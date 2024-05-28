@@ -16,39 +16,42 @@
  * Returns true if <i>date</i> is a valid date string.
  *
  */
-class IsValidDateExpression extends BooleanExpression {
-	/**
-	 * Returns true if a passed in date string (in User format) is valid
-	 */
-	function evaluate() {
+class IsValidDateExpression extends BooleanExpression
+{
+    /**
+     * Returns true if a passed in date string (in User format) is valid
+     */
+    public function evaluate()
+    {
         global $current_user;
         $dtStr = $this->getParameters()->evaluate();
 
-        if(empty($dtStr)) {
+        if (empty($dtStr)) {
             return AbstractExpression::$FALSE;
         }
         try {
             $td = TimeDate::getInstance();
             $date = $td->fromUser($dtStr, $current_user);
-            if(!empty($date) && $td->asUser($date) == $dtStr) {
+            if (!empty($date) && $td->asUser($date) == $dtStr) {
                 return AbstractExpression::$TRUE;
             }
             //Next try without time
             $date = $td->fromUserDate($dtStr, $current_user);
-            if(!empty($date) && $td->asUserDate($date) == $dtStr)  {
+            if (!empty($date) && $td->asUserDate($date) == $dtStr) {
                 return AbstractExpression::$TRUE;
             }
             return AbstractExpression::$FALSE;
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return AbstractExpression::$FALSE;
         }
-	}
+    }
 
-	/**
-	 * Returns true is a passed in date string (in user format) is valid.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+    /**
+     * Returns true is a passed in date string (in user format) is valid.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
 		var dtStr = this.getParameters().evaluate();
         if (typeof dtStr != "string" || dtStr == "") return SUGAR.expressions.Expression.FALSE;
         var format = "Y-m-d";
@@ -59,34 +62,37 @@ class IsValidDateExpression extends BooleanExpression {
 		    return SUGAR.expressions.Expression.TRUE;
 		return SUGAR.expressions.Expression.FALSE;
 EOQ;
-	}
+    }
 
-	/**
-	 * Any generic type will suffice.
-	 */
-	static function getParameterTypes() {
-		return array("string");
-	}
+    /**
+     * Any generic type will suffice.
+     */
+    public static function getParameterTypes()
+    {
+        return ['string'];
+    }
 
-	/**
-	 * Returns the maximum number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 1;
-	}
+    /**
+     * Returns the maximum number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 1;
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return "isValidDate";
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return 'isValidDate';
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 }
-?>

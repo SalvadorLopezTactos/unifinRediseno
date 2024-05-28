@@ -12,8 +12,8 @@
  */
 
 $module_name = 'Accounts';
-$viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
+$viewdefs[$module_name]['base']['menu']['quickcreate'] = [
     'layout' => 'create',
     'visible' => true,
     'order' => 0,
-);
+];

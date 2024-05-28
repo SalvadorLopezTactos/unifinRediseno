@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 
 global $current_user;
@@ -20,11 +21,13 @@ $url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar
     $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Microsoft' .
     '&products=' . $productCodes;
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
         '用 Microsoft 註冊您的 Sugar 實例，以啟用在 Sugar 中使用的 Microsoft 帳戶配置。 ' .
         '請參考 <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Microsoft" target=\'_blank\'>連接器文件</a>' .
         '\' target=\'_blank\'>連接器文件</a>了解更多訊息。</td></tr></table>',
     'oauth2_client_id' => '用戶端 ID',
     'oauth2_client_secret' => '客戶端金鑰',
-);
+    'oauth2_single_tenant_enabled' => '連接到單一租用戶應用程式',
+    'oauth2_single_tenant_id' => '租用戶 ID',
+];

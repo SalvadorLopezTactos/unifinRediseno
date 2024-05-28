@@ -11,14 +11,14 @@
  */
 
 
-require_once('ModuleInstall/PackageManager/PackageManager.php');
+require_once 'ModuleInstall/PackageManager/PackageManager.php';
 
-require_once('vendor/ytree/Tree.php');
-require_once('vendor/ytree/Node.php');
+require_once 'vendor/ytree/Tree.php';
+require_once 'vendor/ytree/Node.php';
 
-class PackageManagerDisplay{
-
-   /**
+class PackageManagerDisplay
+{
+    /**
      * A Static method to Build the display for the package manager
      *
      * @param String form1 - the form to display for manual downloading
@@ -32,10 +32,11 @@ class PackageManagerDisplay{
         $form1,
         $hidden_fields,
         $form_action,
-        $types = array('module'),
+        $types = ['module'],
         $active_form = 'form1',
         $install = false
     ) {
+
         global $current_language, $app_strings;
 
         $app_strings = return_application_language($current_language);
@@ -52,7 +53,7 @@ class PackageManagerDisplay{
         $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
         $mi = new $moduleInstallerClass();
         $mi_errors = $mi->getErrors();
-        $error_html = "";
+        $error_html = '';
         if (!empty($mi_errors)) {
             $error_html = '<div style="margin:0 10px 10px 10px;">';
             foreach ($mi_errors as $error) {
@@ -68,21 +69,18 @@ class PackageManagerDisplay{
         $ss->assign('installation', ($install ? 'true' : 'false'));
 
 
-       $mod_strings = return_module_language($current_language, "Administration");
+        $mod_strings = return_module_language($current_language, 'Administration');
 
         $ss->assign('MOD', $mod_strings);
-		$ss->assign('module_load', 'true');
-        if (UploadStream::getSuhosinStatus() == false)
-        {
+        $ss->assign('module_load', 'true');
+        if (UploadStream::getSuhosinStatus() == false) {
             $ss->assign('ERR_SUHOSIN', true);
-        }
-        else
-        {
+        } else {
             $ss->assign('ERR_SUHOSIN', false);
             $ss->assign('scripts', PackageManagerDisplay::getDisplayScript($install));
         }
         $show_login = false; //hiding install from sugar
-		$ss->assign('MODULE_SELECTOR', PackageManagerDisplay::buildGridOutput($tree, $mod_strings, $isAlive, $show_login));
+        $ss->assign('MODULE_SELECTOR', PackageManagerDisplay::buildGridOutput($tree, $mod_strings, $isAlive, $show_login));
         $ss->assign('INSTALL_ERRORS', $error_html);
         $ss->assign('MOD', $mod_strings);
         $ss->assign('INSTALLED_PACKAGES_HOLDER', PackageManagerDisplay::buildInstalledGrid($mod_strings, $types));
@@ -90,48 +88,49 @@ class PackageManagerDisplay{
         return $ss->fetch('ModuleInstall/PackageManager/tpls/PackageForm.tpl');
     }
 
-    protected static function buildInstalledGrid($mod_strings, $types = array('modules'))
+    protected static function buildInstalledGrid($mod_strings, $types = ['modules'])
     {
-    	  $descItemsInstalled = $mod_strings['LBL_UW_DESC_MODULES_INSTALLED'];
-    	  $output = '<table width="100%" border="0" cellspacing="0" cellpadding="0" ><tr><td align="left">'.$descItemsInstalled.'</td>';
-          $output .= '</td></tr></table>';
-          $output .= "<table width='100%'><tr><td ><div id='installed_grid' class='ygrid-mso' style='height:205px;'></div></td></tr></table>";
-          return $output;
+        $descItemsInstalled = $mod_strings['LBL_UW_DESC_MODULES_INSTALLED'];
+        $output = '<table width="100%" border="0" cellspacing="0" cellpadding="0" ><tr><td align="left">' . $descItemsInstalled . '</td>';
+        $output .= '</td></tr></table>';
+        $output .= "<table width='100%'><tr><td ><div id='installed_grid' class='ygrid-mso' style='height:205px;'></div></td></tr></table>";
+        return $output;
     }
 
     /**
      *  Build html in order to display the grids relevant for module loader
      *
-     *  @param Tree tree - the tree which we are using to display the categories
-     *  @param Array mod_strings - the local mod strings to display
-     *  @return String - a string of html
+     * @param Tree tree - the tree which we are using to display the categories
+     * @param Array mod_strings - the local mod strings to display
+     * @return String - a string of html
      */
     protected static function buildGridOutput($tree, $mod_strings, $display = true, $show_login = true)
     {
-		 $output = "<div id='catview'>";
-		$loginViewStyle = ($display ? 'none' : 'block');
-		$selectViewStyle = ($display ? 'block' : 'none');
-		$output .= "<div id='selectView' style='display:".$selectViewStyle."'>";
-    		$output .= "<table border=0 width='100%' class='moduleTitle'><tr><td width='100%' valign='top'>";
-    		$output .= "<div id='treeview'>";
-    		$output .= $tree->generate_nodes_array();
-    		$output .= "</div>";
-    		$output .= "</td></tr>";
-            $output .= "<tr><td width='100%'>";
-			$output .= "<div id='tabs1'></div>";
-            $output .= "</td></tr>";
-            $output .= "<tr><td width='100%' align='left'>";
-            $output .= "<input type='button' class='button' value='Download Selected' onClick='PackageManager.download();'>";
-            $output .= "</td></tr></table>";
-         $output .= "</div>";
-         if(!$show_login)
-         	$loginViewStyle = 'none';
-		$output .= "</div>";
+        $output = "<div id='catview'>";
+        $loginViewStyle = ($display ? 'none' : 'block');
+        $selectViewStyle = ($display ? 'block' : 'none');
+        $output .= "<div id='selectView' style='display:" . $selectViewStyle . "'>";
+        $output .= "<table border=0 width='100%' class='moduleTitle'><tr><td width='100%' valign='top'>";
+        $output .= "<div id='treeview'>";
+        $output .= $tree->generate_nodes_array();
+        $output .= '</div>';
+        $output .= '</td></tr>';
+        $output .= "<tr><td width='100%'>";
+        $output .= "<div id='tabs1'></div>";
+        $output .= '</td></tr>';
+        $output .= "<tr><td width='100%' align='left'>";
+        $output .= "<input type='button' class='button' value='Download Selected' onClick='PackageManager.download();'>";
+        $output .= '</td></tr></table>';
+        $output .= '</div>';
+        if (!$show_login) {
+            $loginViewStyle = 'none';
+        }
+        $output .= '</div>';
 
-		return $output;
-	}
+        return $output;
+    }
 
-     /**
+    /**
      * A Static method used to build the initial treeview when the page is first displayed
      *
      * @param String div_id - this div in which to display the tree
@@ -154,9 +153,10 @@ class PackageManagerDisplay{
      * @param String modify_field - the field to update when the radio button is changed
      * @return String - a form used to display the license
      */
-    public static function getLicenseDisplay($license_file, $form_action, $next_step, $zipFile, $type, $manifest, $modify_field){
-    	global $current_language;
-        $mod_strings = return_module_language($current_language, "Administration");
+    public static function getLicenseDisplay($license_file, $form_action, $next_step, $zipFile, $type, $manifest, $modify_field)
+    {
+        global $current_language;
+        $mod_strings = return_module_language($current_language, 'Administration');
         $contents = sugar_file_get_contents($license_file);
         $div_id = urlencode($zipFile);
         $display = "<form name='delete{$zipFile}' action='{$form_action}' method='POST'>";
@@ -164,118 +164,118 @@ class PackageManagerDisplay{
         $display .= "<input type='hidden' name='languagePackAction' value='{$type}'>";
         $display .= "<input type='hidden' name='manifest' value='\".urlencode($manifest).\"'>";
         $display .= "<input type='hidden' name='zipFile' value='\".urlencode($zipFile).\"'>";
-        $display .= "<table><tr>";
-        $display .= "<td align=\"left\" valign=\"top\" colspan=2>";
+        $display .= '<table><tr>';
+        $display .= '<td align="left" valign="top" colspan=2>';
         $display .= "<b><font color='red' >{$mod_strings['LBL_MODULE_LICENSE']}</font></b>";
-        $display .= "</td>";
-        $display .= "<td>";
-        $display .= "<slot><a class=\"listViewTdToolsS1\" id='href_animate' onClick=\"PackageManager.toggleLowerDiv('span_animate_div_$div_id', 'span_license_div_$div_id', 350, 0);\"><span id='span_animate_div_$div_id'<img src='".SugarThemeRegistry::current()->getImageURL('advanced_search.gif')."' width='8' height='8' alt='Advanced' border='0'>&nbsp;Expand</span></a></slot></td>";
-        $display .= "</td>";
-        $display .= "</tr>";
-        $display .= "</table>";
+        $display .= '</td>';
+        $display .= '<td>';
+        $display .= "<slot><a class=\"listViewTdToolsS1\" id='href_animate' onClick=\"PackageManager.toggleLowerDiv('span_animate_div_$div_id', 'span_license_div_$div_id', 350, 0);\"><span id='span_animate_div_$div_id'<img src='" . SugarThemeRegistry::current()->getImageURL('advanced_search.gif') . "' width='8' height='8' alt='Advanced' border='0'>&nbsp;Expand</span></a></slot></td>";
+        $display .= '</td>';
+        $display .= '</tr>';
+        $display .= '</table>';
         $display .= "<div id='span_license_div_$div_id' style=\"display: none;\">";
-        $display .= "<table>";
-        $display .= "<tr>";
-        $display .= "<td align=\"left\" valign=\"top\" colspan=2>";
+        $display .= '<table>';
+        $display .= '<tr>';
+        $display .= '<td align="left" valign="top" colspan=2>';
         $display .= "<textarea cols=\"100\" rows=\"8\">{$contents}</textarea>";
-        $display .= "</td>";
-        $display .= "</tr>";
-        $display .= "<tr>";
-        $display .= "<td align=\"left\" valign=\"top\" colspan=2>";
+        $display .= '</td>';
+        $display .= '</tr>';
+        $display .= '<tr>';
+        $display .= '<td align="left" valign="top" colspan=2>';
         $display .= "<input type='radio' id='radio_license_agreement_accept' name='radio_license_agreement' value='accept' onClick=\"document.getElementById('$modify_field').value = 'yes';\">{$mod_strings['LBL_ACCEPT']}&nbsp;";
         $display .= "<input type='radio' id='radio_license_agreement_reject' name='radio_license_agreement' value='reject' checked onClick=\"document.getElementById('$modify_field').value = 'no';\">{$mod_strings['LBL_DENY']}";
-        $display .= "</td>";
-        $display .= "</tr>";
-        $display .= "</table>";
-        $display .= "</div>";
-        $display .= "</form>";
+        $display .= '</td>';
+        $display .= '</tr>';
+        $display .= '</table>';
+        $display .= '</div>';
+        $display .= '</form>';
         return $display;
     }
 
-     /**
+    /**
      * A Static method used to generate the javascript for the page
      *
      * @return String - the javascript required for the page
      */
-    protected static function getDisplayScript($install = false, $type = 'module', $releases = null, $types = array(), $isAlive = true)
+    protected static function getDisplayScript($install = false, $type = 'module', $releases = null, $types = [], $isAlive = true)
     {
         global $sugar_version, $sugar_config;
         global $current_language;
 
-        $mod_strings = return_module_language($current_language, "Administration");
+        $mod_strings = return_module_language($current_language, 'Administration');
         $ss = new Sugar_Smarty();
         $ss->assign('MOD', $mod_strings);
-        if(!$install){
+        if (!$install) {
             $install = 0;
         }
-		$ss->assign('INSTALLATION', $install);
-        $ss->assign('WAIT_IMAGE', SugarThemeRegistry::current()->getImage("loading","border='0' align='bottom'",null,null,'.gif',"Loading"));
+        $ss->assign('INSTALLATION', $install);
+        $ss->assign('WAIT_IMAGE', SugarThemeRegistry::current()->getImage('loading', "border='0' align='bottom'", null, null, '.gif', 'Loading'));
 
         $ss->assign('sugar_version', $sugar_version);
         $ss->assign('js_custom_version', $sugar_config['js_custom_version']);
-         $ss->assign('IS_ALIVE', $isAlive);
+        $ss->assign('IS_ALIVE', $isAlive);
         $ss->assign('GRID_TYPE', implode(',', $types));
-        if($type == 'patch'){
+        if ($type == 'patch') {
             $ss->assign('module_load', 'false');
             $patches = PackageManagerDisplay::createJavascriptPackageArray($releases);
             $ss->assign('PATCHES', $patches);
-        }else{
-           	$pm = new PackageManager();
-           	$releases = $pm->getPackagesInStaging();
-           	$patches = PackageManagerDisplay::createJavascriptModuleArray($releases);
+        } else {
+            $pm = new PackageManager();
+            $releases = $pm->getPackagesInStaging();
+            $patches = PackageManagerDisplay::createJavascriptModuleArray($releases);
             $ss->assign('PATCHES', $patches);
             $installeds = $pm->getinstalledPackages();
-           	$patches = PackageManagerDisplay::createJavascriptModuleArray($installeds, 'mti_installed_data');
+            $patches = PackageManagerDisplay::createJavascriptModuleArray($installeds, 'mti_installed_data');
             $ss->assign('INSTALLED_MODULES', $patches);
-			 $ss->assign('UPGARDE_WIZARD_URL', 'index.php?module=UpgradeWizard&action=index');
+            $ss->assign('UPGARDE_WIZARD_URL', 'index.php?module=UpgradeWizard&action=index');
             $ss->assign('module_load', 'true');
         }
-        if(!empty($GLOBALS['ML_STATUS_MESSAGE']))
-        	$ss->assign('ML_STATUS_MESSAGE',$GLOBALS['ML_STATUS_MESSAGE']);
-        else {
+        if (!empty($GLOBALS['ML_STATUS_MESSAGE'])) {
+            $ss->assign('ML_STATUS_MESSAGE', $GLOBALS['ML_STATUS_MESSAGE']);
+        } else {
             $ss->assign('ML_STATUS_MESSAGE', '');
         }
 
         //Bug 24064. Checking and Defining labels since these might not be cached during Upgrade
-        if(!isset($mod_strings['LBL_ML_INSTALL']) || empty($mod_strings['LBL_ML_INSTALL'])){
-			$mod_strings['LBL_ML_INSTALL'] = 'Install';
-    	}
-		if(!isset($mod_strings['LBL_ML_ENABLE_OR_DISABLE']) || empty($mod_strings['LBL_ML_ENABLE_OR_DISABLE'])) {
-			$mod_strings['LBL_ML_ENABLE_OR_DISABLE'] = 'Enable/Disable';
-		}
-		if(!isset($mod_strings['LBL_ML_DELETE'])|| empty($mod_strings['LBL_ML_DELETE'])){
-			$mod_strings['LBL_ML_DELETE'] = 'Delete';
-		}
+        if (!isset($mod_strings['LBL_ML_INSTALL']) || empty($mod_strings['LBL_ML_INSTALL'])) {
+            $mod_strings['LBL_ML_INSTALL'] = 'Install';
+        }
+        if (!isset($mod_strings['LBL_ML_ENABLE_OR_DISABLE']) || empty($mod_strings['LBL_ML_ENABLE_OR_DISABLE'])) {
+            $mod_strings['LBL_ML_ENABLE_OR_DISABLE'] = 'Enable/Disable';
+        }
+        if (!isset($mod_strings['LBL_ML_DELETE']) || empty($mod_strings['LBL_ML_DELETE'])) {
+            $mod_strings['LBL_ML_DELETE'] = 'Delete';
+        }
         //Add by jchi 6/23/2008 to fix the bug 21667
-		$filegrid_column_ary = array(
-			'Name' => $mod_strings['LBL_ML_NAME'],
-			'Install' => $mod_strings['LBL_ML_INSTALL'],
-			'Delete' => $mod_strings['LBL_ML_DELETE'],
-			'Type' => $mod_strings['LBL_ML_TYPE'],
-			'Version' => $mod_strings['LBL_ML_VERSION'],
-			'Published' => $mod_strings['LBL_ML_PUBLISHED'],
-			'Uninstallable' => $mod_strings['LBL_ML_UNINSTALLABLE'],
-			'Description' => $mod_strings['LBL_ML_DESCRIPTION']
-		);
+        $filegrid_column_ary = [
+            'Name' => $mod_strings['LBL_ML_NAME'],
+            'Install' => $mod_strings['LBL_ML_INSTALL'],
+            'Delete' => $mod_strings['LBL_ML_DELETE'],
+            'Type' => $mod_strings['LBL_ML_TYPE'],
+            'Version' => $mod_strings['LBL_ML_VERSION'],
+            'Published' => $mod_strings['LBL_ML_PUBLISHED'],
+            'Uninstallable' => $mod_strings['LBL_ML_UNINSTALLABLE'],
+            'Description' => $mod_strings['LBL_ML_DESCRIPTION'],
+        ];
 
-		$filegridinstalled_column_ary = array(
-			'Name' => $mod_strings['LBL_ML_NAME'],
-			'Install' => $mod_strings['LBL_ML_INSTALL'],
-			'Action' => $mod_strings['LBL_ML_ACTION'],
-			'Enable_Or_Disable' => $mod_strings['LBL_ML_ENABLE_OR_DISABLE'],
-			'Type' => $mod_strings['LBL_ML_TYPE'],
-			'Version' => $mod_strings['LBL_ML_VERSION'],
-			'Date_Installed' => $mod_strings['LBL_ML_INSTALLED'],
-			'Uninstallable' => $mod_strings['LBL_ML_UNINSTALLABLE'],
-			'Description' => $mod_strings['LBL_ML_DESCRIPTION']
-		);
+        $filegridinstalled_column_ary = [
+            'Name' => $mod_strings['LBL_ML_NAME'],
+            'Install' => $mod_strings['LBL_ML_INSTALL'],
+            'Action' => $mod_strings['LBL_ML_ACTION'],
+            'Enable_Or_Disable' => $mod_strings['LBL_ML_ENABLE_OR_DISABLE'],
+            'Type' => $mod_strings['LBL_ML_TYPE'],
+            'Version' => $mod_strings['LBL_ML_VERSION'],
+            'Date_Installed' => $mod_strings['LBL_ML_INSTALLED'],
+            'Uninstallable' => $mod_strings['LBL_ML_UNINSTALLABLE'],
+            'Description' => $mod_strings['LBL_ML_DESCRIPTION'],
+        ];
 
-		$ss->assign('ML_FILEGRID_COLUMN',$filegrid_column_ary);
-		$ss->assign('ML_FILEGRIDINSTALLED_COLUMN',$filegridinstalled_column_ary);
-		//end
+        $ss->assign('ML_FILEGRID_COLUMN', $filegrid_column_ary);
+        $ss->assign('ML_FILEGRIDINSTALLED_COLUMN', $filegridinstalled_column_ary);
+        //end
 
-		$ss->assign('SHOW_IMG', SugarThemeRegistry::current()->getImage('advanced_search', 'border="0"', 8, 8, '.gif', 'Show'));
-		$ss->assign('HIDE_IMG', SugarThemeRegistry::current()->getImage('basic_search', 'border="0"', 8, 8, '.gif', 'Hide'));
+        $ss->assign('SHOW_IMG', SugarThemeRegistry::current()->getImage('advanced_search', 'border="0"', 8, 8, '.gif', 'Show'));
+        $ss->assign('HIDE_IMG', SugarThemeRegistry::current()->getImage('basic_search', 'border="0"', 8, 8, '.gif', 'Hide'));
         $str = $ss->fetch('ModuleInstall/PackageManager/tpls/PackageManagerScripts.tpl');
         return $str;
     }
@@ -323,16 +323,16 @@ class PackageManagerDisplay{
 
     public static function getHeader()
     {
-    	global $current_language;
+        global $current_language;
 
-        $mod_strings = return_module_language($current_language, "Administration");
+        $mod_strings = return_module_language($current_language, 'Administration');
         $header_text = '';
         $isAlive = false;
         $show_login = false;
-        if(!function_exists('curl_init') && $show_login){
-        	$header_text = "<font color='red'><b>".$mod_strings['ERR_ENABLE_CURL']."</b></font>";
-        	$show_login = false;
+        if (!function_exists('curl_init') && $show_login) {
+            $header_text = "<font color='red'><b>" . $mod_strings['ERR_ENABLE_CURL'] . '</b></font>';
+            $show_login = false;
         }
-        return array('text' => $header_text, 'isAlive' => $isAlive, 'show_login' => $show_login);
+        return ['text' => $header_text, 'isAlive' => $isAlive, 'show_login' => $show_login];
     }
- }
+}

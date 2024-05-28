@@ -10,41 +10,40 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$subpanel_layout = array(
-	'top_buttons' => array(
-			array('widget_class' => 'SubPanelTopCreateButton'),
-	),
+$subpanel_layout = [
+    'top_buttons' => [
+        ['widget_class' => 'SubPanelTopCreateButton'],
+    ],
 
-	'where' => '',
+    'where' => '',
 
-	'list_fields' => array(
-        'holiday_date'=>array(
-		 	'vname' => 'LBL_HOLIDAY_DATE',
-			'widget_class' => 'SubPanelDetailViewLink',
-			'width' => '21%',
-		),
-		'description'=>array(
-		 	'vname' => 'LBL_DESCRIPTION',
-			'width' => '75%',
-			'sortable'=>false,				
-		),
-		'edit_button'=>array(
-			'vname' => 'LBL_EDIT_BUTTON',
-			 'widget_class' => 'SubPanelEditButton',
-			 'width' => '2%',
-		),
+    'list_fields' => [
+        'holiday_date' => [
+            'vname' => 'LBL_HOLIDAY_DATE',
+            'widget_class' => 'SubPanelDetailViewLink',
+            'width' => '21%',
+        ],
+        'description' => [
+            'vname' => 'LBL_DESCRIPTION',
+            'width' => '75%',
+            'sortable' => false,
+        ],
+        'edit_button' => [
+            'vname' => 'LBL_EDIT_BUTTON',
+            'widget_class' => 'SubPanelEditButton',
+            'width' => '2%',
+        ],
 
 
-	),
-);
+    ],
+];
 
-if ( isset($_REQUEST['record']) ) {
-//remove the administrator edit button holiday for the user admin only
-        global $current_user;
-        $result = $GLOBALS['db']->query("SELECT is_admin FROM users WHERE id='".$GLOBALS['db']->quote($_REQUEST['record'])."'");
-        $row = $GLOBALS['db']->fetchByAssoc($result);
-        if(!is_admin($current_user)&& $current_user->isAdminForModule('Users')&& $row['is_admin']==1){
-            unset($subpanel_layout['list_fields']['edit_button']);
-        }
+if (isset($_REQUEST['record'])) {
+    //remove the administrator edit button holiday for the user admin only
+    global $current_user;
+    $result = $GLOBALS['db']->query("SELECT is_admin FROM users WHERE id='" . $GLOBALS['db']->quote($_REQUEST['record']) . "'");
+    $row = $GLOBALS['db']->fetchByAssoc($result);
+    if (!is_admin($current_user) && $current_user->isAdminForModule('Users') && $row['is_admin'] == 1) {
+        unset($subpanel_layout['list_fields']['edit_button']);
+    }
 }
-?>

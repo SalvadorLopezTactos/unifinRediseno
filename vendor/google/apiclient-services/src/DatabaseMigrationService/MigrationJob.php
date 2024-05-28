@@ -22,6 +22,12 @@ class MigrationJob extends \Google\Model
   /**
    * @var string
    */
+  public $cmekKeyName;
+  protected $conversionWorkspaceType = ConversionWorkspaceInfo::class;
+  protected $conversionWorkspaceDataType = '';
+  /**
+   * @var string
+   */
   public $createTime;
   /**
    * @var string
@@ -49,6 +55,10 @@ class MigrationJob extends \Google\Model
   public $endTime;
   protected $errorType = Status::class;
   protected $errorDataType = '';
+  /**
+   * @var string
+   */
+  public $filter;
   /**
    * @var string[]
    */
@@ -86,6 +96,34 @@ class MigrationJob extends \Google\Model
   protected $vpcPeeringConnectivityType = VpcPeeringConnectivity::class;
   protected $vpcPeeringConnectivityDataType = '';
 
+  /**
+   * @param string
+   */
+  public function setCmekKeyName($cmekKeyName)
+  {
+    $this->cmekKeyName = $cmekKeyName;
+  }
+  /**
+   * @return string
+   */
+  public function getCmekKeyName()
+  {
+    return $this->cmekKeyName;
+  }
+  /**
+   * @param ConversionWorkspaceInfo
+   */
+  public function setConversionWorkspace(ConversionWorkspaceInfo $conversionWorkspace)
+  {
+    $this->conversionWorkspace = $conversionWorkspace;
+  }
+  /**
+   * @return ConversionWorkspaceInfo
+   */
+  public function getConversionWorkspace()
+  {
+    return $this->conversionWorkspace;
+  }
   /**
    * @param string
    */
@@ -211,6 +249,20 @@ class MigrationJob extends \Google\Model
   public function getError()
   {
     return $this->error;
+  }
+  /**
+   * @param string
+   */
+  public function setFilter($filter)
+  {
+    $this->filter = $filter;
+  }
+  /**
+   * @return string
+   */
+  public function getFilter()
+  {
+    return $this->filter;
   }
   /**
    * @param string[]

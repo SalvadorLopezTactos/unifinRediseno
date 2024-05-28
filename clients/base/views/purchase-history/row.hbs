@@ -22,7 +22,7 @@
                 <div class="row-cell pli-count toggle-pli-list">
                     <span class="pli-count-label">{{attributes.pli_count}}</span>
                     <i class="{{#if chevronIcon}}{{buildIcon chevronIcon}}{{else}}sicon sicon-chevron-down{{/if}} toggle-list"
-                        data-id="{{attributes.id}}" rel="tooltip" data-placement="bottom"
+                        data-id="{{attributes.id}}" rel="tooltip" data-bs-placement="bottom"
                         title="{{str "LBL_DASHLET_TOGGLE"}}">
                     </i>
                 </div>
@@ -91,14 +91,14 @@
                     </span>
                 </div>
                 <div class="row-cell purchase-details purchase-details-quantity ellipsis_inline">
-                    <span class="totals-label ellipsis_inline" rel="tooltip" data-placement="bottom"
+                    <span class="totals-label ellipsis_inline" rel="tooltip" data-bs-placement="bottom"
                         data-original-title="{{str "LBL_PURCHASE_HISTORY_TOTAL_QUANTITY" attributes._module}}">
                         {{str "LBL_PURCHASE_HISTORY_TOTAL_QUANTITY" attributes._module}}
                     </span>
-                    <span rel="tooltip" data-placement="bottom" title="{{attributes.total_quantity}}">{{attributes.total_quantity}}</span>
+                    <span rel="tooltip" data-bs-placement="bottom" title="{{attributes.total_quantity}}">{{attributes.total_quantity}}</span>
                 </div>
                 <div class="row-cell purchase-details purchase-details-total ellipsis_inline">
-                    <span class="totals-label" rel="tooltip" data-placement="bottom"
+                    <span class="totals-label" rel="tooltip" data-bs-placement="bottom"
                         data-original-title="{{str "LBL_PURCHASE_HISTORY_TOTAL_CURRENCY" attributes._module}}">
                         {{str "LBL_PURCHASE_HISTORY_TOTAL_CURRENCY" attributes._module}}
                     </span>

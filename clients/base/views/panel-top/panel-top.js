@@ -66,6 +66,7 @@
         this.on('linked-model:create', function() {
             this.context.set('skipFetch', false);
             this.context.reloadData();
+            app.events.trigger('link:added', this.context.get('parentModel'));
         }, this);
     },
 

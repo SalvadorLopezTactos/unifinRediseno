@@ -35,19 +35,18 @@ class HealthCheck extends Basic
         $cacheDir = sugar_cached(self::CACHE_DIR);
         sugar_mkdir($cacheDir);
         $this->logfile = 'healthcheck-' . time() . '.log';
-        $scanner->setLogFile($cacheDir . "/" .$this->logfile);
+        $scanner->setLogFile($cacheDir . '/' . $this->logfile);
 
         try {
             $logMeta = $scanner->scan();
             $this->logmeta = json_encode($logMeta);
             $this->bucket = $scanner->getStatus();
             $this->flag = $scanner->getFlag();
-
         } catch (Exception $e) {
-            $GLOBALS['log']->fatal("Error executing Health Check: " . $e->getMessage());
+            $GLOBALS['log']->fatal('Error executing Health Check: ' . $e->getMessage());
             $this->error = $e->getMessage();
         }
-        if (!in_array($this->bucket, array('H'))) {
+        if (!in_array($this->bucket, ['H'])) {
             $this->save();
         }
         return $this;
@@ -61,7 +60,7 @@ class HealthCheck extends Basic
      */
     public function getLastRun()
     {
-        $sql = "SELECT id FROM healthcheck WHERE deleted = 0 ORDER BY date_entered DESC";
+        $sql = 'SELECT id FROM healthcheck WHERE deleted = 0 ORDER BY date_entered DESC';
         $id = $this->db->getOne($sql, false, 'Error fetching most recent healtcheck record');
         if ($id) {
             return $this->retrieve($id);
@@ -76,7 +75,7 @@ class HealthCheck extends Basic
     public function getLogFileName()
     {
         if (!empty($this->logfile)) {
-            return sugar_cached(self::CACHE_DIR) . "/" . $this->logfile;
+            return sugar_cached(self::CACHE_DIR) . '/' . $this->logfile;
         }
     }
 

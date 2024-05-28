@@ -10,24 +10,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['ContractTypes']['base']['view']['list'] = array(
+$viewdefs['ContractTypes']['base']['view']['list'] = [
     'favorites' => false,
-    'panels' => array(
-        array(
+    'panels' => [
+        [
             'name' => 'panel_header',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'link' => true,
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'list_order',
                     'enabled' => true,
                     'default' => true,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

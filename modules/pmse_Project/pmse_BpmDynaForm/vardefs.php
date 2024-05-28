@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmDynaForm'] = array(
+$dictionary['pmse_BpmDynaForm'] = [
     'table' => 'pmse_bpm_dynamic_forms',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'reassignable' => false,
     'duplicate_merge' => true,
-    'fields' => array(
-        'dyn_uid' => array(
+    'fields' => [
+        'dyn_uid' => [
             'required' => true,
             'name' => 'dyn_uid',
             'vname' => 'Form UID Field',
@@ -38,8 +38,8 @@ $dictionary['pmse_BpmDynaForm'] = array(
             'calculated' => false,
             'len' => '32',
             'size' => '32',
-        ),
-        'pro_id' => array(
+        ],
+        'pro_id' => [
             'required' => true,
             'name' => 'pro_id',
             'vname' => 'Form Identifier',
@@ -59,8 +59,8 @@ $dictionary['pmse_BpmDynaForm'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'prj_id' => array(
+        ],
+        'prj_id' => [
             'required' => true,
             'name' => 'prj_id',
             'vname' => 'Form Identifier',
@@ -80,8 +80,8 @@ $dictionary['pmse_BpmDynaForm'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'dyn_module' => array(
+        ],
+        'dyn_module' => [
             'required' => true,
             'name' => 'dyn_module',
             'vname' => 'Module Name',
@@ -101,8 +101,8 @@ $dictionary['pmse_BpmDynaForm'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'dyn_view_defs' => array(
+        ],
+        'dyn_view_defs' => [
             'required' => true,
             'name' => 'dyn_view_defs',
             'vname' => 'Dynaform Data',
@@ -122,23 +122,23 @@ $dictionary['pmse_BpmDynaForm'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmDynaForm', 'pmse_BpmDynaForm');

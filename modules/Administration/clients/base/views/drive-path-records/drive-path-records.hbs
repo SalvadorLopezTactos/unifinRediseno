@@ -12,11 +12,16 @@
 --}}
 <div class="row-fluid ml-5">
     <h3>{{str 'LBL_PATHS_FOR_RECORD_VIEW' module}}</h3>
+    {{#eq driveType 'sharepoint'}}
+    <h5>{{str 'LBL_SELECT_PATHS_RECORD_VIEW_HELPER' module}}</h5>
+    {{/eq}}
 </div>
 <div class="row-fluid ml-5">
     <div class="span3">{{str 'LBL_MODULE'}}</div>
     <div class="span3">{{str 'LBL_DEFAULT_STARTING_PATH' module}}</div>
-    <div class="span3">{{str 'LBL_FIELDS_VARIABLE' module}}</div>
+    {{#includes variablePathEnabled driveType}}
+        <div class="span3">{{str 'LBL_FIELDS_VARIABLE' module}}</div>
+    {{/includes}}
 </div>
 {{#each paths}}
     <div class="row-fluid ml-5 mb-2.5 path" data-isshared="{{is_shared}}" data-folderid="{{folder_id}}"
@@ -29,19 +34,23 @@
                 {{/each}}
             </select>
         </div>
-        <div class="span3">
-            <input class="w-full recordPath" value="{{pathDisplay}}">
+        <div class="span3 mr-1.5">
+            <input {{#includes ../variablePathDisabled ../driveType}} readonly {{/includes}} class="w-full recordPath" value="{{pathDisplay}}">
         </div>
         <div class="span6">
-            <div class="fieldList select2 w-50">
-            </div>
-            <button class="btn addField ml-0.5">
-                <i class="sicon sicon-plus"></i>
-            </button>
-            <button class="btn selectPath ml-0.5">{{str 'LBL_SELECT_PATH' ../module}}</button>
-            <button class="btn savePath ml-0.5">
-                <i class="sicon sicon-check"></i>
-            </button>
+            {{#includes ../variablePathEnabled ../driveType}}
+                <div class="fieldList select2 w-1/2">
+                </div>
+                <button class="btn addField ml-0.5">
+                    <i class="sicon sicon-plus"></i>
+                </button>
+            {{/includes}}
+            <button class="btn selectPath ml-0.5" data-id="{{id}}">{{str 'LBL_SELECT_PATH' ../module}}</button>
+            {{#includes ../variablePathEnabled ../driveType}}
+                <button class="btn savePath ml-0.5" data-id="{{id}}">
+                    <i class="sicon sicon-check" data-id="{{id}}"></i>
+                </button>
+            {{/includes}}
             <button class="btn removePath ml-0.5" data-id="{{id}}">
                 <i class="sicon sicon-remove" data-id="{{id}}"></i>
             </button>

@@ -11,6 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Tasks']['base']['view']['create'] = array(
+$viewdefs['Tasks']['base']['view']['create'] = [
     'duplicateCheck' => false,
-);
+];

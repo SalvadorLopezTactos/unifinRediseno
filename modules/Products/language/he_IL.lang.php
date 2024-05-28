@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'לוח מחוונים של הצעות מחיר לשורת פריט',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות מסוג הצעות מחיר לשורות פריטים',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס פריטי שורה עם הצעת מחיר',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן של פריטי שורה בהצעות מחיר',
 
     'LBL_CAMPAIGN_PRODUCT' => 'שורת פריט הצעת מחיר לקמפיין',
     'LBL_MODULE_NAME' => 'הצעות מחיר לשורות פריטים',
@@ -183,4 +184,4 @@ $mod_strings = array(
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (שורת פריט עם הצעת מחיר חדשה)',
     'LBL_DISCOUNT_PERCENT' => '% אחוז',
     'LBL_DISCOUNT_TYPE' => 'סוג הנחה',
-);
+];

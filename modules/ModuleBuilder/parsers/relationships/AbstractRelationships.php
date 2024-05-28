@@ -18,11 +18,11 @@ use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
  * Relationships defined here are implemented by the build() method to become a relationship that the application can use
  * Note that the modules/Relationships/Relationship.php contains some methods that look similar; remember though that the methods in that file are acting on implemented relationships, not the metadata that we deal with here
  */
+
 class AbstractRelationships
 {
-
     public $newRelationshipName;
-    static $methods = array(
+    public static $methods = [
         'Labels' => 'language',
         'RelationshipMetaData' => 'relationships',
         'SubpanelDefinitions' => 'layoutdefs',
@@ -32,9 +32,9 @@ class AbstractRelationships
         'ClientFiles' => 'clientfiles',
         'WirelessSubpanelDefinitions' => 'wireless_subpanels',
         'SidecarMobileSubpanelDefinitions' => 'sidecar',
-    );
+    ];
     public static $activities = [
-        'calls' => 'Calls' ,
+        'calls' => 'Calls',
         'meetings' => 'Meetings',
         'notes' => 'Notes',
         'tasks' => 'Tasks',
@@ -43,25 +43,26 @@ class AbstractRelationships
     ];
 
 
-    protected $relationships = array ( ) ; // array containing all the AbstractRelationship objects that are in this set of relationships
-    protected $moduleName ;
+    protected $relationships = []; // array containing all the AbstractRelationship objects that are in this set of relationships
+    protected $moduleName;
 
     // bug33522 - the following relationship names that you would find in $dictionary[ <relationshipName> ]
     // have different actual relationship names other than <relationshipName>
     // e.g $dictionary[ 'quotes_accounts' ] has two relationships: quotes_billto_accounts, quotes_shipto_accounts
-    protected $specialCaseBaseNames = array( 'quotes_accounts',
-                                             'quotes_contacts',
-                                             'emails_beans',
+    protected $specialCaseBaseNames = ['quotes_accounts',
+        'quotes_contacts',
+        'emails_beans',
         'emails_email_addr_rel',
-                                             'linked_documents',
+        'linked_documents',
         'OutboundEmail',
-                                             'project_relation',
-                                             'prospect_lists_prospects',
-                                             'queues_beans',
-                                             'queues_queue',
-                                             'tracker_sessions',
-                                             'activities_users'             // needed because of `activities_teams`
-                                          );
+        'project_relation',
+        'prospect_lists_prospects',
+        'queues_beans',
+        'queues_queue',
+        'tracker_sessions',
+        'activities_users',             // needed because of `activities_teams`
+    ];
+
     /*
      * Find all deployed modules that can participate in a relationship
      * Return a list of modules with associated subpanels
@@ -70,66 +71,66 @@ class AbstractRelationships
      */
     public static function findRelatableModules($includeActivitiesSubmodules = true)
     {
-        $relatableModules = array ( ) ;
+        $relatableModules = [];
 
         // add in activities automatically if required
-        $relatableModules [ 'Activities' ] [ 'default' ] = translate( 'LBL_DEFAULT' ) ;
+        $relatableModules ['Activities'] ['default'] = translate('LBL_DEFAULT');
 
         // find all deployed modules
-        $browser = new StudioBrowser() ;
+        $browser = new StudioBrowser();
         $browser->loadRelatableModules();
-        reset($browser->modules) ;
+        reset($browser->modules);
 
         foreach ($browser->modules as $module) {
             // do not include the submodules of Activities as already have the parent...
-            if (! $includeActivitiesSubmodules && in_array ( $module->module, self::$activities ))
-                continue ;
+            if (!$includeActivitiesSubmodules && in_array($module->module, self::$activities)) {
+                continue;
+            }
             $providedSubpanels = $module->getProvidedSubpanels();
-            if ( $providedSubpanels !== false ) {
-                $relatableModules [ $module->module ] = $providedSubpanels;
+            if ($providedSubpanels !== false) {
+                $relatableModules [$module->module] = $providedSubpanels;
             }
         }
 
-        return $relatableModules ;
-
+        return $relatableModules;
     }
 
-    static function validSubpanel ($filename)
+    public static function validSubpanel($filename)
     {
-        if (! file_exists ( $filename ))
-            return false ;
+        if (!file_exists($filename)) {
+            return false;
+        }
 
-        include $filename ;
-        return (isset ( $subpanel_layout ) && (isset ( $subpanel_layout [ 'top_buttons' ] ) && isset ( $subpanel_layout [ 'list_fields' ] ))) ;
+        include $filename;
+        return (isset($subpanel_layout) && (isset($subpanel_layout ['top_buttons']) && isset($subpanel_layout ['list_fields'])));
     }
 
     /*
      * Get a list of all relationships (which have not been deleted)
      * @return array    Array of relationship names, ready for use in get()
      */
-    function getRelationshipList ()
+    public function getRelationshipList()
     {
-        $list = array ( ) ;
-        foreach ( $this->relationships as $name => $relationship )
-        {
-            if (! $relationship->deleted ())
-                $list [ $name ] = $name ;
+        $list = [];
+        foreach ($this->relationships as $name => $relationship) {
+            if (!$relationship->deleted()) {
+                $list [$name] = $name;
+            }
         }
-        return $list ;
+        return $list;
     }
 
     /**
      * Get a relationship by name
-     * @param string $relationshipName  The unique name for this relationship, as returned by $relationship->getName()
+     * @param string $relationshipName The unique name for this relationship, as returned by $relationship->getName()
      * @return AbstractRelationship or false if $relationshipName is not in this set of relationships
      */
-    function get ($relationshipName)
+    public function get($relationshipName)
     {
-        if (isset ( $this->relationships [ $relationshipName ] ))
-        {
-            return $this->relationships [ $relationshipName ] ;
+        if (isset($this->relationships [$relationshipName])) {
+            return $this->relationships [$relationshipName];
         }
-        return false ;
+        return false;
     }
 
     /*
@@ -138,15 +139,15 @@ class AbstractRelationships
      * Otherwise, create and add a new relationship with the information in the $_REQUEST
      * @return AbstractRelationship
      */
-    function addFromPost ()
+    public function addFromPost()
     {
-        $definition = array ( ) ;
+        $definition = [];
 
         foreach (AbstractRelationship::$definitionKeys as $key) {
             if (!empty($_REQUEST[$key])) {
-                if (in_array($key, array('label', 'rhs_label', 'lhs_label'))) {
+                if (in_array($key, ['label', 'rhs_label', 'lhs_label'])) {
                     $definition[$key] = htmlspecialchars_decode($_REQUEST[$key], ENT_QUOTES);
-                } else if ($key == 'relationship_type') {
+                } elseif ($key == 'relationship_type') {
                     $definition[$key] = AbstractRelationship::parseRelationshipType($_REQUEST[$key]);
                 } else {
                     $definition[$key] = $_REQUEST[$key];
@@ -155,31 +156,30 @@ class AbstractRelationships
         }
 
         // if this is a change to an existing relationship, and it is not readonly, then delete the old one
-        if (! empty ( $_REQUEST [ 'relationship_name' ] ))
-        {
-            if ($relationship = $this->get ( $_REQUEST [ 'relationship_name' ] ))
-            {
-                unset( $definition[ 'relationship_name' ] ) ; // in case the related modules have changed; this name is probably no longer appropriate
-                if (! $relationship->readonly ())
-                    $this->delete ( $_REQUEST [ 'relationship_name' ] ) ;
-        }
+        if (!empty($_REQUEST ['relationship_name'])) {
+            if ($relationship = $this->get($_REQUEST ['relationship_name'])) {
+                unset($definition['relationship_name']); // in case the related modules have changed; this name is probably no longer appropriate
+                if (!$relationship->readonly()) {
+                    $this->delete($_REQUEST ['relationship_name']);
+                }
+            }
         }
 
-        $newRelationship = RelationshipFactory::newRelationship ( $definition ) ;
+        $newRelationship = RelationshipFactory::newRelationship($definition);
         // TODO: error handling in case we get a badly formed definition and hence relationship
-        $this->add ( $newRelationship ) ;
-        return $newRelationship ;
+        $this->add($newRelationship);
+        return $newRelationship;
     }
 
     /*
      * Add a relationship to the set
      * @param AbstractRelationship $relationship    The relationship to add
      */
-    function add ($relationship)
+    public function add($relationship)
     {
-        $name = $this->getUniqueName ( $relationship ) ;
-        $relationship->setName ( $name ) ;
-        $this->relationships [ $name ] = $relationship ;
+        $name = $this->getUniqueName($relationship);
+        $relationship->setName($name);
+        $this->relationships [$name] = $relationship;
         $this->newRelationshipName = $name;
     }
 
@@ -216,7 +216,6 @@ class AbstractRelationships
             unset($definition['relationship_name']);
             $this->add(RelationshipFactory::newRelationship($definition));
         }
-
     }
 
     /*
@@ -225,51 +224,49 @@ class AbstractRelationships
      * @param string $basepath  Base directory in which to store the relationships information
      * @return Array of AbstractRelationship objects
      */
-    protected function _load ($basepath)
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _load($basepath)
     {
-        $GLOBALS [ 'log' ]->info ( get_class ( $this ) . ": loading relationships from " . $basepath . '/relationships.php' ) ;
-        $objects = array ( ) ;
-        if (file_exists ( $basepath . '/relationships.php' ))
-        {
+        $GLOBALS ['log']->info(get_class($this) . ': loading relationships from ' . $basepath . '/relationships.php');
+        $objects = [];
+        if (file_exists($basepath . '/relationships.php')) {
             include FileLoader::validateFilePath($basepath . '/relationships.php');
-            foreach ( $relationships as $name => $definition )
-            {
+            foreach ($relationships as $name => $definition) {
                 // update any pre-5.1 relationships to the new definitions
                 // we do this here, rather than when upgrading from 5.0 to 5.1, as modules exported from MB in 5.0 may be loaded into 5.1 at any time
                 // note also that since these definitions are only found in the relationships.php working file they only occur for deployed or exported modules, not published then loaded modules
-                $definition = $this->_updateRelationshipDefinition( $definition ) ;
-                $relationship = RelationshipFactory::newRelationship ( $definition ) ;
+                $definition = $this->_updateRelationshipDefinition($definition);
+                $relationship = RelationshipFactory::newRelationship($definition);
                 // make sure it has a unique name
-                if (! isset( $definition [ 'relationship_name' ] ) )
-                {
-                    $name = $this->getUniqueName ( $relationship ) ;
-                    $relationship->setName ( $name ) ;
+                if (!isset($definition ['relationship_name'])) {
+                    $name = $this->getUniqueName($relationship);
+                    $relationship->setName($name);
                 }
-                $objects [ $name ] = $relationship ;
+                $objects [$name] = $relationship;
             }
         }
-        return $objects ;
+        return $objects;
     }
 
     /*
      * Save the set of relationships to a file
      * @param string $basepath  Base directory in which to store the relationships information
      */
-    protected function _save ($relationships , $basepath)
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _save($relationships, $basepath)
     {
-        $GLOBALS [ 'log' ]->info ( get_class ( $this ) . ": saving relationships to " . $basepath . '/relationships.php' ) ;
-        $header = file_get_contents ( 'modules/ModuleBuilder/MB/header.php' ) ;
+        $GLOBALS ['log']->info(get_class($this) . ': saving relationships to ' . $basepath . '/relationships.php');
+        $header = file_get_contents('modules/ModuleBuilder/MB/header.php');
 
-        $definitions = array ( ) ;
+        $definitions = [];
 
-        foreach ( $relationships as $relationship )
-        {
-            $definitions [ $relationship->getName () ] = $relationship->getDefinition () ;
+        foreach ($relationships as $relationship) {
+            $definitions [$relationship->getName()] = $relationship->getDefinition();
         }
 
-        mkdir_recursive ( $basepath ) ;
+        mkdir_recursive($basepath);
         // replace any existing relationships.php
-        write_array_to_file ( 'relationships', $definitions, $basepath . '/relationships.php', 'w', $header ) ;
+        write_array_to_file('relationships', $definitions, $basepath . '/relationships.php', 'w', $header);
     }
 
     /*
@@ -301,48 +298,42 @@ class AbstractRelationships
      * @param AbstractRelationship The relationship object
      * @return string A globally unique relationship name
      */
-    protected function getUniqueName ($relationship)
+    protected function getUniqueName($relationship)
     {
-        $allRelationships = $this->getRelationshipList () ;
-        $basename = $relationship->getName () ;
+        $allRelationships = $this->getRelationshipList();
+        $basename = $relationship->getName();
 
-        if (empty ( $basename ))
-        {
+        if (empty($basename)) {
             // start off with the proposed name being simply lhs_module_rhs_module
-            $definition = $relationship->getDefinition () ;
-            $basename = strtolower ( $definition [ 'lhs_module' ] . '_' . $definition [ 'rhs_module' ] ) ;
+            $definition = $relationship->getDefinition();
+            $basename = strtolower($definition ['lhs_module'] . '_' . $definition ['rhs_module']);
         }
 
         // Bug #49024 : Relationships Created in Earlier Versions Cause Conflicts and AJAX Errors After Upgrade
         // ...all custom relationships created via Studio should always have a numeric identifier attached.
-        if ( $this instanceof DeployedRelationships )
-        {
-            $name = $basename . '_1' ;
-            $suffix = 2 ;
-        }
-        else
-        {
-            $name = $basename ;
-            $suffix = 1 ;
+        if ($this instanceof DeployedRelationships) {
+            $name = $basename . '_1';
+            $suffix = 2;
+        } else {
+            $name = $basename;
+            $suffix = 1;
         }
 
-        while ( isset ( $allRelationships [ $name ] ) )
-        {
-            $name = $basename . "_" . ( string ) ($suffix ++) ;
+        while (isset($allRelationships [$name])) {
+            $name = $basename . '_' . ( string )($suffix++);
         }
 
         // bug33522 - if our relationship basename is in the special cases
-        if( in_array( $name , $this->specialCaseBaseNames ) )  {
+        if (in_array($name, $this->specialCaseBaseNames)) {
             //add a _1 (or _suffix#) and check to see if it already exists
-            $name = $name . "_" . ( string ) ($suffix ++);
-            while ( isset ( $allRelationships [ $name ] ) )
-            {
+            $name = $name . '_' . ( string )($suffix++);
+            while (isset($allRelationships [$name])) {
                 // if it does exist, strip off the _1 previously added and try again
-                $name = substr( $name , 0 , -2 ) . "_" . ( string ) ($suffix ++);
+                $name = substr($name, 0, -2) . '_' . ( string )($suffix++);
             }
         }
 
-        return $name ;
+        return $name;
     }
 
     /*
@@ -354,43 +345,35 @@ class AbstractRelationships
     public function build($basepath, $installDefPrefix, $relationships)
     {
         global $sugar_config;
-    	// keep the relationships data separate from any other build data by ading /relationships to the basepath
-        $basepath .= '/relationships' ;
+        // keep the relationships data separate from any other build data by ading /relationships to the basepath
+        $basepath .= '/relationships';
 
-        $installDefs = array ( ) ;
-        $compositeAdded = false ;
-        foreach ( self::$methods as $method => $key )
-        {
-            $buildMethod = 'build' . $method ;
-            $saveMethod = 'save' . $method ;
+        $installDefs = [];
+        $compositeAdded = false;
+        foreach (self::$methods as $method => $key) {
+            $buildMethod = 'build' . $method;
+            $saveMethod = 'save' . $method;
 
-            foreach ( $relationships as $name => $relationship )
-            {
-                if (! ($relationship->readonly () || $relationship->deleted ()))
-                {
-                    if (method_exists ( $relationship, $buildMethod ) && method_exists ( $this, $saveMethod ))
-                    {
-                        $metadata = $relationship->$buildMethod () ;
+            foreach ($relationships as $name => $relationship) {
+                if (!($relationship->readonly() || $relationship->deleted())) {
+                    if (method_exists($relationship, $buildMethod) && method_exists($this, $saveMethod)) {
+                        $metadata = $relationship->$buildMethod();
 
-                        if ((is_countable($metadata) ? count(
-                            $metadata
-                        ) : 0) > 0) {// don't clutter up the filesystem with empty files...
-                            $GLOBALS [ 'log' ]->debug ( get_class ( $this ) . ": BUILD is running METHOD $saveMethod" ) ;
-                            $installDef = $this->$saveMethod ( $basepath, $installDefPrefix, $name, $metadata ) ;
+                        if (safeCount($metadata) > 0) {// don't clutter up the filesystem with empty files...
+                            $GLOBALS ['log']->debug(get_class($this) . ": BUILD is running METHOD $saveMethod");
+                            $installDef = $this->$saveMethod($basepath, $installDefPrefix, $name, $metadata);
                             if (!is_null($installDef)) {
-                                foreach ( $installDef as $moduleName => $def )
-                                {
-                                    $installDefs [ $key ] [ ] = $def ;
+                                foreach ($installDef as $moduleName => $def) {
+                                    $installDefs [$key] [] = $def;
                                 }
                             }
                         }
                     }
-
                 }
             }
         }
 
-        return $installDefs ;
+        return $installDefs;
     }
 
     /*
@@ -412,10 +395,10 @@ class AbstractRelationships
 
         mkdir_recursive("$basepath/language");
 
-        $headerString = "<?php\n//THIS FILE IS AUTO GENERATED, DO NOT MODIFY\n" ;
-        $installDefs = array();
+        $headerString = "<?php\n//THIS FILE IS AUTO GENERATED, DO NOT MODIFY\n";
+        $installDefs = [];
 
-        $moduleLabels = array();
+        $moduleLabels = [];
         foreach ($labelDefinitions as $definition) {
             $moduleLabels[$definition['module']][$definition['system_label']] = $definition['display_label'];
         }
@@ -424,10 +407,10 @@ class AbstractRelationships
             $out = $headerString;
 
             $fileBaseName = $relationshipName ? "{$module}.{$relationshipName}.php" : "{$module}.php";
-            $filename = "{$basepath}/language/{$fileBaseName}" ;
+            $filename = "{$basepath}/language/{$fileBaseName}";
 
-            $mod_strings = array();
-            $app_list_strings = array();
+            $mod_strings = [];
+            $app_list_strings = [];
 
             if (file_exists($filename)) {
                 include FileLoader::validateFilePath($filename);
@@ -455,11 +438,11 @@ class AbstractRelationships
             sugar_file_put_contents($filename, $out);
 
             foreach ($sugar_config['languages'] as $lk => $lv) {
-                $installDefs[$module . "_$lk"] = array(
+                $installDefs[$module . "_$lk"] = [
                     'from' => "{$installDefPrefix}/relationships/language/{$fileBaseName}",
                     'to_module' => $module,
-                    'language' => $lk
-                );
+                    'language' => $lk,
+                ];
             }
         }
 
@@ -474,20 +457,20 @@ class AbstractRelationships
      * @param array $relationshipMetaData   Set of metadata definitions in the form $relationshipMetaData[$relationshipName]
      * @return array $installDefs           Set of new installDefs
      */
-    protected function saveRelationshipMetaData ($basepath , $installDefPrefix , $relationshipName , $relationshipMetaData)
+    protected function saveRelationshipMetaData($basepath, $installDefPrefix, $relationshipName, $relationshipMetaData)
     {
-        mkdir_recursive ( "$basepath/relationships" ) ;
+        mkdir_recursive("$basepath/relationships");
 
-        $installDefs = array ( ) ;
+        $installDefs = [];
         $properties = current($relationshipMetaData);
-        $filename = "$basepath/relationships/{$relationshipName}MetaData.php" ;
-        $GLOBALS [ 'log' ]->debug ( get_class ( $this ) . "->saveRelationshipMetaData(): saving the following to {$filename}" . print_r ( $properties, true ) ) ;
-        write_array_to_file ( 'dictionary["' . $relationshipName . '"]', $properties, "{$filename}", 'w' ) ;
-        $installDefs[$relationshipName] = array(
+        $filename = "$basepath/relationships/{$relationshipName}MetaData.php";
+        $GLOBALS ['log']->debug(get_class($this) . "->saveRelationshipMetaData(): saving the following to {$filename}" . print_r($properties, true));
+        write_array_to_file('dictionary["' . $relationshipName . '"]', $properties, "{$filename}", 'w');
+        $installDefs[$relationshipName] = [
             'meta_data' => "{$installDefPrefix}/relationships/relationships/{$relationshipName}MetaData.php",
-        );
+        ];
 
-        return $installDefs ;
+        return $installDefs;
     }
 
     /*
@@ -497,30 +480,28 @@ class AbstractRelationships
      * @param array $subpanelDefinitions    Set of subpanel definitions in the form $subpanelDefinitions[$for_module][]
      * @return array $installDefs           Set of new installDefs
      */
-    protected function saveSubpanelDefinitions ($basepath , $installDefPrefix , $relationshipName , $subpanelDefinitions)
+    protected function saveSubpanelDefinitions($basepath, $installDefPrefix, $relationshipName, $subpanelDefinitions)
     {
-        mkdir_recursive ( "$basepath/layoutdefs/" ) ;
-        $installDefs = array();
+        mkdir_recursive("$basepath/layoutdefs/");
+        $installDefs = [];
 
-        foreach ( $subpanelDefinitions as $moduleName => $definitions )
-        {
-            $filename = "$basepath/layoutdefs/{$relationshipName}_{$moduleName}.php" ;
+        foreach ($subpanelDefinitions as $moduleName => $definitions) {
+            $filename = "$basepath/layoutdefs/{$relationshipName}_{$moduleName}.php";
             $subpanelVarname = 'layout_defs["' . $moduleName . '"]["subpanel_setup"]';
-            $out = "";
-            foreach ( $definitions as $definition )
-            {
-                $GLOBALS [ 'log' ]->debug ( get_class ( $this ) . "->saveSubpanelDefinitions(): saving the following to {$filename}" . print_r ( $definition, true ) ) ;
+            $out = '';
+            foreach ($definitions as $definition) {
+                $GLOBALS ['log']->debug(get_class($this) . "->saveSubpanelDefinitions(): saving the following to {$filename}" . print_r($definition, true));
                 if (empty($definition ['get_subpanel_data']) || $definition ['subpanel_name'] == 'history' || $definition ['subpanel_name'] == 'activities') {
                     $definition ['get_subpanel_data'] = $definition ['subpanel_name'];
                 }
-                $out .= override_value_to_string($subpanelVarname, strtolower ( $definition [ 'get_subpanel_data' ] ), $definition) . "\n";
+                $out .= override_value_to_string($subpanelVarname, strtolower($definition ['get_subpanel_data']), $definition) . "\n";
             }
             if (!empty($out)) {
                 $out = "<?php\n // created: " . date('Y-m-d H:i:s') . "\n" . $out;
                 sugar_file_put_contents($filename, $out);
             }
 
-            $installDefs [ $moduleName ] = array ( 'from' => "{$installDefPrefix}/relationships/layoutdefs/{$relationshipName}_{$moduleName}.php" , 'to_module' => $moduleName ) ;
+            $installDefs [$moduleName] = ['from' => "{$installDefPrefix}/relationships/layoutdefs/{$relationshipName}_{$moduleName}.php", 'to_module' => $moduleName];
         }
         return $installDefs;
     }
@@ -536,7 +517,7 @@ class AbstractRelationships
             return true;
         }
 
-        $checkDirs = array();
+        $checkDirs = [];
         $checkDirs[] = "modules/{$moduleName}/clients/{$client}/layouts/subpanels";
         $checkDirs[] = "custom/modules/{$moduleName}/clients/{$client}/layouts/subpanels";
         if ($client != 'base') {
@@ -555,25 +536,24 @@ class AbstractRelationships
 
 
     /**
-     * @param $moduleName, the module name
+     * @param $moduleName , the module name
      * @param $relationshipName the relationship name
      * @param array $definition the definitions to be saved
      * @param string $basepath - the path to save the file to
      * @param string $client base|mobile|portal
      * @return string filename the layout definition is saved to
      */
-    public function saveSidecarSubpanelDefinitions($basepath , $installDefPrefix , $relationshipName , $subpanelDefinitions, $client='base')
+    public function saveSidecarSubpanelDefinitions($basepath, $installDefPrefix, $relationshipName, $subpanelDefinitions, $client = 'base')
     {
         $basepath = str_replace('relationships', "clients/{$client}/layouts", $basepath);
 
-        $installDefs = array();
-        foreach ( $subpanelDefinitions as $moduleName => $definitions )
-        {
-            if(!$this->hasSidecarLayoutDefs($moduleName, $client)) {
+        $installDefs = [];
+        foreach ($subpanelDefinitions as $moduleName => $definitions) {
+            if (!$this->hasSidecarLayoutDefs($moduleName, $client)) {
                 continue;
             }
 
-            if(strstr($basepath, 'modulebuilder')) {
+            if (strstr($basepath, 'modulebuilder')) {
                 $layoutPath = "{$basepath}/subpanels";
             } else {
                 $layoutPath = "custom/Extension/modules/{$moduleName}/Ext/clients/{$client}/layouts/subpanels";
@@ -584,13 +564,13 @@ class AbstractRelationships
             }
 
 
-            foreach ( $definitions as $definition ) {
-                $override_array = array();
+            foreach ($definitions as $definition) {
+                $override_array = [];
                 // we currently do not support collections in sidecar
                 if (!empty($definition['collection_list'])) {
                     continue;
                 }
-                
+
                 if ($definition['subpanel_name'] === 'Default') {
                     // There is a typo somewhere in the bowels of the Activities relationship code
                     $definition['subpanel_name'] = 'default';
@@ -598,26 +578,26 @@ class AbstractRelationships
 
                 if ($definition['subpanel_name'] !== 'default') {
                     $mc = new MetaDataConverter();
-                    $override_array = array(
-                        'override_subpanel_list_view' => array(
+                    $override_array = [
+                        'override_subpanel_list_view' => [
                             'link' => $definition['get_subpanel_data'],
                             'view' => $mc->fromLegacySubpanelName($definition['subpanel_name']),
-                        )
-                    );
+                        ],
+                    ];
                 }
 
                 $fileName = "{$layoutPath}/{$relationshipName}_{$moduleName}.php";
                 $varName = "viewdefs['{$moduleName}']['{$client}']['layout']['subpanels']['components'][]";
-                $layoutDefs = array(
-                    'layout' => "subpanel",
+                $layoutDefs = [
+                    'layout' => 'subpanel',
                     'label' => $definition['title_key'],
-                    'context' => array(
+                    'context' => [
                         'link' => $definition['get_subpanel_data'],
-                    ),
-                );
+                    ],
+                ];
                 $previous_contents = '';
                 if (file_exists($fileName)) {
-                    $previous_contents = file_get_contents($fileName)."\n\n";
+                    $previous_contents = file_get_contents($fileName) . "\n\n";
                 }
                 write_array_to_file($varName, $layoutDefs, $fileName, 'w', $previous_contents);
 
@@ -630,19 +610,19 @@ class AbstractRelationships
                 }
             }
 
-            // In cases of package publishing, we need to fetch the right path. 
-            // That path will come from installDefPrefix being set to something 
+            // In cases of package publishing, we need to fetch the right path.
+            // That path will come from installDefPrefix being set to something
             // with /SugarModules as a path. Otherwise, use the path that the defs
             // are being saved to in this request.
             $fromPath = $fileName;
             if (strpos($installDefPrefix, '/SugarModules') !== false) {
-              $fromPath = "{$installDefPrefix}/clients/{$client}/layouts/subpanels/{$relationshipName}_{$moduleName}.php";
+                $fromPath = "{$installDefPrefix}/clients/{$client}/layouts/subpanels/{$relationshipName}_{$moduleName}.php";
             }
 
-            $installDefs[$moduleName] = array(
-              'from' => $fromPath,
-              'to_module' => $moduleName
-            );
+            $installDefs[$moduleName] = [
+                'from' => $fromPath,
+                'to_module' => $moduleName,
+            ];
         }
 
         return $installDefs;
@@ -656,57 +636,55 @@ class AbstractRelationships
      * @param array $relationshipMetaData   Set of metadata definitions in the form $relationshipMetaData[$relationshipName]
      * @return array $installDefs           Set of new installDefs
      */
-    protected function saveClientFiles ($basepath, $installDefPrefix, $relationshipName, $moduleClientFileList)
+    protected function saveClientFiles($basepath, $installDefPrefix, $relationshipName, $moduleClientFileList)
     {
-        $installDefs = array();
+        $installDefs = [];
 
         foreach ($moduleClientFileList as $moduleName => $clientFileList) {
             mkdir_recursive("{$basepath}/{$moduleName}/clients");
 
             foreach ($clientFileList as $fileName => $contents) {
-                $from = "{$basepath}/{$moduleName}/".$fileName;
-                $to = "modules/{$moduleName}/".$fileName;
+                $from = "{$basepath}/{$moduleName}/" . $fileName;
+                $to = "modules/{$moduleName}/" . $fileName;
                 $installDefs[$moduleName][$to] = $from;
                 SugarAutoLoader::ensureDir(dirname($from));
                 sugar_file_put_contents($from, $contents);
             }
         }
-        
+
         return $installDefs;
     }
 
 
-    public function saveSidecarMobileSubpanelDefinitions($basepath , $installDefPrefix , $relationshipName , $subpanelDefinitions, $client='mobile')
+    public function saveSidecarMobileSubpanelDefinitions($basepath, $installDefPrefix, $relationshipName, $subpanelDefinitions, $client = 'mobile')
     {
-        return $this->saveSidecarSubpanelDefinitions($basepath , $installDefPrefix , $relationshipName , $subpanelDefinitions, $client);
+        return $this->saveSidecarSubpanelDefinitions($basepath, $installDefPrefix, $relationshipName, $subpanelDefinitions, $client);
     }
 
-    protected function saveWirelessSubpanelDefinitions ($basepath , $installDefPrefix , $relationshipName , $subpanelDefinitions)
+    protected function saveWirelessSubpanelDefinitions($basepath, $installDefPrefix, $relationshipName, $subpanelDefinitions)
     {
         $installDefs = [];
-        mkdir_recursive ( "$basepath/wirelesslayoutdefs/" ) ;
+        mkdir_recursive("$basepath/wirelesslayoutdefs/");
 
-        foreach ( $subpanelDefinitions as $moduleName => $definitions )
-        {
-            $filename = "$basepath/wirelesslayoutdefs/{$relationshipName}_{$moduleName}.php" ;
+        foreach ($subpanelDefinitions as $moduleName => $definitions) {
+            $filename = "$basepath/wirelesslayoutdefs/{$relationshipName}_{$moduleName}.php";
             $subpanelVarname = 'layout_defs["' . $moduleName . '"]["subpanel_setup"]';
-            $out = "";
-            foreach ( $definitions as $definition )
-            {
-                $GLOBALS [ 'log' ]->debug ( get_class ( $this ) . "->saveSubpanelDefinitions(): saving the following to {$filename}" . print_r ( $definition, true ) ) ;
+            $out = '';
+            foreach ($definitions as $definition) {
+                $GLOBALS ['log']->debug(get_class($this) . "->saveSubpanelDefinitions(): saving the following to {$filename}" . print_r($definition, true));
                 if (empty($definition ['get_subpanel_data']) || $definition ['subpanel_name'] == 'history' || $definition ['subpanel_name'] == 'activities') {
                     $definition ['get_subpanel_data'] = $definition ['subpanel_name'];
                 }
-                $out .= override_value_to_string($subpanelVarname, strtolower ( $definition [ 'get_subpanel_data' ] ), $definition) . "\n";
+                $out .= override_value_to_string($subpanelVarname, strtolower($definition ['get_subpanel_data']), $definition) . "\n";
             }
             if (!empty($out)) {
                 $out = "<?php\n // created: " . date('Y-m-d H:i:s') . "\n" . $out;
                 sugar_file_put_contents($filename, $out);
             }
 
-            $installDefs [ $moduleName ] = array ( 'from' => "{$installDefPrefix}/relationships/wirelesslayoutdefs/{$relationshipName}_{$moduleName}.php" , 'to_module' => $moduleName ) ;
+            $installDefs [$moduleName] = ['from' => "{$installDefPrefix}/relationships/wirelesslayoutdefs/{$relationshipName}_{$moduleName}.php", 'to_module' => $moduleName];
         }
-        return $installDefs ;
+        return $installDefs;
     }
 
     /*
@@ -720,52 +698,47 @@ class AbstractRelationships
      * @param array $linkFieldDefinitions   Set of link field definitions in the form $linkFieldDefinitions[$for_module]
      * @return array $installDefs           Set of new installDefs
      */
-    protected function saveVardefs ($basepath , $installDefPrefix , $relationshipName , $vardefs)
+    protected function saveVardefs($basepath, $installDefPrefix, $relationshipName, $vardefs)
     {
         $installDefs = [];
-        mkdir_recursive ( "$basepath/vardefs/" ) ;
-        $GLOBALS [ 'log' ]->debug ( get_class ( $this ) . "->saveVardefs(): vardefs =" . print_r ( $vardefs, true ) ) ;
+        mkdir_recursive("$basepath/vardefs/");
+        $GLOBALS ['log']->debug(get_class($this) . '->saveVardefs(): vardefs =' . print_r($vardefs, true));
 
-        foreach ( $vardefs as $moduleName => $definitions )
-        {
+        foreach ($vardefs as $moduleName => $definitions) {
             $module = BeanFactory::newBean($moduleName);
-            if(!empty($module)) {
-            	$object = $module->object_name ;
+            if (!empty($module)) {
+                $object = $module->object_name;
             } else {
-                $object = $moduleName ;
+                $object = $moduleName;
             }
 
             $relName = $moduleName;
-            foreach ( $definitions as $definition )
-            {
-            	if (!empty($definition['relationship']))
-            	{
-            		$relName = $definition['relationship'];
-            		break;
-            	}
+            foreach ($definitions as $definition) {
+                if (!empty($definition['relationship'])) {
+                    $relName = $definition['relationship'];
+                    break;
+                }
             }
 
-            $filename = "$basepath/vardefs/{$relName}_{$moduleName}.php" ;
+            $filename = "$basepath/vardefs/{$relName}_{$moduleName}.php";
 
-            $out =  "<?php\n// created: " . date('Y-m-d H:i:s') . "\n";
-            foreach ( $definitions as $definition )
-            {
-                $GLOBALS [ 'log' ]->debug ( get_class ( $this ) . "->saveVardefs(): saving the following to {$filename}" . print_r ( $definition, true ) ) ;
-               	$out .= '$dictionary["' . $object . '"]["fields"]["' . $definition [ 'name' ] . '"] = '
-               		  . var_export_helper($definition) . ";\n";
+            $out = "<?php\n// created: " . date('Y-m-d H:i:s') . "\n";
+            foreach ($definitions as $definition) {
+                $GLOBALS ['log']->debug(get_class($this) . "->saveVardefs(): saving the following to {$filename}" . print_r($definition, true));
+                $out .= '$dictionary["' . $object . '"]["fields"]["' . $definition ['name'] . '"] = '
+                    . var_export_helper($definition) . ";\n";
             }
             file_put_contents($filename, $out);
 
-            $installDefs [ $moduleName ] = array (
-            	'from' => "{$installDefPrefix}/relationships/vardefs/{$relName}_{$moduleName}.php" ,
-            	'to_module' => $moduleName
-            ) ;
+            $installDefs [$moduleName] = [
+                'from' => "{$installDefPrefix}/relationships/vardefs/{$relName}_{$moduleName}.php",
+                'to_module' => $moduleName,
+            ];
         }
 
-        $GLOBALS [ 'log' ]->debug ( get_class ( $this ) . "->saveVardefs(): installDefs =" . print_r ( $installDefs, true ) ) ;
+        $GLOBALS ['log']->debug(get_class($this) . '->saveVardefs(): installDefs =' . print_r($installDefs, true));
 
-        return $installDefs ;
-
+        return $installDefs;
     }
 
     /*
@@ -775,38 +748,31 @@ class AbstractRelationships
      * @param $deployedName Name of the module in the deployed form - that is, keyname_modulename or modulename
      * @return array ('moduleName'=>name, 'packageName'=>package) if undeployed, ('moduleName'=>name) if deployed
      */
-    static function parseDeployedModuleName ($deployedName)
+    public static function parseDeployedModuleName($deployedName)
     {
-        $mb = new ModuleBuilder ( ) ;
+        $mb = new ModuleBuilder();
 
-        $packageName = '' ;
-        $moduleName = $deployedName ;
+        $packageName = '';
+        $moduleName = $deployedName;
 
-        foreach ( $mb->getPackageList () as $name )
-        {
+        foreach ($mb->getPackageList() as $name) {
             // convert the keyName into a packageName, needed for checking to see if this is really an undeployed module, or just a module with a _ in the name...
-            $package = $mb->getPackage ( $name ) ; // seem to need to call getPackage twice to get the key correctly... TODO: figure out why...
-            $key = $mb->getPackage ( $name )->key ;
-            if (strlen ( $key ) < strlen ( $deployedName ))
-            {
-                $position = stripos ( $deployedName, $key ) ;
-                $moduleName = trim( substr( $deployedName , strlen($key) ) , '_' ); //use trim rather than just assuming that _ is between packageName and moduleName in the deployedName
-                if ( $position !== false && $position == 0 && (isset ( $mb->packages [ $name ]->modules [ $moduleName ] )))
-                {
-                    $packageName = $name ;
-                    break ;
+            $package = $mb->getPackage($name); // seem to need to call getPackage twice to get the key correctly... TODO: figure out why...
+            $key = $mb->getPackage($name)->key;
+            if (strlen($key) < strlen($deployedName)) {
+                $position = stripos($deployedName, (string) $key);
+                $moduleName = trim(substr($deployedName, strlen($key)), '_'); //use trim rather than just assuming that _ is between packageName and moduleName in the deployedName
+                if ($position !== false && $position == 0 && (isset($mb->packages [$name]->modules [$moduleName]))) {
+                    $packageName = $name;
+                    break;
                 }
             }
         }
 
-        if (! empty ( $packageName ))
-        {
-            return array ( 'moduleName' => $moduleName , 'packageName' => $packageName ) ;
-        } else
-        {
-            return array ( 'moduleName' => $deployedName ) ;
+        if (!empty($packageName)) {
+            return ['moduleName' => $moduleName, 'packageName' => $packageName];
+        } else {
+            return ['moduleName' => $deployedName];
         }
     }
-
-
 }

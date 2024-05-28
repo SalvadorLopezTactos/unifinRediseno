@@ -20,7 +20,6 @@ use Sugarcrm\Sugarcrm\ProcessManager;
  */
 class PMSEFlowRouter
 {
-
     public $pmseElementRunner;
     public $elementStack;
     /**
@@ -167,7 +166,7 @@ class PMSEFlowRouter
 //                $this->runEngine($elementData, $createThread, $bean);
 //            }
 //        } else {
-//            // Quick fix to the 0 output printed by some element, 
+//            // Quick fix to the 0 output printed by some element,
 //            // Please don't remove until the fix to the element is committed
 //            // FIXED ob_get_clean();
 //            return true;
@@ -212,8 +211,11 @@ class PMSEFlowRouter
             case 'UPDATE':
                 unset($resultData['flow_data']['cas_index']); // The case index should not be overriden
                 unset($resultData['flow_data']['cas_previous']); // The case index should not be overriden
-                $resultData['processed_flow'] = $this->caseFlowHandler->saveFlowData($resultData['flow_data'], false,
-                    $resultData['flow_id']);
+                $resultData['processed_flow'] = $this->caseFlowHandler->saveFlowData(
+                    $resultData['flow_data'],
+                    false,
+                    $resultData['flow_id']
+                );
                 break;
             case 'CREATE':
                 if (isset($resultData['create_thread']) && $resultData['create_thread']) {
@@ -233,7 +235,7 @@ class PMSEFlowRouter
                 $resultData['previous_closed_flow'] = $this->caseFlowHandler->closePreviousFlow($previousFlowData);
                 break;
             case 'NONE':
-            default :
+            default:
                 if ($resultData['close_flow'] ?? false) {
                     $resultData['previous_closed_flow'] = $this->caseFlowHandler->closePreviousFlow($previousFlowData);
                 }
@@ -285,8 +287,8 @@ class PMSEFlowRouter
     public function retrieveFollowingElements($executionResult, $flowData)
     {
         switch ($executionResult['route_action']) {
-//            case 'QUEUE':
-//                $this->queueJob($flowData);
+            //            case 'QUEUE':
+            //                $this->queueJob($flowData);
             case 'NONE':
             case 'WAIT':
             case 'SLEEP':
@@ -294,14 +296,16 @@ class PMSEFlowRouter
             case 'FREEZE':
             case 'ERROR':
             case 'INVALID':
-                $result = array();
+                $result = [];
                 break;
             case 'QUEUE':
                 $this->queueJob($flowData);
+                // no break
             case 'ROUTE':
             default:
                 $result = $this->filterFlows(
-                    $this->caseFlowHandler->retrieveFollowingElements($flowData), $executionResult['flow_filters']
+                    $this->caseFlowHandler->retrieveFollowingElements($flowData),
+                    $executionResult['flow_filters']
                 );
                 break;
         }
@@ -345,17 +349,15 @@ class PMSEFlowRouter
      * @param type $filterFlows
      * @return type
      */
-    public function filterFlows($nextElements, $filterFlows = array())
+    public function filterFlows($nextElements, $filterFlows = [])
     {
         if (!empty($filterFlows)) {
             foreach ($nextElements as $key => $element) {
-                if (!in_array($element['bpmn_id'], $filterFlows)) {
+                if (!safeInArray($element['bpmn_id'], $filterFlows)) {
                     unset($nextElements[$key]);
                 }
             }
         }
         return array_values($nextElements);
     }
-
-
 }

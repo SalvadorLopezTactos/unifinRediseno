@@ -60,7 +60,7 @@
 
         let $tableRow = this.$('tr[name="Currencies_-99"]');
         let $rowCheckBox = $tableRow.find('input[name="check"]');
-        let $rowActionDropdown = $tableRow.find('[data-toggle="dropdown"');
+        let $rowActionDropdown = $tableRow.find('[data-bs-toggle="dropdown"');
         let $defaultCurrencyLabel = $tableRow.find('[data-type="name"] div.ellipsis_inline');
 
         // Add the default currency class to the default currency row

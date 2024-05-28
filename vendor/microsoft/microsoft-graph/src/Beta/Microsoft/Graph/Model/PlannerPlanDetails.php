@@ -26,7 +26,7 @@ class PlannerPlanDetails extends PlannerDelta
 {
     /**
     * Gets the categoryDescriptions
-    * An object that specifies the descriptions of the 25 categories that can be associated with tasks in the plan
+    * An object that specifies the descriptions of the 25 categories that can be associated with tasks in the plan.
     *
     * @return PlannerCategoryDescriptions|null The categoryDescriptions
     */
@@ -42,10 +42,10 @@ class PlannerPlanDetails extends PlannerDelta
         }
         return null;
     }
-    
+
     /**
     * Sets the categoryDescriptions
-    * An object that specifies the descriptions of the 25 categories that can be associated with tasks in the plan
+    * An object that specifies the descriptions of the 25 categories that can be associated with tasks in the plan.
     *
     * @param PlannerCategoryDescriptions $val The categoryDescriptions
     *
@@ -56,10 +56,10 @@ class PlannerPlanDetails extends PlannerDelta
         $this->_propDict["categoryDescriptions"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the contextDetails
-    * Read-only. A collection of additional information associated with plannerPlanContext entries that are defined for the plannerPlan container.
+    * A collection of additional information associated with plannerPlanContext entries that are defined for the plannerPlan container. Read-only.
     *
     * @return PlannerPlanContextDetailsCollection|null The contextDetails
     */
@@ -75,10 +75,10 @@ class PlannerPlanDetails extends PlannerDelta
         }
         return null;
     }
-    
+
     /**
     * Sets the contextDetails
-    * Read-only. A collection of additional information associated with plannerPlanContext entries that are defined for the plannerPlan container.
+    * A collection of additional information associated with plannerPlanContext entries that are defined for the plannerPlan container. Read-only.
     *
     * @param PlannerPlanContextDetailsCollection $val The contextDetails
     *
@@ -89,7 +89,7 @@ class PlannerPlanDetails extends PlannerDelta
         $this->_propDict["contextDetails"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the sharedWith
     * The set of user IDs that this plan is shared with. If you are using Microsoft 365 groups, use the groups API to manage group membership to share the group's plan. You can also add existing members of the group to this collection, although it is not required in order for them to access the plan owned by the group.
@@ -108,7 +108,7 @@ class PlannerPlanDetails extends PlannerDelta
         }
         return null;
     }
-    
+
     /**
     * Sets the sharedWith
     * The set of user IDs that this plan is shared with. If you are using Microsoft 365 groups, use the groups API to manage group membership to share the group's plan. You can also add existing members of the group to this collection, although it is not required in order for them to access the plan owned by the group.
@@ -122,5 +122,5 @@ class PlannerPlanDetails extends PlannerDelta
         $this->_propDict["sharedWith"] = $val;
         return $this;
     }
-    
+
 }

@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('features', function (Y, NAME) {
 
 var feature_tests = {};
@@ -72,7 +65,7 @@ Y.mix(Y.namespace('Features'), {
         return (result.length) ? result.join(';') : '';
     },
     /**
-    * Run a sepecific test and return a Boolean response.
+    * Run a specific test and return a Boolean response.
     *
     *   ```
     *   Y.Features.test("load", "1");
@@ -241,7 +234,7 @@ add('load', '8', {
         useSVG = !Y.config.defaultGraphicEngine || Y.config.defaultGraphicEngine != "canvas",
 		canvas = DOCUMENT && DOCUMENT.createElement("canvas"),
         svg = (DOCUMENT && DOCUMENT.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1"));
-    
+
     return svg && (useSVG || !canvas);
 },
     "trigger": "graphics"
@@ -254,7 +247,7 @@ add('load', '9', {
         useSVG = !Y.config.defaultGraphicEngine || Y.config.defaultGraphicEngine != "canvas",
 		canvas = DOCUMENT && DOCUMENT.createElement("canvas"),
         svg = (DOCUMENT && DOCUMENT.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1"));
-    
+
     return svg && (useSVG || !canvas);
 },
     "trigger": "graphics"
@@ -307,7 +300,7 @@ add('load', '14', {
     function workingNative( k, v ) {
         return k === "ok" ? true : v;
     }
-    
+
     // Double check basic functionality.  This is mainly to catch early broken
     // implementations of the JSON API in Firefox 3.1 beta1 and beta2
     if ( nativeSupport ) {
@@ -394,22 +387,19 @@ add('load', '20', {
     */
     return (!Y.UA.nodejs && !Y.UA.winjs);
 },
-    "trigger": "yql",
-    "when": "after"
+    "trigger": "yql"
 });
 // yql-nodejs
 add('load', '21', {
     "name": "yql-nodejs",
     "trigger": "yql",
-    "ua": "nodejs",
-    "when": "after"
+    "ua": "nodejs"
 });
 // yql-winjs
 add('load', '22', {
     "name": "yql-winjs",
     "trigger": "yql",
-    "ua": "winjs",
-    "when": "after"
+    "ua": "winjs"
 });
 
-}, '3.15.0', {"requires": ["yui-base"]});
+}, '3.18.1', {"requires": ["yui-base"]});

@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'لوحة معلومات قائمة الفرص',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'لوحة معلومات سجل الفرص',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => '‏‏عروض الأسعار',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'الفرص حسب حساب ديناميكي',
+    'LBL_TOP_10_OPP' => 'أفضل 10 تطبيقات مفتوحة',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'لوحة المعلومات: فرصي النشطة',
+    'LBL_MY_ACTIVE_OPP' => 'تطبيقاتي المفتوحة',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'إجمالي الخط هو',
 
-    'LBL_OPPORTUNITY_ROLE'=>'دور الفرصة',
+    'LBL_OPPORTUNITY_ROLE' => 'دور الفرصة',
     'LBL_NOTES_SUBPANEL_TITLE' => 'ملاحظات',
     'LBL_TAB_OPPORTUNITY' => 'مراجعة {{module}}',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'من خلال النقر على تأكيد، ستقوم بمسح كل بيانات التوقعات وتغير عرض الفرص الخاص بك. إذا لم يكن ذلك هو ما قصدته، فانقر على إلغاء للعودة إلى الإعدادات السابقة.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'بالنقر فوق تأكيد، ستقوم بمسح كل بيانات التوقعات وتغيير عرض الفرص. '
-        .'سيتم تعطيل جميع "التعاريف العملية" مع وحدة هدف لبند العائد. '
-        .'إذا لم يكن ذلك ما قصدته، فانقر فوق إلغاء للرجوع إلى الإعدادات السابقة.',
+        . 'سيتم تعطيل جميع "التعاريف العملية" مع وحدة هدف لبند العائد. '
+        . 'إذا لم يكن ذلك ما قصدته، فانقر فوق إلغاء للرجوع إلى الإعدادات السابقة.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'إذا تم إغلاق كل بنود العائدات وتم الفوز بأحد هذه العناصر على الأقل،',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'يتم تعيين مرحلة مبيعات الفرصة على "إغلاق لسبب الفوز".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'إذا كانت كل بنود العائدات في مرحلة مبيعات "إغلاق لسبب الخساره"،',
@@ -260,4 +263,9 @@ $mod_strings = array(
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'التنبؤ بنجاح الفرصة',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'عرض تفاصيل التنبؤ لفرصة معينة',
-);
+    'LBL_AI_WINRATE' => 'معدل الفوز',
+    'LBL_AI_WONOPP' => 'الفرص الفائزة',
+    'LBL_AI_CLOSINGTIME' => 'وقت الإغلاق',
+    'LBL_AI_CLOSEDOPP' => 'فرص المبيعات المنتهية',
+    'LBL_AI_LEADTIMESPAN' => 'الوقت بين خلق الفرصة والإغلاق لسبب الفوز',
+];

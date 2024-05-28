@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kategóriák',
     'LBL_MODULE_NAME_SINGULAR' => 'Kategória',
     'LBL_MODULE_TITLE' => 'Kategóriák',
@@ -31,4 +31,4 @@ $mod_strings = array(
 All nested categories will be removed as well',
     'LBL_WRONG_MOVE_PATH' => 'You cannot move a folder into itself.',
     'ERR_EMPTY_NODE_NAME' => 'You cannot add a category without title',
-);
+];

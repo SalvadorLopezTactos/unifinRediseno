@@ -49,15 +49,15 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
  * WebToLeadCapture.php
  * HandleAjaxCall.php */
 
- /*
-  * for 50, added:
-  * minify.php
-  */
+/*
+ * for 50, added:
+ * minify.php
+ */
 
-  /*
-  * for 510, added:
-  * dceActionCleanup.php
-  */
+/*
+* for 510, added:
+* dceActionCleanup.php
+*/
 if (strpos(PHP_SAPI, 'cli') !== 0
     && in_array('phar', stream_get_wrappers(), true)) {
     stream_wrapper_unregister('phar');
@@ -65,21 +65,19 @@ if (strpos(PHP_SAPI, 'cli') !== 0
 
 $GLOBALS['startTime'] = microtime(true);
 
-if(empty($GLOBALS['installing']) && !file_exists('config.php'))
-{
-	header('Location: install.php');
-	exit ();
+if (empty($GLOBALS['installing']) && !file_exists('config.php')) {
+    header('Location: install.php');
+    exit();
 }
 
 require __DIR__ . '/../vendor/autoload.php';
 
-if(empty($GLOBALS['installing']) &&empty($sugar_config['dbconfig']['db_name']))
-{
-	    header('Location: install.php');
-	    exit ();
+if (empty($GLOBALS['installing']) && empty($sugar_config['dbconfig']['db_name'])) {
+    header('Location: install.php');
+    exit();
 }
 
-require_once('include/utils.php');
+require_once 'include/utils.php';
 require_once 'include/dir_inc.php';
 
 require_once 'include/utils/array_utils.php';
@@ -107,7 +105,7 @@ register_shutdown_function('sugar_cleanup');
 // cn: set php.ini settings at entry points
 setPhpIniSettings();
 
-require_once('sugar_version.php'); // provides $sugar_version, $sugar_db_version, $sugar_flavor
+require_once 'sugar_version.php'; // provides $sugar_version, $sugar_db_version, $sugar_flavor
 
 if ($sugar_config['symfony_deprecation_log'] ?? false) {
     new SymfonyDeprecationHandler(LoggerFactory::getLogger('deprecation'));
@@ -123,8 +121,8 @@ foreach (SugarAutoLoader::existing('include/custom_utils.php', 'custom/include/c
     require_once $file;
 }
 
-require_once('include/modules.php'); // provides $moduleList, $beanList, $beanFiles, $modInvisList, $adminOnlyList, $modInvisListActivities
-require_once('modules/Administration/updater_utils.php');
+require_once 'include/modules.php'; // provides $moduleList, $beanList, $beanFiles, $modInvisList, $adminOnlyList, $modInvisListActivities
+require_once 'modules/Administration/updater_utils.php';
 require_once 'modules/Currencies/Currency.php';
 
 UploadStream::register();
@@ -134,55 +132,55 @@ UploadStream::register();
 if (!defined('SUGAR_PATH')) {
     define('SUGAR_PATH', realpath(__DIR__ . '/..'));
 }
-if(empty($GLOBALS['installing'])){
-///////////////////////////////////////////////////////////////////////////////
-////	SETTING DEFAULT VAR VALUES
-$error_notice = '';
-$use_current_user_login = false;
+if (empty($GLOBALS['installing'])) {
+    ///////////////////////////////////////////////////////////////////////////////
+    ////	SETTING DEFAULT VAR VALUES
+    $error_notice = '';
+    $use_current_user_login = false;
 
     LogicHook::initialize()->call_custom_logic('', 'entry_point_variables_setting');
 
-if(!empty($sugar_config['session_dir'])) {
-	session_save_path($sugar_config['session_dir']);
-}
+    if (!empty($sugar_config['session_dir'])) {
+        session_save_path($sugar_config['session_dir']);
+    }
 
     if (class_exists('SessionHandler') && !isCli()) {
         session_set_save_handler(new SugarSessionHandler());
     }
 
-$GLOBALS['sugar_version'] = $sugar_version;
-$GLOBALS['sugar_flavor'] = $sugar_flavor;
-$GLOBALS['js_version_key'] = get_js_version_key();
+    $GLOBALS['sugar_version'] = $sugar_version;
+    $GLOBALS['sugar_flavor'] = $sugar_flavor;
+    $GLOBALS['js_version_key'] = get_js_version_key();
     // Because this line is *supposed* to be indented...
     $GLOBALS['sugar_mar_version'] = $sugar_mar_version;
 
-SugarApplication::preLoadLanguages();
+    SugarApplication::preLoadLanguages();
 
-$timedate = TimeDate::getInstance();
-$GLOBALS['timedate'] = $timedate;
+    $timedate = TimeDate::getInstance();
+    $GLOBALS['timedate'] = $timedate;
 
     if (!empty($sugar_config['dbal_deprecation_log'])) {
         \Doctrine\Deprecations\Deprecation::enableWithPsrLogger(LoggerFactory::getLogger('deprecation'));
     }
 
-$db = DBManagerFactory::getInstance();
-$db->resetQueryCount();
-$locale = Localization::getObject();
+    $db = DBManagerFactory::getInstance();
+    $db->resetQueryCount();
+    $locale = Localization::getObject();
 
-// Emails uses the REQUEST_URI later to construct dynamic URLs.
-// IIS does not pass this field to prevent an error, if it is not set, we will assign it to ''.
-if (!isset ($_SERVER['REQUEST_URI'])) {
-	$_SERVER['REQUEST_URI'] = '';
-}
+    // Emails uses the REQUEST_URI later to construct dynamic URLs.
+    // IIS does not pass this field to prevent an error, if it is not set, we will assign it to ''.
+    if (!isset($_SERVER['REQUEST_URI'])) {
+        $_SERVER['REQUEST_URI'] = '';
+    }
 
-$current_user = BeanFactory::newBean('Users');
-$current_entity = null;
+    $current_user = BeanFactory::newBean('Users');
+    $current_entity = null;
 
     if (!$GLOBALS['sugar_config']['activity_streams_enabled']) {
         Activity::disable();
     }
 
-LogicHook::initialize()->call_custom_logic('', 'after_entry_point');
+    LogicHook::initialize()->call_custom_logic('', 'after_entry_point');
 }
 
 

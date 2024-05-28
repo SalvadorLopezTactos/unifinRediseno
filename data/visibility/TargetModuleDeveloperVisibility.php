@@ -16,8 +16,7 @@
  */
 class TargetModuleDeveloperVisibility extends ACLVisibility
 {
-
-    protected $targetModuleField = "";
+    protected $targetModuleField = '';
 
     /**
      * @param SugarBean $bean
@@ -38,14 +37,14 @@ class TargetModuleDeveloperVisibility extends ACLVisibility
      *
      * @return SugarQuery
      */
-    public function addVisibilityWhereQuery(SugarQuery $query, $options = array())
+    public function addVisibilityWhereQuery(SugarQuery $query, $options = [])
     {
         global $current_user;
 
         if (!empty($this->targetModuleField) && !$current_user->isAdmin()) {
             $modules = $current_user->getDeveloperModules();
             if (empty($modules)) {
-                $modules = array('');
+                $modules = [''];
             }
             $query->where()->in($this->targetModuleField, $modules);
         }
@@ -54,10 +53,10 @@ class TargetModuleDeveloperVisibility extends ACLVisibility
     }
 
     /**
-    * Add visibility clauses to the WHERE part of the query
-    * @param string $query
-    * @return string
-    */
+     * Add visibility clauses to the WHERE part of the query
+     * @param string $query
+     * @return string
+     */
     public function addVisibilityWhere(&$query)
     {
         global $current_user;
@@ -68,7 +67,8 @@ class TargetModuleDeveloperVisibility extends ACLVisibility
             if (empty($table_alias)) {
                 $table_alias = $this->bean->table_name;
             }
-            $modules = array_map(function ($value) use ($db) {
+            $modules = array_map(
+                function ($value) use ($db) {
                     return $db->quoted($value);
                 },
                 $current_user->getDeveloperModules()
@@ -77,7 +77,7 @@ class TargetModuleDeveloperVisibility extends ACLVisibility
             if (empty($modules)) {
                 $devWhere = "$table_alias.{$this->targetModuleField} IS NULL";
             } else {
-                $devWhere = "$table_alias.{$this->targetModuleField} IN (" . implode(',', $modules) . ")";
+                $devWhere = "$table_alias.{$this->targetModuleField} IN (" . implode(',', $modules) . ')';
             }
             if (!empty($query)) {
                 $query .= " AND $devWhere";

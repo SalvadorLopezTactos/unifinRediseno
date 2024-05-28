@@ -16,7 +16,6 @@ use Sugarcrm\Sugarcrm\Audit\Formatter;
 
 class Email implements Formatter
 {
-
     /**
      * @inheritdoc
      */
@@ -60,7 +59,7 @@ class Email implements Formatter
         $addresses = [];
 
         $q = new \SugarQuery();
-        $q->select(["id", "email_address"]);
+        $q->select(['id', 'email_address']);
         $q->from(\BeanFactory::newBean('EmailAddresses'))->where()->in('id', $ids);
 
         $rows = $q->execute();

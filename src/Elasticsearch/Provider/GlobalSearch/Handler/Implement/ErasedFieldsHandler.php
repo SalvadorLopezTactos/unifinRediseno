@@ -47,7 +47,7 @@ class ErasedFieldsHandler extends AbstractHandler implements
 
     /**
      * Retrieve the value of a given field from the database.
-     * @param \SugarBean $bean, associated bean
+     * @param \SugarBean $bean , associated bean
      * @return array
      */
     protected function retrieveErasedFields(\SugarBean $bean)

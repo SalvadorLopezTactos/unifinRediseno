@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\UserUtils\Managers;
 
 use BeanFactory;
@@ -68,7 +69,7 @@ class DashboardManager extends Manager
         $this->dashboards = $payload->getDashboards();
         $this->modules = $payload->getModules();
 
-        if (count($this->destinationUsers) > self::MAX_USER) {
+        if (safeCount($this->destinationUsers) > self::MAX_USER) {
             $this->useScheduledJob = true;
         }
     }
@@ -114,13 +115,13 @@ class DashboardManager extends Manager
             return;
         }
 
-        if ((is_countable($this->modules) ? count($this->modules) : 0) > 0) {
+        if (safeCount($this->modules) > 0) {
             foreach ($this->destinationUsers as $destinationUserId) {
                 $this->deleteDashboards($destinationUserId, $this->modules);
             }
         }
 
-        if (count($this->dashboards) > 0) {
+        if (safeCount($this->dashboards) > 0) {
             foreach ($this->dashboards as $dashboardId) {
                 $this->deleteDashboard($dashboardId);
             }
@@ -208,7 +209,7 @@ class DashboardManager extends Manager
         $sugarQuery->where()->equals('deleted', 0);
         $result = $sugarQuery->execute();
 
-        if (count($result) > 0) {
+        if (safeCount($result) > 0) {
             return true;
         }
 
@@ -271,18 +272,18 @@ class DashboardManager extends Manager
 
         $dashboardsBean = \BeanFactory::newBean('Dashboards');
         $fieldDefs = $dashboardsBean->getFieldDefinitions();
-        $db->updateParams($dashboardsBean->getTableName(), $fieldDefs, array(
+        $db->updateParams($dashboardsBean->getTableName(), $fieldDefs, [
             'deleted' => '1',
-        ), array(
+        ], [
             'id' => $dashboardId,
-        ));
+        ]);
     }
 
     /**
      * Deletes dashboards for a user on a module
      *
      * @param string $userId
-     * @param string $module: null
+     * @param string $module : null
      */
     private function deleteDashboardsFor(string $userId, ?string $module): void
     {
@@ -316,7 +317,7 @@ class DashboardManager extends Manager
      */
     private function cloneDashboards(string $sourceUser, string $destinationUser, ?array $modules): void
     {
-        if (count((array) $modules) > 0) {
+        if (safeCount((array)$modules) > 0) {
             foreach ($modules as $module) {
                 $this->cloneDashboardsFor($sourceUser, $destinationUser, $module);
             }
@@ -374,7 +375,7 @@ class DashboardManager extends Manager
         $sugarQuery->where()->equals('id', $dashboardId);
         $result = $sugarQuery->execute();
 
-        if (is_array($result) && count($result) > 0) {
+        if (is_array($result) && safeCount($result) > 0) {
             return $result[0];
         }
 

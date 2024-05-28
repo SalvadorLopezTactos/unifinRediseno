@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Prikaz pločica',
     'LBL_MODULE_NAME_SINGULAR' => 'Prikaz pločica',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'Prikaz pločica',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => 'Omogući module',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'Moduli prikaza pločica',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'Podešavanja modula',
-    'LBL_PIPELINE_TABLE_HEADER' => "Izaberite polje čije će se vrednosti koristiti kao kolone",
+    'LBL_PIPELINE_TABLE_HEADER' => 'Izaberite polje čije će se vrednosti koristiti kao kolone',
     'LBL_PIPELINE_TILE_HEADER' => 'Polje zaglavlja',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => 'Dostupne kolone',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => 'Polje tela pločice',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'Pregled pločica',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'Previše polja na pločici.',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => 'Ispravite greške u sledećim karticama modula pre nego što nastavite dalje:<br><br>',
-);
+    'LBL_MODULE_SELECTION' => 'Ispod izaberite modul koji želite da vidite i konfigurišete',
+    'LBL_SHOW_COLUMN_COUNT' => 'Prikaži broj kolona',
+    'LBL_SHOW_COLUMN_TOTAL' => 'Prikaži ukupan broj kolona',
+    'LBL_TOTAL_FIELD' => 'Ukupno polja',
+];

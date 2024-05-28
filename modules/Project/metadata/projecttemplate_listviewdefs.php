@@ -9,26 +9,26 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$listViewDefs['ProjectTemplates'] = array(
-    'NAME' => array(
+$listViewDefs['ProjectTemplates'] = [
+    'NAME' => [
         'width' => '40',
         'label' => 'LBL_LIST_NAME',
         'link' => true,
         'default' => true,
-        'customCode'=>'<a href="index.php?offset={$OFFSET}&record={$ID}&action=ProjectTemplatesDetailView&module=Project" >{$NAME}</a>'),
-    'ESTIMATED_START_DATE' => array(
+        'customCode' => '<a href="index.php?offset={$OFFSET}&record={$ID}&action=ProjectTemplatesDetailView&module=Project" >{$NAME}</a>'],
+    'ESTIMATED_START_DATE' => [
         'width' => '20',
         'label' => 'LBL_DATE_START',
         'link' => false,
-        'default' => true),
-    'ESTIMATED_END_DATE' => array(
+        'default' => true],
+    'ESTIMATED_END_DATE' => [
         'width' => '20',
         'label' => 'LBL_DATE_END',
         'link' => false,
-        'default' => true),
-    'TEAM_NAME' => array(
+        'default' => true],
+    'TEAM_NAME' => [
         'width' => '2',
         'label' => 'LBL_LIST_TEAM',
-        'related_fields' => array('team_id'),
-        'default' => false),
-);
+        'related_fields' => ['team_id'],
+        'default' => false],
+];

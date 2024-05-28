@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Registre d&#39;auditories',
     'LBL_FIELD_NAME' => 'Camp',
     'LBL_OLD_NAME' => 'Valor Anterior',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Actualitza a',
     'LBL_BLANK' => '-buit-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Verificar calendari',
+    'LBL_CREATED' => 'Creat',
+];

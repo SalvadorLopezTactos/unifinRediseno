@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Aktif',
     'LBL_ASSIGNEE_RULE' => 'Devralan Kuralı',
     'LBL_TARGET_ASSIGNEE' => 'Hedef Devralan',
+    'LBL_STAGE_NUMBERS' => 'Aşama Numaralandırma',
     'LBL_EXPORT_BUTTON_LABEL' => 'Dışarı Aktar',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'İçe Aktar',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Dosya Sisteminizden *.json dosyası aktararak otomatik olarak yeni bir Akıllı Kılavuz Şablonu kaydı oluşturun/güncelleyin.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'İşaretlenirse, Hedef Devralan = Üst Devralan ise bir üst ögede "Atanan" kullanıcı değiştirildiğinde "Atanan" kullanıcılar da akıllı kılavuzlarda, aşamalarda ve etkinliklerde otomatik olarak değişir. Etkinlik Şablonlarındaki Hedef Devralan ayarlarının, Akıllı Kılavuz Şablonuna göre öncelikli olduğunu unutmayın',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Bir kullanıcı, Etkinliklere ne zaman atanmalıdır?',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Kimlere Etkinlikler atanmalıdır?',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Bu anahtar, otomatik aşama numaralandırmasını göstermenizi veya gizlemenizi sağlar.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Akıllı Kılavuz/Aşama/Etkinlik Şablonu',
 ];

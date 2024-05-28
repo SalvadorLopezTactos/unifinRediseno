@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -50,10 +52,10 @@ class Scalar implements Change
     /**
      * Create a Scalar Audit Field entry from a change array entry
      * @param array $change {
-     *    @type string $field_name name of field which changed
-     *    @type string $data_type type of field which changed
-     *    @type string|null $before value of field before save
-     *    @type string|null $after of field after save
+     * @type string $field_name name of field which changed
+     * @type string $data_type type of field which changed
+     * @type string|null $before value of field before save
+     * @type string|null $after of field after save
      * }
      *
      * @return array|Array<Scalar>

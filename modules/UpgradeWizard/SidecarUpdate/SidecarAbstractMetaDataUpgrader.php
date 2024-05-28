@@ -103,22 +103,21 @@ abstract class SidecarAbstractMetaDataUpgrader
      *
      * @var array
      */
-    protected $legacyViewdefs = array();
-
+    protected $legacyViewdefs = [];
 
     /**
      * The OOB legacy style view defs
      *
      * @var array
      */
-    protected $originalLegacyViewdefs = array();
+    protected $originalLegacyViewdefs = [];
 
     /**
      * The sidecar style view defs
      *
      * @var array
      */
-    protected $sidecarViewdefs = array();
+    protected $sidecarViewdefs = [];
 
     /**
      * Deployed state of the module. This has an effect on how the filenaming is
@@ -144,45 +143,45 @@ abstract class SidecarAbstractMetaDataUpgrader
      * Mapping of viewdef vars for a client and viewtype
      * @var array
      */
-    protected $variableMap = array(
-        'portal'   => array(
-            'list'   => 'viewdefs',
-            'edit'   => 'viewdefs',
+    protected $variableMap = [
+        'portal' => [
+            'list' => 'viewdefs',
+            'edit' => 'viewdefs',
             'detail' => 'viewdefs',
-        ),
-        'wireless' => array(
-            'list'   => 'listViewDefs',
-            'edit'   => 'viewdefs',
+        ],
+        'wireless' => [
+            'list' => 'listViewDefs',
+            'edit' => 'viewdefs',
             'detail' => 'viewdefs',
-        ),
-        'base' => array(
-            'list'   => 'listViewDefs',
-            'edit'   => 'viewdefs',
+        ],
+        'base' => [
+            'list' => 'listViewDefs',
+            'edit' => 'viewdefs',
             'detail' => 'viewdefs',
             'filter' => 'searchdefs',
-            'subpanel' => 'subpanel_layout'
-        ),
-    );
+            'subpanel' => 'subpanel_layout',
+        ],
+    ];
 
     /**
      * Names of the views that this object will work on
      *
      * @var array
      */
-    protected $views = array(
-        'portallist'     => MB_PORTALLISTVIEW,
-        'portalsearch'   => MB_PORTALSEARCHVIEW,
+    protected $views = [
+        'portallist' => MB_PORTALLISTVIEW,
+        'portalsearch' => MB_PORTALSEARCHVIEW,
         'portalrecordview' => MB_RECORDVIEW,
         'portalportalrecordview' => MB_RECORDVIEW,
-        'wirelessedit'   => MB_WIRELESSEDITVIEW,
+        'wirelessedit' => MB_WIRELESSEDITVIEW,
         'wirelessdetail' => MB_WIRELESSDETAILVIEW,
-        'wirelesslist'   => MB_WIRELESSLISTVIEW,
+        'wirelesslist' => MB_WIRELESSLISTVIEW,
         'wirelesssearch' => MB_WIRELESSBASICSEARCH,
-        'baselist'        => MB_SIDECARLISTVIEW,
-        'baserecordview'  => MB_RECORDVIEW,
-        'basefilter'      => MB_BASICSEARCH,
-        'basepopuplist'   => MB_SIDECARPOPUPVIEW,
-    );
+        'baselist' => MB_SIDECARLISTVIEW,
+        'baserecordview' => MB_RECORDVIEW,
+        'basefilter' => MB_BASICSEARCH,
+        'basepopuplist' => MB_SIDECARPOPUPVIEW,
+    ];
 
     /**
      * The indexes within the old viewdefs after the module name for each client
@@ -190,18 +189,18 @@ abstract class SidecarAbstractMetaDataUpgrader
      *
      * @var array
      */
-    protected $vardefIndexes = array(
-        'portallist'     => 'listview',
-        'portaledit'     => 'editview',
-        'portaldetail'   => 'detailview',
-        'wirelessedit'   => 'EditView',
-        'wirelesslist'   => '',
+    protected $vardefIndexes = [
+        'portallist' => 'listview',
+        'portaledit' => 'editview',
+        'portaldetail' => 'detailview',
+        'wirelessedit' => 'EditView',
+        'wirelesslist' => '',
         'wirelessdetail' => 'DetailView',
-        'baselist'       => '',
-        'baseedit'       => 'EditView',
-        'basedetail'     => 'DetailView',
-        'basefilter'     => '',
-    );
+        'baselist' => '',
+        'baseedit' => 'EditView',
+        'basedetail' => 'DetailView',
+        'basefilter' => '',
+    ];
 
     /**
      * Metadata converted instance
@@ -211,14 +210,14 @@ abstract class SidecarAbstractMetaDataUpgrader
 
     /**
      * File with core module definitions for the view
-     * 
+     *
      * @var string
      */
     protected $defsfile;
 
     /**
      * File with template definitions for the view
-     * 
+     *
      * @var string
      */
     protected $base_defsfile;
@@ -227,7 +226,7 @@ abstract class SidecarAbstractMetaDataUpgrader
      * The actual legacy defs converter. For search this will do nothing as search
      * is really just a file move and rename.
      */
-    abstract function convertLegacyViewDefsToSidecar();
+    abstract public function convertLegacyViewDefsToSidecar();
 
     /**
      * Object constructor, simply sets required information into the object
@@ -236,7 +235,8 @@ abstract class SidecarAbstractMetaDataUpgrader
      * @param array $file Information related to the file being worked on. There should be
      *                    an index for each property in this object.
      */
-    public function __construct(SidecarMetaDataUpgrader $upgrader, Array $file) {
+    public function __construct(SidecarMetaDataUpgrader $upgrader, array $file)
+    {
         $this->upgrader = $upgrader;
 
         foreach ($file as $prop => $val) {
@@ -266,8 +266,9 @@ abstract class SidecarAbstractMetaDataUpgrader
      *
      * @return boolean
      */
-    public function upgrade() {
-        if(!$this->upgradeCheck()) {
+    public function upgrade()
+    {
+        if (!$this->upgradeCheck()) {
             $this->logUpgradeStatus("Upgrade declined for $this->fullpath, returning");
             return true;
         }
@@ -289,14 +290,15 @@ abstract class SidecarAbstractMetaDataUpgrader
      *
      * @return int
      */
-    public function handleSave() {
+    public function handleSave()
+    {
         // Get what we need to make our new files
         $viewname = $this->views[$this->client . $this->viewtype];
         $newname = $this->getNewFileName($viewname);
         $content = $this->getNewFileContents($viewname);
         // Make the new file
         $this->logUpgradeStatus("Saving new {$this->client} {$this->type} viewdefs for {$this->module}:{$this->viewtype}");
-        if(empty($content)) {
+        if (empty($content)) {
             $this->logUpgradeStatus("No content for {$this->client} {$this->type} viewdefs for {$this->module}:{$this->viewtype}");
             return false;
         }
@@ -310,7 +312,7 @@ abstract class SidecarAbstractMetaDataUpgrader
      */
     public function handleSaveArray($name, $path)
     {
-        if(empty($this->sidecarViewdefs)) {
+        if (empty($this->sidecarViewdefs)) {
             return true;
         }
         $this->logUpgradeStatus("Saving new {$this->client} {$this->type} viewdefs for {$this->module}:{$this->viewtype} into $path");
@@ -322,7 +324,6 @@ abstract class SidecarAbstractMetaDataUpgrader
         }
         return write_array_to_file($name, $this->sidecarViewdefs, $path);
     }
-
 
     /**
      * Sets the necessary legacy field defs for use in converting
@@ -347,8 +348,8 @@ abstract class SidecarAbstractMetaDataUpgrader
             $var = $this->variableMap[$this->client][$this->viewtype];
             if (isset($$var)) {
                 $defs = $$var;
-                if (isset($this->vardefIndexes[$this->client.$this->viewtype])) {
-                    $index = $this->vardefIndexes[$this->client.$this->viewtype];
+                if (isset($this->vardefIndexes[$this->client . $this->viewtype])) {
+                    $index = $this->vardefIndexes[$this->client . $this->viewtype];
                     $this->legacyViewdefs = empty($index) ? $defs[$module] : $defs[$module][$index];
                 }
             }
@@ -361,11 +362,11 @@ abstract class SidecarAbstractMetaDataUpgrader
      */
     protected function getFieldDefs()
     {
-        if(is_null($this->field_defs)) {
+        if (is_null($this->field_defs)) {
             $bean = BeanFactory::newBean($this->module);
             if (empty($bean)) {
                 // broken state, don't try again
-                $this->field_defs = array();
+                $this->field_defs = [];
             } else {
                 $this->field_defs = $bean->field_defs;
             }
@@ -402,7 +403,6 @@ abstract class SidecarAbstractMetaDataUpgrader
         }
     }
 
-
     /**
      * Saves the contents of a file to the specified path
      *
@@ -410,7 +410,8 @@ abstract class SidecarAbstractMetaDataUpgrader
      * @param string $content The content of the file to save
      * @return int The number of bytes written to the file or false on failure
      */
-    public function save($path, $content) {
+    public function save($path, $content)
+    {
         // If this directory doesn't exist yet, create it
         $dir = dirname($path);
         if (!is_dir($dir)) {
@@ -427,7 +428,8 @@ abstract class SidecarAbstractMetaDataUpgrader
      * @param string $view The view name to get the filename for
      * @return string
      */
-    public function getNewFileName($view) {
+    public function getNewFileName($view)
+    {
         // Clean up client to mobile for wireless clients
         $client = $this->client == 'wireless' ? 'mobile' : $this->client;
 
@@ -461,10 +463,12 @@ abstract class SidecarAbstractMetaDataUpgrader
         $module = $this->getNormalizedModuleName();
         $viewname = MetaDataFiles::getName($viewname);
         $client = $this->client == 'wireless' ? 'mobile' : $this->client;
-        if(empty($this->sidecarViewdefs[$module][$client]['view'][$viewname])) {
+        if (empty($this->sidecarViewdefs[$module][$client]['view'][$viewname])) {
             return '';
         }
-        $out  = "<?php\n\$viewdefs['{$module}']['{$client}']['view']['{$viewname}'] = " . var_export($this->sidecarViewdefs[$module][$client]['view'][$viewname], true) . ";\n";
+        $out = "<?php\n\$viewdefs['{$module}']['{$client}']['view']['{$viewname}'] = " .
+            var_export($this->sidecarViewdefs[$module][$client]['view'][$viewname], true) .
+            ";\n";
         return $out;
     }
 
@@ -475,7 +479,8 @@ abstract class SidecarAbstractMetaDataUpgrader
      *
      * @return string
      */
-    public function getNormalizedModuleName() {
+    public function getNormalizedModuleName()
+    {
         // Use module name if it's set AND the module name is not a placeholder
         if (isset($this->modulename) && !in_array($this->modulename, MetaDataFiles::getModuleNamePlaceholders())) {
             return $this->modulename;
@@ -489,7 +494,8 @@ abstract class SidecarAbstractMetaDataUpgrader
      *
      * @param $message
      */
-    protected function logUpgradeStatus($message) {
+    protected function logUpgradeStatus($message)
+    {
         $this->upgrader->logUpgradeStatus($message);
     }
 
@@ -498,13 +504,14 @@ abstract class SidecarAbstractMetaDataUpgrader
      *
      * @return array
      */
-    public function getSidecarViewDefs() {
+    public function getSidecarViewDefs()
+    {
         return $this->sidecarViewdefs;
     }
 
     /**
      * Load current Sugar metadata for this module
-     * 
+     *
      * @return array
      */
     protected function loadDefaultMetadata()
@@ -512,9 +519,9 @@ abstract class SidecarAbstractMetaDataUpgrader
         $client = $this->client == 'wireless' ? 'mobile' : $this->client;
 
         // The new defs array - this should contain OOTB defs for the module
-        $newdefs = $viewdefs = array();
+        $newdefs = $viewdefs = [];
         $viewname = MetaDataFiles::getName($this->viewtype);
-        if(!$viewname) {
+        if (!$viewname) {
             $viewname = $this->viewtype;
         }
 
@@ -545,7 +552,7 @@ abstract class SidecarAbstractMetaDataUpgrader
                 $module = $package->getModule($this->module);
                 $moduleType = $module->getModuleType();
             }
-            
+
             if (!empty($moduleType)) {
                 $this->base_defsfile = 'include/SugarObjects/templates/' . $moduleType . '/clients/' . $client . '/views/' . $viewname . '/' . $viewname . '.php';
                 if (file_exists($this->base_defsfile)) {
@@ -572,13 +579,13 @@ abstract class SidecarAbstractMetaDataUpgrader
                 }
 
                 // Only write a defs file for deployed modules
-                if($newdefs && $this->deployed) {
+                if ($newdefs && $this->deployed) {
                     // If we used the template, create the basic one
                     $this->logUpgradeStatus(get_class($this) . ": Copying template defs {$this->base_defsfile} to {$this->defsfile}");
                     mkdir_recursive(dirname($this->defsfile));
                     $viewname = pathinfo($this->defsfile, PATHINFO_FILENAME);
                     $export = var_export($newdefs, true);
-                    $data  = <<<END
+                    $data = <<<END
 <?php
 /* Generated by SugarCRM Upgrader */
 \$viewdefs['{$this->module}']['{$client}']['view']['{$viewname}'] = {$export};

@@ -11,80 +11,78 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Cases']['EditView'] = array(
-    'templateMeta' => array('maxColumns' => '2',
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'),
-                                            array('label' => '10', 'field' => '30')
-                                            ),
-                           ),
-    'panels' => array (
+$viewdefs['Cases']['EditView'] = [
+    'templateMeta' => ['maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
 
-  'lbl_case_information' =>
-  array(
-	  array (
-	    array('name'=>'case_number', 'type'=>'readonly') ,
-	  ),
+        'lbl_case_information' => [
+            [
+                ['name' => 'case_number', 'type' => 'readonly'],
+            ],
 
-	  array (
-	    'priority',
-          'account_name',
-	  ),
+            [
+                'priority',
+                'account_name',
+            ],
 
-        array (
-            'business_center_name',
-        ),
+            [
+                'business_center_name',
+            ],
 
-	  array (
-	    'status',
-          'follow_up_datetime',
-	  ),
+            [
+                'status',
+                'follow_up_datetime',
+            ],
 
-	  array (
-	      'type',
-	      'source',
-	  ),
-	  array (
-	    array (
-	      'name' => 'name',
-	      'displayParams' => array ('size'=>75)
-	    ),
-	  ),
+            [
+                'type',
+                'source',
+            ],
+            [
+                [
+                    'name' => 'name',
+                    'displayParams' => ['size' => 75],
+                ],
+            ],
 
-	  array (
+            [
 
-	    array (
-	      'name' => 'description',
-	      'nl2br' => true,
-	    ),
-	  ),
+                [
+                    'name' => 'description',
+                    'nl2br' => true,
+                ],
+            ],
 
-	  array (
+            [
 
-	    array (
-	      'name' => 'resolution',
-	      'nl2br' => true,
-	    ),
-        'resolved_datetime',
-	  ),
+                [
+                    'name' => 'resolution',
+                    'nl2br' => true,
+                ],
+                'resolved_datetime',
+            ],
 
-	  array(
-		  array('name'=>'portal_viewable',
-		  		'label' => 'LBL_SHOW_IN_PORTAL',
-		        'hideIf' => 'empty($PORTAL_ENABLED)',
-		  ),
-	  )
-	),
+            [
+                ['name' => 'portal_viewable',
+                    'label' => 'LBL_SHOW_IN_PORTAL',
+                    'hideIf' => 'empty($PORTAL_ENABLED)',
+                ],
+            ],
+        ],
 
-	'LBL_PANEL_ASSIGNMENT' =>
-	array(
-	   array (
-		    'assigned_user_name',
+        'LBL_PANEL_ASSIGNMENT' => [
+            [
+                'assigned_user_name',
 
-		    array('name'=>'team_name', 'displayParams'=>array('required'=>true)),
-	   ),
-	),
-),
+                ['name' => 'team_name', 'displayParams' => ['required' => true]],
+            ],
+        ],
+    ],
 
 
-);
+];

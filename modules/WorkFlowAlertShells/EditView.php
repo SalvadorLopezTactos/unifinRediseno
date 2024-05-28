@@ -10,21 +10,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
- * Description:  
+ * Description:
  ********************************************************************************/
-
-
-
-
 
 
 global $current_user;
 //Only allow admins to enter this screen
-if (!is_admin($current_user)&& !is_admin_for_any_module($current_user)) {
-	$GLOBALS['log']->error("Non-admin user ($current_user->user_name) attempted to enter the WorkFlow EditView screen");
-	session_destroy();
-	include('modules/Users/Logout.php');
+if (!is_admin($current_user) && !is_admin_for_any_module($current_user)) {
+    $GLOBALS['log']->error("Non-admin user ($current_user->user_name) attempted to enter the WorkFlow EditView screen");
+    session_destroy();
+    include 'modules/Users/Logout.php';
 }
 
 global $mod_strings;
@@ -37,88 +32,81 @@ global $app_strings;
 
 
 $workflow_object = BeanFactory::newBean('WorkFlow');
-if(isset($_REQUEST['workflow_id']) && isset($_REQUEST['workflow_id'])) {
+if (isset($_REQUEST['workflow_id']) && isset($_REQUEST['workflow_id'])) {
     $workflow_object->retrieve($_REQUEST['workflow_id']);
 } else {
-	sugar_die("You shouldn't be here");
+    sugar_die("You shouldn't be here");
 }
 
 
 $focus = BeanFactory::newBean('WorkFlowAlertShells');
 
-if(isset($_REQUEST['record']) && isset($_REQUEST['record'])) {
+if (isset($_REQUEST['record']) && isset($_REQUEST['record'])) {
     $focus->retrieve($_REQUEST['record']);
 }
 
 
-
-
-if(isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] == 'true') {
-	$focus->id = "";
+if (isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] == 'true') {
+    $focus->id = '';
 }
-echo getClassicModuleTitle($mod_strings['LBL_MODULE_NAME'], array($mod_strings['LBL_MODULE_NAME'],$focus->name), true); 
+echo getClassicModuleTitle($mod_strings['LBL_MODULE_NAME'], [$mod_strings['LBL_MODULE_NAME'], $focus->name], true);
 
-$GLOBALS['log']->info("WorkFlowAlertShells edit view");
+$GLOBALS['log']->info('WorkFlowAlertShells edit view');
 
-$xtpl=new XTemplate ('modules/WorkFlowAlertShells/EditView.html');
-$xtpl->assign("MOD", $mod_strings);
-$xtpl->assign("APP", $app_strings);
+$xtpl = new XTemplate('modules/WorkFlowAlertShells/EditView.html');
+$xtpl->assign('MOD', $mod_strings);
+$xtpl->assign('APP', $app_strings);
 
-if (isset($_REQUEST['return_module'])){
-	$xtpl->assign("RETURN_MODULE", $_REQUEST['return_module']);
+if (isset($_REQUEST['return_module'])) {
+    $xtpl->assign('RETURN_MODULE', $_REQUEST['return_module']);
 } else {
-	$xtpl->assign("RETURN_MODULE", "WorkFlow");
+    $xtpl->assign('RETURN_MODULE', 'WorkFlow');
 }
-if (isset($_REQUEST['return_action'])){
-	$xtpl->assign("RETURN_ACTION", $_REQUEST['return_action']);
+if (isset($_REQUEST['return_action'])) {
+    $xtpl->assign('RETURN_ACTION', $_REQUEST['return_action']);
 } else {
-	$xtpl->assign("RETURN_ACTION", "DetailView");
-}	
-if (isset($_REQUEST['return_id'])){
-	$xtpl->assign("RETURN_ID", $_REQUEST['return_id']);
+    $xtpl->assign('RETURN_ACTION', 'DetailView');
+}
+if (isset($_REQUEST['return_id'])) {
+    $xtpl->assign('RETURN_ID', $_REQUEST['return_id']);
 } else {
-	$xtpl->assign("RETURN_ID", $_REQUEST['workflow_id']);
-}	
-
-if (isset($_REQUEST['alert_type'])){
-	//Possible invite alert
-	$focus->alert_type = $_REQUEST['alert_type'];
+    $xtpl->assign('RETURN_ID', $_REQUEST['workflow_id']);
 }
 
-$xtpl->assign("PRINT_website", "index.php?".$GLOBALS['request_string']);
-$xtpl->assign("JAVASCRIPT", get_set_focus_js());
+if (isset($_REQUEST['alert_type'])) {
+    //Possible invite alert
+    $focus->alert_type = $_REQUEST['alert_type'];
+}
+
+$xtpl->assign('PRINT_website', 'index.php?' . $GLOBALS['request_string']);
+$xtpl->assign('JAVASCRIPT', get_set_focus_js());
 
 
-
-$xtpl->assign("ID", $focus->id);
+$xtpl->assign('ID', $focus->id);
 $xtpl->assign('NAME', $focus->name);
-$xtpl->assign("ALERT_TEXT", nl2br($focus->alert_text));
+$xtpl->assign('ALERT_TEXT', nl2br($focus->alert_text));
 
 //Specifc handling forks here for dealing with bridging alert shells used for meeting/call invites
-	$xtpl->assign("ALERT_TYPE", get_select_options_with_id($app_list_strings['wflow_alert_type_dom'], $focus->alert_type));
+$xtpl->assign('ALERT_TYPE', get_select_options_with_id($app_list_strings['wflow_alert_type_dom'], $focus->alert_type));
 
-		$source_type_array = $app_list_strings['wflow_source_type_dom'];
-	
-	if($focus->alert_type=="Email"){
-		unset($source_type_array['System Default']);
-	}	
-		$xtpl->assign("SOURCE_TYPE", get_select_options_with_id($source_type_array, $focus->source_type));
+$source_type_array = $app_list_strings['wflow_source_type_dom'];
 
+if ($focus->alert_type == 'Email') {
+    unset($source_type_array['System Default']);
+}
+$xtpl->assign('SOURCE_TYPE', get_select_options_with_id($source_type_array, $focus->source_type));
 
 
 ////////////CUSTOM TEMPLATE////////
-$template_where = "base_module='".$workflow_object->base_module."'";
-$email_templates_arr = get_bean_select_array(true, 'EmailTemplate','name', $template_where, 'name');
+$template_where = "base_module='" . $workflow_object->base_module . "'";
+$email_templates_arr = get_bean_select_array(true, 'EmailTemplate', 'name', $template_where, 'name');
 
-$xtpl->assign("EMAIL_TEMPLATE_OPTIONS", get_select_options_with_id($email_templates_arr, $focus->custom_template_id));
-
-
-
+$xtpl->assign('EMAIL_TEMPLATE_OPTIONS', get_select_options_with_id($email_templates_arr, $focus->custom_template_id));
 
 
 //Set parent ID
-if(empty($focus->parent_id)){
-	$focus->parent_id = $workflow_object->id;
+if (empty($focus->parent_id)) {
+    $focus->parent_id = $workflow_object->id;
 }
 
 
@@ -130,15 +118,13 @@ global $current_user;
 
 
 //Add Custom Fields
-require_once('modules/DynamicFields/templates/Files/EditView.php');
+require_once 'modules/DynamicFields/templates/Files/EditView.php';
 
-$xtpl->parse("main");
-$xtpl->out("main");
+$xtpl->parse('main');
+$xtpl->out('main');
 
 $javascript = new javascript();
 $javascript->setFormName('EditView');
 $javascript->setSugarBean($focus);
 $javascript->addAllFields('');
 echo $javascript->getScript();
-
-?>

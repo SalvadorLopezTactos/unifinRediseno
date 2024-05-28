@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Datenschutz',
     'LBL_MODULE_NAME_SINGULAR' => 'Datenschutz',
     'LBL_NUMBER' => 'Nummer',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Es wurden keine Felder oder Datensätze zum Löschen markiert.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Dashboard Datenschutz-Datensatz',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Datenschutz',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Zeitleiste des Datenschutzes',
 
     // list view
     'LBL_HELP_RECORDS' => 'Das Datenschutzmodul verfolgt Datenschutzaktivitäten, einschließlich Einwilligung und Themen-Anfragen zur Unterstützung der Datenschutzverfahren Ihrer Organisation. Erstellen Sie Datenschutz-Datensätze im Zusammenhang mit dem Datensatz einer Einzelperson (z. B. einem Kontakt), um die Einwilligung zu verfolgen oder Maßnahmen bei einer Datenschutz-Anfrage zu ergreifen.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Das Datenschutzmodul verfolgt Datenschutzaktivitäten, einschließlich Einwilligung und Themen-Anfragen zur Unterstützung der Datenschutzverfahren Ihrer Organisation. Erstellen Sie Datenschutz-Datensätze im Zusammenhang mit dem Datensatz einer Einzelperson (z. B. einem Kontakt), um die Einwilligung zu verfolgen oder Maßnahmen bei einer Datenschutz-Anfrage zu ergreifen. Sobald die erforderliche Maßnahme abgeschlossen ist, können Benutzer in der Rolle Datenschutzmanager auf „Fertig“ oder „Ablehnen“ klicken, um den Status zu aktualisieren.
 
 Bei Löschanfragen wählen Sie „Zum Löschen markieren“ für jeden Datensatz einer Einzelperson, der in den Unterfenstern unten aufgelistet ist. Sobald die gewünschten Felder ausgewählt sind, werden durch Anklicken von „Löschen und Abschließen“ die Feldwerte dauerhaft gelöscht und der Datenschutz-Datensatz als abgeschlossen markiert.',
-);
+];

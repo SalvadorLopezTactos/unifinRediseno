@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Címkék',
     'LBL_GENERIC_LINK' => 'Kapcsolódó objektumok',
     'LBL_NAME_LOWER' => 'Kisbetűs címkenév',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'Címkéim',
     'LBL_MY_FAVORITE_TAGS' => 'Kedvenc címkéim',
     'LBL_MORE_TAGS' => '{{tagsNumber}} címke',
-);
+];

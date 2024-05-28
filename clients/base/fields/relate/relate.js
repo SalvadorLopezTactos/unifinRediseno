@@ -113,6 +113,9 @@
 
         // A relate field displays a link by default.
         this.viewDefs = _.defaults(this.viewDefs || {}, {link: true});
+
+        this.showIcon = this.def && this.def.show_avatar;
+
         /**
          * The template used for a pill in case of multiselect field.
          *
@@ -1016,7 +1019,7 @@
         }
         var filterBeanClass = app.data.getBeanClass('Filters').prototype,
             filterOptions = this.getFilterOptions() || {},
-            filter = this.filters.collection.get(filterOptions.initial_filter),
+            filter = (this.filters.collection) ? this.filters.collection.get(filterOptions.initial_filter) : null,
             filterDef,
             populate,
             searchTermFilter,

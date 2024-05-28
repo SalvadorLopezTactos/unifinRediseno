@@ -33,20 +33,18 @@
   #recordTab {
     font-size: 0;
     white-space: nowrap;
-  }
 
-  #recordTab > .tab {
-    float: none;
-    font-size: 11px;
-    display: inline-block;
-  }
+    & > .tab {
+      font-size: 11px;
+    }
 
-  #recordTab > .dropdown.open > a {
-    background: @gray20;
-  }
+    & > .dropdown.open > a {
+      background-color: @color-gray-200;
+    }
 
-  #recordTab li.hidden {
-    display: none;
+    li.hidden {
+      display: none;
+    }
   }
 
   .record-cell {
@@ -222,9 +220,10 @@
       z-index: 1;
     }
   }
+
   .input-append input[type="text"][disabled] + .add-on,
-    .input-append input[type="password"][disabled] + .add-on,
-    .input-append textarea[disabled] + .add-on {
+  .input-append input[type="password"][disabled] + .add-on,
+  .input-append textarea[disabled] + .add-on {
     background-color: @inputDisabledBackground;
   }
 
@@ -373,8 +372,7 @@
     }
 
     .error .add-on {
-      .sicon,
-      .fa {
+      .sicon {
         color: @errorText;
       }
     }
@@ -463,6 +461,55 @@
     }
   }
 
+  &[data-name="duration"] {
+    flex: 2;
+
+    &.edit .record-label-wrapper > div[data-name="duration"] {
+      margin-top: 10px;
+    }
+
+    .record-link-wrapper {
+      width: 100%;
+
+      span[data-fieldname="duration"] > span {
+        display: flex;
+        flex-direction: row;
+
+        div[data-type="label"]:first-child {
+          color: @labelColor;
+          font-size: 12px;
+        }
+
+        > div[data-name="duration"] {
+          padding: 7px;
+        }
+      }
+    }
+  }
+
+  &[data-name="repeat_type"] {
+    flex: 0.8;
+    align-self: flex-end;
+  }
+
+  &[data-name="recurrence"] .record-link-wrapper {
+    width: 100%;
+
+    .fieldset-inline.edit {
+      display: flex;
+
+      > div {
+        flex: 1;
+      }
+    }
+
+    .fieldset-inline.detail > div.fieldset-field {
+      display: inline-block;
+      width: auto;
+      max-width: fit-content;
+    }
+  }
+
   &[data-type="favorite"] {
     display: none;
   }
@@ -531,6 +578,27 @@
   //TODO: bring over KB .record-cell styles
 }
 
+.reccurrences-tag-values {
+  margin: 2px 0 1px 4px;
+  font-size: 11px;
+  line-height: 13px;
+  border-radius: 11px;
+  background-color: @color-gray-800;
+  color: @color-white;
+}
+
+.row-fluid.panel_body:first-child {
+  display: flex;
+}
+
+input[name="date_start_date"],
+input[name="date_end_date"],
+input[name="date_start_time"],
+input[name="date_end_time"] {
+  text-overflow: ellipsis;
+  padding-right: 14px;
+}
+
 .record-edit-link-wrapper,
 .record-lock-link-wrapper {
   top: 0;
@@ -556,9 +624,7 @@
     }
 
     .sicon-edit,
-    .sicon-lock,
-    .fa-pencil,
-    .fa-lock {
+    .sicon-lock {
       left: -7px;
       top: 0;
       font-size: 12px;
@@ -577,14 +643,12 @@
 
   .btn {
     &.record-lock-link-on {
-      .sicon,
-      .fa {
+      .sicon {
         display: inline-block;
       }
     }
 
-    .sicon,
-    .fa {
+    .sicon {
       display: none;
     }
   }
@@ -597,8 +661,7 @@
   }
 
   .btn {
-    .sicon,
-    .fa {
+    .sicon {
       display: inline-block;
     }
   }
@@ -681,6 +744,24 @@
     padding: 13px;
     box-sizing: border-box;
   }
+
+  &[data-panelname=access_tab_user_role_panel] {
+    .record-panel-content {
+      padding-left: 0;
+      padding-right: 0;
+
+      .detail {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+
+  &.panel-border-none {
+    .record-panel-header-container {
+      border: none;
+    }
+  }
 }
 
 // in create view, add a bottom border to the last panel so user knows it can be expanded
@@ -718,6 +799,12 @@
     font-size: @baseFontSize;
     line-height: @baseFontSize + 2;
     margin-bottom: 3px;
+  }
+
+  .pipeline-metrics & {
+    input[type="text"] {
+      color: rgba(51, 51, 51, 0.5);
+    }
   }
 }
 
@@ -761,16 +848,16 @@
     &[data-fieldname="date_entered_by"],
     &[data-fieldname="date_modified_by"] {
       > .fieldset-inline {
-        .flex();
+        display: flex;
 
         .fieldset-field {
           &[data-type="datetimecombo"] {
-            .overflow-hidden();
+            overflow: hidden;
           }
 
           &[data-type="relate"]:last-child {
-            .w-auto();
-            .max-w-full();
+            width: auto;
+            max-width: 100%;
           }
         }
       }
@@ -956,8 +1043,7 @@
           margin-left: 0;
         }
 
-        .sicon-edit,
-        .fa-pencil {
+        .sicon-edit {
           margin-left: -10px;
         }
       }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -67,8 +68,8 @@ class SidecarLeadConvertMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
         }
         $this->logUpgradeStatus("Converting lead conversion view defs for '$this->fullpath'");
 
-        $orderedModules = array('Contacts', 'Accounts', 'Opportunities');
-        $moduleList = array();
+        $orderedModules = ['Contacts', 'Accounts', 'Opportunities'];
+        $moduleList = [];
 
         //pull out the ordered ones first...
         foreach ($orderedModules as $module) {
@@ -79,7 +80,7 @@ class SidecarLeadConvertMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
         }
 
         //...now iterate over the rest...
-        foreach($this->legacyViewdefs as $key => $oldDef) {
+        foreach ($this->legacyViewdefs as $key => $oldDef) {
             if ($this->getMetadataParser()->isModuleAllowedInConvert($key)) {
                 $moduleList[] = $this->convertSingleModuleDef($key, $oldDef);
             }
@@ -88,7 +89,7 @@ class SidecarLeadConvertMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
         //...and then merge them with default defs and apply cross module business logic
         $moduleList = $this->getMetadataParser()->mergeConvertDefs($moduleList, true);
 
-        $this->sidecarViewdefs = array('modules' => $moduleList);
+        $this->sidecarViewdefs = ['modules' => $moduleList];
 
         $this->logUpgradeStatus("Converted lead conversion view defs for '$this->fullpath'");
     }
@@ -106,11 +107,11 @@ class SidecarLeadConvertMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
             $oldDef = $oldDef['ConvertLead'];
         }
 
-        $newDef = array(
+        $newDef = [
             'module' => $module,
-        );
+        ];
         //move over specific settings from old def
-        foreach(array('required', 'copyData') as $setting) {
+        foreach (['required', 'copyData'] as $setting) {
             if (isset($oldDef[$setting])) {
                 $newDef[$setting] = $oldDef[$setting];
             }
@@ -137,4 +138,3 @@ class SidecarLeadConvertMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
         return $this->handleSaveArray("viewdefs['Leads']['base']['layout']['convert-main']", $this->newPath);
     }
 }
-

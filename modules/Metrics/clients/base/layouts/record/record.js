@@ -222,13 +222,13 @@
         var module = bean.get('metric_module');
         var multiLineFields = update ?
             this.getColumns(bean) :
-            this._getMultiLineFields(module);
+            this._getMultiLineFields(module, bean);
 
         // Set the information about the tab's fields, including which fields
         // can be used for sorting
         var fields = {};
         var sortFields = {};
-        var nonSortableTypes = ['id', 'relate', 'widget', 'assigned_user_name'];
+        var nonSortableTypes = ['id', 'widget'];
         _.each(multiLineFields, function(field) {
             if (_.isObject(field) && app.acl.hasAccess('read', module, null, field.name)) {
                 // Set the field information
@@ -303,13 +303,17 @@
     /**
      * Gets a unique list of the underlying fields contained in a multi-line list
      * @param module
+     * @param {Object} bean
      * @return {Array} a list of field definitions from the multi-line list metadata
      * @private
      */
-    _getMultiLineFields: function(module) {
+    _getMultiLineFields: function(module, bean) {
         // Get the unique lists of subfields and related_fields from the multi-line
         // list metadata of the module
-        var multiLineMeta = app.metadata.getView(module, 'multi-line-list');
+        var beanViewDefs = bean.attributes.viewdefs;
+        var multiLineMeta = beanViewDefs && beanViewDefs.base ?
+            beanViewDefs.base.view['multi-line-list'] :
+            app.metadata.getView(module, 'multi-line-list');
         var moduleFields = app.metadata.getModule(module, 'fields');
         var subfields = [];
         var relatedFields = [];

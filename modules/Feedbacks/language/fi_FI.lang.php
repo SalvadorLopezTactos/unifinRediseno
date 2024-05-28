@@ -13,7 +13,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FEEDBACK_TEXT_PLACEHOLDER' => 'Palauteteksti',
     'LBL_FEEDBACK_BTN_SUBMIT' => 'Lähetä',
     'LBL_FEEDBACK_SENT' => 'Palaute lähetetty.',
@@ -23,4 +23,4 @@ $mod_strings = array(
     'TPL_FEEDBACK_ASIDE' => 'Keräämme joitakin käyttötietoja lähetyksen aikana. {{learnMoreLink}} Emme kerää yhteystietoja, joten jos tarvitset teknistä tukea tai muuten tarvitset vastauksen palautteeseesi, {{contactSupportLink}}.',
     'LBL_FEEDBACK_ASIDE_CLICK_MORE' => '(Lisätietoja.)',
     'LBL_FEEDBACK_ASIDE_CONTACT_SUPPORT' => 'ota yhteyttä tukeen',
-);
+];

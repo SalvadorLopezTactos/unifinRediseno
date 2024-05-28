@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'カレンダー',
     'LBL_MODULE_NAME_SINGULAR' => 'カレンダー',
     'LBL_MODULE_TITLE' => 'カレンダー',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => '設定',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => '日、週ビューにタイムスロットを表示',
-    'LBL_SETTINGS_TIME_STARTS'=>'開始時:',
-    'LBL_SETTINGS_TIME_ENDS'=>'終了時:',
+    'LBL_SETTINGS_TIME_STARTS' => '開始時:',
+    'LBL_SETTINGS_TIME_ENDS' => '終了時:',
     'LBL_SETTINGS_CALLS_SHOW' => '電話を表示',
     'LBL_SETTINGS_TASKS_SHOW' => 'タスクを表示',
 
@@ -155,7 +155,7 @@ $mod_strings = array (
     'LBL_RECORD_TEMPLATES_TAB' => 'テンプレート',
     'LBL_RECORD_OTHER_TAB' => 'その他',
     'LBL_EVENT_START' => '開始',
-    'LBL_EVENT_END' => '終了',
+    'LBL_EVENT_END' => '終了日',
     'LBL_EVENT_END' => '終了',
     'LBL_DAY_EVENT_TEMPLATE' => '日のイベント',
     'LBL_WEEK_EVENT_TEMPLATE' => '週のイベント',
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'カレンダーの作成',
     'LNK_CALENDAR_LIST' => 'カレンダーの表示',
     'LNK_CALENDAR_LEGACY' => '従来のカレンダー',
-    'LBL_IMPORT_CALENDAR'=> 'カレンダーのインポート',
+    'LBL_IMPORT_CALENDAR' => 'カレンダーのインポート',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'イベントのタイムスタンプ',
     'LBL_INSERTFIELD' => 'フィールドの挿入',
     'LBL_EVENT_START_ERROR' => '開始を選択してください',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'カレンダーを選択してください',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'カレンダーの保存に失敗しました。',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             '日',
             '月',
             '火',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             '木',
             '金',
             '土',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             '日曜日',
             '月曜日',
             '火曜日',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             '木曜日',
             '金曜日',
             '土曜日',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             '1月',
             '2月',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             '10月',
             '11月',
             '12月',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             '1月',
             '2月',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             '10月',
             '11月',
             '12月',
-        ),
-);
+        ],
+];

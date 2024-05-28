@@ -9,11 +9,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$searchFields['TimePeriods'] = 
-	array (
-		'name' => array( 'query_type'=>'default'),
-		'parent_id' => array( 'query_type'=>'default'),
-		'start_date' => array( 'query_type'=>'default'),
-		'end_date' => array( 'query_type'=>'default'),
-		);
-?>
+$searchFields['TimePeriods'] =
+    [
+        'name' => ['query_type' => 'default'],
+        'parent_id' => ['query_type' => 'default'],
+        'start_date' => ['query_type' => 'default'],
+        'end_date' => ['query_type' => 'default'],
+    ];

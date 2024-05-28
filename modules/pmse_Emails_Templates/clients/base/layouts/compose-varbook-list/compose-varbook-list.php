@@ -11,14 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['pmse_Emails_Templates']['base']['layout']['compose-varbook-list'] = array(
+$viewdefs['pmse_Emails_Templates']['base']['layout']['compose-varbook-list'] = [
     'type' => 'multi-selection-list',
-    'components' => array(
-        array(
+    'components' => [
+        [
             'view' => 'compose-varbook-list',
-        ),
-        array(
+        ],
+        [
             'view' => 'compose-varbook-list-bottom',
-        ),
-    ),
-);
+        ],
+    ],
+];

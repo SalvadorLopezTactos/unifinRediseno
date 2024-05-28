@@ -17,7 +17,7 @@
     className: 'quicksearch-taglist',
 
     events: {
-        'click .tag-remove': 'removeTagClicked',
+        'click .tag-remove i': 'removeTagClicked',
         'click .tag-name': 'highlightTagClicked',
         'click .tag-dropdown': 'moduleDropdownClick',
         'click li.tag-name': 'removeDropdownTag'
@@ -294,8 +294,8 @@
     removeTagClicked: function(e) {
         e.preventDefault();
         e.stopPropagation();
-        var $tag = this.$(e.target).parent();
-        this.removeTag($tag);
+        const tag = this.$(e.currentTarget.parentElement).parent();
+        this.removeTag(tag);
         this.$('.tag-wrapper').removeClass('highlight');
 
         // Go back to the quicksearch bar to prevent any shenanigans (only on click)

@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Pulpit listy możliwości',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Pulpit rekordów możliwości',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Oferty',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Szansy wg dynamicznych kontrahentów',
+    'LBL_TOP_10_OPP' => '10 najlepszych otwartych możliwości',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Pulpit podrzędny: moje aktywne możliwości',
+    'LBL_MY_ACTIVE_OPP' => 'Moje aktywne możliwości',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Wartość całkowita lejka sprzedaży wynosi ',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Rola w szansie',
+    'LBL_OPPORTUNITY_ROLE' => 'Rola w szansie',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notatki',
     'LBL_TAB_OPPORTUNITY' => 'Przegląd modułu {{module}}',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'Klikając Potwierdź, usuniesz WSZYSTKIE dane Prognoz i zmienisz Widok szans. Jeśli nie było to Twoim zamiarem, kliknij anuluj, aby wrócić do poprzednich ustawień.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'Klikając przycisk Potwierdź, wymażesz WSZYSTKIE dane prognozy i zmienisz widok możliwości. '
-        .'Również WSZYSTKIE definicje procesów z modułem docelowym pozycji wiersza przychodów zostaną wyłączone. '
-        .'Jeśli to nie o to ci chodziło, kliknij przycisk anuluj, aby powrócić do poprzednich ustawień.',
+        . 'Również WSZYSTKIE definicje procesów z modułem docelowym pozycji wiersza przychodów zostaną wyłączone. '
+        . 'Jeśli to nie o to ci chodziło, kliknij przycisk anuluj, aby powrócić do poprzednich ustawień.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Jeśli wszystkie Pozycje szansy są zamknięte i co najmniej jedna została zakończona sukcesem,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'etap sprzedaży zostanie ustawiony jako Zakończone sukcesem.',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Jeśli wszystkie Pozycje szansy mają etap sprzedaży Zakończone porażką,',
@@ -225,19 +228,19 @@ $mod_strings = array(
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Moduł {{plural_module_name}} umożliwia śledzenie indywidualnej sprzedaży i powiązanych z nią pozycji od początku do końca. Każdy rekord {{module_name}} zawiera potencjalną sprzedaż i obejmuje odpowiadające dane sprzedaży, a także odnoszące się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp.
 
-- Edytuj pola tego rekordu przez kliknięcie odpowiedniego pola lub przycisku Edytuj.
-- Przeglądaj lub modyfikuj powiązania z innymi rekordami w panelach podrzędnych, przełączając widok lewego dolnego panelu na „Widok danych”.
-- Dodawaj i przeglądaj komentarze użytkowników oraz zapisuj historię zmian rekordu w module {{activitystream_singular_module}} przez przełączenie widoku dolnego lewego panelu na „Panel aktywności”.
+- Edytuj pola tego rekordu, klikając poszczególne pola lub przycisk Edytuj.
+- Przeglądaj lub modyfikuj powiązania z innymi rekordami w panelach podrzędnych, przełączając dolny lewy panel na „Widok danych”.
+- Dodawaj i przeglądaj komentarze użytkowników oraz zapisuj historię zmian rekordów w module {{activitystream_singular_module}}, przełączając lewy dolny panel na „Panel aktywności”.
 - Obserwuj lub dodaj do ulubionych ten rekord za pomocą ikon z prawej strony nazwy rekordu.
-- Dodatkowe działania dostępne są na liście rozwijanej Działania po prawej stronie przycisku Edytuj.',
+- Dodatkowe czynności są dostępne w rozwijanym menu działań po prawej stronie przycisku Edytuj.',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => 'Moduł {{plural_module_name}} umożliwia śledzenie indywidualnej sprzedaży i powiązanych z nią pozycji od początku do końca. Każdy rekord {{module_name}} zawiera potencjalną sprzedaż i obejmuje odpowiadające dane sprzedaży, a także odnoszące się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp.
 
 Aby utworzyć rekord {{module_name}}:
-1. Wprowadź żądane wartości w polach.
- - Pola oznaczone jako „Wymagane” należy wypełnić przed zapisaniem.
- - Kliknij pozycję „Wyświetl więcej”, aby wyświetlić dodatkowe pola w razie potrzeby.
+1. Wprowadź odpowiednie wartości do pól.
+ - Pola oznaczone jako „Wymagane” muszą zostać uzupełnione przed zapisaniem.
+ - Kliknij pozycję „Pokaż więcej”, aby w razie konieczności wyświetlić dodatkowe pola.
 2. Kliknij przycisk „Zapisz”, aby zakończyć nowy rekord i wrócić na poprzednią stronę.',
 
 // END ENT/ULT
@@ -260,4 +263,9 @@ Aby utworzyć rekord {{module_name}}:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Prognoza realizacji możliwości',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Wyświetl szczegóły prognozy dla konkretnej możliwości',
-);
+    'LBL_AI_WINRATE' => 'Wskaźnik zak. pow.',
+    'LBL_AI_WONOPP' => 'Możliwości zakończone pow.',
+    'LBL_AI_CLOSINGTIME' => 'Czas zamknięcia',
+    'LBL_AI_CLOSEDOPP' => 'Zamknięte możliwości',
+    'LBL_AI_LEADTIMESPAN' => 'Czas między utworzeniem możliwości a zamknięciem zak. pow.',
+];

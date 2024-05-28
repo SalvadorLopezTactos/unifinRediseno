@@ -11,6 +11,6 @@
  */
 
 
-require_once('install/install_utils.php');
+require_once 'install/install_utils.php';
 
 handleWebConfig();

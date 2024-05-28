@@ -10,61 +10,61 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Campaigns']['base']['view']['list'] = array(
-    'panels' => array(
-        array(
-            'name'   => 'panel_header',
-            'label'  => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
-                    'name'    => 'name',
-                    'link'    => true,
-                    'label'   => 'LBL_LIST_NAME',
+$viewdefs['Campaigns']['base']['view']['list'] = [
+    'panels' => [
+        [
+            'name' => 'panel_header',
+            'label' => 'LBL_PANEL_1',
+            'fields' => [
+                [
+                    'name' => 'name',
+                    'link' => true,
+                    'label' => 'LBL_LIST_NAME',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
-                    'name'    => 'status',
-                    'label'   => 'LBL_LIST_STATUS',
+                ],
+                [
+                    'name' => 'status',
+                    'label' => 'LBL_LIST_STATUS',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
-                    'name'    => 'campaign_type',
-                    'label'   => 'LBL_LIST_TYPE',
+                ],
+                [
+                    'name' => 'campaign_type',
+                    'label' => 'LBL_LIST_TYPE',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
-                    'name'    => 'end_date',
-                    'label'   => 'LBL_LIST_END_DATE',
+                ],
+                [
+                    'name' => 'end_date',
+                    'label' => 'LBL_LIST_END_DATE',
                     'default' => true,
                     'enabled' => true,
-                ),
-                array(
-                    'name'    => 'team_name',
-                    'label'   => 'LBL_TEAM',
+                ],
+                [
+                    'name' => 'team_name',
+                    'label' => 'LBL_TEAM',
                     'default' => true,
                     'enabled' => true,
-                ),
-                array(
-                    'name'     => 'assigned_user_name',
-                    'module'   => 'Users',
-                    'label'    => 'LBL_LIST_ASSIGNED_USER',
-                    'id'       => 'ASSIGNED_USER_ID',
+                ],
+                [
+                    'name' => 'assigned_user_name',
+                    'module' => 'Users',
+                    'label' => 'LBL_LIST_ASSIGNED_USER',
+                    'id' => 'ASSIGNED_USER_ID',
                     'sortable' => false,
-                    'default'  => true,
-                    'enabled'  => true,
-                ),
-                array(
-                    'name'     => 'date_entered',
-                    'type'     => 'datetime',
-                    'label'    => 'LBL_DATE_ENTERED',
-                    'enabled'  => true,
-                    'default'  => true,
+                    'default' => true,
+                    'enabled' => true,
+                ],
+                [
+                    'name' => 'date_entered',
+                    'type' => 'datetime',
+                    'label' => 'LBL_DATE_ENTERED',
+                    'enabled' => true,
+                    'default' => true,
                     'readonly' => true,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

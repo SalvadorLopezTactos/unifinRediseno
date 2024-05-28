@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Nazdorna ploča za popis baze znanja',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapis o bazi znanja',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za bazu znanja',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija baze znanja',
 
     'LBL_MODULE_NAME' => 'Baza znanja',
     'LBL_MODULE_NAME_SINGULAR' => 'Članak baze znanja',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Postavite vrijednost kao primarnu',
     'LBL_ITEM_REMOVE' => 'Ukloni stavku',
     'LBL_ITEM_ADD' => 'Dodaj stavku',
-    'LBL_MODULE_ID'=> 'Sadržaj baze znanja',
+    'LBL_MODULE_ID' => 'Sadržaj baze znanja',
     'LBL_DOCUMENT_REVISION_ID' => 'ID revizije',
     'LBL_DOCUMENT_REVISION' => 'Revizija',
     'LBL_NUMBER' => 'Broj',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'Više članaka modula {{module}}...',
     'LBL_LIST_FORM_TITLE' => 'Popis baze znanja',
     'LBL_SEARCH_FORM_TITLE' => 'Pretraživanje baze znanja',
-);
+];

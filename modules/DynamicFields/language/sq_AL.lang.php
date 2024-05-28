@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Thirrje identifikuese',
     'LNK_NEW_MEETING' => 'Cakto mbledhje',
     'LNK_NEW_TASK' => 'Krijo detyrë',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Fusha meta 2 shtesë',
     'COLUMN_TITLE_EXT3' => 'Fusha meta 3 shtesë',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'lartësia e kornizës',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'URL e gabuar',
     'COLUMN_TITLE_AUDIT' => 'Audito',
     'COLUMN_TITLE_PII' => 'Të dhëna personale',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Vlerë e gabuar',
     'LBL_AUDITED' => 'audituar',
     'LBL_REPORTABLE' => 'raportuese',
-    'ERR_RESERVED_FIELD_NAME' => "Fjala kyçe e rezervuar",
+    'ERR_RESERVED_FIELD_NAME' => 'Fjala kyçe e rezervuar',
     'ERR_SELECT_FIELD_TYPE' => 'Ju lutemi selektoni llojin e fushës',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Emri i fushës tashmë ekziston',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Emri i fajlit duhet të përmbajë vetëm karakteret vijuese: a-zA-Z',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'E bërë',
     'LBL_EXE_NON_SIM_MODE' => 'Ekzekuto modul jo-simulativ',
     'LBL_CALCULATION_VISIBLE' => 'Bëji të dukshme për llogaritjet',
-);
+];

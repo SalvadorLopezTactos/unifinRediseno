@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_ASSIGNED_TO_ID' => 'معرّف المستخدم المعين',
     'LBL_ASSIGNED_TO_NAME' => 'تعيين إلى',
     'LBL_ID' => 'المعرّف',
@@ -52,4 +52,4 @@ $mod_strings = array(
     'LBL_UNREAD' => 'غير مقروء',
     'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'تمت الإشارة إليك من',
     'LBL_YOU_HAVE_BEEN_MENTIONED' => 'تمت الإشارة إليك',
-);
+];

@@ -11,16 +11,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['help'] = array(
-    'components' => array(
-        array(
+$viewdefs['base']['layout']['help'] = [
+    'components' => [
+        [
             'view' => 'help-header',
-        ),
-        array(
-            'layout' => array(
+        ],
+        [
+            'layout' => [
                 'type' => 'base',
                 'css_class' => 'helplet-list-container',
-                'components' => array(
+                'components' => [
                     [
                         'view' => [
                             'name' => 'about-version',
@@ -30,40 +30,33 @@ $viewdefs['base']['layout']['help'] = array(
                             'module' => 'Home',
                         ],
                     ],
-                    array(
+                    [
                         'view' => 'helplet',
-                    ),
-                    array(
-                        'view' => array(
+                    ],
+                    [
+                        'view' => [
                             'type' => 'helplet',
-                            'resources' => array(
-                                'sugar_university' => array(
+                            'resources' => [
+                                'sugar_university' => [
                                     'url' => 'https://sugarclub.sugarcrm.com/learn',
                                     'link' => 'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK',
                                     'type' => 'sugar-university',
-                                ),
-                                'community' => array(
+                                ],
+                                'community' => [
                                     'url' => 'https://sugarclub.sugarcrm.com/explore',
                                     'link' => 'LBL_LEARNING_RESOURCES_COMMUNITY_LINK',
                                     'type' => 'community',
-                                ),
-                                'support' => array(
+                                ],
+                                'support' => [
                                     'url' => 'https://support.sugarcrm.com/',
                                     'link' => 'LBL_LEARNING_RESOURCES_SUPPORT_LINK',
                                     'type' => 'support',
-                                ),
-                                'tour' => array(
-                                    'id' => 'tour',
-                                    'color' => 'gray',
-                                    'icon' => 'fa-road',
-                                    'link' => 'LBL_TOUR_LINK',
-                                    'type' => 'tour',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

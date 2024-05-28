@@ -22,7 +22,7 @@ function getMetricDefs()
     $stockMetrics = [];
 
     // cases
-    require "modules/Cases/clients/base/views/multi-line-list/multi-line-list.php";
+    require 'modules/Cases/clients/base/views/multi-line-list/multi-line-list.php';
     $viewdefsJson = json_encode($viewdefs['Cases']);
     $stockMetrics[] = [
         'name' => 'My Cases',
@@ -101,7 +101,7 @@ function getMetricDefs()
     ];
 
     // accounts
-    require "modules/Accounts/clients/base/views/multi-line-list/multi-line-list.php";
+    require 'modules/Accounts/clients/base/views/multi-line-list/multi-line-list.php';
     $viewdefsJson = json_encode($viewdefs['Accounts']);
     $stockMetrics[] = [
         'name' => 'My Accounts',
@@ -119,7 +119,7 @@ function getMetricDefs()
     ];
 
     // opportunities
-    require "modules/Opportunities/clients/base/views/multi-line-list/multi-line-list.php";
+    require 'modules/Opportunities/clients/base/views/multi-line-list/multi-line-list.php';
     $viewdefsJson = json_encode($viewdefs['Opportunities']);
     $stockMetrics[] = [
         'name' => 'My Opportunities',

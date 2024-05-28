@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_ARCHIVER_ID_FIELD' => 'Archyvavimo priemonės ID',
     'LBL_ARCHIVER_NAME_FIELD' => 'Archyvavimo priemonės pavadinimas',
     'LBL_DATE_OF_ARCHIVE_FIELD' => 'Proceso data',
@@ -28,4 +27,4 @@ $mod_strings = array (
     'LBL_FILTER_DEF_FIELD' => 'Filtro apibrėžimas',
     'LBL_SOURCE_FIELD' => 'Šaltinis',
     'LBL_DOWNLOAD_ID_LIST_BUTTON' => 'Atsisiųsti apdorotus ID',
-);
+];

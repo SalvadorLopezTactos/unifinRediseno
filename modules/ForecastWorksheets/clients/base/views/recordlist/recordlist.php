@@ -9,20 +9,20 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ForecastWorksheets']['base']['view']['recordlist'] = array(
+$viewdefs['ForecastWorksheets']['base']['view']['recordlist'] = [
     'css_class' => 'forecast-worksheet',
     'favorite' => false,
-    'selection' => array(),
-    'rowactions' => array(
-        'actions' => array(
-            array(
+    'selection' => [],
+    'rowactions' => [
+        'actions' => [
+            [
                 'type' => 'rowaction',
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
                 'icon' => 'sicon-preview',
                 'acl_action' => 'view',
-            )
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

@@ -12,7 +12,7 @@
 
 use Sugarcrm\Sugarcrm\modules\Reports\Exporters\ReportExporter;
 
-require_once('include/export_utils.php');
+require_once 'include/export_utils.php';
 
 /**
  * @param Report $reporter Report object
@@ -41,13 +41,13 @@ function template_handle_export(Report &$reporter, bool $stream = true)
 
     if ($stream) {
         ob_clean();
-        header("Pragma: cache");
-        header("Content-type: text/plain; charset=" . $locale->getExportCharset());
-        header("Content-Disposition: attachment; filename=Reports.csv");
-        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        header("Last-Modified: " . TimeDate::httpTime());
-        header("Cache-Control: post-check=0, pre-check=0", false);
-        header("Content-Length: " . mb_strlen($transContent, '8bit'));
+        header('Pragma: cache');
+        header('Content-type: text/plain; charset=' . $locale->getExportCharset());
+        header('Content-Disposition: attachment; filename=Reports.csv');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Last-Modified: ' . TimeDate::httpTime());
+        header('Cache-Control: post-check=0, pre-check=0', false);
+        header('Content-Length: ' . mb_strlen($transContent, '8bit'));
     }
     if (!empty($sugar_config['export_excel_compatible'])) {
         if ($stream) {
@@ -58,7 +58,7 @@ function template_handle_export(Report &$reporter, bool $stream = true)
     } else {
         $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
         if ($locale->getExportCharset() == 'UTF-8' &&
-            ! preg_match('/macintosh|mac os x|mac_powerpc/i', $user_agent)) {
+            !preg_match('/macintosh|mac os x|mac_powerpc/i', $user_agent)) {
             $BOM = "\xEF\xBB\xBF";
         } else {
             $BOM = ''; // Mac Excel does not support utf-8
@@ -83,7 +83,7 @@ function writeToCSVFile(string $content, string $reportName)
     // This mimics what pdf does
     create_cache_directory('csv');
     $filenamestamp = '_' . date(translate('LBL_PDF_TIMESTAMP', 'Reports'), time());
-    $cr = array(' ', "\r", "\n", "/");
+    $cr = [' ', "\r", "\n", '/'];
     $filename = str_replace($cr, '_', $reportName . $filenamestamp . '.csv');
     $cachefile = sugar_cached('csv/') . basename($filename);
     $fp = sugar_fopen($cachefile, 'w');

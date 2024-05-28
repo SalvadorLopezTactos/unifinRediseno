@@ -41,22 +41,13 @@
                     </button>
                     <span class="ml-2 reports-collection-count" data-container="collection-count-widget-container"></span>
                 </div>
-                {{#if showFooter}}
-                    <div class="report-panel-footer p-1 flex tbold px-4">
-                        {{#if showFooterTotalRecordCount}}
-                                {{str 'LBL_TOTAL_COUNT' 'Reports'}}:{{totalCount}}
-                        {{/if}}
-                    </div>
-                {{/if}}
             </div>
         {{/notEq}}
         {{#eq pagesCount "-1"}}
-            {{#if showFooter}}
-                <div class="report-panel-footer p-1 flex tbold px-4 w-full">
-                    {{#if showFooterTotalRecordCount}}
-                            {{str 'LBL_TOTAL_COUNT' 'Reports'}}:{{totalCount}}
-                    {{/if}}
-                </div>
+            {{#if totalCount}}
+                <span class="mt-2 ml-2 reports-collection-count font-bold">
+                    {{str 'LBL_TOTAL_COUNT' 'Reports'}}: {{totalCount}}
+                </span>
             {{/if}}
         {{/eq}}
     {{/if}}

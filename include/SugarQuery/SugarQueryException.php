@@ -21,7 +21,7 @@ class SugarQueryException extends SugarException
      * Extra data attached to the exception
      * @var array
      */
-    public $extraData = array();
+    public $extraData = [];
 
     /**
      * @param string $messageLabel optional Label for error message.  Used to load the appropriate translated message.
@@ -31,7 +31,7 @@ class SugarQueryException extends SugarException
      * @param int $httpCode
      * @param string $errorLabel
      */
-    function __construct($messageLabel = null, $msgArgs = null, $moduleName = null, $errorLabel = null)
+    public function __construct($messageLabel = null, $msgArgs = null, $moduleName = null, $errorLabel = null)
     {
 
         if (!empty($messageLabel)) {
@@ -106,5 +106,4 @@ class SugarQueryException extends SugarException
         $this->extraData[$key] = $data;
         return $this;
     }
-
 }

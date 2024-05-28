@@ -10,58 +10,58 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 return [
-    'metadata' => array(
-        'components' => array(
-            array(
-                'rows' => array(
-                    array(
-                        array(
-                            'view' => array(
+    'metadata' => [
+        'components' => [
+            [
+                'rows' => [
+                    [
+                        [
+                            'view' => [
                                 'type' => 'dashablelist',
                                 'label' => 'TPL_DASHLET_MY_MODULE',
-                                'display_columns' => array(
+                                'display_columns' => [
                                     'bug_number',
                                     'name',
                                     'status',
-                                ),
-                            ),
-                            'context' => array(
+                                ],
+                            ],
+                            'context' => [
                                 'module' => 'Bugs',
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' => array(
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
                                 'type' => 'request-closed-cases-dashlet',
                                 'label' => 'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME',
-                            ),
-                            'context' => array(
+                            ],
+                            'context' => [
                                 'module' => 'Cases',
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' => array(
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
                                 'type' => 'twitter',
                                 'label' => 'LBL_TWITTER_NAME',
                                 'twitter' => 'sugarcrm',
                                 'limit' => '5',
-                            ),
-                            'context' => array(
+                            ],
+                            'context' => [
                                 'module' => 'Home',
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
                 'width' => 12,
-            ),
-        ),
-    ),
+            ],
+        ],
+    ],
     'name' => 'LBL_CASES_LIST_DASHBOARD',
     'id' => '5d673c00-7b52-11e9-871e-f218983a1c3e',
 ];

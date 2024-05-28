@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'เพิ่ม',
     'LBL_ADDRCITY' => 'เมือง',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'ข้อมูล' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'ปิด' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'ไม่พบการเชื่อมต่อของ ID แหล่งที่ให้มา',
-);
-
+];

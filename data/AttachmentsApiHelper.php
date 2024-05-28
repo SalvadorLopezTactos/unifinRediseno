@@ -21,7 +21,7 @@ class AttachmentsApiHelper extends SugarBeanApiHelper
      * @param array $options
      * @return array
      */
-    public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(SugarBean $bean, array $fieldList = [], array $options = [])
     {
         $result = parent::formatForApi($bean, $fieldList, $options);
 
@@ -34,7 +34,7 @@ class AttachmentsApiHelper extends SugarBeanApiHelper
             return $result;
         }
 
-        $result['attachment_list'] = array();
+        $result['attachment_list'] = [];
         foreach ($bean->attachments->getBeans() as $note) {
             if ($note->id !== $bean->id && $attachment = $note->getAttachment()) {
                 array_push($result['attachment_list'], $attachment);
@@ -53,9 +53,9 @@ class AttachmentsApiHelper extends SugarBeanApiHelper
      * @param array $options
      * @return array
      */
-    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = array())
+    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = [])
     {
-        $attachment_list = array();
+        $attachment_list = [];
         if (!empty($submittedData['attachment_list'])) {
             $attachment_list = $submittedData['attachment_list'];
             unset($submittedData['attachment_list']);
@@ -65,7 +65,7 @@ class AttachmentsApiHelper extends SugarBeanApiHelper
 
         if (!empty($attachment_list) && $data) {
             $bean->load_relationship('attachments');
-            $attachments = array();
+            $attachments = [];
             if ($bean->id) {
                 $attachments = $bean->attachments->getBeans();
             } else {

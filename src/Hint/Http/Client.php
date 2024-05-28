@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint\Http;
 
 use Psr\Log\LoggerAwareInterface;
@@ -103,7 +104,7 @@ class Client implements LoggerAwareInterface
 
         // Allow conflicts (duplicate entries, code 409) to be silently ignored
         if ($statusCode >= 400 && $statusCode != 409) {
-            $this->logger->alert('Unexpected HTTP return status code in registerToCompanyIdentity(): '. $statusCode);
+            $this->logger->alert('Unexpected HTTP return status code in registerToCompanyIdentity(): ' . $statusCode);
             $this->logger->alert('Error occurred in registerToCompanyIdentity(): ' . $response->getBody());
         }
 
@@ -134,7 +135,7 @@ class Client implements LoggerAwareInterface
         $statusCode = $response->getCode();
 
         if ($statusCode >= 400) {
-            $this->logger->alert('Unexpected HTTP return status code in updateLicenseInDataEnrichmentIdentityTable(): '. $statusCode);
+            $this->logger->alert('Unexpected HTTP return status code in updateLicenseInDataEnrichmentIdentityTable(): ' . $statusCode);
             $this->logger->alert('Error occurred in updateLicenseInDataEnrichmentIdentityTable(): ' . $response->getBody());
         }
 
@@ -337,12 +338,12 @@ class Client implements LoggerAwareInterface
 
         switch ($response->getCode()) {
             case 401:
-                $this->logger->alert('401: Unauthorized client error: '. print_r($requestInfo, true));
-                $this->logger->alert('Error cause: '. print_r($body, true));
+                $this->logger->alert('401: Unauthorized client error: ' . print_r($requestInfo, true));
+                $this->logger->alert('Error cause: ' . print_r($body, true));
                 throw new SugarApiExceptionInvalidGrant();
             case 402:
                 if (is_null($body) || is_null($body['message'])) {
-                    $this->logger->alert('Invalid response from Hint /token endpoint: '. print_r($requestInfo, true));
+                    $this->logger->alert('Invalid response from Hint /token endpoint: ' . print_r($requestInfo, true));
                     throw new NoLicenseApiException();
                 }
 
@@ -358,24 +359,24 @@ class Client implements LoggerAwareInterface
                 }
                 break;
             case 403:
-                $this->logger->alert('403: Forbidden client error: '. print_r($requestInfo, true));
-                $this->logger->alert('Error cause: '. print_r($body, true));
+                $this->logger->alert('403: Forbidden client error: ' . print_r($requestInfo, true));
+                $this->logger->alert('Error cause: ' . print_r($body, true));
                 throw new SugarApiExceptionNotAuthorized();
             case 404:
                 if (!$suppressNotFoundLog) {
-                    $this->logger->alert('404: Unknown API accessed: '. print_r($requestInfo, true));
-                    $this->logger->alert('Error cause: '. print_r($body, true));
+                    $this->logger->alert('404: Unknown API accessed: ' . print_r($requestInfo, true));
+                    $this->logger->alert('Error cause: ' . print_r($body, true));
                 }
                 throw new SugarApiExceptionNotFound();
             case 200:
                 return json_decode($response->getBody(), true);
-            // This is to handle /config-enrich-bean endpoint as it returns 201 status
+                // This is to handle /config-enrich-bean endpoint as it returns 201 status
             case 201:
                 return 201;
             default:
                 $this->logger->alert('Unexpected HTTP return status code: ' . $response->getCode());
-                $this->logger->alert('Error: '. print_r($requestInfo, true));
-                $this->logger->alert('Error cause: '. print_r($body, true));
+                $this->logger->alert('Error: ' . print_r($requestInfo, true));
+                $this->logger->alert('Error cause: ' . print_r($body, true));
                 throw new SugarApiExceptionError();
         }
     }

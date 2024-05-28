@@ -33,6 +33,10 @@ class CloudfunctionsFunction extends \Google\Collection
   protected $eventTriggerType = EventTrigger::class;
   protected $eventTriggerDataType = '';
   /**
+   * @var string
+   */
+  public $kmsKeyName;
+  /**
    * @var string[]
    */
   public $labels;
@@ -40,6 +44,10 @@ class CloudfunctionsFunction extends \Google\Collection
    * @var string
    */
   public $name;
+  /**
+   * @var bool
+   */
+  public $satisfiesPzs;
   protected $serviceConfigType = ServiceConfig::class;
   protected $serviceConfigDataType = '';
   /**
@@ -52,6 +60,10 @@ class CloudfunctionsFunction extends \Google\Collection
    * @var string
    */
   public $updateTime;
+  /**
+   * @var string
+   */
+  public $url;
 
   /**
    * @param BuildConfig
@@ -110,6 +122,20 @@ class CloudfunctionsFunction extends \Google\Collection
     return $this->eventTrigger;
   }
   /**
+   * @param string
+   */
+  public function setKmsKeyName($kmsKeyName)
+  {
+    $this->kmsKeyName = $kmsKeyName;
+  }
+  /**
+   * @return string
+   */
+  public function getKmsKeyName()
+  {
+    return $this->kmsKeyName;
+  }
+  /**
    * @param string[]
    */
   public function setLabels($labels)
@@ -136,6 +162,20 @@ class CloudfunctionsFunction extends \Google\Collection
   public function getName()
   {
     return $this->name;
+  }
+  /**
+   * @param bool
+   */
+  public function setSatisfiesPzs($satisfiesPzs)
+  {
+    $this->satisfiesPzs = $satisfiesPzs;
+  }
+  /**
+   * @return bool
+   */
+  public function getSatisfiesPzs()
+  {
+    return $this->satisfiesPzs;
   }
   /**
    * @param ServiceConfig
@@ -192,6 +232,20 @@ class CloudfunctionsFunction extends \Google\Collection
   public function getUpdateTime()
   {
     return $this->updateTime;
+  }
+  /**
+   * @param string
+   */
+  public function setUrl($url)
+  {
+    $this->url = $url;
+  }
+  /**
+   * @return string
+   */
+  public function getUrl()
+  {
+    return $this->url;
   }
 }
 

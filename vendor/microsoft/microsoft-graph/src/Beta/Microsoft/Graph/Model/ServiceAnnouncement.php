@@ -25,8 +25,9 @@ namespace Beta\Microsoft\Graph\Model;
 class ServiceAnnouncement extends Entity
 {
 
-     /** 
+     /**
      * Gets the healthOverviews
+    * A collection of service health information for tenant. This property is a contained navigation property, it is nullable and readonly.
      *
      * @return array|null The healthOverviews
      */
@@ -38,11 +39,12 @@ class ServiceAnnouncement extends Entity
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the healthOverviews
+    * A collection of service health information for tenant. This property is a contained navigation property, it is nullable and readonly.
     *
-    * @param ServiceHealth $val The healthOverviews
+    * @param ServiceHealth[] $val The healthOverviews
     *
     * @return ServiceAnnouncement
     */
@@ -51,10 +53,11 @@ class ServiceAnnouncement extends Entity
         $this->_propDict["healthOverviews"] = $val;
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the issues
+    * A collection of service issues for tenant. This property is a contained navigation property, it is nullable and readonly.
      *
      * @return array|null The issues
      */
@@ -66,11 +69,12 @@ class ServiceAnnouncement extends Entity
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the issues
+    * A collection of service issues for tenant. This property is a contained navigation property, it is nullable and readonly.
     *
-    * @param ServiceHealthIssue $val The issues
+    * @param ServiceHealthIssue[] $val The issues
     *
     * @return ServiceAnnouncement
     */
@@ -79,10 +83,11 @@ class ServiceAnnouncement extends Entity
         $this->_propDict["issues"] = $val;
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the messages
+    * A collection of service messages for tenant. This property is a contained navigation property, it is nullable and readonly.
      *
      * @return array|null The messages
      */
@@ -94,11 +99,12 @@ class ServiceAnnouncement extends Entity
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the messages
+    * A collection of service messages for tenant. This property is a contained navigation property, it is nullable and readonly.
     *
-    * @param ServiceUpdateMessage $val The messages
+    * @param ServiceUpdateMessage[] $val The messages
     *
     * @return ServiceAnnouncement
     */
@@ -107,5 +113,5 @@ class ServiceAnnouncement extends Entity
         $this->_propDict["messages"] = $val;
         return $this;
     }
-    
+
 }

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint\Queue\Event;
 
 use Sugarcrm\Sugarcrm\Hint\Logger\Logger as HintLogger;
@@ -56,7 +57,7 @@ abstract class QueueEvent implements QueueEventInterface, LoggerAwareInterface
     /**
      * {@inheritDoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf('%s ( %s )', get_class($this), json_encode($this->data, JSON_UNESCAPED_SLASHES));
     }

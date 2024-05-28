@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Tietuenumero pitää määritellä, jotta käyttäjä voidaan lisätä tähän tiimiin.',
     'ERR_DUP_NAME' => 'Tiimin nimi on jo olemassa. Syötä uusi nimi.',
     'ERR_DELETE_RECORD' => 'Tietuenumero tulee määritellä, jotta voit poistaa tiimin.',
@@ -67,20 +67,20 @@ $mod_strings = array(
 Tiimipohjaisten oikeuksien poistaminen moduulista kumoaa tiimipohjaisiin oikeuksiin liittyvät tiedot kyseisessä moduulissa mukaan lukien prosessimääritykset tai toimintoa käyttävät prosessit. Näihin sisältyvät roolit, jotka käyttävät "Omistaja ja valittu tiimi" -vaihtoehtoa kyseisessä moduulissa, sekä tiimipohjaiset oikeudet kyseisen moduulin tietueisiin.
 Suosittelemme myös, että moduulin tiimipohjaisten oikeuksien käytöstä poistamisen jälkeen tyhjennät järjestelmän välimuistin käyttämällä Pikakorjausta ja Uudelleenrakentaja-työkalua.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Varoitus:</strong>Tiimipohjaisten oikeuksien poistaminen moduulista kumoaa tiimipohjaisiin oikeuksiin liittyvät tiedot kyseisessä moduulissa mukaan lukien prosessimääritykset tai toimintoa käyttävät prosessit. Näihin sisältyvät roolit, jotka käyttävät "Omistaja ja valittu tiimi" -vaihtoehtoa kyseisessä moduulissa, sekä tiimipohjaiset oikeudet kyseisen moduulin tietueisiin.
 Suosittelemme myös, että moduulin tiimipohjaisten oikeuksien käytöstä poistamisen jälkeen tyhjennät järjestelmän välimuistin käyttämällä Pikakorjausta ja Uudelleenrakentaja-työkalua.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Tiimipohjaisten oikeuksien poistaminen moduulista kumoaa tiimipohjaisiin oikeuksiin liittyvät tiedot kyseisessä moduulissa mukaan lukien prosessimääritykset tai toimintoa käyttävät prosessit. Näihin sisältyvät roolit, jotka käyttävät "Omistaja ja valittu tiimi" -vaihtoehtoa kyseisessä moduulissa, sekä tiimipohjaiset oikeudet kyseisen moduulin tietueisiin.
 Suosittelemme myös, että moduulin tiimipohjaisten oikeuksien käytöstä poistamisen jälkeen tyhjennät järjestelmän välimuistin käyttämällä Pikakorjausta ja Uudelleenrakentaja-työkalua. Jos sinulla ei ole Pikakorjaus- ja Uudelleenrakentaja-toimintojen käyttöoikeuksia, ota yhteyttä järjestelmänvalvojaan pääsyn myöntämiseksi Korjaa-valikkoon.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Varoitus:</strong>Tiimipohjaisten oikeuksien poistaminen moduulista kumoaa tiimipohjaisiin oikeuksiin liittyvät tiedot kyseisessä moduulissa mukaan lukien prosessimääritykset tai toimintoa käyttävät prosessit. Näihin sisältyvät roolit, jotka käyttävät "Omistaja ja valittu tiimi" -vaihtoehtoa kyseisessä moduulissa, sekä tiimipohjaiset oikeudet kyseisen moduulin tietueisiin.
 Suosittelemme myös, että moduulin tiimipohjaisten oikeuksien käytöstä poistamisen jälkeen tyhjennät järjestelmän välimuistin käyttämällä Pikakorjausta ja Uudelleenrakentaja-työkalua. Jos sinulla ei ole Pikakorjaus- ja Uudelleenrakentaja-toimintojen käyttöoikeuksia, ota yhteyttä järjestelmänvalvojaan pääsyn myöntämiseksi Korjaa-valikkoon.
 STR
-,
-);
+    ,
+];

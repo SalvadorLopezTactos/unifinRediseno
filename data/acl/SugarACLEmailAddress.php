@@ -20,7 +20,8 @@ class SugarACLEmailAddress extends SugarACLStrategy
      * @param array $context
      * @return bool|void
      */
-    public function checkAccess($module, $view, $context) {
+    public function checkAccess($module, $view, $context)
+    {
         if ($view != 'field') {
             return true;
         }
@@ -29,7 +30,7 @@ class SugarACLEmailAddress extends SugarACLStrategy
         }
 
         $bean = self::loadBean($module, $context);
-        return $bean->ACLFieldAccess('email1',$context['action']);
+        return $bean->ACLFieldAccess('email1', $context['action']);
     }
 
     /**
@@ -39,13 +40,13 @@ class SugarACLEmailAddress extends SugarACLStrategy
      * @param array $context
      * @return SugarBean
      */
-    protected static function loadBean($module, $context = array()) {
-        if(isset($context['bean']) && $context['bean'] instanceof SugarBean && $context['bean']->module_dir == $module) {
+    protected static function loadBean($module, $context = [])
+    {
+        if (isset($context['bean']) && $context['bean'] instanceof SugarBean && $context['bean']->module_dir == $module) {
             $bean = $context['bean'];
         } else {
             $bean = BeanFactory::newBean($module);
         }
         return $bean;
     }
-
 }

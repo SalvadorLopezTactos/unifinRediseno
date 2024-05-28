@@ -10,19 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class SugarFieldText extends SugarFieldBase {
-
-	function getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
-		$displayParams['nl2br'] = true;
-		$displayParams['htmlescape'] = true;
-		$displayParams['url2html'] = true;
-		return parent::getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
+class SugarFieldText extends SugarFieldBase
+{
+    public function getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
+        $displayParams['nl2br'] = true;
+        $displayParams['htmlescape'] = true;
+        $displayParams['url2html'] = true;
+        return parent::getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
     }
 
-	function getWirelessEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
-		$displayParams['nl2br'] = true;
-		$displayParams['url2html'] = true;
-		return parent::getWirelessEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
+    public function getWirelessEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
+        $displayParams['nl2br'] = true;
+        $displayParams['url2html'] = true;
+        return parent::getWirelessEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
     }
 
     /**
@@ -38,4 +40,3 @@ class SugarFieldText extends SugarFieldBase {
         return $this->apiValidateFieldSize($bean, $params, $field, $properties);
     }
 }
-?>

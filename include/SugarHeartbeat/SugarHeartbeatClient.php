@@ -34,12 +34,12 @@ class SugarHeartbeatClient extends \SoapClient
      */
     public function __construct()
     {
-        $this->defaultOptions = array(
+        $this->defaultOptions = [
             'location' => $this->getEndpoint(),
             'uri' => $this->getEndpoint(),
             'soap_version' => SOAP_1_1,
             'exceptions' => 0,
-        );
+        ];
         $options = $this->getOptions();
         parent::__construct(null, $options);
     }
@@ -78,7 +78,7 @@ class SugarHeartbeatClient extends \SoapClient
                 $options['proxy_password'] = $proxy_config->settings['proxy_password'];
             }
         }
-        return array_merge($options, SugarConfig::getInstance()->get('heartbeat.options', array()));
+        return array_merge($options, SugarConfig::getInstance()->get('heartbeat.options', []));
     }
 
     /**
@@ -88,7 +88,7 @@ class SugarHeartbeatClient extends \SoapClient
      */
     public function sugarPing()
     {
-        return $this->__soapCall('sugarPing', array());
+        return $this->__soapCall('sugarPing', []);
     }
 
     /**
@@ -103,6 +103,6 @@ class SugarHeartbeatClient extends \SoapClient
     public function sugarHome(string $key, array $info)
     {
         $data = base64_encode(serialize($info));
-        return $this->__soapCall('sugarHome', array('key' => $key, 'data' => $data));
+        return $this->__soapCall('sugarHome', ['key' => $key, 'data' => $data]);
     }
 }

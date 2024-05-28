@@ -24,10 +24,16 @@ class GoogleCloudContentwarehouseV1DocumentQuery extends \Google\Collection
    * @var string
    */
   public $customPropertyFilter;
+  protected $customWeightsMetadataType = GoogleCloudContentwarehouseV1CustomWeightsMetadata::class;
+  protected $customWeightsMetadataDataType = '';
   /**
    * @var string[]
    */
   public $documentCreatorFilter;
+  /**
+   * @var string[]
+   */
+  public $documentNameFilter;
   /**
    * @var string[]
    */
@@ -70,6 +76,20 @@ class GoogleCloudContentwarehouseV1DocumentQuery extends \Google\Collection
     return $this->customPropertyFilter;
   }
   /**
+   * @param GoogleCloudContentwarehouseV1CustomWeightsMetadata
+   */
+  public function setCustomWeightsMetadata(GoogleCloudContentwarehouseV1CustomWeightsMetadata $customWeightsMetadata)
+  {
+    $this->customWeightsMetadata = $customWeightsMetadata;
+  }
+  /**
+   * @return GoogleCloudContentwarehouseV1CustomWeightsMetadata
+   */
+  public function getCustomWeightsMetadata()
+  {
+    return $this->customWeightsMetadata;
+  }
+  /**
    * @param string[]
    */
   public function setDocumentCreatorFilter($documentCreatorFilter)
@@ -82,6 +102,20 @@ class GoogleCloudContentwarehouseV1DocumentQuery extends \Google\Collection
   public function getDocumentCreatorFilter()
   {
     return $this->documentCreatorFilter;
+  }
+  /**
+   * @param string[]
+   */
+  public function setDocumentNameFilter($documentNameFilter)
+  {
+    $this->documentNameFilter = $documentNameFilter;
+  }
+  /**
+   * @return string[]
+   */
+  public function getDocumentNameFilter()
+  {
+    return $this->documentNameFilter;
   }
   /**
    * @param string[]

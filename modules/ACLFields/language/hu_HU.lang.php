@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_DEFAULT' => 'Nincs beállítva',
     'LBL_READ_WRITE' => 'Írható / olvasható',
     'LBL_READ_OWNER_WRITE' => 'Olvasható / Tulajdonos számára írható',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_READ_SELECTED_TEAMS_WRITE' => 'Olvasás/(Tulajdonos & Kiválasztott Csoportok) Írás',
     'LBL_SELECTED_TEAMS_READ_OWNER_WRITE' => '(Tulajdonos & Kijelölt Csoportok) Olvasás/Tulajdonos Írás',
     'LBL_SELECTED_TEAMS_READ_WRITE' => '(Tulajdonos & Kijelölt Csoportok) Olvasás/(Tulajdonos & Kijelölt Csoportok) Írás',
-);
+];

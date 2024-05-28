@@ -108,6 +108,8 @@
             // The `MassCollection` plugin triggers these events when it shows an
             // alert and the table height changes.
             this.layout.on('list:alert:show list:alert:hide', this._refreshReorderableColumns, this);
+
+            this.layout.on('list:sort:fire', this.handleSortEvent, this);
         }
 
         app.events.on('sugarApp:' + this.module + ':' + this.name + ':updated', this._sugarAppsUpdatedMetadata, this);
@@ -331,7 +333,8 @@
         var firstRightColumn = this.rightColumns[0];
         if (firstRightColumn && _.isArray(firstRightColumn.fields)) {
             //Add Save button to right
-            firstRightColumn.css_class = 'overflow-visible';
+            firstRightColumn.css_class = `absolute group-[.frozen-list-headers]/records:inset-0
+                group-[.frozen-list-headers]/records:w-full overflow-visible w-fit`;
             firstRightColumn.fields.push({
                 type: 'editablelistbutton',
                 label: 'LBL_SAVE_BUTTON_LABEL',
@@ -484,6 +487,27 @@
     },
 
     /**
+     * Callback function for successful deletion on model
+     */
+    deleteModelSuccessCallback: function(model) {
+        let redirect = this._targetUrl !== this._currentUrl;
+        this._modelToDelete = null;
+        this.collection.remove(model, {silent: redirect});
+        if (redirect) {
+            this.unbindBeforeRouteDelete();
+            //Replace the url hash back to the current staying page
+            app.router.navigate(this._targetUrl, {trigger: true});
+            return;
+        }
+        app.events.trigger('preview:close');
+        if (!this.disposed) {
+            this.render();
+        }
+
+        this.layout.trigger('list:record:deleted', model);
+    },
+
+    /**
      * Delete the model once the user confirms the action
      */
     deleteModel: function() {
@@ -498,22 +522,9 @@
                     messages: self.getDeleteMessages(self._modelToDelete).success
                 }
             },
-            success: function() {
-                var redirect = self._targetUrl !== self._currentUrl;
+            success: _.bind(this.deleteModelSuccessCallback, this, model),
+            error: function() {
                 self._modelToDelete = null;
-                self.collection.remove(model, { silent: redirect });
-                if (redirect) {
-                    self.unbindBeforeRouteDelete();
-                    //Replace the url hash back to the current staying page
-                    app.router.navigate(self._targetUrl, {trigger: true});
-                    return;
-                }
-                app.events.trigger("preview:close");
-                if (!self.disposed) {
-                    self.render();
-                }
-
-                self.layout.trigger("list:record:deleted", model);
             }
         });
     },
@@ -684,12 +695,15 @@
 
         // Get the ID of the model from the row
         let row = this.$(event.target).parents('tr');
-        let rowNameComponents = row.attr('name') ? row.attr('name').split('_') : [];
-        if (rowNameComponents.length < 2) {
+        let rowName = row.attr('name');
+        let delimiterIndex = rowName.indexOf('_');
+        if (delimiterIndex === -1) {
             return;
         }
-
-        let modelId = rowNameComponents.pop();
+        let modelId = rowName.substring(delimiterIndex + 1);
+        if (_.isEmpty(modelId)) {
+            return;
+        }
 
         // Check if the row is already in edit mode
         if (!_.isEmpty(this.toggledModels[modelId])) {
@@ -862,7 +876,7 @@
             handler: function() {
                 var self = this;
                 if (this.$('.selected [name=inline-cancel]:visible').length === 0) {
-                    this.$('.selected [data-toggle=dropdown]:visible').click();
+                    this.$('.selected [data-bs-toggle=dropdown]:visible').click();
                     this.$('.selected [name=edit_button]:visible').click();
                     _.defer(function() {
                         self.$('.selected input:first').focus();
@@ -878,7 +892,7 @@
             description: 'LBL_SHORTCUT_RECORD_DELETE',
             handler: function() {
                 if (this.$('.selected [name=inline-cancel]:visible').length === 0) {
-                    this.$('.selected [data-toggle=dropdown]:visible').click().blur();
+                    this.$('.selected [data-bs-toggle=dropdown]:visible').click().blur();
                     this.$('.selected [name=delete_button]:visible').click();
                 }
             }
@@ -936,7 +950,7 @@
             component: this,
             description: 'LBL_SHORTCUT_FOLLOW_RECORD',
             handler: function() {
-                this.$('.selected [data-toggle=dropdown]:visible').click().blur();
+                this.$('.selected [data-bs-toggle=dropdown]:visible').click().blur();
                 this.$('.selected [name=follow_button]:visible').click();
             }
         });
@@ -1018,6 +1032,13 @@
             callback();
         }
 
+        this.toggledModels = {};
+    },
+
+    /**
+     * Clear toggledModels on sorting
+     */
+    handleSortEvent: function() {
         this.toggledModels = {};
     }
 })

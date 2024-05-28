@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmnExtension'] = array(
+$dictionary['pmse_BpmnExtension'] = [
     'table' => 'pmse_bpmn_extension',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'reassignable' => false,
-    'fields' => array(
-        'ext_uid' => array(
+    'fields' => [
+        'ext_uid' => [
             'required' => true,
             'name' => 'ext_uid',
             'vname' => '',
@@ -38,8 +38,8 @@ $dictionary['pmse_BpmnExtension'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'prj_id' => array(
+        ],
+        'prj_id' => [
             'required' => true,
             'name' => 'prj_id',
             'vname' => '',
@@ -59,8 +59,8 @@ $dictionary['pmse_BpmnExtension'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'ext_element' => array(
+        ],
+        'ext_element' => [
             'required' => true,
             'name' => 'ext_element',
             'vname' => '',
@@ -80,8 +80,8 @@ $dictionary['pmse_BpmnExtension'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'ext_element_type' => array(
+        ],
+        'ext_element_type' => [
             'required' => true,
             'name' => 'ext_element_type',
             'vname' => '',
@@ -101,8 +101,8 @@ $dictionary['pmse_BpmnExtension'] = array(
             'calculated' => false,
             'len' => '45',
             'size' => '45',
-        ),
-        'ext_extension' => array(
+        ],
+        'ext_extension' => [
             'required' => false,
             'name' => 'ext_extension',
             'vname' => '',
@@ -122,23 +122,23 @@ $dictionary['pmse_BpmnExtension'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmnExtension', 'pmse_BpmnExtension');

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,6 +10,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class ConnectorApi extends SugarApi
 {
     /**
@@ -19,16 +21,16 @@ class ConnectorApi extends SugarApi
 
     public function registerApiRest()
     {
-        return array(
-            'getConnectors' => array(
+        return [
+            'getConnectors' => [
                 'reqType' => 'GET',
-                'path' => array('connectors'),
-                'pathVars' => array('connectors'),
+                'path' => ['connectors'],
+                'pathVars' => ['connectors'],
                 'method' => 'getConnectors',
                 'shortHelp' => 'Gets connector information',
                 'longHelp' => 'include/api/help/connectors_get_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -79,5 +81,4 @@ class ConnectorApi extends SugarApi
             }
         }
     }
-
 }

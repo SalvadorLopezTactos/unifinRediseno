@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '임베드된 파일',
     'LBL_MODULE_NAME_SINGULAR' => '임베드된 파일',
     'LBL_MODULE_TITLE' => '임베드된 파일',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => '파일명:',
     'LBL_FILENAME' => '파일명:',
     'LBL_UPLOAD_ONLY_IMAGE' => '이미지로 된 파일을 선택해야 합니다.',
-);
+];

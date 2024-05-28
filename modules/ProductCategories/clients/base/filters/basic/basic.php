@@ -9,35 +9,35 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ProductCategories']['base']['filter']['basic'] = array(
+$viewdefs['ProductCategories']['base']['filter']['basic'] = [
     'create' => true,
     'default_filter' => 'all_records',
-    'quicksearch_field' => array('name'),
+    'quicksearch_field' => ['name'],
     'quicksearch_priority' => 1,
-    'filters' => array(
-        array(
+    'filters' => [
+        [
             'id' => 'all_records',
             'name' => 'LBL_LISTVIEW_FILTER_ALL',
-            'filter_definition' => array(),
+            'filter_definition' => [],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'recently_viewed',
             'name' => 'LBL_RECENTLY_VIEWED',
-            'filter_definition' => array(
+            'filter_definition' => [
                 '$tracker' => '-7 DAY',
-            ),
+            ],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'recently_created',
             'name' => 'LBL_NEW_RECORDS',
-            'filter_definition' => array(
-                'date_entered' => array(
+            'filter_definition' => [
+                'date_entered' => [
                     '$dateRange' => 'last_7_days',
-                ),
-            ),
+                ],
+            ],
             'editable' => false,
-        ),
-    ),
-);
+        ],
+    ],
+];

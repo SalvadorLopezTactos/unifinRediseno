@@ -15,55 +15,55 @@
 class Note extends SugarBean
 {
     // Stored fields
-    var $id;
-    var $date_entered;
-    var $date_modified;
-    var $modified_user_id;
-    var $assigned_user_id;
-    var $created_by;
-    var $created_by_name;
-    var $modified_by_name;
-    var $description;
-    var $name;
-    var $filename;
+    public $id;
+    public $date_entered;
+    public $date_modified;
+    public $modified_user_id;
+    public $assigned_user_id;
+    public $created_by;
+    public $created_by_name;
+    public $modified_by_name;
+    public $description;
+    public $name;
+    public $filename;
     // handle to an upload_file object
     // used in emails
-    var $file;
-    var $embed_flag; // inline image flag
+    public $file;
+    public $embed_flag; // inline image flag
     public $note_parent_id;
-    var $parent_type;
-    var $parent_id;
-    var $contact_id;
-    var $portal_flag;
-    var $team_id;
+    public $parent_type;
+    public $parent_id;
+    public $contact_id;
+    public $portal_flag;
+    public $team_id;
 
-    var $parent_name;
-    var $contact_name;
-    var $contact_phone;
-    var $contact_email;
-    var $file_mime_type;
+    public $parent_name;
+    public $contact_name;
+    public $contact_phone;
+    public $contact_email;
+    public $file_mime_type;
     public $file_ext;
     public $file_source;
     public $file_size;
     public $attachment_flag;
-    var $module_dir = "Notes";
-    var $default_note_name_dom = array('Meeting notes', 'Reminder');
-    var $table_name = "notes";
-    var $new_schema = true;
-    var $object_name = "Note";
-    var $importable = true;
+    public $module_dir = 'Notes';
+    public $default_note_name_dom = ['Meeting notes', 'Reminder'];
+    public $table_name = 'notes';
+    public $new_schema = true;
+    public $object_name = 'Note';
+    public $importable = true;
 
     public $entry_source = 'internal';
 
     // This is used to retrieve related fields from form posts.
-    var $additional_column_fields = array(
+    public $additional_column_fields = [
         'contact_name',
         'contact_phone',
         'contact_email',
         'parent_name',
         'first_name',
-        'last_name'
-    );
+        'last_name',
+    ];
 
     /**
      * Assignment notification emails are not sent when the note is an email attachment
@@ -132,15 +132,21 @@ class Note extends SugarBean
             }
         }
 
+        $stateChanges = $this->getStateChanges();
+
+        $this->setContactId();
+        $id = parent::save($check_notify);
+
         // executes Team update flow for all nested attachments if necessary
-        if (!$this->attachment_flag && $this->isUpdate() && $this->load_relationship('attachments')) {
+        if (!$this->attachment_flag && $this->load_relationship('attachments')) {
             $sensitiveFields = [
                 'team_id' => true,
                 'team_set_id' => true,
                 'acl_team_set_id' => true,
                 'assigned_user_id' => true,
             ];
-            if (!empty(array_intersect_key($this->getStateChanges(), $sensitiveFields))) {
+            $teamListIsLong = safeCount($this->teams->_teamList) > 1;
+            if ($teamListIsLong || !empty(array_intersect_key($stateChanges, $sensitiveFields))) {
                 // update DB values
                 $this->updateAttachmentTeams($this->attachments, $this->id);
 
@@ -149,8 +155,7 @@ class Note extends SugarBean
             }
         }
 
-        $this->setContactId();
-        return parent::save($check_notify);
+        return $id;
     }
 
     /**
@@ -225,13 +230,13 @@ class Note extends SugarBean
         }
     }
 
-    function safeAttachmentName()
+    public function safeAttachmentName()
     {
         global $sugar_config;
 
         // get position of last "." in file name
-        $file_ext_beg = strrpos($this->filename, ".");
-        $file_ext = "";
+        $file_ext_beg = strrpos($this->filename, '.');
+        $file_ext = '';
 
         // get file extension
         if ($file_ext_beg !== false) {
@@ -242,9 +247,9 @@ class Note extends SugarBean
         foreach ($sugar_config['upload_badext'] as $badExt) {
             if (strtolower($file_ext) == strtolower($badExt)) {
                 // if found, then append with .txt and break out of lookup
-                $this->name = $this->name . ".txt";
+                $this->name = $this->name . '.txt';
                 $this->file_mime_type = 'text/';
-                $this->filename = $this->filename . ".txt";
+                $this->filename = $this->filename . '.txt';
                 break; // no need to look for more
             }
         }
@@ -256,7 +261,7 @@ class Note extends SugarBean
      * @uses UploadFile::unlink_file() to delete the file as well. The file is only deleted if {@link Note::$upload_id}
      * is empty.
      */
-    function mark_deleted($id)
+    public function mark_deleted($id)
     {
         if (empty($this->upload_id)) {
             UploadFile::unlink_file($id);
@@ -273,13 +278,13 @@ class Note extends SugarBean
      * @param boolean $save
      * @return bool
      */
-    public function deleteAttachment($isduplicate = "false", $save = true)
+    public function deleteAttachment($isduplicate = 'false', $save = true)
     {
         if (!$this->ACLAccess('edit')) {
             return false;
         }
 
-        if ($isduplicate == "true") {
+        if ($isduplicate == 'true') {
             return true;
         }
 
@@ -305,17 +310,17 @@ class Note extends SugarBean
         return true;
     }
 
-    function get_summary_text()
+    public function get_summary_text()
     {
         return "$this->name";
     }
 
-    function fill_in_additional_list_fields()
+    public function fill_in_additional_list_fields()
     {
         $this->fill_in_additional_detail_fields();
     }
 
-    function fill_in_additional_detail_fields()
+    public function fill_in_additional_detail_fields()
     {
         parent::fill_in_additional_detail_fields();
 
@@ -328,7 +333,7 @@ class Note extends SugarBean
     public function get_list_view_data($filter_fields = [])
     {
         $note_fields = $this->get_list_view_array();
-        global $app_list_strings, $focus, $action, $currentModule,$mod_strings, $sugar_config;
+        global $app_list_strings, $focus, $action, $currentModule, $mod_strings, $sugar_config;
 
         if (isset($this->parent_type)) {
             $note_fields['PARENT_MODULE'] = $this->parent_type;
@@ -352,7 +357,7 @@ class Note extends SugarBean
 
         global $current_language;
         $mod_strings = return_module_language($current_language, 'Notes');
-        $note_fields['STATUS']=$mod_strings['LBL_NOTE_STATUS'];
+        $note_fields['STATUS'] = $mod_strings['LBL_NOTE_STATUS'];
 
         return $note_fields;
     }
@@ -361,7 +366,7 @@ class Note extends SugarBean
      * Assigns message variables to email template
      *
      * @param XTemplate $xtpl Email template
-     * @param Note      $note Source note
+     * @param Note $note Source note
      *
      * @return XTemplate
      */
@@ -372,7 +377,7 @@ class Note extends SugarBean
         return $xtpl;
     }
 
-    function listviewACLHelper()
+    public function listviewACLHelper()
     {
         $array_assign = parent::listviewACLHelper();
         $is_owner = false;
@@ -408,7 +413,7 @@ class Note extends SugarBean
         return $array_assign;
     }
 
-    function bean_implements($interface)
+    public function bean_implements($interface)
     {
         switch ($interface) {
             case 'ACL':
@@ -445,7 +450,7 @@ class Note extends SugarBean
      * Verifies if this note has an attachment
      * @return bool
      */
-    public function hasAttachment() : bool
+    public function hasAttachment(): bool
     {
         return !empty($this->filename) && !empty($this->id) && file_exists('upload://' . $this->id);
     }
@@ -454,7 +459,7 @@ class Note extends SugarBean
      * Gets this note's attachment information
      * @return array
      */
-    public function getAttachment() : array
+    public function getAttachment(): array
     {
         if ($this->hasAttachment()) {
             $mimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), 'upload://' . $this->id);

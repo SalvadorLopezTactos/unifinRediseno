@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'مؤرشف البيانات',
     'LBL_MODULE_NAME' => 'مؤرشف البيانات',
     'LBL_FILTER_DEF_FIELD' => 'عامل التصفية',
@@ -28,7 +27,7 @@ $mod_strings = array (
     'LBL_MANAGE_ARCHIVE_JOB_LIST_TITLE' => 'الأرشيفات المجدولة',
     'LBL_MANAGE_ARCHIVE_JOB_IS_NOT_SCHEDULED' => 'لا أرشيفات مجدولة',
     'LBL_ARCHIVE_FILTER' => 'إعدادات عامل التصفية',
-    "LBL_MANAGE_ARCHIVE_SETUP" => 'إعداد أرشفة البيانات',
+    'LBL_MANAGE_ARCHIVE_SETUP' => 'إعداد أرشفة البيانات',
     'LBL_LIST_ARCHIVE_NAME' => 'اسم الأرشيف',
     'LBL_PERFORM_NOW_BTN' => 'التنفيذ الآن',
     'LBL_ARCHIVE_SUCCESS_TITLE' => 'نجاح',
@@ -45,4 +44,4 @@ $mod_strings = array (
         . 'لأن هذا يمكن أن يؤثر على أداء النظام. هل تريد بالتأكيد تنفيذ هذا الإجراء الآن؟',
 
     'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'يجب ضبط {{fieldName}} كعامل تصفية لمؤرشف وحدة {{moduleName}}',
-);
+];

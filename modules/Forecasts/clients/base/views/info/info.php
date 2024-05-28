@@ -10,43 +10,43 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Forecasts']['base']['view']['info'] = array(
-    'last_commit' => array(
-        array(
+$viewdefs['Forecasts']['base']['view']['info'] = [
+    'last_commit' => [
+        [
             'name' => 'lastCommitDate',
             'type' => 'lastcommit',
-            'datapoints' => array(
+            'datapoints' => [
                 'worst_case',
                 'likely_case',
-                'best_case'
-            )
-        )
-    ),
-    'commitlog' => array(
-        array(
+                'best_case',
+            ],
+        ],
+    ],
+    'commitlog' => [
+        [
             'name' => 'commitLog',
             'type' => 'commitlog',
-        )
-    ),
-    'datapoints' => array(
-        array(
+        ],
+    ],
+    'datapoints' => [
+        [
             'name' => 'worst_case',
             'label' => 'LBL_WORST',
             'type' => 'datapoint',
             'click_to_edit' => true,
-        ),
-        array(
+        ],
+        [
             'name' => 'likely_case',
             'label' => 'LBL_LIKELY',
             'total_field' => 'forecasted_likely',
             'type' => 'datapoint',
             'click_to_edit' => true,
-        ),
-        array(
+        ],
+        [
             'name' => 'best_case',
             'label' => 'LBL_BEST',
             'type' => 'datapoint',
             'click_to_edit' => true,
-        )
-    ),
-);
+        ],
+    ],
+];

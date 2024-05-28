@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmnGateway'] = array(
+$dictionary['pmse_BpmnGateway'] = [
     'table' => 'pmse_bpmn_gateway',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'reassignable' => false,
-    'fields' => array(
-        'gat_uid' => array(
+    'fields' => [
+        'gat_uid' => [
             'required' => true,
             'name' => 'gat_uid',
             'vname' => '',
@@ -38,8 +38,8 @@ $dictionary['pmse_BpmnGateway'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'prj_id' => array(
+        ],
+        'prj_id' => [
             'required' => true,
             'name' => 'prj_id',
             'vname' => '',
@@ -59,8 +59,8 @@ $dictionary['pmse_BpmnGateway'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'pro_id' => array(
+        ],
+        'pro_id' => [
             'required' => true,
             'name' => 'pro_id',
             'vname' => '',
@@ -80,8 +80,8 @@ $dictionary['pmse_BpmnGateway'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'gat_type' => array(
+        ],
+        'gat_type' => [
             'required' => true,
             'name' => 'gat_type',
             'vname' => '',
@@ -101,8 +101,8 @@ $dictionary['pmse_BpmnGateway'] = array(
             'calculated' => false,
             'len' => '30',
             'size' => '30',
-        ),
-        'gat_direction' => array(
+        ],
+        'gat_direction' => [
             'required' => true,
             'name' => 'gat_direction',
             'vname' => '',
@@ -122,8 +122,8 @@ $dictionary['pmse_BpmnGateway'] = array(
             'calculated' => false,
             'len' => '30',
             'size' => '30',
-        ),
-        'gat_instantiate' => array(
+        ],
+        'gat_instantiate' => [
             'required' => true,
             'name' => 'gat_instantiate',
             'vname' => '',
@@ -147,8 +147,8 @@ $dictionary['pmse_BpmnGateway'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'gat_event_gateway_type' => array(
+        ],
+        'gat_event_gateway_type' => [
             'required' => true,
             'name' => 'gat_event_gateway_type',
             'vname' => '',
@@ -168,8 +168,8 @@ $dictionary['pmse_BpmnGateway'] = array(
             'calculated' => false,
             'len' => '20',
             'size' => '20',
-        ),
-        'gat_activation_count' => array(
+        ],
+        'gat_activation_count' => [
             'required' => true,
             'name' => 'gat_activation_count',
             'vname' => '',
@@ -193,8 +193,8 @@ $dictionary['pmse_BpmnGateway'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'gat_waiting_for_start' => array(
+        ],
+        'gat_waiting_for_start' => [
             'required' => true,
             'name' => 'gat_waiting_for_start',
             'vname' => '',
@@ -218,8 +218,8 @@ $dictionary['pmse_BpmnGateway'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'gat_default_flow' => array(
+        ],
+        'gat_default_flow' => [
             'required' => true,
             'name' => 'gat_default_flow',
             'vname' => '',
@@ -239,23 +239,23 @@ $dictionary['pmse_BpmnGateway'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmnGateway', 'pmse_BpmnGateway');

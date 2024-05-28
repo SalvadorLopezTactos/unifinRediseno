@@ -29,7 +29,7 @@ class OrderByValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof OrderBy) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\OrderBy');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\OrderBy');
         }
 
         if (null === $value || '' === $value) {
@@ -40,7 +40,7 @@ class OrderByValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, 'string');
         }
 
-        $value = (string) $value;
+        $value = (string)$value;
 
         // validate using regex:
         $regex = '/^((?=[0-9_]*[a-z])[a-z0-9_]+)(\.(?=[0-9_]*[a-z])[a-z0-9_]+)?$/i';

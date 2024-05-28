@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Sutartys',
-	'LBL_MODULE_NAME_SINGULAR' => 'Contract',
-	'LBL_MODULE_TITLE' => 'Sutartys: Pradžia',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Sutartys',
+    'LBL_MODULE_NAME_SINGULAR' => 'Contract',
+    'LBL_MODULE_TITLE' => 'Sutartys: Pradžia',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Sukurti sutartį',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'Valiutos ID:',
     'LBL_CURRENCY' => 'Valiuta:',
     'LBL_CURRENCY_RATE' => 'Currency Rate',
-    'LBL_ASSIGNED_TO_NAME'=>'Atsakingas:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Atsakingas:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Sutarčių sąrašas',	
+    'LBL_LIST_FORM_TITLE' => 'Sutarčių sąrašas',
     'LBL_LIST_CONTRACT_NAME' => 'Sutartis',
     'LBL_LIST_ACCOUNT_NAME' => 'Klientas',
     'LBL_LIST_START_DATE' => 'Pradžia',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Pavadinimas',
     'LBL_LIST_CONTRACT_VALUE' => 'Vertė',
 
-    'LBL_TYPE'=>'Tipas',
+    'LBL_TYPE' => 'Tipas',
     'LBL_TYPE_NAME' => 'Tipo pavadinimas',
-    'LBL_CONTRACT_TYPE'=>'Tipas:',
+    'LBL_CONTRACT_TYPE' => 'Tipas:',
 
     'LBL_CREATED_USER' => 'Sukūrė',
     'LBL_MODIFIED_USER' => 'Redagavo',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Kontaktų „Focus“ stalčius',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Sutarčių įrašų ataskaitų sritis',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Sutarties grafikas',
+];

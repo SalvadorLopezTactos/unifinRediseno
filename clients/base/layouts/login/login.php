@@ -11,16 +11,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['login'] = array(
-    'components' => array(
-        array(
+$viewdefs['base']['layout']['login'] = [
+    'components' => [
+        [
             'view' => 'login',
-        ),
-        array(
-            'view' => array(
+        ],
+        [
+            'view' => [
                 'name' => 'marketing-extras',
                 'css_class' => 'marketing-extras',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

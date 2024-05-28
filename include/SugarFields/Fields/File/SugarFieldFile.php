@@ -13,23 +13,23 @@
 
 class SugarFieldFile extends SugarFieldBase
 {
-    static $imageFileMimeTypes = array(
+    public static $imageFileMimeTypes = [
         'image/jpeg',
         'image/gif',
         'image/png',
         'image/svg+xml',
-    );
+    ];
 
     private function fillInOptions(&$vardef, &$displayParams)
     {
-        if ( isset($vardef['allowEapm']) && $vardef['allowEapm'] == true ) {
-            if ( empty($vardef['docType']) ) {
+        if (isset($vardef['allowEapm']) && $vardef['allowEapm'] == true) {
+            if (empty($vardef['docType'])) {
                 $vardef['docType'] = 'doc_type';
             }
-            if ( empty($vardef['docId']) ) {
+            if (empty($vardef['docId'])) {
                 $vardef['docId'] = 'doc_id';
             }
-            if ( empty($vardef['docUrl']) ) {
+            if (empty($vardef['docUrl'])) {
                 $vardef['docUrl'] = 'doc_url';
             }
         } else {
@@ -37,15 +37,15 @@ class SugarFieldFile extends SugarFieldBase
         }
 
         // Override the default module
-        if ( isset($vardef['linkModuleOverride']) ) {
+        if (isset($vardef['linkModuleOverride'])) {
             $vardef['linkModule'] = $vardef['linkModuleOverride'];
         } else {
             $vardef['linkModule'] = '{$module}';
         }
 
         // This is needed because these aren't always filled out in the edit/detailview defs
-        if ( !isset($vardef['fileId']) ) {
-            if ( isset($displayParams['id']) ) {
+        if (!isset($vardef['fileId'])) {
+            if (isset($displayParams['id'])) {
                 $vardef['fileId'] = $displayParams['id'];
             } else {
                 $vardef['fileId'] = 'id';
@@ -78,7 +78,7 @@ class SugarFieldFile extends SugarFieldBase
 
     public function save($bean, $params, $field, $vardef, $prefix = '')
     {
-        $fakeDisplayParams = array();
+        $fakeDisplayParams = [];
         $this->fillInOptions($vardef, $fakeDisplayParams);
 
         $upload_file = new UploadFile($prefix . $field . '_file');
@@ -86,12 +86,12 @@ class SugarFieldFile extends SugarFieldBase
         //remove file
         if (isset($_REQUEST['remove_file_' . $field]) && $params['remove_file_' . $field] == 1) {
             $upload_file->unlink_file($bean->$field);
-            $bean->$field="";
+            $bean->$field = '';
         }
 
-        $move=false;
+        $move = false;
         // In case of failure midway, we need to reset the values of the bean
-        $originalvals = array('value' => $bean->$field);
+        $originalvals = ['value' => $bean->$field];
 
         // Bug 57400 - Some beans with a filename field type do NOT have file_mime_type
         // or file_ext. In the case of Documents, for example, this happens to be
@@ -105,7 +105,6 @@ class SugarFieldFile extends SugarFieldBase
         }
 
         if (isset($_FILES[$prefix . $field . '_file']) && $upload_file->confirm_upload()) {
-
             // in order to avoid any discrepancies of MIME type with the download code,
             // call the same MIME function instead of using the uploaded file's mime type property.
             $mimeType = get_file_mime_type($upload_file->get_temp_file_location(), 'application/octet-stream');
@@ -114,7 +113,7 @@ class SugarFieldFile extends SugarFieldBase
                 !verify_image_file($upload_file->get_temp_file_location())) {
                 $this->error = string_format(
                     $GLOBALS['app_strings']['LBL_UPLOAD_IMAGE_FILE_NOT_SUPPORTED'],
-                    array($upload_file->file_ext)
+                    [$upload_file->file_ext]
                 );
                 return;
             }
@@ -122,16 +121,16 @@ class SugarFieldFile extends SugarFieldBase
             $bean->file_mime_type = $upload_file->mime_type;
             $bean->file_ext = $upload_file->file_ext;
             $bean->file_size = $upload_file->file_size;
-            $move=true;
+            $move = true;
         } else {
             $this->error = $upload_file->getErrorMessage();
         }
 
-        if (!empty($params['isDuplicate']) && $params['isDuplicate'] == 'true' ) {
+        if (!empty($params['isDuplicate']) && $params['isDuplicate'] == 'true') {
             // This way of detecting duplicates is used in Notes
             $old_id = $params['relate_id'];
         }
-        if (!empty($params['duplicateSave']) && !empty($params['duplicateId']) ) {
+        if (!empty($params['duplicateSave']) && !empty($params['duplicateId'])) {
             // It's a duplicate
             $old_id = $params['duplicateId'];
         }
@@ -144,17 +143,17 @@ class SugarFieldFile extends SugarFieldBase
         }
 
         // Backwards compatibility for fields that still use customCode to handle the file uploads
-        if ( !$move && empty($old_id) && isset($_FILES['uploadfile']) ) {
+        if (!$move && empty($old_id) && isset($_FILES['uploadfile'])) {
             $upload_file = new UploadFile('uploadfile');
-            if ( $upload_file->confirm_upload() ) {
+            if ($upload_file->confirm_upload()) {
                 $bean->$field = $upload_file->get_stored_file_name();
                 $bean->file_mime_type = $upload_file->mime_type;
                 $bean->file_ext = $upload_file->file_ext;
-                $move=true;
+                $move = true;
             } else {
                 $this->error = $upload_file->getErrorMessage();
             }
-        } elseif ( !$move && !empty($old_id) && isset($_REQUEST['uploadfile']) && !isset($_REQUEST[$prefix . $field . '_file']) ) {
+        } elseif (!$move && !empty($old_id) && isset($_REQUEST['uploadfile']) && !isset($_REQUEST[$prefix . $field . '_file'])) {
             // I think we are duplicating a backwards compatibility module.
             $upload_file = new UploadFile('uploadfile');
         }
@@ -189,26 +188,25 @@ class SugarFieldFile extends SugarFieldBase
                 // Report the error
                 $this->error = $upload_file->getErrorMessage();
             }
-
-        } elseif ( ! empty($old_id) ) {
+        } elseif (!empty($old_id)) {
             // It's a duplicate, I think
 
-            if (empty($vardef['docUrl'] ) || empty($params[$prefix . $vardef['docUrl'] ]) ) {
+            if (empty($vardef['docUrl']) || empty($params[$prefix . $vardef['docUrl']])) {
                 $upload_file->duplicate_file($old_id, $bean->id, $bean->$field);
             } else {
                 $docType = $vardef['docType'];
                 $bean->$docType = $params[$prefix . $field . '_old_doctype'];
             }
-        } elseif ( !empty($params[$prefix . $field . '_remoteName']) ) {
+        } elseif (!empty($params[$prefix . $field . '_remoteName'])) {
             // We aren't moving, we might need to do some remote linking
-            $displayParams = array();
+            $displayParams = [];
             $this->fillInOptions($vardef, $displayParams);
 
-            if ( isset($params[$prefix . $vardef['docId']])
-                 && ! empty($params[$prefix . $vardef['docId']])
-                 && isset($params[$prefix . $vardef['docType']])
-                 && ! empty($params[$prefix . $vardef['docType']])
-                ) {
+            if (isset($params[$prefix . $vardef['docId']])
+                && !empty($params[$prefix . $vardef['docId']])
+                && isset($params[$prefix . $vardef['docType']])
+                && !empty($params[$prefix . $vardef['docType']])
+            ) {
                 $bean->$field = $params[$prefix . $field . '_remoteName'];
 
                 $extension = get_file_extension($bean->$field);
@@ -225,11 +223,10 @@ class SugarFieldFile extends SugarFieldBase
             // don't copy the actual file.
             // for now, we only handle email notes
             if (!empty($params['email_type']) &&
-                in_array($params['email_type'], array('Emails', 'EmailTemplates'))
+                in_array($params['email_type'], ['Emails', 'EmailTemplates'])
             ) {
                 $bean->upload_id = $duplicateModuleId;
-            }
-            else {
+            } else {
                 $upload_file->duplicate_file($duplicateModuleId, $bean->id, $bean->$field);
             }
             $bean->$field = $params[$field];
@@ -241,10 +238,10 @@ class SugarFieldFile extends SugarFieldBase
             }
         }
 
-        if ( $vardef['allowEapm'] == true && empty($bean->$field) ) {
+        if ($vardef['allowEapm'] == true && empty($bean->$field)) {
             $GLOBALS['log']->info("The $field is empty, clearing out the lot");
             // Looks like we are emptying this out
-            $clearFields = array('docId', 'docType', 'docUrl', 'docDirectUrl');
+            $clearFields = ['docId', 'docType', 'docUrl', 'docDirectUrl'];
             foreach ($clearFields as $clearMe) {
                 if (!isset($vardef[$clearMe])) {
                     continue;
@@ -259,20 +256,21 @@ class SugarFieldFile extends SugarFieldBase
      * {@inheritDoc}
      */
     public function apiFormatField(
-        array &$data,
-        SugarBean $bean,
-        array $args,
+        array       &$data,
+        SugarBean   $bean,
+        array       $args,
         $fieldName,
         $properties,
-        array $fieldList = null,
+        array       $fieldList = null,
         ServiceBase $service = null
     ) {
+
         // Handle the parent so our current data element is set
         parent::apiFormatField($data, $bean, $args, $fieldName, $properties, $fieldList, $service);
 
         // Get fields related to this field but only if the current field is empty
-        // If the current field is empty, set it to the related field(s) until it 
-        // isn't empty. This happens in the case of upload file fields in File 
+        // If the current field is empty, set it to the related field(s) until it
+        // isn't empty. This happens in the case of upload file fields in File
         // type SugarObject based custom modules. In most cases the fields array
         // will either be empty or one entry long.
         if (empty($data[$fieldName]) && isset($properties['fields'])) {
@@ -285,7 +283,7 @@ class SugarFieldFile extends SugarFieldBase
                 break;
             }
         }
-        
+
         // Add in file_mime_type
         if (empty($data['file_mime_type'])) {
             $data['file_mime_type'] = empty($bean->file_mime_type) ? '' : $bean->file_mime_type;
@@ -306,15 +304,13 @@ class SugarFieldFile extends SugarFieldBase
                 $uploadId = $duplicateBean->getUploadId();
                 // don't copy the actual file for email notes
                 if (!empty($params['email_type']) &&
-                    in_array($params['email_type'], array('Emails', 'EmailTemplates'))
+                    in_array($params['email_type'], ['Emails', 'EmailTemplates'])
                 ) {
                     $bean->upload_id = $uploadId;
-                }
-                else {
+                } else {
                     $upload_file->duplicate_file($uploadId, $bean->id, $bean->$field);
                 }
-            }
-            else {
+            } else {
                 $upload_file->duplicate_file($duplicateModuleId, $bean->id, $bean->$field);
             }
             require_once 'include/utils/file_utils.php';

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Auditnapló',
     'LBL_FIELD_NAME' => 'Mező',
     'LBL_OLD_NAME' => 'Régi érték',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Frissítés a következőre:',
     'LBL_BLANK' => '-üres-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Az audit idővonala',
+    'LBL_CREATED' => 'Létrehozva',
+];

@@ -24,10 +24,10 @@ class ComponentName extends Constraint
     public const ERROR_INVALID_COMPONENT_NAME = 1;
     public const ERROR_RESERVED_KEYWORD = 2;
 
-    protected static $errorNames = array(
+    protected static $errorNames = [
         self::ERROR_INVALID_COMPONENT_NAME => 'ERROR_INVALID_COMPONENT_NAME',
         self::ERROR_RESERVED_KEYWORD => 'ERROR_RESERVED_KEYWORD',
-    );
+    ];
 
     public $message = 'Component name violation: %msg%';
 

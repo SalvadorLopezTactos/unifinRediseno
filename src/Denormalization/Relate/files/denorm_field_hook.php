@@ -16,7 +16,7 @@ $hook_array['before_save'][] = [
     1,
     'denorm_field_watcher',
     null,
-    '\\Sugarcrm\\Sugarcrm\\Denormalization\\Relate\\Hook',
+    '\\' . \Sugarcrm\Sugarcrm\Denormalization\Relate\Hook::class,
     'handleBeforeUpdate',
 ];
 
@@ -24,7 +24,7 @@ $hook_array['after_save'][] = [
     1,
     'denorm_field_watcher',
     null,
-    '\\Sugarcrm\\Sugarcrm\\Denormalization\\Relate\\Hook',
+    '\\' . \Sugarcrm\Sugarcrm\Denormalization\Relate\Hook::class,
     'handleAfterUpdate',
 ];
 
@@ -32,7 +32,7 @@ $hook_array['before_relationship_delete'][] = [
     1,
     'denorm_field_watcher',
     null,
-    '\\Sugarcrm\\Sugarcrm\\Denormalization\\Relate\\Hook',
+    '\\' . \Sugarcrm\Sugarcrm\Denormalization\Relate\Hook::class,
     'handleDeleteRelationship',
 ];
 
@@ -40,6 +40,6 @@ $hook_array['after_relationship_add'][] = [
     1,
     'denorm_field_watcher',
     null,
-    '\\Sugarcrm\\Sugarcrm\\Denormalization\\Relate\\Hook',
+    '\\' . \Sugarcrm\Sugarcrm\Denormalization\Relate\Hook::class,
     'handleAddRelationship',
 ];

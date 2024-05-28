@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'FW:',
     'LBL_RE' => 'Lënda:',
     'LBL_BUTTON_CREATE' => 'Krijo',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Zgjidhni nga llogaria e emailit',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Zgjidhni nënshkrim',
     'LBL_SIGNATURE' => 'Nënshkrimi',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Nënshkrimi bazë",
-    "LBL_SHOW_MORE_SIGNATURES" => "Më shumë nënshkrime",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Nënshkrimi bazë',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Më shumë nënshkrime',
     'LBL_SUBJECT' => 'Subjekti',
     'LBL_TEMPLATE' => 'Shabllon',
     'LBL_TEXT_BODY' => 'Trupi tekstual',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Ora e dërgimit',
     'LBL_LIST_TO_ADDR' => 'deri',
     'LBL_LIST_TYPE' => 'Lloji',
-    "LBL_SELECTED_RECIPIENTS" => "Zgjidhni dërgues",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Më shumë dërgues",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Libri i adresave",
+    'LBL_SELECTED_RECIPIENTS' => 'Zgjidhni dërgues',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Më shumë dërgues',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Libri i adresave',
     'NTC_REMOVE_INVITEE' => 'A jeni të sigurt që dëshironi të fshini këtë pranues nga emaili?',
     'WARNING_SETTINGS_NOT_CONF' => 'Cilësimet e emailit tënd nuk janë konfiguruar saktë për të dërguar email. Duhet konfiguruar një server SMTP ' .
         'te <a href="#bwc/index.php?module=EmailMan&action=config">Cilësimet e emailit</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Bashkëngjitjet mund të mos punojnë: U gjet vlerë e pasaktë apo e papërdorshme për "upload_tmp_dir". ' .
         'Korrigjoje këtë në skedarin tënd php.ini.',
     'LBL_MESSAGE_UID' => 'Mesazh UID',
-    'LBL_OPEN_DRAFT_ALERT' => 'Emaili është draft. Kliko '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'Emaili është draft. Kliko ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  për ta modifikuar.',
     'LBL_EMAIL_BODY' => 'Mesazh me email',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit tek emailet',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të emaileve',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e emailit',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'ska specifikim të dërguesit',
@@ -473,4 +474,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'Dërgo email',
     'LBL_MAILBOX' => 'Llogari e drejtuar nga brenda',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Konfiguro një llogari email-i dalëse nëpërmjet <a href="#OutboundEmail">Cilësimeve të email-it</a> për të dërguar email-e.',
-);
+    'LBL_TOO_SHORT' => 'Shkruaj të paktën {0} karaktere...',
+];

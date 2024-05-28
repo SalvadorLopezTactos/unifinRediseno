@@ -10,35 +10,33 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'Notifications';
-$viewdefs[$module_name]['EditView'] = array(
-    'templateMeta' => array('maxColumns' => '2', 
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'), 
-                                            array('label' => '10', 'field' => '30')
-                                            ),                                                                                                                                    
-                                            ),
-                                            
-                                            
- 'panels' =>array (
-  'default' => 
-  array (
-    
-    array (
-      'name',
-      
-    ),
-    
-    
-    array (
-      'description',
-    ),
-    array (
-        'assigned_user_name',
-      array('name'=>'team_name', 'displayParams'=>array('display'=>true)),
-    ),
-  ),
-                                                    
-),
-                        
-);
-?>
+$viewdefs[$module_name]['EditView'] = [
+    'templateMeta' => ['maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+
+
+    'panels' => [
+        'default' => [
+
+            [
+                'name',
+
+            ],
+
+
+            [
+                'description',
+            ],
+            [
+                'assigned_user_name',
+                ['name' => 'team_name', 'displayParams' => ['display' => true]],
+            ],
+        ],
+
+    ],
+
+];

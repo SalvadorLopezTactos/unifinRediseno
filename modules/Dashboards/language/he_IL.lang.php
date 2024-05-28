@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_DASHBOARD_MODULE' => 'מודל',
     'LBL_MODULE_NAME' => 'לוחות מחוונים',
     'LBL_MODULE_NAME_SINGULAR' => 'לוח מחוונים',
@@ -26,8 +26,12 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'כל לוחות המחוונים עבור מודל {{module}} צפה {{view}}',
     'LBL_COPY_OF' => 'עותק של {{{name}}}',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'צור לוח מחוונים',
-    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
-    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "האם אתה בטוח שברצונך לשחזר את לוח המחוונים הזה לתצורת ברירת המחדל?",
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => 'Are you sure you want to restore this tab to the default layout?',
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => 'האם אתה בטוח שברצונך לשחזר את לוח המחוונים הזה לתצורת ברירת המחדל?',
     'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'האם אתה בטוח שברצונך לשחזר את חלונית לוח המחוונים לפריסת ברירת המחדל?',
     'LBL_FILTER_UTILS_SELECT' => 'הוקצה',
-);
+    'LBL_FILTER_UPDATES_SINCE_LAST_REFRESH' => 'לוח מחוונים זה מכיל מסנני זמן ריצה ששונו מאז הרענון האחרון.',
+    'LBL_TEMPLATE' => 'תבנית',
+    'LBL_UNSELECT_DELETE_TEMPLATES' => 'הפריטים שנבחרו כוללים תבניות של לוח מחוונים, שאותן אי אפשר למחוק במחיקה המונית. כדי להמשיך, יש לבטל בחירה בתבניות.',
+    'LBL_UNSELECT_UPDATE_TEMPLATES' => 'הפריטים שנבחרו כוללים תבניות של לוח מחוונים, שאותן אי אפשר לעדכן בעדכון המוני. כדי להמשיך, יש לבטל בחירה בתבניות.',
+];

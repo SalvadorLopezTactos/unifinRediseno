@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Aquesta firma requereix un nom.',
     'LBL_DEFAULT_SIGNATURE' => 'Per defecte',
     'LBL_MODULE_NAME' => 'Firmes de correu electrònic',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'Usar firma?',
     'LBL_SIGNATURE_PREPEND' => 'Firmar sobre la resposta?',
     'LBL_SIGNATURES' => 'Firmes',
-);
+];

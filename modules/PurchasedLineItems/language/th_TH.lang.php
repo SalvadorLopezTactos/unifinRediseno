@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'แดชบอร์ดรายการสินค้าในไลน์ที่ซื้อมา',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนสินค้าในไลน์ที่ซื้อมา',
     'LBL_PARENT_PURCHASE' => 'การซื้อหลัก',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์รายการสินค้าที่ซื้อแล้ว',
 ];

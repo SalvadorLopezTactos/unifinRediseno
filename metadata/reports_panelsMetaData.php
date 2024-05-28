@@ -46,7 +46,7 @@ $dictionary['reports_panels'] = [
             'name' => 'date_entered',
             'vname' => 'LBL_DATE_ENTERED',
             'type' => 'datetime',
-            'required'=> true,
+            'required' => true,
             'comment' => 'Date record created',
             'readonly' => true,
         ],
@@ -54,7 +54,7 @@ $dictionary['reports_panels'] = [
             'name' => 'date_modified',
             'vname' => 'LBL_DATE_MODIFIED',
             'type' => 'datetime',
-            'required'=> true,
+            'required' => true,
             'comment' => 'Date record last modified',
         ],
         'deleted' => [

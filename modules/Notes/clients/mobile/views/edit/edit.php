@@ -16,17 +16,17 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$viewdefs['Notes']['mobile']['view']['edit'] = array(
-    'templateMeta' => array(
+$viewdefs['Notes']['mobile']['view']['edit'] = [
+    'templateMeta' => [
         'maxColumns' => '1',
-        'widths' => array(
-            array('label' => '10', 'field' => '30'),
-        ),
-    ),
-    'panels' => array(
-        array(
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
+            'fields' => [
                 'name',
                 'description',
                 'contact_name',
@@ -35,8 +35,9 @@ $viewdefs['Notes']['mobile']['view']['edit'] = array(
                 'tag',
                 'assigned_user_name',
                 'team_name',
-            )
-        )
-    ),
-);
-?>
+                'date_modified',
+                'date_entered',
+            ],
+        ],
+    ],
+];

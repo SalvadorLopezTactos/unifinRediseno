@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$pmseModulesList = array (
+$pmseModulesList = [
     'pmse_Inbox',
     'pmse_Project',
     'pmse_Business_Rules',
@@ -45,4 +45,4 @@ $pmseModulesList = array (
     'pmse_BpmGroup',
     'pmse_BpmGroupUser',
     'pmse_EmailMessage',
-);
+];

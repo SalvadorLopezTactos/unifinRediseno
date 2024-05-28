@@ -18,7 +18,9 @@ use Sugarcrm\Sugarcrm\Security\Context;
 use Sugarcrm\Sugarcrm\Security\Subject\Installer;
 use Sugarcrm\Sugarcrm\Denormalization\Relate\FieldConfig;
 use Sugarcrm\Sugarcrm\Denormalization\Relate\Process\Entity;
+
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
+
 
 // This file will load the configuration settings from session data,
 // write to the config file, and execute any necessary database steps.
@@ -26,7 +28,7 @@ $GLOBALS['installing'] = true;
 if (!isset($install_script) || !$install_script) {
     die($mod_strings['ERR_NO_DIRECT_SCRIPT']);
 }
-ini_set("output_buffering", "0");
+ini_set('output_buffering', '0');
 
 // Disable zlib compression as this will interfere with live scrolling
 ini_set('zlib.output_compression', '0');
@@ -46,9 +48,10 @@ ob_implicit_flush();
 // When output_buffering is enabled - which is recommended in production -
 // make sure we flush the current output buffer(s) otherwise we are still
 // buffering at this point and real-time updates wont make it to the screen.
-while (@ob_end_flush());
+while (@ob_end_flush()) {
+}
 
-require_once('install/install_utils.php');
+require_once 'install/install_utils.php';
 
 // set installer subject
 $context = Container::getInstance()->get(Context::class);
@@ -63,22 +66,22 @@ $mi->rebuild_vardefs();
 
 MetaDataManager::disableCache();
 
-include "modules/Trackers/tracker_perfMetaData.php";
-include "modules/Trackers/tracker_queriesMetaData.php";
-include "modules/Trackers/tracker_sessionsMetaData.php";
-include "modules/Trackers/tracker_tracker_queriesMetaData.php";
-require_once('modules/TableDictionary.php');
+include 'modules/Trackers/tracker_perfMetaData.php';
+include 'modules/Trackers/tracker_queriesMetaData.php';
+include 'modules/Trackers/tracker_sessionsMetaData.php';
+include 'modules/Trackers/tracker_tracker_queriesMetaData.php';
+require_once 'modules/TableDictionary.php';
 
 $trackerManager = TrackerManager::getInstance();
 $trackerManager->pause();
 
 
-$cache_dir = sugar_cached("");
-$line_entry_format = "&nbsp&nbsp&nbsp&nbsp&nbsp<b>";
-$line_exit_format = "... &nbsp&nbsp</b>";
+$cache_dir = sugar_cached('');
+$line_entry_format = '&nbsp&nbsp&nbsp&nbsp&nbsp<b>';
+$line_exit_format = '... &nbsp&nbsp</b>';
 $rel_dictionary = $dictionary; // sourced by modules/TableDictionary.php
-$render_table_close = "";
-$render_table_open = "";
+$render_table_close = '';
+$render_table_open = '';
 $setup_db_admin_password = $_SESSION['setup_db_admin_password'];
 $setup_db_admin_user_name = $_SESSION['setup_db_admin_user_name'];
 $setup_db_create_database = $_SESSION['setup_db_create_database'];
@@ -132,34 +135,33 @@ $out = <<<EOQ
    <td colspan="2">
 EOQ;
 echo $out;
-installLog("calling handleSugarConfig()");
+installLog('calling handleSugarConfig()');
 $bottle = handleSugarConfig();
 
-$server_software = $_SERVER["SERVER_SOFTWARE"];
+$server_software = $_SERVER['SERVER_SOFTWARE'];
 if (strpos($server_software, 'Microsoft-IIS') !== false) {
-    installLog("calling handleWebConfig()");
+    installLog('calling handleWebConfig()');
     handleWebConfig();
 } else {
-    installLog("calling handleHtaccess()");
+    installLog('calling handleHtaccess()');
     handleHtaccess();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 ////    START TABLE STUFF
-echo "<br>";
+echo '<br>';
 echo "<b>{$mod_strings['LBL_PERFORM_TABLES']}</b>";
-echo "<br>";
+echo '<br>';
 
 // create the SugarCRM database
 if ($setup_db_create_database) {
-    installLog("calling handleDbCreateDatabase()");
+    installLog('calling handleDbCreateDatabase()');
     installerHook('pre_handleDbCreateDatabase');
     handleDbCreateDatabase();
     installerHook('post_handleDbCreateDatabase');
 } else {
-
-// ensure the charset and collation are utf8
-    installLog("calling handleDbCharsetCollation()");
+    // ensure the charset and collation are utf8
+    installLog('calling handleDbCharsetCollation()');
     installerHook('pre_handleDbCharsetCollation');
     handleDbCharsetCollation();
     installerHook('post_handleDbCharsetCollation');
@@ -178,8 +180,8 @@ foreach ($beanFiles as $bean => $file) {
 
 // load up the config_override.php file.
 // This is used to provide default user settings
-if (is_file("config_override.php")) {
-    require_once("config_override.php");
+if (is_file('config_override.php')) {
+    require_once 'config_override.php';
 }
 
 $db = DBManagerFactory::getInstance();
@@ -187,15 +189,15 @@ $db = DBManagerFactory::getInstance();
 $db->preInstall();
 $startTime = microtime(true);
 $focus = 0;
-$processed_tables = array(); // for keeping track of the tables we have worked on
+$processed_tables = []; // for keeping track of the tables we have worked on
 $empty = '';
 $new_tables = 1; // is there ever a scenario where we DON'T create the admin user?
 $new_config = 1;
 $new_report = 1;
 
 // add non-module Beans to this array to keep the installer from erroring.
-$nonStandardModules = array(//'Tracker',
-);
+$nonStandardModules = [//'Tracker',
+];
 
 // TODO: Remove the following. (See MAR-1314)
 // Disable the activity stream from creating messages while installing.
@@ -206,7 +208,7 @@ Registry\Registry::getInstance()->set('setup:disable_processes', true);
 /**
  * loop through all the Beans and create their tables
  */
-installLog("looping through all the Beans and create their tables");
+installLog('looping through all the Beans and create their tables');
 //start by clearing out the vardefs
 VardefManager::clearVardef();
 
@@ -217,7 +219,7 @@ require 'install/CustomerJourney/CreateDefaultRelationships.php';
 $app_strings = return_application_language('en_us');
 installerHook('pre_createAllModuleTables');
 foreach ($beanFiles as $bean => $file) {
-    $doNotInit = array('Scheduler', 'SchedulersJob', 'ProjectTask');
+    $doNotInit = ['Scheduler', 'SchedulersJob', 'ProjectTask'];
 
     if (in_array($bean, $doNotInit)) {
         $focus = new $bean(false);
@@ -230,14 +232,14 @@ foreach ($beanFiles as $bean => $file) {
     }
 
     $table_name = $focus->table_name;
-    installLog("processing table " . $focus->table_name);
+    installLog('processing table ' . $focus->table_name);
     // check to see if we have already setup this table
     if (!in_array($table_name, $processed_tables)) {
-        if (!file_exists("modules/" . $focus->module_dir . "/vardefs.php")) {
+        if (!file_exists('modules/' . $focus->module_dir . '/vardefs.php')) {
             continue;
         }
         if (!in_array($bean, $nonStandardModules)) {
-            require_once "modules/" . $focus->module_dir . "/vardefs.php"; // load up $dictionary
+            require_once 'modules/' . $focus->module_dir . '/vardefs.php'; // load up $dictionary
             if ($dictionary[$focus->object_name]['table'] == 'does_not_exist') {
                 continue; // support new vardef definitions
             }
@@ -252,30 +254,28 @@ foreach ($beanFiles as $bean => $file) {
 
         if ($setup_db_drop_tables) {
             drop_table_install($focus);
-            installLog("dropping table " . $focus->table_name);
+            installLog('dropping table ' . $focus->table_name);
         }
 
         if (create_table_if_not_exist($focus)) {
-            installLog("creating table " . $focus->table_name);
-            if ($bean == "User") {
+            installLog('creating table ' . $focus->table_name);
+            if ($bean == 'User') {
                 $new_tables = 1;
             }
-            if ($bean == "Administration") {
+            if ($bean == 'Administration') {
                 $new_config = 1;
             }
 
 
-            if ($bean == "SavedReport") {
+            if ($bean == 'SavedReport') {
                 $new_report = 1;
             }
-
         }
 
-        installLog("creating Relationship Meta for " . $focus->getObjectName());
-        installerHook('pre_createModuleTable', array('module' => $focus->getObjectName()));
-        installerHook('post_createModuleTable', array('module' => $focus->getObjectName()));
-        echo ".";
-
+        installLog('creating Relationship Meta for ' . $focus->getObjectName());
+        installerHook('pre_createModuleTable', ['module' => $focus->getObjectName()]);
+        installerHook('post_createModuleTable', ['module' => $focus->getObjectName()]);
+        echo '.';
     } // end if()
 }
 installerHook('post_createAllModuleTables');
@@ -284,7 +284,7 @@ installerHook('post_createAllModuleTables');
 $mi->silent = true;
 $mi->rebuild_extensions();
 
-echo "<br>";
+echo '<br>';
 ////    END TABLE STUFF
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -304,7 +304,7 @@ foreach ($rel_dictionary as $rel_name => $rel_data) {
         $db->createTableParams(
             $table,
             $rel_data['fields'],
-            $rel_data['indices'] ?? array()
+            $rel_data['indices'] ?? []
         );
     }
 }
@@ -321,13 +321,13 @@ $command();
 
 ///////////////////////////////////////////////////////////////////////////////
 ////    START CREATE DEFAULTS
-echo "<br>";
+echo '<br>';
 echo "<b>{$mod_strings['LBL_PERFORM_CREATE_DEFAULT']}</b><br>";
-echo "<br>";
-installLog("Begin creating Defaults");
+echo '<br>';
+installLog('Begin creating Defaults');
 installerHook('pre_createDefaultSettings');
 if ($new_config) {
-    installLog("INSERT defaults INTO config TABLE");
+    installLog('INSERT defaults INTO config TABLE');
     insert_default_settings();
 }
 installerHook('post_createDefaultSettings');
@@ -385,7 +385,7 @@ if ($new_report) {
     echo $line_entry_format . $mod_strings['LBL_PERFORM_DEFAULT_REPORTS'] . $line_exit_format;
     installLog($mod_strings['LBL_PERFORM_DEFAULT_REPORTS']);
     installerHook('pre_createDefaultReports');
-    require_once(get_custom_file_if_exists('modules/Reports/SeedReports.php'));
+    require_once get_custom_file_if_exists('modules/Reports/SeedReports.php');
     create_default_reports();
     installerHook('post_createDefaultReports');
     echo $mod_strings['LBL_PERFORM_DONE'];
@@ -405,12 +405,11 @@ $scheduler->rebuildDefaultSchedulers();
 installerHook('post_createDefaultSchedulers');
 
 
-
 echo $mod_strings['LBL_PERFORM_DONE'];
 
-$defaultTrackerRoles = array(
-    'Tracker' => array(
-        'Trackers' => array(
+$defaultTrackerRoles = [
+    'Tracker' => [
+        'Trackers' => [
             'admin' => 1,
             'access' => 89,
             'view' => 90,
@@ -418,9 +417,9 @@ $defaultTrackerRoles = array(
             'edit' => 90,
             'delete' => 90,
             'import' => 90,
-            'export' => 90
-        ),
-        'TrackerQueries' => array(
+            'export' => 90,
+        ],
+        'TrackerQueries' => [
             'admin' => 1,
             'access' => 89,
             'view' => 90,
@@ -428,9 +427,9 @@ $defaultTrackerRoles = array(
             'edit' => 90,
             'delete' => 90,
             'import' => 90,
-            'export' => 90
-        ),
-        'TrackerPerfs' => array(
+            'export' => 90,
+        ],
+        'TrackerPerfs' => [
             'admin' => 1,
             'access' => 89,
             'view' => 90,
@@ -438,9 +437,9 @@ $defaultTrackerRoles = array(
             'edit' => 90,
             'delete' => 90,
             'import' => 90,
-            'export' => 90
-        ),
-        'TrackerSessions' => array(
+            'export' => 90,
+        ],
+        'TrackerSessions' => [
             'admin' => 1,
             'access' => 89,
             'view' => 90,
@@ -448,32 +447,32 @@ $defaultTrackerRoles = array(
             'edit' => 90,
             'delete' => 90,
             'import' => 90,
-            'export' => 90
-        ),
-    )
-);
+            'export' => 90,
+        ],
+    ],
+];
 installerHook('pre_addDefaultRolesTracker');
 addDefaultRoles($defaultTrackerRoles);
 installerHook('post_addDefaultRolesTracker');
 
 // Adding MLA Roles
 installerHook('pre_addDefaultRoles');
-require_once('modules/ACLRoles/SeedRoles.php');
+require_once 'modules/ACLRoles/SeedRoles.php';
 create_default_roles();
 installerHook('post_addDefaultRoles');
 
 // Hide certain subpanels by default
 
-$disabledTabs = array(
-    "project",
-    "bugs",
-    "products",
-    "contracts",
-    "revenuelineitems",
-    "dataprivacy",
-    "externalusers",
+$disabledTabs = [
+    'project',
+    'bugs',
+    'products',
+    'contracts',
+    'revenuelineitems',
+    'dataprivacy',
+    'externalusers',
     'changetimers',
-);
+];
 
 installerHook('pre_setHiddenSubpanels');
 $disabledTabsKeyArray = TabController::get_key_array($disabledTabs);
@@ -481,7 +480,7 @@ SubPanelDefinitions::set_hidden_subpanels($disabledTabsKeyArray);
 installerHook('post_setHiddenSubpanels');
 
 // Bug 28601 - Set the default list of tabs to show
-$enabled_tabs = array();
+$enabled_tabs = [];
 $enabled_tabs[] = 'Home';
 
 $enabled_tabs[] = 'Accounts';
@@ -528,7 +527,7 @@ $tabs->set_system_tabs($enabled_tabs);
 installerHook('post_setSystemTabs');
 
 // Create the user that will be used by Snip
-require_once('install/createSnipUser.php');
+require_once 'install/createSnipUser.php';
 /**
  * SP-1071 disable unsupported legacy connectors for 7.0
  * // Enable the InsideView connector and add all modules
@@ -551,7 +550,7 @@ foreach ($mapsDefaultConfig as $name => $value) {
 }
 
 
-installLog("Converting Opportunities to use RevenueLineItems");
+installLog('Converting Opportunities to use RevenueLineItems');
 $admin = BeanFactory::newBean('Administration');
 $admin->saveSetting('Opportunities', 'opps_view_by', 'RevenueLineItems', 'base');
 
@@ -559,24 +558,24 @@ $converter = new OpportunityWithRevenueLineItem();
 $converter->doMetadataConvert();
 
 if ($new_report) {
-    installLog("Converting Opportunities Reports to use RevenueLineItems");
+    installLog('Converting Opportunities Reports to use RevenueLineItems');
     // convert the stock reports
     $reports = new OpportunityReports();
     $reports->migrateToRevenueLineItems();
 }
 
 // use the converter to update forecasts, it's protected so we have to get around that for the setup
-installLog("converting Forecasts to use RevenueLineItems");
+installLog('converting Forecasts to use RevenueLineItems');
 $rm = new ReflectionMethod($converter, 'resetForecastData');
 $rm->setAccessible(true);
-$rm->invokeArgs($converter, array('RevenueLineItems'));
+$rm->invokeArgs($converter, ['RevenueLineItems']);
 
 // Create default dashboards
 installLog('creating default dashboards');
 $defaultDashboardInstaller = new DefaultDashboardInstaller();
 global $moduleList;
 $dashboardModule = ['Dashboards'];
-$nonMegaMenuModules = ['ReportSchedules', 'ShiftExceptions',];
+$nonMegaMenuModules = ['ReportSchedules', 'ShiftExceptions','Users',];
 $defaultDashboardInstaller->buildDashboardsFromFiles(array_merge($dashboardModule, $moduleList, $nonMegaMenuModules));
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -595,14 +594,14 @@ $engine = SearchEngine::getInstance();
 $engine->setDisableIndexing(true);
 
 // populating the db with seed data
-installLog("populating the db with seed data");
+installLog('populating the db with seed data');
 if ($_SESSION['demoData'] != 'no') {
     installerHook('pre_installDemoData');
     set_time_limit(301);
 
-    echo "<br>";
+    echo '<br>';
     echo "<b>{$mod_strings['LBL_PERFORM_DEMO_DATA']}</b>";
-    echo "<br><br>";
+    echo '<br><br>';
 
     print($render_table_close);
     print($render_table_open);
@@ -610,10 +609,10 @@ if ($_SESSION['demoData'] != 'no') {
     global $current_user;
     $current_user = new User();
     $current_user->retrieve(1);
-    include("install/populateSeedData.php");
+    include 'install/populateSeedData.php';
     installerHook('post_installDemoData');
 }
-installLog("done populating the db with seed data");
+installLog('done populating the db with seed data');
 
 installLog('Installing Business Process Management designs');
 
@@ -656,7 +655,7 @@ if (isset($_SESSION['INSTALLED_LANG_PACKS']) && ArrayFunctions::is_array_access(
     updateUpgradeHistory();
 }
 
-require_once('modules/Connectors/InstallDefaultConnectors.php');
+require_once 'modules/Connectors/InstallDefaultConnectors.php';
 
 ///////////////////////////////////////////////////////////////////////////////
 ////    INSTALL Email TEMPLATES
@@ -664,21 +663,21 @@ include 'install/seed_data/Email_Notification_SeedData.php';
 include 'install/seed_data/Advanced_Password_SeedData.php';
 
 ////    INSTALL PDF TEMPLATES
-include('install/seed_data/PdfManager_SeedData.php');
+include 'install/seed_data/PdfManager_SeedData.php';
 
 ////    INSTALL Calendars
 include 'install/seed_data/Calendar_SeedData.php';
 
 ///////////////////////////////////////////////////////////////////////////////
 ////    SETUP DONE
-installLog("Done populating data *********");
+installLog('Done populating data *********');
 $memoryUsed = '';
 if (function_exists('memory_get_usage')) {
     $memoryUsed = $mod_strings['LBL_PERFORM_OUTRO_5'] . memory_get_usage() . $mod_strings['LBL_PERFORM_OUTRO_6'];
 }
 
 $errTcpip = '';
-$fp = @fsockopen("www.sugarcrm.com", 80, $errno, $errstr, 3);
+$fp = @fsockopen('www.sugarcrm.com', 80, $errno, $errstr, 3);
 if (!$fp) {
     $errTcpip = "<p>{$mod_strings['ERR_PERFORM_NO_TCPIP']}</p>";
 }
@@ -727,17 +726,17 @@ if (!empty($_SESSION['setup_system_name'])) {
 }
 
 
-installLog("Running post-install hooks");
+installLog('Running post-install hooks');
 post_install_modules();
-installLog("Finished post-install hooks");
+installLog('Finished post-install hooks');
 
 //Call rebuildSprites
 if (function_exists('imagecreatetruecolor')) {
-    require_once('modules/UpgradeWizard/uw_utils.php');
+    require_once 'modules/UpgradeWizard/uw_utils.php';
     rebuildSprites(true);
 }
 
-if (is_array($bottle) && count($bottle) > 0) {
+if (is_array($bottle) && safeCount($bottle) > 0) {
     foreach ($bottle as $bottle_message) {
         $bottleMsg .= "{$bottle_message}\n";
     }
@@ -828,14 +827,14 @@ $updateRelateDenormalizationState = function () {
 $updateRelateDenormalizationState();
 
 // rebuild cache after all is said and done
-installLog("Populating file cache");
+installLog('Populating file cache');
 SugarAutoLoader::buildCache();
 
 // Build the base platform metadata caches after everything else is done.
-installLog("Populating metadata cache");
+installLog('Populating metadata cache');
 MetaDataManager::enableCache();
 $app_list_strings = return_app_list_strings_language('en_us');
-MetaDataManager::setupMetadata(array('base'), array('en_us'));
+MetaDataManager::setupMetadata(['base'], ['en_us']);
 
 // TODO: Remove the following. (See MAR-1314)
 // Restore the activity stream behaviour.
@@ -876,4 +875,4 @@ echo $out;
 if (isset($context, $subject)) {
     $context->deactivateSubject($subject);
 }
-installLog("Installation has completed *********");
+installLog('Installation has completed *********');

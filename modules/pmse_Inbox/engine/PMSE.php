@@ -23,11 +23,11 @@ class PMSE
     {
         $this->version = '1.0.0';
         $this->moduleName = 'SugarBPM';
-        $this->modulePath['pmse_Inbox'] = "modules/pmse_Inbox";
-        $this->modulePath['pmse_Project'] = "modules/pmse_Project";
-        $this->modulePath['pmse_Emails_Templates'] = "modules/pmse_Emails_Templates";
-        $this->modulePath['pmse_Business_Rules'] = "modules/pmse_Business_Rules";
-        $this->modulePath['pmse_Config'] = "modules/pmse_Config";
+        $this->modulePath['pmse_Inbox'] = 'modules/pmse_Inbox';
+        $this->modulePath['pmse_Project'] = 'modules/pmse_Project';
+        $this->modulePath['pmse_Emails_Templates'] = 'modules/pmse_Emails_Templates';
+        $this->modulePath['pmse_Business_Rules'] = 'modules/pmse_Business_Rules';
+        $this->modulePath['pmse_Config'] = 'modules/pmse_Config';
         $this->moduleLanguage = 'pmse_Project';
         $this->moduleLanguageBwc = 'pmse_Config';
     }
@@ -80,7 +80,7 @@ class PMSE
 
         //if ($flavor === false) {
         if (!((int)$version[0] == 6 && (int)$version[1] >= 7)) {
-            require_once "include/utils.php";
+            require_once 'include/utils.php';
             //if the $check_path exists in custom, $path will be returned as "custom/{$check_path}", otherwise $check_path will be returned
             $path = get_custom_file_if_exists($file);
             if ($file != $path) {
@@ -88,12 +88,11 @@ class PMSE
             } else {
                 return false;
             }
-//            return file_exists($file);
+            //            return file_exists($file);
         } else {
             //For Sugar On-Demand
             return file_exists($file);
         }
-
     }
 
     /**
@@ -120,8 +119,8 @@ class PMSE
      */
     public function clearLogFile($file)
     {
-        if ($file == "./PMSE.log") {
-            file_put_contents($file, "");
+        if ($file == './PMSE.log') {
+            file_put_contents($file, '');
         }
     }
 }

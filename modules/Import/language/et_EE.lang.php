@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Imporditud faili on edukalt loetud',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Imporditud kirje osaleb protsessis ja seda ei saa redigeerida, sest osad väljad on protsessi poolt redigeerimiseks lukustatud.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'leiti mitu tõrget. Vaadake tõrgete vahekaarti ridade puhul, mida ei imporditud tõrke tõttu',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Kui kasutajat pole olemas, kasutage praegust kasutajat',
     'LBL_SHOW_HIDDEN' => 'Näita välju, mis pole tavaliselt imporditavad',
     'LBL_UPDATE_RECORDS' => 'Värskenda olemasolevaid kirjeid nende importimise asemel (tagasi võtmine puudub)',
-    'LBL_TEST'=> 'Katseta importi (ära salvesta või muuda andmeid)',
+    'LBL_TEST' => 'Katseta importi (ära salvesta või muuda andmeid)',
     'LBL_TRUNCATE_TABLE' => 'Tühjenda tabel enne importi (kustuta kõik kirjed)',
     'LBL_RELATED_ACCOUNTS' => 'Ära loo seotud kontosid',
     'LBL_NO_DATECHECK' => 'Jäta kuupäeva kontroll vahele (kiirem, kuid ebaõnnestub, kui mõni kuupäev on vale)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Kehtetu täisarvuline väärtus',
     'LBL_ERROR_INVALID_NUM' => 'Sobimatu arvväärtus',
     'LBL_ERROR_INVALID_TIME' => 'Sobimatu aeg',
-    'LBL_ERROR_INVALID_EMAIL'=>'Kehtetu meiliaadress',
-    'LBL_ERROR_INVALID_BOOL'=>'Sobimatu väärtus (peaks olema 1 või 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Sobimatu kuupäeva string',
-    'LBL_ERROR_INVALID_USER'=>'Sobimatu kasutajanimi või ID',
+    'LBL_ERROR_INVALID_EMAIL' => 'Kehtetu meiliaadress',
+    'LBL_ERROR_INVALID_BOOL' => 'Sobimatu väärtus (peaks olema 1 või 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Sobimatu kuupäeva string',
+    'LBL_ERROR_INVALID_USER' => 'Sobimatu kasutajanimi või ID',
     'LBL_ERROR_INVALID_TEAM' => 'Sobimatu meeskonna nimi või ID',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Sobimatu kontonimi või ID',
     'LBL_ERROR_INVALID_RELATE' => 'Sobimatu seostatud väli',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => ' pole olemas või see pole kirjutatav',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Faili üleslaadimine ebaõnnestus. Säte upload_max_filesize teie php.ini failis võib olla seadistatud väiksele arvule',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Fail on liiga suur. Max:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'baiti. Muutke sätet $sugar_config[&#39;upload_maxsize&#39;] failis config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Baiti. Muuda $sugar_config[&#39;upload_maxsize&#39;] kohas config.php',
     'LBL_MODULE_NAME' => 'Import',
     'LBL_MODULE_NAME_SINGULAR' => 'Import',
     'LBL_TRY_AGAIN' => 'Proovi uuesti',
     'LBL_START_OVER' => 'Alusta uuesti',
     'LBL_ERROR' => 'Tõrge:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Imporditud fail sisaldab {0} rida. Optimaalne ridade arv on {1}. Suurem ridade arv võib importimist aeglustada. Importimise jätkamiseks klõpsake nuppu OK. Imporditud faili kontrollimiseks ja uuesti üleslaadimiseks klõpsake nuppu Tühista.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Te ei saa importida süsteemi administraatorist kasutajat',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Te ei saa importida süsteemi administraatorist kasutajat',
     'ERR_REPORT_LOOP' => 'Süsteem tuvastas aruandlustsükli. Kasutaja ei saa endale aru anda ja ükski nende juhatajatest ei saa neile aru anda.',
     'ERR_MULTIPLE' => 'Mitmel veerul on sama välja nimi.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Puuduvad nõutavad väljad:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Teie imporditud failis ei tuvastatud ridu. Veenduge, et teie failis poleks tühje ridu ja proovige uuesti.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Imporditud faili on juba töödeldud või seda ei eksisteeri',
     'LBL_SUCCESS' => 'Õnnestus:',
-	'LBL_FAILURE' => 'Import ebaõnnestus:',
+    'LBL_FAILURE' => 'Import ebaõnnestus:',
     'LBL_SUCCESSFULLY' => 'Edukalt imporditud',
     'LBL_LAST_IMPORT_UNDONE' => 'Import võeti tagasi.',
     'LBL_NO_IMPORT_TO_UNDO' => 'Tagasi võetav import puudus.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Impordi uuesti',
     'LBL_FINISHED' => 'Lõpetatud',
     'LBL_UNDO_LAST_IMPORT' => 'Tühista viimane import',
-    'LBL_LAST_IMPORTED'=>'Loodud',
+    'LBL_LAST_IMPORTED' => 'Loodud',
     'ERR_MULTIPLE_PARENTS' => 'Saae määrata ainult ühe vanema ID',
     'LBL_DUPLICATES' => 'Leiti duplikaadid',
     'LNK_DUPLICATE_LIST' => 'Duplikaatide allalaadimiste loend',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Peida märkused',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Näita veergude eelvaadet',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Peida veergude eelvaade',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Kontrollige duplikaate operaatoriga:',
     'LBL_SAVE_MAPPING_AS' => 'Impordisätete salvestamiseks esitage salvestatud sätete nimi:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Üksisjutumärk (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Kaksisjutumärk (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Uute kirjete määramiseks muudele meeskondadelele kui enda vaikemeeskonnale/-meeskondadele kasutage teiste meeskondade valimiseks veergu Vaikeväärtus.',
     'LBL_SIGN_IN_HELP' => 'Sellele teenuse lubamiseks logige sisse oma kasutajasätete lehe vahekaardil Väliskontod.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Püütakse käsitleda oa e-posti aadresse, mis seda ei toeta.",
-);
+];

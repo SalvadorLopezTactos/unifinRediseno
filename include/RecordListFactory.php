@@ -55,7 +55,7 @@ class RecordListFactory
     public static function saveRecordList($recordList, $module, $id = null, $user = null)
     {
         global $dictionary;
-        
+
         $db = DBManagerFactory::getInstance();
 
         if ($user == null) {
@@ -69,23 +69,23 @@ class RecordListFactory
             $db->insertParams(
                 'record_list',
                 $dictionary['RecordList']['fields'],
-                array(
+                [
                     'id' => $id,
                     'assigned_user_id' => $user->id,
                     'module_name' => $module,
                     'records' => json_encode($recordList),
                     'date_modified' => $currentTime,
-                )
+                ]
             );
         } else {
             $db->updateParams(
                 'record_list',
                 $dictionary['RecordList']['fields'],
-                array(
+                [
                     'records' => json_encode($recordList),
                     'date_modified' => $currentTime,
-                ),
-                array('id' => $id)
+                ],
+                ['id' => $id]
             );
         }
 

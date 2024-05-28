@@ -174,6 +174,11 @@
             return;
         }
 
+        if (this.paginationAction === this.paginationActions.filter && this.collection.page !== this.page &&
+            this.collection.page === 1) {
+            return;
+        }
+
         const limit = parseInt(this.collection.getOption('limit'));
         if (this.limit !== limit) {
             // Clear cache if records limit was changed
@@ -356,6 +361,7 @@
         if (this.restoreFromCache()) {
             options.success(false);
         } else {
+            this.context.trigger('list:paginate:start');
             this.collection.paginate(options);
         }
     },
@@ -531,10 +537,19 @@
 
         if ((collectionDataFetched && isLastOffset) || isPortalThemeConfig) {
             this.pagesCount = currentPage;
-            if (this.layout.type !== 'list' && currentPage === 1) {
+            if (this.getHiddenState() && currentPage === 1) {
                 this.pagesCount = -1;
             }
         }
+    },
+
+    /**
+     * Return true if pagination should be hidden for Pages Count === 1
+     *
+     * @return {boolean}
+     */
+    getHiddenState: function() {
+        return this.layout.type !== 'list';
     },
 
     /**

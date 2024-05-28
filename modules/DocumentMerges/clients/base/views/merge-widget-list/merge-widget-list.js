@@ -200,7 +200,9 @@
                     if (record.get('status') === 'success') {
                         clearInterval(timer);
                         if (!this._documentGeneratedEventTriggered) {
-                            app.events.trigger('docmerge:document:generated', record.get('generated_document_id'));
+                            app.events.trigger('docmerge:document:generated', {
+                                id: record.get('generated_document_id')
+                            });
                             this._documentGeneratedEventTriggered = true;
                         }
 

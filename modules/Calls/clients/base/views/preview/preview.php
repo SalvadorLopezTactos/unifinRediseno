@@ -10,148 +10,148 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Calls']['base']['view']['preview'] = array(
-    'templateMeta' => array(
+$viewdefs['Calls']['base']['view']['preview'] = [
+    'templateMeta' => [
         'maxColumns' => 1,
-    ),
-    'panels' => array(
-        array(
+    ],
+    'panels' => [
+        [
             'name' => 'panel_header',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'picture',
                     'type' => 'avatar',
                     'size' => 'large',
                     'dismiss_label' => true,
                     'readonly' => true,
-                ),
+                ],
                 'name',
-                array(
+                [
                     'name' => 'status',
                     'type' => 'event-status',
                     'enum_width' => 'auto',
                     'dropdown_width' => 'auto',
                     'dropdown_class' => 'select2-menu-only',
                     'container_class' => 'select2-menu-only',
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'panel_body',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'duration',
                     'type' => 'duration',
                     'label' => 'LBL_START_AND_END_DATE_DETAIL_VIEW',
                     'dismiss_label' => true,
                     'inline' => false,
                     'show_child_labels' => true,
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'date_start',
-                            'time' => array(
+                            'time' => [
                                 'step' => 15,
-                            ),
+                            ],
                             'readonly' => false,
-                        ),
-                        array(
+                        ],
+                        [
                             'type' => 'label',
                             'default_value' => 'LBL_START_AND_END_DATE_TO',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'date_end',
-                            'time' => array(
+                            'time' => [
                                 'step' => 15,
-                                'duration' => array(
-                                    'relative_to' => 'date_start'
-                                )
-                            ),
+                                'duration' => [
+                                    'relative_to' => 'date_start',
+                                ],
+                            ],
                             'readonly' => false,
-                        ),
-                    ),
+                        ],
+                    ],
                     'span' => 9,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'duration_hours',
                         'duration_minutes',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'repeat_type',
                     'span' => 3,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'repeat_parent_id',
-                    ),
+                    ],
                     'readonly' => true,
-                ),
+                ],
                 'direction',
-                array(
+                [
                     'name' => 'description',
                     'span' => 12,
                     'rows' => 3,
-                ),
+                ],
                 [
                     'name' => 'transcript',
                     'span' => 12,
                 ],
                 'parent_name',
-                array(
+                [
                     'name' => 'invitees',
                     'type' => 'participants',
                     'label' => 'LBL_INVITEES',
                     'span' => 12,
-                    'fields' => array('name', 'accept_status_calls', 'picture'),
-                ),
+                    'fields' => ['name', 'accept_status_calls', 'picture'],
+                ],
                 'assigned_user_name',
                 'team_name',
-                array(
+                [
                     'name' => 'tag',
                     'span' => 12,
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'panel_hidden',
             'hide' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'date_entered_by',
                     'readonly' => true,
                     'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_ENTERED',
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'date_entered',
-                        ),
-                        array(
+                        ],
+                        [
                             'type' => 'label',
-                            'default_value' => 'LBL_BY'
-                        ),
-                        array(
+                            'default_value' => 'LBL_BY',
+                        ],
+                        [
                             'name' => 'created_by_name',
-                        ),
-                    ),
-                ),
-                array(
+                        ],
+                    ],
+                ],
+                [
                     'name' => 'date_modified_by',
                     'readonly' => true,
                     'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_MODIFIED',
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'date_modified',
-                        ),
-                        array(
+                        ],
+                        [
                             'type' => 'label',
-                            'default_value' => 'LBL_BY'
-                        ),
-                        array(
+                            'default_value' => 'LBL_BY',
+                        ],
+                        [
                             'name' => 'modified_by_name',
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

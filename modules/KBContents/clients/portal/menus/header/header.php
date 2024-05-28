@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['KBContents']['portal']['menu']['header'] = array(
-    array(
+$viewdefs['KBContents']['portal']['menu']['header'] = [
+    [
         'route' => '#KBContents',
         'label' => 'LNK_LIST_ARTICLES',
         'acl_action' => 'list',
         'acl_module' => 'KBContents',
         'icon' => 'sicon-list-view',
-    ),
-);
+    ],
+];

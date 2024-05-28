@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Psr\SimpleCache\CacheInterface;
 
@@ -29,25 +30,25 @@ class ReportVisibility extends SugarVisibility
     public function addVisibilityWhere(&$query)
     {
         global $current_user;
-        if (!empty($current_user) && $current_user->isAdminForModule("Reports")) {
+        if (!empty($current_user) && $current_user->isAdminForModule('Reports')) {
             return $query;
         }
 
         $table_alias = $this->getOption('table_alias');
-        if(empty( $table_alias)) {
+        if (empty($table_alias)) {
             $table_alias = $this->bean->table_name;
         }
 
         $disallowed_modules = $this->getDisallowedModules();
 
-        if($disallowed_modules) {
+        if ($disallowed_modules) {
             $db = DBManagerFactory::getInstance();
-            $literals = array();
+            $literals = [];
             foreach ($disallowed_modules as $module) {
                 $literals[] = $db->quoted($module);
             }
-            $where_clause = $table_alias . '.module NOT IN (' . implode(', ', $literals) .')';
-            if(!empty($query)) {
+            $where_clause = $table_alias . '.module NOT IN (' . implode(', ', $literals) . ')';
+            if (!empty($query)) {
                 $query .= " AND $where_clause";
             } else {
                 $query = $where_clause;
@@ -63,12 +64,12 @@ class ReportVisibility extends SugarVisibility
     public function getDisallowedModules()
     {
         global $current_user, $report_modules;
-        if(!is_null($this->disallowed_modules)) {
+        if (!is_null($this->disallowed_modules)) {
             return $this->disallowed_modules;
         }
-        if(empty($GLOBALS['report_modules'])) {
+        if (empty($GLOBALS['report_modules'])) {
             require_once 'modules/Reports/config.php';
-            if(empty($GLOBALS['report_modules'])) {
+            if (empty($GLOBALS['report_modules'])) {
                 // this shouldn't happen but if it does, no modules for you
                 return array_keys($GLOBALS['beanList']);
             }
@@ -77,10 +78,10 @@ class ReportVisibility extends SugarVisibility
         $userCacheKey = $current_user->id . self::DISALLOWED_MODULES_CACHE_SUFFIX;
         $this->disallowed_modules = $cache->get($userCacheKey, null);
         if ($this->disallowed_modules === null) {
-            $this->disallowed_modules = array();
+            $this->disallowed_modules = [];
             foreach ($report_modules as $module => $name) {
                 $seed = BeanFactory::newBean($module);
-                if (empty($seed) || !$seed->ACLAccess("view")) {
+                if (empty($seed) || !$seed->ACLAccess('view')) {
                     $this->disallowed_modules[] = $module;
                 }
             }
@@ -89,10 +90,11 @@ class ReportVisibility extends SugarVisibility
         return $this->disallowed_modules;
     }
 
-    public function addVisibilityWhereQuery(SugarQuery $sugarQuery, $options = array()) {
+    public function addVisibilityWhereQuery(SugarQuery $sugarQuery, $options = [])
+    {
         $where = null;
         $this->addVisibilityWhere($where);
-        if(!empty($where)) {
+        if (!empty($where)) {
             $sugarQuery->where()->addRaw($where);
         }
 

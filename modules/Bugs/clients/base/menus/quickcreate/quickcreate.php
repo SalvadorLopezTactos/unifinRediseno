@@ -11,8 +11,8 @@
  */
 
 $module_name = 'Bugs';
-$viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
+$viewdefs[$module_name]['base']['menu']['quickcreate'] = [
     'layout' => 'create',
     'label' => 'LNK_NEW_BUG',
     'visible' => false,
-);
+];

@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'in corso',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Messaggi Focus Drawer',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Dashboard record messaggi',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Sequenza temporale messaggi',
 ];

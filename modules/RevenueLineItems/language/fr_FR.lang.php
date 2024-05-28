@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Tableau de bord de la liste de lignes de revenu',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Tableau de bord de l&#39;enregistrement de lignes de revenu',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Types de produit',
     'LBL_ASSIGNED_TO_NAME' => 'Assigné à :',
     'LBL_ASSIGNED_TO' => 'Assigné à (ID)',
-    'LBL_ASSIGNED_TO_ID'=>'Assigné à (ID)',
+    'LBL_ASSIGNED_TO_ID' => 'Assigné à (ID)',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Assigné à',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Assigné à (ID)',
     'LBL_CAMPAIGN_ID' => 'Campagne (ID)',
@@ -217,4 +217,5 @@ Pour créer un enregistrement {{module_name}}, les étapes suivantes sont néces
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Afficher le top 10 des Lignes de revenu dans un graphique à bulles.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Mes Lignes de revenu',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Les Lignes de revenu de mon équipe",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie de ligne de revenu',
+];

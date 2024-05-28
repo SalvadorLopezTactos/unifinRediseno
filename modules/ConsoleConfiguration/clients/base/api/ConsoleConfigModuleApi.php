@@ -58,10 +58,10 @@ class ConsoleConfigModuleApi extends ConfigModuleApi
     /**
      * Save function for the config settings.
      *
-     * @throws SugarApiExceptionNotAuthorized
      * @param ServiceBase $api
      * @param array $args
      * @return array
+     * @throws SugarApiExceptionNotAuthorized
      */
     public function configSave(ServiceBase $api, array $args)
     {
@@ -94,13 +94,13 @@ class ConsoleConfigModuleApi extends ConfigModuleApi
      * @param string $module
      * @return bool
      */
-    protected function isValidModule(string $module) : bool
+    protected function isValidModule(string $module): bool
     {
         if (empty($this->validator)) {
             $this->buildModuleNameValidator();
         }
         $errors = $this->validator->validate($module, $this->moduleNameConstraints);
-        return count($errors) == 0;
+        return safeCount($errors) == 0;
     }
 
     /**
@@ -132,7 +132,7 @@ class ConsoleConfigModuleApi extends ConfigModuleApi
      * @param string $viewVariable
      * @return boolean
      */
-    protected function saveToFile($filename, $defs, $module, $viewVariable = 'viewdefs') : bool
+    protected function saveToFile($filename, $defs, $module, $viewVariable = 'viewdefs'): bool
     {
         if (file_exists($filename)) {
             $filename = FileLoader::validateFilePath($filename);
@@ -168,7 +168,7 @@ class ConsoleConfigModuleApi extends ConfigModuleApi
             foreach ($labels as $label) {
                 if ($mod && !empty($label['label']) && !empty($label['labelValue'])) {
                     // ParserLabel expects this format
-                    $labelsToSave["label_" . $label['label']] = $label['labelValue'];
+                    $labelsToSave['label_' . $label['label']] = $label['labelValue'];
                 }
             }
             $parser = new ParserLabel($mod);

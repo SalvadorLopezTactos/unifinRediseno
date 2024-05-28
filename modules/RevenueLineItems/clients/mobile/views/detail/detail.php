@@ -15,16 +15,16 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-$viewdefs['RevenueLineItems']['mobile']['view']['detail'] = array(
-    'templateMeta' => array(
+$viewdefs['RevenueLineItems']['mobile']['view']['detail'] = [
+    'templateMeta' => [
         'maxColumns' => '1',
-        'widths' => array(
-            array('label' => '10', 'field' => '30'),
-        ),
-    ),
-    'panels' => array(
-        array(
-            'fields' => array(
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        [
+            'fields' => [
                 'name',
                 'opportunity_name',
                 'account_name',
@@ -34,7 +34,7 @@ $viewdefs['RevenueLineItems']['mobile']['view']['detail'] = array(
                 'tag',
                 'assigned_user_name',
                 'team_name',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

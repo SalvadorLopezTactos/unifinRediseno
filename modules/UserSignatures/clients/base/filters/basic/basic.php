@@ -9,16 +9,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['UserSignatures']['base']['filter']['basic'] = array(
-    'quicksearch_field' => array('name'),
+$viewdefs['UserSignatures']['base']['filter']['basic'] = [
+    'quicksearch_field' => ['name'],
     'quicksearch_priority' => 1,
     'quicksearch_split_terms' => false,
-    'filters' => array(
-        array(
+    'filters' => [
+        [
             'id' => 'all_records',
             'name' => 'LBL_LISTVIEW_FILTER_ALL',
-            'filter_definition' => array(),
+            'filter_definition' => [],
             'editable' => false,
-        ),
-    ),
-);
+        ],
+    ],
+];

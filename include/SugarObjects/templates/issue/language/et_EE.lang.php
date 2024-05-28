@@ -10,25 +10,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
 
-  'LBL_NAME' =>'Nimi',
-  'LBL_NUMBER' => 'Number:',
-  'LBL_STATUS' => 'Olek:',
-  'LBL_PRIORITY' => 'Tähtsus:',
-  'LBL_DESCRIPTION' => 'Kirjeldus:',
-  'LBL_RESOLUTION' => 'Resolutsioon',
-  'LBL_LAST_MODIFIED' => 'Viimati muudetud',
-  'LBL_ASSIGNED_TO_ID'=>'Määratud kasutajale:',
-  'LBL_ASSIGNED_TO_NAME' => 'Kasutaja:',
-  'LBL_WORK_LOG' => 'Töö logi:',
+    'LBL_NAME' => 'Nimi',
+    'LBL_NUMBER' => 'Number:',
+    'LBL_STATUS' => 'Olek:',
+    'LBL_PRIORITY' => 'Tähtsus:',
+    'LBL_DESCRIPTION' => 'Kirjeldus:',
+    'LBL_RESOLUTION' => 'Resolutsioon',
+    'LBL_LAST_MODIFIED' => 'Viimati muudetud',
+    'LBL_ASSIGNED_TO_ID' => 'Määratud kasutajale:',
+    'LBL_ASSIGNED_TO_NAME' => 'Kasutaja:',
+    'LBL_WORK_LOG' => 'Töö logi:',
     'LBL_FOLLOW_UP' => 'Järeltegevused',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
     'LBL_RESOLVED_DATETIME' => 'Lahendamise kuupäev',
@@ -36,19 +35,19 @@ $mod_strings = array (
     'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Otsuse tegemiseni jäänud tööaeg',
     'LBL_PENDING_PROCESSING' => 'Töötlemine ootel',
     'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Järeltegevuse kuupäev',
-  'LBL_CREATED_BY' => 'Looja:',
-  'LBL_DATE_CREATED' => 'Loomiskuupäev:',
-  'LBL_DATE_ENTERED' => 'Loomiskuupäev:',
-  'LBL_DATE_MODIFIED'=>'Muutmiskuupäev:',
-  'LBL_MODIFIED_BY' => 'Viimati muutnud:',
-  'LBL_ASSIGNED_USER' => 'Määratud kasutaja:',
-  'LBL_ASSIGNED_USER_NAME' => 'Määratud kasutajale',
-  'LBL_TEAM_NAME' =>'Meeskonna nimi:',
-  'LBL_TYPE'=>'Tüüp:',
-  'LBL_SUBJECT' => 'Teema:',
+    'LBL_CREATED_BY' => 'Looja:',
+    'LBL_DATE_CREATED' => 'Loomiskuupäev:',
+    'LBL_DATE_ENTERED' => 'Loomiskuupäev:',
+    'LBL_DATE_MODIFIED' => 'Muutmiskuupäev:',
+    'LBL_MODIFIED_BY' => 'Viimati muutnud:',
+    'LBL_ASSIGNED_USER' => 'Määratud kasutaja:',
+    'LBL_ASSIGNED_USER_NAME' => 'Määratud kasutajale',
+    'LBL_TEAM_NAME' => 'Meeskonna nimi:',
+    'LBL_TYPE' => 'Tüüp:',
+    'LBL_SUBJECT' => 'Teema:',
 
     'LBL_EDIT_BUTTON' => 'Redigeeri',
     'LBL_REMOVE' => 'Eemalda',
 
 
-  );
+];

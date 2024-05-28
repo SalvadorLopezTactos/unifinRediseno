@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'อ่านไฟล์การนำเข้าสำเร็จแล้ว',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'ระเบียนที่นำเข้ามีการใช้งานในกระบวนการ และไม่สามารถแก้ไขได้ เนื่องจากบางฟิลด์ถูกล็อคสำหรับการแก้ไขโดยกระบวนการ',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'เป็นจำนวนข้อผิดพลาดที่พบ ดูแท็บข้อผิดพลาดเพื่อดูแถวที่ไม่ได้นำเข้าเนื่องจากข้อผิดพลาด',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'ถ้าไม่มีผู้ใช้นี้อยู่ ให้ใช้ผู้ใช้ปัจจุบัน',
     'LBL_SHOW_HIDDEN' => 'แสดงฟิลด์ที่ไม่สามารถนำเข้าได้ตามปกติ',
     'LBL_UPDATE_RECORDS' => 'อัปเดตระเบียนที่มีอยู่แทนการนำเข้า (ไม่สามารถยกเลิกได้)',
-    'LBL_TEST'=> 'ทดสอบการนำเข้า (ไม่บันทึกหรือแก้ไขข้อมูล)',
+    'LBL_TEST' => 'ทดสอบการนำเข้า (ไม่บันทึกหรือแก้ไขข้อมูล)',
     'LBL_TRUNCATE_TABLE' => 'ล้างข้อมูลในตารางก่อนนำเข้า (ลบระเบียนทั้งหมด)',
     'LBL_RELATED_ACCOUNTS' => 'ไม่สร้างบัญชีที่เกี่ยวข้อง',
     'LBL_NO_DATECHECK' => 'ข้ามการตรวจสอบวันที่ (เร็วขึ้น แต่จะทำงานล้มเหลวถ้าวันที่ผิดพลาด)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'ค่าจำนวนเต็มไม่ถูกต้อง',
     'LBL_ERROR_INVALID_NUM' => 'ค่าตัวเลขไม่ถูกต้อง',
     'LBL_ERROR_INVALID_TIME' => 'เวลาไม่ถูกต้อง',
-    'LBL_ERROR_INVALID_EMAIL'=>'ที่อยู่อีเมลไม่ถูกต้อง',
-    'LBL_ERROR_INVALID_BOOL'=>'ค่าไม่ถูกต้อง (ควรมีค่าเป็น 1 หรือ 0)',
-    'LBL_ERROR_INVALID_DATE'=>'สตริงวันที่ไม่ถูกต้อง',
-    'LBL_ERROR_INVALID_USER'=>'ชื่อหรือ ID ผู้ใช้ไม่ถูกต้อง',
+    'LBL_ERROR_INVALID_EMAIL' => 'ที่อยู่อีเมลไม่ถูกต้อง',
+    'LBL_ERROR_INVALID_BOOL' => 'ค่าไม่ถูกต้อง (ควรมีค่าเป็น 1 หรือ 0)',
+    'LBL_ERROR_INVALID_DATE' => 'สตริงวันที่ไม่ถูกต้อง',
+    'LBL_ERROR_INVALID_USER' => 'ชื่อหรือ ID ผู้ใช้ไม่ถูกต้อง',
     'LBL_ERROR_INVALID_TEAM' => 'ชื่อหรือ ID ทีมไม่ถูกต้อง',
     'LBL_ERROR_INVALID_ACCOUNT' => 'ชื่อหรือ ID บัญชีไม่ถูกต้อง',
     'LBL_ERROR_INVALID_RELATE' => 'ฟิลด์ความสัมพันธ์ไม่ถูกต้อง',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => ' ไม่มีอยู่หรือไม่สามารถเขียนได้',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'อัปโหลดไฟล์ไม่สำเร็จ อาจเกิดจากการตั้งค่า &#39;upload_max_filesize&#39; ในไฟล์ php.ini ของคุณเป็นค่าที่น้อยเกินไป',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'ไฟล์มีขนาดใหญ่เกินไป ขนาดสูงสุด:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'ไบต์ โปรดแก้ไข $sugar_config[&#39;upload_maxsize&#39;] ใน config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'ไบต์ เปลี่ยน $sugar_config[&#39;upload_maxsize&#39;] ใน config.php',
     'LBL_MODULE_NAME' => 'นำเข้า',
     'LBL_MODULE_NAME_SINGULAR' => 'นำเข้า',
     'LBL_TRY_AGAIN' => 'ลองอีกครั้ง',
     'LBL_START_OVER' => 'เริ่มต้นใหม่',
     'LBL_ERROR' => 'ข้อผิดพลาด:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'ไฟล์การนำเข้ามี {0} แถว จำนวนแถวที่เหมาะสมที่สุดคือ {1} จำนวนแถวที่เพิ่มมากขึ้นจะทำให้กระบวนการนำเข้าช้าลง คลิกที่ตกลงเพื่อดำเนินการนำเข้าต่อ คลิกที่ยกเลิกเพื่อปรับแก้และโหลดไฟล์การนำเข้าอีกครั้ง',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'คุณไม่สามารถนำเข้าผู้ใช้ที่เป็นผู้ดูแลระบบ',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'คุณไม่สามารถนำเข้าผู้ใช้ที่เป็นผู้ดูแลระบบ',
     'ERR_REPORT_LOOP' => 'ระบบตรวจพบการวนซ้ำในการรายงาน ผู้ใช้ไม่สามารถรายงานต่อตนเองได้ หรือผู้จัดการไม่สามารถรายงานต่อตนเองได้',
     'ERR_MULTIPLE' => 'มีการกำหนดคอลัมน์ที่ใช้ชื่อฟิลด์เดียวกันไว้หลายคอลัมน์',
     'ERR_MISSING_REQUIRED_FIELDS' => 'ไม่มีข้อมูลในฟิลด์ที่ต้องระบุ:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'ไม่พบบรรทัดรายการในไฟล์การนำเข้าของคุณ โปรดตรวจสอบว่าไม่มีรายการที่ว่างเปล่าในไฟล์และลองอีกครั้ง',
     'LBL_FILE_ALREADY_BEEN_OR' => 'ไฟล์การนำเข้านี้ได้รับการประมวลผลแล้ว หรือไม่มีอยู่ในระบบ',
     'LBL_SUCCESS' => 'สำเร็จ:',
-	'LBL_FAILURE' => 'การนำเข้าล้มเหลว:',
+    'LBL_FAILURE' => 'การนำเข้าล้มเหลว:',
     'LBL_SUCCESSFULLY' => 'นำเข้าสำเร็จแล้ว',
     'LBL_LAST_IMPORT_UNDONE' => 'ยกเลิกการนำเข้าแล้ว',
     'LBL_NO_IMPORT_TO_UNDO' => 'ไม่มีการนำเข้าที่จะยกเลิก',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'นำเข้าอีกครั้ง',
     'LBL_FINISHED' => 'เสร็จสิ้น',
     'LBL_UNDO_LAST_IMPORT' => 'ยกเลิกการนำเข้า',
-    'LBL_LAST_IMPORTED'=>'สร้างแล้ว',
+    'LBL_LAST_IMPORTED' => 'สร้างแล้ว',
     'ERR_MULTIPLE_PARENTS' => 'คุณสามารถกำหนด ID หลักได้เพียงรายการเดียว',
     'LBL_DUPLICATES' => 'พบข้อมูลซ้ำกัน',
     'LNK_DUPLICATE_LIST' => 'ดาวน์โหลดรายการที่ซ้ำกัน',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'ซ่อนบันทึก',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'แสดงคอลัมน์ตัวอย่าง',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'ซ่อนคอลัมน์ตัวอย่าง',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'ตรวจสอบรายการที่ซ้ํากันโดยใช้โอเปอเรเตอร์:',
     'LBL_SAVE_MAPPING_AS' => 'ในการบันทึกการตั้งค่าการนำเข้า ให้ระบุชื่อสำหรับการตั้งค่าที่บันทึกไว้:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'เครื่องหมายคำพูดเดี่ยว (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'เครื่องหมายคำพูด (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'ในการระบุระเบียนใหม่ให้ทีมอื่นที่ไม่ใช่ทีมเริ่มต้นของคุณ ให้ใช้คอลัมน์ค่าเริ่มต้นเพื่อเลือกทีมอื่น',
     'LBL_SIGN_IN_HELP' => 'ในการเปิดใช้งานบริการนี้ โปรดลงชื่อเข้าใช้ในแท็บบัญชีภายนอกภายในเพจการตั้งค่าผู้ใช้ของคุณ',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "กำลังพยายามจัดการที่อยู่อีเมลในบีนที่ไม่สนับสนุน",
-);
+];

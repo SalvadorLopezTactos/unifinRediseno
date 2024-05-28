@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('autocomplete-highlighters-accentfold', function (Y, NAME) {
 
 /**
@@ -111,4 +104,4 @@ Y.mix(Y.namespace('AutoCompleteHighlighters'), {
 });
 
 
-}, '3.15.0', {"requires": ["array-extras", "highlight-accentfold"]});
+}, '3.18.1', {"requires": ["array-extras", "highlight-accentfold"]});

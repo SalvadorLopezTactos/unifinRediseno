@@ -9,22 +9,22 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['attachments'] = array(
-	'dashlets' => array(
-		array(
+$viewdefs['base']['view']['attachments'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_DASHLET_ATTACHMENTS_NAME',
             'description' => 'LBL_DASHLET_ATTACHMENTS_DESCRIPTION',
-            'config' => array(
+            'config' => [
                 'auto_refresh' => '0',
                 'module' => 'Notes',
                 'link' => 'notes',
-            ),
-            'preview' => array(
+            ],
+            'preview' => [
                 'module' => 'Notes',
                 'link' => 'notes',
-            ),
-            'filter' => array(
-                'module' => array(
+            ],
+            'filter' => [
+                'module' => [
                     'Accounts',
                     'Contacts',
                     'Opportunities',
@@ -33,69 +33,69 @@ $viewdefs['base']['view']['attachments'] = array(
                     'Cases',
                     'RevenueLineItems',
                     'KBContents',
-                ),
+                ],
                 'view' => 'record',
-            ),
-            'fields' => array(
+            ],
+            'fields' => [
                 'name',
                 'date_entered',
                 'filename',
                 'file_mime_type',
                 'assigned_user_id',
                 'assigned_user_name',
-            ),
-        ),
- 	),
-    'custom_toolbar' => array(
-        'buttons' => array(
-            array(
+            ],
+        ],
+    ],
+    'custom_toolbar' => [
+        'buttons' => [
+            [
                 'type' => 'actiondropdown',
                 'icon' => 'sicon-plus',
                 'no_default_action' => true,
-                'buttons' => array(
-                    array(
+                'buttons' => [
+                    [
                         'type' => 'dashletaction',
                         'css_class' => '',
                         'label' => 'LBL_CREATE_RELATED_RECORD',
                         'action' => 'openCreateDrawer',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'css_class' => '',
                         'label' => 'LBL_ASSOC_RELATED_RECORD',
                         'action' => 'openSelectDrawer',
-                    ),
-                ),
-            ),
-            array(
-                'dropdown_buttons' => array(
-                    array(
+                    ],
+                ],
+            ],
+            [
+                'dropdown_buttons' => [
+                    [
                         'type' => 'dashletaction',
                         'action' => 'editClicked',
                         'label' => 'LBL_DASHLET_CONFIG_EDIT_LABEL',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'action' => 'refreshClicked',
                         'label' => 'LBL_DASHLET_REFRESH_LABEL',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'action' => 'toggleClicked',
                         'label' => 'LBL_DASHLET_MINIMIZE',
                         'event' => 'minimize',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'action' => 'removeClicked',
                         'label' => 'LBL_DASHLET_REMOVE_LABEL',
-                    ),
-                )
-            )
-        )
-    ),
-    'rowactions' => array(
-        array(
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'rowactions' => [
+        [
             'type' => 'rowaction',
             'icon' => 'sicon-unlink',
             'css_class' => 'btn btn-mini',
@@ -103,39 +103,39 @@ $viewdefs['base']['view']['attachments'] = array(
             'target' => 'view',
             'tooltip' => 'LBL_UNLINK_BUTTON',
             'acl_action' => 'edit',
-        ),
-    ),
-    'panels' => array(
-        array(
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_body',
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'limit',
                     'label' => 'Display Rows',
                     'type' => 'enum',
-                    'options' => array(
+                    'options' => [
                         5 => 5,
                         10 => 10,
                         15 => 15,
-                        20 => 20
-                    )
-                ),
-                array(
+                        20 => 20,
+                    ],
+                ],
+                [
                     'name' => 'auto_refresh',
                     'label' => 'Auto Refresh',
                     'type' => 'enum',
                     'options' => 'sugar7_dashlet_auto_refresh_options',
-                ),
-            ),
-        ),
-    ),
-	'supportedImageExtensions' => array(
+                ],
+            ],
+        ],
+    ],
+    'supportedImageExtensions' => [
         'image/jpeg' => 'JPG',
         'image/gif' => 'GIF',
         'image/png' => 'PNG',
-	),
-	'defaultType' => 'txt',
-);
+    ],
+    'defaultType' => 'txt',
+];

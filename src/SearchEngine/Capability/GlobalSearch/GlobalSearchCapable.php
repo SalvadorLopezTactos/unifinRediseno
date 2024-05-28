@@ -45,7 +45,7 @@ interface GlobalSearchCapable extends EngineInterface
      * @param array $modules
      * @return GlobalSearchInterface
      */
-    public function from(array $modules = array());
+    public function from(array $modules = []);
 
     /**
      * Set the flag of getting tags

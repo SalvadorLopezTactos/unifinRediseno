@@ -13,7 +13,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FEEDBACK_TEXT_PLACEHOLDER' => 'Popis zpětné vazby',
     'LBL_FEEDBACK_BTN_SUBMIT' => 'Pošlí',
     'LBL_FEEDBACK_SENT' => 'Zpětná vazba odeslána.',
@@ -23,4 +23,4 @@ $mod_strings = array(
     'TPL_FEEDBACK_ASIDE' => 'Shromažďujeme určitá data o použití v době odeslání. {{learnMoreLink}}. Neshromažďujeme kontaktní údaje. V případě chyb nebo jiných problémů vyžadujících odpověď prosím {{contactSupportLink}}.',
     'LBL_FEEDBACK_ASIDE_CLICK_MORE' => 'Další informace se dozvíte po kliknutí zde',
     'LBL_FEEDBACK_ASIDE_CONTACT_SUPPORT' => 'kontaktovat podporu',
-);
+];

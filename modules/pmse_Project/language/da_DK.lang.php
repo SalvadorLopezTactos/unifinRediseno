@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Procesdefinitioner',
-  'LBL_MODULE_TITLE' => 'Procesdefinitioner',
-  'LBL_MODULE_NAME_SINGULAR' => 'Procesdefinition',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Procesdefinitioner',
+    'LBL_MODULE_TITLE' => 'Procesdefinitioner',
+    'LBL_MODULE_NAME_SINGULAR' => 'Procesdefinition',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Procesdefinitioner',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Procesdefinitioner',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Betjeningspanel til optegnelser over processer for definitioner',
-  'LNK_LIST' => 'Vis procesdefinitioner',
-  'LNK_NEW_PMSE_PROJECT' => 'Opret procesdefinition',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Importér procesdefinitioner',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Betjeningspanel til optegnelser over processer for definitioner',
+    'LNK_LIST' => 'Vis procesdefinitioner',
+    'LNK_NEW_PMSE_PROJECT' => 'Opret procesdefinition',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Importér procesdefinitioner',
 
-  'LBL_PRJ_STATUS' => 'Status',
-  'LBL_PRJ_MODULE' => 'Mål modul',
-  'LBL_PRJ_RUN_ORDER' => 'Kørselsrækkefølge',
-  'LBL_PMSE_BUTTON_SAVE' => 'Gem',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Annullér',
-  'LBL_PMSE_BUTTON_YES' => 'Ja',
-  'LBL_PMSE_BUTTON_NO' => 'Nej',
-  'LBL_PMSE_BUTTON_OK' => 'Ok',
+    'LBL_PRJ_STATUS' => 'Status',
+    'LBL_PRJ_MODULE' => 'Mål modul',
+    'LBL_PRJ_RUN_ORDER' => 'Kørselsrækkefølge',
+    'LBL_PMSE_BUTTON_SAVE' => 'Gem',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Annullér',
+    'LBL_PMSE_BUTTON_YES' => 'Ja',
+    'LBL_PMSE_BUTTON_NO' => 'Nej',
+    'LBL_PMSE_BUTTON_OK' => 'Ok',
     'LBL_PMSE_FORM_ERROR' => 'Ret eventuelle fejl, før du fortsætter.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Design',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktivitet',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Handling',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Kundeemne start hændelse',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Salgsmulighed start hændelse' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Salgsmulighed start hændelse',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Dokument start hændelse',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Start hændelse',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Vent hændelse',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Forretningsregel',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Forretningsregel handling',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'E-mail-skabelon',
-);
+];

@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Iegādāto produktu saraksta informācijas panelis',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Iegādāto produktu ierakstu informācijas panelis',
     'LBL_PARENT_PURCHASE' => 'Sākotnējais pirkums',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Iegādāto produktu laika josla',
 ];

@@ -19,7 +19,7 @@ use Sugarcrm\Sugarcrm\Dbal\Connection;
 /**
  * Set up an array of Jobs with the appropriate metadata
  * 'jobName' => array (
- * 		'X' => 'name',
+ *      'X' => 'name',
  * )
  * 'X' should be an increment of 1
  * 'name' should be the EXACT name of your function
@@ -74,68 +74,69 @@ if (hasMapsLicense()) {
  * Job 0 refreshes all job schedulers at midnight
  * DEPRECATED
  */
-function refreshJobs() {
-	return true;
+function refreshJobs()
+{
+    return true;
 }
 
 
 /**
  * Job 1
  */
-function pollMonitoredInboxes() {
+function pollMonitoredInboxes()
+{
 
-    $_bck_up = array('team_id' => $GLOBALS['current_user']->team_id, 'team_set_id' => $GLOBALS['current_user']->team_set_id);
-	$GLOBALS['log']->info('----->Scheduler fired job of type pollMonitoredInboxes()');
-	global $dictionary;
-	global $app_strings;
+    $_bck_up = ['team_id' => $GLOBALS['current_user']->team_id, 'team_set_id' => $GLOBALS['current_user']->team_set_id];
+    $GLOBALS['log']->info('----->Scheduler fired job of type pollMonitoredInboxes()');
+    global $dictionary;
+    global $app_strings;
 
 
+    $ie = BeanFactory::newBean('InboundEmail');
+    $emailUI = new EmailUI();
+    $r = $ie->db->query('SELECT id, name FROM inbound_email WHERE is_personal = 0 AND deleted=0 AND status=\'Active\' AND mailbox_type != \'bounce\'');
+    $GLOBALS['log']->debug('Just got Result from get all Inbounds of Inbound Emails');
 
-	$ie = BeanFactory::newBean('InboundEmail');
-	$emailUI = new EmailUI();
-	$r = $ie->db->query('SELECT id, name FROM inbound_email WHERE is_personal = 0 AND deleted=0 AND status=\'Active\' AND mailbox_type != \'bounce\'');
-	$GLOBALS['log']->debug('Just got Result from get all Inbounds of Inbound Emails');
-
-	while($a = $ie->db->fetchByAssoc($r)) {
-		$GLOBALS['log']->debug('In while loop of Inbound Emails');
-		$ieX = BeanFactory::getBean('InboundEmail', $a['id'], array('disable_row_level_security' => true));
+    while ($a = $ie->db->fetchByAssoc($r)) {
+        $GLOBALS['log']->debug('In while loop of Inbound Emails');
+        $ieX = BeanFactory::getBean('InboundEmail', $a['id'], ['disable_row_level_security' => true]);
         $GLOBALS['current_user']->team_id = $ieX->team_id;
         $GLOBALS['current_user']->team_set_id = $ieX->team_set_id;
-		$mailboxes = $ieX->mailboxarray;
-        $leaveMessagesOnMailServer = $ieX->get_stored_options("leaveMessagesOnMailServer", 0);
-		foreach($mailboxes as $mbox) {
-			$ieX->mailbox = $mbox;
-			$newMsgs = array();
-			$msgNoToUIDL = array();
-			$connectToMailServer = false;
-			if ($ieX->isPop3Protocol()) {
-				$msgNoToUIDL = $ieX->getPop3NewMessagesToDownloadForCron();
-				// get all the keys which are msgnos;
-				$newMsgs = array_keys($msgNoToUIDL);
-			}
+        $mailboxes = $ieX->mailboxarray;
+        $leaveMessagesOnMailServer = $ieX->get_stored_options('leaveMessagesOnMailServer', 0);
+        foreach ($mailboxes as $mbox) {
+            $ieX->mailbox = $mbox;
+            $newMsgs = [];
+            $msgNoToUIDL = [];
+            $connectToMailServer = false;
+            if ($ieX->isPop3Protocol()) {
+                $msgNoToUIDL = $ieX->getPop3NewMessagesToDownloadForCron();
+                // get all the keys which are msgnos;
+                $newMsgs = array_keys($msgNoToUIDL);
+            }
             if ($ieX->connectToImapServer() == 'true') {
-				$connectToMailServer = true;
-			} // if
+                $connectToMailServer = true;
+            } // if
 
-			$GLOBALS['log']->debug('Trying to connect to mailserver for [ '.$a['name'].' ]');
-			if($connectToMailServer) {
-				$GLOBALS['log']->debug('Connected to mailserver');
-				if (!$ieX->isPop3Protocol()) {
+            $GLOBALS['log']->debug('Trying to connect to mailserver for [ ' . $a['name'] . ' ]');
+            if ($connectToMailServer) {
+                $GLOBALS['log']->debug('Connected to mailserver');
+                if (!$ieX->isPop3Protocol()) {
                     $ieX->conn->selectMailbox($mbox);
                     $newMsgs = $ieX->getNewIds();
-				}
-				if(is_array($newMsgs)) {
-					$current = 1;
-					$total = count($newMsgs);
-					$sugarFolder = new SugarFolder();
-					$groupFolderId = $ieX->groupfolder_id;
-					$isGroupFolderExists = false;
-					$users = array();
-					if ($groupFolderId != null && $groupFolderId != "") {
-						$sugarFolder->retrieve($groupFolderId);
-						$isGroupFolderExists = true;
-						$_REQUEST['team_id'] = $sugarFolder->team_id;
-						$_REQUEST['team_set_id'] = $sugarFolder->team_set_id;
+                }
+                if (is_array($newMsgs)) {
+                    $current = 1;
+                    $total = safeCount($newMsgs);
+                    $sugarFolder = new SugarFolder();
+                    $groupFolderId = $ieX->groupfolder_id;
+                    $isGroupFolderExists = false;
+                    $users = [];
+                    if ($groupFolderId != null && $groupFolderId != '') {
+                        $sugarFolder->retrieve($groupFolderId);
+                        $isGroupFolderExists = true;
+                        $_REQUEST['team_id'] = $sugarFolder->team_id;
+                        $_REQUEST['team_set_id'] = $sugarFolder->team_set_id;
                         $_REQUEST['acl_team_set_id'] = $sugarFolder->acl_team_set_id;
                     } // if
                     $messagesToDelete = [];
@@ -175,8 +176,8 @@ function pollMonitoredInboxes() {
                                         $messagesToDelete[] = $uid;
                                     }
                                     if ($ieX->isMailBoxTypeCreateCase()) {
-                                        $userId = "";
-                                        if ($distributionMethod == 'roundRobin') {
+                                        $userId = '';
+                                        if ($distributionMethod === 'roundRobin') {
                                             if (sizeof($users) == 1) {
                                                 $userId = $users[0];
                                                 $lastRobin = $users[0];
@@ -191,7 +192,7 @@ function pollMonitoredInboxes() {
                                                     $lastRobin = $users[0];
                                                 }
                                             } // else
-                                        } else {
+                                        } elseif ($distributionMethod === 'leastBusy') {
                                             if (sizeof($users) == 1) {
                                                 foreach ($users as $k => $value) {
                                                     $userId = $value;
@@ -204,7 +205,7 @@ function pollMonitoredInboxes() {
                                                 $counts[$leastBusy] = $counts[$leastBusy] + 1;
                                             }
                                         } // else
-                                        $GLOBALS['log']->debug('userId [ '.$userId.' ]');
+                                        $GLOBALS['log']->debug('userId [ ' . $userId . ' ]');
                                         $ieX->handleCreateCase($ieX->email, $userId);
                                     } // if
                                     if (!$leaveMessagesOnMailServer) {
@@ -221,7 +222,7 @@ function pollMonitoredInboxes() {
                                     $email = BeanFactory::newBean('Emails');
                                     $email->name = $ieX->conn->getSubject($uid);
                                     $email->from_addr = implode(',', $ieX->conn->getFromAddresses($uid));
-                                    $email->reply_to_email  = implode(',', $ieX->conn->getReplyToAddresses($uid));
+                                    $email->reply_to_email = implode(',', $ieX->conn->getReplyToAddresses($uid));
                                     if (!empty($email->reply_to_email)) {
                                         $contactAddr = $email->reply_to_email;
                                     } else {
@@ -230,7 +231,7 @@ function pollMonitoredInboxes() {
                                     $mailBoxType = $ieX->mailbox_type;
                                     if (($mailBoxType == 'support') || ($mailBoxType == 'pick')) {
                                         $c = BeanFactory::newBean('Cases');
-                                        $GLOBALS['log']->debug('looking for a case for '.$email->name);
+                                        $GLOBALS['log']->debug('looking for a case for ' . $email->name);
                                         if ($ieX->getCaseIdFromCaseNumber($email->name, $c)) {
                                             $ieX->importEmailFromUid($uid);
                                         } else {
@@ -247,76 +248,76 @@ function pollMonitoredInboxes() {
                                 $e->getMessage()
                             );
                         }
-                        $GLOBALS['log']->debug('***** On message [ '.$current.' of '.$total.' ] *****');
+                        $GLOBALS['log']->debug('***** On message [ ' . $current . ' of ' . $total . ' ] *****');
                         $current++;
-					} // foreach
-					// update Inbound Account with last robin
-					if ($ieX->isMailBoxTypeCreateCase() && $distributionMethod == 'roundRobin') {
-						$emailUI->setLastRobin($ieX, $lastRobin);
-					} // if
-
-				} // if
-			} else {
-				$GLOBALS['log']->fatal("SCHEDULERS: could not get an IMAP connection resource for ID [ {$a['id']} ]. Skipping mailbox [ {$a['name']} ].");
-				// cn: bug 9171 - continue while
-			} // else
-		} // foreach
+                    } // foreach
+                    // update Inbound Account with last robin
+                    if ($ieX->isMailBoxTypeCreateCase() && $distributionMethod == 'roundRobin') {
+                        $emailUI->setLastRobin($ieX, $lastRobin);
+                    } // if
+                } // if
+            } else {
+                $GLOBALS['log']->fatal("SCHEDULERS: could not get an IMAP connection resource for ID [ {$a['id']} ]. Skipping mailbox [ {$a['name']} ].");
+                // cn: bug 9171 - continue while
+            } // else
+        } // foreach
         if ($ieX->conn && method_exists($ieX->conn, 'closeConnection')) {
             $ieX->conn->closeConnection();
         }
-	} // while
+    } // while
     $GLOBALS['current_user']->team_id = $_bck_up['team_id'];
     $GLOBALS['current_user']->team_set_id = $_bck_up['team_set_id'];
-	return true;
+    return true;
 }
 
 /**
  * Job 2
  */
-function runMassEmailCampaign() {
-	if (!class_exists('LoggerManager')){
-
-	}
+function runMassEmailCampaign()
+{
+    if (!class_exists('LoggerManager')) {
+    }
     $GLOBALS['log'] = LoggerManager::getLogger();
-	$GLOBALS['log']->debug('Called:runMassEmailCampaign');
+    $GLOBALS['log']->debug('Called:runMassEmailCampaign');
 
-	if (!class_exists('DBManagerFactory')){
-		require('include/database/DBManagerFactory.php');
-	}
+    if (!class_exists('DBManagerFactory')) {
+        require 'include/database/DBManagerFactory.php';
+    }
 
-	global $beanList;
-	global $beanFiles;
-	require("config.php");
-	require('include/modules.php');
-	if(!class_exists('AclController')) {
-		require('modules/ACL/ACLController.php');
-	}
+    global $beanList;
+    global $beanFiles;
+    require 'config.php';
+    require 'include/modules.php';
+    if (!class_exists('AclController')) {
+        require 'modules/ACL/ACLController.php';
+    }
 
-	require('modules/EmailMan/EmailManDelivery.php');
-	return true;
+    require 'modules/EmailMan/EmailManDelivery.php';
+    return true;
 }
 
 /**
  *  Job 3
  */
-function pruneDatabase() {
+function pruneDatabase()
+{
     $pruneBatchSize = SugarConfig::getInstance()->get('prune_job_batch_size', 500);
-	$GLOBALS['log']->info('----->Scheduler fired job of type pruneDatabase()');
+    $GLOBALS['log']->info('----->Scheduler fired job of type pruneDatabase()');
 
-	$db = DBManagerFactory::getInstance();
-	$tables = $db->getTablesArray();
+    $db = DBManagerFactory::getInstance();
+    $tables = $db->getTablesArray();
     $conn = DBManagerFactory::getInstance()->getConnection();
 
-	if(!empty($tables)) {
+    if (!empty($tables)) {
         foreach ($tables as $table) {
-			// find tables with deleted=1
-			$columns = $db->get_columns($table);
-			// no deleted - won't delete
+            // find tables with deleted=1
+            $columns = $db->get_columns($table);
+            // no deleted - won't delete
             if (empty($columns['deleted'])) {
                 continue;
             }
             if (in_array($table . '_cstm', $tables)) {
-			    $custom_columns = $db->get_columns($table.'_cstm');
+                $custom_columns = $db->get_columns($table . '_cstm');
                 if (!empty($custom_columns['id_c'])) {
                     while (true) {
                         $ids = $conn->createQueryBuilder()
@@ -326,7 +327,7 @@ function pruneDatabase() {
                             ->setMaxResults($pruneBatchSize)
                             ->execute()
                             ->fetchFirstColumn();
-                        if (!is_countable($ids) || count($ids) === 0) {
+                        if (safeCount($ids) === 0) {
                             break;
                         }
                         if (!$conn->isAutoCommit()) {
@@ -353,11 +354,11 @@ function pruneDatabase() {
                 $db->commit();
             }
             $db->optimizeTable($table);
-		} // foreach() tables
+        } // foreach() tables
 
-		return true;
-	}
-	return false;
+        return true;
+    }
+    return false;
 }
 
 
@@ -367,48 +368,49 @@ function pruneDatabase() {
 
 function trimTracker()
 {
+    $tracker_config = null;
     global $sugar_config, $timedate;
-	$GLOBALS['log']->info('----->Scheduler fired job of type trimTracker()');
-	$db = DBManagerFactory::getInstance();
+    $GLOBALS['log']->info('----->Scheduler fired job of type trimTracker()');
+    $db = DBManagerFactory::getInstance();
 
-	$admin = Administration::getSettings('tracker');
-	require('modules/Trackers/config.php');
-	$trackerConfig = $tracker_config;
+    $admin = Administration::getSettings('tracker');
+    require 'modules/Trackers/config.php';
+    $trackerConfig = $tracker_config;
 
-    require_once('include/utils/db_utils.php');
+    require_once 'include/utils/db_utils.php';
     $prune_interval = !empty($admin->settings['tracker_prune_interval']) ? $admin->settings['tracker_prune_interval'] : 30;
-	foreach($trackerConfig as $tableName=>$tableConfig) {
+    foreach ($trackerConfig as $tableName => $tableConfig) {
+        //Skip if table does not exist
+        if (!$db->tableExists($tableName)) {
+            continue;
+        }
 
-		//Skip if table does not exist
-		if(!$db->tableExists($tableName)) {
-		   continue;
-		}
+        $timeStamp = db_convert("'" . $timedate->asDb($timedate->getNow()->get('-' . $prune_interval . ' days')) . "'", 'datetime');
+        if ($tableName == 'tracker_sessions') {
+            $query = "DELETE FROM $tableName WHERE date_end < $timeStamp";
+        } else {
+            $query = "DELETE FROM $tableName WHERE date_modified < $timeStamp";
+        }
 
-	    $timeStamp = db_convert("'". $timedate->asDb($timedate->getNow()->get("-".$prune_interval." days")) ."'" ,"datetime");
-		if($tableName == 'tracker_sessions') {
-		   $query = "DELETE FROM $tableName WHERE date_end < $timeStamp";
-		} else {
-		   $query = "DELETE FROM $tableName WHERE date_modified < $timeStamp";
-		}
-
-	    $GLOBALS['log']->info("----->Scheduler is about to trim the $tableName table by running the query $query");
-		$db->query($query);
+        $GLOBALS['log']->info("----->Scheduler is about to trim the $tableName table by running the query $query");
+        $db->query($query);
         $db->optimizeTable($tableName);
-	} //foreach
+    } //foreach
     return true;
 }
 
 /* Job 5
  *
  */
-function pollMonitoredInboxesForBouncedCampaignEmails() {
-	$GLOBALS['log']->info('----->Scheduler job of type pollMonitoredInboxesForBouncedCampaignEmails()');
+function pollMonitoredInboxesForBouncedCampaignEmails()
+{
+    $GLOBALS['log']->info('----->Scheduler job of type pollMonitoredInboxesForBouncedCampaignEmails()');
 
-	$ie = BeanFactory::newBean('InboundEmail');
-	$r = $ie->db->query('SELECT id FROM inbound_email WHERE deleted=0 AND status=\'Active\' AND mailbox_type=\'bounce\'');
+    $ie = BeanFactory::newBean('InboundEmail');
+    $r = $ie->db->query('SELECT id FROM inbound_email WHERE deleted=0 AND status=\'Active\' AND mailbox_type=\'bounce\'');
 
-	while($a = $ie->db->fetchByAssoc($r)) {
-		$ieX = BeanFactory::getBean('InboundEmail', $a['id'], array('disable_row_level_security' => true));
+    while ($a = $ie->db->fetchByAssoc($r)) {
+        $ieX = BeanFactory::getBean('InboundEmail', $a['id'], ['disable_row_level_security' => true]);
         $ieX->connectToImapServer();
         $GLOBALS['log']->info("Bounced campaign scheduler connected to mail server id: {$a['id']} ");
 
@@ -439,24 +441,26 @@ function pollMonitoredInboxesForBouncedCampaignEmails() {
                 }
             }
         }
-	}
+    }
 
-	return true;
+    return true;
 }
 
 /**
  * Job 6
  */
-function processWorkflow() {
-	include_once('process_workflow.php');
-	return true;
+function processWorkflow()
+{
+    include_once 'process_workflow.php';
+    return true;
 }
 
 /**
  * Job 7
  */
-function processQueue() {
-    include_once('process_queue.php');
+function processQueue()
+{
+    include_once 'process_queue.php';
     return true;
 }
 
@@ -464,14 +468,15 @@ function processQueue() {
 /**
  * Job 9
  */
-function updateTrackerSessions() {
+function updateTrackerSessions()
+{
     global $sugar_config, $timedate;
-	$GLOBALS['log']->info('----->Scheduler fired job of type updateTrackerSessions()');
-	$db = DBManagerFactory::getInstance();
-    require_once('include/utils/db_utils.php');
-	//Update tracker_sessions to set active flag to false
-    $sessionTimeout = $timedate->getNow()->get("-6 hours")->asDb();
-    $dateExpression = db_convert('?', "datetime");
+    $GLOBALS['log']->info('----->Scheduler fired job of type updateTrackerSessions()');
+    $db = DBManagerFactory::getInstance();
+    require_once 'include/utils/db_utils.php';
+    //Update tracker_sessions to set active flag to false
+    $sessionTimeout = $timedate->getNow()->get('-6 hours')->asDb();
+    $dateExpression = db_convert('?', 'datetime');
     $statement = "UPDATE tracker_sessions set active = ? where active = ? and date_end < $dateExpression";
     $params = [0, 1, $sessionTimeout];
     $db->getConnection()
@@ -479,7 +484,7 @@ function updateTrackerSessions() {
             $statement,
             $params
         );
-	return true;
+    return true;
 }
 
 /**
@@ -495,21 +500,22 @@ function sendEmailReminders()
 /**
  * Job 20
  */
-function cleanOldRecordLists() {
+function cleanOldRecordLists()
+{
     global $timedate;
 
-	$GLOBALS['log']->info('----->Scheduler fired job of type cleanOldRecordLists()');
-    $delTime = time()-3600; // Nuke anything an hour old.
+    $GLOBALS['log']->info('----->Scheduler fired job of type cleanOldRecordLists()');
+    $delTime = time() - 3600; // Nuke anything an hour old.
 
-    $hourAgo = $timedate->asDb($timedate->getNow()->modify("-1 hour"));
+    $hourAgo = $timedate->asDb($timedate->getNow()->modify('-1 hour'));
 
     $db = DBManagerFactory::getInstance();
 
-    $query = "DELETE FROM record_list WHERE date_modified < '".$db->quote($hourAgo)."'";
-    $db->query($query,true);
+    $query = "DELETE FROM record_list WHERE date_modified < '" . $db->quote($hourAgo) . "'";
+    $db->query($query, true);
     $db->optimizeTable('record_list');
 
-	return true;
+    return true;
 }
 
 function cleanJobQueue($job)
@@ -517,18 +523,18 @@ function cleanJobQueue($job)
     $td = TimeDate::getInstance();
     // soft delete all jobs that are older than cutoff
     $soft_cutoff = 7;
-    if(isset($GLOBALS['sugar_config']['jobs']['soft_lifetime'])) {
+    if (isset($GLOBALS['sugar_config']['jobs']['soft_lifetime'])) {
         $soft_cutoff = $GLOBALS['sugar_config']['jobs']['soft_lifetime'];
     }
     $soft_cutoff_date = $job->db->quoted($td->getNow()->modify("- $soft_cutoff days")->asDb());
-    $job->db->query("UPDATE {$job->table_name} SET deleted=1 WHERE status='done' AND date_modified < ".$job->db->convert($soft_cutoff_date, 'datetime'));
+    $job->db->query("UPDATE {$job->table_name} SET deleted=1 WHERE status='done' AND date_modified < " . $job->db->convert($soft_cutoff_date, 'datetime'));
     // hard delete all jobs that are older than hard cutoff
     $hard_cutoff = 21;
-    if(isset($GLOBALS['sugar_config']['jobs']['hard_lifetime'])) {
+    if (isset($GLOBALS['sugar_config']['jobs']['hard_lifetime'])) {
         $hard_cutoff = $GLOBALS['sugar_config']['jobs']['hard_lifetime'];
     }
     $hard_cutoff_date = $job->db->quoted($td->getNow()->modify("- $hard_cutoff days")->asDb());
-    $job->db->query("DELETE FROM {$job->table_name} WHERE status='done' AND date_modified < ".$job->db->convert($hard_cutoff_date, 'datetime'));
+    $job->db->query("DELETE FROM {$job->table_name} WHERE status='done' AND date_modified < " . $job->db->convert($hard_cutoff_date, 'datetime'));
     $job->db->optimizeTable($job->table_name);
     return true;
 }
@@ -541,16 +547,16 @@ function updateMomentumCJ($job)
 }
 
 if (SugarAutoLoader::existing('custom/modules/Schedulers/_AddJobsHere.php')) {
-	require('custom/modules/Schedulers/_AddJobsHere.php');
+    require 'custom/modules/Schedulers/_AddJobsHere.php';
 }
 
 $extfile = SugarAutoLoader::loadExtension('schedulers');
-if($extfile) {
+if ($extfile) {
     require $extfile;
 }
 
 $extfile = SugarAutoLoader::loadExtension('app_schedulers');
-if($extfile) {
+if ($extfile) {
     require $extfile;
 }
 
@@ -558,8 +564,8 @@ if($extfile) {
  * Job Watcher for Upgrade from versions below 11.1.0. Manages denormalization jobs, makes them running one by one
  *
  * @param SchedulersJob $watcherJob
- * @throws SugarApiExceptionNotFound
  * @return bool
+ * @throws SugarApiExceptionNotFound
  */
 function upgradeDenormalizationStateForSugar11(SchedulersJob $watcherJob)
 {

@@ -24,7 +24,7 @@
  *     'buttons' => list of button htmls, such as ( html_element1, html_element2, ..., html_element_n),
  *     'id' => id property for ul element
  *     'class' => class property for ul element
- * 	   'flat' => controls the display of the menu as a dropdown or flat buttons (if the value is assigned, it will be not affected by enable_action_menu setting.)
+ *     'flat' => controls the display of the menu as a dropdown or flat buttons (if the value is assigned, it will be not affected by enable_action_menu setting.)
  * @param $smarty
  *
  * @return string - compatible sugarActionMenu structure, such as
@@ -93,87 +93,86 @@ function smarty_function_sugar_action_menu($params, &$smarty)
 {
     global $sugar_config;
 
-    if( !empty($params['params']) ) {
+    if (!empty($params['params'])) {
         $addition_params = $params['params'];
         unset($params['params']);
         $params = array_merge_recursive($params, $addition_params);
     }
     $flat = $params['flat'] ?? (isset($sugar_config['enable_action_menu']) ? !$sugar_config['enable_action_menu'] : false);
     //if buttons have not implemented, it returns empty string;
-    if(empty($params['buttons']))
+    if (empty($params['buttons'])) {
         return '';
+    }
 
-    if(is_array($params['buttons']) && !$flat) {
-
-        $menus = array(
+    if (is_array($params['buttons']) && !$flat) {
+        $menus = [
             'html' => array_shift($params['buttons']),
-            'items' => array()
-        );
+            'items' => [],
+        ];
 
-        foreach($params['buttons'] as $item) {
-            if(is_array($item)) {
-                $sub = array();
+        foreach ($params['buttons'] as $item) {
+            if (is_array($item)) {
+                $sub = [];
                 $sub_first = array_shift($item);
-                foreach($item as $subitem) {
-                    $sub[] = array(
-                        'html' => $subitem
-                    );
+                foreach ($item as $subitem) {
+                    $sub[] = [
+                        'html' => $subitem,
+                    ];
                 }
-                array_push($menus['items'],array(
+                array_push($menus['items'], [
                     'html' => $sub_first,
                     'items' => $sub,
-                    'submenuHtmlOptions' => array(
-                        'class' => 'subnav-sub'
-                    )
-                ));
-            } else if(strlen($item)) {
-                array_push($menus['items'],array(
-                   'html' => $item
-                ));
+                    'submenuHtmlOptions' => [
+                        'class' => 'subnav-sub',
+                    ],
+                ]);
+            } elseif (strlen($item)) {
+                array_push($menus['items'], [
+                    'html' => $item,
+                ]);
             }
         }
-        $action_menu = array(
+        $action_menu = [
             'id' => !empty($params['id']) ? (is_array($params['id']) ? $params['id'][0] : $params['id']) : '',
-            'htmlOptions' => array(
-                'class' => !empty($params['class']) && strpos($params['class'], 'clickMenu') !== false  ? $params['class'] : 'clickMenu '. (!empty($params['class']) ? $params['class'] : ''),
+            'htmlOptions' => [
+                'class' => !empty($params['class']) && strpos($params['class'], 'clickMenu') !== false ? $params['class'] : 'clickMenu ' . (!empty($params['class']) ? $params['class'] : ''),
                 'name' => !empty($params['name']) ? $params['name'] : '',
-            ),
-            'itemOptions' => array(
-                'class' => (count($menus['items']) == 0) ? 'single' : 'sugar_action_button'
-            ),
-            'submenuHtmlOptions' => array(
-                'class' => 'subnav'
-            ),
-            'items' => array(
-                $menus
-            )
-        );
+            ],
+            'itemOptions' => [
+                'class' => (safeCount($menus['items']) == 0) ? 'single' : 'sugar_action_button',
+            ],
+            'submenuHtmlOptions' => [
+                'class' => 'subnav',
+            ],
+            'items' => [
+                $menus,
+            ],
+        ];
         require_once 'include/SugarSmarty/plugins/function.sugar_menu.php';
         return smarty_function_sugar_menu($action_menu, $smarty);
-
     }
 
     if (is_array($params['buttons'])) {
-        return '<div class="action_buttons">' . implode_r(' ', $params['buttons'], true).'<div class="clear"></div></div>';
-    } else if(is_array($params)) {
-        return '<div class="action_buttons">' . implode_r(' ', $params, true).'<div class="clear"></div></div>';
+        return '<div class="action_buttons">' . implode_r(' ', $params['buttons'], true) . '<div class="clear"></div></div>';
+    } elseif (is_array($params)) {
+        return '<div class="action_buttons">' . implode_r(' ', $params, true) . '<div class="clear"></div></div>';
     }
 
     return $params['buttons'];
 }
 
-function implode_r($glue, $pieces, $extract_first_item = false) {
+function implode_r($glue, $pieces, $extract_first_item = false)
+{
     $result = array_shift($pieces);
-    if(is_array($result)) {
+    if (is_array($result)) {
         $result = implode_r($glue, $result);
     }
-    foreach($pieces as $item) {
-        if(is_array($item)) {
-            $result .= empty($extract_first_item) ? implode_r($glue, $item) : $glue.$item[0];
+    foreach ($pieces as $item) {
+        if (is_array($item)) {
+            $result .= empty($extract_first_item) ? implode_r($glue, $item) : $glue . $item[0];
         } else {
-            $result .= $glue.$item;
+            $result .= $glue . $item;
         }
     }
     return $result;
 }
-?>

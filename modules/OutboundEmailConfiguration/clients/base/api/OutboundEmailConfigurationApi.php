@@ -36,31 +36,32 @@ class OutboundEmailConfigurationApi extends ModuleApi
      *
      * @deprecated All /OutboundEmailConfiguration endpoints have been deprecated.
      */
-    public function registerApiRest() {
+    public function registerApiRest()
+    {
         LoggerManager::getLogger()->deprecated(
             'OutboundEmailConfigurationApi and all of its endpoints have been deprecated.'
         );
 
-        $api = array(
-            "outboundEmailConfigurationList" => array(
-                "reqType"   => "GET",
-                "path"      => array("OutboundEmailConfiguration", "list"),
-                "pathVars"  => array("", ""),
-                "method"    => "listConfigurations",
-                "shortHelp" => "A list of outbound email configurations",
-                'longHelp'  => 'modules/OutboundEmailConfiguration/clients/base/api/help/outbound_email_configuration_list_get_help.html',
-            ),
-        );
+        $api = [
+            'outboundEmailConfigurationList' => [
+                'reqType' => 'GET',
+                'path' => ['OutboundEmailConfiguration', 'list'],
+                'pathVars' => ['', ''],
+                'method' => 'listConfigurations',
+                'shortHelp' => 'A list of outbound email configurations',
+                'longHelp' => 'modules/OutboundEmailConfiguration/clients/base/api/help/outbound_email_configuration_list_get_help.html',
+            ],
+        ];
 
         return $api;
     }
 
     /**
-     * @deprecated GET /OutboundEmailConfiguration/list has been deprecated and will not be available after v11. Use GET
-     * /Emails/enum/outbound_email_id instead.
      * @param ServiceBase $api
      * @param array $args
      * @return array
+     * @deprecated GET /OutboundEmailConfiguration/list has been deprecated and will not be available after v11. Use GET
+     * /Emails/enum/outbound_email_id instead.
      */
     public function listConfigurations(ServiceBase $api, array $args)
     {
@@ -69,20 +70,20 @@ class OutboundEmailConfigurationApi extends ModuleApi
             '/Emails/enum/outbound_email_id instead.'
         );
 
-        $list = array();
+        $list = [];
 
-        $configs = OutboundEmailConfigurationPeer::listValidMailConfigurations($GLOBALS["current_user"]);
+        $configs = OutboundEmailConfigurationPeer::listValidMailConfigurations($GLOBALS['current_user']);
 
         foreach ($configs as $config) {
-            $inboxId    = $config->getInboxId();
+            $inboxId = $config->getInboxId();
             $configType = $config->getConfigType();
 
-            $list[] = array(
-                "id"      => (is_null($inboxId)) ? $config->getConfigId() : $inboxId,
-                "display" => $config->getDisplayName(),
-                "type"    => $configType,
-                "default" => ($configType == "system"),
-            );
+            $list[] = [
+                'id' => (is_null($inboxId)) ? $config->getConfigId() : $inboxId,
+                'display' => $config->getDisplayName(),
+                'type' => $configType,
+                'default' => ($configType == 'system'),
+            ];
         }
 
         return $list;

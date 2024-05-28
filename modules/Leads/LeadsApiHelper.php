@@ -13,7 +13,7 @@
 
 class LeadsApiHelper extends SugarBeanApiHelper
 {
-    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = array())
+    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = [])
     {
         foreach ($submittedData as $fieldName => $data) {
             if (isset($bean->field_defs[$fieldName])) {
@@ -33,4 +33,3 @@ class LeadsApiHelper extends SugarBeanApiHelper
         return true;
     }
 }
-

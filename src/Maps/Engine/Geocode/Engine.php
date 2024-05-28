@@ -38,8 +38,8 @@ class Engine
     /**
      * Get Geocode instance based on current system configuration.
      *
-     * @throws \RuntimeException
      * @return \Sugarcrm\Sugarcrm\Maps\Engine\Geocode\Engine
+     * @throws \RuntimeException
      */
     public static function getInstance(): Engine
     {

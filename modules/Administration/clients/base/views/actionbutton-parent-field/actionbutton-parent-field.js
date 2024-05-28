@@ -164,6 +164,17 @@
      */
     _checkFieldCompatibility: function(field) {
         if (
+            this._normalizeType(this._fieldType) === 'parent' &&
+            this._normalizeType(field.type) === 'relate'
+        ) {
+            const modules = app.lang.getAppListStrings(this._fieldDef.options);
+
+            return this.badFields.indexOf(field.name) === -1 &&
+            modules.hasOwnProperty(field.module) &&
+            !_.isEmpty(field.vname);
+        };
+
+        if (
             this._normalizeType(this._fieldType) === 'relate' &&
             this._normalizeType(field.type) === 'relate'
         ) {

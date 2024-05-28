@@ -27,11 +27,12 @@ class SugarFieldMapped extends SugarFieldBase
     /**
      * Override of parent apiSave to force the custom save to be run from API
      * @param SugarBean $bean
-     * @param array     $params
-     * @param string    $field
-     * @param array     $properties
+     * @param array $params
+     * @param string $field
+     * @param array $properties
      */
-    public function apiSave(SugarBean $bean, array $params, $field, $properties) {
+    public function apiSave(SugarBean $bean, array $params, $field, $properties)
+    {
         // Mapped fields needs to have something to map from.
         if (empty($properties['mapFunction']) || empty($properties['parentField'])) {
             return;

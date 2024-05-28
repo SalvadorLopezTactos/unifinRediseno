@@ -163,7 +163,7 @@ class DRI_Workflow extends Basic
     /**
      * @var DRI_SubWorkflow[]
      */
-    private $stages;
+    private static $stages = [];
 
     /**
      * {@inheritdoc}
@@ -179,60 +179,10 @@ class DRI_Workflow extends Basic
     }
 
     /**
-     * @return array
-     */
-    public static function listEnabledModulesEnumOptions()
-    {
-        static $modulesNotAllowed = [
-            'Home',
-            'DRI_Workflows',
-            'DRI_SubWorkflows',
-            'Forecasts',
-            'Feeds',
-            'iFrames',
-            'Worksheet',
-            'Queues',
-            'FAQ',
-            'Newsletters',
-            'Tags',
-            'Library',
-            'Words',
-            'Sugar_Favorites',
-            'KBDocuments',
-            'Reports',
-            'Dashboards',
-            'pmse_Project',
-            'pmse_Inbox',
-            'pmse_Business_Rules',
-            'pmse_Emails_Templates',
-            'Currencies',
-            'CJ_Forms',
-            'CJ_WebHooks',
-            'BusinessCenters',
-            'UserSignatures',
-            'DRI_SubWorkflow_Templates',
-            'DRI_Workflow_Task_Templates',
-            'DRI_Workflow_Templates',
-            'Geocode',
-        ];
-
-        $list = [];
-
-        foreach ($GLOBALS['app_list_strings']['moduleList'] as $module => $name) {
-            if (!in_array($module, $GLOBALS['bwcModules'], true) && (
-                (!in_array($module, $modulesNotAllowed, true) && !in_array($module, $GLOBALS['modInvisList'], true)))) {
-                $list[$module] = $name;
-            }
-        }
-
-        return $list;
-    }
-
-    /**
      * Retrieves a DRI_Workflow with id $id and
      * returns a instance of the retrieved bean
      *
-     * @param string $id: the id of the DRI_Workflow that should be retrieved
+     * @param string $id : the id of the DRI_Workflow that should be retrieved
      * @return DRI_Workflow
      * @throws NotFoundException: if not found
      */
@@ -245,7 +195,7 @@ class DRI_Workflow extends Basic
      * Retrieves a DRI_Workflow with name $name and
      * returns a instance of the retrieved bean
      *
-     * @param string $name: the name of the DRI_Workflow that should be retrieved
+     * @param string $name : the name of the DRI_Workflow that should be retrieved
      * @return DRI_Workflow
      * @throws NotFoundException
      */
@@ -259,6 +209,7 @@ class DRI_Workflow extends Basic
             ]
         );
     }
+
     /**
      * @param SugarBean $parent
      * @param string $template_id
@@ -352,6 +303,7 @@ class DRI_Workflow extends Basic
         \DRI_Workflow_Template $template = null,
         array $data = null
     ) {
+
         if (is_null($parent)) {
             try {
                 $parent = $this->getParent();
@@ -377,6 +329,102 @@ class DRI_Workflow extends Basic
     }
 
     /**
+     * Checks if given field is changed and set to Hide
+     *
+     * @throws CustomerJourneyException\NotFoundException
+     */
+    public function isHideSet()
+    {
+        if (($this->fieldChanged('stage_numbering') &&
+                $this->stage_numbering == true) ||
+            $this->stage_numbering == 1) {
+            $stages = $this->getCopiedActivities();
+            foreach ($stages as $stage) {
+                $this->updateAssigneeActivityID($stage->id, $stage->table_name, 'label', $stage->name);
+            }
+        } else {
+            $this->defaultValueShow('stage_numbering');
+        }
+    }
+
+    /**
+     * Checks if given field is changed
+     *
+     * @param string $field
+     * @return bool
+     */
+    public function fieldChanged($field)
+    {
+        if (!isset($this->fetched_row[$field])) {
+            if (isset($this->$field) && !empty($this->$field)) {
+                return true;
+            }
+            return false;
+        }
+
+        return $this->$field !== $this->fetched_row[$field];
+    }
+
+    /**
+     * Get the stage templates linked with the journey template
+     *
+     * @return DRI_SubWorkflow_Template[]
+     * @throws SugarQueryException
+     */
+    public function getCopiedActivities()
+    {
+        $bean = \BeanFactory::newBean('DRI_SubWorkflows');
+        $query = new \SugarQuery();
+        $query->from($bean, ['team_security' => false]);
+        $query->select('*');
+        $query
+            ->where()
+            ->equals('dri_workflow_id', $this->id);
+
+        return $bean->fetchFromQuery($query);
+    }
+
+    /**
+     * Update the stage Labels
+     *
+     * @param string $templateID
+     * @param string $table
+     * @param string $column
+     * @param string $name
+     * @throws SugarQueryException
+     */
+    public function updateAssigneeActivityID($templateID, $table, $column, $name)
+    {
+        $qb = DBManagerFactory::getConnection()->createQueryBuilder();
+        $qb->update($table)
+            ->set($column, $qb->expr()->literal($name))
+            ->where($qb->expr()->eq('id', $qb->expr()->literal($templateID)));
+        $qb->execute();
+    }
+
+    /**
+     * Show stage number along with name on stage
+     *
+     * @param string $field
+     * @throws SugarQueryException
+     */
+    public function defaultValueShow($field)
+    {
+        if ((!empty($this->fetched_row) && !empty($this->fetched_row[$field]) &&
+                $this->$field == false) ||
+            $this->$field == 0) {
+            $stages = $this->getCopiedActivities();
+            foreach ($stages as $stage) {
+                if (strlen($stage->sort_order) === 1) {
+                    $stage->sort_order = "0{$stage->sort_order}";
+                }
+                $name = sprintf('%s. %s', $stage->sort_order, $stage->name);
+                $this->updateAssigneeActivityID($stage->id, $stage->table_name, 'label', $name);
+            }
+        }
+    }
+
+    /**
      * @param boolean $check_notify
      * @return string
      * @throws NotFoundException
@@ -387,7 +435,7 @@ class DRI_Workflow extends Basic
      */
     public function save($check_notify = false)
     {
-        $isNew =  !$this->isUpdate();
+        $isNew = !$this->isUpdate();
         $template = null;
 
         if (!empty($this->dri_workflow_template_id) && $isNew) {
@@ -441,6 +489,7 @@ class DRI_Workflow extends Basic
             $this->sendWebHooks(\CJ_WebHook::TRIGGER_EVENT_BEFORE_COMPLETED);
         }
 
+        $this->isHideSet();
         $return = parent::save($check_notify);
         $this->setCurrentStageAndActivity();
 
@@ -537,18 +586,26 @@ class DRI_Workflow extends Basic
      */
     public function setCurrentStageAndActivity()
     {
+        static $updated = [];
         foreach ($this->getStages() as $stage) {
             if (!$stage->isCompleted()) {
                 foreach ($stage->getActivities() as $activity) {
+                    $cacheKey = 'DRIWFUpdateCache' . md5(
+                        $activity->id . $activity->module_dir . $stage->id . $this->id
+                    );
+                    if (array_key_exists($cacheKey, $updated)) {
+                        continue;
+                    }
                     $handler = ActivityHandlerFactory::factory($activity->module_dir);
                     if (!$handler->isCompleted($activity) && !empty($this->id)) {
                         $qb = DBManagerFactory::getConnection()->createQueryBuilder();
                         $qb->update('dri_workflows')
-                        ->set('parent_id', $qb->expr()->literal($activity->id))
-                        ->set('parent_type', $qb->expr()->literal($activity->module_dir))
-                        ->set('current_stage_id', $qb->expr()->literal($stage->id))
-                        ->where($qb->expr()->eq('id', $qb->expr()->literal($this->id)));
+                            ->set('parent_id', $qb->expr()->literal($activity->id))
+                            ->set('parent_type', $qb->expr()->literal($activity->module_dir))
+                            ->set('current_stage_id', $qb->expr()->literal($stage->id))
+                            ->where($qb->expr()->eq('id', $qb->expr()->literal($this->id)));
                         $qb->execute();
+                        $updated[$cacheKey] = true;
                         break;
                     }
                 }
@@ -583,7 +640,7 @@ class DRI_Workflow extends Basic
      * Get the dependant activity of a specific activity, based on updating assignee, dates or both
      * updates the assignee accordingly
      * @param \SugarBean $activity
-     * @param  \SugarBean $depActivity
+     * @param \SugarBean $depActivity
      * @param string $templateId
      */
     private function getDependentActivityAssigneeDuedate(\SugarBean $activity, \SugarBean $depActivity, $templateId)
@@ -631,7 +688,7 @@ class DRI_Workflow extends Basic
      * Get the dependant activity of a specific activity
      *
      * @param \SugarBean $activity
-     * @param  \SugarBean $depActivity
+     * @param \SugarBean $depActivity
      * @param string $templateId
      */
     private function getDependentActivitySpecificActivity(\SugarBean $activity, \SugarBean $depActivity, $templateId)
@@ -648,7 +705,7 @@ class DRI_Workflow extends Basic
      * Get the dependant activity of a specific stage
      *
      * @param \SugarBean $activity
-     * @param  DRI_SubWorkflow $stage
+     * @param DRI_SubWorkflow $stage
      * @param string $templateId
      */
     private function getDependentActivitySpecificStage(\SugarBean $activity, \DRI_SubWorkflow $stage, $templateId)
@@ -661,7 +718,7 @@ class DRI_Workflow extends Basic
     /**
      * Get the dependant activity of a specific activity
      *
-     * @param  \SugarBean $activity
+     * @param \SugarBean $activity
      */
     public function getDependentActivity(\SugarBean $activity)
     {
@@ -735,6 +792,7 @@ class DRI_Workflow extends Basic
     {
         /** @var DRI_SubWorkflow[] $stages */
         $stages = [];
+        BeanFactory::registerBean($this);
 
         foreach ($template->getStageTemplates() as $stageTemplate) {
             $stage = new DRI_SubWorkflow();
@@ -749,13 +807,11 @@ class DRI_Workflow extends Basic
                 $stage->modified_user_id = $this->modified_user_id;
             }
 
-            BeanFactory::registerBean($this);
             BeanFactory::registerBean($stage);
             $stage->setJourney($this);
             $stage->populateFromJourney($this);
             $stage->populateFromTemplate($stageTemplate);
             $stage->createActivitiesFromTemplate(false);
-            BeanFactory::unregisterBean($stage);
             $stages[] = $stage;
         }
 
@@ -767,8 +823,6 @@ class DRI_Workflow extends Basic
         $this->calculateMomentum(false);
 
         foreach ($stages as $stage) {
-            BeanFactory::registerBean($this);
-            BeanFactory::registerBean($stage);
             $stage->setJourney($this);
             $stage->save();
             BeanFactory::unregisterBean($stage);
@@ -793,6 +847,7 @@ class DRI_Workflow extends Basic
         $this->assigned_user_id = $this->getTargetAssigneeId();
         $this->team_id = $this->getTargetTeamId();
         $this->team_set_id = $this->getTargetTeamSetId();
+        $this->stage_numbering = $template->stage_numbering;
     }
 
     /**
@@ -890,9 +945,9 @@ class DRI_Workflow extends Basic
         $query->select('id');
         $where = $query->where();
         $where
-                ->equals('dri_workflow_template_id', $template_id)
-                ->equals('archived', false)
-                ->notEquals('state', self::STATE_COMPLETED);
+            ->equals('dri_workflow_template_id', $template_id)
+            ->equals('archived', false)
+            ->notEquals('state', self::STATE_COMPLETED);
 
         foreach ($this->getParentDefinitions() as $parentDef) {
             if ($parentDef['module'] === $parent->module_dir) {
@@ -901,7 +956,7 @@ class DRI_Workflow extends Basic
             }
         }
 
-        $results = count($query->execute());
+        $results = safeCount($query->execute());
 
         if ($results >= $template->active_limit) {
             throw new CJException\SameJourneyLimitReachException();
@@ -948,7 +1003,7 @@ class DRI_Workflow extends Basic
         foreach ($this->getParentDefinitions() as $parentDef) {
             if (!empty($this->{$parentDef['id_name']}) && (is_null($module) || $module === $parentDef['module'])) {
                 $parent = BeanFactory::retrieveBean($parentDef['module'], $this->{$parentDef['id_name']}, [
-                            'disable_row_level_security' => true,
+                    'disable_row_level_security' => true,
                 ]);
 
                 break;
@@ -995,7 +1050,7 @@ class DRI_Workflow extends Basic
     public function cancel()
     {
         $canceller = new Journey\Canceller();
-        $canceller->cancel($this);
+        return $canceller->cancel($this);
     }
 
     /**
@@ -1028,7 +1083,7 @@ class DRI_Workflow extends Basic
      */
     public function insertActivity(\SugarBean $activity)
     {
-        foreach ($this->getStages() as $stage) {
+        foreach ($this->getStages() as &$stage) {
             if ($stage->hasActivity($activity)) {
                 $stage->insertActivity($activity);
             }
@@ -1040,7 +1095,7 @@ class DRI_Workflow extends Basic
      */
     private function loadStages()
     {
-        if (is_null($this->stages)) {
+        if (!array_key_exists($this->id, self::$stages) || is_null(self::$stages[$this->id])) {
             $bean = \BeanFactory::newBean('DRI_SubWorkflows');
 
             $query = new \SugarQuery();
@@ -1048,12 +1103,12 @@ class DRI_Workflow extends Basic
             $query->select('*');
             $query->orderBy('sort_order', 'ASC');
             $query->where()
-                    ->equals('dri_workflow_id', $this->id);
+                ->equals('dri_workflow_id', $this->id);
 
             $this->setStages($bean->fetchFromQuery($query));
 
             // register all stages in the global bean cache
-            foreach ($this->stages as $stage) {
+            foreach (self::$stages[$this->id] as $stage) {
                 BeanFactory::registerBean($stage);
             }
         }
@@ -1064,7 +1119,7 @@ class DRI_Workflow extends Basic
      */
     public function reloadStages()
     {
-        $this->stages = null;
+        self::$stages[$this->id] = null;
         $this->loadStages();
     }
 
@@ -1074,7 +1129,7 @@ class DRI_Workflow extends Basic
      */
     private function setStages(array $stages)
     {
-        $this->stages = $stages;
+        self::$stages[$this->id] = $stages;
     }
 
     /**
@@ -1092,7 +1147,7 @@ class DRI_Workflow extends Basic
 
         $this->loadStages();
 
-        return array_values($this->stages);
+        return array_values(self::$stages[$this->id]);
     }
 
     /**
@@ -1112,6 +1167,21 @@ class DRI_Workflow extends Basic
     }
 
     /**
+     * If stages have already activities loaded or not
+     */
+    private function areStagesAlreadyEmpty()
+    {
+        $fetchAll = false;
+        // if any stage has zero activity then load all activities else skip
+        foreach ($this->getStages() as $stage) {
+            if (empty($stage->getActivities())) {
+                $fetchAll = true;
+            }
+        }
+        return $fetchAll;
+    }
+
+    /**
      * loads all activities related to the journey
      *
      * @throws SugarApiExceptionError
@@ -1119,6 +1189,10 @@ class DRI_Workflow extends Basic
      */
     private function loadActivities()
     {
+        // if any stage has zero activity then load all activities else return
+        if (!$this->areStagesAlreadyEmpty()) {
+            return;
+        }
         // load all activities related to the journey
         $activities = [];
         foreach (ActivityHandlerFactory::all() as $activityHandler) {
@@ -1127,8 +1201,8 @@ class DRI_Workflow extends Basic
             $ids = $idFieldQuery->compile()
                 ->execute()
                 ->fetchAllAssociative();
-
-            if ((is_countable($ids) ? count($ids) : 0) > 0) {
+            $ids = array_column($ids, 'id');
+            if (safeCount($ids) > 0) {
                 $bean = \BeanFactory::newBean($activityHandler->getModuleName());
                 $allFieldsQuery->where()->in('id', $ids);
                 $activities = array_merge($activities, $bean->fetchFromQuery($allFieldsQuery));
@@ -1141,11 +1215,11 @@ class DRI_Workflow extends Basic
         }
 
         // split up the activities between the stage it belongs to
-        foreach ($this->getStages() as $stage) {
+        foreach ($this->getStages() as &$stage) {
             $filtered = [];
 
             foreach ($activities as $activity) {
-                $handler = ActivityHandlerFactory::factory($activity);
+                $handler = ActivityHandlerFactory::factory($activity->getModuleName());
                 if ($handler->getStageId($activity) === $stage->id) {
                     $filtered[] = $activity;
                 }
@@ -1239,7 +1313,6 @@ class DRI_Workflow extends Basic
     public function retrieve($id = -1, $encode = true, $deleted = true)
     {
         $return = parent::retrieve($id, $encode, $deleted);
-        $this->stages = null;
         return $return;
     }
 
@@ -1387,15 +1460,15 @@ class DRI_Workflow extends Basic
     {
         $qb = DBManagerFactory::getConnection()->createQueryBuilder();
         $qb->update($activity->getTableName())
-        ->set('cj_momentum_start_date', $qb->expr()->literal($activity->cj_momentum_start_date))
-        ->where($qb->expr()->eq('id', $qb->expr()->literal($activity->id)));
+            ->set('cj_momentum_start_date', $qb->expr()->literal($activity->cj_momentum_start_date))
+            ->where($qb->expr()->eq('id', $qb->expr()->literal($activity->id)));
         $qb->execute();
 
         $table = $activity->getTableName();
         $qb = DBManagerFactory::getConnection()->createQueryBuilder();
         $qb->update($table)
-        ->set('cj_momentum_start_date', $qb->expr()->literal($activity->cj_momentum_start_date))
-        ->where($qb->expr()->eq('id', $qb->expr()->literal($activity->id)));
+            ->set('cj_momentum_start_date', $qb->expr()->literal($activity->cj_momentum_start_date))
+            ->where($qb->expr()->eq('id', $qb->expr()->literal($activity->id)));
         $qb->execute();
     }
 
@@ -1414,7 +1487,7 @@ class DRI_Workflow extends Basic
 
         foreach ($sharedData as $assigned_user_id => $activityIDs) {
             $userBean = BeanFactory::retrieveBean('Users', $assigned_user_id, [
-                        'disable_row_level_security' => true,
+                'disable_row_level_security' => true,
             ]);
             if (empty($userBean->id)) {
                 return;
@@ -1438,10 +1511,10 @@ class DRI_Workflow extends Basic
         $site_url = $this->getURL();
         $activityPaths = $this->buildActivityPaths($activityIDs, $site_url);
 
-        $notificationTemplateHtml = str_replace("{{activities}}", $activityPaths, $notificationTemplateHtml);
-        $notificationTemplateHtml = str_replace("{{assigned_by}}", $current_user->full_name, $notificationTemplateHtml);
-        $notificationTemplateHtml = str_replace("{{assigned_user}}", $userBean->full_name, $notificationTemplateHtml);
-        $notificationTemplateHtml = str_replace("{{module_link}}", "$site_url/index.php#{$this->module_dir}/{$this->id}", $notificationTemplateHtml);
+        $notificationTemplateHtml = str_replace('{{activities}}', $activityPaths, $notificationTemplateHtml);
+        $notificationTemplateHtml = str_replace('{{assigned_by}}', $current_user->full_name, $notificationTemplateHtml);
+        $notificationTemplateHtml = str_replace('{{assigned_user}}', $userBean->full_name, $notificationTemplateHtml);
+        $notificationTemplateHtml = str_replace('{{module_link}}', "$site_url/index.php#{$this->module_dir}/{$this->id}", $notificationTemplateHtml);
 
         return $notificationTemplateHtml;
     }
@@ -1541,5 +1614,23 @@ class DRI_Workflow extends Basic
                     break;
             }
         }
+    }
+
+    /**
+     * This defines the supporting modules which have metadata needed by DRI_Workflows to be fully
+     * functional on the Mobile application
+     *
+     * @return array
+     */
+    public static function getMobileSupportingModules()
+    {
+        $modules = parent::getMobileSupportingModules();
+        return array_merge($modules, [
+            'CJ_Forms',
+            'CJ_WebHooks',
+            'DRI_SubWorkflow_Templates',
+            'DRI_Workflow_Task_Templates',
+            'DRI_Workflow_Templates',
+        ]);
     }
 }

@@ -12,7 +12,6 @@
 
 class ForecastWorksheetsFilterApi extends FilterApi
 {
-
     /**
      * We need the limit higher for this filter call since we don't support pagination
      *
@@ -22,127 +21,127 @@ class ForecastWorksheetsFilterApi extends FilterApi
 
     public function registerApiRest()
     {
-        return array(
-            'forecastWorksheetGet' => array(
+        return [
+            'forecastWorksheetGet' => [
                 'reqType' => 'GET',
-                'path' => array('ForecastWorksheets'),
-                'pathVars' => array('module'),
+                'path' => ['ForecastWorksheets'],
+                'pathVars' => ['module'],
                 'method' => 'forecastWorksheetsGet',
-                'jsonParams' => array(),
+                'jsonParams' => [],
                 'shortHelp' => 'Filter records from a single module',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastWorksheetGet.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-            'forecastWorksheetTimePeriodGet' => array(
+                ],
+            ],
+            'forecastWorksheetTimePeriodGet' => [
                 'reqType' => 'GET',
-                'path' => array('ForecastWorksheets', '?'),
-                'pathVars' => array('module', 'timeperiod_id'),
+                'path' => ['ForecastWorksheets', '?'],
+                'pathVars' => ['module', 'timeperiod_id'],
                 'method' => 'forecastWorksheetsGet',
-                'jsonParams' => array(),
+                'jsonParams' => [],
                 'shortHelp' => 'Filter records from a single module',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastWorksheetGet.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-            'forecastWorksheetTimePeriodUserIdGet' => array(
+                ],
+            ],
+            'forecastWorksheetTimePeriodUserIdGet' => [
                 'reqType' => 'GET',
-                'path' => array('ForecastWorksheets', '?', '?'),
-                'pathVars' => array('module', 'timeperiod_id', 'user_id'),
+                'path' => ['ForecastWorksheets', '?', '?'],
+                'pathVars' => ['module', 'timeperiod_id', 'user_id'],
                 'method' => 'forecastWorksheetsGet',
-                'jsonParams' => array(),
+                'jsonParams' => [],
                 'shortHelp' => 'Filter records from a single module',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastWorksheetGet.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-            'forecastWorksheetChartGet' => array(
+                ],
+            ],
+            'forecastWorksheetChartGet' => [
                 'reqType' => 'GET',
-                'path' => array('ForecastWorksheets', 'chart'),
-                'pathVars' => array('module', ''),
+                'path' => ['ForecastWorksheets', 'chart'],
+                'pathVars' => ['module', ''],
                 'method' => 'forecastWorksheetsChartGet',
-                'jsonParams' => array(),
+                'jsonParams' => [],
                 'shortHelp' => 'Filter records and reformat data for chart presentation',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastsWorksheetChartGet.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-            'forecastWorksheetChartTimePeriodGet' => array(
+                ],
+            ],
+            'forecastWorksheetChartTimePeriodGet' => [
                 'reqType' => 'GET',
-                'path' => array('ForecastWorksheets', 'chart', '?'),
-                'pathVars' => array('module', '', 'timeperiod_id'),
+                'path' => ['ForecastWorksheets', 'chart', '?'],
+                'pathVars' => ['module', '', 'timeperiod_id'],
                 'method' => 'forecastWorksheetsChartGet',
-                'jsonParams' => array(),
+                'jsonParams' => [],
                 'shortHelp' => 'Filter records and reformat data for chart presentation',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastsWorksheetChartGet.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-            'forecastWorksheetChartTimePeriodUserIdGet' => array(
+                ],
+            ],
+            'forecastWorksheetChartTimePeriodUserIdGet' => [
                 'reqType' => 'GET',
-                'path' => array('ForecastWorksheets', 'chart', '?', '?'),
-                'pathVars' => array('module', '', 'timeperiod_id', 'user_id'),
+                'path' => ['ForecastWorksheets', 'chart', '?', '?'],
+                'pathVars' => ['module', '', 'timeperiod_id', 'user_id'],
                 'method' => 'forecastWorksheetsChartGet',
-                'jsonParams' => array(),
+                'jsonParams' => [],
                 'shortHelp' => 'Filter records and reformat data for chart presentation',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastsWorksheetChartGet.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-            'filterModuleGet' => array(
+                ],
+            ],
+            'filterModuleGet' => [
                 'reqType' => 'GET',
-                'path' => array('ForecastWorksheets', 'filter'),
-                'pathVars' => array('module', ''),
+                'path' => ['ForecastWorksheets', 'filter'],
+                'pathVars' => ['module', ''],
                 'method' => 'forecastWorksheetsGet',
-                'jsonParams' => array('filter'),
+                'jsonParams' => ['filter'],
                 'shortHelp' => 'Filter records from a single module',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastWorksheetFilter.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-            'filterModulePost' => array(
+                ],
+            ],
+            'filterModulePost' => [
                 'reqType' => 'POST',
-                'path' => array('ForecastWorksheets', 'filter'),
-                'pathVars' => array('module', ''),
+                'path' => ['ForecastWorksheets', 'filter'],
+                'pathVars' => ['module', ''],
                 'method' => 'forecastWorksheetsGet',
                 'shortHelp' => 'Filter records from a single module',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastWorksheetFilter.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**
@@ -183,7 +182,7 @@ class ForecastWorksheetsFilterApi extends FilterApi
     {
 
         if (isset($args['no_data']) && $args['no_data'] == 1) {
-            $worksheetData = array('records' => array());
+            $worksheetData = ['records' => []];
         } else {
             //get data via forecastWorksheetsGet, no need to bother with filter setup, get will do that
             $worksheetData = $this->forecastWorksheetsGet($api, $args);
@@ -223,7 +222,7 @@ class ForecastWorksheetsFilterApi extends FilterApi
 
         // if filter is not defined, define it
         if (!isset($args['filter']) || !is_array($args['filter'])) {
-            $args['filter'] = array();
+            $args['filter'] = [];
         }
 
         // if there are filters set, process through them
@@ -260,17 +259,17 @@ class ForecastWorksheetsFilterApi extends FilterApi
     /**
      * Utility Method to create the filter for the filer API to use
      *
-     * @param ServiceBase $api                  Service Api Class
-     * @param mixed $user_id                    Passed in User ID, if false, it will use the current use from $api->user
-     * @param mixed $timeperiod_id              TimePeriod Id, if false, the current time period will be found an used
-     * @param string $parent_type               Type of worksheet to return, defaults to 'opportunities', but can be 'products'
+     * @param ServiceBase $api Service Api Class
+     * @param mixed $user_id Passed in User ID, if false, it will use the current use from $api->user
+     * @param mixed $timeperiod_id TimePeriod Id, if false, the current time period will be found an used
+     * @param string $parent_type Type of worksheet to return, defaults to 'opportunities', but can be 'products'
      * @return array                            The Filer array to be passed back into the filerList Api
      * @throws SugarApiExceptionNotAuthorized
      * @throws SugarApiExceptionInvalidParameter
      */
     protected function createFilter(ServiceBase $api, $user_id, $timeperiod_id, $parent_type = 'Opportunities')
     {
-        $filter = array();
+        $filter = [];
 
         // default draft to be 1
         $draft = 1;
@@ -297,9 +296,9 @@ class ForecastWorksheetsFilterApi extends FilterApi
         }
         // todo-sfa: Make sure that the passed in user can be viewed by the $api->user, need to check reportee tree
         // set the assigned_user_id
-        array_push($filter, array('assigned_user_id' => $user_id));
+        array_push($filter, ['assigned_user_id' => $user_id]);
         // set the draft flag depending on the assigned_user_id that is set from above
-        array_push($filter, array('draft' => $draft));
+        array_push($filter, ['draft' => $draft]);
 
         // if we didn't find a time period, set the time period to be the current time period
         if (!is_guid($timeperiod_id) && is_numeric($timeperiod_id) && $timeperiod_id != 0) {
@@ -320,12 +319,12 @@ class ForecastWorksheetsFilterApi extends FilterApi
         }
         array_push(
             $filter,
-            array(
-                '$and' => array(
-                    array('date_closed_timestamp' => array('$gte' => $tp->start_date_timestamp)),
-                    array('date_closed_timestamp' => array('$lte' => $tp->end_date_timestamp)),
-                )
-            )
+            [
+                '$and' => [
+                    ['date_closed_timestamp' => ['$gte' => $tp->start_date_timestamp]],
+                    ['date_closed_timestamp' => ['$lte' => $tp->end_date_timestamp]],
+                ],
+            ]
         );
 
         if (empty($parent_type)) {
@@ -337,7 +336,7 @@ class ForecastWorksheetsFilterApi extends FilterApi
         }
 
         // we only want to view parent_types of 'Opportunities' here
-        array_push($filter, array('parent_type' => $parent_type));
+        array_push($filter, ['parent_type' => $parent_type]);
 
         return $filter;
     }

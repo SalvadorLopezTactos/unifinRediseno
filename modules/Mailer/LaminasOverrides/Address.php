@@ -31,13 +31,13 @@ class Address implements Address\AddressInterface
      *
      * @param string $address
      * @param null|string $comment Comment associated with the address, if any.
-     * @throws Exception\InvalidArgumentException
      * @return self
+     * @throws Exception\InvalidArgumentException
      */
     public static function fromString($address, $comment = null)
     {
         $email = null;
-        if (! preg_match('/^((?P<name>.*)<(?P<namedEmail>[^>]+)>|(?P<email>.+))$/', $address, $matches)) {
+        if (!preg_match('/^((?P<name>.*)<(?P<namedEmail>[^>]+)>|(?P<email>.+))$/', $address, $matches)) {
             throw new Exception\InvalidArgumentException('Invalid address format');
         }
 
@@ -63,14 +63,14 @@ class Address implements Address\AddressInterface
     /**
      * Constructor
      *
-     * @param  string $email
-     * @param  null|string $name
-     * @param  null|string $comment
+     * @param string $email
+     * @param null|string $name
+     * @param null|string $comment
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($email, $name = null, $comment = null)
     {
-        if (! is_string($email) || empty($email)) {
+        if (!is_string($email) || empty($email)) {
             throw new Exception\InvalidArgumentException('Email must be a valid email address');
         }
 
@@ -79,7 +79,7 @@ class Address implements Address\AddressInterface
         }
 
         if (null !== $name) {
-            if (! is_string($name)) {
+            if (!is_string($name)) {
                 throw new Exception\InvalidArgumentException('Name must be a string');
             }
 
@@ -135,7 +135,7 @@ class Address implements Address\AddressInterface
     public function toString()
     {
         $string = sprintf('<%s>', $this->getEmail());
-        $name   = $this->constructName();
+        $name = $this->constructName();
         if (null === $name) {
             return $string;
         }

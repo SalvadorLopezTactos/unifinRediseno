@@ -95,7 +95,8 @@
                 },
                 parent_type: model.module,
                 parent_id: model.get('id'),
-                parent_name: model.get('name')
+                parent_name: model.get('name'),
+                email_address: _.first(model.get('email')).email_address
             });
         }
 

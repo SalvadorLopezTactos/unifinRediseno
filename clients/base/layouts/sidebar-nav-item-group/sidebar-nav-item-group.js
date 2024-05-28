@@ -14,5 +14,6 @@
  * @extends View.Layout
  */
 ({
-    className: 'sidebar-nav-item-group relative flex flex-column overflow-hidden'
+    className: `sidebar-nav-item-group flex flex-col overflow-hidden relative [&:not(:first-child)]:border-t
+[&:not(:first-child)]:border-[var(--sidebar-nav-group-divider-color)]`
 })

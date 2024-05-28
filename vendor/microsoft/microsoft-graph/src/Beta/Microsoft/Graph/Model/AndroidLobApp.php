@@ -26,7 +26,7 @@ class AndroidLobApp extends MobileLobApp
 {
     /**
     * Gets the identityName
-    * The Identity Name.
+    * The Identity Name. This property is being deprecated in 2302(February 2023).
     *
     * @return string|null The identityName
     */
@@ -38,10 +38,10 @@ class AndroidLobApp extends MobileLobApp
             return null;
         }
     }
-    
+
     /**
     * Sets the identityName
-    * The Identity Name.
+    * The Identity Name. This property is being deprecated in 2302(February 2023).
     *
     * @param string $val The identityName
     *
@@ -52,10 +52,10 @@ class AndroidLobApp extends MobileLobApp
         $this->_propDict["identityName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the identityVersion
-    * The identity version.
+    * The identity version. This property is being deprecated in 2302(February 2023).
     *
     * @return string|null The identityVersion
     */
@@ -67,10 +67,10 @@ class AndroidLobApp extends MobileLobApp
             return null;
         }
     }
-    
+
     /**
     * Sets the identityVersion
-    * The identity version.
+    * The identity version. This property is being deprecated in 2302(February 2023).
     *
     * @param string $val The identityVersion
     *
@@ -81,7 +81,7 @@ class AndroidLobApp extends MobileLobApp
         $this->_propDict["identityVersion"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the minimumSupportedOperatingSystem
     * The value for the minimum applicable operating system.
@@ -100,7 +100,7 @@ class AndroidLobApp extends MobileLobApp
         }
         return null;
     }
-    
+
     /**
     * Sets the minimumSupportedOperatingSystem
     * The value for the minimum applicable operating system.
@@ -114,7 +114,7 @@ class AndroidLobApp extends MobileLobApp
         $this->_propDict["minimumSupportedOperatingSystem"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the packageId
     * The package identifier.
@@ -129,7 +129,7 @@ class AndroidLobApp extends MobileLobApp
             return null;
         }
     }
-    
+
     /**
     * Sets the packageId
     * The package identifier.
@@ -143,7 +143,7 @@ class AndroidLobApp extends MobileLobApp
         $this->_propDict["packageId"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the versionCode
     * The version code of Android Line of Business (LoB) app.
@@ -158,7 +158,7 @@ class AndroidLobApp extends MobileLobApp
             return null;
         }
     }
-    
+
     /**
     * Sets the versionCode
     * The version code of Android Line of Business (LoB) app.
@@ -172,7 +172,7 @@ class AndroidLobApp extends MobileLobApp
         $this->_propDict["versionCode"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the versionName
     * The version name of Android Line of Business (LoB) app.
@@ -187,7 +187,7 @@ class AndroidLobApp extends MobileLobApp
             return null;
         }
     }
-    
+
     /**
     * Sets the versionName
     * The version name of Android Line of Business (LoB) app.
@@ -201,5 +201,5 @@ class AndroidLobApp extends MobileLobApp
         $this->_propDict["versionName"] = $val;
         return $this;
     }
-    
+
 }

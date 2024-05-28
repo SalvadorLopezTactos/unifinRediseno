@@ -10,44 +10,44 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['KBContentTemplates']['base']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['KBContentTemplates']['base']['view']['list'] = [
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'label' => 'LBL_NAME',
                     'default' => true,
                     'enabled' => true,
                     'link' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'created_by_name',
                     'label' => 'LBL_CREATED',
                     'default' => true,
                     'enabled' => true,
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_entered',
                     'label' => 'LBL_DATE_ENTERED',
                     'default' => true,
                     'enabled' => true,
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_modified',
                     'label' => 'LBL_DATE_MODIFIED',
                     'default' => true,
                     'enabled' => true,
                     'readonly' => true,
-                ),
-            ),
-        ),
-    ),
-    'orderBy' => array(
+                ],
+            ],
+        ],
+    ],
+    'orderBy' => [
         'field' => 'date_entered',
         'direction' => 'desc',
-    ),
-);
+    ],
+];

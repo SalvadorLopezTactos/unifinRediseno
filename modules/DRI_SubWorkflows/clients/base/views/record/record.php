@@ -194,6 +194,7 @@ $viewdefs['DRI_SubWorkflows']['base']['view']['record'] = [
                 [
                     'name' => 'sort_order',
                     'label' => 'LBL_SORT_ORDER',
+                    'readonly' => true,
                 ],
                 [
                     'name' => 'description',

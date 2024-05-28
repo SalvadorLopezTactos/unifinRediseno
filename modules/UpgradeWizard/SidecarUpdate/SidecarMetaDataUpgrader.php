@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -38,14 +39,14 @@ class SidecarMetaDataUpgrader
      *
      * @var array
      */
-    protected static $filesForRemoval = array();
+    protected static $filesForRemoval = [];
 
     /**
      * Listing of modules that need to be upgraded
      *
      * @var array
      */
-    protected $upgradeModules = array();
+    protected $upgradeModules = [];
 
     /**
      * The list of paths for both portal and wireless viewdefs under the legacy
@@ -53,31 +54,31 @@ class SidecarMetaDataUpgrader
      *
      * @var array
      */
-    protected $legacyFilePaths = array(
-        'portal' => array(
-            'custom'  => 'custom/portal/',
+    protected $legacyFilePaths = [
+        'portal' => [
+            'custom' => 'custom/portal/',
             'history' => 'custom/portal/',
             'working' => 'custom/working/portal/',
-        ),
-        'wireless' => array(
-            'custom'  => 'custom/',
+        ],
+        'wireless' => [
+            'custom' => 'custom/',
             'history' => 'custom/history/',
             'working' => 'custom/working/',
-        ),
-        'base'        => array(
-            'custom'  => 'custom/',
+        ],
+        'base' => [
+            'custom' => 'custom/',
             'working' => 'custom/working/',
             'history' => 'custom/history/',
-        ),
-    );
+        ],
+    ];
 
-    protected $sidecarFilePaths = array(
-        'portal' => array(
-            'custom'  => 'custom/',
+    protected $sidecarFilePaths = [
+        'portal' => [
+            'custom' => 'custom/',
             'history' => 'custom/history/',
             'working' => 'custom/working/',
-        ),
-    );
+        ],
+    ];
 
     /**
      * Specific module to upgrade
@@ -90,68 +91,68 @@ class SidecarMetaDataUpgrader
      *
      * @var array
      */
-    protected $legacyMetaDataFileNames = array(
-        'wireless' => array(
-            MB_WIRELESSEDITVIEW       => 'wireless.editviewdefs' ,
-            MB_WIRELESSDETAILVIEW     => 'wireless.detailviewdefs' ,
-            MB_WIRELESSLISTVIEW       => 'wireless.listviewdefs' ,
-            MB_WIRELESSBASICSEARCH    => 'wireless.searchdefs' ,
+    protected $legacyMetaDataFileNames = [
+        'wireless' => [
+            MB_WIRELESSEDITVIEW => 'wireless.editviewdefs',
+            MB_WIRELESSDETAILVIEW => 'wireless.detailviewdefs',
+            MB_WIRELESSLISTVIEW => 'wireless.listviewdefs',
+            MB_WIRELESSBASICSEARCH => 'wireless.searchdefs',
             // Advanced is unneeded since it shares with basic
-        ),
-        'portal' => array(
-            MB_PORTALLISTVIEW         => 'listviewdefs',
-            MB_PORTALSEARCHVIEW       => 'searchformdefs',
-            MB_EDITVIEW               => 'editviewdefs',
-            MB_DETAILVIEW             => 'detailviewdefs',
-            MB_PORTALEDITVIEW         => 'edit',
-            MB_PORTALDETAILVIEW       => 'detail',
-        ),
-        'base' => array(
-            MB_LISTVIEW               => 'listviewdefs',
-            MB_EDITVIEW               => 'editviewdefs',
-            MB_DETAILVIEW             => 'detailviewdefs',
-            MB_SEARCHVIEW             => 'searchdefs',
-            MB_QUICKCREATE            => 'quickcreatedefs',
-            MB_CONVERT                => 'convertdefs',
-            MB_POPUPLIST              => 'popupdefs',
-        )
-    );
+        ],
+        'portal' => [
+            MB_PORTALLISTVIEW => 'listviewdefs',
+            MB_PORTALSEARCHVIEW => 'searchformdefs',
+            MB_EDITVIEW => 'editviewdefs',
+            MB_DETAILVIEW => 'detailviewdefs',
+            MB_PORTALEDITVIEW => 'edit',
+            MB_PORTALDETAILVIEW => 'detail',
+        ],
+        'base' => [
+            MB_LISTVIEW => 'listviewdefs',
+            MB_EDITVIEW => 'editviewdefs',
+            MB_DETAILVIEW => 'detailviewdefs',
+            MB_SEARCHVIEW => 'searchdefs',
+            MB_QUICKCREATE => 'quickcreatedefs',
+            MB_CONVERT => 'convertdefs',
+            MB_POPUPLIST => 'popupdefs',
+        ],
+    ];
 
     /**
      * Listing of actual metadata files, by client
      *
      * @var array
      */
-    protected $files = array();
+    protected $files = [];
 
     /**
      * List of Sidecar*MetaDataUpgrader classes that map to a view type
      *
      * @var array
      */
-    protected $upgraderClassMap = array(
-        'list'               => 'List',
-        'edit'               => 'Grid',
-        'detail'             => 'Grid',
-        MB_RECORDVIEW        => 'MergeGrid',
-        MB_PORTALRECORDVIEW  => 'MergeGrid',
-        'search'             => 'Search',
-        'filter'             => 'Filter',
-        'drop'               => 'Drop',
-        'subpanel'           => 'Subpanel',
-        'layoutdef'          => 'Layoutdefs',
-        'quickcreate'        => 'Quickcreate',
-        'menu'               => 'Menu',
-        'convert'            => 'LeadConvert',
-        'popuplist'          => 'SelectionList',
-    );
+    protected $upgraderClassMap = [
+        'list' => 'List',
+        'edit' => 'Grid',
+        'detail' => 'Grid',
+        MB_RECORDVIEW => 'MergeGrid',
+        MB_PORTALRECORDVIEW => 'MergeGrid',
+        'search' => 'Search',
+        'filter' => 'Filter',
+        'drop' => 'Drop',
+        'subpanel' => 'Subpanel',
+        'layoutdef' => 'Layoutdefs',
+        'quickcreate' => 'Quickcreate',
+        'menu' => 'Menu',
+        'convert' => 'LeadConvert',
+        'popuplist' => 'SelectionList',
+    ];
 
     /**
      * List of failed upgrades
      *
      * @var array
      */
-    protected $failures = array();
+    protected $failures = [];
 
     /**
      * Flag to tell the upgrader to write to the log or not. On by default. Can
@@ -165,14 +166,14 @@ class SidecarMetaDataUpgrader
      * Extensions data
      * @var array
      */
-    public $extensions = array();
+    public $extensions = [];
 
     /**
      * Flag that is used in the upgrader to let the process know that this is an
      * installation process and not a typical upgrade. This is used in getting the
      * proper name of the module for upgrading pre-6.6 mobile metadata to 6.6+
      * during installation of a package.
-     * 
+     *
      * @var boolean
      */
     public $fromInstallation = false;
@@ -237,10 +238,10 @@ class SidecarMetaDataUpgrader
      */
     public function getMBModules()
     {
-        if(!empty($this->module)) {
-            return array($this->module);
+        if (!empty($this->module)) {
+            return [$this->module];
         }
-        return array();
+        return [];
     }
 
     /**
@@ -249,11 +250,18 @@ class SidecarMetaDataUpgrader
      */
     public function setUpgradeMBFiles($modules)
     {
-        foreach($modules as $module) {
+        foreach ($modules as $module) {
             $this->logUpgradeStatus("Checking module $module for core upgrade");
             $basefiles = $this->getUpgradeableFilesInPath("modules/$module/metadata/", $module, 'base');
             $this->files = array_merge($this->files, $basefiles);
-            $subfiles = $this->getUpgradeableFilesInPath("modules/$module/metadata/subpanels/", $module, 'base', null, true, true);
+            $subfiles = $this->getUpgradeableFilesInPath(
+                "modules/$module/metadata/subpanels/",
+                $module,
+                'base',
+                null,
+                true,
+                true
+            );
             $this->files = array_merge($this->files, $subfiles);
             // No need to scan portal here since MB modules are not supported for portal
             // Mobile part takes care of itself
@@ -315,12 +323,12 @@ class SidecarMetaDataUpgrader
             $count = $deployedcount = $undeployedcount = 0;
             $buildpath = $package->getBuildDir() . '/SugarModules/modules/';
             foreach ($package->modules as $module => $mbmodule) {
-                if($this->module && $package->key . '_' . $module != $this->module) {
+                if ($this->module && $package->key . '_' . $module != $this->module) {
                     continue;
                 }
                 $appModulePath = $modulepath . $package->key . '_' . $module;
                 $mbbModulePath = $buildpath . $package->key . '_' . $module;
-                $packagePath   = $package->getPackageDir() . '/modules/' . $module;
+                $packagePath = $package->getPackageDir() . '/modules/' . $module;
                 $deployed = file_exists($appModulePath) && file_exists($mbbModulePath);
 
                 // For deployed modules we need to get
@@ -332,7 +340,15 @@ class SidecarMetaDataUpgrader
                     $metadatadir = "$appModulePath/metadata/{$customPath}";
 
                     // Get our upgrade files as base files since these are regular metadata
-                    $files = $this->getUpgradeableFilesInPath($metadatadir, $modulename, $metatype, 'base', null, true, $subpanels);
+                    $files = $this->getUpgradeableFilesInPath(
+                        $metadatadir,
+                        $modulename,
+                        $metatype,
+                        'base',
+                        null,
+                        true,
+                        $subpanels
+                    );
                     $count += count($files);
                     $deployedcount += count($files);
                     $this->files = array_merge($this->files, $files);
@@ -341,7 +357,15 @@ class SidecarMetaDataUpgrader
                     $metadatadir = "$mbbModulePath/metadata/{$customPath}";
 
                     // Get our upgrade files as undeployed base type wireless client
-                    $files = $this->getUpgradeableFilesInPath($metadatadir, $module, $metatype, 'base', $packagename, false, $subpanels);
+                    $files = $this->getUpgradeableFilesInPath(
+                        $metadatadir,
+                        $module,
+                        $metatype,
+                        'base',
+                        $packagename,
+                        false,
+                        $subpanels
+                    );
                     $count += count($files);
                     $deployedcount += count($files);
                     $this->files = array_merge($this->files, $files);
@@ -350,7 +374,15 @@ class SidecarMetaDataUpgrader
                     $metadatadir = "$packagePath/metadata/{$customPath}";
 
                     // Get our upgrade files... these are still 'base' type files
-                    $files = $this->getUpgradeableFilesInPath($metadatadir, $module, $metatype, 'base', $packagename, false, $subpanels);
+                    $files = $this->getUpgradeableFilesInPath(
+                        $metadatadir,
+                        $module,
+                        $metatype,
+                        'base',
+                        $packagename,
+                        false,
+                        $subpanels
+                    );
                     $count += count($files);
                     $undeployedcount += count($files);
                     $this->files = array_merge($this->files, $files);
@@ -368,7 +400,8 @@ class SidecarMetaDataUpgrader
      * @param sting $module The name of the module
      * @return bool
      */
-    public function isModuleDeployed($module) {
+    public function isModuleDeployed($module)
+    {
         if (empty($this->deployedModules)) {
             $dirs = glob('modules/*', GLOB_ONLYDIR);
             foreach ($dirs as $dir) {
@@ -423,7 +456,7 @@ class SidecarMetaDataUpgrader
 
         foreach ($this->getModulesList() as $module) {
             // if this is not a BWC module remove the old subpaneldefs layout
-            if(!isModuleBWC($module)) {
+            if (!isModuleBWC($module)) {
                 self::$filesForRemoval[] = "modules/{$module}/metadata/subpaneldefs.php";
             }
 
@@ -440,15 +473,14 @@ class SidecarMetaDataUpgrader
         $this->cleanupLegacyFiles();
     }
 
-
     /**
      * Get all modules we're going to process
      * @return array
      */
     protected function getModulesList()
     {
-        if($this->module) {
-            return array($this->module => $this->module);
+        if ($this->module) {
+            return [$this->module => $this->module];
         }
         return $GLOBALS['moduleList'];
     }
@@ -460,7 +492,7 @@ class SidecarMetaDataUpgrader
     {
         $modules = $this->getModulesList();
 
-        $DCActions = array();
+        $DCActions = [];
         $actions_path = 'include/DashletContainer/Containers/DCActions.php';
         if (file_exists($actions_path)) {
             include $actions_path;
@@ -475,7 +507,7 @@ class SidecarMetaDataUpgrader
 
         $position = 0;
         foreach ($DCActions as $module) {
-            if($this->module && $this->module != $module) {
+            if ($this->module && $this->module != $module) {
                 continue;
             }
             $sidecarMetadataPath = 'modules/' . $module . '/clients/base/menus/quickcreate/quickcreate.php';
@@ -494,7 +526,13 @@ class SidecarMetaDataUpgrader
 
             $file = $this->getUpgradeFileParams(
                 'modules/' . $module . '/clients/base/menus/quickcreate/quickcreate.php',
-                $module, 'base', 'custom', null, true, false, true
+                $module,
+                'base',
+                'custom',
+                null,
+                true,
+                false,
+                true
             );
             if (empty($file)) {
                 continue;
@@ -505,7 +543,7 @@ class SidecarMetaDataUpgrader
         }
 
         foreach ($disabled as $module) {
-            if($this->module && $this->module != $module) {
+            if ($this->module && $this->module != $module) {
                 continue;
             }
             $sidecarMetadataPath = 'modules/' . $module . '/clients/base/menus/quickcreate/quickcreate.php';
@@ -524,7 +562,13 @@ class SidecarMetaDataUpgrader
 
             $file = $this->getUpgradeFileParams(
                 'modules/' . $module . '/clients/base/menus/quickcreate/quickcreate.php',
-                $module, 'base', 'custom', null, true, false, true
+                $module,
+                'base',
+                'custom',
+                null,
+                true,
+                false,
+                true
             );
             if (empty($file)) {
                 continue;
@@ -545,7 +589,7 @@ class SidecarMetaDataUpgrader
      */
     protected function isQuickCreateVisible($quickCreateFile, $module, $default = false)
     {
-        $viewdefs = array();
+        $viewdefs = [];
         if (file_exists("custom/{$quickCreateFile}")) {
             include FileLoader::validateFilePath("custom/{$quickCreateFile}");
         } elseif (file_exists($quickCreateFile)) {
@@ -558,21 +602,31 @@ class SidecarMetaDataUpgrader
         return (isset($def['visible'])) ? $def['visible'] : $default;
     }
 
-
     protected function setMenuFiles()
     {
         foreach ($this->getModulesList() as $module) {
-            if(file_exists("custom/modules/{$module}/Menu.php")) {
-                $file = $this->getUpgradeFileParams("custom/modules/{$module}/Menu.php", $module, "base", "custom", null, true, false, true);
-                if(empty($file)) continue;
+            if (file_exists("custom/modules/{$module}/Menu.php")) {
+                $file = $this->getUpgradeFileParams(
+                    "custom/modules/{$module}/Menu.php",
+                    $module,
+                    "base",
+                    "custom",
+                    null,
+                    true,
+                    false,
+                    true
+                );
+                if (empty($file)) {
+                    continue;
+                }
                 $this->files[] = $file;
             }
         }
         $this->getExtensionFiles("menus");
 
         // Upgrading globalControlLinks for profileactions
-        if(file_exists('custom/application/Ext/GlobalLinks/links.ext.php') ||
-           file_exists('custom/include/globalControlLinks.php')){
+        if (file_exists('custom/application/Ext/GlobalLinks/links.ext.php') ||
+            file_exists('custom/include/globalControlLinks.php')) {
             $file['fullpath'] = 'include/globalControlLinks.php';
             $file['viewtype'] = 'menu';
             $file['basename'] = 'globalControlLinks';
@@ -609,10 +663,10 @@ class SidecarMetaDataUpgrader
     protected function setUpgradeFiles($client)
     {
         // Only allow portal upgrade files for pre-6.6 instances
-        $isPortal  = $client == 'portal';
+        $isPortal = $client == 'portal';
         $skipFiles = !empty($this->upgrade)
-                     && $this->upgrade instanceof UpgradeScript
-                     && version_compare($this->upgrade->from_version, '6.6.0', '>=');
+            && $this->upgrade instanceof UpgradeScript
+            && version_compare($this->upgrade->from_version, '6.6.0', '>=');
         if ($isPortal && $skipFiles) {
             $this->logUpgradeStatus("Skipping setUpgradeFiles for portal because the Sugar instance version is newer than 6.5 - version: {$this->upgrade->from_version}");
             return;
@@ -659,7 +713,7 @@ class SidecarMetaDataUpgrader
     {
         $this->logUpgradeStatus("Getting subpanel upgrade files ...");
         $paths = $this->legacyFilePaths['base'];
-        if($this->module) {
+        if ($this->module) {
             $glob = $this->module;
         } else {
             $glob = "*";
@@ -686,25 +740,25 @@ class SidecarMetaDataUpgrader
      * @param string $extename Extension type
      * @param string $client the client type
      */
-    protected function getExtensionFiles($extename, $client='base')
+    protected function getExtensionFiles($extename, $client = 'base')
     {
-        if(empty($this->extensions[$extename])) {
+        if (empty($this->extensions[$extename])) {
             return;
         }
         $extdefs = $this->extensions[$extename];
-        if($this->module) {
+        if ($this->module) {
             $glob = $this->module;
         } else {
             $glob = "*";
         }
         $dirs = glob("custom/Extension/modules/$glob/Ext/{$extdefs['extdir']}", GLOB_ONLYDIR);
-        if(empty($dirs)) {
+        if (empty($dirs)) {
             return;
         }
-        foreach($dirs as $dir) {
+        foreach ($dirs as $dir) {
             $comps = explode('/', $dir);
             $module = $comps[3];
-            $files = $this->getUpgradeableFilesInPath($dir."/", $module, $client, 'custom', null, true, true);
+            $files = $this->getUpgradeableFilesInPath($dir . "/", $module, $client, 'custom', null, true, true);
             $this->files = array_merge($this->files, $files);
         }
     }
@@ -734,17 +788,27 @@ class SidecarMetaDataUpgrader
                         // Get the metadata directory
                         $metadatadir = "$dirpath/clients/$client/views";
                         $views = glob("$metadatadir/*", GLOB_ONLYDIR);
-                        if(empty($views)) continue;
+                        if (empty($views)) {
+                            continue;
+                        }
 
-                        foreach($views as $view) {
+                        foreach ($views as $view) {
                             $filename = basename($view);
-                            if(!in_array($filename, $this->legacyMetaDataFileNames[$client])) {
+                            if (!in_array($filename, $this->legacyMetaDataFileNames[$client])) {
                                 continue;
                             }
                             $files = glob("$view/{$filename}.php*");
-                            if(!empty($files)) {
+                            if (!empty($files)) {
                                 foreach ($files as $file) {
-                                    if (($data = $this->getUpgradeFileParams($file, $module, $client, $type, null, true, true)) !== false) {
+                                    if (($data = $this->getUpgradeFileParams(
+                                        $file,
+                                        $module,
+                                        $client,
+                                        $type,
+                                        null,
+                                        true,
+                                        true
+                                    )) !== false) {
                                         $this->files[] = $data;
                                     }
                                 }
@@ -763,19 +827,26 @@ class SidecarMetaDataUpgrader
     /**
      * Gets all metadata files that need to be upgraded for a module
      *
-     * @param string $path    The path to scan for metadata files
-     * @param string $module  The module name, used for indexing
-     * @param string $client  The client, also used for indexing
-     * @param string $type    The type (custom, history, working, base)
+     * @param string $path The path to scan for metadata files
+     * @param string $module The module name, used for indexing
+     * @param string $client The client, also used for indexing
+     * @param string $type The type (custom, history, working, base)
      * @param string $package The name of the package for this module if custom
      * @param boolean $deployed Marker to determine if a custom module is deployed or not
      * @param boolean $subpanel Is there subpanel files in this page
      * @return array
      */
-    public function getUpgradeableFilesInPath($path, $module, $client, $type = 'base', $package = null, $deployed = true, $subpanel = false)
-    {
+    public function getUpgradeableFilesInPath(
+        $path,
+        $module,
+        $client,
+        $type = 'base',
+        $package = null,
+        $deployed = true,
+        $subpanel = false
+    ) {
         $this->logUpgradeStatus("Scanning $path for module $module client $client type $type");
-        $return = array();
+        $return = [];
         if (file_exists($path)) {
             // The second * is to pick up history files
             $files = glob($path . '*.php*');
@@ -783,7 +854,16 @@ class SidecarMetaDataUpgrader
             // And if we have any, match them against what we are looking for
             if (!empty($files)) {
                 foreach ($files as $file) {
-                    if (($data = $this->getUpgradeFileParams($file, $module, $client, $type, $package, $deployed, false, $subpanel)) !== false) {
+                    if (($data = $this->getUpgradeFileParams(
+                        $file,
+                        $module,
+                        $client,
+                        $type,
+                        $package,
+                        $deployed,
+                        false,
+                        $subpanel
+                    )) !== false) {
                         $return[] = $data;
                     }
                 }
@@ -813,15 +893,18 @@ class SidecarMetaDataUpgrader
      */
     protected function getViewTypeFromFilename($filename, $client, $type, $fullname)
     {
-        if(strpos($fullname, '/Ext/Layoutdefs/') !== false || strpos($fullname, '/Ext/WirelessLayoutdefs/') !== false) {
+        if (strpos($fullname, '/Ext/Layoutdefs/') !== false ||
+            strpos($fullname, '/Ext/WirelessLayoutdefs/') !== false) {
             return 'layoutdef';
         }
 
-        if(strpos($fullname, '/Ext/Menus/') !== false || $filename == 'Menu') {
+        if (strpos($fullname, '/Ext/Menus/') !== false || $filename == 'Menu') {
             return 'menu';
         }
 
-        if (strpos($filename, 'For') !== false || strpos($filename, 'default') !== false || strpos($fullname, "metadata/subpanels/") !== false) {
+        if (strpos($filename, 'For') !== false ||
+            strpos($filename, 'default') !== false ||
+            strpos($fullname, "metadata/subpanels/") !== false) {
             return 'subpanel';
         }
 
@@ -842,7 +925,7 @@ class SidecarMetaDataUpgrader
         }
 
         if (strpos($filename, 'search') !== false) {
-            if($client == 'base') {
+            if ($client == 'base') {
                 return 'filter';
             }
             return 'search';
@@ -855,17 +938,17 @@ class SidecarMetaDataUpgrader
             $viewtype = 'detail';
         }
 
-        if(!empty($viewtype)) {
+        if (!empty($viewtype)) {
             // mobile/wireless keep their views
-            if($client == 'mobile' || $client == 'wireless') {
+            if ($client == 'mobile' || $client == 'wireless') {
                 return $viewtype;
             }
             // History views get dropped from edit/detail merge
-            if($type == 'history') {
+            if ($type == 'history') {
                 return 'drop';
             }
 
-            return $client == 'portal'?MB_PORTALRECORDVIEW:MB_RECORDVIEW;
+            return $client == 'portal' ? MB_PORTALRECORDVIEW : MB_RECORDVIEW;
         }
 
         return '';
@@ -909,7 +992,9 @@ class SidecarMetaDataUpgrader
                 }
 
                 // If this file name is an upgrade file and it hasn't been stacked, stack it
-                if (!empty($this->legacyMetaDataFileNames['wireless']) && in_array($filename, $this->legacyMetaDataFileNames['wireless']) && !in_array($filepath, self::$filesForRemoval)) {
+                if (!empty($this->legacyMetaDataFileNames['wireless']) &&
+                    in_array($filename, $this->legacyMetaDataFileNames['wireless']) &&
+                    !in_array($filepath, self::$filesForRemoval)) {
                     self::$filesForRemoval[] = $filepath;
                 }
             }
@@ -925,7 +1010,9 @@ class SidecarMetaDataUpgrader
                 $filename = basename($file, '.php');
 
                 // If this file name is an upgrade file and it hasn't been stacked, stack it
-                if (!empty($this->legacyMetaDataFileNames['wireless']) && in_array($filename, $this->legacyMetaDataFileNames['wireless']) && !in_array($file, self::$filesForRemoval)) {
+                if (!empty($this->legacyMetaDataFileNames['wireless']) &&
+                    in_array($filename, $this->legacyMetaDataFileNames['wireless']) &&
+                    !in_array($file, self::$filesForRemoval)) {
                     self::$filesForRemoval[] = $file;
                 }
             }
@@ -1011,8 +1098,16 @@ class SidecarMetaDataUpgrader
      * @param bool $subpanels Is this a subpanel view
      * @return array Array of file params if found, false otherwise
      */
-    public function getUpgradeFileParams($file, $module, $client, $type = 'base', $package = null, $deployed = true, $sidecar = false, $subpanels = false)
-    {
+    public function getUpgradeFileParams(
+        $file,
+        $module,
+        $client,
+        $type = 'base',
+        $package = null,
+        $deployed = true,
+        $sidecar = false,
+        $subpanels = false
+    ) {
         $this->logUpgradeStatus("Candidate for upgrade: $file");
         // Timestamp for history files
         $timestamp = null;
@@ -1057,13 +1152,14 @@ class SidecarMetaDataUpgrader
 
         if ($history) {
             $parts = explode(':', str_replace('.php_', ':', $file));
-            $filename  = basename($parts[0]);
+            $filename = basename($parts[0]);
             $timestamp = $parts[1];
         } else {
             $filename = basename($file, '.php');
         }
 
-        if ($subpanels || (!empty($this->legacyMetaDataFileNames[$client]) && in_array($filename, $this->legacyMetaDataFileNames[$client]))) {
+        if ($subpanels || (!empty($this->legacyMetaDataFileNames[$client]) &&
+                in_array($filename, $this->legacyMetaDataFileNames[$client]))) {
             // Success! We have a full file path. Add this module to the stack
             $this->addUpgradeModule($module);
             $viewtype = $this->getViewTypeFromFilename($filename, $client, $type, $file);
@@ -1071,18 +1167,18 @@ class SidecarMetaDataUpgrader
             if ($viewtype == 'layoutdef') {
                 $this->upgradeRelatedModuleSubpanel($filename);
             }
-            return array(
-                'client'    => $client,
-                'module'    => $module,
-                'type'      => $type,
-                'basename'  => $filename,
+            return [
+                'client' => $client,
+                'module' => $module,
+                'type' => $type,
+                'basename' => $filename,
                 'timestamp' => $timestamp,
-                'fullpath'  => $file,
-                'package'   => $package,
-                'deployed'  => $deployed,
-                'sidecar'   => $sidecar,
-                'viewtype'  => $viewtype,
-            );
+                'fullpath' => $file,
+                'package' => $package,
+                'deployed' => $deployed,
+                'sidecar' => $sidecar,
+                'viewtype' => $viewtype,
+            ];
         }
         $this->logUpgradeStatus("Not upgrading $file: no file name for $filename");
 

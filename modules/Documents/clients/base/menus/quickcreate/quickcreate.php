@@ -11,26 +11,26 @@
  */
 
 $module_name = 'Documents';
-$viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
+$viewdefs[$module_name]['base']['menu']['quickcreate'] = [
     'layout' => 'create',
     'visible' => true,
     'order' => 5,
-    'related' => array(
-        array(
+    'related' => [
+        [
             'module' => 'Accounts',
             'link' => 'documents',
-        ),
-        array(
+        ],
+        [
             'module' => 'Contacts',
             'link' => 'documents',
-        ),
-        array(
+        ],
+        [
             'module' => 'Opportunities',
             'link' => 'documents',
-        ),
-        array(
+        ],
+        [
             'module' => 'RevenueLineItems',
             'link' => 'documents',
-        ),
-    ),
-);
+        ],
+    ],
+];

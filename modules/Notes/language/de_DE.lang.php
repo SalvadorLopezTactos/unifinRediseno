@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Notizenlisten-Dashboard',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Notizenbericht-Dashboard',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Notizen',
     'LBL_EXTERNAL_USER' => 'Externer Benutzer',
     'LBL_EXTERNAL_USER_NAME' => 'Externer Benutzer',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Notizzeitleiste',
 
     'LBL_RELATED_CONTACT' => 'Zugehöriger Kontakt',
     'ERR_DELETE_RECORD' => 'Zum Löschen der Firma muss eine Datensatznummer angegeben werden.',
@@ -124,4 +125,4 @@ $mod_strings = array(
 - Felder, die als Pflichtfeld markiert sind, müssen vor dem Speichern ausgefüllt werden. 
 - Klicken Sie auf "Mehr anzeigen", um weitere Felder zu erfassen. 
 2. Klicken Sie auf "Speichern", um den Datensatz fertigzustellen und auf die letzte Seite zurück zu kommen.',
-);
+];

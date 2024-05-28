@@ -12,8 +12,7 @@
 --}}
 <div class="change-container">
     {{#each changeDef}}
-        {{log this}}
-        <div class="{{#match css_class "change-after-value"}}bg-pill-background{{/match}} {{css_class}}-container{{#eq type "enum-colorcoded"}}-pill{{/eq}}">
+        <div class="{{#match css_class "change-after-value"}}bg-[--pill-background]{{/match}} {{css_class}}-container{{#eq type "enum-colorcoded"}}-pill{{/eq}}">
             <span class="{{css_class}}">
                 {{#if name}}
                     {{field ../../view model=../model template=../template}}

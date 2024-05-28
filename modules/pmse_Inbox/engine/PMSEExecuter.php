@@ -72,7 +72,7 @@ class PMSEExecuter
         $settings = $sugar_config['pmse_settings_default'];
         $this->maxExecutionCycleNumber = (int)$sugar_config['error_number_of_cycles'];
         $this->maxExecutionTimeout = (int)$settings['error_timeout'];
-        $this->executedElements = array();
+        $this->executedElements = [];
         $this->executionTime = 0;
     }
 
@@ -272,7 +272,7 @@ class PMSEExecuter
                         break;
                 }
                 break;
-            default :
+            default:
                 $bpmElement = false;
                 break;
         }
@@ -307,7 +307,7 @@ class PMSEExecuter
             case 'EVENTBASED':
                 $bpmElement = $this->retrievePMSEElement('PMSEDivergingEventBasedGateway');
                 break;
-            default :
+            default:
                 $bpmElement = false;
                 break;
         }
@@ -332,7 +332,7 @@ class PMSEExecuter
             case 'DEFAULT':
                 $bpmElement = $this->retrievePMSEElement('PMSESequenceFlow');
                 break;
-            default :
+            default:
                 $bpmElement = false;
                 break;
         }
@@ -354,11 +354,12 @@ class PMSEExecuter
         $createThread = false,
         $bean = null,
         $externalAction = '',
-        $arguments = array()
+        $arguments = []
     ) {
 
+
         $caseBean = BeanFactory::getBean('pmse_Inbox');
-        $caseBean->retrieve_by_string_fields(array('cas_id' => $flowData['cas_id']));
+        $caseBean->retrieve_by_string_fields(['cas_id' => $flowData['cas_id']]);
         if ($caseBean->cas_status != 'IN PROGRESS') {
             $fd = BeanFactory::getBean('pmse_BpmFlow', $flowData['id']);
             $fd->cas_flow_status = $caseBean->cas_status;
@@ -379,7 +380,6 @@ class PMSEExecuter
         if ($externalAction == 'WAKE_UP') {
             $elementBean = BeanFactory::getBean('pmse_BpmnEvent', $flowData['bpmn_id']);
             if (!isset($elementBean->id)) {
-
                 // Setting active flow to deleted
                 $fd = BeanFactory::getBean('pmse_BpmFlow', $flowData['id']);
                 $fd->cas_flow_status = 'DELETED';
@@ -443,7 +443,6 @@ class PMSEExecuter
         // If there are flow elements after this one that need processing, handle
         // them here
         if (!empty($routeData['next_elements'])) {
-
             // If there are more than one following flow - like from a parallel
             // gateway - then mark that as needing a thread
             $numNextElements = sizeof($routeData['next_elements']);
@@ -503,6 +502,7 @@ class PMSEExecuter
         // Otherwise, update the flow
         return 'UPDATE';
     }
+
     /**
      * It processes an element based in the assumption that should be executed
      * Synchronously or Asynchronously
@@ -513,10 +513,10 @@ class PMSEExecuter
      * @return type
      * @codeCoverageIgnore
      */
-    public function processElement($flowData, $bean, $externalAction = '', $arguments = array())
+    public function processElement($flowData, $bean, $externalAction = '', $arguments = [])
     {
         $startTime = microtime(true);
-        $executionResult = array();
+        $executionResult = [];
         $pmseElement = $this->retrieveElementByType($flowData);
 
         if (!empty($externalAction) && $externalAction == 'RESUME_EXECUTION') {
@@ -565,7 +565,7 @@ class PMSEExecuter
         }
         $remain = $this->executionTime > $maxExecutionTime;
         if ($remain) {
-            throw ProcessManager\Factory::getException('Execution', "Script execution is taking too much time", 1);
+            throw ProcessManager\Factory::getException('Execution', 'Script execution is taking too much time', 1);
         } else {
             return $this->executionTime;
         }
@@ -605,52 +605,55 @@ class PMSEExecuter
     {
         $nestedCount = $this->validateNestedLoopCount($flowData);
         $executionTime = $this->validateExecutionTime($executionData['elapsed_time']);
-        return array(
+        return [
             'executionTime' => $executionTime,
-            'nestedCount' => $nestedCount
-        );
+            'nestedCount' => $nestedCount,
+        ];
     }
 
     public function logErrorActivity($flowData, $bean)
     {
         $params = $this->processTags($flowData, $bean);
         $params['module_name'] = 'pmse_Inbox';
-        $this->logger->activity('The task &0 of case &1 registered an execution error for the record &2 from module &3.',
-            $params);
+        $this->logger->activity(
+            'The task &0 of case &1 registered an execution error for the record &2 from module &3.',
+            $params
+        );
     }
 
     public function processTags($params, $bean)
     {
-        $result = array();
-        $tags = array('task', 'case', 'record', 'module');
+        $result = [];
+        $tags = ['task', 'case', 'record', 'module'];
         foreach ($tags as $value) {
             switch ($value) {
                 case 'task':
-                    $result['tags'][] = array(
-                        "id" => $params['id'],
-                        "name" => $params['bpmn_type'],
-                        "module" => "pmse_Inbox"
-                    );
+                    $result['tags'][] = [
+                        'id' => $params['id'],
+                        'name' => $params['bpmn_type'],
+                        'module' => 'pmse_Inbox',
+                    ];
                     break;
                 case 'case':
-                    $result['tags'][] = array(
-                        "id" => $params['id'],
-                        "name" => $params['cas_id'],
-                        "module" => "pmse_Inbox"
-                    );
+                    $result['tags'][] = [
+                        'id' => $params['id'],
+                        'name' => $params['cas_id'],
+                        'module' => 'pmse_Inbox',
+                    ];
+                    // no break
                 case 'record':
-                    $result['tags'][] = array(
-                        "id" => $bean->id,
-                        "name" => $bean->name,
-                        "module" => $bean->module_name
-                    );
+                    $result['tags'][] = [
+                        'id' => $bean->id,
+                        'name' => $bean->name,
+                        'module' => $bean->module_name,
+                    ];
                     break;
                 case 'module':
-                    $result['tags'][] = array(
-                        "id" => $bean->id,
-                        "name" => $bean->module_name,
-                        "module" => $bean->module_name
-                    );
+                    $result['tags'][] = [
+                        'id' => $bean->id,
+                        'name' => $bean->module_name,
+                        'module' => $bean->module_name,
+                    ];
                     break;
                 default:
                     break;
@@ -658,5 +661,4 @@ class PMSEExecuter
         }
         return $result;
     }
-
 }

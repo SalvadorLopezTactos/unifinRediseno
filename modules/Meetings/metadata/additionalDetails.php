@@ -40,11 +40,11 @@ function additionalDetailsMeeting($fields)
     }
 
     if (!empty($fields['PARENT_ID'])) {
-        $overlib_string .= "<b>" . $mod_strings['LBL_RELATED_TO'] . "</b> " .
-            "<a href=\"javascript:parent.SUGAR.App.router.navigate(" .
+        $overlib_string .= '<b>' . $mod_strings['LBL_RELATED_TO'] . '</b> ' .
+            '<a href="javascript:parent.SUGAR.App.router.navigate(' .
             "parent.SUGAR.App.router.buildRoute('" . $fields['PARENT_TYPE'] . "', '" . $fields['PARENT_ID'] . "')" .
-            ", {trigger: true});\">" .
-            $fields['PARENT_NAME'] . "</a>";
+            ', {trigger: true});">' .
+            $fields['PARENT_NAME'] . '</a>';
         $overlib_string .= '<br>';
     }
 
@@ -54,7 +54,7 @@ function additionalDetailsMeeting($fields)
     }
 
     if (!empty($fields['DESCRIPTION'])) {
-        $overlib_string .= '<b>'. $mod_strings['LBL_DESCRIPTION'] . '</b> ' . substr($fields['DESCRIPTION'], 0, 300);
+        $overlib_string .= '<b>' . $mod_strings['LBL_DESCRIPTION'] . '</b> ' . substr($fields['DESCRIPTION'], 0, 300);
         if (strlen($fields['DESCRIPTION']) > 300) {
             $overlib_string .= '...';
         }
@@ -64,11 +64,10 @@ function additionalDetailsMeeting($fields)
     $editLink = "index.php?action=EditView&module=Meetings&record={$fields['ID']}";
     $viewLink = "index.php?action=DetailView&module=Meetings&record={$fields['ID']}";
 
-    return array(
+    return [
         'fieldToAddTo' => 'NAME',
         'string' => $overlib_string,
         'editLink' => $editLink,
-        'viewLink' => $viewLink
-    );
-
+        'viewLink' => $viewLink,
+    ];
 }

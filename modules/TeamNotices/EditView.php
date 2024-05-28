@@ -24,7 +24,7 @@ if (!empty($_REQUEST['record'])) {
 
 $GLOBALS['log']->info('Team Notice edit view');
 
-$params = array();
+$params = [];
 $params[] = sprintf(
     '<a href="index.php?action=index&module=TeamNotices">%s</a>',
     htmlspecialchars($mod_strings['LBL_MODULE_NAME'], ENT_COMPAT)
@@ -69,7 +69,7 @@ $buttons = [
     class="button primary" onclick="this.form.action.value='Save'; return check_form('EditView');" 
     type="submit" name="button" value="{$escapedHTML($app_strings['LBL_SAVE_BUTTON_LABEL'])}" >
 HTML
-,
+    ,
     <<<HTML
 <input id="btn_teamnotices_cancel" title="{$escapedHTML($app_strings['LBL_CANCEL_BUTTON_TITLE'])}"
     accessKey="{$escapedHTML($app_strings['LBL_CANCEL_BUTTON_KEY'])}" onclick="this.form.action.value='index';"

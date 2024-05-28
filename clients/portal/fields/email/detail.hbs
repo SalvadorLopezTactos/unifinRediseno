@@ -12,8 +12,8 @@
 --}}
 {{#each value}}
     {{#if invalid_email}}
-        <del rel="tooltip"{{#if ../../../dir}} dir="{{../../../../dir}}"{{/if}} title="{{email_address}} ({{flagLabel}})" data-placement="bottom" class="ellipsis_inline">{{email_address}}</del>
+        <del rel="tooltip"{{#if ../../../dir}} dir="{{../../../../dir}}"{{/if}} title="{{email_address}} ({{flagLabel}})" data-bs-placement="bottom" class="ellipsis_inline">{{email_address}}</del>
     {{else}}
-        <span rel="tooltip"{{#if ../../../dir}} dir="{{../../../../dir}}"{{/if}} title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}" data-placement="bottom" class="ellipsis_inline">{{email_address}}</span>
+        <span rel="tooltip"{{#if ../../../dir}} dir="{{../../../../dir}}"{{/if}} title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}" data-bs-placement="bottom" class="ellipsis_inline">{{email_address}}</span>
     {{/if}}
 {{/each}}

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'タイルビュー',
     'LBL_MODULE_NAME_SINGULAR' => 'タイルビュー',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'タイルビュー',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => '有効なモジュール',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'タイルビューモジュール',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'モジュール設定',
-    'LBL_PIPELINE_TABLE_HEADER' => "値が列として使用されるフィールドを選択してください",
+    'LBL_PIPELINE_TABLE_HEADER' => '値が列として使用されるフィールドを選択してください',
     'LBL_PIPELINE_TILE_HEADER' => 'ヘッダーフィールドをタイル表示',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => '使用可能なカラム',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => '本文フィールドをタイル表示',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'タイルのプレビュー',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'タイルのフィールドが多すぎます。',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => '次へ進む前に、次のモジュール設定のエラーを修正してください。<br><br>',
-);
+    'LBL_MODULE_SELECTION' => '以下で表示および構成するモジュールを選択してください',
+    'LBL_SHOW_COLUMN_COUNT' => '列数を表示',
+    'LBL_SHOW_COLUMN_TOTAL' => '列の合計を表示',
+    'LBL_TOTAL_FIELD' => '合計フィールド',
+];

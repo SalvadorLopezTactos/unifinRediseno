@@ -38,16 +38,16 @@ class HealthCheckHelper
     /**
      * @var array
      */
-    protected $registry = array(
-        'web' => array(
+    protected $registry = [
+        'web' => [
             'Scanner/ScannerWeb.php',
-            'HealthCheckScannerWeb'
-        ),
-        'cli' => array(
+            'HealthCheckScannerWeb',
+        ],
+        'cli' => [
             'Scanner/ScannerCli.php',
-            'HealthCheckScannerCli'
-        )
-    );
+            'HealthCheckScannerCli',
+        ],
+    ];
 
     /**
      * @return HealthCheckScannerWeb
@@ -80,7 +80,7 @@ class HealthCheckHelper
             $result = $client->sugarHome($this->getLicenseKey(), $data);
             return !is_soap_fault($result);
         } else {
-            $GLOBALS['log']->error("HealthCheck: " . $ping->getMessage());
+            $GLOBALS['log']->error('HealthCheck: ' . $ping->getMessage());
         }
         return false;
     }
@@ -94,7 +94,7 @@ class HealthCheckHelper
      */
     public function sendLog($file)
     {
-        $GLOBALS['log']->error("HealthCheck: Send logs to HealthCheck server is disabled.");
+        $GLOBALS['log']->error('HealthCheck: Send logs to HealthCheck server is disabled.');
         return false;
     }
 

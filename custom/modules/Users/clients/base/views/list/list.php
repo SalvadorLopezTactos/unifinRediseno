@@ -1,79 +1,85 @@
 <?php
-
-/* This file was updated by 7_FixNameLink.php */
 $viewdefs['Users']['base']['view']['list'] = array (
   'panels' => 
   array (
     0 => 
     array (
-      'name' => 'panel_header',
-      'label' => 'LBL_PANEL_1',
+      'label' => 'LBL_PANEL_DEFAULT',
       'fields' => 
       array (
         0 => 
         array (
           'name' => 'name',
-          'label' => 'LBL_NAME',
+          'label' => 'LBL_LIST_NAME',
+          'type' => 'fullname',
+          'fields' => 
+          array (
+            0 => 'first_name',
+            1 => 'last_name',
+          ),
           'enabled' => true,
           'default' => true,
           'sortable' => true,
-          'width' => '20%',
           'link' => true,
+          'width' => '20',
+          'related_fields' => 
+          array (
+            0 => 'last_name',
+            1 => 'first_name',
+          ),
+          'orderBy' => 'last_name',
         ),
         1 => 
         array (
           'name' => 'user_name',
-          'label' => 'LBL_USER_NAME',
           'sortable' => true,
-          'width' => '15%',
           'default' => true,
           'enabled' => true,
+          'width' => '15',
+          'label' => 'LBL_USER_NAME',
+          'link' => true,
         ),
         2 => 
         array (
           'name' => 'reports_to_name',
-          'label' => 'LBL_REPORTS_TO_NAME',
-          'enabled' => true,
-          'id' => 'REPORTS_TO_ID',
-          'link' => true,
-          'sortable' => false,
-          'width' => '20%',
           'default' => true,
+          'enabled' => true,
+          'link' => true,
+          'label' => 'LBL_REPORTS_TO_NAME',
+          'id' => 'REPORTS_TO_ID',
+          'sortable' => false,
+          'width' => '20',
         ),
         3 => 
         array (
-          'name' => 'email',
-          'width' => '20%',
-          'label' => 'LBL_EMAIL',
+          'name' => 'status',
           'enabled' => true,
           'default' => true,
           'sortable' => true,
+          'width' => '10',
+          'label' => 'LBL_STATUS',
+          'link' => false,
         ),
         4 => 
         array (
-          'name' => 'status',
-          'label' => 'LBL_STATUS',
+          'name' => 'is_group',
+          'default' => false,
           'enabled' => true,
-          'default' => true,
-          'sortable' => true,
-          'width' => '10%',
+          'width' => '10',
+          'label' => 'LBL_LIST_GROUP',
+          'link' => true,
         ),
         5 => 
         array (
-          'name' => 'is_admin',
-          'label' => 'LBL_IS_ADMIN',
+          'name' => 'license_type',
+          'type' => 'enum',
+          'readonly' => true,
           'enabled' => true,
-          'default' => true,
-          'sortable' => true,
-          'width' => '10%',
-        ),
-        6 => 
-        array (
-          'name' => 'is_group',
-          'label' => 'LBL_GROUP_USER',
-          'enabled' => true,
-          'width' => '10%',
           'default' => false,
+          'sortable' => true,
+          'width' => '20',
+          'label' => 'LBL_LICENSE_TYPE',
+          'link' => false,
         ),
       ),
     ),

@@ -23,19 +23,17 @@ class EmailAddressRelationship extends M2MRelationship
      * @param  $additionalFields key=>value pairs of fields to save on the relationship
      * @return boolean true if successful
      */
-    public function add($lhs, $rhs, $additionalFields = array())
+    public function add($lhs, $rhs, $additionalFields = [])
     {
         $lhsLinkName = $this->lhsLink;
 
-        if (empty($lhs->$lhsLinkName) && !$lhs->load_relationship($lhsLinkName))
-        {
+        if (empty($lhs->$lhsLinkName) && !$lhs->load_relationship($lhsLinkName)) {
             $lhsClass = get_class($lhs);
             $GLOBALS['log']->fatal("could not load LHS $lhsLinkName in $lhsClass");
             return false;
         }
 
-        if ((empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != "Yes"))
-        {
+        if ((empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != 'Yes')) {
             $lhs->$lhsLinkName->resetLoaded();
             $this->callBeforeAdd($lhs, $rhs, $lhsLinkName);
         }
@@ -46,8 +44,7 @@ class EmailAddressRelationship extends M2MRelationship
         $this->addRow($dataToInsert);
         $this->addSelfReferencing($lhs, $rhs, $additionalFields);
 
-        if ((empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != "Yes"))
-        {
+        if ((empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != 'Yes')) {
             $lhs->$lhsLinkName->resetLoaded();
             $this->callAfterAdd($lhs, $rhs, $lhsLinkName);
         }
@@ -60,32 +57,29 @@ class EmailAddressRelationship extends M2MRelationship
         $lhsLinkName = $this->lhsLink;
 
         if (!($lhs instanceof SugarBean)) {
-            $GLOBALS['log']->fatal("LHS is not a SugarBean object");
+            $GLOBALS['log']->fatal('LHS is not a SugarBean object');
             return false;
         }
         if (!($rhs instanceof SugarBean)) {
-            $GLOBALS['log']->fatal("RHS is not a SugarBean object");
+            $GLOBALS['log']->fatal('RHS is not a SugarBean object');
             return false;
         }
-        if (empty($lhs->$lhsLinkName) && !$lhs->load_relationship($lhsLinkName))
-        {
+        if (empty($lhs->$lhsLinkName) && !$lhs->load_relationship($lhsLinkName)) {
             $GLOBALS['log']->fatal("could not load LHS $lhsLinkName");
             return false;
         }
 
-        if (empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != "Yes")
-        {
-            if (!empty($lhs->$lhsLinkName))
-            {
+        if (empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != 'Yes') {
+            if (!empty($lhs->$lhsLinkName)) {
                 $lhs->$lhsLinkName->load();
                 $this->callBeforeDelete($lhs, $rhs, $lhsLinkName);
             }
         }
 
-        $dataToRemove = array(
+        $dataToRemove = [
             $this->def['join_key_lhs'] => $lhs->id,
-            $this->def['join_key_rhs'] => $rhs->id
-        );
+            $this->def['join_key_rhs'] => $rhs->id,
+        ];
 
         $this->removeRow($dataToRemove);
 
@@ -93,10 +87,8 @@ class EmailAddressRelationship extends M2MRelationship
             $this->removeSelfReferencing($lhs, $rhs);
         }
 
-        if (empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != "Yes")
-        {
-            if (!empty($lhs->$lhsLinkName))
-            {
+        if (empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != 'Yes') {
+            if (!empty($lhs->$lhsLinkName)) {
                 $lhs->$lhsLinkName->load();
                 $this->callAfterDelete($lhs, $rhs, $lhsLinkName);
             }

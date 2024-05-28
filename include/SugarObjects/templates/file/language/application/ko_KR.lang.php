@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => '마케팅',
-    'Knowledge Base' => '지식 베이스',
-    'Sales' => '영업',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => '홍보 자료',
-    'Product Brochures' => '브로슈어',
-    'FAQ' => '자주묻는질문',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => '마케팅',
+        'Knowledge Base' => '지식 기반',
+        'Sales' => '영업',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => '작동중',
-    'Draft' => '임시 보관',
-    'FAQ' => '자주묻는질문',
-    'Expired' => '기간 만료됨',
-    'Under Review' => '검토중',
-    'Pending' => '보류중',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => '홍보 자료',
+        'Product Brochures' => '브로슈어',
+        'FAQ' => '자주묻는질문',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => '활성',
+        'Draft' => '임시 보관',
+        'FAQ' => '자주묻는질문',
+        'Expired' => '기간 만료됨',
+        'Under Review' => '검토중',
+        'Pending' => '보류중',
+    ],
+];

@@ -14,17 +14,17 @@
     {{! Flexible dashboards for Sugar 10.2 and above }}
     {{#if (flexibleDashboards)}}
         {{partial 'hint-dashboardtitle' this value=value dir=dir hasEditAccess=hasEditAccess name=name type=type}}
-        <a class="dropdown-toggle btn btn-invisible btn-link" data-toggle="dropdown" href="javascript:void(0);">
-            <i class="fa fa-caret-down"></i>
+        <a class="dropdown-toggle btn btn-invisible btn-link" data-bs-toggle="dropdown" href="javascript:void(0);">
+            <i class="sicon sicon-chevron-down"></i>
         </a>
     {{else}}
-        <a class="dropdown-toggle btn btn-invisible btn-link" data-toggle="dropdown" href="javascript:void(0);">{{value}}<i class="fa fa-caret-down"></i></a>
+        <a class="dropdown-toggle btn btn-invisible btn-link" data-bs-toggle="dropdown" href="javascript:void(0);">{{value}}<i class="sicon sicon-chevron-down"></i></a>
     {{/if}}
-<ul class="dropdown-menu">
+<ul class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl">
     {{!
         FIXME TY-1464: Don't hardcode the "Dashboards" module.
     }}
-    <li><a href="javascript:void(0);" data-action="manager"><i class="fa fa-bars"></i> {{str "LBL_MANAGE_DASHBOARDS" "Dashboards"}}</a></li>
+    <li><a href="javascript:void(0);" data-action="manager"><i class="sicon sicon-dashboard"></i> {{str "LBL_MANAGE_DASHBOARDS" "Dashboards"}}</a></li>
     <li class="divider"></li>
     {{#if dashboards}}
         {{#each this.dashboards.models}}

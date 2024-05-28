@@ -9,24 +9,24 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Leads']['mobile']['layout']['subpanels'] = array(
-    'components' => array(
-        array(
+$viewdefs['Leads']['mobile']['layout']['subpanels'] = [
+    'components' => [
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_CALLS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'calls',
-            ),
+            ],
             'linkable' => false,
-        ),
-        array(
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_MEETINGS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'meetings',
-            ),
+            ],
             'linkable' => false,
-        ),
+        ],
         [
             'layout' => 'subpanel',
             'label' => 'LBL_MESSAGES_SUBPANEL_TITLE',
@@ -34,28 +34,28 @@ $viewdefs['Leads']['mobile']['layout']['subpanels'] = array(
                 'link' => 'message_invites',
             ],
         ],
-        array(
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_TASKS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'tasks',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_NOTES_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'notes',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_EMAILS_SUBPANEL_TITLE',
             'linkable' => false,
             'unlinkable' => false,
-            'context' => array(
+            'context' => [
                 'link' => 'archived_emails',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

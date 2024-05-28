@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('datatype-number-parse', function (Y, NAME) {
 
 /**
@@ -90,7 +83,7 @@ Y.mix(Y.namespace("Number"), {
         if (typeof data === 'string' && Y.Lang.trim(data) !== '') {
             data = +data;
         }
-        
+
         // catch NaN and ±Infinity
         if (typeof data !== 'number' || !isFinite(data)) {
             data = null;
@@ -108,4 +101,4 @@ Y.namespace("DataType");
 Y.DataType.Number = Y.Number;
 
 
-}, '3.15.0', {"requires": ["escape"]});
+}, '3.18.1', {"requires": ["escape"]});

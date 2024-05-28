@@ -13,8 +13,7 @@
 
 class TabController
 {
-
-    public $required_modules = array('Home');
+    public $required_modules = ['Home'];
 
     /**
      * @var array The default list of displayed Portal modules
@@ -24,7 +23,7 @@ class TabController
     /**
      * @var bool flag of validation of the cache
      */
-    static protected $isCacheValid = false;
+    protected static $isCacheValid = false;
 
     public function is_system_tabs_in_db()
     {
@@ -50,17 +49,17 @@ class TabController
             return md5($tabs);
         }
 
-        return "";
+        return '';
     }
 
-	/**
-	 * Return the list of enabled tabs
-	 * @param bool|true $filter when true, the tabs are filtered by the current user's ACLs
+    /**
+     * Return the list of enabled tabs
+     * @param bool|true $filter when true, the tabs are filtered by the current user's ACLs
      * @param bool $requireInModuleList flag to indicate if "in modulelist" is required
-	 *
-	 * @return array
-	 */
-    public function get_system_tabs(bool $filter = true, bool $requireInModuleList = true) : array
+     *
+     * @return array
+     */
+    public function get_system_tabs(bool $filter = true, bool $requireInModuleList = true): array
     {
         global $moduleList;
 
@@ -80,7 +79,7 @@ class TabController
                 if ($requireInModuleList && !empty($tabs) && is_array($tabs)) {
                     //Ensure modules saved in the prefences exist.
                     foreach ($tabs as $id => $tab) {
-                        if (!in_array($tab, $moduleList)) {
+                        if (!safeInArray($tab, $moduleList)) {
                             unset($tabs[$id]);
                         }
                     }
@@ -99,12 +98,13 @@ class TabController
         return $system_tabs_result;
     }
 
+
     /**
      * Retrieve the list of tabs for `Portal`
      */
     public static function getPortalTabs()
     {
-        $modules = array();
+        $modules = [];
         $administration = BeanFactory::newBean('Administration');
         // TODO: Refactor this to use the method provided to select `portal`
         // settings.
@@ -154,7 +154,7 @@ class TabController
             }
         }
 
-        return array($tabs, $unsetTabs);
+        return [$tabs, $unsetTabs];
     }
 
     /**
@@ -178,7 +178,7 @@ class TabController
      * get list of non-accessible but enabled tabs
      * @return array
      */
-    public function getNonAccessibleEnabledTabs() : array
+    public function getNonAccessibleEnabledTabs(): array
     {
         $nonAccessibleTabs = [];
         // get all current tabs, ignoring module list check
@@ -201,10 +201,10 @@ class TabController
     {
         $category = $this->getMySettings();
         $setting = $category->settings['MySettings_disable_users_pinned_modules'] ?? null;
-        
+
         return $setting !== 'yes';
     }
-    
+
     /**
      * Set option flag if the users can edit in their User Profile how many modules they want pinned in
      * the Navigation Bar when this one is collapsed.
@@ -230,7 +230,7 @@ class TabController
     {
         $category = $this->getMySettings();
         $setting = $category->settings['MySettings_disable_useredit'] ?? null;
-    
+
         return $setting !== 'yes';
     }
 
@@ -252,16 +252,16 @@ class TabController
     public function get_number_pinned_modules()
     {
         $numberPinnedModules = $this->getSugarConfig('maxPinnedModules');
-        
+
         if (true === is_numeric($numberPinnedModules)) {
             $numberPinnedModules = intval($numberPinnedModules);
         } else {
             $numberPinnedModules = $this->getSugarConfig('default_max_pinned_modules');
         }
-        
+
         return $numberPinnedModules;
     }
-    
+
     /**
      * Set the number of modules to display in the navigation bar when this one is collapsed
      *
@@ -297,7 +297,7 @@ class TabController
      */
     public static function get_key_array($arr)
     {
-        $new = array();
+        $new = [];
         if (!empty($arr)) {
             foreach ($arr as $val) {
                 $new[$val] = $val;
@@ -315,7 +315,6 @@ class TabController
         } else {
             $user->setPreference($type . '_tabs', $tabs);
         }
-
     }
 
     public function get_user_tabs(&$user, $type = 'display')
@@ -333,11 +332,9 @@ class TabController
             if ($type == 'display') {
                 return $system_tabs;
             } else {
-                return array();
+                return [];
             }
         }
-
-
     }
 
     public function get_unset_tabs($user)
@@ -350,8 +347,6 @@ class TabController
         }
 
         return $unsetTabs;
-
-
     }
 
     public function get_tabs($user)
@@ -404,15 +399,14 @@ class TabController
     {
         global $moduleList;
         $this->set_user_tabs($moduleList, $user);
-
     }
 
     public function restore_system_tabs()
     {
         global $moduleList;
         $this->set_system_tabs($moduleList);
-
     }
+
 
 
     /**
@@ -428,7 +422,7 @@ class TabController
     public static function getAllPortalTabs()
     {
 
-        $tabs = array('Home');
+        $tabs = ['Home'];
 
         $browser = new SugarPortalBrowser();
         $browser->loadModules();

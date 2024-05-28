@@ -10,25 +10,23 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description: view handler for step 1 of the import process
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
-
 class ImportViewExtStep1 extends ImportView
 {
-
     protected $pageTitleKey = 'LBL_CONFIRM_EXT_TITLE';
     protected $currentFormID = 'extstep1';
     protected $previousAction = 'Step1';
     protected $nextAction = 'extdupcheck';
 
- 	/**
+    /**
      * @see SugarView::display()
      */
- 	public function display()
+    public function display()
     {
 
         $source = $this->request->getValidInputRequest('external_source', null, '');
@@ -41,83 +39,81 @@ class ImportViewExtStep1 extends ImportView
         ImportCacheFiles::clearCacheFiles();
 
         $mappingFile = $this->getMappingFile($source);
-        if ( $mappingFile == null ) {
-            $this->_showImportError($mod_strings['ERR_MISSING_MAP_NAME'], $importModule,'Step1');
+        if ($mappingFile == null) {
+            $this->_showImportError($mod_strings['ERR_MISSING_MAP_NAME'], $importModule, 'Step1');
             return;
         }
         $extSourceToSugarFieldMapping = $mappingFile->getMapping($importModule);
 
         // get list of required fields
-        $required = array();
-        foreach ( array_keys($this->bean->get_import_required_fields()) as $name ) {
+        $required = [];
+        foreach (array_keys($this->bean->get_import_required_fields()) as $name) {
             $properties = $this->bean->getFieldDefinition($name);
-            if (!empty ($properties['vname']))
-                $required[$name] = str_replace(":","",translate($properties['vname'] ,$this->bean->module_dir));
-            else
-                $required[$name] = str_replace(":","",translate($properties['name'] ,$this->bean->module_dir));
+            if (!empty($properties['vname'])) {
+                $required[$name] = str_replace(':', '', translate($properties['vname'], $this->bean->module_dir));
+            } else {
+                $required[$name] = str_replace(':', '', translate($properties['name'], $this->bean->module_dir));
+            }
         }
 
         $mappedRows = $this->getMappingRows($importModule, $extSourceToSugarFieldMapping);
-        $this->ss->assign("MODULE_TITLE", $this->getModuleTitle(false));
-        $this->ss->assign("rows", $mappedRows);
-        $this->ss->assign("COLUMNCOUNT", is_countable($mappedRows) ? count($mappedRows) : 0);
-        $this->ss->assign("IMPORT_MODULE", $importModule);
-        $this->ss->assign("JAVASCRIPT", $this->getJS($required));
+        $this->ss->assign('MODULE_TITLE', $this->getModuleTitle(false));
+        $this->ss->assign('rows', $mappedRows);
+        $this->ss->assign('COLUMNCOUNT', safeCount($mappedRows));
+        $this->ss->assign('IMPORT_MODULE', $importModule);
+        $this->ss->assign('JAVASCRIPT', $this->getJS($required));
         $this->ss->assign('CSS', $this->getCSS());
-        $this->ss->assign("CURRENT_STEP", $this->currentStep);
+        $this->ss->assign('CURRENT_STEP', $this->currentStep);
 
-        $this->ss->assign("RECORDTHRESHOLD", $sugar_config['import_max_records_per_file']);
-        $this->ss->assign("ENABLED_DUP_FIELDS", htmlentities(json_encode($this->getFieldsForDuplicateCheck()), ENT_QUOTES));
+        $this->ss->assign('RECORDTHRESHOLD', $sugar_config['import_max_records_per_file']);
+        $this->ss->assign('ENABLED_DUP_FIELDS', json_encode($this->getFieldsForDuplicateCheck()));
         $content = $this->ss->fetch('modules/Import/tpls/extstep1.tpl');
-        $this->ss->assign("CONTENT",$content);
+        $this->ss->assign('CONTENT', $content);
         $out = $this->ss->fetch('modules/Import/tpls/wizardWrapper.tpl');
         echo $out;
     }
 
     private function getFieldsForDuplicateCheck()
     {
-        return array('email1', array('first_name', 'last_name'));
+        return ['email1', ['first_name', 'last_name']];
     }
 
 
     private function getMappingRows($module, $extSourceToSugarFieldMapping)
     {
         global $app_strings, $current_language;
-        $columns = array();
-        $mappedFields = array();
+        $columns = [];
+        $mappedFields = [];
         $mod_strings = return_module_language($current_language, $module);
         $import_mod_strings = return_module_language($current_language, 'Import');
-        $ignored_fields = array();
+        $ignored_fields = [];
 
-        foreach($extSourceToSugarFieldMapping as $externalKey => $sugarMapping)
-        {
+        foreach ($extSourceToSugarFieldMapping as $externalKey => $sugarMapping) {
             // See if we have any field map matches
             $defaultValue = $externalKey;
 
             // build string of options
-            $fields  = $this->bean->get_importable_fields();
-            $options = array();
+            $fields = $this->bean->get_importable_fields();
+            $options = [];
             $defaultField = '';
-            foreach ( $fields as $fieldname => $properties )
-            {
+            foreach ($fields as $fieldname => $properties) {
                 // get field name
-                if (!empty ($properties['vname']))
-					$displayname = str_replace(":","",translate($properties['vname'] ,$this->bean->module_dir));
-                else
-					$displayname = str_replace(":","",translate($properties['name'] ,$this->bean->module_dir));
+                if (!empty($properties['vname'])) {
+                    $displayname = str_replace(':', '', translate($properties['vname'], $this->bean->module_dir));
+                } else {
+                    $displayname = str_replace(':', '', translate($properties['name'], $this->bean->module_dir));
+                }
                 // see if this is required
-                $req_mark  = "";
-                $req_class = "";
-                if ( array_key_exists($fieldname, $this->bean->get_import_required_fields()) ) {
-                    $req_mark  = ' ' . $app_strings['LBL_REQUIRED_SYMBOL'];
+                $req_mark = '';
+                $req_class = '';
+                if (array_key_exists($fieldname, $this->bean->get_import_required_fields())) {
+                    $req_mark = ' ' . $app_strings['LBL_REQUIRED_SYMBOL'];
                     $req_class = ' class="required" ';
                 }
                 // see if we have a match
                 $selected = '';
-                if ( !empty($defaultValue) && !in_array($fieldname,$mappedFields) && !in_array($fieldname,$ignored_fields) )
-                {
-                    if ( strtolower($fieldname) == strtolower($sugarMapping['sugar_key']) )
-                    {
+                if (!empty($defaultValue) && !in_array($fieldname, $mappedFields) && !in_array($fieldname, $ignored_fields)) {
+                    if (strtolower($fieldname) == strtolower($sugarMapping['sugar_key'])) {
                         $selected = ' selected="selected" ';
                         $defaultField = $fieldname;
                         $mappedFields[] = $fieldname;
@@ -125,22 +121,23 @@ class ImportViewExtStep1 extends ImportView
                 }
                 // get field type information
                 $fieldtype = '';
-                if ( isset($properties['type'])
-                        && isset($mod_strings['LBL_IMPORT_FIELDDEF_' . strtoupper($properties['type'])]) )
+                if (isset($properties['type'])
+                    && isset($mod_strings['LBL_IMPORT_FIELDDEF_' . strtoupper($properties['type'])])) {
                     $fieldtype = ' [' . $mod_strings['LBL_IMPORT_FIELDDEF_' . strtoupper($properties['type'])] . '] ';
+                }
 
                 $comment = $properties['comments'] ?? $properties['comment'] ?? '';
                 if (!empty($comment)) {
                     $fieldtype .= ' - ' . $comment;
                 }
 
-                $options[$displayname.$fieldname] = '<option value="' . $fieldname . '" title="' . $displayname . htmlentities($fieldtype, ENT_COMPAT) . '"'
+                $options[$displayname . $fieldname] = '<option value="' . $fieldname . '" title="' . $displayname . htmlentities($fieldtype, ENT_COMPAT) . '"'
                     . $selected . $req_class . '>' . $displayname . $req_mark . '</option>\n';
             }
 
             // get default field value
             $defaultFieldHTML = '';
-            if ( !empty($defaultField) ) {
+            if (!empty($defaultField)) {
                 $defaultFieldHTML = getControl(
                     $module,
                     $defaultField,
@@ -149,22 +146,23 @@ class ImportViewExtStep1 extends ImportView
                 );
             }
 
-            if ( isset($default_values[$defaultField]) )
+            if (isset($default_values[$defaultField])) {
                 unset($default_values[$defaultField]);
+            }
 
             // Bug 27046 - Sort the column name picker alphabetically
             ksort($options);
 
             $help_text = isset($sugarMapping['sugar_help_key']) ? $import_mod_strings[$sugarMapping['sugar_help_key']] : '';
-            $rowLabel = $mod_strings[$sugarMapping['sugar_label']] ?? $sugarMapping['default_label'] ;
-            $columns[] = array(
-                'field_choices' => implode('',$options),
+            $rowLabel = $mod_strings[$sugarMapping['sugar_label']] ?? $sugarMapping['default_label'];
+            $columns[] = [
+                'field_choices' => implode('', $options),
                 'default_field' => $defaultFieldHTML,
-                'cell1'         => str_replace(":",'', $rowLabel),
-                'show_remove'   => false,
-                'ext_key'       => $externalKey,
-                'help_text'     => $help_text
-                );
+                'cell1' => str_replace(':', '', $rowLabel),
+                'show_remove' => false,
+                'ext_key' => $externalKey,
+                'help_text' => $help_text,
+            ];
         }
 
         return $columns;
@@ -173,19 +171,18 @@ class ImportViewExtStep1 extends ImportView
     private function getMappingFile($source)
     {
         $classname = 'ImportMap' . ucfirst(strtolower($source));
-        if (! SugarAutoLoader::requireWithCustom("modules/Import/maps/{$classname}.php") ) {
-        	SugarAutoLoader::requireWithCustom("modules/Import/maps/ImportMapOther.php");
-        	$classname = 'ImportMapOther';
-        	$importSource = 'other';
+        if (!SugarAutoLoader::requireWithCustom("modules/Import/maps/{$classname}.php")) {
+            SugarAutoLoader::requireWithCustom('modules/Import/maps/ImportMapOther.php');
+            $classname = 'ImportMapOther';
+            $importSource = 'other';
         }
 
-        if ( class_exists($classname) )
-        {
-            $mapping_file = new $classname;
+        if (class_exists($classname)) {
+            $mapping_file = new $classname();
             return $mapping_file;
-        }
-        else
+        } else {
             return null;
+        }
     }
 
     private function getImportableExternalEAPMs()
@@ -233,19 +230,19 @@ EOCSS;
     /**
      * Returns JS used in this view
      *
-     * @param  array $required fields that are required for the import
+     * @param array $required fields that are required for the import
      * @return string HTML output with JS code
      */
     protected function getJS($required)
     {
         global $mod_strings;
 
-        $print_required_array = "";
+        $print_required_array = '';
         foreach ($required as $name => $display) {
-            $print_required_array .= "required['$name'] = '". sanitize($display) . "';\n";
+            $print_required_array .= "required['$name'] = '" . sanitize($display) . "';\n";
         }
         $sqsWaitImage = SugarThemeRegistry::current()->getImageURL('sqsWait.gif');
-        $removeButtonImage = "index.php?entryPoint=getImage&themeName=Sugar&imageName=id-ff-remove.png&v=".getVersionedPath('');
+        $removeButtonImage = 'index.php?entryPoint=getImage&themeName=Sugar&imageName=id-ff-remove.png&v=' . getVersionedPath('');
         return <<<EOJAVASCRIPT
 
     document.getElementById('goback').onclick = function()

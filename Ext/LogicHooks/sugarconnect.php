@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('sugarEntry') || !sugarEntry) {
     die('Not A Valid Entry Point');
 }
@@ -19,50 +20,50 @@ if (!defined('sugarEntry') || !sugarEntry) {
 
 // Logic hooks to publish a bean to the Sugar Connect webhook.
 
-$hook_array['after_save'][] = array(
+$hook_array['after_save'][] = [
     1,
     'sugarconnect',
     null,
-    '\\Sugarcrm\\Sugarcrm\\SugarConnect\\LogicHooks\\Handler',
+    '\\' . \Sugarcrm\Sugarcrm\SugarConnect\LogicHooks\Handler::class,
     'publish',
-);
+];
 
-$hook_array['after_delete'][] = array(
+$hook_array['after_delete'][] = [
     1,
     'sugarconnect',
     null,
-    '\\Sugarcrm\\Sugarcrm\\SugarConnect\\LogicHooks\\Handler',
+    '\\' . \Sugarcrm\Sugarcrm\SugarConnect\LogicHooks\Handler::class,
     'publish',
-);
+];
 
-$hook_array['after_restore'][] = array(
+$hook_array['after_restore'][] = [
     1,
     'sugarconnect',
     null,
-    '\\Sugarcrm\\Sugarcrm\\SugarConnect\\LogicHooks\\Handler',
+    '\\' . \Sugarcrm\Sugarcrm\SugarConnect\LogicHooks\Handler::class,
     'publish',
-);
+];
 
-$hook_array['after_relationship_add'][] = array(
+$hook_array['after_relationship_add'][] = [
     1,
     'sugarconnect',
     null,
-    '\\Sugarcrm\\Sugarcrm\\SugarConnect\\LogicHooks\\Handler',
+    '\\' . \Sugarcrm\Sugarcrm\SugarConnect\LogicHooks\Handler::class,
     'publish',
-);
+];
 
-$hook_array['after_relationship_delete'][] = array(
+$hook_array['after_relationship_delete'][] = [
     1,
     'sugarconnect',
     null,
-    '\\Sugarcrm\\Sugarcrm\\SugarConnect\\LogicHooks\\Handler',
+    '\\' . \Sugarcrm\Sugarcrm\SugarConnect\LogicHooks\Handler::class,
     'publish',
-);
+];
 
-$hook_array['after_relationship_update'][] = array(
+$hook_array['after_relationship_update'][] = [
     1,
     'sugarconnect',
     null,
-    '\\Sugarcrm\\Sugarcrm\\SugarConnect\\LogicHooks\\Handler',
+    '\\' . \Sugarcrm\Sugarcrm\SugarConnect\LogicHooks\Handler::class,
     'publish',
-);
+];

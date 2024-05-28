@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Sopimukset',
-	'LBL_MODULE_NAME_SINGULAR' => 'Sopimus',
-	'LBL_MODULE_TITLE' => 'Sopimukset: Etusivu',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Sopimukset',
+    'LBL_MODULE_NAME_SINGULAR' => 'Sopimus',
+    'LBL_MODULE_TITLE' => 'Sopimukset: Etusivu',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Luo sopimus',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'Valuutta-ID:',
     'LBL_CURRENCY' => 'Valuutta:',
     'LBL_CURRENCY_RATE' => 'Valuuttakurssi',
-    'LBL_ASSIGNED_TO_NAME'=>'Vastuuhenkilö:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Vastuuhenkilö:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Sopimuslista',	
+    'LBL_LIST_FORM_TITLE' => 'Sopimuslista',
     'LBL_LIST_CONTRACT_NAME' => 'Sopimuksen nimi',
     'LBL_LIST_ACCOUNT_NAME' => 'Asiakkaan nimi',
     'LBL_LIST_START_DATE' => 'Aloitus',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Nimi',
     'LBL_LIST_CONTRACT_VALUE' => 'Arvo',
 
-    'LBL_TYPE'=>'Tyyppi',
+    'LBL_TYPE' => 'Tyyppi',
     'LBL_TYPE_NAME' => 'Tyypin nimi',
-    'LBL_CONTRACT_TYPE'=>'Tyyppi:',
+    'LBL_CONTRACT_TYPE' => 'Tyyppi:',
 
     'LBL_CREATED_USER' => 'Luoja',
     'LBL_MODIFIED_USER' => 'Muokkaaja',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Sopimukset-tietolaatikko',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Kampanjatietueiden työpöytä',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Sopimuksen aikajana',
+];

@@ -9,14 +9,14 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ContractTypes']['base']['layout']['subpanels'] = array(
-    'components' => array(
-        array(
+$viewdefs['ContractTypes']['base']['layout']['subpanels'] = [
+    'components' => [
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_DOCUMENTS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'documents',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

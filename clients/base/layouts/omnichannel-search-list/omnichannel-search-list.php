@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['omnichannel-search-list'] = array(
+$viewdefs['base']['layout']['omnichannel-search-list'] = [
     'components' => [
         [
             'view' => 'omnichannel-search-headerpane',
@@ -26,4 +26,4 @@ $viewdefs['base']['layout']['omnichannel-search-list'] = array(
             'view' => 'omnichannel-search-filter',
         ],
     ],
-);
+];

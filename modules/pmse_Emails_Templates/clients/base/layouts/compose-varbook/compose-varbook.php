@@ -11,45 +11,45 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['pmse_Emails_Templates']['base']['layout']['compose-varbook'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['pmse_Emails_Templates']['base']['layout']['compose-varbook'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'css_class' => 'main-pane span8 overflow-y-auto',
+                            'components' => [
+                                [
                                     'view' => 'compose-varbook-headerpane',
-                                ),
-                                array(
+                                ],
+                                [
                                     'view' => 'compose-varbook-filter',
-                                ),
-                                array(
+                                ],
+                                [
                                     'layout' => 'compose-varbook-list',
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'preview-pane',
                             'css_class' => 'preview-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'preview',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

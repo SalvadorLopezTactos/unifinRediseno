@@ -20,12 +20,29 @@
      * @inheritdoc
      */
     initialize: function(options) {
-        options.def.events = _.extend({}, options.def.events, {
-            'click [name=send-docusign]': 'sendToDocuSign'
-        });
+        this._beforeInit(options);
 
         this._super('initialize', [options]);
 
+        this._initProperties();
+    },
+
+    /**
+     * Set properties before init
+     *
+     * @param {Object}
+     */
+    _beforeInit: function(options) {
+        options.def.events = _.extend({}, options.def.events, {
+            'click [name=send-docusign]': 'sendToDocuSign',
+            'click [name=send-docusign-template]': 'sendToDocuSignTemplate'
+        });
+    },
+
+    /**
+     * Init properties
+     */
+    _initProperties: function() {
         this.type = 'rowaction';
     },
 
@@ -51,5 +68,29 @@
         };
 
         app.events.trigger('docusign:send:initiate', data);
+    },
+
+    /**
+     * Initiate the composite send process, by opening the tab
+     */
+    sendToDocuSignTemplate: function(e) {
+        const controllerCtx = app.controller.context;
+        const controllerModel = controllerCtx.get('model');
+        const module = controllerModel.get('_module');
+        const modelId = controllerModel.get('id');
+        const documents = [this.model.id];
+        const recipients = [];
+
+        var data = {
+            returnUrlParams: {
+                parentRecord: module,
+                parentId: modelId,
+                token: app.api.getOAuthToken()
+            },
+            recipients: recipients,
+            documents: documents
+        };
+
+        app.events.trigger('docusign:compositeSend:initiate', data, 'selectTemplate');
     }
 })

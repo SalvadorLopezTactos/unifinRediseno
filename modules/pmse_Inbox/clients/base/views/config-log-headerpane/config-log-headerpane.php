@@ -11,25 +11,25 @@
  */
 
 
-$viewdefs['pmse_Inbox']['base']['view']['config-log-headerpane'] = array(
+$viewdefs['pmse_Inbox']['base']['view']['config-log-headerpane'] = [
     'template' => 'headerpane',
-    'title'    => 'ProcessMaker Config Log',
-    'buttons'  => array(
-        array(
-            'name'      => 'cancel_button',
-            'type'      => 'button',
-            'label'     => 'LBL_CANCEL_BUTTON_LABEL',
+    'title' => 'ProcessMaker Config Log',
+    'buttons' => [
+        [
+            'name' => 'cancel_button',
+            'type' => 'button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
-        ),
-        array(
-            'name'      => 'save_button',
-            'type'      => 'button',
-            'label'     => 'LBL_SAVE_BUTTON_LABEL',
+        ],
+        [
+            'name' => 'save_button',
+            'type' => 'button',
+            'label' => 'LBL_SAVE_BUTTON_LABEL',
             'css_class' => 'btn-primary',
-        ),
-        array(
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

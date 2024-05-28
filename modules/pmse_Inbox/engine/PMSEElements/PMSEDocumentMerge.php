@@ -38,7 +38,7 @@ class PMSEDocumentMerge extends PMSEScriptTask
      * @param array $arguments
      * @return array
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         // We need a bean for this to work and the instance needs a Sell/Serve license as well
         if ($this->isRunnable($bean)) {
@@ -51,7 +51,7 @@ class PMSEDocumentMerge extends PMSEScriptTask
 
                 $this->merge($data, $bean, $flowData);
             } catch (PMSEExpressionEvaluationException $e) {
-                throw new PMSEElementException("Document Merge: ".$e, $flowData, $this);
+                throw new PMSEElementException('Document Merge: ' . $e, $flowData, $this);
             }
         }
 
@@ -64,9 +64,9 @@ class PMSEDocumentMerge extends PMSEScriptTask
      * @param SugarBean|null $bean
      * @return boolean
      */
-    protected function isRunnable(SugarBean $bean = null) : bool
+    protected function isRunnable(SugarBean $bean = null): bool
     {
-        return $bean instanceof SugarBean && ($bean->isLicensedForSell() || $bean->isLicensedForServe());
+        return $bean instanceof SugarBean;
     }
 
     /**
@@ -111,7 +111,7 @@ class PMSEDocumentMerge extends PMSEScriptTask
                 'flowData' => json_encode($flowData),
             ]);
         } else {
-            throw new PMSEElementException("Document Merge: No merge type", $mergeType, $this);
+            throw new PMSEElementException('Document Merge: No merge type', $mergeType, $this);
         }
     }
 

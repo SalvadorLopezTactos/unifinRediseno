@@ -22,7 +22,7 @@ class SugarUpgradeFixCustomMultienumFields extends UpgradeScript
             if (is_dir($file)) {
                 continue;
             }
-            $dictionary = array();
+            $dictionary = [];
             require $file;
 
             if (empty($dictionary)) {
@@ -48,9 +48,9 @@ class SugarUpgradeFixCustomMultienumFields extends UpgradeScript
             $strToFile = "<?php\n\n";
             foreach ($dictionary[$module]['fields'][$field] as $key => $value) {
                 $strToFile .= "\$dictionary['{$module}']['fields']['{$field}']['{$key}'] = " . var_export(
-                        $value,
-                        true
-                    ) . ";\n";
+                    $value,
+                    true
+                ) . ";\n";
             }
             $this->upgrader->backupFile($file);
             sugar_file_put_contents_atomic($file, $strToFile);

@@ -10,34 +10,34 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$subpanel_layout = array(
-    'top_buttons' => array(
-        array('widget_class' => 'SubPanelTopCreateButton'),
-        array('widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'ProjectTask'),
-    ),
+$subpanel_layout = [
+    'top_buttons' => [
+        ['widget_class' => 'SubPanelTopCreateButton'],
+        ['widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'ProjectTask'],
+    ],
     'where' => '',
-    'list_fields' => array(
-        'name' => array(
+    'list_fields' => [
+        'name' => [
             'vname' => 'LBL_LIST_NAME',
             'widget_class' => 'SubPanelDetailViewLink',
             'width' => '20%',
-        ),
-        'percent_complete' => array(
+        ],
+        'percent_complete' => [
             'vname' => 'LBL_LIST_PERCENT_COMPLETE',
             'width' => '20%',
-        ),
-        'status' => array(
+        ],
+        'status' => [
             'vname' => 'LBL_LIST_STATUS',
             'width' => '20%',
-        ),
-        'assigned_user_name' => array(
+        ],
+        'assigned_user_name' => [
             'vname' => 'LBL_ASSIGNED_TO_NAME',
             'module' => 'Users',
             'width' => '20%',
-        ),
-        'date_finish' => array(
+        ],
+        'date_finish' => [
             'vname' => 'LBL_LIST_DATE_DUE',
             'width' => '20%',
-        ),
-    ),
-);
+        ],
+    ],
+];

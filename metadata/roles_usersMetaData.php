@@ -10,57 +10,57 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['roles_users'] = array(
+$dictionary['roles_users'] = [
     'table' => 'roles_users',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'role_id' => array(
+        ],
+        'role_id' => [
             'name' => 'role_id',
             'type' => 'id',
-        ),
-        'user_id' => array(
+        ],
+        'user_id' => [
             'name' => 'user_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'roles_userspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_ru_role_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'role_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_ru_user_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'user_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'roles_users' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'roles_users' => [
             'lhs_module' => 'Roles',
             'lhs_table' => 'roles',
             'lhs_key' => 'id',
@@ -71,6 +71,6 @@ $dictionary['roles_users'] = array(
             'join_table' => 'roles_users',
             'join_key_lhs' => 'role_id',
             'join_key_rhs' => 'user_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

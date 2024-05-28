@@ -26,7 +26,7 @@ use Google\Service\PaymentsResellerSubscription\GoogleCloudPaymentsResellerSubsc
  * Typical usage is:
  *  <code>
  *   $paymentsresellersubscriptionService = new Google\Service\PaymentsResellerSubscription(...);
- *   $promotions = $paymentsresellersubscriptionService->promotions;
+ *   $promotions = $paymentsresellersubscriptionService->partners_promotions;
  *  </code>
  */
 class PartnersPromotions extends \Google\Service\Resource
@@ -66,8 +66,8 @@ class PartnersPromotions extends \Google\Service\Resource
    * `youtubePayload.partnerEligibilityId` - `youtubePayload.postalCode` - Unless
    * explicitly mentioned above, other features are not supported. Example:
    * `applicableProducts:partners/partner1/products/product1 AND regionCodes:US
-   * AND youtubePayload.postalCode=94043 AND youtubePayload.partnerEligibilityId
-   * =eligibility-id`
+   * AND youtubePayload.postalCode=94043 AND
+   * youtubePayload.partnerEligibilityId=eligibility-id`
    * @opt_param int pageSize Optional. The maximum number of promotions to return.
    * The service may return fewer than this value. If unspecified, at most 50
    * products will be returned. The maximum value is 1000; values above 1000 will

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Nalozi odlazne e-pošte',
     'LBL_MODULE_NAME_SINGULAR' => 'Nalog odlazne e-pošte',
     'LBL_STATUS' => 'Status',
@@ -40,4 +40,4 @@ $mod_strings = array(
     'LBL_PREFERRED_SENDING_ACCOUNT' => 'Željeni nalog pošiljaoca',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za podešavanje e-pošte',
-);
+];

@@ -10,13 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['pmse_Inbox']['base']['view']['list-headerpane'] = array(
+$viewdefs['pmse_Inbox']['base']['view']['list-headerpane'] = [
     'template' => 'headerpane',
     'title' => 'LBL_PMSE_MY_PROCESSES',
-    'buttons' => array(
-        array(
+    'buttons' => [
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

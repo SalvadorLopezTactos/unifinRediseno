@@ -30,7 +30,7 @@ class EmailRecipientRelationship extends One2MBeanRelationship
      * {@inheritdoc}
      * @throws SugarApiExceptionNotAuthorized
      */
-    public function add($lhs, $rhs, $additionalFields = array())
+    public function add($lhs, $rhs, $additionalFields = [])
     {
         if ($lhs->isArchived()) {
             throw new SugarApiExceptionNotAuthorized("Cannot add to {$this->name} when the email is archived");
@@ -289,7 +289,7 @@ class EmailRecipientRelationship extends One2MBeanRelationship
             return $address['email_address_id'] === $emailAddress->id;
         });
 
-        if (count((array) $matches) === 0) {
+        if (safeCount((array)$matches) === 0) {
             if ($bean->emailAddress->addAddress($emailAddress->email_address) === false) {
                 LoggerManager::getLogger()->error(
                     "Failed to add {$emailAddress->email_address} (EmailAddresses/{$bean->email_address_id}) to " .

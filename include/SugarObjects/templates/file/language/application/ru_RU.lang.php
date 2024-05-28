@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Маркетинговые кампании',
-    'Knowledge Base' => 'База знаний',
-    'Sales' => 'Продажи',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Дополнительное маркетинговое обеспечение',
-    'Product Brochures' => 'Брошюры продуктов',
-    'FAQ' => 'Вопросы и ответы',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Маркетинг',
+        'Knowledge Base' => 'База Знаний',
+        'Sales' => 'Продажи',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Активна',
-    'Draft' => 'Черновик',
-    'FAQ' => 'Вопросы и ответы',
-    'Expired' => 'Просрочен',
-    'Under Review' => 'На рассмотрении',
-    'Pending' => 'В ожидании',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Дополнительное маркетинговое обеспечение',
+        'Product Brochures' => 'Брошюры о продуктах',
+        'FAQ' => 'Вопросы и ответы',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Активные',
+        'Draft' => 'Черновик',
+        'FAQ' => 'Вопросы и ответы',
+        'Expired' => 'Просроченные',
+        'Under Review' => 'На рассмотрении',
+        'Pending' => 'В ожидании',
+    ],
+];

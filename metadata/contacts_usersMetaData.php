@@ -10,59 +10,59 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['contacts_users'] = array(
+$dictionary['contacts_users'] = [
     'table' => 'contacts_users',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'contact_id' => array(
+        ],
+        'contact_id' => [
             'name' => 'contact_id',
             'type' => 'id',
-        ),
-        'user_id' => array(
+        ],
+        'user_id' => [
             'name' => 'user_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'contacts_userspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_con_users_user',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'user_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_contacts_users',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'contact_id',
                 'user_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'contacts_users' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'contacts_users' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
@@ -74,6 +74,6 @@ $dictionary['contacts_users'] = array(
             'join_key_lhs' => 'user_id',
             'join_key_rhs' => 'contact_id',
             'user_field' => 'user_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

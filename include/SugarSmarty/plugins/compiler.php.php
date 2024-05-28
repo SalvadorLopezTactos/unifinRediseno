@@ -18,9 +18,10 @@
  */
 function smarty_compiler_php($tag_arg, &$smarty)
 {
-    return "<?php";
+    return '<?php';
 }
+
 function smarty_compiler_phpclose($tag_arg, &$smarty)
 {
-    return "?>";
+    return '?>';
 }

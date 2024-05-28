@@ -12,25 +12,27 @@
 
 /**
  * ContactsViewContactAddressPopup
- * 
+ *
  * */
- 
-require_once('modules/Contacts/Popup_picker.php');
 
-class ContactsViewContactAddressPopup extends SugarView {
+require_once 'modules/Contacts/Popup_picker.php';
+
+class ContactsViewContactAddressPopup extends SugarView
+{
     /**
      * {@inheritDoc}
      *
      * @param array $params Ignored
      */
-    public function process($params = array())
+    public function process($params = [])
     {
-		$this->display();
- 	}
+        $this->display();
+    }
 
- 	function display() {
- 		$this->renderJavascript();
- 		$popup = new Popup_Picker();
-		echo $popup->process_page_for_address();
- 	}	
+    public function display()
+    {
+        $this->renderJavascript();
+        $popup = new Popup_Picker();
+        echo $popup->process_page_for_address();
+    }
 }

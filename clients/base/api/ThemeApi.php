@@ -17,44 +17,44 @@ class ThemeApi extends SugarApi
 {
     public function registerApiRest()
     {
-        return array(
-            'getCSSURL' => array(
+        return [
+            'getCSSURL' => [
                 'reqType' => 'GET',
-                'path' => array('css'),
-                'pathVars' => array(''),
+                'path' => ['css'],
+                'pathVars' => [''],
                 'method' => 'getCSSURLs',
                 'shortHelp' => 'Get (or generate) the css files for a platform and a theme',
                 'longHelp' => 'include/api/help/css_get_help.html',
                 'noLoginRequired' => true,
-            ),
-            'previewCSS' => array(
+            ],
+            'previewCSS' => [
                 'reqType' => 'GET',
-                'path' => array('css', 'preview'),
-                'pathVars' => array('', ''),
+                'path' => ['css', 'preview'],
+                'pathVars' => ['', ''],
                 'method' => 'previewCSS',
                 'shortHelp' => 'Compile the css for a platform and a theme just as a preview',
                 'longHelp' => 'include/api/help/css_preview_get_help.html',
                 'noLoginRequired' => true,
-                'rawReply' => true
-            ),
-            'getCustomThemeVars' => array(
+                'rawReply' => true,
+            ],
+            'getCustomThemeVars' => [
                 'reqType' => 'GET',
-                'path' => array('theme'),
-                'pathVars' => array(''),
+                'path' => ['theme'],
+                'pathVars' => [''],
                 'method' => 'getCustomThemeVars',
                 'shortHelp' => 'Get the customizable variables of a custom theme',
                 'longHelp' => 'include/api/help/theme_get_help.html',
                 'noLoginRequired' => true,
-            ),
-            'updateCustomTheme' => array(
+            ],
+            'updateCustomTheme' => [
                 'reqType' => 'POST',
-                'path' => array('theme'),
-                'pathVars' => array(''),
+                'path' => ['theme'],
+                'pathVars' => [''],
                 'method' => 'updateCustomTheme',
                 'shortHelp' => 'Update the customizable variables of a custom theme',
                 'longHelp' => 'include/api/help/theme_post_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -70,7 +70,7 @@ class ThemeApi extends SugarApi
         $theme = $this->newSidecarTheme($args);
         // Otherwise we just return the CSS Url so the application can load the CSS file.
         // getCSSURL method takes care of generating CSS file(s) if it doesn't exist in cache.
-        return array("url" => array_values($theme->getCSSURL()));
+        return ['url' => array_values($theme->getCSSURL())];
     }
 
     /**
@@ -110,11 +110,11 @@ class ThemeApi extends SugarApi
     public function getCustomThemeVars(ServiceBase $api, array $args)
     {
         $theme = $this->newSidecarTheme($args);
-        $output = array();
+        $output = [];
         $variablesByType = $theme->getThemeVariables();
         foreach ($variablesByType as $type => $variables) {
             foreach ($variables as $lessVar => $lessValue) {
-                $output[$type][] = array('name' => $lessVar, 'value' => $lessValue);
+                $output[$type][] = ['name' => $lessVar, 'value' => $lessValue];
             }
         }
         return $output;
@@ -153,7 +153,7 @@ class ThemeApi extends SugarApi
             // else
             $theme->loadVariables();
             // Override the custom variables.less with the given vars
-            $variables = array_diff_key($args, array('platform' => 0, 'themeName' => 0, 'reset' => 0));
+            $variables = array_diff_key($args, ['platform' => 0, 'themeName' => 0, 'reset' => 0]);
             $theme->setVariables($variables);
             $theme->saveThemeVariables();
         }
@@ -183,5 +183,4 @@ class ThemeApi extends SugarApi
         }
         return new SidecarTheme($platformName);
     }
-
 }

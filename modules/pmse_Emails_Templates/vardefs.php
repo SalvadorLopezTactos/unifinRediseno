@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_Emails_Templates'] = array(
+$dictionary['pmse_Emails_Templates'] = [
     'table' => 'pmse_emails_templates',
     'color' => 'orange',
     'icon' => 'sicon-process-email-templates-lg',
@@ -22,8 +22,8 @@ $dictionary['pmse_Emails_Templates'] = array(
     //'unified_search' => true,
     //'full_text_search' => true,
     //'unified_search_default_enabled' => true,
-    'fields' => array(
-        'name' => array(
+    'fields' => [
+        'name' => [
             'name' => 'name',
             'vname' => 'LBL_NAME',
             'type' => 'name',
@@ -44,9 +44,9 @@ $dictionary['pmse_Emails_Templates'] = array(
             'reportable' => true,
             'calculated' => false,
             'size' => '20',
-            'full_text_search' => array('enabled' => true, 'searchable' => true, 'boost' => 1.55),
-        ),
-        'from_name' => array(
+            'full_text_search' => ['enabled' => true, 'searchable' => true, 'boost' => 1.55],
+        ],
+        'from_name' => [
             'required' => false,
             'name' => 'from_name',
             'vname' => 'LBL_FROM_NAME',
@@ -65,8 +65,8 @@ $dictionary['pmse_Emails_Templates'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'from_address' => array(
+        ],
+        'from_address' => [
             'required' => false,
             'name' => 'from_address',
             'vname' => 'LBL_FROM_ADDRESS',
@@ -85,8 +85,8 @@ $dictionary['pmse_Emails_Templates'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'subject' => array(
+        ],
+        'subject' => [
             'required' => false,
             'name' => 'subject',
             'vname' => 'LBL_SUBJECT',
@@ -105,8 +105,8 @@ $dictionary['pmse_Emails_Templates'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'body' => array(
+        ],
+        'body' => [
             'required' => false,
             'name' => 'body',
             'vname' => 'LBL_BODY',
@@ -127,8 +127,8 @@ $dictionary['pmse_Emails_Templates'] = array(
             'studio' => 'visible',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'body_html' => array(
+        ],
+        'body_html' => [
             'required' => false,
             'name' => 'body_html',
             'vname' => 'LBL_BODY_HTML',
@@ -149,8 +149,8 @@ $dictionary['pmse_Emails_Templates'] = array(
             'studio' => 'visible',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'type' => array(
+        ],
+        'type' => [
             'required' => false,
             'name' => 'type',
             'vname' => 'LBL_TYPE',
@@ -169,8 +169,8 @@ $dictionary['pmse_Emails_Templates'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'base_module' => array(
+        ],
+        'base_module' => [
             'required' => true,
             'name' => 'base_module',
             'vname' => 'LBL_BASE_MODULE',
@@ -192,12 +192,12 @@ $dictionary['pmse_Emails_Templates'] = array(
             'options' => '',
             'studio' => 'visible',
             'dependency' => false,
-            'function' => array(
+            'function' => [
                 'name' => 'getTargetsModules',
                 'include' => 'modules/pmse_Project/pmse_ProjectHelper.php',
-            ),
-        ),
-        'text_only' => array(
+            ],
+        ],
+        'text_only' => [
             'required' => false,
             'name' => 'text_only',
             'vname' => 'LBL_TEXT_ONLY',
@@ -219,8 +219,8 @@ $dictionary['pmse_Emails_Templates'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'published' => array(
+        ],
+        'published' => [
             'required' => false,
             'name' => 'published',
             'vname' => 'LBL_PUBLISHED',
@@ -239,22 +239,22 @@ $dictionary['pmse_Emails_Templates'] = array(
             'calculated' => false,
             'len' => '3',
             'size' => '20',
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'acls' => array(
-        'SugarACLDeveloperForTarget' => array(
+    'acls' => [
+        'SugarACLDeveloperForTarget' => [
             'targetModuleField' => 'base_module',
             'allowUserRead' => false,
-        ),
-    ),
-    'visibility' => array(
-        'TargetModuleDeveloperVisibility' => array(
+        ],
+    ],
+    'visibility' => [
+        'TargetModuleDeveloperVisibility' => [
             'targetModuleField' => 'base_module',
-        ),
-    ),
+        ],
+    ],
     'hidden_to_role_assignment' => true,
     // @TODO Fix the Default and Basic SugarObject templates so that Basic
     // implements Default. This would allow the application of various
@@ -265,18 +265,18 @@ $dictionary['pmse_Emails_Templates'] = array(
     // implementation fields. Once there is a separation of default and basic
     // templates we can safely remove these as this module will implement
     // default instead of basic.
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'lockable_fields',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'team_security',
         'assignable',
         'taggable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_Emails_Templates', 'pmse_Emails_Templates');

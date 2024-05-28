@@ -27,10 +27,10 @@ class Platform extends Constraint
     /**
      * {@inheritdoc}
      */
-    protected static $errorNames = array(
+    protected static $errorNames = [
         self::ERROR_INVALID_PLATFORM_FORMAT => 'ERROR_INVALID_PLATFORM_FORMAT',
         self::ERROR_INVALID_PLATFORM => 'ERROR_INVALID_PLATFORM',
-    );
+    ];
 
     /**
      * Message template

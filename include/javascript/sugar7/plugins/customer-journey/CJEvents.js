@@ -167,8 +167,9 @@
              * @param {Object} model
              */
             deleteModelClick: function(model) {
-                let labelName = model.get('name');
-                labelName += model.module === 'DRI_SubWorkflows' ? ' stage' : ' activity';
+                let labelName = `${model.get('name')} activity`;
+                labelName += _.isEqual(model.module, 'DRI_Workflow_Task_Templates') ? ' template' : '';
+
                 app.alert.show('delete_activity', {
                     level: 'confirmation',
                     messages: app.lang.get('NTC_DELETE_CONFIRMATION', model.module),
@@ -263,23 +264,42 @@
             },
 
             /**
+             * Checks if Activity status attribute is read-only
+             *
+             * @param {Object} activity
+             */
+            isStatusReadOnly: function(activity) {
+                if (!_.isUndefined(activity) && !_.isUndefined(activity.get('is_status_readonly'))) {
+                    if (app.utils.isTruthy(activity.get('is_status_readonly'))) {
+                        return true;
+                    }
+                }
+                return false;
+            },
+
+            /**
               * Handles starting a given activity
               *
               * @param {Object} activity
               */
             startActivityClick: function(activity) {
-                app.alert.show('processing_start_activity_click', {
-                    level: 'process',
-                    title: app.lang.get('LBL_PROCESSING_REQUEST'),
-                });
-                this.handleForms(
-                    activity,
-                    'in_progress',
-                    _.bind(function() {
-                        this.startActivity(activity);
-                        app.alert.dismiss('processing_start_activity_click');
-                    }, this)
-                );
+                if (!this.isStatusReadOnly(activity)) {
+                    app.alert.show('processing_start_activity_click', {
+                        level: 'process',
+                        title: app.lang.get('LBL_PROCESSING_REQUEST'),
+                    });
+                    this.handleForms(
+                        activity,
+                        'in_progress',
+                        _.bind(function() {
+                            this.startActivity(activity);
+                            app.alert.dismiss('processing_start_activity_click');
+                        }, this)
+                    );
+                    this.enablingJourneyAndDoneLoading();
+                } else {
+                    this.showReadOnlyErrorMessage('error', 'LBL_ACTIVITY_STATUS_READ_ONLY');
+                }
             },
 
             /**
@@ -289,31 +309,62 @@
              */
             startActivity: function(activity) {
                 var url = '';
-                if (activity.module == 'Tasks') {
+                if (activity.module === 'Tasks' || activity.module === 'Calls') {
                     this.disablingJourneyAndStartLoading();
-                    url = this.buildUrlActivityStatusUpdateApi(activity, 'In Progress');
-                    this.callActivityStatusUpdateApi(url, activity);
+                    [url, data] = this.buildUrlActivityStatusUpdateApi(activity, 'In Progress');
+                    this.callActivityStatusUpdateApi(url, activity, data);
                 }
             },
 
             /**
             * Show processing alert
+            *
+            * @param {string} name
+            * @param {string} message
             */
-            showProcessingAlert: function() {
-                app.alert.show('process_complete_activity', {
+            showProcessingAlert: function(name, message) {
+                app.alert.show(name || 'process_complete_activity', {
                     level: 'process',
-                    title: app.lang.get('LBL_CJ_PROCESSING_REQUEST'),
+                    title: message || app.lang.get('LBL_CJ_PROCESSING_REQUEST'),
                     autoClose: false,
                 });
             },
 
             /**
-            * Get count of childActivities
+             * Provide the completed and not applicable statuses of activities
+             *
+             * @return {Object}
+             */
+            getCompleteStatusList: function() {
+                return _.extend(
+                    app.lang.getAppListStrings('cj_calls_completed_status_list'),
+                    app.lang.getAppListStrings('cj_tasks_completed_status_list')
+                );
+            },
+
+            /**
+            * Get count of child activities that are neither completed nor not-applicable
             *
             * @param {Object} activity
+            * @return {number}
             */
-            getChildActivityCount: function(activity) {
-                return _.isUndefined(activity.get('children')) ? 0 : activity.get('children').length;
+            getNotCompletedChildrenCount: function(activity) {
+                const children =  activity.get('children');
+
+                if (_.isUndefined(children)) {
+                    return 0;
+                }
+
+                let count = 0;
+                const statusList = this.getCompleteStatusList();
+
+                _.each(children, function(childActivity) {
+                    if (!statusList[childActivity.status]) {
+                        count++;
+                    }
+                });
+
+                return count;
             },
 
             /**
@@ -324,24 +375,34 @@
             completeActivityClickConfirm: function(activityID) {
                 let activity = this.activities[activityID];
 
-                this.showProcessingAlert();
-
                 if (!_.isUndefined(activity)) {
-                    const count = this.validateChildren(activity);
-                    const taskCompletedList =  'cj_tasks_completed_status_list';
-                    const callCompletedList = 'cj_calls_completed_status_list';
-                    const callCompletedStatus = app.lang.getAppListStrings(callCompletedList)['Not Held'];
-                    const taskCompletedStatus = app.lang.getAppListStrings(taskCompletedList)['Not Applicable'];
+                    if (!this.isStatusReadOnly(activity)) {
+                        const count = this.validateChildren(activity);
 
-                    if (count < 1) {
-                        _.each(activity.get('children'),  (childActivity) => {
-                            if (!_.include([taskCompletedStatus, callCompletedStatus],
-                                this.activities[childActivity.id].get('status'))) {
-                                this.handleFormsForActivities(this.activities[childActivity.id], activity);
+                        if (count < 1) {
+                            this.readOnlyChildActivity = false;
+                            this.isActivityChangeNotAllowed = false;
+                            this.showProcessingAlert();
+                            this.disablingJourneyAndStartLoading();
+
+                            const statusList = this.getCompleteStatusList();
+                            if (activity.get('is_cj_parent_activity')) {
+                                this.completingParentActivity = activity;
                             }
-                        }, this);
+                            _.each(activity.get('children'), (childActivity) => {
+                                const childModel = this.activities[childActivity.id];
+                                const status = childModel.get('status');
+                                this.childActivitiesCount = 0;
+
+                                if (!statusList[status]) {
+                                    this.handleFormsForActivities(childModel, activity);
+                                }
+                            }, this);
+                        } else {
+                            this.blockByWarnings(this.activities[activity.id], count);
+                        }
                     } else {
-                        this.blockByWarnings(this.activities[activity.id], count);
+                        this.showReadOnlyErrorMessage('error', 'LBL_CHILD_ACTIVITY_STATUS_READ_ONLY');
                     }
                 }
             },
@@ -350,8 +411,9 @@
             * Handles completing a given activity
             *
             * @param {Object} activity
+            * @param {boolean} isClicked
             */
-            completeActivityClick: function(activity) {
+            completeActivityClick: function(activity, isClicked = false) {
                 if (this.isParent(activity)) {
                     app.alert.show('success', {
                         level: 'confirmation',
@@ -362,8 +424,16 @@
                         onConfirm: _.bind(this.completeActivityClickConfirm, this, activity.id)
                     });
                 } else {
-                    this.showProcessingAlert();
-                    this.handleFormsForActivities(activity);
+                    if (!this.isStatusReadOnly(activity)) {
+                        if (isClicked) {
+                            this.showProcessingAlert();
+                            this.disablingJourneyAndStartLoading();
+                        }
+
+                        this.handleFormsForActivities(activity);
+                    } else {
+                        this.showReadOnlyErrorMessage('error', 'LBL_ACTIVITY_STATUS_READ_ONLY');
+                    }
                 }
             },
 
@@ -387,35 +457,12 @@
             },
 
             /**
-            * get count of children having Not Applicable status
-            *
-            * @param {Object} activity
-            */
-            getNotApplicableChildrenCount: function(activity) {
-                let count = 0;
-                const taskCompletedList =  'cj_tasks_completed_status_list';
-                const callCompletedList = 'cj_calls_completed_status_list';
-                const callCompletedStatus = app.lang.getAppListStrings(callCompletedList)['Not Held'];
-                const taskCompletedStatus = app.lang.getAppListStrings(taskCompletedList)['Not Applicable'];
-
-                _.each(activity.get('children'), function(childActivity) {
-                    if (_.include([taskCompletedStatus, callCompletedStatus], childActivity.status)) {
-                        count++;
-                    }
-                });
-
-                return count;
-            },
-
-            /**
             * Show alerts for bloacked_by activities
             *
             * @param {Object} activity
             * @param {Int} count
             */
             blockByWarnings: function(activity, count) {
-                app.alert.dismiss('process_complete_activity');
-
                 if (count === 1) {
                     app.alert.show('bloack_by_children', {
                         level: 'warning',
@@ -498,26 +545,44 @@
                     status: activity.fields.status,
                 };
 
-                let url = this.buildUrlActivityStatusUpdateApi(activity, updatedStatus, parent);
+                [url, data] = this.buildUrlActivityStatusUpdateApi(activity, updatedStatus, parent);
                 activity.doValidate(
                     fields,
                     _.bind(function(isValid) {
                         if (isValid) {
-                            app.api.call('create', url, null, {
+                            app.api.call('create', url, data, null, {
                                 success: _.bind(function(response) {
-                                    if (!_.isEmpty(response)) {
+                                    if (!response.isValid) {
                                         app.alert.dismiss('process_complete_activity');
                                         this.alertForRequiredFieldDependency(response);
-
-                                        if (this.childActivityCount > 0) {
-                                            this.reloadData();
-                                        }
+                                        this.enablingJourneyAndDoneLoading();
+                                    } else if (!_.isUndefined(response.isValidParent) &&
+                                        response.isValidParent === false && !_.isUndefined(this.completeQueue)) {
+                                        this.completeQueue = [];
+                                        app.alert.dismiss('process_complete_activity');
+                                        this.showNotAllowedErrorMessage();
+                                        this.enablingJourneyAndDoneLoading();
+                                    } else if (!_.isUndefined(response.isActivityChangeNotAllowed) &&
+                                        response.isActivityChangeNotAllowed === true &&
+                                        !_.isUndefined(this.completeQueue)) {
+                                        this.isActivityChangeNotAllowed = true;
+                                        this.completeActivitySuccess(activity, response.data);
                                     } else {
-                                        this.disablingJourneyAndStartLoading();
-                                        this.completeActivitySuccess(activity);
+                                        if (!_.isUndefined(response.isChildReadOnly) &&
+                                            response.isChildReadOnly === true) {
+                                            this.readOnlyChildActivity = true;
+                                        }
+                                        this.completeActivitySuccess(activity, response.data);
                                     }
                                 }, this),
                                 error: _.bind(this.completeActivityError, this),
+                                complete: _.bind(function() {
+                                    this.completingActivity = false;
+                                    if (!this.disposed) {
+                                        this.render();
+                                    }
+                                    app.alert.dismiss('process_complete_activity');
+                                }, this),
                             });
                         } else {
                             this.completingActivity = false;
@@ -537,33 +602,44 @@
              * Successfull Update Activity Status
              *
              * @param {Object} activity
+             * @param {Object} data
              */
-            completeActivitySuccess: function(activity) {
+            completeActivitySuccess: function(activity, data) {
                 this.completingActivity = false;
-                let stage = this.stages[activity.get('dri_subworkflow_id')];
-                let stageRSATriggerFlag = false;
-                --this.childActivityCount;
-                if (stage.model.get('state') === 'not_started') {
-                    stageRSATriggerFlag = true;
-                }
-                if (this.completeQueue.length) {
+                --this.childActivitiesCount;
+
+                if (!_.isEmpty(this.completeQueue)) {
                     this.completeActivityClick(this.completeQueue.shift());
                 } else {
-                    this.reloadData();
+                    app.alert.dismiss('process_complete_activity');
+                    if (!_.isUndefined(this.completingParentActivity) &&
+                        this.completingParentActivity != null &&
+                        activity.get('cj_parent_activity_id') === this.completingParentActivity.get('id')) {
+                        if (!_.isUndefined(this.readOnlyChildActivity) &&
+                            this.readOnlyChildActivity === true) {
+                            this.showReadOnlyErrorMessage('error', 'LBL_CHILD_ACTIVITY_STATUS_READ_ONLY');
+                            this.readOnlyChildActivity = false;
+                        } if (!_.isUndefined(this.isActivityChangeNotAllowed) &&
+                            this.isActivityChangeNotAllowed === true) {
+                            this.showNotAllowedErrorMessage();
+                            this.isActivityChangeNotAllowed = false;
+                        } else {
+                            app.alert.show('success_complete_activity', {
+                                level: 'success',
+                                messages: app.lang.get('LBL_CJ_SUCCESS'),
+                                autoClose: true,
+                            });
+                        }
+                    } else if (!_.isUndefined(this.isActivityChangeNotAllowed) &&
+                        this.isActivityChangeNotAllowed === true) {
+                        this.showNotAllowedErrorMessage();
+                        this.isActivityChangeNotAllowed = false;
+                    }
+                    this.completingParentActivity = null;
+                    this.reloadData(data);
                 }
-                this.handleFormsForStage(activity, activity.get('dri_subworkflow_id'), stageRSATriggerFlag);
 
-                if (this.childActivityCount === 0) {
-                    app.alert.dismiss('process_complete_activity');
-                    app.alert.show('success_complete_activity', {
-                        level: 'success',
-                        messages: app.lang.get('LBL_CJ_SUCCESS'),
-                        autoClose: true,
-                    });
-                }
-                if (this.childActivityCount === -1) {
-                    app.alert.dismiss('process_complete_activity');
-                }
+                this.handleFormsForStage(activity, activity.get('dri_subworkflow_id'));
             },
 
             /**
@@ -610,11 +686,15 @@
              * @param {Object} activity
              */
             notApplicableActivityClick: function(activity) {
-                this.handleForms(
-                    activity,
-                    'not_applicable',
-                    _.bind(this.notApplicableActivity, this, activity)
-                );
+                if (!this.isStatusReadOnly(activity)) {
+                    this.handleForms(
+                        activity,
+                        'not_applicable',
+                        _.bind(this.notApplicableActivity, this, activity)
+                    );
+                } else {
+                    this.showReadOnlyErrorMessage('error', 'LBL_CHILD_ACTIVITY_STATUS_READ_ONLY');
+                }
             },
 
             /**
@@ -624,28 +704,31 @@
              * @param {Object} activity
              */
             notApplicableActivity: function(activity) {
-                var updatedStatus = '';
-                var url = '';
-
                 if (!_.isEmpty(activity.get('cj_parent_activity_id'))) {
                     // If it is a sub activity
-                    switch (activity.module) {
-                        case 'Tasks':
-                            updatedStatus = 'Not Applicable';
-                            break;
-                        case 'Calls':
-                            updatedStatus = 'Not Held';
-                            break;
-                        case 'Meetings':
-                            updatedStatus = 'Not Held';
-                            break;
+                    if (!this.isStatusReadOnly(activity)) {
+                        this.disablingJourneyAndStartLoading();
+                        let updatedStatus = '';
+
+                        switch (activity.module) {
+                            case 'Tasks':
+                                updatedStatus = 'Not Applicable';
+                                break;
+                            case 'Calls':
+                                updatedStatus = 'Not Held';
+                                break;
+                            case 'Meetings':
+                                updatedStatus = 'Not Held';
+                                break;
+                        }
+                        const [url, data] = this.buildUrlActivityStatusUpdateApi(activity, updatedStatus);
+                        this.callActivityStatusUpdateApi(url, activity, data);
+
+                    } else {
+                        this.showReadOnlyErrorMessage('error', 'LBL_ACTIVITY_STATUS_READ_ONLY');
                     }
-
-                    this.disablingJourneyAndStartLoading();
-
-                    url = this.buildUrlActivityStatusUpdateApi(activity, updatedStatus);
-                    this.callActivityStatusUpdateApi(url, activity);
                 } else {
+                    this.disablingJourneyAndStartLoading();
                     // If it is a parent activity
                     this.childrenActivitiesNotApplicable(activity);
                 }
@@ -661,31 +744,40 @@
                 let url = app.api.buildURL(
                     'DRI_Workflows',
                     'not-applicable',
-                    null,
-                    {
-                        activity_id: activity.id,
-                        activity_module: activity.module,
-                        activities: this.getActivitiesInfo(activity.get('children'), activity),
-                        fieldsToValidate: this.getFieldsToValidate()
-                    }
+                    null
                 );
+                let apiData = {
+                    module: this.model.module,
+                    record: this.model.get('id'),
+                    activity_id: activity.id,
+                    activity_module: activity.module,
+                    activities: this.getActivitiesInfo(activity.get('children'), activity),
+                    fieldsToValidate: this.getFieldsToValidate()
+                };
 
-                this.disablingJourneyAndStartLoading();
-                app.api.call('create', url, null, {
+                app.api.call('create', url, apiData, null, {
                     success: _.bind(function(response) {
-                        if (!_.isEmpty(response)) {
+                        if (!response.isValid) {
                             this.alertForRequiredFieldDependency(response);
-                            this.reloadData();
                             return;
                         }
 
-                        this.reloadData();
-                        var stage = this.stages[activity.get('dri_subworkflow_id')];
-                        var stageRSATriggerFlag = false;
-                        if (stage.model.get('state') === 'not_started') {
-                            stageRSATriggerFlag = true;
+                        if ((!_.isUndefined(response.isValidParent) && response.isValidParent === false) ||
+                            (!_.isUndefined(response.isActivityChangeNotAllowed) &&
+                                response.isActivityChangeNotAllowed === true)) {
+                            this.showNotAllowedErrorMessage();
                         }
-                        this.handleFormsForStage(activity, activity.get('dri_subworkflow_id'), stageRSATriggerFlag);
+
+                        if (!_.isUndefined(response.isChildReadOnly) && response.isChildReadOnly === true) {
+                            this.showReadOnlyErrorMessage('error', 'LBL_CHILD_ACTIVITY_STATUS_READ_ONLY');
+                        }
+
+                        if (!_.isUndefined(response.isSelfReadOnly) && response.isSelfReadOnly === true) {
+                            this.showReadOnlyErrorMessage('error', 'LBL_ACTIVITY_STATUS_READ_ONLY');
+                        }
+
+                        this.reloadData(response.data);
+                        this.handleFormsForStage(activity, activity.get('dri_subworkflow_id'));
                     }, this),
                     error: _.bind(function(result) {
                         this.reloadData();
@@ -760,6 +852,33 @@
              */
             addSubCall: function(activity) {
                 this.addSubActivity(activity, 'Calls');
+            },
+
+            /**
+             * Links an existing task
+             *
+             * @param {Object} stage
+             */
+            linkExistingTask: function(stage) {
+                this.linkExistingActivity(stage, 'Tasks');
+            },
+
+            /**
+             * Links an existing meeting
+             *
+             * @param {Object} stage
+             */
+            linkExistingMeeting: function(stage) {
+                this.linkExistingActivity(stage, 'Meetings');
+            },
+
+            /**
+             * Links an existing call
+             *
+             * @param {Object} stage
+             */
+            linkExistingCall: function(stage) {
+                this.linkExistingActivity(stage, 'Calls');
             },
 
             /**
@@ -1020,10 +1139,52 @@
             },
 
             /**
-             * Event handler when clicking on the View Journey button
+             * Event handler when clicking on the Edit Smart Guide button
              */
-            viewJourneyClick: function() {
-                this.reRoute('DRI_Workflows', this.model.get('id'));
+            editJourneyClick: function() {
+                const route = app.router.buildRoute('DRI_Workflows', this.model.get('id'), 'edit');
+                app.routeBackTo = document.location.hash;
+                app.router.navigate(route, {trigger: true});
+            },
+
+            /**
+             * Event handler when clicking on the assigned user
+             */
+            viewAssignedUserClick: function() {
+                const route = app.router.buildRoute('Users', this.model.get('assigned_user_id'));
+                app.router.navigate(route, {trigger: true});
+            },
+
+            /**
+             * Update the assigned user section based on the width
+             */
+            resizeWorkflowInfo: function() {
+                $el = this.$el;
+                if (!$el) {
+                    return;
+                }
+
+                const descWrapper = $el.find('.dri-workflow-desc');
+                const actionButtonsWrapper = $el.find('.dri-workflow-action-buttons');
+                const assignedUserWrapper = $el.find('.dri-workflow-assigned-user');
+                const assignedUserLabel = $el.find('.dri-workflow-assigned-user-label');
+                const assignedUserName = $el.find('.dri-workflow-assigned-user-name');
+
+                const extraMargin = 50;
+                let spaceAvailable = $el.width() - extraMargin;
+                spaceAvailable -= descWrapper.width();
+                spaceAvailable -= actionButtonsWrapper.width();
+                spaceAvailable -= extraMargin;
+
+                assignedUserLabel.removeClass('hidden').addClass('block');
+                assignedUserName.removeClass('hidden').addClass('inline');
+
+                if (spaceAvailable < assignedUserWrapper.width()) {
+                    assignedUserName.removeClass('inline').addClass('hidden');
+                    if (spaceAvailable < assignedUserWrapper.width()) {
+                        assignedUserLabel.removeClass('block').addClass('hidden');
+                    }
+                }
             },
 
             /**
@@ -1063,29 +1224,38 @@
                     level: 'confirmation',
                     messages: app.lang.get('LBL_CJ_CANCEL_CONFIRMATION', this.model.module),
                     onConfirm: _.bind(function() {
-                        let url = app.api.buildURL(this.model.module, 'cancel', null, {
+                        let url = app.api.buildURL(this.model.module, 'cancel');
+                        let apiData = {
                             record: this.model.get('id'),
                             activities: this.getActivitiesInfo(this.activities),
                             fieldsToValidate: this.getFieldsToValidate()
-                        });
+                        };
 
                         this.disablingJourneyAndStartLoading();
-                        app.api.call('create', url, null, {
+                        app.api.call('create', url, apiData, null, {
                             success: _.bind(function(response) {
-                                this.reloadData();
-
-                                if (!_.isEmpty(response)) {
+                                if (!response.isValid) {
                                     this.alertForRequiredFieldDependency(response);
                                 } else {
-                                    app.alert.show('success', {
-                                        level: 'success',
-                                        autoClose: true,
-                                        messages: app.lang.get(
-                                            'LBL_CANCEL_SUCCESS_MESSAGE',
-                                            'DRI_Workflows',
-                                            {labelName: this.model.get('name')}
-                                        )
-                                    });
+                                    this.reloadData(response.data);
+                                    this.reloadAllJourneys();
+                                    if (!_.isUndefined(response.isChildReadOnly) && response.isChildReadOnly === true) {
+                                        this.showReadOnlyErrorMessage('warning',
+                                            'LBL_GUIDE_CANCELLATION_ACTION_ACTIVITY_STATUS_READ_ONLY');
+                                    } else if (!_.isUndefined(response.isActivityChangeNotAllowed) &&
+                                        response.isActivityChangeNotAllowed === true) {
+                                        this.showNotAllowedErrorMessage();
+                                    } else {
+                                        app.alert.show('success', {
+                                            level: 'success',
+                                            autoClose: true,
+                                            messages: app.lang.get(
+                                                'LBL_CANCEL_SUCCESS_MESSAGE',
+                                                'DRI_Workflows',
+                                                {labelName: this.model.get('name')}
+                                            )
+                                        });
+                                    }
                                 }
                             }, this),
                             error: _.bind(function(result) {
@@ -1096,6 +1266,9 @@
                                     messages: result.message,
                                     autoClose: true
                                 });
+                            }, this),
+                            complete: _.bind(function() {
+                                this.enablingJourneyAndDoneLoading();
                             }, this)
                         });
                     }, this)
@@ -1120,7 +1293,6 @@
                             success: _.bind(function() {
                                 this.updateArchiveUnarchiveLastState('archived', this.model.get('id'));
                                 this.activateCycleAndReloadWorkflow(parentContext, true);
-                                this.reloadData();
                             }, this),
                             error: _.bind(function(result) {
                                 this.enablingJourneyAndDoneLoading();
@@ -1153,8 +1325,7 @@
                         app.api.call('create', url, null, {
                             success: _.bind(function() {
                                 this.updateArchiveUnarchiveLastState('active', this.model.get('id'));
-                                this.activateCycleAndReloadWorkflow(parentContext);
-                                this.reloadData();
+                                this.activateCycleAndReloadWorkflow(parentContext, true);
                             }, this),
                             error: _.bind(function(result) {
                                 this.enablingJourneyAndDoneLoading();
@@ -1176,40 +1347,117 @@
              * @param {Object} model
              */
             deleteCycleClicked: function(model) {
-                const journeyId = this.model.get('id');
-                const labelName = model.get('name') + ' smart guide';
+                const modelId = model.get('id');
+                const module = model.module;
+                const isSmartGuide = _.isEqual(module, 'DRI_Workflows');
+                const moduleMapping = {
+                    'DRI_SubWorkflows': 'stage',
+                    'DRI_Workflows': 'smart guide',
+                    'DRI_SubWorkflow_Templates': 'stage template',
+                };
+                let labelName = `${model.get('name')} ${moduleMapping[module]}`;
 
                 app.alert.show('delete_model', {
                     level: 'confirmation',
-                    messages: app.lang.get('NTC_DELETE_CONFIRMATION', model.module),
+                    messages: app.lang.get('NTC_DELETE_CONFIRMATION', module),
                     onConfirm: _.bind(function() {
                         // We must retrieve the context here since the view
                         // Will be disposed when the request is finished.
-                        var parentContext = this.context.parent;
-                        this.model.destroy({
-                            success: _.bind(function() {
-                                this.removeJourneyIdFromLastState(parentContext.parent, journeyId);
-                                this.activateCycleAndReloadWorkflow(parentContext, true);
-                                app.alert.show('success', {
-                                    level: 'success',
-                                    autoClose: true,
-                                    messages: app.lang.get(
-                                        'LBL_DELETE_SUCCESS_MESSAGE',
-                                        'DRI_Workflows',
-                                        {labelName: labelName}
-                                    )
+                        const parentContext = this.context.parent;
+                        const parentModel = parentContext.parent;
+                        const alertName = 'process_deleting_journey';
+                        if (!_.isUndefined(parentModel) && !_.isUndefined(parentModel.get('model'))) {
+                            let parentJourneyModel = parentModel.get('model');
+                            const relatedCollection = parentJourneyModel.getRelatedCollection('dri_workflows');
+                            if (!_.isUndefined(relatedCollection)) {
+                                const journeyIDs = _.map(relatedCollection.models, model => model.id);
+                                const url = app.api.buildURL('DRI_Workflows', 'delete-stage-journey', null, {
+                                    id: modelId,
+                                    record: this.model.get('id'),
+                                    moduleName: module,
+                                    parentModule: parentModel.get('module'),
+                                    parentModelId: parentModel.get('modelId'),
+                                    currentJourneys: journeyIDs,
+                                    state: parentContext.get('model').get('cj_active_or_archive_filter')
                                 });
-                            }, this),
-                            error: _.bind(function(result) {
-                                this.activateCycleAndReloadWorkflow(parentContext);
-                                app.alert.show('error', {
-                                    level: 'error',
-                                    messages: result.message,
-                                    autoClose: true
+
+                                this.showProcessingAlert(alertName, app.lang.get('LBL_DELETING'));
+                                this.disablingJourneyAndStartLoading();
+
+                                app.api.call('create', url, null, {
+                                    success: _.bind(function(nextJourney) {
+                                        if (this.disposed || this.layout.disposed) {
+                                            return;
+                                        }
+                                        app.alert.dismiss(alertName);
+                                        if (!_.isUndefined(isSmartGuide)) {
+                                            this.removeJourneyIdFromLastState(parentContext.parent, modelId);
+                                            if (!_.isNull(nextJourney)) {
+                                                this.layout.collection.add(nextJourney);
+                                            }
+                                            this.layout.collection.dataFetched = false;
+                                            this.layout.collection.remove(model);
+                                            this.render();
+                                        } else {
+                                            this.reloadData();
+                                        }
+
+                                        app.alert.show('success', {
+                                            level: 'success',
+                                            autoClose: true,
+                                            messages: app.lang.get(
+                                                'LBL_DELETE_SUCCESS_MESSAGE',
+                                                'DRI_Workflows',
+                                                {labelName: labelName}
+                                            )
+                                        });
+                                    }, this),
+                                    error: _.bind(function(result) {
+                                        app.alert.dismiss(alertName);
+
+                                        if (!_.isUndefined(isSmartGuide)) {
+                                            this.activateCycleAndReloadWorkflow(parentContext);
+                                        } else {
+                                            this.reloadData();
+                                        }
+
+                                        app.alert.show('error', {
+                                            level: 'error',
+                                            messages: result.message,
+                                            autoClose: true
+                                        });
+                                    }, this)
                                 });
-                            }, this)
-                        });
+                            }
+                        }
                     }, this)
+                });
+            },
+
+            /**
+             * Shows activity status read only error message
+             *
+             * @param {string} labelKey
+             */
+            showReadOnlyErrorMessage: function(errorLevel, labelKey) {
+                app.alert.show('error_activity_status_readonly', {
+                    level: errorLevel,
+                    messages: app.lang.get(labelKey),
+                    autoClose: false,
+                });
+            },
+
+            /**
+             * Shows activity status read only error message
+             *
+             * @param {string} labelKey
+             */
+            showNotAllowedErrorMessage: function() {
+                app.alert.show('error_activity_not_allowed', {
+                    level: 'error',
+                    messages: app.lang.get('LBL_CURRENT_USER_UNABLE_TO_COMPLETE_STATUS',
+                        'DRI_Workflow_Task_Templates'),
+                    autoClose: false,
                 });
             },
         });

@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class ForecastTreeSeedData {
-
+class ForecastTreeSeedData
+{
     private $common;
 
     public function __construct()
@@ -31,18 +31,17 @@ class ForecastTreeSeedData {
         require_once 'modules/TableDictionary.php';
 
         $results = $GLOBALS['db']->query("SELECT id, user_name, reports_to_id FROM users WHERE status = 'Active'");
-        while(($row = $GLOBALS['db']->fetchByAssoc($results)))
-        {
+        while (($row = $GLOBALS['db']->fetchByAssoc($results))) {
             $GLOBALS['db']->insertParams(
                 $dictionary['forecast_tree']['table'],
                 $dictionary['forecast_tree']['fields'],
-                array(
+                [
                     'id' => $row['id'],
                     'name' => $row['user_name'],
                     'hierarchy_type' => 'users',
                     'user_id' => $row['id'],
                     'parent_id' => $row['reports_to_id'],
-                )
+                ]
             );
         }
     }
@@ -50,8 +49,7 @@ class ForecastTreeSeedData {
     public function populateProductCategorySeedData()
     {
         $results = $GLOBALS['db']->query("SELECT id, name, parent_id, assigned_user_id, 'category' type FROM product_categories WHERE deleted=0 UNION SELECT id, name, category_id, '1', 'product' type FROM product_templates WHERE deleted=0");
-        while(($row = $GLOBALS['db']->fetchByAssoc($results)))
-        {
+        while (($row = $GLOBALS['db']->fetchByAssoc($results))) {
             $parent_id = empty($row['parent_id']) ? '' : $row['parent_id'];
             $assigned_user_id = empty($row['assigned_user_id']) ? '1' : $row['assigned_user_id'];
             $GLOBALS['db']->getConnection()
@@ -67,5 +65,4 @@ class ForecastTreeSeedData {
                 );
         }
     }
-
 }

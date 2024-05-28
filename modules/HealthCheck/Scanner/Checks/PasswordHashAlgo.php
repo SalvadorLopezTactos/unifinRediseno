@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\modules\HealthCheck\Scanner\Checks;
 
 use UpgradeDriver;
@@ -21,12 +22,12 @@ class PasswordHashAlgo
     {
         if ($upgradeDriver instanceof UpgradeDriver) {
             $config = $upgradeDriver->config;
-            $sugarVersion = $upgradeDriver->to_version;
-            $versionForError = '13.3.0';
+            $sugarVersion = $upgradeDriver->context['versionInfo'][0] ?? '';
+            $versionForError = '14.2.0';
         } else {
             $config = $this->getGlobalConfig();
             $sugarVersion = $this->getGlobalVersion();
-            $versionForError = '13.2.0';
+            $versionForError = '14.1.0';
         }
 
         if (isset($config['passwordHash'])) {

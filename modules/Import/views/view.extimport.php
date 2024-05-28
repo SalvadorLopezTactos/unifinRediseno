@@ -10,23 +10,22 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description: view handler for step 1 of the import process
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
-
 class ImportViewExtimport extends ImportView
 {
     protected $pageTitleKey = 'LBL_STEP_DUP_TITLE';
-    protected $importSource = FALSE;
+    protected $importSource = false;
     protected $externalSource = '';
     protected $offset = 0;
     protected $recordsPerImport = 10;
-    protected $importDone = FALSE;
+    protected $importDone = false;
 
-    public function __construct($bean = null, $view_object_map = array())
+    public function __construct($bean = null, $view_object_map = [])
     {
         parent::__construct($bean, $view_object_map);
         $this->externalSource = $_REQUEST['external_source'] ?? '';
@@ -37,35 +36,30 @@ class ImportViewExtimport extends ImportView
         $GLOBALS['log']->info("Initiating external source import- source:{$this->externalSource}, offset: {$this->offset}, recordsPerImport: {$this->recordsPerImport}");
     }
 
- 	/**
+    /**
      * @see SugarView::display()
      */
- 	public function display()
+    public function display()
     {
         global $mod_strings, $app_strings, $current_user;
         global $sugar_config;
 
-        if($this->importSource === FALSE)
-        {
-            $GLOBALS['log']->fatal("Found invalid adapter");
+        if ($this->importSource === false) {
+            $GLOBALS['log']->fatal('Found invalid adapter');
             $this->handleImportError($mod_strings['LBL_EXTERNAL_ERROR_NO_SOURCE']);
         }
 
         $columncount = $_REQUEST['columncount'] ?? '';
         $fieldKeyTranslator = $this->getSugarToExternalFieldMapping($columncount);
 
-        try
-        {
+        try {
             $this->importSource->loadDataSet($this->recordsPerImport);
-        }
-        catch(Exception $e)
-        {
-            $GLOBALS['log']->fatal("Unable to import external feed, exception: " . $e->getMessage() );
+        } catch (Exception $e) {
+            $GLOBALS['log']->fatal('Unable to import external feed, exception: ' . $e->getMessage());
             $this->handleImportError($mod_strings['LBL_EXTERNAL_ERROR_FEED_CORRUPTED']);
         }
 
-        if (!ImportCacheFiles::ensureWritable())
-        {
+        if (!ImportCacheFiles::ensureWritable()) {
             $GLOBALS['log']->fatal($mod_strings['LBL_ERROR_IMPORT_CACHE_NOT_WRITABLE']);
             $this->handleImportError($mod_strings['LBL_ERROR_IMPORT_CACHE_NOT_WRITABLE']);
         }
@@ -75,27 +69,23 @@ class ImportViewExtimport extends ImportView
         $importer->import();
 
         //Send back our results.
-        $metaResult = array('done' => FALSE, 'totalRecordCount' => $this->importSource->getTotalRecordCount() );
+        $metaResult = ['done' => false, 'totalRecordCount' => $this->importSource->getTotalRecordCount()];
         echo json_encode($metaResult);
-        sugar_cleanup(TRUE);
+        sugar_cleanup(true);
     }
 
     protected function handleImportError($errorMessage)
     {
-        $resp = array('totalRecordCount' => -1, 'done' => TRUE, 'error' => $errorMessage);
+        $resp = ['totalRecordCount' => -1, 'done' => true, 'error' => $errorMessage];
         echo json_encode($resp);
-        sugar_cleanup(TRUE);
-
+        sugar_cleanup(true);
     }
 
     protected function getExternalSourceAdapter()
     {
-        if( substr($this->externalSource,7) == 'custom:')
-        {
+        if (substr($this->externalSource, 7) == 'custom:') {
             return $this->getCustomExternalSourceAdapter();
-        }
-        else
-        {
+        } else {
             return new ExternalSourceEAPMAdapter($this->externalSource);
         }
     }
@@ -105,22 +95,18 @@ class ImportViewExtimport extends ImportView
         $externalSourceName = ucfirst($this->externalSource);
         $externalSourceClassName = "ExternalSource{$externalSourceName}Adapter";
         $externalSourceFile = "modules/Import/sources/{$externalSourceClassName}.php";
-        if(!SugarAutoLoader::requireWithCustom($externalSourceFile)) {
+        if (!SugarAutoLoader::requireWithCustom($externalSourceFile)) {
             $GLOBALS['log']->fatal("Unable to load external source adapter, file does not exist: {$externalSourceFile} ");
-            return FALSE;
+            return false;
         }
 
-        if( class_exists($externalSourceClassName) )
-        {
+        if (class_exists($externalSourceClassName)) {
             $GLOBALS['log']->info("Returning external source: $externalSourceClassName");
             return new $externalSourceClassName();
-        }
-        else
-        {
+        } else {
             $GLOBALS['log']->fatal("Unable to load external source adapter class: $externalSourceClassName");
-            return FALSE;
+            return false;
         }
-
     }
 
     /**
@@ -131,15 +117,15 @@ class ImportViewExtimport extends ImportView
      */
     protected function getSugarToExternalFieldMapping($columncount)
     {
-        $userMapping = array();
-        for($i=0;$i<$columncount;$i++)
-        {
+        $userMapping = [];
+        for ($i = 0; $i < $columncount; $i++) {
             $sugarKeyIndex = 'colnum_' . $i;
             $extKeyIndex = 'extkey_' . $i;
             $sugarKey = $_REQUEST[$sugarKeyIndex];
             //User specified don't map, keep going.
-            if($sugarKey == -1)
+            if ($sugarKey == -1) {
                 continue;
+            }
 
             $extKey = $_REQUEST[$extKeyIndex];
             //$defaultValue = $_REQUEST[$sugarKey];

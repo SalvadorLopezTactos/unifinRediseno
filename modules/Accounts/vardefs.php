@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['Account'] = array(
+$dictionary['Account'] = [
     'table' => 'accounts',
     'audited' => true,
     'escalatable' => true,
@@ -22,8 +22,8 @@ $dictionary['Account'] = array(
     'unified_search_default_enabled' => true,
     'duplicate_merge' => true,
     'comment' => 'Accounts are organizations or entities that are the target of selling, support, and marketing activities, or have already purchased products or services',
-    'fields' => array(
-        'parent_id' => array(
+    'fields' => [
+        'parent_id' => [
             'name' => 'parent_id',
             'vname' => 'LBL_PARENT_ACCOUNT_ID',
             'type' => 'id',
@@ -31,36 +31,35 @@ $dictionary['Account'] = array(
             'reportable' => false,
             'audited' => true,
             'comment' => 'Account ID of the parent of this account',
-        ),
-        'sic_code' => array(
+        ],
+        'sic_code' => [
             'name' => 'sic_code',
             'vname' => 'LBL_SIC_CODE',
             'type' => 'varchar',
             'len' => 10,
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => true,
                 'boost' => 1.21,
                 'type' => 'exact',
-            ),
+            ],
             'comment' => 'SIC code of the account',
             'merge_filter' => 'enabled',
-        ),
-         'duns_num' =>
-          array (
+        ],
+        'duns_num' => [
             'name' => 'duns_num',
             'vname' => 'LBL_DUNS_NUM',
             'type' => 'varchar',
             'len' => 15,
-             'full_text_search' => array(
-                 'enabled' => true,
-                 'searchable' => true,
-                 'boost' => 1.23,
-                 'type' => 'exact',
-             ),
+            'full_text_search' => [
+                'enabled' => true,
+                'searchable' => true,
+                'boost' => 1.23,
+                'type' => 'exact',
+            ],
             'comment' => 'DUNS number of the account',
-          ),
-        'parent_name' => array(
+        ],
+        'parent_name' => [
             'name' => 'parent_name',
             'rname' => 'name',
             'id_name' => 'parent_id',
@@ -74,8 +73,8 @@ $dictionary['Account'] = array(
             'link' => 'member_of',
             'unified_search' => true,
             'importable' => 'true',
-        ),
-        'members' => array(
+        ],
+        'members' => [
             'name' => 'members',
             'type' => 'link',
             'relationship' => 'member_accounts',
@@ -83,8 +82,8 @@ $dictionary['Account'] = array(
             'bean_name' => 'Account',
             'source' => 'non-db',
             'vname' => 'LBL_MEMBERS',
-        ),
-        'member_of' => array(
+        ],
+        'member_of' => [
             'name' => 'member_of',
             'type' => 'link',
             'relationship' => 'member_accounts',
@@ -94,8 +93,8 @@ $dictionary['Account'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_MEMBER_OF',
             'side' => 'right',
-        ),
-        'cases' => array(
+        ],
+        'cases' => [
             'name' => 'cases',
             'type' => 'link',
             'relationship' => 'account_cases',
@@ -103,8 +102,8 @@ $dictionary['Account'] = array(
             'bean_name' => 'aCase',
             'source' => 'non-db',
             'vname' => 'LBL_CASES',
-        ),
-        'business_center_name' => array(
+        ],
+        'business_center_name' => [
             'name' => 'business_center_name',
             'rname' => 'name',
             'id_name' => 'business_center_id',
@@ -121,8 +120,8 @@ $dictionary['Account'] = array(
             'unified_search' => true,
             'comment' => 'The name of the business center represented by the business_center_id field',
             'required' => false,
-        ),
-        'business_center_id' => array(
+        ],
+        'business_center_id' => [
             'name' => 'business_center_id',
             'type' => 'relate',
             'dbType' => 'id',
@@ -134,8 +133,8 @@ $dictionary['Account'] = array(
             'audited' => true,
             'massupdate' => false,
             'comment' => 'The business center to which the case is associated',
-        ),
-        'business_centers' => array(
+        ],
+        'business_centers' => [
             'name' => 'business_centers',
             'type' => 'link',
             'relationship' => 'business_center_accounts',
@@ -143,7 +142,7 @@ $dictionary['Account'] = array(
             'side' => 'right',
             'source' => 'non-db',
             'vname' => 'LBL_BUSINESS_CENTER',
-        ),
+        ],
         'messages' => [
             'name' => 'messages',
             'type' => 'link',
@@ -169,7 +168,7 @@ $dictionary['Account'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_OTHER_ESCALATIONS_SUBPANEL_TITLE',
         ],
-        'tasks' => array(
+        'tasks' => [
             'name' => 'tasks',
             'type' => 'link',
             'relationship' => 'account_tasks',
@@ -177,8 +176,8 @@ $dictionary['Account'] = array(
             'bean_name' => 'Task',
             'source' => 'non-db',
             'vname' => 'LBL_TASKS',
-        ),
-        'notes' => array(
+        ],
+        'notes' => [
             'name' => 'notes',
             'type' => 'link',
             'relationship' => 'account_notes',
@@ -186,8 +185,8 @@ $dictionary['Account'] = array(
             'bean_name' => 'Note',
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
-        ),
-        'meetings' => array(
+        ],
+        'meetings' => [
             'name' => 'meetings',
             'type' => 'link',
             'relationship' => 'account_meetings',
@@ -195,8 +194,8 @@ $dictionary['Account'] = array(
             'bean_name' => 'Meeting',
             'source' => 'non-db',
             'vname' => 'LBL_MEETINGS',
-        ),
-        'calls' => array(
+        ],
+        'calls' => [
             'name' => 'calls',
             'type' => 'link',
             'relationship' => 'account_calls',
@@ -204,8 +203,8 @@ $dictionary['Account'] = array(
             'bean_name' => 'Call',
             'source' => 'non-db',
             'vname' => 'LBL_CALLS',
-        ),
-        'emails' => array(
+        ],
+        'emails' => [
             'name' => 'emails',
             'type' => 'link',
             'relationship' => 'emails_accounts_rel', /* reldef in emails */
@@ -213,9 +212,9 @@ $dictionary['Account'] = array(
             'bean_name' => 'Email',
             'source' => 'non-db',
             'vname' => 'LBL_EMAILS',
-            'studio' => array("formula" => false),
-        ),
-        'archived_emails' => array(
+            'studio' => ['formula' => false],
+        ],
+        'archived_emails' => [
             'name' => 'archived_emails',
             'type' => 'link',
             'link_class' => 'ArchivedEmailsBeanLink',
@@ -227,15 +226,15 @@ $dictionary['Account'] = array(
             'relationship' => '',
             'hideacl' => true,
             'readonly' => true,
-        ),
-        'documents' => array(
+        ],
+        'documents' => [
             'name' => 'documents',
             'type' => 'link',
             'relationship' => 'documents_accounts',
             'source' => 'non-db',
             'vname' => 'LBL_DOCUMENTS_SUBPANEL_TITLE',
-        ),
-        'bugs' => array(
+        ],
+        'bugs' => [
             'name' => 'bugs',
             'type' => 'link',
             'relationship' => 'accounts_bugs',
@@ -243,8 +242,8 @@ $dictionary['Account'] = array(
             'bean_name' => 'Bug',
             'source' => 'non-db',
             'vname' => 'LBL_BUGS',
-        ),
-        'contacts' => array(
+        ],
+        'contacts' => [
             'name' => 'contacts',
             'type' => 'link',
             'relationship' => 'accounts_contacts',
@@ -252,8 +251,8 @@ $dictionary['Account'] = array(
             'bean_name' => 'Contact',
             'source' => 'non-db',
             'vname' => 'LBL_CONTACTS',
-        ),
-        'opportunities' => array(
+        ],
+        'opportunities' => [
             'name' => 'opportunities',
             'type' => 'link',
             'relationship' => 'accounts_opportunities',
@@ -261,8 +260,8 @@ $dictionary['Account'] = array(
             'bean_name' => 'Opportunity',
             'source' => 'non-db',
             'vname' => 'LBL_OPPORTUNITY',
-        ),
-        'quotes' => array(
+        ],
+        'quotes' => [
             'name' => 'quotes',
             'type' => 'link',
             'relationship' => 'quotes_billto_accounts',
@@ -271,8 +270,8 @@ $dictionary['Account'] = array(
             'bean_name' => 'Quote',
             'ignore_role' => true,
             'vname' => 'LBL_QUOTES',
-        ),
-        'quotes_shipto' => array(
+        ],
+        'quotes_shipto' => [
             'name' => 'quotes_shipto',
             'type' => 'link',
             'relationship' => 'quotes_shipto_accounts',
@@ -280,17 +279,17 @@ $dictionary['Account'] = array(
             'bean_name' => 'Quote',
             'source' => 'non-db',
             'vname' => 'LBL_QUOTES_SHIP_TO',
-        ),
-        'project' => array (
-             'name' => 'project',
-             'type' => 'link',
-             'relationship' => 'projects_accounts',
-             'module'=>'Project',
-             'bean_name'=>'Project',
-             'source'=>'non-db',
-             'vname'=>'LBL_PROJECTS',
-         ),
-        'leads' => array(
+        ],
+        'project' => [
+            'name' => 'project',
+            'type' => 'link',
+            'relationship' => 'projects_accounts',
+            'module' => 'Project',
+            'bean_name' => 'Project',
+            'source' => 'non-db',
+            'vname' => 'LBL_PROJECTS',
+        ],
+        'leads' => [
             'name' => 'leads',
             'type' => 'link',
             'relationship' => 'account_leads',
@@ -298,12 +297,12 @@ $dictionary['Account'] = array(
             'bean_name' => 'Lead',
             'source' => 'non-db',
             'vname' => 'LBL_LEADS',
-            'populate_list' => array(
+            'populate_list' => [
                 'name' => 'account_name',
                 'phone_office' => 'phone_work',
-            )
-        ),
-        'campaigns' => array(
+            ],
+        ],
+        'campaigns' => [
             'name' => 'campaigns',
             'type' => 'link',
             'relationship' => 'account_campaign_log',
@@ -311,16 +310,16 @@ $dictionary['Account'] = array(
             'bean_name' => 'CampaignLog',
             'source' => 'non-db',
             'vname' => 'LBL_CAMPAIGNLOG',
-            'studio' => array("formula" => false),
-        ),
-        'campaign_accounts' => array(
+            'studio' => ['formula' => false],
+        ],
+        'campaign_accounts' => [
             'name' => 'campaign_accounts',
             'type' => 'link',
             'vname' => 'LBL_CAMPAIGNS',
             'relationship' => 'campaign_accounts',
             'source' => 'non-db',
-        ),
-        'revenuelineitems' =>  array(
+        ],
+        'revenuelineitems' => [
             'name' => 'revenuelineitems',
             'type' => 'link',
             'relationship' => 'revenuelineitems_accounts',
@@ -328,8 +327,8 @@ $dictionary['Account'] = array(
             'module' => 'RevenueLineItems',
             'bean_name' => 'RevenueLineItem',
             'source' => 'non-db',
-            'workflow' => false
-        ),
+            'workflow' => false,
+        ],
         'external_users' => [
             'name' => 'external_users',
             'type' => 'link',
@@ -349,7 +348,7 @@ $dictionary['Account'] = array(
             'source' => 'non-db',
             'workflow' => false,
         ],
-        'forecastworksheets' =>  array(
+        'forecastworksheets' => [
             'name' => 'forecastworksheets',
             'type' => 'link',
             'relationship' => 'forecastworksheets_accounts',
@@ -357,30 +356,30 @@ $dictionary['Account'] = array(
             'module' => 'ForecastWorksheets',
             'bean_name' => 'ForecastWorksheet',
             'source' => 'non-db',
-        ),
-        'products' => array(
+        ],
+        'products' => [
             'name' => 'products',
             'type' => 'link',
             'link_class' => 'AccountLink',
             'relationship' => 'products_accounts',
             'source' => 'non-db',
             'vname' => 'LBL_PRODUCTS',
-        ),
-        'contracts' => array(
+        ],
+        'contracts' => [
             'name' => 'contracts',
             'type' => 'link',
             'relationship' => 'account_contracts',
             'source' => 'non-db',
             'vname' => 'LBL_CONTRACTS',
-        ),
-        'dataprivacy' => array(
+        ],
+        'dataprivacy' => [
             'name' => 'dataprivacy',
             'type' => 'link',
             'relationship' => 'accounts_dataprivacy',
             'source' => 'non-db',
             'vname' => 'LBL_DATAPRIVACY',
-        ),
-        'campaign_id' => array(
+        ],
+        'campaign_id' => [
             'name' => 'campaign_id',
             'comment' => 'Campaign that generated Account',
             'vname' => 'LBL_CAMPAIGN_ID',
@@ -393,8 +392,8 @@ $dictionary['Account'] = array(
             'reportable' => false,
             'massupdate' => false,
             'duplicate_merge' => 'disabled',
-        ),
-        'campaign_name' => array(
+        ],
+        'campaign_name' => [
             'name' => 'campaign_name',
             'rname' => 'name',
             'vname' => 'LBL_CAMPAIGN',
@@ -407,24 +406,24 @@ $dictionary['Account'] = array(
             'module' => 'Campaigns',
             'duplicate_merge' => 'disabled',
             'comment' => 'The first campaign name for Account (Meta-data only)',
-            'studio' => array(
+            'studio' => [
                 'mobile' => false,
-            ),
-        ),
-        'prospect_lists' => array(
+            ],
+        ],
+        'prospect_lists' => [
             'name' => 'prospect_lists',
             'type' => 'link',
             'relationship' => 'prospect_list_accounts',
             'module' => 'ProspectLists',
             'source' => 'non-db',
             'vname' => 'LBL_PROSPECT_LIST',
-        ),
-        'next_renewal_date' => array(
+        ],
+        'next_renewal_date' => [
             'name' => 'next_renewal_date',
             'vname' => 'LBL_NEXT_RENEWAL_DATE',
             'type' => 'date',
             'readonly' => true,
-        ),
+        ],
         'widget_next_renewal_date' => [
             'name' => 'widget_next_renewal_date',
             'vname' => 'LBL_WIDGET_NEXT_RENEWAL_DATE',
@@ -571,48 +570,48 @@ $dictionary['Account'] = array(
             'readonly' => true,
             'reportable' => false,
         ],
-    ),
-    'indices' => array(
-        array('name' => 'idx_accnt_parent_id', 'type' => 'index', 'fields' => array('parent_id')),
-        array('name' => 'idx_account_billing_address_city', 'type' => 'index', 'fields' => array('billing_address_city')),
-        array(
+    ],
+    'indices' => [
+        ['name' => 'idx_accnt_parent_id', 'type' => 'index', 'fields' => ['parent_id']],
+        ['name' => 'idx_account_billing_address_city', 'type' => 'index', 'fields' => ['billing_address_city']],
+        [
             'name' => 'idx_acc_del_l_name_dm',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'name',
                 'date_modified',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_accounts_del_businesscenter',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'business_center_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'member_accounts' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'member_accounts' => [
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',
             'lhs_key' => 'id',
             'rhs_module' => 'Accounts',
             'rhs_table' => 'accounts',
             'rhs_key' => 'parent_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'account_cases' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'account_cases' => [
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',
             'lhs_key' => 'id',
             'rhs_module' => 'Cases',
             'rhs_table' => 'cases',
             'rhs_key' => 'account_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'account_tasks' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'account_tasks' => [
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',
             'lhs_key' => 'id',
@@ -621,9 +620,9 @@ $dictionary['Account'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Accounts'
-        ),
-        'account_notes' => array(
+            'relationship_role_column_value' => 'Accounts',
+        ],
+        'account_notes' => [
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',
             'lhs_key' => 'id',
@@ -632,9 +631,9 @@ $dictionary['Account'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Accounts'
-        ),
-        'account_meetings' => array(
+            'relationship_role_column_value' => 'Accounts',
+        ],
+        'account_meetings' => [
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',
             'lhs_key' => 'id',
@@ -643,9 +642,9 @@ $dictionary['Account'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Accounts'
-        ),
-        'account_calls' => array(
+            'relationship_role_column_value' => 'Accounts',
+        ],
+        'account_calls' => [
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',
             'lhs_key' => 'id',
@@ -654,9 +653,9 @@ $dictionary['Account'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Accounts'
-        ),
-        'account_emails' => array(
+            'relationship_role_column_value' => 'Accounts',
+        ],
+        'account_emails' => [
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',
             'lhs_key' => 'id',
@@ -665,9 +664,9 @@ $dictionary['Account'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Accounts'
-        ),
-        'account_leads' => array(
+            'relationship_role_column_value' => 'Accounts',
+        ],
+        'account_leads' => [
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',
             'lhs_key' => 'id',
@@ -675,43 +674,43 @@ $dictionary['Account'] = array(
             'rhs_table' => 'leads',
             'rhs_key' => 'account_id',
             'relationship_type' => 'one-to-many',
-        ),
-        'accounts_assigned_user' => array(
+        ],
+        'accounts_assigned_user' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
             'rhs_module' => 'Accounts',
             'rhs_table' => 'accounts',
             'rhs_key' => 'assigned_user_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'accounts_modified_user' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'accounts_modified_user' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
             'rhs_module' => 'Accounts',
             'rhs_table' => 'accounts',
             'rhs_key' => 'modified_user_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'accounts_created_by' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'accounts_created_by' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
             'rhs_module' => 'Accounts',
             'rhs_table' => 'accounts',
             'rhs_key' => 'created_by',
-            'relationship_type' => 'one-to-many'
-        ),
-        'account_campaign_log' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'account_campaign_log' => [
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',
             'lhs_key' => 'id',
             'rhs_module' => 'CampaignLog',
             'rhs_table' => 'campaign_log',
             'rhs_key' => 'target_id',
-            'relationship_type' => 'one-to-many'
-        ),
+            'relationship_type' => 'one-to-many',
+        ],
         'account_messages' => [
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',
@@ -743,39 +742,39 @@ $dictionary['Account'] = array(
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Accounts',
         ],
-    ),
-    'duplicate_check' => array(
+    ],
+    'duplicate_check' => [
         'enabled' => true,
-        'FilterDuplicateCheck' => array(
-            'filter_template' => array(
-                array(
-                    '$or' => array(
-                        array('name' => array('$equals' => '$name')),
-                        array('duns_num' => array('$equals' => '$duns_num')),
-                        array(
-                            '$and' => array(
-                                array('name' => array('$starts' => '$name')),
-                                array(
-                                    '$or' => array(
-                                        array('billing_address_city' => array('$starts' => '$billing_address_city')),
-                                        array('shipping_address_city' => array('$starts' => '$shipping_address_city')),
-                                    )
-                                ),
-                            )
-                        ),
-                    )
-                ),
-            ),
-            'ranking_fields' => array(
-                array('in_field_name' => 'name', 'dupe_field_name' => 'name'),
-                array('in_field_name' => 'billing_address_city', 'dupe_field_name' => 'billing_address_city'),
-                array('in_field_name' => 'shipping_address_city', 'dupe_field_name' => 'shipping_address_city'),
-            )
-        )
-    ),
+        'FilterDuplicateCheck' => [
+            'filter_template' => [
+                [
+                    '$or' => [
+                        ['name' => ['$equals' => '$name']],
+                        ['duns_num' => ['$equals' => '$duns_num']],
+                        [
+                            '$and' => [
+                                ['name' => ['$starts' => '$name']],
+                                [
+                                    '$or' => [
+                                        ['billing_address_city' => ['$starts' => '$billing_address_city']],
+                                        ['shipping_address_city' => ['$starts' => '$shipping_address_city']],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'ranking_fields' => [
+                ['in_field_name' => 'name', 'dupe_field_name' => 'name'],
+                ['in_field_name' => 'billing_address_city', 'dupe_field_name' => 'billing_address_city'],
+                ['in_field_name' => 'shipping_address_city', 'dupe_field_name' => 'shipping_address_city'],
+            ],
+        ],
+    ],
     //This enables optimistic locking for Saves From EditView
     'optimistic_locking' => true,
-    'uses' => array(
+    'uses' => [
         'default',
         'assignable',
         'team_security',
@@ -783,11 +782,11 @@ $dictionary['Account'] = array(
         'audit',
         'escalatable',
         'customer_journey_parent',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'Accounts',
     ],
-);
+];
 
 VardefManager::createVardef(
     'Accounts',

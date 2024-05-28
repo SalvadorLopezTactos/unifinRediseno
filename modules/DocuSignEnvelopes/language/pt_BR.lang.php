@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Buscar envelope',
     'LBL_CLOUD_SERVICE_TYPE' => 'Tipo de serviço em nuvem',
     'LBL_CLOUD_PATH' => 'Caminho da nuvem',
+    'LBL_CLOUD_DRIVE_ID' => 'ID da unidade',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Painel de lista de envelopes do DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'Painel de registro de envelopes do DocuSign',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Envelopes recentes do DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco de envelopes do DocuSign',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Linha do tempo de envelope do DocuSign',
 
     'LBL_NEW_ENVELOPE' => 'Novo envelope',
     'LBL_DOCUMENT_IS_NOW' => ' agora é ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Enviar',
     'LBL_BUTTON_CLEAR' => 'Limpar',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Usar modelo',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Enviar com modelo',
     'LBL_PLEASE_LOG_IN' => 'Entre no DocuSign primeiro!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Não é possível baixar este documento. Ele foi criado por outro usuário!',
     'LBL_SEND_NOT_ALLOWED' => 'Não é possível enviar este envelope. Ele foi criado por outro usuário!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'O rascunho foi alterado. Atualizar o status para o atual ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'Envelope do DocuSign atualizado!',
     'LBL_DRAFT_CHANGED_ERROR' => 'O status do envelope do DocuSign não foi atualizado. Verifique os logs para ver detalhes!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'O modelo do DocuSign não pode ser aplicado',
     'LBL_ENVELOPE_NOT_SENT' => 'Envelope não enviado!',
     'LBL_ENVELOPE_SENT' => 'O envelope foi enviado novamente!',
     'LBL_DOCUMENT_ADDED' => 'Documento adicionado ao registro!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Função',
     'LBL_SELECT_BUTTON_LABEL' => 'Selecionar',
     'LBL_BACK_BUTTON_LABEL' => 'Voltar',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Pesquisar por nome do modelo',
+    'LBL_ENVELOPE_NAME' => 'Nome do envelope',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'O nome do envelope não pode estar vazio',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Falha ao buscar possíveis destinatários!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Falha ao buscar modelos!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Selecione uma função para cada destinatário',
+    
+    'LBL_DOWNLOAD' => 'Download',
+    'LBL_OPEN_DRAFT' => 'Abrir rascunho',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Documentos sem arquivo não podem ser enviados ao DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Clique no botão de adição para iniciar o processo de assinatura',
+    'LBL_NO_DOC_SELECTED' => 'Selecione os documentos primeiro',
+    'LBL_SELECT_RECIPIENTS' => 'Selecionar destinatário signatário',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Excluir',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Você precisa instalar o aplicativo DocuSign para uma melhor experiência.',
 ];

@@ -17,6 +17,7 @@
 /*
  * Implementation class for handling search metadata
  */
+
 class DeployedSearchMetaDataImplementation extends DeployedMetaDataImplementation
 {
     /**
@@ -29,12 +30,13 @@ class DeployedSearchMetaDataImplementation extends DeployedMetaDataImplementatio
         parent::deploy($defs);
         $this->createSidecarFilterDefsFromLegacy($defs);
     }
+
     /**
      * Convert BWC searchdefs to sidecar filter metadata files.
      * @param array $defs : the defs of BWC modules to be converted
      * @return array
      */
-    public function createSidecarFilterDefsFromLegacy($defs = array(), $filterDefs = array())
+    public function createSidecarFilterDefsFromLegacy($defs = [], $filterDefs = [])
     {
         if (empty($defs)) {
             $defs = $this->getViewdefs();

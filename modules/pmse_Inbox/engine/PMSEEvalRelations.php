@@ -23,31 +23,31 @@ trait PMSEEvalRelations
      */
     public function evalRelations($value1, $operator, $value2, $type = 'typeDefault', $isUpdate = false)
     {
-        $arrayRelationsSig = array(
-            "==",
-            "!=",
-            ">=",
-            "<=",
-            ">",
-            "<",
-        );
-        $arrayRelationsLit = array(
-            "equals",
-            "not_equals",
-            "major_equals_than",
-            "minor_equals_than",
-            "major_than",
-            "minor_than",
-            "starts_with",
-            "ends_with",
-            "contains",
-            "does_not_contain",
-            "changes",
-            "changes_from",
-            "changes_to",
+        $arrayRelationsSig = [
+            '==',
+            '!=',
+            '>=',
+            '<=',
+            '>',
+            '<',
+        ];
+        $arrayRelationsLit = [
+            'equals',
+            'not_equals',
+            'major_equals_than',
+            'minor_equals_than',
+            'major_than',
+            'minor_than',
+            'starts_with',
+            'ends_with',
+            'contains',
+            'does_not_contain',
+            'changes',
+            'changes_from',
+            'changes_to',
             'array_has_any',
             'array_has_none',
-        );
+        ];
 
         // Set the result
         $result = 0;
@@ -65,8 +65,8 @@ trait PMSEEvalRelations
         if ($type === 'Relate' && is_array($value1)) {
             $value2 = is_array($value2) ? $value2 : explode(',', $value2);
         } else {
-            $value1 = $value1 === null ? $value1 : $this->typeData($value1, $type);
-            $value2 = $value2 === null ? $value2 : $this->typeData($value2, $type);
+            $value1 = $this->isCastException($value1, $type) ? $value1 : $this->typeData($value1, $type);
+            $value2 = $this->isCastException($value2, $type) ? $value2 : $this->typeData($value2, $type);
         }
 
         // Used for reporting back to the caller
@@ -138,10 +138,10 @@ trait PMSEEvalRelations
                 }
                 break;
             case 'contains':
-                $result = strpos($value1, $value2) !== false;
+                $result = strpos($value1, (string) $value2) !== false;
                 break;
             case 'does_not_contain':
-                $result = strpos($value1, $value2) === false;
+                $result = strpos($value1, (string) $value2) === false;
                 break;
             case 'array_has_any':
                 // getting a null value doesn't make sense
@@ -178,5 +178,18 @@ trait PMSEEvalRelations
         }
 
         return $this->typeData($result, 'int');
+    }
+
+    /**
+     * Check if value is not subject to type casting
+     *
+     * @param string $value Value
+     * @param string $type Casting type
+     * @return bool
+     */
+    protected function isCastException($value, $type): bool
+    {
+        return $value === null ||
+            ($value === '' && in_array(strtolower($type), ['int', 'integer']));
     }
 }

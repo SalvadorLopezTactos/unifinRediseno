@@ -92,10 +92,10 @@ $xtpl->assign('JAVASCRIPT', get_set_focus_js());
 $focus_triggers_list = $focus->get_linked_beans('triggers', 'WorkFlowTriggerShell');
 $focus_trigger_filters_list = $focus->get_linked_beans('trigger_filters', 'WorkFlowTriggerShell');
 $focus_all_triggers_list = array_merge($focus_triggers_list, $focus_trigger_filters_list);
-if (count($focus_all_triggers_list) > 0) {
+if (safeCount($focus_all_triggers_list) > 0) {
     $xtpl->assign('DISABLE_TYPE', 'disabled');
     $xtpl->assign('DISABLE_BASE_MODULE', 'disabled');
-//end if we shouldn't be able to change the type or base module
+    //end if we shouldn't be able to change the type or base module
 }
 
 if (isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] === 'true') {
@@ -103,7 +103,7 @@ if (isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] === 'true') {
     $xtpl->assign('IS_DUPLICATE', 'true');
     $xtpl->assign('DISABLE_BASE_MODULE', 'disabled');
     $xtpl->assign('BASE_MODULE_FIELDNAME', 'base_module_disabled');
-    $xtpl->assign('DUPLICATE_BASE_MODULE', '<input name="base_module" type="hidden" value="' . htmlspecialchars($focus->base_module, ENT_COMPAT) .'" >');
+    $xtpl->assign('DUPLICATE_BASE_MODULE', '<input name="base_module" type="hidden" value="' . htmlspecialchars($focus->base_module, ENT_COMPAT) . '" >');
 } else {
     $xtpl->assign('BASE_MODULE_FIELDNAME', 'base_module');
 }
@@ -127,7 +127,7 @@ $xtpl->assign('BASE_MODULE', get_select_options_with_id($focus->get_module_array
 
 
 $cancel = '<input title="' . htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_TITLE'], ENT_COMPAT) . '" id="cancel_workflow"
-        accessKey="' . htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_KEY'], ENT_COMPAT) .'" class="button" ';
+        accessKey="' . htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_KEY'], ENT_COMPAT) . '" class="button" ';
 if (isset($_REQUEST['return_action'])) {
     $json = getJSONobj();
     $onClick = 'this.form.action.value=' . $json->encode($returnAction) . ';';
@@ -152,7 +152,7 @@ $buttons = [
     onclick="this.form.action.value='Save'; return check_form('EditView');"
     type="submit" name="button" value="{$escapedHTML($app_strings['LBL_SAVE_BUTTON_LABEL'])}" >
 HTML
-,
+    ,
     $cancel,
 ];
 

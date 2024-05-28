@@ -30,10 +30,6 @@
 
     activeSelector: '.search-dropdown-list__item--active',
 
-    activeDarkModeClass: 'search-dropdown-darkmode-list__item--active',
-
-    activeDarkModeSelector: '.search-dropdown-darkmode-list__item--active',
-
     hintMetricsToken: undefined,
 
     /**
@@ -217,12 +213,7 @@
 
         if (list.is(':visible')) {
             list.hide();
-            var activeItem;
-            if (this.isDarkMode) {
-                activeItem = event ? $(event.currentTarget) : self.$el.find(self.activeDarkModeSelector);
-            } else {
-                activeItem = event ? $(event.currentTarget) : self.$el.find(self.activeSelector);
-            }
+            var activeItem = event ? $(event.currentTarget) : self.$el.find(self.activeSelector);
             var nameFieldValue = activeItem.attr('data-key') || self.model.get('name');
             self.model.set('name', nameFieldValue);
         }
@@ -236,13 +227,7 @@
     navigateAccountsList: function(dir) {
         var boxItems = this.$el.find('li');
         this.activeIndex = (this.activeIndex + boxItems.length + dir) % boxItems.length;
-        if (this.isDarkMode) {
-            boxItems.removeClass(this.activeDarkModeClass)
-                .eq(this.activeIndex).addClass(this.activeDarkModeClass);
-        } else {
-            boxItems.removeClass(this.activeClass)
-                .eq(this.activeIndex).addClass(this.activeClass);
-        }
+        boxItems.removeClass(this.activeClass).eq(this.activeIndex).addClass(this.activeClass);
     },
 
     /**
@@ -342,5 +327,19 @@
             this.bindSelectEvent();
             this.hasBoundEvent = true;
         }
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Loads proper base templates when necessary
+     */
+    _loadTemplate: function() {
+        if (this.action !== 'edit') {
+            this.type = 'base';
+        }
+
+        this._super('_loadTemplate');
+        this.type = 'hint-accounts-search-dropdown';
     }
 });

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['ProductCategory'] = array(
+$dictionary['ProductCategory'] = [
     'favorites' => false,
     'table' => 'product_categories',
     'archive' => false,
@@ -17,23 +17,23 @@ $dictionary['ProductCategory'] = array(
     'full_text_search' => true,
     'unified_search_default_enabled' => true,
     'comment' => 'Used to categorize products in the product catalog',
-    'fields' => array(
-        'list_order' => array(
+    'fields' => [
+        'list_order' => [
             'name' => 'list_order',
             'vname' => 'LBL_LIST_ORDER',
             'type' => 'int',
-            'validation' => array('type' => 'range', 'min' => 0),
+            'validation' => ['type' => 'range', 'min' => 0],
             'len' => '4',
             'comment' => 'Order within list',
-        ),
-        'parent_id' => array(
+        ],
+        'parent_id' => [
             'name' => 'parent_id',
             'vname' => 'LBL_PARENT_NAME',
             'type' => 'id',
             'comment' => 'Parent category of this item; used for multi-tiered categorization',
-            'reportable' => false
-        ),
-        'parent_category' => array(
+            'reportable' => false,
+        ],
+        'parent_category' => [
             'name' => 'parent_category',
             'type' => 'link',
             'relationship' => 'member_categories',
@@ -43,8 +43,8 @@ $dictionary['ProductCategory'] = array(
             'vname' => 'LBL_PARENT_CATEGORY',
             'side' => 'right',
             'link_type' => 'one',
-        ),
-        'categories' => array(
+        ],
+        'categories' => [
             'name' => 'categories',
             'type' => 'link',
             'relationship' => 'member_categories',
@@ -52,8 +52,8 @@ $dictionary['ProductCategory'] = array(
             'bean_name' => 'ProductCategory',
             'source' => 'non-db',
             'vname' => 'LBL_CATEGORIES',
-        ),
-        'parent_name' => array(
+        ],
+        'parent_name' => [
             'name' => 'parent_name',
             'rname' => 'name',
             'id_name' => 'parent_id',
@@ -68,23 +68,23 @@ $dictionary['ProductCategory'] = array(
             'link' => 'parent_category',
             'unified_search' => true,
             'importable' => 'true',
-        ),
-        'type' => array(
+        ],
+        'type' => [
             'name' => 'type',
             'type' => 'varchar',
-            'source' => 'non-db'
-        ),
-        'forecastworksheet' => array(
+            'source' => 'non-db',
+        ],
+        'forecastworksheet' => [
             'name' => 'forecastworksheet',
             'type' => 'link',
             'relationship' => 'forecastworksheets_categories',
             'source' => 'non-db',
             'vname' => 'LBL_FORECAST_WORKSHEET',
-        ),
-    ),
-    'acls' => array('SugarACLProduct' => true),
-    'indices' => array (
-        array('name' => 'idx_producttemplate_id_parent_name', 'type' => 'index', 'fields' => array('id', 'parent_id', 'name', 'deleted')),
+        ],
+    ],
+    'acls' => ['SugarACLProduct' => true],
+    'indices' => [
+        ['name' => 'idx_producttemplate_id_parent_name', 'type' => 'index', 'fields' => ['id', 'parent_id', 'name', 'deleted']],
         [
             'name' => 'idx_id_name_list_order',
             'type' => 'index',
@@ -94,27 +94,27 @@ $dictionary['ProductCategory'] = array(
                 'list_order',
             ],
         ],
-    ),
-    'relationships' => array(
-        'member_categories' => array(
+    ],
+    'relationships' => [
+        'member_categories' => [
             'lhs_module' => 'ProductCategories',
             'lhs_table' => 'product_categories',
             'lhs_key' => 'id',
             'rhs_module' => 'ProductCategories',
             'rhs_table' => 'product_categories',
             'rhs_key' => 'parent_id',
-            'relationship_type' => 'one-to-many'
-        ),
-    ),
-    'uses' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+    ],
+    'uses' => [
         'default',
         'assignable',
-    ),
-    'ignore_templates' => array(
+    ],
+    'ignore_templates' => [
         'taggable',
         'commentlog',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef(
     'ProductCategories',

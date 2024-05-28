@@ -13,69 +13,69 @@
 
 class ActivitiesApi extends FilterApi
 {
-    protected static $beanList = array();
-    protected static $previewCheckResults = array();
+    protected static $beanList = [];
+    protected static $previewCheckResults = [];
 
     public function registerApiRest()
     {
-        return array(
+        return [
             // TODO: Look into removing this method. We shouldn't need this, but
             // it's here to prevent breaking stuff before SugarCon 2013.
-            'record_activities' => array(
+            'record_activities' => [
                 'reqType' => 'GET',
-                'path' => array('<module>','?', 'link', 'activities'),
-                'pathVars' => array('module','record', ''),
+                'path' => ['<module>', '?', 'link', 'activities'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'getRecordActivities',
                 'shortHelp' => 'This method retrieves a record\'s activities',
                 'longHelp' => 'modules/ActivityStream/clients/base/api/help/recordActivities.html',
-            ),
-            'module_activities' => array(
+            ],
+            'module_activities' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', 'Activities'),
-                'pathVars' => array('module', ''),
+                'path' => ['<module>', 'Activities'],
+                'pathVars' => ['module', ''],
                 'method' => 'getModuleActivities',
                 'shortHelp' => 'This method retrieves a module\'s activities',
                 'longHelp' => 'modules/ActivityStream/clients/base/api/help/moduleActivities.html',
-            ),
-            'home_activities' => array(
+            ],
+            'home_activities' => [
                 'reqType' => 'GET',
-                'path' => array('Activities'),
-                'pathVars' => array(''),
+                'path' => ['Activities'],
+                'pathVars' => [''],
                 'method' => 'getHomeActivities',
                 'shortHelp' => 'This method gets homepage activities for a user',
                 'longHelp' => 'modules/ActivityStream/clients/base/api/help/homeActivities.html',
-            ),
-            'record_activities_filter' => array(
+            ],
+            'record_activities_filter' => [
                 'reqType' => 'GET',
-                'path' => array('<module>','?', 'link', 'activities', 'filter'),
-                'pathVars' => array('module','record', ''),
+                'path' => ['<module>', '?', 'link', 'activities', 'filter'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'getRecordActivities',
                 'shortHelp' => 'This method retrieves a filtered list of a record\'s activities',
                 'longHelp' => 'modules/ActivityStream/clients/base/api/help/recordActivities.html',
-            ),
-            'module_activities_filter' => array(
+            ],
+            'module_activities_filter' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', 'Activities', 'filter'),
-                'pathVars' => array('module', ''),
+                'path' => ['<module>', 'Activities', 'filter'],
+                'pathVars' => ['module', ''],
                 'method' => 'getModuleActivities',
                 'shortHelp' => 'This method retrieves a filtered list of a module\'s activities',
                 'longHelp' => 'modules/ActivityStream/clients/base/api/help/moduleActivities.html',
-            ),
-            'home_activities_filter' => array(
+            ],
+            'home_activities_filter' => [
                 'reqType' => 'GET',
-                'path' => array('Activities', 'filter'),
-                'pathVars' => array(''),
+                'path' => ['Activities', 'filter'],
+                'pathVars' => [''],
                 'method' => 'getHomeActivities',
                 'shortHelp' => 'This method gets a filtered list of homepage activities for a user',
                 'longHelp' => 'modules/ActivityStream/clients/base/api/help/homeActivities.html',
-            ),
-        );
+            ],
+        ];
     }
 
     public function getRecordActivities(ServiceBase $api, array $args)
     {
         if (!Activity::isEnabled()) {
-            $response = array();
+            $response = [];
             $response['next_offset'] = -1;
             $response['args'] = $args;
             return $response;
@@ -85,10 +85,10 @@ class ActivitiesApi extends FilterApi
         $record = BeanFactory::retrieveBean($args['module'], $args['record']);
 
         if (empty($record)) {
-            throw new SugarApiExceptionNotFound('Could not find parent record '.$args['record'].' in module '.$args['module']);
+            throw new SugarApiExceptionNotFound('Could not find parent record ' . $args['record'] . ' in module ' . $args['module']);
         }
         if (!$record->ACLAccess('view')) {
-            throw new SugarApiExceptionNotAuthorized('No access to view records for module: '.$args['module']);
+            throw new SugarApiExceptionNotAuthorized('No access to view records for module: ' . $args['module']);
         }
 
         $query = self::getQueryObject($record, $params, $api);
@@ -102,7 +102,7 @@ class ActivitiesApi extends FilterApi
         $params = $this->parseArguments($api, $args);
         $record = BeanFactory::newBean($args['module']);
         if (!$record->ACLAccess('view')) {
-            throw new SugarApiExceptionNotAuthorized('No access to view records for module: '.$args['module']);
+            throw new SugarApiExceptionNotAuthorized('No access to view records for module: ' . $args['module']);
         }
 
         $query = self::getQueryObject($record, $params, $api);
@@ -131,7 +131,7 @@ class ActivitiesApi extends FilterApi
     {
         global $locale;
 
-        $response = array();
+        $response = [];
         $data = $query->execute();
 
         $seed = BeanFactory::newBean('Activities');
@@ -139,7 +139,7 @@ class ActivitiesApi extends FilterApi
         // We add one to it when setting it, so we subtract one now for the true
         // limit.
         $limit = $query->limit - 1;
-        $count = count($data);
+        $count = safeCount($data);
         if ($count > $limit) {
             $nextOffset = $query->offset + $limit;
             array_pop($data);
@@ -147,9 +147,9 @@ class ActivitiesApi extends FilterApi
             $nextOffset = -1;
         }
 
-        $options = array(
+        $options = [
             'requestBean' => $bean,
-        );
+        ];
 
         foreach ($data as $row) {
             $seed->populateFromRow($row, true);
@@ -158,7 +158,7 @@ class ActivitiesApi extends FilterApi
             if (isset($record['activity_type']) && $record['activity_type'] === 'update') {
                 if (is_null($bean) || empty($bean->id)) {
                     $fields = json_decode($row['fields'], true);
-                    $changedData = array();
+                    $changedData = [];
                     if (!empty($fields)) {
                         $aclBean = null;
                         if (!is_null($bean)) {
@@ -168,18 +168,18 @@ class ActivitiesApi extends FilterApi
                             $aclBean = $this->getEmptyBean($aclModule);
                         }
                         if (!is_null($aclBean)) {
-                            $context = array('user' => $api->user);
+                            $context = ['user' => $api->user];
                             $aclBean->ACLFilterFieldList($record['data']['changes'], $context);
                         }
                         foreach ($record['data']['changes'] as &$change) {
-                            if (in_array($change['field_name'], $fields)) {
+                            if (safeInArray($change['field_name'], $fields)) {
                                 $changedData[$change['field_name']] = $record['data']['changes'][$change['field_name']];
                             }
                         }
                     }
                     $record['data']['changes'] = $changedData;
                 } else {
-                    $context = array('user' => $api->user);
+                    $context = ['user' => $api->user];
                     $bean->ACLFilterFieldList($record['data']['changes'], $context);
                 }
             }
@@ -207,7 +207,7 @@ class ActivitiesApi extends FilterApi
     protected function checkParentPreviewEnabled(User $user, $module, $id)
     {
         $previewCheckKey = $module . '.' . $id;
-        $previewCheckResult = array();
+        $previewCheckResult = [];
         if (array_key_exists($previewCheckKey, self::$previewCheckResults)) {
             $previewCheckResult = self::$previewCheckResults[$previewCheckKey];
         } else {
@@ -238,11 +238,12 @@ class ActivitiesApi extends FilterApi
     }
 
     protected static function getQueryObject(
-        SugarBean $record,
-        array $options,
+        SugarBean   $record,
+        array       $options,
         ServiceBase $api = null,
         $homeActivities = false
     ) {
+
         $seed = BeanFactory::newBean('Activities');
         $query = new SugarQuery();
         $query->from($seed);
@@ -253,16 +254,16 @@ class ActivitiesApi extends FilterApi
         // +1 used to determine if we have more records to show.
         $query->limit($options['limit'] + 1)->offset($options['offset']);
 
-        $columns = array('activities.*', 'users.first_name', 'users.last_name', 'users.picture');
+        $columns = ['activities.*', 'users.first_name', 'users.last_name', 'users.picture'];
 
 
         // Join with user names.
-        $query->joinTable('users', array('joinType' => 'INNER'))
+        $query->joinTable('users', ['joinType' => 'INNER'])
             ->on()->equalsField('activities.created_by', 'users.id');
 
-        $join = $query->joinTable('activities_users', array('joinType' => 'INNER', 'linkName' => 'activities_users', "linkingTable" => true))
-            ->on()->equalsField("activities_users.activity_id", 'activities.id')
-            ->equals("activities_users.deleted", 0);
+        $join = $query->joinTable('activities_users', ['joinType' => 'INNER', 'linkName' => 'activities_users', 'linkingTable' => true])
+            ->on()->equalsField('activities_users.activity_id', 'activities.id')
+            ->equals('activities_users.deleted', 0);
 
         if ($homeActivities || !$record->id) {
             // Join with cached list of activities to show.

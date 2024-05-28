@@ -17,18 +17,18 @@ include_once 'include/utils/array_utils.php';
  * @param string $path
  * @return string
  */
-function clean_path( $path )
+function clean_path($path)
 {
     // clean directory/file path with a functional equivalent
     $appendpath = '';
-    if ( is_windows() && strlen($path) >= 2 && $path[0].$path[1] == "\\\\" ) {
-        $path = substr($path,2);
-        $appendpath = "\\\\";
+    if (is_windows() && strlen($path) >= 2 && $path[0] . $path[1] == '\\\\') {
+        $path = substr($path, 2);
+        $appendpath = '\\\\';
     }
-    $path = str_replace( "\\", "/", $path );
-    $path = str_replace( "//", "/", $path );
-    $path = str_replace( "/./", "/", $path );
-    return( $appendpath.$path );
+    $path = str_replace('\\', '/', $path);
+    $path = str_replace('//', '/', $path);
+    $path = str_replace('/./', '/', $path);
+    return ($appendpath . $path);
 }
 
 /**
@@ -61,62 +61,55 @@ function isValidCopyPath($path)
 
 function create_cache_directory($file)
 {
-    $paths = explode('/',$file);
-    $dir = rtrim(sugar_cached(""), '/');
-    if(!file_exists($dir))
-    {
+    $paths = explode('/', $file);
+    $dir = rtrim(sugar_cached(''), '/');
+    if (!file_exists($dir)) {
         sugar_mkdir($dir, 0775);
     }
-    for($i = 0; $i < sizeof($paths) - 1; $i++)
-    {
+    for ($i = 0; $i < sizeof($paths) - 1; $i++) {
         $dir .= '/' . $paths[$i];
-        if(!file_exists($dir))
-        {
+        if (!file_exists($dir)) {
             sugar_mkdir($dir, 0775);
         }
     }
-    return $dir . '/'. $paths[sizeof($paths) - 1];
+    return $dir . '/' . $paths[sizeof($paths) - 1];
 }
 
 /**
+ * @return string
  * @deprecated
  * Use ModuleInstaller::getModuleDirs
- * @return string
  */
 function get_module_dir_list()
 {
-	$modules = array();
-	$path = 'modules';
-	$d = dir($path);
-	while($entry = $d->read())
-	{
-		if($entry != '..' && $entry != '.')
-		{
-			if(is_dir($path. '/'. $entry))
-			{
-				$modules[$entry] = $entry;
-			}
-		}
-	}
-	return $modules;
+    $modules = [];
+    $path = 'modules';
+    $d = dir($path);
+    while ($entry = $d->read()) {
+        if ($entry != '..' && $entry != '.') {
+            if (is_dir($path . '/' . $entry)) {
+                $modules[$entry] = $entry;
+            }
+        }
+    }
+    return $modules;
 }
 
-function mk_temp_dir( $base_dir, $prefix="" )
+function mk_temp_dir($base_dir, $prefix = '')
 {
-    $temp_dir = tempnam( $base_dir, $prefix );
-    if( !$temp_dir || !unlink( $temp_dir ) )
-    {
-        return( false );
+    $temp_dir = tempnam($base_dir, $prefix);
+    if (!$temp_dir || !unlink($temp_dir)) {
+        return (false);
     }
 
-    if( sugar_mkdir( $temp_dir ) ){
-        return( $temp_dir );
+    if (sugar_mkdir($temp_dir)) {
+        return ($temp_dir);
     }
 
-    return( false );
+    return (false);
 }
 
-function remove_file_extension( $filename )
+function remove_file_extension($filename)
 {
     if (strrpos($filename, '.') === false) {
         return $filename;
@@ -124,17 +117,17 @@ function remove_file_extension( $filename )
     return substr($filename, 0, strrpos($filename, '.'));
 }
 
-function write_array_to_file( $the_name, $the_array, $the_file, $mode="w", $header='' )
+function write_array_to_file($the_name, $the_array, $the_file, $mode = 'w', $header = '')
 {
-    if(!empty($header) && ($mode != 'a' || !file_exists($the_file))){
-		$the_string = $header;
-	}else{
-    	$the_string =   "<?php\n" .
-                    '// created: ' . date('Y-m-d H:i:s') . "\n";
-	}
-    $the_string .=  "\$$the_name = " .
-                    var_export_helper( $the_array ) .
-                    ";";
+    if (!empty($header) && ($mode != 'a' || !file_exists($the_file))) {
+        $the_string = $header;
+    } else {
+        $the_string = "<?php\n" .
+            '// created: ' . date('Y-m-d H:i:s') . "\n";
+    }
+    $the_string .= "\$$the_name = " .
+        var_export_helper($the_array) .
+        ';';
 
     return sugar_file_put_contents_atomic($the_file, $the_string);
 }
@@ -148,18 +141,18 @@ function write_array_to_file( $the_name, $the_array, $the_file, $mode="w", $head
  * @param string $header
  * @return bool
  */
-function write_array_to_file_as_key_value_pair($the_name, $the_array, $the_file, $mode = "w", $header = '')
+function write_array_to_file_as_key_value_pair($the_name, $the_array, $the_file, $mode = 'w', $header = '')
 {
     if (!empty($header) && ($mode != 'a' || !file_exists($the_file))) {
         $the_string = $header;
     } else {
-        $the_string =   "<?php\n" .
+        $the_string = "<?php\n" .
             '// created: ' . date('Y-m-d H:i:s') . "\n";
     }
 
     $arrayName = "\$$the_name";
     foreach ($the_array as $key => $value) {
-        $the_string .= $arrayName . "['$key'] = " . var_export_helper($value) . ";" . "\n";
+        $the_string .= $arrayName . "['$key'] = " . var_export_helper($value) . ';' . "\n";
     }
 
     return sugar_file_put_contents_atomic($the_file, $the_string);
@@ -167,89 +160,79 @@ function write_array_to_file_as_key_value_pair($the_name, $the_array, $the_file,
 
 function create_custom_directory($file)
 {
-    $paths = explode('/',$file);
+    $paths = explode('/', $file);
     $dir = 'custom';
-    if(!file_exists($dir))
-    {
+    if (!file_exists($dir)) {
         sugar_mkdir($dir, 0755);
     }
-    for($i = 0; $i < sizeof($paths) - 1; $i++)
-    {
+    for ($i = 0; $i < sizeof($paths) - 1; $i++) {
         $dir .= '/' . $paths[$i];
-        if(!file_exists($dir))
-        {
+        if (!file_exists($dir)) {
             sugar_mkdir($dir, 0755);
         }
     }
-    return $dir . '/'. $paths[sizeof($paths) - 1];
+    return $dir . '/' . $paths[sizeof($paths) - 1];
 }
 
 /**
  * This function will recursively generates md5s of files and returns an array of all md5s.
  *
- * @param	$path The path of the root directory to scan - must end with '/'
- * @param	$ignore_dirs array of filenames/directory names to ignore running md5 on - default 'cache' and 'upload'
- * @result	$md5_array an array containing path as key and md5 as value
+ * @param   $path The path of the root directory to scan - must end with '/'
+ * @param   $ignore_dirs array of filenames/directory names to ignore running md5 on - default 'cache' and 'upload'
+ * @result  $md5_array an array containing path as key and md5 as value
  */
-function generateMD5array($path, $ignore_dirs = array('cache', 'upload'))
+function generateMD5array($path, $ignore_dirs = ['cache', 'upload'])
 {
     $current_dir_content = [];
-	$dh  = opendir($path);
-	while (false !== ($filename = readdir($dh)))
-	{
-		$current_dir_content[] = $filename;
-	}
+    $dh = opendir($path);
+    while (false !== ($filename = readdir($dh))) {
+        $current_dir_content[] = $filename;
+    }
 
-	// removes the ignored directories
-	$current_dir_content = array_diff($current_dir_content, $ignore_dirs);
+    // removes the ignored directories
+    $current_dir_content = array_diff($current_dir_content, $ignore_dirs);
 
-	sort($current_dir_content);
-	$md5_array = array();
+    sort($current_dir_content);
+    $md5_array = [];
 
-	foreach($current_dir_content as $file)
-	{
-		// make sure that it's not dir '.' or '..'
-		if(strcmp($file, ".") && strcmp($file, ".."))
-		{
-			if(is_dir($path.$file))
-			{
-				// For testing purposes - uncomment to see all files and md5s
-				//echo "<BR>Dir:  ".$path.$file."<br>";
-				//generateMD5array($path.$file."/");
+    foreach ($current_dir_content as $file) {
+        // make sure that it's not dir '.' or '..'
+        if (strcmp($file, '.') && strcmp($file, '..')) {
+            if (is_dir($path . $file)) {
+                // For testing purposes - uncomment to see all files and md5s
+                //echo "<BR>Dir:  ".$path.$file."<br>";
+                //generateMD5array($path.$file."/");
 
-				$md5_array += generateMD5array($path.$file."/", $ignore_dirs);
-			}
-			else
-			{
-				// For testing purposes - uncomment to see all files and md5s
-				//echo "   File: ".$path.$file."<br>";
-				//echo md5_file($path.$file)."<BR>";
+                $md5_array += generateMD5array($path . $file . '/', $ignore_dirs);
+            } else {
+                // For testing purposes - uncomment to see all files and md5s
+                //echo "   File: ".$path.$file."<br>";
+                //echo md5_file($path.$file)."<BR>";
 
-				$md5_array[$path.$file] = md5_file($path.$file);
-			}
-		}
-	}
+                $md5_array[$path . $file] = md5_file($path . $file);
+            }
+        }
+    }
 
-	return $md5_array;
-
+    return $md5_array;
 }
 
 /**
  * Function to compare two directory structures and return the items in path_a that didn't match in path_b
  *
- * @param	$path_a The path of the first root directory to scan - must end with '/'
- * @param	$path_b The path of the second root directory to scan - must end with '/'
- * @param	$ignore_dirs array of filenames/directory names to ignore running md5 on - default 'cache' and 'upload'
- * @result	array containing all the md5s of everything in $path_a that didn't have a match in $path_b
+ * @param   $path_a The path of the first root directory to scan - must end with '/'
+ * @param   $path_b The path of the second root directory to scan - must end with '/'
+ * @param   $ignore_dirs array of filenames/directory names to ignore running md5 on - default 'cache' and 'upload'
+ * @result  array containing all the md5s of everything in $path_a that didn't have a match in $path_b
  */
-function md5DirCompare($path_a, $path_b, $ignore_dirs = array('cache', 'upload'))
+function md5DirCompare($path_a, $path_b, $ignore_dirs = ['cache', 'upload'])
 {
-	$md5array_a = generateMD5array($path_a, $ignore_dirs);
-	$md5array_b = generateMD5array($path_b, $ignore_dirs);
+    $md5array_a = generateMD5array($path_a, $ignore_dirs);
+    $md5array_b = generateMD5array($path_b, $ignore_dirs);
 
-	$result = array_diff($md5array_a, $md5array_b);
+    $result = array_diff($md5array_a, $md5array_b);
 
-	return $result;
+    return $result;
 }
 
 /**
@@ -259,20 +242,27 @@ function md5DirCompare($path_a, $path_b, $ignore_dirs = array('cache', 'upload')
  * @param string $dir directory to look in [ USE ./ in front of the $dir! ]
  * @param regex $pattern optional pattern to match against
  */
-function getFiles(&$arr, $dir, $pattern = null) {
-	if(!is_dir($dir))return;
- 	$d = dir($dir);
- 	while($e =$d->read()){
- 		if(substr($e, 0, 1) == '.')continue;
- 		$file = $dir . '/' . $e;
- 		if(is_dir($file)){
- 			getFiles($arr, $file, $pattern);
- 		}else{
- 			if(empty($pattern)) $arr[] = $file;
-                else if(preg_match($pattern, $file))
+function getFiles(&$arr, $dir, $pattern = null)
+{
+    if (!is_dir($dir)) {
+        return;
+    }
+    $d = dir($dir);
+    while ($e = $d->read()) {
+        if (substr($e, 0, 1) == '.') {
+            continue;
+        }
+        $file = $dir . '/' . $e;
+        if (is_dir($file)) {
+            getFiles($arr, $file, $pattern);
+        } else {
+            if (empty($pattern)) {
                 $arr[] = $file;
- 		}
- 	}
+            } elseif (preg_match($pattern, $file)) {
+                $arr[] = $file;
+            }
+        }
+    }
 }
 
 
@@ -282,33 +272,36 @@ function getFiles(&$arr, $dir, $pattern = null) {
  * @param string $old_filename
  * @param string $new_filename
  */
-function sugar_rename( $old_filename, $new_filename){
-	if (empty($old_filename) || empty($new_filename)) return false;
-	$success = false;
+function sugar_rename($old_filename, $new_filename)
+{
+    if (empty($old_filename) || empty($new_filename)) {
+        return false;
+    }
+    $success = false;
     if (file_exists($new_filename)) {
         unlink($new_filename);
-    	$success = rename($old_filename, $new_filename);
-	}
-	else {
-		$success = rename($old_filename, $new_filename);
-	}
+        $success = rename($old_filename, $new_filename);
+    } else {
+        $success = rename($old_filename, $new_filename);
+    }
 
-	return $success;
+    return $success;
 }
 
-function fileToHash($file){
-		$hash = md5($file);
-		$_SESSION['file2Hash'][$hash] = $file;
-		return $hash;
-	}
-
-function hashToFile($hash){
-		if(!empty($_SESSION['file2Hash'][$hash])){
-			return $_SESSION['file2Hash'][$hash];
-		}
-		return false;
+function fileToHash($file)
+{
+    $hash = md5($file);
+    $_SESSION['file2Hash'][$hash] = $file;
+    return $hash;
 }
 
+function hashToFile($hash)
+{
+    if (!empty($_SESSION['file2Hash'][$hash])) {
+        return $_SESSION['file2Hash'][$hash];
+    }
+    return false;
+}
 
 
 /**
@@ -320,10 +313,9 @@ function hashToFile($hash){
  *
  * @return extension String value, blank if no extension found
  */
-function get_file_extension($filename, $string_to_lower=true)
+function get_file_extension($filename, $string_to_lower = true)
 {
-    if(strpos($filename, '.') !== false)
-    {
+    if (strpos($filename, '.') !== false) {
         $filenameParts = explode('.', $filename);
         $extension = array_pop($filenameParts);
         return $string_to_lower ? strtolower($extension) : $extension;
@@ -345,9 +337,8 @@ function get_file_extension($filename, $string_to_lower=true)
  */
 function get_mime_content_type_from_filename($filename)
 {
-	if(strpos($filename, '.') !== false)
-	{
-        $mime_types = array(
+    if (strpos($filename, '.') !== false) {
+        $mime_types = [
             'txt' => 'text/plain',
             'htm' => 'text/html',
             'html' => 'text/html',
@@ -400,7 +391,7 @@ function get_mime_content_type_from_filename($filename)
             // open office
             'odt' => 'application/vnd.oasis.opendocument.text',
             'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
-        );
+        ];
 
         $ext = get_file_extension($filename, true);
         if (array_key_exists($ext, $mime_types)) {
@@ -408,7 +399,7 @@ function get_mime_content_type_from_filename($filename)
         }
 
         return 'application/octet-stream';
-	}
+    }
 
     return '';
 }
@@ -425,7 +416,7 @@ function cleanFileName($name)
  */
 function cleanDirName($name)
 {
-    return str_replace(array("\\", "/", "."), "", $name);
+    return str_replace(['\\', '/', '.'], '', $name);
 }
 
 /**
@@ -455,7 +446,7 @@ function get_file_mime_type($file, $default = false)
                 $mime = @finfo_file($finfo, $file);
                 finfo_close($finfo);
             }
-        } else  {
+        } else {
             // Fall back to our regular way of doing it
             if (function_exists('mime_content_type')) {
                 $mime = @mime_content_type($file);

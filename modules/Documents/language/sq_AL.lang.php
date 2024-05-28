@@ -10,22 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     //module
     'LBL_MODULE_NAME' => 'Dokumentacionet',
     'LBL_MODULE_NAME_SINGULAR' => 'Dokument',
     'LBL_MODULE_TITLE' => 'Dokumentacioni: Ballina',
     'LNK_NEW_DOCUMENT' => 'krijo dokumentacion',
-    'LNK_DOCUMENT_LIST'=> 'shiko dokumentacionet',
+    'LNK_DOCUMENT_LIST' => 'shiko dokumentacionet',
     'LBL_DOC_REV_HEADER' => 'Revizioni i dokumentacionit',
-    'LBL_SEARCH_FORM_TITLE'=> 'kërkimi i dokumentacionit',
+    'LBL_SEARCH_FORM_TITLE' => 'kërkimi i dokumentacionit',
     //vardef labels
     'LBL_DOCUMENT_ID' => 'ID e dokumentacionit',
     'LBL_NAME' => 'emri i dokumentacionit',
@@ -34,31 +33,31 @@ $mod_strings = array (
     'LBL_CATEGORY' => 'Kategoria',
     'LBL_SUBCATEGORY' => 'nënkategoria',
     'LBL_STATUS' => 'Statusi',
-    'LBL_CREATED_BY'=> 'Krijuar nga',
-    'LBL_DATE_ENTERED'=> 'Të dhënat e krijuara',
-    'LBL_DATE_MODIFIED'=> 'Të dhënat e modifikuara',
+    'LBL_CREATED_BY' => 'Krijuar nga',
+    'LBL_DATE_ENTERED' => 'Të dhënat e krijuara',
+    'LBL_DATE_MODIFIED' => 'Të dhënat e modifikuara',
     'LBL_DELETED' => 'E fshirë',
-    'LBL_MODIFIED'=> 'Modifikuar nga Id',
+    'LBL_MODIFIED' => 'Modifikuar nga Id',
     'LBL_MODIFIED_USER' => 'Modifikuar nga',
-    'LBL_CREATED'=> 'Krijuar nga',
-    'LBL_REVISIONS'=>'Revizionet',
-    'LBL_RELATED_DOCUMENT_ID'=>'Id e dokumentacionit lidhës',
-    'LBL_RELATED_DOCUMENT_REVISION_ID'=>'Id e revizionit të dokumentacionit lidhës',
-    'LBL_IS_TEMPLATE'=>'Është shabllon',
-    'LBL_TEMPLATE_TYPE'=>'Lloji dokumentacioni',
-    'LBL_ASSIGNED_TO_NAME'=>'Drejtuar:',
+    'LBL_CREATED' => 'Krijuar nga',
+    'LBL_REVISIONS' => 'Revizionet',
+    'LBL_RELATED_DOCUMENT_ID' => 'Id e dokumentacionit lidhës',
+    'LBL_RELATED_DOCUMENT_REVISION_ID' => 'Id e revizionit të dokumentacionit lidhës',
+    'LBL_IS_TEMPLATE' => 'Është shabllon',
+    'LBL_TEMPLATE_TYPE' => 'Lloji dokumentacioni',
+    'LBL_ASSIGNED_TO_NAME' => 'Drejtuar:',
     'LBL_REVISION_NAME' => 'numri i rishikimit',
     'LBL_MIME' => 'Lloji pantomime',
     'LBL_REVISION' => 'rishikim',
     'LBL_DOCUMENT' => 'dokumentacion në lidhje me',
     'LBL_LATEST_REVISION' => 'rishikimi i fundit',
     'LBL_DOCUMENT_REVISION_ID' => 'ID i dokumentit inspektuar',
-    'LBL_CHANGE_LOG'=> 'Ndryshimi i hyrjes',
-    'LBL_ACTIVE_DATE'=> 'data e publikimit',
+    'LBL_CHANGE_LOG' => 'Ndryshimi i hyrjes',
+    'LBL_ACTIVE_DATE' => 'data e publikimit',
     'LBL_EXPIRATION_DATE' => 'data e skadimit',
-    'LBL_FILE_EXTENSION'  => 'zgjatje e dosjes',
+    'LBL_FILE_EXTENSION' => 'zgjatje e dosjes',
     'LBL_LAST_REV_MIME_TYPE' => 'Rishikimi i fundit të llojit MIME',
-    'LBL_CAT_OR_SUBCAT_UNSPEC'=>'E papërcaktuar',
+    'LBL_CAT_OR_SUBCAT_UNSPEC' => 'E papërcaktuar',
     'LBL_HOMEPAGE_TITLE' => 'Dokumentacionet e mia',
     //quick search
     'LBL_NEW_FORM_TITLE' => 'Dokumentacion i ri',
@@ -70,25 +69,25 @@ $mod_strings = array (
     'LBL_FILE_UPLOAD' => 'Dosja',
 
     'LBL_CATEGORY_VALUE' => 'Kategoria',
-    'LBL_SUBCATEGORY_VALUE'=> 'Nën kategoria',
-    'LBL_DOC_STATUS'=> 'statusi',
-    'LBL_DOC_STATUS_ID'=> 'Statusi i ID:',
+    'LBL_SUBCATEGORY_VALUE' => 'Nën kategoria',
+    'LBL_DOC_STATUS' => 'statusi',
+    'LBL_DOC_STATUS_ID' => 'Statusi i ID:',
     'LBL_LAST_REV_CREATOR' => 'Revizion i krijuar nga:',
     'LBL_LASTEST_REVISION_NAME' => 'Emri i revizionit të fundit',
     'LBL_SELECTED_REVISION_NAME' => 'Selekto emrin e revizionit',
     'LBL_CONTRACT_STATUS' => 'Statusi i kontratës:',
     'LBL_CONTRACT_NAME' => 'Emri i kontratës:',
     'LBL_LAST_REV_DATE' => 'Data e revizionit',
-    'LBL_DOWNNLOAD_FILE'=> 'Shkarko dosjen:',
-    'LBL_DET_RELATED_DOCUMENT'=>'Dokumentet lidhëse',
-    'LBL_DET_RELATED_DOCUMENT_VERSION'=>"Revizioni i dokumenteve lidhëse",
-    'LBL_DET_IS_TEMPLATE'=>'Shabllon?',
-    'LBL_DET_TEMPLATE_TYPE'=>'lloji i dokumentacionit',
-    'LBL_TEAM'=> 'Grupi',
+    'LBL_DOWNNLOAD_FILE' => 'Shkarko dosjen:',
+    'LBL_DET_RELATED_DOCUMENT' => 'Dokumentet lidhëse',
+    'LBL_DET_RELATED_DOCUMENT_VERSION' => 'Revizioni i dokumenteve lidhëse',
+    'LBL_DET_IS_TEMPLATE' => 'Shabllon?',
+    'LBL_DET_TEMPLATE_TYPE' => 'lloji i dokumentacionit',
+    'LBL_TEAM' => 'Grupi',
     'LBL_IS_SHARED' => 'Ofrohet jashtë:',
-    'LBL_DOC_DESCRIPTION'=>'përshkrimi',
-    'LBL_DOC_ACTIVE_DATE'=> 'data e publikimit',
-    'LBL_DOC_EXP_DATE'=> 'data e skadimit',
+    'LBL_DOC_DESCRIPTION' => 'përshkrimi',
+    'LBL_DOC_ACTIVE_DATE' => 'data e publikimit',
+    'LBL_DOC_EXP_DATE' => 'data e skadimit',
 
     //document list view.
     'LBL_LIST_FORM_TITLE' => 'Lista e dokumentacionit',
@@ -98,11 +97,11 @@ $mod_strings = array (
     'LBL_LIST_REVISION' => 'rishikim',
     'LBL_LIST_LAST_REV_CREATOR' => 'Publikuar nga',
     'LBL_LIST_LAST_REV_DATE' => 'data e rishikimit',
-    'LBL_LIST_VIEW_DOCUMENT'=>'Pamje',
-    'LBL_LIST_DOWNLOAD'=> 'Shkarko',
+    'LBL_LIST_VIEW_DOCUMENT' => 'Pamje',
+    'LBL_LIST_DOWNLOAD' => 'Shkarko',
     'LBL_LIST_ACTIVE_DATE' => 'data e publikimit',
     'LBL_LIST_EXP_DATE' => 'data e skadimit',
-    'LBL_LIST_STATUS'=>'Statusi',
+    'LBL_LIST_STATUS' => 'Statusi',
     'LBL_LINKED_ID' => 'Id lidhëse',
     'LBL_SELECTED_REVISION_ID' => 'id e revizionit të selektuar',
     'LBL_LATEST_REVISION_ID' => 'id e revizionit të fundit',
@@ -114,33 +113,33 @@ $mod_strings = array (
     //document search form.
     'LBL_SF_DOCUMENT' => 'Emri i dokumentit',
     'LBL_SF_CATEGORY' => 'Kategoria',
-    'LBL_SF_SUBCATEGORY'=> 'Nën kategoria',
+    'LBL_SF_SUBCATEGORY' => 'Nën kategoria',
     'LBL_SF_ACTIVE_DATE' => 'data e publikimit',
-    'LBL_SF_EXP_DATE'=> 'data e skadimit',
+    'LBL_SF_EXP_DATE' => 'data e skadimit',
 
     'DEF_CREATE_LOG' => 'dokumentacioni i krijuar',
 
     //error messages
-    'ERR_DOC_NAME'=>'emri i dokumentacionit',
-    'ERR_DOC_ACTIVE_DATE'=>'data e publikimit',
-    'ERR_DOC_EXP_DATE'=> 'data e skadimit',
-    'ERR_FILENAME'=> 'emri i dosjes',
-    'ERR_DOC_VERSION'=> 'versioni i dokumentacionit',
-    'ERR_DELETE_CONFIRM'=> 'A dëshironi të fshini këtë dokumentacion të rishikuar?',
-    'ERR_DELETE_LATEST_VERSION'=> 'Nuk jeni të autorizuar të fshini revizionin e fundit të dokumentit.',
+    'ERR_DOC_NAME' => 'emri i dokumentacionit',
+    'ERR_DOC_ACTIVE_DATE' => 'data e publikimit',
+    'ERR_DOC_EXP_DATE' => 'data e skadimit',
+    'ERR_FILENAME' => 'emri i dosjes',
+    'ERR_DOC_VERSION' => 'versioni i dokumentacionit',
+    'ERR_DELETE_CONFIRM' => 'A dëshironi të fshini këtë dokumentacion të rishikuar?',
+    'ERR_DELETE_LATEST_VERSION' => 'Nuk jeni të autorizuar të fshini revizionin e fundit të dokumentit.',
     'LNK_NEW_MAIL_MERGE' => 'Bashkim i  maileve',
     'LBL_MAIL_MERGE_DOCUMENT' => 'shabllon i bashkimit të maileve',
     'ERR_MISSING_FILE' => 'Ky dokument mungon në dosje, më shumë gjasa për shkak të një gabimi gjatë ngarkimit. Ju lutemi provoni përsëri të ngarkoni dosjen ose kontaktoni administratorin tuaj.',
 
     'LBL_TREE_TITLE' => 'Dokumentacionet',
     //sub-panel vardefs.
-    'LBL_LIST_DOCUMENT_NAME'=>'Emri',
-    'LBL_LIST_IS_TEMPLATE'=>'Shabllon?',
-    'LBL_LIST_TEMPLATE_TYPE'=>'Lloji okumentacioni',
-    'LBL_LIST_SELECTED_REVISION'=>'rishikim i selektuar',
-    'LBL_LIST_LATEST_REVISION'=>'rishikimi i fundit',
-    'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Kontaktet',
-    'LBL_LAST_REV_CREATE_DATE'=>'data e revizionit të fundit të krijuar',
+    'LBL_LIST_DOCUMENT_NAME' => 'Emri',
+    'LBL_LIST_IS_TEMPLATE' => 'Shabllon?',
+    'LBL_LIST_TEMPLATE_TYPE' => 'Lloji okumentacioni',
+    'LBL_LIST_SELECTED_REVISION' => 'rishikim i selektuar',
+    'LBL_LIST_LATEST_REVISION' => 'rishikimi i fundit',
+    'LBL_CONTRACTS_SUBPANEL_TITLE' => 'Kontaktet',
+    'LBL_LAST_REV_CREATE_DATE' => 'data e revizionit të fundit të krijuar',
     //'LNK_DOCUMENT_CAT'=>'Document Categories',
     'LBL_CONTRACTS' => 'Kontratat',
     'LBL_CREATED_USER' => 'Përdorues i krijuar',
@@ -171,9 +170,11 @@ $mod_strings = array (
     // Dashboards
     'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Paneli i regjistrimit të dokumenteve',
     'LBL_MY_DOCUMENTS' => 'Dokumentet e mia',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e dokumenteve',
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Dërgo te DocuSign',
+    'LBL_SEND_TO_DOCUSIGN_TEMPLATE_BUTTON' => 'Dërgo te DocuSign me një shabllon',
 
     // Cloud Drive
 
@@ -183,4 +184,4 @@ $mod_strings = array (
     'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Sinkronizo në OneDrive',
     'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Sinkronizo të gjitha në Dropbox',
     'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Sinkronizo në Dropbox',
-);
+];

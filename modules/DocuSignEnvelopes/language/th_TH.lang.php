@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'เรียกซอง',
     'LBL_CLOUD_SERVICE_TYPE' => 'ประเภทบริการคลาวด์',
     'LBL_CLOUD_PATH' => 'เส้นทางคลาวด์',
+    'LBL_CLOUD_DRIVE_ID' => 'ID ไดร์ฟ',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'แดชบอร์ดรายการซอง DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนซอง DocuSign',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'ซอง DocuSign ล่าสุด',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'ระบบลิ้นชักซอง DocuSign',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์ซอง DocuSign',
 
     'LBL_NEW_ENVELOPE' => 'ซองใหม่',
     'LBL_DOCUMENT_IS_NOW' => ' ขณะนี้ ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'ส่ง',
     'LBL_BUTTON_CLEAR' => 'ล้าง',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'ใช้เทมเพลต',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'ส่งกับเทมเพลท',
     'LBL_PLEASE_LOG_IN' => 'โปรดเข้าระบบ DocuSign ก่อน!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'คุณไม่สามารถดาวน์โหลดเอกสารนี้ได้ เพราะผู้ใช้คนอื่นเป็นคนสร้างเอกสาร!',
     'LBL_SEND_NOT_ALLOWED' => 'คุณไม่สามารถส่งเอกสารนี้ได้ เพราะผู้ใช้คนอื่นเป็นคนสร้างเอกสาร!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'ฉบับร่างได้รับการเปลี่ยนแปลงแล้ว ต้องการอัปเดตไปเป็นฉบับปัจจุบัน ({{status}}) หรือไม่',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'อัปเดตซอง DocuSign แล้ว!',
     'LBL_DRAFT_CHANGED_ERROR' => 'ไม่ได้อัปเดตสถานะซอง DocuSign โปรดตรวจสอบบันทึกล็อกเพื่อดูรายละเอียดเพิ่มเติม!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'ไม่สามารถใช้เทมเพลต DocuSign ได้',
     'LBL_ENVELOPE_NOT_SENT' => 'ไม่ได้ส่งซอง!',
     'LBL_ENVELOPE_SENT' => 'ส่งซองอีกครั้งแล้ว!',
     'LBL_DOCUMENT_ADDED' => 'เพิ่มเอกสารไปในระเบียนแล้ว!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'บทบาท',
     'LBL_SELECT_BUTTON_LABEL' => 'เลือก',
     'LBL_BACK_BUTTON_LABEL' => 'ย้อนกลับ',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'ค้นหาตามชื่อเทมเพลท',
+    'LBL_ENVELOPE_NAME' => 'ชื่อซองจดหมาย',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'ชื่อซองจดหมายไม่สามารถเว้นว่างได้',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'เรียกผู้รับที่มีศักยภาพไม่สำเร็จ!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'เรียกเทมเพลตไม่สำเร็จ!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'โปรดเลือกบทบาทสําหรับผู้รับแต่ละคน',
+    
+    'LBL_DOWNLOAD' => 'ดาวน์โหลด',
+    'LBL_OPEN_DRAFT' => 'เปิดแบบร่าง',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'ไม่สามารถส่งเอกสารที่ไม่มีไฟล์ไปยัง DocuSign ได้',
+    'LBL_START_SIGN_PROMPT' => 'คลิกปุ่มบวกเพื่อเริ่มกระบวนการลงนาม',
+    'LBL_NO_DOC_SELECTED' => 'โปรดเลือกเอกสารก่อน',
+    'LBL_SELECT_RECIPIENTS' => 'เลือกผู้รับผู้ลงนาม',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'ไม่รวม',
+    'LBL_DOCUSIGN_MISSING_APP' => 'คุณต้องติดตั้งแอปพลิเคชัน DocuSign เพื่อประสบการณ์ใช้งานที่ดีขึ้น',
 ];

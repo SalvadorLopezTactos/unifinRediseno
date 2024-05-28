@@ -10,51 +10,51 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['email_marketing_prospect_lists'] = array(
+$dictionary['email_marketing_prospect_lists'] = [
     'table' => 'email_marketing_prospect_lists',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'prospect_list_id' => array(
+        ],
+        'prospect_list_id' => [
             'name' => 'prospect_list_id',
             'type' => 'id',
-        ),
-        'email_marketing_id' => array(
+        ],
+        'email_marketing_id' => [
             'name' => 'email_marketing_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'email_mp_listspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'email_mp_prospects',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'email_marketing_id',
                 'prospect_list_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'email_marketing_prospect_lists' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'email_marketing_prospect_lists' => [
             'lhs_module' => 'EmailMarketing',
             'lhs_table' => 'email_marketing',
             'lhs_key' => 'id',
@@ -65,6 +65,6 @@ $dictionary['email_marketing_prospect_lists'] = array(
             'join_table' => 'email_marketing_prospect_lists',
             'join_key_lhs' => 'email_marketing_id',
             'join_key_rhs' => 'prospect_list_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

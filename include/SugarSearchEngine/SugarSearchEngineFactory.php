@@ -32,7 +32,9 @@ class SugarSearchEngineFactory
     /**
      * Singleton pattern
      */
-    private function __construct(){}
+    private function __construct()
+    {
+    }
 
     /**
      * getInstance()
@@ -42,56 +44,54 @@ class SugarSearchEngineFactory
      * @static
      * @return SugarSearchEngineInterface
      */
-    public static function getInstance($name = '', $config = array(), $useDefaultWhenFTSDown = false)
+    public static function getInstance($name = '', $config = [], $useDefaultWhenFTSDown = false)
     {
-        if ($useDefaultWhenFTSDown && SugarSearchEngineAbstractBase::isSearchEngineDown())
-        {
+        if ($useDefaultWhenFTSDown && SugarSearchEngineAbstractBase::isSearchEngineDown()) {
             $name = 'SugarSearchEngine';
         }
 
-       if (!isset(self::$_instance[$name]))
-       {
-           self::$_instance[$name] = self::setupEngine($name, $config);
-       }
+        if (!isset(self::$_instance[$name])) {
+            self::$_instance[$name] = self::setupEngine($name, $config);
+        }
 
-       return self::$_instance[$name];
+        return self::$_instance[$name];
     }
 
     public static function getFTSEngineNameFromConfig()
     {
-        $name = "";
-        if(isset($GLOBALS['sugar_config']['full_text_engine']) &&
-           is_array($GLOBALS['sugar_config']['full_text_engine']))
-        {
+        $name = '';
+        if (isset($GLOBALS['sugar_config']['full_text_engine']) &&
+            is_array($GLOBALS['sugar_config']['full_text_engine'])) {
             $keys = array_keys($GLOBALS['sugar_config']['full_text_engine']);
             $name = array_pop($keys);
         }
         return $name;
     }
+
     /**
      * @static
      * @param string $name
      * @param array $config
      * @return mixed (bool|SugarSearchEngineInterface)
      */
-    protected static function setupEngine($name = '', $config = array())
+    protected static function setupEngine($name = '', $config = [])
     {
         // if name is empty set name and config
-        if(empty($name) && !empty($GLOBALS['sugar_config']['full_text_engine'])) {
+        if (empty($name) && !empty($GLOBALS['sugar_config']['full_text_engine'])) {
             $name = self::getFTSEngineNameFromConfig();
             $config = $GLOBALS['sugar_config']['full_text_engine'][$name];
         }
 
         // if config is empty set config
-        if(empty($config) && !empty($GLOBALS['sugar_config']['full_text_engine'][$name])) {
+        if (empty($config) && !empty($GLOBALS['sugar_config']['full_text_engine'][$name])) {
             $config = $GLOBALS['sugar_config']['full_text_engine'][$name];
         }
 
-        $paths = array(
+        $paths = [
             "include/SugarSearchEngine/{$name}/SugarSearchEngine{$name}.php" => $name,
             // fallback to base engine if unknown engine name
-            "include/SugarSearchEngine/SugarSearchEngine.php" => '',
-        );
+            'include/SugarSearchEngine/SugarSearchEngine.php' => '',
+        ];
 
         // object loader using custom override
         foreach ($paths as $path => $baseClass) {
@@ -99,7 +99,7 @@ class SugarSearchEngineFactory
                 $engineClass = SugarAutoLoader::customClass("SugarSearchEngine{$baseClass}");
                 $engineInstance = new $engineClass($config);
                 if ($engineInstance instanceof SugarSearchEngineInterface) {
-                    $GLOBALS['log']->info("Found Sugar Search Engine: " . get_class($engineInstance));
+                    $GLOBALS['log']->info('Found Sugar Search Engine: ' . get_class($engineInstance));
                     return $engineInstance;
                 }
             }

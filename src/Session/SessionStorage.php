@@ -15,7 +15,6 @@ namespace Sugarcrm\Sugarcrm\Session;
 use Sugarcrm\Sugarcrm\Util\Arrays\TrackableArray\TrackableArray;
 use Sugarcrm\Sugarcrm\Logger\LoggerTransition;
 
-
 /**
  * Class SessionStorage
  *
@@ -24,7 +23,6 @@ use Sugarcrm\Sugarcrm\Logger\LoggerTransition;
  *
  * @package Sugarcrm\Sugarcrm\Session
  */
-
 class SessionStorage extends TrackableArray implements SessionStorageInterface
 {
     protected static $shutdownRegisterd = false;
@@ -47,7 +45,8 @@ class SessionStorage extends TrackableArray implements SessionStorageInterface
     /**
      * {@inheritdoc} Checks for custom SessionStorage classes or alternate SessionStorage classes set in config.
      */
-    public static function getInstance() {
+    public static function getInstance()
+    {
         $className = \SugarConfig::getInstance()->get(
             'SessionStorageClass',
             \Sugarcrm\Sugarcrm\Session\SessionStorage::class
@@ -89,7 +88,8 @@ class SessionStorage extends TrackableArray implements SessionStorageInterface
     /**
      * {@inheritdoc} destroy the current php session.
      */
-    public function destroy() {
+    public function destroy()
+    {
         if ($this->closed) {
             $this->restart();
         }
@@ -97,11 +97,11 @@ class SessionStorage extends TrackableArray implements SessionStorageInterface
         $_SESSION = $this;
 
         $this->getIterator()->rewind();
-        foreach($this as $key => $val) {
+        foreach ($this as $key => $val) {
             $this->offsetUnset($key);
         }
-        $this->modifiedKeys = array();
-        $this->unsetKeys = array();
+        $this->modifiedKeys = [];
+        $this->unsetKeys = [];
     }
 
     /**
@@ -199,7 +199,7 @@ class SessionStorage extends TrackableArray implements SessionStorageInterface
                     }
                 } else {
                     if (is_array($sessionObject)) {
-                        $klass = "array";
+                        $klass = 'array';
                     } else {
                         $klass = get_class($sessionObject);
                     }

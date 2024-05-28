@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '지식 기반',
     'LBL_MODULE_NAME_SINGULAR' => '지식 기반 문서',
     'LBL_MODULE_TITLE' => '지식기반 조항',
@@ -17,4 +17,4 @@ $mod_strings = array(
     'LBL_KEYWORDS' => '키워드',
     'LBL_CONTENT' => '내용',
     'LBL_ATTACHMENTS' => '첨부',
-);
+];

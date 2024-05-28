@@ -11,16 +11,16 @@
  */
 --}}
 <div class="report-loading-screen-overlay" data-widget="report-loading" data-type="chart">
-    <div class="chart-skeleton-loader"></div>
+    <div class="chart-skeleton-loader h-full ml-2.5 w-[calc(100%-20px)]"></div>
 </div>
 <div class="h-full" data-container="chart-container">
     {{#with this._chartDef}}
         {{field ../this model=../this._reportData template=detail}}
     {{/with}}
 </div>
-<div class="h-full report-no-data-available hidden" data-widget="report-no-chart">
+<div class="report-no-data-available hidden h-full mr-5 text-center" data-widget="report-no-chart">
     {{str "LBL_NO_CHART_REPORT_AVAILABLE"}}
 </div>
-<div class="h-full report-no-data-available hidden" data-widget="report-no-data">
+<div class="report-no-data-available hidden h-full mr-5 text-center" data-widget="report-no-data">
     {{str "LBL_NO_DATA_AVAILABLE"}}
 </div>

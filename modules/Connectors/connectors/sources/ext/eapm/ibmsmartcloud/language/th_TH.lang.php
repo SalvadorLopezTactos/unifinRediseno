@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">รับคีย์และข้อมูลลับจาก IBM SmartCloud ด้วยการลงทะเบียนอินสแตนซ์ Sugar ของคุณเป็นแอปพลิเคชันใหม่<br>
 &nbsp;<br>
 ขั้นตอนในการลงทะเบียนอินสแตนซ์ของคุณ:<br>
@@ -28,5 +28,4 @@ $connector_strings = array (
 </td></tr></table>',
     'oauth_consumer_key' => 'คีย์ผู้ใช้ OAuth',
     'oauth_consumer_secret' => 'ข้อมูลลับของผู้ใช้ OAuth',
-);
-
+];

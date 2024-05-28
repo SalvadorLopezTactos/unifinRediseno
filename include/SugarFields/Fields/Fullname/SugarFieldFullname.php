@@ -19,33 +19,34 @@ class SugarFieldFullname extends SugarFieldBase
      * {@inheritDoc}
      */
     public function apiFormatField(
-        array &$data,
-        SugarBean $bean,
-        array $args,
+        array       &$data,
+        SugarBean   $bean,
+        array       $args,
         $fieldName,
         $properties,
-        array $fieldList = null,
+        array       $fieldList = null,
         ServiceBase $service = null
     ) {
+
         global $locale;
         $this->ensureApiFormatFieldArguments($fieldList, $service);
 
         $data[$fieldName] = $locale->formatName($bean);
     }
 
-    function getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
-	{
+    public function getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
         $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
         return $this->fetch($this->findTemplate('DetailView'));
     }
 
     public function getNormalizedDefs($vardef, $defs)
     {
-         $vardef = parent::getNormalizedDefs($vardef, $defs);
-         if(!empty($defs['name_format_map'])) {
-             $vardef['fields'] = array_unique(array_values($defs['name_format_map']));
-         }
-         return $vardef;
+        $vardef = parent::getNormalizedDefs($vardef, $defs);
+        if (!empty($defs['name_format_map'])) {
+            $vardef['fields'] = array_unique(array_values($defs['name_format_map']));
+        }
+        return $vardef;
     }
 
     /**
@@ -54,10 +55,12 @@ class SugarFieldFullname extends SugarFieldBase
      * Instead of applying the callback to the field itself, applies it to fields required for localized name formatting
      */
     public function iterateViewField(
-        ViewIterator $iterator,
-        array $field,
-        /* callable */ $callback
+        ViewIterator   $iterator,
+        array          $field,
+        /* callable */
+        $callback
     ) {
+
         global $locale;
 
         if (!$this->module) {
@@ -76,30 +79,28 @@ class SugarFieldFullname extends SugarFieldBase
         $vardef,
         $focus,
         ImportFieldSanitize $settings
-        )
-    {
+    ) {
+
         // TODO: figure out how we can parse arbitrary imports
-        if(empty($focus->name_format_map)) {
+        if (empty($focus->name_format_map)) {
             $fn = 'first_name';
             $ln = 'last_name';
         } else {
             $fn = $focus->name_format_map['f'];
             $ln = $focus->name_format_map['l'];
         }
-        if ( property_exists($focus, $fn) && property_exists($focus, $ln) ) {
-            $name_arr = preg_split('/\s+/',$value);
-            if ((is_countable($name_arr) ? count($name_arr) : 0) == 1) {
+        if (property_exists($focus, $fn) && property_exists($focus, $ln)) {
+            $name_arr = preg_split('/\s+/', $value);
+            if (safeCount($name_arr) == 1) {
                 $focus->$ln = $value;
-            }
-            else {
+            } else {
                 // figure out what comes first, the last name or first name
-                if ( strpos($settings->default_locale_name_format,'l') > strpos($settings->default_locale_name_format,'f') ) {
+                if (strpos($settings->default_locale_name_format, 'l') > strpos($settings->default_locale_name_format, 'f')) {
                     $focus->$fn = array_shift($name_arr);
-                    $focus->$ln = join(' ',$name_arr);
-                }
-                else {
+                    $focus->$ln = join(' ', $name_arr);
+                } else {
                     $focus->$ln = array_shift($name_arr);
-                    $focus->$fn = join(' ',$name_arr);
+                    $focus->$fn = join(' ', $name_arr);
                 }
             }
         }
@@ -123,7 +124,7 @@ class SugarFieldFullname extends SugarFieldBase
         $fieldNames = $locale->getNameFormatFields($bean);
 
         foreach ($fieldNames as $field) {
-            if (in_array($field, $bean->erased_fields)) {
+            if (safeInArray($field, $bean->erased_fields)) {
                 $isAnyNameFieldErased = true;
             }
             if (!empty($bean->{$field})) {

@@ -21,7 +21,6 @@ $viewdefs['Escalations']['base']['view']['list'] = [
                     'name' => 'name',
                     'link' => true,
                 ],
-                'parent_type',
                 [
                     'name' => 'parent_type',
                     'enabled' => true,
@@ -39,11 +38,10 @@ $viewdefs['Escalations']['base']['view']['list'] = [
                     'default' => true,
                     'sortable' => false,
                     'ACLTag' => 'PARENT',
-                    'related_fields' =>
-                        [
-                            'parent_id',
-                            'parent_type',
-                        ],
+                    'related_fields' => [
+                        'parent_id',
+                        'parent_type',
+                    ],
                 ],
                 'status',
                 'reason',

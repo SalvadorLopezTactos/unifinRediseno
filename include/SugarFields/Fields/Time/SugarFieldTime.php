@@ -12,20 +12,21 @@
  */
 
 
-class SugarFieldTime extends SugarFieldBase {
-
-    function getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
+class SugarFieldTime extends SugarFieldBase
+{
+    public function getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
         // Create Smarty variables for the Calendar picker widget
-        if(!isset($displayParams['showMinutesDropdown'])) {
-           $displayParams['showMinutesDropdown'] = false;
+        if (!isset($displayParams['showMinutesDropdown'])) {
+            $displayParams['showMinutesDropdown'] = false;
         }
 
-        if(!isset($displayParams['showHoursDropdown'])) {
-           $displayParams['showHoursDropdown'] = false;
+        if (!isset($displayParams['showHoursDropdown'])) {
+            $displayParams['showHoursDropdown'] = false;
         }
 
-        if(!isset($displayParams['showFormats'])) {
-           $displayParams['showFormats'] = false;
+        if (!isset($displayParams['showFormats'])) {
+            $displayParams['showFormats'] = false;
         }
 
         global $timedate;
@@ -35,18 +36,19 @@ class SugarFieldTime extends SugarFieldBase {
         return $this->fetch('include/SugarFields/Fields/Time/EditView.tpl');
     }
 
-    function getSearchViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
-    	// Create Smarty variables for the Calendar picker widget
-        if(!isset($displayParams['showMinutesDropdown'])) {
-           $displayParams['showMinutesDropdown'] = false;
+    public function getSearchViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
+        // Create Smarty variables for the Calendar picker widget
+        if (!isset($displayParams['showMinutesDropdown'])) {
+            $displayParams['showMinutesDropdown'] = false;
         }
 
-        if(!isset($displayParams['showHoursDropdown'])) {
-           $displayParams['showHoursDropdown'] = false;
+        if (!isset($displayParams['showHoursDropdown'])) {
+            $displayParams['showHoursDropdown'] = false;
         }
 
-        if(!isset($displayParams['showFormats'])) {
-           $displayParams['showFormats'] = false;
+        if (!isset($displayParams['showFormats'])) {
+            $displayParams['showFormats'] = false;
         }
 
         global $timedate;
@@ -59,11 +61,11 @@ class SugarFieldTime extends SugarFieldBase {
     public function save($bean, $params, $field, $properties, $prefix = '')
     {
         $inputData = [];
-        if ( !isset($inputData[$prefix.$field]) ) {
+        if (!isset($inputData[$prefix . $field])) {
             $bean->$field = '';
             return;
         }
-        $bean->$field = $this->convertFieldForDB($inputData[$prefix.$field]);
+        $bean->$field = $this->convertFieldForDB($inputData[$prefix . $field]);
     }
 
     /**

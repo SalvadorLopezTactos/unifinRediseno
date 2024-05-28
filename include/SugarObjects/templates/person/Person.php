@@ -80,7 +80,7 @@ class Person extends Basic
         $ori_in_workflow = empty($this->in_workflow) ? false : true;
         $this->emailAddress->handleLegacySave($this, $this->module_dir);
         parent::save($check_notify);
-        $override_email = array();
+        $override_email = [];
         if (!empty($this->email1_set_in_workflow)) {
             $override_email['emailAddress0'] = $this->email1_set_in_workflow;
         }
@@ -117,8 +117,8 @@ class Person extends Basic
         $temp_array = $this->get_list_view_array();
 
         $temp_array['NAME'] = $this->name;
-        $temp_array["ENCODED_NAME"] = $this->full_name;
-        $temp_array["FULL_NAME"] = $this->full_name;
+        $temp_array['ENCODED_NAME'] = $this->full_name;
+        $temp_array['FULL_NAME'] = $this->full_name;
 
         $temp_array['EMAIL'] = $this->emailAddress->getPrimaryAddress($this);
 
@@ -164,32 +164,32 @@ class Person extends Basic
      * Retrieve a list of this person's calendar event start and end times ordered by start datetime
      * @return array
      */
-    public function getFreeBusySchedule(array $options = array())
+    public function getFreeBusySchedule(array $options = [])
     {
         global $timedate;
         $lines = $this->getVCalData($options);
 
-        $utc = new DateTimeZone("UTC");
+        $utc = new DateTimeZone('UTC');
 
-        $activities = array();
+        $activities = [];
         foreach ($lines as $line) {
             if (preg_match('/^FREEBUSY.*?:([^\/]+)\/([^\/]+)/i', $line, $matches)) {
-                $datesArray = array(
+                $datesArray = [
                     SugarDateTime::createFromFormat(vCal::UTC_FORMAT, $matches[1], $utc),
-                    SugarDateTime::createFromFormat(vCal::UTC_FORMAT, $matches[2], $utc)
-                );
+                    SugarDateTime::createFromFormat(vCal::UTC_FORMAT, $matches[2], $utc),
+                ];
                 $act = new CalendarActivity($datesArray);
                 $startTime = $timedate->asIso($act->start_time);
                 $endTime = $timedate->asIso($act->end_time);
-                $activities[$startTime] = array(
-                    "start" => $startTime,
-                    "end" => $endTime,
-                );
+                $activities[$startTime] = [
+                    'start' => $startTime,
+                    'end' => $endTime,
+                ];
             }
         }
         ksort($activities); // order by start date
-        $freeBusySchedule = array();
-        foreach ($activities AS $startDate => $act) {
+        $freeBusySchedule = [];
+        foreach ($activities as $startDate => $act) {
             $freeBusySchedule[] = $act;
         }
 
@@ -237,5 +237,23 @@ class Person extends Basic
     public function getRecordName()
     {
         return $this->getLocaleObject()->formatName($this);
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see SugarBean::mark_deleted()
+     */
+    public function mark_deleted($id)
+    {
+        if (!empty($this->external_user_id)) {
+            $bean = BeanFactory::getBean('ExternalUsers', $this->external_user_id);
+            if ($bean && $bean->parent_type === $this->getModuleName() &&
+                $bean->parent_id === $this->external_user_id) {
+                $bean->parent_type = null;
+                $bean->parent_id = null;
+                $bean->save();
+            }
+        }
+        parent::mark_deleted($id);
     }
 }

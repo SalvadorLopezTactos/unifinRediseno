@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-    'LBL_SOURCE_ID'   => 'ID spoljašnjeg izvora',
+$mod_strings = [
+    'LBL_SOURCE_ID' => 'ID spoljašnjeg izvora',
     'LBL_SOURCE_TYPE' => 'Spoljašnji izvor',
     'LBL_SOURCE_META' => 'Meta spoljašnjeg izvora',
-);
+];

@@ -50,7 +50,7 @@ class DashboardDefaultMetadataApi extends SugarApi
      * @throws SugarApiExceptionMissingParameter
      * @throws SugarApiExceptionRequestMethodFailure
      */
-    public function restoreDefaultMetadataForTabbedDashboard(ServiceBase $api, array $args) : array
+    public function restoreDefaultMetadataForTabbedDashboard(ServiceBase $api, array $args): array
     {
         $this->requireArgs($args, ['dashboard', 'tab_index']);
 
@@ -70,7 +70,7 @@ class DashboardDefaultMetadataApi extends SugarApi
 
         return $this->formatBean($api, $args, $dashboard);
     }
-    
+
     /**
      * Restore dashboard to the default metadata
      *
@@ -83,19 +83,19 @@ class DashboardDefaultMetadataApi extends SugarApi
     public function restoreMetadata(ServiceBase $api, array $args): array
     {
         $this->requireArgs($args, ['dashboard_module', 'dashboard']);
-        
+
         $dashboard = BeanFactory::retrieveBean('Dashboards', $args['id']);
         if (empty($dashboard)) {
             throw new SugarApiExceptionRequestMethodFailure('Failed to retrieve dashboard bean');
         }
-        
+
         $defaultMetadata = $this->getDefaultMetadata($args);
         $dashboard->metadata = json_encode($defaultMetadata);
         $dashboard->save();
-        
+
         return $this->formatBean($api, $args, $dashboard);
     }
-    
+
     /**
      * Set the dashboard bean's metadata to the specified metadata on
      * the specified tab and save
@@ -105,7 +105,7 @@ class DashboardDefaultMetadataApi extends SugarApi
      * @param array $metadata the metadata to set
      * @return bool true if new metadata was saved, false otherwise
      */
-    public function setMetadataForTab(SugarBean $dashboard, int $tabIndex, array $metadata) : bool
+    public function setMetadataForTab(SugarBean $dashboard, int $tabIndex, array $metadata): bool
     {
         if (empty($dashboard) || empty($metadata)) {
             return false;
@@ -144,7 +144,7 @@ class DashboardDefaultMetadataApi extends SugarApi
      * @param array $args
      * @return array the metadata
      */
-    public function getDefaultMetadata(array $args) : array
+    public function getDefaultMetadata(array $args): array
     {
         $metadata = [];
         $filename = $this->getFilename($args);
@@ -166,7 +166,7 @@ class DashboardDefaultMetadataApi extends SugarApi
      * @param array $args
      * @return string the module name
      */
-    public function getModuleForFilename(array $args) : string
+    public function getModuleForFilename(array $args): string
     {
         // dashboard_module takes precedence as dashboards may not be stored in module/Dashboards
         return $args['dashboard_module'] ?? $args['module'];
@@ -178,7 +178,7 @@ class DashboardDefaultMetadataApi extends SugarApi
      * @param array $args
      * @return string the filename
      */
-    public function getFilename(array $args) : string
+    public function getFilename(array $args): string
     {
         $module = $this->getModuleForFilename($args);
         $dashboard = $args['dashboard'];

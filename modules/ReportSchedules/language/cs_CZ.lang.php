@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Plány sestav',
     'LBL_MODULE_NAME_SINGULAR' => 'Plán sestavy',
     'LBL_REPORT_NAME' => 'Sestava',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Typ(y) souboru',
     'LBL_EMBED_REPORT' => 'Vložit sestavu do e-mailu',
     'LBL_EMBED_REPORT_INFO' => 'Poznámka: Pokud sestava obsahuje více než 200 řádků, připojíme sestavu jako soubor CSV.',
-);
+];

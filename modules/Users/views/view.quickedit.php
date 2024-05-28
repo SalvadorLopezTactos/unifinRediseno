@@ -20,8 +20,8 @@
  * Inactive, this needs to trigger a dialog to reassign records.  The quick edit functionality was introduced into the Users module in the 6.4 release.
  *
  */
-require_once('include/MVC/View/views/view.quickedit.php');
-require_once('include/EditView/EditView2.php');
+require_once 'include/MVC/View/views/view.quickedit.php';
+require_once 'include/EditView/EditView2.php';
 
 class UsersViewQuickedit extends ViewQuickEdit
 {
@@ -35,6 +35,5 @@ class UsersViewQuickedit extends ViewQuickEdit
      * @var defaultButtons Array of default buttons assigned to the form (see function.sugar_button.php)
      * We will still take the DCMENUCANCEL and DCMENUFULLFORM buttons, but we inject our own Save button via the QuickEditFooter.tpl file
      */
-    protected $defaultButtons = array('DCMENUCANCEL', 'DCMENUFULLFORM');
-
+    protected $defaultButtons = ['DCMENUCANCEL', 'DCMENUFULLFORM'];
 }

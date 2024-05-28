@@ -17,19 +17,17 @@
  ********************************************************************************/
 
 
-
-
-
 $focus = BeanFactory::newBean('EmailTemplates');
 
-if(!isset($_REQUEST['record']))
-	sugar_die("A record number must be specified to delete the template.");
-$focus->retrieve($_REQUEST['record']);
-if(!$focus->ACLAccess('Delete')) {
-	ACLController::displayNoAccess(true);
-	sugar_cleanup(true);
+if (!isset($_REQUEST['record'])) {
+    sugar_die('A record number must be specified to delete the template.');
 }
-sugar_cache_clear('select_array:'.$focus->object_name.'namebase_module=\''.$focus->base_module.'\'name');
+$focus->retrieve($_REQUEST['record']);
+if (!$focus->ACLAccess('Delete')) {
+    ACLController::displayNoAccess(true);
+    sugar_cleanup(true);
+}
+sugar_cache_clear('select_array:' . $focus->object_name . 'namebase_module=\'' . $focus->base_module . '\'name');
 $focus->mark_deleted($_REQUEST['record']);
 
 

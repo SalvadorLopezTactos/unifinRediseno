@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'التسويق',
-    'Knowledge Base' => 'قاعدة المعارف',
-    'Sales' => 'المبيعات',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'وسائط التسويق',
-    'Product Brochures' => 'منشورات المنتج',
-    'FAQ' => 'الأسئلة المتداولة',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'تسويق',
+        'Knowledge Base' => 'قاعدة معارف',
+        'Sales' => 'مبيعات',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'نشط',
-    'Draft' => 'المسودة',
-    'FAQ' => 'الأسئلة المتداولة',
-    'Expired' => 'منتهي الصلاحية',
-    'Under Review' => 'قيد المراجعة',
-    'Pending' => 'معلق',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'مواد تسويقية',
+        'Product Brochures' => 'كتيبات المنتجات',
+        'FAQ' => 'الأسئلة المتداولة',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'نشط',
+        'Draft' => 'مسودة',
+        'FAQ' => 'الأسئلة المتداولة',
+        'Expired' => 'منتهي الصلاحية',
+        'Under Review' => 'قيد المراجعة',
+        'Pending' => 'معلق',
+    ],
+];

@@ -39,7 +39,7 @@ class CJ_WebHooksApi extends SugarApi
      * according to webhook bean attributes
      *
      * @param ServiceBase $api
-     * @param array       $args
+     * @param array $args
      * @return string|void
      * @throws SugarApiExceptionError
      * @throws SugarApiException

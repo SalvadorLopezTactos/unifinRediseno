@@ -11,15 +11,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['product-quick-picks'] = array(
-    'tabs' => array(
-        array(
+$viewdefs['base']['view']['product-quick-picks'] = [
+    'tabs' => [
+        [
             'active' => true,
             'label' => 'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB',
             'link' => '',
             'module' => '',
-            'row_actions' => array(
-                array(
+            'row_actions' => [
+                [
                     'type' => 'unlink-action',
                     'icon' => 'sicon-unlink',
                     'css_class' => 'btn btn-mini',
@@ -27,20 +27,20 @@ $viewdefs['base']['view']['product-quick-picks'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_UNLINK_BUTTON',
                     'acl_action' => 'edit',
-                ),
+                ],
                 'include_child_items' => true,
-                'invitation_actions' => array(
+                'invitation_actions' => [
                     'name' => 'accept_status_users',
                     'type' => 'invitation-actions',
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'label' => 'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB',
             'link' => '',
             'module' => '',
-            'row_actions' => array(
-                array(
+            'row_actions' => [
+                [
                     'type' => 'unlink-action',
                     'icon' => 'sicon-unlink',
                     'css_class' => 'btn btn-mini',
@@ -48,13 +48,13 @@ $viewdefs['base']['view']['product-quick-picks'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_UNLINK_BUTTON',
                     'acl_action' => 'edit',
-                ),
+                ],
                 'include_child_items' => true,
-                'invitation_actions' => array(
+                'invitation_actions' => [
                     'name' => 'accept_status_users',
                     'type' => 'invitation-actions',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

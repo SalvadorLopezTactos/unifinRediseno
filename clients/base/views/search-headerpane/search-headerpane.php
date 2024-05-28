@@ -10,18 +10,18 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['search-headerpane'] = array(
+$viewdefs['base']['view']['search-headerpane'] = [
     'template' => 'search-headerpane',
-    'fields' => array(
-        array(
+    'fields' => [
+        [
             'name' => 'collection-count',
             'type' => 'collection-count',
-        ),
-    ),
-    'buttons' => array(
-        array(
+        ],
+    ],
+    'buttons' => [
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

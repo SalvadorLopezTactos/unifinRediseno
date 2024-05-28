@@ -61,7 +61,8 @@ use Sugarcrm\Sugarcrm\DependencyInjection\Exception\ServiceUnavailable;
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionPrefetcher;
 use Sugarcrm\Sugarcrm\FeatureToggle\FeatureFlag;
 use Sugarcrm\Sugarcrm\FeatureToggle\Features;
-use Sugarcrm\Sugarcrm\FeatureToggle\Features\EnhancedModuleChecks;
+use Sugarcrm\Sugarcrm\FeatureToggle\Features\StrictIncludes;
+use Sugarcrm\Sugarcrm\FeatureToggle\Features\TranslateMLPCode;
 use Sugarcrm\Sugarcrm\FeatureToggle\FeaturesContext;
 use Sugarcrm\Sugarcrm\FeatureToggle\FeatureToggler;
 use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
@@ -75,6 +76,10 @@ use Sugarcrm\Sugarcrm\PubSub\PublisherInterface as PubSubPublisherInterface;
 use Sugarcrm\Sugarcrm\PubSub\Settings\PushSubscription as PubSubPushSubscriptionSettings;
 use Sugarcrm\Sugarcrm\Security\Context;
 use Sugarcrm\Sugarcrm\Security\HttpClient\ExternalResourceClient;
+use Sugarcrm\Sugarcrm\Security\ModuleScanner\BlacklistVisitor;
+use Sugarcrm\Sugarcrm\Security\ModuleScanner\CodeScanner;
+use Sugarcrm\Sugarcrm\Security\ModuleScanner\DynamicNameVisitor;
+use Sugarcrm\Sugarcrm\Security\ModuleScanner\IncludesVisitor;
 use Sugarcrm\Sugarcrm\Security\Subject\Formatter as SubjectFormatter;
 use Sugarcrm\Sugarcrm\Security\Subject\Formatter\BeanFormatter;
 use Sugarcrm\Sugarcrm\Security\Validator\Validator;
@@ -90,7 +95,7 @@ return new Container([
     Connection::class => function (): Connection {
         return DBManagerFactory::getConnection();
     },
-    SQLLogger::class => function (ContainerInterface $container) : SQLLogger {
+    SQLLogger::class => function (ContainerInterface $container): SQLLogger {
         $config = $container->get(SugarConfig::class);
 
         $channel = LoggerFactory::getLogger('db');
@@ -111,7 +116,7 @@ return new Container([
             $loggers[] = new XhprofLogger(SugarXHprof::getInstance());
         }
 
-        if (count($loggers) == 1) {
+        if (safeCount($loggers) == 1) {
             return array_shift($loggers);
         }
 
@@ -207,30 +212,19 @@ return new Container([
             new AuditFormatter\Subject($container->get(SubjectFormatter::class))
         );
     },
-    Administration::class => function () : Administration {
+    Administration::class => function (): Administration {
         return BeanFactory::newBean('Administration');
     },
-    CacheInterface::class => function (ContainerInterface $container) : CacheInterface {
+    CacheInterface::class => function (ContainerInterface $container): CacheInterface {
         $config = $container->get(SugarConfig::class);
 
         if ($config->get('external_cache_disabled')) {
             return new InMemoryCache();
         }
 
-        $backend = $container->get(
-            $config->get('cache.backend') ?? BackwardCompatibleCache::class
-        );
-
-        $backend = new DefaultTTL($backend, $config->get('cache_expire_timeout') ?: 300);
-
-        if ($config->get('cache.multi_tenant')) {
-            $backend = new MultiTenantCache(
-                substr($config->get('unique_key'), 0, -1)
-                . (int) $config->get('cache.disable_gz', 0),
-                new ConfigurationKeyStorage($config),
-                $backend,
-                $container->get(LoggerInterface::class)
-            );
+        $multiTenantCache = $container->get(MultiTenantCache::class);
+        if ($multiTenantCache !== null) {
+            $backend = $multiTenantCache;
             if ($config->get('cache.disable_gz', false) !== true) {
                 $backend = new GZCompressed(
                     $backend,
@@ -238,6 +232,9 @@ return new Container([
                     $config->get('cache.gz_level')
                 );
             }
+        } else {
+            $backend = $container->get($config->get('cache.backend') ?? BackwardCompatibleCache::class);
+            $backend = new DefaultTTL($backend, $config->get('cache_expire_timeout') ?: 300);
         }
 
         return new Replicate(
@@ -245,24 +242,41 @@ return new Container([
             new InMemoryCache()
         );
     },
-    BackwardCompatibleCache::class => function () : BackwardCompatibleCache {
+    MultiTenantCache::class => function (ContainerInterface $container): ?MultiTenantCache {
+        $config = $container->get(SugarConfig::class);
+
+        if ($config->get('external_cache_disabled') || !$config->get('cache.multi_tenant')) {
+            return null;
+        }
+        $backend = $container->get($config->get('cache.backend') ?? BackwardCompatibleCache::class);
+        $backend = new DefaultTTL($backend, $config->get('cache_expire_timeout') ?: 300);
+
+        return new MultiTenantCache(
+            substr($config->get('unique_key'), 0, -1)
+            . (int)$config->get('cache.disable_gz', 0),
+            new ConfigurationKeyStorage($config),
+            $backend,
+            $container->get(LoggerInterface::class)
+        );
+    },
+    BackwardCompatibleCache::class => function (): BackwardCompatibleCache {
         return new BackwardCompatibleCache(SugarCache::electBackend());
     },
-    ApcuCache::class => function () : ApcuCache {
+    ApcuCache::class => function (): ApcuCache {
         try {
             return new ApcuCache();
         } catch (CacheException $e) {
             throw new ServiceUnavailable($e->getMessage(), 0, $e);
         }
     },
-    RedisCache::class => function (ContainerInterface $container) : RedisCache {
+    RedisCache::class => function (ContainerInterface $container): RedisCache {
         try {
             return new RedisCache($container->get(Redis::class));
         } catch (CacheException $e) {
             throw new ServiceUnavailable($e->getMessage(), 0, $e);
         }
     },
-    MemcachedCache::class => function (ContainerInterface $container) : MemcachedCache {
+    MemcachedCache::class => function (ContainerInterface $container): MemcachedCache {
         $config = $container->get(SugarConfig::class)->get('external_cache.memcache');
 
         try {
@@ -270,11 +284,11 @@ return new Container([
                 throw new SugarCacheException('The memcached extension is not loaded');
             }
             return new MemcachedCache($config['host'] ?? null, $config['port'] ?? null);
-        } catch (CacheException | SugarCacheException $e) {
+        } catch (CacheException|SugarCacheException $e) {
             throw new ServiceUnavailable($e->getMessage(), 0, $e);
         }
     },
-    WinCache::class => function () : WinCache {
+    WinCache::class => function (): WinCache {
         try {
             return new WinCache();
         } catch (CacheException $e) {
@@ -287,7 +301,7 @@ return new Container([
     Validator::class => function (): ValidatorInterface {
         return Validator::getService();
     },
-    AclCacheInterface::class => function (ContainerInterface $container) : AclCacheInterface {
+    AclCacheInterface::class => function (ContainerInterface $container): AclCacheInterface {
         if (SugarCache::electBackend() instanceof SugarCacheRedis) {
             $config = $container->get(SugarConfig::class);
 
@@ -312,7 +326,7 @@ return new Container([
         }
         return AclCache::getInstance();
     },
-    Redis::class => function (ContainerInterface $container) : Redis {
+    Redis::class => function (ContainerInterface $container): Redis {
         if (!extension_loaded('redis')) {
             throw new SugarCacheException('Redis extension is not loaded');
         }
@@ -365,11 +379,26 @@ return new Container([
         return $container->get(Features::class);
     },
     Features::class => function (): Features {
-        require 'sugar_version.php';
+        $sugar_version = $GLOBALS['sugar_config']['sugar_version'] ?? null;
+        if (null === $sugar_version) {
+            require 'sugar_version.php';
+        }
         /**
          * @var string $sugar_version
          */
-        return new Features($sugar_version);
+        $features = new Features($sugar_version);
+        $configuredFeatures = array_merge(
+            SugarConfig::getInstance()->get('moduleInstaller.features', []),
+            SugarConfig::getInstance()->get('features', []),
+        );
+        foreach ($configuredFeatures as $feature => $state) {
+            if ($state === true) {
+                $features->enable($feature);
+            } else {
+                $features->disable($feature);
+            }
+        }
+        return $features;
     },
     Clock::class => function (ContainerInterface $container): Clock {
         return new Clock();
@@ -423,5 +452,19 @@ return new Container([
         $buffer->setTimer($timer);
 
         return $buffer;
+    },
+    CodeScanner::class => function (ContainerInterface $container): CodeScanner {
+        $features = $container->get(FeatureFlag::class);
+        $codeScanner = new CodeScanner();
+        $codeScanner->registerVisitor(new DynamicNameVisitor());
+        if ($features->isEnabled(StrictIncludes::getName())) {
+            $codeScanner->registerVisitor(new IncludesVisitor());
+        }
+        $denyLists = (new \ModuleScanner())->getEffectiveDenyLists();
+        extract($denyLists);
+        $codeScanner->registerVisitor(
+            new BlacklistVisitor($classes, $functions, $methods)
+        );
+        return $codeScanner;
     },
 ]);

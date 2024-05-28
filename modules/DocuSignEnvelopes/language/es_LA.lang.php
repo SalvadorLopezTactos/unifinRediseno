@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Obtener sobre',
     'LBL_CLOUD_SERVICE_TYPE' => 'Tipo de servicio en la nube',
     'LBL_CLOUD_PATH' => 'Ruta de la nube',
+    'LBL_CLOUD_DRIVE_ID' => 'ID de la unidad',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Tablero de lista de sobres de DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'Tablero de registro de sobres de DocuSign',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Sobres de DocuSign recientes',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Panel de enfoque de sobres de DocuSign',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Línea de tiempo del sobre de DocuSign',
 
     'LBL_NEW_ENVELOPE' => 'Nuevo sobre',
     'LBL_DOCUMENT_IS_NOW' => ' está ahora ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Enviar',
     'LBL_BUTTON_CLEAR' => 'Eliminar',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Usar plantilla',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Enviar con plantilla',
     'LBL_PLEASE_LOG_IN' => '¡Primero inicie sesión en DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'No puede descargar este documento. ¡Lo creó otro usuario!',
     'LBL_SEND_NOT_ALLOWED' => 'No puede enviar este sobre. ¡Lo creó otro usuario!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'El borrador cambió. ¿Actualizar el estado al estado actual ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => '¡Se actualizó el sobre de DocuSign!',
     'LBL_DRAFT_CHANGED_ERROR' => 'El estado del sobre de DocuSign no se actualizó. ¡Compruebe los registros para conocer los detalles!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'No se puede aplicar la plantilla de DocuSign',
     'LBL_ENVELOPE_NOT_SENT' => '¡No se envió el sobre!',
     'LBL_ENVELOPE_SENT' => '¡El sobre se envió nuevamente!',
     'LBL_DOCUMENT_ADDED' => '¡Documento agregador al registro!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Función',
     'LBL_SELECT_BUTTON_LABEL' => 'Seleccionar',
     'LBL_BACK_BUTTON_LABEL' => 'Atrás',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Buscar por nombre de plantilla',
+    'LBL_ENVELOPE_NAME' => 'Nombre del sobre',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'El nombre del sobre no puede estar vacío',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Error al obtener destinatarios potenciales.',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Error al obtener plantillas.',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Seleccione una función para cada destinatario',
+    
+    'LBL_DOWNLOAD' => 'Descargar',
+    'LBL_OPEN_DRAFT' => 'Abrir borrador',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Los documentos sin archivo no se pueden enviar a DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Haga clic en el botón Más para iniciar el proceso de firma',
+    'LBL_NO_DOC_SELECTED' => 'Seleccione primero los documentos',
+    'LBL_SELECT_RECIPIENTS' => 'Seleccionar destinatario del firmante',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Excluir',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Debe instalar la aplicación DocuSign para obtener una mejor experiencia.',
 ];

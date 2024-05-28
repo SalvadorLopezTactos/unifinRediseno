@@ -12,45 +12,45 @@
  */
 
 $module_name = 'pmse_Inbox';
-$viewdefs[$module_name]['base']['layout']['unattendedCases'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs[$module_name]['base']['layout']['unattendedCases'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
                             'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'view' => 'unattendedCases-list-headerpane',
-                                ),
-                                array(
+                                ],
+                                [
                                     'view' => 'casesList-filter',
-                                ),
-                                array(
+                                ],
+                                [
                                     'layout' => 'unattendedCases-list',
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'preview-pane',
                             'css_class' => 'preview-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'preview',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

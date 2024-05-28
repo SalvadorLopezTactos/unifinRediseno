@@ -24,34 +24,29 @@
  *  * fieldMapping (array): how should lead fields be mapped to this module left side is the module and right side is the lead
  */
 
-$viewdefs['Leads']['base']['layout']['convert-main'] = array(
-    'modules' =>
-    array(
-        array(
+$viewdefs['Leads']['base']['layout']['convert-main'] = [
+    'modules' => [
+        [
             'module' => 'Contacts',
             'required' => true,
             'copyData' => true,
             'duplicateCheckOnStart' => true,
-            'fieldMapping' =>
-            array(
-            ),
-            'hiddenFields' =>
-            array(
+            'fieldMapping' => [
+            ],
+            'hiddenFields' => [
                 'account_name' => 'Accounts',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'module' => 'Accounts',
             'required' => true,
             'copyData' => true,
             'duplicateCheckOnStart' => true,
-            'duplicateCheckRequiredFields' =>
-            array(
+            'duplicateCheckRequiredFields' => [
                 'name',
-            ),
+            ],
             'contactRelateField' => 'account_name',
-            'fieldMapping' =>
-            array(
+            'fieldMapping' => [
                 'name' => 'account_name',
                 'billing_address_street' => 'primary_address_street',
                 'billing_address_city' => 'primary_address_city',
@@ -64,40 +59,33 @@ $viewdefs['Leads']['base']['layout']['convert-main'] = array(
                 'shipping_address_postalcode' => 'primary_address_postalcode',
                 'shipping_address_country' => 'primary_address_country',
                 'phone_office' => 'phone_work',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'module' => 'Opportunities',
             'required' => false,
             'copyData' => true,
             'duplicateCheckOnStart' => false,
-            'duplicateCheckRequiredFields' =>
-            array(
+            'duplicateCheckRequiredFields' => [
                 'account_id',
-            ),
-            'fieldMapping' =>
-            array(
+            ],
+            'fieldMapping' => [
                 'name' => 'opportunity_name',
                 'phone_work' => 'phone_office',
-            ),
-            'dependentModules' =>
-            array(
-                'Accounts' =>
-                array(
-                    'fieldMapping' =>
-                    array(
+            ],
+            'dependentModules' => [
+                'Accounts' => [
+                    'fieldMapping' => [
                         'account_id' => 'id',
-                    ),
-                ),
-            ),
-            'hiddenFields' =>
-            array(
+                    ],
+                ],
+            ],
+            'hiddenFields' => [
                 'account_name' => 'Accounts',
-            ),
+            ],
             'enableRlis' => true,
             'requireRlis' => true,
             'copyDataToRlis' => true,
-        ),
-    ),
-);
-
+        ],
+    ],
+];

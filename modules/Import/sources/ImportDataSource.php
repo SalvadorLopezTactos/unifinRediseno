@@ -11,10 +11,9 @@
  */
 
 
-
-
 abstract class ImportDataSource implements Iterator
 {
+    // @codingStandardsIgnoreStart PSR2.Classes.PropertyDeclaration.Underscore
     /**
      * The current offset the data set should start at
      */
@@ -58,26 +57,27 @@ abstract class ImportDataSource implements Iterator
     /**
      * Array of the values in the current array we are in
      */
-    protected $_currentRow = FALSE;
+    protected $_currentRow = false;
 
     /**
      * Holds any locale settings needed for import.  These can be provided by the user
      * or explicitly set by the user.
      */
-    protected $_localeSettings = array();
+    protected $_localeSettings = [];
 
     /**
      * Stores a subset or entire portion of the data set requested.
      */
-    protected $_dataSet = array();
+    protected $_dataSet = [];
+    // @codingStandardsIgnoreEnd PSR2.Classes.PropertyDeclaration.Underscore
 
     /**
      * Return a result set from the external source as an associative array with the key value equal to the
-     * external field name and the rvalue equal to the actual value.  
+     * external field name and the rvalue equal to the actual value.
      *
      * @abstract
-     * @param  int $startIndex
-     * @param  int $maxResults
+     * @param int $startIndex
+     * @param int $maxResults
      * @return void
      */
     abstract public function loadDataSet($maxResults = 0);
@@ -95,7 +95,7 @@ abstract class ImportDataSource implements Iterator
      * @return void
      */
     abstract public function getHeaderColumns();
-    
+
     /**
      * Set the source name.
      *
@@ -143,8 +143,8 @@ abstract class ImportDataSource implements Iterator
      * Add this row to the UsersLastImport table
      *
      * @param string $import_module name of the module we are doing the import into
-     * @param string $module        name of the bean we are creating for this import
-     * @param string $id            id of the recorded created in the $module
+     * @param string $module name of the bean we are creating for this import
+     * @param string $id id of the recorded created in the $module
      */
     public static function writeRowToLastImport($import_module, $module, $id)
     {
@@ -152,9 +152,10 @@ abstract class ImportDataSource implements Iterator
 
         $last_import->assigned_user_id = $GLOBALS['current_user']->id;
         $last_import->import_module = $import_module;
-        if ( $module == 'Case' )
+        if ($module == 'Case') {
             $module = 'aCase';
-        
+        }
+
         $last_import->bean_type = $module;
         $last_import->bean_id = $id;
         return $last_import->save();
@@ -170,12 +171,11 @@ abstract class ImportDataSource implements Iterator
      */
     public function writeError($error, $fieldName, $fieldValue)
     {
-        $fp = sugar_fopen(ImportCacheFiles::getErrorFileName(),'a');
-        fputcsv($fp,array($error,$fieldName,$fieldValue,$this->_rowsCount));
+        $fp = sugar_fopen(ImportCacheFiles::getErrorFileName(), 'a');
+        fputcsv($fp, [$error, $fieldName, $fieldValue, $this->_rowsCount]);
         fclose($fp);
 
-        if ( !$this->_rowCountedForErrors || $error == 'Execution')
-        {
+        if (!$this->_rowCountedForErrors || $error == 'Execution') {
             $this->_errorCount++;
             $this->_rowCountedForErrors = true;
             $this->writeErrorRecord($this->formatErrorMessage($error, $fieldName, $fieldValue));
@@ -186,10 +186,11 @@ abstract class ImportDataSource implements Iterator
     {
         global $current_language;
         $mod_strings = return_module_language($current_language, 'Import');
-        return "<b>{$mod_strings['LBL_ERROR']}</b> $error <br/>".
-               "<b>{$mod_strings['LBL_FIELD_NAME']}</b> $fieldName <br/>" .
-               "<b>{$mod_strings['LBL_VALUE']}</b> $fieldValue <br/>";
+        return "<b>{$mod_strings['LBL_ERROR']}</b> $error <br/>" .
+            "<b>{$mod_strings['LBL_FIELD_NAME']}</b> $fieldName <br/>" .
+            "<b>{$mod_strings['LBL_VALUE']}</b> $fieldValue <br/>";
     }
+
     public function resetRowErrorCounter()
     {
         $this->_rowCountedForErrors = false;
@@ -200,9 +201,9 @@ abstract class ImportDataSource implements Iterator
      */
     public function writeStatus()
     {
-        $fp = sugar_fopen(ImportCacheFiles::getStatusFileName(),'a');
-        $statusData = array($this->_rowsCount,$this->_errorCount,$this->_dupeCount,
-                            $this->_createdCount,$this->_updatedCount,$this->_sourcename);
+        $fp = sugar_fopen(ImportCacheFiles::getStatusFileName(), 'a');
+        $statusData = [$this->_rowsCount, $this->_errorCount, $this->_dupeCount,
+            $this->_createdCount, $this->_updatedCount, $this->_sourcename];
         fputcsv($fp, $statusData);
         fclose($fp);
     }
@@ -210,53 +211,49 @@ abstract class ImportDataSource implements Iterator
     /**
      * Writes the row out to the ImportCacheFiles::getDuplicateFileName() file
      */
-    public function markRowAsDuplicate($field_names=array())
+    public function markRowAsDuplicate($field_names = [])
     {
-        $fp = sugar_fopen(ImportCacheFiles::getDuplicateFileName(),'a');
+        $fp = sugar_fopen(ImportCacheFiles::getDuplicateFileName(), 'a');
         fputcsv($fp, $this->_currentRow);
         fclose($fp);
 
         //if available, grab the column number based on passed in field_name
-        if(!empty($field_names))
-        {
+        if (!empty($field_names)) {
             $colkey = '';
-            $colnums = array();
+            $colnums = [];
 
             //REQUEST should have the field names in order as they appear in the row to be written, get the key values
             //of passed in fields into an array
-            foreach($field_names as $fv)
-            {
+            foreach ($field_names as $fv) {
                 $fv = trim($fv);
-                if(empty($fv) || $fv == 'delete')
+                if (empty($fv) || $fv == 'delete') {
                     continue;
+                }
                 $new_keys = array_keys($_REQUEST, $fv);
-                $colnums = array_merge($colnums,$new_keys);
+                $colnums = array_merge($colnums, $new_keys);
             }
 
 
             //if values were found, process for number position
-            if(!empty($colnums))
-            {
+            if (!empty($colnums)) {
                 //foreach column, strip the 'colnum_' prefix to the get the column key value
-                foreach($colnums as $column_key)
-                {
-                    if(strpos($column_key,'colnum_') === 0)
-                    {
-                        $colkey = substr($column_key,7);
+                foreach ($colnums as $column_key) {
+                    if (strpos($column_key, 'colnum_') === 0) {
+                        $colkey = substr($column_key, 7);
                     }
 
                     //if we have the column key, then lets add a span tag with styling reference to the original value
-                    if(!empty($colkey))
-                    {
+                    //check the $colKey for '0' for cases when the first column is a duplicate and needs styling
+                    if (!empty($colkey) || $colkey === '0') {
                         $hilited_val = $this->_currentRow[$colkey];
-                        $this->_currentRow[$colkey]= '<span class=warn>'.$hilited_val.'</span>';
+                        $this->_currentRow[$colkey] = '<span class=warn>' . $hilited_val . '</span>';
                     }
                 }
             }
         }
 
         //add the row (with or without stylings) to the list view, this will get displayed to the user as a list of duplicates
-        $fdp = sugar_fopen(ImportCacheFiles::getDuplicateFileDisplayName(),'a');
+        $fdp = sugar_fopen(ImportCacheFiles::getDuplicateFileDisplayName(), 'a');
         fputcsv($fdp, $this->_currentRow);
         fclose($fdp);
 
@@ -271,10 +268,11 @@ abstract class ImportDataSource implements Iterator
      */
     public function markRowAsImported($createdRecord = true)
     {
-        if ( $createdRecord )
+        if ($createdRecord) {
             ++$this->_createdCount;
-        else
+        } else {
             ++$this->_updatedCount;
+        }
     }
 
     /**
@@ -282,9 +280,9 @@ abstract class ImportDataSource implements Iterator
      */
     public function writeErrorRecord($errorMessage = '')
     {
-        $rowData = !$this->_currentRow ? array() : $this->_currentRow;
-        $fp = sugar_fopen(ImportCacheFiles::getErrorRecordsFileName(),'a');
-        $fpNoErrors = sugar_fopen(ImportCacheFiles::getErrorRecordsWithoutErrorFileName(),'a');
+        $rowData = !$this->_currentRow ? [] : $this->_currentRow;
+        $fp = sugar_fopen(ImportCacheFiles::getErrorRecordsFileName(), 'a');
+        $fpNoErrors = sugar_fopen(ImportCacheFiles::getErrorRecordsWithoutErrorFileName(), 'a');
 
         //Write records only for download without error message.
         fputcsv($fpNoErrors, $rowData);
@@ -292,7 +290,7 @@ abstract class ImportDataSource implements Iterator
         //Add the error message to the first column
         array_unshift($rowData, $errorMessage);
         fputcsv($fp, $rowData);
-        
+
         fclose($fp);
         fclose($fpNoErrors);
     }
@@ -310,4 +308,3 @@ abstract class ImportDataSource implements Iterator
         return null;
     }
 }
- 

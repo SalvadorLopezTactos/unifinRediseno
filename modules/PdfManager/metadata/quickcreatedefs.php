@@ -11,28 +11,27 @@
  */
 
 
-$viewdefs['PdfManager']['QuickCreate'] = array(
-    'templateMeta' => array('maxColumns' => '2',
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'),
-                                            array('label' => '10', 'field' => '30')
-                                            ),
-                                            ),
+$viewdefs['PdfManager']['QuickCreate'] = [
+    'templateMeta' => ['maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
 
- 'panels' =>array (
-  'default' =>
-  array (
+    'panels' => [
+        'default' => [
 
-    array (
-      'name',
-      'assigned_user_name',
-    ),
-    array (
-      'description',
-      array('name'=>'team_name', 'displayParams'=>array('display'=>true)),
-    ),
-  ),
+            [
+                'name',
+                'assigned_user_name',
+            ],
+            [
+                'description',
+                ['name' => 'team_name', 'displayParams' => ['display' => true]],
+            ],
+        ],
 
-),
+    ],
 
-);
+];

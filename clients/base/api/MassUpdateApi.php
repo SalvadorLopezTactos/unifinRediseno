@@ -11,36 +11,37 @@
  */
 
 
-
 /*
  * Mass Update API implementation
  */
-class MassUpdateApi extends SugarApi {
 
+class MassUpdateApi extends SugarApi
+{
     /**
      * This function registers the mass update Rest api
      */
-    public function registerApiRest() {
-        return array(
-            'massUpdatePut' => array(
+    public function registerApiRest()
+    {
+        return [
+            'massUpdatePut' => [
                 'reqType' => 'PUT',
-                'path' => array('<module>','MassUpdate'),
-                'pathVars' => array('module',''),
-                'jsonParams' => array('filter'),
+                'path' => ['<module>', 'MassUpdate'],
+                'pathVars' => ['module', ''],
+                'jsonParams' => ['filter'],
                 'method' => 'massUpdate',
                 'shortHelp' => 'An API to handle mass update.',
                 'longHelp' => 'include/api/help/module_massupdate_put_help.html',
-            ),
-            'massUpdateDelete' => array(
+            ],
+            'massUpdateDelete' => [
                 'reqType' => 'DELETE',
-                'path' => array('<module>','MassUpdate'),
-                'pathVars' => array('module',''),
-                'jsonParams' => array('filter'),
+                'path' => ['<module>', 'MassUpdate'],
+                'pathVars' => ['module', ''],
+                'jsonParams' => ['filter'],
                 'method' => 'massDelete',
                 'shortHelp' => 'An API to handle mass delete.',
                 'longHelp' => 'include/api/help/module_massupdate_delete_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -56,7 +57,7 @@ class MassUpdateApi extends SugarApi {
     /**
      * @var if we are dealing with these mass update vars then need to check for _type vars to determine add/replace
      */
-    protected $massUpdateVars = array('team_name','tag');
+    protected $massUpdateVars = ['team_name', 'tag'];
 
     /**
      * To perform mass delete
@@ -66,10 +67,10 @@ class MassUpdateApi extends SugarApi {
      */
     public function massDelete(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('massupdate_params', 'module'));
+        $this->requireArgs($args, ['massupdate_params', 'module']);
         $this->delete = true;
         $args['massupdate_params']['Delete'] = true;
-        
+
         if (empty($args['massupdate_params']['uid'])) {
             throw new SugarApiExceptionMissingParameter('Missing required parameter uid');
         }
@@ -85,7 +86,7 @@ class MassUpdateApi extends SugarApi {
      */
     public function massUpdate(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('massupdate_params', 'module'));
+        $this->requireArgs($args, ['massupdate_params', 'module']);
 
         $mu_params = $args['massupdate_params'];
         $mu_params['module'] = $args['module'];
@@ -106,12 +107,11 @@ class MassUpdateApi extends SugarApi {
         // check ACL
         $bean = BeanFactory::newBean($mu_params['module']);
         if (!$bean instanceof SugarBean) {
-            throw new SugarApiExceptionInvalidParameter("Invalid bean, is module valid?");
+            throw new SugarApiExceptionInvalidParameter('Invalid bean, is module valid?');
         }
-        $action = $this->delete? 'delete': 'save';
-        if (!$bean->ACLAccess($action))
-        {
-            throw new SugarApiExceptionNotAuthorized('No access to mass update records for module: '.$mu_params['module']);
+        $action = $this->delete ? 'delete' : 'save';
+        if (!$bean->ACLAccess($action)) {
+            throw new SugarApiExceptionNotAuthorized('No access to mass update records for module: ' . $mu_params['module']);
         }
         $mu_params['action'] = $action;
 
@@ -173,7 +173,7 @@ class MassUpdateApi extends SugarApi {
                 continue;
             }
             $field = $fieldsList[$paramName];
-            if ($field['type'] === 'relate' && !in_array($field['name'], $allowedRelateFields)) {
+            if ($field['type'] === 'relate' && !safeInArray($field['name'], $allowedRelateFields)) {
                 if ((empty($field['dbType']) || $field['dbType'] !== 'id') && $field['rname'] !== 'id') {
                     unset($params[$paramName]);
                 }

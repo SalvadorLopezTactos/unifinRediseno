@@ -22,7 +22,7 @@ class DRI_SubWorkflow_TemplatesApi extends SugarApi
         return [
             'getLastStage' => [
                 'reqType' => 'GET',
-                'path' => ['DRI_SubWorkflow_Templates','?', 'last-task'],
+                'path' => ['DRI_SubWorkflow_Templates', '?', 'last-task'],
                 'pathVars' => ['module', 'record'],
                 'method' => 'getLastTask',
                 'shortHelp' => 'Get the last task of the stage template',
@@ -37,7 +37,7 @@ class DRI_SubWorkflow_TemplatesApi extends SugarApi
      * Get the last task of the stage template
      *
      * @param ServiceBase $api
-     * @param array       $args
+     * @param array $args
      * @return array
      * @throws SugarApiExceptionMissingParameter
      * @throws SugarApiExceptionNotAuthorized

@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Aktívny',
     'LBL_ASSIGNEE_RULE' => 'Pravidlo poverenej osoby',
     'LBL_TARGET_ASSIGNEE' => 'Cieľová poverená osoba',
+    'LBL_STAGE_NUMBERS' => 'Číslovanie fáz',
     'LBL_EXPORT_BUTTON_LABEL' => 'Export',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Import',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Automaticky vytvorte/aktualizujte nový záznam šablóny inteligentného sprievodcu importovaním súboru *.json zo systému súborov.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Ak je začiarknuté, a ak cieľová poverená osoba = nadradená poverená osoba, tak keď sa v nadradenej položke zmení používateľ „Priradené k“, automaticky sa zmenia aj používatelia „Priradené k“ v inteligentných sprievodcoch, fázach a aktivitách. Upozorňujeme, že nastavenia cieľovej poverenej osoby v šablónach aktivít majú prednosť pred šablónou inteligentného sprievodcu',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Kedy by mal byť používateľ priradený k aktivitám',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Komu by mali byť priradené aktivity',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Tento prepínač vám umožňuje zobraziť alebo skryť automatické číslovanie fáz.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Šablóna inteligentného sprievodcu/fázy/aktivity',
 ];

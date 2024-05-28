@@ -9,19 +9,19 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Styleguide']['base']['view']['dashlet-chart'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['Styleguide']['base']['view']['dashlet-chart'] = [
+    'dashlets' => [
+        [
             'label' => 'Chart Dashlet Example',
             'description' => 'LBL_DASHLET_OPPORTUNITY_DESCRIPTION',
-            'filter' => array(
-                'module' => array(
+            'filter' => [
+                'module' => [
                     'Styleguide',
-                ),
-                'view' => 'record'
-            ),
-            'config' => array(),
-            'preview' => array(),
-        ),
-    ),
-);
+                ],
+                'view' => 'record',
+            ],
+            'config' => [],
+            'preview' => [],
+        ],
+    ],
+];

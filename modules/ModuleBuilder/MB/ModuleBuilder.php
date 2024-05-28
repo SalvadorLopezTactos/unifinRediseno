@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /*********************************************************************************
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -21,18 +22,18 @@ require_once 'modules/ModuleBuilder/parsers/constants.php';
 
 class ModuleBuilder
 {
-    var $packages = array ( ) ;
+    public $packages = [];
 
-    function getPackageList()
+    public function getPackageList()
     {
-        static $list = array();
+        static $list = [];
         if (!empty($list) || !file_exists(MB_PACKAGE_PATH)) {
             return $list;
         }
-        
+
         // Get directories within the module builder package path
         $dirs = glob(MB_PACKAGE_PATH . '/*', GLOB_ONLYDIR);
-        
+
         // And check to see if there is a manifest.php in it
         foreach ($dirs as $dir) {
             $path = "$dir/manifest.php";
@@ -40,8 +41,8 @@ class ModuleBuilder
                 $list[] = basename($dir);
             }
         }
-        
-        // Order is important as generate_nodes_array in Tree.php later loops 
+
+        // Order is important as generate_nodes_array in Tree.php later loops
         // over this by foreach to generate the package list
         sort($list);
         return $list;
@@ -51,80 +52,75 @@ class ModuleBuilder
      * @param $name
      * @return MBPackage
      */
-    function getPackage ($name)
+    public function getPackage($name)
     {
-        if (empty ( $this->packages [ $name ] ))
-            $this->packages [ $name ] = new MBPackage ( $name ) ;
+        if (empty($this->packages [$name])) {
+            $this->packages [$name] = new MBPackage($name);
+        }
 
-        return $this->packages [ $name ] ;
+        return $this->packages [$name];
     }
 
-    function getPackageKey ($name)
+    public function getPackageKey($name)
     {
-        $manifestPath = MB_PACKAGE_PATH . '/' . $name . '/manifest.php' ;
-        if (file_exists ( $manifestPath ))
-        {
+        $manifestPath = MB_PACKAGE_PATH . '/' . $name . '/manifest.php';
+        if (file_exists($manifestPath)) {
             require FileLoader::validateFilePath($manifestPath);
-            if(!empty($manifest))
+            if (!empty($manifest)) {
                 return $manifest['key'];
+            }
         }
-        return false ;
+        return false;
     }
 
-    function &getPackageModule ($package , $module)
+    public function &getPackageModule($package, $module)
     {
-        $this->getPackage ( $package ) ;
-        $this->packages [ $package ]->getModule ( $module ) ;
-        return $this->packages [ $package ]->modules [ $module ] ;
+        $this->getPackage($package);
+        $this->packages [$package]->getModule($module);
+        return $this->packages [$package]->modules [$module];
     }
 
-    function save ()
+    public function save()
     {
-        $packages = array_keys ( $this->packages ) ;
-        foreach ( $packages as $package )
-        {
-            $this->packages [ $package ]->save () ;
+        $packages = array_keys($this->packages);
+        foreach ($packages as $package) {
+            $this->packages [$package]->save();
         }
     }
 
-    function build ()
+    public function build()
     {
-        $packages = array_keys ( $this->packages ) ;
-        foreach ( $packages as $package )
-        {
-            if (count ( $packages ) == 1)
-            {
-                $this->packages [ $package ]->build ( true ) ;
-            } else
-            {
-                $this->packages [ $package ]->build ( false ) ;
+        $packages = array_keys($this->packages);
+        foreach ($packages as $package) {
+            if (safeCount($packages) == 1) {
+                $this->packages [$package]->build(true);
+            } else {
+                $this->packages [$package]->build(false);
             }
         }
     }
 
-    function getPackages ()
+    public function getPackages()
     {
-        if (empty ( $this->packages ))
-        {
-            $list = $this->getPackageList () ;
-            foreach ( $list as $package )
-            {
-                if (! empty ( $this->packages [ $package ] ))
-                    continue ;
-                $this->packages [ $package ] = new MBPackage ( $package ) ;
+        if (empty($this->packages)) {
+            $list = $this->getPackageList();
+            foreach ($list as $package) {
+                if (!empty($this->packages [$package])) {
+                    continue;
+                }
+                $this->packages [$package] = new MBPackage($package);
             }
         }
     }
 
-    function getNodes ()
+    public function getNodes()
     {
-        $this->getPackages () ;
-        $nodes = array ( ) ;
-        foreach ( array_keys ( $this->packages ) as $name )
-        {
-            $nodes [] = $this->packages [ $name ]->getNodes () ;
+        $this->getPackages();
+        $nodes = [];
+        foreach (array_keys($this->packages) as $name) {
+            $nodes [] = $this->packages [$name]->getNodes();
         }
-        return $nodes ;
+        return $nodes;
     }
 
     /**
@@ -133,19 +129,18 @@ class ModuleBuilder
      * @param string $module
      * @return array $aliases
      */
-    static public function getModuleAliases($module)
+    public static function getModuleAliases($module)
     {
-        $aliases = array($module);
-        $relate_arr = array(
+        $aliases = [$module];
+        $relate_arr = [
             'Users' => 'Employees',
-            'Employees' => 'Users'
-        );
+            'Employees' => 'Users',
+        ];
 
-        if (isset($relate_arr[$module])){
+        if (isset($relate_arr[$module])) {
             $aliases[] = $relate_arr[$module];
         }
 
         return $aliases;
     }
-
 }

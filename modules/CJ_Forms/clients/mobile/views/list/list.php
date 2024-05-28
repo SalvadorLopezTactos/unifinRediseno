@@ -22,6 +22,26 @@ $viewdefs['CJ_Forms']['mobile']['view']['list'] = [
                     'link' => true,
                 ],
                 [
+                    'name' => 'main_trigger_type',
+                    'label' => 'LBL_MAIN_TRIGGER_TYPE',
+                    'default' => true,
+                    'enabled' => true,
+                ],
+                [
+                    'name' => 'date_modified',
+                    'label' => 'LBL_DATE_MODIFIED',
+                    'enabled' => true,
+                    'default' => true,
+                    'readonly' => true,
+                ],
+                [
+                    'name' => 'date_entered',
+                    'label' => 'LBL_DATE_ENTERED',
+                    'enabled' => true,
+                    'default' => true,
+                    'readonly' => true,
+                ],
+                [
                     'name' => 'team_name',
                     'label' => 'LBL_TEAM',
                     'width' => 9,

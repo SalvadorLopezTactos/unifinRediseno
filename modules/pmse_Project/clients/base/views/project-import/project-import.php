@@ -10,16 +10,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['pmse_Project']['base']['view']['project-import'] = array(
-    'panels' => array(
-        array(
-            'fields' => array(
-                array(
+$viewdefs['pmse_Project']['base']['view']['project-import'] = [
+    'panels' => [
+        [
+            'fields' => [
+                [
                     'name' => 'project_import',
                     'type' => 'file',
                     'view' => 'edit',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

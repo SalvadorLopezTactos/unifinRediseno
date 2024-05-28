@@ -1597,7 +1597,13 @@ SUGAR.reports = function() {
 				alert(SUGAR.language.get('Reports', 'LBL_MAXIMUM_3_GROUP_BY'));
 				return false;
 			}
-			
+
+            // we need at least 2 groups to be able to draw a chart
+            if (group_defs.length < 2 && chart_type === 'lineF') {
+                alert(SUGAR.language.get('Reports', 'LBL_LINE_CHART_INVALID'));
+                return false;
+            }
+
 				report_def.display_columns = display_cols;
 			report_def.module = current_module;
 				report_def.group_defs = group_defs;
@@ -1614,7 +1620,6 @@ SUGAR.reports = function() {
 			report_def.numerical_chart_column = document.ReportsWizardForm.numerical_chart_column.value;
 			report_def.numerical_chart_column_type = document.ReportsWizardForm.numerical_chart_column_type.value;
 		  	report_def.assigned_user_id = document.ReportsWizardForm.assigned_user_id.value;
-
 			if (report_type != 'tabular')
 				report_def.report_type = 'summary';
 			else
@@ -1840,9 +1845,19 @@ SUGAR.reports = function() {
             }
 		},
         cancelReport: function() {
-            var dashletEdit = this.getWindowLocationParameterByName('dashletEdit', window.location.search);
-            if (dashletEdit) {
-                parent.$(parent).trigger('dashletEdit');
+            const reportId = this.getWindowLocationParameterByName('id', window.location.search);
+            const iframe = window.frameElement;
+            let fromListView = false;
+
+            if (!_.isUndefined(iframe)) {
+                const iframeSrc = iframe.src;
+                const querystringParams = new URLSearchParams(iframeSrc);
+                fromListView = querystringParams.get('fromListView');
+            }
+
+            if (reportId && !fromListView) {
+                const route = parent.App.router.buildRoute('Reports', reportId);
+                parent.App.router.navigate(route, {trigger: true});
             } else {
                 parent.App.router.navigate('Reports', {trigger: true});
             }
@@ -3001,7 +3016,10 @@ SUGAR.reports = function() {
                 SUGAR.reports.addFilterInputText(row, filter);
                 SUGAR.reports.addRunTimeCheckBox(row, filter, rowId);
             }
-            else if (['date', 'datetime', 'service-enddate'].includes(field_type)) {
+            else if (qualifier_name === 'anything') {
+                SUGAR.reports.addFilterNoInput(row, filter);
+                SUGAR.reports.addRunTimeCheckBox(row, filter, rowId);
+            } else if (['date', 'datetime', 'service-enddate'].includes(field_type)) {
 				if (qualifier_name.indexOf('tp_') == 0) {
 					SUGAR.reports.addFilterInputEmpty(row,filter);
 					SUGAR.reports.addRunTimeCheckBox(row,filter,rowId);		
@@ -3921,7 +3939,17 @@ SUGAR.reports = function() {
 	            fields: ["field_label", "module_name","parents", "field_name", "link_name", "parent_module", "parents_link"]
 	        };
 
-			var title = "<h3 class='spantitle'>" + SUGAR.language.get('Reports','LBL_AVAILABLE_FIELDS') + " : " + comboLabel  +  "<span id='fields_panel_help'><img src='index.php?entryPoint=getImage&themeName=" + SUGAR.themes.theme_name + "&imageName=helpInline.png'  alt='"+SUGAR.language.get("Reports", "LBL_ALT_INFORMATION")+"' class='inlineHelpTip' onclick='SUGAR.util.showHelpTips(this,\"" + SUGAR.language.get('Reports','LBL_FIELDS_PANEL_HELP_DESC') +"\");'></span></h3>";
+            var title = '<h3 class="spantitle">' +
+                SUGAR.language.get('Reports', 'LBL_AVAILABLE_FIELDS') +
+                ' : ' +
+                _.escape(comboLabel) +
+                '<span id="fields_panel_help"><img src="index.php?entryPoint=getImage&themeName=' +
+                SUGAR.themes.theme_name +
+                '&imageName=helpInline.png"  alt="' +
+                SUGAR.language.get('Reports', 'LBL_ALT_INFORMATION') +
+                '" class="inlineHelpTip" onclick="SUGAR.util.showHelpTips(this,\'' +
+                SUGAR.language.get('Reports', 'LBL_FIELDS_PANEL_HELP_DESC') +
+                '\');"></span></h3>';
 
 			var oldOffsetHeight = document.getElementById("autocomplete").offsetHeight;
 			SUGAR.reports.autocompletemodule.header.innerHTML = title;

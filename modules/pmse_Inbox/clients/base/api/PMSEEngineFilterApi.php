@@ -23,26 +23,26 @@ class PMSEEngineFilterApi extends FilterApi
      * Predefined scalar filters
      * @var array
      */
-    protected static $customFilters = array('visibility', 'in_time', 'assignment_method');
+    protected static $customFilters = ['visibility', 'in_time', 'assignment_method'];
 
     /**
      * FilterApi filters blocked by PA PMSEEngineFilterApi
      * @var array
      */
-    protected static $blockedFilters = array('$favorite', '$tracker');
+    protected static $blockedFilters = ['$favorite', '$tracker'];
 
     /**
      * List of supported operators
      * @var array
      */
-    protected static $supportedOperators = array(
+    protected static $supportedOperators = [
         '$equals',
         '$not_equals',
         '$in',
         '$not_in',
         '$dateRange',
         '$starts',
-    );
+    ];
 
     /**
      * Mapping of fields to a query column in getQueryObjectPA()
@@ -58,51 +58,51 @@ class PMSEEngineFilterApi extends FilterApi
 
     public function registerApiRest()
     {
-        return array(
-            'filterModuleGet' => array(
+        return [
+            'filterModuleGet' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Inbox', 'filter'),
-                'pathVars' => array('module', ''),
+                'path' => ['pmse_Inbox', 'filter'],
+                'pathVars' => ['module', ''],
                 'method' => 'filterList',
-                'jsonParams' => array('filter'),
-                'exceptions' => array(
+                'jsonParams' => ['filter'],
+                'exceptions' => [
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
-                ),
+                ],
                 'shortHelp' => 'Returns a list of Processes by user',
                 'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_filter_list_help.html',
-            ),
-            'filterModuleAll' => array(
+            ],
+            'filterModuleAll' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Inbox'),
-                'pathVars' => array('module'),
+                'path' => ['pmse_Inbox'],
+                'pathVars' => ['module'],
                 'method' => 'filterListAllPA',
-                'jsonParams' => array('filter'),
-                'exceptions' => array(
+                'jsonParams' => ['filter'],
+                'exceptions' => [
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
-                ),
+                ],
                 'shortHelp' => 'Returns a list of Processes by user using filters',
                 'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_filter_list_all_pa_help.html',
-            ),
-            'filterModuleAllCount' => array(
+            ],
+            'filterModuleAllCount' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Inbox', 'count'),
-                'pathVars' => array('module', ''),
-                'jsonParams' => array('filter'),
+                'path' => ['pmse_Inbox', 'count'],
+                'pathVars' => ['module', ''],
+                'jsonParams' => ['filter'],
                 'method' => 'filterListCount',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionError',
                     'SugarApiExceptionNotAuthorized',
-                ),
+                ],
 //                'shortHelp' => 'List of all records in this module',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -120,10 +120,10 @@ class PMSEEngineFilterApi extends FilterApi
     {
         $result = parent::filterList($api, $args, $acl);
         foreach ($result['records'] as $key => $value) {
-            $params = array(
+            $params = [
                 'erased_fields' => true,
                 'use_cache' => false,           // TODO: remove this flag once the BeanFactory cache issue is fixed
-            );
+            ];
             $assignedBean = BeanFactory::getBean($value['cas_sugar_module'], $value['cas_sugar_object_id'], $params);
 
             if (is_null($assignedBean)) {
@@ -150,7 +150,7 @@ class PMSEEngineFilterApi extends FilterApi
 
         // Set the default visibility to a regular user
         if (empty($args['filter']['visibility'])) {
-            $args['filter'][] = array('visibility' => 'regular_user');
+            $args['filter'][] = ['visibility' => 'regular_user'];
         }
         return $this->filterList($api, $args, $acl);
     }
@@ -184,13 +184,13 @@ class PMSEEngineFilterApi extends FilterApi
         $q = self::getQueryObjectPA($seed, $options);
 
         if (!isset($args['filter']) || !is_array($args['filter'])) {
-            $args['filter'] = array();
+            $args['filter'] = [];
         }
 
         // Applying filters using PA logic
         $this->addFiltersPA($args['filter'], $q->where(), $q);
 
-        return array($args, $q, $options, $seed);
+        return [$args, $q, $options, $seed];
     }
 
     /**
@@ -199,7 +199,8 @@ class PMSEEngineFilterApi extends FilterApi
      * @param SugarQuery $q
      * @return bool
      */
-    public static function isSupportedPAFilter($filter, SugarQuery $q) {
+    public static function isSupportedPAFilter($filter, SugarQuery $q)
+    {
         $fields = array_keys($q->select()->select);
         $filters = array_merge(self::$customFilters, self::$blockedFilters, $fields);
         return in_array($filter, $filters);
@@ -296,13 +297,14 @@ class PMSEEngineFilterApi extends FilterApi
      * @param $expression
      * @param SugarQuery_Builder_Where $where
      */
-    public static function addInTimeFilter($expression, SugarQuery_Builder_Where $where) {
+    public static function addInTimeFilter($expression, SugarQuery_Builder_Where $where)
+    {
         $exp = self::getRawExpression($expression);
-        if ($exp=== 'true') {
+        if ($exp === 'true') {
             $where->queryOr()
                 ->gte('cas_due_date', TimeDate::getInstance()->nowDb())
                 ->isNull('cas_due_date');
-        } else if ($exp === 'false') {
+        } elseif ($exp === 'false') {
             $where->queryAnd()
                 ->notNull('cas_due_date')
                 ->lte('cas_due_date', TimeDate::getInstance()->nowDb());
@@ -328,7 +330,7 @@ class PMSEEngineFilterApi extends FilterApi
                 ->queryAnd()
                 ->equals('activity_definition.act_assignment_method', 'selfservice')
                 ->notNull('cas_start_date');
-        } else if ($method == 'selfservice') {
+        } elseif ($method == 'selfservice') {
             $teams = array_keys($current_user->get_my_teams());
             $where->queryAnd()
                 ->in('activity_definition.act_assign_team', $teams)
@@ -350,7 +352,7 @@ class PMSEEngineFilterApi extends FilterApi
     public static function addFieldFilterPA($field, $expression, SugarQuery_Builder_Where $where)
     {
         [$operator, $value] = self::getExpression($expression);
-        switch($operator) {
+        switch ($operator) {
             case '$equals':
                 //more dirty hack
                 //will be fixed when we redo relationships with vardefs
@@ -399,7 +401,7 @@ class PMSEEngineFilterApi extends FilterApi
     public static function removeVisibilityFilter(SugarQuery_Builder_Where $where)
     {
         $conditions = $where->conditions;
-        foreach($conditions as $key => $condition) {
+        foreach ($conditions as $key => $condition) {
             $field = $condition->field;
             if ($field->field == 'cas_user_id') {
                 unset($where->conditions[$key]);
@@ -418,14 +420,14 @@ class PMSEEngineFilterApi extends FilterApi
         // we don't send an operator in args if the operator is $equals
         if (!is_array($expression)) {
             $value = $expression;
-            $expression = array();
+            $expression = [];
             $expression['$equals'] = $value;
         }
 
         $keys = array_keys($expression);
         $operator = $keys[0];
         if (in_array($operator, self::$supportedOperators)) {
-            return array($operator, $expression[$operator]);
+            return [$operator, $expression[$operator]];
         } else {
             $sugarApiExceptionInvalidParameter = new SugarApiExceptionInvalidParameter(
                 'ERROR_PA_FILTER_UNSUPPORTED_OPERATOR'
@@ -433,7 +435,6 @@ class PMSEEngineFilterApi extends FilterApi
             PMSELogger::getInstance()->alert($sugarApiExceptionInvalidParameter->getMessage());
             throw $sugarApiExceptionInvalidParameter;
         }
-
     }
 
     /**
@@ -458,7 +459,7 @@ class PMSEEngineFilterApi extends FilterApi
         if (empty($options['select'])) {
             $options['select'] = self::$mandatory_fields;
         }
-        $queryOptions = array('add_deleted' => (!isset($options['add_deleted'])||$options['add_deleted'])?true:false);
+        $queryOptions = ['add_deleted' => (!isset($options['add_deleted']) || $options['add_deleted']) ? true : false];
         if ($queryOptions['add_deleted'] == false) {
             $options['select'][] = 'deleted';
         }
@@ -466,7 +467,7 @@ class PMSEEngineFilterApi extends FilterApi
         $q = new SugarQuery();
         $q->from($seed, $queryOptions);
         $q->distinct(false);
-        $fields = array();
+        $fields = [];
         foreach ($options['select'] as $field) {
             // fields that aren't in field defs are removed, since we don't know
             // what to do with them
@@ -477,61 +478,61 @@ class PMSEEngineFilterApi extends FilterApi
         }
 
         //INNER JOIN BPM INBOX TABLE
-        $fields[] = array("date_entered", 'date_entered');
-        $fields[] = array("cas_id", 'cas_id');
-        $fields[] = array("cas_sugar_module", 'cas_sugar_module');
+        $fields[] = ['date_entered', 'date_entered'];
+        $fields[] = ['cas_id', 'cas_id'];
+        $fields[] = ['cas_sugar_module', 'cas_sugar_module'];
 
-        $fields[] = array("cas_sugar_object_id", 'cas_sugar_object_id');
-        $fields[] = array("cas_user_id",'cas_user_id');
-        $fields[] = array("cas_assignment_method",'cas_assignment_method');
+        $fields[] = ['cas_sugar_object_id', 'cas_sugar_object_id'];
+        $fields[] = ['cas_user_id', 'cas_user_id'];
+        $fields[] = ['cas_assignment_method', 'cas_assignment_method'];
 
 
-        $q->joinTable('pmse_inbox', array('alias' => 'inbox', 'joinType' => 'INNER', 'linkingTable' => true))
+        $q->joinTable('pmse_inbox', ['alias' => 'inbox', 'joinType' => 'INNER', 'linkingTable' => true])
             ->on()
             ->equalsField('inbox.cas_id', 'cas_id')
             ->equals('inbox.deleted', 0);
-        $fields[] = array("inbox.id", 'inbox_id');
-        $fields[] = array("inbox.cas_title", 'cas_title');
+        $fields[] = ['inbox.id', 'inbox_id'];
+        $fields[] = ['inbox.cas_title', 'cas_title'];
         $q->where()
             ->equals('cas_flow_status', 'FORM');
 
         //INNER JOIN BPMN ACTIVITY DEFINITION
-        $q->joinTable('pmse_bpmn_activity', array('alias' => 'activity', 'joinType' => 'INNER', 'linkingTable' => true))
+        $q->joinTable('pmse_bpmn_activity', ['alias' => 'activity', 'joinType' => 'INNER', 'linkingTable' => true])
             ->on()
             ->equalsField('activity.id', 'bpmn_id')
             ->equals('activity.deleted', 0);
-        $fields[] = array("activity.name", 'act_name');
+        $fields[] = ['activity.name', 'act_name'];
 
         //INNER JOIN BPMN ACTIVITY DEFINTION
-        $q->joinTable('pmse_bpm_activity_definition', array('alias' => 'activity_definition', 'joinType' => 'INNER', 'linkingTable' => true))
+        $q->joinTable('pmse_bpm_activity_definition', ['alias' => 'activity_definition', 'joinType' => 'INNER', 'linkingTable' => true])
             ->on()
             ->equalsField('activity_definition.id', 'activity.id')
             ->equals('activity_definition.deleted', 0);
-        $fields[] = array("activity_definition.act_assignment_method", 'act_assignment_method');
+        $fields[] = ['activity_definition.act_assignment_method', 'act_assignment_method'];
 
         //INNER JOIN BPMN PROCESS DEFINTION
-        $q->joinTable('pmse_bpmn_process', array('alias' => 'process', 'joinType' => 'INNER', 'linkingTable' => true))
+        $q->joinTable('pmse_bpmn_process', ['alias' => 'process', 'joinType' => 'INNER', 'linkingTable' => true])
             ->on()
             ->equalsField('process.id', 'inbox.pro_id')
             ->equals('process.deleted', 0);
-        $fields[] = array("process.name", 'pro_title');
-        $fields[] = array("process.prj_id", 'prj_id');
-        $fields[] = array("process.created_by", 'prj_created_by');
-        $fields[] = array("process.assigned_user_id", 'prj_assigned_to');
+        $fields[] = ['process.name', 'pro_title'];
+        $fields[] = ['process.prj_id', 'prj_id'];
+        $fields[] = ['process.created_by', 'prj_created_by'];
+        $fields[] = ['process.assigned_user_id', 'prj_assigned_to'];
 
         //INNER JOIN USER_DATA DEFINTION
-        $q->joinTable('users', array('alias' => 'user_data', 'joinType' => 'LEFT', 'linkingTable' => true))
+        $q->joinTable('users', ['alias' => 'user_data', 'joinType' => 'LEFT', 'linkingTable' => true])
             ->on()
             ->equalsField('user_data.id', 'cas_user_id')
             ->equals('user_data.deleted', 0);
-        $fields[] = array("user_data.user_name", 'user_name');
+        $fields[] = ['user_data.user_name', 'user_name'];
 
         //INNER JOIN TEAM_DATA DEFINTION
-        $q->joinTable('teams', array('alias' => 'team_data', 'joinType' => 'LEFT', 'linkingTable' => true))
+        $q->joinTable('teams', ['alias' => 'team_data', 'joinType' => 'LEFT', 'linkingTable' => true])
             ->on()
             ->equalsField('team_data.id', 'cas_user_id')
             ->equals('team_data.deleted', 0);
-        $fields[] = array("team.name", 'team_name');
+        $fields[] = ['team.name', 'team_name'];
 
         $q->select($fields)
             ->fieldRaw('user_data.last_name', 'assigned_user_name');
@@ -560,13 +561,13 @@ class PMSEEngineFilterApi extends FilterApi
         return $q;
     }
 
-    protected function formatBeans(ServiceBase $api, array $args, $beans, array $options = array())
+    protected function formatBeans(ServiceBase $api, array $args, $beans, array $options = [])
     {
         if (!empty($args['fields']) && !is_array($args['fields'])) {
-            $args['fields'] = explode(',',$args['fields']);
+            $args['fields'] = explode(',', $args['fields']);
         }
 
-        $ret = array();
+        $ret = [];
 
         foreach ($beans as $bean) {
             if (!is_subclass_of($bean, 'SugarBean')) {
@@ -581,7 +582,7 @@ class PMSEEngineFilterApi extends FilterApi
                 continue;
             }
 
-            $arr_aux = array();
+            $arr_aux = [];
             $arr_aux['cas_id'] = $bean->fetched_row['cas_id'] ?? $bean->fetched_row['pmse_bpm_flow__cas_id'];
             $arr_aux['act_assignment_method'] = $bean->fetched_row['act_assignment_method'];
             $arr_aux['cas_title'] = $bean->fetched_row['cas_title'];
@@ -622,13 +623,13 @@ class PMSEEngineFilterApi extends FilterApi
 
     protected function getOrderByFromArgs(array $args, SugarBean $seed = null)
     {
-        $orderBy = array();
+        $orderBy = [];
         if (!isset($args['order_by']) || !is_string($args['order_by'])) {
             return $orderBy;
         }
 
         $columns = explode(',', $args['order_by']);
-        $parsed = array();
+        $parsed = [];
         foreach ($columns as $column) {
             $column = explode(':', $column, 2);
             $field = array_shift($column);
@@ -640,9 +641,9 @@ class PMSEEngineFilterApi extends FilterApi
             }
         }
 
-        $converted = array();
+        $converted = [];
         foreach ($parsed as $field => $direction) {
-            $converted[] = array($field, $direction ? 'ASC' : 'DESC');
+            $converted[] = [$field, $direction ? 'ASC' : 'DESC'];
         }
 
         return $converted;

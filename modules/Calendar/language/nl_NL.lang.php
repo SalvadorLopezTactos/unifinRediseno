@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Agenda',
     'LBL_MODULE_NAME_SINGULAR' => 'Agenda',
     'LBL_MODULE_TITLE' => 'Agenda',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Instellingen',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Toon tijd in Dag en Week views:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Starttijd:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Eindtijd:',
+    'LBL_SETTINGS_TIME_STARTS' => 'Starttijd:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Eindtijd:',
     'LBL_SETTINGS_CALLS_SHOW' => 'Toon Telefoongesprekken:',
     'LBL_SETTINGS_TASKS_SHOW' => 'Toon Taken:',
 
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Agenda aanmaken',
     'LNK_CALENDAR_LIST' => 'Agenda&#39;s bekijken',
     'LNK_CALENDAR_LEGACY' => 'Verouderde agenda',
-    'LBL_IMPORT_CALENDAR'=> 'Agenda importeren',
+    'LBL_IMPORT_CALENDAR' => 'Agenda importeren',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Tijdstempel evenement',
     'LBL_INSERTFIELD' => 'Veld invoegen',
     'LBL_EVENT_START_ERROR' => 'Kies een begin',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Selecteer een agenda',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Laden van agenda&#39;s is mislukt.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Zo',
             'Ma',
             'Tue',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Thu',
             'Vrij',
             'Sat',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Zondag',
             'Maandag',
             'Dinsdag',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Donderdag',
             'Vrijdag',
             'Zaterdag',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Jan',
             'Feb',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Okt',
             'Nov',
             'Dec',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Januari',
             'Februari',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Oktober',
             'November',
             'December',
-        ),
-);
+        ],
+];

@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'ฐานความรู้',
     'LBL_MODULE_NAME_SINGULAR' => 'บทความฐานความรู้',
     'LBL_MODULE_TITLE' => 'บทความฐานความรู้',
     'LBL_REVISIONS_SUBPANEL_TITLE' => 'รุ่น',
-);
+];

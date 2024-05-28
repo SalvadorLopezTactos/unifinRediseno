@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tipus de Producte',
     'LBL_MODULE_NAME_SINGULAR' => 'Tipus de producte',
     'LBL_MODULE_TITLE' => 'Tipus de productes: inici',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Esteu segur que voleu suprimir aquest registre?',
     'ERR_DELETE_RECORD' => 'Per suprimir el tipus de producte, heu d&#39;especificar un número de registre.',
     'NTC_LIST_ORDER' => 'Estableix l´ordre en el qual aquest tipus apareixerà en les llistes desplegables de Tipus de Producte',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Importar Tipus de Producte',
-    'LBL_CREATED_BY'=>'Creat Per',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Importar Tipus de Producte',
+    'LBL_CREATED_BY' => 'Creat Per',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Assignat a ID',
-    'LBL_EXPORT_CREATED_BY'=>'Creat per ID',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Importar categories de producte',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Assignat a ID',
+    'LBL_EXPORT_CREATED_BY' => 'Creat per ID',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Importar categories de producte',
+];

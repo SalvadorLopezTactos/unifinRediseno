@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Tags']['base']['filter']['default'] = array(
+$viewdefs['Tags']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'date_entered' => array(),
-        'date_modified' => array(),
-        'assigned_user_name' => array(),
-    ),
-);
+    'fields' => [
+        'name' => [],
+        'date_entered' => [],
+        'date_modified' => [],
+        'assigned_user_name' => [],
+    ],
+];

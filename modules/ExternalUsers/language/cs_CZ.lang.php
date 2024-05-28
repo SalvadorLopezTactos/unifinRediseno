@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => 'Případy',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Příležitosti',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Nabídky',
-    'LBL_NOTES'=>'Poznámky',
+    'LBL_NOTES' => 'Poznámky',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => 'Řídicí panel záznamu externích uživatelů',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová osa externího uživatele',
 ];

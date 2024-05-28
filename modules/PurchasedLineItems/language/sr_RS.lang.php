@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Kontrolna tabla liste kupljenih stavki',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Kontrolna tabla za zapise o kupljenim stavkama',
     'LBL_PARENT_PURCHASE' => 'Nadređena kupovina',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linije kupljenih stavki',
 ];

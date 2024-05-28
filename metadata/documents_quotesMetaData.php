@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['documents_quotes'] = array(
+$dictionary['documents_quotes'] = [
     'true_relationship_type' => 'many-to-many',
-    'relationships' => array(
-        'documents_quotes' => array(
+    'relationships' => [
+        'documents_quotes' => [
             'lhs_module' => 'Documents',
             'lhs_table' => 'documents',
             'lhs_key' => 'id',
@@ -24,57 +24,57 @@ $dictionary['documents_quotes'] = array(
             'join_table' => 'documents_quotes',
             'join_key_lhs' => 'document_id',
             'join_key_rhs' => 'quote_id',
-        ),
-    ),
+        ],
+    ],
     'table' => 'documents_quotes',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => true,
-        ),
-        'document_id' => array(
+        ],
+        'document_id' => [
             'name' => 'document_id',
             'type' => 'id',
-        ),
-        'quote_id' => array(
+        ],
+        'quote_id' => [
             'name' => 'quote_id',
             'type' => 'id',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'documents_quotesspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'documents_quotes_quote_id',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'quote_id',
                 'document_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'documents_quotes_document_id',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'document_id',
                 'quote_id',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

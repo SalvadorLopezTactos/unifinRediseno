@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Auditlogboek',
     'LBL_FIELD_NAME' => 'Veld',
     'LBL_OLD_NAME' => 'Oude Waarde',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Update naar',
     'LBL_BLANK' => '-blank-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn audit',
+    'LBL_CREATED' => 'Aangemaakt',
+];

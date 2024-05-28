@@ -10,25 +10,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
 
-  'LBL_NAME' =>'Vārds:',
-  'LBL_NUMBER' => 'Skaits:',
-  'LBL_STATUS' => 'Statuss:',
-  'LBL_PRIORITY' => 'Prioritāte:',
-  'LBL_DESCRIPTION' => 'Apraksts:',
-  'LBL_RESOLUTION' => 'Risinājums',
-  'LBL_LAST_MODIFIED' => 'Modificēts',
-  'LBL_ASSIGNED_TO_ID'=>'Piešķirts lietotājam:',
-  'LBL_ASSIGNED_TO_NAME' => 'Piešķirts lietotājam:',
-  'LBL_WORK_LOG' => 'Darba Žurnāls:',
+    'LBL_NAME' => 'Vārds:',
+    'LBL_NUMBER' => 'Skaits:',
+    'LBL_STATUS' => 'Statuss:',
+    'LBL_PRIORITY' => 'Prioritāte:',
+    'LBL_DESCRIPTION' => 'Apraksts:',
+    'LBL_RESOLUTION' => 'Risinājums',
+    'LBL_LAST_MODIFIED' => 'Modificēts',
+    'LBL_ASSIGNED_TO_ID' => 'Piešķirts lietotājam:',
+    'LBL_ASSIGNED_TO_NAME' => 'Piešķirts lietotājam:',
+    'LBL_WORK_LOG' => 'Darba Žurnāls:',
     'LBL_FOLLOW_UP' => 'Turpmākā darbība',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
     'LBL_RESOLVED_DATETIME' => 'Atrisināšanas datums',
@@ -36,19 +35,19 @@ $mod_strings = array (
     'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Darba stundas līdz risinājumam',
     'LBL_PENDING_PROCESSING' => 'Gaida apstrādi',
     'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Turpmāko darbību datums',
-  'LBL_CREATED_BY' => 'Izveidoja:',
-  'LBL_DATE_CREATED' => 'Izveides datums:',
-  'LBL_DATE_ENTERED' => 'Izveides datums:',
-  'LBL_DATE_MODIFIED'=>'Modificēšanas datums:',
-  'LBL_MODIFIED_BY' => 'Modificēja:',
-  'LBL_ASSIGNED_USER' => 'Piešķirts lietotājam:',
-  'LBL_ASSIGNED_USER_NAME' => 'Piešķirts',
-  'LBL_TEAM_NAME' =>'Darba grupas nosaukums:',
-  'LBL_TYPE'=>'Tips:',
-  'LBL_SUBJECT' => 'Temats:',
+    'LBL_CREATED_BY' => 'Izveidoja:',
+    'LBL_DATE_CREATED' => 'Izveides datums:',
+    'LBL_DATE_ENTERED' => 'Izveides datums:',
+    'LBL_DATE_MODIFIED' => 'Modificēšanas datums:',
+    'LBL_MODIFIED_BY' => 'Modificēja:',
+    'LBL_ASSIGNED_USER' => 'Piešķirts lietotājam:',
+    'LBL_ASSIGNED_USER_NAME' => 'Piešķirts',
+    'LBL_TEAM_NAME' => 'Darba grupas nosaukums:',
+    'LBL_TYPE' => 'Tips:',
+    'LBL_SUBJECT' => 'Temats:',
 
     'LBL_EDIT_BUTTON' => 'Rediģēt',
     'LBL_REMOVE' => 'Noņemt',
 
 
-  );
+];

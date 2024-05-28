@@ -150,6 +150,7 @@ class SugarUpgradeInstallDashboards extends UpgradeScript
         string $to_flavor = null,
         string $version_operator = '<'
     ): bool {
+
         $isUpgradeToVersion = version_compare($this->from_version, $version, $version_operator);
         if (!is_null($from_flavor) && !is_null($to_flavor)) {
             $isFlavorConversion = !$this->fromFlavor($from_flavor) && $this->toFlavor($to_flavor);

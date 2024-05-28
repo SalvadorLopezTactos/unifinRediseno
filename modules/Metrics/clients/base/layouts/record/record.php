@@ -9,41 +9,41 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Metrics']['base']['layout']['record'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['Metrics']['base']['layout']['record'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'css_class' => 'main-pane span8 overflow-y-auto',
+                            'components' => [
+                                [
                                     'view' => 'record-header-buttons',
-                                ),
-                                array(
+                                ],
+                                [
                                     'layout' => 'record-content',
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'side-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'view' => 'record-side-pane',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

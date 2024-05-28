@@ -10,30 +10,30 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="subpanel-header">
-    <div>
+<div class="subpanel-header row-fluid panel_body">
+    <div class="span6 flex" rel="tooltip" data-bs-placement="bottom" title="{{getModuleName widgetModule plural=true}}">
         {{moduleLabel widgetModule 'sm' class='pull-left'}}
         <h4 class="pull-left">{{getModuleName widgetModule plural=true}}</h4>
     </div>
-    <div class="subpanel-controls btn-toolbar pull-right">
+    <div class="subpanel-controls btn-toolbar pull-right span6">
         <span class="pull-right maps-small-margin-right">
             <span class="small">
-                <a class="rowaction btn" rel="tooltip" data-action="open-subpanel-config" data-placement="bottom" title="{{str 'LBL_MAPS_MODULE_SLAYOUT' module}}">
+                <a class="rowaction btn" rel="tooltip" data-action="open-subpanel-config" data-bs-placement="bottom" title="{{str 'LBL_MAPS_MODULE_SLAYOUT' module}}">
                      <i class="sicon sicon-list"></i>
                 </a>
             </span>
             <span class="small">
-                <a class="rowaction btn" rel="tooltip" data-action="open-mappings" data-placement="bottom" title="{{str 'LBL_MAPS_MODULE_MAPPINGS' module}}">
+                <a class="rowaction btn" rel="tooltip" data-action="open-mappings" data-bs-placement="bottom" title="{{str 'LBL_MAPS_MODULE_MAPPINGS' module}}">
                      <i class="sicon sicon-edit"></i>
                 </a>
             </span>
             <span class="small hide">
-                <a class="rowaction btn" rel="tooltip" data-action="open-settings" data-placement="bottom" title="{{str 'LBL_MAPS_MODULE_OPTIONS' module}}">
+                <a class="rowaction btn" rel="tooltip" data-action="open-settings" data-bs-placement="bottom" title="{{str 'LBL_MAPS_MODULE_OPTIONS' module}}">
                      <i class="sicon sicon-settings"></i>
                 </a>
             </span>
             <span class="small">
-                <a class="rowaction btn" rel="tooltip" data-action="remove-module" data-placement="bottom" title="{{str 'LBL_MAPS_MODULE_REMOVE' module}}">
+                <a class="rowaction btn" rel="tooltip" data-action="remove-module" data-bs-placement="bottom" title="{{str 'LBL_MAPS_MODULE_REMOVE' module}}">
                      <i class="sicon sicon-minus"></i>
                 </a>
             </span>

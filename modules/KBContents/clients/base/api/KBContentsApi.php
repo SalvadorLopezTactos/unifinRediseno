@@ -10,70 +10,69 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use \Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
-use \Sugarcrm\Sugarcrm\Elasticsearch\Query\QueryBuilder;
-use \Sugarcrm\Sugarcrm\Elasticsearch\Query\KBQuery;
-
+use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
+use Sugarcrm\Sugarcrm\Elasticsearch\Query\QueryBuilder;
+use Sugarcrm\Sugarcrm\Elasticsearch\Query\KBQuery;
 
 class KBContentsApi extends SugarListApi
 {
     public function registerApiRest()
     {
-        return array(
-            'related_documents' => array(
+        return [
+            'related_documents' => [
                 'reqType' => 'GET',
-                'path' => array('KBContents', '?', 'related_documents'),
-                'pathVars' => array('module', 'record'),
+                'path' => ['KBContents', '?', 'related_documents'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'relatedDocuments',
                 'shortHelp' => 'Get related documents for current record.',
                 'longHelp' => '',
-            ),
+            ],
             //disable KBDocuments, KBArticles through API
-            'disableKBDocuments1' => array(
+            'disableKBDocuments1' => [
                 'reqType' => '?',
-                'path' => array('KBDocuments'),
-                'pathVars' => array('module'),
+                'path' => ['KBDocuments'],
+                'pathVars' => ['module'],
                 'method' => 'disableApi',
                 'extraScore' => 1,
                 'shortHelp' => 'Disable KBDocuments',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-            'disableKBDocuments2' => array(
+                ],
+            ],
+            'disableKBDocuments2' => [
                 'reqType' => '?',
-                'path' => array('KBDocuments', '?'),
-                'pathVars' => array('module', ''),
+                'path' => ['KBDocuments', '?'],
+                'pathVars' => ['module', ''],
                 'extraScore' => 1,
                 'method' => 'disableApi',
                 'shortHelp' => 'Disable KBDocuments',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-            'disableKBArticles1' => array(
+                ],
+            ],
+            'disableKBArticles1' => [
                 'reqType' => '?',
-                'path' => array('KBArticles'),
-                'pathVars' => array('module'),
+                'path' => ['KBArticles'],
+                'pathVars' => ['module'],
                 'method' => 'disableApi',
                 'extraScore' => 1,
                 'shortHelp' => 'Disable KBArticles',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-            'disableKBArticles2' => array(
+                ],
+            ],
+            'disableKBArticles2' => [
                 'reqType' => '?',
-                'path' => array('KBArticles', '?'),
-                'pathVars' => array('module', ''),
+                'path' => ['KBArticles', '?'],
+                'pathVars' => ['module', ''],
                 'extraScore' => 1,
                 'method' => 'disableApi',
                 'shortHelp' => 'Disable KBArticles',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**
@@ -93,7 +92,7 @@ class KBContentsApi extends SugarListApi
         $options = $this->parseArguments($api, $args);
 
         $builder = $this->getElasticQueryBuilder($args, $options);
-        $ftsFields = ApiHelper::getHelper($api, $targetBean)->getElasticSearchFields(array('name', 'kbdocument_body'));
+        $ftsFields = ApiHelper::getHelper($api, $targetBean)->getElasticSearchFields(['name', 'kbdocument_body']);
 
         //set the query using more_like_this query
         $query = new KBQuery();
@@ -107,7 +106,7 @@ class KBContentsApi extends SugarListApi
 
         $resultSet = $builder->executeSearch();
 
-        $returnedRecords = array();
+        $returnedRecords = [];
 
         foreach ($resultSet as $result) {
             $record = BeanFactory::retrieveBean($result->getType(), $result->getId());
@@ -125,7 +124,7 @@ class KBContentsApi extends SugarListApi
             $nextOffset = -1;
         }
 
-        return array('next_offset' => $nextOffset, 'records' => $returnedRecords);
+        return ['next_offset' => $nextOffset, 'records' => $returnedRecords];
     }
 
     /**
@@ -142,7 +141,7 @@ class KBContentsApi extends SugarListApi
         $builder = new QueryBuilder($engineContainer);
         $builder
             ->setUser($current_user)
-            ->setModules(array($args['module']))
+            ->setModules([$args['module']])
             ->setOffset($options['offset'])
             ->setLimit($options['limit']);
 
@@ -157,6 +156,6 @@ class KBContentsApi extends SugarListApi
      */
     public function disableApi(ServiceBase $api, array $args)
     {
-        throw new SugarApiExceptionNotFound("The requested module is disabled in API.");
+        throw new SugarApiExceptionNotFound('The requested module is disabled in API.');
     }
 }

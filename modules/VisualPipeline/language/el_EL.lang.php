@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Εμφάνιση πλακιδίου',
     'LBL_MODULE_NAME_SINGULAR' => 'Εμφάνιση πλακιδίου',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'Εμφάνιση πλακιδίου',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => 'Ενεργοποιημένες Ενότητες',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'Προβολή Ενότητες σε Πλακίδια',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'Ρυθμίσεις ενότητας',
-    'LBL_PIPELINE_TABLE_HEADER' => "Επιλέξτε το πεδίο του οποίου οι τιμές θα χρησιμοποιηθούν ως στήλες",
+    'LBL_PIPELINE_TABLE_HEADER' => 'Επιλέξτε το πεδίο του οποίου οι τιμές θα χρησιμοποιηθούν ως στήλες',
     'LBL_PIPELINE_TILE_HEADER' => 'Πεδίο Επικεφαλίδας Πλακιδίου',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => 'Διαθέσιμες Στήλες',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => 'Πεδία Σώματος Πλακιδίου',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'Προιεπισκόπιση πλακιδίου',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'Πολλά πεδία στο πλακίδιο.',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => 'Παρακαλώ επιλύστε τα σφάλματα στις παρακάτω καρτέλες ρυθμίσεων λειτουργικών μονάδων πριν προχωρήσετε:<br><br>',
-);
+    'LBL_MODULE_SELECTION' => 'Επιλέξτε τη μονάδα που θέλετε να δείτε και να διαμορφώσετε παρακάτω',
+    'LBL_SHOW_COLUMN_COUNT' => 'Εμφάνιση πλήθους στηλών',
+    'LBL_SHOW_COLUMN_TOTAL' => 'Εμφάνιση συνόλου στηλών',
+    'LBL_TOTAL_FIELD' => 'Πεδίο συνόλου',
+];

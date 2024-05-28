@@ -35,23 +35,39 @@
         // if we don't render it.
         this.before('render', function() {
             if (self.hasAccess() && !self.isOnForbiddenLayout()) {
+                this._accessPrevented = false;
                 this._show();
                 return true;
             }
             else {
+                this._accessPrevented = true;
                 this.hide();
                 return false;
+            }
+        });
+
+        // A user may not have general access to a module, but may have access
+        // to a specific record of the module. Because of that, we need to
+        // re-check for access after the model and its ACL data is loaded
+        this.listenTo(this.model, 'sync', function() {
+            if (this._accessPrevented && this.hasAccess()) {
+                this.render();
+                this.view.trigger('button:access:rendered', this);
             }
         });
     },
     _render:function() {
         this.fullRoute = _.isString(this.def.route) ? this.def.route : null;
+        this.openWindow = this.def.openWindow === true;
+        this.externalRoute = this.def.externalRoute === true;
         this.ariaLabel = null;
         if (!this.label || this.label.trim() === '') {
             if (this.def.tooltip) {
                 this.ariaLabel = app.lang.get(this.def.tooltip, this.module);
             } else {
-                this.ariaLabel = _.isString(this.def.icon) ? this.def.icon.replace(/^fa-(.*)/, '$1').replace(/-o(-)|-o$/, ' outline$1').replace('-', ' ') : null;
+                this.ariaLabel = _.isString(this.def.icon) ?
+                    this.def.icon.replace(/^sicon-(.*)/, '$1').replace('-', ' ') :
+                    null;
             }
         }
 
@@ -109,6 +125,16 @@
             evt.preventDefault();
             evt.stopImmediatePropagation();
             return false;
+        }
+
+        const alertData = this.def.alertOnClick;
+
+        // show alert if we have alert config setup
+        if (alertData) {
+            app.alert.show(alertData.id || 'button_alert_on_click', {
+                level: alertData.level || 'info',
+                messages: alertData.messages || ''
+            });
         }
     },
 
@@ -190,25 +216,43 @@
      */
     hasAccess: function() {
         // buttons use the acl_action and acl_module properties in metadata to denote their action for acls
-        var acl_module = this.def.acl_module,
-            acl_action = this.def.acl_action;
+        const aclModule = this.def.acl_module;
+        const aclAction = this.def.acl_action;
+        const isTemplate = this.model ? this.model.get('is_template') : false;
+
+        const targetModule = this.model ? (this.model.get('_module') || this.module) : this.module;
+        const moduleData = app.metadata.getModule(targetModule) || {};
+        const templateSpecificActions = moduleData.templateSpecificActions || [];
 
         // Need to test BWC status
         if (_.isBoolean(this.def.allow_bwc) && !this.def.allow_bwc) {
             app.logger.warn('The "allow_bwc" property has been deprecated since 7.9, and will be removed in 7.10.');
 
-            var isBwc = app.metadata.getModule(acl_module || this.module).isBwcEnabled;
+            var isBwc = app.metadata.getModule(aclModule || targetModule).isBwcEnabled;
             if (isBwc) {
                 // Action not allowed for BWC module
                 return false;
             }
         }
 
+        if (!isTemplate && templateSpecificActions.indexOf(aclAction) > -1) {
+            return false;
+        }
+
+        if (isTemplate) {
+            const restrictedActions = moduleData.templateRestrictedActions || [];
+
+            if (restrictedActions.indexOf(aclAction) > -1 &&
+                (_.isUndefined(aclModule) || aclModule === targetModule)) {
+                return false;
+            }
+        }
+
         // Finally check ACLs
-        if (!acl_module) {
-            return app.acl.hasAccessToModel(acl_action, this.model, this);
+        if (!aclModule) {
+            return app.acl.hasAccessToModel(aclAction, this.model, this);
         } else {
-            return app.acl.hasAccess(acl_action, acl_module);
+            return app.acl.hasAccess(aclAction, aclModule);
         }
     },
 
@@ -280,5 +324,13 @@
         }
         // Return true for record view, where we do not filter anything out
         return true;
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        this._super('_dispose');
+        this.stopListening();
     }
 })

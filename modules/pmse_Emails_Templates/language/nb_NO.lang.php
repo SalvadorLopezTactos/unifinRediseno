@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Brødtekst:',
     'LBL_BASE_MODULE' => 'Mål Modul',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Kunne ikke opprette mal for prosses-e-post fra filen',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'E-postmalen brukes for øyeblikket i en prosessdefinisjon. Vil du fortsatt redigere denne e-postmalen?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Du kan ikke slette e-postmalen fordi den for øyeblikket brukes i en prosessdefinisjon.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Du kan ikke slette e-postmalen fordi den for øyeblikket brukes i en prosessdefinisjon.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Feltvelter',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Velg',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Feltverditype',
-);
+];

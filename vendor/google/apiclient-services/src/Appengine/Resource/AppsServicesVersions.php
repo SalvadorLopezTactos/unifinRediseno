@@ -26,7 +26,7 @@ use Google\Service\Appengine\Version;
  * Typical usage is:
  *  <code>
  *   $appengineService = new Google\Service\Appengine(...);
- *   $versions = $appengineService->versions;
+ *   $versions = $appengineService->apps_services_versions;
  *  </code>
  */
 class AppsServicesVersions extends \Google\Service\Resource
@@ -114,9 +114,10 @@ class AppsServicesVersions extends \Google\Service\Resource
    * standard environment: automatic_scaling.min_idle_instances
    * (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.ser
    * vices.versions#Version.FIELDS.automatic_scaling)
-   * automatic_scaling.max_idle_instances (https://cloud.google.com/appengine/docs
-   * /admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_
-   * scaling) automaticScaling.standard_scheduler_settings.max_instances
+   * automatic_scaling.max_idle_instances
+   * (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.ser
+   * vices.versions#Version.FIELDS.automatic_scaling)
+   * automaticScaling.standard_scheduler_settings.max_instances
    * (https://cloud.google.com/appengine/docs/admin-
    * api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings)
    * automaticScaling.standard_scheduler_settings.min_instances

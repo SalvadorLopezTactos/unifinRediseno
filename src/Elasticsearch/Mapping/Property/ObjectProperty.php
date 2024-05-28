@@ -42,7 +42,7 @@ class ObjectProperty extends RawProperty implements PropertyInterface
      * Object mapping properties
      * @var PropertyInterface[]
      */
-    protected $properties = array();
+    protected $properties = [];
 
     /**
      * include_in_all
@@ -58,11 +58,11 @@ class ObjectProperty extends RawProperty implements PropertyInterface
     {
         $mapping = array_merge(
             $this->mapping,
-            array(
+            [
                 'type' => $this->type,
                 'dynamic' => $this->dynamic,
                 'enabled' => $this->enabled,
-            )
+            ]
         );
 
         // Only add properties if any are set

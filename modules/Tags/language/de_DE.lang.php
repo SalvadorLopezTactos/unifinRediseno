@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tags',
     'LBL_GENERIC_LINK' => 'Verbundene Objekte',
     'LBL_NAME_LOWER' => 'Tag-Name in Kleinbuchstaben',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'Meine Tags',
     'LBL_MY_FAVORITE_TAGS' => 'Meine bevorzugten Tags',
     'LBL_MORE_TAGS' => '{{tagsNumber}} Tags',
-);
+];

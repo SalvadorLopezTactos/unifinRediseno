@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'โปรแกรมเก็บข้อมูลถาวร',
     'LBL_MODULE_NAME' => 'โปรแกรมเก็บข้อมูลถาวร',
     'LBL_FILTER_DEF_FIELD' => 'ตัวกรอง',
@@ -28,7 +27,7 @@ $mod_strings = array (
     'LBL_MANAGE_ARCHIVE_JOB_LIST_TITLE' => 'การจัดเก็บถาวรที่กำหนดเวลาไว้',
     'LBL_MANAGE_ARCHIVE_JOB_IS_NOT_SCHEDULED' => 'ไม่มีการจัดเก็บถาวรที่กำหนดเวลาไว้',
     'LBL_ARCHIVE_FILTER' => 'การตั้งค่าตัวกรอง',
-    "LBL_MANAGE_ARCHIVE_SETUP" => 'ติดตั้งข้อมูลจัดเก็บถาวร',
+    'LBL_MANAGE_ARCHIVE_SETUP' => 'ติดตั้งข้อมูลจัดเก็บถาวร',
     'LBL_LIST_ARCHIVE_NAME' => 'ชื่อจัดเก็บถาวร',
     'LBL_PERFORM_NOW_BTN' => 'ดำเนินการตอนนี้',
     'LBL_ARCHIVE_SUCCESS_TITLE' => 'สำเร็จ',
@@ -45,4 +44,4 @@ $mod_strings = array (
         . 'เนื่องด้วยมันอาจจะมีผลกระทบต่อประสิทธิภาพระบบ คุณแน่ใจหรือไม่ว่าต้องการดำเนินการตอนนี้',
 
     'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'ตัวจัดเก็บของโมดูล {{moduleName}} จะต้องมี {{fieldName}} ตั้งค่าไว้ในตัวกรอง',
-);
+];

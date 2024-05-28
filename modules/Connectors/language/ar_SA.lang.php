@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'إضافة',
     'LBL_ADDRCITY' => 'المدينة',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'معلومات' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'إغلاق' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'لم يتم العثور على موصل لمعرف المصدر المعطى.',
-);
-
+];

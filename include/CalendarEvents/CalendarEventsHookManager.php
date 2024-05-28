@@ -16,14 +16,14 @@
  */
 class CalendarEventsHookManager
 {
-    protected $inviteeRelationships = array(
+    protected $inviteeRelationships = [
         'meetings_users' => true,
         'meetings_contacts' => true,
         'meetings_leads' => true,
         'calls_users' => true,
         'calls_contacts' => true,
         'calls_leads' => true,
-    );
+    ];
 
     /**
      * @deprecated Since 7.8

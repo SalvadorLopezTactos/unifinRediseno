@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'عرض عمليات التصعيد',
     'LBL_LIST_RELATED_TO_ID' => 'مرتبط بمعرف',
     'LNK_IMPORT_ESCALATIONS' => 'استيراد عمليات التصعيد',
-    
+
     'LBL_LIST_SUBJECT' => 'الموضوع',
     'LBL_LIST_NUMBER' => 'رقم.',
     'LBL_LIST_RELATED_TO_TYPE' => 'النوع ذو الصلة',

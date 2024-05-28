@@ -20,7 +20,7 @@
                     class="{{#if this.widthClass}}{{this.widthClass}}{{/if}} {{#isSortable ../../module this}}sorting{{#eq ../../../orderBy.field name}}_{{{../../../../orderBy.direction}}}{{/eq}} orderBy{{name}}{{/isSortable}}"
                     {{#if name}} data-fieldname="{{name}}"{{/if}}
                     data-orderby="{{orderBy}}">
-                    <span>
+                    <span class="px-2 py-1">
                         {{str label ../../module}}
                     </span>
                 </th>

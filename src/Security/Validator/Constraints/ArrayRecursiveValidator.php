@@ -30,7 +30,7 @@ class ArrayRecursiveValidator extends AllValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof ArrayRecursive) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\ArrayRecursive');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\ArrayRecursive');
         }
 
         if (null === $value || '' === $value) {

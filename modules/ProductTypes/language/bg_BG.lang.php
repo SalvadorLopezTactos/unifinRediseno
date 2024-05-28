@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Типове продукти',
     'LBL_MODULE_NAME_SINGULAR' => 'Тип на продукт',
     'LBL_MODULE_TITLE' => 'Типове продукти',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Сигурни ли сте, че желаете да изтриете този запис?',
     'ERR_DELETE_RECORD' => 'Трябва да определите номер на записа, за да изтриете този тип продукт.',
     'NTC_LIST_ORDER' => 'Определете поредността на типа в списъка с типове продукти',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Импортиране на типове продукти',
-    'LBL_CREATED_BY'=>'Създадено от',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Импортиране на типове продукти',
+    'LBL_CREATED_BY' => 'Създадено от',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Отговорник',
-    'LBL_EXPORT_CREATED_BY'=>'Създаден от',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Импортиране на категории продукти',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Отговорник',
+    'LBL_EXPORT_CREATED_BY' => 'Създаден от',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Импортиране на категории продукти',
+];

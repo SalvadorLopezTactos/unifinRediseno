@@ -175,7 +175,7 @@
         try {
             var self = this;
             // Load the connect-streams library and initialize the CCP
-            $.getScript('include/javascript/amazon-connect/amazon-connect-streams-1.6.9.js', function() {
+            $.getScript('include/javascript/amazon-connect/amazon-connect-streams.js', function() {
                 // Load chat library here, must be loaded after connect-streams
                 $.getScript('include/javascript/amazon-connect/amazon-connect-chat.js', function() {
                     self.libraryLoaded = true;

@@ -31,22 +31,22 @@ class SugarHttpClient
      * @param array $curlOpts cURL options
      * @return string|boolean
      */
-    public function callRest($url, $postArgs, array $curlOpts = array())
+    public function callRest($url, $postArgs, array $curlOpts = [])
     {
         // cURL extension is required
-        if (!function_exists("curl_init")) {
+        if (!function_exists('curl_init')) {
             $this->last_error = 'ERROR_NO_CURL';
-            $GLOBALS['log']->fatal("REST call failed - no cURL!");
+            $GLOBALS['log']->fatal('REST call failed - no cURL!');
             return false;
         }
 
         $curl = curl_init($url);
 
         // cURL post options
-        $postOpts = array(
+        $postOpts = [
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS => $postArgs,
-        );
+        ];
 
         // Merge defaults, override and post options together
         $curlOpts = $postOpts + $this->getCurlOpts($curlOpts);
@@ -88,15 +88,15 @@ class SugarHttpClient
      * @param array $opts List op cURL options to add or override the defauls
      * @return array
      */
-    protected function getCurlOpts(array $opts = array())
+    protected function getCurlOpts(array $opts = [])
     {
-        $default = array(
+        $default = [
             CURLOPT_HEADER => false,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => 10,
             CURLOPT_SSL_VERIFYPEER => true,
             CURLOPT_SSL_VERIFYHOST => 2,
-        );
+        ];
         return $opts + $default;
     }
 }

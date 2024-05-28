@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => '记录电话',
     'LNK_NEW_MEETING' => '调度会议',
     'LNK_NEW_TASK' => '创建任务',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => '扩展元字段 2',
     'COLUMN_TITLE_EXT3' => '扩展元字段 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => '浮动框架高度',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => '默认URL',
     'COLUMN_TITLE_AUDIT' => '审核',
     'COLUMN_TITLE_PII' => '个人信息',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => '默认值',
     'LBL_AUDITED' => '审核',
     'LBL_REPORTABLE' => '可报告的',
-    'ERR_RESERVED_FIELD_NAME' => "保留关键字",
+    'ERR_RESERVED_FIELD_NAME' => '保留关键字',
     'ERR_SELECT_FIELD_TYPE' => '请选择字段类型',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => '字段名已经存在',
     'ERR_FIELD_NAME_NON_DB_CHARS' => '字段名只能使用下列字符：a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => '完成',
     'LBL_EXE_NON_SIM_MODE' => '执行非仿真模式',
     'LBL_CALCULATION_VISIBLE' => '使其可见以用于计算',
-);
+];

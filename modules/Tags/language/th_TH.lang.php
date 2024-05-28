@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'แท็ก',
     'LBL_GENERIC_LINK' => 'ออบเจกต์ที่เกี่ยวข้อง',
     'LBL_NAME_LOWER' => 'ชื่อแท็กตัวพิมพ์เล็ก',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'แท็กของฉัน',
     'LBL_MY_FAVORITE_TAGS' => 'แท็กโปรดของฉัน',
     'LBL_MORE_TAGS' => '{{tagsNumber}} แท็ก',
-);
+];

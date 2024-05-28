@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Denne signaturen krever et navn.',
     'LBL_DEFAULT_SIGNATURE' => 'Standard',
     'LBL_MODULE_NAME' => 'E-postsignaturer',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'Bruk signatur?',
     'LBL_SIGNATURE_PREPEND' => 'Signatur over svar?',
     'LBL_SIGNATURES' => 'Signaturer',
-);
+];

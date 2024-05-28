@@ -10,12 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class ListViewPackages extends ListViewSmarty{
-    var $secondaryDisplayColumns;
+class ListViewPackages extends ListViewSmarty
+{
+    public $secondaryDisplayColumns;
 
     /**
      * Override the setup method in ListViewSmarty since we are not passing in a bean
-     * 
+     *
      * @param data  the data to display on the page
      * @param file  the template file to parse
      */
@@ -23,27 +24,27 @@ class ListViewPackages extends ListViewSmarty{
         $data,
         $file = '',
         $where = '',
-        $params = array(),
+        $params = [],
         $offset = 0,
         $limit = -1,
-        $filter_fields = array(),
+        $filter_fields = [],
         $id_field = 'id'
     ) {
         $this->data = $data;
-        $this->tpl = $file;       
+        $this->tpl = $file;
     }
-    
+
     /**
      * Override the display method
      */
     public function display($end = true)
     {
         global $odd_bg, $even_bg, $app_strings;
-        $this->ss->assign('rowColor', array('oddListRow', 'evenListRow'));
-        $this->ss->assign('bgColor', array($odd_bg, $even_bg));
+        $this->ss->assign('rowColor', ['oddListRow', 'evenListRow']);
+        $this->ss->assign('bgColor', [$odd_bg, $even_bg]);
         $this->ss->assign('displayColumns', $this->displayColumns);
         $this->ss->assign('secondaryDisplayColumns', $this->secondaryDisplayColumns);
-        $this->ss->assign('data', $this->data); 
-        return $this->ss->fetch($this->tpl);  
-    }  
+        $this->ss->assign('data', $this->data);
+        return $this->ss->fetch($this->tpl);
+    }
 }

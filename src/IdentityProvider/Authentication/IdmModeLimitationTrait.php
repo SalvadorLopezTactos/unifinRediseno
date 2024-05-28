@@ -37,7 +37,8 @@ trait IdmModeLimitationTrait
         // UserType field is handled separately in UserViewHelper and MassUpdate
         // and to set idm_mode_disabled=>true for it we need to change code in UserViewHelper and MassUpdate.
         return $this->isLimitedForModuleInIdmMode($module) &&
-            ( $fieldDefs['name'] === 'UserType' ||
+            (
+                $fieldDefs['name'] === 'UserType' ||
                 (!empty($fieldDefs['idm_mode_disabled']) &&
                     ($fieldDefs['name'] !== 'license_type' ||
                         ($fieldDefs['name'] === 'license_type' && $this->getUserLicenseTypeIdmModeLock())))
@@ -58,6 +59,6 @@ trait IdmModeLimitationTrait
      */
     protected function getUserLicenseTypeIdmModeLock(): bool
     {
-        return  $this->getIdpConfig()->getUserLicenseTypeIdmModeLock();
+        return $this->getIdpConfig()->getUserLicenseTypeIdmModeLock();
     }
 }

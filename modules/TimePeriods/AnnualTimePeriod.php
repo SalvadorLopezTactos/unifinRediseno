@@ -14,9 +14,10 @@
  * Implements the annual representation of a time period
  * @api
  */
-class AnnualTimePeriod extends TimePeriod implements TimePeriodInterface {
-
-    public function __construct() {
+class AnnualTimePeriod extends TimePeriod implements TimePeriodInterface
+{
+    public function __construct()
+    {
         parent::__construct();
 
         //The time period type
@@ -63,12 +64,12 @@ class AnnualTimePeriod extends TimePeriod implements TimePeriodInterface {
         $timedate = TimeDate::getInstance();
         $year = $timedate->fromDbDate($this->start_date);
 
-        if(isset($this->currentSettings['timeperiod_fiscal_year']) &&
+        if (isset($this->currentSettings['timeperiod_fiscal_year']) &&
             $this->currentSettings['timeperiod_fiscal_year'] == 'next_year') {
             $year->modify('+1 year');
         }
 
-        return string_format($this->name_template, array($year->format('Y')));
+        return string_format($this->name_template, [$year->format('Y')]);
     }
 
 
@@ -78,8 +79,9 @@ class AnnualTimePeriod extends TimePeriod implements TimePeriodInterface {
      * @param $chartData Array of chart data values
      * @return formatted Array of chart data values where the labels are broken down by the timeperiod's increments
      */
-    public function getChartLabels($chartData) {
-        $months = array();
+    public function getChartLabels($chartData)
+    {
+        $months = [];
 
         $start = strtotime($this->start_date);
         $end = strtotime($this->end_date);
@@ -101,8 +103,8 @@ class AnnualTimePeriod extends TimePeriod implements TimePeriodInterface {
      * @param String The date_closed value in db date format
      * @return String value of the key to use to map to the chart labels
      */
-    public function getChartLabelsKey($dateClosed) {
+    public function getChartLabelsKey($dateClosed)
+    {
         return date('Y', strtotime($dateClosed));
     }
-
 }

@@ -13,7 +13,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FEEDBACK_TEXT_PLACEHOLDER' => 'Tagasiside kirjeldus',
     'LBL_FEEDBACK_BTN_SUBMIT' => 'Saada',
     'LBL_FEEDBACK_SENT' => 'Tagasiside saadetud.',
@@ -23,4 +23,4 @@ $mod_strings = array(
     'TPL_FEEDBACK_ASIDE' => 'Kogume esitamisel teatud kasutusandmeid. {{learnMoreLink}}. Me ei kogu kontaktteavet. Vastust vajavate vigade või muude probleemide korral vt: {{contactSupportLink}}.',
     'LBL_FEEDBACK_ASIDE_CLICK_MORE' => 'Lisateabe saamiseks klõpsake siin',
     'LBL_FEEDBACK_ASIDE_CONTACT_SUPPORT' => 'võtke ühendust toega',
-);
+];

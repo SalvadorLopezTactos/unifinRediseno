@@ -14,10 +14,10 @@
  * Define the after_save hook that will generate a renewal opportunity
  * when an opportunity containing services is closed won
  */
-$hook_array['after_save'][] = array(
+$hook_array['after_save'][] = [
     1,
     'generateRenewalOpportunity',
     'modules/Opportunities/OpportunityHooks.php',
     'OpportunityHooks',
     'generateRenewalOpportunity',
-);
+];

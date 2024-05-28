@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_SALUTATION' => 'Hitap',
     'LBL_NAME' => 'İsim',
     'LBL_FIRST_NAME' => 'İsim',
@@ -68,4 +68,4 @@ $mod_strings = array(
     'LBL_GOOGLEPLUS' => 'Google Plus ID',
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Alternatif adresi birincil adrese kopyala',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Birincil adresi alternatif adrese kopyala',
-);
+];

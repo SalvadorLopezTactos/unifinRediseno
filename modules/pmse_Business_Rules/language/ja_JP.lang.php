@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'プロセスビジネスルール',
-  'LBL_MODULE_TITLE' => 'プロセスビジネスルール',
-  'LBL_MODULE_NAME_SINGULAR' => 'プロセスビジネス定義',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'プロセスビジネスルール',
+    'LBL_MODULE_TITLE' => 'プロセスビジネスルール',
+    'LBL_MODULE_NAME_SINGULAR' => 'プロセスビジネス定義',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'プロセス ビジネスルール フォーカス ドロワ',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'プロセス ビジネスルール フォーカス ドロワ',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'ビジネスルールの処理レコードダッシュボード',
-  'LBL_RST_UID' => 'ビジネスルールID',
-  'LBL_RST_TYPE' => 'ビジネスルールタイプ',
-  'LBL_RST_DEFINITION' => 'ビジネスルール定義',
-  'LBL_RST_EDITABLE' => 'ビジネスルール編集可',
-  'LBL_RST_SOURCE' => 'ビジネスルールソース',
-  'LBL_RST_SOURCE_DEFINITION' => 'ビジネスルールソース定義',
-  'LBL_RST_MODULE' => '対象モジュール',
-  'LBL_RST_FILENAME' => 'ビジネスルールファイル名',
-  'LBL_RST_CREATE_DATE' => 'ビジネスルール作成日',
-  'LBL_RST_UPDATE_DATE' => 'ビジネスルール更新日',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'ビジネスルールの処理レコードダッシュボード',
+    'LBL_RST_UID' => 'ビジネスルールID',
+    'LBL_RST_TYPE' => 'ビジネスルールタイプ',
+    'LBL_RST_DEFINITION' => 'ビジネスルール定義',
+    'LBL_RST_EDITABLE' => 'ビジネスルール編集可',
+    'LBL_RST_SOURCE' => 'ビジネスルールソース',
+    'LBL_RST_SOURCE_DEFINITION' => 'ビジネスルールソース定義',
+    'LBL_RST_MODULE' => '対象モジュール',
+    'LBL_RST_FILENAME' => 'ビジネスルールファイル名',
+    'LBL_RST_CREATE_DATE' => 'ビジネスルール作成日',
+    'LBL_RST_UPDATE_DATE' => 'ビジネスルール更新日',
 
     'LNK_LIST' => 'ビジネスルール閲覧',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'プロセスビジネスルールを作成',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => '無効なフィールドまたは SugarCRM のインスタンスで発見されていないフィールドを使用しているため、このビジネスルールは無効です。下記のエラーを修正し、ビジネスルールを保存してください。',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'このビジネスルールはプロセス定義により現在使用中です。それでもこのビジネスルールを編集しますか？',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "このビジネスルールは現在プロセス定義により使用中のため削除できません。",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'このビジネスルールは現在プロセス定義により使用中のため削除できません。',
+];

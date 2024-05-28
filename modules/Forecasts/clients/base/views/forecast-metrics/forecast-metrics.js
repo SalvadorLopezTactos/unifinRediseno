@@ -192,7 +192,7 @@
      * Show/Hide metric item SVG-loader
      */
     toggleLoader: function(show) {
-        this.$el.find('.forecast-metric').toggleClass('forecasts-loader', show);
+        this.$el.find('.forecast-metric').toggleClass('metric-skeleton-loader', show);
     },
 
     /**

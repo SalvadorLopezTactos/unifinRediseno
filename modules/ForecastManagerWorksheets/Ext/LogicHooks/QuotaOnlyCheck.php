@@ -12,10 +12,10 @@
 
 
 // Full text search.
-$hook_array['before_save'][] = array(
+$hook_array['before_save'][] = [
     1,
     'manager_worksheet_quota_only_save',
     'modules/ForecastManagerWorksheets/ForecastManagerWorksheetHooks.php',
     'ForecastManagerWorksheetHooks',
-    'draftRecordQuotaOnlyCheck'
-);
+    'draftRecordQuotaOnlyCheck',
+];

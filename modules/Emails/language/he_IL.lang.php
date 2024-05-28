@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'הודעה שהועברה:',
     'LBL_RE' => 'Re:',
     'LBL_BUTTON_CREATE' => 'צור',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'בחר מתוך חשבון מייל',
     'LBL_SELECT_SIGNATURE_TITLE' => 'בחר חתימה',
     'LBL_SIGNATURE' => 'חתימה',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "חתימת ברירת מחדל",
-    "LBL_SHOW_MORE_SIGNATURES" => "חתימות נוספות...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'חתימת ברירת מחדל',
+    'LBL_SHOW_MORE_SIGNATURES' => 'חתימות נוספות...',
     'LBL_SUBJECT' => 'נושא:',
     'LBL_TEMPLATE' => 'תבנית',
     'LBL_TEXT_BODY' => 'גוף ההודעה',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'זמן שליחה',
     'LBL_LIST_TO_ADDR' => 'אל',
     'LBL_LIST_TYPE' => 'סוג',
-    "LBL_SELECTED_RECIPIENTS" => "נמענים שנבחרו",
-    "LBL_SHOW_MORE_RECIPIENTS" => "נמענים נוספים",
-    "LBL_COMPOSE_ADDRESSBOOK" => "ספר כתובות",
+    'LBL_SELECTED_RECIPIENTS' => 'נמענים שנבחרו',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'נמענים נוספים',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'ספר כתובות',
     'NTC_REMOVE_INVITEE' => 'האם אתה בטוח שברצונך להסיר נמען זה מהודעת הדוא"ל?',
     'WARNING_SETTINGS_NOT_CONF' => 'הגדרות הדוא&#39;&#39;ל שלך לא מוגדרים באופן נכון ולכן אין ביכולתך לשלוח דוא&#39;&#39;ל. צרופות שרת SMTP ' .
         '. יש לקבוע את התצורה ב-<a href="#bwc/index.php?module=EmailMan&action=config">הגדרות הדוא"ל</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'ייכשלו: נמצא ערך לא מתאים או לא יציב עבור "upload_tmp_dir".' .
         'נא תקן את זה בקובץ php.ini שלך.',
     'LBL_MESSAGE_UID' => 'הודעה UID',
-    'LBL_OPEN_DRAFT_ALERT' => 'דוא"ל זה הוא טיוטה. לחץ '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'דוא"ל זה הוא טיוטה. לחץ ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  לעריכה.',
     'LBL_EMAIL_BODY' => 'הודעת דואר אלקטרוני',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס דוא"ל',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות דוא"ל',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן של דואר אלקטרוני',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'לא צויינו נמענים',
@@ -475,4 +476,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'שלח דוא&#39;ל',
     'LBL_MAILBOX' => 'חשבון נכנס',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'כדי לשלוח דוא"ל, יש להגדיר חשבון דוא"ל יוצא ב<a href="#OutboundEmail">הגדרות דוא"ל</a>.',
-);
+    'LBL_TOO_SHORT' => 'הקלד לפחות {0} תווים...',
+];

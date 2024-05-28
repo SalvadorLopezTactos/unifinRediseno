@@ -15,7 +15,7 @@
  */
 ({
     events: {
-        'click .tab-badgeable > a[name=pipelineBtn]': 'changePipeline',
+        'click a[name=pipelineBtn]': 'changePipeline',
     },
 
     /**
@@ -54,6 +54,7 @@
         }
 
         this.$('.tab.active').removeClass('active');
+        $('.close-drawer button').trigger('click');
         $currentTarget.addClass('active');
         var pipelineType = $currentTarget.data('pipeline');
 
@@ -63,7 +64,7 @@
         this.context.get('model').set('pipeline_type', pipelineType);
 
         // apply filter
-        var filterPanel = this.layout.getComponent('filterpanel');
+        let filterPanel = this.layout.getComponent('pipeline-filterpanel');
         if (filterPanel) {
             filterPanel.trigger('filter:apply');
         }

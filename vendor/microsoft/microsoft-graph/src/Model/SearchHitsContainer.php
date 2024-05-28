@@ -25,6 +25,37 @@ class SearchHitsContainer extends Entity
 {
 
     /**
+    * Gets the aggregations
+    *
+    * @return SearchAggregation|null The aggregations
+    */
+    public function getAggregations()
+    {
+        if (array_key_exists("aggregations", $this->_propDict)) {
+            if (is_a($this->_propDict["aggregations"], "\Microsoft\Graph\Model\SearchAggregation") || is_null($this->_propDict["aggregations"])) {
+                return $this->_propDict["aggregations"];
+            } else {
+                $this->_propDict["aggregations"] = new SearchAggregation($this->_propDict["aggregations"]);
+                return $this->_propDict["aggregations"];
+            }
+        }
+        return null;
+    }
+
+    /**
+    * Sets the aggregations
+    *
+    * @param SearchAggregation $val The value to assign to the aggregations
+    *
+    * @return SearchHitsContainer The SearchHitsContainer
+    */
+    public function setAggregations($val)
+    {
+        $this->_propDict["aggregations"] = $val;
+         return $this;
+    }
+
+    /**
     * Gets the hits
     * A collection of the search results.
     *

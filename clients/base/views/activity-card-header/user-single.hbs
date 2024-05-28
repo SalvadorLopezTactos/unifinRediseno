@@ -11,5 +11,24 @@
  */
 --}}
 {{#with view}}
-    {{partial 'user' this view=this userField=userField model=activity}}
+    {{#if usersPanelBefore}}
+        {{#each ../usersPanelBefore.fields}}
+            {{field ../../this model=../../activity}}
+        {{/each}}
+    {{/if}}
+
+    <div class="panel-user-single flex">
+        {{#if usersPanel.label}}
+            {{#if userField}}
+                <div class="activity-label">{{str usersPanel.label}}</div>
+            {{/if}}
+        {{/if}}
+        {{partial 'user' this view=this userField=userField model=activity}}
+    </div>
+
+    {{#if usersPanelAfter}}
+        {{#each ../usersPanelAfter.fields}}
+            {{field ../../this model=../../activity}}
+        {{/each}}
+    {{/if}}
 {{/with}}

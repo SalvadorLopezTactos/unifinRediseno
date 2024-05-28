@@ -25,7 +25,7 @@ class ViewIterator
     /**
      * @var array Field definitions of the module
      */
-    protected $fieldDefs = array();
+    protected $fieldDefs = [];
 
     /**
      * Constructor
@@ -49,7 +49,7 @@ class ViewIterator
     {
         foreach ($fieldSet as $field) {
             if (is_string($field)) {
-                $field = array('name' => $field);
+                $field = ['name' => $field];
             }
 
             if (is_array($field)) {

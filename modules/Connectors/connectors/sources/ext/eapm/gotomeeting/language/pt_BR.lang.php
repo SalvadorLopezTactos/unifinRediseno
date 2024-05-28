@@ -11,9 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' =>
-'<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
+        '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
 Registre um novo aplicativo GoToMeeting para receber uma chave de cliente do LogMeIn.<br>
 &nbsp;<br>
 Etapas para registrar suas instância:<br>
@@ -36,4 +36,4 @@ Etapas para registrar suas instância:<br>
 </ol>
 </td></tr></table>',
     'oauth_consumer_key' => 'Chave do consumidor',
-);
+];

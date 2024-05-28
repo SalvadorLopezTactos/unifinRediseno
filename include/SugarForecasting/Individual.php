@@ -17,18 +17,18 @@ class SugarForecasting_Individual extends SugarForecasting_AbstractForecast impl
      *
      * @var array
      */
-    protected $dataArray = array();
+    protected $dataArray = [];
 
     /**
      * Run all the tasks we need to process get the data back
      *
-     * @deprecated
-     * @see ForecastWorksheetsFilterApi
      * @return array|string
+     * @see ForecastWorksheetsFilterApi
+     * @deprecated
      */
     public function process()
     {
-        return array();
+        return [];
     }
 
 
@@ -51,28 +51,28 @@ class SugarForecasting_Individual extends SugarForecasting_AbstractForecast impl
     public function save()
     {
         /* @var $seed ForecastWorksheet */
-        $seed = BeanFactory::newBean("ForecastWorksheets");
+        $seed = BeanFactory::newBean('ForecastWorksheets');
         $seed->loadFromRow($this->args);
         $sfh = new SugarFieldHandler();
 
         foreach ($seed->field_defs as $properties) {
             $fieldName = $properties['name'];
 
-            if(!isset($this->args[$fieldName])) {
-               continue;
+            if (!isset($this->args[$fieldName])) {
+                continue;
             }
 
-            if (!$seed->ACLFieldAccess($fieldName,'save') ) {
+            if (!$seed->ACLFieldAccess($fieldName, 'save')) {
                 // No write access to this field, but they tried to edit it
                 global $app_strings;
-                throw new SugarApiException(string_format($app_strings['SUGAR_API_EXCEPTION_NOT_AUTHORIZED'], array($fieldName, $this->args['module'])));
+                throw new SugarApiException(string_format($app_strings['SUGAR_API_EXCEPTION_NOT_AUTHORIZED'], [$fieldName, $this->args['module']]));
             }
 
             $type = !empty($properties['custom_type']) ? $properties['custom_type'] : $properties['type'];
             $field = $sfh->getSugarField($type);
 
-            if(!is_null($field)) {
-               $field->save($seed, $this->args, $fieldName, $properties);
+            if (!is_null($field)) {
+                $field->save($seed, $this->args, $fieldName, $properties);
             }
         }
 
@@ -83,7 +83,7 @@ class SugarForecasting_Individual extends SugarForecasting_AbstractForecast impl
         $seed->saveWorksheet();
 
         // we have the id, just retrieve the record again
-        $seed = BeanFactory::getBean("ForecastWorksheets", $this->getArg('record'));
+        $seed = BeanFactory::getBean('ForecastWorksheets', $this->getArg('record'));
 
         return $seed;
     }

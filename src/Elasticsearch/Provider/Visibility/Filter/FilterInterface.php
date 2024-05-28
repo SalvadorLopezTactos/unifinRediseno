@@ -32,5 +32,5 @@ interface FilterInterface
      * @param array $options
      * @return \Elastica\Query\AbstractQuery
      */
-    public function buildFilter(array $options = array());
+    public function buildFilter(array $options = []);
 }

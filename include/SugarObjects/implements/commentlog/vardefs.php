@@ -10,51 +10,52 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$vardefs = array(
-    'fields' => array(
-        'commentlog' =>  array(
+$vardefs = [
+    'fields' => [
+        'commentlog' => [
             'name' => 'commentlog',
             'vname' => 'LBL_COMMENTLOG',
             'type' => 'collection',
-            'displayParams' => array(
+            'displayParams' => [
                 'type' => 'commentlog',
-                'fields' => array(
+                'fields' => [
                     'entry',
                     'date_entered',
                     'created_by_name',
-                ),
+                ],
                 'max_num' => 100,
-            ),
-            'links' => array('commentlog_link'),
+            ],
+            'links' => ['commentlog_link'],
             'order_by' => 'date_entered:asc',
             'source' => 'non-db',
             'module' => 'CommentLog',
-            'studio' => array(
+            'studio' => [
                 'listview' => false,
                 'recordview' => true,
+                'previewview' => true,
                 'wirelesseditview' => false,
                 'wirelessdetailview' => true,
                 'wirelesslistview' => false,
                 'wireless_basic_search' => false,
                 'wireless_advanced_search' => false,
-            ),
-            'full_text_search' => array(
+            ],
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => true,
-            ),
-        ),
-        'commentlog_link' => array(
+            ],
+        ],
+        'commentlog_link' => [
             'name' => 'commentlog_link',
             'type' => 'link',
             'vname' => 'LBL_COMMENTLOG_LINK',
-            'relationship' => strtolower($module).'_commentlog',
+            'relationship' => strtolower($module) . '_commentlog',
             'source' => 'non-db',
             'exportable' => false,
             'duplicate_merge' => 'disabled',
-        ),
-    ),
-    'relationships' => array(
-        strtolower($module).'_commentlog' => array(
+        ],
+    ],
+    'relationships' => [
+        strtolower($module) . '_commentlog' => [
             'lhs_module' => $module,
             'lhs_table' => $table_name,
             'lhs_key' => 'id',
@@ -67,6 +68,6 @@ $vardefs = array(
             'join_key_rhs' => 'commentlog_id',
             'relationship_role_column' => 'module',
             'relationship_role_column_value' => $module,
-        ),
-    ),
-);
+        ],
+    ],
+];

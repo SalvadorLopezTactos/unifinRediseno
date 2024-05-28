@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Obter uma Chave e Segredo do IBM SmartCloud registrando sua instância Sugar como um novo aplicativo. A capacidade de registro será possível a partir de 8 de maio de 2011.<br>
 &nbsp;<br>
 Etapas para registrar sua instância:<br>
@@ -28,5 +28,4 @@ Etapas para registrar sua instância:<br>
 </td></tr></table>',
     'oauth_consumer_key' => 'Chave do Consumidor OAuth',
     'oauth_consumer_secret' => 'Segredo do Consumidor OAuth',
-);
-
+];

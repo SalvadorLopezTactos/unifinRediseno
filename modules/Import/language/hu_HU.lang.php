@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Import fájl olvasása sikeres',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Az importált rekord részt vesz egy folyamatban ezért nem szerkeszthető, mert bizonyos mezők zárolva vannak a folyamat által szerkeztés céljából.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'sor nem került importálásra hiba miatt',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Ha a felhasználó nem létezik, használja az aktuális felhasználót',
     'LBL_SHOW_HIDDEN' => 'Azon mezők megjelenítése, amelyek alapvetően nem importálhatók',
     'LBL_UPDATE_RECORDS' => 'Rekordok importálása helyett frissítse a korábbiakat (nem visszavonható)',
-    'LBL_TEST'=> 'Teszt import (nem menti és változtatja meg az adatokat)',
+    'LBL_TEST' => 'Teszt import (nem menti és változtatja meg az adatokat)',
     'LBL_TRUNCATE_TABLE' => 'Táblák kiürítése importálás előtt (minden rekordot töröl)',
     'LBL_RELATED_ACCOUNTS' => 'Ne hozzon létre kapcsolódó klienseket',
     'LBL_NO_DATECHECK' => 'Dátum ellenőrzés kihagyása (gyorsabb, de hibát okoz, ha van hibás dátum)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Érvénytelen egész szám',
     'LBL_ERROR_INVALID_NUM' => 'Érvénytelen számérték',
     'LBL_ERROR_INVALID_TIME' => 'Érvénytelen idő',
-    'LBL_ERROR_INVALID_EMAIL'=>'Érvénytelen email cím',
-    'LBL_ERROR_INVALID_BOOL'=>'Érvénytelen érték (kizárólag 1 vagy 0 lehet)',
-    'LBL_ERROR_INVALID_DATE'=>'Érvénytelen dátum formátum',
-    'LBL_ERROR_INVALID_USER'=>'Érvénytelen felhasználói név vagy azonosító',
+    'LBL_ERROR_INVALID_EMAIL' => 'Érvénytelen email cím',
+    'LBL_ERROR_INVALID_BOOL' => 'Érvénytelen érték (kizárólag 1 vagy 0 lehet)',
+    'LBL_ERROR_INVALID_DATE' => 'Érvénytelen dátum formátum',
+    'LBL_ERROR_INVALID_USER' => 'Érvénytelen felhasználói név vagy azonosító',
     'LBL_ERROR_INVALID_TEAM' => 'Érvénytelen csoportnév vagy azonosító',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Érvénytelen fióknév vagy azonosító',
     'LBL_ERROR_INVALID_RELATE' => 'Érvénytelen relációs mező',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'nem létezik vagy nem írható',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'A fájl feltöltése sikertelen. Lehetséges hogy a php.ini fájl $#39;upload_max_filesize$#39; beállítása túl alacsony értékre van állítva',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'A fájl túl nagy. Max:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'bájt. Változtassa meg a $sugar_config[$#39;upload_maxsize$#39;] -t a config.php-ben.',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bájt. Változtassa meg a(z) $sugar_config[&#39;upload_maxsize&#39;] értéket a config.php fájlban',
     'LBL_MODULE_NAME' => 'Importálás',
     'LBL_MODULE_NAME_SINGULAR' => 'Import',
     'LBL_TRY_AGAIN' => 'Próbálja újra',
     'LBL_START_OVER' => 'Újrakezdés',
     'LBL_ERROR' => 'Hiba:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Az importálandó fájl {0} sort tartalmaz. A sorok optimális száma {1}. Az ennél magasabb sorszám lassíthatja az importálás folyamatát. Kattintson az OK gombra az importálás folytatásához, vagy válassza a Mégsem opciót az importálandó fájl áttekintéséhez és az ismételt feltöltéséhez!',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Rendszer adminisztrátor felhasználót nem tud importálni',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Rendszer adminisztrátor felhasználót nem tud importálni',
     'ERR_REPORT_LOOP' => 'A rendszer egy jelentési hurkot azonosított. Egy felhasználó nem tud jelentést tenni önmagának, és a menedzserei sem tudnak jelenteni neki.',
     'ERR_MULTIPLE' => 'Több oszlop került meghatározásra egyező mezőnévvel.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Kötelező mezők hiányoznak:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Nem találhatók sorok az importált fájlban. Kérem, győződjön meg róla, hogy nincsenek üres sorok az állományban és próbálkozzon ismét!',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Az importálandó fájl már feldolgozott, vagy nem létezik',
     'LBL_SUCCESS' => 'Sikeres:',
-	'LBL_FAILURE' => 'Importálási hiba:',
+    'LBL_FAILURE' => 'Importálási hiba:',
     'LBL_SUCCESSFULLY' => 'Sikeresen importálva',
     'LBL_LAST_IMPORT_UNDONE' => 'Az utolsó import visszavonva.',
     'LBL_NO_IMPORT_TO_UNDO' => 'Nincs visszavonható import.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Ismételt importálás',
     'LBL_FINISHED' => 'Befejezve',
     'LBL_UNDO_LAST_IMPORT' => 'Utolsó import visszavonása',
-    'LBL_LAST_IMPORTED'=>'Létrehozva',
+    'LBL_LAST_IMPORTED' => 'Létrehozva',
     'ERR_MULTIPLE_PARENTS' => 'Csak egy szülő azonosítót adhat meg',
     'LBL_DUPLICATES' => 'A rendszer ismételt tartalmakat talált',
     'LNK_DUPLICATE_LIST' => 'Kettőzött tartalmak listájának letöltése',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Jegyzetek elrejtése',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Előnézeti oszlopok megtekintése',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Előnézeti oszlopok elrejtése',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Ellenőrizze a duplikátumokat az operátorral:',
     'LBL_SAVE_MAPPING_AS' => 'Az importálási beállítások mentéséhez adjon nevet azoknak:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Aposztróf ($#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Idézőjel (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Ha nem az alapértelmezett beállítások szerinti csoportokhoz vagy felhasználókhoz kívánja hozzárendelni az új rekordokat, használja az Alapértelmezett érték oszlopot a cél újbóli megadásához!',
     'LBL_SIGN_IN_HELP' => 'A szolgáltatás engedélyezése érdekében, kérem, keresse fel a felhasználói beállítások oldalt és ott jelentkezzen be a külső alkalmazások fülön!',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Olyan Beanben próbál emaileket kezelni, amely nem támogatja azt.",
-);
+];

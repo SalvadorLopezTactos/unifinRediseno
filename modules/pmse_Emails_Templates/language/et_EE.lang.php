@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Keha',
     'LBL_BASE_MODULE' => 'Eesmärgi moodul',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Protsessi e-kirja malli loomine failist ebaõnnestus',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Seda e-kirja malli kasutatakse praegu protsessi määratluses. Kas soovite endiselt seda e-kirja malli redigeerida?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Te ei saa seda e-kirja malli kustutada, kuna seda kasutatakse praegu protsessi määratluses.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Te ei saa seda e-kirja malli kustutada, kuna seda kasutatakse praegu protsessi määratluses.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Väljade valija',
     'LBL_SUGAR_LINK_SELECTOR' => 'Kirje lingi valija',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Seotud eesmärgi mooduliga',
     'LBL_SELECT_BUTTON_LABEL' => 'Vali',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Välja väärtuse tüüp',
-);
+];

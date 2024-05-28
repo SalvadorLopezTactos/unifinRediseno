@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">註冊您的 Sugar 實例為新的應用程式，從 IBM SmartCloud 獲取 API 金鑰和密碼。註冊功能將於 2011 年 5 月 8 日起啟用。<br>
 &nbsp;<br>
 註冊實例的步驟：<br>
@@ -28,5 +28,4 @@ $connector_strings = array (
 </td></tr></table>',
     'oauth_consumer_key' => 'OAuth 消費者金鑰',
     'oauth_consumer_secret' => 'OAuth 消費者密碼',
-);
-
+];

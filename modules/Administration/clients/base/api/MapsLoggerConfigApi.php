@@ -128,13 +128,14 @@ class MapsLoggerConfigApi extends ConfigApi
      * @return mixed
      */
     private function getMapsLogData(
-        array $modules,
+        array  $modules,
         string $startDate,
         string $logLevel,
-        ?int $offset,
-        ?int $limit,
-        bool $count
+        ?int   $offset,
+        ?int   $limit,
+        bool   $count
     ) {
+
         $geocodeBean = BeanFactory::newBean(Constants::GEOCODE_MODULE);
 
         $dt = new DateTime($startDate);
@@ -211,7 +212,7 @@ class MapsLoggerConfigApi extends ConfigApi
             $offset = 0;
         }
 
-        $nextOffset = $offset + (int) $limit;
+        $nextOffset = $offset + (int)$limit;
 
         if ($nextOffset >= $totalCount) {
             $nextOffset = -1;
@@ -234,7 +235,7 @@ class MapsLoggerConfigApi extends ConfigApi
         $defaultLimit = 25;
 
         if (isset($args['offset'])) {
-            $offset = (int) $args['offset'];
+            $offset = (int)$args['offset'];
         }
 
         if ($offset < 0) {
@@ -242,17 +243,17 @@ class MapsLoggerConfigApi extends ConfigApi
         }
 
         if (isset($args['limit']) && $args['limit'] !== '') {
-            $limit = (int) $args['limit'];
+            $limit = (int)$args['limit'];
         }
 
         if (!$limit || $limit < 1 || $limit > $defaultLimit) {
             $limit = $defaultLimit;
         }
 
-        return array(
+        return [
             $offset,
             $limit,
-        );
+        ];
     }
 
     /**
@@ -264,6 +265,6 @@ class MapsLoggerConfigApi extends ConfigApi
      */
     protected function getTotalPagesNumber($totalRecords, $itemsPerPage): int
     {
-        return (int) ceil($totalRecords / $itemsPerPage);
+        return (int)ceil($totalRecords / $itemsPerPage);
     }
 }

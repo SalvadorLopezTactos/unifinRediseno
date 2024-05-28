@@ -72,6 +72,7 @@ class Envelope implements ModelInterface, ArrayAccess
         'auto_navigation' => '?string',
         'brand_id' => '?string',
         'brand_lock' => '?string',
+        'burn_default_tab_data' => '?string',
         'certificate_uri' => '?string',
         'completed_date_time' => '?string',
         'copy_recipient_data' => '?string',
@@ -158,6 +159,7 @@ class Envelope implements ModelInterface, ArrayAccess
         'auto_navigation' => null,
         'brand_id' => null,
         'brand_lock' => null,
+        'burn_default_tab_data' => null,
         'certificate_uri' => null,
         'completed_date_time' => null,
         'copy_recipient_data' => null,
@@ -265,6 +267,7 @@ class Envelope implements ModelInterface, ArrayAccess
         'auto_navigation' => 'autoNavigation',
         'brand_id' => 'brandId',
         'brand_lock' => 'brandLock',
+        'burn_default_tab_data' => 'burnDefaultTabData',
         'certificate_uri' => 'certificateUri',
         'completed_date_time' => 'completedDateTime',
         'copy_recipient_data' => 'copyRecipientData',
@@ -351,6 +354,7 @@ class Envelope implements ModelInterface, ArrayAccess
         'auto_navigation' => 'setAutoNavigation',
         'brand_id' => 'setBrandId',
         'brand_lock' => 'setBrandLock',
+        'burn_default_tab_data' => 'setBurnDefaultTabData',
         'certificate_uri' => 'setCertificateUri',
         'completed_date_time' => 'setCompletedDateTime',
         'copy_recipient_data' => 'setCopyRecipientData',
@@ -437,6 +441,7 @@ class Envelope implements ModelInterface, ArrayAccess
         'auto_navigation' => 'getAutoNavigation',
         'brand_id' => 'getBrandId',
         'brand_lock' => 'getBrandLock',
+        'burn_default_tab_data' => 'getBurnDefaultTabData',
         'certificate_uri' => 'getCertificateUri',
         'completed_date_time' => 'getCompletedDateTime',
         'copy_recipient_data' => 'getCopyRecipientData',
@@ -577,6 +582,7 @@ class Envelope implements ModelInterface, ArrayAccess
         $this->container['auto_navigation'] = isset($data['auto_navigation']) ? $data['auto_navigation'] : null;
         $this->container['brand_id'] = isset($data['brand_id']) ? $data['brand_id'] : null;
         $this->container['brand_lock'] = isset($data['brand_lock']) ? $data['brand_lock'] : null;
+        $this->container['burn_default_tab_data'] = isset($data['burn_default_tab_data']) ? $data['burn_default_tab_data'] : null;
         $this->container['certificate_uri'] = isset($data['certificate_uri']) ? $data['certificate_uri'] : null;
         $this->container['completed_date_time'] = isset($data['completed_date_time']) ? $data['completed_date_time'] : null;
         $this->container['copy_recipient_data'] = isset($data['copy_recipient_data']) ? $data['copy_recipient_data'] : null;
@@ -981,6 +987,30 @@ class Envelope implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets burn_default_tab_data
+     *
+     * @return ?string
+     */
+    public function getBurnDefaultTabData()
+    {
+        return $this->container['burn_default_tab_data'];
+    }
+
+    /**
+     * Sets burn_default_tab_data
+     *
+     * @param ?string $burn_default_tab_data 
+     *
+     * @return $this
+     */
+    public function setBurnDefaultTabData($burn_default_tab_data)
+    {
+        $this->container['burn_default_tab_data'] = $burn_default_tab_data;
+
+        return $this;
+    }
+
+    /**
      * Gets certificate_uri
      *
      * @return ?string
@@ -1089,7 +1119,7 @@ class Envelope implements ModelInterface, ArrayAccess
     /**
      * Sets custom_fields
      *
-     * @param \DocuSign\eSign\Model\CustomFields $custom_fields custom_fields
+     * @param \DocuSign\eSign\Model\CustomFields $custom_fields An optional array of strings that allows the sender to provide custom data about the recipient. This information is returned in the envelope status but otherwise not used by DocuSign. Each customField string can be a maximum of 100 characters.
      *
      * @return $this
      */
@@ -1329,7 +1359,7 @@ class Envelope implements ModelInterface, ArrayAccess
     /**
      * Sets email_settings
      *
-     * @param \DocuSign\eSign\Model\EmailSettings $email_settings email_settings
+     * @param \DocuSign\eSign\Model\EmailSettings $email_settings A complex type that contains email settings.
      *
      * @return $this
      */
@@ -1449,7 +1479,7 @@ class Envelope implements ModelInterface, ArrayAccess
     /**
      * Sets envelope_custom_metadata
      *
-     * @param \DocuSign\eSign\Model\EnvelopeCustomMetadata $envelope_custom_metadata envelope_custom_metadata
+     * @param \DocuSign\eSign\Model\EnvelopeCustomMetadata $envelope_custom_metadata 
      *
      * @return $this
      */
@@ -1569,7 +1599,7 @@ class Envelope implements ModelInterface, ArrayAccess
     /**
      * Sets envelope_metadata
      *
-     * @param \DocuSign\eSign\Model\EnvelopeMetadata $envelope_metadata envelope_metadata
+     * @param \DocuSign\eSign\Model\EnvelopeMetadata $envelope_metadata Provides information about the features and services that are enabled for the envelope, including the Correct feature, the Advanced Correct feature, and DocuSign eNotary service.
      *
      * @return $this
      */
@@ -1977,7 +2007,7 @@ class Envelope implements ModelInterface, ArrayAccess
     /**
      * Sets lock_information
      *
-     * @param \DocuSign\eSign\Model\LockInformation $lock_information lock_information
+     * @param \DocuSign\eSign\Model\LockInformation $lock_information Provides lock information about an envelope that a user has locked.
      *
      * @return $this
      */
@@ -2025,7 +2055,7 @@ class Envelope implements ModelInterface, ArrayAccess
     /**
      * Sets notification
      *
-     * @param \DocuSign\eSign\Model\Notification $notification notification
+     * @param \DocuSign\eSign\Model\Notification $notification 
      *
      * @return $this
      */
@@ -2073,7 +2103,7 @@ class Envelope implements ModelInterface, ArrayAccess
     /**
      * Sets power_form
      *
-     * @param \DocuSign\eSign\Model\PowerForm $power_form power_form
+     * @param \DocuSign\eSign\Model\PowerForm $power_form Information about any PowerForms that are included in the envelope.
      *
      * @return $this
      */
@@ -2169,7 +2199,7 @@ class Envelope implements ModelInterface, ArrayAccess
     /**
      * Sets recipients
      *
-     * @param \DocuSign\eSign\Model\Recipients $recipients recipients
+     * @param \DocuSign\eSign\Model\Recipients $recipients An array of powerform recipients.
      *
      * @return $this
      */
@@ -2241,7 +2271,7 @@ class Envelope implements ModelInterface, ArrayAccess
     /**
      * Sets sender
      *
-     * @param \DocuSign\eSign\Model\UserInfo $sender sender
+     * @param \DocuSign\eSign\Model\UserInfo $sender Information about the sender of the envelope.
      *
      * @return $this
      */
@@ -2529,7 +2559,7 @@ class Envelope implements ModelInterface, ArrayAccess
     /**
      * Sets workflow
      *
-     * @param \DocuSign\eSign\Model\Workflow $workflow workflow
+     * @param \DocuSign\eSign\Model\Workflow $workflow 
      *
      * @return $this
      */

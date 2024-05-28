@@ -9,18 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
+
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 global $current_user;
 
-if (!is_admin($current_user)) sugar_die("Unauthorized access to administration.");
+if (!is_admin($current_user)) {
+    sugar_die('Unauthorized access to administration.');
+}
 
 $focus = Administration::getSettings();
 
@@ -30,24 +33,19 @@ if ($focus->isLicensedForHint() && $_POST['license_key'] !== $focus->settings['l
 
 // filter for relevant POST data and update config table
 foreach ($_POST as $key => $val) {
-	$prefix = $focus->get_config_prefix($key);
-	if (in_array($prefix[0], $focus->config_categories)) {
-        if ( $prefix[0] == "license" )
-        {
-        	if ( $prefix[1] == "expire_date" )
-        	{
-        		global $timedate;
-            	$val = $timedate->swap_formats( $val, $timedate->get_date_format(), $timedate->dbDayFormat );
-        	}
-        	else
-        	if ( $prefix[1] == "key" )
-        	{
+    $prefix = $focus->get_config_prefix($key);
+    if (safeInArray($prefix[0], $focus->config_categories)) {
+        if ($prefix[0] == 'license') {
+            if ($prefix[1] == 'expire_date') {
+                global $timedate;
+                $val = $timedate->swap_formats($val, $timedate->get_date_format(), $timedate->dbDayFormat);
+            } elseif ($prefix[1] == 'key') {
                 continue; //license_key has complex behavior and will be processed separately
-        	}
+            }
         }
 
-        $focus->saveSetting($prefix[0], $prefix[1], $val); 
-	}
+        $focus->saveSetting($prefix[0], $prefix[1], $val);
+    }
 }
 
 $licenseKey = InputValidation::getService()->getValidInputPost('license_key', null, null);

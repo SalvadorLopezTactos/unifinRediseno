@@ -13,7 +13,9 @@
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
-if(!defined('sugarEntry'))define('sugarEntry', true);
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -30,19 +32,18 @@ if (isset($_REQUEST['root_directory'])) {
 
 //if we are coming from browser
 
-if(isset($_REQUEST['root_directory'])){
-
-    require_once('include/utils/sugar_file_utils.php');
+if (isset($_REQUEST['root_directory'])) {
+    require_once 'include/utils/sugar_file_utils.php';
 
     // get the root directory to process
     $inputValidation = InputValidation::getService();
     $from = $inputValidation->getValidInputRequest('root_directory', 'Assert\File');
     $forceReb = !empty($_REQUEST['force_rebuild']);
     // make sure that the rebuild option has been chosen
-    if (isset($_REQUEST['js_rebuild_concat'])){
+    if (isset($_REQUEST['js_rebuild_concat'])) {
         if (!$forceReb && $_REQUEST['js_rebuild_concat'] == 'rebuild') {
             //rebuild if files have changed
-            $js_groupings = array();
+            $js_groupings = [];
             if (isset($_REQUEST['root_directory'])) {
                 require 'jssource/JSGroupings.php';
             } else {
@@ -53,10 +54,9 @@ if(isset($_REQUEST['root_directory'])){
             $grp_array = $js_groupings;//from JSGroupings.php;
 
             //for each item in array, concatenate the source files
-            foreach($grp_array as $grp){
+            foreach ($grp_array as $grp) {
                 // check if we have to do a rebuild by comparing JS file timestamps
-                foreach($grp as $original =>$concat){
-
+                foreach ($grp as $original => $concat) {
                     // if the original file doesn't exist, skip it (so does the build util)
                     if (!is_file($original)) {
                         continue;
@@ -68,12 +68,12 @@ if(isset($_REQUEST['root_directory'])){
                     if (is_file($concat)) {
                         // if individual file has been modified date later than modified date of
                         // concatenated file, then force a rebuild
-                        if(filemtime($original) > filemtime($concat)){
+                        if (filemtime($original) > filemtime($concat)) {
                             $forceReb = true;
                             //no need to continue, we will rebuild
                             break 2;
                         }
-                    }else{
+                    } else {
                         //if files are not valid, rebuild as one file could have been deleted
                         $forceReb = true;
                         //no need to continue, we will rebuild
@@ -81,75 +81,76 @@ if(isset($_REQUEST['root_directory'])){
                     }
                 }
             }
-
         }
         //if boolean has been set, concatenate files
         if ($forceReb) {
             $minifyUtils = new SugarMinifyUtils();
             $minifyUtils->ConcatenateFiles("$from");
         }
-
-    }else{
+    } else {
         //We are only allowing rebuilding of concat files from browser.
     }
     return;
-}else{
+} else {
     //run via command line
     //print_r($argv);
-    $from="";
+    $from = '';
 
-    if(isset($argv[1]) && !empty($argv[1])){
-         $from = $argv[1];
-    }else{
+    if (isset($argv[1]) && !empty($argv[1])) {
+        $from = $argv[1];
+    } else {
         //Root Directory was not specified
         echo 'Root Directory Input was not provided';
         return;
     }
 
     if ($argv[1] != '-?') {
-        require_once('include/utils.php');
-        require_once('include/utils/file_utils.php');
-        require_once('include/utils/sugar_file_utils.php');
-        require_once('include/dir_inc.php');
+        require_once 'include/utils.php';
+        require_once 'include/utils/file_utils.php';
+        require_once 'include/utils/sugar_file_utils.php';
+        require_once 'include/dir_inc.php';
     }
-    if(!function_exists('sugar_cached')) {
+    if (!function_exists('sugar_cached')) {
         if ($argv[1] != '-?') {
-            require_once($from.'/./include/utils.php');
-            require_once($from.'/./include/utils/file_utils.php');
-            require_once($from.'/./include/utils/sugar_file_utils.php');
-            require_once($from.'/./include/dir_inc.php');
+            require_once $from . '/./include/utils.php';
+            require_once $from . '/./include/utils/file_utils.php';
+            require_once $from . '/./include/utils/sugar_file_utils.php';
+            require_once $from . '/./include/dir_inc.php';
         }
-        if(!function_exists('sugar_cached')) {
-            function sugar_cached($dir) { return "cache/$dir"; }
+        if (!function_exists('sugar_cached')) {
+            function sugar_cached($dir)
+            {
+                return "cache/$dir";
+            }
         }
     }
 
-    if($argv[1] == '-?'){
+    if ($argv[1] == '-?') {
         $argv[2] = '-?';
     }
     $minifyUtils = new SugarMinifyUtils();
 
     //if second argument is set, then process commands
-    if(!empty($argv[2])){
-        if($argv[2] == '-r'){
+    if (!empty($argv[2])) {
+        if ($argv[2] == '-r') {
             //replace the compressed scripts with the backed up version
-            $minifyUtils->reverseScripts("$from/jssource/src_files",$from);
-        }elseif($argv[2] == '-m'){
+            $minifyUtils->reverseScripts("$from/jssource/src_files", $from);
+        } elseif ($argv[2] == '-m') {
             //replace the scripts, and then minify the scripts again
-            $minifyUtils->reverseScripts("$from/jssource/src_files",$from);
+            $minifyUtils->reverseScripts("$from/jssource/src_files", $from);
             $minifyUtils->BackUpAndCompressScriptFiles($from, '', false);
-        }elseif($argv[2] == '-c'){
+        } elseif ($argv[2] == '-c') {
             //replace the scripts, concatenate the files, and then minify the scripts again
-            $minifyUtils->reverseScripts("$from/jssource/src_files",$from);
+            $minifyUtils->reverseScripts("$from/jssource/src_files", $from);
             $minifyUtils->BackUpAndCompressScriptFiles($from, '', false);
             $minifyUtils->ConcatenateFiles($from);
-        }elseif($argv[2] == '-mo'){
+        } elseif ($argv[2] == '-mo') {
             //do not replace the scriptsjust minify the existing scripts again
             $minifyUtils->BackUpAndCompressScriptFiles($from, '', false);
-        }elseif($argv[2] == '-co'){
+        } elseif ($argv[2] == '-co') {
             //concatenate the files only
             $minifyUtils->ConcatenateFiles($from);
-        }elseif($argv[2] == '-?'){
+        } elseif ($argv[2] == '-?') {
             die("
     Usage : minify <root path> [[-r]|[-m]|[-c]]
 
@@ -175,15 +176,13 @@ if(isset($_REQUEST['root_directory'])){
     You wish to have backed up jssource files concatenated, minified, and replace your current javascript files:
         minify 'c:/sugar' -c
                                         ");
-
         }
-    }else{
+    } else {
         //default is to concatenate the files, then back up and compress them
-        if(empty($from)){
-            echo("directory root to process was not specified");
+        if (empty($from)) {
+            echo('directory root to process was not specified');
         }
         $minifyUtils->BackUpAndCompressScriptFiles($from, '', true);
         $minifyUtils->ConcatenateFiles($from);
     }
 }
-

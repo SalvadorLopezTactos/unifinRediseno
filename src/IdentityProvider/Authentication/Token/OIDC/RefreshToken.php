@@ -41,7 +41,7 @@ class RefreshToken extends AbstractToken
     /**
      * @inheritdoc
      */
-    public function getCredentials() : string
+    public function getCredentials(): string
     {
         return $this->credentials;
     }

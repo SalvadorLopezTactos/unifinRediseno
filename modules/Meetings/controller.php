@@ -15,13 +15,13 @@ class MeetingsController extends SugarController
     protected function action_editView()
     {
         $this->view = 'edit';
-       
+
         $editAllRecurrences = $_REQUEST['edit_all_recurrences'] ?? false;
-        $this->view_object_map['repeatData'] = CalendarUtils::getRepeatData($this->bean, $editAllRecurrences);
-        
+        $this->view_object_map['repeatData'] = $this->bean->getRepeatData($editAllRecurrences);
+
         return true;
     }
-    
+
     protected function action_editAllRecurrences()
     {
         if (!empty($this->bean->repeat_parent_id)) {
@@ -31,7 +31,7 @@ class MeetingsController extends SugarController
         }
         header("Location: index.php?module=Meetings&action=EditView&record={$id}&edit_all_recurrences=true");
     }
-    
+
     protected function action_removeAllRecurrences()
     {
         if (!empty($this->bean->repeat_parent_id)) {
@@ -40,15 +40,15 @@ class MeetingsController extends SugarController
         } else {
             $id = $this->bean->id;
         }
-        
+
         if (!$this->bean->ACLAccess('Delete')) {
             ACLController::displayNoAccess(true);
             sugar_cleanup(true);
         }
-        
-        CalendarUtils::markRepeatDeleted($this->bean);
+
+        $this->bean->markRepeatDeleted();
         $this->bean->mark_deleted($id);
-        
-        header("Location: index.php?module=Meetings");
+
+        header('Location: index.php?module=Meetings');
     }
 }

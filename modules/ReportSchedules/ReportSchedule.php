@@ -82,7 +82,7 @@ class ReportSchedule extends Basic
      * {@inheritDoc}
      * @see SugarBean::fetchFromQuery($query, $fields, $options)
      */
-    public function fetchFromQuery(SugarQuery $query, array $fields = array(), array $options = array())
+    public function fetchFromQuery(SugarQuery $query, array $fields = [], array $options = [])
     {
         $query->where()->equals('schedule_type', 'pro');
         return parent::fetchFromQuery($query, $fields, $options);
@@ -151,11 +151,11 @@ SET
 QUERY;
             if (!empty($date_start) && $active) {
                 $next_run_date = $this->getNextRunDate($date_start, $interval);
-                $query .= ", next_run = " . $this->db->quoted($next_run_date);
+                $query .= ', next_run = ' . $this->db->quoted($next_run_date);
             }
-            $query .= " WHERE id = " . $this->db->quoted($id);
+            $query .= ' WHERE id = ' . $this->db->quoted($id);
         }
-        $this->db->query($query, true, "error saving schedule");
+        $this->db->query($query, true, 'error saving schedule');
 
         return $id;
     }
@@ -222,7 +222,7 @@ QUERY;
             global $current_user;
             $id = $current_user->id;
         }
-        $return_array = array();
+        $return_array = [];
         $query = "SELECT * FROM $this->table_name WHERE user_id='$id'";
         $results = $this->db->query($query);
         while ($row = $this->db->fetchByAssoc($results)) {
@@ -270,7 +270,7 @@ QUERY;
             $this->db->quoted($report_id)
         );
         $results = $this->db->query($query);
-        $return_array = array();
+        $return_array = [];
         while ($row = $this->db->fetchByAssoc($results)) {
             $return_array[] = $this->fromConvertReportScheduleDBRow($row);
         }
@@ -297,7 +297,7 @@ FROM
 WHERE
     reportschedule_id = $scheduleId AND deleted = 0
 QUERY;
-            $subscriber = array();
+            $subscriber = [];
             $result = $this->db->query($query);
             while ($row = $this->db->fetchByAssoc($result)) {
                 $subscriber[] = BeanFactory::retrieveBean('Users', $row['user_id']);
@@ -348,7 +348,7 @@ WHERE
         AND rs.active = 1
 QUERY;
 
-        $reports = array();
+        $reports = [];
         $result = $this->db->query($query);
         while ($row = $this->db->fetchByAssoc($result)) {
             $reports[] = $row;
@@ -381,28 +381,28 @@ QUERY;
                 "FROM $this->table_name " .
                 "JOIN reportschedules_users on reportschedules_users.reportschedule_id = $this->table_name.id " .
                 "JOIN saved_reports on saved_reports.id=$this->table_name.report_id " .
-                "JOIN users on users.id = reportschedules_users.user_id " .
-                "WHERE saved_reports.deleted = 0 AND " .
+                'JOIN users on users.id = reportschedules_users.user_id ' .
+                'WHERE saved_reports.deleted = 0 AND ' .
                 "$this->table_name.next_run < '$time' $where AND " .
                 "$this->table_name.deleted = 0 AND " .
                 "$this->table_name.active = 1 AND " .
-                "$this->table_name.schedule_type = " . $this->db->quoted($scheduleType) . " AND " .
+                "$this->table_name.schedule_type = " . $this->db->quoted($scheduleType) . ' AND ' .
                 "users.status = 'Active' AND users.deleted = 0 " .
-                "AND reportschedules_users.deleted = 0 " .
+                'AND reportschedules_users.deleted = 0 ' .
                 "ORDER BY $this->table_name.next_run ASC";
         } else {
-            $query = "SELECT report_schedules.id AS id, report_schedules.report_id AS report_id, " .
-                "report_schedules.date_start AS date_start,  report_schedules.date_modified AS date_modified, " .
-                "report_schedules.next_run AS next_run, report_schedules.user_id AS user_id " .
-                "FROM $this->table_name \n".
-                "join saved_reports on saved_reports.id=$this->table_name.report_id \n".
-                "join users on users.id = report_schedules.user_id".
+            $query = 'SELECT report_schedules.id AS id, report_schedules.report_id AS report_id, ' .
+                'report_schedules.date_start AS date_start,  report_schedules.date_modified AS date_modified, ' .
+                'report_schedules.next_run AS next_run, report_schedules.user_id AS user_id ' .
+                "FROM $this->table_name \n" .
+                "join saved_reports on saved_reports.id=$this->table_name.report_id \n" .
+                'join users on users.id = report_schedules.user_id' .
                 " WHERE saved_reports.deleted=0 AND \n" .
-                "$this->table_name.next_run < '$time' $where AND \n".
-                "$this->table_name.deleted=0 AND \n".
+                "$this->table_name.next_run < '$time' $where AND \n" .
+                "$this->table_name.deleted=0 AND \n" .
                 "$this->table_name.active=1 AND " .
-                "$this->table_name.schedule_type=" . $this->db->quoted($scheduleType) . " AND\n".
-                "users.status='Active' AND users.deleted='0'".
+                "$this->table_name.schedule_type=" . $this->db->quoted($scheduleType) . " AND\n" .
+                "users.status='Active' AND users.deleted='0'" .
                 "ORDER BY $this->table_name.next_run ASC";
         }
         return $query;
@@ -415,12 +415,12 @@ QUERY;
      * @param string $schedule_type
      * @return array
      */
-    public function get_reports_to_email($user_id = '', $schedule_type = "pro")
+    public function get_reports_to_email($user_id = '', $schedule_type = 'pro')
     {
         $query = $this->getQuery($user_id, $schedule_type);
 
         $results = $this->db->query($query);
-        $return_array = array();
+        $return_array = [];
         while ($row = $this->db->fetchByAssoc($results)) {
             $return_array[] = $this->fromConvertReportScheduleDBRow($row);
         }
@@ -434,25 +434,25 @@ QUERY;
      * @param string $schedule_type
      * @return array
      */
-    public function get_ent_reports_to_email($user_id = '', $schedule_type = "ent")
+    public function get_ent_reports_to_email($user_id = '', $schedule_type = 'ent')
     {
         $where = '';
         if (!empty($user_id)) {
             $where = "AND user_id='$user_id'";
         }
         $time = gmdate($GLOBALS['timedate']->get_db_date_time_format(), time());
-        $query = "SELECT report_schedules.* FROM $this->table_name \n".
-            "join report_maker on report_maker.id=$this->table_name.report_id \n".
-            "join users on users.id = report_schedules.user_id".
+        $query = "SELECT report_schedules.* FROM $this->table_name \n" .
+            "join report_maker on report_maker.id=$this->table_name.report_id \n" .
+            'join users on users.id = report_schedules.user_id' .
             " WHERE report_maker.deleted=0 AND \n" .
-            "$this->table_name.next_run < '$time' $where AND \n".
-            "$this->table_name.deleted=0 AND \n".
+            "$this->table_name.next_run < '$time' $where AND \n" .
+            "$this->table_name.deleted=0 AND \n" .
             "$this->table_name.active=1 AND " .
-            "$this->table_name.schedule_type='".$schedule_type."' AND\n".
-            "users.status='Active' AND users.deleted='0'".
+            "$this->table_name.schedule_type='" . $schedule_type . "' AND\n" .
+            "users.status='Active' AND users.deleted='0'" .
             "ORDER BY $this->table_name.next_run ASC";
         $results = $this->db->query($query);
-        $return_array = array();
+        $return_array = [];
         while ($row = $this->db->fetchByAssoc($results)) {
             $return_array[$row['report_id']] = $this->fromConvertReportScheduleDBRow($row);
         }
@@ -504,10 +504,10 @@ QUERY;
     public function isReportSchedulerActive()
     {
         // Look for the Scheduler by 'job', since name is localized
-        $fields = array(
+        $fields = [
             'job' => 'function::processQueue',
             'status' => 'Active',
-        );
+        ];
 
         $scheduler = new Scheduler();
         $scheduler = $scheduler->retrieve_by_string_fields($fields);

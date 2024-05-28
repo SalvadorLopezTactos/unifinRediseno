@@ -16,31 +16,31 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$viewdefs['Accounts']['mobile']['view']['edit'] = array(
-	'templateMeta' => array(
-                            'maxColumns' => '1',
-                            'widths' => array(
-								array('label' => '10', 'field' => '30'),
-                            ),
-                           ),
-    'panels' => array(
-    	array(
+$viewdefs['Accounts']['mobile']['view']['edit'] = [
+    'templateMeta' => [
+        'maxColumns' => '1',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
-                array(
-                    'name'=>'name',
-                    'displayParams' => array(
+            'fields' => [
+                [
+                    'name' => 'name',
+                    'displayParams' => [
                         'required' => true,
                         'wireless_edit_only' => true,
-                    ),
-                ),
+                    ],
+                ],
                 'phone_office',
-                array(
-                    'name'=>'website',
-                    'displayParams'=>array(
-                        'type'=>'link',
-                    ),
-                ),
+                [
+                    'name' => 'website',
+                    'displayParams' => [
+                        'type' => 'link',
+                    ],
+                ],
                 'email',
                 'tag',
                 'billing_address_street',
@@ -50,7 +50,7 @@ $viewdefs['Accounts']['mobile']['view']['edit'] = array(
                 'billing_address_country',
                 'assigned_user_name',
                 'team_name',
-            ),
-        ),
-	),
-);
+            ],
+        ],
+    ],
+];

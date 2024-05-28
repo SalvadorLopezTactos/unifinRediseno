@@ -23,7 +23,7 @@ class SugarForecasting_ReportingUsers extends SugarForecasting_AbstractForecast
         $isManager = User::isManager($userId);
         $loggedInUserId = $GLOBALS['current_user']->id;
         $loggedInUserIsManager = User::isManager($loggedInUserId);
-        $children = array();
+        $children = [];
         $userBean = BeanFactory::getBean('Users', $userId);
         $tree = null;
 
@@ -31,7 +31,7 @@ class SugarForecasting_ReportingUsers extends SugarForecasting_AbstractForecast
         //manager)
         if ($isManager) {
             $children = $this->getChildren($userBean);
-        } else if (!$isManager && $loggedInUserIsManager) {
+        } elseif (!$isManager && $loggedInUserIsManager) {
             $userBean = BeanFactory::getBean('Users', $userBean->reports_to_id);
             $children = $this->getChildren($userBean);
         }
@@ -44,12 +44,12 @@ class SugarForecasting_ReportingUsers extends SugarForecasting_AbstractForecast
         //is a manager.
         if ($loggedInUserId != $userId && $loggedInUserIsManager && $userBean->id != $loggedInUserId) {
             // we need to create a parent record
-                $parent = $this->getParentLink($loggedInUserId);
-                // the open user should be marked as a manager now
-                $tree['attr']['rel'] = 'manager';
+            $parent = $this->getParentLink($loggedInUserId);
+            // the open user should be marked as a manager now
+            $tree['attr']['rel'] = 'manager';
 
-                // put the parent link and the tree in the same level
-                $tree = array($parent, $tree);
+            // put the parent link and the tree in the same level
+            $tree = [$parent, $tree];
         }
 
         return $tree;
@@ -62,8 +62,10 @@ class SugarForecasting_ReportingUsers extends SugarForecasting_AbstractForecast
      */
     protected function getChildren(User $user)
     {
-        $query = $user->create_new_list_query('',
-            'users.reports_to_id = ' . $user->db->quoted($user->id) . ' AND users.status = \'Active\'');
+        $query = $user->create_new_list_query(
+            '',
+            'users.reports_to_id = ' . $user->db->quoted($user->id) . ' AND users.status = \'Active\''
+        );
         $response = $user->process_list_query($query, 0);
         return $response['list'];
     }
@@ -105,12 +107,12 @@ class SugarForecasting_ReportingUsers extends SugarForecasting_AbstractForecast
         $parent = $this->getTreeArray($parentBean, 'parent_link');
 
         // overwrite the whole attr array for the parent
-        $parent['attr'] = array(
+        $parent['attr'] = [
             'rel' => 'parent_link',
             'class' => 'parent',
             // adding id tag for QA's voodoo tests
-            'id' => 'jstree_node_parent'
-        );
+            'id' => 'jstree_node_parent',
+        ];
 
         return $parent;
     }
@@ -127,7 +129,7 @@ class SugarForecasting_ReportingUsers extends SugarForecasting_AbstractForecast
         $fullName = $locale->formatName($user);
 
         $qa_id = 'jstree_node_';
-        if ($rel == "my_opportunities") {
+        if ($rel == 'my_opportunities') {
             $qa_id .= 'myopps_';
         }
 
@@ -139,10 +141,10 @@ class SugarForecasting_ReportingUsers extends SugarForecasting_AbstractForecast
             $state = 'closed';
         }
 
-        return array(
+        return [
             'data' => $fullName,
-            'children' => array(),
-            'metadata' => array(
+            'children' => [],
+            'metadata' => [
                 'id' => $user->id,
                 'user_name' => $user->user_name,
                 'full_name' => $fullName,
@@ -154,15 +156,14 @@ class SugarForecasting_ReportingUsers extends SugarForecasting_AbstractForecast
                 'title' => $user->title,
                 'is_manager' => User::isManager($user->id),
                 'is_top_level_manager' => User::isTopLevelManager($user->id),
-            ),
+            ],
             'state' => $state,
-            'attr' => array(
+            'attr' => [
                 // set all users to rep by default
                 'rel' => $rel,
                 // adding id tag for QA's voodoo tests
                 'id' => $qa_id . $user->id,
-            )
-        );
+            ],
+        ];
     }
-
 }

@@ -30,7 +30,7 @@ class PMSEConcurrencyValidator extends PMSEBaseValidator implements PMSEValidate
     {
         $args = $request->getArguments();
         $flowId = $args['idFlow'] ?? $args['flow_id'] ?? '0';
-        $flows = $this->getRegistry()->get('locked_flows', array());
+        $flows = $this->getRegistry()->get('locked_flows', []);
         if (!isset($flows[$flowId])) {
             $request->validate();
         } else {

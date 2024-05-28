@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Marketing',
-    'Knowledge Base' => 'Báza znalostí',
-    'Sales' => 'Predaje',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Marketingové materiály',
-    'Product Brochures' => 'Produktové brožúry',
-    'FAQ' => 'Často kladené otázky',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Marketing',
+        'Knowledge Base' => 'Báza znalostí',
+        'Sales' => 'Predaje',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Aktívny',
-    'Draft' => 'Návrh',
-    'FAQ' => 'Často kladené otázky',
-    'Expired' => 'Platnosť skončila',
-    'Under Review' => 'Kontrolovaný',
-    'Pending' => 'Prebieha',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Marketingové materiály',
+        'Product Brochures' => 'Brožúry produktov',
+        'FAQ' => 'Často kladené otázky',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Aktívne',
+        'Draft' => 'Návrh',
+        'FAQ' => 'Často kladené otázky',
+        'Expired' => 'Platnosť skončila',
+        'Under Review' => 'Kontroluje sa',
+        'Pending' => 'Prebieha',
+    ],
+];

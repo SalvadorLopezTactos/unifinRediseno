@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kolejka zadań',
     'LBL_MODULE_NAME_SINGULAR' => 'Kolejka zadań',
     'LBL_MODULE_TITLE' => 'Kolejka zadań: strona główna',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Anulowane rozwiązanie',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Uruchomione rozwiązanie',
     // Errors
-    'ERR_CALL' => "Nie można wywołać funkcji: %s",
-    'ERR_CURL' => "Brak CURL — nie można uruchomić zadań URL",
-    'ERR_FAILED' => "Niepowodzenie, sprawdź logi PHP oraz sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s w %s w linii %d",
-    'ERR_NOUSER' => "Nie określono ID użytkownika dla zadania",
-    'ERR_NOSUCHUSER' => "Nie odnaleziono ID użytkownika %s",
-    'ERR_JOBTYPE' => "Nieznany typ zadania: %s",
-    'ERR_TIMEOUT' => "Niepowodzenie z powodu przekroczenia limitu czasowego",
+    'ERR_CALL' => 'Nie można wywołać funkcji: %s',
+    'ERR_CURL' => 'Brak CURL — nie można uruchomić zadań URL',
+    'ERR_FAILED' => 'Niepowodzenie, sprawdź logi PHP oraz sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s w %s w linii %d',
+    'ERR_NOUSER' => 'Nie określono ID użytkownika dla zadania',
+    'ERR_NOSUCHUSER' => 'Nie odnaleziono ID użytkownika %s',
+    'ERR_JOBTYPE' => 'Nieznany typ zadania: %s',
+    'ERR_TIMEOUT' => 'Niepowodzenie z powodu przekroczenia limitu czasowego',
     'ERR_JOB_FAILED_VERBOSE' => 'Zadanie %1$s (%2$s) zakończyło się niepowodzeniem w przebiegu CRON',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Nie można załadować pliku bean o identyfikatorze: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Nie można znaleźć mechanizmu obsługującego trasę %s',
@@ -91,13 +91,13 @@ Obsługuje on programowane wysyłanie komunikatów przez aplikacje typu web serv
 </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Pomoc dla konfiguracji systemu Amazon SQS',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Sekcja konfiguracji systemu Amazon SQS.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Sekcja konfiguracji systemu Amazon SQS.</b></p>
 <ul>
 <li>ID klucza dostępu: <i>wprowadź numer identyfikacyjny klucza dostępu do usługi Amazon SQS</i></li>
 <li>Tajny klucz dostępu: <i>wprowadź swój tajny klucz dostępu do usługi Amazon SQS</i></li>
 <li>Region: <i>wprowadź region serwera Amazon SQS</i></li>
 <li>Nazwa kolejki: <i>wprowadź nazwę kolejki serwera Amazon SQS</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'Pomoc dla konfiguracji AMQP',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>Sekcja konfiguracji AMQP.</b></p>
 <ul>
@@ -118,4 +118,4 @@ Obsługuje on programowane wysyłanie komunikatów przez aplikacje typu web serv
     'LBL_REGION' => 'Region',
     'LBL_ACCESS_KEY_SECRET' => 'Tajny klucz dostępu',
     'LBL_QUEUE_NAME' => 'Nazwa adaptera',
-);
+];

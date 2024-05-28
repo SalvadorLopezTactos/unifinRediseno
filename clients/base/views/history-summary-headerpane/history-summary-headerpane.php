@@ -9,32 +9,32 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['history-summary-headerpane'] = array(
+$viewdefs['base']['view']['history-summary-headerpane'] = [
     'template' => 'headerpane',
-    'fields' => array(
-        array(
+    'fields' => [
+        [
             'name' => 'picture',
             'type' => 'avatar',
             'size' => 'large',
             'dismiss_label' => true,
             'readonly' => true,
-        ),
-        array(
+        ],
+        [
             'name' => 'title',
             'type' => 'label',
             'default_value' => 'LBL_HISTORICAL_SUMMARY',
-        ),
-    ),
-    'buttons' => array(
-        array(
-            'name'    => 'cancel_button',
-            'type'    => 'button',
-            'label'   => 'LBL_CLOSE_BUTTON_LABEL',
-            'css_class' => 'btn-primary'
-        ),
-        array(
+        ],
+    ],
+    'buttons' => [
+        [
+            'name' => 'cancel_button',
+            'type' => 'button',
+            'label' => 'LBL_CLOSE_BUTTON_LABEL',
+            'css_class' => 'btn-primary',
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

@@ -10,21 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'Documents';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
         'route' => '#' . $module_name . '/create',
         'label' => 'LNK_NEW_DOCUMENT',
-        'acl_action'=> 'create',
-        'acl_module'=> $module_name,
+        'acl_action' => 'create',
+        'acl_module' => $module_name,
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route'=>'#'.$module_name,
-        'label' =>'LNK_DOCUMENT_LIST',
-        'acl_action'=>'list',
-        'acl_module'=>$module_name,
+    ],
+    [
+        'route' => '#' . $module_name,
+        'label' => 'LNK_DOCUMENT_LIST',
+        'acl_action' => 'list',
+        'acl_module' => $module_name,
         'icon' => 'sicon-list-view',
-    ),
+    ],
     //TODO look at old file and deal with this
     /*array(
         'route'=>'#bwc/index.php?module=MailMerge&action=index&reset=true',
@@ -33,4 +33,4 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'acl_module'=>'',
         'icon' => '',
     ),*/
-);
+];

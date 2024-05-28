@@ -9,6 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$config = array(
-	'image'=>'Cases'
-);
+$config = [
+    'image' => 'Cases',
+];

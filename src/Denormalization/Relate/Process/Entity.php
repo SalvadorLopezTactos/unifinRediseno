@@ -123,7 +123,7 @@ final class Entity
 
     public function getRelationshipName(): string
     {
-        return (string) $this->relationship->name;
+        return (string)$this->relationship->name;
     }
 
     protected function extractFieldDef(SugarBean $bean, string $fieldName): ?array

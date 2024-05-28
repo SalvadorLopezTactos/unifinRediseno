@@ -141,7 +141,7 @@ document.getElementById('progress_div').innerHTML = '{sugar_getimage name="bar_l
 									{counter start=0 name="buttonCounter" print=false assign="buttonCounter"}
 								{/if}
 								<td width="16%" style="padding: 5px;"  valign="top" id='buttons_td'>
-								     <table class='wizardButton' onclick='SUGAR.reports.moduleButtonClick("{$button.key}", this);' onmousedown="" onmouseout="" width="60%" border='1' id='{$button.name}'>
+								     <table class='wizardButton' onclick='SUGAR.reports.moduleButtonClick("{$button.key}", this);' onmousedown="" onmouseout="" width="60%" border='1' id="{$button.name|escape:'html':'UTF-8'}">
 								         <tr>
 											<td align="left" width='50%'>
                                                 {capture assign="name"}{$button.img}{/capture}

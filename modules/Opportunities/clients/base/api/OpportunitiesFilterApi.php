@@ -57,9 +57,9 @@ class OpportunitiesFilterApi extends FilterApi
      */
     private function addForecastFilter(ServiceBase $api, array $args, SugarQuery $query)
     {
-        $forecastUserId = $args["user_id"];
-        $forecastUserType = $args["type"];
-        $forecastTimePeriodId = $args["time_period"];
+        $forecastUserId = $args['user_id'];
+        $forecastUserType = $args['type'];
+        $forecastTimePeriodId = $args['time_period'];
         $metrics = $args['metrics'] ?? [];
         $filterDef = [];
 

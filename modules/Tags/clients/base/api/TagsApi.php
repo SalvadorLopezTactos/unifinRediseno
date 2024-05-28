@@ -25,25 +25,25 @@ class TagsApi extends ModuleApi
      */
     public function registerApiRest()
     {
-        return array(
-            'update' => array(
+        return [
+            'update' => [
                 'reqType' => 'PUT',
-                'path' => array('Tags','?'),
-                'pathVars' => array('module','record'),
+                'path' => ['Tags', '?'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'updateRecord',
                 'shortHelp' => 'This method updates a record of the specified type',
                 'longHelp' => 'include/api/help/module_record_put_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
      * Fetches data from the $args array and updates the bean with that data
      *
-     * @param SugarBean   $bean The bean to be updated
-     * @param ServiceBase $api  The API class of the request, used in cases
+     * @param SugarBean $bean The bean to be updated
+     * @param ServiceBase $api The API class of the request, used in cases
      *      where the API changes how the fields are pulled from the args array.
-     * @param array       $args The arguments array passed in from the API
+     * @param array $args The arguments array passed in from the API
      * @return id Bean id
      */
     public function updateBean(SugarBean $bean, ServiceBase $api, array $args)

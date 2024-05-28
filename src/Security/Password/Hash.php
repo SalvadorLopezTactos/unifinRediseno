@@ -55,7 +55,7 @@ class Hash
      */
     public function __call($method, array $arguments)
     {
-        return call_user_func_array(array($this->backend, $method), $arguments);
+        return call_user_func_array([$this->backend, $method], $arguments);
     }
 
     /**
@@ -79,16 +79,10 @@ class Hash
     public static function getInstance()
     {
         if (empty(self::$instance)) {
+            //Due to security issue we don't allow use Sha2 strategy and move all clients without IDM to Native strategy
+            self::$instance = $instance = new self(self::getHashBackend(self::DEFAULT_BACKEND, null, []));
 
-            $config = \SugarConfig::getInstance();
-
-            $backend = $config->get('passwordHash.backend', self::DEFAULT_BACKEND);
-            $algo = $config->get('passwordHash.algo', null);
-            $options = $config->get('passwordHash.options', array());
-
-            self::$instance = $instance = new self(self::getHashBackend($backend, $algo, $options));
-
-            $instance->setRehash($config->get('passwordHash.rehash', true));
+            $instance->setRehash(true);
         }
         return self::$instance;
     }
@@ -102,7 +96,7 @@ class Hash
      * @param array $options
      * @return BackendInterface
      */
-    public static function getHashBackend($class, $algo = null, array $options = array())
+    public static function getHashBackend($class, $algo = null, array $options = [])
     {
         $class = \SugarAutoLoader::customClass('\\Sugarcrm\\Sugarcrm\\Security\\Password\\Backend\\' . ucfirst($class));
 
@@ -128,7 +122,7 @@ class Hash
      */
     public function setRehash($toggle)
     {
-        $this->rehash = (bool) $toggle;
+        $this->rehash = (bool)$toggle;
     }
 
     /**

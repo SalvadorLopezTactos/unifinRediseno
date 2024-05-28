@@ -73,6 +73,12 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'adopt_sig_config_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'advanced_correct' => '?string',
         'advanced_correct_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'advanced_search_enable_tab_field' => '?string',
+        'advanced_search_enable_tab_field_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'advanced_search_enable_template_id_field' => '?string',
+        'advanced_search_enable_template_id_field_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'advanced_search_enable_template_name_field' => '?string',
+        'advanced_search_enable_template_name_field_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_access_code_format' => '?string',
         'allow_access_code_format_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_account_management_granular' => '?string',
@@ -85,6 +91,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_agent_name_email_edit_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_agreement_actions' => '?string',
         'allow_agreement_actions_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'allow_agreement_orchestration_workflows' => '?string',
+        'allow_agreement_orchestration_workflows_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_auto_nav_settings' => '?string',
         'allow_auto_nav_settings_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_auto_tagging' => '?string',
@@ -94,6 +102,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_cd_withdraw' => '?string',
         'allow_cd_withdraw_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_connect_http_listener_configs' => '?string',
+        'allow_connect_o_auth_ui' => '?string',
         'allow_connect_send_finish_later' => '?string',
         'allow_connect_send_finish_later_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_connect_unified_payload_ui' => '?string',
@@ -105,12 +114,16 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_delayed_routing_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_delegated_signing' => '?string',
         'allow_delegated_signing_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'allow_doc_gen_documents' => '?string',
+        'allow_doc_gen_documents_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_document_disclosures' => '?string',
         'allow_document_disclosures_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_documents_on_signed_envelopes' => '?string',
         'allow_documents_on_signed_envelopes_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_document_visibility' => '?string',
         'allow_document_visibility_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'allow_editing_envelopes_on_behalf_of_others' => '?string',
+        'allow_editing_envelopes_on_behalf_of_others_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_e_hanko_stamps' => '?string',
         'allow_e_hanko_stamps_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_e_note_e_original' => '?string',
@@ -135,6 +148,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_external_linked_accounts_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_external_signature_pad' => '?string',
         'allow_external_signature_pad_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'allow_idv_for_eu_qualified_signatures' => '?string',
+        'allow_idv_for_eu_qualified_signatures_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_idv_level1' => '?string',
         'allow_idv_level1_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_idv_level2' => '?string',
@@ -149,6 +164,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_in_person_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_managed_stamps' => '?string',
         'allow_managed_stamps_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'allow_managing_envelopes_on_behalf_of_others' => '?string',
+        'allow_managing_envelopes_on_behalf_of_others_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_markup' => '?string',
         'allow_markup_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_member_time_zone' => '?string',
@@ -168,6 +185,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_open_trust_signer_certificate' => '?string',
         'allow_open_trust_signer_certificate_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_organization_docusign_monitor' => '?string',
+        'allow_organization_docusign_monitor_lite' => '?string',
+        'allow_organization_docusign_monitor_lite_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_organization_docusign_monitor_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_organization_domain_user_management' => '?string',
         'allow_organization_domain_user_management_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
@@ -179,8 +198,14 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_organization_to_use_in_person_electronic_notary_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_organization_to_use_remote_notary' => '?string',
         'allow_organization_to_use_remote_notary_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'allow_organization_to_use_third_party_electronic_notary' => '?string',
+        'allow_organization_to_use_third_party_electronic_notary_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'allow_participant_recipient_type' => '?string',
+        'allow_participant_recipient_type_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_payment_processing' => '?string',
         'allow_payment_processing_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'allow_performance_analytics' => '?string',
+        'allow_performance_analytics_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_phone_authentication' => '?string',
         'allow_phone_authentication_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_phone_auth_override' => '?string',
@@ -201,6 +226,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_scheduled_sending_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_security_appliance' => '?string',
         'allow_security_appliance_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'allow_sending_envelopes_on_behalf_of_others' => '?string',
+        'allow_sending_envelopes_on_behalf_of_others_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_send_to_certified_delivery' => '?string',
         'allow_send_to_certified_delivery_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_send_to_intermediary' => '?string',
@@ -235,12 +262,18 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_social_id_login_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_supplemental_documents' => '?string',
         'allow_supplemental_documents_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'allow_third_party_electronic_notary' => '?string',
+        'allow_third_party_electronic_notary_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'allow_transactions_workspace' => '?string',
+        'allow_transactions_workspace_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_users_to_access_directory' => '?string',
         'allow_users_to_access_directory_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_value_insights' => '?string',
         'allow_value_insights_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'allow_web_forms' => '?string',
         'allow_web_forms_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'allow_whats_app_delivery' => '?string',
+        'allow_whats_app_delivery_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'anchor_population_scope' => '?string',
         'anchor_population_scope_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'anchor_tag_versioned_placement_enabled' => '?string',
@@ -292,6 +325,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'convert_pdf_fields_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'data_population_scope' => '?string',
         'data_population_scope_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'default_to_advanced_envelopes_filter_form' => '?string',
+        'default_to_advanced_envelopes_filter_form_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'disable_auto_template_matching' => '?string',
         'disable_auto_template_matching_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'disable_mobile_app' => '?string',
@@ -322,12 +357,19 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'document_retention_purge_tabs' => '?string',
         'document_visibility' => '?string',
         'document_visibility_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'dss_enable_provisioning_pen_configuration_radmin_option' => '?string',
         'dss_sign_28411_enable_leave_page_prompt_radmin_option' => '?string',
         'dss_sign_29182_slide_up_bar_radmin_option' => '?string',
         'email_template_version' => '?string',
         'email_template_version_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_access_code_generator' => '?string',
         'enable_access_code_generator_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_account_wide_search' => '?string',
+        'enable_account_wide_search_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_adm_healthcare' => '?string',
+        'enable_adm_healthcare_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_advanced_envelopes_search' => '?string',
+        'enable_advanced_envelopes_search_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_advanced_payments' => '?string',
         'enable_advanced_payments_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_advanced_power_forms' => '?string',
@@ -342,19 +384,48 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'enable_bcc_dummy_link_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_calculated_fields' => '?string',
         'enable_calculated_fields_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_click_plus' => '?string',
+        'enable_click_plus_conditional_content' => '?string',
+        'enable_click_plus_conditional_content_meta_data' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_click_plus_custom_fields' => '?string',
+        'enable_click_plus_custom_fields_meta_data' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_click_plus_custom_style' => '?string',
+        'enable_click_plus_custom_style_meta_data' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_click_plus_dynamic_content' => '?string',
+        'enable_click_plus_dynamic_content_meta_data' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_click_plus_meta_data' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_clickwraps' => '?string',
         'enable_clickwraps_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_combined_pdf_download_for_sbs' => '?string',
         'enable_comments_history_download_in_signing' => '?string',
         'enable_comments_history_download_in_signing_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_contact_suggestions' => '?string',
+        'enable_contact_suggestions_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_customer_satisfaction_metric_tracking' => '?string',
         'enable_customer_satisfaction_metric_tracking_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_d_sig_eu_advanced_pens' => '?string',
+        'enable_d_sig_eu_advanced_pens_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_d_sig_express_pens' => '?string',
+        'enable_d_sig_express_pens_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_d_sig_id_check_for_aes_pens' => '?string',
+        'enable_d_sig_id_check_for_aes_pens_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_d_sig_id_check_in_person_for_qes_pens' => '?string',
+        'enable_d_sig_id_check_in_person_for_qes_pens_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_d_sig_id_check_remote_for_qes_pens' => '?string',
+        'enable_d_sig_id_check_remote_for_qes_pens_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_d_sig_id_verification_pens' => '?string',
+        'enable_d_sig_id_verification_pens_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_d_sig_id_verification_premier_pens' => '?string',
+        'enable_d_sig_id_verification_premier_pens_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_ds_pro' => '?string',
         'enable_ds_pro_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_enforce_tls_emails_setting_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_envelope_stamping_by_account_admin' => '?string',
         'enable_envelope_stamping_by_account_admin_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_envelope_stamping_by_ds_admin' => '?string',
         'enable_envelope_stamping_by_ds_admin_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_e_sign_api_hourly_limit_management' => '?string',
+        'enable_e_sign_api_hourly_limit_management_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_esign_communities' => '?string',
         'enable_esign_communities_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_id_fx_accountless_sms_auth_for_part11' => '?string',
@@ -363,10 +434,13 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'enable_id_fx_intuit_kba_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_id_fx_phone_authentication' => '?string',
         'enable_id_fx_phone_authentication_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_idfx_phone_auth_signature_auth_status' => '?string',
+        'enable_idfx_phone_auth_signature_auth_status_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_in_browser_editor' => '?string',
         'enable_in_browser_editor_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_key_terms_suggestions_by_document_type' => '?string',
         'enable_key_terms_suggestions_by_document_type_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enable_participant_recipient_setting_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_payment_processing' => '?string',
         'enable_payment_processing_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enable_pdfa_conversion' => '?string',
@@ -440,10 +514,18 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'enable_witnessing_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'enforce_template_name_uniqueness' => '?string',
         'enforce_template_name_uniqueness_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'enforce_tls_emails' => '?string',
+        'enforce_tls_emails_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'envelope_integration_allowed' => '?string',
         'envelope_integration_allowed_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'envelope_integration_enabled' => '?string',
         'envelope_integration_enabled_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'envelope_limits_total_document_size_allowed_in_mb' => '?string',
+        'envelope_limits_total_document_size_allowed_in_mb_enabled' => '?string',
+        'envelope_limits_total_document_size_allowed_in_mb_enabled_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'envelope_limits_total_document_size_allowed_in_mb_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'envelope_search_mode' => '?string',
+        'envelope_search_mode_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'envelope_stamping_default_value' => '?string',
         'envelope_stamping_default_value_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'exit_prompt' => '?string',
@@ -461,6 +543,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'finish_reminder_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'guided_forms_html_allowed' => '?string',
         'guided_forms_html_allowed_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'guided_forms_html_conversion_policy' => '?string',
+        'guided_forms_html_conversion_policy_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'has_recipient_connect_claimed_domain' => '?string',
         'hide_account_address_in_co_c' => '?string',
         'hide_account_address_in_co_c_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
@@ -477,6 +561,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'id_check_required_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'identity_verification' => '\DocuSign\eSign\Model\AccountIdentityVerificationWorkflow[]',
         'identity_verification_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'idfx_kba_authentication_override' => '?string',
+        'idfx_kba_authentication_override_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'idfx_phone_authentication_override' => '?string',
         'idfx_phone_authentication_override_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'ignore_error_if_anchor_tab_not_found' => '?string',
@@ -489,21 +575,31 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'in_session_enabled_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'in_session_suppress_emails' => '?string',
         'in_session_suppress_emails_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'is_connect_document_fields_enabled' => '?string',
         'linked_external_primary_accounts' => '\DocuSign\eSign\Model\LinkedExternalPrimaryAccount[]',
         'maximum_signing_groups' => '?string',
         'maximum_signing_groups_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'maximum_users_per_signing_group' => '?string',
         'maximum_users_per_signing_group_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'max_number_of_custom_stamps' => '?string',
+        'merge_mixed_mode_results' => '?string',
+        'merge_mixed_mode_results_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'mobile_session_timeout' => '?string',
         'mobile_session_timeout_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'number_of_active_custom_stamps' => '?string',
         'opt_in_mobile_signing_v02' => '?string',
         'opt_in_mobile_signing_v02_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'opt_in_universal_signatures' => '?string',
         'opt_out_auto_nav_text_and_tab_color_updates' => '?string',
         'opt_out_auto_nav_text_and_tab_color_updates_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'opt_out_new_platform_seal' => '?string',
         'opt_out_new_platform_seal_platform_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'pdf_max_chunked_upload_part_size' => '?string',
+        'pdf_max_chunked_upload_part_size_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'pdf_max_chunked_upload_total_size' => '?string',
+        'pdf_max_chunked_upload_total_size_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'pdf_max_individual_upload_size' => '?string',
+        'pdf_max_individual_upload_size_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'phone_auth_recipient_may_provide_phone_number' => '?string',
         'phone_auth_recipient_may_provide_phone_number_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'pki_sign_downloaded_pdf_docs' => '?string',
@@ -526,6 +622,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'rsa_verid_password' => '?string',
         'rsa_verid_ruleset' => '?string',
         'rsa_verid_user_id' => '?string',
+        'sbs_transaction_level' => '?string',
         'self_signed_recipient_email_document' => '?string',
         'self_signed_recipient_email_document_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'self_signed_recipient_email_document_user_override' => '?string',
@@ -634,10 +731,16 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'use_derived_keys_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'use_docu_sign_express_signer_certificate' => '?string',
         'use_docu_sign_express_signer_certificate_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'use_envelope_search_mixed_mode' => '?string',
+        'use_envelope_search_mixed_mode_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'use_multi_app_groups_data' => '?string',
         'use_multi_app_groups_data_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'use_new_blob_for_pdf' => '?string',
         'use_new_blob_for_pdf_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'use_new_envelope_search' => '?string',
+        'use_new_envelope_search_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'use_new_envelope_search_only_when_searching_after_date' => '?string',
+        'use_new_envelope_search_only_when_searching_after_date_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'use_safe_signer_certificates' => '?string',
         'use_safe_signer_certificates_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'uses_api' => '?string',
@@ -682,6 +785,12 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'adopt_sig_config_metadata' => null,
         'advanced_correct' => null,
         'advanced_correct_metadata' => null,
+        'advanced_search_enable_tab_field' => null,
+        'advanced_search_enable_tab_field_metadata' => null,
+        'advanced_search_enable_template_id_field' => null,
+        'advanced_search_enable_template_id_field_metadata' => null,
+        'advanced_search_enable_template_name_field' => null,
+        'advanced_search_enable_template_name_field_metadata' => null,
         'allow_access_code_format' => null,
         'allow_access_code_format_metadata' => null,
         'allow_account_management_granular' => null,
@@ -694,6 +803,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_agent_name_email_edit_metadata' => null,
         'allow_agreement_actions' => null,
         'allow_agreement_actions_metadata' => null,
+        'allow_agreement_orchestration_workflows' => null,
+        'allow_agreement_orchestration_workflows_metadata' => null,
         'allow_auto_nav_settings' => null,
         'allow_auto_nav_settings_metadata' => null,
         'allow_auto_tagging' => null,
@@ -703,6 +814,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_cd_withdraw' => null,
         'allow_cd_withdraw_metadata' => null,
         'allow_connect_http_listener_configs' => null,
+        'allow_connect_o_auth_ui' => null,
         'allow_connect_send_finish_later' => null,
         'allow_connect_send_finish_later_metadata' => null,
         'allow_connect_unified_payload_ui' => null,
@@ -714,12 +826,16 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_delayed_routing_metadata' => null,
         'allow_delegated_signing' => null,
         'allow_delegated_signing_metadata' => null,
+        'allow_doc_gen_documents' => null,
+        'allow_doc_gen_documents_metadata' => null,
         'allow_document_disclosures' => null,
         'allow_document_disclosures_metadata' => null,
         'allow_documents_on_signed_envelopes' => null,
         'allow_documents_on_signed_envelopes_metadata' => null,
         'allow_document_visibility' => null,
         'allow_document_visibility_metadata' => null,
+        'allow_editing_envelopes_on_behalf_of_others' => null,
+        'allow_editing_envelopes_on_behalf_of_others_metadata' => null,
         'allow_e_hanko_stamps' => null,
         'allow_e_hanko_stamps_metadata' => null,
         'allow_e_note_e_original' => null,
@@ -744,6 +860,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_external_linked_accounts_metadata' => null,
         'allow_external_signature_pad' => null,
         'allow_external_signature_pad_metadata' => null,
+        'allow_idv_for_eu_qualified_signatures' => null,
+        'allow_idv_for_eu_qualified_signatures_metadata' => null,
         'allow_idv_level1' => null,
         'allow_idv_level1_metadata' => null,
         'allow_idv_level2' => null,
@@ -758,6 +876,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_in_person_metadata' => null,
         'allow_managed_stamps' => null,
         'allow_managed_stamps_metadata' => null,
+        'allow_managing_envelopes_on_behalf_of_others' => null,
+        'allow_managing_envelopes_on_behalf_of_others_metadata' => null,
         'allow_markup' => null,
         'allow_markup_metadata' => null,
         'allow_member_time_zone' => null,
@@ -777,6 +897,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_open_trust_signer_certificate' => null,
         'allow_open_trust_signer_certificate_metadata' => null,
         'allow_organization_docusign_monitor' => null,
+        'allow_organization_docusign_monitor_lite' => null,
+        'allow_organization_docusign_monitor_lite_metadata' => null,
         'allow_organization_docusign_monitor_metadata' => null,
         'allow_organization_domain_user_management' => null,
         'allow_organization_domain_user_management_metadata' => null,
@@ -788,8 +910,14 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_organization_to_use_in_person_electronic_notary_metadata' => null,
         'allow_organization_to_use_remote_notary' => null,
         'allow_organization_to_use_remote_notary_metadata' => null,
+        'allow_organization_to_use_third_party_electronic_notary' => null,
+        'allow_organization_to_use_third_party_electronic_notary_metadata' => null,
+        'allow_participant_recipient_type' => null,
+        'allow_participant_recipient_type_metadata' => null,
         'allow_payment_processing' => null,
         'allow_payment_processing_metadata' => null,
+        'allow_performance_analytics' => null,
+        'allow_performance_analytics_metadata' => null,
         'allow_phone_authentication' => null,
         'allow_phone_authentication_metadata' => null,
         'allow_phone_auth_override' => null,
@@ -810,6 +938,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_scheduled_sending_metadata' => null,
         'allow_security_appliance' => null,
         'allow_security_appliance_metadata' => null,
+        'allow_sending_envelopes_on_behalf_of_others' => null,
+        'allow_sending_envelopes_on_behalf_of_others_metadata' => null,
         'allow_send_to_certified_delivery' => null,
         'allow_send_to_certified_delivery_metadata' => null,
         'allow_send_to_intermediary' => null,
@@ -844,12 +974,18 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_social_id_login_metadata' => null,
         'allow_supplemental_documents' => null,
         'allow_supplemental_documents_metadata' => null,
+        'allow_third_party_electronic_notary' => null,
+        'allow_third_party_electronic_notary_metadata' => null,
+        'allow_transactions_workspace' => null,
+        'allow_transactions_workspace_metadata' => null,
         'allow_users_to_access_directory' => null,
         'allow_users_to_access_directory_metadata' => null,
         'allow_value_insights' => null,
         'allow_value_insights_metadata' => null,
         'allow_web_forms' => null,
         'allow_web_forms_metadata' => null,
+        'allow_whats_app_delivery' => null,
+        'allow_whats_app_delivery_metadata' => null,
         'anchor_population_scope' => null,
         'anchor_population_scope_metadata' => null,
         'anchor_tag_versioned_placement_enabled' => null,
@@ -901,6 +1037,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'convert_pdf_fields_metadata' => null,
         'data_population_scope' => null,
         'data_population_scope_metadata' => null,
+        'default_to_advanced_envelopes_filter_form' => null,
+        'default_to_advanced_envelopes_filter_form_metadata' => null,
         'disable_auto_template_matching' => null,
         'disable_auto_template_matching_metadata' => null,
         'disable_mobile_app' => null,
@@ -931,12 +1069,19 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'document_retention_purge_tabs' => null,
         'document_visibility' => null,
         'document_visibility_metadata' => null,
+        'dss_enable_provisioning_pen_configuration_radmin_option' => null,
         'dss_sign_28411_enable_leave_page_prompt_radmin_option' => null,
         'dss_sign_29182_slide_up_bar_radmin_option' => null,
         'email_template_version' => null,
         'email_template_version_metadata' => null,
         'enable_access_code_generator' => null,
         'enable_access_code_generator_metadata' => null,
+        'enable_account_wide_search' => null,
+        'enable_account_wide_search_metadata' => null,
+        'enable_adm_healthcare' => null,
+        'enable_adm_healthcare_metadata' => null,
+        'enable_advanced_envelopes_search' => null,
+        'enable_advanced_envelopes_search_metadata' => null,
         'enable_advanced_payments' => null,
         'enable_advanced_payments_metadata' => null,
         'enable_advanced_power_forms' => null,
@@ -951,19 +1096,48 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'enable_bcc_dummy_link_metadata' => null,
         'enable_calculated_fields' => null,
         'enable_calculated_fields_metadata' => null,
+        'enable_click_plus' => null,
+        'enable_click_plus_conditional_content' => null,
+        'enable_click_plus_conditional_content_meta_data' => null,
+        'enable_click_plus_custom_fields' => null,
+        'enable_click_plus_custom_fields_meta_data' => null,
+        'enable_click_plus_custom_style' => null,
+        'enable_click_plus_custom_style_meta_data' => null,
+        'enable_click_plus_dynamic_content' => null,
+        'enable_click_plus_dynamic_content_meta_data' => null,
+        'enable_click_plus_meta_data' => null,
         'enable_clickwraps' => null,
         'enable_clickwraps_metadata' => null,
         'enable_combined_pdf_download_for_sbs' => null,
         'enable_comments_history_download_in_signing' => null,
         'enable_comments_history_download_in_signing_metadata' => null,
+        'enable_contact_suggestions' => null,
+        'enable_contact_suggestions_metadata' => null,
         'enable_customer_satisfaction_metric_tracking' => null,
         'enable_customer_satisfaction_metric_tracking_metadata' => null,
+        'enable_d_sig_eu_advanced_pens' => null,
+        'enable_d_sig_eu_advanced_pens_metadata' => null,
+        'enable_d_sig_express_pens' => null,
+        'enable_d_sig_express_pens_metadata' => null,
+        'enable_d_sig_id_check_for_aes_pens' => null,
+        'enable_d_sig_id_check_for_aes_pens_metadata' => null,
+        'enable_d_sig_id_check_in_person_for_qes_pens' => null,
+        'enable_d_sig_id_check_in_person_for_qes_pens_metadata' => null,
+        'enable_d_sig_id_check_remote_for_qes_pens' => null,
+        'enable_d_sig_id_check_remote_for_qes_pens_metadata' => null,
+        'enable_d_sig_id_verification_pens' => null,
+        'enable_d_sig_id_verification_pens_metadata' => null,
+        'enable_d_sig_id_verification_premier_pens' => null,
+        'enable_d_sig_id_verification_premier_pens_metadata' => null,
         'enable_ds_pro' => null,
         'enable_ds_pro_metadata' => null,
+        'enable_enforce_tls_emails_setting_metadata' => null,
         'enable_envelope_stamping_by_account_admin' => null,
         'enable_envelope_stamping_by_account_admin_metadata' => null,
         'enable_envelope_stamping_by_ds_admin' => null,
         'enable_envelope_stamping_by_ds_admin_metadata' => null,
+        'enable_e_sign_api_hourly_limit_management' => null,
+        'enable_e_sign_api_hourly_limit_management_metadata' => null,
         'enable_esign_communities' => null,
         'enable_esign_communities_metadata' => null,
         'enable_id_fx_accountless_sms_auth_for_part11' => null,
@@ -972,10 +1146,13 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'enable_id_fx_intuit_kba_metadata' => null,
         'enable_id_fx_phone_authentication' => null,
         'enable_id_fx_phone_authentication_metadata' => null,
+        'enable_idfx_phone_auth_signature_auth_status' => null,
+        'enable_idfx_phone_auth_signature_auth_status_metadata' => null,
         'enable_in_browser_editor' => null,
         'enable_in_browser_editor_metadata' => null,
         'enable_key_terms_suggestions_by_document_type' => null,
         'enable_key_terms_suggestions_by_document_type_metadata' => null,
+        'enable_participant_recipient_setting_metadata' => null,
         'enable_payment_processing' => null,
         'enable_payment_processing_metadata' => null,
         'enable_pdfa_conversion' => null,
@@ -1049,10 +1226,18 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'enable_witnessing_metadata' => null,
         'enforce_template_name_uniqueness' => null,
         'enforce_template_name_uniqueness_metadata' => null,
+        'enforce_tls_emails' => null,
+        'enforce_tls_emails_metadata' => null,
         'envelope_integration_allowed' => null,
         'envelope_integration_allowed_metadata' => null,
         'envelope_integration_enabled' => null,
         'envelope_integration_enabled_metadata' => null,
+        'envelope_limits_total_document_size_allowed_in_mb' => null,
+        'envelope_limits_total_document_size_allowed_in_mb_enabled' => null,
+        'envelope_limits_total_document_size_allowed_in_mb_enabled_metadata' => null,
+        'envelope_limits_total_document_size_allowed_in_mb_metadata' => null,
+        'envelope_search_mode' => null,
+        'envelope_search_mode_metadata' => null,
         'envelope_stamping_default_value' => null,
         'envelope_stamping_default_value_metadata' => null,
         'exit_prompt' => null,
@@ -1070,6 +1255,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'finish_reminder_metadata' => null,
         'guided_forms_html_allowed' => null,
         'guided_forms_html_allowed_metadata' => null,
+        'guided_forms_html_conversion_policy' => null,
+        'guided_forms_html_conversion_policy_metadata' => null,
         'has_recipient_connect_claimed_domain' => null,
         'hide_account_address_in_co_c' => null,
         'hide_account_address_in_co_c_metadata' => null,
@@ -1086,6 +1273,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'id_check_required_metadata' => null,
         'identity_verification' => null,
         'identity_verification_metadata' => null,
+        'idfx_kba_authentication_override' => null,
+        'idfx_kba_authentication_override_metadata' => null,
         'idfx_phone_authentication_override' => null,
         'idfx_phone_authentication_override_metadata' => null,
         'ignore_error_if_anchor_tab_not_found' => null,
@@ -1098,21 +1287,31 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'in_session_enabled_metadata' => null,
         'in_session_suppress_emails' => null,
         'in_session_suppress_emails_metadata' => null,
+        'is_connect_document_fields_enabled' => null,
         'linked_external_primary_accounts' => null,
         'maximum_signing_groups' => null,
         'maximum_signing_groups_metadata' => null,
         'maximum_users_per_signing_group' => null,
         'maximum_users_per_signing_group_metadata' => null,
         'max_number_of_custom_stamps' => null,
+        'merge_mixed_mode_results' => null,
+        'merge_mixed_mode_results_metadata' => null,
         'mobile_session_timeout' => null,
         'mobile_session_timeout_metadata' => null,
         'number_of_active_custom_stamps' => null,
         'opt_in_mobile_signing_v02' => null,
         'opt_in_mobile_signing_v02_metadata' => null,
+        'opt_in_universal_signatures' => null,
         'opt_out_auto_nav_text_and_tab_color_updates' => null,
         'opt_out_auto_nav_text_and_tab_color_updates_metadata' => null,
         'opt_out_new_platform_seal' => null,
         'opt_out_new_platform_seal_platform_metadata' => null,
+        'pdf_max_chunked_upload_part_size' => null,
+        'pdf_max_chunked_upload_part_size_metadata' => null,
+        'pdf_max_chunked_upload_total_size' => null,
+        'pdf_max_chunked_upload_total_size_metadata' => null,
+        'pdf_max_individual_upload_size' => null,
+        'pdf_max_individual_upload_size_metadata' => null,
         'phone_auth_recipient_may_provide_phone_number' => null,
         'phone_auth_recipient_may_provide_phone_number_metadata' => null,
         'pki_sign_downloaded_pdf_docs' => null,
@@ -1135,6 +1334,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'rsa_verid_password' => null,
         'rsa_verid_ruleset' => null,
         'rsa_verid_user_id' => null,
+        'sbs_transaction_level' => null,
         'self_signed_recipient_email_document' => null,
         'self_signed_recipient_email_document_metadata' => null,
         'self_signed_recipient_email_document_user_override' => null,
@@ -1243,10 +1443,16 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'use_derived_keys_metadata' => null,
         'use_docu_sign_express_signer_certificate' => null,
         'use_docu_sign_express_signer_certificate_metadata' => null,
+        'use_envelope_search_mixed_mode' => null,
+        'use_envelope_search_mixed_mode_metadata' => null,
         'use_multi_app_groups_data' => null,
         'use_multi_app_groups_data_metadata' => null,
         'use_new_blob_for_pdf' => null,
         'use_new_blob_for_pdf_metadata' => null,
+        'use_new_envelope_search' => null,
+        'use_new_envelope_search_metadata' => null,
+        'use_new_envelope_search_only_when_searching_after_date' => null,
+        'use_new_envelope_search_only_when_searching_after_date_metadata' => null,
         'use_safe_signer_certificates' => null,
         'use_safe_signer_certificates_metadata' => null,
         'uses_api' => null,
@@ -1312,6 +1518,12 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'adopt_sig_config_metadata' => 'adoptSigConfigMetadata',
         'advanced_correct' => 'advancedCorrect',
         'advanced_correct_metadata' => 'advancedCorrectMetadata',
+        'advanced_search_enable_tab_field' => 'advancedSearchEnableTabField',
+        'advanced_search_enable_tab_field_metadata' => 'advancedSearchEnableTabFieldMetadata',
+        'advanced_search_enable_template_id_field' => 'advancedSearchEnableTemplateIdField',
+        'advanced_search_enable_template_id_field_metadata' => 'advancedSearchEnableTemplateIdFieldMetadata',
+        'advanced_search_enable_template_name_field' => 'advancedSearchEnableTemplateNameField',
+        'advanced_search_enable_template_name_field_metadata' => 'advancedSearchEnableTemplateNameFieldMetadata',
         'allow_access_code_format' => 'allowAccessCodeFormat',
         'allow_access_code_format_metadata' => 'allowAccessCodeFormatMetadata',
         'allow_account_management_granular' => 'allowAccountManagementGranular',
@@ -1324,6 +1536,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_agent_name_email_edit_metadata' => 'allowAgentNameEmailEditMetadata',
         'allow_agreement_actions' => 'allowAgreementActions',
         'allow_agreement_actions_metadata' => 'allowAgreementActionsMetadata',
+        'allow_agreement_orchestration_workflows' => 'allowAgreementOrchestrationWorkflows',
+        'allow_agreement_orchestration_workflows_metadata' => 'allowAgreementOrchestrationWorkflowsMetadata',
         'allow_auto_nav_settings' => 'allowAutoNavSettings',
         'allow_auto_nav_settings_metadata' => 'allowAutoNavSettingsMetadata',
         'allow_auto_tagging' => 'allowAutoTagging',
@@ -1333,6 +1547,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_cd_withdraw' => 'allowCDWithdraw',
         'allow_cd_withdraw_metadata' => 'allowCDWithdrawMetadata',
         'allow_connect_http_listener_configs' => 'allowConnectHttpListenerConfigs',
+        'allow_connect_o_auth_ui' => 'allowConnectOAuthUI',
         'allow_connect_send_finish_later' => 'allowConnectSendFinishLater',
         'allow_connect_send_finish_later_metadata' => 'allowConnectSendFinishLaterMetadata',
         'allow_connect_unified_payload_ui' => 'allowConnectUnifiedPayloadUI',
@@ -1344,12 +1559,16 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_delayed_routing_metadata' => 'allowDelayedRoutingMetadata',
         'allow_delegated_signing' => 'allowDelegatedSigning',
         'allow_delegated_signing_metadata' => 'allowDelegatedSigningMetadata',
+        'allow_doc_gen_documents' => 'allowDocGenDocuments',
+        'allow_doc_gen_documents_metadata' => 'allowDocGenDocumentsMetadata',
         'allow_document_disclosures' => 'allowDocumentDisclosures',
         'allow_document_disclosures_metadata' => 'allowDocumentDisclosuresMetadata',
         'allow_documents_on_signed_envelopes' => 'allowDocumentsOnSignedEnvelopes',
         'allow_documents_on_signed_envelopes_metadata' => 'allowDocumentsOnSignedEnvelopesMetadata',
         'allow_document_visibility' => 'allowDocumentVisibility',
         'allow_document_visibility_metadata' => 'allowDocumentVisibilityMetadata',
+        'allow_editing_envelopes_on_behalf_of_others' => 'allowEditingEnvelopesOnBehalfOfOthers',
+        'allow_editing_envelopes_on_behalf_of_others_metadata' => 'allowEditingEnvelopesOnBehalfOfOthersMetadata',
         'allow_e_hanko_stamps' => 'allowEHankoStamps',
         'allow_e_hanko_stamps_metadata' => 'allowEHankoStampsMetadata',
         'allow_e_note_e_original' => 'allowENoteEOriginal',
@@ -1374,6 +1593,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_external_linked_accounts_metadata' => 'allowExternalLinkedAccountsMetadata',
         'allow_external_signature_pad' => 'allowExternalSignaturePad',
         'allow_external_signature_pad_metadata' => 'allowExternalSignaturePadMetadata',
+        'allow_idv_for_eu_qualified_signatures' => 'allowIDVForEUQualifiedSignatures',
+        'allow_idv_for_eu_qualified_signatures_metadata' => 'allowIDVForEUQualifiedSignaturesMetadata',
         'allow_idv_level1' => 'allowIDVLevel1',
         'allow_idv_level1_metadata' => 'allowIDVLevel1Metadata',
         'allow_idv_level2' => 'allowIDVLevel2',
@@ -1388,6 +1609,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_in_person_metadata' => 'allowInPersonMetadata',
         'allow_managed_stamps' => 'allowManagedStamps',
         'allow_managed_stamps_metadata' => 'allowManagedStampsMetadata',
+        'allow_managing_envelopes_on_behalf_of_others' => 'allowManagingEnvelopesOnBehalfOfOthers',
+        'allow_managing_envelopes_on_behalf_of_others_metadata' => 'allowManagingEnvelopesOnBehalfOfOthersMetadata',
         'allow_markup' => 'allowMarkup',
         'allow_markup_metadata' => 'allowMarkupMetadata',
         'allow_member_time_zone' => 'allowMemberTimeZone',
@@ -1407,6 +1630,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_open_trust_signer_certificate' => 'allowOpenTrustSignerCertificate',
         'allow_open_trust_signer_certificate_metadata' => 'allowOpenTrustSignerCertificateMetadata',
         'allow_organization_docusign_monitor' => 'allowOrganizationDocusignMonitor',
+        'allow_organization_docusign_monitor_lite' => 'allowOrganizationDocusignMonitorLite',
+        'allow_organization_docusign_monitor_lite_metadata' => 'allowOrganizationDocusignMonitorLiteMetadata',
         'allow_organization_docusign_monitor_metadata' => 'allowOrganizationDocusignMonitorMetadata',
         'allow_organization_domain_user_management' => 'allowOrganizationDomainUserManagement',
         'allow_organization_domain_user_management_metadata' => 'allowOrganizationDomainUserManagementMetadata',
@@ -1418,8 +1643,14 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_organization_to_use_in_person_electronic_notary_metadata' => 'allowOrganizationToUseInPersonElectronicNotaryMetadata',
         'allow_organization_to_use_remote_notary' => 'allowOrganizationToUseRemoteNotary',
         'allow_organization_to_use_remote_notary_metadata' => 'allowOrganizationToUseRemoteNotaryMetadata',
+        'allow_organization_to_use_third_party_electronic_notary' => 'allowOrganizationToUseThirdPartyElectronicNotary',
+        'allow_organization_to_use_third_party_electronic_notary_metadata' => 'allowOrganizationToUseThirdPartyElectronicNotaryMetadata',
+        'allow_participant_recipient_type' => 'allowParticipantRecipientType',
+        'allow_participant_recipient_type_metadata' => 'allowParticipantRecipientTypeMetadata',
         'allow_payment_processing' => 'allowPaymentProcessing',
         'allow_payment_processing_metadata' => 'allowPaymentProcessingMetadata',
+        'allow_performance_analytics' => 'allowPerformanceAnalytics',
+        'allow_performance_analytics_metadata' => 'allowPerformanceAnalyticsMetadata',
         'allow_phone_authentication' => 'allowPhoneAuthentication',
         'allow_phone_authentication_metadata' => 'allowPhoneAuthenticationMetadata',
         'allow_phone_auth_override' => 'allowPhoneAuthOverride',
@@ -1440,6 +1671,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_scheduled_sending_metadata' => 'allowScheduledSendingMetadata',
         'allow_security_appliance' => 'allowSecurityAppliance',
         'allow_security_appliance_metadata' => 'allowSecurityApplianceMetadata',
+        'allow_sending_envelopes_on_behalf_of_others' => 'allowSendingEnvelopesOnBehalfOfOthers',
+        'allow_sending_envelopes_on_behalf_of_others_metadata' => 'allowSendingEnvelopesOnBehalfOfOthersMetadata',
         'allow_send_to_certified_delivery' => 'allowSendToCertifiedDelivery',
         'allow_send_to_certified_delivery_metadata' => 'allowSendToCertifiedDeliveryMetadata',
         'allow_send_to_intermediary' => 'allowSendToIntermediary',
@@ -1474,12 +1707,18 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_social_id_login_metadata' => 'allowSocialIdLoginMetadata',
         'allow_supplemental_documents' => 'allowSupplementalDocuments',
         'allow_supplemental_documents_metadata' => 'allowSupplementalDocumentsMetadata',
+        'allow_third_party_electronic_notary' => 'allowThirdPartyElectronicNotary',
+        'allow_third_party_electronic_notary_metadata' => 'allowThirdPartyElectronicNotaryMetadata',
+        'allow_transactions_workspace' => 'allowTransactionsWorkspace',
+        'allow_transactions_workspace_metadata' => 'allowTransactionsWorkspaceMetadata',
         'allow_users_to_access_directory' => 'allowUsersToAccessDirectory',
         'allow_users_to_access_directory_metadata' => 'allowUsersToAccessDirectoryMetadata',
         'allow_value_insights' => 'allowValueInsights',
         'allow_value_insights_metadata' => 'allowValueInsightsMetadata',
         'allow_web_forms' => 'allowWebForms',
         'allow_web_forms_metadata' => 'allowWebFormsMetadata',
+        'allow_whats_app_delivery' => 'allowWhatsAppDelivery',
+        'allow_whats_app_delivery_metadata' => 'allowWhatsAppDeliveryMetadata',
         'anchor_population_scope' => 'anchorPopulationScope',
         'anchor_population_scope_metadata' => 'anchorPopulationScopeMetadata',
         'anchor_tag_versioned_placement_enabled' => 'anchorTagVersionedPlacementEnabled',
@@ -1531,6 +1770,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'convert_pdf_fields_metadata' => 'convertPdfFieldsMetadata',
         'data_population_scope' => 'dataPopulationScope',
         'data_population_scope_metadata' => 'dataPopulationScopeMetadata',
+        'default_to_advanced_envelopes_filter_form' => 'defaultToAdvancedEnvelopesFilterForm',
+        'default_to_advanced_envelopes_filter_form_metadata' => 'defaultToAdvancedEnvelopesFilterFormMetadata',
         'disable_auto_template_matching' => 'disableAutoTemplateMatching',
         'disable_auto_template_matching_metadata' => 'disableAutoTemplateMatchingMetadata',
         'disable_mobile_app' => 'disableMobileApp',
@@ -1561,12 +1802,19 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'document_retention_purge_tabs' => 'documentRetentionPurgeTabs',
         'document_visibility' => 'documentVisibility',
         'document_visibility_metadata' => 'documentVisibilityMetadata',
+        'dss_enable_provisioning_pen_configuration_radmin_option' => 'dss_EnableProvisioningPenConfiguration_RadminOption',
         'dss_sign_28411_enable_leave_page_prompt_radmin_option' => 'dss_SIGN_28411_EnableLeavePagePrompt_RadminOption',
         'dss_sign_29182_slide_up_bar_radmin_option' => 'dss_SIGN_29182_SlideUpBar_RadminOption',
         'email_template_version' => 'emailTemplateVersion',
         'email_template_version_metadata' => 'emailTemplateVersionMetadata',
         'enable_access_code_generator' => 'enableAccessCodeGenerator',
         'enable_access_code_generator_metadata' => 'enableAccessCodeGeneratorMetadata',
+        'enable_account_wide_search' => 'enableAccountWideSearch',
+        'enable_account_wide_search_metadata' => 'enableAccountWideSearchMetadata',
+        'enable_adm_healthcare' => 'enableAdmHealthcare',
+        'enable_adm_healthcare_metadata' => 'enableAdmHealthcareMetadata',
+        'enable_advanced_envelopes_search' => 'enableAdvancedEnvelopesSearch',
+        'enable_advanced_envelopes_search_metadata' => 'enableAdvancedEnvelopesSearchMetadata',
         'enable_advanced_payments' => 'enableAdvancedPayments',
         'enable_advanced_payments_metadata' => 'enableAdvancedPaymentsMetadata',
         'enable_advanced_power_forms' => 'enableAdvancedPowerForms',
@@ -1581,19 +1829,48 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'enable_bcc_dummy_link_metadata' => 'enableBccDummyLinkMetadata',
         'enable_calculated_fields' => 'enableCalculatedFields',
         'enable_calculated_fields_metadata' => 'enableCalculatedFieldsMetadata',
+        'enable_click_plus' => 'enableClickPlus',
+        'enable_click_plus_conditional_content' => 'enableClickPlusConditionalContent',
+        'enable_click_plus_conditional_content_meta_data' => 'enableClickPlusConditionalContentMetaData',
+        'enable_click_plus_custom_fields' => 'enableClickPlusCustomFields',
+        'enable_click_plus_custom_fields_meta_data' => 'enableClickPlusCustomFieldsMetaData',
+        'enable_click_plus_custom_style' => 'enableClickPlusCustomStyle',
+        'enable_click_plus_custom_style_meta_data' => 'enableClickPlusCustomStyleMetaData',
+        'enable_click_plus_dynamic_content' => 'enableClickPlusDynamicContent',
+        'enable_click_plus_dynamic_content_meta_data' => 'enableClickPlusDynamicContentMetaData',
+        'enable_click_plus_meta_data' => 'enableClickPlusMetaData',
         'enable_clickwraps' => 'enableClickwraps',
         'enable_clickwraps_metadata' => 'enableClickwrapsMetadata',
         'enable_combined_pdf_download_for_sbs' => 'enableCombinedPDFDownloadForSBS',
         'enable_comments_history_download_in_signing' => 'enableCommentsHistoryDownloadInSigning',
         'enable_comments_history_download_in_signing_metadata' => 'enableCommentsHistoryDownloadInSigningMetadata',
+        'enable_contact_suggestions' => 'enableContactSuggestions',
+        'enable_contact_suggestions_metadata' => 'enableContactSuggestionsMetadata',
         'enable_customer_satisfaction_metric_tracking' => 'enableCustomerSatisfactionMetricTracking',
         'enable_customer_satisfaction_metric_tracking_metadata' => 'enableCustomerSatisfactionMetricTrackingMetadata',
+        'enable_d_sig_eu_advanced_pens' => 'enableDSigEUAdvancedPens',
+        'enable_d_sig_eu_advanced_pens_metadata' => 'enableDSigEUAdvancedPensMetadata',
+        'enable_d_sig_express_pens' => 'enableDSigExpressPens',
+        'enable_d_sig_express_pens_metadata' => 'enableDSigExpressPensMetadata',
+        'enable_d_sig_id_check_for_aes_pens' => 'enableDSigIDCheckForAESPens',
+        'enable_d_sig_id_check_for_aes_pens_metadata' => 'enableDSigIDCheckForAESPensMetadata',
+        'enable_d_sig_id_check_in_person_for_qes_pens' => 'enableDSigIDCheckInPersonForQESPens',
+        'enable_d_sig_id_check_in_person_for_qes_pens_metadata' => 'enableDSigIDCheckInPersonForQESPensMetadata',
+        'enable_d_sig_id_check_remote_for_qes_pens' => 'enableDSigIDCheckRemoteForQESPens',
+        'enable_d_sig_id_check_remote_for_qes_pens_metadata' => 'enableDSigIDCheckRemoteForQESPensMetadata',
+        'enable_d_sig_id_verification_pens' => 'enableDSigIDVerificationPens',
+        'enable_d_sig_id_verification_pens_metadata' => 'enableDSigIDVerificationPensMetadata',
+        'enable_d_sig_id_verification_premier_pens' => 'enableDSigIDVerificationPremierPens',
+        'enable_d_sig_id_verification_premier_pens_metadata' => 'enableDSigIDVerificationPremierPensMetadata',
         'enable_ds_pro' => 'enableDSPro',
         'enable_ds_pro_metadata' => 'enableDSProMetadata',
+        'enable_enforce_tls_emails_setting_metadata' => 'enableEnforceTlsEmailsSettingMetadata',
         'enable_envelope_stamping_by_account_admin' => 'enableEnvelopeStampingByAccountAdmin',
         'enable_envelope_stamping_by_account_admin_metadata' => 'enableEnvelopeStampingByAccountAdminMetadata',
         'enable_envelope_stamping_by_ds_admin' => 'enableEnvelopeStampingByDSAdmin',
         'enable_envelope_stamping_by_ds_admin_metadata' => 'enableEnvelopeStampingByDSAdminMetadata',
+        'enable_e_sign_api_hourly_limit_management' => 'enableESignAPIHourlyLimitManagement',
+        'enable_e_sign_api_hourly_limit_management_metadata' => 'enableESignAPIHourlyLimitManagementMetadata',
         'enable_esign_communities' => 'enableEsignCommunities',
         'enable_esign_communities_metadata' => 'enableEsignCommunitiesMetadata',
         'enable_id_fx_accountless_sms_auth_for_part11' => 'enableIDFxAccountlessSMSAuthForPart11',
@@ -1602,10 +1879,13 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'enable_id_fx_intuit_kba_metadata' => 'enableIDFxIntuitKBAMetadata',
         'enable_id_fx_phone_authentication' => 'enableIDFxPhoneAuthentication',
         'enable_id_fx_phone_authentication_metadata' => 'enableIDFxPhoneAuthenticationMetadata',
+        'enable_idfx_phone_auth_signature_auth_status' => 'enableIdfxPhoneAuthSignatureAuthStatus',
+        'enable_idfx_phone_auth_signature_auth_status_metadata' => 'enableIdfxPhoneAuthSignatureAuthStatusMetadata',
         'enable_in_browser_editor' => 'enableInBrowserEditor',
         'enable_in_browser_editor_metadata' => 'enableInBrowserEditorMetadata',
         'enable_key_terms_suggestions_by_document_type' => 'enableKeyTermsSuggestionsByDocumentType',
         'enable_key_terms_suggestions_by_document_type_metadata' => 'enableKeyTermsSuggestionsByDocumentTypeMetadata',
+        'enable_participant_recipient_setting_metadata' => 'enableParticipantRecipientSettingMetadata',
         'enable_payment_processing' => 'enablePaymentProcessing',
         'enable_payment_processing_metadata' => 'enablePaymentProcessingMetadata',
         'enable_pdfa_conversion' => 'enablePDFAConversion',
@@ -1679,10 +1959,18 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'enable_witnessing_metadata' => 'enableWitnessingMetadata',
         'enforce_template_name_uniqueness' => 'enforceTemplateNameUniqueness',
         'enforce_template_name_uniqueness_metadata' => 'enforceTemplateNameUniquenessMetadata',
+        'enforce_tls_emails' => 'enforceTlsEmails',
+        'enforce_tls_emails_metadata' => 'enforceTlsEmailsMetadata',
         'envelope_integration_allowed' => 'envelopeIntegrationAllowed',
         'envelope_integration_allowed_metadata' => 'envelopeIntegrationAllowedMetadata',
         'envelope_integration_enabled' => 'envelopeIntegrationEnabled',
         'envelope_integration_enabled_metadata' => 'envelopeIntegrationEnabledMetadata',
+        'envelope_limits_total_document_size_allowed_in_mb' => 'EnvelopeLimitsTotalDocumentSizeAllowedInMB',
+        'envelope_limits_total_document_size_allowed_in_mb_enabled' => 'EnvelopeLimitsTotalDocumentSizeAllowedInMBEnabled',
+        'envelope_limits_total_document_size_allowed_in_mb_enabled_metadata' => 'EnvelopeLimitsTotalDocumentSizeAllowedInMBEnabledMetadata',
+        'envelope_limits_total_document_size_allowed_in_mb_metadata' => 'EnvelopeLimitsTotalDocumentSizeAllowedInMBMetadata',
+        'envelope_search_mode' => 'envelopeSearchMode',
+        'envelope_search_mode_metadata' => 'envelopeSearchModeMetadata',
         'envelope_stamping_default_value' => 'envelopeStampingDefaultValue',
         'envelope_stamping_default_value_metadata' => 'envelopeStampingDefaultValueMetadata',
         'exit_prompt' => 'exitPrompt',
@@ -1700,6 +1988,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'finish_reminder_metadata' => 'finishReminderMetadata',
         'guided_forms_html_allowed' => 'guidedFormsHtmlAllowed',
         'guided_forms_html_allowed_metadata' => 'guidedFormsHtmlAllowedMetadata',
+        'guided_forms_html_conversion_policy' => 'guidedFormsHtmlConversionPolicy',
+        'guided_forms_html_conversion_policy_metadata' => 'guidedFormsHtmlConversionPolicyMetadata',
         'has_recipient_connect_claimed_domain' => 'hasRecipientConnectClaimedDomain',
         'hide_account_address_in_co_c' => 'hideAccountAddressInCoC',
         'hide_account_address_in_co_c_metadata' => 'hideAccountAddressInCoCMetadata',
@@ -1716,6 +2006,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'id_check_required_metadata' => 'idCheckRequiredMetadata',
         'identity_verification' => 'identityVerification',
         'identity_verification_metadata' => 'identityVerificationMetadata',
+        'idfx_kba_authentication_override' => 'idfxKBAAuthenticationOverride',
+        'idfx_kba_authentication_override_metadata' => 'idfxKBAAuthenticationOverrideMetadata',
         'idfx_phone_authentication_override' => 'idfxPhoneAuthenticationOverride',
         'idfx_phone_authentication_override_metadata' => 'idfxPhoneAuthenticationOverrideMetadata',
         'ignore_error_if_anchor_tab_not_found' => 'ignoreErrorIfAnchorTabNotFound',
@@ -1728,21 +2020,31 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'in_session_enabled_metadata' => 'inSessionEnabledMetadata',
         'in_session_suppress_emails' => 'inSessionSuppressEmails',
         'in_session_suppress_emails_metadata' => 'inSessionSuppressEmailsMetadata',
+        'is_connect_document_fields_enabled' => 'isConnectDocumentFieldsEnabled',
         'linked_external_primary_accounts' => 'linkedExternalPrimaryAccounts',
         'maximum_signing_groups' => 'maximumSigningGroups',
         'maximum_signing_groups_metadata' => 'maximumSigningGroupsMetadata',
         'maximum_users_per_signing_group' => 'maximumUsersPerSigningGroup',
         'maximum_users_per_signing_group_metadata' => 'maximumUsersPerSigningGroupMetadata',
         'max_number_of_custom_stamps' => 'maxNumberOfCustomStamps',
+        'merge_mixed_mode_results' => 'mergeMixedModeResults',
+        'merge_mixed_mode_results_metadata' => 'mergeMixedModeResultsMetadata',
         'mobile_session_timeout' => 'mobileSessionTimeout',
         'mobile_session_timeout_metadata' => 'mobileSessionTimeoutMetadata',
         'number_of_active_custom_stamps' => 'numberOfActiveCustomStamps',
         'opt_in_mobile_signing_v02' => 'optInMobileSigningV02',
         'opt_in_mobile_signing_v02_metadata' => 'optInMobileSigningV02Metadata',
+        'opt_in_universal_signatures' => 'optInUniversalSignatures',
         'opt_out_auto_nav_text_and_tab_color_updates' => 'optOutAutoNavTextAndTabColorUpdates',
         'opt_out_auto_nav_text_and_tab_color_updates_metadata' => 'optOutAutoNavTextAndTabColorUpdatesMetadata',
         'opt_out_new_platform_seal' => 'optOutNewPlatformSeal',
         'opt_out_new_platform_seal_platform_metadata' => 'optOutNewPlatformSealPlatformMetadata',
+        'pdf_max_chunked_upload_part_size' => 'pdfMaxChunkedUploadPartSize',
+        'pdf_max_chunked_upload_part_size_metadata' => 'pdfMaxChunkedUploadPartSizeMetadata',
+        'pdf_max_chunked_upload_total_size' => 'pdfMaxChunkedUploadTotalSize',
+        'pdf_max_chunked_upload_total_size_metadata' => 'pdfMaxChunkedUploadTotalSizeMetadata',
+        'pdf_max_individual_upload_size' => 'pdfMaxIndividualUploadSize',
+        'pdf_max_individual_upload_size_metadata' => 'pdfMaxIndividualUploadSizeMetadata',
         'phone_auth_recipient_may_provide_phone_number' => 'phoneAuthRecipientMayProvidePhoneNumber',
         'phone_auth_recipient_may_provide_phone_number_metadata' => 'phoneAuthRecipientMayProvidePhoneNumberMetadata',
         'pki_sign_downloaded_pdf_docs' => 'pkiSignDownloadedPDFDocs',
@@ -1765,6 +2067,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'rsa_verid_password' => 'rsaVeridPassword',
         'rsa_verid_ruleset' => 'rsaVeridRuleset',
         'rsa_verid_user_id' => 'rsaVeridUserId',
+        'sbs_transaction_level' => 'sbsTransactionLevel',
         'self_signed_recipient_email_document' => 'selfSignedRecipientEmailDocument',
         'self_signed_recipient_email_document_metadata' => 'selfSignedRecipientEmailDocumentMetadata',
         'self_signed_recipient_email_document_user_override' => 'selfSignedRecipientEmailDocumentUserOverride',
@@ -1873,10 +2176,16 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'use_derived_keys_metadata' => 'useDerivedKeysMetadata',
         'use_docu_sign_express_signer_certificate' => 'useDocuSignExpressSignerCertificate',
         'use_docu_sign_express_signer_certificate_metadata' => 'useDocuSignExpressSignerCertificateMetadata',
+        'use_envelope_search_mixed_mode' => 'useEnvelopeSearchMixedMode',
+        'use_envelope_search_mixed_mode_metadata' => 'useEnvelopeSearchMixedModeMetadata',
         'use_multi_app_groups_data' => 'useMultiAppGroupsData',
         'use_multi_app_groups_data_metadata' => 'useMultiAppGroupsDataMetadata',
         'use_new_blob_for_pdf' => 'useNewBlobForPdf',
         'use_new_blob_for_pdf_metadata' => 'useNewBlobForPdfMetadata',
+        'use_new_envelope_search' => 'useNewEnvelopeSearch',
+        'use_new_envelope_search_metadata' => 'useNewEnvelopeSearchMetadata',
+        'use_new_envelope_search_only_when_searching_after_date' => 'useNewEnvelopeSearchOnlyWhenSearchingAfterDate',
+        'use_new_envelope_search_only_when_searching_after_date_metadata' => 'useNewEnvelopeSearchOnlyWhenSearchingAfterDateMetadata',
         'use_safe_signer_certificates' => 'useSAFESignerCertificates',
         'use_safe_signer_certificates_metadata' => 'useSAFESignerCertificatesMetadata',
         'uses_api' => 'usesAPI',
@@ -1921,6 +2230,12 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'adopt_sig_config_metadata' => 'setAdoptSigConfigMetadata',
         'advanced_correct' => 'setAdvancedCorrect',
         'advanced_correct_metadata' => 'setAdvancedCorrectMetadata',
+        'advanced_search_enable_tab_field' => 'setAdvancedSearchEnableTabField',
+        'advanced_search_enable_tab_field_metadata' => 'setAdvancedSearchEnableTabFieldMetadata',
+        'advanced_search_enable_template_id_field' => 'setAdvancedSearchEnableTemplateIdField',
+        'advanced_search_enable_template_id_field_metadata' => 'setAdvancedSearchEnableTemplateIdFieldMetadata',
+        'advanced_search_enable_template_name_field' => 'setAdvancedSearchEnableTemplateNameField',
+        'advanced_search_enable_template_name_field_metadata' => 'setAdvancedSearchEnableTemplateNameFieldMetadata',
         'allow_access_code_format' => 'setAllowAccessCodeFormat',
         'allow_access_code_format_metadata' => 'setAllowAccessCodeFormatMetadata',
         'allow_account_management_granular' => 'setAllowAccountManagementGranular',
@@ -1933,6 +2248,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_agent_name_email_edit_metadata' => 'setAllowAgentNameEmailEditMetadata',
         'allow_agreement_actions' => 'setAllowAgreementActions',
         'allow_agreement_actions_metadata' => 'setAllowAgreementActionsMetadata',
+        'allow_agreement_orchestration_workflows' => 'setAllowAgreementOrchestrationWorkflows',
+        'allow_agreement_orchestration_workflows_metadata' => 'setAllowAgreementOrchestrationWorkflowsMetadata',
         'allow_auto_nav_settings' => 'setAllowAutoNavSettings',
         'allow_auto_nav_settings_metadata' => 'setAllowAutoNavSettingsMetadata',
         'allow_auto_tagging' => 'setAllowAutoTagging',
@@ -1942,6 +2259,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_cd_withdraw' => 'setAllowCdWithdraw',
         'allow_cd_withdraw_metadata' => 'setAllowCdWithdrawMetadata',
         'allow_connect_http_listener_configs' => 'setAllowConnectHttpListenerConfigs',
+        'allow_connect_o_auth_ui' => 'setAllowConnectOAuthUi',
         'allow_connect_send_finish_later' => 'setAllowConnectSendFinishLater',
         'allow_connect_send_finish_later_metadata' => 'setAllowConnectSendFinishLaterMetadata',
         'allow_connect_unified_payload_ui' => 'setAllowConnectUnifiedPayloadUi',
@@ -1953,12 +2271,16 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_delayed_routing_metadata' => 'setAllowDelayedRoutingMetadata',
         'allow_delegated_signing' => 'setAllowDelegatedSigning',
         'allow_delegated_signing_metadata' => 'setAllowDelegatedSigningMetadata',
+        'allow_doc_gen_documents' => 'setAllowDocGenDocuments',
+        'allow_doc_gen_documents_metadata' => 'setAllowDocGenDocumentsMetadata',
         'allow_document_disclosures' => 'setAllowDocumentDisclosures',
         'allow_document_disclosures_metadata' => 'setAllowDocumentDisclosuresMetadata',
         'allow_documents_on_signed_envelopes' => 'setAllowDocumentsOnSignedEnvelopes',
         'allow_documents_on_signed_envelopes_metadata' => 'setAllowDocumentsOnSignedEnvelopesMetadata',
         'allow_document_visibility' => 'setAllowDocumentVisibility',
         'allow_document_visibility_metadata' => 'setAllowDocumentVisibilityMetadata',
+        'allow_editing_envelopes_on_behalf_of_others' => 'setAllowEditingEnvelopesOnBehalfOfOthers',
+        'allow_editing_envelopes_on_behalf_of_others_metadata' => 'setAllowEditingEnvelopesOnBehalfOfOthersMetadata',
         'allow_e_hanko_stamps' => 'setAllowEHankoStamps',
         'allow_e_hanko_stamps_metadata' => 'setAllowEHankoStampsMetadata',
         'allow_e_note_e_original' => 'setAllowENoteEOriginal',
@@ -1983,6 +2305,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_external_linked_accounts_metadata' => 'setAllowExternalLinkedAccountsMetadata',
         'allow_external_signature_pad' => 'setAllowExternalSignaturePad',
         'allow_external_signature_pad_metadata' => 'setAllowExternalSignaturePadMetadata',
+        'allow_idv_for_eu_qualified_signatures' => 'setAllowIdvForEuQualifiedSignatures',
+        'allow_idv_for_eu_qualified_signatures_metadata' => 'setAllowIdvForEuQualifiedSignaturesMetadata',
         'allow_idv_level1' => 'setAllowIdvLevel1',
         'allow_idv_level1_metadata' => 'setAllowIdvLevel1Metadata',
         'allow_idv_level2' => 'setAllowIdvLevel2',
@@ -1997,6 +2321,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_in_person_metadata' => 'setAllowInPersonMetadata',
         'allow_managed_stamps' => 'setAllowManagedStamps',
         'allow_managed_stamps_metadata' => 'setAllowManagedStampsMetadata',
+        'allow_managing_envelopes_on_behalf_of_others' => 'setAllowManagingEnvelopesOnBehalfOfOthers',
+        'allow_managing_envelopes_on_behalf_of_others_metadata' => 'setAllowManagingEnvelopesOnBehalfOfOthersMetadata',
         'allow_markup' => 'setAllowMarkup',
         'allow_markup_metadata' => 'setAllowMarkupMetadata',
         'allow_member_time_zone' => 'setAllowMemberTimeZone',
@@ -2016,6 +2342,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_open_trust_signer_certificate' => 'setAllowOpenTrustSignerCertificate',
         'allow_open_trust_signer_certificate_metadata' => 'setAllowOpenTrustSignerCertificateMetadata',
         'allow_organization_docusign_monitor' => 'setAllowOrganizationDocusignMonitor',
+        'allow_organization_docusign_monitor_lite' => 'setAllowOrganizationDocusignMonitorLite',
+        'allow_organization_docusign_monitor_lite_metadata' => 'setAllowOrganizationDocusignMonitorLiteMetadata',
         'allow_organization_docusign_monitor_metadata' => 'setAllowOrganizationDocusignMonitorMetadata',
         'allow_organization_domain_user_management' => 'setAllowOrganizationDomainUserManagement',
         'allow_organization_domain_user_management_metadata' => 'setAllowOrganizationDomainUserManagementMetadata',
@@ -2027,8 +2355,14 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_organization_to_use_in_person_electronic_notary_metadata' => 'setAllowOrganizationToUseInPersonElectronicNotaryMetadata',
         'allow_organization_to_use_remote_notary' => 'setAllowOrganizationToUseRemoteNotary',
         'allow_organization_to_use_remote_notary_metadata' => 'setAllowOrganizationToUseRemoteNotaryMetadata',
+        'allow_organization_to_use_third_party_electronic_notary' => 'setAllowOrganizationToUseThirdPartyElectronicNotary',
+        'allow_organization_to_use_third_party_electronic_notary_metadata' => 'setAllowOrganizationToUseThirdPartyElectronicNotaryMetadata',
+        'allow_participant_recipient_type' => 'setAllowParticipantRecipientType',
+        'allow_participant_recipient_type_metadata' => 'setAllowParticipantRecipientTypeMetadata',
         'allow_payment_processing' => 'setAllowPaymentProcessing',
         'allow_payment_processing_metadata' => 'setAllowPaymentProcessingMetadata',
+        'allow_performance_analytics' => 'setAllowPerformanceAnalytics',
+        'allow_performance_analytics_metadata' => 'setAllowPerformanceAnalyticsMetadata',
         'allow_phone_authentication' => 'setAllowPhoneAuthentication',
         'allow_phone_authentication_metadata' => 'setAllowPhoneAuthenticationMetadata',
         'allow_phone_auth_override' => 'setAllowPhoneAuthOverride',
@@ -2049,6 +2383,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_scheduled_sending_metadata' => 'setAllowScheduledSendingMetadata',
         'allow_security_appliance' => 'setAllowSecurityAppliance',
         'allow_security_appliance_metadata' => 'setAllowSecurityApplianceMetadata',
+        'allow_sending_envelopes_on_behalf_of_others' => 'setAllowSendingEnvelopesOnBehalfOfOthers',
+        'allow_sending_envelopes_on_behalf_of_others_metadata' => 'setAllowSendingEnvelopesOnBehalfOfOthersMetadata',
         'allow_send_to_certified_delivery' => 'setAllowSendToCertifiedDelivery',
         'allow_send_to_certified_delivery_metadata' => 'setAllowSendToCertifiedDeliveryMetadata',
         'allow_send_to_intermediary' => 'setAllowSendToIntermediary',
@@ -2083,12 +2419,18 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_social_id_login_metadata' => 'setAllowSocialIdLoginMetadata',
         'allow_supplemental_documents' => 'setAllowSupplementalDocuments',
         'allow_supplemental_documents_metadata' => 'setAllowSupplementalDocumentsMetadata',
+        'allow_third_party_electronic_notary' => 'setAllowThirdPartyElectronicNotary',
+        'allow_third_party_electronic_notary_metadata' => 'setAllowThirdPartyElectronicNotaryMetadata',
+        'allow_transactions_workspace' => 'setAllowTransactionsWorkspace',
+        'allow_transactions_workspace_metadata' => 'setAllowTransactionsWorkspaceMetadata',
         'allow_users_to_access_directory' => 'setAllowUsersToAccessDirectory',
         'allow_users_to_access_directory_metadata' => 'setAllowUsersToAccessDirectoryMetadata',
         'allow_value_insights' => 'setAllowValueInsights',
         'allow_value_insights_metadata' => 'setAllowValueInsightsMetadata',
         'allow_web_forms' => 'setAllowWebForms',
         'allow_web_forms_metadata' => 'setAllowWebFormsMetadata',
+        'allow_whats_app_delivery' => 'setAllowWhatsAppDelivery',
+        'allow_whats_app_delivery_metadata' => 'setAllowWhatsAppDeliveryMetadata',
         'anchor_population_scope' => 'setAnchorPopulationScope',
         'anchor_population_scope_metadata' => 'setAnchorPopulationScopeMetadata',
         'anchor_tag_versioned_placement_enabled' => 'setAnchorTagVersionedPlacementEnabled',
@@ -2140,6 +2482,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'convert_pdf_fields_metadata' => 'setConvertPdfFieldsMetadata',
         'data_population_scope' => 'setDataPopulationScope',
         'data_population_scope_metadata' => 'setDataPopulationScopeMetadata',
+        'default_to_advanced_envelopes_filter_form' => 'setDefaultToAdvancedEnvelopesFilterForm',
+        'default_to_advanced_envelopes_filter_form_metadata' => 'setDefaultToAdvancedEnvelopesFilterFormMetadata',
         'disable_auto_template_matching' => 'setDisableAutoTemplateMatching',
         'disable_auto_template_matching_metadata' => 'setDisableAutoTemplateMatchingMetadata',
         'disable_mobile_app' => 'setDisableMobileApp',
@@ -2170,12 +2514,19 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'document_retention_purge_tabs' => 'setDocumentRetentionPurgeTabs',
         'document_visibility' => 'setDocumentVisibility',
         'document_visibility_metadata' => 'setDocumentVisibilityMetadata',
+        'dss_enable_provisioning_pen_configuration_radmin_option' => 'setDssEnableProvisioningPenConfigurationRadminOption',
         'dss_sign_28411_enable_leave_page_prompt_radmin_option' => 'setDssSign28411EnableLeavePagePromptRadminOption',
         'dss_sign_29182_slide_up_bar_radmin_option' => 'setDssSign29182SlideUpBarRadminOption',
         'email_template_version' => 'setEmailTemplateVersion',
         'email_template_version_metadata' => 'setEmailTemplateVersionMetadata',
         'enable_access_code_generator' => 'setEnableAccessCodeGenerator',
         'enable_access_code_generator_metadata' => 'setEnableAccessCodeGeneratorMetadata',
+        'enable_account_wide_search' => 'setEnableAccountWideSearch',
+        'enable_account_wide_search_metadata' => 'setEnableAccountWideSearchMetadata',
+        'enable_adm_healthcare' => 'setEnableAdmHealthcare',
+        'enable_adm_healthcare_metadata' => 'setEnableAdmHealthcareMetadata',
+        'enable_advanced_envelopes_search' => 'setEnableAdvancedEnvelopesSearch',
+        'enable_advanced_envelopes_search_metadata' => 'setEnableAdvancedEnvelopesSearchMetadata',
         'enable_advanced_payments' => 'setEnableAdvancedPayments',
         'enable_advanced_payments_metadata' => 'setEnableAdvancedPaymentsMetadata',
         'enable_advanced_power_forms' => 'setEnableAdvancedPowerForms',
@@ -2190,19 +2541,48 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'enable_bcc_dummy_link_metadata' => 'setEnableBccDummyLinkMetadata',
         'enable_calculated_fields' => 'setEnableCalculatedFields',
         'enable_calculated_fields_metadata' => 'setEnableCalculatedFieldsMetadata',
+        'enable_click_plus' => 'setEnableClickPlus',
+        'enable_click_plus_conditional_content' => 'setEnableClickPlusConditionalContent',
+        'enable_click_plus_conditional_content_meta_data' => 'setEnableClickPlusConditionalContentMetaData',
+        'enable_click_plus_custom_fields' => 'setEnableClickPlusCustomFields',
+        'enable_click_plus_custom_fields_meta_data' => 'setEnableClickPlusCustomFieldsMetaData',
+        'enable_click_plus_custom_style' => 'setEnableClickPlusCustomStyle',
+        'enable_click_plus_custom_style_meta_data' => 'setEnableClickPlusCustomStyleMetaData',
+        'enable_click_plus_dynamic_content' => 'setEnableClickPlusDynamicContent',
+        'enable_click_plus_dynamic_content_meta_data' => 'setEnableClickPlusDynamicContentMetaData',
+        'enable_click_plus_meta_data' => 'setEnableClickPlusMetaData',
         'enable_clickwraps' => 'setEnableClickwraps',
         'enable_clickwraps_metadata' => 'setEnableClickwrapsMetadata',
         'enable_combined_pdf_download_for_sbs' => 'setEnableCombinedPdfDownloadForSbs',
         'enable_comments_history_download_in_signing' => 'setEnableCommentsHistoryDownloadInSigning',
         'enable_comments_history_download_in_signing_metadata' => 'setEnableCommentsHistoryDownloadInSigningMetadata',
+        'enable_contact_suggestions' => 'setEnableContactSuggestions',
+        'enable_contact_suggestions_metadata' => 'setEnableContactSuggestionsMetadata',
         'enable_customer_satisfaction_metric_tracking' => 'setEnableCustomerSatisfactionMetricTracking',
         'enable_customer_satisfaction_metric_tracking_metadata' => 'setEnableCustomerSatisfactionMetricTrackingMetadata',
+        'enable_d_sig_eu_advanced_pens' => 'setEnableDSigEuAdvancedPens',
+        'enable_d_sig_eu_advanced_pens_metadata' => 'setEnableDSigEuAdvancedPensMetadata',
+        'enable_d_sig_express_pens' => 'setEnableDSigExpressPens',
+        'enable_d_sig_express_pens_metadata' => 'setEnableDSigExpressPensMetadata',
+        'enable_d_sig_id_check_for_aes_pens' => 'setEnableDSigIdCheckForAesPens',
+        'enable_d_sig_id_check_for_aes_pens_metadata' => 'setEnableDSigIdCheckForAesPensMetadata',
+        'enable_d_sig_id_check_in_person_for_qes_pens' => 'setEnableDSigIdCheckInPersonForQesPens',
+        'enable_d_sig_id_check_in_person_for_qes_pens_metadata' => 'setEnableDSigIdCheckInPersonForQesPensMetadata',
+        'enable_d_sig_id_check_remote_for_qes_pens' => 'setEnableDSigIdCheckRemoteForQesPens',
+        'enable_d_sig_id_check_remote_for_qes_pens_metadata' => 'setEnableDSigIdCheckRemoteForQesPensMetadata',
+        'enable_d_sig_id_verification_pens' => 'setEnableDSigIdVerificationPens',
+        'enable_d_sig_id_verification_pens_metadata' => 'setEnableDSigIdVerificationPensMetadata',
+        'enable_d_sig_id_verification_premier_pens' => 'setEnableDSigIdVerificationPremierPens',
+        'enable_d_sig_id_verification_premier_pens_metadata' => 'setEnableDSigIdVerificationPremierPensMetadata',
         'enable_ds_pro' => 'setEnableDsPro',
         'enable_ds_pro_metadata' => 'setEnableDsProMetadata',
+        'enable_enforce_tls_emails_setting_metadata' => 'setEnableEnforceTlsEmailsSettingMetadata',
         'enable_envelope_stamping_by_account_admin' => 'setEnableEnvelopeStampingByAccountAdmin',
         'enable_envelope_stamping_by_account_admin_metadata' => 'setEnableEnvelopeStampingByAccountAdminMetadata',
         'enable_envelope_stamping_by_ds_admin' => 'setEnableEnvelopeStampingByDsAdmin',
         'enable_envelope_stamping_by_ds_admin_metadata' => 'setEnableEnvelopeStampingByDsAdminMetadata',
+        'enable_e_sign_api_hourly_limit_management' => 'setEnableESignApiHourlyLimitManagement',
+        'enable_e_sign_api_hourly_limit_management_metadata' => 'setEnableESignApiHourlyLimitManagementMetadata',
         'enable_esign_communities' => 'setEnableEsignCommunities',
         'enable_esign_communities_metadata' => 'setEnableEsignCommunitiesMetadata',
         'enable_id_fx_accountless_sms_auth_for_part11' => 'setEnableIdFxAccountlessSmsAuthForPart11',
@@ -2211,10 +2591,13 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'enable_id_fx_intuit_kba_metadata' => 'setEnableIdFxIntuitKbaMetadata',
         'enable_id_fx_phone_authentication' => 'setEnableIdFxPhoneAuthentication',
         'enable_id_fx_phone_authentication_metadata' => 'setEnableIdFxPhoneAuthenticationMetadata',
+        'enable_idfx_phone_auth_signature_auth_status' => 'setEnableIdfxPhoneAuthSignatureAuthStatus',
+        'enable_idfx_phone_auth_signature_auth_status_metadata' => 'setEnableIdfxPhoneAuthSignatureAuthStatusMetadata',
         'enable_in_browser_editor' => 'setEnableInBrowserEditor',
         'enable_in_browser_editor_metadata' => 'setEnableInBrowserEditorMetadata',
         'enable_key_terms_suggestions_by_document_type' => 'setEnableKeyTermsSuggestionsByDocumentType',
         'enable_key_terms_suggestions_by_document_type_metadata' => 'setEnableKeyTermsSuggestionsByDocumentTypeMetadata',
+        'enable_participant_recipient_setting_metadata' => 'setEnableParticipantRecipientSettingMetadata',
         'enable_payment_processing' => 'setEnablePaymentProcessing',
         'enable_payment_processing_metadata' => 'setEnablePaymentProcessingMetadata',
         'enable_pdfa_conversion' => 'setEnablePdfaConversion',
@@ -2288,10 +2671,18 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'enable_witnessing_metadata' => 'setEnableWitnessingMetadata',
         'enforce_template_name_uniqueness' => 'setEnforceTemplateNameUniqueness',
         'enforce_template_name_uniqueness_metadata' => 'setEnforceTemplateNameUniquenessMetadata',
+        'enforce_tls_emails' => 'setEnforceTlsEmails',
+        'enforce_tls_emails_metadata' => 'setEnforceTlsEmailsMetadata',
         'envelope_integration_allowed' => 'setEnvelopeIntegrationAllowed',
         'envelope_integration_allowed_metadata' => 'setEnvelopeIntegrationAllowedMetadata',
         'envelope_integration_enabled' => 'setEnvelopeIntegrationEnabled',
         'envelope_integration_enabled_metadata' => 'setEnvelopeIntegrationEnabledMetadata',
+        'envelope_limits_total_document_size_allowed_in_mb' => 'setEnvelopeLimitsTotalDocumentSizeAllowedInMb',
+        'envelope_limits_total_document_size_allowed_in_mb_enabled' => 'setEnvelopeLimitsTotalDocumentSizeAllowedInMbEnabled',
+        'envelope_limits_total_document_size_allowed_in_mb_enabled_metadata' => 'setEnvelopeLimitsTotalDocumentSizeAllowedInMbEnabledMetadata',
+        'envelope_limits_total_document_size_allowed_in_mb_metadata' => 'setEnvelopeLimitsTotalDocumentSizeAllowedInMbMetadata',
+        'envelope_search_mode' => 'setEnvelopeSearchMode',
+        'envelope_search_mode_metadata' => 'setEnvelopeSearchModeMetadata',
         'envelope_stamping_default_value' => 'setEnvelopeStampingDefaultValue',
         'envelope_stamping_default_value_metadata' => 'setEnvelopeStampingDefaultValueMetadata',
         'exit_prompt' => 'setExitPrompt',
@@ -2309,6 +2700,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'finish_reminder_metadata' => 'setFinishReminderMetadata',
         'guided_forms_html_allowed' => 'setGuidedFormsHtmlAllowed',
         'guided_forms_html_allowed_metadata' => 'setGuidedFormsHtmlAllowedMetadata',
+        'guided_forms_html_conversion_policy' => 'setGuidedFormsHtmlConversionPolicy',
+        'guided_forms_html_conversion_policy_metadata' => 'setGuidedFormsHtmlConversionPolicyMetadata',
         'has_recipient_connect_claimed_domain' => 'setHasRecipientConnectClaimedDomain',
         'hide_account_address_in_co_c' => 'setHideAccountAddressInCoC',
         'hide_account_address_in_co_c_metadata' => 'setHideAccountAddressInCoCMetadata',
@@ -2325,6 +2718,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'id_check_required_metadata' => 'setIdCheckRequiredMetadata',
         'identity_verification' => 'setIdentityVerification',
         'identity_verification_metadata' => 'setIdentityVerificationMetadata',
+        'idfx_kba_authentication_override' => 'setIdfxKbaAuthenticationOverride',
+        'idfx_kba_authentication_override_metadata' => 'setIdfxKbaAuthenticationOverrideMetadata',
         'idfx_phone_authentication_override' => 'setIdfxPhoneAuthenticationOverride',
         'idfx_phone_authentication_override_metadata' => 'setIdfxPhoneAuthenticationOverrideMetadata',
         'ignore_error_if_anchor_tab_not_found' => 'setIgnoreErrorIfAnchorTabNotFound',
@@ -2337,21 +2732,31 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'in_session_enabled_metadata' => 'setInSessionEnabledMetadata',
         'in_session_suppress_emails' => 'setInSessionSuppressEmails',
         'in_session_suppress_emails_metadata' => 'setInSessionSuppressEmailsMetadata',
+        'is_connect_document_fields_enabled' => 'setIsConnectDocumentFieldsEnabled',
         'linked_external_primary_accounts' => 'setLinkedExternalPrimaryAccounts',
         'maximum_signing_groups' => 'setMaximumSigningGroups',
         'maximum_signing_groups_metadata' => 'setMaximumSigningGroupsMetadata',
         'maximum_users_per_signing_group' => 'setMaximumUsersPerSigningGroup',
         'maximum_users_per_signing_group_metadata' => 'setMaximumUsersPerSigningGroupMetadata',
         'max_number_of_custom_stamps' => 'setMaxNumberOfCustomStamps',
+        'merge_mixed_mode_results' => 'setMergeMixedModeResults',
+        'merge_mixed_mode_results_metadata' => 'setMergeMixedModeResultsMetadata',
         'mobile_session_timeout' => 'setMobileSessionTimeout',
         'mobile_session_timeout_metadata' => 'setMobileSessionTimeoutMetadata',
         'number_of_active_custom_stamps' => 'setNumberOfActiveCustomStamps',
         'opt_in_mobile_signing_v02' => 'setOptInMobileSigningV02',
         'opt_in_mobile_signing_v02_metadata' => 'setOptInMobileSigningV02Metadata',
+        'opt_in_universal_signatures' => 'setOptInUniversalSignatures',
         'opt_out_auto_nav_text_and_tab_color_updates' => 'setOptOutAutoNavTextAndTabColorUpdates',
         'opt_out_auto_nav_text_and_tab_color_updates_metadata' => 'setOptOutAutoNavTextAndTabColorUpdatesMetadata',
         'opt_out_new_platform_seal' => 'setOptOutNewPlatformSeal',
         'opt_out_new_platform_seal_platform_metadata' => 'setOptOutNewPlatformSealPlatformMetadata',
+        'pdf_max_chunked_upload_part_size' => 'setPdfMaxChunkedUploadPartSize',
+        'pdf_max_chunked_upload_part_size_metadata' => 'setPdfMaxChunkedUploadPartSizeMetadata',
+        'pdf_max_chunked_upload_total_size' => 'setPdfMaxChunkedUploadTotalSize',
+        'pdf_max_chunked_upload_total_size_metadata' => 'setPdfMaxChunkedUploadTotalSizeMetadata',
+        'pdf_max_individual_upload_size' => 'setPdfMaxIndividualUploadSize',
+        'pdf_max_individual_upload_size_metadata' => 'setPdfMaxIndividualUploadSizeMetadata',
         'phone_auth_recipient_may_provide_phone_number' => 'setPhoneAuthRecipientMayProvidePhoneNumber',
         'phone_auth_recipient_may_provide_phone_number_metadata' => 'setPhoneAuthRecipientMayProvidePhoneNumberMetadata',
         'pki_sign_downloaded_pdf_docs' => 'setPkiSignDownloadedPdfDocs',
@@ -2374,6 +2779,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'rsa_verid_password' => 'setRsaVeridPassword',
         'rsa_verid_ruleset' => 'setRsaVeridRuleset',
         'rsa_verid_user_id' => 'setRsaVeridUserId',
+        'sbs_transaction_level' => 'setSbsTransactionLevel',
         'self_signed_recipient_email_document' => 'setSelfSignedRecipientEmailDocument',
         'self_signed_recipient_email_document_metadata' => 'setSelfSignedRecipientEmailDocumentMetadata',
         'self_signed_recipient_email_document_user_override' => 'setSelfSignedRecipientEmailDocumentUserOverride',
@@ -2482,10 +2888,16 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'use_derived_keys_metadata' => 'setUseDerivedKeysMetadata',
         'use_docu_sign_express_signer_certificate' => 'setUseDocuSignExpressSignerCertificate',
         'use_docu_sign_express_signer_certificate_metadata' => 'setUseDocuSignExpressSignerCertificateMetadata',
+        'use_envelope_search_mixed_mode' => 'setUseEnvelopeSearchMixedMode',
+        'use_envelope_search_mixed_mode_metadata' => 'setUseEnvelopeSearchMixedModeMetadata',
         'use_multi_app_groups_data' => 'setUseMultiAppGroupsData',
         'use_multi_app_groups_data_metadata' => 'setUseMultiAppGroupsDataMetadata',
         'use_new_blob_for_pdf' => 'setUseNewBlobForPdf',
         'use_new_blob_for_pdf_metadata' => 'setUseNewBlobForPdfMetadata',
+        'use_new_envelope_search' => 'setUseNewEnvelopeSearch',
+        'use_new_envelope_search_metadata' => 'setUseNewEnvelopeSearchMetadata',
+        'use_new_envelope_search_only_when_searching_after_date' => 'setUseNewEnvelopeSearchOnlyWhenSearchingAfterDate',
+        'use_new_envelope_search_only_when_searching_after_date_metadata' => 'setUseNewEnvelopeSearchOnlyWhenSearchingAfterDateMetadata',
         'use_safe_signer_certificates' => 'setUseSafeSignerCertificates',
         'use_safe_signer_certificates_metadata' => 'setUseSafeSignerCertificatesMetadata',
         'uses_api' => 'setUsesApi',
@@ -2530,6 +2942,12 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'adopt_sig_config_metadata' => 'getAdoptSigConfigMetadata',
         'advanced_correct' => 'getAdvancedCorrect',
         'advanced_correct_metadata' => 'getAdvancedCorrectMetadata',
+        'advanced_search_enable_tab_field' => 'getAdvancedSearchEnableTabField',
+        'advanced_search_enable_tab_field_metadata' => 'getAdvancedSearchEnableTabFieldMetadata',
+        'advanced_search_enable_template_id_field' => 'getAdvancedSearchEnableTemplateIdField',
+        'advanced_search_enable_template_id_field_metadata' => 'getAdvancedSearchEnableTemplateIdFieldMetadata',
+        'advanced_search_enable_template_name_field' => 'getAdvancedSearchEnableTemplateNameField',
+        'advanced_search_enable_template_name_field_metadata' => 'getAdvancedSearchEnableTemplateNameFieldMetadata',
         'allow_access_code_format' => 'getAllowAccessCodeFormat',
         'allow_access_code_format_metadata' => 'getAllowAccessCodeFormatMetadata',
         'allow_account_management_granular' => 'getAllowAccountManagementGranular',
@@ -2542,6 +2960,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_agent_name_email_edit_metadata' => 'getAllowAgentNameEmailEditMetadata',
         'allow_agreement_actions' => 'getAllowAgreementActions',
         'allow_agreement_actions_metadata' => 'getAllowAgreementActionsMetadata',
+        'allow_agreement_orchestration_workflows' => 'getAllowAgreementOrchestrationWorkflows',
+        'allow_agreement_orchestration_workflows_metadata' => 'getAllowAgreementOrchestrationWorkflowsMetadata',
         'allow_auto_nav_settings' => 'getAllowAutoNavSettings',
         'allow_auto_nav_settings_metadata' => 'getAllowAutoNavSettingsMetadata',
         'allow_auto_tagging' => 'getAllowAutoTagging',
@@ -2551,6 +2971,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_cd_withdraw' => 'getAllowCdWithdraw',
         'allow_cd_withdraw_metadata' => 'getAllowCdWithdrawMetadata',
         'allow_connect_http_listener_configs' => 'getAllowConnectHttpListenerConfigs',
+        'allow_connect_o_auth_ui' => 'getAllowConnectOAuthUi',
         'allow_connect_send_finish_later' => 'getAllowConnectSendFinishLater',
         'allow_connect_send_finish_later_metadata' => 'getAllowConnectSendFinishLaterMetadata',
         'allow_connect_unified_payload_ui' => 'getAllowConnectUnifiedPayloadUi',
@@ -2562,12 +2983,16 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_delayed_routing_metadata' => 'getAllowDelayedRoutingMetadata',
         'allow_delegated_signing' => 'getAllowDelegatedSigning',
         'allow_delegated_signing_metadata' => 'getAllowDelegatedSigningMetadata',
+        'allow_doc_gen_documents' => 'getAllowDocGenDocuments',
+        'allow_doc_gen_documents_metadata' => 'getAllowDocGenDocumentsMetadata',
         'allow_document_disclosures' => 'getAllowDocumentDisclosures',
         'allow_document_disclosures_metadata' => 'getAllowDocumentDisclosuresMetadata',
         'allow_documents_on_signed_envelopes' => 'getAllowDocumentsOnSignedEnvelopes',
         'allow_documents_on_signed_envelopes_metadata' => 'getAllowDocumentsOnSignedEnvelopesMetadata',
         'allow_document_visibility' => 'getAllowDocumentVisibility',
         'allow_document_visibility_metadata' => 'getAllowDocumentVisibilityMetadata',
+        'allow_editing_envelopes_on_behalf_of_others' => 'getAllowEditingEnvelopesOnBehalfOfOthers',
+        'allow_editing_envelopes_on_behalf_of_others_metadata' => 'getAllowEditingEnvelopesOnBehalfOfOthersMetadata',
         'allow_e_hanko_stamps' => 'getAllowEHankoStamps',
         'allow_e_hanko_stamps_metadata' => 'getAllowEHankoStampsMetadata',
         'allow_e_note_e_original' => 'getAllowENoteEOriginal',
@@ -2592,6 +3017,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_external_linked_accounts_metadata' => 'getAllowExternalLinkedAccountsMetadata',
         'allow_external_signature_pad' => 'getAllowExternalSignaturePad',
         'allow_external_signature_pad_metadata' => 'getAllowExternalSignaturePadMetadata',
+        'allow_idv_for_eu_qualified_signatures' => 'getAllowIdvForEuQualifiedSignatures',
+        'allow_idv_for_eu_qualified_signatures_metadata' => 'getAllowIdvForEuQualifiedSignaturesMetadata',
         'allow_idv_level1' => 'getAllowIdvLevel1',
         'allow_idv_level1_metadata' => 'getAllowIdvLevel1Metadata',
         'allow_idv_level2' => 'getAllowIdvLevel2',
@@ -2606,6 +3033,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_in_person_metadata' => 'getAllowInPersonMetadata',
         'allow_managed_stamps' => 'getAllowManagedStamps',
         'allow_managed_stamps_metadata' => 'getAllowManagedStampsMetadata',
+        'allow_managing_envelopes_on_behalf_of_others' => 'getAllowManagingEnvelopesOnBehalfOfOthers',
+        'allow_managing_envelopes_on_behalf_of_others_metadata' => 'getAllowManagingEnvelopesOnBehalfOfOthersMetadata',
         'allow_markup' => 'getAllowMarkup',
         'allow_markup_metadata' => 'getAllowMarkupMetadata',
         'allow_member_time_zone' => 'getAllowMemberTimeZone',
@@ -2625,6 +3054,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_open_trust_signer_certificate' => 'getAllowOpenTrustSignerCertificate',
         'allow_open_trust_signer_certificate_metadata' => 'getAllowOpenTrustSignerCertificateMetadata',
         'allow_organization_docusign_monitor' => 'getAllowOrganizationDocusignMonitor',
+        'allow_organization_docusign_monitor_lite' => 'getAllowOrganizationDocusignMonitorLite',
+        'allow_organization_docusign_monitor_lite_metadata' => 'getAllowOrganizationDocusignMonitorLiteMetadata',
         'allow_organization_docusign_monitor_metadata' => 'getAllowOrganizationDocusignMonitorMetadata',
         'allow_organization_domain_user_management' => 'getAllowOrganizationDomainUserManagement',
         'allow_organization_domain_user_management_metadata' => 'getAllowOrganizationDomainUserManagementMetadata',
@@ -2636,8 +3067,14 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_organization_to_use_in_person_electronic_notary_metadata' => 'getAllowOrganizationToUseInPersonElectronicNotaryMetadata',
         'allow_organization_to_use_remote_notary' => 'getAllowOrganizationToUseRemoteNotary',
         'allow_organization_to_use_remote_notary_metadata' => 'getAllowOrganizationToUseRemoteNotaryMetadata',
+        'allow_organization_to_use_third_party_electronic_notary' => 'getAllowOrganizationToUseThirdPartyElectronicNotary',
+        'allow_organization_to_use_third_party_electronic_notary_metadata' => 'getAllowOrganizationToUseThirdPartyElectronicNotaryMetadata',
+        'allow_participant_recipient_type' => 'getAllowParticipantRecipientType',
+        'allow_participant_recipient_type_metadata' => 'getAllowParticipantRecipientTypeMetadata',
         'allow_payment_processing' => 'getAllowPaymentProcessing',
         'allow_payment_processing_metadata' => 'getAllowPaymentProcessingMetadata',
+        'allow_performance_analytics' => 'getAllowPerformanceAnalytics',
+        'allow_performance_analytics_metadata' => 'getAllowPerformanceAnalyticsMetadata',
         'allow_phone_authentication' => 'getAllowPhoneAuthentication',
         'allow_phone_authentication_metadata' => 'getAllowPhoneAuthenticationMetadata',
         'allow_phone_auth_override' => 'getAllowPhoneAuthOverride',
@@ -2658,6 +3095,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_scheduled_sending_metadata' => 'getAllowScheduledSendingMetadata',
         'allow_security_appliance' => 'getAllowSecurityAppliance',
         'allow_security_appliance_metadata' => 'getAllowSecurityApplianceMetadata',
+        'allow_sending_envelopes_on_behalf_of_others' => 'getAllowSendingEnvelopesOnBehalfOfOthers',
+        'allow_sending_envelopes_on_behalf_of_others_metadata' => 'getAllowSendingEnvelopesOnBehalfOfOthersMetadata',
         'allow_send_to_certified_delivery' => 'getAllowSendToCertifiedDelivery',
         'allow_send_to_certified_delivery_metadata' => 'getAllowSendToCertifiedDeliveryMetadata',
         'allow_send_to_intermediary' => 'getAllowSendToIntermediary',
@@ -2692,12 +3131,18 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'allow_social_id_login_metadata' => 'getAllowSocialIdLoginMetadata',
         'allow_supplemental_documents' => 'getAllowSupplementalDocuments',
         'allow_supplemental_documents_metadata' => 'getAllowSupplementalDocumentsMetadata',
+        'allow_third_party_electronic_notary' => 'getAllowThirdPartyElectronicNotary',
+        'allow_third_party_electronic_notary_metadata' => 'getAllowThirdPartyElectronicNotaryMetadata',
+        'allow_transactions_workspace' => 'getAllowTransactionsWorkspace',
+        'allow_transactions_workspace_metadata' => 'getAllowTransactionsWorkspaceMetadata',
         'allow_users_to_access_directory' => 'getAllowUsersToAccessDirectory',
         'allow_users_to_access_directory_metadata' => 'getAllowUsersToAccessDirectoryMetadata',
         'allow_value_insights' => 'getAllowValueInsights',
         'allow_value_insights_metadata' => 'getAllowValueInsightsMetadata',
         'allow_web_forms' => 'getAllowWebForms',
         'allow_web_forms_metadata' => 'getAllowWebFormsMetadata',
+        'allow_whats_app_delivery' => 'getAllowWhatsAppDelivery',
+        'allow_whats_app_delivery_metadata' => 'getAllowWhatsAppDeliveryMetadata',
         'anchor_population_scope' => 'getAnchorPopulationScope',
         'anchor_population_scope_metadata' => 'getAnchorPopulationScopeMetadata',
         'anchor_tag_versioned_placement_enabled' => 'getAnchorTagVersionedPlacementEnabled',
@@ -2749,6 +3194,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'convert_pdf_fields_metadata' => 'getConvertPdfFieldsMetadata',
         'data_population_scope' => 'getDataPopulationScope',
         'data_population_scope_metadata' => 'getDataPopulationScopeMetadata',
+        'default_to_advanced_envelopes_filter_form' => 'getDefaultToAdvancedEnvelopesFilterForm',
+        'default_to_advanced_envelopes_filter_form_metadata' => 'getDefaultToAdvancedEnvelopesFilterFormMetadata',
         'disable_auto_template_matching' => 'getDisableAutoTemplateMatching',
         'disable_auto_template_matching_metadata' => 'getDisableAutoTemplateMatchingMetadata',
         'disable_mobile_app' => 'getDisableMobileApp',
@@ -2779,12 +3226,19 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'document_retention_purge_tabs' => 'getDocumentRetentionPurgeTabs',
         'document_visibility' => 'getDocumentVisibility',
         'document_visibility_metadata' => 'getDocumentVisibilityMetadata',
+        'dss_enable_provisioning_pen_configuration_radmin_option' => 'getDssEnableProvisioningPenConfigurationRadminOption',
         'dss_sign_28411_enable_leave_page_prompt_radmin_option' => 'getDssSign28411EnableLeavePagePromptRadminOption',
         'dss_sign_29182_slide_up_bar_radmin_option' => 'getDssSign29182SlideUpBarRadminOption',
         'email_template_version' => 'getEmailTemplateVersion',
         'email_template_version_metadata' => 'getEmailTemplateVersionMetadata',
         'enable_access_code_generator' => 'getEnableAccessCodeGenerator',
         'enable_access_code_generator_metadata' => 'getEnableAccessCodeGeneratorMetadata',
+        'enable_account_wide_search' => 'getEnableAccountWideSearch',
+        'enable_account_wide_search_metadata' => 'getEnableAccountWideSearchMetadata',
+        'enable_adm_healthcare' => 'getEnableAdmHealthcare',
+        'enable_adm_healthcare_metadata' => 'getEnableAdmHealthcareMetadata',
+        'enable_advanced_envelopes_search' => 'getEnableAdvancedEnvelopesSearch',
+        'enable_advanced_envelopes_search_metadata' => 'getEnableAdvancedEnvelopesSearchMetadata',
         'enable_advanced_payments' => 'getEnableAdvancedPayments',
         'enable_advanced_payments_metadata' => 'getEnableAdvancedPaymentsMetadata',
         'enable_advanced_power_forms' => 'getEnableAdvancedPowerForms',
@@ -2799,19 +3253,48 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'enable_bcc_dummy_link_metadata' => 'getEnableBccDummyLinkMetadata',
         'enable_calculated_fields' => 'getEnableCalculatedFields',
         'enable_calculated_fields_metadata' => 'getEnableCalculatedFieldsMetadata',
+        'enable_click_plus' => 'getEnableClickPlus',
+        'enable_click_plus_conditional_content' => 'getEnableClickPlusConditionalContent',
+        'enable_click_plus_conditional_content_meta_data' => 'getEnableClickPlusConditionalContentMetaData',
+        'enable_click_plus_custom_fields' => 'getEnableClickPlusCustomFields',
+        'enable_click_plus_custom_fields_meta_data' => 'getEnableClickPlusCustomFieldsMetaData',
+        'enable_click_plus_custom_style' => 'getEnableClickPlusCustomStyle',
+        'enable_click_plus_custom_style_meta_data' => 'getEnableClickPlusCustomStyleMetaData',
+        'enable_click_plus_dynamic_content' => 'getEnableClickPlusDynamicContent',
+        'enable_click_plus_dynamic_content_meta_data' => 'getEnableClickPlusDynamicContentMetaData',
+        'enable_click_plus_meta_data' => 'getEnableClickPlusMetaData',
         'enable_clickwraps' => 'getEnableClickwraps',
         'enable_clickwraps_metadata' => 'getEnableClickwrapsMetadata',
         'enable_combined_pdf_download_for_sbs' => 'getEnableCombinedPdfDownloadForSbs',
         'enable_comments_history_download_in_signing' => 'getEnableCommentsHistoryDownloadInSigning',
         'enable_comments_history_download_in_signing_metadata' => 'getEnableCommentsHistoryDownloadInSigningMetadata',
+        'enable_contact_suggestions' => 'getEnableContactSuggestions',
+        'enable_contact_suggestions_metadata' => 'getEnableContactSuggestionsMetadata',
         'enable_customer_satisfaction_metric_tracking' => 'getEnableCustomerSatisfactionMetricTracking',
         'enable_customer_satisfaction_metric_tracking_metadata' => 'getEnableCustomerSatisfactionMetricTrackingMetadata',
+        'enable_d_sig_eu_advanced_pens' => 'getEnableDSigEuAdvancedPens',
+        'enable_d_sig_eu_advanced_pens_metadata' => 'getEnableDSigEuAdvancedPensMetadata',
+        'enable_d_sig_express_pens' => 'getEnableDSigExpressPens',
+        'enable_d_sig_express_pens_metadata' => 'getEnableDSigExpressPensMetadata',
+        'enable_d_sig_id_check_for_aes_pens' => 'getEnableDSigIdCheckForAesPens',
+        'enable_d_sig_id_check_for_aes_pens_metadata' => 'getEnableDSigIdCheckForAesPensMetadata',
+        'enable_d_sig_id_check_in_person_for_qes_pens' => 'getEnableDSigIdCheckInPersonForQesPens',
+        'enable_d_sig_id_check_in_person_for_qes_pens_metadata' => 'getEnableDSigIdCheckInPersonForQesPensMetadata',
+        'enable_d_sig_id_check_remote_for_qes_pens' => 'getEnableDSigIdCheckRemoteForQesPens',
+        'enable_d_sig_id_check_remote_for_qes_pens_metadata' => 'getEnableDSigIdCheckRemoteForQesPensMetadata',
+        'enable_d_sig_id_verification_pens' => 'getEnableDSigIdVerificationPens',
+        'enable_d_sig_id_verification_pens_metadata' => 'getEnableDSigIdVerificationPensMetadata',
+        'enable_d_sig_id_verification_premier_pens' => 'getEnableDSigIdVerificationPremierPens',
+        'enable_d_sig_id_verification_premier_pens_metadata' => 'getEnableDSigIdVerificationPremierPensMetadata',
         'enable_ds_pro' => 'getEnableDsPro',
         'enable_ds_pro_metadata' => 'getEnableDsProMetadata',
+        'enable_enforce_tls_emails_setting_metadata' => 'getEnableEnforceTlsEmailsSettingMetadata',
         'enable_envelope_stamping_by_account_admin' => 'getEnableEnvelopeStampingByAccountAdmin',
         'enable_envelope_stamping_by_account_admin_metadata' => 'getEnableEnvelopeStampingByAccountAdminMetadata',
         'enable_envelope_stamping_by_ds_admin' => 'getEnableEnvelopeStampingByDsAdmin',
         'enable_envelope_stamping_by_ds_admin_metadata' => 'getEnableEnvelopeStampingByDsAdminMetadata',
+        'enable_e_sign_api_hourly_limit_management' => 'getEnableESignApiHourlyLimitManagement',
+        'enable_e_sign_api_hourly_limit_management_metadata' => 'getEnableESignApiHourlyLimitManagementMetadata',
         'enable_esign_communities' => 'getEnableEsignCommunities',
         'enable_esign_communities_metadata' => 'getEnableEsignCommunitiesMetadata',
         'enable_id_fx_accountless_sms_auth_for_part11' => 'getEnableIdFxAccountlessSmsAuthForPart11',
@@ -2820,10 +3303,13 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'enable_id_fx_intuit_kba_metadata' => 'getEnableIdFxIntuitKbaMetadata',
         'enable_id_fx_phone_authentication' => 'getEnableIdFxPhoneAuthentication',
         'enable_id_fx_phone_authentication_metadata' => 'getEnableIdFxPhoneAuthenticationMetadata',
+        'enable_idfx_phone_auth_signature_auth_status' => 'getEnableIdfxPhoneAuthSignatureAuthStatus',
+        'enable_idfx_phone_auth_signature_auth_status_metadata' => 'getEnableIdfxPhoneAuthSignatureAuthStatusMetadata',
         'enable_in_browser_editor' => 'getEnableInBrowserEditor',
         'enable_in_browser_editor_metadata' => 'getEnableInBrowserEditorMetadata',
         'enable_key_terms_suggestions_by_document_type' => 'getEnableKeyTermsSuggestionsByDocumentType',
         'enable_key_terms_suggestions_by_document_type_metadata' => 'getEnableKeyTermsSuggestionsByDocumentTypeMetadata',
+        'enable_participant_recipient_setting_metadata' => 'getEnableParticipantRecipientSettingMetadata',
         'enable_payment_processing' => 'getEnablePaymentProcessing',
         'enable_payment_processing_metadata' => 'getEnablePaymentProcessingMetadata',
         'enable_pdfa_conversion' => 'getEnablePdfaConversion',
@@ -2897,10 +3383,18 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'enable_witnessing_metadata' => 'getEnableWitnessingMetadata',
         'enforce_template_name_uniqueness' => 'getEnforceTemplateNameUniqueness',
         'enforce_template_name_uniqueness_metadata' => 'getEnforceTemplateNameUniquenessMetadata',
+        'enforce_tls_emails' => 'getEnforceTlsEmails',
+        'enforce_tls_emails_metadata' => 'getEnforceTlsEmailsMetadata',
         'envelope_integration_allowed' => 'getEnvelopeIntegrationAllowed',
         'envelope_integration_allowed_metadata' => 'getEnvelopeIntegrationAllowedMetadata',
         'envelope_integration_enabled' => 'getEnvelopeIntegrationEnabled',
         'envelope_integration_enabled_metadata' => 'getEnvelopeIntegrationEnabledMetadata',
+        'envelope_limits_total_document_size_allowed_in_mb' => 'getEnvelopeLimitsTotalDocumentSizeAllowedInMb',
+        'envelope_limits_total_document_size_allowed_in_mb_enabled' => 'getEnvelopeLimitsTotalDocumentSizeAllowedInMbEnabled',
+        'envelope_limits_total_document_size_allowed_in_mb_enabled_metadata' => 'getEnvelopeLimitsTotalDocumentSizeAllowedInMbEnabledMetadata',
+        'envelope_limits_total_document_size_allowed_in_mb_metadata' => 'getEnvelopeLimitsTotalDocumentSizeAllowedInMbMetadata',
+        'envelope_search_mode' => 'getEnvelopeSearchMode',
+        'envelope_search_mode_metadata' => 'getEnvelopeSearchModeMetadata',
         'envelope_stamping_default_value' => 'getEnvelopeStampingDefaultValue',
         'envelope_stamping_default_value_metadata' => 'getEnvelopeStampingDefaultValueMetadata',
         'exit_prompt' => 'getExitPrompt',
@@ -2918,6 +3412,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'finish_reminder_metadata' => 'getFinishReminderMetadata',
         'guided_forms_html_allowed' => 'getGuidedFormsHtmlAllowed',
         'guided_forms_html_allowed_metadata' => 'getGuidedFormsHtmlAllowedMetadata',
+        'guided_forms_html_conversion_policy' => 'getGuidedFormsHtmlConversionPolicy',
+        'guided_forms_html_conversion_policy_metadata' => 'getGuidedFormsHtmlConversionPolicyMetadata',
         'has_recipient_connect_claimed_domain' => 'getHasRecipientConnectClaimedDomain',
         'hide_account_address_in_co_c' => 'getHideAccountAddressInCoC',
         'hide_account_address_in_co_c_metadata' => 'getHideAccountAddressInCoCMetadata',
@@ -2934,6 +3430,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'id_check_required_metadata' => 'getIdCheckRequiredMetadata',
         'identity_verification' => 'getIdentityVerification',
         'identity_verification_metadata' => 'getIdentityVerificationMetadata',
+        'idfx_kba_authentication_override' => 'getIdfxKbaAuthenticationOverride',
+        'idfx_kba_authentication_override_metadata' => 'getIdfxKbaAuthenticationOverrideMetadata',
         'idfx_phone_authentication_override' => 'getIdfxPhoneAuthenticationOverride',
         'idfx_phone_authentication_override_metadata' => 'getIdfxPhoneAuthenticationOverrideMetadata',
         'ignore_error_if_anchor_tab_not_found' => 'getIgnoreErrorIfAnchorTabNotFound',
@@ -2946,21 +3444,31 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'in_session_enabled_metadata' => 'getInSessionEnabledMetadata',
         'in_session_suppress_emails' => 'getInSessionSuppressEmails',
         'in_session_suppress_emails_metadata' => 'getInSessionSuppressEmailsMetadata',
+        'is_connect_document_fields_enabled' => 'getIsConnectDocumentFieldsEnabled',
         'linked_external_primary_accounts' => 'getLinkedExternalPrimaryAccounts',
         'maximum_signing_groups' => 'getMaximumSigningGroups',
         'maximum_signing_groups_metadata' => 'getMaximumSigningGroupsMetadata',
         'maximum_users_per_signing_group' => 'getMaximumUsersPerSigningGroup',
         'maximum_users_per_signing_group_metadata' => 'getMaximumUsersPerSigningGroupMetadata',
         'max_number_of_custom_stamps' => 'getMaxNumberOfCustomStamps',
+        'merge_mixed_mode_results' => 'getMergeMixedModeResults',
+        'merge_mixed_mode_results_metadata' => 'getMergeMixedModeResultsMetadata',
         'mobile_session_timeout' => 'getMobileSessionTimeout',
         'mobile_session_timeout_metadata' => 'getMobileSessionTimeoutMetadata',
         'number_of_active_custom_stamps' => 'getNumberOfActiveCustomStamps',
         'opt_in_mobile_signing_v02' => 'getOptInMobileSigningV02',
         'opt_in_mobile_signing_v02_metadata' => 'getOptInMobileSigningV02Metadata',
+        'opt_in_universal_signatures' => 'getOptInUniversalSignatures',
         'opt_out_auto_nav_text_and_tab_color_updates' => 'getOptOutAutoNavTextAndTabColorUpdates',
         'opt_out_auto_nav_text_and_tab_color_updates_metadata' => 'getOptOutAutoNavTextAndTabColorUpdatesMetadata',
         'opt_out_new_platform_seal' => 'getOptOutNewPlatformSeal',
         'opt_out_new_platform_seal_platform_metadata' => 'getOptOutNewPlatformSealPlatformMetadata',
+        'pdf_max_chunked_upload_part_size' => 'getPdfMaxChunkedUploadPartSize',
+        'pdf_max_chunked_upload_part_size_metadata' => 'getPdfMaxChunkedUploadPartSizeMetadata',
+        'pdf_max_chunked_upload_total_size' => 'getPdfMaxChunkedUploadTotalSize',
+        'pdf_max_chunked_upload_total_size_metadata' => 'getPdfMaxChunkedUploadTotalSizeMetadata',
+        'pdf_max_individual_upload_size' => 'getPdfMaxIndividualUploadSize',
+        'pdf_max_individual_upload_size_metadata' => 'getPdfMaxIndividualUploadSizeMetadata',
         'phone_auth_recipient_may_provide_phone_number' => 'getPhoneAuthRecipientMayProvidePhoneNumber',
         'phone_auth_recipient_may_provide_phone_number_metadata' => 'getPhoneAuthRecipientMayProvidePhoneNumberMetadata',
         'pki_sign_downloaded_pdf_docs' => 'getPkiSignDownloadedPdfDocs',
@@ -2983,6 +3491,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'rsa_verid_password' => 'getRsaVeridPassword',
         'rsa_verid_ruleset' => 'getRsaVeridRuleset',
         'rsa_verid_user_id' => 'getRsaVeridUserId',
+        'sbs_transaction_level' => 'getSbsTransactionLevel',
         'self_signed_recipient_email_document' => 'getSelfSignedRecipientEmailDocument',
         'self_signed_recipient_email_document_metadata' => 'getSelfSignedRecipientEmailDocumentMetadata',
         'self_signed_recipient_email_document_user_override' => 'getSelfSignedRecipientEmailDocumentUserOverride',
@@ -3091,10 +3600,16 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         'use_derived_keys_metadata' => 'getUseDerivedKeysMetadata',
         'use_docu_sign_express_signer_certificate' => 'getUseDocuSignExpressSignerCertificate',
         'use_docu_sign_express_signer_certificate_metadata' => 'getUseDocuSignExpressSignerCertificateMetadata',
+        'use_envelope_search_mixed_mode' => 'getUseEnvelopeSearchMixedMode',
+        'use_envelope_search_mixed_mode_metadata' => 'getUseEnvelopeSearchMixedModeMetadata',
         'use_multi_app_groups_data' => 'getUseMultiAppGroupsData',
         'use_multi_app_groups_data_metadata' => 'getUseMultiAppGroupsDataMetadata',
         'use_new_blob_for_pdf' => 'getUseNewBlobForPdf',
         'use_new_blob_for_pdf_metadata' => 'getUseNewBlobForPdfMetadata',
+        'use_new_envelope_search' => 'getUseNewEnvelopeSearch',
+        'use_new_envelope_search_metadata' => 'getUseNewEnvelopeSearchMetadata',
+        'use_new_envelope_search_only_when_searching_after_date' => 'getUseNewEnvelopeSearchOnlyWhenSearchingAfterDate',
+        'use_new_envelope_search_only_when_searching_after_date_metadata' => 'getUseNewEnvelopeSearchOnlyWhenSearchingAfterDateMetadata',
         'use_safe_signer_certificates' => 'getUseSafeSignerCertificates',
         'use_safe_signer_certificates_metadata' => 'getUseSafeSignerCertificatesMetadata',
         'uses_api' => 'getUsesApi',
@@ -3193,6 +3708,12 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['adopt_sig_config_metadata'] = isset($data['adopt_sig_config_metadata']) ? $data['adopt_sig_config_metadata'] : null;
         $this->container['advanced_correct'] = isset($data['advanced_correct']) ? $data['advanced_correct'] : null;
         $this->container['advanced_correct_metadata'] = isset($data['advanced_correct_metadata']) ? $data['advanced_correct_metadata'] : null;
+        $this->container['advanced_search_enable_tab_field'] = isset($data['advanced_search_enable_tab_field']) ? $data['advanced_search_enable_tab_field'] : null;
+        $this->container['advanced_search_enable_tab_field_metadata'] = isset($data['advanced_search_enable_tab_field_metadata']) ? $data['advanced_search_enable_tab_field_metadata'] : null;
+        $this->container['advanced_search_enable_template_id_field'] = isset($data['advanced_search_enable_template_id_field']) ? $data['advanced_search_enable_template_id_field'] : null;
+        $this->container['advanced_search_enable_template_id_field_metadata'] = isset($data['advanced_search_enable_template_id_field_metadata']) ? $data['advanced_search_enable_template_id_field_metadata'] : null;
+        $this->container['advanced_search_enable_template_name_field'] = isset($data['advanced_search_enable_template_name_field']) ? $data['advanced_search_enable_template_name_field'] : null;
+        $this->container['advanced_search_enable_template_name_field_metadata'] = isset($data['advanced_search_enable_template_name_field_metadata']) ? $data['advanced_search_enable_template_name_field_metadata'] : null;
         $this->container['allow_access_code_format'] = isset($data['allow_access_code_format']) ? $data['allow_access_code_format'] : null;
         $this->container['allow_access_code_format_metadata'] = isset($data['allow_access_code_format_metadata']) ? $data['allow_access_code_format_metadata'] : null;
         $this->container['allow_account_management_granular'] = isset($data['allow_account_management_granular']) ? $data['allow_account_management_granular'] : null;
@@ -3205,6 +3726,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['allow_agent_name_email_edit_metadata'] = isset($data['allow_agent_name_email_edit_metadata']) ? $data['allow_agent_name_email_edit_metadata'] : null;
         $this->container['allow_agreement_actions'] = isset($data['allow_agreement_actions']) ? $data['allow_agreement_actions'] : null;
         $this->container['allow_agreement_actions_metadata'] = isset($data['allow_agreement_actions_metadata']) ? $data['allow_agreement_actions_metadata'] : null;
+        $this->container['allow_agreement_orchestration_workflows'] = isset($data['allow_agreement_orchestration_workflows']) ? $data['allow_agreement_orchestration_workflows'] : null;
+        $this->container['allow_agreement_orchestration_workflows_metadata'] = isset($data['allow_agreement_orchestration_workflows_metadata']) ? $data['allow_agreement_orchestration_workflows_metadata'] : null;
         $this->container['allow_auto_nav_settings'] = isset($data['allow_auto_nav_settings']) ? $data['allow_auto_nav_settings'] : null;
         $this->container['allow_auto_nav_settings_metadata'] = isset($data['allow_auto_nav_settings_metadata']) ? $data['allow_auto_nav_settings_metadata'] : null;
         $this->container['allow_auto_tagging'] = isset($data['allow_auto_tagging']) ? $data['allow_auto_tagging'] : null;
@@ -3214,6 +3737,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['allow_cd_withdraw'] = isset($data['allow_cd_withdraw']) ? $data['allow_cd_withdraw'] : null;
         $this->container['allow_cd_withdraw_metadata'] = isset($data['allow_cd_withdraw_metadata']) ? $data['allow_cd_withdraw_metadata'] : null;
         $this->container['allow_connect_http_listener_configs'] = isset($data['allow_connect_http_listener_configs']) ? $data['allow_connect_http_listener_configs'] : null;
+        $this->container['allow_connect_o_auth_ui'] = isset($data['allow_connect_o_auth_ui']) ? $data['allow_connect_o_auth_ui'] : null;
         $this->container['allow_connect_send_finish_later'] = isset($data['allow_connect_send_finish_later']) ? $data['allow_connect_send_finish_later'] : null;
         $this->container['allow_connect_send_finish_later_metadata'] = isset($data['allow_connect_send_finish_later_metadata']) ? $data['allow_connect_send_finish_later_metadata'] : null;
         $this->container['allow_connect_unified_payload_ui'] = isset($data['allow_connect_unified_payload_ui']) ? $data['allow_connect_unified_payload_ui'] : null;
@@ -3225,12 +3749,16 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['allow_delayed_routing_metadata'] = isset($data['allow_delayed_routing_metadata']) ? $data['allow_delayed_routing_metadata'] : null;
         $this->container['allow_delegated_signing'] = isset($data['allow_delegated_signing']) ? $data['allow_delegated_signing'] : null;
         $this->container['allow_delegated_signing_metadata'] = isset($data['allow_delegated_signing_metadata']) ? $data['allow_delegated_signing_metadata'] : null;
+        $this->container['allow_doc_gen_documents'] = isset($data['allow_doc_gen_documents']) ? $data['allow_doc_gen_documents'] : null;
+        $this->container['allow_doc_gen_documents_metadata'] = isset($data['allow_doc_gen_documents_metadata']) ? $data['allow_doc_gen_documents_metadata'] : null;
         $this->container['allow_document_disclosures'] = isset($data['allow_document_disclosures']) ? $data['allow_document_disclosures'] : null;
         $this->container['allow_document_disclosures_metadata'] = isset($data['allow_document_disclosures_metadata']) ? $data['allow_document_disclosures_metadata'] : null;
         $this->container['allow_documents_on_signed_envelopes'] = isset($data['allow_documents_on_signed_envelopes']) ? $data['allow_documents_on_signed_envelopes'] : null;
         $this->container['allow_documents_on_signed_envelopes_metadata'] = isset($data['allow_documents_on_signed_envelopes_metadata']) ? $data['allow_documents_on_signed_envelopes_metadata'] : null;
         $this->container['allow_document_visibility'] = isset($data['allow_document_visibility']) ? $data['allow_document_visibility'] : null;
         $this->container['allow_document_visibility_metadata'] = isset($data['allow_document_visibility_metadata']) ? $data['allow_document_visibility_metadata'] : null;
+        $this->container['allow_editing_envelopes_on_behalf_of_others'] = isset($data['allow_editing_envelopes_on_behalf_of_others']) ? $data['allow_editing_envelopes_on_behalf_of_others'] : null;
+        $this->container['allow_editing_envelopes_on_behalf_of_others_metadata'] = isset($data['allow_editing_envelopes_on_behalf_of_others_metadata']) ? $data['allow_editing_envelopes_on_behalf_of_others_metadata'] : null;
         $this->container['allow_e_hanko_stamps'] = isset($data['allow_e_hanko_stamps']) ? $data['allow_e_hanko_stamps'] : null;
         $this->container['allow_e_hanko_stamps_metadata'] = isset($data['allow_e_hanko_stamps_metadata']) ? $data['allow_e_hanko_stamps_metadata'] : null;
         $this->container['allow_e_note_e_original'] = isset($data['allow_e_note_e_original']) ? $data['allow_e_note_e_original'] : null;
@@ -3255,6 +3783,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['allow_external_linked_accounts_metadata'] = isset($data['allow_external_linked_accounts_metadata']) ? $data['allow_external_linked_accounts_metadata'] : null;
         $this->container['allow_external_signature_pad'] = isset($data['allow_external_signature_pad']) ? $data['allow_external_signature_pad'] : null;
         $this->container['allow_external_signature_pad_metadata'] = isset($data['allow_external_signature_pad_metadata']) ? $data['allow_external_signature_pad_metadata'] : null;
+        $this->container['allow_idv_for_eu_qualified_signatures'] = isset($data['allow_idv_for_eu_qualified_signatures']) ? $data['allow_idv_for_eu_qualified_signatures'] : null;
+        $this->container['allow_idv_for_eu_qualified_signatures_metadata'] = isset($data['allow_idv_for_eu_qualified_signatures_metadata']) ? $data['allow_idv_for_eu_qualified_signatures_metadata'] : null;
         $this->container['allow_idv_level1'] = isset($data['allow_idv_level1']) ? $data['allow_idv_level1'] : null;
         $this->container['allow_idv_level1_metadata'] = isset($data['allow_idv_level1_metadata']) ? $data['allow_idv_level1_metadata'] : null;
         $this->container['allow_idv_level2'] = isset($data['allow_idv_level2']) ? $data['allow_idv_level2'] : null;
@@ -3269,6 +3799,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['allow_in_person_metadata'] = isset($data['allow_in_person_metadata']) ? $data['allow_in_person_metadata'] : null;
         $this->container['allow_managed_stamps'] = isset($data['allow_managed_stamps']) ? $data['allow_managed_stamps'] : null;
         $this->container['allow_managed_stamps_metadata'] = isset($data['allow_managed_stamps_metadata']) ? $data['allow_managed_stamps_metadata'] : null;
+        $this->container['allow_managing_envelopes_on_behalf_of_others'] = isset($data['allow_managing_envelopes_on_behalf_of_others']) ? $data['allow_managing_envelopes_on_behalf_of_others'] : null;
+        $this->container['allow_managing_envelopes_on_behalf_of_others_metadata'] = isset($data['allow_managing_envelopes_on_behalf_of_others_metadata']) ? $data['allow_managing_envelopes_on_behalf_of_others_metadata'] : null;
         $this->container['allow_markup'] = isset($data['allow_markup']) ? $data['allow_markup'] : null;
         $this->container['allow_markup_metadata'] = isset($data['allow_markup_metadata']) ? $data['allow_markup_metadata'] : null;
         $this->container['allow_member_time_zone'] = isset($data['allow_member_time_zone']) ? $data['allow_member_time_zone'] : null;
@@ -3288,6 +3820,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['allow_open_trust_signer_certificate'] = isset($data['allow_open_trust_signer_certificate']) ? $data['allow_open_trust_signer_certificate'] : null;
         $this->container['allow_open_trust_signer_certificate_metadata'] = isset($data['allow_open_trust_signer_certificate_metadata']) ? $data['allow_open_trust_signer_certificate_metadata'] : null;
         $this->container['allow_organization_docusign_monitor'] = isset($data['allow_organization_docusign_monitor']) ? $data['allow_organization_docusign_monitor'] : null;
+        $this->container['allow_organization_docusign_monitor_lite'] = isset($data['allow_organization_docusign_monitor_lite']) ? $data['allow_organization_docusign_monitor_lite'] : null;
+        $this->container['allow_organization_docusign_monitor_lite_metadata'] = isset($data['allow_organization_docusign_monitor_lite_metadata']) ? $data['allow_organization_docusign_monitor_lite_metadata'] : null;
         $this->container['allow_organization_docusign_monitor_metadata'] = isset($data['allow_organization_docusign_monitor_metadata']) ? $data['allow_organization_docusign_monitor_metadata'] : null;
         $this->container['allow_organization_domain_user_management'] = isset($data['allow_organization_domain_user_management']) ? $data['allow_organization_domain_user_management'] : null;
         $this->container['allow_organization_domain_user_management_metadata'] = isset($data['allow_organization_domain_user_management_metadata']) ? $data['allow_organization_domain_user_management_metadata'] : null;
@@ -3299,8 +3833,14 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['allow_organization_to_use_in_person_electronic_notary_metadata'] = isset($data['allow_organization_to_use_in_person_electronic_notary_metadata']) ? $data['allow_organization_to_use_in_person_electronic_notary_metadata'] : null;
         $this->container['allow_organization_to_use_remote_notary'] = isset($data['allow_organization_to_use_remote_notary']) ? $data['allow_organization_to_use_remote_notary'] : null;
         $this->container['allow_organization_to_use_remote_notary_metadata'] = isset($data['allow_organization_to_use_remote_notary_metadata']) ? $data['allow_organization_to_use_remote_notary_metadata'] : null;
+        $this->container['allow_organization_to_use_third_party_electronic_notary'] = isset($data['allow_organization_to_use_third_party_electronic_notary']) ? $data['allow_organization_to_use_third_party_electronic_notary'] : null;
+        $this->container['allow_organization_to_use_third_party_electronic_notary_metadata'] = isset($data['allow_organization_to_use_third_party_electronic_notary_metadata']) ? $data['allow_organization_to_use_third_party_electronic_notary_metadata'] : null;
+        $this->container['allow_participant_recipient_type'] = isset($data['allow_participant_recipient_type']) ? $data['allow_participant_recipient_type'] : null;
+        $this->container['allow_participant_recipient_type_metadata'] = isset($data['allow_participant_recipient_type_metadata']) ? $data['allow_participant_recipient_type_metadata'] : null;
         $this->container['allow_payment_processing'] = isset($data['allow_payment_processing']) ? $data['allow_payment_processing'] : null;
         $this->container['allow_payment_processing_metadata'] = isset($data['allow_payment_processing_metadata']) ? $data['allow_payment_processing_metadata'] : null;
+        $this->container['allow_performance_analytics'] = isset($data['allow_performance_analytics']) ? $data['allow_performance_analytics'] : null;
+        $this->container['allow_performance_analytics_metadata'] = isset($data['allow_performance_analytics_metadata']) ? $data['allow_performance_analytics_metadata'] : null;
         $this->container['allow_phone_authentication'] = isset($data['allow_phone_authentication']) ? $data['allow_phone_authentication'] : null;
         $this->container['allow_phone_authentication_metadata'] = isset($data['allow_phone_authentication_metadata']) ? $data['allow_phone_authentication_metadata'] : null;
         $this->container['allow_phone_auth_override'] = isset($data['allow_phone_auth_override']) ? $data['allow_phone_auth_override'] : null;
@@ -3321,6 +3861,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['allow_scheduled_sending_metadata'] = isset($data['allow_scheduled_sending_metadata']) ? $data['allow_scheduled_sending_metadata'] : null;
         $this->container['allow_security_appliance'] = isset($data['allow_security_appliance']) ? $data['allow_security_appliance'] : null;
         $this->container['allow_security_appliance_metadata'] = isset($data['allow_security_appliance_metadata']) ? $data['allow_security_appliance_metadata'] : null;
+        $this->container['allow_sending_envelopes_on_behalf_of_others'] = isset($data['allow_sending_envelopes_on_behalf_of_others']) ? $data['allow_sending_envelopes_on_behalf_of_others'] : null;
+        $this->container['allow_sending_envelopes_on_behalf_of_others_metadata'] = isset($data['allow_sending_envelopes_on_behalf_of_others_metadata']) ? $data['allow_sending_envelopes_on_behalf_of_others_metadata'] : null;
         $this->container['allow_send_to_certified_delivery'] = isset($data['allow_send_to_certified_delivery']) ? $data['allow_send_to_certified_delivery'] : null;
         $this->container['allow_send_to_certified_delivery_metadata'] = isset($data['allow_send_to_certified_delivery_metadata']) ? $data['allow_send_to_certified_delivery_metadata'] : null;
         $this->container['allow_send_to_intermediary'] = isset($data['allow_send_to_intermediary']) ? $data['allow_send_to_intermediary'] : null;
@@ -3355,12 +3897,18 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['allow_social_id_login_metadata'] = isset($data['allow_social_id_login_metadata']) ? $data['allow_social_id_login_metadata'] : null;
         $this->container['allow_supplemental_documents'] = isset($data['allow_supplemental_documents']) ? $data['allow_supplemental_documents'] : null;
         $this->container['allow_supplemental_documents_metadata'] = isset($data['allow_supplemental_documents_metadata']) ? $data['allow_supplemental_documents_metadata'] : null;
+        $this->container['allow_third_party_electronic_notary'] = isset($data['allow_third_party_electronic_notary']) ? $data['allow_third_party_electronic_notary'] : null;
+        $this->container['allow_third_party_electronic_notary_metadata'] = isset($data['allow_third_party_electronic_notary_metadata']) ? $data['allow_third_party_electronic_notary_metadata'] : null;
+        $this->container['allow_transactions_workspace'] = isset($data['allow_transactions_workspace']) ? $data['allow_transactions_workspace'] : null;
+        $this->container['allow_transactions_workspace_metadata'] = isset($data['allow_transactions_workspace_metadata']) ? $data['allow_transactions_workspace_metadata'] : null;
         $this->container['allow_users_to_access_directory'] = isset($data['allow_users_to_access_directory']) ? $data['allow_users_to_access_directory'] : null;
         $this->container['allow_users_to_access_directory_metadata'] = isset($data['allow_users_to_access_directory_metadata']) ? $data['allow_users_to_access_directory_metadata'] : null;
         $this->container['allow_value_insights'] = isset($data['allow_value_insights']) ? $data['allow_value_insights'] : null;
         $this->container['allow_value_insights_metadata'] = isset($data['allow_value_insights_metadata']) ? $data['allow_value_insights_metadata'] : null;
         $this->container['allow_web_forms'] = isset($data['allow_web_forms']) ? $data['allow_web_forms'] : null;
         $this->container['allow_web_forms_metadata'] = isset($data['allow_web_forms_metadata']) ? $data['allow_web_forms_metadata'] : null;
+        $this->container['allow_whats_app_delivery'] = isset($data['allow_whats_app_delivery']) ? $data['allow_whats_app_delivery'] : null;
+        $this->container['allow_whats_app_delivery_metadata'] = isset($data['allow_whats_app_delivery_metadata']) ? $data['allow_whats_app_delivery_metadata'] : null;
         $this->container['anchor_population_scope'] = isset($data['anchor_population_scope']) ? $data['anchor_population_scope'] : null;
         $this->container['anchor_population_scope_metadata'] = isset($data['anchor_population_scope_metadata']) ? $data['anchor_population_scope_metadata'] : null;
         $this->container['anchor_tag_versioned_placement_enabled'] = isset($data['anchor_tag_versioned_placement_enabled']) ? $data['anchor_tag_versioned_placement_enabled'] : null;
@@ -3412,6 +3960,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['convert_pdf_fields_metadata'] = isset($data['convert_pdf_fields_metadata']) ? $data['convert_pdf_fields_metadata'] : null;
         $this->container['data_population_scope'] = isset($data['data_population_scope']) ? $data['data_population_scope'] : null;
         $this->container['data_population_scope_metadata'] = isset($data['data_population_scope_metadata']) ? $data['data_population_scope_metadata'] : null;
+        $this->container['default_to_advanced_envelopes_filter_form'] = isset($data['default_to_advanced_envelopes_filter_form']) ? $data['default_to_advanced_envelopes_filter_form'] : null;
+        $this->container['default_to_advanced_envelopes_filter_form_metadata'] = isset($data['default_to_advanced_envelopes_filter_form_metadata']) ? $data['default_to_advanced_envelopes_filter_form_metadata'] : null;
         $this->container['disable_auto_template_matching'] = isset($data['disable_auto_template_matching']) ? $data['disable_auto_template_matching'] : null;
         $this->container['disable_auto_template_matching_metadata'] = isset($data['disable_auto_template_matching_metadata']) ? $data['disable_auto_template_matching_metadata'] : null;
         $this->container['disable_mobile_app'] = isset($data['disable_mobile_app']) ? $data['disable_mobile_app'] : null;
@@ -3442,12 +3992,19 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['document_retention_purge_tabs'] = isset($data['document_retention_purge_tabs']) ? $data['document_retention_purge_tabs'] : null;
         $this->container['document_visibility'] = isset($data['document_visibility']) ? $data['document_visibility'] : null;
         $this->container['document_visibility_metadata'] = isset($data['document_visibility_metadata']) ? $data['document_visibility_metadata'] : null;
+        $this->container['dss_enable_provisioning_pen_configuration_radmin_option'] = isset($data['dss_enable_provisioning_pen_configuration_radmin_option']) ? $data['dss_enable_provisioning_pen_configuration_radmin_option'] : null;
         $this->container['dss_sign_28411_enable_leave_page_prompt_radmin_option'] = isset($data['dss_sign_28411_enable_leave_page_prompt_radmin_option']) ? $data['dss_sign_28411_enable_leave_page_prompt_radmin_option'] : null;
         $this->container['dss_sign_29182_slide_up_bar_radmin_option'] = isset($data['dss_sign_29182_slide_up_bar_radmin_option']) ? $data['dss_sign_29182_slide_up_bar_radmin_option'] : null;
         $this->container['email_template_version'] = isset($data['email_template_version']) ? $data['email_template_version'] : null;
         $this->container['email_template_version_metadata'] = isset($data['email_template_version_metadata']) ? $data['email_template_version_metadata'] : null;
         $this->container['enable_access_code_generator'] = isset($data['enable_access_code_generator']) ? $data['enable_access_code_generator'] : null;
         $this->container['enable_access_code_generator_metadata'] = isset($data['enable_access_code_generator_metadata']) ? $data['enable_access_code_generator_metadata'] : null;
+        $this->container['enable_account_wide_search'] = isset($data['enable_account_wide_search']) ? $data['enable_account_wide_search'] : null;
+        $this->container['enable_account_wide_search_metadata'] = isset($data['enable_account_wide_search_metadata']) ? $data['enable_account_wide_search_metadata'] : null;
+        $this->container['enable_adm_healthcare'] = isset($data['enable_adm_healthcare']) ? $data['enable_adm_healthcare'] : null;
+        $this->container['enable_adm_healthcare_metadata'] = isset($data['enable_adm_healthcare_metadata']) ? $data['enable_adm_healthcare_metadata'] : null;
+        $this->container['enable_advanced_envelopes_search'] = isset($data['enable_advanced_envelopes_search']) ? $data['enable_advanced_envelopes_search'] : null;
+        $this->container['enable_advanced_envelopes_search_metadata'] = isset($data['enable_advanced_envelopes_search_metadata']) ? $data['enable_advanced_envelopes_search_metadata'] : null;
         $this->container['enable_advanced_payments'] = isset($data['enable_advanced_payments']) ? $data['enable_advanced_payments'] : null;
         $this->container['enable_advanced_payments_metadata'] = isset($data['enable_advanced_payments_metadata']) ? $data['enable_advanced_payments_metadata'] : null;
         $this->container['enable_advanced_power_forms'] = isset($data['enable_advanced_power_forms']) ? $data['enable_advanced_power_forms'] : null;
@@ -3462,19 +4019,48 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['enable_bcc_dummy_link_metadata'] = isset($data['enable_bcc_dummy_link_metadata']) ? $data['enable_bcc_dummy_link_metadata'] : null;
         $this->container['enable_calculated_fields'] = isset($data['enable_calculated_fields']) ? $data['enable_calculated_fields'] : null;
         $this->container['enable_calculated_fields_metadata'] = isset($data['enable_calculated_fields_metadata']) ? $data['enable_calculated_fields_metadata'] : null;
+        $this->container['enable_click_plus'] = isset($data['enable_click_plus']) ? $data['enable_click_plus'] : null;
+        $this->container['enable_click_plus_conditional_content'] = isset($data['enable_click_plus_conditional_content']) ? $data['enable_click_plus_conditional_content'] : null;
+        $this->container['enable_click_plus_conditional_content_meta_data'] = isset($data['enable_click_plus_conditional_content_meta_data']) ? $data['enable_click_plus_conditional_content_meta_data'] : null;
+        $this->container['enable_click_plus_custom_fields'] = isset($data['enable_click_plus_custom_fields']) ? $data['enable_click_plus_custom_fields'] : null;
+        $this->container['enable_click_plus_custom_fields_meta_data'] = isset($data['enable_click_plus_custom_fields_meta_data']) ? $data['enable_click_plus_custom_fields_meta_data'] : null;
+        $this->container['enable_click_plus_custom_style'] = isset($data['enable_click_plus_custom_style']) ? $data['enable_click_plus_custom_style'] : null;
+        $this->container['enable_click_plus_custom_style_meta_data'] = isset($data['enable_click_plus_custom_style_meta_data']) ? $data['enable_click_plus_custom_style_meta_data'] : null;
+        $this->container['enable_click_plus_dynamic_content'] = isset($data['enable_click_plus_dynamic_content']) ? $data['enable_click_plus_dynamic_content'] : null;
+        $this->container['enable_click_plus_dynamic_content_meta_data'] = isset($data['enable_click_plus_dynamic_content_meta_data']) ? $data['enable_click_plus_dynamic_content_meta_data'] : null;
+        $this->container['enable_click_plus_meta_data'] = isset($data['enable_click_plus_meta_data']) ? $data['enable_click_plus_meta_data'] : null;
         $this->container['enable_clickwraps'] = isset($data['enable_clickwraps']) ? $data['enable_clickwraps'] : null;
         $this->container['enable_clickwraps_metadata'] = isset($data['enable_clickwraps_metadata']) ? $data['enable_clickwraps_metadata'] : null;
         $this->container['enable_combined_pdf_download_for_sbs'] = isset($data['enable_combined_pdf_download_for_sbs']) ? $data['enable_combined_pdf_download_for_sbs'] : null;
         $this->container['enable_comments_history_download_in_signing'] = isset($data['enable_comments_history_download_in_signing']) ? $data['enable_comments_history_download_in_signing'] : null;
         $this->container['enable_comments_history_download_in_signing_metadata'] = isset($data['enable_comments_history_download_in_signing_metadata']) ? $data['enable_comments_history_download_in_signing_metadata'] : null;
+        $this->container['enable_contact_suggestions'] = isset($data['enable_contact_suggestions']) ? $data['enable_contact_suggestions'] : null;
+        $this->container['enable_contact_suggestions_metadata'] = isset($data['enable_contact_suggestions_metadata']) ? $data['enable_contact_suggestions_metadata'] : null;
         $this->container['enable_customer_satisfaction_metric_tracking'] = isset($data['enable_customer_satisfaction_metric_tracking']) ? $data['enable_customer_satisfaction_metric_tracking'] : null;
         $this->container['enable_customer_satisfaction_metric_tracking_metadata'] = isset($data['enable_customer_satisfaction_metric_tracking_metadata']) ? $data['enable_customer_satisfaction_metric_tracking_metadata'] : null;
+        $this->container['enable_d_sig_eu_advanced_pens'] = isset($data['enable_d_sig_eu_advanced_pens']) ? $data['enable_d_sig_eu_advanced_pens'] : null;
+        $this->container['enable_d_sig_eu_advanced_pens_metadata'] = isset($data['enable_d_sig_eu_advanced_pens_metadata']) ? $data['enable_d_sig_eu_advanced_pens_metadata'] : null;
+        $this->container['enable_d_sig_express_pens'] = isset($data['enable_d_sig_express_pens']) ? $data['enable_d_sig_express_pens'] : null;
+        $this->container['enable_d_sig_express_pens_metadata'] = isset($data['enable_d_sig_express_pens_metadata']) ? $data['enable_d_sig_express_pens_metadata'] : null;
+        $this->container['enable_d_sig_id_check_for_aes_pens'] = isset($data['enable_d_sig_id_check_for_aes_pens']) ? $data['enable_d_sig_id_check_for_aes_pens'] : null;
+        $this->container['enable_d_sig_id_check_for_aes_pens_metadata'] = isset($data['enable_d_sig_id_check_for_aes_pens_metadata']) ? $data['enable_d_sig_id_check_for_aes_pens_metadata'] : null;
+        $this->container['enable_d_sig_id_check_in_person_for_qes_pens'] = isset($data['enable_d_sig_id_check_in_person_for_qes_pens']) ? $data['enable_d_sig_id_check_in_person_for_qes_pens'] : null;
+        $this->container['enable_d_sig_id_check_in_person_for_qes_pens_metadata'] = isset($data['enable_d_sig_id_check_in_person_for_qes_pens_metadata']) ? $data['enable_d_sig_id_check_in_person_for_qes_pens_metadata'] : null;
+        $this->container['enable_d_sig_id_check_remote_for_qes_pens'] = isset($data['enable_d_sig_id_check_remote_for_qes_pens']) ? $data['enable_d_sig_id_check_remote_for_qes_pens'] : null;
+        $this->container['enable_d_sig_id_check_remote_for_qes_pens_metadata'] = isset($data['enable_d_sig_id_check_remote_for_qes_pens_metadata']) ? $data['enable_d_sig_id_check_remote_for_qes_pens_metadata'] : null;
+        $this->container['enable_d_sig_id_verification_pens'] = isset($data['enable_d_sig_id_verification_pens']) ? $data['enable_d_sig_id_verification_pens'] : null;
+        $this->container['enable_d_sig_id_verification_pens_metadata'] = isset($data['enable_d_sig_id_verification_pens_metadata']) ? $data['enable_d_sig_id_verification_pens_metadata'] : null;
+        $this->container['enable_d_sig_id_verification_premier_pens'] = isset($data['enable_d_sig_id_verification_premier_pens']) ? $data['enable_d_sig_id_verification_premier_pens'] : null;
+        $this->container['enable_d_sig_id_verification_premier_pens_metadata'] = isset($data['enable_d_sig_id_verification_premier_pens_metadata']) ? $data['enable_d_sig_id_verification_premier_pens_metadata'] : null;
         $this->container['enable_ds_pro'] = isset($data['enable_ds_pro']) ? $data['enable_ds_pro'] : null;
         $this->container['enable_ds_pro_metadata'] = isset($data['enable_ds_pro_metadata']) ? $data['enable_ds_pro_metadata'] : null;
+        $this->container['enable_enforce_tls_emails_setting_metadata'] = isset($data['enable_enforce_tls_emails_setting_metadata']) ? $data['enable_enforce_tls_emails_setting_metadata'] : null;
         $this->container['enable_envelope_stamping_by_account_admin'] = isset($data['enable_envelope_stamping_by_account_admin']) ? $data['enable_envelope_stamping_by_account_admin'] : null;
         $this->container['enable_envelope_stamping_by_account_admin_metadata'] = isset($data['enable_envelope_stamping_by_account_admin_metadata']) ? $data['enable_envelope_stamping_by_account_admin_metadata'] : null;
         $this->container['enable_envelope_stamping_by_ds_admin'] = isset($data['enable_envelope_stamping_by_ds_admin']) ? $data['enable_envelope_stamping_by_ds_admin'] : null;
         $this->container['enable_envelope_stamping_by_ds_admin_metadata'] = isset($data['enable_envelope_stamping_by_ds_admin_metadata']) ? $data['enable_envelope_stamping_by_ds_admin_metadata'] : null;
+        $this->container['enable_e_sign_api_hourly_limit_management'] = isset($data['enable_e_sign_api_hourly_limit_management']) ? $data['enable_e_sign_api_hourly_limit_management'] : null;
+        $this->container['enable_e_sign_api_hourly_limit_management_metadata'] = isset($data['enable_e_sign_api_hourly_limit_management_metadata']) ? $data['enable_e_sign_api_hourly_limit_management_metadata'] : null;
         $this->container['enable_esign_communities'] = isset($data['enable_esign_communities']) ? $data['enable_esign_communities'] : null;
         $this->container['enable_esign_communities_metadata'] = isset($data['enable_esign_communities_metadata']) ? $data['enable_esign_communities_metadata'] : null;
         $this->container['enable_id_fx_accountless_sms_auth_for_part11'] = isset($data['enable_id_fx_accountless_sms_auth_for_part11']) ? $data['enable_id_fx_accountless_sms_auth_for_part11'] : null;
@@ -3483,10 +4069,13 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['enable_id_fx_intuit_kba_metadata'] = isset($data['enable_id_fx_intuit_kba_metadata']) ? $data['enable_id_fx_intuit_kba_metadata'] : null;
         $this->container['enable_id_fx_phone_authentication'] = isset($data['enable_id_fx_phone_authentication']) ? $data['enable_id_fx_phone_authentication'] : null;
         $this->container['enable_id_fx_phone_authentication_metadata'] = isset($data['enable_id_fx_phone_authentication_metadata']) ? $data['enable_id_fx_phone_authentication_metadata'] : null;
+        $this->container['enable_idfx_phone_auth_signature_auth_status'] = isset($data['enable_idfx_phone_auth_signature_auth_status']) ? $data['enable_idfx_phone_auth_signature_auth_status'] : null;
+        $this->container['enable_idfx_phone_auth_signature_auth_status_metadata'] = isset($data['enable_idfx_phone_auth_signature_auth_status_metadata']) ? $data['enable_idfx_phone_auth_signature_auth_status_metadata'] : null;
         $this->container['enable_in_browser_editor'] = isset($data['enable_in_browser_editor']) ? $data['enable_in_browser_editor'] : null;
         $this->container['enable_in_browser_editor_metadata'] = isset($data['enable_in_browser_editor_metadata']) ? $data['enable_in_browser_editor_metadata'] : null;
         $this->container['enable_key_terms_suggestions_by_document_type'] = isset($data['enable_key_terms_suggestions_by_document_type']) ? $data['enable_key_terms_suggestions_by_document_type'] : null;
         $this->container['enable_key_terms_suggestions_by_document_type_metadata'] = isset($data['enable_key_terms_suggestions_by_document_type_metadata']) ? $data['enable_key_terms_suggestions_by_document_type_metadata'] : null;
+        $this->container['enable_participant_recipient_setting_metadata'] = isset($data['enable_participant_recipient_setting_metadata']) ? $data['enable_participant_recipient_setting_metadata'] : null;
         $this->container['enable_payment_processing'] = isset($data['enable_payment_processing']) ? $data['enable_payment_processing'] : null;
         $this->container['enable_payment_processing_metadata'] = isset($data['enable_payment_processing_metadata']) ? $data['enable_payment_processing_metadata'] : null;
         $this->container['enable_pdfa_conversion'] = isset($data['enable_pdfa_conversion']) ? $data['enable_pdfa_conversion'] : null;
@@ -3560,10 +4149,18 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['enable_witnessing_metadata'] = isset($data['enable_witnessing_metadata']) ? $data['enable_witnessing_metadata'] : null;
         $this->container['enforce_template_name_uniqueness'] = isset($data['enforce_template_name_uniqueness']) ? $data['enforce_template_name_uniqueness'] : null;
         $this->container['enforce_template_name_uniqueness_metadata'] = isset($data['enforce_template_name_uniqueness_metadata']) ? $data['enforce_template_name_uniqueness_metadata'] : null;
+        $this->container['enforce_tls_emails'] = isset($data['enforce_tls_emails']) ? $data['enforce_tls_emails'] : null;
+        $this->container['enforce_tls_emails_metadata'] = isset($data['enforce_tls_emails_metadata']) ? $data['enforce_tls_emails_metadata'] : null;
         $this->container['envelope_integration_allowed'] = isset($data['envelope_integration_allowed']) ? $data['envelope_integration_allowed'] : null;
         $this->container['envelope_integration_allowed_metadata'] = isset($data['envelope_integration_allowed_metadata']) ? $data['envelope_integration_allowed_metadata'] : null;
         $this->container['envelope_integration_enabled'] = isset($data['envelope_integration_enabled']) ? $data['envelope_integration_enabled'] : null;
         $this->container['envelope_integration_enabled_metadata'] = isset($data['envelope_integration_enabled_metadata']) ? $data['envelope_integration_enabled_metadata'] : null;
+        $this->container['envelope_limits_total_document_size_allowed_in_mb'] = isset($data['envelope_limits_total_document_size_allowed_in_mb']) ? $data['envelope_limits_total_document_size_allowed_in_mb'] : null;
+        $this->container['envelope_limits_total_document_size_allowed_in_mb_enabled'] = isset($data['envelope_limits_total_document_size_allowed_in_mb_enabled']) ? $data['envelope_limits_total_document_size_allowed_in_mb_enabled'] : null;
+        $this->container['envelope_limits_total_document_size_allowed_in_mb_enabled_metadata'] = isset($data['envelope_limits_total_document_size_allowed_in_mb_enabled_metadata']) ? $data['envelope_limits_total_document_size_allowed_in_mb_enabled_metadata'] : null;
+        $this->container['envelope_limits_total_document_size_allowed_in_mb_metadata'] = isset($data['envelope_limits_total_document_size_allowed_in_mb_metadata']) ? $data['envelope_limits_total_document_size_allowed_in_mb_metadata'] : null;
+        $this->container['envelope_search_mode'] = isset($data['envelope_search_mode']) ? $data['envelope_search_mode'] : null;
+        $this->container['envelope_search_mode_metadata'] = isset($data['envelope_search_mode_metadata']) ? $data['envelope_search_mode_metadata'] : null;
         $this->container['envelope_stamping_default_value'] = isset($data['envelope_stamping_default_value']) ? $data['envelope_stamping_default_value'] : null;
         $this->container['envelope_stamping_default_value_metadata'] = isset($data['envelope_stamping_default_value_metadata']) ? $data['envelope_stamping_default_value_metadata'] : null;
         $this->container['exit_prompt'] = isset($data['exit_prompt']) ? $data['exit_prompt'] : null;
@@ -3581,6 +4178,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['finish_reminder_metadata'] = isset($data['finish_reminder_metadata']) ? $data['finish_reminder_metadata'] : null;
         $this->container['guided_forms_html_allowed'] = isset($data['guided_forms_html_allowed']) ? $data['guided_forms_html_allowed'] : null;
         $this->container['guided_forms_html_allowed_metadata'] = isset($data['guided_forms_html_allowed_metadata']) ? $data['guided_forms_html_allowed_metadata'] : null;
+        $this->container['guided_forms_html_conversion_policy'] = isset($data['guided_forms_html_conversion_policy']) ? $data['guided_forms_html_conversion_policy'] : null;
+        $this->container['guided_forms_html_conversion_policy_metadata'] = isset($data['guided_forms_html_conversion_policy_metadata']) ? $data['guided_forms_html_conversion_policy_metadata'] : null;
         $this->container['has_recipient_connect_claimed_domain'] = isset($data['has_recipient_connect_claimed_domain']) ? $data['has_recipient_connect_claimed_domain'] : null;
         $this->container['hide_account_address_in_co_c'] = isset($data['hide_account_address_in_co_c']) ? $data['hide_account_address_in_co_c'] : null;
         $this->container['hide_account_address_in_co_c_metadata'] = isset($data['hide_account_address_in_co_c_metadata']) ? $data['hide_account_address_in_co_c_metadata'] : null;
@@ -3597,6 +4196,8 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['id_check_required_metadata'] = isset($data['id_check_required_metadata']) ? $data['id_check_required_metadata'] : null;
         $this->container['identity_verification'] = isset($data['identity_verification']) ? $data['identity_verification'] : null;
         $this->container['identity_verification_metadata'] = isset($data['identity_verification_metadata']) ? $data['identity_verification_metadata'] : null;
+        $this->container['idfx_kba_authentication_override'] = isset($data['idfx_kba_authentication_override']) ? $data['idfx_kba_authentication_override'] : null;
+        $this->container['idfx_kba_authentication_override_metadata'] = isset($data['idfx_kba_authentication_override_metadata']) ? $data['idfx_kba_authentication_override_metadata'] : null;
         $this->container['idfx_phone_authentication_override'] = isset($data['idfx_phone_authentication_override']) ? $data['idfx_phone_authentication_override'] : null;
         $this->container['idfx_phone_authentication_override_metadata'] = isset($data['idfx_phone_authentication_override_metadata']) ? $data['idfx_phone_authentication_override_metadata'] : null;
         $this->container['ignore_error_if_anchor_tab_not_found'] = isset($data['ignore_error_if_anchor_tab_not_found']) ? $data['ignore_error_if_anchor_tab_not_found'] : null;
@@ -3609,21 +4210,31 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['in_session_enabled_metadata'] = isset($data['in_session_enabled_metadata']) ? $data['in_session_enabled_metadata'] : null;
         $this->container['in_session_suppress_emails'] = isset($data['in_session_suppress_emails']) ? $data['in_session_suppress_emails'] : null;
         $this->container['in_session_suppress_emails_metadata'] = isset($data['in_session_suppress_emails_metadata']) ? $data['in_session_suppress_emails_metadata'] : null;
+        $this->container['is_connect_document_fields_enabled'] = isset($data['is_connect_document_fields_enabled']) ? $data['is_connect_document_fields_enabled'] : null;
         $this->container['linked_external_primary_accounts'] = isset($data['linked_external_primary_accounts']) ? $data['linked_external_primary_accounts'] : null;
         $this->container['maximum_signing_groups'] = isset($data['maximum_signing_groups']) ? $data['maximum_signing_groups'] : null;
         $this->container['maximum_signing_groups_metadata'] = isset($data['maximum_signing_groups_metadata']) ? $data['maximum_signing_groups_metadata'] : null;
         $this->container['maximum_users_per_signing_group'] = isset($data['maximum_users_per_signing_group']) ? $data['maximum_users_per_signing_group'] : null;
         $this->container['maximum_users_per_signing_group_metadata'] = isset($data['maximum_users_per_signing_group_metadata']) ? $data['maximum_users_per_signing_group_metadata'] : null;
         $this->container['max_number_of_custom_stamps'] = isset($data['max_number_of_custom_stamps']) ? $data['max_number_of_custom_stamps'] : null;
+        $this->container['merge_mixed_mode_results'] = isset($data['merge_mixed_mode_results']) ? $data['merge_mixed_mode_results'] : null;
+        $this->container['merge_mixed_mode_results_metadata'] = isset($data['merge_mixed_mode_results_metadata']) ? $data['merge_mixed_mode_results_metadata'] : null;
         $this->container['mobile_session_timeout'] = isset($data['mobile_session_timeout']) ? $data['mobile_session_timeout'] : null;
         $this->container['mobile_session_timeout_metadata'] = isset($data['mobile_session_timeout_metadata']) ? $data['mobile_session_timeout_metadata'] : null;
         $this->container['number_of_active_custom_stamps'] = isset($data['number_of_active_custom_stamps']) ? $data['number_of_active_custom_stamps'] : null;
         $this->container['opt_in_mobile_signing_v02'] = isset($data['opt_in_mobile_signing_v02']) ? $data['opt_in_mobile_signing_v02'] : null;
         $this->container['opt_in_mobile_signing_v02_metadata'] = isset($data['opt_in_mobile_signing_v02_metadata']) ? $data['opt_in_mobile_signing_v02_metadata'] : null;
+        $this->container['opt_in_universal_signatures'] = isset($data['opt_in_universal_signatures']) ? $data['opt_in_universal_signatures'] : null;
         $this->container['opt_out_auto_nav_text_and_tab_color_updates'] = isset($data['opt_out_auto_nav_text_and_tab_color_updates']) ? $data['opt_out_auto_nav_text_and_tab_color_updates'] : null;
         $this->container['opt_out_auto_nav_text_and_tab_color_updates_metadata'] = isset($data['opt_out_auto_nav_text_and_tab_color_updates_metadata']) ? $data['opt_out_auto_nav_text_and_tab_color_updates_metadata'] : null;
         $this->container['opt_out_new_platform_seal'] = isset($data['opt_out_new_platform_seal']) ? $data['opt_out_new_platform_seal'] : null;
         $this->container['opt_out_new_platform_seal_platform_metadata'] = isset($data['opt_out_new_platform_seal_platform_metadata']) ? $data['opt_out_new_platform_seal_platform_metadata'] : null;
+        $this->container['pdf_max_chunked_upload_part_size'] = isset($data['pdf_max_chunked_upload_part_size']) ? $data['pdf_max_chunked_upload_part_size'] : null;
+        $this->container['pdf_max_chunked_upload_part_size_metadata'] = isset($data['pdf_max_chunked_upload_part_size_metadata']) ? $data['pdf_max_chunked_upload_part_size_metadata'] : null;
+        $this->container['pdf_max_chunked_upload_total_size'] = isset($data['pdf_max_chunked_upload_total_size']) ? $data['pdf_max_chunked_upload_total_size'] : null;
+        $this->container['pdf_max_chunked_upload_total_size_metadata'] = isset($data['pdf_max_chunked_upload_total_size_metadata']) ? $data['pdf_max_chunked_upload_total_size_metadata'] : null;
+        $this->container['pdf_max_individual_upload_size'] = isset($data['pdf_max_individual_upload_size']) ? $data['pdf_max_individual_upload_size'] : null;
+        $this->container['pdf_max_individual_upload_size_metadata'] = isset($data['pdf_max_individual_upload_size_metadata']) ? $data['pdf_max_individual_upload_size_metadata'] : null;
         $this->container['phone_auth_recipient_may_provide_phone_number'] = isset($data['phone_auth_recipient_may_provide_phone_number']) ? $data['phone_auth_recipient_may_provide_phone_number'] : null;
         $this->container['phone_auth_recipient_may_provide_phone_number_metadata'] = isset($data['phone_auth_recipient_may_provide_phone_number_metadata']) ? $data['phone_auth_recipient_may_provide_phone_number_metadata'] : null;
         $this->container['pki_sign_downloaded_pdf_docs'] = isset($data['pki_sign_downloaded_pdf_docs']) ? $data['pki_sign_downloaded_pdf_docs'] : null;
@@ -3646,6 +4257,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['rsa_verid_password'] = isset($data['rsa_verid_password']) ? $data['rsa_verid_password'] : null;
         $this->container['rsa_verid_ruleset'] = isset($data['rsa_verid_ruleset']) ? $data['rsa_verid_ruleset'] : null;
         $this->container['rsa_verid_user_id'] = isset($data['rsa_verid_user_id']) ? $data['rsa_verid_user_id'] : null;
+        $this->container['sbs_transaction_level'] = isset($data['sbs_transaction_level']) ? $data['sbs_transaction_level'] : null;
         $this->container['self_signed_recipient_email_document'] = isset($data['self_signed_recipient_email_document']) ? $data['self_signed_recipient_email_document'] : null;
         $this->container['self_signed_recipient_email_document_metadata'] = isset($data['self_signed_recipient_email_document_metadata']) ? $data['self_signed_recipient_email_document_metadata'] : null;
         $this->container['self_signed_recipient_email_document_user_override'] = isset($data['self_signed_recipient_email_document_user_override']) ? $data['self_signed_recipient_email_document_user_override'] : null;
@@ -3754,10 +4366,16 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
         $this->container['use_derived_keys_metadata'] = isset($data['use_derived_keys_metadata']) ? $data['use_derived_keys_metadata'] : null;
         $this->container['use_docu_sign_express_signer_certificate'] = isset($data['use_docu_sign_express_signer_certificate']) ? $data['use_docu_sign_express_signer_certificate'] : null;
         $this->container['use_docu_sign_express_signer_certificate_metadata'] = isset($data['use_docu_sign_express_signer_certificate_metadata']) ? $data['use_docu_sign_express_signer_certificate_metadata'] : null;
+        $this->container['use_envelope_search_mixed_mode'] = isset($data['use_envelope_search_mixed_mode']) ? $data['use_envelope_search_mixed_mode'] : null;
+        $this->container['use_envelope_search_mixed_mode_metadata'] = isset($data['use_envelope_search_mixed_mode_metadata']) ? $data['use_envelope_search_mixed_mode_metadata'] : null;
         $this->container['use_multi_app_groups_data'] = isset($data['use_multi_app_groups_data']) ? $data['use_multi_app_groups_data'] : null;
         $this->container['use_multi_app_groups_data_metadata'] = isset($data['use_multi_app_groups_data_metadata']) ? $data['use_multi_app_groups_data_metadata'] : null;
         $this->container['use_new_blob_for_pdf'] = isset($data['use_new_blob_for_pdf']) ? $data['use_new_blob_for_pdf'] : null;
         $this->container['use_new_blob_for_pdf_metadata'] = isset($data['use_new_blob_for_pdf_metadata']) ? $data['use_new_blob_for_pdf_metadata'] : null;
+        $this->container['use_new_envelope_search'] = isset($data['use_new_envelope_search']) ? $data['use_new_envelope_search'] : null;
+        $this->container['use_new_envelope_search_metadata'] = isset($data['use_new_envelope_search_metadata']) ? $data['use_new_envelope_search_metadata'] : null;
+        $this->container['use_new_envelope_search_only_when_searching_after_date'] = isset($data['use_new_envelope_search_only_when_searching_after_date']) ? $data['use_new_envelope_search_only_when_searching_after_date'] : null;
+        $this->container['use_new_envelope_search_only_when_searching_after_date_metadata'] = isset($data['use_new_envelope_search_only_when_searching_after_date_metadata']) ? $data['use_new_envelope_search_only_when_searching_after_date_metadata'] : null;
         $this->container['use_safe_signer_certificates'] = isset($data['use_safe_signer_certificates']) ? $data['use_safe_signer_certificates'] : null;
         $this->container['use_safe_signer_certificates_metadata'] = isset($data['use_safe_signer_certificates_metadata']) ? $data['use_safe_signer_certificates_metadata'] : null;
         $this->container['uses_api'] = isset($data['uses_api']) ? $data['uses_api'] : null;
@@ -3820,7 +4438,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets access_code_format
      *
-     * @param \DocuSign\eSign\Model\AccessCodeFormat $access_code_format access_code_format
+     * @param \DocuSign\eSign\Model\AccessCodeFormat $access_code_format Format of the string provided to a recipient in order to access an envelope.
      *
      * @return $this
      */
@@ -3868,7 +4486,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets account_date_time_format_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $account_date_time_format_metadata account_date_time_format_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $account_date_time_format_metadata Metadata that indicates whether the `accountDateTimeFormat` property is editable.
      *
      * @return $this
      */
@@ -3916,7 +4534,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets account_default_language_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $account_default_language_metadata account_default_language_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $account_default_language_metadata 
      *
      * @return $this
      */
@@ -3964,7 +4582,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets account_name_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $account_name_metadata account_name_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $account_name_metadata Metadata that indicates whether the `accountName` property is editable.
      *
      * @return $this
      */
@@ -3988,7 +4606,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets account_notification
      *
-     * @param \DocuSign\eSign\Model\AccountNotification $account_notification account_notification
+     * @param \DocuSign\eSign\Model\AccountNotification $account_notification An object that specifies notifications (expirations and reminders) for the envelope.
      *
      * @return $this
      */
@@ -4012,7 +4630,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets account_ui_settings
      *
-     * @param \DocuSign\eSign\Model\AccountUISettings $account_ui_settings account_ui_settings
+     * @param \DocuSign\eSign\Model\AccountUISettings $account_ui_settings An object that defines the settings to use in the UI.
      *
      * @return $this
      */
@@ -4060,7 +4678,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets adopt_sig_config_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $adopt_sig_config_metadata adopt_sig_config_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $adopt_sig_config_metadata Metadata that indicates whether the `adoptSigConfig` property is editable.
      *
      * @return $this
      */
@@ -4108,13 +4726,157 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets advanced_correct_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $advanced_correct_metadata advanced_correct_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $advanced_correct_metadata Metadata that indicates whether the `advancedCorrect` property is editable.
      *
      * @return $this
      */
     public function setAdvancedCorrectMetadata($advanced_correct_metadata)
     {
         $this->container['advanced_correct_metadata'] = $advanced_correct_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets advanced_search_enable_tab_field
+     *
+     * @return ?string
+     */
+    public function getAdvancedSearchEnableTabField()
+    {
+        return $this->container['advanced_search_enable_tab_field'];
+    }
+
+    /**
+     * Sets advanced_search_enable_tab_field
+     *
+     * @param ?string $advanced_search_enable_tab_field 
+     *
+     * @return $this
+     */
+    public function setAdvancedSearchEnableTabField($advanced_search_enable_tab_field)
+    {
+        $this->container['advanced_search_enable_tab_field'] = $advanced_search_enable_tab_field;
+
+        return $this;
+    }
+
+    /**
+     * Gets advanced_search_enable_tab_field_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getAdvancedSearchEnableTabFieldMetadata()
+    {
+        return $this->container['advanced_search_enable_tab_field_metadata'];
+    }
+
+    /**
+     * Sets advanced_search_enable_tab_field_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $advanced_search_enable_tab_field_metadata 
+     *
+     * @return $this
+     */
+    public function setAdvancedSearchEnableTabFieldMetadata($advanced_search_enable_tab_field_metadata)
+    {
+        $this->container['advanced_search_enable_tab_field_metadata'] = $advanced_search_enable_tab_field_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets advanced_search_enable_template_id_field
+     *
+     * @return ?string
+     */
+    public function getAdvancedSearchEnableTemplateIdField()
+    {
+        return $this->container['advanced_search_enable_template_id_field'];
+    }
+
+    /**
+     * Sets advanced_search_enable_template_id_field
+     *
+     * @param ?string $advanced_search_enable_template_id_field 
+     *
+     * @return $this
+     */
+    public function setAdvancedSearchEnableTemplateIdField($advanced_search_enable_template_id_field)
+    {
+        $this->container['advanced_search_enable_template_id_field'] = $advanced_search_enable_template_id_field;
+
+        return $this;
+    }
+
+    /**
+     * Gets advanced_search_enable_template_id_field_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getAdvancedSearchEnableTemplateIdFieldMetadata()
+    {
+        return $this->container['advanced_search_enable_template_id_field_metadata'];
+    }
+
+    /**
+     * Sets advanced_search_enable_template_id_field_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $advanced_search_enable_template_id_field_metadata 
+     *
+     * @return $this
+     */
+    public function setAdvancedSearchEnableTemplateIdFieldMetadata($advanced_search_enable_template_id_field_metadata)
+    {
+        $this->container['advanced_search_enable_template_id_field_metadata'] = $advanced_search_enable_template_id_field_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets advanced_search_enable_template_name_field
+     *
+     * @return ?string
+     */
+    public function getAdvancedSearchEnableTemplateNameField()
+    {
+        return $this->container['advanced_search_enable_template_name_field'];
+    }
+
+    /**
+     * Sets advanced_search_enable_template_name_field
+     *
+     * @param ?string $advanced_search_enable_template_name_field 
+     *
+     * @return $this
+     */
+    public function setAdvancedSearchEnableTemplateNameField($advanced_search_enable_template_name_field)
+    {
+        $this->container['advanced_search_enable_template_name_field'] = $advanced_search_enable_template_name_field;
+
+        return $this;
+    }
+
+    /**
+     * Gets advanced_search_enable_template_name_field_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getAdvancedSearchEnableTemplateNameFieldMetadata()
+    {
+        return $this->container['advanced_search_enable_template_name_field_metadata'];
+    }
+
+    /**
+     * Sets advanced_search_enable_template_name_field_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $advanced_search_enable_template_name_field_metadata 
+     *
+     * @return $this
+     */
+    public function setAdvancedSearchEnableTemplateNameFieldMetadata($advanced_search_enable_template_name_field_metadata)
+    {
+        $this->container['advanced_search_enable_template_name_field_metadata'] = $advanced_search_enable_template_name_field_metadata;
 
         return $this;
     }
@@ -4156,7 +4918,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_access_code_format_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_access_code_format_metadata allow_access_code_format_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_access_code_format_metadata Metadata that indicates whether the `allowAccessCodeFormat` property is editable.
      *
      * @return $this
      */
@@ -4204,7 +4966,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_account_management_granular_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_account_management_granular_metadata allow_account_management_granular_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_account_management_granular_metadata Metadata that indicates whether the `allowAccountManagementGranular` property is editable.
      *
      * @return $this
      */
@@ -4252,7 +5014,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_account_member_name_change_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_account_member_name_change_metadata allow_account_member_name_change_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_account_member_name_change_metadata Metadata that indicates whether the `allowAccountMemberNameChange` property is editable.
      *
      * @return $this
      */
@@ -4300,7 +5062,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_advanced_recipient_routing_conditional_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_advanced_recipient_routing_conditional_metadata allow_advanced_recipient_routing_conditional_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_advanced_recipient_routing_conditional_metadata Metadata that indicates whether the ` allowAdvancedRecipientRoutingConditional` property is editable.
      *
      * @return $this
      */
@@ -4348,7 +5110,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_agent_name_email_edit_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_agent_name_email_edit_metadata allow_agent_name_email_edit_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_agent_name_email_edit_metadata Metadata that indicates whether the `allowAgentNameEmailEdit` property is editable.
      *
      * @return $this
      */
@@ -4396,13 +5158,61 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_agreement_actions_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_agreement_actions_metadata allow_agreement_actions_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_agreement_actions_metadata Metadata about the `allowAgreementActions` property.
      *
      * @return $this
      */
     public function setAllowAgreementActionsMetadata($allow_agreement_actions_metadata)
     {
         $this->container['allow_agreement_actions_metadata'] = $allow_agreement_actions_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_agreement_orchestration_workflows
+     *
+     * @return ?string
+     */
+    public function getAllowAgreementOrchestrationWorkflows()
+    {
+        return $this->container['allow_agreement_orchestration_workflows'];
+    }
+
+    /**
+     * Sets allow_agreement_orchestration_workflows
+     *
+     * @param ?string $allow_agreement_orchestration_workflows 
+     *
+     * @return $this
+     */
+    public function setAllowAgreementOrchestrationWorkflows($allow_agreement_orchestration_workflows)
+    {
+        $this->container['allow_agreement_orchestration_workflows'] = $allow_agreement_orchestration_workflows;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_agreement_orchestration_workflows_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getAllowAgreementOrchestrationWorkflowsMetadata()
+    {
+        return $this->container['allow_agreement_orchestration_workflows_metadata'];
+    }
+
+    /**
+     * Sets allow_agreement_orchestration_workflows_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_agreement_orchestration_workflows_metadata 
+     *
+     * @return $this
+     */
+    public function setAllowAgreementOrchestrationWorkflowsMetadata($allow_agreement_orchestration_workflows_metadata)
+    {
+        $this->container['allow_agreement_orchestration_workflows_metadata'] = $allow_agreement_orchestration_workflows_metadata;
 
         return $this;
     }
@@ -4444,7 +5254,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_auto_nav_settings_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_auto_nav_settings_metadata allow_auto_nav_settings_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_auto_nav_settings_metadata Metadata that indicates whether the `allowAutoNavSettings` property is editable.
      *
      * @return $this
      */
@@ -4492,7 +5302,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_auto_tagging_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_auto_tagging_metadata allow_auto_tagging_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_auto_tagging_metadata Metadata that indicates whether the `allowAutoTagging` property is editable.
      *
      * @return $this
      */
@@ -4540,7 +5350,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_bulk_send_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_bulk_send_metadata allow_bulk_send_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_bulk_send_metadata Metadata that indicates whether the `allowBulkSend` property is editable.
      *
      * @return $this
      */
@@ -4588,7 +5398,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_cd_withdraw_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_cd_withdraw_metadata allow_cd_withdraw_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_cd_withdraw_metadata Metadata that indicates whether the `allowCDWithdraw` property is editable.
      *
      * @return $this
      */
@@ -4619,6 +5429,30 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     public function setAllowConnectHttpListenerConfigs($allow_connect_http_listener_configs)
     {
         $this->container['allow_connect_http_listener_configs'] = $allow_connect_http_listener_configs;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_connect_o_auth_ui
+     *
+     * @return ?string
+     */
+    public function getAllowConnectOAuthUi()
+    {
+        return $this->container['allow_connect_o_auth_ui'];
+    }
+
+    /**
+     * Sets allow_connect_o_auth_ui
+     *
+     * @param ?string $allow_connect_o_auth_ui 
+     *
+     * @return $this
+     */
+    public function setAllowConnectOAuthUi($allow_connect_o_auth_ui)
+    {
+        $this->container['allow_connect_o_auth_ui'] = $allow_connect_o_auth_ui;
 
         return $this;
     }
@@ -4660,7 +5494,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_connect_send_finish_later_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_connect_send_finish_later_metadata allow_connect_send_finish_later_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_connect_send_finish_later_metadata Metadata that indicates whether the `allowConnectSendFinishLater` property is editable.
      *
      * @return $this
      */
@@ -4732,7 +5566,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_consumer_disclosure_override_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_consumer_disclosure_override_metadata allow_consumer_disclosure_override_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_consumer_disclosure_override_metadata Metadata that indicates whether the `allowConsumerDisclosureOverride` property is editable.
      *
      * @return $this
      */
@@ -4780,7 +5614,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_data_download_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_data_download_metadata allow_data_download_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_data_download_metadata Metadata that indicates whether the `allowDataDownload` property is editable.
      *
      * @return $this
      */
@@ -4804,7 +5638,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_delayed_routing
      *
-     * @param ?string $allow_delayed_routing \"true\" if the account has permission to use the delayed routing feature to insert delays before routing an envelope to a recipient, \"false\" otherwise.
+     * @param ?string $allow_delayed_routing \\\"true\\\" if the account has permission to use the delayed routing feature to insert delays before routing an envelope to a recipient, \\\"false\\\" otherwise.
      *
      * @return $this
      */
@@ -4828,7 +5662,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_delayed_routing_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_delayed_routing_metadata allow_delayed_routing_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_delayed_routing_metadata 
      *
      * @return $this
      */
@@ -4876,13 +5710,61 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_delegated_signing_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_delegated_signing_metadata allow_delegated_signing_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_delegated_signing_metadata 
      *
      * @return $this
      */
     public function setAllowDelegatedSigningMetadata($allow_delegated_signing_metadata)
     {
         $this->container['allow_delegated_signing_metadata'] = $allow_delegated_signing_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_doc_gen_documents
+     *
+     * @return ?string
+     */
+    public function getAllowDocGenDocuments()
+    {
+        return $this->container['allow_doc_gen_documents'];
+    }
+
+    /**
+     * Sets allow_doc_gen_documents
+     *
+     * @param ?string $allow_doc_gen_documents 
+     *
+     * @return $this
+     */
+    public function setAllowDocGenDocuments($allow_doc_gen_documents)
+    {
+        $this->container['allow_doc_gen_documents'] = $allow_doc_gen_documents;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_doc_gen_documents_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getAllowDocGenDocumentsMetadata()
+    {
+        return $this->container['allow_doc_gen_documents_metadata'];
+    }
+
+    /**
+     * Sets allow_doc_gen_documents_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_doc_gen_documents_metadata 
+     *
+     * @return $this
+     */
+    public function setAllowDocGenDocumentsMetadata($allow_doc_gen_documents_metadata)
+    {
+        $this->container['allow_doc_gen_documents_metadata'] = $allow_doc_gen_documents_metadata;
 
         return $this;
     }
@@ -4924,7 +5806,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_document_disclosures_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_document_disclosures_metadata allow_document_disclosures_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_document_disclosures_metadata Metadata that indicates whether the `allowDocumentDisclosures` property is editable.
      *
      * @return $this
      */
@@ -4972,7 +5854,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_documents_on_signed_envelopes_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_documents_on_signed_envelopes_metadata allow_documents_on_signed_envelopes_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_documents_on_signed_envelopes_metadata Metadata that indicates whether the `allowDocumentsOnSignedEnvelopes` property is editable.
      *
      * @return $this
      */
@@ -5020,13 +5902,61 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_document_visibility_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_document_visibility_metadata allow_document_visibility_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_document_visibility_metadata Metadata that indicates whether the `allowDocumentVisibility` property is editable.
      *
      * @return $this
      */
     public function setAllowDocumentVisibilityMetadata($allow_document_visibility_metadata)
     {
         $this->container['allow_document_visibility_metadata'] = $allow_document_visibility_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_editing_envelopes_on_behalf_of_others
+     *
+     * @return ?string
+     */
+    public function getAllowEditingEnvelopesOnBehalfOfOthers()
+    {
+        return $this->container['allow_editing_envelopes_on_behalf_of_others'];
+    }
+
+    /**
+     * Sets allow_editing_envelopes_on_behalf_of_others
+     *
+     * @param ?string $allow_editing_envelopes_on_behalf_of_others 
+     *
+     * @return $this
+     */
+    public function setAllowEditingEnvelopesOnBehalfOfOthers($allow_editing_envelopes_on_behalf_of_others)
+    {
+        $this->container['allow_editing_envelopes_on_behalf_of_others'] = $allow_editing_envelopes_on_behalf_of_others;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_editing_envelopes_on_behalf_of_others_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getAllowEditingEnvelopesOnBehalfOfOthersMetadata()
+    {
+        return $this->container['allow_editing_envelopes_on_behalf_of_others_metadata'];
+    }
+
+    /**
+     * Sets allow_editing_envelopes_on_behalf_of_others_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_editing_envelopes_on_behalf_of_others_metadata 
+     *
+     * @return $this
+     */
+    public function setAllowEditingEnvelopesOnBehalfOfOthersMetadata($allow_editing_envelopes_on_behalf_of_others_metadata)
+    {
+        $this->container['allow_editing_envelopes_on_behalf_of_others_metadata'] = $allow_editing_envelopes_on_behalf_of_others_metadata;
 
         return $this;
     }
@@ -5068,7 +5998,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_e_hanko_stamps_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_e_hanko_stamps_metadata allow_e_hanko_stamps_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_e_hanko_stamps_metadata Metadata that indicates whether the `allowEHankoStamps` property is editable.
      *
      * @return $this
      */
@@ -5116,7 +6046,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_e_note_e_original_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_e_note_e_original_metadata allow_e_note_e_original_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_e_note_e_original_metadata Metadata that indicates whether the `allowENoteEOriginal` property is editable.
      *
      * @return $this
      */
@@ -5164,7 +6094,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_envelope_correct_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_envelope_correct_metadata allow_envelope_correct_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_envelope_correct_metadata Metadata that indicates whether the `allowEnvelopeCorrect` property is editable.
      *
      * @return $this
      */
@@ -5212,7 +6142,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_envelope_custody_transfer_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_envelope_custody_transfer_metadata allow_envelope_custody_transfer_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_envelope_custody_transfer_metadata Metadata that indicates whether the `allowEnvelopeCustodyTransfer` property is editable.
      *
      * @return $this
      */
@@ -5260,7 +6190,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_envelope_custom_fields_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_envelope_custom_fields_metadata allow_envelope_custom_fields_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_envelope_custom_fields_metadata Metadata that indicates whether the `allowEnvelopeCustomFields` property is editable.
      *
      * @return $this
      */
@@ -5308,7 +6238,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_envelope_publish_reporting_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_envelope_publish_reporting_metadata allow_envelope_publish_reporting_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_envelope_publish_reporting_metadata Metadata that indicates whether the `allowEnvelopePublishReporting` property is editable.
      *
      * @return $this
      */
@@ -5356,7 +6286,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_envelope_reporting_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_envelope_reporting_metadata allow_envelope_reporting_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_envelope_reporting_metadata Metadata that indicates whether the `allowEnvelopeReporting` property is editable.
      *
      * @return $this
      */
@@ -5404,7 +6334,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_expression_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_expression_metadata allow_expression_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_expression_metadata Metadata that indicates whether the `allowExpression` property is editable.
      *
      * @return $this
      */
@@ -5452,7 +6382,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_express_signer_certificate_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_express_signer_certificate_metadata allow_express_signer_certificate_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_express_signer_certificate_metadata Metadata that indicates whether the `allowExpressSignerCertificate` property is editable.
      *
      * @return $this
      */
@@ -5500,7 +6430,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_extended_sending_resource_file_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_extended_sending_resource_file_metadata allow_extended_sending_resource_file_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_extended_sending_resource_file_metadata Metadata that indicates whether the `allowExtendedSendingResourceFile` property is editable.
      *
      * @return $this
      */
@@ -5548,7 +6478,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_external_linked_accounts_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_external_linked_accounts_metadata allow_external_linked_accounts_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_external_linked_accounts_metadata 
      *
      * @return $this
      */
@@ -5596,13 +6526,61 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_external_signature_pad_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_external_signature_pad_metadata allow_external_signature_pad_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_external_signature_pad_metadata Metadata that indicates whether the `allowExternalSignaturePad` property is editable.
      *
      * @return $this
      */
     public function setAllowExternalSignaturePadMetadata($allow_external_signature_pad_metadata)
     {
         $this->container['allow_external_signature_pad_metadata'] = $allow_external_signature_pad_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_idv_for_eu_qualified_signatures
+     *
+     * @return ?string
+     */
+    public function getAllowIdvForEuQualifiedSignatures()
+    {
+        return $this->container['allow_idv_for_eu_qualified_signatures'];
+    }
+
+    /**
+     * Sets allow_idv_for_eu_qualified_signatures
+     *
+     * @param ?string $allow_idv_for_eu_qualified_signatures 
+     *
+     * @return $this
+     */
+    public function setAllowIdvForEuQualifiedSignatures($allow_idv_for_eu_qualified_signatures)
+    {
+        $this->container['allow_idv_for_eu_qualified_signatures'] = $allow_idv_for_eu_qualified_signatures;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_idv_for_eu_qualified_signatures_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getAllowIdvForEuQualifiedSignaturesMetadata()
+    {
+        return $this->container['allow_idv_for_eu_qualified_signatures_metadata'];
+    }
+
+    /**
+     * Sets allow_idv_for_eu_qualified_signatures_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_idv_for_eu_qualified_signatures_metadata 
+     *
+     * @return $this
+     */
+    public function setAllowIdvForEuQualifiedSignaturesMetadata($allow_idv_for_eu_qualified_signatures_metadata)
+    {
+        $this->container['allow_idv_for_eu_qualified_signatures_metadata'] = $allow_idv_for_eu_qualified_signatures_metadata;
 
         return $this;
     }
@@ -5644,7 +6622,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_idv_level1_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_idv_level1_metadata allow_idv_level1_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_idv_level1_metadata Metadata that indicates whether the `allowIDVLevel1` property is editable.
      *
      * @return $this
      */
@@ -5692,7 +6670,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_idv_level2_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_idv_level2_metadata allow_idv_level2_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_idv_level2_metadata 
      *
      * @return $this
      */
@@ -5740,7 +6718,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_idv_level3_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_idv_level3_metadata allow_idv_level3_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_idv_level3_metadata 
      *
      * @return $this
      */
@@ -5788,7 +6766,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_idv_platform_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_idv_platform_metadata allow_idv_platform_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_idv_platform_metadata Metadata that indicates whether the `allowIDVPlatform` property is editable.
      *
      * @return $this
      */
@@ -5860,7 +6838,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_in_person_electronic_notary_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_in_person_electronic_notary_metadata MetaData for the allowInPersonElectronicNotary flag
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_in_person_electronic_notary_metadata MetaData for the Account Level Flag that determines the availability to perform In Person Electronic Notarial (IPEN) actions
      *
      * @return $this
      */
@@ -5884,7 +6862,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_in_person_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_in_person_metadata allow_in_person_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_in_person_metadata Metadata that indicates whether the `allowInPerson` property is editable.
      *
      * @return $this
      */
@@ -5932,13 +6910,61 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_managed_stamps_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_managed_stamps_metadata allow_managed_stamps_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_managed_stamps_metadata Metadata that indicates whether the `allowManagedStamps` property is editable.
      *
      * @return $this
      */
     public function setAllowManagedStampsMetadata($allow_managed_stamps_metadata)
     {
         $this->container['allow_managed_stamps_metadata'] = $allow_managed_stamps_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_managing_envelopes_on_behalf_of_others
+     *
+     * @return ?string
+     */
+    public function getAllowManagingEnvelopesOnBehalfOfOthers()
+    {
+        return $this->container['allow_managing_envelopes_on_behalf_of_others'];
+    }
+
+    /**
+     * Sets allow_managing_envelopes_on_behalf_of_others
+     *
+     * @param ?string $allow_managing_envelopes_on_behalf_of_others 
+     *
+     * @return $this
+     */
+    public function setAllowManagingEnvelopesOnBehalfOfOthers($allow_managing_envelopes_on_behalf_of_others)
+    {
+        $this->container['allow_managing_envelopes_on_behalf_of_others'] = $allow_managing_envelopes_on_behalf_of_others;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_managing_envelopes_on_behalf_of_others_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getAllowManagingEnvelopesOnBehalfOfOthersMetadata()
+    {
+        return $this->container['allow_managing_envelopes_on_behalf_of_others_metadata'];
+    }
+
+    /**
+     * Sets allow_managing_envelopes_on_behalf_of_others_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_managing_envelopes_on_behalf_of_others_metadata 
+     *
+     * @return $this
+     */
+    public function setAllowManagingEnvelopesOnBehalfOfOthersMetadata($allow_managing_envelopes_on_behalf_of_others_metadata)
+    {
+        $this->container['allow_managing_envelopes_on_behalf_of_others_metadata'] = $allow_managing_envelopes_on_behalf_of_others_metadata;
 
         return $this;
     }
@@ -5980,7 +7006,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_markup_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_markup_metadata allow_markup_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_markup_metadata Metadata that indicates whether the `allowMarkup` property is editable.
      *
      * @return $this
      */
@@ -6028,7 +7054,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_member_time_zone_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_member_time_zone_metadata allow_member_time_zone_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_member_time_zone_metadata Metadata that indicates whether the `allowMemberTimeZone` property is editable.
      *
      * @return $this
      */
@@ -6076,7 +7102,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_merge_fields_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_merge_fields_metadata allow_merge_fields_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_merge_fields_metadata Metadata that indicates whether the `allowMergeFields` property is editable.
      *
      * @return $this
      */
@@ -6124,7 +7150,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_multiple_brand_profiles_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_multiple_brand_profiles_metadata allow_multiple_brand_profiles_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_multiple_brand_profiles_metadata Metadata that indicates whether the `allowMultipleBrandProfiles` property is editable.
      *
      * @return $this
      */
@@ -6172,7 +7198,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_multiple_signer_attachments_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_multiple_signer_attachments_metadata allow_multiple_signer_attachments_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_multiple_signer_attachments_metadata Metadata that indicates whether the `allowMultipleSignerAttachments` property is editable.
      *
      * @return $this
      */
@@ -6220,7 +7246,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_non_us_phone_auth_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_non_us_phone_auth_metadata allow_non_us_phone_auth_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_non_us_phone_auth_metadata Metadata that indicates whether the `allowNonUSPhoneAuth` property is editable.
      *
      * @return $this
      */
@@ -6268,7 +7294,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_ocr_of_envelope_documents_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_ocr_of_envelope_documents_metadata allow_ocr_of_envelope_documents_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_ocr_of_envelope_documents_metadata 
      *
      * @return $this
      */
@@ -6316,7 +7342,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_offline_signing_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_offline_signing_metadata allow_offline_signing_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_offline_signing_metadata Metadata that indicates whether the `allowOfflineSigning` property is editable.
      *
      * @return $this
      */
@@ -6364,7 +7390,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_open_trust_signer_certificate_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_open_trust_signer_certificate_metadata allow_open_trust_signer_certificate_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_open_trust_signer_certificate_metadata Metadata that indicates whether the `allowOpenTrustSignerCertificate` property is editable.
      *
      * @return $this
      */
@@ -6400,6 +7426,54 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets allow_organization_docusign_monitor_lite
+     *
+     * @return ?string
+     */
+    public function getAllowOrganizationDocusignMonitorLite()
+    {
+        return $this->container['allow_organization_docusign_monitor_lite'];
+    }
+
+    /**
+     * Sets allow_organization_docusign_monitor_lite
+     *
+     * @param ?string $allow_organization_docusign_monitor_lite 
+     *
+     * @return $this
+     */
+    public function setAllowOrganizationDocusignMonitorLite($allow_organization_docusign_monitor_lite)
+    {
+        $this->container['allow_organization_docusign_monitor_lite'] = $allow_organization_docusign_monitor_lite;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_organization_docusign_monitor_lite_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getAllowOrganizationDocusignMonitorLiteMetadata()
+    {
+        return $this->container['allow_organization_docusign_monitor_lite_metadata'];
+    }
+
+    /**
+     * Sets allow_organization_docusign_monitor_lite_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_organization_docusign_monitor_lite_metadata 
+     *
+     * @return $this
+     */
+    public function setAllowOrganizationDocusignMonitorLiteMetadata($allow_organization_docusign_monitor_lite_metadata)
+    {
+        $this->container['allow_organization_docusign_monitor_lite_metadata'] = $allow_organization_docusign_monitor_lite_metadata;
+
+        return $this;
+    }
+
+    /**
      * Gets allow_organization_docusign_monitor_metadata
      *
      * @return \DocuSign\eSign\Model\SettingsMetadata
@@ -6412,7 +7486,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_organization_docusign_monitor_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_organization_docusign_monitor_metadata allow_organization_docusign_monitor_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_organization_docusign_monitor_metadata 
      *
      * @return $this
      */
@@ -6460,7 +7534,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_organization_domain_user_management_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_organization_domain_user_management_metadata allow_organization_domain_user_management_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_organization_domain_user_management_metadata 
      *
      * @return $this
      */
@@ -6508,7 +7582,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_organizations_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_organizations_metadata allow_organizations_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_organizations_metadata Metadata that indicates whether the `allowOrganizations` property is editable.
      *
      * @return $this
      */
@@ -6556,7 +7630,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_organization_sso_management_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_organization_sso_management_metadata allow_organization_sso_management_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_organization_sso_management_metadata 
      *
      * @return $this
      */
@@ -6604,7 +7678,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_organization_to_use_in_person_electronic_notary_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_organization_to_use_in_person_electronic_notary_metadata MetaData for the allowOrganizationToUseInPersonElectronicNotary flag
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_organization_to_use_in_person_electronic_notary_metadata MetaData for the Organization Level Flag that determines the availability to perform In Person Electronic Notarial (IPEN) actions
      *
      * @return $this
      */
@@ -6652,13 +7726,109 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_organization_to_use_remote_notary_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_organization_to_use_remote_notary_metadata allow_organization_to_use_remote_notary_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_organization_to_use_remote_notary_metadata 
      *
      * @return $this
      */
     public function setAllowOrganizationToUseRemoteNotaryMetadata($allow_organization_to_use_remote_notary_metadata)
     {
         $this->container['allow_organization_to_use_remote_notary_metadata'] = $allow_organization_to_use_remote_notary_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_organization_to_use_third_party_electronic_notary
+     *
+     * @return ?string
+     */
+    public function getAllowOrganizationToUseThirdPartyElectronicNotary()
+    {
+        return $this->container['allow_organization_to_use_third_party_electronic_notary'];
+    }
+
+    /**
+     * Sets allow_organization_to_use_third_party_electronic_notary
+     *
+     * @param ?string $allow_organization_to_use_third_party_electronic_notary Org level flag that determines the abailability to perform Third Party Notary (3PN) actions.
+     *
+     * @return $this
+     */
+    public function setAllowOrganizationToUseThirdPartyElectronicNotary($allow_organization_to_use_third_party_electronic_notary)
+    {
+        $this->container['allow_organization_to_use_third_party_electronic_notary'] = $allow_organization_to_use_third_party_electronic_notary;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_organization_to_use_third_party_electronic_notary_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getAllowOrganizationToUseThirdPartyElectronicNotaryMetadata()
+    {
+        return $this->container['allow_organization_to_use_third_party_electronic_notary_metadata'];
+    }
+
+    /**
+     * Sets allow_organization_to_use_third_party_electronic_notary_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_organization_to_use_third_party_electronic_notary_metadata Metadata for the org level flag that dtermines the availablity to perform Third Party Notary (3PN) actions.
+     *
+     * @return $this
+     */
+    public function setAllowOrganizationToUseThirdPartyElectronicNotaryMetadata($allow_organization_to_use_third_party_electronic_notary_metadata)
+    {
+        $this->container['allow_organization_to_use_third_party_electronic_notary_metadata'] = $allow_organization_to_use_third_party_electronic_notary_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_participant_recipient_type
+     *
+     * @return ?string
+     */
+    public function getAllowParticipantRecipientType()
+    {
+        return $this->container['allow_participant_recipient_type'];
+    }
+
+    /**
+     * Sets allow_participant_recipient_type
+     *
+     * @param ?string $allow_participant_recipient_type 
+     *
+     * @return $this
+     */
+    public function setAllowParticipantRecipientType($allow_participant_recipient_type)
+    {
+        $this->container['allow_participant_recipient_type'] = $allow_participant_recipient_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_participant_recipient_type_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getAllowParticipantRecipientTypeMetadata()
+    {
+        return $this->container['allow_participant_recipient_type_metadata'];
+    }
+
+    /**
+     * Sets allow_participant_recipient_type_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_participant_recipient_type_metadata 
+     *
+     * @return $this
+     */
+    public function setAllowParticipantRecipientTypeMetadata($allow_participant_recipient_type_metadata)
+    {
+        $this->container['allow_participant_recipient_type_metadata'] = $allow_participant_recipient_type_metadata;
 
         return $this;
     }
@@ -6700,13 +7870,61 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_payment_processing_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_payment_processing_metadata allow_payment_processing_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_payment_processing_metadata Metadata that indicates whether the `allowPaymentProcessing` property is editable.
      *
      * @return $this
      */
     public function setAllowPaymentProcessingMetadata($allow_payment_processing_metadata)
     {
         $this->container['allow_payment_processing_metadata'] = $allow_payment_processing_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_performance_analytics
+     *
+     * @return ?string
+     */
+    public function getAllowPerformanceAnalytics()
+    {
+        return $this->container['allow_performance_analytics'];
+    }
+
+    /**
+     * Sets allow_performance_analytics
+     *
+     * @param ?string $allow_performance_analytics 
+     *
+     * @return $this
+     */
+    public function setAllowPerformanceAnalytics($allow_performance_analytics)
+    {
+        $this->container['allow_performance_analytics'] = $allow_performance_analytics;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_performance_analytics_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getAllowPerformanceAnalyticsMetadata()
+    {
+        return $this->container['allow_performance_analytics_metadata'];
+    }
+
+    /**
+     * Sets allow_performance_analytics_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_performance_analytics_metadata 
+     *
+     * @return $this
+     */
+    public function setAllowPerformanceAnalyticsMetadata($allow_performance_analytics_metadata)
+    {
+        $this->container['allow_performance_analytics_metadata'] = $allow_performance_analytics_metadata;
 
         return $this;
     }
@@ -6748,7 +7966,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_phone_authentication_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_phone_authentication_metadata allow_phone_authentication_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_phone_authentication_metadata Metadata that indicates whether the `allowPhoneAuthentication` property is editable.
      *
      * @return $this
      */
@@ -6796,7 +8014,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_phone_auth_override_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_phone_auth_override_metadata allow_phone_auth_override_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_phone_auth_override_metadata Metadata that indicates whether the `allowPhoneAuthOverride` property is editable.
      *
      * @return $this
      */
@@ -6844,7 +8062,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_private_signing_groups_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_private_signing_groups_metadata allow_private_signing_groups_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_private_signing_groups_metadata Metadata that indicates whether the `allowPrivateSigningGroups` property is editable.
      *
      * @return $this
      */
@@ -6892,7 +8110,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_recipient_connect_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_recipient_connect_metadata allow_recipient_connect_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_recipient_connect_metadata 
      *
      * @return $this
      */
@@ -6940,7 +8158,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_reminders_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_reminders_metadata allow_reminders_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_reminders_metadata Metadata that indicates whether the `allowReminders` property is editable.
      *
      * @return $this
      */
@@ -6988,7 +8206,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_remote_notary_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_remote_notary_metadata allow_remote_notary_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_remote_notary_metadata 
      *
      * @return $this
      */
@@ -7036,7 +8254,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_resource_file_branding_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_resource_file_branding_metadata allow_resource_file_branding_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_resource_file_branding_metadata Metadata that indicates whether the `allowResourceFileBranding` property is editable.
      *
      * @return $this
      */
@@ -7084,7 +8302,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_safe_bio_pharma_signer_certificate_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_safe_bio_pharma_signer_certificate_metadata allow_safe_bio_pharma_signer_certificate_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_safe_bio_pharma_signer_certificate_metadata Metadata that indicates whether the `allowSafeBioPharmaSignerCertificate` property is editable.
      *
      * @return $this
      */
@@ -7108,7 +8326,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_scheduled_sending
      *
-     * @param ?string $allow_scheduled_sending \"true\" if the account has permission to use the scheduled sending feature to send envelopes at a specified datetime in the future, \"false\" otherwise.
+     * @param ?string $allow_scheduled_sending \\\"true\\\" if the account has permission to use the scheduled sending feature to send envelopes at a specified datetime in the future, \\\"false\\\" otherwise.
      *
      * @return $this
      */
@@ -7132,7 +8350,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_scheduled_sending_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_scheduled_sending_metadata allow_scheduled_sending_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_scheduled_sending_metadata 
      *
      * @return $this
      */
@@ -7180,13 +8398,61 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_security_appliance_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_security_appliance_metadata allow_security_appliance_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_security_appliance_metadata Metadata that indicates whether the `allowSecurityAppliance` property is editable.
      *
      * @return $this
      */
     public function setAllowSecurityApplianceMetadata($allow_security_appliance_metadata)
     {
         $this->container['allow_security_appliance_metadata'] = $allow_security_appliance_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_sending_envelopes_on_behalf_of_others
+     *
+     * @return ?string
+     */
+    public function getAllowSendingEnvelopesOnBehalfOfOthers()
+    {
+        return $this->container['allow_sending_envelopes_on_behalf_of_others'];
+    }
+
+    /**
+     * Sets allow_sending_envelopes_on_behalf_of_others
+     *
+     * @param ?string $allow_sending_envelopes_on_behalf_of_others 
+     *
+     * @return $this
+     */
+    public function setAllowSendingEnvelopesOnBehalfOfOthers($allow_sending_envelopes_on_behalf_of_others)
+    {
+        $this->container['allow_sending_envelopes_on_behalf_of_others'] = $allow_sending_envelopes_on_behalf_of_others;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_sending_envelopes_on_behalf_of_others_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getAllowSendingEnvelopesOnBehalfOfOthersMetadata()
+    {
+        return $this->container['allow_sending_envelopes_on_behalf_of_others_metadata'];
+    }
+
+    /**
+     * Sets allow_sending_envelopes_on_behalf_of_others_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_sending_envelopes_on_behalf_of_others_metadata 
+     *
+     * @return $this
+     */
+    public function setAllowSendingEnvelopesOnBehalfOfOthersMetadata($allow_sending_envelopes_on_behalf_of_others_metadata)
+    {
+        $this->container['allow_sending_envelopes_on_behalf_of_others_metadata'] = $allow_sending_envelopes_on_behalf_of_others_metadata;
 
         return $this;
     }
@@ -7228,7 +8494,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_send_to_certified_delivery_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_send_to_certified_delivery_metadata allow_send_to_certified_delivery_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_send_to_certified_delivery_metadata Metadata that indicates whether the `allowSendToCertifiedDelivery` property is editable.
      *
      * @return $this
      */
@@ -7276,7 +8542,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_send_to_intermediary_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_send_to_intermediary_metadata allow_send_to_intermediary_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_send_to_intermediary_metadata Metadata that indicates whether the `allowSendToIntermediary` property is editable.
      *
      * @return $this
      */
@@ -7324,7 +8590,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_server_templates_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_server_templates_metadata allow_server_templates_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_server_templates_metadata Metadata that indicates whether the `allowServerTemplates` property is editable.
      *
      * @return $this
      */
@@ -7372,7 +8638,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_set_embedded_recipient_start_url_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_set_embedded_recipient_start_url_metadata allow_set_embedded_recipient_start_url_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_set_embedded_recipient_start_url_metadata 
      *
      * @return $this
      */
@@ -7420,7 +8686,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_shared_tabs_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_shared_tabs_metadata allow_shared_tabs_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_shared_tabs_metadata Metadata that indicates whether the `allowSharedTabs` property is editable.
      *
      * @return $this
      */
@@ -7468,7 +8734,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_signature_stamps_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_signature_stamps_metadata allow_signature_stamps_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_signature_stamps_metadata Metadata that indicates whether the `allowSignatureStamps` property is editable.
      *
      * @return $this
      */
@@ -7516,7 +8782,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_sign_document_from_home_page_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_sign_document_from_home_page_metadata allow_sign_document_from_home_page_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_sign_document_from_home_page_metadata Metadata that indicates whether the `allowSignDocumentFromHomePage` property is editable.
      *
      * @return $this
      */
@@ -7564,7 +8830,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_signer_reassign_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_signer_reassign_metadata allow_signer_reassign_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_signer_reassign_metadata Metadata that indicates whether the `allowSignerReassign` property is editable.
      *
      * @return $this
      */
@@ -7612,7 +8878,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_signer_reassign_override_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_signer_reassign_override_metadata allow_signer_reassign_override_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_signer_reassign_override_metadata Metadata that indicates whether the `allowSignerReassignOverride` property is editable.
      *
      * @return $this
      */
@@ -7660,7 +8926,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_signing_extensions_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_signing_extensions_metadata allow_signing_extensions_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_signing_extensions_metadata Metadata that indicates whether the `allowSigningExtensions` property is editable.
      *
      * @return $this
      */
@@ -7708,7 +8974,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_signing_groups_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_signing_groups_metadata allow_signing_groups_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_signing_groups_metadata Metadata that indicates whether the `allowSigningGroups` property is editable.
      *
      * @return $this
      */
@@ -7756,7 +9022,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_signing_insights_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_signing_insights_metadata allow_signing_insights_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_signing_insights_metadata 
      *
      * @return $this
      */
@@ -7804,7 +9070,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_signing_radio_deselect_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_signing_radio_deselect_metadata allow_signing_radio_deselect_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_signing_radio_deselect_metadata Metadata that indicates whether the `allowSigningRadioDeselect` property is editable.
      *
      * @return $this
      */
@@ -7900,7 +9166,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_sms_delivery_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_sms_delivery_metadata allow_sms_delivery_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_sms_delivery_metadata 
      *
      * @return $this
      */
@@ -7948,7 +9214,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_social_id_login_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_social_id_login_metadata allow_social_id_login_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_social_id_login_metadata Deprecated.
      *
      * @return $this
      */
@@ -7996,13 +9262,109 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_supplemental_documents_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_supplemental_documents_metadata allow_supplemental_documents_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_supplemental_documents_metadata Metadata that indicates whether the `allowSupplementalDocuments` property is editable.
      *
      * @return $this
      */
     public function setAllowSupplementalDocumentsMetadata($allow_supplemental_documents_metadata)
     {
         $this->container['allow_supplemental_documents_metadata'] = $allow_supplemental_documents_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_third_party_electronic_notary
+     *
+     * @return ?string
+     */
+    public function getAllowThirdPartyElectronicNotary()
+    {
+        return $this->container['allow_third_party_electronic_notary'];
+    }
+
+    /**
+     * Sets allow_third_party_electronic_notary
+     *
+     * @param ?string $allow_third_party_electronic_notary Account level flag that determines the availability to perform Third Party Notary (3PN) actions.
+     *
+     * @return $this
+     */
+    public function setAllowThirdPartyElectronicNotary($allow_third_party_electronic_notary)
+    {
+        $this->container['allow_third_party_electronic_notary'] = $allow_third_party_electronic_notary;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_third_party_electronic_notary_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getAllowThirdPartyElectronicNotaryMetadata()
+    {
+        return $this->container['allow_third_party_electronic_notary_metadata'];
+    }
+
+    /**
+     * Sets allow_third_party_electronic_notary_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_third_party_electronic_notary_metadata 
+     *
+     * @return $this
+     */
+    public function setAllowThirdPartyElectronicNotaryMetadata($allow_third_party_electronic_notary_metadata)
+    {
+        $this->container['allow_third_party_electronic_notary_metadata'] = $allow_third_party_electronic_notary_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_transactions_workspace
+     *
+     * @return ?string
+     */
+    public function getAllowTransactionsWorkspace()
+    {
+        return $this->container['allow_transactions_workspace'];
+    }
+
+    /**
+     * Sets allow_transactions_workspace
+     *
+     * @param ?string $allow_transactions_workspace 
+     *
+     * @return $this
+     */
+    public function setAllowTransactionsWorkspace($allow_transactions_workspace)
+    {
+        $this->container['allow_transactions_workspace'] = $allow_transactions_workspace;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_transactions_workspace_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getAllowTransactionsWorkspaceMetadata()
+    {
+        return $this->container['allow_transactions_workspace_metadata'];
+    }
+
+    /**
+     * Sets allow_transactions_workspace_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_transactions_workspace_metadata 
+     *
+     * @return $this
+     */
+    public function setAllowTransactionsWorkspaceMetadata($allow_transactions_workspace_metadata)
+    {
+        $this->container['allow_transactions_workspace_metadata'] = $allow_transactions_workspace_metadata;
 
         return $this;
     }
@@ -8044,7 +9406,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_users_to_access_directory_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_users_to_access_directory_metadata allow_users_to_access_directory_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_users_to_access_directory_metadata 
      *
      * @return $this
      */
@@ -8092,7 +9454,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_value_insights_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_value_insights_metadata allow_value_insights_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_value_insights_metadata 
      *
      * @return $this
      */
@@ -8140,13 +9502,61 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets allow_web_forms_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_web_forms_metadata allow_web_forms_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_web_forms_metadata 
      *
      * @return $this
      */
     public function setAllowWebFormsMetadata($allow_web_forms_metadata)
     {
         $this->container['allow_web_forms_metadata'] = $allow_web_forms_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_whats_app_delivery
+     *
+     * @return ?string
+     */
+    public function getAllowWhatsAppDelivery()
+    {
+        return $this->container['allow_whats_app_delivery'];
+    }
+
+    /**
+     * Sets allow_whats_app_delivery
+     *
+     * @param ?string $allow_whats_app_delivery 
+     *
+     * @return $this
+     */
+    public function setAllowWhatsAppDelivery($allow_whats_app_delivery)
+    {
+        $this->container['allow_whats_app_delivery'] = $allow_whats_app_delivery;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_whats_app_delivery_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getAllowWhatsAppDeliveryMetadata()
+    {
+        return $this->container['allow_whats_app_delivery_metadata'];
+    }
+
+    /**
+     * Sets allow_whats_app_delivery_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $allow_whats_app_delivery_metadata 
+     *
+     * @return $this
+     */
+    public function setAllowWhatsAppDeliveryMetadata($allow_whats_app_delivery_metadata)
+    {
+        $this->container['allow_whats_app_delivery_metadata'] = $allow_whats_app_delivery_metadata;
 
         return $this;
     }
@@ -8188,7 +9598,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets anchor_population_scope_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $anchor_population_scope_metadata anchor_population_scope_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $anchor_population_scope_metadata Metadata that indicates whether the `anchorPopulationScope` property is editable.
      *
      * @return $this
      */
@@ -8236,7 +9646,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets anchor_tag_versioned_placement_metadata_enabled
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $anchor_tag_versioned_placement_metadata_enabled anchor_tag_versioned_placement_metadata_enabled
+     * @param \DocuSign\eSign\Model\SettingsMetadata $anchor_tag_versioned_placement_metadata_enabled 
      *
      * @return $this
      */
@@ -8284,7 +9694,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets attach_completed_envelope_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $attach_completed_envelope_metadata attach_completed_envelope_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $attach_completed_envelope_metadata Metadata that indicates whether the `attachCompletedEnvelope` property is editable.
      *
      * @return $this
      */
@@ -8332,7 +9742,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets authentication_check_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $authentication_check_metadata authentication_check_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $authentication_check_metadata Metadata that indicates whether the `authenticationCheck` property is editable.
      *
      * @return $this
      */
@@ -8380,7 +9790,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets auto_nav_rule_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $auto_nav_rule_metadata auto_nav_rule_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $auto_nav_rule_metadata Metadata that indicates whether the `autoNavRule` property is editable.
      *
      * @return $this
      */
@@ -8428,7 +9838,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets auto_provision_signer_account_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $auto_provision_signer_account_metadata auto_provision_signer_account_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $auto_provision_signer_account_metadata Metadata that indicates whether the `autoProvisionSignerAccount` property is editable.
      *
      * @return $this
      */
@@ -8476,7 +9886,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets bcc_email_archive_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $bcc_email_archive_metadata bcc_email_archive_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $bcc_email_archive_metadata Metadata that indicates whether the `bccEmailArchive` property is editable.
      *
      * @return $this
      */
@@ -8524,7 +9934,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets beta_switch_configuration_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $beta_switch_configuration_metadata beta_switch_configuration_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $beta_switch_configuration_metadata Reserved for DocuSign.
      *
      * @return $this
      */
@@ -8548,7 +9958,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets billing_address
      *
-     * @param \DocuSign\eSign\Model\AddressInformation $billing_address billing_address
+     * @param \DocuSign\eSign\Model\AddressInformation $billing_address The billing address for the account.
      *
      * @return $this
      */
@@ -8572,7 +9982,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets billing_address_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $billing_address_metadata billing_address_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $billing_address_metadata Metadata that indicates whether the `billingAddress` property is editable.
      *
      * @return $this
      */
@@ -8692,7 +10102,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets bulk_send_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $bulk_send_metadata bulk_send_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $bulk_send_metadata Metadata that indicates whether the `bulkSend` property is editable.
      *
      * @return $this
      */
@@ -8740,7 +10150,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets can_self_brand_send_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $can_self_brand_send_metadata can_self_brand_send_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $can_self_brand_send_metadata Metadata that indicates whether the `canSelfBrandSend` property is editable.
      *
      * @return $this
      */
@@ -8788,7 +10198,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets can_self_brand_sign_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $can_self_brand_sign_metadata can_self_brand_sign_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $can_self_brand_sign_metadata Metadata that indicates whether the `canSelfBrandSign` property is editable.
      *
      * @return $this
      */
@@ -8836,7 +10246,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets can_use_salesforce_o_auth_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $can_use_salesforce_o_auth_metadata can_use_salesforce_o_auth_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $can_use_salesforce_o_auth_metadata 
      *
      * @return $this
      */
@@ -8884,7 +10294,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets capture_voice_recording_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $capture_voice_recording_metadata capture_voice_recording_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $capture_voice_recording_metadata Reserved for DocuSign.
      *
      * @return $this
      */
@@ -8932,7 +10342,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets cfr21_simplified_signing_enabled_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $cfr21_simplified_signing_enabled_metadata cfr21_simplified_signing_enabled_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $cfr21_simplified_signing_enabled_metadata 
      *
      * @return $this
      */
@@ -8980,7 +10390,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets cfr_use_wide_image_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $cfr_use_wide_image_metadata cfr_use_wide_image_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $cfr_use_wide_image_metadata Metadata that indicates whether the `cfrUseWideImage` property is editable.
      *
      * @return $this
      */
@@ -9028,7 +10438,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets check_for_multiple_admins_on_account_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $check_for_multiple_admins_on_account_metadata check_for_multiple_admins_on_account_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $check_for_multiple_admins_on_account_metadata Metadata that indicates whether the `checkForMultipleAdminsOnAccount` property is editable.
      *
      * @return $this
      */
@@ -9076,7 +10486,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets chrome_signature_enabled_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $chrome_signature_enabled_metadata chrome_signature_enabled_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $chrome_signature_enabled_metadata Metadata that indicates whether the `chromeSignatureEnabled` property is editable.
      *
      * @return $this
      */
@@ -9124,7 +10534,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets comment_email_show_message_text_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $comment_email_show_message_text_metadata comment_email_show_message_text_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $comment_email_show_message_text_metadata Metadata that indicates whether the `commentEmailShowMessageText` property is editable.
      *
      * @return $this
      */
@@ -9172,7 +10582,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets comments_allow_envelope_override_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $comments_allow_envelope_override_metadata comments_allow_envelope_override_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $comments_allow_envelope_override_metadata Metadata that indicates whether the `commentsAllowEnvelopeOverride` property is editable.
      *
      * @return $this
      */
@@ -9220,7 +10630,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets conditional_fields_enabled_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $conditional_fields_enabled_metadata conditional_fields_enabled_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $conditional_fields_enabled_metadata Metadata that indicates whether the `conditionalFieldsEnabled` property is editable.
      *
      * @return $this
      */
@@ -9268,7 +10678,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets consumer_disclosure_frequency_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $consumer_disclosure_frequency_metadata consumer_disclosure_frequency_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $consumer_disclosure_frequency_metadata Metadata that indicates whether the `consumerDisclosureFrequency` property is editable.
      *
      * @return $this
      */
@@ -9316,7 +10726,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets convert_pdf_fields_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $convert_pdf_fields_metadata convert_pdf_fields_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $convert_pdf_fields_metadata Metadata that indicates whether the `convertPdfFields` property is editable.
      *
      * @return $this
      */
@@ -9364,13 +10774,61 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets data_population_scope_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $data_population_scope_metadata data_population_scope_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $data_population_scope_metadata Metadata that indicates whether the `dataPopulationScope` property is editable.
      *
      * @return $this
      */
     public function setDataPopulationScopeMetadata($data_population_scope_metadata)
     {
         $this->container['data_population_scope_metadata'] = $data_population_scope_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets default_to_advanced_envelopes_filter_form
+     *
+     * @return ?string
+     */
+    public function getDefaultToAdvancedEnvelopesFilterForm()
+    {
+        return $this->container['default_to_advanced_envelopes_filter_form'];
+    }
+
+    /**
+     * Sets default_to_advanced_envelopes_filter_form
+     *
+     * @param ?string $default_to_advanced_envelopes_filter_form 
+     *
+     * @return $this
+     */
+    public function setDefaultToAdvancedEnvelopesFilterForm($default_to_advanced_envelopes_filter_form)
+    {
+        $this->container['default_to_advanced_envelopes_filter_form'] = $default_to_advanced_envelopes_filter_form;
+
+        return $this;
+    }
+
+    /**
+     * Gets default_to_advanced_envelopes_filter_form_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getDefaultToAdvancedEnvelopesFilterFormMetadata()
+    {
+        return $this->container['default_to_advanced_envelopes_filter_form_metadata'];
+    }
+
+    /**
+     * Sets default_to_advanced_envelopes_filter_form_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $default_to_advanced_envelopes_filter_form_metadata 
+     *
+     * @return $this
+     */
+    public function setDefaultToAdvancedEnvelopesFilterFormMetadata($default_to_advanced_envelopes_filter_form_metadata)
+    {
+        $this->container['default_to_advanced_envelopes_filter_form_metadata'] = $default_to_advanced_envelopes_filter_form_metadata;
 
         return $this;
     }
@@ -9412,7 +10870,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets disable_auto_template_matching_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_auto_template_matching_metadata disable_auto_template_matching_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_auto_template_matching_metadata 
      *
      * @return $this
      */
@@ -9460,7 +10918,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets disable_mobile_app_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_mobile_app_metadata disable_mobile_app_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_mobile_app_metadata Metadata that indicates whether the `disableMobileApp` property is editable.
      *
      * @return $this
      */
@@ -9508,7 +10966,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets disable_mobile_push_notifications_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_mobile_push_notifications_metadata disable_mobile_push_notifications_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_mobile_push_notifications_metadata Metadata that indicates whether the `disableMobilePushNotifications` property is editable.
      *
      * @return $this
      */
@@ -9556,7 +11014,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets disable_mobile_sending_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_mobile_sending_metadata disable_mobile_sending_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_mobile_sending_metadata Metadata that indicates whether the `disableMobileSending` property is editable.
      *
      * @return $this
      */
@@ -9604,7 +11062,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets disable_multiple_sessions_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_multiple_sessions_metadata disable_multiple_sessions_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_multiple_sessions_metadata Metadata that indicates whether the `disableMultipleSessions` property is editable.
      *
      * @return $this
      */
@@ -9628,7 +11086,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets disable_purge_notifications_for_sender_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_purge_notifications_for_sender_metadata disable_purge_notifications_for_sender_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_purge_notifications_for_sender_metadata Reserved for DocuSign.
      *
      * @return $this
      */
@@ -9676,7 +11134,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets disable_signer_cert_view_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_signer_cert_view_metadata disable_signer_cert_view_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_signer_cert_view_metadata Metadata that indicates whether the `disableSignerCertView` property is editable.
      *
      * @return $this
      */
@@ -9724,7 +11182,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets disable_signer_history_view_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_signer_history_view_metadata disable_signer_history_view_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_signer_history_view_metadata Metadata that indicates whether the `disableSignerHistoryView` property is editable.
      *
      * @return $this
      */
@@ -9772,7 +11230,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets disable_style_signature_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_style_signature_metadata disable_style_signature_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_style_signature_metadata Metadata that indicates whether the `disableStyleSignature` property is editable.
      *
      * @return $this
      */
@@ -9820,7 +11278,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets disable_upload_signature_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_upload_signature_metadata disable_upload_signature_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_upload_signature_metadata Metadata that indicates whether the `disableUploadSignature` property is editable.
      *
      * @return $this
      */
@@ -9868,7 +11326,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets disable_user_sharing_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_user_sharing_metadata disable_user_sharing_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $disable_user_sharing_metadata Metadata that indicates whether the `disableUserSharing` property is editable.
      *
      * @return $this
      */
@@ -9916,7 +11374,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets display_beta_switch_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $display_beta_switch_metadata display_beta_switch_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $display_beta_switch_metadata Metadata that indicates whether the `displayBetaSwitch` property is editable.
      *
      * @return $this
      */
@@ -9964,7 +11422,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets document_conversion_restrictions_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $document_conversion_restrictions_metadata document_conversion_restrictions_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $document_conversion_restrictions_metadata Metadata that indicates whether the `documentConversionRestrictions` property is editable.
      *
      * @return $this
      */
@@ -10012,7 +11470,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets document_retention_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $document_retention_metadata document_retention_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $document_retention_metadata Metadata that indicates whether the `documentRetention` property is editable.
      *
      * @return $this
      */
@@ -10084,13 +11542,37 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets document_visibility_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $document_visibility_metadata document_visibility_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $document_visibility_metadata Metadata that indicates whether the `documentVisibility` property is editable.
      *
      * @return $this
      */
     public function setDocumentVisibilityMetadata($document_visibility_metadata)
     {
         $this->container['document_visibility_metadata'] = $document_visibility_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets dss_enable_provisioning_pen_configuration_radmin_option
+     *
+     * @return ?string
+     */
+    public function getDssEnableProvisioningPenConfigurationRadminOption()
+    {
+        return $this->container['dss_enable_provisioning_pen_configuration_radmin_option'];
+    }
+
+    /**
+     * Sets dss_enable_provisioning_pen_configuration_radmin_option
+     *
+     * @param ?string $dss_enable_provisioning_pen_configuration_radmin_option 
+     *
+     * @return $this
+     */
+    public function setDssEnableProvisioningPenConfigurationRadminOption($dss_enable_provisioning_pen_configuration_radmin_option)
+    {
+        $this->container['dss_enable_provisioning_pen_configuration_radmin_option'] = $dss_enable_provisioning_pen_configuration_radmin_option;
 
         return $this;
     }
@@ -10180,7 +11662,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets email_template_version_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $email_template_version_metadata email_template_version_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $email_template_version_metadata Metadata that indicates whether the `emailTemplateVersion` property is editable.
      *
      * @return $this
      */
@@ -10228,13 +11710,157 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_access_code_generator_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_access_code_generator_metadata enable_access_code_generator_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_access_code_generator_metadata Metadata that indicates whether the `enableAccessCodeGenerator` property is editable.
      *
      * @return $this
      */
     public function setEnableAccessCodeGeneratorMetadata($enable_access_code_generator_metadata)
     {
         $this->container['enable_access_code_generator_metadata'] = $enable_access_code_generator_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_account_wide_search
+     *
+     * @return ?string
+     */
+    public function getEnableAccountWideSearch()
+    {
+        return $this->container['enable_account_wide_search'];
+    }
+
+    /**
+     * Sets enable_account_wide_search
+     *
+     * @param ?string $enable_account_wide_search 
+     *
+     * @return $this
+     */
+    public function setEnableAccountWideSearch($enable_account_wide_search)
+    {
+        $this->container['enable_account_wide_search'] = $enable_account_wide_search;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_account_wide_search_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableAccountWideSearchMetadata()
+    {
+        return $this->container['enable_account_wide_search_metadata'];
+    }
+
+    /**
+     * Sets enable_account_wide_search_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_account_wide_search_metadata 
+     *
+     * @return $this
+     */
+    public function setEnableAccountWideSearchMetadata($enable_account_wide_search_metadata)
+    {
+        $this->container['enable_account_wide_search_metadata'] = $enable_account_wide_search_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_adm_healthcare
+     *
+     * @return ?string
+     */
+    public function getEnableAdmHealthcare()
+    {
+        return $this->container['enable_adm_healthcare'];
+    }
+
+    /**
+     * Sets enable_adm_healthcare
+     *
+     * @param ?string $enable_adm_healthcare 
+     *
+     * @return $this
+     */
+    public function setEnableAdmHealthcare($enable_adm_healthcare)
+    {
+        $this->container['enable_adm_healthcare'] = $enable_adm_healthcare;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_adm_healthcare_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableAdmHealthcareMetadata()
+    {
+        return $this->container['enable_adm_healthcare_metadata'];
+    }
+
+    /**
+     * Sets enable_adm_healthcare_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_adm_healthcare_metadata 
+     *
+     * @return $this
+     */
+    public function setEnableAdmHealthcareMetadata($enable_adm_healthcare_metadata)
+    {
+        $this->container['enable_adm_healthcare_metadata'] = $enable_adm_healthcare_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_advanced_envelopes_search
+     *
+     * @return ?string
+     */
+    public function getEnableAdvancedEnvelopesSearch()
+    {
+        return $this->container['enable_advanced_envelopes_search'];
+    }
+
+    /**
+     * Sets enable_advanced_envelopes_search
+     *
+     * @param ?string $enable_advanced_envelopes_search 
+     *
+     * @return $this
+     */
+    public function setEnableAdvancedEnvelopesSearch($enable_advanced_envelopes_search)
+    {
+        $this->container['enable_advanced_envelopes_search'] = $enable_advanced_envelopes_search;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_advanced_envelopes_search_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableAdvancedEnvelopesSearchMetadata()
+    {
+        return $this->container['enable_advanced_envelopes_search_metadata'];
+    }
+
+    /**
+     * Sets enable_advanced_envelopes_search_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_advanced_envelopes_search_metadata 
+     *
+     * @return $this
+     */
+    public function setEnableAdvancedEnvelopesSearchMetadata($enable_advanced_envelopes_search_metadata)
+    {
+        $this->container['enable_advanced_envelopes_search_metadata'] = $enable_advanced_envelopes_search_metadata;
 
         return $this;
     }
@@ -10276,7 +11902,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_advanced_payments_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_advanced_payments_metadata enable_advanced_payments_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_advanced_payments_metadata Metadata that indicates whether the `enableAdvancedPayments` property is editable.
      *
      * @return $this
      */
@@ -10324,7 +11950,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_advanced_power_forms_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_advanced_power_forms_metadata enable_advanced_power_forms_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_advanced_power_forms_metadata Metadata that indicates whether the `enableAdvancedPowerForms` property is editable.
      *
      * @return $this
      */
@@ -10372,7 +11998,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_agreement_actions_for_clm_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_agreement_actions_for_clm_metadata enable_agreement_actions_for_clm_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_agreement_actions_for_clm_metadata 
      *
      * @return $this
      */
@@ -10420,7 +12046,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_agreement_actions_for_e_sign_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_agreement_actions_for_e_sign_metadata enable_agreement_actions_for_e_sign_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_agreement_actions_for_e_sign_metadata 
      *
      * @return $this
      */
@@ -10468,7 +12094,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_auto_nav_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_auto_nav_metadata enable_auto_nav_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_auto_nav_metadata Metadata that indicates whether the `enableAutoNav` property is editable.
      *
      * @return $this
      */
@@ -10516,7 +12142,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_bcc_dummy_link_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_bcc_dummy_link_metadata enable_bcc_dummy_link_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_bcc_dummy_link_metadata 
      *
      * @return $this
      */
@@ -10564,13 +12190,253 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_calculated_fields_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_calculated_fields_metadata enable_calculated_fields_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_calculated_fields_metadata Metadata that indicates whether the `enableCalculatedFields` property is editable.
      *
      * @return $this
      */
     public function setEnableCalculatedFieldsMetadata($enable_calculated_fields_metadata)
     {
         $this->container['enable_calculated_fields_metadata'] = $enable_calculated_fields_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_click_plus
+     *
+     * @return ?string
+     */
+    public function getEnableClickPlus()
+    {
+        return $this->container['enable_click_plus'];
+    }
+
+    /**
+     * Sets enable_click_plus
+     *
+     * @param ?string $enable_click_plus 
+     *
+     * @return $this
+     */
+    public function setEnableClickPlus($enable_click_plus)
+    {
+        $this->container['enable_click_plus'] = $enable_click_plus;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_click_plus_conditional_content
+     *
+     * @return ?string
+     */
+    public function getEnableClickPlusConditionalContent()
+    {
+        return $this->container['enable_click_plus_conditional_content'];
+    }
+
+    /**
+     * Sets enable_click_plus_conditional_content
+     *
+     * @param ?string $enable_click_plus_conditional_content 
+     *
+     * @return $this
+     */
+    public function setEnableClickPlusConditionalContent($enable_click_plus_conditional_content)
+    {
+        $this->container['enable_click_plus_conditional_content'] = $enable_click_plus_conditional_content;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_click_plus_conditional_content_meta_data
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableClickPlusConditionalContentMetaData()
+    {
+        return $this->container['enable_click_plus_conditional_content_meta_data'];
+    }
+
+    /**
+     * Sets enable_click_plus_conditional_content_meta_data
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_click_plus_conditional_content_meta_data 
+     *
+     * @return $this
+     */
+    public function setEnableClickPlusConditionalContentMetaData($enable_click_plus_conditional_content_meta_data)
+    {
+        $this->container['enable_click_plus_conditional_content_meta_data'] = $enable_click_plus_conditional_content_meta_data;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_click_plus_custom_fields
+     *
+     * @return ?string
+     */
+    public function getEnableClickPlusCustomFields()
+    {
+        return $this->container['enable_click_plus_custom_fields'];
+    }
+
+    /**
+     * Sets enable_click_plus_custom_fields
+     *
+     * @param ?string $enable_click_plus_custom_fields 
+     *
+     * @return $this
+     */
+    public function setEnableClickPlusCustomFields($enable_click_plus_custom_fields)
+    {
+        $this->container['enable_click_plus_custom_fields'] = $enable_click_plus_custom_fields;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_click_plus_custom_fields_meta_data
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableClickPlusCustomFieldsMetaData()
+    {
+        return $this->container['enable_click_plus_custom_fields_meta_data'];
+    }
+
+    /**
+     * Sets enable_click_plus_custom_fields_meta_data
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_click_plus_custom_fields_meta_data 
+     *
+     * @return $this
+     */
+    public function setEnableClickPlusCustomFieldsMetaData($enable_click_plus_custom_fields_meta_data)
+    {
+        $this->container['enable_click_plus_custom_fields_meta_data'] = $enable_click_plus_custom_fields_meta_data;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_click_plus_custom_style
+     *
+     * @return ?string
+     */
+    public function getEnableClickPlusCustomStyle()
+    {
+        return $this->container['enable_click_plus_custom_style'];
+    }
+
+    /**
+     * Sets enable_click_plus_custom_style
+     *
+     * @param ?string $enable_click_plus_custom_style 
+     *
+     * @return $this
+     */
+    public function setEnableClickPlusCustomStyle($enable_click_plus_custom_style)
+    {
+        $this->container['enable_click_plus_custom_style'] = $enable_click_plus_custom_style;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_click_plus_custom_style_meta_data
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableClickPlusCustomStyleMetaData()
+    {
+        return $this->container['enable_click_plus_custom_style_meta_data'];
+    }
+
+    /**
+     * Sets enable_click_plus_custom_style_meta_data
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_click_plus_custom_style_meta_data 
+     *
+     * @return $this
+     */
+    public function setEnableClickPlusCustomStyleMetaData($enable_click_plus_custom_style_meta_data)
+    {
+        $this->container['enable_click_plus_custom_style_meta_data'] = $enable_click_plus_custom_style_meta_data;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_click_plus_dynamic_content
+     *
+     * @return ?string
+     */
+    public function getEnableClickPlusDynamicContent()
+    {
+        return $this->container['enable_click_plus_dynamic_content'];
+    }
+
+    /**
+     * Sets enable_click_plus_dynamic_content
+     *
+     * @param ?string $enable_click_plus_dynamic_content 
+     *
+     * @return $this
+     */
+    public function setEnableClickPlusDynamicContent($enable_click_plus_dynamic_content)
+    {
+        $this->container['enable_click_plus_dynamic_content'] = $enable_click_plus_dynamic_content;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_click_plus_dynamic_content_meta_data
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableClickPlusDynamicContentMetaData()
+    {
+        return $this->container['enable_click_plus_dynamic_content_meta_data'];
+    }
+
+    /**
+     * Sets enable_click_plus_dynamic_content_meta_data
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_click_plus_dynamic_content_meta_data 
+     *
+     * @return $this
+     */
+    public function setEnableClickPlusDynamicContentMetaData($enable_click_plus_dynamic_content_meta_data)
+    {
+        $this->container['enable_click_plus_dynamic_content_meta_data'] = $enable_click_plus_dynamic_content_meta_data;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_click_plus_meta_data
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableClickPlusMetaData()
+    {
+        return $this->container['enable_click_plus_meta_data'];
+    }
+
+    /**
+     * Sets enable_click_plus_meta_data
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_click_plus_meta_data 
+     *
+     * @return $this
+     */
+    public function setEnableClickPlusMetaData($enable_click_plus_meta_data)
+    {
+        $this->container['enable_click_plus_meta_data'] = $enable_click_plus_meta_data;
 
         return $this;
     }
@@ -10612,7 +12478,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_clickwraps_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_clickwraps_metadata enable_clickwraps_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_clickwraps_metadata Metadata that indicates whether the `enableClickwraps` property is editable.
      *
      * @return $this
      */
@@ -10684,13 +12550,61 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_comments_history_download_in_signing_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_comments_history_download_in_signing_metadata enable_comments_history_download_in_signing_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_comments_history_download_in_signing_metadata 
      *
      * @return $this
      */
     public function setEnableCommentsHistoryDownloadInSigningMetadata($enable_comments_history_download_in_signing_metadata)
     {
         $this->container['enable_comments_history_download_in_signing_metadata'] = $enable_comments_history_download_in_signing_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_contact_suggestions
+     *
+     * @return ?string
+     */
+    public function getEnableContactSuggestions()
+    {
+        return $this->container['enable_contact_suggestions'];
+    }
+
+    /**
+     * Sets enable_contact_suggestions
+     *
+     * @param ?string $enable_contact_suggestions 
+     *
+     * @return $this
+     */
+    public function setEnableContactSuggestions($enable_contact_suggestions)
+    {
+        $this->container['enable_contact_suggestions'] = $enable_contact_suggestions;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_contact_suggestions_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableContactSuggestionsMetadata()
+    {
+        return $this->container['enable_contact_suggestions_metadata'];
+    }
+
+    /**
+     * Sets enable_contact_suggestions_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_contact_suggestions_metadata 
+     *
+     * @return $this
+     */
+    public function setEnableContactSuggestionsMetadata($enable_contact_suggestions_metadata)
+    {
+        $this->container['enable_contact_suggestions_metadata'] = $enable_contact_suggestions_metadata;
 
         return $this;
     }
@@ -10732,13 +12646,349 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_customer_satisfaction_metric_tracking_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_customer_satisfaction_metric_tracking_metadata enable_customer_satisfaction_metric_tracking_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_customer_satisfaction_metric_tracking_metadata Metadata that indicates whether the `enableCustomerSatisfactionMetricTracking` property is editable.
      *
      * @return $this
      */
     public function setEnableCustomerSatisfactionMetricTrackingMetadata($enable_customer_satisfaction_metric_tracking_metadata)
     {
         $this->container['enable_customer_satisfaction_metric_tracking_metadata'] = $enable_customer_satisfaction_metric_tracking_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_d_sig_eu_advanced_pens
+     *
+     * @return ?string
+     */
+    public function getEnableDSigEuAdvancedPens()
+    {
+        return $this->container['enable_d_sig_eu_advanced_pens'];
+    }
+
+    /**
+     * Sets enable_d_sig_eu_advanced_pens
+     *
+     * @param ?string $enable_d_sig_eu_advanced_pens 
+     *
+     * @return $this
+     */
+    public function setEnableDSigEuAdvancedPens($enable_d_sig_eu_advanced_pens)
+    {
+        $this->container['enable_d_sig_eu_advanced_pens'] = $enable_d_sig_eu_advanced_pens;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_d_sig_eu_advanced_pens_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableDSigEuAdvancedPensMetadata()
+    {
+        return $this->container['enable_d_sig_eu_advanced_pens_metadata'];
+    }
+
+    /**
+     * Sets enable_d_sig_eu_advanced_pens_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_d_sig_eu_advanced_pens_metadata 
+     *
+     * @return $this
+     */
+    public function setEnableDSigEuAdvancedPensMetadata($enable_d_sig_eu_advanced_pens_metadata)
+    {
+        $this->container['enable_d_sig_eu_advanced_pens_metadata'] = $enable_d_sig_eu_advanced_pens_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_d_sig_express_pens
+     *
+     * @return ?string
+     */
+    public function getEnableDSigExpressPens()
+    {
+        return $this->container['enable_d_sig_express_pens'];
+    }
+
+    /**
+     * Sets enable_d_sig_express_pens
+     *
+     * @param ?string $enable_d_sig_express_pens 
+     *
+     * @return $this
+     */
+    public function setEnableDSigExpressPens($enable_d_sig_express_pens)
+    {
+        $this->container['enable_d_sig_express_pens'] = $enable_d_sig_express_pens;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_d_sig_express_pens_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableDSigExpressPensMetadata()
+    {
+        return $this->container['enable_d_sig_express_pens_metadata'];
+    }
+
+    /**
+     * Sets enable_d_sig_express_pens_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_d_sig_express_pens_metadata 
+     *
+     * @return $this
+     */
+    public function setEnableDSigExpressPensMetadata($enable_d_sig_express_pens_metadata)
+    {
+        $this->container['enable_d_sig_express_pens_metadata'] = $enable_d_sig_express_pens_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_d_sig_id_check_for_aes_pens
+     *
+     * @return ?string
+     */
+    public function getEnableDSigIdCheckForAesPens()
+    {
+        return $this->container['enable_d_sig_id_check_for_aes_pens'];
+    }
+
+    /**
+     * Sets enable_d_sig_id_check_for_aes_pens
+     *
+     * @param ?string $enable_d_sig_id_check_for_aes_pens 
+     *
+     * @return $this
+     */
+    public function setEnableDSigIdCheckForAesPens($enable_d_sig_id_check_for_aes_pens)
+    {
+        $this->container['enable_d_sig_id_check_for_aes_pens'] = $enable_d_sig_id_check_for_aes_pens;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_d_sig_id_check_for_aes_pens_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableDSigIdCheckForAesPensMetadata()
+    {
+        return $this->container['enable_d_sig_id_check_for_aes_pens_metadata'];
+    }
+
+    /**
+     * Sets enable_d_sig_id_check_for_aes_pens_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_d_sig_id_check_for_aes_pens_metadata 
+     *
+     * @return $this
+     */
+    public function setEnableDSigIdCheckForAesPensMetadata($enable_d_sig_id_check_for_aes_pens_metadata)
+    {
+        $this->container['enable_d_sig_id_check_for_aes_pens_metadata'] = $enable_d_sig_id_check_for_aes_pens_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_d_sig_id_check_in_person_for_qes_pens
+     *
+     * @return ?string
+     */
+    public function getEnableDSigIdCheckInPersonForQesPens()
+    {
+        return $this->container['enable_d_sig_id_check_in_person_for_qes_pens'];
+    }
+
+    /**
+     * Sets enable_d_sig_id_check_in_person_for_qes_pens
+     *
+     * @param ?string $enable_d_sig_id_check_in_person_for_qes_pens 
+     *
+     * @return $this
+     */
+    public function setEnableDSigIdCheckInPersonForQesPens($enable_d_sig_id_check_in_person_for_qes_pens)
+    {
+        $this->container['enable_d_sig_id_check_in_person_for_qes_pens'] = $enable_d_sig_id_check_in_person_for_qes_pens;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_d_sig_id_check_in_person_for_qes_pens_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableDSigIdCheckInPersonForQesPensMetadata()
+    {
+        return $this->container['enable_d_sig_id_check_in_person_for_qes_pens_metadata'];
+    }
+
+    /**
+     * Sets enable_d_sig_id_check_in_person_for_qes_pens_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_d_sig_id_check_in_person_for_qes_pens_metadata 
+     *
+     * @return $this
+     */
+    public function setEnableDSigIdCheckInPersonForQesPensMetadata($enable_d_sig_id_check_in_person_for_qes_pens_metadata)
+    {
+        $this->container['enable_d_sig_id_check_in_person_for_qes_pens_metadata'] = $enable_d_sig_id_check_in_person_for_qes_pens_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_d_sig_id_check_remote_for_qes_pens
+     *
+     * @return ?string
+     */
+    public function getEnableDSigIdCheckRemoteForQesPens()
+    {
+        return $this->container['enable_d_sig_id_check_remote_for_qes_pens'];
+    }
+
+    /**
+     * Sets enable_d_sig_id_check_remote_for_qes_pens
+     *
+     * @param ?string $enable_d_sig_id_check_remote_for_qes_pens 
+     *
+     * @return $this
+     */
+    public function setEnableDSigIdCheckRemoteForQesPens($enable_d_sig_id_check_remote_for_qes_pens)
+    {
+        $this->container['enable_d_sig_id_check_remote_for_qes_pens'] = $enable_d_sig_id_check_remote_for_qes_pens;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_d_sig_id_check_remote_for_qes_pens_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableDSigIdCheckRemoteForQesPensMetadata()
+    {
+        return $this->container['enable_d_sig_id_check_remote_for_qes_pens_metadata'];
+    }
+
+    /**
+     * Sets enable_d_sig_id_check_remote_for_qes_pens_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_d_sig_id_check_remote_for_qes_pens_metadata 
+     *
+     * @return $this
+     */
+    public function setEnableDSigIdCheckRemoteForQesPensMetadata($enable_d_sig_id_check_remote_for_qes_pens_metadata)
+    {
+        $this->container['enable_d_sig_id_check_remote_for_qes_pens_metadata'] = $enable_d_sig_id_check_remote_for_qes_pens_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_d_sig_id_verification_pens
+     *
+     * @return ?string
+     */
+    public function getEnableDSigIdVerificationPens()
+    {
+        return $this->container['enable_d_sig_id_verification_pens'];
+    }
+
+    /**
+     * Sets enable_d_sig_id_verification_pens
+     *
+     * @param ?string $enable_d_sig_id_verification_pens 
+     *
+     * @return $this
+     */
+    public function setEnableDSigIdVerificationPens($enable_d_sig_id_verification_pens)
+    {
+        $this->container['enable_d_sig_id_verification_pens'] = $enable_d_sig_id_verification_pens;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_d_sig_id_verification_pens_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableDSigIdVerificationPensMetadata()
+    {
+        return $this->container['enable_d_sig_id_verification_pens_metadata'];
+    }
+
+    /**
+     * Sets enable_d_sig_id_verification_pens_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_d_sig_id_verification_pens_metadata 
+     *
+     * @return $this
+     */
+    public function setEnableDSigIdVerificationPensMetadata($enable_d_sig_id_verification_pens_metadata)
+    {
+        $this->container['enable_d_sig_id_verification_pens_metadata'] = $enable_d_sig_id_verification_pens_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_d_sig_id_verification_premier_pens
+     *
+     * @return ?string
+     */
+    public function getEnableDSigIdVerificationPremierPens()
+    {
+        return $this->container['enable_d_sig_id_verification_premier_pens'];
+    }
+
+    /**
+     * Sets enable_d_sig_id_verification_premier_pens
+     *
+     * @param ?string $enable_d_sig_id_verification_premier_pens 
+     *
+     * @return $this
+     */
+    public function setEnableDSigIdVerificationPremierPens($enable_d_sig_id_verification_premier_pens)
+    {
+        $this->container['enable_d_sig_id_verification_premier_pens'] = $enable_d_sig_id_verification_premier_pens;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_d_sig_id_verification_premier_pens_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableDSigIdVerificationPremierPensMetadata()
+    {
+        return $this->container['enable_d_sig_id_verification_premier_pens_metadata'];
+    }
+
+    /**
+     * Sets enable_d_sig_id_verification_premier_pens_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_d_sig_id_verification_premier_pens_metadata 
+     *
+     * @return $this
+     */
+    public function setEnableDSigIdVerificationPremierPensMetadata($enable_d_sig_id_verification_premier_pens_metadata)
+    {
+        $this->container['enable_d_sig_id_verification_premier_pens_metadata'] = $enable_d_sig_id_verification_premier_pens_metadata;
 
         return $this;
     }
@@ -10780,13 +13030,37 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_ds_pro_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_ds_pro_metadata enable_ds_pro_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_ds_pro_metadata Metadata that indicates whether the `enableDSPro` property is editable.
      *
      * @return $this
      */
     public function setEnableDsProMetadata($enable_ds_pro_metadata)
     {
         $this->container['enable_ds_pro_metadata'] = $enable_ds_pro_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_enforce_tls_emails_setting_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableEnforceTlsEmailsSettingMetadata()
+    {
+        return $this->container['enable_enforce_tls_emails_setting_metadata'];
+    }
+
+    /**
+     * Sets enable_enforce_tls_emails_setting_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_enforce_tls_emails_setting_metadata 
+     *
+     * @return $this
+     */
+    public function setEnableEnforceTlsEmailsSettingMetadata($enable_enforce_tls_emails_setting_metadata)
+    {
+        $this->container['enable_enforce_tls_emails_setting_metadata'] = $enable_enforce_tls_emails_setting_metadata;
 
         return $this;
     }
@@ -10828,7 +13102,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_envelope_stamping_by_account_admin_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_envelope_stamping_by_account_admin_metadata enable_envelope_stamping_by_account_admin_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_envelope_stamping_by_account_admin_metadata Metadata that indicates whether the `enableEnvelopeStampingByAccountAdmin` property is editable.
      *
      * @return $this
      */
@@ -10876,13 +13150,61 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_envelope_stamping_by_ds_admin_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_envelope_stamping_by_ds_admin_metadata enable_envelope_stamping_by_ds_admin_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_envelope_stamping_by_ds_admin_metadata Metadata that indicates whether the `enableEnvelopeStampingByDSAdmin` property is editable.
      *
      * @return $this
      */
     public function setEnableEnvelopeStampingByDsAdminMetadata($enable_envelope_stamping_by_ds_admin_metadata)
     {
         $this->container['enable_envelope_stamping_by_ds_admin_metadata'] = $enable_envelope_stamping_by_ds_admin_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_e_sign_api_hourly_limit_management
+     *
+     * @return ?string
+     */
+    public function getEnableESignApiHourlyLimitManagement()
+    {
+        return $this->container['enable_e_sign_api_hourly_limit_management'];
+    }
+
+    /**
+     * Sets enable_e_sign_api_hourly_limit_management
+     *
+     * @param ?string $enable_e_sign_api_hourly_limit_management 
+     *
+     * @return $this
+     */
+    public function setEnableESignApiHourlyLimitManagement($enable_e_sign_api_hourly_limit_management)
+    {
+        $this->container['enable_e_sign_api_hourly_limit_management'] = $enable_e_sign_api_hourly_limit_management;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_e_sign_api_hourly_limit_management_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableESignApiHourlyLimitManagementMetadata()
+    {
+        return $this->container['enable_e_sign_api_hourly_limit_management_metadata'];
+    }
+
+    /**
+     * Sets enable_e_sign_api_hourly_limit_management_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_e_sign_api_hourly_limit_management_metadata 
+     *
+     * @return $this
+     */
+    public function setEnableESignApiHourlyLimitManagementMetadata($enable_e_sign_api_hourly_limit_management_metadata)
+    {
+        $this->container['enable_e_sign_api_hourly_limit_management_metadata'] = $enable_e_sign_api_hourly_limit_management_metadata;
 
         return $this;
     }
@@ -10924,7 +13246,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_esign_communities_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_esign_communities_metadata enable_esign_communities_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_esign_communities_metadata 
      *
      * @return $this
      */
@@ -10972,7 +13294,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_id_fx_accountless_sms_auth_for_part11_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_id_fx_accountless_sms_auth_for_part11_metadata enable_id_fx_accountless_sms_auth_for_part11_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_id_fx_accountless_sms_auth_for_part11_metadata 
      *
      * @return $this
      */
@@ -11020,7 +13342,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_id_fx_intuit_kba_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_id_fx_intuit_kba_metadata enable_id_fx_intuit_kba_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_id_fx_intuit_kba_metadata 
      *
      * @return $this
      */
@@ -11068,13 +13390,61 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_id_fx_phone_authentication_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_id_fx_phone_authentication_metadata enable_id_fx_phone_authentication_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_id_fx_phone_authentication_metadata 
      *
      * @return $this
      */
     public function setEnableIdFxPhoneAuthenticationMetadata($enable_id_fx_phone_authentication_metadata)
     {
         $this->container['enable_id_fx_phone_authentication_metadata'] = $enable_id_fx_phone_authentication_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_idfx_phone_auth_signature_auth_status
+     *
+     * @return ?string
+     */
+    public function getEnableIdfxPhoneAuthSignatureAuthStatus()
+    {
+        return $this->container['enable_idfx_phone_auth_signature_auth_status'];
+    }
+
+    /**
+     * Sets enable_idfx_phone_auth_signature_auth_status
+     *
+     * @param ?string $enable_idfx_phone_auth_signature_auth_status 
+     *
+     * @return $this
+     */
+    public function setEnableIdfxPhoneAuthSignatureAuthStatus($enable_idfx_phone_auth_signature_auth_status)
+    {
+        $this->container['enable_idfx_phone_auth_signature_auth_status'] = $enable_idfx_phone_auth_signature_auth_status;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_idfx_phone_auth_signature_auth_status_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableIdfxPhoneAuthSignatureAuthStatusMetadata()
+    {
+        return $this->container['enable_idfx_phone_auth_signature_auth_status_metadata'];
+    }
+
+    /**
+     * Sets enable_idfx_phone_auth_signature_auth_status_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_idfx_phone_auth_signature_auth_status_metadata 
+     *
+     * @return $this
+     */
+    public function setEnableIdfxPhoneAuthSignatureAuthStatusMetadata($enable_idfx_phone_auth_signature_auth_status_metadata)
+    {
+        $this->container['enable_idfx_phone_auth_signature_auth_status_metadata'] = $enable_idfx_phone_auth_signature_auth_status_metadata;
 
         return $this;
     }
@@ -11116,7 +13486,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_in_browser_editor_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_in_browser_editor_metadata enable_in_browser_editor_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_in_browser_editor_metadata 
      *
      * @return $this
      */
@@ -11164,13 +13534,37 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_key_terms_suggestions_by_document_type_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_key_terms_suggestions_by_document_type_metadata enable_key_terms_suggestions_by_document_type_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_key_terms_suggestions_by_document_type_metadata 
      *
      * @return $this
      */
     public function setEnableKeyTermsSuggestionsByDocumentTypeMetadata($enable_key_terms_suggestions_by_document_type_metadata)
     {
         $this->container['enable_key_terms_suggestions_by_document_type_metadata'] = $enable_key_terms_suggestions_by_document_type_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_participant_recipient_setting_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnableParticipantRecipientSettingMetadata()
+    {
+        return $this->container['enable_participant_recipient_setting_metadata'];
+    }
+
+    /**
+     * Sets enable_participant_recipient_setting_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_participant_recipient_setting_metadata 
+     *
+     * @return $this
+     */
+    public function setEnableParticipantRecipientSettingMetadata($enable_participant_recipient_setting_metadata)
+    {
+        $this->container['enable_participant_recipient_setting_metadata'] = $enable_participant_recipient_setting_metadata;
 
         return $this;
     }
@@ -11212,7 +13606,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_payment_processing_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_payment_processing_metadata enable_payment_processing_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_payment_processing_metadata Metadata that indicates whether the `enablePaymentProcessing` property is editable.
      *
      * @return $this
      */
@@ -11260,7 +13654,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_pdfa_conversion_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_pdfa_conversion_metadata enable_pdfa_conversion_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_pdfa_conversion_metadata 
      *
      * @return $this
      */
@@ -11332,7 +13726,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_power_form_direct_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_power_form_direct_metadata enable_power_form_direct_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_power_form_direct_metadata Metadata that indicates whether the `enablePowerFormDirect` property is editable.
      *
      * @return $this
      */
@@ -11356,7 +13750,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_power_form_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_power_form_metadata enable_power_form_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_power_form_metadata Metadata that indicates whether the `enablePowerForm` property is editable.
      *
      * @return $this
      */
@@ -11404,7 +13798,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_recipient_domain_validation_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_recipient_domain_validation_metadata enable_recipient_domain_validation_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_recipient_domain_validation_metadata Metadata that indicates whether the `enableRecipientDomainValidation` property is editable.
      *
      * @return $this
      */
@@ -11452,7 +13846,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_recipient_may_provide_phone_number_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_recipient_may_provide_phone_number_metadata enable_recipient_may_provide_phone_number_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_recipient_may_provide_phone_number_metadata 
      *
      * @return $this
      */
@@ -11500,7 +13894,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_report_links_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_report_links_metadata enable_report_links_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_report_links_metadata Metadata that indicates whether the `enableReportLinks` property is editable.
      *
      * @return $this
      */
@@ -11548,7 +13942,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_require_sign_on_paper_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_require_sign_on_paper_metadata enable_require_sign_on_paper_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_require_sign_on_paper_metadata Metadata that indicates whether the `enableRequireSignOnPaper` property is editable.
      *
      * @return $this
      */
@@ -11596,7 +13990,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_reserved_domain_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_reserved_domain_metadata enable_reserved_domain_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_reserved_domain_metadata Metadata that indicates whether the `enableReservedDomain` property is editable.
      *
      * @return $this
      */
@@ -11644,7 +14038,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_responsive_signing_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_responsive_signing_metadata enable_responsive_signing_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_responsive_signing_metadata Metadata that indicates whether the `enableResponsiveSigning` property is editable.
      *
      * @return $this
      */
@@ -11692,7 +14086,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_scheduled_release_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_scheduled_release_metadata enable_scheduled_release_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_scheduled_release_metadata Metadata that indicates whether the `enableScheduledRelease` property is editable.
      *
      * @return $this
      */
@@ -11740,7 +14134,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_search_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_search_metadata enable_search_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_search_metadata 
      *
      * @return $this
      */
@@ -11788,7 +14182,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_search_site_specific_api_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_search_site_specific_api_metadata enable_search_site_specific_api_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_search_site_specific_api_metadata 
      *
      * @return $this
      */
@@ -11836,7 +14230,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_search_ui_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_search_ui_metadata enable_search_ui_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_search_ui_metadata 
      *
      * @return $this
      */
@@ -11884,7 +14278,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_sending_tags_font_settings_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_sending_tags_font_settings_metadata enable_sending_tags_font_settings_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_sending_tags_font_settings_metadata Metadata that indicates whether the `enableSendingTagsFontSettings` property is editable.
      *
      * @return $this
      */
@@ -11932,7 +14326,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_send_to_agent_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_send_to_agent_metadata enable_send_to_agent_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_send_to_agent_metadata Metadata that indicates whether the `enableSendToAgent` property is editable.
      *
      * @return $this
      */
@@ -11980,7 +14374,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_send_to_intermediary_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_send_to_intermediary_metadata enable_send_to_intermediary_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_send_to_intermediary_metadata Metadata that indicates whether the `enableSendToIntermediary` property is editable.
      *
      * @return $this
      */
@@ -12028,7 +14422,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_send_to_manage_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_send_to_manage_metadata enable_send_to_manage_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_send_to_manage_metadata Metadata that indicates whether the `enableSendToManage` property is editable.
      *
      * @return $this
      */
@@ -12076,7 +14470,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_sequential_signing_api_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_sequential_signing_api_metadata enable_sequential_signing_api_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_sequential_signing_api_metadata Metadata that indicates whether the `enableSequentialSigningAPI` property is editable.
      *
      * @return $this
      */
@@ -12124,7 +14518,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_sequential_signing_ui_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_sequential_signing_ui_metadata enable_sequential_signing_ui_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_sequential_signing_ui_metadata Metadata that indicates whether the `enableSequentialSigningUI` property is editable.
      *
      * @return $this
      */
@@ -12172,7 +14566,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_signer_attachments_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_signer_attachments_metadata enable_signer_attachments_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_signer_attachments_metadata Metadata that indicates whether the `enableSignerAttachments` property is editable.
      *
      * @return $this
      */
@@ -12220,7 +14614,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_signing_extension_comments_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_signing_extension_comments_metadata enable_signing_extension_comments_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_signing_extension_comments_metadata Metadata that indicates whether the `enableSigningExtensionComments` property is editable.
      *
      * @return $this
      */
@@ -12268,7 +14662,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_signing_extension_conversations_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_signing_extension_conversations_metadata enable_signing_extension_conversations_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_signing_extension_conversations_metadata Metadata that indicates whether the `enableSigningExtensionConversations` property is editable.
      *
      * @return $this
      */
@@ -12316,7 +14710,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_signing_order_settings_for_account_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_signing_order_settings_for_account_metadata enable_signing_order_settings_for_account_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_signing_order_settings_for_account_metadata Metadata that indicates whether the `enableSigningOrderSettingsForAccount` property is editable.
      *
      * @return $this
      */
@@ -12364,7 +14758,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_sign_on_paper_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_sign_on_paper_metadata enable_sign_on_paper_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_sign_on_paper_metadata Metadata that indicates whether the `enableSignOnPaper` property is editable.
      *
      * @return $this
      */
@@ -12412,7 +14806,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_sign_on_paper_override_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_sign_on_paper_override_metadata enable_sign_on_paper_override_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_sign_on_paper_override_metadata Metadata that indicates whether the `enableSignOnPaperOverride` property is editable.
      *
      * @return $this
      */
@@ -12460,7 +14854,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_sign_with_notary_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_sign_with_notary_metadata enable_sign_with_notary_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_sign_with_notary_metadata Metadata that indicates whether the `enableSignWithNotary` property is editable.
      *
      * @return $this
      */
@@ -12508,7 +14902,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_smart_contracts_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_smart_contracts_metadata enable_smart_contracts_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_smart_contracts_metadata Metadata that indicates whether the `enableSmartContracts` property is editable.
      *
      * @return $this
      */
@@ -12556,7 +14950,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_sms_authentication_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_sms_authentication_metadata enable_sms_authentication_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_sms_authentication_metadata Metadata that indicates whether the `enableSMSAuthentication` property is editable.
      *
      * @return $this
      */
@@ -12604,7 +14998,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_sms_delivery_additional_notification_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_sms_delivery_additional_notification_metadata enable_sms_delivery_additional_notification_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_sms_delivery_additional_notification_metadata 
      *
      * @return $this
      */
@@ -12676,7 +15070,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_social_id_login_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_social_id_login_metadata enable_social_id_login_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_social_id_login_metadata Deprecated.
      *
      * @return $this
      */
@@ -12724,7 +15118,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_strike_through_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_strike_through_metadata enable_strike_through_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_strike_through_metadata Metadata that indicates whether the `enableStrikeThrough` property is editable.
      *
      * @return $this
      */
@@ -12772,7 +15166,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_transaction_point_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_transaction_point_metadata enable_transaction_point_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_transaction_point_metadata Reserved for DocuSign.
      *
      * @return $this
      */
@@ -12820,7 +15214,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_vaulting_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_vaulting_metadata enable_vaulting_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_vaulting_metadata Metadata that indicates whether the `enableVaulting` property is editable.
      *
      * @return $this
      */
@@ -12868,7 +15262,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enable_witnessing_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_witnessing_metadata enable_witnessing_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enable_witnessing_metadata Metadata that indicates whether the `enableWitnessing` property is editable.
      *
      * @return $this
      */
@@ -12916,13 +15310,61 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets enforce_template_name_uniqueness_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $enforce_template_name_uniqueness_metadata enforce_template_name_uniqueness_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enforce_template_name_uniqueness_metadata Metadata that indicates whether the `enforceTemplateNameUniqueness` property is editable.
      *
      * @return $this
      */
     public function setEnforceTemplateNameUniquenessMetadata($enforce_template_name_uniqueness_metadata)
     {
         $this->container['enforce_template_name_uniqueness_metadata'] = $enforce_template_name_uniqueness_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets enforce_tls_emails
+     *
+     * @return ?string
+     */
+    public function getEnforceTlsEmails()
+    {
+        return $this->container['enforce_tls_emails'];
+    }
+
+    /**
+     * Sets enforce_tls_emails
+     *
+     * @param ?string $enforce_tls_emails 
+     *
+     * @return $this
+     */
+    public function setEnforceTlsEmails($enforce_tls_emails)
+    {
+        $this->container['enforce_tls_emails'] = $enforce_tls_emails;
+
+        return $this;
+    }
+
+    /**
+     * Gets enforce_tls_emails_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnforceTlsEmailsMetadata()
+    {
+        return $this->container['enforce_tls_emails_metadata'];
+    }
+
+    /**
+     * Sets enforce_tls_emails_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $enforce_tls_emails_metadata 
+     *
+     * @return $this
+     */
+    public function setEnforceTlsEmailsMetadata($enforce_tls_emails_metadata)
+    {
+        $this->container['enforce_tls_emails_metadata'] = $enforce_tls_emails_metadata;
 
         return $this;
     }
@@ -12964,7 +15406,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets envelope_integration_allowed_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $envelope_integration_allowed_metadata envelope_integration_allowed_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $envelope_integration_allowed_metadata Metadata that indicates whether the `envelopeIntegrationAllowed` property is editable.
      *
      * @return $this
      */
@@ -13012,13 +15454,157 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets envelope_integration_enabled_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $envelope_integration_enabled_metadata envelope_integration_enabled_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $envelope_integration_enabled_metadata Metadata that indicates whether the `envelopeIntegrationEnabled` property is editable.
      *
      * @return $this
      */
     public function setEnvelopeIntegrationEnabledMetadata($envelope_integration_enabled_metadata)
     {
         $this->container['envelope_integration_enabled_metadata'] = $envelope_integration_enabled_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets envelope_limits_total_document_size_allowed_in_mb
+     *
+     * @return ?string
+     */
+    public function getEnvelopeLimitsTotalDocumentSizeAllowedInMb()
+    {
+        return $this->container['envelope_limits_total_document_size_allowed_in_mb'];
+    }
+
+    /**
+     * Sets envelope_limits_total_document_size_allowed_in_mb
+     *
+     * @param ?string $envelope_limits_total_document_size_allowed_in_mb 
+     *
+     * @return $this
+     */
+    public function setEnvelopeLimitsTotalDocumentSizeAllowedInMb($envelope_limits_total_document_size_allowed_in_mb)
+    {
+        $this->container['envelope_limits_total_document_size_allowed_in_mb'] = $envelope_limits_total_document_size_allowed_in_mb;
+
+        return $this;
+    }
+
+    /**
+     * Gets envelope_limits_total_document_size_allowed_in_mb_enabled
+     *
+     * @return ?string
+     */
+    public function getEnvelopeLimitsTotalDocumentSizeAllowedInMbEnabled()
+    {
+        return $this->container['envelope_limits_total_document_size_allowed_in_mb_enabled'];
+    }
+
+    /**
+     * Sets envelope_limits_total_document_size_allowed_in_mb_enabled
+     *
+     * @param ?string $envelope_limits_total_document_size_allowed_in_mb_enabled 
+     *
+     * @return $this
+     */
+    public function setEnvelopeLimitsTotalDocumentSizeAllowedInMbEnabled($envelope_limits_total_document_size_allowed_in_mb_enabled)
+    {
+        $this->container['envelope_limits_total_document_size_allowed_in_mb_enabled'] = $envelope_limits_total_document_size_allowed_in_mb_enabled;
+
+        return $this;
+    }
+
+    /**
+     * Gets envelope_limits_total_document_size_allowed_in_mb_enabled_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnvelopeLimitsTotalDocumentSizeAllowedInMbEnabledMetadata()
+    {
+        return $this->container['envelope_limits_total_document_size_allowed_in_mb_enabled_metadata'];
+    }
+
+    /**
+     * Sets envelope_limits_total_document_size_allowed_in_mb_enabled_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $envelope_limits_total_document_size_allowed_in_mb_enabled_metadata 
+     *
+     * @return $this
+     */
+    public function setEnvelopeLimitsTotalDocumentSizeAllowedInMbEnabledMetadata($envelope_limits_total_document_size_allowed_in_mb_enabled_metadata)
+    {
+        $this->container['envelope_limits_total_document_size_allowed_in_mb_enabled_metadata'] = $envelope_limits_total_document_size_allowed_in_mb_enabled_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets envelope_limits_total_document_size_allowed_in_mb_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnvelopeLimitsTotalDocumentSizeAllowedInMbMetadata()
+    {
+        return $this->container['envelope_limits_total_document_size_allowed_in_mb_metadata'];
+    }
+
+    /**
+     * Sets envelope_limits_total_document_size_allowed_in_mb_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $envelope_limits_total_document_size_allowed_in_mb_metadata 
+     *
+     * @return $this
+     */
+    public function setEnvelopeLimitsTotalDocumentSizeAllowedInMbMetadata($envelope_limits_total_document_size_allowed_in_mb_metadata)
+    {
+        $this->container['envelope_limits_total_document_size_allowed_in_mb_metadata'] = $envelope_limits_total_document_size_allowed_in_mb_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets envelope_search_mode
+     *
+     * @return ?string
+     */
+    public function getEnvelopeSearchMode()
+    {
+        return $this->container['envelope_search_mode'];
+    }
+
+    /**
+     * Sets envelope_search_mode
+     *
+     * @param ?string $envelope_search_mode 
+     *
+     * @return $this
+     */
+    public function setEnvelopeSearchMode($envelope_search_mode)
+    {
+        $this->container['envelope_search_mode'] = $envelope_search_mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets envelope_search_mode_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getEnvelopeSearchModeMetadata()
+    {
+        return $this->container['envelope_search_mode_metadata'];
+    }
+
+    /**
+     * Sets envelope_search_mode_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $envelope_search_mode_metadata 
+     *
+     * @return $this
+     */
+    public function setEnvelopeSearchModeMetadata($envelope_search_mode_metadata)
+    {
+        $this->container['envelope_search_mode_metadata'] = $envelope_search_mode_metadata;
 
         return $this;
     }
@@ -13060,7 +15646,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets envelope_stamping_default_value_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $envelope_stamping_default_value_metadata envelope_stamping_default_value_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $envelope_stamping_default_value_metadata Metadata that indicates whether the `envelopeStampingDefaultValue` property is editable.
      *
      * @return $this
      */
@@ -13108,7 +15694,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets exit_prompt_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $exit_prompt_metadata exit_prompt_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $exit_prompt_metadata 
      *
      * @return $this
      */
@@ -13180,7 +15766,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets express_send_allow_tabs_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $express_send_allow_tabs_metadata express_send_allow_tabs_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $express_send_allow_tabs_metadata Metadata that indicates whether the `expressSendAllowTabs` property is editable.
      *
      * @return $this
      */
@@ -13204,7 +15790,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets express_send_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $express_send_metadata express_send_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $express_send_metadata Metadata that indicates whether the `expressSend` property is editable.
      *
      * @return $this
      */
@@ -13228,7 +15814,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets external_document_sources
      *
-     * @param \DocuSign\eSign\Model\ExternalDocumentSources $external_document_sources external_document_sources
+     * @param \DocuSign\eSign\Model\ExternalDocumentSources $external_document_sources A list of external document sources such as DropBox and OneDrive.
      *
      * @return $this
      */
@@ -13276,7 +15862,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets external_signature_pad_type_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $external_signature_pad_type_metadata external_signature_pad_type_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $external_signature_pad_type_metadata Metadata that indicates whether the `externalSignaturePadType` property is editable.
      *
      * @return $this
      */
@@ -13324,7 +15910,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets fax_out_enabled_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $fax_out_enabled_metadata fax_out_enabled_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $fax_out_enabled_metadata Metadata that indicates whether the `faxOutEnabled` property is editable.
      *
      * @return $this
      */
@@ -13372,7 +15958,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets finish_reminder_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $finish_reminder_metadata finish_reminder_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $finish_reminder_metadata 
      *
      * @return $this
      */
@@ -13420,13 +16006,61 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets guided_forms_html_allowed_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $guided_forms_html_allowed_metadata guided_forms_html_allowed_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $guided_forms_html_allowed_metadata 
      *
      * @return $this
      */
     public function setGuidedFormsHtmlAllowedMetadata($guided_forms_html_allowed_metadata)
     {
         $this->container['guided_forms_html_allowed_metadata'] = $guided_forms_html_allowed_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets guided_forms_html_conversion_policy
+     *
+     * @return ?string
+     */
+    public function getGuidedFormsHtmlConversionPolicy()
+    {
+        return $this->container['guided_forms_html_conversion_policy'];
+    }
+
+    /**
+     * Sets guided_forms_html_conversion_policy
+     *
+     * @param ?string $guided_forms_html_conversion_policy 
+     *
+     * @return $this
+     */
+    public function setGuidedFormsHtmlConversionPolicy($guided_forms_html_conversion_policy)
+    {
+        $this->container['guided_forms_html_conversion_policy'] = $guided_forms_html_conversion_policy;
+
+        return $this;
+    }
+
+    /**
+     * Gets guided_forms_html_conversion_policy_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getGuidedFormsHtmlConversionPolicyMetadata()
+    {
+        return $this->container['guided_forms_html_conversion_policy_metadata'];
+    }
+
+    /**
+     * Sets guided_forms_html_conversion_policy_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $guided_forms_html_conversion_policy_metadata 
+     *
+     * @return $this
+     */
+    public function setGuidedFormsHtmlConversionPolicyMetadata($guided_forms_html_conversion_policy_metadata)
+    {
+        $this->container['guided_forms_html_conversion_policy_metadata'] = $guided_forms_html_conversion_policy_metadata;
 
         return $this;
     }
@@ -13492,7 +16126,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets hide_account_address_in_co_c_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $hide_account_address_in_co_c_metadata hide_account_address_in_co_c_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $hide_account_address_in_co_c_metadata Metadata that indicates whether the `hideAccountAddressInCoC` property is editable.
      *
      * @return $this
      */
@@ -13540,7 +16174,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets hide_pricing_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $hide_pricing_metadata hide_pricing_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $hide_pricing_metadata Metadata that indicates whether the `hidePricing` property is editable.
      *
      * @return $this
      */
@@ -13636,7 +16270,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets id_check_expire_days_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $id_check_expire_days_metadata id_check_expire_days_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $id_check_expire_days_metadata Metadata that indicates whether the `idCheckExpireDays` property is editable.
      *
      * @return $this
      */
@@ -13660,7 +16294,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets id_check_expire_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $id_check_expire_metadata id_check_expire_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $id_check_expire_metadata Metadata that indicates whether the `idCheckExpire` property is editable.
      *
      * @return $this
      */
@@ -13708,7 +16342,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets id_check_expire_minutes_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $id_check_expire_minutes_metadata id_check_expire_minutes_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $id_check_expire_minutes_metadata Metadata that indicates whether the `idCheckExpireMinutes` property is editable.
      *
      * @return $this
      */
@@ -13756,7 +16390,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets id_check_required_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $id_check_required_metadata id_check_required_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $id_check_required_metadata Metadata that indicates whether the `idCheckRequired` property is editable.
      *
      * @return $this
      */
@@ -13804,13 +16438,61 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets identity_verification_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $identity_verification_metadata identity_verification_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $identity_verification_metadata Metadata that indicates whether the `identityVerification` property is editable.
      *
      * @return $this
      */
     public function setIdentityVerificationMetadata($identity_verification_metadata)
     {
         $this->container['identity_verification_metadata'] = $identity_verification_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets idfx_kba_authentication_override
+     *
+     * @return ?string
+     */
+    public function getIdfxKbaAuthenticationOverride()
+    {
+        return $this->container['idfx_kba_authentication_override'];
+    }
+
+    /**
+     * Sets idfx_kba_authentication_override
+     *
+     * @param ?string $idfx_kba_authentication_override 
+     *
+     * @return $this
+     */
+    public function setIdfxKbaAuthenticationOverride($idfx_kba_authentication_override)
+    {
+        $this->container['idfx_kba_authentication_override'] = $idfx_kba_authentication_override;
+
+        return $this;
+    }
+
+    /**
+     * Gets idfx_kba_authentication_override_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getIdfxKbaAuthenticationOverrideMetadata()
+    {
+        return $this->container['idfx_kba_authentication_override_metadata'];
+    }
+
+    /**
+     * Sets idfx_kba_authentication_override_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $idfx_kba_authentication_override_metadata 
+     *
+     * @return $this
+     */
+    public function setIdfxKbaAuthenticationOverrideMetadata($idfx_kba_authentication_override_metadata)
+    {
+        $this->container['idfx_kba_authentication_override_metadata'] = $idfx_kba_authentication_override_metadata;
 
         return $this;
     }
@@ -13852,7 +16534,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets idfx_phone_authentication_override_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $idfx_phone_authentication_override_metadata idfx_phone_authentication_override_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $idfx_phone_authentication_override_metadata 
      *
      * @return $this
      */
@@ -13900,7 +16582,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets ignore_error_if_anchor_tab_not_found_metadata_enabled
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $ignore_error_if_anchor_tab_not_found_metadata_enabled ignore_error_if_anchor_tab_not_found_metadata_enabled
+     * @param \DocuSign\eSign\Model\SettingsMetadata $ignore_error_if_anchor_tab_not_found_metadata_enabled Reserved for DocuSign.
      *
      * @return $this
      */
@@ -13948,7 +16630,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets in_person_id_check_question_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $in_person_id_check_question_metadata in_person_id_check_question_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $in_person_id_check_question_metadata Metadata that indicates whether the `inPersonIDCheckQuestion` property is editable.
      *
      * @return $this
      */
@@ -13996,7 +16678,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets in_person_signing_enabled_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $in_person_signing_enabled_metadata in_person_signing_enabled_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $in_person_signing_enabled_metadata Metadata that indicates whether the `inPersonSigningEnabled` property is editable.
      *
      * @return $this
      */
@@ -14044,7 +16726,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets in_session_enabled_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $in_session_enabled_metadata in_session_enabled_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $in_session_enabled_metadata Metadata that indicates whether the `inSessionEnabled` property is editable.
      *
      * @return $this
      */
@@ -14092,13 +16774,37 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets in_session_suppress_emails_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $in_session_suppress_emails_metadata in_session_suppress_emails_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $in_session_suppress_emails_metadata Metadata that indicates whether the `inSessionSuppressEmails` property is editable.
      *
      * @return $this
      */
     public function setInSessionSuppressEmailsMetadata($in_session_suppress_emails_metadata)
     {
         $this->container['in_session_suppress_emails_metadata'] = $in_session_suppress_emails_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_connect_document_fields_enabled
+     *
+     * @return ?string
+     */
+    public function getIsConnectDocumentFieldsEnabled()
+    {
+        return $this->container['is_connect_document_fields_enabled'];
+    }
+
+    /**
+     * Sets is_connect_document_fields_enabled
+     *
+     * @param ?string $is_connect_document_fields_enabled 
+     *
+     * @return $this
+     */
+    public function setIsConnectDocumentFieldsEnabled($is_connect_document_fields_enabled)
+    {
+        $this->container['is_connect_document_fields_enabled'] = $is_connect_document_fields_enabled;
 
         return $this;
     }
@@ -14164,7 +16870,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets maximum_signing_groups_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $maximum_signing_groups_metadata maximum_signing_groups_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $maximum_signing_groups_metadata Metadata that indicates whether the `maximumSigningGroups` property is editable.
      *
      * @return $this
      */
@@ -14212,7 +16918,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets maximum_users_per_signing_group_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $maximum_users_per_signing_group_metadata maximum_users_per_signing_group_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $maximum_users_per_signing_group_metadata Metadata that indicates whether the `maximumUsersPerSigningGroup` property is editable.
      *
      * @return $this
      */
@@ -14243,6 +16949,54 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     public function setMaxNumberOfCustomStamps($max_number_of_custom_stamps)
     {
         $this->container['max_number_of_custom_stamps'] = $max_number_of_custom_stamps;
+
+        return $this;
+    }
+
+    /**
+     * Gets merge_mixed_mode_results
+     *
+     * @return ?string
+     */
+    public function getMergeMixedModeResults()
+    {
+        return $this->container['merge_mixed_mode_results'];
+    }
+
+    /**
+     * Sets merge_mixed_mode_results
+     *
+     * @param ?string $merge_mixed_mode_results 
+     *
+     * @return $this
+     */
+    public function setMergeMixedModeResults($merge_mixed_mode_results)
+    {
+        $this->container['merge_mixed_mode_results'] = $merge_mixed_mode_results;
+
+        return $this;
+    }
+
+    /**
+     * Gets merge_mixed_mode_results_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getMergeMixedModeResultsMetadata()
+    {
+        return $this->container['merge_mixed_mode_results_metadata'];
+    }
+
+    /**
+     * Sets merge_mixed_mode_results_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $merge_mixed_mode_results_metadata 
+     *
+     * @return $this
+     */
+    public function setMergeMixedModeResultsMetadata($merge_mixed_mode_results_metadata)
+    {
+        $this->container['merge_mixed_mode_results_metadata'] = $merge_mixed_mode_results_metadata;
 
         return $this;
     }
@@ -14284,7 +17038,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets mobile_session_timeout_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $mobile_session_timeout_metadata mobile_session_timeout_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $mobile_session_timeout_metadata Metadata that indicates whether the `mobileSessionTimeout` property is editable.
      *
      * @return $this
      */
@@ -14356,13 +17110,37 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets opt_in_mobile_signing_v02_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $opt_in_mobile_signing_v02_metadata opt_in_mobile_signing_v02_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $opt_in_mobile_signing_v02_metadata Metadata that indicates whether the `optInMobileSigningV02` property is editable.
      *
      * @return $this
      */
     public function setOptInMobileSigningV02Metadata($opt_in_mobile_signing_v02_metadata)
     {
         $this->container['opt_in_mobile_signing_v02_metadata'] = $opt_in_mobile_signing_v02_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets opt_in_universal_signatures
+     *
+     * @return ?string
+     */
+    public function getOptInUniversalSignatures()
+    {
+        return $this->container['opt_in_universal_signatures'];
+    }
+
+    /**
+     * Sets opt_in_universal_signatures
+     *
+     * @param ?string $opt_in_universal_signatures 
+     *
+     * @return $this
+     */
+    public function setOptInUniversalSignatures($opt_in_universal_signatures)
+    {
+        $this->container['opt_in_universal_signatures'] = $opt_in_universal_signatures;
 
         return $this;
     }
@@ -14404,7 +17182,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets opt_out_auto_nav_text_and_tab_color_updates_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $opt_out_auto_nav_text_and_tab_color_updates_metadata opt_out_auto_nav_text_and_tab_color_updates_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $opt_out_auto_nav_text_and_tab_color_updates_metadata Metadata that indicates whether the `optOutAutoNavTextAndTabColorUpdates` property is editable.
      *
      * @return $this
      */
@@ -14452,13 +17230,157 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets opt_out_new_platform_seal_platform_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $opt_out_new_platform_seal_platform_metadata opt_out_new_platform_seal_platform_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $opt_out_new_platform_seal_platform_metadata Metadata that indicates whether the `optOutNewPlatformSealPlatform` property is editable.
      *
      * @return $this
      */
     public function setOptOutNewPlatformSealPlatformMetadata($opt_out_new_platform_seal_platform_metadata)
     {
         $this->container['opt_out_new_platform_seal_platform_metadata'] = $opt_out_new_platform_seal_platform_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets pdf_max_chunked_upload_part_size
+     *
+     * @return ?string
+     */
+    public function getPdfMaxChunkedUploadPartSize()
+    {
+        return $this->container['pdf_max_chunked_upload_part_size'];
+    }
+
+    /**
+     * Sets pdf_max_chunked_upload_part_size
+     *
+     * @param ?string $pdf_max_chunked_upload_part_size 
+     *
+     * @return $this
+     */
+    public function setPdfMaxChunkedUploadPartSize($pdf_max_chunked_upload_part_size)
+    {
+        $this->container['pdf_max_chunked_upload_part_size'] = $pdf_max_chunked_upload_part_size;
+
+        return $this;
+    }
+
+    /**
+     * Gets pdf_max_chunked_upload_part_size_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getPdfMaxChunkedUploadPartSizeMetadata()
+    {
+        return $this->container['pdf_max_chunked_upload_part_size_metadata'];
+    }
+
+    /**
+     * Sets pdf_max_chunked_upload_part_size_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $pdf_max_chunked_upload_part_size_metadata 
+     *
+     * @return $this
+     */
+    public function setPdfMaxChunkedUploadPartSizeMetadata($pdf_max_chunked_upload_part_size_metadata)
+    {
+        $this->container['pdf_max_chunked_upload_part_size_metadata'] = $pdf_max_chunked_upload_part_size_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets pdf_max_chunked_upload_total_size
+     *
+     * @return ?string
+     */
+    public function getPdfMaxChunkedUploadTotalSize()
+    {
+        return $this->container['pdf_max_chunked_upload_total_size'];
+    }
+
+    /**
+     * Sets pdf_max_chunked_upload_total_size
+     *
+     * @param ?string $pdf_max_chunked_upload_total_size 
+     *
+     * @return $this
+     */
+    public function setPdfMaxChunkedUploadTotalSize($pdf_max_chunked_upload_total_size)
+    {
+        $this->container['pdf_max_chunked_upload_total_size'] = $pdf_max_chunked_upload_total_size;
+
+        return $this;
+    }
+
+    /**
+     * Gets pdf_max_chunked_upload_total_size_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getPdfMaxChunkedUploadTotalSizeMetadata()
+    {
+        return $this->container['pdf_max_chunked_upload_total_size_metadata'];
+    }
+
+    /**
+     * Sets pdf_max_chunked_upload_total_size_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $pdf_max_chunked_upload_total_size_metadata 
+     *
+     * @return $this
+     */
+    public function setPdfMaxChunkedUploadTotalSizeMetadata($pdf_max_chunked_upload_total_size_metadata)
+    {
+        $this->container['pdf_max_chunked_upload_total_size_metadata'] = $pdf_max_chunked_upload_total_size_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets pdf_max_individual_upload_size
+     *
+     * @return ?string
+     */
+    public function getPdfMaxIndividualUploadSize()
+    {
+        return $this->container['pdf_max_individual_upload_size'];
+    }
+
+    /**
+     * Sets pdf_max_individual_upload_size
+     *
+     * @param ?string $pdf_max_individual_upload_size 
+     *
+     * @return $this
+     */
+    public function setPdfMaxIndividualUploadSize($pdf_max_individual_upload_size)
+    {
+        $this->container['pdf_max_individual_upload_size'] = $pdf_max_individual_upload_size;
+
+        return $this;
+    }
+
+    /**
+     * Gets pdf_max_individual_upload_size_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getPdfMaxIndividualUploadSizeMetadata()
+    {
+        return $this->container['pdf_max_individual_upload_size_metadata'];
+    }
+
+    /**
+     * Sets pdf_max_individual_upload_size_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $pdf_max_individual_upload_size_metadata 
+     *
+     * @return $this
+     */
+    public function setPdfMaxIndividualUploadSizeMetadata($pdf_max_individual_upload_size_metadata)
+    {
+        $this->container['pdf_max_individual_upload_size_metadata'] = $pdf_max_individual_upload_size_metadata;
 
         return $this;
     }
@@ -14500,7 +17422,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets phone_auth_recipient_may_provide_phone_number_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $phone_auth_recipient_may_provide_phone_number_metadata phone_auth_recipient_may_provide_phone_number_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $phone_auth_recipient_may_provide_phone_number_metadata Metadata that indicates whether the `phoneAuthRecipientMayProvidePhoneNumber` property is editable.
      *
      * @return $this
      */
@@ -14548,7 +17470,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets pki_sign_downloaded_pdf_docs_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $pki_sign_downloaded_pdf_docs_metadata pki_sign_downloaded_pdf_docs_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $pki_sign_downloaded_pdf_docs_metadata Metadata that indicates whether the `pkiSignDownloadedPDFDocs` property is editable.
      *
      * @return $this
      */
@@ -14596,7 +17518,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets read_only_mode_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $read_only_mode_metadata read_only_mode_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $read_only_mode_metadata 
      *
      * @return $this
      */
@@ -14644,7 +17566,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets recipients_can_sign_offline_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $recipients_can_sign_offline_metadata recipients_can_sign_offline_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $recipients_can_sign_offline_metadata Metadata that indicates whether the `recipientsCanSignOffline` property is editable.
      *
      * @return $this
      */
@@ -14692,7 +17614,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets recipient_signing_auto_navigation_control_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $recipient_signing_auto_navigation_control_metadata recipient_signing_auto_navigation_control_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $recipient_signing_auto_navigation_control_metadata Metadata that indicates whether the `recipientSigningAutoNavigationControl` property is editable.
      *
      * @return $this
      */
@@ -14740,7 +17662,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets require21_cf_rpt11_compliance_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $require21_cf_rpt11_compliance_metadata require21_cf_rpt11_compliance_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $require21_cf_rpt11_compliance_metadata Metadata that indicates whether the `require21CFRpt11Compliance` property is editable.
      *
      * @return $this
      */
@@ -14788,7 +17710,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets require_decline_reason_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $require_decline_reason_metadata require_decline_reason_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $require_decline_reason_metadata Metadata that indicates whether the `requireDeclineReason` property is editable.
      *
      * @return $this
      */
@@ -14836,7 +17758,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets require_external_user_management_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $require_external_user_management_metadata require_external_user_management_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $require_external_user_management_metadata Metadata that indicates whether the `requireExternalUserManagement` property is editable.
      *
      * @return $this
      */
@@ -14884,7 +17806,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets require_signer_certificate_type_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $require_signer_certificate_type_metadata require_signer_certificate_type_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $require_signer_certificate_type_metadata Metadata that indicates whether the `requireSignerCertificateType` property is editable.
      *
      * @return $this
      */
@@ -14992,6 +17914,30 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets sbs_transaction_level
+     *
+     * @return ?string
+     */
+    public function getSbsTransactionLevel()
+    {
+        return $this->container['sbs_transaction_level'];
+    }
+
+    /**
+     * Sets sbs_transaction_level
+     *
+     * @param ?string $sbs_transaction_level 
+     *
+     * @return $this
+     */
+    public function setSbsTransactionLevel($sbs_transaction_level)
+    {
+        $this->container['sbs_transaction_level'] = $sbs_transaction_level;
+
+        return $this;
+    }
+
+    /**
      * Gets self_signed_recipient_email_document
      *
      * @return ?string
@@ -15028,7 +17974,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets self_signed_recipient_email_document_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $self_signed_recipient_email_document_metadata self_signed_recipient_email_document_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $self_signed_recipient_email_document_metadata Metadata that indicates whether the `selfSignedRecipientEmailDocument` property is editable.
      *
      * @return $this
      */
@@ -15076,7 +18022,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets self_signed_recipient_email_document_user_override_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $self_signed_recipient_email_document_user_override_metadata self_signed_recipient_email_document_user_override_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $self_signed_recipient_email_document_user_override_metadata Metadata that indicates whether the `selfSignedRecipientEmailDocumentUserOverride` property is editable.
      *
      * @return $this
      */
@@ -15124,7 +18070,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets sender_can_sign_in_each_location_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $sender_can_sign_in_each_location_metadata sender_can_sign_in_each_location_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $sender_can_sign_in_each_location_metadata Metadata that indicates whether the `senderCanSignInEachLocation` property is editable.
      *
      * @return $this
      */
@@ -15172,7 +18118,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets sender_must_authenticate_signing_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $sender_must_authenticate_signing_metadata sender_must_authenticate_signing_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $sender_must_authenticate_signing_metadata Metadata that indicates whether the `senderMustAuthenticateSigning` property is editable.
      *
      * @return $this
      */
@@ -15220,7 +18166,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets sending_tags_font_color_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $sending_tags_font_color_metadata sending_tags_font_color_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $sending_tags_font_color_metadata Metadata that indicates whether the `sendingTagsFontColor` property is editable.
      *
      * @return $this
      */
@@ -15268,7 +18214,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets sending_tags_font_name_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $sending_tags_font_name_metadata sending_tags_font_name_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $sending_tags_font_name_metadata Metadata that indicates whether the `sendingTagsFontName` property is editable.
      *
      * @return $this
      */
@@ -15316,7 +18262,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets sending_tags_font_size_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $sending_tags_font_size_metadata sending_tags_font_size_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $sending_tags_font_size_metadata Metadata that indicates whether the `sendingTagsFontSize` property is editable.
      *
      * @return $this
      */
@@ -15364,7 +18310,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets send_lockout_recipient_notification_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $send_lockout_recipient_notification_metadata send_lockout_recipient_notification_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $send_lockout_recipient_notification_metadata 
      *
      * @return $this
      */
@@ -15412,7 +18358,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets send_to_certified_delivery_enabled_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $send_to_certified_delivery_enabled_metadata send_to_certified_delivery_enabled_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $send_to_certified_delivery_enabled_metadata Metadata that indicates whether the `sendToCertifiedDeliveryEnabled` property is editable.
      *
      * @return $this
      */
@@ -15460,7 +18406,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets session_timeout_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $session_timeout_metadata session_timeout_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $session_timeout_metadata Metadata that indicates whether the `sessionTimeout` property is editable.
      *
      * @return $this
      */
@@ -15508,7 +18454,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets set_recip_email_lang_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $set_recip_email_lang_metadata set_recip_email_lang_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $set_recip_email_lang_metadata Metadata that indicates whether the `setRecipEmailLang` property is editable.
      *
      * @return $this
      */
@@ -15556,7 +18502,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets set_recip_sign_lang_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $set_recip_sign_lang_metadata set_recip_sign_lang_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $set_recip_sign_lang_metadata Metadata that indicates whether the `setRecipSignLang` property is editable.
      *
      * @return $this
      */
@@ -15604,7 +18550,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets shared_template_folders_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $shared_template_folders_metadata shared_template_folders_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $shared_template_folders_metadata Metadata that indicates whether the `sharedTemplateFolders` property is editable.
      *
      * @return $this
      */
@@ -15652,7 +18598,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets show_complete_dialog_in_embedded_session_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $show_complete_dialog_in_embedded_session_metadata show_complete_dialog_in_embedded_session_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $show_complete_dialog_in_embedded_session_metadata Metadata that indicates whether the `showCompleteDialogInEmbeddedSession` property is editable.
      *
      * @return $this
      */
@@ -15700,7 +18646,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets show_conditional_routing_on_send_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $show_conditional_routing_on_send_metadata show_conditional_routing_on_send_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $show_conditional_routing_on_send_metadata 
      *
      * @return $this
      */
@@ -15748,7 +18694,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets show_initial_conditional_fields_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $show_initial_conditional_fields_metadata show_initial_conditional_fields_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $show_initial_conditional_fields_metadata Metadata that indicates whether the `showInitialConditionalFields` property is editable.
      *
      * @return $this
      */
@@ -15796,7 +18742,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets show_localized_watermarks_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $show_localized_watermarks_metadata show_localized_watermarks_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $show_localized_watermarks_metadata Metadata that indicates whether the `showLocalizedWatermarks` property is editable.
      *
      * @return $this
      */
@@ -15844,7 +18790,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets show_masked_fields_when_downloading_document_as_sender_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $show_masked_fields_when_downloading_document_as_sender_metadata show_masked_fields_when_downloading_document_as_sender_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $show_masked_fields_when_downloading_document_as_sender_metadata 
      *
      * @return $this
      */
@@ -15892,7 +18838,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets show_tutorials_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $show_tutorials_metadata show_tutorials_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $show_tutorials_metadata Metadata that indicates whether the `showTutorials` property is editable.
      *
      * @return $this
      */
@@ -15940,7 +18886,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets signature_providers_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $signature_providers_metadata signature_providers_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $signature_providers_metadata Metadata that indicates whether the `signatureProviders` property is editable.
      *
      * @return $this
      */
@@ -15988,7 +18934,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets sign_date_format_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $sign_date_format_metadata sign_date_format_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $sign_date_format_metadata Metadata that indicates whether the `signDateFormat` property is editable.
      *
      * @return $this
      */
@@ -16036,7 +18982,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets sign_date_time_account_language_override_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $sign_date_time_account_language_override_metadata sign_date_time_account_language_override_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $sign_date_time_account_language_override_metadata 
      *
      * @return $this
      */
@@ -16084,7 +19030,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets sign_date_time_account_timezone_override_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $sign_date_time_account_timezone_override_metadata sign_date_time_account_timezone_override_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $sign_date_time_account_timezone_override_metadata 
      *
      * @return $this
      */
@@ -16132,7 +19078,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets signer_attach_certificate_to_envelope_pdf_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_attach_certificate_to_envelope_pdf_metadata signer_attach_certificate_to_envelope_pdf_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_attach_certificate_to_envelope_pdf_metadata Metadata that indicates whether the `signerAttachCertificateToEnvelopePDF` property is editable.
      *
      * @return $this
      */
@@ -16180,7 +19126,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets signer_attach_concat_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_attach_concat_metadata signer_attach_concat_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_attach_concat_metadata Metadata that indicates whether the `signerAttachConcat` property is editable.
      *
      * @return $this
      */
@@ -16228,7 +19174,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets signer_can_create_account_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_can_create_account_metadata signer_can_create_account_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_can_create_account_metadata Metadata that indicates whether the `signerCanCreateAccount` property is editable.
      *
      * @return $this
      */
@@ -16276,7 +19222,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets signer_can_sign_on_mobile_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_can_sign_on_mobile_metadata signer_can_sign_on_mobile_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_can_sign_on_mobile_metadata Metadata that indicates whether the `signerCanSignOnMobile` property is editable.
      *
      * @return $this
      */
@@ -16324,7 +19270,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets signer_in_session_use_envelope_complete_email_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_in_session_use_envelope_complete_email_metadata signer_in_session_use_envelope_complete_email_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_in_session_use_envelope_complete_email_metadata Metadata that indicates whether the `signerInSessionUseEnvelopeCompleteEmail` property is editable.
      *
      * @return $this
      */
@@ -16372,7 +19318,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets signer_login_requirements_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_login_requirements_metadata signer_login_requirements_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_login_requirements_metadata Metadata that indicates whether the `signerLoginRequirements` property is editable.
      *
      * @return $this
      */
@@ -16420,7 +19366,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets signer_must_have_account_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_must_have_account_metadata signer_must_have_account_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_must_have_account_metadata Metadata that indicates whether the `signerMustHaveAccount` property is editable.
      *
      * @return $this
      */
@@ -16468,7 +19414,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets signer_must_login_to_sign_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_must_login_to_sign_metadata signer_must_login_to_sign_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_must_login_to_sign_metadata Metadata that indicates whether the `signerMustLoginToSign` property is editable.
      *
      * @return $this
      */
@@ -16516,7 +19462,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets signer_show_secure_field_initial_values_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_show_secure_field_initial_values_metadata signer_show_secure_field_initial_values_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $signer_show_secure_field_initial_values_metadata Metadata that indicates whether the `signerShowSecureFieldInitialValues` property is editable.
      *
      * @return $this
      */
@@ -16564,7 +19510,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets signing_session_timeout_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $signing_session_timeout_metadata signing_session_timeout_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $signing_session_timeout_metadata Metadata that indicates whether the `signingSessionTimeout` property is editable.
      *
      * @return $this
      */
@@ -16612,7 +19558,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets signing_ui_version_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $signing_ui_version_metadata signing_ui_version_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $signing_ui_version_metadata Reserved for DocuSign.
      *
      * @return $this
      */
@@ -16660,7 +19606,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets sign_time_format_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $sign_time_format_metadata sign_time_format_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $sign_time_format_metadata Metadata that indicates whether the `signTimeFormat` property is editable.
      *
      * @return $this
      */
@@ -16708,7 +19654,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets sign_time_show_am_pm_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $sign_time_show_am_pm_metadata sign_time_show_am_pm_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $sign_time_show_am_pm_metadata Metadata that indicates whether the `signTimeShowAmPm` property is editable.
      *
      * @return $this
      */
@@ -16756,7 +19702,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets simplified_sending_enabled_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $simplified_sending_enabled_metadata simplified_sending_enabled_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $simplified_sending_enabled_metadata Metadata that indicates whether the `simplifiedSendingEnabled` property is editable.
      *
      * @return $this
      */
@@ -16804,7 +19750,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets single_sign_on_enabled_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $single_sign_on_enabled_metadata single_sign_on_enabled_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $single_sign_on_enabled_metadata Metadata that indicates whether the `singleSignOnEnabled` property is editable.
      *
      * @return $this
      */
@@ -16852,7 +19798,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets skip_auth_completed_envelopes_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $skip_auth_completed_envelopes_metadata skip_auth_completed_envelopes_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $skip_auth_completed_envelopes_metadata Metadata that indicates whether the `skipAuthCompletedEnvelopes` property is editable.
      *
      * @return $this
      */
@@ -16900,7 +19846,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets social_id_recip_auth_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $social_id_recip_auth_metadata social_id_recip_auth_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $social_id_recip_auth_metadata Metadata that indicates whether the `socialIdRecipAuth` property is editable.
      *
      * @return $this
      */
@@ -16948,7 +19894,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets specify_document_visibility_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $specify_document_visibility_metadata specify_document_visibility_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $specify_document_visibility_metadata Metadata that indicates whether the `specifyDocumentVisibility` property is editable.
      *
      * @return $this
      */
@@ -16996,7 +19942,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets start_in_advanced_correct_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $start_in_advanced_correct_metadata start_in_advanced_correct_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $start_in_advanced_correct_metadata Metadata that indicates whether the `startInAdvancedCorrect` property is editable.
      *
      * @return $this
      */
@@ -17044,7 +19990,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets supplemental_documents_must_accept_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $supplemental_documents_must_accept_metadata supplemental_documents_must_accept_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $supplemental_documents_must_accept_metadata Metadata that indicates whether the `supplementalDocumentsMustAccept` property is editable.
      *
      * @return $this
      */
@@ -17092,7 +20038,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets supplemental_documents_must_read_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $supplemental_documents_must_read_metadata supplemental_documents_must_read_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $supplemental_documents_must_read_metadata Metadata that indicates whether the `supplementalDocumentsMustRead` property is editable.
      *
      * @return $this
      */
@@ -17140,7 +20086,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets supplemental_documents_must_view_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $supplemental_documents_must_view_metadata supplemental_documents_must_view_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $supplemental_documents_must_view_metadata Metadata that indicates whether the `supplementalDocumentsMustView` property is editable.
      *
      * @return $this
      */
@@ -17188,7 +20134,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets suppress_certificate_enforcement_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $suppress_certificate_enforcement_metadata suppress_certificate_enforcement_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $suppress_certificate_enforcement_metadata Metadata that indicates whether the `suppressCertificateEnforcement` property is editable.
      *
      * @return $this
      */
@@ -17212,7 +20158,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets tab_account_settings
      *
-     * @param \DocuSign\eSign\Model\TabAccountSettings $tab_account_settings tab_account_settings
+     * @param \DocuSign\eSign\Model\TabAccountSettings $tab_account_settings Account-wide tab settings.
      *
      * @return $this
      */
@@ -17260,7 +20206,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets timezone_offset_api_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $timezone_offset_api_metadata timezone_offset_api_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $timezone_offset_api_metadata Metadata that indicates whether the `timezoneOffsetAPI` property is editable.
      *
      * @return $this
      */
@@ -17308,7 +20254,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets timezone_offset_ui_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $timezone_offset_ui_metadata timezone_offset_ui_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $timezone_offset_ui_metadata Metadata that indicates whether the `timezoneOffsetUI` property is editable.
      *
      * @return $this
      */
@@ -17380,7 +20326,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets use_account_level_email_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $use_account_level_email_metadata use_account_level_email_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $use_account_level_email_metadata Metadata that indicates whether the `useAccountLevelEmail` property is editable.
      *
      * @return $this
      */
@@ -17428,7 +20374,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets use_consumer_disclosure_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $use_consumer_disclosure_metadata use_consumer_disclosure_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $use_consumer_disclosure_metadata Metadata that indicates whether the `useConsumerDisclosure` property is editable.
      *
      * @return $this
      */
@@ -17476,7 +20422,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets use_consumer_disclosure_within_account_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $use_consumer_disclosure_within_account_metadata use_consumer_disclosure_within_account_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $use_consumer_disclosure_within_account_metadata Metadata that indicates whether the `useConsumerDisclosureWithinAccount` property is editable.
      *
      * @return $this
      */
@@ -17524,7 +20470,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets use_derived_keys_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $use_derived_keys_metadata use_derived_keys_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $use_derived_keys_metadata Metadata that indicates whether the `useDerivedKeys` property is editable.
      *
      * @return $this
      */
@@ -17572,13 +20518,61 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets use_docu_sign_express_signer_certificate_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $use_docu_sign_express_signer_certificate_metadata use_docu_sign_express_signer_certificate_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $use_docu_sign_express_signer_certificate_metadata Metadata that indicates whether the `useDocuSignExpressSignerCertificate` property is editable.
      *
      * @return $this
      */
     public function setUseDocuSignExpressSignerCertificateMetadata($use_docu_sign_express_signer_certificate_metadata)
     {
         $this->container['use_docu_sign_express_signer_certificate_metadata'] = $use_docu_sign_express_signer_certificate_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets use_envelope_search_mixed_mode
+     *
+     * @return ?string
+     */
+    public function getUseEnvelopeSearchMixedMode()
+    {
+        return $this->container['use_envelope_search_mixed_mode'];
+    }
+
+    /**
+     * Sets use_envelope_search_mixed_mode
+     *
+     * @param ?string $use_envelope_search_mixed_mode 
+     *
+     * @return $this
+     */
+    public function setUseEnvelopeSearchMixedMode($use_envelope_search_mixed_mode)
+    {
+        $this->container['use_envelope_search_mixed_mode'] = $use_envelope_search_mixed_mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets use_envelope_search_mixed_mode_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getUseEnvelopeSearchMixedModeMetadata()
+    {
+        return $this->container['use_envelope_search_mixed_mode_metadata'];
+    }
+
+    /**
+     * Sets use_envelope_search_mixed_mode_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $use_envelope_search_mixed_mode_metadata 
+     *
+     * @return $this
+     */
+    public function setUseEnvelopeSearchMixedModeMetadata($use_envelope_search_mixed_mode_metadata)
+    {
+        $this->container['use_envelope_search_mixed_mode_metadata'] = $use_envelope_search_mixed_mode_metadata;
 
         return $this;
     }
@@ -17620,7 +20614,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets use_multi_app_groups_data_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $use_multi_app_groups_data_metadata use_multi_app_groups_data_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $use_multi_app_groups_data_metadata 
      *
      * @return $this
      */
@@ -17668,13 +20662,109 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets use_new_blob_for_pdf_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $use_new_blob_for_pdf_metadata use_new_blob_for_pdf_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $use_new_blob_for_pdf_metadata Metadata that indicates whether the `useNewBlobForPdf` property is editable.
      *
      * @return $this
      */
     public function setUseNewBlobForPdfMetadata($use_new_blob_for_pdf_metadata)
     {
         $this->container['use_new_blob_for_pdf_metadata'] = $use_new_blob_for_pdf_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets use_new_envelope_search
+     *
+     * @return ?string
+     */
+    public function getUseNewEnvelopeSearch()
+    {
+        return $this->container['use_new_envelope_search'];
+    }
+
+    /**
+     * Sets use_new_envelope_search
+     *
+     * @param ?string $use_new_envelope_search 
+     *
+     * @return $this
+     */
+    public function setUseNewEnvelopeSearch($use_new_envelope_search)
+    {
+        $this->container['use_new_envelope_search'] = $use_new_envelope_search;
+
+        return $this;
+    }
+
+    /**
+     * Gets use_new_envelope_search_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getUseNewEnvelopeSearchMetadata()
+    {
+        return $this->container['use_new_envelope_search_metadata'];
+    }
+
+    /**
+     * Sets use_new_envelope_search_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $use_new_envelope_search_metadata 
+     *
+     * @return $this
+     */
+    public function setUseNewEnvelopeSearchMetadata($use_new_envelope_search_metadata)
+    {
+        $this->container['use_new_envelope_search_metadata'] = $use_new_envelope_search_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets use_new_envelope_search_only_when_searching_after_date
+     *
+     * @return ?string
+     */
+    public function getUseNewEnvelopeSearchOnlyWhenSearchingAfterDate()
+    {
+        return $this->container['use_new_envelope_search_only_when_searching_after_date'];
+    }
+
+    /**
+     * Sets use_new_envelope_search_only_when_searching_after_date
+     *
+     * @param ?string $use_new_envelope_search_only_when_searching_after_date 
+     *
+     * @return $this
+     */
+    public function setUseNewEnvelopeSearchOnlyWhenSearchingAfterDate($use_new_envelope_search_only_when_searching_after_date)
+    {
+        $this->container['use_new_envelope_search_only_when_searching_after_date'] = $use_new_envelope_search_only_when_searching_after_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets use_new_envelope_search_only_when_searching_after_date_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getUseNewEnvelopeSearchOnlyWhenSearchingAfterDateMetadata()
+    {
+        return $this->container['use_new_envelope_search_only_when_searching_after_date_metadata'];
+    }
+
+    /**
+     * Sets use_new_envelope_search_only_when_searching_after_date_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $use_new_envelope_search_only_when_searching_after_date_metadata 
+     *
+     * @return $this
+     */
+    public function setUseNewEnvelopeSearchOnlyWhenSearchingAfterDateMetadata($use_new_envelope_search_only_when_searching_after_date_metadata)
+    {
+        $this->container['use_new_envelope_search_only_when_searching_after_date_metadata'] = $use_new_envelope_search_only_when_searching_after_date_metadata;
 
         return $this;
     }
@@ -17716,7 +20806,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets use_safe_signer_certificates_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $use_safe_signer_certificates_metadata use_safe_signer_certificates_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $use_safe_signer_certificates_metadata Metadata that indicates whether the `useSAFESignerCertificates` property is editable.
      *
      * @return $this
      */
@@ -17764,7 +20854,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets uses_api_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $uses_api_metadata uses_api_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $uses_api_metadata Metadata that indicates whether the `usesAPI` property is editable.
      *
      * @return $this
      */
@@ -17812,7 +20902,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets use_signature_provider_platform_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $use_signature_provider_platform_metadata use_signature_provider_platform_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $use_signature_provider_platform_metadata Metadata that indicates whether the `useSignatureProviderPlatform` property is editable.
      *
      * @return $this
      */
@@ -17884,7 +20974,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets validations_allowed_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $validations_allowed_metadata validations_allowed_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $validations_allowed_metadata Metadata that indicates whether the `validationsAllowed` property is editable.
      *
      * @return $this
      */
@@ -17932,7 +21022,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets validations_brand_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $validations_brand_metadata validations_brand_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $validations_brand_metadata Metadata that indicates whether the `validationsBrand` property is editable.
      *
      * @return $this
      */
@@ -17980,7 +21070,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets validations_cadence_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $validations_cadence_metadata validations_cadence_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $validations_cadence_metadata Metadata that indicates whether the `validationsCadence` property is editable.
      *
      * @return $this
      */
@@ -18028,7 +21118,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets validations_enabled_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $validations_enabled_metadata validations_enabled_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $validations_enabled_metadata Metadata that indicates whether the `validationsEnabled` property is editable.
      *
      * @return $this
      */
@@ -18076,7 +21166,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets validations_report_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $validations_report_metadata validations_report_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $validations_report_metadata Metadata that indicates whether the `validationsReport` property is editable.
      *
      * @return $this
      */
@@ -18124,7 +21214,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets water_mark_enabled_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $water_mark_enabled_metadata water_mark_enabled_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $water_mark_enabled_metadata Metadata that indicates whether the `waterMarkEnabled` property is editable.
      *
      * @return $this
      */
@@ -18172,7 +21262,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets write_reminder_to_envelope_history_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $write_reminder_to_envelope_history_metadata write_reminder_to_envelope_history_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $write_reminder_to_envelope_history_metadata Metadata that indicates whether the `writeReminderToEnvelopeHistory` property is editable.
      *
      * @return $this
      */
@@ -18220,7 +21310,7 @@ class AccountSettingsInformation implements ModelInterface, ArrayAccess
     /**
      * Sets wurfl_min_allowable_screen_size_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $wurfl_min_allowable_screen_size_metadata wurfl_min_allowable_screen_size_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $wurfl_min_allowable_screen_size_metadata Metadata that indicates whether the `wurflMinAllowableScreenSize` property is editable.
      *
      * @return $this
      */

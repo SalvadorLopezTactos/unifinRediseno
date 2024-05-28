@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => '商談品目リストのダッシュ ボード',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => '商談品目レコードのダッシュ ボード',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => '商品タイプ',
     'LBL_ASSIGNED_TO_NAME' => 'アサイン先',
     'LBL_ASSIGNED_TO' => 'アサインされたユーザー名',
-    'LBL_ASSIGNED_TO_ID'=>'アサインされたユーザーID',
+    'LBL_ASSIGNED_TO_ID' => 'アサインされたユーザーID',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'アサインされたユーザー名',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'アサインされたユーザーID',
     'LBL_CAMPAIGN_ID' => 'キャンペーンID',
@@ -211,4 +211,5 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'トップ10の商談品目をバブルチャートで表示する',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => '私の商談品目',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "チームの商談品目",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '商談品目のタイムライン',
+];

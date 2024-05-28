@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kalendar',
     'LBL_MODULE_NAME_SINGULAR' => 'Kalendar',
     'LBL_MODULE_TITLE' => 'Kalendar',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Postavke',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Prikaži vremensko razdoblje u prikazu dana i tjedna:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Vrijeme početka:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Vrijeme završetka:',
+    'LBL_SETTINGS_TIME_STARTS' => 'Vrijeme početka:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Vrijeme završetka:',
     'LBL_SETTINGS_CALLS_SHOW' => 'Prikaži pozive:',
     'LBL_SETTINGS_TASKS_SHOW' => 'Prikaži zadatke:',
 
@@ -123,7 +123,7 @@ $mod_strings = array (
     'LBL_REPEAT_DOW' => 'Na',
     'LBL_REPEAT_UNTIL' => 'Ponavljaj do',
     'LBL_REPEAT_COUNT' => 'Broj ponavljanja',
-    'LBL_RECURRING_LIMIT_ERROR' => 'Ovaj se ponavljajući modul $moduleTitle ne može zakazati jer premašuje maksimalno dozvoljeno ograničenje ponavljanja od $.',
+    'LBL_RECURRING_LIMIT_ERROR' => 'Ovaj ponavljajući $moduleTitle nije moguće zakazati jer premašuje maksimalno dopušteno ponavljanje od $limit.',
 
     'LBL_EDIT_ALL_RECURRENCES' => 'Uredi sva ponavljanja',
     'LBL_REMOVE_ALL_RECURRENCES' => 'Izbriši sva ponavljanja',
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Izradi kalendar',
     'LNK_CALENDAR_LIST' => 'Prikaži kalendare',
     'LNK_CALENDAR_LEGACY' => 'Kalendar nasljeđa',
-    'LBL_IMPORT_CALENDAR'=> 'Uvezi kalendar',
+    'LBL_IMPORT_CALENDAR' => 'Uvezi kalendar',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Vremenska oznaka događaja',
     'LBL_INSERTFIELD' => 'Umetni polje',
     'LBL_EVENT_START_ERROR' => 'Odaberite početak',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Odaberite kalendar',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Nije uspjelo spremanje kalendara.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Ned.',
             'Pon.',
             'Uto.',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Čet.',
             'Pet.',
             'Sub.',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Nedjelja',
             'Ponedjeljak',
             'Utorak',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Četvrtak',
             'Petak',
             'Subota',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Sij.',
             'Velj.',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Lis.',
             'Stu.',
             'Pro.',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Siječanj',
             'Veljača',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Listopad',
             'Studeni',
             'Prosinac',
-        ),
-);
+        ],
+];

@@ -11,22 +11,22 @@
  */
 
 $module_name = 'Leads';
-$viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
+$viewdefs[$module_name]['base']['menu']['quickcreate'] = [
     'layout' => 'create',
     'visible' => true,
     'order' => 4,
-    'related' => array(
-        array(
+    'related' => [
+        [
             'module' => 'Accounts',
             'link' => 'leads',
-        ),
-        array(
+        ],
+        [
             'module' => 'Contacts',
             'link' => 'leads',
-        ),
-        array(
+        ],
+        [
             'module' => 'Opportunities',
             'link' => 'leads',
-        ),
-    ),
-);
+        ],
+    ],
+];

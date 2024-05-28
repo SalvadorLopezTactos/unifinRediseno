@@ -10,33 +10,33 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Teams']['base']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Teams']['base']['view']['list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'label' => 'LBL_PRIMARY_TEAM_NAME',
                     'enabled' => true,
                     'default' => true,
                     'sortable' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'description',
                     'label' => 'LBL_DESCRIPTION',
                     'sortable' => false,
-                ),
-                array(
+                ],
+                [
                     'name' => 'private',
                     'label' => 'LBL_PRIVATE',
                     'enabled' => true,
                     'default' => true,
                     'sortable' => true,
-                ),
-            ),
+                ],
+            ],
 
-        ),
-    ),
-);
+        ],
+    ],
+];

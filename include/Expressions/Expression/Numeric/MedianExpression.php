@@ -22,7 +22,7 @@ class MedianExpression extends NumericExpression
      */
     public function evaluate()
     {
-        $values = array();
+        $values = [];
 
         foreach ($this->getParameters() as $expr) {
             $values[] = $expr->evaluate();
@@ -65,7 +65,7 @@ EOQ;
      */
     public static function getOperationName()
     {
-        return "median";
+        return 'median';
     }
 
     /**

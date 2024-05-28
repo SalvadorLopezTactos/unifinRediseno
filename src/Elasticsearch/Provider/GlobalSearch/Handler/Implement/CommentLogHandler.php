@@ -62,22 +62,22 @@ class CommentLogHandler extends AbstractHandler implements
      * Weighted boost definition
      * @var array
      */
-    protected $weightedBoost = array(
+    protected $weightedBoost = [
         'gs_commentlog_wildcard_commentlog_entry' => 0.45,
-    );
+    ];
 
     /**
      * Highlighter field definitions
      * @var array
      */
-    protected $highlighterFields = array(
-        '*.gs_commentlog' => array(
+    protected $highlighterFields = [
+        '*.gs_commentlog' => [
             'number_of_fragments' => 0,
-        ),
-        '*.gs_commentlog_wildcard' => array(
+        ],
+        '*.gs_commentlog_wildcard' => [
             'number_of_fragments' => 0,
-        ),
-    );
+        ],
+    ];
 
     /**
      * Field name to use for commentlog search
@@ -92,17 +92,17 @@ class CommentLogHandler extends AbstractHandler implements
     {
         parent::setProvider($provider);
 
-        $provider->addSupportedTypes(array(self::COMMENTLOG_FIELD));
+        $provider->addSupportedTypes([self::COMMENTLOG_FIELD]);
         $provider->addHighlighterFields($this->highlighterFields);
         $provider->addWeightedBoosts($this->weightedBoost);
 
         // As we are searching against commentlog_search field, we want to remap the
         // highlights from that field back to the original commentlog field.
-        $provider->addFieldRemap(array($this->searchField => self::COMMENTLOG_FIELD));
+        $provider->addFieldRemap([$this->searchField => self::COMMENTLOG_FIELD]);
 
         // We don't want to add the commentlog field to the queuemanager query
         // because we will populate the commentlogs seperately.
-        $provider->addSkipTypesFromQueue(array(self::COMMENTLOG_FIELD));
+        $provider->addSkipTypesFromQueue([self::COMMENTLOG_FIELD]);
     }
 
 
@@ -145,7 +145,7 @@ class CommentLogHandler extends AbstractHandler implements
             return;
         }
 
-        $commentlogFields = array('commentlog_entry');
+        $commentlogFields = ['commentlog_entry'];
 
         foreach ($commentlogFields as $commentlogField) {
             foreach ($this->multiFieldDefs as $multiField => $mdefs) {
@@ -161,7 +161,7 @@ class CommentLogHandler extends AbstractHandler implements
      */
     public function getSupportedTypes()
     {
-        return array(self::COMMENTLOG_FIELD);
+        return [self::COMMENTLOG_FIELD];
     }
 
     /**
@@ -186,7 +186,7 @@ class CommentLogHandler extends AbstractHandler implements
         }
 
         $commentlog_beans = $bean->commentlog_link->getBeans();
-        $commentlogs = array();
+        $commentlogs = [];
 
         foreach ($commentlog_beans as $id => $commentlog_bean) {
             $commentlogs[] = $commentlog_bean->entry;
@@ -196,9 +196,9 @@ class CommentLogHandler extends AbstractHandler implements
         $document->removeDataField(self::COMMENTLOG_FIELD);
 
         // Format data for commentlog search fields
-        $value = array(
-            'commentlog_entry' => array(),
-        );
+        $value = [
+            'commentlog_entry' => [],
+        ];
 
         foreach ($commentlogs as $commentlog) {
             $value['commentlog_entry'][] = $commentlog;

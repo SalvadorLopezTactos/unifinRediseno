@@ -26,11 +26,11 @@ class InputParameters extends Constraint
     public const ERROR_GET = 2;
     public const ERROR_POST = 3;
 
-    protected static $errorNames = array(
+    protected static $errorNames = [
         self::ERROR_REQUEST => 'ERROR_REQUEST',
         self::ERROR_GET => 'ERROR_GET',
         self::ERROR_POST => 'ERROR_POST',
-    );
+    ];
 
     public $msgGeneric = 'Generic input violation for input parameter [%type%]';
     public $msgNullBytes = 'Null bytes violation for input parameter [%type%]';

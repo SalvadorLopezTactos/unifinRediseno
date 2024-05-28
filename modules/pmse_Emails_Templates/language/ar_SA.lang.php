@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'النص',
     'LBL_BASE_MODULE' => 'الوحدة المستهدفة',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'فشل إنشاء قالب البريد الإلكتروني للعملية من ملف',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'قالب البريد الإلكتروني هذا يستخدم حاليا في "تعريف العملية". هل ما تزال تريد تعديل "قالب البريد الإلكتروني" هذا؟',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "لا يمكنك حذف \"قالب البريد الإلكتروني\" هذا لأنه يجري استخدامه حاليًا في \"تعريف العملية\".",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'لا يمكنك حذف "قالب البريد الإلكتروني" هذا لأنه يجري استخدامه حاليًا في "تعريف العملية".',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'محدد الحقول',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'تحديد',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'نوع قيمة الحقل',
-);
+];

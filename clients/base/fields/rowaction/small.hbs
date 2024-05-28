@@ -17,13 +17,13 @@
 {{/if}}
 {{#if def.tooltip}}
     rel="tooltip"
-    data-placement="bottom"
+    data-bs-placement="bottom"
     title="{{str def.tooltip module}}"
     aria-label="{{str def.tooltip module}}"
 {{else}}
     {{#if label}}
         rel="tooltip"
-        data-placement="bottom"
+        data-bs-placement="bottom"
         title="{{str label module}}"
         aria-label="{{str label module}}"
     {{else}}

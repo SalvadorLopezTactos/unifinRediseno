@@ -48,9 +48,9 @@ class AdministrationViewCloudinsights extends SugarView
         $this->ss->assign('APP', $GLOBALS['app_strings']);
 
         echo getClassicModuleTitle(
-            "Administration",
+            'Administration',
             [
-                "<a href='#Administration'>" . translate('LBL_MODULE_NAME') . "</a>",
+                "<a href='#Administration'>" . translate('LBL_MODULE_NAME') . '</a>',
                 translate('LBL_VIEW_CLOUD_INSIGHTS'),
             ],
             false

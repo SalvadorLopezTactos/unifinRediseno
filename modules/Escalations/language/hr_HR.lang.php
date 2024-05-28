@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'Prikaži eskalacije',
     'LBL_LIST_RELATED_TO_ID' => 'Povezano s ID-jem',
     'LNK_IMPORT_ESCALATIONS' => 'Uvezi eskalacije',
-    
+
     'LBL_LIST_SUBJECT' => 'Predmet',
     'LBL_LIST_NUMBER' => 'Br.',
     'LBL_LIST_RELATED_TO_TYPE' => 'Povezana vrsta',

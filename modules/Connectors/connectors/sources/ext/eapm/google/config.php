@@ -11,15 +11,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$config = array (
-  'name' => 'Google',
-  'eapm' => array(
-    'enabled' => true,
-    'only' => true,
-  ),
-  'order' => 12,
-  'properties' => array (
-    'oauth2_client_id' => '',
-    'oauth2_client_secret' => '',
-  ),
-);
+$config = [
+    'name' => 'Google',
+    'eapm' => [
+        'enabled' => true,
+        'only' => true,
+    ],
+    'order' => 12,
+    'properties' => [
+        'oauth2_client_id' => '',
+        'oauth2_client_secret' => '',
+    ],
+];

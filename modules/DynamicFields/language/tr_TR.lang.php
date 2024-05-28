@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Tel. Araması Planla',
     'LNK_NEW_MEETING' => 'Toplantı Planla',
     'LNK_NEW_TASK' => 'Görev Oluştur',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Ekstra Meta Alanı 2',
     'COLUMN_TITLE_EXT3' => 'Ekstra Meta Alanı 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'IFrame Yüksekliği',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'Varsayılan URL',
     'COLUMN_TITLE_AUDIT' => 'Değişiklik Tarihçesi',
     'COLUMN_TITLE_PII' => 'Kişisel Bilgiler',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Varsayılan Değer',
     'LBL_AUDITED' => 'Denetlenmiş',
     'LBL_REPORTABLE' => 'Raporlanabilir',
-    'ERR_RESERVED_FIELD_NAME' => "Saklanmış Anahtar Kelime",
+    'ERR_RESERVED_FIELD_NAME' => 'Saklanmış Anahtar Kelime',
     'ERR_SELECT_FIELD_TYPE' => 'Lütfen Alan Tipi Seçin',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Alan İsmi zaten var',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Alan ismi yalnızca şu karakterleri içermelidir: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Tamam',
     'LBL_EXE_NON_SIM_MODE' => 'Simülasyon-olmayan modda çalıştır',
     'LBL_CALCULATION_VISIBLE' => 'Hesaplamalar için görünür yap',
-);
+];

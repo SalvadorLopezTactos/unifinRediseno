@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * <b>createList(v1, ...)</b><br/>
  * Returns a list made up of the passed in variables.<br/>
@@ -16,32 +17,32 @@
  */
 class DefineEnumExpression extends EnumExpression
 {
-	/**
-	 * Returns the entire enumeration bare.
-	 */
-	function evaluate() {
-		$params = $this->getParameters();
-		$array  = array();
+    /**
+     * Returns the entire enumeration bare.
+     */
+    public function evaluate()
+    {
+        $params = $this->getParameters();
+        $array = [];
 
-		if (is_array($params)) 
-		{
-			foreach ( $params as $param ) {
-				$array[] = $param->evaluate();
-			} 
-		}
-		else {
-			$array[] = $params->evaluate();
-		}
+        if (is_array($params)) {
+            foreach ($params as $param) {
+                $array[] = $param->evaluate();
+            }
+        } else {
+            $array[] = $params->evaluate();
+        }
 
-		return $array;
-	}
+        return $array;
+    }
 
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
 			var params = this.getParameters();
 			var array = [];
 			if (typeof(params.length) != "undefined")
@@ -54,29 +55,30 @@ class DefineEnumExpression extends EnumExpression
 			}
 			return array;
 EOQ;
-	}
+    }
 
 
-	/**
-	 * The first parameter is a number and the second is the list.
-	 */
-    static function getParameterTypes() {
-		return AbstractExpression::$GENERIC_TYPE;
-	}
+    /**
+     * The first parameter is a number and the second is the list.
+     */
+    public static function getParameterTypes()
+    {
+        return AbstractExpression::$GENERIC_TYPE;
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return array("createList", "enum");
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return ['createList', 'enum'];
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 }
-
-?>

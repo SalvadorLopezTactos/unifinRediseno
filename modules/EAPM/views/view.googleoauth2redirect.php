@@ -58,7 +58,7 @@ class EAPMViewGoogleOauth2Redirect extends SugarView
      * @param $tokenData
      * @return array
      */
-    protected function buildResponse($tokenData) : array
+    protected function buildResponse($tokenData): array
     {
         switch ($this->context) {
             case 'email':
@@ -81,9 +81,9 @@ class EAPMViewGoogleOauth2Redirect extends SugarView
     protected function buildBasicResponse($tokenJSON)
     {
         if (empty($tokenJSON)) {
-            return array(
+            return [
                 'result' => false,
-            );
+            ];
         }
 
         // Build a basic response object indicating authentication success
@@ -91,12 +91,12 @@ class EAPMViewGoogleOauth2Redirect extends SugarView
         $hasFreshAccessToken = isset($token['created']) &&
             isset($token['expires_in']) &&
             $this->isTokenExpired((int)$token['expires_in'], (int)$token['created']);
-        $response = array(
+        $response = [
             'result' => true,
             'hasFreshAccessToken' => $hasFreshAccessToken,
             'hasRefreshToken' => isset($token['refresh_token']),
             'dataSource' => 'googleOauthRedirect',
-        );
+        ];
 
         return $response;
     }

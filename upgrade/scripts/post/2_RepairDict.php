@@ -22,13 +22,13 @@ class SugarUpgradeRepairDict extends UpgradeScript
 
     public function run()
     {
-        $tableDictionaryExtDirs = array('custom/Extension/application/Ext/TableDictionary',
-            'custom/application/Ext/TableDictionary');
+        $tableDictionaryExtDirs = ['custom/Extension/application/Ext/TableDictionary',
+            'custom/application/Ext/TableDictionary'];
 
         foreach ($tableDictionaryExtDirs as $tableDictionaryExt) {
             if (is_dir($tableDictionaryExt) && is_writable($tableDictionaryExt)) {
                 $files = $this->findFiles($tableDictionaryExt);
-                foreach($files as $file) {
+                foreach ($files as $file) {
                     $entry = $tableDictionaryExt . '/' . $file;
                     if (is_file($entry) && preg_match('/\.php$/i', $entry) && is_writeable($entry)) {
                         $fp = fopen($entry, 'r');
@@ -60,7 +60,7 @@ class SugarUpgradeRepairDict extends UpgradeScript
             } // if
         }
     }
-    
+
     /**
      * All custom files was moved to 'Disable' folders for disabled module.
      * But the files content didn't changed.
@@ -71,7 +71,7 @@ class SugarUpgradeRepairDict extends UpgradeScript
      */
     protected function isIncludedFileExists($source, $included)
     {
-        if (preg_match('~.*'. DISABLED_PATH . '$~', pathinfo($source, PATHINFO_DIRNAME))) {
+        if (preg_match('~.*' . DISABLED_PATH . '$~', pathinfo($source, PATHINFO_DIRNAME))) {
             $included = sprintf(
                 '%s' . DIRECTORY_SEPARATOR . DISABLED_PATH . DIRECTORY_SEPARATOR . '%s',
                 dirname($included),

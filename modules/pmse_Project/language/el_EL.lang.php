@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Ορισμοί Διεργασιών',
-  'LBL_MODULE_TITLE' => 'Ορισμοί Διεργασιών',
-  'LBL_MODULE_NAME_SINGULAR' => 'Ορισμοί Διεργασιών',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Ορισμοί Διεργασιών',
+    'LBL_MODULE_TITLE' => 'Ορισμοί Διεργασιών',
+    'LBL_MODULE_NAME_SINGULAR' => 'Ορισμοί Διεργασιών',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης διαδικασίας ορισμών',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης διαδικασίας ορισμών',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Ορισμών Διαδικασίας',
-  'LNK_LIST' => 'Προβολή Ορισμών Διεργασιών',
-  'LNK_NEW_PMSE_PROJECT' => 'Δημιουργία Ορισμών Διεργασίας',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Εισαγωγή Ορισμών Διεργασίας',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Ορισμών Διαδικασίας',
+    'LNK_LIST' => 'Προβολή Ορισμών Διεργασιών',
+    'LNK_NEW_PMSE_PROJECT' => 'Δημιουργία Ορισμών Διεργασίας',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Εισαγωγή Ορισμών Διεργασίας',
 
-  'LBL_PRJ_STATUS' => 'Κατάσταση',
-  'LBL_PRJ_MODULE' => 'Ενότητα Στόχου',
-  'LBL_PRJ_RUN_ORDER' => 'Σειρά Λειτουργίας',
-  'LBL_PMSE_BUTTON_SAVE' => 'Αποθήκευση',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Ακύρωση',
-  'LBL_PMSE_BUTTON_YES' => 'Ναι',
-  'LBL_PMSE_BUTTON_NO' => 'Όχι',
-  'LBL_PMSE_BUTTON_OK' => 'Εντάξει',
+    'LBL_PRJ_STATUS' => 'Κατάσταση',
+    'LBL_PRJ_MODULE' => 'Ενότητα Στόχου',
+    'LBL_PRJ_RUN_ORDER' => 'Σειρά Λειτουργίας',
+    'LBL_PMSE_BUTTON_SAVE' => 'Αποθήκευση',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Ακύρωση',
+    'LBL_PMSE_BUTTON_YES' => 'Ναι',
+    'LBL_PMSE_BUTTON_NO' => 'Όχι',
+    'LBL_PMSE_BUTTON_OK' => 'Εντάξει',
     'LBL_PMSE_FORM_ERROR' => 'Θα πρέπει να επιλύσετε τυχόν σφάλματα πριν συνεχίσετε.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Σχεδιασμός',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Δραστηριότητα',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Ενέργεια',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Οδηγός Έναρξης Συμβάντος',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Ευκαιρία Έναρξης Συμβάντος' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Ευκαιρία Έναρξης Συμβάντος',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Έγγραφο Έναρξης Συμβάντος',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Άλλη Ενότητα Συμβάντος',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Αναμονή Συμβάντος',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Επιχειρηματικός κανόνας',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Ενέργεια επιχειρηματικού κανόνα',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Πρότυπο email',
-);
+];

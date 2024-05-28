@@ -12,30 +12,30 @@
  */
 
 $module_name = 'pmse_Inbox';
-$viewdefs[$module_name]['base']['layout']['config'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs[$module_name]['base']['layout']['config'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
                             'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'view' => 'config-headerpane',
-                                ),
-                                array(
-                                    'view' => 'config'
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                                [
+                                    'view' => 'config',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

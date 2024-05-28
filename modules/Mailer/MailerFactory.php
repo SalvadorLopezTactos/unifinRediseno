@@ -13,10 +13,10 @@
 
 
 // external imports
-                                                                                      // represent the modes; also
-                                                                                      // imports
-                                                                                      // OutboundSmtpEmailConfiguration
-                                                                                      // and OutboundEmailConfiguration
+// represent the modes; also
+// imports
+// OutboundSmtpEmailConfiguration
+// and OutboundEmailConfiguration
 
 /**
  * Factory to create Mailers.
@@ -24,7 +24,7 @@
 class MailerFactory
 {
     protected static $strategies = [
-        OutboundEmailConfigurationPeer::MODE_SMTP => "SmtpMailer",
+        OutboundEmailConfigurationPeer::MODE_SMTP => 'SmtpMailer',
     ];
 
     /**
@@ -73,7 +73,7 @@ class MailerFactory
      *
      * @static
      * @access public
-     * @param OutboundEmailConfiguration $config          required The configuration that provides context to the chosen sending
+     * @param OutboundEmailConfiguration $config required The configuration that provides context to the chosen sending
      *                                                    strategy.
      * @return mixed An object of one of the Mailers defined in $modeToMailerMap.
      * @throws MailerException Allows MailerExceptions to bubble up.
@@ -81,7 +81,7 @@ class MailerFactory
     public static function getMailer(OutboundEmailConfiguration $config)
     {
         $headers = static::buildHeadersForMailer($config->getFrom(), $config->getReplyTo());
-        $mailer  = static::buildMailer($config);
+        $mailer = static::buildMailer($config);
         $mailer->setHeaders($headers);
 
         return $mailer;
@@ -92,16 +92,16 @@ class MailerFactory
      *
      * @static
      * @access private
-     * @param OutboundEmailConfiguration $config          required Must be an OutboundEmailConfiguration or a type that derives
+     * @param OutboundEmailConfiguration $config required Must be an OutboundEmailConfiguration or a type that derives
      *                                                    from it.
      * @return mixed An object of one of the Mailers defined in $modeToMailerMap.
      * @throws MailerException
      */
     private static function buildMailer(OutboundEmailConfiguration $config)
     {
-        $mode     = $config->getMode();
+        $mode = $config->getMode();
         $strategy = static::getStrategy($mode);
-        $mailer   = null;
+        $mailer = null;
 
         if (is_null($strategy)) {
             throw new MailerException(
@@ -130,8 +130,8 @@ class MailerFactory
      *
      * @static
      * @access private
-     * @param EmailIdentity $from             required The true sender of the email.
-     * @param EmailIdentity $replyTo          Should be an EmailIdentity, but null is acceptable if no Reply-To header
+     * @param EmailIdentity $from required The true sender of the email.
+     * @param EmailIdentity $replyTo Should be an EmailIdentity, but null is acceptable if no Reply-To header
      *                                        is to be set.
      * @return EmailHeaders
      * @throws MailerException
@@ -187,7 +187,7 @@ class MailerFactory
      */
     protected static function getStrategy($mode)
     {
-        $strategy   = null;
+        $strategy = null;
         $strategies = static::getStrategies();
 
         if (array_key_exists($mode, $strategies)) {

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,6 +10,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class NotesFileApi extends FileApi
 {
     public function registerApiRest()
@@ -41,7 +43,7 @@ class NotesFileApi extends FileApi
      */
     public function getBeansForZipArchive(SugarBean $record, string $linkName, string $field)
     {
-        $beans =  parent::getBeansForZipArchive($record, $linkName, $field);
+        $beans = parent::getBeansForZipArchive($record, $linkName, $field);
         if (!empty($record->$field) && !in_array($record->id, array_keys($beans))) {
             $beans[$record->id] = $record;
         }

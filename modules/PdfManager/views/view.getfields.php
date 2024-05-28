@@ -11,14 +11,13 @@
  */
 
 
-
 class ViewGetFields extends SugarView
 {
     /**
      * @var mixed
      */
     public $baseLink;
-    public $vars = array("baseModule", "baseLink");
+    public $vars = ['baseModule', 'baseLink'];
 
     public function __construct()
     {
@@ -37,10 +36,9 @@ class ViewGetFields extends SugarView
     {
         $fieldsForSelectedModule = PdfManagerHelper::getFields($this->baseModule, true);
         $selectedField = null;
-        $fieldsForSubModule = array();
+        $fieldsForSubModule = [];
 
         if (!empty($this->baseLink) && strpos($this->baseLink, 'pdfManagerRelateLink_') === 0) {
-
             $selectedField = $this->baseLink;
             $linkName = substr($this->baseLink, strlen('pdfManagerRelateLink_'));
             $focus = BeanFactory::newBean($this->baseModule);

@@ -23,6 +23,8 @@
         options.template = app.template.get('filter-module-dropdown');
 
         this._super('initialize', [options]);
+
+        this.layout.on('filter:change:module', this.filterChangeHandler, this);
     },
 
     /**
@@ -42,22 +44,30 @@
     },
 
     /**
-     * Trigger event to reload the layout when the module changes.
+     * Handler for the filter changes
      * @param {string} linkModuleName
      * @param {string} linkName
-     * @param {boolean} silent
      */
-    handleChange: function(linkModuleName, linkName, silent) {
-        linkModuleName = linkModuleName || this.layout.name;
-
-        var cacheKey = app.user.lastState.key(this.layout.name, this.layout);
+    filterChangeHandler: function(linkModuleName, linkName) {
+        const cacheKey = app.user.lastState.key(this.layout.name, this.layout);
 
         if (linkName) {
             app.user.lastState.set(cacheKey, linkName);
         } else {
             app.user.lastState.remove(cacheKey);
         }
-
-        this._super('handleChange', [linkModuleName, linkName, silent]);
     },
+
+    /**
+     * @inheritdoc
+     */
+    initSelection: function(el, callback) {
+        let selection = {};
+        if (_.findWhere(this.filterList, {id: el.val()})) {
+            selection = _.findWhere(this.filterList, {id: el.val()});
+        } else if (this.filterList && this.filterList.length > 0)  {
+            selection = this.filterList[0];
+        }
+        callback(selection);
+    }
 })

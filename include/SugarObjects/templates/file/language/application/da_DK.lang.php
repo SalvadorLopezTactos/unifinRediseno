@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Markedsføringsside',
-    'Knowledge Base' => 'Videnbase',
-    'Sales' => 'Salgsside',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Markedsføringsmateriale',
-    'Product Brochures' => 'Produktbrochurer',
-    'FAQ' => 'Ofte stillede spørgsmål',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Markedsføring',
+        'Knowledge Base' => 'Vidensbase',
+        'Sales' => 'Salg',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Aktiv',
-    'Draft' => 'Kladde',
-    'FAQ' => 'Ofte stillede spørgsmål',
-    'Expired' => 'Udløbet',
-    'Under Review' => 'Til gennemsyn',
-    'Pending' => 'Afventer',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Markedsføringsmateriale',
+        'Product Brochures' => 'Produktbrochurer',
+        'FAQ' => 'Ofte stillede spørgsmål',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Aktiv',
+        'Draft' => 'Kladde',
+        'FAQ' => 'Ofte stillede spørgsmål',
+        'Expired' => 'Udløbet',
+        'Under Review' => 'Til gennemsyn',
+        'Pending' => 'Afventer',
+    ],
+];

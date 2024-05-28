@@ -18,7 +18,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-
 /**
  *
  * SearchEngine schedule full reindex
@@ -47,8 +46,7 @@ class SearchReindexCommand extends Command implements InstanceModeInterface
                 null,
                 InputOption::VALUE_NONE,
                 'Clear the data of the involved index/indices before reindexing the records.'
-            )
-        ;
+            );
     }
 
     /**
@@ -62,11 +60,10 @@ class SearchReindexCommand extends Command implements InstanceModeInterface
     {
         $result = $this
             ->initApi($this->getApi())
-            ->callApi('searchReindex', array(
+            ->callApi('searchReindex', [
                 'module_list' => $input->getOption('modules'),
                 'clear_data' => $input->getOption('clearData'),
-            ))
-        ;
+            ]);
 
         $status = $result['success'];
 

@@ -11,18 +11,17 @@
  */
 
 
-
 class ImportListView
 {
     /**
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * @var array
      */
-    protected $headerColumns = array();
+    protected $headerColumns = [];
 
     /**
      * @var Sugar_Smarty
@@ -52,10 +51,10 @@ class ImportListView
     /**
      * Create a list view object that can display a data source which implements the Paginatable interface.
      *
-     * @throws Exception
-     * @param  Paginatable $dataSource
-     * @param  array $params
+     * @param Paginatable $dataSource
+     * @param array $params
      * @param string $tableIdentifier
+     * @throws Exception
      */
     public function __construct($dataSource, $params, $tableIdentifier = '')
     {
@@ -67,10 +66,11 @@ class ImportListView
         $this->dataSource = $dataSource;
         $this->headerColumns = $this->dataSource->getHeaderColumns() ?: [];
 
-        if( !isset($params['offset']) )
-            throw new Exception("Missing required parameter offset for ImportListView");
-        else
+        if (!isset($params['offset'])) {
+            throw new Exception('Missing required parameter offset for ImportListView');
+        } else {
             $this->dataSource->setCurrentOffset($params['offset']);
+        }
 
         $this->recordsPerPage = $params['totalRecords'] ?? $sugar_config['list_max_entries_per_page'] + 0;
         $this->data = $this->dataSource->loadDataSet($this->recordsPerPage)->getDataSet();
@@ -83,27 +83,28 @@ class ImportListView
      * @param bool $return True if we should return the content rather than echoing.
      * @return
      */
-    public function display($return = FALSE)
+    public function display($return = false)
     {
-        global $app_strings,$mod_strings;
+        global $app_strings, $mod_strings;
 
-        $navStrings = array('next' => $app_strings['LNK_LIST_NEXT'],'previous' => $app_strings['LNK_LIST_PREVIOUS'],'end' => $app_strings['LNK_LIST_END'],
-                            'start' => $app_strings['LNK_LIST_START'],'of' => $app_strings['LBL_LIST_OF']);
+        $navStrings = ['next' => $app_strings['LNK_LIST_NEXT'], 'previous' => $app_strings['LNK_LIST_PREVIOUS'], 'end' => $app_strings['LNK_LIST_END'],
+            'start' => $app_strings['LNK_LIST_START'], 'of' => $app_strings['LBL_LIST_OF']];
         $this->ss->assign('navStrings', $navStrings);
-        $this->ss->assign('pageData', $this->generatePaginationData() );
+        $this->ss->assign('pageData', $this->generatePaginationData());
         $this->ss->assign('tableID', $this->tableID);
-        $this->ss->assign('colCount', count($this->headerColumns));
-        $this->ss->assign('APP',$app_strings);
-        $this->ss->assign('rowColor', array('oddListRow', 'evenListRow'));
-        $this->ss->assign('displayColumns',$this->headerColumns);
+        $this->ss->assign('colCount', safeCount($this->headerColumns));
+        $this->ss->assign('APP', $app_strings);
+        $this->ss->assign('rowColor', ['oddListRow', 'evenListRow']);
+        $this->ss->assign('displayColumns', $this->headerColumns);
         $this->ss->assign('data', $this->data);
         $this->ss->assign('maxColumns', $this->maxColumns);
         $this->ss->assign('MOD', $mod_strings);
         $contents = $this->ss->fetch('modules/Import/tpls/listview.tpl');
-        if($return)
+        if ($return) {
             return $contents;
-        else
+        } else {
             echo $contents;
+        }
     }
 
     /**
@@ -114,10 +115,9 @@ class ImportListView
     protected function getMaxColumnsForDataSet()
     {
         $maxColumns = 0;
-        foreach($this->data as $data)
-        {
-            if ((is_countable($data) ? count($data) : 0) > $maxColumns) {
-                $maxColumns = is_countable($data) ? count($data) : 0;
+        foreach ($this->data as $data) {
+            if (safeCount($data) > $maxColumns) {
+                $maxColumns = safeCount($data);
             }
         }
         return $maxColumns;
@@ -132,19 +132,15 @@ class ImportListView
     {
         $currentOffset = $this->dataSource->getCurrentOffset();
         $totalRecordsCount = $this->dataSource->getTotalRecordCount();
-        $nextOffset =  $currentOffset+ $this->recordsPerPage;
+        $nextOffset = $currentOffset + $this->recordsPerPage;
         $nextOffset = $nextOffset > $totalRecordsCount ? 0 : $nextOffset;
         $lastOffset = floor($totalRecordsCount / $this->recordsPerPage) * $this->recordsPerPage;
         $previousOffset = $currentOffset - $this->recordsPerPage;
-        $offsets = array('totalCounted'=> true, 'total' => $totalRecordsCount, 'next' => $nextOffset,
-                         'last' => $lastOffset, 'previous' => $previousOffset,
-                         'current' => $currentOffset, 'lastOffsetOnPage' => count($this->data) + $this->dataSource->getCurrentOffset() );
+        $offsets = ['totalCounted' => true, 'total' => $totalRecordsCount, 'next' => $nextOffset,
+            'last' => $lastOffset, 'previous' => $previousOffset,
+            'current' => $currentOffset, 'lastOffsetOnPage' => safeCount($this->data) + $this->dataSource->getCurrentOffset()];
 
-        $pageData = array('offsets' => $offsets);
+        $pageData = ['offsets' => $offsets];
         return $pageData;
-
     }
-
-
-
 }

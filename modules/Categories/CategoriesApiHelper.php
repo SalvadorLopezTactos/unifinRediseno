@@ -16,7 +16,7 @@ class CategoriesApiHelper extends SugarBeanApiHelper
     /**
      * {@inheritdoc}
      */
-    public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(SugarBean $bean, array $fieldList = [], array $options = [])
     {
         $action = (!empty($options['action']) && $options['action'] == 'list') ? 'list' : 'view';
         $hasAccess = empty($bean->deleted) && $bean->ACLAccess($action);

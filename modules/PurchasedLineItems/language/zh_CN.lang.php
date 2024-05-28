@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => '已购买单项列表仪表板',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => '已购买单项档案仪表板',
     'LBL_PARENT_PURCHASE' => '父级购买',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '已购买明细项目时间轴',
 ];

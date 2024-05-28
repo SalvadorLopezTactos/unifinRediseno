@@ -126,7 +126,7 @@
                     messages: 'ERR_GENERIC_SERVER_ERROR'
                 });
             },
-            showNoAccessError: function() {
+            showNoAccessError: function(error) {
                 if (!this instanceof app.view.View) {
                     app.logger.error('This method should be invoked by Function.prototype.call(), passing in as argument' +
                     'an instance of this view.');
@@ -135,9 +135,10 @@
                 var name = 'server-error';
                 this._viewAlerts.push(name);
                 this.cancel();
+
                 app.alert.show(name, {
                     level: 'error',
-                    messages: 'ERR_HTTP_404_TEXT_LINE1'
+                    messages: this._getNoAccessErrorMessage(error)
                 });
             },
             showSuccessButDeniedAccess: function() {
@@ -493,7 +494,7 @@
                     this.handleMetadataSyncError(e);
                 } else {
                     if (e.status == 403) {
-                        this.alerts.showNoAccessError.call(this);
+                        this.alerts.showNoAccessError.call(this, e);
                     }
                     callback(true);
                 }
@@ -567,6 +568,19 @@
             },
             lastSaveAction: this.context.lastSaveAction
         };
+
+        // If the parent model has a 'fields' option set, we need to also add
+        // it here so that the proper fields are returned from the API
+        let parentModel = this.model && this.model.link && this.model.link.bean;
+        if (parentModel) {
+            let fields = parentModel.getOption('fields');
+            if (fields) {
+                options.params = {
+                    fields: fields
+                };
+            }
+        }
+
         this.applyAfterCreateOptions(options);
 
         // Check if this has subpanel create models

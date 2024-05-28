@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Auditi logi',
     'LBL_FIELD_NAME' => 'Väli',
     'LBL_OLD_NAME' => 'Vana väärtus',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Värskenda versioonile',
     'LBL_BLANK' => '-tühi-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Auditi ajakava',
+    'LBL_CREATED' => 'Loodud',
+];

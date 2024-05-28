@@ -14,71 +14,73 @@
  * API Class to handle file and image (attachment) interactions with a field in
  * a record.
  */
-class FileApi extends SugarApi {
+class FileApi extends SugarApi
+{
     /**
      * Dictionary registration method, called when the API definition is built
      *
      * @return array
      */
-    public function registerApiRest() {
-        return array(
-            'saveFilePost' => array(
+    public function registerApiRest()
+    {
+        return [
+            'saveFilePost' => [
                 'reqType' => 'POST',
-                'path' => array('<module>', '?', 'file', '?'),
-                'pathVars' => array('module', 'record', '', 'field'),
+                'path' => ['<module>', '?', 'file', '?'],
+                'pathVars' => ['module', 'record', '', 'field'],
                 'method' => 'saveFilePost',
                 'rawPostContents' => true,
                 'shortHelp' => 'Saves a file. The file can be a new file or a file override.',
                 'longHelp' => 'include/api/help/module_record_file_field_post_help.html',
-            ),
-            'saveFilePut' => array(
+            ],
+            'saveFilePut' => [
                 'reqType' => 'PUT',
-                'path' => array('<module>', '?', 'file', '?'),
-                'pathVars' => array('module', 'record', '', 'field'),
+                'path' => ['<module>', '?', 'file', '?'],
+                'pathVars' => ['module', 'record', '', 'field'],
                 'method' => 'saveFilePut',
                 'rawPostContents' => true,
                 'shortHelp' => 'Saves a file. The file can be a new file or a file override. (This is an alias of the POST method save.)',
                 'longHelp' => 'include/api/help/module_record_file_field_put_help.html',
-            ),
-            'getFileList' => array(
+            ],
+            'getFileList' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'file'),
-                'pathVars' => array('module', 'record', ''),
+                'path' => ['<module>', '?', 'file'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'getFileList',
                 'shortHelp' => 'Gets a listing of files related to a field for a module record.',
                 'longHelp' => 'include/api/help/module_record_file_get_help.html',
-            ),
-            'getFileContents' => array(
+            ],
+            'getFileContents' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'file', '?'),
-                'pathVars' => array('module', 'record', '', 'field'),
+                'path' => ['<module>', '?', 'file', '?'],
+                'pathVars' => ['module', 'record', '', 'field'],
                 'method' => 'getFile',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
                 'shortHelp' => 'Gets the contents of a single file related to a field for a module record.',
                 'longHelp' => 'include/api/help/module_record_file_field_get_help.html',
-            ),
-            'removeFile' => array(
+            ],
+            'removeFile' => [
                 'reqType' => 'DELETE',
-                'path' => array('<module>', '?', 'file', '?'),
-                'pathVars' => array('module', 'record', '', 'field'),
+                'path' => ['<module>', '?', 'file', '?'],
+                'pathVars' => ['module', 'record', '', 'field'],
                 'method' => 'removeFile',
                 'rawPostContents' => true,
                 'shortHelp' => 'Removes a file from a field.',
                 'longHelp' => 'include/api/help/module_record_file_field_delete_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
      * Saves a file to a module field using the PUT method
      *
-     * @param ServiceBase $api  The service base
-     * @param array       $args Arguments array built by the service base
-     * @param string      $stream
+     * @param ServiceBase $api The service base
+     * @param array $args Arguments array built by the service base
+     * @param string $stream
      *
-     * @throws SugarApiExceptionMissingParameter
      * @return array
+     * @throws SugarApiExceptionMissingParameter
      */
     public function saveFilePut(ServiceBase $api, array $args, $stream = 'php://input')
     {
@@ -97,10 +99,10 @@ class FileApi extends SugarApi {
 
         // Create a temp name for our file to begin mocking the $_FILES array
         $tempfile = $this->getTempFileName();
-        $this->createTempFileFromInput($tempfile, $stream, $encoded);
+        [$sizeEncoded] = $this->createTempFileFromInput($tempfile, $stream, $encoded);
 
         // Now validate our file
-        $filesize = filesize($tempfile);
+        $filesize = $encoded ? $sizeEncoded : filesize($tempfile);
         $this->checkPutRequestBody($filesize);
 
         // Now get our actual mime type from our internal methodology if it wasn't passed
@@ -110,14 +112,14 @@ class FileApi extends SugarApi {
         }
 
         // Mock a $_FILES array member, adding in _SUGAR_API_UPLOAD to allow file uploads
-        $_FILES[$args['field']] = array(
+        $_FILES[$args['field']] = [
             'name' => $filename,
             'type' => $filetype,
             'tmp_name' => $tempfile,
             'error' => 0,
             'size' => $filesize,
             '_SUGAR_API_UPLOAD' => true, // This is in place to allow bypassing is_uploaded_file() checks
-        );
+        ];
 
         // Now that we are set up, hand this off to the POST save handler
         $return = $this->saveFilePost($api, $args);
@@ -140,8 +142,8 @@ class FileApi extends SugarApi {
      */
     protected function checkFileAccess(SugarBean $bean, $field, array $args)
     {
-        if(!$bean->ACLAccess('view')) {
-            throw new SugarApiExceptionNotAuthorized('No access to view records for module: '.$args['module']);
+        if (!$bean->ACLAccess('view')) {
+            throw new SugarApiExceptionNotAuthorized('No access to view records for module: ' . $args['module']);
         }
 
         // Handle ACL - if there is no current field data, it is a CREATE
@@ -187,7 +189,6 @@ class FileApi extends SugarApi {
         // message on uploads. This check is in place specifically for file uploads that are too
         // big to be handled by checking for the presence of the $_FILES array and also if it is empty.
         if (empty($_FILES[$filesIndex])) {
-
             // If we get here, the attachment was > php.ini upload_max_filesize value so we need to
             // check if delete_if_fails optional parameter was set true, etc.
             $this->deleteIfFails($bean, $args);
@@ -215,7 +216,7 @@ class FileApi extends SugarApi {
                     }
 
                     // Session error handler is throwing errors if not set
-                    $_SESSION['user_error_message'] = array();
+                    $_SESSION['user_error_message'] = [];
 
                     // Handle setting the files array to what SugarFieldFile is expecting
                     if (!empty($_FILES[$filesIndex]) && empty($_FILES[$filesIndex . '_file'])) {
@@ -243,7 +244,6 @@ class FileApi extends SugarApi {
 
                 // Handle errors
                 if (!empty($sf->error)) {
-
                     // Note, that although the code earlier in this method (where attachment too large) handles
                     // if file > php.ini upload_maxsize, we still may have a file > sugarcrm maxsize
                     $this->deleteIfFails($bean, $args);
@@ -251,13 +251,12 @@ class FileApi extends SugarApi {
                 }
 
                 // Prep our return
-                $fileinfo = array();
+                $fileinfo = [];
 
                 //In case we are returning a temporary file
                 if ($temporary) {
                     $fileinfo['guid'] = $bean->$field;
-                }
-                else {
+                } else {
                     // Save the bean
                     $this->saveBean($bean, $api, $args);
 
@@ -268,15 +267,15 @@ class FileApi extends SugarApi {
                 }
 
                 // This is a good return
-                return array(
+                return [
                     $field => $fileinfo,
-                    'record' => $this->formatBean($api, $args, $bean)
-                );
+                    'record' => $this->formatBean($api, $args, $bean),
+                ];
             }
         }
 
         // @TODO Localize this exception message
-        throw new SugarApiExceptionError("Unexpected field type: ".$def['type']);
+        throw new SugarApiExceptionError('Unexpected field type: ' . $def['type']);
     }
 
     /**
@@ -291,8 +290,8 @@ class FileApi extends SugarApi {
         // Validate and load up the bean because we need it
         $bean = $this->loadBean($api, $args, 'view');
 
-        if(!$bean->ACLAccess('view')) {
-            throw new SugarApiExceptionNotAuthorized('No access to view records for module: '.$args['module']);
+        if (!$bean->ACLAccess('view')) {
+            throw new SugarApiExceptionNotAuthorized('No access to view records for module: ' . $args['module']);
         }
 
         // Special cases for document revision sets
@@ -305,7 +304,7 @@ class FileApi extends SugarApi {
         }
 
         // Set up our return array
-        $list = array();
+        $list = [];
         foreach ($bean->field_defs as $field => $def) {
             // We are looking specifically for file and image types
             if (isset($def['type']) && ($def['type'] == 'image' || $def['type'] == 'file')) {
@@ -317,7 +316,7 @@ class FileApi extends SugarApi {
 
                 // Add it to the return, as an object so that if it is empty it
                 // is still an object in json responses
-                $list[$field] = (object) $fileinfo;
+                $list[$field] = (object)$fileinfo;
             }
         }
 
@@ -352,8 +351,8 @@ class FileApi extends SugarApi {
         // Get the bean
         $bean = $this->loadBean($api, $args);
 
-        if(!$bean->ACLAccess('view')) {
-            throw new SugarApiExceptionNotAuthorized('No access to view records for module: '.$args['module']);
+        if (!$bean->ACLAccess('view')) {
+            throw new SugarApiExceptionNotAuthorized('No access to view records for module: ' . $args['module']);
         }
 
         if (empty($bean->{$field})) {
@@ -368,7 +367,7 @@ class FileApi extends SugarApi {
         //for the image type field, forceDownload set default as false in order to display on the image element.
         $forceDownload = ($def['type'] == 'image') ? false : true;
         if (isset($args['force_download'])) {
-            $forceDownload = (bool) $args['force_download'];
+            $forceDownload = (bool)$args['force_download'];
         }
         $api->setHeader('Content-Security-Policy', "script-src 'none'");
 
@@ -424,7 +423,7 @@ class FileApi extends SugarApi {
                 }
             } else {
                 // @TODO Localize this exception message
-                throw new SugarApiExceptionError("Unexpected field type: ".$def['type']);
+                throw new SugarApiExceptionError('Unexpected field type: ' . $def['type']);
             }
         }
 
@@ -525,10 +524,9 @@ class FileApi extends SugarApi {
         // If the file was too big, the user may still want to go back and select a smaller file < max;
         // but now, upon saving, the client will attempt to PUT related record first and if their ACL's
         // may prevent edit/deletes it would fail. This rectifies such a scenario.
-        if(!empty($args['delete_if_fails'])) {
-
+        if (!empty($args['delete_if_fails'])) {
             // First ensure user owns record
-            if($bean->created_by == $GLOBALS['current_user']->id) {
+            if ($bean->created_by == $GLOBALS['current_user']->id) {
                 $bean->mark_deleted($bean->id);
                 return true;
             }
@@ -550,7 +548,7 @@ class FileApi extends SugarApi {
      */
     protected function getFileInfo(SugarBean $bean, $field, ServiceBase $api)
     {
-        $info = array();
+        $info = [];
         if (isset($bean->field_defs[$field])) {
             $def = $bean->field_defs[$field];
             if (isset($def['type']) && !empty($bean->{$field})) {
@@ -560,20 +558,20 @@ class FileApi extends SugarApi {
                     $filedata = getimagesize($filepath);
 
                     // Add in height and width for image types
-                    $info = array(
+                    $info = [
                         'content-type' => $filedata['mime'],
                         'content-length' => filesize($filepath),
                         'name' => $filename,
                         'path' => $filepath,
                         'width' => empty($filedata[0]) ? 0 : $filedata[0],
                         'height' => empty($filedata[1]) ? 0 : $filedata[1],
-                        'uri' => $api->getResourceURI(array($bean->module_dir, $bean->id, 'file', $field)),
-                    );
+                        'uri' => $api->getResourceURI([$bean->module_dir, $bean->id, 'file', $field]),
+                    ];
                 } elseif ($def['type'] == 'file') {
                     $download = $this->getDownloadFileApi($api);
                     $info = $download->getFileInfo($bean, $field);
                     if (!empty($info) && empty($info['uri'])) {
-                        $info['uri'] = $api->getResourceURI(array($bean->module_dir, $bean->id, 'file', $field));
+                        $info['uri'] = $api->getResourceURI([$bean->module_dir, $bean->id, 'file', $field]);
                     }
                 }
             }
@@ -634,18 +632,22 @@ class FileApi extends SugarApi {
      * @param Resource $inputHandle The input file data resource
      * @param Resource $outputHandle The output file data resource
      * @param boolean $encoded Tells this method whether to base64 decode the input
+     * @return int[]
      */
-    protected function writeFileData($inputHandle, $outputHandle, $encoded = false)
+    protected function writeFileData($inputHandle, $outputHandle, $encoded = false): array
     {
+        $bytesIn = $bytesOut = 0;
         // Write it out
         while ($data = fread($inputHandle, 1024)) {
+            $bytesIn += strlen($data);
             // Decode if we are handling encoded file contents
             if ($encoded) {
                 $data = base64_decode($data);
             }
-
+            $bytesOut += strlen($data);
             fwrite($outputHandle, $data);
         }
+        return [$bytesIn, $bytesOut];
     }
 
     /**
@@ -659,14 +661,15 @@ class FileApi extends SugarApi {
     {
         // Now read the raw body to capture what is being sent by PUT requests
         // Using a file handle to save on memory consumption with file_get_contents
-        $inputHandle  = $this->getFileHandle($input);
+        $inputHandle = $this->getFileHandle($input);
         $outputHandle = $this->getFileHandle($tempfile, 'w');
 
-        $this->writeFileData($inputHandle, $outputHandle, $encoded);
+        [$bytesIn, $bytesOut] = $this->writeFileData($inputHandle, $outputHandle, $encoded);
 
         // Close the handles
         $this->closeFileHandle($inputHandle);
         $this->closeFileHandle($outputHandle);
+        return [$bytesIn, $bytesOut];
     }
 
     /**

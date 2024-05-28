@@ -41,7 +41,7 @@ class AnalysisBuilder
     /**
      * @var array List of analysis entries
      */
-    protected $analysis = array();
+    protected $analysis = [];
 
     /**
      * Ctor
@@ -57,7 +57,7 @@ class AnalysisBuilder
      */
     public function compile()
     {
-        return array(self::ANALYSIS => $this->analysis);
+        return [self::ANALYSIS => $this->analysis];
     }
 
     /**
@@ -66,7 +66,7 @@ class AnalysisBuilder
      * @param string $type Builtin analyzer type
      * @param array $options
      */
-    public function addAnalyzer($name, $type, array $options = array())
+    public function addAnalyzer($name, $type, array $options = [])
     {
         $this->addAnalysis(self::ANALYZER, $name, $type, $options);
         return $this;
@@ -78,7 +78,7 @@ class AnalysisBuilder
      * @param unknown $type
      * @param array $options
      */
-    public function addTokenizer($name, $type, array $options = array())
+    public function addTokenizer($name, $type, array $options = [])
     {
         $this->addAnalysis(self::TOKENIZER, $name, $type, $options);
         return $this;
@@ -90,7 +90,7 @@ class AnalysisBuilder
      * @param string $type
      * @param array $options
      */
-    public function addFilter($name, $type, array $options = array())
+    public function addFilter($name, $type, array $options = [])
     {
         $this->addAnalysis(self::TOKENFILTER, $name, $type, $options);
         return $this;
@@ -102,7 +102,7 @@ class AnalysisBuilder
      * @param string $type
      * @param array $options
      */
-    public function addCharFilter($name, $type, array $options = array())
+    public function addCharFilter($name, $type, array $options = [])
     {
         $this->addAnalysis(self::CHARFILTER, $name, $type, $options);
         return $this;
@@ -115,11 +115,11 @@ class AnalysisBuilder
      * @param array $filters Optional list of token filters
      * @param array $charFilters Optional list of character filters
      */
-    public function addCustomAnalyzer($name, $tokenizer, array $filters = array(), array $charFilters = array())
+    public function addCustomAnalyzer($name, $tokenizer, array $filters = [], array $charFilters = [])
     {
-        $options = array(
+        $options = [
             self::TOKENIZER => $tokenizer,
-        );
+        ];
 
         if ($filters) {
             $options[self::TOKENFILTER] = $filters;
@@ -150,7 +150,7 @@ class AnalysisBuilder
         if (isset($this->analysis[$base][$name])) {
             throw new AnalyzerBuilderException("Cannot redeclare $base '{$name}'");
         }
-        $settings = array_merge($options, array('type' => $type));
+        $settings = array_merge($options, ['type' => $type]);
         $this->analysis[$base][$name] = $settings;
     }
 
@@ -159,11 +159,11 @@ class AnalysisBuilder
      */
     private function init()
     {
-        $this->analysis = array(
-            self::ANALYZER => array(),
-            self::TOKENIZER => array(),
-            self::TOKENFILTER => array(),
-            self::CHARFILTER => array(),
-        );
+        $this->analysis = [
+            self::ANALYZER => [],
+            self::TOKENIZER => [],
+            self::TOKENFILTER => [],
+            self::CHARFILTER => [],
+        ];
     }
 }

@@ -9,32 +9,32 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Users']['DetailView'] = array(
-    'templateMeta' => array('maxColumns' => '2', 
-                            'widths' => array(
-                                array('label' => '10', 'field' => '30'), 
-                                array('label' => '10', 'field' => '30')
-                            ),
-                            'form' => array(
-                                'headerTpl'=>'modules/Users/tpls/DetailViewHeader.tpl',
-                                'footerTpl'=>'modules/Users/tpls/DetailViewFooter.tpl',
-                            ),
-                      ),
-    'panels' => array (
-        'LBL_USER_INFORMATION' => array (
-            array('user_name',
-                  array('name' => 'last_name',
-                        'label' => 'LBL_LIST_NAME',
-                  ),
-            ),
-            array('status',
-                  '',
-            ),
-            array(array(
-                      'name'=>'UserType',
-                      'customCode'=>'{$USER_TYPE_READONLY}',
-                  ),
-            ),
-        ),
-    ),
-);
+$viewdefs['Users']['DetailView'] = [
+    'templateMeta' => ['maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+        'form' => [
+            'headerTpl' => 'modules/Users/tpls/DetailViewHeader.tpl',
+            'footerTpl' => 'modules/Users/tpls/DetailViewFooter.tpl',
+        ],
+    ],
+    'panels' => [
+        'LBL_USER_INFORMATION' => [
+            ['user_name',
+                ['name' => 'last_name',
+                    'label' => 'LBL_LIST_NAME',
+                ],
+            ],
+            ['status',
+                '',
+            ],
+            [[
+                'name' => 'UserType',
+                'customCode' => '{$USER_TYPE_READONLY}',
+            ],
+            ],
+        ],
+    ],
+];

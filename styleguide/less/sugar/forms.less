@@ -218,8 +218,9 @@ textarea {
   min-height: @baseLineHeight; // clear the floating input if there is no label text
   padding-left: 20px;
 }
+
 .radio input[type="radio"],
-  .checkbox input[type="checkbox"] {
+.checkbox input[type="checkbox"] {
   margin-left: -20px;
 }
 
@@ -270,15 +271,15 @@ textarea[class*="span"],
 }
 // Ensure input-prepend/append never wraps
 .input-append input[class*="span"],
-  .input-append .uneditable-input[class*="span"],
-  .input-prepend input[class*="span"],
-  .input-prepend .uneditable-input[class*="span"],
-  .row-fluid input[class*="span"],
-  .row-fluid select[class*="span"],
-  .row-fluid textarea[class*="span"],
-  .row-fluid .uneditable-input[class*="span"],
-  .row-fluid .input-prepend [class*="span"],
-  .row-fluid .input-append [class*="span"] {
+.input-append .uneditable-input[class*="span"],
+.input-prepend input[class*="span"],
+.input-prepend .uneditable-input[class*="span"],
+.row-fluid input[class*="span"],
+.row-fluid select[class*="span"],
+.row-fluid textarea[class*="span"],
+.row-fluid .uneditable-input[class*="span"],
+.row-fluid .input-prepend [class*="span"],
+.row-fluid .input-append [class*="span"] {
   display: inline-block;
 }
 
@@ -292,12 +293,12 @@ textarea[class*="span"],
 
 // Float to collapse white-space for proper grid alignment
 .controls-row [class*="span"],
-  .row-fluid .controls-row [class*="span"] {
+.row-fluid .controls-row [class*="span"] {
   float: left;
 }
 // Explicity set top padding on all checkboxes/radios, not just first-child
 .controls-row .checkbox[class*="span"],
-  .controls-row .radio[class*="span"] {
+.controls-row .radio[class*="span"] {
   padding-top: 5px;
 }
 
@@ -498,13 +499,6 @@ select:focus:invalid {
 // SEARCH FORM
 // -----------
 
-input.search-query {
-  padding-right: 14px;
-  padding-left: 14px;
-  margin-bottom: 0; // Remove the default margin on all inputs
-  border-radius: 15px;
-}
-
 /* Allow for input prepend/append in search forms */
 .form-search .input-append .search-query,
 .form-search .input-prepend .search-query {
@@ -577,9 +571,9 @@ input.search-query {
 }
 // Remove float and margin, set to inline-block
 .form-search .radio input[type="radio"],
-  .form-search .checkbox input[type="checkbox"],
-  .form-inline .radio input[type="radio"],
-  .form-inline .checkbox input[type="checkbox"] {
+.form-search .checkbox input[type="checkbox"],
+.form-inline .radio input[type="radio"],
+.form-inline .checkbox input[type="checkbox"] {
   float: left;
   margin-right: 3px;
   margin-left: 0;
@@ -923,8 +917,7 @@ input[type=radio] {
       color: @errorText;
       z-index: 1;
 
-      .sicon,
-      .fa {
+      .sicon {
         color: @errorText;
       }
 
@@ -969,7 +962,7 @@ input[type=radio] {
 }
 
 .radio input[type="radio"],
-  .checkbox input[type="checkbox"] {
+.checkbox input[type="checkbox"] {
   float: none;
 }
 
@@ -1119,17 +1112,7 @@ input[type=radio] {
     }
 
     &.controls-three {
-      padding-right: 90px;
-    }
-
-    &.controls-two {
-      padding-right: 63px;
-    }
-
-    .btn-group {
-      position: absolute;
-      top: 0;
-      right: 0;
+      padding-right: 8rem;
     }
   }
 }
@@ -1231,7 +1214,7 @@ input[type="radio"][readonly] {
 }
 
 textarea,
-input[type="text"],
+// input[type="text"],
 input[type="password"],
 input[type="datetime"],
 input[type="datetime-local"],
@@ -1254,7 +1237,6 @@ input[type="color"],
 [data-type='date-cascade'] {
   .input-append.error {
     + .add-on[data-icon='calendar'] {
-      .fa-calendar,
       .sicon-calendar {
         color: @red;
       }

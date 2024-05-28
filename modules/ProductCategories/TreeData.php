@@ -12,23 +12,23 @@
 
 use Doctrine\DBAL\Result;
 
-require_once('vendor/ytree/Node.php');
-
+require_once 'vendor/ytree/Node.php';
 
 
 //function returns an array of objects of Node type.
-function get_node_data($params,$get_array=false) {
-    $click_level=$params['TREE']['depth'];
-    $parent_id=$params['NODES'][$click_level]['id'];
+function get_node_data($params, $get_array = false)
+{
+    $click_level = $params['TREE']['depth'];
+    $parent_id = $params['NODES'][$click_level]['id'];
 
-    $ret = array();
-	$nodes=get_product_categories($parent_id);
-	foreach ($nodes as $node) {
-		$ret['nodes'][]=$node->get_definition();
-	}
-	$json = new JSON();
-	$str=$json->encode($ret);
-	return $str;
+    $ret = [];
+    $nodes = get_product_categories($parent_id);
+    foreach ($nodes as $node) {
+        $ret['nodes'][] = $node->get_definition();
+    }
+    $json = new JSON();
+    $str = $json->encode($ret);
+    return $str;
 }
 
 /*
@@ -39,11 +39,12 @@ function get_node_data($params,$get_array=false) {
  * node at index 0 represents the topmost level node. This fuction calls itself recursively to build
  * open nodes.
  */
-function get_product_categories($parent_id,$open_nodes_ids=array()) {
+function get_product_categories($parent_id, $open_nodes_ids = [])
+{
     $href_string = "javascript:set_return('productcategories')";
     reset($open_nodes_ids);
-    $nodes=array();
-    if ($parent_id=='') {
+    $nodes = [];
+    if ($parent_id == '') {
         $query = <<<SQL
 SELECT * FROM product_categories 
 WHERE (parent_id IS NULL OR parent_id = '') AND deleted = 0 
@@ -66,25 +67,25 @@ SQL;
     /** @var Result $result */
     foreach ($result->iterateAssociative() as $row) {
         $node = new Node($row['id'], $row['name']);
-        $node->set_property("href", $href_string);
+        $node->set_property('href', $href_string);
 
-        if ((is_countable($open_nodes_ids) ? count($open_nodes_ids) : 0) > 0 and $row['id'] == current(
+        if (safeCount($open_nodes_ids) > 0 and $row['id'] == current(
             $open_nodes_ids
         )) {
             $node->expanded = true;
             $node->dynamic_load = false;
-            $current_id=current($open_nodes_ids);
+            $current_id = current($open_nodes_ids);
             array_shift($open_nodes_ids);
-            $child_nodes=get_product_categories($current_id,$open_nodes_ids);
+            $child_nodes = get_product_categories($current_id, $open_nodes_ids);
             //add all returned node to current node.
             foreach ($child_nodes as $child_node) {
-            	$node->add_node($child_node);
+                $node->add_node($child_node);
             }
-    	} else {
+        } else {
             $node->expanded = false;
             $node->dynamic_load = true;
-    	}
-        $nodes[]=$node;
+        }
+        $nodes[] = $node;
     }
     return $nodes;
 }

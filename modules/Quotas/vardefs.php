@@ -9,14 +9,14 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Quota'] = array(
+$dictionary['Quota'] = [
     'table' => 'quotas',
     'archive' => false,
     'audited' => true,
     'activity_enabled' => true,
     'favorites' => false,
-    'fields' => array(
-        'user_id' => array(
+    'fields' => [
+        'user_id' => [
             'name' => 'user_id',
             'vname' => 'LBL_USER_ID',
             'type' => 'assigned_user_name',
@@ -26,24 +26,24 @@ $dictionary['Quota'] = array(
             'reportable' => false,
             'dbType' => 'id',
             'importable' => 'required',
-        ),
-        'user_name' => array(
+        ],
+        'user_name' => [
             'name' => 'user_name',
             'vname' => 'LBL_USER_NAME',
             'type' => 'varchar',
             'reportable' => false,
             'source' => 'non-db',
             'table' => 'users',
-        ),
-        'user_full_name' => array(
+        ],
+        'user_full_name' => [
             'name' => 'user_full_name',
             'vname' => 'LBL_USER_FULL_NAME',
             'type' => 'varchar',
             'reportable' => false,
             'source' => 'non-db',
             'table' => 'users',
-        ),
-        'timeperiod_id' => array(
+        ],
+        'timeperiod_id' => [
             'name' => 'timeperiod_id',
             'vname' => 'LBL_TIMEPERIOD_ID',
             'type' => 'enum',
@@ -51,8 +51,8 @@ $dictionary['Quota'] = array(
             'function' => 'getTimePeriodsDropDownForQuotas',
             'reportable' => true,
             'audited' => true,
-        ),
-        'quota_type' => array(
+        ],
+        'quota_type' => [
             'name' => 'quota_type',
             'vname' => 'LBL_QUOTA_TYPE',
             'type' => 'enum',
@@ -60,8 +60,8 @@ $dictionary['Quota'] = array(
             'massupdate' => false,
             'options' => 'forecast_type_dom',
             'reportable' => false,
-        ),
-        'amount' => array(
+        ],
+        'amount' => [
             'name' => 'amount',
             'vname' => 'LBL_AMOUNT',
             'type' => 'currency',
@@ -69,8 +69,8 @@ $dictionary['Quota'] = array(
             'reportable' => true,
             'importable' => 'required',
             'audited' => true,
-        ),
-        'amount_base_currency' => array(
+        ],
+        'amount_base_currency' => [
             'name' => 'amount_base_currency',
             'vname' => 'LBL_AMOUNT_BASE_CURRENCY',
             'type' => 'currency',
@@ -79,28 +79,28 @@ $dictionary['Quota'] = array(
             'studio' => false,
             'readonly' => true,
             'is_base_currency' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
+                'base_rate',
+            ],
             'formula' => 'ifElse(isNumeric($amount), currencyDivide($amount, $base_rate), "")',
             'calculated' => true,
             'enforced' => true,
-        ),
-        'committed' => array(
+        ],
+        'committed' => [
             'name' => 'committed',
             'vname' => 'LBL_COMMITTED',
             'type' => 'bool',
             'default' => '0',
             'required' => false,
             'reportable' => false,
-        )
-    ),
-    'indices' => array(
-        array('name' => 'idx_quota_user_tp', 'type' => 'index', 'fields' => array('user_id', 'timeperiod_id')),
-    ),
-    'relationships' => array(
-        'quota_activities' => array(
+        ],
+    ],
+    'indices' => [
+        ['name' => 'idx_quota_user_tp', 'type' => 'index', 'fields' => ['user_id', 'timeperiod_id']],
+    ],
+    'relationships' => [
+        'quota_activities' => [
             'lhs_module' => 'Quotas',
             'lhs_table' => 'quotas',
             'lhs_key' => 'id',
@@ -114,16 +114,16 @@ $dictionary['Quota'] = array(
             'join_key_rhs' => 'activity_id',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Quotas',
-        )
-    ),
-);
+        ],
+    ],
+];
 
 VardefManager::createVardef(
     'Quotas',
     'Quota',
-    array(
+    [
         'default',
         'assignable',
-        'currency'
-    )
+        'currency',
+    ]
 );

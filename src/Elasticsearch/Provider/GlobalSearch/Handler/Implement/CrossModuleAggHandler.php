@@ -65,13 +65,12 @@ class CrossModuleAggHandler extends AbstractHandler implements
         }
 
         // implicit module aggregation
-        $size = count($builder->getModules());
+        $size = safeCount($builder->getModules());
         $builder->addAggregation('modules', new ModuleAggregation($size));
 
         // add cross module aggregations
         $this->loadAggDefs();
         foreach ($this->aggDefs as $id => $defs) {
-
             // create new object
             $agg = AggregationFactory::create($defs['type']);
 

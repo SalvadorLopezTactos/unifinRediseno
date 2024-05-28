@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('datatable-table', function (Y, NAME) {
 
 /**
@@ -41,20 +34,20 @@ Y.namespace('DataTable').TableView = Y.Base.create('table', Y.View, [], {
 
     @property CAPTION_TEMPLATE
     @type {String}
-    @default '<caption class="{className}"/>'
+    @default '<caption class="{className}"></caption>'
     @since 3.6.0
     **/
-    CAPTION_TEMPLATE: '<caption class="{className}"/>',
+    CAPTION_TEMPLATE: '<caption class="{className}"></caption>',
 
     /**
     The HTML template used to create the table Node.
 
     @property TABLE_TEMPLATE
     @type {String}
-    @default '<table cellspacing="0" class="{className}"/>'
+    @default '<table cellspacing="0" class="{className}"></table>'
     @since 3.6.0
     **/
-    TABLE_TEMPLATE  : '<table cellspacing="0" class="{className}"/>',
+    TABLE_TEMPLATE  : '<table cellspacing="0" class="{className}"></table>',
 
     /**
     The object or instance of the class assigned to `bodyView` that is
@@ -759,4 +752,4 @@ Y.namespace('DataTable').TableView = Y.Base.create('table', Y.View, [], {
 
 
 
-}, '3.15.0', {"requires": ["datatable-core", "datatable-head", "datatable-body", "view", "classnamemanager"]});
+}, '3.18.1', {"requires": ["datatable-core", "datatable-head", "datatable-body", "view", "classnamemanager"]});

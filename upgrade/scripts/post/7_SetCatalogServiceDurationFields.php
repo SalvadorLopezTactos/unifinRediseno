@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Set catalog_service_duration_value and catalog_service_duration_unit fields
  * for line items so proration calculations work on upgrade

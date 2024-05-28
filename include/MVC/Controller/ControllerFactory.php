@@ -17,29 +17,29 @@
  */
 class ControllerFactory
 {
-	/**
-	 * Obtain an instance of the correct controller.
-	 *
+    /**
+     * Obtain an instance of the correct controller.
+     *
      * @param string $module Module name
      * @return SugarController
-	 */
+     */
     public static function getController($module)
-	{
-		if(SugarAutoLoader::requireWithCustom("modules/{$module}/controller.php")) {
-		    $class = SugarAutoLoader::customClass(ucfirst($module).'Controller');
-		} else {
-		    SugarAutoLoader::requireWithCustom('include/MVC/Controller/SugarController.php');
-		    $class = SugarAutoLoader::customClass('SugarController');
-		}
-		if(class_exists($class, false)) {
-			$controller = new $class();
-		}
+    {
+        if (SugarAutoLoader::requireWithCustom("modules/{$module}/controller.php")) {
+            $class = SugarAutoLoader::customClass(ucfirst($module) . 'Controller');
+        } else {
+            SugarAutoLoader::requireWithCustom('include/MVC/Controller/SugarController.php');
+            $class = SugarAutoLoader::customClass('SugarController');
+        }
+        if (class_exists($class, false)) {
+            $controller = new $class();
+        }
 
-		if(empty($controller)) {
-		    $controller = new SugarController();
-		}
-		//setup the controller
-		$controller->setup($module);
-		return $controller;
-	}
+        if (empty($controller)) {
+            $controller = new SugarController();
+        }
+        //setup the controller
+        $controller->setup($module);
+        return $controller;
+    }
 }

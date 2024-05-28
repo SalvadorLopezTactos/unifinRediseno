@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['DataPrivacy'] = array(
+$dictionary['DataPrivacy'] = [
     'table' => 'data_privacy',
     'audited' => true,
     'activity_enabled' => false,
@@ -19,23 +19,23 @@ $dictionary['DataPrivacy'] = array(
     'unified_search' => true,
     'full_text_search' => true,
     'unified_search_default_enabled' => true,
-    'duplicate_merge'=>false,
+    'duplicate_merge' => false,
     'comment' => 'Requests regarding the data we have collected on our customers',
-    'fields' => array(
-        'type' => array (
+    'fields' => [
+        'type' => [
             'name' => 'type',
             'vname' => 'LBL_TYPE',
             'type' => 'enum',
             'options' => 'dataprivacy_type_dom',
-            'len'=>255,
+            'len' => 255,
             'unified_search' => true,
             'comment' => 'The type of request',
             'sortable' => true,
             'duplicate_on_record_copy' => 'always',
             'required' => true,
             'audited' => true,
-        ),
-        'status' => array (
+        ],
+        'status' => [
             'name' => 'status',
             'vname' => 'LBL_STATUS',
             'type' => 'enum',
@@ -47,8 +47,8 @@ $dictionary['DataPrivacy'] = array(
             'duplicate_on_record_copy' => 'always',
             'audited' => true,
             'massupdate' => false,
-        ),
-        'business_purpose' => array (
+        ],
+        'business_purpose' => [
             'name' => 'business_purpose',
             'vname' => 'LBL_BUSINESS_PURPOSE',
             'type' => 'multienum',
@@ -60,139 +60,129 @@ $dictionary['DataPrivacy'] = array(
             'duplicate_on_record_copy' => 'always',
             'required' => false,
             'isMultiSelect' => true,
-            'visibility_grid' => array(
+            'visibility_grid' => [
                 'trigger' => 'type',
-                'values' => array(
-                    '' => array (),
-                    'Request for Data Privacy Policy' => array (),
-                    'Send Personal Information being processed' => array (),
-                    'Rectify Information' => array (),
-                    'Request to Erase Information' => array (),
-                    'Export Information' => array (),
-                    'Restrict Processing' => array (),
-                    'Object to Processing' => array (),
-                    'Consent to Process' => array(
+                'values' => [
+                    '' => [],
+                    'Request for Data Privacy Policy' => [],
+                    'Send Personal Information being processed' => [],
+                    'Rectify Information' => [],
+                    'Request to Erase Information' => [],
+                    'Export Information' => [],
+                    'Restrict Processing' => [],
+                    'Object to Processing' => [],
+                    'Consent to Process' => [
                         'Business Communications',
                         'Marketing Communications by company',
                         'Marketing Communications by partners',
-                    ),
-                    'Withdraw Consent' => array(
+                    ],
+                    'Withdraw Consent' => [
                         'Business Communications',
                         'Marketing Communications by company',
                         'Marketing Communications by partners',
-                    ),
-                    'Other' => array (),
-                ),
-            ),
+                    ],
+                    'Other' => [],
+                ],
+            ],
             'audited' => true,
-        ),
-        'source' =>
-            array (
-                'name' => 'source',
-                'vname' => 'LBL_SOURCE',
-                'type' => 'varchar',
-                'len' => 255,
-                'required' => false,
-                'full_text_search' => array('enabled' => true, 'searchable' => true),
-                'comment' => 'The source of the request',
-                'audited' => true,
-            ),
-        'requested_by' =>
-            array(
-                'name' => 'requested_by',
-                'vname' => 'LBL_REQUESTED_BY',
-                'type' => 'varchar',
-                'len' => 255,
-                'full_text_search' => array(
-                    'enabled' => true,
-                    'searchable' => true,
-                ),
-                'comment' => 'Requested by',
-                'audited' => true,
-            ),
-        'date_opened' =>
-            array(
-                'name' => 'date_opened',
-                'vname' => 'LBL_DATE_OPENED',
-                'type' => 'date',
-                'display_default' => 'now',
-                'options' => 'date_range_search_dom',
-                'enable_range_search' => true,
-                'comment' => 'Date opened',
-            ),
-        'date_due' =>
-            array(
-                'name' => 'date_due',
-                'vname' => 'LBL_DATE_DUE',
-                'type' => 'date',
-                'options' => 'date_range_search_dom',
-                'enable_range_search' => true,
-                'comment' => 'Due date',
-                'audited' => true,
-             ),
-        'resolution' =>
-            array (
-                'name' => 'resolution',
-                'vname' => 'LBL_RESOLUTION',
-                'type' => 'text',
-                'full_text_search' => array('enabled' => true, 'searchable' => true),
-                'comment' => 'The resolution of the request',
-                'audited' => true,
-            ),
-        'date_closed' =>
-            array(
-                'name' => 'date_closed',
-                'vname' => 'LBL_DATE_CLOSED',
-                'type' => 'date',
-                'options' => 'date_range_search_dom',
-                'enable_range_search' => true,
-                'comment' => 'Date closed',
-                'audited' => true,
-            ),
-        'fields_to_erase' => array(
+        ],
+        'source' => [
+            'name' => 'source',
+            'vname' => 'LBL_SOURCE',
+            'type' => 'varchar',
+            'len' => 255,
+            'required' => false,
+            'full_text_search' => ['enabled' => true, 'searchable' => true],
+            'comment' => 'The source of the request',
+            'audited' => true,
+        ],
+        'requested_by' => [
+            'name' => 'requested_by',
+            'vname' => 'LBL_REQUESTED_BY',
+            'type' => 'varchar',
+            'len' => 255,
+            'full_text_search' => [
+                'enabled' => true,
+                'searchable' => true,
+            ],
+            'comment' => 'Requested by',
+            'audited' => true,
+        ],
+        'date_opened' => [
+            'name' => 'date_opened',
+            'vname' => 'LBL_DATE_OPENED',
+            'type' => 'date',
+            'display_default' => 'now',
+            'options' => 'date_range_search_dom',
+            'enable_range_search' => true,
+            'comment' => 'Date opened',
+        ],
+        'date_due' => [
+            'name' => 'date_due',
+            'vname' => 'LBL_DATE_DUE',
+            'type' => 'date',
+            'options' => 'date_range_search_dom',
+            'enable_range_search' => true,
+            'comment' => 'Due date',
+            'audited' => true,
+        ],
+        'resolution' => [
+            'name' => 'resolution',
+            'vname' => 'LBL_RESOLUTION',
+            'type' => 'text',
+            'full_text_search' => ['enabled' => true, 'searchable' => true],
+            'comment' => 'The resolution of the request',
+            'audited' => true,
+        ],
+        'date_closed' => [
+            'name' => 'date_closed',
+            'vname' => 'LBL_DATE_CLOSED',
+            'type' => 'date',
+            'options' => 'date_range_search_dom',
+            'enable_range_search' => true,
+            'comment' => 'Date closed',
+            'audited' => true,
+        ],
+        'fields_to_erase' => [
             'name' => 'fields_to_erase',
             'type' => 'json',
             'dbType' => 'text',
             'studio' => false,
             'hideacl' => true,
             'reportable' => false,
-        ),
-        'leads' =>
-            array (
-                'name' => 'leads',
-                'type' => 'link',
-                'relationship' => 'leads_dataprivacy',
-                'source'=>'non-db',
-                'vname'=>'LBL_LEADS',
-            ),
-        'accounts' =>
-            array (
-                'name' => 'accounts',
-                'type' => 'link',
-                'relationship' => 'accounts_dataprivacy',
-                'source'=>'non-db',
-                'vname'=>'LBL_ACCOUNTS',
-            ),
-        'contacts' =>
-            array (
-                'name' => 'contacts',
-                'type' => 'link',
-                'relationship' => 'contacts_dataprivacy',
-                'source'=>'non-db',
-                'vname'=>'LBL_CONTACTS',
-            ),
-        'prospects' =>
-            array (
-                'name' => 'prospects',
-                'type' => 'link',
-                'relationship' => 'prospects_dataprivacy',
-                'source'=>'non-db',
-                'vname'=>'LBL_PROSPECTS',
-            ),
-    ),
-    'indices' => array(
-    ),
-    'acls' => array('SugarACLDataPrivacy' => true, 'SugarACLStatic' => true),
-);
+        ],
+        'leads' => [
+            'name' => 'leads',
+            'type' => 'link',
+            'relationship' => 'leads_dataprivacy',
+            'source' => 'non-db',
+            'vname' => 'LBL_LEADS',
+        ],
+        'accounts' => [
+            'name' => 'accounts',
+            'type' => 'link',
+            'relationship' => 'accounts_dataprivacy',
+            'source' => 'non-db',
+            'vname' => 'LBL_ACCOUNTS',
+        ],
+        'contacts' => [
+            'name' => 'contacts',
+            'type' => 'link',
+            'relationship' => 'contacts_dataprivacy',
+            'source' => 'non-db',
+            'vname' => 'LBL_CONTACTS',
+        ],
+        'prospects' => [
+            'name' => 'prospects',
+            'type' => 'link',
+            'relationship' => 'prospects_dataprivacy',
+            'source' => 'non-db',
+            'vname' => 'LBL_PROSPECTS',
+        ],
+    ],
+    'indices' => [
+    ],
+    'acls' => ['SugarACLDataPrivacy' => true, 'SugarACLStatic' => true],
+];
 
-VardefManager::createVardef('DataPrivacy', 'DataPrivacy', array('default', 'assignable', 'team_security', 'issue'));
+VardefManager::createVardef('DataPrivacy', 'DataPrivacy', ['default', 'assignable', 'team_security', 'issue', 'audit']);

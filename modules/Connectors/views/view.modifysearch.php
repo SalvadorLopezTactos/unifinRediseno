@@ -1,4 +1,5 @@
 <?php
+
 // @codingStandardsIgnoreFile
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -20,11 +21,11 @@ class ViewModifySearch extends SugarView
     {
         global $mod_strings;
 
-        return array(
-            "<a href='#Administration'>".translate('LBL_MODULE_NAME', 'Administration')."</a>",
-            "<a href='index.php?module=Connectors&action=ConnectorSettings'>".$mod_strings['LBL_ADMINISTRATION_MAIN']."</a>",
+        return [
+            "<a href='#Administration'>" . translate('LBL_MODULE_NAME', 'Administration') . '</a>',
+            "<a href='index.php?module=Connectors&action=ConnectorSettings'>" . $mod_strings['LBL_ADMINISTRATION_MAIN'] . '</a>',
             $mod_strings['LBL_MODIFY_SEARCH_TITLE'],
-        );
+        ];
     }
 
     /**
@@ -48,7 +49,7 @@ class ViewModifySearch extends SugarView
         foreach ($connectors as $id => $source) {
             $s = SourceFactory::getSource($id);
             if ($s === null || !$s->isEnabledInAdminSearch() || !$s->isEnabledInWizard()) {
-               unset($connectors[$id]);
+                unset($connectors[$id]);
             }
         }
 

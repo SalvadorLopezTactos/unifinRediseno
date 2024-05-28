@@ -36,69 +36,69 @@ class ForecastReset
      *
      * @var array
      */
-    protected $rli_worksheet_columns = array(
-        array(
+    protected $rli_worksheet_columns = [
+        [
             'name' => 'opportunity_name',
             'label' => 'LBL_OPPORTUNITY_NAME',
             'label_module' => 'Opportunities',
-            'order' => 3
-        ),
-        array(
+            'order' => 3,
+        ],
+        [
             'name' => 'product_template_name',
             'label' => 'LBL_PRODUCT',
             'label_module' => 'RevenueLineItems',
-            'order' => 7
-        ),
-        array(
+            'order' => 7,
+        ],
+        [
             'name' => 'list_price',
             'label' => 'LBL_LIST_PRICE',
             'label_module' => 'RevenueLineItems',
-            'order' => 15
-        ),
-        array(
+            'order' => 15,
+        ],
+        [
             'name' => 'cost_price',
             'label' => 'LBL_COST_PRICE',
-            'order' => 16
-        ),
-        array(
+            'order' => 16,
+        ],
+        [
             'name' => 'discount_price',
             'label' => 'LBL_DISCOUNT_PRICE',
             'label_module' => 'RevenueLineItems',
-            'order' => 17
-        ),
-        array(
+            'order' => 17,
+        ],
+        [
             'name' => 'discount_amount',
             'label' => 'LBL_TOTAL_DISCOUNT_AMOUNT',
-            'order' => 18
-        ),
-        array(
+            'order' => 18,
+        ],
+        [
             'name' => 'quantity',
             'label' => 'LBL_LIST_QUANTITY',
             'label_module' => 'RevenueLineItems',
-            'order' => 19
-        ),
-        array(
+            'order' => 19,
+        ],
+        [
             'name' => 'category_name',
             'label' => 'LBL_CATEGORY',
-            'order' => 20
-        ),
-        array(
+            'order' => 20,
+        ],
+        [
             'name' => 'total_amount',
             'label' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
             'label_module' => 'RevenueLineItems',
-            'order' => 21
-        ),
-    );
+            'order' => 21,
+        ],
+    ];
 
     /**
      * What tables should be truncated
      *
      * @var array
      */
-    protected $tables = array(
+    protected $tables = [
         'forecast_worksheets',
-        'forecasts'
-    );
+        'forecasts',
+    ];
 
     /**
      * Reset the Forecast Module to have no data
@@ -185,7 +185,6 @@ class ForecastReset
 
         // now write out the correct list view
         $this->setWorksheetColumns('base', $columns, $forecast_by);
-
     }
 
     public function setWorksheetColumns($platform, $worksheetColumns, $forecastBy)
@@ -214,16 +213,16 @@ class ForecastReset
             }
         );
 
-        $cteable = array(
+        $cteable = [
             'commit_stage',
             'worst_case',
             'likely_case',
             'best_case',
             'date_closed',
-            'sales_stage'
-        );
+            'sales_stage',
+        ];
 
-        $currency_fields = array(
+        $currency_fields = [
             'worst_case',
             'likely_case',
             'best_case',
@@ -231,8 +230,8 @@ class ForecastReset
             'cost_price',
             'discount_price',
             'discount_amount',
-            'total_amount'
-        );
+            'total_amount',
+        ];
 
         foreach ($fields as $field) {
             if (!in_array($field['name'], $worksheetColumns)) {
@@ -240,30 +239,30 @@ class ForecastReset
             }
 
             $column = $field['name'];
-            $additionalDefs = array();
+            $additionalDefs = [];
 
             // set the label for the parent_name field, depending on what we are forecasting by
             if ($column == 'parent_name') {
                 $label = $forecastBy == 'Opportunities' ? 'LBL_OPPORTUNITY_NAME' : 'LBL_REVENUELINEITEM_NAME';
                 $additionalDefs = array_merge(
                     $additionalDefs,
-                    array('label' => $label)
+                    ['label' => $label]
                 );
             }
 
             if (in_array($column, $cteable)) {
                 $additionalDefs = array_merge(
                     $additionalDefs,
-                    array('click_to_edit' => true)
+                    ['click_to_edit' => true]
                 );
             }
             if (in_array($column, $currency_fields)) {
                 $additionalDefs = array_merge(
                     $additionalDefs,
-                    array(
+                    [
                         'convertToBase' => true,
-                        'showTransactionalAmount' => true
-                    )
+                        'showTransactionalAmount' => true,
+                    ]
                 );
             }
 
@@ -279,6 +278,7 @@ class ForecastReset
         // save the file, but we don't need to load the the $_REQUEST, so pass false
         $listDefsParser->handleSave(false);
     }
+
 
 
     /**
@@ -303,13 +303,14 @@ class ForecastReset
         }
 
         if ($refresh) {
-            $this->runRebuildExtensions(array('Forecasts'));
+            $this->runRebuildExtensions(['Forecasts']);
 
             MetaDataManager::refreshModulesCache('Forecasts');
         }
     }
 
-    public function runRebuildExtensions(array $modules = array('Forecasts'))
+
+    public function runRebuildExtensions(array $modules = ['Forecasts'])
     {
         SugarAutoLoader::load('modules/Administration/QuickRepairAndRebuild.php');
         $rac = new RepairAndClear();

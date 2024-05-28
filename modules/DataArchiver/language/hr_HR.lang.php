@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Alat za arh. podataka',
     'LBL_MODULE_NAME' => 'Alat za arh. podataka',
     'LBL_FILTER_DEF_FIELD' => 'Filtriraj',
@@ -28,7 +27,7 @@ $mod_strings = array (
     'LBL_MANAGE_ARCHIVE_JOB_LIST_TITLE' => 'Zakazane arhive',
     'LBL_MANAGE_ARCHIVE_JOB_IS_NOT_SCHEDULED' => 'Nema zakazanih arhiva',
     'LBL_ARCHIVE_FILTER' => 'Postavke filtra',
-    "LBL_MANAGE_ARCHIVE_SETUP" => 'Postavi arhiviranje podataka',
+    'LBL_MANAGE_ARCHIVE_SETUP' => 'Postavi arhiviranje podataka',
     'LBL_LIST_ARCHIVE_NAME' => 'Arhiviraj naziv',
     'LBL_PERFORM_NOW_BTN' => 'Provedi sada',
     'LBL_ARCHIVE_SUCCESS_TITLE' => 'Uspjeh',
@@ -45,4 +44,4 @@ $mod_strings = array (
         . 'jer u protivnom ona dovesti do smetnji u radu sustava. Jeste li sigurni da sad želite provesti tu radnju?',
 
     'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'U alatu za arhiviranje modula {{moduleName}} potrebno je postaviti {{fieldName}} kao filter',
-);
+];

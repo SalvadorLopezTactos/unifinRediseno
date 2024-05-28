@@ -59,6 +59,13 @@
      */
     hideOrShowPopulateFieldPanel: function() {
         if (
+            _.isEmpty(this.model.get('main_trigger_type')) ||
+            _.isEqual(this.model.get('main_trigger_type'), 'sugar_action_to_smart_guide')
+        ) {
+            // trigger event to hide the populate field panel
+            this.view.trigger('record:showHidePanel', 'LBL_RECORDVIEW_PANEL4', false);
+        }
+        if (
             _.contains(['create_record', 'update_record'], this.model.get('action_type')) &&
             ((this.action === 'edit' && !_.isEmpty(this.model.get('parent_id'))) || this.action === 'detail')
         ) {
@@ -84,6 +91,7 @@
         if (this.model) {
             this.listenTo(this.model, 'change:relationship', this.reloadEnumOptions);
             this.listenTo(this.model, `change:${this.name}`, this.bindDataChangeHandler);
+            this.listenTo(this.model, 'change:main_trigger_type', this.bindDataChangeHandler);
             this.listenTo(this.model, 'change:parent_id', this.hideOrShowPopulateFieldPanel);
         }
     },
@@ -103,7 +111,11 @@
      * @param {boolean} hideOrShow
      */
     hideOrShowEmailRelatedField: function(hideOrShow) {
-        if (_.isEqual(this.model.get(this.name), 'view_record')) {
+        if (
+            _.isEqual(this.model.get(this.name), 'view_record') ||
+            _.isEmpty(this.model.get('main_trigger_type')) ||
+            _.isEqual(this.model.get('main_trigger_type'), 'sugar_action_to_smart_guide')
+        ) {
             hideOrShow = false;
         }
 

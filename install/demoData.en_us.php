@@ -13,95 +13,95 @@
 //users demodata
 //VP
 global $sugar_demodata;
-$sugar_demodata['users'][0] = array(
-  'id' => 'seed_jim_id',	
-  'last_name' => 'Brennan',
-  'first_name' => 'Jim',
-  'user_name' => 'jim',
-  'title'	=> 'VP Sales',
-  'is_admin' => false,
-  'reports_to' => null,
-  'reports_to_name' => null,
-  'email' => 'jim@example.com'
-);
+$sugar_demodata['users'][0] = [
+    'id' => 'seed_jim_id',
+    'last_name' => 'Brennan',
+    'first_name' => 'Jim',
+    'user_name' => 'jim',
+    'title' => 'VP Sales',
+    'is_admin' => false,
+    'reports_to' => null,
+    'reports_to_name' => null,
+    'email' => 'jim@example.com',
+];
 
 //west team
-$sugar_demodata['users'][] = array(
-  'id' => 'seed_sarah_id',	
-  'last_name' => 'Smith',
-  'first_name' => 'Sarah',
-  'user_name' => 'sarah',
-  'title'	=> 'Sales Manager West',
-  'is_admin' => false,
-  'reports_to' => 'seed_jim_id',
-  'reports_to_name' => 'Brennan, Jim',
-  'email' => 'sarah@example.com'
-);
+$sugar_demodata['users'][] = [
+    'id' => 'seed_sarah_id',
+    'last_name' => 'Smith',
+    'first_name' => 'Sarah',
+    'user_name' => 'sarah',
+    'title' => 'Sales Manager West',
+    'is_admin' => false,
+    'reports_to' => 'seed_jim_id',
+    'reports_to_name' => 'Brennan, Jim',
+    'email' => 'sarah@example.com',
+];
 
-$sugar_demodata['users'][] = array(
-  'id' => 'seed_sally_id',	
-  'last_name' => 'Bronsen',
-  'first_name' => 'Sally',
-  'user_name' => 'sally',
-  'title'	=> 'Senior Account Rep',
-  'is_admin' => false,
-  'reports_to' => 'seed_sarah_id',
-  'reports_to_name' => 'Smith, Sarah',
-  'email' => 'sally@example.com'
-);
+$sugar_demodata['users'][] = [
+    'id' => 'seed_sally_id',
+    'last_name' => 'Bronsen',
+    'first_name' => 'Sally',
+    'user_name' => 'sally',
+    'title' => 'Senior Account Rep',
+    'is_admin' => false,
+    'reports_to' => 'seed_sarah_id',
+    'reports_to_name' => 'Smith, Sarah',
+    'email' => 'sally@example.com',
+];
 
-$sugar_demodata['users'][] = array(
-  'id' => 'seed_max_id',	
-  'last_name' => 'Jensen',
-  'first_name' => 'Max',
-  'user_name' => 'max',
-  'title'	=> 'Account Rep',
-  'is_admin' => false,
-  'reports_to' => 'seed_sarah_id',
-  'reports_to_name' => 'Smith, Sarah',
-  'email' => 'tom@example.com'
-);
+$sugar_demodata['users'][] = [
+    'id' => 'seed_max_id',
+    'last_name' => 'Jensen',
+    'first_name' => 'Max',
+    'user_name' => 'max',
+    'title' => 'Account Rep',
+    'is_admin' => false,
+    'reports_to' => 'seed_sarah_id',
+    'reports_to_name' => 'Smith, Sarah',
+    'email' => 'tom@example.com',
+];
 
 //east team
-$sugar_demodata['users'][] = array(
-  'id' => 'seed_will_id',	
-  'last_name' => 'Westin',
-  'first_name' => 'Will',
-  'user_name' => 'will',
-  'title'	=> 'Sales Manager East',
-  'is_admin' => false,
-  'reports_to' => 'seed_jim_id',
-  'reports_to_name' => 'Brennan, Jim',
-  'email' => 'will@example.com'
-);
+$sugar_demodata['users'][] = [
+    'id' => 'seed_will_id',
+    'last_name' => 'Westin',
+    'first_name' => 'Will',
+    'user_name' => 'will',
+    'title' => 'Sales Manager East',
+    'is_admin' => false,
+    'reports_to' => 'seed_jim_id',
+    'reports_to_name' => 'Brennan, Jim',
+    'email' => 'will@example.com',
+];
 
-$sugar_demodata['users'][] = array(
-  'id' => 'seed_chris_id',	
-  'last_name' => 'Olliver',
-  'first_name' => 'Chris',
-  'user_name' => 'chris',
-  'title'	=> 'Senior Account Rep',
-  'is_admin' => false,
-  'reports_to' => 'seed_will_id',
-  'reports_to_name' => 'Westin, Will',
-  'email' => 'chris@example.com'
-);
+$sugar_demodata['users'][] = [
+    'id' => 'seed_chris_id',
+    'last_name' => 'Olliver',
+    'first_name' => 'Chris',
+    'user_name' => 'chris',
+    'title' => 'Senior Account Rep',
+    'is_admin' => false,
+    'reports_to' => 'seed_will_id',
+    'reports_to_name' => 'Westin, Will',
+    'email' => 'chris@example.com',
+];
 
 //teams demodata
-$sugar_demodata['teams'][] = array(
-  'name' => 'East',	
-  'description' => 'This is the team for the East',
-  'team_id' => 'East',
-);
+$sugar_demodata['teams'][] = [
+    'name' => 'East',
+    'description' => 'This is the team for the East',
+    'team_id' => 'East',
+];
 
-$sugar_demodata['teams'][] = array(
-  'name' => 'West',	
-  'description' => 'This is the team for the West',
-  'team_id' => 'West',
-);
+$sugar_demodata['teams'][] = [
+    'name' => 'West',
+    'description' => 'This is the team for the West',
+    'team_id' => 'West',
+];
 
 // tags
-$sugar_demodata['tags_array'] = array(
+$sugar_demodata['tags_array'] = [
     'follow up',
     'travel',
     'bills',
@@ -152,9 +152,9 @@ $sugar_demodata['tags_array'] = array(
     'Africa',
     'World Wide',
     'Candy Bean',
-);
+];
 //contacts accounts
-$sugar_demodata['last_name_array'] = array(
+$sugar_demodata['last_name_array'] = [
     'Aarons',
     'Abelson',
     'Able',
@@ -1152,9 +1152,9 @@ $sugar_demodata['last_name_array'] = array(
     'Tubbs',
     'Tullos',
     'Tung',
-);
+];
 
-$sugar_demodata['first_name_array'] = array(
+$sugar_demodata['first_name_array'] = [
     'Abby',
     'Adah',
     'Adalberto',
@@ -2155,252 +2155,252 @@ $sugar_demodata['first_name_array'] = array(
     'Yvone',
     'Zane',
     'Zella',
-);
+];
 
-$sugar_demodata['company_name_array'] = array(
-	"24/7 Couriers",
-	"Sandeon Consolidation Corp",
-	"360 Vacations",
-	"Powell Funding",
-	"5D Investments",
-	"Aim Capital Inc",
-	"AB Drivers Limited",
-	"Hammer Group Inc",
-	"Arts & Crafts Inc",
-	"A.D. Importing Company Inc",
-	"A.G. Parr PLC",
-	"AtoZ Co Ltd",
-	"Avery Software Co",
-	"Airline Maintenance Co",
-	"Air Safety Inc",
-	"Anytime Air Support Inc",
-	"Coolview Net Ltd",
-	"Rubble Group Inc",
-	"B.C. Investing International",
-	"Sunyvale Reporting Ltd",
-	"B.H. Edwards Inc",
-	"Insight Marketing Inc",
-	"Bay Funding Co",
-	"Nelson Inc",
-	"Calm Sailing Inc",
-	"Chandler Logistics Inc",
-	"Cloud Cover Trust",
-	"Complete Holding",
-	"Constrata Trust LLC",
-	"Cumberland Trails Inc",
-	"DD Furniture Inc",
-	"Dirt Mining Ltd",
-	"Hollywood Diner Ltd",
-	"Davenport Investing",
-	"Draft Diversified Energy Inc",
-	"First National S/B",
-	"Gifted Holdings AG",
-	"Green Tractor Group Limited",
-	"Grow-Fast Inc",
-	"Income Free Investing LP",
-	"International Art Inc",
-	"Ink Conglomerate Inc",
-	"J.K.M. Corp (HA)",
-	"JAB Funds Ltd.",
-	"JBC Banking Inc",
-	"JJ Resources Inc",
-	"Jungle Systems Inc",
-	"Kringle Bell Inc".
-	"K.A. Tower & Co",
-	"Kaos Trading Ltd",
-	"Kings Royalty Trust",
-	"King Software Inc",
-	"Smith & Sons",
-	"Lexington Shores Corp",
-	"Max Holdings Ltd",
-	"Mississippi Bank Group",
-	"MMM Mortuary Corp",
-	"MTM Investment Bank F S B",
-	"Nimble Technologies Inc",
-	"NW Bridge Construction",
-	"NW Capital Corp",
-	"OTC Holdings",
-	"Overhead & Underfoot Ltd.",
-	"P Piper & Sons",
-	"Powder Suppliers",
-	"Pullman Cart Company",
-	"Q.R.&E. Corp",
-	"Q3 ARVRO III PR",
-	"Rhyme & Reason Inc",
-	"Riviera Hotels",
-	"RR. Talker Co",
-	"RRR Advertising Inc.",
-	"S Cane Sweeteners Ltd",
-	"Sea Region Inc",
-	"Slender Broadband Inc",
-	"Smallville Resources Inc",
-	"South Sea Plumbing Products",
-	"Southern Realty",
-	"Spend Thrift Inc",
-	"Spindle Broadcast Corp.",
-	"Start Over Trust",
-	"Super Star Holdings Inc",
-	"SuperG Tech",
-	"T-Cat Media Group Inc",
-	"TJ O'Rourke Inc",
-	"Tortoise Corp",
-	"Tracker Com LP",
-	"Trait Institute Inc",
-	"Tri-State Medical Corp",
-	"T-Squared Techs",
-	"EEE Endowments LTD",
-	"Underwater Mining Inc.",
-	"Union Bank",
-	"Waverly Trading House",
-	"White Cross Co",
-	"X-Sell Holdings",
-	"XY&Z Funding Inc",
-);
+$sugar_demodata['company_name_array'] = [
+    '24/7 Couriers',
+    'Sandeon Consolidation Corp',
+    '360 Vacations',
+    'Powell Funding',
+    '5D Investments',
+    'Aim Capital Inc',
+    'AB Drivers Limited',
+    'Hammer Group Inc',
+    'Arts & Crafts Inc',
+    'A.D. Importing Company Inc',
+    'A.G. Parr PLC',
+    'AtoZ Co Ltd',
+    'Avery Software Co',
+    'Airline Maintenance Co',
+    'Air Safety Inc',
+    'Anytime Air Support Inc',
+    'Coolview Net Ltd',
+    'Rubble Group Inc',
+    'B.C. Investing International',
+    'Sunyvale Reporting Ltd',
+    'B.H. Edwards Inc',
+    'Insight Marketing Inc',
+    'Bay Funding Co',
+    'Nelson Inc',
+    'Calm Sailing Inc',
+    'Chandler Logistics Inc',
+    'Cloud Cover Trust',
+    'Complete Holding',
+    'Constrata Trust LLC',
+    'Cumberland Trails Inc',
+    'DD Furniture Inc',
+    'Dirt Mining Ltd',
+    'Hollywood Diner Ltd',
+    'Davenport Investing',
+    'Draft Diversified Energy Inc',
+    'First National S/B',
+    'Gifted Holdings AG',
+    'Green Tractor Group Limited',
+    'Grow-Fast Inc',
+    'Income Free Investing LP',
+    'International Art Inc',
+    'Ink Conglomerate Inc',
+    'J.K.M. Corp (HA)',
+    'JAB Funds Ltd.',
+    'JBC Banking Inc',
+    'JJ Resources Inc',
+    'Jungle Systems Inc',
+    'Kringle Bell Inc' .
+    'K.A. Tower & Co',
+    'Kaos Trading Ltd',
+    'Kings Royalty Trust',
+    'King Software Inc',
+    'Smith & Sons',
+    'Lexington Shores Corp',
+    'Max Holdings Ltd',
+    'Mississippi Bank Group',
+    'MMM Mortuary Corp',
+    'MTM Investment Bank F S B',
+    'Nimble Technologies Inc',
+    'NW Bridge Construction',
+    'NW Capital Corp',
+    'OTC Holdings',
+    'Overhead & Underfoot Ltd.',
+    'P Piper & Sons',
+    'Powder Suppliers',
+    'Pullman Cart Company',
+    'Q.R.&E. Corp',
+    'Q3 ARVRO III PR',
+    'Rhyme & Reason Inc',
+    'Riviera Hotels',
+    'RR. Talker Co',
+    'RRR Advertising Inc.',
+    'S Cane Sweeteners Ltd',
+    'Sea Region Inc',
+    'Slender Broadband Inc',
+    'Smallville Resources Inc',
+    'South Sea Plumbing Products',
+    'Southern Realty',
+    'Spend Thrift Inc',
+    'Spindle Broadcast Corp.',
+    'Start Over Trust',
+    'Super Star Holdings Inc',
+    'SuperG Tech',
+    'T-Cat Media Group Inc',
+    "TJ O'Rourke Inc",
+    'Tortoise Corp',
+    'Tracker Com LP',
+    'Trait Institute Inc',
+    'Tri-State Medical Corp',
+    'T-Squared Techs',
+    'EEE Endowments LTD',
+    'Underwater Mining Inc.',
+    'Union Bank',
+    'Waverly Trading House',
+    'White Cross Co',
+    'X-Sell Holdings',
+    'XY&Z Funding Inc',
+];
 
-$sugar_demodata['company_name_suffix_array'] = array(
-	'Consolidated',
-	'Enterprises',
-	'Incorporated',
-	'Limited',
-	'Ventures',
-	'Systems',
-	'Corporation',
-	'Group',
-	'Products',
-	'Manufacturing',
-	'Holdings',
-	'Consulting',
-	'Solutions',
-);
+$sugar_demodata['company_name_suffix_array'] = [
+    'Consolidated',
+    'Enterprises',
+    'Incorporated',
+    'Limited',
+    'Ventures',
+    'Systems',
+    'Corporation',
+    'Group',
+    'Products',
+    'Manufacturing',
+    'Holdings',
+    'Consulting',
+    'Solutions',
+];
 
-$sugar_demodata['street_address_array'] = array(
-	 "123 Anywhere Street",
-	 "345 Sugar Blvd.",
-	 "1715 Scott Dr",
-	 "999 Baker Way",
-	 "67321 West Siam St.",
-	 "48920 San Carlos Ave",
-	 "777 West Filmore Ln",
-	 "9 IBM Path",
-	 "111 Silicon Valley Road",
-	 "321 University Ave.",
- );
+$sugar_demodata['street_address_array'] = [
+    '123 Anywhere Street',
+    '345 Sugar Blvd.',
+    '1715 Scott Dr',
+    '999 Baker Way',
+    '67321 West Siam St.',
+    '48920 San Carlos Ave',
+    '777 West Filmore Ln',
+    '9 IBM Path',
+    '111 Silicon Valley Road',
+    '321 University Ave.',
+];
 
-$sugar_demodata['city_array'] = array(
-	 "San Jose",
-	 "San Francisco",
-	 "Sunnyvale",
-	 "San Mateo",
-	 "Cupertino",
-	 "Los Angeles",
-	 "Santa Monica",
-	 "Denver",
-	 "St. Petersburg",
-	 "Santa Fe",
-	 "Ohio",
-	 "Salt Lake City",
-	 "Persistance",
-	 "Alabama",
-	 "Kansas City",
-);
+$sugar_demodata['city_array'] = [
+    'San Jose',
+    'San Francisco',
+    'Sunnyvale',
+    'San Mateo',
+    'Cupertino',
+    'Los Angeles',
+    'Santa Monica',
+    'Denver',
+    'St. Petersburg',
+    'Santa Fe',
+    'Ohio',
+    'Salt Lake City',
+    'Persistance',
+    'Alabama',
+    'Kansas City',
+];
 
 //cases demodata
-$sugar_demodata['case_seed_names'] = array(
-	'Having trouble adding new items',
-	'System not responding',
-	'Need assistance with large customization',
-	'Need to purchase additional licenses',
-	'Warning message when using the wrong browser'
-);
+$sugar_demodata['case_seed_names'] = [
+    'Having trouble adding new items',
+    'System not responding',
+    'Need assistance with large customization',
+    'Need to purchase additional licenses',
+    'Warning message when using the wrong browser',
+];
 
 //bugs demodata
-$sugar_demodata['bug_seed_names'] = array(
-	'Error occurs while running count query',
-	'Warning is displayed in file after exporting',
-	'Fatal error during installation',
-	'Broken image appears in home page',
-	'Syntax error appears when running old reports'
-);
+$sugar_demodata['bug_seed_names'] = [
+    'Error occurs while running count query',
+    'Warning is displayed in file after exporting',
+    'Fatal error during installation',
+    'Broken image appears in home page',
+    'Syntax error appears when running old reports',
+];
 
-$sugar_demodata['note_seed_names_and_Descriptions'] = array(
-	array('More Account Information','This account could turn into a 3,000-user opportunity.'),
-	array('Call Information','The initial sales call went well. Will follow up with contact in 3 days.'),
-	array('Met at SugarCon 2010','Contact expressed interest in becoming a partner.'),
-	array('Attended CRM Exceleration Event in Asia','Contact\'s event registration fee was comped.')
-);
+$sugar_demodata['note_seed_names_and_Descriptions'] = [
+    ['More Account Information', 'This account could turn into a 3,000-user opportunity.'],
+    ['Call Information', 'The initial sales call went well. Will follow up with contact in 3 days.'],
+    ['Met at SugarCon 2010', 'Contact expressed interest in becoming a partner.'],
+    ['Attended CRM Exceleration Event in Asia', 'Contact\'s event registration fee was comped.'],
+];
 
-$sugar_demodata['call_seed_data_names'] = array(
-	'Get more information on the proposed deal',
-	'Left a message',
-	'Bad time, will call back',
-	'Discuss review process'
-);
+$sugar_demodata['call_seed_data_names'] = [
+    'Get more information on the proposed deal',
+    'Left a message',
+    'Bad time, will call back',
+    'Discuss review process',
+];
 
 //titles
-$sugar_demodata['titles'] = array(
-	"President",
-	"VP Operations",
-	"VP Sales",
-	"Director Operations",
-	"Director Sales",
-	"Mgr Operations",
-	"IT Developer",
-	"Senior Product Manager"
-);
+$sugar_demodata['titles'] = [
+    'President',
+    'VP Operations',
+    'VP Sales',
+    'Director Operations',
+    'Director Sales',
+    'Mgr Operations',
+    'IT Developer',
+    'Senior Product Manager',
+];
 
 //tasks
-$sugar_demodata['task_seed_data_names'] = array(
-	'Assemble catalogs', 
-	'Make travel arrangements', 
-	'Send a letter', 
-	'Send contract', 
-	'Send fax', 
-	'Send a follow-up letter', 
-	'Send literature', 
-	'Send proposal', 
-	'Send quote', 
-	'Call to schedule meeting', 
-	'Setup evaluation', 
-	'Get demo feedback', 
-	'Arrange introduction', 
-	'Escalate support request', 
-	'Close out support request', 
-	'Ship product', 
-	'Arrange reference call', 
-	'Schedule training', 
-	'Send local user group information', 
-	'Add to mailing list',
-);
+$sugar_demodata['task_seed_data_names'] = [
+    'Assemble catalogs',
+    'Make travel arrangements',
+    'Send a letter',
+    'Send contract',
+    'Send fax',
+    'Send a follow-up letter',
+    'Send literature',
+    'Send proposal',
+    'Send quote',
+    'Call to schedule meeting',
+    'Setup evaluation',
+    'Get demo feedback',
+    'Arrange introduction',
+    'Escalate support request',
+    'Close out support request',
+    'Ship product',
+    'Arrange reference call',
+    'Schedule training',
+    'Send local user group information',
+    'Add to mailing list',
+];
 
 //meetings
-$sugar_demodata['meeting_seed_data_names'] = array(
-	'Follow-up on proposal', 
-	'Initial discussion', 
-	'Review needs', 
-	'Discuss pricing', 
-	'Demo', 
-	'Introduce all players',
-);
+$sugar_demodata['meeting_seed_data_names'] = [
+    'Follow-up on proposal',
+    'Initial discussion',
+    'Review needs',
+    'Discuss pricing',
+    'Demo',
+    'Introduce all players',
+];
 $sugar_demodata['meeting_seed_data_descriptions'] = 'Meeting to discuss project plan and hash out the details of implementation';
 
 //emails
-$sugar_demodata['email_seed_data_subjects'] = array(
-	'Follow-up on proposal', 
-	'Initial discussion', 
-	'Review needs', 
-	'Discuss pricing', 
-	'Demo', 
-	'Introduce all players', 
-);
+$sugar_demodata['email_seed_data_subjects'] = [
+    'Follow-up on proposal',
+    'Initial discussion',
+    'Review needs',
+    'Discuss pricing',
+    'Demo',
+    'Introduce all players',
+];
 $sugar_demodata['email_seed_data_descriptions'] = 'Important Meeting to discuss ' .
     'project plan and hash out the details of implementation';
 $sugar_demodata['email_seed_data_description_html'] = '<p><strong>Important</strong> ' .
     'Meeting to discuss project plan and hash out the details of implementation.</p>';
-$sugar_demodata['email_seed_data_types'] = array(
+$sugar_demodata['email_seed_data_types'] = [
     'inbound',
     'draft',
     'out',
-);
+];
 
 //leads
 $sugar_demodata['primary_address_state'] = 'CA';
@@ -2409,125 +2409,125 @@ $sugar_demodata['billing_address_state']['west'] = 'CA';
 $sugar_demodata['primary_address_country'] = 'USA';
 
 //manufacturers
-$sugar_demodata['manufacturer_seed_data_names'] = array(
-	'TekWare Inc.', 
-	'Acme Suppliers'
-);
+$sugar_demodata['manufacturer_seed_data_names'] = [
+    'TekWare Inc.',
+    'Acme Suppliers',
+];
 
 //Shippers
-$sugar_demodata['shipper_seed_data_names'] = array(
-	'FedEx', 
-	'USPS Ground'
-);
+$sugar_demodata['shipper_seed_data_names'] = [
+    'FedEx',
+    'USPS Ground',
+];
 
 //productcategories
 $sugar_demodata['category_ext_name'] = ' Widgets';
 $sugar_demodata['product_ext_name'] = ' Gadget';
-$sugar_demodata['productcategory_seed_data_names'] = array(
-	'Desktops', 
-	'Laptops', 
-	'Stationary Device', 
-	'Modular Device'
-);
+$sugar_demodata['productcategory_seed_data_names'] = [
+    'Desktops',
+    'Laptops',
+    'Stationary Device',
+    'Modular Device',
+];
 
 //producttype
-$sugar_demodata['producttype_seed_data_names']= array(
-	'Devices', 
-	'Hardware', 
-	'Support Contract'
-);
+$sugar_demodata['producttype_seed_data_names'] = [
+    'Devices',
+    'Hardware',
+    'Support Contract',
+];
 
 //taxrate
-$sugar_demodata['taxrate_seed_data'][] = array(
-	'name' => '8.25 - Cupertino, CA',
-	'value' => '8.25',
-);
+$sugar_demodata['taxrate_seed_data'][] = [
+    'name' => '8.25 - Cupertino, CA',
+    'value' => '8.25',
+];
 
-$sugar_demodata['currency_seed_data'][] = array(
-	'name' => 'Euro',
-	'conversion_rate' => 0.9,
-	'iso4217' => 'EUR',
-	'symbol' => '€',
-);
+$sugar_demodata['currency_seed_data'][] = [
+    'name' => 'Euro',
+    'conversion_rate' => 0.9,
+    'iso4217' => 'EUR',
+    'symbol' => '€',
+];
 
 //producttemplate
-$sugar_demodata['producttemplate_seed_data'][] = array(
-	'name' => 'TK 1000 Desktop',
-	'tax_class' => 'Taxable',
-	'cost_price' => 500.00,
-	'cost_usdollar' => 500.00,
-	'list_price' => 800.00,
-	'list_usdollar' => 800.00,
-	'discount_price' => 800.00,
-	'discount_usdollar' => 800.00,
-	'pricing_formula' => 'IsList',
-	'mft_part_num' => 'XYZ7890122222',
-	'pricing_factor' => '1',
-	'status' => 'Available',
-	'weight' => 20.0,
-	'date_available' => '2009-10-15',
-	'qty_in_stock' => '72',
+$sugar_demodata['producttemplate_seed_data'][] = [
+    'name' => 'TK 1000 Desktop',
+    'tax_class' => 'Taxable',
+    'cost_price' => 500.00,
+    'cost_usdollar' => 500.00,
+    'list_price' => 800.00,
+    'list_usdollar' => 800.00,
+    'discount_price' => 800.00,
+    'discount_usdollar' => 800.00,
+    'pricing_formula' => 'IsList',
+    'mft_part_num' => 'XYZ7890122222',
+    'pricing_factor' => '1',
+    'status' => 'Available',
+    'weight' => 20.0,
+    'date_available' => '2009-10-15',
+    'qty_in_stock' => '72',
     'service' => false,
-); 
+];
 
-$sugar_demodata['producttemplate_seed_data'][] = array(
-	'name' => 'TK 1000 Desktop',
-	'tax_class' => 'Taxable',
-	'cost_price' => 600.00,
-	'cost_usdollar' => 600.00,
-	'list_price' => 900.00,
-	'list_usdollar' => 900.00,
-	'discount_price' => 900.00,
-	'discount_usdollar' => 900.00,
-	'pricing_formula' => 'IsList',
-	'mft_part_num' => 'XYZ7890123456',
-	'pricing_factor' => '1',
-	'status' => 'Available',
-	'weight' => 20.0,
-	'date_available' => '2009-10-15',
-	'qty_in_stock' => '65',
+$sugar_demodata['producttemplate_seed_data'][] = [
+    'name' => 'TK 1000 Desktop',
+    'tax_class' => 'Taxable',
+    'cost_price' => 600.00,
+    'cost_usdollar' => 600.00,
+    'list_price' => 900.00,
+    'list_usdollar' => 900.00,
+    'discount_price' => 900.00,
+    'discount_usdollar' => 900.00,
+    'pricing_formula' => 'IsList',
+    'mft_part_num' => 'XYZ7890123456',
+    'pricing_factor' => '1',
+    'status' => 'Available',
+    'weight' => 20.0,
+    'date_available' => '2009-10-15',
+    'qty_in_stock' => '65',
     'service' => false,
-); 
+];
 
-$sugar_demodata['producttemplate_seed_data'][] = array(
-	'name' => 'TK m30 Desktop',
-	'tax_class' => 'Taxable',
-	'cost_price' => 1300.00,
-	'cost_usdollar' => 1300.00,
-	'list_price' => 1700.00,
-	'list_usdollar' => 1700.00,
-	'discount_price' => 1625.00,
-	'discount_usdollar' => 1625.00,
-	'pricing_formula' => 'ProfitMargin',
-	'mft_part_num' => 'ABCD123456890',
-	'pricing_factor' => '20',
-	'status' => 'Available',
-	'weight' => 5.0,
-	'date_available' => '2009-10-15',
-	'qty_in_stock' => '12',
+$sugar_demodata['producttemplate_seed_data'][] = [
+    'name' => 'TK m30 Desktop',
+    'tax_class' => 'Taxable',
+    'cost_price' => 1300.00,
+    'cost_usdollar' => 1300.00,
+    'list_price' => 1700.00,
+    'list_usdollar' => 1700.00,
+    'discount_price' => 1625.00,
+    'discount_usdollar' => 1625.00,
+    'pricing_formula' => 'ProfitMargin',
+    'mft_part_num' => 'ABCD123456890',
+    'pricing_factor' => '20',
+    'status' => 'Available',
+    'weight' => 5.0,
+    'date_available' => '2009-10-15',
+    'qty_in_stock' => '12',
     'service' => false,
-); 
+];
 
-$sugar_demodata['producttemplate_seed_data'][] = array(
-	'name' => 'Reflective Mirror Widget',
-	'tax_class' => 'Taxable',
-	'cost_price' => 200.00,
-	'cost_usdollar' => 200.00,
-	'list_price' => 325.00,
-	'list_usdollar' => 325.00,
-	'discount_price' => 266.50,
-	'discount_usdollar' => 266.50,
-	'pricing_formula' => 'PercentageDiscount',
-	'mft_part_num' => '2.0',
-	'pricing_factor' => '20',
-	'status' => 'Available',
-	'weight' => 20.0,
-	'date_available' => '2009-10-15',
-	'qty_in_stock' => '65',
+$sugar_demodata['producttemplate_seed_data'][] = [
+    'name' => 'Reflective Mirror Widget',
+    'tax_class' => 'Taxable',
+    'cost_price' => 200.00,
+    'cost_usdollar' => 200.00,
+    'list_price' => 325.00,
+    'list_usdollar' => 325.00,
+    'discount_price' => 266.50,
+    'discount_usdollar' => 266.50,
+    'pricing_formula' => 'PercentageDiscount',
+    'mft_part_num' => '2.0',
+    'pricing_factor' => '20',
+    'status' => 'Available',
+    'weight' => 20.0,
+    'date_available' => '2009-10-15',
+    'qty_in_stock' => '65',
     'service' => false,
-);
+];
 
-$sugar_demodata['producttemplate_seed_data'][] = array(
+$sugar_demodata['producttemplate_seed_data'][] = [
     'name' => '48 Month Service',
     'tax_class' => 'Taxable',
     'cost_price' => 900.00,
@@ -2546,10 +2546,10 @@ $sugar_demodata['producttemplate_seed_data'][] = array(
     'service' => true,
     'renewable' => true,
     'service_duration_unit' => 'month',
-    'service_duration_value'=> 48,
-);
+    'service_duration_value' => 48,
+];
 
-$sugar_demodata['producttemplate_seed_data'][] = array(
+$sugar_demodata['producttemplate_seed_data'][] = [
     'name' => '3 Year Service',
     'tax_class' => 'Taxable',
     'cost_price' => 350.00,
@@ -2568,68 +2568,68 @@ $sugar_demodata['producttemplate_seed_data'][] = array(
     'service' => true,
     'renewable' => false,
     'service_duration_unit' => 'year',
-    'service_duration_value'=> 3,
-);
+    'service_duration_value' => 3,
+];
 
 // KBDocuments
-$sugar_demodata['kbcategories_array'] = array(
-    'Documentation' => array(
+$sugar_demodata['kbcategories_array'] = [
+    'Documentation' => [
         'Calendar',
         'Calls',
         'Email',
-        'Database'
-    ),
-    'Tutorials' => array(),
-    'Video' => array(),
-    'Help' => array()
-);
+        'Database',
+    ],
+    'Tutorials' => [],
+    'Video' => [],
+    'Help' => [],
+];
 
-$sugar_demodata['kbdocuments_statuses'] = array(
+$sugar_demodata['kbdocuments_statuses'] = [
     'draft',
     'in-review',
     'approved',
     'published',
-);
+];
 
-$sugar_demodata['kbdocuments_languages'] = array(
-    array(
+$sugar_demodata['kbdocuments_languages'] = [
+    [
         'en' => 'English',
-        'primary' => true
-    ),
-    array(
+        'primary' => true,
+    ],
+    [
         'de' => 'Deutsch',
-        'primary' => false
-    ),
-);
+        'primary' => false,
+    ],
+];
 
-$sugar_demodata['kbdocuments_seed_data'][] = array(
+$sugar_demodata['kbdocuments_seed_data'][] = [
     'name' => 'Connecting to the Internet',
     'body' => '<p>To connect your device to the Internet, use any application that accesses the Internet. You can connect using either Wi-Fi or Bluetooth.</p>',
     'tag' => '^WiFi^,^Bluetooth^,^Networking^',
-    'localizations' => array(
-        array(
+    'localizations' => [
+        [
             'language' => 'de',
             'name' => 'Verbinden mit dem Internet',
-            'body' => '<p>Um das Gerät mit dem Internet verbinden, verwenden Sie alle Anwendungen, die auf das Internet zugreift. Sie können eine Verbindung sowohl mit der Wi-Fi oder Bluetooth.</p>'
-        )
-    )
-);
-$sugar_demodata['kbdocuments_seed_data'][] = array(
+            'body' => '<p>Um das Gerät mit dem Internet verbinden, verwenden Sie alle Anwendungen, die auf das Internet zugreift. Sie können eine Verbindung sowohl mit der Wi-Fi oder Bluetooth.</p>',
+        ],
+    ],
+];
+$sugar_demodata['kbdocuments_seed_data'][] = [
     'name' => 'Charging the battery',
     'body' => '<p>To charge the battery, try the following:</p>
     <ul><li>Connect device to a power outlet using the included cable and the USB power adapter.</li>
     <li>Connect to a high-power USB 2.0 port using the included cable.</li></ul>',
     'tag' => '^Basic Usage^,^Hardware^',
-    'revisions' => array(
-        array(
-            'name' => 'Charging the battery - revision 2'
-        ),
-        array(
-            'name' => 'Charging the battery - revision 3'
-        )
-    )
-);
-$sugar_demodata['kbdocuments_seed_data'][] = array(
+    'revisions' => [
+        [
+            'name' => 'Charging the battery - revision 2',
+        ],
+        [
+            'name' => 'Charging the battery - revision 3',
+        ],
+    ],
+];
+$sugar_demodata['kbdocuments_seed_data'][] = [
     'name' => 'How to print',
     'active_date' => '2015-01-01',
     'exp_date' => '2015-12-31',
@@ -2637,9 +2637,9 @@ $sugar_demodata['kbdocuments_seed_data'][] = array(
     'notuseful' => 5,
     'body' => '<p>In order to print, you first need to send your file to your computer. Access and print the file from your computer.</p>',
     'tag' => '^Basic Usage^,^Tools^',
-);
+];
 
-$sugar_demodata['kbdocuments_seed_data'][] = array(
+$sugar_demodata['kbdocuments_seed_data'][] = [
     'name' => 'How to change the language',
     'active_date' => '2015-01-01',
     'exp_date' => '2015-12-31',
@@ -2647,82 +2647,82 @@ $sugar_demodata['kbdocuments_seed_data'][] = array(
     'notuseful' => 12,
     'body' => '<p>If your device is not set to your preferred language, please make sure you have completed the setup. In the Settings screen, select Languages. Select the language you prefer.</p>',
     'tag' => '^Basic Usage^,^OS and Interface^',
-);
+];
 
-$sugar_demodata['kbdocuments_seed_data'][] = array(
+$sugar_demodata['kbdocuments_seed_data'][] = [
     'name' => 'Resetting the device',
     'active_date' => '2014-01-01',
     'exp_date' => '2014-12-31',
     'body' => '<p>When things are not working as expected, try resetting the device. Hold the Start button until the dialog box displays.  Select the Reset option.</p>',
     'tag' => '^Basic Usage^,^Hardware^',
-);
-$sugar_demodata['contract_seed_data'][] = array(
-	'name' => 'IT Tech Support for UK Datacenter',
-	'reference_code' => 'EMP-9802',
-	'total_contract_value' => '500600.01',
-	'start_date' => '2010-05-15',
-	'end_date' => '2020-05-15',
-	'company_signed_date' => '2010-03-15',
-	'customer_signed_date' => '2010-03-16',
-	'description' => 'This is a sub-contract for a very large project.',
-); 
+];
+$sugar_demodata['contract_seed_data'][] = [
+    'name' => 'IT Tech Support for UK Datacenter',
+    'reference_code' => 'EMP-9802',
+    'total_contract_value' => '500600.01',
+    'start_date' => '2010-05-15',
+    'end_date' => '2020-05-15',
+    'company_signed_date' => '2010-03-15',
+    'customer_signed_date' => '2010-03-16',
+    'description' => 'This is a sub-contract for a very large project.',
+];
 
-$sugar_demodata['contract_seed_data'][] = array(
-	'name' => 'Ion Engines for Auto Plant',
-	'reference_code' => 'EMP-7277',
-	'total_contract_value' => '333444.34',
-	'start_date' => '2010-05-15',
-	'end_date' => '2020-05-15',
-	'company_signed_date' => '2010-03-15',
-	'customer_signed_date' => '2010-03-16',
-	'description' => 'In competition with Sienar Fleet Systems for this one.',
-);
+$sugar_demodata['contract_seed_data'][] = [
+    'name' => 'Ion Engines for Auto Plant',
+    'reference_code' => 'EMP-7277',
+    'total_contract_value' => '333444.34',
+    'start_date' => '2010-05-15',
+    'end_date' => '2020-05-15',
+    'company_signed_date' => '2010-03-15',
+    'customer_signed_date' => '2010-03-16',
+    'description' => 'In competition with Sienar Fleet Systems for this one.',
+];
 
 //BEGIN Quotes demo data
-$sugar_demodata['quotes_seed_data']['quotes'][0] = array(
-	'name' => 'Computers for [account name]',
-	'quote_stage' => 'Draft',
+$sugar_demodata['quotes_seed_data']['quotes'][0] = [
+    'name' => 'Computers for [account name]',
+    'quote_stage' => 'Draft',
     'date_quote_expected_closed' => '2020-06-28',
     'description' => '',
     'purcahse_order_num' => '6011842',
     'payment_terms' => 'Net 30',
 
-    'bundle_data' => array(
-		0 => array (
-		    'bundle_name' => 'Computers',
-		    'bundle_stage' => 'Draft',
-		    'comment' => 'TK Desktop Computers',
-		    'products' => array (
-				1 => array('name'=>'TK 1000 Desktop', 'quantity'=>'1'),
-				2 => array('name'=>'TK m30 Desktop', 'quantity'=>'2'),
-			),
-		),
-	),
-);
+    'bundle_data' => [
+        0 => [
+            'bundle_name' => 'Computers',
+            'bundle_stage' => 'Draft',
+            'comment' => 'TK Desktop Computers',
+            'products' => [
+                1 => ['name' => 'TK 1000 Desktop', 'quantity' => '1'],
+                2 => ['name' => 'TK m30 Desktop', 'quantity' => '2'],
+            ],
+        ],
+    ],
+];
 
 
-$sugar_demodata['quotes_seed_data']['quotes'][1] = array(
-	'name' => 'Mirrors for [account name]',
-	'quote_stage' => 'Negotiation',
+$sugar_demodata['quotes_seed_data']['quotes'][1] = [
+    'name' => 'Mirrors for [account name]',
+    'quote_stage' => 'Negotiation',
     'date_quote_expected_closed' => '2020-06-28',
     'description' => '',
- 	'purcahse_order_num' => '3940021',
+    'purcahse_order_num' => '3940021',
     'payment_terms' => 'Net 15',
-         
 
-    'bundle_data' => array(
-		0 => array (
-		    'bundle_name' => 'Mirrors',
-		    'bundle_stage' => 'Draft',
-		    'comment' => 'Reflective Mirrors',
-		    'products' => array (
-				1 => array('name'=>'Reflective Mirror Widget', 'quantity'=>'2'),
-			),
-		),
-	),
-);
 
-$sugar_demodata['quotes_seed_data']['quotes'][2] = array(
+    'bundle_data' => [
+        0 => [
+            'bundle_name' => 'Mirrors',
+            'bundle_stage' => 'Draft',
+            'comment' => 'Reflective Mirrors',
+            'products' => [
+                1 => ['name' => 'Reflective Mirror Widget', 'quantity' => '2'],
+            ],
+        ],
+    ],
+];
+
+$sugar_demodata['quotes_seed_data']['quotes'][2] = [
     'name' => '48 Month Service for [account name]',
     'quote_stage' => 'Negotiation',
     'date_quote_expected_closed' => '2020-06-28',
@@ -2730,23 +2730,23 @@ $sugar_demodata['quotes_seed_data']['quotes'][2] = array(
     'purcahse_order_num' => '5480201',
     'payment_terms' => 'Net 25',
 
-    'bundle_data' => array(
-        0 => array (
+    'bundle_data' => [
+        0 => [
             'bundle_name' => '48 Month Service',
             'bundle_stage' => 'Draft',
             'comment' => '48 Month Service',
-            'products' => array (
-                1 => array(
-                    'name'=>'48 Month Service',
-                    'quantity'=>'5',
+            'products' => [
+                1 => [
+                    'name' => '48 Month Service',
+                    'quantity' => '5',
                     'service_start_date' => '2020-06-28',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];
 
-$sugar_demodata['quotes_seed_data']['quotes'][3] = array(
+$sugar_demodata['quotes_seed_data']['quotes'][3] = [
     'name' => '3 Year Service for [account name]',
     'quote_stage' => 'Draft',
     'date_quote_expected_closed' => '2020-06-28',
@@ -2754,52 +2754,52 @@ $sugar_demodata['quotes_seed_data']['quotes'][3] = array(
     'purcahse_order_num' => '692500',
     'payment_terms' => 'Net 10',
 
-    'bundle_data' => array(
-        0 => array (
+    'bundle_data' => [
+        0 => [
             'bundle_name' => '3 Year Service',
             'bundle_stage' => 'Draft',
             'comment' => '3 Year Service',
-            'products' => array (
-                1 => array(
-                    'name'=>'3 Year Service',
-                    'quantity'=>'10',
+            'products' => [
+                1 => [
+                    'name' => '3 Year Service',
+                    'quantity' => '10',
                     'service_start_date' => '2020-06-28',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];
 //END Quotes demo data
 
 //BEGIN Opportunities demo data
-$sugar_demodata['opportunities_seed_data']['opportunities'][1] = array(
+$sugar_demodata['opportunities_seed_data']['opportunities'][1] = [
 
-    'bundle_data' => array(
-		0 => array (
-		    'bundle_name' => 'Mirrors',
-		    'bundle_stage' => 'Draft',
-		    'comment' => 'Reflective Mirrors',
-		    'products' => array (
-				1 => array('name'=>'Reflective Mirror Widget', 'quantity'=>'2'),
-			),
-		),
+    'bundle_data' => [
+        0 => [
+            'bundle_name' => 'Mirrors',
+            'bundle_stage' => 'Draft',
+            'comment' => 'Reflective Mirrors',
+            'products' => [
+                1 => ['name' => 'Reflective Mirror Widget', 'quantity' => '2'],
+            ],
+        ],
 
 
-        0 => array (
-      		    'bundle_name' => 'Mirrors',
-      		    'bundle_stage' => 'Draft',
-      		    'comment' => 'Reflective Mirrors',
-      		    'products' => array (
-      				1 => array('name'=>'Reflective Mirror Widget', 'quantity'=>'2'),
-      			),
-      	),
+        0 => [
+            'bundle_name' => 'Mirrors',
+            'bundle_stage' => 'Draft',
+            'comment' => 'Reflective Mirrors',
+            'products' => [
+                1 => ['name' => 'Reflective Mirror Widget', 'quantity' => '2'],
+            ],
+        ],
 
-	),
-);
+    ],
+];
 //END Opportunities demo data
 
 //BEGIN Data Privacy demo data
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Send copy of privacy policy',
     'status' => 'Open',
     'type' => 'Request for Data Privacy Policy',
@@ -2807,8 +2807,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Contact would like to review our privacy policy and wants a copy',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Send copy of revised privacy policy',
     'status' => 'Closed',
     'type' => 'Request for Data Privacy Policy',
@@ -2817,8 +2817,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'requested_by' => 'By the person themselves',
     'description' => 'We have sent an older version of the privacy policy and they would like to see the updated policy',
     'resolution' => 'An updated policy was sent via email.',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Send personal information being captured in CRM',
     'status' => 'Open',
     'type' => 'Send Personal Information being processed',
@@ -2826,8 +2826,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Phone',
     'requested_by' => 'By the person themselves',
     'description' => 'Wants to know the details of all information captured in our CRM system',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Inquiry about personal information captured',
     'status' => 'Closed',
     'type' => 'Send Personal Information being processed',
@@ -2836,8 +2836,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'requested_by' => 'By the person themselves',
     'description' => 'Wants details of the personal information captured by us',
     'resolution' => 'Copied information personal information viewer and emailed to the person',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Request to check and send personal information',
     'status' => 'Rejected',
     'type' => 'Send Personal Information being processed',
@@ -2847,8 +2847,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'description' => 'Wanted to check if any personal information was being recorded',
     'resolution' => 'Subject is not eligible to receive a copy of the personal data as per legal. They can request again once legal challenges are resolved.',
     'work_log' => 'Checking with legal on applicability',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Change the phone number in record',
     'status' => 'Open',
     'type' => 'Rectify Information',
@@ -2856,8 +2856,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'New work phone in 555-787-9087',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Change title and company name',
     'status' => 'Closed',
     'type' => 'Rectify Information',
@@ -2866,8 +2866,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'requested_by' => 'By the person themselves',
     'description' => 'Person has changed company. We need to correct this information. New company is Acme Software. New Title is Director Business Development. No email provided.',
     'resolution' => 'Information rectified and confirmed in audit log',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Would like to erase and forget',
     'status' => 'Open',
     'type' => 'Request to Erase Information',
@@ -2875,8 +2875,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Subject wants to completely forget about them',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Request to remove social data',
     'status' => 'Closed',
     'type' => 'Request to Erase Information',
@@ -2885,8 +2885,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'requested_by' => 'By the person themselves',
     'description' => 'This person wants us to remove their social links',
     'resolution' => 'Information erased and informed subject via email',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Request to erase record completely',
     'status' => 'Rejected',
     'type' => 'Request to Erase Information',
@@ -2896,8 +2896,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'description' => 'Person has requested to be erased completely',
     'resolution' => 'Request was reject as there is a outstanding balance. Email was sent to the person.',
     'work_log' => "There is an outstanding balance with this company. Record cannot be erased until all arrears are paid.\n\nChecking if there is any outstanding work items",
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Request for an electronic copy of data',
     'status' => 'Open',
     'type' => 'Export Information',
@@ -2905,8 +2905,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Person wants access to all personal data stored in our systems',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Request for an electronic copy of personal data',
     'status' => 'Closed',
     'type' => 'Export Information',
@@ -2916,8 +2916,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'description' => 'Would like to receive an electronic copy of personal data',
     'resolution' => 'Exported data from List view and emailed a subset to person',
     'work_log' => 'Confirmed that subject is under purview of GDPR and has data subject rights',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Request copy of all data',
     'status' => 'Rejected',
     'type' => 'Export Information',
@@ -2927,8 +2927,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'description' => 'Would like to receive an electronic copy of personal data',
     'resolution' => 'Request rejected. Emal has been sent with the decision.',
     'work_log' => 'Subject is not EU resident and is not under purview. Recommend to reject request',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Would like to request the processing be stopped',
     'status' => 'Open',
     'type' => 'Restrict Processing',
@@ -2936,8 +2936,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Wants to restrict the processing of personal data',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Wants to stop processing of data',
     'status' => 'Closed',
     'type' => 'Restrict Processing',
@@ -2946,8 +2946,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'requested_by' => 'By the person themselves',
     'description' => 'Wants to restrict the processing of personal data',
     'resolution' => 'Record has been marked for restriction',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Requesting to stop processing of personal data',
     'status' => 'Rejected',
     'type' => 'Restrict Processing',
@@ -2957,8 +2957,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'description' => 'Wants to restrict the processing of personal data',
     'resolution' => 'Request rejected. Emal has been sent with the decision.',
     'work_log' => 'Subject is not EU resident and is not under purview. Recommend to reject request',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Objects to processing of personal data',
     'status' => 'Open',
     'type' => 'Object to Processing',
@@ -2966,8 +2966,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Wants to restrict the processing of personal data',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Request related to objection of processing',
     'status' => 'Closed',
     'type' => 'Object to Processing',
@@ -2976,8 +2976,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'requested_by' => 'By the person themselves',
     'description' => 'Wants to restrict the processing of personal data',
     'resolution' => 'Record has been marked for restriction',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Requesting to stop processing of personal data',
     'status' => 'Rejected',
     'type' => 'Object to Processing',
@@ -2987,8 +2987,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'description' => 'Wants to restrict the processing of personal data',
     'resolution' => 'Request rejected. Emal has been sent with the decision.',
     'work_log' => 'Subject is not EU resident and is not under purview. Recommend to reject request',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Received consent to process',
     'status' => 'Closed',
     'type' => 'Consent to Process',
@@ -2998,8 +2998,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'description' => 'Consent was received',
     'resolution' => 'Consent recorded in record',
     'business_purpose' => '^Business Communications^,^Marketing Communications by company^',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Withdraws consent for marketing',
     'status' => 'Open',
     'type' => 'Withdraw Consent',
@@ -3008,8 +3008,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'requested_by' => 'By the person themselves',
     'description' => 'Would like to withdraw consent',
     'business_purpose' => '^Marketing Communications by company^,^Marketing Communications by partners^',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Withdraws consent for partner marketing',
     'status' => 'Closed',
     'type' => 'Withdraw Consent',
@@ -3019,8 +3019,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'description' => 'Would like to withdraw consent',
     'resolution' => 'Accepted. Email sent. Contact record updated.',
     'business_purpose' => '^Marketing Communications by partners^',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Withdraws consent for partner marketing',
     'status' => 'Rejected',
     'type' => 'Withdraw Consent',
@@ -3031,8 +3031,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'resolution' => 'Request rejected. Emal has been sent with the decision.',
     'work_log' => 'Consent cannot be removed for business communications as per policy',
     'business_purpose' => '^Business Communications^ ',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Wanted to find out if our company is compliant with regulations',
     'status' => 'Closed',
     'type' => 'Other',
@@ -3041,8 +3041,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'requested_by' => 'By the person themselves',
     'description' => 'email sent with link to the web site on privacy policy',
     'resolution' => 'EMail sent',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Request for personal information captured in CRM',
     'status' => 'Open',
     'type' => 'Send Personal Information being processed',
@@ -3050,8 +3050,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Phone',
     'requested_by' => 'By the person themselves',
     'description' => 'Wants to know the details of all information captured in our CRM system',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Send personal information ',
     'status' => 'Open',
     'type' => 'Send Personal Information being processed',
@@ -3059,8 +3059,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Phone',
     'requested_by' => 'By the person themselves',
     'description' => 'Wants to know the details of all information captured in our CRM system',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Send personal information being captured in CRM',
     'status' => 'Open',
     'type' => 'Send Personal Information being processed',
@@ -3068,8 +3068,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Phone',
     'requested_by' => 'By the person themselves',
     'description' => 'Wants to know the details of all information captured in our CRM system',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Request for a copy of data',
     'status' => 'Open',
     'type' => 'Export Information',
@@ -3077,8 +3077,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Subject is requesting a copy of all personal information captured on them',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Request for an electronic copy of personal data',
     'status' => 'Open',
     'type' => 'Export Information',
@@ -3086,8 +3086,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Requesting an electronic copy of personal data stored',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Request for a copy of personal information ',
     'status' => 'Open',
     'type' => 'Export Information',
@@ -3095,8 +3095,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Request for a copy of personal information',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Request for an electronic copy of data',
     'status' => 'Open',
     'type' => 'Export Information',
@@ -3104,8 +3104,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Request for an electronic copy of data',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Want us to erase personal data',
     'status' => 'Open',
     'type' => 'Request to Erase Information',
@@ -3113,8 +3113,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Want us to erase personal data because they are getting a lot of junk mail',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'No business, Erase data',
     'status' => 'Open',
     'type' => 'Request to Erase Information',
@@ -3122,8 +3122,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Request to erase data as they have not done any business with our company in the past 4 years',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Erase personal data per lack of consent',
     'status' => 'Open',
     'type' => 'Request to Erase Information',
@@ -3131,8 +3131,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Subject is upset that consent was not provided, and hence data should be erased and no further communication should be allowed',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Forget about my record',
     'status' => 'Open',
     'type' => 'Request to Erase Information',
@@ -3140,8 +3140,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Would like us to forget about their record completely from all systems',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Received consent to process',
     'status' => 'Closed',
     'type' => 'Consent to Process',
@@ -3151,8 +3151,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'description' => 'Consent was received',
     'resolution' => 'Consent recorded in record',
     'business_purpose' => '^Business Communications^,^Marketing Communications by company^,^Marketing Communications by partners^',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Received consent to process',
     'status' => 'Closed',
     'type' => 'Consent to Process',
@@ -3162,8 +3162,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'description' => 'Consent was received',
     'resolution' => 'Consent recorded in record',
     'business_purpose' => '^Business Communications^,^Marketing Communications by company^,^Marketing Communications by partners^',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Received consent to process',
     'status' => 'Closed',
     'type' => 'Consent to Process',
@@ -3173,8 +3173,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'description' => 'Consent was received',
     'resolution' => 'Consent recorded in record',
     'business_purpose' => '^Business Communications^,^Marketing Communications by company^,^Marketing Communications by partners^',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Received consent to process',
     'status' => 'Closed',
     'type' => 'Consent to Process',
@@ -3184,8 +3184,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'description' => 'Consent was received',
     'resolution' => 'Consent recorded in record',
     'business_purpose' => '^Business Communications^,^Marketing Communications by company^,^Marketing Communications by partners^',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Received consent to process',
     'status' => 'Closed',
     'type' => 'Consent to Process',
@@ -3195,8 +3195,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'description' => 'Consent was received',
     'resolution' => 'Consent recorded in record',
     'business_purpose' => '^Business Communications^,^Marketing Communications by company^,^Marketing Communications by partners^',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Received consent to process',
     'status' => 'Closed',
     'type' => 'Consent to Process',
@@ -3206,8 +3206,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'description' => 'Consent was received',
     'resolution' => 'Consent recorded in record',
     'business_purpose' => '^Business Communications^,^Marketing Communications by company^,^Marketing Communications by partners^',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Received consent to process',
     'status' => 'Closed',
     'type' => 'Consent to Process',
@@ -3217,8 +3217,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'description' => 'Consent was received',
     'resolution' => 'Consent recorded in record',
     'business_purpose' => '^Business Communications^,^Marketing Communications by company^,^Marketing Communications by partners^',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Want us to erase personal data',
     'status' => 'Open',
     'type' => 'Request to Erase Information',
@@ -3226,8 +3226,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Want us to erase personal data because they are getting a lot of spam',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'No business, Erase data',
     'status' => 'Open',
     'type' => 'Request to Erase Information',
@@ -3235,8 +3235,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Requet to erase data as they have not done any business with our company in the past 2 years',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Erase personal data per lack of consent',
     'status' => 'Open',
     'type' => 'Request to Erase Information',
@@ -3244,8 +3244,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Subject is upset that consent was not provided, and hence data should be erased and no further communication should be allowed',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'ERase data about minors',
     'status' => 'Open',
     'type' => 'Request to Erase Information',
@@ -3254,8 +3254,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'requested_by' => 'By the parent of person',
     'description' => 'The parent of this person called and would like to completely erase their minors data',
     'resolution' => 'Confirmed that subject is a minor and is subject to erasure. Informed Data Privacy Manager',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Requests to correct information',
     'status' => 'Open',
     'type' => 'Rectify Information',
@@ -3263,8 +3263,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'New work phone in 510-737-9876',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Change email address',
     'status' => 'Open',
     'type' => 'Rectify Information',
@@ -3272,8 +3272,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'New email address is jwc@acme.com',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Change company and title',
     'status' => 'Open',
     'type' => 'Rectify Information',
@@ -3281,8 +3281,8 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Company name is Whitehouse marketing, Title is VP Marketing',
-);
-$sugar_demodata['dataprivacy_seed_data'][] = array(
+];
+$sugar_demodata['dataprivacy_seed_data'][] = [
     'name' => 'Would like to request the processing be stopped',
     'status' => 'Open',
     'type' => 'Restrict Processing',
@@ -3290,5 +3290,5 @@ $sugar_demodata['dataprivacy_seed_data'][] = array(
     'source' => 'Email',
     'requested_by' => 'By the person themselves',
     'description' => 'Wants to restrict the processing of personal data',
-);
+];
 //END Data Privacy demo data

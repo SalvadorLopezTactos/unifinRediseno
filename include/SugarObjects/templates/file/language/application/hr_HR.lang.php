@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Marketing',
-    'Knowledge Base' => 'Baza znanja',
-    'Sales' => 'Prodaja',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Popratni marketinški materijal',
-    'Product Brochures' => 'Brošure proizvoda',
-    'FAQ' => 'FAQ',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Marketing',
+        'Knowledge Base' => 'Baza znanja',
+        'Sales' => 'Prodaja',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Aktivno',
-    'Draft' => 'Skica',
-    'FAQ' => 'FAQ',
-    'Expired' => 'Isteklo',
-    'Under Review' => 'Pregled u tijeku',
-    'Pending' => 'Na čekanju',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Popratni marketinški materijal',
+        'Product Brochures' => 'Brošure proizvoda',
+        'FAQ' => 'FAQ',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Aktivno',
+        'Draft' => 'Skica',
+        'FAQ' => 'FAQ',
+        'Expired' => 'Isteklo',
+        'Under Review' => 'Pregled u tijeku',
+        'Pending' => 'Na čekanju',
+    ],
+];

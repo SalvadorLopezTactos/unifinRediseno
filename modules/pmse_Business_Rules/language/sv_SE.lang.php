@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Affärsprocessregler',
-  'LBL_MODULE_TITLE' => 'Affärsprocessregler',
-  'LBL_MODULE_NAME_SINGULAR' => 'Affärsprocessregel',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Affärsprocessregler',
+    'LBL_MODULE_TITLE' => 'Affärsprocessregler',
+    'LBL_MODULE_NAME_SINGULAR' => 'Affärsprocessregel',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för affärsprocessregler',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för affärsprocessregler',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Instrumentpanel för post för processverksamhetsregler',
-  'LBL_RST_UID' => 'Affärsregels ID',
-  'LBL_RST_TYPE' => 'Affärsregeltyp',
-  'LBL_RST_DEFINITION' => 'Affärsregeldefinition',
-  'LBL_RST_EDITABLE' => 'Affärsregel Redigerbar',
-  'LBL_RST_SOURCE' => 'Affärsregel Källa',
-  'LBL_RST_SOURCE_DEFINITION' => 'Affärsregel Källdefinition',
-  'LBL_RST_MODULE' => 'Målmodul',
-  'LBL_RST_FILENAME' => 'Affärsregel Filnamn',
-  'LBL_RST_CREATE_DATE' => 'Affärsregel Skapat Datum',
-  'LBL_RST_UPDATE_DATE' => 'Affärsregel Uppdaterat Datum',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Instrumentpanel för post för processverksamhetsregler',
+    'LBL_RST_UID' => 'Affärsregels ID',
+    'LBL_RST_TYPE' => 'Affärsregeltyp',
+    'LBL_RST_DEFINITION' => 'Affärsregeldefinition',
+    'LBL_RST_EDITABLE' => 'Affärsregel Redigerbar',
+    'LBL_RST_SOURCE' => 'Affärsregel Källa',
+    'LBL_RST_SOURCE_DEFINITION' => 'Affärsregel Källdefinition',
+    'LBL_RST_MODULE' => 'Målmodul',
+    'LBL_RST_FILENAME' => 'Affärsregel Filnamn',
+    'LBL_RST_CREATE_DATE' => 'Affärsregel Skapat Datum',
+    'LBL_RST_UPDATE_DATE' => 'Affärsregel Uppdaterat Datum',
 
     'LNK_LIST' => 'Visa Affärsregelprocesser',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Skapa Affärsregelprocess',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Affärsregeln är ogiltig eftersom den använder sig av ogiltiga fält eller fält som ej kan hittas i din version av SugarCRM. Åtgärda problemen nedan för att spara affärsregeln.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Affärsregeln används i en processdefinition. Vill du ändå redigera den?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Du kan inte radera affärsregeln eftersom den används i en processdefinition.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Du kan inte radera affärsregeln eftersom den används i en processdefinition.',
+];

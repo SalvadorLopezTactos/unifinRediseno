@@ -47,7 +47,7 @@ class CurrentUserPortalApi extends CurrentUserApi
         }
         $user_data['site_user_id'] = $contact->getSiteUserId(true);
         $user_data['cookie_consent'] = !empty($contact->cookie_consent);
-        return array('current_user'=>$user_data);
+        return ['current_user' => $user_data];
     }
 
     /**
@@ -100,11 +100,11 @@ class CurrentUserPortalApi extends CurrentUserApi
     {
         $bean->portal_password = User::getPasswordHash($new);
         $bean->save();
-        return array(
+        return [
             'valid' => true,
             'message' => 'Password updated.',
             'expiration' => null,
-        );
+        ];
     }
 
     /**
@@ -159,7 +159,9 @@ class CurrentUserPortalApi extends CurrentUserApi
             }
         }
         foreach ($acls as $modName => $modAcls) {
-            if ($modName === 'Contacts') continue;
+            if ($modName === 'Contacts') {
+                continue;
+            }
 
             $acls[$modName]['edit'] = 'no';
         }
@@ -168,8 +170,8 @@ class CurrentUserPortalApi extends CurrentUserApi
     }
 
     /**
-     * @deprecated use PortalFactory::getInstance('Session')->getContact()
      * @return Contact
+     * @deprecated use PortalFactory::getInstance('Session')->getContact()
      */
     protected function getPortalContact()
     {

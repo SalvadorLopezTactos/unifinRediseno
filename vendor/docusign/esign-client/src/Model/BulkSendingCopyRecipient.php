@@ -37,6 +37,7 @@ use DocuSign\eSign\ObjectSerializer;
  * BulkSendingCopyRecipient Class Doc Comment
  *
  * @category    Class
+ * @description This object contains details about a bulk send recipient.
  * @package     DocuSign\eSign
  * @author      Swagger Codegen team <apihelp@docusign.com>
  * @license     The DocuSign PHP Client SDK is licensed under the MIT License.
@@ -72,6 +73,7 @@ class BulkSendingCopyRecipient implements ModelInterface, ArrayAccess
         'id_check_configuration_name' => '?string',
         'id_check_information_input' => '\DocuSign\eSign\Model\IdCheckInformationInput',
         'identification_method' => '?string',
+        'identity_verification' => '\DocuSign\eSign\Model\RecipientIdentityVerification',
         'name' => '?string',
         'note' => '?string',
         'phone_authentication' => '\DocuSign\eSign\Model\RecipientPhoneAuthentication',
@@ -104,6 +106,7 @@ class BulkSendingCopyRecipient implements ModelInterface, ArrayAccess
         'id_check_configuration_name' => null,
         'id_check_information_input' => null,
         'identification_method' => null,
+        'identity_verification' => null,
         'name' => null,
         'note' => null,
         'phone_authentication' => null,
@@ -157,6 +160,7 @@ class BulkSendingCopyRecipient implements ModelInterface, ArrayAccess
         'id_check_configuration_name' => 'idCheckConfigurationName',
         'id_check_information_input' => 'idCheckInformationInput',
         'identification_method' => 'identificationMethod',
+        'identity_verification' => 'identityVerification',
         'name' => 'name',
         'note' => 'note',
         'phone_authentication' => 'phoneAuthentication',
@@ -189,6 +193,7 @@ class BulkSendingCopyRecipient implements ModelInterface, ArrayAccess
         'id_check_configuration_name' => 'setIdCheckConfigurationName',
         'id_check_information_input' => 'setIdCheckInformationInput',
         'identification_method' => 'setIdentificationMethod',
+        'identity_verification' => 'setIdentityVerification',
         'name' => 'setName',
         'note' => 'setNote',
         'phone_authentication' => 'setPhoneAuthentication',
@@ -221,6 +226,7 @@ class BulkSendingCopyRecipient implements ModelInterface, ArrayAccess
         'id_check_configuration_name' => 'getIdCheckConfigurationName',
         'id_check_information_input' => 'getIdCheckInformationInput',
         'identification_method' => 'getIdentificationMethod',
+        'identity_verification' => 'getIdentityVerification',
         'name' => 'getName',
         'note' => 'getNote',
         'phone_authentication' => 'getPhoneAuthentication',
@@ -307,6 +313,7 @@ class BulkSendingCopyRecipient implements ModelInterface, ArrayAccess
         $this->container['id_check_configuration_name'] = isset($data['id_check_configuration_name']) ? $data['id_check_configuration_name'] : null;
         $this->container['id_check_information_input'] = isset($data['id_check_information_input']) ? $data['id_check_information_input'] : null;
         $this->container['identification_method'] = isset($data['identification_method']) ? $data['identification_method'] : null;
+        $this->container['identity_verification'] = isset($data['identity_verification']) ? $data['identity_verification'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['note'] = isset($data['note']) ? $data['note'] : null;
         $this->container['phone_authentication'] = isset($data['phone_authentication']) ? $data['phone_authentication'] : null;
@@ -477,7 +484,7 @@ class BulkSendingCopyRecipient implements ModelInterface, ArrayAccess
     /**
      * Sets email_notification
      *
-     * @param \DocuSign\eSign\Model\RecipientEmailNotification $email_notification email_notification
+     * @param \DocuSign\eSign\Model\RecipientEmailNotification $email_notification A complex type that contains information sets the language of the recipient's email information.   **IMPORTANT**: If you enable email notification for one recipient, you must enable email notification for all recipients as it overrides the Envelope Subject and `EmailBlurb` property settings.
      *
      * @return $this
      */
@@ -621,7 +628,7 @@ class BulkSendingCopyRecipient implements ModelInterface, ArrayAccess
     /**
      * Sets id_check_information_input
      *
-     * @param \DocuSign\eSign\Model\IdCheckInformationInput $id_check_information_input id_check_information_input
+     * @param \DocuSign\eSign\Model\IdCheckInformationInput $id_check_information_input An object that contains input information related to a recipient ID check.
      *
      * @return $this
      */
@@ -652,6 +659,30 @@ class BulkSendingCopyRecipient implements ModelInterface, ArrayAccess
     public function setIdentificationMethod($identification_method)
     {
         $this->container['identification_method'] = $identification_method;
+
+        return $this;
+    }
+
+    /**
+     * Gets identity_verification
+     *
+     * @return \DocuSign\eSign\Model\RecipientIdentityVerification
+     */
+    public function getIdentityVerification()
+    {
+        return $this->container['identity_verification'];
+    }
+
+    /**
+     * Sets identity_verification
+     *
+     * @param \DocuSign\eSign\Model\RecipientIdentityVerification $identity_verification 
+     *
+     * @return $this
+     */
+    public function setIdentityVerification($identity_verification)
+    {
+        $this->container['identity_verification'] = $identity_verification;
 
         return $this;
     }
@@ -717,7 +748,7 @@ class BulkSendingCopyRecipient implements ModelInterface, ArrayAccess
     /**
      * Sets phone_authentication
      *
-     * @param \DocuSign\eSign\Model\RecipientPhoneAuthentication $phone_authentication phone_authentication
+     * @param \DocuSign\eSign\Model\RecipientPhoneAuthentication $phone_authentication When `idCheckConfigurationName` is set to `Phone Auth $`, you use this complex type to provide the recipient authentication method details. It contains the following elements:  * `recipMayProvideNumber`: Boolean. When **true,** the recipient can use whatever phone number they choose. * `senderProvidedNumbers`: ArrayOfStrings.  A list of phone numbers the recipient can use. * `recordVoicePrint`: Reserved for DocuSign. * `validateRecipProvidedNumber`: Reserved for DocuSign.
      *
      * @return $this
      */
@@ -861,7 +892,7 @@ class BulkSendingCopyRecipient implements ModelInterface, ArrayAccess
     /**
      * Sets sms_authentication
      *
-     * @param \DocuSign\eSign\Model\RecipientSMSAuthentication $sms_authentication sms_authentication
+     * @param \DocuSign\eSign\Model\RecipientSMSAuthentication $sms_authentication When `idCheckConfigurationName` is set to `SMS Auth $`, you use this complex type to provide the recipient authentication method details. It contains the element `senderProvidedNumbers`, which is an array of phone numbers that the recipient can use for SMS text authentication.
      *
      * @return $this
      */

@@ -10,12 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
- * Description:  
+ * Description:
  ********************************************************************************/
 
 global $mod_strings;
-$module_menu = Array(
-	);
-
-?>
+$module_menu = [
+];

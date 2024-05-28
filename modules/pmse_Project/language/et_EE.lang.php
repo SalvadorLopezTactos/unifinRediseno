@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Protsessi määratlused',
-  'LBL_MODULE_TITLE' => 'Protsessi määratlused',
-  'LBL_MODULE_NAME_SINGULAR' => 'Process Definition',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Protsessi määratlused',
+    'LBL_MODULE_TITLE' => 'Protsessi määratlused',
+    'LBL_MODULE_NAME_SINGULAR' => 'Process Definition',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Protsessi definitsioonide fookuse sahtel',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Protsessi definitsioonide fookuse sahtel',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Protsessi definitsioonide kirjete armatuurlaud',
-  'LNK_LIST' => 'Kuva protsessi määratlused',
-  'LNK_NEW_PMSE_PROJECT' => 'Create Process Definition',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Impordi protsessi määratlused',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Protsessi definitsioonide kirjete armatuurlaud',
+    'LNK_LIST' => 'Kuva protsessi määratlused',
+    'LNK_NEW_PMSE_PROJECT' => 'Create Process Definition',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Impordi protsessi määratlused',
 
-  'LBL_PRJ_STATUS' => 'Olek',
-  'LBL_PRJ_MODULE' => 'Target Module',
-  'LBL_PRJ_RUN_ORDER' => 'Käitamise järjestus',
-  'LBL_PMSE_BUTTON_SAVE' => 'Salvesta',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Tühista',
-  'LBL_PMSE_BUTTON_YES' => 'Yes',
-  'LBL_PMSE_BUTTON_NO' => 'No',
-  'LBL_PMSE_BUTTON_OK' => 'Ok',
+    'LBL_PRJ_STATUS' => 'Olek',
+    'LBL_PRJ_MODULE' => 'Target Module',
+    'LBL_PRJ_RUN_ORDER' => 'Käitamise järjestus',
+    'LBL_PMSE_BUTTON_SAVE' => 'Salvesta',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Tühista',
+    'LBL_PMSE_BUTTON_YES' => 'Yes',
+    'LBL_PMSE_BUTTON_NO' => 'No',
+    'LBL_PMSE_BUTTON_OK' => 'Ok',
     'LBL_PMSE_FORM_ERROR' => 'Parandage enne jätkamist kõik vead.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Design',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Tegevus',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Action',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Lead Start Event',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Opportunity Start Event' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Opportunity Start Event',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Document Start Event',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Start Event',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Wait Event',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Ärireegel',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Ärireegli tegevus',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Meilimall',
-);
+];

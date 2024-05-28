@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Теги',
     'LBL_GENERIC_LINK' => 'Связанные объекты',
     'LBL_NAME_LOWER' => 'Имя тега в нижнем регистре',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'Мои теги',
     'LBL_MY_FAVORITE_TAGS' => 'Мои избранные теги',
     'LBL_MORE_TAGS' => 'Число тегов: {{tagsNumber}}',
-);
+];

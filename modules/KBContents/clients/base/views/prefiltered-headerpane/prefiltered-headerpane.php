@@ -10,27 +10,27 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['KBContents']['base']['view']['prefiltered-headerpane'] = array(
-    'fields' => array(
-        array(
+$viewdefs['KBContents']['base']['view']['prefiltered-headerpane'] = [
+    'fields' => [
+        [
             'name' => 'title',
             'type' => 'label',
             'value' => 'LBL_MODULE_NAME',
-        ),
-    ),
-    'buttons' => array(
-        array(
+        ],
+    ],
+    'buttons' => [
+        [
             'name' => 'cancel_button',
             'type' => 'button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
-            'events' => array(
+            'events' => [
                 'click' => 'selection:closedrawer:fire',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
+        ],
+    ],
     'template' => 'headerpane',
-);
+];

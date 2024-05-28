@@ -9,59 +9,59 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['accounts_dataprivacy'] = array(
+$dictionary['accounts_dataprivacy'] = [
     'table' => 'accounts_dataprivacy',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'account_id' => array(
+        ],
+        'account_id' => [
             'name' => 'account_id',
             'type' => 'id',
-        ),
-        'dataprivacy_id' => array(
+        ],
+        'dataprivacy_id' => [
             'name' => 'dataprivacy_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'accounts_dataprivacypk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_acc_dataprivacy_dataprivacy',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'dataprivacy_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_accounts_dataprivacy',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'account_id',
                 'dataprivacy_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'accounts_dataprivacy' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'accounts_dataprivacy' => [
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',
             'lhs_key' => 'id',
@@ -72,6 +72,6 @@ $dictionary['accounts_dataprivacy'] = array(
             'join_table' => 'accounts_dataprivacy',
             'join_key_lhs' => 'account_id',
             'join_key_rhs' => 'dataprivacy_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

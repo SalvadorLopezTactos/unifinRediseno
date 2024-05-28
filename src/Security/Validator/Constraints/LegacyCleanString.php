@@ -36,9 +36,9 @@ class LegacyCleanString extends Constraint
     // Error codes
     public const FILTER_ERROR = 1;
 
-    protected static $errorNames = array(
+    protected static $errorNames = [
         self::FILTER_ERROR => 'FILTER_ERROR',
-    );
+    ];
 
     public $filter = self::STANDARD;
     public $message = 'LegacyCleanString violation [%filter%]';

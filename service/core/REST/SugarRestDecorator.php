@@ -1,5 +1,8 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+
+if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -17,17 +20,19 @@
  * Time: 11:58 AM
  * To change this template use File | Settings | File Templates.
  */
-require_once('service/core/REST/SugarRest.php');
+require_once 'service/core/REST/SugarRest.php';
 
-class SugarRestDecorator extends SugarRest{
+class SugarRestDecorator extends SugarRest
+{
     protected $decoratedClass;
 
-    public function __construct($decoratedClass){
+    public function __construct($decoratedClass)
+    {
         $this->decoratedClass = $decoratedClass;
-	}
+    }
 
-    public function serve(){
+    public function serve()
+    {
         return $this->decoratedClass->serve();
     }
 }
- 

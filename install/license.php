@@ -11,23 +11,23 @@
  */
 
 global $sugar_version, $js_custom_version;
-if( !isset( $install_script ) || !$install_script ){
+if (!isset($install_script) || !$install_script) {
     die('Unable to process script directly.');
 }
 
 // setup session variables (and their defaults) if this page has not yet been submitted
-if(!isset($_SESSION['license_submitted']) || !$_SESSION['license_submitted']){
+if (!isset($_SESSION['license_submitted']) || !$_SESSION['license_submitted']) {
     $_SESSION['setup_license_accept'] = false;
 }
 
 $checked = (isset($_SESSION['setup_license_accept']) && !empty($_SESSION['setup_license_accept'])) ? 'checked="on"' : '';
 
-require_once("install/install_utils.php");
-$license_file = getLicenseContents("LICENSE");
+require_once 'install/install_utils.php';
+$license_file = getLicenseContents('LICENSE');
 $license_file = formatLicense($license_file);
 $langHeader = get_language_header();
 $versionToken = getVersionedPath(null);
-$out =<<<EOQ
+$out = <<<EOQ
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html {$langHeader}>
 <head>

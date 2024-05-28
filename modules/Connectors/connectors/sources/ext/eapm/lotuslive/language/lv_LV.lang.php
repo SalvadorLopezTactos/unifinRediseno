@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Iegūstiet atslēgu un paroli no IBM SmartCloud, reģistrējot savu Sugar instanci kā jaunu programmu. Iespēja reģistrēt programmu ir sākot no 2011. gada 8. maija.<br>
 &nbsp;<br>
 Instances reģistrēšanai veicamie soļi:<br>
@@ -28,5 +28,4 @@ Instances reģistrēšanai veicamie soļi:<br>
 </td></tr></table>',
     'oauth_consumer_key' => 'OAuth patērētāja atslēga',
     'oauth_consumer_secret' => 'OAuth patērētāja parole',
-);
-
+];

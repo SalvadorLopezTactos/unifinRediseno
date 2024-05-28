@@ -16,8 +16,9 @@ class TeamsViewList extends ViewList
     public function preDisplay()
     {
         //bug #46690: Developer Access to Users/Teams/Roles
-        if (!$GLOBALS['current_user']->isAdminForModule('Users') && !$GLOBALS['current_user']->isDeveloperForModule('Users'))
-            sugar_die("Unauthorized access to administration.");
+        if (!$GLOBALS['current_user']->isAdminForModule('Users') && !$GLOBALS['current_user']->isDeveloperForModule('Users')) {
+            sugar_die('Unauthorized access to administration.');
+        }
 
         parent::preDisplay();
     }

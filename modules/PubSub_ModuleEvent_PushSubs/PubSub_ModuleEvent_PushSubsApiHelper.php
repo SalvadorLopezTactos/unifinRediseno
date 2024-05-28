@@ -91,7 +91,7 @@ final class PubSub_ModuleEvent_PushSubsApiHelper extends SugarBeanApiHelper
             try {
                 $uri = new URI($submittedData['webhook_url']);
                 $uri = UriNormalizer::normalize($uri);
-                $submittedData['webhook_url'] = (string) $uri;
+                $submittedData['webhook_url'] = (string)$uri;
             } catch (Exception $e) {
                 throw new SugarApiExceptionInvalidParameter('ERR_PUBSUB_MODULEEVENT_PUSHSUBS_WEBHOOK_URL_INVALID');
             }

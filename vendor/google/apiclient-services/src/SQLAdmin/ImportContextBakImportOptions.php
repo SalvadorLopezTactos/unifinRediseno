@@ -19,9 +19,39 @@ namespace Google\Service\SQLAdmin;
 
 class ImportContextBakImportOptions extends \Google\Model
 {
+  /**
+   * @var string
+   */
+  public $bakType;
   protected $encryptionOptionsType = ImportContextBakImportOptionsEncryptionOptions::class;
   protected $encryptionOptionsDataType = '';
+  /**
+   * @var bool
+   */
+  public $noRecovery;
+  /**
+   * @var bool
+   */
+  public $recoveryOnly;
+  /**
+   * @var bool
+   */
+  public $striped;
 
+  /**
+   * @param string
+   */
+  public function setBakType($bakType)
+  {
+    $this->bakType = $bakType;
+  }
+  /**
+   * @return string
+   */
+  public function getBakType()
+  {
+    return $this->bakType;
+  }
   /**
    * @param ImportContextBakImportOptionsEncryptionOptions
    */
@@ -35,6 +65,48 @@ class ImportContextBakImportOptions extends \Google\Model
   public function getEncryptionOptions()
   {
     return $this->encryptionOptions;
+  }
+  /**
+   * @param bool
+   */
+  public function setNoRecovery($noRecovery)
+  {
+    $this->noRecovery = $noRecovery;
+  }
+  /**
+   * @return bool
+   */
+  public function getNoRecovery()
+  {
+    return $this->noRecovery;
+  }
+  /**
+   * @param bool
+   */
+  public function setRecoveryOnly($recoveryOnly)
+  {
+    $this->recoveryOnly = $recoveryOnly;
+  }
+  /**
+   * @return bool
+   */
+  public function getRecoveryOnly()
+  {
+    return $this->recoveryOnly;
+  }
+  /**
+   * @param bool
+   */
+  public function setStriped($striped)
+  {
+    $this->striped = $striped;
+  }
+  /**
+   * @return bool
+   */
+  public function getStriped()
+  {
+    return $this->striped;
   }
 }
 

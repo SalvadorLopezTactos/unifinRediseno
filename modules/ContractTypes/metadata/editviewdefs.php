@@ -14,30 +14,29 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$viewdefs['ContractTypes']['EditView'] = array(
-    'templateMeta' => array('maxColumns' => '2', 
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'), 
-                                            array('label' => '10', 'field' => '30')
-                                            ),
-    ),
-    
-    'panels' => array (
-    	'default'=> array(
-	         array(array('name'=>'name',
-	                     'label'=>'LBL_NAME', 
-	                     'displayParams'=>array('required'=>true, 'size'=>60)
-	               )
-	         ),
-	         array(array('name'=>'list_order',
-	                     'label'=>'LBL_LIST_ORDER',
-	                     'displayParams'=>array('size'=>4)
-	               ),
-	         ),
-         ),
-    )
+
+$viewdefs['ContractTypes']['EditView'] = [
+    'templateMeta' => ['maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+
+    'panels' => [
+        'default' => [
+            [['name' => 'name',
+                'label' => 'LBL_NAME',
+                'displayParams' => ['required' => true, 'size' => 60],
+            ],
+            ],
+            [['name' => 'list_order',
+                'label' => 'LBL_LIST_ORDER',
+                'displayParams' => ['size' => 4],
+            ],
+            ],
+        ],
+    ],
 
 
-);
-?>
+];

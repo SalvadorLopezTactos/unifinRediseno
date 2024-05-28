@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Skaff en nøkkel og en hemmelig nøkkel fra IBM SmartCloud ved å registrere Sugar-forekomsten din som en ny applikasjon.<br>
 &nbsp;<br>
 Fremgangsmåte for å registrere forekomsten din:<br>
@@ -28,5 +28,4 @@ Fremgangsmåte for å registrere forekomsten din:<br>
 </td></tr></table>',
     'oauth_consumer_key' => 'OAuth-forbrukernøkkel',
     'oauth_consumer_secret' => 'OAuth-forbrukerhemmelighet',
-);
-
+];

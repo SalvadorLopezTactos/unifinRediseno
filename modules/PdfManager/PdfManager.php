@@ -54,7 +54,8 @@ class PdfManager extends Basic
     public function bean_implements($interface)
     {
         switch ($interface) {
-            case 'ACL': return true;
+            case 'ACL':
+                return true;
         }
 
         return false;
@@ -65,14 +66,14 @@ class PdfManager extends Basic
         $the_array = parent::get_list_view_data();
         $the_array['BASE_MODULE'] = PdfManagerHelper::getModuleName($this->base_module);
 
-        return  $the_array;
+        return $the_array;
     }
 
-    public function deleteAttachment($isduplicate = "false")
+    public function deleteAttachment($isduplicate = 'false')
     {
         $removeFile = null;
         if ($this->ACLAccess('edit')) {
-            if ($isduplicate == "true") {
+            if ($isduplicate == 'true') {
                 return true;
             }
             $removeFile = "upload://{$this->id}";

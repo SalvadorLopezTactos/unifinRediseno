@@ -108,8 +108,7 @@
       .select2-arrow {
         background: none;
 
-        .sicon-chevron-down,
-        .fa-caret-down {
+        .sicon-chevron-down {
           display: none;
         }
       }
@@ -168,10 +167,6 @@
         line-height: 13px;
         height: 12px;
         background: @btnSecondaryBackground;
-
-        i.fa {
-          margin-left: 4px;
-        }
 
         &:hover {
           background: @btnSecondaryBackgroundHover;
@@ -337,6 +332,7 @@
         }
       }
     }
+
     .controls[data-filter='value'] {
       .input-prepend.input-append {
         display: flex;
@@ -484,13 +480,6 @@
         }
       }
     }
-
-    .select2-select-legend {
-      .fa-plus {
-        margin-top: 3px;
-        line-height: 4px;
-      }
-    }
   }
 
   // adding this for mass update teamset
@@ -587,17 +576,6 @@
 
     &.select2-result-border-bottom {
       border-bottom: 1px solid @borderColor;
-    }
-
-    .select2-fa-prepend {
-      i.fa-check {
-        padding-right: 5px;
-      }
-
-      i.fa-plus {
-        padding-left: 1px;
-        padding-right: 7px;
-      }
     }
 
     .select2-icon-prepend {

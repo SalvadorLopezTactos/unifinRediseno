@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'שלב קבוצה',
-    'LBL_DEAL_TOT'=>'סך הכל הנחה',
-    'LBL_DEAL_TOT_USDOLLAR'=>'סך הכל הנחה בדולרים',
+    'LBL_DEAL_TOT' => 'סך הכל הנחה',
+    'LBL_DEAL_TOT_USDOLLAR' => 'סך הכל הנחה בדולרים',
     'LBL_NEW_SUB' => 'סיכום ביניים להנחה',
     'LBL_SHIPPING' => 'משלוח',
-    'LBL_SHIPPING_USDOLLAR'=>'משלוח בדולרים',
-    'LBL_SUBTOTAL_USDOLLAR'=>'סיכום ביניים בדולרים',
+    'LBL_SHIPPING_USDOLLAR' => 'משלוח בדולרים',
+    'LBL_SUBTOTAL_USDOLLAR' => 'סיכום ביניים בדולרים',
     'LBL_SUBTOTAL' => 'סיכום ביניים',
     'LBL_TAXABLE_SUBTOTAL' => 'סיכום ביניים חייב במס',
-    'LBL_TAX_USDOLLAR'=>'מס בדולרים',
+    'LBL_TAX_USDOLLAR' => 'מס בדולרים',
     'LBL_TAX' => 'מס',
-    'LBL_TOTAL_USDOLLAR'=>'סך הכל בדולרים',
+    'LBL_TOTAL_USDOLLAR' => 'סך הכל בדולרים',
     'LBL_TOTAL' => 'סך הכל',
     'LBL_QUOTE_BUNDLE_POSITION' => 'מיקום ההצעות',
     'EXCEPTION_INVALID_QUOTE_ID' => 'חסרה הצעה ID במטען',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'ההצעה שביקשת לא נמצאה',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'ההצעה שביקשת לא נמצאה',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'הנחה קבוצתית נוספת',
     'LBL_GROUP_TOTAL' => 'סה"כ קבוצה',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'כותרת עליונה לקבוצה',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'קבוצת מארזי המוצרים כברירת מחדל להצעת מחיר זו',
     'LBL_ALERT_DELETING_ITEM' => 'מוחק שורת(ות) פריט(ים)',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'שורת הפריט נמחקה בהצלחה',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן של חבילות מוצרים',
+];

@@ -68,6 +68,27 @@
                 }
             },
             {
+                name: 'changePassword',
+                route: 'changePassword',
+                callback: function() {
+                    if (!app.controller.context.get('layout')) {
+                        app.controller.loadView({
+                            module: 'Users',
+                            layout: 'record',
+                            modelId: app.user.get('id'),
+                        });
+                    }
+
+                    app.drawer.open({
+                        layout: 'change-password',
+                        context: {
+                            fromRouter: true,
+                            skipFetch: true
+                        }
+                    });
+                }
+            },
+            {
                 name: 'externalAuthError',
                 route: 'externalAuthError',
                 callback: function() {
@@ -193,7 +214,7 @@
                 name: 'profile',
                 route: 'profile',
                 callback: function() {
-                    var route = app.bwc.buildRoute('Users', app.user.get('id'));
+                    const route = app.router.buildRoute('Users', app.user.get('id'));
                     app.router.navigate(route, {trigger: true, replace: true});
                 }
             },
@@ -309,8 +330,37 @@
                 }
             },
             {
-                name: "list",
-                route: ":module"
+                name: 'list',
+                route: ':module',
+                callback: function(module) {
+                    // FIXME: We shouldn't be calling private methods like this.
+                    // Will be addressed in SC-2761.
+                    if (!app.router._moduleExists(module)) {
+                        return;
+                    }
+
+                    const enabledModulesKey = 'enabled_modules';
+                    let pipelineConfig = app.metadata.getModule('VisualPipeline', 'config') || {};
+                    let enableModules = pipelineConfig[enabledModulesKey] || [];
+                    let isAvailablePipeline = _.includes(enableModules, module);
+                    //get layout name according last pipeline view status and if pipeline is available
+                    //for this module. If pipeline is not available for this module set last state back to 0
+                    let layout = 'records';
+
+                    if (app.user.lastState.get(module + ':pipeline')) {
+                        if (isAvailablePipeline) {
+                            layout = 'pipeline-records';
+                        } else {
+                            app.user.lastState.set(module + ':pipeline', 0);
+                            app.user.lastState.set(`${module}:list-filterpanel:toggle-view`, 'list');
+                        }
+                    }
+
+                    app.controller.loadView({
+                        module: module,
+                        layout: layout
+                    });
+                }
             },
             {
                 name: 'create',
@@ -422,15 +472,14 @@
                 name: 'pipelineView',
                 route: ':module/pipeline',
                 callback: function(module) {
-                    if (!app.acl.hasAccessToModel('list', this.model)) {
-                        app.error.handleHttpError({status: 404});
+                    // FIXME: We shouldn't be calling private methods like this.
+                    // Will be addressed in SC-2761.
+                    if (!app.router._moduleExists(module)) {
                         return;
                     }
 
-                    app.controller.loadView({
-                        module: module,
-                        layout: 'pipeline-records'
-                    });
+                    //redirect to 'list' route
+                    app.router.redirect('#' + module);
                 }
             },
             {
@@ -475,7 +524,8 @@
             'records': 'TPL_BROWSER_SUGAR7_RECORDS_TITLE',
             'record': 'TPL_BROWSER_SUGAR7_RECORD_TITLE',
             'about': 'TPL_BROWSER_SUGAR7_ABOUT_TITLE',
-            'activities': 'TPL_BROWSER_SUGAR7_RECORD_TITLE'
+            'activities': 'TPL_BROWSER_SUGAR7_RECORD_TITLE',
+            'pipeline-records': 'TPL_BROWSER_SUGAR7_RECORDS_TITLE'
         };
     // FIXME: This should have unit test coverage, e.g. on `app:view:change`
     // ensure `document.title` is updated. Will be addressed in SC-2761.
@@ -496,10 +546,10 @@
             // In the case of Dashboards record view page,
             // the translation is not stored in the current module,
             // and we want to look up from the module that dashboard is for
-            if (moduleName === 'Dashboards' && titleInfo.dashboard_module) {
+            if (module === 'Dashboards' && titleInfo.dashboard_module) {
                 titleInfo.name = app.lang.get(titleInfo.name, titleInfo.dashboard_module);
             } else {
-                titleInfo.name = app.lang.get(titleInfo.name, moduleName);
+                titleInfo.name = app.lang.get(titleInfo.name, module);
             }
         }
         title = template(titleInfo);
@@ -642,50 +692,6 @@
 
             // FIXME: Show wizard functionality should be broken out into
             // another function; will be addressed in SC-2761.
-
-            // Check if cookie consent should be shown
-            var showConsent = false;
-            if (app.user && app.user.has('cookie_consent')) {
-                showConsent = !app.user.get('cookie_consent');
-                if (showConsent) {
-                    // If the license settings need to be input, don't show the cookie consent
-                    var systemConfig = app.metadata.getConfig();
-                    if (systemConfig.system_status &&
-                        systemConfig.system_status.level &&
-                        systemConfig.system_status.level === 'admin_only'
-                    ) {
-                        showConsent = false;
-                    }
-                    // If the admin logged in as impersonated user, don't show the cookie consent
-                    if (app.cache && app.cache.has('ImpersonationFor')) {
-                        showConsent = false;
-                    }
-                }
-            }
-            if (showConsent) {
-                var callbacks = {
-                    complete: function() {
-                        var module = app.utils.getWindowLocationParameterByName('module', window.location.search);
-                        var action = app.utils.getWindowLocationParameterByName('action', window.location.search);
-
-                        // work around for saml authentication of a new user
-                        if (_.isString(module) && _.isString(action) &&
-                            module.toLowerCase() === 'users' && action.toLowerCase() === 'authenticate') {
-                            window.location = window.location.pathname;
-                        } else {
-                            window.location.reload(); //Reload when done
-                        }
-                    }
-                };
-                app.controller.loadView({
-                    layout: 'consent-wizard',
-                    module: 'Users',
-                    modelId: app.user.get('id'),
-                    callbacks: callbacks
-                });
-                app.additionalComponents['header-nav'].hide();
-                return false;
-            }
 
             // Check if first time login wizard should be shown
             var showWizard = false;

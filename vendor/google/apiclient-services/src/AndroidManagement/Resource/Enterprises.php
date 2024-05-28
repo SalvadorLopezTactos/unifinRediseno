@@ -33,7 +33,7 @@ class Enterprises extends \Google\Service\Resource
 {
   /**
    * Creates an enterprise. This is the last step in the enterprise signup flow.
-   * (enterprises.create)
+   * See also: SigninDetail (enterprises.create)
    *
    * @param Enterprise $postBody
    * @param array $optParams Optional parameters.
@@ -41,11 +41,11 @@ class Enterprises extends \Google\Service\Resource
    * @opt_param bool agreementAccepted Whether the enterprise admin has seen and
    * agreed to the managed Google Play Agreement
    * (https://www.android.com/enterprise/terms/). Do not set this field for any
-   * customer-managed enterprise (https://developers.google.com/android/management
-   * /create-enterprise#customer-managed_enterprises). Set this to field to true
-   * for all EMM-managed enterprises
-   * (https://developers.google.com/android/management/create-enterprise#emm-
-   * managed_enterprises).
+   * customer-managed enterprise
+   * (https://developers.google.com/android/management/create-enterprise#customer-
+   * managed_enterprises). Set this to field to true for all EMM-managed
+   * enterprises (https://developers.google.com/android/management/create-
+   * enterprise#emm-managed_enterprises).
    * @opt_param string enterpriseToken The enterprise token appended to the
    * callback URL. Set this when creating a customer-managed enterprise
    * (https://developers.google.com/android/management/create-enterprise#customer-
@@ -120,7 +120,7 @@ class Enterprises extends \Google\Service\Resource
     return $this->call('list', [$params], ListEnterprisesResponse::class);
   }
   /**
-   * Updates an enterprise. (enterprises.patch)
+   * Updates an enterprise. See also: SigninDetail (enterprises.patch)
    *
    * @param string $name The name of the enterprise in the form
    * enterprises/{enterpriseId}.

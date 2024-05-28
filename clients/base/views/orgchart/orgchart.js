@@ -105,7 +105,7 @@
             .attr('height', '32px')
             .attr('transform', 'translate(3, 3)')
             .on('error', function() {
-                d3.select(this)
+                d3sugar.select(this)
                     .style('width', 'auto')
                     .attr('x', '4')
                     .attr('xlink:href', 'include/images/user.svg');
@@ -125,17 +125,29 @@
 
         node
             .on('mouseenter', function(d) {
-                d3.select(this)
+                d3sugar.select(this)
                     .select('.sc-org-name')
                         .style('text-decoration', 'underline');
             })
             .on('mouseleave', function(d) {
-                d3.select(this)
+                d3sugar.select(this)
                     .select('.sc-org-name')
                         .style('text-decoration', 'none');
             });
 
         return node;
+    },
+
+    /**
+     * Check if slider is initialized
+     * @return {boolean}
+     */
+    isSliderInitialized: function() {
+        if (this.slider) {
+            const api = this.slider.data('api');
+            return !!(api && api.handles);
+        }
+        return !!this.slider;
     },
 
     /**
@@ -147,7 +159,7 @@
             return;
         }
 
-        if (!this.slider) {
+        if (!this.isSliderInitialized()) {
             // chart controls
             this.slider = this.$('.btn-slider .noUiSlider');
             this.sliderZoomOut = this.$('.zoom-control[data-control="zoom-out"]');

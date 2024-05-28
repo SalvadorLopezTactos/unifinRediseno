@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -28,8 +29,8 @@
 class MinDateConditionalRelatedExpression extends DateExpression
 {
     /**
-     * @deprecated
      * @return int|string
+     * @deprecated
      */
     public function evaluate()
     {
@@ -206,7 +207,7 @@ JS;
     protected function checkConditions(SugarBean $bean, array $conditions)
     {
         foreach ($conditions as $field => $values) {
-            if (!in_array($bean->$field, $values)) {
+            if (!safeInArray($bean->$field, $values)) {
                 return false;
             }
         }
@@ -219,7 +220,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return array("rollupConditionalMinDate");
+        return ['rollupConditionalMinDate'];
     }
 
     /**
@@ -230,12 +231,12 @@ JS;
      */
     public static function getParameterTypes()
     {
-        return array(
+        return [
             AbstractExpression::$RELATE_TYPE,
             AbstractExpression::$STRING_TYPE,
             AbstractExpression::$ENUM_TYPE,
             AbstractExpression::$ENUM_TYPE,
-        );
+        ];
     }
 
     /**

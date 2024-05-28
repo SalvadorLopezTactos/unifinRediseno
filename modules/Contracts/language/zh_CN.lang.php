@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => '合同',
-	'LBL_MODULE_NAME_SINGULAR' => '合同',
-	'LBL_MODULE_TITLE' => '合同：首页',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => '合同',
+    'LBL_MODULE_NAME_SINGULAR' => '合同',
+    'LBL_MODULE_TITLE' => '合同：首页',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => '创建合同',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => '货币编号：',
     'LBL_CURRENCY' => '货币：',
     'LBL_CURRENCY_RATE' => '汇率',
-    'LBL_ASSIGNED_TO_NAME'=>'负责人：',                   
+    'LBL_ASSIGNED_TO_NAME' => '负责人：',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => '合同列表',	
+    'LBL_LIST_FORM_TITLE' => '合同列表',
     'LBL_LIST_CONTRACT_NAME' => '合同名称',
     'LBL_LIST_ACCOUNT_NAME' => '账户名称',
     'LBL_LIST_START_DATE' => '开始',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => '名称',
     'LBL_LIST_CONTRACT_VALUE' => '值',
 
-    'LBL_TYPE'=>'类型',
+    'LBL_TYPE' => '类型',
     'LBL_TYPE_NAME' => '类型名称',
-    'LBL_CONTRACT_TYPE'=>'类型：',
+    'LBL_CONTRACT_TYPE' => '类型：',
 
     'LBL_CREATED_USER' => '已创建的用户',
     'LBL_MODIFIED_USER' => '已修改的用户',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => '合同焦点抽屉',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => '合同记录仪表板',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '合同时间轴',
+];

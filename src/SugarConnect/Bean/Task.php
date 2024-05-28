@@ -20,13 +20,13 @@ class Task extends SugarBean
     /**
      * Determines how to handle bean events for Tasks.
      *
-     * @param \SugarBean $bean  The bean that was changed.
-     * @param string     $event The type of event.
-     * @param array      $args  Additional arguments.
+     * @param \SugarBean $bean The bean that was changed.
+     * @param string $event The type of event.
+     * @param array $args Additional arguments.
      *
      * @return void
      */
-    public function publish(\SugarBean $bean, string $event, array $args) : void
+    public function publish(\SugarBean $bean, string $event, array $args): void
     {
         $eventList = [
             'after_save',

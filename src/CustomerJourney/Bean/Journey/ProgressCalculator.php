@@ -14,12 +14,8 @@ namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Journey;
 
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Stage\ProgressCalculator as StageProgressCalculator;
 
-/**
- * @author Emil Kilhage <emil.kilhage@addoptify.com>
- */
 class ProgressCalculator
 {
-
     /**
      * @var \DRI_Workflow
      */

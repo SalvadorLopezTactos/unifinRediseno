@@ -34,7 +34,7 @@ class IsInEnumExpression extends BooleanExpression
                 if ($value == $needle) {
                     return AbstractExpression::$TRUE;
                 }
-                if (is_array($value) && in_array($needle, $value)) {
+                if (is_array($value) && safeInArray($needle, $value)) {
                     return AbstractExpression::$TRUE;
                 }
             }
@@ -72,7 +72,7 @@ EOQ;
      */
     public static function getParameterTypes()
     {
-        return array("generic", "enum");
+        return ['generic', 'enum'];
     }
 
     /**
@@ -89,7 +89,7 @@ EOQ;
      */
     public static function getOperationName()
     {
-        return array("isInList", "isInEnum");
+        return ['isInList', 'isInEnum'];
     }
 
     /**

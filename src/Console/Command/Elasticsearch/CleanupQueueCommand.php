@@ -42,8 +42,7 @@ class CleanupQueueCommand extends Command implements InstanceModeInterface
                 InputOption::VALUE_REQUIRED,
                 'Comma separated list of modules to be purged from queue. If no module(s) are specified ' .
                 'all records from any disabled modules will be purged.'
-            )
-        ;
+            );
     }
 
     /**
@@ -54,10 +53,10 @@ class CleanupQueueCommand extends Command implements InstanceModeInterface
         $engine = SearchEngine::getInstance()->getEngine();
 
         if (!$engine instanceof Elastic) {
-            throw new RuntimeException("Backend search engine is not Elastic");
+            throw new RuntimeException('Backend search engine is not Elastic');
         }
 
-        $modules = explode(',', $input->getOption('modules'));
+        $modules = explode(',', $input->getOption('modules') ?? '');
 
         if (empty($modules)) {
             $engine->getContainer()->queueManager->cleanupQueue();

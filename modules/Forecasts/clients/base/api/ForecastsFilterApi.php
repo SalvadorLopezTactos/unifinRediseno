@@ -12,40 +12,39 @@
 
 class ForecastsFilterApi extends FilterApi
 {
-
     public function registerApiRest()
     {
-        return array(
-            'filterModuleGet' => array(
+        return [
+            'filterModuleGet' => [
                 'reqType' => 'GET',
-                'path' => array('Forecasts', 'filter'),
-                'pathVars' => array('module', ''),
+                'path' => ['Forecasts', 'filter'],
+                'pathVars' => ['module', ''],
                 'method' => 'filterList',
-                'jsonParams' => array('filter'),
+                'jsonParams' => ['filter'],
                 'shortHelp' => 'Filter records from a single module',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastsFilter.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-            'filterModulePost' => array(
+                ],
+            ],
+            'filterModulePost' => [
                 'reqType' => 'POST',
-                'path' => array('Forecasts', 'filter'),
-                'pathVars' => array('module', ''),
+                'path' => ['Forecasts', 'filter'],
+                'pathVars' => ['module', ''],
                 'method' => 'filterList',
                 'shortHelp' => 'Filter records from a single module',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastsFilter.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**
@@ -97,11 +96,11 @@ class ForecastsFilterApi extends FilterApi
 
         // if filter is not defined, define it
         if (!isset($args['filter']) || !is_array($args['filter'])) {
-            $args['filter'] = array();
+            $args['filter'] = [];
         }
 
         if (isset($args['filter'][0]['$tracker'])) {
-            return array('next_offset' => -1, 'records' => array());
+            return ['next_offset' => -1, 'records' => []];
         }
 
         // if there are filters set, process through them
@@ -134,17 +133,17 @@ class ForecastsFilterApi extends FilterApi
     /**
      * Utility Method to create the filter for the filer API to use
      *
-     * @param ServiceBase $api                  Service Api Class
-     * @param mixed $user_id                    Passed in User ID, if false, it will use the current use from $api->user
-     * @param mixed $timeperiod_id              TimePeriod Id, if false, the current time period will be found an used
-     * @param string $forecast_type             Type of forecast to return, direct or rollup
+     * @param ServiceBase $api Service Api Class
+     * @param mixed $user_id Passed in User ID, if false, it will use the current use from $api->user
+     * @param mixed $timeperiod_id TimePeriod Id, if false, the current time period will be found an used
+     * @param string $forecast_type Type of forecast to return, direct or rollup
      * @return array                            The Filer array to be passed back into the filerList Api
      * @throws SugarApiExceptionNotAuthorized
      * @throws SugarApiExceptionInvalidParameter
      */
     protected function createFilter(ServiceBase $api, $user_id, $timeperiod_id, $forecast_type)
     {
-        $filter = array();
+        $filter = [];
 
         // if we did not find a user in the filters array, set it to the current user's id
         if ($user_id == false) {
@@ -165,13 +164,13 @@ class ForecastsFilterApi extends FilterApi
 
             if ($user_id != $api->user->id && !User::isManager($api->user->id)) {
                 throw new SugarApiExceptionNotAuthorized(
-                    string_format($mod_strings['LBL_ERROR_NOT_MANAGER'], array($api->user->id, $user_id))
+                    string_format($mod_strings['LBL_ERROR_NOT_MANAGER'], [$api->user->id, $user_id])
                 );
             }
         }
 
         // set the assigned_user_id
-        array_push($filter, array('user_id' => $user_id));
+        array_push($filter, ['user_id' => $user_id]);
 
         if ($forecast_type !== false) {
             // make sure $forecast_type is valid (e.g. Direct or Rollup)
@@ -185,7 +184,7 @@ class ForecastsFilterApi extends FilterApi
                     );
             }
             // set the forecast type, make sure it's always capitalized
-            array_push($filter, array('forecast_type' => ucfirst($forecast_type)));
+            array_push($filter, ['forecast_type' => ucfirst($forecast_type)]);
         }
 
         // if we didn't find a time period, set the time period to be the current time period
@@ -200,9 +199,8 @@ class ForecastsFilterApi extends FilterApi
         if (is_null($tp) || is_null($tp->id)) {
             throw new SugarApiExceptionInvalidParameter('Provided TimePeriod is not valid');
         }
-        array_push($filter, array('timeperiod_id' => $tp->id));
+        array_push($filter, ['timeperiod_id' => $tp->id]);
 
         return $filter;
     }
-
 }

@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'View Escalations',
     'LBL_LIST_RELATED_TO_ID' => 'Related to ID',
     'LNK_IMPORT_ESCALATIONS' => 'Import Escalations',
-    
+
     'LBL_LIST_SUBJECT' => 'Subject',
     'LBL_LIST_NUMBER' => 'Num.',
     'LBL_LIST_RELATED_TO_TYPE' => 'Related Type',

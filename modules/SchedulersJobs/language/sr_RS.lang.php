@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Redosled poslova',
     'LBL_MODULE_NAME_SINGULAR' => 'Redosled poslova',
     'LBL_MODULE_TITLE' => 'Redosled posla: Početna strana',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Otkazana rezolucija',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Rezolucija u toku',
     // Errors
-    'ERR_CALL' => "Ne može se pozvati funkcija: %s",
-    'ERR_CURL' => "Nema CURL-a - ne mogu se pokrenuti URL poslovi",
-    'ERR_FAILED' => "Neočekivana greška, molimo proverite PHP logove i sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s u %s na liniji %d",
-    'ERR_NOUSER' => "Nema ID-a korisnika dodeljenog za posao",
-    'ERR_NOSUCHUSER' => "ID korisnika %s nije pronađen",
-    'ERR_JOBTYPE' => "Nepoznat tip posla: %s",
-    'ERR_TIMEOUT' => "Greška usled isteka vremena",
+    'ERR_CALL' => 'Ne može se pozvati funkcija: %s',
+    'ERR_CURL' => 'Nema CURL-a - ne mogu se pokrenuti URL poslovi',
+    'ERR_FAILED' => 'Neočekivana greška, molimo proverite PHP logove i sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s u %s na liniji %d',
+    'ERR_NOUSER' => 'Nema ID-a korisnika dodeljenog za posao',
+    'ERR_NOSUCHUSER' => 'ID korisnika %s nije pronađen',
+    'ERR_JOBTYPE' => 'Nepoznat tip posla: %s',
+    'ERR_TIMEOUT' => 'Greška usled isteka vremena',
     'ERR_JOB_FAILED_VERBOSE' => 'Posao %1$s (%2$s) neuspeo u izvršenju CRON-a',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Ne može se učitati zrno sa id: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Ne može se pronaći procedura za rutu %s',
@@ -92,13 +92,13 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Pomoć za konfiguraciju Amazon SQS',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Odeljak za konfiguraciju Amazon SQS.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Odeljak za konfiguraciju Amazon SQS.</b></p>
 <ul>
     <li>ID pristupnog koda: <i>Unesite vaš id pristupnog koda za Amazon SQS</i></li>
     <li>Tajni pristupni kod: <i>Unesite vaš tajni pristupni kod za Amazon SQS</i></li>
     <li>Region: <i>Unesite region Amazon SQS servera</i></li>
     <li>Ime redosleda: <i>Unesite ime redosleda Amazon SQS servera</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'Pomoć za AMQP konfiguraciju',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>Odeljak za AMQP konfiguraciju.</b></p>
 <ul>
@@ -119,4 +119,4 @@ $mod_strings = array(
     'LBL_REGION' => 'Region',
     'LBL_ACCESS_KEY_SECRET' => 'Kod tajnog pristupa',
     'LBL_QUEUE_NAME' => 'Ime adaptera',
-);
+];

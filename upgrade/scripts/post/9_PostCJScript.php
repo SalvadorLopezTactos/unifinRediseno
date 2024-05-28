@@ -17,9 +17,7 @@ class SugarUpgradePostCJScript extends UpgradeScript
 {
     public function run()
     {
-        if (version_compare($this->from_version, '12.3.0', '<') &&
-            version_compare($this->to_version, '12.3.0', '>=')
-        ) {
+        if (version_compare($this->from_version, '12.3.0', '<')) {
             if ($this->shouldCreateTemplates()) {
                 $this->installDefaultTemplates();
             }
@@ -28,7 +26,10 @@ class SugarUpgradePostCJScript extends UpgradeScript
             $this->addRelationshipandScheduler();
             $this->addCJModulesInNavbar();
         }
+
+        $this->setMainTriggerType();
         $this->emptyDRIWorkflowTemplateID();
+        $this->removeAutomateModulesFromWirelessRegistry();
     }
 
     /**
@@ -204,7 +205,7 @@ class SugarUpgradePostCJScript extends UpgradeScript
                 $response = [];
             }
         } catch (\JsonException $exception) {
-            $this->log('Json decode error msg: '. $exception->getMessage());
+            $this->log('Json decode error msg: ' . $exception->getMessage());
         }
 
         return $response;
@@ -218,8 +219,8 @@ class SugarUpgradePostCJScript extends UpgradeScript
         $this->log('Retaining Sugar Automate Users if any');
 
         $hasAccessField = isset($GLOBALS['dictionary']) && isset($GLOBALS['dictionary']['User']) &&
-                isset($GLOBALS['dictionary']['User']['fields']) &&
-                isset($GLOBALS['dictionary']['User']['fields']['customer_journey_access']);
+            isset($GLOBALS['dictionary']['User']['fields']) &&
+            isset($GLOBALS['dictionary']['User']['fields']['customer_journey_access']);
 
         if ($hasAccessField) {
             $automateKey = Subscription::SUGAR_AUTOMATE_KEY;
@@ -285,5 +286,54 @@ class SugarUpgradePostCJScript extends UpgradeScript
                 }
             }
         }
+    }
+
+    /**
+     * Set the man_trigger_type field for the previously created RSA
+     */
+    protected function setMainTriggerType(): void
+    {
+        $qb = DBManagerFactory::getConnection()->createQueryBuilder();
+        $qb->update('cj_forms')
+            ->set('main_trigger_type', $qb->expr()->literal('smart_guide_to_sugar_action'))
+            ->where($qb->expr()->isNull('main_trigger_type'));
+        $qb->execute();
+    }
+
+    /**
+     * Remove automate modules from wireless_module_registry array
+     */
+    protected function removeAutomateModulesFromWirelessRegistry(): void
+    {
+        $automate_wireless_not_supported_modules = [
+            'DRI_SubWorkflow_Templates',
+            'DRI_Workflow_Task_Templates',
+            'DRI_Workflow_Templates',
+            'CJ_Forms',
+            'CJ_WebHooks',
+        ];
+        $file = array_pop(SugarAutoLoader::existing('custom/include/MVC/Controller/wireless_module_registry.php'));
+
+        if (empty($file)) {
+            return;
+        }
+
+        require $file;
+        $updated_wireless_modules = [];
+
+        foreach ($wireless_module_registry as $e => $def) {
+            if (!safeInArray($e, $automate_wireless_not_supported_modules)) {
+                $updated_wireless_modules[$e] = $def;
+            }
+        }
+
+        write_array_to_file('wireless_module_registry', $updated_wireless_modules, $file);
+        foreach ($automate_wireless_not_supported_modules as $mod) {
+            sugar_cache_clear("CONTROLLER_wireless_module_registry_$mod");
+        }
+        sugar_cache_put('wireless_module_registry_keys', array_keys($updated_wireless_modules));
+        sugar_cache_reset();
+
+        MetaDataManager::refreshCache(['mobile']);
     }
 }

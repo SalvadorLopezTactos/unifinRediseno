@@ -22,6 +22,8 @@ class EnterpriseCrmFrontendsEventbusProtoTriggerConfig extends \Google\Collectio
   protected $collection_key = 'startTasks';
   protected $alertConfigType = EnterpriseCrmEventbusProtoWorkflowAlertConfig::class;
   protected $alertConfigDataType = 'array';
+  protected $cloudSchedulerConfigType = EnterpriseCrmEventbusProtoCloudSchedulerConfig::class;
+  protected $cloudSchedulerConfigDataType = '';
   /**
    * @var string
    */
@@ -30,6 +32,10 @@ class EnterpriseCrmFrontendsEventbusProtoTriggerConfig extends \Google\Collectio
    * @var string[]
    */
   public $enabledClients;
+  /**
+   * @var string
+   */
+  public $errorCatcherId;
   /**
    * @var string
    */
@@ -59,6 +65,10 @@ class EnterpriseCrmFrontendsEventbusProtoTriggerConfig extends \Google\Collectio
   /**
    * @var string
    */
+  public $triggerName;
+  /**
+   * @var string
+   */
   public $triggerNumber;
   /**
    * @var string
@@ -78,6 +88,20 @@ class EnterpriseCrmFrontendsEventbusProtoTriggerConfig extends \Google\Collectio
   public function getAlertConfig()
   {
     return $this->alertConfig;
+  }
+  /**
+   * @param EnterpriseCrmEventbusProtoCloudSchedulerConfig
+   */
+  public function setCloudSchedulerConfig(EnterpriseCrmEventbusProtoCloudSchedulerConfig $cloudSchedulerConfig)
+  {
+    $this->cloudSchedulerConfig = $cloudSchedulerConfig;
+  }
+  /**
+   * @return EnterpriseCrmEventbusProtoCloudSchedulerConfig
+   */
+  public function getCloudSchedulerConfig()
+  {
+    return $this->cloudSchedulerConfig;
   }
   /**
    * @param string
@@ -106,6 +130,20 @@ class EnterpriseCrmFrontendsEventbusProtoTriggerConfig extends \Google\Collectio
   public function getEnabledClients()
   {
     return $this->enabledClients;
+  }
+  /**
+   * @param string
+   */
+  public function setErrorCatcherId($errorCatcherId)
+  {
+    $this->errorCatcherId = $errorCatcherId;
+  }
+  /**
+   * @return string
+   */
+  public function getErrorCatcherId()
+  {
+    return $this->errorCatcherId;
   }
   /**
    * @param string
@@ -218,6 +256,20 @@ class EnterpriseCrmFrontendsEventbusProtoTriggerConfig extends \Google\Collectio
   public function getTriggerId()
   {
     return $this->triggerId;
+  }
+  /**
+   * @param string
+   */
+  public function setTriggerName($triggerName)
+  {
+    $this->triggerName = $triggerName;
+  }
+  /**
+   * @return string
+   */
+  public function getTriggerName()
+  {
+    return $this->triggerName;
   }
   /**
    * @param string

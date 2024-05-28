@@ -12,16 +12,14 @@
 
 class Company extends Basic
 {
-
-
     /**
- 	 * Constructor
- 	 */
+     * Constructor
+     */
     public function __construct()
- 	{
- 		parent::__construct();
- 		$this->emailAddress = BeanFactory::newBean('EmailAddresses');
- 	}
+    {
+        parent::__construct();
+        $this->emailAddress = BeanFactory::newBean('EmailAddresses');
+    }
 
     /**
      *
@@ -38,7 +36,7 @@ class Company extends Basic
         $ori_in_workflow = empty($this->in_workflow) ? false : true;
         $this->emailAddress->handleLegacySave($this, $this->module_dir);
         parent::save($check_notify);
-        $override_email = array();
+        $override_email = [];
         if (!empty($this->email1_set_in_workflow)) {
             $override_email['emailAddress0'] = $this->email1_set_in_workflow;
         }
@@ -49,33 +47,41 @@ class Company extends Basic
             $this->in_workflow = false;
         }
         if ($ori_in_workflow === false || !empty($override_email)) {
-            $this->emailAddress->save($this->id, $this->module_dir, $override_email, '', '', '', '',
-                $this->in_workflow);
+            $this->emailAddress->save(
+                $this->id,
+                $this->module_dir,
+                $override_email,
+                '',
+                '',
+                '',
+                '',
+                $this->in_workflow
+            );
         }
         return $this;
     }
 
- 	/**
- 	 * Populate email address fields here instead of retrieve() so that they are properly available for logic hooks
- 	 *
- 	 * @see parent::fill_in_relationship_fields()
- 	 */
-	public function fill_in_relationship_fields()
-	{
-	    parent::fill_in_relationship_fields();
-	    $this->emailAddress->handleLegacyRetrieve($this);
-	}
+    /**
+     * Populate email address fields here instead of retrieve() so that they are properly available for logic hooks
+     *
+     * @see parent::fill_in_relationship_fields()
+     */
+    public function fill_in_relationship_fields()
+    {
+        parent::fill_in_relationship_fields();
+        $this->emailAddress->handleLegacyRetrieve($this);
+    }
 
-	/**
+    /**
      * @see parent::get_list_view_data($filter_fields = [])
- 	 */
+     */
     public function get_list_view_data($filter_fields = [])
-	{
-		global $current_user;
+    {
+        global $current_user;
 
-		$temp_array = $this->get_list_view_array();
+        $temp_array = $this->get_list_view_array();
 
-		$temp_array['EMAIL'] = $this->emailAddress->getPrimaryAddress($this);
+        $temp_array['EMAIL'] = $this->emailAddress->getPrimaryAddress($this);
 
         // Fill in the email1 field only if the user has access to it
         // This is a special case, because getEmailLink() uses email1 field for making the link
@@ -84,8 +90,8 @@ class Company extends Basic
             $this->email1 = $temp_array['EMAIL'];
         }
 
-		$temp_array['EMAIL_LINK'] = $current_user->getEmailLink('email1', $this, '', '', 'ListView');
+        $temp_array['EMAIL_LINK'] = $current_user->getEmailLink('email1', $this, '', '', 'ListView');
 
-		return $temp_array;
-	}
+        return $temp_array;
+    }
 }

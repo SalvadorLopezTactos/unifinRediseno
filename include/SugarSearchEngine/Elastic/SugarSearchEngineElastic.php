@@ -42,7 +42,7 @@ class SugarSearchEngineElastic extends SugarSearchEngineAbstractBase
     /**
      * @var array
      */
-    protected $options = array();
+    protected $options = [];
 
     /**
      * Ctor
@@ -50,7 +50,7 @@ class SugarSearchEngineElastic extends SugarSearchEngineAbstractBase
      * @param GlobalSearchCapable $engine
      * @param LoggerManager $logger
      */
-    public function __construct($options = array(), GlobalSearchCapable $engine = null, LoggerManager $logger = null)
+    public function __construct($options = [], GlobalSearchCapable $engine = null, LoggerManager $logger = null)
     {
         $this->options = $options;
         $this->engine = $engine ?: SearchEngine::getInstance('GlobalSearch')->getEngine();
@@ -64,7 +64,7 @@ class SugarSearchEngineElastic extends SugarSearchEngineAbstractBase
      *
      * @throws \Exception
      */
-    public function search($query, $offset = 0, $limit = 20, $options = array())
+    public function search($query, $offset = 0, $limit = 20, $options = [])
     {
         global $current_user;
 
@@ -83,7 +83,7 @@ class SugarSearchEngineElastic extends SugarSearchEngineAbstractBase
             $this->engine->from($options['moduleFilter']);
         }
 
-        $filters = array();
+        $filters = [];
 
         if (isset($options['my_items']) && $options['my_items'] !== false) {
             if (empty($current_user->id)) {
@@ -91,9 +91,9 @@ class SugarSearchEngineElastic extends SugarSearchEngineAbstractBase
             }
 
             $ownerField = Mapping::PREFIX_COMMON . 'owner_id.owner';
-            $filters[] = new \Elastica\Query\Term(array(
+            $filters[] = new \Elastica\Query\Term([
                 $ownerField => $current_user->id,
-            ));
+            ]);
         }
 
         // TODO - range filter
@@ -106,9 +106,9 @@ class SugarSearchEngineElastic extends SugarSearchEngineAbstractBase
             }
 
             $favField = Mapping::PREFIX_COMMON . 'user_favorites.agg';
-            $filters[] = new \Elastica\Query\Term(array(
+            $filters[] = new \Elastica\Query\Term([
                 $favField => $current_user->id,
-            ));
+            ]);
         }
 
         // TODO - sort options

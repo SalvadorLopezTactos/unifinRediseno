@@ -9,10 +9,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$hook_array['after_save'][] = array(
+$hook_array['after_save'][] = [
     1,
     'Hook description',
     null,
     \Sugarcrm\Sugarcrm\modules\UserPreferences\HintUserPreferencesHook::class,
     'afterSave',
-);
+];

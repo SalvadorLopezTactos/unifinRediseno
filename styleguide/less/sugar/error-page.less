@@ -1,6 +1,8 @@
 /* ERROR PAGE
   ----------------*/
 
+// TODO optimize using Tailwind
+
 div.error-page {
   .error-bg {
     background: url('@{baseUrl}/img/flat_stack_404.svg') top right no-repeat;
@@ -26,10 +28,9 @@ body.sugar-dark-theme {
 
 @media (max-width: 768px) {
   .error-bg {
-    .h-full();
-    .w-full();
-    .absolute();
-
+    height: 100%;
+    width: 100%;
+    position: absolute;
     opacity: 0.4;
     right: 0;
     top: 0;

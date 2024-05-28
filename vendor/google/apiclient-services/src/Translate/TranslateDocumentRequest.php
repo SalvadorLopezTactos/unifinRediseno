@@ -27,8 +27,20 @@ class TranslateDocumentRequest extends \Google\Model
   protected $documentInputConfigDataType = '';
   protected $documentOutputConfigType = DocumentOutputConfig::class;
   protected $documentOutputConfigDataType = '';
+  /**
+   * @var bool
+   */
+  public $enableRotationCorrection;
+  /**
+   * @var bool
+   */
+  public $enableShadowRemovalNativePdf;
   protected $glossaryConfigType = TranslateTextGlossaryConfig::class;
   protected $glossaryConfigDataType = '';
+  /**
+   * @var bool
+   */
+  public $isTranslateNativePdfOnly;
   /**
    * @var string[]
    */
@@ -89,6 +101,34 @@ class TranslateDocumentRequest extends \Google\Model
     return $this->documentOutputConfig;
   }
   /**
+   * @param bool
+   */
+  public function setEnableRotationCorrection($enableRotationCorrection)
+  {
+    $this->enableRotationCorrection = $enableRotationCorrection;
+  }
+  /**
+   * @return bool
+   */
+  public function getEnableRotationCorrection()
+  {
+    return $this->enableRotationCorrection;
+  }
+  /**
+   * @param bool
+   */
+  public function setEnableShadowRemovalNativePdf($enableShadowRemovalNativePdf)
+  {
+    $this->enableShadowRemovalNativePdf = $enableShadowRemovalNativePdf;
+  }
+  /**
+   * @return bool
+   */
+  public function getEnableShadowRemovalNativePdf()
+  {
+    return $this->enableShadowRemovalNativePdf;
+  }
+  /**
    * @param TranslateTextGlossaryConfig
    */
   public function setGlossaryConfig(TranslateTextGlossaryConfig $glossaryConfig)
@@ -101,6 +141,20 @@ class TranslateDocumentRequest extends \Google\Model
   public function getGlossaryConfig()
   {
     return $this->glossaryConfig;
+  }
+  /**
+   * @param bool
+   */
+  public function setIsTranslateNativePdfOnly($isTranslateNativePdfOnly)
+  {
+    $this->isTranslateNativePdfOnly = $isTranslateNativePdfOnly;
+  }
+  /**
+   * @return bool
+   */
+  public function getIsTranslateNativePdfOnly()
+  {
+    return $this->isTranslateNativePdfOnly;
   }
   /**
    * @param string[]

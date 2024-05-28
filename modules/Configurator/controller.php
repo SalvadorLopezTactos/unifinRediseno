@@ -18,7 +18,7 @@ class ConfiguratorController extends SugarController
      * by `self::action_saveconfig`.
      * @var array
      */
-    protected $allowKeysSaveConfig = array(
+    protected $allowKeysSaveConfig = [
         'list_max_entries_per_page',
         'list_max_entries_per_subpanel',
         'collapse_subpanels',
@@ -63,21 +63,25 @@ class ConfiguratorController extends SugarController
         'processes_auto_validate_on_autosave',
         'processes_auto_save_interval',
         'error_number_of_cycles',
-    );
+
+        //Doc Merge
+        'document_merge_service_urls_default',
+    ];
 
 
-    function action_listview(){
+    public function action_listview()
+    {
         global $current_user;
-        if(!is_admin($current_user)){
+        if (!is_admin($current_user)) {
             sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
         }
         $this->view = 'edit';
     }
 
-    function action_saveadminwizard()
+    public function action_saveadminwizard()
     {
         global $current_user;
-        if(!is_admin($current_user)){
+        if (!is_admin($current_user)) {
             sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
         }
         $focus = Administration::getSettings();
@@ -91,9 +95,9 @@ class ConfiguratorController extends SugarController
         // Bug 37310 - Delete any existing currency that matches the one we've just set the default to during the admin wizard
         $currency = BeanFactory::newBean('Currencies');
         $currency->retrieve_id_by_name($_REQUEST['default_currency_name']);
-        if ( !empty($currency->id)
-                && $currency->symbol == $_REQUEST['default_currency_symbol']
-                && $currency->iso4217 == $_REQUEST['default_currency_iso4217'] ) {
+        if (!empty($currency->id)
+            && $currency->symbol == $_REQUEST['default_currency_symbol']
+            && $currency->iso4217 == $_REQUEST['default_currency_iso4217']) {
             $currency->deleted = 1;
             $currency->save();
         }
@@ -146,10 +150,10 @@ class ConfiguratorController extends SugarController
         exit();
     }
 
-    function action_detail()
+    public function action_detail()
     {
         global $current_user;
-        if(!is_admin($current_user)){
+        if (!is_admin($current_user)) {
             sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
         }
         $this->view = 'edit';
@@ -158,7 +162,7 @@ class ConfiguratorController extends SugarController
     /**
      * Define correct view for action
      */
-    function action_historyContactsEmails()
+    public function action_historyContactsEmails()
     {
         $this->view = 'historyContactsEmails';
     }
@@ -166,13 +170,12 @@ class ConfiguratorController extends SugarController
     /**
      * Generates custom field_defs for selected fields
      */
-    function action_historyContactsEmailsSave()
+    public function action_historyContactsEmailsSave()
     {
         require_once 'include/formbase.php';
 
         if (!empty($_POST['modules']) && is_array($_POST['modules'])) {
-
-            $modules = array();
+            $modules = [];
             foreach ($_POST['modules'] as $moduleName => $enabled) {
                 $bean = BeanFactory::newBean($moduleName);
 
@@ -184,7 +187,7 @@ class ConfiguratorController extends SugarController
                 }
 
                 // these are the specific modules we care about
-                if (!in_array($moduleName, array('Opportunities','Accounts','Cases'))) {
+                if (!in_array($moduleName, ['Opportunities', 'Accounts', 'Cases'])) {
                     continue;
                 }
 

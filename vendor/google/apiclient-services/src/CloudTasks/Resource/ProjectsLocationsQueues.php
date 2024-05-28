@@ -34,7 +34,7 @@ use Google\Service\CloudTasks\TestIamPermissionsResponse;
  * Typical usage is:
  *  <code>
  *   $cloudtasksService = new Google\Service\CloudTasks(...);
- *   $queues = $cloudtasksService->queues;
+ *   $queues = $cloudtasksService->projects_locations_queues;
  *  </code>
  */
 class ProjectsLocationsQueues extends \Google\Service\Resource
@@ -156,8 +156,9 @@ class ProjectsLocationsQueues extends \Google\Service\Resource
    * will be deleted regardless of whether it was dispatched or not. WARNING:
    * Using this method may have unintended side effects if you are using an App
    * Engine `queue.yaml` or `queue.xml` file to manage your queues. Read [Overview
-   * of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs
-   * /queue-yaml) before using this method. (queues.patch)
+   * of Queue Management and
+   * queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using this
+   * method. (queues.patch)
    *
    * @param string $name Caller-specified and required in CreateQueue, after which
    * it becomes output only. The queue name. The queue name must have the

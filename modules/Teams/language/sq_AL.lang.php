@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Duhet përcaktuar numrin e regjistrimit për të shtuar një përdorues në këtë grup.',
     'ERR_DUP_NAME' => 'Emri i grupit tashme ekziston, ju lutemi zgjidhni një emër tjetër.',
     'ERR_DELETE_RECORD' => 'Duhet përcaktuar numrin e regjistrimit për të fshirë këtë grup.',
@@ -66,17 +66,17 @@ $mod_strings = array(
     'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
 Çaktivizimi i lejeve me bazë grupi për një modul do të prapakthejë të dhënat që lidhen me lejet me bazë grupi për atë modul, duke përfshirë përcaktimet e proceseve ose proceset që përdorin funksionin. Kjo përfshin rolet që përdorin opsionin "Pronari dhe grupi i zgjedhur" për atë modul dhe të dhënat e lejeve me bazë grupi për regjistrimet në atë modul. Gjithashtu, rekomandojmë që të përdorësh mjetin "Riparim i shpejtë dhe rindërtim" për të spastruar memorien specifike të sistemit pas çaktivizimit të lejeve me bazë grupi për modulet.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Paralajmërim:</strong> Çaktivizimi i lejeve me bazë grupi për një modul do të prapakthejë të dhënat që lidhen me lejet me bazë grupi për atë modul, duke përfshirë përcaktimet e proceseve ose proceset që përdorin funksionin. Kjo përfshin rolet që përdorin opsionin "Pronari dhe grupi i zgjedhur" për atë modul dhe të dhënat e lejeve me bazë grupi për regjistrimet në atë modul. Gjithashtu, rekomandojmë që të përdorësh mjetin "Riparim i shpejtë dhe rindërtim" për të spastruar memorien specifike të sistemit pas çaktivizimit të lejeve me bazë grupi për modulet.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Çaktivizimi i lejeve me bazë grupi për një modul do të prapakthejë të dhënat që lidhen me lejet me bazë grupi për atë modul, duke përfshirë përcaktimet e proceseve ose proceset që përdorin funksionin. Kjo përfshin rolet që përdorin opsionin "Pronari dhe grupi i zgjedhur" për atë modul dhe të dhënat e lejeve me bazë grupi për regjistrimet në atë modul. Gjithashtu, rekomandojmë që të përdorësh mjetin "Riparim i shpejtë dhe rindërtim" për të spastruar memorien specifike të sistemit pas çaktivizimit të lejeve me bazë grupi për modulet. Nëse nuk ke akses për të përdorur "Riparim i shpejtë dhe rindërtim", kontakto administratorin që ka akses në menynë e riparimit.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Paralajmërim:</strong> Çaktivizimi i lejeve me bazë grupi për një modul do të prapakthejë të dhënat që lidhen me lejet me bazë grupi për atë modul, duke përfshirë përcaktimet e proceseve ose proceset që përdorin funksionin. Kjo përfshin rolet që përdorin opsionin "Pronari dhe grupi i zgjedhur" për atë modul dhe të dhënat e lejeve me bazë grupi për regjistrimet në atë modul. Gjithashtu, rekomandojmë që të përdorësh mjetin "Riparim i shpejtë dhe rindërtim" për të spastruar memorien specifike të sistemit pas çaktivizimit të lejeve me bazë grupi për modulet. Nëse nuk ke akses për të përdorur "Riparim i shpejtë dhe rindërtim", kontakto administratorin që ka akses në menynë e riparimit.
 STR
-,
-);
+    ,
+];

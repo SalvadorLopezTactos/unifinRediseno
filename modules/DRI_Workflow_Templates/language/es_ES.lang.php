@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Activo',
     'LBL_ASSIGNEE_RULE' => 'Regla de asignado',
     'LBL_TARGET_ASSIGNEE' => 'Asignado objetivo',
+    'LBL_STAGE_NUMBERS' => 'Numeración de etapas',
     'LBL_EXPORT_BUTTON_LABEL' => 'Exportar',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Importar',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Crear/actualizar automáticamente un nuevo registro de la plantilla de la guía inteligente mediante la importación de un archivo *.json desde su sistema de archivos.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Si está marcado, si el asignado objetivo = asignado principal, cuando se cambia el usuario "Asignado a" en un elemento principal, los usuarios "Asignado a" también cambiarán automáticamente en las guías inteligentes, fases y actividades. Tenga en cuenta que la configuración de Asignado objetivo en las plantillas de actividad tiene prioridad sobre la plantilla de la guía inteligente',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Cuándo se debe asignar un usuario a las actividades',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Quién debe asignarse a las actividades',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Este interruptor le permite mostrar u ocultar la numeración automática de etapas.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Guía inteligente/Fase/Plantilla de actividades',
 ];

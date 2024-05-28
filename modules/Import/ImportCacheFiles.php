@@ -9,34 +9,33 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description: Static class to that is used to get the filenames for the various
  * cache files used
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
-
 class ImportCacheFiles
 {
     /**#@+
      * Cache file names
      */
-    public const FILE_MISCELLANEOUS      = 'misc';
-    public const FILE_DUPLICATES         = 'dupes';
+    public const FILE_MISCELLANEOUS = 'misc';
+    public const FILE_DUPLICATES = 'dupes';
     public const FILE_DUPLICATES_DISPLAY = 'dupesdisplay';
-    public const FILE_ERRORS             = 'error';
-    public const FILE_ERROR_RECORDS      = 'errorrecords';
+    public const FILE_ERRORS = 'error';
+    public const FILE_ERROR_RECORDS = 'errorrecords';
     public const FILE_ERROR_RECORDS_ONLY = 'errorrecordsonly';
-    public const FILE_STATUS             = 'status';
+    public const FILE_STATUS = 'status';
     /**#@-*/
 
     /**
      * List of all cache file names
-     * 
+     *
      * @var array
      */
-    protected static $all_files = array(
+    protected static $all_files = [
         self::FILE_MISCELLANEOUS,
         self::FILE_DUPLICATES,
         self::FILE_DUPLICATES_DISPLAY,
@@ -44,7 +43,7 @@ class ImportCacheFiles
         self::FILE_ERROR_RECORDS,
         self::FILE_ERROR_RECORDS_ONLY,
         self::FILE_STATUS,
-    );
+    ];
 
     /**
      * Get import directory name
@@ -52,7 +51,7 @@ class ImportCacheFiles
      */
     public static function getImportDir()
     {
-        return "upload://import";
+        return 'upload://import';
     }
 
 
@@ -64,8 +63,8 @@ class ImportCacheFiles
      */
     public static function convertFileNameToUrl($fileName)
     {
-        $fileName = str_replace(self::getImportDir() . "/", "", $fileName);
-        $fileName = "index.php?entryPoint=download&id=ImportErrors&type=import&tempName=" . $fileName . "&isTempFile=1";
+        $fileName = str_replace(self::getImportDir() . '/', '', $fileName);
+        $fileName = 'index.php?entryPoint=download&id=ImportErrors&type=import&tempName=' . $fileName . '&isTempFile=1';
         return $fileName;
     }
 
@@ -73,7 +72,7 @@ class ImportCacheFiles
     /**
      * Returns the filename for a temporary file
      *
-     * @param  string $type string to prepend to the filename, typically to indicate the file's use
+     * @param string $type string to prepend to the filename, typically to indicate the file's use
      * @return string filename
      */
     private static function _createFileName($type = self::FILE_MISCELLANEOUS)
@@ -88,20 +87,16 @@ class ImportCacheFiles
 
     /**
      * Ensure that all cache files are writable or can be created
-     * 
+     *
      * @return bool
      */
     public static function ensureWritable()
     {
-        foreach (self::$all_files as $type)
-        {
+        foreach (self::$all_files as $type) {
             $filename = self::_createFileName($type);
-            if (file_exists($filename) && !is_writable($filename))
-            {
+            if (file_exists($filename) && !is_writable($filename)) {
                 return false;
-            }
-            elseif (!is_writable(dirname($filename)))
-            {
+            } elseif (!is_writable(dirname($filename))) {
                 return false;
             }
         }
@@ -175,11 +170,12 @@ class ImportCacheFiles
     {
         global $sugar_config;
         $importdir = self::getImportDir();
-        if ( is_dir($importdir) ) {
+        if (is_dir($importdir)) {
             $files = dir($importdir);
             while (false !== ($file = $files->read())) {
-                if ( !is_dir($file) && stristr($file,'.csv') )
+                if (!is_dir($file) && stristr($file, '.csv')) {
                     unlink("$importdir/$file");
+                }
             }
         }
     }

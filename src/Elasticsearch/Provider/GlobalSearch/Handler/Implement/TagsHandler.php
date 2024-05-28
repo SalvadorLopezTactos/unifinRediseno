@@ -61,11 +61,10 @@ class TagsHandler extends AbstractHandler implements
 
         // setup seed bean once
         if (empty($this->tagSeed)) {
-            $this->tagSeed = \BeanFactory::newBean("Tags");
+            $this->tagSeed = \BeanFactory::newBean('Tags');
         }
 
         return $this->tagSeed->getTagIdsByBean($bean);
-
     }
 
     /**

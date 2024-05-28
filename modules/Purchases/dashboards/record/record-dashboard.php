@@ -16,6 +16,18 @@ return [
         'dashlets' => [
             [
                 'view' => [
+                    'type' => 'activity-timeline',
+                    'label' => 'TPL_ACTIVITY_TIMELINE_DASHLET',
+                ],
+                'context' => [
+                    'module' => 'Purchases',
+                ],
+                'width' => 12,
+                'x' => 0,
+                'y' => 0,
+            ],
+            [
+                'view' => [
                     'type' => 'dashablerecord',
                     'module' => 'Purchases',
                     'label' => 'LBL_RELATED_ACCOUNT',

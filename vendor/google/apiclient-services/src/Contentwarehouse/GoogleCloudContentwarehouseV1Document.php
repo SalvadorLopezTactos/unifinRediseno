@@ -20,12 +20,12 @@ namespace Google\Service\Contentwarehouse;
 class GoogleCloudContentwarehouseV1Document extends \Google\Collection
 {
   protected $collection_key = 'properties';
-  /**
-   * @var bool
-   */
-  public $asyncEnabled;
   protected $cloudAiDocumentType = GoogleCloudDocumentaiV1Document::class;
   protected $cloudAiDocumentDataType = '';
+  /**
+   * @var string
+   */
+  public $contentCategory;
   /**
    * @var string
    */
@@ -42,6 +42,10 @@ class GoogleCloudContentwarehouseV1Document extends \Google\Collection
    * @var string
    */
   public $displayUri;
+  /**
+   * @var string
+   */
+  public $dispositionTime;
   /**
    * @var string
    */
@@ -73,13 +77,13 @@ class GoogleCloudContentwarehouseV1Document extends \Google\Collection
    */
   public $referenceId;
   /**
-   * @var string
-   */
-  public $structuredContentUri;
-  /**
    * @var bool
    */
   public $textExtractionDisabled;
+  /**
+   * @var bool
+   */
+  public $textExtractionEnabled;
   /**
    * @var string
    */
@@ -94,20 +98,6 @@ class GoogleCloudContentwarehouseV1Document extends \Google\Collection
   public $updater;
 
   /**
-   * @param bool
-   */
-  public function setAsyncEnabled($asyncEnabled)
-  {
-    $this->asyncEnabled = $asyncEnabled;
-  }
-  /**
-   * @return bool
-   */
-  public function getAsyncEnabled()
-  {
-    return $this->asyncEnabled;
-  }
-  /**
    * @param GoogleCloudDocumentaiV1Document
    */
   public function setCloudAiDocument(GoogleCloudDocumentaiV1Document $cloudAiDocument)
@@ -120,6 +110,20 @@ class GoogleCloudContentwarehouseV1Document extends \Google\Collection
   public function getCloudAiDocument()
   {
     return $this->cloudAiDocument;
+  }
+  /**
+   * @param string
+   */
+  public function setContentCategory($contentCategory)
+  {
+    $this->contentCategory = $contentCategory;
+  }
+  /**
+   * @return string
+   */
+  public function getContentCategory()
+  {
+    return $this->contentCategory;
   }
   /**
    * @param string
@@ -176,6 +180,20 @@ class GoogleCloudContentwarehouseV1Document extends \Google\Collection
   public function getDisplayUri()
   {
     return $this->displayUri;
+  }
+  /**
+   * @param string
+   */
+  public function setDispositionTime($dispositionTime)
+  {
+    $this->dispositionTime = $dispositionTime;
+  }
+  /**
+   * @return string
+   */
+  public function getDispositionTime()
+  {
+    return $this->dispositionTime;
   }
   /**
    * @param string
@@ -290,20 +308,6 @@ class GoogleCloudContentwarehouseV1Document extends \Google\Collection
     return $this->referenceId;
   }
   /**
-   * @param string
-   */
-  public function setStructuredContentUri($structuredContentUri)
-  {
-    $this->structuredContentUri = $structuredContentUri;
-  }
-  /**
-   * @return string
-   */
-  public function getStructuredContentUri()
-  {
-    return $this->structuredContentUri;
-  }
-  /**
    * @param bool
    */
   public function setTextExtractionDisabled($textExtractionDisabled)
@@ -316,6 +320,20 @@ class GoogleCloudContentwarehouseV1Document extends \Google\Collection
   public function getTextExtractionDisabled()
   {
     return $this->textExtractionDisabled;
+  }
+  /**
+   * @param bool
+   */
+  public function setTextExtractionEnabled($textExtractionEnabled)
+  {
+    $this->textExtractionEnabled = $textExtractionEnabled;
+  }
+  /**
+   * @return bool
+   */
+  public function getTextExtractionEnabled()
+  {
+    return $this->textExtractionEnabled;
   }
   /**
    * @param string

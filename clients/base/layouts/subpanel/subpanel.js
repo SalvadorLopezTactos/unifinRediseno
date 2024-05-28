@@ -83,6 +83,23 @@
         if (options.def.settings) {
             this.context.set('settings', options.def.settings);
         }
+        app.events.on('timeline:link:added timeline:link:removed', this.handleTimelineLinkChanges, this);
+    },
+
+    /**
+     * Reload data if any link changes
+     * @param {string} parentModule
+     * @param {string} parentId
+     * @param {Object} model
+     */
+    handleTimelineLinkChanges: function(parentModule, parentId, model) {
+        let baseRecord = this.context.get('parentModel');
+        if (baseRecord && model && this.module === model.get('_module') &&
+            baseRecord.get('id') === parentId &&
+            baseRecord.get('_module') === parentModule) {
+            this.context.set('skipFetch', false);
+            this.context.reloadData();
+        }
     },
 
     /**
@@ -99,5 +116,13 @@
     hide: function() {
         this.context.set('hidden', true);
         this._super('hide');
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        app.events.off('timeline:link:added timeline:link:removed', this.handleTimelineLinkChanges, this);
+        this._super('_dispose');
     }
 })

@@ -14,7 +14,7 @@
     <div class='non-hint-user-msg'>{{str 'LBL_HINT_DASHLET_ALLOWED1'}}</div>
 {{else}}
     {{#unless stage2errorCode}}
-        <div class='stage2-news' style='{{#if isDarkMode}}background-color: #000000; border-color: #4D5154;{{/if}}'>
+        <div class='stage2-news overflow-hidden' style='{{#if isDarkMode}}background-color: #000000; border-color: #4D5154;{{/if}}'>
             {{#if isHintRequestLoading}}
                 {{#if isDarkMode}}
                     <img rel="noopener" src='themes/Stage2/hint_news_dashlet_preloader.gif' style='background-color: #000000; background-size: cover; background-repeat: no-repeat;'>
@@ -22,7 +22,7 @@
                     <img rel="noopener" src='themes/Stage2/opt_render_3.gif'>
                 {{/if}}
             {{else}}
-                <div class='hint-news-dashlet-auto-notifier vanished'>{{str 'LBL_NEW_NOTIFICATIONS'}}</div>
+                <div class='hint-news-dashlet-auto-notifier sicon-lg sicon sicon-arrow-up vanished'>{{str 'LBL_NEW_NOTIFICATIONS'}}</div>
                 <div id='newsarea'>
                     {{#if displayNews}}
                         <ul class='unstyled stage2-news-list'>

@@ -24,7 +24,7 @@ class SugarQuery_Builder_Union
      * Array of union queries.
      * @var array
      */
-    protected $queries = array();
+    protected $queries = [];
 
     /**
      * Create Union Object.
@@ -42,7 +42,7 @@ class SugarQuery_Builder_Union
      */
     public function addQuery(SugarQuery $query, $all = true)
     {
-        $this->queries[] = array('query' => $query, 'all' => (boolean) $all);
+        $this->queries[] = ['query' => $query, 'all' => (bool)$all];
     }
 
     /**

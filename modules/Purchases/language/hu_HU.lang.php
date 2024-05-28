@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Vásárlások rekord műszerfal',
     'LBL_RELATED_ACCOUNT' => 'Kapcsolódó fiók',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Vásárlások figyelemfelhívás',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vásárlás idővonala',
 ];

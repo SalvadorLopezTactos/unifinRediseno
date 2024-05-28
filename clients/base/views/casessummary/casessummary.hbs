@@ -12,16 +12,17 @@
 --}}
 <div class="tabbable tabs-full {{tabClass}}" data-content="chart">
     <ul id="tab" class="nav nav-tabs">
-        <li class="active">
-            <a class="ellipsis_inline" data-original-title="{{str "LBL_DASHLET_CASESSUMMARY_SUMMARY"}}" data-casessummary-status="Summary" href="#tab-chart" data-toggle="tab">
+        <li class="active" data-bs-target="#tab-chart" data-bs-toggle="tab">
+            <a class="ellipsis_inline" data-original-title="{{str "LBL_DASHLET_CASESSUMMARY_SUMMARY"}}"
+               data-casessummary-status="Summary">
                 <span class="tab-title">{{str "LBL_DASHLET_CASESSUMMARY_SUMMARY"}}</span>
                 <br>
                 <span class="label label-important count sc-fill00">{{total}}</span>
             </a>
         </li>
         {{#each tabData}}
-            <li>
-                <a class="ellipsis_inline" data-original-title="{{statusLabel}}" data-casessummary-status="{{status}}" href="#tab-{{index}}" data-toggle="tab">
+            <li data-bs-target="#tab-{{index}}" data-bs-toggle="tab">
+                <a class="ellipsis_inline" data-original-title="{{statusLabel}}" data-casessummary-status="{{status}}">
                     <span class="tab-title font-semibold">{{statusLabel}}</span>
                     <br>
                     <span class="label count {{cssClass}}">{{models.length}}</span>

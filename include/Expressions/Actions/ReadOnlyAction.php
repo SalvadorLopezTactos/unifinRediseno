@@ -13,18 +13,18 @@
 
 class ReadOnlyAction extends AbstractAction
 {
-    protected $expression = "";
+    protected $expression = '';
 
     /*
      * array Array of actions on which the Expression Action is not allowed
      */
-    protected $disallowedActions = array('view');
+    protected $disallowedActions = ['view'];
 
     public function __construct($params)
     {
         $this->params = $params;
         $this->targetField = $params['target'];
-        $this->expression = str_replace("\n", "", $params['value']);
+        $this->expression = str_replace("\n", '', $params['value']);
     }
 
     /**
@@ -146,6 +146,6 @@ class ReadOnlyAction extends AbstractAction
 
     public static function getActionName()
     {
-        return "ReadOnly";
+        return 'ReadOnly';
     }
 }

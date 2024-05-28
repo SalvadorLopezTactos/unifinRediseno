@@ -26,7 +26,7 @@ class AccessReviewScheduleSettings extends Entity
 
     /**
     * Gets the applyActions
-    * Optional field. Describes the  actions to take once a review is complete. There are two types that are currently supported: removeAccessApplyAction (default) and disableAndDeleteUserApplyAction. Field only needs to be specified in the case of disableAndDeleteUserApplyAction. See accessReviewApplyAction.
+    * Optional field. Describes the  actions to take once a review is complete. There are two types that are currently supported: removeAccessApplyAction (default) and disableAndDeleteUserApplyAction. Field only needs to be specified in the case of disableAndDeleteUserApplyAction.
     *
     * @return AccessReviewApplyAction|null The applyActions
     */
@@ -45,7 +45,7 @@ class AccessReviewScheduleSettings extends Entity
 
     /**
     * Sets the applyActions
-    * Optional field. Describes the  actions to take once a review is complete. There are two types that are currently supported: removeAccessApplyAction (default) and disableAndDeleteUserApplyAction. Field only needs to be specified in the case of disableAndDeleteUserApplyAction. See accessReviewApplyAction.
+    * Optional field. Describes the  actions to take once a review is complete. There are two types that are currently supported: removeAccessApplyAction (default) and disableAndDeleteUserApplyAction. Field only needs to be specified in the case of disableAndDeleteUserApplyAction.
     *
     * @param AccessReviewApplyAction $val The value to assign to the applyActions
     *
@@ -58,7 +58,7 @@ class AccessReviewScheduleSettings extends Entity
     }
     /**
     * Gets the autoApplyDecisionsEnabled
-    * Indicates whether decisions are automatically applied. When set to false, a user must apply the decisions manually once the reviewer completes the access review. When set to true, decisions are applied automatically after the access review instance duration ends, whether or not the reviewers have responded. Default value is false.
+    * Indicates whether decisions are automatically applied. When set to false, an admin must apply the decisions manually once the reviewer completes the access review. When set to true, decisions are applied automatically after the access review instance duration ends, whether or not the reviewers have responded. Default value is false.  CAUTION: If both autoApplyDecisionsEnabled and defaultDecisionEnabled are true, all access for the principals to the resource risks being revoked if the reviewers fail to respond.
     *
     * @return bool|null The autoApplyDecisionsEnabled
     */
@@ -73,7 +73,7 @@ class AccessReviewScheduleSettings extends Entity
 
     /**
     * Sets the autoApplyDecisionsEnabled
-    * Indicates whether decisions are automatically applied. When set to false, a user must apply the decisions manually once the reviewer completes the access review. When set to true, decisions are applied automatically after the access review instance duration ends, whether or not the reviewers have responded. Default value is false.
+    * Indicates whether decisions are automatically applied. When set to false, an admin must apply the decisions manually once the reviewer completes the access review. When set to true, decisions are applied automatically after the access review instance duration ends, whether or not the reviewers have responded. Default value is false.  CAUTION: If both autoApplyDecisionsEnabled and defaultDecisionEnabled are true, all access for the principals to the resource risks being revoked if the reviewers fail to respond.
     *
     * @param bool $val The value of the autoApplyDecisionsEnabled
     *
@@ -82,6 +82,34 @@ class AccessReviewScheduleSettings extends Entity
     public function setAutoApplyDecisionsEnabled($val)
     {
         $this->_propDict["autoApplyDecisionsEnabled"] = $val;
+        return $this;
+    }
+    /**
+    * Gets the decisionHistoriesForReviewersEnabled
+    * Indicates whether decisions on previous access review stages are available for reviewers on an accessReviewInstance with multiple subsequent stages. If not provided, the default is disabled (false).
+    *
+    * @return bool|null The decisionHistoriesForReviewersEnabled
+    */
+    public function getDecisionHistoriesForReviewersEnabled()
+    {
+        if (array_key_exists("decisionHistoriesForReviewersEnabled", $this->_propDict)) {
+            return $this->_propDict["decisionHistoriesForReviewersEnabled"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the decisionHistoriesForReviewersEnabled
+    * Indicates whether decisions on previous access review stages are available for reviewers on an accessReviewInstance with multiple subsequent stages. If not provided, the default is disabled (false).
+    *
+    * @param bool $val The value of the decisionHistoriesForReviewersEnabled
+    *
+    * @return AccessReviewScheduleSettings
+    */
+    public function setDecisionHistoriesForReviewersEnabled($val)
+    {
+        $this->_propDict["decisionHistoriesForReviewersEnabled"] = $val;
         return $this;
     }
     /**
@@ -114,7 +142,7 @@ class AccessReviewScheduleSettings extends Entity
     }
     /**
     * Gets the defaultDecisionEnabled
-    * Indicates whether the default decision is enabled or disabled when reviewers do not respond. Default value is false.
+    * Indicates whether the default decision is enabled or disabled when reviewers do not respond. Default value is false.  CAUTION: If both autoApplyDecisionsEnabled and defaultDecisionEnabled are true, all access for the principals to the resource risks being revoked if the reviewers fail to respond.
     *
     * @return bool|null The defaultDecisionEnabled
     */
@@ -129,7 +157,7 @@ class AccessReviewScheduleSettings extends Entity
 
     /**
     * Sets the defaultDecisionEnabled
-    * Indicates whether the default decision is enabled or disabled when reviewers do not respond. Default value is false.
+    * Indicates whether the default decision is enabled or disabled when reviewers do not respond. Default value is false.  CAUTION: If both autoApplyDecisionsEnabled and defaultDecisionEnabled are true, all access for the principals to the resource risks being revoked if the reviewers fail to respond.
     *
     * @param bool $val The value of the defaultDecisionEnabled
     *
@@ -142,7 +170,7 @@ class AccessReviewScheduleSettings extends Entity
     }
     /**
     * Gets the instanceDurationInDays
-    * Duration of each recurrence of review (accessReviewInstance) in number of days.
+    * Duration of an access review instance in days. NOTE: If the stageSettings of the accessReviewScheduleDefinition object is defined, its durationInDays setting will be used instead of the value of this property.
     *
     * @return int|null The instanceDurationInDays
     */
@@ -157,7 +185,7 @@ class AccessReviewScheduleSettings extends Entity
 
     /**
     * Sets the instanceDurationInDays
-    * Duration of each recurrence of review (accessReviewInstance) in number of days.
+    * Duration of an access review instance in days. NOTE: If the stageSettings of the accessReviewScheduleDefinition object is defined, its durationInDays setting will be used instead of the value of this property.
     *
     * @param int $val The value of the instanceDurationInDays
     *
@@ -224,9 +252,75 @@ class AccessReviewScheduleSettings extends Entity
         $this->_propDict["mailNotificationsEnabled"] = $val;
         return $this;
     }
+
+    /**
+    * Gets the recommendationInsightSettings
+    * Optional. Describes the types of insights that aid reviewers to make access review decisions. NOTE: If the stageSettings of the accessReviewScheduleDefinition object is defined, its recommendationInsightSettings setting will be used instead of the value of this property.
+    *
+    * @return AccessReviewRecommendationInsightSetting|null The recommendationInsightSettings
+    */
+    public function getRecommendationInsightSettings()
+    {
+        if (array_key_exists("recommendationInsightSettings", $this->_propDict)) {
+            if (is_a($this->_propDict["recommendationInsightSettings"], "\Microsoft\Graph\Model\AccessReviewRecommendationInsightSetting") || is_null($this->_propDict["recommendationInsightSettings"])) {
+                return $this->_propDict["recommendationInsightSettings"];
+            } else {
+                $this->_propDict["recommendationInsightSettings"] = new AccessReviewRecommendationInsightSetting($this->_propDict["recommendationInsightSettings"]);
+                return $this->_propDict["recommendationInsightSettings"];
+            }
+        }
+        return null;
+    }
+
+    /**
+    * Sets the recommendationInsightSettings
+    * Optional. Describes the types of insights that aid reviewers to make access review decisions. NOTE: If the stageSettings of the accessReviewScheduleDefinition object is defined, its recommendationInsightSettings setting will be used instead of the value of this property.
+    *
+    * @param AccessReviewRecommendationInsightSetting $val The value to assign to the recommendationInsightSettings
+    *
+    * @return AccessReviewScheduleSettings The AccessReviewScheduleSettings
+    */
+    public function setRecommendationInsightSettings($val)
+    {
+        $this->_propDict["recommendationInsightSettings"] = $val;
+         return $this;
+    }
+
+    /**
+    * Gets the recommendationLookBackDuration
+    * Optional field. Indicates the period of inactivity (with respect to the start date of the review instance) that recommendations will be configured from. The recommendation will be to deny if the user is inactive during the look-back duration. For reviews of groups and Azure AD roles, any duration is accepted. For reviews of applications, 30 days is the maximum duration. If not specified, the duration is 30 days. NOTE: If the stageSettings of the accessReviewScheduleDefinition object is defined, its recommendationLookBackDuration setting will be used instead of the value of this property.
+    *
+    * @return \DateInterval|null The recommendationLookBackDuration
+    */
+    public function getRecommendationLookBackDuration()
+    {
+        if (array_key_exists("recommendationLookBackDuration", $this->_propDict)) {
+            if (is_a($this->_propDict["recommendationLookBackDuration"], "\DateInterval") || is_null($this->_propDict["recommendationLookBackDuration"])) {
+                return $this->_propDict["recommendationLookBackDuration"];
+            } else {
+                $this->_propDict["recommendationLookBackDuration"] = new \DateInterval($this->_propDict["recommendationLookBackDuration"]);
+                return $this->_propDict["recommendationLookBackDuration"];
+            }
+        }
+        return null;
+    }
+
+    /**
+    * Sets the recommendationLookBackDuration
+    * Optional field. Indicates the period of inactivity (with respect to the start date of the review instance) that recommendations will be configured from. The recommendation will be to deny if the user is inactive during the look-back duration. For reviews of groups and Azure AD roles, any duration is accepted. For reviews of applications, 30 days is the maximum duration. If not specified, the duration is 30 days. NOTE: If the stageSettings of the accessReviewScheduleDefinition object is defined, its recommendationLookBackDuration setting will be used instead of the value of this property.
+    *
+    * @param \DateInterval $val The value to assign to the recommendationLookBackDuration
+    *
+    * @return AccessReviewScheduleSettings The AccessReviewScheduleSettings
+    */
+    public function setRecommendationLookBackDuration($val)
+    {
+        $this->_propDict["recommendationLookBackDuration"] = $val;
+         return $this;
+    }
     /**
     * Gets the recommendationsEnabled
-    * Indicates whether decision recommendations are enabled/disabled.
+    * Indicates whether decision recommendations are enabled or disabled. NOTE: If the stageSettings of the accessReviewScheduleDefinition object is defined, its recommendationsEnabled setting will be used instead of the value of this property.
     *
     * @return bool|null The recommendationsEnabled
     */
@@ -241,7 +335,7 @@ class AccessReviewScheduleSettings extends Entity
 
     /**
     * Sets the recommendationsEnabled
-    * Indicates whether decision recommendations are enabled/disabled.
+    * Indicates whether decision recommendations are enabled or disabled. NOTE: If the stageSettings of the accessReviewScheduleDefinition object is defined, its recommendationsEnabled setting will be used instead of the value of this property.
     *
     * @param bool $val The value of the recommendationsEnabled
     *
@@ -255,7 +349,7 @@ class AccessReviewScheduleSettings extends Entity
 
     /**
     * Gets the recurrence
-    * Detailed settings for recurrence using the standard Outlook recurrence object. Only weekly and absoluteMonthly on recurrencePattern are supported. Use the property startDate on recurrenceRange to determine the day the review starts.
+    * Detailed settings for recurrence using the standard Outlook recurrence object. Note: Only dayOfMonth, interval, and type (weekly, absoluteMonthly) properties are supported. Use the property startDate on recurrenceRange to determine the day the review starts.
     *
     * @return PatternedRecurrence|null The recurrence
     */
@@ -274,7 +368,7 @@ class AccessReviewScheduleSettings extends Entity
 
     /**
     * Sets the recurrence
-    * Detailed settings for recurrence using the standard Outlook recurrence object. Only weekly and absoluteMonthly on recurrencePattern are supported. Use the property startDate on recurrenceRange to determine the day the review starts.
+    * Detailed settings for recurrence using the standard Outlook recurrence object. Note: Only dayOfMonth, interval, and type (weekly, absoluteMonthly) properties are supported. Use the property startDate on recurrenceRange to determine the day the review starts.
     *
     * @param PatternedRecurrence $val The value to assign to the recurrence
     *

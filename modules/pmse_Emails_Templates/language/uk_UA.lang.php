@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Текст',
     'LBL_BASE_MODULE' => 'Основний модуль',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Не вдалося створити запис процесу обробки шаблону Email з файлу',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Цей шаблон повідомлення електронної пошти використовується у визначенні процесів. Справді редагувати цей шаблон повідомлення електронної пошти?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Цей шаблон повідомлення електронної пошти не можна видалити, оскільки він використовується у визначенні процесів.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Цей шаблон повідомлення електронної пошти не можна видалити, оскільки він використовується у визначенні процесів.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Вибір поля',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Вибрати',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Тип значення поля',
-);
+];

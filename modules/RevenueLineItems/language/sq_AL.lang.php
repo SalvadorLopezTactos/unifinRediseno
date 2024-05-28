@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Paneli i listës së artikujve të linjës së të ardhurave',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të artikujve të linjës së të ardhurave',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Llojet e Produkteve',
     'LBL_ASSIGNED_TO_NAME' => 'Përdorues i caktuar',
     'LBL_ASSIGNED_TO' => 'Drejtuar',
-    'LBL_ASSIGNED_TO_ID'=>'ID e përdoruesit të caktuar',
+    'LBL_ASSIGNED_TO_ID' => 'ID e përdoruesit të caktuar',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Emri i përdoruesit të caktuar',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'ID e përdoruesit të caktuar',
     'LBL_CAMPAIGN_ID' => 'ID e fushatës',
@@ -211,4 +211,5 @@ Për të krijuar një {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Shfaq dhjetë rreshtat më të lartë në diagram fluskash',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Rrjeshti i të ardhurave të mia',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Rrjeshti i të ardhurave të ekipit tim",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Linja e kohës e zërit të të ardhurave',
+];

@@ -22,7 +22,7 @@ class ForecastManagerWorksheetsApiHelper extends SugarBeanApiHelper
      * @param $options array Currently no options are supported
      * @return array The bean in array format, ready for passing out the API to clients.
      */
-    public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(SugarBean $bean, array $fieldList = [], array $options = [])
     {
         $data = parent::formatForApi($bean, $fieldList, $options);
         $sq = new SugarQuery();
@@ -58,15 +58,15 @@ class ForecastManagerWorksheetsApiHelper extends SugarBeanApiHelper
         } else {
             if (!empty($beans)) {
                 $fBean = $beans[0];
-                $committed_date = $bean->db->fromConvert($fBean["date_modified"], "datetime");
+                $committed_date = $bean->db->fromConvert($fBean['date_modified'], 'datetime');
 
                 if (strtotime($committed_date) < strtotime($bean->fetched_row['date_modified'])) {
                     $db = DBManagerFactory::getInstance();
                     // find the differences via the audit table
                     // we use a direct query since SugarQuery can't do the audit tables...
                     $sql = sprintf(
-                        "SELECT field_name, before_value_string, after_value_string FROM %s
-                        WHERE parent_id = %s AND date_created >= " . $db->convert('%s', 'datetime'),
+                        'SELECT field_name, before_value_string, after_value_string FROM %s
+                        WHERE parent_id = %s AND date_created >= ' . $db->convert('%s', 'datetime'),
                         $bean->get_audit_table_name(),
                         $db->quoted($bean->id),
                         $db->quoted($committed_date)
@@ -81,7 +81,7 @@ class ForecastManagerWorksheetsApiHelper extends SugarBeanApiHelper
 
                     while ($row = $db->fetchByAssoc($results)) {
                         $field = substr($row['field_name'], 0, strpos($row['field_name'], '_'));
-                        if (isset($settings['show_worksheet_' . $field]) && $settings['show_worksheet_' . $field] == "1") {
+                        if (isset($settings['show_worksheet_' . $field]) && $settings['show_worksheet_' . $field] == '1') {
                             // calculate the difference to make sure it actually changed at 2 digits vs changed at 6
                             $diff = SugarMath::init($row['after_value_string'], 6)->sub(
                                 $row['before_value_string']

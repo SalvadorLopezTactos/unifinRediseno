@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,7 +20,7 @@ class MetaDataManagerKiosk extends MetaDataManager
      * @param MetaDataContextInterface $context
      * @return array Kiosk metadata
      */
-    public function getMetadata($args = array(), MetaDataContextInterface $context = null)
+    public function getMetadata($args = [], MetaDataContextInterface $context = null)
     {
         $data = [
             'config' => [],

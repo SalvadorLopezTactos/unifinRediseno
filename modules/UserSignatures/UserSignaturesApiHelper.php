@@ -22,7 +22,7 @@ class UserSignaturesApiHelper extends SugarBeanApiHelper
      * @param array $options
      * @return array
      */
-    public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(SugarBean $bean, array $fieldList = [], array $options = [])
     {
         global $current_user;
 

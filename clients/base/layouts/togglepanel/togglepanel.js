@@ -22,6 +22,39 @@
     },
 
     /**
+     * Additional component elements to supply _placeComponent and showComponent work
+     */
+    pipelineComponents: [
+        {
+            'name': 'pipeline-recordlist-content',
+        }
+    ],
+
+    /**
+     * Available toggels for all modules
+     */
+    availableToggles: [
+        {
+            'name': 'pipeline',
+            'icon': 'sicon-tile-view',
+            'label': 'LBL_PIPELINE_VIEW_BTN',
+            'route': 'pipeline',
+        },
+        {
+            'name': 'list',
+            'icon': 'sicon-list-view',
+            'label': 'LBL_LISTVIEW',
+            'route': 'list',
+
+        },
+        {
+            'name': 'activitystream',
+            'icon': 'sicon-clock',
+            'label': 'LBL_ACTIVITY_STREAM',
+        }
+    ],
+
+    /**
      * @override
      * @param {Object} opts
      */
@@ -59,9 +92,9 @@
 
         // show the first toggle if the last viewed state isn't set in the metadata
         if (_.isUndefined(lastViewed) || this.isToggleButtonDisabled(lastViewed)) {
-            var enabledToggles = _.filter(this.toggles, function(toggle) {
+            let enabledToggles = _.filter(this.toggles, function(toggle) {
                 return !toggle.disabled;
-            });
+            }, this);
             if (enabledToggles.length > 0) {
                 lastViewed = _.first(enabledToggles).toggle;
             }
@@ -70,10 +103,14 @@
         if (lastViewed) {
             this.showComponent(lastViewed, true);//SP-1766-don't double render!
             // Toggle the appropriate button and layout for initial render
-            this.$('[data-view="' + lastViewed + '"]')
+            let dataView = app.user.lastState.get(this.module + ':pipeline') ? 'pipeline' : 'list';
+            dataView = ('activitystream' === lastViewed) ? lastViewed : dataView;
+            this.$(`#view-type-${dataView}`)
                 .button('toggle')
                 .attr('aria-pressed', true);
         }
+
+        this._placeToggleButtons();
     },
 
     /**
@@ -91,17 +128,11 @@
      * @return {boolean}
      */
     isToggleButtonDisabled: function (name) {
-        var disabled = false,
-            toggleButton;
-
-        toggleButton = _.find(this.toggles, function (toggle) {
+        let toggleButton = _.find(this.toggles, function(toggle) {
             return toggle.toggle === name;
         });
 
-        if (toggleButton) {
-            disabled = toggleButton.disabled;
-        }
-        return disabled;
+        return toggleButton ? toggleButton.disabled : true;
     },
 
     /**
@@ -110,39 +141,90 @@
      * @param {Object} options The Backbone.View initialization options.
      */
     processToggles: function(options) {
-        var temp = {};
+        let temp = {};
+        let subpanels = _.filter(options.meta.components, function(component) {
+            let toggle = component.view ? component.view :
+                (_.isString(component.layout)) ? component.layout : component.layout.type;
 
-        //Go through components and figure out which toggles we should add
-        _.each(options.meta.components, function (component) {
-            var toggle;
-            if (component.view) {
-                toggle = component.view;
-            } else if (component.layout) {
-                toggle = (_.isString(component.layout)) ? component.layout : component.layout.type;
+            if ('subpanels' === toggle) {
+                return true;
             }
 
-            var availableToggle = _.find(options.meta.availableToggles, function (curr) {
-                return curr.name === toggle;
+            return false;
+        });
+
+        if (subpanels.length) {
+            //Go through components and figure out which toggles we should add
+            _.each(options.meta.components, function(component) {
+                let toggle;
+                if (component.view) {
+                    toggle = component.view;
+                } else if (component.layout) {
+                    toggle = (_.isString(component.layout)) ? component.layout : component.layout.type;
+                }
+
+                let availableToggle = _.find(options.meta.availableToggles, function(curr) {
+                    return curr.name === toggle;
+                }, this);
+                if (toggle && availableToggle) {
+                    let disabled = !!availableToggle.disabled;
+                    temp[toggle] = {
+                        toggle: toggle,
+                        title: availableToggle.label,
+                        class: availableToggle.icon,
+                        css_class: availableToggle.css_class,
+                        disabled: disabled,
+                        route: availableToggle.route
+                    };
+                }
             }, this);
-            if (toggle && availableToggle) {
-                var disabled = !!availableToggle.disabled;
-                temp[toggle] = {
-                    toggle: toggle,
-                    title: availableToggle.label,
-                    class: availableToggle.icon,
-                    css_class: availableToggle.css_class,
-                    disabled: disabled,
-                    route: availableToggle.route
-                };
-            }
-        }, this);
 
-        // Sort the toggles by the order in the availableToggles list
-        _.each(options.meta.availableToggles, function(toggle) {
-            if (temp[toggle.name]) {
-                this.toggles.push(temp[toggle.name]);
-            }
-        }, this);
+            // Sort the toggles by the order in the availableToggles list
+            _.each(options.meta.availableToggles, function(toggle) {
+                if (temp[toggle.name] && !temp[toggle.name].disabled) {
+                    this.toggles.push(temp[toggle.name]);
+                }
+            }, this);
+        } else {
+            _.each(this.availableToggles, function(toggle) {
+                let disabled = this._setDisabled(toggle);
+                if (!disabled) {
+                    let tempToggle = {
+                        toggle: toggle.name,
+                        title: toggle.label,
+                        class: toggle.icon,
+                        css_class: toggle.css_class,
+                        disabled: disabled,
+                        route: toggle.route
+                    };
+                    this.toggles.push(tempToggle);
+                }
+            }, this);
+        }
+    },
+
+    /**
+     * Set disabled property
+     *
+     * @param availableToggle
+     * @param module
+     * @return {boolean}
+     * @private
+     */
+    _setDisabled: function(toggle) {
+        if (toggle.name === 'pipeline') {
+            const isPipelineEnabled = app.metadata.getModule(this.options.module).isPipelineEnabled;
+            const layout = this.options.context.get('layout');
+            const enabledLayouts = [
+                'records',
+                'pipeline-records',
+            ];
+            return !(isPipelineEnabled && _.contains(enabledLayouts, layout));
+        } else if (toggle.name === 'activitystream') {
+            return !app.metadata.getModule(this.options.module).activityStreamEnabled;
+        }
+
+        return !!toggle.disabled;
     },
 
     /**
@@ -152,15 +234,19 @@
      * @param {Object} def
      */
     _placeComponent: function (component, def) {
-        var toggleAvailable = _.isObject(_.find(this.options.meta.availableToggles, function (curr) {
-            return curr.name === component.name;
-        }));
+        let toggleAvailable = _.isObject(_.find(
+            [...this.availableToggles, ...this.pipelineComponents],
+            function(curr) {return curr.name === component.name;}
+        ));
 
         if (toggleAvailable) {
             this.componentsList[component.name] = component;
         }
-
-        this.$('.main-content').append(component.el);
+        if (component.name === 'multi-line-sorting' || component.name === 'multi-line-list-filter') {
+            this.$('.search-filter>.control-group>.controls.btn-group-fit').append(component.el);
+        } else {
+            this.$('.main-content').append(component.el);
+        }
     },
 
     /**
@@ -172,10 +258,18 @@
         // Only toggle if we click on an inactive button
         if (!$el.hasClass('active')) {
             var data = $el.data();
+            app.user.lastState.set(this.toggleViewLastStateKey, data.view);
             if (data.route) {
-                app.router.navigate(this.module + '/' + data.route, {trigger: true});
-            } else {
-                app.user.lastState.set(this.toggleViewLastStateKey, data.view);
+                let isPipline = 'pipeline' === data.route ? 1 : 0;
+                //set pipeline view status
+                app.user.lastState.set(this.module + ':pipeline', isPipline);
+                const currentURL = Backbone.history.getFragment();
+
+                if (currentURL === this.module) {
+                    app.router.refresh();
+                } else {
+                    app.router.navigate(this.module, {trigger: true});
+                }
             }
             this.showComponent(data.view);
             this._toggleAria($el);
@@ -204,6 +298,7 @@
     showComponent: function (name, silent) {
         if (!name) return;
 
+        name = ('pipeline' === name) ? _.first(this.pipelineComponents).name : name;
         _.each(this.componentsList, function (comp) {
             if (comp.name === name) {
                 comp.show();
@@ -235,5 +330,27 @@
         });
         this.componentsList = {};
         app.view.Layout.prototype._dispose.call(this);
+    },
+
+    /**
+     * Set toggle buttons position.
+     *
+     * @private
+     */
+    _placeToggleButtons: function() {
+        switch (this.toggles.length) {
+            case 0:
+                this.$('.controls-two').toggleClass('controls-two controls-zero');
+                this.$('.refresh').toggleClass('refresh refresh-for-zero');
+                this.$('.pipeline-refresh-btn').removeClass('pipeline-refresh-btn');
+                break;
+            case 3:
+                this.$('.controls-two').toggleClass('controls-two controls-three');
+                this.$('.refresh').toggleClass('refresh refresh-for-three');
+                this.$('.pipeline-refresh-btn').removeClass('pipeline-refresh-btn');
+                break;
+            default:
+                break;
+        }
     }
 })

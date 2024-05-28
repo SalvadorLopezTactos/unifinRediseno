@@ -23,7 +23,8 @@ class EmailFormatter
     /**
      * @access public
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->retrieveDisclosureSettings();
     }
 
@@ -34,7 +35,8 @@ class EmailFormatter
      * @param string $content
      * @return boolean
      */
-    public static function isHtml($content) {
+    public static function isHtml($content)
+    {
         return (strcmp($content, preg_replace('/(?:<|&lt;)\/?([a-zA-Z]+) *[^\/(?:<|&lt;)]*?\/?(?:>|&gt;)/', '', $content)) != 0);
     }
 
@@ -45,7 +47,8 @@ class EmailFormatter
      * @param string $content
      * @return boolean
      */
-    public static function isTextOnly($content) {
+    public static function isTextOnly($content)
+    {
         return !self::isHtml($content);
     }
 
@@ -53,13 +56,14 @@ class EmailFormatter
      * Performs character set and HTML character translations on the string.
      *
      * @access public
-     * @param string       $string      required The string that is to be translated.
-     * @param Localization $locale      required The locale object for doing the character set translation.
-     * @param string       $toCharset   required Translate to this character set.
-     * @param string       $fromCharset          Translate from this character set.
+     * @param string $string required The string that is to be translated.
+     * @param Localization $locale required The locale object for doing the character set translation.
+     * @param string $toCharset required Translate to this character set.
+     * @param string $fromCharset Translate from this character set.
      * @return string The translated string.
      */
-    public function translateCharacters($string, Localization $locale, $toCharset, $fromCharset = "UTF-8") {
+    public function translateCharacters($string, Localization $locale, $toCharset, $fromCharset = 'UTF-8')
+    {
         // perform character set translations on the string
         $string = $locale->translateCharset($string, $fromCharset, $toCharset);
 
@@ -76,7 +80,8 @@ class EmailFormatter
      * @param string $body required
      * @return string
      */
-    public function formatTextBody($body) {
+    public function formatTextBody($body)
+    {
         if ($this->includeDisclosure) {
             $body .= "\r\r{$this->disclosureContent}"; //@todo why are we using /r?
         }
@@ -93,60 +98,61 @@ class EmailFormatter
      * @param string $body required
      * @return array body=String with the applicable modifications. images=Array of EmbeddedImage objects.
      */
-    public function formatHtmlBody($body) {
+    public function formatHtmlBody($body)
+    {
         global $sugar_config;
-        $siteUrl = $sugar_config["site_url"];
+        $siteUrl = $sugar_config['site_url'];
 
         if ($this->includeDisclosure) {
             $body .= "<br /><br />{$this->disclosureContent}";
         }
 
         // replace references to cache/images with cid tag
-        $pattern     = ";=\s*\"" . preg_quote(sugar_cached("images/"), ";") . ";";
-        $replacement = "=\"cid:";
-        $body        = preg_replace($pattern, $replacement, $body);
+        $pattern = ";=\s*\"" . preg_quote(sugar_cached('images/'), ';') . ';';
+        $replacement = '="cid:';
+        $body = preg_replace($pattern, $replacement, $body);
 
         // replace any embeded images using cache/images for src url
         $converted = $this->convertInlineImageToEmbeddedImage(
             $body,
             "(?:{$siteUrl})?/?cache/images/",
-            sugar_cached("images/")
+            sugar_cached('images/')
         );
-        $body   = $converted["body"];
-        $images = $converted["images"];
+        $body = $converted['body'];
+        $images = $converted['images'];
 
         // replace any embeded images using the secure entryPoint for src url
         $converted = $this->convertInlineImageToEmbeddedImage(
             $body,
             "(?:{$siteUrl})?/?index.php[?]entryPoint=download&(?:amp;)?[^\"]*?id=",
-            "upload://",
+            'upload://',
             true
         );
-        $body   = $converted["body"];
-        $images = array_merge($images, $converted["images"]);
+        $body = $converted['body'];
+        $images = array_merge($images, $converted['images']);
 
         // Convert the EmbeddedFiles end point url to cid
         $converted = $this->convertEmbeddedFileToImage($body);
-        $body   = $converted["body"];
-        $images = array_merge($images, $converted["images"]);
+        $body = $converted['body'];
+        $images = array_merge($images, $converted['images']);
 
-        return array(
-            "body"   => $body,
-            "images" => $images,
-        );
+        return [
+            'body' => $body,
+            'images' => $images,
+        ];
     }
 
     /**
      * Converts the EmbeddedFiles end point url to embedded image so the in-line image can be attached in email
      *
-    // body example:
-    // <img src="rest/v11_13/EmbeddedFiles/8e1c9ec8-e99e-11eb-b7df-acde48001122/file/..." width="134" height="26"/>
-    // in this case, id would be '8e1c9ec8-e99e-11eb-b7df-acde48001122'
+     * // body example:
+     * // <img src="rest/v11_13/EmbeddedFiles/8e1c9ec8-e99e-11eb-b7df-acde48001122/file/..." width="134" height="26"/>
+     * // in this case, id would be '8e1c9ec8-e99e-11eb-b7df-acde48001122'
      *
      * @param string $body email body
      * @return array
      */
-    protected function convertEmbeddedFileToImage(string $body) : array
+    protected function convertEmbeddedFileToImage(string $body): array
     {
         // the src regular expression to match
         $src = <<<EOT
@@ -173,7 +179,7 @@ EOT;
         $body = preg_replace("|{$src}|i", '"cid:$1"', $body);
 
         return [
-            'body'   => $body,
+            'body' => $body,
             'images' => $embeddedImages,
         ];
     }
@@ -183,40 +189,41 @@ EOT;
      *
      * @access protected
      * @param string $body
-     * @param string $regex       Regular expression
+     * @param string $regex Regular expression
      * @param string $localPrefix Prefix where local files are stored
-     * @param bool   $object      Use attachment object
+     * @param bool $object Use attachment object
      * @return array body=String with the applicable modifications. images=Array of EmbeddedImage objects.
      */
-    protected function convertInlineImageToEmbeddedImage($body, $regex, $localPrefix, $object = false) {
-        $embeddedImages = array();
-        $i              = 0;
-        $foundImages    = array();
+    protected function convertInlineImageToEmbeddedImage($body, $regex, $localPrefix, $object = false)
+    {
+        $embeddedImages = [];
+        $i = 0;
+        $foundImages = [];
         $src = "[\"']({$regex})([^&\"']+).*?[\"']";
 
         preg_match_all("#<img[^>]*[\s]+src[^=]*=[\s]*{$src}#si", $body, $foundImages);
 
         foreach ($foundImages[2] as $image) {
-            $filename     = urldecode($image);
-            $cid          = $filename;
+            $filename = urldecode($image);
+            $cid = $filename;
             $fileLocation = $localPrefix . $filename;
 
             if (file_exists($fileLocation)) {
-                $mimeType = "";
+                $mimeType = '';
 
                 if ($object) {
-                    $mimeType  = "application/octet-stream";
-                    $objectType = array();
+                    $mimeType = 'application/octet-stream';
+                    $objectType = [];
 
                     if (preg_match("#&(?:amp;)?type=([\w]+)#i", $foundImages[0][$i], $objectType)) {
                         $beanName = null;
 
                         switch (strtolower($objectType[1])) {
-                            case "documents":
-                                $beanName = "DocumentRevisions";
+                            case 'documents':
+                                $beanName = 'DocumentRevisions';
                                 break;
-                            case "notes":
-                                $beanName = "Notes";
+                            case 'notes':
+                                $beanName = 'Notes';
                                 break;
                         }
                     }
@@ -226,12 +233,12 @@ EOT;
                         $bean->retrieve($filename);
 
                         if (!empty($bean->id)) {
-                            $mimeType  = $bean->file_mime_type;
-                            $filename  = $bean->filename;
+                            $mimeType = $bean->file_mime_type;
+                            $filename = $bean->filename;
                         }
                     }
                 } else {
-                    $mimeType = "image/" . strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+                    $mimeType = 'image/' . strtolower(pathinfo($filename, PATHINFO_EXTENSION));
                 }
 
                 $embeddedImages[] = new EmbeddedImage($cid, $fileLocation, $filename, Encoding::Base64, $mimeType);
@@ -243,12 +250,12 @@ EOT;
         $body = preg_replace("|{$src}|i", '"cid:$2"', $body);
 
         // remove bad img line from outbound email
-        $body = preg_replace('#<img[^>]+src[^=]*=\"\/([^>]*?[^>]*)>#sim', "", $body);
+        $body = preg_replace('#<img[^>]+src[^=]*=\"\/([^>]*?[^>]*)>#sim', '', $body);
 
-        return array(
-            "body"   => $body,
-            "images" => $embeddedImages,
-        );
+        return [
+            'body' => $body,
+            'images' => $embeddedImages,
+        ];
     }
 
     /**
@@ -258,13 +265,14 @@ EOT;
      * @access protected
      * @todo consider how this could become a merge field that is added prior to the Mailer getting created
      */
-    protected function retrieveDisclosureSettings() {
+    protected function retrieveDisclosureSettings()
+    {
         $admin = new Administration();
         $admin->retrieveSettings();
 
-        if (isset($admin->settings["disclosure_enable"]) && !empty($admin->settings["disclosure_enable"])) {
+        if (isset($admin->settings['disclosure_enable']) && !empty($admin->settings['disclosure_enable'])) {
             $this->includeDisclosure = true;
-            $this->disclosureContent = $admin->settings["disclosure_text"];
+            $this->disclosureContent = $admin->settings['disclosure_text'];
         }
     }
 }

@@ -18,7 +18,7 @@ $viewdefs['base']['layout']['hint-news-panel'] = [
                 'icon' => 'newspaper-o',
                 'title' => 'LBL_HINT_NEWS',
                 'fields' => [
-                   [
+                    [
                         'type' => 'hint-news-panel-filter',
                         'view' => 'edit',
                         'name' => 'categories',
@@ -27,7 +27,7 @@ $viewdefs['base']['layout']['hint-news-panel'] = [
                         'options' => 'stage2_preferences_category',
                     ], [
                         'type' => 'hint-news-preferences-trigger',
-                        'icon' => 'fa-cog',
+                        'icon' => 'sicon-settings',
                         'view' => 'detail',
                     ],
                 ],

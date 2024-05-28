@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Jobbkø',
     'LBL_MODULE_NAME_SINGULAR' => 'Jobbkø',
     'LBL_MODULE_TITLE' => 'Jobbkø: hjemme',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Løsning kansellert',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Løsning kjører',
     // Errors
-    'ERR_CALL' => "Kan ikke kjøre funksjon: %s",
-    'ERR_CURL' => "Ingen CURL - kan ikke kjøre URL-jobber",
-    'ERR_FAILED' => "Det har oppstått en feil, vennligst sjekk PHP-logger og sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s i %s på linje %d",
-    'ERR_NOUSER' => "Ingen Bruker-ID definert for jobben",
-    'ERR_NOSUCHUSER' => "Bruker-ID %s ikke funnet",
-    'ERR_JOBTYPE' => "Ukjent jobbtype: %s",
-    'ERR_TIMEOUT' => "Tvunget feil på tidsavbrudd",
+    'ERR_CALL' => 'Kan ikke kjøre funksjon: %s',
+    'ERR_CURL' => 'Ingen CURL - kan ikke kjøre URL-jobber',
+    'ERR_FAILED' => 'Det har oppstått en feil, vennligst sjekk PHP-logger og sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s i %s på linje %d',
+    'ERR_NOUSER' => 'Ingen Bruker-ID definert for jobben',
+    'ERR_NOSUCHUSER' => 'Bruker-ID %s ikke funnet',
+    'ERR_JOBTYPE' => 'Ukjent jobbtype: %s',
+    'ERR_TIMEOUT' => 'Tvunget feil på tidsavbrudd',
     'ERR_JOB_FAILED_VERBOSE' => 'Jobb %1$s (%2$s) feilet i CRON-kjøring',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Kan ikke laste bean med ID: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Kunne ikke finne handler for ruten %s',
@@ -91,7 +91,7 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Amazon SQS-konfigurasjonshjelp',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Seksjon for Amazon SQS-konfigurasjon.</b></p> <ul><li>Tilgangsnøkkel-ID: <i>Angi tilgangsnøkkel-ID-nummeret for Amazon SQS</i></li> <li>Hemmelig tilgangsnøkkel: <i>Angi den hemmelige tilgangsnøkkelen for Amazon SQS</i></li> <li>Region: <i>Angi regionen for Amazon SQS-serveren</i></li> <li>Kønavn: <i>Angi kønavnet for Amazon SQS-serveren</i></li></ul>",
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Seksjon for Amazon SQS-konfigurasjon.</b></p> <ul><li>Tilgangsnøkkel-ID: <i>Angi tilgangsnøkkel-ID-nummeret for Amazon SQS</i></li> <li>Hemmelig tilgangsnøkkel: <i>Angi den hemmelige tilgangsnøkkelen for Amazon SQS</i></li> <li>Region: <i>Angi regionen for Amazon SQS-serveren</i></li> <li>Kønavn: <i>Angi kønavnet for Amazon SQS-serveren</i></li></ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'AMQP-konfigurasjonshjelp',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>Seksjon for AMQP-konfigurasjon.</b></p> <ul><li>Server-URL: <i>Angi meldingkøens server-URL.</i></li>     <li>Pålogging: <i>Angi påloggingsinformasjonen for RabbitMQ</i></li>     <li>Passord: <i>Angi passordet for RabbitMQ</i></li></ul>",
     'LBL_CONFIG_GEARMAN_TITLE' => 'Gearman-konfigurasjonshjelp',
@@ -107,4 +107,4 @@ $mod_strings = array(
     'LBL_REGION' => 'Region',
     'LBL_ACCESS_KEY_SECRET' => 'Hemmelig tilgangsnøkkel',
     'LBL_QUEUE_NAME' => 'Adapternavn',
-);
+];

@@ -10,84 +10,84 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['tag_bean_rel'] = array(
+$dictionary['tag_bean_rel'] = [
     'table' => 'tag_bean_rel',
-    'relationships' => array(
-    ),
-    'fields' => array(
-        'id' => array(
+    'relationships' => [
+    ],
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
             'required' => true,
-        ),
-        'tag_id' => array(
+        ],
+        'tag_id' => [
             'name' => 'tag_id',
             'type' => 'id',
             'required' => true,
-        ),
-        'bean_id' => array(
+        ],
+        'bean_id' => [
             'name' => 'bean_id',
             'type' => 'id',
             'required' => true,
-        ),
-        'bean_module' => array(
+        ],
+        'bean_module' => [
             'name' => 'bean_module',
             'type' => 'varchar',
             'len' => 100,
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'tags_bean_relpk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_tagsrel_tagid_beanid',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'tag_id',
                 'bean_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_tag_bean_rel_del_bean_module_beanid',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'bean_module',
                 'bean_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_del_tagid_beanid',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'tag_id',
                 'bean_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_bid_tid_bm_del',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'bean_id',
                 'tag_id',
                 'bean_module',
                 'deleted',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

@@ -11,10 +11,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['PdfManager']['mobile']['layout']['edit'] = array(
-    'components' => array(
-        array(
+$viewdefs['PdfManager']['mobile']['layout']['edit'] = [
+    'components' => [
+        [
             'view' => 'edit',
-        )
-    ),
-);
+        ],
+    ],
+];

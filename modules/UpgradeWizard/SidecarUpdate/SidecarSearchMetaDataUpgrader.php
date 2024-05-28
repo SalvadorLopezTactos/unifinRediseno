@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 // This will need to be pathed properly when packaged
 require_once 'SidecarAbstractMetaDataUpgrader.php';
 
@@ -29,7 +30,8 @@ class SidecarSearchMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
      *
      * @return bool
      */
-    public function upgrade() {
+    public function upgrade()
+    {
         if (file_exists($this->fullpath)) {
             // Save the new file and report it
             return $this->handleSave();
@@ -41,7 +43,9 @@ class SidecarSearchMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
     /**
      * Does nothing for search since search is simply a file move.
      */
-    public function convertLegacyViewDefsToSidecar() {}
+    public function convertLegacyViewDefsToSidecar()
+    {
+    }
 
     /**
      * Simply gets the current file contents

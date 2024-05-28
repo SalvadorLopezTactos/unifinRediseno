@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '嵌入的文件',
     'LBL_MODULE_NAME_SINGULAR' => '嵌入的文件',
     'LBL_MODULE_TITLE' => '嵌入的文件',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => '文件名',
     'LBL_FILENAME' => '文件名',
     'LBL_UPLOAD_ONLY_IMAGE' => '所选的文件应为图片。',
-);
+];

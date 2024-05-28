@@ -23,13 +23,18 @@ use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 abstract class AbstractMetaDataImplementation
 {
-    //@codingStandardsIgnoreStart
+    /**
+     * Base (standard) view definitions
+     *
+     * @var array
+     */
+    protected $baseViewdefs = [];
+    // @codingStandardsIgnoreStart PSR2.Classes.PropertyDeclaration.Underscore
     public $_history;
     /**
      * @var array<string, mixed>|mixed[]|mixed
      */
     public $_variables;
-    //@codingStandardsIgnoreEnd
     /**
      * Flag for deployed state of this implementation, used by the parsers for
      * determining cache clearing and other stuff
@@ -42,51 +47,44 @@ abstract class AbstractMetaDataImplementation
     protected $_viewType; // list, edit, search, detail
     protected $_moduleName;
     protected $_viewdefs; // Raw $viewdefs from the metadata file
-    protected $_originalViewdefs = array();
-
-    /**
-     * Base (standard) view definitions
-     *
-     * @var array
-     */
-    protected $baseViewdefs = array();
-
+    protected $_originalViewdefs = [];
     protected $_fielddefs;
-    protected $_comboFieldDefs = array();
+    protected $_comboFieldDefs = [];
     protected $_paneldefs;
-    protected $_paneldefsPath = array();
+    protected $_paneldefsPath = [];
     protected $_useWorkingFile = false;
-    protected $_sourceFilename = '' ; // the name of the file from which we loaded the definition we're working on - needed when we come to write out the historical record
+    protected $_sourceFilename = ''; // the name of the file from which we loaded the definition we're working on - needed when we come to write out the historical record
     // would like this to be a constant, but alas, constants cannot contain arrays...
-    protected $_fileVariables = array (
-    MB_POPUPSEARCH              => 'popupMeta',
-    MB_POPUPLIST                => 'popupMeta',
-    MB_LISTVIEW                 => 'listViewDefs',
-    MB_SIDECARQUOTEDATAGROUPLIST => 'viewdefs',
-    MB_QUOTEDATAGRANDTOTALHEADER => 'viewdefs',
-    MB_QUOTEDATAGRANDTOTALFOOTER => 'viewdefs',
-    MB_SIDECARLISTVIEW          => 'viewdefs',
-    MB_SIDECARPOPUPVIEW         => 'viewdefs',
-    MB_SIDECARDUPECHECKVIEW     => 'viewdefs',
-    MB_BASICSEARCH              => 'searchdefs',
-    MB_ADVANCEDSEARCH           => 'searchdefs',
-    MB_EDITVIEW                 => 'viewdefs',
-    MB_DETAILVIEW               => 'viewdefs',
-    MB_QUICKCREATE              => 'viewdefs',
-    MB_RECORDVIEW               => 'viewdefs',
-    MB_RECORDDASHLETVIEW        => 'viewdefs',
-    MB_PREVIEWVIEW              => 'viewdefs',
-    MB_WIRELESSEDITVIEW         => 'viewdefs',
-    MB_WIRELESSDETAILVIEW       => 'viewdefs',
-    MB_WIRELESSLISTVIEW         => 'viewdefs',
-    MB_WIRELESSBASICSEARCH      => 'searchdefs',
-    MB_WIRELESSADVANCEDSEARCH   => 'searchdefs',
-    MB_PORTALEDITVIEW           => 'viewdefs',
-    MB_PORTALDETAILVIEW         => 'viewdefs',
-    MB_PORTALRECORDVIEW         => 'viewdefs',
-    MB_PORTALLISTVIEW           => 'viewdefs',
-    MB_PORTALSEARCHVIEW         => 'searchdefs',
-    ) ;
+    protected $_fileVariables = [
+        MB_POPUPSEARCH => 'popupMeta',
+        MB_POPUPLIST => 'popupMeta',
+        MB_LISTVIEW => 'listViewDefs',
+        MB_SIDECARQUOTEDATAGROUPLIST => 'viewdefs',
+        MB_QUOTEDATAGRANDTOTALHEADER => 'viewdefs',
+        MB_QUOTEDATAGRANDTOTALFOOTER => 'viewdefs',
+        MB_SIDECARLISTVIEW => 'viewdefs',
+        MB_SIDECARPOPUPVIEW => 'viewdefs',
+        MB_SIDECARDUPECHECKVIEW => 'viewdefs',
+        MB_BASICSEARCH => 'searchdefs',
+        MB_ADVANCEDSEARCH => 'searchdefs',
+        MB_EDITVIEW => 'viewdefs',
+        MB_DETAILVIEW => 'viewdefs',
+        MB_QUICKCREATE => 'viewdefs',
+        MB_RECORDVIEW => 'viewdefs',
+        MB_RECORDDASHLETVIEW => 'viewdefs',
+        MB_PREVIEWVIEW => 'viewdefs',
+        MB_WIRELESSEDITVIEW => 'viewdefs',
+        MB_WIRELESSDETAILVIEW => 'viewdefs',
+        MB_WIRELESSLISTVIEW => 'viewdefs',
+        MB_WIRELESSBASICSEARCH => 'searchdefs',
+        MB_WIRELESSADVANCEDSEARCH => 'searchdefs',
+        MB_PORTALEDITVIEW => 'viewdefs',
+        MB_PORTALDETAILVIEW => 'viewdefs',
+        MB_PORTALRECORDVIEW => 'viewdefs',
+        MB_PORTALLISTVIEW => 'viewdefs',
+        MB_PORTALSEARCHVIEW => 'searchdefs',
+    ];
+    // @codingStandardsIgnoreEnd PSR2.Classes.PropertyDeclaration.Underscore
 
     /**
      * Returns an array of modules affected by this object. In almost all cases
@@ -96,7 +94,7 @@ abstract class AbstractMetaDataImplementation
      */
     public function getAffectedModules()
     {
-        return array($this->_moduleName);
+        return [$this->_moduleName];
     }
 
     /**
@@ -135,12 +133,12 @@ abstract class AbstractMetaDataImplementation
      * @param array $params Additional metadata parameters
      * @return string
      */
-    protected function getFileNameByParameters($view, $module, $location, $client, array $params = array())
+    protected function getFileNameByParameters($view, $module, $location, $client, array $params = [])
     {
-        $params = array_merge($params, array(
+        $params = array_merge($params, [
             'client' => $this->_viewClient,
             'location' => $location,
-        ));
+        ]);
 
         if ($client) {
             $params['client'] = $client;
@@ -189,7 +187,7 @@ abstract class AbstractMetaDataImplementation
                         foreach ($field['fields'] as $sfKey => $subField) {
                             // if subField has a name and is present in the field list
                             // we check if the name is set first as some subFields may not have a name property
-                            if (isset($subField['name']) && in_array($subField['name'], $fieldList)) {
+                            if (isset($subField['name']) && safeInArray($subField['name'], $fieldList)) {
                                 // update the properties of the subField
                                 $subField = array_merge($subField, $propertyList);
 
@@ -200,7 +198,7 @@ abstract class AbstractMetaDataImplementation
 
                                 // if the field is not in the fieldList then update the panel with changes made
                                 // to subfield since they won't be picked up via newDef later
-                                if (!in_array($field['name'], $fieldList)) {
+                                if (!safeInArray($field['name'], $fieldList)) {
                                     $panels[$pKey]['fields'][$fKey]['fields'][$sfKey] = $subField;
                                 }
                             }
@@ -220,7 +218,7 @@ abstract class AbstractMetaDataImplementation
                 }
 
                 // The logic above ensures we will always have this
-                if (in_array($newDef['name'], $fieldList)) {
+                if (safeInArray($newDef['name'], $fieldList)) {
                     // Put all of it together now
                     $panels[$pKey]['fields'][$fKey] = array_merge($newDef, $propertyList);
                 }
@@ -234,11 +232,11 @@ abstract class AbstractMetaDataImplementation
     /*
      * Getters for the definitions loaded by the Constructor
      */
-    public function getViewdefs ()
+    public function getViewdefs()
     {
-        $GLOBALS['log']->debug( get_class ( $this ) . '->getViewdefs:'.print_r($this->_viewdefs,true) ) ;
+        $GLOBALS['log']->debug(get_class($this) . '->getViewdefs:' . print_r($this->_viewdefs, true));
 
-        return $this->_viewdefs ;
+        return $this->_viewdefs;
     }
 
     public function getOriginalViewdefs()
@@ -251,9 +249,9 @@ abstract class AbstractMetaDataImplementation
         return $this->baseViewdefs;
     }
 
-    public function getFielddefs ()
+    public function getFielddefs()
     {
-        return $this->_fielddefs ;
+        return $this->_fielddefs;
     }
 
     public function getPanelDefs()
@@ -327,7 +325,7 @@ abstract class AbstractMetaDataImplementation
     {
         $client = empty($this->_viewClient) ? 'base' : $this->_viewClient;
         if (isset($this->_viewdefs[$client]) && is_array($this->_viewdefs[$client]) && isset($this->_viewdefs[$client]['view']) && is_array($this->_viewdefs[$client]['view'])) {
-            $this->_paneldefsPath = array($client, 'view');
+            $this->_paneldefsPath = [$client, 'view'];
             $viewType = key($this->_viewdefs[$client]['view']);
             if (isset($this->_viewdefs[$client]['view'][$viewType]['panels'])) {
                 $this->_paneldefsPath[] = $viewType;
@@ -355,9 +353,9 @@ abstract class AbstractMetaDataImplementation
      * Obtain a new accessor for the history of this layout
      * Ideally the History object would be a singleton; however given the use case (modulebuilder/studio) it's unlikely to be an issue
      */
-    public function getHistory ()
+    public function getHistory()
     {
-        return $this->_history ;
+        return $this->_history;
     }
 
     /*
@@ -366,40 +364,41 @@ abstract class AbstractMetaDataImplementation
      * @param string filename       The full path to the file containing the layout
      * @return array The layout, null if the file does not exist
      */
-    protected function _loadFromFile ($filename)
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _loadFromFile($filename)
     {
         // BEGIN ASSERTIONS
-        if (! file_exists ( $filename )) {
-            return null ;
+        if (!file_exists($filename)) {
+            return null;
         }
         // END ASSERTIONS
-        $GLOBALS['log']->debug(get_class($this)."->_loadFromFile(): reading from ".$filename );
+        $GLOBALS['log']->debug(get_class($this) . '->_loadFromFile(): reading from ' . $filename);
         try {
             // loads the viewdef - must be a require not require_once to ensure can reload if called twice in succession
             require FileLoader::validateFilePath($filename);
             LoggerManager::getLogger()->debug(get_class($this) . "->_loadFromFile(): loading from valid filename $filename");
-            
+
             // Check to see if we have the module name set as a variable rather than embedded in the $viewdef array
             // If we do, then we have to preserve the module variable when we write the file back out
             // This is a format used by ModuleBuilder templated modules to speed the renaming of modules
             // OOB Sugar modules don't use this format
-    
-            $moduleVariables = ['module_name' , '_module_name' , 'OBJECT_NAME' , '_object_name'];
-    
+
+            $moduleVariables = ['module_name', '_module_name', 'OBJECT_NAME', '_object_name'];
+
             $variables = [];
             foreach ($moduleVariables as $name) {
                 if (isset(${$name})) {
                     $variables[$name] = ${$name};
                 }
             }
-    
+
             // Extract the layout definition from the loaded file - the layout definition is held under a variable name that varies between the various layout types (e.g., listviews hold it in listViewDefs, editviews in viewdefs)
             $viewVariable = $this->_fileVariables[$this->_view];
             $defs = ${$viewVariable};
-    
+
             // Now tidy up the module name in the viewdef array
             // MB created definitions store the defs under packagename_modulename and later methods that expect to find them under modulename will fail
-    
+
             $modulePath = true;
             if (isset($variables['module_name'])) {
                 $mbName = $variables['module_name'];
@@ -419,7 +418,7 @@ abstract class AbstractMetaDataImplementation
             } else {
                 $value = $defs;
             }
-    
+
             $GLOBALS['log']->debug(get_class($this) . '->_loadFromFile: returning ' . print_r($value, true));
         } catch (\TypeError $e) {
             LoggerManager::getLogger()->warn(
@@ -427,20 +426,21 @@ abstract class AbstractMetaDataImplementation
             );
             return null;
         } catch (\Throwable $e) {
-            LoggerManager::getLogger()->warn(get_class($this) . "->_loadFromFile(): require " . $filename . "failed!");
+            LoggerManager::getLogger()->warn(get_class($this) . '->_loadFromFile(): require ' . $filename . 'failed!');
             return null;
         }
         return $value;
     }
 
-    protected function _loadFromPopupFile ($filename, $mod, $view, $forSave = false)
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _loadFromPopupFile($filename, $mod, $view, $forSave = false)
     {
         // BEGIN ASSERTIONS
         if (!file_exists($filename)) {
-            return null ;
+            return null;
         }
         // END ASSERTIONS
-        $GLOBALS['log']->debug(get_class($this)."->_loadFromFile(): reading from ".$filename );
+        $GLOBALS['log']->debug(get_class($this) . '->_loadFromFile(): reading from ' . $filename);
 
         if (!empty($mod)) {
             $oldModStrings = $GLOBALS['mod_strings'];
@@ -452,7 +452,7 @@ abstract class AbstractMetaDataImplementation
             // loads the viewdef - must be a require not require_once to ensure can reload if called twice in succession
             require FileLoader::validateFilePath($filename);
             $viewVariable = $this->_fileVariables[$this->_view];
-            $defs = ${$viewVariable} ;
+            $defs = ${$viewVariable};
             if (!$forSave) {
                 //Now we will unset the reserve field in pop definition file.
                 $limitFields = PopupMetaDataParser::$reserveProperties;
@@ -488,13 +488,13 @@ abstract class AbstractMetaDataImplementation
                     }
                 }
             }
-    
+
             $this->_variables = [];
             if (!empty($oldModStrings)) {
                 $GLOBALS['mod_strings'] = $oldModStrings;
             }
         } catch (\Throwable $e) {
-            LoggerManager::getLogger()->warn(get_class($this) . "->_loadFromFile(): require " . $filename . "failed!");
+            LoggerManager::getLogger()->warn(get_class($this) . '->_loadFromFile(): require ' . $filename . 'failed!');
             return null;
         }
         return $defs;
@@ -508,7 +508,8 @@ abstract class AbstractMetaDataImplementation
      * @param array defs        	Array containing the layout definition; the top level should be the definition itself; not the modulename or viewdef= preambles found in the file definitions
      * @param boolean useVariables	Write out with placeholder entries for module name and object name - used by ModuleBuilder modules
      */
-    protected function _saveToFile($filename ,$defs ,$useVariables = true, $forPopup = false)
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _saveToFile($filename, $defs, $useVariables = true, $forPopup = false)
     {
         if (file_exists($filename)) {
             $filename = FileLoader::validateFilePath($filename);
@@ -517,20 +518,20 @@ abstract class AbstractMetaDataImplementation
 
         mkdir_recursive(dirname($filename));
 
-        $useVariables = ((is_countable($this->_variables) ? count($this->_variables) : 0) > 0) && $useVariables; // only makes sense to do the variable replace if we have variables to replace...
+        $useVariables = (safeCount($this->_variables) > 0) && $useVariables; // only makes sense to do the variable replace if we have variables to replace...
 
         // create the new metadata file contents, and write it out
-        $out = "<?php\n" ;
+        $out = "<?php\n";
         if ($useVariables) {
             // write out the $<variable>=<modulename> lines
             foreach ($this->_variables as $key => $value) {
-                $out .= "\$$key = '" . $value . "';\n" ;
+                $out .= "\$$key = '" . $value . "';\n";
             }
         }
 
         $viewVariable = $this->_fileVariables[$this->_view];
         if ($forPopup) {
-            $out .= "\$$viewVariable = \n" . var_export_helper ( $defs ) ;
+            $out .= "\$$viewVariable = \n" . var_export_helper($defs);
         } else {
             $moduleIndex = $useVariables ? '$module_name' : "'$this->_moduleName'";
             $out .= '$' . $viewVariable . "[$moduleIndex] = \n" . var_export_helper($defs);
@@ -539,7 +540,7 @@ abstract class AbstractMetaDataImplementation
         $out .= ";\n"; // Leaving off the closing PHP tag
 
         if (sugar_file_put_contents($filename, $out) === false) {
-            $GLOBALS['log']->fatal(get_class($this).": could not write new viewdef file " . $filename);
+            $GLOBALS['log']->fatal(get_class($this) . ': could not write new viewdef file ' . $filename);
         }
     }
 
@@ -548,7 +549,7 @@ abstract class AbstractMetaDataImplementation
      *
      * 1. The starting point is the module's fielddefs, sourced from the Bean
      * 2. Second comes any overrides from the layouts themselves. Note though that only visible fields are included in a layoutdef, which
-     * 	  means fields that aren't present in the current layout may have a layout defined in a lower-priority layoutdef, for example, the base layoutdef
+     *    means fields that aren't present in the current layout may have a layout defined in a lower-priority layoutdef, for example, the base layoutdef
      *
      * Thus to determine the current fielddef for any given field, we take the fielddef defined in the module's Bean and then override with first the base layout,
      * then the customlayout, then finally the working layout...
@@ -564,7 +565,8 @@ abstract class AbstractMetaDataImplementation
      * $viewClient will be portal|mobile|base
      * $viewType will be list|edit|detail|search
      */
-    public function _mergeFielddefs ( &$fielddefs , $layout )
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    public function _mergeFielddefs(&$fielddefs, $layout)
     {
         // nothing to merge
         if (empty($layout)) {
@@ -597,17 +599,17 @@ abstract class AbstractMetaDataImplementation
         } else {
             foreach ($layout as $key => $def) {
                 if (is_string($key) && $key == 'templateMeta') {
-                    continue ;
+                    continue;
                 }
 
                 if (is_array($def)) {
                     if (isset($def['name']) && !is_array($def['name'])) {
-                         // found a 'name' definition, that is not the definition of a field called name :)
+                        // found a 'name' definition, that is not the definition of a field called name :)
                         // if this is a module field, then merge in the definition, otherwise this is a new field defined in the layout, so just take the definition
                         $fielddefs[$def['name']] = (isset($fielddefs[$def['name']])) ? array_merge($fielddefs[$def['name']], $def) : $def;
                     } elseif ((isset($def['label']) || isset($def['vname']) || isset($def['widget_class'])) && !is_numeric($key)) {
                         // dealing with a listlayout which lacks 'name' keys, but which does have 'label' keys
-                        $key = strtolower($key) ;
+                        $key = strtolower($key);
                         $fielddefs[$key] = (isset($fielddefs[$key])) ? array_merge($fielddefs[$key], $def) : $def;
                     } else {
                         $this->_mergeFielddefs($fielddefs, $def);

@@ -23,12 +23,13 @@ class TeamSetPruneSqlCommand extends TeamSetPruneCommand implements InstanceMode
         $this
             ->setName('teamset:sql')
             ->setDescription('Print the sql query used to search for unused teamsets')
-            ->setHelp("Just displays the SQL used to search for unused team sets, in case you want to review it.");
+            ->setHelp('Just displays the SQL used to search for unused team sets, in case you want to review it.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->preflightCheck($output);
         $this->getPruner()->getSQL();
+        return 0;
     }
 }

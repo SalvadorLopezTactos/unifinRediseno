@@ -15,18 +15,18 @@
 </div>
 <div class="report-multiselect-wrapper">
     <div class="flex flex-row items-center pt-1.5 pb-1.5 pl-2.5 pr-2.5 select-all">
-        <label><input class="mr-2.5" type="checkbox" name="select-all"> {{str 'LBL_SELECT_ALL' 'Reports'}}</label>
+        <label class="h-full inline-flex my-0.5 text-[--text-color] w-full"><input class="mr-2.5" type="checkbox" name="select-all"> {{str 'LBL_SELECT_ALL' 'Reports'}}</label>
     </div>
-    <div class="report-multiselect-options">
+    <div class="report-multiselect-options overflow-y-auto">
         {{#each data._inputValue}}
             <div class="flex flex-row items-center p-1.5 pl-2.5 pr-2.5">
-                <label><input class="mr-2.5" type="checkbox" value="{{@key}}" data-fieldname="select-multiple" checked>
+                <label class="h-full inline-flex my-0.5 text-[--text-color] w-full"><input class="mr-2.5" type="checkbox" value="{{@key}}" data-fieldname="select-multiple" checked>
                 {{this}}</label>
             </div>
         {{/each}}
         {{#each data._inputValue1}}
             <div class="flex flex-row items-center p-1.5 pl-2.5 pr-2.5">
-                <label><input class="mr-2.5" type="checkbox" value="{{@key}}" data-fieldname="select-multiple">
+                <label class="h-full inline-flex my-0.5 text-[--text-color] w-full"><input class="mr-2.5" type="checkbox" value="{{@key}}" data-fieldname="select-multiple">
                 {{this}}</label>
             </div>
         {{/each}}

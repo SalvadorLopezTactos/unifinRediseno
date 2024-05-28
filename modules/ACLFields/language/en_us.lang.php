@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_DEFAULT' => 'Not Set',
     'LBL_READ_WRITE' => 'Read/Write',
     'LBL_READ_OWNER_WRITE' => 'Read/Owner Write',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_READ_SELECTED_TEAMS_WRITE' => 'Read/(Owner & Selected Teams) Write',
     'LBL_SELECTED_TEAMS_READ_OWNER_WRITE' => '(Owner & Selected Teams) Read/Owner Write',
     'LBL_SELECTED_TEAMS_READ_WRITE' => '(Owner & Selected Teams) Read/(Owner & Selected Teams) Write',
-);
+];

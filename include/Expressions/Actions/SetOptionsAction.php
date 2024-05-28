@@ -10,34 +10,36 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class SetOptionsAction extends AbstractAction{
+class SetOptionsAction extends AbstractAction
+{
     /**
      * @var string[]|string|mixed
      */
     public $labelsExpression;
-    protected $keysExpression = "";
-	protected $labelsExpressions =  "";
+    protected $keysExpression = '';
+    protected $labelsExpressions = '';
 
     /**
      * array Array of actions on which the Expression Action is not allowed
      */
-    protected $disallowedActions = array('view');
+    protected $disallowedActions = ['view'];
 
     public function __construct($params)
     {
         $this->params = $params;
-		$this->targetField = $params['target'];
-		$this->keysExpression = str_replace("\n", "",$params['keys']);
-		$this->labelsExpression = str_replace("\n", "",$params['labels']);
-	}
-	
-	/**
-	 * Returns the javascript class equavalent to this php class
-	 *
-	 * @return string javascript.
-	 */
-	static function getJavascriptClass() {
-		return  "
+        $this->targetField = $params['target'];
+        $this->keysExpression = str_replace("\n", '', $params['keys']);
+        $this->labelsExpression = str_replace("\n", '', $params['labels']);
+    }
+
+    /**
+     * Returns the javascript class equavalent to this php class
+     *
+     * @return string javascript.
+     */
+    public static function getJavascriptClass()
+    {
+        return "
 		SUGAR.forms.SetOptionsAction = function(target, keyExpr, labelExpr) {
 			this.afterRender = true;
 			if (_.isObject(target)){
@@ -187,30 +189,31 @@ class SetOptionsAction extends AbstractAction{
 				}
 			}
 		});";
-	}
+    }
 
-	/**
-	 * Returns the javascript code to generate this actions equivalent. 
-	 *
-	 * @return string javascript.
-	 */
-	function getJavascriptFire() {
-		return  "new SUGAR.forms.SetOptionsAction('{$this->targetField}','{$this->keysExpression}', '{$this->labelsExpression}')";
-	}
-	
-	
-	
-	/**
-	 * Applies the Action to the target.
-	 *
-	 * @param SugarBean $target
-	 * A NoOP on the PHP side for setoptions
-	 */
-	function fire(&$target) {
-		
-	}
-	
-	static function getActionName() {
-		return "SetOptions";
-	}
+    /**
+     * Returns the javascript code to generate this actions equivalent.
+     *
+     * @return string javascript.
+     */
+    public function getJavascriptFire()
+    {
+        return "new SUGAR.forms.SetOptionsAction('{$this->targetField}','{$this->keysExpression}', '{$this->labelsExpression}')";
+    }
+
+
+    /**
+     * Applies the Action to the target.
+     *
+     * @param SugarBean $target
+     * A NoOP on the PHP side for setoptions
+     */
+    public function fire(&$target)
+    {
+    }
+
+    public static function getActionName()
+    {
+        return 'SetOptions';
+    }
 }

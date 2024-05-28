@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('sugarEntry') || !sugarEntry) {
     die('Not A Valid Entry Point');
 }
@@ -13,50 +14,50 @@ if (!defined('sugarEntry') || !sugarEntry) {
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$hook_array['after_save'][] = array(
+$hook_array['after_save'][] = [
     1,
     'Publish after_save events to Pub/Sub subscribers',
     null,
-    '\\Sugarcrm\\Sugarcrm\\PubSub\\Module\\Event\\Publisher',
+    '\\' . \Sugarcrm\Sugarcrm\PubSub\Module\Event\Publisher::class,
     'handleEvent',
-);
+];
 
-$hook_array['after_delete'][] = array(
+$hook_array['after_delete'][] = [
     1,
     'Publish after_delete events to Pub/Sub subscribers',
     null,
-    '\\Sugarcrm\\Sugarcrm\\PubSub\\Module\\Event\\Publisher',
+    '\\' . \Sugarcrm\Sugarcrm\PubSub\Module\Event\Publisher::class,
     'handleEvent',
-);
+];
 
-$hook_array['after_restore'][] = array(
+$hook_array['after_restore'][] = [
     1,
     'Publish after_restore events to Pub/Sub subscribers',
     null,
-    '\\Sugarcrm\\Sugarcrm\\PubSub\\Module\\Event\\Publisher',
+    '\\' . \Sugarcrm\Sugarcrm\PubSub\Module\Event\Publisher::class,
     'handleEvent',
-);
+];
 
-$hook_array['after_relationship_add'][] = array(
+$hook_array['after_relationship_add'][] = [
     1,
     'Publish after_relationship_add events to Pub/Sub subscribers',
     null,
-    '\\Sugarcrm\\Sugarcrm\\PubSub\\Module\\Event\\Publisher',
+    '\\' . \Sugarcrm\Sugarcrm\PubSub\Module\Event\Publisher::class,
     'handleEvent',
-);
+];
 
-$hook_array['after_relationship_delete'][] = array(
+$hook_array['after_relationship_delete'][] = [
     1,
     'Publish after_relationship_delete events to Pub/Sub subscribers',
     null,
-    '\\Sugarcrm\\Sugarcrm\\PubSub\\Module\\Event\\Publisher',
+    '\\' . \Sugarcrm\Sugarcrm\PubSub\Module\Event\Publisher::class,
     'handleEvent',
-);
+];
 
-$hook_array['after_relationship_update'][] = array(
+$hook_array['after_relationship_update'][] = [
     1,
     'Publish after_relationship_update events to Pub/Sub subscribers',
     null,
-    '\\Sugarcrm\\Sugarcrm\\PubSub\\Module\\Event\\Publisher',
+    '\\' . \Sugarcrm\Sugarcrm\PubSub\Module\Event\Publisher::class,
     'handleEvent',
-);
+];

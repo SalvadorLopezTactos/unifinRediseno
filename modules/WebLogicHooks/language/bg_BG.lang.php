@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Уеб Logic hooks',
     'LBL_MODULE_NAME_SINGULAR' => 'Уеб Logic hook',
     'LBL_MODULE_TITLE' => 'Уеб Logic hooks',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => 'Поискай метод',
     'LBL_TRIGGER_EVENT' => 'Стартирай събитие',
     'LBL_URL' => 'Уеб адрес',
-);
+];

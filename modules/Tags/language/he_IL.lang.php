@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'תגיות',
     'LBL_GENERIC_LINK' => 'אובייקטים קשורים',
     'LBL_NAME_LOWER' => 'שם תגית באותיות קטנות',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'התגים שלי',
     'LBL_MY_FAVORITE_TAGS' => 'התגים המועדפים שלי',
     'LBL_MORE_TAGS' => '{{tagsNumber}} תגים',
-);
+];

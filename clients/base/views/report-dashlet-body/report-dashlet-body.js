@@ -159,6 +159,9 @@
         const viewName = 'report-chart';
 
         this._createViewController(viewType, viewName, forceRender);
+
+        // chart needs to resize, as well as the legend
+        this.context.trigger('container-resizing');
     },
 
     /**

@@ -51,6 +51,10 @@
             return false;
         }
 
+        if (this.model && this.model.get('_is_external_link')) {
+            return false;
+        }
+
         return this._super('hasAccess');
     }
 })

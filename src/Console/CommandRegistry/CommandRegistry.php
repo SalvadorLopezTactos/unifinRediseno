@@ -42,10 +42,10 @@ class CommandRegistry implements CommandRegistryInterface
      * Supported modes
      * @var array
      */
-    protected $modes = array(
+    protected $modes = [
         self::MODE_STANDALONE,
         self::MODE_INSTANCE,
-    );
+    ];
 
     /**
      * Registered commands
@@ -91,7 +91,7 @@ class CommandRegistry implements CommandRegistryInterface
     public function addSymfonyCommand(Command $command, $modes)
     {
         if (!is_array($modes)) {
-            $modes = array($modes);
+            $modes = [$modes];
         }
 
         foreach ($modes as $mode) {

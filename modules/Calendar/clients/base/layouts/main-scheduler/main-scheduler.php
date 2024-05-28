@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['Calendar']['base']['layout']['main-scheduler'] = [
-    'css_class'  => 'calendar-main-scheduler',
+    'css_class' => 'calendar-main-scheduler',
     'components' => [
         [
-             'view' => [
+            'view' => [
                 'type' => 'main-panel',
                 'name' => 'main-panel',
                 'css_class' => 'calendar-main-panel',
@@ -39,7 +39,7 @@ $viewdefs['Calendar']['base']['layout']['main-scheduler'] = [
                         'css_class' => 'calendar',
                     ],
                 ],
-             ],
+            ],
         ],
         [
             'view' => [

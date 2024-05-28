@@ -11,10 +11,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['logout'] = array(
-    'components' => array(
-        array(
+$viewdefs['base']['layout']['logout'] = [
+    'components' => [
+        [
             'view' => 'logout',
-        ),
-    ),
-);
+        ],
+    ],
+];

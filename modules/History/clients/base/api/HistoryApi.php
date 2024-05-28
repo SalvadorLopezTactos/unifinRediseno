@@ -16,55 +16,55 @@ class HistoryApi extends RelateApi
      * This is the list of allowed History Modules
      * @var array
      */
-    protected $moduleList = array(
+    protected $moduleList = [
         'meetings' => 'Meetings',
         'calls' => 'Calls',
         'notes' => 'Notes',
         'tasks' => 'Tasks',
         'emails' => 'Emails',
-    );
+    ];
     /**
      * filters per module for list requests
      * @var array
      */
-    protected $moduleFilters = array(
-        'Calls' => array(
-            array(
-                'status' => array(
-                    '$in' => array(
+    protected $moduleFilters = [
+        'Calls' => [
+            [
+                'status' => [
+                    '$in' => [
                         'Not Held',
-                        'Held'
-                    ),
-                ),
-            ),
-        ),
-        'Meetings' =>array(
-            array(
-                'status' => array(
-                    '$in' => array(
+                        'Held',
+                    ],
+                ],
+            ],
+        ],
+        'Meetings' => [
+            [
+                'status' => [
+                    '$in' => [
                         'Not Held',
-                        'Held'
-                    ),
-                ),
-            ),
-        ),
-        'Tasks' =>array(
-            array(
-                'status' => array(
-                    '$in' => array(
+                        'Held',
+                    ],
+                ],
+            ],
+        ],
+        'Tasks' => [
+            [
+                'status' => [
+                    '$in' => [
                         'Deferred',
-                        'Completed'
-                    ),
-                ),
-            ),
-        )
-    );
+                        'Completed',
+                    ],
+                ],
+            ],
+        ],
+    ];
 
     /**
      * This is the list of valid fields that should be on each select
      * @var array
      */
-    protected $validFields = array(
+    protected $validFields = [
         'name',
         'status',
         'description',
@@ -72,32 +72,33 @@ class HistoryApi extends RelateApi
         'date_modified',
         'assigned_user_name',
         'assigned_user_id',
-    );
+    ];
 
     public function registerApiRest()
     {
-        return array(
-            'recordListView' => array(
+        return [
+            'recordListView' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'link', 'history'),
-                'pathVars' => array('module', 'record', ''),
+                'path' => ['<module>', '?', 'link', 'history'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'filterModuleList',
-                'jsonParams' => array('filter'),
+                'jsonParams' => ['filter'],
                 'shortHelp' => 'Get the history records for a specific record',
                 'longHelp' => 'include/api/help/history_filter.html',
-                'exceptions' => array(
+                'exceptions' => [
                     // Thrown in filterList
                     'SugarApiExceptionInvalidParameter',
                     // Thrown in filterListSetup and parseArguments
                     'SugarApiExceptionNotAuthorized',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     public function filterModuleList(ServiceBase $api, array $args, $acl = 'list')
     {
         $options = [];
+        $record = BeanFactory::retrieveBean($args['module'], $args['record']);
         $orderByKeys = [];
         if (!empty($args['order_by'])) {
             $args['order_by'] = $this->getOrderByFromArgs($args);
@@ -129,7 +130,11 @@ class HistoryApi extends RelateApi
 
         // if the module list is empty then someone passed in bad modules for the history
         if (empty($this->moduleList)) {
-            throw new SugarApiExceptionInvalidParameter("Module List is empty, must contain: Meetings, Calls, Notes, Tasks, or Emails");
+            $GLOBALS['log']->warn('Module List for HistoryApi is empty.');
+            return [
+                'next_offset' => -1,
+                'records' => [],
+            ];
         }
 
         $fieldWhiteList = [];
@@ -167,7 +172,7 @@ class HistoryApi extends RelateApi
         }
 
         if (!empty($args['fields'])) {
-            $args['fields'] .= "," . implode(',', $this->validFields);
+            $args['fields'] .= ',' . implode(',', $this->validFields);
         } else {
             $args['fields'] = implode(',', $this->validFields);
         }
@@ -177,7 +182,7 @@ class HistoryApi extends RelateApi
         }
 
         foreach ($this->moduleList as $link_name => $module) {
-            $args['filter'] = array();
+            $args['filter'] = [];
             $savedFields = $args['fields'];
             $args['link_name'] = $link_name;
 
@@ -196,54 +201,18 @@ class HistoryApi extends RelateApi
 
             /** @var SugarQuery $q */
             try {
-                [$args, $q, $options] = $this->filterRelatedSetup($api, $args);
-                $q->select()->selectReset();
-                $q->orderByReset(); // ORACLE doesn't allow order by in UNION queries
-                if (!empty($args['placeholder_fields'][$module])) {
-                    $newFields = array_merge($args['placeholder_fields'][$module], $fields);
-                } else {
-                    $newFields = $fields;
-                }
-                if (!empty($args['alias_fields'])) {
-                    $newFields = array_merge(array_keys($args['alias_fields']), $newFields);
-                }
-                sort($newFields);
-                foreach ($newFields as $field) {
-                    if ($field == 'module') {
-                        continue;
-                    }
-                    // special case for description on emails
-                    if ($module == 'Emails' && $field == 'description') {
-                        // ORACLE requires EMPTY_CLOB() for union queries if CLOB fields were used before
-                        $q->select()->fieldRaw(DBManagerFactory::getInstance()->emptyValue('text') . " email_description");
-                    } else {
-                        if (isset($args['placeholder_fields'][$module][$field])) {
-                            if ($module === 'Audit' && $field === 'assigned_user_name') {
-                                $q->select()->fieldRaw("'' rel_assigned_user_name_first_name");
-                                $q->select()->fieldRaw("'' rel_assigned_user_name_last_name");
-                                $q->select()->fieldRaw("'' assigned_user_name_owner");
-                            } else {
-                                $param = $q->getDBManager()->getValidDBName($args['placeholder_fields'][$module][$field]);
+                [$args, $q, $options] = $this->prepareQuery($api, $args, $module, $fields, $record, $link_name);
 
-                                $q->select()->fieldRaw("'' $param");
-                            }
-                        } elseif (isset($args['alias_fields'][$field])) {
-                            if (isset($args['alias_fields'][$field][$module])) {
-                                $q->select()->field([[$args['alias_fields'][$field][$module], $field]]);
-                            } else {
-                                $q->select()->fieldRaw("'' $field");
-                            }
-                        } else {
-                            $q->select()->field($field);
-                        }
-                    }
-                }
-    
-                $q->select()->field('id');
-                $q->select()->field('assigned_user_id');
-                $q->limit = $q->offset = null;
-                $q->select()->fieldRaw("'{$module}'", 'module');
                 $query->union($q);
+
+                if (($args['add_create_record'] ?? 0) === 1 && $module === 'Audit' && empty($args['module_filters'])) {
+                    $argsForCreate = $args;
+                    $argsForCreate['filter'] = $this->moduleFilters['AuditCreate'];
+
+                    [, $q] = $this->prepareQuery($api, $argsForCreate, $module, $fields, $record, $link_name);
+                    $query->union($q);
+                }
+
                 $query->limit($options['limit'] + 1);
                 $query->offset($options['offset']);
             } catch (Exception $e) {
@@ -267,6 +236,94 @@ class HistoryApi extends RelateApi
     }
 
     /**
+     * Prepare Sugar Query
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @param string $module
+     * @param array $fields
+     * @param SugarBean $record
+     * @param string $link_name
+     * @return array
+     * @throws SugarApiExceptionNotFound
+     */
+    protected function prepareQuery(
+        ServiceBase $api,
+        array $args,
+        string $module,
+        array $fields,
+        SugarBean $record,
+        string $link_name
+    ) {
+        [$args, $q, $options] = $this->filterRelatedSetup($api, $args);
+        $q->select()->selectReset();
+        $q->orderByReset(); // ORACLE doesn't allow order by in UNION queries
+        if (!empty($args['placeholder_fields'][$module])) {
+            $newFields = array_merge($args['placeholder_fields'][$module], $fields);
+        } else {
+            $newFields = $fields;
+        }
+        if (!empty($args['alias_fields'])) {
+            $newFields = array_merge(array_keys($args['alias_fields']), $newFields);
+        }
+        sort($newFields);
+        foreach ($newFields as $field) {
+            if ($field == 'module') {
+                continue;
+            }
+            // special case for description on emails
+            if ($module == 'Emails' && $field == 'description') {
+                // ORACLE requires EMPTY_CLOB() for union queries if CLOB fields were used before
+                $q->select()->fieldRaw(DBManagerFactory::getInstance()->emptyValue('text') . ' email_description');
+            } else {
+                if (isset($args['placeholder_fields'][$module][$field])) {
+                    if ($module === 'Audit' && $field === 'assigned_user_name') {
+                        $q->select()->fieldRaw("'' rel_assigned_user_name_first_name");
+                        $q->select()->fieldRaw("'' rel_assigned_user_name_last_name");
+                        $q->select()->fieldRaw("'' assigned_user_name_owner");
+                    } else {
+                        $param = $q->getDBManager()->getValidDBName($args['placeholder_fields'][$module][$field]);
+
+                        $q->select()->fieldRaw("'' $param");
+                    }
+                } elseif (isset($args['alias_fields'][$field])) {
+                    if (isset($args['alias_fields'][$field][$module])) {
+                        if ($args['alias_fields'][$field][$module] === 'date_linked') {
+                            if ($record->load_relationship($link_name)) {
+                                $join = $q->getJoinForLink($link_name);
+                                if ($join && $join->relationshipTableAlias) {
+                                    $alias = $join->relationshipTableAlias;
+                                    $q->select()->fieldRaw("$alias.date_modified $field");
+                                } else {
+                                    // date_linked is not available for some 1:m relationships,
+                                    // fall back to date_entered
+                                    $q->select()->field([['date_entered', $field]]);
+                                }
+                            } else {
+                                $q->select()->fieldRaw("'' $field");
+                            }
+                        } else {
+                            $q->select()->field([[$args['alias_fields'][$field][$module], $field]]);
+                        }
+                    } else {
+                        $q->select()->fieldRaw("'' $field");
+                    }
+                } else {
+                    $q->select()->field($field);
+                }
+            }
+        }
+
+        $q->select()->field('id');
+        $q->select()->field('assigned_user_id');
+        $q->limit = $q->offset = null;
+        $q->select()->fieldRaw("'{$module}'", 'module');
+        $q->select()->fieldRaw("'{$link_name}'", 'link_name');
+
+        return [$args, $q, $options];
+    }
+
+    /**
      * @param array $args
      * @param array $fieldWhiteList
      * @return array
@@ -284,7 +341,7 @@ class HistoryApi extends RelateApi
                     if (!in_array($module, $this->moduleList)) {
                         throw new SugarApiExceptionInvalidParameter(sprintf('invalid module: %s', $module));
                     }
-                    if (!array_key_exists($field, $fieldWhiteList)) {
+                    if (!array_key_exists($field, $fieldWhiteList) && $field !== 'date_linked') {
                         throw new SugarApiExceptionInvalidParameter(sprintf('field: %s not found in module: %s', $field, $module));
                     }
                 }
@@ -314,11 +371,11 @@ class HistoryApi extends RelateApi
             }
         }
 
-        $fields = !empty($args['fields']) ? explode(',', $args['fields']) : array();
+        $fields = !empty($args['fields']) ? explode(',', $args['fields']) : [];
 
         foreach ($fields as $key => $field) {
             if (!array_key_exists($field, $fieldWhiteList)) {
-                if (!empty($args['ignore_field_presence']) && in_array($field, $args['ignore_field_presence'])) {
+                if (!empty($args['ignore_field_presence']) && safeInArray($field, $args['ignore_field_presence'])) {
                     continue;
                 }
                 throw new SugarApiExceptionInvalidParameter(sprintf('no one module has select field: %s', $field));
@@ -336,11 +393,12 @@ class HistoryApi extends RelateApi
 
     protected function runQuery(ServiceBase $api, array $args, SugarQuery $q, array $options, SugarBean $seed = null)
     {
-        $beans = array(
-            '_rows' => array()
-        );
+        $beans = [
+            '_rows' => [],
+        ];
+        $result = $q->execute();
 
-        foreach ($q->execute() as $row) {
+        foreach ($result as $row) {
             /** @var SugarBean $bean */
             $bean = BeanFactory::newBean($row['module']);
             if (isset($args['alias_fields'])) {
@@ -360,10 +418,11 @@ class HistoryApi extends RelateApi
         $rows = $beans['_rows'];
         unset($beans['_rows']);
 
-        $data = array();
+        $data = [];
         $data['next_offset'] = -1;
 
-        $i = 0;
+        $compensation = safeCount($result) - safeCount($beans);
+        $i = $compensation;
         foreach ($beans as $bean_id => $bean) {
             if ($i == $options['limit']) {
                 unset($beans[$bean_id]);
@@ -391,13 +450,15 @@ class HistoryApi extends RelateApi
         foreach ($data['records'] as $id => $record) {
             $data['records'][$id]['moduleNameSingular'] = $GLOBALS['app_list_strings']['moduleListSingular'][$record['_module']];
             $data['records'][$id]['moduleName'] = $GLOBALS['app_list_strings']['moduleList'][$record['_module']];
+            $data['records'][$id]['date_linked'] = $rows[$record['id']]['date_linked'] ?? '';
+            $data['records'][$id]['link_name'] = $rows[$record['id']]['link_name'] ?? '';
 
             // Have to tack on from/to/description here due to not all modules
             // having all these fields
-            if($record['_module'] == 'Emails') {
+            if ($record['_module'] == 'Emails') {
                 /* @var $q SugarQuery */
                 $q = new SugarQuery();
-                $q->select(array('description', 'from_addr', 'to_addrs'));
+                $q->select(['description', 'from_addr', 'to_addrs']);
                 $q->from(BeanFactory::newBean('EmailText'));
                 $q->where()->equals('email_id', $data['records'][$id]['id']);
                 foreach ($q->execute() as $row) {

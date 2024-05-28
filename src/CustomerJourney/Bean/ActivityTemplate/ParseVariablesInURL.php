@@ -14,7 +14,6 @@ namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\ActivityTemplate;
 
 class ParseVariablesInURL
 {
-
     /**
      * Get all the variables in an array and find out the relevant modules then
      * it will return the array of all the necessary information belonging to module
@@ -27,7 +26,7 @@ class ParseVariablesInURL
         if (empty($bodyVariables) || empty($data)) {
             return;
         }
-        
+
         //Create Parent Bean
         if (!empty($data->parent_type) && !empty($data->parent_id)) {
             $parentBean = \BeanFactory::retrieveBean($data->parent_type, $data->parent_id);
@@ -41,7 +40,7 @@ class ParseVariablesInURL
                 $journeyBean->name = $parentBean->name . ' - ' . $journeyBean->name;
             }
         }
-        
+
         //This array will contain the "module label" as a key and array of information related to the
         //module as a value.
         $moduleFields = [];
@@ -68,7 +67,7 @@ class ParseVariablesInURL
                 array_push($moduleFields, $info);
             }
         }
-        
+
         return $moduleFields;
     }
 
@@ -90,7 +89,7 @@ class ParseVariablesInURL
         $moduleName = $moduleInfo[0];
         $fieldName = $moduleInfo[1];
 
-        $info  = [];
+        $info = [];
         if (in_array($moduleName, $modules)) { //Mentioned module is valid
             switch ($moduleName) {
                 case 'parent':
@@ -102,7 +101,7 @@ class ParseVariablesInURL
                 case 'journey':
                     $info = ['module' => 'DRI_Workflows',
                         'field' => $fieldName,
-                        'field_value' => $journeyBean->{$fieldName} ?? "",
+                        'field_value' => $journeyBean->{$fieldName} ?? '',
                         'original_variable' => $originalVariable];
                     break;
                 case 'current_user':
@@ -114,13 +113,13 @@ class ParseVariablesInURL
                 case 'stage':
                     $info = ['module' => 'DRI_SubWorkflows',
                         'field' => $fieldName,
-                        'field_value' => $stageBean->{$fieldName} ?? "",
+                        'field_value' => $stageBean->{$fieldName} ?? '',
                         'original_variable' => $originalVariable];
                     break;
                 case 'activity':
                     $info = ['module' => '',
                         'field' => $fieldName,
-                        'field_value' => $data->{$fieldName} ?? "",
+                        'field_value' => $data->{$fieldName} ?? '',
                         'original_variable' => $originalVariable];
                     break;
             }

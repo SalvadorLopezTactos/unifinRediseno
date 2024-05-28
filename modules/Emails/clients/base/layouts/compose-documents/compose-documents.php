@@ -11,14 +11,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Emails']['base']['layout']['compose-documents'] = array(
-    'components' => array(
-        array(
+$viewdefs['Emails']['base']['layout']['compose-documents'] = [
+    'components' => [
+        [
             'layout' => 'selection-list',
-            'context' => array(
+            'context' => [
                 'module' => 'Documents',
-            ),
-        ),
-    ),
-);
-
+            ],
+        ],
+    ],
+];

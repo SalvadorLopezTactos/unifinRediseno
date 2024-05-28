@@ -12,15 +12,23 @@
  */
 
 
-class ext_eapm_lotuslive extends source {
-	protected $_enable_in_wizard = false;
-	protected $_enable_in_hover = false;
-	protected $_has_testing_enabled = false;
+class ext_eapm_lotuslive extends source
+{
+    // @codingStandardsIgnoreStart PSR2.Classes.PropertyDeclaration.Underscore
+    protected $_enable_in_wizard = false;
+    protected $_enable_in_hover = false;
+    protected $_has_testing_enabled = false;
+    // @codingStandardsIgnoreEnd PSR2.Classes.PropertyDeclaration.Underscore
 
     // DEPRECATED in favor of IBM SmartCloud
     protected $_enable_in_admin_display = false;
     protected $_enable_in_admin_properties = false;
 
-	public function getItem($args=array(), $module=null){}
-	public function getList($args=array(), $module=null) {}
+    public function getItem($args = [], $module = null)
+    {
+    }
+
+    public function getList($args = [], $module = null)
+    {
+    }
 }

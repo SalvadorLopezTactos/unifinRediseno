@@ -12,19 +12,19 @@
  */
 
 /*********************************************************************************
-* Description:
-* Portions created by SugarCRM are Copyright (C) SugarCRM, Inc. All Rights
-* Reserved. Contributor(s): contact@synolia.com - www.synolia.com
-* *******************************************************************************/
+ * Description:
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc. All Rights
+ * Reserved. Contributor(s): contact@synolia.com - www.synolia.com
+ * *******************************************************************************/
 
-$config = array (
-  'name' => 'Twitter',
-  'eapm' => array(
-    'enabled' => true,
-  ),
-  'order' => 5,
-  'properties' => array (
-      'oauth_consumer_key' => '',
-      'oauth_consumer_secret' => '',
-      ),
-);
+$config = [
+    'name' => 'Twitter',
+    'eapm' => [
+        'enabled' => true,
+    ],
+    'order' => 5,
+    'properties' => [
+        'oauth_consumer_key' => '',
+        'oauth_consumer_secret' => '',
+    ],
+];

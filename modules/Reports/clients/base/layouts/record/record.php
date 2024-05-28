@@ -10,9 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['Reports']['base']['layout']['record'] = [
-    'css_class' => 'report-record-container flex-records-layout',
-    'components' =>
-    [
+    'css_class' => 'report-record-container flex-records-layout overflow-x-hidden overflow-y-auto',
+    'components' => [
         [
             'view' => 'report-header',
             'primary' => true,

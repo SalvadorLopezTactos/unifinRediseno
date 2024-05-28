@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Definicije procesa',
-  'LBL_MODULE_TITLE' => 'Definicije procesa',
-  'LBL_MODULE_NAME_SINGULAR' => 'Definicija procesa',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Definicije procesa',
+    'LBL_MODULE_TITLE' => 'Definicije procesa',
+    'LBL_MODULE_NAME_SINGULAR' => 'Definicija procesa',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za definicije procesa',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za definicije procesa',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o definicijama procesa',
-  'LNK_LIST' => 'Prikaži definicije procesa',
-  'LNK_NEW_PMSE_PROJECT' => 'Stvori definiciju procesa',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Uvezi definicije procesa',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o definicijama procesa',
+    'LNK_LIST' => 'Prikaži definicije procesa',
+    'LNK_NEW_PMSE_PROJECT' => 'Stvori definiciju procesa',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Uvezi definicije procesa',
 
-  'LBL_PRJ_STATUS' => 'Status',
-  'LBL_PRJ_MODULE' => 'Modul meta',
-  'LBL_PRJ_RUN_ORDER' => 'Redoslijed izvršavanja',
-  'LBL_PMSE_BUTTON_SAVE' => 'Spremi',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Odustani',
-  'LBL_PMSE_BUTTON_YES' => 'Da',
-  'LBL_PMSE_BUTTON_NO' => 'Ne',
-  'LBL_PMSE_BUTTON_OK' => 'U redu',
+    'LBL_PRJ_STATUS' => 'Status',
+    'LBL_PRJ_MODULE' => 'Modul meta',
+    'LBL_PRJ_RUN_ORDER' => 'Redoslijed izvršavanja',
+    'LBL_PMSE_BUTTON_SAVE' => 'Spremi',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Odustani',
+    'LBL_PMSE_BUTTON_YES' => 'Da',
+    'LBL_PMSE_BUTTON_NO' => 'Ne',
+    'LBL_PMSE_BUTTON_OK' => 'U redu',
     'LBL_PMSE_FORM_ERROR' => 'Prije nastavka riješite sve pogreške.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Oblikuj',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktivnost',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Radnja',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Početni događaj poten. klijenta',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Početni događaj za priliku' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Početni događaj za priliku',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Početni događaj za dokument',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Početni događaj',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Događaj čekanja',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Poslovno pravilo',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Radnja u vezi s poslovnim pravilom',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Predložak e-pošte',
-);
+];

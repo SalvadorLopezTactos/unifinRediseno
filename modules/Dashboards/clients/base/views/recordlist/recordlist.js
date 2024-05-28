@@ -19,6 +19,22 @@
     /**
      * @inheritdoc
      */
+    initialize: function(options) {
+        this._super('initialize', [options]);
+
+        this._initProperties();
+    },
+
+    /**
+     * Property initialization
+     */
+    _initProperties: function() {
+        this._fieldsToFetch = ['is_template'];
+    },
+
+    /**
+     * @inheritdoc
+     */
     getDeleteMessages: function(model) {
         var messages = {};
         var modelName = app.lang.get(model.get('name'), model.get('dashboard_module'));

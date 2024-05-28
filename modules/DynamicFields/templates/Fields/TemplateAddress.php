@@ -100,7 +100,7 @@ class TemplateAddress extends TemplateField
         $fields = $this->createFields();
         foreach ($fields as $addressFieldName => $addressField) {
             // Use the entered label value as a prefix instead of the field name
-            $parser->handleSave(["label_" . $addressField->label => $labelValue . $addressFieldName], $GLOBALS['current_language']);
+            $parser->handleSave(['label_' . $addressField->label => $labelValue . $addressFieldName], $GLOBALS['current_language']);
             $addressField->save($dynamicField);
         }
 

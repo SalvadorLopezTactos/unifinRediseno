@@ -13,7 +13,7 @@
 {{#if value}}
     {{#eachOptions items}}
         {{#eq this.key ../value}}
-            <div class="ellipsis_inline" data-placement="bottom" title="{{value}}{{#if ../../showFactorField}} ({{str ../../../factorFieldLabel ../../../module}} = {{../../../factorValue}}){{/if}}">
+            <div class="ellipsis_inline" data-bs-placement="bottom" title="{{value}}{{#if ../../showFactorField}} ({{str ../../../factorFieldLabel ../../../module}} = {{../../../factorValue}}){{/if}}">
                 {{value}}
                 {{#if ../../showFactorField}}
                     &nbsp;({{str ../../../factorFieldLabel ../../../module}} = {{../../../factorValue}})

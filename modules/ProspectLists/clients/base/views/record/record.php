@@ -16,19 +16,19 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$viewdefs['ProspectLists']['base']['view']['record'] = array(
-    'buttons' => array(
-        array(
+$viewdefs['ProspectLists']['base']['view']['record'] = [
+    'buttons' => [
+        [
             'type' => 'button',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
-            'events' => array(
+            'events' => [
                 'click' => 'button:cancel_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
             'name' => 'save_button',
@@ -36,158 +36,158 @@ $viewdefs['ProspectLists']['base']['view']['record'] = array(
             'css_class' => 'btn btn-primary',
             'showOn' => 'edit',
             'acl_action' => 'edit',
-        ),
-        array(
+        ],
+        [
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
             'primary' => true,
             'showOn' => 'view',
-            'buttons' => array(
-                array(
+            'buttons' => [
+                [
                     'type' => 'rowaction',
                     'event' => 'button:edit_button:click',
                     'name' => 'edit_button',
                     'label' => 'LBL_EDIT_BUTTON_LABEL',
                     'acl_action' => 'edit',
-                ),
-                array(
+                ],
+                [
                     'type' => 'shareaction',
                     'name' => 'share',
                     'label' => 'LBL_RECORD_SHARE_BUTTON',
                     'acl_action' => 'view',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'event' => 'button:export_button:click',
                     'name' => 'export_button',
                     'label' => 'LBL_EXPORT',
                     'acl_action' => 'export',
-                ),
-                array(
+                ],
+                [
                     'type' => 'divider',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'event' => 'button:duplicate_button:click',
                     'name' => 'duplicate_button',
                     'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
                     'acl_module' => 'ProspectLists',
                     'acl_action' => 'create',
-                ),
-                array(
+                ],
+                [
                     'type' => 'divider',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'event' => 'button:delete_button:click',
                     'name' => 'delete_button',
                     'label' => 'LBL_DELETE_BUTTON_LABEL',
                     'acl_action' => 'delete',
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-    'panels' => array(
-        array(
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_header',
             'header' => true,
-            'fields' => array(
-                array(
-                    'name'          => 'picture',
-                    'type'          => 'avatar',
-                    'size'          => 'large',
+            'fields' => [
+                [
+                    'name' => 'picture',
+                    'type' => 'avatar',
+                    'size' => 'large',
                     'dismiss_label' => true,
-                    'readonly'      => true,
-                ),
+                    'readonly' => true,
+                ],
                 'name',
-                array(
+                [
                     'name' => 'favorite',
                     'label' => 'LBL_FAVORITE',
                     'type' => 'favorite',
                     'dismiss_label' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'follow',
-                    'label'=> 'LBL_FOLLOW',
+                    'label' => 'LBL_FOLLOW',
                     'type' => 'follow',
                     'readonly' => true,
                     'dismiss_label' => true,
-                ),
-            )
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'description',
                     'span' => 12,
-                ),
-                array(
+                ],
+                [
                     'name' => 'list_type',
-                    'displayParams' => array('required' => true),
+                    'displayParams' => ['required' => true],
                     'span' => 12,
-                ),
-                array(
+                ],
+                [
                     'name' => 'entry_count',
                     'label' => 'LBL_ENTRIES',
                     'readonly' => true,
-                ),
+                ],
                 'domain_name',
                 'assigned_user_name',
-                array(
+                [
                     'name' => 'date_modified_by',
                     'readonly' => true,
                     'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_MODIFIED',
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'date_modified',
-                        ),
-                        array(
+                        ],
+                        [
                             'type' => 'label',
-                            'default_value' => 'LBL_BY'
-                        ),
-                        array(
+                            'default_value' => 'LBL_BY',
+                        ],
+                        [
                             'name' => 'modified_by_name',
-                        ),
-                    ),
-                ),
-                array(
-                    "type" => "teamset",
-                    "name" => "team_name"
-                ),
-                array(
+                        ],
+                    ],
+                ],
+                [
+                    'type' => 'teamset',
+                    'name' => 'team_name',
+                ],
+                [
                     'name' => 'date_entered_by',
                     'readonly' => true,
                     'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_ENTERED',
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'date_entered',
-                        ),
-                        array(
+                        ],
+                        [
                             'type' => 'label',
-                            'default_value' => 'LBL_BY'
-                        ),
-                        array(
+                            'default_value' => 'LBL_BY',
+                        ],
+                        [
                             'name' => 'created_by_name',
-                        ),
-                    ),
-                ),
-                array(
+                        ],
+                    ],
+                ],
+                [
                     'name' => 'tag',
                     'span' => 12,
-                ),
-            )
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

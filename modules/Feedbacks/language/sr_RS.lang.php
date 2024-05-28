@@ -13,7 +13,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FEEDBACK_TEXT_PLACEHOLDER' => 'Opis povratnih informacija',
     'LBL_FEEDBACK_BTN_SUBMIT' => 'Pošalji',
     'LBL_FEEDBACK_SENT' => 'Povratna informacija je poslata.',
@@ -23,4 +23,4 @@ $mod_strings = array(
     'TPL_FEEDBACK_ASIDE' => 'Mi sakupljamo podatke o korišćenju u trenutku podnošenja. {{learnMoreLink}}. Mi ne sakupljamo kontakt informacije. Molim {{contactSupportLink}} zbog bagova ili drugih problema koji zahtevaju rešenje.',
     'LBL_FEEDBACK_ASIDE_CLICK_MORE' => 'Kliknuti ovde kako biste saznali više',
     'LBL_FEEDBACK_ASIDE_CONTACT_SUPPORT' => 'kontaktirati Podršku',
-);
+];

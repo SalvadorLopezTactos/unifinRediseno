@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\UserUtils\Managers;
 
 use Sugarcrm\Sugarcrm\UserUtils\Invoker\payloads\InvokerBasePayload;
@@ -79,7 +80,7 @@ class ScheduledReportingManager extends Manager
         $this->sourceUser = $payload->getSourceUser();
         $this->destinationUsers = $payload->getDestinationUsers();
 
-        if (count($this->destinationUsers) > self::MAX_USER) {
+        if (safeCount($this->destinationUsers) > self::MAX_USER) {
             $this->useScheduledJob = true;
         }
     }

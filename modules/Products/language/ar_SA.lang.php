@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'لوحة معلومات قائمة البنود المسعرة',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'لوحة معلومات سجل البنود المسعرة',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم البنود المسعرة',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني للبند المسعر',
 
     'LBL_CAMPAIGN_PRODUCT' => 'حملة البند المسعر',
     'LBL_MODULE_NAME' => 'البنود المسعرة',
@@ -183,4 +184,4 @@ $mod_strings = array(
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (بنود مسعرة جديدة)',
     'LBL_DISCOUNT_PERCENT' => '% بالمائة',
     'LBL_DISCOUNT_TYPE' => 'نوع الخصم',
-);
+];

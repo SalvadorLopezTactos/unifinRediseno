@@ -18,7 +18,7 @@ class SugarQuery_Builder_Join
     /**
      * @var array
      */
-    public $options = array();
+    public $options = [];
 
     /**
      * @var null|string|SugarQuery
@@ -63,7 +63,7 @@ class SugarQuery_Builder_Join
      * @param array $options
      * @throws SugarQueryException
      */
-    public function __construct($table, array $options = array())
+    public function __construct($table, array $options = [])
     {
         if (!is_string($table) && !isset($options['alias'])) {
             throw new SugarQueryException('Joined sub-query must have alias');
@@ -75,9 +75,9 @@ class SugarQuery_Builder_Join
         unset($options['bean']);
         $this->relatedJoin = !empty($options['relatedJoin']) ? $options['relatedJoin'] : false;
         unset($options['relatedJoin']);
-        $this->options = array_merge(array(
+        $this->options = array_merge([
             'joinType' => 'INNER',
-        ), $options);
+        ], $options);
     }
 
     /**
@@ -160,7 +160,7 @@ class SugarQuery_Builder_Join
         return $this->table;
     }
 
-    public function join($link, $options = array())
+    public function join($link, $options = [])
     {
         $options['relatedJoin'] = $this->options['alias'];
         return $this->query->join($link, $options);

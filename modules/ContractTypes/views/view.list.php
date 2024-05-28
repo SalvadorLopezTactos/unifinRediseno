@@ -9,18 +9,17 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /*********************************************************************************
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-
-
-class ContractTypesViewList extends ViewList {
- 	function preDisplay(){
- 		parent::preDisplay();
- 		$this->lv->showMassupdateFields=false;
- 		
- 	}
+class ContractTypesViewList extends ViewList
+{
+    public function preDisplay()
+    {
+        parent::preDisplay();
+        $this->lv->showMassupdateFields = false;
+    }
 }
-?>

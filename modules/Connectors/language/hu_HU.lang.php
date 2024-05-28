@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Hozzáadás',
     'LBL_ADDRCITY' => 'Város',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Info' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Zárás' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'Nem található csatlakozó a megadott forrásazonosítóhoz.',
-);
-
+];

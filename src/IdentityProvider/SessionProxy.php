@@ -40,8 +40,8 @@ class SessionProxy implements SessionInterface
 
     /**
      * Unsupported method.
-     * @throws \LogicException
      * @param string $id
+     * @throws \LogicException
      */
     public function setId($id)
     {
@@ -66,8 +66,8 @@ class SessionProxy implements SessionInterface
 
     /**
      * Unsupported method.
-     * @throws \LogicException
      * @param null $lifetime
+     * @throws \LogicException
      */
     public function invalidate($lifetime = null)
     {
@@ -76,9 +76,9 @@ class SessionProxy implements SessionInterface
 
     /**
      * Unsupported method.
-     * @throws \LogicException
      * @param bool|false $destroy
      * @param null $lifetime
+     * @throws \LogicException
      */
     public function migrate($destroy = false, $lifetime = null)
     {
@@ -167,8 +167,8 @@ class SessionProxy implements SessionInterface
 
     /**
      * Unsupported method.
-     * @throws \LogicException
      * @param SessionBagInterface $bag
+     * @throws \LogicException
      */
     public function registerBag(SessionBagInterface $bag)
     {
@@ -177,8 +177,8 @@ class SessionProxy implements SessionInterface
 
     /**
      * Unsupported method.
-     * @throws \LogicException
      * @param string $name
+     * @throws \LogicException
      */
     public function getBag($name)
     {

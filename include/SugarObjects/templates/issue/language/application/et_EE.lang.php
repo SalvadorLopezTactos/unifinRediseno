@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'Administratsioon',
-    'Product' => 'Toode',
-    'User' => 'Kasutaja',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => 'Uus',
-    'Assigned' => 'Määratud',
-    'Closed' => 'Suletud',
-    'Pending Input' => 'Ootel sisend',
-    'Rejected' => 'Tagasi lükatud',
-    'Duplicate' => 'Duplikaat',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => 'Kõrge',
-    'P2' => 'Keskmine',
-    'P3' => 'Madal',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => 'Aktsepteeritud',
-    'Duplicate' => 'Duplikaat',
-    'Closed' => 'Suletud',
-    'Out of Date' => 'Aegunud',
-    'Invalid' => 'Kehtetu',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => 'Administratsioon',
+        'Product' => 'Toode',
+        'User' => 'Kasutaja',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => 'Uus',
+        'Assigned' => 'Määratud',
+        'Closed' => 'Suletud',
+        'Pending Input' => 'Ootel sisend',
+        'Rejected' => 'Tagasi lükatud',
+        'Duplicate' => 'Duplikaat',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => 'Suur',
+        'P2' => 'Keskmine',
+        'P3' => 'Väike',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => 'Aktsepteeritud',
+        'Duplicate' => 'Duplikaat',
+        'Closed' => 'Suletud',
+        'Out of Date' => 'Aegunud',
+        'Invalid' => 'Kehtetu',
+    ],
+];

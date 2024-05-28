@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Personvern for data',
     'LBL_MODULE_NAME_SINGULAR' => 'Personvern for data',
     'LBL_NUMBER' => 'Nummer',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Ingen felt eller poster er merket for sletting.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Personvernpostdashbord',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Datavern fokusskuff',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje for personvern',
 
     // list view
     'LBL_HELP_RECORDS' => 'Personvernmodulen sporer personvernaktiviteter, inkludert forespørsler om samtykke og navn, for å støtte organisasjonens personvernprosedyrer. Opprett personvernposter relatert til en persons post (f.eks. en kontakt) for å spore samtykke eller handle med en personvernforespørsel.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Personvernmodulen sporer personvernaktiviteter sporer personvernaktiviteter, inkludert forespørsler om samtykke og navn, for å støtte organisasjonens personvernaktiviteter. Opprett personvernposter relatert til en persons post (f.eks. en kontakt) for å spore samtykke eller handle ved en personvernforespørsel. Så snart den nødvendige handlingen er fullført, kan brukere i personvernsjefrollen klikke "Fullfør" eller "Avvis" for å oppdatere statusen.
 
 For slettingsforespørsler velger du "Merk for sletting" for hver av personenes poster oppført i underpanelene nedenfor. Så snart alle ønskede felt er valgt, vil det å klikke "Slett og fullført" permanent fjerne feltverdiene og merke personvernposten som fullført.',
-);
+];

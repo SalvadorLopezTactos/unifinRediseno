@@ -22,41 +22,11 @@ namespace Beta\Microsoft\Graph\ManagedTenants\Model;
 * @license   https://opensource.org/licenses/MIT MIT License
 * @link      https://graph.microsoft.com
 */
-class CloudPcOverview implements \JsonSerializable
+class CloudPcOverview extends \Beta\Microsoft\Graph\Model\Entity
 {
     /**
-    * The array of properties available
-    * to the model
-    *
-    * @var array $_propDict
-    */
-    protected $_propDict;
-    
-    /**
-    * Construct a new CloudPcOverview
-    *
-    * @param array $propDict A list of properties to set
-    */
-    function __construct($propDict = array())
-    {
-        if (!is_array($propDict)) {
-           $propDict = array();
-        }
-        $this->_propDict = $propDict;
-    }
-
-    /**
-    * Gets the property dictionary of the CloudPcOverview
-    *
-    * @return array The list of properties
-    */
-    public function getProperties()
-    {
-        return $this->_propDict;
-    }
-    
-    /**
     * Gets the lastRefreshedDateTime
+    * Date and time the entity was last updated in the multi-tenant management platform. Optional. Read-only.
     *
     * @return \DateTime|null The lastRefreshedDateTime
     */
@@ -72,9 +42,10 @@ class CloudPcOverview implements \JsonSerializable
         }
         return null;
     }
-    
+
     /**
     * Sets the lastRefreshedDateTime
+    * Date and time the entity was last updated in the multi-tenant management platform. Optional. Read-only.
     *
     * @param \DateTime $val The lastRefreshedDateTime
     *
@@ -85,9 +56,10 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["lastRefreshedDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the numberOfCloudPcConnectionStatusFailed
+    * The number of cloud PC connections that have a status of failed. Optional. Read-only.
     *
     * @return int|null The numberOfCloudPcConnectionStatusFailed
     */
@@ -99,9 +71,10 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the numberOfCloudPcConnectionStatusFailed
+    * The number of cloud PC connections that have a status of failed. Optional. Read-only.
     *
     * @param int $val The numberOfCloudPcConnectionStatusFailed
     *
@@ -112,9 +85,10 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["numberOfCloudPcConnectionStatusFailed"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the numberOfCloudPcConnectionStatusPassed
+    * The number of cloud PC connections that have a status of passed. Optional. Read-only.
     *
     * @return int|null The numberOfCloudPcConnectionStatusPassed
     */
@@ -126,9 +100,10 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the numberOfCloudPcConnectionStatusPassed
+    * The number of cloud PC connections that have a status of passed. Optional. Read-only.
     *
     * @param int $val The numberOfCloudPcConnectionStatusPassed
     *
@@ -139,9 +114,10 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["numberOfCloudPcConnectionStatusPassed"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the numberOfCloudPcConnectionStatusPending
+    * The number of cloud PC connections that have a status of pending. Optional. Read-only.
     *
     * @return int|null The numberOfCloudPcConnectionStatusPending
     */
@@ -153,9 +129,10 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the numberOfCloudPcConnectionStatusPending
+    * The number of cloud PC connections that have a status of pending. Optional. Read-only.
     *
     * @param int $val The numberOfCloudPcConnectionStatusPending
     *
@@ -166,9 +143,10 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["numberOfCloudPcConnectionStatusPending"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the numberOfCloudPcConnectionStatusRunning
+    * The number of cloud PC connections that have a status of running. Optional. Read-only.
     *
     * @return int|null The numberOfCloudPcConnectionStatusRunning
     */
@@ -180,9 +158,10 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the numberOfCloudPcConnectionStatusRunning
+    * The number of cloud PC connections that have a status of running. Optional. Read-only.
     *
     * @param int $val The numberOfCloudPcConnectionStatusRunning
     *
@@ -193,9 +172,10 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["numberOfCloudPcConnectionStatusRunning"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the numberOfCloudPcConnectionStatusUnkownFutureValue
+    * The number of cloud PC connections that have a status of unknownFutureValue. Optional. Read-only.
     *
     * @return int|null The numberOfCloudPcConnectionStatusUnkownFutureValue
     */
@@ -207,9 +187,10 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the numberOfCloudPcConnectionStatusUnkownFutureValue
+    * The number of cloud PC connections that have a status of unknownFutureValue. Optional. Read-only.
     *
     * @param int $val The numberOfCloudPcConnectionStatusUnkownFutureValue
     *
@@ -220,9 +201,10 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["numberOfCloudPcConnectionStatusUnkownFutureValue"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the numberOfCloudPcStatusDeprovisioning
+    * The number of cloud PCs that have a status of deprovisioning. Optional. Read-only.
     *
     * @return int|null The numberOfCloudPcStatusDeprovisioning
     */
@@ -234,9 +216,10 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the numberOfCloudPcStatusDeprovisioning
+    * The number of cloud PCs that have a status of deprovisioning. Optional. Read-only.
     *
     * @param int $val The numberOfCloudPcStatusDeprovisioning
     *
@@ -247,9 +230,10 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["numberOfCloudPcStatusDeprovisioning"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the numberOfCloudPcStatusFailed
+    * The number of cloud PCs that have a status of failed. Optional. Read-only.
     *
     * @return int|null The numberOfCloudPcStatusFailed
     */
@@ -261,9 +245,10 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the numberOfCloudPcStatusFailed
+    * The number of cloud PCs that have a status of failed. Optional. Read-only.
     *
     * @param int $val The numberOfCloudPcStatusFailed
     *
@@ -274,9 +259,10 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["numberOfCloudPcStatusFailed"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the numberOfCloudPcStatusInGracePeriod
+    * The number of cloud PCs that have a status of inGracePeriod. Optional. Read-only.
     *
     * @return int|null The numberOfCloudPcStatusInGracePeriod
     */
@@ -288,9 +274,10 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the numberOfCloudPcStatusInGracePeriod
+    * The number of cloud PCs that have a status of inGracePeriod. Optional. Read-only.
     *
     * @param int $val The numberOfCloudPcStatusInGracePeriod
     *
@@ -301,9 +288,10 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["numberOfCloudPcStatusInGracePeriod"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the numberOfCloudPcStatusNotProvisioned
+    * The number of cloud PCs that have a status of notProvisioned. Optional. Read-only.
     *
     * @return int|null The numberOfCloudPcStatusNotProvisioned
     */
@@ -315,9 +303,10 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the numberOfCloudPcStatusNotProvisioned
+    * The number of cloud PCs that have a status of notProvisioned. Optional. Read-only.
     *
     * @param int $val The numberOfCloudPcStatusNotProvisioned
     *
@@ -328,9 +317,10 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["numberOfCloudPcStatusNotProvisioned"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the numberOfCloudPcStatusProvisioned
+    * The number of cloud PCs that have a status of provisioned. Optional. Read-only.
     *
     * @return int|null The numberOfCloudPcStatusProvisioned
     */
@@ -342,9 +332,10 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the numberOfCloudPcStatusProvisioned
+    * The number of cloud PCs that have a status of provisioned. Optional. Read-only.
     *
     * @param int $val The numberOfCloudPcStatusProvisioned
     *
@@ -355,9 +346,10 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["numberOfCloudPcStatusProvisioned"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the numberOfCloudPcStatusProvisioning
+    * The number of cloud PCs that have a status of provisioning. Optional. Read-only.
     *
     * @return int|null The numberOfCloudPcStatusProvisioning
     */
@@ -369,9 +361,10 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the numberOfCloudPcStatusProvisioning
+    * The number of cloud PCs that have a status of provisioning. Optional. Read-only.
     *
     * @param int $val The numberOfCloudPcStatusProvisioning
     *
@@ -382,9 +375,10 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["numberOfCloudPcStatusProvisioning"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the numberOfCloudPcStatusUnknown
+    * The number of cloud PCs that have a status of unknown. Optional. Read-only.
     *
     * @return int|null The numberOfCloudPcStatusUnknown
     */
@@ -396,9 +390,10 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the numberOfCloudPcStatusUnknown
+    * The number of cloud PCs that have a status of unknown. Optional. Read-only.
     *
     * @param int $val The numberOfCloudPcStatusUnknown
     *
@@ -409,9 +404,10 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["numberOfCloudPcStatusUnknown"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the numberOfCloudPcStatusUpgrading
+    * The number of cloud PCs that have a status of upgrading. Optional. Read-only.
     *
     * @return int|null The numberOfCloudPcStatusUpgrading
     */
@@ -423,9 +419,10 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the numberOfCloudPcStatusUpgrading
+    * The number of cloud PCs that have a status of upgrading. Optional. Read-only.
     *
     * @param int $val The numberOfCloudPcStatusUpgrading
     *
@@ -436,9 +433,10 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["numberOfCloudPcStatusUpgrading"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the tenantDisplayName
+    * The display name for the managed tenant. Optional. Read-only.
     *
     * @return string|null The tenantDisplayName
     */
@@ -450,9 +448,10 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the tenantDisplayName
+    * The display name for the managed tenant. Optional. Read-only.
     *
     * @param string $val The tenantDisplayName
     *
@@ -463,7 +462,7 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["tenantDisplayName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the tenantId
     *
@@ -477,7 +476,7 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the tenantId
     *
@@ -490,9 +489,39 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["tenantId"] = $val;
         return $this;
     }
-    
+
+    /**
+    * Gets the totalBusinessLicenses
+    * The total number of cloud PC devices that have the Business SKU. Optional. Read-only.
+    *
+    * @return int|null The totalBusinessLicenses
+    */
+    public function getTotalBusinessLicenses()
+    {
+        if (array_key_exists("totalBusinessLicenses", $this->_propDict)) {
+            return $this->_propDict["totalBusinessLicenses"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the totalBusinessLicenses
+    * The total number of cloud PC devices that have the Business SKU. Optional. Read-only.
+    *
+    * @param int $val The totalBusinessLicenses
+    *
+    * @return CloudPcOverview
+    */
+    public function setTotalBusinessLicenses($val)
+    {
+        $this->_propDict["totalBusinessLicenses"] = intval($val);
+        return $this;
+    }
+
     /**
     * Gets the totalCloudPcConnectionStatus
+    * The total number of cloud PC connection statuses for the given managed tenant. Optional. Read-only.
     *
     * @return int|null The totalCloudPcConnectionStatus
     */
@@ -504,9 +533,10 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the totalCloudPcConnectionStatus
+    * The total number of cloud PC connection statuses for the given managed tenant. Optional. Read-only.
     *
     * @param int $val The totalCloudPcConnectionStatus
     *
@@ -517,9 +547,10 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["totalCloudPcConnectionStatus"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the totalCloudPcStatus
+    * The total number of cloud PC statues for the given managed tenant. Optional. Read-only.
     *
     * @return int|null The totalCloudPcStatus
     */
@@ -531,9 +562,10 @@ class CloudPcOverview implements \JsonSerializable
             return null;
         }
     }
-    
+
     /**
     * Sets the totalCloudPcStatus
+    * The total number of cloud PC statues for the given managed tenant. Optional. Read-only.
     *
     * @param int $val The totalCloudPcStatus
     *
@@ -544,46 +576,34 @@ class CloudPcOverview implements \JsonSerializable
         $this->_propDict["totalCloudPcStatus"] = intval($val);
         return $this;
     }
-    
+
     /**
-    * Gets the ODataType
+    * Gets the totalEnterpriseLicenses
+    * The total number of cloud PC devices that have the Enterprise SKU. Optional. Read-only.
     *
-    * @return string The ODataType
+    * @return int|null The totalEnterpriseLicenses
     */
-    public function getODataType()
+    public function getTotalEnterpriseLicenses()
     {
-        return $this->_propDict["@odata.type"];
+        if (array_key_exists("totalEnterpriseLicenses", $this->_propDict)) {
+            return $this->_propDict["totalEnterpriseLicenses"];
+        } else {
+            return null;
+        }
     }
-    
+
     /**
-    * Sets the ODataType
+    * Sets the totalEnterpriseLicenses
+    * The total number of cloud PC devices that have the Enterprise SKU. Optional. Read-only.
     *
-    * @param string $val The ODataType
+    * @param int $val The totalEnterpriseLicenses
     *
     * @return CloudPcOverview
     */
-    public function setODataType($val)
+    public function setTotalEnterpriseLicenses($val)
     {
-        $this->_propDict["@odata.type"] = $val;
+        $this->_propDict["totalEnterpriseLicenses"] = intval($val);
         return $this;
     }
-    
-    /**
-    * Serializes the object by property array
-    * Manually serialize DateTime into RFC3339 format
-    *
-    * @return array The list of properties
-    */
-    public function jsonSerialize()
-    {
-        $serializableProperties = $this->getProperties();
-        foreach ($serializableProperties as $property => $val) {
-            if (is_a($val, "\DateTime")) {
-                $serializableProperties[$property] = $val->format(\DateTime::RFC3339);
-            } else if (is_a($val, "\Microsoft\Graph\Core\Enum")) {
-                $serializableProperties[$property] = $val->value();
-            }
-        }
-        return $serializableProperties;
-    }
+
 }

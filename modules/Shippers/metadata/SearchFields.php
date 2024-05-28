@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $searchFields['Shippers'] =
-    array (
-        'name' => array('query_type'=>'default')
-    );
-?>
+    [
+        'name' => ['query_type' => 'default'],
+    ];

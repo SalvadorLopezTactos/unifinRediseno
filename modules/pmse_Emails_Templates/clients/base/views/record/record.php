@@ -97,7 +97,7 @@ $viewdefs['pmse_Emails_Templates']['base']['view']['record'] = [
             'name' => 'panel_header',
             'label' => 'LBL_RECORD_HEADER',
             'header' => true,
-            'fields' =>[
+            'fields' => [
                 [
                     'name' => 'picture',
                     'type' => 'avatar',

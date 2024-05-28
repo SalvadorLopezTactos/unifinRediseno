@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Получете ключ и таен ключ от IBM SmartCloud, като регистрирате Вашата инсталация на Sugar като ново приложение. Ще имате възможност за регистриране от 8 май 2011 г.<br>
 &nbsp;<br>
 Стъпки за регистриране на Вашата инсталация:<br>
@@ -28,5 +28,4 @@ $connector_strings = array (
 </td></tr></table>',
     'oauth_consumer_key' => 'Потребителски OAuth ключ',
     'oauth_consumer_secret' => 'Потребителски OAuth таен ключ',
-);
-
+];

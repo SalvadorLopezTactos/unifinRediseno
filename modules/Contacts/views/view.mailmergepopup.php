@@ -12,25 +12,27 @@
 
 /**
  * ContactsViewContactAddressPopup
- * 
+ *
  * */
- 
-require_once('modules/Contacts/Popup_picker.php');
 
-class ContactsViewMailMergePopup extends SugarView {
+require_once 'modules/Contacts/Popup_picker.php';
+
+class ContactsViewMailMergePopup extends SugarView
+{
     /**
      * {@inheritDoc}
      *
      * @param array $params Ignored
      */
-    public function process($params = array())
+    public function process($params = [])
     {
-		$this->display();
- 	}
+        $this->display();
+    }
 
- 	function display() {
- 		
-		$popup = new Popup_Picker();
-		echo $popup->process_page_for_merge();
- 	}	
+    public function display()
+    {
+
+        $popup = new Popup_Picker();
+        echo $popup->process_page_for_merge();
+    }
 }

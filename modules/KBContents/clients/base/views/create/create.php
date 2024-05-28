@@ -10,80 +10,80 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['KBContents']['base']['view']['create'] = array(
+$viewdefs['KBContents']['base']['view']['create'] = [
     'template' => 'record',
-    'buttons' => array(
-        array(
+    'buttons' => [
+        [
             'name' => 'cancel_button',
             'type' => 'button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
-            'events' => array(
+            'events' => [
                 'click' => 'button:cancel_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'restore_button',
             'type' => 'button',
             'label' => 'LBL_RESTORE',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'select',
-            'events' => array(
+            'events' => [
                 'click' => 'button:restore_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
             'primary' => true,
             'switch_on_click' => true,
             'showOn' => 'create',
-            'buttons' => array(
-                array(
+            'buttons' => [
+                [
                     'type' => 'rowaction',
                     'name' => 'save_button',
                     'label' => 'LBL_SAVE_BUTTON_LABEL',
-                    'events' => array(
+                    'events' => [
                         'click' => 'button:save_button:click',
-                    ),
-                ),
-            ),
-        ),
-        array(
+                    ],
+                ],
+            ],
+        ],
+        [
             'type' => 'actiondropdown',
             'name' => 'duplicate_dropdown',
             'primary' => true,
             'showOn' => 'duplicate',
-            'buttons' => array(
-                array(
+            'buttons' => [
+                [
                     'type' => 'rowaction',
                     'name' => 'duplicate_button',
                     'label' => 'LBL_IGNORE_DUPLICATE_AND_SAVE',
-                    'events' => array(
+                    'events' => [
                         'click' => 'button:save_button:click',
-                    ),
-                ),
-            ),
-        ),
-        array(
+                    ],
+                ],
+            ],
+        ],
+        [
             'type' => 'actiondropdown',
             'name' => 'select_dropdown',
             'primary' => true,
             'showOn' => 'select',
-            'buttons' => array(
-                array(
+            'buttons' => [
+                [
                     'type' => 'rowaction',
                     'name' => 'select_button',
                     'label' => 'LBL_SAVE_BUTTON_LABEL',
-                    'events' => array(
+                    'events' => [
                         'click' => 'button:save_button:click',
-                    ),
-                ),
-            ),
-        ),
-        array(
+                    ],
+                ],
+            ],
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

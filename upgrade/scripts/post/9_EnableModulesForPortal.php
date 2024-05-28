@@ -28,7 +28,7 @@ class SugarUpgradeEnableModulesForPortal extends UpgradeScript
         $allowedActions = ['edit', 'admin', 'access', 'list', 'view'];
 
         $role = BeanFactory::newBean('ACLRoles');
-        $role->retrieve_by_string_fields(array('name' => 'Customer Self-Service Portal Role'));
+        $role->retrieve_by_string_fields(['name' => 'Customer Self-Service Portal Role']);
 
         if (!empty($role->id)) { // 'role id not empty' means portal has been enabled before
             $roleActions = $role->getRoleActions($role->id);
@@ -69,7 +69,7 @@ class SugarUpgradeEnableModulesForPortal extends UpgradeScript
      */
     protected function getPortalUser()
     {
-        $portalUserName = "SugarCustomerSupportPortalUser";
+        $portalUserName = 'SugarCustomerSupportPortalUser';
         $id = BeanFactory::newBean('Users')->retrieve_user_id($portalUserName);
         if ($id) {
             $resultUser = BeanFactory::getBean('Users', $id);

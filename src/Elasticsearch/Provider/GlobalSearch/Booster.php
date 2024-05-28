@@ -37,7 +37,7 @@ class Booster
      * List of mapping types which are weighted
      * @var array
      */
-    protected $weighted = array();
+    protected $weighted = [];
 
     /**
      * Set weighted list
@@ -57,7 +57,7 @@ class Booster
     public function getBoostValue(array $defs, $weightId)
     {
         if (isset($defs['full_text_search']['boost'])) {
-            $boost = (float) $defs['full_text_search']['boost'];
+            $boost = (float)$defs['full_text_search']['boost'];
         } else {
             $boost = $this->defaultBoost;
         }

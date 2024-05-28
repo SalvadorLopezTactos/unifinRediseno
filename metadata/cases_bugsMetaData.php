@@ -10,59 +10,59 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['cases_bugs'] = array(
+$dictionary['cases_bugs'] = [
     'table' => 'cases_bugs',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'case_id' => array(
+        ],
+        'case_id' => [
             'name' => 'case_id',
             'type' => 'id',
-        ),
-        'bug_id' => array(
+        ],
+        'bug_id' => [
             'name' => 'bug_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'cases_bugspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_cas_bug_bug',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'bug_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_case_bug',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'case_id',
                 'bug_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'cases_bugs' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'cases_bugs' => [
             'lhs_module' => 'Cases',
             'lhs_table' => 'cases',
             'lhs_key' => 'id',
@@ -73,6 +73,6 @@ $dictionary['cases_bugs'] = array(
             'join_table' => 'cases_bugs',
             'join_key_lhs' => 'case_id',
             'join_key_rhs' => 'bug_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

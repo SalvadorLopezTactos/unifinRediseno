@@ -11,7 +11,7 @@
  */
 --}}
 {{#if ellipsis}}
-    <div class="ellipsis_inline" data-placement="bottom"{{#if dir}} dir="{{dir}}"{{/if}} title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}" >
+    <div class="ellipsis_inline" data-bs-placement="bottom"{{#if dir}} dir="{{dir}}"{{/if}} title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}" >
 {{/if}}
 {{#if href}}<a href="{{#if def.events}}javascript:void(0);{{else}}{{href}}{{/if}}" data-link-target="{{linkTarget}}" data-module="{{module}}" data-model-id="{{modelId}}">{{value}}</a>{{else}}{{value}}{{/if~}}
 {{#if ellipsis}}

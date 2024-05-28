@@ -58,7 +58,7 @@ class ChartDisplay
      *
      * @var array
      */
-    protected $chartRows = array();
+    protected $chartRows = [];
 
     /**
      * Set the Reporter (Report Object) to use
@@ -93,7 +93,7 @@ class ChartDisplay
      */
     public function sortByDataSeries(array &$reportDef)
     {
-        if (!$this->chartRows && !is_array($this->chartRows) && count($this->chartRows) < 1) {
+        if (!$this->chartRows && !is_array($this->chartRows) && safeCount($this->chartRows) < 1) {
             return;
         }
 
@@ -121,7 +121,7 @@ class ChartDisplay
             return;
         }
 
-        if (count($orderBy) < 1) {
+        if (safeCount($orderBy) < 1) {
             return;
         }
 
@@ -204,7 +204,6 @@ class ChartDisplay
     public function getSugarChart()
     {
         if ($this->canDrawChart()) {
-
             /* @var $sugarChart SugarChart or its sub class */
             $sugarChart = SugarChartFactory::getInstance('', 'Reports');
 
@@ -242,9 +241,9 @@ class ChartDisplay
             $allowDrillthru = !isModuleBWC($this->reporter->module);
 
             if (isset($reportDef['group_defs'])) {
-                $groupByNames = array();
-                $groupByLabels = array();
-                $groupByTypes = array();
+                $groupByNames = [];
+                $groupByLabels = [];
+                $groupByTypes = [];
 
                 foreach ($reportDef['group_defs'] as $group_def) {
                     $groupByNames[] = $group_def['name'];
@@ -317,7 +316,7 @@ class ChartDisplay
             ':' .
             ($this->reporter->report_def['group_defs'][0]['name'] ?? '');
 
-        if (!empty ($this->reporter->report_def['group_defs'][0]['qualifier'])) {
+        if (!empty($this->reporter->report_def['group_defs'][0]['qualifier'])) {
             $group_key .= ':' . $this->reporter->report_def['group_defs'][0]['qualifier'];
         }
 
@@ -342,7 +341,7 @@ class ChartDisplay
      * @param $val
      * @return bool
      */
-    protected function shouldUnformat($val) : bool
+    protected function shouldUnformat($val): bool
     {
         $report_defs = $this->reporter->report_def;
         $isCurrency = isset($report_defs['numerical_chart_column_type']) &&
@@ -364,7 +363,7 @@ class ChartDisplay
             $this->reporter->run_total_query();
             // start template_total_table code
             $total_row = $this->reporter->get_summary_total_row();
-            for ($i = 0; $i < count($this->reporter->chart_header_row); $i++) {
+            for ($i = 0; $i < safeCount($this->reporter->chart_header_row); $i++) {
                 if ($this->reporter->chart_header_row[$i]['column_key'] == 'count') {
                     $this->reporter->chart_header_row[$i]['column_key'] = 'self:count';
                 } // if
@@ -386,7 +385,7 @@ class ChartDisplay
             }
             if ($total > 100000) {
                 $do_thousands = true;
-                $total = (string) round($total / 1000);
+                $total = (string)round($total / 1000);
             } else {
                 $do_thousands = false;
             }
@@ -410,8 +409,8 @@ class ChartDisplay
         $symbol = $this->print_currency_symbol();
 
         //if there is no symbol, then precision should be saved as this is not a currency
-        if(empty($symbol)) {
-            $round = $precision = strpos(strrev($total), ".");
+        if (empty($symbol)) {
+            $round = $precision = strpos(strrev($total), '.');
         } else {
             $currentUserPrecision = $current_user->getPreference('default_currency_significant_digits');
 
@@ -432,8 +431,8 @@ class ChartDisplay
      */
     protected function parseChartRows()
     {
-        $chart_rows = array();
-        $chart_groupings = array();
+        $chart_rows = [];
+        $chart_groupings = [];
         foreach ($this->reporter->chart_rows as $row) {
             $row_remap = $this->get_row_remap($row);
             if (!isset($row_remap['group_base_text'])) {
@@ -446,7 +445,7 @@ class ChartDisplay
                 if (!empty($this->reporter->all_fields[$fieldKey])) {
                     $fieldDef = $this->reporter->all_fields[$fieldKey];
                     if ($fieldDef['type'] == 'currency') {
-                        $numKey = "numerical_is_currency";
+                        $numKey = 'numerical_is_currency';
                         $chart_rows[$row_remap['group_text']][$row_remap['group_base_text']][$numKey] = true;
                     }
                 }
@@ -476,7 +475,7 @@ class ChartDisplay
 
         //Determine if the original report def has a grouping level greater than one
         if (isset($this->reporter->report_def['group_defs'])) {
-            $this->stackChart = ((is_countable($this->reporter->report_def['group_defs']) ? count($this->reporter->report_def['group_defs']) : 0) > 1) ? true : false;
+            $this->stackChart = (safeCount($this->reporter->report_def['group_defs']) > 1) ? true : false;
         }
 
         switch ($this->chartType) {
@@ -561,7 +560,7 @@ class ChartDisplay
         $currency_symbol = '';
 
         if ((isset($report_defs['numerical_chart_column_type']) &&
-            $report_defs['numerical_chart_column_type'] == 'currency') ||
+                $report_defs['numerical_chart_column_type'] == 'currency') ||
             $this->isChartColumnCurrency()
         ) {
             $currency = BeanFactory::newBean('Currencies')->getUserCurrency();
@@ -581,7 +580,7 @@ class ChartDisplay
     {
         $report = $this->reporter;
 
-        $reportDefs = (array) $report->report_def;
+        $reportDefs = (array)$report->report_def;
 
         if (!array_key_exists('numerical_chart_column', $reportDefs)) {
             return false;
@@ -596,7 +595,7 @@ class ChartDisplay
         $numericalChartColumn = $reportDefs['numerical_chart_column'];
         $numericalChartComponents = explode(':', $numericalChartColumn);
 
-        if (count($numericalChartComponents) < 2) {
+        if (safeCount($numericalChartComponents) < 2) {
             return false;
         }
 
@@ -634,7 +633,7 @@ class ChartDisplay
     protected function get_row_remap($row)
     {
         global $locale;
-        $row_remap = array();
+        $row_remap = [];
         if (!isset($row['cells'][$this->reporter->chart_numerical_position]['val'])) {
             return $row_remap;
         }
@@ -657,7 +656,7 @@ class ChartDisplay
 
         $groupDefs = $this->reporter->report_def['group_defs'];
 
-        if ((is_countable($groupDefs) ? count($groupDefs) : 0) > 1) {
+        if (safeCount($groupDefs) > 1) {
             // multiple group by, use second group by as legend
             $secondGroupIndex = 1;
             $secondGroupDef = $groupDefs[$secondGroupIndex];
@@ -685,7 +684,6 @@ class ChartDisplay
         //end jclark fix
 
         return $row_remap;
-
     }
 
     /**
@@ -697,8 +695,8 @@ class ChartDisplay
     protected function get_total($total_row)
     {
         $total_index = 0;
-        if (!empty ($this->reporter->chart_total_header_row)) {
-            for ($i = 0; $i < count($this->reporter->chart_total_header_row); $i++) {
+        if (!empty($this->reporter->chart_total_header_row)) {
+            for ($i = 0; $i < safeCount($this->reporter->chart_total_header_row); $i++) {
                 if ($this->reporter->chart_total_header_row[$i]['column_key'] == $this->reporter->report_def['numerical_chart_column']) {
                     $total_index = $i;
                     break;
@@ -713,15 +711,14 @@ class ChartDisplay
         }
         global $do_thousands;
         if ($this->get_maximum() > 100000 && (!isset($this->reporter->report_def['do_round'])
-            || (isset($this->reporter->report_def['do_round']) && $this->reporter->report_def['do_round'] == 1))
+                || (isset($this->reporter->report_def['do_round']) && $this->reporter->report_def['do_round'] == 1))
         ) {
             $do_thousands = true;
-            return (string) round($total / 1000);
+            return (string)round($total / 1000);
         } else {
             $do_thousands = false;
-            return (string) $total;
+            return (string)$total;
         }
-
     }
 
     /**
@@ -746,7 +743,7 @@ class ChartDisplay
      */
     protected function get_maximum()
     {
-        $numbers = array();
+        $numbers = [];
         foreach ($this->reporter->chart_rows as $row) {
             $row_remap = $this->get_row_remap($row);
             array_push($numbers, $row_remap['numerical_value']);
@@ -762,7 +759,7 @@ class ChartDisplay
      */
     protected function get_max_from_numbers($numbers)
     {
-        if (!empty ($numbers)) {
+        if (!empty($numbers)) {
             $max = max($numbers);
             if ($max < 1) {
                 return $max;
@@ -777,7 +774,7 @@ class ChartDisplay
     /**
      * Figure out the cache name for a chart
      *
-     * @param null|Report $reporter         If Null, this will use the set reporter, other wise it will use the passed in one
+     * @param null|Report $reporter If Null, this will use the set reporter, other wise it will use the passed in one
      * @return string                       File name for the cache file.
      */
     public function get_cache_file_name($reporter = null)
@@ -787,15 +784,15 @@ class ChartDisplay
         }
         global $current_user;
 
-        $xml_cache_dir = sugar_cached("xml/");
+        $xml_cache_dir = sugar_cached('xml/');
         if ($reporter->is_saved_report == true) {
-            $filename = $xml_cache_dir . $current_user->getUserPrivGuid(). '_' . $reporter->saved_report_id . '_saved_chart.xml';
+            $filename = $xml_cache_dir . $current_user->getUserPrivGuid() . '_' . $reporter->saved_report_id . '_saved_chart.xml';
         } else {
             $filename = $xml_cache_dir . $current_user->getUserPrivGuid() . '_' . time() . '_curr_user_chart.xml';
         }
 
         if (!is_dir(dirname($filename))) {
-            create_cache_directory("xml/");
+            create_cache_directory('xml/');
         }
 
         return $filename;
@@ -805,7 +802,7 @@ class ChartDisplay
      * Method for displaying the old legacy way that was done.
      *
      * @param $id                       ID use for the guid
-     * @param bool $is_dashlet          Are we displaying a dashlet or not
+     * @param bool $is_dashlet Are we displaying a dashlet or not
      * @return JitReports|string        Return the HTML
      */
     public function legacyDisplay($id, $is_dashlet = false)

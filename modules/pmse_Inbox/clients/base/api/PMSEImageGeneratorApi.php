@@ -11,7 +11,6 @@
  */
 
 
-
 use Sugarcrm\Sugarcrm\ProcessManager;
 
 /**
@@ -27,45 +26,45 @@ class PMSEImageGeneratorApi extends FileTempApi
      */
     public function registerApiRest()
     {
-        return array(
-            'getFileContents' => array(
+        return [
+            'getFileContents' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Inbox', '?', 'file', '?'),
-                'pathVars' => array('module', 'record', '', 'field'),
+                'path' => ['pmse_Inbox', '?', 'file', '?'],
+                'pathVars' => ['module', 'record', '', 'field'],
                 'method' => 'getFile',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
                 'shortHelp' => 'Returns the process status image file',
                 'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_get_file_help.html',
-            ),
-            'getTempImage' => array(
+            ],
+            'getTempImage' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Inbox', 'temp', 'file', '?', '?'),
-                'pathVars' => array('module', 'record', '', 'field', 'temp_id'),
+                'path' => ['pmse_Inbox', 'temp', 'file', '?', '?'],
+                'pathVars' => ['module', 'record', '', 'field', 'temp_id'],
                 'method' => 'getTempImage',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
 //                'shortHelp' => 'Returns the process status image file from tmp folder',
-            ),
-            'getPaProjectFileContents' => array(
+            ],
+            'getPaProjectFileContents' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Project', '?', 'file', '?'),
-                'pathVars' => array('module', 'record', '', 'field'),
+                'path' => ['pmse_Project', '?', 'file', '?'],
+                'pathVars' => ['module', 'record', '', 'field'],
                 'method' => 'getProjectFile',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
 //                'shortHelp' => 'Returns Project image file',
-            ),
-            'getPaProjectTempImage' => array(
+            ],
+            'getPaProjectTempImage' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Project', 'temp', 'file', '?', '?'),
-                'pathVars' => array('module', 'record', '', 'field', 'temp_id'),
+                'path' => ['pmse_Project', 'temp', 'file', '?', '?'],
+                'pathVars' => ['module', 'record', '', 'field', 'temp_id'],
                 'method' => 'getTempImage',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
 //                'shortHelp' => 'Returns project image file from tmp folder',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -130,7 +129,7 @@ class PMSEImageGeneratorApi extends FileTempApi
         $img = empty($args['_project']) ?
             $image->get_image($args['record']) : $image->getProjectImage($args['record']);
         if ($img === null) {
-            LoggerManager::getLogger()->fatal(
+            LoggerManager::getLogger()->warn(
                 __METHOD__ . ': image processing failed' .  PHP_EOL . (new Exception())->getTraceAsString()
             );
             return;
@@ -144,4 +143,3 @@ class PMSEImageGeneratorApi extends FileTempApi
         imagedestroy($img);
     }
 }
-

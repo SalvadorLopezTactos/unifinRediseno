@@ -19,6 +19,8 @@
  * @extends View.Fields.Base.IntField
  */
 ({
+    plugins: ['RecurringEvents'],
+
     extendsFrom: 'IntField',
 
     /**

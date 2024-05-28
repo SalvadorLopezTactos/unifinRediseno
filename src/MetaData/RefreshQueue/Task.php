@@ -22,7 +22,7 @@ class Task
      *
      * @var array
      */
-    protected $items = array();
+    protected $items = [];
 
     /**
      * Task scope
@@ -103,7 +103,7 @@ class Task
      */
     public function isCoveredBy(self $other)
     {
-        return count(array_intersect_key($this->items, $other->items)) != 0
+        return safeCount(array_intersect_key($this->items, $other->items)) != 0
             && $other->scope->includes($this->scope);
     }
 
@@ -125,14 +125,14 @@ class Task
      */
     public function isEmpty()
     {
-        return count($this->items) == 0;
+        return safeCount($this->items) == 0;
     }
 
     /**
-    * Add/Update the params of this task
-    *
-    * @param array $params
-    */
+     * Add/Update the params of this task
+     *
+     * @param array $params
+     */
     public function mergeParams(array $params)
     {
         $this->scope->mergeParams($params);

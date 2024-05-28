@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Маркетингові кампанії',
-    'Knowledge Base' => 'База знань',
-    'Sales' => 'Продажі',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Додаткове маркетингове забезпечення',
-    'Product Brochures' => 'Брошури продуктів',
-    'FAQ' => 'Запитання й відповіді',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Маркетинг',
+        'Knowledge Base' => 'База знань',
+        'Sales' => 'Продажі',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Активна',
-    'Draft' => 'Чернетка',
-    'FAQ' => 'Запитання й відповіді',
-    'Expired' => 'Закінчився термін дії',
-    'Under Review' => 'Перебуває на розгляді',
-    'Pending' => 'Очікує рішення',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Додаткове маркетингове забезпечення',
+        'Product Brochures' => 'Брошури продуктів',
+        'FAQ' => 'Запитання й відповіді',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Активні',
+        'Draft' => 'Чернетка',
+        'FAQ' => 'Запитання й відповіді',
+        'Expired' => 'Закінчився термін дії',
+        'Under Review' => 'Перебуває на розгляді',
+        'Pending' => 'Очікує рішення',
+    ],
+];

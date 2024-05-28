@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Paziņojuma teksts',
     'LBL_BASE_MODULE' => 'Mērķa modulis',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Neizdevās izveidot E-pasta šablona apstrādi no faila',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Šī e-pasta veidne pašlaik tiek izmantota procesa definīcijā. Vai tomēr vēlaties rediģēt šo e-pasta veidni?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Šo e-pasta veidni nevar izdzēst, jo tā pašlaik tiek izmantota procesa definīcijā.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Šo e-pasta veidni nevar izdzēst, jo tā pašlaik tiek izmantota procesa definīcijā.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Lauku selektors',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Izvēlieties',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Lauka vērtības tips',
-);
+];

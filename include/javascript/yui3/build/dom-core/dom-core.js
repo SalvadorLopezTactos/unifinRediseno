@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('dom-core', function (Y, NAME) {
 
 var NODE_TYPE = 'nodeType',
@@ -394,4 +387,4 @@ Y_DOM = {
 Y.DOM = Y_DOM;
 
 
-}, '3.15.0', {"requires": ["oop", "features"]});
+}, '3.18.1', {"requires": ["oop", "features"]});

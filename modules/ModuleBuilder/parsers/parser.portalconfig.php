@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,13 +16,12 @@ use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
 
 class ParserModifyPortalConfig extends ModuleBuilderParser
 {
-
     /**
      * Sets up Portal.
      *
      * @param array $settings (optional) the array of portal settings.
      */
-    public function setUpPortal(array $settings = array())
+    public function setUpPortal(array $settings = [])
     {
         // Initialize `MySettings_tab` (setting containing the list of module
         // tabs) if not set.
@@ -116,16 +116,16 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
      */
     public function unsetPortal()
     {
-        $portalConfig = array(
+        $portalConfig = [
             'appStatus' => 'offLine',
             'caseDeflection' => 'enabled',
             'showKBNotes' => 'enabled',
             'enableSelfSignUp' => 'disabled',
-            'on' => 0
-        );
+            'on' => 0,
+        ];
         $this->savePortalSettings($portalConfig);
         $this->removeOAuthForPortalUser();
-        MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_SERVERINFO), ['base']);
+        MetaDataManager::refreshSectionCache([MetaDataManager::MM_SERVERINFO], ['base']);
     }
 
     /**
@@ -135,13 +135,13 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
      */
     private function getDefaultPortalSettings()
     {
-        $portalConfig = array(
+        $portalConfig = [
             'platform' => 'portal',
             'debugSugarApi' => true,
             'logLevel' => 'ERROR',
             'logWriter' => 'ConsoleWriter',
             'logFormatter' => 'SimpleFormatter',
-            'metadataTypes' => array(),
+            'metadataTypes' => [],
             'defaultModule' => 'Cases',
             'allowCloseCase' => PortalFactory::getInstance('Settings')->isServe() ? 'allow' : 'disallow',
             'caseDeflection' => PortalFactory::getInstance('Settings')->isServe() ? 'enabled' : 'disabled',
@@ -154,26 +154,26 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
             'caseVisibility' => 'all',
             'emailVisibility' => 'related_contacts',
             'messageVisibility' => 'related_contacts',
-            'orderByDefaults' => array(
-                'Cases' => array(
+            'orderByDefaults' => [
+                'Cases' => [
                     'field' => 'case_number',
-                    'direction' => 'desc'
-                ),
-                'Bugs' => array(
+                    'direction' => 'desc',
+                ],
+                'Bugs' => [
                     'field' => 'bug_number',
-                    'direction' => 'desc'
-                ),
-                'Notes' => array(
+                    'direction' => 'desc',
+                ],
+                'Notes' => [
                     'field' => 'date_modified',
-                    'direction' => 'desc'
-                ),
-                'KBContents' => array(
+                    'direction' => 'desc',
+                ],
+                'KBContents' => [
                     'field' => 'date_modified',
-                    'direction' => 'desc'
-                )
-            ),
+                    'direction' => 'desc',
+                ],
+            ],
             'enableSelfSignUp' => 'disabled',
-        );
+        ];
         if (inDeveloperMode()) {
             $portalConfig['logLevel'] = 'DEBUG';
         }
@@ -226,7 +226,7 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
                 TabController::setPortalTabs($fieldValue);
             } elseif ($admin->saveSetting('portal', $fieldKey, $fieldValue, 'support') === false) {
                 $GLOBALS['log']->fatal("Error saving portal config var $fieldKey, orig: "
-                    . print_r($fieldValue, true) . " , json:".json_encode($fieldValue));
+                    . print_r($fieldValue, true) . ' , json:' . json_encode($fieldValue));
             }
         }
 
@@ -270,7 +270,7 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
     {
         // Try to retrieve the portal user. If exists, check for
         // corresponding oauth2 and mark deleted.
-        $portalUserName = "SugarCustomerSupportPortalUser";
+        $portalUserName = 'SugarCustomerSupportPortalUser';
         $id = BeanFactory::newBean('Users')->retrieve_user_id($portalUserName);
         if ($id) {
             $clientSeed = BeanFactory::newBean('OAuthKeys');
@@ -288,14 +288,14 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
      */
     public function getPortalUser()
     {
-        $portalUserName = "SugarCustomerSupportPortalUser";
+        $portalUserName = 'SugarCustomerSupportPortalUser';
         $id = BeanFactory::newBean('Users')->retrieve_user_id($portalUserName);
         if (!$id) {
             $user = BeanFactory::newBean('Users');
             $user->user_name = $portalUserName;
             $user->title = 'Sugar Customer Support Portal User';
             $user->description = $user->title;
-            $user->first_name = "";
+            $user->first_name = '';
             $user->last_name = $user->title;
             $user->status = 'Active';
             $user->receive_notifications = 0;
@@ -344,12 +344,12 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
     public function getPortalACLRole()
     {
         global $mod_strings;
-        $allowedModules = array('Bugs', 'Cases', 'Notes', 'KBContents', 'Contacts', 'Messages', 'Emails');
-        $allowedActions = array('edit', 'admin', 'access', 'list', 'view');
+        $allowedModules = ['Bugs', 'Cases', 'Notes', 'KBContents', 'Contacts', 'Messages', 'Emails'];
+        $allowedActions = ['edit', 'admin', 'access', 'list', 'view'];
         $role = BeanFactory::newBean('ACLRoles');
-        $role->retrieve_by_string_fields(array('name' => 'Customer Self-Service Portal Role'));
+        $role->retrieve_by_string_fields(['name' => 'Customer Self-Service Portal Role']);
         if (empty($role->id)) {
-            $role->name = "Customer Self-Service Portal Role";
+            $role->name = 'Customer Self-Service Portal Role';
             $role->description = translate('LBL_PORTAL_ROLE_DESC', 'ModuleBuilder');
             $role->save();
             $roleActions = $role->getRoleActions($role->id);
@@ -384,12 +384,10 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
                             } else {
                                 $aclAllow = ACL_ALLOW_NONE;
                             }
-
                         }
                         if ($actionName != 'access') {
                             $role->setAction($role->id, $action['id'], $aclAllow);
                         }
-
                     }
                 }
             }

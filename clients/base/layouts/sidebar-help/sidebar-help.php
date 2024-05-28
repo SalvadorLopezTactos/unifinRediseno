@@ -19,7 +19,7 @@ $viewdefs['base']['layout']['sidebar-help'] = [
         [
             'layout' => [
                 'type' => 'base',
-                'css_class' => 'helplet-list-container py-0 px-4 w-92',
+                'css_class' => 'helplet-list-container py-0 px-4 w-96',
                 'components' => [
                     [
                         'view' => [

@@ -11,26 +11,24 @@
  */
 
 
-
-
 class PMSEConvergingGateway extends PMSEGateway
 {
     public function retrievePreviousFlows($type, $elementId, $casId = '')
     {
         $sugarQuery = $this->retrieveSugarQueryObject();
         $flowBean = $this->caseFlowHandler->retrieveBean('pmse_BpmnFlow');
-        
-        $sugarQuery->select(array('a.id'));
+
+        $sugarQuery->select(['a.id']);
         $sugarQuery->select()->fieldRaw('b.cas_id');
         $sugarQuery->select()->fieldRaw('b.cas_index');
         $sugarQuery->select()->fieldRaw('b.cas_thread');
 
-        $sugarQuery->from($flowBean, array('alias' => 'a'));
-        
-        switch ($type){
+        $sugarQuery->from($flowBean, ['alias' => 'a']);
+
+        switch ($type) {
             case 'PASSED':
                 $joinType = 'INNER';
-                $whereClause = 'b.bpmn_type=\'bpmnFlow\' AND b.cas_id=\''.$casId.'\' AND';
+                $whereClause = 'b.bpmn_type=\'bpmnFlow\' AND b.cas_id=\'' . $casId . '\' AND';
                 break;
             case 'ALL':
             default:
@@ -39,13 +37,13 @@ class PMSEConvergingGateway extends PMSEGateway
                 break;
         };
 
-        $sugarQuery->joinTable('pmse_bpm_flow', array('joinType' => $joinType, 'alias' => 'b'))
+        $sugarQuery->joinTable('pmse_bpm_flow', ['joinType' => $joinType, 'alias' => 'b'])
             ->on()->equalsField('a.id', 'b.bpmn_id');
         $sugarQuery->where()->queryAnd()
             ->addRaw("{$whereClause} a.flo_element_dest='{$elementId}' AND a.flo_element_dest_type='bpmnGateway'");
         $flows = $sugarQuery->execute();
 
-        $filteredFlows = array();
+        $filteredFlows = [];
         foreach ($flows as $element) {
             if (!array_key_exists($element['id'], $filteredFlows)) {
                 $filteredFlows[$element['id']] = $element;

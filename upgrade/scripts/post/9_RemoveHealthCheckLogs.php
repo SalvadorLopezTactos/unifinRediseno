@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Schedule .git directories for removal
  */
@@ -30,7 +31,7 @@ class SugarUpgradeRemoveHealthCheckLogs extends UpgradeScript
     protected function removeLogs()
     {
         $files = glob('healthcheck_*.log');
-        $now   = time();
+        $now = time();
 
         foreach ($files as $file) {
             if (is_file($file)) {

@@ -11,63 +11,63 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['bubblechart'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['base']['view']['bubblechart'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME',
             'description' => 'LBL_TOP10_OPPORTUNITIES_CHART_DESC',
-            'config' => array(
+            'config' => [
                 'filter_duration' => 'current',
-            ),
-            'preview' => array(),
-            'filter' => array(
-                'module' => array(
+            ],
+            'preview' => [],
+            'filter' => [
+                'module' => [
                     'Home',
                     'Accounts',
                     'Contacts',
                     'Leads',
                     'Opportunities',
                     'RevenueLineItems',
-                ),
-                'view' => array(
+                ],
+                'view' => [
                     'record',
                     'records',
-                ),
-            ),
-        ),
-    ),
-    'panels' => array(
-        array(
+                ],
+            ],
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_body',
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'filter_duration',
                     'label' => 'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS',
                     'type' => 'timeperiod',
                     'options' => 'generic_timeperiod_options',
                     'use_generic_timeperiods' => true,
                     'enum_width' => 'auto',
-                ),
-                array(
+                ],
+                [
                     'name' => 'visibility',
                     'label' => 'LBL_TOP10_OPPORTUNITIES_DEFAULT_DATASET',
                     'type' => 'enum',
                     'options' => 'top10_opportunities_visibility_options',
                     'enum_width' => 'auto',
-                ),
-            ),
-        ),
-    ),
-    'filter_duration' => array(
-        array(
+                ],
+            ],
+        ],
+    ],
+    'filter_duration' => [
+        [
             'name' => 'filter_duration',
             'label' => 'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS',
             'type' => 'timeperiod',
             'options' => 'generic_timeperiod_options',
             'use_generic_timeperiods' => true,
-        ),
-    ),
-);
+        ],
+    ],
+];

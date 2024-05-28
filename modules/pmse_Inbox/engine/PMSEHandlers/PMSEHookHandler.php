@@ -69,7 +69,7 @@ class PMSEHookHandler extends PMSEAbstractRequestHandler
     /**
      * @inheritDoc
      */
-    public function executeRequest($args = array(), $createThread = false, $bean = null, $externalAction = '')
+    public function executeRequest($args = [], $createThread = false, $bean = null, $externalAction = '')
     {
         // If we are disabled we need to bail immediately
         if (!$this->isEnabled()) {
@@ -82,14 +82,14 @@ class PMSEHookHandler extends PMSEAbstractRequestHandler
 
     /**
      *
-     * @global type $db
-     * @global type $redirectBeforeSave
      * @param type $bean
      * @param type $event
      * @param type $arguments
      * @param type $startEvents
      * @param type $isNewRecord
      * @return boolean
+     * @global type $db
+     * @global type $redirectBeforeSave
      */
     public function runStartEventAfterSave($bean, $event, $arguments)
     {
@@ -131,6 +131,7 @@ class PMSEHookHandler extends PMSEAbstractRequestHandler
         $arguments['event'] = $event;
         $this->executeRequest($arguments, false, $bean, '');
     }
+
     /**
      * Execute the cron tasks.
      */
@@ -157,27 +158,28 @@ class PMSEHookHandler extends PMSEAbstractRequestHandler
 
         // Used in the get full list process
         $addedSQL = 'bpmn_type = ' . $db->quoted('bpmnEvent') .
-                    ' AND cas_flow_status = ' . $db->quoted('SLEEPING') .
-                    ' AND cas_due_date <= ' . $db->quoted($today);
+            ' AND cas_flow_status = ' . $db->quoted('SLEEPING') .
+            ' AND cas_due_date <= ' . $db->quoted($today);
 
         $bean = BeanFactory::newBean('pmse_BpmFlow');
         $flows = $bean->get_full_list('', $addedSQL);
 
         // If there were flows to process, handle that
-        if ($flows !== null && ($c = is_countable($flows) ? count($flows) : 0) > 0) {
+        if ($flows !== null && ($c = safeCount($flows)) > 0) {
             foreach ($flows as $flow) {
                 $this->newFollowFlow($flow->fetched_row, false, null, 'WAKE_UP');
             }
 
             $this->getLogger()->info("Processed $c flows with status sleeping");
         } else {
-            $this->getLogger()->info("No flows processed with status sleeping");
+            $this->getLogger()->info('No flows processed with status sleeping');
         }
     }
 
     protected function newFollowFlow($flowData, $createThread = false, $bean = null, $externalAction = '')
     {
         Registry\Registry::getInstance()->drop('triggered_starts');
+        Registry\Registry::getInstance()->set('start_cas_id', (int)$flowData['cas_id'], true);
         $fr = ProcessManager\Factory::getPMSEObject('PMSEExecuter');
         return $fr->runEngine($flowData, $createThread, $bean, $externalAction);
     }

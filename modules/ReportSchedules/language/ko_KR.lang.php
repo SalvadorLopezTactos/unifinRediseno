@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '보고서 일정',
     'LBL_MODULE_NAME_SINGULAR' => '보고서 일정',
     'LBL_REPORT_NAME' => '보고서',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => '파일 형식',
     'LBL_EMBED_REPORT' => '이메일에 보고서 삽입',
     'LBL_EMBED_REPORT_INFO' => '참고: 보고서가 200행을 초과하면 보고서를 CSV 파일로 첨부합니다.',
-);
+];

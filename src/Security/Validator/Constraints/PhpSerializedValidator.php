@@ -34,7 +34,7 @@ class PhpSerializedValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof PhpSerialized) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\PhpSerialized');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\PhpSerialized');
         }
 
         if (null === $value || '' === $value) {
@@ -45,7 +45,7 @@ class PhpSerializedValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, 'string');
         }
 
-        $value = (string) $value;
+        $value = (string)$value;
 
         if ($constraint->base64Encoded) {
             $value = base64_decode($value, true);
@@ -65,7 +65,7 @@ class PhpSerializedValidator extends ConstraintValidator
 
         // detect any objects
         preg_match('/[oc]:[^:]*\d+:/i', $value, $matches);
-        if (count($matches)) {
+        if (safeCount($matches)) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('%msg%', 'object(s) not allowed')
                 ->setInvalidValue($value)
@@ -76,7 +76,7 @@ class PhpSerializedValidator extends ConstraintValidator
 
         // detect any references
         preg_match('/r:[^:]*\d+;/i', $value, $matches);
-        if (count($matches)) {
+        if (safeCount($matches)) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('%msg%', 'reference(s) not allowed')
                 ->setInvalidValue($value)

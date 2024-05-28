@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 declare(strict_types=1);
+
 namespace Sugarcrm\Sugarcrm\modules\Reports\Exporters;
 
 /**
@@ -38,7 +39,7 @@ class ReportJSONExporterRowsAndColumns extends ReportJSONExporterBase
         $resultArray = [];
         while (($row = $this->reporter->get_next_row('result', 'display_columns', false, true)) !== 0) {
             $tmpArray = [];
-            for ($i = 0; $i < count($headerRow); $i++) {
+            for ($i = 0; $i < safeCount($headerRow); $i++) {
                 $tmpArray[$headerRow[$i]] = $row['cells'][$i];
             }
             $resultArray[] = $tmpArray;

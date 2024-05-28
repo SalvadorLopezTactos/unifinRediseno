@@ -67,6 +67,7 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
             x_axis_label: '', //eslint-disable-line camelcase
             y_axis_label: '', //eslint-disable-line camelcase
             allow_drillthru: true, //eslint-disable-line camelcase,
+            barThickness: 20,
             chartElementId: elementId,
         }, chartConfig, chartParams);
 
@@ -251,6 +252,26 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
         chartOptions.options.animation = chartOptions.options.animation || {};
         chartOptions.options.animation.duration = 0;
 
+        const showLegendInPrint = (this.params.show_legend || this.params.print_chart_legend) &&
+                                    this.params.chartType !== 'treemapChart';
+        const showTitleInPrint = this.params.show_title || this.params.print_chart_title;
+
+        if (chartOptions.options && chartOptions.options.plugins && chartOptions.options.plugins.legend) {
+            chartOptions.options.plugins.legend.display =  showLegendInPrint;
+        }
+
+        if (chartOptions.options && chartOptions.options.legend) {
+            chartOptions.options.legend.display = showLegendInPrint;
+        }
+
+        if (chartOptions.options && chartOptions.options.plugins && chartOptions.options.plugins.title) {
+            chartOptions.options.plugins.title.display =  showTitleInPrint;
+        }
+
+        if (chartOptions.options && chartOptions.options.title) {
+            chartOptions.options.title.display = showTitleInPrint;
+        }
+
         return chartOptions;
     };
 
@@ -389,6 +410,40 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
     };
 
     /**
+     * Customize tooltip title
+     *
+     * @param {Object} tooltip
+     * @param {Object} data
+     * @return {boolean|string|Object}
+     */
+    BaseChart.prototype.getCustomTooltipTitle = function(tooltip, data) {
+        if (!_.isUndefined(this.params.tooltip) && !_.isUndefined(this.params.tooltip.title)) {
+            if (!_.isFunction(this.params.tooltip.title)) {
+                return this.params.tooltip.title;
+            }
+            return this.params.tooltip.title(this, tooltip, data);
+        }
+        return false;
+    };
+
+    /**
+     * Customize tooltip label
+     *
+     * @param {Object} tooltip
+     * @param {Object} data
+     * @return {boolean|string|Object}
+     */
+    BaseChart.prototype.getCustomTooltipLabel = function(tooltip, data) {
+        if (!_.isUndefined(this.params.tooltip) && !_.isUndefined(this.params.tooltip.label)) {
+            if (!_.isFunction(this.params.tooltip.label)) {
+                return this.params.tooltip.label;
+            }
+            return this.params.tooltip.label(this, tooltip, data);
+        }
+        return false;
+    };
+
+    /**
      * Generic options and callbacks for building tooltips
      * @return {Object}
      */
@@ -398,56 +453,64 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
             displayColors: false,
             callbacks: {
                 title: (function(tooltip) {
-                    return _.first(tooltip).label;
+                    let title = this.getCustomTooltipTitle(tooltip);
+                    if (!title) {
+                        title = _.first(tooltip).label;
+                    }
+                    return title;
                 }).bind(this),
                 label: (function(tooltip) {
-                    let value = tooltip.raw;
-                    let props = this.getProperties();
-                    let yIsCurrency = props.yDataType === 'currency';
-                    let isNonBarMultipleDatasets = !this.params.barType && this.data.datasets.length > 1;
-                    let isGroupedBarChart = !this.isSingleDataset() &&
-                        ['grouped', 'stacked'].includes(this.params.barType);
-                    let isPieLike = ['pieChart', 'donutChart'].includes(this.params.chartType);
+                    let label = this.getCustomTooltipLabel(tooltip);
+                    if (!label) {
+                        let value = tooltip.raw;
+                        let props = this.getProperties();
+                        let yIsCurrency = props.yDataType === 'currency';
+                        let isNonBarMultipleDatasets = !this.params.barType && this.data.datasets.length > 1;
+                        let isGroupedBarChart = !this.isSingleDataset() &&
+                            ['grouped', 'stacked'].includes(this.params.barType);
+                        let isPieLike = ['pieChart', 'donutChart'].includes(this.params.chartType);
 
-                    let total;
-                    if (isPieLike) {
-                        total = this.sumValues(this.data.datasets[0].data);
-                    } else if (isGroupedBarChart) {
-                        total = this.sumValues(this.data.datasets.map(dataset => dataset.data[tooltip.dataIndex]));
-                    } else if (this.mutatedBarChart) {
-                        const allValues = _.chain(this.data.datasets).pluck('data').flatten().value();
-                        total = this.sumValues(allValues);
-                    } else {
-                        total = this.sumValues(tooltip.dataset.data);
-                    }
+                        let total;
+                        if (isPieLike) {
+                            total = this.sumValues(this.data.datasets[0].data);
+                        } else if (isGroupedBarChart) {
+                            total = this.sumValues(this.data.datasets.map(dataset => dataset.data[tooltip.dataIndex]));
+                        } else if (this.mutatedBarChart) {
+                            const allValues = _.chain(this.data.datasets).pluck('data').flatten().value();
+                            total = this.sumValues(allValues);
+                        } else {
+                            total = this.sumValues(tooltip.dataset.data);
+                        }
 
-                    let labels = [];
+                        let labels = [];
 
-                    if ((isGroupedBarChart || isNonBarMultipleDatasets) && !isPieLike) {
-                        let text = isNonBarMultipleDatasets ? props.groupName : props.seriesName;
-                        if (text) {
+                        if ((isGroupedBarChart || isNonBarMultipleDatasets) && !isPieLike) {
+                            let text = isNonBarMultipleDatasets ? props.groupName : props.seriesName;
+                            if (text) {
+                                labels.push({
+                                    text: text,
+                                    value: tooltip.dataset.label,
+                                });
+                            }
+                        }
+
+                        labels.push({
+                            text: yIsCurrency ? this.labels.tooltip.amount : this.labels.tooltip.count,
+                            value: yIsCurrency ?
+                                this.app.currency.formatAmountLocale(value, this.locale.currency_id) :
+                                this.app.utils.charts.numberFormat(value, this.locale.precision, false, this.locale),
+                        });
+
+                        if (this.app.utils.charts.isNumeric(value) && !isNonBarMultipleDatasets) {
                             labels.push({
-                                text: text,
-                                value: tooltip.dataset.label,
+                                text: this.labels.tooltip.percent,
+                                value: this.app.utils.charts.numberFormatPercent(value, total, this.locale),
                             });
                         }
+
+                        label =  labels.map(label => `${label.text}: ${label.value}`);
                     }
-
-                    labels.push({
-                        text: yIsCurrency ? this.labels.tooltip.amount : this.labels.tooltip.count,
-                        value: yIsCurrency ?
-                            this.app.currency.formatAmountLocale(value, this.locale.currency_id) :
-                            this.app.utils.charts.numberFormat(value, this.locale.precision, false, this.locale),
-                    });
-
-                    if (this.app.utils.charts.isNumeric(value) && !isNonBarMultipleDatasets) {
-                        labels.push({
-                            text: this.labels.tooltip.percent,
-                            value: this.app.utils.charts.numberFormatPercent(value, total, this.locale),
-                        });
-                    }
-
-                    return labels.map(label => `${label.text}: ${label.value}`);
+                    return label;
                 }).bind(this),
             }
         };
@@ -642,6 +705,15 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
     BaseChart.prototype.getDataLabelsColor = function() {
         const grayBlack = '#2b2d2e'; // @gray90
         const grayWhite = '#e5eaed'; // @gray30
+
+        // as long as the label is placed outside of the segment and on the chart container
+        // we need to set a color opposite to the theme and ignore the segment color
+        if (this.params.showValues === 'top' && !this.params.stacked) {
+            return _.map(this.getColors(), function() {
+                return this.app.utils.isDarkMode() ? grayWhite : grayBlack;
+            }, this);
+        }
+
         return _.map(this.getColors(), function(color) {
             return this.app.utils.isWhiteColor(color) ? grayBlack : grayWhite;
         }, this);
@@ -784,10 +856,14 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
         // Minimum space given to each datapoint on the axis. In vertical
         // bar charts, we want some extra space to make labels more readable
         let orientation = this.params.orientation ? this.params.orientation : 'horizontal';
-        this.minDatapointThickness = orientation === 'horizontal' ? 15 : 30;
 
-        // Maximum thickness a bar will render as in pixels
-        this.maxBarThickness = 35;
+        //We need minimum data point thickness in order to set the correct minimum height or width for the chart
+        //Based on min height/width, we have horizontal/vertical scroll if needed
+        const horizontalMinDatapointThickness = 45;
+        const verticalMinDatapointThickness = 40;
+
+        this.minDatapointThickness = orientation === 'horizontal' ? horizontalMinDatapointThickness :
+            verticalMinDatapointThickness;
 
         // Percentage of how much space a data point takes up in its axis container
         this.categoryPercentage = 0.8;
@@ -887,6 +963,7 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
             let rightMargin = _.get(this.params, ['margin', 'right']) || 0;
             let minChartWidth = (valuesCount * this.minDatapointThickness) + leftMargin + rightMargin;
             wrapperProperties['min-width'] = `${minChartWidth}px`;
+            wrapperProperties['min-height'] = '200px';
         }
 
         return wrapperProperties;
@@ -904,7 +981,9 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
      * @return {Object}
      */
     const formatBarChartTopLabels = function(chartDetails, params, props, rawData, locale) {
-        chartDetails.options.plugins.datalabels.anchor = 'end';
+        if (params.orientation !== 'vertical') {
+            chartDetails.options.plugins.datalabels.anchor = 'end';
+        }
 
         if (params.barType === 'grouped') {
             let maxValue = 0;
@@ -970,12 +1049,17 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                             display: isHorizontal ? this.params.show_y_label : this.params.show_x_label,
                             text: isHorizontal ? this.params.y_axis_label : this.params.x_axis_label,
                             color: this.getTextColor(),
+                            font: {
+                                weight: 'bold',
+                            },
                         },
                         stacked: this.params.stacked,
                         ticks: this.getTickOptions('x'),
+                        border: {
+                            display: true,
+                        },
                         grid: {
                             display: true,
-                            drawBorder: true,
                             drawOnChartArea: true,
                             drawTicks: false,
                             color: this.getAxisColors(),
@@ -986,12 +1070,17 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                             display: isHorizontal ? this.params.show_x_label : this.params.show_y_label,
                             text: isHorizontal ? this.params.x_axis_label : this.params.y_axis_label,
                             color: this.getTextColor(),
+                            font: {
+                                weight: 'bold',
+                            },
                         },
                         stacked: this.params.stacked,
                         ticks: this.getTickOptions('y'),
+                        border: {
+                            display: true,
+                        },
                         grid: {
                             display: true,
-                            drawBorder: true,
                             drawOnChartArea: true,
                             drawTicks: false,
                             color: this.getAxisColors(),
@@ -1015,9 +1104,12 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                     tooltip: this.getTooltipOptions(),
                     datalabels: {
                         color: this.getDataLabelsColor(),
-                        anchor: this.getLabelAnchorValue(),
-                        align: this.getLabelAlignValue(),
-                        rotation: this.getLabelRotationValue(),
+                        anchor: (context) => {
+                            return this.getLabelAnchorValue(context);
+                        },
+                        align: (context) => {
+                            return this.getLabelAlignValue(context);
+                        },
                         padding: 4,
                         formatter: (function(value, context) {
                             let props = this.getProperties();
@@ -1058,10 +1150,12 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                 title: {
                     display: false,
                 },
+                border: {
+                    display: false,
+                },
                 grid: {
                     drawOnGridArea: false,
                     drawTicks: false,
-                    drawBorder: false,
                 },
                 ticks: {
                     minRotation: 0,
@@ -1135,7 +1229,6 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                     categoryPercentage: dataset.categoryPercentage,
                     data: values,
                     label: label,
-                    maxBarThickness: dataset.maxBarThickness,
                 });
             }, this);
 
@@ -1144,40 +1237,67 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
     };
 
     /**
+     * Clamp the position of a label inside a vertical bar chart
+     *
+     * @param {Object} context
+     *
+     * @return {string|boolean}
+     */
+    BarChart.prototype.clampDatalabelVerticalPosition = function(context) {
+        // make sure we don't display the label outside of the segment if we have a groupped chart
+        if (this.params.orientation === 'vertical' && !(this.params.showValues === 'top' && !this.params.stacked)) {
+            let minBarHeight = 25;
+            const datasetMeta = context.chart.getDatasetMeta(context.datasetIndex);
+            const barHeight = datasetMeta.data[context.dataIndex].height;
+
+            if (barHeight < minBarHeight) {
+                return 'center';
+            }
+        }
+
+        return false;
+    };
+
+    /**
      * Gets the data label align value
+     *
+     * @param {Object} context
+     *
      * @return {string}
      */
-    BarChart.prototype.getLabelAlignValue = function() {
+    BarChart.prototype.getLabelAlignValue = function(context) {
         let alignMap = {
             '1': 'start',
             start: 'end',
             middle: 'center',
             end: 'start',
-            top: this.params.stacked ? 'start' : 'end'
+            top: this.params.stacked ? 'start' : 'end',
         };
-        return alignMap[this.params.showValues] || 'center';
+
+        const clampedPosition = this.clampDatalabelVerticalPosition(context);
+
+        return clampedPosition || alignMap[this.params.showValues] || 'center';
     };
 
     /**
      * Gets the data label anchor value
+     *
+     * @param {Object} context
+     *
      * @return {string}
      */
-    BarChart.prototype.getLabelAnchorValue = function() {
+    BarChart.prototype.getLabelAnchorValue = function(context) {
         let anchorMap = {
             '1': 'end',
             start: 'start',
             middle: 'center',
             end: 'end',
+            top: 'end',
         };
-        return anchorMap[this.params.showValues] || 'center';
-    };
 
-    /**
-     * Gets the data label rotation value
-     * @return {number}
-     */
-    BarChart.prototype.getLabelRotationValue = function() {
-        return this.params.barType === 'grouped' && this.params.orientation !== 'horizontal' ? -90 : 0;
+        const clampedPosition = this.clampDatalabelVerticalPosition(context);
+
+        return clampedPosition || anchorMap[this.params.showValues] || 'center';
     };
 
     /**
@@ -1192,10 +1312,6 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
      * Updates the chart colors, if a chart segment has been selected
      */
     BarChart.prototype.updateChartColors = function() {
-        if (this.mutatedBarChart) {
-            return;
-        }
-
         let isSingleDataset = this.rawData.values &&
             this.rawData.values[0] &&
             this.rawData.values[0].values.length === 1;
@@ -1203,7 +1319,7 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
 
         if (!_.isUndefined(this.params.groupIndex) && !_.isUndefined(this.params.seriesIndex)) {
             this.chart.data.datasets.map((dataset, index) => {
-                if (isSingleDataset || !isGroupedOrStacked) {
+                if ((isSingleDataset || !isGroupedOrStacked) && !this.mutatedBarChart) {
                     this.chart.data.datasets[index].backgroundColor = [...this.getColors()];
                 } else {
                     this.chart.data
@@ -1212,7 +1328,7 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                 }
             });
 
-            if (isGroupedOrStacked) {
+            if (isGroupedOrStacked || this.mutatedBarChart) {
                 this.chart.data
                     .datasets[this.params.seriesIndex]
                     .backgroundColor[this.params.groupIndex] = this.getColors(this.params.seriesIndex, true);
@@ -1235,7 +1351,6 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                 datasets: this.rawData.label.map((label, index) => ({
                     categoryPercentage: this.categoryPercentage,
                     barPercentage: this.barPercentage,
-                    maxBarThickness: this.maxBarThickness,
                     label: this.pickLabel(label),
                     backgroundColor: new Array(this.rawData.values[0].values.length).fill(this.getColors(index)),
                     data: this.rawData.values.map(value => value.values[index]),
@@ -1247,7 +1362,6 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                 datasets: [{
                     categoryPercentage: this.categoryPercentage,
                     barPercentage: this.barPercentage,
-                    maxBarThickness: this.maxBarThickness,
                     label: this.pickLabel(this.rawData.label.length === 1 ? this.rawData.label[0] : ''),
                     backgroundColor: [...this.getColors()],
                     data: this.rawData.values.map(value => this.sumValues(value.values)),
@@ -1408,9 +1522,11 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                             color: this.getTextColor(),
                         },
                         ticks: this.getTickOptions('x'),
+                        border: {
+                            display: true,
+                        },
                         grid: {
                             display: true,
-                            drawBorder: true,
                             drawOnChartArea: true,
                             drawTicks: false,
                             color: this.getAxisColors(),
@@ -1423,9 +1539,11 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                             color: this.getTextColor(),
                         },
                         ticks: this.getTickOptions('y'),
+                        border: {
+                            display: true,
+                        },
                         grid: {
                             display: true,
-                            drawBorder: true,
                             drawOnChartArea: true,
                             drawTicks: false,
                             color: this.getAxisColors(),
@@ -1462,27 +1580,36 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
             displayColors: false,
             callbacks: {
                 title: (function(tooltip) {
-                    return _.first(tooltip).label;
+                    let title = this.getCustomTooltipTitle(tooltip);
+                    if (!title) {
+                        title = _.first(tooltip).label;
+                    }
+                    return title;
                 }).bind(this),
                 label: (function(tooltip) {
-                    let value = tooltip.raw;
-                    let props = this.getProperties();
-                    let yIsCurrency = props.yDataType === 'currency';
+                    let label = this.getCustomTooltipLabel(tooltip);
+                    if (!label) {
+                        let value = tooltip.raw;
+                        let props = this.getProperties();
+                        let yIsCurrency = props.yDataType === 'currency';
 
-                    let labels = [
-                        {
-                            text: props.groupName,
-                            value: tooltip.dataset.label,
-                        },
-                        {
-                            text: yIsCurrency ? this.labels.tooltip.amount : this.labels.tooltip.count,
-                            value: yIsCurrency ?
-                                this.app.currency.formatAmountLocale(value, this.locale.currency_id) :
-                                this.app.utils.charts.numberFormat(value, this.locale.precision, false, this.locale),
-                        }
-                    ];
+                        let labels = [
+                            {
+                                text: props.groupName,
+                                value: tooltip.dataset.label,
+                            },
+                            {
+                                text: yIsCurrency ? this.labels.tooltip.amount : this.labels.tooltip.count,
+                                value: yIsCurrency ?
+                                    this.app.currency.formatAmountLocale(value, this.locale.currency_id) :
+                                    this.app.utils.charts.numberFormat(value, this.locale.precision, false,
+                                        this.locale),
+                            }
+                        ];
 
-                    return labels.map(label => `${label.text}: ${label.value}`);
+                        label = labels.map(label => `${label.text}: ${label.value}`);
+                    }
+                    return label;
                 }).bind(this),
             }
         };
@@ -1551,7 +1678,7 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
     FunnelChart.prototype.createSavableChart = function() {
         this.data = this.transformData();
 
-        let savableChartOptions = this.makeChartSavable(this.getChartOptions());
+        let savableChartOptions = this.makeChartSavable(this.getChartOptions({alwaysDisplayLabel: true}));
         this.chart = new window.Chart2(this.getSavableChartElement(), savableChartOptions);
         return this.chart;
     };
@@ -1585,9 +1712,11 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
 
     /**
      * Gets the chart options for funnel charts
+     * @param rules
+     *
      * @return {Object}
      */
-    FunnelChart.prototype.getChartOptions = function() {
+    FunnelChart.prototype.getChartOptions = function(rules) {
         return {
             plugins: [ChartDataLabelsV1],
             type: this.chartType,
@@ -1620,6 +1749,38 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                             let props = this.getProperties();
                             return this.formatNumericTicks(value, props.yDataType === 'currency', 2);
                         }).bind(this),
+                        display: (function(context) {
+                            if ([0, '0', 'total'].includes(this.params.showValues)) {
+                                return false;
+                            }
+
+                            if (rules && rules.alwaysDisplayLabel) {
+                                return true;
+                            }
+
+                            const targetSet = context.chart.getDatasetMeta(context.datasetIndex || 0);
+                            const targetBar = targetSet && targetSet.data ? targetSet.data[context.dataIndex] : false;
+                            const targetCorners = targetBar ? targetBar._cornersCache : false;
+
+                            const topLeftCornerIndex = 0;
+                            const bottomLeftCornerIndex = 1;
+                            const yPosIndex = 1;
+                            const minHeightAllowed = 10;
+
+                            let barHeight = 0;
+
+                            if (targetCorners &&
+                                targetCorners[topLeftCornerIndex] &&
+                                targetCorners[bottomLeftCornerIndex]) {
+                                const topY = targetCorners[topLeftCornerIndex][yPosIndex] || 0;
+                                const bottomY = targetCorners[bottomLeftCornerIndex][yPosIndex] || 0;
+
+                                barHeight = topY - bottomY;
+                            }
+
+                            return barHeight >= minHeightAllowed;
+                        }
+                        ).bind(this),
                     },
                 }
             },
@@ -1670,38 +1831,46 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
             },
             callbacks: {
                 title: (function(tooltipItem, data) {
-                    return this.pickLabel(data.labels[tooltipItem[0].index]);
+                    let title = this.getCustomTooltipTitle(tooltipItem, data);
+                    if (!title) {
+                        title = this.pickLabel(data.labels[tooltipItem[0].index]);
+                    }
+                    return title;
                 }).bind(this),
                 label: (function(tooltipItem, data) {
-                    let value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                    let props = this.getProperties();
-                    let yIsCurrency = props.yDataType === 'currency';
-                    let isNonBarMultipleDatasets = this.data.datasets.length > 1;
-                    let total = this.sumValues(data.datasets[tooltipItem.datasetIndex].data);
-                    let labels = [];
+                    let label = this.getCustomTooltipLabel(tooltipItem, data);
+                    if (!label) {
+                        let value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                        let props = this.getProperties();
+                        let yIsCurrency = props.yDataType === 'currency';
+                        let isNonBarMultipleDatasets = this.data.datasets.length > 1;
+                        let total = this.sumValues(data.datasets[tooltipItem.datasetIndex].data);
+                        let labels = [];
 
-                    if (isNonBarMultipleDatasets) {
+                        if (isNonBarMultipleDatasets) {
+                            labels.push({
+                                text: isNonBarMultipleDatasets ? props.groupName : props.seriesName,
+                                value: data.datasets[tooltipItem.datasetIndex].label,
+                            });
+                        }
+
                         labels.push({
-                            text: isNonBarMultipleDatasets ? props.groupName : props.seriesName,
-                            value: data.datasets[tooltipItem.datasetIndex].label,
+                            text: yIsCurrency ? this.labels.tooltip.amount : this.labels.tooltip.count,
+                            value: yIsCurrency ?
+                                this.app.currency.formatAmountLocale(value, this.locale.currency_id) :
+                                this.app.utils.charts.numberFormat(value, this.locale.precision, false, this.locale),
                         });
+
+                        if (this.app.utils.charts.isNumeric(value) && !isNonBarMultipleDatasets) {
+                            labels.push({
+                                text: this.labels.tooltip.percent,
+                                value: this.app.utils.charts.numberFormatPercent(value, total, this.locale),
+                            });
+                        }
+
+                        label = labels.map(label => `${label.text}: ${label.value}`);
                     }
-
-                    labels.push({
-                        text: yIsCurrency ? this.labels.tooltip.amount : this.labels.tooltip.count,
-                        value: yIsCurrency ?
-                            this.app.currency.formatAmountLocale(value, this.locale.currency_id) :
-                            this.app.utils.charts.numberFormat(value, this.locale.precision, false, this.locale),
-                    });
-
-                    if (this.app.utils.charts.isNumeric(value) && !isNonBarMultipleDatasets) {
-                        labels.push({
-                            text: this.labels.tooltip.percent,
-                            value: this.app.utils.charts.numberFormatPercent(value, total, this.locale),
-                        });
-                    }
-
-                    return labels.map(label => `${label.text}: ${label.value}`);
+                    return label;
                 }).bind(this),
             }
         };
@@ -1823,41 +1992,49 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
             displayColors: false,
             callbacks: {
                 title: (function(tooltip) {
-                    let dataIndex = _.first(tooltip).dataIndex;
-                    return this.pickLabel(this.sortedData[dataIndex].label);
+                    let title = this.getCustomTooltipTitle(tooltip);
+                    if (!title) {
+                        let dataIndex = _.first(tooltip).dataIndex;
+                        title = this.pickLabel(this.sortedData[dataIndex].label);
+                    }
+                    return title;
                 }).bind(this),
                 label: (function(tooltip) {
-                    let dataIndex = tooltip.dataIndex;
-                    let value = this.sortedData[dataIndex].value;
-                    let props = this.getProperties();
-                    let yIsCurrency = props.yDataType === 'currency';
-                    let isNonBarMultipleDatasets = !this.params.barType && this.data.datasets.length > 1;
-                    let total = this.sumValues(this.sortedData.map(value => value.value));
+                    let label = this.getCustomTooltipLabel(tooltip);
+                    if (!label) {
+                        let dataIndex = tooltip.dataIndex;
+                        let value = this.sortedData[dataIndex].value;
+                        let props = this.getProperties();
+                        let yIsCurrency = props.yDataType === 'currency';
+                        let isNonBarMultipleDatasets = !this.params.barType && this.data.datasets.length > 1;
+                        let total = this.sumValues(this.sortedData.map(value => value.value));
 
-                    let labels = [];
+                        let labels = [];
 
-                    if (isNonBarMultipleDatasets) {
+                        if (isNonBarMultipleDatasets) {
+                            labels.push({
+                                text: isNonBarMultipleDatasets ? props.groupName : props.seriesName,
+                                value: tooltip.dataset.label,
+                            });
+                        }
+
                         labels.push({
-                            text: isNonBarMultipleDatasets ? props.groupName : props.seriesName,
-                            value: tooltip.dataset.label,
+                            text: yIsCurrency ? this.labels.tooltip.amount : this.labels.tooltip.count,
+                            value: yIsCurrency ?
+                                this.app.currency.formatAmountLocale(value, this.locale.currency_id) :
+                                this.app.utils.charts.numberFormat(value, this.locale.precision, false, this.locale),
                         });
+
+                        if (this.app.utils.charts.isNumeric(value) && !isNonBarMultipleDatasets) {
+                            labels.push({
+                                text: this.labels.tooltip.percent,
+                                value: this.app.utils.charts.numberFormatPercent(value, total, this.locale),
+                            });
+                        }
+
+                        label = labels.map(label => `${label.text}: ${label.value}`);
                     }
-
-                    labels.push({
-                        text: yIsCurrency ? this.labels.tooltip.amount : this.labels.tooltip.count,
-                        value: yIsCurrency ?
-                            this.app.currency.formatAmountLocale(value, this.locale.currency_id) :
-                            this.app.utils.charts.numberFormat(value, this.locale.precision, false, this.locale),
-                    });
-
-                    if (this.app.utils.charts.isNumeric(value) && !isNonBarMultipleDatasets) {
-                        labels.push({
-                            text: this.labels.tooltip.percent,
-                            value: this.app.utils.charts.numberFormatPercent(value, total, this.locale),
-                        });
-                    }
-
-                    return labels.map(label => `${label.text}: ${label.value}`);
+                    return label;
                 }).bind(this),
             }
         };
@@ -2123,15 +2300,21 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
          * Get and save the fiscal year start date as an application cached variable
          */
         defineFiscalYearStart: function() {
-            var fiscalYear = this.getFiscalStartDate();
+            let fiscalYear = this.getFiscalStartDate();
 
             if (!_.isEmpty(fiscalYear)) {
                 return;
             }
 
-            fiscalYear = new Date().getFullYear();
+            const config = this.sugarApp.metadata.getModule('Forecasts', 'config');
+            let fiscalStartDate = !_.isEmpty(config) ? config.timeperiod_start_date : null;
 
-            this.sugarApp.api.call('GET', this.sugarApp.api.buildURL('TimePeriods/' + fiscalYear + '-01-01'), null, {
+            if (_.isEmpty(fiscalStartDate)) {
+                fiscalYear = new Date().getUTCFullYear();
+                fiscalStartDate = fiscalYear + '-01-01';
+            }
+
+            this.sugarApp.api.call('GET', this.sugarApp.api.buildURL('TimePeriods/' + fiscalStartDate), null, {
                 success: _.bind(this.setFiscalStartDate, this),
                 error: _.bind(function() {
                     // Needed to catch the 404 in case there isnt a current timeperiod
@@ -2149,12 +2332,20 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
             if (!firstQuarter) {
                 return;
             }
-            var fiscalYear = firstQuarter.start_date.split('-')[0];
-            var quarterNumber = firstQuarter.name.match(/.*Q(\d{1})/)[1];  // [1-4]
-            var quarterDateStart = new Date(firstQuarter.start_date);      // 2017-01-01
-            var hourUTCOffset = quarterDateStart.getTimezoneOffset() / 60; // 5
-            var fiscalMonth = quarterDateStart.getUTCMonth() - (quarterNumber - 1) * 3; // 1
-            var fiscalYearStart = new Date(fiscalYear, fiscalMonth, 1, -hourUTCOffset, 0, 0).toUTCString();
+
+            const timePeriodType = 'Quarter';
+            const fiscalYear = firstQuarter.start_date.split('-')[0];
+            const quarterDateStart = new Date(firstQuarter.start_date);      // 2017-01-01
+            let fiscalMonth = quarterDateStart.getUTCMonth();
+            const day = quarterDateStart.getUTCDate();
+
+            if (firstQuarter.type === timePeriodType) {
+                const quarterNumber = firstQuarter.name.match(/.*Q(\d{1})/)[1];  // [1-4]
+                fiscalMonth = fiscalMonth - (quarterNumber - 1) * 3; // 1
+            }
+
+            const fiscalYearStart = new Date(Date.UTC(fiscalYear, fiscalMonth, day, 0, 0, 0)).toUTCString();
+
             this.sugarApp.cache.set('fiscaltimeperiods', {'annualDate': fiscalYearStart});
         },
 
@@ -2172,6 +2363,25 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
         },
 
         /**
+         * Calculates the target year in case fiscal year is next year
+         *
+         * @param label chart group or series label
+         * @return {string} the actual year
+         */
+        getTargetYear: function(label) {
+            const config = this.sugarApp.metadata.getModule('Forecasts', 'config');
+
+            if (!_.isUndefined(config) &&
+                config.timeperiod_fiscal_year === 'next_year') {
+                const actualYear = new Date(label).getUTCFullYear() - 1;
+
+                return actualYear.toString();
+            }
+
+            return label;
+        },
+
+        /**
          * Process the user selected chart date label based on the report def
          * column function
          *
@@ -2182,13 +2392,15 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
         getDateValues: function(label, type) {
             var dateParser = this.sugarApp.date;
             var userLangPref = this.sugarApp.user.getLanguage() || 'en_us';
-            var datePatterns = {
+
+            let pattern = this.sugarApp.date.getUserDateFormat();
+            const partialDatePatterns = {
                 year: 'YYYY', // 2017
                 quarter: 'Q YYYY', // Q3 2017
                 month: 'MMMM YYYY', // March 2017
                 week: 'W YYYY', // W56 2017
-                day: 'YYYY-MM-DD' //2017-12-31
             };
+
             var startDate;
             var endDate;
             var y1;
@@ -2208,6 +2420,8 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
 
                     case 'fiscalYear':
                         // 2017
+                        label = this.getTargetYear(label);
+
                         var fy = new Date(this.getFiscalStartDate() || new Date().getFullYear() + '-01-01');
                         fy.setUTCFullYear(label);
                         y1 = fy.getUTCFullYear();
@@ -2227,6 +2441,8 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                         var fy = new Date(this.getFiscalStartDate() || new Date().getFullYear() + '-01-01');
                         var re = /Q([1-4]{1})\s(\d{4})/;
                         var rm = label.match(re);
+                        rm[2] = this.getTargetYear(rm[2]);
+
                         fy.setUTCFullYear(rm[2]);
                         fy.setUTCMonth((rm[1] - 1) * 3 + fy.getUTCMonth());
                         y1 = fy.getUTCFullYear();
@@ -2242,13 +2458,12 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                         break;
 
                     case 'day':
-                        var pattern = datePatterns[type];
                         var parsedDate = dateParser(label, pattern, userLangPref);
                         startDate = parsedDate.formatServer(true); //2017-12-31
                         break;
 
                     default:
-                        var pattern = datePatterns[type] || 'YYYY';
+                        pattern = partialDatePatterns[type] || partialDatePatterns.year;
                         var parsedDate = dateParser(label, pattern, userLangPref);
                         var momentType = type === 'week' ? 'isoweek' : type;
                         startDate = parsedDate.startOf(momentType).formatServer(true); //2017-01-01
@@ -2312,10 +2527,28 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                         }
 
                         break;
+                    case 'multienum':
+                        const multiEnumValue = enums[def.table_key + ':' + def.name][label];
+                        if (multiEnumValue) {
+                            values.push(multiEnumValue);
+                        } else {
+                            const labels = label.split(', ');
+                            _.each(labels, (label) => {
+                                const multiEnumValue = enums[def.table_key + ':' + def.name][label];
+                                values.push(multiEnumValue);
+                            });
+                        }
+                        break;
                     case 'date':
+                    case 'datetime':
+                    case 'datetimecombo':
                         // convert to server format before sending
                         var date = new this.sugarApp.date(label, this.sugarApp.date.getUserDateFormat());
-                        values.push(date.formatServer(true));
+                        let dateValue = date.formatServer(true);
+                        if (dateValue === 'Invalid date') {
+                            dateValue = '';
+                        }
+                        values.push(dateValue);
                         break;
                     case 'int':
                         const numberSeparator = this.sugarApp.user.getPreference('number_grouping_separator');
@@ -2436,7 +2669,7 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
          * @return {Array} array of enums group defs
          */
         getEnums: function(reportDef) {
-            var enumTypes = ['enum', 'radioenum'];
+            var enumTypes = ['enum', 'radioenum', 'multienum'];
             var groups = this.getGrouping(reportDef);
             var enums = [];
             _.each(groups, function(group) {

@@ -209,10 +209,10 @@ class EmailParticipant extends SugarBean
      *
      * This is used when determining the direction of an email.
      *
-     * @see Email::getDirection()
-     * @uses SugarEmailAddress::getEmployeesWithEmailAddress()
      * @return bool
      * @throws Doctrine\DBAL\Exception
+     * @see  Email::getDirection()
+     * @uses SugarEmailAddress::getEmployeesWithEmailAddress()
      */
     public function isAnEmployee()
     {
@@ -226,6 +226,6 @@ class EmailParticipant extends SugarBean
 
         $employees = SugarEmailAddress::getEmployeesWithEmailAddress($this->email_address_id);
 
-        return count($employees) > 0;
+        return safeCount($employees) > 0;
     }
 }

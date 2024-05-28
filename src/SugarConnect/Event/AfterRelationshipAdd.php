@@ -26,13 +26,13 @@ class AfterRelationshipAdd implements Publisher, ConfigurationAwareInterface
     /**
      * Sends an after_relationship_add event to the Sugar Connect webhook.
      *
-     * @param \SugarBean $bean  The bean that was changed.
-     * @param string     $event The type of event.
-     * @param array      $args  Additional arguments.
+     * @param \SugarBean $bean The bean that was changed.
+     * @param string $event The type of event.
+     * @param array $args Additional arguments.
      *
      * @return void
      */
-    public function publish(\SugarBean $bean, string $event, array $args) : void
+    public function publish(\SugarBean $bean, string $event, array $args): void
     {
         $user = \BeanFactory::newBean('Users');
         $user->getSystemUser();

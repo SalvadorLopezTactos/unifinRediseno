@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Lähtevän sähköpostin tilit',
     'LBL_MODULE_NAME_SINGULAR' => 'Lähtevän sähköpostin tili',
     'LBL_STATUS' => 'Tila',
@@ -40,4 +40,4 @@ $mod_strings = array(
     'LBL_PREFERRED_SENDING_ACCOUNT' => 'Ensisijainen sähköpostitili viestien lähettämiseen',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Sähköpostiasetukset-tietolaatikko',
-);
+];

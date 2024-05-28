@@ -27,13 +27,13 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
 
     /**
      * In case off Employees->Users hierarhy we need a way
-     * to ignore fields which are related to Users module when we scan Employees module  
+     * to ignore fields which are related to Users module when we scan Employees module
      */
-    protected $combinedModules = array(
-        'Employees' => array(
+    protected $combinedModules = [
+        'Employees' => [
             'Users',
-        ),
-    );
+        ],
+    ];
 
     /**
      * {@inheritdoc}
@@ -169,7 +169,7 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
      */
     protected function checkFieldsRelationships($fieldDefs, $seed)
     {
-        $wrongRelations = array();
+        $wrongRelations = [];
         foreach ($fieldDefs as $fieldnm => $field) {
             // Check for bad links
             if ($field['type'] == 'link') {
@@ -251,7 +251,7 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
             if (!empty($def[$relateKey])) {
                 $relatedBean = $this->getBean($def[$relateKey]);
                 if (!empty($relatedBean->module_name)) {
-                    $beanNames = array($relatedBean->module_name);
+                    $beanNames = [$relatedBean->module_name];
                     if (array_key_exists($relatedBean->module_name, $this->combinedModules)) {
                         $beanNames = array_merge($beanNames, $this->combinedModules[$relatedBean->module_name]);
                     }
@@ -262,7 +262,7 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
                 }
             }
             if (!empty($seed->module_name)) {
-                $beanNames = array($seed->module_name);
+                $beanNames = [$seed->module_name];
                 if (array_key_exists($seed->module_name, $this->combinedModules)) {
                     $beanNames = array_merge($beanNames, $this->combinedModules[$seed->module_name]);
                 }
@@ -290,7 +290,7 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
 
         $files = $this->getFiles($seed, $def['name']);
         foreach ($files as $file) {
-            $dictionary = array();
+            $dictionary = [];
             include $file;
             $this->upgrader->backupFile($file);
             if (!empty($dictionary[$seed->object_name]['relationships'][$def['name']])) {
@@ -316,7 +316,7 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
      */
     protected function checkFieldsType($fieldDefs)
     {
-        $linkToUpdate = array();
+        $linkToUpdate = [];
         foreach ($fieldDefs as $fieldnm => $field) {
             // Skip 'team_name' field
             if ($fieldnm == 'team_name') {
@@ -336,11 +336,13 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
             if ($field['type'] == 'relate') {
                 if (!empty($field['id_name']) &&
                     !empty($fieldDefs[$field['id_name']]) &&
-                    ((!empty($field['link']) &&
-                        $field['link'] != $field['id_name'] &&
-                        !$this->isFieldLink($fieldDefs[$field['id_name']], $fieldDefs) &&
-                        $fieldDefs[$field['id_name']]['type'] == 'link') ||
-                        (empty($fieldDefs[$field['id_name']]['rname']) ||
+                    (
+                        (!empty($field['link']) &&
+                            $field['link'] != $field['id_name'] &&
+                            !$this->isFieldLink($fieldDefs[$field['id_name']], $fieldDefs) &&
+                            $fieldDefs[$field['id_name']]['type'] == 'link') ||
+                        (
+                            empty($fieldDefs[$field['id_name']]['rname']) ||
                             empty($fieldDefs[$field['id_name']]['link'])
                         )
                     )
@@ -397,7 +399,7 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
             }
             $files = $this->getFiles($seed, $def['relationship'], $def['name']);
             foreach ($files as $file) {
-                $dictionary = array();
+                $dictionary = [];
                 include $file;
                 if (!empty($dictionary[$seed->object_name]['fields'][$link])) {
                     $this->upgrader->backupFile($file);
@@ -441,38 +443,38 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
      */
     protected function getAvailableFiles($seed, $rel_name)
     {
-        $result = array(
-            'main' => array(),
-            'addon' => array(),
-        );
+        $result = [
+            'main' => [],
+            'addon' => [],
+        ];
         $mod = $seed->module_dir;
         if ($mod == 'Employees') {
             $mod = 'Users';
         }
         $basepath = "custom/Extension/modules/{$mod}/Ext/";
-        $relationshipsPath = "custom/Extension/modules/relationships/";
-        $relationshipsDirs = array(
+        $relationshipsPath = 'custom/Extension/modules/relationships/';
+        $relationshipsDirs = [
             'layoutdefs',
             'vardefs',
-            'wirelesslayoutdefs'
-        );
-        $paths = array(
+            'wirelesslayoutdefs',
+        ];
+        $paths = [
             "{$basepath}Vardefs/",
             "{$basepath}Layoutdefs/",
             "{$basepath}WirelessLayoutdefs/",
-            "custom/Extension/application/Ext/TableDictionary/",
-        );
+            'custom/Extension/application/Ext/TableDictionary/',
+        ];
         if (!empty($rel_name)) {
-            $fn = $rel_name ."_". $mod. ".php";
+            $fn = $rel_name . '_' . $mod . '.php';
 
             foreach ($relationshipsDirs as $relationshipDir) {
                 array_push($paths, "{$relationshipsPath}{$relationshipDir}/");
             }
 
-            $files = array(
+            $files = [
                 "custom/metadata/{$rel_name}MetaData.php",
-                "{$relationshipsPath}relationships/{$rel_name}MetaData.php"
-            );
+                "{$relationshipsPath}relationships/{$rel_name}MetaData.php",
+            ];
             foreach ($paths as $path) {
                 array_push($files, $path . $fn);
             }
@@ -485,7 +487,7 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
         }
         //check for non-standard paths.
         foreach ($paths as $path) {
-            foreach (glob($path . "*.php") as $file) {
+            foreach (glob($path . '*.php') as $file) {
                 if (!in_array($file, $result['main']) && !in_array($file, $result['addon'])) {
                     array_push($result['addon'], $file);
                 }
@@ -552,7 +554,7 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
             if (is_array($token) && $token[0] == T_VARIABLE) {
                 $res = $token[1];
                 //Added -1 to $ind's upper bound since $ind++ is used in the loop
-                while ($tokens[$ind] != '=' && $ind < count($tokens)-1) {
+                while ($tokens[$ind] != '=' && $ind < count($tokens) - 1) {
                     $ind++;
                     if (!is_array($tokens[$ind])) {
                         if ($tokens[$ind] == '=') {
@@ -584,7 +586,7 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
         if (file_exists($fn)) {
             $this->deleteFile($fn);
         } else {
-	        return false;
+            return false;
         }
 
         return true;
@@ -627,12 +629,12 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
         if (!empty($def['source']) && $def['source'] != 'db' && $def['source'] != 'custom_fields') {
             return;
         }
-        foreach (array('fields', 'db_concat_fields', 'sort_on') as $subField) {
+        foreach (['fields', 'db_concat_fields', 'sort_on'] as $subField) {
             if (empty($def[$subField])) {
                 continue;
             }
             if (!is_array($def[$subField])) {
-                $def[$subField] = array($def[$subField]);
+                $def[$subField] = [$def[$subField]];
             }
             foreach ($def[$subField] as $k => $value) {
                 $bad = false;
@@ -673,17 +675,17 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
         $seed = BeanFactory::newBean($mod);
         $this->removeField($seed, $def['name']);
 
-        $vBean = ($mod == "aCase") ? "Case" : $mod;
-        $out =  "<?php\n // created: " . date('Y-m-d H:i:s') . "\n";
+        $vBean = ($mod == 'aCase') ? 'Case' : $mod;
+        $out = "<?php\n // created: " . date('Y-m-d H:i:s') . "\n";
         foreach ($def as $property => $val) {
             $out .= override_value_to_string_recursive(
-                array(
+                [
                     $vBean,
-                    "fields",
+                    'fields',
                     $def['name'],
-                    $property
-                ),
-                "dictionary",
+                    $property,
+                ],
+                'dictionary',
                 $val
             );
             $out .= "\n";
@@ -707,13 +709,13 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
         }
 
         foreach ($files as $file) {
-            $dictionary = array();
+            $dictionary = [];
             include $file;
             if (!empty($dictionary[$seed->object_name]['fields'][$field])) {
                 $this->upgrader->backupFile($file);
                 $this->log("Remove definition of {$field} for module {$mod}");
                 $out = "<?php\n // created: " . date('Y-m-d H:i:s') . "\n";
-                unset ($dictionary[$seed->object_name]['fields'][$field]);
+                unset($dictionary[$seed->object_name]['fields'][$field]);
                 if (empty($dictionary)) {
                     $this->deleteFile($file);
                 } else {
@@ -776,12 +778,12 @@ class DefinitionObject implements Iterator, ArrayAccess, Countable
     public function __construct($definitions)
     {
         if (!is_array($definitions)) {
-            $definitions = array($definitions);
+            $definitions = [$definitions];
         }
         $this->defs = $definitions;
         $this->offsets = array_keys($definitions);
         $this->current_offset = 0;
-        $this->wrongDefs = array();
+        $this->wrongDefs = [];
     }
 
     public function setWrongDef($key)
@@ -809,7 +811,7 @@ class DefinitionObject implements Iterator, ArrayAccess, Countable
     #[\ReturnTypeWillChange]
     public function key()
     {
-        return ($this->current_offset < $this->count()) ? $this->offsets[$this->current_offset]: null;
+        return ($this->current_offset < $this->count()) ? $this->offsets[$this->current_offset] : null;
     }
 
     public function valid(): bool
@@ -848,7 +850,7 @@ class DefinitionObject implements Iterator, ArrayAccess, Countable
         }
         unset($this->defs[$offset], $this->offsets[$index]);
         $ind = 0;
-        $offsets = array();
+        $offsets = [];
         foreach ($this->offsets as $off) {
             $offsets[$ind++] = $off;
         }
@@ -857,6 +859,6 @@ class DefinitionObject implements Iterator, ArrayAccess, Countable
 
     public function count(): int
     {
-        return count($this->defs);
+        return is_countable($this->defs) ? count($this->defs) : 0;
     }
 }

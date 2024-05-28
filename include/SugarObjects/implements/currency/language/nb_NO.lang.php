@@ -9,11 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-    'LBL_CURRENCY'=>'Valuta',
+$mod_strings = [
+    'LBL_CURRENCY' => 'Valuta',
     'LBL_CURRENCIES' => 'Valuta',
-    'LBL_CURRENCY_NAME'=>'Valuta navn',
-    'LBL_CURRENCY_SYMBOL'=>'Valutategn',
+    'LBL_CURRENCY_NAME' => 'Valuta navn',
+    'LBL_CURRENCY_SYMBOL' => 'Valutategn',
     'LBL_CURRENCY_RATE' => 'Grunnlagsrente',
     'LBL_CURRENCY_ID' => 'Valuta ID',
-);
+];

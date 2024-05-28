@@ -11,66 +11,68 @@
  */
 
 
-class EmailMan extends SugarBean{
-	var $id;
-	var $deleted;
-	var $date_created;
-	var $date_modified;
-	var $module;
-	var $module_id;
-	var $marketing_id;
-	var $campaign_id;
-	var $user_id;
-	var $list_id;
-	var $invalid_email;
-	var $from_name;
-	var $from_email;
-	var $in_queue;
-	var $in_queue_date;
-	var $template_id;
-	var $send_date_time;
-	var $table_name = "emailman";
-	var $object_name = "EmailMan";
-	var $module_dir = "EmailMan";
-	var $send_attempts;
-	var $related_id;
-	var $related_type;
-	var $test=false;
-	var $notes_array = array();
-    var $verified_email_marketing_ids =  array();
-	function toString(){
-		return "EmailMan:\nid = $this->id ,user_id= $this->user_id module = $this->module , related_id = $this->related_id , related_type = $this->related_type ,list_id = $this->list_id, send_date_time= $this->send_date_time\n";
-	}
+class EmailMan extends SugarBean
+{
+    public $id;
+    public $deleted;
+    public $date_created;
+    public $date_modified;
+    public $module;
+    public $module_id;
+    public $marketing_id;
+    public $campaign_id;
+    public $user_id;
+    public $list_id;
+    public $invalid_email;
+    public $from_name;
+    public $from_email;
+    public $in_queue;
+    public $in_queue_date;
+    public $template_id;
+    public $send_date_time;
+    public $table_name = 'emailman';
+    public $object_name = 'EmailMan';
+    public $module_dir = 'EmailMan';
+    public $send_attempts;
+    public $related_id;
+    public $related_type;
+    public $test = false;
+    public $notes_array = [];
+    public $verified_email_marketing_ids = [];
+
+    public function toString()
+    {
+        return "EmailMan:\nid = $this->id ,user_id= $this->user_id module = $this->module , related_id = $this->related_id , related_type = $this->related_type ,list_id = $this->list_id, send_date_time= $this->send_date_time\n";
+    }
 
     // This is used to retrieve related fields from form posts.
-	var $additional_column_fields = array();
+    public $additional_column_fields = [];
 
 
-	public function __construct() {
-		parent::__construct();
-		$this->disable_row_level_security=true;
-
-	}
-
-	var $new_schema = true;
-
-    public function create_new_list_query($order_by, $where, $filter = array(), $params = array(), $show_deleted = 0, $join_type = '', $return_array = false, $parentbean = null, $singleSelect = false, $ifListForExport = false)
+    public function __construct()
     {
-		$query = array('select' => '', 'from' => '', 'where' => '', 'order_by' => '');
+        parent::__construct();
+        $this->disable_row_level_security = true;
+    }
+
+    public $new_schema = true;
+
+    public function create_new_list_query($order_by, $where, $filter = [], $params = [], $show_deleted = 0, $join_type = '', $return_array = false, $parentbean = null, $singleSelect = false, $ifListForExport = false)
+    {
+        $query = ['select' => '', 'from' => '', 'where' => '', 'order_by' => ''];
 
 
-
-		$query['select'] = "SELECT $this->table_name.* ,
+        $query['select'] = "SELECT $this->table_name.* ,
 					campaigns.name as campaign_name,
 					email_marketing.name as message_name,
 					(CASE related_type
-						WHEN 'Contacts' THEN ".$this->db->concat('contacts', array('first_name', 'last_name'), '&nbsp;')."
-						WHEN 'Leads' THEN ".$this->db->concat('leads', array('first_name', 'last_name'), '&nbsp;')."
+						WHEN 'Contacts' THEN " . $this->db->concat('contacts', ['first_name', 'last_name'], '&nbsp;') . "
+						WHEN 'Leads' THEN " . $this->db->concat('leads', ['first_name', 'last_name'], '&nbsp;') . "
 						WHEN 'Accounts' THEN accounts.name
-						WHEN 'Users' THEN ".$this->db->concat('users', array('first_name', 'last_name'), '&nbsp;')."
-						WHEN 'Prospects' THEN ".$this->db->concat('prospects', array('first_name', 'last_name'), '&nbsp;')."
-					END) recipient_name";
-		$query['from'] = "	FROM $this->table_name
+						WHEN 'Users' THEN " . $this->db->concat('users', ['first_name', 'last_name'], '&nbsp;') . "
+						WHEN 'Prospects' THEN " . $this->db->concat('prospects', ['first_name', 'last_name'], '&nbsp;') . '
+					END) recipient_name';
+        $query['from'] = "	FROM $this->table_name
 					LEFT JOIN users ON users.id = $this->table_name.related_id and $this->table_name.related_type ='Users'
 					LEFT JOIN contacts ON contacts.id = $this->table_name.related_id and $this->table_name.related_type ='Contacts'
 					LEFT JOIN leads ON leads.id = $this->table_name.related_id and $this->table_name.related_type ='Leads'
@@ -81,52 +83,53 @@ class EmailMan extends SugarBean{
 					LEFT JOIN campaigns ON campaigns.id = $this->table_name.campaign_id
 					LEFT JOIN email_marketing ON email_marketing.id = $this->table_name.marketing_id ";
 
-                $where_auto = " $this->table_name.deleted=0";
+        $where_auto = " $this->table_name.deleted=0";
 
-		$this->addVisibilityFrom($query['from'], array('where_condition' => true));
+        $this->addVisibilityFrom($query['from'], ['where_condition' => true]);
 
-        if($where != "")
-			$query['where'] = "WHERE $where AND ".$where_auto;
-		else
-			$query['where'] = "WHERE ".$where_auto;
+        if ($where != '') {
+            $query['where'] = "WHERE $where AND " . $where_auto;
+        } else {
+            $query['where'] = 'WHERE ' . $where_auto;
+        }
 
-		$this->addVisibilityWhere($query['where'], array('where_condition' => true));
+        $this->addVisibilityWhere($query['where'], ['where_condition' => true]);
 
-    	if(isset($params['group_by'])) {
+        if (isset($params['group_by'])) {
             $query['group_by'] .= " GROUP BY {$params['group_by']}";
-		}
+        }
 
         $order_by = $this->process_order_by($order_by);
         if (!empty($order_by)) {
             $query['order_by'] = ' ORDER BY ' . $order_by;
         }
 
-		if ($return_array) {
-			return $query;
-		}
+        if ($return_array) {
+            return $query;
+        }
 
-		return  $query['select'] . $query['from'] . $query['where']. $query['order_by'];
-
+        return $query['select'] . $query['from'] . $query['where'] . $query['order_by'];
     } // if
 
-    function create_queue_items_query($order_by, $where,$filter=array(),$params=array(), $show_deleted = 0,$join_type='', $return_array = false,$parentbean=null, $singleSelect = false) {
+    public function create_queue_items_query($order_by, $where, $filter = [], $params = [], $show_deleted = 0, $join_type = '', $return_array = false, $parentbean = null, $singleSelect = false)
+    {
 
-		if ($return_array) {
-			return parent::create_new_list_query($order_by, $where,$filter,$params, $show_deleted,$join_type, $return_array,$parentbean, $singleSelect);
-		}
+        if ($return_array) {
+            return parent::create_new_list_query($order_by, $where, $filter, $params, $show_deleted, $join_type, $return_array, $parentbean, $singleSelect);
+        }
 
-		$query = "SELECT $this->table_name.* ,
+        $query = "SELECT $this->table_name.* ,
 					campaigns.name as campaign_name,
 					email_marketing.name as message_name,
 					(CASE related_type
-						WHEN 'Contacts' THEN ".$this->db->concat('contacts', array('first_name', 'last_name'), '&nbsp;')."
-						WHEN 'Leads' THEN ".$this->db->concat('leads', array('first_name', 'last_name'), '&nbsp;')."
+						WHEN 'Contacts' THEN " . $this->db->concat('contacts', ['first_name', 'last_name'], '&nbsp;') . "
+						WHEN 'Leads' THEN " . $this->db->concat('leads', ['first_name', 'last_name'], '&nbsp;') . "
 						WHEN 'Accounts' THEN accounts.name
-						WHEN 'Users' THEN ".$this->db->concat('users', array('first_name', 'last_name'), '&nbsp;')."
-						WHEN 'Prospects' THEN ".$this->db->concat('prospects', array('first_name', 'last_name'), '&nbsp;')."
-					END) recipient_name";
+						WHEN 'Users' THEN " . $this->db->concat('users', ['first_name', 'last_name'], '&nbsp;') . "
+						WHEN 'Prospects' THEN " . $this->db->concat('prospects', ['first_name', 'last_name'], '&nbsp;') . '
+					END) recipient_name';
 
-		 $query .= " FROM $this->table_name
+        $query .= " FROM $this->table_name
 		            LEFT JOIN users ON users.id = $this->table_name.related_id and $this->table_name.related_type ='Users'
 					LEFT JOIN contacts ON contacts.id = $this->table_name.related_id and $this->table_name.related_type ='Contacts'
 					LEFT JOIN leads ON leads.id = $this->table_name.related_id and $this->table_name.related_type ='Leads'
@@ -137,43 +140,43 @@ class EmailMan extends SugarBean{
 					LEFT JOIN campaigns ON campaigns.id = $this->table_name.campaign_id
 					LEFT JOIN email_marketing ON email_marketing.id = $this->table_name.marketing_id ";
 
-		 //B.F. #37943
-		if( isset($params['group_by']) )
-		{
-			$group_by = str_replace("emailman", "em", $params['group_by']);
-		    $query .= "INNER JOIN (select min(id) as id from emailman  em GROUP BY $group_by  ) secondary
+        //B.F. #37943
+        if (isset($params['group_by'])) {
+            $group_by = str_replace('emailman', 'em', $params['group_by']);
+            $query .= "INNER JOIN (select min(id) as id from emailman  em GROUP BY $group_by  ) secondary
 			           on {$this->table_name}.id = secondary.id	";
-		}
+        }
 
-                $where_auto = " $this->table_name.deleted=0";
+        $where_auto = " $this->table_name.deleted=0";
 
-        if($where != "")
-			$query .= "WHERE $where AND ".$where_auto;
-		else
-			$query .= "WHERE ".$where_auto;
+        if ($where != '') {
+            $query .= "WHERE $where AND " . $where_auto;
+        } else {
+            $query .= 'WHERE ' . $where_auto;
+        }
 
         $order_by = $this->process_order_by($order_by);
         if (!empty($order_by)) {
             $query .= ' ORDER BY ' . $order_by;
         }
 
-		return $query;
-
+        return $query;
     }
 
-	function create_list_query($order_by, $where, $show_deleted = 0){
+    public function create_list_query($order_by, $where, $show_deleted = 0)
+    {
 
-		$query = "SELECT $this->table_name.* ,
+        $query = "SELECT $this->table_name.* ,
 					campaigns.name as campaign_name,
 					email_marketing.name as message_name,
 					(CASE related_type
-						WHEN 'Contacts' THEN ".$this->db->concat('contacts', array('first_name', 'last_name'), '&nbsp;')."
-						WHEN 'Leads' THEN ".$this->db->concat('leads', array('first_name', 'last_name'), '&nbsp;')."
+						WHEN 'Contacts' THEN " . $this->db->concat('contacts', ['first_name', 'last_name'], '&nbsp;') . "
+						WHEN 'Leads' THEN " . $this->db->concat('leads', ['first_name', 'last_name'], '&nbsp;') . "
 						WHEN 'Accounts' THEN accounts.name
-						WHEN 'Users' THEN ".$this->db->concat('users', array('first_name', 'last_name'), '&nbsp;')."
-						WHEN 'Prospects' THEN ".$this->db->concat('prospects', array('first_name', 'last_name'), '&nbsp;')."
-					END) recipient_name";
-		$query .= "	FROM $this->table_name
+						WHEN 'Users' THEN " . $this->db->concat('users', ['first_name', 'last_name'], '&nbsp;') . "
+						WHEN 'Prospects' THEN " . $this->db->concat('prospects', ['first_name', 'last_name'], '&nbsp;') . '
+					END) recipient_name';
+        $query .= "	FROM $this->table_name
 					LEFT JOIN users ON users.id = $this->table_name.related_id and $this->table_name.related_type ='Users'
 					LEFT JOIN contacts ON contacts.id = $this->table_name.related_id and $this->table_name.related_type ='Contacts'
 					LEFT JOIN leads ON leads.id = $this->table_name.related_id and $this->table_name.related_type ='Leads'
@@ -184,30 +187,31 @@ class EmailMan extends SugarBean{
 					LEFT JOIN campaigns ON campaigns.id = $this->table_name.campaign_id
 					LEFT JOIN email_marketing ON email_marketing.id = $this->table_name.marketing_id ";
 
-                $where_auto = " $this->table_name.deleted=0";
+        $where_auto = " $this->table_name.deleted=0";
 
-        if($where != "")
-			$query .= "where $where AND ".$where_auto;
-		else
-			$query .= "where ".$where_auto;
+        if ($where != '') {
+            $query .= "where $where AND " . $where_auto;
+        } else {
+            $query .= 'where ' . $where_auto;
+        }
 
         $order_by = $this->process_order_by($order_by);
         if (!empty($order_by)) {
             $query .= ' ORDER BY ' . $order_by;
         }
 
-		return $query;
-	}
+        return $query;
+    }
 
     public function get_list_view_data($filter_fields = [])
     {
-    	global $locale, $current_user;
+        global $locale, $current_user;
         $temp_array = parent::get_list_view_array();
 
         $related_type = $temp_array['RELATED_TYPE'];
         $related_type = strtolower($related_type);
         $related_type = ucfirst($related_type);
-        $related_id   = $temp_array['RELATED_ID'];
+        $related_id = $temp_array['RELATED_ID'];
 
         $related_bean = BeanFactory::getBean($related_type, $related_id);
         if ($related_bean) {
@@ -236,41 +240,41 @@ SQL;
     }
 
 
-	function set_as_sent($email_address, $delete= true,$email_id=null, $email_type=null,$activity_type=null){
+    public function set_as_sent($email_address, $delete = true, $email_id = null, $email_type = null, $activity_type = null)
+    {
 
-		global $timedate;
+        global $timedate;
 
-		$this->send_attempts++;
-		$this->id = (int)$this->id;
-		if($delete || $this->send_attempts > 5){
+        $this->send_attempts++;
+        $this->id = (int)$this->id;
+        if ($delete || $this->send_attempts > 5) {
+            //create new campaign log record.
 
-			//create new campaign log record.
-
-			$campaign_log = BeanFactory::newBean('CampaignLog');
-			$campaign_log->campaign_id=$this->campaign_id;
-			$campaign_log->target_tracker_key=$this->target_tracker_key;
-			$campaign_log->target_id= $this->related_id;
-			$campaign_log->target_type=$this->related_type;
-            $campaign_log->marketing_id=$this->marketing_id;
-			//if test suppress duplicate email address checking.
-			if (!$this->test) {
-				$campaign_log->more_information=$email_address;
-			}
-			$campaign_log->activity_type=$activity_type;
-			$campaign_log->activity_date=$timedate->now();
-			$campaign_log->list_id=$this->list_id;
-			$campaign_log->related_id= $email_id;
-			$campaign_log->related_type=$email_type;
+            $campaign_log = BeanFactory::newBean('CampaignLog');
+            $campaign_log->campaign_id = $this->campaign_id;
+            $campaign_log->target_tracker_key = $this->target_tracker_key;
+            $campaign_log->target_id = $this->related_id;
+            $campaign_log->target_type = $this->related_type;
+            $campaign_log->marketing_id = $this->marketing_id;
+            //if test suppress duplicate email address checking.
+            if (!$this->test) {
+                $campaign_log->more_information = $email_address;
+            }
+            $campaign_log->activity_type = $activity_type;
+            $campaign_log->activity_date = $timedate->now();
+            $campaign_log->list_id = $this->list_id;
+            $campaign_log->related_id = $email_id;
+            $campaign_log->related_type = $email_type;
             $campaign_log->save();
 
-			$query = "DELETE FROM emailman WHERE id = $this->id";
-			$this->db->query($query);
-		}else{
-			//try to send the email again a day later.
-			$query = 'UPDATE ' . $this->table_name . " SET in_queue='1', send_attempts='$this->send_attempts', in_queue_date=". $this->db->now() ." WHERE id = $this->id";
-			$this->db->query($query);
-		}
-	}
+            $query = "DELETE FROM emailman WHERE id = $this->id";
+            $this->db->query($query);
+        } else {
+            //try to send the email again a day later.
+            $query = 'UPDATE ' . $this->table_name . " SET in_queue='1', send_attempts='$this->send_attempts', in_queue_date=" . $this->db->now() . " WHERE id = $this->id";
+            $this->db->query($query);
+        }
+    }
 
     /**
      * Function finds the reference email for the campaign. Since a campaign can have multiple email templates
@@ -292,37 +296,40 @@ SQL;
      * @param string from_address_name The from address eg markeing <marketing@sugar.net>
      * @return
      */
-    function create_ref_email($marketing_id,$subject,$body_text,$body_html,$campagin_name,$from_address,$sender_id,$notes,$macro_nv,$newmessage,$from_address_name) {
+    public function create_ref_email($marketing_id, $subject, $body_text, $body_html, $campagin_name, $from_address, $sender_id, $notes, $macro_nv, $newmessage, $from_address_name)
+    {
         $rel_name = null;
-       global $mod_Strings, $timedate;
-       $upd_ref_email=false;
-       if ($newmessage or empty($this->ref_email->id)) {
-           $this->ref_email = BeanFactory::newBean('Emails');
-           $this->ref_email->retrieve($marketing_id, true, false);
+        global $mod_Strings, $timedate;
+        $upd_ref_email = false;
+        if ($newmessage or empty($this->ref_email->id)) {
+            $this->ref_email = BeanFactory::newBean('Emails');
+            $this->ref_email->retrieve($marketing_id, true, false);
 
-           //the reference email should be updated when user swithces from test mode to regular mode,and, for every run in test mode, and is user
-           //switches back to test mode.
-           //this is to account for changes to email template.
-           $upd_ref_email=(!empty($this->ref_email->id) and $this->ref_email->parent_type=='test' and $this->ref_email->parent_id=='test');
-          //following condition is for switching back to test mode.
-           if (!$upd_ref_email) $upd_ref_email=($this->test and !empty($this->ref_email->id) and empty($this->ref_email->parent_type) and empty($this->ref_email->parent_id));
-           if (empty($this->ref_email->id) or $upd_ref_email) {
+            //the reference email should be updated when user swithces from test mode to regular mode,and, for every run in test mode, and is user
+            //switches back to test mode.
+            //this is to account for changes to email template.
+            $upd_ref_email = (!empty($this->ref_email->id) and $this->ref_email->parent_type == 'test' and $this->ref_email->parent_id == 'test');
+            //following condition is for switching back to test mode.
+            if (!$upd_ref_email) {
+                $upd_ref_email = ($this->test and !empty($this->ref_email->id) and empty($this->ref_email->parent_type) and empty($this->ref_email->parent_id));
+            }
+            if (empty($this->ref_email->id) or $upd_ref_email) {
                 //create email record.
-                $this->ref_email->id=$marketing_id;
+                $this->ref_email->id = $marketing_id;
                 $this->ref_email->date_sent = $timedate->nowDb();
 
-                if ($upd_ref_email==false) {
-                    $this->ref_email->new_with_id=true;
+                if ($upd_ref_email == false) {
+                    $this->ref_email->new_with_id = true;
                 }
 
                 $this->ref_email->team_id = 1;
-                $this->ref_email->to_addrs= '';
+                $this->ref_email->to_addrs = '';
                 $this->ref_email->to_addrs_ids = '';
                 $this->ref_email->to_addrs_names = '';
-                $this->ref_email->to_addrs_emails ='';
-                $this->ref_email->type= 'campaign';
+                $this->ref_email->to_addrs_emails = '';
+                $this->ref_email->type = 'campaign';
                 $this->ref_email->deleted = '0';
-                $this->ref_email->name = $campagin_name.': '.$subject ;
+                $this->ref_email->name = $campagin_name . ': ' . $subject;
                 $this->ref_email->description_html = $body_html;
                 $this->ref_email->description = $body_text;
                 $this->ref_email->from_addr = $from_address;
@@ -330,27 +337,27 @@ SQL;
                 $this->ref_email->assigned_user_id = $sender_id;
                 if ($this->test) {
                     $this->ref_email->parent_type = 'test';
-                    $this->ref_email->parent_id =  'test';
+                    $this->ref_email->parent_id = 'test';
                 } else {
                     $this->ref_email->parent_type = '';
-                    $this->ref_email->parent_id =  '';
+                    $this->ref_email->parent_id = '';
                 }
 
-                $this->ref_email->status='sent';
+                $this->ref_email->status = 'sent';
                 $this->ref_email->state = Email::STATE_ARCHIVED;
                 $retId = $this->ref_email->save();
 
-                foreach($notes as $note) {
-                        [$filename, $mime_type] = $this->getFileInfo($note);
+                foreach ($notes as $note) {
+                    [$filename, $mime_type] = $this->getFileInfo($note);
                     $noteAudit = BeanFactory::newBean('Notes');
                     $noteAudit->email_id = $retId;
                     $noteAudit->email_type = $this->ref_email->module_dir;
-                    $noteAudit->description = "[".$note->filename."] ".$mod_strings['LBL_ATTACHMENT_AUDIT'];
+                    $noteAudit->description = '[' . $note->filename . '] ' . $mod_strings['LBL_ATTACHMENT_AUDIT'];
                     $noteAudit->name = $note->name;
-                    $noteAudit->filename=$filename;
-                    $noteAudit->file_mime_type=$mime_type;
+                    $noteAudit->filename = $filename;
+                    $noteAudit->file_mime_type = $mime_type;
                     $noteAudit->upload_id = $note->getUploadId();
-                    $noteAudit_id=$noteAudit->save();
+                    $noteAudit_id = $noteAudit->save();
                 }
             }
 
@@ -360,37 +367,36 @@ SQL;
             $this->ref_email->load_relationship('contacts');
             $this->ref_email->load_relationship('leads');
             $this->ref_email->load_relationship('accounts');
-       }
+        }
 
-       if (!empty($this->related_id ) && !empty($this->related_type)) {
-
+        if (!empty($this->related_id) && !empty($this->related_type)) {
             //save relationships.
-            switch ($this->related_type)  {
+            switch ($this->related_type) {
                 case 'Users':
-                    $rel_name="users";
+                    $rel_name = 'users';
                     break;
 
                 case 'Prospects':
-                    $rel_name="prospects";
+                    $rel_name = 'prospects';
                     break;
 
                 case 'Contacts':
-                    $rel_name="contacts";
+                    $rel_name = 'contacts';
                     break;
 
                 case 'Leads':
-                    $rel_name="leads";
+                    $rel_name = 'leads';
                     break;
 
                 case 'Accounts':
-                    $rel_name="accounts";
+                    $rel_name = 'accounts';
                     break;
             }
 
             //required for one email per campaign per marketing message.
-            $this->ref_email->$rel_name->add($this->related_id,array('campaign_data'=>serialize($macro_nv)));
-       }
-       return $this->ref_email->id;
+            $this->ref_email->$rel_name->add($this->related_id, ['campaign_data' => serialize($macro_nv)]);
+        }
+        return $this->ref_email->id;
     }
 
     /**
@@ -401,64 +407,65 @@ SQL;
     protected function getFileInfo($note)
     {
         $filename = $mime_type = '';
-        if($note->object_name == 'Note') {
-            if (! empty($note->file->temp_file_location) && is_file($note->file->temp_file_location)) {
+        if ($note->object_name == 'Note') {
+            if (!empty($note->file->temp_file_location) && is_file($note->file->temp_file_location)) {
                 $filename = $note->file->original_file_name;
                 $mimetype = $note->file->mime_type;
             } else {
-                $filename = $note->id.$note->filename;
+                $filename = $note->id . $note->filename;
                 $mimetype = $note->file_mime_type;
             }
-        } elseif($note->object_name == 'DocumentRevision') { // from Documents
-            $filename = $note->id.$note->filename;
+        } elseif ($note->object_name == 'DocumentRevision') { // from Documents
+            $filename = $note->id . $note->filename;
             $mimetype = $note->file_mime_type;
         }
-        return array($filename, $mimetype);
+        return [$filename, $mimetype];
     }
 
-   /**
-    * The function creates a copy of email send to each target.
-    *
-    * @param $module
-    * @param BaseMailer $mail
-    */
-    public function create_indiv_email($module, $mail) {
+    /**
+     * The function creates a copy of email send to each target.
+     *
+     * @param $module
+     * @param BaseMailer $mail
+     */
+    public function create_indiv_email($module, $mail)
+    {
         global $timedate,
-               $mod_strings;
+        $mod_strings;
 
         $email = BeanFactory::newBean('Emails');
 
         $email->team_id = 1;
 
-        $email->to_addrs         = "{$module->name}&lt;{$module->email1}&gt;";
-        $email->to_addrs_ids     = "{$module->id};";
-        $email->to_addrs_names   = "{$module->name};";
-        $email->to_addrs_emails  = "{$module->email1};";
-        $email->type             = 'archived';
-        $email->deleted          = '0';
-        $email->name             = "{$this->current_campaign->name}: " . $mail->getHeader(EmailHeaders::Subject);
-        $email->description      = $mail->getTextBody();
+        $email->to_addrs = "{$module->name}&lt;{$module->email1}&gt;";
+        $email->to_addrs_ids = "{$module->id};";
+        $email->to_addrs_names = "{$module->name};";
+        $email->to_addrs_emails = "{$module->email1};";
+        $email->type = 'archived';
+        $email->deleted = '0';
+        $email->name = "{$this->current_campaign->name}: " . $mail->getHeader(EmailHeaders::Subject);
+        $email->description = $mail->getTextBody();
         $email->description_html = $mail->getHtmlBody();
-        $email->from_addr        = $mail->getHeader(EmailHeaders::From)->getEmail();
+        $email->from_addr = $mail->getHeader(EmailHeaders::From)->getEmail();
         $email->assigned_user_id = $this->user_id;
-        $email->parent_type      = $this->related_type;
-        $email->parent_id        = $this->related_id;
+        $email->parent_type = $this->related_type;
+        $email->parent_id = $this->related_id;
         $email->date_sent = $timedate->nowDb();
-        $email->status           = 'sent';
+        $email->status = 'sent';
         $email->state = Email::STATE_ARCHIVED;
         $email->message_id = $mail->getHeader(EmailHeaders::MessageId);
-        $retId                   = $email->save();
+        $retId = $email->save();
 
         foreach ($this->notes_array as $note) {
             [$filename, $mime_type] = $this->getFileInfo($note);
             // create "audit" email without duping off the file to save on disk space
-            $noteAudit              = BeanFactory::newBean('Notes');
+            $noteAudit = BeanFactory::newBean('Notes');
             $noteAudit->email_id = $retId;
             $noteAudit->email_type = $email->module_dir;
-            $noteAudit->name        = $note->name;
+            $noteAudit->name = $note->name;
             $noteAudit->description = "[{$note->filename}] {$mod_strings['LBL_ATTACHMENT_AUDIT']}";
-            $noteAudit->filename=$filename;
-            $noteAudit->file_mime_type=$mime_type;
+            $noteAudit->filename = $filename;
+            $noteAudit->file_mime_type = $mime_type;
             $noteAudit->upload_id = $note->getUploadId();
             $noteAudit->save();
         }
@@ -467,19 +474,19 @@ SQL;
             //save relationships.
             switch ($this->related_type) {
                 case 'Users':
-                    $rel_name = "users";
+                    $rel_name = 'users';
                     break;
                 case 'Prospects':
-                    $rel_name = "prospects";
+                    $rel_name = 'prospects';
                     break;
                 case 'Contacts':
-                    $rel_name = "contacts";
+                    $rel_name = 'contacts';
                     break;
                 case 'Leads':
-                    $rel_name = "leads";
+                    $rel_name = 'leads';
                     break;
                 case 'Accounts':
-                    $rel_name = "accounts";
+                    $rel_name = 'accounts';
                     break;
             }
 
@@ -497,120 +504,120 @@ SQL;
      * for the campaign. If issues are found a fatal error will be logged but processing will not stop.
      * @return Boolean Returns true if all campaign parameters are set correctly
      */
-    function verify_campaign($marketing_id) {
+    public function verify_campaign($marketing_id)
+    {
 
         if (!isset($this->verified_email_marketing_ids[$marketing_id])) {
             if (!class_exists('EmailMarketing')) {
-
             }
             $email_marketing = BeanFactory::newBean('EmailMarketing');
-            $ret=$email_marketing->retrieve($marketing_id);
+            $ret = $email_marketing->retrieve($marketing_id);
             if (empty($ret)) {
-                $GLOBALS['log']->fatal('Error retrieving marketing message for the email campaign. marketing_id = ' .$marketing_id);
+                $GLOBALS['log']->fatal('Error retrieving marketing message for the email campaign. marketing_id = ' . $marketing_id);
                 return false;
             }
 
             //verify the email template.
             if (empty($email_marketing->template_id)) {
-                $GLOBALS['log']->fatal('Error retrieving template for the email campaign. marketing_id = ' .$marketing_id);
+                $GLOBALS['log']->fatal('Error retrieving template for the email campaign. marketing_id = ' . $marketing_id);
                 return false;
             }
 
             if (!class_exists('EmailTemplate')) {
-
             }
             $emailtemplate = BeanFactory::newBean('EmailTemplates');
 
-            $ret=$emailtemplate->retrieve($email_marketing->template_id);
+            $ret = $emailtemplate->retrieve($email_marketing->template_id);
             if (empty($ret)) {
-                $GLOBALS['log']->fatal('Error retrieving template for the email campaign. template_id = ' .$email_marketing->template_id);
+                $GLOBALS['log']->fatal('Error retrieving template for the email campaign. template_id = ' . $email_marketing->template_id);
                 return false;
             }
 
             if (empty($emailtemplate->subject) and empty($emailtemplate->body) and empty($emailtemplate->body_html)) {
-                $GLOBALS['log']->fatal('Email template is empty. email_template_id=' .$email_marketing->template_id);
-				return false;
+                $GLOBALS['log']->fatal('Email template is empty. email_template_id=' . $email_marketing->template_id);
+                return false;
             }
-
         }
-        $this->verified_email_marketing_ids[$marketing_id]=1;
+        $this->verified_email_marketing_ids[$marketing_id] = 1;
 
         return true;
     }
-	function sendEmail($mail,$save_emails=1,$testmode=false){
-        $success = false;
-	    $this->test=$testmode;
 
-		global $sugar_config;
-		global $mod_strings;
+    public function sendEmail($mail, $save_emails = 1, $testmode = false)
+    {
+        $success = false;
+        $this->test = $testmode;
+
+        global $sugar_config;
+        global $mod_strings;
         global $locale;
         $OBCharset = $locale->getPrecedentPreference('default_email_charset');
-		$mod_strings = return_module_language( $sugar_config['default_language'], 'EmailMan');
+        $mod_strings = return_module_language($sugar_config['default_language'], 'EmailMan');
 
-		//get tracking entities locations.
-		if (!isset($this->tracking_url)) {
-			$admin = Administration::getSettings('massemailer'); //retrieve all admin settings.
-		    if (isset($admin->settings['massemailer_tracking_entities_location_type']) and $admin->settings['massemailer_tracking_entities_location_type']=='2'  and isset($admin->settings['massemailer_tracking_entities_location']) ) {
-				$this->tracking_url=$admin->settings['massemailer_tracking_entities_location'];
-		    } else {
-				$this->tracking_url=$sugar_config['site_url'];
-		    }
-		}
+        //get tracking entities locations.
+        if (!isset($this->tracking_url)) {
+            $admin = Administration::getSettings('massemailer'); //retrieve all admin settings.
+            if (isset($admin->settings['massemailer_tracking_entities_location_type']) and $admin->settings['massemailer_tracking_entities_location_type'] == '2' and isset($admin->settings['massemailer_tracking_entities_location'])) {
+                $this->tracking_url = $admin->settings['massemailer_tracking_entities_location'];
+            } else {
+                $this->tracking_url = $sugar_config['site_url'];
+            }
+        }
 
         //make sure tracking url ends with '/' character
         $strLen = strlen($this->tracking_url);
-        if ($this->tracking_url[$strLen-1] !='/') {
-            $this->tracking_url .='/';
+        if ($this->tracking_url[$strLen - 1] != '/') {
+            $this->tracking_url .= '/';
         }
 
-		$module = BeanFactory::getBean($this->related_type, $this->related_id);
-		if(empty($module)) {
-		    return false;
-		}
-		$module->emailAddress->handleLegacyRetrieve($module);
+        $module = BeanFactory::getBean($this->related_type, $this->related_id);
+        if (empty($module)) {
+            return false;
+        }
+        $module->emailAddress->handleLegacyRetrieve($module);
 
         //check to see if bean has a primary email address
         if (!$this->is_primary_email_address($module)) {
             //no primary email address designated, do not send out email, create campaign log
             //of type send error to denote that this user was not emailed
-            $this->set_as_sent($module->email1, true,null,null,'send error');
+            $this->set_as_sent($module->email1, true, null, null, 'send error');
             //create fatal logging for easy review of cause.
             $GLOBALS['log']->fatal('Email Address provided is not Primary Address for email with id ' . $module->email1 . "' Emailman id=$this->id");
             return true;
         }
 
-		if (!$this->valid_email_address($module->email1)) {
-			$this->set_as_sent($module->email1, true,null,null,'invalid email');
-			$GLOBALS['log']->fatal('Encountered invalid email address' . $module->email1 . " Emailman id=$this->id");
-			return true;
-		}
+        if (!$this->valid_email_address($module->email1)) {
+            $this->set_as_sent($module->email1, true, null, null, 'invalid email');
+            $GLOBALS['log']->fatal('Encountered invalid email address' . $module->email1 . " Emailman id=$this->id");
+            return true;
+        }
 
         if ((!isset($module->email_opt_out)
-                    || ($module->email_opt_out !== 'on'
-                        && $module->email_opt_out !== 1
-                        && $module->email_opt_out !== '1'))
+                || ($module->email_opt_out !== 'on'
+                    && $module->email_opt_out !== 1
+                    && $module->email_opt_out !== '1'))
             && (!isset($module->invalid_email)
-                    || ($module->invalid_email !== 'on'
-                        && $module->invalid_email !== 1
-                        && $module->invalid_email !== '1'))){
-            $lower_email_address=strtolower($module->email1);
-			//test against indivdual address.
-			if (isset($this->restricted_addresses) and isset($this->restricted_addresses[$lower_email_address])) {
-				$this->set_as_sent($lower_email_address, true,null,null,'blocked');
-				return true;
-			}
-			//test against restricted domains
-			$at_pos=strrpos($lower_email_address,'@');
-			if ($at_pos !== false) {
-				foreach ($this->restricted_domains as $domain=>$value) {
-					$pos=strrpos($lower_email_address,$domain);
-					if ($pos !== false && $pos > $at_pos) {
-						//found
-						$this->set_as_sent($lower_email_address, true,null,null,'blocked');
-						return true;
-					}
-				}
-			}
+                || ($module->invalid_email !== 'on'
+                    && $module->invalid_email !== 1
+                    && $module->invalid_email !== '1'))) {
+            $lower_email_address = strtolower($module->email1);
+            //test against indivdual address.
+            if (isset($this->restricted_addresses) and isset($this->restricted_addresses[$lower_email_address])) {
+                $this->set_as_sent($lower_email_address, true, null, null, 'blocked');
+                return true;
+            }
+            //test against restricted domains
+            $at_pos = strrpos($lower_email_address, '@');
+            if ($at_pos !== false) {
+                foreach ($this->restricted_domains as $domain => $value) {
+                    $pos = strrpos($lower_email_address, (string) $domain);
+                    if ($pos !== false && $pos > $at_pos) {
+                        //found
+                        $this->set_as_sent($lower_email_address, true, null, null, 'blocked');
+                        return true;
+                    }
+                }
+            }
 
             if ($this->hasEmailBeenSent($module->email1, $this->marketing_id)) {
                 // A non-Test version of this marketing email was previously sent to this Email address
@@ -618,35 +625,32 @@ SQL;
                 return true;
             }
 
-			$this->target_tracker_key=create_guid();
+            $this->target_tracker_key = create_guid();
 
-			//fetch email marketing.
-			if (empty($this->current_emailmarketing) or !isset($this->current_emailmarketing)) {
-				if (!class_exists('EmailMarketing')) {
+            //fetch email marketing.
+            if (empty($this->current_emailmarketing) or !isset($this->current_emailmarketing)) {
+                if (!class_exists('EmailMarketing')) {
+                }
 
-				}
-
-				$this->current_emailmarketing = BeanFactory::newBean('EmailMarketing');
-
-			}
-			if (empty($this->current_emailmarketing->id) or $this->current_emailmarketing->id !== $this->marketing_id) {
-				$this->current_emailmarketing->retrieve($this->marketing_id);
+                $this->current_emailmarketing = BeanFactory::newBean('EmailMarketing');
+            }
+            if (empty($this->current_emailmarketing->id) or $this->current_emailmarketing->id !== $this->marketing_id) {
+                $this->current_emailmarketing->retrieve($this->marketing_id);
 
                 $this->newmessage = true;
-			}
-			//fetch email template associate with the marketing message.
-			if (empty($this->current_emailtemplate) or $this->current_emailtemplate->id !== $this->current_emailmarketing->template_id) {
-				if (!class_exists('EmailTemplate')) {
+            }
+            //fetch email template associate with the marketing message.
+            if (empty($this->current_emailtemplate) or $this->current_emailtemplate->id !== $this->current_emailmarketing->template_id) {
+                if (!class_exists('EmailTemplate')) {
+                }
+                $this->current_emailtemplate = BeanFactory::newBean('EmailTemplates');
 
-				}
-				$this->current_emailtemplate = BeanFactory::newBean('EmailTemplates');
+                $this->current_emailtemplate->retrieve($this->current_emailmarketing->template_id);
 
-				$this->current_emailtemplate->retrieve($this->current_emailmarketing->template_id);
-
-				//escape email template contents.
-				$this->current_emailtemplate->subject=from_html($this->current_emailtemplate->subject);
-				$this->current_emailtemplate->body_html=from_html($this->current_emailtemplate->body_html);
-				$this->current_emailtemplate->body=from_html($this->current_emailtemplate->body);
+                //escape email template contents.
+                $this->current_emailtemplate->subject = from_html($this->current_emailtemplate->subject);
+                $this->current_emailtemplate->body_html = from_html($this->current_emailtemplate->body_html);
+                $this->current_emailtemplate->body = from_html($this->current_emailtemplate->body);
 
                 //FIXME: notes.email_type should be EmailTemplates
                 $stmt = $this->db->getConnection()->executeQuery(
@@ -654,54 +658,52 @@ SQL;
                     [$this->current_emailtemplate->id]
                 );
 
-				// cn: bug 4684 - initialize the notes array, else old data is still around for the next round
-				$this->notes_array = array();
+                // cn: bug 4684 - initialize the notes array, else old data is still around for the next round
+                $this->notes_array = [];
                 while ($noteId = $stmt->fetchOne()) {
                     $noteTemplate = BeanFactory::getBean('Notes', $noteId);
-					$this->notes_array[] = $noteTemplate;
-				}
-			}
+                    $this->notes_array[] = $noteTemplate;
+                }
+            }
 
-			// fetch mailbox details..
-			if(empty($this->current_mailbox)) {
-				if (!class_exists('InboundEmail')) {
-
-				}
-				$this->current_mailbox = BeanFactory::newBean('InboundEmail');
+            // fetch mailbox details..
+            if (empty($this->current_mailbox)) {
+                if (!class_exists('InboundEmail')) {
+                }
+                $this->current_mailbox = BeanFactory::newBean('InboundEmail');
                 $this->current_mailbox->disable_row_level_security = true;
-			}
-			if (empty($this->current_mailbox->id) or $this->current_mailbox->id !== $this->current_emailmarketing->inbound_email_id) {
-				$this->current_mailbox->retrieve($this->current_emailmarketing->inbound_email_id);
-				//extract the email address.
-				$this->mailbox_from_addr=$this->current_mailbox->get_stored_options('from_addr','nobody@example.com',null);
-			}
+            }
+            if (empty($this->current_mailbox->id) or $this->current_mailbox->id !== $this->current_emailmarketing->inbound_email_id) {
+                $this->current_mailbox->retrieve($this->current_emailmarketing->inbound_email_id);
+                //extract the email address.
+                $this->mailbox_from_addr = $this->current_mailbox->get_stored_options('from_addr', 'nobody@example.com', null);
+            }
 
-			// fetch campaign details..
-			if (empty($this->current_campaign)) {
-				if (!class_exists('Campaign')) {
+            // fetch campaign details..
+            if (empty($this->current_campaign)) {
+                if (!class_exists('Campaign')) {
+                }
+                $this->current_campaign = BeanFactory::newBean('Campaigns');
+            }
+            if (empty($this->current_campaign->id) or $this->current_campaign->id !== $this->current_emailmarketing->campaign_id) {
+                $this->current_campaign->retrieve($this->current_emailmarketing->campaign_id);
 
-				}
-				$this->current_campaign = BeanFactory::newBean('Campaigns');
-			}
-			if (empty($this->current_campaign->id) or $this->current_campaign->id !== $this->current_emailmarketing->campaign_id) {
-				$this->current_campaign->retrieve($this->current_emailmarketing->campaign_id);
+                //load defined tracked_urls
+                $this->current_campaign->load_relationship('tracked_urls');
+                $query_array = $this->current_campaign->tracked_urls->getQuery(true);
+                $query_array['select'] = 'SELECT tracker_name, tracker_key, id, is_optout ';
+                $result = $this->current_campaign->db->query(implode(' ', $query_array));
 
-				//load defined tracked_urls
-				$this->current_campaign->load_relationship('tracked_urls');
-				$query_array=$this->current_campaign->tracked_urls->getQuery(true);
-				$query_array['select']="SELECT tracker_name, tracker_key, id, is_optout ";
-				$result=$this->current_campaign->db->query(implode(' ',$query_array));
-
-				$this->has_optout_links=false;
-				$this->tracker_urls=array();
-				while (($row=$this->current_campaign->db->fetchByAssoc($result)) != null) {
-					$this->tracker_urls['{'.$row['tracker_name'].'}']=$row;
-					//has the user defined opt-out links for the campaign.
-					if ($row['is_optout']==1) {
-						$this->has_optout_links=true;
-					}
-				}
-			}
+                $this->has_optout_links = false;
+                $this->tracker_urls = [];
+                while (($row = $this->current_campaign->db->fetchByAssoc($result)) != null) {
+                    $this->tracker_urls['{' . $row['tracker_name'] . '}'] = $row;
+                    //has the user defined opt-out links for the campaign.
+                    if ($row['is_optout'] == 1) {
+                        $this->has_optout_links = true;
+                    }
+                }
+            }
 
             try {
                 $from = new EmailIdentity($this->mailbox_from_addr, $this->current_emailmarketing->from_name);
@@ -727,32 +729,30 @@ SQL;
                     $mail->setHeader(EmailHeaders::ReplyTo, new EmailIdentity($replyToAddr, $replyToName));
                 }
 
-                $mail->setHeader("X-CampTrackID", $this->target_tracker_key);
+                $mail->setHeader('X-CampTrackID', $this->target_tracker_key);
 
                 //parse and replace bean variables.
-                $macro_nv   = array();
+                $macro_nv = [];
                 $focus_name = 'Contacts';
                 if ($module->module_dir == 'Accounts') {
                     $focus_name = 'Accounts';
                 }
 
 
-                $template_data = $this->current_emailtemplate->parse_email_template(array('subject'  => $this->current_emailtemplate->subject,
-                                                                                          'body_html'=> $this->current_emailtemplate->body_html,
-                                                                                          'body'     => $this->current_emailtemplate->body,
-                                                                                    )
-                    , $focus_name, $module
-                    , $macro_nv);
+                $template_data = $this->current_emailtemplate->parse_email_template(['subject' => $this->current_emailtemplate->subject,
+                    'body_html' => $this->current_emailtemplate->body_html,
+                    'body' => $this->current_emailtemplate->body,
+                ], $focus_name, $module, $macro_nv);
 
                 //add email address to this list.
                 $macro_nv['sugar_to_email_address'] = $module->email1;
-                $macro_nv['email_template_id']      = $this->current_emailmarketing->template_id;
+                $macro_nv['email_template_id'] = $this->current_emailmarketing->template_id;
 
                 //parse and replace urls.
                 //this is new style of adding tracked urls to a campaign.
-                $tracker_url_template  = $this->tracking_url . 'index.php?entryPoint=campaign_trackerv2&track=%s' . '&identifier=' . $this->target_tracker_key;
+                $tracker_url_template = $this->tracking_url . 'index.php?entryPoint=campaign_trackerv2&track=%s' . '&identifier=' . $this->target_tracker_key;
                 $removeme_url_template = $this->tracking_url . 'index.php?entryPoint=removeme&identifier=' . $this->target_tracker_key;
-                $template_data         = $this->current_emailtemplate->parse_tracker_urls($template_data, $tracker_url_template, $this->tracker_urls, $removeme_url_template);
+                $template_data = $this->current_emailtemplate->parse_tracker_urls($template_data, $tracker_url_template, $this->tracker_urls, $removeme_url_template);
 
                 $mail->clearRecipients();
                 $mail->addRecipientsTo(new EmailIdentity($module->email1, $module->name));
@@ -784,7 +784,7 @@ SQL;
 
                     if (!empty($tracker_url)) {
                         $htmlBody = str_replace('TRACKER_URL_START', "<a href='" . $tracker_url . "'>", $htmlBody);
-                        $htmlBody = str_replace('TRACKER_URL_END', "</a>", $htmlBody);
+                        $htmlBody = str_replace('TRACKER_URL_END', '</a>', $htmlBody);
                         $textBody .= "\n" . $tracker_url;
                     }
 
@@ -805,7 +805,7 @@ SQL;
 
                 // cn: bug 4684, handle attachments in email templates.
                 if (!empty($this->notes_array)) {
-                    foreach($this->notes_array as $note) {
+                    foreach ($this->notes_array as $note) {
                         $attachment = AttachmentPeer::attachmentFromSugarBean($note);
                         $mail->addAttachment($attachment);
                     }
@@ -839,45 +839,46 @@ SQL;
                 }
             } catch (MailerException $me) {
                 //log send error. save for next attempt after 24hrs. no campaign log entry will be created.
-                $this->set_as_sent($module->email1,false,null,null,'send error');
-                $GLOBALS['log']->error("Emailman::sendMail - Campaign Email Send Error:" . $me->getMessage());
+                $this->set_as_sent($module->email1, false, null, null, 'send error');
+                $GLOBALS['log']->error('Emailman::sendMail - Campaign Email Send Error:' . $me->getMessage());
             }
-		}else{
-            $this->target_tracker_key=create_guid();
+        } else {
+            $this->target_tracker_key = create_guid();
 
-			if (isset($module->email_opt_out) && ($module->email_opt_out === 'on' || $module->email_opt_out == '1' || $module->email_opt_out == 1)) {
-				$this->set_as_sent($module->email1,true,null,null,'removed');
-			} else {
-				if (isset($module->invalid_email) && ($module->invalid_email == 1 || $module->invalid_email == '1')) {
-					$this->set_as_sent($module->email1,true,null,null,'invalid email');
-				} else {
-					$this->set_as_sent($module->email1,true, null,null,'send error');
-				}
-			}
-		}
+            if (isset($module->email_opt_out) && ($module->email_opt_out === 'on' || $module->email_opt_out == '1' || $module->email_opt_out == 1)) {
+                $this->set_as_sent($module->email1, true, null, null, 'removed');
+            } else {
+                if (isset($module->invalid_email) && ($module->invalid_email == 1 || $module->invalid_email == '1')) {
+                    $this->set_as_sent($module->email1, true, null, null, 'invalid email');
+                } else {
+                    $this->set_as_sent($module->email1, true, null, null, 'send error');
+                }
+            }
+        }
 
-		return $success;
-	}
+        return $success;
+    }
 
-	/*
-	 * Validates the passed email address.
-	 * Limitations of this algorithm: does not validate email addressess that end with .meuseum
-	 *
-	 */
-	function valid_email_address($email_address) {
+    /*
+     * Validates the passed email address.
+     * Limitations of this algorithm: does not validate email addressess that end with .meuseum
+     *
+     */
+    public function valid_email_address($email_address)
+    {
 
-		$email_address=trim($email_address);
-		if (empty($email_address)) {
-			return false;
-		}
+        $email_address = trim($email_address);
+        if (empty($email_address)) {
+            return false;
+        }
 
-		$pattern='/[A-Z0-9\._%-]+@[A-Z0-9\.-]+\.[A-Za-z]{2,}$/i';
-		$ret=preg_match($pattern, $email_address);
-		if ($ret===false or $ret==0) {
-			return false;
-		}
-		return true;
-	}
+        $pattern = '/[A-Z0-9\._%-]+@[A-Z0-9\.-]+\.[A-Za-z]{2,}$/i';
+        $ret = preg_match($pattern, $email_address);
+        if ($ret === false or $ret == 0) {
+            return false;
+        }
+        return true;
+    }
 
     /*
      * This function takes in the given bean and searches for a related email address
@@ -885,23 +886,23 @@ SQL;
      * If no primary email address is found, then false is returned
      *
      */
-    function is_primary_email_address($bean){
-        $email_address=trim($bean->email1);
+    public function is_primary_email_address($bean)
+    {
+        $email_address = trim($bean->email1);
 
         if (empty($email_address)) {
             return false;
         }
         //query for this email address rel and see if this is primary address
-        $primary_qry = "select email_address_id from email_addr_bean_rel where bean_id = '".$bean->id."' and email_addr_bean_rel.primary_address=1 and deleted=0";
+        $primary_qry = "select email_address_id from email_addr_bean_rel where bean_id = '" . $bean->id . "' and email_addr_bean_rel.primary_address=1 and deleted=0";
         $res = $bean->db->query($primary_qry);
-        $prim_row=$this->db->fetchByAssoc($res);
+        $prim_row = $this->db->fetchByAssoc($res);
         //return true if this is primary
         if (!empty($prim_row)) {
             return true;
         }
         return false;
-
-     }
+    }
 
     /**
      * Actuall deletes the emailman record
@@ -911,7 +912,7 @@ SQL;
     {
         $query = "DELETE FROM {$this->table_name} WHERE id = ? ";
         $conn = $this->db->getConnection();
-        $conn->executeStatement($query, array($this->id));
+        $conn->executeStatement($query, [$this->id]);
     }
 
     /**
@@ -926,7 +927,7 @@ SQL;
     protected function hasEmailBeenSent($email, $marketingId)
     {
         $q = new SugarQuery();
-        $q->select(array('id'));
+        $q->select(['id']);
         $q->from(BeanFactory::newBean('CampaignLog'));
         $q->where()->queryAnd()
             ->equals('more_information', $email)

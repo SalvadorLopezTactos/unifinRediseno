@@ -13,8 +13,8 @@
 
 class SugarWidgetSubPanelTopMessage extends SugarWidgetSubPanelTopButton
 {
-    public function display(array $defines, $additionalFormFields = array())
-	{
+    public function display(array $defines, $additionalFormFields = [])
+    {
         return $defines['message'];
-	}
+    }
 }

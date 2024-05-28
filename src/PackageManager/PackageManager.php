@@ -89,7 +89,7 @@ class PackageManager
     {
         global $sugar_version, $sugar_flavor;
 
-        $this->isPackageScanEnabled = (bool) SugarConfig::getInstance()->get('moduleInstaller.packageScan', false);
+        $this->isPackageScanEnabled = (bool)SugarConfig::getInstance()->get('moduleInstaller.packageScan', false);
         $this->sugarVersion = $sugar_version;
         $this->sugarFlavor = $sugar_flavor;
 
@@ -97,7 +97,7 @@ class PackageManager
         $this->upgradeHistoryFactory = new UpgradeHistoryFactory();
 
         $this->baseTempDir = sugar_cached('mlp_temp');
-        sugar_mkdir($this->baseTempDir);
+        sugar_mkdir($this->baseTempDir, null, true);
         $this->baseUpgradeDir = 'upgrades';
     }
 
@@ -356,7 +356,7 @@ class PackageManager
      * @param string $packageDir
      * @throws Exception\ModuleScannerException
      */
-    private function scanPackage(string $packageDir):void
+    private function scanPackage(string $packageDir): void
     {
         $this->moduleScanner->scanPackage($packageDir);
         if ($this->moduleScanner->hasIssues()) {
@@ -559,7 +559,7 @@ class PackageManager
                     'Package Install process was not finished successfully'
                 );
                 LoggerManager::getLogger()->fatal(sprintf(
-                    "Error: %s in %s at line: %s",
+                    'Error: %s in %s at line: %s',
                     $err['message'],
                     $err['file'],
                     $err['line']
@@ -784,7 +784,7 @@ class PackageManager
             MlpLogger::replaceDefault();
 
             LoggerManager::getLogger()->fatal(sprintf(
-                "Uninstalling a package %s because of the fatal error",
+                'Uninstalling a package %s because of the fatal error',
                 $justInstalled->name
             ));
             LoggerManager::getLogger()->fatal($err);
@@ -804,7 +804,7 @@ class PackageManager
     protected function getUniquePackageFileName(UpgradeHistory $history): string
     {
         return sprintf(
-            "%s_%s_%s.zip",
+            '%s_%s_%s.zip',
             $history->id_name,
             $history->version,
             time(),

@@ -9,18 +9,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Releases']['base']['filter']['basic'] = array(
+$viewdefs['Releases']['base']['filter']['basic'] = [
     'create' => false,
-    'filters' => array(
-        array(
+    'filters' => [
+        [
             'id' => 'all_records', // need 'all_records' to make filter irremovable
             'name' => 'LBL_ACTIVE_RELEASES',
-            'filter_definition' => array(
-                'status' => array(
-                    '$in' => array('Active'),
-                ),
-            ),
+            'filter_definition' => [
+                'status' => [
+                    '$in' => ['Active'],
+                ],
+            ],
             'editable' => false,
-        ),
-    ),
-);
+        ],
+    ],
+];

@@ -9,6 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Releases']['base']['filter']['default'] = array(
+$viewdefs['Releases']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-);
+];

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,15 +10,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-class ProductTemplatesController extends SugarController {
+
+class ProductTemplatesController extends SugarController
+{
     public function process()
     {
         if ((!is_admin($GLOBALS['current_user']) && (!is_admin_for_module($GLOBALS['current_user'], 'Products')))
-		  && (strtolower($this->action) != 'popup')){
-			$this->hasAccess = false;
-		}
-		parent::process();
-	}
-	
+            && (strtolower($this->action) != 'popup')) {
+            $this->hasAccess = false;
+        }
+        parent::process();
+    }
 }
-

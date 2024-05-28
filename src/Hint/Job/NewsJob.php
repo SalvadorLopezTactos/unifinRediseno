@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint\Job;
 
 use Sugarcrm\Sugarcrm\Hint\Config\ConfigTrait;
@@ -47,6 +48,10 @@ class NewsJob implements \RunnableSchedulerJob
      */
     public function run($data)
     {
+        if (!hasSystemHintLicense()) {
+            return $this->job->succeedJob(translate('LBL_HINT_NO_LICENSE_ACCESS'));
+        }
+
         if (!$this->getConfig()->isInsightsEnabled()) {
             return $this->postpone('Postponing, Hint insights package is disabled');
         }

@@ -189,6 +189,11 @@ $viewdefs['DRI_Workflows']['base']['view']['record'] = [
                 'case_name',
                 [],
                 [
+                    'name' => 'stage_numbering',
+                    'type' => 'toggle',
+                    'css_class' => 'horizontal-vertical',
+                ],
+                [
                     'name' => 'description',
                     'comment' => 'Full text of the note',
                     'label' => 'LBL_DESCRIPTION',

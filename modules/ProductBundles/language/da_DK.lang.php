@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Gruppefase:',
-    'LBL_DEAL_TOT'=>'rabat i alt',
-    'LBL_DEAL_TOT_USDOLLAR'=>'rabat i alt i USD',
+    'LBL_DEAL_TOT' => 'rabat i alt',
+    'LBL_DEAL_TOT_USDOLLAR' => 'rabat i alt i USD',
     'LBL_NEW_SUB' => 'Subtotal inkl. rabat:',
     'LBL_SHIPPING' => 'Fragt:',
-    'LBL_SHIPPING_USDOLLAR'=>'Fragt i USD',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Subtotal i USD',
+    'LBL_SHIPPING_USDOLLAR' => 'Fragt i USD',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Subtotal i USD',
     'LBL_SUBTOTAL' => 'Subtotal:',
     'LBL_TAXABLE_SUBTOTAL' => 'Skattepligtige i alt',
-    'LBL_TAX_USDOLLAR'=>'Moms i USD',
+    'LBL_TAX_USDOLLAR' => 'Moms i USD',
     'LBL_TAX' => 'Moms:',
-    'LBL_TOTAL_USDOLLAR'=>'I alt i USD',
+    'LBL_TOTAL_USDOLLAR' => 'I alt i USD',
     'LBL_TOTAL' => 'I alt:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Quote Bundle Position',
     'EXCEPTION_INVALID_QUOTE_ID' => 'Quote ID mangler fra nyttelasten',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'Den Quote du har anmodet om blev ikke fundet',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'Den Quote du har anmodet om blev ikke fundet',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Yderligere grupperabat',
     'LBL_GROUP_TOTAL' => 'Gruppetotal',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Gruppeoverskrift',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Standardprodukt-pakkeløsningen for tilbuddet',
     'LBL_ALERT_DELETING_ITEM' => 'Sletter linjeelement(er)',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Linjeelementet blev slettet',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje for produktbundt',
+];

@@ -25,7 +25,17 @@
     .headerpane {
       h1 {
         .record-cell:first-child {
-          .w-full();
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .home-headerpane {
+    .headerpane {
+      h1 {
+        .record-cell.error:first-child {
+          width: 100%;
         }
       }
     }
@@ -34,16 +44,15 @@
   .headerpane {
     h1 {
       > .record-cell {
-        .pl-0();
+        padding-left: 0;
 
         &:first-child {
-          .pl-5();
+          padding-left: 1.25rem;
         }
 
         &.edit {
-          .w-full();
-
           padding: 12px 0 0 20px;
+          width: 100%;
         }
 
         .detail {
@@ -56,9 +65,12 @@
       div {
         &.ellipsis_inline {
           //Added to match favorite button height in adjacent record-cell
-          .h-7();
-
+          height: 1.75rem;
           line-height: 28px;
+        }
+
+        &.record-edit-link-wrapper {
+          display: none;
         }
       }
 
@@ -250,6 +262,10 @@
   .ui-sortable .ui-sortable-placeholder {
     height: auto !important;
   }
+
+  &.overflow-y-clip {
+    overflow-y: clip;
+  }
 }
 
 .row-model-data {
@@ -302,7 +318,7 @@ body.sugar-dark-theme {
       width: calc(~"34.042553198% + 1px");
       right: auto;
       padding: 0 5px 0 4px;
-      z-index: 1;
+      z-index: 2;
 
       .record-cell {
         .detail {
@@ -316,7 +332,7 @@ body.sugar-dark-theme {
         max-width: none;
 
         &.edit {
-          .w-full();
+          width: 100%;
         }
       }
 
@@ -339,8 +355,7 @@ body.sugar-dark-theme {
         }
 
         div.dropdown {
-          .pr-0();
-
+          padding-right: 0;
           display: flex;
           align-items: center;
 
@@ -417,6 +432,7 @@ body.sugar-dark-theme {
   .drillthrough-pane {
     .headerpane {
       border-bottom: 0;
+      background-color: transparent;
 
       .record-cell:first-child {
         padding-top: 16px;
@@ -514,12 +530,6 @@ body.sugar-dark-theme {
         border-left: @borderWidget;
         border-top: @borderWidget;
         white-space: nowrap;
-
-        > a {
-          margin: 0;
-          padding: 10px;
-          border-radius: 0;
-        }
       }
 
       &.related-tabs {
@@ -619,8 +629,7 @@ body.sugar-dark-theme {
 
   .nav-tabs > li > a {
     outline: none;
-
-    .pb-0\.75();
+    padding-bottom: 0.1875rem;
   }
 }
 
@@ -629,16 +638,12 @@ body.sugar-dark-theme {
   .toggleless-filterpanel {
     background: @multiLineBackground;
 
-    .filter-definition-container {
-      max-height: 215px;
-      .overflow-auto();
-    }
+    .main-content {
+      margin: -5px 50px 5px 5px;
+      display: flex;
 
-    .controls.has-refresh {
-      padding-right: 15px;
-
-      .refresh {
-        right: 5px;
+      .sorting-panel {
+        display: inline-flex;
       }
     }
   }
@@ -732,12 +737,18 @@ body.sugar-dark-theme {
     height: calc(~'100% - 40px');
 
     .grid-stack-item {
-      .pt-3();
+      padding-top: 0.75rem;
     }
 
     .grid-stack-item:last-child {
-      .mb-5();
+      margin-bottom: 1.25rem;
     }
+  }
+
+  .agent_workbench_dashboard.multi-line,
+  .console_dashboard.multi-line {
+    background-color: var(--primary-content-background);
+    height: 100%;
   }
 
   .dashboard {
@@ -746,6 +757,66 @@ body.sugar-dark-theme {
     .cols {
       display: flex;
       flex-direction: column;
+    }
+  }
+}
+
+.dropdown-restrictions {
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1070;
+
+  .dropdown-item-li {
+    width: auto;
+  }
+}
+
+.dropdown-toggle.actionbtn-toggle.chart-legend-dropdown {
+  &:hover {
+    color: @blue;
+    background-color: @gray20;
+
+    i.sicon {
+      color: @blue;
+    }
+  }
+}
+
+body.sugar-dark-theme {
+  .dropdown-toggle.actionbtn-toggle.chart-legend-dropdown {
+    background-color: transparent;
+
+    &:hover {
+      color: @darkModeBlue;
+      background-color: @gray80;
+
+      i.sicon {
+        color: @sicon-color;
+      }
+    }
+  }
+}
+
+.detail.btn-group.actions.chart-legend-toggle {
+  a.chart-legend-dropdown {
+    color: @blue;
+    border: 0.125rem solid @blue;
+
+    i.sicon {
+      color: @blue;
+    }
+  }
+}
+
+body.sugar-dark-theme {
+  .detail.btn-group.actions.chart-legend-toggle {
+    a.chart-legend-dropdown {
+      color: @white;
+      border: 0.125rem solid @darkModeBlue;
+
+      i.sicon {
+        color: @sicon-color;
+      }
     }
   }
 }

@@ -206,8 +206,8 @@ final class DenormalizationApi extends SugarApi
     {
         $module = $args['modules'] ?? null;
         $fieldLists = $args['field-lists'] ?? null;
-        $fieldsNotDenormalized = (array) $fieldLists['not_denormalized'] ?? [];
-        $fieldsDenormalized = (array) $fieldLists['denormalized'] ?? [];
+        $fieldsNotDenormalized = (array)$fieldLists['not_denormalized'] ?? [];
+        $fieldsDenormalized = (array)$fieldLists['denormalized'] ?? [];
 
         $fieldNameToProcess = null;
         $isDenormalization = null;

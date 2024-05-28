@@ -14,17 +14,17 @@ use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
 
 class ModulePortalApi extends ModuleApi
 {
-    public function registerApiRest() : array
+    public function registerApiRest(): array
     {
         return [
             'create' => [
-                'reqType'   => 'POST',
-                'path'      => ['<module>'],
-                'pathVars'  => ['module'],
-                'method'    => 'createRecord',
+                'reqType' => 'POST',
+                'path' => ['<module>'],
+                'pathVars' => ['module'],
+                'method' => 'createRecord',
                 'shortHelp' => 'This API creates a new record through the portal platform and it relates automatically 
                     the Portal Contact (and optionally the Contact\'s Account) based on the portal visibility relationships',
-                'longHelp'  => 'include/api/help/module_post_help.html',
+                'longHelp' => 'include/api/help/module_post_help.html',
             ],
         ];
     }
@@ -38,7 +38,7 @@ class ModulePortalApi extends ModuleApi
      * @throws SugarApiExceptionNotAuthorized
      * @throws SugarApiExceptionNotFound
      */
-    public function createRecord(ServiceBase $api, array $args) : array
+    public function createRecord(ServiceBase $api, array $args): array
     {
         $this->requireArgs($args, ['module']);
 

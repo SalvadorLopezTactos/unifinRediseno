@@ -140,11 +140,26 @@
             show_legend: false,
             show_title: false,
             colorOverrideList: colorList,
+            tooltip: {
+                label: this.getCustomTooltipLabel,
+            }
         };
 
         _.defer(_.bind(function() {
             this.chartData.set({rawChartData: chartData, rawChartParams: chartParams});
         }, this));
+    },
+
+    /**
+     * Customize tooltip label
+     *
+     * @param {Object} chart
+     * @param {Object} tooltip
+     * @return {Array} Array of strings
+     */
+    getCustomTooltipLabel: function(chart, tooltip) {
+        return [`${chart.labels.tooltip.count}: ${chart.rawData.values[tooltip.dataIndex].count}`,
+        `${chart.labels.tooltip.percent}: ${Math.round(chart.rawData.values[tooltip.dataIndex].percentage)}%`];
     },
 
     /**

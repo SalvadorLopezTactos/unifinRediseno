@@ -544,7 +544,7 @@
      * @return {boolean}
      */
     isPanelOpen: function() {
-        return this.$(this.accordionBody).hasClass('in');
+        return this.$(this.accordionBody).hasClass('show');
     },
 
     /**

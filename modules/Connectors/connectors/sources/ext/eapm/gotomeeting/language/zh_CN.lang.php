@@ -11,9 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' =>
-'<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
+        '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
 通过注册会翼通应用程序从 LogMeIn 取得用户密匙。<br>
 &nbsp;<br>
 注册实例的步骤：<br>
@@ -36,4 +36,4 @@ $connector_strings = array(
 </ol>
 </td></tr></table>',
     'oauth_consumer_key' => '用户密匙',
-);
+];

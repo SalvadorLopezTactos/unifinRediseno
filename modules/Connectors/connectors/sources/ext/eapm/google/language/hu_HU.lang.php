@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 
 global $current_user;
@@ -20,11 +21,11 @@ $url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar
     $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Google' .
     $productCodes;
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
         'Regisztrálja a Sugar példányát a Google szolgáltatásában, hogy engedélyezze a Google-fiókok konfigurálását Sugar rendszerben való használathoz. ' .
         'Hivatkozzon a következőre: <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Google" target=\'_blank\'>' .
         '\' target=\'_blank\'>Csatlakozók dokumentáció</a> részre.</td></tr></table>',
     'oauth2_client_id' => 'Ügyfélazonosító',
     'oauth2_client_secret' => 'Ügyféltitok',
-);
+];

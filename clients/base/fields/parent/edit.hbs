@@ -11,7 +11,7 @@
  */
 --}}
 <div class="flex-relate-module">
-    <select class="select2 inherit-width" name="parent_type"{{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}}>
+    <select class="select2 inherit-width rtl:max-w-full" name="parent_type"{{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}}>
         {{#if noAccessModule}}
             <option value="{{noAccessModule.key}}" selected>{{noAccessModule.value}}</option>
         {{/if}}

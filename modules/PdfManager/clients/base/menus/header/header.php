@@ -10,36 +10,36 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'PdfManager';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
         'route' => '#bwc/index.php?' . http_build_query(
-            array(
-                'module' => $module_name,
-                'action' => 'EditView'
-            )
+            [
+                    'module' => $module_name,
+                    'action' => 'EditView',
+                ]
         ),
-        'label' =>'LNK_NEW_RECORD',
-        'acl_action'=>'create',
-        'acl_module'=>$module_name,
+        'label' => 'LNK_NEW_RECORD',
+        'acl_action' => 'create',
+        'acl_module' => $module_name,
         'icon' => 'sicon-plus',
-    ),
-    array(
+    ],
+    [
         'route' => '#bwc/index.php?' . http_build_query(
-            array(
-                'module' => $module_name,
-                'action' => 'index'
-            )
+            [
+                    'module' => $module_name,
+                    'action' => 'index',
+                ]
         ),
-        'label' =>'LNK_LIST',
-        'acl_action'=>'list',
-        'acl_module'=>$module_name,
+        'label' => 'LNK_LIST',
+        'acl_action' => 'list',
+        'acl_module' => $module_name,
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=>'#bwc/index.php?return_module=PdfManager&return_action=index&module=Configurator&action=SugarpdfSettings',
-        'label' =>'LNK_EDIT_PDF_TEMPLATE',
-        'acl_action'=>'',
-        'acl_module'=>'',
+    ],
+    [
+        'route' => '#bwc/index.php?return_module=PdfManager&return_action=index&module=Configurator&action=SugarpdfSettings',
+        'label' => 'LNK_EDIT_PDF_TEMPLATE',
+        'acl_action' => '',
+        'acl_module' => '',
         'icon' => 'sicon-edit',
-    ),
-);
+    ],
+];

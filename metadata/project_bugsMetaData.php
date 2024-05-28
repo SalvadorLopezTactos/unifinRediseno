@@ -10,59 +10,59 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['projects_bugs'] = array(
+$dictionary['projects_bugs'] = [
     'table' => 'projects_bugs',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'bug_id' => array(
+        ],
+        'bug_id' => [
             'name' => 'bug_id',
             'type' => 'id',
-        ),
-        'project_id' => array(
+        ],
+        'project_id' => [
             'name' => 'project_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'projects_bugs_pk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_proj_bug_bug',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'bug_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'projects_bugs_alt',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'project_id',
                 'bug_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'projects_bugs' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'projects_bugs' => [
             'lhs_module' => 'Project',
             'lhs_table' => 'project',
             'lhs_key' => 'id',
@@ -73,6 +73,6 @@ $dictionary['projects_bugs'] = array(
             'join_table' => 'projects_bugs',
             'join_key_lhs' => 'project_id',
             'join_key_rhs' => 'bug_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\SearchEngine;
 
+use Sugarcrm\Sugarcrm\SearchEngine\Engine\Elastic;
 use Sugarcrm\Sugarcrm\SearchEngine\Engine\EngineInterface;
 
 /**
@@ -42,25 +43,44 @@ class SearchEngine
     /**
      * Get SearchEngine instance based on current system configuration.
      * @param string $capability Optional capability to check for
-     * @throws \RuntimeException
      * @return \Sugarcrm\Sugarcrm\SearchEngine\SearchEngine
      * TODO: add ES specific exceptions
+     * @throws \RuntimeException
      */
     public static function getInstance($capability = null)
     {
         // Load our instance if not done so yet
         if (empty(self::$instance)) {
-
             $sugarConfig = \SugarConfig::getInstance();
 
             if (!$config = $sugarConfig->get('full_text_engine', false)) {
-                throw new \RuntimeException("No search engine configured");
+                throw new \RuntimeException('No search engine configured');
             }
 
-            $configKeys = array_keys($config);
-            $type = array_pop($configKeys);
-            self::$instance = new self(self::newEngine($type, $config[$type]));
-            self::$instance->setGlobalConfig($sugarConfig->get('search_engine', array()));
+            $engineType = self::getEngineType();
+
+            // get environment variables to overwrite values from config.php
+            // environment variable name mapping
+            // 'es_username' ==> 'username'
+            // 'es_password' ==> 'password'
+            // 'es_transport' ==> 'transport'
+            //
+            $ftsSettings = AdminSettings::getFtsVariables();
+            $userName = $ftsSettings['username'] ?? '';
+            if (is_string($userName) && !empty($userName)) {
+                $config[$engineType]['username'] = $userName;
+            }
+            $password = $ftsSettings['password'] ?? '';
+            if (is_string($password) && !empty($password)) {
+                $config[$engineType]['password'] = $password;
+            }
+            $transport = $ftsSettings['transport'] ?? 'http';
+            if (is_string($transport) && !empty($transport)) {
+                $config[$engineType]['transport'] = $transport;
+            }
+
+            self::$instance = new self(self::newEngine($engineType, $config[$engineType]));
+            self::$instance->setGlobalConfig($sugarConfig->get('search_engine', []));
         }
 
         // Check for capability if requested
@@ -75,11 +95,15 @@ class SearchEngine
      * Create SearchEngine object
      * @param string $type Engine implementation
      * @param array $config Engine configuration settings
-     * @throws \RuntimeException
      * @return \Sugarcrm\Sugarcrm\SearchEngine\Engine\EngineInterface
+     * @throws \RuntimeException
      */
-    public static function newEngine($type, array $config = array())
+    public static function newEngine(?string $type, array $config = [])
     {
+        if (empty($type)) {
+            throw new \RuntimeException("SearchEngine type is empty");
+        }
+
         $type = ucfirst($type);
         $class = \SugarAutoLoader::customClass(
             sprintf('Sugarcrm\\Sugarcrm\\SearchEngine\\Engine\\%s', $type)
@@ -101,6 +125,22 @@ class SearchEngine
     }
 
     /**
+     * check if a type is Elastic or not
+     * @param string|null $type
+     * @return string
+     */
+    public static function getEngineType() : string
+    {
+        $sugarConfig = \SugarConfig::getInstance();
+        if (!$config = $sugarConfig->get('full_text_engine', false)) {
+            throw new \RuntimeException('No search engine configured');
+        }
+
+        $configKeys = array_keys($config);
+        return $configKeys[0] ?? '';
+    }
+
+    /**
      * Overload method calls for implementation engine
      * @param string $method
      * @param array $arguments
@@ -117,7 +157,7 @@ class SearchEngine
                 )
             );
         }
-        return call_user_func_array(array($this->engine, $method), $arguments);
+        return call_user_func_array([$this->engine, $method], $arguments);
     }
 
     /**
@@ -132,7 +172,7 @@ class SearchEngine
             $capability,
             $capability
         );
-        return in_array($interface, class_implements($this->engine, false));
+        return safeInArray($interface, class_implements($this->engine, false));
     }
 
     /**

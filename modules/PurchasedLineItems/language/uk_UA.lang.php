@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Інформаційна панель списку куплених продуктів',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Інформаційна панель записів куплених продуктів',
     'LBL_PARENT_PURCHASE' => 'Початкова покупка',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Часова шкала куплених продуктів',
 ];

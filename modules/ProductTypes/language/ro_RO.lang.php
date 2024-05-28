@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tipuri Produse',
     'LBL_MODULE_NAME_SINGULAR' => 'Tipul produsului',
     'LBL_MODULE_TITLE' => 'Tipuri produse: Acasa',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Esti sigur ca vrei sa stergi aceasta inregistrare?',
     'ERR_DELETE_RECORD' => 'Trebuie să specifici un număr de înregistrare pentru a șterge tipul produsului.',
     'NTC_LIST_ORDER' => 'Setaţi ordinea în care acest tip vor fi afişate în listele  tipului de produs abandonate',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Importa Tip produs',
-    'LBL_CREATED_BY'=>'Creat de',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Importa Tip produs',
+    'LBL_CREATED_BY' => 'Creat de',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Atribuit ID Utilizator',
-    'LBL_EXPORT_CREATED_BY'=>'Creat de ID',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Importă Categorii Produs',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Atribuit ID Utilizator',
+    'LBL_EXPORT_CREATED_BY' => 'Creat de ID',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Importă Categorii Produs',
+];

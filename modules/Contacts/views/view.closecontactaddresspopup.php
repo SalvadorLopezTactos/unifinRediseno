@@ -9,12 +9,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- 
 
-class ContactsViewCloseContactAddressPopup extends ViewList {
- 	function display() {
-        if(isset($_REQUEST['close_window'])) echo "<script>window.close();</script>";
+
+class ContactsViewCloseContactAddressPopup extends ViewList
+{
+    public function display()
+    {
+        if (isset($_REQUEST['close_window'])) {
+            echo '<script>window.close();</script>';
+        }
         parent::display();
- 	}	
+    }
 }
-?>

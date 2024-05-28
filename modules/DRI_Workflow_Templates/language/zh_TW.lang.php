@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => '使用中',
     'LBL_ASSIGNEE_RULE' => '受託人規則',
     'LBL_TARGET_ASSIGNEE' => '目標受託人',
+    'LBL_STAGE_NUMBERS' => '階段編號',
     'LBL_EXPORT_BUTTON_LABEL' => '匯出',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => '匯入',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => '透過從檔案系統匯入 *.json 檔案，自動建立/更新一個新的「智慧指南範本」記錄。',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => '若已核取，則在目標受託人 = 父項受託人，以及父項上的「指派給」使用者變更時，智慧指南、階段和活動中的「指派給」使用者也將自動變更。請注意，活動範本上目標受託人的設定優先於智慧指南範本',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => '何時應向使用者指派活動',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => '應為誰指派活動',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => '此切換允許您顯示或隱藏自動階段編號。',
     'CJ_FORMS_LBL_PARENT_NAME' => '智慧指南/階段/活動範本',
 ];

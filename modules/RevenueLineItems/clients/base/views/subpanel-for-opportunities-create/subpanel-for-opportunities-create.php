@@ -9,97 +9,97 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-create'] = array(
-    'rowactions' => array(
-        'actions' => array(
-            array(
+$viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-create'] = [
+    'rowactions' => [
+        'actions' => [
+            [
                 'type' => 'rowaction',
                 'css_class' => 'btn deleteBtn',
                 'icon' => 'sicon-minus',
                 'event' => 'list:deleterow:fire',
-            ),
-            array(
+            ],
+            [
                 'type' => 'rowaction',
                 'css_class' => 'btn addBtn',
                 'icon' => 'sicon-plus',
                 'event' => 'list:addrow:fire',
-            ),
-        ),
-    ),
-    'panels' => array(
-        array(
+            ],
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'link' => true,
                     'label' => 'LBL_LIST_NAME',
                     'enabled' => true,
-                    'default' => true
-                ),
+                    'default' => true,
+                ],
                 'date_closed',
-                array(
+                [
                     'name' => 'worst_case',
                     'type' => 'currency',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'currency_id',
                         'base_rate',
                         'total_amount',
                         'quantity',
                         'discount_amount',
-                        'discount_price'
-                    ),
+                        'discount_price',
+                    ],
                     'showTransactionalAmount' => true,
                     'convertToBase' => true,
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
-                    'default' => true
-                ),
-                array(
+                    'default' => true,
+                ],
+                [
                     'name' => 'likely_case',
                     'type' => 'currency',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'currency_id',
                         'base_rate',
                         'total_amount',
                         'quantity',
                         'discount_amount',
-                        'discount_price'
-                    ),
+                        'discount_price',
+                    ],
                     'showTransactionalAmount' => true,
                     'convertToBase' => true,
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
-                    'default' => true
-                ),
-                array(
+                    'default' => true,
+                ],
+                [
                     'name' => 'best_case',
                     'type' => 'currency',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'currency_id',
                         'base_rate',
                         'total_amount',
                         'quantity',
                         'discount_amount',
-                        'discount_price'
-                    ),
+                        'discount_price',
+                    ],
                     'showTransactionalAmount' => true,
                     'convertToBase' => true,
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
-                    'default' => true
-                ),
+                    'default' => true,
+                ],
                 'sales_stage',
-                array(
+                [
                     'name' => 'probability',
-                    'readonly' => true
-                ),
+                    'readonly' => true,
+                ],
                 'commit_stage',
-                array(
+                [
                     'name' => 'product_template_name',
                     'enabled' => true,
                     'default' => true,
@@ -108,14 +108,14 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-create
                         'catalog_service_duration_unit',
                         'catalog_service_duration_value',
                     ],
-                ),
-                array(
+                ],
+                [
                     'name' => 'category_name',
                     'enabled' => true,
-                    'default' => true
-                ),
+                    'default' => true,
+                ],
                 'quantity',
-                array(
+                [
                     'name' => 'discount_field',
                     'type' => 'fieldset',
                     'css_class' => 'discount-field',
@@ -124,65 +124,65 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-create
                     'default' => true,
                     'sortable' => false,
                     'show_child_labels' => false,
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'discount_amount',
                             'label' => 'LBL_DISCOUNT_AMOUNT',
                             'type' => 'discount-amount',
                             'discountFieldName' => 'discount_select',
-                            'related_fields' => array(
+                            'related_fields' => [
                                 'currency_id',
-                            ),
+                            ],
                             'convertToBase' => true,
                             'base_rate_field' => 'base_rate',
                             'showTransactionalAmount' => true,
-                        ),
-                        array(
+                        ],
+                        [
                             'type' => 'discount-select',
                             'name' => 'discount_select',
-                            'options' => array(),
-                        ),
-                    ),
-                ),
-                array(
+                            'options' => [],
+                        ],
+                    ],
+                ],
+                [
                     'name' => 'assigned_user_name',
                     'enabled' => true,
-                    'default' => true
-                ),
+                    'default' => true,
+                ],
                 'service',
-                'service_start_date' => array(
+                'service_start_date' => [
                     'name' => 'service_start_date',
                     'label' => 'LBL_SERVICE_START_DATE',
                     'type' => 'date',
-                ),
-                'service_end_date' => array(
+                ],
+                'service_end_date' => [
                     'name' => 'service_end_date',
                     'label' => 'LBL_SERVICE_END_DATE',
                     'type' => 'service-enddate',
-                ),
-                array(
+                ],
+                [
                     'name' => 'service_duration',
                     'type' => 'fieldset',
                     'css_class' => 'service-duration-field',
                     'label' => 'LBL_SERVICE_DURATION',
                     'inline' => true,
                     'show_child_labels' => false,
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'service_duration_value',
                             'label' => 'LBL_SERVICE_DURATION_VALUE',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'service_duration_unit',
                             'label' => 'LBL_SERVICE_DURATION_UNIT',
-                        ),
-                    ),
-                ),
-                'renewable' => array(
+                        ],
+                    ],
+                ],
+                'renewable' => [
                     'name' => 'renewable',
                     'label' => 'LBL_RENEWABLE',
                     'type' => 'bool',
-                ),
+                ],
                 'add_on_to_name' => [
                     'name' => 'add_on_to_name',
                     'type' => 'add-on-to',
@@ -191,7 +191,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-create
                         'add_on_to_id',
                     ],
                 ],
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

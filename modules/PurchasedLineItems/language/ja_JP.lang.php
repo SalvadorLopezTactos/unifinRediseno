@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => '購入商品一覧のダッシュボード',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => '購入商品レコードダッシュボード',
     'LBL_PARENT_PURCHASE' => '親購入',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '購入済み商品のタイムライン',
 ];

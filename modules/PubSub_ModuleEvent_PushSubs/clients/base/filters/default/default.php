@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['PubSub_ModuleEvent_PushSubs']['base']['filter']['default'] = array(
+$viewdefs['PubSub_ModuleEvent_PushSubs']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
     'fields' => [
         'created_by_name' => [],
@@ -21,4 +21,4 @@ $viewdefs['PubSub_ModuleEvent_PushSubs']['base']['filter']['default'] = array(
         'target_module' => [],
         'webhook_url' => [],
     ],
-);
+];

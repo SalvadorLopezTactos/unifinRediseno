@@ -17,8 +17,8 @@
         // see https://help.pendo.io/resources/support-library/analytics/disable-ip-address-and-geo-location-logging.html
 
         /**
-        * List of default values needed for Pendo analytics
-        */
+         * List of default values needed for Pendo analytics
+         */
         serverInfoDefaults: {
             'si_id': 'unknown_si_id',
             'si_name': 'unknown_si_name',
@@ -101,33 +101,38 @@
          */
         getPendoMetadata: function() {
             // user data
-            var visitorId = app.user.get('site_user_id') || 'unknown_user';
-            var userType = app.user.get('type') || 'unknown_user_type';
-            var language = app.user.getLanguage() || 'unknown_language';
-            var roles = app.user.get('roles');
-            roles = Array.isArray(roles) ? (roles.length >= 1 ? roles.join(',') : 'no_roles') : 'unknown_roles';
-
-            var licenses = app.user.get('licenses');
-            licenses = Array.isArray(licenses) && licenses.length > 0 ? licenses.join(',') : 'no_licenses';
+            const visitorId = app.user.get('site_user_id') || 'unknown_user';
+            const userType = app.user.get('type') || 'unknown_user_type';
+            const language = app.user.getLanguage() || 'unknown_language';
+            let rolesArray = app.user.get('roles');
+            let roles = Array.isArray(rolesArray)
+                ? (rolesArray.length >= 1 ? rolesArray.join(',') : 'no_roles')
+                : 'unknown_roles';
+            let licensesArray = app.user.get('licenses');
+            let licenses = Array.isArray(licensesArray) && licensesArray.length > 0
+                ? licensesArray.join(',')
+                : 'no_licenses';
 
             // account data
-            var activityStreamsEnabled = app.config.activityStreamsEnabled ? 'True' : 'False';
-            var editablePreviewEnabled = app.config.previewEdit ? 'True' : 'False';
-            var listMaxEntriesPerPage = app.config.maxQueryResult || 'unknown_list_view_items_per_page';
-            var listMaxEntriesPerSubpanel = app.config.maxSubpanelResult || 'unknown_list_view_items_per_page';
-            var leadConversionOptions = app.config.leadConvActivityOpt || 'unknown_lead_conversion_options';
-            var systemDefaultCurrencyCode = app.currency.getBaseCurrency().iso4217 ||
+            const activityStreamsEnabled = app.config.activityStreamsEnabled ? 'True' : 'False';
+            const editablePreviewEnabled = app.config.previewEdit ? 'True' : 'False';
+            const listMaxEntriesPerPage = app.config.maxQueryResult || 'unknown_list_view_items_per_page';
+            const listMaxEntriesPerSubpanel = app.config.maxSubpanelResult || 'unknown_list_view_items_per_page';
+            const leadConversionOptions = app.config.leadConvActivityOpt || 'unknown_lead_conversion_options';
+            const systemDefaultCurrencyCode = app.currency.getBaseCurrency().iso4217 ||
                 'unknown_system_default_currency_code';
-            var systemDefaultLanguage = app.lang.getLanguage() || 'unknown_system_default_language';
-            var awsConnectInstanceName = app.config.awsConnectInstanceName || 'unknown_connect_instance_name';
-            var awsConnectUrl = app.config.awsConnectUrl || 'unknown_connect_url';
+            const systemDefaultLanguage = app.lang.getLanguage() || 'unknown_system_default_language';
+            const awsConnectInstanceName = app.config.awsConnectInstanceName || 'unknown_connect_instance_name';
+            const awsConnectUrl = app.config.awsConnectUrl || 'unknown_connect_url';
 
-            var serverInfo = app.metadata.getServerInfo();
-            var accountId = serverInfo.site_id || 'unknown_account';
-            var siteUrl = _.isFunction(app.utils.getSiteUrl) ? app.utils.getSiteUrl() : 'unknown_domain';
-            var version = serverInfo.version || 'unknown_version';
-            var flavor = serverInfo.flavor || 'unknown_edition';
-            var accountBasicInfo = {
+            const serverInfo = app.metadata.getServerInfo();
+            const accountId = serverInfo.site_id || 'unknown_account';
+            const siteUrl = _.isFunction(app.utils.getSiteUrl) ? app.utils.getSiteUrl() : 'unknown_domain';
+            const version = serverInfo.version || 'unknown_version';
+            const flavor = serverInfo.flavor || 'unknown_edition';
+            const hostEnvironment = app.config.host_environment || 'on-premise';
+            const hostDesignation = app.config.host_designation || 'production';
+            const accountBasicInfo = {
                 id: accountId,
                 domain: siteUrl,
                 edition: flavor,
@@ -140,9 +145,11 @@
                 system_default_currency_code: systemDefaultCurrencyCode,
                 system_default_language: systemDefaultLanguage,
                 aws_connect_instance_name: awsConnectInstanceName,
-                aws_connect_url: awsConnectUrl
+                aws_connect_url: awsConnectUrl,
+                host_environment: hostEnvironment,
+                host_designation: hostDesignation,
             };
-            var accountServerInfo = _.each(this.serverInfoDefaults, function(value, name, serverInfoList) {
+            const accountServerInfo = _.each(this.serverInfoDefaults, function (value, name, serverInfoList) {
                 serverInfoList[name] = serverInfo[name] || value;
                 return serverInfoList;
             });
@@ -153,7 +160,9 @@
                     user_type: userType,
                     language: language,
                     roles: roles,
-                    licenses: licenses
+                    licenses: licenses,
+                    host_environment: hostEnvironment,
+                    host_designation: hostDesignation
                 },
                 account: _.extend(accountBasicInfo, accountServerInfo)
             };
@@ -162,15 +171,18 @@
         /*
          * Track an activity.
          *
-         * Pendo auto-tracks most events.
-         * You don't have to do this every single time you want to track something.
+         * Pendo auto-tracks most page interactions.
          * See https://help.pendo.io/resources/support-library/api/index.html?bash#track-events
          * @param {string} trackType Activity type.
          * @param {Object} trackData Activity metadata.
          * @member SUGAR.App.analytics.connectors.Pendo
          */
         track: function(trackType, trackData) {
-            pendo.track(trackType, trackData);
+            app.logger.debug(`Pendo track => ${trackType}: ${trackData} `);
+
+            if (_.has(pendo, 'track')) {
+                pendo.track(trackType, trackData);
+            }
         },
 
         /*
@@ -182,24 +194,36 @@
         trackPageView: function(pageUri) {
             // Pendo automatically collects page view data
             // see https://help.pendo.io/resources/support-library/api/index.html?bash#browser-interactions
+            this.track(pageUri);
         },
 
         /*
          * Track an event on the page.
          *
-         * @param {Object} event Google Analytics event to track.
-         * @param {string} event.category Category of the event.
-         * @param {string} event.action Action of the event.
-         * @param {string} event.label Always set to the route the user is on.
+         * @param {Object} event to track.
+         * @param {string} event.action Action of the event (ex. 'click').
+         * @param {string} event.category Category of the event (ex. 'quick_create').
+         * @param {string} event.label Human readable name of the event for Pendo.
+         * @param {string} event.currentLocation Always set to the route the user is on.
          * @param {number} [event.value] Value of the event.
          * @member SUGAR.App.analytics.connectors.Pendo
          */
         trackEvent: function(event) {
-            // Pendo automatically collects some events
-            // see https://help.pendo.io/resources/support-library/api/index.html?bash#browser-interactions
             // Pendo Agent API allows us to track more events if needed
             // see https://help.pendo.io/resources/support-library/api/index.html?bash#track-events
             // see app.analytics.track();
+            if (!event?.action) {
+                throw new Error(`Invalid track event, event.action not valid. ${event}`);
+            }
+
+            // These two variables create a more readable event label from the action and category properties.
+            // For example, event.action = 'click' becomes 'Click' and event.category = 'quick_create' becomes 'quick
+            // create'. Therefore, 'click:quick_create' becomes 'Click quick create'.
+            const formattedAction = `${event?.action[0].toUpperCase()}${event?.action.slice(1)}`;
+            const parsedCategory = event?.category.split('_').join(' ');
+            const eventName = event?.label || `${formattedAction} ${parsedCategory}`;
+            app.logger.debug(`Pendo trackEvent => ${eventName}: ${event}`);
+            this.track(eventName, event);
         },
 
         /*

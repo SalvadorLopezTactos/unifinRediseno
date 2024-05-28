@@ -10,11 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['record-map'] = array(
-    'type'       => 'simple',
-    'components' => array(
-        array(
+$viewdefs['base']['layout']['record-map'] = [
+    'type' => 'simple',
+    'components' => [
+        [
             'view' => 'record-map',
-        ),
-    ),
-);
+        ],
+    ],
+];

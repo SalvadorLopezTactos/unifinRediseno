@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Integrerede filer',
     'LBL_MODULE_NAME_SINGULAR' => 'Integreret fil',
     'LBL_MODULE_TITLE' => 'Integreret fil',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => 'Filnavn',
     'LBL_FILENAME' => 'Filnavn',
     'LBL_UPLOAD_ONLY_IMAGE' => 'Den valgte fil skal være et billede.',
-);
+];

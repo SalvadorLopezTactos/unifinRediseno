@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Veebihaagid',
     'LBL_MODULE_NAME_SINGULAR' => 'Veebihaak',
     'LBL_MODULE_TITLE' => 'Veebihaagid',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => 'Taotluse meetod',
     'LBL_TRIGGER_EVENT' => 'Vallanda sündmus',
     'LBL_URL' => 'URL',
-);
+];

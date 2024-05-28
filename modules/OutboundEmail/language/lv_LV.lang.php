@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Izejošo e-pastu konti',
     'LBL_MODULE_NAME_SINGULAR' => 'Izejošo e-pastu konts',
     'LBL_STATUS' => 'Statuss',
@@ -40,4 +40,4 @@ $mod_strings = array(
     'LBL_PREFERRED_SENDING_ACCOUNT' => 'Vēlamais sūtīšanas uzņēmums',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'E-pasta iestatījumu fokusa panelis',
-);
+];

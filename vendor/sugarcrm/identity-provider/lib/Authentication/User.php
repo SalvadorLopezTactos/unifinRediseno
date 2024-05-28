@@ -70,7 +70,7 @@ class User implements UserInterface
      * @param string $password
      * @param array $attributes
      */
-    public function __construct($username = null, $password = null, array $attributes = [])
+    public function __construct($username = '', $password = '', array $attributes = [])
     {
         $this->username = trim($username);
         $this->password = $password;

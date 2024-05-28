@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('selector-native', function (Y, NAME) {
 
 (function(Y) {
@@ -294,7 +287,7 @@ var Selector = {
     /**
      * Determines whether or not the given node matches the given CSS selector.
      * @method test
-     * 
+     *
      * @param {HTMLElement} node A node to test.
      * @param {String} selector A CSS selector to test the node against.
      * @param {HTMLElement} root optional A node to start the query from. Defaults to the parent document of the node.
@@ -404,4 +397,4 @@ Y.mix(Y.Selector, Selector, true);
 })(Y);
 
 
-}, '3.15.0', {"requires": ["dom-base"]});
+}, '3.18.1', {"requires": ["dom-base"]});

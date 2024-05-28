@@ -8,7 +8,7 @@
   width: 100%;
 
   &:last-child {
-    .pb-3\.5();
+    padding-bottom: 0.875rem;
   }
 
   i {
@@ -54,15 +54,8 @@
       }
     }
 
-    .feedback-close {
-      top: 12px;
-      right: 12px;
-      .m-0();
-      .absolute();
-
-      &:hover {
-        text-decoration: none;
-      }
+    .feedback-close:hover {
+      text-decoration: none;
     }
   }
 
@@ -84,10 +77,6 @@
     i {
       font-size: initial;
       padding: 1px;
-
-      &.fa-road {
-        padding: 1px 0 0;
-      }
     }
   }
 
@@ -108,8 +97,7 @@
     margin: 0;
     padding: 0;
 
-    &.disabled .label,
-    .fa {
+    &.disabled .label {
       color: @white;
       cursor: default;
     }

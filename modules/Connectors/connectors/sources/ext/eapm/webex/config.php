@@ -12,13 +12,13 @@
  */
 
 
-$config = array (
-  'name' => 'WebEx',
-  'eapm' => array(
-    'enabled' => true,
-    'only' => true,
-  ),
-  'order' => 15,
-  'properties' => array (
-  ),
-);
+$config = [
+    'name' => 'WebEx',
+    'eapm' => [
+        'enabled' => true,
+        'only' => true,
+    ],
+    'order' => 15,
+    'properties' => [
+    ],
+];

@@ -18,16 +18,17 @@
  */
 class SugarCurrency
 {
-
     /**
      * get a currency object
      *
      * @access protected
-     * @param  string $currencyId Optional if empty, base currency is returned
+     * @param string $currencyId Optional if empty, base currency is returned
      * @return object   currency object
      */
-    protected static function _getCurrency( $currencyId = null ) {
-        if(empty($currencyId)) {
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected static function _getCurrency($currencyId = null)
+    {
+        if (empty($currencyId)) {
             $currencyId = '-99';
         }
         $currency = BeanFactory::getBean('Currencies', $currencyId);
@@ -39,20 +40,21 @@ class SugarCurrency
      * convert a currency from one to another
      *
      * @access public
-     * @param  float  $amount
-     * @param  string $fromId source currency_id
-     * @param  string $toId target currency_id
-     * @param  int    $precision Optional decimal precision
+     * @param float $amount
+     * @param string $fromId source currency_id
+     * @param string $toId target currency_id
+     * @param int $precision Optional decimal precision
      * @return float   converted amount
      */
-    public static function convertAmount( $amount, $fromId, $toId, $precision = 6 ) {
-        if($fromId == $toId) {
+    public static function convertAmount($amount, $fromId, $toId, $precision = 6)
+    {
+        if ($fromId == $toId) {
             return $amount;
         }
         $currency1 = self::_getCurrency($fromId);
         $currency2 = self::_getCurrency($toId);
         // if either conversion_rate is 0 or not defined, we just return the amount
-        if(empty($currency1->conversion_rate) || empty($currency2->conversion_rate)) {
+        if (empty($currency1->conversion_rate) || empty($currency2->conversion_rate)) {
             return $amount;
         }
         // NOTE: database defines precision to 6 by default
@@ -63,12 +65,13 @@ class SugarCurrency
      * convenience function: convert a currency to base currency
      *
      * @access public
-     * @param  float  $amount
-     * @param  string $fromId source currency_id
-     * @param  int    $precision Optional decimal precision
+     * @param float $amount
+     * @param string $fromId source currency_id
+     * @param int $precision Optional decimal precision
      * @return float   converted amount
      */
-    public static function convertAmountToBase( $amount, $fromId, $precision = 6 ) {
+    public static function convertAmountToBase($amount, $fromId, $precision = 6)
+    {
         return self::convertAmount($amount, $fromId, '-99', $precision);
     }
 
@@ -76,12 +79,13 @@ class SugarCurrency
      * convenience function: convert a currency from base currency
      *
      * @access public
-     * @param  float  $amount
-     * @param  string $toId source currency_id
-     * @param  int    $precision Optional decimal precision
+     * @param float $amount
+     * @param string $toId source currency_id
+     * @param int $precision Optional decimal precision
      * @return float   converted amount
      */
-    public static function convertAmountFromBase( $amount, $toId, $precision = 6 ) {
+    public static function convertAmountFromBase($amount, $toId, $precision = 6)
+    {
         return self::convertAmount($amount, '-99', $toId, $precision);
     }
 
@@ -89,15 +93,16 @@ class SugarCurrency
      * convert a currency with a given rate
      *
      * @access public
-     * @param  float  $amount
-     * @param  float  $fromRate rate to convert from (default base rate)
-     * @param  float  $toRate rate to convert to (default base rate)
-     * @param  int    $precision Optional decimal precision
+     * @param float $amount
+     * @param float $fromRate rate to convert from (default base rate)
+     * @param float $toRate rate to convert to (default base rate)
+     * @param int $precision Optional decimal precision
      * @return float   converted amount
      */
-    public static function convertWithRate( $amount, $fromRate = 1.0, $toRate = 1.0, $precision = 6 ) {
+    public static function convertWithRate($amount, $fromRate = 1.0, $toRate = 1.0, $precision = 6)
+    {
         // if rate is 0 or null, just return the amount
-        if(empty($fromRate) || empty($toRate)) {
+        if (empty($fromRate) || empty($toRate)) {
             return $amount;
         }
 
@@ -108,20 +113,20 @@ class SugarCurrency
             return '0';
         }
 
-        return SugarMath::init(0, $precision)->exp('?/?*?',array($amount,$fromRate,$toRate))->result();
+        return SugarMath::init(0, $precision)->exp('?/?*?', [$amount, $fromRate, $toRate])->result();
     }
 
     /**
      * format a currency amount with symbol and defined formatting
      *
      * @access public
-     * @param  float  $amount
-     * @param  string $currencyId
-     * @param  int    $decimalPrecision Optional the number of decimal places to use
-     * @param  string $decimalSeparator Optional the string to use as decimal separator
-     * @param  string $numberGroupingSeparator Optional the string to use for thousands separator
-     * @param  bool   $showSymbol Optional show symbol along with currency default true
-     * @param  string $symbolSeparator Optional string between symbol and amount
+     * @param float $amount
+     * @param string $currencyId
+     * @param int $decimalPrecision Optional the number of decimal places to use
+     * @param string $decimalSeparator Optional the string to use as decimal separator
+     * @param string $numberGroupingSeparator Optional the string to use for thousands separator
+     * @param bool $showSymbol Optional show symbol along with currency default true
+     * @param string $symbolSeparator Optional string between symbol and amount
      * @return string  formatted amount
      */
     public static function formatAmount(
@@ -133,6 +138,7 @@ class SugarCurrency
         $showSymbol = true,
         $symbolSeparator = ''
     ) {
+
         if (!is_numeric($amount)) {
             $GLOBALS['log']->warn('Trying to format a non-numeric amount: ' . $amount);
             return $amount;
@@ -152,18 +158,19 @@ class SugarCurrency
      * format a currency amount with symbol and user defined formatting
      *
      * @access public
-     * @param  float  $amount
-     * @param  string $currencyId
-     * @param  bool   $showSymbol Optional show symbol along with currency default true
-     * @param  string $symbolSeparator Optional string between symbol and amount
+     * @param float $amount
+     * @param string $currencyId
+     * @param bool $showSymbol Optional show symbol along with currency default true
+     * @param string $symbolSeparator Optional string between symbol and amount
      * @return string  formatted amount
      */
     public static function formatAmountUserLocale(
         $amount,
         $currencyId,
-        $showSymbol=true,
+        $showSymbol = true,
         $symbolSeparator = ''
     ) {
+
         global $locale;
         // get user defined preferences
         $decimalPrecision = $locale->getPrecision();
@@ -179,7 +186,8 @@ class SugarCurrency
      * @access public
      * @return object  currency object
      */
-    public static function getBaseCurrency( ) {
+    public static function getBaseCurrency()
+    {
         // the base currency has a hard-coded currency id of -99
         return self::_getCurrency('-99');
     }
@@ -188,7 +196,7 @@ class SugarCurrency
      * get a currency object by currency id
      *
      * @access public
-     * @param  string $currencyId
+     * @param string $currencyId
      * @return Currency  currency object
      */
     public static function getCurrencyByID($currencyId = null)
@@ -200,10 +208,11 @@ class SugarCurrency
      * get a currency object by ISO
      *
      * @access public
-     * @param  string $ISO ISO4217 value
+     * @param string $ISO ISO4217 value
      * @return object  currency object
      */
-    public static function getCurrencyByISO( $ISO ) {
+    public static function getCurrencyByISO($ISO)
+    {
         $currency = self::_getCurrency('-99');
         $currencyId = $currency->retrieveIDByISO($ISO);
         $currency = self::_getCurrency($currencyId);
@@ -214,10 +223,11 @@ class SugarCurrency
      * get a currency object by currency symbol
      *
      * @access public
-     * @param  string $symbol currency symbol
+     * @param string $symbol currency symbol
      * @return object  currency object
      */
-    public static function getCurrencyBySymbol( $symbol ) {
+    public static function getCurrencyBySymbol($symbol)
+    {
         $currency = self::_getCurrency('-99');
         $currencyId = $currency->retrieveIDBySymbol($symbol);
         $currency = self::_getCurrency($currencyId);
@@ -229,7 +239,7 @@ class SugarCurrency
      * If global $current_user object is empty then use default system currency id (-99).
      *
      * @access public
-     * @param  object $user Optional the user object
+     * @param object $user Optional the user object
      * @return Currency  currency object
      */
     public static function getUserLocaleCurrency($user = null)
@@ -246,9 +256,9 @@ class SugarCurrency
     /**
      * Verify that the currency_base_rate is set and updated as it should when the bean is saving
      *
-     * @see SugarBean::save()
      * @param SugarBean $bean
      * @param bool @isUpdate This is bean in an update save()?
+     * @see SugarBean::save()
      */
     public static function verifyCurrencyBaseRateSet(SugarBean $bean, $isUpdate = true)
     {
@@ -261,7 +271,7 @@ class SugarCurrency
             // check if the bean has the updateCurrencyBaseRate method as an additional check
             $beanCurrencyCheck = true;
             if (method_exists($bean, 'updateCurrencyBaseRate')) {
-                $beanCurrencyCheck = call_user_func(array($bean, 'updateCurrencyBaseRate'));
+                $beanCurrencyCheck = call_user_func([$bean, 'updateCurrencyBaseRate']);
             }
 
             // we should only check if the currencyId has changed if we the be is doing an update, not an insert
@@ -269,7 +279,6 @@ class SugarCurrency
                 $bean->base_rate = $currency->conversion_rate;
             }
         }
-
     }
 
     /**

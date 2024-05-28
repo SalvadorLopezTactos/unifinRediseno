@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Producttypes',
     'LBL_MODULE_NAME_SINGULAR' => 'Producttype',
     'LBL_MODULE_TITLE' => 'Producttypes: Start',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Weet u zeker dat u dit record wilt verwijderen?',
     'ERR_DELETE_RECORD' => 'U dient een recordnummer op te geven om het producttype te kunnen verwijderen.',
     'NTC_LIST_ORDER' => 'Bepaal de volgorde hoe dit type wordt getoond de dropdown',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Importeren Producttypes',
-    'LBL_CREATED_BY'=>'Gemaakt door',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Importeren Producttypes',
+    'LBL_CREATED_BY' => 'Gemaakt door',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Toegewezen aan ID:',
-    'LBL_EXPORT_CREATED_BY'=>'Aangemaakt door ID:',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Importeer Productcategorieën',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Toegewezen aan ID:',
+    'LBL_EXPORT_CREATED_BY' => 'Aangemaakt door ID:',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Importeer Productcategorieën',
+];

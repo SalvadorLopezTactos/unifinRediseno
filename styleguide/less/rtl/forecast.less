@@ -54,21 +54,16 @@
 
 .forecast-value {
   .text-xs {
-    .ml-4();
-    .mr-0();
+    margin-left: 1rem;
+    margin-right: 0;
   }
 }
 
 .forecast-value-input {
-  .relative();
-  .pr-4();
-  .pl-0();
-
   .clickToEdit {
     span.edit-icon {
-      .absolute();
-
       left: unset;
+      position: absolute;
       right: 0;
       top: -2px;
     }
@@ -83,7 +78,12 @@
   .metrics-help-modal {
     .popover-content {
       .sicon-help-lg {
-        .ml-2();
+        margin-left: 0.5rem;
+      }
+
+      .sicon-close {
+        right: auto !important;
+        left: 0.75rem;
       }
     }
   }

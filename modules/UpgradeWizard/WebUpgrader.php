@@ -73,19 +73,16 @@ class WebUpgrader extends UpgradeDriver
         $lengthAttribute = $xpath->query('//' . $path . '/@maxAllowedContentLength');
 
         if ($lengthAttribute->length) {
-
             $currentLength = $lengthAttribute->item(0)->value;
             if ($currentLength < self::IIS_CONTENT_LENGTH) {
                 $lengthAttribute->item(0)->value = self::IIS_CONTENT_LENGTH;
                 $saveConfig = true;
             }
         } else {
-
             $elements = explode('/', $path);
             $currentPath = '/';
             $currentNode = null;
             foreach ($elements as $nodeName) {
-
                 $currentPath .= '/' . $nodeName;
                 if (!$xpath->query($currentPath)->length) {
                     $newChild = $config->createElement($nodeName, null);
@@ -116,8 +113,8 @@ class WebUpgrader extends UpgradeDriver
     public function __construct($dir)
     {
         $this->context['source_dir'] = $dir;
-        $this->context['log'] = "UpgradeWizard.log";
-        $this->context['HealthCheckLog'] = "HealthCheck.log";
+        $this->context['log'] = 'UpgradeWizard.log';
+        $this->context['HealthCheckLog'] = 'HealthCheck.log';
         $this->context['zip'] = ''; // temporary
         parent::__construct();
     }
@@ -154,10 +151,10 @@ class WebUpgrader extends UpgradeDriver
         }
         if (!empty($this->state['zip'])) {
             $this->context['zip'] = $this->state['zip'];
-            $this->context['backup_dir'] = "upgrades/backup/" . pathinfo(
-                    $this->context['zip'],
-                    PATHINFO_FILENAME
-                ) . "-restore";
+            $this->context['backup_dir'] = 'upgrades/backup/' . pathinfo(
+                $this->context['zip'],
+                PATHINFO_FILENAME
+            ) . '-restore';
         }
         return true;
     }
@@ -178,9 +175,9 @@ class WebUpgrader extends UpgradeDriver
      */
     protected function getUser()
     {
-        $user = $this->loadUser(array(
+        $user = $this->loadUser([
             'id' => $this->state['admin'],
-        ));
+        ]);
 
         if ($user->id) {
             $this->context['admin'] = $user->user_name;
@@ -194,12 +191,12 @@ class WebUpgrader extends UpgradeDriver
      * We copy them so that upgrading would not mess them up
      * @var array
      */
-    protected $upgradeFiles = array(
+    protected $upgradeFiles = [
         'WebUpgrader.php',
         'UpgradeDriver.php',
         'upgrade_screen.php',
-        'version.json'
-    );
+        'version.json',
+    ];
 
     /**
      * Start upgrade process
@@ -224,7 +221,7 @@ class WebUpgrader extends UpgradeDriver
         $this->state['webToken'] = create_guid();
         $this->saveState();
         // copy upgrader files
-        $upg_dir = $this->cacheDir("upgrades/driver/");
+        $upg_dir = $this->cacheDir('upgrades/driver/');
         $this->ensureDir($upg_dir);
         $_SESSION['upgrade_dir'] = $upg_dir;
         foreach ($this->upgradeFiles as $ufile) {
@@ -244,7 +241,7 @@ class WebUpgrader extends UpgradeDriver
      */
     protected function getStatus()
     {
-        $state = array();
+        $state = [];
         if (isset($this->state['stage'])) {
             $state['stage'] = $this->state['stage'];
         }
@@ -264,7 +261,7 @@ class WebUpgrader extends UpgradeDriver
      */
     public function process($action)
     {
-        if ($action == "status") {
+        if ($action == 'status') {
             return $this->getStatus();
         }
 
@@ -274,7 +271,7 @@ class WebUpgrader extends UpgradeDriver
             return true;
         }
 
-        if (!in_array($action, $this->stages)) {
+        if (!$this->safeInArray($action, $this->stages)) {
             return $this->error("Unknown stage $action", true);
         }
         if ($action == 'unpack') {
@@ -291,24 +288,24 @@ class WebUpgrader extends UpgradeDriver
                     return false;
                 }
                 if (!empty($manifest['copy_files']['from_dir'])) {
-                    $new_source_dir = $this->context['extract_dir'] . "/" . $manifest['copy_files']['from_dir'];
+                    $new_source_dir = $this->context['extract_dir'] . '/' . $manifest['copy_files']['from_dir'];
                 } else {
-                    $this->error("No from_dir in manifest", true);
+                    $this->error('No from_dir in manifest', true);
                     return false;
                 }
                 if (is_file("$new_source_dir/LICENSE")) {
                     $this->license = file_get_contents("$new_source_dir/LICENSE");
                 } elseif (is_file("$new_source_dir/LICENSE.txt")) {
                     $this->license = file_get_contents("$new_source_dir/LICENSE.txt");
-                } elseif (is_file($this->context['source_dir'] . "/LICENSE.txt")) {
-                    $this->license = file_get_contents($this->context['source_dir'] . "/LICENSE.txt");
-                } elseif (is_file($this->context['source_dir'] . "/LICENSE")) {
-                    $this->license = file_get_contents($this->context['source_dir'] . "/LICENSE");
+                } elseif (is_file($this->context['source_dir'] . '/LICENSE.txt')) {
+                    $this->license = file_get_contents($this->context['source_dir'] . '/LICENSE.txt');
+                } elseif (is_file($this->context['source_dir'] . '/LICENSE')) {
+                    $this->license = file_get_contents($this->context['source_dir'] . '/LICENSE');
                 }
-                if (is_file($this->context['extract_dir'] . "/README")) {
-                    $this->readme = file_get_contents($this->context['extract_dir'] . "/README");
-                } elseif (is_file($this->context['extract_dir'] . "/README.txt")) {
-                    $this->readme = file_get_contents($this->context['extract_dir'] . "/README.txt");
+                if (is_file($this->context['extract_dir'] . '/README')) {
+                    $this->readme = file_get_contents($this->context['extract_dir'] . '/README');
+                } elseif (is_file($this->context['extract_dir'] . '/README.txt')) {
+                    $this->readme = file_get_contents($this->context['extract_dir'] . '/README.txt');
                 }
             }
             return $res;
@@ -320,17 +317,17 @@ class WebUpgrader extends UpgradeDriver
      * Messages for upload errors
      * @var array
      */
-    protected $upload_errors = array(
-        0 => "There is no error, the file uploaded with success",
-        1 => "The uploaded file exceeds the upload_max_filesize directive in php.ini",
-        2 => "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form",
-        3 => "The uploaded file was only partially uploaded",
-        4 => "No file was uploaded",
-        6 => "Missing a temporary folder",
-        7 => "Failed to write file to disk",
-        8 => "A PHP extension stopped the file upload",
+    protected $upload_errors = [
+        0 => 'There is no error, the file uploaded with success',
+        1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
+        2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
+        3 => 'The uploaded file was only partially uploaded',
+        4 => 'No file was uploaded',
+        6 => 'Missing a temporary folder',
+        7 => 'Failed to write file to disk',
+        8 => 'A PHP extension stopped the file upload',
 
-    );
+    ];
 
     /**
      * Handle zip file upload
@@ -339,7 +336,7 @@ class WebUpgrader extends UpgradeDriver
     protected function handleUpload()
     {
         if (empty($_FILES['zip'])) {
-            return $this->error("Expected file upload", true);
+            return $this->error('Expected file upload', true);
         }
         if ($_FILES['zip']['error'] != UPLOAD_ERR_OK) {
             return $this->error(
@@ -348,22 +345,21 @@ class WebUpgrader extends UpgradeDriver
             );
         }
         if (!is_uploaded_file($_FILES['zip']['tmp_name'])) {
-            return $this->error("Upload failed", true);
+            return $this->error('Upload failed', true);
         }
-        $this->ensureDir("upgrades");
-        $this->context['zip'] = "upgrades/" . uniqid();
+        $this->ensureDir('upgrades');
+        $this->context['zip'] = 'upgrades/' . uniqid();
         if (move_uploaded_file($_FILES['zip']['tmp_name'], $this->context['zip'])) {
             $this->state['zip'] = $this->context['zip'];
-            $this->context['backup_dir'] = "upgrades/backup/" . pathinfo(
-                    $this->context['zip'],
-                    PATHINFO_FILENAME
-                ) . "-restore";
+            $this->context['backup_dir'] = 'upgrades/backup/' . pathinfo(
+                $this->context['zip'],
+                PATHINFO_FILENAME
+            ) . '-restore';
             $this->saveState();
             return true;
         } else {
             return $this->error("Failed to move uploaded file to {$this->context['zip']}", true);
         }
-
     }
 
     /**
@@ -374,7 +370,7 @@ class WebUpgrader extends UpgradeDriver
         global $token;
         $upgraderVersion = $this->context['versionInfo'][0];
         $upgraderBuild = $this->context['versionInfo'][1];
-        $this->log("WebUpgrader v." . $upgraderVersion . " (build " . $upgraderBuild . ") starting");
+        $this->log('WebUpgrader v.' . $upgraderVersion . ' (build ' . $upgraderBuild . ') starting');
 
         // Using the existing cookie, set a global variable to pass down to upgrade_screen.php for completing the top
         // level body class.
@@ -395,7 +391,7 @@ class WebUpgrader extends UpgradeDriver
     public function removeTempFiles()
     {
         parent::removeTempFiles();
-        $this->removeDir($this->cacheDir("upgrades/driver/"));
+        $this->removeDir($this->cacheDir('upgrades/driver/'));
     }
 
     /**
@@ -405,7 +401,7 @@ class WebUpgrader extends UpgradeDriver
     {
         $scanner = $this->getHealthCheckScanner('web');
         if (!$scanner) {
-            return $this->error("Cannot find health check scanner", true);
+            return $this->error('Cannot find health check scanner', true);
         }
         $scanner->setLogFile($this->context['HealthCheckLog']);
 
@@ -426,10 +422,10 @@ class WebUpgrader extends UpgradeDriver
             $this->log('*** END HEALTHCHECK ISSUES ***');
         }
 
-        $this->getHelper()->pingHeartbeat(array('bucket' => $scanner->getStatus(), 'flag' => $scanner->getFlag()));
+        $this->getHelper()->pingHeartbeat(['bucket' => $scanner->getStatus(), 'flag' => $scanner->getFlag()]);
 
         if ($scanner->isFlagRed()) {
-            $logDetails = array();
+            $logDetails = [];
             foreach ($logsInfo as $key => $log) {
                 if ($log['flag'] == HealthCheckScannerMeta::FLAG_RED) {
                     $logDetails = $log;
@@ -437,7 +433,7 @@ class WebUpgrader extends UpgradeDriver
                 }
             }
             $messageMaxLength = 250;
-            $message= $logDetails['log'];
+            $message = $logDetails['log'];
             $message = mb_strlen($message) > $messageMaxLength
                 ? mb_substr($message, 0, $messageMaxLength) . ' ...'
                 : $message;
@@ -459,5 +455,13 @@ class WebUpgrader extends UpgradeDriver
             require_once 'HealthCheckClient.php';
         }
         return HealthCheckHelper::getInstance();
+    }
+
+    protected function safeInArray($needle, $haystack, bool $strict = false) : bool
+    {
+        if (!is_array($haystack)) {
+            return false;
+        }
+        return in_array($needle, $haystack, $strict);
     }
 }

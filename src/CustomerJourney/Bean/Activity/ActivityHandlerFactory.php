@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity;
 
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\ActivityHelper as ActivityHelper;
@@ -18,7 +19,6 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\ActivityHelper as Act
  */
 class ActivityHandlerFactory
 {
-
     /**
      * Creates the right ActivityHandler for a given module name
      *
@@ -29,7 +29,7 @@ class ActivityHandlerFactory
     public static function factory(string $moduleName)
     {
         $moduleName = is_object($moduleName) &&
-            $moduleName instanceof \SugarBean ? $moduleName->module_dir : $moduleName;
+        $moduleName instanceof \SugarBean ? $moduleName->module_dir : $moduleName;
         return ActivityHelper::getInstance(strtolower($moduleName), $moduleName);
     }
 

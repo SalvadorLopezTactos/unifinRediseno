@@ -26,29 +26,29 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
     public $loadedViewClient;
     /**
      * The file that the metadata for this implementation was loaded from
-     * 
+     *
      * @var string
      */
     protected $loadedMetadataFile;
 
     /**
      * The metadata file that the original metadata was loaded from
-     * 
+     *
      * @var string
      */
     protected $originalMetadataFile;
 
     /**
      * Used when loading metadata to find the right file to use
-     * 
+     *
      * @var array
      */
-    protected $currentStateFiles = array(
+    protected $currentStateFiles = [
         MB_HISTORYMETADATALOCATION,
         MB_WORKINGMETADATALOCATION,
         MB_CUSTOMMETADATALOCATION,
         MB_BASEMETADATALOCATION,
-    );
+    ];
 
     /**
      * The constructor
@@ -60,7 +60,7 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
     {
         $this->bean = BeanFactory::newBean($loadedModule);
         if (empty($this->bean)) {
-            throw new Exception("Bean was not provided");
+            throw new Exception('Bean was not provided');
         }
 
         // Set some preliminaries so that the rest of the class can do its thing
@@ -81,7 +81,7 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
         // Some fields are defined in the original filter metadata file but not in _fielddefs.
         // We want to add them to _fielddefs as well, so when they are moved from the default
         // column to the hidden column in Studio's search layout, they won't disappear.
-        $types = array(MB_BASEMETADATALOCATION);
+        $types = [MB_BASEMETADATALOCATION];
         $marker = 'originalMetadataFile';
         $originalMeta = $this->getMetadataFromFiles($types, $marker);
         if (empty($originalMeta)) {
@@ -99,7 +99,7 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
         }
 
         // Make sure the paneldefs are proper if there are any
-        $this->_paneldefs = $this->_viewdefs ?? array();
+        $this->_paneldefs = $this->_viewdefs ?? [];
 
         // Lastly, but not leastly, grab the original metadata
         $original = $this->getOriginalMetadata();
@@ -108,16 +108,16 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
 
     /**
      * Gets an array containing just a fields element
-     * 
+     *
      * @return array
      */
     public function getEmptyDefs()
     {
-        return array('fields' => array());
+        return ['fields' => []];
     }
 
     /**
-     * Gets correct view definitions from an array of definitions 
+     * Gets correct view definitions from an array of definitions
      * @param array $defs Complete viewdef to get defs from
      * @param string $client The client to search the defs for
      * @return array
@@ -182,7 +182,7 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
 
         // Handle history
         if ($this->loadedMetadataFile === MB_HISTORYMETADATALOCATION) {
-            $types = array(MB_WORKINGMETADATALOCATION, MB_CUSTOMMETADATALOCATION, MB_BASEMETADATALOCATION);
+            $types = [MB_WORKINGMETADATALOCATION, MB_CUSTOMMETADATALOCATION, MB_BASEMETADATALOCATION];
             foreach ($types as $type) {
                 $file = $this->getMetadataFilename($type);
                 if (file_exists($file)) {
@@ -212,7 +212,7 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
 
         if ($clearCache) {
             // clear the cache for this module
-            MetaDataManager::refreshModulesCache(array($this->_moduleName));
+            MetaDataManager::refreshModulesCache([$this->_moduleName]);
         }
         return $ret;
     }
@@ -245,7 +245,7 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
 
     /**
      * Gets metadata from a set of file types.
-     * 
+     *
      * @param array $types List of file types to get metadata from when found
      * @param string $marker The property to set when metadata is found
      * @return array
@@ -253,7 +253,7 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
     public function getMetadataFromFiles($types, $marker = 'loadedMetadataFile')
     {
         // Prepare the return
-        $viewdefs = array();
+        $viewdefs = [];
 
         foreach ($types as $type) {
             $file = $this->getMetadataFilename($type);
@@ -272,12 +272,12 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
     /**
      * Gets the original view defs from either the custom metadata, base metadata
      * or the sugar objects template
-     * 
+     *
      * @return array
      */
     public function getOriginalMetadata()
     {
-        $types = array(MB_CUSTOMMETADATALOCATION, MB_BASEMETADATALOCATION);
+        $types = [MB_CUSTOMMETADATALOCATION, MB_BASEMETADATALOCATION];
         $marker = 'originalMetadataFile';
 
         $viewdefs = $this->getMetadataFromFiles($types, $marker);
@@ -292,9 +292,9 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
     }
 
     /**
-     * Loads the current metadata for this implementation. Checks in working, 
+     * Loads the current metadata for this implementation. Checks in working,
      * history, custom and base before getting fallback metadata.
-     * 
+     *
      * @return array
      */
     public function getCurrentMetadata()
@@ -303,7 +303,7 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
         // here... one for the current metadata to show in studio, which loads
         // working, history, custom, base in that order, and one for the original
         // view defs that are brought in which should be base, custom. In both
-        // cases, if there are no defs found, we should look to sugar object 
+        // cases, if there are no defs found, we should look to sugar object
         // templates for type then basic, in that order.
         $viewdefs = $this->getMetadataFromFiles($this->currentStateFiles);
 
@@ -320,24 +320,24 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
     }
 
     /**
-     * Gets the metadata from various non module locations as a fallback. If 
-     * no metadata file is found, will log an error and return an empty set of 
+     * Gets the metadata from various non module locations as a fallback. If
+     * no metadata file is found, will log an error and return an empty set of
      * viewdefs.
-     * 
+     *
      * @param string $marker The property to set when metadata is found
      * @return array
      */
     public function getFallbackMetadata($marker = 'loadedMetadataFile')
     {
         // Prepare the return
-        $viewdefs = array();
+        $viewdefs = [];
 
         // Get our module type
         $sm = new StudioModule($this->_moduleName);
         $template = $sm->getType();
 
         // Build an array of files to search defs for
-        $files = array();
+        $files = [];
         if (!$this->_viewClient !== 'base') {
             // This is the OOTB file for this module in the base client
             $files[] = $this->getMetadataFilename(MB_BASEMETADATALOCATION, null, 'base');
@@ -388,11 +388,11 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
         parent::setViewClient($client);
         $this->loadedViewClient = $client;
     }
-    
+
     /**
      * Attempts to get defs from an array with unknown client type, like from a
      * fallback fetch
-     * 
+     *
      * @param array $defs The definitions to search
      * @return array
      */

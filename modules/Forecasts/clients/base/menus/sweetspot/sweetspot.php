@@ -10,11 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $moduleName = 'Forecasts';
-$viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
-    array(
+$viewdefs[$moduleName]['base']['menu']['sweetspot'] = [
+    [
         'label' => 'LBL_MODULE_NAME',
         'module' => $moduleName,
         'icon' => 'sicon-list',
         'route' => '#Forecasts',
-    ),
-);
+    ],
+];

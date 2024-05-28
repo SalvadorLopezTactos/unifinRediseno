@@ -1,116 +1,107 @@
 <?php
-$viewdefs['Employees'] = 
-array (
-  'base' => 
+// created: 2024-05-21 12:55:59
+$viewdefs['Employees']['base']['view']['list'] = array (
+  'panels' => 
   array (
-    'view' => 
+    0 => 
     array (
-      'list' => 
+      'name' => 'panel_header',
+      'label' => 'LBL_PANEL_1',
+      'fields' => 
       array (
-        'panels' => 
+        0 => 
         array (
-          0 => 
-          array (
-            'name' => 'panel_header',
-            'label' => 'LBL_PANEL_1',
-            'fields' => 
-            array (
-              0 => 
-              array (
-                'name' => 'name',
-                'label' => 'LBL_NAME',
-                'enabled' => true,
-                'default' => true,
-                'sortable' => true,
-                'width' => '20',
-              ),
-              1 => 
-              array (
-                'name' => 'region_c',
-                'label' => 'LBL_REGION',
-                'enabled' => true,
-                'default' => true,
-                'width' => '10',
-              ),
-              2 => 
-              array (
-                'name' => 'equipo_c',
-                'label' => 'LBL_EQUIPO',
-                'enabled' => true,
-                'default' => true,
-                'width' => '10',
-              ),
-              3 => 
-              array (
-                'name' => 'puestousuario_c',
-                'label' => 'LBL_PUESTOUSUARIO',
-                'enabled' => true,
-                'default' => true,
-                'width' => '10',
-              ),
-              4 => 
-              array (
-                'name' => 'subpuesto_c',
-                'label' => 'LBL_SUBPUESTO',
-                'enabled' => true,
-                'default' => true,
-                'width' => '10',
-              ),
-              5 => 
-              array (
-                'name' => 'reports_to_name',
-                'label' => 'LBL_LIST_REPORTS_TO_NAME',
-                'enabled' => true,
-                'default' => true,
-                'sortable' => true,
-                'width' => '15',
-              ),
-              6 => 
-              array (
-                'name' => 'email',
-                'label' => 'LBL_EMAIL',
-                'enabled' => true,
-                'default' => true,
-                'sortable' => true,
-                'width' => '15',
-              ),
-              7 => 
-              array (
-                'name' => 'phone_work',
-                'label' => 'LBL_OFFICE_PHONE',
-                'default' => true,
-                'enabled' => true,
-                'sortable' => true,
-                'width' => '10',
-              ),
-              8 => 
-              array (
-                'name' => 'ext_c',
-                'label' => 'LBL_EXT',
-                'enabled' => true,
-                'default' => true,
-                'width' => '10',
-              ),
-              9 => 
-              array (
-                'name' => 'date_entered',
-                'label' => 'LBL_DATE_ENTERED',
-                'enabled' => true,
-                'default' => true,
-                'sortable' => true,
-                'width' => '10',
-              ),
-              10 => 
-              array (
-                'name' => 'employee_status',
-                'label' => 'LBL_LIST_EMPLOYEE_STATUS',
-                'enabled' => true,
-                'default' => false,
-                'sortable' => true,
-                'width' => '10',
-              ),
-            ),
-          ),
+          'name' => 'name',
+          'label' => 'LBL_NAME',
+          'enabled' => true,
+          'default' => true,
+          'sortable' => true,
+          'width' => '20',
+        ),
+        1 => 
+        array (
+          'name' => 'region_c',
+          'label' => 'LBL_REGION',
+          'enabled' => true,
+          'default' => true,
+          'width' => '10',
+        ),
+        2 => 
+        array (
+          'name' => 'equipo_c',
+          'label' => 'LBL_EQUIPO',
+          'enabled' => true,
+          'default' => true,
+          'width' => '10',
+        ),
+        3 => 
+        array (
+          'name' => 'puestousuario_c',
+          'label' => 'LBL_PUESTOUSUARIO',
+          'enabled' => true,
+          'default' => true,
+          'width' => '10',
+        ),
+        4 => 
+        array (
+          'name' => 'subpuesto_c',
+          'label' => 'LBL_SUBPUESTO',
+          'enabled' => true,
+          'default' => true,
+          'width' => '10',
+        ),
+        5 => 
+        array (
+          'name' => 'reports_to_name',
+          'label' => 'LBL_LIST_REPORTS_TO_NAME',
+          'enabled' => true,
+          'default' => true,
+          'sortable' => true,
+          'width' => '15',
+        ),
+        6 => 
+        array (
+          'name' => 'email',
+          'label' => 'LBL_EMAIL',
+          'enabled' => true,
+          'default' => true,
+          'sortable' => true,
+          'width' => '15',
+        ),
+        7 => 
+        array (
+          'name' => 'phone_work',
+          'label' => 'LBL_OFFICE_PHONE',
+          'default' => true,
+          'enabled' => true,
+          'sortable' => true,
+          'width' => '10',
+        ),
+        8 => 
+        array (
+          'name' => 'ext_c',
+          'label' => 'LBL_EXT',
+          'enabled' => true,
+          'default' => true,
+          'width' => '10',
+        ),
+        9 => 
+        array (
+          'name' => 'date_entered',
+          'label' => 'LBL_DATE_ENTERED',
+          'enabled' => true,
+          'default' => true,
+          'sortable' => true,
+          'width' => '10',
+        ),
+        10 => 
+        array (
+          'name' => 'employee_status',
+          'label' => 'LBL_LIST_EMPLOYEE_STATUS',
+          'enabled' => true,
+          'default' => false,
+          'sortable' => true,
+          'width' => '10',
         ),
       ),
     ),

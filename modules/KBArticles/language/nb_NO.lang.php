@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'KB-dokumenter',
     'LBL_MODULE_NAME_SINGULAR' => 'Kunnskapsbase-artikkel',
     'LBL_MODULE_TITLE' => 'Kunnskapsbase-artikkel',
     'LBL_REVISIONS_SUBPANEL_TITLE' => 'Revisjoner',
-);
+];

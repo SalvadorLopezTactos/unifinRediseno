@@ -9,10 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
-  * Store old BWC modules list so we could use it to compare to new BWC modules list
-  * and upgrade those which are not BWC anymore.
-  */
+ * Store old BWC modules list so we could use it to compare to new BWC modules list
+ * and upgrade those which are not BWC anymore.
+ */
 class SugarUpgradeRegisterBwcModules extends UpgradeScript
 {
     public $type = self::UPGRADE_CUSTOM;
@@ -25,7 +26,7 @@ class SugarUpgradeRegisterBwcModules extends UpgradeScript
 
     protected function getBwcModules()
     {
-        $bwcModules = array();
+        $bwcModules = [];
         include 'include/modules.php';
 
         return $bwcModules;

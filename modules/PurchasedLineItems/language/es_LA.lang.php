@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Tablero de lista de partidas individuales adquiridas',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Tablero de registro de partidas individuales adquiridas',
     'LBL_PARENT_PURCHASE' => 'Compra principal',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Línea de tiempo de los elementos comprados',
 ];

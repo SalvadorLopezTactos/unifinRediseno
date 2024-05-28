@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'Administration',
-    'Product' => 'Produto',
-    'User' => 'Usuário',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => 'Novo',
-    'Assigned' => 'Atribuída',
-    'Closed' => 'Encerrado',
-    'Pending Input' => 'Entrada Pendente',
-    'Rejected' => 'Rejeitado',
-    'Duplicate' => 'Duplicar',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => 'Alta',
-    'P2' => 'Média',
-    'P3' => 'Baixa',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => 'Aceito',
-    'Duplicate' => 'Duplicar',
-    'Closed' => 'Encerrado',
-    'Out of Date' => 'Obsoleto',
-    'Invalid' => 'Inválido',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => 'Administração',
+        'Product' => 'Produto',
+        'User' => 'Usuário',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => 'Novo',
+        'Assigned' => 'Atribuído',
+        'Closed' => 'Fechado',
+        'Pending Input' => 'Entrada pendente',
+        'Rejected' => 'Rejeitado',
+        'Duplicate' => 'Duplicata',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => 'Alto',
+        'P2' => 'Médio',
+        'P3' => 'Baixo',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => 'Aceito',
+        'Duplicate' => 'Duplicata',
+        'Closed' => 'Encerrado',
+        'Out of Date' => 'Obsoleto',
+        'Invalid' => 'Inválido',
+    ],
+];

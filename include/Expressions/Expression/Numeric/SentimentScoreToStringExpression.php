@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * <b>sentimentScoreToStr(Number score)</b><br/>
  * Returns <i>score</i> converted to its string representation.<br/>
@@ -55,7 +56,7 @@ EOQ;
      */
     public static function getOperationName()
     {
-        return "sentimentScoreToStr";
+        return 'sentimentScoreToStr';
     }
 
     /**

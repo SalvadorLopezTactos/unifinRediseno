@@ -131,12 +131,12 @@ class SugarUpgradeUpdateOOBReports extends UpgradeScript
         $app_strings = return_application_language($GLOBALS['current_language']);
 
         $reports_module_url = "<a href='index.php#Reports'>" .
-            $app_strings['LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2'] . "</a>";
+            $app_strings['LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_2'] . '</a>';
         $link = "https://www.sugarcrm.com/crm/product_doc.php?edition={$GLOBALS['sugar_flavor']}" .
             "&version={$GLOBALS['sugar_version']}&lang=en_us&module=Notify&route=stockReports";
-        $documentation_url = "<a href='{$link}'>" . $app_strings['LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4'] . "</a>";
-        $description = $app_strings['LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1'] . $reports_module_url . ". " .
-            $app_strings['LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3'] . $documentation_url . ".";
+        $documentation_url = "<a href='{$link}'>" . $app_strings['LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_4'] . '</a>';
+        $description = $app_strings['LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_1'] . $reports_module_url . '. ' .
+            $app_strings['LBL_NEW_OOB_REPORTS_NOTIFICATION_DESC_3'] . $documentation_url . '.';
 
         $result = $this->db->query("SELECT id FROM users where deleted = 0 AND status = 'Active'");
         while ($row = $this->db->fetchByAssoc($result)) {

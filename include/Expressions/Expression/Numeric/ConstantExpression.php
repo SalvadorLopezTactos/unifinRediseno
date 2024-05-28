@@ -36,7 +36,7 @@ EOQ;
      */
     public static function getOperationName()
     {
-        return "";
+        return '';
     }
 
     /**

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '工作佇列',
     'LBL_MODULE_NAME_SINGULAR' => '工作佇列',
     'LBL_MODULE_TITLE' => '工作佇列：首頁',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => '解決方式已取消',
     'LBL_RESOLUTION_FILTER_RUNNING' => '解決方式正在執行',
     // Errors
-    'ERR_CALL' => "無法調用功能：%s",
-    'ERR_CURL' => "無 CURL－無法執行 URL 工作",
-    'ERR_FAILED' => "意外失敗，請檢查 PHP 記錄和 sugarcrm.log",
-    'ERR_PHP' => "%s [%d]：%s 中的 %s（行 %d）",
-    'ERR_NOUSER' => "工作未指定使用者 ID",
-    'ERR_NOSUCHUSER' => "未找到使用者 ID %s",
-    'ERR_JOBTYPE' => "未知工作類型：%s",
-    'ERR_TIMEOUT' => "逾時強制失敗",
+    'ERR_CALL' => '無法調用功能：%s',
+    'ERR_CURL' => '無 CURL－無法執行 URL 工作',
+    'ERR_FAILED' => '意外失敗，請檢查 PHP 記錄和 sugarcrm.log',
+    'ERR_PHP' => '%s [%d]：%s 中的 %s（行 %d）',
+    'ERR_NOUSER' => '工作未指定使用者 ID',
+    'ERR_NOSUCHUSER' => '未找到使用者 ID %s',
+    'ERR_JOBTYPE' => '未知工作類型：%s',
+    'ERR_TIMEOUT' => '逾時強制失敗',
     'ERR_JOB_FAILED_VERBOSE' => 'CRON 執行中工作 %1$s (%2$s) 失敗',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => '無法載入 ID 為 %s 的 Bean',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => '無法找到路由 %s 的處理常式',
@@ -93,13 +93,13 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Amazon SQS 設定說明',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Amazon SQS 設定部分。</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Amazon SQS 設定部分。</b></p>
 <ul>
     <li>存取金鑰 ID：<i>輸入 Amazon SQS 的存取金鑰 ID 編號</i></li>
     <li>秘密存取金鑰：<i>輸入 Amazon SQS 的秘密存取金鑰</i></li>
     <li>區域：<i>輸入 Amazon SQS 伺服器的區域</i></li>
     <li>佇列名稱：<i>輸入 Amazon SQS 伺服器的佇列名稱</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'AMQP 設定說明',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>AMQP 設定部分。</b></p>
 <ul>
@@ -120,4 +120,4 @@ $mod_strings = array(
     'LBL_REGION' => '區域',
     'LBL_ACCESS_KEY_SECRET' => '秘密存取金鑰',
     'LBL_QUEUE_NAME' => '配接器名稱',
-);
+];

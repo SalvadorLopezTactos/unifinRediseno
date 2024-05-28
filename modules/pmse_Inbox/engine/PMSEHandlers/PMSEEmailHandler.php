@@ -111,9 +111,9 @@ class PMSEEmailHandler
 
     /**
      * Gets the localization object
-     * @deprecated Will be removed in a future release
      * @return type
      * @codeCoverageIgnore
+     * @deprecated Will be removed in a future release
      */
     public function getLocale()
     {
@@ -173,9 +173,9 @@ class PMSEEmailHandler
 
     /**
      * Sets the localization object
-     * @deprecated Will be removed in a future release
      * @param type $locale
      * @codeCoverageIgnore
+     * @deprecated Will be removed in a future release
      */
     public function setLocale($locale)
     {
@@ -242,33 +242,38 @@ class PMSEEmailHandler
      */
     public function processEmailsAndExpand($bean, $to, $flowData)
     {
-        $res = array();
+        $res = [];
 
         foreach ($to as $entry) {
             switch (strtoupper($entry->type)) {
                 case 'USER':
                     $res = array_merge(
-                        $res, $this->processUserEmails($bean, $entry, $flowData)
+                        $res,
+                        $this->processUserEmails($bean, $entry, $flowData)
                     );
                     break;
                 case 'TEAM':
                     $res = array_merge(
-                        $res, $this->processTeamEmails($bean, $entry, $flowData)
+                        $res,
+                        $this->processTeamEmails($bean, $entry, $flowData)
                     );
                     break;
                 case 'ROLE':
                     $res = array_merge(
-                        $res, $this->processRoleEmails($bean, $entry, $flowData)
+                        $res,
+                        $this->processRoleEmails($bean, $entry, $flowData)
                     );
                     break;
                 case 'RECIPIENT':
                     $res = array_merge(
-                        $res, $this->processRecipientEmails($bean, $entry, $flowData)
+                        $res,
+                        $this->processRecipientEmails($bean, $entry, $flowData)
                     );
                     break;
                 case 'EMAIL':
                     $res = array_merge(
-                        $res, $this->processDirectEmails($bean, $entry, $flowData)
+                        $res,
+                        $this->processDirectEmails($bean, $entry, $flowData)
                     );
                     break;
             }
@@ -279,7 +284,7 @@ class PMSEEmailHandler
 
     public function processUserEmails($bean, $entry, $flowData)
     {
-        $res = $users = array();
+        $res = $users = [];
 
         // Get all the related beans
         $beans = $this->getRelatedModuleObject()->getChainedRelationshipBeans([$bean], $entry);
@@ -304,31 +309,59 @@ class PMSEEmailHandler
     }
 
     /**
+     * Get the contact bean associated with the given ID
+     *
+     * @param $contactId String ID of the contact, or a variable user ID
+     * @param $targetBean SugarBean target bean of the process
+     * @return SugarBean|null
+     */
+    protected function getContactBeanFromTarget($contactId, $targetBean)
+    {
+        switch ($contactId) {
+            case 'system_email':
+                return null;
+            case 'created_by':
+                return $this->getRecordCreator($targetBean);
+            case 'currentuser':
+                return $this->getCurrentUser();
+            case 'modified_user_id':
+                return $this->getLastModifier($targetBean);
+            case 'owner':
+                return $this->getCurrentAssignee($targetBean);
+            case 'supervisor':
+                $userBean = $this->getCurrentAssignee($targetBean);
+                return $this->getSupervisor($userBean);
+        }
+
+        return $this->getContactBeanFromId($contactId);
+    }
+
+    /**
      * @return SugarBean of the current user
      */
     public function getCurrentUser()
     {
         $userHandler = ProcessManager\Factory::getPMSEObject('PMSEUserAssignmentHandler');
         $currentUserId = $userHandler->getCurrentUserId();
-        $userBean = $this->retrieveBean("Users", $currentUserId);
+        $userBean = $this->retrieveBean('Users', $currentUserId);
         return $userBean;
     }
 
     public function getCurrentAssignee($bean)
     {
-        $userBean = $this->retrieveBean("Users", $bean->assigned_user_id);
+        $userBean = $this->retrieveBean('Users', $bean->assigned_user_id);
         return $userBean;
     }
 
     public function getRecordCreator($bean)
     {
-        $userBean = $this->retrieveBean("Users", $bean->created_by);
+        $userBean = $this->retrieveBean('Users', $bean->created_by);
         return $userBean;
     }
 
     public function getLastModifier($bean)
     {
-        $userBean = $this->retrieveBean("Users", $bean->modified_user_id);
+        $userBean = $this->retrieveBean('Users', $bean->modified_user_id);
         return $userBean;
     }
 
@@ -345,7 +378,7 @@ class PMSEEmailHandler
 
     public function getUserEmails($userBean, $entry)
     {
-        $res = array();
+        $res = [];
         $user = $userBean;
         if ($entry->user === 'manager_of') {
             $user = $this->getSupervisor($userBean);
@@ -363,23 +396,22 @@ class PMSEEmailHandler
     public function getSupervisor($user)
     {
         if (isset($user->reports_to_id) && $user->reports_to_id != '') {
-            $supervisor = $this->retrieveBean("Users", $user->reports_to_id);
-            if (
-                isset($supervisor->full_name) &&
+            $supervisor = $this->retrieveBean('Users', $user->reports_to_id);
+            if (isset($supervisor->full_name) &&
                 !empty($supervisor->full_name) &&
                 isset($supervisor->email1) &&
                 !empty($supervisor->email1)
             ) {
                 return $supervisor;
             } else {
-                return '';
+                return null;
             }
         }
     }
 
     public function processTeamEmails($bean, $entry, $flowData)
     {
-        $res = array();
+        $res = [];
         $teams = [];
         if ($entry->value === 'assigned_teams') {
             if (!empty($bean->team_set_id)) {
@@ -391,7 +423,7 @@ class PMSEEmailHandler
         foreach ($teams as $team) {
             $members = $team->get_team_members();
             foreach ($members as $user) {
-                $userBean = $this->retrieveBean("Users", $user->id);
+                $userBean = $this->retrieveBean('Users', $user->id);
                 if ($this->isUserActiveForEmail($userBean)) {
                     $item = new stdClass();
                     $item->name = $userBean->full_name;
@@ -405,7 +437,7 @@ class PMSEEmailHandler
 
     public function processRoleEmails($bean, $entry, $flowData)
     {
-        $res = array();
+        $res = [];
         if ($entry->value === 'is_admin') {
             $userList = $this->getAdminBeans();
         } else {
@@ -430,7 +462,7 @@ class PMSEEmailHandler
      * @return array
      * @throws SugarQueryException
      */
-    private function getAdminBeans() : array
+    private function getAdminBeans(): array
     {
         $query = new SugarQuery();
 
@@ -455,7 +487,7 @@ class PMSEEmailHandler
 
     public function processRecipientEmails($bean, $entry, $flowData)
     {
-        $res = array();
+        $res = [];
         $field = $entry->value;
 
         $beans = $this->getRelatedModuleObject()->getChainedRelationshipBeans([$bean], $entry);
@@ -473,7 +505,7 @@ class PMSEEmailHandler
 
     public function processDirectEmails($bean, $entry, $flowData)
     {
-        $res = array();
+        $res = [];
         $item = new stdClass();
         if (isset($entry->id)) {
             if (isset($entry->module)) {
@@ -572,7 +604,7 @@ class PMSEEmailHandler
      */
     public function sendTemplateEmail($moduleName, $beanId, $addresses, $templateId, $evnDefBean = null)
     {
-        $mailTransmissionProtocol = "unknown";
+        $mailTransmissionProtocol = 'unknown';
         if (PMSEEngineUtils::isEmailRecipientEmpty($addresses)) {
             $this->getLogger()->alert('All email recipients are filtered out of the email recipient list.');
             return;
@@ -583,11 +615,11 @@ class PMSEEmailHandler
             $templateObject->disable_row_level_security = true;
 
             $mailObject = $this->retrieveMailer();
-            $mailTransmissionProtocol   = $mailObject->getMailTransmissionProtocol();
+            $mailTransmissionProtocol = $mailObject->getMailTransmissionProtocol();
 
             $this->addRecipients($mailObject, $addresses);
 
-            if (isset($templateId) && $templateId != "") {
+            if (isset($templateId) && $templateId != '') {
                 $templateObject->retrieve($templateId);
             } else {
                 $this->getLogger()->warning('template_id is not defined');
@@ -656,9 +688,9 @@ class PMSEEmailHandler
     public function addEmailToQueue($id)
     {
         $job = BeanFactory::newBean('SchedulersJobs');
-        $job->name = "SugarBPM Email Queue";
-        $job->target = "class::SugarJobSendAWFEmail";
-        $job->data = json_encode(array('id' => $id));
+        $job->name = 'SugarBPM Email Queue';
+        $job->target = 'class::SugarJobSendAWFEmail';
+        $job->data = json_encode(['id' => $id]);
 
         $jq = new SugarJobQueue();
         $jq->submitJob($job);
@@ -684,7 +716,7 @@ class PMSEEmailHandler
     {
         if (empty($email) || empty($email->id)) {
             $this->getLogger()->warning(
-                "Error sending email. Email data not found"
+                'Error sending email. Email data not found'
             );
             return false;
         }
@@ -775,7 +807,7 @@ class PMSEEmailHandler
 
         $addresses = $this->getRecipients($evnDefBean, $targetBean, $flowData);
         $sender = $this->getSenderFromEventDefinition($evnDefBean, $targetBean);
-        $outboundId = $this->getOutBoundEmailIdFromEventDefinition($evnDefBean);
+        $outboundId = $this->getOutBoundEmailIdFromEventDefinition($evnDefBean, $targetBean);
         return $this->saveEmailBean($targetBean, $templateBean, $sender, $addresses, $emailMessageBean, $outboundId);
     }
 
@@ -1062,21 +1094,51 @@ class PMSEEmailHandler
     /**
      * Extract the id for the From field from the event definition
      *
-     * @param SugarBean $evnDefBean
+     * @param SugarBean $evnDefBean The event definition bean
+     * @param SugarBean $targetBean The target bean of the process
      * @return string|null The outbound email id if it exists
      */
-    private function getOutBoundEmailIdFromEventDefinition($evnDefBean)
+    public function getOutBoundEmailIdFromEventDefinition($evnDefBean, $targetBean)
     {
-        if (!empty($evnDefBean->evn_params)) {
-            $addressesJSON = htmlspecialchars_decode($evnDefBean->evn_params, ENT_COMPAT);
-            $addresses = json_decode($addressesJSON);
-            $id = !empty($addresses->from->id) ? $addresses->from->id : null;
-            //Check if this is an outbound account
-            $bean = $this->retrieveBean('OutboundEmail', $id);
-            return !empty($bean->id) ? $bean->id : null;
+        if (empty($evnDefBean->evn_params)) {
+            return null;
         }
-        return null;
+
+        $addressesJSON = htmlspecialchars_decode($evnDefBean->evn_params, ENT_COMPAT);
+        $addresses = json_decode($addressesJSON);
+        $fromId = $addresses->from->id ?? null;
+        if (!$fromId) {
+            return null;
+        }
+
+        // Check if this is an outbound account
+        $bean = $this->retrieveBean('OutboundEmail', $fromId);
+        if (empty($bean->id)) {
+            // if not, check if contact (User or OutboundEmail) has an outbound account
+            $contactBean = $this->getContactBeanFromTarget($fromId, $targetBean);
+            if (!empty($contactBean->id)) {
+                $bean = $contactBean->getModuleName() === 'Users' ?
+                    $this->getUserConfiguredOutboundEmailBean($contactBean->id) :
+                    $contactBean;
+            }
+        }
+
+        return $bean->id ?? null;
     }
+
+    /**
+     * Get a configured outbound email bean for a user
+     *
+     * @param string $userId
+     * @return SugarBean|null
+     */
+    protected function getUserConfiguredOutboundEmailBean($userId)
+    {
+        $ob = BeanFactory::newBean('OutboundEmail');
+        $bean = $ob->getUsersMailerForSystemOverride($userId);
+        return $bean && $bean->isConfigured() ? $bean : null;
+    }
+
     /**
      * Gets the contact information (email address and name) associated with the
      * given ID
@@ -1088,36 +1150,16 @@ class PMSEEmailHandler
      */
     public function getContactInformationFromId($contactId, $targetBean, string $type = '')
     {
-        $contactBean = null;
-
-        // Get the contact bean associated with the given ID
-        switch ($contactId) {
-            case 'system_email':
-                // The system email account (defined in Admin settings)
-                // is the fallback account when 'name' or 'address' are null
-                return [
-                    'name' => null,
-                    'address' => null,
-                ];
-            case 'created_by':
-                $contactBean = $this->getRecordCreator($targetBean);
-                break;
-            case 'currentuser':
-                $contactBean = $this->getCurrentUser();
-                break;
-            case 'modified_user_id':
-                $contactBean = $this->getLastModifier($targetBean);
-                break;
-            case 'owner':
-                $contactBean = $this->getCurrentAssignee($targetBean);
-                break;
-            case 'supervisor':
-                $contactBean = $this->getCurrentAssignee($targetBean);
-                $contactBean = $this->getSupervisor($contactBean);
-                break;
-            default:
-                $contactBean = $this->getContactBeanFromId($contactId);
+        if ($contactId === 'system_email') {
+            // The system email account (defined in Admin settings)
+            // is the fallback account when 'name' or 'address' are null
+            return [
+                'name' => null,
+                'address' => null,
+            ];
         }
+
+        $contactBean = $this->getContactBeanFromTarget($contactId, $targetBean);
 
         // Return the name and primary email address associated with the contact bean
         return $this->getContactInformationFromBean($contactBean, $type);
@@ -1148,7 +1190,7 @@ class PMSEEmailHandler
      * Retrieves the contact information (name and primary email address) associated
      * with the given bean
      *
-     * @param Sugarbean|null $contactBean  to extract contact information from
+     * @param Sugarbean|null $contactBean to extract contact information from
      * @param string $type The value we want to set on the email. Supports `from` and `reply`
      * @return array containing the contact name and primary email address of the user
      */
@@ -1344,8 +1386,8 @@ class PMSEEmailHandler
             $widget_id = $_REQUEST[$module . '_email_widget_id'];
         }
 
-        while (isset($_REQUEST[$module . $widget_id . "emailAddress" . $widgetCount])) {
-            if (empty($_REQUEST[$module . $widget_id . "emailAddress" . $widgetCount])) {
+        while (isset($_REQUEST[$module . $widget_id . 'emailAddress' . $widgetCount])) {
+            if (empty($_REQUEST[$module . $widget_id . 'emailAddress' . $widgetCount])) {
                 $widgetCount++;
                 continue;
             }

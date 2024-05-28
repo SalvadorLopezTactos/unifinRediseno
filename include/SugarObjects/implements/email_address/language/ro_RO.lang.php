@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_ANY_EMAIL' => 'Orice Email:',
     'LBL_EMAIL' => 'adresa email',
     'LBL_PRIMARY_EMAIL' => 'E-mail principal',
@@ -18,7 +18,7 @@ $mod_strings = array (
     'LBL_OTHER_EMAIL_ADDRESS' => 'Alt Email:',
     'LBL_EMAIL_ADDRESS' => 'Adresă Email',
     'LBL_EMAIL_ADDRESSES' => 'adresa email',
-    'LBL_INVALID_EMAIL'=>'Email Invalid:',
+    'LBL_INVALID_EMAIL' => 'Email Invalid:',
     'LBL_EMAIL_OPT_OUT' => 'Optiune Email Respinsa:',
     'LBL_EMAIL_NON_PRIMARY' => 'Adrese email secundare',
-);
+];

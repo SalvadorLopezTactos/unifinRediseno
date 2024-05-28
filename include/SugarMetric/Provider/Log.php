@@ -58,7 +58,7 @@ class SugarMetric_Provider_Log implements SugarMetric_Provider_Interface
      */
     public function isLoaded()
     {
-        return (bool) $this->logger;
+        return (bool)$this->logger;
     }
 
     /**

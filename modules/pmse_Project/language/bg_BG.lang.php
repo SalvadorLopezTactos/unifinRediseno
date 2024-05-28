@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Дефиниции на процеси',
-  'LBL_MODULE_TITLE' => 'Дефиниции на процеси',
-  'LBL_MODULE_NAME_SINGULAR' => 'Дефиниция на процес',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Дефиниции на процеси',
+    'LBL_MODULE_TITLE' => 'Дефиниции на процеси',
+    'LBL_MODULE_NAME_SINGULAR' => 'Дефиниция на процес',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на дефиниции на процеси',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на дефиниции на процеси',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Електронно табло със запис на дефиниции на процесите',
-  'LNK_LIST' => 'Списък с дефиниции на процеси',
-  'LNK_NEW_PMSE_PROJECT' => 'Създай дефиниция на процес',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Импортирай дефиниции на процеси',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Електронно табло със запис на дефиниции на процесите',
+    'LNK_LIST' => 'Списък с дефиниции на процеси',
+    'LNK_NEW_PMSE_PROJECT' => 'Създай дефиниция на процес',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Импортирай дефиниции на процеси',
 
-  'LBL_PRJ_STATUS' => 'Статус',
-  'LBL_PRJ_MODULE' => 'Основен модул',
-  'LBL_PRJ_RUN_ORDER' => 'Ред на изпълнение',
-  'LBL_PMSE_BUTTON_SAVE' => 'Съхрани',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Отмени',
-  'LBL_PMSE_BUTTON_YES' => 'Да',
-  'LBL_PMSE_BUTTON_NO' => 'Не',
-  'LBL_PMSE_BUTTON_OK' => 'ОК',
+    'LBL_PRJ_STATUS' => 'Статус',
+    'LBL_PRJ_MODULE' => 'Основен модул',
+    'LBL_PRJ_RUN_ORDER' => 'Ред на изпълнение',
+    'LBL_PMSE_BUTTON_SAVE' => 'Съхрани',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Отмени',
+    'LBL_PMSE_BUTTON_YES' => 'Да',
+    'LBL_PMSE_BUTTON_NO' => 'Не',
+    'LBL_PMSE_BUTTON_OK' => 'ОК',
     'LBL_PMSE_FORM_ERROR' => 'Отстранете възникналите грешки преди да продължите.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Проектиране',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Дейност',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Действие',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Начално събитие в модул Потенциални клиенти',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Начално събитие в модул Възможности' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Начално събитие в модул Възможности',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Начално събитие в модул Документи',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Събитие към друг модул',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Събитие тип времеви интервал',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Бизнес правило',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Действие на бизнес правило',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Шаблон на електронно писмо',
-);
+];

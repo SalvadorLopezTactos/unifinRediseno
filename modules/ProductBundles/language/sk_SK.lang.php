@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Skupina etapy',
-    'LBL_DEAL_TOT'=>'Zľava celkom',
-    'LBL_DEAL_TOT_USDOLLAR'=>'Zľava celkom (US Dollar)',
+    'LBL_DEAL_TOT' => 'Zľava celkom',
+    'LBL_DEAL_TOT_USDOLLAR' => 'Zľava celkom (US Dollar)',
     'LBL_NEW_SUB' => 'Medzisúčet po zľave:',
     'LBL_SHIPPING' => 'Dodanie',
-    'LBL_SHIPPING_USDOLLAR'=>'Dodanie (US Dollar)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Medzisúčet (US Dollar)',
+    'LBL_SHIPPING_USDOLLAR' => 'Dodanie (US Dollar)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Medzisúčet (US Dollar)',
     'LBL_SUBTOTAL' => 'Medzisúčet:',
     'LBL_TAXABLE_SUBTOTAL' => 'Zdaniteľný medzisúčet',
-    'LBL_TAX_USDOLLAR'=>'DPH (US Dollar)',
+    'LBL_TAX_USDOLLAR' => 'DPH (US Dollar)',
     'LBL_TAX' => 'DPH:',
-    'LBL_TOTAL_USDOLLAR'=>'Celkom (US Dollar)',
+    'LBL_TOTAL_USDOLLAR' => 'Celkom (US Dollar)',
     'LBL_TOTAL' => 'Celkom:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Quote Bundle Position',
     'EXCEPTION_INVALID_QUOTE_ID' => 'Quote ID is missing from the payload',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'The Quote you requested was not found',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'The Quote you requested was not found',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Dodatočná skupinová zľava',
     'LBL_GROUP_TOTAL' => 'Súčet skupiny',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Hlavička skupiny',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Predvolená skupina produktových balíčkov pre ponuku',
     'LBL_ALERT_DELETING_ITEM' => 'Vymazávanie položiek',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Položka sa úspešne vymazala',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová os produktového balíčka',
+];

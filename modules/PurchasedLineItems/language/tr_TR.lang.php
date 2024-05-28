@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Satın Alınan Kalemler Listesi Panosu',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Satın Alınan Kalemler Kayıt Panosu',
     'LBL_PARENT_PURCHASE' => 'Ana Satın Alma',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Satın Alınan Kalem Zaman Çizelgesi',
 ];

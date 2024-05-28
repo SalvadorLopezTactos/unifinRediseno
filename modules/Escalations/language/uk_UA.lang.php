@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'Переглянути ескалації',
     'LBL_LIST_RELATED_TO_ID' => 'Пов’язаний з ID',
     'LNK_IMPORT_ESCALATIONS' => 'Імпортувати ескалації',
-    
+
     'LBL_LIST_SUBJECT' => 'Тема',
     'LBL_LIST_NUMBER' => 'Ном.',
     'LBL_LIST_RELATED_TO_TYPE' => 'Пов’язаний тип',

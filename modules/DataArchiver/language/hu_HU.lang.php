@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Adatarchiváló',
     'LBL_MODULE_NAME' => 'Adatarchiváló',
     'LBL_FILTER_DEF_FIELD' => 'Szűrő',
@@ -28,7 +27,7 @@ $mod_strings = array (
     'LBL_MANAGE_ARCHIVE_JOB_LIST_TITLE' => 'Időzített archiválások',
     'LBL_MANAGE_ARCHIVE_JOB_IS_NOT_SCHEDULED' => 'Nincsenek időzített archiválások',
     'LBL_ARCHIVE_FILTER' => 'Szűrőbeállítások',
-    "LBL_MANAGE_ARCHIVE_SETUP" => 'Adatarchiválás beállítása',
+    'LBL_MANAGE_ARCHIVE_SETUP' => 'Adatarchiválás beállítása',
     'LBL_LIST_ARCHIVE_NAME' => 'Archívum neve',
     'LBL_PERFORM_NOW_BTN' => 'Végrehajtás most',
     'LBL_ARCHIVE_SUCCESS_TITLE' => 'Sikeres',
@@ -45,4 +44,4 @@ $mod_strings = array (
         . 'mivel ez hatással lehet a rendszer teljesítményére. Szeretné most végrehajtani ezt a tevékenységet?',
 
     'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'A(z) {{moduleName}} archiválójának {{fieldName}} beállított szűrővel kell rendelkeznie',
-);
+];

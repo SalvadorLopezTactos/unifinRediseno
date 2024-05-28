@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Import souboru proběhl úspěšně',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Importovaný záznam se účastní procesu a nelze ho upravit, protože některá pole jsou procesem uzamčena pro úpravy.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Záznamy přeskočeny kvůli chybě',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Pokud uživatel neexistuje, použijte aktuálního uživatele',
     'LBL_SHOW_HIDDEN' => 'Ukázat pole která nejsou běžně importovatelná',
     'LBL_UPDATE_RECORDS' => 'Aktualizovat existující zínamy namísto importování (nelze vrátit)',
-    'LBL_TEST'=> 'Testovcí import (neukládat nebo měnit data)',
+    'LBL_TEST' => 'Testovcí import (neukládat nebo měnit data)',
     'LBL_TRUNCATE_TABLE' => 'Vyprázdnit tabulku před importem (vymazat všechny záznamy)',
     'LBL_RELATED_ACCOUNTS' => 'Nevytvářet relační záznamy',
     'LBL_NO_DATECHECK' => 'Přeskočit kontrolu data (rychlejší, ale chybné, pokud je datum uvedeno chybně)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Chybný integer',
     'LBL_ERROR_INVALID_NUM' => 'Neplatná číselná hodnota',
     'LBL_ERROR_INVALID_TIME' => 'Neplatný čas',
-    'LBL_ERROR_INVALID_EMAIL'=>'Neplatná emailová adresa',
-    'LBL_ERROR_INVALID_BOOL'=>'Neplatná hodnota (musí být 1 nebo 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Neplatný datový řetězec',
-    'LBL_ERROR_INVALID_USER'=>'Neplatné uživatelské jméno nebo ID',
+    'LBL_ERROR_INVALID_EMAIL' => 'Neplatná emailová adresa',
+    'LBL_ERROR_INVALID_BOOL' => 'Neplatná hodnota (musí být 1 nebo 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Neplatný datový řetězec',
+    'LBL_ERROR_INVALID_USER' => 'Neplatné uživatelské jméno nebo ID',
     'LBL_ERROR_INVALID_TEAM' => 'Špatné jméno či ID týmu',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Špatné jméno či ID společnosti',
     'LBL_ERROR_INVALID_RELATE' => 'Špatné relační pole',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'neexistuje nebo není zapisovatelný',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Soubor nebyl úspěšně nahrán. Může to být způsobeno nastavením nízkého čísla pro direktivu [upload_max_filesize] ve vašem php.ini souboru',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Soubor je příliš velký. Maximálně',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bytů. Změnte nastavení $sugar_config[upload_maxsize] v konfiguračním souboru config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bajty. Změňte $sugar_config[&#39;upload_maxsize&#39;] v config.php',
     'LBL_MODULE_NAME' => 'Importovat',
     'LBL_MODULE_NAME_SINGULAR' => 'Importovat',
     'LBL_TRY_AGAIN' => 'Zkusit znovu',
     'LBL_START_OVER' => 'Začít znovu',
     'LBL_ERROR' => 'Chyba:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Importní soubor obsahuje {0} řádků. Doporučený počet řádků je {1}. Více řádků může zpomalit importovací proces.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Nelze importovat uživatele správce systému',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Nelze importovat uživatele správce systému',
     'ERR_REPORT_LOOP' => 'System detekoval smyčku. Uživatel se nemůže zodpovídat sám sobě, nebo žádný jejich manažer se nemůže zodpovídat jemu.',
     'ERR_MULTIPLE' => 'Několik sloupců bylo definováno se stejným názvem pole.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Chybějící požadovaná pole:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Nebyly nalezeny žádné řádky v souboru.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Importovací soubor byl již zpracován nenbo neexistuje.',
     'LBL_SUCCESS' => 'Dokončeno:',
-	'LBL_FAILURE' => 'Import selhal:',
+    'LBL_FAILURE' => 'Import selhal:',
     'LBL_SUCCESSFULLY' => 'Úspěšně naimportováno',
     'LBL_LAST_IMPORT_UNDONE' => 'Váš poslední import se nezdařil',
     'LBL_NO_IMPORT_TO_UNDO' => 'Import nelze vrátit zpět.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Importovat více',
     'LBL_FINISHED' => 'Ukončit',
     'LBL_UNDO_LAST_IMPORT' => 'Vrátit zpět poslední import',
-    'LBL_LAST_IMPORTED'=>'Poslední import',
+    'LBL_LAST_IMPORTED' => 'Poslední import',
     'ERR_MULTIPLE_PARENTS' => 'Pouze jedno ID rodiče může být definováno',
     'LBL_DUPLICATES' => 'Nalezeny duplikáty',
     'LNK_DUPLICATE_LIST' => 'Download List of Duplicates',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Skrýt poznámky',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Zobrazit sloupce náhledu',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Skrýt sloupce náhledu',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Zkontrolujte duplicity pomocí operátoru:',
     'LBL_SAVE_MAPPING_AS' => 'Save Mapping As',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Single Quote (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Dvojité uvozovky (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'K přiřazení nových záznamů jinému týmu, že je Váš výchozí tým / týmy, použijte sloupec Výchozí hodnota ke zvolení jiných týmů.',
     'LBL_SIGN_IN_HELP' => 'K povolení této služby se prosím přihlašte do externího účtu, který se nachází v záložce v sekci Uživatelské nastavení.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Pokus o zpracování e-mailových adres v beanu, který je nepodporuje.",
-);
+];

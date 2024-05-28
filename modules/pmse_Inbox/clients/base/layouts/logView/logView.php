@@ -10,35 +10,35 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['pmse_Inbox']['base']['layout']['logView'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
-                'components' => array(
-                    array(
+$viewdefs['pmse_Inbox']['base']['layout']['logView'] = [
+    'components' => [
+        [
+            'layout' => [
+                'components' => [
+                    [
                         'view' => 'logView-headerpane',
                         'primary' => true,
-                    ),
-                    array(
-                        'layout' => array(
-                            'components' => array(
-                                array(
+                    ],
+                    [
+                        'layout' => [
+                            'components' => [
+                                [
                                     'view' => 'logView-pane',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-        array(
-            'layout' => array(
-                'components' => array(
-                    array(
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        [
+            'layout' => [
+                'components' => [
+                    [
                         'layout' => 'sidebar',
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

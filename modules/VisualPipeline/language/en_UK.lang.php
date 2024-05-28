@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tile View',
     'LBL_MODULE_NAME_SINGULAR' => 'Tile View',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'Tile View',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => 'Enabled Modules',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'Tile View Modules',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'Module Settings',
-    'LBL_PIPELINE_TABLE_HEADER' => "Select the field whose values will be used as columns",
+    'LBL_PIPELINE_TABLE_HEADER' => 'Select the field whose values will be used as columns',
     'LBL_PIPELINE_TILE_HEADER' => 'Tile Header Field',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => 'Available Columns',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => 'Tile Body Fields',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'Tile Preview',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'Too many fields on tile.',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => 'Please resolve errors in the following module settings tabs before proceeding:<br><br>',
-);
+    'LBL_MODULE_SELECTION' => 'Select the module you would like to view and configure below',
+    'LBL_SHOW_COLUMN_COUNT' => 'Show Column Count',
+    'LBL_SHOW_COLUMN_TOTAL' => 'Show Column Total',
+    'LBL_TOTAL_FIELD' => 'Total Field',
+];

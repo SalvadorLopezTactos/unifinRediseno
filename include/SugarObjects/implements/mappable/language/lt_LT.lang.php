@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = [
-    'LBL_GC_STATUS'=>'Geokodavimo būsena',
+    'LBL_GC_STATUS' => 'Geokodavimo būsena',
     'LBL_GC_LATITUDE' => 'Geokodavimo platuma',
     'LBL_GC_LONGITUDE' => 'Geokodavimo ilguma',
     'LBL_GC_STATUS_DETAIL' => 'Geokodavimo būsenos duomenys',

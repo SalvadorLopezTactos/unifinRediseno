@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'This signature requires a name.',
     'LBL_DEFAULT_SIGNATURE' => 'Numatytasis',
     'LBL_MODULE_NAME' => 'Skaitmeniniai el. pašto parašai',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'Use signature?',
     'LBL_SIGNATURE_PREPEND' => 'Signature above reply?',
     'LBL_SIGNATURES' => 'Signatures',
-);
+];

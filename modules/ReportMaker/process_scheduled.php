@@ -12,31 +12,31 @@
  */
 
 
-$modListHeader = array();
+$modListHeader = [];
 
-require_once('modules/Reports/templates/templates_pdf.php');
+require_once 'modules/Reports/templates/templates_pdf.php';
 require_once 'modules/Reports/config.php';
 
 global $sugar_config;
 
-$language         = $sugar_config['default_language'];
+$language = $sugar_config['default_language'];
 $app_list_strings = return_app_list_strings_language($language);
-$app_strings      = return_application_language($language);
+$app_strings = return_application_language($language);
 
 $reportSchedule = new ReportSchedule();
 
 // Process Enterprise Schedule reports via CSV
-$reportsToEmailEnt = $reportSchedule->get_ent_reports_to_email("", "ent");
+$reportsToEmailEnt = $reportSchedule->get_ent_reports_to_email('', 'ent');
 
 global $report_modules,
-       $modListHeader,
-       $locale;
+$modListHeader,
+$locale;
 
 foreach ($reportsToEmailEnt as $scheduleId => $scheduleInfo) {
     $user = BeanFactory::getBean('Users', $scheduleInfo['user_id']);
 
-    $current_user   = $user; // should this be the global $current_user? global $current_user isn't referenced
-    $modListHeader  = query_module_access_list($current_user);
+    $current_user = $user; // should this be the global $current_user? global $current_user isn't referenced
+    $modListHeader = query_module_access_list($current_user);
     $report_modules = getAllowedReportModules($modListHeader);
 
     // Acquire the enterprise report to be sent
@@ -47,14 +47,14 @@ foreach ($reportsToEmailEnt as $scheduleId => $scheduleInfo) {
     // Process data sets into CSV files
 
     // loop through data sets;
-    $dataSets  = $reportMaker->get_data_sets();
-    $tempFiles = array();
+    $dataSets = $reportMaker->get_data_sets();
+    $tempFiles = [];
 
     foreach ($dataSets as $key => $dataSet) {
-        $csv           = $dataSet->export_csv();
-        $filenamestamp = "{$dataSet->name}_{$user->user_name}_" . date(translate("LBL_CSV_TIMESTAMP", "Reports"), time());
-        $filename      = str_replace(" ", "_", "{$reportMaker->name}{$filenamestamp}.csv");
-        $fp            = sugar_fopen(sugar_cached("csv/") . $filename, "w");
+        $csv = $dataSet->export_csv();
+        $filenamestamp = "{$dataSet->name}_{$user->user_name}_" . date(translate('LBL_CSV_TIMESTAMP', 'Reports'), time());
+        $filename = str_replace(' ', '_', "{$reportMaker->name}{$filenamestamp}.csv");
+        $fp = sugar_fopen(sugar_cached('csv/') . $filename, 'w');
         fwrite($fp, $csv);
         fclose($fp);
 
@@ -64,7 +64,7 @@ foreach ($reportsToEmailEnt as $scheduleId => $scheduleInfo) {
     // get the recipient data...
 
     // first get all email addresses known for this recipient
-    $recipientEmailAddresses = array($user->email1, $user->email2);
+    $recipientEmailAddresses = [$user->email1, $user->email2];
     $recipientEmailAddresses = array_filter($recipientEmailAddresses);
 
     // then retrieve first non-empty email address
@@ -77,7 +77,7 @@ foreach ($reportsToEmailEnt as $scheduleId => $scheduleInfo) {
         $mailer = MailerFactory::getSystemDefaultMailer();
 
         // set the subject of the email
-        $subject = empty($reportMaker->name) ? "Report" : $reportMaker->name;
+        $subject = empty($reportMaker->name) ? 'Report' : $reportMaker->name;
         $mailer->setSubject($subject);
 
         // add the recipient
@@ -87,26 +87,26 @@ foreach ($reportsToEmailEnt as $scheduleId => $scheduleInfo) {
         $tempCount = 0;
 
         foreach ($tempFiles as $filename) {
-            $filePath       = sugar_cached("csv/") . $filename;
+            $filePath = sugar_cached('csv/') . $filename;
             $attachmentName = "{$subject}_{$tempCount}.csv";
-            $attachment     = new Attachment($filePath, $attachmentName, Encoding::Base64, "application/csv");
+            $attachment = new Attachment($filePath, $attachmentName, Encoding::Base64, 'application/csv');
             $mailer->addAttachment($attachment);
             $tempCount++;
         }
 
         // set the body of the email
-        $body = $mod_strings["LBL_HELLO"];
+        $body = $mod_strings['LBL_HELLO'];
 
-        if ($recipientName != "") {
+        if ($recipientName != '') {
             $body .= " {$recipientName}";
         }
 
         $body .= ",\n\n" .
-                 $mod_strings["LBL_SCHEDULED_REPORT_MSG_INTRO"] .
-                 $reportMaker->date_entered .
-                 $mod_strings["LBL_SCHEDULED_REPORT_MSG_BODY1"] .
-                 $reportMaker->name .
-                 $mod_strings["LBL_SCHEDULED_REPORT_MSG_BODY2"];
+            $mod_strings['LBL_SCHEDULED_REPORT_MSG_INTRO'] .
+            $reportMaker->date_entered .
+            $mod_strings['LBL_SCHEDULED_REPORT_MSG_BODY1'] .
+            $reportMaker->name .
+            $mod_strings['LBL_SCHEDULED_REPORT_MSG_BODY2'];
 
         // the compared strings will be the same if strip_tags had no affect
         // if the compared strings are equal, then it's a text-only message
@@ -122,16 +122,18 @@ foreach ($reportsToEmailEnt as $scheduleId => $scheduleInfo) {
 
         $mailer->send();
 
-        $reportSchedule->update_next_run_time($scheduleInfo["id"],
-                                              $scheduleInfo["next_run"],
-                                              $scheduleInfo["time_interval"]);
+        $reportSchedule->update_next_run_time(
+            $scheduleInfo['id'],
+            $scheduleInfo['next_run'],
+            $scheduleInfo['time_interval']
+        );
     } catch (MailerException $me) {
         switch ($me->getCode()) {
             case MailerException::InvalidEmailAddress:
-                $GLOBALS["log"]->info("No email address for {$recipientName}");
+                $GLOBALS['log']->info("No email address for {$recipientName}");
                 break;
             default:
-                $GLOBALS["log"]->fatal("Mail error: " . $me->getMessage());
+                $GLOBALS['log']->fatal('Mail error: ' . $me->getMessage());
                 break;
         }
     }

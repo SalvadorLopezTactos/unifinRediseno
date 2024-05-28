@@ -117,7 +117,7 @@ class BusinessProcessInstaller
      * @param Object $object The object to use
      * @return BusinessProcessInstaller
      */
-    public function setLogger(string $method, $object = null) : BusinessProcessInstaller
+    public function setLogger(string $method, $object = null): BusinessProcessInstaller
     {
         $this->logMethod = $method;
         $this->logger = $object;
@@ -128,7 +128,7 @@ class BusinessProcessInstaller
      * Logs a message to a log
      * @param string $msg The message to log
      */
-    protected function log(string $msg) : void
+    protected function log(string $msg): void
     {
         // If there is a log method, use it
         if ($this->logMethod) {
@@ -172,9 +172,9 @@ class BusinessProcessInstaller
      * Gathers up installation files for processing
      * @return BusinessProcessInstaller
      */
-    protected function collectInstallationFiles() : BusinessProcessInstaller
+    protected function collectInstallationFiles(): BusinessProcessInstaller
     {
-        $files = glob($this->dataDirectory . '*.{' . implode(',', $this->exts) . '}', GLOB_BRACE|GLOB_NOSORT);
+        $files = glob($this->dataDirectory . '*.{' . implode(',', $this->exts) . '}', GLOB_BRACE | GLOB_NOSORT);
         foreach ($files as $file) {
             $ext = pathinfo($file, PATHINFO_EXTENSION);
             $this->installFiles[$ext][] = $file;
@@ -188,7 +188,7 @@ class BusinessProcessInstaller
      * @param string $file The file to get data from
      * @return array
      */
-    public function getProjectData(string $file) : array
+    public function getProjectData(string $file): array
     {
         $content = file_get_contents($file);
         $data = json_decode($content, true);
@@ -252,7 +252,7 @@ class BusinessProcessInstaller
      * do the actual importing of the data
      * @return BusinessProcessInstaller
      */
-    protected function installFileData() : BusinessProcessInstaller
+    protected function installFileData(): BusinessProcessInstaller
     {
         // Install Projects first, followed by Business Rules and Email Templates
         foreach ($this->exts as $ext) {
@@ -448,7 +448,7 @@ class BusinessProcessInstaller
      * @param array $data Project data
      * @return array
      */
-    protected function getOptionsFromProjectData(array $data) : array
+    protected function getOptionsFromProjectData(array $data): array
     {
         // Make this a little easier to get to what we need
         $project = $data['project'];
@@ -467,7 +467,7 @@ class BusinessProcessInstaller
      * @param array $element Element definition
      * @return boolean
      */
-    protected function isSendMessage(array $element) : bool
+    protected function isSendMessage(array $element): bool
     {
         return isset($element['evn_marker']) && $element['evn_marker'] === 'MESSAGE' &&
             isset($element['evn_behavior']) && $element['evn_behavior'] === 'THROW';
@@ -526,7 +526,7 @@ class BusinessProcessInstaller
      * Kicks off the installation process
      * @return BusinessProcessInstaller
      */
-    public function install() : BusinessProcessInstaller
+    public function install(): BusinessProcessInstaller
     {
         // This should not be a problem for installation, but it is necessary for
         // upgrades
@@ -552,12 +552,12 @@ class BusinessProcessInstaller
      * @param string $type Either for failures, or extension type
      * @return integer
      */
-    public function getFinalCount(string $type) : int
+    public function getFinalCount(string $type): int
     {
         if ($type === 'failures') {
-            return count($this->failures);
+            return safeCount($this->failures);
         } else {
-            return isset($this->installed[$type]) ? count($this->installed[$type]) : 0;
+            return isset($this->installed[$type]) ? safeCount($this->installed[$type]) : 0;
         }
     }
 
@@ -565,7 +565,7 @@ class BusinessProcessInstaller
      * Cleans up after the installer is done
      * @return BusinessProcessInstaller
      */
-    public function cleanup() : BusinessProcessInstaller
+    public function cleanup(): BusinessProcessInstaller
     {
         // Delete the installation data files
         foreach ($this->getInstalledFiles() as $file) {
@@ -603,7 +603,7 @@ class BusinessProcessInstaller
      * Logs final counts to the installation log
      * @return BusinessProcessInstaller
      */
-    public function logInstallTotals() : BusinessProcessInstaller
+    public function logInstallTotals(): BusinessProcessInstaller
     {
         foreach ($this->getInstallTotalsLog() as $entry) {
             $this->log($entry);
@@ -617,7 +617,7 @@ class BusinessProcessInstaller
      * can be installed and retrieved
      * @return bool The previous state of the license admin work flag
      */
-    protected function suspendLicenseChecks() : bool
+    protected function suspendLicenseChecks(): bool
     {
         // Needed for license management overrides. This should be done before
         // any data is collected to ensure all necessary data is collected.
@@ -634,7 +634,7 @@ class BusinessProcessInstaller
      * Resets the license enforcement check if it is needed
      * @return bool Always true
      */
-    protected function resumeLicenseChecks() : bool
+    protected function resumeLicenseChecks(): bool
     {
         // Reset the admin flag on the access control manager if it needs it.
         if ($this->licenseCheckState !== true) {

@@ -348,7 +348,7 @@
                 this.$el.closest('.record-cell').attr({
                     'rel': 'tooltip',
                     'data-title': title,
-                    'data-placement': 'bottom'
+                    'data-bs-placement': 'bottom'
                 });
             },
             /**

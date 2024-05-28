@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => '지식 기반 목록 대시보드',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => '지식 기반 기록 대시보드',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => '지식 기반 포커스 서랍',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '지식 기반 타임라인',
 
     'LBL_MODULE_NAME' => '지식 베이스',
     'LBL_MODULE_NAME_SINGULAR' => '지식기반 조항',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => '기본으로 값 설정',
     'LBL_ITEM_REMOVE' => '항목 삭제',
     'LBL_ITEM_ADD' => '항목 추가',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => '수정 ID',
     'LBL_DOCUMENT_REVISION' => '개정',
     'LBL_NUMBER' => '번호:',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => '더 많은 {{module}} 기사...',
     'LBL_LIST_FORM_TITLE' => '지식 기반 목록',
     'LBL_SEARCH_FORM_TITLE' => '지식 기반 검색',
-);
+];

@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 declare(strict_types=1);
+
 namespace Sugarcrm\Sugarcrm\modules\Reports\Exporters;
 
 require_once 'include/export_utils.php'; // for user defined delimiter
@@ -75,7 +76,7 @@ abstract class ReportCSVExporterBase implements ReportExporterInterface
      * @param bool $withQuotes
      * @return string
      */
-    protected function getDelimiter($withQuotes = true) : string
+    protected function getDelimiter($withQuotes = true): string
     {
         if ($withQuotes) {
             return '"' . getDelimiter() . '"';
@@ -125,7 +126,7 @@ abstract class ReportCSVExporterBase implements ReportExporterInterface
      */
     protected function makeDetailData(array $detail_row, array $detail_header)
     {
-        $output = array();
+        $output = [];
         if ($detail_row == 0) {
             // if there is no data
             return $output;

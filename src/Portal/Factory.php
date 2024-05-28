@@ -26,7 +26,7 @@ class Factory
      *
      * @return 'Sugarcrm\\Sugarcrm\\Portal\\' . $className
      */
-    public static function getInstance(String $className)
+    public static function getInstance(string $className)
     {
         if (empty($className)) {
             return false;

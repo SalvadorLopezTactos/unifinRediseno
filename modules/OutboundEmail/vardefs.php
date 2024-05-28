@@ -120,7 +120,7 @@ $dictionary['OutboundEmail'] = [
             'dbType' => 'varchar',
             'len' => 255,
             'reportable' => false,
-            'dependency'=> 'not(equal($type, "system"))',
+            'dependency' => 'not(equal($type, "system"))',
         ],
         'reply_to_email_addresses' => [
             'name' => 'reply_to_email_addresses',
@@ -152,7 +152,7 @@ $dictionary['OutboundEmail'] = [
             'table' => 'email_addresses',
             'type' => 'relate',
             'vname' => 'LBL_REPLY_TO_EMAIL_ADDRESS',
-            'dependency'=> 'not(equal($type, "system"))',
+            'dependency' => 'not(equal($type, "system"))',
         ],
         'mail_sendtype' => [
             'name' => 'mail_sendtype',

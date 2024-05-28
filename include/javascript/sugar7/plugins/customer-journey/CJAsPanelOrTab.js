@@ -277,7 +277,7 @@
              * @private
              */
             _loadCjAsPanel: function() {
-                if (this.disposed) {
+                if (this.disposed || (this.context && this.context.get('reloadSingleJourney'))) {
                     return;
                 }
 
@@ -422,12 +422,7 @@
 
                 this._CJ.initComponents(undefined, context, module);
                 this._CJ.loadData();
-                this.listenTo(this._CJ.collection, 'sync', function() {
-                    if (_.isEqual(this._CJ.context.get('module'), 'DRI_Workflows')) {
-                        const journeyTab = $('[data-panelname=customer_journey_tab] .record-panel-header span')[0];
-                        $(journeyTab).html(`Smart Guides (${this._CJ.collection.length})`);
-                    }
-                });
+                this.listenTo(this._CJ.collection, 'add remove sync', this._CJ.renderHeaderPanelData);
             },
 
             /**
@@ -502,7 +497,7 @@
              * @private
              */
             _loadCjAsTab: function() {
-                if (this.disposed) {
+                if (this.disposed || (this.context && this.context.get('reloadSingleJourney'))) {
                     return;
                 }
 

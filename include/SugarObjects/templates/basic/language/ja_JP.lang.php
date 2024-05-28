@@ -10,28 +10,28 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-'LBL_ID'=>'ID',
-'LBL_DATE_ENTERED'=>'作成日',
-'LBL_DATE_MODIFIED'=>'更新日', 
-'LBL_MODIFIED'=>'更新者',
-'LBL_MODIFIED_ID'=>'更新者ID',
-'LBL_MODIFIED_NAME'=>'更新者',
-'LBL_CREATED'=>'作成者',
-'LBL_CREATED_ID'=>'作成者ID',
-'LBL_DOC_OWNER'=>'ドキュメントの所有者',
-'LBL_USER_FAVORITES'=>'お気に入りのユーザー',
-'LBL_DESCRIPTION'=>'詳細',
-'LBL_DELETED'=>'削除済み',
-'LBL_NAME'=>'名前',
-'LBL_CREATED_USER'=>'作成者',
-'LBL_MODIFIED_USER'=>'更新者',
-'LBL_LIST_NAME'=>'名前',
-'LBL_EDIT_BUTTON' => '編集',
- 'LBL_REMOVE' => '削除',
+$mod_strings = [
+    'LBL_ID' => 'ID',
+    'LBL_DATE_ENTERED' => '作成日',
+    'LBL_DATE_MODIFIED' => '更新日',
+    'LBL_MODIFIED' => '更新者',
+    'LBL_MODIFIED_ID' => '更新者ID',
+    'LBL_MODIFIED_NAME' => '更新者',
+    'LBL_CREATED' => '作成者',
+    'LBL_CREATED_ID' => '作成者ID',
+    'LBL_DOC_OWNER' => 'ドキュメントの所有者',
+    'LBL_USER_FAVORITES' => 'お気に入りのユーザー',
+    'LBL_DESCRIPTION' => '詳細',
+    'LBL_DELETED' => '削除済み',
+    'LBL_NAME' => '名前',
+    'LBL_CREATED_USER' => '作成者',
+    'LBL_MODIFIED_USER' => '更新者',
+    'LBL_LIST_NAME' => '名前',
+    'LBL_EDIT_BUTTON' => '編集',
+    'LBL_REMOVE' => '削除',
     //define label(s) to be used for overriding local values during import/export
     'LBL_EXPORT_MODIFIED_BY_NAME' => '更新者',
     'LBL_EXPORT_CREATED_BY_NAME' => '名前で作成',
 
     'LBL_COMMENTLOG' => 'Comment Log',
-);
+];

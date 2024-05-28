@@ -251,7 +251,9 @@
             return {
                 name: relationship.name,
                 relationshipName: relationship.relationship,
-                module: relationship.module || this.getRelationshipModule(relationship.relationship, module)
+                module: relationship.module || this.getRelationshipModule(relationship.relationship, module),
+                moduleLabelTranslation: app.lang.getModuleName(
+                    relationship.module || this.getRelationshipModule(relationship.relationship, module)),
             };
         }, this));
 

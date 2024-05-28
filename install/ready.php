@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-if( !isset( $install_script ) || !$install_script ){
-	die($mod_strings['ERR_NO_DIRECT_SCRIPT']);
+if (!isset($install_script) || !$install_script) {
+    die($mod_strings['ERR_NO_DIRECT_SCRIPT']);
 }
 // $mod_strings come from calling page.
 

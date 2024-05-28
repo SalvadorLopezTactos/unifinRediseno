@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => '知识库列表仪表板',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => '知识库记录仪表板',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => '知识库焦点抽屉',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '知识库时间轴',
 
     'LBL_MODULE_NAME' => '知识库',
     'LBL_MODULE_NAME_SINGULAR' => '知识库文章',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => '将“值”设置为“主要”',
     'LBL_ITEM_REMOVE' => '移除项目',
     'LBL_ITEM_ADD' => '添加项目',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => '版本编号',
     'LBL_DOCUMENT_REVISION' => '修订版本',
     'LBL_NUMBER' => '编号',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => '更多 {{module}} 文章...',
     'LBL_LIST_FORM_TITLE' => '知识库列表',
     'LBL_SEARCH_FORM_TITLE' => '知识库搜索',
-);
+];

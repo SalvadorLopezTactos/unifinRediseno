@@ -37,9 +37,9 @@ class LegacyJsonServer
         // to get a simplified version of the sugarbean
         $module_arr = $this->populateBean($focus);
 
-        $response = array();
+        $response = [];
         $response['id'] = $request_id;
-        $response['result'] = array("status" => "success", "record" => $module_arr);
+        $response['result'] = ['status' => 'success', 'record' => $module_arr];
         return $response;
     }
 
@@ -94,10 +94,10 @@ class LegacyJsonServer
             }
         }
 
-        $list_return = array();
+        $list_return = [];
 
         if (!empty($args['module'])) {
-            $args['modules'] = array($args['module']);
+            $args['modules'] = [$args['module']];
         }
 
         foreach ($args['modules'] as $module) {
@@ -107,9 +107,9 @@ class LegacyJsonServer
             if (!empty($args['order'])) {
                 $query_orderby = preg_replace('/[^\w_.-]+/i', '', $args['order']['by']);
                 if (!empty($args['order']['desc'])) {
-                    $query_orderby .= " DESC";
+                    $query_orderby .= ' DESC';
                 } else {
-                    $query_orderby .= " ASC";
+                    $query_orderby .= ' ASC';
                 }
             }
 
@@ -118,7 +118,7 @@ class LegacyJsonServer
                 $query_limit = (int)$args['limit'];
             }
             $query_where = $this->constructWhere($args, $focus->table_name, $module);
-            $list_arr = array();
+            $list_arr = [];
             if ($focus->ACLAccess('ListView', true)) {
                 $focus->ungreedy_count = false;
                 $curlist = $focus->get_list($query_orderby, $query_where, 0, $query_limit, -1, 0);
@@ -128,27 +128,26 @@ class LegacyJsonServer
 
         $app_list_strings = null;
 
-        for ($i = 0; $i < count($list_return); $i++) {
+        for ($i = 0; $i < safeCount($list_return); $i++) {
             if (isset($list_return[$i]->emailAddress) && is_object($list_return[$i]->emailAddress)) {
                 $list_return[$i]->emailAddress->handleLegacyRetrieve($list_return[$i]);
             }
 
-            $list_arr[$i] = array();
-            $list_arr[$i]['fields'] = array();
+            $list_arr[$i] = [];
+            $list_arr[$i]['fields'] = [];
             $list_arr[$i]['module'] = $list_return[$i]->object_name;
 
             foreach ($args['field_list'] as $field) {
-
                 //handle links
                 if (isset($list_return[$i]->field_defs[$field])
-                    && $list_return[$i]->field_defs[$field]['type'] == "relate") {
+                    && $list_return[$i]->field_defs[$field]['type'] == 'relate') {
                     $linked = current(
                         $list_return[$i]->get_linked_beans(
                             $list_return[$i]->field_defs[$field]['link'],
                             get_valid_bean_name($list_return[$i]->field_defs[$field]['module'])
                         )
                     );
-                    $list_return[$i]->$field = "";
+                    $list_return[$i]->$field = '';
                     if (is_object($linked)) {
                         $linkFieldName = $list_return[$i]->field_defs[$field]['rname'];
                         $list_return[$i]->$field = $linked->$linkFieldName;
@@ -162,7 +161,8 @@ class LegacyJsonServer
                 // handle enums
                 if ((isset($list_return[$i]->field_defs[$field]['type'])
                         && $list_return[$i]->field_defs[$field]['type'] == 'enum')
-                    || (isset($list_return[$i]->field_defs[$field]['custom_type'])
+                    || (
+                        isset($list_return[$i]->field_defs[$field]['custom_type'])
                         && $list_return[$i]->field_defs[$field]['custom_type'] == 'enum'
                     )) {
                     // get fields to match enum vals
@@ -177,12 +177,8 @@ class LegacyJsonServer
 
                     // match enum vals to text vals in language pack for return
                     if (!empty($app_list_strings[$list_return[$i]->field_defs[$field]['options']])) {
-                        if (!empty($app_list_strings[
-                            $list_return[$i]->field_defs[$field]['options']
-                        ][$list_return[$i]->$field])) {
-                            $list_return[$i]->$field = $app_list_strings[
-                                $list_return[$i]->field_defs[$field]['options']
-                            ][$list_return[$i]->$field];
+                        if (!empty($app_list_strings[$list_return[$i]->field_defs[$field]['options']][$list_return[$i]->$field])) {
+                            $list_return[$i]->$field = $app_list_strings[$list_return[$i]->field_defs[$field]['options']][$list_return[$i]->$field];
                         } else {
                             $list_return[$i]->$field = '';
                         }
@@ -199,7 +195,7 @@ class LegacyJsonServer
 
 
         $response['id'] = $request_id;
-        $response['result'] = array("list" => $list_arr);
+        $response['result'] = ['list' => $list_arr];
         return $response;
     }
 
@@ -226,26 +222,28 @@ class LegacyJsonServer
     {
         $all_fields = $focus->column_fields;
         // MEETING SPECIFIC
-        $all_fields = array_merge($all_fields,
-            array('required', 'accept_status', 'name')); // need name field for contacts and users
+        $all_fields = array_merge(
+            $all_fields,
+            ['required', 'accept_status', 'name']
+        ); // need name field for contacts and users
         //$all_fields = array_merge($focus->column_fields,$focus->additional_column_fields);
 
-        $module_arr = array();
+        $module_arr = [];
 
         $module_arr['module'] = $focus->object_name;
         $module_arr['module_name'] = $focus->object_name;
 
-        $module_arr['fields'] = array();
+        $module_arr['fields'] = [];
 
         foreach ($all_fields as $field) {
             if (isset($focus->$field) && !is_object($focus->$field)) {
                 $focus->$field = from_html($focus->$field);
-                $focus->$field = preg_replace("/\r\n/", "<BR>", $focus->$field);
-                $focus->$field = preg_replace("/\n/", "<BR>", $focus->$field);
+                $focus->$field = preg_replace("/\r\n/", '<BR>', $focus->$field);
+                $focus->$field = preg_replace("/\n/", '<BR>', $focus->$field);
                 $module_arr['fields'][$field] = $focus->$field;
             }
         }
-        $GLOBALS['log']->debug("JSON_SERVER:populate bean:");
+        $GLOBALS['log']->debug('JSON_SERVER:populate bean:');
         return $module_arr;
     }
 
@@ -261,30 +259,29 @@ class LegacyJsonServer
     public function constructWhere(&$query_obj, $table = '', $module = null)
     {
         if (!empty($table)) {
-            $table .= ".";
+            $table .= '.';
         }
-        $cond_arr = array();
+        $cond_arr = [];
 
         if (!is_array($query_obj['conditions'])) {
-            $query_obj['conditions'] = array();
+            $query_obj['conditions'] = [];
         }
 
         foreach ($query_obj['conditions'] as $condition) {
             if ($condition['name'] == 'user_hash' ||
-                ($condition['name'] == 'account_name' && $module === "Users")) {
+                ($condition['name'] == 'account_name' && $module === 'Users')) {
                 continue;
             }
             if ($condition['name'] == 'email1' or $condition['name'] == 'email2' or $condition['name'] == 'email') {
-
                 $email1_value = $GLOBALS['db']->quote(sugarStrToUpper($condition['value']));
                 $email1_condition = " {$table}id in ( SELECT  er.bean_id AS id FROM email_addr_bean_rel er, " .
-                    "email_addresses ea WHERE ea.id = er.email_address_id " .
+                    'email_addresses ea WHERE ea.id = er.email_address_id ' .
                     "AND ea.deleted = 0 AND er.deleted = 0 AND er.bean_module = '{$module}' AND email_address_caps LIKE '%{$email1_value}%' )";
 
                 array_push($cond_arr, $email1_condition);
-            } elseif ($condition['name'] == 'account_name' && $module == "Contacts") {
+            } elseif ($condition['name'] == 'account_name' && $module == 'Contacts') {
                 $account_name = " {$table}id in ( SELECT  lnk.contact_id AS id FROM accounts ac, " .
-                    "accounts_contacts lnk WHERE ac.id = lnk.account_id " .
+                    'accounts_contacts lnk WHERE ac.id = lnk.account_id ' .
                     "AND ac.deleted = 0 AND lnk.deleted = 0 AND ac.name LIKE '%" .
                     $GLOBALS['db']->quote($condition['value']) . "%' )";
                 array_push($cond_arr, $account_name);
@@ -297,7 +294,7 @@ class LegacyJsonServer
                 $query_parts = explode(' ', $condition['value']);
                 $first_name_query = array_shift($query_parts);
                 $name_query = "({$table}first_name like '" . $GLOBALS['db']->quote($first_name_query) . "%'";
-                if (count($query_parts) > 0) {
+                if (safeCount($query_parts) > 0) {
                     $last_name_query = implode($query_parts);
                     $full_name_group = 'and';
                 } else {
@@ -327,8 +324,8 @@ class LegacyJsonServer
         }
 
         $group = strtolower(trim($query_obj['group']));
-        if ($group != "and" && $group != "or") {
-            $group = "and";
+        if ($group != 'and' && $group != 'or') {
+            $group = 'and';
         }
         // Fix for SS-422 Inactive Users can be found when creating meetings.
         // Meetings and Calls modules escapes inactive user validations due to incorrect brackets placements.
@@ -337,8 +334,8 @@ class LegacyJsonServer
 
         //if filtering users table ensure status is Active
         if ($table == 'users.') {
-            if (count($cond_arr) > 0) {
-                $result = $result . " and ";
+            if (safeCount($cond_arr) > 0) {
+                $result = $result . ' and ';
             }
             $result = $result . "users.status='Active'";
         }

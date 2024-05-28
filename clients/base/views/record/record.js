@@ -191,7 +191,7 @@
                     messages: 'ERR_RESOLVE_ERRORS'
                 });
             },
-            showNoAccessError: function() {
+            showNoAccessError: function(error) {
                 if (!this instanceof app.view.View) {
                     app.logger.error('This method should be invoked by Function.prototype.call(), passing in as argument' +
                         'an instance of this view.');
@@ -202,7 +202,7 @@
                 // display no access error
                 app.alert.show('server-error', {
                     level: 'error',
-                    messages: 'ERR_HTTP_404_TEXT_LINE1'
+                    messages: this._getNoAccessErrorMessage(error)
                 });
                 // discard any changes before redirect
                 this.handleCancel();
@@ -283,9 +283,73 @@
             this.context.reloadData();
         }, this);
 
+        app.events.on('focusdrawer:close', this.handleFocusDrawerClose, this);
+
         this.cancelButtonClicked = false;
 
-        this.on('init', this._initDropdownBasedViews, this);
+        // Run certain tasks after initialize() is completely done. We do this
+        // because of the complex inheritance structure of base and module-
+        // specific create and record views, and how metadata is manipulated
+        // at each level during initialize()
+        this.listenTo(this, 'init', this._afterInit);
+    },
+
+    /**
+     * Handles tasks to be done after the initialize is fully complete
+     *
+     * @private
+     */
+    _afterInit: function() {
+        if (this.showExtraMeta !== false) {
+            this._initExtraMeta();
+        }
+        this.meta.panels = this._filterPanels(this.meta.panels);
+        this._initDropdownBasedViews();
+    },
+
+    /**
+     * Removes any panels that should not be visible to the current user
+     *
+     * @param {Array} panels the panels metadata to filter
+     * @return {Array} the filtered metadata panels list
+     */
+    _filterPanels: function(panels) {
+        let newPanels = [];
+        _.each(panels, function(panel) {
+            if (panel.visibility === 'self' && this.model.get('id') !== app.user.get('id')) {
+                return;
+            }
+            if (panel.invisibility === this.type) {
+                return;
+            }
+            newPanels.push(panel);
+        }, this);
+        return newPanels;
+    },
+
+    /**
+     * Returns the message displayed when a 403/no access error is encountered
+     *
+     * @param {Object} error the error from the API
+     * @return {string} the error message to display
+     * @private
+     */
+    _getNoAccessErrorMessage: function(error) {
+        return 'ERR_HTTP_404_TEXT_LINE1';
+    },
+
+    /**
+     * Reload data if any records have been updated in focus drawer
+     * after the focus drawer is closed.
+     * @param {Array} updatedModels
+     */
+    handleFocusDrawerClose: function(updatedModels) {
+        if (!_.isEmpty(updatedModels)) {
+            this.model.fetch({
+                showAlerts: true,
+                view: 'record'
+            });
+        }
     },
 
     /**
@@ -308,7 +372,8 @@
         // dropdown value
         this.dbvTriggerField = _.first(_.keys(dropdownViews));
         this.dbvMetaPanels = _.mapObject(dropdownViews[this.dbvTriggerField], function(valueMeta) {
-            return _.get(valueMeta, ['meta', 'panels']) || null;
+            let meta = this._addExtraMetaPanels(valueMeta.meta || {});
+            return meta.panels || null;
         }, this);
 
         this._initDropdownBasedViewsForModel();
@@ -458,6 +523,59 @@
     },
 
     /**
+     * Injects extra record-extra-meta metadata into the view if it is defined
+     *
+     * @param {Object} options the view initialization options
+     * @private
+     */
+    _initExtraMeta: function() {
+        this.extraMeta = app.metadata.getView(this.module, 'record-extra-meta');
+        if (!_.isEmpty(this.extraMeta)) {
+            // Add the extra fields to the context so they are fetched properly
+            let extraFields = _.pluck(_.flatten(_.pluck(this.extraMeta.panels, 'fields')), 'name');
+            let contextFields = this.context.get('fields') || [];
+            contextFields = contextFields.concat(extraFields);
+            this.context.set('fields', _.uniq(contextFields));
+
+            // Add the extra panels to the view's metadata
+            this.meta = this._addExtraMetaPanels(this.meta || {});
+        }
+    },
+
+    /**
+     * Injects any record-extra-meta panels into the metadata if defined
+     *
+     * @param {Object} meta the metadata to augment
+     * @return {Object} the augmented metadata
+     * @private
+     */
+    _addExtraMetaPanels(meta) {
+        let extraMeta = this.extraMeta || {};
+
+        // Add any extra panels to record view metadata
+        if (!_.isEmpty(extraMeta.panels)) {
+            meta.panels = meta.panels || [];
+            meta.panels = meta.panels.concat(extraMeta.panels || []);
+
+            // If any of the extra panels are tabs, force the first panel to be
+            // a tab to allow for tabbed view
+            let extraHasTabs = _.some(extraMeta.panels, function(panel) {
+                return !!panel.newTab;
+            });
+            if (extraHasTabs) {
+                let firstPanel = _.find(meta.panels, function(panel) {
+                    return panel.header !== true;
+                });
+                if (firstPanel) {
+                    firstPanel.newTab = true;
+                }
+            }
+        }
+
+        return meta;
+    },
+
+    /**
      * Relocate all pencils of the record
      */
     relocatePencils: function() {
@@ -477,21 +595,16 @@
      * @param {Object} diff The diff object of fields with ACL changes.
      */
     handleAclChange: function(diff) {
-        var editAccess = app.acl.hasAccessToModel('edit', this.model);
-
         this._setNoEditFields();
         this.setEditableFields();
 
         var noEditFieldsMap = _.object(this.noEditFields, _.values(this.noEditFields));
         var $pencils = this.$('[data-wrapper=edit]');
 
+        // Update the edit pencil availability for all fields
         _.each($pencils, function(pencilEl) {
             var $pencilEl = $(pencilEl);
             var field = $pencilEl.data('name');
-
-            if (editAccess && !diff[field]) {
-                return;
-            }
 
             var isEditable = _.isUndefined(noEditFieldsMap[field]);
             $pencilEl.toggleClass('hide', !isEditable);
@@ -708,11 +821,11 @@
      * Assign events to button clicks.
      */
     delegateButtonEvents: function() {
-        this.context.on('button:edit_button:click', this.editClicked, this);
-        this.context.on('button:save_button:click', this.saveClicked, this);
-        this.context.on('button:delete_button:click', this.deleteClicked, this);
-        this.context.on('button:duplicate_button:click', this.duplicateClicked, this);
-        this.context.on('button:cancel_button:click', this.cancelClicked, this);
+        this.listenTo(this.context, 'button:edit_button:click', this.editClicked);
+        this.listenTo(this.context, 'button:save_button:click', this.saveClicked);
+        this.listenTo(this.context, 'button:delete_button:click', this.deleteClicked);
+        this.listenTo(this.context, 'button:duplicate_button:click', this.duplicateClicked);
+        this.listenTo(this.context, 'button:cancel_button:click', this.cancelClicked);
     },
 
     _render: function() {
@@ -728,13 +841,11 @@
             this.setLabel(this.context, this.context.get('record_label'));
         }
 
-        // Field labels in headerpane should be hidden on view but displayed in edit and create
+        // Prevent the pencil from appearing on fields that are always readonly
         _.each(this.fields, function(field) {
-            // some fields like 'favorite' is readonly by default, so we need to remove edit-link-wrapper
-            if (app.utils.isFieldAlwaysReadOnly(field.def, field.viewDefs) &&
-                field.name && !_.contains(this.noEditFields, field.name)
-            ) {
-                this.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
+            if (app.utils.isFieldAlwaysReadOnly(field.def, field.viewDefs) ||
+                !app.acl.hasAccessToModel('edit', this.model, field.name)) {
+                this.$('.record-edit-link-wrapper[data-name=' + field.name + ']').addClass('hide');
             }
         }, this);
 
@@ -857,8 +968,9 @@
             return;
         }
 
-        if (activeTabHref && activeTab) {
+        if (activeTabHref && activeTab.length) {
             activeTab.tab('show');
+            this.makeTabActiveForFirefox(activeTab);
         } else if (this.meta.useTabsAndPanels && this.checkFirstPanel()) {
             // If tabs and no last state set, show first tab on render
             this.$('#recordTab a:first').tab('show');
@@ -884,11 +996,44 @@
         }
         return activeTabHref;
     },
+
+    /**
+     * There is known issue in firefox 120, this can be removed
+     * when this bug: https://bugzilla.mozilla.org/show_bug.cgi?id=1858743 is fixed in the release of Firefox 121 .....
+     *
+     * @param {Object} currentTarget
+     */
+    makeTabActiveForFirefox: function(currentTarget) {
+        // check for firefox
+        if (typeof InstallTrigger === 'undefined') {
+            return;
+        }
+        const tabEl = this.$(currentTarget).parent();
+
+        if (!tabEl) {
+            return;
+        }
+
+        const isAlreadyActive = tabEl.hasClass('active-tab');
+
+        if (isAlreadyActive) {
+            return;
+        }
+
+        tabEl.addClass('active-tab');
+
+        tabEl.siblings().each(function(index, item) {
+            $(item).removeClass('active-tab');
+        });
+    },
+
     /**
      * sets active tab in user last state
      * @param {Event} event
      */
     setActiveTab: function(event) {
+        this.makeTabActiveForFirefox(event.currentTarget);
+
         if (this.createMode) {
             return;
         }
@@ -1074,7 +1219,14 @@
             if (this.inlineEditMode) {
                 this.setButtonStates(this.STATE.EDIT);
             }
+
+            if (this.model.get('is_template')) {
+                const templateEditableFields = this.getTemplateEditableFields();
+
+                this.hidePencil(templateEditableFields);
+            }
         }, this);
+        this.listenTo(this, 'button:access:rendered', this._setButtonState);
     },
 
     /**
@@ -1441,6 +1593,13 @@
         cellData = cell.data();
         field = this.getField(cellData.name);
 
+        const templateEditableFields = this.getTemplateEditableFields();
+        const isTemplateEditable = templateEditableFields.indexOf(field.name) > -1 || !field.name;
+
+        if (this.model.get('is_template') && !isTemplateEditable) {
+            return;
+        }
+
         // If the focus drawer icon was clicked, open the focus drawer instead
         // of entering edit mode
         if (target && target.hasClass('focus-icon') && field && field.focusIconEnabled) {
@@ -1525,7 +1684,17 @@
         }, this);
     },
 
+    /**
+     * Callback function for save complete
+     */
+    _saveModelCompleteCallback: function() {
+        if (this.editOnly) {
+            this.toggleButtons(true);
+        }
+    },
+
     _saveModel: function() {
+        let cjFormBatch;
         var options,
             successCallback = _.bind(function() {
                 this.resetTemporaryFileFields();
@@ -1548,9 +1717,33 @@
                     this.render();
                 }
 
+                // tell the focus drawer that this record has been updated
+                if (this.closestComponent('side-drawer')) {
+                    app.sideDrawer.addUpdatedModel(this.model);
+                }
+
                 if (typeof this.saveCallback === 'function') {
                     this.saveCallback(true);
                 }
+
+                const saveRecordCallback = (view) => {
+                    cjFormBatch = view;
+
+                    if (!_.isUndefined(cjFormBatch)) {
+                        const params = {
+                            record: this.model.get('id'),
+                            module: this.module,
+                        };
+
+                        cjFormBatch.startBatchingProcess(params);
+                    }
+                };
+
+                app.CJBaseHelper.fetchActiveSmartGuideCount(this.context, this.layout, this.module,
+                    this.model.get('id'),
+                    saveRecordCallback
+                );
+
             }, this);
 
         //Call editable to turn off key and mouse events before fields are disposed (SP-1873)
@@ -1573,7 +1766,9 @@
                         }
                     }, this));
                 } else if (error.status === 403 || error.status === 404) {
-                    this.alerts.showNoAccessError.call(this);
+                    this.alerts.showNoAccessError.call(this, error);
+                } else if (error.status === 422 && _.isFunction(this._handleNoEventsGenerated)) {
+                    this._handleNoEventsGenerated();
                 } else {
                     this.editClicked();
                 }
@@ -1581,12 +1776,12 @@
                 if (typeof this.saveCallback === 'function') {
                     this.saveCallback(false);
                 }
-            }, this),
-            complete: _.bind(function() {
-                if (this.editOnly) {
-                    this.toggleButtons(true);
+
+                if (!_.isUndefined(cjFormBatch)) {
+                    cjFormBatch.endBatchingProcess(false, false);
                 }
             }, this),
+            complete: _.bind(this._saveModelCompleteCallback, this),
             lastModified: this.model.get('date_modified'),
             viewed: true
         };
@@ -1599,6 +1794,8 @@
             options.params.view = this.model.getOption('view') || this.context.get('dataView');
         }
 
+        // set a flag to ensure that model is saved from front-end
+        options.params.allowBatching = true;
         options = _.extend({}, options, this.getCustomSaveOptions(options));
 
         this.model.save({}, options);
@@ -1714,6 +1911,36 @@
     },
 
     /**
+     * Callback function for successful deletion on model
+     */
+    deleteModelSuccessCallback: function() {
+        if (this.closestComponent('side-drawer')) {
+            app.sideDrawer.addUpdatedModel(this.model);
+            app.sideDrawer.closeTab(app.sideDrawer.activeTabIndex);
+            return;
+        }
+        let redirect = this._targetUrl !== this._currentUrl;
+
+        this.context.trigger('record:deleted', this._modelToDelete);
+
+        this._modelToDelete = false;
+
+        if (redirect) {
+            this.unbindBeforeRouteDelete();
+            //Replace the url hash back to the current staying page
+            app.router.navigate(this._targetUrl, {trigger: true});
+            return;
+        }
+
+        if (this.context.get('navigateBack')) {
+            app.router.navigate(app.router.getFragment(), {trigger: true});
+            return;
+        }
+
+        app.router.navigate(this.module, {trigger: true});
+    },
+
+    /**
      * Delete the model once the user confirms the action
      */
     deleteModel: function() {
@@ -1727,31 +1954,7 @@
                     messages: self.getDeleteMessages().success
                 }
             },
-            success: function() {
-                if (self.closestComponent('side-drawer')) {
-                    app.sideDrawer.closeTab(app.sideDrawer.activeTabIndex);
-                    return;
-                }
-                var redirect = self._targetUrl !== self._currentUrl;
-
-                self.context.trigger('record:deleted', self._modelToDelete);
-
-                self._modelToDelete = false;
-
-                if (redirect) {
-                    self.unbindBeforeRouteDelete();
-                    //Replace the url hash back to the current staying page
-                    app.router.navigate(self._targetUrl, {trigger: true});
-                    return;
-                }
-
-                if (self.context.get('navigateBack')) {
-                    app.router.navigate(app.router.getFragment(), {trigger: true});
-                    return;
-                }
-
-                app.router.navigate(self.module, {trigger: true});
-            }
+            success: _.bind(this.deleteModelSuccessCallback, this)
         });
 
     },
@@ -1844,7 +2047,7 @@
                 this.$('.tab-pane').removeClass('active in');
 
                 // Switch to the tab with the error
-                tabLink = this.$('[href="#' + fieldTab.attr('id') + '"][data-toggle="tab"]');
+                tabLink = this.$('[href="#' + fieldTab.attr('id') + '"][data-bs-toggle="tab"]');
                 tabLink.tab('show');
 
                 // Put a ! next to the tab if one doesn't already exist
@@ -1885,15 +2088,25 @@
         this.currentState = state;
 
         _.each(this.buttons, function(field) {
-            var showOn = field.def.showOn;
-            if (_.isUndefined(showOn) || (showOn === state)) {
-                field.show();
-            } else {
-                field.hide();
-            }
-        });
+            this._setButtonState(field);
+        }, this);
 
         this.toggleButtons(true);
+    },
+
+    /**
+     * Show/hide a single button field depending on the current view state
+     *
+     * @param {Object} field the field object for the button
+     * @private
+     */
+    _setButtonState: function(field) {
+        let showOn = field.def.showOn;
+        if (_.isUndefined(showOn) || (showOn === this.currentState)) {
+            field.show();
+        } else {
+            field.hide();
+        }
     },
 
     /**
@@ -2322,15 +2535,19 @@
         var $recordCells = this._getRecordCells();
 
         if ($recordCells && ($recordCells.length > 0) && (this.getContainerWidth() > 0)) {
-            $ellipsisCell = $(this._getCellToEllipsify($recordCells));
+            if ($recordCells.length === 1 && $($recordCells[0]).hasClass('btn-toolbar')) {
+                this.$('.headerpane h1').css('display', 'block');
+            } else {
+                $ellipsisCell = $(this._getCellToEllipsify($recordCells));
 
-            if ($ellipsisCell.length > 0) {
-                if ($ellipsisCell.hasClass('edit')) {
-                    // make the ellipsis cell widen to 100% on edit
-                    $ellipsisCell.css({'width': '100%'});
-                } else {
-                    ellipsisCellWidth = this._calculateEllipsifiedCellWidth($recordCells, $ellipsisCell);
-                    this._setMaxWidthForEllipsifiedCell($ellipsisCell, ellipsisCellWidth);
+                if ($ellipsisCell.length > 0) {
+                    if ($ellipsisCell.hasClass('edit')) {
+                        // make the ellipsis cell widen to 100% on edit
+                        $ellipsisCell.css({'width': '100%'});
+                    } else {
+                        ellipsisCellWidth = this._calculateEllipsifiedCellWidth($recordCells, $ellipsisCell);
+                        this._setMaxWidthForEllipsifiedCell($ellipsisCell, ellipsisCellWidth);
+                    }
                 }
             }
         }
@@ -2366,7 +2583,8 @@
             'enum',
             'url',
             'dashboardtitle',
-            'hint-accounts-search-dropdown'
+            'hint-accounts-search-dropdown',
+            undefined
         ];
 
         return _.find($cells, function(cell) {
@@ -2573,7 +2791,7 @@
             component: this,
             description: 'LBL_SHORTCUT_RECORD_DELETE',
             handler: function() {
-                this.$('.headerpane [data-toggle=dropdown]:visible').click().blur();
+                this.$('.headerpane [data-bs-toggle=dropdown]:visible').click().blur();
                 this.$('.headerpane [name=delete_button]:visible').click();
             }
         });
@@ -2662,7 +2880,7 @@
             component: this,
             description: 'LBL_SHORTCUT_COPY_RECORD',
             handler: function() {
-                this.$('.headerpane [data-toggle=dropdown]:visible').click().blur();
+                this.$('.headerpane [data-bs-toggle=dropdown]:visible').click().blur();
                 this.$('.headerpane [name=duplicate_button]:visible').click();
             }
         });
@@ -2673,7 +2891,7 @@
             component: this,
             description: 'LBL_SHORTCUT_OPEN_MORE_ACTION',
             handler: function() {
-                var $primaryDropdown = this.$('.headerpane .btn-primary[data-toggle=dropdown]:visible');
+                var $primaryDropdown = this.$('.headerpane .btn-primary[data-bs-toggle=dropdown]:visible');
                 if (($primaryDropdown.length > 0) && !$primaryDropdown.hasClass('disabled')) {
                     $primaryDropdown.click();
                 }
@@ -2805,9 +3023,10 @@
         this.buttons = null;
         this.editableFields = null;
         this.inlineEditModeFields = [];
-        this.stopListening(this.model);
+        this.stopListening();
         this.off('editable:keydown', this.handleKeyDown, this);
         $(window).off('resize.' + this.cid);
+        app.events.off('focusdrawer:close', this.handleFocusDrawerClose, this);
         app.view.View.prototype._dispose.call(this);
     }
 })

@@ -11,6 +11,8 @@
  */
 
 $viewdefs['Tasks']['base']['view']['activity-card-content'] = [
+    'sort_by' => 'date_due',
+    'sort_order' => 'asc',
     'panels' => [
         [
             'name' => 'panel_status',

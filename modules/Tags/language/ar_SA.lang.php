@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'الرموز',
     'LBL_GENERIC_LINK' => 'الأشياء ذات الصلة',
     'LBL_NAME_LOWER' => 'اسم الرمز بحروف صغيرة (الإنجليزية فقط)',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'علاماتي',
     'LBL_MY_FAVORITE_TAGS' => 'علاماتي المفضلة',
     'LBL_MORE_TAGS' => '{{tagsNumber}} علامات',
-);
+];

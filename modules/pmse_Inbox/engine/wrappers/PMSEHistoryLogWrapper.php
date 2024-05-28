@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * CRUD Wrapper to manage records related to History Logs
  *
@@ -110,7 +111,6 @@ class PMSEHistoryLogWrapper
     {
 
         if (!isset($args) || !is_array($args) || sizeof($args) <= 0) {
-
             $this->data->error = translate('LBL_PMSE_ADAM_WRAPPER_HISTORYLOG_ARGUMENTEMPTY', 'pmse_Project');
             $this->data->result = false;
         } else {
@@ -176,10 +176,10 @@ class PMSEHistoryLogWrapper
      */
     public function assemblyEntries()
     {
-        $entries = array();
-        $queryOptions = array('add_deleted' => true);
+        $entries = [];
+        $queryOptions = ['add_deleted' => true];
         $beanFlow = BeanFactory::newBean('pmse_BpmFlow');
-        $fields = array(
+        $fields = [
             'id',
             'date_entered',
             'date_modified',
@@ -211,7 +211,7 @@ class PMSEHistoryLogWrapper
             'cas_started',
             'cas_finished',
             'cas_delayed',
-        );
+        ];
 
         $q = new SugarQuery();
         $q->from($beanFlow, $queryOptions);
@@ -237,11 +237,11 @@ class PMSEHistoryLogWrapper
 
             $entry = $this->fetchUserType($caseData);
 
-            $entry['due_date'] = !empty($caseData['cas_due_date']) ? PMSEEngineUtils::getDateToFE($caseData['cas_due_date'], 'datetime'): '';
-            $entry['end_date'] = !empty($caseData['cas_finish_date']) ? PMSEEngineUtils::getDateToFE($caseData['cas_finish_date'], 'datetime'): '';
-            $entry['current_date'] =  PMSEEngineUtils::getDateToFE(TimeDate::getInstance()->nowDb(), 'datetime');
-            $entry['delegate_date'] = !empty($caseData['cas_delegate_date']) ? PMSEEngineUtils::getDateToFE($caseData['cas_delegate_date'], 'datetime'): '';
-            $entry['start_date'] = !empty($caseData['cas_start_date']) ? PMSEEngineUtils::getDateToFE($caseData['cas_start_date'], 'datetime'): '';
+            $entry['due_date'] = !empty($caseData['cas_due_date']) ? PMSEEngineUtils::getDateToFE($caseData['cas_due_date'], 'datetime') : '';
+            $entry['end_date'] = !empty($caseData['cas_finish_date']) ? PMSEEngineUtils::getDateToFE($caseData['cas_finish_date'], 'datetime') : '';
+            $entry['current_date'] = PMSEEngineUtils::getDateToFE(TimeDate::getInstance()->nowDb(), 'datetime');
+            $entry['delegate_date'] = !empty($caseData['cas_delegate_date']) ? PMSEEngineUtils::getDateToFE($caseData['cas_delegate_date'], 'datetime') : '';
+            $entry['start_date'] = !empty($caseData['cas_start_date']) ? PMSEEngineUtils::getDateToFE($caseData['cas_start_date'], 'datetime') : '';
             $entry['completed'] = true;
             $entry['cas_user_id'] = $caseData['cas_user_id'];
 
@@ -266,7 +266,7 @@ class PMSEHistoryLogWrapper
                         } else {
                             if ($caseData['cas_flow_status'] == 'CLOSED') {
                                 $formActionBean = BeanFactory::getBean('pmse_BpmFormAction');
-                                $formActionBean->retrieve_by_string_fields(array('cas_id' => $caseData['cas_id'], 'act_id' => $caseData['bpmn_id']));
+                                $formActionBean->retrieve_by_string_fields(['cas_id' => $caseData['cas_id'], 'act_id' => $caseData['bpmn_id']]);
                                 if ($formActionBean->frm_action) {
                                     $action = $formActionBean->frm_action;
                                 } else {
@@ -461,10 +461,10 @@ class PMSEHistoryLogWrapper
     {
         $statusEntry = [];
         $q = new SugarQuery();
-        $fields = array(
+        $fields = [
             'cas_status',
             'date_modified',
-        );
+        ];
         $q->select($fields);
         $q->from(BeanFactory::newBean('pmse_Inbox'));
         $q->where()->equals('cas_id', $case_id);
@@ -472,7 +472,7 @@ class PMSEHistoryLogWrapper
         $rows = $q->execute();
 
         // If the status is IN PROGRESS then the status is not shown.
-        if (!empty($rows[0]) && !empty($rows[0]['cas_status']) && $rows[0]['cas_status'] != "IN PROGRESS") {
+        if (!empty($rows[0]) && !empty($rows[0]['cas_status']) && $rows[0]['cas_status'] != 'IN PROGRESS') {
             $statusEntry['image'] = $this->getModuleLabelClasses();
             $statusEntry['script'] = true;
             $statusEntry['show_user'] = false;
@@ -571,7 +571,7 @@ class PMSEHistoryLogWrapper
      */
     private function fetchUserType($caseData)
     {
-        $entry = array('show_user' => true);
+        $entry = ['show_user' => true];
 
         $this->currentUser->retrieve($caseData['cas_user_id']);
         if ($caseData['cas_sugar_action'] == 'SCRIPTTASK') {
@@ -601,9 +601,10 @@ class PMSEHistoryLogWrapper
         }
         // @codeCoverageIgnoreStart
         if (trim($entry['user']) == '') {
-            $entry['user'] = sprintf(translate('LBL_PMSE_HISTORY_LOG_NOTFOUND_USER', 'pmse_Inbox'),
-                $caseData['cas_user_id']);
-
+            $entry['user'] = sprintf(
+                translate('LBL_PMSE_HISTORY_LOG_NOTFOUND_USER', 'pmse_Inbox'),
+                $caseData['cas_user_id']
+            );
         }
         // @codeCoverageIgnoreEnd
         return $entry;
@@ -641,7 +642,7 @@ class PMSEHistoryLogWrapper
                 }
             }
         }
-        return sprintf(" (%s %s)", $returnStatus, $returnAction);
+        return sprintf(' (%s %s)', $returnStatus, $returnAction);
     }
 
     /**
@@ -679,5 +680,4 @@ class PMSEHistoryLogWrapper
     {
         $this->db = $mock;
     }
-
 }

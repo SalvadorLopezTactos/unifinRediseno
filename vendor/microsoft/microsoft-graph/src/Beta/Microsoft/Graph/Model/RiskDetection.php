@@ -42,7 +42,7 @@ class RiskDetection extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the activity
     * Indicates the activity type the detected risk is linked to. The possible values are signin, user, unknownFutureValue.
@@ -56,7 +56,7 @@ class RiskDetection extends Entity
         $this->_propDict["activity"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the activityDateTime
     * Date and time that the risky activity occurred. The DateTimeOffset type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
@@ -75,7 +75,7 @@ class RiskDetection extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the activityDateTime
     * Date and time that the risky activity occurred. The DateTimeOffset type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
@@ -89,7 +89,7 @@ class RiskDetection extends Entity
         $this->_propDict["activityDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the additionalInfo
     * Additional information associated with the risk detection in JSON format.
@@ -104,7 +104,7 @@ class RiskDetection extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the additionalInfo
     * Additional information associated with the risk detection in JSON format.
@@ -118,7 +118,7 @@ class RiskDetection extends Entity
         $this->_propDict["additionalInfo"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the correlationId
     * Correlation ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in.
@@ -133,7 +133,7 @@ class RiskDetection extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the correlationId
     * Correlation ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in.
@@ -147,7 +147,7 @@ class RiskDetection extends Entity
         $this->_propDict["correlationId"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the detectedDateTime
     * Date and time that the risk was detected. The DateTimeOffset type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
@@ -166,7 +166,7 @@ class RiskDetection extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the detectedDateTime
     * Date and time that the risk was detected. The DateTimeOffset type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
@@ -180,7 +180,7 @@ class RiskDetection extends Entity
         $this->_propDict["detectedDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the detectionTimingType
     * Timing of the detected risk (real-time/offline). The possible values are notDefined, realtime, nearRealtime, offline, unknownFutureValue.
@@ -199,7 +199,7 @@ class RiskDetection extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the detectionTimingType
     * Timing of the detected risk (real-time/offline). The possible values are notDefined, realtime, nearRealtime, offline, unknownFutureValue.
@@ -213,7 +213,7 @@ class RiskDetection extends Entity
         $this->_propDict["detectionTimingType"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the ipAddress
     * Provides the IP address of the client from where the risk occurred.
@@ -228,7 +228,7 @@ class RiskDetection extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the ipAddress
     * Provides the IP address of the client from where the risk occurred.
@@ -242,7 +242,7 @@ class RiskDetection extends Entity
         $this->_propDict["ipAddress"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the lastUpdatedDateTime
     * Date and time that the risk detection was last updated.
@@ -261,7 +261,7 @@ class RiskDetection extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the lastUpdatedDateTime
     * Date and time that the risk detection was last updated.
@@ -275,7 +275,7 @@ class RiskDetection extends Entity
         $this->_propDict["lastUpdatedDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the location
     * Location of the sign-in.
@@ -294,7 +294,7 @@ class RiskDetection extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the location
     * Location of the sign-in.
@@ -308,7 +308,7 @@ class RiskDetection extends Entity
         $this->_propDict["location"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the requestId
     * Request ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in.
@@ -323,7 +323,7 @@ class RiskDetection extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the requestId
     * Request ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in.
@@ -337,10 +337,10 @@ class RiskDetection extends Entity
         $this->_propDict["requestId"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the riskDetail
-    * Details of the detected risk. The possible values are none, adminGeneratedTemporaryPassword, userPerformedSecuredPasswordChange, userPerformedSecuredPasswordReset, adminConfirmedSigninSafe, aiConfirmedSigninSafe, userPassedMFADrivenByRiskBasedPolicy, adminDismissedAllRiskForUser, adminConfirmedSigninCompromised, hidden, adminConfirmedUserCompromised, unknownFutureValue. Note: Details for this property are only available for Azure AD Premium P2 customers. P1 customers will be returned hidden.
+    * Details of the detected risk. The possible values are: none, adminGeneratedTemporaryPassword, userPerformedSecuredPasswordChange, userPerformedSecuredPasswordReset, adminConfirmedSigninSafe, aiConfirmedSigninSafe, userPassedMFADrivenByRiskBasedPolicy, adminDismissedAllRiskForUser, adminConfirmedSigninCompromised, hidden, adminConfirmedUserCompromised, unknownFutureValue, adminConfirmedServicePrincipalCompromised, adminDismissedAllRiskForServicePrincipal, m365DAdminDismissedDetection. Note that you must use the Prefer: include - unknown -enum-members request header to get the following value(s) in this evolvable enum: adminConfirmedServicePrincipalCompromised , adminDismissedAllRiskForServicePrincipal , m365DAdminDismissedDetection. Note: Details for this property are only available for Azure AD Premium P2 customers. P1 customers will be returned hidden.
     *
     * @return RiskDetail|null The riskDetail
     */
@@ -356,10 +356,10 @@ class RiskDetection extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the riskDetail
-    * Details of the detected risk. The possible values are none, adminGeneratedTemporaryPassword, userPerformedSecuredPasswordChange, userPerformedSecuredPasswordReset, adminConfirmedSigninSafe, aiConfirmedSigninSafe, userPassedMFADrivenByRiskBasedPolicy, adminDismissedAllRiskForUser, adminConfirmedSigninCompromised, hidden, adminConfirmedUserCompromised, unknownFutureValue. Note: Details for this property are only available for Azure AD Premium P2 customers. P1 customers will be returned hidden.
+    * Details of the detected risk. The possible values are: none, adminGeneratedTemporaryPassword, userPerformedSecuredPasswordChange, userPerformedSecuredPasswordReset, adminConfirmedSigninSafe, aiConfirmedSigninSafe, userPassedMFADrivenByRiskBasedPolicy, adminDismissedAllRiskForUser, adminConfirmedSigninCompromised, hidden, adminConfirmedUserCompromised, unknownFutureValue, adminConfirmedServicePrincipalCompromised, adminDismissedAllRiskForServicePrincipal, m365DAdminDismissedDetection. Note that you must use the Prefer: include - unknown -enum-members request header to get the following value(s) in this evolvable enum: adminConfirmedServicePrincipalCompromised , adminDismissedAllRiskForServicePrincipal , m365DAdminDismissedDetection. Note: Details for this property are only available for Azure AD Premium P2 customers. P1 customers will be returned hidden.
     *
     * @param RiskDetail $val The riskDetail
     *
@@ -370,10 +370,10 @@ class RiskDetection extends Entity
         $this->_propDict["riskDetail"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the riskEventType
-    * The type of risk event detected. The possible values are unlikelyTravel, anonymizedIPAddress, maliciousIPAddress, unfamiliarFeatures, malwareInfectedIPAddress, suspiciousIPAddress, leakedCredentials, investigationsThreatIntelligence, generic,adminConfirmedUserCompromised, mcasImpossibleTravel, mcasSuspiciousInboxManipulationRules, investigationsThreatIntelligenceSigninLinked, maliciousIPAddressValidCredentialsBlockedIP, and unknownFutureValue.
+    * The type of risk event detected. The possible values are unlikelyTravel, anonymizedIPAddress, maliciousIPAddress, unfamiliarFeatures, malwareInfectedIPAddress, suspiciousIPAddress, leakedCredentials, investigationsThreatIntelligence, generic,adminConfirmedUserCompromised, mcasImpossibleTravel, mcasSuspiciousInboxManipulationRules, investigationsThreatIntelligenceSigninLinked, maliciousIPAddressValidCredentialsBlockedIP, anomalousUserActivity, userReportedSuspiciousActivity.  For more information about each value, see riskEventType values.
     *
     * @return string|null The riskEventType
     */
@@ -385,10 +385,10 @@ class RiskDetection extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the riskEventType
-    * The type of risk event detected. The possible values are unlikelyTravel, anonymizedIPAddress, maliciousIPAddress, unfamiliarFeatures, malwareInfectedIPAddress, suspiciousIPAddress, leakedCredentials, investigationsThreatIntelligence, generic,adminConfirmedUserCompromised, mcasImpossibleTravel, mcasSuspiciousInboxManipulationRules, investigationsThreatIntelligenceSigninLinked, maliciousIPAddressValidCredentialsBlockedIP, and unknownFutureValue.
+    * The type of risk event detected. The possible values are unlikelyTravel, anonymizedIPAddress, maliciousIPAddress, unfamiliarFeatures, malwareInfectedIPAddress, suspiciousIPAddress, leakedCredentials, investigationsThreatIntelligence, generic,adminConfirmedUserCompromised, mcasImpossibleTravel, mcasSuspiciousInboxManipulationRules, investigationsThreatIntelligenceSigninLinked, maliciousIPAddressValidCredentialsBlockedIP, anomalousUserActivity, userReportedSuspiciousActivity.  For more information about each value, see riskEventType values.
     *
     * @param string $val The riskEventType
     *
@@ -399,7 +399,7 @@ class RiskDetection extends Entity
         $this->_propDict["riskEventType"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the riskLevel
     * Level of the detected risk. The possible values are low, medium, high, hidden, none, unknownFutureValue. Note: Details for this property are only available for Azure AD Premium P2 customers. P1 customers will be returned hidden.
@@ -418,7 +418,7 @@ class RiskDetection extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the riskLevel
     * Level of the detected risk. The possible values are low, medium, high, hidden, none, unknownFutureValue. Note: Details for this property are only available for Azure AD Premium P2 customers. P1 customers will be returned hidden.
@@ -432,7 +432,7 @@ class RiskDetection extends Entity
         $this->_propDict["riskLevel"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the riskState
     * The state of a detected risky user or sign-in. The possible values are none, confirmedSafe, remediated, dismissed, atRisk, confirmedCompromised, and unknownFutureValue.
@@ -451,7 +451,7 @@ class RiskDetection extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the riskState
     * The state of a detected risky user or sign-in. The possible values are none, confirmedSafe, remediated, dismissed, atRisk, confirmedCompromised, and unknownFutureValue.
@@ -465,10 +465,9 @@ class RiskDetection extends Entity
         $this->_propDict["riskState"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the riskType
-    * List of risk event types.Note: This property is deprecated. Use riskEventType instead.
     *
     * @return RiskEventType|null The riskType
     */
@@ -484,10 +483,9 @@ class RiskDetection extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the riskType
-    * List of risk event types.Note: This property is deprecated. Use riskEventType instead.
     *
     * @param RiskEventType $val The riskType
     *
@@ -498,7 +496,7 @@ class RiskDetection extends Entity
         $this->_propDict["riskType"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the source
     * Source of the risk detection. For example, activeDirectory.
@@ -513,7 +511,7 @@ class RiskDetection extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the source
     * Source of the risk detection. For example, activeDirectory.
@@ -527,7 +525,7 @@ class RiskDetection extends Entity
         $this->_propDict["source"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the tokenIssuerType
     * Indicates the type of token issuer for the detected sign-in risk. The possible values are AzureAD, ADFederationServices, and unknownFutureValue.
@@ -546,7 +544,7 @@ class RiskDetection extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the tokenIssuerType
     * Indicates the type of token issuer for the detected sign-in risk. The possible values are AzureAD, ADFederationServices, and unknownFutureValue.
@@ -560,7 +558,7 @@ class RiskDetection extends Entity
         $this->_propDict["tokenIssuerType"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the userDisplayName
     * Name of the user.
@@ -575,7 +573,7 @@ class RiskDetection extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the userDisplayName
     * Name of the user.
@@ -589,7 +587,7 @@ class RiskDetection extends Entity
         $this->_propDict["userDisplayName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the userId
     * Unique ID of the user.  The DateTimeOffset type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
@@ -604,7 +602,7 @@ class RiskDetection extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the userId
     * Unique ID of the user.  The DateTimeOffset type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
@@ -618,7 +616,7 @@ class RiskDetection extends Entity
         $this->_propDict["userId"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the userPrincipalName
     * The user principal name (UPN) of the user.
@@ -633,7 +631,7 @@ class RiskDetection extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the userPrincipalName
     * The user principal name (UPN) of the user.
@@ -647,5 +645,5 @@ class RiskDetection extends Entity
         $this->_propDict["userPrincipalName"] = $val;
         return $this;
     }
-    
+
 }

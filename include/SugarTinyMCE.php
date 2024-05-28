@@ -16,63 +16,63 @@
  */
 class SugarTinyMCE
 {
-    var $jsroot = "include/javascript/tiny_mce/";
-    var $customConfigFile = 'custom/include/tinyButtonConfig.php';
+    public $jsroot = 'include/javascript/tiny_mce/';
+    public $customConfigFile = 'custom/include/tinyButtonConfig.php';
     public $customPluginConfigFile = 'custom/include/tinyPluginConfig.php';
-    var $customDefaultConfigFile = 'custom/include/tinyMCEDefaultConfig.php';
-    var $buttonConfigs
-        = array(
-            'default'             => array(
-                'buttonConfig'  => "code,help,separator,bold,italic,underline,strikethrough,separator,justifyleft,justifycenter,justifyright,
-	                     					justifyfull,separator,forecolor,backcolor,separator,styleselect,formatselect,fontselect,fontsizeselect,",
-                'buttonConfig2' => "cut,copy,paste,pastetext,pasteword,selectall,separator,search,replace,separator,bullist,numlist,separator,outdent,
+    public $customDefaultConfigFile = 'custom/include/tinyMCEDefaultConfig.php';
+    public $buttonConfigs
+        = [
+            'default' => [
+                'buttonConfig' => 'code,help,separator,bold,italic,underline,strikethrough,separator,justifyleft,justifycenter,justifyright,
+	                     					justifyfull,separator,forecolor,backcolor,separator,styleselect,formatselect,fontselect,fontsizeselect,',
+                'buttonConfig2' => 'cut,copy,paste,pastetext,pasteword,selectall,separator,search,replace,separator,bullist,numlist,separator,outdent,
 	                     					indent,separator,ltr,rtl,separator,undo,redo,separator, link,unlink,anchor,image,separator,sub,sup,separator,charmap,
-	                     					visualaid",
-                'buttonConfig3' => "tablecontrols,separator,advhr,hr,removeformat,separator,insertdate,inserttime,separator,preview,spellchecker"
-            ),
-            'email_compose'       => array(
-                'buttonConfig'  => "code,help,separator,bold,italic,underline,strikethrough,separator,bullist,numlist,separator,justifyleft,justifycenter,justifyright,
-	                     					justifyfull,separator,forecolor,backcolor,separator,spellchecker,seperator,styleselect,formatselect,fontselect,fontsizeselect",
-                'buttonConfig2' => "",
-                'buttonConfig3' => ""
-            ),
-            'email_compose_light' => array(
-                'buttonConfig'  => "code,help,separator,bold,italic,underline,strikethrough,separator,bullist,numlist,separator,justifyleft,justifycenter,justifyright,
-	                     					justifyfull,separator,forecolor,backcolor,separator,spellchecker,seperator,styleselect,formatselect,fontselect,fontsizeselect",
-                'buttonConfig2' => "",
-                'buttonConfig3' => ""
-            ),
-        );
+	                     					visualaid',
+                'buttonConfig3' => 'tablecontrols,separator,advhr,hr,removeformat,separator,insertdate,inserttime,separator,preview,spellchecker',
+            ],
+            'email_compose' => [
+                'buttonConfig' => 'code,help,separator,bold,italic,underline,strikethrough,separator,bullist,numlist,separator,justifyleft,justifycenter,justifyright,
+	                     					justifyfull,separator,forecolor,backcolor,separator,spellchecker,seperator,styleselect,formatselect,fontselect,fontsizeselect',
+                'buttonConfig2' => '',
+                'buttonConfig3' => '',
+            ],
+            'email_compose_light' => [
+                'buttonConfig' => 'code,help,separator,bold,italic,underline,strikethrough,separator,bullist,numlist,separator,justifyleft,justifycenter,justifyright,
+	                     					justifyfull,separator,forecolor,backcolor,separator,spellchecker,seperator,styleselect,formatselect,fontselect,fontsizeselect',
+                'buttonConfig2' => '',
+                'buttonConfig3' => '',
+            ],
+        ];
 
-    var $pluginsConfig
-        = array(
+    public $pluginsConfig
+        = [
             'email_compose_light' => 'insertdatetime,paste,directionality,safari,spellchecker',
-            'email_compose'       => 'advhr,insertdatetime,table,preview,paste,searchreplace,directionality,fullpage,spellchecker',
-        );
+            'email_compose' => 'advhr,insertdatetime,table,preview,paste,searchreplace,directionality,fullpage,spellchecker',
+        ];
 
 
-    var $defaultConfig
-        = array(
-            'convert_urls'                      => false,
-            'valid_children'                    => '+body[style]',
-            'height'                            => 300,
-            'width'                             => '100%',
-            'theme'                             => 'advanced',
-            'theme_advanced_toolbar_align'      => "left",
-            'theme_advanced_toolbar_location'   => "top",
-            'theme_advanced_buttons1'           => "",
-            'theme_advanced_buttons2'           => "",
-            'theme_advanced_buttons3'           => "",
-            'theme_advanced_statusbar_location' => "none",
-            'strict_loading_mode'               => true,
-            'mode'                              => 'exact',
-            'language'                          => 'en',
-            'plugins'                           => 'advhr,insertdatetime,table,preview,paste,searchreplace,directionality,spellchecker',
-            'elements'                          => '',
-            'extended_valid_elements'           => 'style[dir|lang|media|title|type],hr[class|width|size|noshade],@[class|style]',
-            'content_css'                       => 'include/javascript/tiny_mce/themes/advanced/skins/default/content.css',
-            'oninit' =>  'onTinyMCEInit',
-        );
+    public $defaultConfig
+        = [
+            'convert_urls' => false,
+            'valid_children' => '+body[style]',
+            'height' => 300,
+            'width' => '100%',
+            'theme' => 'advanced',
+            'theme_advanced_toolbar_align' => 'left',
+            'theme_advanced_toolbar_location' => 'top',
+            'theme_advanced_buttons1' => '',
+            'theme_advanced_buttons2' => '',
+            'theme_advanced_buttons3' => '',
+            'theme_advanced_statusbar_location' => 'none',
+            'strict_loading_mode' => true,
+            'mode' => 'exact',
+            'language' => 'en',
+            'plugins' => 'advhr,insertdatetime,table,preview,paste,searchreplace,directionality,spellchecker',
+            'elements' => '',
+            'extended_valid_elements' => 'style[dir|lang|media|title|type],hr[class|width|size|noshade],@[class|style]',
+            'content_css' => 'include/javascript/tiny_mce/themes/advanced/skins/default/content.css',
+            'oninit' => 'onTinyMCEInit',
+        ];
 
 
     /**
@@ -92,7 +92,7 @@ class SugarTinyMCE
      *
      * @return string
      */
-    function getInstance($targets = "")
+    public function getInstance($targets = '')
     {
         global $json;
 
@@ -106,8 +106,8 @@ class SugarTinyMCE
         if (SugarAutoLoader::existing('include/javascript/tiny_mce/langs/' . $lang . '.js')) {
             $config['language'] = $lang;
         }
-        $config['directionality']          = SugarThemeRegistry::current()->directionality;
-        $config['elements']                = $targets;
+        $config['directionality'] = SugarThemeRegistry::current()->directionality;
+        $config['elements'] = $targets;
         $config['theme_advanced_buttons1'] = $this->buttonConfigs['default']['buttonConfig'];
         $config['theme_advanced_buttons2'] = $this->buttonConfigs['default']['buttonConfig2'];
         $config['theme_advanced_buttons3'] = $this->buttonConfigs['default']['buttonConfig3'];
@@ -117,7 +117,7 @@ class SugarTinyMCE
         $instantiateCall = '';
         $path = getJSPath('include/javascript/tiny_mce/tiny_mce.js');
 
-        $exTargets = explode(",", $targets);
+        $exTargets = explode(',', $targets);
 
         $ret
             = <<<eoq
@@ -127,7 +127,7 @@ class SugarTinyMCE
 function onTinyMCEInit() {
 eoq;
         foreach ($exTargets as $instance) {
-            $ret .= "$('#".$instance."_ifr').contents().find('iframe[data-mce-src]').attr('src','').attr('sandbox','');\n";
+            $ret .= "$('#" . $instance . "_ifr').contents().find('iframe[data-mce-src]').attr('src','').attr('sandbox','');\n";
         }
 
         $ret .= <<<eoq
@@ -156,7 +156,7 @@ eoq;
         return $ret;
     }
 
-    function getConfig($type = 'default')
+    public function getConfig($type = 'default')
     {
         global $json;
 
@@ -179,8 +179,7 @@ eoq;
         }
 
         $jsConfig = $json->encode($config);
-        return "var tinyConfig = " . $jsConfig . ";";
-
+        return 'var tinyConfig = ' . $jsConfig . ';';
     }
 
     /**
@@ -191,11 +190,11 @@ eoq;
      *
      * @return $html with all the tinyMCE specific html removed
      */
-    function cleanEncodedMCEHtml($html)
+    public function cleanEncodedMCEHtml($html)
     {
-        $html = str_replace("mce:script", "script", $html);
-        $html = str_replace("mce_src=", "src=", $html);
-        $html = str_replace("mce_href=", "href=", $html);
+        $html = str_replace('mce:script', 'script', $html);
+        $html = str_replace('mce_src=', 'src=', $html);
+        $html = str_replace('mce_href=', 'href=', $html);
         return $html;
     }
 
@@ -231,12 +230,12 @@ eoq;
     private function overloadPluginConfigs()
     {
         if (SugarAutoLoader::existing($this->customPluginConfigFile)) {
-            require_once($this->customPluginConfigFile);
+            require_once $this->customPluginConfigFile;
         }
 
         $defs = SugarAutoLoader::loadExtension('tinymce');
         if ($defs) {
-            require($defs);
+            require $defs;
         }
 
         if (!isset($pluginsConfig)) {
@@ -255,12 +254,12 @@ eoq;
     private function overloadDefaultConfigs()
     {
         if (SugarAutoLoader::existing($this->customDefaultConfigFile)) {
-            require_once($this->customDefaultConfigFile);
+            require_once $this->customDefaultConfigFile;
         }
 
         $defs = SugarAutoLoader::loadExtension('tinymce');
         if ($defs) {
-            require($defs);
+            require $defs;
         }
 
         if (!isset($defaultConfig)) {
@@ -268,12 +267,11 @@ eoq;
         }
 
         foreach ($defaultConfig as $k => $v) {
-            if ($k == "extended_valid_elements") {
-                $this->defaultConfig[$k] .= "," . $v;
+            if ($k == 'extended_valid_elements') {
+                $this->defaultConfig[$k] .= ',' . $v;
             } else {
                 $this->defaultConfig[$k] = $v;
             }
         }
     }
-
 } // end class def

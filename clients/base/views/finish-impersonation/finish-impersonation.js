@@ -39,26 +39,50 @@
      */
     finishImpersonation: function() {
         let self = this;
-        app.bwc.logout(
-            function(data) {
+        accessToken = this.cache.get('OriginAuthAccessToken');
+        refreshToken = this.cache.get('OriginAuthRefreshToken');
+        app.api.logout({
+            complete: function(data) {
                 self.cache.cut('ImpersonationFor');
 
-                self.cache.set('AuthAccessToken', self.cache.get('OriginAuthAccessToken'));
-                self.cache.set('AuthRefreshToken', self.cache.get('OriginAuthRefreshToken'));
+                self.cache.set('AuthAccessToken', accessToken);
+                self.cache.set('AuthRefreshToken', refreshToken);
 
                 self.cache.cut('OriginAuthAccessToken');
                 self.cache.cut('OriginAuthRefreshToken');
 
-                // Have to login to BWC after admin token has been switched back
-                app.bwc.login(null, function() {
-                    if (window.opener) {
-                        window.close();
-                    } else {
-                        window.location.replace(self.getComeBackUrl());
+                if (!refreshToken) {
+                    self.closeImpersonationWindow();
+                    return;
+                }
+
+                payload = {
+                    refresh: true,
+                    access_token: accessToken,
+                    refresh_token: refreshToken,
+                };
+
+                app.api.login(null, payload, {
+                    success: function(data) {
+                        // Have to login to BWC after admin token has been switched back
+                        app.bwc.login(null, function() {
+                            self.closeImpersonationWindow();
+                        });
+                    },
+                    error: function(data) {
+                        self.closeImpersonationWindow();
                     }
                 });
             }
-        );
+        });
+    },
+
+    closeImpersonationWindow: function() {
+        if (window.opener) {
+            window.close();
+        } else {
+            window.location.replace(this.getComeBackUrl());
+        }
     },
 
     /**

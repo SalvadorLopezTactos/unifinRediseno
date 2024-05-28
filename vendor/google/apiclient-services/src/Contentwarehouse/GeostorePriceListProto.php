@@ -20,6 +20,10 @@ namespace Google\Service\Contentwarehouse;
 class GeostorePriceListProto extends \Google\Collection
 {
   protected $collection_key = 'section';
+  /**
+   * @var string
+   */
+  public $aggregatorId;
   protected $availableTimeType = GeostoreTimeScheduleProto::class;
   protected $availableTimeDataType = '';
   /**
@@ -33,6 +37,20 @@ class GeostorePriceListProto extends \Google\Collection
   protected $sourceUrlType = GeostoreUrlListProto::class;
   protected $sourceUrlDataType = '';
 
+  /**
+   * @param string
+   */
+  public function setAggregatorId($aggregatorId)
+  {
+    $this->aggregatorId = $aggregatorId;
+  }
+  /**
+   * @return string
+   */
+  public function getAggregatorId()
+  {
+    return $this->aggregatorId;
+  }
   /**
    * @param GeostoreTimeScheduleProto
    */

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="headerpane">
+<div class="headerpane bg-[--primary-content-background] box-border fixed">
     <h1>
         {{#each view.meta.panels}}
             {{#if header}}
@@ -35,7 +35,7 @@
                                         </span>
                                         <span class="record-lock-link-wrapper hide" data-name="{{name}}">
                                             <a class="record-lock-link btn btn-invisible" data-type="{{type}}" data-name="{{name}}">
-                                                <i class="sicon sicon-lock" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-placement="right"></i>
+                                                <i class="sicon sicon-lock" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-bs-placement="right"></i>
                                             </a>
                                         </span>
                                     {{/notHas}}
@@ -53,12 +53,12 @@
                         <div class="btn-group btn-group-previous-next">
                             <button class="btn btn-invisible previous-row{{#unless view.showPrevious}} disabled{{/unless}}"
                                     data-action="scroll" data-action-type="prev"
-                                    data-id="{{fieldValue view.model "id"}}" rel="tooltip" data-placement="bottom" title="{{str "LNK_LIST_PREVIOUS" view.module}}"{{#unless view.showPrevious}} tabindex="-1"{{/unless}} aria-label="{{str "LNK_LIST_PREVIOUS" view.module}}">
+                                    data-id="{{fieldValue view.model "id"}}" rel="tooltip" data-bs-placement="bottom" title="{{str "LNK_LIST_PREVIOUS" view.module}}"{{#unless view.showPrevious}} tabindex="-1"{{/unless}} aria-label="{{str "LNK_LIST_PREVIOUS" view.module}}">
                                 <i class="sicon sicon-chevron-left"></i>
                             </button>
                             <button class="btn btn-invisible next-row{{#unless view.showNext}} disabled{{/unless}}"
                                     data-action="scroll" data-action-type="next"
-                                    data-id="{{fieldValue view.model "id"}}" rel="tooltip" data-placement="bottom" title="{{str "LNK_LIST_NEXT" view.module}}"{{#unless view.showNext}} tabindex="-1"{{/unless}}  aria-label="{{str "LNK_LIST_NEXT" view.module}}">
+                                    data-id="{{fieldValue view.model "id"}}" rel="tooltip" data-bs-placement="bottom" title="{{str "LNK_LIST_NEXT" view.module}}"{{#unless view.showNext}} tabindex="-1"{{/unless}}  aria-label="{{str "LNK_LIST_NEXT" view.module}}">
                                 <i class="sicon sicon-chevron-right"></i>
                             </button>
                         </div>

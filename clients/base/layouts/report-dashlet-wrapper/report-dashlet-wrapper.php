@@ -21,7 +21,7 @@ $viewdefs['base']['layout']['report-dashlet-wrapper'] = [
         [
             'view' => [
                 'name' => 'report-dashlet-body',
-                'css_class' => 'report-dashlet-body-height',
+                'css_class' => 'report-dashlet-body-height h-[calc(100%-47px)] overflow-auto',
             ],
         ],
     ],

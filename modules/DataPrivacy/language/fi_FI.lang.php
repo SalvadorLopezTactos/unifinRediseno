@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tietosuoja',
     'LBL_MODULE_NAME_SINGULAR' => 'Tietosuoja',
     'LBL_NUMBER' => 'Numero',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Ei poistettaviksi merkittyjä kenttiä tai tietueita.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Tietosuojatietueiden työpöytä',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Tietosuoja-tietolaatikko',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tietosuojan aikajana',
 
     // list view
     'LBL_HELP_RECORDS' => 'Tietosuojamoduuli tukee organisaation tietosuojatoimenpiteitä jäljittämällä tietosuojatoimet, mukaan lukien suostumus- ja aihepyynnöt. Luo henkilön tietueeseen liittyvät tietosuojatietueet (esim. yhteystieto) jotta voit jäljittää suostumuksen tai toimia tietosuojapyynnön mukaan.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Tietosuojamoduuli tukee organisaation tietosuojatoimenpiteitä jäljittämällä tietosuojatoimet, mukaan lukien suostumus- ja aihepyynnöt. Luo henkilön tietueeseen liittyvät tietosuojatietueet (esim. yhteystieto) jotta voit jäljittää suostumuksen tai toimia tietosuojapyynnön mukaan. Kun tarvittava toimenpide on valmis, käyttäjät, joilla on tietosuojavalvojan rooli, voivat päivittää tilaa napsauttamalla "Valmis" "tai Hylkää".
 
 Jos kyseessä on poistopyyntö, valitse "Merkitse poistettavaksi" henkilön kaikkiin tietueisiin, jotka on lueteltu alla olevissa alipaneeleissa. Kun kaikki tarvittavat kentät on valittu, "Poista ja suorita loppuun" -kohdan napsauttaminen poistaa pysyvästi kentän arvot ja merkitsee tietosuojatietueen valmiiksi.',
-);
+];

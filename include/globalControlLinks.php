@@ -10,37 +10,38 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  controls which link show up in the upper right hand corner of the app
  ********************************************************************************/
 
 global $app_strings, $current_user;
 global $sugar_config, $sugar_version, $sugar_flavor, $server_unique_key, $current_language, $action;
 
- if(!isset($global_control_links)){
- 	$global_control_links = array();
-	$sub_menu = array();
- }
+if (!isset($global_control_links)) {
+    $global_control_links = [];
+    $sub_menu = [];
+}
 
-if(SugarThemeRegistry::current()->name != 'Classic')
-$global_control_links['profile'] = array(
-'linkinfo' => array($app_strings['LBL_PROFILE'] => 'index.php?module=Users&action=EditView&record='.$GLOBALS['current_user']->id),
-'submenu' => ''
-);
+if (SugarThemeRegistry::current()->name != 'Classic') {
+    $global_control_links['profile'] = [
+        'linkinfo' => [$app_strings['LBL_PROFILE'] => '#Users/' . $GLOBALS['current_user']->id],
+        'submenu' => '',
+    ];
+}
 
-$global_control_links['employees'] = array(
-'linkinfo' => array($app_strings['LBL_EMPLOYEES']=> 'index.php?module=Employees&action=index&query=true'),
-'submenu' => ''
-);
-if (
-        is_admin($current_user)
-		|| $current_user->isDeveloperForAnyModule()
+$global_control_links['employees'] = [
+    'linkinfo' => [$app_strings['LBL_EMPLOYEES'] => 'index.php?module=Employees&action=index&query=true'],
+    'submenu' => '',
+];
+if (is_admin($current_user)
+    || $current_user->isDeveloperForAnyModule()
 
-        ) $global_control_links['admin'] = array(
+) {
+    $global_control_links['admin'] = [
 
-'linkinfo' => array($app_strings['LBL_ADMIN'] => '#Administration'),
-'submenu' => ''
-);
+        'linkinfo' => [$app_strings['LBL_ADMIN'] => '#Administration'],
+        'submenu' => '',
+    ];
+}
 /* no longer goes in the menubar - now implemented in the bottom bar.
 $global_control_links['training'] = array(
 'linkinfo' => array($app_strings['LBL_TRAINING'] => 'javascript:void(window.open(\'http://support.sugarcrm.com\'))'),
@@ -51,15 +52,15 @@ $global_control_links['help'] = array(
     'submenu' => ''
  );
 */
-$global_control_links['users'] = array(
-'linkinfo' => array($app_strings['LBL_LOGOUT'] => 'index.php?module=Users&action=Logout'),
-'submenu' => ''
-);
+$global_control_links['users'] = [
+    'linkinfo' => [$app_strings['LBL_LOGOUT'] => 'index.php?module=Users&action=Logout'],
+    'submenu' => '',
+];
 
-$global_control_links['about'] = array('linkinfo' => array($app_strings['LNK_ABOUT'] => 'index.php?module=Home&action=About'),
-'submenu' => ''
-);
+$global_control_links['about'] = ['linkinfo' => [$app_strings['LNK_ABOUT'] => 'index.php?module=Home&action=About'],
+    'submenu' => '',
+];
 
-foreach(SugarAutoLoader::existing('custom/include/globalControlLinks.php', SugarAutoLoader::loadExtension("links")) as $file) {
+foreach (SugarAutoLoader::existing('custom/include/globalControlLinks.php', SugarAutoLoader::loadExtension('links')) as $file) {
     include $file;
 }

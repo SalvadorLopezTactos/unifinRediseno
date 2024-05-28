@@ -30,16 +30,16 @@ class ArrayFunctions
      */
     public static function is_array_access($arr)
     {
-        return is_array($arr) || is_object($arr) && in_array('ArrayAccess', class_implements($arr));
+        return is_array($arr) || is_object($arr) && safeInArray('ArrayAccess', class_implements($arr));
     }
 
     /**
      * Implementation of in_array that works on arrays or classes that implement ArrayAccess
      * such as ArrayObject
      *
-     * @param mixed             $needle
+     * @param mixed $needle
      * @param array|ArrayAccess $haystack
-     * @param bool              $strict
+     * @param bool $strict
      *
      * @return bool
      */
@@ -63,8 +63,8 @@ class ArrayFunctions
      * such as ArrayObject
      *
      * @param array|ArrayAccess $arr
-     * @param null              $search
-     * @param bool              $strict
+     * @param null $search
+     * @param bool $strict
      *
      * @return array
      */
@@ -75,7 +75,7 @@ class ArrayFunctions
             return array_keys($arr, $search, $strict);
         }
 
-        $out = array();
+        $out = [];
 
         foreach ($arr as $key => $value) {
             if (!is_null($search)) {
@@ -95,8 +95,8 @@ class ArrayFunctions
      * such as ArrayObject
      *
      * @param array|ArrayAccess $arr
-     * @param null              $search
-     * @param bool              $strict
+     * @param null $search
+     * @param bool $strict
      *
      * @return array
      */
@@ -119,7 +119,7 @@ class ArrayFunctions
      * @param array $data
      * @return array
      */
-    public static function powerSet(array $data) : array
+    public static function powerSet(array $data): array
     {
         // add the empty set
         $results = [[]];

@@ -25,9 +25,9 @@ class QuickSearchQuery
      * Condition operators
      * @var string
      */
-    public const CONDITION_CONTAINS    = 'contains';
+    public const CONDITION_CONTAINS = 'contains';
     public const CONDITION_LIKE_CUSTOM = 'like_custom';
-    public const CONDITION_EQUAL       = 'equal';
+    public const CONDITION_EQUAL = 'equal';
 
     protected $extra_where;
 
@@ -66,9 +66,9 @@ class QuickSearchQuery
      */
     public function get_contact_array($args)
     {
-        $args    = $this->prepareArguments($args);
-        $args    = $this->updateContactArrayArguments($args);
-        $data    = $this->getRawResults($args);
+        $args = $this->prepareArguments($args);
+        $args = $this->updateContactArrayArguments($args);
+        $data = $this->getRawResults($args);
         $results = $this->prepareResults($data, $args);
 
         return $this->getFilteredJsonResults($results);
@@ -83,7 +83,7 @@ class QuickSearchQuery
     public function get_user_array($args)
     {
         $condition = $args['conditions'][0]['value'];
-        $results   = $this->getUserResults($condition);
+        $results = $this->getUserResults($condition);
 
         return $this->getJsonEncodedData($results);
     }
@@ -111,24 +111,24 @@ class QuickSearchQuery
      */
     public function externalApi($args)
     {
-        $data = array();
+        $data = [];
         try {
             $api = ExternalAPIFactory::loadAPI($args['api']);
-            $data['fields']     = $api->searchDoc($_REQUEST['query']);
-            $data['totalCount'] = is_countable($data['fields']) ? count($data['fields']) : 0;
-        } catch(Exception $ex) {
+            $data['fields'] = $api->searchDoc($_REQUEST['query']);
+            $data['totalCount'] = safeCount($data['fields']);
+        } catch (Exception $ex) {
             $GLOBALS['log']->error($ex->getMessage());
         }
 
         return $this->getJsonEncodedData($data);
     }
 
-    function fts_query()
+    public function fts_query()
     {
         $_REQUEST['q'] = trim($_REQUEST['term']);
         $view = new ViewFts();
         $view->init();
-        echo $view->display(TRUE, TRUE);
+        echo $view->display(true, true);
     }
 
     /**
@@ -144,34 +144,33 @@ class QuickSearchQuery
 
         $table = $focus->getTableName();
         if (!empty($table)) {
-            $table_prefix = $db->getValidDBName($table).".";
+            $table_prefix = $db->getValidDBName($table) . '.';
         } else {
             $table_prefix = '';
         }
-        $conditionArray = array();
+        $conditionArray = [];
 
         if (!isset($args['conditions']) || !is_array($args['conditions'])) {
-            $args['conditions'] = array();
+            $args['conditions'] = [];
         }
 
-        foreach($args['conditions'] as $condition)
-        {
+        foreach ($args['conditions'] as $condition) {
             if (isset($condition['op'])) {
                 $operator = $condition['op'];
             } else {
                 $operator = null;
             }
 
-            switch ($operator)
-            {
+            switch ($operator) {
                 case self::CONDITION_CONTAINS:
                     array_push(
                         $conditionArray,
                         sprintf(
                             "%s like '%%%s%%'",
                             $table_prefix . $db->getValidDBName($condition['name']),
-                            $db->quote($condition['value']
-                    )));
+                            $db->quote($condition['value'])
+                        )
+                    );
                     break;
 
                 case self::CONDITION_LIKE_CUSTOM:
@@ -185,30 +184,28 @@ class QuickSearchQuery
                         $like .= $db->quote($condition['end']);
                     }
 
-                    if ($focus instanceof Person){
+                    if ($focus instanceof Person) {
                         $nameFormat = $locale->getLocaleFormatMacro($current_user);
 
-                        if (strpos($nameFormat,'l') > strpos($nameFormat,'f')) {
+                        if (strpos($nameFormat, 'l') > strpos($nameFormat, 'f')) {
                             array_push(
                                 $conditionArray,
-                                $db->getLikeSQL($db->concat($table, array('first_name','last_name')), $like)
+                                $db->getLikeSQL($db->concat($table, ['first_name', 'last_name']), $like)
                             );
                         } else {
                             array_push(
                                 $conditionArray,
-                                $db->getLikeSQL($db->concat($table, array('last_name','first_name')), $like)
+                                $db->getLikeSQL($db->concat($table, ['last_name', 'first_name']), $like)
                             );
                         }
-                    }
-                    elseif ($focus instanceof Team) {
+                    } elseif ($focus instanceof Team) {
                         array_push(
                             $conditionArray,
-                            '(' . $db->getLikeSQL($table_prefix . $db->getValidDBName($condition['name']), sprintf("%s%%", $db->quote($condition['value']))) . ' or ' . $db->getLikeSQL($table_prefix . 'name_2', sprintf("%s%%", $db->quote($condition['value']))) . ')'
+                            '(' . $db->getLikeSQL($table_prefix . $db->getValidDBName($condition['name']), sprintf('%s%%', $db->quote($condition['value']))) . ' or ' . $db->getLikeSQL($table_prefix . 'name_2', sprintf('%s%%', $db->quote($condition['value']))) . ')'
                         );
 
                         $condition['exclude_private_teams'] = true;
-                    }
-                    else {
+                    } else {
                         array_push(
                             $conditionArray,
                             $db->getLikeSQL($table_prefix . $db->getValidDBName($condition['name']), $like)
@@ -221,23 +218,23 @@ class QuickSearchQuery
                         array_push(
                             $conditionArray,
                             sprintf("(%s = '%s')", $db->getValidDBName($condition['name']), $db->quote($condition['value']))
-                            );
+                        );
                     }
                     break;
 
                 default:
                     array_push(
                         $conditionArray,
-                        $db->getLikeSQL($table_prefix.$db->getValidDBName($condition['name']), sprintf("%s%%", $db->quote($condition['value'])))
+                        $db->getLikeSQL($table_prefix . $db->getValidDBName($condition['name']), sprintf('%s%%', $db->quote($condition['value'])))
                     );
             }
         }
 
-        $whereClauseArray = array();
+        $whereClauseArray = [];
         if (!empty($conditionArray)) {
             $whereClauseArray[] = sprintf('(%s)', implode(" {$args['group']} ", $conditionArray));
         }
-        if(!empty($this->extra_where)) {
+        if (!empty($this->extra_where)) {
             $whereClauseArray[] = "({$this->extra_where})";
         }
 
@@ -261,16 +258,15 @@ class QuickSearchQuery
         global $sugar_config;
 
         $app_list_strings = $GLOBALS['app_list_strings'] ?? null;
-        $data['totalCount'] = count($results);
-        $data['fields']     = array();
+        $data['totalCount'] = safeCount($results);
+        $data['fields'] = [];
 
-        for ($i = 0; $i < count($results); $i++) {
-            $data['fields'][$i] = array();
+        for ($i = 0; $i < safeCount($results); $i++) {
+            $data['fields'][$i] = [];
             $data['fields'][$i]['module'] = $results[$i]->object_name;
 
             //C.L.: Bug 43395 - For Quicksearch, do not return values with salutation and title formatting
-            if($results[$i] instanceof Person)
-            {
+            if ($results[$i] instanceof Person) {
                 $results[$i]->createLocaleFormattedName = false;
             }
             $listData = $results[$i]->get_list_view_data();
@@ -282,9 +278,12 @@ class QuickSearchQuery
                     || (isset($results[$i]->field_defs[$field]['custom_type'])
                         && $results[$i]->field_defs[$field]['custom_type'] == 'enum')) {
                     // get fields to match enum vals
-                    if(empty($app_list_strings)) {
-                        if(isset($_SESSION['authenticated_user_language']) && $_SESSION['authenticated_user_language'] != '') $current_language = $_SESSION['authenticated_user_language'];
-                        else $current_language = $sugar_config['default_language'];
+                    if (empty($app_list_strings)) {
+                        if (isset($_SESSION['authenticated_user_language']) && $_SESSION['authenticated_user_language'] != '') {
+                            $current_language = $_SESSION['authenticated_user_language'];
+                        } else {
+                            $current_language = $sugar_config['default_language'];
+                        }
                         $app_list_strings = return_app_list_strings_language($current_language);
                     }
 
@@ -295,13 +294,13 @@ class QuickSearchQuery
                     }
                 }
 
-                if($results[$i] instanceof Team){
+                if ($results[$i] instanceof Team) {
                     $results[$i]->name = Team::getDisplayName($results[$i]->name, $results[$i]->name_2);
                 }
 
                 if (isset($listData[$field])) {
                     $data['fields'][$i][$field] = $listData[$field];
-                } else if (isset($results[$i]->$field)) {
+                } elseif (isset($results[$i]->$field)) {
                     $data['fields'][$i][$field] = $results[$i]->$field;
                 } else {
                     $data['fields'][$i][$field] = '';
@@ -332,11 +331,11 @@ class QuickSearchQuery
      * Filter duplicate results from the list
      *
      * @param array $list
-     * @return	array
+     * @return  array
      */
     protected function filterResults($list)
     {
-        $fieldsFiltered = array();
+        $fieldsFiltered = [];
         foreach ($list['fields'] as $field) {
             $found = false;
             foreach ($fieldsFiltered as $item) {
@@ -351,8 +350,8 @@ class QuickSearchQuery
             }
         }
 
-        $list['totalCount'] = count($fieldsFiltered);
-        $list['fields']     = $fieldsFiltered;
+        $list['totalCount'] = safeCount($fieldsFiltered);
+        $list['fields'] = $fieldsFiltered;
 
         return $list;
     }
@@ -368,8 +367,8 @@ class QuickSearchQuery
     {
         $orderBy = !empty($args['order']) ? $args['order'] : '';
         $baseOrderBy = $orderBy;
-        $limit   = !empty($args['limit']) ? intval($args['limit']) : '';
-        $data    = array();
+        $limit = !empty($args['limit']) ? intval($args['limit']) : '';
+        $data = [];
 
         foreach ($args['modules'] as $module) {
             $focus = BeanFactory::newBean($module);
@@ -378,7 +377,7 @@ class QuickSearchQuery
 
             if ($focus->ACLAccess('ListView', true)) {
                 $where = $this->constructWhere($focus, $args);
-                $data  = $this->updateData($data, $focus, $orderBy, $where, $limit, $singleSelect);
+                $data = $this->updateData($data, $focus, $orderBy, $where, $limit, $singleSelect);
             }
         }
 
@@ -400,11 +399,11 @@ class QuickSearchQuery
     protected function prepareResults($data, $args)
     {
         $results = [];
-        $results['totalCount'] = $count = count($data);
-        $results['fields']     = array();
+        $results['totalCount'] = $count = safeCount($data);
+        $results['fields'] = [];
 
         for ($i = 0; $i < $count; $i++) {
-            $field = array();
+            $field = [];
             $field['module'] = $data[$i]->object_name;
 
             $field = $this->overrideContactId($field, $data[$i], $args);
@@ -426,18 +425,19 @@ class QuickSearchQuery
     {
         $users = $this->getUserArray($condition);
 
-        $results = array();
-        $results['totalCount'] = count($users);
-        $results['fields']     = array();
+        $results = [];
+        $results['totalCount'] = safeCount($users);
+        $results['fields'] = [];
 
         foreach ($users as $id => $name) {
             array_push(
                 $results['fields'],
-                array(
-                    'id' => (string) $id,
+                [
+                    'id' => (string)$id,
                     'user_name' => $name,
-                    'module' => 'Users'
-            ));
+                    'module' => 'Users',
+                ]
+            );
         }
 
         return $results;
@@ -488,8 +488,8 @@ class QuickSearchQuery
     protected function overrideContactId($result, $data, $args)
     {
         foreach ($args['field_list'] as $field) {
-            $result[$field] = (preg_match('/reports_to_id$/s',$field)
-                               || preg_match('/contact_id$/s',$field))
+            $result[$field] = (preg_match('/reports_to_id$/s', $field)
+                || preg_match('/contact_id$/s', $field))
                 ? $data->id // "reports_to_id" to "id"
                 : $data->$field;
         }
@@ -512,14 +512,14 @@ class QuickSearchQuery
             $sugar_config['list_max_entries_per_page'] = ($args['limit'] + 1);
         }
 
-        $defaults = array(
+        $defaults = [
             'order_by_name' => false,
-        );
+        ];
         $this->extra_where = '';
 
         // Sanitize group
         /* BUG: 52684 properly check for 'and' jeff@neposystems.com */
-        if(!empty($args['group'])  && strcasecmp($args['group'], 'and') == 0) {
+        if (!empty($args['group']) && strcasecmp($args['group'], 'and') == 0) {
             $args['group'] = 'AND';
         } else {
             $args['group'] = 'OR';
@@ -551,7 +551,7 @@ class QuickSearchQuery
         return (showFullName())
             // utils.php, if system is configured to show full name
             ? getUserArrayFromFullName($condition, true)
-            : get_user_array(false, 'Active', '', false, $condition,' AND portal_only=0 ',false);
+            : get_user_array(false, 'Active', '', false, $condition, ' AND portal_only=0 ', false);
     }
 
     /**
@@ -565,13 +565,13 @@ class QuickSearchQuery
     {
         global $db;
 
-        $where = array();
+        $where = [];
         $teams_filtered = false;
 
         if (isset($args['conditions']) && is_array($args['conditions'])) {
             foreach ($args['conditions'] as $i => $condition) {
                 if (isset($condition['name'], $condition['value'])) {
-                    switch($condition['name']) {
+                    switch ($condition['name']) {
                         case 'name':
                             $where[] = sprintf(
                                 "(teams.name like '%s%%' OR teams.name_2 like '%s%%')",
@@ -594,7 +594,7 @@ class QuickSearchQuery
         }
 
         if (!$teams_filtered) {
-            $where[] ='teams.private = 0';
+            $where[] = 'teams.private = 0';
         }
 
         return implode(' AND ', $where);
@@ -673,7 +673,7 @@ class QuickSearchQuery
     protected function updateTeamArrayArguments($args)
     {
         $this->extra_where = $this->getNonPrivateTeamsWhere($args);
-        $args['modules'] = array('Teams');
+        $args['modules'] = ['Teams'];
 
         return $args;
     }

@@ -10,6 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_ENTRY' => 'รายการ',
-);
+];

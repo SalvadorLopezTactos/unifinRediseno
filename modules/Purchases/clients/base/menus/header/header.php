@@ -17,7 +17,7 @@ $viewdefs[$module_name]['base']['menu']['header'] = [
         'acl_action' => 'create',
         'acl_module' => $module_name,
         'icon' => 'sicon-plus',
-        'route' => '#' . $module_name.'/create',
+        'route' => '#' . $module_name . '/create',
     ],
     [
         'route' => '#' . $module_name,
@@ -29,17 +29,17 @@ $viewdefs[$module_name]['base']['menu']['header'] = [
     [
         'route' => '#Reports?filterModule=' . $module_name,
         'label' => 'LNK_PURCHASE_REPORTS',
-        'acl_action'=> 'list',
+        'acl_action' => 'list',
         'acl_module' => 'Reports',
         'icon' => 'sicon-reports',
     ],
     [
         'route' => '#bwc/index.php?' . http_build_query(
             [
-                'module' => 'Import',
-                'action' => 'Step1',
-                'import_module' => $module_name,
-            ]
+                    'module' => 'Import',
+                    'action' => 'Step1',
+                    'import_module' => $module_name,
+                ]
         ),
         'label' => 'LNK_IMPORT_PURCHASES',
         'acl_action' => 'import',

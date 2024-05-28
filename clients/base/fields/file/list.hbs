@@ -14,14 +14,19 @@
     {{#each value}}
         {{#notEq mimeType 'image'}}
             {{#eq docType 'Sugar'}}
-                <a class="ellipsis_inline" data-placement="bottom" title="{{name}}" href="javascript:void(0);" data-url="{{url}}" data-action="download">{{name}}</a>
+                <a class="ellipsis_inline" data-bs-placement="bottom" title="{{name}}" href="javascript:void(0);"
+                   data-url="{{url}}" data-action="download">{{name}}</a>
             {{/eq}}
             {{#notEq docType 'Sugar'}}
-                <a class="ellipsis_inline" data-placement="bottom" title="{{name}}" href="{{url}}" target="_blank">{{name}}</a>
+                <a class="ellipsis_inline" data-bs-placement="bottom" title="{{name}}" href="{{url}}" target="_blank">
+                    {{name}}
+                </a>
             {{/notEq}}
         {{/notEq}}
         {{#eq mimeType 'image'}}
-            <a class="ellipsis_inline" data-placement="bottom" title="{{name}}" href="{{url}}" target="_blank">{{name}}</a>
+            <a class="ellipsis_inline" data-bs-placement="bottom" title="{{name}}" href="{{url}}" target="_blank">
+                {{name}}
+            </a>
         {{/eq}}
     {{/each}}
 {{/if}}

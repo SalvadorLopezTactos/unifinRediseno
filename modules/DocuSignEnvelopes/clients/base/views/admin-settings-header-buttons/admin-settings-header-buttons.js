@@ -48,7 +48,10 @@
             this._getSaveConfigAttributes(),
             {
                 success: _.bind(function(settings) {
-                    app.DocuSign.showRecipients = settings.recipientSelection === 'show';
+                    if (_.isUndefined(app.config.docusign)) {
+                        app.config.docusign = {};
+                    }
+                    app.config.docusign.recipientSelection = settings.recipientSelection;
 
                     this.showSavedConfirmation();
 

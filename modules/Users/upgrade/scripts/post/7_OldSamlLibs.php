@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Files to delete for 7.0 - old SAML libs, now moved to vendor/
  */

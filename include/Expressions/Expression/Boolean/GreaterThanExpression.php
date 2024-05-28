@@ -16,59 +16,67 @@
  * Returns true num1 is greater than num2.<br/>
  * ex: <i>greaterThan(3, 5)</i> = false
  */
-class GreaterThanExpression extends BooleanExpression {
-	/**
-	 * Returns itself when evaluating.
-	 */
-	function evaluate() {
-		$params = $this->getParameters();
+class GreaterThanExpression extends BooleanExpression
+{
+    /**
+     * Returns itself when evaluating.
+     */
+    public function evaluate()
+    {
+        $params = $this->getParameters();
 
-		$a = $params[0]->evaluate();
-		$b = $params[1]->evaluate();
+        $a = $params[0]->evaluate();
+        $b = $params[1]->evaluate();
 
-		if ( $a > $b )	return AbstractExpression::$TRUE;
-		return AbstractExpression::$FALSE;
-	}
+        if ($a > $b) {
+            return AbstractExpression::$TRUE;
+        }
+        return AbstractExpression::$FALSE;
+    }
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
 			var params = this.getParameters();
 			var a = params[0].evaluate();
 			var b = params[1].evaluate();
 			if ( a > b )	return SUGAR.expressions.Expression.TRUE;
 			return SUGAR.expressions.Expression.FALSE;
 EOQ;
-	}
+    }
 
-	/**
-	 * Any generic type will suffice.
-	 */
-	static function getParameterTypes() {
-		return array("number", "number");
-	}
+    /**
+     * Any generic type will suffice.
+     */
+    public static function getParameterTypes()
+    {
+        return ['number', 'number'];
+    }
 
-	/**
-	 * Returns the maximum number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 2;
-	}
+    /**
+     * Returns the maximum number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 2;
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return "greaterThan";
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return 'greaterThan';
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 }
-?>

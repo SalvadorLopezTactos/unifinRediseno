@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -46,9 +48,10 @@ final class MultitenantValueSerializer implements ValueSerializer
 
     public function __construct(
         ValueSerializer $valueSerializer,
-        UuidInterface $encryptionKey,
+        UuidInterface   $encryptionKey,
         LoggerInterface $logger
     ) {
+
         $this->valueSerializer = $valueSerializer;
         $this->key = $encryptionKey;
         $this->logger = $logger;

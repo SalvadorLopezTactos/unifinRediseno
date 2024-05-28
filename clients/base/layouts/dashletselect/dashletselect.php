@@ -11,45 +11,45 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['dashletselect'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['base']['layout']['dashletselect'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'css_class' => 'main-pane overflow-y-auto span8',
+                            'components' => [
+                                [
                                     'view' => 'filtered-search',
-                                ),
-                                array(
+                                ],
+                                [
                                     'view' => 'dashletselect-headerpane',
-                                ),
-                                array(
+                                ],
+                                [
                                     'view' => 'dashletselect',
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'preview-pane',
                             'css_class' => 'preview-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'dashlet-preview',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'Administration',
-    'Product' => 'Produkts',
-    'User' => 'Lietotājs',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => 'Jauns',
-    'Assigned' => 'Nodota',
-    'Closed' => 'Aizvērts',
-    'Pending Input' => 'Gaida ievadi',
-    'Rejected' => 'Noraidīts',
-    'Duplicate' => 'Dublicēt',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => 'Augsta',
-    'P2' => 'Vidējs',
-    'P3' => 'Zema',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => 'Apstiprināts',
-    'Duplicate' => 'Dublicēt',
-    'Closed' => 'Aizvērts',
-    'Out of Date' => 'Novecojis',
-    'Invalid' => 'Nederīgs',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => 'Administrēšana',
+        'Product' => 'Produkts',
+        'User' => 'Lietotājs',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => 'Jauns',
+        'Assigned' => 'Piešķirts',
+        'Closed' => 'Slēgts',
+        'Pending Input' => 'Gaida ievadi',
+        'Rejected' => 'Noraidīts',
+        'Duplicate' => 'Dublikāts',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => 'Augsts',
+        'P2' => 'Vidējs',
+        'P3' => 'Zems',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => 'Pieņemts',
+        'Duplicate' => 'Dublikāts',
+        'Closed' => 'Slēgts',
+        'Out of Date' => 'Novecojis',
+        'Invalid' => 'Nederīgs',
+    ],
+];

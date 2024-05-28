@@ -9,8 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Emails']['base']['filter']['operators'] = array(
-    'email-recipients' => array(
+$viewdefs['Emails']['base']['filter']['operators'] = [
+    'email-recipients' => [
         '$in' => 'LBL_OPERATOR_CONTAINS',
-    ),
-);
+    ],
+];

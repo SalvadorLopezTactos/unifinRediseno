@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['DocumentRevisions']['base']['view']['create'] = array(
+$viewdefs['DocumentRevisions']['base']['view']['create'] = [
     'panels' => [
         [
             'name' => 'panel_header',
@@ -37,7 +37,7 @@ $viewdefs['DocumentRevisions']['base']['view']['create'] = array(
                 ],
                 [
                     'name' => 'follow',
-                    'label'=> 'LBL_FOLLOW',
+                    'label' => 'LBL_FOLLOW',
                     'type' => 'follow',
                     'readonly' => true,
                     'dismiss_label' => true,
@@ -98,4 +98,4 @@ $viewdefs['DocumentRevisions']['base']['view']['create'] = array(
             ],
         ],
     ],
-);
+];

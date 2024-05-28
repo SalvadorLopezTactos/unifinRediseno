@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Reports\Traits;
 
 use Report;
@@ -27,11 +28,12 @@ trait SummaryDetailsHelper
      */
     protected function createHeaderWithGroupBy(
         \Report $reporter,
-        int $index,
-        array $row,
-        ?array $summaryColumns,
-        bool $detaliedHeader = false
+        int     $index,
+        array   $row,
+        ?array  $summaryColumns,
+        bool    $detaliedHeader = false
     ) {
+
         $groupDef = $reporter->report_def['group_defs'];
         $attributeInfo = $groupDef[$index];
 
@@ -130,14 +132,15 @@ trait SummaryDetailsHelper
     /** */
     protected function createHeaderWithoutGroupBy(
         \Report $reporter,
-        array $headerRow,
-        array $row,
-        bool $detaliedHeader = false
+        array   $headerRow,
+        array   $row,
+        bool    $detaliedHeader = false
     ) {
-        $groupByIndexInHeaderRow = [];
-        $groupDef = (array) $reporter->report_def['group_defs'];
 
-        for ($i = 0; $i < count($groupDef); $i++) {
+        $groupByIndexInHeaderRow = [];
+        $groupDef = (array)$reporter->report_def['group_defs'];
+
+        for ($i = 0; $i < safeCount($groupDef); $i++) {
             $grKey = $this->getGroupByKey($groupDef[$i]);
 
             if (array_key_exists($grKey, $reporter->group_defs_Info)) {
@@ -172,11 +175,12 @@ trait SummaryDetailsHelper
         array $groupByIndexInHeaderRow,
         bool  $detaliedHeader = false
     ) {
+
         $columnValues = $detaliedHeader ? [] : '';
 
         $count = 0;
 
-        for ($i = 0; $i < count($headerRow); $i++) {
+        for ($i = 0; $i < safeCount($headerRow); $i++) {
             if (!in_array($i, $groupByIndexInHeaderRow)) {
                 $currentRow = $headerRow[$i];
                 $value = $row['cells'][$i];
@@ -224,11 +228,12 @@ trait SummaryDetailsHelper
      * @return array
      */
     protected function replaceHeaderRowWithSummaryColumns(
-        array $headerRow,
-        array $summaryColumns,
+        array   $headerRow,
+        array   $summaryColumns,
         \Report $reporter,
-        bool $detaliedHeader = false
+        bool    $detaliedHeader = false
     ): array {
+
         $count = 0;
         $removeHeaderRowLink = false;
 
@@ -236,7 +241,7 @@ trait SummaryDetailsHelper
             $removeHeaderRowLink = true;
         }
 
-        for ($i = 0; $i < count($summaryColumns); $i++) {
+        for ($i = 0; $i < safeCount($summaryColumns); $i++) {
             if (!isset($summaryColumns[$i]['is_group_by']) || ($summaryColumns[$i]['is_group_by']) != 'hidden') {
                 if (!$removeHeaderRowLink) {
                     $currentRow = $summaryColumns[$i];
@@ -394,14 +399,15 @@ trait SummaryDetailsHelper
      * @return void
      */
     protected function generateSummaryDetailRowData(
-        array &$allData,
-        int &$groupNr,
-        array $row,
-        int $depth,
-        int $maxDepth,
+        array   &$allData,
+        int     &$groupNr,
+        array   $row,
+        int     $depth,
+        int     $maxDepth,
         \Report $report,
-        array $headerRow
+        array   $headerRow
     ) {
+
         $value = $row['cells'][$depth];
         $uniqueIdentifier = $value;
         $isSimpleField = true;
@@ -506,7 +512,7 @@ trait SummaryDetailsHelper
         }
 
         if (array_key_exists('records', $data)) {
-            return count($data['records']);
+            return safeCount($data['records']);
         }
 
         $groupCount = 0;
@@ -553,7 +559,7 @@ trait SummaryDetailsHelper
                 if (!is_array($fieldData)) {
                     continue;
                 }
-                 //will translate the  grand total labels according to the header
+                //will translate the  grand total labels according to the header
                 if (array_key_exists('name', $fieldData) && $fieldData['name'] === 'count' &&
                     !array_key_exists('vname', $fieldData)) {
                     $data[$index]['name'] = 'name';

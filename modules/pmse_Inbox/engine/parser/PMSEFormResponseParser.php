@@ -96,11 +96,11 @@ class PMSEFormResponseParser extends PMSEAbstractDataParser implements PMSEDataP
      * @param type $args enter the global variable $db and id case
      * @return type
      */
-    public function parseCriteriaToken($criteriaToken, $args = array())
+    public function parseCriteriaToken($criteriaToken, $args = [])
     {
         $db = $args['db'];
-        $query = "select frm_action, pmse_bpm_form_action.act_id, act_uid from pmse_bpm_form_action " .
-            "left join pmse_bpmn_activity on (pmse_bpm_form_action.act_id = pmse_bpmn_activity.id) " .
+        $query = 'select frm_action, pmse_bpm_form_action.act_id, act_uid from pmse_bpm_form_action ' .
+            'left join pmse_bpmn_activity on (pmse_bpm_form_action.act_id = pmse_bpmn_activity.id) ' .
             "where cas_id = {$args['cas_id']} and frm_last = 1 ";
         $result = $db->Query($query);
         $row = $db->fetchByAssoc($result);
@@ -110,8 +110,8 @@ class PMSEFormResponseParser extends PMSEAbstractDataParser implements PMSEDataP
         while (is_array($row)) {
             $uidStr = '{::_form_::' . $row['act_uid'] . '::}';
             $idStr = '{::_form_::' . $row['act_id'] . '::}';
-            $existsUID = stristr($uidStr, $criteriaToken->expField);
-            $existsID = stristr($idStr, $criteriaToken->expField);
+            $existsUID = stristr($uidStr, (string) $criteriaToken->expField);
+            $existsID = stristr($idStr, (string) $criteriaToken->expField);
             if ($existsUID || $existsID) {
                 $tokenValue = $row['frm_action'];
                 $tokenUid = $existsUID ? $row['act_uid'] : $row['act_id'];
@@ -121,10 +121,10 @@ class PMSEFormResponseParser extends PMSEAbstractDataParser implements PMSEDataP
             }
         }
         $tokenDelimiter = '::';
-        $newTokenArray = array('{', '_form_', $tokenUid, '}');
+        $newTokenArray = ['{', '_form_', $tokenUid, '}'];
         $assembledTokenString = implode($tokenDelimiter, $newTokenArray);
         $criteriaToken->expToken = $assembledTokenString;
-        $criteriaToken->currentValue = array($tokenValue);
+        $criteriaToken->currentValue = [$tokenValue];
         return $criteriaToken;
     }
 }

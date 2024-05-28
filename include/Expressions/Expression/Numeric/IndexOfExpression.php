@@ -63,7 +63,7 @@ EOQ;
      */
     public static function getOperationName()
     {
-        return "indexOf";
+        return 'indexOf';
     }
 
     /**
@@ -71,7 +71,7 @@ EOQ;
      */
     public static function getParameterTypes()
     {
-        return array("generic", "enum");
+        return ['generic', 'enum'];
     }
 
     /**

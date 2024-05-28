@@ -1,0 +1,6 @@
+<?php
+// created: 2024-05-21 12:56:21
+$viewdefs['Users']['base']['menu']['quickcreate'] = array (
+  'visible' => true,
+  'order' => 0,
+);

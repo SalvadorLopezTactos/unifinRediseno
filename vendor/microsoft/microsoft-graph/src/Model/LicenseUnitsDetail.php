@@ -25,7 +25,7 @@ class LicenseUnitsDetail extends Entity
 {
     /**
     * Gets the enabled
-    * The number of units that are enabled.
+    * The number of units that are enabled for the active subscription of the service SKU.
     *
     * @return int|null The enabled
     */
@@ -40,7 +40,7 @@ class LicenseUnitsDetail extends Entity
 
     /**
     * Sets the enabled
-    * The number of units that are enabled.
+    * The number of units that are enabled for the active subscription of the service SKU.
     *
     * @param int $val The value of the enabled
     *
@@ -52,8 +52,34 @@ class LicenseUnitsDetail extends Entity
         return $this;
     }
     /**
+    * Gets the lockedOut
+    *
+    * @return int|null The lockedOut
+    */
+    public function getLockedOut()
+    {
+        if (array_key_exists("lockedOut", $this->_propDict)) {
+            return $this->_propDict["lockedOut"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the lockedOut
+    *
+    * @param int $val The value of the lockedOut
+    *
+    * @return LicenseUnitsDetail
+    */
+    public function setLockedOut($val)
+    {
+        $this->_propDict["lockedOut"] = $val;
+        return $this;
+    }
+    /**
     * Gets the suspended
-    * The number of units that are suspended.
+    * The number of units that are suspended because the subscription of the service SKU has been cancelled. The units cannot be assigned but can still be reactivated before they are deleted.
     *
     * @return int|null The suspended
     */
@@ -68,7 +94,7 @@ class LicenseUnitsDetail extends Entity
 
     /**
     * Sets the suspended
-    * The number of units that are suspended.
+    * The number of units that are suspended because the subscription of the service SKU has been cancelled. The units cannot be assigned but can still be reactivated before they are deleted.
     *
     * @param int $val The value of the suspended
     *
@@ -81,7 +107,7 @@ class LicenseUnitsDetail extends Entity
     }
     /**
     * Gets the warning
-    * The number of units that are in warning status.
+    * The number of units that are in warning status. When the subscription of the service SKU has expired, the customer has a grace period to renew their subscription before it is cancelled (moved to a suspended state).
     *
     * @return int|null The warning
     */
@@ -96,7 +122,7 @@ class LicenseUnitsDetail extends Entity
 
     /**
     * Sets the warning
-    * The number of units that are in warning status.
+    * The number of units that are in warning status. When the subscription of the service SKU has expired, the customer has a grace period to renew their subscription before it is cancelled (moved to a suspended state).
     *
     * @param int $val The value of the warning
     *

@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="record-icon" rel="tooltip" title={{moduleIconToolTip this.activity.attributes.icon_module}}>
-    <i class="{{buildIcon this.activity.attributes.icon_class}}"></i>
+<div class="record-icon" rel="tooltip" title={{moduleIconToolTip module}}>
+    {{moduleLabel module 'lg'}}
 </div>
 {{#each meta.panels}}
     <div class="{{css_class}}">
@@ -21,7 +21,7 @@
     </div>
 {{/each}}
 {{#if state}}
-    <div class="record-details" rel="tooltip" data-placement="bottom"
+    <div class="record-details" rel="tooltip" data-bs-placement="bottom"
          {{#eq state 'Archived'}} title="{{str 'LBL_LIST_DATE_SENT' module}}" {{/eq}}
          {{#eq state 'Draft'}} title="{{str 'LBL_LIST_DATE_ENTERED' module}}" {{/eq}}
     >

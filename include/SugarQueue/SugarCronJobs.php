@@ -9,7 +9,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
+
+
 /**
  * CRON driver for job queue
  * @api
@@ -76,7 +79,7 @@ class SugarCronJobs
     public function __construct()
     {
         $this->queue = new SugarJobQueue();
-        $this->lockfile = sugar_cached("modules/Schedulers/lastrun");
+        $this->lockfile = sugar_cached('modules/Schedulers/lastrun');
         if (!empty($GLOBALS['sugar_config']['cron']['max_cron_jobs'])) {
             $this->max_jobs = $GLOBALS['sugar_config']['cron']['max_cron_jobs'];
         }
@@ -96,8 +99,8 @@ class SugarCronJobs
      */
     protected function markLastRun()
     {
-        if(!file_put_contents($this->lockfile, time())) {
-            $GLOBALS['log']->fatal('Scheduler cannot write PID file.  Please check permissions on '.$this->lockfile);
+        if (!file_put_contents($this->lockfile, time())) {
+            $GLOBALS['log']->fatal('Scheduler cannot write PID file.  Please check permissions on ' . $this->lockfile);
         }
     }
 
@@ -107,18 +110,18 @@ class SugarCronJobs
      */
     public function throttle()
     {
-        if($this->min_interval == 0) {
+        if ($this->min_interval == 0) {
             return true;
         }
         create_cache_directory($this->lockfile);
-        if(!file_exists($this->lockfile)) {
+        if (!file_exists($this->lockfile)) {
             $this->markLastRun();
             return true;
         } else {
             $ts = file_get_contents($this->lockfile);
             $this->markLastRun();
             $now = time();
-            if($now - $ts < $this->min_interval) {
+            if ($now - $ts < $this->min_interval) {
                 // run too frequently
                 return false;
             }
@@ -134,9 +137,9 @@ class SugarCronJobs
     protected function jobFailed($job = null, $errMsg = '')
     {
         $this->runOk = false;
-        if(!empty($job)) {
+        if (!empty($job)) {
             $GLOBALS['log']->fatal("Job {$job->id} ({$job->name}) failed in CRON run, " . $errMsg);
-            if($this->verbose) {
+            if ($this->verbose) {
                 printf(translate('ERR_JOB_FAILED_VERBOSE', 'SchedulersJobs'), $job->id, $job->name);
             }
         }
@@ -160,7 +163,7 @@ class SugarCronJobs
      */
     public function getMyId()
     {
-        return 'CRON'.$GLOBALS['sugar_config']['unique_key'].':'.getmypid();
+        return 'CRON' . $GLOBALS['sugar_config']['unique_key'] . ':' . getmypid();
     }
 
     /**
@@ -195,7 +198,7 @@ class SugarCronJobs
         Registry\Registry::getInstance()->drop('triggered_starts');
         $this->setTimeLimit($this->max_runtime);
         try {
-            set_error_handler([$this, "errorHandler"], E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
+            set_error_handler([$this, 'errorHandler'], E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
             $res = $this->job->runJob();
             restore_error_handler();
             $this->clearTimeLimit();
@@ -217,10 +220,10 @@ class SugarCronJobs
 
     /**
      * catch error
-     * @param int    $errno
+     * @param int $errno
      * @param string $errstr
      * @param string $errfile
-     * @param int    $errline
+     * @param int $errline
      * @throws Exception
      */
     public function errorHandler($errno, $errstr, $errfile, $errline)
@@ -246,32 +249,32 @@ class SugarCronJobs
     public function runCycle()
     {
         // throttle
-        if(!$this->throttle()) {
-            $GLOBALS['log']->fatal("Job runs too frequently, throttled to protect the system.");
+        if (!$this->throttle()) {
+            $GLOBALS['log']->fatal('Job runs too frequently, throttled to protect the system.');
             return;
         }
         // clean old stale jobs
-        if(!$this->queue->cleanup()) {
+        if (!$this->queue->cleanup()) {
             $this->jobFailed();
         }
         // run schedulers
-        if(!$this->disable_schedulers) {
+        if (!$this->disable_schedulers) {
             $this->queue->runSchedulers();
         }
         // run jobs
-        $cutoff = time()+$this->max_runtime;
+        $cutoff = time() + $this->max_runtime;
         if ($this->enforceHardLimit) {
-            set_time_limit(2*$this->max_runtime); // allow some space for normal exit
+            set_time_limit(2 * $this->max_runtime); // allow some space for normal exit
         }
-        register_shutdown_function(array($this, "unexpectedExit"));
+        register_shutdown_function([$this, 'unexpectedExit']);
         $myid = $this->getMyId();
-        for($count=0;$count<$this->max_jobs;$count++) {
+        for ($count = 0; $count < $this->max_jobs; $count++) {
             $this->job = $this->queue->nextJob($myid);
-            if(empty($this->job)) {
+            if (empty($this->job)) {
                 return;
             }
             $this->executeJob($this->job);
-            if(time() >= $cutoff) {
+            if (time() >= $cutoff) {
                 break;
             }
         }

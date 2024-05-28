@@ -10,13 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = '<module_name>';
-$viewdefs[$module_name]['mobile']['layout']['edit'] = array(
+$viewdefs[$module_name]['mobile']['layout']['edit'] = [
     'type' => 'edit',
-    'components' =>
-    array(
+    'components' => [
         0 =>
-        array(
-            'view' => 'edit',
-        )
-    ),
-);
+            [
+                'view' => 'edit',
+            ],
+    ],
+];

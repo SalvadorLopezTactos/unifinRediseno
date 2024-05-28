@@ -10,6 +10,7 @@
  * SugarCRM Changelog
  * 04/26/2021 Removed type validation in setType
  */
+
 namespace Laminas\Mail\Header;
 
 use Laminas\Mail\Headers;
@@ -44,7 +45,7 @@ class ContentType implements UnstructuredInterface
             throw new Exception\InvalidArgumentException('Invalid header line for Content-Type string');
         }
 
-        $value  = str_replace(Headers::FOLDING, ' ', $value);
+        $value = str_replace(Headers::FOLDING, ' ', $value);
         $parts = explode(';', $value, 2);
 
         $header = new static();
@@ -52,7 +53,7 @@ class ContentType implements UnstructuredInterface
 
         if (isset($parts[1])) {
             $values = ListParser::parse(trim($parts[1]), [';', '=']);
-            $length = count($values);
+            $length = safeCount($values);
 
             for ($i = 0; $i < $length; $i += 2) {
                 $value = $values[$i + 1];
@@ -78,7 +79,7 @@ class ContentType implements UnstructuredInterface
 
         $values = [$prepared];
         foreach ($this->parameters as $attribute => $value) {
-            if (HeaderInterface::FORMAT_ENCODED === $format && ! Mime::isPrintable($value)) {
+            if (HeaderInterface::FORMAT_ENCODED === $format && !Mime::isPrintable($value)) {
                 $this->encoding = 'UTF-8';
                 $value = HeaderWrap::wrap($value, $this);
                 $this->encoding = 'ASCII';
@@ -109,9 +110,9 @@ class ContentType implements UnstructuredInterface
     /**
      * Set the content type
      *
-     * @param  string $type
-     * @throws Exception\InvalidArgumentException
+     * @param string $type
      * @return ContentType
+     * @throws Exception\InvalidArgumentException
      */
     public function setType($type)
     {
@@ -132,21 +133,21 @@ class ContentType implements UnstructuredInterface
     /**
      * Add a parameter pair
      *
-     * @param  string $name
-     * @param  string $value
+     * @param string $name
+     * @param string $value
      * @return ContentType
      * @throws Exception\InvalidArgumentException for parameter names that do not follow RFC 2822
      * @throws Exception\InvalidArgumentException for parameter values that do not follow RFC 2822
      */
     public function addParameter($name, $value)
     {
-        $name  = trim(strtolower($name));
-        $value = (string) $value;
+        $name = trim(strtolower($name));
+        $value = (string)$value;
 
-        if (! HeaderValue::isValid($name)) {
+        if (!HeaderValue::isValid($name)) {
             throw new Exception\InvalidArgumentException('Invalid content-type parameter name detected');
         }
-        if (! HeaderWrap::canBeEncoded($value)) {
+        if (!HeaderWrap::canBeEncoded($value)) {
             throw new Exception\InvalidArgumentException(
                 'Parameter value must be composed of printable US-ASCII or UTF-8 characters.'
             );
@@ -169,7 +170,7 @@ class ContentType implements UnstructuredInterface
     /**
      * Get a parameter by name
      *
-     * @param  string $name
+     * @param string $name
      * @return null|string
      */
     public function getParameter($name)
@@ -184,7 +185,7 @@ class ContentType implements UnstructuredInterface
     /**
      * Remove a named parameter
      *
-     * @param  string $name
+     * @param string $name
      * @return bool
      */
     public function removeParameter($name)

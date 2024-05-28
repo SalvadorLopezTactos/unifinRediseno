@@ -19,7 +19,6 @@ use Sugarcrm\Sugarcrm\ProcessManager\Registry;
  */
 class PMSEElementValidator extends PMSEBaseValidator implements PMSEValidate
 {
-
     /**
      * @var type
      */
@@ -256,7 +255,7 @@ class PMSEElementValidator extends PMSEBaseValidator implements PMSEValidate
     {
         $q = $this->getSugarQueryObject();
         $q->select()->fieldRaw('NULL');
-        $q->from($this->getBeanFlow(), array('add_deleted' => true));
+        $q->from($this->getBeanFlow(), ['add_deleted' => true]);
         $q->where()
             ->equals('cas_sugar_object_id', $bean->id)
             ->equals('cas_sugar_module', $bean->module_name)
@@ -292,7 +291,7 @@ class PMSEElementValidator extends PMSEBaseValidator implements PMSEValidate
     {
         $q = $this->getSugarQueryObject();
         $q->select('cas_flow_status');
-        $q->from($this->getBeanFlow(), array('add_deleted' => true));
+        $q->from($this->getBeanFlow(), ['add_deleted' => true]);
 
         if (empty($flowData['id'])) {
             $q->where()
@@ -412,5 +411,4 @@ class PMSEElementValidator extends PMSEBaseValidator implements PMSEValidate
 
         return $request;
     }
-
 }

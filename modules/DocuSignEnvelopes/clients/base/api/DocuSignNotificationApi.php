@@ -55,7 +55,7 @@ class DocuSignNotificationApi extends SugarApi
 
         $envelopeId = $envelopeStatusObj->EnvelopeID;
         if (!is_string($envelopeId)) {
-            $envelopeId = (string) $envelopeId[0];
+            $envelopeId = (string)$envelopeId[0];
         }
         $newStatus = strtolower($envelopeStatusObj->Status);
 
@@ -107,7 +107,7 @@ class DocuSignNotificationApi extends SugarApi
         $notificationBean->description = "DocuSign Envelope: {$envelopeBean->name} " .
             translate('LBL_NOTIFICATION_ENVELOPE_IS_NOW', $envelopeBean->module_dir) .
             " <a href='#DocuSignEnvelopes/{$envelopeBean->id}'>" .
-            translate('docusign_envelope_status_list', '', $envelopeBean->status) . "</a>";
+            translate('docusign_envelope_status_list', '', $envelopeBean->status) . '</a>';
 
         $notificationBean->assigned_user_id = $envelopeBean->assigned_user_id;
         $notificationBean->parent_id = $envelopeBean->id;

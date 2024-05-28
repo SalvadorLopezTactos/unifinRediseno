@@ -15,55 +15,53 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
- $module_name = '<module_name>';
+$module_name = '<module_name>';
 
- $viewdefs[$module_name]['QuickCreate'] = array(
-    'templateMeta' => array('form' => array('enctype'=>'multipart/form-data',
-                                            'hidden'=>array()),
+$viewdefs[$module_name]['QuickCreate'] = [
+    'templateMeta' => ['form' => ['enctype' => 'multipart/form-data',
+        'hidden' => []],
 
-                            'maxColumns' => '2',
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'),
-                                            array('label' => '10', 'field' => '30')
-                                            ),
-'javascript' =>
-	'{sugar_getscript file="include/javascript/popup_parent_helper.js"}
+        'maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+        'javascript' =>
+            '{sugar_getscript file="include/javascript/popup_parent_helper.js"}
 	{sugar_getscript file="modules/Documents/documents.js"}',
-),
- 'panels' =>array (
-  'default' =>
-  array (
-	array (
-      'document_name',
-      'assigned_user_name',
-	),
+    ],
+    'panels' => [
+        'default' => [
+            [
+                'document_name',
+                'assigned_user_name',
+            ],
 
-    array (
-      array('name'=>'uploadfile',
-            'customCode' => '{if $fields.id.value!=""}
+            [
+                ['name' => 'uploadfile',
+                    'customCode' => '{if $fields.id.value!=""}
             				{assign var="type" value="hidden"}
             		 		{else}
             		 		{assign var="type" value="file"}
             		  		{/if}
             		  		<input name="uploadfile" type = {$type} size="30" maxlength="" onchange="setvalue(this);" value="{$fields.filename.value}">{$fields.filename.value}',
-            'displayParams'=>array('required'=>true),
-            ),
-      array('name'=>'team_name','displayParams'=>array('required'=>true)),
-	),
+                    'displayParams' => ['required' => true],
+                ],
+                ['name' => 'team_name', 'displayParams' => ['required' => true]],
+            ],
 
-    array (
-      'active_date',
-    ),
-    
-    array (
-       'category_id',
-       'subcategory_id',
-    ),
+            [
+                'active_date',
+            ],
 
-    array (
-      array('name'=>'description', 'displayParams'=>array('rows'=>10, 'cols'=>120)),
-    ),
-  ),
-)
-);
+            [
+                'category_id',
+                'subcategory_id',
+            ],
 
+            [
+                ['name' => 'description', 'displayParams' => ['rows' => 10, 'cols' => 120]],
+            ],
+        ],
+    ],
+];

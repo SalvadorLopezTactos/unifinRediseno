@@ -9,47 +9,47 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['KBContents']['portal']['view']['record'] = array(
-    'buttons' => array(
-        array(
+$viewdefs['KBContents']['portal']['view']['record'] = [
+    'buttons' => [
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-    'panels' => array(
-        array(
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_header',
             'header' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'picture',
                     'type' => 'avatar',
                     'size' => 'large',
                     'dismiss_label' => true,
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'name',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'useful',
                         'notuseful',
                         'usefulness_user_vote',
-                    ),
-                ),
-            ),
-        ),
-        array(
+                    ],
+                ],
+            ],
+        ],
+        [
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'placeholders' => true,
-            'fields' => array(
-                'kbdocument_body' => array(
+            'fields' => [
+                'kbdocument_body' => [
                     'name' => 'kbdocument_body',
                     'type' => 'html',
                     'span' => 12,
-                ),
-                'attachment_list' => array(
+                ],
+                'attachment_list' => [
                     'name' => 'attachment_list',
                     'label' => 'LBL_ATTACHMENTS',
                     'type' => 'multi-attachments',
@@ -73,37 +73,37 @@ $viewdefs['KBContents']['portal']['view']['record'] = array(
                         'file_ext',
                         'upload_id',
                     ],
-                ),
-                'category_name' => array(
+                ],
+                'category_name' => [
                     'name' => 'category_name',
                     'label' => 'LBL_CATEGORY_NAME',
-                ),
-                'language' => array(
+                ],
+                'language' => [
                     'name' => 'language',
                     'type' => 'enum-config',
                     'key' => 'languages',
-                ),
-                'date_entered' => array(
+                ],
+                'date_entered' => [
                     'name' => 'date_entered',
-                ),
-                'active_date' => array(
+                ],
+                'active_date' => [
                     'name' => 'active_date',
-                ),
-            ),
-        ),
-    ),
-    'moreLessInlineFields' => array(
-        'usefulness' => array(
+                ],
+            ],
+        ],
+    ],
+    'moreLessInlineFields' => [
+        'usefulness' => [
             'name' => 'usefulness',
             'type' => 'usefulness',
             'span' => 6,
             'cell_css_class' => 'pull-right usefulness',
             'readonly' => true,
-            'fields' => array(
+            'fields' => [
                 'usefulness_user_vote',
                 'useful',
                 'notuseful',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Маркетинг',
-    'Knowledge Base' => 'База от знания',
-    'Sales' => 'Продажби',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Маркетингови материали',
-    'Product Brochures' => 'Брошури',
-    'FAQ' => 'Често задавани въпроси',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Маркетинг',
+        'Knowledge Base' => 'База от знания',
+        'Sales' => 'Продажби',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Активен',
-    'Draft' => 'Работен вариант',
-    'FAQ' => 'Често задавани въпроси',
-    'Expired' => 'С изтекъл срок на валидност',
-    'Under Review' => 'В процес на обработка',
-    'Pending' => 'Висяща',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Маркетингови материали',
+        'Product Brochures' => 'Продуктови брошури',
+        'FAQ' => 'Често задавани въпроси',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Активно',
+        'Draft' => 'Работен вариант',
+        'FAQ' => 'Често задавани въпроси',
+        'Expired' => 'С изтекла валидност',
+        'Under Review' => 'В процес на обработка',
+        'Pending' => 'Изчакващо',
+    ],
+];

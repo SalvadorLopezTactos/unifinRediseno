@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Home']['base']['view']['module-menu'] = array(
-    'settings' => array(
+$viewdefs['Home']['base']['view']['module-menu'] = [
+    'settings' => [
         'favorites' => 0,
         'recently_viewed' => 10,
         'recently_viewed_toggle' => 3,
-    ),
-);
+    ],
+];

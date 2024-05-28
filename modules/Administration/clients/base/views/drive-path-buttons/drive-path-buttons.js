@@ -33,6 +33,11 @@
         this.driveTypeLabel = app.lang.getAppListStrings('drive_types')[this.driveType];
     },
 
+    _render: function() {
+        this._super('_render');
+        this._handleSharedWithMeButton();
+    },
+
     /**
      * Save the current path
      *
@@ -42,7 +47,7 @@
         let folders = this.layout.getComponent('drive-path-select').currentPathFolders;
         const folderId = this.layout.getComponent('drive-path-select').currentFolderId;
         const driveId = this.layout.getComponent('drive-path-select').driveId;
-        const folderName = this.layout.getComponent('drive-path-select').currentFolderName;
+        const siteId = this.layout.getComponent('drive-path-select').siteId;
 
         const url = app.api.buildURL('CloudDrive', 'path');
 
@@ -57,7 +62,9 @@
             drivePath: JSON.stringify(folders),
             folderId: folderId,
             driveId: driveId,
+            siteId: siteId,
             isShared: this.context.get('sharedWithMe'),
+            pathId: this.context.get('pathId'),
         } , {
             success: function() {
                 app.alert.dismiss('path-processing');
@@ -87,6 +94,9 @@
      * @param {Event} evt
      */
     toggleShared: function(evt) {
+        if (this.driveType === 'sharepoint') {
+            return;
+        }
         this.sharedWithMe = this.$('.sharedWithMe').prop('checked');
         this.context.set('sharedWithMe', this.sharedWithMe);
         let pathView = this.layout.getComponent('drive-path-select');
@@ -103,5 +113,16 @@
         checkbox.prop('checked', !this.sharedWithMe);
 
         this.toggleShared();
-    }
+    },
+
+    /**
+     * Disable the Shared with me button for Sharepoint
+     *
+     */
+    _handleSharedWithMeButton: function() {
+        if (this.driveType === 'sharepoint') {
+            this.$('[name="shared_button"]').attr('disabled', true);
+            this.$('[name="shared_button"]').addClass('disabled');
+        }
+    },
 });

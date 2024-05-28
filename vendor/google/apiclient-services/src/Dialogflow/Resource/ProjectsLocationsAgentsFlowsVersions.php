@@ -30,7 +30,7 @@ use Google\Service\Dialogflow\GoogleProtobufEmpty;
  * Typical usage is:
  *  <code>
  *   $dialogflowService = new Google\Service\Dialogflow(...);
- *   $versions = $dialogflowService->versions;
+ *   $versions = $dialogflowService->projects_locations_agents_flows_versions;
  *  </code>
  */
 class ProjectsLocationsAgentsFlowsVersions extends \Google\Service\Resource
@@ -121,9 +121,10 @@ class ProjectsLocationsAgentsFlowsVersions extends \Google\Service\Resource
   }
   /**
    * Loads resources in the specified version to the draft flow. This method is a
-   * [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how
-   * /long-running-operation). The returned `Operation` type has the following
-   * method-specific fields: - `metadata`: An empty [Struct
+   * [long-running
+   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-
+   * operation). The returned `Operation` type has the following method-specific
+   * fields: - `metadata`: An empty [Struct
    * message](https://developers.google.com/protocol-
    * buffers/docs/reference/google.protobuf#struct) - `response`: An [Empty
    * message](https://developers.google.com/protocol-

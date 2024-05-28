@@ -19,7 +19,7 @@ class SugarWidgetFieldDiscountAmount extends SugarWidgetFieldCurrency
         $bean = BeanFactory::newBean('Products');
         $discountSelectField = $bean->getFieldDefinition('discount_select');
         if (!empty($discountSelectField)) {
-            $table = $layout_def["table_alias"];
+            $table = $layout_def['table_alias'];
             $query = "$table.discount_select, " . $query;
         }
 
@@ -27,10 +27,10 @@ class SugarWidgetFieldDiscountAmount extends SugarWidgetFieldCurrency
     }
 
     /**
-    *   Returns the discount amount in the appropriate format.
-    *   If DISCOUNT_SELECT is 0, then it should be formatted as currency.
-    *   If DISCOUNT_SELECT is 1, then it should be formatted as a percent value.
-    */
+     *   Returns the discount amount in the appropriate format.
+     *   If DISCOUNT_SELECT is 0, then it should be formatted as currency.
+     *   If DISCOUNT_SELECT is 1, then it should be formatted as a percent value.
+     */
     public function displayListPlain($layout_def)
     {
 
@@ -45,9 +45,9 @@ class SugarWidgetFieldDiscountAmount extends SugarWidgetFieldCurrency
             if (isset($layout_def['fields'][$key])) {
                 // If it is 0, drop the trailing decimal places and leave off the %.
                 if ((float)$layout_def['fields'][$key] == 0) {
-                    $output = number_format($layout_def['fields'][$key], 0, ".", ",");
+                    $output = number_format($layout_def['fields'][$key], 0, '.', ',');
                 } else {
-                    $output = number_format($layout_def['fields'][$key], 2, ".", ",") . "%";
+                    $output = number_format($layout_def['fields'][$key], 2, '.', ',') . '%';
                 }
                 return $output;
             }

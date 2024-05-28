@@ -9,14 +9,14 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Emails']['base']['view']['panel-top'] = array(
-    'buttons' => array(
-        array(
+$viewdefs['Emails']['base']['view']['panel-top'] = [
+    'buttons' => [
+        [
             'type' => 'actiondropdown',
             'name' => 'panel_dropdown',
             'css_class' => 'pull-right',
-            'buttons' => array(
-                array(
+            'buttons' => [
+                [
                     'type' => 'emailaction-paneltop',
                     'icon' => 'sicon-plus',
                     'name' => 'email_compose_button',
@@ -25,14 +25,14 @@ $viewdefs['Emails']['base']['view']['panel-top'] = array(
                     'set_recipient_to_parent' => true,
                     'set_related_to_parent' => true,
                     'tooltip' => 'LBL_CREATE_BUTTON_LABEL',
-                ),
-                array(
+                ],
+                [
                     'type' => 'link-action',
                     'name' => 'select_button',
                     'label' => 'LBL_ASSOC_RELATED_RECORD',
                     'css_class' => 'disabled',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

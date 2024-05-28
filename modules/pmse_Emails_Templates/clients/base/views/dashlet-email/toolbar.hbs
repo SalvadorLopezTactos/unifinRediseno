@@ -14,8 +14,8 @@
     <div class="row-fluid">
         {{#if settings.attributes.visibility}}
             <div class="btn-group dashlet-group pull-right" data-toggle="buttons-radio">
-                <button class="btn{{#eq settings.attributes.visibility "user"}} active{{/eq}}" value="user" data-action="visibility-switcher" rel="tooltip" data-container="body" data-placement="bottom" title="{{str "LBL_PMSE_MY_EMAIL_TEMPLATES" this.module}}" aria-pressed="{{#eq settings.attributes.visibility "user"}}true{{else}}false{{/eq}}" track="click:viewMyUserDashlet">{{str "LBL_PMSE_MY_EMAIL_TEMPLATES" this.module}}</button>
-                <button class="btn{{#eq settings.attributes.visibility "group"}} active{{/eq}}" value="group" data-action="visibility-switcher" rel="tooltip" data-container="body" data-placement="bottom" title="{{str "LBL_PMSE_ALL_EMAIL_TEMPLATES" this.module}}" aria-pressed="{{#eq settings.attributes.visibility "group"}}true{{else}}false{{/eq}}" track="click:viewMyTeamsDashlet">{{str "LBL_PMSE_ALL_EMAIL_TEMPLATES" this.module}}</button>
+                <button class="btn{{#eq settings.attributes.visibility "user"}} active{{/eq}}" value="user" data-action="visibility-switcher" rel="tooltip" data-container="body" data-bs-placement="bottom" title="{{str "LBL_PMSE_MY_EMAIL_TEMPLATES" this.module}}" aria-pressed="{{#eq settings.attributes.visibility "user"}}true{{else}}false{{/eq}}" track="click:viewMyUserDashlet">{{str "LBL_PMSE_MY_EMAIL_TEMPLATES" this.module}}</button>
+                <button class="btn{{#eq settings.attributes.visibility "group"}} active{{/eq}}" value="group" data-action="visibility-switcher" rel="tooltip" data-container="body" data-bs-placement="bottom" title="{{str "LBL_PMSE_ALL_EMAIL_TEMPLATES" this.module}}" aria-pressed="{{#eq settings.attributes.visibility "group"}}true{{else}}false{{/eq}}" track="click:viewMyTeamsDashlet">{{str "LBL_PMSE_ALL_EMAIL_TEMPLATES" this.module}}</button>
             </div>
         {{/if}}
     </div>

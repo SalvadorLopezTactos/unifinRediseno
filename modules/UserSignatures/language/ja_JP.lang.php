@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'この署名には名前が必要です。',
     'LBL_DEFAULT_SIGNATURE' => 'デフォルト',
     'LBL_MODULE_NAME' => 'メール署名',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => '署名の使用:',
     'LBL_SIGNATURE_PREPEND' => '署名を返信引用文の前に挿入?',
     'LBL_SIGNATURES' => '署名',
-);
+];

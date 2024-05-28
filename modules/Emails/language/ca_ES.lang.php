@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'RV:',
     'LBL_RE' => 'Contestar:',
     'LBL_BUTTON_CREATE' => 'Crea',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Esculli des de Email de Compte',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Esculli firma',
     'LBL_SIGNATURE' => 'Firma',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Firma per defecte.",
-    "LBL_SHOW_MORE_SIGNATURES" => "Més firmes",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Firma per defecte.',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Més firmes',
     'LBL_SUBJECT' => 'Assumpte:',
     'LBL_TEMPLATE' => 'Plantilla',
     'LBL_TEXT_BODY' => 'Cos de Text',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Hora Tramesa',
     'LBL_LIST_TO_ADDR' => 'Per a',
     'LBL_LIST_TYPE' => 'Tipus',
-    "LBL_SELECTED_RECIPIENTS" => "Seleccionar destinataris",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Més destinataris",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Llibreta de Direccions",
+    'LBL_SELECTED_RECIPIENTS' => 'Seleccionar destinataris',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Més destinataris',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Llibreta de Direccions',
     'NTC_REMOVE_INVITEE' => 'Esteu segur que voleu treure aquest destinatari del missatge de correu electrònic?',
     'WARNING_SETTINGS_NOT_CONF' => 'La seva configuració de correu electrònic no està configurada correctament per enviar correu electrònic. S&#39;ha de configurar ' .
         'un servidor SMTP a <a href="#bwc/index.php?module=EmailMan&action=config"> Configuració de correu electrònic</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Els fitxers adjunts podrien fallar: s&#39;ha detectat un valor incorrecte o inservible per a "upload_tmp_dir" ' .
         'Corregiu-ho al vostre fitxer php.ini.',
     'LBL_MESSAGE_UID' => 'Missatge UID',
-    'LBL_OPEN_DRAFT_ALERT' => 'Correu electrònic és un esborrany. Feu clic a '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'Correu electrònic és un esborrany. Feu clic a ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  per editar-ho.',
     'LBL_EMAIL_BODY' => 'Missatge d&#39;e-mail',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als correus electrònics',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Quadre de comandament del registre de correus electrònics',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia del correu electrònic',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'no s&#39;han especificat destinataris',
@@ -473,4 +474,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'Enviar correu',
     'LBL_MAILBOX' => 'Compte d&#39;entrada',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Configureu un compte de correu electrònic sortint mitjançant la <a href="#OutboundEmail">Configuració de correu electrònic</a> per enviar correus electrònics.',
-);
+    'LBL_TOO_SHORT' => 'Escriviu com a mínim {0} caràcters...',
+];

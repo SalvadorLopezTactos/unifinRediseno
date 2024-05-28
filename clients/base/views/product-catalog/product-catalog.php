@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['product-catalog'] = array(
+$viewdefs['base']['view']['product-catalog'] = [
     'label' => 'LBL_PRODUCT_CATALOG_NAME',
     'description' => 'LBL_PRODUCT_CATALOG_DESC',
-);
+];

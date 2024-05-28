@@ -18,7 +18,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\Table;
 
-
 /**
  *
  * SearchEngine status
@@ -35,8 +34,7 @@ class SearchStatusCommand extends Command implements InstanceModeInterface
     {
         $this
             ->setName('search:status')
-            ->setDescription('Show search engine availability and enabled modules')
-        ;
+            ->setDescription('Show search engine availability and enabled modules');
     }
 
     /**
@@ -50,26 +48,25 @@ class SearchStatusCommand extends Command implements InstanceModeInterface
     {
         $result = $this
             ->initApi($this->getApi())
-            ->callApi('searchStatus')
-        ;
+            ->callApi('searchStatus');
 
         $available = $result['available'];
 
         $table = new Table($output);
-        $table->setHeaders(array('Enabled modules'));
+        $table->setHeaders(['Enabled modules']);
 
         if (isset($result['enabled_modules'])) {
             foreach ($result['enabled_modules'] as $module) {
-                $table->addRow(array($module));
+                $table->addRow([$module]);
             }
         }
 
         $table->render();
 
         if ($available) {
-            $output->writeln("SearchEngine AVAILABLE");
+            $output->writeln('SearchEngine AVAILABLE');
         } else {
-            $output->writeln("SearchEngine *NOT* available");
+            $output->writeln('SearchEngine *NOT* available');
         }
 
         return $available ? 0 : 1;

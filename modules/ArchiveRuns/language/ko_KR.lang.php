@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_ARCHIVER_ID_FIELD' => '아카이버 ID',
     'LBL_ARCHIVER_NAME_FIELD' => '아카이버 이름',
     'LBL_DATE_OF_ARCHIVE_FIELD' => '처리 날짜',
@@ -28,4 +27,4 @@ $mod_strings = array (
     'LBL_FILTER_DEF_FIELD' => '필터 정의',
     'LBL_SOURCE_FIELD' => '소스',
     'LBL_DOWNLOAD_ID_LIST_BUTTON' => '처리된 ID 다운로드',
-);
+];

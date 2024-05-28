@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Pianificazioni di report',
     'LBL_MODULE_NAME_SINGULAR' => 'Pianificazione report',
     'LBL_REPORT_NAME' => 'Report',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Tipo File',
     'LBL_EMBED_REPORT' => 'Incorpora report in e-mail',
     'LBL_EMBED_REPORT_INFO' => 'Nota: se il report supera le 200 righe, verrà allegato il report come file CSV.',
-);
+];

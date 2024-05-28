@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Pardavimų sąrašo ataskaitų sritis',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Pardavimų duomenų ataskaitų sritis',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Quotes',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Galimybės naudojant „Dynamic“ paskyrą',
+    'LBL_TOP_10_OPP' => '10 geriausių atvirų galimybių',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => '„Dashlet“: mano aktyvios galimybės',
+    'LBL_MY_ACTIVE_OPP' => 'Mano aktyvios galimybės',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Pipeline Total is ',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Opportunity Role',
+    'LBL_OPPORTUNITY_ROLE' => 'Opportunity Role',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Užrašai',
     'LBL_TAB_OPPORTUNITY' => '{{module}} apžvalga',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'By clicking Confirm, you will be erasing ALL Forecasts data and changing your Opportunities View. If this is not what you intended, click cancel to return to previous settings.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'Spustelėję Patvirtinti, ištrinsite VISUS prognozių duomenis ir pakeisite galimybių rodinį. '
-        .'Taip pat bus išjungti VISI procesų apibrėžimai su pajamų eilutės prekių tiksliniu moduliu. '
-        .'Jei norėjote ne to, spustelėdami Atšaukti galite grįžti į ankstesnius nustatymus.',
+        . 'Taip pat bus išjungti VISI procesų apibrėžimai su pajamų eilutės prekių tiksliniu moduliu. '
+        . 'Jei norėjote ne to, spustelėdami Atšaukti galite grįžti į ankstesnius nustatymus.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'If all Revenue Line Items are closed and at least one was won,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'the Opportunity Sales Stage is set to "Closed Won".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'If all Revenue Line Items are in the "Closed Lost" Sales Stage,',
@@ -220,19 +223,19 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'After you initiate this change, Revenue Line Item records will be created for each existing {{module_name}} in the background. When the Revenue Line Items are complete and available, a notification will be sent to the email address on your user profile. Please note that your instance must be configured to send email via Admin > Email Settings in order for the notification to be sent.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulis {{plural_module_name}} suteikia galimybę nuo pradžios iki pabaigos stebėti atskirus pardavimus ir tiems pardavimams priklausančius eilutės elementus. Kiekvienas {{module_name}} įrašas reiškia būsimą pardavimą ir apima reikiamus pardavimo duomenis, taip pat susijusius su kitais svarbiais įrašais, tokiais kaip {{quotes_module}}, {{contacts_module}} ir kt. {{module_name}} paprastai pereis per kelis pardavimo etapus, kol bus pažymėtas „Uždaryta, laimėta“ arba „Uždaryta, pralaimėta“. {{plural_module_name}} galima dar labiau panaudoti naudojant „Sugar“ {{forecasts_singular_module}} modulį, kad suprastumėte ir numatytumėte pardavimo tendencijas bei sutelktumėte dėmesį į pardavimo kvotas.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} modulis leidžia stebėti individualius pardavimus nuo pradžios iki pabaigos. Vienas {{module_name}} Įrašas reiškia būsimą pardavimą ir apima atitinkamus pardavimo duomenis, taip pat susijusius su kitais svarbiais įrašais, tokiais kaip {{quotes_module}}, {{contacts_module}} it t. t. {{module_name}} paprastai eis per kelis pardavimo etapus, kol bus pažymėta "Uždaryta laimėta" arba "Uždaryta prarasta". {{plural_module_name}} galima dar labiau panaudoti naudojant „Sugar“ {{forecasts_singular_module}}ing modulis, kad būtų galims suprasti ir prognozuoti pardavimo tendencijas, taip pat susitelkti į darbą, kad būtų pasiektos pardavimo kvotos.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modulis {{plural_module_name}} suteikia galimybę nuo pradžios iki pabaigos stebėti atskirus pardavimus ir tiems pardavimams priklausančius eilutės elementus. Kiekvienas {{module_name}} įrašas reiškia būsimą pardavimą ir apima reikiamus pardavimo duomenis, taip pat susijusius su kitais svarbiais įrašais, tokiais kaip {{quotes_module}}, {{contacts_module}} ir kt.
+    'LBL_HELP_RECORD' => 'Modulis {{plural_module_name}} suteikia galimybę nuo pradžios iki pabaigos stebėti atskirus pardavimus ir tiems pardavimams priklausančius eilutės elementus. Kiekvienas {{module_name}} įrašas reiškia galimą pardavimą ir apima reikiamus pardavimo duomenis, taip pat susijusius su kitais svarbiais įrašais, tokiais kaip {{quotes_module}}, {{contacts_module}} ir kt.
 
 - Redaguokite šio įrašo laukus spustelėdami atskirą lauką arba mygtuką „Redaguoti“.
 - Peržiūrėkite arba modifikuokite nuorodas į kitus papildomų skydų įrašus, perjungdami apatinę kairę sritį į „Duomenų rodinys“.
 - Atlikite ir peržiūrėkite vartotojų komentarus ir įrašykite pakeitimų istoriją {{activitystream_singular_module}} perjungdami apatinę kairę sritį į „Veiklos srautas“.
 - Stebėkite šį įrašą arba įtraukite jį į parankinius naudodami piktogramas, esančias įrašo pavadinimo dešinėje.
-- Papildomus veiksmus galima atlikti išskleidžiamajame meniu „Redaguoti“ dešinėje.',
+- Papildomus veiksmus galima atlikti išskleidžiamajame meniu mygtuko „Redaguoti“ dešinėje.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modulis {{plural_module_name}} suteikia galimybę nuo pradžios iki pabaigos stebėti atskirus pardavimus ir tiems pardavimams priklausančius eilutės elementus. Kiekvienas {{module_name}} įrašas reiškia būsimą pardavimą ir apima reikiamus pardavimo duomenis, taip pat susijusius su kitais svarbiais įrašais, tokiais kaip {{quotes_module}}, {{contacts_module}} ir kt.
+    'LBL_HELP_CREATE' => 'Modulis {{plural_module_name}} suteikia galimybę nuo pradžios iki pabaigos stebėti atskirus pardavimus ir tiems pardavimams priklausančius eilutės elementus. Kiekvienas {{module_name}} įrašas reiškia būsimą pardavimą ir apima susijusio pardavimo datą ir kitus svarbius įrašus, tokius kaip {{quotes_module}}, {{contacts_module}} ir kt.
 
 Norėdami sukurti {{module_name}}:
 1. Nurodykite norimas laukų reikšmes.
@@ -260,4 +263,9 @@ Norėdami sukurti {{module_name}}:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Galimybė uždaryti nuspėjimą',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Peržiūrėti konkrečios galimybės nuspėjimo išsamią informaciją',
-);
+    'LBL_AI_WINRATE' => 'Laimėjimo koeficientas',
+    'LBL_AI_WONOPP' => 'Laimėtos galimybės',
+    'LBL_AI_CLOSINGTIME' => 'Užbaigimo laikas',
+    'LBL_AI_CLOSEDOPP' => 'Užbaigtos galimybės',
+    'LBL_AI_LEADTIMESPAN' => 'Laikas tarp galimybių kūrimo ir užbaigto laimėjimo',
+];

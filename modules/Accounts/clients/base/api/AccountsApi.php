@@ -15,16 +15,16 @@ class AccountsApi extends ModuleApi
 {
     public function registerApiRest()
     {
-        return array(
-            'opportunity_stats' => array(
+        return [
+            'opportunity_stats' => [
                 'reqType' => 'GET',
-                'path' => array('Accounts','?', 'opportunity_stats'),
-                'pathVars' => array('module', 'record'),
+                'path' => ['Accounts', '?', 'opportunity_stats'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'opportunityStats',
                 'shortHelp' => 'Get opportunity statistics for current record',
                 'longHelp' => '',
-            ),
-        );
+            ],
+        ];
     }
 
     public function opportunityStats(ServiceBase $api, array $args)
@@ -59,11 +59,11 @@ class AccountsApi extends ModuleApi
         $status_field = $this->getOpportunityStatusField();
 
         $query = new SugarQuery();
-        $query->select(array($status_field, 'amount_usdollar'));
+        $query->select([$status_field, 'amount_usdollar']);
         $query->from($linkSeed);
         // making this more generic so we can use this on contacts also as soon
         // as we move it to a proper module
-        $query->join('accounts', array('alias' => 'record'));
+        $query->join('accounts', ['alias' => 'record']);
         $query->where()->equals('record.id', $record->id);
         // FIXME add the security query here!!!
         // TODO: When we can sum on the database side through SugarQuery, we can
@@ -73,17 +73,17 @@ class AccountsApi extends ModuleApi
 
         // TODO this can't be done this way since we can change the status on
         // studio and add more
-        $data = array(
-            'won' => array('amount_usdollar' => 0, 'count' => 0),
-            'lost' => array('amount_usdollar' => 0, 'count' => 0),
-            'active' => array('amount_usdollar' => 0, 'count' => 0)
-        );
+        $data = [
+            'won' => ['amount_usdollar' => 0, 'count' => 0],
+            'lost' => ['amount_usdollar' => 0, 'count' => 0],
+            'active' => ['amount_usdollar' => 0, 'count' => 0],
+        ];
 
         foreach ($results as $row) {
-            $map = array(
+            $map = [
                 'Closed Lost' => 'lost',
                 'Closed Won' => 'won',
-            );
+            ];
             if (array_key_exists($row[$status_field], $map)) {
                 $status = $map[$row[$status_field]];
             } else {

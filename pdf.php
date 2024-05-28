@@ -1,5 +1,9 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+
+if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,28 +24,25 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 global $locale;
 
 if (!empty($_REQUEST['module']) && !empty($_REQUEST['action']) && !empty($_REQUEST['record'])) {
-
     $request = InputValidation::getService();
     $module = $request->getValidInputGet('module', 'Assert\Mvc\ModuleName');
     $record = $request->getValidInputGet('record', 'Assert\Guid');
     $action = $request->getValidInputGet('action');
-
 } else {
-    sugar_die("pdf.php - module, action, and record id all are required");
+    sugar_die('pdf.php - module, action, and record id all are required');
 }
 
 $GLOBALS['focus'] = BeanFactory::getBean($module, $record);
 
 if (empty($GLOBALS['focus'])) {
     ACLController::displayNoAccess();
-    sugar_die("pdf.php - record not found");
+    sugar_die('pdf.php - record not found');
 }
 
 $includeFile = "modules/$module/$action.php";
 
 if (!file_exists($includeFile)) {
-    sugar_die("pdf.php - include file does not exist");
+    sugar_die('pdf.php - include file does not exist');
 }
 
 SugarAutoLoader::includeFile($includeFile);
-

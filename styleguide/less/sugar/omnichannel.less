@@ -194,14 +194,14 @@
   }
 
   .record-cell.omni-cell {
-    .h-auto();
+    height: auto;
 
     &:not(:last-child) {
       margin-bottom: 5px;
     }
 
     &:not(.error) .omni-label {
-      .text-default();
+      color: var(--text-color);
     }
 
     input[type="text"],
@@ -220,8 +220,7 @@
     }
 
     .error-tooltip {
-      .absolute();
-
+      position: absolute;
       right: 5px;
     }
   }
@@ -240,8 +239,6 @@
     border-top: @borderWidget;
 
     .omni-detail-title-text {
-      .font-bold();
-
       font-size: 14px;
     }
 
@@ -251,14 +248,9 @@
       padding-top: 2px;
       line-height: 16px;
 
-      i {
-        .text-label();
-        .m-0();
-      }
-
       &.saving,
       &.saved {
-        .inline-block();
+        display: inline-block;
       }
 
       &.saved i {
@@ -505,7 +497,7 @@
     .nav-tabs {
       li.tab.tab-badgeable {
         a .label {
-          .inline-flex();
+          display: inline-flex;
         }
 
         &.disabled {
@@ -554,16 +546,16 @@
   // Hide contents of non-record dashlets, menus that shouldn't be accessible,
   // field content in record dashlets
   .nodata,
-    .jstree,
-    [data-type='jstree-no-data'],
-    [data-place='loading'],
-    [data-action='show-more'],
-    .comment-log-dashlet-content,
-    .activity-timeline,
-    .console-list-view-table tbody,
-    .record-cell:not([data-type='avatar']) .detail,
-    .dashlet-header .fieldset.actions,
-    .list-view tbody {
+  .jstree,
+  [data-type='jstree-no-data'],
+  [data-place='loading'],
+  [data-action='show-more'],
+  .comment-log-dashlet-content,
+  .activity-timeline,
+  .console-list-view-table tbody,
+  .record-cell:not([data-type='avatar']) .detail,
+  .dashlet-header .fieldset.actions,
+  .list-view tbody {
     visibility: hidden;
   }
 
@@ -590,7 +582,7 @@
   // fixing the freakin disabled search tab in freakin config
   &.omni-console .omni-dashboard li.tab.tab-badgeable.disabled a {
     line-height: 28px;
-    padding: 7px 8px 0;
+    padding: 7px 8px 2px;
 
     .sicon {
       color: @sicon-color;
@@ -683,16 +675,11 @@
   }
 
   .omnichannel-search-list {
-    display: flex;
-    flex-direction: row;
-    .flex-grow();
-
     .omnichannel-search-filter-wrapper {
       background: @contentBackground;
       border-color: @borderColor;
       border-top: @borderWidget;
       border-width: 1px 0 0 1px;
-      .w-4\/12();
 
       .omnichannel-search-facet-list {
         padding-top: 10px;
@@ -716,11 +703,6 @@
     }
 
     .omnibar-search {
-      background-color: @primaryContentBackground;
-      border-right: @borderWidget;
-      height: 100%;
-      .w-8\/12();
-
       &.loading {
         background-color: @primaryContentActive;
       }
@@ -784,7 +766,7 @@
       top: 47px;
       width: 600px;
       left: 50px;
-      .absolute();
+      position: absolute;
 
       li.search-result {
         padding: 0;
@@ -799,12 +781,6 @@
     box-sizing: border-box;
 
     .omnichannel-search-modulelist-wrapper {
-      width: 30px;
-      cursor: pointer;
-      padding: 0 0 0 10px;
-      z-index: @zindexFixedNavbar;
-      .relative();
-
       .menu-item {
         padding: 8px 10px;
         -webkit-user-select: none;
@@ -834,10 +810,6 @@
           }
         }
       }
-    }
-
-    .omnichannel-search-bar-wrapper {
-      .w-full();
     }
 
     .omnichannel-search-button-wrapper {

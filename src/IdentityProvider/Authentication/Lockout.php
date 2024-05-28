@@ -84,14 +84,14 @@ class Lockout
             $message .= sprintf(' %s ', trim($this->getAppString('LBL_LOGIN_LOGIN_TIME_ALLOWED')));
 
             switch (true) {
-                case (floor($timeLeft/86400) != 0):
-                    $message .= floor($timeLeft/86400) . $this->getAppString('LBL_LOGIN_LOGIN_TIME_DAYS');
+                case (floor($timeLeft / 86400) != 0):
+                    $message .= floor($timeLeft / 86400) . $this->getAppString('LBL_LOGIN_LOGIN_TIME_DAYS');
                     break;
-                case (floor($timeLeft/3600) != 0):
-                    $message .= floor($timeLeft/3600) . $this->getAppString('LBL_LOGIN_LOGIN_TIME_HOURS');
+                case (floor($timeLeft / 3600) != 0):
+                    $message .= floor($timeLeft / 3600) . $this->getAppString('LBL_LOGIN_LOGIN_TIME_HOURS');
                     break;
-                case (floor($timeLeft/60) != 0):
-                    $message .= floor($timeLeft/60) . $this->getAppString('LBL_LOGIN_LOGIN_TIME_MINUTES');
+                case (floor($timeLeft / 60) != 0):
+                    $message .= floor($timeLeft / 60) . $this->getAppString('LBL_LOGIN_LOGIN_TIME_MINUTES');
                     break;
                 case (floor($timeLeft) != 0):
                     $message .= floor($timeLeft) . $this->getAppString('LBL_LOGIN_LOGIN_TIME_SECONDS');
@@ -138,7 +138,7 @@ class Lockout
      */
     public function getFailedLoginsCount()
     {
-        return (int) $this->getConfigValue('lockoutexpirationlogin', 0);
+        return (int)$this->getConfigValue('lockoutexpirationlogin', 0);
     }
 
     /**
@@ -148,8 +148,8 @@ class Lockout
      */
     public function getLockoutDurationMins(): int
     {
-        $time = (int) $this->getConfigValue('lockoutexpirationtime', 0);
-        $type = (int) $this->getConfigValue('lockoutexpirationtype', 0);
+        $time = (int)$this->getConfigValue('lockoutexpirationtime', 0);
+        $type = (int)$this->getConfigValue('lockoutexpirationtype', 0);
         return $time * $type;
     }
 

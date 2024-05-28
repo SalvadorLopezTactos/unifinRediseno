@@ -14,14 +14,10 @@ $viewdefs['Tasks']['base']['view']['activity-card-header'] = [
     'panels' => [
         [
             'name' => 'panel_users',
-            'label' => 'LBL_PANEL_USERS',
-            'css_class' => 'panel-users',
-            'template' => 'user-to-user',
+            'label' => 'LBL_ASSIGNED_TO',
+            'css_class' => 'panel-users mt-2 flex flex-wrap gap-x-4 gap-y-2',
+            'template' => 'user-single',
             'fields' => [
-                [
-                    'name' => 'created_by_name',
-                    'type' => 'relate',
-                ],
                 [
                     'name' => 'assigned_user_name',
                     'type' => 'relate',
@@ -35,8 +31,9 @@ $viewdefs['Tasks']['base']['view']['activity-card-header'] = [
             'fields' => [
                 [
                     'name' => 'name',
-                    'type' => 'name',
+                    'type' => 'relate',
                     'link' => true,
+                    'id_name' => 'id',
                 ],
             ],
         ],

@@ -10,20 +10,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-{{#if relatedCollection.dataFetched}}
+<div class="timeline-filter-panel bg-[--dashlet-background] border-t border-b border-[--border-color] flex h-10 items-center sticky top-0 z-[1]">
     <div class="activity-timeline-filter"></div>
-    {{#if models.length}}
-        <div class="activity-timeline-create"></div>
-        <div class="activity-timeline-cards"></div>
-        {{#unless fetchCompleted}}
-            <div class="dashlet-footer">
-                <button class="more btn btn-link btn-invisible">{{str "LBL_SHOW_MORE"}}...</button>
-            </div>
-        {{/unless}}
-    {{else}}
-        <div  class="empty-activity tcenter">
-            <h1>{{str 'LBL_NO_ACTIVITY'}}</h1>
-            <img class="placeholder-empty" src="{{buildUrl url='styleguide/assets/img/dashboards/empty-state.svg'}}">
-        </div>
-    {{/if}}
-{{/if}}
+    <div class="search-group box-border m-0 shadow-none w-full">
+        <input class="search-input h-[26px] mr-[5px] py-1 pr-5 pl-2 w-full" type="text" data-action="search" value="{{searchTerm}}"
+            placeholder="{{str 'LBL_BASIC_QUICK_SEARCH'}}" />
+        <i class="sicon sicon-close add-on cursor-pointer pr-[0.25rem] top-4{{#unless searchTerm}} hidden{{/unless}}"></i>
+    </div>
+</div>
+<div class="activity-timeline-create"></div>
+<div class="activity-timeline-cards"></div>
+<div class="dashlet-footer">
+    <button class="more btn btn-link btn-invisible">{{str "LBL_SHOW_MORE"}}...</button>
+</div>

@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Du må oppgi et registernummer for å legge til en bruker til denne gruppen.',
     'ERR_DUP_NAME' => 'Team navnet eksisterer allerede, velg et annet.',
     'ERR_DELETE_RECORD' => 'Du må oppgi et registernummer for å slette denne gruppen.',
@@ -66,17 +66,17 @@ $mod_strings = array(
     'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
 Deaktivering av gruppebaserte tillatelser for en modul vil tilbakestille data tilknyttet gruppebaserte tillatelser for den modulen, herunder prosessdefinisjoner eller prosesser som bruker funksjonen. Dette inkluderer roller som bruker alternativet "Eier og valgt gruppe" for den modulen samt gruppebaserte tillatelsesdata for poster i den modulen. Vi anbefaler også at du bruker verktøyet for hurtigreparasjon og gjenoppbygging for å tømme systemets hurtigbuffer etter deaktivering av gruppebaserte tillatelser for en modul.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Advarsel:</strong> Deaktivering av gruppebaserte tillatelser for en modul vil tilbakestille data tilknyttet gruppebaserte tillatelser for den modulen, herunder prosessdefinisjoner eller prosesser som bruker funksjonen. Dette inkluderer roller som bruker alternativet "Eier og valgt gruppe" for den modulen samt gruppebaserte tillatelsesdata for poster i den modulen. Vi anbefaler også at du bruker verktøyet for hurtigreparasjon og gjenoppbygging for å tømme systemets hurtigbuffer etter deaktivering av gruppebaserte tillatelser for en modul.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Deaktivering av gruppebaserte tillatelser for en modul vil tilbakestille data tilknyttet gruppebaserte tillatelser for den modulen, herunder prosessdefinisjoner eller prosesser som bruker funksjonen. Dette inkluderer roller som bruker alternativet "Eier og valgt gruppe" for den modulen samt gruppebaserte tillatelsesdata for poster i den modulen. Vi anbefaler også at du bruker verktøyet for hurtigreparasjon og gjenoppbygging for å tømme systemets hurtigbuffer etter deaktivering av gruppebaserte tillatelser for en modul. Hvis du ikke har tilgang til verktøyet for hurtigreparasjon og gjenoppbygging, ta kontakt med en administrator med tilgang til reparasjonsmenyen.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Advarsel:</strong> Deaktivering av gruppebaserte tillatelser for en modul vil tilbakestille data tilknyttet gruppebaserte tillatelser for den modulen, herunder prosessdefinisjoner eller prosesser som bruker funksjonen. Dette inkluderer roller som bruker alternativet "Eier og valgt gruppe" for den modulen samt gruppebaserte tillatelsesdata for poster i den modulen. Vi anbefaler også at du bruker verktøyet for hurtigreparasjon og gjenoppbygging for å tømme systemets hurtigbuffer etter deaktivering av gruppebaserte tillatelser for en modul. Hvis du ikke har tilgang til verktøyet for hurtigreparasjon og gjenoppbygging, ta kontakt med en administrator med tilgang til reparasjonsmenyen.
 STR
-,
-);
+    ,
+];

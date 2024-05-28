@@ -10,21 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Opportunities']['base']['filter']['default'] = array(
+$viewdefs['Opportunities']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'account_name' => array(),
-        'amount' => array(),
-        'renewal' => array(),
-        'next_step' => array(),
-        'probability' => array(),
-        'lead_source' => array(),
-        'opportunity_type' => array(),
-        'sales_stage' => array(),
-        'date_entered' => array(),
-        'date_modified' => array(),
-        'date_closed' => array(),
+    'fields' => [
+        'name' => [],
+        'account_name' => [],
+        'amount' => [],
+        'renewal' => [],
+        'next_step' => [],
+        'probability' => [],
+        'lead_source' => [],
+        'opportunity_type' => [],
+        'sales_stage' => [],
+        'date_entered' => [],
+        'date_modified' => [],
+        'date_closed' => [],
         'service_duration' => [
             'dbFields' => [
                 'service_duration_value',
@@ -33,16 +33,16 @@ $viewdefs['Opportunities']['base']['filter']['default'] = array(
             'vname' => 'LBL_SERVICE_DURATION',
             'type' => 'text',
         ],
-        'tag' => array(),
-        'assigned_user_name' => array(),
-        '$owner' => array(
+        'tag' => [],
+        'assigned_user_name' => [],
+        '$owner' => [
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',
-        ),
-        '$favorite' => array(
+        ],
+        '$favorite' => [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        ),
+        ],
         '$distance' => [
             'name' => '$distance',
             'vname' => 'LBL_MAPS_DISTANCE',
@@ -58,5 +58,5 @@ $viewdefs['Opportunities']['base']['filter']['default'] = array(
         'team_name' => [],
         'modified_by_name' => [],
         'created_by_name' => [],
-    ),
-);
+    ],
+];

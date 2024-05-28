@@ -13,8 +13,8 @@
 namespace Sugarcrm\Sugarcrm\UserUtils\Invoker\payloads;
 
 /**
-* The InvokerFiltersPayload class handles payloads related to dashboards
-*/
+ * The InvokerFiltersPayload class handles payloads related to dashboards
+ */
 class InvokerDashboardsPayload extends InvokerBasePayload
 {
     /**
@@ -36,7 +36,7 @@ class InvokerDashboardsPayload extends InvokerBasePayload
         $this->modules = $options['modules'] ?? [];
     }
 
-     /**
+    /**
      * Setter for dashboards involved in the command
      *
      * @param array $dashboards

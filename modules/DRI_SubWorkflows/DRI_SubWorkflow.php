@@ -112,7 +112,7 @@ class DRI_SubWorkflow extends Basic
     /**
      * @var SugarBean[]
      */
-    private $activitiesCache;
+    private $activitiesCache = [];
 
     /**
      * @var string
@@ -154,7 +154,7 @@ class DRI_SubWorkflow extends Basic
      * Retrieves a DRI_SubWorkflow with id $id and
      * returns a instance of the retrieved bean
      *
-     * @param string $id: the id of the DRI_SubWorkflow that should be retrieved
+     * @param string $id : the id of the DRI_SubWorkflow that should be retrieved
      * @return DRI_SubWorkflow
      * @throws NotFoundException: if not found
      */
@@ -238,7 +238,7 @@ class DRI_SubWorkflow extends Basic
         return $this->state === DRI_SubWorkflow::STATE_COMPLETED;
     }
 
-     /**
+    /**
      * Check if stage is cancelled
      *
      * @return bool
@@ -368,11 +368,11 @@ class DRI_SubWorkflow extends Basic
     }
 
     /**
-     * Shift the duplicate order stages forward
+     * Update the order of this stage if order is duplicate
      */
-    public function moveDuplicatedStagesForward()
+    public function moveDuplicatedStageForward()
     {
-        $this->reorderSortOrdersAndLabels($this->dri_workflow_id, 'add');
+        $this->reorderSortOrdersAndLabels($this->dri_workflow_id, 'update_order');
     }
 
     /**
@@ -406,7 +406,6 @@ class DRI_SubWorkflow extends Basic
             $parent = $this->getParent();
         } catch (CJException\ParentNotFoundException $e) {
             throw $e;
-            $parent = null;
         }
 
         $journey = $this->getJourney();
@@ -431,7 +430,7 @@ class DRI_SubWorkflow extends Basic
         }
 
         if ($isNew && $this->isDuplicateStageByOrder() && !$this->created_from_journey) {
-            $this->moveDuplicatedStagesForward();
+            $this->moveDuplicatedStageForward();
         }
 
         if ($this->hasTemplate() && $isNew && !$this->created_from_journey) {
@@ -554,7 +553,7 @@ class DRI_SubWorkflow extends Basic
     public function skippedToCompleted()
     {
         $fetched_row_value = false;
-        if (is_array($this->fetched_row)) {
+        if (is_array($this->fetched_row) && isset($this->fetched_row['state'])) {
             $fetched_row_value = $this->fetched_row['state'];
         }
 
@@ -713,13 +712,17 @@ class DRI_SubWorkflow extends Basic
      */
     private function setLabel()
     {
-        $order = $this->sort_order;
+        $journey = $this->getJourney();
+        if (!$journey->stage_numbering) {
+            $order = $this->sort_order;
+            if (strlen($order) === 1) {
+                $order = "0{$order}";
+            }
 
-        if (strlen($order) === 1) {
-            $order = "0{$order}";
+            $this->label = sprintf('%s. %s', $order, $this->name);
+        } else {
+            $this->label = $this->name;
         }
-
-        $this->label = sprintf('%s. %s', $order, $this->name);
     }
 
     /**
@@ -731,7 +734,7 @@ class DRI_SubWorkflow extends Basic
     {
         try {
             self::getByCycleIdAndName($this->dri_workflow_id, $this->name, $this->id);
-            throw new SugarApiExceptionInvalidParameter(sprintf('stage with name %s does already exist', $this->name));
+            throw new SugarApiExceptionInvalidParameter(sprintf('Another Stage in this Smart Guide is already named %s.', $this->name));
         } catch (CJException\CustomerJourneyException $e) {
         }
     }
@@ -799,6 +802,8 @@ class DRI_SubWorkflow extends Basic
             }
 
             $handler->beforeCreate($activity, $parent);
+            $activity->do_not_reset_template_id = true;
+
             $activity->save();
             if (method_exists($handler, 'addInvitees')) {
                 $handler->addInvitees($activity);
@@ -868,7 +873,7 @@ class DRI_SubWorkflow extends Basic
 
         foreach ($this->getActivities() as $next) {
             $bHandler = ActivityHandlerFactory::factory($next->module_dir);
-            if (!$next->deleted && (int) $bHandler->getSortOrder($next) > (int) $aHandler->getSortOrder($activity)) {
+            if (!$next->deleted && (int)$bHandler->getSortOrder($next) > (int)$aHandler->getSortOrder($activity)) {
                 return $next;
             }
         }
@@ -985,7 +990,19 @@ class DRI_SubWorkflow extends Basic
      */
     private function setActivities(array $activities)
     {
-        $this->activitiesCache = $activities;
+        foreach ($activities as $activity) {
+            $this->activitiesCache[$activity->id] = $activity;
+        }
+    }
+
+    /**
+     * Update the given activity in the cache
+     *
+     * @param $activity
+     */
+    public function setActivity($activity)
+    {
+        $this->activitiesCache[$activity->id] = $activity;
     }
 
     /**
@@ -1005,7 +1022,7 @@ class DRI_SubWorkflow extends Basic
      */
     public function loadActivities()
     {
-        if (is_null($this->activitiesCache) || !count((array) $this->activitiesCache)) {
+        if (is_null($this->activitiesCache) || !safeCount((array)$this->activitiesCache)) {
             $activities = [];
 
             foreach (ActivityHandlerFactory::all() as $activityHandler) {
@@ -1021,7 +1038,7 @@ class DRI_SubWorkflow extends Basic
      */
     public function reloadActivities()
     {
-        $this->activitiesCache = null;
+        $this->activitiesCache = [];
         $this->loadActivities();
     }
 
@@ -1047,17 +1064,17 @@ class DRI_SubWorkflow extends Basic
     private function sortActivities($activities)
     {
         $leastActivitiesCount = 2;
-        if (count($activities) < $leastActivitiesCount) {
+        if (safeCount($activities) < $leastActivitiesCount) {
             return $activities;
         }
 
         $left = $right = [];
         $pivot_key = array_key_first($activities);
         $pivotActivity = array_shift($activities);
-        $pivot = (int) ActivityHandlerFactory::factory($pivotActivity->module_dir)->getSortOrder($pivotActivity);
+        $pivot = (int)ActivityHandlerFactory::factory($pivotActivity->module_dir)->getSortOrder($pivotActivity);
 
         foreach ($activities as $k => $activity) {
-            $order = (int) ActivityHandlerFactory::factory($activity->module_dir)->getSortOrder($activity);
+            $order = (int)ActivityHandlerFactory::factory($activity->module_dir)->getSortOrder($activity);
             if ($order < $pivot) {
                 $left[$k] = $activity;
             } else {
@@ -1078,7 +1095,7 @@ class DRI_SubWorkflow extends Basic
     public function retrieve($id = -1, $encode = true, $deleted = true)
     {
         $return = parent::retrieve($id, $encode, $deleted);
-        $this->activitiesCache = null;
+        $this->activitiesCache = [];
         return $return;
     }
 
@@ -1107,7 +1124,7 @@ class DRI_SubWorkflow extends Basic
 
         parent::mark_deleted($id);
 
-        if (!is_null($journey) && !$journey->deleted) {
+        if (!is_null($journey) && !empty($journey->id) && !$journey->deleted) {
             $this->reorderSortOrdersAndLabels($journey->id);
             $journey = $this->getJourney();
             $journey->reloadStages();

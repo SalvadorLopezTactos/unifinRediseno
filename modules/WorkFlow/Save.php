@@ -9,8 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description:
  ********************************************************************************/
 
@@ -31,9 +31,9 @@ if (!empty($record)) {
 
 //check if we need to remove the old stuff
 if (!$is_new && (
-        (!empty($base_module) && $base_module != $focus->base_module) ||
+    (!empty($base_module) && $base_module != $focus->base_module) ||
         (!empty($type) && $type != $focus->type)
-    )) {
+)) {
     $focus->delete_workflow_on_cascade = false;
     $focus->mark_deleted($record);
     $focus->deleted = 0;
@@ -53,7 +53,7 @@ foreach ($focus->additional_column_fields as $field) {
 }
 
 
-if ($focus->status == "Active") {
+if ($focus->status == 'Active') {
     $focus->status = 1;
 } else {
     $focus->status = 0;
@@ -62,19 +62,19 @@ if ($focus->status == "Active") {
 //If this is new, set the initial process order
 if ($is_new == true) {
     $controller = new Controller();
-    $controller->init($focus, "New");
-    $controller->change_component_order("", "", $_REQUEST['base_module']);
+    $controller->init($focus, 'New');
+    $controller->change_component_order('', '', $_REQUEST['base_module']);
 }
 
 $focus->save();
 
 
-if (!empty($_POST['is_duplicate']) && $_POST['is_duplicate'] == "true") {
+if (!empty($_POST['is_duplicate']) && $_POST['is_duplicate'] == 'true') {
     $old_workflow = BeanFactory::getBean('WorkFlow', $_POST['old_record_id']);
     $alerts_list =& $old_workflow->get_linked_beans('alerts', 'WorkFlowAlertShell');
     $actions_list =& $old_workflow->get_linked_beans('actions', 'WorkFlowActionShell');
-    $triggers_list = & $old_workflow->get_linked_beans('triggers', 'WorkFlowTriggerShell');
-    $filters_list = & $old_workflow->get_linked_beans('trigger_filters', 'WorkFlowTriggerShell');
+    $triggers_list = &$old_workflow->get_linked_beans('triggers', 'WorkFlowTriggerShell');
+    $filters_list = &$old_workflow->get_linked_beans('trigger_filters', 'WorkFlowTriggerShell');
 
     foreach ($alerts_list as $alert) {
         $alert->copy($focus->id);
@@ -86,7 +86,7 @@ if (!empty($_POST['is_duplicate']) && $_POST['is_duplicate'] == "true") {
         // BUG 44500 Duplicating workflow does not duplicate invitees for created activites
         $query = "SELECT id FROM workflow WHERE parent_id = '{$action->id}' ";
         $result1 = $focus->db->query($query);
-        while (($row=$focus->db->fetchByAssoc($result1)) != null) {
+        while (($row = $focus->db->fetchByAssoc($result1)) != null) {
             $copyWorkflow = BeanFactory::getBean('WorkFlow', $row['id']);
             $copyWorkflow->id = '';
             $copyWorkflow->parent_id = $newActionId;
@@ -94,7 +94,7 @@ if (!empty($_POST['is_duplicate']) && $_POST['is_duplicate'] == "true") {
 
             $query = "SELECT id FROM workflow_alertshells WHERE parent_id = '{$row['id']}' ";
             $result2 = $focus->db->query($query);
-            while (($alertshell=$focus->db->fetchByAssoc($result2)) != null) {
+            while (($alertshell = $focus->db->fetchByAssoc($result2)) != null) {
                 $copyAlertshell = BeanFactory::getBean('WorkFlowAlertShells', $alertshell['id']);
                 $copyAlertshell->id = '';
                 $copyAlertshell->parent_id = $copyWorkflowId;
@@ -102,7 +102,7 @@ if (!empty($_POST['is_duplicate']) && $_POST['is_duplicate'] == "true") {
 
                 $query = "SELECT id FROM workflow_alerts WHERE parent_id = '{$alertshell['id']}' ";
                 $result3 = $focus->db->query($query);
-                while (($alert=$focus->db->fetchByAssoc($result3)) != null) {
+                while (($alert = $focus->db->fetchByAssoc($result3)) != null) {
                     $copyAlert = BeanFactory::getBean('WorkFlowAlerts', $alert['id']);
                     $copyAlert->id = '';
                     $copyAlert->parent_id = $copyAlertshellId;
@@ -142,7 +142,7 @@ if (empty($return_id) && !empty($focus->id)) {
 $return_id = urlencode($return_id);
 $return_module = urlencode($return_module);
 
-$GLOBALS['log']->debug("Saved record with id of ".$return_id);
+$GLOBALS['log']->debug('Saved record with id of ' . $return_id);
 //exit;
 
 //Redirect to DetailView, not listview for the workflow object.

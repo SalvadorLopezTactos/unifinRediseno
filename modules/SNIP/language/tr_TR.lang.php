@@ -11,24 +11,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'E-Posta Arşivleme',
-    'LBL_SNIP_SUMMARY' => "E-Posta arşivleme, kullanıcıların e-postaları herhangi bir e-posta istemcisi üzerinden, Sugar tarafından sağlanan e-posta adresine göndererek uygulamaya yüklenmesini sağlayan sistemdir. Her Sugar kurulumu, kendisine ait tekil bir e-posta adresi içerir. E-Postaları yüklemek için, kullanıcı e-postayı KIME, BİLGİ veya GİZLİ BİLGİ alanlarını kullanarak bu e-posta adresine gönderir. E-Posta Arşivleme sistemi, e-postayı sugar kurulumuna yükler. Servis, e-postayı bütün ekleri, imajlar ve Takvim olayları ile birlikte yükleyip, e-posta adresi ile eşleştirerek ilgili kayıtları oluşturur. <br><br><br />Örnek: Bir kullanıcı olarak bir müşteriyi görüntülediğimde, Müşteri kaydının e-posta adresine göre eşleşen bütün e-postaları görebileceğim. Ayrıca, Müşteri ile ilişkili Kontakların e-postalarını da görebileceğim.<br><br>Aşağıdaki koşulları kabul edin ve hizmeti başlatmak için Etkinleştir butonuna tıklayın. Hizmet etkinleştiğinde, hizmeti kullanmak için gerekli e-posta adresi görünür hale gelecektir.<br><br>",
-	'LBL_REGISTER_SNIP_FAIL' => 'Arşivlen E-Posta servisiyle bağlantı başarısız: %s!<br>',
-	'LBL_CONFIGURE_SNIP' => 'E-Posta Arşivleme',
+    'LBL_SNIP_SUMMARY' => 'E-Posta arşivleme, kullanıcıların e-postaları herhangi bir e-posta istemcisi üzerinden, Sugar tarafından sağlanan e-posta adresine göndererek uygulamaya yüklenmesini sağlayan sistemdir. Her Sugar kurulumu, kendisine ait tekil bir e-posta adresi içerir. E-Postaları yüklemek için, kullanıcı e-postayı KIME, BİLGİ veya GİZLİ BİLGİ alanlarını kullanarak bu e-posta adresine gönderir. E-Posta Arşivleme sistemi, e-postayı sugar kurulumuna yükler. Servis, e-postayı bütün ekleri, imajlar ve Takvim olayları ile birlikte yükleyip, e-posta adresi ile eşleştirerek ilgili kayıtları oluşturur. <br><br><br />Örnek: Bir kullanıcı olarak bir müşteriyi görüntülediğimde, Müşteri kaydının e-posta adresine göre eşleşen bütün e-postaları görebileceğim. Ayrıca, Müşteri ile ilişkili Kontakların e-postalarını da görebileceğim.<br><br>Aşağıdaki koşulları kabul edin ve hizmeti başlatmak için Etkinleştir butonuna tıklayın. Hizmet etkinleştiğinde, hizmeti kullanmak için gerekli e-posta adresi görünür hale gelecektir.<br><br>',
+    'LBL_REGISTER_SNIP_FAIL' => 'Arşivlen E-Posta servisiyle bağlantı başarısız: %s!<br>',
+    'LBL_CONFIGURE_SNIP' => 'E-Posta Arşivleme',
     'LBL_DISABLE_SNIP' => 'Etkisizleştirin',
     'LBL_SNIP_APPLICATION_UNIQUE_KEY' => 'Uygulama Tekil Anahtarı',
     'LBL_SNIP_USER' => 'E-Posta Arşivleyen Kullanıcı',
     'LBL_SNIP_PWD' => 'E-Posta Arşivleme Şifresi',
     'LBL_SNIP_SUGAR_URL' => 'Sugar Kurulum URL adresi',
-	'LBL_SNIP_CALLBACK_URL' => 'E-Posta arşivleme servis URL Adresi',
+    'LBL_SNIP_CALLBACK_URL' => 'E-Posta arşivleme servis URL Adresi',
     'LBL_SNIP_USER_DESC' => 'E-Posta Arşivleyen Kullanıcı',
     'LBL_SNIP_KEY_DESC' => 'E-Posta arşivleme OAuth anahtarı. E-Postaları almak amacıyla bu kuruluma erişmek için kullanılır.',
     'LBL_SNIP_STATUS_OK' => 'Etkin',
@@ -39,17 +38,17 @@ $mod_strings = array(
     'LBL_SNIP_STATUS_FAIL_SUMMARY' => 'Arşivlenmiş E-Posta servisi şu anda kullanılamaz. Servis arızalı veya Sugar kurulumu ile bağlantı başarısız oldu.',
     'LBL_SNIP_GENERIC_ERROR' => 'Arşivlenmiş E-Posta servisi şu anda kullanılamaz. Servis arızalı veya Sugar kurulumu ile bağlantı başarısız oldu.',
 
-	'LBL_SNIP_STATUS_RESET' => 'Henüz çalışmadı',
-	'LBL_SNIP_STATUS_PROBLEM' => 'Sorun: %s',
-    'LBL_SNIP_NEVER' => "Hiç",
-    'LBL_SNIP_STATUS_SUMMARY' => "E-Posta Arşivleme hizmetinin durumu:",
-    'LBL_SNIP_ACCOUNT' => "Müşteri",
-    'LBL_SNIP_STATUS' => "Durum",
-    'LBL_SNIP_LAST_SUCCESS' => "Son başarılı çalışma",
-    "LBL_SNIP_DESCRIPTION" => "E-Posta arşivleme servisi otomatik bir e-posta arşivleme sistemidir",
-    "LBL_SNIP_DESCRIPTION_SUMMARY" => "E-Postaları manuel olarak yükleme ve bağlamaya gerek kalmadan, SugarCRM içindeki kontaklarınıza gönderilen veya alınan e-postaların görülmesini sağlar",
-    "LBL_SNIP_PURCHASE_SUMMARY" => "E-Posta Arşivlemesini kullanmak için bir SugarCRM lisansı satın almanız gerekmektedir",
-    "LBL_SNIP_PURCHASE" => "Satın almak için tıklayınız",
+    'LBL_SNIP_STATUS_RESET' => 'Henüz çalışmadı',
+    'LBL_SNIP_STATUS_PROBLEM' => 'Sorun: %s',
+    'LBL_SNIP_NEVER' => 'Hiç',
+    'LBL_SNIP_STATUS_SUMMARY' => 'E-Posta Arşivleme hizmetinin durumu:',
+    'LBL_SNIP_ACCOUNT' => 'Müşteri',
+    'LBL_SNIP_STATUS' => 'Durum',
+    'LBL_SNIP_LAST_SUCCESS' => 'Son başarılı çalışma',
+    'LBL_SNIP_DESCRIPTION' => 'E-Posta arşivleme servisi otomatik bir e-posta arşivleme sistemidir',
+    'LBL_SNIP_DESCRIPTION_SUMMARY' => 'E-Postaları manuel olarak yükleme ve bağlamaya gerek kalmadan, SugarCRM içindeki kontaklarınıza gönderilen veya alınan e-postaların görülmesini sağlar',
+    'LBL_SNIP_PURCHASE_SUMMARY' => 'E-Posta Arşivlemesini kullanmak için bir SugarCRM lisansı satın almanız gerekmektedir',
+    'LBL_SNIP_PURCHASE' => 'Satın almak için tıklayınız',
     'LBL_SNIP_EMAIL' => 'E-Posta Arşivleme Adresi',
     'LBL_SNIP_AGREE' => "I agree to the above terms and the <a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>privacy policy</a>.",
     'LBL_SNIP_PRIVACY' => 'gizlilik sözleşmesi',
@@ -65,8 +64,8 @@ $mod_strings = array(
     'LBL_CONTACT_SUPPORT' => 'Lütfen tekrar deneyin veya SugarCRM Destek ile iletişime geçin.',
     'LBL_SNIP_SUPPORT' => 'Yardım için SugarCRM Destek birimiyle temasa geçin.',
     'ERROR_BAD_RESULT' => 'Servisten kötü cevap döndü',
-	'ERROR_NO_CURL' => 'cURL uzantıları gerekli, ancak etkinleştirilmemiş',
-	'ERROR_REQUEST_FAILED' => 'Sunucuya bağlantı kurulamadı',
+    'ERROR_NO_CURL' => 'cURL uzantıları gerekli, ancak etkinleştirilmemiş',
+    'ERROR_REQUEST_FAILED' => 'Sunucuya bağlantı kurulamadı',
 
     'LBL_CANCEL_BUTTON_TITLE' => 'İptal',
 
@@ -74,4 +73,4 @@ $mod_strings = array(
     'LBL_SNIP_MOUSEOVER_EMAIL' => 'E-Posta Arşivleme sisteminde kaydedilmesi için gönderilecek e-posta adresidir.',
     'LBL_SNIP_MOUSEOVER_SERVICE_URL' => 'Bu URL adresi, E-Posta Arşivleme sunucusuna aittir. E-posta arşivleme sunucusunu etkinleştirmek ve devre dışı bırakmak gibi bütün istekler bu URL üzerinden iletilecektir.',
     'LBL_SNIP_MOUSEOVER_INSTANCE_URL' => 'Bu Sugar Kurulumunun web hizmetleri URL adresidir. E-Posta Arşivlenme sunucusu bu URL üzerinden sunucuya bağlanmaktadır.',
-);
+];

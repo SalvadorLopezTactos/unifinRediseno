@@ -10,45 +10,45 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['Subscription'] = array(
+$dictionary['Subscription'] = [
     'table' => 'subscriptions',
-    'fields' => array(
+    'fields' => [
         // Set unnecessary fields from Basic to non-required/non-db.
-        'name' => array (
+        'name' => [
             'name' => 'name',
             'type' => 'varchar',
             'required' => false,
             'source' => 'non-db',
-        ),
+        ],
 
-        'description' => array (
+        'description' => [
             'name' => 'description',
             'type' => 'varchar',
             'required' => false,
             'source' => 'non-db',
-        ),
+        ],
 
         // Add table columns.
-        'parent_type' => array(
-            'name'     => 'parent_type',
-            'type'     => 'varchar',
-            'len'      => 100,
+        'parent_type' => [
+            'name' => 'parent_type',
+            'type' => 'varchar',
+            'len' => 100,
             'required' => true,
-        ),
+        ],
 
-        'parent_id' => array(
-            'name'     => 'parent_id',
-            'type'     => 'id',
+        'parent_id' => [
+            'name' => 'parent_id',
+            'type' => 'id',
             'required' => true,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'subscription_parent',
             'type' => 'index',
-            'fields' => array('parent_id'),
-        ),
-    ),
+            'fields' => ['parent_id'],
+        ],
+    ],
     // @TODO Fix the Default and Basic SugarObject templates so that Basic
     // implements Default. This would allow the application of various
     // implementations on Basic without forcing Default to have those so that
@@ -58,10 +58,10 @@ $dictionary['Subscription'] = array(
     // implementation fields. Once there is a separation of default and basic
     // templates we can safely remove these as this module will implement
     // default instead of basic.
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'commentlog',
-    ),
-);
+    ],
+];
 
-VardefManager::createVardef('ActivityStream/Subscriptions', 'Subscription', array('basic'));
+VardefManager::createVardef('ActivityStream/Subscriptions', 'Subscription', ['basic']);

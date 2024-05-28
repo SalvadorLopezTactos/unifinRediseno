@@ -10,6 +10,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class RevenueLineItemToQuoteConvertApi extends SugarApi
 {
     /**
@@ -17,24 +18,24 @@ class RevenueLineItemToQuoteConvertApi extends SugarApi
      */
     public function registerApiRest()
     {
-        return array(
-            'convert' => array(
+        return [
+            'convert' => [
                 'reqType' => 'POST',
-                'path' => array('RevenueLineItems', '?', 'quote'),
-                'pathVars' => array('module', 'record', 'action'),
+                'path' => ['RevenueLineItems', '?', 'quote'],
+                'pathVars' => ['module', 'record', 'action'],
                 'method' => 'convertToQuote',
                 'shortHelp' => 'Convert a Revenue Line Item Into A Quote Record',
                 'longHelp' => 'modules/RevenueLineItems/clients/base/api/help/convert_to_quote.html',
-            ),
-            'multiconvert' => array(
+            ],
+            'multiconvert' => [
                 'reqType' => 'POST',
-                'path' => array('RevenueLineItems', 'multi-quote'),
-                'pathVars' => array('module', 'action'),
+                'path' => ['RevenueLineItems', 'multi-quote'],
+                'pathVars' => ['module', 'action'],
                 'method' => 'multiConvertToQuote',
                 'shortHelp' => 'Convert a Revenue Line Item Into A Quote Record',
                 'longHelp' => 'modules/RevenueLineItems/clients/base/api/help/multi_convert_to_quote.html',
-            )
-        );
+            ],
+        ];
     }
 
     /**
@@ -77,7 +78,7 @@ class RevenueLineItemToQuoteConvertApi extends SugarApi
         $quote->tax_usdollar = 0.00;
         $quote->currency_id = $opp->currency_id;
         $quote->opportunity_id = $opp->id;
-        $quote->quote_stage = "Draft";
+        $quote->quote_stage = 'Draft';
         $quote->assigned_user_id = $GLOBALS['current_user']->id;
 
         $this->setQuoteAccountInfo($opp->account_id, $quote);
@@ -86,18 +87,18 @@ class RevenueLineItemToQuoteConvertApi extends SugarApi
 
         $quote->set_relationship(
             'product_bundle_quote',
-            array('quote_id' => $quote->id, 'bundle_id' => $product_bundle->id, 'bundle_index' => 0)
+            ['quote_id' => $quote->id, 'bundle_id' => $product_bundle->id, 'bundle_index' => 0]
         );
 
-        return array('id' => $quote->id, 'name' => $quote->name);
+        return ['id' => $quote->id, 'name' => $quote->name];
     }
 
     /**
      * Converts RLI to a quote
-     * 
+     *
      * @param ServiceBase api
      * @param array args
-     * 
+     *
      * @returns array Quote ID and name of new quote
      */
     public function convertToQuote(ServiceBase $api, array $args)
@@ -123,42 +124,41 @@ class RevenueLineItemToQuoteConvertApi extends SugarApi
         $quote->renewal = $opp->renewal;
 
         // lets create a new bundle
-        $product_bundle = $this->createProductBundleFromRLIList(array($args['record']), $quote->id);
+        $product_bundle = $this->createProductBundleFromRLIList([$args['record']], $quote->id);
 
         $quote->set_relationship(
             'product_bundle_quote',
-            array('quote_id' => $quote->id, 'bundle_id' => $product_bundle->id, 'bundle_index' => 0)
+            ['quote_id' => $quote->id, 'bundle_id' => $product_bundle->id, 'bundle_index' => 0]
         );
 
         // quote should default to same currency as RLI
         $quote->currency_id = $rli->currency_id;
         $quote->base_rate = $rli->base_rate;
         $quote->opportunity_id = $opp->id;
-        $quote->quote_stage = "Draft";
+        $quote->quote_stage = 'Draft';
         $quote->assigned_user_id = $GLOBALS['current_user']->id;
 
         $this->setQuoteAccountInfo($opp->account_id, $quote);
 
         $quote->save();
 
-        return array('id' => $quote->id, 'name' => $quote->name);
+        return ['id' => $quote->id, 'name' => $quote->name];
     }
 
     /**
      * Take a list of RLI's and make them into a new Product Bundle
      *
      * @param array $rlis
-     * @param string $quote_id      The id for the quote we are creating
-     * @throws SugarApiExceptionRequestMethodFailure
+     * @param string $quote_id The id for the quote we are creating
      * @return ProductBundle
+     * @throws SugarApiExceptionRequestMethodFailure
      */
     protected function createProductBundleFromRLIList(array $rlis, $quote_id = null)
     {
         $product = null;
-        $errors = array();
-        $rli_to_convert = array();
+        $errors = [];
+        $rli_to_convert = [];
         foreach ($rlis as $key => $rli_id) {
-
             /* @var $rli RevenueLineItem */
             $rli = BeanFactory::getBean('RevenueLineItems', $rli_id);
 
@@ -192,7 +192,7 @@ class RevenueLineItemToQuoteConvertApi extends SugarApi
 
             $product_bundle->set_relationship(
                 'product_bundle_product',
-                array('bundle_id' => $product_bundle->id, 'product_id' => $product->id, 'product_index' => ($key + 1))
+                ['bundle_id' => $product_bundle->id, 'product_id' => $product->id, 'product_index' => ($key + 1)]
             );
 
             if (!is_null($quote_id)) {
@@ -240,13 +240,13 @@ class RevenueLineItemToQuoteConvertApi extends SugarApi
 
             $quote->set_relationship(
                 'quotes_accounts',
-                array('quote_id' => $quote->id, 'account_id' => $account->id, 'account_role' => 'Bill To'),
+                ['quote_id' => $quote->id, 'account_id' => $account->id, 'account_role' => 'Bill To'],
                 false
             );
 
             $quote->set_relationship(
                 'quotes_accounts',
-                array('quote_id' => $quote->id, 'account_id' => $account->id, 'account_role' => 'Ship To'),
+                ['quote_id' => $quote->id, 'account_id' => $account->id, 'account_role' => 'Ship To'],
                 false
             );
         }

@@ -20,7 +20,7 @@ class ForecastHooks extends AbstractForecastHooks
      * @param string $event
      * @param array $params
      */
-    public static function fixDateModified(Forecast $forecast, $event, $params = array())
+    public static function fixDateModified(Forecast $forecast, $event, $params = [])
     {
         if (isset($forecast->fetched_row['date_modified'])) {
             $forecast->date_modified = $forecast->fetched_row['date_modified'];
@@ -35,7 +35,7 @@ class ForecastHooks extends AbstractForecastHooks
      * @param string $event
      * @param array $params
      */
-    public function setCommitStageIfEmpty($bean, $event, $params = array())
+    public function setCommitStageIfEmpty($bean, $event, $params = [])
     {
         // only run on before_save logic hooks
         if ($event != 'before_save') {
@@ -45,7 +45,7 @@ class ForecastHooks extends AbstractForecastHooks
             //Retrieve Forecasts_category_ranges and json decode as an associative array
             $forecast_ranges = static::$settings['forecast_ranges'] ?? '';
             $category_ranges = isset(static::$settings[$forecast_ranges . '_ranges']) ?
-                (array)static::$settings[$forecast_ranges . '_ranges'] : array();
+                (array)static::$settings[$forecast_ranges . '_ranges'] : [];
             foreach ($category_ranges as $key => $entry) {
                 if ($bean->probability >= $entry['min'] && $bean->probability <= $entry['max']) {
                     $bean->commit_stage = $key;
@@ -60,7 +60,7 @@ class ForecastHooks extends AbstractForecastHooks
      * @param string $event
      * @param array $params
      */
-    public function setBestWorstEqualToLikelyAmount($bean, $event, $params = array())
+    public function setBestWorstEqualToLikelyAmount($bean, $event, $params = [])
     {
         // only run on before_save logic hooks
         if ($event != 'before_save' || empty($bean->sales_stage)) {

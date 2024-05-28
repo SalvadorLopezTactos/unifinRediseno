@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Szablony bazy wiedzy',
     'LBL_MODULE_NAME_SINGULAR' => 'Szablon bazy wiedzy',
     'LBL_MODULE_TITLE' => 'Szablon bazy wiedzy',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Wyświetl szablony',
     'LBL_TEXT_BODY' => 'Treść',
     'LBL_LIST_TEMPLATE_NAME' => 'Nazwa szablonu',
-);
+];

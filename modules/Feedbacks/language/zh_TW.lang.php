@@ -13,7 +13,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FEEDBACK_TEXT_PLACEHOLDER' => '回饋描述',
     'LBL_FEEDBACK_BTN_SUBMIT' => '傳送',
     'LBL_FEEDBACK_SENT' => '已傳送回饋。',
@@ -23,4 +23,4 @@ $mod_strings = array(
     'TPL_FEEDBACK_ASIDE' => '我們會在提交時收集某些使用資料。{{learnMoreLink}}。我們不會收集聯絡資訊。請前往 {{contactSupportLink}} ，就錯誤或其他問題取得回應。',
     'LBL_FEEDBACK_ASIDE_CLICK_MORE' => '按一下此處了解更多',
     'LBL_FEEDBACK_ASIDE_CONTACT_SUPPORT' => '連絡人支援',
-);
+];

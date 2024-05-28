@@ -10,49 +10,49 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Home']['base']['view']['top-activity-user'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['Home']['base']['view']['top-activity-user'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_MOST_ACTIVE_COLLEAGUES',
             'description' => 'LBL_MOST_ACTIVE_COLLEAGUES_DESC',
-            'config' => array(
+            'config' => [
                 'filter_duration' => '7',
-                'module' => 'Home'
-            ),
-            'preview' => array(
+                'module' => 'Home',
+            ],
+            'preview' => [
                 'filter_duration' => '7',
-                'module' => 'Home'
-            ),
-            'filter' => array(
-                'module' => array(
+                'module' => 'Home',
+            ],
+            'filter' => [
+                'module' => [
                     'Home',
-                ),
+                ],
                 'view' => 'record',
-            ),
-        ),
-    ),
-    'panels' => array(
-        array(
+            ],
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_body',
             'columns' => 1,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'filter_duration',
                     'label' => 'Filter',
                     'type' => 'enum',
-                    'options' => 'activity_user_options'
-                ),
-            ),
-        ),
-    ),
-    'buttons' => array(
-        array(
+                    'options' => 'activity_user_options',
+                ],
+            ],
+        ],
+    ],
+    'buttons' => [
+        [
             'name' => 'filter_duration',
             'label' => 'Filter',
             'type' => 'enum',
-            'options' => 'activity_user_options'
-        ),
-    ),
-);
+            'options' => 'activity_user_options',
+        ],
+    ],
+];

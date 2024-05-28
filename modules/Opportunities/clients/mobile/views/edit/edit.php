@@ -11,24 +11,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Opportunities']['mobile']['view']['edit'] = array(
-    'templateMeta' => array(
+$viewdefs['Opportunities']['mobile']['view']['edit'] = [
+    'templateMeta' => [
         'maxColumns' => '1',
-        'widths' => array(
-            array('label' => '10', 'field' => '30'),
-        ),
-    ),
-    'panels' => array(
-        array(
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
-                    'displayParams' => array(
+                    'displayParams' => [
                         'required' => true,
                         'wireless_edit_only' => true,
-                    )
-                ),
+                    ],
+                ],
                 'amount',
                 'account_name',
                 'date_closed',
@@ -40,7 +40,7 @@ $viewdefs['Opportunities']['mobile']['view']['edit'] = array(
                 'forecasted_likely',
                 'commit_stage',
                 'lost',
-            )
-        )
-    ),
-);
+            ],
+        ],
+    ],
+];

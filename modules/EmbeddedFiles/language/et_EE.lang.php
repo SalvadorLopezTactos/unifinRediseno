@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Manustatud failid',
     'LBL_MODULE_NAME_SINGULAR' => 'Manustatud fail',
     'LBL_MODULE_TITLE' => 'Manustatud fail',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => 'Faili nimi',
     'LBL_FILENAME' => 'Faili nimi',
     'LBL_UPLOAD_ONLY_IMAGE' => 'Valitud fail peaks olema pilt.',
-);
+];

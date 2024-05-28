@@ -32,6 +32,8 @@ class AssistantLogsDeviceInfoLog extends \Google\Collection
    * @var string
    */
   public $deviceId;
+  protected $deviceIdLogType = AssistantLogsSettingsDeviceIdLog::class;
+  protected $deviceIdLogDataType = '';
   /**
    * @var int
    */
@@ -48,6 +50,10 @@ class AssistantLogsDeviceInfoLog extends \Google\Collection
    * @var string
    */
   public $eliminatingLumosProcessor;
+  /**
+   * @var string
+   */
+  public $homeStructureId;
   /**
    * @var bool
    */
@@ -116,6 +122,20 @@ class AssistantLogsDeviceInfoLog extends \Google\Collection
     return $this->deviceId;
   }
   /**
+   * @param AssistantLogsSettingsDeviceIdLog
+   */
+  public function setDeviceIdLog(AssistantLogsSettingsDeviceIdLog $deviceIdLog)
+  {
+    $this->deviceIdLog = $deviceIdLog;
+  }
+  /**
+   * @return AssistantLogsSettingsDeviceIdLog
+   */
+  public function getDeviceIdLog()
+  {
+    return $this->deviceIdLog;
+  }
+  /**
    * @param int
    */
   public function setDeviceIndex($deviceIndex)
@@ -170,6 +190,20 @@ class AssistantLogsDeviceInfoLog extends \Google\Collection
   public function getEliminatingLumosProcessor()
   {
     return $this->eliminatingLumosProcessor;
+  }
+  /**
+   * @param string
+   */
+  public function setHomeStructureId($homeStructureId)
+  {
+    $this->homeStructureId = $homeStructureId;
+  }
+  /**
+   * @return string
+   */
+  public function getHomeStructureId()
+  {
+    return $this->homeStructureId;
   }
   /**
    * @param bool

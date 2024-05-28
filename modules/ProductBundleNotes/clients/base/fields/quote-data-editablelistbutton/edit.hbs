@@ -12,7 +12,7 @@
 --}}
 <a href="{{#if fullRoute}}#{{fullRoute}}{{else}}{{#if def.route}}#{{buildRoute context=context model=model action=def.route.action}}{{else}}javascript:void(0);{{/if}}{{/if}}"
     class="btn {{name}}"
-    data-placement="bottom"
+    data-bs-placement="bottom"
     {{#if def.tooltip}}
         rel="tooltip"
         data-original-title="{{str def.tooltip module}}"

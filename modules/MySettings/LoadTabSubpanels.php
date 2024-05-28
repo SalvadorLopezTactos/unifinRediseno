@@ -14,6 +14,7 @@
  * Created on Jul 17, 2006
  * Ajax Procedure for loading all subpanels for a certain subpanel tab.
  */
+
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 $detailView = new DetailView();
@@ -24,9 +25,8 @@ $focus->id = $_REQUEST['record'];
 $loadModule = InputValidation::getService()->getValidInputRequest('loadModule', 'Assert\Mvc\ModuleName');
 $subpanel = new SubPanelTiles($focus, $loadModule);
 
-if(!function_exists('get_form_header')) {
+if (!function_exists('get_form_header')) {
     global $theme;
-
 }
 
 // set up data for subpanels
@@ -37,4 +37,3 @@ $_REQUEST['action'] = 'DetailView';
 //This line of code is critical.  We need to ensure that the global controller bean is set to the $currentModule global variable
 $GLOBALS['app']->controller->bean = $focus;
 echo $subpanel->display(false);
-?>

@@ -51,11 +51,15 @@ class Access extends \Google\Collection
   /**
    * @var string
    */
+  public $userAgent;
+  /**
+   * @var string
+   */
   public $userAgentFamily;
   /**
    * @var string
    */
-  public $username;
+  public $userName;
 
   /**
    * @param string
@@ -172,6 +176,20 @@ class Access extends \Google\Collection
   /**
    * @param string
    */
+  public function setUserAgent($userAgent)
+  {
+    $this->userAgent = $userAgent;
+  }
+  /**
+   * @return string
+   */
+  public function getUserAgent()
+  {
+    return $this->userAgent;
+  }
+  /**
+   * @param string
+   */
   public function setUserAgentFamily($userAgentFamily)
   {
     $this->userAgentFamily = $userAgentFamily;
@@ -186,16 +204,16 @@ class Access extends \Google\Collection
   /**
    * @param string
    */
-  public function setUsername($username)
+  public function setUserName($userName)
   {
-    $this->username = $username;
+    $this->userName = $userName;
   }
   /**
    * @return string
    */
-  public function getUsername()
+  public function getUserName()
   {
-    return $this->username;
+    return $this->userName;
   }
 }
 

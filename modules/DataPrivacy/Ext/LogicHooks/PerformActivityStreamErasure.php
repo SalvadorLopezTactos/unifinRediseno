@@ -13,10 +13,10 @@
 /**
  * Initiate the Activity Stream erasure process if DataPrivacy status transitions to Closed
  */
-$hook_array['after_save'][] = array(
+$hook_array['after_save'][] = [
     1,
     'performActivityStreamErasure',
     'modules/DataPrivacy/DataPrivacyHooks.php',
     'DataPrivacyHooks',
     'performActivityStreamErasure',
-);
+];

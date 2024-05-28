@@ -10,12 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="impersonation-banner flex flex-row items-center absolute w-full bg-impersonation-banner">
-    <span>
-        <span class="sicon sicon-mask icon mx-2.5"></span>
+<div class="absolute bg-purple-600 flex flex-row h-[34px] impersonation-banner items-center justify-between text-white w-full z-[1035]">
+    <div class="flex items-center">
+        <span class="sicon sicon-lg sicon-mask icon mx-2.5 text-white"></span>
         {{#if message}}
-            <span class="text">{{message}}</span>
+            <span class="text-sm">{{message}}</span>
         {{/if}}
-    </span>
-    <a class="btn mr-2.5 text-default" href="#finishImpersonation">{{str 'LBL_FINISH_IMPERSONATING'}}</a>
+    </div>
+    <a class="btn mr-2.5 text-sm text-[--text-color]" href="#finishImpersonation">{{str 'LBL_FINISH_IMPERSONATING'}}</a>
 </div>

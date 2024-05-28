@@ -96,7 +96,7 @@ class SugarUpgradeOpportunityUpdateSalesStageFieldData extends UpgradeScript
             $sq->where()->queryAnd()->addRaw("sales_stage not in ('" . join("', '", $closedWon) . "')");
             $sq->groupBy('sales_stage');
 
-            if (count($rlis = $sq->execute()) > 0) {
+            if (safeCount($rlis = $sq->execute()) > 0) {
                 foreach ($rlis as $rli) {
                     $stage = $rli['sales_stage'];
                     $nextSalesStageOption = array_search(

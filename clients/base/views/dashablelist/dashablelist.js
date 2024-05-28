@@ -99,7 +99,7 @@
         'ProductTypes',
         'UserSignatures',
         'OutboundEmail',
-        'Administration'
+        'Administration',
     ],
 
     /**
@@ -233,6 +233,22 @@
     },
 
     /**
+     * Function to check if the set filter is available for the particular module
+     *
+     * @param moduleName {string} module name
+     * @param filterCheck {string} filter_id being checked
+     * @return {string} Return the given filter is it exists for that module, else return 'all_records'
+     * @private
+     */
+    _checkFilterPerModule: function(moduleName, filterCheck) {
+        let availableFilters = app.metadata.getModule(moduleName, 'filters').basic.meta.filters;
+        let filter = _.find(availableFilters, function(filter) {
+                return filter.id === filterCheck;
+            });
+        return _.isUndefined(filter) ? 'all_records' : filter.id;
+    },
+
+    /**
      * Must implement this method as a part of the contract with the Dashlet
      * plugin. Kicks off the various paths associated with a dashlet:
      * Configuration, preview, and display.
@@ -244,14 +260,15 @@
         if (this.meta.config) {
             // keep the display_columns and label fields in sync with the selected module when configuring a dashlet
             this.settings.on('change:module', function(model, moduleName) {
-                var label = (model.get('filter_id') === 'assigned_to_me') ? 'TPL_DASHLET_MY_MODULE' : 'LBL_MODULE_NAME';
+                let filterId = this._checkFilterPerModule(moduleName, model.get('filter_id'));
+                let label = (filterId === 'assigned_to_me') ? 'TPL_DASHLET_MY_MODULE' : 'LBL_MODULE_NAME';
                 model.set('label', app.lang.get(label, moduleName, {
                     module: app.lang.getModuleName(moduleName, {plural: true})
                 }));
 
                 // Re-initialize the filterpanel with the new module.
                 this.dashModel.set('module', moduleName);
-                this.dashModel.set('filter_id', 'assigned_to_me');
+                this.dashModel.set('filter_id', filterId);
                 this.layout.trigger('dashlet:filter:reinitialize');
 
                 this._updateDisplayColumns();
@@ -273,8 +290,13 @@
 
         if (this.settings.get('intelligent') == '1') {
             let link = this.settings.get('linked_fields');
-            let model = this.model || app.controller.context.get('model');
             let module = this.settings.get('module');
+            let parentModelId = (this.context && this.context.parent && this.context.parent.parent) ?
+                this.context.parent.parent.get('modelId') :
+                null;
+            let model = (parentModelId && app.controller.context.get('targetLayout') === 'focus') ?
+                app.data.createBean(this.context.parent.get('module'), {id: parentModelId}) :
+                this.model || app.controller.context.get('model');
             let options = {
                 link: {
                     name: link,
@@ -613,7 +635,24 @@
      */
     getFieldMetaForView: function(meta) {
         meta = _.isObject(meta) ? meta : {};
-        return !_.isUndefined(meta.panels) ? _.flatten(_.pluck(meta.panels, 'fields')) : [];
+        let metaFields = !_.isUndefined(meta.panels) ? _.flatten(_.pluck(meta.panels, 'fields')) : [];
+        let trueFieldsCount = 3;
+        metaFields = _.map(metaFields, function(field) {
+            if (!_.isUndefined(field.selected)) {
+                if (field.selected === true) {
+                    trueFieldsCount--;
+                }
+                return field;
+            }
+
+            field.selected = false;
+            if (trueFieldsCount !== 0) {
+                field.selected = true;
+                trueFieldsCount--;
+            }
+            return field;
+        });
+        return metaFields;
     },
 
     /**
@@ -725,6 +764,15 @@
         if (_.isEmpty(this._availableModules) || !_.isObject(this._availableModules)) {
             this._availableModules = {};
             var visibleModules = app.metadata.getModuleNames({filter: 'visible', access: 'read'});
+            //Enable users module to show for Admin users
+            if (app.acl.hasAccess('admin', 'Users')) {
+                visibleModules.push('Users');
+                if (_.contains(this.moduleBlacklist, 'Users')) {
+                    this.moduleBlacklist = _.without(this.moduleBlacklist, 'Users');
+                }
+            } else if (!_.contains(this.moduleBlacklist, 'Users')) {
+                this.moduleBlacklist.push('Users');
+            }
             var allowedModules = _.difference(visibleModules, this.moduleBlacklist);
 
             var contextModule = app.controller.context.get('module');

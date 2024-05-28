@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Toevoegen',
     'LBL_ADDRCITY' => 'Plaats',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Info' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Sluiten' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'Er is geen connector gevonden voor de opgegeven bron-ID.',
-);
-
+];

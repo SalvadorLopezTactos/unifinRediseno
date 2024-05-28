@@ -17,5 +17,5 @@ namespace Sugarcrm\Sugarcrm\ProductDefinition\Config\Source;
  */
 interface SourceInterface
 {
-    public function getDefinition():? string;
+    public function getDefinition(): ?string;
 }

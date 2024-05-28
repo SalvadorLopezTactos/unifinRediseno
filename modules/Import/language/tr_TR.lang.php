@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Veri Yükleme Dosyası Başarıyla Okundu',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'İçe aktarılan kayıt, bir işleme katılıyor ve bazı alanlar işlem tarafından düzenlemeye karşı kilitlendiği için düzenlenemez.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Hata nedeniyle kayıt(lar) atlandı',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Eğer kullanıcı yok ise, şu anki kullanıcıyı kullan',
     'LBL_SHOW_HIDDEN' => 'Normal koşullarda Veri Yükleme yapılamayacak alanları göster',
     'LBL_UPDATE_RECORDS' => 'Verileri Yüklemek yerine, kayıtları güncelle (Geri Almak mümkün değil)',
-    'LBL_TEST'=> 'Veri Yüklemeyi Test Et (veriyi saklama veya değiştirme)',
+    'LBL_TEST' => 'Veri Yüklemeyi Test Et (veriyi saklama veya değiştirme)',
     'LBL_TRUNCATE_TABLE' => 'Veri Yükleme öncesinde tabloyu sil (bütün kayıtları sil)',
     'LBL_RELATED_ACCOUNTS' => 'İlişkili Müşterileri Oluşturma',
     'LBL_NO_DATECHECK' => 'Tarih kontrolünü atla (daha hızlı olmasına rağmen yanlış tarih durumunda hata oluşacak)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Geçersiz tamsayı değeri',
     'LBL_ERROR_INVALID_NUM' => 'Geçersiz sayısal değer',
     'LBL_ERROR_INVALID_TIME' => 'Geçersiz saat',
-    'LBL_ERROR_INVALID_EMAIL'=>'Geçersiz E-Posta Adresi',
-    'LBL_ERROR_INVALID_BOOL'=>'Geçersiz değer (1 veya 0 olması gerekmektedir)',
-    'LBL_ERROR_INVALID_DATE'=>'Geçersiz tarih değeri',
-    'LBL_ERROR_INVALID_USER'=>'Geçersiz kullanıcı ismi veya ID',
+    'LBL_ERROR_INVALID_EMAIL' => 'Geçersiz E-Posta Adresi',
+    'LBL_ERROR_INVALID_BOOL' => 'Geçersiz değer (1 veya 0 olması gerekmektedir)',
+    'LBL_ERROR_INVALID_DATE' => 'Geçersiz tarih değeri',
+    'LBL_ERROR_INVALID_USER' => 'Geçersiz kullanıcı ismi veya ID',
     'LBL_ERROR_INVALID_TEAM' => 'Geçersiz takım ismi veya ID',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Geçersiz müşteri ismi veya ID',
     'LBL_ERROR_INVALID_RELATE' => 'Geçersiz ilişkili alanlar',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'mevcut değil veya yazılamaz durumda',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Dosya başarıyla yüklenemedi. php.ini dosyasındaki &#39;upload_max_filesize&#39; değeri çok küçük belirlenmiş olabilir',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Dosya çok büyük. Maksimum:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bayt. config.php dosyasında $sugar_config[&#39;upload_maxsize&#39;] parametresini değiştirin',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Baytlar. config.php içerisinde $sugar_config[&#39;upload_maxsize&#39;] değerini değiştirin',
     'LBL_MODULE_NAME' => 'Veri Yükle',
     'LBL_MODULE_NAME_SINGULAR' => 'Veri Yükle',
     'LBL_TRY_AGAIN' => 'Tekrar Dene',
     'LBL_START_OVER' => 'Yeniden Başlat',
     'LBL_ERROR' => 'Hata:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Aktarım dosyası {0} satır içermektedir. İdeal satırların sayısı {1} dir. Daha fazla satır aktarım sürecini yavaşlatabilir. Aktarıma devam etmek için Tamam butonuna tıklayın. Aktarım dosyasını gözden geçirmek ve tekrar yüklemek için İptal butonuna tıklayın.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Sistem Yöneticisi kullanıcısını yükleyemezsiniz',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Sistem Yöneticisi kullanıcısını yükleyemezsiniz',
     'ERR_REPORT_LOOP' => 'Sistem bir organizasyonel raporlama sonsuz döngüsü fark etti. Bir kullanıcı kendisine rapor edemez veya yöneticilerinden herhangi biri rapor edemez.',
     'ERR_MULTIPLE' => 'Aynı alan ismiyle birden fazla kolon tanımlanmış durumda.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Doldurulması zorunlu alanlar eksik:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Yüklediğiniz dosyada satır yok',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Yüklenecek dosya zaten işlendi veya bulunamadı',
     'LBL_SUCCESS' => 'Başarılı:',
-	'LBL_FAILURE' => 'Veri Yükleme Başarısız:',
+    'LBL_FAILURE' => 'Veri Yükleme Başarısız:',
     'LBL_SUCCESSFULLY' => 'Veriler Başarıyla Yüklendi',
     'LBL_LAST_IMPORT_UNDONE' => 'Son yüklemeniz geri alınmıştı.',
     'LBL_NO_IMPORT_TO_UNDO' => 'Geri alınacak herhangi bir yükleme yok.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Tekrar Veri Yükle',
     'LBL_FINISHED' => 'Tamamlanmış',
     'LBL_UNDO_LAST_IMPORT' => 'Veri Yüklemeyi Geri Al',
-    'LBL_LAST_IMPORTED'=>'Son Oluşturuldu',
+    'LBL_LAST_IMPORTED' => 'Son Oluşturuldu',
     'ERR_MULTIPLE_PARENTS' => 'Yalnızca bir adet Üst ID tanımlayabilirsiniz',
     'LBL_DUPLICATES' => 'Aynı Olabilecek Kayıtlar Bulundu',
     'LNK_DUPLICATE_LIST' => 'Aynı Olabilecek Kayıtların Listesini İndirin',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Notları Gizle',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Ön izleme Kolonlarını Göster',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Ön izleme Kolonlarını Gizle',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Operatör kullanarak çift kayıotları kontrol edin:',
     'LBL_SAVE_MAPPING_AS' => 'Veri yükleme ayarlarını kaydetmek için, isim belirtiniz:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Tek Tırnak (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Çift Tırnak (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Yeni kayıtları, kendi varsayılan takımınızdan/takımlarınızdan başka bir takıma atamak için Varsayılan Değer kolonunu kullanın.',
     'LBL_SIGN_IN_HELP' => 'Bu hizmeti etkinleştirmek için, kullanıcı ayarları sayfasında Harici Hesaplar sekmesi altından giriş yapın.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "\"Bean\" desteklemediği halde, e-mail adreslerini yönetilmesine çalışılıyor",
-);
+];

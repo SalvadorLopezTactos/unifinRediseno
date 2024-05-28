@@ -11,25 +11,17 @@
  */
 --}}
 {{#unless hideActivity}}
-<div class="block filtered tabbable tabs-left" id="moduleActivity">
-    {{#if relatedCollection.dataFetched}}
-        {{#if models.length}}
-            <div class="activity-timeline-create"></div>
-            <div class="activity-timeline-cards"></div>
-            {{#unless fetchCompleted}}
-                <div class="dashlet-footer">
-                    <button class="more btn btn-link btn-invisible">{{str "LBL_SHOW_MORE"}}...</button>
-                </div>
-            {{/unless}}
-        {{else}}
-            <div  class="empty-activity tcenter">
-                <h1>{{str 'LBL_NO_ACTIVITY'}}</h1>
-                <img class="placeholder-empty" src="{{buildUrl url='styleguide/assets/img/dashboards/empty-state.svg'}}">
-            </div>
-        {{/if}}
-    {{/if}}
+<div class="block filtered tabbable tabs-left test1" id="moduleActivity">
+    <div class="activity-timeline-create"></div>
+    <div class="activity-timeline-cards"></div>
+    {{#unless fetchCompleted}}
+        <div class="dashlet-footer">
+            <button class="more btn btn-link btn-invisible">{{str "LBL_SHOW_MORE"}}...</button>
+        </div>
+    {{/unless}}
+
     <div class="actions">
-        <a class="btn addNote" rel="tooltip" data-action="addNote" data-placement="left"
+        <a class="btn addNote" rel="tooltip" data-action="addNote" data-bs-placement="left"
            title="{{str "LBL_PORTAL_NEW_NOTE_TITLE"}}"
         >
             <i class="sicon sicon-plus"></i>

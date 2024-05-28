@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'FW:',
     'LBL_RE' => 'Re:',
     'LBL_BUTTON_CREATE' => 'Vytvoriť',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Vyberte z e-mailového účtu',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Vyberte podpis',
     'LBL_SIGNATURE' => 'Podpis',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Predvolený podpis",
-    "LBL_SHOW_MORE_SIGNATURES" => "Viac podpisov...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Predvolený podpis',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Viac podpisov...',
     'LBL_SUBJECT' => 'Predmet:',
     'LBL_TEMPLATE' => 'Šablóna',
     'LBL_TEXT_BODY' => 'Telo textu',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Čas odoslania',
     'LBL_LIST_TO_ADDR' => 'Príjemca',
     'LBL_LIST_TYPE' => 'Typ',
-    "LBL_SELECTED_RECIPIENTS" => "Vybratí príjemcovia",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Viac príjemcov ...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Adresár",
+    'LBL_SELECTED_RECIPIENTS' => 'Vybratí príjemcovia',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Viac príjemcov ...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Adresár',
     'NTC_REMOVE_INVITEE' => 'Naozaj chcete odstrániť tohto príjemcu zo e-mailu?',
     'WARNING_SETTINGS_NOT_CONF' => 'Vaše nastavenia e-mailu nie sú správne nakonfigurované na odosielanie e-mailov. Server SMTP ' .
         'musí byť nakonfigurovaný v <a href="#bwc/index.php?module=EmailMan&action=config">Email Settings</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Prílohy sa nemusia správne pripojiť: Bola zistená nesprávna alebo nepoužiteľná hodnota pre "upload_tmp_dir" ' .
         'Opravte túto chybu v súbore php.ini.',
     'LBL_MESSAGE_UID' => 'UID správy',
-    'LBL_OPEN_DRAFT_ALERT' => 'E-mail je koncept. Kliknite na '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'E-mail je koncept. Kliknite na ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  pre úpravu.',
     'LBL_EMAIL_BODY' => 'E-mailová správa',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na e-maily',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Informačný panel so záznamom e-mailov',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová os e-mailu',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'nie sú stanovení príjemcovia',
@@ -475,4 +476,5 @@ Prostredníctvom tlačidla Šablóna môžete použiť preddefinovanú šablónu
     'LBL_SHORTCUT_EMAIL_SEND' => 'Odoslať e-mail',
     'LBL_MAILBOX' => 'Prichádzajúca pošta',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Aby ste mohli odosielať e-maily, nakonfigurujte účet odchádzajúcich e-mailov pomocou <a href="#OutboundEmail">Nastavenia e-mailu</a>.',
-);
+    'LBL_TOO_SHORT' => 'Zadajte aspoň {0} znakov...',
+];

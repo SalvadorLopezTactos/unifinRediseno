@@ -15,14 +15,13 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
- $app_list_strings = array (
 
-  strtolower($object_name).'_type_dom' =>
-  array (
-    '' => '',
-    'Existing Business' => 'العمل الحالي',
-    'New Business' => 'العمل الجديد',
-  ),
+$app_list_strings = [
 
-  );
+    strtolower($object_name) . '_type_dom' => [
+        '' => '',
+        'Existing Business' => 'أعمال قائمة',
+        'New Business' => 'أعمال جديدة',
+    ],
+
+];

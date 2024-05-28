@@ -30,12 +30,12 @@ class BackwardCompatibleAdapter implements LoggerInterface
      *
      * @var array
      */
-    protected static $levelMap = array(
+    protected static $levelMap = [
         'fatal' => LogLevel::ALERT,
         'security' => LogLevel::CRITICAL,
         'warn' => LogLevel::WARNING,
         'deprecated' => LogLevel::NOTICE,
-    );
+    ];
 
     /**
      * Underlying pure PSR-3 logger
@@ -78,7 +78,7 @@ class BackwardCompatibleAdapter implements LoggerInterface
     }
 
     /** {@inheritDoc} */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         $this->logger->log($level, $message, $context);
     }

@@ -57,24 +57,24 @@ final class StateAwareRebuild
     public function __invoke($ignoreUpToDate = false)
     {
         if (!$this->state->isEnabled()) {
-            return array(
+            return [
                 true,
                 'The use of denormalized table is not enabled. No need to run the job.',
-            );
+            ];
         }
 
         if ($this->state->isRebuildRunning()) {
-            return array(
+            return [
                 true,
                 'Denormalized table rebuild is already running.',
-            );
+            ];
         }
 
         if (!$ignoreUpToDate && $this->state->isUpToDate()) {
-            return array(
+            return [
                 true,
                 'Denormalized data is up to date.',
-            );
+            ];
         }
 
         try {
@@ -86,20 +86,20 @@ final class StateAwareRebuild
         } catch (\Exception $e) {
             $this->logger->critical($e);
 
-            return array(
+            return [
                 false,
                 sprintf(
                     'Denormalized table rebuild failed with error: %s',
                     $e->getMessage()
                 ),
-            );
+            ];
         } finally {
             $this->state->markRebuildNotRunning();
         }
 
-        return array(
+        return [
             true,
             'Denormalized table rebuild completed',
-        );
+        ];
     }
 }

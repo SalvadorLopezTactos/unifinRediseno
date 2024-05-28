@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'การกำหนดค่าคอนโซล',
     'LBL_MODULE_NAME_SINGULAR' => 'การกำหนดค่าคอนโซล',
     'LBL_CONSOLE_CONFIG_TITLE' => 'คอนโซล',
@@ -55,4 +56,4 @@ $mod_strings = array(
     'LBL_CONSOLE_DIRECTIONS_CHANGE' => 'การเปลี่ยนแปลงจะเกิดผลทันที แต่คุณจะต้องทำการบันทึกเพื่อที่จะให้มันเกิดผล',
     'LBL_CONSOLE_DIRECTIONS_FILTER_AND' => 'และ ',
     'LBL_CONSOLE_DIRECTIONS_FILTER_OR' => 'หรือ ',
-);
+];

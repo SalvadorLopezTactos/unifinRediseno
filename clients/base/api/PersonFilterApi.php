@@ -11,46 +11,51 @@
  */
 
 
-class PersonFilterApi extends FilterApi {
+class PersonFilterApi extends FilterApi
+{
     /**
      * @var bool|mixed
      */
     public $useOnlyActiveUsers;
-    public function registerApiRest() {
-        return array(
-            'UserSearch' => array(
+
+    protected $filterPortalUsers;
+
+    public function registerApiRest()
+    {
+        return [
+            'UserSearch' => [
                 'reqType' => 'GET',
-                'path' => array('Users'),
-                'jsonParams' => array('filter'),
-                'pathVars' => array('module_list'),
+                'path' => ['Users'],
+                'jsonParams' => ['filter'],
+                'pathVars' => ['module_list'],
                 'method' => 'filterList',
                 'shortHelp' => 'Search User records',
                 'longHelp' => 'include/api/help/module_filter_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     // Thrown in filterList and filterListSetup
                     'SugarApiExceptionInvalidParameter',
                     // Thrown in filterListSetup and parseArguments
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionError',
-                )
-            ),
-            'EmployeeSearch' => array(
+                ],
+            ],
+            'EmployeeSearch' => [
                 'reqType' => 'GET',
-                'path' => array('Employees'),
-                'jsonParams' => array('filter'),
-                'pathVars' => array('module_list'),
+                'path' => ['Employees'],
+                'jsonParams' => ['filter'],
+                'pathVars' => ['module_list'],
                 'method' => 'filterList',
                 'shortHelp' => 'Search Employee records',
                 'longHelp' => 'include/api/help/module_filter_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     // Thrown in filterList and filterListSetup
                     'SugarApiExceptionInvalidParameter',
                     // Thrown in filterListSetup and parseArguments
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionError',
-                )
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**
@@ -69,21 +74,27 @@ class PersonFilterApi extends FilterApi {
      */
     public function filterList(ServiceBase $api, array $args, $acl = 'list')
     {
+        $this->filterPortalUsers = safeInArray($args['module_list'], ['Users', 'Employees']) &&
+            !empty($args['filterPortal']);
+        $this->useOnlyActiveUsers = safeInArray($args['module_list'], ['Users', 'Employees']) &&
+            !empty($args['filterInactive']);
+
         if (!empty($args['q'])) {
+            $this->useOnlyActiveUsers = $this->useOnlyActiveUsers && empty($options['fieldFilters']['status']);
             return $this->globalSearch($api, $args);
         }
+
+        $this->useOnlyActiveUsers = $this->useOnlyActiveUsers && empty(array_column($args['filter'] ?? [], 'status'));
 
         $args['module'] = $args['module_list'];
 
         $api->action = 'list';
         [$args, $q, $options, $seed] = $this->filterListSetup($api, $args);
 
-        // To maintain the contract, set this as a property on this object
-        $this->useOnlyActiveUsers = isset($args['filter']) && $this->useOnlyActiveUsers($args['filter']);
         $this->getCustomWhereForModule($args['module_list'], $q);
 
         if (($options['id_query'] ?? null) instanceof SugarQuery) {
-            $this->addCustomWhereToIdQuery((string) $args['module_list'], $options['id_query']);
+            $this->addCustomWhereToIdQuery((string)$args['module_list'], $options['id_query']);
         }
 
         return $this->runQuery($api, $args, $q, $options, $seed);
@@ -95,20 +106,20 @@ class PersonFilterApi extends FilterApi {
      * @param array $args The arguments array passed in from the API
      * @return array result set
      */
-    public function globalSearch(ServiceBase $api, array $args) {
+    public function globalSearch(ServiceBase $api, array $args)
+    {
         $api->action = 'list';
         // This is required to keep the loadFromRow() function in the bean from making our day harder than it already is.
         $GLOBALS['disable_date_format'] = true;
         $search = new UnifiedSearchApi();
-        $options = $search->parseSearchOptions($api,$args);
+        $options = $search->parseSearchOptions($api, $args);
 
         // In case we want to filter on user status
-        $this->useOnlyActiveUsers = !empty($options['fieldFilters']['status']);
         $options['custom_where'] = $this->getCustomWhereForModule($args['module_list']);
 
         $searchEngine = new SugarSpot();
         $options['resortResults'] = true;
-        $recordSet = $search->globalSearchSpot($api,$args,$searchEngine,$options);
+        $recordSet = $search->globalSearchSpot($api, $args, $searchEngine, $options);
 
         return $recordSet;
     }
@@ -120,18 +131,24 @@ class PersonFilterApi extends FilterApi {
      * @param string $module The name of the module we are looking for
      * @return string
      */
-    protected function getCustomWhereForModule($module, $query = null) {
+    protected function getCustomWhereForModule($module, $query = null)
+    {
         if ($query instanceof SugarQuery) {
             if ($module == 'Employees') {
-                $query->where()->equals('employee_status', 'Active')->equals('show_on_employees','1');
+                $query->where()->equals('employee_status', 'Active')->equals('show_on_employees', '1');
                 return;
             }
 
-            // This allows us to filter on active or inactive users
-            $w = $query->where()->equals('portal_only', '0');
-            if ($this->useOnlyActiveUsers) {
-                $w->equals('status', 'Active');
+            // Filter out portal type Users if necessary
+            if ($this->filterPortalUsers) {
+                $query->where()->equals('portal_only', '0');
             }
+
+            // Filter out inactive Users if necessary
+            if ($this->useOnlyActiveUsers) {
+                $query->where()->equals('status', 'Active');
+            }
+
             return;
         }
 
@@ -139,9 +156,22 @@ class PersonFilterApi extends FilterApi {
             return "users.employee_status = 'Active' AND users.show_on_employees = 1";
         }
 
-        // Same here... allow filtering of active or inactive users
-        $r = $this->useOnlyActiveUsers ? "users.status = 'Active' AND " : '';
-        return "$r users.portal_only = 0";
+        $filter = '';
+
+        // Filter out portal type Users if necessary
+        if ($this->filterPortalUsers) {
+            $filter .= "users.portal_only = 0";
+        }
+
+        // Filter out inactive Users if necessary
+        if ($this->useOnlyActiveUsers) {
+            if (!empty($filter)) {
+                $filter .= ' AND ';
+            }
+            $filter .= "users.status = 'Active'";
+        }
+
+        return $filter;
     }
 
     /**
@@ -150,8 +180,9 @@ class PersonFilterApi extends FilterApi {
      * status = 'Active'
      * @param array $filter Filter definition
      * @return boolean
+     * @deprecated As of 13.3 this is no longer used
      */
-    protected function useOnlyActiveUsers(array $filter = []) : bool
+    protected function useOnlyActiveUsers(array $filter = []): bool
     {
         return empty(array_column($filter, 'status'));
     }
@@ -167,9 +198,14 @@ class PersonFilterApi extends FilterApi {
             return;
         }
 
-        $w = $query->where()->equals('portal_only', '0');
+        // Filter out portal type Users if necessary
+        if ($this->filterPortalUsers) {
+            $query->where()->equals('portal_only', '0');
+        }
+
+        // Filter out inactive Users if necessary
         if ($this->useOnlyActiveUsers) {
-            $w->equals('status', 'Active');
+            $query->where()->equals('status', 'Active');
         }
     }
 }

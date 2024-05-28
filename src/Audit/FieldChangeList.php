@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -45,7 +47,7 @@ class FieldChangeList implements JsonSerializable, IteratorAggregate, \Countable
      *
      * @return self
      */
-    public static function fromChanges(array $changes) : self
+    public static function fromChanges(array $changes): self
     {
         //Todo: Refactor once we want to add support for custom Field Change classes.
         $auditFields = [];
@@ -103,6 +105,6 @@ class FieldChangeList implements JsonSerializable, IteratorAggregate, \Countable
      */
     public function count(): int
     {
-        return count($this->changes);
+        return safeCount($this->changes);
     }
 }

@@ -13,7 +13,7 @@
 
 class Template
 {
- function display()
- { 
- }
+    public function display()
+    {
+    }
 }

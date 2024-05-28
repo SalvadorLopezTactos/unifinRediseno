@@ -9,16 +9,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ProductCategories']['mobile']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['ProductCategories']['mobile']['view']['list'] = [
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
+            'fields' => [
                 'name',
                 'parent_name',
                 'description',
                 'list_order',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

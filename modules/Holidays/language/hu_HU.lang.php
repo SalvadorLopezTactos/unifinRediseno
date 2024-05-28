@@ -32,7 +32,7 @@ $mod_strings = [
 
     'LBL_RESOURCE' => 'Forrás:',
     'LBL_PERSON_TYPE' => 'Személy típusa:',
-    'LBL_RELATED_MODULE'=> 'Kapcsolódó modul:',
+    'LBL_RELATED_MODULE' => 'Kapcsolódó modul:',
 
     // For HolidaysQuickCreate.php
     'LBL_SELECT_RESOURCE_TYPE' => 'Válasszon forrás típust...',

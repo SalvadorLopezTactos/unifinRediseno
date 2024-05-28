@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Aktyvūs pašto klientai',
     'LBL_ASSIGNEE_RULE' => 'Perėmėjo taisyklė',
     'LBL_TARGET_ASSIGNEE' => 'Tikslinis perėmėjas',
+    'LBL_STAGE_NUMBERS' => 'Etapų numeracija',
     'LBL_EXPORT_BUTTON_LABEL' => 'Eksportuoti',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Importas',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Automatiškai sukurti / atnaujinti naują „Smart Guide“ šablono įrašą importuojant *.json failą iš failų sistemos.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Jei pažymėta, Jei „Tikslinis priskirtasis“ = „Pagrindinis paskirtasis“, kai pakeičiamas pagrindinis „Priskirta (kam)“ vartotojas, vartotojai „Priskirta (kam)“ taip pat automatiškai pasikeis išmaniuosiuose vadovuose, etapuose ir veikloje. Atminkite, kad veiklos šablonų tikslinio priskirtojo nuostatos turi viršenybę prieš „Smart Guide“ šabloną',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Kada vartotojas turi būti priskirtas veiklai',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Kam turėtų būti priskirtos veiklos',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Šis perjungiklis leidžia parodyti arba paslėpti automatinį etapų numeravimą.',
     'CJ_FORMS_LBL_PARENT_NAME' => '„Smart Guide“ / etapas / veiklos šablonas',
 ];

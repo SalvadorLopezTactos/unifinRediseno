@@ -10,52 +10,52 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['roles_modules'] = array(
+$dictionary['roles_modules'] = [
     'table' => 'roles_modules',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'role_id' => array(
+        ],
+        'role_id' => [
             'name' => 'role_id',
             'type' => 'id',
-        ),
-        'module_id' => array(
+        ],
+        'module_id' => [
             'name' => 'module_id',
             'type' => 'id',
-        ),
-        'allow' => array(
+        ],
+        'allow' => [
             'name' => 'allow',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'roles_modulespk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_module_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'module_id',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

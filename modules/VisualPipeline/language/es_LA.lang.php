@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Vista del mosaico',
     'LBL_MODULE_NAME_SINGULAR' => 'Vista del mosaico',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'Vista del mosaico',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => 'Módulos Habilitados',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'Módulos de la Vista de Mosaico',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'Configuración del módulo',
-    'LBL_PIPELINE_TABLE_HEADER' => "Seleccione el campo cuyos valores se utilizarán como columnas",
+    'LBL_PIPELINE_TABLE_HEADER' => 'Seleccione el campo cuyos valores se utilizarán como columnas',
     'LBL_PIPELINE_TILE_HEADER' => 'Campo del Encabezado del Mosaico',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => 'Columnas disponibles',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => 'Campos del Cuerpo del Mosaico',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'Previsualización del mosaico',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'Demasiados campos en el mosaico.',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => 'Resuelva los errores en las siguientes pestañas de configuración de módulos antes de continuar:<br><br>',
-);
+    'LBL_MODULE_SELECTION' => 'Seleccione el módulo que desea ver y configurar a continuación',
+    'LBL_SHOW_COLUMN_COUNT' => 'Mostrar recuento de columnas',
+    'LBL_SHOW_COLUMN_TOTAL' => 'Mostrar total de columnas',
+    'LBL_TOTAL_FIELD' => 'Campo total',
+];

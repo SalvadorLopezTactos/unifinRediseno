@@ -9,13 +9,14 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
+
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 class ViewConfigureshortcutbar extends SugarView
@@ -25,7 +26,7 @@ class ViewConfigureshortcutbar extends SugarView
      *
      * @var array
      */
-    private $blacklistedModules = array(
+    private $blacklistedModules = [
         'EAPM',
         'Users',
         'Employees',
@@ -34,48 +35,48 @@ class ViewConfigureshortcutbar extends SugarView
         'pmse_Inbox',
         'pmse_Business_Rules',
         'pmse_Emails_Templates',
-    );
+    ];
 
     /**
-	 * @see SugarView::_getModuleTitleParams()
-	 */
-	protected function _getModuleTitleParams($browserTitle = false)
-	{
-	    global $mod_strings;
+     * @see SugarView::_getModuleTitleParams()
+     */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _getModuleTitleParams($browserTitle = false)
+    {
+        global $mod_strings;
 
-        return array("<a href='#Administration'>".$mod_strings['LBL_MODULE_NAME']."</a>", $mod_strings['LBL_CONFIGURE_SHORTCUT_BAR']);
+        return ["<a href='#Administration'>" . $mod_strings['LBL_MODULE_NAME'] . '</a>', $mod_strings['LBL_CONFIGURE_SHORTCUT_BAR']];
     }
 
     /**
-	 * @see SugarView::preDisplay()
-	 */
-	public function preDisplay()
-	{
-	    global $current_user;
+     * @see SugarView::preDisplay()
+     */
+    public function preDisplay()
+    {
+        global $current_user;
 
-	    if (!is_admin($current_user))
-        {
-	        sugar_die("Unauthorized access to administration.");
+        if (!is_admin($current_user)) {
+            sugar_die('Unauthorized access to administration.');
         }
-	}
+    }
 
     /**
-	 * @see SugarView::display()
-	 */
+     * @see SugarView::display()
+     */
     public function display()
     {
         global $mod_strings;
 
         $title = getClassicModuleTitle(
-            "Administration",
-            array(
+            'Administration',
+            [
                 "<a href='#Administration'>{$mod_strings['LBL_MODULE_NAME']}</a>",
-                translate('LBL_CONFIGURE_SHORTCUT_BAR')
-            ),
+                translate('LBL_CONFIGURE_SHORTCUT_BAR'),
+            ],
             false
         );
-        $msg = "";
-        $GLOBALS['log']->info("Administration ConfigureShortcutBar view");
+        $msg = '';
+        $GLOBALS['log']->info('Administration ConfigureShortcutBar view');
 
         $quickCreateModules = $this->getQuickCreateModules();
         $request = InputValidation::getService();
@@ -83,9 +84,9 @@ class ViewConfigureshortcutbar extends SugarView
         //If save is set, save then let the user know if the save worked.
         if (!empty($_REQUEST['enabled_modules'])) {
             // get the enabled
-            $enabled_modules = $request->getValidInputRequest('enabled_modules', array(
-                'Assert\JSON' => array('htmlDecode' => true)
-            ));
+            $enabled_modules = $request->getValidInputRequest('enabled_modules', [
+                'Assert\JSON' => ['htmlDecode' => true],
+            ]);
 
             $enabledModules = array_flip($enabled_modules);
 
@@ -96,10 +97,10 @@ class ViewConfigureshortcutbar extends SugarView
             );
 
             if ($successful) {
-                MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_MODULES));
-                echo "true";
+                MetaDataManager::refreshSectionCache([MetaDataManager::MM_MODULES]);
+                echo 'true';
             } else {
-                echo translate("LBL_SAVE_FAILED");
+                echo translate('LBL_SAVE_FAILED');
             }
         } else {
             $enabled = $this->sortEnabledModules($quickCreateModules['enabled']);
@@ -114,17 +115,17 @@ class ViewConfigureshortcutbar extends SugarView
 
             $this->ss->assign('enabled_modules', json_encode($enabled));
             $this->ss->assign('disabled_modules', json_encode($disabled));
-            $this->ss->assign('description', translate("LBL_CONFIGURE_SHORTCUT_BAR"));
+            $this->ss->assign('description', translate('LBL_CONFIGURE_SHORTCUT_BAR'));
             $this->ss->assign('msg', $msg);
 
             $returnModule = $request->getValidInputRequest(
                 'return_module',
-                array('Assert\Type' => (array('type' => 'string'))),
+                ['Assert\Type' => (['type' => 'string'])],
                 'Administration'
             );
             $returnAction = $request->getValidInputRequest(
                 'return_action',
-                array('Assert\Type' => (array('type' => 'string'))),
+                ['Assert\Type' => (['type' => 'string'])],
                 'index'
             );
             $this->ss->assign('RETURN_MODULE', $returnModule);
@@ -142,8 +143,8 @@ class ViewConfigureshortcutbar extends SugarView
     public function getQuickCreateModules()
     {
         global $moduleList;
-        $enabledModules = array();
-        $disabledModules = array();
+        $enabledModules = [];
+        $disabledModules = [];
 
         foreach ($moduleList as $module) {
             $quickCreateMetadata = $this->getQuickCreateMetadata($module);
@@ -161,10 +162,10 @@ class ViewConfigureshortcutbar extends SugarView
             }
         }
 
-        return array(
+        return [
             'enabled' => $enabledModules,
             'disabled' => $disabledModules,
-        );
+        ];
     }
 
     /**
@@ -252,7 +253,7 @@ class ViewConfigureshortcutbar extends SugarView
 
         //if custom file was written correctly, update the cached menu file
         if ($result) {
-            MetaDataFiles::buildModuleClientCache(array('base'), 'menu', $module);
+            MetaDataFiles::buildModuleClientCache(['base'], 'menu', $module);
         }
 
         return $result;
@@ -283,14 +284,14 @@ class ViewConfigureshortcutbar extends SugarView
      */
     protected function filterAndFormatModuleList($moduleList)
     {
-        $results = array();
+        $results = [];
 
         foreach ($moduleList as $module => $data) {
             if (!in_array($module, $this->blacklistedModules)) {
-                $results[] = array(
+                $results[] = [
                     'module' => $module,
                     'label' => translate($module),
-                );
+                ];
             }
         }
 

@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Liste for kjøpt varelinjeoppføring',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Dashbord for kjøpt varelinjeoppføring',
     'LBL_PARENT_PURCHASE' => 'Overordnet kjøp',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Kjøpt varelinje tidslinje',
 ];

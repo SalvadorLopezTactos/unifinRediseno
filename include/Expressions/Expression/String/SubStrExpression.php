@@ -15,31 +15,33 @@
  * Returns <i>length</i> characters starting at 0-based index <i>from</i>.<br />
  * ex: <em>subStr("Hello", 1, 3)</em> = "ell"
  */
-class SubStrExpression extends StringExpression 
+class SubStrExpression extends StringExpression
 {
     /**
-    * Returns itself when evaluating.
-    */
-    function evaluate() 
+     * Returns itself when evaluating.
+     */
+    public function evaluate()
     {
         $params = $this->getParameters();
         $str = $params[0]->evaluate();
         $fromIdx = $params[1]->evaluate();
         $strLength = $params[2]->evaluate();
 
-        if (!is_numeric($fromIdx))
-          throw new Exception(static::getOperationName() . ": Parameter FROM must be a number.");
+        if (!is_numeric($fromIdx)) {
+            throw new Exception(static::getOperationName() . ': Parameter FROM must be a number.');
+        }
 
-        if (!is_numeric($strLength))
-          throw new Exception(static::getOperationName() . ": Parameter LENGTH must be a number.");
+        if (!is_numeric($strLength)) {
+            throw new Exception(static::getOperationName() . ': Parameter LENGTH must be a number.');
+        }
 
         return sugarSubstr($str, $fromIdx, $strLength);
     }
 
     /**
-    * Returns the JS Equivalent of the evaluate function.
-    */
-    static function getJSEvaluate() 
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
     {
         return <<<EOQ
             var params = this.getParameters();
@@ -51,34 +53,34 @@ EOQ;
     }
 
     /**
-    * Returns the opreation name that this Expression should be
-    * called by.
-    */
-    static function getOperationName() 
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
     {
-        return "subStr";
+        return 'subStr';
     }
 
     /**
-    * Any generic type will suffice.
-    */
-    static function getParameterTypes()
+     * Any generic type will suffice.
+     */
+    public static function getParameterTypes()
     {
-        return array("string", "number", "number");
+        return ['string', 'number', 'number'];
     }
 
     /**
-    * Returns the exact number of parameters needed.
-    */
-    static function getParamCount() 
+     * Returns the exact number of parameters needed.
+     */
+    public static function getParamCount()
     {
         return 3;
     }
 
     /**
-    * Returns the String representation of this Expression.
-    */
-    function toString() 
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
     {
     }
 }

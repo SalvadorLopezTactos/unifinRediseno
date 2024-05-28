@@ -11,8 +11,8 @@
  */
 
 
-class CurrentUserMobileApi extends CurrentUserApi {
-
+class CurrentUserMobileApi extends CurrentUserApi
+{
     /**
      * Get the user hash
      *

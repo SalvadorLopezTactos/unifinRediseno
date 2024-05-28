@@ -33,13 +33,14 @@ class SugarQuery_Builder_Orderby
         $this->direction = $direction;
     }
 
-    public function addField($column)
+    public function addField($column, $nullsLast = false)
     {
-        $this->column = new SugarQuery_Builder_Field_Orderby($column, $this->query, $this->direction);
+        $this->column = new SugarQuery_Builder_Field_Orderby($column, $this->query, $this->direction, $nullsLast);
         return $this;
     }
 
-    public function addRaw($expression) {
+    public function addRaw($expression)
+    {
         $this->column = new SugarQuery_Builder_Field_Raw($expression, $this->query);
     }
 }

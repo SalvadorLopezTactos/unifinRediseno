@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper;
 
 /**
@@ -21,12 +22,12 @@ class ProgressHelper
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\activityHelper
      */
     private $activityHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\scoreHelper
      */
     private $scoreHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\pointsHelper
      */

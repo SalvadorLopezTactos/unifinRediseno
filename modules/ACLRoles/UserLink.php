@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\ACL\Cache as AclCacheInterface;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
@@ -24,12 +25,12 @@ class UserLink extends Link2
      * {@inheritDoc}
      * @see Link2::add()
      */
-    public function add($rel_keys, $additional_values = array())
+    public function add($rel_keys, $additional_values = [])
     {
         // clear acl cache
         if ($this->focus instanceof ACLRole) {
             if (!is_array($rel_keys)) {
-                $rel_keys = array($rel_keys);
+                $rel_keys = [$rel_keys];
             }
             foreach ($rel_keys as $rel_key) {
                 if ($rel_key instanceof User) {

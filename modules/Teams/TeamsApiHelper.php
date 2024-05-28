@@ -13,7 +13,6 @@
 
 class TeamsApiHelper extends SugarBeanApiHelper
 {
-
     /**
      * Formats the bean so it is ready to be handed back to the API's client. Certian fields will get extra processing
      * to make them easier to work with from the client end.
@@ -23,11 +22,11 @@ class TeamsApiHelper extends SugarBeanApiHelper
      * @param $options array Currently no options are supported
      * @return array The bean in array format, ready for passing out the API to clients.
      */
-    public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(SugarBean $bean, array $fieldList = [], array $options = [])
     {
         $data = parent::formatForApi($bean, $fieldList, $options);
 
-        if (in_array("name", $fieldList) && !empty($bean->name_2)) {
+        if (in_array('name', $fieldList) && !empty($bean->name_2)) {
             $data['name'] = trim($bean->name . ' ' . $bean->name_2);
             if (!empty($data['name_2'])) {
                 $data['name_2'] = '';

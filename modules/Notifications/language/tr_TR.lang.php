@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_ASSIGNED_TO_ID' => 'Atanan Kullanıcı ID',
     'LBL_ASSIGNED_TO_NAME' => 'Atanan Kişi',
     'LBL_ID' => 'KİMLİK',
@@ -52,4 +52,4 @@ $mod_strings = array(
     'LBL_UNREAD' => 'Okunmadı',
     'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Sizden bahseden kişi:',
     'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Sizden bahsedildi',
-);
+];

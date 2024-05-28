@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'FW:',
     'LBL_RE' => 'Re:',
     'LBL_BUTTON_CREATE' => 'Creează',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Alegeți din contul de email',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Alege semnatura',
     'LBL_SIGNATURE' => 'Semnatura',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "semnătură implicită",
-    "LBL_SHOW_MORE_SIGNATURES" => "Mai multe semnaturi",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'semnătură implicită',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Mai multe semnaturi',
     'LBL_SUBJECT' => 'Subiect',
     'LBL_TEMPLATE' => 'Șablon',
     'LBL_TEXT_BODY' => 'Corp text',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Cand a fost trimis',
     'LBL_LIST_TO_ADDR' => 'Spre:',
     'LBL_LIST_TYPE' => 'Tip',
-    "LBL_SELECTED_RECIPIENTS" => "Destinatari selectati",
-    "LBL_SHOW_MORE_RECIPIENTS" => "mai multi destinatari",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Cartea de adrese",
+    'LBL_SELECTED_RECIPIENTS' => 'Destinatari selectati',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'mai multi destinatari',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Cartea de adrese',
     'NTC_REMOVE_INVITEE' => 'Sunteţi sigur că doriţi să eliminaţi acest recipient din e-mail?',
     'WARNING_SETTINGS_NOT_CONF' => 'Setările de e-mail nu sunt configurate corect pentru a trimite e-mailul. Un server SMTP ' .
         'trebuie să fie configurat în <a href="#bwc/index.php?module=EmailMan&action=config"> Setări e-mail</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Atașamentele pot eșua: O valoare incorectă sau inutilizabilă pentru "upload_tmp_dir" ' .
         'a fost detectată. Corectați acest lucru în fișierul php.ini.',
     'LBL_MESSAGE_UID' => 'UID mesaj',
-    'LBL_OPEN_DRAFT_ALERT' => 'E-mailul este o schiță. Faceți clic pe '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'E-mailul este o schiță. Faceți clic pe ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  pentru a edita.',
     'LBL_EMAIL_BODY' => 'Mesaj de e-mail',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare e-mailuri',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare E-mail-uri',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia e-mailurilor',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'niciun destinatar specificat',
@@ -473,4 +474,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'Trimitere e-mail',
     'LBL_MAILBOX' => 'Cont intrare',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Configurați un cont de e-mailuri de ieșire prin intermediul <a href="#OutboundEmail">Setări e-mail</a> pentru a trimite e-mailuri.',
-);
+    'LBL_TOO_SHORT' => 'Tastați cel puțin {0} caractere...',
+];

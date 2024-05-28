@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'vykdoma',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Pranešimų „Focus“ stalčius',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Pranešimų įrašų ataskaitų sritis',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Pranešimų laiko planavimo juosta',
 ];

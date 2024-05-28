@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Tabloul de bord Listă note',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare Notițe',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare note',
     'LBL_EXTERNAL_USER' => 'Utilizator extern',
     'LBL_EXTERNAL_USER_NAME' => 'Utilizator extern',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologie notă',
 
     'LBL_RELATED_CONTACT' => 'Contact corelat',
     'ERR_DELETE_RECORD' => 'Trebuie să specifici un număr de înregistrare pentru a șterge contul.',
@@ -120,4 +121,4 @@ $mod_strings = array(
 - Câmpurile marcate cu "Obligatoriu" trebuie să fie completate înainte de a salva.
 - Faceţi clic pe "Afişare mai multe" pentru a afişa câmpuri suplimentare, dacă este necesar.
 2. Faceţi clic pe "Salvare" pentru a finaliza noua înregistrare şi pentru a reveni la pagina anterioară.',
-);
+];

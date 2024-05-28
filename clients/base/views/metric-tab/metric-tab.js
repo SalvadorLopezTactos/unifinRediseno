@@ -173,8 +173,12 @@
      */
     toggleActive: function() {
         if (!this.active) {
-            this.setActiveMetric(this.meta);
-            this.context.trigger('active:metric:changed', this.meta.id);
+            const callback = () => {
+                this.setActiveMetric(this.meta);
+                this.context.trigger('active:metric:changed', this.meta.id);
+            };
+
+            app.events.trigger('active:metric:change', callback);
         }
     },
 

@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'триває',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель для повідомлень',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Інформаційна панель записів повідомлень',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Часова шкала повідомлень',
 ];

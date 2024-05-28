@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => '수익 라인 상품 목록 대시보드',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => '수익 라인 상품 기록 대시보드',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => '상품 유형목록',
     'LBL_ASSIGNED_TO_NAME' => '담당자:',
     'LBL_ASSIGNED_TO' => '담당자:',
-    'LBL_ASSIGNED_TO_ID'=>'할당 된 사용자 ID',
+    'LBL_ASSIGNED_TO_ID' => '할당 된 사용자 ID',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => '할당 된 사용자 이름',
     'LBL_EXPORT_ASSIGNED_USER_ID' => '할당 된 사용자 이름',
     'LBL_CAMPAIGN_ID' => '캠페인 ID',
@@ -211,4 +211,5 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => '버블차트에 상위 10 영업선 항목 표시.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => '내 영업선 항목',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "우리 팀의 영업선 항목",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '매출 라인아이템 타임라인',
+];

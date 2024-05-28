@@ -13,7 +13,7 @@
 
 <div id="tourStart">
     <div class="modal-header">
-    <a class="close" data-dismiss="modal">×</a>
+    <a class="close" data-bs-dismiss="modal">×</a>
     <h3>{$APP.LBL_TOUR_WELCOME}</h3>
     </div>
 
@@ -41,7 +41,7 @@
 </div>
 <div id="tourEnd" style="display: none;">
     <div class="modal-header">
-    <a class="close" data-dismiss="modal">×</a>
+    <a class="close" data-bs-dismiss="modal">×</a>
     <h3>{$APP.LBL_TOUR_DONE}</h3>
     </div>
 
@@ -51,7 +51,7 @@
 			<p>
 			{$APP.LBL_TOUR_REFERENCE_1} <a href="javascript:void window.open('http://support.sugarcrm.com/02_Documentation/01_Sugar_Editions/{$appList.documentation.$sugarFlavor}')">{$APP.LNK_TOUR_DOCUMENTATION}</a> {$APP.LBL_TOUR_REFERENCE_2}
 <br>
-				<i class="fa fa-arrow-right fa-lg" style="float: right; position: relative; right: -33px; top: -30px;"></i>
+				<i class="sicon sicon-lg sicon-arrow-right-lg" style="float: right; position: relative; right: -33px; top: -30px;"></i>
 			</p>
 			</div>
 			<div style="float: left">

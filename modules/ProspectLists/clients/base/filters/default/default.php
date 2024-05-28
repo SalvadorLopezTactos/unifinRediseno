@@ -9,19 +9,19 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ProspectLists']['base']['filter']['default'] = array(
+$viewdefs['ProspectLists']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields'         => array(
-        'name'      => array(),
-        'list_type' => array(),
-        'tag' => array(),
-        '$owner'    => array(
+    'fields' => [
+        'name' => [],
+        'list_type' => [],
+        'tag' => [],
+        '$owner' => [
             'predefined_filter' => true,
-            'vname'             => 'LBL_CURRENT_USER_FILTER',
-        ),
-        '$favorite' => array(
+            'vname' => 'LBL_CURRENT_USER_FILTER',
+        ],
+        '$favorite' => [
             'predefined_filter' => true,
-            'vname'             => 'LBL_FAVORITES_FILTER',
-        ),
-    ),
-);
+            'vname' => 'LBL_FAVORITES_FILTER',
+        ],
+    ],
+];

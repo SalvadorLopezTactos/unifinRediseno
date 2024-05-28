@@ -10,19 +10,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $moduleName = 'Documents';
-$viewdefs['DocumentRevisions']['base']['menu']['header'] = array(
-    array(
+$viewdefs['DocumentRevisions']['base']['menu']['header'] = [
+    [
         'route' => '#' . $moduleName . '/create',
         'label' => 'LNK_NEW_DOCUMENT',
         'acl_action' => 'create',
         'acl_module' => $moduleName,
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route' => '#'.$moduleName,
+    ],
+    [
+        'route' => '#' . $moduleName,
         'label' => 'LNK_DOCUMENT_LIST',
         'acl_action' => 'list',
         'acl_module' => $moduleName,
         'icon' => 'sicon-list-view',
-    ),
-);
+    ],
+];

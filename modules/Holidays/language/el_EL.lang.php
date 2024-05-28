@@ -32,7 +32,7 @@ $mod_strings = [
 
     'LBL_RESOURCE' => 'Πόρος:',
     'LBL_PERSON_TYPE' => 'Τύπος Υπευθύνου',
-    'LBL_RELATED_MODULE'=> 'Σχετικά ενότητα:',
+    'LBL_RELATED_MODULE' => 'Σχετικά ενότητα:',
 
     // For HolidaysQuickCreate.php
     'LBL_SELECT_RESOURCE_TYPE' => 'Επιλογή Τύπου Πόρου...',

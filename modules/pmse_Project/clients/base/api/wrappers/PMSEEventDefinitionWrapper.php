@@ -24,7 +24,7 @@ class PMSEEventDefinitionWrapper implements PMSEObservable
     private $processDefinition;
     private $relatedDependency;
     private $relationship;
-    protected $observers = array();
+    protected $observers = [];
 
     /**
      * Class Constructor
@@ -126,8 +126,8 @@ class PMSEEventDefinitionWrapper implements PMSEObservable
      */
     public function _get(array $args)
     {
-        $result = array();
-        $this->event->retrieve_by_string_fields(array('evn_uid' => $args['record']));
+        $result = [];
+        $this->event->retrieve_by_string_fields(['evn_uid' => $args['record']]);
         if (!empty($this->event->fetched_row)) {
             $this->eventDefinition->retrieve($this->event->id);
             if (!empty($this->eventDefinition->fetched_row)) {
@@ -135,10 +135,10 @@ class PMSEEventDefinitionWrapper implements PMSEObservable
                 $result['evn_uid'] = $this->event->fetched_row['evn_uid'];
             }
         }
-        $relatedOutput = array();
+        $relatedOutput = [];
         if (isset($args['related'])) {
             $related = explode(',', $args['related']);
-            $output = array();
+            $output = [];
             if (is_array($related)) {
                 foreach ($related as $search) {
                     $output[$search] = $this->crmDataWrapper->getRelatedSearch($search, $args);
@@ -157,9 +157,8 @@ class PMSEEventDefinitionWrapper implements PMSEObservable
      */
     public function _put(array $args)
     {
-        if (isset($args['record']) && count($args) > 0) {
-
-            if ($this->event->retrieve_by_string_fields(array('evn_uid' => $args['record']))) {
+        if (isset($args['record']) && safeCount($args) > 0) {
+            if ($this->event->retrieve_by_string_fields(['evn_uid' => $args['record']])) {
                 if (!empty($this->event->fetched_row)) {
                     $args = $args['data'];
 
@@ -189,7 +188,6 @@ class PMSEEventDefinitionWrapper implements PMSEObservable
                     //if ($this->event->evn_behavior == 'CATCH') {
                     $this->notify();
                     //}
-
                 }
             }
         }

@@ -11,6 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['history-summary-preview'] = array(
+$viewdefs['base']['view']['history-summary-preview'] = [
     'template' => 'preview',
-);
+];

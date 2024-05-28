@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Prozessdefinitionen',
-  'LBL_MODULE_TITLE' => 'Prozessdefinitionen',
-  'LBL_MODULE_NAME_SINGULAR' => 'Prozessdefinition',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Prozessdefinitionen',
+    'LBL_MODULE_TITLE' => 'Prozessdefinitionen',
+    'LBL_MODULE_NAME_SINGULAR' => 'Prozessdefinition',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Prozessdefinitionen',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Prozessdefinitionen',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Prozessdefinitionsbericht-Dashboard',
-  'LNK_LIST' => 'Prozessdefinitionen anzeigen',
-  'LNK_NEW_PMSE_PROJECT' => 'Prozessdefinition erstellen',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Prozessdefinitionen importieren',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Prozessdefinitionsbericht-Dashboard',
+    'LNK_LIST' => 'Prozessdefinitionen anzeigen',
+    'LNK_NEW_PMSE_PROJECT' => 'Prozessdefinition erstellen',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Prozessdefinitionen importieren',
 
-  'LBL_PRJ_STATUS' => 'Status',
-  'LBL_PRJ_MODULE' => 'Zielmodul:',
-  'LBL_PRJ_RUN_ORDER' => 'Reihenfolge ausführen',
-  'LBL_PMSE_BUTTON_SAVE' => 'Speichern',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Abbrechen',
-  'LBL_PMSE_BUTTON_YES' => 'Ja',
-  'LBL_PMSE_BUTTON_NO' => 'Nein',
-  'LBL_PMSE_BUTTON_OK' => 'OK',
+    'LBL_PRJ_STATUS' => 'Status',
+    'LBL_PRJ_MODULE' => 'Zielmodul:',
+    'LBL_PRJ_RUN_ORDER' => 'Reihenfolge ausführen',
+    'LBL_PMSE_BUTTON_SAVE' => 'Speichern',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Abbrechen',
+    'LBL_PMSE_BUTTON_YES' => 'Ja',
+    'LBL_PMSE_BUTTON_NO' => 'Nein',
+    'LBL_PMSE_BUTTON_OK' => 'OK',
     'LBL_PMSE_FORM_ERROR' => 'Bitte beheben Sie alle Fehler, bevor Sie fortfahren.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Designen',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktivitäten',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Aktion',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Interessent Startereignis',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Verkaufschance Startereignis' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Verkaufschance Startereignis',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Dokument Startereignis',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Weiteres Modulereignis',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Warten-Ereignis',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Geschäftsregel',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Geschäftsregel-Aktion',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'E-Mail-Vorlage',
-);
+];

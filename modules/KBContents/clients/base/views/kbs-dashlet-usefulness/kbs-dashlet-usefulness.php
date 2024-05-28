@@ -10,27 +10,27 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['KBContents']['base']['view']['kbs-dashlet-usefulness'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['KBContents']['base']['view']['kbs-dashlet-usefulness'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_DASHLET_USEFULNESS_NAME',
             'description' => 'LBL_DASHLET_USEFULNESS_DESC',
-            'config' => array(
-                'module' => 'KBContents'
-            ),
-            'preview' => array(),
-            'filter' => array(
-                'module' => array(
+            'config' => [
+                'module' => 'KBContents',
+            ],
+            'preview' => [],
+            'filter' => [
+                'module' => [
                     'KBContents',
-                ),
+                ],
                 'view' => 'record',
-            ),
-        ),
-    ),
-    'chart' => array(
+            ],
+        ],
+    ],
+    'chart' => [
         'name' => 'chart',
         'label' => 'Chart',
         'type' => 'chart',
-        'view' => 'detail'
-    ),
-);
+        'view' => 'detail',
+    ],
+];

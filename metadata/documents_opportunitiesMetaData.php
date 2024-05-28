@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['documents_opportunities'] = array(
+$dictionary['documents_opportunities'] = [
     'true_relationship_type' => 'many-to-many',
-    'relationships' => array(
-        'documents_opportunities' => array(
+    'relationships' => [
+        'documents_opportunities' => [
             'lhs_module' => 'Documents',
             'lhs_table' => 'documents',
             'lhs_key' => 'id',
@@ -24,57 +24,57 @@ $dictionary['documents_opportunities'] = array(
             'join_table' => 'documents_opportunities',
             'join_key_lhs' => 'document_id',
             'join_key_rhs' => 'opportunity_id',
-        ),
-    ),
+        ],
+    ],
     'table' => 'documents_opportunities',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => true,
-        ),
-        'document_id' => array(
+        ],
+        'document_id' => [
             'name' => 'document_id',
             'type' => 'id',
-        ),
-        'opportunity_id' => array(
+        ],
+        'opportunity_id' => [
             'name' => 'opportunity_id',
             'type' => 'id',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'documents_opportunitiesspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_docu_opps_oppo_id',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'opportunity_id',
                 'document_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_docu_oppo_docu_id',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'document_id',
                 'opportunity_id',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\CloudDrive\Constants;
 
 abstract class DriveType
@@ -16,4 +17,5 @@ abstract class DriveType
     public const GOOGLE = 'google';
     public const ONEDRIVE = 'onedrive';
     public const DROPBOX = 'dropbox';
+    public const SHAREPOINT = 'sharepoint';
 }

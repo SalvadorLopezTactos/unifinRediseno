@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,7 +19,7 @@ class ViewRoleDropdownFilter extends ViewDropdown
 {
     protected $template = 'modules/ModuleBuilder/tpls/MBModule/roledropdownfilter.tpl';
 
-    protected $defaultParams = array(
+    protected $defaultParams = [
         'refreshTree' => false,
         'package_name' => 'studio',
         'view_package' => 'studio',
@@ -27,8 +28,8 @@ class ViewRoleDropdownFilter extends ViewDropdown
         'dropdown_name' => '',
         'dropdown_role' => 'default',
         'field' => '',
-        'new' => false
-    );
+        'new' => false,
+    ];
 
     /**
      * @param $params

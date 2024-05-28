@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Bu imza bir isim gerektiriyor.',
     'LBL_DEFAULT_SIGNATURE' => 'Varsayılan',
     'LBL_MODULE_NAME' => 'E-posta imzaları',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'İmza kullanılsın mı?',
     'LBL_SIGNATURE_PREPEND' => 'İmza yanıt üzerinde mi olacak?',
     'LBL_SIGNATURES' => 'İmzalar',
-);
+];

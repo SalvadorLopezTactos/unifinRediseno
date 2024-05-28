@@ -13,7 +13,6 @@
 
 class ForecastWorksheetHooks extends AbstractForecastHooks
 {
-
     /**
      * This method, just set the date_modified to the value from the db, vs the user formatted value that sugarbean sets
      * after it has been retrieved
@@ -22,7 +21,7 @@ class ForecastWorksheetHooks extends AbstractForecastHooks
      * @param string $event
      * @param array $params
      */
-    public static function fixDateModified(ForecastWorksheet $worksheet, $event, $params = array())
+    public static function fixDateModified(ForecastWorksheet $worksheet, $event, $params = [])
     {
         if (isset($worksheet->fetched_row['date_modified'])) {
             $worksheet->date_modified = $worksheet->fetched_row['date_modified'];
@@ -119,13 +118,13 @@ class ForecastWorksheetHooks extends AbstractForecastHooks
                     $notifyBean->created_by = $user->id;
                     $notifyBean->parent_type = $bean->parent_type;
                     $notifyBean->parent_id = $bean->parent_id;
-                    $notifyBean->name = string_format($worksheet_strings['LBL_MANAGER_NOTIFY_NAME'], array($mod_strings['LBL_MODULE_NAME_SINGULAR']));
+                    $notifyBean->name = string_format($worksheet_strings['LBL_MANAGER_NOTIFY_NAME'], [$mod_strings['LBL_MODULE_NAME_SINGULAR']]);
                     $notifyBean->description = string_format(
                         $worksheet_strings['LBL_MANAGER_NOTIFY'],
-                        array(
+                        [
                             $mod_strings['LBL_MODULE_NAME_SINGULAR'],
-                            $bean->name
-                        )
+                            $bean->name,
+                        ]
                     );
                     $notifyBean->save();
 

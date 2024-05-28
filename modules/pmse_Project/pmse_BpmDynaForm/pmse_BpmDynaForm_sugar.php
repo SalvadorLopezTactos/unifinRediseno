@@ -15,38 +15,40 @@
  * PLEASE DO NOT CHANGE THIS CLASS
  * PLACE ANY CUSTOMIZATIONS IN pmse_BpmDynaForm
  */
-class pmse_BpmDynaForm_sugar extends Basic {
-	var $new_schema = true;
-	var $module_dir = 'pmse_Project/pmse_BpmDynaForm';
+class pmse_BpmDynaForm_sugar extends Basic
+{
+    public $new_schema = true;
+    public $module_dir = 'pmse_Project/pmse_BpmDynaForm';
     public $module_name = 'pmse_BpmDynaForm';
-	var $object_name = 'pmse_BpmDynaForm';
-	var $table_name = 'pmse_bpm_dynamic_forms';
-	var $importable = false;
-    var $disable_custom_fields = true;
-    var $id;
-    var $name;
-    var $date_entered;
-    var $date_modified;
-    var $modified_user_id;
-    var $modified_by_name;
-    var $created_by;
-    var $created_by_name;
-    var $description;
-    var $deleted;
-    var $created_by_link;
-    var $modified_user_link;
-    var $activities;
-    var $assigned_user_id;
-    var $assigned_user_name;
-    var $assigned_user_link;
-    var $dyn_uid;
-    var $pro_id;
-    var $prj_id;
-    var $dyn_module;
-    var $dyn_view_defs;
+    public $object_name = 'pmse_BpmDynaForm';
+    public $table_name = 'pmse_bpm_dynamic_forms';
+    public $importable = false;
+    public $disable_custom_fields = true;
+    public $id;
+    public $name;
+    public $date_entered;
+    public $date_modified;
+    public $modified_user_id;
+    public $modified_by_name;
+    public $created_by;
+    public $created_by_name;
+    public $description;
+    public $deleted;
+    public $created_by_link;
+    public $modified_user_link;
+    public $activities;
+    public $assigned_user_id;
+    public $assigned_user_name;
+    public $assigned_user_link;
+    public $dyn_uid;
+    public $pro_id;
+    public $prj_id;
+    public $dyn_module;
+    public $dyn_view_defs;
 
 
-	public function __construct(){
-		parent::__construct();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 }

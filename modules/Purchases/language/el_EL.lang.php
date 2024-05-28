@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Αγορών',
     'LBL_RELATED_ACCOUNT' => 'Σχετικός λογαριασμός',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης αγορών',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Χρονολόγιο αγοράς',
 ];

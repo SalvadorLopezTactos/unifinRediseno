@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Kontrolna tabla liste prodajnih prilika',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa prodajnih prilika',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Ponude',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Prodajne prilike prema dinamičnom nalogu',
+    'LBL_TOP_10_OPP' => 'Top 10 otvorenih prilika',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Dašlet: Moje otvorene prilike',
+    'LBL_MY_ACTIVE_OPP' => 'Moje aktivne prilike',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Levak prodaje ukupno je',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Uloga prodajne prilike',
+    'LBL_OPPORTUNITY_ROLE' => 'Uloga prodajne prilike',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Beleške',
     'LBL_TAB_OPPORTUNITY' => '{{module}} pregled',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'Klikom na Potvrdi, biće obrisane svi podaci Prognoze i biće promenjen prikaz Prodajnih prilika. Ukoliko ovo nije ono što nameravate, kliknite na Poništi kako bi se vratili na prethodna podešavanja.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'Ako kliknete na dugme „Potvrdi“, izbrisaćete SVE podatke o Prognozi i izmeniti prikaz Mogućnosti. '
-        .'Takođe će biti onemogućene sve definicije procesa sa ciljnim modulom za stavke linije prihoda. '
-        .'Ukoliko niste to želeli, kliknite na „Otkaži“ da biste se vratili na prethodne postavke.',
+        . 'Takođe će biti onemogućene sve definicije procesa sa ciljnim modulom za stavke linije prihoda. '
+        . 'Ukoliko niste to želeli, kliknite na „Otkaži“ da biste se vratili na prethodne postavke.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Ukoliko su Prihodi zatvoreni i samo je jedan dobitan,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'faza Prodajnih prilika će biti podešena na ,,Zatvoreno dobitna".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Ukoliko su predmeti linije Prihoda u ,,Zatvoreno izgubljeno" prodajnoj fazi,',
@@ -260,4 +263,9 @@ Da biste kreirali modul {{module_name}}:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Prognoza u pogledu zatvaranja prilike',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Prikaži pojedinosti o prognozi za određenu prodajnu priliku',
-);
+    'LBL_AI_WINRATE' => 'Stopa uspešnosti',
+    'LBL_AI_WONOPP' => 'Dobijene prilike',
+    'LBL_AI_CLOSINGTIME' => 'Vreme zaključivanja',
+    'LBL_AI_CLOSEDOPP' => 'Zaključene prodajne prilike',
+    'LBL_AI_LEADTIMESPAN' => 'Vreme između kreiranja mogućnosti i zaključenog dobitka',
+];

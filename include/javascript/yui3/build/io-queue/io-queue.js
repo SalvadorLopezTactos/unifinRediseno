@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('io-queue', function (Y, NAME) {
 
 /**
@@ -174,4 +167,4 @@ _queue.empty = function () { io.qEmpty(); };
 Y.io.queue = _queue;
 
 
-}, '3.15.0', {"requires": ["io-base", "queue-promote"]});
+}, '3.18.1', {"requires": ["io-base", "queue-promote"]});

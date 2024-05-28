@@ -9,28 +9,28 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs["base"]["view"]["dashboard-headerpane"] = array(
-    "buttons" => array(
-        array(
-            "type" => "actiondropdown",
-            "buttons" => array(
-                array(
-                    "name"      => "add_button",
-                    "type"      => "rowaction",
-                    "label"     => "LBL_CREATE_BUTTON_LABEL",
-                    "css_class" => "btn",
-                ),
-
-                array(
-                    "name"      => "edit_button",
-                    "type"      => "rowaction",
-                    "label"     => "LBL_EDIT_BUTTON",
-                ),
+$viewdefs['base']['view']['dashboard-headerpane'] = [
+    'buttons' => [
+        [
+            'type' => 'actiondropdown',
+            'buttons' => [
+                [
+                    'name' => 'add_button',
+                    'type' => 'rowaction',
+                    'label' => 'LBL_CREATE_BUTTON_LABEL',
+                    'css_class' => 'btn',
+                ],
 
                 [
-                    "name"      => "add_dashlet_button",
-                    "type"      => "rowaction",
-                    "label"     => "LBL_ADD_DASHLET_BUTTON",
+                    'name' => 'edit_button',
+                    'type' => 'rowaction',
+                    'label' => 'LBL_EDIT_BUTTON',
+                ],
+
+                [
+                    'name' => 'add_dashlet_button',
+                    'type' => 'rowaction',
+                    'label' => 'LBL_ADD_DASHLET_BUTTON',
                     'events' => [
                         'click' => 'button:add_dashlet_button:click',
                     ],
@@ -49,38 +49,38 @@ $viewdefs["base"]["view"]["dashboard-headerpane"] = array(
                     ],
                 ],
 
-                array(
-                    "name"      => "collapse_button",
-                    "type"      => "rowaction",
-                    "label"     => "LBL_DASHLET_MINIMIZE_ALL",
-                ),
+                [
+                    'name' => 'collapse_button',
+                    'type' => 'rowaction',
+                    'label' => 'LBL_DASHLET_MINIMIZE_ALL',
+                ],
 
-                array(
-                    "name"      => "expand_button",
-                    "type"      => "rowaction",
-                    "label"     => "LBL_DASHLET_MAXIMIZE_ALL",
-                ),
-            ),
-            "showOn" => "view",
-        ),
-        array(
-            "name"      => "cancel_button",
-            "type"      => "button",
-            "label"     => "LBL_CANCEL_BUTTON_LABEL",
-            "css_class" => "btn-invisible btn-link",
-            "showOn" => "edit",
-        ),
-        array(
-            "name"      => "delete_button",
-            "type"      => "button",
-            "label"     => "LBL_DELETE_BUTTON_LABEL",
-            "css_class" => "btn-danger",
-            "showOn" => "edit",
-        ),
+                [
+                    'name' => 'expand_button',
+                    'type' => 'rowaction',
+                    'label' => 'LBL_DASHLET_MAXIMIZE_ALL',
+                ],
+            ],
+            'showOn' => 'view',
+        ],
         [
-            "name"      => "add_dashlet_button_edit",
-            "type"      => "button",
-            "label"     => "LBL_ADD_DASHLET_BUTTON",
+            'name' => 'cancel_button',
+            'type' => 'button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
+            'css_class' => 'btn-invisible btn-link',
+            'showOn' => 'edit',
+        ],
+        [
+            'name' => 'delete_button',
+            'type' => 'button',
+            'label' => 'LBL_DELETE_BUTTON_LABEL',
+            'css_class' => 'btn-danger',
+            'showOn' => 'edit',
+        ],
+        [
+            'name' => 'add_dashlet_button_edit',
+            'type' => 'button',
+            'label' => 'LBL_ADD_DASHLET_BUTTON',
             'events' => [
                 'click' => 'button:add_dashlet_button:click',
             ],
@@ -99,45 +99,45 @@ $viewdefs["base"]["view"]["dashboard-headerpane"] = array(
                 ],
             ],
         ],
-        array(
-            "name"      => "save_button",
-            "type"      => "button",
-            'events' => array(
+        [
+            'name' => 'save_button',
+            'type' => 'button',
+            'events' => [
                 'click' => 'button:save_button:click',
-            ),
-            "label"     => "LBL_SAVE_BUTTON_LABEL",
-            "css_class" => "btn-primary",
-            "showOn" => "edit",
-        ),
+            ],
+            'label' => 'LBL_SAVE_BUTTON_LABEL',
+            'css_class' => 'btn-primary',
+            'showOn' => 'edit',
+        ],
 
-        array(
-            "name"      => "create_cancel_button",
-            "type"      => "button",
-            "label"     => "LBL_CANCEL_BUTTON_LABEL",
-            "css_class" => "btn-invisible btn-link",
-            "showOn" => "create",
-        ),
-        array(
-            "name"      => "create_button",
-            "type"      => "button",
-            'events' => array(
+        [
+            'name' => 'create_cancel_button',
+            'type' => 'button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
+            'css_class' => 'btn-invisible btn-link',
+            'showOn' => 'create',
+        ],
+        [
+            'name' => 'create_button',
+            'type' => 'button',
+            'events' => [
                 'click' => 'button:save_button:click',
-            ),
-            "label"     => "LBL_SAVE_BUTTON_LABEL",
-            "css_class" => "btn-primary",
-            "showOn" => "create",
-        ),
-    ),
-    "panels" => array(
-        array(
-            "name" => "header",
-            "fields" => array(
-                array(
-                    "type" => "dashboardtitle",
-                    "name" => "name",
-                    "placeholder" => "LBL_DASHBOARD_TITLE",
-                ),
-            ),
-        ),
-    ),
-);
+            ],
+            'label' => 'LBL_SAVE_BUTTON_LABEL',
+            'css_class' => 'btn-primary',
+            'showOn' => 'create',
+        ],
+    ],
+    'panels' => [
+        [
+            'name' => 'header',
+            'fields' => [
+                [
+                    'type' => 'dashboardtitle',
+                    'name' => 'name',
+                    'placeholder' => 'LBL_DASHBOARD_TITLE',
+                ],
+            ],
+        ],
+    ],
+];

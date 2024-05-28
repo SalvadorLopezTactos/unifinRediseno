@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper;
 
 /**
@@ -17,27 +18,26 @@ namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper;
  */
 class ScoreHelper
 {
-
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\parentHelper
      */
     private $parentHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\activityHelper
      */
     private $activityHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\childActivityHelper
      */
     private $childActivityHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\statusHelper
      */
     private $statusHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\pointsHelper
      */
@@ -63,7 +63,7 @@ class ScoreHelper
      */
     public function getScore(\SugarBean $activity)
     {
-        return (int) $activity->customer_journey_score;
+        return (int)$activity->customer_journey_score;
     }
 
     /**

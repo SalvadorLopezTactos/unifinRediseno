@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_NOTE_POSITION' => 'מיקום חבילת מוצר',
     'LBL_PRODUCT_BUNDLE_NOTES_QUOTE_DATA_LIST' => 'רשימת נתונים של הצעות מחיר והערות על מארזי מוצרים',
-);
+];

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -149,7 +151,7 @@ class GZCompressed implements CacheInterface
      * @param $default
      * @return mixed|string
      */
-    private function uncompress(String $value, $default)
+    private function uncompress(string $value, $default)
     {
         $result = gzuncompress($value);
         if ($result !== false) {

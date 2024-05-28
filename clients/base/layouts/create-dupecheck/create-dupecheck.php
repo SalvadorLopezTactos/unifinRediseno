@@ -10,16 +10,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['create-dupecheck'] = array(
+$viewdefs['base']['layout']['create-dupecheck'] = [
     'type' => 'dupecheck',
-    'components' =>  array(
-        array(
+    'components' => [
+        [
             'view' => 'dupecheck-header',
-        ),
-        array(
+        ],
+        [
             'name' => 'dupecheck-list',
             'view' => 'dupecheck-list',
             'primary' => true,
-        ),
-    ),
-);
+        ],
+    ],
+];

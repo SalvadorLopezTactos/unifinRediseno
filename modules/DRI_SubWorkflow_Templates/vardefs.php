@@ -46,7 +46,7 @@ $dictionary['DRI_SubWorkflow_Template'] = [
             'len' => 8,
             'options' => 'numeric_range_search_dom',
             'enable_range_search' => true,
-            'help' =>  'LBL_SMART_GUIDE_STAGE_ORDER',
+            'help' => 'LBL_SMART_GUIDE_STAGE_ORDER',
         ],
         'points' => [
             'name' => 'points',

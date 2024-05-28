@@ -237,7 +237,7 @@ interface NestedBeanInterface
      *    |
      *    + - subNode1
      *
-     * @param NestedBeanInterface $node.
+     * @param NestedBeanInterface $node .
      * @return string Id of new created bean;
      *
      * @throws Exception When current bean isn't new bean (existing in Db bean).
@@ -271,7 +271,7 @@ interface NestedBeanInterface
      *    |
      *    + - $newNode
      *
-     * @param NestedBeanInterface $node.
+     * @param NestedBeanInterface $node .
      * @return string Id of new created bean;
      *
      * @throws Exception When current bean isn't new bean (existing in Db bean).
@@ -309,7 +309,7 @@ interface NestedBeanInterface
      *    |
      *    + - $targetNode
      *
-     * @param NestedBeanInterface $target.
+     * @param NestedBeanInterface $target .
      * @return string Id of new created bean;
      *
      * @throws Exception When current bean isn't new bean (existing in Db bean).
@@ -347,7 +347,7 @@ interface NestedBeanInterface
      *    |
      *    + - subNode1
      *
-     * @param NestedBeanInterface $target.
+     * @param NestedBeanInterface $target .
      * @return string Id of new created bean;
      *
      * @throws Exception When current bean isn't new bean (existing in Db bean).

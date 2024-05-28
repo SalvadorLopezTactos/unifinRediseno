@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmActivityStep'] = array(
+$dictionary['pmse_BpmActivityStep'] = [
     'table' => 'pmse_bpm_activity_step',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'reassignable' => false,
     'duplicate_merge' => true,
-    'fields' => array(
-        'pro_id' => array(
+    'fields' => [
+        'pro_id' => [
             'required' => true,
             'name' => 'pro_id',
             'vname' => 'Process identifier',
@@ -38,8 +38,8 @@ $dictionary['pmse_BpmActivityStep'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'act_step_type' => array(
+        ],
+        'act_step_type' => [
             'required' => true,
             'name' => 'act_step_type',
             'vname' => 'step type',
@@ -59,8 +59,8 @@ $dictionary['pmse_BpmActivityStep'] = array(
             'calculated' => false,
             'len' => '30',
             'size' => '30',
-        ),
-        'act_criteria' => array(
+        ],
+        'act_criteria' => [
             'required' => true,
             'name' => 'act_criteria',
             'vname' => 'expresion evaluated before execute this step',
@@ -80,8 +80,8 @@ $dictionary['pmse_BpmActivityStep'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'act_step_form' => array(
+        ],
+        'act_step_form' => [
             'required' => true,
             'name' => 'act_step_form',
             'vname' => 'dynaform to be displayed',
@@ -101,8 +101,8 @@ $dictionary['pmse_BpmActivityStep'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'act_step_script' => array(
+        ],
+        'act_step_script' => [
             'required' => true,
             'name' => 'act_step_script',
             'vname' => 'script to be executed as part of this ',
@@ -122,23 +122,23 @@ $dictionary['pmse_BpmActivityStep'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmActivityStep', 'pmse_BpmActivityStep');

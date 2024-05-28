@@ -81,7 +81,7 @@ class GoogleCloudRunV2Task extends \Google\Collection
   /**
    * @var string
    */
-  public $launchStage;
+  public $logUri;
   /**
    * @var int
    */
@@ -102,6 +102,10 @@ class GoogleCloudRunV2Task extends \Google\Collection
    * @var int
    */
   public $retried;
+  /**
+   * @var bool
+   */
+  public $satisfiesPzs;
   /**
    * @var string
    */
@@ -354,16 +358,16 @@ class GoogleCloudRunV2Task extends \Google\Collection
   /**
    * @param string
    */
-  public function setLaunchStage($launchStage)
+  public function setLogUri($logUri)
   {
-    $this->launchStage = $launchStage;
+    $this->logUri = $logUri;
   }
   /**
    * @return string
    */
-  public function getLaunchStage()
+  public function getLogUri()
   {
-    return $this->launchStage;
+    return $this->logUri;
   }
   /**
    * @param int
@@ -434,6 +438,20 @@ class GoogleCloudRunV2Task extends \Google\Collection
   public function getRetried()
   {
     return $this->retried;
+  }
+  /**
+   * @param bool
+   */
+  public function setSatisfiesPzs($satisfiesPzs)
+  {
+    $this->satisfiesPzs = $satisfiesPzs;
+  }
+  /**
+   * @return bool
+   */
+  public function getSatisfiesPzs()
+  {
+    return $this->satisfiesPzs;
   }
   /**
    * @param string

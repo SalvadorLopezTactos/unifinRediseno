@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * move blowfish dir from cache to custom
  */
@@ -19,10 +20,10 @@ class SugarUpgradeMoveBlowfish extends UpgradeScript
 
     public function run()
     {
-        if(file_exists($this->cacheDir("blowfish")) && !file_exists("custom/blowfish")) {
-           $this->log('Renaming cache/blowfish');
-           rename($this->cacheDir("blowfish"), "custom/blowfish");
-           $this->log('Renamed cache/blowfish to custom/blowfish');
+        if (file_exists($this->cacheDir('blowfish')) && !file_exists('custom/blowfish')) {
+            $this->log('Renaming cache/blowfish');
+            rename($this->cacheDir('blowfish'), 'custom/blowfish');
+            $this->log('Renamed cache/blowfish to custom/blowfish');
         }
     }
 }

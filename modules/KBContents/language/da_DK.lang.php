@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Vidensbaseliste-dashboard',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Vidensbaseoptegnelses-dashboard',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Vidensbase',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje for vidensbase',
 
     'LBL_MODULE_NAME' => 'Videnbase',
     'LBL_MODULE_NAME_SINGULAR' => 'Videnbaseartikel',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Indstil værdi som primær',
     'LBL_ITEM_REMOVE' => 'Fjern emne',
     'LBL_ITEM_ADD' => 'Tilføj emne',
-    'LBL_MODULE_ID'=> 'KB-indhold',
+    'LBL_MODULE_ID' => 'KB-indhold',
     'LBL_DOCUMENT_REVISION_ID' => 'Revision-ID',
     'LBL_DOCUMENT_REVISION' => 'Revision',
     'LBL_NUMBER' => 'Nummer',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'Flere {{module}} artikler...',
     'LBL_LIST_FORM_TITLE' => 'Vidensbase-liste',
     'LBL_SEARCH_FORM_TITLE' => 'Vidensbase-søgning',
-);
+];

@@ -30,11 +30,11 @@ class SugarUpgradeUpdateSiteUserId extends UpgradeDBScript
         }
 
         $this->log('Updating site_user_id in users table');
-        $result = $this->db->query("SELECT id FROM users");
+        $result = $this->db->query('SELECT id FROM users');
 
         while ($row = $this->db->fetchByAssoc($result, false)) {
             $site_user_id = getSiteHash($row['id']);
-            $sql = "UPDATE users SET site_user_id = ? WHERE id = ?";
+            $sql = 'UPDATE users SET site_user_id = ? WHERE id = ?';
             $this->executeUpdate($sql, [$site_user_id, $row['id']]);
         }
 

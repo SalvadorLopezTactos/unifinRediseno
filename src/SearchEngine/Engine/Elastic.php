@@ -100,7 +100,7 @@ class Elastic implements
     /**
      * {@inheritDoc}
      */
-    public function scheduleIndexing(array $modules = array(), $clearData = false)
+    public function scheduleIndexing(array $modules = [], $clearData = false)
     {
         return $this->container->indexManager->scheduleIndexing($modules, $clearData);
     }
@@ -108,7 +108,7 @@ class Elastic implements
     /**
      * {@inheritDoc}
      */
-    public function addMappings(array $modules = array())
+    public function addMappings(array $modules = [])
     {
         return $this->container->indexManager->addMappings($modules);
     }
@@ -116,7 +116,7 @@ class Elastic implements
     /**
      * {@inheritDoc}
      */
-    public function indexBean(\SugarBean $bean, array $options = array())
+    public function indexBean(\SugarBean $bean, array $options = [])
     {
         $this->container->indexer->indexBean($bean);
     }
@@ -126,7 +126,7 @@ class Elastic implements
      */
     public function runFullReindex($clearData = false)
     {
-        $this->scheduleIndexing(array(), $clearData);
+        $this->scheduleIndexing([], $clearData);
         $this->container->queueManager->consumeQueue();
     }
 
@@ -176,7 +176,7 @@ class Elastic implements
     /**
      * {@inheritDoc}
      */
-    public function from(array $modules = array())
+    public function from(array $modules = [])
     {
         $this->gsProvider()->from($modules);
         return $this;

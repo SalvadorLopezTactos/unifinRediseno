@@ -13,6 +13,7 @@
 /**
  * Declare the namespace for this class
  */
+
 namespace Sugarcrm\Sugarcrm\ProcessManager;
 
 /**
@@ -179,7 +180,7 @@ class Factory
         }
 
         // Get new object. Argument passing will take place in other methods.
-        return new static::$cache['classes'][$key];
+        return new static::$cache['classes'][$key]();
     }
 
     /**
@@ -248,7 +249,7 @@ class Factory
             $load = class_exists($class) ? $class : $base;
 
             // Load what we have now
-            static::$cache['evaluators'][$type] = new $load;
+            static::$cache['evaluators'][$type] = new $load();
         }
 
         return static::$cache['evaluators'][$type];
@@ -265,10 +266,10 @@ class Factory
      * all PMSE classes are moved out to ProcessManager classes, this will have
      * to do.
      *
-     * @todo  Create a PMSERunnable and have all PMSEElement object
-     * implement it.
      * @param string $name Name of the element to get the object for
      * @return PMSERunnable
+     * @todo  Create a PMSERunnable and have all PMSEElement object
+     * implement it.
      */
     public static function getElement($name = '')
     {
@@ -290,10 +291,10 @@ class Factory
 
         // This checks for Custom classes that will likely extends a base class
         if (\SugarAutoLoader::requireWithCustom("custom/$path{$custom}.php") !== false) {
-            $return = new $custom;
+            $return = new $custom();
         } elseif (\SugarAutoLoader::requireWithCustom("$path{$name}.php") !== false) {
             // This checks for custom classes that override a base class
-            $return = new $name;
+            $return = new $name();
         }
 
         // Before returning, we should validate that the object is an instance

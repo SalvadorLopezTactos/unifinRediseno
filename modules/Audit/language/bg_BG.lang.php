@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Дневник на одита',
     'LBL_FIELD_NAME' => 'Поле',
     'LBL_OLD_NAME' => 'Предишна стойност',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Актуализирай до',
     'LBL_BLANK' => '-празно-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Времева скала на одит',
+    'LBL_CREATED' => 'Създадено',
+];

@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Informačný panel so zoznamom príležitostí',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Informačný panel so záznamom príležitostí',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Ponuky',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Príležitosti podľa dynamického účtu',
+    'LBL_TOP_10_OPP' => 'Top 10 otvorených príležitostí',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Dashlet: Moje aktívne príležitosti',
+    'LBL_MY_ACTIVE_OPP' => 'Moje aktívne príležitosti',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Celková pipeline je ',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Rola obchodnej príležirosti',
+    'LBL_OPPORTUNITY_ROLE' => 'Rola obchodnej príležirosti',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Poznámky',
     'LBL_TAB_OPPORTUNITY' => 'Revízia {{module}}',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'Kliknutím na tlačidlo Potvrdiť vymažete VŠETKY dáta prognóz a zmeníte zobrazenie príležitostí. Ak tento krok nebol vaším zámerom, kliknutím na tlačidlo Zrušiť sa vrátite do predchádzajúcich nastavení.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'Kliknutím na tlačidlo Potvrdiť vymažete VŠETKY údaje prognóz a zmeníte zobrazenie príležitostí. '
-        .'Blokované budú takisto VŠETKY definície procesov s cieľovým modulom položiek krivky výnosu. '
-        .'Ak tento krok nebol vaším zámerom, kliknutím na tlačidlo Zrušiť sa vrátite do predchádzajúcich nastavení.',
+        . 'Blokované budú takisto VŠETKY definície procesov s cieľovým modulom položiek krivky výnosu. '
+        . 'Ak tento krok nebol vaším zámerom, kliknutím na tlačidlo Zrušiť sa vrátite do predchádzajúcich nastavení.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Ak sú všetky položky krivky výnosu uzavreté a aspoň jedna bola získaná,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'fáza predaja príležitosti sa nastaví do stavu "Uzavreté/získané".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Ak sú všetky položky krivky výnosu v stave fázy predaja "Uzavreté/nezískané",',
@@ -260,4 +263,9 @@ Ak chcete vytvoriť modul {{module_name}}:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Predpoveď uzatvorenia príležitosti',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Zobraziť podrobnosti predpovede pre konkrétnu príležitosť',
-);
+    'LBL_AI_WINRATE' => 'Miera získania',
+    'LBL_AI_WONOPP' => 'Získané príležitosti',
+    'LBL_AI_CLOSINGTIME' => 'Čas uzatvorenia',
+    'LBL_AI_CLOSEDOPP' => 'Uzatvorené príležitosti',
+    'LBL_AI_LEADTIMESPAN' => 'Čas medzi vytvorením príležitosti a uzatvorením/získaním',
+];

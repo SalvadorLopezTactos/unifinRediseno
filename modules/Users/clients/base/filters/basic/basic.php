@@ -19,6 +19,25 @@ $viewdefs['Users']['base']['filter']['basic'] = [
             'editable' => false,
         ],
         [
+            'id' => 'recently_created',
+            'name' => 'LBL_NEW_RECORDS',
+            'filter_definition' => [
+                'date_entered' => [
+                    '$dateRange' => 'last_7_days',
+                ],
+            ],
+            'editable' => false,
+        ],
+        [
+            'id' => 'recently_viewed',
+            'name' => 'LBL_RECENTLY_VIEWED',
+            'filter_definition' => [
+                '$tracker' => '-7 DAY',
+            ],
+            'app' => 'base',
+            'editable' => false,
+        ],
+        [
             'id' => 'missing_customer_journey_access',
             'name' => 'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS',
             'filter_definition' => [
@@ -46,6 +65,26 @@ $viewdefs['Users']['base']['filter']['basic'] = [
             ],
             'editable' => false,
             'is_template' => true,
+        ],
+        [
+            'id' => 'active_users',
+            'name' => 'LBL_ACTIVE_USERS',
+            'filter_definition' => [
+                'status' => [
+                    '$in' => ['Active'],
+                ],
+            ],
+            'editable' => false,
+        ],
+        [
+            'id' => 'group_users',
+            'name' => 'LBL_GROUP_USERS',
+            'filter_definition' => [
+                'is_group' => [
+                    '$equals' => 1,
+                ],
+            ],
+            'editable' => false,
         ],
     ],
 ];

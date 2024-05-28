@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Vista affiancata',
     'LBL_MODULE_NAME_SINGULAR' => 'Vista affiancata',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'Vista affiancata',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => 'Moduli attivati',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'Affianca vista moduli',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'Impostazioni modulo',
-    'LBL_PIPELINE_TABLE_HEADER' => "Seleziona il campo i cui valori saranno utilizzati come colonne",
+    'LBL_PIPELINE_TABLE_HEADER' => 'Seleziona il campo i cui valori saranno utilizzati come colonne',
     'LBL_PIPELINE_TILE_HEADER' => 'Affianca campo intestazione',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => 'Colonne disponibili',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => 'Affianca campi del corpo',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'Anteprima riquadro',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'Troppi campi nel riquadro.',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => 'Risolvere gli errori nelle seguenti impostazioni del modulo prima di continuare:<br><br>',
-);
+    'LBL_MODULE_SELECTION' => 'Seleziona il modulo che desideri visualizzare e configurare di seguito',
+    'LBL_SHOW_COLUMN_COUNT' => 'Mostra conteggio colonne',
+    'LBL_SHOW_COLUMN_TOTAL' => 'Mostra totale colonne',
+    'LBL_TOTAL_FIELD' => 'Campo totale',
+];

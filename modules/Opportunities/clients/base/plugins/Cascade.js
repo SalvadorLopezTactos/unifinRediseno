@@ -242,9 +242,11 @@
                     // Disable the field, and make sure its action is properly
                     // set
                     let oldAction = this.field._previousAction || this.field.action;
-                    this.field._removeViewClass(oldAction);
-                    this.field._previousAction = oldAction;
-                    this.field.action = 'disabled';
+                    if (oldAction !== undefined || !this.field.view || this.field.view.name !== 'multi-line-list') {
+                        this.field._removeViewClass(oldAction);
+                        this.field._previousAction = oldAction;
+                        this.field.action = 'disabled';
+                    }
 
                     // Uncheck the checkbox, and disable it if needed
                     this.field.shouldCascade = false;
@@ -462,7 +464,7 @@
              * Clear cascade field
              */
             clearCascadeValue: function() {
-                if (this.context.attributes.layout  && this.context.attributes.layout === 'record') {
+                if (this.context && this.context.get('layout')  && this.context.get('layout') === 'record') {
                     _.each(this.fieldNames, function(fieldName) {
                         this.model.unset(`${fieldName}_cascade`);
                         this.setRliValueForField(fieldName, '');

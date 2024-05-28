@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,5 +16,5 @@ namespace Sugarcrm\Sugarcrm\ACL;
 
 interface KeyConverter
 {
-    function convert(string $key): string;
+    public function convert(string $key): string;
 }

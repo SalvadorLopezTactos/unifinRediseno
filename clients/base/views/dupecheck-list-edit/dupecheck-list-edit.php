@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['dupecheck-list-edit'] = array(
+$viewdefs['base']['view']['dupecheck-list-edit'] = [
     'template' => 'flex-list',
-    'selection' => array(),
-);
+    'selection' => [],
+];

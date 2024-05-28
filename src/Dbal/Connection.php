@@ -37,7 +37,7 @@ class Connection extends BaseConnection
     /**
      * {@inheritDoc}
      */
-    public function executeQuery($query, array $params = array(), $types = array(), QueryCacheProfile $qcp = null): Result
+    public function executeQuery($query, array $params = [], $types = [], QueryCacheProfile $qcp = null): Result
     {
         try {
             return parent::executeQuery($query, $params, $types, $qcp);
@@ -50,7 +50,7 @@ class Connection extends BaseConnection
     /**
      * {@inheritDoc}
      */
-    public function executeUpdate($query, array $params = array(), array $types = array()): int
+    public function executeUpdate($query, array $params = [], array $types = []): int
     {
         try {
             return parent::executeStatement($query, $params, $types);
@@ -63,7 +63,7 @@ class Connection extends BaseConnection
     /**
      * {@inheritDoc}
      */
-    public function executeStatement($query, array $params = array(), array $types = array()): int
+    public function executeStatement($query, array $params = [], array $types = []): int
     {
         try {
             return parent::executeStatement($query, $params, $types);
@@ -95,7 +95,7 @@ class Connection extends BaseConnection
         if ($e instanceof DBALException\DriverException && $e->getQuery() !== null) {
             $message .= '; Query: ' . $e->getQuery()->getSQL();
             $params = $e->getQuery()->getParams();
-            if (count($params) > 0) {
+            if (safeCount($params) > 0) {
                 $message .= '; Params: ' . var_export($params, true);
             }
         }

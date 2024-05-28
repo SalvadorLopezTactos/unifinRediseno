@@ -176,7 +176,7 @@ class PMSECrmDataWrapper implements PMSEObservable
 
 
         $this->beanList = $beanList;
-        $this->observers = array();
+        $this->observers = [];
         $this->db = DBManagerFactory::getInstance();
 
         $this->logger = PMSELogger::getInstance();
@@ -637,7 +637,7 @@ class PMSECrmDataWrapper implements PMSEObservable
      * @return type
      * @codeCoverageIgnore
      */
-    function getObservers()
+    public function getObservers()
     {
         return $this->observers;
     }
@@ -647,7 +647,7 @@ class PMSECrmDataWrapper implements PMSEObservable
      * @param type $observers
      * @codeCoverageIgnore
      */
-    function setObservers($observers)
+    public function setObservers($observers)
     {
         $this->observers = $observers;
     }
@@ -671,6 +671,7 @@ class PMSECrmDataWrapper implements PMSEObservable
     }
 
     // @codingStandardsIgnoreStart
+
     /**
      * @codeCoverageIgnore
      */
@@ -801,10 +802,10 @@ class PMSECrmDataWrapper implements PMSEObservable
                 $output = $this->getOutboundEmailAccounts($args);
                 $outputType = 1;
                 break;
-            //case 'Log':
-            //    $output = $this->retrieveHistoryLog($filter);
-            //    $outputType = 1;
-            //    break;
+                //case 'Log':
+                //    $output = $this->retrieveHistoryLog($filter);
+                //    $outputType = 1;
+                //    break;
             default:
                 $outputType = 2;
         }
@@ -828,7 +829,7 @@ class PMSECrmDataWrapper implements PMSEObservable
      */
     public function invalidRequest()
     {
-        $response = array('success' => false, 'message' => 'Invalid Request');
+        $response = ['success' => false, 'message' => 'Invalid Request'];
         return $response;
     }
 
@@ -851,7 +852,7 @@ class PMSECrmDataWrapper implements PMSEObservable
         if ($filter === '') {
             return $this->invalidRequest();
         }
-        $out = array();
+        $out = [];
 
         $email = $this->getEmailBean();
         $email->email2init();
@@ -913,7 +914,7 @@ SQL;
             );
 
         foreach ($result->iterateAssociative() as $a) {
-            $person = array();
+            $person = [];
             $person['fullName'] = $a['first_name'] . ' ' . $a['last_name'];
             $person['emailAddress'] = $a['email_address'];
             $person['id'] = $a['id'];
@@ -929,7 +930,8 @@ SQL;
      * @param $linkField Relationship Key
      * @param $targetModule Target Module
      */
-    public function getRelatedModule($linkField, $targetModule) {
+    public function getRelatedModule($linkField, $targetModule)
+    {
         $baseModule = BeanFactory::newBean($targetModule);
         $baseModule->load_relationship($linkField);
         if (isset($baseModule->$linkField)) {
@@ -949,16 +951,16 @@ SQL;
     public function retrieveTeams($filter = '', $args = [])
     {
         $beansTeams = $this->getTeamsBean();
-        $output = array();
+        $output = [];
 
         $q = $this->sugarQueryObject;
-        $q->from($beansTeams, array('add_deleted' => true));
+        $q->from($beansTeams, ['add_deleted' => true]);
         $q->distinct(false);
-        $fields = array(
+        $fields = [
             'id',
             'name',
             'name2',
-        );
+        ];
 
         if ($filter == 'public' || $filter == 'reassign') {
             $q->where()
@@ -980,7 +982,7 @@ SQL;
 
         $teamsData = $q->execute();
         foreach ($teamsData as $team) {
-            $teamTmp = array();
+            $teamTmp = [];
             $teamTmp['value'] = $team['id'];
             $teamTmp['text'] = $team['name'];
             if (($team['id'] != 'current_team') || ($team['id'] == 'current_team' && $filter == 'reassign')) {
@@ -1009,7 +1011,7 @@ SQL;
         $users = BeanFactory::newBean('Users');
         $teams = BeanFactory::newBean('Teams');
 
-        $q = new SugarQuery;
+        $q = new SugarQuery();
         $q->from($users);
         $q->select([
             'id',
@@ -1069,34 +1071,34 @@ SQL;
      */
     public function getTargetAndRelatedFields($filter = '', $relationship = 'all')
     {
-        $result = array();
-//        $bean = BeanFactory::getBean($args['module'], $args['id']);
+        $result = [];
+        //        $bean = BeanFactory::getBean($args['module'], $args['id']);
         $result['success'] = true;
-//        $result['base_module'] = $bean->base_module;
-//        $result['name'] = $bean->name;
-//        $result['description'] = $bean->description;
-//        $result['subject'] = $bean->subject;
-//        $result['body_html'] = $bean->body_html;
-//        $result['body'] = $bean->body;
-//        $result['text_only'] = $bean->text_only == 1 ? "checked" : "";
-//        $result['from_name'] = $bean->from_name;
-//        $result['from_address'] = $bean->from_address;
+        //        $result['base_module'] = $bean->base_module;
+        //        $result['name'] = $bean->name;
+        //        $result['description'] = $bean->description;
+        //        $result['subject'] = $bean->subject;
+        //        $result['body_html'] = $bean->body_html;
+        //        $result['body'] = $bean->body;
+        //        $result['text_only'] = $bean->text_only == 1 ? "checked" : "";
+        //        $result['from_name'] = $bean->from_name;
+        //        $result['from_address'] = $bean->from_address;
 
         $fields = $this->retrieveFields($filter);
         if ($fields['success']) {
             $result['fields'] = $fields['result'];
         } else {
-            $result['fields'] = array();
+            $result['fields'] = [];
         }
         $related_modules = $this->retrieveRelatedBeans($filter, $relationship);
         if ($related_modules['success']) {
-            for ($i = 0; $i < (is_countable($related_modules['result']) ? count($related_modules['result']) : 0); $i++) {
+            for ($i = 0; $i < safeCount($related_modules['result']); $i++) {
                 $fields = $this->retrieveFields($related_modules['result'][$i]['value']);
-                $related_modules['result'][$i]["fields"] = $fields['result'];
+                $related_modules['result'][$i]['fields'] = $fields['result'];
             }
             $result['related_modules'] = $related_modules['result'];
         } else {
-            $result['related_modules'] = array();
+            $result['related_modules'] = [];
         }
         return $result;
     }
@@ -1109,18 +1111,18 @@ SQL;
     public function retrieveModules($filter = '')
     {
         $moduleList = PMSEEngineUtils::getModules();
-        $output = array();
+        $output = [];
         foreach ($moduleList as $module) {
             if (!empty($module->name) && (empty($filter) || stripos($module->name, $filter) !== false)) {
-                $tmpField = array();
+                $tmpField = [];
                 $tmpField['value'] = $module->module;
                 $tmpField['text'] = $module->name;
                 $output[] = $tmpField;
             }
         }
 
-        $value = array();
-        $text = array();
+        $value = [];
+        $text = [];
         foreach ($output as $key => $row) {
             $value[$key] = $row['value'];
             $text[$key] = $row['text'];
@@ -1143,10 +1145,9 @@ SQL;
         $projectBean = $this->getProjectBean();
         $processBean = $this->getProcessBean();
 
-        $output = array();
+        $output = [];
         if ($projectBean->retrieve($filter)) {
-
-            $processBean->retrieve_by_string_fields(array('prj_id' => $projectBean->id));
+            $processBean->retrieve_by_string_fields(['prj_id' => $projectBean->id]);
 
             $where = '';
             if (!empty($filter)) {
@@ -1154,7 +1155,7 @@ SQL;
             }
             $dynaformList = $dynaformBean->get_full_list('', $where);
             foreach ($dynaformList as $dynaform) {
-                $tmpDynaform = array();
+                $tmpDynaform = [];
                 $tmpDynaform['value'] = $dynaform->dyn_uid;
                 $tmpDynaform['text'] = $dynaform->name;
                 $output[] = $tmpDynaform;
@@ -1171,25 +1172,25 @@ SQL;
     public function retrieveActivities($filter = '')
     {
         $activityBean = $this->getActivityBean();
-        $fields = array(
+        $fields = [
             'act_uid',
-            'name'
-        );
+            'name',
+        ];
         $this->sugarQueryObject->select($fields);
-        $this->sugarQueryObject->from($activityBean, array('alias' => 'a'));
+        $this->sugarQueryObject->from($activityBean, ['alias' => 'a']);
 
         switch (strtolower($filter)) {
             case 'user':
-                $this->sugarQueryObject->joinTable('pmse_bpm_activity_definition', array('alias' => 'b'))
+                $this->sugarQueryObject->joinTable('pmse_bpm_activity_definition', ['alias' => 'b'])
                     ->on()->equalsField('b.id', 'a.id');
-                $this->sugarQueryObject->joinTable('pmse_bpm_dynamic_forms', array('alias' => 'c'))
+                $this->sugarQueryObject->joinTable('pmse_bpm_dynamic_forms', ['alias' => 'c'])
                     ->on()->equalsField('c.dyn_uid', 'b.act_type');
                 $this->sugarQueryObject
                     ->where()
                     ->equals('a.act_task_type', 'USERTASK');
                 break;
             case 'script':
-                $this->sugarQueryObject->joinTable('pmse_bpm_activity_definition', array('alias' => 'b'))
+                $this->sugarQueryObject->joinTable('pmse_bpm_activity_definition', ['alias' => 'b'])
                     ->on()->equalsField('b.id', 'a.id');
                 $this->sugarQueryObject
                     ->where()
@@ -1207,9 +1208,9 @@ SQL;
         // TODO add debug log here
         $activityList = $this->sugarQueryObject->execute();
 
-        $output = array();
+        $output = [];
         foreach ($activityList as $activity) {
-            $tmpACtivity = array();
+            $tmpACtivity = [];
             $tmpACtivity['value'] = $activity['act_uid'];
             $tmpACtivity['text'] = $activity['name'];
             $output[] = $tmpACtivity;
@@ -1229,14 +1230,14 @@ SQL;
     {
         //$processDefinitionBean = new BpmProcessDefinition();
         $processDefinitionBean = $this->getProcessDefinition();
-//        $res = new stdClass();
-//        $res->search = $filter;
-//        $res->success = true;
+        //        $res = new stdClass();
+        //        $res->search = $filter;
+        //        $res->success = true;
         $where = 'pmse_project.id=\'' . $filter . '\'';
-        $joinedTables = array(
-            array('INNER', 'pmse_bpmn_process', 'pmse_bpmn_process.id=pmse_bpm_process_definition.id'),
-            array('INNER', 'pmse_project', 'pmse_project.id=pmse_bpmn_process.prj_id')
-        );
+        $joinedTables = [
+            ['INNER', 'pmse_bpmn_process', 'pmse_bpmn_process.id=pmse_bpm_process_definition.id'],
+            ['INNER', 'pmse_project', 'pmse_project.id=pmse_bpmn_process.prj_id'],
+        ];
 
         $processDefinitionList = $this->getSelectRows(
             $processDefinitionBean,
@@ -1245,11 +1246,11 @@ SQL;
             0,
             -1,
             -1,
-            array(),
+            [],
             $joinedTables
         );
         $processDefinitionList = $processDefinitionList['rowList'];
-        $output = array();
+        $output = [];
         foreach ($processDefinitionList as $processDefinition) {
             $output[] = $processDefinition;
         }
@@ -1265,7 +1266,7 @@ SQL;
      */
     public function getAjaxRelationships($relationships)
     {
-        $ajaxrels = array();
+        $ajaxrels = [];
         $relationshipList = $relationships->getRelationshipList();
         foreach ($relationshipList as $relationshipName) {
             $rel = $relationships->get($relationshipName)->getDefinition();
@@ -1291,7 +1292,7 @@ SQL;
             }
             $rel ['name'] = $relationshipName;
             if ($rel ['is_custom'] && isset($rel ['from_studio']) && $rel ['from_studio']) {
-                $rel ['name'] = $relationshipName . "*";
+                $rel ['name'] = $relationshipName . '*';
             }
             $ajaxrels [] = $rel;
         }
@@ -1316,33 +1317,33 @@ SQL;
     public function retrieveRelatedModules($filter)
     {
         $newModuleFilter = $this->getBeanModuleName($filter);
-        $output_11 = array();
-        $output_1m = array();
-        $output = array();
+        $output_11 = [];
+        $output_1m = [];
+        $output = [];
         $moduleBean = $this->getModuleFilter($newModuleFilter);
 
-        $relationshipType = array('one-to-one', 'one-to-many', 'many-to-many');
+        $relationshipType = ['one-to-one', 'one-to-many', 'many-to-many'];
         $ajaxRelationships = '';
         if (is_object($moduleBean)) {
             $relationships = new DeployedRelationships($newModuleFilter);
             $ajaxRelationships = $this->getAjaxRelationships($relationships);
-            if ("ProjectTask" == $newModuleFilter) {
-                $newModuleFilter = "Project Tasks";
+            if ('ProjectTask' == $newModuleFilter) {
+                $newModuleFilter = 'Project Tasks';
             }
             foreach ($ajaxRelationships as $related) {
                 if (($newModuleFilter == $related['lhs_module'] || strtolower(
-                            $newModuleFilter
-                        ) == $related['lhs_table']) && in_array($related['relationship_type'], $relationshipType)
+                    $newModuleFilter
+                ) == $related['lhs_table']) && safeInArray($related['relationship_type'], $relationshipType)
                 ) {
-                    $tmpField = array();
+                    $tmpField = [];
                     $tmpField['value'] = $related['rhs_module'];
                     $tmpField['text'] = $related['rhs_module'];
                     $output[] = $tmpField;
                 }
             }
         }
-        $moduleName = (translate("LBL_MODULE_NAME", $filter) == "LBL_MODULE_NAME") ? $filter : translate("LBL_MODULE_NAME", $filter);
-        $filterArray = array('value' => $filter, 'text' => '<' . $moduleName . '>');
+        $moduleName = (translate('LBL_MODULE_NAME', $filter) == 'LBL_MODULE_NAME') ? $filter : translate('LBL_MODULE_NAME', $filter);
+        $filterArray = ['value' => $filter, 'text' => '<' . $moduleName . '>'];
         array_unshift($output, $filterArray);
 
         //$res->result = $output;
@@ -1380,7 +1381,6 @@ SQL;
      */
     public function _post(array $args)
     {
-
     }
 
     /**
@@ -1388,7 +1388,6 @@ SQL;
      */
     public function _delete(array $args)
     {
-
     }
 
     /**
@@ -1398,7 +1397,7 @@ SQL;
      */
     public function updateProcessDefinitions($args)
     {
-        $res = array(); //new stdClass();
+        $res = []; //new stdClass();
         $res['search'] = $args['filter'];
         $res['success'] = false;
 
@@ -1411,11 +1410,11 @@ SQL;
         if ($projectBean->retrieve($args['filter'])) {
             unset($args['prj_uid']);
             $args['prj_id'] = $projectBean->id;
-            $processBean->retrieve_by_string_fields(array('prj_id' => $projectBean->id));
+            $processBean->retrieve_by_string_fields(['prj_id' => $projectBean->id]);
             unset($args['pro_uid']);
             $args['pro_id'] = $processBean->id;
             $processDefinitionBean->retrieve_by_string_fields(
-                array('prj_id' => $projectBean->id, 'id' => $processBean->id)
+                ['prj_id' => $projectBean->id, 'id' => $processBean->id]
             );
             // If there are group fields (e.g: billing_address) in the definition then we need to expand the group field
             // to lock the individual fields which make up the group field.
@@ -1425,7 +1424,6 @@ SQL;
             );
 
             foreach ($args as $key => $value) {
-
                 if ($key == 'pro_module' && ($processDefinitionBean->$key != $value)) {
                     $updateDefaultForm = true;
                 }
@@ -1595,10 +1593,10 @@ SQL;
     public function retrieveFields($filter = '', ModuleApi $moduleApi = null, $type = '', $baseModule = '')
     {
         $newModuleFilter = $this->isBeanElement($filter) ?
-                           $filter :
-                           $this->pmseRelatedModule->getRelatedModuleName($baseModule, $filter);
+            $filter :
+            $this->pmseRelatedModule->getRelatedModuleName($baseModule, $filter);
 
-        $res = array();
+        $res = [];
         new stdClass();
 
         $res['name'] = $newModuleFilter;
@@ -1613,22 +1611,18 @@ SQL;
         $fieldTypes = $module_strings['fieldTypes'];
         //add datetimecombo type field from the vardef overrides to point to Datetime type
         $fieldTypes['datetime'] = $fieldTypes['datetimecombo'];
-        $fieldTypes['name'] = "Name";
+        $fieldTypes['name'] = 'Name';
 
         global $app_list_strings;
-        $output = array();
-        $groupFields = array();
-        $groupFieldsMap = array();
+        $output = [];
+        $groupFields = [];
+        $groupFieldsMap = [];
 
         $moduleBean = $this->getModuleFilter($newModuleFilter);
-        $fieldsData = $moduleBean->field_defs ?? array();
+        $fieldsData = $moduleBean->field_defs ?? [];
 
         foreach ($fieldsData as $field) {
-            // hide required by formula fields for ARR and CF event settings
-            if (!empty($field['required_formula']) && in_array($type, ['CF', 'AC'])) {
-                continue;
-            }
-            $tmpField = array();
+            $tmpField = [];
             if (isset($field['vname']) && (PMSEEngineUtils::isValidField($field, $type)) &&
                 AccessControlManager::instance()->allowFieldAccess($newModuleFilter, $field['name']) &&
                 PMSEEngineUtils::isSupportedField($moduleBean->object_name, $field['name'], $type)) {
@@ -1679,7 +1673,7 @@ SQL;
                     }
 
                     $tmpField['optionItem'] = 'none';
-                    if (in_array($field['type'], array('enum', 'radioenum', 'multienum', 'parent_type'))) {
+                    if (in_array($field['type'], ['enum', 'radioenum', 'multienum', 'parent_type'])) {
                         if (!isset($field['options']) || !isset($app_list_strings[$field['options']])) {
                             if (PMSEEngineUtils::specialFields($field, $type)) {
                                 $tmpField['optionItem'] = $this->gatewayModulesMethod($field);
@@ -1696,10 +1690,10 @@ SQL;
                     }
 
                     if ($field['type'] == 'bool') {
-                        $tmpField['optionItem'] = array("TRUE" => true, "FALSE" => false);
+                        $tmpField['optionItem'] = ['TRUE' => true, 'FALSE' => false];
                     }
 
-                    if (isset($field['required'])) {
+                    if (isset($field['required']) && empty($field['required_formula']) && in_array($type, ['CF', 'AC'])) {
                         $tmpField['required'] = $field['required'];
                     }
                     if (isset($field['len'])) {
@@ -1719,7 +1713,7 @@ SQL;
             }
         }
 
-        $text = array();
+        $text = [];
         foreach ($output as $key => $row) {
             $text[$key] = strtolower($row['text']);
         }
@@ -1736,7 +1730,7 @@ SQL;
      * @param array $additionalArgs
      * @return object
      */
-    public function addRelatedRecord($filter = '', $additionalArgs = array())
+    public function addRelatedRecord($filter = '', $additionalArgs = [])
     {
         if ($this->isBeanElement($filter)) {
             $newModuleFilter = $filter;
@@ -1745,7 +1739,7 @@ SQL;
             $newModuleFilter = $related['rhs_module'];
         }
 
-        $res = array();
+        $res = [];
 
         $res['name'] = $newModuleFilter;
 
@@ -1758,13 +1752,13 @@ SQL;
         $fieldTypes['datetime'] = $fieldTypes['datetimecombo'];
 
         global $app_list_strings;
-        $output = array();
+        $output = [];
         $moduleBean = $this->getModuleFilter($newModuleFilter);
-        $fieldsData = $moduleBean->field_defs ?? array();
+        $fieldsData = $moduleBean->field_defs ?? [];
         foreach ($fieldsData as $field) {
             $retrieveId = isset($additionalArgs['retrieveId']) && !empty($additionalArgs['retrieveId']) && $field['name'] == 'id' ? $additionalArgs['retrieveId'] : false;
             if (isset($field['vname']) && (PMSEEngineUtils::isValidField($field, 'AC') || $retrieveId)) {
-                $tmpField = array();
+                $tmpField = [];
                 $tmpField['value'] = $field['name'];
                 $tmpField['text'] = $this->getFormattedFieldLabel($field['vname'], $newModuleFilter);
                 $tmpField['type'] = $fieldTypes[$field['type']] ?? ucfirst(
@@ -1791,17 +1785,17 @@ SQL;
         }
         $arrayModules = $this->returnArrayModules($newModuleFilter);
         $customfields = false;
-        if ((is_countable($arrayModules) ? count($arrayModules) : 0) > 0) {
-            $output = array();
+        if (safeCount($arrayModules) > 0) {
+            $output = [];
             $customfields = true;
         } else {
             $arrayModules = $this->returnArrayModules('All');
         }
-        if ((is_countable($arrayModules) ? count($arrayModules) : 0) > 0) {
+        if (safeCount($arrayModules) > 0) {
             foreach ($fieldsData as $field) {
                 $newfield = $this->dataFieldPersonalized($field, $arrayModules, $customfields);
                 if (isset($field['vname']) && isset($newfield)) {
-                    $tmpField = array();
+                    $tmpField = [];
                     $tmpField['value'] = $newfield['value'] ?? $field['name'];
                     $tmpField['text'] = $newfield['text'] ?? $this->getFormattedFieldLabel($field['vname'], $newModuleFilter);
                     $tmpField['type'] = $fieldTypes[$newfield['type']] ?? ucfirst(
@@ -1826,7 +1820,7 @@ SQL;
                 }
             }
         }
-        $text = array();
+        $text = [];
         foreach ($output as $key => $row) {
             $text[$key] = strtolower($row['text']);
         }
@@ -1850,18 +1844,18 @@ SQL;
             $related = $this->getRelationshipData($filter);
             $newModuleFilter = $related['rhs_module'];
         }
-        $res = array(); //new stdClass();
+        $res = []; //new stdClass();
         $res['name'] = $newModuleFilter;
         $res['search'] = $filter;
         $res['success'] = true;
 
-        $output = array();
+        $output = [];
         $moduleBean = $this->getModuleFilter($newModuleFilter);
-        $fieldsData = $moduleBean->field_defs ?? array();
+        $fieldsData = $moduleBean->field_defs ?? [];
         foreach ($fieldsData as $field) {
             if (isset($field['vname']) && PMSEEngineUtils::isValidField($field)) {
                 if ($field['type'] == 'date' || $field['type'] == 'datetimecombo' || $field['type'] == 'datetime') {
-                    $tmpField = array();
+                    $tmpField = [];
                     $tmpField['value'] = $field['name'];
                     $tmpField['text'] = $this->getFormattedFieldLabel($field['vname'], $newModuleFilter);
                     $output[] = $tmpField;
@@ -1870,7 +1864,7 @@ SQL;
         }
 
         if ($includeCurrent) {
-            $arr_Now = array();
+            $arr_Now = [];
             $arr_Now['value'] = 'current_date_time';
             $arr_Now['text'] = 'Current Date Time';
             array_unshift($output, $arr_Now);
@@ -1887,7 +1881,7 @@ SQL;
      */
     public function retrieveRuleSets($filter, $orderBy = 'name')
     {
-        $q = new SugarQuery;
+        $q = new SugarQuery();
         $q->from($this->getRuleSetBean(), 'b');
 
         // This is the pattern that the client expects
@@ -1922,14 +1916,14 @@ SQL;
         $processDefinitionBean = $this->getProcessDefinition();
         $activityDefinitionBean = $this->getActivityDefinitionBean();
         $projectBean = $this->getProjectBean();
-        $output = array();
+        $output = [];
 
         if ($projectBean->retrieve($filter)) {
             $processDefinitionBean->retrieve($projectBean->id);
 
-            $this->sugarQueryObject->select(array('id', 'name'));
-            $this->sugarQueryObject->from($activityDefinitionBean, array('alias' => 'a'));
-            $this->sugarQueryObject->joinTable('pmse_bpmn_activity', array('alias' => 'b'))
+            $this->sugarQueryObject->select(['id', 'name']);
+            $this->sugarQueryObject->from($activityDefinitionBean, ['alias' => 'a']);
+            $this->sugarQueryObject->joinTable('pmse_bpmn_activity', ['alias' => 'b'])
                 ->on()->equalsField('b.id', 'a.id');
             $this->sugarQueryObject->where()->queryAnd()
                 ->addRaw(
@@ -1939,7 +1933,7 @@ SQL;
             $rows = $this->sugarQueryObject->execute();
 
             foreach ($rows as $key => $definition) {
-                $tmpArray = array();
+                $tmpArray = [];
                 $tmpArray['value'] = $definition['id'];
                 $tmpArray['text'] = $definition['name'];
                 $output[] = $tmpArray;
@@ -1960,7 +1954,7 @@ SQL;
             return [];
         }
 
-        $q = new SugarQuery;
+        $q = new SugarQuery();
         $q->from($this->getEmailTemplateBean());
 
         // This is the pattern that the client expects
@@ -1989,11 +1983,11 @@ SQL;
      */
     public function validateProjectName($projectName)
     {
-        $res = array();
+        $res = [];
         $res['success'] = true;
         $projectObject = $this->getProjectBean();
         $result = true;
-        $rsProject = $projectObject->retrieve_by_string_fields(array('name' => $projectName));
+        $rsProject = $projectObject->retrieve_by_string_fields(['name' => $projectName]);
         if (!is_null($rsProject)) {
             $result = false;
             $res['message'] = sprintf(
@@ -2015,7 +2009,7 @@ SQL;
     {
         $res = new stdClass();
         $res->success = true;
-//        $emailObject = new BpmEmailTemplate();
+        //        $emailObject = new BpmEmailTemplate();
         $emailObject = $this->getEmailTemplateBean();
         $result = true;
         $where = "name ='" . $emailName . "'" . (isset($id) ? " and id != '" . $id . "'" : '');
@@ -2040,9 +2034,9 @@ SQL;
      */
     public function validateBusinessRuleName($brName, $brId = null)
     {
-        $res = array(); //new stdClass();
+        $res = []; //new stdClass();
         $res['success'] = true;
-//        $brObject = new BpmRuleSet();
+        //        $brObject = new BpmRuleSet();
         $brObject = $this->getRuleSetBean();
         $result = true;
         $where = "rst_name ='" . $brName . "'" . (isset($brId) ? " AND rst_uid !='" . $brId . "'" : '');
@@ -2065,13 +2059,13 @@ SQL;
      */
     public function defaultUsersList()
     {
-//        $res = new stdClass();
-//        $res->success = true;
-        $tmpArray = array(
-            array('value' => 'current_user', 'text' => translate('LBL_PMSE_FORM_OPTION_CURRENT_USER', 'pmse_Project')),
-            array('value' => 'supervisor', 'text' => translate('LBL_PMSE_FORM_OPTION_SUPERVISOR', 'pmse_Project')),
-            array('value' => 'owner', 'text' => translate('LBL_PMSE_FORM_OPTION_RECORD_OWNER', 'pmse_Project'))
-        );
+        //        $res = new stdClass();
+        //        $res->success = true;
+        $tmpArray = [
+            ['value' => 'current_user', 'text' => translate('LBL_PMSE_FORM_OPTION_CURRENT_USER', 'pmse_Project')],
+            ['value' => 'supervisor', 'text' => translate('LBL_PMSE_FORM_OPTION_SUPERVISOR', 'pmse_Project')],
+            ['value' => 'owner', 'text' => translate('LBL_PMSE_FORM_OPTION_RECORD_OWNER', 'pmse_Project')],
+        ];
         //$res->result = $tmpArray;
         return $tmpArray;
     }
@@ -2083,13 +2077,13 @@ SQL;
     public function rolesList()
     {
         $userRoles = ACLRole::getAllRoles(true);
-        $tmpArray = array();
-        $tmpArray[] = array(
+        $tmpArray = [];
+        $tmpArray[] = [
             'value' => 'is_admin',
-            'text' => translate('LBL_PMSE_FORM_OPTION_ADMINISTRATOR', 'pmse_Project')
-        );
+            'text' => translate('LBL_PMSE_FORM_OPTION_ADMINISTRATOR', 'pmse_Project'),
+        ];
         foreach ($userRoles as $role) {
-            $tmpArray[] = array('value' => $role['id'], 'text' => $role['name']);
+            $tmpArray[] = ['value' => $role['id'], 'text' => $role['name']];
         }
         return $tmpArray;
     }
@@ -2103,14 +2097,14 @@ SQL;
     public function validateReclaimCase($casID, $casIndex)
     {
         //TODO Review functionality
-        $res = array(); //new stdClass();
+        $res = []; //new stdClass();
         $res['success'] = true;
         $res['result'] = false;
         //$caseBean = new BpmInbox();
         $caseBean = $this->getInboxBean();
-        $this->sugarQueryObject->select(array('a.cas_id'));
-        $this->sugarQueryObject->from($caseBean, array('alias' => 'a'));
-        $this->sugarQueryObject->joinTable('pmse_bpm_flow', array('joinType' => 'LEFT', 'alias' => 'b'))
+        $this->sugarQueryObject->select(['a.cas_id']);
+        $this->sugarQueryObject->from($caseBean, ['alias' => 'a']);
+        $this->sugarQueryObject->joinTable('pmse_bpm_flow', ['joinType' => 'LEFT', 'alias' => 'b'])
             ->on()->equalsField('a.cas_id', 'b.cas_id');
         $this->sugarQueryObject->where()
             ->equals('b.cas_id', $casID)
@@ -2133,86 +2127,86 @@ SQL;
      */
     private function returnArrayModules($module)
     {
-        $arraymodules = array(
-            'Notes' => array(
-                array('name' => 'name', 'type' => 'name'),
-                array(
+        $arraymodules = [
+            'Notes' => [
+                ['name' => 'name', 'type' => 'name'],
+                [
                     'name' => 'assigned_user_name',
                     'type' => 'enum',
                     'value' => 'assigned_user_id',
-                    'method' => 'assignedUsers'
-                ), //TYPE original relate
-                array('name' => 'description', 'type' => 'text'),
-                array('name' => 'portal_flag', 'type' => 'bool', 'required' => false),
+                    'method' => 'assignedUsers',
+                ], //TYPE original relate
+                ['name' => 'description', 'type' => 'text'],
+                ['name' => 'portal_flag', 'type' => 'bool', 'required' => false],
                 //array('name'=>'contact_name', 'type'=>'relate')
-            ),
-            'Tasks' => array(
-                array('name' => 'name', 'type' => 'name'),
-                array('name' => 'date_start', 'type' => 'datetimecombo'),
-                array('name' => 'date_due', 'type' => 'datetimecombo'),
-                array('name' => 'priority', 'type' => 'enum', 'method' => 'default'),
-                array('name' => 'description', 'type' => 'text'),
-                array('name' => 'status', 'type' => 'enum', 'method' => 'default'),
+            ],
+            'Tasks' => [
+                ['name' => 'name', 'type' => 'name'],
+                ['name' => 'date_start', 'type' => 'datetimecombo'],
+                ['name' => 'date_due', 'type' => 'datetimecombo'],
+                ['name' => 'priority', 'type' => 'enum', 'method' => 'default'],
+                ['name' => 'description', 'type' => 'text'],
+                ['name' => 'status', 'type' => 'enum', 'method' => 'default'],
                 //array('name'=>'contact_name', 'type'=>'relate'),
-                array(
+                [
                     'name' => 'assigned_user_name',
                     'type' => 'enum',
                     'value' => 'assigned_user_id',
-                    'method' => 'assignedUsers'
-                ) //TYPE original relate
-            ),
-            'Meetings' => array(
-                array('name' => 'name', 'type' => 'name'),
-                array('name' => 'type', 'type' => 'enum', 'method' => 'default'),
-                array('name' => 'date_start', 'type' => 'datetimecombo'),
-                array('name' => 'date_end', 'type' => 'datetimecombo'),
-                array('name' => 'duration_hours', 'type' => 'int'),
-                array('name' => 'reminder_time', 'type' => 'enum', 'text' => 'Reminder Popup', 'method' => 'default'),
-                array(
+                    'method' => 'assignedUsers',
+                ], //TYPE original relate
+            ],
+            'Meetings' => [
+                ['name' => 'name', 'type' => 'name'],
+                ['name' => 'type', 'type' => 'enum', 'method' => 'default'],
+                ['name' => 'date_start', 'type' => 'datetimecombo'],
+                ['name' => 'date_end', 'type' => 'datetimecombo'],
+                ['name' => 'duration_hours', 'type' => 'int'],
+                ['name' => 'reminder_time', 'type' => 'enum', 'text' => 'Reminder Popup', 'method' => 'default'],
+                [
                     'name' => 'email_reminder_time',
                     'type' => 'enum',
                     'text' => 'Reminder Email all invitees',
-                    'method' => 'default'
-                ),
-                array('name' => 'status', 'type' => 'enum', 'method' => 'default'),
-                array('name' => 'location', 'type' => 'varchar'),
-                array(
+                    'method' => 'default',
+                ],
+                ['name' => 'status', 'type' => 'enum', 'method' => 'default'],
+                ['name' => 'location', 'type' => 'varchar'],
+                [
                     'name' => 'assigned_user_name',
                     'type' => 'enum',
                     'value' => 'assigned_user_id',
-                    'method' => 'assignedUsers'
-                ) //TYPE original relate
-            ),
-            'Calls' => array(
-                array('name' => 'name', 'type' => 'name'),
-                array('name' => 'date_start', 'type' => 'datetimecombo'),
-                array('name' => 'duration_hours', 'type' => 'int'),
-                array('name' => 'description', 'type' => 'text'),
-                array('name' => 'status', 'type' => 'enum', 'method' => 'default'),
-                array('name' => 'reminder_time', 'type' => 'enum', 'text' => 'Reminder Popup', 'method' => 'default'),
-                array(
+                    'method' => 'assignedUsers',
+                ], //TYPE original relate
+            ],
+            'Calls' => [
+                ['name' => 'name', 'type' => 'name'],
+                ['name' => 'date_start', 'type' => 'datetimecombo'],
+                ['name' => 'duration_hours', 'type' => 'int'],
+                ['name' => 'description', 'type' => 'text'],
+                ['name' => 'status', 'type' => 'enum', 'method' => 'default'],
+                ['name' => 'reminder_time', 'type' => 'enum', 'text' => 'Reminder Popup', 'method' => 'default'],
+                [
                     'name' => 'email_reminder_time',
                     'type' => 'enum',
                     'text' => 'Reminder Email all invitees',
-                    'method' => 'default'
-                ),
-                array(
+                    'method' => 'default',
+                ],
+                [
                     'name' => 'assigned_user_name',
                     'type' => 'enum',
                     'value' => 'assigned_user_id',
-                    'method' => 'assignedUsers'
-                ) //TYPE original relate
-            ),
-            'All' => array(
-                array(
+                    'method' => 'assignedUsers',
+                ], //TYPE original relate
+            ],
+            'All' => [
+                [
                     'name' => 'assigned_user_name',
                     'type' => 'enum',
                     'value' => 'assigned_user_id',
-                    'method' => 'assignedUsers'
-                ) //TYPE original relate
-            )
-        );
-        return $arraymodules[$module] ?? array();
+                    'method' => 'assignedUsers',
+                ], //TYPE original relate
+            ],
+        ];
+        return $arraymodules[$module] ?? [];
     }
 
     /**
@@ -2270,7 +2264,7 @@ SQL;
      */
     private function replaceItemsValues($def)
     {
-        $field = array();
+        $field = [];
         switch ($def['name']) {
             case 'assigned_user_id':
                 $field['type'] = 'user';
@@ -2298,13 +2292,12 @@ SQL;
      */
     public function getRelatedSearch($filter, $args)
     {
-        $out = array();
+        $out = [];
         switch ($filter) {
             case 'modules':
                 $out = $this->retrieveModules('');
                 break;
             case 'fields':
-
                 break;
         }
         return $out;
@@ -2318,7 +2311,7 @@ SQL;
      */
     private function retrieveCrmData($result, $filter)
     {
-        $output = array();
+        $output = [];
         $output['success'] = true;
         $output['search'] = $filter;
         $output['result'] = $result;
@@ -2371,10 +2364,10 @@ SQL;
      */
     private function getAllRelated($filter, ModuleApi $moduleApi, string $relationship, string $baseModule, $type = '')
     {
-        $result = array();
+        $result = [];
         $result['success'] = true;
         $res = $this->retrieveRelatedBeans($filter, $relationship);
-        $arr = array();
+        $arr = [];
         if (is_array($res['result']) && !empty($res['result'])) {
             foreach ($res['result'] as $key => $value) {
                 //$aux = $this->addRelatedRecord($value['value']);
@@ -2429,13 +2422,13 @@ SQL;
         };
 
         $q = $this->sugarQueryObject;
-        $q->select(array('id'));
+        $q->select(['id']);
         $q->from(BeanFactory::newBean('pmse_BpmnEvent'));
         $q->where()->equals('evn_uid', $eventUid);
         $result = $q->execute();
 
         if (is_array($result)) {
-            if (count($result) > 0) {
+            if (safeCount($result) > 0) {
                 $eventDefinitionId = $result[0]['id'];
                 $sql = "UPDATE pmse_bpm_event_definition
                     SET evn_criteria = ''
@@ -2458,15 +2451,15 @@ SQL;
      */
     public function getMultiLockedFieldsFromGroupField($module, $proLockedVariables)
     {
-        $groupFieldsArray = array();
+        $groupFieldsArray = [];
         $newLockedFieldsStr = '';
 
         $moduleBean = BeanFactory::newBean($module);
-        $fieldsDataArray = $moduleBean->field_defs ?? array();
+        $fieldsDataArray = $moduleBean->field_defs ?? [];
         $lockedVarsArray = json_decode($proLockedVariables);
         foreach ($fieldsDataArray as $key => $fieldsArray) {
-            if (!empty($fieldsArray['group']) && (in_array($fieldsArray['group'], $lockedVarsArray))) {
-                $groupFieldsArray[$fieldsArray['group']][] =  $fieldsArray['name'];
+            if (!empty($fieldsArray['group']) && (safeInArray($fieldsArray['group'], $lockedVarsArray))) {
+                $groupFieldsArray[$fieldsArray['group']][] = $fieldsArray['name'];
                 if ((!empty($fieldsDataArray[$fieldsArray['group']])) &&
                     (array_search($fieldsArray['group'], $groupFieldsArray) === false)) {
                     $groupFieldsArray[$fieldsArray['group']][] = $fieldsArray['group'];
@@ -2497,5 +2490,4 @@ SQL;
     {
         return str_replace(':', '', translate($fieldLabel, $module));
     }
-
 }

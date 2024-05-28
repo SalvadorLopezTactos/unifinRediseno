@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('graphics-svg', function (Y, NAME) {
 
 var IMPLEMENTATION = "svg",
@@ -3038,7 +3031,7 @@ Y.extend(SVGGraphic, Y.GraphicBase, {
         this.set("height", h);
         return this;
     },
-    
+
     /**
      * Removes all nodes.
      *
@@ -3561,4 +3554,4 @@ Y.SVGGraphic = SVGGraphic;
 
 
 
-}, '3.15.0', {"requires": ["graphics"]});
+}, '3.18.1', {"requires": ["graphics"]});

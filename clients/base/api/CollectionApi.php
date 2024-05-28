@@ -85,10 +85,10 @@ abstract class CollectionApi extends SugarApi
      */
     protected function buildResponse(array $records, array $nextOffset, array $errors)
     {
-        $response = array(
+        $response = [
             'records' => $records,
             'next_offset' => $nextOffset,
-        );
+        ];
 
         if (!empty($errors)) {
             $response['errors'] = $errors;
@@ -117,9 +117,9 @@ abstract class CollectionApi extends SugarApi
 
         $count = $this->getCount($api, $args, $definition);
 
-        return array(
+        return [
             'record_count' => $count,
-        );
+        ];
     }
 
     /**
@@ -137,27 +137,28 @@ abstract class CollectionApi extends SugarApi
      * @return array
      */
     protected function getData(
-        ServiceBase $api,
-        array $args,
+        ServiceBase                   $api,
+        array                         $args,
         CollectionDefinitionInterface $definition,
-        array $sortFields
+        array                         $sortFields
     ) {
-        $data = array();
+
+        $data = [];
         foreach ($definition->getSources() as $source) {
             if ($args['offset'][$source] >= 0) {
                 $sourceArgs = $this->getSourceArguments($api, $args, $definition, $source, $sortFields[$source]);
-                $response = array();
+                $response = [];
 
                 try {
                     $response = $this->getSourceData($api, $source, $sourceArgs);
                 } catch (SugarApiException $e) {
                     $response['next_offset'] = -1;
-                    $response['records'] = array();
-                    $response['error'] = array(
+                    $response['records'] = [];
+                    $response['error'] = [
                         'code' => $e->getHttpCode(),
                         'error' => $e->getErrorLabel(),
                         'error_message' => $e->getMessage(),
-                    );
+                    ];
                 }
 
                 $data[$source] = $response;
@@ -179,11 +180,12 @@ abstract class CollectionApi extends SugarApi
      * @throws SugarApiExceptionNotFound
      */
     protected function getCount(
-        ServiceBase $api,
-        array $args,
+        ServiceBase                   $api,
+        array                         $args,
         CollectionDefinitionInterface $definition
     ) {
-        $count = array();
+
+        $count = [];
         foreach ($definition->getSources() as $source) {
             $sourceArgs = $this->getSourceArguments($api, $args, $definition, $source);
             $response = $this->getSourceCount($api, $source, $sourceArgs);
@@ -205,23 +207,24 @@ abstract class CollectionApi extends SugarApi
      * @return array RelateApi arguments
      */
     protected function getSourceArguments(
-        ServiceBase $api,
-        array $args,
+        ServiceBase                   $api,
+        array                         $args,
         CollectionDefinitionInterface $definition,
         $source,
-        array $sortFields = array()
+        array                         $sortFields = []
     ) {
-        $args = array_merge($args, array(
+
+        $args = array_merge($args, [
             'offset' => $args['offset'][$source],
-        ));
+        ]);
 
         $args['filter'] = $this->getSourceFilter($args, $definition, $source);
         unset($args['stored_filter']);
 
         $args = $this->mapSourceArguments($definition, $source, $args);
 
-        if (isset($args['fields']) && is_countable($args['fields']) && count($args['fields']) > 0
-            && is_countable($sortFields) && count($sortFields) > 0) {
+        if (isset($args['fields']) && safeCount($args['fields']) > 0
+            && safeCount($sortFields) > 0) {
             $args['fields'] = array_merge($args['fields'], $sortFields);
         }
 
@@ -244,7 +247,7 @@ abstract class CollectionApi extends SugarApi
      */
     protected function getSourceFilter(array $args, CollectionDefinitionInterface $definition, $source)
     {
-        $filters = array();
+        $filters = [];
 
         if ($definition->hasSourceFilter($source)) {
             $filters[] = $definition->getSourceFilter($source);
@@ -263,11 +266,11 @@ abstract class CollectionApi extends SugarApi
             $filters[] = $filter;
         }
 
-        if (count($filters) > 0) {
+        if (safeCount($filters) > 0) {
             return call_user_func_array('array_merge', $filters);
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -343,9 +346,9 @@ abstract class CollectionApi extends SugarApi
         if (!$args['order_by']) {
             $orderBy = $definition->getOrderBy();
             if ($orderBy) {
-                $args['order_by'] = $this->getOrderByFromArgs(array(
+                $args['order_by'] = $this->getOrderByFromArgs([
                     'order_by' => $orderBy,
-                ));
+                ]);
             } else {
                 $args['order_by'] = $this->getDefaultOrderBy();
             }
@@ -353,7 +356,7 @@ abstract class CollectionApi extends SugarApi
 
         // convert fields to a array for consistent behavior with SugarApi::formatBeans
         if (!empty($args['fields']) && !is_array($args['fields'])) {
-            $args['fields'] = explode(',',$args['fields']);
+            $args['fields'] = explode(',', $args['fields']);
         }
 
         $args['stored_filter'] = $this->normalizeStoredFilter($args, $definition);
@@ -381,16 +384,16 @@ abstract class CollectionApi extends SugarApi
 
             $offset = $args['offset'];
         } else {
-            $offset = array();
+            $offset = [];
         }
 
-        $keys = array();
+        $keys = [];
         foreach ($definition->getSources() as $source) {
             $keys[$source] = true;
             if (!isset($offset[$source])) {
                 $offset[$source] = 0;
             } else {
-                $offset[$source] = (int) $offset[$source];
+                $offset[$source] = (int)$offset[$source];
                 if ($offset[$source] < 0) {
                     $offset[$source] = -1;
                 }
@@ -416,10 +419,10 @@ abstract class CollectionApi extends SugarApi
     protected function normalizeStoredFilter(array $args, CollectionDefinitionInterface $definition)
     {
         if (!isset($args['stored_filter'])) {
-            return array();
+            return [];
         }
 
-        $filter = (array) $args['stored_filter'];
+        $filter = (array)$args['stored_filter'];
         foreach ($filter as $filterName) {
             if (!$definition->hasStoredFilter($filterName)) {
                 throw new SugarApiExceptionInvalidParameter('Stored filter not found');
@@ -440,7 +443,7 @@ abstract class CollectionApi extends SugarApi
      */
     protected function extractErrors(array &$data)
     {
-        $errors = array();
+        $errors = [];
 
         foreach ($data as $linkName => $linkData) {
             if (isset($linkData['error'])) {
@@ -468,7 +471,7 @@ abstract class CollectionApi extends SugarApi
     {
         $comparator = $this->getSourceDataComparator($spec);
 
-        $sourceRecords = $returnedBySource = array();
+        $sourceRecords = $returnedBySource = [];
 
         // put source name into every record
         foreach ($data as $source => $sourceData) {
@@ -480,7 +483,7 @@ abstract class CollectionApi extends SugarApi
             $nextOffset[$source] = $sourceData['next_offset'];
         }
 
-        $records = $index = array();
+        $records = $index = [];
         while (true) {
             uasort($sourceRecords, $comparator);
             $source = key($sourceRecords);
@@ -489,7 +492,7 @@ abstract class CollectionApi extends SugarApi
                 break;
             }
             if (!isset($index[$record['_module']][$record['id']])) {
-                if ($limit >= 0 && count($records) >= $limit) {
+                if ($limit >= 0 && safeCount($records) >= $limit) {
                     array_unshift($sourceRecords[$source], $record);
                     break;
                 }
@@ -515,22 +518,22 @@ abstract class CollectionApi extends SugarApi
      */
     protected function getSortSpec(CollectionDefinitionInterface $definition, $orderBy)
     {
-        $sourceData = array();
+        $sourceData = [];
         foreach ($definition->getSources() as $source) {
             $moduleName = $definition->getSourceModuleName($source);
             $bean = BeanFactory::newBean($moduleName);
             if ($definition->hasFieldMap($source)) {
                 $fieldMap = $definition->getFieldMap($source);
             } else {
-                $fieldMap = array();
+                $fieldMap = [];
             }
-            $sourceData[$source] = array($bean, $fieldMap);
+            $sourceData[$source] = [$bean, $fieldMap];
         }
 
-        $spec = array();
+        $spec = [];
         foreach ($orderBy as $alias => $direction) {
             $isNumeric = null;
-            $map = array();
+            $map = [];
             foreach ($sourceData as $source => $data) {
                 /** @var SugarBean $bean */
                 [$bean, $fieldMap] = $data;
@@ -556,14 +559,14 @@ abstract class CollectionApi extends SugarApi
                 }
 
                 if (isset($fieldDef['sort_on'])) {
-                    if ($isFieldNumeric && (is_countable($fieldDef['sort_on']) ? count($fieldDef['sort_on']) : 0) > 1) {
+                    if ($isFieldNumeric && safeCount($fieldDef['sort_on']) > 1) {
                         throw new SugarApiExceptionError(
                             'Cannot use "sort_on" more than one columns for numeric fields in collections'
                         );
                     }
-                    $map[$source] = (array) $fieldDef['sort_on'];
+                    $map[$source] = (array)$fieldDef['sort_on'];
                 } else {
-                    $map[$source] = array($field);
+                    $map[$source] = [$field];
                 }
 
                 if ($isNumeric === null) {
@@ -575,11 +578,11 @@ abstract class CollectionApi extends SugarApi
                 }
             }
 
-            $spec[] = array(
+            $spec[] = [
                 'map' => $map,
                 'is_numeric' => $isNumeric,
                 'direction' => $direction,
-            );
+            ];
         }
 
         return $spec;
@@ -596,11 +599,11 @@ abstract class CollectionApi extends SugarApi
      */
     protected function getAdditionalSortFields(array $args, CollectionDefinitionInterface $definition, array $sortSpec)
     {
-        $result = array();
+        $result = [];
 
         // make sure result contains entry for every source in order to make less checks in future
         foreach ($definition->getSources() as $source) {
-            $result[$source] = array();
+            $result[$source] = [];
         }
 
         if (!empty($args['fields'])) {
@@ -632,12 +635,18 @@ abstract class CollectionApi extends SugarApi
     protected function getColumnComparator($map, $isNumeric, $direction)
     {
         $comparator = $isNumeric ? function ($a, $b) {
+            if (!is_numeric($a)) {
+                return 1;
+            }
+            if (!is_numeric($b)) {
+                return -1;
+            }
             return $a - $b;
         } : $this->collator;
 
         $getValue = function ($row, $fields) {
             // do not concat values in case there's only one field in order to preserve value type
-            if ((is_countable($fields) ? count($fields) : 0) == 1) {
+            if (safeCount($fields) == 1) {
                 return $row[$fields[0]];
             } else {
                 return implode(' ', array_map(function ($field) use ($row) {
@@ -666,7 +675,7 @@ abstract class CollectionApi extends SugarApi
      */
     protected function getRecordComparator(array $spec)
     {
-        $comparators = array();
+        $comparators = [];
         foreach ($spec as $alias => $properties) {
             $comparators[] = $this->getColumnComparator(
                 $properties['map'],
@@ -699,8 +708,8 @@ abstract class CollectionApi extends SugarApi
         $recordComparator = $this->getRecordComparator($spec);
 
         return function ($a, $b) use ($recordComparator) {
-            $countA = is_countable($a) ? count($a) : 0;
-            $countB = is_countable($b) ? count($b) : 0;
+            $countA = safeCount($a);
+            $countB = safeCount($b);
             if (!$countA || !$countB) {
                 // non-empty array should go first
                 return $countB - $countA;
@@ -723,10 +732,10 @@ abstract class CollectionApi extends SugarApi
      */
     protected function getNextOffset(array $offset, array $returned, array $nextOffset, array $remainder)
     {
-        $truncated = array();
+        $truncated = [];
 
         foreach ($remainder as $source => $records) {
-            $truncated[$source] = (is_countable($records) ? count($records) : 0) > 0;
+            $truncated[$source] = safeCount($records) > 0;
         }
 
         foreach ($offset as $source => $value) {
@@ -796,7 +805,7 @@ abstract class CollectionApi extends SugarApi
      */
     protected function mapArrayKeys(array $array, array $fieldMap)
     {
-        $mapped = array();
+        $mapped = [];
         foreach ($array as $alias => $value) {
             if (isset($fieldMap[$alias])) {
                 $field = $fieldMap[$alias];
@@ -830,7 +839,7 @@ abstract class CollectionApi extends SugarApi
             if (isset($fieldMap[$value])) {
                 return $fieldMap[$value];
             }
-            return  $value;
+            return $value;
         }, $array);
     }
 
@@ -843,7 +852,7 @@ abstract class CollectionApi extends SugarApi
      */
     protected function formatOrderBy(array $orderBy)
     {
-        $formatted = array();
+        $formatted = [];
         foreach ($orderBy as $field => $direction) {
             $column = $field;
             if (!$direction) {
@@ -862,9 +871,9 @@ abstract class CollectionApi extends SugarApi
      */
     protected function getDefaultOrderBy()
     {
-        return array(
+        return [
             'date_modified' => false,
-        );
+        ];
     }
 
     /**

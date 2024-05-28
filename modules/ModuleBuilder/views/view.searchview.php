@@ -11,8 +11,7 @@
  */
 
 
-
-require_once 'modules/ModuleBuilder/parsers/constants.php' ;
+require_once 'modules/ModuleBuilder/parsers/constants.php';
 
 class ViewSearchView extends ViewListView
 {
@@ -20,81 +19,80 @@ class ViewSearchView extends ViewListView
      * @var mixed|string
      */
     public $title;
- 	public function __construct()
- 	{
- 		parent::__construct();
- 		if (!empty($_REQUEST['searchlayout'])) {
- 			$this->editLayout = $this->request->getValidInputRequest('searchlayout', 'Assert\ComponentName');
- 		}
- 	}
- 	
- 	/**
-	 * @see SugarView::_getModuleTitleParams()
-	 */
-	protected function _getModuleTitleParams($browserTitle = false)
-	{
-	    global $mod_strings;
-	    
-    	return array(
-    	   translate('LBL_MODULE_NAME','Administration'),
-    	   ModuleBuilderController::getModuleTitle(),
-    	   );
+
+    public function __construct()
+    {
+        parent::__construct();
+        if (!empty($_REQUEST['searchlayout'])) {
+            $this->editLayout = $this->request->getValidInputRequest('searchlayout', 'Assert\ComponentName');
+        }
     }
 
- 	// DO NOT REMOVE - overrides parent ViewEdit preDisplay() which attempts to load a bean for a non-existent module
- 	function preDisplay()
- 	{
- 	}
+    /**
+     * @see SugarView::_getModuleTitleParams()
+     */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _getModuleTitleParams($browserTitle = false)
+    {
+        global $mod_strings;
 
- 	function display(
- 	    $preview = false
- 	    )
- 	{
- 		$packageName = $this->request->getValidInputRequest('view_package', 'Assert\ComponentName');
- 		$parser = ParserFactory::getParser ( $this->editLayout , $this->editModule, $packageName ) ;
+        return [
+            translate('LBL_MODULE_NAME', 'Administration'),
+            ModuleBuilderController::getModuleTitle(),
+        ];
+    }
 
- 		$smarty = parent::constructSmarty ( $parser ) ;
- 		$smarty->assign ( 'action', 'searchViewSave' ) ;
- 		$smarty->assign ( 'view', $this->editLayout ) ;
- 		$smarty->assign ( 'helpName', 'searchViewEditor' ) ;
- 		$smarty->assign ( 'helpDefault', 'modify' ) ;
+    // DO NOT REMOVE - overrides parent ViewEdit preDisplay() which attempts to load a bean for a non-existent module
+    public function preDisplay()
+    {
+    }
 
- 		if ($preview)
- 		{
- 			echo $smarty->fetch ( "modules/ModuleBuilder/tpls/Preview/listView.tpl" ) ;
- 		} else
- 		{
- 			$ajax = $this->constructAjax () ;
- 			$ajax->addSection ( 'center', translate ($this->title), $smarty->fetch ( "modules/ModuleBuilder/tpls/listView.tpl" ) ) ;
- 			echo $ajax->getJavascript () ;
- 		}
- 	}
+    public function display(
+        $preview = false
+    ) {
 
- 	function constructAjax()
- 	{
- 		$ajax = new AjaxCompose ( ) ;
- 		switch ( $this->editLayout )
- 		{
- 			case MB_WIRELESSBASICSEARCH:
- 			case MB_WIRELESSADVANCEDSEARCH:
- 				$searchLabel = 'LBL_WIRELESSSEARCH' ;
- 				break;
- 			default:
-                if(isModuleBWC($this->editModule)) {
+
+        $packageName = $this->request->getValidInputRequest('view_package', 'Assert\ComponentName');
+        $parser = ParserFactory::getParser($this->editLayout, $this->editModule, $packageName);
+
+        $smarty = parent::constructSmarty($parser);
+        $smarty->assign('action', 'searchViewSave');
+        $smarty->assign('view', $this->editLayout);
+        $smarty->assign('helpName', 'searchViewEditor');
+        $smarty->assign('helpDefault', 'modify');
+
+        if ($preview) {
+            echo $smarty->fetch('modules/ModuleBuilder/tpls/Preview/listView.tpl');
+        } else {
+            $ajax = $this->constructAjax();
+            $ajax->addSection('center', translate($this->title), $smarty->fetch('modules/ModuleBuilder/tpls/listView.tpl'));
+            echo $ajax->getJavascript();
+        }
+    }
+
+    public function constructAjax()
+    {
+        $ajax = new AjaxCompose();
+        switch ($this->editLayout) {
+            case MB_WIRELESSBASICSEARCH:
+            case MB_WIRELESSADVANCEDSEARCH:
+                $searchLabel = 'LBL_WIRELESSSEARCH';
+                break;
+            default:
+                if (isModuleBWC($this->editModule)) {
                     $searchLabel = 'LBL_' . strtoupper($this->editLayout);
                 } else {
                     $searchLabel = 'LBL_FILTER_SEARCH';
                 }
                 break;
- 		}
+        }
 
-        $layoutLabel = 'LBL_LAYOUTS' ;
-        $layoutView = 'layouts' ;
+        $layoutLabel = 'LBL_LAYOUTS';
+        $layoutView = 'layouts';
 
-        if ( in_array ( $this->editLayout , array ( MB_WIRELESSBASICSEARCH , MB_WIRELESSADVANCEDSEARCH ) ) )
-        {
-        	$layoutLabel = 'LBL_WIRELESSLAYOUTS' ;
-        	$layoutView = 'wirelesslayouts' ;
+        if (in_array($this->editLayout, [MB_WIRELESSBASICSEARCH, MB_WIRELESSADVANCEDSEARCH])) {
+            $layoutLabel = 'LBL_WIRELESSLAYOUTS';
+            $layoutView = 'wirelesslayouts';
         }
 
         if ($this->fromModuleBuilder) {

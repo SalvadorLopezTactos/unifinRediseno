@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Pārskatu grafiki',
     'LBL_MODULE_NAME_SINGULAR' => 'Pārskata grafiks',
     'LBL_REPORT_NAME' => 'Pārskats',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Faila veids(i)',
     'LBL_EMBED_REPORT' => 'Iegult ziņojumu e-pastā',
     'LBL_EMBED_REPORT_INFO' => 'Piezīme: ja atskaite pārsniedz 200 rindas, mēs pievienosim ziņojumu kā CSV failu.',
-);
+];

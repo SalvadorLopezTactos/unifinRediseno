@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity;
 
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper as ActivitiesHelpers;
@@ -23,7 +24,6 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper as ActivitiesHelpers;
  */
 trait ActivityHandlerTrait
 {
-
     public $webooksHelper;
     public $statusHelper;
     public $scoreHelper;
@@ -52,6 +52,6 @@ trait ActivityHandlerTrait
         $this->childActivityHelper = new ActivitiesHelpers\ChildActivityHelper();
         $this->momentumHelper = new ActivitiesHelpers\MomentumHelper();
         $this->parentHelper = new ActivitiesHelpers\ParentHelper();
-        $this->activityDatesHelper =  new ActivitiesHelpers\ActivityDatesHelper();
+        $this->activityDatesHelper = new ActivitiesHelpers\ActivityDatesHelper();
     }
 }

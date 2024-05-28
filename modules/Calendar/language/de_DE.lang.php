@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kalender',
     'LBL_MODULE_NAME_SINGULAR' => 'Kalender',
     'LBL_MODULE_TITLE' => 'Kalender',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Einstellungen',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Zeiteinteilung in Tag- und Wochenansichten anzeigen:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Startzeit:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Endzeit:',
+    'LBL_SETTINGS_TIME_STARTS' => 'Startzeit:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Endzeit:',
     'LBL_SETTINGS_CALLS_SHOW' => 'Anrufe anzeigen:',
     'LBL_SETTINGS_TASKS_SHOW' => 'Aufgaben anzeigen:',
 
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Kalender erstellen',
     'LNK_CALENDAR_LIST' => 'Kalender anzeigen',
     'LNK_CALENDAR_LEGACY' => 'Alte Kalender',
-    'LBL_IMPORT_CALENDAR'=> 'Kalender importieren',
+    'LBL_IMPORT_CALENDAR' => 'Kalender importieren',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Ereigniszeitstempel',
     'LBL_INSERTFIELD' => 'Feld einfügen',
     'LBL_EVENT_START_ERROR' => 'Wählen Sie bitte einen Start aus.',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Bitte wählen Sie einen Kalender aus',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Kalender konnten nicht gespeichert werden.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'So',
             'Mon',
             'Tue',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Thu',
             'Fri',
             'Sat',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Sonntag',
             'Montag',
             'Dienstag',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Donnerstag',
             'Freitag',
             'Samstag',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Jan',
             'Feb',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Okt',
             'Nov',
             'Dez',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Januar',
             'Februar',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Oktober',
             'November',
             'Dezember',
-        ),
-);
+        ],
+];

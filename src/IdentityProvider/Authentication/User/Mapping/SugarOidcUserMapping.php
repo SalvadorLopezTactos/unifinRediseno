@@ -149,7 +149,7 @@ class SugarOidcUserMapping implements MappingInterface
         if (is_null($status)) {
             return null;
         }
-        return (int) $status == self::OIDC_USER_STATUS_ACTIVE
+        return (int)$status == self::OIDC_USER_STATUS_ACTIVE
             ? User::USER_STATUS_ACTIVE
             : User::USER_STATUS_INACTIVE;
     }

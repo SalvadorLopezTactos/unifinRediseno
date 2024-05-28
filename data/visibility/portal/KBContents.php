@@ -63,7 +63,7 @@ class KBContents extends Portal
      * Get published statuses
      * @return array
      */
-    protected function getPublishedStatuses() : array
+    protected function getPublishedStatuses(): array
     {
         if (!method_exists($this->context->getBean(), 'getPublishedStatuses')) {
             return [];

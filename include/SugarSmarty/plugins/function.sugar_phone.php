@@ -66,26 +66,25 @@ r28841 - 2007-10-24 20:11:24 -0700 (Wed, 24 Oct 2007) - ajay - 16807: added supp
  * Name:     sugar_translate<br>
  * Purpose:  translates a label into the users current language
  *
- * @author Majed Itani {majed at sugarcrm.com
  * @param array
  * @param Smarty
+ * @author Majed Itani {majed at sugarcrm.com
  */
 function smarty_function_sugar_phone($params, &$smarty)
 {
-	if (!isset($params['value'])){
-		$smarty->trigger_error("sugar_phone: missing 'value' parameter");
-		return '';
-	}
+    if (!isset($params['value'])) {
+        $smarty->trigger_error("sugar_phone: missing 'value' parameter");
+        return '';
+    }
 
-	global $system_config;
-    if(isset($system_config->settings['system_skypeout_on']) && $system_config->settings['system_skypeout_on'] == 1
-    	&& isset($params['value']) && skype_formatted($params['value'])  ) {
-    		$GLOBALS['log']->debug($params['value']);
-			return '<a href="callto:'.format_skype($params['value']).'">'.$params['value'].'</a>';
-
-    } elseif(isset($_SESSION['isMobile'])) {
-        return '<a href="tel:'.format_skype($params['value']).'">'.$params['value'].'</a>';
+    global $system_config;
+    if (isset($system_config->settings['system_skypeout_on']) && $system_config->settings['system_skypeout_on'] == 1
+        && isset($params['value']) && skype_formatted($params['value'])) {
+        $GLOBALS['log']->debug($params['value']);
+        return '<a href="callto:' . format_skype($params['value']) . '">' . $params['value'] . '</a>';
+    } elseif (isset($_SESSION['isMobile'])) {
+        return '<a href="tel:' . format_skype($params['value']) . '">' . $params['value'] . '</a>';
     } else {
-    	return $params['value'];
+        return $params['value'];
     }
 }

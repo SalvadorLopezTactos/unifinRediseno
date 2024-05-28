@@ -9,15 +9,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Notes']['EditView'] = array(
-    'templateMeta' => array('form' => array('enctype'=> 'multipart/form-data',
-                                            ),
-							'maxColumns' => '2',
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'),
-                                            array('label' => '10', 'field' => '30')
-                                            ),
-'javascript' => '{sugar_getscript file="include/javascript/dashlets.js"}
+$viewdefs['Notes']['EditView'] = [
+    'templateMeta' => ['form' => ['enctype' => 'multipart/form-data',
+    ],
+        'maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+        'javascript' => '{sugar_getscript file="include/javascript/dashlets.js"}
 <script>
 function deleteAttachmentCallBack(text)
 	{literal} { {/literal}
@@ -32,36 +32,35 @@ function deleteAttachmentCallBack(text)
 {literal} } {/literal}
 </script>
 <script>toggle_portal_flag(); function toggle_portal_flag()  {literal} { {/literal} {$TOGGLE_JS} {literal} } {/literal} </script>',
-),
-	'panels' =>array (
-  		'lbl_note_information' => array (
-  					array ('contact_name','parent_name'),
-	    			array (
-                        array('name'=>'name', 'displayParams'=>array('size'=>60)),''
-                    ),
+    ],
+    'panels' => [
+        'lbl_note_information' => [
+            ['contact_name', 'parent_name'],
+            [
+                ['name' => 'name', 'displayParams' => ['size' => 60]], '',
+            ],
 
-					array ( 
-						'filename',
+            [
+                'filename',
 
-					    array('name'=>'portal_flag',
-					          'displayParams'=>array('required'=>false),
-			   				  'label' => 'LBL_PORTAL_FLAG',
-                		      'hideIf' => 'empty($PORTAL_ENABLED)',
-					    ),
-	    			),
-	    			array (
-                        array('name' => 'description', 'label' => 'LBL_NOTE_STATUS'),
-                    ),
+                ['name' => 'portal_flag',
+                    'displayParams' => ['required' => false],
+                    'label' => 'LBL_PORTAL_FLAG',
+                    'hideIf' => 'empty($PORTAL_ENABLED)',
+                ],
+            ],
+            [
+                ['name' => 'description', 'label' => 'LBL_NOTE_STATUS'],
+            ],
 
-  		),
+        ],
 
 
-	  'LBL_PANEL_ASSIGNMENT' => array(
-	    array(
-		    array ('name' => 'assigned_user_name','label' => 'LBL_ASSIGNED_TO'),
-		    array('name'=>'team_name'),
-	    ),
-	  ),
-	)
-);
-?>
+        'LBL_PANEL_ASSIGNMENT' => [
+            [
+                ['name' => 'assigned_user_name', 'label' => 'LBL_ASSIGNED_TO'],
+                ['name' => 'team_name'],
+            ],
+        ],
+    ],
+];

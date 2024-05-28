@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmFlow'] = array(
+$dictionary['pmse_BpmFlow'] = [
     'table' => 'pmse_bpm_flow',
     'audited' => false,
     'archive' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'reassignable' => false,
-    'fields' => array(
-        'cas_id' => array(
+    'fields' => [
+        'cas_id' => [
             'required' => true,
             'name' => 'cas_id',
             'vname' => 'Unique Identifier for this Case',
@@ -41,8 +41,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'cas_index' => array(
+        ],
+        'cas_index' => [
             'required' => true,
             'name' => 'cas_index',
             'vname' => 'Case flow index a sequential number relative to each case',
@@ -65,8 +65,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'pro_id' => array(
+        ],
+        'pro_id' => [
             'required' => true,
             'name' => 'pro_id',
             'vname' => 'Process identifier',
@@ -86,8 +86,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'cas_previous' => array(
+        ],
+        'cas_previous' => [
             'required' => true,
             'name' => 'cas_previous',
             'vname' => 'Previous flow',
@@ -111,8 +111,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'cas_reassign_level' => array(
+        ],
+        'cas_reassign_level' => [
             'required' => true,
             'name' => 'cas_reassign_level',
             'vname' => 'Reassign nesting Level in case an adhoc or reassign derivation has been used',
@@ -136,8 +136,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'bpmn_id' => array(
+        ],
+        'bpmn_id' => [
             'required' => true,
             'name' => 'bpmn_id',
             'vname' => 'Bpmn Object identifier',
@@ -157,8 +157,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'bpmn_type' => array(
+        ],
+        'bpmn_type' => [
             'required' => true,
             'name' => 'bpmn_type',
             'vname' => 'Bpmn Object type',
@@ -178,8 +178,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'calculated' => false,
             'len' => '32',
             'size' => '32',
-        ),
-        'cas_assignment_method' => array(
+        ],
+        'cas_assignment_method' => [
             'required' => true,
             'name' => 'cas_assignment_method',
             'vname' => '',
@@ -199,8 +199,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'calculated' => false,
             'len' => '32',
             'size' => '32',
-        ),
-        'cas_user_id' => array(
+        ],
+        'cas_user_id' => [
             'required' => true,
             'name' => 'cas_user_id',
             'vname' => 'User Identifier for who started the Case',
@@ -220,8 +220,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'calculated' => false,
             'len' => '40',
             'size' => '40',
-        ),
-        'cas_thread' => array(
+        ],
+        'cas_thread' => [
             'required' => true,
             'name' => 'cas_thread',
             'vname' => 'Case thread',
@@ -245,8 +245,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'cas_flow_status' => array(
+        ],
+        'cas_flow_status' => [
             'required' => true,
             'name' => 'cas_flow_status',
             'vname' => '',
@@ -266,8 +266,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'calculated' => false,
             'len' => '32',
             'size' => '32',
-        ),
-        'cas_sugar_module' => array(
+        ],
+        'cas_sugar_module' => [
             'required' => true,
             'name' => 'cas_sugar_module',
             'vname' => 'Sugarcrm module name',
@@ -287,8 +287,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'calculated' => false,
             'len' => '128',
             'size' => '128',
-        ),
-        'cas_sugar_object_id' => array(
+        ],
+        'cas_sugar_object_id' => [
             'required' => true,
             'name' => 'cas_sugar_object_id',
             'vname' => 'id for the current object in original module',
@@ -308,8 +308,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'calculated' => false,
             'len' => '40',
             'size' => '40',
-        ),
-        'cas_sugar_action' => array(
+        ],
+        'cas_sugar_action' => [
             'required' => true,
             'name' => 'cas_sugar_action',
             'vname' => 'Sugarcrm module name',
@@ -329,8 +329,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'calculated' => false,
             'len' => '40',
             'size' => '40',
-        ),
-        'cas_adhoc_type' => array(
+        ],
+        'cas_adhoc_type' => [
             'required' => true,
             'name' => 'cas_adhoc_type',
             'vname' => 'PMSE Adhoc behavior',
@@ -350,8 +350,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'calculated' => false,
             'len' => '40',
             'size' => '40',
-        ),
-        'cas_adhoc_parent_id' => array(
+        ],
+        'cas_adhoc_parent_id' => [
             'required' => true,
             'name' => 'cas_adhoc_parent_id',
             'vname' => 'PMSE adhoc parent id',
@@ -368,14 +368,14 @@ $dictionary['pmse_BpmFlow'] = array(
             'reportable' => true,
             'unified_search' => false,
             'merge_filter' => 'disabled',
-            'full_text_search' => array(
-              'boost' => '0',
-            ),
+            'full_text_search' => [
+                'boost' => '0',
+            ],
             'calculated' => false,
             'len' => '40',
             'size' => '40',
-        ),
-        'cas_adhoc_actions' => array(
+        ],
+        'cas_adhoc_actions' => [
             'required' => true,
             'name' => 'cas_adhoc_actions',
             'vname' => 'PMSE adhoc actions',
@@ -392,14 +392,14 @@ $dictionary['pmse_BpmFlow'] = array(
             'reportable' => true,
             'unified_search' => false,
             'merge_filter' => 'disabled',
-            'full_text_search' => array(
-              'boost' => '0',
-            ),
+            'full_text_search' => [
+                'boost' => '0',
+            ],
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'cas_task_start_date' => array(
+        ],
+        'cas_task_start_date' => [
             'required' => false,
             'name' => 'cas_task_start_date',
             'vname' => 'when the case was was delegated to a activity/task.',
@@ -419,8 +419,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'size' => '20',
             'enable_range_search' => false,
             'dbType' => 'datetime',
-        ),
-        'cas_delegate_date' => array(
+        ],
+        'cas_delegate_date' => [
             'required' => false,
             'name' => 'cas_delegate_date',
             'vname' => 'when the case was was created.',
@@ -440,8 +440,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'size' => '20',
             'enable_range_search' => false,
             'dbType' => 'datetime',
-        ),
-        'cas_start_date' => array(
+        ],
+        'cas_start_date' => [
             'required' => false,
             'name' => 'cas_start_date',
             'vname' => 'when the case was was updated.',
@@ -461,8 +461,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'size' => '20',
             'enable_range_search' => false,
             'dbType' => 'datetime',
-        ),
-        'cas_finish_date' => array(
+        ],
+        'cas_finish_date' => [
             'required' => false,
             'name' => 'cas_finish_date',
             'vname' => 'when the case was was updated.',
@@ -482,8 +482,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'size' => '20',
             'enable_range_search' => false,
             'dbType' => 'datetime',
-        ),
-        'cas_due_date' => array(
+        ],
+        'cas_due_date' => [
             'required' => false,
             'name' => 'cas_due_date',
             'vname' => 'when the case was was updated.',
@@ -503,8 +503,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'size' => '20',
             'enable_range_search' => false,
             'dbType' => 'datetime',
-        ),
-        'cas_queue_duration' => array(
+        ],
+        'cas_queue_duration' => [
             'required' => true,
             'name' => 'cas_queue_duration',
             'vname' => '',
@@ -528,8 +528,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'cas_duration' => array(
+        ],
+        'cas_duration' => [
             'required' => true,
             'name' => 'cas_duration',
             'vname' => '',
@@ -553,8 +553,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'cas_delay_duration' => array(
+        ],
+        'cas_delay_duration' => [
             'required' => true,
             'name' => 'cas_delay_duration',
             'vname' => '',
@@ -578,8 +578,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'cas_started' => array(
+        ],
+        'cas_started' => [
             'required' => true,
             'name' => 'cas_started',
             'vname' => '',
@@ -603,8 +603,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'cas_finished' => array(
+        ],
+        'cas_finished' => [
             'required' => true,
             'name' => 'cas_finished',
             'vname' => '',
@@ -628,8 +628,8 @@ $dictionary['pmse_BpmFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'cas_delayed' => array(
+        ],
+        'cas_delayed' => [
             'required' => true,
             'name' => 'cas_delayed',
             'vname' => '',
@@ -653,52 +653,52 @@ $dictionary['pmse_BpmFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'idx_pmse_bpm_flow_cas_flow_status',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'bpmn_id',
                 'cas_flow_status',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_pmse_bpm_flow_parent_and_cas_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'cas_sugar_object_id',
                 'cas_sugar_module',
                 'cas_index',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_pmse_bpm_flow_bpmn_type_flow_status_due_date_del',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'bpmn_type',
                 'cas_flow_status',
                 'cas_due_date',
                 'deleted',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_pmse_bpm_flow_del_cas_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'cas_id',
                 'deleted',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_pmse_bpm_flow_cas_id_flow_status',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'cas_id',
                 'cas_flow_status',
-            ),
-        ),
+            ],
+        ],
         [
             'name' => 'idx_pmse_bpm_flow_cas_flow_status_cas_obj_id_del',
             'type' => 'index',
@@ -708,22 +708,22 @@ $dictionary['pmse_BpmFlow'] = array(
                 'deleted',
             ],
         ],
-    ),
-    'relationships' => array(),
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmFlow', 'pmse_BpmFlow');

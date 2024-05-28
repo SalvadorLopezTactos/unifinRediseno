@@ -11,15 +11,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Home']['base']['view']['about-headerpane'] = array(
+$viewdefs['Home']['base']['view']['about-headerpane'] = [
     'template' => 'headerpane',
-    'css_class' => 'about-headerpane',
-    'fields' => array(
-        array(
+    'css_class' => 'about-headerpane bg-transparent',
+    'fields' => [
+        [
             'name' => 'title',
             'type' => 'label',
             'default_value' => 'TPL_ABOUT',
-        ),
-    ),
-    'buttons' => array(),
-);
+        ],
+    ],
+    'buttons' => [],
+];

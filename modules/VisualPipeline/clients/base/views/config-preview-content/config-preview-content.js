@@ -30,9 +30,9 @@
      */
     setupTabChange: function() {
         var content = this.closestComponent('side-pane').layout;
-        var tabControls = content.$('#tabs li.tab');
+        let tabControls = content.$('#tabs select.module-selection');
         _.each(tabControls, function(el) {
-            $(el).on('click', _.bind(this.render, this));
+            $(el).on('change', _.bind(this.render, this));
         }, this);
     },
 
@@ -54,7 +54,7 @@
     render: function() {
         //get the currently active tab
         var content = this.closestComponent('side-pane').layout;
-        var currentTab = content.$('#tabs .ui-tabs-active').attr('aria-controls');
+        let currentTab = content.$('#tabs select.module-selection').val();
 
         //get the model shown in the current tab
         var currentModel = _.find(this.collection.models, function(model) {

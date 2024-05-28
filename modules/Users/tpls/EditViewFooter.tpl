@@ -427,7 +427,7 @@
                                 <h4 ><slot>{$MOD.LBL_PDF_SETTINGS}</slot></h4></th>
                         </tr>
                         <tr>
-                            <td width="17%" scope="row"><slot>{$MOD.LBL_PDF_FONT_NAME_MAIN}:</slot>&nbsp;{sugar_help text=$MOD.LBL_PDF_FONT_NAME_MAIN_TEXT}</td>
+                            <td width="17%" scope="row"><slot>{$MOD.LBL_PDF_FONT_NAME_MAIN}:</slot>&nbsp;{sugar_help text=$PDF_FONT_NAME_MAIN_TEXT}</td>
                             <td width="33%"><slot><select name='sugarpdf_pdf_font_name_main' tabindex='16'>{$PDF_FONT_NAME_MAIN}</select></slot></td>
                             <td colspan="2"><slot>&nbsp;</slot></td>
                         </tr>
@@ -437,7 +437,7 @@
                             <td colspan="2"><slot>{$MOD.LBL_PDF_FONT_SIZE_MAIN_TEXT}&nbsp;</slot></td>
                         </tr>
                         <tr>
-                            <td width="17%" scope="row"><slot>{$MOD.LBL_PDF_FONT_NAME_DATA}:</slot>&nbsp;{sugar_help text=$MOD.LBL_PDF_FONT_NAME_DATA_TEXT}</td>
+                            <td width="17%" scope="row"><slot>{$MOD.LBL_PDF_FONT_NAME_DATA}:</slot>&nbsp;{sugar_help text=$PDF_FONT_NAME_DATA_TEXT}</td>
                             <td width="33%"><slot><select name='sugarpdf_pdf_font_name_data' tabindex='16'>{$PDF_FONT_NAME_DATA}</select></slot></td>
                             <td colspan="2"><slot>&nbsp;</slot></td>
                         </tr>

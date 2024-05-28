@@ -35,7 +35,7 @@ class DocuSignUtils
      * @method getDocusignGlobalConfigs
      * @return Array
      */
-    public static function getDocusignGlobalConfigs() : array
+    public static function getDocusignGlobalConfigs(): array
     {
         $administrationBean = new \Administration();
         $administrationBean->retrieveSettings('Docusign');
@@ -63,6 +63,17 @@ class DocuSignUtils
             'GlobalSettings',
             base64_encode(serialize($docusignGlobalConfigs))
         );
+
+        self::refreshMetadataCache();
+    }
+
+    /**
+     * refresh metadata cache
+     *
+     */
+    protected static function refreshMetadataCache()
+    {
+        \MetaDataManager::refreshSectionCache(\MetaDataManager::MM_CONFIG);
     }
 
     /**
@@ -149,11 +160,12 @@ class DocuSignUtils
      * @return \Document|Array Document bean or array with the error thown
      */
     public static function createDocumentInSugar(
-        string $docName,
-        string $docPdfBytes,
+        string            $docName,
+        string            $docPdfBytes,
         \DocuSignEnvelope $envelopeBean,
-        string $completedDateTime = ''
+        string            $completedDateTime = ''
     ) {
+
         global $log;
         try {
             $revisionId = Uuid::uuid4();
@@ -210,7 +222,7 @@ class DocuSignUtils
     private static function updateCloudPath(\SugarBean &$envelopeBean, $documentName)
     {
         $cloudPath = json_decode($envelopeBean->cloud_path, true);
-        $lastItemInPath = $cloudPath[(is_countable($cloudPath) ? count($cloudPath) : 0) - 1];
+        $lastItemInPath = $cloudPath[safeCount($cloudPath) - 1];
         if (isset($lastItemInPath['folderId'])) {
             $cloudPath[] = ['name' => "{$documentName}.pdf"];
             $envelopeBean->cloud_path = json_encode($cloudPath);
@@ -273,7 +285,7 @@ class DocuSignUtils
      *
      * @return bool
      */
-    public static function checkEAPM() : bool
+    public static function checkEAPM(): bool
     {
         $extApi = new \ExtAPIDocuSign();
         $userEAPM = $extApi->getUserEAPM();
@@ -295,6 +307,7 @@ class DocuSignUtils
         }
 
         $cloudServiceName = $envelopeBean->cloud_service_type;
+        $driveId = $envelopeBean->driveId;
 
         $documentBean = \BeanFactory::getBean('Documents', $documentId);
         $drive = new DriveFacade($cloudServiceName);
@@ -311,6 +324,9 @@ class DocuSignUtils
             $uploadOptions['folderPath'] = $envelopeBean->cloud_path;
             $uploadOptions['filePath'] = $envelopeBean->cloud_path;
         } else {
+            if ($cloudServiceName === 'sharepoint') {
+                $uploadOptions['driveId'] = $envelopeBean->driveId;
+            }
             $uploadOptions['pathId'] = $envelopeBean->cloud_path;
         }
 

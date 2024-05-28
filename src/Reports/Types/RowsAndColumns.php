@@ -9,7 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Reports\Types;
+
 use Sugarcrm\Sugarcrm\Reports\Constants\ReportType;
 
 class RowsAndColumns extends Reporter
@@ -46,7 +48,7 @@ class RowsAndColumns extends Reporter
         $totalCount = property_exists($report, 'total_count') ? $report->total_count : 0;
 
         if ($needTotalCount) {
-            $listData['totalCount'] = (int) $totalCount;
+            $listData['totalCount'] = (int)$totalCount;
         }
 
         $nextOffset = $this->getNextOffset($limit, $offset, $totalCount);
@@ -77,7 +79,7 @@ class RowsAndColumns extends Reporter
         $sugarWidgerReport = new \SugarWidgetReportField($report->layout_manager);
 
         foreach ($records as $record) {
-            $record = array_combine(array_map("strtoupper", array_keys($record)), array_values($record));
+            $record = array_combine(array_map('strtoupper', array_keys($record)), array_values($record));
 
             $formattedData[] = $this->formatRow($report, $record, $sugarWidgerReport);
         }
@@ -96,7 +98,7 @@ class RowsAndColumns extends Reporter
      */
     protected function formatRow(\Report $report, array $record, \SugarWidgetReportField $sugarWidgerReport): array
     {
-        $displayColumns = (array) $report->report_def['display_columns'];
+        $displayColumns = (array)$report->report_def['display_columns'];
         $row = [];
 
         foreach ($displayColumns as $displayColumn) {
@@ -142,7 +144,7 @@ class RowsAndColumns extends Reporter
      */
     protected function getHeader(\Report $report): array
     {
-        $displayColumns = (array) $report->report_def['display_columns'];
+        $displayColumns = (array)$report->report_def['display_columns'];
         $fieldsDef = [];
 
         foreach ($displayColumns as $displayColumn) {
@@ -174,7 +176,7 @@ class RowsAndColumns extends Reporter
             return $orderBy;
         }
 
-        $orderByMeta = (array) $report->report_def['order_by'];
+        $orderByMeta = (array)$report->report_def['order_by'];
 
         foreach ($orderByMeta as $index => $orderByField) {
             $orderBy[$index] = [];

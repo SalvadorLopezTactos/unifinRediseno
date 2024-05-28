@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-'LBL_ASSIGNED_TO_ID'=>'アサイン先ID',
-'LBL_ASSIGNED_TO_NAME' => 'アサイン先',
-);
+$mod_strings = [
+    'LBL_ASSIGNED_TO_ID' => 'アサイン先ID',
+    'LBL_ASSIGNED_TO_NAME' => 'アサイン先',
+];

@@ -32,7 +32,7 @@ class PackageManager
 
     public static function fromNameValueList($nvl)
     {
-        $array = array();
+        $array = [];
         foreach ($nvl as $list) {
             $array[$list['name']] = $list['value'];
         }

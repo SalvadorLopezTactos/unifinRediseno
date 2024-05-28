@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Paani vaade',
     'LBL_MODULE_NAME_SINGULAR' => 'Paani vaade',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'Paani vaade',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => 'Lubatud moodulid',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'Paani vaate moodulid',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'Mooduli sätted',
-    'LBL_PIPELINE_TABLE_HEADER' => "Valige väli, mille väärtusi veergudena kasutatakse",
+    'LBL_PIPELINE_TABLE_HEADER' => 'Valige väli, mille väärtusi veergudena kasutatakse',
     'LBL_PIPELINE_TILE_HEADER' => 'Paani päise väli',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => 'Saadaolevad veerud',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => 'Paani keha väljad',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'Paani eelvaade',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'Paanil on liiga palju välju.',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => 'Enne jätkamist lahendage järgmistel moodulisätete vahekaartidel esinevad tõrked:<br><br>',
-);
+    'LBL_MODULE_SELECTION' => 'Valige allpool moodul, mida soovite vaadata ja konfigureerida',
+    'LBL_SHOW_COLUMN_COUNT' => 'Kuva veergude arv',
+    'LBL_SHOW_COLUMN_TOTAL' => 'Kuva veergude koguarv',
+    'LBL_TOTAL_FIELD' => 'Välju kokku',
+];

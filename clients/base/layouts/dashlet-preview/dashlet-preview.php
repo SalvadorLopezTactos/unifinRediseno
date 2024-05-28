@@ -11,11 +11,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['dashlet-preview'] = array(
+$viewdefs['base']['layout']['dashlet-preview'] = [
     'type' => 'preview',
-    'components' => array(
-        array(
+    'components' => [
+        [
             'view' => 'preview-header',
-        ),
-    ),
-);
+        ],
+    ],
+];

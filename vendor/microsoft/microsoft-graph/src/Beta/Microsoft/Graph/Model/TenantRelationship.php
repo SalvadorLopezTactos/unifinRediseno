@@ -31,7 +31,7 @@ class TenantRelationship implements \JsonSerializable
     * @var array $_propDict
     */
     protected $_propDict;
-    
+
     /**
     * Construct a new TenantRelationship
     *
@@ -54,9 +54,10 @@ class TenantRelationship implements \JsonSerializable
     {
         return $this->_propDict;
     }
-    
+
     /**
     * Gets the managedTenants
+    * The operations available to interact with the multi-tenant management platform.
     *
     * @return \Beta\Microsoft\Graph\ManagedTenants\Model\ManagedTenant|null The managedTenants
     */
@@ -72,9 +73,10 @@ class TenantRelationship implements \JsonSerializable
         }
         return null;
     }
-    
+
     /**
     * Sets the managedTenants
+    * The operations available to interact with the multi-tenant management platform.
     *
     * @param \Beta\Microsoft\Graph\ManagedTenants\Model\ManagedTenant $val The managedTenants
     *
@@ -85,17 +87,80 @@ class TenantRelationship implements \JsonSerializable
         $this->_propDict["managedTenants"] = $val;
         return $this;
     }
-    
+
+
+     /**
+     * Gets the delegatedAdminCustomers
+    * The customer who has a delegated admin relationship with a Microsoft partner.
+     *
+     * @return array|null The delegatedAdminCustomers
+     */
+    public function getDelegatedAdminCustomers()
+    {
+        if (array_key_exists("delegatedAdminCustomers", $this->_propDict)) {
+           return $this->_propDict["delegatedAdminCustomers"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the delegatedAdminCustomers
+    * The customer who has a delegated admin relationship with a Microsoft partner.
+    *
+    * @param DelegatedAdminCustomer[] $val The delegatedAdminCustomers
+    *
+    * @return TenantRelationship
+    */
+    public function setDelegatedAdminCustomers($val)
+    {
+        $this->_propDict["delegatedAdminCustomers"] = $val;
+        return $this;
+    }
+
+
+     /**
+     * Gets the delegatedAdminRelationships
+    * The details of the delegated administrative privileges that a Microsoft partner has in a customer tenant.
+     *
+     * @return array|null The delegatedAdminRelationships
+     */
+    public function getDelegatedAdminRelationships()
+    {
+        if (array_key_exists("delegatedAdminRelationships", $this->_propDict)) {
+           return $this->_propDict["delegatedAdminRelationships"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the delegatedAdminRelationships
+    * The details of the delegated administrative privileges that a Microsoft partner has in a customer tenant.
+    *
+    * @param DelegatedAdminRelationship[] $val The delegatedAdminRelationships
+    *
+    * @return TenantRelationship
+    */
+    public function setDelegatedAdminRelationships($val)
+    {
+        $this->_propDict["delegatedAdminRelationships"] = $val;
+        return $this;
+    }
+
     /**
     * Gets the ODataType
     *
-    * @return string The ODataType
+    * @return string|null The ODataType
     */
     public function getODataType()
     {
-        return $this->_propDict["@odata.type"];
+        if (array_key_exists('@odata.type', $this->_propDict)) {
+            return $this->_propDict["@odata.type"];
+        }
+        return null;
     }
-    
+
     /**
     * Sets the ODataType
     *
@@ -108,13 +173,14 @@ class TenantRelationship implements \JsonSerializable
         $this->_propDict["@odata.type"] = $val;
         return $this;
     }
-    
+
     /**
     * Serializes the object by property array
     * Manually serialize DateTime into RFC3339 format
     *
     * @return array The list of properties
     */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $serializableProperties = $this->getProperties();
@@ -123,6 +189,10 @@ class TenantRelationship implements \JsonSerializable
                 $serializableProperties[$property] = $val->format(\DateTime::RFC3339);
             } else if (is_a($val, "\Microsoft\Graph\Core\Enum")) {
                 $serializableProperties[$property] = $val->value();
+            } else if (is_a($val, "\Entity")) {
+                $serializableProperties[$property] = $val->jsonSerialize();
+            } else if (is_a($val, "\GuzzleHttp\Psr7\Stream")) {
+                $serializableProperties[$property] = (string) $val;
             }
         }
         return $serializableProperties;

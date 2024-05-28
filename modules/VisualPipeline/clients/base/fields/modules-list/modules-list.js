@@ -80,6 +80,8 @@
      * @inheritdoc
      */
     _render: function() {
+        this.items = this._sortModuleNamesAlphabetical(this.items);
+
         this._super('_render');
         if (this.name === 'enabled_modules') {
             this.attachEvents();
@@ -131,5 +133,21 @@
         this.$el.off('select2-removed', this.handleRemoveItemHandler);
         this.$el.off('select2-selecting', this.handleAddItemHandler);
         this._super('_dispose');
+    },
+
+    /**
+     * Sorts module names object by property value as name of module
+     *
+     * @param {Object} obj
+     * @return {Object}
+     * @private
+     */
+    _sortModuleNamesAlphabetical: function(obj) {
+        let sortedKeys = Object.keys(obj).sort((a, b) => obj[a].localeCompare(obj[b]));
+        let sortedObj = {};
+        for (let i = 0; i < sortedKeys.length; i++) {
+            sortedObj[sortedKeys[i]] = obj[sortedKeys[i]];
+        }
+        return sortedObj;
     }
 });

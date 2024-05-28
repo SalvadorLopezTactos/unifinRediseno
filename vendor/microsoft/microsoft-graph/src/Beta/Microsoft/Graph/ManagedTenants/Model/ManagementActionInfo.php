@@ -25,6 +25,7 @@ class ManagementActionInfo extends \Beta\Microsoft\Graph\Model\Entity
 {
     /**
     * Gets the managementActionId
+    * The identifier for the management action. Required. Read-only.
     *
     * @return string|null The managementActionId
     */
@@ -39,6 +40,7 @@ class ManagementActionInfo extends \Beta\Microsoft\Graph\Model\Entity
 
     /**
     * Sets the managementActionId
+    * The identifier for the management action. Required. Read-only.
     *
     * @param string $val The value of the managementActionId
     *
@@ -51,6 +53,7 @@ class ManagementActionInfo extends \Beta\Microsoft\Graph\Model\Entity
     }
     /**
     * Gets the managementTemplateId
+    * The identifier for the management template. Required. Read-only.
     *
     * @return string|null The managementTemplateId
     */
@@ -65,6 +68,7 @@ class ManagementActionInfo extends \Beta\Microsoft\Graph\Model\Entity
 
     /**
     * Sets the managementTemplateId
+    * The identifier for the management template. Required. Read-only.
     *
     * @param string $val The value of the managementTemplateId
     *
@@ -73,6 +77,32 @@ class ManagementActionInfo extends \Beta\Microsoft\Graph\Model\Entity
     public function setManagementTemplateId($val)
     {
         $this->_propDict["managementTemplateId"] = $val;
+        return $this;
+    }
+    /**
+    * Gets the managementTemplateVersion
+    *
+    * @return int|null The managementTemplateVersion
+    */
+    public function getManagementTemplateVersion()
+    {
+        if (array_key_exists("managementTemplateVersion", $this->_propDict)) {
+            return $this->_propDict["managementTemplateVersion"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the managementTemplateVersion
+    *
+    * @param int $val The value of the managementTemplateVersion
+    *
+    * @return ManagementActionInfo
+    */
+    public function setManagementTemplateVersion($val)
+    {
+        $this->_propDict["managementTemplateVersion"] = $val;
         return $this;
     }
 }

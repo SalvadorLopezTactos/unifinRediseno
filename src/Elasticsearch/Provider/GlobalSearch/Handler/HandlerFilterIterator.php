@@ -40,7 +40,7 @@ class HandlerFilterIterator extends \FilterIterator
      */
     public function accept(): bool
     {
-        return in_array($this->interface, class_implements($this->current()));
+        return safeInArray($this->interface, class_implements($this->current()));
     }
 
     /**

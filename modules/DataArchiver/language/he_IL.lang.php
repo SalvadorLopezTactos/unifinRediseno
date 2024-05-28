@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'מאחסן נתונים בארכיון',
     'LBL_MODULE_NAME' => 'מאחסן נתונים בארכיון',
     'LBL_FILTER_DEF_FIELD' => 'סינון',
@@ -28,7 +27,7 @@ $mod_strings = array (
     'LBL_MANAGE_ARCHIVE_JOB_LIST_TITLE' => 'ארכיונים מתוזמנים',
     'LBL_MANAGE_ARCHIVE_JOB_IS_NOT_SCHEDULED' => 'אין ארכיונים מתוזמנים',
     'LBL_ARCHIVE_FILTER' => 'הגדרות סינון',
-    "LBL_MANAGE_ARCHIVE_SETUP" => 'הגדרת אחסון נתונים בארכיון',
+    'LBL_MANAGE_ARCHIVE_SETUP' => 'הגדרת אחסון נתונים בארכיון',
     'LBL_LIST_ARCHIVE_NAME' => 'שם ארכיון',
     'LBL_PERFORM_NOW_BTN' => 'לביצוע עכשיו',
     'LBL_ARCHIVE_SUCCESS_TITLE' => 'הצלחה',
@@ -45,4 +44,4 @@ $mod_strings = array (
         . 'מאחר שהיא עלולה להשפיע על ביצועי המערכת. בטוח שברצונך לבצע פעולה זו כעת?',
 
     'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'המאחסן בארכיון עבור המודול {{moduleName}} חייב לכלול את {{fieldName}} כמסנן',
-);
+];

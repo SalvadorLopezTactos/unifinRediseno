@@ -10,22 +10,22 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/Reports/SavedReport.php');
+require_once 'modules/Reports/SavedReport.php';
 
 class ReportsSearchApi extends PersonFilterApi
 {
     public function registerApiRest()
     {
-        return array(
-            'ReportSearch' => array(
+        return [
+            'ReportSearch' => [
                 'reqType' => 'GET',
-                'path' => array('Reports'),
-                'pathVars' => array('module_list'),
+                'path' => ['Reports'],
+                'pathVars' => ['module_list'],
                 'method' => 'filterList',
                 'shortHelp' => 'Search Reports',
                 'longHelp' => 'include/api/help/getListModule.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -47,7 +47,7 @@ class ReportsSearchApi extends PersonFilterApi
             return;
         }
 
-        $where_clauses = array();
+        $where_clauses = [];
         foreach ($ACLUnAllowedModules as $module => $class_name) {
             array_push($where_clauses, "saved_reports.module != '$module'");
         }

@@ -10,58 +10,58 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['quotes_opportunities'] = array(
+$dictionary['quotes_opportunities'] = [
     'table' => 'quotes_opportunities',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'opportunity_id' => array(
+        ],
+        'opportunity_id' => [
             'name' => 'opportunity_id',
             'type' => 'id',
-        ),
-        'quote_id' => array(
+        ],
+        'quote_id' => [
             'name' => 'quote_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'quotes_opportunitiespk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_opp_qte_opp',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'opportunity_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_quote_oportunities',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'quote_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'quotes_opportunities' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'quotes_opportunities' => [
             'lhs_module' => 'Opportunities',
             'lhs_table' => 'opportunities',
             'lhs_key' => 'id',
@@ -73,6 +73,6 @@ $dictionary['quotes_opportunities'] = array(
             'join_table' => 'quotes_opportunities',
             'join_key_lhs' => 'opportunity_id',
             'join_key_rhs' => 'quote_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

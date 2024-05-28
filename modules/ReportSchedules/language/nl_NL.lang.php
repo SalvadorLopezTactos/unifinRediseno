@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Schema&#39;s rapporteren',
     'LBL_MODULE_NAME_SINGULAR' => 'Schema rapporteren',
     'LBL_REPORT_NAME' => 'Rapport',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Bestandstype(&#39;s)',
     'LBL_EMBED_REPORT' => 'Rapport insluiten in e-mail',
     'LBL_EMBED_REPORT_INFO' => 'Opmerking: als het rapport groter is dan 200 rijen, voegen we het rapport als CSV-bestand toe.',
-);
+];

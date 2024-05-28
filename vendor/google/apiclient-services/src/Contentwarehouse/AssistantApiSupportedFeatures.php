@@ -60,6 +60,10 @@ class AssistantApiSupportedFeatures extends \Google\Model
   /**
    * @var bool
    */
+  public $confirmationBeforeReadingMultipleMessagesSupported;
+  /**
+   * @var bool
+   */
   public $crossDeviceBroadcastSupported;
   /**
    * @var string
@@ -116,6 +120,10 @@ class AssistantApiSupportedFeatures extends \Google\Model
    */
   public $isPairedPhoneNeededForComms;
   /**
+   * @var bool
+   */
+  public $justInTimeSupported;
+  /**
    * @var string
    */
   public $launchKeyboardSupported;
@@ -127,6 +135,10 @@ class AssistantApiSupportedFeatures extends \Google\Model
    * @var bool
    */
   public $liveCardsSupported;
+  /**
+   * @var string
+   */
+  public $lottieAnimationSupport;
   /**
    * @var bool
    */
@@ -165,6 +177,10 @@ class AssistantApiSupportedFeatures extends \Google\Model
    * @var bool
    */
   public $privacyAwareLockscreenSupported;
+  /**
+   * @var bool
+   */
+  public $readMessagesTtsTaperingSupported;
   /**
    * @var bool
    */
@@ -391,6 +407,20 @@ class AssistantApiSupportedFeatures extends \Google\Model
   /**
    * @param bool
    */
+  public function setConfirmationBeforeReadingMultipleMessagesSupported($confirmationBeforeReadingMultipleMessagesSupported)
+  {
+    $this->confirmationBeforeReadingMultipleMessagesSupported = $confirmationBeforeReadingMultipleMessagesSupported;
+  }
+  /**
+   * @return bool
+   */
+  public function getConfirmationBeforeReadingMultipleMessagesSupported()
+  {
+    return $this->confirmationBeforeReadingMultipleMessagesSupported;
+  }
+  /**
+   * @param bool
+   */
   public function setCrossDeviceBroadcastSupported($crossDeviceBroadcastSupported)
   {
     $this->crossDeviceBroadcastSupported = $crossDeviceBroadcastSupported;
@@ -613,6 +643,20 @@ class AssistantApiSupportedFeatures extends \Google\Model
     return $this->isPairedPhoneNeededForComms;
   }
   /**
+   * @param bool
+   */
+  public function setJustInTimeSupported($justInTimeSupported)
+  {
+    $this->justInTimeSupported = $justInTimeSupported;
+  }
+  /**
+   * @return bool
+   */
+  public function getJustInTimeSupported()
+  {
+    return $this->justInTimeSupported;
+  }
+  /**
    * @param string
    */
   public function setLaunchKeyboardSupported($launchKeyboardSupported)
@@ -653,6 +697,20 @@ class AssistantApiSupportedFeatures extends \Google\Model
   public function getLiveCardsSupported()
   {
     return $this->liveCardsSupported;
+  }
+  /**
+   * @param string
+   */
+  public function setLottieAnimationSupport($lottieAnimationSupport)
+  {
+    $this->lottieAnimationSupport = $lottieAnimationSupport;
+  }
+  /**
+   * @return string
+   */
+  public function getLottieAnimationSupport()
+  {
+    return $this->lottieAnimationSupport;
   }
   /**
    * @param bool
@@ -793,6 +851,20 @@ class AssistantApiSupportedFeatures extends \Google\Model
   public function getPrivacyAwareLockscreenSupported()
   {
     return $this->privacyAwareLockscreenSupported;
+  }
+  /**
+   * @param bool
+   */
+  public function setReadMessagesTtsTaperingSupported($readMessagesTtsTaperingSupported)
+  {
+    $this->readMessagesTtsTaperingSupported = $readMessagesTtsTaperingSupported;
+  }
+  /**
+   * @return bool
+   */
+  public function getReadMessagesTtsTaperingSupported()
+  {
+    return $this->readMessagesTtsTaperingSupported;
   }
   /**
    * @param bool

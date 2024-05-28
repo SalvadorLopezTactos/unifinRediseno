@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'กำหนดการรายงาน',
     'LBL_MODULE_NAME_SINGULAR' => 'กำหนดการรายงาน',
     'LBL_REPORT_NAME' => 'รายงาน',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'ประเภทไฟล์',
     'LBL_EMBED_REPORT' => 'ฝังรายงานในอีเมล',
     'LBL_EMBED_REPORT_INFO' => 'หมายเหตุ: หากรายงานมีจำนวนแถวมากกว่า 200 แถว เราจะแนบรายงานเป็นไฟล์ CSV',
-);
+];

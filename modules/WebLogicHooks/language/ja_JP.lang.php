@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'WEBロジックフック',
     'LBL_MODULE_NAME_SINGULAR' => 'WEBロジックフック',
     'LBL_MODULE_TITLE' => 'WEBロジックフック',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => '方法を要求する',
     'LBL_TRIGGER_EVENT' => 'トリガーイベント',
     'LBL_URL' => 'URL',
-);
+];

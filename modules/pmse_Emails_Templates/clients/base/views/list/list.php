@@ -10,51 +10,51 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['pmse_Emails_Templates']['base']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['pmse_Emails_Templates']['base']['view']['list'] = [
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'label' => 'LBL_NAME',
                     'default' => true,
                     'enabled' => true,
                     'link' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'base_module',
                     'label' => 'LBL_BASE_MODULE',
                     'enabled' => true,
                     'default' => true,
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'assigned_user_name',
                     'label' => 'LBL_ASSIGNED_TO_NAME',
                     'default' => true,
                     'enabled' => true,
                     'link' => true,
-                ),
-                array(
+                ],
+                [
                     'label' => 'LBL_DATE_MODIFIED',
                     'enabled' => true,
                     'default' => true,
                     'name' => 'date_modified',
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'label' => 'LBL_DATE_ENTERED',
                     'enabled' => true,
                     'default' => true,
                     'name' => 'date_entered',
                     'readonly' => true,
-                ),
-            ),
-        ),
-    ),
-    'orderBy' => array(
+                ],
+            ],
+        ],
+    ],
+    'orderBy' => [
         'field' => 'date_modified',
         'direction' => 'desc',
-    ),
-);
+    ],
+];

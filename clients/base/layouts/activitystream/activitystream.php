@@ -11,13 +11,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['activitystream'] = array(
-    'components' => array(
-        array(
+$viewdefs['base']['layout']['activitystream'] = [
+    'components' => [
+        [
             'view' => 'activitystream-omnibar',
-        ),
-        array(
+        ],
+        [
             'view' => 'activitystream-bottom',
-        ),
-    ),
-);
+        ],
+    ],
+];

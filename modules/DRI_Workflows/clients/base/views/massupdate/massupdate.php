@@ -12,6 +12,13 @@
 $viewdefs['DRI_Workflows']['base']['view']['massupdate'] = [
     'buttons' => [
         [
+            'type' => 'button',
+            'value' => 'cancel',
+            'css_class' => 'btn-invisible cancel_button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
+            'primary' => false,
+        ],
+        [
             'name' => 'update_button',
             'type' => 'button',
             'label' => 'LBL_UPDATE',
@@ -19,16 +26,8 @@ $viewdefs['DRI_Workflows']['base']['view']['massupdate'] = [
             'css_class' => 'btn-primary',
             'primary' => true,
         ],
-        [
-            'type' => 'button',
-            'value' => 'cancel',
-            'css_class' => 'btn-invisible cancel_button',
-            'icon' => 'icon-remove',
-            'primary' => false,
-        ],
     ],
-    'panels' =>
-    [
+    'panels' => [
         [
             'fields' => [],
         ],

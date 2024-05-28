@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Plány hlásení',
     'LBL_MODULE_NAME_SINGULAR' => 'Plán hlásení',
     'LBL_REPORT_NAME' => 'Hlásenie',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Typ(-y) súboru',
     'LBL_EMBED_REPORT' => 'Vložiť hlásenie do e-mailu',
     'LBL_EMBED_REPORT_INFO' => 'Poznámka: Ak hlásenie presiahne 200 riadkov, pripojíme ho ako súbor CSV.',
-);
+];

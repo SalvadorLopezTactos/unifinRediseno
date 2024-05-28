@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'フォワード:',
     'LBL_RE' => 'Re:',
     'LBL_BUTTON_CREATE' => '作成',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Eメールアカウントから選んでください',
     'LBL_SELECT_SIGNATURE_TITLE' => '署名を選んでください',
     'LBL_SIGNATURE' => '署名',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "デフォルトの署名",
-    "LBL_SHOW_MORE_SIGNATURES" => "他の署名",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'デフォルトの署名',
+    'LBL_SHOW_MORE_SIGNATURES' => '他の署名',
     'LBL_SUBJECT' => '件名:',
     'LBL_TEMPLATE' => 'テンプレート',
     'LBL_TEXT_BODY' => 'テキスト本文',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => '送信時間',
     'LBL_LIST_TO_ADDR' => 'To',
     'LBL_LIST_TYPE' => 'タイプ',
-    "LBL_SELECTED_RECIPIENTS" => "選択された宛先",
-    "LBL_SHOW_MORE_RECIPIENTS" => "他の宛先",
-    "LBL_COMPOSE_ADDRESSBOOK" => "アドレス帳",
+    'LBL_SELECTED_RECIPIENTS' => '選択された宛先',
+    'LBL_SHOW_MORE_RECIPIENTS' => '他の宛先',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'アドレス帳',
     'NTC_REMOVE_INVITEE' => 'あなたはEメールから、この受信者を削除してもよろしいですか？',
     'WARNING_SETTINGS_NOT_CONF' => 'Eメール設定がEメールを送信するために正しく設定されていません。SMTP サーバー ' .
         'は、<a href="#bwc/index.php?module=EmailMan&action=config">Eメールの設定</a> で設定する必要があります。',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'ファイルの添付ができません:"upload_tmp_dir"の正しくないまたは使用できない値が ' .
         '検出されました。php.ini ファイルで修正してください。',
     'LBL_MESSAGE_UID' => 'メッセージUID',
-    'LBL_OPEN_DRAFT_ALERT' => 'Eメールはドラフトです。'.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>をクリックして'.
+    'LBL_OPEN_DRAFT_ALERT' => 'Eメールはドラフトです。' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>をクリックして' .
         '編集してください。',
     'LBL_EMAIL_BODY' => '電子メール メッセージ',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Ｅメール フォーカス ドロワ',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Eメール記録ダッシュボード',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'メールのタイムライン',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => '受信者が指定されていません',
@@ -473,4 +474,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'Eメール送信',
     'LBL_MAILBOX' => 'インバウンドアカウント',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Eメールを送信するために、<a href="#OutboundEmail">Eメール設定</a>経由で発信Eメールアカウントを設定してください。',
-);
+    'LBL_TOO_SHORT' => '{0}文字以上入力してください…',
+];

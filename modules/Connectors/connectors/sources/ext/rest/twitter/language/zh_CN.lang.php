@@ -12,13 +12,13 @@
  */
 
 /*********************************************************************************
-* Description:
-* Portions created by SugarCRM are Copyright (C) SugarCRM, Inc. All Rights
-* Reserved. Contributor(s): contact@synolia.com - www.synolia.com
-* *******************************************************************************/
+ * Description:
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc. All Rights
+ * Reserved. Contributor(s): contact@synolia.com - www.synolia.com
+ * *******************************************************************************/
 
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1">
 								<tr><td valign="top" width="35%" class="dataLabel">
 									注册您的 Sugar 实例为新的应用程序，从 Twitter 获取 API 密钥和密码。<br/><br>注册实例的步骤：<br/><br/>
@@ -38,9 +38,7 @@ $connector_strings = array (
 							</table>',
     'LBL_NAME' => 'Twitter 用户名',
     'LBL_ID' => 'Twitter 用户名',
-	'company_url' => 'URL',
+    'company_url' => 'URL',
     'oauth_consumer_key' => 'API 密钥',
     'oauth_consumer_secret' => 'API 密码',
-);
-
-?>
+];

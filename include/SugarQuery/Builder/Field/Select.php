@@ -15,7 +15,6 @@
  * SugarQuery_Builder_Field_Select
  * @api
  */
-
 class SugarQuery_Builder_Field_Select extends SugarQuery_Builder_Field
 {
     public function __construct($field, SugarQuery $query)
@@ -28,8 +27,8 @@ class SugarQuery_Builder_Field_Select extends SugarQuery_Builder_Field
         $this->checkCustomField();
 
         if (isset($this->def['type']) && $this->def['type'] == 'function') {
-            if(!empty($this->def['function_params'])) {
-                foreach($this->def['function_params'] as $param) {
+            if (!empty($this->def['function_params'])) {
+                foreach ($this->def['function_params'] as $param) {
                     $this->addToSelect("{$this->table}.{$param}");
                 }
             }
@@ -57,10 +56,10 @@ class SugarQuery_Builder_Field_Select extends SugarQuery_Builder_Field
                     ->getDBManager()
                     ->get_columns($bean->getTableName());
             }
-            foreach ($bean->field_defs AS $field => $def) {
+            foreach ($bean->field_defs as $field => $def) {
                 if ((!isset($def['source'])
-                    || $def['source'] === 'db'
-                    || ($def['source'] === 'custom_fields' && !in_array($def['type'], $bean::$relateFieldTypes)))
+                        || $def['source'] === 'db'
+                        || ($def['source'] === 'custom_fields' && !safeInArray($def['type'], $bean::$relateFieldTypes)))
                     && (!$this->query->verifyDBfields || array_key_exists($field, $dbColumns))
                 ) {
                     $this->addToSelect("{$this->table}.{$field}");
@@ -112,20 +111,20 @@ class SugarQuery_Builder_Field_Select extends SugarQuery_Builder_Field
         // Exists only checks
         if (!empty($this->def['rname_exists'])) {
             $this->markNonDb();
-            $this->addToSelectRaw("case when {$this->jta}.{$this->def['rname']} IS NOT NULL then 1 else 0 end",$this->field);
+            $this->addToSelectRaw("case when {$this->jta}.{$this->def['rname']} IS NOT NULL then 1 else 0 end", $this->field);
             return;
         }
 
         if (!empty($this->def['rname']) && !empty($this->jta)) {
-            $field = array("{$this->jta}.{$this->def['rname']}", $this->def['name']);
-            $this->addToSelect(array($field));
+            $field = ["{$this->jta}.{$this->def['rname']}", $this->def['name']];
+            $this->addToSelect([$field]);
             if (isset($this->def['module'])) {
                 $rBean = BeanFactory::getDefinition($this->def['module']);
                 $ownerField = $rBean->getOwnerField();
                 if ($ownerField) {
-                    $this->query->select->addField($this->jta . '.' . $ownerField, array(
+                    $this->query->select->addField($this->jta . '.' . $ownerField, [
                         'alias' => $this->def['name'] . '_owner',
-                    ));
+                    ]);
                 }
             }
             $this->markNonDb();

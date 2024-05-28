@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,6 +16,18 @@ return [
         'components' => [
             [
                 'rows' => [
+                    [
+                        [
+                            'view' => [
+                                'type' => 'activity-timeline',
+                                'label' => 'TPL_ACTIVITY_TIMELINE_DASHLET',
+                            ],
+                            'context' => [
+                                'module' => 'Contracts',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
                     [
                         [
                             'view' => [

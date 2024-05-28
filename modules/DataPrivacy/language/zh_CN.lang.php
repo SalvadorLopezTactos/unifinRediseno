@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '数据隐私',
     'LBL_MODULE_NAME_SINGULAR' => '数据隐私',
     'LBL_NUMBER' => '编号',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => '没有已被标记为删除的字段或记录。',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => '数据隐私记录仪表板',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => '数据隐私焦点抽屉',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '数据隐私时间轴',
 
     // list view
     'LBL_HELP_RECORDS' => '数据隐私模块可追踪隐私活动，包括许可和主题请求，以支持组织的隐私程序。创建与个人记录（如联系人）相关的数据隐私记录，以追踪许可或对隐私请求执行操作。',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => '数据隐私模块可追踪隐私活动，包括许可和主题请求，以支持组织的隐私程序。创建与个人记录（如联系人）相关的数据隐私记录，以追踪许可或对隐私请求执行操作。完成所需的操作后，角色为数据隐私管理员的用户便可点击“完成”或“拒绝”来更新状态。
 
 对于删除请求，可对下方子面板中所列个人记录中的每一个选择“标记为删除”。选择好全部所需字段后，点击“删除并完成”会永久地删除这些字段的值，并将数据隐私记录标记为已完成。',
-);
+];

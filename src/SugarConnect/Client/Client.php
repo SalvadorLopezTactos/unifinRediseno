@@ -24,5 +24,5 @@ interface Client
      *
      * @return void
      */
-    public function send(array $events) : void;
+    public function send(array $events): void;
 }

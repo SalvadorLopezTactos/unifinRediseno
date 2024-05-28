@@ -11,49 +11,49 @@
  */
 
 
-$viewdefs['pmse_Emails_Templates']['base']['layout']['compose-sugarlinks'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
-                'components' => array(
-                    array(
-                        'layout' => array(
+$viewdefs['pmse_Emails_Templates']['base']['layout']['compose-sugarlinks'] = [
+    'components' => [
+        [
+            'layout' => [
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
                             'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'view' => 'compose-sugarlinks-headerpane',
-                                ),
-                                array(
+                                ],
+                                [
                                     'view' => 'compose-sugarlinks-list',
-                                ),
-                            ),
+                                ],
+                            ],
                             'type' => 'simple',
                             'name' => 'main-pane',
                             'span' => 8,
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'preview-pane',
                             'css_class' => 'preview-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'preview',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
                 'type' => 'default',
                 'name' => 'sidebar',
                 'span' => 12,
-            ),
-        ),
-    ),
+            ],
+        ],
+    ],
     'type' => 'compose-sugarlinks',
     'name' => 'base',
     'span' => 12,
-);
+];

@@ -85,5 +85,15 @@
             // re-render after update
             this.render();
         }
-    }
+    },
+
+    /**
+     * Check is transaction value is equal to value and returns answer.
+     *
+     * @return {boolean} True if the values are equal or false if not
+     * @private
+     */
+    isTransactionValueEqualToValue: function() {
+        return this.transactionValue === this.value;
+    },
 });

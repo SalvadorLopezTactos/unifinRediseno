@@ -9,76 +9,92 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Dashboards']['base']['filter']['basic'] = array(
+$viewdefs['Dashboards']['base']['filter']['basic'] = [
     'create' => true,
-    'quicksearch_field' => array('name'),
+    'quicksearch_field' => ['name'],
     'quicksearch_priority' => 1,
     'quicksearch_split_terms' => false,
-    'filters' => array(
-        array(
+    'filters' => [
+        [
             'id' => 'all_records',
             'name' => 'LBL_LISTVIEW_FILTER_ALL',
-            'filter_definition' => array(),
+            'filter_definition' => [],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'assigned_to_me',
             'name' => 'LBL_ASSIGNED_TO_ME',
-            'filter_definition' => array(
+            'filter_definition' => [
                 '$owner' => '',
-            ),
+            ],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'favorites',
             'name' => 'LBL_FAVORITES',
-            'filter_definition' => array(
+            'filter_definition' => [
                 '$favorite' => '',
-            ),
+            ],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'recently_viewed',
             'name' => 'LBL_RECENTLY_VIEWED',
-            'filter_definition' => array(
+            'filter_definition' => [
                 '$tracker' => '-7 DAY',
-            ),
+            ],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'recently_created',
             'name' => 'LBL_NEW_RECORDS',
-            'filter_definition' => array(
-                'date_entered' => array(
+            'filter_definition' => [
+                'date_entered' => [
                     '$dateRange' => 'last_7_days',
-                ),
-            ),
+                ],
+            ],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
+            'id' => 'template_dashboards',
+            'name' => 'LBL_TEMPLATES',
+            'filter_definition' => [
+                'is_template' => '1',
+            ],
+            'editable' => false,
+        ],
+        [
+            'id' => 'non_template_dashboards',
+            'name' => 'LBL_NON_TEMPLATES',
+            'filter_definition' => [
+                'is_template' => '0',
+            ],
+            'editable' => false,
+        ],
+        [
             'id' => 'module',
             'name' => 'LBL_BY_MODULE_FILTER',
-            'filter_definition' => array(
-                array('dashboard_module' => array(
+            'filter_definition' => [
+                ['dashboard_module' => [
                     '$in' => '',
-                )),
-            ),
+                ]],
+            ],
             'editable' => true,
             'is_template' => true,
-        ),
-        array(
+        ],
+        [
             'id' => 'module_and_layout',
             'name' => 'LBL_BY_MODULE_FILTER',
-            'filter_definition' => array(
-                array('dashboard_module' => array(
+            'filter_definition' => [
+                ['dashboard_module' => [
                     '$in' => '',
-                )),
-                array('view_name' => array(
+                ]],
+                ['view_name' => [
                     '$in' => '',
-                )),
-            ),
+                ]],
+            ],
             'editable' => true,
             'is_template' => true,
-        ),
-    ),
-);
+        ],
+    ],
+];

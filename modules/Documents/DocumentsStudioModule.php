@@ -10,30 +10,29 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /*********************************************************************************
- * $Id: view.sugarpdf.php 
+ * $Id: view.sugarpdf.php
  * Description: This file is used to override the default Meta-data EditView behavior
  * to provide customization specific to the Quotes module.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-
 class DocumentsStudioModule extends StudioModule
 {
-     function __construct ($module)
+    public function __construct($module)
     {
-         parent::__construct ($module);
+        parent::__construct($module);
     }
 
-    function getLayouts()
+    public function getLayouts()
     {
         $layouts = parent::getLayouts();
-        
-        //The Documents popup view is not customizable
-        unset($layouts [ translate('LBL_POPUP') ]);
-        
-        return $layouts ;
 
+        //The Documents popup view is not customizable
+        unset($layouts [translate('LBL_POPUP')]);
+
+        return $layouts;
     }
 }

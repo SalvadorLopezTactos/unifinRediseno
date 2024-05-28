@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Užrašų sąrašo ataskaitų sritis',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Pastabų ataskaitų sritis',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ pastabos',
     'LBL_EXTERNAL_USER' => 'Išorinis vartotojas',
     'LBL_EXTERNAL_USER_NAME' => 'Išorinis vartotojas',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Pastabos laiko juosta',
 
     'LBL_RELATED_CONTACT' => 'Susiję kontaktai',
     'ERR_DELETE_RECORD' => 'Jūs turite nurodyti įrašo numerį, kad galėtumėte ištrinti klientą.',
@@ -126,4 +127,4 @@ $mod_strings = array(
  - Fields marked "Required" must be completed prior to saving.
  - Click "Show More" to expose additional fields if necessary.
 2. Click "Save" to finalize the new record and return to the previous page.',
-);
+];

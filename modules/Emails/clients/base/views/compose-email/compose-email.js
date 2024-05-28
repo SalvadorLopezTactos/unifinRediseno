@@ -94,14 +94,6 @@
                 this.toggleButtons(true);
             }
         }, this);
-
-        this.on('editable:toggle_fields', function(fields, viewName) {
-            var field = this.getField('recipients');
-
-            if (field) {
-                field.trigger('recipients:edit:hide');
-            }
-        }, this);
     },
 
     /**

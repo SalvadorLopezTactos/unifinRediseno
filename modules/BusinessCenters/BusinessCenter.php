@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -263,7 +265,7 @@ class BusinessCenter extends Basic
     public function isOpen(string $day)
     {
         $field = 'is_open_' . $this->getNormalizedDay($day);
-        return (bool) $this->$field;
+        return (bool)$this->$field;
     }
 
     /**
@@ -307,8 +309,8 @@ class BusinessCenter extends Basic
         // assembled string property
         return $asParts ?
             [
-                'hour' => (int) $this->{$prop . '_hour'},
-                'minutes' => (int) $this->{$prop . '_minutes'},
+                'hour' => (int)$this->{$prop . '_hour'},
+                'minutes' => (int)$this->{$prop . '_minutes'},
             ] :
             $this->$prop;
     }
@@ -496,9 +498,10 @@ class BusinessCenter extends Basic
     public function canCalculateIncrement($interval = 0, $unit = 'hours')
     {
         return $this->hasBusinessHours() &&
-               floatval($interval) > 0.0 &&
-               isset($this->intervalUnits[$unit]);
+            floatval($interval) > 0.0 &&
+            isset($this->intervalUnits[$unit]);
     }
+
     /**
      * Gets a DB date time string of the date that is `$interval` hours greater
      * than `$datetime`

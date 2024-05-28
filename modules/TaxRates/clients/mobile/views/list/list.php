@@ -9,15 +9,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['TaxRates']['mobile']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['TaxRates']['mobile']['view']['list'] = [
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
+            'fields' => [
                 'name',
                 'value',
                 'date_modified',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

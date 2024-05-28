@@ -9,16 +9,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Quotes']['base']['view']['panel-top-for-contracts'] = array(
+$viewdefs['Quotes']['base']['view']['panel-top-for-contracts'] = [
     'type' => 'panel-top',
     'template' => 'panel-top',
-    'buttons' => array(
-        array(
+    'buttons' => [
+        [
             'type' => 'actiondropdown',
             'name' => 'panel_dropdown',
             'css_class' => 'pull-right',
-            'buttons' => array(
-                array(
+            'buttons' => [
+                [
                     'type' => 'sticky-rowaction',
                     'icon' => 'sicon-plus',
                     'name' => 'create_button',
@@ -27,13 +27,13 @@ $viewdefs['Quotes']['base']['view']['panel-top-for-contracts'] = array(
                     'acl_action' => 'create',
                     'tooltip' => 'LBL_CREATE_BUTTON_LABEL',
                     'css_class' => 'disabled',
-                ),
-                array(
+                ],
+                [
                     'type' => 'link-action',
                     'name' => 'select_button',
                     'label' => 'LBL_ASSOC_RELATED_RECORD',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

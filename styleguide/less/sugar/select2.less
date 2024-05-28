@@ -87,7 +87,7 @@
 
   &.select2-choices-pills .select2-search-choice,
   &.select2-container-multi.select2-choices-pills-close .select2-search-choice {
-    margin: 2px 0 1px 4px;
+    margin: 1px 0 1px 4px;
     font-size: 12px;
     font-weight: bold;
     border: none;
@@ -317,13 +317,6 @@
           background: transparent !important;
         }
       }
-    }
-  }
-
-  .select2-select-legend {
-    .fa-plus {
-      margin-top: 3px;
-      line-height: 4px;
     }
   }
 
@@ -646,29 +639,32 @@
   min-height: 28px;
 
   .input-append {
-    width: 50%;
-    width: calc(~"100% - 80px");
+    width: calc(~"100% - 6rem");
     float: left;
 
     input[type="text"] {
-      width: 95%;
-      width: calc(~"100% - 14px");
+      width: 100%;
       border-radius: 0 @baseBorderRadius @baseBorderRadius 0;
     }
   }
 
   > input[type="text"] {
-    width: 50%;
-    width: calc(~"100% - 80px") !important;
     border-radius: 0 2px 2px 0;
     float: right;
     box-sizing: border-box;
     height: 28px;
+
+    .record-cell .edit & {
+      width: calc(~"100% - 6rem");
+    }
+
+    .dataTable .edit & {
+      width: calc(~"100% - 6rem");
+    }
   }
 
   .edit {
     float: left;
-    width: 80px;
 
     &.currency.list {
       width: auto;
@@ -733,12 +729,11 @@
   }
 
   a:hover {
-    color: @black;
+    color: @textColor;
     text-decoration: none;
   }
 
-  span.sicon,
-  span.fa {
+  span.sicon {
     position: absolute;
     top: 7px;
     right: 7px;
@@ -876,9 +871,7 @@
     background: @dropdownLinkBackgroundHover;
     color: @dropdownLinkColor;
 
-    .sicon,
-    .fa {
-      /* additive */
+    .sicon {
       color: @linkColorHover;
     }
   }

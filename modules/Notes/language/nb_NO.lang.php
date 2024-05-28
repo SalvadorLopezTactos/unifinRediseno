@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Dashbord for notatliste',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Registerdashbord for merknader',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Notater fokusskuff',
     'LBL_EXTERNAL_USER' => 'Ekstern bruker',
     'LBL_EXTERNAL_USER_NAME' => 'Ekstern bruker',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Notattidslinje',
 
     'LBL_RELATED_CONTACT' => 'Relatert kontakt',
     'ERR_DELETE_RECORD' => 'Du må oppgi et registernummer for å slette denne bedriften.',
@@ -120,4 +121,4 @@ $mod_strings = array(
 - Felt som er merket "Obligatorisk" må oppdateres før du lagrer. 
 - Klikk "Vis mer" for å avsløre flere felt hvis det er nødvendig. 
 2. Klikk "Lagre" for å sluttføre den nye posten og gå tilbake til forrige side.',
-);
+];

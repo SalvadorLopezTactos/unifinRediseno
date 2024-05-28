@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => '购买记录仪表板',
     'LBL_RELATED_ACCOUNT' => '关联账户',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => '购买焦点抽屉',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '购买时间轴',
 ];

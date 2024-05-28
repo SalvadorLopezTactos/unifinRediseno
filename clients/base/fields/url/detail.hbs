@@ -11,7 +11,7 @@
  */
 --}}
 {{#if value}}
-    <span class="ellipsis_inline" data-placement="bottom" title="{{value}}">
+    <span class="ellipsis_inline" data-bs-placement="bottom" title="{{value}}">
         {{#if def.isClickable}}
             <a {{#if def.link_target}}target="{{def.link_target}}"{{/if}} href="{{value}}"{{#if dir}} dir="{{dir}}"{{/if}}>{{value}}</a>
         {{else}}

@@ -29,7 +29,7 @@ class GuidValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof Guid) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Guid');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\Guid');
         }
 
         if (null === $value || '' === $value) {
@@ -40,7 +40,7 @@ class GuidValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, 'string');
         }
 
-        $value = (string) $value;
+        $value = (string)$value;
 
         // check for allowed characters
         if (!preg_match('/^[a-z0-9\-_]*$/i', $value)) {

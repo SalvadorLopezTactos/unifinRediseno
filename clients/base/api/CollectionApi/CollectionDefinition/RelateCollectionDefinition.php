@@ -50,7 +50,7 @@ class RelateCollectionDefinition extends AbstractCollectionDefinition
     {
         if (!$this->bean->load_relationship($source)) {
             throw new SugarApiExceptionError(
-                $this->getErrorMessage('Unable to load link %s', array($source))
+                $this->getErrorMessage('Unable to load link %s', [$source])
             );
         }
 

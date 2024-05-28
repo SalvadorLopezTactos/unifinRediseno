@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Dasboard de lista de Itens de Linha cotados',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Dashboard do registo de Itens de linha cotados',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco de itens de linha cotados',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Timeline dos Itens de Linha Cotados',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Item de Linha Cotado da Campanha',
     'LBL_MODULE_NAME' => 'Itens de Linha Cotados',
@@ -183,4 +184,4 @@ Para criar um {{module_name}}:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Novo Item da Linha Cotado)',
     'LBL_DISCOUNT_PERCENT' => '% Percentagem',
     'LBL_DISCOUNT_TYPE' => 'Tipo de Desconto',
-);
+];

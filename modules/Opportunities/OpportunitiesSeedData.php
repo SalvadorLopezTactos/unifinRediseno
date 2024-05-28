@@ -17,14 +17,15 @@
  * that we may better control and test creating default Opportunities.
  *
  */
+class OpportunitiesSeedData
+{
+    // @codingStandardsIgnoreStart PSR2.Classes.PropertyDeclaration.Underscore
+    private static $_ranges;
 
-class OpportunitiesSeedData {
+    public static $pt_ids = [];
 
-    static private $_ranges;
-
-    public static $pt_ids = array();
-
-    public static $pc_ids = array();
+    public static $pc_ids = [];
+    // @codingStandardsIgnoreEnd PSR2.Classes.PropertyDeclaration.Underscore
 
     public static $serviceOppIds;
 
@@ -37,7 +38,7 @@ class OpportunitiesSeedData {
 
     protected static $products = [];
 
-    protected static function hasProductLicense(string $product) : bool
+    protected static function hasProductLicense(string $product): bool
     {
         if (!empty(static::$products)) {
             return array_key_exists($product, static::$products);
@@ -91,7 +92,7 @@ class OpportunitiesSeedData {
     public static function populateSeedData($records, $app_list_strings, $accounts, $users)
     {
         if (empty($accounts) || empty($app_list_strings) || (!is_int($records) || $records < 1) || empty($users)) {
-            return array();
+            return [];
         }
 
         $opp_config = Opportunity::getSettings(true);
@@ -99,7 +100,7 @@ class OpportunitiesSeedData {
 
         self::$db = DBManagerFactory::getInstance();
 
-        $opp_ids = array();
+        $opp_ids = [];
         $timedate = TimeDate::getInstance();
 
         // get the additional currencies from the table
@@ -112,18 +113,17 @@ class OpportunitiesSeedData {
         $oppFieldDefs = $opp->getFieldDefinitions();
         $oppIndices = $opp->getIndices();
         $oppDbData = self::toDatabaseArray($opp);
-        $oppSql = 'INSERT INTO '. $opp->table_name . ' ('. join(',', array_keys($oppDbData)) . ') VALUES';
-        $oppRows = array();
-        $oppAccRows = array();
-        $oppAccRow = array(
+        $oppSql = 'INSERT INTO ' . $opp->table_name . ' (' . join(',', array_keys($oppDbData)) . ') VALUES';
+        $oppRows = [];
+        $oppAccRows = [];
+        $oppAccRow = [
             'id' => '',
             'opportunity_id' => '',
             'account_id' => '',
             'date_modified' => self::$db->quoted($now),
-            'deleted' => 0
-        );
-        $oppAccSql = 'INSERT INTO accounts_opportunities ('. join(',', array_keys($oppAccRow)) . ') VALUES';
-
+            'deleted' => 0,
+        ];
+        $oppAccSql = 'INSERT INTO accounts_opportunities (' . join(',', array_keys($oppAccRow)) . ') VALUES';
 
 
         if ($usingRLIs) {
@@ -153,7 +153,7 @@ class OpportunitiesSeedData {
 
         $fwFieldDefs = $fw->getFieldDefinitions();
         $fwIndices = $fw->getIndices();
-        $fwRows = array();
+        $fwRows = [];
         $fwDbData = self::toDatabaseArray($fw);
         $fwSql = 'INSERT INTO ' . $fw->table_name . '(' . join(',', array_keys($fwDbData)) . ') VALUES';
 
@@ -219,20 +219,20 @@ class OpportunitiesSeedData {
             $opp->account_id = $account->id;
             $opp->account_name = $account->name;
 
-            $oppAccRows[] = '(' . join(',', array_merge($oppAccRow, array(
-                'id' => self::$db->quoted(create_guid()),
-                'account_id' => self::$db->quoted($account->id),
-                'opportunity_id' => self::$db->quoted($opp->id)
-            ))) . ')';
+            $oppAccRows[] = '(' . join(',', array_merge($oppAccRow, [
+                    'id' => self::$db->quoted(create_guid()),
+                    'account_id' => self::$db->quoted($account->id),
+                    'opportunity_id' => self::$db->quoted($opp->id),
+                ])) . ')';
 
-            $return = array();
+            $return = [];
             if ($usingRLIs) {
                 $return = static::createRevenueLineItems($opp, random_int(3, 5), $app_list_strings);
             }
             $values = array_merge(self::toDatabaseArray($opp), $return);
 
-            $sqlValues = array();
-            foreach($values as $key => $value) {
+            $sqlValues = [];
+            foreach ($values as $key => $value) {
                 $value = self::evaluateIndexedValue($key, $value, $oppIndices);
                 $sqlValues[] = self::$db->massageValue($value, $oppFieldDefs[$key]);
             }
@@ -247,7 +247,7 @@ class OpportunitiesSeedData {
                 $fw->parent_id = $opp->id;
                 $fwValues = self::toDatabaseArray($fw);
 
-                $sqlValues = array();
+                $sqlValues = [];
                 foreach ($fwValues as $key => $value) {
                     $value = self::evaluateIndexedValue($key, $value, $fwIndices);
                     $sqlValues[$key] = self::$db->massageValue($value, $fwFieldDefs[$key]);
@@ -266,6 +266,7 @@ class OpportunitiesSeedData {
 
         return $opp_ids;
     }
+
 
     /**
      * populateServiceData
@@ -292,7 +293,7 @@ class OpportunitiesSeedData {
         $oppDateClosedTimestamp = 0;
 
         if (empty($accounts) || empty($app_list_strings)) {
-            return array();
+            return [];
         }
 
         $oppConfig = Opportunity::getSettings(true);
@@ -300,7 +301,7 @@ class OpportunitiesSeedData {
 
         self::$db = DBManagerFactory::getInstance();
 
-        $oppIds = array();
+        $oppIds = [];
         $timedate = TimeDate::getInstance();
 
         // get the additional currencies from the table
@@ -339,7 +340,7 @@ class OpportunitiesSeedData {
 
             $fwFieldDefs = $fw->getFieldDefinitions();
             $fwIndices = $fw->getIndices();
-            $fwRows = array();
+            $fwRows = [];
             $fwDbData = self::toDatabaseArray($fw);
             $fwSql = 'INSERT INTO ' . $fw->table_name . '(' . join(',', array_keys($fwDbData)) . ') VALUES';
 
@@ -347,9 +348,9 @@ class OpportunitiesSeedData {
             $rli = BeanFactory::newBean('RevenueLineItems');
             $rliFieldDefs = $rli->getFieldDefinitions();
             $rliIndices = $rli->getIndices();
-            $rliSql = array();
+            $rliSql = [];
             $rliDbData = self::toDatabaseArray($rli);
-            $sqlRli = 'INSERT INTO '. $rli->table_name . '('. join(',', array_keys($rliDbData)) . ') VALUES';
+            $sqlRli = 'INSERT INTO ' . $rli->table_name . '(' . join(',', array_keys($rliDbData)) . ') VALUES';
 
             foreach (array_keys($serviceOpp) as $arrKey) {
                 $rli->$arrKey = $serviceOpp[$arrKey];
@@ -375,7 +376,7 @@ class OpportunitiesSeedData {
 
             $values = self::toDatabaseArray($rli);
 
-            $sqlValues = array();
+            $sqlValues = [];
             foreach ($values as $key => $value) {
                 $value = self::evaluateIndexedValue($key, $value, $rliIndices);
                 $sqlValues[] = self::$db->massageValue($value, $rliFieldDefs[$key]);
@@ -388,7 +389,7 @@ class OpportunitiesSeedData {
             $fw->id = create_guid();
             $fw->parent_id = $rli->id;
             $fwValues = self::toDatabaseArray($fw);
-            $sqlValues = array();
+            $sqlValues = [];
             foreach ($fwValues as $key => $value) {
                 $value = self::evaluateIndexedValue($key, $value, $fwIndices);
                 $sqlValues[$key] = self::$db->massageValue($value, $fwFieldDefs[$key]);
@@ -416,18 +417,18 @@ class OpportunitiesSeedData {
                 ->add(SugarCurrency::convertWithRate($rli->worst_case, $baseRate, $opp->base_rate))
                 ->result();
 
-            $return = array(
+            $return = [
                 'date_closed' => $oppDateClosed,
                 'date_closed_timestamp' => $oppDateClosedTimestamp,
                 'amount' => $oppAmount,
                 'best_case' => $oppBestCase,
                 'worst_case' => $oppWorstCase,
-            );
+            ];
 
             self::insertAndCommit($sqlRli, $rliSql);
 
             // process all the forecast worksheet rows since we have the correct opp name now
-            $tRows = array();
+            $tRows = [];
             foreach ($fwRows as $row) {
                 $row['opportunity_name'] = self::$db->quoted($opp->name);
                 $tRows[] = '(' . join(',', $row) . ')';
@@ -438,7 +439,7 @@ class OpportunitiesSeedData {
             //Renewal Opp
             if ($usingRLIs) {
                 // get all the fields from the opportunities table for the given Opportunity Id
-                $sql = 'SELECT * FROM opportunities WHERE deleted = 0 AND id = '. self::$db->quoted($serviceOpp['opportunity_id']);
+                $sql = 'SELECT * FROM opportunities WHERE deleted = 0 AND id = ' . self::$db->quoted($serviceOpp['opportunity_id']);
                 $oppResults = self::$db->query($sql);
                 while ($row = self::$db->fetchByAssoc($oppResults)) {
                     static::$oppForRenewal[] = $row;
@@ -470,27 +471,27 @@ class OpportunitiesSeedData {
                 }
             }
 
-            $oppSql = 'INSERT INTO '. $opp->table_name . ' ('. join(',', array_keys(self::toDatabaseArray($opp))) . ') VALUES';
-            $oppRows = array();
-            $oppAccRows = array();
-            $oppAccRow = array(
+            $oppSql = 'INSERT INTO ' . $opp->table_name . ' (' . join(',', array_keys(self::toDatabaseArray($opp))) . ') VALUES';
+            $oppRows = [];
+            $oppAccRows = [];
+            $oppAccRow = [
                 'id' => '',
                 'opportunity_id' => '',
                 'account_id' => '',
                 'date_modified' => self::$db->quoted($now),
                 'deleted' => 0,
-            );
-            $oppAccSql = 'INSERT INTO accounts_opportunities ('. join(',', array_keys($oppAccRow)) . ') VALUES';
+            ];
+            $oppAccSql = 'INSERT INTO accounts_opportunities (' . join(',', array_keys($oppAccRow)) . ') VALUES';
 
-            $oppAccRows[] = '(' . join(',', array_merge($oppAccRow, array(
+            $oppAccRows[] = '(' . join(',', array_merge($oppAccRow, [
                     'id' => self::$db->quoted(create_guid()),
                     'account_id' => self::$db->quoted($serviceOpp['account_id']),
                     'opportunity_id' => self::$db->quoted($opp->id),
-                ))) . ')';
+                ])) . ')';
 
             $values = array_merge(self::toDatabaseArray($opp), $return);
 
-            $sqlValues = array();
+            $sqlValues = [];
             foreach ($values as $key => $value) {
                 $value = self::evaluateIndexedValue($key, $value, $oppIndices);
                 $sqlValues[] = self::$db->massageValue($value, $oppFieldDefs[$key]);
@@ -506,7 +507,7 @@ class OpportunitiesSeedData {
                 $fw->parent_id = $opp->id;
                 $fwValues = self::toDatabaseArray($fw);
 
-                $sqlValues = array();
+                $sqlValues = [];
                 foreach ($fwValues as $key => $value) {
                     $value = self::evaluateIndexedValue($key, $value, $fwIndices);
                     $sqlValues[$key] = self::$db->massageValue($value, $fwFieldDefs[$key]);
@@ -530,7 +531,9 @@ class OpportunitiesSeedData {
      * @param int $rlis_to_create
      * @param array $app_list_strings
      */
-    private static function createRevenueLineItems(&$opp, $rlis_to_create, $app_list_strings) {
+    private static function createRevenueLineItems(&$opp, $rlis_to_create, $app_list_strings)
+    {
+        $pt_id = null;
         $service = null;
         $service_duration_value = null;
         $service_duration_unit = null;
@@ -540,7 +543,7 @@ class OpportunitiesSeedData {
         $pt = null;
 
         $seed = random_int(1, 15);
-        if ($seed%2 == 0) {
+        if ($seed % 2 == 0) {
             $currency = SugarCurrency::getCurrencyByISO('EUR');
             $currency_id = $currency->id;
             $base_rate = $currency->conversion_rate;
@@ -566,8 +569,8 @@ class OpportunitiesSeedData {
         $rli = BeanFactory::newBean('RevenueLineItems');
         $rliFieldDefs = $rli->getFieldDefinitions();
         $rliIndices = $rli->getIndices();
-        $rliSql = array();
-        $sqlRli = 'INSERT INTO '. $rli->table_name . '('. join(',', array_keys(self::toDatabaseArray($rli))) . ') VALUES';
+        $rliSql = [];
+        $sqlRli = 'INSERT INTO ' . $rli->table_name . '(' . join(',', array_keys(self::toDatabaseArray($rli))) . ') VALUES';
 
 
         /* @var $fw ForecastWorksheet */
@@ -580,8 +583,8 @@ class OpportunitiesSeedData {
         $fw->created_by = $opp->created_by;
         $fwFieldDefs = $fw->getFieldDefinitions();
         $fwIndices = $fw->getIndices();
-        $fwRows = array();
-        $fwSql = 'INSERT INTO '. $fw->table_name . '('. join(',', array_keys(self::toDatabaseArray($fw))) . ') VALUES';
+        $fwRows = [];
+        $fwSql = 'INSERT INTO ' . $fw->table_name . '(' . join(',', array_keys(self::toDatabaseArray($fw))) . ') VALUES';
 
         $opp_date_closed = '';
         $opp_date_closed_timestamp = 0;
@@ -598,15 +601,15 @@ class OpportunitiesSeedData {
         $latestRliSalesStageIndex = 0;
         $latestRliSalesStageKey = '';
 
-        while($rlis_created < $rlis_to_create) {
+        while ($rlis_created < $rlis_to_create) {
             $amount = random_int(1000, 7500);
             $rand_best_worst = random_int(100, 900);
             $doPT = false;
             $quantity = random_int(1, 100);
-            $cost_price = $amount/2;
+            $cost_price = $amount / 2;
             $list_price = $amount;
             $discount_price = ($amount / $quantity);
-            if ($rlis_created%2 === 0) {
+            if ($rlis_created % 2 === 0) {
                 $doPT = true;
                 $pt_id = array_rand(static::$pt_ids);
                 $pt = static::$pt_ids[$pt_id];
@@ -633,9 +636,9 @@ class OpportunitiesSeedData {
             $rli->team_id = $opp->team_id;
             $rli->team_set_id = $opp->team_set_id;
             $rli->name = $opp->name;
-            $rli->best_case = $amount+$rand_best_worst;
+            $rli->best_case = $amount + $rand_best_worst;
             $rli->likely_case = $amount;
-            $rli->worst_case = $amount-$rand_best_worst;
+            $rli->worst_case = $amount - $rand_best_worst;
             $rli->list_price = $list_price;
             $rli->discount_price = $discount_price;
             $rli->cost_price = $cost_price;
@@ -686,8 +689,8 @@ class OpportunitiesSeedData {
             if ($doPT) {
                 $rli->product_template_id = $pt_id;
                 $rli->discount_amount = random_int(100, intval($rli->cost_price));
-                $rli->discount_rate_percent = (($rli->discount_amount/$rli->discount_price)*100);
-                foreach($pt as $field => $value) {
+                $rli->discount_rate_percent = (($rli->discount_amount / $rli->discount_price) * 100);
+                foreach ($pt as $field => $value) {
                     if ($field != 'id') {
                         $rli->$field = $value;
                     }
@@ -712,7 +715,7 @@ class OpportunitiesSeedData {
             // For sell based purchase generation
             $rli->generate_purchase = !$isClosed && static::hasProductLicense('sell') ? 'Yes' : '';
 
-            $rli->total_amount = (($rli->discount_price-$rli->discount_amount)*$rli->quantity);
+            $rli->total_amount = (($rli->discount_price - $rli->discount_amount) * $rli->quantity);
             $rli->id = create_guid();
             $rli->date_entered = $now;
             $rli->date_modified = $now;
@@ -721,8 +724,8 @@ class OpportunitiesSeedData {
 
             $values = self::toDatabaseArray($rli);
 
-            $sqlValues = array();
-            foreach($values as $key => $value) {
+            $sqlValues = [];
+            foreach ($values as $key => $value) {
                 $value = self::evaluateIndexedValue($key, $value, $rliIndices);
                 $sqlValues[] = self::$db->massageValue($value, $rliFieldDefs[$key]);
             }
@@ -735,8 +738,8 @@ class OpportunitiesSeedData {
             $fw->parent_id = $rli->id;
             $fwValues = self::toDatabaseArray($fw);
 
-            $sqlValues = array();
-            foreach($fwValues as $key => $value) {
+            $sqlValues = [];
+            foreach ($fwValues as $key => $value) {
                 $value = self::evaluateIndexedValue($key, $value, $fwIndices);
                 $sqlValues[$key] = self::$db->massageValue($value, $fwFieldDefs[$key]);
             }
@@ -751,14 +754,14 @@ class OpportunitiesSeedData {
 
             if (!$isClosedLost) {
                 $opp_amount = SugarMath::init($opp_amount)
-                                ->add(SugarCurrency::convertWithRate($rli->likely_case, $base_rate, $opp->base_rate))
-                                ->result();
+                    ->add(SugarCurrency::convertWithRate($rli->likely_case, $base_rate, $opp->base_rate))
+                    ->result();
                 $opp_best_case = SugarMath::init($opp_best_case)
-                                ->add(SugarCurrency::convertWithRate($rli->best_case, $base_rate, $opp->base_rate))
-                                ->result();
+                    ->add(SugarCurrency::convertWithRate($rli->best_case, $base_rate, $opp->base_rate))
+                    ->result();
                 $opp_worst_case = SugarMath::init($opp_worst_case)
-                                ->add(SugarCurrency::convertWithRate($rli->worst_case, $base_rate, $opp->base_rate))
-                                ->result();
+                    ->add(SugarCurrency::convertWithRate($rli->worst_case, $base_rate, $opp->base_rate))
+                    ->result();
             }
             $rlis_created++;
         }
@@ -791,22 +794,23 @@ class OpportunitiesSeedData {
         self::insertAndCommit($sqlRli, $rliSql);
 
         // process all the forecast worksheet rows since we have the correct opp name now
-        $tRows = array();
-        foreach($fwRows as $row) {
+        $tRows = [];
+        foreach ($fwRows as $row) {
             $row['opportunity_name'] = self::$db->quoted($opp->name);
             $tRows[] = '(' . join(',', $row) . ')';
         }
         self::insertAndCommit($fwSql, $tRows);
 
 
-        return array(
+        return [
             'date_closed' => $opp_date_closed,
             'date_closed_timestamp' => $opp_date_closed_timestamp,
             'amount' => $opp_amount,
             'best_case' => $opp_best_case,
-            'worst_case' => $opp_worst_case
-        );
+            'worst_case' => $opp_worst_case,
+        ];
     }
+
 
     /**
      * Calculate service_end_date for service RLI.
@@ -826,6 +830,7 @@ class OpportunitiesSeedData {
         }
         return $rli->service_end_date;
     }
+
 
     protected static function insertAndCommit($sql, array $rows, $table = '')
     {
@@ -849,16 +854,16 @@ class OpportunitiesSeedData {
     private static function getRanges($total_months = 12)
     {
         if (self::$_ranges === null) {
-            self::$_ranges = array();
+            self::$_ranges = [];
             for ($i = $total_months; $i >= 0; $i--) {
                 // define priority for month,
-                self::$_ranges[$total_months-$i] = ( $total_months-$i > 6 )
-                    ? self::$_ranges[$total_months-$i] = 6 ** 2 + $i
-                    :  self::$_ranges[$total_months-$i] = $i ** 2 + 1;
+                self::$_ranges[$total_months - $i] = ($total_months - $i > 6)
+                    ? self::$_ranges[$total_months - $i] = 6 ** 2 + $i
+                    : self::$_ranges[$total_months - $i] = $i ** 2 + 1;
                 // increase probability for current quarters
-                self::$_ranges[$total_months-$i] = $total_months-$i == 0 ? self::$_ranges[$total_months-$i]*2.5 : self::$_ranges[$total_months-$i];
-                self::$_ranges[$total_months-$i] = $total_months-$i == 1 ? self::$_ranges[$total_months-$i]*2 : self::$_ranges[$total_months-$i];
-                self::$_ranges[$total_months-$i] = $total_months-$i == 2 ? self::$_ranges[$total_months-$i]*1.5 : self::$_ranges[$total_months-$i];
+                self::$_ranges[$total_months - $i] = $total_months - $i == 0 ? self::$_ranges[$total_months - $i] * 2.5 : self::$_ranges[$total_months - $i];
+                self::$_ranges[$total_months - $i] = $total_months - $i == 1 ? self::$_ranges[$total_months - $i] * 2 : self::$_ranges[$total_months - $i];
+                self::$_ranges[$total_months - $i] = $total_months - $i == 2 ? self::$_ranges[$total_months - $i] * 1.5 : self::$_ranges[$total_months - $i];
             }
         }
         return self::$_ranges;
@@ -916,12 +921,12 @@ class OpportunitiesSeedData {
         $now->modify("-$monthDelta month");
 
         if ($monthDelta == 0 && $now->day == 1) {
-            $now->modify("-1 day");
+            $now->modify('-1 day');
             $day = $now->day;
         } else {
             // random day from start of month to now
-            $tmpDay = ($now->day-1 != 0) ? $now->day-1 : 1;
-            $day =  random_int(1, $tmpDay);
+            $tmpDay = ($now->day - 1 != 0) ? $now->day - 1 : 1;
+            $day = random_int(1, $tmpDay);
         }
         $now->setTime(0, 0, 0); // always default it to midnight
         return $timedate->asDbDate($now->get_day_begin($day));
@@ -943,7 +948,7 @@ class OpportunitiesSeedData {
         foreach ($indices as $key => $index) {
             if (!empty($index['fields']) &&
                 is_array($index['fields']) &&
-                in_array($name, $index['fields'])) {
+                safeInArray($name, $index['fields'])) {
                 $indexDef = $index;
                 break;
             }
@@ -967,7 +972,7 @@ class OpportunitiesSeedData {
      */
     private static function toDatabaseArray(SugarBean $bean): array
     {
-        return array_filter($bean->toArray(), static function ($key) use ($bean) : bool {
+        return array_filter($bean->toArray(), static function ($key) use ($bean): bool {
             $data = $bean->field_defs[$key];
             return !isset($data['source']) || $data['source'] === 'db';
         }, ARRAY_FILTER_USE_KEY);

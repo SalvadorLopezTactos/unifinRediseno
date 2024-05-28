@@ -26,7 +26,7 @@ class Device extends DirectoryObject
 {
     /**
     * Gets the accountEnabled
-    * true if the account is enabled; otherwise, false. default is true.
+    * true if the account is enabled; otherwise, false. Default is true.  Supports $filter (eq, ne, not, in). Only callers in Global Administrator and Cloud Device Administrator roles can set this property.
     *
     * @return bool|null The accountEnabled
     */
@@ -38,10 +38,10 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the accountEnabled
-    * true if the account is enabled; otherwise, false. default is true.
+    * true if the account is enabled; otherwise, false. Default is true.  Supports $filter (eq, ne, not, in). Only callers in Global Administrator and Cloud Device Administrator roles can set this property.
     *
     * @param bool $val The accountEnabled
     *
@@ -52,11 +52,11 @@ class Device extends DirectoryObject
         $this->_propDict["accountEnabled"] = boolval($val);
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the alternativeSecurityIds
-    * For internal use only. Not nullable.
+    * For internal use only. Not nullable. Supports $filter (eq, not, ge, le).
      *
      * @return array|null The alternativeSecurityIds
      */
@@ -68,12 +68,12 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the alternativeSecurityIds
-    * For internal use only. Not nullable.
+    * For internal use only. Not nullable. Supports $filter (eq, not, ge, le).
     *
-    * @param AlternativeSecurityId $val The alternativeSecurityIds
+    * @param AlternativeSecurityId[] $val The alternativeSecurityIds
     *
     * @return Device
     */
@@ -82,10 +82,10 @@ class Device extends DirectoryObject
         $this->_propDict["alternativeSecurityIds"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the approximateLastSignInDateTime
-    * The timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
+    * The timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only. Supports $filter (eq, ne, not, ge, le, and eq on null values) and $orderBy.
     *
     * @return \DateTime|null The approximateLastSignInDateTime
     */
@@ -101,10 +101,10 @@ class Device extends DirectoryObject
         }
         return null;
     }
-    
+
     /**
     * Sets the approximateLastSignInDateTime
-    * The timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
+    * The timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only. Supports $filter (eq, ne, not, ge, le, and eq on null values) and $orderBy.
     *
     * @param \DateTime $val The approximateLastSignInDateTime
     *
@@ -115,7 +115,7 @@ class Device extends DirectoryObject
         $this->_propDict["approximateLastSignInDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the complianceExpirationDateTime
     * The timestamp when the device is no longer deemed compliant. The timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
@@ -134,7 +134,7 @@ class Device extends DirectoryObject
         }
         return null;
     }
-    
+
     /**
     * Sets the complianceExpirationDateTime
     * The timestamp when the device is no longer deemed compliant. The timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
@@ -148,7 +148,7 @@ class Device extends DirectoryObject
         $this->_propDict["complianceExpirationDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the deviceCategory
     * User-defined property set by Intune to automatically add devices to groups and simplify managing devices.
@@ -163,7 +163,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the deviceCategory
     * User-defined property set by Intune to automatically add devices to groups and simplify managing devices.
@@ -177,10 +177,10 @@ class Device extends DirectoryObject
         $this->_propDict["deviceCategory"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the deviceId
-    * Identifier set by Azure Device Registration Service at the time of registration.
+    * Unique Identifier set by Azure Device Registration Service at the time of registration. This is an alternate key that can be used to reference the device object. Also Supports $filter (eq, ne, not, startsWith).
     *
     * @return string|null The deviceId
     */
@@ -192,10 +192,10 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the deviceId
-    * Identifier set by Azure Device Registration Service at the time of registration.
+    * Unique Identifier set by Azure Device Registration Service at the time of registration. This is an alternate key that can be used to reference the device object. Also Supports $filter (eq, ne, not, startsWith).
     *
     * @param string $val The deviceId
     *
@@ -206,7 +206,7 @@ class Device extends DirectoryObject
         $this->_propDict["deviceId"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the deviceMetadata
     * For internal use only. Set to null.
@@ -221,7 +221,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the deviceMetadata
     * For internal use only. Set to null.
@@ -235,7 +235,7 @@ class Device extends DirectoryObject
         $this->_propDict["deviceMetadata"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the deviceOwnership
     * Ownership of the device. This property is set by Intune. Possible values are: unknown, company, personal.
@@ -250,7 +250,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the deviceOwnership
     * Ownership of the device. This property is set by Intune. Possible values are: unknown, company, personal.
@@ -264,7 +264,7 @@ class Device extends DirectoryObject
         $this->_propDict["deviceOwnership"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the deviceVersion
     * For internal use only.
@@ -279,7 +279,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the deviceVersion
     * For internal use only.
@@ -293,10 +293,10 @@ class Device extends DirectoryObject
         $this->_propDict["deviceVersion"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the displayName
-    * The display name for the device. Required.
+    * The display name for the device. Required. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values), $search, and $orderBy.
     *
     * @return string|null The displayName
     */
@@ -308,10 +308,10 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the displayName
-    * The display name for the device. Required.
+    * The display name for the device. Required. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values), $search, and $orderBy.
     *
     * @param string $val The displayName
     *
@@ -322,7 +322,7 @@ class Device extends DirectoryObject
         $this->_propDict["displayName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the domainName
     * The on-premises domain name of Hybrid Azure AD joined devices. This property is set by Intune.
@@ -337,7 +337,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the domainName
     * The on-premises domain name of Hybrid Azure AD joined devices. This property is set by Intune.
@@ -351,7 +351,7 @@ class Device extends DirectoryObject
         $this->_propDict["domainName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the enrollmentProfileName
     * Enrollment profile applied to the device. For example, Apple Device Enrollment Profile, Device enrollment - Corporate device identifiers, or Windows Autopilot profile name. This property is set by Intune.
@@ -366,7 +366,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the enrollmentProfileName
     * Enrollment profile applied to the device. For example, Apple Device Enrollment Profile, Device enrollment - Corporate device identifiers, or Windows Autopilot profile name. This property is set by Intune.
@@ -380,7 +380,7 @@ class Device extends DirectoryObject
         $this->_propDict["enrollmentProfileName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the enrollmentType
     * Enrollment type of the device. This property is set by Intune. Possible values are: unknown, userEnrollment, deviceEnrollmentManager, appleBulkWithUser, appleBulkWithoutUser, windowsAzureADJoin, windowsBulkUserless, windowsAutoEnrollment, windowsBulkAzureDomainJoin, windowsCoManagement.
@@ -395,7 +395,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the enrollmentType
     * Enrollment type of the device. This property is set by Intune. Possible values are: unknown, userEnrollment, deviceEnrollmentManager, appleBulkWithUser, appleBulkWithoutUser, windowsAzureADJoin, windowsBulkUserless, windowsAutoEnrollment, windowsBulkAzureDomainJoin, windowsCoManagement.
@@ -409,9 +409,10 @@ class Device extends DirectoryObject
         $this->_propDict["enrollmentType"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the extensionAttributes
+    * Contains extension attributes 1-15 for the device. The individual extension attributes are not selectable. These properties are mastered in cloud and can be set during creation or update of a device object in Azure AD. Supports $filter (eq, not, startsWith, and eq on null values).
     *
     * @return OnPremisesExtensionAttributes|null The extensionAttributes
     */
@@ -427,9 +428,10 @@ class Device extends DirectoryObject
         }
         return null;
     }
-    
+
     /**
     * Sets the extensionAttributes
+    * Contains extension attributes 1-15 for the device. The individual extension attributes are not selectable. These properties are mastered in cloud and can be set during creation or update of a device object in Azure AD. Supports $filter (eq, not, startsWith, and eq on null values).
     *
     * @param OnPremisesExtensionAttributes $val The extensionAttributes
     *
@@ -440,12 +442,12 @@ class Device extends DirectoryObject
         $this->_propDict["extensionAttributes"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the hostnames
     * List of hostNames for the device.
     *
-    * @return string|null The hostnames
+    * @return array|null The hostnames
     */
     public function getHostnames()
     {
@@ -455,12 +457,12 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the hostnames
     * List of hostNames for the device.
     *
-    * @param string $val The hostnames
+    * @param string[] $val The hostnames
     *
     * @return Device
     */
@@ -469,10 +471,10 @@ class Device extends DirectoryObject
         $this->_propDict["hostnames"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the isCompliant
-    * true if the device complies with Mobile Device Management (MDM) policies; otherwise, false. Read-only. This can only be updated by Intune for any device OS type or by an approved MDM app for Windows OS devices.
+    * true if the device complies with Mobile Device Management (MDM) policies; otherwise, false. Read-only. This can only be updated by Intune for any device OS type or by an approved MDM app for Windows OS devices. Supports $filter (eq, ne, not).
     *
     * @return bool|null The isCompliant
     */
@@ -484,10 +486,10 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the isCompliant
-    * true if the device complies with Mobile Device Management (MDM) policies; otherwise, false. Read-only. This can only be updated by Intune for any device OS type or by an approved MDM app for Windows OS devices.
+    * true if the device complies with Mobile Device Management (MDM) policies; otherwise, false. Read-only. This can only be updated by Intune for any device OS type or by an approved MDM app for Windows OS devices. Supports $filter (eq, ne, not).
     *
     * @param bool $val The isCompliant
     *
@@ -498,10 +500,10 @@ class Device extends DirectoryObject
         $this->_propDict["isCompliant"] = boolval($val);
         return $this;
     }
-    
+
     /**
     * Gets the isManaged
-    * true if the device is managed by a Mobile Device Management (MDM) app; otherwise, false. This can only be updated by Intune for any device OS type or by an approved MDM app for Windows OS devices.
+    * true if the device is managed by a Mobile Device Management (MDM) app; otherwise, false. This can only be updated by Intune for any device OS type or by an approved MDM app for Windows OS devices. Supports $filter (eq, ne, not).
     *
     * @return bool|null The isManaged
     */
@@ -513,10 +515,10 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the isManaged
-    * true if the device is managed by a Mobile Device Management (MDM) app; otherwise, false. This can only be updated by Intune for any device OS type or by an approved MDM app for Windows OS devices.
+    * true if the device is managed by a Mobile Device Management (MDM) app; otherwise, false. This can only be updated by Intune for any device OS type or by an approved MDM app for Windows OS devices. Supports $filter (eq, ne, not).
     *
     * @param bool $val The isManaged
     *
@@ -527,7 +529,36 @@ class Device extends DirectoryObject
         $this->_propDict["isManaged"] = boolval($val);
         return $this;
     }
-    
+
+    /**
+    * Gets the isManagementRestricted
+    * true if the device is a member of a restricted management administrative unit, in which case it requires a role scoped to the restricted administrative unit to manage. Default value is false. Read-only.  To manage a device that's a member of a restricted administrative unit, the calling app must be assigned the Directory.Write.Restricted permission. For delegated scenarios, the administrators must also be explicitly assigned supported roles at the restricted administrative unit scope.
+    *
+    * @return bool|null The isManagementRestricted
+    */
+    public function getIsManagementRestricted()
+    {
+        if (array_key_exists("isManagementRestricted", $this->_propDict)) {
+            return $this->_propDict["isManagementRestricted"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the isManagementRestricted
+    * true if the device is a member of a restricted management administrative unit, in which case it requires a role scoped to the restricted administrative unit to manage. Default value is false. Read-only.  To manage a device that's a member of a restricted administrative unit, the calling app must be assigned the Directory.Write.Restricted permission. For delegated scenarios, the administrators must also be explicitly assigned supported roles at the restricted administrative unit scope.
+    *
+    * @param bool $val The isManagementRestricted
+    *
+    * @return Device
+    */
+    public function setIsManagementRestricted($val)
+    {
+        $this->_propDict["isManagementRestricted"] = boolval($val);
+        return $this;
+    }
+
     /**
     * Gets the isRooted
     * true if device is rooted; false if device is jail-broken. This can only be updated by Intune.
@@ -542,7 +573,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the isRooted
     * true if device is rooted; false if device is jail-broken. This can only be updated by Intune.
@@ -556,7 +587,7 @@ class Device extends DirectoryObject
         $this->_propDict["isRooted"] = boolval($val);
         return $this;
     }
-    
+
     /**
     * Gets the managementType
     * Management channel of the device.  This property is set by Intune. Possible values are: eas, mdm, easMdm, intuneClient, easIntuneClient, configurationManagerClient, configurationManagerClientMdm, configurationManagerClientMdmEas, unknown, jamf, googleCloudDevicePolicyController.
@@ -571,7 +602,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the managementType
     * Management channel of the device.  This property is set by Intune. Possible values are: eas, mdm, easMdm, intuneClient, easIntuneClient, configurationManagerClient, configurationManagerClientMdm, configurationManagerClientMdmEas, unknown, jamf, googleCloudDevicePolicyController.
@@ -585,10 +616,39 @@ class Device extends DirectoryObject
         $this->_propDict["managementType"] = $val;
         return $this;
     }
-    
+
+    /**
+    * Gets the mdmAppId
+    * Application identifier used to register device into MDM. Read-only. Supports $filter (eq, ne, not, startsWith).
+    *
+    * @return string|null The mdmAppId
+    */
+    public function getMdmAppId()
+    {
+        if (array_key_exists("mdmAppId", $this->_propDict)) {
+            return $this->_propDict["mdmAppId"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the mdmAppId
+    * Application identifier used to register device into MDM. Read-only. Supports $filter (eq, ne, not, startsWith).
+    *
+    * @param string $val The mdmAppId
+    *
+    * @return Device
+    */
+    public function setMdmAppId($val)
+    {
+        $this->_propDict["mdmAppId"] = $val;
+        return $this;
+    }
+
     /**
     * Gets the onPremisesLastSyncDateTime
-    * The last time at which the object was synced with the on-premises directory. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z Read-only.
+    * The last time at which the object was synced with the on-premises directory. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z Read-only. Supports $filter (eq, ne, not, ge, le, in).
     *
     * @return \DateTime|null The onPremisesLastSyncDateTime
     */
@@ -604,10 +664,10 @@ class Device extends DirectoryObject
         }
         return null;
     }
-    
+
     /**
     * Sets the onPremisesLastSyncDateTime
-    * The last time at which the object was synced with the on-premises directory. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z Read-only.
+    * The last time at which the object was synced with the on-premises directory. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z Read-only. Supports $filter (eq, ne, not, ge, le, in).
     *
     * @param \DateTime $val The onPremisesLastSyncDateTime
     *
@@ -618,10 +678,10 @@ class Device extends DirectoryObject
         $this->_propDict["onPremisesLastSyncDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the onPremisesSyncEnabled
-    * true if this object is synced from an on-premises directory; false if this object was originally synced from an on-premises directory but is no longer synced; null if this object has never been synced from an on-premises directory (default). Read-only.
+    * true if this object is synced from an on-premises directory; false if this object was originally synced from an on-premises directory but is no longer synced; null if this object has never been synced from an on-premises directory (default). Read-only. Supports $filter (eq, ne, not, in, and eq on null values).
     *
     * @return bool|null The onPremisesSyncEnabled
     */
@@ -633,10 +693,10 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the onPremisesSyncEnabled
-    * true if this object is synced from an on-premises directory; false if this object was originally synced from an on-premises directory but is no longer synced; null if this object has never been synced from an on-premises directory (default). Read-only.
+    * true if this object is synced from an on-premises directory; false if this object was originally synced from an on-premises directory but is no longer synced; null if this object has never been synced from an on-premises directory (default). Read-only. Supports $filter (eq, ne, not, in, and eq on null values).
     *
     * @param bool $val The onPremisesSyncEnabled
     *
@@ -647,10 +707,10 @@ class Device extends DirectoryObject
         $this->_propDict["onPremisesSyncEnabled"] = boolval($val);
         return $this;
     }
-    
+
     /**
     * Gets the operatingSystem
-    * The type of operating system on the device. Required.
+    * The type of operating system on the device. Required. Supports $filter (eq, ne, not, ge, le, startsWith, and eq on null values).
     *
     * @return string|null The operatingSystem
     */
@@ -662,10 +722,10 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the operatingSystem
-    * The type of operating system on the device. Required.
+    * The type of operating system on the device. Required. Supports $filter (eq, ne, not, ge, le, startsWith, and eq on null values).
     *
     * @param string $val The operatingSystem
     *
@@ -676,10 +736,10 @@ class Device extends DirectoryObject
         $this->_propDict["operatingSystem"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the operatingSystemVersion
-    * Operating system version of the device. Required.
+    * Operating system version of the device. Required. Supports $filter (eq, ne, not, ge, le, startsWith, and eq on null values).
     *
     * @return string|null The operatingSystemVersion
     */
@@ -691,10 +751,10 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the operatingSystemVersion
-    * Operating system version of the device. Required.
+    * Operating system version of the device. Required. Supports $filter (eq, ne, not, ge, le, startsWith, and eq on null values).
     *
     * @param string $val The operatingSystemVersion
     *
@@ -705,12 +765,12 @@ class Device extends DirectoryObject
         $this->_propDict["operatingSystemVersion"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the physicalIds
-    * For internal use only. Not nullable.
+    * For internal use only. Not nullable. Supports $filter (eq, not, ge, le, startsWith, /$count eq 0, /$count ne 0.
     *
-    * @return string|null The physicalIds
+    * @return array|null The physicalIds
     */
     public function getPhysicalIds()
     {
@@ -720,12 +780,12 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the physicalIds
-    * For internal use only. Not nullable.
+    * For internal use only. Not nullable. Supports $filter (eq, not, ge, le, startsWith, /$count eq 0, /$count ne 0.
     *
-    * @param string $val The physicalIds
+    * @param string[] $val The physicalIds
     *
     * @return Device
     */
@@ -734,7 +794,7 @@ class Device extends DirectoryObject
         $this->_propDict["physicalIds"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the profileType
     * The profile type of the device. Possible values: RegisteredDevice (default), SecureVM, Printer, Shared, IoT.
@@ -749,7 +809,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the profileType
     * The profile type of the device. Possible values: RegisteredDevice (default), SecureVM, Printer, Shared, IoT.
@@ -763,7 +823,7 @@ class Device extends DirectoryObject
         $this->_propDict["profileType"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the registrationDateTime
     * Date and time of when the device was registered. The timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
@@ -782,7 +842,7 @@ class Device extends DirectoryObject
         }
         return null;
     }
-    
+
     /**
     * Sets the registrationDateTime
     * Date and time of when the device was registered. The timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
@@ -796,12 +856,12 @@ class Device extends DirectoryObject
         $this->_propDict["registrationDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the systemLabels
-    * List of labels applied to the device by the system.
+    * List of labels applied to the device by the system. Supports $filter (/$count eq 0, /$count ne 0).
     *
-    * @return string|null The systemLabels
+    * @return array|null The systemLabels
     */
     public function getSystemLabels()
     {
@@ -811,12 +871,12 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the systemLabels
-    * List of labels applied to the device by the system.
+    * List of labels applied to the device by the system. Supports $filter (/$count eq 0, /$count ne 0).
     *
-    * @param string $val The systemLabels
+    * @param string[] $val The systemLabels
     *
     * @return Device
     */
@@ -825,7 +885,7 @@ class Device extends DirectoryObject
         $this->_propDict["systemLabels"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the trustType
     * Type of trust for the joined device. Read-only. Possible values: Workplace (indicates bring your own personal devices), AzureAd (Cloud only joined devices), ServerAd (on-premises domain joined devices joined to Azure AD). For more details, see Introduction to device management in Azure Active Directory
@@ -840,7 +900,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the trustType
     * Type of trust for the joined device. Read-only. Possible values: Workplace (indicates bring your own personal devices), AzureAd (Cloud only joined devices), ServerAd (on-premises domain joined devices joined to Azure AD). For more details, see Introduction to device management in Azure Active Directory
@@ -854,7 +914,7 @@ class Device extends DirectoryObject
         $this->_propDict["trustType"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the kind
     * Form factor of device. Only returned if user signs in with a Microsoft account as part of Project Rome.
@@ -869,7 +929,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the kind
     * Form factor of device. Only returned if user signs in with a Microsoft account as part of Project Rome.
@@ -883,7 +943,7 @@ class Device extends DirectoryObject
         $this->_propDict["kind"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the manufacturer
     * Manufacturer of the device. Read-only.
@@ -898,7 +958,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the manufacturer
     * Manufacturer of the device. Read-only.
@@ -912,7 +972,7 @@ class Device extends DirectoryObject
         $this->_propDict["manufacturer"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the model
     * Model of the device. Read-only.
@@ -927,7 +987,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the model
     * Model of the device. Read-only.
@@ -941,7 +1001,7 @@ class Device extends DirectoryObject
         $this->_propDict["model"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the name
     * Friendly name of a device. Only returned if user signs in with a Microsoft account as part of Project Rome.
@@ -956,7 +1016,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the name
     * Friendly name of a device. Only returned if user signs in with a Microsoft account as part of Project Rome.
@@ -970,7 +1030,7 @@ class Device extends DirectoryObject
         $this->_propDict["name"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the platform
     * Platform of device. Only returned if user signs in with a Microsoft account as part of Project Rome. Only returned if user signs in with a Microsoft account as part of Project Rome.
@@ -985,7 +1045,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the platform
     * Platform of device. Only returned if user signs in with a Microsoft account as part of Project Rome. Only returned if user signs in with a Microsoft account as part of Project Rome.
@@ -999,7 +1059,7 @@ class Device extends DirectoryObject
         $this->_propDict["platform"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the status
     * Device is online or offline. Only returned if user signs in with a Microsoft account as part of Project Rome.
@@ -1014,7 +1074,7 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the status
     * Device is online or offline. Only returned if user signs in with a Microsoft account as part of Project Rome.
@@ -1028,9 +1088,9 @@ class Device extends DirectoryObject
         $this->_propDict["status"] = $val;
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the usageRights
     * Represents the usage rights a device has been granted.
      *
@@ -1044,12 +1104,12 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the usageRights
     * Represents the usage rights a device has been granted.
     *
-    * @param UsageRight $val The usageRights
+    * @param UsageRight[] $val The usageRights
     *
     * @return Device
     */
@@ -1058,11 +1118,11 @@ class Device extends DirectoryObject
         $this->_propDict["usageRights"] = $val;
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the memberOf
-    * Groups that this device is a member of. Read-only. Nullable.
+    * Groups and administrative units that this device is a member of. Read-only. Nullable. Supports $expand.
      *
      * @return array|null The memberOf
      */
@@ -1074,12 +1134,12 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the memberOf
-    * Groups that this device is a member of. Read-only. Nullable.
+    * Groups and administrative units that this device is a member of. Read-only. Nullable. Supports $expand.
     *
-    * @param DirectoryObject $val The memberOf
+    * @param DirectoryObject[] $val The memberOf
     *
     * @return Device
     */
@@ -1088,11 +1148,11 @@ class Device extends DirectoryObject
         $this->_propDict["memberOf"] = $val;
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the registeredOwners
-    * The user that cloud joined the device or registered their personal device. The registered owner is set at the time of registration. Currently, there can be only one owner. Read-only. Nullable.
+    * The user that cloud joined the device or registered their personal device. The registered owner is set at the time of registration. Read-only. Nullable. Supports $expand.
      *
      * @return array|null The registeredOwners
      */
@@ -1104,12 +1164,12 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the registeredOwners
-    * The user that cloud joined the device or registered their personal device. The registered owner is set at the time of registration. Currently, there can be only one owner. Read-only. Nullable.
+    * The user that cloud joined the device or registered their personal device. The registered owner is set at the time of registration. Read-only. Nullable. Supports $expand.
     *
-    * @param DirectoryObject $val The registeredOwners
+    * @param DirectoryObject[] $val The registeredOwners
     *
     * @return Device
     */
@@ -1118,11 +1178,11 @@ class Device extends DirectoryObject
         $this->_propDict["registeredOwners"] = $val;
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the registeredUsers
-    * Collection of registered users of the device. For cloud joined devices and registered personal devices, registered users are set to the same value as registered owners at the time of registration. Read-only. Nullable.
+    * Collection of registered users of the device. For cloud joined devices and registered personal devices, registered users are set to the same value as registered owners at the time of registration. Read-only. Nullable. Supports $expand.
      *
      * @return array|null The registeredUsers
      */
@@ -1134,12 +1194,12 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the registeredUsers
-    * Collection of registered users of the device. For cloud joined devices and registered personal devices, registered users are set to the same value as registered owners at the time of registration. Read-only. Nullable.
+    * Collection of registered users of the device. For cloud joined devices and registered personal devices, registered users are set to the same value as registered owners at the time of registration. Read-only. Nullable. Supports $expand.
     *
-    * @param DirectoryObject $val The registeredUsers
+    * @param DirectoryObject[] $val The registeredUsers
     *
     * @return Device
     */
@@ -1148,11 +1208,11 @@ class Device extends DirectoryObject
         $this->_propDict["registeredUsers"] = $val;
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the transitiveMemberOf
-    * Groups that this device is a member of. This operation is transitive.
+    * Groups and administrative units that this device is a member of. This operation is transitive. Supports $expand.
      *
      * @return array|null The transitiveMemberOf
      */
@@ -1164,12 +1224,12 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the transitiveMemberOf
-    * Groups that this device is a member of. This operation is transitive.
+    * Groups and administrative units that this device is a member of. This operation is transitive. Supports $expand.
     *
-    * @param DirectoryObject $val The transitiveMemberOf
+    * @param DirectoryObject[] $val The transitiveMemberOf
     *
     * @return Device
     */
@@ -1178,9 +1238,9 @@ class Device extends DirectoryObject
         $this->_propDict["transitiveMemberOf"] = $val;
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the extensions
     * The collection of open extensions defined for the device. Read-only. Nullable.
      *
@@ -1194,12 +1254,12 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the extensions
     * The collection of open extensions defined for the device. Read-only. Nullable.
     *
-    * @param Extension $val The extensions
+    * @param Extension[] $val The extensions
     *
     * @return Device
     */
@@ -1208,9 +1268,9 @@ class Device extends DirectoryObject
         $this->_propDict["extensions"] = $val;
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the commands
     * Set of commands sent to this device.
      *
@@ -1224,12 +1284,12 @@ class Device extends DirectoryObject
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the commands
     * Set of commands sent to this device.
     *
-    * @param Command $val The commands
+    * @param Command[] $val The commands
     *
     * @return Device
     */
@@ -1238,5 +1298,5 @@ class Device extends DirectoryObject
         $this->_propDict["commands"] = $val;
         return $this;
     }
-    
+
 }

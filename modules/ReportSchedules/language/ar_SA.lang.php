@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'جداول التقرير',
     'LBL_MODULE_NAME_SINGULAR' => 'جدول التقرير',
     'LBL_REPORT_NAME' => 'التقرير',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'نوع (أنواع) الملفات',
     'LBL_EMBED_REPORT' => 'تضمين التقرير في البريد الإلكتروني',
     'LBL_EMBED_REPORT_INFO' => 'ملاحظة: إذا تجاوز التقرير 200 صف، فسوف نرفق التقرير كملف CSV.',
-);
+];

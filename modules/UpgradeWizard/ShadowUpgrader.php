@@ -16,21 +16,21 @@ require_once 'CliUpgrader.php';
  */
 class ShadowUpgrader extends CliUpgrader
 {
-    protected $options = array(
+    protected $options = [
         // required, short, long
-        'pre_template' => array(true, 'f', 'from'),
-        'post_template' => array(true, 't', 'to'),
-        "source_dir" => array(true, 's', 'source'),
-        "log" => array(true, 'l', 'log'),
-        "admin" => array(true, 'u', 'user'),
-        "backup" => array(false, 'b', 'backup'),
-        "script_mask" => array(false, 'm', 'mask'),
-        "stage" => array(false, 'S', 'stage'),
-        "autoconfirm" => array(false, 'A', 'autoconfirm'),
-        "force" => array(false, 'F', 'force'),
+        'pre_template' => [true, 'f', 'from'],
+        'post_template' => [true, 't', 'to'],
+        'source_dir' => [true, 's', 'source'],
+        'log' => [true, 'l', 'log'],
+        'admin' => [true, 'u', 'user'],
+        'backup' => [false, 'b', 'backup'],
+        'script_mask' => [false, 'm', 'mask'],
+        'stage' => [false, 'S', 'stage'],
+        'autoconfirm' => [false, 'A', 'autoconfirm'],
+        'force' => [false, 'F', 'force'],
         // Appears when stage was not specified and upgrader is running step by step.
-        'all' => array(false, 'a', 'all'),
-    );
+        'all' => [false, 'a', 'all'],
+    ];
 
     /**
      * @see CliUpgrader::usage()
@@ -47,7 +47,7 @@ class ShadowUpgrader extends CliUpgrader
     protected static function usage()
     {
         [$version, $build] = static::getVersion();
-    	$usage =<<<eoq2
+        $usage = <<<eoq2
 Shadow Upgrader v.$version (build $build)
 php ShadowUpgrader.php -f oldTemplate -t newTemplate -s pathToSugarInstance -l logFile -u admin-user
 
@@ -70,40 +70,40 @@ Optional arguments:
     -F/--force 0/1                       : Force upgrade regardless of health check results, default is 0 (use with caution !)
 
 eoq2;
-    	echo $usage;
+        echo $usage;
     }
 
     /**
-     * @see UpgradeDriver::verifyArguments()
      * @return bool
+     * @see UpgradeDriver::verifyArguments()
      */
     protected function verifyArguments()
     {
-        if(!function_exists("shadow")) {
-            $this->argError("Shadow module should be installed to run this script.");
+        if (!function_exists('shadow')) {
+            $this->argError('Shadow module should be installed to run this script.');
         }
 
-        if(empty($this->context['source_dir']) || !is_dir($this->context['source_dir'])) {
-            $this->argError("Source dir parameter must be a valid directory.");
+        if (empty($this->context['source_dir']) || !is_dir($this->context['source_dir'])) {
+            $this->argError('Source dir parameter must be a valid directory.');
         }
 
-        if(empty($this->context['pre_template']) || empty($this->context['post_template'])) {
-            $this->argError("Templates should be specified");
+        if (empty($this->context['pre_template']) || empty($this->context['post_template'])) {
+            $this->argError('Templates should be specified');
         }
 
-        if(!is_file("{$this->context['pre_template']}/include/entryPoint.php")) {
+        if (!is_file("{$this->context['pre_template']}/include/entryPoint.php")) {
             $this->argError("{$this->context['pre_template']} is not a SugarCRM template.");
         }
 
-        if(!is_file("{$this->context['post_template']}/include/entryPoint.php")) {
+        if (!is_file("{$this->context['post_template']}/include/entryPoint.php")) {
             $this->argError("{$this->context['post_template']} is not a SugarCRM template.");
         }
 
-        if(!is_file("{$this->context['source_dir']}/config.php")) {
+        if (!is_file("{$this->context['source_dir']}/config.php")) {
             $this->argError("{$this->context['source_dir']} is not a SugarCRM directory.");
         }
 
-    	return true;
+        return true;
     }
 
     /**
@@ -116,7 +116,7 @@ eoq2;
         $parts = explode(DIRECTORY_SEPARATOR, $path);
         $f = array_pop($parts);
         $v = array_pop($parts);
-        return $v.$f;
+        return $v . $f;
     }
 
     /**
@@ -134,10 +134,10 @@ eoq2;
         $to = $this->getVersionFromPath($context['post_template']);
         $context['zip'] = "ShadowUpgrade-$from-$to";
         // only use custom and DB scripts
-        if(isset($context['script_mask'])) {
-            $context['script_mask'] &= UpgradeScript::UPGRADE_CUSTOM|UpgradeScript::UPGRADE_DB;
+        if (isset($context['script_mask'])) {
+            $context['script_mask'] &= UpgradeScript::UPGRADE_CUSTOM | UpgradeScript::UPGRADE_DB;
         } else {
-            $context['script_mask'] = UpgradeScript::UPGRADE_CUSTOM|UpgradeScript::UPGRADE_DB;
+            $context['script_mask'] = UpgradeScript::UPGRADE_CUSTOM | UpgradeScript::UPGRADE_DB;
         }
         $context['new_source_dir'] = $context['post_template'];
         $context['original_source_dir'] = $context['source_dir'];
@@ -150,9 +150,9 @@ eoq2;
     }
 
     /**
-     * @see CliUpgrader::extractZip()
      * @param string $zip
      * @return bool|false
+     * @see CliUpgrader::extractZip()
      */
     protected function extractZip($zip)
     {
@@ -161,17 +161,17 @@ eoq2;
     }
 
     /**
-     * @see CliUpgrader::unlink()
      * @param string $file
      * @return bool
+     * @see CliUpgrader::unlink()
      */
     public function unlink($file)
     {
-        if($file[0] == '/') {
+        if ($file[0] == '/') {
             return parent::unlink($file);
         }
         // check relative paths against source dir
-        if(file_exists($this->context['source_dir']."/".$file)) {
+        if (file_exists($this->context['source_dir'] . '/' . $file)) {
             return @unlink($file);
         }
         return true;
@@ -194,29 +194,29 @@ eoq2;
     }
 
     /**
-     * @see CliUpgrader::getManifest()
      * @return array
+     * @see CliUpgrader::getManifest()
      */
     public function getManifest()
     {
         // load target data
         [$to_version, $to_flavor] = $this->getToVersion();
         // return fake manifest
-        return array(
+        return [
             'description' => 'Shadow Upgrade from {$this->from_version}/{$this->from_flavor} to $to_version/$to_flavor',
-            'acceptable_sugar_flavors' => array($this->from_flavor),
-            'acceptable_sugar_versions' => array('exact_matches' => array($this->from_version)),
+            'acceptable_sugar_flavors' => [$this->from_flavor],
+            'acceptable_sugar_versions' => ['exact_matches' => [$this->from_version]],
             'type' => 'patch',
             'version' => $to_version,
             'flavor' => $to_flavor,
-        );
+        ];
     }
 
     /**
-     * @see CliUpgrader::verify()
      * @param string $zip
      * @param string $dir
      * @return bool|false
+     * @see CliUpgrader::verify()
      */
     protected function verify($zip, $dir)
     {
@@ -229,21 +229,21 @@ eoq2;
      */
     protected function initSugar()
     {
-        if($this->context['stage'] == 'pre' || $this->context['stage'] == 'unpack'  || $this->context['stage'] == 'healthcheck' ) {
+        if ($this->context['stage'] == 'pre' || $this->context['stage'] == 'unpack' || $this->context['stage'] == 'healthcheck') {
             $templ_dir = $this->context['pre_template'];
         } else {
             $templ_dir = $this->context['post_template'];
         }
         chdir($templ_dir);
         $this->log("Shadow configuration: $templ_dir -> {$this->context['original_source_dir']}");
-        shadow($templ_dir, $this->context['original_source_dir'], array("cache", "upload", "config.php"));
+        shadow($templ_dir, $this->context['original_source_dir'], ['cache', 'upload', 'config.php']);
         $this->context['source_dir'] = $templ_dir;
         return parent::initSugar();
     }
 
     /**
-     * @see CliUpgrader::healthcheck()
      * @return bool
+     * @see CliUpgrader::healthcheck()
      */
     public function healthcheck()
     {
@@ -252,8 +252,8 @@ eoq2;
     }
 
     /**
-     * @see UpgradeDriver::getPackageUid()
      * @return string
+     * @see UpgradeDriver::getPackageUid()
      */
     protected function getPackageUid()
     {
@@ -261,16 +261,16 @@ eoq2;
     }
 
     /**
-     * @see UpgradeDriver::getScripts()
-     *
      * @param string $dir Sugar directory
      * @param string $stage
      * @return array
+     * @see UpgradeDriver::getScripts()
+     *
      */
     protected function getScripts($dir, $stage)
     {
         //For the pre stage step, use the post template location
-        if($stage == 'pre') {
+        if ($stage == 'pre') {
             $dir = $this->context['post_template'];
             $this->log("Pre stage will get scripts from location: $dir");
         }
@@ -298,11 +298,13 @@ eoq2;
     }
 }
 
-if(empty($argv[0]) || basename($argv[0]) != basename(__FILE__)) return;
+if (empty($argv[0]) || basename($argv[0]) != basename(__FILE__)) {
+    return;
+}
 
 $sapi_type = php_sapi_name();
 if (substr($sapi_type, 0, 3) != 'cli') {
-    die("This is command-line only script");
+    die('This is command-line only script');
 }
 $upgrader = new ShadowUpgrader();
 $upgrader->start();

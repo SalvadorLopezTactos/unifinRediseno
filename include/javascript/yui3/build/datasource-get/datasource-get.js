@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('datasource-get', function (Y, NAME) {
 
 /**
@@ -213,4 +206,4 @@ Y.DataSource.Get = Y.extend(DSGet, Y.DataSource.Local, {
 YUI.namespace("Env.DataSource.callbacks");
 
 
-}, '3.15.0', {"requires": ["datasource-local", "get"]});
+}, '3.18.1', {"requires": ["datasource-local", "get"]});

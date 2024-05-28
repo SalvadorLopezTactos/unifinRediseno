@@ -136,7 +136,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return array("rollupMin");
+        return ['rollupMin'];
     }
 
     /**
@@ -144,7 +144,7 @@ JS;
      */
     public static function getParameterTypes()
     {
-        return array(AbstractExpression::$RELATE_TYPE, AbstractExpression::$STRING_TYPE);
+        return [AbstractExpression::$RELATE_TYPE, AbstractExpression::$STRING_TYPE];
     }
 
     /**

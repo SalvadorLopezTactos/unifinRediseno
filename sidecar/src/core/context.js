@@ -9,9 +9,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const Bean = require('data/bean');
-const BeanCollection = require('data/bean-collection');
-const DataManager = require('data/data-manager');
+const Bean = require('../data/bean');
+const BeanCollection = require('../data/bean-collection');
+const DataManager = require('../data/data-manager');
 
 /**
  * Helper function to determine if {@link Core/Context#loadData} can be called
@@ -38,7 +38,7 @@ function shouldFetch() {
  * ### Instantiate a context.
  *
  * ```
- * const Context = require('core/context');
+ * const Context = require('./context');
  * let myContext = new Context();
  * ```
  *

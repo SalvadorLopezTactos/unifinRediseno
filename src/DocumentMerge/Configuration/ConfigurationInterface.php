@@ -19,7 +19,7 @@ interface ConfigurationInterface
      *
      * @return string
      */
-    public function getServiceURL() : string;
+    public function getServiceURL(): string;
 
     /**
      * Returns the unique_key from config.

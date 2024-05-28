@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => '진행중',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => '메시지 포커스 서랍',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => '메시지 기록 대시보드',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '메시지 타임라인',
 ];

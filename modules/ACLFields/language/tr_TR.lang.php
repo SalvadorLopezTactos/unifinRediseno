@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_DEFAULT' => 'Belirtilmedi',
     'LBL_READ_WRITE' => 'Okuma/Yazma',
     'LBL_READ_OWNER_WRITE' => 'Okuma/Sahibin Yazabilmesi',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_READ_SELECTED_TEAMS_WRITE' => 'Okuma/(Sahibi ve Seçili Takımlar) Yazma',
     'LBL_SELECTED_TEAMS_READ_OWNER_WRITE' => '(Sahibi ve Seçili Takımlar) Okuma/Sahibi Yazma',
     'LBL_SELECTED_TEAMS_READ_WRITE' => '(Sahibi ve Seçili Takımlar) Okuma/(Sahibi ve Seçili Takımlar) Yazma',
-);
+];

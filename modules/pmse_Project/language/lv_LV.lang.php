@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Procesu definīcijas',
-  'LBL_MODULE_TITLE' => 'Procesu definīcijas',
-  'LBL_MODULE_NAME_SINGULAR' => 'Procesu definīcijas',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Procesu definīcijas',
+    'LBL_MODULE_TITLE' => 'Procesu definīcijas',
+    'LBL_MODULE_NAME_SINGULAR' => 'Procesu definīcijas',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Procesu definīciju fokusa panelis',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Procesu definīciju fokusa panelis',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Procesu definīciju instrumentu panelis',
-  'LNK_LIST' => 'Skatīt procesu definīcijas',
-  'LNK_NEW_PMSE_PROJECT' => 'Izveidot procesa definīciju',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Importēt procesa definīciju',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Procesu definīciju instrumentu panelis',
+    'LNK_LIST' => 'Skatīt procesu definīcijas',
+    'LNK_NEW_PMSE_PROJECT' => 'Izveidot procesa definīciju',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Importēt procesa definīciju',
 
-  'LBL_PRJ_STATUS' => 'Statuss',
-  'LBL_PRJ_MODULE' => 'Mērķa modulis',
-  'LBL_PRJ_RUN_ORDER' => 'Izpildes secība',
-  'LBL_PMSE_BUTTON_SAVE' => 'Saglabāt',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Atcelt',
-  'LBL_PMSE_BUTTON_YES' => 'Jā',
-  'LBL_PMSE_BUTTON_NO' => 'Nē',
-  'LBL_PMSE_BUTTON_OK' => 'Labi',
+    'LBL_PRJ_STATUS' => 'Statuss',
+    'LBL_PRJ_MODULE' => 'Mērķa modulis',
+    'LBL_PRJ_RUN_ORDER' => 'Izpildes secība',
+    'LBL_PMSE_BUTTON_SAVE' => 'Saglabāt',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Atcelt',
+    'LBL_PMSE_BUTTON_YES' => 'Jā',
+    'LBL_PMSE_BUTTON_NO' => 'Nē',
+    'LBL_PMSE_BUTTON_OK' => 'Labi',
     'LBL_PMSE_FORM_ERROR' => 'Pirms turpināšanas izlabojiet kļūdas.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Veidošana',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Darbības',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Darbība',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Interesenta sākuma notikums',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Darījuma sākuma notikums' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Darījuma sākuma notikums',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Dokumenta sākuma notikums',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Sākuma notikums',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Notikuma gaidīšana',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Biznesa noteikums',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Biznesa noteikuma darbība',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'E-pasta veidne',
-);
+];

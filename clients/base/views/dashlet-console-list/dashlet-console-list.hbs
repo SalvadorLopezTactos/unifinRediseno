@@ -46,7 +46,7 @@
                     <thead>
                     <tr>
                         {{#each fields}}
-                            <th class="{{#isSortable ../../module this}}sorting sorting_{{#eq
+                            <th class="relative {{#isSortable ../../module this}}sorting sorting_{{#eq
                                     ../../../collection.orderBy.field
                                     name}}{{../../../../orderBy.direction}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if
                                     widthClass}} {{widthClass}}{{/if}}"

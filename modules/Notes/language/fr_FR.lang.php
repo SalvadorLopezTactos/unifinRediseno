@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Tableau de bord de la liste de notes',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de notes',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Notes',
     'LBL_EXTERNAL_USER' => 'Utilisateur extérieur',
     'LBL_EXTERNAL_USER_NAME' => 'Utilisateur extérieur',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie de la note',
 
     'LBL_RELATED_CONTACT' => 'Contact lié',
     'ERR_DELETE_RECORD' => 'Vous devez spécifier un ID pour toute suppression.',
@@ -126,4 +127,4 @@ $mod_strings = array(
  - Les champs identifiés comme "Obligatoire" doivent être complétés avant la sauvegarde.
  - Cliquer sur "Voir plus" pour afficher plus de champs, si nécessaire.
 2. Cliquer sur "Sauvegarder" pour finaliser l&#39;enregistrement et retourner sur la page précédente.',
-);
+];

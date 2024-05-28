@@ -16,45 +16,49 @@
  */
 class Trigger
 {
-	public $triggerFields = array();
-	public $conditionFunction = "";
-	static $ValueNotSetError = -1;
+    public $triggerFields = [];
+    public $conditionFunction = '';
+    public static $ValueNotSetError = -1;
 
-    public function __construct($condition, $fields = array())
+    public function __construct($condition, $fields = [])
     {
-		$this->conditionFunction = $condition;
-		if (!is_array($fields))
-			$fields = array($fields);
-		$this->triggerFields = $fields;
-	}
+        $this->conditionFunction = $condition;
+        if (!is_array($fields)) {
+            $fields = [$fields];
+        }
+        $this->triggerFields = $fields;
+    }
 
-	function evaluate($target) {
-		$result = Parser::evaluate($this->conditionFunction, $target)->evaluate();
-		if ($result == AbstractExpression::$TRUE){
-			return true;
-		} else {
-			return false;
-		}
-	}
+    public function evaluate($target)
+    {
+        $result = Parser::evaluate($this->conditionFunction, $target)->evaluate();
+        if ($result == AbstractExpression::$TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	function getJavascript() {
-		$js = "new SUGAR.forms.Trigger([";
-		for ($i=0; $i < sizeOf($this->triggerFields); $i++) {
-			$js .= "'{$this->triggerFields[$i]}'";
-			if ($i < sizeOf($this->triggerFields) - 1){
-				$js .= ",";
-			}
-		}
-		$js .= "], '" . str_replace("\n","",$this->conditionFunction) . "')";
-		return $js;
-	}
+    public function getJavascript()
+    {
+        $js = 'new SUGAR.forms.Trigger([';
+        for ($i = 0; $i < sizeOf($this->triggerFields); $i++) {
+            $js .= "'{$this->triggerFields[$i]}'";
+            if ($i < sizeOf($this->triggerFields) - 1) {
+                $js .= ',';
+            }
+        }
+        $js .= "], '" . str_replace("\n", '', $this->conditionFunction) . "')";
+        return $js;
+    }
 
-	function getCondition() {
-		return $this->conditionFunction;
-	}
+    public function getCondition()
+    {
+        return $this->conditionFunction;
+    }
 
-    function getFields(){
+    public function getFields()
+    {
         return $this->triggerFields;
     }
 }
-

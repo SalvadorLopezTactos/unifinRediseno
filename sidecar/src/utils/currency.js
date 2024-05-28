@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const math = require('utils/math');
-const User = require('core/user');
-const Utils = require('utils/utils');
+const math = require('./math');
+const User = require('../core/user');
+const Utils = require('./utils');
 
 /**
  * Currency module provides utility methods for working with currencies.

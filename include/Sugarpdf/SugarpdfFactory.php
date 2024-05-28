@@ -11,26 +11,28 @@
  */
 
 
-class SugarpdfFactory{
+class SugarpdfFactory
+{
     /**
      * load the correct Tcpdf
      * @param string $type Tcpdf Type
      * @return Sugarpdf
      */
-    public static function loadSugarpdf($type, $module, $bean = null, $sugarpdf_object_map = array())
+    public static function loadSugarpdf($type, $module, $bean = null, $sugarpdf_object_map = [])
     {
         $type = strtolower(basename($type));
         //first let's check if the module handles this Tcpdf
         $sugarpdf = null;
-        $path = '/sugarpdf/sugarpdf.'.$type.'.php';
-        $pdf_file = SugarAutoLoader::existingCustomOne('include/Sugarpdf'.$path, 'modules/'.$module.$path);
-        if($pdf_file) {
+        $path = '/sugarpdf/sugarpdf.' . $type . '.php';
+        $pdf_file = SugarAutoLoader::existingCustomOne('include/Sugarpdf' . $path, 'modules/' . $module . $path);
+        if ($pdf_file) {
             $sugarpdf = SugarpdfFactory::buildFromFile($pdf_file, $bean, $sugarpdf_object_map, $type, $module);
         }
 
         // Default to Sugarpdf if still nothing found/built
-        if (!isset($sugarpdf))
+        if (!isset($sugarpdf)) {
             $sugarpdf = new Sugarpdf($bean, $sugarpdf_object_map);
+        }
         return $sugarpdf;
     }
 
@@ -42,12 +44,12 @@ class SugarpdfFactory{
      */
     protected static function buildFromFile($file, &$bean, $sugarpdf_object_map, $type, $module)
     {
-        require_once($file);
+        require_once $file;
         //try ModuleSugarpdfType first then try SugarpdfType if that fails then use Sugarpdf
-        $class = ucfirst($module).'Sugarpdf'.ucfirst($type);
-        if(!class_exists($class)){
-            $class = 'Sugarpdf'.ucfirst($type);
-            if(!class_exists($class)){
+        $class = ucfirst($module) . 'Sugarpdf' . ucfirst($type);
+        if (!class_exists($class)) {
+            $class = 'Sugarpdf' . ucfirst($type);
+            if (!class_exists($class)) {
                 return new Sugarpdf($bean, $sugarpdf_object_map);
             }
         }
@@ -68,7 +70,7 @@ class SugarpdfFactory{
     protected static function buildClass($class, &$bean, $sugarpdf_object_map)
     {
         $sugarpdf = new $class($bean, $sugarpdf_object_map);
-        if($sugarpdf instanceof Sugarpdf) {
+        if ($sugarpdf instanceof Sugarpdf) {
             return $sugarpdf;
         } else {
             return new Sugarpdf($bean, $sugarpdf_object_map);

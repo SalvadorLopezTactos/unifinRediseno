@@ -14,7 +14,6 @@ namespace Sugarcrm\Sugarcrm\Elasticsearch\Queue;
 
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 
-
 /**
  *
  * Persistent scheduler which is responsible to create subsequent jobs based
@@ -56,7 +55,7 @@ class Scheduler implements \RunnableSchedulerJob
     {
         // We can only run for Elasticsearch engine
         if (!$this->isElasticSearchEngine()) {
-            return $this->job->failJob("The current configured SearchEngine is not Elasticsearch");
+            return $this->job->failJob('The current configured SearchEngine is not Elasticsearch');
         }
 
         // Force connectivity check
@@ -66,14 +65,14 @@ class Scheduler implements \RunnableSchedulerJob
         }
 
         // Create consumer jobs
-        $list = array();
+        $list = [];
         foreach ($this->getQueuedModules() as $module) {
             $this->engine->getContainer()->queueManager->createConsumer($module);
             $list[] = $module;
         }
 
         if (!empty($list)) {
-            $message = 'Created consumers for: '.implode(', ', $list);
+            $message = 'Created consumers for: ' . implode(', ', $list);
         } else {
             $message = 'No records currently in queue - nothing to do';
             $this->reportIndexingDone();

@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Groepsstadium:',
-    'LBL_DEAL_TOT'=>'Korting totaal',
-    'LBL_DEAL_TOT_USDOLLAR'=>'Korting totaal (US Dollar)',
+    'LBL_DEAL_TOT' => 'Korting totaal',
+    'LBL_DEAL_TOT_USDOLLAR' => 'Korting totaal (US Dollar)',
     'LBL_NEW_SUB' => 'Korting subtotaal:',
     'LBL_SHIPPING' => 'Vervoerswijze:',
-    'LBL_SHIPPING_USDOLLAR'=>'Verzendkosten (USD)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Subtotaal (USD)',
+    'LBL_SHIPPING_USDOLLAR' => 'Verzendkosten (USD)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Subtotaal (USD)',
     'LBL_SUBTOTAL' => 'Subtotaal:',
     'LBL_TAXABLE_SUBTOTAL' => 'Belastbaar subtotaal',
-    'LBL_TAX_USDOLLAR'=>'BTW (USD)',
+    'LBL_TAX_USDOLLAR' => 'BTW (USD)',
     'LBL_TAX' => 'BTW:',
-    'LBL_TOTAL_USDOLLAR'=>'Totaal (USD)',
+    'LBL_TOTAL_USDOLLAR' => 'Totaal (USD)',
     'LBL_TOTAL' => 'Totaal',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Offerte bundelpositie',
     'EXCEPTION_INVALID_QUOTE_ID' => 'Offerte-ID ontbreekt aan de nettolading',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'De offerte die u heeft aangevraagd werd niet gevonden',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'De offerte die u heeft aangevraagd werd niet gevonden',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Aanvullende groepskorting',
     'LBL_GROUP_TOTAL' => 'Groepstotaal',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Koptekst groep',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'De standaard productbundelgroep voor de offerte',
     'LBL_ALERT_DELETING_ITEM' => 'Regelitem(s) verwijderen',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Regelitem succesvol verwijderd',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn productbundel',
+];

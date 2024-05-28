@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'يحتاج هذا التوقيع إلى اسم.',
     'LBL_DEFAULT_SIGNATURE' => 'افتراضي',
     'LBL_MODULE_NAME' => 'توقيعات البريد الإلكتروني',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'استخدام توقيع؟',
     'LBL_SIGNATURE_PREPEND' => 'هل تريد التوقيع على الرد السابق؟',
     'LBL_SIGNATURES' => 'التوقيعات',
-);
+];

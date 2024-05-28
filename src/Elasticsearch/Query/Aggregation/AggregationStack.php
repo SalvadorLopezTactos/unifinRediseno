@@ -22,12 +22,12 @@ class AggregationStack implements \IteratorAggregate
     /**
      * @var AggregationInterface[]
      */
-    protected $stack = array();
+    protected $stack = [];
 
     /**
      * @var array
      */
-    protected $filters = array();
+    protected $filters = [];
 
     /**
      * {@inheritdoc}
@@ -78,7 +78,7 @@ class AggregationStack implements \IteratorAggregate
 
         // now build each aggregation and apply all filters except for its own
         // to each aggregation and register them on the query object
-        $aggs = array();
+        $aggs = [];
         foreach ($this->stack as $id => $agg) {
             $aggFilters = $this->getAggFiltersForAggId($id, $filters);
             $aggs[] = $agg->build($id, $aggFilters);
@@ -93,7 +93,7 @@ class AggregationStack implements \IteratorAggregate
      */
     protected function buildFilters(array $filterDefs)
     {
-        $filters = array();
+        $filters = [];
         foreach ($this->stack as $id => $agg) {
             if (isset($filterDefs[$id])) {
                 if ($filter = $agg->buildFilter($filterDefs[$id])) {

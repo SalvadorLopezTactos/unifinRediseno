@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'A importação de arquivo foi lida com sucesso.',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'O registo importado está participando de um processo e não pode ser editado porque alguns campos estão bloqueados para edição pelo processo.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'erros encontrados. Veja a guia de erros para linhas que não foram importadas devido a erro',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Se o usuário não existir, use o usuário atual',
     'LBL_SHOW_HIDDEN' => 'Mostrar campos que normalmente não são importáveis',
     'LBL_UPDATE_RECORDS' => 'Atualizar registros existentes em vez de importá-los (sem desfazer)',
-    'LBL_TEST'=> 'Teste de importação (não salvar nem alterar dados)',
+    'LBL_TEST' => 'Teste de importação (não salvar nem alterar dados)',
     'LBL_TRUNCATE_TABLE' => 'Esvaziar tabela antes da importação (excluir todos os registros)',
     'LBL_RELATED_ACCOUNTS' => 'Não criar contas relacionadas',
     'LBL_NO_DATECHECK' => 'Ignorar verificação das datas (opção mais rápida, mas falhará se alguma data estiver errada)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Valor inteiro inválido',
     'LBL_ERROR_INVALID_NUM' => 'Valor numérico inválido',
     'LBL_ERROR_INVALID_TIME' => 'Hora inválida',
-    'LBL_ERROR_INVALID_EMAIL'=>'Endereço de e-mail inválido',
-    'LBL_ERROR_INVALID_BOOL'=>'Valor inválido (deve ser 1 ou 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Cadeia de caracteres de data inválida',
-    'LBL_ERROR_INVALID_USER'=>'Nome de usuário ou ID inválido',
+    'LBL_ERROR_INVALID_EMAIL' => 'Endereço de e-mail inválido',
+    'LBL_ERROR_INVALID_BOOL' => 'Valor inválido (deve ser 1 ou 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Cadeia de caracteres de data inválida',
+    'LBL_ERROR_INVALID_USER' => 'Nome de usuário ou ID inválido',
     'LBL_ERROR_INVALID_TEAM' => 'Nome de equipe ou ID inválido',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Nome de conta ou ID inválido',
     'LBL_ERROR_INVALID_RELATE' => 'Campo relacional inválido',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => ' não existe ou não é gravável',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'O arquivo não foi carregado com sucesso. É possível que a configuração &#39;upload_max_filesize&#39; em seu arquivo php.ini esteja configurada para um número menor',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'O arquivo é grande demais. Máx.:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bytes. Alterar $sugar_config[&#39;upload_maxsize&#39;] no config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bytes. Alterar $sugar_config[&#39;upload_maxsize&#39;] em config.php',
     'LBL_MODULE_NAME' => 'Importar',
     'LBL_MODULE_NAME_SINGULAR' => 'Importar',
     'LBL_TRY_AGAIN' => 'Tente novamente',
     'LBL_START_OVER' => 'Começar novamente',
     'LBL_ERROR' => 'Erro:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'O arquivo de importação contém {0} linhas. O número ideal de linhas é {1}. Um número maior de linhas pode retardar o processo de importação. Clique em OK para continuar importando. Clique em Cancelar para revisar e carregar o arquivo de importação novamente.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Você não pode importar um usuário administrador do sistema',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Você não pode importar um usuário administrador do sistema',
     'ERR_REPORT_LOOP' => 'O sistema detectou um loop de relatórios. Um usuário não pode passar informação, nem qualquer de seus gerentes que reportam a eles.',
     'ERR_MULTIPLE' => 'Múltiplas colunas foram definidas com o mesmo nome de campo.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Campos obrigatórios ausentes:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Nenhuma linha foi detectada no arquivo de importação. Certifique-se de que não há linhas vazias no arquivo e tente novamente.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'O arquivo de importação já foi processado ou não existe',
     'LBL_SUCCESS' => 'Sucesso:',
-	'LBL_FAILURE' => 'Falha na importação:',
+    'LBL_FAILURE' => 'Falha na importação:',
     'LBL_SUCCESSFULLY' => 'Importação bem-sucedida',
     'LBL_LAST_IMPORT_UNDONE' => 'A importação foi desfeita.',
     'LBL_NO_IMPORT_TO_UNDO' => 'Não havia importação alguma para desfazer.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Importar novamente',
     'LBL_FINISHED' => 'Concluído',
     'LBL_UNDO_LAST_IMPORT' => 'Desfazer importação',
-    'LBL_LAST_IMPORTED'=>'Criado',
+    'LBL_LAST_IMPORTED' => 'Criado',
     'ERR_MULTIPLE_PARENTS' => 'Você pode ter apenas um ID precedente definido',
     'LBL_DUPLICATES' => 'Itens duplicados encontrados',
     'LNK_DUPLICATE_LIST' => 'Fazer download da lista de itens duplicados',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Ocultar notas',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Mostrar pré-visualização de colunas',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Ocultar pré-visualização de colunas',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Verifique se há duplicatas usando o operador:',
     'LBL_SAVE_MAPPING_AS' => 'Para salvar os arquivos de importação, forneça um nome para as configurações salvas:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Aspas simples (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Aspas duplas (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Para atribuir os novos registros a equipes que não sejam sua equipe padrão, use a coluna Valor padrão para selecionar as equipes.',
     'LBL_SIGN_IN_HELP' => 'Para habilitar este serviço, acesse a aba Contas externas a partir de sua página de configurações do usuário.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Tentando lidar com endereços de e-mail em um Bean que não oferece suporte a eles.",
-);
+];

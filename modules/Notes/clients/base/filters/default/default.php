@@ -10,35 +10,35 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Notes']['base']['filter']['default'] = array(
+$viewdefs['Notes']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'filters' => array(
-        array(
+    'filters' => [
+        [
             'id' => 'created_by_me',
             'name' => 'LBL_CREATED_BY_ME',
-            'filter_definition' => array(
+            'filter_definition' => [
                 '$creator' => '',
-                'email_id' => array(
+                'email_id' => [
                     '$empty' => '',
-                ),
-            ),
+                ],
+            ],
             'editable' => false,
-        ),
-    ),
-    'fields' => array(
-        'name' => array(),
-        'contact_name' => array(),
-        'parent_name' => array(),
-        'date_entered' => array(),
-        'date_modified' => array(),
-        'tag' => array(),
-        '$owner' => array(
+        ],
+    ],
+    'fields' => [
+        'name' => [],
+        'contact_name' => [],
+        'parent_name' => [],
+        'date_entered' => [],
+        'date_modified' => [],
+        'tag' => [],
+        '$owner' => [
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',
-        ),
-        '$favorite' => array(
+        ],
+        '$favorite' => [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        ),
-    ),
-);
+        ],
+    ],
+];

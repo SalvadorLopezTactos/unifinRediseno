@@ -9,8 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$searchFields['ReportMaker'] = 
-	array (
-		'name' => array( 'query_type'=>'default'),
-		);
-?>
+$searchFields['ReportMaker'] =
+    [
+        'name' => ['query_type' => 'default'],
+    ];

@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Aktiv',
     'LBL_ASSIGNEE_RULE' => 'Regel for modtager',
     'LBL_TARGET_ASSIGNEE' => 'Målmodtager',
+    'LBL_STAGE_NUMBERS' => 'Fasenummerering',
     'LBL_EXPORT_BUTTON_LABEL' => 'Eksportér',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Importér',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Opret/opdater automatisk en ny post for e-mailskabelon ved at importere en *.json-fil fra dit filsystem.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Når denne indstilling er aktiveret: Hvis Målmodtager = Overordnet modtager, hvis Tildelt Til-brugeren ændres på en overordnet bruger, vil Tildelt Til-brugerne i Smart Guides, faser og aktiviteter automatisk også ændre sig. Bemærk, at indstillingerne for målmodtager i aktivitetsskabeloner har forrang frem for Smart Guide-skabelonen',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Hvornår skal en bruger tildeles aktiviteterne',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Hvem skal tildeles aktiviteterne',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Denne til/fra-knap giver dig mulighed for at vise eller skjule automatisk fasenummerering.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Smart Guide-/Fase-/Aktivitetsskabelon',
 ];

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['KBContent'] = array(
+$dictionary['KBContent'] = [
     'optimistic_locking' => true,
     'table' => 'kbcontents',
     'color' => 'coral',
@@ -28,30 +28,30 @@ $dictionary['KBContent'] = array(
     'unified_search_default_enabled' => true,
     'comment' => 'A content represents information about document',
     'duplicate_merge' => true,
-    'fields' => array(
-        'kbdocument_body' => array(
+    'fields' => [
+        'kbdocument_body' => [
             'name' => 'kbdocument_body',
             'vname' => 'LBL_TEXT_BODY',
             'dbType' => 'longtext',
             'type' => 'htmleditable_tinymce',
             'comment' => 'Article body',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => true,
                 'boost' => 0.60,
-            ),
+            ],
             'audited' => false,
             'duplicate_on_record_copy' => 'always',
             'sortable' => false,
-        ),
-        'language' => array(
+        ],
+        'language' => [
             'name' => 'language',
             'type' => 'enum',
             'function_bean' => 'KBContents',
-            'function' => array(
+            'function' => [
                 'returns' => 'array',
-                'name' => 'getLanguageOptions'
-            ),
+                'name' => 'getLanguageOptions',
+            ],
             'len' => '2',
             'required' => true,
             'vname' => 'LBL_LANG',
@@ -60,12 +60,12 @@ $dictionary['KBContent'] = array(
             'studio' => false,
             'duplicate_on_record_copy' => 'always',
             'massupdate' => false,
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => false,
-            ),
-        ),
-        'active_date' => array(
+            ],
+        ],
+        'active_date' => [
             'name' => 'active_date',
             'vname' => 'LBL_PUBLISH_DATE',
             'type' => 'date',
@@ -73,13 +73,13 @@ $dictionary['KBContent'] = array(
             'studio' => true,
             'duplicate_on_record_copy' => 'no',
             'massupdate' => false,
-            'validation' => array(
+            'validation' => [
                 'type' => 'isbefore',
                 'compareto' => 'exp_date',
-                'blank' => false
-            ),
-        ),
-        'exp_date' => array(
+                'blank' => false,
+            ],
+        ],
+        'exp_date' => [
             'name' => 'exp_date',
             'vname' => 'LBL_EXP_DATE',
             'type' => 'date',
@@ -90,8 +90,8 @@ $dictionary['KBContent'] = array(
                 'enabled' => true,
                 'searchable' => false,
             ],
-        ),
-        'approved' => array(
+        ],
+        'approved' => [
             'name' => 'approved',
             'vname' => 'LBL_APPROVED',
             'type' => 'bool',
@@ -99,8 +99,8 @@ $dictionary['KBContent'] = array(
             'duplicate_on_record_copy' => 'no',
             'studio' => false,
             'massupdate' => false,
-        ),
-        'status' => array(
+        ],
+        'status' => [
             'name' => 'status',
             'vname' => 'LBL_STATUS',
             'type' => 'enum',
@@ -111,12 +111,12 @@ $dictionary['KBContent'] = array(
             'audited' => true,
             'studio' => true,
             'duplicate_on_record_copy' => 'no',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => false,
-            ),
-        ),
-        'viewcount' => array(
+            ],
+        ],
+        'viewcount' => [
             'name' => 'viewcount',
             'vname' => 'LBL_VIEWED_COUNT',
             'type' => 'int',
@@ -127,8 +127,8 @@ $dictionary['KBContent'] = array(
             'studio' => true,
             'readonly' => true,
             'duplicate_merge' => 'disabled',
-        ),
-        'revision' => array(
+        ],
+        'revision' => [
             'name' => 'revision',
             'vname' => 'LBL_REVISION',
             'type' => 'int',
@@ -136,8 +136,8 @@ $dictionary['KBContent'] = array(
             'duplicate_on_record_copy' => 'no',
             'studio' => true,
             'duplicate_merge' => 'disabled',
-        ),
-        'useful' => array(
+        ],
+        'useful' => [
             'name' => 'useful',
             'vname' => 'LBL_USEFUL',
             'type' => 'int',
@@ -146,8 +146,8 @@ $dictionary['KBContent'] = array(
             'studio' => false,
             'group' => 'usefulness',
             'hideacl' => true,
-        ),
-        'notuseful' => array(
+        ],
+        'notuseful' => [
             'name' => 'notuseful',
             'vname' => 'LBL_NOT_USEFUL',
             'type' => 'int',
@@ -156,8 +156,8 @@ $dictionary['KBContent'] = array(
             'studio' => false,
             'group' => 'usefulness',
             'hideacl' => true,
-        ),
-        'attachment_list' => array(
+        ],
+        'attachment_list' => [
             'name' => 'attachment_list',
             'links' => [
                 'attachments',
@@ -179,8 +179,8 @@ $dictionary['KBContent'] = array(
                     'attachment_flag' => '1',
                 ],
             ],
-        ),
-        'notes' => array(
+        ],
+        'notes' => [
             'name' => 'notes',
             'vname' => 'LBL_NOTES',
             'type' => 'link',
@@ -188,7 +188,7 @@ $dictionary['KBContent'] = array(
             'module' => 'Notes',
             'bean_name' => 'Note',
             'source' => 'non-db',
-        ),
+        ],
         'messages' => [
             'name' => 'messages',
             'vname' => 'LBL_MESSAGES',
@@ -198,7 +198,7 @@ $dictionary['KBContent'] = array(
             'bean_name' => 'Note',
             'source' => 'non-db',
         ],
-        'attachments' => array(
+        'attachments' => [
             'name' => 'attachments',
             'vname' => 'LBL_ATTACHMENTS',
             'type' => 'link',
@@ -207,16 +207,16 @@ $dictionary['KBContent'] = array(
             'bean_name' => 'Note',
             'source' => 'non-db',
             'group' => 'attachments',
-        ),
-        'kbdocuments_kbcontents' => array(
+        ],
+        'kbdocuments_kbcontents' => [
             'name' => 'kbdocuments_kbcontents',
             'type' => 'link',
             'vname' => 'LBL_KBDOCUMENTS',
             'relationship' => 'kbdocuments_kbcontents',
             'source' => 'non-db',
             'duplicate_on_record_copy' => 'no',
-        ),
-        'kbdocument_id' => array(
+        ],
+        'kbdocument_id' => [
             'name' => 'kbdocument_id',
             'id_name' => 'kbdocument_id',
             'vname' => 'LBL_KBDOCUMENT_ID',
@@ -230,8 +230,8 @@ $dictionary['KBContent'] = array(
             'duplicate_merge' => 'disabled',
             'duplicate_on_record_copy' => 'no',
             'studio' => false,
-        ),
-        'kbdocument_name' => array(
+        ],
+        'kbdocument_name' => [
             'name' => 'kbdocument_name',
             'rname' => 'name',
             'vname' => 'LBL_KBDOCUMENT',
@@ -246,8 +246,8 @@ $dictionary['KBContent'] = array(
             'duplicate_on_record_copy' => 'always',
             'studio' => false,
             'massupdate' => false,
-        ),
-        'active_rev' => array(
+        ],
+        'active_rev' => [
             'name' => 'active_rev',
             'vname' => 'LBL_ACTIVE_REV',
             'type' => 'tinyint',
@@ -255,20 +255,20 @@ $dictionary['KBContent'] = array(
             'comment' => 'Active revision flag',
             'default' => 0,
             'duplicate_on_record_copy' => 'no',
-            'studio' => array(
+            'studio' => [
                 'list' => false,
                 'quickcreate' => false,
                 'basic_search' => false,
                 'advanced_search' => false,
-            ),
+            ],
             'readonly' => true,
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => false,
                 'type' => 'int',
-            ),
-        ),
-        'is_external' => array(
+            ],
+        ],
+        'is_external' => [
             'name' => 'is_external',
             'vname' => 'LBL_IS_EXTERNAL',
             'type' => 'tinyint',
@@ -285,16 +285,16 @@ $dictionary['KBContent'] = array(
                 'searchable' => false,
                 'type' => 'int',
             ],
-        ),
-        'kbarticles_kbcontents' => array(
+        ],
+        'kbarticles_kbcontents' => [
             'name' => 'kbarticles_kbcontents',
             'type' => 'link',
             'vname' => 'LBL_KBARTICLES',
             'relationship' => 'kbarticles_kbcontents',
             'source' => 'non-db',
             'duplicate_on_record_copy' => 'no',
-        ),
-        'kbarticle_id' => array(
+        ],
+        'kbarticle_id' => [
             'name' => 'kbarticle_id',
             'id_name' => 'kbarticle_id',
             'vname' => 'LBL_KBARTICLE_ID',
@@ -310,8 +310,8 @@ $dictionary['KBContent'] = array(
             'importable' => false,
             'audited' => true,
             'studio' => false,
-        ),
-        'kbarticle_name' => array(
+        ],
+        'kbarticle_name' => [
             'name' => 'kbarticle_name',
             'rname' => 'name',
             'vname' => 'LBL_KBARTICLE',
@@ -326,8 +326,8 @@ $dictionary['KBContent'] = array(
             'duplicate_on_record_copy' => 'no',
             'studio' => false,
             'massupdate' => false,
-        ),
-        'localizations' => array(
+        ],
+        'localizations' => [
             'name' => 'localizations',
             'type' => 'link',
             'link_class' => 'LocalizationsLink',
@@ -337,8 +337,8 @@ $dictionary['KBContent'] = array(
             'duplicate_on_record_copy' => 'no',
             'studio' => false,
             'massupdate' => false,
-        ),
-        'revisions' => array(
+        ],
+        'revisions' => [
             'name' => 'revisions',
             'type' => 'link',
             'link_class' => 'RevisionsLink',
@@ -348,8 +348,8 @@ $dictionary['KBContent'] = array(
             'studio' => false,
             'massupdate' => false,
             'duplicate_on_record_copy' => 'no',
-        ),
-        'related_languages' => array(
+        ],
+        'related_languages' => [
             'name' => 'related_languages',
             'type' => 'enum',
             'function' => 'getLanguages',
@@ -359,15 +359,15 @@ $dictionary['KBContent'] = array(
             'studio' => false,
             'massupdate' => false,
             'duplicate_on_record_copy' => 'no',
-        ),
-        'kbsapprovers_kbcontents' => array(
+        ],
+        'kbsapprovers_kbcontents' => [
             'name' => 'kbsapprovers_kbcontents',
             'type' => 'link',
             'vname' => 'LBL_KBSAPPROVERS',
             'relationship' => 'kbsapprovers_kbcontents',
             'source' => 'non-db',
-        ),
-        'kbsapprover_id' => array(
+        ],
+        'kbsapprover_id' => [
             'name' => 'kbsapprover_id',
             'id_name' => 'kbsapprover_id',
             'vname' => 'LBL_KBSAPPROVER_ID',
@@ -383,8 +383,8 @@ $dictionary['KBContent'] = array(
             'duplicate_on_record_copy' => 'no',
             'studio' => false,
             'comment' => 'User who approved article',
-        ),
-        'kbsapprover_name' => array(
+        ],
+        'kbsapprover_name' => [
             'name' => 'kbsapprover_name',
             'rname' => 'full_name',
             'vname' => 'LBL_KBSAPPROVER',
@@ -398,16 +398,16 @@ $dictionary['KBContent'] = array(
             'duplicate_merge' => 'disabled',
             'duplicate_on_record_copy' => 'no',
             'studio' => true,
-        ),
+        ],
 
-        'cases' => array(
+        'cases' => [
             'name' => 'cases',
             'type' => 'link',
             'relationship' => 'relcases_kbcontents',
             'source' => 'non-db',
             'vname' => 'LBL_KBSCASES',
-        ),
-        'kbscase_id' => array(
+        ],
+        'kbscase_id' => [
             'name' => 'kbscase_id',
             'id_name' => 'kbscase_id',
             'vname' => 'LBL_KBSCASE_ID',
@@ -425,8 +425,8 @@ $dictionary['KBContent'] = array(
             'studio' => false,
             'comment' => 'Related case',
             'importable' => true,
-        ),
-        'kbscase_name' => array(
+        ],
+        'kbscase_name' => [
             'name' => 'kbscase_name',
             'rname' => 'name',
             'vname' => 'LBL_KBSCASE',
@@ -441,8 +441,8 @@ $dictionary['KBContent'] = array(
             'duplicate_on_record_copy' => 'no',
             'studio' => true,
             'importable' => false,
-        ),
-        'category_id' => array(
+        ],
+        'category_id' => [
             'name' => 'category_id',
             'vname' => 'LBL_CATEGORY_ID',
             'type' => 'id',
@@ -451,8 +451,8 @@ $dictionary['KBContent'] = array(
             'audited' => true,
             'studio' => false,
             'duplicate_on_record_copy' => 'always',
-        ),
-        'category_name' => array(
+        ],
+        'category_name' => [
             'name' => 'category_name',
             'rname' => 'name',
             'id_name' => 'category_id',
@@ -467,8 +467,8 @@ $dictionary['KBContent'] = array(
             'source' => 'non-db',
             'studio' => 'visible',
             'duplicate_on_record_copy' => 'always',
-        ),
-        'usefulness' => array(
+        ],
+        'usefulness' => [
             'name' => 'usefulness',
             'type' => 'link',
             'module' => 'Users',
@@ -480,9 +480,9 @@ $dictionary['KBContent'] = array(
             'studio' => false,
             'massupdate' => false,
             'reportable' => false,
-            'side' => 'right'
-        ),
-        'calls' => array(
+            'side' => 'right',
+        ],
+        'calls' => [
             'name' => 'calls',
             'type' => 'link',
             'relationship' => 'kbcontent_calls',
@@ -490,8 +490,8 @@ $dictionary['KBContent'] = array(
             'bean_name' => 'Call',
             'source' => 'non-db',
             'vname' => 'LBL_CALLS',
-        ),
-        'meetings' => array(
+        ],
+        'meetings' => [
             'name' => 'meetings',
             'type' => 'link',
             'relationship' => 'kbcontent_meetings',
@@ -499,15 +499,15 @@ $dictionary['KBContent'] = array(
             'bean_name' => 'Meeting',
             'source' => 'non-db',
             'vname' => 'LBL_MEETINGS',
-        ),
-        'usefulness_user_vote' => array(
+        ],
+        'usefulness_user_vote' => [
             'name' => 'usefulness_user_vote',
             'type' => 'smallint',
             'source' => 'non-db',
             'duplicate_on_record_copy' => 'no',
             'studio' => false,
-        ),
-        'tasks' => array(
+        ],
+        'tasks' => [
             'name' => 'tasks',
             'type' => 'link',
             'relationship' => 'kbcontent_tasks',
@@ -515,9 +515,9 @@ $dictionary['KBContent'] = array(
             'bean_name' => 'Task',
             'source' => 'non-db',
             'vname' => 'LBL_TASKS',
-        ),
-    ),
-    'relationships' => array(
+        ],
+    ],
+    'relationships' => [
         'kbcontent_messages' => [
             'lhs_module' => 'KBContents',
             'lhs_table' => 'kbcontents',
@@ -529,7 +529,7 @@ $dictionary['KBContent'] = array(
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'KBContents',
         ],
-        'kbcontent_notes' => array(
+        'kbcontent_notes' => [
             'lhs_module' => 'KBContents',
             'lhs_table' => 'kbcontents',
             'lhs_key' => 'id',
@@ -539,8 +539,8 @@ $dictionary['KBContent'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'KBContents',
-        ),
-        'kbcontent_attachments' => array(
+        ],
+        'kbcontent_attachments' => [
             'lhs_module' => 'KBContents',
             'lhs_table' => 'kbcontents',
             'lhs_key' => 'id',
@@ -552,26 +552,26 @@ $dictionary['KBContent'] = array(
             'relationship_file' => 'data/Relationships/AttachmentRelationship.php',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'KBContents',
-        ),
-        'kbdocuments_kbcontents' => array (
+        ],
+        'kbdocuments_kbcontents' => [
             'lhs_module' => 'KBDocuments',
             'lhs_table' => 'kbdocuments',
             'lhs_key' => 'id',
             'rhs_module' => 'KBContents',
             'rhs_table' => 'kbcontents',
             'rhs_key' => 'kbdocument_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'kbarticles_kbcontents' => array (
+            'relationship_type' => 'one-to-many',
+        ],
+        'kbarticles_kbcontents' => [
             'lhs_module' => 'KBArticles',
             'lhs_table' => 'kbarticles',
             'lhs_key' => 'id',
             'rhs_module' => 'KBContents',
             'rhs_table' => 'kbcontents',
             'rhs_key' => 'kbarticle_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'localizations' => array (
+            'relationship_type' => 'one-to-many',
+        ],
+        'localizations' => [
             'lhs_module' => 'KBContents',
             'lhs_table' => 'kbcontents',
             'lhs_key' => 'kbdocument_id',
@@ -582,8 +582,8 @@ $dictionary['KBContent'] = array(
             'join_key_lhs' => 'kbdocument_id',
             'join_key_rhs' => 'kbdocument_id',
             'relationship_type' => 'one-to-many',
-        ),
-        'revisions' => array (
+        ],
+        'revisions' => [
             'lhs_module' => 'KBContents',
             'lhs_table' => 'kbcontents',
             'lhs_key' => 'kbarticle_id',
@@ -594,17 +594,17 @@ $dictionary['KBContent'] = array(
             'join_key_lhs' => 'kbarticle_id',
             'join_key_rhs' => 'kbarticle_id',
             'relationship_type' => 'one-to-many',
-        ),
-        'kbsapprovers_kbcontents' => array (
+        ],
+        'kbsapprovers_kbcontents' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
             'rhs_module' => 'KBContents',
             'rhs_table' => 'kbcontents',
             'rhs_key' => 'kbsapprover_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'kbcontent_calls' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'kbcontent_calls' => [
             'lhs_module' => 'KBContents',
             'lhs_table' => 'kbcontents',
             'lhs_key' => 'id',
@@ -614,8 +614,8 @@ $dictionary['KBContent'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'KBContents',
-        ),
-        'kbcontent_meetings' => array(
+        ],
+        'kbcontent_meetings' => [
             'lhs_module' => 'KBContents',
             'lhs_table' => 'kbcontents',
             'lhs_key' => 'id',
@@ -625,17 +625,17 @@ $dictionary['KBContent'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'KBContents',
-        ),
-        'relcases_kbcontents' => array (
+        ],
+        'relcases_kbcontents' => [
             'lhs_module' => 'Cases',
             'lhs_table' => 'cases',
             'lhs_key' => 'id',
             'rhs_module' => 'KBContents',
             'rhs_table' => 'kbcontents',
             'rhs_key' => 'kbscase_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'kbcontent_tasks' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'kbcontent_tasks' => [
             'lhs_module' => 'KBContents',
             'lhs_table' => 'kbcontents',
             'lhs_key' => 'id',
@@ -644,39 +644,40 @@ $dictionary['KBContent'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'KBContents'
-        ),
-    ),
-    'indices' => array(
-        array(
+            'relationship_role_column_value' => 'KBContents',
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'idx_kbcontent_del_doc_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'kbdocument_id',
                 'deleted',
-            ),
-        ),
-    ),
-    'duplicate_check' => array(
+            ],
+        ],
+    ],
+    'duplicate_check' => [
         'enabled' => false,
-    ),
-    'acls' => array(
+    ],
+    'acls' => [
         'SugarACLStatic' => true,
         'SugarACLKB' => true,
-    ),
-    'visibility' => array(
+    ],
+    'visibility' => [
         'KBVisibility' => true,
         'TeamSecurity' => true,
-    ),
-    'uses' => array(
+    ],
+    'uses' => [
         'basic',
         'team_security',
         'assignable',
-    ),
+        'audit',
+    ],
     'portal_visibility' => [
         'class' => 'KBContents',
     ],
-);
+];
 
 VardefManager::createVardef(
     'KBContents',

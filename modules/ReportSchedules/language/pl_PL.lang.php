@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Harmonogramy raportów',
     'LBL_MODULE_NAME_SINGULAR' => 'Harmonogram raportów',
     'LBL_REPORT_NAME' => 'Raport',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Typy pliku',
     'LBL_EMBED_REPORT' => 'Umieść raport w wiadomości e-mail',
     'LBL_EMBED_REPORT_INFO' => 'Uwaga: jeśli raport ma więcej niż 200 wierszy, zostanie załączony w postaci pliku CSV.',
-);
+];

@@ -93,8 +93,8 @@ class QueryManager extends \FilterApi
 
     /**
      * Extract sql for debugging purposes
-      *
-      * @return string
+     *
+     * @return string
      */
     public function extractSql(): string
     {
@@ -115,7 +115,7 @@ class QueryManager extends \FilterApi
      * @param String $content
      * @return string
      */
-    public function strReplaceFirst(String $from, String $to, String $content): string
+    public function strReplaceFirst(string $from, string $to, string $content): string
     {
         $from = '/' . preg_quote($from, '/') . '/';
 
@@ -240,7 +240,7 @@ class QueryManager extends \FilterApi
                 $filterDef = $calendarFilter['filterDef'];
 
                 if (isset($filterId) && !empty($filterId)) {
-                    if (in_array($filterId, $this->defaultFilters) === true) {
+                    if (safeInArray($filterId, $this->defaultFilters) === true) {
                         //sometime filters come as a simple dictionary - like 'My Meetings' filter.
                         //Others are arrays of dictionaries
                         $filterDefKeys = array_keys($filterDef);
@@ -252,18 +252,18 @@ class QueryManager extends \FilterApi
                         $filterDef = $this->filterManager->getFilterDefinition($module, $filterId);
                     }
                 }
-                                       
+
                 self::addFilters($filterDef, $this->query->where(), $this->query);
             }
         }
 
         $tmpTimeDate = \TimeDate::getInstance();
-        
+
         //format to GMT values for sql queries
         $viewStart = $this->params['startDate'];
         $viewStartDT = new \DateTime($viewStart);
         $viewStart = $tmpTimeDate->asDb($viewStartDT);
-        
+
         $viewEnd = $this->params['endDate'];
         $viewEndDT = new \DateTime($viewEnd);
         $viewEnd = $tmpTimeDate->asDb($viewEndDT);
@@ -382,7 +382,7 @@ SQL;
      * @param SugarBean $calendarBean
      * @return String
      */
-    protected function generateDbDateEndFormula(\SugarBean $calendarBean): String
+    protected function generateDbDateEndFormula(\SugarBean $calendarBean): string
     {
         $eventStart = $calendarBean->event_start;
 
@@ -392,19 +392,19 @@ SQL;
         $formula = $eventStart;
 
         if (!empty($calendarBean->duration_minutes) &&
-        isset($this->targetBean->field_defs[$calendarBean->duration_minutes])) {
+            isset($this->targetBean->field_defs[$calendarBean->duration_minutes])) {
             $durationMinutesField = $this->prepareDbFieldForQuery($calendarBean->duration_minutes);
             $formula = "DATE_ADD({$formula}, INTERVAL {$durationMinutesField} MINUTE)";
         }
 
-        if (!empty($calendarBean->duration_hours)  &&
-        isset($this->targetBean->field_defs[$calendarBean->duration_hours])) {
+        if (!empty($calendarBean->duration_hours) &&
+            isset($this->targetBean->field_defs[$calendarBean->duration_hours])) {
             $durationHoursField = $this->prepareDbFieldForQuery($calendarBean->duration_hours);
             $formula = "DATE_ADD({$formula}, INTERVAL {$durationHoursField} HOUR)";
         }
 
-        if (!empty($calendarBean->duration_days)  &&
-        isset($this->targetBean->field_defs[$calendarBean->duration_days])) {
+        if (!empty($calendarBean->duration_days) &&
+            isset($this->targetBean->field_defs[$calendarBean->duration_days])) {
             $durationDaysField = $this->prepareDbFieldForQuery($calendarBean->duration_days);
             $formula = "DATE_ADD({$formula}, INTERVAL {$durationDaysField} DAY)";
         }
@@ -470,7 +470,7 @@ SQL;
         }
 
         //add id_name values to list for relates
-        $fieldsToAdd = array();
+        $fieldsToAdd = [];
         foreach ($tempFieldsToSelectList as $fieldToSelect) {
             $fieldToSelectDefinition = $dictionary[$objectName]['fields'][$fieldToSelect];
             if ($fieldToSelectDefinition['type'] === 'relate') {
@@ -484,7 +484,7 @@ SQL;
 
         //add dblclick record id
         $dblClickAction = explode(':', $this->calendarBean->dblclick_event);
-        if (is_array($dblClickAction) && count($dblClickAction) === 3) {
+        if (is_array($dblClickAction) && safeCount($dblClickAction) === 3) {
             $dblClickModule = $dblClickAction[1];
             $dblClickId = $dblClickAction[2];
             if ($dblClickModule !== 'self') {
@@ -494,12 +494,13 @@ SQL;
 
         //test fields against vardefs in order to make sure sql will not fail because of a wrong field name given
         $fieldsToSelect = array_unique($tempFieldsToSelectList);
-        $tempFieldsToSelectList = array();
+        $tempFieldsToSelectList = [];
         foreach ($fieldsToSelect as $fieldToSelect) {
-            if ((array_key_exists($fieldToSelect, $dictionary[$objectName]['fields']) === true
+            if ((
+                array_key_exists($fieldToSelect, $dictionary[$objectName]['fields']) === true
                     && (array_key_exists('source', $dictionary[$objectName]['fields'][$fieldToSelect]) === false
                         || $dictionary[$objectName]['fields'][$fieldToSelect]['source'] === 'custom_fields')
-                ) || $fieldToSelect === 'current_user_id') {
+            ) || $fieldToSelect === 'current_user_id') {
                 $tempFieldsToSelectList[] = $fieldToSelect;
             }
         }
@@ -518,12 +519,12 @@ SQL;
      */
     public function parseTargetBody(string $target_body): array
     {
-        $component_array = array();
+        $component_array = [];
 
         preg_match_all('/(({::)[^>]*?)(.*?)((::})[^>]*?)/', $target_body, $matches, PREG_SET_ORDER);
 
         foreach ($matches as $val) {
-            if (is_array($val) && count($val) > 3) {
+            if (is_array($val) && safeCount($val) > 3) {
                 $matched_component_core = $val[3];
                 $component_array[] = $matched_component_core;
             }

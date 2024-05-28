@@ -118,3 +118,7 @@ ul.module_draglist {
     display:block;
     background: var(--content-background);
 }
+
+input[data-cb] {
+    margin: 7px 0;
+}

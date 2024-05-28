@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Вземане на контейнер за документи',
     'LBL_CLOUD_SERVICE_TYPE' => 'Тип на услуга в облака',
     'LBL_CLOUD_PATH' => 'Път към облака',
+    'LBL_CLOUD_DRIVE_ID' => 'ИД на място за съхранение',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Табло със списък на контейнери за документи DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'Табло със записи на контейнери за документи DocuSign',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Скорошни контейнери за документи DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже на фокус на контейнери за документи DocuSign',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Хронология на контейнера на документи DocuSign',
 
     'LBL_NEW_ENVELOPE' => 'Нов контейнер',
     'LBL_DOCUMENT_IS_NOW' => ' сега е ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Изпрати',
     'LBL_BUTTON_CLEAR' => 'Изчисти',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Използване на шаблон',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Изпращане с шаблон',
     'LBL_PLEASE_LOG_IN' => 'Моля, първо влезте в DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Не можете да изтеглите този документ. Той е създаден от друг потребител!',
     'LBL_SEND_NOT_ALLOWED' => 'Не можете да изпратите този контейнер. Той есъздаден от друг потребител!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Черновата е променена. Ще актуализирате ли статуса до текущия ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'Контейнерът за документи DocuSign е актуализиран!',
     'LBL_DRAFT_CHANGED_ERROR' => 'Статусът на контейнер на документи DocuSign не е актуализиран. Проверете регистрите за подробности!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'Не може да се приложи шаблон на DocuSign',
     'LBL_ENVELOPE_NOT_SENT' => 'Контейнерът не е изпратен!',
     'LBL_ENVELOPE_SENT' => 'Контейнерът беше изпратен отново!',
     'LBL_DOCUMENT_ADDED' => 'Документът е добавен на запис!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Роля',
     'LBL_SELECT_BUTTON_LABEL' => 'Избери [Alt+T]',
     'LBL_BACK_BUTTON_LABEL' => 'Назад',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Търсене по име на шаблон',
+    'LBL_ENVELOPE_NAME' => 'Име на контейнер за документи',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Името на контейнера не може да бъде празно',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Неуспешно извличане на потенциални получатели!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Неуспешно извличане на шаблони!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Моля, изберете роля за всеки получател',
+    
+    'LBL_DOWNLOAD' => 'Изтегляне',
+    'LBL_OPEN_DRAFT' => 'Отваряне на чернова',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Документи без файл не могат да бъдат изпращани на DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Щракнете върху бутона Плюс, за да започнете процеса на подписване',
+    'LBL_NO_DOC_SELECTED' => 'Моля, първо изберете документи',
+    'LBL_SELECT_RECIPIENTS' => 'Избиране на получател на подписващия',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Изключване',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Трябва да инсталирате приложението DocuSign за по-добра функционалност.',
 ];

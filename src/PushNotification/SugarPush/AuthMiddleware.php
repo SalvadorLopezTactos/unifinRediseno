@@ -57,7 +57,7 @@ class AuthMiddleware
      *
      * @return \Closure
      */
-    public function __invoke(callable $handler) : \Closure
+    public function __invoke(callable $handler): \Closure
     {
         return function (RequestInterface $request, array $options) use ($handler) {
             if (empty($options['authorize_as_application'])) {
@@ -94,7 +94,7 @@ class AuthMiddleware
      *
      * @return array Configuration expected by IdmProvider.
      */
-    private function getOAuth2Config() : array
+    private function getOAuth2Config(): array
     {
         $idm = new IdmConfig(\SugarConfig::getInstance());
         return $idm->getIDMModeConfig();
@@ -108,7 +108,7 @@ class AuthMiddleware
      * @param string $token
      * @return RequestInterface
      */
-    private function addAuthorizationHeader(RequestInterface $request, string $token) : RequestInterface
+    private function addAuthorizationHeader(RequestInterface $request, string $token): RequestInterface
     {
         return $request->withAddedHeader(
             'Authorization',
@@ -124,7 +124,7 @@ class AuthMiddleware
         $restService = new \RestService();
         $token = $restService->grabToken();
 
-        return (string) $token;
+        return (string)$token;
     }
 
     /**
@@ -136,7 +136,7 @@ class AuthMiddleware
 
         // Reuse the existing token.
         if ($token instanceof AccessToken && !$token->hasExpired()) {
-            return (string) $token;
+            return (string)$token;
         }
 
         // Get a new access token.
@@ -144,6 +144,6 @@ class AuthMiddleware
 
         $this->cache->set('sugar_push_access_token', $token);
 
-        return (string) $token;
+        return (string)$token;
     }
 }

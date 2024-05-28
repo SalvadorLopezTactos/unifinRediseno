@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Opportunities List Dashboard',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Opportunities Record Dashboard',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Quotes',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Opportunities By A Dynamic Account',
+    'LBL_TOP_10_OPP' => 'Top 10 open opps',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Dashlet: My Active Opportunities',
+    'LBL_MY_ACTIVE_OPP' => 'My Active Opps',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Pipeline Total is',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Opportunity Role',
+    'LBL_OPPORTUNITY_ROLE' => 'Opportunity Role',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notes',
     'LBL_TAB_OPPORTUNITY' => '{{module}} Review',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'By clicking Confirm, you will be erasing ALL Forecasts data and changing your Opportunities View. If this is not what you intended, click cancel to return to previous settings.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'By clicking Confirm, you will be erasing ALL Forecasts data and changing your Opportunities View. '
-        .'Also ALL Process Definitions with a target module of Revenue Line Items will be disabled. '
-        .'If this is not what you intended, click cancel to return to previous settings.',
+        . 'Also ALL Process Definitions with a target module of Revenue Line Items will be disabled. '
+        . 'If this is not what you intended, click cancel to return to previous settings.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'If all Revenue Line Items are closed and at least one was won,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'the Opportunity Sales Stage is set to "Closed Won".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'If all Revenue Line Items are in the "Closed Lost" Sales Stage,',
@@ -251,7 +254,7 @@ Changing the setting from "{{plural_module_name}}" to "{{plural_module_name}} an
     'LBL_HELP_RECORDS' => 'The {{plural_module_name}} module allows you to track individual sales from start to finish. Each {{module_name}} record represents a prospective sale and includes relevant sales data as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc. An {{module_name}} will typically progress through several Sales Stages until it is marked either "Closed Won" or "Closed Lost". {{plural_module_name}} can be leveraged even further by using Sugar&#39;s {{forecasts_singular_module}}ing module to understand and predict sales trends as well as focus work to achieve sales quotas.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'The {{plural_module_name}} module allows you to track individual sales and the line items belonging to those sales from start to finish. Each {{module_name}} record represents a prospective sale and includes relevant sales data as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'The {{plural_module_name}} module allows you to track individual sales and the line items belonging to those sales from start to finish. Each {{module_name}} record represents a prospective sale and includes the relevant sales data as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc.
 
 - Edit this record&#39;s fields by clicking an individual field or the Edit button.
 - View or modify links to other records in the subpanels by toggling the bottom left pane to "Data View".
@@ -260,7 +263,7 @@ Changing the setting from "{{plural_module_name}}" to "{{plural_module_name}} an
 - Additional actions are available in the dropdown Actions menu to the right of the Edit button.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'The {{plural_module_name}} module allows you to track individual sales and the line items belonging to those sales from start to finish. Each {{module_name}} record represents a prospective sale and includes relevant sales data as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'The {{plural_module_name}} module allows you to track individual sales and the line items belonging to those sales from start to finish. Each {{module_name}} record represents a prospective sale and includes the relevant sales data as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc.
 
 To create an {{module_name}}:
 1. Provide values for the fields as desired.
@@ -288,4 +291,9 @@ To create an {{module_name}}:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Opportunity Close Prediction',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'View prediction details for a specific Opportunity',
-);
+    'LBL_AI_WINRATE' => 'Win Rate',
+    'LBL_AI_WONOPP' => 'Won Opportunities',
+    'LBL_AI_CLOSINGTIME' => 'Closing time',
+    'LBL_AI_CLOSEDOPP' => 'Closed Opportunities',
+    'LBL_AI_LEADTIMESPAN' => 'Time Between Opportunity Creation and Closed Won',
+];

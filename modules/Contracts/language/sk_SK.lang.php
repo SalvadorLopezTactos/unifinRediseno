@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Kontrakty',
-	'LBL_MODULE_NAME_SINGULAR' => 'Zmluva',
-	'LBL_MODULE_TITLE' => 'Kontrakty: Hlavná stránka',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Kontrakty',
+    'LBL_MODULE_NAME_SINGULAR' => 'Zmluva',
+    'LBL_MODULE_TITLE' => 'Kontrakty: Hlavná stránka',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Vytvorte Kontrakt',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'ID meny:',
     'LBL_CURRENCY' => 'Mena:',
     'LBL_CURRENCY_RATE' => 'Menový kurz',
-    'LBL_ASSIGNED_TO_NAME'=>'Pridelený k:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Pridelený k:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Zoznam Kontraktov',	
+    'LBL_LIST_FORM_TITLE' => 'Zoznam Kontraktov',
     'LBL_LIST_CONTRACT_NAME' => 'Názov Kontraktu',
     'LBL_LIST_ACCOUNT_NAME' => 'Názov účtu',
     'LBL_LIST_START_DATE' => 'Štart',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Meno',
     'LBL_LIST_CONTRACT_VALUE' => 'Hodnota',
 
-    'LBL_TYPE'=>'Typ',
+    'LBL_TYPE' => 'Typ',
     'LBL_TYPE_NAME' => 'Názov typu',
-    'LBL_CONTRACT_TYPE'=>'Typ kontraktu',
+    'LBL_CONTRACT_TYPE' => 'Typ kontraktu',
 
     'LBL_CREATED_USER' => 'Vytvorený užívateľ',
     'LBL_MODIFIED_USER' => 'Upravený užívateľ',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na kontrakty',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Informačný panel so záznamom kontraktov',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová os kontraktu',
+];

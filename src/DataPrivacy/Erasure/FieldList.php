@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -44,10 +46,10 @@ class FieldList implements Field, Countable
      * @param array $array
      * @return self
      */
-    public static function fromArray(array $array) : self
+    public static function fromArray(array $array): self
     {
         return new self(
-            ...array_map(function ($element) : Field {
+            ...array_map(function ($element): Field {
                 if (is_string($element)) {
                     $element = ['field_name' => $element];
                 }
@@ -70,7 +72,7 @@ class FieldList implements Field, Countable
     /**
      * {@inheritDoc}
      */
-    public function erase(SugarBean $bean) : void
+    public function erase(SugarBean $bean): void
     {
         foreach ($this->fields as $field) {
             $field->erase($bean);
@@ -94,7 +96,7 @@ class FieldList implements Field, Countable
      * @param self $other
      * @return self
      */
-    public function with(self $other) : self
+    public function with(self $other): self
     {
         $fields = $this->fields;
 
@@ -113,7 +115,7 @@ class FieldList implements Field, Countable
      * @param self $other
      * @return self
      */
-    public function without(self $other) : self
+    public function without(self $other): self
     {
         $fields = $this->fields;
 
@@ -134,7 +136,7 @@ class FieldList implements Field, Countable
      * @param array $array
      * @return Scalar
      */
-    private static function createScalarField(array $array) : Scalar
+    private static function createScalarField(array $array): Scalar
     {
         return new Scalar($array['field_name']);
     }
@@ -145,13 +147,13 @@ class FieldList implements Field, Countable
      * @param array $array
      * @return Email
      */
-    private static function createEmailField(array $array) : Email
+    private static function createEmailField(array $array): Email
     {
         if (!isset($array['id'])) {
             $array['id'] = '';
-//            throw new InvalidArgumentException(
-//                'The array representation of an email field must contain the "id" element'
-//            );
+            //            throw new InvalidArgumentException(
+            //                'The array representation of an email field must contain the "id" element'
+            //            );
         }
 
         return new Email($array['id']);
@@ -160,8 +162,8 @@ class FieldList implements Field, Countable
     /**
      * {@inheritDoc}
      */
-    public function count() : int
+    public function count(): int
     {
-        return count($this->fields);
+        return safeCount($this->fields);
     }
 }

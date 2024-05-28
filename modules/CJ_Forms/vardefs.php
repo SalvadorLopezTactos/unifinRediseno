@@ -28,24 +28,8 @@ $dictionary['CJ_Form'] = [
             'importable' => 'true',
             'massupdate' => false,
             'options' => 'cj_forms_trigger_event_list',
-            'type' => 'enum',
-            'visibility_grid' => [
-                'trigger' => 'parent_type',
-                'values' => [
-                    'DRI_Workflow_Task_Templates' => [
-                        'in_progress',
-                        'completed',
-                        'not_applicable',
-                    ],
-                    'DRI_SubWorkflow_Templates' => [
-                        'in_progress',
-                        'completed',
-                    ],
-                    'DRI_Workflow_Templates' => [
-                        'completed',
-                    ],
-                ],
-            ],
+            'type' => 'trigger-event',
+            'dbType' => 'varchar',
         ],
         'action_type' => [
             'name' => 'action_type',
@@ -139,7 +123,6 @@ $dictionary['CJ_Form'] = [
             'massupdate' => false,
             'type' => 'text',
             'studio' => false,
-            'dependency' => 'or(equal($action_type, "create_record"), equal($action_type, "update_record"))',
         ],
         'select_to_email_address' => [
             'name' => 'select_to_email_address',
@@ -203,7 +186,6 @@ $dictionary['CJ_Form'] = [
             'options' => 'cj_forms_display_rsa_icon',
             'type' => 'enum',
             'default' => 'yes',
-            'dependency' => 'and(and(and(not(equal($action_type,"view_record")), and(not(equal($action_trigger_type,"automatic_create")),not(equal($action_trigger_type,"automatic_update")))),not(equal($parent_type,"DRI_Workflow_Templates"))),not(equal($parent_type,"DRI_SubWorkflow_Templates")))',
         ],
         'activity_module' => [
             'name' => 'activity_module',
@@ -265,7 +247,7 @@ $dictionary['CJ_Form'] = [
         'dri_workflow_template_name' => [
             'name' => 'dri_workflow_template_name',
             'vname' => 'LBL_DRI_WORKFLOW_TEMPLATE',
-            'required' => false,
+            'required' => true,
             'reportable' => false,
             'audited' => true,
             'importable' => 'true',
@@ -326,6 +308,81 @@ $dictionary['CJ_Form'] = [
             'relationship' => 'cj_form_email_templates_emailtemplates',
             'module' => 'EmailTemplates',
         ],
+        'main_trigger_type' => [
+            'name' => 'main_trigger_type',
+            'vname' => 'LBL_MAIN_TRIGGER_TYPE',
+            'required' => true,
+            'reportable' => true,
+            'audited' => true,
+            'len' => 100,
+            'importable' => 'true',
+            'massupdate' => false,
+            'options' => 'cj_forms_main_trigger_type_list',
+            'type' => 'enum',
+        ],
+        'module_trigger' => [
+            'name' => 'module_trigger',
+            'vname' => 'LBL_MODULE_TRIGGER',
+            'required' => true,
+            'reportable' => true,
+            'audited' => true,
+            'len' => 100,
+            'importable' => 'true',
+            'massupdate' => false,
+            'type' => 'module-trigger',
+            'dbType' => 'varchar',
+            'options' => 'cj_forms_module_trigger_list',
+        ],
+        'field_trigger' => [
+            'name' => 'field_trigger',
+            'vname' => 'LBL_FIELD_TRIGGER',
+            'required' => true,
+            'reportable' => false,
+            'audited' => false,
+            'importable' => false,
+            'massupdate' => false,
+            'type' => 'field-trigger-filter',
+            'dbType' => 'longtext',
+            'moduleField' => 'module_trigger',
+            'openBuildFilterView' => true,
+        ],
+        // Field when trigger type is Sugar Action To Smart Guide
+        'smart_guide_template_id' => [
+            'name' => 'smart_guide_template_id',
+            'vname' => 'LBL_SMART_GUIDE_TEMPLATE',
+            'required' => false,
+            'reportable' => false,
+            'audited' => true,
+            'importable' => 'true',
+            'massupdate' => false,
+            'type' => 'id',
+        ],
+        'smart_guide_template_name' => [
+            'name' => 'smart_guide_template_name',
+            'vname' => 'LBL_SMART_GUIDE_TEMPLATE',
+            'required' => true,
+            'reportable' => false,
+            'audited' => true,
+            'importable' => 'true',
+            'massupdate' => false,
+            'source' => 'non-db',
+            'type' => 'relate',
+            'rname' => 'name',
+            'table' => 'dri_workflow_templates',
+            'id_name' => 'smart_guide_template_id',
+            'sort_on' => 'name',
+            'module' => 'DRI_Workflow_Templates',
+        ],
+        'target_action' => [
+            'name' => 'target_action',
+            'vname' => 'LBL_CJ_TARGET',
+            'required' => true,
+            'reportable' => true,
+            'audited' => true,
+            'importable' => 'true',
+            'massupdate' => false,
+            'type' => 'text',
+        ],
     ],
     'indices' => [
         'cj_forms_parent_id' => [
@@ -382,3 +439,6 @@ VardefManager::createVardef('CJ_Forms', 'CJ_Form', [
     'basic',
     'team_security',
 ]);
+
+
+$dictionary['CJ_Form']['fields']['team_name']['dependency'] = 'or(equal($main_trigger_type, "smart_guide_to_sugar_action"), equal($main_trigger_type, "sugar_action_to_smart_guide"))';

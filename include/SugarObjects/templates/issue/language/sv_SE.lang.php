@@ -10,25 +10,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
 
-  'LBL_NAME' =>'Namn',
-  'LBL_NUMBER' => 'Nummer:',
-  'LBL_STATUS' => 'Status:',
-  'LBL_PRIORITY' => 'Prioritet',
-  'LBL_DESCRIPTION' => 'Beskrivning:',
-  'LBL_RESOLUTION' => 'Upplösning',
-  'LBL_LAST_MODIFIED' => 'Senast Modifierad',
-  'LBL_ASSIGNED_TO_ID'=>'Tilldelad till:',
-  'LBL_ASSIGNED_TO_NAME' => 'Tilldelad till:',
-  'LBL_WORK_LOG' => 'Arbetslog:',
+    'LBL_NAME' => 'Namn',
+    'LBL_NUMBER' => 'Nummer:',
+    'LBL_STATUS' => 'Status:',
+    'LBL_PRIORITY' => 'Prioritet',
+    'LBL_DESCRIPTION' => 'Beskrivning:',
+    'LBL_RESOLUTION' => 'Upplösning',
+    'LBL_LAST_MODIFIED' => 'Senast Modifierad',
+    'LBL_ASSIGNED_TO_ID' => 'Tilldelad till:',
+    'LBL_ASSIGNED_TO_NAME' => 'Tilldelad till:',
+    'LBL_WORK_LOG' => 'Arbetslog:',
     'LBL_FOLLOW_UP' => 'Följ upp',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
     'LBL_RESOLVED_DATETIME' => 'Löst datum',
@@ -36,19 +35,19 @@ $mod_strings = array (
     'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Arbetstimmar till upplösning',
     'LBL_PENDING_PROCESSING' => 'Pågående process',
     'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Uppföljningsdatum',
-  'LBL_CREATED_BY' => 'Skapad av:',
-  'LBL_DATE_CREATED' => 'Skapad den:',
-  'LBL_DATE_ENTERED' => 'Skapad den:',
-  'LBL_DATE_MODIFIED'=>'Senast redigerad:',
-  'LBL_MODIFIED_BY' => 'Senast Modifierad Av:',
-  'LBL_ASSIGNED_USER' => 'Tilldelad till användare:',
-  'LBL_ASSIGNED_USER_NAME' => 'Tilldelad till',
-  'LBL_TEAM_NAME' =>'Teamnamn:',
-  'LBL_TYPE'=>'Typ:',
-  'LBL_SUBJECT' => 'Ämne:',
+    'LBL_CREATED_BY' => 'Skapad av:',
+    'LBL_DATE_CREATED' => 'Skapad den:',
+    'LBL_DATE_ENTERED' => 'Skapad den:',
+    'LBL_DATE_MODIFIED' => 'Senast redigerad:',
+    'LBL_MODIFIED_BY' => 'Senast Modifierad Av:',
+    'LBL_ASSIGNED_USER' => 'Tilldelad till användare:',
+    'LBL_ASSIGNED_USER_NAME' => 'Tilldelad till',
+    'LBL_TEAM_NAME' => 'Teamnamn:',
+    'LBL_TYPE' => 'Typ:',
+    'LBL_SUBJECT' => 'Ämne:',
 
     'LBL_EDIT_BUTTON' => 'Redigera',
     'LBL_REMOVE' => 'Ta bort',
 
 
-  );
+];

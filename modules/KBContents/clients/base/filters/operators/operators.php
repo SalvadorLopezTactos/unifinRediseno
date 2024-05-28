@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['KBContents']['base']['filter']['operators'] = array(
-    'nestedset' => array(
+$viewdefs['KBContents']['base']['filter']['operators'] = [
+    'nestedset' => [
         '$in' => 'LBL_OPERATOR_IS',
         '$not_in' => 'LBL_OPERATOR_IS_NOT',
         '$empty' => 'LBL_OPERATOR_EMPTY',
         '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
-    ),
-    'htmleditable_tinymce' => array(
+    ],
+    'htmleditable_tinymce' => [
         '$contains' => 'LBL_OPERATOR_CONTAINING_THESE_WORDS',
         '$not_contains' => 'LBL_OPERATOR_EXCLUDING_THESE_WORDS',
-    ),
-);
+    ],
+];

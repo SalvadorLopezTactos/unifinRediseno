@@ -13,8 +13,8 @@
 
 <tr>
     {{#each model}}
-        <td class="wrap-report-text overflow-hidden">
-            <div class="ellipsis_inline" data-placement="bottom" data-html="true" data-original-title="{{this}}">
+        <td class="wrap-report-text bg-[--primary-content-background] overflow-hidden">
+            <div class="ellipsis_inline" data-bs-placement="bottom" data-html="true" data-original-title="{{this}}">
                 {{#sanitize}}
                     {{{this}}}
                 {{/sanitize}}

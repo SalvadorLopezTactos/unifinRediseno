@@ -10,7 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class Shift extends Basic {
+class Shift extends Basic
+{
     public $new_schema = true;
     public $module_dir = 'Shifts';
     public $module_name = 'Shifts';
@@ -109,7 +110,7 @@ class Shift extends Basic {
     public function isOpen(string $day)
     {
         $field = 'is_open_' . $day;
-        return (bool) $this->$field;
+        return (bool)$this->$field;
     }
 
     /**
@@ -149,14 +150,16 @@ class Shift extends Basic {
 
         return
             [
-                'hour' => (int) $this->{$prop . '_hour'},
-                'minutes' => (int) $this->{$prop . '_minutes'},
+                'hour' => (int)$this->{$prop . '_hour'},
+                'minutes' => (int)$this->{$prop . '_minutes'},
             ];
     }
 
-    public function bean_implements($interface){
-        switch($interface){
-            case 'ACL': return true;
+    public function bean_implements($interface)
+    {
+        switch ($interface) {
+            case 'ACL':
+                return true;
         }
         return false;
     }

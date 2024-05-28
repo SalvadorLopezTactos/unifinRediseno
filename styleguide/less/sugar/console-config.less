@@ -53,6 +53,37 @@
   overflow: auto;
   flex: 1;
 
+  .edit-th {
+    min-width: 70px;
+  }
+
+  .tr-inline-edit {
+    .left-column {
+      z-index: 10;
+
+      .fieldset {
+        padding: 0;
+      }
+    }
+
+    .edit-td {
+      min-width: 70px;
+    }
+
+    .subfields .subfield {
+      margin-bottom: 0.5rem;
+
+      .datetime {
+        display: flex;
+        gap: 4px;
+      }
+    }
+
+    div[data-fieldname="case_number"] .ellipsis_inline {
+      font-size: @fontSizeMedium;
+    }
+  }
+
   &.console-preview {
     .multi-line-table {
       border: @borderWidget;
@@ -92,11 +123,9 @@
 .agent_workbench_dashboard,
 .console_dashboard {
   .kpi-metrics {
-    height: 61px;
-    background-color: @btnBackground;
     display: flex;
-    border-bottom-width: 1px;
-    border-bottom-color: @gray30;
+    min-height: 61px;
+    background-color: @btnBackground;
 
     .kpi-metrics-tabs {
       width: ~'calc(100% - 24px)';
@@ -105,6 +134,10 @@
 
       .metric-tabs {
         display: flex;
+
+        .hidden {
+          display: none;
+        }
 
         .empty-metric-ribbon {
           font-weight: 400;
@@ -296,6 +329,7 @@
 
         .dropdown-menu {
           border-radius: 0 0 6px 6px;
+          top: 49px;
         }
       }
     }
@@ -313,6 +347,8 @@
 
   .multi-line-list-view {
     background: @multiLineBackground;
+    flex: inherit;
+    height: calc(~'100% - 176px');
 
     .multi-line-list-loader,
     .multi-line-list-loader-footer {
@@ -336,25 +372,10 @@
           tr {
             th[data-fieldname]:not(.stick-left) {
               &:nth-child(2) {
-                .sticky();
-
+                // TODO Move to Tailwind eventually
+                position: sticky;
                 left: @multiLineFirstColumnLeft;
                 z-index: 10;
-
-                &.column-border::after {
-                  .h-full();
-                  .absolute();
-
-                  content: '';
-                  width: 1px;
-                  background-color: @borderColor;
-                  min-width: 1px;
-                  max-width: 1px;
-                  border-right: none;
-                  top: 0;
-                  bottom: 0;
-                  right: -1px;
-                }
               }
             }
           }
@@ -363,24 +384,11 @@
         tbody {
           tr {
             td:nth-child(2) {
-              .sticky();
-
+              // TODO Move to Tailwind eventually
+              position: sticky;
               left: @multiLineFirstColumnLeft;
               z-index: 10;
               overflow: visible;
-
-              &.column-border::after {
-                .absolute();
-
-                content: '';
-                width: 1px;
-                background-color: @borderColor;
-                min-width: 1px;
-                max-width: 1px;
-                top: 0;
-                bottom: 0;
-                right: -1px;
-              }
             }
           }
         }
@@ -388,40 +396,11 @@
     }
 
     td.left-column .fieldset.btn-group {
-      .static();
-    }
-
-    &.frozen-list-headers {
-      thead {
-        .sticky();
-
-        top: 0;
-        z-index: 12;
-      }
-    }
-
-    thead {
-      .left-column {
-        .sticky();
-
-        left: 0;
-        z-index: 12;
-        height: 28px;
-        min-width: 38px;
-      }
+      // TODO Move to Tailwind eventually
+      position: static;
     }
 
     tbody .left-column {
-      .sticky();
-
-      left: 0;
-      border-top: @borderWidget;
-      height: 44px;
-
-      &:focus-within {
-        z-index: 11;
-      }
-
       .dropdown-menu {
         left: 9px;
         top: 34px;

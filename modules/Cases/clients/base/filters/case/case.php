@@ -25,5 +25,21 @@ $viewdefs['Cases']['base']['filter']['case'] = [
             ],
             'editable' => false,
         ],
+        [
+            'id' => 'escalated_cases',
+            'name' => 'LBL_ESCALATED_CASES',
+            'filter_definition' => [
+                'is_escalated' => [
+                    '$equals' => '1',
+                ],
+            ],
+            'filter_template' => [
+                'is_escalated' => [
+                    '$equals' => '1',
+                ],
+            ],
+            'editable' => false,
+            'is_template' => true,
+        ],
     ],
 ];

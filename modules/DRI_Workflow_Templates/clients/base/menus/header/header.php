@@ -25,8 +25,8 @@ $viewdefs['DRI_Workflow_Templates']['base']['menu']['header'] = [
         'icon' => 'sicon-list-view',
     ],
     [
-        'route'=>'#DRI_Workflow_Templates/layout/template-import',
-        'label' =>'LNK_IMPORT_CUSTOMER_JOURNEY_TEMPLATES',
+        'route' => '#DRI_Workflow_Templates/layout/template-import',
+        'label' => 'LNK_IMPORT_CUSTOMER_JOURNEY_TEMPLATES',
         'acl_action' => 'import',
         'acl_module' => 'DRI_Workflow_Templates',
         'icon' => 'sicon-upload',

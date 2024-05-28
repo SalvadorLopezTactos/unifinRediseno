@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Konsollkonfigurasjon',
     'LBL_MODULE_NAME_SINGULAR' => 'Konsollkonfigurasjon',
     'LBL_CONSOLE_CONFIG_TITLE' => 'Konsoll',
@@ -55,4 +56,4 @@ $mod_strings = array(
     'LBL_CONSOLE_DIRECTIONS_CHANGE' => 'Endringene vises øyeblikkelig, men du må lagre dem for at de skal tre i kraft.',
     'LBL_CONSOLE_DIRECTIONS_FILTER_AND' => 'og ',
     'LBL_CONSOLE_DIRECTIONS_FILTER_OR' => 'eller ',
-);
+];

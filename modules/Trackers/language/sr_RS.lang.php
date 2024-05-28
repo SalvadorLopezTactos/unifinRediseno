@@ -10,48 +10,46 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
 
-		  //Column header mapping
-		  'action' => 'Akcija',
-		  'active_users' => 'Broj aktivnih korisnika',
-		  'date_modified' => 'Datum poslednje akcije',
-		  'different_modules_accessed' => 'Broj modula kojima je pristupano',
-		  'first_name' => 'Ime',
-		  'item_id' => 'ID broj',
-		  'item_summary' => 'Naziv',
-		  'last_action' => 'Datum/vreme poslednje akcije',
-		  'last_name' => 'Prezime:',
-		  'module_name' => 'Naziv modula',
-		  'records_modified' => 'Ukupno promenjenih zapisa',
-		  'top_module' => 'Moduli kojima je najčešće pristupano',
-		  'total_count' => 'Ukupan broj pregleda strane',
-		  'total_login_time' => 'Vreme (hh:mm:ss)',
-		  'user_name' => 'Korisničko ime',
-		  'users' => 'Korisnici',
-		  
-		  //Administration related labels
-		  'LBL_ENABLE' => 'Omogućeno',
-		  'LBL_MODULE_NAME_TITLE' => 'Sistemi za praćenje',
-		  'LBL_MODULE_NAME' => 'Sistemi za praćenje',
-		  'LBL_MODULE_NAME_SINGULAR' => 'Sistem za praćenje',
-		  'LBL_TRACKER_SETTINGS' => 'Podešavanja sistema za praćenje',
-		  'LBL_TRACKER_QUERIES_DESC' => 'Upiti za sisteme praćenja',
-		  'LBL_TRACKER_QUERIES_HELP' => 'Pratite SQL izraze kada je opcija "Loguj spore upite" omogućena i kada izvršenje upita prevaziđe vrednost "Vremenski prag sporog upita"',
-		  'LBL_TRACKER_PERF_DESC' => 'Performanse sistema za praćenje',
-		  'LBL_TRACKER_PERF_HELP' => 'Prati promene u bazi, pristupe fajlovima i iskorišćenost memorije.',
-		  'LBL_TRACKER_SESSIONS_DESC' => 'Sesije sistema za praćenje',
-		  'LBL_TRACKER_SESSIONS_HELP' => 'Prati aktivne korisnike i informacije o sesiji korisnika',
-		  'LBL_TRACKER_DESC' => 'Akcije sistema za praćenje',
-		  'LBL_TRACKER_HELP' => 'Prati preglede korisničke strane (module i zapise kojima je pristupano) i čuvanje zapisa',
-		  'LBL_TRACKER_PRUNE_INTERVAL' => 'Broj dana koliko će se čuvati podaci sistema za praćenje kada Planer očisti tabele',
-		  'LBL_TRACKER_PRUNE_RANGE' => 'Broj dana',
-);
-?>
+    //Column header mapping
+    'action' => 'Akcija',
+    'active_users' => 'Broj aktivnih korisnika',
+    'date_modified' => 'Datum poslednje akcije',
+    'different_modules_accessed' => 'Broj modula kojima je pristupano',
+    'first_name' => 'Ime',
+    'item_id' => 'ID broj',
+    'item_summary' => 'Naziv',
+    'last_action' => 'Datum/vreme poslednje akcije',
+    'last_name' => 'Prezime:',
+    'module_name' => 'Naziv modula',
+    'records_modified' => 'Ukupno promenjenih zapisa',
+    'top_module' => 'Moduli kojima je najčešće pristupano',
+    'total_count' => 'Ukupan broj pregleda strane',
+    'total_login_time' => 'Vreme (hh:mm:ss)',
+    'user_name' => 'Korisničko ime',
+    'users' => 'Korisnici',
+
+    //Administration related labels
+    'LBL_ENABLE' => 'Omogućeno',
+    'LBL_MODULE_NAME_TITLE' => 'Sistemi za praćenje',
+    'LBL_MODULE_NAME' => 'Sistemi za praćenje',
+    'LBL_MODULE_NAME_SINGULAR' => 'Sistem za praćenje',
+    'LBL_TRACKER_SETTINGS' => 'Podešavanja sistema za praćenje',
+    'LBL_TRACKER_QUERIES_DESC' => 'Upiti za sisteme praćenja',
+    'LBL_TRACKER_QUERIES_HELP' => 'Pratite SQL izraze kada je opcija "Loguj spore upite" omogućena i kada izvršenje upita prevaziđe vrednost "Vremenski prag sporog upita"',
+    'LBL_TRACKER_PERF_DESC' => 'Performanse sistema za praćenje',
+    'LBL_TRACKER_PERF_HELP' => 'Prati promene u bazi, pristupe fajlovima i iskorišćenost memorije.',
+    'LBL_TRACKER_SESSIONS_DESC' => 'Sesije sistema za praćenje',
+    'LBL_TRACKER_SESSIONS_HELP' => 'Prati aktivne korisnike i informacije o sesiji korisnika',
+    'LBL_TRACKER_DESC' => 'Akcije sistema za praćenje',
+    'LBL_TRACKER_HELP' => 'Prati preglede korisničke strane (module i zapise kojima je pristupano) i čuvanje zapisa',
+    'LBL_TRACKER_PRUNE_INTERVAL' => 'Broj dana koliko će se čuvati podaci sistema za praćenje kada Planer očisti tabele',
+    'LBL_TRACKER_PRUNE_RANGE' => 'Broj dana',
+];

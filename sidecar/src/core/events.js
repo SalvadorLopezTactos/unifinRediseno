@@ -16,7 +16,7 @@
  *
  * Usage example:
  * ```
- * const Events = require('core/Events');
+ * const Events = require('./Events');
  * var foo = {
  *     initialize: function() {
  *         // Register the event with the events hub.

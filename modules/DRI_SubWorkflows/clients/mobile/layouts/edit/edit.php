@@ -11,8 +11,7 @@
  */
 $viewdefs['DRI_SubWorkflows']['mobile']['layout']['edit'] = [
     'type' => 'edit',
-    'components' =>
-    [
+    'components' => [
         [
             'view' => 'edit',
         ],

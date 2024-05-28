@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Reports\Charts\Types;
 
 class TreemapChart extends BaseChart
@@ -46,7 +47,7 @@ class TreemapChart extends BaseChart
     {
         $newData = [];
         foreach ($data['values'] as $value) {
-            $newData [] = ['label' =>  $value['label'][0], 'value' => $value['values'][0]];
+            $newData [] = ['label' => $value['label'][0], 'value' => $value['values'][0]];
         }
 
         return $newData;

@@ -199,9 +199,9 @@ $dictionary['Note'] = [
         ],
         'parent_name' => [
             'name' => 'parent_name',
-            'parent_type' => 'record_type_display' ,
+            'parent_type' => 'record_type_display',
             'type_name' => 'parent_type',
-            'id_name' => 'parent_id', 'vname'=>'LBL_RELATED_TO',
+            'id_name' => 'parent_id', 'vname' => 'LBL_RELATED_TO',
             'type' => 'parent',
             'source' => 'non-db',
             'options' => 'record_type_display_notes',
@@ -225,10 +225,10 @@ $dictionary['Note'] = [
             'source' => 'non-db',
         ],
         'contact_phone' => [
-            'name' =>'contact_phone',
+            'name' => 'contact_phone',
             'vname' => 'LBL_PHONE',
             'type' => 'relate',
-            'source' =>'non-db',
+            'source' => 'non-db',
             'link' => 'contact',
             'module' => 'Contacts',
             'table' => 'contacts',
@@ -237,7 +237,7 @@ $dictionary['Note'] = [
         ],
         'contact_email' => [
             'name' => 'contact_email',
-            'type' =>'varchar',
+            'type' => 'varchar',
             'vname' => 'LBL_EMAIL_ADDRESS',
             'source' => 'non-db',
             'studio' => false,
@@ -647,6 +647,7 @@ $dictionary['Note'] = [
         'assignable',
         'team_security',
         'external_source',
+        'audit',
     ],
     'portal_visibility' => [
         'class' => 'Notes',

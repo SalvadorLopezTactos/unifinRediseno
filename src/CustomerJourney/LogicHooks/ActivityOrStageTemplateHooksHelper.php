@@ -30,7 +30,7 @@ class ActivityOrStageTemplateHooksHelper
     {
         if ((self::isFieldChanged($activityOrStageTemplate, 'start_next_journey_id') ||
                 self::isFieldChanged($activityOrStageTemplate, 'dri_workflow_template_id')) &&
-                !empty($activityOrStageTemplate->start_next_journey_id)
+            !empty($activityOrStageTemplate->start_next_journey_id)
         ) {
             try {
                 $currentJourneyTemplate = \DRI_Workflow_Template::getById($activityOrStageTemplate->dri_workflow_template_id);

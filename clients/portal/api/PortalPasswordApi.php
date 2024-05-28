@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -57,7 +59,7 @@ class PortalPasswordApi extends SugarApi
      * @throws SugarApiExceptionRequestMethodFailure
      * @throws SugarApiExceptionMissingParameter
      */
-    public function resetEmailPortalPassword(ServiceBase $api, array $args) : bool
+    public function resetEmailPortalPassword(ServiceBase $api, array $args): bool
     {
         $this->requireArgs($args, ['username']);
 
@@ -93,7 +95,7 @@ class PortalPasswordApi extends SugarApi
      * @return null|SugarBean
      * @throws SugarApiExceptionNotFound
      */
-    public function getBean(string $module) : SugarBean
+    public function getBean(string $module): SugarBean
     {
         return BeanFactory::getBean($module);
     }
@@ -103,7 +105,7 @@ class PortalPasswordApi extends SugarApi
      *
      * @return SugarQuery
      */
-    public function getSugarQuery() : SugarQuery
+    public function getSugarQuery(): SugarQuery
     {
         return new SugarQuery();
     }
@@ -129,7 +131,7 @@ class PortalPasswordApi extends SugarApi
         $guid = Uuid::uuid1();
 
         // create a url with new guid
-        $url = prependSiteURL('/portal/#resetpassword/'.$guid);
+        $url = prependSiteURL('/portal/#resetpassword/' . $guid);
         $values = [
             'guid' => $guid,
             'bean_id' => $contactBean->id,
@@ -152,7 +154,7 @@ class PortalPasswordApi extends SugarApi
      * @return bool
      * @throws SugarApiException
      */
-    public function sendEmail(string $templateId, SugarBean $contactBean, string $platform) : bool
+    public function sendEmail(string $templateId, SugarBean $contactBean, string $platform): bool
     {
         $mailTransmissionProtocol = null;
         $result = false;
@@ -213,8 +215,8 @@ class PortalPasswordApi extends SugarApi
                     LoggerManager::getLogger()->fatal('Email Reminder: error sending email, system smtp server is not set');
                     break;
                 default:
-                    LoggerManager::getLogger()->fatal('Email Reminder: error sending e-mail (method: '.
-                        $mailTransmissionProtocol .'), (error: '.$message .')');
+                    LoggerManager::getLogger()->fatal('Email Reminder: error sending e-mail (method: ' .
+                        $mailTransmissionProtocol . '), (error: ' . $message . ')');
                     break;
             }
             throw new SugarApiException(translate('LBL_PASSWORD_RESET_EMAIL_FAIL'));
@@ -230,7 +232,7 @@ class PortalPasswordApi extends SugarApi
      * @return array containing the ID and date_modified of the matching contact bean
      * @throws SugarApiException
      */
-    public function resetPassword(ServiceBase $api, array $args) : array
+    public function resetPassword(ServiceBase $api, array $args): array
     {
         $this->requireArgs($args, ['newPassword', 'resetID']);
 
@@ -263,7 +265,7 @@ class PortalPasswordApi extends SugarApi
      * @param string $newPassword the string containing the new portal password
      * @return bool true if the password meets requirements; false otherwise
      */
-    protected function validatePassword($newPassword) : bool
+    protected function validatePassword($newPassword): bool
     {
         // Validate that the password meets the minimum requirements, which
         // are the same as the requirements for base users
@@ -277,7 +279,7 @@ class PortalPasswordApi extends SugarApi
      * @return string|null the string containing the contact bean ID associated
      *         with the reset token, or null if the token is invalid
      */
-    protected function validateResetToken($resetID) : ?string
+    protected function validateResetToken($resetID): ?string
     {
         // If the reset token does not exist, indicate failure
         $token = $this->findResetToken($resetID);
@@ -324,7 +326,7 @@ class PortalPasswordApi extends SugarApi
      * @return Contact|null the contact bean that was updated, or null if no
      *         matching contact was found
      */
-    protected function updatePortalPassword($contactID, $newPassword) : ?Contact
+    protected function updatePortalPassword($contactID, $newPassword): ?Contact
     {
         $contactBean = BeanFactory::newBean('Contacts');
         $contactBean->disable_row_level_security = true;
@@ -357,12 +359,12 @@ class PortalPasswordApi extends SugarApi
      * @param Contact $contactBean the Contact whose Portal password has been changed
      * @return bool true if successful; false if an error occurred
      */
-    protected function sendConfirmationEmail(Contact $contactBean) : bool
+    protected function sendConfirmationEmail(Contact $contactBean): bool
     {
         // Fail if no primary email address is set for the contact
         $toAddress = $contactBean->emailAddress->getPrimaryAddress($contactBean);
         if (empty($toAddress)) {
-            \LoggerManager::getLogger()->fatal("Error sending password reset confirmation email: No recipient email address");
+            \LoggerManager::getLogger()->fatal('Error sending password reset confirmation email: No recipient email address');
             return false;
         }
 

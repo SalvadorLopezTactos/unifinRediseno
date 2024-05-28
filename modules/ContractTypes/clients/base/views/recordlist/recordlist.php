@@ -10,20 +10,20 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['ContractTypes']['base']['view']['recordlist'] = array(
-    'selection' => array(
+$viewdefs['ContractTypes']['base']['view']['recordlist'] = [
+    'selection' => [
         'type' => 'multi',
-        'actions' => array(
-            array(
+        'actions' => [
+            [
                 'name' => 'merge_button',
                 'type' => 'button',
                 'label' => 'LBL_MERGE',
                 'primary' => true,
-                'events' => array(
+                'events' => [
                     'click' => 'list:mergeduplicates:fire',
-                ),
+                ],
                 'acl_action' => 'edit',
-            ),
+            ],
             [
                 'name' => 'calc_field_button',
                 'type' => 'button',
@@ -33,26 +33,26 @@ $viewdefs['ContractTypes']['base']['view']['recordlist'] = array(
                 ],
                 'acl_action' => 'massupdate',
             ],
-            array(
+            [
                 'name' => 'delete_button',
                 'type' => 'button',
                 'label' => 'LBL_DELETE',
                 'acl_action' => 'delete',
                 'primary' => true,
-                'events' => array(
+                'events' => [
                     'click' => 'list:massdelete:fire',
-                ),
-            ),
-            array(
+                ],
+            ],
+            [
                 'name' => 'export_button',
                 'type' => 'button',
                 'label' => 'LBL_EXPORT',
                 'acl_action' => 'export',
                 'primary' => true,
-                'events' => array(
+                'events' => [
                     'click' => 'list:massexport:fire',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

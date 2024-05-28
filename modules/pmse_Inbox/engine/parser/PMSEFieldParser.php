@@ -56,11 +56,11 @@ class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserIn
      * List of token parse methods
      * @var array
      */
-    public $tokenMethods = array(
+    public $tokenMethods = [
         'current_user' => 'parseCurrentUser',
         'supervisor' => 'parseSupervisor',
         'owner' => 'parseOwner',
-    );
+    ];
 
     /**
      * Getting the PMSERelatedModule object
@@ -111,7 +111,7 @@ class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserIn
     {
         $this->evaluatedBean = $evaluatedBean;
         $this->relatedBean = null;
-        $this->relatedBeans = array();
+        $this->relatedBeans = [];
     }
 
     /**
@@ -149,12 +149,12 @@ class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserIn
 
     /**
      * Parser token incorporando el tipo de dato, en el caso de tipo de dato date, datetime se usa la clase TimeDate
-     * @global object $current_user cuurrent user
      * @param object $criteriaToken token to be parsed
      * @param array $params
      * @return object
+     * @global object $current_user cuurrent user
      */
-    public function parseCriteriaToken($criteriaToken, $params = array())
+    public function parseCriteriaToken($criteriaToken, $params = [])
     {
         if ($criteriaToken->expType === 'VARIABLE') {
             $criteriaToken = $this->parseVariable($criteriaToken, $params);
@@ -179,7 +179,7 @@ class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserIn
         }
 
         // Get the module for the criteria
-        $criteriaMod  = BeanFactory::getBeanClass($criteriaToken->expModule);
+        $criteriaMod = BeanFactory::getBeanClass($criteriaToken->expModule);
         // If there is no criteria module then it is a link
         // If we have a criteria module, but it is not the evaluated bean,
         // it is a link
@@ -241,7 +241,10 @@ class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserIn
             }
 
             // Check the criteria field type and set data as needed
-            $type = $bean->field_defs[$criteriaToken->expField]['type'];
+            $type = '';
+            if (isset($bean->field_defs[$criteriaToken->expField]['type'])) {
+                $type = $bean->field_defs[$criteriaToken->expField]['type'];
+            }
             $dates = ['date', 'datetime', 'datetimecombo'];
             if (in_array($type, $dates)) {
                 $criteriaToken->expSubtype = 'date';
@@ -255,31 +258,31 @@ class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserIn
 
     /**
      * Parse the token using a new function to parse variable tokens
-     * @global object $current_user
      * @param type $criteriaToken
      * @param type $params
      * @return type
+     * @global object $current_user
      */
-    public function parseVariable($criteriaToken, $params = array())
+    public function parseVariable($criteriaToken, $params = [])
     {
-        $tokenArray = array(
+        $tokenArray = [
             $criteriaToken->expModule ?? null,
             $criteriaToken->expValue ?? null,
             $criteriaToken->expOperator ?? null,
-        );
+        ];
         $tokenValue = $this->parseTokenValue($tokenArray);
         $tokenValue = $tokenValue[0];
         if ($criteriaToken->expSubtype == 'Currency') {
             $value = json_decode($tokenValue);
             // in some use cases, value can be numeric instead of array
             // so need to handle currency_id and amount accordingly
-            if (!empty($value["currency_id"])) {
-                $criteriaToken->expField = $value["currency_id"];
+            if (!empty($value['currency_id'])) {
+                $criteriaToken->expField = $value['currency_id'];
             } elseif (isset($this->evaluatedBean->currency_id)) {
                 $criteriaToken->expField = $this->evaluatedBean->currency_id;
             }
-            if (!empty($value["amount"])) {
-                $criteriaToken->currentValue = $value["amount"];
+            if (!empty($value['amount'])) {
+                $criteriaToken->currentValue = $value['amount'];
             } else {
                 $criteriaToken->currentValue = $tokenValue;
             }
@@ -350,7 +353,7 @@ class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserIn
      */
     public function parseTokenValue($token, $params = [])
     {
-        $values = array();
+        $values = [];
 
         if (!empty($token)) {
             // This logic is a fairly bad assumption, but works in most cases. The
@@ -375,7 +378,7 @@ class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserIn
                     PMSEEngineUtils::setRegistry($bean, false);
                 }
             } else {
-                $beans = array($this->evaluatedBean);
+                $beans = [$this->evaluatedBean];
             }
 
             if (is_array($beans)) {
@@ -429,7 +432,7 @@ class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserIn
      */
     public function decomposeToken($token)
     {
-        $response = array();
+        $response = [];
         $tokenArray = explode('::', $token);
         foreach ($tokenArray as $key => $value) {
             if ($value != '{' && $value != '}' && !empty($value)) {
@@ -448,8 +451,8 @@ class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserIn
     public function hasParseMethod($token)
     {
         return !empty($token->expValue) && !is_array($token->expValue)
-               && isset($this->tokenMethods[$token->expValue])
-               && method_exists($this, $this->tokenMethods[$token->expValue]);
+            && isset($this->tokenMethods[$token->expValue])
+            && method_exists($this, $this->tokenMethods[$token->expValue]);
     }
 
     /**

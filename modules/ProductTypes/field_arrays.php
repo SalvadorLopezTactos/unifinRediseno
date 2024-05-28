@@ -10,22 +10,20 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Contains field arrays that are used for caching
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-$fields_array['ProductType'] = array ('column_fields' => Array("id"
-		,"name"
-		,"description"
-		,"list_order"
-		,"date_entered"
-		,"date_modified"
-		,"modified_user_id"
-		, "created_by"
-		),
-        'list_fields' =>  Array('id', 'name', 'description','list_order'),
-    'required_fields' =>  array("name"=>1, "list_order"=>2),
-);
-?>
+$fields_array['ProductType'] = ['column_fields' => ['id'
+    , 'name'
+    , 'description'
+    , 'list_order'
+    , 'date_entered'
+    , 'date_modified'
+    , 'modified_user_id'
+    , 'created_by',
+],
+    'list_fields' => ['id', 'name', 'description', 'list_order'],
+    'required_fields' => ['name' => 1, 'list_order' => 2],
+];

@@ -134,7 +134,7 @@ class TemplateImporter
         if (is_object($this->output)) {
             $this->output->writeln($message);
         } elseif ($this->output === true) {
-            $message = strip_tags($message);
+            $message = htmlspecialchars($message);
             $lineBreak = php_sapi_name() === 'cli' ? '\n' : '<br/>';
             echo $message . $lineBreak;
         }
@@ -301,7 +301,7 @@ class TemplateImporter
             !empty($data['blocked_by_id']) &&
             empty($data['blocked_by'])
         ) {
-            $data['blocked_by'] = json_encode(array ($data['blocked_by_id']));
+            $data['blocked_by'] = json_encode([$data['blocked_by_id']]);
         }
 
         foreach ($data as $fieldName => $value) {
@@ -341,8 +341,8 @@ class TemplateImporter
     {
         if ($bean->new_with_id || !empty($bean->fetched_row['deleted'])) {
             $fetchedRowDeleted = false;
-            if (is_array($bean->fetched_row)) {
-                $fetchedRowDeleted = $bean->fetched_row['deleted'] ?? null;
+            if (is_array($bean->fetched_row) && isset($bean->fetched_row['deleted'])) {
+                $fetchedRowDeleted = $bean->fetched_row['deleted'];
             }
 
             $this->log("creating {$bean->module_dir}");
@@ -445,7 +445,7 @@ class TemplateImporter
     {
         $ids = $this->listIds();
 
-        if (count($ids) > 0) {
+        if (safeCount($ids) > 0) {
             foreach ($ids as $id) {
                 $this->import($id);
             }

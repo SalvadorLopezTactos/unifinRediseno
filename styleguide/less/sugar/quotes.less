@@ -135,7 +135,6 @@
 
             &.btn-group {
               margin-left: 0;
-              padding-right: 2px;
             }
           }
         }
@@ -155,11 +154,6 @@
     tbody.quote-data-group {
       border-top: @borderWidget;
 
-      tr.quote-data-group-header td,
-      tr.quote-data-group-footer td {
-        background: @contentBackground;
-      }
-
       tr.quote-data-group-header {
         td[data-type="quote-group-title"] {
           padding: 6px 8px 2px;
@@ -178,16 +172,6 @@
         }
 
         .action-button-wrapper {
-          .fieldset:first-child {
-            left: 8px;
-            width: 28px;
-          }
-
-          span.fieldset:last-child {
-            left: 16px;
-            width: 36px;
-          }
-
           .left-column-save-cancel {
             display: none;
           }
@@ -229,30 +213,6 @@
 
             .left-column-save-cancel {
               display: inline-block;
-              width: 71px;
-              height: 36px;
-              background: @gray20;
-
-              &.higher {
-                padding: 0;
-                border-bottom: 0;
-
-                .btn {
-                  &.inline-cancel {
-                    margin-left: 4px;
-                  }
-
-                  .fa {
-                    font-size: 16px;
-                  }
-
-                  &.inline-save {
-                    .fa {
-                      color: @PrimaryButton;
-                    }
-                  }
-                }
-              }
             }
 
             .left-column-buttons {
@@ -527,14 +487,6 @@
 
           .btn-group .btn {
             border-radius: 0 3px 3px 0;
-          }
-        }
-
-        // discount type font-family to be same as rest
-        .fieldset {
-          a.btn .fa {
-            font-family: @sansFontFamily;
-            font-size: 12px;
           }
         }
 

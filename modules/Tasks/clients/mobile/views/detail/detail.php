@@ -16,22 +16,22 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$viewdefs['Tasks']['mobile']['view']['detail'] = array(
-    'templateMeta' => array(
+$viewdefs['Tasks']['mobile']['view']['detail'] = [
+    'templateMeta' => [
         'maxColumns' => '1',
-        'widths' => array(
-            array('label' => '10', 'field' => '30'),
-        ),
-    ),
-    'panels' => array(
-        array(
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
-                    'displayParams' => array(
+                    'displayParams' => [
                         'required' => true,
-                        'wireless_edit_only' => true)),
+                        'wireless_edit_only' => true]],
                 'priority',
                 'status',
                 'date_start',
@@ -41,8 +41,7 @@ $viewdefs['Tasks']['mobile']['view']['detail'] = array(
                 'parent_name',
                 'assigned_user_name',
                 'team_name',
-            )
-        ),
-    ),
-);
-?>
+            ],
+        ],
+    ],
+];

@@ -9,36 +9,36 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Forecasts']['base']['view']['config-scenarios'] = array(
+$viewdefs['Forecasts']['base']['view']['config-scenarios'] = [
     'label' => 'LBL_FORECASTS_CONFIG_BREADCRUMB_SCENARIOS',
-    'panels' => array(
-        array(
-            'fields' => array(
-                array(
+    'panels' => [
+        [
+            'fields' => [
+                [
                     'name' => 'show_worksheet_likely',
                     'type' => 'bool',
                     'label' => 'LBL_FORECASTS_CONFIG_WORKSHEET_SCENARIOS_LIKELY',
                     'default' => false,
                     'enabled' => true,
                     'view' => 'detail',
-                ),
-                array(
+                ],
+                [
                     'name' => 'show_worksheet_best',
                     'type' => 'bool',
                     'label' => 'LBL_FORECASTS_CONFIG_WORKSHEET_SCENARIOS_BEST',
                     'default' => false,
                     'enabled' => true,
                     'view' => 'forecastsWorksheet',
-                ),
-                array(
+                ],
+                [
                     'name' => 'show_worksheet_worst',
                     'type' => 'bool',
                     'label' => 'LBL_FORECASTS_CONFIG_WORKSHEET_SCENARIOS_WORST',
                     'default' => false,
                     'enabled' => true,
                     'view' => 'forecastsWorksheet',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

@@ -17,53 +17,53 @@ class EmailsApi extends ModuleApi
      */
     public function registerApiRest()
     {
-        return array(
-            'create' => array(
+        return [
+            'create' => [
                 'reqType' => 'POST',
-                'path' => array('Emails'),
-                'pathVars' => array('module'),
+                'path' => ['Emails'],
+                'pathVars' => ['module'],
                 'method' => 'createRecord',
                 'shortHelp' => 'This method creates a new Emails record',
                 'longHelp' => 'modules/Emails/clients/base/api/help/emails_record_post_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionMissingParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
                     'SugarApiException',
                     'SugarApiExceptionError',
-                ),
-            ),
-            'retrieve' => array(
+                ],
+            ],
+            'retrieve' => [
                 'reqType' => 'GET',
-                'path' => array('Emails', '?'),
-                'pathVars' => array('module', 'record'),
+                'path' => ['Emails', '?'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'retrieveRecord',
                 'shortHelp' => 'Returns a single Emails record',
                 'longHelp' => 'modules/Emails/clients/base/api/help/emails_record_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionMissingParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-            'update' => array(
+                ],
+            ],
+            'update' => [
                 'reqType' => 'PUT',
-                'path' => array('Emails', '?'),
-                'pathVars' => array('module', 'record'),
+                'path' => ['Emails', '?'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'updateRecord',
                 'shortHelp' => 'This method updates an Emails record',
                 'longHelp' => 'modules/Emails/clients/base/api/help/emails_record_put_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionMissingParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
                     'SugarApiException',
                     'SugarApiExceptionError',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**
@@ -87,8 +87,8 @@ class EmailsApi extends ModuleApi
         $result = parent::createRecord($api, $args);
 
         if ($isReady) {
-            $loadArgs = array('module' => 'Emails', 'record' => $result['id']);
-            $email = $this->loadBean($api, $loadArgs, 'save', array('source' => 'module_api', 'use_cache' => false));
+            $loadArgs = ['module' => 'Emails', 'record' => $result['id']];
+            $email = $this->loadBean($api, $loadArgs, 'save', ['source' => 'module_api', 'use_cache' => false]);
 
             try {
                 $this->sendEmail($email);
@@ -113,7 +113,7 @@ class EmailsApi extends ModuleApi
         $result = parent::updateRecord($api, $args);
 
         if ($isReady) {
-            $email = $this->loadBean($api, $args, 'save', array('source' => 'module_api'));
+            $email = $this->loadBean($api, $args, 'save', ['source' => 'module_api']);
             $this->sendEmail($email);
             $result = $this->formatBeanAfterSave($api, $args, $email);
         }

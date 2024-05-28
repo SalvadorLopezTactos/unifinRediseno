@@ -181,9 +181,7 @@
             });
         }
         _.each(fieldList, function(field) {
-            // Only fields that are marked with massupdate set to true AND
-            // that are not readonly should be used
-            if (!field.massupdate || field.readonly) {
+            if (!this.checkFieldAvailability(field)) {
                 return;
             }
 
@@ -193,10 +191,24 @@
             var cloneField = app.utils.deepCopy(field);
             cloneField.label = cloneField.label || cloneField.vname;
             massFields.push(cloneField);
-        });
+        }, this);
 
         // Patch the fields so that types like multienum and text use the correct templates
         options.meta.panels[0].fields = app.metadata._patchFields(options.module, metadataModule, massFields);
+    },
+
+    /**
+     * Checks whether the given module field should be allowed for mass update
+     *
+     * @param {Object} field the field metadata
+     * @return {boolean} true if the field should be allowed for mass update; false otherwise
+     */
+    checkFieldAvailability: function(field) {
+        if (!field.massupdate || field.readonly) {
+            return false;
+        }
+
+        return true;
     },
 
     _render: function() {
@@ -582,10 +594,36 @@
     },
 
     /**
+     * Function to get the message to be displayed in the alert
+     *
+     * @return {string}
+     */
+    getDeleteMessage: function() {
+        return app.lang.get('NTC_DELETE_CONFIRMATION_MULTIPLE', this.module);
+    },
+
+    /**
      * Popup dialog message to confirm delete action
      */
     warnDelete: function() {
-        this._modelsToDelete = this.getMassUpdateModel(this.module);
+        const _modelsToDelete = this.getMassUpdateModel(this.module);
+        const selectionContainsTemplates = _.filter(
+            _modelsToDelete.models,
+            (model) => {
+                return model.get('is_template');
+            }
+        ).length > 0;
+
+        if (selectionContainsTemplates) {
+            app.alert.show('try_delete_template', {
+                level: 'error',
+                messages: app.lang.get('LBL_UNSELECT_DELETE_TEMPLATES', this.module),
+            });
+
+            return;
+        }
+
+        this._modelsToDelete = _modelsToDelete;
         this._modelsToDelete.setChunkSize(this._settings.mass_delete_chunk_size);
 
         this._targetUrl = Backbone.history.getFragment();
@@ -598,7 +636,7 @@
 
         app.alert.show('delete_confirmation', {
             level: 'confirmation',
-            messages: app.lang.get('NTC_DELETE_CONFIRMATION_MULTIPLE', this.module),
+            messages: this.getDeleteMessage(),
             onConfirm: _.bind(this.deleteModels, this),
             onCancel: _.bind(function() {
                 app.analytics.trackEvent('click', 'mass_delete_cancel');
@@ -620,12 +658,42 @@
     },
 
     /**
+     * Delete models success callback function
+     *
+     * @param data
+     * @param response
+     * @param options
+     */
+    deleteModelsSuccessCallback: function(data, response, options) {
+        this.layout.trigger('list:records:deleted', this.lastSelectedModels);
+        this.lastSelectedModels = null;
+        let redirect = this._targetUrl !== this._currentUrl;
+        if (options.status === 'done') {
+            //TODO: Since self.layout.trigger("list:search:fire") is deprecated by filterAPI,
+            //TODO: Need trigger for fetching new record list
+            this.layout.context.reloadData({showAlerts: false});
+        } else if (options.status === 'queued') {
+            app.alert.show('jobqueue_notice', {
+                level: 'success',
+                title: app.lang.get('LBL_MASS_UPDATE_JOB_QUEUED'),
+                autoClose: true
+            });
+        }
+        this._modelsToDelete = null;
+        if (redirect) {
+            this.unbindBeforeRouteDelete();
+            //Replace the url hash back to the current staying page
+            app.router.navigate(this._targetUrl, {trigger: true});
+        }
+    },
+
+    /**
      * Delete the model once the user confirms the action
      */
     deleteModels: function() {
         var self = this,
             collection = self._modelsToDelete;
-        var lastSelectedModels = _.clone(collection.models);
+        this.lastSelectedModels = _.clone(collection.models);
 
         app.analytics.trackEvent('click', 'mass_delete_confirm');
         if(collection) {
@@ -647,23 +715,7 @@
                         messages: ['ERR_HTTP_500_TEXT_LINE1', 'ERR_HTTP_500_TEXT_LINE2']
                     });
                 },
-                success: function(data, response, options) {
-                    self.layout.trigger("list:records:deleted", lastSelectedModels);
-                    var redirect = self._targetUrl !== self._currentUrl;
-                    if (options.status === 'done') {
-                        //TODO: Since self.layout.trigger("list:search:fire") is deprecated by filterAPI,
-                        //TODO: Need trigger for fetching new record list
-                        self.layout.context.reloadData({showAlerts: false});
-                    } else if (options.status === 'queued') {
-                        app.alert.show('jobqueue_notice', {level: 'success', title: app.lang.get('LBL_MASS_UPDATE_JOB_QUEUED'), autoClose: true});
-                    }
-                    self._modelsToDelete = null;
-                    if (redirect) {
-                        self.unbindBeforeRouteDelete();
-                        //Replace the url hash back to the current staying page
-                        app.router.navigate(self._targetUrl, {trigger: true});
-                    }
-                }
+                success: _.bind(this.deleteModelsSuccessCallback, this)
             });
         }
     },
@@ -723,6 +775,22 @@
         forCalcFields = !!forCalcFields;
         var massUpdate = this.getMassUpdateModel(this.module),
             self = this;
+
+        const selectionContainsTemplates = _.filter(
+            massUpdate.models,
+            (model) => {
+                return model.get('is_template');
+            }
+        ).length > 0;
+
+        if (selectionContainsTemplates) {
+            app.alert.show('try_update_template', {
+                level: 'error',
+                messages: app.lang.get('LBL_UNSELECT_UPDATE_TEMPLATES', this.module),
+            });
+
+            return;
+        }
 
         massUpdate.setChunkSize(this._settings.mass_update_chunk_size);
 
@@ -931,6 +999,23 @@
         });
     },
     show: function() {
+        const massModel = this.context.get('mass_collection');
+        const selectionContainsTemplates = _.filter(
+            massModel.models,
+            (model) => {
+                return model.get('is_template');
+            }
+        ).length > 0;
+
+        if (selectionContainsTemplates) {
+            app.alert.show('try_update_template', {
+                level: 'error',
+                messages: app.lang.get('LBL_UNSELECT_UPDATE_TEMPLATES', this.module),
+            });
+
+            return;
+        }
+
         this.hideAll();
         this.visible = true;
         this.defaultOption = null;
@@ -939,7 +1024,6 @@
         this.model.set(defaults);
         this.setDefault();
 
-        var massModel = this.context.get('mass_collection');
         massModel.off(null, null, this);
         massModel.on('add remove reset massupdate:estimate', this.setDisabled, this);
         massModel.on('massupdate:start massupdate:end', this.setDisabledOnUpdate, this);

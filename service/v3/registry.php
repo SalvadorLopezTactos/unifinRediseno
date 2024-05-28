@@ -1,5 +1,8 @@
 <?php
-if(!defined('sugarEntry'))define('sugarEntry', true);
+
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,18 +14,19 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('service/v2/registry.php'); //Extend off of v2 registry
+require_once 'service/v2/registry.php'; //Extend off of v2 registry
 
-class registry_v3 extends registry {
-	
-	/**
-	 * This method registers all the functions on the service class
-	 *
-	 */
-	protected function registerFunction() {
-		
+class registry_v3 extends registry
+{
+    /**
+     * This method registers all the functions on the service class
+     *
+     */
+    protected function registerFunction()
+    {
+
         $this->getLogger()->info('Begin: registry->registerFunction');
-		parent::registerFunction();
+        parent::registerFunction();
 
         $this->serviceClass->getServer()->addFunction([
             'get_module_fields_md5',
@@ -32,9 +36,9 @@ class registry_v3 extends registry {
             'search_by_module',
             'get_relationships',
         ]);
-		            
+
         $this->getLogger()->info('END: registry->registerFunction');
-	        
-		// END OF REGISTER FUNCTIONS
-	}
+
+        // END OF REGISTER FUNCTIONS
+    }
 }

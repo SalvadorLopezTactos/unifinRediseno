@@ -10,15 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$subpanel_layout = array(
-	'buttons' => array(
-            array('widget_class' => 'SubPanelTopCreateButton'),
-			array('widget_class' => 'SubPanelTopSelectButton'),
-	),
+$subpanel_layout = [
+    'buttons' => [
+        ['widget_class' => 'SubPanelTopCreateButton'],
+        ['widget_class' => 'SubPanelTopSelectButton'],
+    ],
 
-	'where' => '',
+    'where' => '',
 
 
-	'list_fields' => array(),
-);
-?>
+    'list_fields' => [],
+];

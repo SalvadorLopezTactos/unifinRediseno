@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'تمت قراءة ملف الاستيراد بنجاح',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'السجل المستورد يشارك في عملية ولا يمكن تحريره لأن بعض الحقول مؤمنة للتحرير بواسطة العملية.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'لم يتم استيراد صفوف بسبب حدوث خطأ',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'إذا لم يكن المستخدم موجودًا، فاستخدم المستخدم الحالي',
     'LBL_SHOW_HIDDEN' => 'عرض الحقول التي لا يمكن استيرادها في الحالات الطبيعية',
     'LBL_UPDATE_RECORDS' => 'تحديث السجلات الحالية بدلاً من استيرادها (عدم التراجع)',
-    'LBL_TEST'=> 'اختبار الاستيراد (عدم حفظ أو تغيير البيانات)',
+    'LBL_TEST' => 'اختبار الاستيراد (عدم حفظ أو تغيير البيانات)',
     'LBL_TRUNCATE_TABLE' => 'إفراغ الجدول قبل الاستيراد (حذف كل السجلات)',
     'LBL_RELATED_ACCOUNTS' => 'عدم إنشاء حسابات مرتبطة',
     'LBL_NO_DATECHECK' => 'تجاوز فحص التاريخ (أسرع، إلا أن الاستيراد سيفشل في حالة وجود خطأ في أي تاريخ)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'قيمة رقم صحيح غير صالحة',
     'LBL_ERROR_INVALID_NUM' => 'قيمة رقمية غير صالحة',
     'LBL_ERROR_INVALID_TIME' => 'وقت غير صالح',
-    'LBL_ERROR_INVALID_EMAIL'=>'عنوان بريد إلكتروني غير صالح',
-    'LBL_ERROR_INVALID_BOOL'=>'قيمة غير صالحة (يجب أن تكون القيمة 1 أو 0)',
-    'LBL_ERROR_INVALID_DATE'=>'سلسلة تاريخ غير صالحة',
-    'LBL_ERROR_INVALID_USER'=>'اسم مستخدم أو معرّف غير صالح',
+    'LBL_ERROR_INVALID_EMAIL' => 'عنوان بريد إلكتروني غير صالح',
+    'LBL_ERROR_INVALID_BOOL' => 'قيمة غير صالحة (يجب أن تكون القيمة 1 أو 0)',
+    'LBL_ERROR_INVALID_DATE' => 'سلسلة تاريخ غير صالحة',
+    'LBL_ERROR_INVALID_USER' => 'اسم مستخدم أو معرّف غير صالح',
     'LBL_ERROR_INVALID_TEAM' => 'اسم فريق عمل أو معرّف غير صالح',
     'LBL_ERROR_INVALID_ACCOUNT' => 'اسم حساب أو معرّف غير صالح',
     'LBL_ERROR_INVALID_RELATE' => 'حقل علائقي غير صالح',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'غير موجود أو لا يمكن الكتابة عليه',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'لم يتم تحميل الملف بشكل صحيح. ربما يكون الإعداد &#39;upload_max_filesize&#39; في ملف php.ini مضبوطًا على رقم صغير',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'الملف كبير للغاية. الحد الأقصى:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'بايت. قم بتغيير $sugar_config[&#39;upload_maxsize&#39;] في config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'وحدات بايت. تغيير $sugar_config[&#39;upload_maxsize&#39;] في config.php',
     'LBL_MODULE_NAME' => 'استيراد',
     'LBL_MODULE_NAME_SINGULAR' => 'استيراد',
     'LBL_TRY_AGAIN' => 'المحاولة مرة أخرى',
     'LBL_START_OVER' => 'البدء من البداية',
     'LBL_ERROR' => 'خطأ:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'ملف الاستيراد يحتوي على {0} صف (صفوف). العدد المثالي للصفوف هو {1}. يمكن أن تؤدي الصفوف الأكثر من ذلك إلى إبطاء عملية الاستيراد. انقر على موافق لمتابعة الاستيراد. انقر على إلغاء لمراجعة ملف الاستيراد وإعادة تحميله.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'لا يمكنك استيراد مستخدم مسؤول بالنظام',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'لا يمكنك استيراد مستخدم مسؤول بالنظام',
     'ERR_REPORT_LOOP' => 'اكتشف النظام وجود تكرار حلقي لتقرير. لا يمكن للمستخدم تقديم تقارير لنفسه، ولا يستطيع أي من المديرين المختصين بهم تقديم تقارير لهم.',
     'ERR_MULTIPLE' => 'تم تحديد أعمدة متعددة تحمل نفس اسم الحقل.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'هناك حقول ضرورية مفقودة:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'لم يتم اكتشاف سطور في ملف الاستيراد الخاص بك.  يرجى التحقق من عدم وجود صفوف فارغة في الملف وأعد المحاولة.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'تمت معالجة ملف الاستيراد بالفعل أو الملف غير موجود',
     'LBL_SUCCESS' => 'نجاح:',
-	'LBL_FAILURE' => 'فشل الاستيراد:',
+    'LBL_FAILURE' => 'فشل الاستيراد:',
     'LBL_SUCCESSFULLY' => 'تم الاستيراد بنجاح',
     'LBL_LAST_IMPORT_UNDONE' => 'تم التراجع عن الاستيراد.',
     'LBL_NO_IMPORT_TO_UNDO' => 'لم تتم عملية استيراد للتراجع عنها.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'استيراد مرة أخرى',
     'LBL_FINISHED' => 'تم الانتهاء',
     'LBL_UNDO_LAST_IMPORT' => 'التراجع عن الاستيراد',
-    'LBL_LAST_IMPORTED'=>'تم الإنشاء',
+    'LBL_LAST_IMPORTED' => 'تم الإنشاء',
     'ERR_MULTIPLE_PARENTS' => 'يمكن أن تقوم بتعريف معرّف رئيسي واحد فقط',
     'LBL_DUPLICATES' => 'تم العثور على تكرارات',
     'LNK_DUPLICATE_LIST' => 'تنزيل قائمة التكرارات',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'إخفاء الملاحظات',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'عرض أعمدة المعاينة',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'إخفاء أعمدة المعاينة',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'تحقق من وجود تكرارات باستخدام عامل التشغيل:',
     'LBL_SAVE_MAPPING_AS' => 'لحفظ إعدادات الاستيراد، قم بتوفير اسم للإعدادات المحفوظة:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'علامة اقتباس مفردة (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'علامة اقتباس مزدوجة (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'لتعيين السجلات الجديدة لفرق عمل بخلاف فريق (فرق) العمل الافتراضية الخاصة بك، استخدم عمود القيمة الافتراضية لتحديد فرق عمل مختلفة.',
     'LBL_SIGN_IN_HELP' => 'لتمكين هذه الخدمة، يرجى تسجيل الدخول تحت علامة تبويب الحسابات الخارجية في صفحة إعدادات المستخدم الخاصة بك.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "تجري محاولة للتعامل مع عناوين البريد الإلكتروني في مكون برمجي (Bean) لا يدعمها.",
-);
+];

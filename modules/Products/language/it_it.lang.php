@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Dashboard elenco articoli nell&#39;offerta',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Dashboard record prodotti offerta',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Prodotti Focus Drawer',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia prodotti offerti',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Elemento della Campagna Riportato',
     'LBL_MODULE_NAME' => 'Prodotti',
@@ -182,4 +183,4 @@ Per creare un {{module_name}}:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nuova voce quotata)',
     'LBL_DISCOUNT_PERCENT' => '% percentuale',
     'LBL_DISCOUNT_TYPE' => 'Tipo di sconto',
-);
+];

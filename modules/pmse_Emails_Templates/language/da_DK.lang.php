@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Skrivefelt',
     'LBL_BASE_MODULE' => 'Mål modul',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Fejl ved oprettelsen af proces e-mail-skabelon fra fil',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Denne e-mail-skabelon anvendes aktuelt i en procesdefinition. Ønsker du stadig at redigere denne e-mail-skabelon?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Du kan ikke slette denne e-mail-skabelon, fordi den aktuelt anvendes i en procesdefinition.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Du kan ikke slette denne e-mail-skabelon, fordi den aktuelt anvendes i en procesdefinition.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Feltvælger',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Vælg',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Type feltværdi',
-);
+];

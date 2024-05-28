@@ -10,14 +10,14 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$searchdefs['Accounts'] = array(
-	'templateMeta' => array(
-		'maxColumns' => '1', 
-		'widths' => array('label' => '10', 'field' => '30'),                 
-	),
-	'layout' => array(  					
-		'basic_search' => array(
-			'name',
-		),
-	),
-);
+$searchdefs['Accounts'] = [
+    'templateMeta' => [
+        'maxColumns' => '1',
+        'widths' => ['label' => '10', 'field' => '30'],
+    ],
+    'layout' => [
+        'basic_search' => [
+            'name',
+        ],
+    ],
+];

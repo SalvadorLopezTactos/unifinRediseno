@@ -10,10 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  ********************************************************************************/
 
 //defines the call and meeting status.  Values are keys, not translated strings
-$open_status[] = "Planned";
-
-?>
+$open_status[] = 'Planned';

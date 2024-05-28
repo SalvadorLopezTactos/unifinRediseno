@@ -42,7 +42,7 @@ class SugarPsrLogger implements LoggerTemplate
     {
         // for compatibility with LoggerManager::__call() and SugarLogger::log()
         if (is_array($message)) {
-            if (count($message) == 1) {
+            if (safeCount($message) == 1) {
                 $message = array_shift($message);
             } else {
                 $message = print_r($message, true);

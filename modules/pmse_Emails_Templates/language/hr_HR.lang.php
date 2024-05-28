@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Tijelo',
     'LBL_BASE_MODULE' => 'Modul meta',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Stvaranje predloška e-pošte procesa iz datoteke nije uspjelo',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Ovaj se predložak e-pošte trenutačno upotrebljava u definiciji procesa. Još uvijek želite urediti ovaj predložak e-pošte?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Ne možete izbrisati ovaj predložak e-pošte jer se trenutačno upotrebljava u definiciji procesa.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Ne možete izbrisati ovaj predložak e-pošte jer se trenutačno upotrebljava u definiciji procesa.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Birač polja',
     'LBL_SUGAR_LINK_SELECTOR' => 'Birač poveznice zapisa',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Povezano s modulom meta',
     'LBL_SELECT_BUTTON_LABEL' => 'Odaberi',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Vrsta vrijednosti polja',
-);
+];

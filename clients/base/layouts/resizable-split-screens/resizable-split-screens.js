@@ -14,7 +14,7 @@
  * @extends View.Views.Base.Layout
  */
  ({
-    className: 'h-full flex-grow w-1',
+    className: 'flex flex-grow h-full overflow-y-scroll w-1',
 
     /**
      * @inheritdoc
@@ -278,6 +278,7 @@
             );
         }
 
+        this.context.trigger('container-resizing');
         this._setResizeFeedback();
     },
 

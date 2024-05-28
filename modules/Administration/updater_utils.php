@@ -9,8 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /*********************************************************************************
-********************************************************************************/
+ ********************************************************************************/
 
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 use Sugarcrm\Sugarcrm\Hint\Queue\ProcessorFactory;
@@ -45,70 +46,67 @@ function getBaseSystemInfo($send_usage_info = true)
     return SugarSystemInfo::getInstance()->getBaseInfo();
 }
 
-function check_now($send_usage_info=true, $get_request_data=false, $response_data = false, $from_install=false ) {
+function check_now($send_usage_info = true, $get_request_data = false, $response_data = false, $from_install = false)
+{
     $sclient = null;
     $sugar_version = null;
-	global $sugar_config, $timedate;
-	global $db, $license;
+    global $sugar_config, $timedate;
+    global $db, $license;
 
-	$return_array=array();
-    if(!$from_install && empty($license))loadLicense(true);
+    $return_array = [];
+    if (!$from_install && empty($license)) {
+        loadLicense(true);
+    }
 
     $key = null;
     $needToDownload = true;
-	if(!$response_data){
-
+    if (!$response_data) {
         $systemInfo = SugarSystemInfo::getInstance();
         SugarAutoLoader::requireWithCustom('include/SugarHeartbeat/SugarHeartbeatClient.php', true);
         $sclientClass = SugarAutoLoader::customClass('SugarHeartbeatClient');
         $sclient = new $sclientClass();
 
-        if($from_install){
-    		$info = $systemInfo->getBaseInfo();
-
-        }else{
+        if ($from_install) {
+            $info = $systemInfo->getBaseInfo();
+        } else {
             $info = $systemInfo->getInfo();
         }
 
-		// This section of code is a portion of the code referred
-		// to as Critical Control Software under the End User
-		// License Agreement.  Neither the Company nor the Users
-		// may modify any portion of the Critical Control Software.
-		if(!empty( $license->settings['license_key'])){
-			$key = $license->settings['license_key'];
-		}else{
-			//END REQUIRED CODE
-			$key = '4829482749329';
-		}
+        // This section of code is a portion of the code referred
+        // to as Critical Control Software under the End User
+        // License Agreement.  Neither the Company nor the Users
+        // may modify any portion of the Critical Control Software.
+        if (!empty($license->settings['license_key'])) {
+            $key = $license->settings['license_key'];
+        } else {
+            //END REQUIRED CODE
+            $key = '4829482749329';
+        }
 
-		$encoded = sugarEncode($key, serialize($info));
+        $encoded = sugarEncode($key, serialize($info));
 
-		if($get_request_data){
-			$request_data = array('key'=>$key, 'data'=>$encoded);
-			return serialize($request_data);
-		}
-		$encodedResult = $sclient->sugarHome($key, $info);
-
-	}else{
-		$encodedResult = 	$response_data['data'];
-		$key = $response_data['key'];
+        if ($get_request_data) {
+            $request_data = ['key' => $key, 'data' => $encoded];
+            return serialize($request_data);
+        }
+        $encodedResult = $sclient->sugarHome($key, $info);
+    } else {
+        $encodedResult = $response_data['data'];
+        $key = $response_data['key'];
         $needToDownload = false;
-	}
+    }
 
     if ($response_data || !is_soap_fault($encodedResult)) {
-		$serializedResultData = sugarDecode($key,$encodedResult);
+        $serializedResultData = sugarDecode($key, $encodedResult);
         $resultData = unserialize($serializedResultData, ['allowed_classes' => false]);
-        if($response_data && empty($resultData))
-		{
-			$resultData = array();
-			$resultData['validation'] = 'invalid validation key';
-		}
-	}else
-	{
-		$resultData = array();
-		$resultData['versions'] = array();
-
-	}
+        if ($response_data && empty($resultData)) {
+            $resultData = [];
+            $resultData['validation'] = 'invalid validation key';
+        }
+    } else {
+        $resultData = [];
+        $resultData['versions'] = [];
+    }
     if (!isset($resultData['validation'])) {
         $resultData['validation'] = 'invalid';
     }
@@ -125,62 +123,56 @@ function check_now($send_usage_info=true, $get_request_data=false, $response_dat
         //END REQUIRED CODE
 
         if (!empty($resultData['msg'])) {
-			if(!empty($resultData['msg']['admin'])){
-				$license->saveSetting('license', 'msg_admin', base64_encode($resultData['msg']['admin']));
-			}else{
-				$license->saveSetting('license', 'msg_admin','');
-			}
-			if(!empty($resultData['msg']['all'])){
-				$license->saveSetting('license', 'msg_all', base64_encode($resultData['msg']['all']));
-			}else{
-				$license->saveSetting('license', 'msg_all','');
-			}
-		}else{
-			$license->saveSetting('license', 'msg_admin','');
-			$license->saveSetting('license', 'msg_all','');
-		}
-		$license->saveSetting('license', 'last_validation', 'success');
-		unset($_SESSION['COULD_NOT_CONNECT']);
-	}
-	else
-	{
-		$resultData = array();
-		$resultData['versions'] = array();
+            if (!empty($resultData['msg']['admin'])) {
+                $license->saveSetting('license', 'msg_admin', base64_encode($resultData['msg']['admin']));
+            } else {
+                $license->saveSetting('license', 'msg_admin', '');
+            }
+            if (!empty($resultData['msg']['all'])) {
+                $license->saveSetting('license', 'msg_all', base64_encode($resultData['msg']['all']));
+            } else {
+                $license->saveSetting('license', 'msg_all', '');
+            }
+        } else {
+            $license->saveSetting('license', 'msg_admin', '');
+            $license->saveSetting('license', 'msg_all', '');
+        }
+        $license->saveSetting('license', 'last_validation', 'success');
+        unset($_SESSION['COULD_NOT_CONNECT']);
+    } else {
+        $resultData = [];
+        $resultData['versions'] = [];
 
-		$license->saveSetting('license', 'last_connection_fail', TimeDate::getInstance()->nowDb());
-		$license->saveSetting('license', 'last_validation', 'no_connection');
+        $license->saveSetting('license', 'last_connection_fail', TimeDate::getInstance()->nowDb());
+        $license->saveSetting('license', 'last_validation', 'no_connection');
 
-		if( empty($license->settings['license_last_validation_success']) && empty($license->settings['license_last_validation_fail']) && empty($license->settings['license_vk_end_date'])){
-			$license->saveSetting('license', 'vk_end_date', TimeDate::getInstance()->nowDb());
+        if (empty($license->settings['license_last_validation_success']) && empty($license->settings['license_last_validation_fail']) && empty($license->settings['license_vk_end_date'])) {
+            $license->saveSetting('license', 'vk_end_date', TimeDate::getInstance()->nowDb());
 
-			$license->saveSetting('license', 'validation_key', base64_encode(serialize(array('verified'=>false))));
-		}
-		$_SESSION['COULD_NOT_CONNECT'] =TimeDate::getInstance()->nowDb();
-
-	}
-	if(!empty($resultData['versions'])){
-
-		$license->saveSetting('license', 'latest_versions',base64_encode(serialize($resultData['versions'])));
-	}else{
-		$resultData['versions'] = array();
-		$license->saveSetting('license', 'latest_versions','')	;
-	}
+            $license->saveSetting('license', 'validation_key', base64_encode(serialize(['verified' => false])));
+        }
+        $_SESSION['COULD_NOT_CONNECT'] = TimeDate::getInstance()->nowDb();
+    }
+    if (!empty($resultData['versions'])) {
+        $license->saveSetting('license', 'latest_versions', base64_encode(serialize($resultData['versions'])));
+    } else {
+        $resultData['versions'] = [];
+        $license->saveSetting('license', 'latest_versions', '');
+    }
 
 
+    include 'sugar_version.php';
+
+    if (sizeof($resultData) == 1 && !empty($resultData['versions'][0]['version'])
+        && compareVersions($sugar_version, $resultData['versions'][0]['version'])) {
+        $resultData['versions'][0]['version'] = $sugar_version;
+        $resultData['versions'][0]['description'] = 'You have the latest version.';
+    }
 
 
-	include('sugar_version.php');
-
-	if(sizeof($resultData) == 1 && !empty($resultData['versions'][0]['version'])
-        && compareVersions($sugar_version, $resultData['versions'][0]['version']))
-	{
-		$resultData['versions'][0]['version'] = $sugar_version;
-		$resultData['versions'][0]['description'] = "You have the latest version.";
-	}
-
-
-	return $resultData['versions'];
+    return $resultData['versions'];
 }
+
 /*
  * returns true if $ver1 > $ver2
  */
@@ -188,85 +180,96 @@ function compareVersions($ver1, $ver2)
 {
     return (version_compare($ver1, $ver2) === 1);
 }
-function set_CheckUpdates_config_setting($value) {
+
+function set_CheckUpdates_config_setting($value)
+{
 
 
-	$admin = BeanFactory::newBean('Administration');
-	$admin->saveSetting('Update','CheckUpdates',$value);
+    $admin = BeanFactory::newBean('Administration');
+    $admin->saveSetting('Update', 'CheckUpdates', $value);
 }
+
 /* return's value for the 'CheckUpdates' config setting
 * if the setting does not exist one gets created with a default value of automatic.
 */
-function get_CheckUpdates_config_setting() {
+function get_CheckUpdates_config_setting()
+{
 
-	$checkupdates='automatic';
+    $checkupdates = 'automatic';
 
 
-	$admin = Administration::getSettings('Update',true);
-	if (empty($admin->settings) or empty($admin->settings['Update_CheckUpdates'])) {
-		$admin->saveSetting('Update','CheckUpdates','automatic');
-	} else {
-		$checkupdates=$admin->settings['Update_CheckUpdates'];
-	}
-	return $checkupdates;
+    $admin = Administration::getSettings('Update', true);
+    if (empty($admin->settings) or empty($admin->settings['Update_CheckUpdates'])) {
+        $admin->saveSetting('Update', 'CheckUpdates', 'automatic');
+    } else {
+        $checkupdates = $admin->settings['Update_CheckUpdates'];
+    }
+    return $checkupdates;
 }
 
-function set_last_check_version_config_setting($value) {
+function set_last_check_version_config_setting($value)
+{
 
 
-	$admin = BeanFactory::newBean('Administration');
-	$admin->saveSetting('Update','last_check_version',$value);
-}
-function get_last_check_version_config_setting() {
-
-
-
-	$admin = Administration::getSettings('Update');
-	if (empty($admin->settings) or empty($admin->settings['Update_last_check_version'])) {
-		return null;
-	} else {
-		return $admin->settings['Update_last_check_version'];
-	}
+    $admin = BeanFactory::newBean('Administration');
+    $admin->saveSetting('Update', 'last_check_version', $value);
 }
 
-
-function set_last_check_date_config_setting($value) {
-
-
-	$admin = BeanFactory::newBean('Administration');
-	$admin->saveSetting('Update','last_check_date',$value);
-}
-function get_last_check_date_config_setting() {
+function get_last_check_version_config_setting()
+{
 
 
-
-	$admin = Administration::getSettings('Update');
-	if (empty($admin->settings) or empty($admin->settings['Update_last_check_date'])) {
-		return 0;
-	} else {
-		return $admin->settings['Update_last_check_date'];
-	}
+    $admin = Administration::getSettings('Update');
+    if (empty($admin->settings) or empty($admin->settings['Update_last_check_version'])) {
+        return null;
+    } else {
+        return $admin->settings['Update_last_check_version'];
+    }
 }
 
-function set_sugarbeat($value) {
-	global $sugar_config;
-	$_SUGARBEAT="sugarbeet";
-	$sugar_config[$_SUGARBEAT] = $value;
-	write_array_to_file( "sugar_config", $sugar_config, "config.php" );
-}
-function get_sugarbeat() {
-	return true;
+
+function set_last_check_date_config_setting($value)
+{
+
+
+    $admin = BeanFactory::newBean('Administration');
+    $admin->saveSetting('Update', 'last_check_date', $value);
 }
 
-function shouldCheckSugar(){
-	global $license, $timedate;
-	if(
-	(empty($license->settings['license_last_validation_fail']) ||  $license->settings['license_last_validation_fail'] < $timedate->getNow()->modify("-6 hours")->asDb(false))  &&
-    (get_CheckUpdates_config_setting() == 'automatic' || !empty($GLOBALS['sugar_config']['hide_admin_licensing']))) {
-		return true;
-	}
+function get_last_check_date_config_setting()
+{
 
-	return false;
+
+    $admin = Administration::getSettings('Update');
+    if (empty($admin->settings) or empty($admin->settings['Update_last_check_date'])) {
+        return 0;
+    } else {
+        return $admin->settings['Update_last_check_date'];
+    }
+}
+
+function set_sugarbeat($value)
+{
+    global $sugar_config;
+    $_SUGARBEAT = 'sugarbeet';
+    $sugar_config[$_SUGARBEAT] = $value;
+    write_array_to_file('sugar_config', $sugar_config, 'config.php');
+}
+
+function get_sugarbeat()
+{
+    return true;
+}
+
+function shouldCheckSugar()
+{
+    global $license, $timedate;
+    if ((empty($license->settings['license_last_validation_fail']) || $license->settings['license_last_validation_fail'] < $timedate->getNow()->modify('-6 hours')->asDb(false)) &&
+        (get_CheckUpdates_config_setting() == 'automatic' || !empty($GLOBALS['sugar_config']['hide_admin_licensing']))) {
+        return true;
+    }
+
+    return false;
 }
 
 // This section of code is a portion of the code referred
@@ -285,11 +288,11 @@ function authenticateDownloadKey()
     $licenseSettings = $GLOBALS['license']->settings ?? '';
 
     // Retrieve license if required
-	if ((!is_array($licenseSettings) ||
-			empty($licenseSettings['license_validation_key'])) &&
-		shouldCheckSugar()) {
-		check_now(get_sugarbeat());
-	}
+    if ((!is_array($licenseSettings) ||
+            empty($licenseSettings['license_validation_key'])) &&
+        shouldCheckSugar()) {
+        check_now(get_sugarbeat());
+    }
 
     // Validation key is required
     if (!is_array($licenseSettings) ||
@@ -305,33 +308,33 @@ function authenticateDownloadKey()
     };
 
     // Populate data from globals
-    $fromGlobals = array(
-        'license_expire_date' => array(
+    $fromGlobals = [
+        'license_expire_date' => [
             'type' => 'string',
-        ),
-        'license_users' => array(
+        ],
+        'license_users' => [
             'type' => 'int',
-        ),
-        'license_num_portal_users' => array(
+        ],
+        'license_num_portal_users' => [
             'type' => 'int',
-        ),
-        'license_vk_end_date' => array(
+        ],
+        'license_vk_end_date' => [
             'type' => 'string',
-        ),
-        'license_key' => array(
+        ],
+        'license_key' => [
             'type' => 'string',
-        ),
-        'license_enforce_portal_user_limit' => array(
+        ],
+        'license_enforce_portal_user_limit' => [
             'type' => 'int',
             'target' => 'enforce_portal_user_limit',
-        ),
-        'license_enforce_user_limit' => array(
+        ],
+        'license_enforce_user_limit' => [
             'type' => 'int',
             'target' => 'enforce_user_limit',
-        ),
-    );
+        ],
+    ];
 
-    $data = array();
+    $data = [];
     foreach ($fromGlobals as $source => $defs) {
         $target = empty($defs['target']) ? $source : $defs['target'];
         if (isset($licenseSettings[$source])) {
@@ -367,57 +370,53 @@ function authenticateDownloadKey()
     return true;
 }
 
-function checkDownloadKey($data){
+function checkDownloadKey($data)
+{
 
-	if(!isset($GLOBALS['license'])){
-		loadLicense(true);
-	}
-
-
-	if(!is_array($data)){
+    if (!isset($GLOBALS['license'])) {
+        loadLicense(true);
+    }
 
 
-		if($data == 'invalid'){
-			$GLOBALS['license']->saveSetting('license', 'users', 1);
-			$GLOBALS['license']->saveSetting('license', 'num_lic_oc', 0);
-			$GLOBALS['license']->saveSetting('license', 'num_portal_users', 0);
-			$GLOBALS['license']->saveSetting('license', 'validation_key', '');
-			$GLOBALS['license']->saveSetting('license', 'vk_end_date', '2000-10-10');
+    if (!is_array($data)) {
+        if ($data == 'invalid') {
+            $GLOBALS['license']->saveSetting('license', 'users', 1);
+            $GLOBALS['license']->saveSetting('license', 'num_lic_oc', 0);
+            $GLOBALS['license']->saveSetting('license', 'num_portal_users', 0);
+            $GLOBALS['license']->saveSetting('license', 'validation_key', '');
+            $GLOBALS['license']->saveSetting('license', 'vk_end_date', '2000-10-10');
 
-			$GLOBALS['license']->saveSetting('license', 'expire_date', '2000-10-10');
-			$GLOBALS['license']->saveSetting('license', 'validation_notice', 'invalid');
-			$GLOBALS['license']->saveSetting('license', 'last_validation_fail', TimeDate::getInstance()->nowDb());
-			return 'Invalid Download Key';
-		}
-		if($data == 'expired' || $data == 'closed'){
-			$GLOBALS['license']->saveSetting('license', 'validation_notice', 'expired');
-			if($data == 'closed'){
-				$GLOBALS['license']->saveSetting('license', 'users', 1);
-			}
-			$GLOBALS['license']->saveSetting('license', 'last_validation_fail', TimeDate::getInstance()->nowDb());
-			return 'Expired Download Key';
-		}else if($data == 'invalid validation key'){
-			$GLOBALS['license']->saveSetting('license', 'validation_notice', 'Invalid Validation Key File - please make sure you uploaded the right file');
-			$GLOBALS['license']->saveSetting('license', 'last_validation_fail', TimeDate::getInstance()->nowDb());
-			return 'Invalid Validation Key';
-
-		}
-		return $data;
-
-
-	}
+            $GLOBALS['license']->saveSetting('license', 'expire_date', '2000-10-10');
+            $GLOBALS['license']->saveSetting('license', 'validation_notice', 'invalid');
+            $GLOBALS['license']->saveSetting('license', 'last_validation_fail', TimeDate::getInstance()->nowDb());
+            return 'Invalid Download Key';
+        }
+        if ($data == 'expired' || $data == 'closed') {
+            $GLOBALS['license']->saveSetting('license', 'validation_notice', 'expired');
+            if ($data == 'closed') {
+                $GLOBALS['license']->saveSetting('license', 'users', 1);
+            }
+            $GLOBALS['license']->saveSetting('license', 'last_validation_fail', TimeDate::getInstance()->nowDb());
+            return 'Expired Download Key';
+        } elseif ($data == 'invalid validation key') {
+            $GLOBALS['license']->saveSetting('license', 'validation_notice', 'Invalid Validation Key File - please make sure you uploaded the right file');
+            $GLOBALS['license']->saveSetting('license', 'last_validation_fail', TimeDate::getInstance()->nowDb());
+            return 'Invalid Validation Key';
+        }
+        return $data;
+    }
 
     $settings = [
         // default the number of licensed users to 1 in order to avoid the error message
         // when the administrator has already logged in but hasn't yet validated the license
-        'users'                     => $data['license_users'] ?? 1,
-        'num_lic_oc'                => $data['license_num_lic_oc'] ?? 0,
-        'num_portal_users'          => $data['license_num_portal_users'] ?? 0,
-        'validation_key'            => $data['license_validation_key'] ?? null,
-        'vk_end_date'               => $data['license_vk_end_date'] ?? null,
-        'expire_date'               => $data['license_expire_date'] ?? null,
-        'last_validation_success'   => TimeDate::getInstance()->nowDb(),
-        'validation_notice'         => '',
+        'users' => $data['license_users'] ?? 1,
+        'num_lic_oc' => $data['license_num_lic_oc'] ?? 0,
+        'num_portal_users' => $data['license_num_portal_users'] ?? 0,
+        'validation_key' => $data['license_validation_key'] ?? null,
+        'vk_end_date' => $data['license_vk_end_date'] ?? null,
+        'expire_date' => $data['license_expire_date'] ?? null,
+        'last_validation_success' => TimeDate::getInstance()->nowDb(),
+        'validation_notice' => '',
         'enforce_portal_user_limit' => $data['enforce_portal_user_limit'] ?? 0,
     ];
 
@@ -429,10 +428,9 @@ function checkDownloadKey($data){
         $GLOBALS['license']->saveSetting('license', $parameter, $value);
     }
 
-	loadLicense(true);
-	return 'Validation Complete';
+    loadLicense(true);
+    return 'Validation Complete';
 }
-
 
 
 /**
@@ -440,71 +438,74 @@ function checkDownloadKey($data){
  *
  * Use following standard for whitelist:
  * array(
- *		'module_name_1' => array('action_name_1', 'action_name_2', ...),	// Allow only "action_name_1" and "action_name_2" for "module_name_1"
- *		'module_name_2' => 'all',	|										// Allow ALL actions in module "module_name_2"
- *		...
- *		)
+ *      'module_name_1' => array('action_name_1', 'action_name_2', ...),    // Allow only "action_name_1" and "action_name_2" for "module_name_1"
+ *      'module_name_2' => 'all',   |                                       // Allow ALL actions in module "module_name_2"
+ *      ...
+ *      )
  * @param User $user
  * @return array
  */
-function getModuleWhiteListForLicenseCheck(User $user) {
-	$admin_white_list = array(
-		'Administration'		=> array('LicenseSettings', 'Save'),
-		'Configurator'			=> 'all',
-		'Home'					=> array('About'),
-		'Notifications'			=> array('quicklist'),
-		'Users'					=> array('SetTimezone', 'SaveTimezone', 'Logout')
-	);
+function getModuleWhiteListForLicenseCheck(User $user)
+{
+    $admin_white_list = [
+        'Administration' => ['LicenseSettings', 'Save'],
+        'Configurator' => 'all',
+        'Home' => ['About'],
+        'Notifications' => ['quicklist'],
+        'Users' => ['SetTimezone', 'SaveTimezone', 'Logout'],
+    ];
 
-	$not_admin_white_list	= array(
-		'Users'					=> array('Logout', 'Login')
-	);
+    $not_admin_white_list = [
+        'Users' => ['Logout', 'Login'],
+    ];
 
-	$white_list				= is_admin($user)?$admin_white_list:$not_admin_white_list;
+    $white_list = is_admin($user) ? $admin_white_list : $not_admin_white_list;
 
-	return $white_list;
+    return $white_list;
 }
 
 /**
  * Check if $module and $action don't get into whitelist and do we need redirect
  *
- * @param string	$state	Now works only for 'LICENSE_KEY' state (TODO: do we need any other state?)
- * @param string	$module	Module to check
- * @param string	$action	(optional) Action to check. Can be omitted because some modules include all actions
+ * @param string $state Now works only for 'LICENSE_KEY' state (TODO: do we need any other state?)
+ * @param string $module Module to check
+ * @param string $action (optional) Action to check. Can be omitted because some modules include all actions
  * @return boolean
  */
-function isNeedRedirectDependingOnUserAndSystemState($state, $module = null, $action = null, $whiteList = array()) {
-	if($module !== null) {
-		if($state == 'LICENSE_KEY') {
-			foreach($whiteList as $wlModule => $wlActions) {
-				if($module == $wlModule && ($wlActions === 'all' || in_array($action, $wlActions))) {
-					return false;
-				}
-			}
-		}
-	}
+function isNeedRedirectDependingOnUserAndSystemState($state, $module = null, $action = null, $whiteList = [])
+{
+    if ($module !== null) {
+        if ($state == 'LICENSE_KEY') {
+            foreach ($whiteList as $wlModule => $wlActions) {
+                if ($module == $wlModule && ($wlActions === 'all' || safeInArray($action, $wlActions))) {
+                    return false;
+                }
+            }
+        }
+    }
 
-	return true;
+    return true;
 }
 
 /**
  * Redirect current user if current module and action isn't in whitelist
- * @global User		$current_user	User object that stores current application user
- * @param string	$state			Now works only for 'LICENSE_KEY' state  (TODO: do we need any other state?)
+ * @param string $state Now works only for 'LICENSE_KEY' state  (TODO: do we need any other state?)
+ * @global User $current_user User object that stores current application user
  */
-function setSystemState($state){
-	global $current_user;
+function setSystemState($state)
+{
+    global $current_user;
 
-	$admin_redirect_url		= 'index.php?action=LicenseSettings&module=Administration&LicState=check';
-	$not_admin_redirect_url	= 'index.php?module=Users&action=Logout&LicState=check';
+    $admin_redirect_url = 'index.php?action=LicenseSettings&module=Administration&LicState=check';
+    $not_admin_redirect_url = 'index.php?module=Users&action=Logout&LicState=check';
 
-	if(isset($current_user) && !empty($current_user->id)){
-		if(isNeedRedirectDependingOnUserAndSystemState($state, $_REQUEST['module'], $_REQUEST['action'], getModuleWhiteListForLicenseCheck($current_user))) {
-			$redirect_url			= is_admin($current_user)?$admin_redirect_url:$not_admin_redirect_url;
-			header('Location: '.$redirect_url);
-			sugar_cleanup(true);
-		}
-	}
+    if (isset($current_user) && !empty($current_user->id)) {
+        if (isNeedRedirectDependingOnUserAndSystemState($state, $_REQUEST['module'], $_REQUEST['action'], getModuleWhiteListForLicenseCheck($current_user))) {
+            $redirect_url = is_admin($current_user) ? $admin_redirect_url : $not_admin_redirect_url;
+            header('Location: ' . $redirect_url);
+            sugar_cleanup(true);
+        }
+    }
 }
 
 /**
@@ -519,10 +520,10 @@ function checkSystemState()
         die('LICENSE INFORMATION IS REQUIRED PLEASE CONTACT A SYSTEM ADMIN ');
     }
     if ($_SESSION['LICENSE_EXPIRES_IN'] != 'valid' && $_SESSION['LICENSE_EXPIRES_IN'] < -30) {
-        die('LICENSE EXPIRED ' . abs($_SESSION['LICENSE_EXPIRES_IN']) .' day(s) ago - PLEASE CONTACT A SYSTEM ADMIN');
+        die('LICENSE EXPIRED ' . abs($_SESSION['LICENSE_EXPIRES_IN']) . ' day(s) ago - PLEASE CONTACT A SYSTEM ADMIN');
     }
     if ($_SESSION['VALIDATION_EXPIRES_IN'] != 'valid' && $_SESSION['VALIDATION_EXPIRES_IN'] < -30) {
-        die('VALIDATION KEY FOR LICENSE EXPIRED ' . abs($_SESSION['VALIDATION_EXPIRES_IN']) .' day(s) ago - PLEASE CONTACT A SYSTEM ADMIN');
+        die('VALIDATION KEY FOR LICENSE EXPIRED ' . abs($_SESSION['VALIDATION_EXPIRES_IN']) . ' day(s) ago - PLEASE CONTACT A SYSTEM ADMIN');
     }
 }
 
@@ -535,7 +536,6 @@ function checkSystemLicenseStatus()
     loadLicense(true);
 
     if (!empty($license->settings)) {
-
         if (isset($license->settings['license_vk_end_date'])) {
             $_SESSION['VALIDATION_EXPIRES_IN'] = isAboutToExpire($license->settings['license_vk_end_date']);
         } else {
@@ -567,23 +567,23 @@ function apiCheckSystemStatus($forceReload = false)
 {
     global $sugar_config;
 
-    if (!isset($sugar_config['installer_locked']) || $sugar_config['installer_locked'] == false ){
-        return array(
-            'level'  =>'admin_only',
-            'message'=>'WARN_INSTALLER_LOCKED',
-            'url'    =>'install.php',
-        );
+    if (!isset($sugar_config['installer_locked']) || $sugar_config['installer_locked'] == false) {
+        return [
+            'level' => 'admin_only',
+            'message' => 'WARN_INSTALLER_LOCKED',
+            'url' => 'install.php',
+        ];
     }
 
     // If they are missing session variables force a reload
-    $sessionCheckNotExists = array(
+    $sessionCheckNotExists = [
         'VALIDATION_EXPIRES_IN',
         'LICENSE_EXPIRES_IN',
-    );
-    $sessionCheckExists = array(
+    ];
+    $sessionCheckExists = [
         'HomeOnly',
         'INVALID_LICENSE',
-    );
+    ];
     foreach ($sessionCheckNotExists as $key) {
         if (!isset($_SESSION[$key])) {
             $forceReload = true;
@@ -605,12 +605,11 @@ function apiCheckSystemStatus($forceReload = false)
             $url = $GLOBALS['sugar_config']['maintenanceMode'];
         }
 
-        return array(
-            'level'  =>'maintenance',
-            'message'=>'EXCEPTION_MAINTENANCE',
-            'url'    =>$url,
-        );
-
+        return [
+            'level' => 'maintenance',
+            'message' => 'EXCEPTION_MAINTENANCE',
+            'url' => $url,
+        ];
     }
 
     return $systemStatus;
@@ -629,7 +628,7 @@ function apiLoadSystemStatus($forceReload = false)
     $systemStatus = sugar_cache_retrieve('api_system_status');
     if (empty($systemStatus)) {
         // No luck, try the database
-	    $administration = Administration::getSettings('system');
+        $administration = Administration::getSettings('system');
         // key defined in Adminitration::retrieveSettings(): $key = $row['category'] . '_' . $row['name'];
         if (!empty($administration->settings['system_api_system_status'])) {
             $systemStatus = unserialize(
@@ -640,7 +639,7 @@ function apiLoadSystemStatus($forceReload = false)
     } else {
         // if it's not an array and is truthy, comvert it to true
         // See BR-1150
-        if($systemStatus && !is_array($systemStatus)) {
+        if ($systemStatus && !is_array($systemStatus)) {
             $systemStatus = true;
         }
     }
@@ -659,11 +658,11 @@ function apiLoadSystemStatus($forceReload = false)
     }
     $serializedStatus = serialize($systemStatus);
     if ($serializedStatus != serialize($oldSystemStatus)) {
-        sugar_cache_put('api_system_status',$systemStatus);
+        sugar_cache_put('api_system_status', $systemStatus);
         if (!isset($administration)) {
             $administration = Administration::getSettings('system');
         }
-        $administration->saveSetting('system','api_system_status',base64_encode($serializedStatus));
+        $administration->saveSetting('system', 'api_system_status', base64_encode($serializedStatus));
     }
 
     return $systemStatus;
@@ -681,11 +680,11 @@ function apiActualLoadSystemStatus()
     $subscriptions = SubscriptionManager::instance()->getSystemSubscriptions();
     // no valid subscription
     if (empty($subscriptions)) {
-        return array(
+        return [
             'level' => 'admin_only',
             'message' => 'ERROR_LICENSE_EXPIRED',
             'url' => '#bwc/index.php?action=LicenseSettings&module=Administration',
-        );
+        ];
     }
 
     if (!empty($admin->settings['license_enforce_user_limit'])) {
@@ -705,66 +704,66 @@ function apiActualLoadSystemStatus()
         if (!empty($exceededLicenseTypes)) {
             $_SESSION['license_seats_needed'] = $license_seats_needed;
             $_SESSION['EXCEEDS_MAX_USERS'] = 1;
-            return array(
+            return [
                 'level' => 'admin_only',
                 'message' => 'ERROR_LICENSE_SEATS_MAXED',
-                'url' => '#bwc/index.php?module=Users&action=index',
-            );
+                'url' => '#Users',
+            ];
         }
         // END License User Limit Enforcement
     }
 
     // Only allow administrators because of altered license issue
     if (!empty($_SESSION['HomeOnly'])) {
-        return array(
-            'level'  =>'admin_only',
-            'message'=>'FATAL_LICENSE_ALTERED',
-            'url'    =>'#bwc/index.php?action=LicenseSettings&module=Administration',
-        );
+        return [
+            'level' => 'admin_only',
+            'message' => 'FATAL_LICENSE_ALTERED',
+            'url' => '#bwc/index.php?action=LicenseSettings&module=Administration',
+        ];
     }
 
-        if (!empty($_SESSION['INVALID_LICENSE'])) {
-            return array(
-                'level'  =>'admin_only',
-                'message'=>'ERROR_LICENSE_VALIDATION',
-                'url'    =>'#bwc/index.php?action=LicenseSettings&module=Administration',
-            );
+    if (!empty($_SESSION['INVALID_LICENSE'])) {
+        return [
+            'level' => 'admin_only',
+            'message' => 'ERROR_LICENSE_VALIDATION',
+            'url' => '#bwc/index.php?action=LicenseSettings&module=Administration',
+        ];
+    }
+    if (isset($_SESSION['LICENSE_EXPIRES_IN'])
+        && $_SESSION['LICENSE_EXPIRES_IN'] != 'valid') {
+        if ($_SESSION['LICENSE_EXPIRES_IN'] < -1) {
+            return [
+                'level' => 'admin_only',
+                'message' => 'ERROR_LICENSE_EXPIRED',
+                'url' => '#bwc/index.php?action=LicenseSettings&module=Administration',
+            ];
+        } elseif (isset($GLOBALS['current_user']->id)
+            && $GLOBALS['current_user']->isAdmin()) {
+            // Not yet expired, but soon enough to warn
+            return [
+                'level' => 'warning',
+                'message' => 'WARN_LICENSE_EXPIRED',
+                'url' => '#bwc/index.php?action=LicenseSettings&module=Administration',
+            ];
         }
-        if (isset($_SESSION['LICENSE_EXPIRES_IN'])
-            && $_SESSION['LICENSE_EXPIRES_IN'] != 'valid') {
-            if ($_SESSION['LICENSE_EXPIRES_IN'] < -1) {
-                return array(
-                    'level'  =>'admin_only',
-                    'message'=>'ERROR_LICENSE_EXPIRED',
-                    'url'    =>'#bwc/index.php?action=LicenseSettings&module=Administration',
-                    );
-            } else if (isset($GLOBALS['current_user']->id)
-                       && $GLOBALS['current_user']->isAdmin()) {
-                // Not yet expired, but soon enough to warn
-                return array(
-                    'level'  =>'warning',
-                    'message'=>'WARN_LICENSE_EXPIRED',
-                    'url'    =>'#bwc/index.php?action=LicenseSettings&module=Administration',
-                    );
-            }
-        } elseif (isset($_SESSION['VALIDATION_EXPIRES_IN'])
-                  && $_SESSION['VALIDATION_EXPIRES_IN'] != 'valid') {
-            if ($_SESSION['VALIDATION_EXPIRES_IN'] < -1 ) {
-                return array(
-                    'level'  =>'admin_only',
-                    'message'=>'ERROR_LICENSE_VALIDATION',
-                    'url'    =>'#bwc/index.php?action=LicenseSettings&module=Administration',
-                );
-            } else if (isset($GLOBALS['current_user']->id)
-                       && $GLOBALS['current_user']->isAdmin()) {
-                // Not yet expired, but soon enough to warn
-                return array(
-                    'level'  =>'warning',
-                    'message'=>'WARN_LICENSE_VALIDATION',
-                    'url'    =>'#bwc/index.php?action=LicenseSettings&module=Administration',
-                );
-            }
+    } elseif (isset($_SESSION['VALIDATION_EXPIRES_IN'])
+        && $_SESSION['VALIDATION_EXPIRES_IN'] != 'valid') {
+        if ($_SESSION['VALIDATION_EXPIRES_IN'] < -1) {
+            return [
+                'level' => 'admin_only',
+                'message' => 'ERROR_LICENSE_VALIDATION',
+                'url' => '#bwc/index.php?action=LicenseSettings&module=Administration',
+            ];
+        } elseif (isset($GLOBALS['current_user']->id)
+            && $GLOBALS['current_user']->isAdmin()) {
+            // Not yet expired, but soon enough to warn
+            return [
+                'level' => 'warning',
+                'message' => 'WARN_LICENSE_VALIDATION',
+                'url' => '#bwc/index.php?action=LicenseSettings&module=Administration',
+            ];
         }
+    }
 
     return true;
 }
@@ -778,11 +777,11 @@ function apiCheckLoginStatus()
 
     // The other license check codes are handled by apiCheckSystemLicenseStatus
     if (!empty($GLOBALS['login_error'])) {
-        return array(
-            'level'  =>'admin_only',
-            'message'=>'ERROR_LICENSE_VALIDATION',
-            'url'    =>'#bwc/index.php?action=LicenseSettings&module=Administration',
-        );
+        return [
+            'level' => 'admin_only',
+            'message' => 'ERROR_LICENSE_VALIDATION',
+            'url' => '#bwc/index.php?action=LicenseSettings&module=Administration',
+        ];
     }
 
     // Force it to recheck the system license on login
@@ -791,43 +790,44 @@ function apiCheckLoginStatus()
 }
 
 
+function isAboutToExpire($expire_date, $days_before_warning = 7)
+{
+    $seconds_before_warning = $days_before_warning * 24 * 60 * 60;
+    $seconds_to_expire = 0;
+    if (!empty($expire_date)) {
+        $seconds_to_expire = strtotime($expire_date) - time();
+    }
 
-
-function isAboutToExpire($expire_date, $days_before_warning = 7){
-	$seconds_before_warning = $days_before_warning * 24 * 60 * 60;
-	$seconds_to_expire = 0;
-	if(!empty($expire_date))
-	{
-		$seconds_to_expire = strtotime( $expire_date ) - time();
-	}
-
-	if( $seconds_to_expire < $seconds_before_warning ){
-		$days_to_expire =  intval($seconds_to_expire / (60 * 60 * 24 ));
-		return $days_to_expire;
-	}
-	else {
-		return 'valid';
-	}
+    if ($seconds_to_expire < $seconds_before_warning) {
+        $days_to_expire = intval($seconds_to_expire / (60 * 60 * 24));
+        return $days_to_expire;
+    } else {
+        return 'valid';
+    }
 }
+
 //END REQUIRED CODE
 
-function loadLicense($firstLogin=false){
+function loadLicense($firstLogin = false)
+{
 
-	$GLOBALS['license'] = Administration::getSettings('license', $firstLogin);
-
+    $GLOBALS['license'] = Administration::getSettings('license', $firstLogin);
 }
 
-function loginLicense(){
+function loginLicense()
+{
     $sugar_version = null;
-	global $current_user, $license;
-	loadLicense(true);
+    global $current_user, $license;
+    loadLicense(true);
 
-    if ((isset($_SESSION['EXCEEDS_MAX_USERS']) && $_SESSION['EXCEEDS_MAX_USERS'] == 1 )
+    if ((isset($_SESSION['EXCEEDS_MAX_USERS']) && $_SESSION['EXCEEDS_MAX_USERS'] == 1)
         || empty($license->settings['license_key'])
-        || (!empty($license->settings['license_last_validation'])
+        || (
+            !empty($license->settings['license_last_validation'])
             && $license->settings['license_last_validation'] == 'failed'
             && !empty($license->settings['license_last_validation_fail'])
-            && (empty($license->settings['license_last_validation_success'])
+            && (
+                empty($license->settings['license_last_validation_success'])
                 || $license->settings['license_last_validation_fail'] > $license->settings['license_last_validation_success']
             )
         )
@@ -884,55 +884,52 @@ function loginLicense(){
         }
     }
 
-	if (shouldCheckSugar()) {
+    if (shouldCheckSugar()) {
+        $last_check_date = get_last_check_date_config_setting();
+        $current_date_time = time();
+        $time_period = 3 * 23 * 3600;
+        if (($current_date_time - $last_check_date) > $time_period
+            || empty($license->settings['license_last_validation_success'])
+        ) {
+            $version = check_now(get_sugarbeat());
 
+            unset($_SESSION['license_seats_needed']);
+            unset($_SESSION['LICENSE_EXPIRES_IN']);
+            unset($_SESSION['VALIDATION_EXPIRES_IN']);
+            unset($_SESSION['HomeOnly']);
 
-		$last_check_date=get_last_check_date_config_setting();
-		$current_date_time=time();
-		$time_period=3*23*3600 ;
-		if (($current_date_time - $last_check_date) > $time_period
-		|| empty($license->settings['license_last_validation_success'])
-		) {
-			$version = check_now(get_sugarbeat());
-
-			unset($_SESSION['license_seats_needed']);
-			unset($_SESSION['LICENSE_EXPIRES_IN']);
-			unset($_SESSION['VALIDATION_EXPIRES_IN']);
-			unset($_SESSION['HomeOnly']);
-
-			loadLicense();
-			set_last_check_date_config_setting("$current_date_time");
-			include('sugar_version.php');
+            loadLicense();
+            set_last_check_date_config_setting("$current_date_time");
+            include 'sugar_version.php';
 
             $newVersion = '';
-            if (!empty($version) && (is_countable($version) ? count($version) : 0) == 1) {
+            if (!empty($version) && safeCount($version) == 1) {
                 $newVersion = $version[0]['version'];
             }
 
-            if (version_compare($newVersion, $sugar_version, '>') && is_admin($current_user))
-			{
-				//set session variables.
-				$_SESSION['available_version']=$version[0]['version'];
-				$_SESSION['available_version_description']=$version[0]['description'];
-				set_last_check_version_config_setting($version[0]['version']);
-			}
-		}
-	}
+            if (version_compare($newVersion, $sugar_version, '>') && is_admin($current_user)) {
+                //set session variables.
+                $_SESSION['available_version'] = $version[0]['version'];
+                $_SESSION['available_version_description'] = $version[0]['description'];
+                set_last_check_version_config_setting($version[0]['version']);
+            }
+        }
+    }
 
-	// This section of code is a portion of the code referred
-	// to as Critical Control Software under the End User
-	// License Agreement.  Neither the Company nor the Users
-	// may modify any portion of the Critical Control Software.
+    // This section of code is a portion of the code referred
+    // to as Critical Control Software under the End User
+    // License Agreement.  Neither the Company nor the Users
+    // may modify any portion of the Critical Control Software.
 
     if (!authenticateDownloadKey()) {
-	   if(is_admin($current_user)){
-		  $_SESSION['HomeOnly'] = true;
-	    }else{
-	         $_SESSION['login_error'] = $GLOBALS['app_strings']['ERROR_LICENSE_VALIDATION'];
-        $GLOBALS['login_error'] =  $GLOBALS['app_strings']['ERROR_LICENSE_VALIDATION'];
-	    }
-	}
-	//END REQUIRED CODE DO NOT MODIFY
+        if (is_admin($current_user)) {
+            $_SESSION['HomeOnly'] = true;
+        } else {
+            $_SESSION['login_error'] = $GLOBALS['app_strings']['ERROR_LICENSE_VALIDATION'];
+            $GLOBALS['login_error'] = $GLOBALS['app_strings']['ERROR_LICENSE_VALIDATION'];
+        }
+    }
+    //END REQUIRED CODE DO NOT MODIFY
 }
 
 /**

@@ -12,13 +12,11 @@
 $module_name = 'Calendar';
 
 $viewdefs[$module_name]['base']['view']['subpanel-list'] = [
-    'panels' =>
-    [
+    'panels' => [
         [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' =>
-            [
+            'fields' => [
                 [
                     'label' => 'LBL_NAME',
                     'enabled' => true,

@@ -15,7 +15,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
 class TemplateEncrypt extends TemplateField
 {
-	var $type='encrypt';
+    public $type = 'encrypt';
     public $massupdate = 1;
 
     /**
@@ -23,18 +23,19 @@ class TemplateEncrypt extends TemplateField
      */
     public $len = 255;
 
-	function save($df){
-		$this->type = 'encrypt';
-		$this->ext3 = 'varchar';
-		parent::save($df);
+    public function save($df)
+    {
+        $this->type = 'encrypt';
+        $this->ext3 = 'varchar';
+        parent::save($df);
+    }
 
-	}
-
-	function get_field_def(){
-		$vardef = parent::get_field_def();
-		$vardef['dbType'] = $this->ext3;
-		return $vardef;
-	}
+    public function get_field_def()
+    {
+        $vardef = parent::get_field_def();
+        $vardef['dbType'] = $this->ext3;
+        return $vardef;
+    }
 
     /**
      * @inheritdoc

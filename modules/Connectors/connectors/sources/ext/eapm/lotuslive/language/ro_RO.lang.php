@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Obţineţi Cheia API şi API Secret de pe IBM SmartCloud, înregistrându-vă instanţa Sugar ca aplicaţie nouă. Posibilitatea de înregistrare va fi disponibilă începând cu 8 mai 2011.<br>
 &nbsp;<br>
 Paşi pentru înregistrarea instanţei:<br>
@@ -28,5 +28,4 @@ Paşi pentru înregistrarea instanţei:<br>
 </td></tr></table>',
     'oauth_consumer_key' => 'Cheie client OAuth',
     'oauth_consumer_secret' => 'Secret client OAuth',
-);
-
+];

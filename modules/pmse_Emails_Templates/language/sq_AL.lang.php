@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Trupi',
     'LBL_BASE_MODULE' => 'Moduli i synimit',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Dështim për të krijuar Shabllon për Procesimin e Emailit nga fajlli',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Shablloni i emailit po përdoret aktualisht në përcaktimin e një procesi. Të ndryshohet shablloni i emailit?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Nuk mund ta fshish këtë shabllon emaili sepse po përdoret aktualisht në përcaktimin e një procesi.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Nuk mund ta fshish këtë shabllon emaili sepse po përdoret aktualisht në përcaktimin e një procesi.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Përzgjedhësi i fushave',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Zgjidh',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Lloji i vlerës së fushës',
-);
+];

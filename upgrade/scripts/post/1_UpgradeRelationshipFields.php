@@ -41,7 +41,7 @@ class SugarUpgradeUpgradeRelationshipFields extends UpgradeScript
 
     protected function loadDefinition($name, $file)
     {
-        $dictionary = array();
+        $dictionary = [];
         include $file;
         return $dictionary[$name];
     }
@@ -60,7 +60,7 @@ class SugarUpgradeUpgradeRelationshipFields extends UpgradeScript
             return;
         }
 
-        $converted = array();
+        $converted = [];
         foreach ($definition['fields'] as $key => $value) {
             if (!isset($value['name'])) {
                 $this->log('No field name in relationship ' . $name . ' definition for key ' . $key);

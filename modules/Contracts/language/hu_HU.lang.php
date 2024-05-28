@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Szerződések',
-	'LBL_MODULE_NAME_SINGULAR' => 'Szerződés',
-	'LBL_MODULE_TITLE' => 'Szerződések: Főoldal',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Szerződések',
+    'LBL_MODULE_NAME_SINGULAR' => 'Szerződés',
+    'LBL_MODULE_TITLE' => 'Szerződések: Főoldal',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Új szerződés létrehozása',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'Pénznem azonosító:',
     'LBL_CURRENCY' => 'Pénznem:',
     'LBL_CURRENCY_RATE' => 'Árfolyam',
-    'LBL_ASSIGNED_TO_NAME'=>'Felelős neve:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Felelős neve:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Szerződéslista',	
+    'LBL_LIST_FORM_TITLE' => 'Szerződéslista',
     'LBL_LIST_CONTRACT_NAME' => 'Szerződés neve',
     'LBL_LIST_ACCOUNT_NAME' => 'Kliens neve',
     'LBL_LIST_START_DATE' => 'Kezdete',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Név',
     'LBL_LIST_CONTRACT_VALUE' => 'Érték',
 
-    'LBL_TYPE'=>'Típus',
+    'LBL_TYPE' => 'Típus',
     'LBL_TYPE_NAME' => 'Típus Név',
-    'LBL_CONTRACT_TYPE'=>'Típus:',
+    'LBL_CONTRACT_TYPE' => 'Típus:',
 
     'LBL_CREATED_USER' => 'Létrehozott felhasználó',
     'LBL_MODIFIED_USER' => 'Módosított felhasználó',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Figyelemfelhívás szerződések',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Szerződések Bejegyzése Műszerfal',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Szerződés idővonala',
+];

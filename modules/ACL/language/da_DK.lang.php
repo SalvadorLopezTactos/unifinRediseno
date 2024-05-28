@@ -9,22 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-'LBL_ALLOW_ALL'=>'Alle',
-'LBL_ALLOW_NONE'=>'Ingen',
-'LBL_ALLOW_OWNER'=>'Ejer',
-'LBL_ROLE'=>'Rolle',
-'LBL_NAME'=>'Navn',
-'LBL_DESCRIPTION'=>'Beskrivelse',
-'LIST_ROLES'=>'Vis roller',
-'LBL_USERS_SUBPANEL_TITLE'=>'Brugere',
-'LIST_ROLES_BY_USER'=>'Vis roller efter bruger',
-'LBL_ROLES_SUBPANEL_TITLE'=>'Brugerroller',
-'LBL_SEARCH_FORM_TITLE'=>'Søg',
-'LBL_NO_ACCESS'=>'Du har ikke adgang til dette område. Kontakt webstedsadministratoren for at få adgang,',
-'LBL_REDIRECT_TO_HOME'=>'Omdiriger til Start i',
-'LBL_SECONDS'=>'sekunder',
-'LBL_ADDING'=>'Tilføjer for',
+$mod_strings = [
+    'LBL_ALLOW_ALL' => 'Alle',
+    'LBL_ALLOW_NONE' => 'Ingen',
+    'LBL_ALLOW_OWNER' => 'Ejer',
+    'LBL_ROLE' => 'Rolle',
+    'LBL_NAME' => 'Navn',
+    'LBL_DESCRIPTION' => 'Beskrivelse',
+    'LIST_ROLES' => 'Vis roller',
+    'LBL_USERS_SUBPANEL_TITLE' => 'Brugere',
+    'LIST_ROLES_BY_USER' => 'Vis roller efter bruger',
+    'LBL_ROLES_SUBPANEL_TITLE' => 'Brugerroller',
+    'LBL_SEARCH_FORM_TITLE' => 'Søg',
+    'LBL_NO_ACCESS' => 'Du har ikke adgang til dette område. Kontakt webstedsadministratoren for at få adgang,',
+    'LBL_REDIRECT_TO_HOME' => 'Omdiriger til Start i',
+    'LBL_SECONDS' => 'sekunder',
+    'LBL_ADDING' => 'Tilføjer for',
 
-)
-?>
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Quadre de comandament del llistat d&#39;elements de línia d&#39;ingressos',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Quadre de comandament del registre d&#39;elements de línia d&#39;ingressos',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Tipus de Producte',
     'LBL_ASSIGNED_TO_NAME' => 'Usuari Assignat:',
     'LBL_ASSIGNED_TO' => 'Assignada a',
-    'LBL_ASSIGNED_TO_ID'=>'ID d&#39;usuari assignat',
+    'LBL_ASSIGNED_TO_ID' => 'ID d&#39;usuari assignat',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nom d&#39;usuari assignat',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'ID d&#39;usuari assignat',
     'LBL_CAMPAIGN_ID' => 'ID de campanya',
@@ -217,4 +217,5 @@ Per crear un {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Mostra els deu millors elements de línia d&#39;ingressos a un gràfic de bombolles',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Els meus elements de línia d&#39;ingressos',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Els elements de la línia d&#39;ingressos del meu equip",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Calendari d&#39;ingressos de l&#39;element de la línia',
+];

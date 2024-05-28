@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Ficheiros Incorporados',
     'LBL_MODULE_NAME_SINGULAR' => 'Ficheiro Incorporado',
     'LBL_MODULE_TITLE' => 'Ficheiro Incorporado',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => 'Nome do ficheiro',
     'LBL_FILENAME' => 'Nome do ficheiro',
     'LBL_UPLOAD_ONLY_IMAGE' => 'O ficheiro selecionado deve ser uma imagem.',
-);
+];

@@ -88,6 +88,7 @@ body > .le_panel .le_edit, #toolbox .le_panel .le_edit {
         color: var(--text-color);
 	padding: 4px;
 	margin: 1px;
+	position: sticky;
 }
 
 .portal-module-list-header {

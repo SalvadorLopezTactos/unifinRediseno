@@ -126,6 +126,7 @@
         this.context.trigger('split-screens-config-change', config, true);
         this.context.trigger('split-screens-orientation-change', config);
         this.context.trigger('split-screens-resized', config);
+        this.context.trigger('container-resizing');
     },
 
     /**

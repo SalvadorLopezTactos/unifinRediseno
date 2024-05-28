@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '标签',
     'LBL_GENERIC_LINK' => '相关对象',
     'LBL_NAME_LOWER' => '小写标签名',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => '我的标签',
     'LBL_MY_FAVORITE_TAGS' => '我的收藏夹标签',
     'LBL_MORE_TAGS' => '{{tagsNumber}} 标签',
-);
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '지식 기반 템플릿',
     'LBL_MODULE_NAME_SINGULAR' => '지식 기반 템플릿',
     'LBL_MODULE_TITLE' => '지식 기반 템플릿',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => '템플릿 보기',
     'LBL_TEXT_BODY' => '몸',
     'LBL_LIST_TEMPLATE_NAME' => '템플릿명',
-);
+];

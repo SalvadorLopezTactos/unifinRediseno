@@ -53,9 +53,9 @@ class SugarUpgradeUpdateSchedulersDateTimeEnd extends UpgradeDBScript
                 'Elasticsearch Queue Scheduler',
             ];
             $schedulerStr = "'" . implode("', '", $schedulers) . "'";
-            $sql = "UPDATE schedulers SET date_time_end = NULL WHERE name IN (" .
+            $sql = 'UPDATE schedulers SET date_time_end = NULL WHERE name IN (' .
                 $schedulerStr .
-                ") AND date_time_end IS NOT NULL";
+                ') AND date_time_end IS NOT NULL';
             $this->executeUpdate($sql);
         }
     }

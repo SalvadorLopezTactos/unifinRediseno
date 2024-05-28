@@ -20,7 +20,6 @@
  */
 class SugarJobUpdateForecastWorksheets implements RunnableSchedulerJob
 {
-
     /**
      * @var SchedulersJob
      */
@@ -46,7 +45,7 @@ class SugarJobUpdateForecastWorksheets implements RunnableSchedulerJob
         $settings = Forecast::getSettings();
 
         if ($settings['is_setup'] == false) {
-            $GLOBALS['log']->fatal("Forecast Module is not setup. " . self::class . " should not be running");
+            $GLOBALS['log']->fatal('Forecast Module is not setup. ' . self::class . ' should not be running');
             return false;
         }
 
@@ -60,5 +59,4 @@ class SugarJobUpdateForecastWorksheets implements RunnableSchedulerJob
         $this->job->succeedJob();
         return true;
     }
-
 }

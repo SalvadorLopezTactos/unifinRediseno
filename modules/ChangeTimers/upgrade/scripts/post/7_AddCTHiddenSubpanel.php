@@ -24,7 +24,7 @@ class SugarUpgradeAddSTHiddenSubpanel extends UpgradeScript
             (version_compare($this->from_version, '9.3.0', '<') || strtolower($this->from_flavor) === 'pro')) {
             // Add ChangeTimers to hidden subpanels if it's not already there
             $panels = SubPanelDefinitions::get_hidden_subpanels();
-            if (!in_array('changetimers', $panels)) {
+            if (!safeInArray('changetimers', $panels)) {
                 $panels['changetimers'] = 'changetimers';
                 SubPanelDefinitions::set_hidden_subpanels($panels);
             }

@@ -92,12 +92,12 @@ $viewdefs['Holidays']['base']['view']['record'] = [
             'header' => true,
             'fields' => [
                 [
-                    'name'          => 'picture',
-                    'type'          => 'avatar',
-                    'width'         => 42,
-                    'height'        => 42,
+                    'name' => 'picture',
+                    'type' => 'avatar',
+                    'width' => 42,
+                    'height' => 42,
                     'dismiss_label' => true,
-                    'readonly'      => true,
+                    'readonly' => true,
                 ],
                 'name',
             ],

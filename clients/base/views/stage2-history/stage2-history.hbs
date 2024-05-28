@@ -17,12 +17,12 @@
 {{#if collection.dataFetched}}
 <ul class='unstyled hint-preview-history-list'>
     {{#each collection.models}}
-        <li class='hint-preview-history-item item {{this.attributes._icon}}{{#if attributes._highlight}} highlight{{/if}}'>
+        <li class='hint-preview-history-item flex item {{this.attributes._icon}}{{#if attributes._highlight}} highlight{{/if}}'>
             <div class="iconContainer rounded-b-md">
                 <i class='label-module label-module-size-sm label-module-color-ocean sicon sicon-{{this.attributes._icon}}'></i>
             </div>
 
-            <div class="historyContainer">
+            <div class="historyContainer ml-2.5 overflow-hidden">
                 <span class='ellipsis_inline mt-2 mb-2' title="{{this.attributes.name}}">
                     <a href="{{this.attributes._link}}">{{this.attributes.name}}</a>
                 </span>
@@ -46,7 +46,7 @@
         </li>
     {{/each}}
     {{#unless collection.models}}
-        <li class='hint-preview-history-item item'>
+        <li class='hint-preview-history-item flex item'>
             <span class="no-history p-2">{{str 'LBL_HINT_HISTORY_NONE'}}</span>
         </li>
     {{/unless}}

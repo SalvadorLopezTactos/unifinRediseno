@@ -388,10 +388,9 @@ SUGAR.expressions.Expression.TYPE_MAP	= {
 EXPRESSIONJS;
 
 
-
 /**
- * STEP 2: 	Compile the code for the available operations mostly
- * 			generated in the 'functions_cache_new.js' file.
+ * STEP 2:    Compile the code for the available operations mostly
+ *            generated in the 'functions_cache_new.js' file.
  */
 
 echo <<<EOQ
@@ -462,12 +461,12 @@ EOQ;
 
 
 // now include the cached list of functions
-include('./functions_cache_new.js');
+include './functions_cache_new.js';
 
 
 /**
- * STEP 3: 	Echo the ExpressionParser framework which manages
- * 			parsing and error handling.
+ * STEP 3:    Echo the ExpressionParser framework which manages
+ *            parsing and error handling.
  */
 
 
@@ -648,5 +647,3 @@ SUGAR.expressions.ExpressionParser.prototype.toConstant = function(expr) {
 	return null;
 }
 EOQ;
-
-?>

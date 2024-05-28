@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,6 +10,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Installs the new PDF templates for Quotes and Invoices with service information
  */
@@ -25,14 +27,14 @@ class SugarUpgradeAddServicesPDFs extends UpgradeScript
             // Set up the variables needed to create the templates
             $logoUrl = './themes/default/images/pdf_logo.jpg';
             if (defined('PDF_HEADER_LOGO')) {
-                $logoUrl = K_PATH_CUSTOM_IMAGES.PDF_HEADER_LOGO;
+                $logoUrl = K_PATH_CUSTOM_IMAGES . PDF_HEADER_LOGO;
                 $imsize = @getimagesize($logoUrl);
                 if ($imsize === false) {
                     // Encode spaces on filename
                     $logoUrl = str_replace(' ', '%20', $logoUrl);
                     $imsize = @getimagesize($logoUrl);
                     if ($imsize === false) {
-                        $logoUrl = K_PATH_IMAGES.PDF_HEADER_LOGO;
+                        $logoUrl = K_PATH_IMAGES . PDF_HEADER_LOGO;
                     }
                 }
                 $logoUrl = './' . $logoUrl;

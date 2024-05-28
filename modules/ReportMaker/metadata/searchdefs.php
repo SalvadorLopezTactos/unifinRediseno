@@ -9,17 +9,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-  $searchdefs['ReportMaker'] = array(
-					'templateMeta' => array(
-							'maxColumns' => '3',
-  							'maxColumnsBasic' => '4',
-                            'widths' => array('label' => '10', 'field' => '30'),
-                           ),
-                    'layout' => array(
-						'basic_search' => array(
-						    'name' => array('name' => 'name', 'label' => 'LBL_NAME',),
-						    ),
-						'advanced_search' => array(),
-					),
- 			   );
-?>
+$searchdefs['ReportMaker'] = [
+    'templateMeta' => [
+        'maxColumns' => '3',
+        'maxColumnsBasic' => '4',
+        'widths' => ['label' => '10', 'field' => '30'],
+    ],
+    'layout' => [
+        'basic_search' => [
+            'name' => ['name' => 'name', 'label' => 'LBL_NAME',],
+        ],
+        'advanced_search' => [],
+    ],
+];

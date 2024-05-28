@@ -36,7 +36,7 @@ class PMSEAssignUser extends PMSEScriptTask
      * @param array $arguments
      * @return array
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         switch ($externalAction) {
             case 'RESUME_EXECUTION':
@@ -51,7 +51,8 @@ class PMSEAssignUser extends PMSEScriptTask
         $act_assign_user = $bpmnElement['act_assign_user'];
         $userData = $this->retrieveUserData($act_assign_user);
 
-        if (isset($bean->field_defs['assigned_user_id']) && isset($userData->id) && $userData->id == $act_assign_user) {
+        if (isset($bean->field_defs['assigned_user_id']) && isset($userData->id) && $userData->id == $act_assign_user
+            && $userData->status == 'Active') {
             $this->logger->debug("Assign user to '$act_assign_user'");
 
             $historyData = $this->retrieveHistoryData($flowData['cas_sugar_module']);
@@ -67,7 +68,7 @@ class PMSEAssignUser extends PMSEScriptTask
             $flowData['cas_user_id'] = $act_assign_user;
             $historyData->savePostData('assigned_user_id', $act_assign_user);
 
-            $params = array();
+            $params = [];
             $params['cas_id'] = $flowData['cas_id'];
             $params['cas_index'] = $flowData['cas_index'];
             $params['act_id'] = $bpmnElement['id'];

@@ -10,9 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-function build_related_list_by_user_id($bean, $user_id,$where, $fill_additional_column_fields = true) {
+function build_related_list_by_user_id($bean, $user_id, $where, $fill_additional_column_fields = true)
+{
 
-    $bean_id_name = strtolower($bean->object_name).'_id';
+    $bean_id_name = strtolower($bean->object_name) . '_id';
 
     $query = new SugarQuery();
     $query->from($bean);
@@ -28,7 +29,7 @@ function build_related_list_by_user_id($bean, $user_id,$where, $fill_additional_
 
     $result = $query->execute();
 
-    $list = array();
+    $list = [];
 
     foreach ($result as $row) {
         $newbean = clone $bean;
@@ -36,7 +37,7 @@ function build_related_list_by_user_id($bean, $user_id,$where, $fill_additional_
         $newbean->fetched_row = $row;
         $newbean->fromArray($row);
 
-        $newbean->processed_dates_times = array();
+        $newbean->processed_dates_times = [];
         $newbean->check_date_relationships_load();
 
         if (method_exists($newbean, 'setFillAdditionalColumnFields')) {
@@ -49,4 +50,3 @@ function build_related_list_by_user_id($bean, $user_id,$where, $fill_additional_
 
     return $list;
 }
-?>

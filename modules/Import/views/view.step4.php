@@ -9,31 +9,28 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description: view handler for step 4 of the import process
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
-
-
 class ImportViewStep4 extends ImportView
 {
-
     /**
      * @see SugarView::display()
      */
- 	public function display()
+    public function display()
     {
         global $mod_strings, $sugar_config;
 
         // Check to be sure we are getting an import file that is in the right place
-        $uploadFile = "upload://".basename($_REQUEST['tmp_file']);
-        if(!file_exists($uploadFile)) {
-            trigger_error($mod_strings['LBL_CANNOT_OPEN'],E_USER_ERROR);
+        $uploadFile = 'upload://' . basename($_REQUEST['tmp_file']);
+        if (!file_exists($uploadFile)) {
+            trigger_error($mod_strings['LBL_CANNOT_OPEN'], E_USER_ERROR);
         }
 
-        $uploadFiles = explode("-", $uploadFile);
+        $uploadFiles = explode('-', $uploadFile);
         $currentPart = end($uploadFiles);
 
         $delimiter = $this->getDelimiterValue();
@@ -48,11 +45,11 @@ class ImportViewStep4 extends ImportView
         );
 
         //Ensure we have a valid file.
-        if ( !$importSource->fileExists() )
-            trigger_error($mod_strings['LBL_CANNOT_OPEN'],E_USER_ERROR);
+        if (!$importSource->fileExists()) {
+            trigger_error($mod_strings['LBL_CANNOT_OPEN'], E_USER_ERROR);
+        }
 
-        if (!ImportCacheFiles::ensureWritable())
-        {
+        if (!ImportCacheFiles::ensureWritable()) {
             trigger_error($mod_strings['LBL_ERROR_IMPORT_CACHE_NOT_WRITABLE'], E_USER_ERROR);
         }
 

@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('dd-gestures', function (Y, NAME) {
 
 
@@ -52,11 +45,10 @@ YUI.add('dd-gestures', function (Y, NAME) {
         this._createPG();
         this._active = true;
         Y.one(Y.config.doc).on('gesturemove', Y.throttle(Y.bind(DDM._move, DDM), DDM.get('throttleTime')), {
-            standAlone: true,
-            preventDefault: true
+            standAlone: true
         });
     };
 
 
 
-}, '3.15.0', {"requires": ["dd-drag", "event-synthetic", "event-gestures"]});
+}, '3.18.1', {"requires": ["dd-drag", "event-synthetic", "event-gestures"]});

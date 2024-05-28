@@ -53,20 +53,20 @@
     setCollectionOptions: function() {
         var self = this;
         var endpoint = function(method, model, options, callbacks) {
-            var real_module = self.context.parent.get('module'),
-                layoutType = self.context.parent.get('layout'),
-                modelId = self.context.parent.get('modelId'),
-                action = model.module, // equal to 'Activities'
-                url;
+            let realModule = self.context.parent.get('module');
+            let layoutType = self.context.parent.get('layout');
+            let modelId = self.context.parent.get('modelId');
+            let action = model.module; // equal to 'Activities'
+            let url;
             switch (layoutType) {
                 case "activities":
-                    url = app.api.buildURL(real_module, null, {}, options.params);
+                    url = app.api.buildURL(realModule, null, {}, options.params);
                     break;
-                case "records":
-                    url = app.api.buildURL(real_module, action, {}, options.params);
+                case 'records': case 'pipeline-records':
+                    url = app.api.buildURL(realModule, action, {}, options.params);
                     break;
                 case "record":
-                    url = app.api.buildURL(real_module, null, {id: modelId, link: 'activities'}, options.params);
+                    url = app.api.buildURL(realModule, null, {id: modelId, link: 'activities'}, options.params);
                     break;
             }
             return app.api.call("read", url, null, callbacks);
@@ -84,6 +84,12 @@
                 self.collection.reset();
             }
         });
+
+        //to trigger fetch data for pipeline layout
+        if ('pipeline-records' === this.context.parent.get('layout')) {
+            let options = this.context.get('collectionOptions');
+            this.collection.fetch(options);
+        }
     },
 
     /**

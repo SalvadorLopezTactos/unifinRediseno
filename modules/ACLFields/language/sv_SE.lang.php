@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_DEFAULT' => 'Ej satt',
     'LBL_READ_WRITE' => 'Läsa/Skriva',
     'LBL_READ_OWNER_WRITE' => 'Läsa/Ägare skriva',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_READ_SELECTED_TEAMS_WRITE' => 'Läs/(Ägare & Utvalt team) Skriv',
     'LBL_SELECTED_TEAMS_READ_OWNER_WRITE' => '(Ägare & Utvalda Team) Läs/Ägare Skriv',
     'LBL_SELECTED_TEAMS_READ_WRITE' => '(Ägare & Utvalda team) Läs/(Ägare & Utvalda team) Skriv',
-);
+];

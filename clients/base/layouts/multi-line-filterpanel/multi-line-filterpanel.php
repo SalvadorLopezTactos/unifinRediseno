@@ -18,11 +18,13 @@ $viewdefs['base']['layout']['multi-line-filterpanel'] = [
         'id' => 'multiline-list-filterpanel',
     ],
     'refresh_button' => true,
-    'css_class' => 'toggleless-filterpanel',
+    'css_class' => 'toggleless-filterpanel mt-1.5',
     'components' => [
         [
-            'layout' => 'filter',
-            'loadModule' => 'Filters',
+            'layout' => 'multi-line-list-filter',
+        ],
+        [
+            'layout' => 'multi-line-sorting',
         ],
         [
             'view' => 'filter-rows',

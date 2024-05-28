@@ -26,7 +26,7 @@ class LogExpression extends NumericExpression
         $base = $params[1]->evaluate();
         $value = $params[0]->evaluate();
         if ($base == 1) {
-            throw new Exception("Log base can not be 1");
+            throw new Exception('Log base can not be 1');
         }
 
         return SugarMath::init(log($value))->div(log($base))->result();
@@ -53,7 +53,7 @@ EOQ;
      */
     public static function getOperationName()
     {
-        return "log";
+        return 'log';
     }
 
     /**

@@ -11,21 +11,21 @@
  */
 
 /**
-  * Scan modules to find print_r, var_dump, exit, die using and replace it with custom sugar_upgrade_* functions.
-  */
+ * Scan modules to find print_r, var_dump, exit, die using and replace it with custom sugar_upgrade_* functions.
+ */
 class SugarUpgradeCheckOutput extends UpgradeScript
 {
     public $order = 9200;
     public $type = self::UPGRADE_CUSTOM;
 
-    protected $excludedScanDirectories = array(
+    protected $excludedScanDirectories = [
         'backup',
         'disabled',
         'tmp',
         'temp',
-    );
+    ];
 
-    public $filesToFix = array();
+    public $filesToFix = [];
 
     protected $sePattern = <<<ENDP
 if\s*\(\s*!\s*defined\s*\(\s*['|"]sugarEntry['|"]\s*\)\s*(\|\|\s*!\s*sugarEntry\s*)?\)\s*{?\s*die\s*\(\s*['|"](.*?)['|"]\s*\)\s*;\s*}?
@@ -49,12 +49,11 @@ ENDP;
 
             $regExp = implode('|', $functions);
 
-            if (preg_match_all('#([^_])\b('. $regExp . ')\b(.*?(,(.*?)\)?)?);#is', $fileContents, $matchAll, PREG_SET_ORDER)) {
-
+            if (preg_match_all('#([^_])\b(' . $regExp . ')\b(.*?(,(.*?)\)?)?);#is', $fileContents, $matchAll, PREG_SET_ORDER)) {
                 $changedContents = $fileContents;
                 $changedContentsFlag = false;
 
-                foreach($matchAll as $match) {
+                foreach ($matchAll as $match) {
                     // skip print_r with second param
                     if ('print_r' == $match[2] && !empty($match[5])) {
                         continue;
@@ -64,7 +63,7 @@ ENDP;
                     $replace = preg_replace('#([^_])\b(' . $regExp . ')\b([^_])#is', '\\1sugar_upgrade_\\2\\3', $pattern);
 
                     if (!empty($pattern) && !empty($replace)) {
-                        $changedContents = preg_replace("#" . preg_quote($pattern, '#') . "#is", $replace, $changedContents);
+                        $changedContents = preg_replace('#' . preg_quote($pattern, '#') . '#is', $replace, $changedContents);
                         $changedContentsFlag = true;
                     }
 
@@ -85,21 +84,21 @@ ENDP;
 
     public function run()
     {
-        $healthCheck = array();
+        $healthCheck = [];
         if (!empty($this->state['healthcheck'])) {
             foreach ($this->state['healthcheck'] as $healthMeta) {
                 switch ($healthMeta['report']) {
-                    case 'foundDieExit' :
+                    case 'foundDieExit':
                         $healthCheck[$healthMeta['params'][0]][] = 'exit';
                         $healthCheck[$healthMeta['params'][0]][] = 'die';
                         break;
-                    case 'foundPrintR' :
+                    case 'foundPrintR':
                         $healthCheck[$healthMeta['params'][0]][] = 'print_r';
                         break;
-                    case 'foundVarDump' :
+                    case 'foundVarDump':
                         $healthCheck[$healthMeta['params'][0]][] = 'var_dump';
                         break;
-                    // ignoring foundEcho foundPrint because we don't know how to fix them correctly
+                        // ignoring foundEcho foundPrint because we don't know how to fix them correctly
                 }
             }
         }

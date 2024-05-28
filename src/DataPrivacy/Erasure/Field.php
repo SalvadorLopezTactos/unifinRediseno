@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -25,5 +27,5 @@ interface Field extends JsonSerializable
      *
      * @param SugarBean $bean
      */
-    public function erase(SugarBean $bean) : void;
+    public function erase(SugarBean $bean): void;
 }

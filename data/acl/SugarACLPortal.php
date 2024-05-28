@@ -60,9 +60,9 @@ class SugarACLPortal extends SugarACLStatic
                             'lhs_field' => 'id',
                             'operator' => '=',
                             'rhs_value' => \DBManagerFactory::getInstance()->quote(PortalFactory::getInstance('Session')->getContactId()),
-                         ],
+                        ],
                     ]);
-                    $bean->portal_owner = (is_countable($rows['rows']) ? count($rows['rows']) : 0) > 0;
+                    $bean->portal_owner = safeCount($rows['rows']) > 0;
                     break;
                 case 'Notes':
                     $bean->portal_owner = $bean->contact_id === PortalFactory::getInstance('Session')->getContactId();
@@ -99,7 +99,7 @@ class SugarACLPortal extends SugarACLStatic
             }
 
             $context['owner_override'] = $this->isPortalOwner($bean);
-            
+
             if (isset(self::$action_translate[$action])) {
                 $action = self::$action_translate[$action];
             }
@@ -125,7 +125,7 @@ class SugarACLPortal extends SugarACLStatic
         return $accessGranted;
     }
 
-    public static $action_translate = array(
+    public static $action_translate = [
         'listview' => 'list',
         'index' => 'list',
         'popupeditview' => 'edit',
@@ -134,7 +134,7 @@ class SugarACLPortal extends SugarACLStatic
         'detailview' => 'view',
         'save' => 'edit',
         'create' => 'edit',
-    );
+    ];
 
     /**
      * Check access to fields
@@ -146,16 +146,16 @@ class SugarACLPortal extends SugarACLStatic
     protected function fieldACL($module, $action, $context)
     {
         $accessGranted = $this->portalAccess($module, $action, $context);
-        
+
         // Handle file and image type field checking here, specifically for creates
         if ($accessGranted === false && $action === 'create') {
             $bean = $context['bean'] ?? null;
-            
+
             // If there is a bean, and a field name and defs for that fieldname...
             if ($bean && isset($context['field']) && isset($bean->field_defs[$context['field']])) {
                 $field = $context['field'];
                 $def = $bean->field_defs[$field];
-                
+
                 // If the field type is an image or file
                 if (isset($def['type']) && ($def['type'] === 'image' || $def['type'] === 'file')) {
                     // And the value for this field in the bean is empty, it is
@@ -190,7 +190,7 @@ class SugarACLPortal extends SugarACLStatic
             $module = ($module === 'Categories') ? 'KBContents' : $module;
 
             // block listviews for the list of modules defined in modulesToDenyPortalList
-            if ($action === 'list' && in_array($module, $this->modulesToDenyPortalList)) {
+            if ($action === 'list' && safeInArray($module, $this->modulesToDenyPortalList)) {
                 return false;
             }
 

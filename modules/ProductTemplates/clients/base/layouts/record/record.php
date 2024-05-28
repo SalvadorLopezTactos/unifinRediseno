@@ -10,121 +10,120 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['ProductTemplates']['base']['layout']['record'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['ProductTemplates']['base']['layout']['record'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'css_class' => 'main-pane span8 overflow-auto',
+                            'components' => [
+                                [
                                     'view' => 'record',
                                     'primary' => true,
-                                ),
-                                array(
+                                ],
+                                [
                                     'layout' => 'extra-info',
-                                ),
-                                array(
-                                    'layout' => array(
+                                ],
+                                [
+                                    'layout' => [
                                         'type' => 'filterpanel',
-                                        'last_state' => array(
+                                        'last_state' => [
                                             'id' => 'record-filterpanel',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'toggle-view' => 'subpanels',
-                                            ),
-                                        ),
-                                        'availableToggles' => array(
-                                            array(
+                                            ],
+                                        ],
+                                        'availableToggles' => [
+                                            [
                                                 'name' => 'subpanels',
                                                 'icon' => 'sicon-list-view',
                                                 'label' => 'LBL_DATA_VIEW',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'name' => 'list',
                                                 'icon' => 'sicon-list-view',
                                                 'label' => 'LBL_LISTVIEW',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'name' => 'activitystream',
                                                 'icon' => 'sicon-clock',
                                                 'label' => 'LBL_ACTIVITY_STREAM',
-                                            ),
-                                        ),
-                                        'components' => array(
-                                            array(
+                                            ],
+                                        ],
+                                        'components' => [
+                                            [
                                                 'layout' => 'filter',
-                                                'xmeta' => array(
+                                                'xmeta' => [
                                                     'layoutType' => '',
-                                                ),
+                                                ],
                                                 'loadModule' => 'Filters',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'filter-rows',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'filter-actions',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'layout' => 'activitystream',
-                                                'context' =>
-                                                array(
+                                                'context' => [
                                                     'module' => 'Activities',
-                                                ),
-                                            ),
-                                            array(
+                                                ],
+                                            ],
+                                            [
                                                 'layout' => 'subpanels',
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'dashboard-pane',
                             'css_class' => 'dashboard-pane',
-                            'components' => array(
-                                array(
-                                    'layout' => array(
+                            'components' => [
+                                [
+                                    'layout' => [
                                         'type' => 'dashboard',
-                                        'last_state' => array(
+                                        'last_state' => [
                                             'id' => 'last-visit',
-                                        )
-                                    ),
-                                    'context' => array(
+                                        ],
+                                    ],
+                                    'context' => [
                                         'forceNew' => true,
                                         'module' => 'Home',
-                                    ),
+                                    ],
                                     'loadModule' => 'Dashboards',
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'preview-pane',
                             'css_class' => 'preview-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'preview',
                                     'xmeta' => [
                                         'editable' => true,
                                     ],
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

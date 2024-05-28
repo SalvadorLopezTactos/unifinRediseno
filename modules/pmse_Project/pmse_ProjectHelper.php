@@ -15,7 +15,7 @@ use Sugarcrm\Sugarcrm\ProcessManager;
 function getTargetsModules()
 {
     // Prepare the result
-    $modules = array();
+    $modules = [];
 
     // Get the module list from the data wrapper
     $wrapper = ProcessManager\Factory::getPMSEObject('PMSECrmDataWrapper');

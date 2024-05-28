@@ -269,6 +269,23 @@
     },
 
     /**
+     * Gets a list of the underlying fields contained in a multi-line list
+     * @param module
+     * @return {Array} a list of field definitions from the multi-line list metadata
+     * @private
+     */
+    _getMetaFields: function(module) {
+        let multiLineMeta = app.metadata.getView(module, 'multi-line-list');
+        let subfields = [];
+        _.each(multiLineMeta.panels, function(panel) {
+            _.each(panel.fields, function(fieldDefs) {
+                subfields = subfields.concat(fieldDefs.subfields);
+            });
+        }, this);
+        return subfields;
+    },
+
+    /**
      * To build the regular field definitions
      * @param li The <li> element of a regular field.
      * @param field The field object to be populated
@@ -282,6 +299,15 @@
         var type = fieldDef.type;
 
         field.type = type;
+        let metaFields = this._getMetaFields(module);
+        let metaField = metaFields.find(metaField => metaField.name === field.name && !metaField.widget_name);
+        if (metaField && metaField.type) {
+            field.type = metaField.type;
+            if (metaField.disable_field) {
+                field.disable_field = metaField.disable_field;
+            }
+        }
+
         if (!_.isEmpty(fieldDef.related_fields)) {
             field.related_fields = fieldDef.related_fields;
         }

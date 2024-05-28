@@ -27,26 +27,26 @@ class UpgradeHistory extends SugarBean
     // If a FATAL or PARSE error caught, the package with age below this timeout will be removed.
     public const PACKAGE_EMERGENCY_ROLLBACK_TIMEOUT_MIN = 5;
 
-    var $new_schema = true;
-    var $module_dir = 'Administration';
+    public $new_schema = true;
+    public $module_dir = 'Administration';
 
     // Stored fields
-    var $id;
-    var $filename;
-    var $md5sum;
-    var $type;
-    var $version;
-    var $status;
-    var $date_entered;
+    public $id;
+    public $filename;
+    public $md5sum;
+    public $type;
+    public $version;
+    public $status;
+    public $date_entered;
 
     /**
      * @var string
      */
     public $date_modified;
 
-    var $name;
-    var $description;
-    var $id_name;
+    public $name;
+    public $description;
+    public $id_name;
 
     /**
      * serialized base_64_encoded package manifest
@@ -96,12 +96,12 @@ class UpgradeHistory extends SugarBean
      */
     public $uninstallable;
 
-    var $tracker_visibility = false;
-    var $table_name = "upgrade_history";
-    var $object_name = "UpgradeHistory";
-    var $module_name = "UpgradeHistory";
-    var $column_fields = Array( "id", "filename", "md5sum", "type", "version", "status", "date_entered" );
-    var $disable_custom_fields = true;
+    public $tracker_visibility = false;
+    public $table_name = 'upgrade_history';
+    public $object_name = 'UpgradeHistory';
+    public $module_name = 'UpgradeHistory';
+    public $column_fields = ['id', 'filename', 'md5sum', 'type', 'version', 'status', 'date_entered'];
+    public $disable_custom_fields = true;
 
     /**
      * UpgradeHistory constructor.
@@ -248,7 +248,7 @@ class UpgradeHistory extends SugarBean
      * @return SugarBean|null
      * @throws SugarQueryException
      */
-    public function retrieveByMd5(string $md5Sum, array $queryOptions = []):? SugarBean
+    public function retrieveByMd5(string $md5Sum, array $queryOptions = []): ?SugarBean
     {
         $result = $this->findByMd5($md5Sum, $queryOptions);
         if (!empty($result)) {
@@ -319,7 +319,7 @@ class UpgradeHistory extends SugarBean
      */
     public function getProcessStatus(): array
     {
-        return (array) @json_decode($this->process_status, true);
+        return (array)@json_decode($this->process_status, true);
     }
 
     /**
@@ -328,7 +328,7 @@ class UpgradeHistory extends SugarBean
      * @return SugarBean|null
      * @throws SugarQueryException
      */
-    public function retrieveByIdName(string $idName):? SugarBean
+    public function retrieveByIdName(string $idName): ?SugarBean
     {
         $query = new SugarQuery();
         $query->from($this);
@@ -375,7 +375,7 @@ class UpgradeHistory extends SugarBean
      * @return null|UpgradeHistory
      * @throws SugarQueryException
      */
-    public function checkForExisting(UpgradeHistory $source):? UpgradeHistory
+    public function checkForExisting(UpgradeHistory $source): ?UpgradeHistory
     {
         $result = $this->findMatchesByName($source);
         if (!empty($result)) {
@@ -392,13 +392,13 @@ class UpgradeHistory extends SugarBean
     {
         return [
             'id' => $this->id,
-            'name' => (string) $this->name,
-            'type' => (string) $this->type,
-            'status' => (string) $this->status,
-            'description' => (string) $this->description,
-            'version' => (string) $this->version,
-            'published_data' => (string) $this->published_date,
-            'date_modified' => (string) $this->date_modified,
+            'name' => (string)$this->name,
+            'type' => (string)$this->type,
+            'status' => (string)$this->status,
+            'description' => (string)$this->description,
+            'version' => (string)$this->version,
+            'published_data' => (string)$this->published_date,
+            'date_modified' => (string)$this->date_modified,
             'enabled' => $this->isPackageEnabled(),
             'uninstallable' => $this->isPackageUninstallable(),
             'file' => $this->id,
@@ -449,7 +449,7 @@ class UpgradeHistory extends SugarBean
      * @return UpgradeHistory|null
      * @throws SugarQueryException
      */
-    public function getPreviousInstalledVersion():? UpgradeHistory
+    public function getPreviousInstalledVersion(): ?UpgradeHistory
     {
         if ($this->status === self::STATUS_INSTALLED) {
             return null;

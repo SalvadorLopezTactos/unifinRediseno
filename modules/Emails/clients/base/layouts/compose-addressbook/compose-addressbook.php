@@ -11,48 +11,48 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Emails']['base']['layout']['compose-addressbook'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['Emails']['base']['layout']['compose-addressbook'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'css_class' => 'main-pane span8 overflow-y-auto',
+                            'components' => [
+                                [
                                     'view' => 'compose-addressbook-headerpane',
-                                ),
-                                array(
+                                ],
+                                [
                                     'view' => 'compose-addressbook-recipientscontainer',
-                                ),
-                                array(
+                                ],
+                                [
                                     'view' => 'compose-addressbook-filter',
-                                ),
-                                array(
+                                ],
+                                [
                                     'layout' => 'compose-addressbook-list',
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'preview-pane',
                             'css_class' => 'preview-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'preview',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

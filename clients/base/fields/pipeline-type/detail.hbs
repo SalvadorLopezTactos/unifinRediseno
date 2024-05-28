@@ -18,8 +18,8 @@
     {{else}}
         <ul class="nav nav-tabs pull-left">
             {{#each tabs}}
-                <li class="tab tab-badgeable {{#eq ../value moduleField}}active{{/eq}}">
-                    <a class="tcenter pipeline-stage" data-pipeline="{{moduleField}}" name="pipelineBtn">
+                <li class="tab tab-pipeline flex-grow h-9 hover:bg-[--tab-background-hover-color]{{#eq ../value moduleField}} active-tab{{/eq}}">
+                    <a class="text-center pipeline-stage" data-pipeline="{{moduleField}}" name="pipelineBtn">
                         <span class="tab-title font-semibold">{{tabLabel}}</span>
                     </a>
                 </li>

@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('tree', function (Y, NAME) {
 
 /*jshint boss:true, expr:true, onevar:false */
@@ -691,17 +684,27 @@ var Tree = Y.Base.create('tree', Y.Base, [], {
     @protected
     **/
     _adoptNode: function (node, options) {
-        var oldTree = node.tree;
+        var oldTree = node.tree,
+            child;
 
         if (oldTree === this) {
             return;
         }
 
         for (var i = 0, len = node.children.length; i < len; i++) {
-            this._adoptNode(node.children[i], {silent: true});
+            child = node.children[i];
+
+            child.parent = null; // Prevents the child from being removed from
+                                 // its parent during the adoption.
+
+            this._adoptNode(child, {silent: true});
+            child.parent = node;
         }
 
-        oldTree.removeNode(node, options);
+        if (node.parent) {
+            oldTree.removeNode(node, options);
+        }
+
         delete oldTree._nodeMap[node.id];
 
         // If this node isn't an instance of this tree's composed _nodeClass,
@@ -714,6 +717,8 @@ var Tree = Y.Base.create('tree', Y.Base, [], {
         }
 
         node.tree = this;
+        node._isIndexStale = true;
+
         this._nodeMap[node.id] = node;
     },
 
@@ -932,4 +937,4 @@ var Tree = Y.Base.create('tree', Y.Base, [], {
 Y.Tree = Y.mix(Tree, Y.Tree);
 
 
-}, '3.15.0', {"requires": ["base-build", "tree-node"]});
+}, '3.18.1', {"requires": ["base-build", "tree-node"]});

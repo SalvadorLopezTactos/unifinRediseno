@@ -22,9 +22,10 @@
 }
 
 #content {
+  background: @contentBackground;
   position: fixed;
   width: calc(~"100% - @sidebarNavWidth");
-  top: 0;
+  top: @headerNavHeight;
   right: 0;
   bottom: 0;
   left: @sidebarNavWidth;
@@ -42,12 +43,10 @@
 .main-pane {
   position: absolute;
   bottom: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
   padding-top: 0 !important;
 
   &:not(.bg-transparent) {
-    .bg-primary-content-background();
+    background-color: var(--primary-content-background);
   }
 
   .list-view {
@@ -113,19 +112,9 @@
 
 /* NEW SKIN START */
 
-#content {
-  /* override */
-  background: @contentBackground;
-}
-
 #header:not(.hide) + #content {
   /* override */
   top: 45px;
-}
-
-#header-nav:not(.hide) + #content {
-  /* override */
-  top: @headerNavHeight;
 }
 
 .main-pane {
@@ -141,36 +130,11 @@
     top: @bannerHeight + 45px;
   }
 
-  #header-nav:not(.hide) + #content {
+  #content {
     /* override */
     top: calc(@bannerHeightREM ~"+" @headerNavHeight);
   }
 }
-
-/* Impersonation banner START */
-
-.impersonation-banner {
-  top: 0;
-  left: 0;
-  height: @bannerHeight;
-  color: @white;
-  justify-content: space-between;
-  z-index: @zindexImpersonationBanner;
-
-  .icon {
-    color: @white;
-  }
-
-  .text {
-    font-size: @fontSizeHeaderSubTitle;
-  }
-
-  .btn {
-    font-size: @fontSizeHeaderSubTitle;
-  }
-}
-
-/* Impersonation banner END */
 
 .split-screen-resizer {
   background-color: @resizerColor;
@@ -228,19 +192,5 @@
 }
 
 .split-screens-container {
-  .w-full();
-  .h-full();
-  .flex();
-
   background-color: @primaryContentBackground;
-}
-
-.first-split-screen {
-  .overflow-auto();
-}
-
-.second-split-screen {
-  .overflow-auto();
-
-  flex: 1;
 }

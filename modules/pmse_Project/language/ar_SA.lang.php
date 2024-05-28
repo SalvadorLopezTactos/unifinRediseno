@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'تعريف العملية',
-  'LBL_MODULE_TITLE' => 'تعريف العملية',
-  'LBL_MODULE_NAME_SINGULAR' => 'تعريف العملية',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'تعريف العملية',
+    'LBL_MODULE_TITLE' => 'تعريف العملية',
+    'LBL_MODULE_NAME_SINGULAR' => 'تعريف العملية',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم تعريفات العمليات',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم تعريفات العمليات',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'لوحة معلومات سجل تعريفات العمليات',
-  'LNK_LIST' => 'عرض تعريفات العملية',
-  'LNK_NEW_PMSE_PROJECT' => 'إنشاء تعريف العملية',
-  'LNK_IMPORT_PMSE_PROJECT' => 'استيراد تعريفات العملية',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'لوحة معلومات سجل تعريفات العمليات',
+    'LNK_LIST' => 'عرض تعريفات العملية',
+    'LNK_NEW_PMSE_PROJECT' => 'إنشاء تعريف العملية',
+    'LNK_IMPORT_PMSE_PROJECT' => 'استيراد تعريفات العملية',
 
-  'LBL_PRJ_STATUS' => 'الحالة',
-  'LBL_PRJ_MODULE' => 'الوحدة المستهدفة',
-  'LBL_PRJ_RUN_ORDER' => 'ترتيب التشغبل',
-  'LBL_PMSE_BUTTON_SAVE' => 'حفظ',
-  'LBL_PMSE_BUTTON_CANCEL' => 'إلغاء',
-  'LBL_PMSE_BUTTON_YES' => 'نعم',
-  'LBL_PMSE_BUTTON_NO' => 'لا',
-  'LBL_PMSE_BUTTON_OK' => 'موافق',
+    'LBL_PRJ_STATUS' => 'الحالة',
+    'LBL_PRJ_MODULE' => 'الوحدة المستهدفة',
+    'LBL_PRJ_RUN_ORDER' => 'ترتيب التشغبل',
+    'LBL_PMSE_BUTTON_SAVE' => 'حفظ',
+    'LBL_PMSE_BUTTON_CANCEL' => 'إلغاء',
+    'LBL_PMSE_BUTTON_YES' => 'نعم',
+    'LBL_PMSE_BUTTON_NO' => 'لا',
+    'LBL_PMSE_BUTTON_OK' => 'موافق',
     'LBL_PMSE_FORM_ERROR' => 'يرجى حل أي أخطاء قبل المتابعة.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'تصميم',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'النشاط',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'الإجراء',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'حدث بدء العميل المحتمل',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'حدث بدء الفرصة' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'حدث بدء الفرصة',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'حدث بدء المستند',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'حدث وحدة أخرى',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'حدث الانتظار',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'قاعدة العمل',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'إجراء قاعدة العمل',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'قالب البريد الإلكتروني',
-);
+];

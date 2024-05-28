@@ -11,24 +11,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['list'] = array(
+$viewdefs['base']['layout']['list'] = [
     'css_class' => 'paginated-flex-list',
-    'components' => array(
-        array(
+    'components' => [
+        [
             'view' => 'massupdate',
-        ),
-        array(
+        ],
+        [
             'view' => 'massaddtolist',
-        ),
-        array(
+        ],
+        [
             'view' => 'recordlist',
             'primary' => true,
-        ),
+        ],
         [
             'view' => [
                 'name' => 'list-pagination',
-                'css_class' => 'flex-table-pagination',
+                'css_class' => 'flex-table-pagination absolute bg-[--primary-content-background] w-full z-30',
             ],
         ],
-    ),
-);
+    ],
+];

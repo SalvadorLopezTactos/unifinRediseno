@@ -11,40 +11,40 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Leads']['base']['layout']['convert'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['Leads']['base']['layout']['convert'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'css_class' => 'main-pane overflow-y-auto span8',
+                            'components' => [
+                                [
                                     'view' => 'convert-headerpane',
-                                ),
-                                array(
+                                ],
+                                [
                                     'layout' => 'convert-main',
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'preview-pane',
                             'css_class' => 'preview-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'preview',
-                                ),
-                            ),
-                        ),
-                    ),
+                                ],
+                            ],
+                        ],
+                    ],
                     [
                         'layout' => [
                             'type' => 'base',
@@ -58,15 +58,15 @@ $viewdefs['Leads']['base']['layout']['convert'] = array(
                                         'components' => [
                                             [
                                                 'layout' => 'convert-dashboard',
-                                            ]
+                                            ],
                                         ],
                                     ],
                                 ],
                             ],
                         ],
                     ],
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

@@ -189,6 +189,7 @@
 
 // Elemental labels colors
 // -------------------------------------------------------------
+// TODO deprecate along with modules badges in labels-badges.less
 @el-accounts-text: @color-green-600;
 @el-accounts-bg: @color-green-200;
 @el-bc-bg: @color-pacific-200;
@@ -310,6 +311,7 @@
 @textColorHover: var(--text-color-hover);
 @textColorInverse: var(--text-color-inverse);
 @textColorLight: var(--text-color-light);
+@historyLogColor: var(--history-log-color);
 @placeholderText: @color-gray-600;
 @primaryContentBackground: var(--primary-content-background);
 @primaryContentBackgroundAccent: var(--primary-content-background-accent);
@@ -318,9 +320,11 @@
 @primaryContentHoverStriped: var(--primary-content-hover-striped);
 @primaryContentHoverBackground: var(--primary-content-hover-background);
 @secondaryContentBackground: var(--secondary-content-background);
+@contentTimelineBackground: var(--content-timeline-background);
 @searchbarBackground: var(--searchbar-background);
 @sidebarNavBackground: var(--sidebar-nav-background);
 @sidebarNavBackgroundHover: var(--sidebar-nav-background-hover);
+// TODO REMOVE
 @overlayBackground: rgba(0, 0, 0, 0.5);
 
 // Links
@@ -355,12 +359,10 @@
 //--------------------------
 @shadowWidget: 0 2px 4px 0 var(--shadow-color);
 @shadowWidgetInset: inset 0 2px 1px var(--shadow-color);
-@boxShadowNone: 0 0 0 var(--shadow-color);
-@boxShadow: 0 2px 2px var(--shadow-color), 0 0 2px var(--shadow-color);
-@boxShadowMd: 0 4px 4px var(--shadow-color);
+@boxShadowNoneTop: 0 2px 2px var(--shadow-color);
+@boxShadowMdHover: 0 2px 4px var(--shadow-color-hover);
 @boxShadowLg: 0 2px 8px var(--shadow-color);
 @boxShadowLgHover: 0 2px 8px var(--shadow-color-hover);
-@boxShadowXl: 0 2px 9px var(--shadow-color);
 
 // Borders
 //--------------------------
@@ -373,15 +375,17 @@
 @activityBackgroundColor: var(--activity-background-color);
 @activityBorderTopColor: var(--activity-border-top-color);
 @activityColor: var(--activity-color);
-@activityBaseColor: 0.25rem solid var(--activity-base-color);
-@activityBaseCancellationColor: 0.25rem solid var(--activity-base-cancellation-color);
-@activityBaseNotColor: 0.25rem solid var(--activity-base-not-color);
+@activityBaseColor: 4px solid var(--activity-base-color);
+@activityInProgressColor: 4px solid var(--activity-inprogress-color);
+@activityBaseCancellationColor: 4px solid var(--activity-base-cancellation-color);
+@activityBaseNotColor: 4px solid var(--activity-base-not-color);
 @templateCardColor: 1px solid var(--tempalte-card-color);
 @activityBaseIconColor: var(--activity-base-icon-color);
 @activityRowFluidColor: var(--activity-row-fluid-color);
 @activityRowFluidBorderColor: 1px solid var(--activity-row-fluid-border-color);
 @activityProgressColor: var(--activity-progress-color);
 @activityInfoColor: var(--activity-info-color);
+@activityBaseTypeIconColor: var(--activity-base-type-icon-color);
 
 // Sugar Automate Borders
 //--------------------------
@@ -397,17 +401,26 @@
 @resizerColor: var(--resizer-color);
 @dragHandleColor: var(--drag-handle-color);
 
-// Component sizing
+// Font sizing
 // -------------------------
+// TODO: DO NOT USE, use Tailwind directly
 @fontSizeExtraLarge: @baseFontSize + 6px; // 18px
 @fontSizeHeader: @baseFontSize + 3px; // 15px
 @fontSizeLarge: @baseFontSize + 3px; // 15px
 @fontSizeMedium: @baseFontSize + 1px; // 13px
 @fontSizeSmall: @baseFontSize - 1px; // 11px
 @fontSizeMini: @baseFontSize - 2px; // 10px
+
+// Padding
+// -------------------------
+// TODO: DO NOT USE, use Tailwind directly
 @paddingLarge: 9px 14px; // 44px
 @paddingSmall: 5px 9px; // 26px
 @paddingMini: 2px 6px; // 24px
+
+// Border radius
+// -------------------------
+// TODO: DO NOT USE, use Tailwind directly
 @baseBorderRadius: 3px;
 @borderRadiusLarge: 6px;
 @borderRadiusSmall: 2px;
@@ -478,12 +491,6 @@
 
 @loadingBackground: var(--content-background);
 @loadingBorder: var(--border-color);
-
-// Buttons
-// -------------------------
-// Necessary for use in LESS functions
-@btnBackgroundLight: @color-white;
-@btnBackgroundDark: @color-black;
 
 // Base button
 @btnBackground: var(--btn-background);
@@ -560,12 +567,11 @@
 // Z-index master list
 // -------------------------
 // Used for a bird's eye view of components dependent on the z-axis
-// Try to avoid customizing these :)
+// TODO CLEAN UP in favour Tailwind scale
 @zindexDefault: 1;
 @zindexDropdown: 1000;
 @zindexPopover: 1010;
 @zindexFixedNavbar: 1030;
-@zindexFixedFooter: 1031;
 @zindexSidebarNav: 1060;
 @zindexTooltip: 1070;
 @zindexModalBackdrop: 1040;
@@ -803,10 +809,6 @@
 @headerpaneSideToggleHoverBackground: var(--headerpane-side-toggle-hover-background);
 @subcontentHeaderBackground: var(--subheader-content-background);
 
-// Footer
-// -------------------------
-@footerBackgroundColor: var(--footer-background);
-
 // Subpanels
 // -------------------------
 @subpanelBackground: var(--subpanel-background);
@@ -894,6 +896,7 @@
 // Console Metric Tabs
 @consoleMetricTabDropdownColor: var(--btn-secondary-color);
 
+@timelineSkeletonLoader: var(--timeline-skeleton-loader);
 @dataSkeletonLoader: var(--data-skeleton-loader);
 @dataSkeletonLoaderStatic: var(--data-skeleton-loader-static);
 @chartSkeletonLoader: var(--chart-skeleton-loader);
@@ -917,3 +920,8 @@
 @summationSkeletonLoader: var(--summation-skeleton-loader);
 @rowsAndColumnsSkeletonLoader: var(--rows-and-columns-skeleton-loader);
 @summationWithDetailSkeletonLoader: var(--summation-with-detail-skeleton-loader);
+@automateSkeletonLoader: var(--automate-skeleton-loader);
+
+// DocuSign
+@docusignInputFocus: var(--link-color);
+@docusignDashletBorderColor: var(--border-color);

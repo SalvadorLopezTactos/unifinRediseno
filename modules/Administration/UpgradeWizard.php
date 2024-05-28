@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-if(!is_admin($GLOBALS['current_user'])){
-	sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
+if (!is_admin($GLOBALS['current_user'])) {
+    sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
 }
 
 require_once 'ModuleInstall/ModuleScanner.php';
@@ -31,7 +31,7 @@ use Sugarcrm\Sugarcrm\AccessControl\SugarFeatureVoter;
 
 global $mod_strings;
 
-$form_action = "index.php?module=Administration&view=module&action=UpgradeWizard";
+$form_action = 'index.php?module=Administration&view=module&action=UpgradeWizard';
 $uploadLabel = htmlspecialchars(translate('LBL_UW_UPLOAD_MODULE', 'Administration'), ENT_COMPAT);
 $descItemsQueued = $mod_strings['LBL_UW_DESC_MODULES_QUEUED'];
 $descItemsInstalled = $mod_strings['LBL_UW_DESC_MODULES_INSTALLED'];
@@ -41,22 +41,21 @@ define('SUGARCRM_MIN_UPLOAD_MAX_FILESIZE_BYTES', 6 * 1024 * 1024);  // 6 Megabyt
 
 $upload_max_filesize = ini_get('upload_max_filesize');
 $upload_max_filesize_bytes = return_bytes($upload_max_filesize);
-if($upload_max_filesize_bytes < constant('SUGARCRM_MIN_UPLOAD_MAX_FILESIZE_BYTES'))
-{
-	$GLOBALS['log']->debug("detected upload_max_filesize: $upload_max_filesize");
-	print('<p class="error">' . $mod_strings['MSG_INCREASE_UPLOAD_MAX_FILESIZE'] . ' '
-		. get_cfg_var('cfg_file_path') . "</p>\n");
+if ($upload_max_filesize_bytes < constant('SUGARCRM_MIN_UPLOAD_MAX_FILESIZE_BYTES')) {
+    $GLOBALS['log']->debug("detected upload_max_filesize: $upload_max_filesize");
+    print('<p class="error">' . $mod_strings['MSG_INCREASE_UPLOAD_MAX_FILESIZE'] . ' '
+        . get_cfg_var('cfg_file_path') . "</p>\n");
 }
 
 //
 // process "run" commands
 //
 $request = InputValidation::getService();
-$run = $request->getValidInputRequest('run', null, "");
+$run = $request->getValidInputRequest('run', null, '');
 $reloadMetadata = $request->getValidInputRequest('reloadMetadata');
 
-if ($run !== "" && empty($GLOBALS['sugar_config']['use_common_ml_dir'])) {
-    if ($run == "upload") {
+if ($run !== '' && empty($GLOBALS['sugar_config']['use_common_ml_dir'])) {
+    if ($run == 'upload') {
         try {
             $packageManager = new PackageManager();
             $uploadFile = new UploadFile(new BaseUploadFile('upgrade_zip'));
@@ -81,7 +80,7 @@ echo getClassicModuleTitle(
     [htmlspecialchars(translate('LBL_MODULE_LOADER_TITLE', 'Administration'), ENT_COMPAT)],
     false
 );
-$csrfToken = smarty_function_sugar_csrf_form_token(array(), $smarty);
+$csrfToken = smarty_function_sugar_csrf_form_token([], $smarty);
 
 // upload link
 //
@@ -91,8 +90,8 @@ if (!AccessControlManager::instance()->allowFeatureAccess(SugarFeatureVoter::MOD
 }
 if (!empty($GLOBALS['sugar_config']['use_common_ml_dir']) || $isUploadEnabled === false) {
     $form = '<p>' . $mod_strings['LBL_MODULE_UPLOAD_DISABLE_HELP_TEXT'] . '</p>';
-}else{
-    $form =<<<eoq
+} else {
+    $form = <<<eoq
 <form name="the_form" enctype="multipart/form-data" action="{$form_action}" method="post"  >
 {$csrfToken}
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="edit view">
@@ -117,7 +116,7 @@ eoq;
 $hidden_fields = '<input type="hidden" name="run" value="upload" />';
 $hidden_fields .= '<input type="hidden" name="mode" />';
 
-echo PackageManagerDisplay::buildPackageDisplay($form, $hidden_fields, $form_action, array('module'));
+echo PackageManagerDisplay::buildPackageDisplay($form, $hidden_fields, $form_action, ['module']);
 
 if (!empty($reloadMetadata)) {
     echo "
@@ -127,7 +126,7 @@ if (!empty($reloadMetadata)) {
         </script>";
 }
 
-$GLOBALS['log']->info( "Upgrade Wizard view");
+$GLOBALS['log']->info('Upgrade Wizard view');
 
 if (!AccessControlManager::instance()->allowFeatureAccess(SugarFeatureVoter::MODULE_LOADER_UPLOAD_FEATURE_NAME)) {
     $sugarDocUrl = 'http://www.sugarcrm.com/crm/product_doc.php';

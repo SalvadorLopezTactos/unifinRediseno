@@ -99,12 +99,13 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
      * @param MappingInterface $userMapping
      */
     public function __construct(
-        AbstractProvider $oAuthProvider,
+        AbstractProvider      $oAuthProvider,
         UserProviderInterface $userProvider,
-        SugarOIDCUserChecker $userChecker,
-        MappingInterface $userMapping,
-        Checker $SAChecker
+        SugarOIDCUserChecker  $userChecker,
+        MappingInterface      $userMapping,
+        Checker               $SAChecker
     ) {
+
         $this->oAuthProvider = $oAuthProvider;
         $this->userProvider = $userProvider;
         $this->userChecker = $userChecker;
@@ -116,7 +117,7 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
      * to get logger
      * @return \LoggerManager
      */
-    protected function getLogger() : \LoggerManager
+    protected function getLogger(): \LoggerManager
     {
         if (empty($this->logger)) {
             $this->logger = \LoggerManager::getLogger();
@@ -216,7 +217,7 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
         }
 
         if (empty($result['active'])) {
-            $this->getLogger()->fatal('IDM access token is expired: ' . json_encode($result));
+            $this->getLogger()->warn('IDM access token is expired: ' . json_encode($result));
             throw new InvalidTokenException('IDM access token is expired');
         }
 
@@ -282,7 +283,9 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
             $this->getLogger()->fatal('Can not retrieve user info from STS for subject: ' . $result['sub'] ?? 'empty subject');
         }
         $user->setAttribute('oidc_data', $this->userMapping->map($userInfo));
-        $user->setAttribute('updated_at', $userInfo['updated_at']);
+        if (isset($userInfo['updated_at'])) {
+            $user->setAttribute('updated_at', $userInfo['updated_at']);
+        }
         $user->setAttribute('oidc_identify', $this->userMapping->mapIdentity($result));
 
         foreach ($result as $key => $value) {

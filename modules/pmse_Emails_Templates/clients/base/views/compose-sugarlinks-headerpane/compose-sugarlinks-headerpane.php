@@ -11,25 +11,25 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['pmse_Emails_Templates']['base']['view']['compose-sugarlinks-headerpane'] = array(
+$viewdefs['pmse_Emails_Templates']['base']['view']['compose-sugarlinks-headerpane'] = [
     'template' => 'headerpane',
     'title' => 'LBL_SUGAR_LINK_SELECTOR',
-    'buttons' => array(
-        array(
+    'buttons' => [
+        [
             'name' => 'cancel_button',
             'type' => 'button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
-        ),
-        array(
+        ],
+        [
             'name' => 'select_button',
             'type' => 'button',
             'label' => 'LBL_SELECT_BUTTON_LABEL',
             'css_class' => 'btn-primary',
-        ),
-        array(
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

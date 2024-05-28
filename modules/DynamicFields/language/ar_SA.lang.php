@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'سجل المكالمات',
     'LNK_NEW_MEETING' => 'جدولة اجتماع',
     'LNK_NEW_TASK' => 'إنشاء مهمة',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'حقل التعريف الإضافي 2',
     'COLUMN_TITLE_EXT3' => 'حقل التعريف الإضافي 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'ارتفاع IFrame',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'عنوان URL الافتراضي',
     'COLUMN_TITLE_AUDIT' => 'التدقيق',
     'COLUMN_TITLE_PII' => 'المعلومات الشخصية',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'القيمة الافتراضية',
     'LBL_AUDITED' => 'تم التدقيق',
     'LBL_REPORTABLE' => 'يمكن إرسال تقرير عنه',
-    'ERR_RESERVED_FIELD_NAME' => "كلمة بحث رئيسية محجوزة",
+    'ERR_RESERVED_FIELD_NAME' => 'كلمة بحث رئيسية محجوزة',
     'ERR_SELECT_FIELD_TYPE' => 'يرجى تحديد نوع الحقل',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'اسم الحقل موجود بالفعل',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'يجب أن يحتوي اسم الحقل على الحروف التالية فقط: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'تم',
     'LBL_EXE_NON_SIM_MODE' => 'تنفيذ وضع عدم المحاكاة',
     'LBL_CALCULATION_VISIBLE' => 'جعله مرئيًا للحسابات',
-);
+];

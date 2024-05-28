@@ -11,74 +11,74 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Documents']['base']['layout']['tabbed-layout'] = array(
-    'components' => array(
-        array(
+$viewdefs['Documents']['base']['layout']['tabbed-layout'] = [
+    'components' => [
+        [
             'view' => 'activitystream',
             'label' => 'Activity Stream',
-        ),
-        array(
+        ],
+        [
             'layout' => 'list-cluster',
             'label' => 'Document Revisions',
-            'context' => array(
+            'context' => [
                 'link' => 'revisions',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'list-cluster',
             'label' => 'Contracts',
-            'context' => array(
+            'context' => [
                 'link' => 'contracts',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'list-cluster',
             'label' => 'Accounts',
-            'context' => array(
+            'context' => [
                 'link' => 'accounts',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'list-cluster',
             'label' => 'Contacts',
-            'context' => array(
+            'context' => [
                 'link' => 'contacts',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'list-cluster',
             'label' => 'Opportunities',
-            'context' => array(
+            'context' => [
                 'link' => 'opportunities',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'list-cluster',
             'label' => 'Cases',
-            'context' => array(
+            'context' => [
                 'link' => 'cases',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'list-cluster',
             'label' => 'Bugs',
-            'context' => array(
+            'context' => [
                 'link' => 'bugs',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'list-cluster',
             'label' => 'Quotes',
-            'context' => array(
+            'context' => [
                 'link' => 'quotes',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'list-cluster',
             'label' => 'Products',
-            'context' => array(
+            'context' => [
                 'link' => 'products',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

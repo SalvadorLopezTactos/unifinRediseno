@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,54 +10,54 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ConsoleConfiguration']['base']['view']['config-tab-settings'] = array(
+$viewdefs['ConsoleConfiguration']['base']['view']['config-tab-settings'] = [
     'label' => 'LBL_MODULE_NAME',
-    'panels' => array(
-        array(
+    'panels' => [
+        [
             'label' => 'LBL_CONSOLE_SORT_ORDER_DEFAULT',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'order_by_primary_group',
                     'label' => 'LBL_CONSOLE_SORT_ORDER_PRIMARY',
                     'type' => 'fieldset',
                     'inline' => true,
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'order_by_primary',
                             'label' => 'LBL_CONSOLE_SORT_ORDER_PRIMARY',
                             'type' => 'enum',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'order_by_primary_direction',
                             'label' => 'LBL_DIRECTION',
                             'type' => 'sort-order-selector',
                             'default' => 'desc',
                             'dependencyField' => 'order_by_primary',
-                        ),
-                    ),
-                ),
-                array(
+                        ],
+                    ],
+                ],
+                [
                     'name' => 'order_by_secondary_group',
                     'label' => 'LBL_CONSOLE_SORT_ORDER_SECONDARY',
                     'type' => 'fieldset',
                     'inline' => true,
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'order_by_secondary',
                             'label' => 'LBL_CONSOLE_SORT_ORDER_SECONDARY',
                             'type' => 'enum',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'order_by_secondary_direction',
                             'label' => 'LBL_DIRECTION',
                             'type' => 'sort-order-selector',
                             'default' => 'desc',
                             'dependencyField' => 'order_by_secondary',
-                        ),
-                    ),
-                ),
-            ),
-        ),
+                        ],
+                    ],
+                ],
+            ],
+        ],
         [
             'label' => 'LBL_FREEZE_FIRST_COLUMN',
             'fields' => [
@@ -67,16 +68,16 @@ $viewdefs['ConsoleConfiguration']['base']['view']['config-tab-settings'] = array
                 ],
             ],
         ],
-        array(
+        [
             'label' => 'LBL_CONSOLE_FILTER',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'filter_def',
                     'dismiss_label' => true,
                     'type' => 'filter-field',
-                ),
-            ),
-        ),
+                ],
+            ],
+        ],
         [
             'label' => 'LBL_PREVIEW',
             'fields' => [
@@ -86,14 +87,14 @@ $viewdefs['ConsoleConfiguration']['base']['view']['config-tab-settings'] = array
                 ],
             ],
         ],
-        array(
-            'fields' => array(
-                array(
+        [
+            'fields' => [
+                [
                     'name' => 'directions',
                     'vname' => 'LBL_CONSOLE_DIRECTIONS',
                     'type' => 'directions',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

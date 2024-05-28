@@ -26,7 +26,7 @@ class TypeFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    public function buildFilter(array $options = array())
+    public function buildFilter(array $options = [])
     {
         $filter = new \Elastica\Query\Term();
         $filter->setTerm(Mapping::MODULE_NAME_FIELD, $options['module']);

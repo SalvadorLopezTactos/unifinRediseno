@@ -13,10 +13,10 @@
 /**
  * Reset the date_modified so we have the seconds on it
  */
-$hook_array['after_relationship_delete'][] = array(
+$hook_array['after_relationship_delete'][] = [
     1,
     'unlinkRecordsFromErase',
     'modules/DataPrivacy/DataPrivacyHooks.php',
     'DataPrivacyHooks',
     'unlinkRecordsFromErase',
-);
+];

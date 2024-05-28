@@ -37,7 +37,7 @@ class Zend_Crypt
     /**
      * @var array
      */
-    protected static $_supportedAlgosOpenssl = array(
+    protected static $_supportedAlgosOpenssl = [
         'md2',
         'md4',
         'mdc2',
@@ -47,13 +47,13 @@ class Zend_Crypt
         'sha224',
         'sha256',
         'sha384',
-        'sha512'
-    );
+        'sha512',
+    ];
 
     /**
      * @var array
      */
-    protected static $_supportedAlgosMhash = array(
+    protected static $_supportedAlgosMhash = [
         'adler32',
         'crc32',
         'crc32b',
@@ -69,8 +69,8 @@ class Zend_Crypt
         'sha256',
         'tiger',
         'tiger128',
-        'tiger160'
-    );
+        'tiger160',
+    ];
 
     /**
      * @param string $algorithm
@@ -98,13 +98,13 @@ class Zend_Crypt
         if (function_exists('hash')) {
             self::$_type = self::TYPE_HASH;
             if (in_array($algorithm, hash_algos())) {
-               return;
+                return;
             }
         }
         if (function_exists('mhash')) {
             self::$_type = self::TYPE_MHASH;
             if (in_array($algorithm, self::$_supportedAlgosMhash)) {
-               return;
+                return;
             }
         }
         if (function_exists('openssl_digest')) {
@@ -113,7 +113,7 @@ class Zend_Crypt
             }
             self::$_type = self::TYPE_OPENSSL;
             if (in_array($algorithm, self::$_supportedAlgosOpenssl)) {
-               return;
+                return;
             }
         }
         /**

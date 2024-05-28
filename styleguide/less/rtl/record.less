@@ -1,10 +1,4 @@
 div.record div.record-cell {
-  &:hover {
-    .record-edit-link .fa-pencil {
-      right: 0;
-    }
-  }
-
   :not(.edit).address_city div::after {
     margin-left: 0;
     margin-right: -4px;
@@ -19,6 +13,7 @@ div.record div.record-cell {
   .record-cell .record-label {
     margin: 0 7px 0 0;
   }
+
   .record-cell[data-type="teamset"] {
     .btn {
       margin-right: 8px;
@@ -40,6 +35,7 @@ div.record div.record-cell {
       padding-left: 108px;
     }
   }
+
   .record-cell[data-type="email"] {
     .btn-group.prevent-mousedown {
       margin-right: 8px;
@@ -68,10 +64,10 @@ div.record div.record-cell {
 }
 
 .record .record-cell[data-type="language"],
-  .record .record-cell[data-type="enum"],
-  .record .record-cell[data-type="relate"],
-  .record .record-cell[data-type="parent"],
-  .record .record-cell[data-type="teamset"] {
+.record .record-cell[data-type="enum"],
+.record .record-cell[data-type="relate"],
+.record .record-cell[data-type="parent"],
+.record .record-cell[data-type="teamset"] {
   .input-append.error .add-on.error-tooltip {
     left: 17px;
     right: auto;
@@ -97,6 +93,7 @@ div.record div.record-cell {
 .record .record-cell .normal > .fieldset-inline.detail .ellipsis_inline {
   padding: 5px 7px 5px 0;
 }
+
 .record .fieldset-inline.edit .fieldset-field[data-type="label"] {
   padding-right: 4px;
   padding-left: 12px;
@@ -128,7 +125,7 @@ div.record div.record-cell:not(:first-child) {
   left: 0;
 }
 
-.subpanels-layout .subpanel-header .btn-toolbar> span[class^="panel-top"]:first-child {
+.subpanels-layout .subpanel-header .btn-toolbar > span[class^="panel-top"]:first-child {
   float: right;
 }
 

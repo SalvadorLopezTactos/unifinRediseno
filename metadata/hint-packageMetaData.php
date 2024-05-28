@@ -150,9 +150,9 @@ $dictionary['hint_events_queue'] = [
             ],
         ],
         [
-            'name' =>'event_number_uk',
+            'name' => 'event_number_uk',
             'type' => 'unique',
-            'fields'=> [
+            'fields' => [
                 'event_number',
             ],
         ],

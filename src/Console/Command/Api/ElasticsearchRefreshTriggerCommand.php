@@ -63,10 +63,10 @@ class ElasticsearchRefreshTriggerCommand extends Command implements InstanceMode
      * @param array $args Arguments to be passed to the public API
      * @codeCoverageIgnore
      */
-    protected function callApi($method, array $args = array())
+    protected function callApi($method, array $args = [])
     {
-        $args = array($this->service, $args);
-        return call_user_func_array(array($this->api, $method), $args);
+        $args = [$this->service, $args];
+        return call_user_func_array([$this->api, $method], $args);
     }
 
     /**
@@ -87,8 +87,7 @@ class ElasticsearchRefreshTriggerCommand extends Command implements InstanceMode
     {
         $this
             ->setName('elastic:refresh_trigger')
-            ->setDescription('Perform a manual refresh on all indices')
-        ;
+            ->setDescription('Perform a manual refresh on all indices');
     }
 
     /**
@@ -98,11 +97,10 @@ class ElasticsearchRefreshTriggerCommand extends Command implements InstanceMode
     {
         $result = $this
             ->initApi($this->getApi())
-            ->callApi('elasticSearchRefreshTrigger', array())
-        ;
+            ->callApi('elasticSearchRefreshTrigger', []);
 
         $table = new Table($output);
-        $table->setHeaders(array('Index', 'Status'));
+        $table->setHeaders(['Index', 'Status']);
 
         if ($result) {
             foreach ($result as $index => $status) {
@@ -111,7 +109,7 @@ class ElasticsearchRefreshTriggerCommand extends Command implements InstanceMode
                 } else {
                     $status = sprintf('<error>%s</error>', $status);
                 }
-                $table->addRow(array($index, $status));
+                $table->addRow([$index, $status]);
             }
         }
 

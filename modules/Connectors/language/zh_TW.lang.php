@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => '新增',
     'LBL_ADDRCITY' => '城市',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => '資訊' /*for 508 compliance fix*/,
     'LBL_CLOSE' => '關閉' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => '未發現給定的資源ID的連接器。',
-);
-
+];

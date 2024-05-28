@@ -32,7 +32,7 @@ $mod_strings = [
 
     'LBL_RESOURCE' => 'Darbuotojai:',
     'LBL_PERSON_TYPE' => 'Asmens tipas',
-    'LBL_RELATED_MODULE'=> 'Susijęs modulis:',
+    'LBL_RELATED_MODULE' => 'Susijęs modulis:',
 
     // For HolidaysQuickCreate.php
     'LBL_SELECT_RESOURCE_TYPE' => 'Pasirinkite resursų tipą...',

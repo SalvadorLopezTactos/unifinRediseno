@@ -15,21 +15,21 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-$viewdefs['Products']['mobile']['view']['list'] = array(
-    'panels' => array(
-        array(
-            'fields' => array(
-                array(
+$viewdefs['Products']['mobile']['view']['list'] = [
+    'panels' => [
+        [
+            'fields' => [
+                [
                     'name' => 'name',
                     'default' => true,
                     'enabled' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'status',
                     'enabled' => true,
                     'default' => true,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

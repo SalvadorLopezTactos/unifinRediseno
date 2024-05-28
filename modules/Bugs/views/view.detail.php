@@ -10,12 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class BugsViewDetail extends ViewDetail {
- 	function display() {
+class BugsViewDetail extends ViewDetail
+{
+    public function display()
+    {
         $admin = Administration::getSettings();
-        if(isset($admin->settings['portal_on']) && $admin->settings['portal_on']) {
-           $this->ss->assign("PORTAL_ENABLED", true);
+        if (isset($admin->settings['portal_on']) && $admin->settings['portal_on']) {
+            $this->ss->assign('PORTAL_ENABLED', true);
         }
- 		parent::display();
- 	}
+        parent::display();
+    }
 }

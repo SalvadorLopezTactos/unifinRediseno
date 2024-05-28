@@ -19,8 +19,7 @@ $viewdefs['base']['view']['cj-as-a-dashlet'] = [
             'filter' => [
                 'module' => explode(',', $GLOBALS['sugar_config']['customer_journey']['enabled_modules']),
                 'blacklist' => [
-                    'module' =>
-                    [
+                    'module' => [
                         'Administration',
                         'Emails',
                         'pmse_Project',

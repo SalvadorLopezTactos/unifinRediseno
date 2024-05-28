@@ -62,7 +62,7 @@ class XhprofLogger implements SQLLogger
     public function startQuery($sql, array $params = null, array $types = null)
     {
         $this->start = microtime(true);
-        $this->currentQuery = array('sql' => $sql, 'params' => $params, 'types' => $types);
+        $this->currentQuery = ['sql' => $sql, 'params' => $params, 'types' => $types];
     }
 
     /**

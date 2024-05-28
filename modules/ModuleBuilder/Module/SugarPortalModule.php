@@ -37,35 +37,35 @@ class SugarPortalModule
         }
     }
 
-	function getNodes()
-	{
-		$layouts = array();
-		if (isset($this->views)) {
-            foreach($this->views as $file=>$def){
-          			   $file = str_replace($file, '.php', '');
-          			   $viewType = ($def['type'] == 'list')?"ListView":ucfirst($def['type']);
+    public function getNodes()
+    {
+        $layouts = [];
+        if (isset($this->views)) {
+            foreach ($this->views as $file => $def) {
+                $file = str_replace($file, '.php', '');
+                $viewType = ($def['type'] == 'list') ? 'ListView' : ucfirst($def['type']);
                 $layouts[] = ['name' => $def['name'], 'module' => $this->module, 'action' => "module=ModuleBuilder&action=editPortal&view={$viewType}&view_module=" . $this->module];
-          		}
+            }
         }
 
-		$nodes =  array(
-		            'name'=>$this->name, 'module'=>$this->module, 'type'=>'SugarPortalModule', 'action'=>"module=ModuleBuilder&action=wizard&portal=1&view_module=".$this->module, 
-		            'children'=>$layouts,
-			        );
-		return $nodes;
-	}
-	
+        $nodes = [
+            'name' => $this->name, 'module' => $this->module, 'type' => 'SugarPortalModule', 'action' => 'module=ModuleBuilder&action=wizard&portal=1&view_module=' . $this->module,
+            'children' => $layouts,
+        ];
+        return $nodes;
+    }
+
     /**
      * Gets an array of expected view files for portal layouts
-     * 
+     *
      * Added as a helper to bug 55003
-     * 
+     *
      * @static
      * @return array
      */
-	public static function getViewFiles()
+    public static function getViewFiles()
     {
-        // If mod strings are empty, rebuild them - some rest calls are failing 
+        // If mod strings are empty, rebuild them - some rest calls are failing
         // here
         global $mod_strings;
         if (empty($mod_strings['LBL_RECORDVIEW'])) {
@@ -73,16 +73,11 @@ class SugarPortalModule
         } else {
             $mstrings = $mod_strings;
         }
-        
-        // These mod_strings are ModuleBuilder module strings
-        return array(
-            'record.php' => array('name' => $mstrings['LBL_RECORDVIEW'] , 'type' => 'recordView'),
-            'list.php'   => array('name' => $mstrings['LBL_LISTVIEW'],    'type' => 'list'),
-        );
-    }
-	
-	
-	
-	
-}
 
+        // These mod_strings are ModuleBuilder module strings
+        return [
+            'record.php' => ['name' => $mstrings['LBL_RECORDVIEW'], 'type' => 'recordView'],
+            'list.php' => ['name' => $mstrings['LBL_LISTVIEW'], 'type' => 'list'],
+        ];
+    }
+}

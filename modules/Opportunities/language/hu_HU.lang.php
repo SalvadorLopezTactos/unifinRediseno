@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Lehetőségek listája műszerfal',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Lehetőség bejegyzések műszerfal',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Árajánlatok',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Lehetőségek dinamikus fiók szerint',
+    'LBL_TOP_10_OPP' => 'A 10 legjobb nyitott lehetőség',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Dashlet: Aktív lehetőségeim',
+    'LBL_MY_ACTIVE_OPP' => 'Aktív lehetőségeim',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'A pipeline teljes értéke',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Lehetőség szerepe',
+    'LBL_OPPORTUNITY_ROLE' => 'Lehetőség szerepe',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Feljegyzések',
     'LBL_TAB_OPPORTUNITY' => '{{module}} áttekintése',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'A Visszaigazolás gombra kattintva Ön ki fog törölni MINDEN Előrejelző adatot a Lehetőségek Nézetéből. Ha Ön nem ezt akarta, kattintson a Vissza gombra, hogy visszatérhessen az előző oldal beállításaihoz.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'A megerősítésre kattintva kitörli az ÖSSZES előrejelzés adatot és megváltoztatja a Lehetőségek Nézetet. '
-        .'A bevételi tételek MINDEN cél-modullal rendelkező folyamat meghatározása le lesz tiltva. '
-        .'Ha nem ez volt a szándéka, kattintson a mégse gombra az előző oldalra való visszatéréshez.',
+        . 'A bevételi tételek MINDEN cél-modullal rendelkező folyamat meghatározása le lesz tiltva. '
+        . 'Ha nem ez volt a szándéka, kattintson a mégse gombra az előző oldalra való visszatéréshez.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Ha minden Bevételi Sortétel be van zárva és legalább egy megnyert tétel van,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'a Lehetőségi Eladások Státusza a "Bezárva Megnyerve" értéket veszi fel.',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Ha minden Bevételi Sortétel Eladási Státusza a "Bezárva Elveszítve" értéket veszi fel,',
@@ -220,7 +223,7 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Miután Ön kezdeményezi ezt a változtatást, a Bevételi Sortételek adatai minden meglévő {{module_name}} modulra vonatkozóan a háttérben megjelennek. Ha a Bevételi Sortételek adatai készen vannak és rendelkezésre állnak a rendszer értesítést küld az Ön felhasználói profiljának e-mail címére. Kérjük, vegye figyelembe, hogy a példánya úgy kell legyen konfigurálva, hogy tudjon e-mailt küldeni az Admin > Email Beállításokon keresztül, hogy az értesítés elküldhető legyen.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'A {{plural_module_name}} modulok lehetővé teszik az egyes értékesítések nyomon követését az elejétől a végéig. Minden {{module_name}} rekord egy jövőbeli értékesítést képvisel, és tartalmazza a releváns értékesítési adatokat, valamint más fontos nyilvántartások, például {{quotes_module}}, {{contacts_module}}stb is viszonyít. Egy {{module_name}} általában több értékesítési szakaszon halad keresztül, amíg "Lezárt megnyert" vagy "Lezárt elveszett" jelölést nem kap. A(z) {{plural_module_name}} még jobban kihasználható a Sugar {{forecasts_singular_module}} moduljának használatával az értékesítési trendek megértéséhez és előrejelzéséhez, valamint az értékesítési kvóták elérésére irányuló munka összpontosításához.',
+    'LBL_HELP_RECORDS' => 'A(z) {{plural_module_name}} modul lehetővé teszi az egyes értékesítések nyomon követését az elejétől a végéig. Mindegyik {{module_name}} rekord egy várható értékesítést képvisel, és tartalmazza a releváns értékesítési adatokat, valamint más fontos rekordokhoz kapcsolódóan, mint például: {{quotes_module}}, {{contacts_module}} stb. Egy {{module_name}} általában több értékesítési szakaszon halad keresztül, amíg "lezárt, megnyert" vagy "lezárt, elveszett" jelölést nem kap. {{plural_module_name}} még tovább kihasználható a Sugar {{forecasts_singular_module}} használatával az értékesítési trendek megértéséhez és előrejelzéséhez, valamint az értékesítési kvóták eléréséhez szükséges munka összpontosításához.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'A(z) {{plural_module_name}} modul segítségével a kezdetektől a befejezésig nyomon követheti egyéni módon az értékesítéseket. Mindegyik {{module_name}} bejegyzés egy értékesítési lehetőséget képvisel, és tartalmazza az összes releváns értékesítési adatot, valamint az egyéb fontos bejegyzéseket, amilyen például a(z) {{quotes_module}}, {{contacts_module}} stb.
@@ -260,4 +263,9 @@ Egy {{module_name}} létrehozása:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'A lehetőség lezárásának becslése',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Az adott lehetőség előrejelzésével kapcsolatos részletek megtekintése',
-);
+    'LBL_AI_WINRATE' => 'Nyerési arány',
+    'LBL_AI_WONOPP' => 'Megnyert lehetőségek',
+    'LBL_AI_CLOSINGTIME' => 'Zárási idő',
+    'LBL_AI_CLOSEDOPP' => 'Lezárt lehetőségek',
+    'LBL_AI_LEADTIMESPAN' => 'A lehetőség létrehozása és a megnyert lezárás között eltelt idő',
+];

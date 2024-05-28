@@ -14,7 +14,6 @@ namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\WebHook;
 
 class CustomPostBodyVariables
 {
-
     private $webHook;
 
     public function __construct(\CJ_WebHook $webHook)
@@ -102,7 +101,7 @@ class CustomPostBodyVariables
                 case 'stage':
                     $info = ['module' => 'DRI_SubWorkflows',
                         'field' => $fieldName,
-                        'field_value' => $data['stage'][$fieldName] ?? $this->getRelateValueForStage("DRI_SubWorkflows", $fieldName, $originalVariable, $data['journey']['name']),
+                        'field_value' => $data['stage'][$fieldName] ?? $this->getRelateValueForStage('DRI_SubWorkflows', $fieldName, $originalVariable, $data['journey']['name']),
                         'original_variable' => $originalVariable];
                     break;
                 case 'activity':
@@ -177,7 +176,7 @@ class CustomPostBodyVariables
             return $data['activity']['assigned_user_id'];
         }
     }
-    
+
     /**
      * If field type is relate then return Single Module Name otherwise return false
      * @param string $moduleName
@@ -189,23 +188,23 @@ class CustomPostBodyVariables
         if (empty($moduleName) || empty($fieldName)) {
             return false;
         }
-        
+
         global $dictionary, $app_list_strings;
-        
+
         if ($moduleName === 'DRI_SubWorkflows') {
             $singleModuleName = 'DRI_SubWorkflow';
         } else {
             $singleModuleName = $app_list_strings['moduleListSingular'][$moduleName];
         }
         $type = $dictionary[$singleModuleName]['fields'][$fieldName]['type'];
-        
+
         if ($type === 'relate') {
             return $singleModuleName;
         }
-        
+
         return false;
     }
-    
+
     /**
      * For related journey of stage if field is not empty then return journey name otherwise
      * return original variable
@@ -218,14 +217,14 @@ class CustomPostBodyVariables
     private function getRelateValueForStage(string $moduleName, string $fieldName, string $originalVar, string $journeyName)
     {
         $singleModuleName = $this->typeIsRelate($moduleName, $fieldName);
-        
+
         if ($singleModuleName === 'DRI_SubWorkflow' && $fieldName === 'dri_workflow_nam') {
             return $journeyName;
         }
-        
+
         return $originalVar;
     }
-    
+
     /**
      * Returns relate field value if exist otherwise returns variable as it is
      * @param string $moduleName
@@ -241,29 +240,29 @@ class CustomPostBodyVariables
         }
 
         global $dictionary, $app_list_strings;
-        
+
         $singleModuleName = $this->typeIsRelate($moduleName, $fieldName);
         if (empty($singleModuleName)) {
             return $originalVar;
         }
 
         $joinName = $dictionary[$singleModuleName]['fields'][$fieldName]['join_name'];
-        
+
         if (!empty($joinName)) {
             $SugarQuery = new \SugarQuery();
             $SugarQuery->from(\BeanFactory::newBean($moduleName));
             $relate = $SugarQuery->join($joinName)->joinName();
-            $SugarQuery->select(array("$relate.name"));
+            $SugarQuery->select(["$relate.name"]);
             $SugarQuery->where()
-                    ->equals('deleted', 0)
-                    ->equals('id', $id)
-                    ->equals("$relate.deleted", 0)
-                    ->equals("$relate.contact_id", $id);
+                ->equals('deleted', 0)
+                ->equals('id', $id)
+                ->equals("$relate.deleted", 0)
+                ->equals("$relate.contact_id", $id);
             $data = $SugarQuery->execute();
-            
+
             return $data[0]['name'];
         }
-        
+
         return $originalVar;
     }
 }

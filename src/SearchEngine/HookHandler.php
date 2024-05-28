@@ -36,7 +36,7 @@ class HookHandler
                 $string = gettype($bean);
             }
 
-            $this->getLogger()->fatal("IndexBean: Not bean -> " . $string);
+            $this->getLogger()->fatal('IndexBean: Not bean -> ' . $string);
             return;
         }
 

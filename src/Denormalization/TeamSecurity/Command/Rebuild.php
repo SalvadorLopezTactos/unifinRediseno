@@ -54,12 +54,14 @@ final class Rebuild
      */
     public function __invoke($table)
     {
-        $this->conn->executeStatement(<<<SQL
+        $this->conn->executeStatement(
+            <<<SQL
 DELETE FROM $table
 SQL
         );
 
-        $this->conn->executeStatement(<<<SQL
+        $this->conn->executeStatement(
+            <<<SQL
 INSERT INTO $table
 SELECT
     ts.id AS team_set_id,

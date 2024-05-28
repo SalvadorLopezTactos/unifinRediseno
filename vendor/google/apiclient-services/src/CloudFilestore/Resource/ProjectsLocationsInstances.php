@@ -21,13 +21,14 @@ use Google\Service\CloudFilestore\Instance;
 use Google\Service\CloudFilestore\ListInstancesResponse;
 use Google\Service\CloudFilestore\Operation;
 use Google\Service\CloudFilestore\RestoreInstanceRequest;
+use Google\Service\CloudFilestore\RevertInstanceRequest;
 
 /**
  * The "instances" collection of methods.
  * Typical usage is:
  *  <code>
  *   $fileService = new Google\Service\CloudFilestore(...);
- *   $instances = $fileService->instances;
+ *   $instances = $fileService->projects_locations_instances;
  *  </code>
  */
 class ProjectsLocationsInstances extends \Google\Service\Resource
@@ -40,7 +41,7 @@ class ProjectsLocationsInstances extends \Google\Service\Resource
    *
    * @param string $parent Required. The instance's project and location, in the
    * format `projects/{project_id}/locations/{location}`. In Filestore, locations
-   * map to GCP zones, for example **us-west1-b**.
+   * map to Google Cloud zones, for example **us-west1-b**.
    * @param Instance $postBody
    * @param array $optParams Optional parameters.
    *
@@ -93,7 +94,7 @@ class ProjectsLocationsInstances extends \Google\Service\Resource
    * @param string $parent Required. The project and location for which to
    * retrieve instance information, in the format
    * `projects/{project_id}/locations/{location}`. In Cloud Filestore, locations
-   * map to GCP zones, for example **us-west1-b**. To retrieve instance
+   * map to Google Cloud zones, for example **us-west1-b**. To retrieve instance
    * information for all locations, use "-" for the `{location}` value.
    * @param array $optParams Optional parameters.
    *
@@ -148,6 +149,23 @@ class ProjectsLocationsInstances extends \Google\Service\Resource
     $params = ['name' => $name, 'postBody' => $postBody];
     $params = array_merge($params, $optParams);
     return $this->call('restore', [$params], Operation::class);
+  }
+  /**
+   * Revert an existing instance's file system to a specified snapshot.
+   * (instances.revert)
+   *
+   * @param string $name Required.
+   * projects/{project_id}/locations/{location_id}/instances/{instance_id}. The
+   * resource name of the instance, in the format
+   * @param RevertInstanceRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Operation
+   */
+  public function revert($name, RevertInstanceRequest $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('revert', [$params], Operation::class);
   }
 }
 

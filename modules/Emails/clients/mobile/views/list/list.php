@@ -9,18 +9,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Emails']['mobile']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Emails']['mobile']['view']['list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'from_collection',
                     'type' => 'email-sender',
                     'label' => 'LBL_FROM',
                     'sortable' => false,
                     'max_num' => -1,
-                    'fields' => array(
+                    'fields' => [
                         'email_address_id',
                         'email_address',
                         'address_type',
@@ -29,16 +29,16 @@ $viewdefs['Emails']['mobile']['view']['list'] = array(
                         'parent_name',
                         'invalid_email',
                         'opt_out',
-                    ),
+                    ],
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'name',
                     'enabled' => true,
                     'default' => true,
                     /* Fetch the following fields along with other fields displayed on the list view */
-                    'related_fields' => array(
+                    'related_fields' => [
                         'my_favorite',
                         'following',
                         'state',
@@ -50,10 +50,10 @@ $viewdefs['Emails']['mobile']['view']['list'] = array(
                         'tag',
                         'mailbox_name',
                         'total_attachments',
-                        array(
+                        [
                             'name' => 'to_collection',
                             'max_num' => -1,
-                            'fields' => array(
+                            'fields' => [
                                 'email_address_id',
                                 'email_address',
                                 'address_type',
@@ -62,12 +62,12 @@ $viewdefs['Emails']['mobile']['view']['list'] = array(
                                 'parent_name',
                                 'invalid_email',
                                 'opt_out',
-                            ),
-                        ),
-                        array(
+                            ],
+                        ],
+                        [
                             'name' => 'attachments_collection',
                             'max_num' => -1,
-                            'fields' => array(
+                            'fields' => [
                                 'name',
                                 'filename',
                                 'file_size',
@@ -75,12 +75,12 @@ $viewdefs['Emails']['mobile']['view']['list'] = array(
                                 'file_mime_type',
                                 'file_ext',
                                 'upload_id',
-                            ),
-                        ),
-                        array(
+                            ],
+                        ],
+                        [
                             'name' => 'cc_collection',
                             'max_num' => -1,
-                            'fields' => array(
+                            'fields' => [
                                 'email_address_id',
                                 'email_address',
                                 'address_type',
@@ -89,12 +89,12 @@ $viewdefs['Emails']['mobile']['view']['list'] = array(
                                 'parent_name',
                                 'invalid_email',
                                 'opt_out',
-                            ),
-                        ),
-                        array(
+                            ],
+                        ],
+                        [
                             'name' => 'bcc_collection',
                             'max_num' => -1,
-                            'fields' => array(
+                            'fields' => [
                                 'email_address_id',
                                 'email_address',
                                 'address_type',
@@ -103,17 +103,17 @@ $viewdefs['Emails']['mobile']['view']['list'] = array(
                                 'parent_name',
                                 'invalid_email',
                                 'opt_out',
-                            ),
-                        ),
-                    ),
-                ),
-                array(
+                            ],
+                        ],
+                    ],
+                ],
+                [
                     'name' => 'date_sent',
                     'label' => 'LBL_DATE',
                     'enabled' => true,
                     'default' => true,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

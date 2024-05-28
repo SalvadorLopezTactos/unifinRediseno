@@ -14,6 +14,8 @@
  * @extends View.Fields.Base.BaseField
  */
 ({
+    plugins: ['RecurringEvents'],
+
     fieldTag: 'input.select2',
 
     /**
@@ -390,6 +392,22 @@
     },
 
     /**
+     * Provide placeholder if found else default select placeholder
+     *
+     * @return {string}
+     */
+    getPlaceHolder: function() {
+        let placeHolder = app.lang.get(this.def.placeholder, this.model.module);
+
+        // if placeholder label translation is not found then set default select placeholder
+        if (_.isEqual(placeHolder, this.def.placeholder)) {
+            placeHolder = app.lang.get('LBL_SEARCH_SELECT');
+        }
+
+        return placeHolder;
+    },
+
+    /**
      * Helper function for generating Select2 options for this enum
      * @param {Array} optionsKeys Set of option keys that will be loaded into Select2 widget
      * @return {Object} Select2 options, refer to Select2 documentation for what each option means
@@ -403,7 +421,7 @@
          * Initial value that is selected if no other selection is made
          */
         if(!this.def.isMultiSelect) {
-            select2Options.placeholder = app.lang.get("LBL_SEARCH_SELECT");
+            select2Options.placeholder = this.getPlaceHolder();
         }
 
         /* From http://ivaynberg.github.com/select2/#documentation:
@@ -438,6 +456,12 @@
          */
         if (this.def.isMultiSelect) {
             select2Options.multiple = true;
+
+            // If there is a maximum number of items allowed to be picked, set
+            // that option here
+            if (Number.isInteger(this.def.maximumSelectionSize) && this.def.maximumSelectionSize > 0) {
+                select2Options.maximumSelectionSize = this.def.maximumSelectionSize;
+            }
         }
 
         /* If we need to define a custom value separator

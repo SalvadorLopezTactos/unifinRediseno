@@ -19,10 +19,10 @@ interface CacheInterface
 {
     /**
      * return actual product definition
-     * @throws \Exception
      * @return string|null
+     * @throws \Exception
      */
-    public function get():? string;
+    public function get(): ?string;
 
     /**
      * set definition to cache

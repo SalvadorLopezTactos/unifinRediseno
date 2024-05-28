@@ -1,5 +1,8 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+
+if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,26 +16,26 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 // Full text search after_save hook to update/index a bean
 
-$hook_array['after_save'][] = array(
+$hook_array['after_save'][] = [
     1,
     'fts',
     null,
-    '\\Sugarcrm\\Sugarcrm\\SearchEngine\\HookHandler',
+    '\\' . \Sugarcrm\Sugarcrm\SearchEngine\HookHandler::class,
     'indexBean',
-);
+];
 
-$hook_array['after_delete'][] = array(
+$hook_array['after_delete'][] = [
     1,
     'fts',
     null,
-    '\\Sugarcrm\\Sugarcrm\\SearchEngine\\HookHandler',
+    '\\' . \Sugarcrm\Sugarcrm\SearchEngine\HookHandler::class,
     'indexBean',
-);
+];
 
-$hook_array['after_restore'][] = array(
+$hook_array['after_restore'][] = [
     1,
     'fts',
     null,
-    '\\Sugarcrm\\Sugarcrm\\SearchEngine\\HookHandler',
+    '\\' . \Sugarcrm\Sugarcrm\SearchEngine\HookHandler::class,
     'indexBean',
-);
+];

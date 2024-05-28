@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_ANY_EMAIL' => 'อีเมล:',
     'LBL_EMAIL' => 'ที่อยู่อีเมล:',
     'LBL_PRIMARY_EMAIL' => 'อีเมลหลัก',
@@ -18,7 +18,7 @@ $mod_strings = array (
     'LBL_OTHER_EMAIL_ADDRESS' => 'อีเมลอื่น:',
     'LBL_EMAIL_ADDRESS' => 'ที่อยู่อีเมล',
     'LBL_EMAIL_ADDRESSES' => 'ที่อยู่อีเมล',
-    'LBL_INVALID_EMAIL'=>'อีเมลไม่ถูกต้อง:',
+    'LBL_INVALID_EMAIL' => 'อีเมลไม่ถูกต้อง:',
     'LBL_EMAIL_OPT_OUT' => 'ปฏิเสธการรับอีเมล:',
     'LBL_EMAIL_NON_PRIMARY' => 'อีเมลที่ไม่ใช่ที่อยู่หลัก',
-);
+];

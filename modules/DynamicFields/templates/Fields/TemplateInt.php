@@ -13,7 +13,6 @@
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
-
 class TemplateInt extends TemplateRange
 {
     /**
@@ -27,32 +26,34 @@ class TemplateInt extends TemplateRange
      * @var mixed
      */
     public $autoinc_start;
-	var $type = 'int';
+    public $type = 'int';
 
     /**
      * @var int|null
      */
     public $len = null;
 
-    var $supports_unified_search = true;
+    public $supports_unified_search = true;
     /** @var array */
     public $validation;
 
-	public function __construct(){
-		parent::__construct();
-		$this->vardef_map['autoinc_next'] = 'autoinc_next';
-		$this->vardef_map['autoinc_start'] = 'autoinc_start';
-		$this->vardef_map['auto_increment'] = 'auto_increment';
-        
+    public function __construct()
+    {
+        parent::__construct();
+        $this->vardef_map['autoinc_next'] = 'autoinc_next';
+        $this->vardef_map['autoinc_start'] = 'autoinc_start';
+        $this->vardef_map['auto_increment'] = 'auto_increment';
+
         $this->vardef_map['min'] = 'ext1';
         $this->vardef_map['max'] = 'ext2';
         $this->vardef_map['disable_num_format'] = 'ext3';
     }
 
-	function get_html_edit(){
-		$this->prepare();
-		return "<input type='text' name='". $this->name. "' id='".$this->name."' title='{" . strtoupper($this->name) ."_HELP}' size='".$this->size."' maxlength='".$this->len."' value='{". strtoupper($this->name). "}'>";
-	}
+    public function get_html_edit()
+    {
+        $this->prepare();
+        return "<input type='text' name='" . $this->name . "' id='" . $this->name . "' title='{" . strtoupper($this->name) . "_HELP}' size='" . $this->size . "' maxlength='" . $this->len . "' value='{" . strtoupper($this->name) . "}'>";
+    }
 
     public function populateFromPost(Request $request = null)
     {
@@ -61,64 +62,60 @@ class TemplateInt extends TemplateRange
         }
 
         parent::populateFromPost($request);
-		if (isset($this->auto_increment))
-		{
-		    $this->auto_increment = $this->auto_increment == "true" || $this->auto_increment === true;
-		}
-	}
+        if (isset($this->auto_increment)) {
+            $this->auto_increment = $this->auto_increment == 'true' || $this->auto_increment === true;
+        }
+    }
 
-    function get_field_def(){
-		$vardef = parent::get_field_def();
+    public function get_field_def()
+    {
+        $vardef = parent::get_field_def();
         $vardef['disable_num_format'] = $this->disable_num_format ?? $this->ext3;//40005
 
         $vardef['min'] = $this->min ?? $this->ext1;
         $vardef['max'] = $this->max ?? $this->ext2;
         $vardef['min'] = filter_var($vardef['min'], FILTER_VALIDATE_INT);
         $vardef['max'] = filter_var($vardef['max'], FILTER_VALIDATE_INT);
-        if ($vardef['min'] !== false || $vardef['max'] !== false)
-        {
-            $vardef['validation'] = array(
+        if ($vardef['min'] !== false || $vardef['max'] !== false) {
+            $vardef['validation'] = [
                 'type' => 'range',
                 'min' => $vardef['min'],
-                'max' => $vardef['max']
-            );
+                'max' => $vardef['max'],
+            ];
         }
 
-        if(!empty($this->auto_increment))
-		{
-			$vardef['auto_increment'] = $this->auto_increment;
-			if ((empty($this->autoinc_next)) && isset($this->module) && isset($this->module->table_name))
-			{
+        if (!empty($this->auto_increment)) {
+            $vardef['auto_increment'] = $this->auto_increment;
+            if ((empty($this->autoinc_next)) && isset($this->module) && isset($this->module->table_name)) {
                 $db = DBManagerFactory::getInstance();
                 $auto = $db->getAutoIncrement($this->module->table_name, $this->name);
                 $this->autoinc_next = $vardef['autoinc_next'] = $auto;
-			}
-		}
-		return $vardef;
+            }
+        }
+        return $vardef;
     }
 
-    function save($df){
+    public function save($df)
+    {
         $next = false;
-		if (!empty($this->auto_increment) && (!empty($this->autoinc_next) || !empty($this->autoinc_start)) && isset($this->module))
-        {
-            if (!empty($this->autoinc_start) && $this->autoinc_start > $this->autoinc_next)
-			{
-				$this->autoinc_next = $this->autoinc_start;
-			}
-			if(isset($this->module->table_name)){
+        if (!empty($this->auto_increment) && (!empty($this->autoinc_next) || !empty($this->autoinc_start)) && isset($this->module)) {
+            if (!empty($this->autoinc_start) && $this->autoinc_start > $this->autoinc_next) {
+                $this->autoinc_next = $this->autoinc_start;
+            }
+            if (isset($this->module->table_name)) {
                 $db = DBManagerFactory::getInstance();
                 //Check that the new value is greater than the old value
                 $oldNext = $db->getAutoIncrement($this->module->table_name, $this->name);
-                if ($this->autoinc_next > $oldNext)
-                {
+                if ($this->autoinc_next > $oldNext) {
                     $db->setAutoIncrementStart($this->module->table_name, $this->name, $this->autoinc_next);
                 }
-			}
-			$next = $this->autoinc_next;
-			$this->autoinc_next = false;
+            }
+            $next = $this->autoinc_next;
+            $this->autoinc_next = false;
         }
-		parent::save($df);
-		if ($next)
-		  $this->autoinc_next = $next;
+        parent::save($df);
+        if ($next) {
+            $this->autoinc_next = $next;
+        }
     }
 }

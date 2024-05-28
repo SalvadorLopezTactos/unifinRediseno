@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Embedded Files',
     'LBL_MODULE_NAME_SINGULAR' => 'Embedded File',
     'LBL_MODULE_TITLE' => 'Embedded File',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => 'Όνομα Αρχείου',
     'LBL_FILENAME' => 'Όνομα Αρχείου',
     'LBL_UPLOAD_ONLY_IMAGE' => 'Το επιλεγμένο αρχείο πρέπει να είναι εικόνα.',
-);
+];

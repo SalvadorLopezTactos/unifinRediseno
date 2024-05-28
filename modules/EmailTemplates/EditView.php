@@ -79,7 +79,7 @@ if ($has_campaign || $inboundEmail) {
 }
 
 
-$params = array();
+$params = [];
 
 if (empty($focus->id)) {
     $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL'], ENT_COMPAT);
@@ -104,7 +104,7 @@ if (!$focus->ACLAccess('EditView')) {
     sugar_cleanup(true);
 }
 
-$GLOBALS['log']->info("EmailTemplate detail view");
+$GLOBALS['log']->info('EmailTemplate detail view');
 
 if ($has_campaign || $inboundEmail) {
     $xtpl = new XTemplate('modules/EmailTemplates/EditView.html');
@@ -112,29 +112,29 @@ if ($has_campaign || $inboundEmail) {
     $xtpl = new XTemplate('modules/EmailTemplates/EditViewMain.html');
 } // else
 $xtpl->assign('PAGE_TITLE', $pageTitle);
-$xtpl->assign("MOD", $mod_strings);
-$xtpl->assign("APP", $app_strings);
+$xtpl->assign('MOD', $mod_strings);
+$xtpl->assign('APP', $app_strings);
 
-$xtpl->assign("LBL_ACCOUNT", $app_list_strings['moduleList']['Accounts']);
-$xtpl->parse("main.variable_option");
+$xtpl->assign('LBL_ACCOUNT', $app_list_strings['moduleList']['Accounts']);
+$xtpl->parse('main.variable_option');
 
 $returnModule = '';
 if (isset($_REQUEST['return_module'])) {
     $returnModule = $_REQUEST['return_module'];
-    $xtpl->assign("RETURN_MODULE", $returnModule);
+    $xtpl->assign('RETURN_MODULE', $returnModule);
 }
 
 $returnAction = 'index';
 if (isset($_REQUEST['return_action'])) {
-    $xtpl->assign("RETURN_ACTION", $_REQUEST['return_action']);
+    $xtpl->assign('RETURN_ACTION', $_REQUEST['return_action']);
     $returnAction = $_REQUEST['return_action'];
 }
 if (isset($_REQUEST['return_id'])) {
-    $xtpl->assign("RETURN_ID", $_REQUEST['return_id']);
+    $xtpl->assign('RETURN_ID', $_REQUEST['return_id']);
 }
 // handle Create $module then Cancel
 if (empty($_REQUEST['return_id'])) {
-    $xtpl->assign("RETURN_ACTION", 'index');
+    $xtpl->assign('RETURN_ACTION', 'index');
 }
 
 $json = getJSONobj();
@@ -153,28 +153,28 @@ if ($has_campaign || $inboundEmail) {
 }
 $cancel_script_html = htmlspecialchars($cancel_script, ENT_COMPAT);
 //Setup assigned user name
-$popup_request_data = array(
+$popup_request_data = [
     'call_back_function' => 'set_return',
     'form_name' => 'EditView',
-    'field_to_name_array' => array(
+    'field_to_name_array' => [
         'id' => 'assigned_user_id',
         'user_name' => 'assigned_user_name',
-    ),
-);
+    ],
+];
 $xtpl->assign('encoded_assigned_users_popup_request_data', $json->encode($popup_request_data));
 if (!empty($focus->assigned_user_name)) {
-    $xtpl->assign("ASSIGNED_USER_NAME", $focus->assigned_user_name);
+    $xtpl->assign('ASSIGNED_USER_NAME', $focus->assigned_user_name);
 }
 
 $xtpl->assign('assign_user_select', SugarThemeRegistry::current()->getImage('id-ff-select', '', null, null, '.png', $mod_strings['LBL_SELECT']));
 $xtpl->assign('assign_user_clear', SugarThemeRegistry::current()->getImage('id-ff-clear', '', null, null, '.gif', $mod_strings['LBL_ID_FF_CLEAR']));
 //Assign qsd script
 $qsd = QuickSearchDefaults::getQuickSearchDefaults();
-$sqs_objects = array('EditView_assigned_user_name' => $qsd->getQSUser());
+$sqs_objects = ['EditView_assigned_user_name' => $qsd->getQSUser()];
 $quicksearch_js = '<script type="text/javascript" language="javascript">sqs_objects = ' . $json->encode($sqs_objects) . '; enableQS();</script>';
 
 $xtpl->assign('CANCEL_SCRIPT', $cancel_script_html);
-$xtpl->assign("JAVASCRIPT", get_set_focus_js() . $quicksearch_js);
+$xtpl->assign('JAVASCRIPT', get_set_focus_js() . $quicksearch_js);
 
 if (!is_file(sugar_cached('jsLanguage/') . $GLOBALS['current_language'] . '.js')) {
     jsLanguage::createAppStringsCache($GLOBALS['current_language']);
@@ -225,10 +225,10 @@ if ($focus->text_only || $isForgotPasswordEmail) {
 //Assign the Teamset field
 $teamSetField = new SugarFieldTeamset('Teamset');
 $code = $teamSetField->getClassicView($focus->field_defs);
-$xtpl->assign("TEAM", $code);
+$xtpl->assign('TEAM', $code);
 
-$xtpl->assign("FIELD_DEFS_JS", $focus->generateFieldDefsJS());
-$xtpl->assign("LBL_CONTACT", $app_list_strings['moduleList']['Contacts']);
+$xtpl->assign('FIELD_DEFS_JS', $focus->generateFieldDefsJS());
+$xtpl->assign('LBL_CONTACT', $app_list_strings['moduleList']['Contacts']);
 
 global $current_user;
 $request = InputValidation::getService();
@@ -246,7 +246,7 @@ if (!empty($focus->parent_type)) {
     onclick="return window.open('index.php?module=' + encodeURIComponent(document.EditView.parent_type.value) + '&action=Popup&html=Popup_picker&form=TasksEditView', 'test', 'width=600,height=400,resizable=1,scrollbars=1');">
 HTML;
 
-    $xtpl->assign("CHANGE_PARENT_BUTTON", $change_parent_button);
+    $xtpl->assign('CHANGE_PARENT_BUTTON', $change_parent_button);
 }
 if ($focus->parent_type === 'Account') {
     $searchQuery = '&' . http_build_query([
@@ -355,7 +355,7 @@ if (!empty($etid)) {
     $where = 'notes.email_id=' . $GLOBALS['db']->quoted($etid) . ' AND notes.filename IS NOT NULL';
     $notes_list = $note->get_full_list('', $where, true) ?? [];
 
-    for ($i = 0, $iMax = is_countable($notes_list) ? count($notes_list) : 0; $i < $iMax; $i++) {
+    for ($i = 0, $iMax = safeCount($notes_list); $i < $iMax; $i++) {
         $the_note = $notes_list[$i];
         if (empty($the_note->filename)) {
             continue;
@@ -394,7 +394,7 @@ if ($has_campaign) {
         $xtpl->assign('TYPEDROPDOWN', get_select_options_with_id($app_list_strings['emailTemplates_type_list'], $templateType));
     } elseif ($templateType === 'system') {
         // if the type is system, the type cannot be changed, the dropdown should contain 'system' only
-        $availableOptions = array('system' => $app_list_strings['emailTemplates_type_list']['system']);
+        $availableOptions = ['system' => $app_list_strings['emailTemplates_type_list']['system']];
         $xtpl->assign('TYPEDROPDOWN', get_select_options_with_id($availableOptions, $templateType));
     } else {
         $xtpl->assign('TYPEDROPDOWN', get_select_options_with_id($app_list_strings['emailTemplates_type_list_no_workflow'], $templateType));

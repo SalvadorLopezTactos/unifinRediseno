@@ -19,7 +19,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
 
-
 /**
  *
  * Elasticsearch queue status
@@ -36,8 +35,7 @@ class ElasticsearchQueueCommand extends Command implements InstanceModeInterface
     {
         $this
             ->setName('elastic:queue')
-            ->setDescription('Show Elasticsearch queue statistics')
-        ;
+            ->setDescription('Show Elasticsearch queue statistics');
     }
 
     /**
@@ -51,21 +49,20 @@ class ElasticsearchQueueCommand extends Command implements InstanceModeInterface
     {
         $result = $this
             ->initApi($this->getApi())
-            ->callApi('elasticSearchQueue', array())
-        ;
+            ->callApi('elasticSearchQueue', []);
 
         $table = new Table($output);
-        $table->setHeaders(array('Module', 'Count'));
+        $table->setHeaders(['Module', 'Count']);
 
         if (isset($result['queued'])) {
             foreach ($result['queued'] as $module => $count) {
-                $table->addRow(array($module, $count));
+                $table->addRow([$module, $count]);
             }
             $table->addRow(new TableSeparator());
         }
 
         $total = $result['total'] ?? 0;
-        $table->addRow(array('Total', $total));
+        $table->addRow(['Total', $total]);
         $table->render();
 
         return $total > 0 ? 1 : 0;

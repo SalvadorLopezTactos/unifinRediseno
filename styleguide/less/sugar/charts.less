@@ -3,21 +3,16 @@
 
 //HOMEPAGE
 .dashboard {
-  .thumbnail.dashlet:not(.collapsed) {
+  .dashlet:not(.collapsed) {
     // 100% of parent container's size
     .dashlet-content > div {
       height: 100%;
     }
 
-    .dashlet-content .list-view {
-      overflow: scroll;
-      height: calc(~'100% - 1px');
-    }
     // parent - 16px (chart margins)
     .sc-chart,
     .nv-chart {
       height: ~'calc(100% - 16px)';
-      margin: 8px;
     }
 
     // parent - space for words to appear above/below chart as needed
@@ -58,7 +53,6 @@
     .sc-chart,
     .nv-chart {
       height: ~'calc(100% - 16px)';
-      margin: 8px;
     }
     // parent - 55px (dashlet options + margins)
     .dashlet-options + .sc-chart,

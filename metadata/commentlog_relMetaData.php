@@ -10,53 +10,53 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['commentlog_rel'] = array(
+$dictionary['commentlog_rel'] = [
     'table' => 'commentlog_rel',
-    'relationships' => array(),
-    'fields' => array(
-        'id' => array(
+    'relationships' => [],
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
             'required' => true,
-        ),
-        'record_id' => array(
+        ],
+        'record_id' => [
             'name' => 'record_id',
             'type' => 'id',
             'required' => true,
-        ),
-        'commentlog_id' => array(
+        ],
+        'commentlog_id' => [
             'name' => 'commentlog_id',
             'type' => 'id',
             'required' => true,
-        ),
-        'module' => array(
+        ],
+        'module' => [
             'name' => 'module',
             'type' => 'varchar',
             'len' => 100,
             'required' => false,
             'readonly' => true,
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'commentlog_relpk',
             'type' => 'primary',
-            'fields' => array('id'),
-        ),
-        array(
+            'fields' => ['id'],
+        ],
+        [
             'name' => 'commentlog_record_relpk',
             'type' => 'index',
-            'fields' => array('record_id'),
-        ),
-        array(
+            'fields' => ['record_id'],
+        ],
+        [
             'name' => 'commentlog_commentlog_relpk',
             'type' => 'index',
-            'fields' => array('commentlog_id'),
-        ),
-    ),
-);
+            'fields' => ['commentlog_id'],
+        ],
+    ],
+];

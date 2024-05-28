@@ -10,12 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="headerpane">
+<div class="headerpane bg-[--primary-content-background] box-border fixed table w-[calc(100%-3.75rem)]">
     <h1>
         <div class="record-cell">
             <span class="module-title">{{str title this.module}}</span>
         </div>
-        <div class="btn-toolbar pull-right dropdown">
+        <div class="btn-toolbar pull-right dropdown !flex gap-2">
             {{#each meta.buttons}}
                 {{field ../this}}
             {{/each}}

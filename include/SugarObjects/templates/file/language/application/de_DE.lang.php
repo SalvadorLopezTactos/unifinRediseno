@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Marketingseite',
-    'Knowledge Base' => 'Wissendatenbank',
-    'Sales' => 'Verkaufsseite',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Werbematerial',
-    'Product Brochures' => 'Produktbroschüren',
-    'FAQ' => 'Häufig gestellte Fragen',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Marketing',
+        'Knowledge Base' => 'Wissensdatenbank',
+        'Sales' => 'Verkauf',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Aktiv',
-    'Draft' => 'Entwurf',
-    'FAQ' => 'Häufig gestellte Fragen',
-    'Expired' => 'Abgelaufen',
-    'Under Review' => 'Wird überprüft',
-    'Pending' => 'Ausstehend',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Werbematerial',
+        'Product Brochures' => 'Produktbroschüren',
+        'FAQ' => 'Häufig gestellte Fragen',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Aktiv',
+        'Draft' => 'Entwurf',
+        'FAQ' => 'Häufig gestellte Fragen',
+        'Expired' => 'Abgelaufen',
+        'Under Review' => 'Wird überprüft',
+        'Pending' => 'Ausstehend',
+    ],
+];

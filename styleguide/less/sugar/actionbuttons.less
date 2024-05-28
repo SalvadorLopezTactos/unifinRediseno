@@ -11,7 +11,6 @@
 .actionbuttons.btn {
   vertical-align: middle;
   border: 1px solid @transparent;
-  font-weight: 400;
   font-size: 12px;
   display: inline-flex;
   flex-flow: row nowrap;
@@ -19,7 +18,7 @@
   align-items: center;
   min-height: 18px;
   min-width: 18px;
-  margin-left: 0;
+  font-weight: 600;
 }
 
 .record .actionbuttons.btn,
@@ -60,6 +59,10 @@
 
 .actionbuttons.actionbuttons-button.btn.btn-mini {
   .btn-mini;
+}
+
+.actionbuttons.btn:not(.btn-mini) {
+  column-gap: 7px;
 }
 
 .actionbuttons.btn.btn-primary {
@@ -449,7 +452,8 @@
   width: 100px;
 }
 
-.span6.record-cell.edit.ab-admin-display-setting {
+.span6.record-cell.edit.ab-admin-display-setting,
+.span12.record-cell.edit.ab-admin-display-setting {
   margin-bottom: 0;
 }
 
@@ -506,7 +510,7 @@
   height: 39px;
   border-top: 0;
   border-bottom: 0;
-  .bg-primary-content-background();
+  background-color: var(--primary-content-background);
 }
 
 .record.tab-layout .content-tabs.ab-admin-tabs .nav.nav-tabs .tab.tab-badgeable .tab-title {
@@ -545,6 +549,14 @@
 .ab-admin-side-pane-part.ab-admin-side-preview {
   border-bottom: 0;
   width: 100%;
+
+  .actionbuttons.btn {
+    margin-left: 0;
+  }
+}
+
+.ab-admin-display-setting .ab-admin-button-property .span1.record-link-wrapper {
+  width: 14px;
 }
 
 .ab-admin-display-setting .ab-admin-button-property .record-label-wrapper {
@@ -561,7 +573,7 @@
 }
 
 .content-tabs.ab-admin-tabs .nav.nav-tabs .tab.active a {
-  .pb-1();
+  padding-bottom: 0.25rem;
 }
 
 .dashboard .record .content-tabs.ab-admin-tabs .ab-admin-side-tabs .tab.active a {
@@ -681,10 +693,7 @@
   align-items: center;
 }
 
-.ab-parent-field
-  .ab-parent-field-container
-  .span9
-  div[data-container="fields"] {
+.ab-parent-field .ab-parent-field-container .span9 div[data-container="fields"] {
   margin-left: 0;
 }
 
@@ -923,4 +932,11 @@ div.formula-builder div.rollup-action-bar.hidden {
 
 .sidebar-content .dashboard .actionbutton-headerpane {
   padding: 0;
+}
+
+.dashboard .headerpane {
+  .action-button-wrapper {
+    white-space: nowrap;
+    align-items: center;
+  }
 }

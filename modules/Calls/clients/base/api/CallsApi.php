@@ -17,8 +17,8 @@ class CallsApi extends CalendarEventsApi
      */
     public function registerApiRest()
     {
-        $register = array();  // No Calls-Specific API beyond what is being implemented in Superclass
+        $register = [];  // No Calls-Specific API beyond what is being implemented in Superclass
 
-        return parent::getRestApi("Calls", $register);
+        return parent::getRestApi('Calls', $register);
     }
 }

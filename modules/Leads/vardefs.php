@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['Lead'] = array(
+$dictionary['Lead'] = [
     'table' => 'leads',
     'color' => 'purple',
     'icon' => 'sicon-lead-lg',
@@ -21,10 +21,10 @@ $dictionary['Lead'] = array(
     'unified_search_default_enabled' => true,
     'duplicate_merge' => true,
     'comment' => 'Leads are persons of interest early in a sales cycle',
-    'fields' => array(
+    'fields' => [
 
 
-        'converted' => array(
+        'converted' => [
             'name' => 'converted',
             'vname' => 'LBL_CONVERTED',
             'type' => 'bool',
@@ -32,16 +32,16 @@ $dictionary['Lead'] = array(
             'comment' => 'Has Lead been converted to a Contact (and other Sugar objects)',
             'massupdate' => false,
             'studio' => false,
-        ),
-        'refered_by' => array(
+        ],
+        'refered_by' => [
             'name' => 'refered_by',
             'vname' => 'LBL_REFERED_BY',
             'type' => 'varchar',
             'len' => '100',
             'comment' => 'Identifies who refered the lead',
             'merge_filter' => 'enabled',
-        ),
-        'lead_source' => array(
+        ],
+        'lead_source' => [
             'name' => 'lead_source',
             'vname' => 'LBL_LEAD_SOURCE',
             'type' => 'enum',
@@ -50,15 +50,15 @@ $dictionary['Lead'] = array(
             'audited' => true,
             'comment' => 'Lead source (ex: Web, print)',
             'merge_filter' => 'enabled',
-        ),
-        'lead_source_description' => array(
+        ],
+        'lead_source_description' => [
             'name' => 'lead_source_description',
             'vname' => 'LBL_LEAD_SOURCE_DESCRIPTION',
             'type' => 'text',
             'group' => 'lead_source',
-            'comment' => 'Description of the lead source'
-        ),
-        'status' => array(
+            'comment' => 'Description of the lead source',
+        ],
+        'status' => [
             'name' => 'status',
             'vname' => 'LBL_STATUS',
             'type' => 'enum',
@@ -70,38 +70,38 @@ $dictionary['Lead'] = array(
             'merge_filter' => 'enabled',
             //Fixme PAT-2241 will remove this when SugarLogic is supported in preview
             'previewEdit' => false,
-        ),
-        'status_description' => array(
+        ],
+        'status_description' => [
             'name' => 'status_description',
             'vname' => 'LBL_STATUS_DESCRIPTION',
             'type' => 'text',
             'group' => 'status',
-            'comment' => 'Description of the status of the lead'
-        ),
-        'department' => array(
+            'comment' => 'Description of the status of the lead',
+        ],
+        'department' => [
             'name' => 'department',
             'vname' => 'LBL_DEPARTMENT',
             'type' => 'varchar',
             'len' => '100',
             'comment' => 'Department the lead belongs to',
             'merge_filter' => 'enabled',
-        ),
-        'reports_to_id' => array(
+        ],
+        'reports_to_id' => [
             'name' => 'reports_to_id',
             'vname' => 'LBL_REPORTS_TO_ID',
             'type' => 'id',
             'reportable' => false,
-            'comment' => 'ID of Contact the Lead reports to'
-        ),
-        'report_to_name' => array(
+            'comment' => 'ID of Contact the Lead reports to',
+        ],
+        'report_to_name' => [
             'name' => 'report_to_name',
             'rname' => 'name',
             'id_name' => 'reports_to_id',
             'vname' => 'LBL_REPORTS_TO',
             'type' => 'relate',
-            'related_fields' => array(
+            'related_fields' => [
                 'reports_to_id',
-            ),
+            ],
             'table' => 'contacts',
             'isnull' => 'true',
             'module' => 'Contacts',
@@ -110,8 +110,8 @@ $dictionary['Lead'] = array(
             'source' => 'non-db',
             'reportable' => false,
             'massupdate' => false,
-        ),
-        'reports_to_link' => array(
+        ],
+        'reports_to_link' => [
             'name' => 'reports_to_link',
             'type' => 'link',
             'relationship' => 'lead_direct_reports',
@@ -119,9 +119,9 @@ $dictionary['Lead'] = array(
             'side' => 'right',
             'source' => 'non-db',
             'vname' => 'LBL_REPORTS_TO',
-            'reportable' => false
-        ),
-        'reportees' => array(
+            'reportable' => false,
+        ],
+        'reportees' => [
             'name' => 'reportees',
             'type' => 'link',
             'relationship' => 'lead_direct_reports',
@@ -129,25 +129,25 @@ $dictionary['Lead'] = array(
             'side' => 'left',
             'source' => 'non-db',
             'vname' => 'LBL_REPORTS_TO',
-            'reportable' => false
-        ),
-        'contacts' => array(
+            'reportable' => false,
+        ],
+        'contacts' => [
             'name' => 'contacts',
             'type' => 'link',
             'relationship' => 'contact_leads',
-            'module' => "Contacts",
+            'module' => 'Contacts',
             'source' => 'non-db',
             'vname' => 'LBL_CONTACTS',
-            'reportable' => false
-        ),
-        'dataprivacy' => array(
+            'reportable' => false,
+        ],
+        'dataprivacy' => [
             'name' => 'dataprivacy',
             'type' => 'link',
             'relationship' => 'leads_dataprivacy',
             'source' => 'non-db',
             'vname' => 'LBL_DATAPRIVACY',
-        ),
-        'dp_business_purpose' => array (
+        ],
+        'dp_business_purpose' => [
             'name' => 'dp_business_purpose',
             'vname' => 'LBL_DATAPRIVACY_BUSINESS_PURPOSE',
             'type' => 'multienum',
@@ -157,8 +157,8 @@ $dictionary['Lead'] = array(
             'default' => '',
             'len' => 255,
             'comment' => 'Business purposes consented for',
-        ),
-        'dp_consent_last_updated' => array(
+        ],
+        'dp_consent_last_updated' => [
             'name' => 'dp_consent_last_updated',
             'vname' => 'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED',
             'type' => 'date',
@@ -167,32 +167,32 @@ $dictionary['Lead'] = array(
             'enable_range_search' => true,
             'options' => 'date_range_search_dom',
             'comment' => 'Date consent last updated',
-        ),
+        ],
         //d&b principal id, a unique id assigned to a contact by D&B API
         //this contact is used for dupe check
-        'dnb_principal_id' => array (
-           'name' => 'dnb_principal_id',
-           'vname' => 'LBL_DNB_PRINCIPAL_ID',
-           'type' => 'varchar',
-           'len' => 30,
-           'comment' => 'Unique Id For D&B Contact',
-        ),
-        'account_name' => array(
+        'dnb_principal_id' => [
+            'name' => 'dnb_principal_id',
+            'vname' => 'LBL_DNB_PRINCIPAL_ID',
+            'type' => 'varchar',
+            'len' => 30,
+            'comment' => 'Unique Id For D&B Contact',
+        ],
+        'account_name' => [
             'name' => 'account_name',
             'vname' => 'LBL_ACCOUNT_NAME',
             'type' => 'varchar',
             'len' => '255',
             'unified_search' => true,
             'comment' => 'Account name for lead',
-        ),
-        'account_to_lead' => array(
+        ],
+        'account_to_lead' => [
             'name' => 'account_to_lead',
             'rname' => 'name',
             'id_name' => 'account_id',
             'type' => 'relate',
-            'related_fields' => array(
+            'related_fields' => [
                 'account_id',
-            ),
+            ],
             'link' => 'accounts',
             'isnull' => 'true',
             'module' => 'Accounts',
@@ -200,17 +200,17 @@ $dictionary['Lead'] = array(
             'unified_search' => false,
             'studio' => false,
             'massupdate' => false,
-            'populate_list' => array(
+            'populate_list' => [
                 'billing_address_street' => 'primary_address_street',
                 'billing_address_city' => 'primary_address_city',
                 'billing_address_state' => 'primary_address_state',
                 'billing_address_postalcode' => 'primary_address_postalcode',
                 'billing_address_country' => 'primary_address_country',
                 'phone_office' => 'phone_work',
-            ),
+            ],
             'importable' => 'false',
-        ),
-        'accounts' => array(
+        ],
+        'accounts' => [
             'name' => 'accounts',
             'type' => 'link',
             'relationship' => 'account_leads',
@@ -218,23 +218,23 @@ $dictionary['Lead'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_ACCOUNT',
             'duplicate_merge' => 'disabled',
-        ),
-        'account_description' => array(
+        ],
+        'account_description' => [
             'name' => 'account_description',
             'vname' => 'LBL_ACCOUNT_DESCRIPTION',
             'type' => 'text',
             'group' => 'account_name',
             'unified_search' => true,
-            'comment' => 'Description of lead account'
-        ),
-        'contact_id' => array(
+            'comment' => 'Description of lead account',
+        ],
+        'contact_id' => [
             'name' => 'contact_id',
             'type' => 'id',
             'reportable' => false,
             'vname' => 'LBL_CONTACT_ID',
-            'comment' => 'If converted, Contact ID resulting from the conversion'
-        ),
-        'contact' => array(
+            'comment' => 'If converted, Contact ID resulting from the conversion',
+        ],
+        'contact' => [
             'name' => 'contact',
             'type' => 'link',
             'link_type' => 'one',
@@ -243,17 +243,17 @@ $dictionary['Lead'] = array(
             'vname' => 'LBL_LEADS',
             'reportable' => false,
             'side' => 'right',
-        ),
-        'contact_name' => array(
+        ],
+        'contact_name' => [
             'name' => 'contact_name',
             'rname' => 'name',
             'id_name' => 'contact_id',
             'vname' => 'LBL_CONTACT_NAME',
             'join_name' => 'contacts',
             'type' => 'relate',
-            'related_fields' => array(
+            'related_fields' => [
                 'contact_id',
-            ),
+            ],
             'link' => 'contacts',
             'table' => 'contacts',
             'isnull' => 'true',
@@ -263,96 +263,96 @@ $dictionary['Lead'] = array(
             'source' => 'non-db',
             'unified_search' => false,
             'massupdate' => false,
-        ),
-        'account_id' => array(
+        ],
+        'account_id' => [
             'name' => 'account_id',
             'type' => 'id',
             'reportable' => false,
             'vname' => 'LBL_ACCOUNT_ID',
-            'comment' => 'If converted, Account ID resulting from the conversion'
-        ),
-        'opportunity_id' => array(
+            'comment' => 'If converted, Account ID resulting from the conversion',
+        ],
+        'opportunity_id' => [
             'name' => 'opportunity_id',
             'type' => 'id',
             'reportable' => false,
             'vname' => 'LBL_OPPORTUNITY_ID',
-            'comment' => 'If converted, Opportunity ID resulting from the conversion'
-        ),
-        'opportunity' => array(
+            'comment' => 'If converted, Opportunity ID resulting from the conversion',
+        ],
+        'opportunity' => [
             'name' => 'opportunity',
             'type' => 'link',
             'link_type' => 'one',
             'relationship' => 'opportunity_leads',
             'source' => 'non-db',
             'vname' => 'LBL_OPPORTUNITIES',
-        ),
-        'converted_opp_name' => array(
+        ],
+        'converted_opp_name' => [
             'name' => 'converted_opp_name',
             'rname' => 'name',
             'id_name' => 'opportunity_id',
             'vname' => 'LBL_CONVERTED_OPPORTUNITY_NAME',
             'type' => 'relate',
-            'related_fields' => array(
+            'related_fields' => [
                 'opportunity_id',
-            ),
+            ],
             'link' => 'opportunity',
             'module' => 'Opportunities',
             'source' => 'non-db',
-        ),
-        'opportunity_name' => array(
+        ],
+        'opportunity_name' => [
             'name' => 'opportunity_name',
             'vname' => 'LBL_OPPORTUNITY_NAME',
             'type' => 'varchar',
             'len' => '255',
-            'comment' => 'Opportunity name associated with lead'
-        ),
-        'opportunity_amount' => array(
+            'comment' => 'Opportunity name associated with lead',
+        ],
+        'opportunity_amount' => [
             'name' => 'opportunity_amount',
             'vname' => 'LBL_OPPORTUNITY_AMOUNT',
             'type' => 'varchar',
             'group' => 'opportunity_name',
             'len' => '50',
-            'comment' => 'Amount of the opportunity'
-        ),
-        'campaign_id' => array(
+            'comment' => 'Amount of the opportunity',
+        ],
+        'campaign_id' => [
             'name' => 'campaign_id',
             'type' => 'id',
             'reportable' => false,
             'vname' => 'LBL_CAMPAIGN_ID',
-            'comment' => 'Campaign that generated lead'
-        ),
-        'campaign_name' => array(
+            'comment' => 'Campaign that generated lead',
+        ],
+        'campaign_name' => [
             'name' => 'campaign_name',
             'rname' => 'name',
             'id_name' => 'campaign_id',
             'vname' => 'LBL_CAMPAIGN',
             'type' => 'relate',
-            'related_fields' => array(
+            'related_fields' => [
                 'campaign_id',
-            ),
+            ],
             'link' => 'campaign_leads',
             'table' => 'campaigns',
             'isnull' => 'true',
             'module' => 'Campaigns',
             'source' => 'non-db',
-            'additionalFields' => array('id' => 'campaign_id'),
+            'additionalFields' => ['id' => 'campaign_id'],
             'massupdate' => false,
-            'studio' => array(
+            'studio' => [
                 'mobile' => false,
-            ),
-        ),
-        'campaign_leads' => array(
+            ],
+        ],
+        'campaign_leads' => [
             'name' => 'campaign_leads',
             'type' => 'link',
             'vname' => 'LBL_CAMPAIGN_LEAD',
             'relationship' => 'campaign_leads',
             'source' => 'non-db',
-        ),
+        ],
         //Deprecated: Use rname_link instead
-        'c_accept_status_fields' => array(
+        'c_accept_status_fields' => [
             'name' => 'c_accept_status_fields',
             'rname' => 'id',
-            'relationship_fields' => array('id' => 'accept_status_id', 'accept_status' => 'accept_status_name'),
+            'relationship_fields' => ['id' => 'accept_status_id', 'accept_status' => 'accept_status_name'],
             'vname' => 'LBL_LIST_ACCEPT_STATUS',
             'type' => 'relate',
             'link' => 'calls',
@@ -361,12 +361,12 @@ $dictionary['Lead'] = array(
             'importable' => 'false',
             'duplicate_merge' => 'disabled',
             'studio' => false,
-        ),
+        ],
         //Deprecated: Use rname_link instead
-        'm_accept_status_fields' => array(
+        'm_accept_status_fields' => [
             'name' => 'm_accept_status_fields',
             'rname' => 'id',
-            'relationship_fields' => array('id' => 'accept_status_id', 'accept_status' => 'accept_status_name'),
+            'relationship_fields' => ['id' => 'accept_status_id', 'accept_status' => 'accept_status_name'],
             'vname' => 'LBL_LIST_ACCEPT_STATUS',
             'type' => 'relate',
             'link' => 'meetings',
@@ -376,17 +376,17 @@ $dictionary['Lead'] = array(
             'hideacl' => true,
             'duplicate_merge' => 'disabled',
             'studio' => false,
-        ),
+        ],
         //Deprecated: Use rname_link instead
-        'accept_status_id' => array(
+        'accept_status_id' => [
             'name' => 'accept_status_id',
             'type' => 'varchar',
             'source' => 'non-db',
             'vname' => 'LBL_LIST_ACCEPT_STATUS',
-            'studio' => array('listview' => false),
-        ),
+            'studio' => ['listview' => false],
+        ],
         //Deprecated: Use rname_link instead
-        'accept_status_name' => array(
+        'accept_status_name' => [
             'massupdate' => false,
             'name' => 'accept_status_name',
             'type' => 'enum',
@@ -394,8 +394,8 @@ $dictionary['Lead'] = array(
             'vname' => 'LBL_LIST_ACCEPT_STATUS',
             'options' => 'dom_meeting_accept_status',
             'importable' => 'false',
-        ),
-        'accept_status_calls' => array(
+        ],
+        'accept_status_calls' => [
             'massupdate' => false,
             'name' => 'accept_status_calls',
             'type' => 'enum',
@@ -406,8 +406,8 @@ $dictionary['Lead'] = array(
             'importable' => 'false',
             'link' => 'calls',
             'rname_link' => 'accept_status',
-        ),
-        'accept_status_meetings' => array(
+        ],
+        'accept_status_meetings' => [
             'massupdate' => false,
             'name' => 'accept_status_meetings',
             'type' => 'enum',
@@ -418,7 +418,7 @@ $dictionary['Lead'] = array(
             'importable' => 'false',
             'link' => 'meetings',
             'rname_link' => 'accept_status',
-        ),
+        ],
         'accept_status_messages' => [
             'massupdate' => false,
             'name' => 'accept_status_messages',
@@ -431,7 +431,7 @@ $dictionary['Lead'] = array(
             'link' => 'meetings',
             'rname_link' => 'accept_status',
         ],
-        'webtolead_email1' => array(
+        'webtolead_email1' => [
             'name' => 'webtolead_email1',
             'vname' => 'LBL_EMAIL_ADDRESS',
             'type' => 'email',
@@ -440,8 +440,8 @@ $dictionary['Lead'] = array(
             'comment' => 'Main email address of lead',
             'importable' => 'false',
             'studio' => 'false',
-        ),
-        'webtolead_email2' => array(
+        ],
+        'webtolead_email2' => [
             'name' => 'webtolead_email2',
             'vname' => 'LBL_OTHER_EMAIL_ADDRESS',
             'type' => 'email',
@@ -450,8 +450,8 @@ $dictionary['Lead'] = array(
             'comment' => 'Secondary email address of lead',
             'importable' => 'false',
             'studio' => 'false',
-        ),
-        'webtolead_email_opt_out' => array(
+        ],
+        'webtolead_email_opt_out' => [
             'name' => 'webtolead_email_opt_out',
             'vname' => 'LBL_EMAIL_OPT_OUT',
             'type' => 'bool',
@@ -460,8 +460,8 @@ $dictionary['Lead'] = array(
             'importable' => 'false',
             'massupdate' => false,
             'studio' => 'false',
-        ),
-        'webtolead_invalid_email' => array(
+        ],
+        'webtolead_invalid_email' => [
             'name' => 'webtolead_invalid_email',
             'vname' => 'LBL_INVALID_EMAIL',
             'type' => 'bool',
@@ -470,8 +470,8 @@ $dictionary['Lead'] = array(
             'importable' => 'false',
             'massupdate' => false,
             'studio' => 'false',
-        ),
-        'birthdate' => array(
+        ],
+        'birthdate' => [
             'name' => 'birthdate',
             'vname' => 'LBL_BIRTHDATE',
             'massupdate' => false,
@@ -479,8 +479,8 @@ $dictionary['Lead'] = array(
             'comment' => 'The birthdate of the contact',
             'audited' => true,
             'pii' => true,
-        ),
-        'portal_name' => array(
+        ],
+        'portal_name' => [
             'name' => 'portal_name',
             'vname' => 'LBL_PORTAL_NAME',
             'type' => 'varchar',
@@ -489,8 +489,8 @@ $dictionary['Lead'] = array(
             'group_label' => 'LBL_PORTAL',
             'comment' => 'Portal user name when lead created via lead portal',
             'studio' => true,
-        ),
-        'portal_app' => array(
+        ],
+        'portal_app' => [
             'name' => 'portal_app',
             'vname' => 'LBL_PORTAL_APP',
             'type' => 'varchar',
@@ -498,8 +498,8 @@ $dictionary['Lead'] = array(
             'len' => '255',
             'comment' => 'Portal application that resulted in created of lead',
             'studio' => true,
-        ),
-        'business_center_name' => array(
+        ],
+        'business_center_name' => [
             'name' => 'business_center_name',
             'rname' => 'name',
             'id_name' => 'business_center_id',
@@ -516,8 +516,8 @@ $dictionary['Lead'] = array(
             'unified_search' => true,
             'comment' => 'The name of the business center represented by the business_center_id field',
             'required' => false,
-        ),
-        'business_center_id' => array(
+        ],
+        'business_center_id' => [
             'name' => 'business_center_id',
             'type' => 'relate',
             'dbType' => 'id',
@@ -529,8 +529,8 @@ $dictionary['Lead'] = array(
             'audited' => true,
             'massupdate' => false,
             'comment' => 'The business center to which the case is associated',
-        ),
-        'business_centers' => array(
+        ],
+        'business_centers' => [
             'name' => 'business_centers',
             'type' => 'link',
             'relationship' => 'business_center_leads',
@@ -538,7 +538,7 @@ $dictionary['Lead'] = array(
             'side' => 'right',
             'source' => 'non-db',
             'vname' => 'LBL_BUSINESS_CENTER',
-        ),
+        ],
         'messages' => [
             'name' => 'messages',
             'type' => 'link',
@@ -546,14 +546,14 @@ $dictionary['Lead'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_MESSAGES',
         ],
-        'message_invites' => array(
+        'message_invites' => [
             'name' => 'message_invites',
             'type' => 'link',
             'relationship' => 'messages_leads',
             'source' => 'non-db',
             'vname' => 'LBL_MESSAGES',
-        ),
-        'website' => array(
+        ],
+        'website' => [
             'name' => 'website',
             'vname' => 'LBL_WEBSITE',
             'type' => 'url',
@@ -561,60 +561,60 @@ $dictionary['Lead'] = array(
             'len' => 255,
             'link_target' => '_blank',
             'comment' => 'URL of website for the company',
-        ),
-        'tasks' => array(
+        ],
+        'tasks' => [
             'name' => 'tasks',
             'type' => 'link',
             'relationship' => 'lead_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_TASKS',
-        ),
-        'notes' => array(
+        ],
+        'notes' => [
             'name' => 'notes',
             'type' => 'link',
             'relationship' => 'lead_notes',
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
-        ),
-        'meetings' => array(
+        ],
+        'meetings' => [
             'name' => 'meetings',
             'type' => 'link',
             'relationship' => 'meetings_leads',
             'source' => 'non-db',
             'vname' => 'LBL_MEETINGS',
-        ),
-        'meetings_parent' => array(
+        ],
+        'meetings_parent' => [
             'name' => 'meetings_parent',
             'type' => 'link',
             'relationship' => 'lead_meetings',
             'source' => 'non-db',
             'vname' => 'LBL_MEETINGS',
             'reportable' => false,
-        ),
-        'calls' => array(
+        ],
+        'calls' => [
             'name' => 'calls',
             'type' => 'link',
             'relationship' => 'calls_leads',
             'source' => 'non-db',
             'vname' => 'LBL_CALLS',
-        ),
-        'calls_parent' => array(
+        ],
+        'calls_parent' => [
             'name' => 'calls_parent',
             'type' => 'link',
             'relationship' => 'lead_calls',
             'source' => 'non-db',
             'vname' => 'LBL_CALLS',
             'reportable' => false,
-        ),
-        'emails' => array(
+        ],
+        'emails' => [
             'name' => 'emails',
             'type' => 'link',
             'relationship' => 'emails_leads_rel',
             'source' => 'non-db',
             'unified_search' => true,
             'vname' => 'LBL_EMAILS',
-        ),
-        'archived_emails' => array(
+        ],
+        'archived_emails' => [
             'name' => 'archived_emails',
             'type' => 'link',
             'link_class' => 'ArchivedEmailsLink',
@@ -625,8 +625,8 @@ $dictionary['Lead'] = array(
             'relationship' => '',
             'hideacl' => true,
             'readonly' => true,
-        ),
-        'campaigns' => array(
+        ],
+        'campaigns' => [
             'name' => 'campaigns',
             'type' => 'link',
             'relationship' => 'lead_campaign_log',
@@ -634,31 +634,31 @@ $dictionary['Lead'] = array(
             'bean_name' => 'CampaignLog',
             'source' => 'non-db',
             'vname' => 'LBL_CAMPAIGNLOG',
-        ),
-        'prospect_lists' => array(
+        ],
+        'prospect_lists' => [
             'name' => 'prospect_lists',
             'type' => 'link',
             'relationship' => 'prospect_list_leads',
             'module' => 'ProspectLists',
             'source' => 'non-db',
             'vname' => 'LBL_PROSPECT_LIST',
-        ),
-        'prospect' => array(
+        ],
+        'prospect' => [
             'name' => 'prospect',
             'type' => 'link',
             'relationship' => 'lead_prospect',
             'module' => 'Prospects',
             'source' => 'non-db',
             'vname' => 'LBL_PROSPECT',
-        ),
-        'preferred_language' => array(
+        ],
+        'preferred_language' => [
             'name' => 'preferred_language',
             'type' => 'enum',
             'vname' => 'LBL_PREFERRED_LANGUAGE',
             'options' => 'available_language_dom',
-        ),
+        ],
         // Marketo Fields
-        'mkto_sync' => array(
+        'mkto_sync' => [
             'name' => 'mkto_sync',
             'vname' => 'LBL_MKTO_SYNC',
             'type' => 'bool',
@@ -669,8 +669,8 @@ $dictionary['Lead'] = array(
             'duplicate_merge' => true,
             'reportable' => true,
             'importable' => 'true',
-        ),
-        'mkto_id' => array(
+        ],
+        'mkto_id' => [
             'name' => 'mkto_id',
             'vname' => 'LBL_MKTO_ID',
             'comment' => 'Associated Marketo Lead ID',
@@ -681,8 +681,8 @@ $dictionary['Lead'] = array(
             'duplicate_merge' => true,
             'reportable' => true,
             'importable' => 'false',
-        ),
-        'mkto_lead_score' => array(
+        ],
+        'mkto_lead_score' => [
             'name' => 'mkto_lead_score',
             'vname' => 'LBL_MKTO_LEAD_SCORE',
             'comment' => null,
@@ -693,7 +693,7 @@ $dictionary['Lead'] = array(
             'duplicate_merge' => true,
             'reportable' => true,
             'importable' => 'true',
-        ),
+        ],
         'ai_conv_score_classification' => [
             'name' => 'ai_conv_score_classification',
             'vname' => 'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD',
@@ -701,7 +701,7 @@ $dictionary['Lead'] = array(
             'options' => 'ai_conv_score_classification_dropdown',
             'default_value' => '',
             'reportable' => true,
-            'audited' => false,
+            'audited' => true,
             'importable' => false,
             'listview' => true,
             'readonly' => true,
@@ -760,6 +760,8 @@ $dictionary['Lead'] = array(
             'name' => 'ai_conv_score_absolute',
             'vname' => 'LBL_AI_CONV_SCORE_ABSOLUTE',
             'type' => 'decimal',
+            'len' => 10,
+            'precision' => 8,
             'reportable' => true,
             'importable' => false,
             'readonly' => true,
@@ -770,6 +772,8 @@ $dictionary['Lead'] = array(
             'name' => 'ai_conv_bin_accuracy',
             'vname' => 'LBL_AI_CONV_BIN_ACCURACY',
             'type' => 'decimal',
+            'len' => 10,
+            'precision' => 8,
             'reportable' => true,
             'importable' => false,
             'readonly' => true,
@@ -780,6 +784,8 @@ $dictionary['Lead'] = array(
             'name' => 'ai_conv_multiplier',
             'vname' => 'LBL_AI_CONV_MULTIPLIER',
             'type' => 'decimal',
+            'len' => 10,
+            'precision' => 8,
             'reportable' => true,
             'importable' => false,
             'readonly' => true,
@@ -790,6 +796,8 @@ $dictionary['Lead'] = array(
             'name' => 'ai_icp_fit_score_absolute',
             'vname' => 'LBL_AI_ICP_FIT_SCORE_ABSOLUTE',
             'type' => 'decimal',
+            'len' => 10,
+            'precision' => 8,
             'reportable' => true,
             'importable' => false,
             'readonly' => true,
@@ -800,6 +808,8 @@ $dictionary['Lead'] = array(
             'name' => 'ai_icp_fit_bin_accuracy',
             'vname' => 'LBL_AI_ICP_FIT_BIN_ACCURACY',
             'type' => 'decimal',
+            'len' => 10,
+            'precision' => 8,
             'reportable' => true,
             'importable' => false,
             'readonly' => true,
@@ -810,6 +820,8 @@ $dictionary['Lead'] = array(
             'name' => 'ai_icp_fit_multiplier',
             'vname' => 'LBL_AI_ICP_FIT_MULTIPLIER',
             'type' => 'decimal',
+            'len' => 10,
+            'precision' => 8,
             'reportable' => true,
             'importable' => false,
             'readonly' => true,
@@ -1081,82 +1093,82 @@ $dictionary['Lead'] = array(
             'readonly' => true,
             'reportable' => false,
         ],
-    ),
-    'indices' => array(
-        array(
+    ],
+    'indices' => [
+        [
             'name' => 'idx_lead_acct_name_first',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'account_name',
                 'date_modified',
                 'id',
                 'team_set_id',
-                ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_lead_idx_del_last_name',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'last_name',
-                ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_leads_status',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'status',
-                ),
-        ),
-        array('name' => 'idx_lead_opp_del', 'type' => 'index',
-            'fields' => array(
+            ],
+        ],
+        ['name' => 'idx_lead_opp_del', 'type' => 'index',
+            'fields' => [
                 'deleted',
                 'opportunity_id',
                 'id',
-                ),
-        ),
-        array('name' => 'idx_leads_acct_del', 'type' => 'index', 'fields' => array('account_id', 'deleted',)),
-        array('name' => 'idx_lead_contact', 'type' => 'index', 'fields' => array('contact_id')),
-        array('name' => 'idx_reports_to', 'type' => 'index',
-            'fields' => array(
+            ],
+        ],
+        ['name' => 'idx_leads_acct_del', 'type' => 'index', 'fields' => ['account_id', 'deleted',]],
+        ['name' => 'idx_lead_contact', 'type' => 'index', 'fields' => ['contact_id']],
+        ['name' => 'idx_reports_to', 'type' => 'index',
+            'fields' => [
                 'deleted',
                 'reports_to_id',
                 'id',
-                ),
-        ),
-        array('name' => 'idx_lead_phone_work', 'type' => 'index', 'fields' => array('phone_work')),
-        array('name' => 'idx_lead_mkto_id', 'type' => 'index', 'fields' => array('mkto_id')),
-        array(
+            ],
+        ],
+        ['name' => 'idx_lead_phone_work', 'type' => 'index', 'fields' => ['phone_work']],
+        ['name' => 'idx_lead_mkto_id', 'type' => 'index', 'fields' => ['mkto_id']],
+        [
             'name' => 'idx_leads_del_businesscenter',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'business_center_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'lead_prospect' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'lead_prospect' => [
             'lhs_module' => 'Leads',
             'lhs_table' => 'leads',
             'lhs_key' => 'id',
             'rhs_module' => 'Prospects',
             'rhs_table' => 'prospects',
             'rhs_key' => 'lead_id',
-            'relationship_type' => 'one-to-one'
-        ),
-        'lead_direct_reports' => array(
+            'relationship_type' => 'one-to-one',
+        ],
+        'lead_direct_reports' => [
             'lhs_module' => 'Leads',
             'lhs_table' => 'leads',
             'lhs_key' => 'id',
             'rhs_module' => 'Leads',
             'rhs_table' => 'leads',
             'rhs_key' => 'reports_to_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'lead_tasks' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'lead_tasks' => [
             'lhs_module' => 'Leads',
             'lhs_table' => 'leads',
             'lhs_key' => 'id',
@@ -1165,9 +1177,9 @@ $dictionary['Lead'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Leads'
-        ),
-        'lead_notes' => array(
+            'relationship_role_column_value' => 'Leads',
+        ],
+        'lead_notes' => [
             'lhs_module' => 'Leads',
             'lhs_table' => 'leads',
             'lhs_key' => 'id',
@@ -1176,8 +1188,8 @@ $dictionary['Lead'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Leads'
-        ),
+            'relationship_role_column_value' => 'Leads',
+        ],
         'lead_messages' => [
             'lhs_module' => 'Leads',
             'lhs_table' => 'leads',
@@ -1189,7 +1201,7 @@ $dictionary['Lead'] = array(
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Leads',
         ],
-        'lead_meetings' => array(
+        'lead_meetings' => [
             'lhs_module' => 'Leads',
             'lhs_table' => 'leads',
             'lhs_key' => 'id',
@@ -1198,9 +1210,9 @@ $dictionary['Lead'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Leads'
-        ),
-        'lead_calls' => array(
+            'relationship_role_column_value' => 'Leads',
+        ],
+        'lead_calls' => [
             'lhs_module' => 'Leads',
             'lhs_table' => 'leads',
             'lhs_key' => 'id',
@@ -1209,9 +1221,9 @@ $dictionary['Lead'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Leads'
-        ),
-        'lead_emails' => array(
+            'relationship_role_column_value' => 'Leads',
+        ],
+        'lead_emails' => [
             'lhs_module' => 'Leads',
             'lhs_table' => 'leads',
             'lhs_key' => 'id',
@@ -1220,70 +1232,70 @@ $dictionary['Lead'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Leads'
-        ),
-        'lead_campaign_log' => array(
+            'relationship_role_column_value' => 'Leads',
+        ],
+        'lead_campaign_log' => [
             'lhs_module' => 'Leads',
             'lhs_table' => 'leads',
             'lhs_key' => 'id',
             'rhs_module' => 'CampaignLog',
             'rhs_table' => 'campaign_log',
             'rhs_key' => 'target_id',
-            'relationship_type' => 'one-to-many'
-        )
+            'relationship_type' => 'one-to-many',
+        ],
 
-    ),
-    'duplicate_check' => array(
+    ],
+    'duplicate_check' => [
         'enabled' => true,
-        'FilterDuplicateCheck' => array(
-            'filter_template' => array(
-                array(
-                    '$and' => array(
-                        array(
-                            '$or' => array(
-                                array('status' => array('$not_equals' => 'Converted')),
-                                array('status' => array('$is_null' => '')),
-                            )
-                        ),
-                        array(
-                            '$or' => array(
-                                array(
-                                    '$and' => array(
-                                        array('account_name' => array('$starts' => '$account_name')),
-                                        array('first_name' => array('$starts' => '$first_name')),
-                                        array('last_name' => array('$starts' => '$last_name')),
-                                        array('dnb_principal_id' => array('$equals' => '$dnb_principal_id')),
-                                    )
-                                ),
-                                array('phone_work' => array('$equals' => '$phone_work')),
-                            )
-                        ),
-                    )
-                )
-            ),
-            'ranking_fields' => array(
-                array('in_field_name' => 'phone_work', 'dupe_field_name' => 'phone_work'),
-                array('in_field_name' => 'account_name', 'dupe_field_name' => 'account_name'),
-                array('in_field_name' => 'last_name', 'dupe_field_name' => 'last_name'),
-                array('in_field_name' => 'first_name', 'dupe_field_name' => 'first_name'),
-            )
-        )
-    ),
+        'FilterDuplicateCheck' => [
+            'filter_template' => [
+                [
+                    '$and' => [
+                        [
+                            '$or' => [
+                                ['status' => ['$not_equals' => 'Converted']],
+                                ['status' => ['$is_null' => '']],
+                            ],
+                        ],
+                        [
+                            '$or' => [
+                                [
+                                    '$and' => [
+                                        ['account_name' => ['$starts' => '$account_name']],
+                                        ['first_name' => ['$starts' => '$first_name']],
+                                        ['last_name' => ['$starts' => '$last_name']],
+                                        ['dnb_principal_id' => ['$equals' => '$dnb_principal_id']],
+                                    ],
+                                ],
+                                ['phone_work' => ['$equals' => '$phone_work']],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'ranking_fields' => [
+                ['in_field_name' => 'phone_work', 'dupe_field_name' => 'phone_work'],
+                ['in_field_name' => 'account_name', 'dupe_field_name' => 'account_name'],
+                ['in_field_name' => 'last_name', 'dupe_field_name' => 'last_name'],
+                ['in_field_name' => 'first_name', 'dupe_field_name' => 'first_name'],
+            ],
+        ],
+    ],
     //This enables optimistic locking for Saves From EditView
     'optimistic_locking' => true,
-);
+];
 
 VardefManager::createVardef(
     'Leads',
     'Lead',
-    array(
+    [
         'default',
         'assignable',
         'team_security',
         'person',
         'audit',
         'customer_journey_parent',
-    )
+    ]
 );
 
 //boost value for full text search

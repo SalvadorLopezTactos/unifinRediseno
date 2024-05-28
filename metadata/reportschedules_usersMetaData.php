@@ -10,60 +10,60 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['reportschedules_users'] = array(
+$dictionary['reportschedules_users'] = [
     'table' => 'reportschedules_users',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'reportschedule_id' => array(
+        ],
+        'reportschedule_id' => [
             'name' => 'reportschedule_id',
             'type' => 'id',
-        ),
-        'user_id' => array(
+        ],
+        'user_id' => [
             'name' => 'user_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'reportschedules_userspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_usr_rs_usr',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'user_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_reportschedule_users_del',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'reportschedule_id',
                 'user_id',
                 'deleted',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'reportschedules_users' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'reportschedules_users' => [
             'lhs_module' => 'ReportSchedules',
             'lhs_table' => 'report_schedules',
             'lhs_key' => 'id',
@@ -74,6 +74,6 @@ $dictionary['reportschedules_users'] = array(
             'join_table' => 'reportschedules_users',
             'join_key_lhs' => 'reportschedule_id',
             'join_key_rhs' => 'user_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

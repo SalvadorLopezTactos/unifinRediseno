@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
 
     //module strings.
     'LBL_MODULE_NAME' => 'Fleta pune per menaxhimin e parashikimeve',
@@ -35,14 +35,14 @@ $mod_strings = array (
     'LBL_FORECAST_TYPE' => 'Lloji i parashikimit',
     'LBL_FORECAST_OPP_COUNT' => 'Llogaritja e mundësive totale',
     'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Tubimi i llogaritjes së mundësive',
-    'LBL_FORECAST_OPP_WEIGH'=> 'Vlera e matur',
+    'LBL_FORECAST_OPP_WEIGH' => 'Vlera e matur',
     'LBL_FORECAST_USER' => 'Përdorues',
-    'LBL_DATE_COMMITTED'=> 'Të dhënat e kryera',
+    'LBL_DATE_COMMITTED' => 'Të dhënat e kryera',
     'LBL_DATE_ENTERED' => 'Të dhënat e futura',
     'LBL_DATE_MODIFIED' => 'Të dhënat e modifikuara',
     'LBL_CREATED_BY' => 'Krijuar nga',
     'LBL_DELETED' => 'Fshi',
-    'LBL_MODIFIED_USER_ID'=>'Modifikuar nga',
+    'LBL_MODIFIED_USER_ID' => 'Modifikuar nga',
     'LBL_WK_VERSION' => 'Versioni',
     'LBL_WK_REVISION' => 'Revizion',
 
@@ -59,68 +59,68 @@ $mod_strings = array (
     'LBL_QC_UPCOMING_FORECASTS' => 'Parashikimet e mia',
     'LBL_QC_LAST_DATE_COMMITTED' => 'Data e fundit e angazhimit',
     'LBL_QC_LAST_COMMIT_VALUE' => 'Vlera e fundit e angazhimit',
-    'LBL_QC_HEADER_DELIM'=> 'Deri',
+    'LBL_QC_HEADER_DELIM' => 'Deri',
 
     //opportunity worksheet list view labels
-    'LBL_OW_OPPORTUNITIES' => "Mundësi:",
-    'LBL_OW_ACCOUNTNAME' => "Llogaria",
-    'LBL_OW_REVENUE' => "Vlerë",
-    'LBL_OW_WEIGHTED' => "Vlera e matur",
-    'LBL_OW_MODULE_TITLE'=> 'Tabela e mundësisë',
-    'LBL_OW_PROBABILITY'=>'Probabiliteti',
-    'LBL_OW_NEXT_STEP'=>'Hapi vijues',
-    'LBL_OW_DESCRIPTION'=>'Përshkrimi',
-    'LBL_OW_TYPE'=>'Lloji',
+    'LBL_OW_OPPORTUNITIES' => 'Mundësi:',
+    'LBL_OW_ACCOUNTNAME' => 'Llogaria',
+    'LBL_OW_REVENUE' => 'Vlerë',
+    'LBL_OW_WEIGHTED' => 'Vlera e matur',
+    'LBL_OW_MODULE_TITLE' => 'Tabela e mundësisë',
+    'LBL_OW_PROBABILITY' => 'Probabiliteti',
+    'LBL_OW_NEXT_STEP' => 'Hapi vijues',
+    'LBL_OW_DESCRIPTION' => 'Përshkrimi',
+    'LBL_OW_TYPE' => 'Lloji',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'Raport direkt',
-    'LBL_FDR_OPPORTUNITIES'=>'Mundësitë në parashikim',
-    'LBL_FDR_WEIGH'=>'Vlerat e matura të mundësive',
-    'LBL_FDR_COMMIT'=>'Vlera e angazhimit',
-    'LBL_FDR_DATE_COMMIT'=>'Data e angazhimit',
+    'LBL_FDR_USER_NAME' => 'Raport direkt',
+    'LBL_FDR_OPPORTUNITIES' => 'Mundësitë në parashikim',
+    'LBL_FDR_WEIGH' => 'Vlerat e matura të mundësive',
+    'LBL_FDR_COMMIT' => 'Vlera e angazhimit',
+    'LBL_FDR_DATE_COMMIT' => 'Data e angazhimit',
 
     //detail view.
     'LBL_DV_HEADER' => 'Parashikimet: Tabela',
     'LBL_DV_MY_FORECASTS' => 'Parashikimet e mia',
-    'LBL_DV_MY_TEAM' => "Parashikimet e grupit tim" ,
+    'LBL_DV_MY_TEAM' => "Parashikimet e grupit tim",
     'LBL_DV_TIMEPERIODS' => 'Kohëzgjatja',
     'LBL_DV_FORECAST_PERIOD' => 'Kohëzgjatja e parashikimit',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Mundësitë e parashikimit',
     'LBL_SEARCH' => 'Selekto',
     'LBL_SEARCH_LABEL' => 'Selekto',
     'LBL_COMMIT_HEADER' => 'Parashikimet e kryera',
-    'LBL_DV_LAST_COMMIT_DATE' =>'Data e fundit e angazhuar',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'vlera e fundit e angazhuar',
+    'LBL_DV_LAST_COMMIT_DATE' => 'Data e fundit e angazhuar',
+    'LBL_DV_LAST_COMMIT_AMOUNT' => 'vlera e fundit e angazhuar',
     'LBL_DV_FORECAST_ROLLUP' => 'Parashikimi mbledhës',
     'LBL_DV_TIMEPERIOD' => 'Periudha kohore',
     'LBL_DV_TIMPERIOD_DATES' => 'Gama e të dhënave:',
     'LBL_LOADING_COMMIT_HISTORY' => 'Duke ngarkuar kryerjen e historisë...',
 
     //list view
-    'LBL_LV_TIMPERIOD'=> 'Kohëzgjatja',
-    'LBL_LV_TIMPERIOD_START_DATE'=> 'Data e nisjes',
-    'LBL_LV_TIMPERIOD_END_DATE'=> 'Data e përfundimit',
-    'LBL_LV_TYPE'=> 'Lloji i parashikimit',
-    'LBL_LV_COMMIT_DATE'=> 'Të dhënat e kryera',
-    'LBL_LV_OPPORTUNITIES'=> 'Mundësitë',
-    'LBL_LV_WEIGH'=> 'Vlera e matur',
-    'LBL_LV_COMMIT'=> 'Vlera e angazhimit',
+    'LBL_LV_TIMPERIOD' => 'Kohëzgjatja',
+    'LBL_LV_TIMPERIOD_START_DATE' => 'Data e nisjes',
+    'LBL_LV_TIMPERIOD_END_DATE' => 'Data e përfundimit',
+    'LBL_LV_TYPE' => 'Lloji i parashikimit',
+    'LBL_LV_COMMIT_DATE' => 'Të dhënat e kryera',
+    'LBL_LV_OPPORTUNITIES' => 'Mundësitë',
+    'LBL_LV_WEIGH' => 'Vlera e matur',
+    'LBL_LV_COMMIT' => 'Vlera e angazhimit',
 
-    'LBL_COMMIT_NOTE'=> 'Shtyp sasi që do të doje të kryesh për periudhë kohore të caktuar',
+    'LBL_COMMIT_NOTE' => 'Shtyp sasi që do të doje të kryesh për periudhë kohore të caktuar',
 
-    'LBL_COMMIT_MESSAGE'=> 'A dëshiron të kryesh këto sasi?',
+    'LBL_COMMIT_MESSAGE' => 'A dëshiron të kryesh këto sasi?',
     'ERR_FORECAST_AMOUNT' => 'Nevoitet vlera e kryer dhe patjetër duhet të jetë numër.',
 
     // js error strings
     'LBL_FC_START_DATE' => 'Data e nisjes',
     'LBL_FC_USER' => 'Caktuar për',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'Nuk ka periudha kohore aktive për parashikim.',
-    'LBL_FDR_ADJ_AMOUNT'=>'Shuma e rregulluar',
-    'LBL_SAVE_WOKSHEET'=>'Ruaj fletën e punës',
-    'LBL_RESET_WOKSHEET'=>'Rivendos fletën e punës',
-    'LBL_SHOW_CHART'=>'Shiko grafikat',
-    'LBL_RESET_CHECK'=>'Të giithë të dhënat e fletës së punës për periudhë kohore të caktuar dhe përdoruesit e kyqur do të largohen. Vazhdoni?',
+    'LBL_NO_ACTIVE_TIMEPERIOD' => 'Nuk ka periudha kohore aktive për parashikim.',
+    'LBL_FDR_ADJ_AMOUNT' => 'Shuma e rregulluar',
+    'LBL_SAVE_WOKSHEET' => 'Ruaj fletën e punës',
+    'LBL_RESET_WOKSHEET' => 'Rivendos fletën e punës',
+    'LBL_SHOW_CHART' => 'Shiko grafikat',
+    'LBL_RESET_CHECK' => 'Të giithë të dhënat e fletës së punës për periudhë kohore të caktuar dhe përdoruesit e kyqur do të largohen. Vazhdoni?',
 
     'LBL_CURRENCY' => 'Monedha',
     'LBL_CURRENCY_ID' => 'ID e Monedhës',
@@ -149,6 +149,6 @@ $mod_strings = array (
     'LBL_HISTORY_LOG' => 'Angazhimi i fundit',
     'LBL_NO_COMMIT' => 'Ska angazhim të më parshëm',
 
-    'LBL_MANGER_SAVED' => 'E ruajtur nga menaxheri'
+    'LBL_MANGER_SAVED' => 'E ruajtur nga menaxheri',
 
-);
+];

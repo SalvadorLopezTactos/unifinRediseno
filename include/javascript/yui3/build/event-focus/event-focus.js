@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('event-focus', function (Y, NAME) {
 
 /**
@@ -284,4 +277,4 @@ if (useActivate) {
 }
 
 
-}, '3.15.0', {"requires": ["event-synthetic"]});
+}, '3.18.1', {"requires": ["event-synthetic"]});

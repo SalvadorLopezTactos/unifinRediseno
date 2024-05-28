@@ -9,22 +9,20 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$searchdefs['Holidays'] = array(
-            'templateMeta' => array(
-                    'maxColumns' => '2',  'maxColumnsBasic' => '2', 
-                    'widths' => array('label' => '10', 'field' => '30'),                 
-                   ),
-            'layout' => array(                      
-                'basic_search' => array(
-                    'holiday_date',
-                    
-                 
-                ),
-                'advanced_search' => array(
-                    'holiday_date',
-                    'description',
-                ),                                              
-            ),
-);
-    
-?>
+$searchdefs['Holidays'] = [
+    'templateMeta' => [
+        'maxColumns' => '2', 'maxColumnsBasic' => '2',
+        'widths' => ['label' => '10', 'field' => '30'],
+    ],
+    'layout' => [
+        'basic_search' => [
+            'holiday_date',
+
+
+        ],
+        'advanced_search' => [
+            'holiday_date',
+            'description',
+        ],
+    ],
+];

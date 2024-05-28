@@ -61,6 +61,8 @@
         $(window)
             .off('resize.header')
             .on('resize.header', resize);
+
+        app.events.on('focusdrawer:close', this.handleFocusDrawerClose, this);
     },
 
     /**
@@ -142,6 +144,8 @@
 
         this.stopListening(this.collection);
         this.listenTo(this.collection, 'data:sync:complete', this.dataSyncComplete);
+        this.listenTo(this.context, 'list:paginate:start', this.showLoading);
+        this.listenTo(this.context, 'filter:fetch:start', this.showLoading);
     },
 
     /**
@@ -258,7 +262,8 @@
      * Load list data based on metric filter
      */
     loadListData: function() {
-        $('.multi-line-list-view', this.$el.closest('.dashlets')).addClass('data-loader');
+        this.showLoading();
+        this.collection.trigger('list:paginate:loading');
 
         let metricId = this.getActiveMetricId();
         let bean = app.data.createBean('Metrics', {
@@ -270,8 +275,18 @@
                     metric.attributes.filter_def = [];
                 }
                 app.events.trigger('metric:initialize', metric.attributes);
+                if (this.context) {
+                    this.context.trigger('filter:apply');
+                }
             }, this)
         });
+    },
+
+    /**
+     * Show loading block
+     */
+    showLoading: function() {
+        $('.multi-line-list-view', this.$el.closest('.dashlets')).addClass('data-loader');
     },
 
     /**
@@ -407,6 +422,18 @@
             this.isRefreshProcess = true;
             this.loadListData();
         }, this));
+    },
+
+    /**
+     * Refresh metric tabs if any records have been updated
+     * after the focus drawer is closed.
+     * @param {Array} updatedModels
+     */
+    handleFocusDrawerClose: function(updatedModels) {
+        if (!_.isEmpty(updatedModels)) {
+            this.isRefreshProcess = true;
+            this.loadListData();
+        }
     },
 
     /**
@@ -565,7 +592,9 @@
      * @inheritdoc
      */
     _dispose: function() {
+        app.events.off('focusdrawer:close', this.handleFocusDrawerClose, this);
         $(window).off('resize.header');
+        this.stopListening();
         this._super('_dispose');
     },
 
@@ -639,6 +668,8 @@
         while ($metrics.outerWidth(true) > width && $toHide.length > 0) {
             this.toggleMetric($toHide.data('metric'), false);
             $toHide = $toHide.prev();
+            // "More" dropdown should be displayed here to calculate its width value on the next step
+            this._$moreMetricsDD.toggleClass('hidden', false);
         }
     },
 

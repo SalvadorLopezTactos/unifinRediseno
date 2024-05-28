@@ -60,7 +60,6 @@ class SugarOIDCUserChecker extends UserChecker
     public function checkPostAuth(UserInterface $user)
     {
         $this->loadSugarUser($user);
-        parent::checkPostAuth($user);
     }
 
     /**
@@ -88,7 +87,7 @@ class SugarOIDCUserChecker extends UserChecker
             $sugarUser = $this->localUserProvider->createUser($userAttributes['user_name'], $userAttributes);
         } catch (InactiveUserException $e) {
             $sugarUser = $e->getSugarUser();
-            if (!$sugarUser || (($userAttributes['status'] !== User::USER_STATUS_ACTIVE) && !$this->allowInactive )) {
+            if (!$sugarUser || (($userAttributes['status'] !== User::USER_STATUS_ACTIVE) && !$this->allowInactive)) {
                 throw $e;
             }
 

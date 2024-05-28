@@ -17,7 +17,7 @@
     /**
      * @inheritdoc
      */
-    className: 'searchbar-dropdown shadow-xl border-dropdown-widget rounded-t-none rounded-b-md',
+    className: 'searchbar-dropdown shadow-xl border-[--dropdown-border-widget] rounded-t-none rounded-b-md',
 
     /**
      * @inheritdoc

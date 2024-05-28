@@ -32,41 +32,41 @@ class ModuleCollectionApi extends CollectionApi
      */
     public function registerApiRest()
     {
-        return array(
-            'getCollection' => array(
+        return [
+            'getCollection' => [
                 'reqType' => 'GET',
-                'path' => array('collection', '?'),
-                'pathVars' => array('', 'collection_name'),
+                'path' => ['collection', '?'],
+                'pathVars' => ['', 'collection_name'],
                 'method' => 'getCollection',
                 'shortHelp' => 'Lists collection records.',
                 'longHelp' => 'include/api/help/collection_collection_name_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
-                ),
-            ),
-            'getCollectionCount' => array(
+                ],
+            ],
+            'getCollectionCount' => [
                 'reqType' => 'GET',
-                'path' => array('collection', '?', 'count'),
-                'pathVars' => array('', 'collection_name', ''),
+                'path' => ['collection', '?', 'count'],
+                'pathVars' => ['', 'collection_name', ''],
                 'method' => 'getCollectionCount',
                 'shortHelp' => 'Counts collection records.',
                 'longHelp' => 'include/api/help/collection_collection_name_count_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionError',
                     'SugarApiExceptionNotAuthorized',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /** {@inheritDoc} */
     protected function getCollectionDefinition(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('collection_name'));
+        $this->requireArgs($args, ['collection_name']);
 
         $definition = new ModuleCollectionDefinition($args['collection_name']);
 

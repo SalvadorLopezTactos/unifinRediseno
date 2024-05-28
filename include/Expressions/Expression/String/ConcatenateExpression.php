@@ -15,24 +15,27 @@
  * Appends two or more pieces of text together.<br/>
  * ex: <i>concat("Hello", " ", "World")</i> = "Hello World"
  */
-class ConcatenateExpression extends StringExpression {
-	/**
-	 * Returns itself when evaluating.
-	 */
-	function evaluate() {
-		// TODO: add caching of return values
-		$concat = "";
-		foreach ( $this->getParameters() as $expr ) {
-			$concat .= $expr->evaluate();
-		}
-		return $concat;
-	}
+class ConcatenateExpression extends StringExpression
+{
+    /**
+     * Returns itself when evaluating.
+     */
+    public function evaluate()
+    {
+        // TODO: add caching of return values
+        $concat = '';
+        foreach ($this->getParameters() as $expr) {
+            $concat .= $expr->evaluate();
+        }
+        return $concat;
+    }
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
 			var concat = "";
 			var params = this.getParameters() ;
 			for ( var i = 0; i < params.length; i++ ) {
@@ -40,20 +43,21 @@ class ConcatenateExpression extends StringExpression {
 			}
 			return concat;
 EOQ;
-	}
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return "concat";
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return 'concat';
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 }
-?>

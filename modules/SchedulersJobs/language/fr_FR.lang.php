@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'File d&#39;attente des tâches',
     'LBL_MODULE_NAME_SINGULAR' => 'File d&#39;attente des tâches',
     'LBL_MODULE_TITLE' => 'Liste d&#39;attente des tâches : Accueil',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Résolution annulée',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Résolution en cours d&#39;exécution',
     // Errors
-    'ERR_CALL' => "Ne peut pas appeler la fonction : %s",
-    'ERR_CURL' => "cURL non présent - exécution des jobs URL impossible",
-    'ERR_FAILED' => "Échec inattendu, veuillez vérifier les logs PHP et sugarcrm.log",
-    'ERR_PHP' => "%s [%d] : %s sur %s à la ligne %d",
-    'ERR_NOUSER' => "Pas d'ID d'utilisateur précisé pour le job",
-    'ERR_NOSUCHUSER' => "ID utilisateur %s non trouvé",
-    'ERR_JOBTYPE' => "Type de job inconnu : %s",
-    'ERR_TIMEOUT' => "Forcé l'échec sur timeout",
+    'ERR_CALL' => 'Ne peut pas appeler la fonction : %s',
+    'ERR_CURL' => 'cURL non présent - exécution des jobs URL impossible',
+    'ERR_FAILED' => 'Échec inattendu, veuillez vérifier les logs PHP et sugarcrm.log',
+    'ERR_PHP' => '%s [%d] : %s sur %s à la ligne %d',
+    'ERR_NOUSER' => 'Pas d&#39;ID d&#39;utilisateur précisé pour le job',
+    'ERR_NOSUCHUSER' => 'ID utilisateur %s non trouvé',
+    'ERR_JOBTYPE' => 'Type de job inconnu : %s',
+    'ERR_TIMEOUT' => 'Forcé l&#39;échec sur timeout',
     'ERR_JOB_FAILED_VERBOSE' => 'Job %1$s (%2$s) en échec au lancement du CRON',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Impossible de charger le bean avec l&#39;id : %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Cannot find handler for route %s',
@@ -73,7 +73,7 @@ $mod_strings = array(
     'LBL_CONFIG_SERVERS_TITLE' => 'Aide configuration de la file d&#39;attente des tâches',
     'LBL_CONFIG_SERVERS_TEXT' => "<p><b>Section de Configuration principale.</b></p> <ul><li>Exécuteur : <ul><li><i>Standard</i> - n'utiliser qu'un processus pour les travailleurs.</li>     <li><i>Parallèle</i> - utiliser quelques processus pour les travailleurs.</li>     </ul></li> <li>Adaptateur : <ul><li>de <i>File d'attente par défaut</i> - Ceci n'utilisera que la base de données de Sugar sans aucune file d'attente des messages.</li>     <li><i>Amazon SQS</i> - Amazon Simple Queue Service est un service de messagerie à file d'attente distribuée introduit par Amazon.com.     Il prend en charge la programmation, l'envoi de messages via les applications de service web comme moyen de communiquer sur Internet.</li>     <li> <i>RabbitMQ</i> - logiciel libre de messagerie (parfois appelé middleware orienté message) qui implémente le Advanced Message Queuing Protocol (AMQP).</li>     <li><i>Gearman</i> - est environnement pour applications open source pour répartir les tâches informatiques appropriées à plusieurs ordinateurs, de sorte que les tâches exigeantes puissent s'accomplir plus rapidement.</li>     <li><i>Immédiat</i> - comme la file d'attente par défaut, mais exécute la tâche immédiatement après l'ajout.</li>     </ul>     </li> </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Aide sur la configuration Amazon SQS',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Section de Configuration Amazon SQS.</b></p> <ul><li>ID de clé d'accès : <i>Entrez votre numéro id de clé d'accès pour Amazon SQS</i></li> <li> Touche d'accès au Secret : <i>Entrez votre clé d'accès secret pour Amazon SQS</i></li> <li>Région : <i>saisissez la région du serveur Amazon SQS</i></li> <li>Nom de la file d'attente : <i>saisir le nom de file d'attente du serveur Amazon SQS</i></li></ul>",
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Section de Configuration Amazon SQS.</b></p> <ul><li>ID de clé d&#39;accès : <i>Entrez votre numéro id de clé d&#39;accès pour Amazon SQS</i></li> <li> Touche d&#39;accès au Secret : <i>Entrez votre clé d&#39;accès secret pour Amazon SQS</i></li> <li>Région : <i>saisissez la région du serveur Amazon SQS</i></li> <li>Nom de la file d&#39;attente : <i>saisir le nom de file d&#39;attente du serveur Amazon SQS</i></li></ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'Aide à la configuration AMQP',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>Section configuration AMQP.</b></p>
 <ul>
@@ -94,4 +94,4 @@ $mod_strings = array(
     'LBL_REGION' => 'Région',
     'LBL_ACCESS_KEY_SECRET' => 'Clé d&#39;accès secrète',
     'LBL_QUEUE_NAME' => 'Nom de l&#39;adaptateur',
-);
+];

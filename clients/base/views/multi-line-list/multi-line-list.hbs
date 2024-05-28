@@ -18,7 +18,7 @@
                     <thead>
                     <tr>
                         {{#each ../../../leftColumns}}
-                            <th class="left-column"></th>
+                            <th class="left-column h-7 left-0 min-w-[2.375rem] sticky z-[12]"></th>
                         {{/each}}
                         {{#each fields}}
                             <th class="{{#if widthClass}} {{widthClass}}{{/if}}"
@@ -31,13 +31,14 @@
                                 {{/if}}
                             </th>
                         {{/each}}
+                        <th class="edit-th"></th>
                     </tr>
                     </thead>
                     <tbody>
                     {{#each ../../../collection.models}}
-                        <tr class="multi-line-row" data-id={{this.id}}>
+                        <tr class="multi-line-row single" data-id={{this.id}}>
                             {{#each ../../../../leftColumns}}
-                                <td class='left-column'>
+                                <td class='left-column border-t border-[--border-color] focus-within:z-[11] h-11 left-0 sticky'>
                                     {{field ../../../../../this model=../this template=../../../../../viewName}}
                                 </td>
                             {{/each}}
@@ -50,6 +51,26 @@
                                     {{/each}}
                                 </td>
                             {{/each}}
+
+                            {{#if hasEditAccess}}
+                                <td class="edit-td sticky right-0">
+                                    <div class="flex flex-row items-center absolute h-full top-0 right-0 pr-1.5">
+                                        <div class="btn-group detail flex flex-row items-center rounded-full shadow-lg bg-[--dashlet-background]">
+                                            <button type="button" class="btn btn-invisible" data-action="edit-list-row">
+                                                <i class="sicon sicon-edit"></i>
+                                            </button>
+                                        </div>
+                                        <div class="btn-group edit flex flex-row items-center rounded-full shadow-lg bg-[--dashlet-background] w-15 h-7.5">
+                                            <button type="button" class="btn btn-invisible pr-0" data-action="cancel-list-row">
+                                                <i class="sicon sicon-close"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-invisible pl-0" data-action="save-list-row">
+                                                <i class="sicon sicon-check-circle"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            {{/if}}
                         </tr>
                     {{/each}}
                     </tbody>
@@ -61,7 +82,7 @@
             {{/if}}
         {{else}}
             <div class="multi-line-list-loader-footer h-full w-full">
-                <div class="data-skeleton-loader"></div>
+                <div class="data-skeleton-loader h-full w-full"></div>
             </div>
         {{/if}}
     </div>

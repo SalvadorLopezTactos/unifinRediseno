@@ -12,20 +12,21 @@
 --}}
 <div class="ab-admin-action-container">
     <div class="ab-admin-action-header">
-        <a class="btn btn-invisible ab-admin-action-title" type="button" data-toggle="collapse" data-target="div[data-id={{_actionId}}]"
-            aria-expanded="false" aria-controls="{{_actionId}}">
+        <a class="btn btn-invisible ab-admin-action-title" type="button"
+           data-bs-toggle="collapse" data-bs-target="div[data-id='{{_actionId}}']"
+            aria-expanded="true" aria-controls="{{_actionId}}">
             <h1>{{str "LBL_ACTIONBUTTON_ACTION"}}</h1>
         </a>
         <div class="ab-admin-action-button-strip">
-            <a class="btn btn-default" data-action="add" rel="tooltip" data-placement="top" aria-label="{{str 'LBL_ACTIONBUTTON_ADD_ACTION'}}" data-original-title="{{str 'LBL_ACTIONBUTTON_ADD_ACTION'}}">
+            <a class="btn btn-default" data-action="add" rel="tooltip" data-bs-placement="top" aria-label="{{str 'LBL_ACTIONBUTTON_ADD_ACTION'}}" data-original-title="{{str 'LBL_ACTIONBUTTON_ADD_ACTION'}}">
                 <i class="sicon sicon-plus"></i>
             </a>
-            <a class="btn btn-default" data-action="remove" rel="tooltip" data-placement="top" aria-label="{{str 'LBL_ACTIONBUTTON_REMOVE_ACTION'}}" data-original-title="{{str 'LBL_ACTIONBUTTON_REMOVE_ACTION'}}">
+            <a class="btn btn-default" data-action="remove" rel="tooltip" data-bs-placement="top" aria-label="{{str 'LBL_ACTIONBUTTON_REMOVE_ACTION'}}" data-original-title="{{str 'LBL_ACTIONBUTTON_REMOVE_ACTION'}}">
                 <i class="sicon sicon-minus"></i>
             </a>
         </div>
     </div>
-    <div class="in collapse ab-admin-action" data-id="{{_actionId}}">
+    <div class="in bs-collapse collapse ab-admin-action show" data-id="{{_actionId}}">
         <div class="ab-admin-action-selector record">
             <div class="span6 record-cell edit" data-type="text">
                 <div class="labels-on-side">

@@ -12,13 +12,16 @@
 --}}
 <div class="row-fluid ml-5">
     <h3>{{driveTypeLabel}} {{str 'LBL_DRIVE_ROOT_PATH' module}}</h3>
+    {{#eq driveType 'sharepoint'}}
+    <h5>{{str 'LBL_SELECT_PATH_HELPER' module}}</h5>
+    {{/eq}}
 </div>
 <div class="row-fluid ml-5">
-    <div class="span3">
-        <input type="text" class="text-lg w-full rootPath" value="{{rootPathDisplay}}"/>
+    <div class="span3 mr-1.5">
+        <input type="text" {{#eq driveType 'sharepoint'}} readonly {{/eq}} class="text-lg w-full rootPath" value="{{rootPathDisplay}}"/>
     </div>
-    <div class="span3">
-        <button class="btn selectRootPath">{{str 'LBL_SELECT_ROOT_PATH' module}}</button>
-        <button class="btn removeRootPath">{{str 'LBL_REMOVE_ROOT_PATH' module}}</button>
+    <div class="span6">
+        <button class="btn selectRootPath ml-1.5">{{str 'LBL_SELECT_ROOT_PATH' module}}</button>
+        <button class="btn removeRootPath ml-1.5">{{str 'LBL_REMOVE_ROOT_PATH' module}}</button>
     </div>
 </div>

@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'العقود',
-	'LBL_MODULE_NAME_SINGULAR' => 'العقد',
-	'LBL_MODULE_TITLE' => 'العقود: الصفحة الرئيسية',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'العقود',
+    'LBL_MODULE_NAME_SINGULAR' => 'العقد',
+    'LBL_MODULE_TITLE' => 'العقود: الصفحة الرئيسية',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'إنشاء عقد',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'معرّف العملة:',
     'LBL_CURRENCY' => 'العملة:',
     'LBL_CURRENCY_RATE' => 'سعر العملة',
-    'LBL_ASSIGNED_TO_NAME'=>'تعيين إلى:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'تعيين إلى:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'قائمة العقود',	
+    'LBL_LIST_FORM_TITLE' => 'قائمة العقود',
     'LBL_LIST_CONTRACT_NAME' => 'اسم العقد',
     'LBL_LIST_ACCOUNT_NAME' => 'اسم الحساب',
     'LBL_LIST_START_DATE' => 'البدء',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'الاسم',
     'LBL_LIST_CONTRACT_VALUE' => 'القيمة',
 
-    'LBL_TYPE'=>'النوع',
+    'LBL_TYPE' => 'النوع',
     'LBL_TYPE_NAME' => 'اسم النوع',
-    'LBL_CONTRACT_TYPE'=>'النوع:',
+    'LBL_CONTRACT_TYPE' => 'النوع:',
 
     'LBL_CREATED_USER' => 'المستخدم الذي تم إنشاؤه',
     'LBL_MODIFIED_USER' => 'المستخدم الذي تم تعديله',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم العقود',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'لوحة معلومات سجل العقود',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني للعقد',
+];

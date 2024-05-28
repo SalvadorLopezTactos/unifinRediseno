@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kalendár',
     'LBL_MODULE_NAME_SINGULAR' => 'Kalendár',
     'LBL_MODULE_TITLE' => 'Kalendár',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Nastavenia',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Zobraziť časové úseky v zobrazení dňa a týždňa:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Čas začiatku:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Čas konca:',
+    'LBL_SETTINGS_TIME_STARTS' => 'Čas začiatku:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Čas konca:',
     'LBL_SETTINGS_CALLS_SHOW' => 'Zobraziť volania:',
     'LBL_SETTINGS_TASKS_SHOW' => 'Zobraziť úlohy:',
 
@@ -123,7 +123,7 @@ $mod_strings = array (
     'LBL_REPEAT_DOW' => 'V deň:',
     'LBL_REPEAT_UNTIL' => 'Opakovať až kým',
     'LBL_REPEAT_COUNT' => 'Počet opakovaní',
-    'LBL_RECURRING_LIMIT_ERROR' => 'Tento opakujúci sa $moduleTitle nemožno naplánovať, pretože prekračuje maximálny povolený limit opakovaní $.',
+    'LBL_RECURRING_LIMIT_ERROR' => 'Tento opakujúci sa $moduleTitle sa nedá naplánovať, pretože prekročil maximálne povolené opakovanie $limit.',
 
     'LBL_EDIT_ALL_RECURRENCES' => 'Upraviť všetky opakovania',
     'LBL_REMOVE_ALL_RECURRENCES' => 'Odstrániť všetky opakovania',
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Vytvoriť kalendár',
     'LNK_CALENDAR_LIST' => 'Zobraziť kalendáre',
     'LNK_CALENDAR_LEGACY' => 'Staršia verzia kalendára',
-    'LBL_IMPORT_CALENDAR'=> 'Importovať kalendár',
+    'LBL_IMPORT_CALENDAR' => 'Importovať kalendár',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Časová pečiatka udalosti',
     'LBL_INSERTFIELD' => 'Vložiť pole',
     'LBL_EVENT_START_ERROR' => 'Vyberte začiatok',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Vyberte kalendár',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Nepodarilo sa uložiť kalendáre.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Ne',
             'Po',
             'Ut',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Št',
             'Pi',
             'So',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Nedeľa',
             'Pondelok',
             'Utorok',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Štvrtok',
             'Piatok',
             'Sobota',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Jan',
             'Feb',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Okt',
             'Nov',
             'Dec',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Január',
             'Február',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Október',
             'November',
             'December',
-        ),
-);
+        ],
+];

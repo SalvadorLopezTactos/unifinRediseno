@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Tämä allekirjoitus vaatii nimen.',
     'LBL_DEFAULT_SIGNATURE' => 'Oletus',
     'LBL_MODULE_NAME' => 'Sähköpostin allekirjoitukset',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'Käytä allekirjoitusta?',
     'LBL_SIGNATURE_PREPEND' => 'Allekirjoitus ennen vastausta?',
     'LBL_SIGNATURES' => 'Allekirjoitukset',
-);
+];

@@ -9,60 +9,60 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ArchiveRuns']['base']['view']['subpanel-list'] = array(
+$viewdefs['ArchiveRuns']['base']['view']['subpanel-list'] = [
     'template' => 'flex-list',
     'sticky_resizable_columns' => true,
     'favorite' => false,
-    'panels' => array(
-        array(
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'label' => 'LBL_DATE_OF_ARCHIVE_FIELD',
                     'enabled' => true,
                     'default' => true,
                     'name' => 'date_of_archive',
-                ),
-                array(
+                ],
+                [
                     'label' => 'LBL_PROCESS_TYPE_FIELD',
                     'enabled' => true,
                     'default' => true,
                     'name' => 'process_type',
-                ),
-                array(
+                ],
+                [
                     'label' => 'LBL_MODULE_FIELD',
                     'enabled' => true,
                     'default' => true,
                     'name' => 'source_module',
-                ),
-                array(
+                ],
+                [
                     'label' => 'LBL_FILTER_DEF_FIELD',
                     'enabled' => true,
                     'default' => true,
                     'name' => 'filter_def',
                     'type' => 'filter-def',
                     'sortable' => false,
-                ),
-                array(
-                     'label' => 'LBL_NUM_PROCESSED_FIELD',
-                     'enabled' => true,
-                     'default' => true,
-                     'name' => 'num_processed',
-                ),
-                array(
+                ],
+                [
+                    'label' => 'LBL_NUM_PROCESSED_FIELD',
+                    'enabled' => true,
+                    'default' => true,
+                    'name' => 'num_processed',
+                ],
+                [
                     'label' => 'LBL_SOURCE_FIELD',
                     'enabled' => true,
                     'default' => true,
                     'name' => 'created_by',
-                ),
-            ),
-        ),
-    ),
-    'rowactions' => array(
-        'actions' => array(
-            array(
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+    'rowactions' => [
+        'actions' => [
+            [
+            ],
+        ],
+    ],
+];

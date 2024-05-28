@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -56,7 +58,7 @@ final class Email implements Field
      *
      * {@inheritDoc}
      */
-    public function erase(SugarBean $bean) : void
+    public function erase(SugarBean $bean): void
     {
         $emailBean = \BeanFactory::getBean('EmailAddresses', $this->id);
 

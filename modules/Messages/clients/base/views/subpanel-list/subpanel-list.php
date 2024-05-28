@@ -10,13 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['Messages']['base']['view']['subpanel-list'] = [
-    'panels' =>
-    [
+    'panels' => [
         [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' =>
-            [
+            'fields' => [
                 [
                     'name' => 'name',
                     'label' => 'LBL_MESSAGE_SUBJECT',

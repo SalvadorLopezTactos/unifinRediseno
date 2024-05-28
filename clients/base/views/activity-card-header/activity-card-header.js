@@ -46,8 +46,29 @@
 
         this.setUsersPanel();
         this.setHeaderPanel();
+        this.addNumber();
 
         this.isRtl = app.lang.direction === 'rtl';
+    },
+
+    /**
+     * Add number to name field
+     */
+    addNumber: function() {
+        const numberField = this.moduleSingular.toLowerCase().replace(/\s+/g, '') + '_number';
+
+        if (!this.activity) {
+            return;
+        }
+
+        const numberValue = this.activity.get(numberField);
+
+        if (!numberValue) {
+            return;
+        }
+
+        const nameValue = numberValue + ' ' + this.activity.get('name');
+        this.activity.set('name', nameValue, {silent: true});
     },
 
     /**
@@ -64,9 +85,17 @@
      * @return {Object}
      */
     getUsersPanel: function() {
-        if (!this.usersPanel) {
-            this.usersPanel = this.getMetaPanel('panel_users');
-        }
+        const userPanelsMap = {
+            panel_users: 'usersPanel',
+            panel_users_before: 'usersPanelBefore',
+            panel_users_after: 'usersPanelAfter',
+        };
+
+        _.each(userPanelsMap, (name, key) => {
+            if (!this[name]) {
+                this[name] = this.getMetaPanel(key) || {fields: []};
+            }
+        });
 
         return this.usersPanel;
     },

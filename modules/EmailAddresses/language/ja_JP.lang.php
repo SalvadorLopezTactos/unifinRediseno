@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_EMAIL_ADDRESS_ID' => 'ID',
     'LBL_EMAIL_ADDRESS' => 'Eメールアドレス',
     'LBL_EMAIL_ADDRESS_CAPS' => 'Eメールアドレス(大文字)',
@@ -31,4 +30,4 @@ $mod_strings = array (
     'LBL_CONFIRMATION_REQUESTED_ON' => '確認リクエストアクションが行われました',
     'LBL_CONFIRMATION_TITLE' => 'ありがとうございます',
     'LBL_CONFIRMATION_MESSAGE' => 'サブスクリプションが確認されました。当社の一覧に追加されましたので、近々ご連絡します。',
-);
+];

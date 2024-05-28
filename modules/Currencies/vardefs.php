@@ -9,20 +9,20 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Currency'] = array(
+$dictionary['Currency'] = [
     'table' => 'currencies',
     'favorites' => false,
     'comment' => 'Currencies allow Sugar to store and display monetary values in various denominations',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'vname' => 'LBL_NAME',
             'type' => 'id',
             'required' => true,
             'reportable' => false,
-            'comment' => 'Unique identifer'
-        ),
-        'name' => array(
+            'comment' => 'Unique identifer',
+        ],
+        'name' => [
             'name' => 'name',
             'vname' => 'LBL_LIST_NAME',
             'type' => 'name',
@@ -31,8 +31,8 @@ $dictionary['Currency'] = array(
             'required' => true,
             'comment' => 'Name of the currency',
             'importable' => 'required',
-        ),
-        'symbol' => array(
+        ],
+        'symbol' => [
             'name' => 'symbol',
             'vname' => 'LBL_LIST_SYMBOL',
             'type' => 'varchar',
@@ -40,15 +40,15 @@ $dictionary['Currency'] = array(
             'required' => true,
             'comment' => 'Symbol representing the currency',
             'importable' => 'required',
-        ),
-        'iso4217' => array(
+        ],
+        'iso4217' => [
             'name' => 'iso4217',
             'vname' => 'LBL_LIST_ISO4217',
             'type' => 'varchar',
             'len' => '3',
             'comment' => '3-letter identifier specified by ISO 4217 (ex: USD)',
-        ),
-        'conversion_rate' => array(
+        ],
+        'conversion_rate' => [
             'name' => 'conversion_rate',
             'vname' => 'LBL_LIST_RATE',
             'type' => 'decimal',
@@ -57,9 +57,9 @@ $dictionary['Currency'] = array(
             'required' => true,
             'comment' => 'Conversion rate factor (relative to stored value)',
             'importable' => 'required',
-            'validation' => array('type' => 'range', 'min' => 0.000001),
-        ),
-        'status' => array(
+            'validation' => ['type' => 'range', 'min' => 0.000001],
+        ],
+        'status' => [
             'name' => 'status',
             'vname' => 'LBL_STATUS',
             'type' => 'enum',
@@ -68,37 +68,37 @@ $dictionary['Currency'] = array(
             'len' => 100,
             'comment' => 'Currency status',
             'importable' => 'required',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'vname' => 'LBL_DELETED',
             'type' => 'bool',
             'required' => false,
             'reportable' => false,
-            'comment' => 'Record deletion indicator'
-        ),
-        'date_entered' => array(
+            'comment' => 'Record deletion indicator',
+        ],
+        'date_entered' => [
             'name' => 'date_entered',
             'vname' => 'LBL_DATE_ENTERED',
             'type' => 'datetime',
             'required' => true,
-            'comment' => 'Date record created'
-        ),
-        'date_modified' => array(
+            'comment' => 'Date record created',
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'vname' => 'LBL_DATE_MODIFIED',
             'type' => 'datetime',
             'required' => true,
-            'comment' => 'Date record last modified'
-        ),
-        'created_by' => array(
+            'comment' => 'Date record last modified',
+        ],
+        'created_by' => [
             'name' => 'created_by',
             'reportable' => false,
             'vname' => 'LBL_CREATED_BY',
             'type' => 'id',
             'required' => true,
-            'comment' => 'User ID who created record'
-        ),
+            'comment' => 'User ID who created record',
+        ],
         'sync_key' => [
             'is_sync_key' => true,
             'name' => 'sync_key',
@@ -136,15 +136,15 @@ $dictionary['Currency'] = array(
                 'portaleditview' => false,
             ],
         ],
-    ),
-    'acls' => array('SugarACLAdminOnly' => array('allowUserRead' => true)),
-    'indices' => array(
-        array('name' => 'currenciespk', 'type' => 'primary', 'fields' => array('id')),
-        array('name' => 'idx_currency_name', 'type' => 'index', 'fields' => array('name', 'deleted')),
+    ],
+    'acls' => ['SugarACLAdminOnly' => ['allowUserRead' => true]],
+    'indices' => [
+        ['name' => 'currenciespk', 'type' => 'primary', 'fields' => ['id']],
+        ['name' => 'idx_currency_name', 'type' => 'index', 'fields' => ['name', 'deleted']],
         [
             'name' => 'idx_currencies_skey',
             'type' => 'unique',
             'fields' => ['sync_key'],
         ],
-    )
-);
+    ],
+];

@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => '客戶回饋',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => '商機',
     'LBL_QUOTES_SUBPANEL_TITLE' => '報價',
-    'LBL_NOTES'=>'附註',
+    'LBL_NOTES' => '附註',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => '外部使用者記錄儀表板',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '外部使用者時間軸',
 ];

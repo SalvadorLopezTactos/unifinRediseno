@@ -9,94 +9,93 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Bugs']['DetailView'] = array(
-'templateMeta' => array('form' => array('buttons'=>array('EDIT', 'DUPLICATE', 'DELETE', 'FIND_DUPLICATES',)),
-                        'maxColumns' => '2',
-                        'widths' => array(
-                                        array('label' => '10', 'field' => '30'),
-                                        array('label' => '10', 'field' => '30')
-                                        ),
-                        ),
+$viewdefs['Bugs']['DetailView'] = [
+    'templateMeta' => ['form' => ['buttons' => ['EDIT', 'DUPLICATE', 'DELETE', 'FIND_DUPLICATES',]],
+        'maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
 
-'panels' =>array (
-  'lbl_bug_information'=>array(
-	  array (
-	    'bug_number',
-	    'priority',
-	  ),
+    'panels' => [
+        'lbl_bug_information' => [
+            [
+                'bug_number',
+                'priority',
+            ],
 
-	  array (
-	    array (
-	      'name' => 'name',
-	      'label' => 'LBL_SUBJECT',
-	    ),
-	  ),
+            [
+                [
+                    'name' => 'name',
+                    'label' => 'LBL_SUBJECT',
+                ],
+            ],
 
-	  array (
-          'status',
-          'follow_up_datetime',
-	  ),
-        array(
-            'type',
-            'source',
-        ),
+            [
+                'status',
+                'follow_up_datetime',
+            ],
+            [
+                'type',
+                'source',
+            ],
 
-	  array (
-	    'product_category',
-	    'resolution',
-        ),
+            [
+                'product_category',
+                'resolution',
+            ],
 
-	  array (
-	    array (
-	      'name' => 'found_in_release',
-	      'label' => 'LBL_FOUND_IN_RELEASE',
-	    ),
-	    'fixed_in_release',
-	  ),
+            [
+                [
+                    'name' => 'found_in_release',
+                    'label' => 'LBL_FOUND_IN_RELEASE',
+                ],
+                'fixed_in_release',
+            ],
 
-	  array (
-	    'description',
-	  ),
+            [
+                'description',
+            ],
 
-	  array (
-	    'work_log',
-	  ),
+            [
+                'work_log',
+            ],
 
-	  array (
-	     array('name'=>'portal_viewable',
-			   'label' => 'LBL_SHOW_IN_PORTAL',
-		       'hideIf' => 'empty($PORTAL_ENABLED)',
-	         ),
-	  ),
-  ),
+            [
+                ['name' => 'portal_viewable',
+                    'label' => 'LBL_SHOW_IN_PORTAL',
+                    'hideIf' => 'empty($PORTAL_ENABLED)',
+                ],
+            ],
+        ],
 
-      'LBL_PANEL_ASSIGNMENT' =>
-      array (
+        'LBL_PANEL_ASSIGNMENT' => [
 
-        array (
+            [
 
-          array (
-            'name' => 'assigned_user_name',
-            'label' => 'LBL_ASSIGNED_TO_NAME',
-          ),
+                [
+                    'name' => 'assigned_user_name',
+                    'label' => 'LBL_ASSIGNED_TO_NAME',
+                ],
 
-          array (
-            'name' => 'date_modified',
-            'customCode' => '{$fields.date_modified.value} {$APP.LBL_BY} {$fields.modified_by_name.value}',
-            'label' => 'LBL_DATE_MODIFIED',
-          ),
-        ),
+                [
+                    'name' => 'date_modified',
+                    'customCode' => '{$fields.date_modified.value} {$APP.LBL_BY} {$fields.modified_by_name.value}',
+                    'label' => 'LBL_DATE_MODIFIED',
+                ],
+            ],
 
-        array (
-          'team_name',
+            [
+                'team_name',
 
-          array (
-            'name' => 'date_entered',
-            'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value}',
-            'label' => 'LBL_DATE_ENTERED',
-          ),
+                [
+                    'name' => 'date_entered',
+                    'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value}',
+                    'label' => 'LBL_DATE_ENTERED',
+                ],
 
-        ),
-      ),
-)
-);
+            ],
+        ],
+    ],
+];

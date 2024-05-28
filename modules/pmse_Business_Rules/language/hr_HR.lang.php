@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Poslovna pravila procesa',
-  'LBL_MODULE_TITLE' => 'Poslovna pravila procesa',
-  'LBL_MODULE_NAME_SINGULAR' => 'Poslovno pravilo procesa',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Poslovna pravila procesa',
+    'LBL_MODULE_TITLE' => 'Poslovna pravila procesa',
+    'LBL_MODULE_NAME_SINGULAR' => 'Poslovno pravilo procesa',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za poslovna pravila procesa',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za poslovna pravila procesa',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o poslovnim pravilima procesa',
-  'LBL_RST_UID' => 'ID poslovnog pravila',
-  'LBL_RST_TYPE' => 'Vrsta poslovnog pravila',
-  'LBL_RST_DEFINITION' => 'Definicija poslovnog pravila',
-  'LBL_RST_EDITABLE' => 'Izmjenjivo poslovno pravilo',
-  'LBL_RST_SOURCE' => 'Izvor poslovnog pravila',
-  'LBL_RST_SOURCE_DEFINITION' => 'Definicija izvora poslovnog pravila',
-  'LBL_RST_MODULE' => 'Modul meta',
-  'LBL_RST_FILENAME' => 'Naziv datoteke poslovnog pravila',
-  'LBL_RST_CREATE_DATE' => 'Datum stvaranja poslovnog pravila',
-  'LBL_RST_UPDATE_DATE' => 'Datum ažuriranja poslovnog pravila',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o poslovnim pravilima procesa',
+    'LBL_RST_UID' => 'ID poslovnog pravila',
+    'LBL_RST_TYPE' => 'Vrsta poslovnog pravila',
+    'LBL_RST_DEFINITION' => 'Definicija poslovnog pravila',
+    'LBL_RST_EDITABLE' => 'Izmjenjivo poslovno pravilo',
+    'LBL_RST_SOURCE' => 'Izvor poslovnog pravila',
+    'LBL_RST_SOURCE_DEFINITION' => 'Definicija izvora poslovnog pravila',
+    'LBL_RST_MODULE' => 'Modul meta',
+    'LBL_RST_FILENAME' => 'Naziv datoteke poslovnog pravila',
+    'LBL_RST_CREATE_DATE' => 'Datum stvaranja poslovnog pravila',
+    'LBL_RST_UPDATE_DATE' => 'Datum ažuriranja poslovnog pravila',
 
     'LNK_LIST' => 'Prikaži poslovna pravila procesa',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Stvori poslovno pravilo procesa',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Poslovno pravilo nije ispravno jer upotrebljava neispravna polja ili polja koja nisu pronađena u vašoj instanci SugarCRM. Popravite pogreške u nastavku i spremite poslovno pravilo.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Ovo poslovno pravilo trenutačno se upotrebljava u definiciji procesa. Želite li još uvijek urediti ovo poslovno pravilo?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Ne možete izbrisati ovo poslovno pravilo jer se trenutačno upotrebljava u definiciji procesa.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Ne možete izbrisati ovo poslovno pravilo jer se trenutačno upotrebljava u definiciji procesa.',
+];

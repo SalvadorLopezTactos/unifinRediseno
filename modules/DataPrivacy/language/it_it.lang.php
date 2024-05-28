@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Privacy dei dati',
     'LBL_MODULE_NAME_SINGULAR' => 'Privacy dei dati',
     'LBL_NUMBER' => 'Numero',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Nessun campo o record è stato contrassegnato per l&#39;eliminazione.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Dashboard dei record della privacy dei dati',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Privacy dei dati Focus Drawer',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Sequenza temporale privacy dei dati',
 
     // list view
     'LBL_HELP_RECORDS' => 'Il modulo Privacy dei dati tiene traccia delle attività relative alla privacy, incluse le richieste di consenso e di oggetto, per supportare le procedure di privacy dell&#39;organizzazione. Creare record di privacy dei dati relativi al record di un individuo (ad esempio, un contatto) per tenere traccia del consenso o intraprendere un&#39;azione su una richiesta di privacy.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Il modulo Privacy dei dati tiene traccia delle attività relative alla privacy, incluse le richieste di consenso e di oggetto, per supportare le procedure di privacy dell&#39;organizzazione. Creare record di privacy dei dati relativi al record di un individuo (ad esempio, un contatto) per tenere traccia del consenso o intraprendere un&#39;azione su una richiesta di privacy. Una volta completata l&#39;azione richiesta, gli utenti che dispongono del ruolo di Responsabile della privacy dei dati possono fare clic su "Completa" o "Rifiuta" per aggiornare lo stato.
 
 Per le richieste di eliminazione, selezionare "Contrassegna per l&#39;eliminazione" per ciascun dei record dell&#39;individuo elencati nei sottopannelli seguenti. Una volta selezionati tutti i campi desiderati, facendo clic su "Elimina e Completa" si elimineranno in maniera permanente i valori dei campi e il record della privacy dei dati verrà contrassegnato come completato.',
-);
+];

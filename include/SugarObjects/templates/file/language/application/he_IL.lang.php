@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'שיווק',
-    'Knowledge Base' => 'מאגר ידע',
-    'Sales' => 'מכירות',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'שיווק מקבילי',
-    'Product Brochures' => 'עלון מוצרים',
-    'FAQ' => 'שאלות נפוצות',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'שיווק',
+        'Knowledge Base' => 'מאגר ידע',
+        'Sales' => 'מכירות',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'פעיל',
-    'Draft' => 'טיוטה',
-    'FAQ' => 'שאלות נפוצות',
-    'Expired' => 'פג תוקף',
-    'Under Review' => 'בסקירה',
-    'Pending' => 'תלויות ועומדות',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'תיעוד נלווה לשיווק',
+        'Product Brochures' => 'עלוני מוצרים',
+        'FAQ' => 'FAQ',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'פעיל',
+        'Draft' => 'טיוטה',
+        'FAQ' => 'FAQ',
+        'Expired' => 'פג תוקף',
+        'Under Review' => 'בבדיקה',
+        'Pending' => 'בהמתנה',
+    ],
+];

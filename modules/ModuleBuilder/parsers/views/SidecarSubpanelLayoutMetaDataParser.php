@@ -13,8 +13,7 @@
 
 class SidecarSubpanelLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
 {
-
-    public $invisibleFields = array();
+    public $invisibleFields = [];
 
     /*
      * Constructor, builds the parent ListLayoutMetaDataParser then adds the
@@ -27,10 +26,10 @@ class SidecarSubpanelLayoutMetaDataParser extends SidecarListLayoutMetaDataParse
      */
     public function __construct($subpanelName, $moduleName, $packageName = '', $client = 'base')
     {
-        $GLOBALS['log']->debug(get_class($this) . ": __construct()");
+        $GLOBALS['log']->debug(get_class($this) . ': __construct()');
 
         if (empty($client)) {
-            throw new \InvalidArgumentException("Client cannot be blank in SidecarSubpanelLayoutMetaDataParser");
+            throw new \InvalidArgumentException('Client cannot be blank in SidecarSubpanelLayoutMetaDataParser');
         }
 
         if (empty($packageName)) {
@@ -42,7 +41,7 @@ class SidecarSubpanelLayoutMetaDataParser extends SidecarListLayoutMetaDataParse
         $this->_viewdefs = $this->implementation->getViewdefs();
         $this->_paneldefs = $this->implementation->getPanelDefs();
         $this->_fielddefs = $this->implementation->getFieldDefs();
-        $this->columns = array('LBL_DEFAULT' => 'getDefaultFields', 'LBL_HIDDEN' => 'getAvailableFields');
+        $this->columns = ['LBL_DEFAULT' => 'getDefaultFields', 'LBL_HIDDEN' => 'getAvailableFields'];
     }
 
     /**
@@ -52,7 +51,7 @@ class SidecarSubpanelLayoutMetaDataParser extends SidecarListLayoutMetaDataParse
     protected function _clearCaches()
     {
         // Leave this empty. The metadata cache clear that needs to be done for
-        // this has to be done late in the process or at least well after the 
+        // this has to be done late in the process or at least well after the
         // extensions for a subpanel are built.
     }
 
@@ -88,7 +87,7 @@ class SidecarSubpanelLayoutMetaDataParser extends SidecarListLayoutMetaDataParse
             if (!empty($panels) && is_array($panels)) {
                 foreach ($panels as $panelIndex => $def) {
                     if (isset($def['fields']) && is_array($def['fields'])) {
-                        $newFields = array();
+                        $newFields = [];
                         foreach ($def['fields'] as $fieldIndex => $field) {
                             if (!empty($field['name']) && $field['name'] == $fieldName) {
                                 $return = true;

@@ -9,16 +9,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Forecasts']['base']['layout']['config-drawer-content'] = array(
-    'components' => array(
-        array(
+$viewdefs['Forecasts']['base']['layout']['config-drawer-content'] = [
+    'components' => [
+        [
             'view' => 'config-timeperiods',
-        ),
-        array(
+        ],
+        [
             'view' => 'config-ranges',
-        ),
-        array(
+        ],
+        [
             'view' => 'config-scenarios',
-        ),
-    ),
-);
+        ],
+    ],
+];

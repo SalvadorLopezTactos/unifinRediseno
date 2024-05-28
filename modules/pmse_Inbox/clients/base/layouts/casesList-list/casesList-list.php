@@ -11,13 +11,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['pmse_Inbox']['base']['layout']['casesList-list'] = array(
-    'components' => array(
-        array(
+$viewdefs['pmse_Inbox']['base']['layout']['casesList-list'] = [
+    'components' => [
+        [
             'view' => 'casesList-list',
-        ),
-        array(
+        ],
+        [
             'view' => 'list-bottom',
-        ),
-    ),
-);
+        ],
+    ],
+];

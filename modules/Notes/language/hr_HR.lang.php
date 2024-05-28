@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Nadzorna ploča za popis bilješki',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o bilješkama',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za bilješke',
     'LBL_EXTERNAL_USER' => 'Vanjski korisnik',
     'LBL_EXTERNAL_USER_NAME' => 'Vanjski korisnik',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija bilješke',
 
     'LBL_RELATED_CONTACT' => 'Povezani kontakt',
     'ERR_DELETE_RECORD' => 'Morate navesti broj zapisa da biste izbrisali račun.',
@@ -126,4 +127,4 @@ $mod_strings = array(
  - Polja označena „Obavezno” moraju se ispuniti prije spremanja.
  - Kliknite na „Prikaži više” da biste otkrili dodatna polja ako je potrebno.
 2. Kliknite na „Spremi” da biste završili novi zapis i vratili se na prethodnu stranicu.',
-);
+];

@@ -102,14 +102,14 @@
  *     }
  * }
  *
- * const ErrorHandler = _.extend(require('core/error'), Handlers);
+ * const ErrorHandler = _.extend(require('./error'), Handlers);
  *```
  *
  * @module Core/Error
  */
-const Alert = require('view/alert');
-const Utils = require('utils/utils');
-const Language = require('core/language');
+const Alert = require('../view/alert');
+const Utils = require('../utils/utils');
+const Language = require('./language');
 
 /**
  * Calls the given custom handler callback, or falls back to

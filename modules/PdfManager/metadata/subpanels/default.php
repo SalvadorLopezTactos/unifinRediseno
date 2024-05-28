@@ -11,33 +11,33 @@
  */
 
 
-$subpanel_layout = array(
-    'top_buttons' => array(
-        array('widget_class' => 'SubPanelTopCreateButton'),
-        array('widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'PdfManager'),
-    ),
+$subpanel_layout = [
+    'top_buttons' => [
+        ['widget_class' => 'SubPanelTopCreateButton'],
+        ['widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'PdfManager'],
+    ],
 
     'where' => '',
 
-    'list_fields' => array(
-        'name'=>array(
-             'vname' => 'LBL_NAME',
+    'list_fields' => [
+        'name' => [
+            'vname' => 'LBL_NAME',
             'widget_class' => 'SubPanelDetailViewLink',
-             'width' => '45%',
-        ),
-        'date_modified'=>array(
-             'vname' => 'LBL_DATE_MODIFIED',
-             'width' => '45%',
-        ),
-        'edit_button'=>array(
+            'width' => '45%',
+        ],
+        'date_modified' => [
+            'vname' => 'LBL_DATE_MODIFIED',
+            'width' => '45%',
+        ],
+        'edit_button' => [
             'widget_class' => 'SubPanelEditButton',
-             'module' => 'PdfManager',
-             'width' => '4%',
-        ),
-        'remove_button'=>array(
+            'module' => 'PdfManager',
+            'width' => '4%',
+        ],
+        'remove_button' => [
             'widget_class' => 'SubPanelRemoveButton',
-             'module' => 'PdfManager',
+            'module' => 'PdfManager',
             'width' => '5%',
-        ),
-    ),
-);
+        ],
+    ],
+];

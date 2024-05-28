@@ -10,31 +10,31 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['pmse_Inbox']['base']['view']['recordlist'] = array(
+$viewdefs['pmse_Inbox']['base']['view']['recordlist'] = [
     'favorite' => false,
     'following' => false,
-    'selection' => array(
-    ),
-    'rowactions' => array(
-        'actions' => array(
-            array(
+    'selection' => [
+    ],
+    'rowactions' => [
+        'actions' => [
+            [
                 'type' => 'rowaction',
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
                 'icon' => 'sicon-preview',
                 'acl_action' => 'view',
-            ),
-            array(
+            ],
+            [
                 'type' => 'rowaction',
                 'name' => 'edit_button',
                 'label' => 'LBL_PMSE_SHOW_PROCESS',
                 'event' => 'list:process:fire',
                 'acl_action' => 'view',
-            ),
-        ),
-    ),
-    'last_state' => array(
+            ],
+        ],
+    ],
+    'last_state' => [
         'id' => 'record-list',
-    ),
-);
+    ],
+];

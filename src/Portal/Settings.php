@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,6 +14,7 @@
 
 
 namespace Sugarcrm\Sugarcrm\Portal;
+
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 use Administration;
 
@@ -53,7 +56,7 @@ class Settings
     /**
      * @return array
      */
-    protected function getSubscriptions() : array
+    protected function getSubscriptions(): array
     {
         return SubscriptionManager::instance()->getSystemSubscriptions();
     }
@@ -61,7 +64,7 @@ class Settings
     /**
      * @return bool
      */
-    public function isServe() : bool
+    public function isServe(): bool
     {
         $sub = $this->getSubscriptions();
         return (!empty($sub['SUGAR_SERVE']) ? true : false);
@@ -70,7 +73,7 @@ class Settings
     /**
      * @return bool
      */
-    public function allowCasesForContactsWithoutAccount() : bool
+    public function allowCasesForContactsWithoutAccount(): bool
     {
         return false;
     }

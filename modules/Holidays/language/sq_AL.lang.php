@@ -32,7 +32,7 @@ $mod_strings = [
 
     'LBL_RESOURCE' => 'Burimi',
     'LBL_PERSON_TYPE' => 'Lloji i personit',
-    'LBL_RELATED_MODULE'=> 'Moduli lidhës',
+    'LBL_RELATED_MODULE' => 'Moduli lidhës',
 
     // For HolidaysQuickCreate.php
     'LBL_SELECT_RESOURCE_TYPE' => 'Selekto llojin e burimit',

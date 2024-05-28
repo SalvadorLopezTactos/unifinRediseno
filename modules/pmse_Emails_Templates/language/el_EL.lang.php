@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Σώμα',
     'LBL_BASE_MODULE' => 'Ενότητα Στόχου',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Αποτυχία δημιουργίας Ορισμού Προτύπου Email από το αρχείο',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Αυτό το πρότυπο ηλεκτρονικού ταχυδρομείου χρησιμοποιείται αυτήν την περίοδο σε Προσδιορισμό διαδικασίας. Είστε βέβαιος ότι θέλετε να τροποποιήσετε αυτό το πρότυπο ηλεκτρονικού ταχυδρομείου;',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Δεν μπορείτε να διαγράψετε αυτό το πρότυπο ηλεκτρονικού ταχυδρομείου, επειδή χρησιμοποιείται επί του παρόντος από ορισμό διαδικασίας.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Δεν μπορείτε να διαγράψετε αυτό το πρότυπο ηλεκτρονικού ταχυδρομείου, επειδή χρησιμοποιείται επί του παρόντος από ορισμό διαδικασίας.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Επιλογέας πεδίων',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Επιλογή',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Τύπος τιμής πεδίου',
-);
+];

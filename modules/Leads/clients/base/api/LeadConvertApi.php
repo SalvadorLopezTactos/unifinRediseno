@@ -16,16 +16,16 @@ class LeadConvertApi extends ModuleApi
     public function registerApiRest()
     {
         //Extend with test method
-        $api= array (
-            'convertLead' => array(
+        $api = [
+            'convertLead' => [
                 'reqType' => 'POST',
-                'path' => array('Leads', '?', 'convert'),
-                'pathVars' => array('','leadId',''),
+                'path' => ['Leads', '?', 'convert'],
+                'pathVars' => ['', 'leadId', ''],
                 'method' => 'convertLead',
                 'shortHelp' => 'Convert Lead to a Contact and optionally link it to a new or existing module such as an Account or Opportunity',
                 'longHelp' => 'modules/Leads/clients/base/api/help/LeadConvertApi.html',
-            ),
-        );
+            ],
+        ];
 
         return $api;
     }
@@ -44,15 +44,15 @@ class LeadConvertApi extends ModuleApi
         $modules = $this->loadModules($api, $leadConvert->getAvailableModules(), $args['modules']);
 
         $transferActivitiesModules =
-            empty($args['transfer_activities_modules']) ? array() : $args['transfer_activities_modules'];
+            empty($args['transfer_activities_modules']) ? [] : $args['transfer_activities_modules'];
         $transferActivitiesAction =
             empty($args['transfer_activities_action']) ? '' : $args['transfer_activities_action'];
 
         $modules = $leadConvert->convertLead($modules, $transferActivitiesAction, $transferActivitiesModules);
 
-        return array (
-            'modules' => $this->formatBeans($api, $args, $modules)
-        );
+        return [
+            'modules' => $this->formatBeans($api, $args, $modules),
+        ];
     }
 
     /**
@@ -67,27 +67,26 @@ class LeadConvertApi extends ModuleApi
     protected function loadModule(ServiceBase $api, $module, $data)
     {
         $version = $api->getRequest()->getUrlVersion();
-        $moduleDef = array (
+        $moduleDef = [
             'module' => $module,
-        );
+        ];
 
         if (isset($data['id'])) {
             $moduleDef['record'] = $data['id'];
-        }
-        else {
-            $request = array(
-                array(
+        } else {
+            $request = [
+                [
                     'url' => "/{$version}/{$module}",
                     'method' => 'POST',
                     'data' => json_encode($data),
-                )
-            );
+                ],
+            ];
             $apiClass = new BulkApi();
-            $result = $apiClass->bulkCall($api, array('requests' => $request));
+            $result = $apiClass->bulkCall($api, ['requests' => $request]);
 
             if (isset($result) && isset($result[0]) && isset($result[0]['contents'])) {
                 if ($result[0]['status'] != 200) {
-                    throw new SugarApiExceptionRequestMethodFailure($result[0]['contents']['error'], array(), null, 424, $result[0]['contents']['error_message']);
+                    throw new SugarApiExceptionRequestMethodFailure($result[0]['contents']['error'], [], null, 424, $result[0]['contents']['error_message']);
                 }
 
                 $moduleDef['record'] = $result[0]['contents']['id'];
@@ -108,7 +107,7 @@ class LeadConvertApi extends ModuleApi
      */
     protected function loadModules(ServiceBase $api, $modulesToConvert, $data)
     {
-        $beans = array();
+        $beans = [];
 
         foreach ($modulesToConvert as $moduleName) {
             if (!isset($data[$moduleName])) {

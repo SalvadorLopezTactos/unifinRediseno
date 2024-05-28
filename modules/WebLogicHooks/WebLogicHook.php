@@ -56,7 +56,7 @@ class WebLogicHook extends SugarBean implements RunnableSchedulerJob
 
     protected function getActionArray()
     {
-        return array(1, $this->name, 'modules/WebLogicHooks/WebLogicHook.php', 'WebLogicHook', 'dispatchRequest', $this->id);
+        return [1, $this->name, 'modules/WebLogicHooks/WebLogicHook.php', 'WebLogicHook', 'dispatchRequest', $this->id];
     }
 
     public function save($check_notify = false)
@@ -69,7 +69,10 @@ class WebLogicHook extends SugarBean implements RunnableSchedulerJob
             $oldhook = $hook;
             // since remove_logic_hook compares 1, 3 and 4
             $oldhook[3] = 'WebLogicHook';
-            remove_logic_hook($this->webhook_target_module, $this->trigger_event, $oldhook);
+            $oldTargetModule = $this->fetched_row['webhook_target_module'] ?? '';
+            if (!empty($oldTargetModule)) {
+                remove_logic_hook($oldTargetModule, $this->trigger_event, $oldhook);
+            }
         }
         parent::save($check_notify);
         $hook[5] = $this->id;
@@ -90,11 +93,11 @@ class WebLogicHook extends SugarBean implements RunnableSchedulerJob
             return;
         }
 
-        $jobData = array(
+        $jobData = [
             'url' => $this->url,
             'request_method' => $this->request_method,
             'payload' => (new CreatePayload($this))->getPayload($seed, $event, $arguments),
-        );
+        ];
 
         $job = new SchedulersJob();
         $job->assigned_user_id = $this->created_by;
@@ -130,22 +133,22 @@ class WebLogicHook extends SugarBean implements RunnableSchedulerJob
 
         $curlHandler = curl_init();
 
-        $options = array(
-            CURLOPT_HTTPHEADER      => false,
-            CURLOPT_RETURNTRANSFER  => true,
-            CURLOPT_CONNECTTIMEOUT  => 5,
-            CURLOPT_TIMEOUT         => $this->getCURLTimeout($data),
-            CURLOPT_MAXREDIRS       => 1,
-            CURLOPT_USERAGENT       => 'SugarCrm',
-            CURLOPT_VERBOSE         => false,
-            CURLOPT_URL             => $data['url'],
-            CURLOPT_HTTPHEADER      => array(
+        $options = [
+            CURLOPT_HTTPHEADER => false,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CONNECTTIMEOUT => 5,
+            CURLOPT_TIMEOUT => $this->getCURLTimeout($data),
+            CURLOPT_MAXREDIRS => 1,
+            CURLOPT_USERAGENT => 'SugarCrm',
+            CURLOPT_VERBOSE => false,
+            CURLOPT_URL => $data['url'],
+            CURLOPT_HTTPHEADER => [
                 'Content-Type: application/json',
                 'Content-Length: ' . strlen($payload),
-            ),
-            CURLOPT_POSTFIELDS      => $payload,
-            CURLOPT_CUSTOMREQUEST   => $data['request_method'],
-        );
+            ],
+            CURLOPT_POSTFIELDS => $payload,
+            CURLOPT_CUSTOMREQUEST => $data['request_method'],
+        ];
 
         curl_setopt_array($curlHandler, $options);
 

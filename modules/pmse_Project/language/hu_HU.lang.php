@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Folyamatdefiníciók',
-  'LBL_MODULE_TITLE' => 'Folyamatdefiníciók',
-  'LBL_MODULE_NAME_SINGULAR' => 'Folyamatdefiníció',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Folyamatdefiníciók',
+    'LBL_MODULE_TITLE' => 'Folyamatdefiníciók',
+    'LBL_MODULE_NAME_SINGULAR' => 'Folyamatdefiníció',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Folyamatmeghatározások figyelemfelhívás',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Folyamatmeghatározások figyelemfelhívás',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Folyamatmeghatározások bejegyzés műszerfal',
-  'LNK_LIST' => 'Folyamatdefiníciók megtekintése',
-  'LNK_NEW_PMSE_PROJECT' => 'Folyamatdefiníciók létrehozása',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Folyamatdefiníciók importálása',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Folyamatmeghatározások bejegyzés műszerfal',
+    'LNK_LIST' => 'Folyamatdefiníciók megtekintése',
+    'LNK_NEW_PMSE_PROJECT' => 'Folyamatdefiníciók létrehozása',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Folyamatdefiníciók importálása',
 
-  'LBL_PRJ_STATUS' => 'Állapot',
-  'LBL_PRJ_MODULE' => 'Célmodul',
-  'LBL_PRJ_RUN_ORDER' => 'Megrendelés futtatása',
-  'LBL_PMSE_BUTTON_SAVE' => 'Mentés',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Mégsem',
-  'LBL_PMSE_BUTTON_YES' => 'Igen',
-  'LBL_PMSE_BUTTON_NO' => 'Nem',
-  'LBL_PMSE_BUTTON_OK' => 'OK',
+    'LBL_PRJ_STATUS' => 'Állapot',
+    'LBL_PRJ_MODULE' => 'Célmodul',
+    'LBL_PRJ_RUN_ORDER' => 'Megrendelés futtatása',
+    'LBL_PMSE_BUTTON_SAVE' => 'Mentés',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Mégsem',
+    'LBL_PMSE_BUTTON_YES' => 'Igen',
+    'LBL_PMSE_BUTTON_NO' => 'Nem',
+    'LBL_PMSE_BUTTON_OK' => 'OK',
     'LBL_PMSE_FORM_ERROR' => 'Kérem javítson ki minden hibát folytatás előtt.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Tervezés',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Tevékenység',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Művelet',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Ajánlás Kezdési Esemény',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Lehetőség Kezdési Esemény' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Lehetőség Kezdési Esemény',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Dokumentum Kezdési Esemény',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Más Modul Esemény',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Várakozási Esemény',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Üzleti szabály',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Üzleti szabály tevékenység',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'E-mail sablon',
-);
+];

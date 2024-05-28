@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Dashboard für den Datensatz der Einkäufe',
     'LBL_RELATED_ACCOUNT' => 'Zugehörige Firma',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Käufe',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Kaufzeitleiste',
 ];

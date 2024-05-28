@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'การดูแลระบบ',
-    'Product' => 'ผลิตภัณฑ์',
-    'User' => 'ผู้ใช้',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => 'ใหม่',
-    'Assigned' => 'ระบุแล้ว',
-    'Closed' => 'ปิดแล้ว',
-    'Pending Input' => 'รออินพุต',
-    'Rejected' => 'ปฏิเสธ',
-    'Duplicate' => 'ซ้ำ',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => 'สูง',
-    'P2' => 'ปานกลาง',
-    'P3' => 'ต่ำ',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => 'ยอมรับแล้ว',
-    'Duplicate' => 'ซ้ำ',
-    'Closed' => 'ปิดแล้ว',
-    'Out of Date' => 'เก่าเกินไป',
-    'Invalid' => 'ไม่ถูกต้อง',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => 'การดูแลระบบ',
+        'Product' => 'ผลิตภัณฑ์',
+        'User' => 'ผู้ใช้',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => 'ใหม่',
+        'Assigned' => 'ระบุแล้ว',
+        'Closed' => 'ปิดแล้ว',
+        'Pending Input' => 'อินพุตที่รอดำเนินการ',
+        'Rejected' => 'ถูกปฏิเสธ',
+        'Duplicate' => 'ซ้ำ',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => 'สูง',
+        'P2' => 'ปานกลาง',
+        'P3' => 'ต่ำ',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => 'ยอมรับแล้ว',
+        'Duplicate' => 'ซ้ำ',
+        'Closed' => 'ปิดแล้ว',
+        'Out of Date' => 'เก่าเกินไป',
+        'Invalid' => 'ไม่ถูกต้อง',
+    ],
+];

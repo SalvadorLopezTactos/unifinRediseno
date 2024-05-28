@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Reguli operative de proces',
-  'LBL_MODULE_TITLE' => 'Reguli operative de proces',
-  'LBL_MODULE_NAME_SINGULAR' => 'Regulă operativă de proces',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Reguli operative de proces',
+    'LBL_MODULE_TITLE' => 'Reguli operative de proces',
+    'LBL_MODULE_NAME_SINGULAR' => 'Regulă operativă de proces',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare reguli operative de proces',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare reguli operative de proces',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare reguli operative de proces',
-  'LBL_RST_UID' => 'ID regulă operativă',
-  'LBL_RST_TYPE' => 'Tip regulă operativă',
-  'LBL_RST_DEFINITION' => 'Definire regulă operativă',
-  'LBL_RST_EDITABLE' => 'Regulă operativă editabilă',
-  'LBL_RST_SOURCE' => 'Sursă regulă operativă',
-  'LBL_RST_SOURCE_DEFINITION' => 'Definire sursă regulă operativă',
-  'LBL_RST_MODULE' => 'Modul ţintă',
-  'LBL_RST_FILENAME' => 'Nume fișier regulă operativă',
-  'LBL_RST_CREATE_DATE' => 'Data creării regulii operative',
-  'LBL_RST_UPDATE_DATE' => 'Data actualizării regulii operative',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare reguli operative de proces',
+    'LBL_RST_UID' => 'ID regulă operativă',
+    'LBL_RST_TYPE' => 'Tip regulă operativă',
+    'LBL_RST_DEFINITION' => 'Definire regulă operativă',
+    'LBL_RST_EDITABLE' => 'Regulă operativă editabilă',
+    'LBL_RST_SOURCE' => 'Sursă regulă operativă',
+    'LBL_RST_SOURCE_DEFINITION' => 'Definire sursă regulă operativă',
+    'LBL_RST_MODULE' => 'Modul ţintă',
+    'LBL_RST_FILENAME' => 'Nume fișier regulă operativă',
+    'LBL_RST_CREATE_DATE' => 'Data creării regulii operative',
+    'LBL_RST_UPDATE_DATE' => 'Data actualizării regulii operative',
 
     'LNK_LIST' => 'Vizualizare reguli operative de proces',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Creează Regulă operativă de proces',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Această Regulă de afaceri nu este validă deoarece foloseşte câmpuri nevalide sau câmpuri care nu se găsesc în instanţa dvs. de SugarCRM. Vă rugăm să remediați erorile de mai jos şi salvaţi Regula de afaceri.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Această regulă operativă este momentan utilizată într-o Definiţie de proces. Doriţi să editaţi în continuare această regulă operativă?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Nu puteţi şterge această regulă operativă, deoarece este utilizată momentan într-o Definiţie de proces.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Nu puteţi şterge această regulă operativă, deoarece este utilizată momentan într-o Definiţie de proces.',
+];

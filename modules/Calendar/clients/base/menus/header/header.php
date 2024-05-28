@@ -12,14 +12,14 @@
 $module_name = 'Calendar';
 $viewdefs[$module_name]['base']['menu']['header'] = [
     [
-        'route' => '#'.$module_name.'/create',
+        'route' => '#' . $module_name . '/create',
         'label' => 'LNK_NEW_CALENDAR',
         'acl_action' => 'create',
         'acl_module' => $module_name,
         'icon' => 'sicon sicon-plus',
     ],
     [
-        'route' => '#'.$module_name,
+        'route' => '#' . $module_name,
         'label' => 'LNK_CALENDAR_LIST',
         'acl_action' => 'list',
         'acl_module' => $module_name,
@@ -33,8 +33,8 @@ $viewdefs[$module_name]['base']['menu']['header'] = [
         'icon' => 'sicon-calendar',
     ],
     [
-        'route' => '#bwc/index.php?module=Import&action=Step1&import_module='.$module_name
-                    .'&return_module='.$module_name.'&return_action=index',
+        'route' => '#bwc/index.php?module=Import&action=Step1&import_module=' . $module_name
+            . '&return_module=' . $module_name . '&return_action=index',
         'label' => 'LBL_IMPORT_CALENDAR',
         'acl_action' => 'import',
         'acl_module' => $module_name,

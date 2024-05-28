@@ -466,7 +466,7 @@
      * @return {Object}
      */
     _distributePhones: function(siBean, key, value) {
-        siBean[key] = value ? value : '';
+        siBean[key] = value ? value.replaceAll(', ', '. ') : '';
         return siBean;
     },
 
@@ -1222,7 +1222,7 @@
                 self.trigger('changed:_hintRequestCompleted');
 
                 if (self.$('[data-name="saveAll"]')) {
-                    self.$('[data-name="saveAll"]').tooltip('destroy');
+                    self.$('[data-name="saveAll"]').tooltip('dispose');
                 }
                 if (self.disposed || !data || !data.enriched) {
                     self._disposeHintView();
@@ -1285,24 +1285,10 @@
                     return;
                 }
 
-                if (self.isDarkMode) {
-                    self.$('[data-name="saveAll"]').removeClass('hint-preview-icon-darkmode--loading');
-                } else {
-                    self.$('[data-name="saveAll"]').removeClass('hint-preview-icon--loading');
-                }
+                self.$('[data-name="saveAll"]').removeClass('hint-preview-icon--loading');
                 self._enrichHintDashletWithBean(bean);
                 self._filterFieldsBasedOnConfig();
                 self._fixLengthPhoneFields();
-
-                if (self.moduleName === 'Leads') {
-                    if (self.isDarkMode) {
-                        self.$('.hint-preview-icon-darkmode--cloud[data-name="' +
-                            'hint_account_website' + '"]').addClass('hidden');
-                    } else {
-                        self.$('.hint-preview-icon--cloud[data-name="' +
-                            'hint_account_website' + '"]').addClass('hidden');
-                    }
-                }
 
                 // Hide other two phone fields if there is no value.
                 if (self.moduleName === 'Leads' || self.moduleName === 'Contacts') {
@@ -1374,11 +1360,7 @@
             var truncatedPhoneFromHint = phone && self._getTruncatedPhoneBasedOnFieldWidth(phone, phoneField);
             if (recordViewPhoneNumber === truncatedPhoneFromHint) {
                 self._attrsToSave = _.omit(self._attrsToSave, phoneField);
-                if (self.isDarkMode) {
-                    self.$('.hint-preview-icon-darkmode--cloud[data-name="' + phoneField + '"]').addClass('hidden');
-                } else {
-                    self.$('.hint-preview-icon--cloud[data-name="' + phoneField + '"]').addClass('hidden');
-                }
+                self.$('.hint-preview-icon--cloud[data-name="' + phoneField + '"]').addClass('hidden');
             }
         });
     },
@@ -1424,18 +1406,10 @@
                     if (isAccountSicCodeSpecialCase) {
                         var sicCodeFromRecordView = self.context.get('model').attributes.sic_code;
                         self.model.set('hint_account_sic_code_label', sicCodeFromRecordView);
-                        if (self.isDarkMode) {
-                            self.$('.hint-preview-icon-darkmode--cloud[data-name="' + attr + '"]').addClass('hidden');
-                        } else {
-                            self.$('.hint-preview-icon--cloud[data-name="' + attr + '"]').addClass('hidden');
-                        }
+                        self.$('.hint-preview-icon--cloud[data-name="' + attr + '"]').addClass('hidden');
                     } else {
                         self.model.set(attr, this.context.get('model').attributes[attr]);
-                        if (self.isDarkMode) {
-                            self.$('.hint-preview-icon-darkmode--cloud[data-name="' + attr + '"]').addClass('hidden');
-                        } else {
-                            self.$('.hint-preview-icon--cloud[data-name="' + attr + '"]').addClass('hidden');
-                        }
+                        self.$('.hint-preview-icon--cloud[data-name="' + attr + '"]').addClass('hidden');
                     }
                 }
             }, this);
@@ -1484,8 +1458,8 @@
             var phoneTypeFields = ['phone_work', 'phone_other', 'phone_mobile'];
             if (self.includes(phoneTypeFields, attr)) {
                 var recordHintPhoneFieldsArray = self._originalModel.attributes[attr] ?
-                    self._originalModel.attributes[attr].split(', ') : [];
-                var newHintPhoneFieldsArray = bean[attr] ? bean[attr].split(', ') : [];
+                    self._originalModel.attributes[attr].split('. ') : [];
+                var newHintPhoneFieldsArray = bean[attr] ? bean[attr].split('. ') : [];
                 if (recordHintPhoneFieldsArray.length === newHintPhoneFieldsArray.length) {
                     newDataFound = recordHintPhoneFieldsArray.length !==
                         _.intersection(newHintPhoneFieldsArray, recordHintPhoneFieldsArray).length;
@@ -1645,7 +1619,7 @@
                     // Teh value parameter is of the form (oldAttrValue(From Hint record view field),
                     // newAttrValue(found by hint)).
                     const isValidAvailablePhoneField = self.isValidPhoneType(attr) &&
-                        value.indexOf(self._originalModel.get(attr) + ', ') > -1;
+                        value.indexOf(self._originalModel.get(attr) + '. ') > -1;
                     if (isValidAvailablePhoneField) {
                         var truncatedValueField = value && self._getTruncatedPhoneBasedOnFieldWidth(value, attr);
                         self._originalModel.save(attr, truncatedValueField);
@@ -1711,7 +1685,7 @@
                     // The value parameter is of the form (oldAttrValue(From Hint record view field),
                     // newAttrValue(found by hint)).
                     const isValidAvailablePhoneField = self.isValidPhoneType(attr) &&
-                        value.indexOf(self._originalModel.get(attr) + ', ') > -1;
+                        value.indexOf(self._originalModel.get(attr) + '. ') > -1;
                     if (isValidAvailablePhoneField) {
                         var truncatedValueField = value && self._getTruncatedPhoneBasedOnFieldWidth(value, attr);
                         self._originalModel.set(attr, truncatedValueField);
@@ -1943,7 +1917,9 @@
                     attr[key] = phoneNumber && this._getTruncatedPhoneBasedOnFieldWidth(phoneNumber, key);
                 } else if (key === 'hint_photo') {
                     attr.hint_contact_pic = contactsPhotoURL;
-                }  else {
+                }  else if (key === 'website') {
+                    attr[key] = String(this.model.get('hint_account_website'));
+                } else {
                     attr[key] = String(this.model.get(key));
                 }
             }
@@ -2184,7 +2160,9 @@
      * @param {Object} para2
      */
     _saveDataInRecordField: function(para1, para2) {
-        var needsAccountPic = para1 === 'website' && _.isEmpty(this._originalModel.get('hint_account_pic'));
+        var needsAccountPic = para1 === 'website' &&
+                     _.isEmpty(this._originalModel.get('hint_account_pic')) &&
+                     this.module === 'Accounts';
         var needsContactPic = para1 === 'title' && _.isEmpty(this._originalModel.get('hint_contact_pic'));
         var enrichNewContactPicAndTitle = _.isEmpty(this._originalModel.get('title')) &&
             this._doNonAccountsPhotoURLsDiffer();
@@ -2303,11 +2281,11 @@
         var phones = this.model.get('phone_work') || '';
         var newPhone = this.model.get('hint_phone_1');
         if (!this._isEmpty(newPhone) && phones.indexOf(newPhone) < 0) {
-            phones = (phones === '') ? newPhone : (phones + ', ' + newPhone);
+            phones = (phones === '') ? newPhone : (phones + '. ' + newPhone);
         }
         newPhone = this.model.get('hint_phone_2');
         if (!this._isEmpty(newPhone) && phones.indexOf(newPhone) < 0) {
-            phones = (phones === '') ? newPhone : (phones + ', ' + newPhone);
+            phones = (phones === '') ? newPhone : (phones + '. ' + newPhone);
         }
         return phones;
     },
@@ -2338,21 +2316,14 @@
             }
             // Add loading animation for saveAll icon.
             $btn.html('');
-            if (self.isDarkMode) {
-                $btn.removeClass('btn btn-primary saveAll').addClass('hint-preview-icon-darkmode--loading');
-            } else {
-                $btn.removeClass('btn btn-primary saveAll').addClass('hint-preview-icon--loading');
-            }
+            $btn.removeClass('btn btn-primary saveAll').addClass('hint-preview-icon--loading');
 
             //Remove any erased fields
             self.filteredAttrsToSave = _.omit(self.filteredAttrsToSave, self._erasedFields);
 
             setTimeout(function() {
-                if (self.isDarkMode) {
-                    $btn.removeClass('hint-preview-icon-darkmode--cloud').addClass('hint-preview-icon--confirm');
-                } else {
-                    $btn.removeClass('hint-preview-icon--loading').addClass('hint-preview-icon--confirm');
-                }
+                $btn.removeClass('hint-preview-icon--loading').addClass('hint-preview-icon--confirm bg-transparent');
+
                 setTimeout(function() {
                     $btn.addClass('hidden');
                 }, 2000);
@@ -2361,18 +2332,14 @@
                         self._recordEvent('saveAllHintPersonFields', '*');
                         self._updateBaseModel(self.filteredAttrsToSave);
                         this.$('[data-action="copy"]').addClass('hidden');
-                        self.$('[data-name="saveAll"]').tooltip('destroy');
+                        self.$('[data-name="saveAll"]').tooltip('dispose');
                     }
                 }, 500);
             }, 2000);
             // Save clicked field.
         } else {
             // Show loading icon first
-            if (self.isDarkMode) {
-                $btn.removeClass('hint-preview-icon-darkmode--cloud').addClass('hint-preview-icon-darkmode--loading');
-            } else {
-                $btn.removeClass('hint-preview-icon--cloud').addClass('hint-preview-icon--loading');
-            }
+            $btn.removeClass('hint-preview-icon--cloud').addClass('hint-preview-icon--loading');
             self._recordEvent('saveHintPersonField', attr);
             switch (attr) {
                 case 'hint_account_website':
@@ -2390,11 +2357,8 @@
             if (_.contains(this.enrichAttributeList, attr)) {
                 this._trackEvent(' Enrichment - List View Preview', attr + ' saved');
             }
-            if (self.isDarkMode) {
-                $btn.removeClass('hint-preview-icon-darkmode--loading').addClass('hint-preview-icon--confirm');
-            } else {
-                $btn.removeClass('hint-preview-icon--loading').addClass('hint-preview-icon--confirm');
-            }
+
+            $btn.removeClass('hint-preview-icon--loading').addClass('hint-preview-icon--confirm bg-transparent');
             setTimeout(function() {
                 $btn.addClass('hidden');
             }, 1500);

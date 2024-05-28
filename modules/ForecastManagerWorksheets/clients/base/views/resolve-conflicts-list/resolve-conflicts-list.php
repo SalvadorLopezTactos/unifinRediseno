@@ -9,25 +9,24 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ForecastManagerWorksheets']['base']['view']['resolve-conflicts-list'] = array(
+$viewdefs['ForecastManagerWorksheets']['base']['view']['resolve-conflicts-list'] = [
     'css_class' => 'forecast-manager-worksheet',
-    'panels' => array(
-        array(
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'type' => 'userLink',
                     'label' => 'LBL_NAME',
                     'link' => true,
-                    'route' =>
-                        array(
-                            'recordID' => 'user_id',
-                        ),
+                    'route' => [
+                        'recordID' => 'user_id',
+                    ],
                     'sortable' => true,
                     'default' => true,
                     'enabled' => true,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'user_id',
                         'is_manager',
                         'show_history_log',
@@ -37,9 +36,9 @@ $viewdefs['ForecastManagerWorksheets']['base']['view']['resolve-conflicts-list']
                         'closed_amount',
                         'opp_count',
                         'timeperiod_id',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'quota',
                     'type' => 'currency',
                     'label' => 'LBL_QUOTA_ADJUSTED',
@@ -47,14 +46,14 @@ $viewdefs['ForecastManagerWorksheets']['base']['view']['resolve-conflicts-list']
                     'default' => true,
                     'enabled' => true,
                     'convertToBase' => true,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'base_rate',
                         'currency_id',
-                    ),
+                    ],
                     'align' => 'right',
                     'click_to_edit' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'worst_case',
                     'type' => 'currency',
                     'label' => 'LBL_WORST',
@@ -62,13 +61,13 @@ $viewdefs['ForecastManagerWorksheets']['base']['view']['resolve-conflicts-list']
                     'default' => true,
                     'enabled' => true,
                     'convertToBase' => true,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'base_rate',
                         'currency_id',
-                    ),
+                    ],
                     'align' => 'right',
-                ),
-                array(
+                ],
+                [
                     'name' => 'worst_case_adjusted',
                     'type' => 'currency',
                     'label' => 'LBL_WORST_ADJUSTED',
@@ -76,14 +75,14 @@ $viewdefs['ForecastManagerWorksheets']['base']['view']['resolve-conflicts-list']
                     'default' => true,
                     'enabled' => true,
                     'convertToBase' => true,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'base_rate',
                         'currency_id',
-                    ),
+                    ],
                     'align' => 'right',
                     'click_to_edit' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'likely_case',
                     'type' => 'currency',
                     'label' => 'LBL_LIKELY',
@@ -91,13 +90,13 @@ $viewdefs['ForecastManagerWorksheets']['base']['view']['resolve-conflicts-list']
                     'default' => false,
                     'enabled' => true,
                     'convertToBase' => true,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'base_rate',
                         'currency_id',
-                    ),
+                    ],
                     'align' => 'right',
-                ),
-                array(
+                ],
+                [
                     'name' => 'likely_case_adjusted',
                     'type' => 'currency',
                     'label' => 'LBL_LIKELY_ADJUSTED',
@@ -105,14 +104,14 @@ $viewdefs['ForecastManagerWorksheets']['base']['view']['resolve-conflicts-list']
                     'default' => false,
                     'enabled' => true,
                     'convertToBase' => true,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'base_rate',
                         'currency_id',
-                    ),
+                    ],
                     'align' => 'right',
                     'click_to_edit' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'best_case',
                     'type' => 'currency',
                     'label' => 'LBL_BEST',
@@ -120,13 +119,13 @@ $viewdefs['ForecastManagerWorksheets']['base']['view']['resolve-conflicts-list']
                     'default' => false,
                     'enabled' => true,
                     'convertToBase' => true,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'base_rate',
                         'currency_id',
-                    ),
+                    ],
                     'align' => 'right',
-                ),
-                array(
+                ],
+                [
                     'name' => 'best_case_adjusted',
                     'type' => 'currency',
                     'label' => 'LBL_BEST_ADJUSTED',
@@ -134,14 +133,14 @@ $viewdefs['ForecastManagerWorksheets']['base']['view']['resolve-conflicts-list']
                     'default' => false,
                     'enabled' => true,
                     'convertToBase' => true,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'base_rate',
                         'currency_id',
-                    ),
+                    ],
                     'align' => 'right',
                     'click_to_edit' => true,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

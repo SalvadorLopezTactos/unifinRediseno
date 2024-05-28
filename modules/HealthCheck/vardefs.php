@@ -11,49 +11,49 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['HealthCheck'] = array(
+$dictionary['HealthCheck'] = [
     'table' => 'healthcheck',
-    'fields' => array(
-        'logfile' => array(
+    'fields' => [
+        'logfile' => [
             'name' => 'logfile',
             'vname' => 'LBL_LOGFILE',
             'type' => 'varchar',
             'len' => 255,
-        ),
-        'bucket' => array(
+        ],
+        'bucket' => [
             'name' => 'bucket',
             'vname' => 'LBL_BUCKET',
             'type' => 'char',
             'len' => 1,
-        ),
-        'flag' => array(
+        ],
+        'flag' => [
             'name' => 'flag',
             'vname' => 'LBL_FLAG',
             'type' => 'int',
             'len' => 1,
-        ),
-        'logmeta' => array(
+        ],
+        'logmeta' => [
             'name' => 'logmeta',
             'vname' => 'LBL_LOGMETA',
             'type' => 'json',
             //Sugar 6 does not support `type` => `json` so `blob` is needed to skip SugarBean::cleanBean
             'dbType' => 'longtext',
-        ),
-        'error' => array(
+        ],
+        'error' => [
             'name' => 'error',
             'vname' => 'LBL_ERROR',
             'type' => 'varchar',
             'len' => 255,
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => false,
-    'uses' => array(
+    'uses' => [
         'default',
-    ),
-    'acls' => array(
+    ],
+    'acls' => [
         'SugarACLAdminOnly' => true,
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('HealthCheck', 'HealthCheck');

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,9 +20,9 @@ class SidecarPortalListLayoutMetaDataParser extends SidecarListLayoutMetaDataPar
      * @var array
      * @protected
      */
-    protected $invalidTypes = array(
-        'portal' => array('iframe', 'encrypt', 'html', 'currency', 'currency_id'),
-    );
+    protected $invalidTypes = [
+        'portal' => ['iframe', 'encrypt', 'html', 'currency', 'currency_id'],
+    ];
 
     /**
      * List of allowed views for this parser.
@@ -31,14 +32,14 @@ class SidecarPortalListLayoutMetaDataParser extends SidecarListLayoutMetaDataPar
      *
      * @var array
      */
-    protected $allowedViews = array(
+    protected $allowedViews = [
         MB_PORTALLISTVIEW,
-    );
+    ];
 
     /**
      * Sets the sortable property of the fielddef
      *
-     * @param string $fieldName  The name of the field being worked on
+     * @param string $fieldName The name of the field being worked on
      * @param array $fieldDef The current fielddef collection for a field
      * @return array The modified fielddef collection
      */

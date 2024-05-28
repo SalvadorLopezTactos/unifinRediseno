@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Αρχείο καταγραφής ελέγχου',
     'LBL_FIELD_NAME' => 'Πεδίο',
     'LBL_OLD_NAME' => 'Παλαιά Τιμή',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Ενημέρωση σε',
     'LBL_BLANK' => '-κενό-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Χρονολόγιο ελέγχου',
+    'LBL_CREATED' => 'Δημιουργήθηκε',
+];

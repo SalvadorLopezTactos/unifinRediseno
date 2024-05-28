@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Teklif Edilen Kalemler Listesi Panosu',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Teklif Kalemleri Kayıt Panosu',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Teklif Edilen Kalemler Odak Bölmesi',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Teklif Edilen Kalem Zaman Çizelgesi',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Kampanyada Teklif Edilen Kalem',
     'LBL_MODULE_NAME' => 'Teklif Kalemleri',
@@ -183,4 +184,4 @@ $mod_strings = array(
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Yeni Kalem)',
     'LBL_DISCOUNT_PERCENT' => 'Yüzde % ',
     'LBL_DISCOUNT_TYPE' => 'İndirim Türü',
-);
+];

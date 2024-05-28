@@ -35,27 +35,27 @@ class LockedFieldsRelatedModulesUtilities
     {
         global $beanList, $modInvisList;
 
-        $fields = array();
+        $fields = [];
         foreach ($beanList as $module => $bean) {
             // Do not allow establish relationships for modules that are invisible
             // unless they are on the whitelist
-            if (in_array($module, $modInvisList) && !in_array($module, static::$moduleWhiteList)) {
+            if (safeInArray($module, $modInvisList) && !in_array($module, static::$moduleWhiteList)) {
                 continue;
             }
 
             // Add the locked field relationship now
             $object = BeanFactory::getObjectName($module);
-            $relName = strtolower($module) . "_locked_fields";
+            $relName = strtolower($module) . '_locked_fields';
             $linkField = VardefManager::getLinkFieldForRelationship($module, $object, $relName);
             if ($linkField) {
                 $name = strtolower($module) . '_locked_fields_link';
-                $fields[$name] = array(
+                $fields[$name] = [
                     'name' => $name,
                     'vname' => $module,
                     'type' => 'link',
                     'relationship' => $relName,
                     'source' => 'non-db',
-                );
+                ];
             }
         }
 

@@ -24,8 +24,7 @@ $viewdefs['portal']['view']['signup'] = [
     'panels' => [
         [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' =>
-            [
+            'fields' => [
                 [
                     'name' => 'first_name',
                     'type' => 'varchar',

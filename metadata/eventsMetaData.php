@@ -11,17 +11,17 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['collections']['events'] = array(
+$dictionary['collections']['events'] = [
     'name' => 'events',
-    'modules' => array(
+    'modules' => [
         'Calls',
         'Meetings',
-        array(
+        [
             'name' => 'Tasks',
-            'field_map' => array(
+            'field_map' => [
                 'date_end' => 'date_due',
-            )
-        ),
-    ),
+            ],
+        ],
+    ],
     'order_by' => 'date_end:desc',
-);
+];

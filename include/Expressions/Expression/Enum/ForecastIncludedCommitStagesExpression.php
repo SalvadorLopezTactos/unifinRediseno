@@ -58,7 +58,7 @@ JS;
      */
     public static function getParameterTypes()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -66,6 +66,6 @@ JS;
      */
     public static function getOperationName()
     {
-        return array("forecastIncludedCommitStages");
+        return ['forecastIncludedCommitStages'];
     }
 }

@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Fetch envelope',
     'LBL_CLOUD_SERVICE_TYPE' => 'Cloud service type',
     'LBL_CLOUD_PATH' => 'Cloud path',
+    'LBL_CLOUD_DRIVE_ID' => 'Drive ID',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign Envelopes List Dashboard',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'DocuSign Envelopes Record Dashboard',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Recent DocuSign Envelopes',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign Envelopes Focus Dashboard',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'DocuSign Envelope Timeline',
 
     'LBL_NEW_ENVELOPE' => 'New Envelope',
     'LBL_DOCUMENT_IS_NOW' => ' is now ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Send',
     'LBL_BUTTON_CLEAR' => 'Clear',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Use template',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Send with template',
     'LBL_PLEASE_LOG_IN' => 'Please log in to DocuSign first!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'You can not download this document. It has been created by another user!',
     'LBL_SEND_NOT_ALLOWED' => 'You can not send this envelope. It has been created by another user!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Draft has been changed. Update status to current one ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'DocuSign Envelope updated!',
     'LBL_DRAFT_CHANGED_ERROR' => 'DocuSign Envelope status did not updated. Check logs for details!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'DocuSign Template can\'t be applied',
     'LBL_ENVELOPE_NOT_SENT' => 'Envelope not sent!',
     'LBL_ENVELOPE_SENT' => 'Envelope was sent again!',
     'LBL_DOCUMENT_ADDED' => 'Document added on record!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Role',
     'LBL_SELECT_BUTTON_LABEL' => 'Select',
     'LBL_BACK_BUTTON_LABEL' => 'Back',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Search by Template name',
+    'LBL_ENVELOPE_NAME' => 'Envelope name',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Envelope name cannot be empty',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Failed to fetch potential recipients!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Failed to fetch templates!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Please select a role for each recipient',
+    
+    'LBL_DOWNLOAD' => 'Download',
+    'LBL_OPEN_DRAFT' => 'Open Draft',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Documents without a file cannot be sent to DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Click Plus button to start signing process',
+    'LBL_NO_DOC_SELECTED' => 'Please select documents first',
+    'LBL_SELECT_RECIPIENTS' => 'Select signer recipient',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Exclude',
+    'LBL_DOCUSIGN_MISSING_APP' => 'You need to install DocuSign application for better experience.',
 ];

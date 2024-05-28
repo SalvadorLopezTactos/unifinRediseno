@@ -13,7 +13,7 @@
     app.events.on("app:init", function () {
         let tagTextTemplate = Handlebars.compile('@[{{module}}:{{id}}:{{name}}]');
         let taggingHtml = '<span class="sugar_tagging">&nbsp;</span>';
-        let tagListContainerHtml = '<ul class="dropdown-menu activitystream-tag-dropdown"></ul>';
+        let tagListContainerHtml = '<ul class="activitystream-tag-dropdown dropdown-menu ml-0 text-xs w-full"></ul>';
         let mention = '@';
         let reference = '#';
         let keycodeAt = 64;
@@ -660,8 +660,7 @@
                     // Create new dropdown list and place it below the input box
                     $dropdown = $(tagListContainerHtml)
                         .hide()
-                        .appendTo($taggable.parent())
-                        .css('top', $taggable.outerHeight());
+                        .appendTo($taggable.parent());
                 } else {
                     // Empty existing dropdown list
                     $dropdown.empty();

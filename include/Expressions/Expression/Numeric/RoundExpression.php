@@ -51,7 +51,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return array('round');
+        return ['round'];
     }
 
     /**

@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmConfig'] = array(
+$dictionary['pmse_BpmConfig'] = [
     'table' => 'pmse_bpm_config',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'reassignable' => false,
     'duplicate_merge' => true,
-    'fields' => array(
-        'cfg_status' => array(
+    'fields' => [
+        'cfg_status' => [
             'required' => true,
             'name' => 'cfg_status',
             'vname' => 'step type',
@@ -38,8 +38,8 @@ $dictionary['pmse_BpmConfig'] = array(
             'calculated' => false,
             'len' => '20',
             'size' => '20',
-        ),
-        'cfg_value' => array(
+        ],
+        'cfg_value' => [
             'required' => true,
             'name' => 'cfg_value',
             'vname' => 'script to be executed as part of this ',
@@ -59,23 +59,23 @@ $dictionary['pmse_BpmConfig'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmConfig', 'pmse_BpmConfig');

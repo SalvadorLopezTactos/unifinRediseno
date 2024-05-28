@@ -22,9 +22,9 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Exception as CustomerJourneyException;
  */
 class JourneyParentHooksHelper
 {
-    public const ACTIVITY_DUE_DATE_CACHE_PREFIX = 'DRI_Workflows_LogicHook_ParentHook::updateActivityDueDate';
-    public const ACTIVITY_START_DATE_CACHE_PREFIX = 'DRI_Workflows_LogicHook_ParentHook::updateActivityStartDate';
-    public const ACTIVITY_MOMENTUM_START_DATE_CACHE_PREFIX = 'DRI_Workflows_LogicHook_ParentHook::updateActivityMomentumStartDate';
+    public const ACTIVITY_DUE_DATE_CACHE_PREFIX = 'DRI_Workflows_LogicHook_ParentHook_updateActivityDueDate';
+    public const ACTIVITY_START_DATE_CACHE_PREFIX = 'DRI_Workflows_LogicHook_ParentHook_updateActivityStartDate';
+    public const ACTIVITY_MOMENTUM_START_DATE_CACHE_PREFIX = 'DRI_Workflows_LogicHook_ParentHook_updateActivityMomentumStartDate';
 
     /**
      * All after_save logic hooks is inside this function.
@@ -35,9 +35,13 @@ class JourneyParentHooksHelper
      */
     public function afterSave(\SugarBean $bean, $event, $arguments)
     {
+        if (!hasSystemAutomateLicense()) {
+            return;
+        }
+
         $moduleName = $bean->getModuleName();
 
-        if (!self::isEnabledForModule($moduleName)) {
+        if (!self::isEnabledForModule($moduleName) || isset($bean->do_not_reset_template_id)) {
             return;
         }
 
@@ -70,9 +74,9 @@ class JourneyParentHooksHelper
      */
     public static function clearParentActivityDatesCache($module)
     {
-        sugar_cache_clear(self::ACTIVITY_DUE_DATE_CACHE_PREFIX.':'.$module);
-        sugar_cache_clear(self::ACTIVITY_START_DATE_CACHE_PREFIX.':'.$module);
-        sugar_cache_clear(self::ACTIVITY_MOMENTUM_START_DATE_CACHE_PREFIX.':'.$module);
+        sugar_cache_clear(self::ACTIVITY_DUE_DATE_CACHE_PREFIX . ':' . $module);
+        sugar_cache_clear(self::ACTIVITY_START_DATE_CACHE_PREFIX . ':' . $module);
+        sugar_cache_clear(self::ACTIVITY_MOMENTUM_START_DATE_CACHE_PREFIX . ':' . $module);
     }
 
     /**
@@ -91,11 +95,14 @@ class JourneyParentHooksHelper
     public function startJourney(\SugarBean $bean, $arguments)
     {
         try {
-            if ($this->shouldStartJourney($bean, $arguments)) {
-                \DRI_Workflow::start($bean, $bean->dri_workflow_template_id);
-                $bean->dri_customer_journey_started_template = $bean->dri_workflow_template_id;
-            }
+            $shouldStart = $this->shouldStartJourney($bean, $arguments);
+            $templateId = $bean->dri_workflow_template_id;
             $this->unsetJourneyTemplateID($bean);
+
+            if ($shouldStart) {
+                \DRI_Workflow::start($bean, $templateId);
+                $bean->dri_customer_journey_started_template = $templateId;
+            }
         } catch (CustomerJourneyException\SameJourneyLimitReachException $ex) {
             $GLOBALS['log']->fatal($ex->getMessage());
             $this->unsetJourneyTemplateID($bean);
@@ -137,11 +144,11 @@ class JourneyParentHooksHelper
     private function shouldStartJourney(\SugarBean $bean, $arguments)
     {
         return !empty($bean->dri_workflow_template_id)
-            && empty($bean->is_customer_journey_activity)
+            && (empty($bean->is_customer_journey_activity) || $bean->isPASaveRequest)
             && (empty($bean->dri_customer_journey_started_template) || $bean->dri_workflow_template_id !== $bean->dri_customer_journey_started_template)
             && (empty($arguments['stateChanges'])
                 || $bean->dri_workflow_template_id !== $arguments['stateChanges']['dri_workflow_template_id']['before'])
-                && !$bean->inOperation('saving_related');
+            && !$bean->inOperation('delete');
     }
 
     /**
@@ -157,7 +164,8 @@ class JourneyParentHooksHelper
         // check for updates in relevant fields
         $templates = [];
         foreach ($rows as $row) {
-            if ($bean->{$row['due_date_field']} !== $arguments['stateChanges'][$row['due_date_field']]['before']) {
+            if (!isset($arguments['stateChanges'][$row['due_date_field']]['before'])
+                || $bean->{$row['due_date_field']} !== $arguments['stateChanges'][$row['due_date_field']]['before']) {
                 $templates[$row['activity_type']][] = $row['id'];
             }
         }
@@ -223,18 +231,25 @@ class JourneyParentHooksHelper
             return;
         }
 
+        $parentIDFieldName = strtolower($bean->object_name) . '_id';
+
         foreach ($templates as $module => $ids) {
             $handler = ActivityHandlerFactory::factory($module);
             $activity = \BeanFactory::newBean($module);
 
-            // build query to fetch activities related to the parent and the activity template
+            // build query to fetch activities related to the parent and the active journeys
             $query = new \SugarQuery();
-            $query->from($activity);
             $query->select('id');
+            $query->from($activity, ['alias' => 'activity']);
+
+            $join = $query->joinTable('dri_workflows', ['alias' => 'workflows']);
+            $join->on()->equalsField('workflows.id', 'activity.dri_workflow_id');
+            $join->on()->equals('workflows.deleted', 0);
+
             $query->where()
-                    ->in('dri_workflow_task_template_id', array_unique($ids))
-                    ->equals('parent_id', $bean->id)
-                    ->equals('parent_type', $bean->module_dir);
+                    ->in('activity.dri_workflow_task_template_id', array_unique($ids))
+                    ->equals("workflows.$parentIDFieldName", $bean->id)
+                    ->equals('workflows.state', 'in_progress');
 
             foreach ($query->execute() as $row) {
                 /** @var \SugarBean $activity */
@@ -280,18 +295,18 @@ class JourneyParentHooksHelper
             if ($momentumOrStartDueDate == 'momentum') {
                 $query->select('id', 'activity_type', 'momentum_start_field');
                 $query->where()
-                        ->equals('momentum_start_type', \DRI_Workflow_Task_Template::MOMENTUM_START_TYPE_PARENT_DATE_FIELD)
-                        ->equals('momentum_start_module', $module);
+                    ->equals('momentum_start_type', \DRI_Workflow_Task_Template::MOMENTUM_START_TYPE_PARENT_DATE_FIELD)
+                    ->equals('momentum_start_module', $module);
             } elseif ($momentumOrStartDueDate == 'duedate') {
                 $query->select('id', 'activity_type', 'due_date_field');
                 $query->where()
-                        ->equals('task_due_date_type', \DRI_Workflow_Task_Template::TASK_DUE_DATE_TYPE_DAYS_FROM_PARENT_DATE_FIELD)
-                        ->equals('due_date_module', $module);
+                    ->equals('task_due_date_type', \DRI_Workflow_Task_Template::TASK_DUE_DATE_TYPE_DAYS_FROM_PARENT_DATE_FIELD)
+                    ->equals('due_date_module', $module);
             } elseif ($momentumOrStartDueDate == 'startdate') {
                 $query->select('id', 'activity_type', 'start_date_field');
                 $query->where()
-                        ->equals('task_start_date_type', \DRI_Workflow_Task_Template::TASK_START_DATE_TYPE_DAYS_FROM_PARENT_DATE_FIELD)
-                        ->equals('start_date_module', $module);
+                    ->equals('task_start_date_type', \DRI_Workflow_Task_Template::TASK_START_DATE_TYPE_DAYS_FROM_PARENT_DATE_FIELD)
+                    ->equals('start_date_module', $module);
             }
 
             $rows = $query->execute();
@@ -316,7 +331,7 @@ class JourneyParentHooksHelper
         $activityHandler = ActivityHandlerFactory::factory($activity->module_dir);
 
         if ($activityTemplate->getAssigneeRule($stage) === \DRI_Workflow_Template::ASSIGNEE_RULE_CREATE ||
-                ($activityTemplate->getAssigneeRule($stage) === \DRI_Workflow_Template::ASSIGNEE_RULE_STAGE_START && $stage->state == \DRI_SubWorkflow::STATE_IN_PROGRESS)) {
+            ($activityTemplate->getAssigneeRule($stage) === \DRI_Workflow_Template::ASSIGNEE_RULE_STAGE_START && $stage->state == \DRI_SubWorkflow::STATE_IN_PROGRESS)) {
             //setAssignmentSummary, flag for make sure send a single compile assignment summary email
             $activity->setAssignmentSummary = true;
             $activityHandler->applyAssigneeRuleOnActivity($activityTemplate, $activity, $stage);
@@ -402,7 +417,7 @@ class JourneyParentHooksHelper
         }
 
         if (!$activityHandler->hasActivityTemplate($activity) ||
-                ($activityHandler->isCompleted($activity) || $activityHandler->isNotApplicable($activity))) {
+            ($activityHandler->isCompleted($activity) || $activityHandler->isNotApplicable($activity))) {
             return;
         }
 
@@ -430,7 +445,7 @@ class JourneyParentHooksHelper
      * Reassigns assignee for specific activity
      * having target assignee as parent assignee
      *
-     * @param \SugarBean  $activity
+     * @param \SugarBean $activity
      * @param \DRI_SubWorkflow $stage
      * @param string $previousParentAssignedUserId
      */
@@ -661,12 +676,12 @@ class JourneyParentHooksHelper
 
         $qb = \DBManagerFactory::getConnection()->createQueryBuilder();
         $qb->update($tableName)
-            ->set('dri_workflow_template_id', $qb->expr()->literal(''))
+            ->set('dri_workflow_template_id', 'NULL')
             ->where($qb->expr()->eq('id', $qb->expr()->literal($bean->id)));
         $qb->executeQuery();
 
         //when multiple BPMs were being triggered for this bean record this field remained populated
         //so we are unsetting it from bean as well after setting it empty in db.
-        $bean->dri_workflow_template_id = '';
+        $bean->dri_workflow_template_id = null;
     }
 }

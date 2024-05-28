@@ -33,7 +33,7 @@ class AdministrationController extends SugarController
     {
         global $current_user, $app_strings, $modInvisList;
         $request = InputValidation::getService();
-        
+
         if (!is_admin($current_user)) {
             sugar_die($app_strings['ERR_NOT_ADMIN']);
         }
@@ -50,7 +50,7 @@ class AdministrationController extends SugarController
         array_unshift($enabled_tabs, 'Home');
         $tabs = new TabController();
         $tabs->set_system_tabs($enabled_tabs);
-        
+
         $tabs->set_users_can_edit(1 == $request->getValidInputRequest('user_edit_tabs'));
         $tabs->set_users_pinned_modules(1 == $request->getValidInputRequest('users_pinned_modules'));
         $tabs->set_number_pinned_modules($request->getValidInputRequest('number_pinned_modules'));
@@ -60,22 +60,22 @@ class AdministrationController extends SugarController
             $disabledTabs = json_decode(html_entity_decode($request->getValidInputRequest('disabled_tabs'), ENT_QUOTES));
             $disabledTabsKeyArray = TabController::get_key_array($disabledTabs);
             //Never show Project subpanels if Project module is hidden
-            if (!in_array('project', $disabledTabsKeyArray) && in_array('Project', $modInvisList)) {
+            if (!safeInArray('project', $disabledTabsKeyArray) && safeInArray('Project', $modInvisList)) {
                 $disabledTabsKeyArray[] = 'project';
             }
             // if RLI is hidden, always hide the RLI subpanel.
-            if (!in_array('revenuelineitems', $disabledTabsKeyArray) && in_array('RevenueLineItems', $modInvisList)) {
+            if (!safeInArray('revenuelineitems', $disabledTabsKeyArray) && safeInArray('RevenueLineItems', $modInvisList)) {
                 $disabledTabsKeyArray[] = 'revenuelineitems';
             }
             SubPanelDefinitions::set_hidden_subpanels($disabledTabsKeyArray);
         }
 
         // Only rebuild the relevent metadata sections.
-        MetaDataManager::refreshSectionCache(MetaDataManager::MM_MODULESINFO, array('base'));
-        MetaDataManager::refreshSectionCache(MetaDataManager::MM_HIDDENSUBPANELS, array('base'));
+        MetaDataManager::refreshSectionCache(MetaDataManager::MM_MODULESINFO, ['base']);
+        MetaDataManager::refreshSectionCache(MetaDataManager::MM_HIDDENSUBPANELS, ['base']);
 
         if (!headers_sent()) {
-            header("Location: index.php?module=Administration&action=ConfigureTabs");
+            header('Location: index.php?module=Administration&action=ConfigureTabs');
         }
     }
 
@@ -92,15 +92,15 @@ class AdministrationController extends SugarController
         $disabled_langs = json_decode(html_entity_decode(InputValidation::getService()->getValidInputRequest('disabled_langs'), ENT_QUOTES));
         $enabled_langs = json_decode(html_entity_decode(InputValidation::getService()->getValidInputRequest('enabled_langs'), ENT_QUOTES));
 
-        if ((is_countable($sugar_config['languages']) ? count($sugar_config['languages']) : 0) === (is_countable($disabled_langs) ? count($disabled_langs) : 0)) {
+        if (safeCount($sugar_config['languages']) === safeCount($disabled_langs)) {
             sugar_die(translate('LBL_CAN_NOT_DISABLE_ALL_LANG'));
         } else {
             $cfg = $this->getConfigurator();
-            if (in_array($sugar_config['default_language'], $disabled_langs)) {
+            if (safeInArray($sugar_config['default_language'], $disabled_langs)) {
                 reset($enabled_langs);
                 $cfg->config['default_language'] = current($enabled_langs);
             }
-            if (in_array($GLOBALS['current_user']->preferred_language, $disabled_langs)) {
+            if (safeInArray($GLOBALS['current_user']->preferred_language, $disabled_langs)) {
                 $GLOBALS['current_user']->preferred_language = current($enabled_langs);
                 $GLOBALS['current_user']->save();
             }
@@ -120,25 +120,25 @@ class AdministrationController extends SugarController
             var app = window.parent.SUGAR.App;
             app.api.call('read', app.api.buildURL('ping'));
             app.router.navigate('#bwc/index.php?module=Administration&action=Languages', {trigger:true, replace:true});
-            </script>"
-        );
+            </script>");
     }
 
     public function action_updatewirelessenabledmodules()
     {
-        require_once('modules/Administration/Forms.php');
+        require_once 'modules/Administration/Forms.php';
 
         global $app_strings, $current_user, $moduleList;
 
-        if (!is_admin($current_user)) sugar_die($app_strings['ERR_NOT_ADMIN']);
+        if (!is_admin($current_user)) {
+            sugar_die($app_strings['ERR_NOT_ADMIN']);
+        }
 
         $cfg = $this->getConfigurator();
         $cfg->saveConfig();
 
-        if (isset($_REQUEST['enabled_modules']) && !empty ($_REQUEST['enabled_modules']))
-        {
-            $updated_enabled_modules = array();
-            $wireless_module_registry = array();
+        if (isset($_REQUEST['enabled_modules']) && !empty($_REQUEST['enabled_modules'])) {
+            $updated_enabled_modules = [];
+            $wireless_module_registry = [];
 
             $file = 'include/MVC/Controller/wireless_module_registry.php';
 
@@ -146,29 +146,28 @@ class AdministrationController extends SugarController
                 require $file;
             }
 
-            foreach (explode (',', $_REQUEST['enabled_modules']) as $moduleName)
-            {
-                $moduleDef = array_key_exists($moduleName, $wireless_module_registry) ? $wireless_module_registry[$moduleName] : array();
-                $updated_enabled_modules [ $moduleName ] = $moduleDef;
+            foreach (explode(',', $_REQUEST['enabled_modules']) as $moduleName) {
+                $moduleDef = array_key_exists($moduleName, $wireless_module_registry) ? $wireless_module_registry[$moduleName] : [];
+                $updated_enabled_modules [$moduleName] = $moduleDef;
             }
 
             $filename = create_custom_directory('include/MVC/Controller/wireless_module_registry.php');
 
-            mkdir_recursive ( dirname ( $filename ) ) ;
-            write_array_to_file ( 'wireless_module_registry', $updated_enabled_modules, $filename );
-            foreach($moduleList as $mod){
+            mkdir_recursive(dirname($filename));
+            write_array_to_file('wireless_module_registry', $updated_enabled_modules, $filename);
+            foreach ($moduleList as $mod) {
                 sugar_cache_clear("CONTROLLER_wireless_module_registry_$mod");
             }
             //Users doesn't appear in the normal module list, but its value is cached on login.
-            sugar_cache_clear("CONTROLLER_wireless_module_registry_Users");
+            sugar_cache_clear('CONTROLLER_wireless_module_registry_Users');
             sugar_cache_put('wireless_module_registry_keys', array_keys($updated_enabled_modules));
             sugar_cache_reset();
 
             // Bug 59121 - Clear the metadata cache for the mobile platform
-            MetaDataManager::refreshCache(array('mobile'));
+            MetaDataManager::refreshCache(['mobile']);
         }
 
-        echo "true";
+        echo 'true';
     }
 
     /**
@@ -182,7 +181,7 @@ class AdministrationController extends SugarController
         $this->saveFtsConfig($type, $config);
 
         $clearData = !empty($_REQUEST['clearData']) ? true : false;
-        $modules = !empty($_REQUEST['modules']) ? explode(",", $_REQUEST['modules']) : array();
+        $modules = !empty($_REQUEST['modules']) ? explode(',', $_REQUEST['modules']) : [];
 
         try {
             $result = SearchEngine::getInstance()->scheduleIndexing($modules, $clearData);
@@ -191,7 +190,7 @@ class AdministrationController extends SugarController
         }
 
         // TODO: add visual feedback in UI if this returns false
-        echo json_encode(array('success' => $result));
+        echo json_encode(['success' => $result]);
 
         if (!empty($e)) {
             throw $e;
@@ -208,7 +207,7 @@ class AdministrationController extends SugarController
             sugar_die($app_strings['ERR_NOT_ADMIN']);
         }
         [$type, $config] = $this->getFtsSettingsFromRequest($_REQUEST);
-        $valid = $this->verifyFtsConnectivity($type, $this->mergeFtsConfig($type, $config));
+        $valid = $this->verifyFtsConnectivity($type, $config);
 
         // Set label
         if ($valid) {
@@ -217,7 +216,7 @@ class AdministrationController extends SugarController
             $status = $GLOBALS['mod_strings']['LBL_FTS_CONN_UNKNOWN_FAILURE'];
         }
 
-        echo json_encode(array('valid' => $valid, 'status' => $status));
+        echo json_encode(['valid' => $valid, 'status' => $status]);
         sugar_cleanup(true);
     }
 
@@ -228,12 +227,13 @@ class AdministrationController extends SugarController
      */
     public function getModuleList($modules)
     {
-        $list = array();
+        $list = [];
         if (isset($modules)) {
             return explode(',', $modules);
         }
         return $list;
     }
+
     /**
      * action_saveglobalsearchsettings
      *
@@ -265,12 +265,12 @@ class AdministrationController extends SugarController
         $ftsAdmin->saveFTSModuleListSettings($enabledModules, $disabledModules);
 
         // Refresh the server info & module list sections of the metadata
-        MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_SERVERINFO, MetaDataManager::MM_MODULES));
+        MetaDataManager::refreshSectionCache([MetaDataManager::MM_SERVERINFO, MetaDataManager::MM_MODULES]);
 
         if (!$valid) {
             echo $GLOBALS['mod_strings']['LBL_FTS_CONNECTION_INVALID'];
         } else {
-            echo "true";
+            echo 'true';
         }
     }
 
@@ -280,9 +280,9 @@ class AdministrationController extends SugarController
      * @param array $config
      * @return bool
      */
-    protected function hasConfigChanged(string $type, array $config) : bool
+    protected function hasConfigChanged(string $type, array $config): bool
     {
-        $currentConfig = SugarConfig::getInstance()->get("full_text_engine.{$type}", array());
+        $currentConfig = SugarConfig::getInstance()->get("full_text_engine.{$type}", []);
         foreach ($config as $key => $value) {
             if ($value != ($currentConfig[$key] ?? '')) {
                 return true;
@@ -290,6 +290,7 @@ class AdministrationController extends SugarController
         }
         return false;
     }
+
     /**
      * action_saveunifiedsearchsettings
      *
@@ -311,11 +312,11 @@ class AdministrationController extends SugarController
             $unifiedSearchAdvanced->saveGlobalSearchSettings();
 
             // Refresh the server info & module list sections of the metadata
-            MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_SERVERINFO, MetaDataManager::MM_MODULES));
+            MetaDataManager::refreshSectionCache([MetaDataManager::MM_SERVERINFO, MetaDataManager::MM_MODULES]);
 
-            echo "true";
+            echo 'true';
         } catch (Exception $ex) {
-            echo "false";
+            echo 'false';
         }
     }
 
@@ -330,11 +331,9 @@ class AdministrationController extends SugarController
         $mod_strings = [];
         global $current_user;
         $this->view = 'ajax';
-        if(function_exists('imagecreatetruecolor'))
-        {
-            if(is_admin($current_user))
-            {
-                require_once('modules/UpgradeWizard/uw_utils.php');
+        if (function_exists('imagecreatetruecolor')) {
+            if (is_admin($current_user)) {
+                require_once 'modules/UpgradeWizard/uw_utils.php';
                 rebuildSprites(false);
             }
         } else {
@@ -349,28 +348,9 @@ class AdministrationController extends SugarController
      * @param array $config
      * @return array
      */
-    protected function saveFtsConfig($type, array $config) : array
+    protected function saveFtsConfig(string $type, array $config): array
     {
-        if (isMts() || !(isset($config['host']) || isset($config['port']))) {
-            // disable save in MTS env
-            return $config;
-        }
-
-        if (isset($config['host'])) {
-            $config['host'] = decodeLocalhost($config['host']);
-        }
-
-        if (!$this->hasConfigChanged($type, $config)) {
-            return $config;
-        }
-
-        $config = $this->mergeFtsConfig($type, $config);
-        $cfg = $this->getConfigurator();
-        $cfg->config['full_text_engine'] = array($type => $config);
-        $cfg->handleOverride();
-
-        SugarConfig::getInstance()->clearCache();
-        return $config;
+        return AdminSettings::saveFtsConfig($type, $config);
     }
 
     /**
@@ -385,7 +365,7 @@ class AdministrationController extends SugarController
      */
     protected function mergeFtsConfig($type, $newConfig)
     {
-        $currentConfig = SugarConfig::getInstance()->get("full_text_engine.{$type}", array());
+        $currentConfig = SugarConfig::getInstance()->get("full_text_engine.{$type}", []);
         return array_merge($currentConfig, $newConfig);
     }
 
@@ -394,20 +374,9 @@ class AdministrationController extends SugarController
      * @param array $request
      * @return array
      */
-    protected function getFtsSettingsFromRequest(array $request)
+    protected function getFtsSettingsFromRequest(array $request) : array
     {
-        $type = empty($request['type']) ? '' : $request['type'];
-        $config = array('host' => '', 'port' => '');
-        foreach (array_keys($config) as $key) {
-            if (!empty($request[$key])) {
-                if ($key === 'host') {
-                    $config[$key] = decodeLocalhost($request[$key]);
-                } else {
-                    $config[$key] = $request[$key];
-                }
-            }
-        }
-        return array($type, $config);
+        return AdminSettings::getFtsSettingsFromRequest($request);
     }
 
     /**
@@ -418,8 +387,7 @@ class AdministrationController extends SugarController
      */
     protected function verifyFtsConnectivity($type, array $config)
     {
-        $engine = SearchEngine::newEngine($type, $this->mergeFtsConfig($type, $config));
-        return $engine->isAvailable(true);
+        return AdminSettings::verifyFtsConnectivity($type, $config);
     }
 
     /**
@@ -470,7 +438,7 @@ class AdministrationController extends SugarController
 
         if ($file = $this->getUploadedMetadataFile()) {
             $errors = [];
-            $parseResult = $this->getParsedIdPMetadata((string) $file);
+            $parseResult = $this->getParsedIdPMetadata((string)$file);
 
             if (!$parseResult) {
                 $errors[] = $this->translateModuleError('WRONG_IMPORT_METADATA_INVALID_SOURCE_ERROR');
@@ -551,7 +519,7 @@ class AdministrationController extends SugarController
      * @param String $arrayName Name of global array defined in the metadata file (e.g. platforms)
      * @param String $ext Optional file extension. Used to save extension metadata in .ext.php files
      */
-    protected function savePlatformMetadata(String $filename, String $arrayName, String $ext = ''): void
+    protected function savePlatformMetadata(string $filename, string $arrayName, string $ext = ''): void
     {
         $platformMeta = json_decode(
             html_entity_decode(
@@ -568,7 +536,7 @@ class AdministrationController extends SugarController
         // If out array values are themselves arrays, we have an
         // associativ array, and should save key-value pairs.
         foreach ($platformMeta as $key => $value) {
-            $key = is_array($value) ? strval(var_export($key, true)) : "";
+            $key = is_array($value) ? strval(var_export($key, true)) : '';
             $out .= "\${$arrayName}[$key] = " . var_export($value, true) . ";\n";
         }
 

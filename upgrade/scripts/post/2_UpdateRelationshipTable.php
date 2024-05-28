@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * We need to repair the relationship table before we repair everything else
  * Otherwise the relationship rebuild happens before the table is fixed and
@@ -31,7 +32,7 @@ class SugarUpgradeUpdateRelationshipTable extends UpgradeScript
         $focus = BeanFactory::newBean('Relationships');
 
         $sql = $this->db->repairTable($focus, true);
-        if(trim($sql) != '') {
+        if (trim($sql) != '') {
             $this->log('Ran sql: ' . $sql);
         } else {
             $this->log('Relationship database table up to date.');
@@ -39,6 +40,5 @@ class SugarUpgradeUpdateRelationshipTable extends UpgradeScript
 
         unset($GLOBALS['reload_vardefs']);
         $this->log('Relationship Database table repaired');
-
     }
 }

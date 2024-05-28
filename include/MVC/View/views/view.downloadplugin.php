@@ -18,7 +18,7 @@ class ViewDownloadplugin extends ViewAjax
      */
     public function display()
     {
-		$sp = new SugarPlugins();
-		$sp->downloadPlugin($_REQUEST['plugin']);	
+        $sp = new SugarPlugins();
+        $sp->downloadPlugin($_REQUEST['plugin']);
     }
 }

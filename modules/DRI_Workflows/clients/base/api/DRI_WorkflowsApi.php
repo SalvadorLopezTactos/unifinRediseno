@@ -16,6 +16,7 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Exception as CJException;
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Journey as Journey;
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\RSA\CheckAndPerformRSA as CheckAndPerformRSA;
 use Sugarcrm\Sugarcrm\CustomerJourney\ConfigurationManager;
+use Sugarcrm\Sugarcrm\CustomerJourney\LogicHooks\ActivityHooksHelper;
 
 class DRI_WorkflowsApi extends SugarApi
 {
@@ -176,14 +177,79 @@ class DRI_WorkflowsApi extends SugarApi
                 'longHelp' => '/include/api/help/customer_journeyDRI_WorkflowsgetGracePeriodRemainingDays.html',
                 'minVersion' => '11.19',
             ],
+            'delete-stage-journey' => [
+                'reqType' => 'POST',
+                'path' => ['DRI_Workflows', 'delete-stage-journey'],
+                'pathVars' => ['module', 'action'],
+                'method' => 'deleteStageOrJourney',
+                'shortHelp' => 'Delete journey or stage according to the provide module and id',
+                'longHelp' => '/include/api/help/customer_journeyDRI_WorkflowsDeleteStageOrJourney.html',
+                'minVersion' => '11.21',
+            ],
+            'getActiveSmartGuidesCount' => [
+                'reqType' => 'GET',
+                'path' => ['?', '?', 'activeSmartGuidesCount'],
+                'pathVars' => ['module', 'record'],
+                'method' => 'getActiveSmartGuidesCount',
+                'shortHelp' => 'Provide the count of active smart guides related to a particular record',
+                'longHelp' => '/include/api/help/customer_journeyDRI_WorkflowsgetActiveSmartGuidesCount.html',
+                'minVersion' => '11.22',
+            ],
+            'getSmartGuidesCount' => [
+                'reqType' => 'GET',
+                'path' => ['?', '?', 'get-smartguides-count'],
+                'pathVars' => ['module', 'record'],
+                'method' => 'getSmartGuidesCount',
+                'shortHelp' => 'give the count of smart guides',
+                'longHelp' => '/include/api/help/customer_journeyDRI_WorkflowsgetSmartGuidesCount.html',
+                'minVersion' => '11.22',
+            ],
         ];
+    }
+
+    /**
+     * Get the count of the smart guides
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @throws SugarQueryException
+     * @throws NotFoundException
+     * @throws ParentNotFoundException
+     * @throws SugarApiExceptionError
+     * @throws SugarApiExceptionInvalidParameter
+     * @throws SugarApiExceptionError
+     * @throws SugarApiExceptionMissingParameter
+     * @throws SugarApiExceptionNotFound
+     */
+    public function getSmartGuidesCount(ServiceBase $api, array $args)
+    {
+        // Ensure this end-point must be accessible to Sugar Automate Users
+        ConfigurationManager::ensureAutomateUser();
+
+        $this->requireArgs($args, ['module', 'record']);
+        $configuratorObj = new Configurator();
+        $configuratorObj->loadConfig();
+
+        $parentModuleBean = \BeanFactory::getBean($args['module']);
+        $parentIDFieldName = strtolower($parentModuleBean->object_name) . '_id';
+        $workflowBean = \BeanFactory::getBean('DRI_Workflows');
+        $query = new \SugarQuery();
+
+        $query->select(['id']);
+        $query->from($workflowBean)->where()
+            ->equals($parentIDFieldName, $args['record']);
+
+        $configCount = $configuratorObj->config['list_max_entries_per_page'];
+        $count = safeCount($query->execute());
+
+        return $count > $configCount ? $configCount : $count;
     }
 
     /**
      * Provide journey and related stages data of chart
      *
      * @param ServiceBase $api
-     * @param array       $args
+     * @param array $args
      * @return array
      * @throws SugarApiExceptionMissingParameter
      * @throws SugarApiExceptionNotAuthorized
@@ -211,14 +277,17 @@ class DRI_WorkflowsApi extends SugarApi
             ];
 
             if ($journey) {
-                $coverage = (is_countable($journey->getStages()) ? count($journey->getStages()) : 0) > 0 ? 100 / (is_countable($journey->getStages()) ? count($journey->getStages()) : 0) : 0;
-                foreach ($journey->getStages() as $stage) {
+                $stages = $journey->getStages();
+                $coverage = safeCount($stages) > 0 ? 100 / safeCount($stages) : 0;
+                foreach ($stages as $stage) {
                     $data['stages'][] = [
                         'id' => $stage->id,
                         'label' => $stage->label,
                         'name' => $stage->name,
                         'state' => $stage->state,
                         'values' => [$coverage],
+                        'count' => $stage->score,
+                        'percentage' => SugarMath::init($stage->progress)->mul(100)->result(),
                     ];
                 }
             }
@@ -390,6 +459,9 @@ class DRI_WorkflowsApi extends SugarApi
             'momentum_ratio',
             'momentum_points',
             'momentum_score',
+            'assigned_user_id',
+            'assigned_user_name',
+            'assigned_user_picture',
         ];
 
         foreach ($journey->getParentDefinitions() as $def) {
@@ -453,7 +525,12 @@ class DRI_WorkflowsApi extends SugarApi
         /** @var DRI_Workflow $journey */
         $journey = $this->loadBean($api, $args);
 
-        $journey->cancel();
+        $response = $journey->cancel();
+        if (!empty($response)) {
+            $args = array_merge($args, $response);
+        }
+
+        return $this->formatSuccessResponse($api, $args);
     }
 
     /**
@@ -533,6 +610,33 @@ class DRI_WorkflowsApi extends SugarApi
             'name' => $bean->name,
             'module' => $bean->module_dir,
             'field' => $field,
+            'isValid' => false,
+        ];
+    }
+
+    /**
+     * Format the response after successfully performing the action
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     */
+    private function formatSuccessResponse(ServiceBase $api, array $args)
+    {
+        $data = [];
+        $childActivitiesCount = $args['childActivitiesCount'] ?? null;
+
+        if (empty($childActivitiesCount) || $childActivitiesCount <= 1) {
+            $data = $this->widgetData($api, $args);
+        }
+
+        return [
+            'isValid' => true,
+            'isChildReadOnly' => isset($args['is_child_read_only']) ? $args['is_child_read_only'] : '',
+            'isSelfReadOnly' => isset($args['self_read_only_activity']) ? $args['self_read_only_activity'] : '',
+            'isActivityChangeNotAllowed' => isset($args['activity_change_not_allowed']) ? $args['activity_change_not_allowed'] : '',
+            'isValidParent' => isset($args['is_valid_parent']) ? $args['is_valid_parent'] : '',
+            'data' => $data,
         ];
     }
 
@@ -599,7 +703,7 @@ class DRI_WorkflowsApi extends SugarApi
      */
     private function getChartJourney(array $journeys)
     {
-        if (count($journeys) === 0) {
+        if (safeCount($journeys) === 0) {
             return false;
         }
 
@@ -753,16 +857,21 @@ class DRI_WorkflowsApi extends SugarApi
 
         if ($activity instanceof Task) {
             $fields[] = 'date_due';
-        } else {
+        } elseif ($activity instanceof Call) {
+            $fields[] = 'date_start';
+            $fields[] = 'date_end';
+        } elseif ($activity instanceof Meeting) {
             $fields[] = 'date_start';
         }
 
         $data = $this->formatBean($api, ['fields' => $fields], $activity);
 
+        $activityHandler = ActivityHandlerFactory::factory($activity->module_dir);
+        $data['is_status_readonly'] = $activityHandler->isStatusReadOnly($activity);
+
         $data['customer_journey_progress'] = round($data['customer_journey_progress'] * 100);
         $data['cj_momentum_ratio'] = round($data['cj_momentum_ratio'] * 100);
 
-        $activityHandler = ActivityHandlerFactory::factory($activity->module_dir);
 
         $data['blocked_by'] = $activityHandler->getBlockedByActivityIds($activity);
         $data['blocked_by_stages'] = $activityHandler->getNotCompletedBlockedByStageIds($activity);
@@ -849,8 +958,11 @@ class DRI_WorkflowsApi extends SugarApi
         if (!empty($parentActivity)) {
             $canceller = new Journey\Canceller();
 
-            $canceller->notApplicableActivity($parentActivity);
+            $response = $canceller->notApplicableActivity($parentActivity);
+            $args = array_merge($args, $response);
         }
+
+        return $this->formatSuccessResponse($api, $args);
     }
 
     /**
@@ -888,18 +1000,19 @@ class DRI_WorkflowsApi extends SugarApi
         $parentActivity = $args['parentActivity'];
         $activities = $args['activities'];
         $fieldsToValidate = $args['fieldsToValidate'];
+        $response = [];
 
         // while completing a sub activity validate formula for
         // current activity, sibling activities and parent activity
         if (isset($activities)) {
-            $statusType = count($activities) > 1 ? 'complete' : $status;
+            $statusType = safeCount($activities) > 1 ? 'complete' : $status;
             $response = $this->validateActivities($activities, $fieldsToValidate, $statusType);
 
             if (!empty($response)) {
                 return $response;
             }
 
-            // validate parent activity formula with complete status
+            // validate the parent activity formula with complete status
             if (isset($parentActivity)) {
                 $response = $this->validateActivities($parentActivity, $fieldsToValidate, 'complete');
 
@@ -909,18 +1022,18 @@ class DRI_WorkflowsApi extends SugarApi
             }
         }
 
-        if ($this->checkValidUpdatedActivityStatus($args['activity_module'], $args['status'])) {
-            $bean = BeanFactory::retrieveBean($args['activity_module'], $args['activity_id']);
+        $response = $this->validateAndUpdateActivityStatus(
+            'DRI_Workflows',
+            $args['activity_id'],
+            $args['activity_module'],
+            $args['status'],
+            $args['targetItem']
+        );
 
-            if (!empty($bean->id)) {
-                $bean->status = $args['status'];
-
-                (new ActivityDatesHelper())->setActivityStartAndEndDates($bean, $args['status']);
-                $bean->save();
-            }
-        } else {
-            throw new \SugarApiExceptionInvalidParameter();
+        if (!empty($response)) {
+            $args = array_merge($args, $response);
         }
+        return $this->formatSuccessResponse($api, $args);
     }
 
     /**
@@ -945,11 +1058,72 @@ class DRI_WorkflowsApi extends SugarApi
         }
     }
 
+   /**
+     * Check whether the updatedStatus of an activity is valid and if yes then update activity
+     *
+     * @param string $activityID
+     * @param string $activityModule
+     * @param string $updatedActivityStatus
+     * @param string $targetModuleName
+     * @param mixed $targetItem
+     * @throws SugarApiException
+     * @throws SugarApiExceptionInvalidParameter
+     */
+    public function validateAndUpdateActivityStatus(
+        string $targetModuleName,
+        string $activityID,
+        string $activityModule,
+        string $updatedActivityStatus,
+        $targetItem
+    ) {
+        $response = [];
+        $response['activity_change_not_allowed'] = false;
+        $response['is_valid_parent'] = true;
+        if ($this->checkValidUpdatedActivityStatus($activityModule, $updatedActivityStatus)) {
+            $bean = BeanFactory::retrieveBean($activityModule, $activityID);
+
+            if (isset($targetItem)) {
+                $targetBean = BeanFactory::retrieveBean($targetItem['module'], $targetItem['id']);
+
+                $activityHelper = ActivityHandlerFactory::factory($targetItem['module']);
+                $targetBean->processing_smart_guide = true;
+                $response['is_valid_parent'] = $activityHelper->validateParent($targetBean, $updatedActivityStatus);
+            }
+
+            if (!empty($bean) && $response['is_valid_parent']) {
+                $activityHandler = ActivityHandlerFactory::factory($activityModule);
+                if (!$activityHandler->isParent($bean) && $activityHandler->isStatusReadOnly($bean)) {
+                    $response['is_child_read_only'] = true;
+                } else {
+                    $oldStatus = $bean->status;
+                    $bean->status = $updatedActivityStatus;
+                    (new ActivityDatesHelper())->setActivityStartAndEndDates($bean, $updatedActivityStatus);
+                    if ($targetModuleName === 'dri_workflows') {
+                        $bean->customer_journey_blocked_by = '';
+                        $bean->cj_blocked_by_stages = '';
+                    }
+                    $activityHooksHelper = new ActivityHooksHelper();
+                    $activityHooksHelper->validate($bean);
+                    $response['activity_change_not_allowed'] = ActivityHooksHelper::getAllowedByError();
+                    ActivityHooksHelper::resetAllowedByError();
+                    if (!$response['activity_change_not_allowed']) {
+                        $bean->save();
+                    } else {
+                        $bean->status = $oldStatus;
+                    }
+                }
+            }
+        } else {
+            throw new \SugarApiExceptionInvalidParameter();
+        }
+        return $response;
+    }
+
     /**
      * Create Customer Journey Relationships for standard modules present in the config
      *
      * @param ServiceBase $api
-     * @param array       $args
+     * @param array $args
      * @return array
      * @throws SugarApiExceptionMissingParameter
      * @throws SugarApiExceptionNotFound
@@ -966,7 +1140,7 @@ class DRI_WorkflowsApi extends SugarApi
      * Create Customer Journey Relationships for standard modules present in the config
      *
      * @param ServiceBase $api
-     * @param array       $args
+     * @param array $args
      * @return boolean
      * @throws SugarApiExceptionMissingParameter
      * @throws SugarApiExceptionNotFound
@@ -988,7 +1162,7 @@ class DRI_WorkflowsApi extends SugarApi
                     $objectName = $moduleBean->object_name;
                     $moduleName = $moduleBean->module_dir;
                     $tableName = $moduleBean->table_name;
-                    $beanName =  $objectName;
+                    $beanName = $objectName;
                     $idName = strtolower($objectName) . '_id';
                     $name = strtolower($objectName) . '_name';
                     $linkName = strtolower($objectName) . '_link';
@@ -1092,7 +1266,7 @@ class DRI_WorkflowsApi extends SugarApi
 
                 //write this meta to the vardefs file
                 $fileWriteSuccess = write_array_to_file(
-                    "vardefs",
+                    'vardefs',
                     $vardefs,
                     $filePath
                 );
@@ -1178,11 +1352,144 @@ class DRI_WorkflowsApi extends SugarApi
                 return;
             }
 
-            $write = "<?php\n" .
-                '// created: ' . date('Y-m-d H:i:s') . "\n" .
-                "";
-            //write this meta to the vardefs file
+            $moduleBean = BeanFactory::newBean($module);
+            $objectName = $moduleBean->object_name;
+            $tableName = $moduleBean->table_name;
+
+            $relName = strtolower($objectName). '_dri_workflow_templates';
+            $idxName = 'idx_'.trim(substr(strtolower($tableName), 0, 17)). '_cjtpl_id';
+            $write = "<?php"  . PHP_EOL .
+                '// created: ' . date('Y-m-d H:i:s') . PHP_EOL .
+                'unset($dictionary[\'' . $objectName . '\'][\'fields\'][\'dri_workflows\']);' . PHP_EOL .
+                'unset($dictionary[\'' . $objectName . '\'][\'fields\'][\'dri_workflow_template_name\']);' . PHP_EOL .
+                'unset($dictionary[\'' . $objectName . '\'][\'fields\'][\'dri_workflow_template_link\']);' . PHP_EOL .
+                'unset($dictionary[\'' . $objectName . '\'][\'relationships\'][\'' . $relName . '\']);' . PHP_EOL .
+                'unset($dictionary[\'' . $objectName . '\'][\'indices\'][\'' . $idxName . '\']);';
+
+            if (!in_array($module, ['Meetings', 'Calls', 'Tasks'])) {
+                //write this meta to the vardefs file
+                $write .= PHP_EOL .
+                    'unset($dictionary[\'' . $objectName . '\'][\'fields\'][\'dri_workflow_template_id\']);';
+            }
             $fileWriteSuccess = sugar_file_put_contents_atomic($cjFilePath, $write);
         }
+    }
+
+    /**
+     * Delete journey or stage according to the provide module and id
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @throws SugarApiExceptionMissingParameter
+     * @throws SugarApiExceptionNotFound
+     * @throws Exception
+     */
+    public function deleteStageOrJourney($api, $args)
+    {
+        $this->requireArgs($args, ['id', 'moduleName']);
+
+        $this->checkLicense();
+
+        $moduleName = $args['moduleName'];
+        $bean = BeanFactory::retrieveBean($moduleName, $args['id']);
+
+        $bean->mark_deleted($bean->id);
+
+        if ($moduleName === 'DRI_SubWorkflows') {
+            return $this->formatSuccessResponse($api, $args);
+        } elseif ($moduleName === 'DRI_Workflows') {
+            return $this->getNextJourney($moduleName, $api, $args);
+        }
+    }
+
+    /**
+     * Gets next journey id from DB
+     *
+     * @param array $args
+     * @return string
+     */
+    private function getJourneyFromDB($args)
+    {
+        $parentModuleBean = \BeanFactory::getBean($args['parentModule']);
+        $parentIDFieldName = strtolower($parentModuleBean->object_name) . '_id';
+        $workflowBean = \BeanFactory::getBean('DRI_Workflows');
+        $query = new \SugarQuery();
+
+        $query->select(['id']);
+        $query->from($workflowBean)->where()
+            ->equals($parentIDFieldName, $args['parentModelId'])
+            ->notIn('id', $args['currentJourneys']);
+        if ($args['state'] === 'active') {
+            $query->where()->equals('archived', false);
+        } elseif ($args['state'] === 'archived') {
+            $query->where()->equals('archived', true);
+        }
+        $query->orderBy('date_entered', 'ASC');
+
+        // since one journey is deleted at a time so we will get one next journey other than current journey
+        return $query->getOne();
+    }
+
+    /**
+     * Get next Journey in the queue, if already below limit or no next journey in queue return null
+     *
+     * @param string $moduleName
+     * @param ServiceBase $api
+     * @param array $args
+     *
+     * @return array|null
+     */
+    public function getNextJourney($moduleName, $api, $args)
+    {
+        $configuratorObj = new Configurator();
+        $configuratorObj->loadConfig();
+        $configCount = $configuratorObj->config['list_max_entries_per_page'];
+
+        // if already below max entries then do not run query
+        if (sizeof($args['currentJourneys']) < $configCount) {
+            return;
+        }
+
+        $nextjourneyId = $this->getJourneyFromDB($args);
+
+        if (!empty($nextjourneyId)) {
+            $args['module'] = $moduleName;
+            $args['record'] = $nextjourneyId;
+            return $this->widgetData($api, $args);
+        }
+
+        return;
+    }
+
+    /**
+     * Provide the count of active smart guides related to a particular record
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return int
+     * @throws SugarApiExceptionMissingParameter
+     * @throws SugarApiExceptionNotAuthorized
+     * @throws SugarApiExceptionNotFound
+     * @throws Exception
+     */
+    public function getActiveSmartGuidesCount(ServiceBase $api, array $args)
+    {
+        // Ensure this end-point must be accessible to Sugar Automate Users
+        ConfigurationManager::ensureAutomateUser();
+
+        $this->requireArgs($args, ['module', 'record']);
+
+        $parentModuleBean = \BeanFactory::getBean($args['module']);
+        $parentIDFieldName = strtolower($parentModuleBean->object_name) . '_id';
+        $workflowBean = \BeanFactory::getBean('DRI_Workflows');
+        $query = new \SugarQuery();
+
+        $query->select(['id']);
+        $query->from($workflowBean)->where()
+            ->equals($parentIDFieldName, $args['record'])
+            ->equals('state', 'in_progress')
+            ->equals('archived', false);
+
+        return safeCount($query->execute());
     }
 }

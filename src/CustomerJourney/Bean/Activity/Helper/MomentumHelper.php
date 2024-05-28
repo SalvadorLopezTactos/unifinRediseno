@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper;
 
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\ActivityHandlerFactory;
@@ -20,32 +21,31 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Exception as CJException;
  */
 class MomentumHelper
 {
-
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\parentHelper
      */
     private $parentHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\activityHelper
      */
     private $activityHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\childActivityHelper
      */
     private $childActivityHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\statusHelper
      */
     private $statusHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\stageHelper
      */
     private $stageHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\activityDatesHelper
      */
@@ -98,18 +98,18 @@ class MomentumHelper
         $handler = ActivityHandlerFactory::factory($activity->module_dir);
 
         if ($this->statusHelper->isStatusChanged($activity) &&
-        $this->statusHelper->isCompleted($activity) &&
-                empty($activity->cj_momentum_end_date)) {
+            $this->statusHelper->isCompleted($activity) &&
+            empty($activity->cj_momentum_end_date)) {
             $activity->cj_momentum_end_date = $timeDate->asDb($timeDate->getNow());
         } elseif (!$this->statusHelper->isCompleted($activity)) {
-            $activity->cj_momentum_end_date = "";
+            $activity->cj_momentum_end_date = '';
         }
 
         $template = $handler->getActivityTemplate($activity);
 
         //If it is parent activity and new one.
         if (($this->parentHelper->isParent($activity) && empty($activity->cj_momentum_points)) ||
-                empty($activity->cj_momentum_start_date)) {
+            empty($activity->cj_momentum_start_date)) {
             $activity->cj_momentum_points = $template->momentum_points;
             $activity->cj_momentum_score = $template->momentum_points;
             $activity->cj_momentum_ratio = 1;
@@ -128,8 +128,8 @@ class MomentumHelper
             }
 
             $actualHours = $diff->days * 24 + $diff->h + ($diff->i / 60);
-            $dueDays = !empty($template->momentum_due_days) ? (int) $template->momentum_due_days : 0;
-            $expectedHours = !empty($template->momentum_due_hours) ? (int) $template->momentum_due_hours : 0;
+            $dueDays = !empty($template->momentum_due_days) ? (int)$template->momentum_due_days : 0;
+            $expectedHours = !empty($template->momentum_due_hours) ? (int)$template->momentum_due_hours : 0;
             $expectedHours += $dueDays * 24;
 
             if ($actualHours > 0) {
@@ -187,7 +187,7 @@ class MomentumHelper
      */
     public function getMomentumPoints(\SugarBean $activity)
     {
-        return (int) $activity->cj_momentum_points;
+        return (int)$activity->cj_momentum_points;
     }
 
     /**
@@ -198,7 +198,7 @@ class MomentumHelper
      */
     public function getMomentumScore(\SugarBean $activity)
     {
-        return (int) $activity->cj_momentum_score;
+        return (int)$activity->cj_momentum_score;
     }
 
     /**

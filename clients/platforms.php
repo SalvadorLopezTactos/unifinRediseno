@@ -18,6 +18,7 @@ $platforms[] = 'lpi';
 $platforms[] = 'collabspot';
 $platforms[] = 'collabspotbackend';
 $platforms[] = 'discover';
+$platforms[] = 'gcs';
 $platforms[] = 'dms';
 $platforms[] = 'kiosk';
 $platforms[] = 'sugarlambda';

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Dodaj',
     'LBL_ADDRCITY' => 'Grad',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Inform.' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Zatvori' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'Nije pronađen nijedan poveznik za navedeni ID izvora.',
-);
-
+];

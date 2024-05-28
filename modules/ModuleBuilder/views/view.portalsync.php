@@ -11,34 +11,35 @@
  */
 
 
-class ViewPortalSync extends SugarView 
+class ViewPortalSync extends SugarView
 {
     public function __construct()
-	{
-	    $GLOBALS['log']->debug('ViewPortalSync constructor');
+    {
+        $GLOBALS['log']->debug('ViewPortalSync constructor');
         parent::__construct();
-	}
-
-	/**
-	 * @see SugarView::_getModuleTitleParams()
-	 */
-	protected function _getModuleTitleParams($browserTitle = false)
-	{
-	    global $mod_strings;
-	    
-    	return array(
-    	   translate('LBL_MODULE_NAME','Administration'),
-    	   ModuleBuilderController::getModuleTitle(),
-    	   );
     }
 
-	// DO NOT REMOVE - overrides parent ViewEdit preDisplay() which attempts to load a bean for a non-existent module
-	function preDisplay() 
-	{
-	}
+    /**
+     * @see SugarView::_getModuleTitleParams()
+     */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _getModuleTitleParams($browserTitle = false)
+    {
+        global $mod_strings;
 
-	function display() 
-	{
+        return [
+            translate('LBL_MODULE_NAME', 'Administration'),
+            ModuleBuilderController::getModuleTitle(),
+        ];
+    }
+
+    // DO NOT REMOVE - overrides parent ViewEdit preDisplay() which attempts to load a bean for a non-existent module
+    public function preDisplay()
+    {
+    }
+
+    public function display()
+    {
         $smarty = new Sugar_Smarty();
         $smarty->assign('welcome', $GLOBALS['mod_strings']['LBL_SYNCP_WELCOME']);
         $smarty->assign('mod', $GLOBALS['mod_strings']);
@@ -51,12 +52,12 @@ class ViewPortalSync extends SugarView
         $options = !empty($system_config->settings['system_portal_url'])
             ? $system_config->settings['system_portal_url'] : 'https://';
 
-        $smarty->assign('options',$options);
+        $smarty->assign('options', $options);
         $ajax = new AjaxCompose();
         $ajax->addCrumb(translate('LBL_SUGARPORTAL', 'ModuleBuilder'), 'ModuleBuilder.main("sugarportal")');
         $ajax->addCrumb(translate('LBL_SYNCPORTAL', 'ModuleBuilder'), 'ModuleBuilder.getContent("module=ModuleBuilder&action=portalsync")');
         $ajax->addSection('center', translate('LBL_SYNCPORTAL', 'ModuleBuilder'), $smarty->fetch('modules/ModuleBuilder/tpls/portalsync.tpl'));
-		$GLOBALS['log']->debug($smarty->fetch('modules/ModuleBuilder/tpls/portalsync.tpl'));
+        $GLOBALS['log']->debug($smarty->fetch('modules/ModuleBuilder/tpls/portalsync.tpl'));
         echo $ajax->getJavascript();
-	}
+    }
 }

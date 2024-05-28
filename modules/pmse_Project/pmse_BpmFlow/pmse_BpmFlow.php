@@ -13,52 +13,51 @@
 /**
  * THIS CLASS IS FOR DEVELOPERS TO MAKE CUSTOMIZATIONS IN
  */
+class pmse_BpmFlow extends pmse_BpmFlow_sugar
+{
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-
-class pmse_BpmFlow extends pmse_BpmFlow_sugar {
-
-
-	public function __construct(){
-		parent::__construct();
-	}
-
-	function bean_implements($interface){
-		switch($interface){
-			case 'ACL':
-				return true;
-		}
-		return false;
-	}
+    public function bean_implements($interface)
+    {
+        switch ($interface) {
+            case 'ACL':
+                return true;
+        }
+        return false;
+    }
 
     public function getACLCategory()
     {
         return 'pmse_Inbox';
     }
 
-	/**
-	 * @inheritDoc
-	 */
-	public function ACLAccess($view, $context = null)
-	{
-		switch ($view) {
-			case 'list':
-				if (is_array($context)
-					&& isset($context['source'])
-					&& $context['source'] === 'filter_api') {
-					return false;
-				}
-				break;
-			case 'edit':
-			case 'view':
-				if (is_array($context)
-					&& isset($context['source'])
-					&& $context['source'] === 'module_api') {
-					return false;
-				}
-				break;
-		}
-		return parent::ACLAccess($view, $context);
-	}
+    /**
+     * @inheritDoc
+     */
+    public function ACLAccess($view, $context = null)
+    {
+        switch ($view) {
+            case 'list':
+                if (is_array($context)
+                    && isset($context['source'])
+                    && $context['source'] === 'filter_api') {
+                    return false;
+                }
+                break;
+            case 'edit':
+            case 'view':
+                if (is_array($context)
+                    && isset($context['source'])
+                    && $context['source'] === 'module_api') {
+                    return false;
+                }
+                break;
+        }
+        return parent::ACLAccess($view, $context);
+    }
 
     /**
      * {@inheritDoc}
@@ -75,8 +74,8 @@ class pmse_BpmFlow extends pmse_BpmFlow_sugar {
     }
 
     /**
-    * @inheritDoc
-    */
+     * @inheritDoc
+     */
     public function save($check_notify = false)
     {
         // Because cas_user_id is sometimes set from assigned_user_id, and because

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Kõnede logi',
     'LNK_NEW_MEETING' => 'Plaani kohtumine',
     'LNK_NEW_TASK' => 'Loo ülesanne',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Lisa metaväli 2',
     'COLUMN_TITLE_EXT3' => 'Lisa metaväli 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'IFrame kõrgus',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'Vaike-URL',
     'COLUMN_TITLE_AUDIT' => 'Audit',
     'COLUMN_TITLE_PII' => 'Isiklik teave',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Vaikeväärtus',
     'LBL_AUDITED' => 'Auditeeritud',
     'LBL_REPORTABLE' => 'Aruandlusega',
-    'ERR_RESERVED_FIELD_NAME' => "Võtmesõna",
+    'ERR_RESERVED_FIELD_NAME' => 'Võtmesõna',
     'ERR_SELECT_FIELD_TYPE' => 'Valige välja tüüp',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Välja nimi on juba olemas',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Välja nimi peab sisaldama ainult järgmisi märke: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Tehtud',
     'LBL_EXE_NON_SIM_MODE' => 'Täida mittesimuleerimisrežiim',
     'LBL_CALCULATION_VISIBLE' => 'Muuda arvutuste jaoks nähtavaks',
-);
+];

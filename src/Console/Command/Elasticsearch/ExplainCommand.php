@@ -81,8 +81,7 @@ class ExplainCommand extends Command implements InstanceModeInterface
                 InputOption::VALUE_REQUIRED,
                 'Maximum amount of records to return.',
                 20
-            )
-        ;
+            );
     }
 
     /**
@@ -96,7 +95,7 @@ class ExplainCommand extends Command implements InstanceModeInterface
         if ($modules) {
             $modules = explode(',', $modules);
         } else {
-            $modules = array();
+            $modules = [];
         }
 
         $userId = $input->getOption('user');
@@ -106,7 +105,7 @@ class ExplainCommand extends Command implements InstanceModeInterface
             $user = $this->getCurrentUser();
         }
 
-        $limit = (int) $input->getOption('limit');
+        $limit = (int)$input->getOption('limit');
 
         $globalSearch
             ->from($modules)
@@ -116,8 +115,7 @@ class ExplainCommand extends Command implements InstanceModeInterface
             ->fieldBoost(true)
             ->useHighlighter(true)
             ->setExplain(true)
-            ->setUser($user)
-        ;
+            ->setUser($user);
 
         $resultSet = $globalSearch->search()->getResultSet();
 
@@ -149,15 +147,15 @@ class ExplainCommand extends Command implements InstanceModeInterface
 
     /**
      * Get GlobalSearch provider
-     * @throws \Exception
      * @return GlobalSearch
+     * @throws \Exception
      */
     protected function getGlobalSearchProvider()
     {
         $engine = SearchEngine::getInstance()->getEngine();
 
         if (!$engine instanceof Elastic) {
-            throw new \Exception("This command is only valid when using Elasticsearch as backend");
+            throw new \Exception('This command is only valid when using Elasticsearch as backend');
         }
 
         return $engine->getContainer()->getProvider('GlobalSearch');
@@ -166,8 +164,8 @@ class ExplainCommand extends Command implements InstanceModeInterface
     /**
      * Get user bean based on id
      * @param string $id
-     * @throws \Exception
      * @return \User
+     * @throws \Exception
      */
     protected function getUser($id)
     {

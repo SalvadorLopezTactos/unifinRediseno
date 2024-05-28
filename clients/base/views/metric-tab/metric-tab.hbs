@@ -15,7 +15,7 @@
         {{meta.name}}</a></span>
 {{else}}
     <div class="kpi-metric{{#if active}} active{{/if}}">
-        <div class="kpi-metric-tab" data-placement="bottom">
+        <div class="kpi-metric-tab" data-bs-placement="bottom">
             <div class="kpi-metric-tab-content">
                 <span class="kpi-metric-label{{#if active}} active{{/if}} ellipsis_inline" rel="tooltip" title="{{meta.name}}">
                     {{meta.name}}
@@ -27,16 +27,15 @@
         <div class="btn-group">
             <button
                 type="button"
-                data-toggle="dropdown"
-                rel="tooltip"
+                data-bs-toggle="dropdown"
                 class="btn btn-invisible dropdown-toggle"
-                data-placement="right"
                 aria-haspopup="true"
                 aria-expanded="false"
+                data-bs-display="static"
             >
                 <i class="sicon sicon-kebab"></i>
             </button>
-            <ul class="dropdown-menu left" role="menu">
+            <ul class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl" role="menu">
                 <li role="presentation"><a role="menuitem" href="#{{buildRoute module='Metrics' id=meta.id}}" class="manage">{{str "LBL_SEE_DETAILS" module}}
                 </a></li>
                 {{#if hasAdminAccess}}

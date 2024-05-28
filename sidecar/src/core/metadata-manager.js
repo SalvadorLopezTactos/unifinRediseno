@@ -9,17 +9,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const Acl = require('core/acl');
-const Events = require('core/events');
-const Template = require('view/template');
-const User = require('core/user');
-const Utils = require('utils/utils');
-const Language = require('core/language');
-const ViewManager = require('view/view-manager');
-const DataManager = require('data/data-manager');
-
-// Promise Polyfill for IE Support, remove when we drop that browser!
-import Promise from 'promise-polyfill';
+const Acl = require('./acl');
+const Events = require('./events');
+const Template = require('../view/template');
+const User = require('./user');
+const Utils = require('../utils/utils');
+const Language = require('./language');
+const ViewManager = require('../view/view-manager');
+const DataManager = require('../data/data-manager');
 
 // Key prefix used to identify metadata in the local storage.
 var _keyPrefix = 'meta:';

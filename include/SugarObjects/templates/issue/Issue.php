@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -55,6 +58,7 @@ class Issue extends Basic
         return $this->isResolvedStatus($this->status);
     }
 
+
     /**
      * Check if this issue is newly resolved; i.e. it changed from an
      * unresolved to a resolved status.
@@ -91,8 +95,9 @@ class Issue extends Basic
     public function getHoursBetween(
         \SugarDateTime $startDateTime,
         \SugarDateTime $endDateTime,
-        string $bid = ''
+        string         $bid = ''
     ) {
+
         $hours = [
             'calendarHours' => 0.00,
             'businessHours' => 0.00,
@@ -152,7 +157,7 @@ class Issue extends Basic
      * @return string
      * @throws SugarQueryException
      */
-    protected function getLastRecord(string $field) : array
+    protected function getLastRecord(string $field): array
     {
         $query = new SugarQuery();
         $query->select(['id', 'value_string']);
@@ -177,7 +182,7 @@ class Issue extends Basic
      * @param string $field
      * @return string
      */
-    protected function createNewCTRecord(string $field) : string
+    protected function createNewCTRecord(string $field): string
     {
         $newBean = BeanFactory::newBean('ChangeTimers');
         $newBean->parent_type = $this->getModuleName();
@@ -193,7 +198,7 @@ class Issue extends Basic
      * @return bool
      * @throws Exception
      */
-    protected function updateLastCTRecord(string $lastId) : bool
+    protected function updateLastCTRecord(string $lastId): bool
     {
         $bean = BeanFactory::retrieveBean('ChangeTimers', $lastId);
         if ($bean) {
@@ -208,7 +213,7 @@ class Issue extends Basic
             $bean->hours = $hours['calendarHours'];
             $bean->business_hours = $hours['businessHours'];
 
-            return (bool) $bean->save();
+            return (bool)$bean->save();
         }
 
         return false;
@@ -219,7 +224,7 @@ class Issue extends Basic
      * @param array $lastRecord
      * @return bool
      */
-    protected function shouldNotProcess(string $field, array $lastRecord) : bool
+    protected function shouldNotProcess(string $field, array $lastRecord): bool
     {
         if (!empty($lastRecord)) {
             if ($this->$field == $lastRecord['value_string']) {
@@ -228,6 +233,7 @@ class Issue extends Basic
         }
         return false;
     }
+
     /**
      * @param string $field
      * @throws SugarQueryException
@@ -251,7 +257,7 @@ class Issue extends Basic
     /**
      * @return array
      */
-    protected function getChangeTimerFields() : array
+    protected function getChangeTimerFields(): array
     {
         $bean_name = get_valid_bean_name($this->getModuleName());
         return VardefManager::getModuleProperty($bean_name, 'change_timer_fields', []);
@@ -284,7 +290,7 @@ class Issue extends Basic
 
         $id = parent::save($check_notify);
 
-        if ($this->isLicensedForServe()) {
+        if ($this->isLicensedForServe() || $this->isLicensedForEnterprise()) {
             $changeTimerFields = $this->getChangeTimerFields();
             if (!empty($changeTimerFields) && SugarBean::enterOperation('saving_change_timer')) {
                 $this->processChangeTimers($changeTimerFields);

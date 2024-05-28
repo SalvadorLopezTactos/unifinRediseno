@@ -14,15 +14,19 @@
 {{value}}
 {{/eq}}
 {{#notEq value hiddenValue}}
-    <span class="relate-field-container">
+    <span class="relate-field-container flex">
+        {{#if showIcon}}
+            {{moduleLabel module 'sm' rel='tooltip' title=(getModuleName module) data-bs-placement='top'}}
+        {{/if}}
+
         {{#if href}}
-            <a class="ellipsis_inline" href="{{href}}" data-placement="bottom" title="{{value}}"
+            <a class="ellipsis_inline {{module}}" href="{{href}}" data-bs-placement="bottom" title="{{value}}"
                data-link-target="{{linkTarget}}" data-module="{{module}}" data-model-id="{{modelId}}">
                 {{value}}
             </a>
             {{partial 'focus-icon' this this}}
         {{else}}
-            <span class="ellipsis_inline" data-placement="bottom" title="{{value}}">
+            <span class="ellipsis_inline" data-bs-placement="bottom" title="{{value}}">
                 {{value}}
             </span>
         {{/if}}

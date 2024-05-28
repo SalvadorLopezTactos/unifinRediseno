@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_SALUTATION' => 'Oslovljavanje',
     'LBL_NAME' => 'Ime',
     'LBL_FIRST_NAME' => 'Ime',
@@ -68,4 +68,4 @@ $mod_strings = array(
     'LBL_GOOGLEPLUS' => 'ID za Google Plus',
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiraj zamjensku adresu u primarnu adresu',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiraj primarnu adresu u zamjensku adresu',
-);
+];

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Sildid',
     'LBL_GENERIC_LINK' => 'Seotud objektid',
     'LBL_NAME_LOWER' => 'Väike sildi nimi',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'Minu sildid',
     'LBL_MY_FAVORITE_TAGS' => 'Minu lemmiksildid',
     'LBL_MORE_TAGS' => '{{tagsNumber}} silti',
-);
+];

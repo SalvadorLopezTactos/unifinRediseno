@@ -46,20 +46,63 @@
     /**
      * @inheritdoc
      */
+    bindDataChange: function() {
+        this._super('bindDataChange');
+
+        this._resizeDebounce = _.debounce(_.bind(this._resize, this), 50);
+        $(window).on('resize.' + this.cid, this._resizeDebounce);
+        this.listenTo(app.events, 'metric:data:ready', this._resizeDebounce);
+    },
+
+    /**
+     * @inheritdoc
+     */
     _render: function() {
         this._super('_render');
-        this.$('a[data-toggle="tab"]').on('shown.bs.tab', _.bind(this.tabClickHandle, this));
+        this.$('li[data-bs-toggle="tab"]').on('shown.bs.tab', _.bind(this.tabClickHandle, this));
 
-        const resizeDebounce = _.debounce(_.bind(this._resize, this), 50);
-        $(window).on('resize.' + this.cid, resizeDebounce);
-        this.listenTo(app.events, 'app:view:change', resizeDebounce);
+        // Observe resizing on the headerpane
+        if (this.resizeOb) {
+            this.resizeOb.disconnect();
+        }
+        let lhPane = $('.listheaderpane').get(0);
+        if (lhPane instanceof Element) {
+            this.resizeOb = new ResizeObserver(_.bind(this.reHeightParentContainer, this));
+            this.resizeOb.observe(lhPane);
+        }
     },
 
     /**
      * Change css propperties of different Forecasts elements on resize event
      */
     _resize: function() {
+        if (!this.$el) {
+            return;
+        }
+
         const windowWidth = $(window).width();
+        const main = this.$el.closest(this.parentContainer);
+        const headerpane = main.find('.headerpane');
+        const flexList = main.find('.paginated-flex-list');
+        const metrics = main.find('.forecast-metrics');
+        const metricsHeight = metrics.outerHeight();
+
+        flexList.css({
+            height: `calc(100% - ${metricsHeight}px - 2rem)`,
+        });
+
+        headerpane.css({
+            width: (windowWidth <= 768) ? `${main.width()}px` : '',
+        });
+    },
+
+    /**
+     * Change css propperties of parent container element
+     */
+    reHeightParentContainer: function() {
+        if (!this.$el) {
+            return;
+        }
 
         const main = this.$el.closest(this.parentContainer);
         const headerpane = main.find('.headerpane');
@@ -68,23 +111,6 @@
         main.css({
             top: headerpaneHeight,
             height: `calc(100% - ${headerpaneHeight}px)`,
-        });
-
-        const flextList = main.find('.paginated-flex-list');
-        const metrics = main.find('.forecast-metrics');
-        const metricsHeight = metrics.outerHeight();
-
-        flextList.css({
-            height: `calc(100% - ${metricsHeight}px - 2rem)`,
-        });
-
-        const sidebar = $('.sidebar-content');
-        sidebar.css({
-            top: (windowWidth <= 768) ? `${headerpaneHeight}px` : '',
-        });
-
-        headerpane.css({
-            width: (windowWidth <= 768) ? `${main.width()}px` : '',
         });
     },
 

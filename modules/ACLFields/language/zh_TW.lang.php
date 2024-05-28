@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_DEFAULT' => '未設定',
     'LBL_READ_WRITE' => '讀取/寫入',
     'LBL_READ_OWNER_WRITE' => '讀取/擁有者寫入',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_READ_SELECTED_TEAMS_WRITE' => '讀/(擁有者與選定的小組) 寫',
     'LBL_SELECTED_TEAMS_READ_OWNER_WRITE' => '(擁有者與選定的小組) 讀/擁有者寫',
     'LBL_SELECTED_TEAMS_READ_WRITE' => '(擁有者與選定的小組) 讀/(擁有者與選定的小組) 寫',
-);
+];

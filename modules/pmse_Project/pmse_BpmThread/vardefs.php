@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmThread'] = array(
+$dictionary['pmse_BpmThread'] = [
     'table' => 'pmse_bpm_thread',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'reassignable' => false,
-    'fields' => array(
-        'cas_id' => array(
+    'fields' => [
+        'cas_id' => [
             'required' => true,
             'name' => 'cas_id',
             'vname' => 'Unique Identifier for this Case',
@@ -41,8 +41,8 @@ $dictionary['pmse_BpmThread'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'cas_thread_index' => array(
+        ],
+        'cas_thread_index' => [
             'required' => true,
             'name' => 'cas_thread_index',
             'vname' => 'Case thread index a sequential number relative to each case',
@@ -66,8 +66,8 @@ $dictionary['pmse_BpmThread'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'cas_thread_parent' => array(
+        ],
+        'cas_thread_parent' => [
             'required' => true,
             'name' => 'cas_thread_parent',
             'vname' => 'Parent thread',
@@ -91,8 +91,8 @@ $dictionary['pmse_BpmThread'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'cas_thread_status' => array(
+        ],
+        'cas_thread_status' => [
             'required' => true,
             'name' => 'cas_thread_status',
             'vname' => 'Thread status',
@@ -112,8 +112,8 @@ $dictionary['pmse_BpmThread'] = array(
             'calculated' => false,
             'len' => '32',
             'size' => '32',
-        ),
-        'cas_flow_index' => array(
+        ],
+        'cas_flow_index' => [
             'required' => true,
             'name' => 'cas_flow_index',
             'vname' => 'Case flow index',
@@ -137,8 +137,8 @@ $dictionary['pmse_BpmThread'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'cas_thread_tokens' => array(
+        ],
+        'cas_thread_tokens' => [
             'required' => true,
             'name' => 'cas_thread_tokens',
             'vname' => 'tokens evaluated in this thread',
@@ -162,8 +162,8 @@ $dictionary['pmse_BpmThread'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'cas_thread_passes' => array(
+        ],
+        'cas_thread_passes' => [
             'required' => true,
             'name' => 'cas_thread_passes',
             'vname' => 'times the thread was routed',
@@ -187,33 +187,33 @@ $dictionary['pmse_BpmThread'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'idx_pmse_bpm_thread_del_cas_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'cas_id',
                 'deleted',
-            ),
-        ),
-    ),
-    'relationships' => array(),
+            ],
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmThread', 'pmse_BpmThread');

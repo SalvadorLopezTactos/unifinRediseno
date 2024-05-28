@@ -51,12 +51,18 @@ class SessionListener
             if (session_id()) {
                 session_write_close();
             }
-            ini_set("session.use_cookies", '0');
+            ini_set('session.use_cookies', '0');
             session_id($sessionId);
             session_start();
         }
 
         if (empty($_SESSION)) {
+            if ($token->hasAttribute('ext')) {
+                $tokenExt = $token->getAttribute('ext');
+                if (!empty($tokenExt['sudoer'])) {
+                    $_SESSION['sudo_for'] = $tokenExt['sudoer'];
+                }
+            }
             $_SESSION['externalLogin'] = true;
             $_SESSION['is_valid_session'] = true;
             $_SESSION['ip_address'] = query_client_ip();

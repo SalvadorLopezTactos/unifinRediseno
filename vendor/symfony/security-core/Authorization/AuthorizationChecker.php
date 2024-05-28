@@ -32,7 +32,7 @@ class AuthorizationChecker implements AuthorizationCheckerInterface
     private $alwaysAuthenticate;
     private $exceptionOnNoToken;
 
-    public function __construct(TokenStorageInterface $tokenStorage, /*AccessDecisionManagerInterface*/ $accessDecisionManager, /*bool*/ $alwaysAuthenticate = false, /*bool*/ $exceptionOnNoToken = true)
+    public function __construct(TokenStorageInterface $tokenStorage, /* AccessDecisionManagerInterface */ $accessDecisionManager, /* bool */ $alwaysAuthenticate = false, /* bool */ $exceptionOnNoToken = true)
     {
         if ($accessDecisionManager instanceof AuthenticationManagerInterface) {
             trigger_deprecation('symfony/security-core', '5.4', 'The $autenticationManager argument of "%s" is deprecated.', __METHOD__);
@@ -80,7 +80,7 @@ class AuthorizationChecker implements AuthorizationCheckerInterface
             // @deprecated since Symfony 5.4
             if ($this->alwaysAuthenticate || !$authenticated = $token->isAuthenticated(false)) {
                 if (!($authenticated ?? true)) {
-                    trigger_deprecation('symfony/core', '5.4', 'Returning false from "%s()" is deprecated, return null from "getUser()" instead.');
+                    trigger_deprecation('symfony/core', '5.4', 'Returning false from "%s::isAuthenticated()" is deprecated, return null from "getUser()" instead.', get_debug_type($token));
                 }
                 $this->tokenStorage->setToken($token = $this->authenticationManager->authenticate($token));
             }

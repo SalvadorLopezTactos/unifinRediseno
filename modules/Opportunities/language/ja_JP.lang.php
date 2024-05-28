@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => '商談リスト ダッシュ ボード',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => '商談レコードダッシュ ボード',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => '見積',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => '動的アカウントによる機会',
+    'LBL_TOP_10_OPP' => '上位10件のオープンな機会',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'ダッシュレット：私のアクティブな機会',
+    'LBL_MY_ACTIVE_OPP' => '私のアクティブな機会',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'パイプラインの合計は',
 
-    'LBL_OPPORTUNITY_ROLE'=>'商談での役割',
+    'LBL_OPPORTUNITY_ROLE' => '商談での役割',
     'LBL_NOTES_SUBPANEL_TITLE' => 'メモ',
     'LBL_TAB_OPPORTUNITY' => '{{module}} のレビュー',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => '確認をクリックすると、すべての売上予測データを消去し、商談ビューを変更します。これが意図したものではない場合は、キャンセルをクリックして以前の設定に戻ります。',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         '確認をクリックすると、すべての売上予測データを消去して商談ビューが変更されます。'
-        .'また、商談品目のターゲットモジュールが含まれるすべてのプロセス定義は無効になります。'
-        .'この操作が意図したものでなければ、キャンセルをクリックして以前の設定に戻ってください。',
+        . 'また、商談品目のターゲットモジュールが含まれるすべてのプロセス定義は無効になります。'
+        . 'この操作が意図したものでなければ、キャンセルをクリックして以前の設定に戻ってください。',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => '全ての商談品目がクローズされ、少なくとも一つ受注した場合、',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => '商談セールスステージは「クローズされた受注」にセットされます。',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => '全ての商談品目がクローズされた失注ステージにある場合、',
@@ -220,25 +223,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'この変更を開始した後、既存の{{module_name}} の商談品目のレコードが作成されます。商談品目が完了し使用可能の場合、通知がユーザプロファイルのEメールアドレスに送信されます。インスタンスは通知が送信されるために　管理＞Eメール設定　でEメールを送信するように設定する必要がありますのでご注意ください。',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}}モジュールにより、個々の販売を最初から最後まで追跡できます。各 {{module_name}} のレコードは販売見込みを表し、関連する販売データと {{quotes_module}}、{{contacts_module}} などの他の重要なレコードに関連するデータが含まれています。{{module_name}} は、通常、いくつかの販売ステージを経て、[受注] または [失注] と表示されます。{{plural_module_name}} は、Sugar の {{forecasts_singular_module}} モジュールを使って、販売傾向を把握・予測し、販売ノルマを達成するために作業を集中させることで、さらに活用できます。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} モジュールを使用すると、個々の商談を最初から最後まで追跡できます。各 {{module_name}} レコードは、商談見込みを表し、関連する商談データだけでなく、{{quotes_module}}、{{contacts_module}} などの他の重要なレコードに関連するものも含まれます。{{module_name}} は通常、「完了」または「失注」と表示されるまで、いくつかのセールスステージを進みます。{{plural_module_name}} をさらに活用するには、Sugarの {{forecasts_singular_module}} モジュールを使用して、商談傾向を理解および予測し、営業ノルマを達成するための作業に集中します。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} モジュールを使用すると、個々の売上とその売上に属する商品を最初から最後まで追跡することができます。各 {{module_name}} レコードは販売見込みを表し、関連する販売データだけでなく、{{quotes_module}} や {{contacts_module}} など他の重要なレコードに関連するデータも含まれます。
+    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールにより、個々の商談とそれらの商談に属している商談品目を最初から最後まで追跡できます。各{{module_name}}レコードは商談見込みを表し、関連する商談データだけでなく{{quotes_module}}、{{contacts_module}}などの他の重要なレコードに関連しているデータも含まれます。
 
-- 個々のフィールドまたは [編集] ボタンをクリックして、このレコードのフィールドを編集できます。
-- 左下のペインを [データビュー] に切り替えて、サブパネル内の他のレコードへのリンクを表示または変更することができます。
-- 左下のペインを [アクティビティストリーム] に切り替えることで、{{activitystream_singular_module}} 内のユーザーコメントとレコードの変更履歴を作成、表示することができます。
-- レコード名の右側にあるアイコンを使用して、このレコードをフォローまたはお気に入りに追加することができます。
-- その他のアクションは、[編集] ボタンの右側にあるドロップダウンの [操作] メニューにあります。',
+・個々のフィールドまたは[編集]ボタンをクリックすると、このレコードのフィールドを編集できます。
+・左下のペインを[データビュー]に切り替えると、サブパネルにある他のレコードへのリンクを表示または修正できます。
+・左下のペインを[アクティビティストリーム]に切り替えると、{{activitystream_singular_module}}でユーザーコメントを作成・閲覧したり、変更履歴を記録したりできます。
+・レコード名の右側にあるアイコンを使用すると、このレコードをフォローしたり、お気に入りに追加したりできます。
+・[編集]ボタンの右側にあるドロップダウンの[アクション]メニューから、追加のアクションが利用できます。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} モジュールを使用すると、個々の売上とそれらの売上に属する商品を最初から最後まで追跡できます。各 {{module_name}} レコードは販売見込みを表し、関連する販売データだけでなく、{{quotes_module}} や {{contacts_module}} などの他の重要なレコードに関連するデータも含まれます。
+    'LBL_HELP_CREATE' => '{{plural_module_name}}モジュールにより、個々の商談とそれらの商談に属している商談品目を最初から最後まで追跡できます。各{{module_name}}レコードは商談見込みを表し、関連する商談データだけでなく{{quotes_module}}、{{contacts_module}}などの他の重要なレコードに関連しているデータも含まれます。
 
-{{module_name}} の作成方法:
+{{module_name}}の作成方法
 1. 必要に応じてフィールドに値を入力します。
- - [必須] とマークされたフィールドは入力してから保存する必要があります。
- - 必要に応じて [さらに表示] をクリックすると追加フィールドが表示されます。
-2. [保存] をクリックすると、新しいレコードが確定されて前のページに戻ります。',
+・[必須]とマークされたフィールドは入力してから保存する必要があります。
+・必要に応じて[さらに表示]をクリックすると、追加フィールドが表示されます。
+2. [保存]をクリックすると、新しいレコードが確定されて前のページに戻ります。',
 
 // END ENT/ULT
 
@@ -260,4 +263,9 @@ $mod_strings = array(
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => '商談クローズ予測',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => '指定の商談の予測詳細を見る',
-);
+    'LBL_AI_WINRATE' => '受注率',
+    'LBL_AI_WONOPP' => '受注済み商談',
+    'LBL_AI_CLOSINGTIME' => '完了時間',
+    'LBL_AI_CLOSEDOPP' => '完了商談',
+    'LBL_AI_LEADTIMESPAN' => '商談の作成から受注済みまでの時間',
+];

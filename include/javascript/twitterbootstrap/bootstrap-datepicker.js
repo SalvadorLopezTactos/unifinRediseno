@@ -234,6 +234,29 @@
 				top: offset.top + this.height,
 				left: offset.left
 			});
+
+			const appendToElement = _.first(this.appendTo);
+			const pickerElement = _.first(this.picker);
+
+			if (_.isUndefined(appendToElement) ||
+				_.isUndefined(pickerElement) ||
+				!isHTMLElement(appendToElement) ||
+				!isHTMLElement(pickerElement)
+			) {
+				return;
+			}
+
+			const availableRightSpace = appendToElement.getBoundingClientRect().right -
+				pickerElement.getBoundingClientRect().right;
+
+			if (availableRightSpace < 0) {
+				offset.left = offset.left + availableRightSpace;
+
+				this.picker.css({
+					top: offset.top + this.height,
+					left: offset.left
+				});
+			}
 		},
 		verifyDate: function(dateString) {
 			return DPGlobal.parseDate(dateString, this.format).inputDateStringWasValid;
@@ -835,7 +858,7 @@
 						'</thead>',
 		contTemplate: '<tbody><tr><td colspan="7"></td></tr></tbody>'
 	};
-	DPGlobal.template = '<div class="datepicker dropdown-menu">'+
+    DPGlobal.template = '<div class="datepicker dropdown-menu border-0 dark:border border-[--dropdown-border-widget]">'+
 							'<div class="datepicker-days">'+
 								'<table class=" table-condensed">'+
 									DPGlobal.headTemplate+

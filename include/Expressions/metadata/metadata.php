@@ -9,278 +9,276 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dd_meta = array(
+$dd_meta = [
 
-	'triggers'	=>	array(
+    'triggers' => [
 
-		/* Dropdown to Dropdown */
-		'trigger1' => array(
-				'fields' => array(
-					'country_select'
-				),
-				'condition'=>'contains($country_select, "United States")',
-				'dependencies'=>array(
-					'loadUSStates'=>array(
-						'key'=>'loadUSStates'
-					)
-				),
-				'triggeronload'=>true
-		),
+        /* Dropdown to Dropdown */
+        'trigger1' => [
+            'fields' => [
+                'country_select',
+            ],
+            'condition' => 'contains($country_select, "United States")',
+            'dependencies' => [
+                'loadUSStates' => [
+                    'key' => 'loadUSStates',
+                ],
+            ],
+            'triggeronload' => true,
+        ],
 
-		'trigger2' => array(
-				'fields'=>array(
-					'country_select'
-				),
-				'condition'=>'contains($country_select, "Canada")',
-				'dependencies'=>array(
-					'loadCNStates'=>array(
-						'key'=>'loadCNStates',
-					)
-				),
-				'triggeronload'=>true
-		),
-
-
-		/* Dropdown to CF */
-		'trigger3' => array(
-				'fields' => array(
-					'feet_select', 'inches_select', 'weight_select',
-				),
-				'dependencies'=>array(
-					'calculateBMI'=>array('key'=>'calculateBMI')
-				),
-				'triggeronload'=>true
-		),
-
-		/* CF to Dropdown */
-		'trigger4' => array(
-				'fields' => array(
-					'income_input',
-				),
-				'condition'	=> 'greaterThan($income_input, 100000)',
-				'dependencies'=>array(
-					'populateRich'=>array('key'=>'populateRich')
-				),
-				'triggeronload'=>true
-		),
-		'trigger5' => array(
-				'fields' => array(
-					'income_input',
-				),
-				'condition'	=> 'greaterThan(100000, $income_input)',
-				'dependencies'=>array(
-					'populateMedi'=>array('key'=>'populateMedi')
-				),
-				'triggeronload'=>true
-		),
-		'trigger6' => array(
-				'fields' => array(
-					'salary_input', 'tax_input',
-				),
-				'dependencies'=>array(
-					'calculateIncome'=>array('key'=>'calculateIncome')
-				),
-				'triggeronload'=>true
-		),
+        'trigger2' => [
+            'fields' => [
+                'country_select',
+            ],
+            'condition' => 'contains($country_select, "Canada")',
+            'dependencies' => [
+                'loadCNStates' => [
+                    'key' => 'loadCNStates',
+                ],
+            ],
+            'triggeronload' => true,
+        ],
 
 
+        /* Dropdown to CF */
+        'trigger3' => [
+            'fields' => [
+                'feet_select', 'inches_select', 'weight_select',
+            ],
+            'dependencies' => [
+                'calculateBMI' => ['key' => 'calculateBMI'],
+            ],
+            'triggeronload' => true,
+        ],
 
-		/* Field to Style */
-		'trigger7' => array(
-				'fields' => array(
-					'temperature_input',
-				),
-				'condition'	=> 'greaterThan($temperature_input, 100)',
-				'dependencies'=>array(
-					'makeHot'=>array('key'=>'makeHot')
-				),
-				'triggeronload'=>true
-		),
-		'trigger8' => array(
-				'fields' => array(
-					'temperature_input',
-				),
-				'condition'	=> 'greaterThan(100, $temperature_input)',
-				'dependencies'=>array(
-					'makeCold'=>array('key'=>'makeCold')
-				),
-				'triggeronload'=>true
-		),
-
-		/* Dropdown to Style */
-		'trigger9' => array(
-				'fields' => array(
-					'color_input',
-				),
-				'dependencies'=>array(
-					'changeStyle'=>array('key'=>'changeStyle')
-				),
-				'triggeronload'=>true
-		),
-
-	),
-
-	'dependencies'=>array(
-
-		/* Example 1 */
-		'loadUSStates'=>array(
-			'field'=>'state_select',
-			'expression'=>'enum("New York", "Pennsylvania", "California", "Florida")',
-		),
-		'loadCNStates'=>array(
-			'field'			=>	'state_select',
-			'expression'	=>	'enum("Ontario", "Quebec", "British Columbia", "Manitoba")',
-		),
+        /* CF to Dropdown */
+        'trigger4' => [
+            'fields' => [
+                'income_input',
+            ],
+            'condition' => 'greaterThan($income_input, 100000)',
+            'dependencies' => [
+                'populateRich' => ['key' => 'populateRich'],
+            ],
+            'triggeronload' => true,
+        ],
+        'trigger5' => [
+            'fields' => [
+                'income_input',
+            ],
+            'condition' => 'greaterThan(100000, $income_input)',
+            'dependencies' => [
+                'populateMedi' => ['key' => 'populateMedi'],
+            ],
+            'triggeronload' => true,
+        ],
+        'trigger6' => [
+            'fields' => [
+                'salary_input', 'tax_input',
+            ],
+            'dependencies' => [
+                'calculateIncome' => ['key' => 'calculateIncome'],
+            ],
+            'triggeronload' => true,
+        ],
 
 
-		/* Example 2 */
-		'calculateBMI'=>array(
-			'field'			=>	'bmi_output',
-			'expression'	=>	'multiply(divide($weight_select,pow(add(multiply($feet_select, 12),$inches_select),2)),703)',
-		),
+        /* Field to Style */
+        'trigger7' => [
+            'fields' => [
+                'temperature_input',
+            ],
+            'condition' => 'greaterThan($temperature_input, 100)',
+            'dependencies' => [
+                'makeHot' => ['key' => 'makeHot'],
+            ],
+            'triggeronload' => true,
+        ],
+        'trigger8' => [
+            'fields' => [
+                'temperature_input',
+            ],
+            'condition' => 'greaterThan(100, $temperature_input)',
+            'dependencies' => [
+                'makeCold' => ['key' => 'makeCold'],
+            ],
+            'triggeronload' => true,
+        ],
+
+        /* Dropdown to Style */
+        'trigger9' => [
+            'fields' => [
+                'color_input',
+            ],
+            'dependencies' => [
+                'changeStyle' => ['key' => 'changeStyle'],
+            ],
+            'triggeronload' => true,
+        ],
+
+    ],
+
+    'dependencies' => [
+
+        /* Example 1 */
+        'loadUSStates' => [
+            'field' => 'state_select',
+            'expression' => 'enum("New York", "Pennsylvania", "California", "Florida")',
+        ],
+        'loadCNStates' => [
+            'field' => 'state_select',
+            'expression' => 'enum("Ontario", "Quebec", "British Columbia", "Manitoba")',
+        ],
 
 
-		/* Example 3 */
-		'calculateIncome'=>array(
-			'field'			=>	'income_input',
-			'expression'	=>	'subtract($salary_input, multiply($salary_input, divide($tax_input, 100)))',
-		),
-		'populateRich'=>array(
-			'field'			=>	'interest_select',
-			'expression'	=>	'enum("Equestrian", "Sailboating", "Golf", "Pool", "Billiards", "Curling")',
-		),
-		'populateMedi'=>array(
-			'field'			=>	'interest_select',
-			'expression'	=>	'enum("Basketball", "Football", "Tennis", "Lacrosse", "Waterpolo", "Swimming")',
-		),
+        /* Example 2 */
+        'calculateBMI' => [
+            'field' => 'bmi_output',
+            'expression' => 'multiply(divide($weight_select,pow(add(multiply($feet_select, 12),$inches_select),2)),703)',
+        ],
 
 
-		/* Example 4 */
-		'makeHot'=>array(
-			'type'			=>	'style',
-			'field'			=>	'heat_index',
-			'expression'	=>	'{ backgroundColor: "#FF0022" }',
-		),
-		'makeCold'=>array(
-			'type'			=>	'style',
-			'field'			=>	'heat_index',
-			'expression'	=>	'{ backgroundColor: "blue" }',
-		),
+        /* Example 3 */
+        'calculateIncome' => [
+            'field' => 'income_input',
+            'expression' => 'subtract($salary_input, multiply($salary_input, divide($tax_input, 100)))',
+        ],
+        'populateRich' => [
+            'field' => 'interest_select',
+            'expression' => 'enum("Equestrian", "Sailboating", "Golf", "Pool", "Billiards", "Curling")',
+        ],
+        'populateMedi' => [
+            'field' => 'interest_select',
+            'expression' => 'enum("Basketball", "Football", "Tennis", "Lacrosse", "Waterpolo", "Swimming")',
+        ],
 
 
-		/* Example 5 */
-		'changeStyle'=>array(
-			'type'			=>	'style',
-			'field'			=>	'color_index',
-			'expression'	=>	'{ backgroundColor: { evaluate: \'concat($color_input, "")\' } }',
-		),
-	)
-);
+        /* Example 4 */
+        'makeHot' => [
+            'type' => 'style',
+            'field' => 'heat_index',
+            'expression' => '{ backgroundColor: "#FF0022" }',
+        ],
+        'makeCold' => [
+            'type' => 'style',
+            'field' => 'heat_index',
+            'expression' => '{ backgroundColor: "blue" }',
+        ],
 
 
-
-$dep_meta = array(
-	'triggers'	=>	array(
-
-		/* Dropdown to Dropdown */
-		'trigger1' => array(
-				'fields' => array(
-					'lastname'
-				),
-				'condition'=>'contains($lastname, "Smith")',
-				'dependencies'=>array(
-					'met'=>array(
-						'makeReq'=>array(
-							'key'=>'makeReq'
-						),
-					),
-					'unmet'=>array(
-						'makeNReq'=>array(
-							'key'=>'makeNReq'
-						),
-					),
-				),
-				'triggeronload'=>true
-		),
-	),
-
-	'dependencies'=>array(
-
-		/* Example 1 */
-		'makeReq'=>array(
-			'type'=>'require',
-			'field'=>'number',
-			'require'=>true,
-			'label_id'=>'number_lbl',
-		),
+        /* Example 5 */
+        'changeStyle' => [
+            'type' => 'style',
+            'field' => 'color_index',
+            'expression' => '{ backgroundColor: { evaluate: \'concat($color_input, "")\' } }',
+        ],
+    ],
+];
 
 
-		/* Example 1 */
-		'makeNReq'=>array(
-			'type'=>'require',
-			'field'=>'number',
-			'require'=>false,
-			'label_id'=>'number_lbl',
-		),
-	),
-);
+$dep_meta = [
+    'triggers' => [
 
-$val_meta = array(
-	'myform'=>array(
-		'firstname'	=> array(
-			'required'	=>	true,
-			'conditions'	=> array(
-				'alpha'	=> array(
-				),
-				'binarydep'	=> array(
-							'sibling' => 'number',
-				),
-			),
-		),
-		'lastname'	=> array(
-			'required'	=>	true,
-			'conditions'	=> array(
-				'alpha'	=> array(
-				),
-				'binarydep'	=> array(
-							'sibling' => 'number',
-				),
-			),
-		),
-		'email'		=> array(
-			'required'	=>	true,
-			'conditions'	=> array(
-				'email'	=> array(
-						'message' => 'default',
-				),
-			),
-		),
-		'phone'		=> array(
-			'required'	=>	true,
-			'conditions'	=> array(
-				'phone'	=> array(
+        /* Dropdown to Dropdown */
+        'trigger1' => [
+            'fields' => [
+                'lastname',
+            ],
+            'condition' => 'contains($lastname, "Smith")',
+            'dependencies' => [
+                'met' => [
+                    'makeReq' => [
+                        'key' => 'makeReq',
+                    ],
+                ],
+                'unmet' => [
+                    'makeNReq' => [
+                        'key' => 'makeNReq',
+                    ],
+                ],
+            ],
+            'triggeronload' => true,
+        ],
+    ],
 
-				),
-			),
-		),
-		'date'		=> array(
-			'conditions'	=> array(
-				'date'	=> array(
-				),
-			),
-		),
-		'number'	=> array(
-			'required'	=>	true,
-			'conditions'	=> array(
-				'number'	=> array(
-				),
-			),
-		),
-	)
-);
+    'dependencies' => [
+
+        /* Example 1 */
+        'makeReq' => [
+            'type' => 'require',
+            'field' => 'number',
+            'require' => true,
+            'label_id' => 'number_lbl',
+        ],
 
 
-require_once "include/Expressions/metadata/metatojs.php";
+        /* Example 1 */
+        'makeNReq' => [
+            'type' => 'require',
+            'field' => 'number',
+            'require' => false,
+            'label_id' => 'number_lbl',
+        ],
+    ],
+];
+
+$val_meta = [
+    'myform' => [
+        'firstname' => [
+            'required' => true,
+            'conditions' => [
+                'alpha' => [
+                ],
+                'binarydep' => [
+                    'sibling' => 'number',
+                ],
+            ],
+        ],
+        'lastname' => [
+            'required' => true,
+            'conditions' => [
+                'alpha' => [
+                ],
+                'binarydep' => [
+                    'sibling' => 'number',
+                ],
+            ],
+        ],
+        'email' => [
+            'required' => true,
+            'conditions' => [
+                'email' => [
+                    'message' => 'default',
+                ],
+            ],
+        ],
+        'phone' => [
+            'required' => true,
+            'conditions' => [
+                'phone' => [
+
+                ],
+            ],
+        ],
+        'date' => [
+            'conditions' => [
+                'date' => [
+                ],
+            ],
+        ],
+        'number' => [
+            'required' => true,
+            'conditions' => [
+                'number' => [
+                ],
+            ],
+        ],
+    ],
+];
+
+
+require_once 'include/Expressions/metadata/metatojs.php';
 
 echo getJSFromDDMeta($dep_meta);
 echo getJSFromValidationMeta($val_meta);

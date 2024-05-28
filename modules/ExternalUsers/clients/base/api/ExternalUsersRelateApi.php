@@ -120,8 +120,7 @@ class ExternalUsersRelateApi extends RelateApi
         // fixing duplicates in the query is not needed since even if it selects many-to-many related records,
         // they are still filtered by one primary record, so the subset is at most one-to-many
         $options['skipFixQuery'] = true;
-
-        return array($args, $q, $options, $linkSeed);
+        return [$args, $q, $options, $linkSeed];
     }
 
     /**
@@ -142,24 +141,50 @@ class ExternalUsersRelateApi extends RelateApi
         $qRelatedIds->setJoinOn(['baseBeanId' => $record->id]);
         self::addFilters($filter, $qRelatedIds->where(), $qRelatedIds);
 
+        $qExternalRelatedIds = [];
+        // Get ids of records related to contact/lead/prostect...
+        if (!empty($record->parent_type) && !empty($record->parent_id)) {
+            $externalBean = BeanFactory::getBean($record->parent_type, $record->parent_id);
+            if ($externalBean && !empty($externalBean->id)) {
+                foreach ($externalBean->getFieldDefinitions() as $def) {
+                    if (isset($def['type']) && $def['type'] === 'link' &&
+                        $externalBean->load_relationship($def['name'])) {
+                        $externalLinkName = $def['name'];
+                        if ($externalBean->$externalLinkName->getRelatedModuleName() === $linkSeed->getModuleName() &&
+                            $externalBean->$externalLinkName->getType() === $record->$linkName->getType()) {
+                            $qExternalRelatedIdsQuery = new SugarQuery();
+                            $qExternalRelatedIdsQuery->from($linkSeed);
+                            $qExternalRelatedIdsQuery->select(['id']);
+                            $qExternalRelatedIdsQuery->joinSubpanel($externalBean, $externalLinkName, ['joinType' => 'INNER']);
+                            $qExternalRelatedIdsQuery->setJoinOn(['baseBeanId' => $externalBean->id]);
+                            self::addFilters($filter, $qExternalRelatedIdsQuery->where(), $qExternalRelatedIdsQuery);
+                            $qExternalRelatedIds[] = $qExternalRelatedIdsQuery;
+                        }
+                    }
+                }
+            }
+        }
         // Get ids of records created by this user
         $qExternalIds = new SugarQuery();
         $qExternalIds->from($linkSeed);
         $qExternalIds->select(['id']);
         $qExternalIds->where()
-        ->equals('source_id', $record->external_id);
+            ->equals('source_id', $record->external_id);
 
         self::addFilters($filter, $qExternalIds->where(), $qExternalIds);
 
         $qIds = new SugarQuery();
         $qIds->union($qRelatedIds);
         $qIds->union($qExternalIds);
+        foreach ($qExternalRelatedIds as $query) {
+            $qIds->union($query);
+        }
 
         $ids = $qIds
             ->compile()
             ->execute()
             ->fetchFirstColumn();
 
-        return $ids;
+        return array_unique($ids);
     }
 }

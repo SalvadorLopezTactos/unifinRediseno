@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Programar Trucada',
     'LNK_NEW_MEETING' => 'Programa una reunió',
     'LNK_NEW_TASK' => 'Crea una tasca',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Meta de camp addicional 2',
     'COLUMN_TITLE_EXT3' => 'Meta de camp addicional 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'Alçada iframe',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'URL per defecte',
     'COLUMN_TITLE_AUDIT' => 'Auditoria',
     'COLUMN_TITLE_PII' => 'Informació personal',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Valor per defecte',
     'LBL_AUDITED' => 'Auditats',
     'LBL_REPORTABLE' => 'Reportar',
-    'ERR_RESERVED_FIELD_NAME' => "Paraula reservada",
+    'ERR_RESERVED_FIELD_NAME' => 'Paraula reservada',
     'ERR_SELECT_FIELD_TYPE' => 'Seleccioneu un tipus de camp',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'El nom de camp ja existeix',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'El nom del camp ha de contindre únicament els següents caràcters: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Fet',
     'LBL_EXE_NON_SIM_MODE' => 'Executar mode no simulat',
     'LBL_CALCULATION_VISIBLE' => 'Fes-ho visible per als càlculs',
-);
+];

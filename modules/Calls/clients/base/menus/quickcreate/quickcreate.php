@@ -11,9 +11,9 @@
  */
 
 $module_name = 'Calls';
-$viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
+$viewdefs[$module_name]['base']['menu']['quickcreate'] = [
     'layout' => 'create',
     'label' => 'LNK_NEW_CALL',
     'visible' => true,
     'order' => 7,
-);
+];

@@ -22,7 +22,7 @@ $viewdefs['base']['layout']['create-no-cancel-button'] = [
                         'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
+                            'css_class' => 'main-pane overflow-y-auto span8',
                             'components' => [
                                 [
                                     'view' => 'create-no-cancel-button',

@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Tabloul de bord Listă elemente linie oferte',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare articole de linie ofertate',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare articole de linie ofertate',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia articolelor de linie cotate',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Element inclus în oferta campaniei',
     'LBL_MODULE_NAME' => 'Produse din ofertă',
@@ -183,4 +184,4 @@ Pentru a crea {{module_name}}:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Articol de linie nou ofertat)',
     'LBL_DISCOUNT_PERCENT' => 'Procentaj %',
     'LBL_DISCOUNT_TYPE' => 'Tip de reducere',
-);
+];

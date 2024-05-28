@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -53,12 +56,12 @@ class SearchPortalApi extends SugarApi
      *
      * @param ServiceBase $api
      * @param array $args
-     * @throws SugarApiExceptionMissingParameter
-     * @throws SugarApiExceptionRequestMethodFailure
-     * @deprecated Since 10.2.0.
      * @return array
+     * @throws SugarApiExceptionRequestMethodFailure
+     * @throws SugarApiExceptionMissingParameter
+     * @deprecated Since 10.2.0.
      */
-    public function portalSearch(ServiceBase $api, array $args) : array
+    public function portalSearch(ServiceBase $api, array $args): array
     {
         $msg = 'This endpoint is deprecated as of 10.2.0 and will be removed in a future release.';
         $msg .= ' Use genericsearch instead.';
@@ -76,7 +79,7 @@ class SearchPortalApi extends SugarApi
             $modulesToSearch = explode(',', $args['module_list']);
             foreach ($modulesToSearch as $module) {
                 // ensure all passed in modules are suppoorted
-                if (!in_array($module, $settings['modules'])) {
+                if (!safeInArray($module, $settings['modules'])) {
                     throw new SugarApiExceptionInvalidParameter('Module not supported: ' . $module);
                 }
             }

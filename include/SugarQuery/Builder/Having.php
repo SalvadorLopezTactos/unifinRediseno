@@ -20,13 +20,14 @@ class SugarQuery_Builder_Having
         $this->query = $query;
     }
 
-    public function addField($column, $options = array())
+    public function addField($column, $options = [])
     {
         $this->column = new SugarQuery_Builder_Field_Having($column, $this->query);
         return $this;
     }
-    
-    public function addRaw($expression) {
+
+    public function addRaw($expression)
+    {
         $this->column = new SugarQuery_Builder_Field_Raw($expression, $this->query);
     }
 }

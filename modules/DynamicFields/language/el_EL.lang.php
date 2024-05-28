@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Καταγραφή Κλήσης',
     'LNK_NEW_MEETING' => 'Προγραμματισμός Συνάντησης',
     'LNK_NEW_TASK' => 'Δημιουργία Εργασίας',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Επιπλέον Meta Πεδίο 2',
     'COLUMN_TITLE_EXT3' => 'Επιπλέον Meta Πεδίο 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'Ύψος Πλαισίου',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'Προεπιλογή URL',
     'COLUMN_TITLE_AUDIT' => 'Λογιστικός Έλεγχος',
     'COLUMN_TITLE_PII' => 'Προσωπικές πληροφορίες',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Προκαθορισμένη Τιμή',
     'LBL_AUDITED' => 'Ελεγμένη',
     'LBL_REPORTABLE' => 'Καταγράψιμη',
-    'ERR_RESERVED_FIELD_NAME' => "Διατηρημένη λέξη κλειδί",
+    'ERR_RESERVED_FIELD_NAME' => 'Διατηρημένη λέξη κλειδί',
     'ERR_SELECT_FIELD_TYPE' => 'Παρακαλώ επιλέξτε Τύπο Πεδίου',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Το Όνομα του Πεδίου υπάρχει ήδη',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Το Όνομα πεδίου πρέπει να περιέχει μόνο τους ακόλουθους χαρακτήρες: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Έτοιμο',
     'LBL_EXE_NON_SIM_MODE' => 'Εκτελέστε τη λειτουργία μη-προσομοίωση',
     'LBL_CALCULATION_VISIBLE' => 'Εμφανίστε για υπολογισμούς',
-);
+];

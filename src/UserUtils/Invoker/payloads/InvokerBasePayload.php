@@ -193,8 +193,8 @@ class InvokerBasePayload extends InvokerPayload
         $sugarQuery->select->fieldRaw('aru.user_id');
         $sugarQuery->from($role, ['alias' => 'ar']);
         $sugarQuery->joinTable('acl_roles_users', ['alias' => 'aru'])
-                    ->on()
-                    ->equalsField('ar.id', 'aru.role_id');
+            ->on()
+            ->equalsField('ar.id', 'aru.role_id');
         $sugarQuery->where()->equals('aru.role_id', $roleId);
         $sugarQuery->where()->equals('aru.deleted', 0);
         $result = $sugarQuery->execute();
@@ -212,7 +212,7 @@ class InvokerBasePayload extends InvokerPayload
      */
     public function getUsersFromTeams(?array $teams): array
     {
-        $teamIds = array();
+        $teamIds = [];
         if (!$teams) {
             return $teamIds;
         }

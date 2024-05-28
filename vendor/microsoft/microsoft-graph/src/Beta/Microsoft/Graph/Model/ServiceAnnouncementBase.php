@@ -25,8 +25,9 @@ namespace Beta\Microsoft\Graph\Model;
 class ServiceAnnouncementBase extends Entity
 {
 
-     /** 
+     /**
      * Gets the details
+    * Additional details about service event. This property doesn't support filters.
      *
      * @return array|null The details
      */
@@ -38,11 +39,12 @@ class ServiceAnnouncementBase extends Entity
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the details
+    * Additional details about service event. This property doesn't support filters.
     *
-    * @param KeyValuePair $val The details
+    * @param KeyValuePair[] $val The details
     *
     * @return ServiceAnnouncementBase
     */
@@ -51,9 +53,10 @@ class ServiceAnnouncementBase extends Entity
         $this->_propDict["details"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the endDateTime
+    * The end time of the service event.
     *
     * @return \DateTime|null The endDateTime
     */
@@ -69,9 +72,10 @@ class ServiceAnnouncementBase extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the endDateTime
+    * The end time of the service event.
     *
     * @param \DateTime $val The endDateTime
     *
@@ -82,9 +86,10 @@ class ServiceAnnouncementBase extends Entity
         $this->_propDict["endDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the lastModifiedDateTime
+    * The last modified time of the service event.
     *
     * @return \DateTime|null The lastModifiedDateTime
     */
@@ -100,9 +105,10 @@ class ServiceAnnouncementBase extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the lastModifiedDateTime
+    * The last modified time of the service event.
     *
     * @param \DateTime $val The lastModifiedDateTime
     *
@@ -113,9 +119,10 @@ class ServiceAnnouncementBase extends Entity
         $this->_propDict["lastModifiedDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the startDateTime
+    * The start time of the service event.
     *
     * @return \DateTime|null The startDateTime
     */
@@ -131,9 +138,10 @@ class ServiceAnnouncementBase extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the startDateTime
+    * The start time of the service event.
     *
     * @param \DateTime $val The startDateTime
     *
@@ -144,9 +152,10 @@ class ServiceAnnouncementBase extends Entity
         $this->_propDict["startDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the title
+    * The title of the service event.
     *
     * @return string|null The title
     */
@@ -158,9 +167,10 @@ class ServiceAnnouncementBase extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the title
+    * The title of the service event.
     *
     * @param string $val The title
     *
@@ -171,5 +181,5 @@ class ServiceAnnouncementBase extends Entity
         $this->_propDict["title"] = $val;
         return $this;
     }
-    
+
 }

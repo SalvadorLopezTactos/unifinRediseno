@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Wissensdatenbank-Vorlagen',
     'LBL_MODULE_NAME_SINGULAR' => 'Wissensdatenbank-Vorlage',
     'LBL_MODULE_TITLE' => 'Wissensdatenbank-Vorlage',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Vorlagen anzeigen',
     'LBL_TEXT_BODY' => 'Text',
     'LBL_LIST_TEMPLATE_NAME' => 'Vorlagenname',
-);
+];

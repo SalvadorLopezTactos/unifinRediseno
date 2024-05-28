@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('dd-proxy', function (Y, NAME) {
 
 
@@ -160,6 +153,8 @@ YUI.add('dd-proxy', function (Y, NAME) {
                 n = host.get(NODE),
                 c = n.cloneNode(true);
 
+            c.all('input[type="radio"]').removeAttribute('name');
+
             delete c._yuid;
             c.setAttribute('id', Y.guid());
             c.setStyle('position', 'absolute');
@@ -253,4 +248,4 @@ YUI.add('dd-proxy', function (Y, NAME) {
 
 
 
-}, '3.15.0', {"requires": ["dd-drag"]});
+}, '3.18.1', {"requires": ["dd-drag"]});

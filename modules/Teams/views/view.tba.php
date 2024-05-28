@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,10 +21,10 @@ class TeamsViewTBA extends SugarView
     {
         global $mod_strings;
 
-        return array(
-            "<a href='#Administration'>".$mod_strings['LBL_MODULE_NAME']."</a>",
+        return [
+            "<a href='#Administration'>" . $mod_strings['LBL_MODULE_NAME'] . '</a>',
             $mod_strings['LBL_TBA_CONFIGURATION'],
-        );
+        ];
     }
 
     /**
@@ -66,7 +67,7 @@ class TeamsViewTBA extends SugarView
         $tbaConfigurator = new TeamBasedACLConfigurator();
         $modules = $tbaConfigurator->getListOfPublicTBAModules();
         // sort modules by module label
-        $modulesTitles = array();
+        $modulesTitles = [];
         foreach ($modules as $name) {
             $beanList = array_keys($GLOBALS['beanList']);
 

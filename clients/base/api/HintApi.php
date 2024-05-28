@@ -29,7 +29,9 @@ use Sugarcrm\Sugarcrm\Hint\Queue\QueueTrait;
 
 class HintApi extends \SugarApi implements LoggerAwareInterface
 {
-    use LoggerAwareTrait, ConfigTrait, QueueTrait;
+    use LoggerAwareTrait;
+    use ConfigTrait;
+    use QueueTrait;
 
     public $privilegeToken = null;
     public $enrichFieldConfig;
@@ -110,7 +112,7 @@ class HintApi extends \SugarApi implements LoggerAwareInterface
 
             'updateEnrichFieldConfig' => [
                 'reqType' => 'PUT',
-                'path' => ['hint','enrich', 'config'],
+                'path' => ['hint', 'enrich', 'config'],
                 'pathVars' => [''],
                 'method' => 'updateEnrichFieldConfig',
                 'shortHelp' => 'Updates Hint configuration',
@@ -190,7 +192,7 @@ class HintApi extends \SugarApi implements LoggerAwareInterface
 
             'updateDataEnrichConfigFields' => [
                 'reqType' => 'POST',
-                'path' => ['hint','data', 'enrich', 'fields'],
+                'path' => ['hint', 'data', 'enrich', 'fields'],
                 'pathVars' => [''],
                 'method' => 'updateDataEnrichmentFieldsConfig',
                 'shortHelp' => 'Updates Data Enrichment Hint configuration',
@@ -361,7 +363,7 @@ class HintApi extends \SugarApi implements LoggerAwareInterface
         try {
             $this->getInitializer()->resync();
         } catch (\Throwable $e) {
-            $errorMessage = sprintf("Resync failed: %s", $e->getMessage());
+            $errorMessage = sprintf('Resync failed: %s', $e->getMessage());
             $GLOBALS['log']->fatal($errorMessage);
             throw new \SugarApiException($errorMessage);
         }
@@ -381,7 +383,7 @@ class HintApi extends \SugarApi implements LoggerAwareInterface
     public function createToken($api, $args)
     {
         $tokenResponse = Manager::instance()->getNewAccessToken();
-        $this->privilegeToken =  $tokenResponse['privilegeToken'];
+        $this->privilegeToken = $tokenResponse['privilegeToken'];
         // Only the accessToken is sent to the client.
         $clientResponse = ['accessToken' => $tokenResponse['accessToken']];
         // older servers won't send the subscription type, so be check before using
@@ -422,7 +424,7 @@ class HintApi extends \SugarApi implements LoggerAwareInterface
      * @param array $configToUpdate
      * @return array
      */
-    public function updateDataEnrichmentFieldsConfig(ServiceBase $api, array $configToUpdate) : array
+    public function updateDataEnrichmentFieldsConfig(ServiceBase $api, array $configToUpdate): array
     {
         ConfigurationManager::ensureAdminUser();
         $manager = Manager::instance();
@@ -553,7 +555,7 @@ class HintApi extends \SugarApi implements LoggerAwareInterface
      * Queues UserUnlicensedEvents on 10.3+ Sugar instances to unlicensing users where
      * per-user licensing is supported.
      *
-     * @param $immediateFlush: when true, immediately process the queue to send relevant accountset
+     * @param $immediateFlush : when true, immediately process the queue to send relevant accountset
      * and target data prior to removal of hint tables
      */
     public function queueUnlicenseEvents($immediateFlush = false)

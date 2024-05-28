@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'لوحة معلومات قائمة البنود للعائد',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'لوحة معلومات سجل البنود للعائد',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'أنواع المنتج',
     'LBL_ASSIGNED_TO_NAME' => 'تعيين إلى:',
     'LBL_ASSIGNED_TO' => 'تعيين إلى',
-    'LBL_ASSIGNED_TO_ID'=>'معرّف المستخدم المعين',
+    'LBL_ASSIGNED_TO_ID' => 'معرّف المستخدم المعين',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'اسم المستخدم المعين',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'معرّف المستخدم المعين',
     'LBL_CAMPAIGN_ID' => 'معرّف الحملة',
@@ -217,4 +217,5 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'عرض أعلى 10 بنود العائدات في مخطط الفقاعة.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'بنود العائدات الخاصة بي',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "بنود العائدات الخاصة بفريقي",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني لبند الإيرادات',
+];

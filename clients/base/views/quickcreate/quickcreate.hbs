@@ -11,16 +11,16 @@
  */
 --}}
 <ul class="nav megamenu" >
-    <li class="dropdown border-l border-default" id="createList">
+    <li class="dropdown border-l border-[--border-color]" id="createList">
         <div class="btn-group p-2">
-            <button data-toggle="dropdown" role="button" type="button"
-                class="btn btn-invisible btn-link dropdown-toggle" rel="tooltip" data-placement="left"
-                title="{{str "LBL_QUICK_CREATE_TITLE"}}" track="click:quickCreate"
-                aria-label="{{str 'LBL_QUICK_CREATE_MENU'}}" aria-haspopup="true" aria-expanded="false"
+            <button data-bs-toggle="dropdown" class="btn btn-invisible btn-link dropdown-toggle"
+                    track="click:quickCreate" role="button" type="button"
+                    aria-label="{{str 'LBL_QUICK_CREATE_MENU'}}" aria-haspopup="true" aria-expanded="false"
             >
                 <i class="sicon sicon-plus"></i>
+                {{tooltipTemplate (str 'LBL_QUICK_CREATE_TITLE') 'left'}}
             </button>
-            <div class="dropdown-menu rounded-t-none scroll pull-right">
+            <div class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl rounded-t-none scroll pull-right">
                 <ul role="menu">
                     {{#each createMenuItems}}
                         <li class="megamenu-dropdown-item-container">

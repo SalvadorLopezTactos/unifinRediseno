@@ -11,31 +11,31 @@
  */
 
 
-$listViewDefs['Quotes'] = array(
-	'QUOTE_NUM' => array(
-		'width' => '10',  
-		'label' => 'LBL_LIST_QUOTE_NUM', 
-		'link' => false,
-        'default' => true),
-	'NAME' => array(
-		'width' => '25', 
-		'label' => 'LBL_LIST_QUOTE_NAME', 
-		'link' => true,
-        'default' => true),
-	'BILLING_ACCOUNT_NAME' => array(
-		'width' => '20',  
-		'label' => 'LBL_LIST_ACCOUNT_NAME',
-        'id' => 'ACCOUNT_ID',
-        'module'  => 'Accounts',        
-        'link' => true,
-        'default' => true), 
-	'QUOTE_STAGE' => array(
-		'width' => '10', 
-		'label' => 'LBL_LIST_QUOTE_STAGE', 
+$listViewDefs['Quotes'] = [
+    'QUOTE_NUM' => [
+        'width' => '10',
+        'label' => 'LBL_LIST_QUOTE_NUM',
         'link' => false,
-        'default' => true        
-	),
-    'TOTAL' => array(
+        'default' => true],
+    'NAME' => [
+        'width' => '25',
+        'label' => 'LBL_LIST_QUOTE_NAME',
+        'link' => true,
+        'default' => true],
+    'BILLING_ACCOUNT_NAME' => [
+        'width' => '20',
+        'label' => 'LBL_LIST_ACCOUNT_NAME',
+        'id' => 'ACCOUNT_ID',
+        'module' => 'Accounts',
+        'link' => true,
+        'default' => true],
+    'QUOTE_STAGE' => [
+        'width' => '10',
+        'label' => 'LBL_LIST_QUOTE_STAGE',
+        'link' => false,
+        'default' => true,
+    ],
+    'TOTAL' => [
         'width' => '10',
         'label' => 'LBL_LIST_AMOUNT',
         'link' => false,
@@ -43,40 +43,38 @@ $listViewDefs['Quotes'] = array(
         'currency_format' => true,
         'align' => 'right',
         'sortable' => false,
-    ),
-	'TOTAL_USDOLLAR' => array(
-		'width' => '10', 
-		'label' => 'LBL_LIST_AMOUNT_USDOLLAR',
+    ],
+    'TOTAL_USDOLLAR' => [
+        'width' => '10',
+        'label' => 'LBL_LIST_AMOUNT_USDOLLAR',
         'link' => false,
         'default' => true,
         'currency_format' => true,
-        'align' => 'right'
-    ),
-	'DATE_QUOTE_EXPECTED_CLOSED' => array(
-		'width' => '15', 
-		'label' => 'LBL_LIST_DATE_QUOTE_EXPECTED_CLOSED',
+        'align' => 'right',
+    ],
+    'DATE_QUOTE_EXPECTED_CLOSED' => [
+        'width' => '15',
+        'label' => 'LBL_LIST_DATE_QUOTE_EXPECTED_CLOSED',
         'link' => false,
-        'default' => true        
-        ),
-	'TEAM_NAME' => array(
-		'width' => '10', 
-		'label' => 'LBL_LIST_TEAM',
+        'default' => true,
+    ],
+    'TEAM_NAME' => [
+        'width' => '10',
+        'label' => 'LBL_LIST_TEAM',
         'link' => false,
         'default' => false,
-        'related_fields' => array('team_id'),        
-        ),
-	'ASSIGNED_USER_NAME' => array(
-		'width' => '10', 
-		'label' => 'LBL_LIST_ASSIGNED_USER',
-		'module' => 'Employees',
+        'related_fields' => ['team_id'],
+    ],
+    'ASSIGNED_USER_NAME' => [
+        'width' => '10',
+        'label' => 'LBL_LIST_ASSIGNED_USER',
+        'module' => 'Employees',
         'id' => 'ASSIGNED_USER_ID',
-        'default' => true        
-        ),
-	'DATE_ENTERED' => array (
-	    'width' => '10',
-	    'label' => 'LBL_DATE_ENTERED',
-	    'default' => true,
-	  )        
-);
-
-?>
+        'default' => true,
+    ],
+    'DATE_ENTERED' => [
+        'width' => '10',
+        'label' => 'LBL_DATE_ENTERED',
+        'default' => true,
+    ],
+];

@@ -12,18 +12,19 @@
  */
 
 /*********************************************************************************
-* Description:
-* Portions created by SugarCRM are Copyright (C) SugarCRM, Inc. All Rights
-* Reserved. Contributor(s): contact@synolia.com - www.synolia.com
-* *******************************************************************************/
+ * Description:
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc. All Rights
+ * Reserved. Contributor(s): contact@synolia.com - www.synolia.com
+ * *******************************************************************************/
 
 require_once 'vendor/Zend/Oauth/Consumer.php';
 
-class ext_rest_twitter extends ext_rest {
-
+class ext_rest_twitter extends ext_rest
+{
     protected $_has_testing_enabled = true;
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         $this->_enable_in_wizard = false;
         $this->_enable_in_hover = true;
@@ -37,18 +38,19 @@ class ext_rest_twitter extends ext_rest {
      * @param $propParam optional param that'll override internal properties if set
      * @return result boolean result of the test function
      */
-    public function test() {
+    public function test()
+    {
         $properties = $this->getProperties();
 
         $api = ExternalAPIFactory::loadAPI('Twitter', true);
 
         // Start with a reasonable default
-        $config = array(
+        $config = [
             'callbackUrl' => 'http://www.sugarcrm.com',
             'requestTokenUrl' => 'https://api.twitter.com/oauth/request_token',
             'consumerKey' => $properties['oauth_consumer_key'],
-            'consumerSecret' => $properties['oauth_consumer_secret']
-        );
+            'consumerSecret' => $properties['oauth_consumer_secret'],
+        ];
 
         if ($api) {
             $config['requestTokenUrl'] = $api->getOauthRequestURL();
@@ -59,7 +61,7 @@ class ext_rest_twitter extends ext_rest {
             $consumer->getRequestToken();
             return true;
         } catch (Exception $e) {
-            $GLOBALS['log']->error("Error getting request token for twitter:".$e->getMessage());
+            $GLOBALS['log']->error('Error getting request token for twitter:' . $e->getMessage());
             return false;
         }
     }
@@ -70,7 +72,9 @@ class ext_rest_twitter extends ext_rest {
      * As the twitter connector does not have a true API call, we simply
      * override this abstract
      */
-    public function getItem($args=array(), $module=null){}
+    public function getItem($args = [], $module = null)
+    {
+    }
 
 
     /*
@@ -79,7 +83,7 @@ class ext_rest_twitter extends ext_rest {
      * As the twitter connector does not have a true API call, we simply
      * override this abstract method
      */
-    public function getList($args=array(), $module=null){}
+    public function getList($args = [], $module = null)
+    {
+    }
 }
-
-?>

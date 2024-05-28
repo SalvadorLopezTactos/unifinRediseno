@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_DEFAULT' => 'Não Definido',
     'LBL_READ_WRITE' => 'Ler/Escrever',
     'LBL_READ_OWNER_WRITE' => 'Ler/Editar Pelo Proprietário',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_READ_SELECTED_TEAMS_WRITE' => 'Leitura/(Proprietário e Equipas selecionadas) Escrita',
     'LBL_SELECTED_TEAMS_READ_OWNER_WRITE' => '(Proprietário e equipas selecionadas) Leitura/Escrita do proprietário',
     'LBL_SELECTED_TEAMS_READ_WRITE' => 'Leitura (Proprietário e equipas selecionadas)/Escrita (Proprietário e equipas selecionadas)',
-);
+];

@@ -51,7 +51,7 @@ class EAPMViewDocuSignOauth2Redirect extends SugarView
      * @param $tokenData
      * @return array
      */
-    protected function buildResponse($tokenData) : array
+    protected function buildResponse($tokenData): array
     {
         if (empty($tokenData)) {
             return [

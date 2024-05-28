@@ -26,7 +26,7 @@ class OwnerFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    public function buildFilter(array $options = array())
+    public function buildFilter(array $options = [])
     {
         // Create the field name
         $ownerField = Mapping::PREFIX_COMMON . 'owner_id.owner';

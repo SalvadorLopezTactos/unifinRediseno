@@ -29,8 +29,7 @@ $viewdefs[$module_name]['base']['view']['massupdate'] = [
             'primary' => true,
         ],
     ],
-    'panels' =>
-    [
+    'panels' => [
         [
             'fields' => [
             ],

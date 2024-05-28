@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Leipäteksti',
     'LBL_BASE_MODULE' => 'Kantamoduuli',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Prosessisähköpostimallin luonti tiedostosta epäonnistui.',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Tätä sähköpostimallia käytetään tällä hetkellä prosessimääritelmässä. Haluatko silti muokata tätä sähköpostimallia?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Et voi poistaa tätä sähköpostimallia, koska sitä käytetään tällä hetkellä prosessimääritelmässä.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Et voi poistaa tätä sähköpostimallia, koska sitä käytetään tällä hetkellä prosessimääritelmässä.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Kenttien valitsin',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Valitse',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Kentän arvon tyyppi',
-);
+];

@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('yui-log', function (Y, NAME) {
 
 /**
@@ -64,9 +57,8 @@ INSTANCE.log = function(msg, cat, src, silent) {
                 bail = excl[src];
             }
 
-            // Set a default category of info if the category was not defined or was not
-            // a real category.
-            if ((typeof cat === 'undefined') || !(cat in LEVELS)) {
+            // Set a default category of info if the category was not defined.
+            if ((typeof cat === 'undefined')) {
                 cat = 'info';
             }
 
@@ -130,4 +122,4 @@ INSTANCE.message = function() {
 };
 
 
-}, '3.15.0', {"requires": ["yui-base"]});
+}, '3.18.1', {"requires": ["yui-base"]});

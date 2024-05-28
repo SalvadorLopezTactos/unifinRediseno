@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('classnamemanager', function (Y, NAME) {
 
 /**
@@ -61,7 +54,7 @@ Y.ClassNameManager = function () {
 	return {
 
 		/**
-		 * Returns a class name prefixed with the the value of the
+		 * Returns a class name prefixed with the value of the
 		 * <code>Y.config.classNamePrefix</code> attribute + the provided strings.
 		 * Uses the <code>Y.config.classNameDelimiter</code> attribute to delimit the
 		 * provided strings. E.g. Y.ClassNameManager.getClassName('foo','bar'); // yui-foo-bar
@@ -88,4 +81,4 @@ Y.ClassNameManager = function () {
 }();
 
 
-}, '3.15.0', {"requires": ["yui-base"]});
+}, '3.18.1', {"requires": ["yui-base"]});

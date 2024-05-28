@@ -9,29 +9,29 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Campaigns']['base']['filter']['default'] = array(
+$viewdefs['Campaigns']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'status' => array(),
-        'campaign_type' => array(),
-        'budget' => array(),
-        'actual_cost' => array(),
-        'expected_cost' => array(),
-        'expected_revenue' => array(),
-        'start_date' => array(),
-        'end_date' => array(),
-        'date_entered' => array(),
-        'date_modified' => array(),
-        'assigned_user_name' => array(),
-        'team_name' => array(),
-        '$owner' => array(
+    'fields' => [
+        'name' => [],
+        'status' => [],
+        'campaign_type' => [],
+        'budget' => [],
+        'actual_cost' => [],
+        'expected_cost' => [],
+        'expected_revenue' => [],
+        'start_date' => [],
+        'end_date' => [],
+        'date_entered' => [],
+        'date_modified' => [],
+        'assigned_user_name' => [],
+        'team_name' => [],
+        '$owner' => [
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',
-        ),
-        '$favorite' => array(
+        ],
+        '$favorite' => [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        ),
-    ),
-);
+        ],
+    ],
+];

@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$layout_defs['Contracts'] = array( 
-    // sets up which panels to show, in which order, and with what linked_fields 
-    'subpanel_setup' => array(
-        'contracts_documents' => array(
+$layout_defs['Contracts'] = [
+    // sets up which panels to show, in which order, and with what linked_fields
+    'subpanel_setup' => [
+        'contracts_documents' => [
             'order' => 10,
             'module' => 'Documents',
             'sort_order' => 'asc',
@@ -23,31 +23,31 @@ $layout_defs['Contracts'] = array(
             'set_subpanel_data' => 'contracts_documents',
             'title_key' => 'LBL_DOCUMENTS_SUBPANEL_TITLE',
             'fill_in_additional_fields' => true,
-            'refresh_page' => 1,            
-        ),
-        'history' => array(
+            'refresh_page' => 1,
+        ],
+        'history' => [
             'order' => 20,
             'sort_order' => 'desc',
             'sort_by' => 'notes.date_entered',
             'title_key' => 'LBL_NOTES_SUBPANEL_TITLE',
             'type' => 'collection',
             'subpanel_name' => 'history',   //this values is not associated with a physical file.
-            'header_definition_from_subpanel'=> 'meetings',
-            'module'=>'History',
-            
-            'top_buttons' => array(
-                array('widget_class' => 'SubPanelTopCreateNoteButton'),
-            ),    
-                    
-            'collection_list' => array(    
-                'notes' => array(
+            'header_definition_from_subpanel' => 'meetings',
+            'module' => 'History',
+
+            'top_buttons' => [
+                ['widget_class' => 'SubPanelTopCreateNoteButton'],
+            ],
+
+            'collection_list' => [
+                'notes' => [
                     'module' => 'Notes',
                     'subpanel_name' => 'default',
                     'get_subpanel_data' => 'notes',
-                ),
-            ),
-        ),
-        'contacts' => array(
+                ],
+            ],
+        ],
+        'contacts' => [
             'order' => 30,
             'module' => 'Contacts',
             'sort_order' => 'asc',
@@ -56,11 +56,11 @@ $layout_defs['Contracts'] = array(
             'get_subpanel_data' => 'contacts',
             'add_subpanel_data' => 'contact_id',
             'title_key' => 'LBL_CONTACTS_SUBPANEL_TITLE',
-            'top_buttons' => array(
-                array('widget_class' => 'SubPanelTopSelectButton', 'mode'=>'MultiSelect'),
-            ),
-        ),
-        'products' => array(
+            'top_buttons' => [
+                ['widget_class' => 'SubPanelTopSelectButton', 'mode' => 'MultiSelect'],
+            ],
+        ],
+        'products' => [
             'order' => 40,
             'module' => 'Products',
             'sort_order' => 'desc',
@@ -69,28 +69,28 @@ $layout_defs['Contracts'] = array(
             'get_subpanel_data' => 'products',
             'add_subpanel_data' => 'product_id',
             'title_key' => 'LBL_PRODUCTS_SUBPANEL_TITLE',
-            'top_buttons' => array(
-                array('widget_class' => 'SubPanelTopSelectButton'),
-            ),
-        ),
-        'quotes' => array(
+            'top_buttons' => [
+                ['widget_class' => 'SubPanelTopSelectButton'],
+            ],
+        ],
+        'quotes' => [
             'order' => 50,
             'module' => 'Quotes',
             'sort_order' => 'desc',
             'sort_by' => 'date_quote_expected_closed',
             'subpanel_name' => 'default',
             'get_subpanel_data' => 'quotes',
-            'get_distinct_data'=> true,
+            'get_distinct_data' => true,
             'add_subpanel_data' => 'quote_id',
             'title_key' => 'LBL_QUOTES_SUBPANEL_TITLE',
-            'top_buttons' => array(
-                array(
+            'top_buttons' => [
+                [
                     'widget_class' => 'SubPanelTopSelectButton',
                     'popup_module' => 'Quotes',
-                    'mode' => 'MultiSelect', 
-                    'initial_filter_fields' => array('account_id' => 'account_id'), //'account_name' => 'account_name'),   
-                ),
-            ),
-        ),
-    ),
-);
+                    'mode' => 'MultiSelect',
+                    'initial_filter_fields' => ['account_id' => 'account_id'], //'account_name' => 'account_name'),
+                ],
+            ],
+        ],
+    ],
+];

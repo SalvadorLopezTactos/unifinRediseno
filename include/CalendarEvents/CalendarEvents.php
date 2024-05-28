@@ -12,7 +12,8 @@
 
 /**
  * @var CalendarEvents
- */
+ * @deprecated This class will be removed in a future release
+ * */
 class CalendarEvents
 {
     public static $old_assigned_user_id = null;
@@ -21,11 +22,11 @@ class CalendarEvents
      * Schedulable calendar events (modules) supported
      * @var array
      */
-    public $calendarEventModules = array(
+    public $calendarEventModules = [
         'Meetings',
         'Calls',
         'Tasks',
-    );
+    ];
 
     /**
      * @param SugarBean $bean
@@ -37,7 +38,7 @@ class CalendarEvents
         if (!in_array($bean->module_name, $this->calendarEventModules)) {
             $logmsg = 'Recurring Calendar Event - Module Unexpected: ' . $bean->module_name;
             $GLOBALS['log']->error($logmsg);
-            throw new SugarException('LBL_CALENDAR_EVENT_RECURRENCE_MODULE_NOT_SUPPORTED', array($bean->module_name));
+            throw new SugarException('LBL_CALENDAR_EVENT_RECURRENCE_MODULE_NOT_SUPPORTED', [$bean->module_name]);
         }
 
         $isRecurring = !empty($bean->repeat_type) && !empty($bean->date_start);
@@ -76,7 +77,7 @@ class CalendarEvents
      */
     public function buildParamsForRecurring(SugarBean $parentBean)
     {
-        $params = array();
+        $params = [];
         $params['type'] = $parentBean->repeat_type;
         $params['interval'] = $parentBean->repeat_interval;
         $params['count'] = $parentBean->repeat_count;
@@ -101,13 +102,13 @@ class CalendarEvents
         if (!$this->isEventRecurring($parentBean)) {
             $logmsg = 'SaveRecurringEvents() : Event is not a Recurring Event';
             $GLOBALS['log']->error($logmsg);
-            throw new SugarException('LBL_CALENDAR_EVENT_NOT_A_RECURRING_EVENT', array($parentBean->object_name));
+            throw new SugarException('LBL_CALENDAR_EVENT_NOT_A_RECURRING_EVENT', [$parentBean->object_name]);
         }
 
         if (!empty($parentBean->repeat_parent_id)) {
             $logmsg = 'SaveRecurringEvents() : Event received is not the Parent Occcurrence';
             $GLOBALS['log']->error($logmsg);
-            throw new SugarException('LBL_CALENDAR_EVENT_IS_NOT_A_PARENT_OCCURRENCE', array($parentBean->object_name));
+            throw new SugarException('LBL_CALENDAR_EVENT_IS_NOT_A_PARENT_OCCURRENCE', [$parentBean->object_name]);
         }
 
         $dateStart = $this->formatDateTime('datetime', $parentBean->date_start, 'user');
@@ -117,10 +118,10 @@ class CalendarEvents
         $repeatDateTimeArray = $this->buildRecurringSequence($dateStart, $params);
 
         $limit = $this->getRecurringLimit();
-        if (count($repeatDateTimeArray) > $limit) {
+        if (safeCount($repeatDateTimeArray) > $limit) {
             $logMessage = sprintf(
                 'Calendar Events (%d) exceed Event Limit: (%d)',
-                count($repeatDateTimeArray),
+                safeCount($repeatDateTimeArray),
                 $limit
             );
             $GLOBALS['log']->warning($logMessage);
@@ -143,7 +144,7 @@ class CalendarEvents
      * @param SugarBean Child Calendar Event Bean
      * @param array Tag Beans currently existing on Child (optional - defaults to empty array)
      */
-    public function reconcileTags(array $parentTagBeans, SugarBean $childBean, $childTagBeans = array())
+    public function reconcileTags(array $parentTagBeans, SugarBean $childBean, $childTagBeans = [])
     {
         $sf = SugarFieldHandler::getSugarField('tag');
         $parentTags = $sf->getOriginalTags($parentTagBeans);
@@ -168,10 +169,10 @@ class CalendarEvents
         $options = $params;
 
         $type = $params['type'];
-        if ($type === "Weekly") {
+        if ($type === 'Weekly') {
             $dow = $params['dow'];
-            if ($dow === "") {
-                return array();
+            if ($dow === '') {
+                return [];
             }
         }
         $options['type'] = $type;
@@ -194,7 +195,7 @@ class CalendarEvents
         $options['until'] = empty($params['until']) ? '' : $params['until'];
 
         if ($options['count'] == 0 && empty($options['until'])) {
-            return array();
+            return [];
         }
 
         $start = SugarDateTime::createFromFormat($GLOBALS['timedate']->get_date_time_format(), $date_start);
@@ -209,8 +210,8 @@ class CalendarEvents
         $options['end'] = $end;
 
         $current = clone $start;
-        $scratchPad = array();
-        $days = array();
+        $scratchPad = [];
+        $days = [];
         if ($params['type'] === 'Monthly' && !empty($params['selector']) && $params['selector'] === 'Each') {
             if (!empty($params['days'])) {
                 $dArray = explode(',', $params['days']);
@@ -228,27 +229,27 @@ class CalendarEvents
         $scratchPad['days'] = $days;
 
         $scratchPad['ResultTotal'] = 0;
-        $scratchPad['Results'] = array();
+        $scratchPad['Results'] = [];
 
         $limit = SugarConfig::getInstance()->get('calendar.max_repeat_count', 1000);
 
         $loop = true;
         while ($loop) {
             switch ($type) {
-                case "Daily":
+                case 'Daily':
                     $loop = $this->nextDaily($current, $interval, $options, $scratchPad);
                     break;
-                case "Weekly":
+                case 'Weekly':
                     $loop = $this->nextWeekly($current, $interval, $options, $scratchPad);
                     break;
-                case "Monthly":
+                case 'Monthly':
                     $loop = $this->nextMonthly($current, $interval, $options, $scratchPad);
                     break;
-                case "Yearly":
+                case 'Yearly':
                     $loop = $this->nextYearly($current, $interval, $options, $scratchPad);
                     break;
                 default:
-                    return array();
+                    return [];
             }
 
             if ($scratchPad['ResultTotal'] > $limit + 100) {
@@ -264,7 +265,7 @@ class CalendarEvents
      * is part of the recurring result set
      * @param SugarDateTime $current
      * @param array $options : the recurrence rules in effect
-     * @param array $scratchPad  : Scratchpad Area for intermediate and final result computation
+     * @param array $scratchPad : Scratchpad Area for intermediate and final result computation
      * @return bool  true=Complete   false=Incomplete
      */
     protected function isComplete($current, $options, &$scratchPad)
@@ -272,7 +273,7 @@ class CalendarEvents
         if (($options['count'] == 0 &&
                 !empty($options['until']) &&
                 !empty($options['end']) &&
-                $current->format("U") <= $options['end']->format("U")) ||
+                $current->format('U') <= $options['end']->format('U')) ||
             ($options['count'] > 0 &&
                 $scratchPad['ResultTotal'] < $options['count'])
         ) {
@@ -288,7 +289,7 @@ class CalendarEvents
      * @param SugarDateTime $current : the next Date to be considered as a Result Candidate
      * @param array $interval : interval size
      * @param array $options : array of processing options
-     * @param array $scratchPad  : Scratchpad Area for intermediate and final result computation
+     * @param array $scratchPad : Scratchpad Area for intermediate and final result computation
      * @return boolean : true=continue false=quit
      */
     protected function nextDaily($current, $interval, $options, &$scratchPad)
@@ -303,9 +304,9 @@ class CalendarEvents
     /**
      * Process the current Datetime for Repeat type = 'Weekly'
      * @param SugarDateTime $current : the next Date to be considered as a Result Candidate
-     * @param array $interval : interval size
+     * @param int $interval : interval size
      * @param array $options : array of processing options
-     * @param array $scratchPad  : Scratchpad Area for intermediate and final result computation
+     * @param array $scratchPad : Scratchpad Area for intermediate and final result computation
      * @return boolean : true=continue false=quit
      */
     protected function nextWeekly($current, $interval, $options, &$scratchPad)
@@ -323,7 +324,7 @@ class CalendarEvents
                 $skip = (7 * ($interval - 1)) + 1;
                 $current->modify("+{$skip} Days");
             } else {
-                $current->modify("+1 Days");
+                $current->modify('+1 Days');
             }
             return true; // Continue
         }
@@ -335,7 +336,7 @@ class CalendarEvents
      * @param SugarDateTime $current : the next Date to be considered as a Result Candidate
      * @param array $interval : interval size
      * @param array $options : array of processing options
-     * @param array $scratchPad  : Scratchpad Area for intermediate and final result computation
+     * @param array $scratchPad : Scratchpad Area for intermediate and final result computation
      * @return boolean : true=continue false=quit
      */
     protected function nextMonthly($current, $interval, $options, &$scratchPad)
@@ -350,7 +351,7 @@ class CalendarEvents
         }
 
         switch ($options['selector']) {
-            case 'On': {
+            case 'On':
                 if (!empty($options['ordinal']) && !empty($options['unit'])) {
                     $ordinal = $options['ordinal'];
                     $unit = $options['unit'];
@@ -359,72 +360,58 @@ class CalendarEvents
                         !empty($app_list_strings['repeat_unit_dom'][$unit])
                     ) {
                         switch ($ordinal) {
-                            case 'first': {
+                            case 'first':
                                 $offset = 0;
                                 break;
-                            }
-                            case 'second': {
+                            case 'second':
                                 $offset = 1;
                                 break;
-                            }
-                            case 'third': {
+                            case 'third':
                                 $offset = 2;
                                 break;
-                            }
-                            case 'fourth': {
+                            case 'fourth':
                                 $offset = 3;
                                 break;
-                            }
-                            case 'fifth': {
+                            case 'fifth':
                                 $offset = 4;
                                 break;
-                            }
-                            default: { // 'last'
+                            default: // 'last'
                                 $offset = -1;
                                 break;
-                            }
                         }
                         switch ($unit) {
-                            case 'Sun': {
+                            case 'Sun':
                                 $targetDay = SugarDateTime::DOW_SUN;
                                 break;
-                            }
-                            case 'Mon': {
+                            case 'Mon':
                                 $targetDay = SugarDateTime::DOW_MON;
                                 break;
-                            }
-                            case 'Tue': {
+                            case 'Tue':
                                 $targetDay = SugarDateTime::DOW_TUE;
                                 break;
-                            }
-                            case 'Wed': {
+                            case 'Wed':
                                 $targetDay = SugarDateTime::DOW_WED;
                                 break;
-                            }
-                            case 'Thu': {
+                            case 'Thu':
                                 $targetDay = SugarDateTime::DOW_THU;
                                 break;
-                            }
-                            case 'Fri': {
+                            case 'Fri':
                                 $targetDay = SugarDateTime::DOW_FRI;
                                 break;
-                            }
-                            case 'Sat': {
+                            case 'Sat':
                                 $targetDay = SugarDateTime::DOW_SAT;
                                 break;
-                            }
-                            default: { // Not Day of the Week: WD (Weekday) or WE (Weekend Day)
+                            default: // Not Day of the Week: WD (Weekday) or WE (Weekend Day)
                                 $targetDay = -1;
                                 break;
-                            }
                         }
 
                         $result = null;
                         $last = ($offset == -1);
                         if ($targetDay >= 0) {    // Day Of Week (0=>6)
-                            $dates = $current->getMonthDatesForDaysOfWeek(array($targetDay));
+                            $dates = $current->getMonthDatesForDaysOfWeek([$targetDay]);
                             if ($last) {
-                                $offset = count($dates) - 1;
+                                $offset = safeCount($dates) - 1;
                             }
                             if (isset($dates[$offset])) {
                                 $result = $dates[$offset];
@@ -443,7 +430,7 @@ class CalendarEvents
                                 $dates = $current->getMonthDatesForWeekEndDays();
                             }
                             if ($last) {
-                                $offset = count($dates) - 1;
+                                $offset = safeCount($dates) - 1;
                             }
                             if (isset($dates[$offset])) {
                                 $result = $dates[$offset];
@@ -476,8 +463,8 @@ class CalendarEvents
                     }
                 }
                 return false;  // Quit
-            }
-            case 'Each': {
+                break;
+            case 'Each':
                 /* Current Day of Month need not be considered in the "Each" case - We have specific days to consider */
                 $current->setDateForFirstDayOfMonth();
                 $startDatetime = $options['start'];
@@ -495,7 +482,7 @@ class CalendarEvents
                 }
                 $current->modify("+{$interval} Months");
                 return true; // Continue
-            }
+                break;
         }
         return false;  // Quit
     }
@@ -505,7 +492,7 @@ class CalendarEvents
      * @param SugarDateTime $current : the next Date to be considered as a Result Candidate
      * @param array $interval : interval size
      * @param array $options : array of processing options
-     * @param array $scratchPad  : Scratchpad Area for intermediate and final result computation
+     * @param array $scratchPad : Scratchpad Area for intermediate and final result computation
      * @return boolean : true=continue false=quit
      */
     protected function nextYearly($current, $interval, $options, &$scratchPad)
@@ -536,72 +523,58 @@ class CalendarEvents
                     !empty($app_list_strings['repeat_unit_dom'][$unit])
                 ) {
                     switch ($ordinal) {
-                        case 'first': {
+                        case 'first':
                             $offset = 0;
                             break;
-                        }
-                        case 'second': {
+                        case 'second':
                             $offset = 1;
                             break;
-                        }
-                        case 'third': {
+                        case 'third':
                             $offset = 2;
                             break;
-                        }
-                        case 'fourth': {
+                        case 'fourth':
                             $offset = 3;
                             break;
-                        }
-                        case 'fifth': {
+                        case 'fifth':
                             $offset = 4;
                             break;
-                        }
-                        default: { // 'last'
+                        default: // 'last'
                             $offset = -1;
                             break;
-                        }
                     }
                     switch ($unit) {
-                        case 'Sun': {
+                        case 'Sun':
                             $targetDay = SugarDateTime::DOW_SUN;
                             break;
-                        }
-                        case 'Mon': {
+                        case 'Mon':
                             $targetDay = SugarDateTime::DOW_MON;
                             break;
-                        }
-                        case 'Tue': {
+                        case 'Tue':
                             $targetDay = SugarDateTime::DOW_TUE;
                             break;
-                        }
-                        case 'Wed': {
+                        case 'Wed':
                             $targetDay = SugarDateTime::DOW_WED;
                             break;
-                        }
-                        case 'Thu': {
+                        case 'Thu':
                             $targetDay = SugarDateTime::DOW_THU;
                             break;
-                        }
-                        case 'Fri': {
+                        case 'Fri':
                             $targetDay = SugarDateTime::DOW_FRI;
                             break;
-                        }
-                        case 'Sat': {
+                        case 'Sat':
                             $targetDay = SugarDateTime::DOW_SAT;
                             break;
-                        }
-                        default: { // Not Day of the Week: WD (Weekday) or WE (Weekend Day)
+                        default: // Not Day of the Week: WD (Weekday) or WE (Weekend Day)
                             $targetDay = -1;
                             break;
-                        }
                     }
 
                     $result = null;
                     $last = ($offset == -1);
                     if ($targetDay >= 0) {    // Day Of Week (0=>6)
-                        $dates = $current->getYearDatesForDaysOfWeek(array($targetDay));
+                        $dates = $current->getYearDatesForDaysOfWeek([$targetDay]);
                         if ($last) {
-                            $offset = count($dates) - 1;
+                            $offset = safeCount($dates) - 1;
                         }
                         if (isset($dates[$offset])) {
                             $result = $dates[$offset];
@@ -618,21 +591,21 @@ class CalendarEvents
                         if ($last) {
                             $current->setDate($current->getYear(), 12, 1);
                             if ($unit === 'WD') { // WeekDay
-                                 $dates = $current->getMonthDatesForNonWeekEndDays();
-                             } else { // 'WE' = Weekend Day
-                                 $dates = $current->getMonthDatesForWeekEndDays();
-                             }
-                            $offset = count($dates) - 1;
+                                $dates = $current->getMonthDatesForNonWeekEndDays();
+                            } else { // 'WE' = Weekend Day
+                                $dates = $current->getMonthDatesForWeekEndDays();
+                            }
+                            $offset = safeCount($dates) - 1;
                             if (isset($dates[$offset])) {
                                 $result = $dates[$offset];
                             }
                         } else {
                             $current->setDate($current->getYear(), 1, 1);
                             if ($unit === 'WD') { // WeekDay
-                                 $dates = $current->getMonthDatesForNonWeekEndDays();
-                             } else { // 'WE' = Weekend Day
-                                 $dates = $current->getMonthDatesForWeekEndDays();
-                             }
+                                $dates = $current->getMonthDatesForNonWeekEndDays();
+                            } else { // 'WE' = Weekend Day
+                                $dates = $current->getMonthDatesForWeekEndDays();
+                            }
                             if (isset($dates[$offset])) {
                                 $result = $dates[$offset];
                             }
@@ -663,7 +636,6 @@ class CalendarEvents
             }
 
             return false;  // Quit  -  Ordinal and/or Unit Options invalid or missing
-
         }
         return false;  // Quit   -  Selector option invalid
     }
@@ -708,8 +680,8 @@ class CalendarEvents
         }
 
         /*--- Parent Bean previously Created - Remove it from the List ---*/
-        if (count($repeatDateTimeArray) > 0) {
-            unset ($repeatDateTimeArray[0]);
+        if (safeCount($repeatDateTimeArray) > 0) {
+            unset($repeatDateTimeArray[0]);
         }
 
         return CalendarUtils::saveRecurring($parentBean, $repeatDateTimeArray);
@@ -723,7 +695,7 @@ class CalendarEvents
      * @param User whose formatting preferences are to be used if output format is 'user'
      * @return string formatted result
      */
-    public function formatDateTime($type, $dtm, $toFormat, $user=null)
+    public function formatDateTime($type, $dtm, $toFormat, $user = null)
     {
         $result = '';
         if (empty($user)) {
@@ -743,7 +715,7 @@ class CalendarEvents
      * @param User whose timezone preferences are to be used (optional - defaults to current user)
      * @return SugarDateTime
      */
-    public function getSugarDateTime($type, $dtm, $user=null)
+    public function getSugarDateTime($type, $dtm, $user = null)
     {
         global $timedate;
         $sugarDateTime = null;
@@ -753,7 +725,7 @@ class CalendarEvents
                 $sugarDateTime = $timedate->fromDBType($dtm, $type);
             }
             if (empty($sugarDateTime)) {
-                switch($type) {
+                switch ($type) {
                     case 'time':
                         $sugarDateTime = $timedate->fromIsoTime($dtm);
                         break;
@@ -805,15 +777,15 @@ class CalendarEvents
      */
     public function inviteParent($bean, $parentType, $parentId)
     {
-        $inviteeRelationships = array(
+        $inviteeRelationships = [
             'Contacts' => 'contacts',
             'Leads' => 'leads',
-        );
+        ];
 
-        foreach($inviteeRelationships as $module => $relationship) {
+        foreach ($inviteeRelationships as $module => $relationship) {
             if ($parentType == $module) {
                 $bean->load_relationship($relationship);
-                if (!$bean->$relationship->relationship_exists($relationship, array('id' => $parentId))) {
+                if (!$bean->$relationship->relationship_exists($relationship, ['id' => $parentId])) {
                     $bean->$relationship->add($parentId);
                 }
             }
@@ -832,7 +804,7 @@ class CalendarEvents
 
         $dtm = clone $dateStart;
         $bean->duration_hours = empty($bean->duration_hours) ? 0 : intval($bean->duration_hours);
-        $bean->duration_minutes =  empty($bean->duration_minutes) ? 0 : intval($bean->duration_minutes);
+        $bean->duration_minutes = empty($bean->duration_minutes) ? 0 : intval($bean->duration_minutes);
         $bean->date_start = $dtm->asDb();
         if ($bean->duration_hours > 0) {
             $dtm->modify("+{$bean->duration_hours} hours");
@@ -866,10 +838,11 @@ class CalendarEvents
         SugarBean $event,
         SugarBean $invitee,
         $status = 'accept',
-        $options = array()
+        $options = []
     ) {
+
         $changeWasMade = false;
-        if (in_array($event->status, array('Held', 'Not Held'))) {
+        if (in_array($event->status, ['Held', 'Not Held'])) {
             $GLOBALS['log']->debug(
                 sprintf(
                     'Do not update the %s/%s accept status for the parent event %s/%s when the event status is %s',
@@ -962,7 +935,7 @@ class CalendarEvents
             $parent->id
         ));
         $query = new SugarQuery();
-        $query->select(array('id'));
+        $query->select(['id']);
         $query->from($parent);
         $query->where()->equals('repeat_parent_id', $parent->id);
         $query->orderBy('date_start', 'ASC');
@@ -989,7 +962,7 @@ class CalendarEvents
             $GLOBALS['log']->debug(sprintf('Retrieving the next %d records beginning at %d', $limit, $offset));
             $query->limit($limit)->offset($offset);
             $rows = $query->execute();
-            $rowCount = count($rows);
+            $rowCount = safeCount($rows);
             $GLOBALS['log']->debug(sprintf('Repeating the action on %d events', $rowCount));
             $rows = is_array($rows) ? $rows : [];
             array_walk($rows, $callback);

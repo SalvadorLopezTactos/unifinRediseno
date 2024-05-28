@@ -398,7 +398,7 @@
             this._functionsHelp[text] :
             app.lang.get('LBL_ACTIONBUTTON_HELP_NOT_AVAILABLE');
         return '<div data-toggle=\'tooltip\' data-html=\'true\' rel=\'tooltip\' ' +
-            ' data-placement=\'right\' title=\'' + _.escape(help) + '\'>' + _.escape(text) + '</div>';
+            ' data-bs-placement=\'right\' title=\'' + _.escape(help) + '\'>' + _.escape(text) + '</div>';
     },
 
     /**

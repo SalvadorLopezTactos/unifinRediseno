@@ -9,38 +9,38 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Contacts']['base']['view']['search-list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Contacts']['base']['view']['search-list'] = [
+    'panels' => [
+        [
             'name' => 'primary',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'picture',
                     'type' => 'avatar',
                     'size' => 'medium',
                     'readonly' => true,
                     'css_class' => 'pull-left',
-                ),
-                array(
+                ],
+                [
                     'name' => 'name',
                     'type' => 'fullname',
-                    'fields' => array(
+                    'fields' => [
                         'salutation',
                         'first_name',
                         'last_name',
-                    ),
+                    ],
                     'link' => true,
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'secondary',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'email',
                     'label' => 'LBL_PRIMARY_EMAIL',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

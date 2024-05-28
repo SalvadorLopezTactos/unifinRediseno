@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tudásbázis-sablonok',
     'LBL_MODULE_NAME_SINGULAR' => 'Tudásbázis-sablon',
     'LBL_MODULE_TITLE' => 'Tudásbázis-sablon',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Sablonok megtekintése',
     'LBL_TEXT_BODY' => 'Törzs',
     'LBL_LIST_TEMPLATE_NAME' => 'Sablon neve',
-);
+];

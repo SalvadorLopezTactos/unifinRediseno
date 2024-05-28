@@ -16,17 +16,18 @@ class ForecastsController extends SugarController
      * remap listview action to sidecar
      * @var array
      */
-    protected $action_remap = array(
-        'ListView' => 'sidecar'
-    );
+    protected $action_remap = [
+        'ListView' => 'sidecar',
+    ];
 
     /**
      * Actually remap the action if required.
      *
      */
-    protected function remapAction(){
+    protected function remapAction()
+    {
         $this->do_action = strtolower($this->do_action) == 'listview' ? 'ListView' : $this->do_action;
-        if(!empty($this->action_remap[$this->do_action])){
+        if (!empty($this->action_remap[$this->do_action])) {
             $this->action = $this->action_remap[$this->do_action];
             $this->do_action = $this->action;
         }
@@ -37,20 +38,20 @@ class ForecastsController extends SugarController
      * dialog will appear once again.
      *
      */
-    public function action_resetSettings() {
+    public function action_resetSettings()
+    {
         global $current_user;
-        if($current_user->isAdminForModule('Forecasts')) {
+        if ($current_user->isAdminForModule('Forecasts')) {
             $db = DBManagerFactory::getInstance();
             $db->query("UPDATE config SET value = '0' WHERE category = 'Forecasts' and name in ('is_setup', 'has_commits')");
             $db->query("UPDATE timeperiods SET deleted = '1'");
             $db->query("UPDATE quotas SET deleted = '1'");
-            MetaDataManager::refreshModulesCache(array('Forecasts'));
-            MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_CONFIG));
-            echo '<script>' . navigateToSidecar(buildSidecarRoute("Forecasts")) . ';</script>';
+            MetaDataManager::refreshModulesCache(['Forecasts']);
+            MetaDataManager::refreshSectionCache([MetaDataManager::MM_CONFIG]);
+            echo '<script>' . navigateToSidecar(buildSidecarRoute('Forecasts')) . ';</script>';
             exit();
         }
 
         $this->view = 'noaccess';
     }
-
 }

@@ -16,13 +16,13 @@
     {{/unless}}
     {{#if dropdownFields}}
         <a track="click:rowactions"
-           class="btn border-none bg-none {{#if def.no_default_action}} btn-invisible{{/if}}{{#if def.primary}} btn-primary{{/if}}"
-           data-toggle="dropdown" href="javascript:void(0);"
-           data-placement="bottom"
-           rel="tooltip"
-           role="button" tabindex="{{tabIndex}}" aria-label="{{str 'LBL_LISTVIEW_ACTIONS' module}}"
-           aria-haspopup="true" aria-expanded="false"
-           title="{{str 'LBL_LISTVIEW_ACTIONS' module}}"><i class="{{buildIcon caretIcon}}"></i></a>
-        <ul data-menu="dropdown" class="dropdown-menu" role="menu"></ul>
+           class="btn !border-none !bg-transparent {{#if def.no_default_action}} btn-invisible{{/if}}{{#if def.primary}} btn-primary{{/if}}"
+           data-bs-toggle="dropdown" href="javascript:void(0);"
+           tabindex="{{tabIndex}}" aria-label="{{str 'LBL_LISTVIEW_ACTIONS' module}}"
+           aria-haspopup="true" aria-expanded="false" data-bs-display="static">
+            <i class="{{buildIcon caretIcon}}"></i>
+            {{tooltipTemplate (str 'LBL_LISTVIEW_ACTIONS' module) 'bottom'}}
+        </a>
+        <ul data-menu="dropdown" class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl" role="menu"></ul>
     {{/if}}
 {{/if}}

@@ -10,27 +10,29 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class FormatedNameExpression extends StringExpression {
-	/**
-	 * Returns itself when evaluating.
-	 */
-	function evaluate() {
-		$params	  = $this->getParameters();
-		$sal =    $params[0]->evaluate();
-		$first =  $params[1]->evaluate();
-		$last =   $params[2]->evaluate();
-		$title =  $params[3]->evaluate();
-		
-		global $locale;
-		return $locale->getLocaleFormattedName($first, $last, $sal, $title);
-		
-	}
+class FormatedNameExpression extends StringExpression
+{
+    /**
+     * Returns itself when evaluating.
+     */
+    public function evaluate()
+    {
+        $params = $this->getParameters();
+        $sal = $params[0]->evaluate();
+        $first = $params[1]->evaluate();
+        $last = $params[2]->evaluate();
+        $title = $params[3]->evaluate();
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+        global $locale;
+        return $locale->getLocaleFormattedName($first, $last, $sal, $title);
+    }
+
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
 var params	= this.getParameters();
 var comp = {s:params[0].evaluate(), f:params[1].evaluate(), l:params[2].evaluate(), t:params[3].evaluate()};
 var name = '';
@@ -43,30 +45,34 @@ for(i=0; i<name_format.length; i++) {
 }
 return name;
 EOQ;
-	}
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return "formatName";
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return 'formatName';
+    }
 
-	/**
-	 * Returns the exact number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 4;
-	}
+    /**
+     * Returns the exact number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 4;
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
-    static function getParameterTypes() {
-		return AbstractExpression::$STRING_TYPE;
-	}
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
+
+    public static function getParameterTypes()
+    {
+        return AbstractExpression::$STRING_TYPE;
+    }
 }
-?>

@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Pulpit listy zakupionych pozycji',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Pulpit rekordów zakupionych pozycji',
     'LBL_PARENT_PURCHASE' => 'Zakup nadrzędny',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Oś czasu pozycji zakupów',
 ];

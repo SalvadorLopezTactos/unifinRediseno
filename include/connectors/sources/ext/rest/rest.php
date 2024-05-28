@@ -15,25 +15,28 @@
  * REST generic connector
  * @api
  */
-abstract class ext_rest extends source{
+abstract class ext_rest extends source
+{
+    // @codingStandardsIgnoreLine PSR2.Classes.PropertyDeclaration.Underscore
+    protected $_url;
 
-	protected $_url;
+    protected function fetchUrl($url)
+    {
+        $data = '';
+        $data = @file_get_contents($url);
+        if (empty($data)) {
+            $GLOBALS['log']->error("Unable to retrieve contents from url:[{$url}]");
+        }
+        return $data;
+    }
 
- 	protected function fetchUrl($url){
- 		$data = '';
- 		$data = @file_get_contents($url);
- 		if(empty($data)) {
- 		   $GLOBALS['log']->error("Unable to retrieve contents from url:[{$url}]");
- 		}
- 		return $data;
- 	}
+    public function getUrl()
+    {
+        return $this->_url;
+    }
 
- 	public function getUrl(){
- 		return $this->_url;
- 	}
-
- 	public function setUrl($url){
- 		$this->_url = $url;
- 	}
+    public function setUrl($url)
+    {
+        $this->_url = $url;
+    }
 }
-?>

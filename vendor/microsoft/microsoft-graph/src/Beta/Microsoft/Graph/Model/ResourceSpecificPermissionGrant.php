@@ -38,7 +38,7 @@ class ResourceSpecificPermissionGrant extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the clientAppId
     * ID of the service principal of the Azure AD app that has been granted access. Read-only.
@@ -52,7 +52,7 @@ class ResourceSpecificPermissionGrant extends DirectoryObject
         $this->_propDict["clientAppId"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the clientId
     * ID of the Azure AD app that has been granted access. Read-only.
@@ -67,7 +67,7 @@ class ResourceSpecificPermissionGrant extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the clientId
     * ID of the Azure AD app that has been granted access. Read-only.
@@ -81,10 +81,10 @@ class ResourceSpecificPermissionGrant extends DirectoryObject
         $this->_propDict["clientId"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the permission
-    * The name of the permission. Read-only.
+    * The name of the resource-specific permission. Read-only.
     *
     * @return string|null The permission
     */
@@ -96,10 +96,10 @@ class ResourceSpecificPermissionGrant extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the permission
-    * The name of the permission. Read-only.
+    * The name of the resource-specific permission. Read-only.
     *
     * @param string $val The permission
     *
@@ -110,7 +110,7 @@ class ResourceSpecificPermissionGrant extends DirectoryObject
         $this->_propDict["permission"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the permissionType
     * The type of permission. Possible values are: Application, Delegated. Read-only.
@@ -125,7 +125,7 @@ class ResourceSpecificPermissionGrant extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the permissionType
     * The type of permission. Possible values are: Application, Delegated. Read-only.
@@ -139,7 +139,7 @@ class ResourceSpecificPermissionGrant extends DirectoryObject
         $this->_propDict["permissionType"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the resourceAppId
     * ID of the Azure AD app that is hosting the resource. Read-only.
@@ -154,7 +154,7 @@ class ResourceSpecificPermissionGrant extends DirectoryObject
             return null;
         }
     }
-    
+
     /**
     * Sets the resourceAppId
     * ID of the Azure AD app that is hosting the resource. Read-only.
@@ -168,5 +168,5 @@ class ResourceSpecificPermissionGrant extends DirectoryObject
         $this->_propDict["resourceAppId"] = $val;
         return $this;
     }
-    
+
 }

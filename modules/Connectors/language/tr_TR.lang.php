@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Ekle',
     'LBL_ADDRCITY' => 'Şehir',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Bilgi' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Kapat' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'İlgili kaynak Kimliği için bağlayıcı bulunamadı.',
-);
-
+];

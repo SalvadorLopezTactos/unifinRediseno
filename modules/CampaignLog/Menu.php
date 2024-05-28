@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  TODO To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,6 +17,5 @@
  ********************************************************************************/
 
 global $mod_strings, $app_strings;
-$module_menu = Array(
-	);
-?>
+$module_menu = [
+];

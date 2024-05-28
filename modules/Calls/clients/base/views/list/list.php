@@ -9,21 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Calls']['base']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Calls']['base']['view']['list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'label' => 'LBL_LIST_SUBJECT',
                     'enabled' => true,
                     'default' => true,
                     'link' => true,
                     'name' => 'name',
-                    'related_fields' => array('repeat_type'),
-                ),
-                array(
+                    'related_fields' => ['repeat_type'],
+                ],
+                [
                     'name' => 'parent_name',
                     'label' => 'LBL_LIST_RELATED_TO',
                     'dynamic_module' => 'PARENT_TYPE',
@@ -33,13 +33,12 @@ $viewdefs['Calls']['base']['view']['list'] = array(
                     'default' => true,
                     'sortable' => false,
                     'ACLTag' => 'PARENT',
-                    'related_fields' =>
-                        array(
-                            'parent_id',
-                            'parent_type',
-                        ),
-                ),
-                array(
+                    'related_fields' => [
+                        'parent_id',
+                        'parent_type',
+                    ],
+                ],
+                [
                     'name' => 'date_start',
                     'label' => 'LBL_LIST_DATE',
                     'type' => 'datetimecombo-colorcoded',
@@ -48,27 +47,27 @@ $viewdefs['Calls']['base']['view']['list'] = array(
                     'enabled' => true,
                     'default' => true,
                     'readonly' => true,
-                    'related_fields' => array('status'),
-                ),
-                array(
+                    'related_fields' => ['status'],
+                ],
+                [
                     'name' => 'date_end',
                     'link' => false,
                     'default' => false,
                     'enabled' => true,
-                ),
-                array(
+                ],
+                [
                     'enabled' => true,
                     'default' => true,
                     'name' => 'status',
                     'type' => 'event-status',
                     'css_class' => 'full-width',
-                ),
-                array(
+                ],
+                [
                     'enabled' => true,
                     'default' => true,
                     'name' => 'direction',
-                ),
-                array(
+                ],
+                [
                     'name' => 'assigned_user_name',
                     'target_record_key' => 'assigned_user_id',
                     'target_module' => 'Employees',
@@ -76,14 +75,14 @@ $viewdefs['Calls']['base']['view']['list'] = array(
                     'enabled' => true,
                     'default' => true,
                     'sortable' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_entered',
                     'enabled' => true,
                     'default' => true,
                     'readonly' => true,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

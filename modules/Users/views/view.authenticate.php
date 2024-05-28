@@ -25,7 +25,7 @@ class UsersViewAuthenticate extends SidecarView
      */
     protected $dataOnly = false;
 
-    public function preDisplay($params = array())
+    public function preDisplay($params = [])
     {
         $sess = SessionStorage::getInstance();
         if ($sess->getId()) {
@@ -51,9 +51,9 @@ class UsersViewAuthenticate extends SidecarView
         if (!empty($_REQUEST['MSID'])) {
             $args['grant_type'] = SugarOAuth2Storage::SEAMLESS_GRANT_TYPE;
         } else {
-            if(empty($args['grant_type'])) {
+            if (empty($args['grant_type'])) {
                 $args['grant_type'] = OAuth2::GRANT_TYPE_USER_CREDENTIALS;
-                if(!empty($args['user_name']) && isset($args['user_password'])) {
+                if (!empty($args['user_name']) && isset($args['user_password'])) {
                     // old-style login, let's translate it
                     $args['username'] = $args['user_name'];
                     $args['password'] = $args['user_password'];
@@ -67,7 +67,7 @@ class UsersViewAuthenticate extends SidecarView
             $this->authorization = $oapi->token($service, $args);
             $this->authorization['external_login'] = AuthenticationController::getInstance()->isExternal();
         } catch (Exception $e) {
-            $GLOBALS['log']->error("Login exception: " . $e->getMessage());
+            $GLOBALS['log']->error('Login exception: ' . $e->getMessage());
 
             $this->killSessionCookie();
             if (AuthenticationController::getInstance()->isExternal()) {
@@ -97,10 +97,10 @@ class UsersViewAuthenticate extends SidecarView
         parent::preDisplay($params);
     }
 
-    public function display($params = array())
+    public function display($params = [])
     {
-        if($this->dataOnly) {
-            $this->ss->assign("siteUrl", $GLOBALS['sugar_config']['site_url']);
+        if ($this->dataOnly) {
+            $this->ss->assign('siteUrl', $GLOBALS['sugar_config']['site_url']);
             $template = $this->getAuthenticateTemplate();
             $this->ss->display($template);
         } else {
@@ -118,7 +118,7 @@ class UsersViewAuthenticate extends SidecarView
     {
         if (isset($this->platform)) {
             $platforms = MetaDataManager::getPlatformList();
-            if (in_array($this->platform, $platforms, true)) {
+            if (safeInArray($this->platform, $platforms, true)) {
                 $platformTemplate = SugarAutoLoader::existingCustomOne(
                     'modules/Users/tpls/Authenticate' . ucfirst(basename($this->platform)) . '.tpl'
                 );

@@ -13,25 +13,26 @@
 
 return [
     'metadata' => [
-            'components' => [
-                [
-                    'rows' => [
+        'components' => [
+            [
+                'rows' => [
+                    [
                         [
-                            [
-                                'view' => [
-                                    'type' => 'forecastdetails',
-                                    'label' => 'LBL_DASHLET_FORECAST_NAME',
-                                ],
-                                'context' => [
-                                    'module' => 'Forecasts',
-                                ],
-                                'width' => 12,
+                            'view' => [
+                                'type' => 'pipeline-metrics',
+                                'label' => 'LBL_PIPELINE_METRICS_DASHLET_NAME',
+                                'module' => 'Forecasts',
                             ],
+                            'context' => [
+                                'module' => 'Forecasts',
+                            ],
+                            'width' => 12,
                         ],
                     ],
-                    'width' => 12,
                 ],
+                'width' => 12,
             ],
         ],
+    ],
     'name' => 'LBL_FORECASTS_RECORD_DASHBOARD',
 ];

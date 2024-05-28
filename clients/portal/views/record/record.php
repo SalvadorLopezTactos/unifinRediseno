@@ -1,4 +1,5 @@
 <?php
+
 //FILE SUGARCRM flav=ent
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -11,19 +12,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['portal']['view']['record'] = array(
-    'buttons' => array(
-        array(
+$viewdefs['portal']['view']['record'] = [
+    'buttons' => [
+        [
             'type' => 'button',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
-            'events' => array(
+            'events' => [
                 'click' => 'button:cancel_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
             'name' => 'save_button',
@@ -31,25 +32,25 @@ $viewdefs['portal']['view']['record'] = array(
             'css_class' => 'btn btn-primary',
             'showOn' => 'edit',
             'acl_action' => 'edit',
-        ),
-        array(
+        ],
+        [
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
             'primary' => true,
             'showOn' => 'view',
-            'buttons' => array(
-                array(
+            'buttons' => [
+                [
                     'type' => 'rowaction',
                     'event' => 'button:edit_button:click',
                     'name' => 'edit_button',
                     'label' => 'LBL_EDIT_BUTTON_LABEL',
                     'acl_action' => 'edit',
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

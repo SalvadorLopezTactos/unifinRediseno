@@ -57,7 +57,7 @@ class MetaDataContextUser implements MetaDataContextInterface
         $hash = md5($hash . SubscriptionManager::instance()->getUserLicenseTypesInString($this->user));
 
         if ($this->user->isAdmin()) {
-            $hash = md5($hash . "admin");
+            $hash = md5($hash . 'admin');
         }
 
         return $hash;
@@ -74,6 +74,7 @@ class MetaDataContextUser implements MetaDataContextInterface
     {
         return $this->context->compare($a, $b);
     }
+
 
     /**
      * Gets the role set of the given user

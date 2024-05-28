@@ -159,7 +159,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return array("rollupSum", "rollupCurrencySum");
+        return ['rollupSum', 'rollupCurrencySum'];
     }
 
     /**
@@ -167,7 +167,7 @@ JS;
      */
     public static function getParameterTypes()
     {
-        return array(AbstractExpression::$RELATE_TYPE, AbstractExpression::$STRING_TYPE);
+        return [AbstractExpression::$RELATE_TYPE, AbstractExpression::$STRING_TYPE];
     }
 
     /**

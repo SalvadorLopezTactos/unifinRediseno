@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Assists in modifying the Metadata in places that the core cannot handle at this time.
  *
@@ -25,7 +26,7 @@ class MetaDataHacks
     /**
      * Fix the ACLs for non-db fields that actually do need ACLs for
      *
-     * @param  array $fieldsAcls array of fields that have ACLs
+     * @param array $fieldsAcls array of fields that have ACLs
      * @return array Array of fixed ACL's
      */
     public function fixAcls(array $fieldsAcls)
@@ -38,7 +39,7 @@ class MetaDataHacks
      * We need to set the type ot what the
      * field type really is not relate.
      *
-     * @param  array $fieldDefs
+     * @param array $fieldDefs
      * @return array $fieldDefs
      */
     public function fixRelateFields(array $fieldDefs)
@@ -64,7 +65,7 @@ class MetaDataHacks
      * Cleans default value of fields to strip out metacharacters used by the app.
      * Used initially for cleaning default multienum values.
      *
-     * @param  array $fielddefs
+     * @param array $fielddefs
      * @return array
      */
     public function normalizeFieldDefs(array $defs)
@@ -92,7 +93,7 @@ class MetaDataHacks
     protected function getSugarFieldHandler()
     {
         if (empty($this->sfh)) {
-            $this->sfh = new SugarFieldHandler;
+            $this->sfh = new SugarFieldHandler();
         }
 
         return $this->sfh;

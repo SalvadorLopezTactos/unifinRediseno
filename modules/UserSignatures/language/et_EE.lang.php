@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'See allkiri nõuab nime.',
     'LBL_DEFAULT_SIGNATURE' => 'Vaikimisi',
     'LBL_MODULE_NAME' => 'Meilisignatuurid',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'Kas kasutada allkirja?',
     'LBL_SIGNATURE_PREPEND' => 'Allkiri vastuse peale?',
     'LBL_SIGNATURES' => 'Allkirjad',
-);
+];

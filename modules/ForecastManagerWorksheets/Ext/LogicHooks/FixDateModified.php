@@ -13,18 +13,18 @@
 /**
  * Reset the date_modified so we have the seconds on it
  */
-$hook_array['process_record'][] = array(
+$hook_array['process_record'][] = [
     1,
     'fixDateModified',
     'modules/ForecastManagerWorksheets/ForecastManagerWorksheetHooks.php',
     'ForecastManagerWorksheetHooks',
     'fixDateModified',
-);
+];
 
-$hook_array['after_retrieve'][] = array(
+$hook_array['after_retrieve'][] = [
     1,
     'fixDateModified',
     'modules/ForecastManagerWorksheets/ForecastManagerWorksheetHooks.php',
     'ForecastManagerWorksheetHooks',
     'fixDateModified',
-);
+];

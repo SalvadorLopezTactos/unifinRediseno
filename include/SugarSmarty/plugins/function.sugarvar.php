@@ -70,53 +70,53 @@ r22124 - 2007-04-20 16:54:53 -0700 (Fri, 20 Apr 2007) - clee -
  * Name:     sugarvar<br>
  * Purpose:  creates a smarty variable from the parameters
  *
- * @author Wayne Pan {wayne at sugarcrm.com}
  * @param array
  * @param Smarty
+ * @author Wayne Pan {wayne at sugarcrm.com}
  */
 
 function smarty_function_sugarvar($params, &$smarty)
 {
-	if(empty($params['key']))  {
-	    $smarty->trigger_error("sugarvar: missing 'key' parameter");
-	    return;
-	}
+    if (empty($params['key'])) {
+        $smarty->trigger_error("sugarvar: missing 'key' parameter");
+        return;
+    }
 
-        $object = empty($params['objectName']) ? $smarty->getTemplateVars('parentFieldArray') : $params['objectName'];
-        $displayParams = $smarty->getTemplateVars('displayParams');
+    $object = empty($params['objectName']) ? $smarty->getTemplateVars('parentFieldArray') : $params['objectName'];
+    $displayParams = $smarty->getTemplateVars('displayParams');
 
 
-	if(empty($params['memberName'])){
-            $member = $smarty->getTemplateVars('vardef');
-		$member = $member['name'];
-	}else{
-		$members = explode('.', $params['memberName']);
-            $member =  $smarty->getTemplateVars($members[0]);
-		for($i = 1; $i < count($members); $i++){
-			$member = $member[$members[$i]];
-		}
-	}
+    if (empty($params['memberName'])) {
+        $member = $smarty->getTemplateVars('vardef');
+        $member = $member['name'];
+    } else {
+        $members = explode('.', $params['memberName']);
+        $member = $smarty->getTemplateVars($members[0]);
+        for ($i = 1; $i < safeCount($members); $i++) {
+            $member = $member[$members[$i]];
+        }
+    }
 
     $_contents = '$' . (string)$object . '.' . $member . '.' . $params['key'];
-	if(empty($params['stringFormat']) && empty($params['string'])) {
-		$_contents = '{' . $_contents;
-		if(!empty($params['htmlentitydecode'])){
+    if (empty($params['stringFormat']) && empty($params['string'])) {
+        $_contents = '{' . $_contents;
+        if (!empty($params['htmlentitydecode'])) {
             $_contents .= '|unescape:\'htmlall\'';
-		}
-		if(!empty($displayParams['htmlescape'])){
-		    $_contents .= '|escape:\'html\'';
-		}
-		if(!empty($displayParams['strip_tags'])){
-			$_contents .= '|strip_tags';
-		}
-		if(!empty($displayParams['url2html'])){
-			$_contents .= '|url2html';
-		}
-		if(!empty($displayParams['nl2br'])){
-			$_contents .= '|nl2br';
-		}
+        }
+        if (!empty($displayParams['htmlescape'])) {
+            $_contents .= '|escape:\'html\'';
+        }
+        if (!empty($displayParams['strip_tags'])) {
+            $_contents .= '|strip_tags';
+        }
+        if (!empty($displayParams['url2html'])) {
+            $_contents .= '|url2html';
+        }
+        if (!empty($displayParams['nl2br'])) {
+            $_contents .= '|nl2br';
+        }
 
-		$_contents .= '}';
+        $_contents .= '}';
     }
     return $_contents;
 }

@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Corpo',
     'LBL_BASE_MODULE' => 'Módulo de destino',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Falha ao criar o modelo de e-mail de processo pelo arquivo',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Este modelo de e-mail está sendo usado em uma definição de processo. Ainda deseja editar esse modelo de e-mail?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Não é possível excluir este modelo de e-mail porque ele está sendo atualmente usado em uma definição de processo.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Não é possível excluir este modelo de e-mail porque ele está sendo atualmente usado em uma definição de processo.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Seletor de campos',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Selecionar',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Tipo de valor do campo',
-);
+];

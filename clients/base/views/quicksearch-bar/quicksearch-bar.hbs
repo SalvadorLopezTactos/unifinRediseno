@@ -10,4 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<input type="text" value="{{searchTerm}}" class="search-query" placeholder="{{str 'LBL_SEARCH'}}" data-action="search_bar" aria-label="{{str 'LBL_GLOBAL_SEARCH'}}">
+<input
+    type="text"
+    value="{{searchTerm}}"
+    class="search-query !bg-[--searchbar-background] border-none box-border float-none min-h-[1.75rem] min-w-[8.75rem] my-1.5 !rounded-md text-ellipsis text-[--text-color] transition-none w-full"
+    placeholder="{{str 'LBL_SEARCH'}}"
+    data-action="search_bar"
+    aria-label="{{str 'LBL_GLOBAL_SEARCH'}}"
+>

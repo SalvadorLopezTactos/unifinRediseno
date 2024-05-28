@@ -9,29 +9,29 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Calls']['base']['filter']['default'] = array(
+$viewdefs['Calls']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'status' => array(),
-        'date_start' => array(),
-        'date_end' => array(),
-        'date_entered' => array(),
-        'date_modified' => array(),
-        'assigned_user_name' => array(),
-        'team_name' => array(),
-        'tag' => array(),
-        '$owner' => array(
+    'fields' => [
+        'name' => [],
+        'status' => [],
+        'date_start' => [],
+        'date_end' => [],
+        'date_entered' => [],
+        'date_modified' => [],
+        'assigned_user_name' => [],
+        'team_name' => [],
+        'tag' => [],
+        '$owner' => [
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',
-        ),
-        '$favorite' => array(
+        ],
+        '$favorite' => [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        ),
+        ],
         'cj_activity_tpl_name' => [],
         'dri_subworkflow_template_name' => [],
         'dri_workflow_template_name' => [],
         'is_customer_journey_activity' => [],
-    ),
-);
+    ],
+];

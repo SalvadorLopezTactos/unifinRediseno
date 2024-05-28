@@ -18,8 +18,6 @@
 
     plugins: ['ErrorDecoration'],
 
-    supportedModules: ['Opportunities', 'Cases', 'Tasks', 'Leads'],
-
     fieldsAllowedInTileBody: 5, // Use a number <= than 0 to disable the 'Number of fields allowed in a tile' check.
 
     /**
@@ -60,10 +58,18 @@
      * Sets the list of modules the user has no access to on the model.
      */
     setNotAvailableModules: function() {
-        var notAvailableModules = _.reject(this.supportedModules, function(module) {
-            return !_.isEmpty(app.metadata.getModule(module));
+        let modules = app.metadata.getModuleNames({
+            filter: 'display_tab',
+            access: 'read'
         });
+        let notAvailableModules = _.reject(modules, function(module) {
+            let moduleDetail = app.metadata.getModule(module);
+            return !_.isEmpty(moduleDetail) &&
+                !moduleDetail.isPipelineExcluded &&
+                this._checkDropdownField(moduleDetail.fields);
+        }, this);
         this.model.set('notAvailableModules', notAvailableModules);
+
     },
 
     /**
@@ -82,6 +88,9 @@
         var recordsPerColumn = this.model.get('records_per_column');
         var hiddenValues = this.model.get('hidden_values');
         var availableColumns = this.model.get('available_columns');
+        let showColumnCount = this.model.get('show_column_count') || {};
+        let showColumnTotal = this.model.get('show_column_total') || {};
+        let totalField = this.model.get('total_field') || {};
 
         if (!(recordsPerColumn instanceof Object)) {
             recordsPerColumn = JSON.parse(recordsPerColumn);
@@ -96,7 +105,10 @@
                 tile_body_fields: tileBodyFields[moduleName],
                 records_per_column: recordsPerColumn[moduleName],
                 hidden_values: hiddenValues[moduleName],
-                available_columns: availableColumns[moduleName]
+                available_columns: availableColumns[moduleName],
+                show_column_count: showColumnCount[moduleName],
+                show_column_total: showColumnTotal[moduleName],
+                total_field: totalField[moduleName],
             };
             this.addModelToCollection(moduleName, data);
         }, this);
@@ -123,7 +135,7 @@
      */
     setAllowedModules: function() {
         var moduleDetails = {};
-        var allowedModules = this.supportedModules || app.metadata.getModuleNames({
+        let allowedModules = app.metadata.getModuleNames({
             filter: 'display_tab',
             access: 'read'
         });
@@ -134,12 +146,29 @@
             moduleDetails = app.metadata.getModule(module);
             if (moduleDetails &&
                 !moduleDetails.isBwcEnabled &&
-                !_.isEmpty(moduleDetails.fields)) {
+                !_.isEmpty(moduleDetails.fields) &&
+                !moduleDetails.isPipelineExcluded &&
+                this._checkDropdownField(moduleDetails.fields)) {
                 modules[module] = app.lang.getAppListStrings('moduleList')[module];
             }
-        });
+        }, this);
 
         this.context.set('allowedModules', modules);
+    },
+
+    /**
+     * Function to check if the module has any dropdown type fields
+     *
+     * @param {Object} fields
+     * @return {boolean}
+     */
+    _checkDropdownField: function(fields) {
+        for (const property in fields) {
+            if (fields[property].type === 'enum') {
+                return true;
+            }
+        }
+        return false;
     },
 
     /**
@@ -191,7 +220,10 @@
                 tile_body_fields: data.tile_body_fields || '',
                 records_per_column: data.records_per_column || '',
                 hidden_values: data.hidden_values || '',
-                available_columns: data.available_columns || ''
+                available_columns: data.available_columns || '',
+                show_column_count: data.show_column_count || '',
+                show_column_total: data.show_column_total || '',
+                total_field: data.show_column_total ? (data.total_field || '') : '',
             });
 
             this.getModuleFields(bean);
@@ -200,6 +232,8 @@
         }
 
         this.setActiveTabIndex();
+
+        this.context.trigger('pipeline:config:set-active-module', module);
     },
 
     /**
@@ -212,8 +246,10 @@
         var content = {};
         var dropdownFields = {};
         var allFields = {};
+        let allTotalableFields = {};
         var studioFields = [];
         var metaFields = app.metadata.getModule(module) ? app.metadata.getModule(module).fields : {};
+        const totalableFields = ['int', 'float', 'decimal', 'currency'];
 
         _.each(metaFields, function(metaField) {
             if (this.isValidStudioField(metaField)) {
@@ -233,12 +269,16 @@
                 var label = app.lang.get(field.label || field.vname, module);
                 if (!_.isEmpty(label)) {
                     allFields[field.name] = label;
+                    if (totalableFields.includes(field.type)) {
+                        allTotalableFields[field.name] = label;
+                    }
                 }
             }
         }, this);
 
         content.dropdownFields = dropdownFields;
         content.fields = allFields;
+        content.allTotalableFields = allTotalableFields;
 
         bean.set('tabContent', content);
     },
@@ -289,6 +329,7 @@
             bean.addValidationTask('check_tile_header', _.bind(this._validateTileOptionsHeader, bean));
             bean.addValidationTask('check_tile_body_fields', _.bind(this._validateTileOptionsBody, bean));
             bean.addValidationTask('check_records_displayed', _.bind(this._validateRecordsDisplayed, bean));
+            bean.addValidationTask('check_total_field', _.bind(this._validateTileOptionsTotal, bean));
 
             if (this.fieldsAllowedInTileBody > 0) {
                 bean.addValidationTask(
@@ -306,6 +347,7 @@
                 model.addValidationTask('check_tile_header', _.bind(this._validateTileOptionsHeader, model));
                 model.addValidationTask('check_tile_body_fields', _.bind(this._validateTileOptionsBody, model));
                 model.addValidationTask('check_records_displayed', _.bind(this._validateRecordsDisplayed, model));
+                model.addValidationTask('check_total_field', _.bind(this._validateTileOptionsTotal, model));
 
                 if (this.fieldsAllowedInTileBody > 0) {
                     model.addValidationTask(
@@ -387,6 +429,23 @@
         if (_.isEmpty(this.get('records_per_column'))) {
             errors.records_per_column = errors.records_per_column || {};
             errors.records_per_column.required = true;
+        }
+
+        callback(null, fields, errors);
+    },
+
+    /**
+     * Validates Tile Options total value for the enabled module
+     * @param {Object} fields
+     * @param {Object} errors
+     * @param {Function} callback
+     *
+     * @protected
+     */
+    _validateTileOptionsTotal: function(fields, errors, callback) {
+        if (this.get('show_column_total') && !this.get('total_field')) {
+            errors.total_field = errors.total_field || {};
+            errors.total_field.required = true;
         }
 
         callback(null, fields, errors);

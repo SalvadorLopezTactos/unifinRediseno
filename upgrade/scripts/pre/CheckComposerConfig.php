@@ -71,7 +71,7 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
      * Installed packages from lock file
      * @var array
      */
-    protected $lockPackages = array();
+    protected $lockPackages = [];
 
     /**
      * Stock hash file
@@ -83,13 +83,13 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
      * Target upgrade definition
      * @var array
      */
-    protected $target = array();
+    protected $target = [];
 
     /**
      * List of generic settings which are always overruled by SugarCRM
      * @var array
      */
-    protected $genericSettings = array(
+    protected $genericSettings = [
         'name',
         'description',
         'type',
@@ -99,7 +99,7 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
         'minimum-stability',
         'autoload', // We may need to expand this later on
         'config',   // We may need to expand this later on
-    );
+    ];
 
     /**
      * {@inheritDoc}
@@ -107,14 +107,14 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
     public function run()
     {
         if (!$this->initialize()) {
-            return $this->error("Composer configuration initialization error");
+            return $this->error('Composer configuration initialization error');
         }
 
         if ($this->skipMerge()) {
             return true;
         }
 
-        $this->log("Custom composer configuration detected");
+        $this->log('Custom composer configuration detected');
         $this->loadTargetDefinition();
 
         // Determine missing packages.
@@ -125,8 +125,8 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
 
         // If all packages are satisfied we can still continue the upgrade.
         if ($validsettings && empty($missingPack)) {
-            $this->log("Custom composer configuration is valid for upgrade");
-            $this->useCustomComposerFiles(array($this->jsonFile, $this->lockFile));
+            $this->log('Custom composer configuration is valid for upgrade');
+            $this->useCustomComposerFiles([$this->jsonFile, $this->lockFile]);
             return true;
         }
 
@@ -147,9 +147,9 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
         );
 
         // Generate user error
-        $error = "A custom composer configuration has been detected which is incompatible ";
-        $error .= "with the upgrade process. Consult the SugarCRM Administration Guide for ";
-        $error .= "more details on how to resolve this issue. Detailed logs are available in %s.";
+        $error = 'A custom composer configuration has been detected which is incompatible ';
+        $error .= 'with the upgrade process. Consult the SugarCRM Administration Guide for ';
+        $error .= 'more details on how to resolve this issue. Detailed logs are available in %s.';
 
         return $this->error(sprintf($error, $this->context['log']), true);
     }
@@ -229,12 +229,12 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
     protected function initialize()
     {
         if (empty($this->context['source_dir'])) {
-            $this->log("No source_dir context available");
+            $this->log('No source_dir context available');
             return false;
         }
 
         if (empty($this->context['new_source_dir'])) {
-            $this->log("No new_source_dir context available");
+            $this->log('No new_source_dir context available');
             return false;
         }
 
@@ -259,7 +259,7 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
      */
     protected function getMissingPackages(array $target, array $lock)
     {
-        $callable = array($this, 'isPackageAvailable');
+        $callable = [$this, 'isPackageAvailable'];
         return $this->getMissing($callable, $target, $lock);
     }
 
@@ -272,7 +272,7 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
      */
     protected function getMissing($callable, array $target, array $lock)
     {
-        $missing = array();
+        $missing = [];
         foreach ($target as $key => $value) {
             if (!call_user_func($callable, $key, $value, $lock)) {
                 $missing[$key] = $value;
@@ -288,10 +288,10 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
     protected function loadTargetDefinition()
     {
         // Initialize target.
-        $this->target = array(
-            'generic' => array(),
-            'packages' => array(),
-        );
+        $this->target = [
+            'generic' => [],
+            'packages' => [],
+        ];
 
         $new = $this->loadFromFile($this->newJsonFile);
 
@@ -332,12 +332,12 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
         // Fetch checksum of the stock composer.json
         $stockHash = $this->getStockHash(self::COMPOSER_JSON);
         if (!$stockHash) {
-            $this->log("Cannot find stock hash of " . self::COMPOSER_JSON);
+            $this->log('Cannot find stock hash of ' . self::COMPOSER_JSON);
             return false;
         }
 
         if ($actualHash !== $stockHash) {
-            $this->log("Actual hash of " . self::COMPOSER_JSON
+            $this->log('Actual hash of ' . self::COMPOSER_JSON
                 . " ($actualHash) does not match stock hash ($stockHash)");
             return false;
         }
@@ -369,7 +369,7 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
      */
     protected function getStockHash($file)
     {
-        $md5_string = array();
+        $md5_string = [];
         if (!file_exists($this->hashFile)) {
             $this->log("{$this->hashFile} file is missing.");
             return null;
@@ -440,7 +440,7 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
      */
     protected function isPlatformPackage($package)
     {
-        return (bool) !strpos($package, '/');
+        return (bool)!strpos($package, '/');
     }
 
     /**
@@ -453,12 +453,12 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
         $json = $this->fileGetContents($file);
         if ($json === false) {
             $this->log("Cannot read $file");
-            return array();
+            return [];
         }
         $content = json_decode($json, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
             $this->log("JSON decode error '" . json_last_error_msg() . "' for $file");
-            return array();
+            return [];
         }
 
         return $content;
@@ -480,7 +480,6 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
         }
         $this->log("Saving file $file to disk");
         return $this->filePutContents($file, $json);
-
     }
 
     /**
@@ -492,13 +491,13 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
         // In case for one reason composer.json or composer.lock have
         // dissappeared, we skip the merge as there is no reference
         // to start from..
-        if ($this->areFilesMissing(array($this->jsonFile, $this->lockFile))) {
+        if ($this->areFilesMissing([$this->jsonFile, $this->lockFile])) {
             return true;
         }
 
         // Determine if any changes have been made to composer settings
         if ($this->isStockComposer()) {
-            $this->log("Skipping merge, stock composer settings detected");
+            $this->log('Skipping merge, stock composer settings detected');
             return true;
         }
 
@@ -540,7 +539,7 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
      */
     protected function filePutContents($file, $content)
     {
-        return (bool) file_put_contents($file, $content);
+        return (bool)file_put_contents($file, $content);
     }
 
     /**
@@ -552,5 +551,4 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
     {
         return copy($source, $target);
     }
-
 }

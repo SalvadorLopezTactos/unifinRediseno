@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Dziennik inspekcji',
     'LBL_FIELD_NAME' => 'Pole',
     'LBL_OLD_NAME' => 'Poprzednia wartość',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Aktualizuj do',
     'LBL_BLANK' => '-brak-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Oś czasu audytu',
+    'LBL_CREATED' => 'Utworzone',
+];

@@ -107,6 +107,13 @@ $viewdefs['DRI_SubWorkflows']['mobile']['view']['detail'] = [
                 ],
                 'team_name',
                 'assigned_user_name',
+                'date_modified',
+                'modified_by_name',
+                'date_entered',
+                'created_by_name',
+                [
+                    'name' => 'tag',
+                ],
             ],
         ],
     ],

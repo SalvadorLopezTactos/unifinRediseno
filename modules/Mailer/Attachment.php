@@ -25,12 +25,13 @@ class Attachment
 
     /**
      * @access public
-     * @param string      $path     required
-     * @param null|string $name     Should be a string, but null is acceptable if the path will be used for the name.
-     * @param string      $encoding
-     * @param string      $mimeType
+     * @param string $path required
+     * @param null|string $name Should be a string, but null is acceptable if the path will be used for the name.
+     * @param string $encoding
+     * @param string $mimeType
      */
-    public function __construct($path, $name = null, $encoding = Encoding::Base64, $mimeType = "") {
+    public function __construct($path, $name = null, $encoding = Encoding::Base64, $mimeType = '')
+    {
         $this->setPath($path);
         $this->setName($name);
         $this->setMimeType($mimeType);
@@ -41,7 +42,8 @@ class Attachment
      * @access public
      * @param string $path required
      */
-    public function setPath($path) {
+    public function setPath($path)
+    {
         $this->path = $path;
     }
 
@@ -49,7 +51,8 @@ class Attachment
      * @access public
      * @return string
      */
-    public function getPath() {
+    public function getPath()
+    {
         return $this->path;
     }
 
@@ -57,8 +60,9 @@ class Attachment
      * @access public
      * @param null|string $name required Should be a string, but null is acceptable if the path will be used for the name.
      */
-    public function setName($name) {
-        if (!is_string($name) || $name == "") {
+    public function setName($name)
+    {
+        if (!is_string($name) || $name == '') {
             // derive the name from the path if the name is invalid
             $name = basename($this->path);
         }
@@ -70,7 +74,8 @@ class Attachment
      * @access public
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
@@ -79,10 +84,11 @@ class Attachment
      * @param string $encoding
      * @throws MailerException
      */
-    public function setEncoding($encoding = Encoding::Base64) {
+    public function setEncoding($encoding = Encoding::Base64)
+    {
         if (!Encoding::isValid($encoding)) {
             throw new MailerException(
-                "Invalid Attachment: encoding is invalid",
+                'Invalid Attachment: encoding is invalid',
                 MailerException::InvalidAttachment
             );
         }
@@ -94,7 +100,8 @@ class Attachment
      * @access public
      * @return string
      */
-    public function getEncoding() {
+    public function getEncoding()
+    {
         return $this->encoding;
     }
 
@@ -102,11 +109,12 @@ class Attachment
      * @access public
      * @param string $mimeType
      */
-    public function setMimeType($mimeType = "") {
+    public function setMimeType($mimeType = '')
+    {
         // Reject Email if it has Executable Attachments
         if ($mimeType === 'application/x-dosexec') {
             throw new MailerException(
-                "Executable attachment not accepted",
+                'Executable attachment not accepted',
                 MailerException::ExecutableAttachment
             );
         }
@@ -118,7 +126,8 @@ class Attachment
      * @access public
      * @return string
      */
-    public function getMimeType() {
+    public function getMimeType()
+    {
         return $this->mimeType;
     }
 
@@ -128,12 +137,13 @@ class Attachment
      * @access public
      * @return array Array of key value pairs representing the properties of the attachment.
      */
-    public function toArray() {
-        return array(
-            "path"     => $this->getPath(),
-            "name"     => $this->getName(),
-            "encoding" => $this->getEncoding(),
-            "mimetype" => $this->getMimeType(),
-        );
+    public function toArray()
+    {
+        return [
+            'path' => $this->getPath(),
+            'name' => $this->getName(),
+            'encoding' => $this->getEncoding(),
+            'mimetype' => $this->getMimeType(),
+        ];
     }
 }

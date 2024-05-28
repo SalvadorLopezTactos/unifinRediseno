@@ -10,58 +10,58 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['product_product'] = array(
+$dictionary['product_product'] = [
     'table' => 'product_product',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'parent_id' => array(
+        ],
+        'parent_id' => [
             'name' => 'parent_id',
             'type' => 'id',
-        ),
-        'child_id' => array(
+        ],
+        'child_id' => [
             'name' => 'child_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'prod_prodpk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_pp_parent',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'parent_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_pp_child',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'child_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'product_product' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'product_product' => [
             'lhs_module' => 'Products',
             'lhs_table' => 'products',
             'lhs_key' => 'id',
@@ -73,6 +73,6 @@ $dictionary['product_product'] = array(
             'join_key_lhs' => 'parent_id',
             'join_key_rhs' => 'child_id',
             'reverse' => '1',
-        ),
-    ),
-);
+        ],
+    ],
+];

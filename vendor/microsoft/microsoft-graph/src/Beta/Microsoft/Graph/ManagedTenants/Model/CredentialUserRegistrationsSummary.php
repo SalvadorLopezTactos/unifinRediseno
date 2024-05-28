@@ -26,6 +26,7 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
 {
     /**
     * Gets the lastRefreshedDateTime
+    * Date and time the entity was last updated in the multi-tenant management platform. Optional. Read-only.
     *
     * @return \DateTime|null The lastRefreshedDateTime
     */
@@ -41,9 +42,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
         }
         return null;
     }
-    
+
     /**
     * Sets the lastRefreshedDateTime
+    * Date and time the entity was last updated in the multi-tenant management platform. Optional. Read-only.
     *
     * @param \DateTime $val The lastRefreshedDateTime
     *
@@ -54,9 +56,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
         $this->_propDict["lastRefreshedDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the mfaAndSsprCapableUserCount
+    * The number of users that are capable of performing multi-factor authentication or self service password reset. Optional. Read-only.
     *
     * @return int|null The mfaAndSsprCapableUserCount
     */
@@ -68,9 +71,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
             return null;
         }
     }
-    
+
     /**
     * Sets the mfaAndSsprCapableUserCount
+    * The number of users that are capable of performing multi-factor authentication or self service password reset. Optional. Read-only.
     *
     * @param int $val The mfaAndSsprCapableUserCount
     *
@@ -81,9 +85,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
         $this->_propDict["mfaAndSsprCapableUserCount"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the mfaConditionalAccessPolicyState
+    * The state of a conditional access policy that enforces multi-factor authentication. Optional. Read-only.
     *
     * @return string|null The mfaConditionalAccessPolicyState
     */
@@ -95,9 +100,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
             return null;
         }
     }
-    
+
     /**
     * Sets the mfaConditionalAccessPolicyState
+    * The state of a conditional access policy that enforces multi-factor authentication. Optional. Read-only.
     *
     * @param string $val The mfaConditionalAccessPolicyState
     *
@@ -108,9 +114,39 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
         $this->_propDict["mfaConditionalAccessPolicyState"] = $val;
         return $this;
     }
-    
+
+    /**
+    * Gets the mfaExcludedUserCount
+    * The number of users in the multi-factor authentication exclusion security group (Microsoft 365 Lighthouse - MFA exclusions). Optional. Read-only.
+    *
+    * @return int|null The mfaExcludedUserCount
+    */
+    public function getMfaExcludedUserCount()
+    {
+        if (array_key_exists("mfaExcludedUserCount", $this->_propDict)) {
+            return $this->_propDict["mfaExcludedUserCount"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the mfaExcludedUserCount
+    * The number of users in the multi-factor authentication exclusion security group (Microsoft 365 Lighthouse - MFA exclusions). Optional. Read-only.
+    *
+    * @param int $val The mfaExcludedUserCount
+    *
+    * @return CredentialUserRegistrationsSummary
+    */
+    public function setMfaExcludedUserCount($val)
+    {
+        $this->_propDict["mfaExcludedUserCount"] = intval($val);
+        return $this;
+    }
+
     /**
     * Gets the mfaRegisteredUserCount
+    * The number of users registered for multi-factor authentication. Optional. Read-only.
     *
     * @return int|null The mfaRegisteredUserCount
     */
@@ -122,9 +158,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
             return null;
         }
     }
-    
+
     /**
     * Sets the mfaRegisteredUserCount
+    * The number of users registered for multi-factor authentication. Optional. Read-only.
     *
     * @param int $val The mfaRegisteredUserCount
     *
@@ -135,9 +172,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
         $this->_propDict["mfaRegisteredUserCount"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the securityDefaultsEnabled
+    * A flag indicating whether Identity Security Defaults is enabled. Optional. Read-only.
     *
     * @return bool|null The securityDefaultsEnabled
     */
@@ -149,9 +187,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
             return null;
         }
     }
-    
+
     /**
     * Sets the securityDefaultsEnabled
+    * A flag indicating whether Identity Security Defaults is enabled. Optional. Read-only.
     *
     * @param bool $val The securityDefaultsEnabled
     *
@@ -162,9 +201,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
         $this->_propDict["securityDefaultsEnabled"] = boolval($val);
         return $this;
     }
-    
+
     /**
     * Gets the ssprEnabledUserCount
+    * The number of users enabled for self service password reset. Optional. Read-only.
     *
     * @return int|null The ssprEnabledUserCount
     */
@@ -176,9 +216,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
             return null;
         }
     }
-    
+
     /**
     * Sets the ssprEnabledUserCount
+    * The number of users enabled for self service password reset. Optional. Read-only.
     *
     * @param int $val The ssprEnabledUserCount
     *
@@ -189,9 +230,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
         $this->_propDict["ssprEnabledUserCount"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the ssprRegisteredUserCount
+    * The number of users registered for self service password reset. Optional. Read-only.
     *
     * @return int|null The ssprRegisteredUserCount
     */
@@ -203,9 +245,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
             return null;
         }
     }
-    
+
     /**
     * Sets the ssprRegisteredUserCount
+    * The number of users registered for self service password reset. Optional. Read-only.
     *
     * @param int $val The ssprRegisteredUserCount
     *
@@ -216,9 +259,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
         $this->_propDict["ssprRegisteredUserCount"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the tenantDisplayName
+    * The display name for the managed tenant. Required. Read-only.
     *
     * @return string|null The tenantDisplayName
     */
@@ -230,9 +274,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
             return null;
         }
     }
-    
+
     /**
     * Sets the tenantDisplayName
+    * The display name for the managed tenant. Required. Read-only.
     *
     * @param string $val The tenantDisplayName
     *
@@ -243,9 +288,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
         $this->_propDict["tenantDisplayName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the tenantId
+    * The Azure Active Directory tenant identifier for the managed tenant. Required. Read-only.
     *
     * @return string|null The tenantId
     */
@@ -257,9 +303,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
             return null;
         }
     }
-    
+
     /**
     * Sets the tenantId
+    * The Azure Active Directory tenant identifier for the managed tenant. Required. Read-only.
     *
     * @param string $val The tenantId
     *
@@ -270,9 +317,37 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
         $this->_propDict["tenantId"] = $val;
         return $this;
     }
-    
+
+    /**
+    * Gets the tenantLicenseType
+    *
+    * @return string|null The tenantLicenseType
+    */
+    public function getTenantLicenseType()
+    {
+        if (array_key_exists("tenantLicenseType", $this->_propDict)) {
+            return $this->_propDict["tenantLicenseType"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the tenantLicenseType
+    *
+    * @param string $val The tenantLicenseType
+    *
+    * @return CredentialUserRegistrationsSummary
+    */
+    public function setTenantLicenseType($val)
+    {
+        $this->_propDict["tenantLicenseType"] = $val;
+        return $this;
+    }
+
     /**
     * Gets the totalUserCount
+    * The total number of users in the given managed tenant. Optional. Read-only.
     *
     * @return int|null The totalUserCount
     */
@@ -284,9 +359,10 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
             return null;
         }
     }
-    
+
     /**
     * Sets the totalUserCount
+    * The total number of users in the given managed tenant. Optional. Read-only.
     *
     * @param int $val The totalUserCount
     *
@@ -297,5 +373,5 @@ class CredentialUserRegistrationsSummary extends \Beta\Microsoft\Graph\Model\Ent
         $this->_propDict["totalUserCount"] = intval($val);
         return $this;
     }
-    
+
 }

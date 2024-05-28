@@ -14,8 +14,9 @@
     <div class="content-tabs">
         <ul class="nav nav-tabs ml-5 mb-0 report-dashlet-config-tabs" id="recordTab">
             {{#each meta.panels}}
-                <li class="tab tab-badgeable {{name}} {{#eq @index 0}} active{{/eq}}">
-                    <a class="report-dashlet-config-tab" href="#{{name}}{{cid}}" data-toggle="tab" data-tabname="{{name}}">
+                <li class="flex tab tab-badgeable {{name}} {{#eq @index 0}} active{{/eq}}"
+                    data-bs-toggle="tab" data-bs-target="#{{name}}{{cid}}" data-tabname="{{name}}">
+                    <a class="report-dashlet-config-tab">
                         {{#notEq @index 0}}<i class="sicon sicon-info-lg mr-1 tab-disabled-info" data-fieldname="info-{{name}}"></i>{{/notEq}}
                         <span class="tab-title report-dashlet-tab-title font-semibold">{{str label ../../../view.module}}</span>
                     </a>
@@ -24,7 +25,7 @@
         </ul>
         <div id="tabContent" class="tab-content record">
             {{#each meta.panels}}
-                <div class="tab-pane fade {{#eq @index 0}} active in{{/eq}}" id="{{name}}{{cid}}">
+                <div class="tab-pane fade {{#eq @index 0}} active show{{/eq}}" id="{{name}}{{cid}}">
                     {{#if custom_view}}
                         <div {{#if span}}class="span{{span}}" {{/if}}data-container="{{custom_view}}"></div>
                     {{/if}}

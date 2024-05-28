@@ -21,6 +21,7 @@ class DriveItemMapper
      * @var string|mixed
      */
     public $type;
+
     /**
      * @constructor
      * @param mixed $data
@@ -50,6 +51,8 @@ class DriveItemMapper
             return DriveItem::fromOneDrive($data);
         } elseif ($type === DriveType::DROPBOX) {
             return DriveItem::fromDropboxDrive($data);
+        } elseif ($type === DriveType::SHAREPOINT) {
+            return DriveItem::fromSharepoint($data);
         }
 
         return null;

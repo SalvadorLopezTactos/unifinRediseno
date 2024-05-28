@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Sugarcrm\Sugarcrm\Security\ModuleScanner;
 
 use PhpParser\Error;
+use PhpParser\Node\Expr\CallLike;
 use PhpParser\NodeFinder;
 use PhpParser\ParserFactory;
 use Sugarcrm\Sugarcrm\Security\ModuleScanner\Issues\ForbiddenManifestExpressionUsed;
@@ -40,6 +41,9 @@ class ManifestScanner
         $nodeFinder = new NodeFinder;
 
         $forbiddenNodes = $nodeFinder->find($ast, function ($node) {
+            if ($node instanceof CallLike) {
+                return true;
+            }
             $denyList = [
                 Node\Expr\Include_::class,
                 Node\Expr\Eval_::class,
@@ -47,11 +51,6 @@ class ManifestScanner
                 Node\Stmt\Echo_::class,
                 Node\Expr\ArrowFunction::class,
                 Node\Expr\ShellExec::class,
-                Node\Expr\FuncCall::class,
-                Node\Expr\MethodCall::class,
-                Node\Expr\New_::class,
-                Node\Expr\NullsafeMethodCall::class,
-                Node\Expr\StaticCall::class,
             ];
             return in_array(get_class($node), $denyList);
         });

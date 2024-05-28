@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Procesa biznesa lomas',
-  'LBL_MODULE_TITLE' => 'Procesa biznesa lomas',
-  'LBL_MODULE_NAME_SINGULAR' => 'Procesa biznesa lomas',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Procesa biznesa lomas',
+    'LBL_MODULE_TITLE' => 'Procesa biznesa lomas',
+    'LBL_MODULE_NAME_SINGULAR' => 'Procesa biznesa lomas',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Procesa biznesa noteikumu fokusa panelis',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Procesa biznesa noteikumu fokusa panelis',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Procesu biznesa noteikumu ierakstu instrumentu panelis',
-  'LBL_RST_UID' => 'Biznesa noteikuma ID',
-  'LBL_RST_TYPE' => 'Biznesa noteikuma veids',
-  'LBL_RST_DEFINITION' => 'Biznesa noteikuma definīcija',
-  'LBL_RST_EDITABLE' => 'Rediģējams Biznesa noteikums',
-  'LBL_RST_SOURCE' => 'Biznesa noteikuma avots',
-  'LBL_RST_SOURCE_DEFINITION' => 'Biznesa noteikuma avota definīcija',
-  'LBL_RST_MODULE' => 'Mērķa modulis',
-  'LBL_RST_FILENAME' => 'Biznesa noteikuma faila nosaukums',
-  'LBL_RST_CREATE_DATE' => 'Biznesa noteikuma izveides datums',
-  'LBL_RST_UPDATE_DATE' => 'Biznesa noteikuma atjaunināšanas datums',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Procesu biznesa noteikumu ierakstu instrumentu panelis',
+    'LBL_RST_UID' => 'Biznesa noteikuma ID',
+    'LBL_RST_TYPE' => 'Biznesa noteikuma veids',
+    'LBL_RST_DEFINITION' => 'Biznesa noteikuma definīcija',
+    'LBL_RST_EDITABLE' => 'Rediģējams Biznesa noteikums',
+    'LBL_RST_SOURCE' => 'Biznesa noteikuma avots',
+    'LBL_RST_SOURCE_DEFINITION' => 'Biznesa noteikuma avota definīcija',
+    'LBL_RST_MODULE' => 'Mērķa modulis',
+    'LBL_RST_FILENAME' => 'Biznesa noteikuma faila nosaukums',
+    'LBL_RST_CREATE_DATE' => 'Biznesa noteikuma izveides datums',
+    'LBL_RST_UPDATE_DATE' => 'Biznesa noteikuma atjaunināšanas datums',
 
     'LNK_LIST' => 'Skatīti biznesa noteikumu apstrādes procesu',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Izveidot procesa biznesa lomu',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Šī biznesa loma ir nederīga, jo izmanto nederīgus laukus vai laukus, kas netika atrasti jūsu SugarCRM versijā. Lūdzam izlabot zemāk norādītās kļūdas un saglabāt šo biznesa lomu.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Šis biznesa nosacījums pašlaik tiek izmantots procesa definīcijā. Vai tomēr vēlaties rediģēt šo e-pasta veidni?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Šo biznesa nosacījumu nevar dzēst, jo tas pašlaik tiek izmantots procesa definīcijā.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Šo biznesa nosacījumu nevar dzēst, jo tas pašlaik tiek izmantots procesa definīcijā.',
+];

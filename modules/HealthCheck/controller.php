@@ -25,7 +25,7 @@ class HealthCheckController extends SugarController
      * @see SugarController::$action_remap
      * @var array
      */
-    protected $action_remap = array();
+    protected $action_remap = [];
 
     /**
      * Default action "index"
@@ -48,16 +48,16 @@ class HealthCheckController extends SugarController
 
         $hc = $this->bean->run($scanner);
         if (!empty($hc->error)) {
-            echo json_encode(array('error' => $hc->error));
+            echo json_encode(['error' => $hc->error]);
         } else {
             // logmeta is already json encoded
             echo $hc->logmeta;
         }
 
-        if ($this->getHelper()->pingHeartbeat(array('bucket' => $hc->bucket, 'flag' => $hc->flag))) {
-            $GLOBALS['log']->info("HealthCheck: Heartbeat server has been pinged successfully.");
+        if ($this->getHelper()->pingHeartbeat(['bucket' => $hc->bucket, 'flag' => $hc->flag])) {
+            $GLOBALS['log']->info('HealthCheck: Heartbeat server has been pinged successfully.');
         } else {
-            $GLOBALS['log']->error("HealthCheck: Unable to ping Heartbeat server.");
+            $GLOBALS['log']->error('HealthCheck: Unable to ping Heartbeat server.');
         }
     }
 

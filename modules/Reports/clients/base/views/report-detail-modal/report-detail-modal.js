@@ -125,7 +125,7 @@
             type,
         };
 
-        if (forceRender) {
+        if (forceRender === true) {
             this.render();
         }
     },

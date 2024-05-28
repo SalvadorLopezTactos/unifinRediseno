@@ -26,8 +26,8 @@ class MapsConfigApi extends ConfigApi
         return [
             'setConfig' => [
                 'reqType' => ['POST'],
-                'path' => ['Administration','maps', 'config', '?'],
-                'pathVars' => ['', '','', 'category'],
+                'path' => ['Administration', 'maps', 'config', '?'],
+                'pathVars' => ['', '', '', 'category'],
                 'method' => 'setConfig',
                 'shortHelp' => 'Sets configuration for a category',
                 'longHelp' => 'include/api/help/administration_config_post_help.html',

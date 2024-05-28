@@ -15,7 +15,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 global $dictionary;
 //Load all relationship metadata
-include_once("modules/TableDictionary.php");
+include_once 'modules/TableDictionary.php';
 
 
 define('REL_LHS', 'LHS');
@@ -57,16 +57,16 @@ abstract class SugarRelationship
      *
      * @var SugarBean[]
      */
-    protected static $resaveQueue = array();
+    protected static $resaveQueue = [];
 
     /**
      * Index of bean resave queue
      *
      * @var array
      */
-    protected static $resaveIndex = array();
+    protected static $resaveIndex = [];
 
-    public abstract function add($lhs, $rhs, $additionalFields = array());
+    abstract public function add($lhs, $rhs, $additionalFields = []);
 
     /**
      * @abstract
@@ -76,7 +76,7 @@ abstract class SugarRelationship
      *
      * @return boolean
      */
-    public abstract function remove($lhs, $rhs);
+    abstract public function remove($lhs, $rhs);
 
     /**
      * Return type of relationship based on side.
@@ -94,7 +94,7 @@ abstract class SugarRelationship
      *
      * @return void
      */
-    public abstract function load($link, $params = array());
+    abstract public function load($link, $params = []);
 
     /**
      * Gets the query to load a link.
@@ -107,7 +107,7 @@ abstract class SugarRelationship
      *
      * @return string|array query used to load this relationship
      */
-    public abstract function getQuery($link, $params = array());
+    abstract public function getQuery($link, $params = []);
 
     /**
      * @abstract
@@ -116,18 +116,18 @@ abstract class SugarRelationship
      *
      * @return string|array the query to join against the related modules table for the given link.
      */
-    abstract public function getJoin($link, $params = array(), $return_array = false);
+    abstract public function getJoin($link, $params = [], $return_array = false);
 
     /**
      * @abstract
-     * @internal
-     *
      * @param Link2 $link
      * @param SugarQuery $sugar_query
      *
      * @return SugarQuery
+     * @internal
+     *
      */
-    public abstract function buildJoinSugarQuery(
+    abstract public function buildJoinSugarQuery(
         Link2 $link,
         $sugar_query,
         $options
@@ -141,13 +141,13 @@ abstract class SugarRelationship
      *
      * @return bool
      */
-    public abstract function relationship_exists($lhs, $rhs);
+    abstract public function relationship_exists($lhs, $rhs);
 
     /**
      * @abstract
      * @return string name of the table for this relationship
      */
-    public abstract function getRelationshipTable();
+    abstract public function getRelationshipTable();
 
     /**
      * @param  $link Link2 removes all the beans associated with this link from the relationship
@@ -191,7 +191,7 @@ abstract class SugarRelationship
      */
     public function removeById($rowID)
     {
-        $this->removeRow(array("id" => $rowID));
+        $this->removeRow(['id' => $rowID]);
     }
 
     /**
@@ -200,6 +200,22 @@ abstract class SugarRelationship
     public function getRHSModule()
     {
         return $this->def['rhs_module'];
+    }
+
+    /**
+     * @return string name of right hand side key.
+     */
+    public function getRHSKey()
+    {
+        return $this->def['rhs_key'];
+    }
+
+    /**
+     * @return string name of left hand side key.
+     */
+    public function getLHSKey()
+    {
+        return $this->def['lhs_key'];
     }
 
     /**
@@ -231,7 +247,7 @@ abstract class SugarRelationship
      */
     public function getFields()
     {
-        return $this->def['fields'] ?? array();
+        return $this->def['fields'] ?? [];
     }
 
     /**
@@ -242,8 +258,7 @@ abstract class SugarRelationship
     protected function addRow(array $row)
     {
         $existing = $this->checkExisting($row);
-        if (!empty($existing)) //Update the existing row, overriding the values with those passed in
-        {
+        if (!empty($existing)) { //Update the existing row, overriding the values with those passed in
             return $this->updateRow(
                 $existing['id'],
                 array_merge($existing, $row)
@@ -276,9 +291,9 @@ abstract class SugarRelationship
             $this->getRelationshipTable(),
             $this->getFields(),
             $values,
-            array(
+            [
                 'id' => $id,
-            )
+            ]
         );
 
         return true;
@@ -300,10 +315,10 @@ abstract class SugarRelationship
         DBManagerFactory::getInstance()->updateParams(
             $this->getRelationshipTable(),
             $this->getFields(),
-            array(
+            [
                 'deleted' => 1,
                 'date_modified' => TimeDate::getInstance()->nowDb(),
-            ),
+            ],
             $where
         );
 
@@ -351,10 +366,10 @@ abstract class SugarRelationship
         if (!empty($this->def['relationship_role_columns']) && is_array($this->def['relationship_role_columns'])) {
             return $this->def['relationship_role_columns'];
         }
-        if (!empty($this->def['relationship_role_column']) && !empty($this->def["relationship_role_column_value"])) {
-            return array($this->def['relationship_role_column'] => $this->def["relationship_role_column_value"]);
+        if (!empty($this->def['relationship_role_column']) && !empty($this->def['relationship_role_column_value'])) {
+            return [$this->def['relationship_role_column'] => $this->def['relationship_role_column_value']];
         }
-        return array();
+        return [];
     }
 
     /**
@@ -371,6 +386,7 @@ abstract class SugarRelationship
         $ignoreRole = false,
         $ignorePrimary = false
     ) {
+
         if (!$ignoreRole && !$this->ignore_role_filter) {
             $this->applyQueryBuilderRoleFilter($builder, $tableAlias);
         }
@@ -421,11 +437,11 @@ abstract class SugarRelationship
      *
      * @return string
      */
-    protected function getRoleWhere($table = "", $ignore_role_filter = false, $ignore_primary_flag = false)
+    protected function getRoleWhere($table = '', $ignore_role_filter = false, $ignore_primary_flag = false)
     {
         $ignore_role_filter = $ignore_role_filter || $this->ignore_role_filter;
-        $roleCheck = "";
-        if (empty ($table)) {
+        $roleCheck = '';
+        if (empty($table)) {
             $table = $this->getRelationshipTable();
         }
 
@@ -441,15 +457,14 @@ abstract class SugarRelationship
                 if (is_null($value)) {
                     $roleCheck .= ' IS NULL';
                 } else {
-                    $roleCheck .= " = ".$db->quoted($value);
+                    $roleCheck .= ' = ' . $db->quoted($value);
                 }
             }
         }
         if (!empty($this->def['primary_flag_column'])
             && !empty($this->primaryOnly)
             && !$ignore_primary_flag) {
-
-            $field = $table.'.'.$this->def['primary_flag_column'];
+            $field = $table . '.' . $this->def['primary_flag_column'];
 
             $roleCheck .= " AND {$field} = 1 ";
         }
@@ -479,7 +494,6 @@ abstract class SugarRelationship
         if (!empty($this->def['primary_flag_column']) && !empty($this->primaryOnly) && !$ignoreFlag) {
             $query->andWhere($expr->eq($this->def['primary_flag_column'], 1));
         }
-
     }
 
 
@@ -494,13 +508,14 @@ abstract class SugarRelationship
      */
     protected function buildSugarQueryRoleWhere(
         $sugar_query,
-        $table = "",
+        $table = '',
         $ignore_role_filter = false
     ) {
-        $ignore_role_filter = $ignore_role_filter || $this->ignore_role_filter;
-        $roleCheck = array();
 
-        if (empty ($table)) {
+        $ignore_role_filter = $ignore_role_filter || $this->ignore_role_filter;
+        $roleCheck = [];
+
+        if (empty($table)) {
             $table = $this->getRelationshipTable();
         }
 
@@ -527,7 +542,6 @@ abstract class SugarRelationship
         if (!empty($this->def['primary_flag_column'])
             && !empty($this->primaryOnly)
             && !$ignore_role_filter) {
-
             $field = $this->def['primary_flag_column'];
             if (!empty($table)) {
                 $field = "$table.{$field}";
@@ -547,7 +561,7 @@ abstract class SugarRelationship
      */
     protected function getCustomLogicArguments($focus, $related, $link_name)
     {
-        $custom_logic_arguments = array();
+        $custom_logic_arguments = [];
         $custom_logic_arguments['id'] = $focus->id;
         $custom_logic_arguments['related_id'] = $related->id;
         $custom_logic_arguments['name'] = $focus->name;
@@ -563,13 +577,13 @@ abstract class SugarRelationship
     /**
      * Call the before add logic hook for a given link
      *
-     * @param  SugarBean $focus base bean the hooks is triggered from
-     * @param  SugarBean $related bean being added/removed/updated from relationship
+     * @param SugarBean $focus base bean the hooks is triggered from
+     * @param SugarBean $related bean being added/removed/updated from relationship
      * @param string $link_name name of link being triggerd
      *
      * @return void
      */
-    protected function callBeforeAdd($focus, $related, $link_name = "")
+    protected function callBeforeAdd($focus, $related, $link_name = '')
     {
         $custom_logic_arguments = $this->getCustomLogicArguments(
             $focus,
@@ -585,13 +599,13 @@ abstract class SugarRelationship
     /**
      * Call the after add logic hook for a given link
      *
-     * @param  SugarBean $focus base bean the hooks is triggered from
-     * @param  SugarBean $related bean being added/removed/updated from relationship
+     * @param SugarBean $focus base bean the hooks is triggered from
+     * @param SugarBean $related bean being added/removed/updated from relationship
      * @param string $link_name name of link being triggerd
      *
      * @return void
      */
-    protected function callAfterAdd($focus, $related, $link_name = "")
+    protected function callAfterAdd($focus, $related, $link_name = '')
     {
         $custom_logic_arguments = $this->getCustomLogicArguments(
             $focus,
@@ -607,13 +621,13 @@ abstract class SugarRelationship
     /**
      * Call the before update logic hook for a given link
      *
-     * @param  SugarBean $focus base bean the hooks is triggered from
-     * @param  SugarBean $related bean being added/removed/updated from relationship
+     * @param SugarBean $focus base bean the hooks is triggered from
+     * @param SugarBean $related bean being added/removed/updated from relationship
      * @param string $link_name name of link being triggerd
      *
      * @return void
      */
-    protected function callBeforeUpdate($focus, $related, $link_name = "")
+    protected function callBeforeUpdate($focus, $related, $link_name = '')
     {
         $custom_logic_arguments = $this->getCustomLogicArguments(
             $focus,
@@ -629,33 +643,33 @@ abstract class SugarRelationship
     /**
      * Call the after update logic hook for a given link
      *
-     * @param  SugarBean $focus base bean the hooks is triggered from
-     * @param  SugarBean $related bean being added/removed/updated from relationship
+     * @param SugarBean $focus base bean the hooks is triggered from
+     * @param SugarBean $related bean being added/removed/updated from relationship
      * @param string $link_name name of link being triggerd
      *
      * @return void
      */
-    protected function callAfterUpdate($focus, $related, $link_name = "")
+    protected function callAfterUpdate($focus, $related, $link_name = '')
     {
         $custom_logic_arguments = $this->getCustomLogicArguments(
-                $focus,
-                $related,
-                $link_name
+            $focus,
+            $related,
+            $link_name
         );
         $focus->call_custom_logic(
-                'after_relationship_update',
-                $custom_logic_arguments
+            'after_relationship_update',
+            $custom_logic_arguments
         );
     }
 
     /**
-     * @param  SugarBean $focus
-     * @param  SugarBean $related
+     * @param SugarBean $focus
+     * @param SugarBean $related
      * @param string $link_name
      *
      * @return void
      */
-    protected function callBeforeDelete($focus, $related, $link_name = "")
+    protected function callBeforeDelete($focus, $related, $link_name = '')
     {
         $custom_logic_arguments = $this->getCustomLogicArguments(
             $focus,
@@ -669,13 +683,13 @@ abstract class SugarRelationship
     }
 
     /**
-     * @param  SugarBean $focus
-     * @param  SugarBean $related
+     * @param SugarBean $focus
+     * @param SugarBean $related
      * @param string $link_name
      *
      * @return void
      */
-    protected function callAfterDelete($focus, $related, $link_name = "")
+    protected function callAfterDelete($focus, $related, $link_name = '')
     {
         $custom_logic_arguments = $this->getCustomLogicArguments(
             $focus,
@@ -721,7 +735,7 @@ abstract class SugarRelationship
     protected function getOptionalWhereClause($optional_array, $whereTable = '', SugarBean $relatedBean = null)
     {
         //lhs_field, operator, and rhs_value must be set in optional_array
-        foreach (array("lhs_field", "operator", "rhs_value") as $required) {
+        foreach (['lhs_field', 'operator', 'rhs_value'] as $required) {
             if (empty($optional_array[$required])) {
                 throw new \InvalidArgumentException('lhs_field, operator and rhs_value must be set');
             }
@@ -758,10 +772,11 @@ abstract class SugarRelationship
         SugarQuery $query,
         $optional_array,
         $whereTable = '',
-        SugarBean $relatedBean = null
+        SugarBean  $relatedBean = null
     ) {
+
         //lhs_field, operator, and rhs_value must be set in optional_array
-        foreach (array('lhs_field', 'operator', 'rhs_value') as $required) {
+        foreach (['lhs_field', 'operator', 'rhs_value'] as $required) {
             if (empty($optional_array[$required])) {
                 throw new \InvalidArgumentException('lhs_field, operator and rhs_value must be set');
             }
@@ -797,9 +812,9 @@ abstract class SugarRelationship
         $parts = explode(',', $orderBy);
         $parts = is_array($parts) ? $parts : [];
         array_walk($parts, 'trim');
-        $fields = array();
+        $fields = [];
         foreach ($parts as $part) {
-            $matches = array();
+            $matches = [];
             if (preg_match('/^(.*)\s+(asc|desc)$/i', $part, $matches)) {
                 $fields[$matches[1]] = $matches[2];
             } else {
@@ -813,7 +828,7 @@ abstract class SugarRelationship
      * Adds a realted Bean to the list to be resaved along with the current bean.
      * @static
      *
-     * @param  SugarBean $bean
+     * @param SugarBean $bean
      *
      * @return void
      */
@@ -840,7 +855,7 @@ abstract class SugarRelationship
         }
 
         //Resave any bean not currently in the middle of a save operation
-        while (count(self::$resaveQueue) > 0) {
+        while (safeCount(self::$resaveQueue) > 0) {
             $bean = array_shift(self::$resaveQueue);
             if (empty($bean->deleted) && empty($bean->in_save)) {
                 if ($refresh) {
@@ -862,7 +877,7 @@ abstract class SugarRelationship
         SugarBean::leaveOperation('saving_related');
 
         //Reset the queue index
-        self::$resaveIndex = array();
+        self::$resaveIndex = [];
 
         SugarBean::clearRecursiveResave();
         return true;
@@ -874,8 +889,8 @@ abstract class SugarRelationship
     public function isParentRelationship()
     {
         //check role fields to see if this is a parent (flex relate) relationship
-        if (!empty($this->def["relationship_role_column"]) && !empty($this->def["relationship_role_column_value"])
-            && $this->def["relationship_role_column"] == "parent_type" && $this->def['rhs_key'] == "parent_id"
+        if (!empty($this->def['relationship_role_column']) && !empty($this->def['relationship_role_column_value'])
+            && $this->def['relationship_role_column'] == 'parent_type' && $this->def['rhs_key'] == 'parent_id'
         ) {
             return true;
         }
@@ -902,14 +917,14 @@ abstract class SugarRelationship
             case 'rhs_table':
                 return $this->def['rhs_table'];
             case 'list_fields':
-                return array(
+                return [
                     'lhs_table',
                     'lhs_key',
                     'rhs_module',
                     'rhs_table',
                     'rhs_key',
-                    'relationship_type'
-                );
+                    'relationship_type',
+                ];
         }
 
         if (isset($this->$name)) {

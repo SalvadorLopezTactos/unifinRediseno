@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 
 global $current_user;
@@ -20,11 +21,13 @@ $url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar
     $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Microsoft' .
     '&products=' . $productCodes;
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
         'Registrujte svoju Sugar instancu putem usluge Microsoft Azure kako biste omogućili konfiguraciju Microsoft naloga za korišćenje u okviru Sugar-a. ' .
         'Više informacija potražite na <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Microsoft" target=\'_blank\'>Dokumentacija o konektorima </a>' .
         '\' target=\'_blank\'>dokumentaciji za konektore</a>.</td></tr></table>',
     'oauth2_client_id' => 'ID klijenta',
     'oauth2_client_secret' => 'Tajna klijenta',
-);
+    'oauth2_single_tenant_enabled' => 'Poveži sa aplikacijom Single Tenant',
+    'oauth2_single_tenant_id' => 'ID stanara',
+];

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint\Job;
 
 use Sugarcrm\Sugarcrm\Hint\Config\ConfigTrait;
@@ -49,15 +50,8 @@ class InitJob implements \RunnableSchedulerJob
      */
     public function run($data)
     {
-        try {
-            $hintLicenseCheck = ConfigurationManager::isHintUser();
-            if (!$hintLicenseCheck) {
-                $this->job->succeedJob('Hint init: license was not found');
-                return;
-            }
-        } catch (\Throwable $e) {
-            $this->job->succeedJob('Hint init: Problem with Hint license');
-            return;
+        if (!hasSystemHintLicense()) {
+            return $this->job->succeedJob(translate('LBL_HINT_NO_LICENSE_ACCESS'));
         }
 
         // no scheduler means this job finished successfully some time ago

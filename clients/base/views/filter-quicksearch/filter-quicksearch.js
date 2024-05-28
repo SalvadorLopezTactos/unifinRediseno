@@ -23,7 +23,7 @@
         'paste': 'throttledSearch'
     },
 
-    className: 'table-cell full-width',
+    className: 'table-cell full-width flex',
 
     /**
      * @override

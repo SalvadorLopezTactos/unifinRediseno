@@ -25,6 +25,37 @@ namespace Microsoft\Graph\Model;
 class TeamsAppDefinition extends Entity
 {
     /**
+    * Gets the authorization
+    *
+    * @return TeamsAppAuthorization|null The authorization
+    */
+    public function getAuthorization()
+    {
+        if (array_key_exists("authorization", $this->_propDict)) {
+            if (is_a($this->_propDict["authorization"], "\Microsoft\Graph\Model\TeamsAppAuthorization") || is_null($this->_propDict["authorization"])) {
+                return $this->_propDict["authorization"];
+            } else {
+                $this->_propDict["authorization"] = new TeamsAppAuthorization($this->_propDict["authorization"]);
+                return $this->_propDict["authorization"];
+            }
+        }
+        return null;
+    }
+
+    /**
+    * Sets the authorization
+    *
+    * @param TeamsAppAuthorization $val The authorization
+    *
+    * @return TeamsAppDefinition
+    */
+    public function setAuthorization($val)
+    {
+        $this->_propDict["authorization"] = $val;
+        return $this;
+    }
+
+    /**
     * Gets the createdBy
     *
     * @return IdentitySet|null The createdBy
@@ -41,7 +72,7 @@ class TeamsAppDefinition extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the createdBy
     *
@@ -54,7 +85,7 @@ class TeamsAppDefinition extends Entity
         $this->_propDict["createdBy"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the description
     * Verbose description of the application.
@@ -69,7 +100,7 @@ class TeamsAppDefinition extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the description
     * Verbose description of the application.
@@ -83,7 +114,7 @@ class TeamsAppDefinition extends Entity
         $this->_propDict["description"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the displayName
     * The name of the app provided by the app developer.
@@ -98,7 +129,7 @@ class TeamsAppDefinition extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the displayName
     * The name of the app provided by the app developer.
@@ -112,7 +143,7 @@ class TeamsAppDefinition extends Entity
         $this->_propDict["displayName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the lastModifiedDateTime
     *
@@ -130,7 +161,7 @@ class TeamsAppDefinition extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the lastModifiedDateTime
     *
@@ -143,7 +174,7 @@ class TeamsAppDefinition extends Entity
         $this->_propDict["lastModifiedDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the publishingState
     * The published status of a specific version of a Teams app. Possible values are:submitted — The specific version of the Teams app has been submitted and is under review. published  — The request to publish the specific version of the Teams app has been approved by the admin and the app is published.  rejected — The request to publish the specific version of the Teams app was rejected by the admin.
@@ -162,7 +193,7 @@ class TeamsAppDefinition extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the publishingState
     * The published status of a specific version of a Teams app. Possible values are:submitted — The specific version of the Teams app has been submitted and is under review. published  — The request to publish the specific version of the Teams app has been approved by the admin and the app is published.  rejected — The request to publish the specific version of the Teams app was rejected by the admin.
@@ -176,7 +207,7 @@ class TeamsAppDefinition extends Entity
         $this->_propDict["publishingState"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the shortDescription
     * Short description of the application.
@@ -191,7 +222,7 @@ class TeamsAppDefinition extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the shortDescription
     * Short description of the application.
@@ -205,7 +236,7 @@ class TeamsAppDefinition extends Entity
         $this->_propDict["shortDescription"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the teamsAppId
     * The ID from the Teams app manifest.
@@ -220,7 +251,7 @@ class TeamsAppDefinition extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the teamsAppId
     * The ID from the Teams app manifest.
@@ -234,7 +265,7 @@ class TeamsAppDefinition extends Entity
         $this->_propDict["teamsAppId"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the version
     * The version number of the application.
@@ -249,7 +280,7 @@ class TeamsAppDefinition extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the version
     * The version number of the application.
@@ -263,7 +294,7 @@ class TeamsAppDefinition extends Entity
         $this->_propDict["version"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the bot
     * The details of the bot specified in the Teams app manifest.
@@ -282,7 +313,7 @@ class TeamsAppDefinition extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the bot
     * The details of the bot specified in the Teams app manifest.
@@ -296,5 +327,5 @@ class TeamsAppDefinition extends Entity
         $this->_propDict["bot"] = $val;
         return $this;
     }
-    
+
 }

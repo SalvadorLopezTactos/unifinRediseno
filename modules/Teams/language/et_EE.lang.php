@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Kasutaja lisamiseks sellesse meeskonda täpsustage kirje numbrit.',
     'ERR_DUP_NAME' => 'Selline meeskonna nimi on juba olemas, valige midagi muud.',
     'ERR_DELETE_RECORD' => 'Selle meeskonna kustutamiseks täpsustage kirje numbrit.',
@@ -67,18 +67,18 @@ $mod_strings = array(
 Meeskonnapõhiste õiguste keelamine mooduli puhul ennistab kõik andmed, mis on seotud selle mooduli meeskonnapõhiste õigustega, sh mis tahes protsessi määratlused või protsessid, mis kasutavad seda funktsiooni. See hõlmab mis tahes rolle, mis kasutavad selle mooduli puhul suvandit „Omanik ja valitud meeskond” ning mis tahes meeskonnapõhiste õiguste andmeid selle mooduli kirjete puhul.
 Soovitame kasutada kiirparanduse ja taasehitamise tööriistu, et tühjendada süsteemi vahemälu pärast meeskonnapõhiste õiguste keelamist mis tahes mooduli puhul.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Hoiatus:</strong> meeskonnapõhiste õiguste keelamine mooduli puhul ennistab kõik andmed, mis on seotud selle mooduli meeskonnapõhiste õigustega, sh mis tahes protsessi määratlused või protsessid, mis kasutavad seda funktsiooni. See hõlmab mis tahes rolle, mis kasutavad selle mooduli puhul suvandit „Omanik ja valitud meeskond” ning mis tahes meeskonnapõhiste õiguste andmeid selle mooduli kirjete puhul. Soovitame kasutada kiirparanduse ja taasehitamise tööriistu, et tühjendada süsteemi vahemälu pärast meeskonnapõhiste õiguste keelamist mis tahes mooduli puhul.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Meeskonnapõhiste õiguste keelamine mooduli puhul ennistab kõik andmed, mis on seotud selle mooduli meeskonnapõhiste õigustega, sh mis tahes protsessi määratlused või protsessid, mis kasutavad seda funktsiooni. See hõlmab mis tahes rolle, mis kasutavad selle mooduli puhul suvandit „Omanik ja valitud meeskond” ning mis tahes meeskonnapõhiste õiguste andmeid selle mooduli kirjete puhul.
 Soovitame kasutada kiirparanduse ja taasehitamise tööriistu, et tühjendada süsteemi vahemälu pärast meeskonnapõhiste õiguste keelamist mis tahes mooduli puhul. Kui teil pole kiirparanduse ja taasehitamise tööriistadele juurdepääsu, võtke ühendust administraatooriga, kellel on juurdepääs menüüle Parandamine.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Hoiatus:</strong> meeskonnapõhiste õiguste keelamine mooduli puhul ennistab kõik andmed, mis on seotud selle mooduli meeskonnapõhiste õigustega, sh mis tahes protsessi määratlused või protsessid, mis kasutavad seda funktsiooni. See hõlmab mis tahes rolle, mis kasutavad selle mooduli puhul suvandit „Omanik ja valitud meeskond” ning mis tahes meeskonnapõhiste õiguste andmeid selle mooduli kirjete puhul. Soovitame kasutada kiirparanduse ja taasehitamise tööriistu, et tühjendada süsteemi vahemälu pärast meeskonnapõhiste õiguste keelamist mis tahes mooduli puhul. Kui teil pole kiirparanduse ja taasehitamise tööriistadele juurdepääsu, võtke ühendust administraatooriga, kellel on juurdepääs menüüle Parandamine.
 STR
-,
-);
+    ,
+];

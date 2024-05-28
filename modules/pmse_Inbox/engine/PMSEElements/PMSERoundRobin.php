@@ -37,14 +37,14 @@ class PMSERoundRobin extends PMSEScriptTask
      * @param array $arguments
      * @return array
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         $historyData = null;
         switch ($externalAction) {
             case 'RESUME_EXECUTION':
                 $flowAction = 'UPDATE';
                 break;
-            default :
+            default:
                 $flowAction = 'CREATE';
                 break;
         }
@@ -89,7 +89,7 @@ class PMSERoundRobin extends PMSEScriptTask
                 PMSEEngineUtils::saveAssociatedBean($bean);
             }
 
-            $params = array();
+            $params = [];
             $params['cas_id'] = $flowData['cas_id'];
             $params['cas_index'] = $flowData['cas_index'];
             $params['act_id'] = $bpmnElement['id'];
@@ -103,6 +103,5 @@ class PMSERoundRobin extends PMSEScriptTask
             $this->caseFlowHandler->saveFormAction($params);
         }
         return $this->prepareResponse($flowData, 'ROUTE', $flowAction);
-
     }
 }

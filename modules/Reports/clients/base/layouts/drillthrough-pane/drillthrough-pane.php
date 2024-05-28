@@ -11,32 +11,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Reports']['base']['layout']['drillthrough-pane'] = array(
+$viewdefs['Reports']['base']['layout']['drillthrough-pane'] = [
     'name' => 'drillthrough-pane',
-    'css_class' => 'dashboard drillthrough-pane',
-    'components' => array(
-        array(
-            'view' => array(
+    'css_class' => 'dashboard drillthrough-pane pb-4',
+    'components' => [
+        [
+            'view' => [
                 'name' => 'drillthrough-pane-headerpane',
                 'template' => 'headerpane',
-                'fields' => array(
-                    array(
-                        'name' => 'title',
-                        'type' => 'text',
-                    ),
-                ),
-                'buttons' => array(
-                    array(
+                'buttons' => [
+                    [
                         'type' => 'button',
                         'icon' => 'sicon-refresh',
-                        'css_class' => 'btn',
+                        'css_class' => 'btn mr-4',
                         'tooltip' => 'LBL_REFRESH_LIST_AND_CHART',
-                        'events' => array(
+                        'events' => [
                             'click' => 'click:refresh_list_chart',
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

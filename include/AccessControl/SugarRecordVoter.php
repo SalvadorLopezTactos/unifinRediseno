@@ -35,7 +35,7 @@ class SugarRecordVoter extends SugarVoter
     /**
      * {@inheritdoc}
      */
-    public function vote(string $key, string $subject, ?string $value = null) : bool
+    public function vote(string $key, string $subject, ?string $value = null): bool
     {
         if (empty($value) || !$this->supports($key)) {
             return true;

@@ -12,19 +12,21 @@
 
 class TrackerQuery extends SugarBean
 {
-    var $module_dir = 'Trackers';
-    var $module_name = 'TrackerQueries';
-    var $object_name = 'tracker_queries';
-    var $table_name = 'tracker_queries';
-    var $acltype = 'TrackerQuery';
-    var $acl_category = 'TrackerQueries';
-    var $disable_custom_fields = true;
+    public $module_dir = 'Trackers';
+    public $module_name = 'TrackerQueries';
+    public $object_name = 'tracker_queries';
+    public $table_name = 'tracker_queries';
+    public $acltype = 'TrackerQuery';
+    public $acl_category = 'TrackerQueries';
+    public $disable_custom_fields = true;
 
-    var $disable_row_level_security = true;
+    public $disable_row_level_security = true;
 
-    function bean_implements($interface){
-        switch($interface){
-            case 'ACL': return true;
+    public function bean_implements($interface)
+    {
+        switch ($interface) {
+            case 'ACL':
+                return true;
         }
         return false;
     }

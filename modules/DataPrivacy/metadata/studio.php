@@ -9,4 +9,4 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$GLOBALS['studioDefs']['DataPrivacy'] = array();
+$GLOBALS['studioDefs']['DataPrivacy'] = [];

@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Řídicí panel seznamu znalostní báze',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Řídicí panel záznamů znalostní báze',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na znalostní bázi',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová osa znalostní báze',
 
     'LBL_MODULE_NAME' => 'Znalostní báze',
     'LBL_MODULE_NAME_SINGULAR' => 'Článek znalostní báze',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Nastavit hodnotu jako primární',
     'LBL_ITEM_REMOVE' => 'Odebrat položku',
     'LBL_ITEM_ADD' => 'Přidat položku',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => 'ID revize',
     'LBL_DOCUMENT_REVISION' => 'Revize',
     'LBL_NUMBER' => 'Číslo',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'Další články o modulu {{module}}...',
     'LBL_LIST_FORM_TITLE' => 'Seznam znalostní báze',
     'LBL_SEARCH_FORM_TITLE' => 'Hledání ve znalostní bázi',
-);
+];

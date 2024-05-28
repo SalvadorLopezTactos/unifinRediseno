@@ -16,13 +16,13 @@ class LocalizationsLink extends Link2
     /**
      * {@inheritdoc}
      */
-    function buildJoinSugarQuery($sugar_query, $options = array())
+    public function buildJoinSugarQuery($sugar_query, $options = [])
     {
         $sugar_query->where()
             ->notEquals('id', $this->focus->id)
             ->notEquals('kbarticle_id', $this->focus->kbarticle_id)
             ->equals('active_rev', 1);
-        
+
         return $this->relationship->buildJoinSugarQuery($this, $sugar_query, $options);
     }
 }

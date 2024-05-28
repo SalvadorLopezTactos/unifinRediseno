@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Γνωσιακής Βάσης',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Γνωσιακής Βάσης',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης Γνωσιακής βάσης',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Χρονολόγιο γνωσιακής βάσης',
 
     'LBL_MODULE_NAME' => 'Βάση Γνώσεων',
     'LBL_MODULE_NAME_SINGULAR' => 'Άρθρο Βάσης Γνώσεων',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Ρύθμιση τιμής ως πρωτεύουσας',
     'LBL_ITEM_REMOVE' => 'Αφαιρέστε είδος',
     'LBL_ITEM_ADD' => 'Προσθέστε είδος',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => 'Ταυτότητα αναθεώρησης',
     'LBL_DOCUMENT_REVISION' => 'Αναθεώρηση',
     'LBL_NUMBER' => 'Αριθμός:',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'Περισσότερα {{module}} άρθρα...',
     'LBL_LIST_FORM_TITLE' => 'Κατάλογος βασικών γνώσεων',
     'LBL_SEARCH_FORM_TITLE' => 'Εξερεύνηση γνωσιακής Βάσης',
-);
+];

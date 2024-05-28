@@ -10,27 +10,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$popupMeta = array('moduleMain' => 'DataSet',
-						'varName' => 'DATASET',
-						'className' => 'DataSet',
-						'orderBy' => 'name',
-						'whereClauses' => 
-							array('name' => 'data_sets.name'),
-						'listviewdefs' => array(
-											'NAME' => array(
-												'width' => '35', 
-												'label' => 'LBL_NAME',
-												'link' => true,
-										        'default' => true), 
-											'DESCRIPTION' => array(
-												'width' => '65', 
-												'label' => 'LBL_DESCRIPTION', 
-												'link' => false,
-										        'default' => true),
-											),
-						'searchdefs'   => array(
-										 	'name'
-										  )
-						);
-?>
- 
+$popupMeta = ['moduleMain' => 'DataSet',
+    'varName' => 'DATASET',
+    'className' => 'DataSet',
+    'orderBy' => 'name',
+    'whereClauses' => ['name' => 'data_sets.name'],
+    'listviewdefs' => [
+        'NAME' => [
+            'width' => '35',
+            'label' => 'LBL_NAME',
+            'link' => true,
+            'default' => true],
+        'DESCRIPTION' => [
+            'width' => '65',
+            'label' => 'LBL_DESCRIPTION',
+            'link' => false,
+            'default' => true],
+    ],
+    'searchdefs' => [
+        'name',
+    ],
+];

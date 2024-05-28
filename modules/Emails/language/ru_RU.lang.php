@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'FW:',
     'LBL_RE' => 'Re:',
     'LBL_BUTTON_CREATE' => 'Создать',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Выбрать из e-mail аккаунта',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Выбрать подпись',
     'LBL_SIGNATURE' => 'Подпись',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Подпись по умолчанию",
-    "LBL_SHOW_MORE_SIGNATURES" => "Больше подписей...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Подпись по умолчанию',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Больше подписей...',
     'LBL_SUBJECT' => 'Тема:',
     'LBL_TEMPLATE' => 'Шаблон',
     'LBL_TEXT_BODY' => 'Текст письма',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Время отправки',
     'LBL_LIST_TO_ADDR' => 'Кому',
     'LBL_LIST_TYPE' => 'Вид',
-    "LBL_SELECTED_RECIPIENTS" => "Выбранные получатели",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Больше получателей...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Адресная книга",
+    'LBL_SELECTED_RECIPIENTS' => 'Выбранные получатели',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Больше получателей...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Адресная книга',
     'NTC_REMOVE_INVITEE' => 'Вы уверены, что хотите удалить этого получателя из данного e-mail-сообщения?',
     'WARNING_SETTINGS_NOT_CONF' => 'Параметры электронной почты не настроены правильно для отправки сообщений. Сервер SMTP ' .
         'необходимо настроить в разделе <a href="#bwc/index.php?module=EmailMan&action=config">Параметры электронной почты</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Вероятно, вложения не будут прикреплены к сообщению: обнаружено неверное или неиспользуемое значение переменной "upload_tmp_dir" ' .
         'Исправьте эту ошибку в файле php.ini.',
     'LBL_MESSAGE_UID' => 'Идентификатор пользователя сообщения',
-    'LBL_OPEN_DRAFT_ALERT' => 'Сообщение является черновиком. Нажмите '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'Сообщение является черновиком. Нажмите ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  для редактирования.',
     'LBL_EMAIL_BODY' => 'Сообщение электронной почты',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для электронных писем',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Информационная панель записей электронной почты',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Временная шкала электронной почты',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'Не указаны получатели',
@@ -475,4 +476,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'Отправить сообщение электронной почты',
     'LBL_MAILBOX' => 'Учетная запись входящей почты',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Чтобы отправлять электронные письма, настройте учетную запись исходящей электронной почты в разделе <a href="#OutboundEmail">Настройки электронной почты</a>.',
-);
+    'LBL_TOO_SHORT' => 'Введите минимум {0} символов...',
+];

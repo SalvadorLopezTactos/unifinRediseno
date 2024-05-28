@@ -10,22 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     //module
     'LBL_MODULE_NAME' => 'ドキュメント',
     'LBL_MODULE_NAME_SINGULAR' => 'ドキュメント',
     'LBL_MODULE_TITLE' => 'ドキュメント: ホーム',
     'LNK_NEW_DOCUMENT' => 'ドキュメント作成',
-    'LNK_DOCUMENT_LIST'=> 'ドキュメント一覧',
+    'LNK_DOCUMENT_LIST' => 'ドキュメント一覧',
     'LBL_DOC_REV_HEADER' => 'ドキュメントの版',
-    'LBL_SEARCH_FORM_TITLE'=> 'ドキュメント検索',
+    'LBL_SEARCH_FORM_TITLE' => 'ドキュメント検索',
     //vardef labels
     'LBL_DOCUMENT_ID' => 'ドキュメントID',
     'LBL_NAME' => 'ドキュメント名',
@@ -34,31 +33,31 @@ $mod_strings = array (
     'LBL_CATEGORY' => 'カテゴリ',
     'LBL_SUBCATEGORY' => 'サブカテゴリ',
     'LBL_STATUS' => 'ステータス',
-    'LBL_CREATED_BY'=> '作成者',
-    'LBL_DATE_ENTERED'=> '作成日',
-    'LBL_DATE_MODIFIED'=> '更新日',
+    'LBL_CREATED_BY' => '作成者',
+    'LBL_DATE_ENTERED' => '作成日',
+    'LBL_DATE_MODIFIED' => '更新日',
     'LBL_DELETED' => '削除済み',
-    'LBL_MODIFIED'=> '更新者ID',
+    'LBL_MODIFIED' => '更新者ID',
     'LBL_MODIFIED_USER' => '更新者',
-    'LBL_CREATED'=> '作成者',
-    'LBL_REVISIONS'=>'版',
-    'LBL_RELATED_DOCUMENT_ID'=>'関連ドキュメントID',
-    'LBL_RELATED_DOCUMENT_REVISION_ID'=>'関連ドキュメント版ID',
-    'LBL_IS_TEMPLATE'=>'テンプレート',
-    'LBL_TEMPLATE_TYPE'=>'ドキュメントタイプ',
-    'LBL_ASSIGNED_TO_NAME'=>'アサイン先:',
+    'LBL_CREATED' => '作成者',
+    'LBL_REVISIONS' => '版',
+    'LBL_RELATED_DOCUMENT_ID' => '関連ドキュメントID',
+    'LBL_RELATED_DOCUMENT_REVISION_ID' => '関連ドキュメント版ID',
+    'LBL_IS_TEMPLATE' => 'テンプレート',
+    'LBL_TEMPLATE_TYPE' => 'ドキュメントタイプ',
+    'LBL_ASSIGNED_TO_NAME' => 'アサイン先:',
     'LBL_REVISION_NAME' => '版数',
     'LBL_MIME' => 'Mimeタイプ',
     'LBL_REVISION' => '版',
     'LBL_DOCUMENT' => '関連ドキュメント',
     'LBL_LATEST_REVISION' => '最新版',
     'LBL_DOCUMENT_REVISION_ID' => 'ドキュメントの版数ID',
-    'LBL_CHANGE_LOG'=> '更新履歴',
-    'LBL_ACTIVE_DATE'=> '発行日',
+    'LBL_CHANGE_LOG' => '更新履歴',
+    'LBL_ACTIVE_DATE' => '発行日',
     'LBL_EXPIRATION_DATE' => '有効期限',
-    'LBL_FILE_EXTENSION'  => 'ファイル拡張子',
+    'LBL_FILE_EXTENSION' => 'ファイル拡張子',
     'LBL_LAST_REV_MIME_TYPE' => '最新版のMIMEタイプ',
-    'LBL_CAT_OR_SUBCAT_UNSPEC'=>'未指定',
+    'LBL_CAT_OR_SUBCAT_UNSPEC' => '未指定',
     'LBL_HOMEPAGE_TITLE' => '私のドキュメント',
     //quick search
     'LBL_NEW_FORM_TITLE' => 'ドキュメント作成',
@@ -70,25 +69,25 @@ $mod_strings = array (
     'LBL_FILE_UPLOAD' => 'ファイル:',
 
     'LBL_CATEGORY_VALUE' => 'カテゴリ:',
-    'LBL_SUBCATEGORY_VALUE'=> 'サブカテゴリ:',
-    'LBL_DOC_STATUS'=> 'ステータス:',
-    'LBL_DOC_STATUS_ID'=> 'ステータスID:',
+    'LBL_SUBCATEGORY_VALUE' => 'サブカテゴリ:',
+    'LBL_DOC_STATUS' => 'ステータス:',
+    'LBL_DOC_STATUS_ID' => 'ステータスID:',
     'LBL_LAST_REV_CREATOR' => '版の作成者:',
     'LBL_LASTEST_REVISION_NAME' => '最新版の名称:',
     'LBL_SELECTED_REVISION_NAME' => '選択された版の名称:',
     'LBL_CONTRACT_STATUS' => '契約ステータス:',
     'LBL_CONTRACT_NAME' => '契約名:',
     'LBL_LAST_REV_DATE' => '改版日:',
-    'LBL_DOWNNLOAD_FILE'=> 'ファイルダウンロード:',
-    'LBL_DET_RELATED_DOCUMENT'=>'関連ドキュメント:',
-    'LBL_DET_RELATED_DOCUMENT_VERSION'=>"関連ドキュメントの版:",
-    'LBL_DET_IS_TEMPLATE'=>'テンプレート :',
-    'LBL_DET_TEMPLATE_TYPE'=>'ドキュメントタイプ:',
-    'LBL_TEAM'=> 'チーム:',
+    'LBL_DOWNNLOAD_FILE' => 'ファイルダウンロード:',
+    'LBL_DET_RELATED_DOCUMENT' => '関連ドキュメント:',
+    'LBL_DET_RELATED_DOCUMENT_VERSION' => '関連ドキュメントの版:',
+    'LBL_DET_IS_TEMPLATE' => 'テンプレート :',
+    'LBL_DET_TEMPLATE_TYPE' => 'ドキュメントタイプ:',
+    'LBL_TEAM' => 'チーム:',
     'LBL_IS_SHARED' => '外部で利用可能：',
-    'LBL_DOC_DESCRIPTION'=>'詳細:',
-    'LBL_DOC_ACTIVE_DATE'=> '発行日:',
-    'LBL_DOC_EXP_DATE'=> '有効期限:',
+    'LBL_DOC_DESCRIPTION' => '詳細:',
+    'LBL_DOC_ACTIVE_DATE' => '発行日:',
+    'LBL_DOC_EXP_DATE' => '有効期限:',
 
     //document list view.
     'LBL_LIST_FORM_TITLE' => 'ドキュメント一覧',
@@ -98,11 +97,11 @@ $mod_strings = array (
     'LBL_LIST_REVISION' => '版',
     'LBL_LIST_LAST_REV_CREATOR' => '発行者',
     'LBL_LIST_LAST_REV_DATE' => '改版日',
-    'LBL_LIST_VIEW_DOCUMENT'=>'閲覧',
-    'LBL_LIST_DOWNLOAD'=> 'ダウンロード',
+    'LBL_LIST_VIEW_DOCUMENT' => '閲覧',
+    'LBL_LIST_DOWNLOAD' => 'ダウンロード',
     'LBL_LIST_ACTIVE_DATE' => '発行日',
     'LBL_LIST_EXP_DATE' => '有効期限',
-    'LBL_LIST_STATUS'=>'ステータス',
+    'LBL_LIST_STATUS' => 'ステータス',
     'LBL_LINKED_ID' => 'リンクID',
     'LBL_SELECTED_REVISION_ID' => '選択された版のID',
     'LBL_LATEST_REVISION_ID' => '最新版ID',
@@ -114,33 +113,33 @@ $mod_strings = array (
     //document search form.
     'LBL_SF_DOCUMENT' => 'ドキュメント名:',
     'LBL_SF_CATEGORY' => 'カテゴリ:',
-    'LBL_SF_SUBCATEGORY'=> 'サブカテゴリ:',
+    'LBL_SF_SUBCATEGORY' => 'サブカテゴリ:',
     'LBL_SF_ACTIVE_DATE' => '発行日:',
-    'LBL_SF_EXP_DATE'=> '有効期限:',
+    'LBL_SF_EXP_DATE' => '有効期限:',
 
     'DEF_CREATE_LOG' => 'ドキュメント作成日',
 
     //error messages
-    'ERR_DOC_NAME'=>'ドキュメント名',
-    'ERR_DOC_ACTIVE_DATE'=>'発行日',
-    'ERR_DOC_EXP_DATE'=> '有効期限',
-    'ERR_FILENAME'=> 'ファイル名',
-    'ERR_DOC_VERSION'=> 'ドキュメントのバージョン',
-    'ERR_DELETE_CONFIRM'=> 'この版を削除してよいですか？',
-    'ERR_DELETE_LATEST_VERSION'=> '最新版を削除することを許可されていません。',
+    'ERR_DOC_NAME' => 'ドキュメント名',
+    'ERR_DOC_ACTIVE_DATE' => '発行日',
+    'ERR_DOC_EXP_DATE' => '有効期限',
+    'ERR_FILENAME' => 'ファイル名',
+    'ERR_DOC_VERSION' => 'ドキュメントのバージョン',
+    'ERR_DELETE_CONFIRM' => 'この版を削除してよいですか？',
+    'ERR_DELETE_LATEST_VERSION' => '最新版を削除することを許可されていません。',
     'LNK_NEW_MAIL_MERGE' => 'メールマージ',
     'LBL_MAIL_MERGE_DOCUMENT' => 'メールマージテンプレート:',
     'ERR_MISSING_FILE' => 'このドキュメントにはファイルがありません。アップロード時のエラーである可能性があります。再度アップロードを実行するか、システム管理者に連絡してください。',
 
     'LBL_TREE_TITLE' => 'ドキュメント',
     //sub-panel vardefs.
-    'LBL_LIST_DOCUMENT_NAME'=>'ドキュメント名',
-    'LBL_LIST_IS_TEMPLATE'=>'テンプレート？',
-    'LBL_LIST_TEMPLATE_TYPE'=>'ドキュメントタイプ',
-    'LBL_LIST_SELECTED_REVISION'=>'選択された版',
-    'LBL_LIST_LATEST_REVISION'=>'最新版',
-    'LBL_CONTRACTS_SUBPANEL_TITLE'=>'契約',
-    'LBL_LAST_REV_CREATE_DATE'=>'最新版作成日',
+    'LBL_LIST_DOCUMENT_NAME' => 'ドキュメント名',
+    'LBL_LIST_IS_TEMPLATE' => 'テンプレート？',
+    'LBL_LIST_TEMPLATE_TYPE' => 'ドキュメントタイプ',
+    'LBL_LIST_SELECTED_REVISION' => '選択された版',
+    'LBL_LIST_LATEST_REVISION' => '最新版',
+    'LBL_CONTRACTS_SUBPANEL_TITLE' => '契約',
+    'LBL_LAST_REV_CREATE_DATE' => '最新版作成日',
     //'LNK_DOCUMENT_CAT'=>'Document Categories',
     'LBL_CONTRACTS' => '契約',
     'LBL_CREATED_USER' => '作成者',
@@ -171,9 +170,11 @@ $mod_strings = array (
     // Dashboards
     'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'ドキュメント記録ダッシュボード',
     'LBL_MY_DOCUMENTS' => 'マイドキュメント',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ドキュメントのタイムライン',
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'DocuSignに送信',
+    'LBL_SEND_TO_DOCUSIGN_TEMPLATE_BUTTON' => 'テンプレートでDocuSignに送信',
 
     // Cloud Drive
 
@@ -183,4 +184,4 @@ $mod_strings = array (
     'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'OneDriveに同期する',
     'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Dropboxにすべて同期する',
     'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Dropboxに同期する',
-);
+];

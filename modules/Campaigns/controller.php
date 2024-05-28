@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class CampaignsController extends SugarController{
-
-    function action_newsletterlist(){
+class CampaignsController extends SugarController
+{
+    public function action_newsletterlist()
+    {
         $this->view = 'newsletterlist';
     }
 }
-?>

@@ -56,7 +56,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return array('subtract', 'currencySubtract', 'sub');
+        return ['subtract', 'currencySubtract', 'sub'];
     }
 
     /**
@@ -64,15 +64,15 @@ JS;
      */
     public function toString()
     {
-        $str = "";
+        $str = '';
 
         foreach ($this->getParameters() as $expr) {
             if (!$expr instanceof ConstantExpression) {
-                $str .= "(";
+                $str .= '(';
             }
-            $str .= $expr->toString() . " - ";
+            $str .= $expr->toString() . ' - ';
             if (!$expr instanceof ConstantExpression) {
-                $str .= ")";
+                $str .= ')';
             }
         }
     }

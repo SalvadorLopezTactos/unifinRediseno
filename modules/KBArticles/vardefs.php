@@ -10,22 +10,22 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['KBArticle'] = array(
+$dictionary['KBArticle'] = [
     'table' => 'kbarticles',
     'reassignable' => false,
     'favorites' => true,
     'unified_search' => true,
     'full_text_search' => false,
     'comment' => 'Knowledge Base Article',
-    'fields' => array(
-        'kbdocuments_kbarticles' => array(
+    'fields' => [
+        'kbdocuments_kbarticles' => [
             'name' => 'kbdocuments_kbarticles',
             'type' => 'link',
             'vname' => 'LBL_KBDOCUMENTS',
             'relationship' => 'kbdocuments_kbarticles',
             'source' => 'non-db',
-        ),
-        'kbdocument_id' => array(
+        ],
+        'kbdocument_id' => [
             'name' => 'kbdocument_id',
             'id_name' => 'kbdocument_id',
             'vname' => 'LBL_KBDOCUMENT_ID',
@@ -37,8 +37,8 @@ $dictionary['KBArticle'] = array(
             'reportable' => false,
             'massupdate' => false,
             'duplicate_merge' => 'disabled',
-        ),
-        'kbdocument_name' => array(
+        ],
+        'kbdocument_name' => [
             'name' => 'kbdocument_name',
             'rname' => 'name',
             'vname' => 'LBL_KBDOCUMENT',
@@ -50,18 +50,18 @@ $dictionary['KBArticle'] = array(
             'link' => 'kbdocuments_kbarticles',
             'module' => 'KBDocuments',
             'duplicate_merge' => 'disabled',
-        ),
-        'kbarticles_kbcontents' => array(
+        ],
+        'kbarticles_kbcontents' => [
             'name' => 'kbarticles_kbcontents',
             'type' => 'link',
             'vname' => 'LBL_KBARTICLES',
             'relationship' => 'kbarticles_kbcontents',
             'source' => 'non-db',
             'side' => 'right',
-        ),
-    ),
-    'relationships' => array(
-        'kbdocuments_kbarticles' => array (
+        ],
+    ],
+    'relationships' => [
+        'kbdocuments_kbarticles' => [
             'lhs_module' => 'KBDocuments',
             'lhs_table' => 'kbdocuments',
             'lhs_key' => 'id',
@@ -69,8 +69,8 @@ $dictionary['KBArticle'] = array(
             'rhs_table' => 'kbarticles',
             'rhs_key' => 'kbdocument_id',
             'relationship_type' => 'one-to-many',
-        ),
-        'kbarticles_kbcontents' => array (
+        ],
+        'kbarticles_kbcontents' => [
             'lhs_module' => 'KBArticles',
             'lhs_table' => 'kbarticles',
             'lhs_key' => 'id',
@@ -78,18 +78,18 @@ $dictionary['KBArticle'] = array(
             'rhs_table' => 'kbcontents',
             'rhs_key' => 'kbarticle_id',
             'relationship_type' => 'one-to-many',
-        ),
-    ),
-    'uses' => array(
+        ],
+    ],
+    'uses' => [
         'basic',
         'team_security',
         'assignable',
-    ),
-    'ignore_templates' => array(
+    ],
+    'ignore_templates' => [
         'taggable',
         'commentlog',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef(
     'KBArticles',

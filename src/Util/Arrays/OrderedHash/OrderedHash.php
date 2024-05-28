@@ -48,14 +48,14 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
      *
      * An unordered associative array of all of the elements currently in the hash.
      */
-    protected $elements = array();
+    protected $elements = [];
 
     /**
      * Produces an ordered hash from an associative array.
      *
      * @param array $hash
      */
-    public function __construct($hash = array())
+    public function __construct($hash = [])
     {
         foreach ($hash as $key => $value) {
             $this->push($key, $value);
@@ -130,7 +130,7 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
      */
     public function count(): int
     {
-        return count($this->elements);
+        return safeCount($this->elements);
     }
 
     /**
@@ -265,8 +265,8 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
      *
      * The iterator is moved to the next element if the iterator is currently pointing at the removed element.
      *
-     * @uses OrderedHash::offsetGet to retrieve the element to remove.
      * @param string|int $key
+     * @uses OrderedHash::offsetGet to retrieve the element to remove.
      */
     public function offsetUnset($key): void
     {
@@ -374,10 +374,10 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
     public function toArray()
     {
         if ($this->isEmpty()) {
-            return array();
+            return [];
         }
 
-        $imploded = array();
+        $imploded = [];
         $current = $this->bottom();
 
         while ($current) {

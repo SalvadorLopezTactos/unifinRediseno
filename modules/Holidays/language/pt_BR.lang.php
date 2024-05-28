@@ -32,7 +32,7 @@ $mod_strings = [
 
     'LBL_RESOURCE' => 'Recurso:',
     'LBL_PERSON_TYPE' => 'Tipo de pessoa',
-    'LBL_RELATED_MODULE'=> 'Módulo Relacionado:',
+    'LBL_RELATED_MODULE' => 'Módulo Relacionado:',
 
     // For HolidaysQuickCreate.php
     'LBL_SELECT_RESOURCE_TYPE' => 'Selecionar tipo de recurso...',

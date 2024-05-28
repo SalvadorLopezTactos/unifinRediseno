@@ -105,13 +105,13 @@ class PMSEBeanHandler
 
     /**
      * get the related modules of a determined bean passed as parameter
-     * @global type $beanList
-     * @global type $beanFiles
-     * @global type $db
      * @param type $bean
      * @param type $flowBean
      * @param type $act_field_module
      * @return type
+     * @global type $beanFiles
+     * @global type $db
+     * @global type $beanList
      */
     public function getRelatedModule($bean, $flowBean, $act_field_module)
     {
@@ -129,23 +129,23 @@ class PMSEBeanHandler
             $this->logger->error("[][] $act_field_module module is not related to $moduleName, ain't appear in the bean list");
         } else {
             $this->logger->info("[][] $moduleName got a related module named: [$act_field_module]");
-//            $moduleClassName = $beanList[$act_field_module];
-//            $moduleDir = $beanFiles[$moduleClassName];
+            //            $moduleClassName = $beanList[$act_field_module];
+            //            $moduleDir = $beanFiles[$moduleClassName];
             $moduleName = $act_field_module;
 
             ///relationship
-//            $relationship = "Relationship";
-//            $RelationshipModuleDir = $beanFiles[$relationship];
-//            require_once ($RelationshipModuleDir);
-            $beanRelations = $this->retrieveBean("Relationships");
+            //            $relationship = "Relationship";
+            //            $RelationshipModuleDir = $beanFiles[$relationship];
+            //            require_once ($RelationshipModuleDir);
+            $beanRelations = $this->retrieveBean('Relationships');
             $relation = $beanRelations->retrieve_by_sides($left, $related, $db);
             $ID_Related = $relation['rhs_key'];
             $this->logger->info("[][] $related $ID_Related field found.");
 
             // related module ID
-//            $classRelatedBean = $beanList[$related];
-//            $RelatedModuleDir = $beanFiles[$classRelatedBean];
-//            require_once ($RelatedModuleDir);
+            //            $classRelatedBean = $beanList[$related];
+            //            $RelatedModuleDir = $beanFiles[$classRelatedBean];
+            //            require_once ($RelatedModuleDir);
             $beanRelated = $this->retrieveBean("$related");
 
             $singleCondition = $ID_Related . "='" . $id_mainModule . "'";
@@ -155,7 +155,7 @@ class PMSEBeanHandler
                 $this->logger->info("[][] Getting the last related record of $len records.");
                 $beanRelated = $list_bean_related[$len - 1];
             } else {
-                $beanRelated->retrieve_by_string_fields(array($ID_Related => $id_mainModule), true);
+                $beanRelated->retrieve_by_string_fields([$ID_Related => $id_mainModule], true);
             }
             if (!isset($beanRelated->id)) {
                 $this->logger->info("[][] There is not a data relationship beetween $act_field_module and {$flowBean['cas_sugar_module']}");
@@ -217,7 +217,7 @@ class PMSEBeanHandler
      */
     public function mergingTemplate($bean, $template, $components, $evaluate)
     {
-        $replace = array();
+        $replace = [];
 
         // Loop over each of the component elements
         foreach ($components as $module) {
@@ -274,7 +274,7 @@ class PMSEBeanHandler
                     }
 
                     // If we are looking for a "from" value, and we have one...
-                    if ($data['value_type'] === 'old' && array_key_exists($fieldName, (array) $newBean->dataChanges)) {
+                    if ($data['value_type'] === 'old' && array_key_exists($fieldName, (array)$newBean->dataChanges)) {
                         $value = $newBean->dataChanges[$fieldName]['before'];
                     } else {
                         // Handle date/datetime, and boolean, field types
@@ -326,18 +326,18 @@ class PMSEBeanHandler
      * an email template, expression template, or another type of text with
      * bean variables in it.
      *
-     * @global type $beanList
      * @param type $bean
      * @param type $template
      * @param type $component_array
      * @param type $evaluate
      * @return type
+     * @global type $beanList
      */
     public function mergeTemplate($bean, $template, $component_array, $evaluate = false)
     {
         global $beanList;
-        $replace_array = Array();
-        $replace_type_array = array();
+        $replace_array = [];
+        $replace_type_array = [];
 
 
         foreach ($component_array as $module_name => $module_array) {
@@ -351,15 +351,23 @@ class PMSEBeanHandler
 
                     if ($field_array['value_type'] == 'future') {
                         if ($evaluate) {
-                            $replacement_value = bpminbox_check_special_fields($field_array['name'], $bean, false,
-                                array());
+                            $replacement_value = bpminbox_check_special_fields(
+                                $field_array['name'],
+                                $bean,
+                                false,
+                                []
+                            );
                         } else {
-                            $replacement_value = bpminbox_check_special_fields($field_array['name'], $bean, false,
-                                array());
+                            $replacement_value = bpminbox_check_special_fields(
+                                $field_array['name'],
+                                $bean,
+                                false,
+                                []
+                            );
                         }
                     }
                     if ($field_array['value_type'] == 'past') {
-                        $replacement_value = bpminbox_check_special_fields($field_array['name'], $bean, true, array());
+                        $replacement_value = bpminbox_check_special_fields($field_array['name'], $bean, true, []);
                     }
 
                     $replace_type_array[$field_array['original']] = get_bean_field_type($field_array['name'], $bean);
@@ -369,11 +377,14 @@ class PMSEBeanHandler
                 //Confirm this is an actual module in the beanlist
                 if (isset($beanList[$module_name]) || isset($bean->field_defs[$module_name])) {
                     ///Build the relationship information using the Relationship handler
-                    $rel_handler = $bean->call_relationship_handler("module_dir", true);
+                    $rel_handler = $bean->call_relationship_handler('module_dir', true);
                     if (isset($bean->field_defs[$module_name])) {
                         $rel_handler->rel1_relationship_name = $bean->field_defs[$module_name]['relationship'];
-                        $rel_module = get_rel_module_name($bean->module_dir, $rel_handler->rel1_relationship_name,
-                            $bean->db);
+                        $rel_module = get_rel_module_name(
+                            $bean->module_dir,
+                            $rel_handler->rel1_relationship_name,
+                            $bean->db
+                        );
                         $rel_handler->rel1_module = $rel_module;
                         $rel_handler->rel1_bean = get_module_info($rel_module);
                     } else {
@@ -387,7 +398,7 @@ class PMSEBeanHandler
                         }
                     }
                     //obtain the rel_module object
-                    $rel_list = $rel_handler->build_related_list("base");
+                    $rel_list = $rel_handler->build_related_list('base');
                     if (!empty($rel_list[0])) {
                         $rel_object = $rel_list[0];
                         $rel_module_present = true;
@@ -402,11 +413,15 @@ class PMSEBeanHandler
                                 $replacement_value = $this->get_href_link($rel_object);
                             } else {
                                 //use future always for rel because fetched should always be the same
-                                $replacement_value = bpminbox_check_special_fields($field_array['name'], $rel_object,
-                                    false, array());
+                                $replacement_value = bpminbox_check_special_fields(
+                                    $field_array['name'],
+                                    $rel_object,
+                                    false,
+                                    []
+                                );
                             }
                         } else {
-                            $replacement_value = "Invalid Value";
+                            $replacement_value = 'Invalid Value';
                         }
                         $replace_array[$field_array['original']] = implode(', ', unencodeMultienum($replacement_value));
                     }
@@ -425,8 +440,8 @@ class PMSEBeanHandler
                     $replacement_value = trim($replacement_value);
                 } elseif ($type == 'currency') {
                     //TODO hardcoded . , should use system currency format
-                    $replacement_value = str_replace(",", '', $replacement_value);
-                    $replacement_value = str_replace(".", ',', $replacement_value);
+                    $replacement_value = str_replace(',', '', $replacement_value);
+                    $replacement_value = str_replace('.', ',', $replacement_value);
                     $replacement_value = floatval($replacement_value);
                 } else {
                     //here $replacement_value must be datatime, time, string datatype values
@@ -451,7 +466,7 @@ class PMSEBeanHandler
         $value = null;
         global $timedate;
         $response = new stdClass();
-        $dataEval = array();
+        $dataEval = [];
         foreach ($expression as $value) {
             $expSubtype = PMSEEngineUtils::getExpressionSubtype($value);
             if ($value->expType != 'VARIABLE') {
@@ -464,7 +479,7 @@ class PMSEBeanHandler
                             $dataEval[] = (float)$value->expValue;
                             break;
                         case 'DOUBLE':
-                            $dataEval[] = (double)$value->expValue;
+                            $dataEval[] = (float)$value->expValue;
                             break;
                         case 'NUMBER':
                             $dataEval[] = (float)$value->expValue;
@@ -509,7 +524,7 @@ class PMSEBeanHandler
                 }
             }
         }
-        if (count($dataEval) > 1) {
+        if (safeCount($dataEval) > 1) {
             $response->value = $this->evaluator->evaluateExpression(json_encode($expression), $bean);
             $response->type = gettype($response->value);
         } else {
@@ -608,7 +623,7 @@ class PMSEBeanHandler
     protected function setDataReplacementMeta(array &$return, array $parts, string $target, string $original)
     {
         // See if we can handle legacy workflow template conversion
-        if (($parts[0] === 'past' || $parts[0] === 'future') && ($partsCount = count($parts)) > 2) {
+        if (($parts[0] === 'past' || $parts[0] === 'future') && ($partsCount = safeCount($parts)) > 2) {
             // Convert past to old, or leave future as is
             $type = $parts[0] === 'past' ? 'old' : 'future';
 
@@ -659,7 +674,7 @@ class PMSEBeanHandler
      */
     public function getLastArrayKey(array $array)
     {
-        return count($array) - 1;
+        return safeCount($array) - 1;
     }
 
     /**
@@ -724,8 +739,8 @@ class PMSEBeanHandler
         $dueDate = null;
         $isDate = false;
         $date = '';
-        $arrayUnitPos = array();
-        $arrayUnitNeg = array();
+        $arrayUnitPos = [];
+        $arrayUnitNeg = [];
         foreach ($expre as $keyevn => $evn) {
             switch ($evn->expType) {
                 case 'FIXED_DATE':
@@ -795,30 +810,30 @@ class PMSEBeanHandler
         }
         if ($isDate) {
             $dateInt = strtotime($date);
-            $date_evn = date("Y-m-d H:i:s", $dateInt);
+            $date_evn = date('Y-m-d H:i:s', $dateInt);
             if (!empty($arrayUnitPos) || !empty($arrayUnitNeg)) {
                 foreach ($arrayUnitPos as $unit => $value) {
                     $duration = $value . ' ' . $unit;
-                    $dueDate = date("Y-m-d H:i:s", strtotime("+$duration", $dateInt));
+                    $dueDate = date('Y-m-d H:i:s', strtotime("+$duration", $dateInt));
                     $dateInt = strtotime($dueDate);
                 }
                 foreach ($arrayUnitNeg as $unit => $value) {
                     $duration = $value . ' ' . $unit;
-                    $dueDate = date("Y-m-d H:i:s", strtotime("$duration", $dateInt));
+                    $dueDate = date('Y-m-d H:i:s', strtotime("$duration", $dateInt));
                     $dateInt = strtotime($dueDate);
                 }
                 if ($dueDate > $date_evn) {
                     $today = $date_evn;
                 } else {
                     $today = $dueDate;
-                    $dueDate = date("Y-m-d H:i:s", strtotime("+10 seconds", $dateInt));
+                    $dueDate = date('Y-m-d H:i:s', strtotime('+10 seconds', $dateInt));
                 }
             } else {
                 $today = $date_evn;
-                $dueDate = date("Y-m-d H:i:s", strtotime("+1 day", $dateInt));
+                $dueDate = date('Y-m-d H:i:s', strtotime('+1 day', $dateInt));
             }
         }
-        return array($today, $dueDate);
+        return [$today, $dueDate];
     }
 
     /**
@@ -834,10 +849,10 @@ class PMSEBeanHandler
 
     /**
      *
-     * @global type $app_list_strings
-     * @global type $sugar_config
      * @param type $bean
      * @return type
+     * @global type $app_list_strings
+     * @global type $sugar_config
      */
     private function get_href_link($bean)
     {
@@ -871,7 +886,7 @@ class PMSEBeanHandler
         $q->where()->equals('cas_id', $this->flowData['cas_id']);
         $result = $q->getOne();
 
-        $showCaseUrl = $sugar_config['site_url'] .'/index.php#';
+        $showCaseUrl = $sugar_config['site_url'] . '/index.php#';
 
         if (isModuleBWC($targetModule)) {
             $params = [

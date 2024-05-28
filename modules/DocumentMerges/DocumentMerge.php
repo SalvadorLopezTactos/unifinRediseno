@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,6 +10,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class DocumentMerge extends Basic
 {
     public $id;
@@ -16,10 +18,10 @@ class DocumentMerge extends Basic
     public $date_entered;
     public $created_by;
     public $created_by_name;
-    public $table_name  = 'document_merges';
+    public $table_name = 'document_merges';
     public $object_name = 'DocumentMerge';
-    public $module_dir  = 'DocumentMerges';
-    public $new_schema  = true;
+    public $module_dir = 'DocumentMerges';
+    public $new_schema = true;
 
     /**
      * Make sure the bean implements ACL so it can be modified from Roles

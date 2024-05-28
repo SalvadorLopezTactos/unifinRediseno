@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Gegevensprivacy',
     'LBL_MODULE_NAME_SINGULAR' => 'Gegevensprivacy',
     'LBL_NUMBER' => 'Nummer',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Er zijn geen velden of records gemarkeerd om te wissen.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Dashboard gegevensprivacy record',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer gegevensprivacy',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn gegevensprivacy',
 
     // list view
     'LBL_HELP_RECORDS' => 'De module Gegevensprivacy volgt privacy-activiteiten, waaronder het geven van toestemming voor en het verzenden van verzoeken. Dit wordt gedaan ter ondersteuning van de privacyprocedures van uw organisatie. Maak gegevensprivacyrecords met betrekking tot een individueel record aan (bijv. een contactpersoon) om toestemming te volgen of actie te ondernemen met betrekking tot een privacyverzoek.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'De module Gegevensprivacy volgt privacy-activiteiten, waaronder het geven van toestemming voor en het verzenden van verzoeken. Dit wordt gedaan ter ondersteuning van de privacyprocedures van uw organisatie. Maak gegevensprivacyrecords met betrekking tot een individueel record aan (bijv. een contactpersoon) om toestemming te volgen of actie te ondernemen met betrekking tot een privacyverzoek. Zodra de benodigde actie is voltooid, kunnen gebruikers met de rol Manager Gegevensprivacy op "Voltooien" of "Weigeren" klikken om de status bij te werken.
 
 Voor verzoeken om te wissen, selecteert u "Markeren voor wissen: voor elk van records die worden weergegeven in de onderstaande subpanelen. Zodra alle gewenste velden zijn geselecteerd, kunt u op "Wissen en voltooien" klikken om de waarden van de velden permanent te wissen en het gegevensprivacyrecord als voltooid te markeren.',
-);
+];

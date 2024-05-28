@@ -243,8 +243,10 @@ if(typeof(SimpleList) == 'undefined'){
         if (SimpleList.hasSalesStageClassification) {
             var salesStageDropdown = document.getElementById('sales_stage_classification');
 
-            var out2 = parseList(ul1, 'List 2', true);
-            salesStageDropdown.value = out2;
+            if (!_.isNull(salesStageDropdown)) {
+                let out2 = parseList(ul1, 'List 2', true);
+                salesStageDropdown.value = out2;
+            }
         }
 
         ModuleBuilder.refreshDD_name = document.getElementById('dropdown_name').value;

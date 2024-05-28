@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'FW:',
     'LBL_RE' => 'Betreft:',
     'LBL_BUTTON_CREATE' => 'Nieuw',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Kies de afzender',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Kies handtekening',
     'LBL_SIGNATURE' => 'Handtekening',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Standaard handtekening",
-    "LBL_SHOW_MORE_SIGNATURES" => "Meer handtekeningen...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Standaard handtekening',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Meer handtekeningen...',
     'LBL_SUBJECT' => 'Onderwerp:',
     'LBL_TEMPLATE' => 'Sjabloon',
     'LBL_TEXT_BODY' => 'Tekst Body',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Tijdstip verzonden',
     'LBL_LIST_TO_ADDR' => 'Aan',
     'LBL_LIST_TYPE' => 'Type',
-    "LBL_SELECTED_RECIPIENTS" => "Gekozen ontvangers",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Meer ontvangers...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Adresboek",
+    'LBL_SELECTED_RECIPIENTS' => 'Gekozen ontvangers',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Meer ontvangers...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Adresboek',
     'NTC_REMOVE_INVITEE' => 'Weet u zeker dat u deze ontvanger wilt verwijderen voor deze e-mail?',
     'WARNING_SETTINGS_NOT_CONF' => 'Uw e-mailinstellingen zijn niet goed geconfigureerd om e-mail te kunnen verzenden. Een SMTP-server ' .
         'moet zijn geconfigureerd in <a href="#bwc/index.php?module=EmailMan&action=config">E-mailinstellingen</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Bijlagen kunnen mislukken: een onjuiste of ongebruikte waarde voor "upload_tmp_dir" ' .
         'werd gedetecteerd. Corrigeer dit in uw php.ini bestand.',
     'LBL_MESSAGE_UID' => 'Bericht UID',
-    'LBL_OPEN_DRAFT_ALERT' => 'E-mail is een concept. Klik op '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'E-mail is een concept. Klik op ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  om te bewerken.',
     'LBL_EMAIL_BODY' => 'E-mailbericht',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer e-mails',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Dashboard record e-mails',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'E-mailtijdlijn',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'geen ontvangers opgegeven',
@@ -475,4 +476,5 @@ U kunt een vooraf opgezet sjabloon toepassen met behulp van de sjabloon knop of 
     'LBL_SHORTCUT_EMAIL_SEND' => 'E-mail verzenden',
     'LBL_MAILBOX' => 'Inkomend account',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Configureer een uitgaand e-mailaccount via <a href="#OutboundEmail">E-mailinstellingen</a> om e-mails te kunnen sturen.',
-);
+    'LBL_TOO_SHORT' => 'Voer minimaal {0} tekens in...',
+];

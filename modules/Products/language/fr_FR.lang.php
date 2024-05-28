@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Tableau de bord de la liste de lignes de devis',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de lignes de devis',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Lignes de devis',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie de ligne de devis',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Campagne de la ligne de devis',
     'LBL_MODULE_NAME' => 'Lignes de devis',
@@ -183,4 +184,4 @@ Pour créer un enregistrement {{module_name}}, les étapes suivantes sont néces
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nouvelle ligne de devis)',
     'LBL_DISCOUNT_PERCENT' => 'Pourcentage',
     'LBL_DISCOUNT_TYPE' => 'Type de remise',
-);
+];

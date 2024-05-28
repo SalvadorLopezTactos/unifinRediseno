@@ -48,7 +48,7 @@ class FileValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof File) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\File');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\File');
         }
 
         if (null === $value || '' === $value) {
@@ -63,7 +63,7 @@ class FileValidator extends ConstraintValidator
             throw new ConstraintDefinitionException('No basedirs defined');
         }
 
-        $value = (string) $value;
+        $value = (string)$value;
 
         // check for null bytes
         if (strpos($value, chr(0)) !== false) {
@@ -101,7 +101,7 @@ class FileValidator extends ConstraintValidator
         // normalized format needs to start with baseDir value
         $baseDirCompliant = false;
         foreach ($constraint->baseDirs as $baseDir) {
-            if (strpos($normalized, $baseDir) === 0) {
+            if (strpos($normalized, (string) $baseDir) === 0) {
                 $baseDirCompliant = true;
                 break;
             }

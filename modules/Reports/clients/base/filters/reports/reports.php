@@ -10,33 +10,33 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Reports']['base']['filter']['reports'] = array(
-    'filters' => array(
-        array(
+$viewdefs['Reports']['base']['filter']['reports'] = [
+    'filters' => [
+        [
             'id' => 'by_module',
             'name' => 'LBL_FILTER_BY_MODULE',
-            'filter_definition' => array(
-                array(
-                    'module' => array(
-                        '$in' => array(),
-                    ),
-                ),
-            ),
+            'filter_definition' => [
+                [
+                    'module' => [
+                        '$in' => [],
+                    ],
+                ],
+            ],
             'editable' => true,
             'is_template' => true,
-        ),
-        array(
+        ],
+        [
             'id' => 'with_charts',
             'name' => 'LBL_FILTER_WITH_CHARTS',
-            'filter_definition' => array(
-                array(
-                    'chart_type' => array(
+            'filter_definition' => [
+                [
+                    'chart_type' => [
                         '$not_equals' => 'none',
-                    ),
-                ),
-            ),
+                    ],
+                ],
+            ],
             'editable' => false,
             'is_template' => true,
-        ),
-    ),
-);
+        ],
+    ],
+];

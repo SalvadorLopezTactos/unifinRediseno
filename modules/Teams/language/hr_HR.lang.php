@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Morate navesti broj zapisa da biste dodali korisnika ovom timu.',
     'ERR_DUP_NAME' => 'Naziv tima već je postojao, izaberite drugi.',
     'ERR_DELETE_RECORD' => 'Morate navesti broj zapisa da biste izbrisali ovaj tim.',
@@ -70,7 +70,7 @@ Onemogućavanje dozvola na temelju tima za modul vratit će podatke povezane s d
  Također preporučujemo da upotrebljavate alat Brzi popravak i ponovna izgradnja da biste izbrisali predmemoriju
  svojeg sustava nakon onemogućavanja dozvola na temelju tima za bilo koji modul.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Upozorenje:</strong> onemogućavanje dozvola na temelju tima za modul vratit će podatke povezane s
  dozvolama na temelju tima za taj modul, uključujući definicije procesa ili procese koji upotrebljavaju značajku. To
@@ -79,7 +79,7 @@ STR
  izgradnja da biste izbrisali predmemoriju svojeg sustava nakon onemogućavanja dozvola na temelju tima za bilo
  koji modul.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Onemogućavanje dozvola na temelju tima za modul vratit će podatke povezane s dozvolama na temelju tima za taj
  modul, uključujući definicije procesa ili procese koji upotrebljavaju značajku. To uključuje uloge koje upotrebljavaju
@@ -88,7 +88,7 @@ Onemogućavanje dozvola na temelju tima za modul vratit će podatke povezane s d
  svojeg sustava nakon onemogućavanja dozvola na temelju tima za bilo koji modul. Ako nemate pristup upotrebi alata
  Brzi popravak i ponovna izgradnja, obratite se administratoru s pristupom izborniku za popravak.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Upozorenje:</strong> onemogućavanje dozvola na temelju tima za modul vratit će podatke povezane s
  dozvolama na temelju tima za taj modul, uključujući definicije procesa ili procese koji upotrebljavaju značajku. To
@@ -98,5 +98,5 @@ STR
  koji modul. Ako nemate pristup upotrebi alata Brzi popravak i ponovna izgradnja, obratite se administratoru s
  pristupom izborniku za popravak.
 STR
-,
-);
+    ,
+];

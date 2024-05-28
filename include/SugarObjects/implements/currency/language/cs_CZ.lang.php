@@ -9,11 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-    'LBL_CURRENCY'=>'Měna:',
+$mod_strings = [
+    'LBL_CURRENCY' => 'Měna:',
     'LBL_CURRENCIES' => 'Měny',
-    'LBL_CURRENCY_NAME'=>'Název měny',
-    'LBL_CURRENCY_SYMBOL'=>'Symbol měny',
+    'LBL_CURRENCY_NAME' => 'Název měny',
+    'LBL_CURRENCY_SYMBOL' => 'Symbol měny',
     'LBL_CURRENCY_RATE' => 'Základní kurz',
     'LBL_CURRENCY_ID' => 'ID měny',
-);
+];

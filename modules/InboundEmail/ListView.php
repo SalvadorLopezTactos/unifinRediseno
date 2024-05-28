@@ -14,7 +14,7 @@ global $mod_strings;
 global $app_list_strings;
 global $current_user;
 
-if (!$current_user->isAdminForModule("InboundEmail")) {
+if (!$current_user->isAdminForModule('InboundEmail')) {
     sugar_die(translate('ERR_NOT_ADMIN'));
 }
 
@@ -24,8 +24,8 @@ $focus->checkImap();
 ///////////////////////////////////////////////////////////////////////////////
 ////	I-E SYSTEM SETTINGS
 ////	handle saving settings
-if(isset($_REQUEST['save']) && $_REQUEST['save'] == 'true') {
-	$focus->saveInboundEmailSystemSettings('Case', $_REQUEST['inbound_email_case_macro']);
+if (isset($_REQUEST['save']) && $_REQUEST['save'] == 'true') {
+    $focus->saveInboundEmailSystemSettings('Case', $_REQUEST['inbound_email_case_macro']);
 }
 ////	END I-E SYSTEM SETTINGS
 ///////////////////////////////////////////////////////////////////////////////
@@ -42,8 +42,7 @@ $listView->setHeaderTitle($mod_strings['LBL_MODULE_TITLE']);
 
 echo $focus->getSystemSettingsForm();
 $listView->show_export_button = false;
-$listView->ignorePopulateOnly = TRUE; //Always show all records, ignore save_query performance setting.
+$listView->ignorePopulateOnly = true; //Always show all records, ignore save_query performance setting.
 $listView->setQuery($where, $limit, $orderBy, 'InboundEmail', $allowByOverride);
-$listView->xTemplateAssign("EDIT_INLINE_IMG", SugarThemeRegistry::current()->getImage('edit_inline','align="absmiddle" border="0"', null,null,'.gif',$app_strings['LNK_EDIT']));
-$listView->processListView($focus, "main", "InboundEmail");
-
+$listView->xTemplateAssign('EDIT_INLINE_IMG', SugarThemeRegistry::current()->getImage('edit_inline', 'align="absmiddle" border="0"', null, null, '.gif', $app_strings['LNK_EDIT']));
+$listView->processListView($focus, 'main', 'InboundEmail');

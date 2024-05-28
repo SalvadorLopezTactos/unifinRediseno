@@ -11,14 +11,13 @@
  */
 
 
-
 class PMSEConvergingExclusiveGateway extends PMSEConvergingGateway
 {
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         $routeAction = 'WAIT';
         $flowAction = 'NONE';
-        $filters = array();
+        $filters = [];
         $previousFlows = $this->retrievePreviousFlows('PASSED', $flowData['bpmn_id'], $flowData['cas_id']);
         $reached = false;
         if (sizeof($previousFlows) === 1) {
@@ -26,7 +25,7 @@ class PMSEConvergingExclusiveGateway extends PMSEConvergingGateway
             $flowAction = 'CREATE';
             $reached = true;
         }
-        $result =  $this->prepareResponse($flowData, $routeAction, $flowAction, $filters);
+        $result = $this->prepareResponse($flowData, $routeAction, $flowAction, $filters);
         if ($reached) {
             $result['create_thread'] = true;
         }

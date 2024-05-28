@@ -201,7 +201,7 @@ CollapsiblePanel.prototype.isCollapsed = function () {
 CollapsiblePanel.prototype.collapse = function (noAnimation) {
 	this._collapsed = true;
 	if(this._htmlBody) {
-		jQuery(this._htmlCollapsibleIcon).removeClass('fa-caret-up').addClass('fa-caret-down');
+		jQuery(this._htmlCollapsibleIcon).removeClass('sicon-caret-up').addClass('sicon-caret-down');
 		if(isInDOM(this.html)) {
 			if (!this._enabledAnimations || noAnimation) {
 				jQuery(this._htmlBody).stop(true, true).hide();
@@ -221,7 +221,7 @@ CollapsiblePanel.prototype.collapse = function (noAnimation) {
 CollapsiblePanel.prototype.expand = function (noAnimation) {
 	this._collapsed = false;
 	if(this._htmlBody) {
-		jQuery(this._htmlCollapsibleIcon).removeClass('fa-caret-down').addClass('fa-caret-up');
+		jQuery(this._htmlCollapsibleIcon).removeClass('sicon-caret-down').addClass('sicon-caret-up');
 		if (!this._enabledAnimations || noAnimation) {
 			jQuery(this._htmlBody).stop(true, true).show();
 		} else {

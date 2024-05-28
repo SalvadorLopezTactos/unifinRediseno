@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Nabavite ključ i tajnu sa IBM SmartCloud registrovanjem Vaše Sugar instance kao nove aplikacije. Mogućnost registrovanja je moguća od 8. maja 2011.<br>&nbsp;<br>
 Koraci za registraciju Vaše instance:<br>
 &nbsp;<br>
@@ -27,5 +27,4 @@ Koraci za registraciju Vaše instance:<br>
 </td></tr></table>',
     'oauth_consumer_key' => 'OAuth Potrošački ključ',
     'oauth_consumer_secret' => 'OAuth Potrošačka tajna',
-);
-
+];

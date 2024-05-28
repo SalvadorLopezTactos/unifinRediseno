@@ -9,67 +9,56 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$searchdefs ['Notes'] = 
-array (
-  'layout' => 
-  array (
-    'basic_search' => 
-    array (
-      'name' => 
-      array (
-        'name' => 'name',
-        'default' => true,
-        'width' => '10%',
-      ),
-	  array ('name'=>'current_user_only', 'label'=>'LBL_CURRENT_USER_FILTER', 'type'=>'bool'),             
-		      array ('name' => 'favorites_only','label' => 'LBL_FAVORITES_FILTER','type' => 'bool',),
-    ),
-    'advanced_search' => 
-    array (
-      'name' => 
-      array (
-        'name' => 'name',
-        'default' => true,
-        'width' => '10%',
-      ),
-      'contact_name' => 
-      array (
-        'type' => 'name',
-        'link' => 'contact',
-        'label' => 'LBL_CONTACT_NAME',
-        'width' => '10%',
-        'default' => true,
-        'name' => 'contact_name',
-      ),
-      'parent_name' => 
-      array (
-        'type' => 'parent',
-        'label' => 'LBL_RELATED_TO',
-        'width' => '10%',
-        'default' => true,
-        'name' => 'parent_name',
-      ),
-      'date_entered' => 
-      array (
-        'type' => 'datetime',
-        'label' => 'LBL_DATE_ENTERED',
-        'width' => '10%',
-        'default' => true,
-        'name' => 'date_entered',
-      ),
-      
-		      array ('name' => 'favorites_only','label' => 'LBL_FAVORITES_FILTER','type' => 'bool',),
-    ),
-  ),
-  'templateMeta' => 
-  array (
-    'maxColumns' => '3',
-    'maxColumnsBasic' => '4', 
-    'widths' => 
-    array (
-      'label' => '10',
-      'field' => '30',
-    ),
-  ),
-);
-?>
+$searchdefs ['Notes'] =
+    [
+        'layout' => [
+            'basic_search' => [
+                'name' => [
+                    'name' => 'name',
+                    'default' => true,
+                    'width' => '10%',
+                ],
+                ['name' => 'current_user_only', 'label' => 'LBL_CURRENT_USER_FILTER', 'type' => 'bool'],
+                ['name' => 'favorites_only', 'label' => 'LBL_FAVORITES_FILTER', 'type' => 'bool',],
+            ],
+            'advanced_search' => [
+                'name' => [
+                    'name' => 'name',
+                    'default' => true,
+                    'width' => '10%',
+                ],
+                'contact_name' => [
+                    'type' => 'name',
+                    'link' => 'contact',
+                    'label' => 'LBL_CONTACT_NAME',
+                    'width' => '10%',
+                    'default' => true,
+                    'name' => 'contact_name',
+                ],
+                'parent_name' => [
+                    'type' => 'parent',
+                    'label' => 'LBL_RELATED_TO',
+                    'width' => '10%',
+                    'default' => true,
+                    'name' => 'parent_name',
+                ],
+                'date_entered' => [
+                    'type' => 'datetime',
+                    'label' => 'LBL_DATE_ENTERED',
+                    'width' => '10%',
+                    'default' => true,
+                    'name' => 'date_entered',
+                ],
+
+                ['name' => 'favorites_only', 'label' => 'LBL_FAVORITES_FILTER', 'type' => 'bool',],
+            ],
+        ],
+        'templateMeta' => [
+            'maxColumns' => '3',
+            'maxColumnsBasic' => '4',
+            'widths' => [
+                'label' => '10',
+                'field' => '30',
+            ],
+        ],
+    ];

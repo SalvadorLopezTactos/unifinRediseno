@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Normas empresariales de procesos',
-  'LBL_MODULE_TITLE' => 'Normas empresariales de procesos',
-  'LBL_MODULE_NAME_SINGULAR' => 'Norma empresarial de procesos',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Normas empresariales de procesos',
+    'LBL_MODULE_TITLE' => 'Normas empresariales de procesos',
+    'LBL_MODULE_NAME_SINGULAR' => 'Norma empresarial de procesos',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Panel de enfoque en las reglas de negocios de procesos',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Panel de enfoque en las reglas de negocios de procesos',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Cuadro de mando del registro de normas empresariales de procesos',
-  'LBL_RST_UID' => 'ID de norma empresarial',
-  'LBL_RST_TYPE' => 'Tipo de norma empresarial',
-  'LBL_RST_DEFINITION' => 'Definición de norma empresarial',
-  'LBL_RST_EDITABLE' => 'Norma empresarial editable',
-  'LBL_RST_SOURCE' => 'Origen de norma empresarial',
-  'LBL_RST_SOURCE_DEFINITION' => 'Definición de origen de norma empresarial',
-  'LBL_RST_MODULE' => 'Módulo de destino',
-  'LBL_RST_FILENAME' => 'Nombre de archivo de norma empresarial',
-  'LBL_RST_CREATE_DATE' => 'Fecha de creación de norma empresarial',
-  'LBL_RST_UPDATE_DATE' => 'Fecha de actualización de norma empresarial',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Cuadro de mando del registro de normas empresariales de procesos',
+    'LBL_RST_UID' => 'ID de norma empresarial',
+    'LBL_RST_TYPE' => 'Tipo de norma empresarial',
+    'LBL_RST_DEFINITION' => 'Definición de norma empresarial',
+    'LBL_RST_EDITABLE' => 'Norma empresarial editable',
+    'LBL_RST_SOURCE' => 'Origen de norma empresarial',
+    'LBL_RST_SOURCE_DEFINITION' => 'Definición de origen de norma empresarial',
+    'LBL_RST_MODULE' => 'Módulo de destino',
+    'LBL_RST_FILENAME' => 'Nombre de archivo de norma empresarial',
+    'LBL_RST_CREATE_DATE' => 'Fecha de creación de norma empresarial',
+    'LBL_RST_UPDATE_DATE' => 'Fecha de actualización de norma empresarial',
 
     'LNK_LIST' => 'Ver normas empresariales de procesos',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Crear norma empresarial de procesos',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Esta regla de negocio no es válida, ya que utiliza campos no válidos o campos que no se encuentran en su instancia de SugarCRM. Corrija los errores siguientes y guarde la regla de negocio.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Esta norma empresarial se está utilizando en estos momentos en una definición de proceso. ¿Aún así desea editarla?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "No puede eliminar esta norma empresarial porque en estos momentos se utiliza en una definición de proceso.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'No puede eliminar esta norma empresarial porque en estos momentos se utiliza en una definición de proceso.',
+];

@@ -10,24 +10,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-if( !isset( $install_script ) || !$install_script ){
+if (!isset($install_script) || !$install_script) {
     die($mod_strings['ERR_NO_DIRECT_SCRIPT']);
 }
 
 $errs = '';
-if(isset($validation_errors)) {
-    if ((is_countable($validation_errors) ? count($validation_errors) : 0) > 0) {
-		$errs  = '<div id="errorMsgs">';
-		$errs .= "<p>{$mod_strings['LBL_SYSOPTS_ERRS_TITLE']}</p>";
-		$errs .= '<ul>';
+if (isset($validation_errors)) {
+    if (safeCount($validation_errors) > 0) {
+        $errs = '<div id="errorMsgs">';
+        $errs .= "<p>{$mod_strings['LBL_SYSOPTS_ERRS_TITLE']}</p>";
+        $errs .= '<ul>';
 
-		foreach($validation_errors as $error) {
-			$errs .= '<li>' . $error . '</li>';
-		}
+        foreach ($validation_errors as $error) {
+            $errs .= '<li>' . $error . '</li>';
+        }
 
-		$errs .= '</ul>';
-		$errs .= '</div>';
-	}
+        $errs .= '</ul>';
+        $errs .= '</div>';
+    }
 }
 
 $drivers = DBManagerFactory::getDbDrivers();
@@ -36,19 +36,19 @@ $setup_db_type = 'mysql';
 if (!empty($_SESSION['setup_db_type'])) {
     $setup_db_type = $_SESSION['setup_db_type'];
 }
-if (count($drivers) && !array_key_exists($setup_db_type, $drivers)) {
+if (safeCount($drivers) && !array_key_exists($setup_db_type, $drivers)) {
     $driverKeys = array_keys($drivers);
     $setup_db_type = $driverKeys[0];
 }
-$disabledNextButton = count($drivers) ? '' : ' disabled="disabled"';
+$disabledNextButton = safeCount($drivers) ? '' : ' disabled="disabled"';
 $_SESSION['setup_db_type'] = $setup_db_type;
 
-foreach(array_keys($drivers) as $dname) {
+foreach (array_keys($drivers) as $dname) {
     $checked[$dname] = '';
 }
 $checked[$setup_db_type] = 'checked="checked"';
 $langHeader = get_language_header();
-$out=<<<EOQ
+$out = <<<EOQ
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html {$langHeader}>
 <head>
@@ -89,14 +89,14 @@ $out=<<<EOQ
     <td>&nbsp;</td>
     <td align="left">
 EOQ;
-foreach($drivers as $type => $driver) {
-    $oci = ($type == "oci8")?"":'none'; // hack for special oracle message
-    $out.=<<<EOQ
+foreach ($drivers as $type => $driver) {
+    $oci = ($type == 'oci8') ? '' : 'none'; // hack for special oracle message
+    $out .= <<<EOQ
         <input type="radio" class="checkbox" name="setup_db_type" id="setup_db_type" value="$type" {$checked[$type]} onclick="document.getElementById('ociMsg').style.display='$oci'"/>{$mod_strings[$driver->label]}
 EOQ;
 }
 
-$out.=<<<EOQ
+$out .= <<<EOQ
     </td>
     <td width='350'nowrap>&nbsp;
     <div name="ociMsg" id="ociMsg" style="display:none">
@@ -104,7 +104,7 @@ $out.=<<<EOQ
     </div>
 EOQ;
 
-$out.=<<<EOQ
+$out .= <<<EOQ
     </td>
 
 </tr>

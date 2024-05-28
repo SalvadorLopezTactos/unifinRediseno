@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Regras de negócios de processos',
-  'LBL_MODULE_TITLE' => 'Regras de negócios de processos',
-  'LBL_MODULE_NAME_SINGULAR' => 'Regra de negócios de processo',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Regras de negócios de processos',
+    'LBL_MODULE_TITLE' => 'Regras de negócios de processos',
+    'LBL_MODULE_NAME_SINGULAR' => 'Regra de negócios de processo',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco nas regras de negócio dos processos',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco nas regras de negócio dos processos',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Painel de registro de regras de negócios de processo',
-  'LBL_RST_UID' => 'ID da regra de negócio',
-  'LBL_RST_TYPE' => 'Tipo de regra de negócios',
-  'LBL_RST_DEFINITION' => 'Definição de regra de negócio',
-  'LBL_RST_EDITABLE' => 'Regra de negócio editável',
-  'LBL_RST_SOURCE' => 'Origem da regra de negócio',
-  'LBL_RST_SOURCE_DEFINITION' => 'Definição de origem da regra de negócio',
-  'LBL_RST_MODULE' => 'Módulo de destino',
-  'LBL_RST_FILENAME' => 'Nome do arquivo da regra de negócio',
-  'LBL_RST_CREATE_DATE' => 'Data de criação da regra de negócio',
-  'LBL_RST_UPDATE_DATE' => 'Data da atualização da regra de negócio',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Painel de registro de regras de negócios de processo',
+    'LBL_RST_UID' => 'ID da regra de negócio',
+    'LBL_RST_TYPE' => 'Tipo de regra de negócios',
+    'LBL_RST_DEFINITION' => 'Definição de regra de negócio',
+    'LBL_RST_EDITABLE' => 'Regra de negócio editável',
+    'LBL_RST_SOURCE' => 'Origem da regra de negócio',
+    'LBL_RST_SOURCE_DEFINITION' => 'Definição de origem da regra de negócio',
+    'LBL_RST_MODULE' => 'Módulo de destino',
+    'LBL_RST_FILENAME' => 'Nome do arquivo da regra de negócio',
+    'LBL_RST_CREATE_DATE' => 'Data de criação da regra de negócio',
+    'LBL_RST_UPDATE_DATE' => 'Data da atualização da regra de negócio',
 
     'LNK_LIST' => 'Visualizar regras de negócios de processo',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Criar Regra de Negócios de Processos',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Esta regra de negócio é inválida, já que ela usa campos inválidos ou campos que não foram encontrados em sua instância do SugarCRM. Corrija os erros abaixo e salve a regra de negócios.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Esta regra de negócio está sendo usada em uma definição de processo. Ainda deseja editar esta regra de negócio?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Não é possível excluir essa regra de negócio, porque ela está sendo usada no momento em uma definição de processo.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Não é possível excluir essa regra de negócio, porque ela está sendo usada no momento em uma definição de processo.',
+];

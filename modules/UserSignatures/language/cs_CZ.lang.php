@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Tento podpis vyžaduje jméno.',
     'LBL_DEFAULT_SIGNATURE' => 'Výchozí',
     'LBL_MODULE_NAME' => 'Podpisy e-mailu',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'Použít podpis?',
     'LBL_SIGNATURE_PREPEND' => 'Podpis nad odpovědí?',
     'LBL_SIGNATURES' => 'Podpisy',
-);
+];

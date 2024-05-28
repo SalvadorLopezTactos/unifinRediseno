@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('datatable-column-widths', function (Y, NAME) {
 
 /**
@@ -312,10 +305,10 @@ the natural width of the table's containing DOM elements.
 
 If absolute widths are required, it can be accomplished with
 some custom CSS and the use of a `cellTemplate`, or
-`formatter`.  
+`formatter`.
 
-See the description of 
-[datatable-column-widths](DataTable.ColumnWidths.html) 
+See the description of
+[datatable-column-widths](DataTable.ColumnWidths.html)
 for an example of how to do this.
 
     { key: 'a', width: '400px' },
@@ -327,4 +320,4 @@ for an example of how to do this.
  */
 
 
-}, '3.15.0', {"requires": ["datatable-base"]});
+}, '3.18.1', {"requires": ["datatable-base"]});

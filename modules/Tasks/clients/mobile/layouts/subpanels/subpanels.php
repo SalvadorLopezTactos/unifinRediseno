@@ -9,15 +9,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Tasks']['mobile']['layout']['subpanels'] = array(
-    'components' => array(
-        array(
+$viewdefs['Tasks']['mobile']['layout']['subpanels'] = [
+    'components' => [
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_NOTES_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'notes',
-            ),
+            ],
             'linkable' => false,
-        ),
-    ),
-);
+        ],
+    ],
+];

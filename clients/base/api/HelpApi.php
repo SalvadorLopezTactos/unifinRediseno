@@ -10,50 +10,51 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class HelpApi extends SugarApi 
+class HelpApi extends SugarApi
 {
     /**
      * The help endpoints need some client files to function properly.
-     * 
+     *
      * @var array
      */
-    protected $clientFiles = array(
+    protected $clientFiles = [
         'cache/include/javascript/sugar_grp1_jquery.js',
-    );
-    
+    ];
+
     /**
-     * Used in transformations of class names, like making 
+     * Used in transformations of class names, like making
      * SugarApiExceptionRequestTooLarge into Request Too Large or request-too-large
-     * 
+     *
      * @var string
      */
     protected $camelCasePattern = '#(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])#';
 
-    public function registerApiRest() {
-        return array(
-            'getHelp' => array(
+    public function registerApiRest()
+    {
+        return [
+            'getHelp' => [
                 'reqType' => 'GET',
-                'path' => array('help'),
-                'pathVars' => array(''),
+                'path' => ['help'],
+                'pathVars' => [''],
                 'method' => 'getHelp',
                 'shortHelp' => 'Shows Help information',
                 'longHelp' => 'include/api/help/help_get_help.html',
                 'rawReply' => true,
                 // Everyone needs some help sometimes.
                 'noLoginRequired' => true,
-            ),
-            'getExceptions' => array(
+            ],
+            'getExceptions' => [
                 'reqType' => 'GET',
-                'path' => array('help', 'exceptions'),
-                'pathVars' => array('', ''),
+                'path' => ['help', 'exceptions'],
+                'pathVars' => ['', ''],
                 'method' => 'getExceptionsHelp',
                 'shortHelp' => 'Shows the exceptions thrown by the API',
                 'longHelp' => 'include/api/help/help_get_exceptions.html',
                 'rawReply' => true,
                 // Everyone needs some help sometimes.
                 'noLoginRequired' => true,
-            ),
-        );
+            ],
+        ];
     }
 
     public function getHelp(ServiceBase $api, array $args)
@@ -61,33 +62,33 @@ class HelpApi extends SugarApi
         // This function needs to peer into the deep, twisted soul of the RestServiceDictionary
         $dir = $api->dict->dict;
 
-        if ( empty($args['platform']) ) {
+        if (empty($args['platform'])) {
             $platform = 'base';
         } else {
             $platform = $args['platform'];
         }
 
-        $endpointList = array();
-        foreach ( $dir as $startDepth => $dirPart ) {
-            if ( isset($dirPart[$platform]) ) {
-                $endpointList = array_merge($endpointList, $this->getEndpoints($dirPart[$platform],$startDepth));
+        $endpointList = [];
+        foreach ($dir as $startDepth => $dirPart) {
+            if (isset($dirPart[$platform])) {
+                $endpointList = array_merge($endpointList, $this->getEndpoints($dirPart[$platform], $startDepth));
             }
         }
 
         // Add in the full endpoint paths, so we can sort by them
-        foreach ( $endpointList as $idx => $endpoint ) {
+        foreach ($endpointList as $idx => $endpoint) {
             $fullPath = '';
-            foreach ( $endpoint['path'] as $pathIdx => $pathPart ) {
-                if ( $pathPart == '?' ) {
+            foreach ($endpoint['path'] as $pathIdx => $pathPart) {
+                if ($pathPart == '?') {
                     // pull in the path variable in here so the documentation is readable
-                    $pathPart = ':'.$endpoint['pathVars'][$pathIdx];
+                    $pathPart = ':' . $endpoint['pathVars'][$pathIdx];
                 }
-                $fullPath .= '/'.$pathPart;
+                $fullPath .= '/' . $pathPart;
             }
             $endpointList[$idx]['fullPath'] = $fullPath;
 
             // Handle exception lists
-            $exceptions = array();
+            $exceptions = [];
             if (!empty($endpoint['exceptions']) && is_array($endpoint['exceptions'])) {
                 foreach ($endpoint['exceptions'] as $exception) {
                     $id = $this->getExceptionId($exception);
@@ -99,8 +100,8 @@ class HelpApi extends SugarApi
         }
 
         // Sort the endpoint list
-        usort($endpointList,array('HelpApi','cmpEndpoints'));
-        $endpointListAssoc = array();
+        usort($endpointList, ['HelpApi', 'cmpEndpoints']);
+        $endpointListAssoc = [];
         foreach ($endpointList as $endpoint) {
             $endpointListAssoc[self::getEndPointKey($endpoint)] = $endpoint;
         }
@@ -109,7 +110,7 @@ class HelpApi extends SugarApi
         $this->ensureClientFiles();
         $jsfiles = $this->clientFiles;
         ob_start();
-        require('include/api/help/extras/helpList.php');
+        require 'include/api/help/extras/helpList.php';
         $endpointHtml = ob_get_clean();
 
         $api->setHeader('Content-Type', 'text/html');
@@ -120,10 +121,10 @@ class HelpApi extends SugarApi
     {
         return md5($endpoint['reqType'] . ' ' . $endpoint['fullPath']);
     }
-    
+
     /**
      * Gets the exceptions list for the exceptions help endpoint
-     * 
+     *
      * @param ServiceBase $api The service object
      * @param array $args The request arguments
      * @return string The HTML output for this help endpoint
@@ -134,17 +135,17 @@ class HelpApi extends SugarApi
         $this->ensureClientFiles();
         $jsfiles = $this->clientFiles;
         ob_start();
-        require('include/api/help/extras/exceptionList.php');
+        require 'include/api/help/extras/exceptionList.php';
         $endpointHtml = ob_get_clean();
 
         $api->setHeader('Content-Type', 'text/html');
         return $endpointHtml;
     }
-    
+
     /**
      * Gets the list of exceptions for this system along with some useful information
      * about each exception
-     * 
+     *
      * @return array
      */
     protected function getExceptions()
@@ -156,11 +157,11 @@ class HelpApi extends SugarApi
 
         // Parse it for class names, as that will drive the list of data
         $pattern = '#class ([a-zA-Z0-9_]*) #';
-        $matches = array();
+        $matches = [];
         preg_match_all($pattern, $content, $matches, PREG_SET_ORDER);
 
         // Prepare the return
-        $exceptions = array();
+        $exceptions = [];
 
         // Now loop through the exceptions and build a collection of information
         // on each one
@@ -174,7 +175,7 @@ class HelpApi extends SugarApi
             $label = $e->errorLabel;
             $message = $e->messageLabel;
             $desc = $e->descriptionLabel;
-            $exceptions[$class] = array(
+            $exceptions[$class] = [
                 'element_id' => $this->getExceptionId($class),
                 'class' => $class,
                 'code' => $code,
@@ -184,7 +185,7 @@ class HelpApi extends SugarApi
                 'message' => translate($message),
                 'desc_key' => $desc,
                 'desc' => translate($desc),
-            );
+            ];
         }
 
         return $exceptions;
@@ -196,10 +197,11 @@ class HelpApi extends SugarApi
      * @param $depth int required, how much deeper you need to go before you actually find the endpoints.
      * @return array An array of endpoints for that directory part.
      */
-    protected function getEndpoints($dirPart, $depth) {
-        if ( $depth == 0 ) {
-            $endpoints = array();
-            foreach ( $dirPart as $subEndpoints ) {
+    protected function getEndpoints($dirPart, $depth)
+    {
+        if ($depth == 0) {
+            $endpoints = [];
+            foreach ($dirPart as $subEndpoints) {
                 $endpoints = array_merge($endpoints, $subEndpoints);
             }
 
@@ -207,8 +209,8 @@ class HelpApi extends SugarApi
         }
 
         $newDepth = $depth - 1;
-        $endpoints = array();
-        foreach ( $dirPart as $subDir ) {
+        $endpoints = [];
+        foreach ($dirPart as $subDir) {
             $endpoints = array_merge($endpoints, $this->getEndpoints($subDir, $newDepth));
         }
 
@@ -221,13 +223,14 @@ class HelpApi extends SugarApi
      * @param $endpoint2 hash required, Second verse, same as the first.
      * @return int +1 if endpoint1 is greater than endpoint2, -1 otherwise
      */
-    public static function cmpEndpoints($endpoint1, $endpoint2) {
-        return ( $endpoint1['fullPath'] > $endpoint2['fullPath'] ) ? +1 : -1;
+    public static function cmpEndpoints($endpoint1, $endpoint2)
+    {
+        return ($endpoint1['fullPath'] > $endpoint2['fullPath']) ? +1 : -1;
     }
 
     /**
-     * Ensures that necessary client files are in place 
-     * 
+     * Ensures that necessary client files are in place
+     *
      * @return boolean
      */
     protected function ensureClientFiles()
@@ -239,7 +242,7 @@ class HelpApi extends SugarApi
     /**
      * Gets the exception type label for an exception from the exception class
      * name
-     * 
+     *
      * @param string $class The exception class to get the type from
      * @return string
      */
@@ -260,7 +263,7 @@ class HelpApi extends SugarApi
     /**
      * Takes a camel case exception class name and makes it lower case hyphenated:
      * SugarApiExceptionRequestTooLarge -> sugar-api-exception-request-too-large
-     * 
+     *
      * @param string $class The exception class name to transform
      * @return string
      */

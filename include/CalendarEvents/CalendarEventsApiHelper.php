@@ -18,10 +18,10 @@ class CalendarEventsApiHelper extends SugarBeanApiHelper
      *
      * @var array
      */
-    protected $numericFields = array(
+    protected $numericFields = [
         'duration_hours',
         'duration_minutes',
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class CalendarEventsApiHelper extends SugarBeanApiHelper
      * @return array
      * @throws SugarApiExceptionMissingParameter
      */
-    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = array())
+    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = [])
     {
         /**
          * The duration_hours and duration_minutes fields must be positive integers; either actual integers or strings
@@ -99,7 +99,7 @@ class CalendarEventsApiHelper extends SugarBeanApiHelper
      * @param array $options
      * @return array
      */
-    public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(SugarBean $bean, array $fieldList = [], array $options = [])
     {
         $data = parent::formatForApi($bean, $fieldList, $options);
 
@@ -130,7 +130,7 @@ class CalendarEventsApiHelper extends SugarBeanApiHelper
      */
     protected function getNumericValue($data)
     {
-        return is_numeric($data) ? (int) $data : null;
+        return is_numeric($data) ? (int)$data : null;
     }
 
     /**
@@ -143,7 +143,7 @@ class CalendarEventsApiHelper extends SugarBeanApiHelper
      */
     protected function getInvitees(SugarBean $bean, $link, $submittedData)
     {
-        $invites = array();
+        $invites = [];
         if ($bean->load_relationship($link)) {
             $invites = $bean->$link->get();
         }

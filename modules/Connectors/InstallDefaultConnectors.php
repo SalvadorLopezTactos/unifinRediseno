@@ -10,34 +10,29 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$default_modules_sources = array (
-  'Accounts' =>
-  array (
-     'ext_rest_twitter' => 'ext_rest_twitter',
-     //'ext_rest_insideview' => 'ext_rest_insideview',
-  ),
-  'Contacts' =>
-  array (
-     'ext_rest_twitter' => 'ext_rest_twitter',
-     //'ext_rest_insideview' => 'ext_rest_insideview',
-  ),
+$default_modules_sources = [
+    'Accounts' => [
+        'ext_rest_twitter' => 'ext_rest_twitter',
+        //'ext_rest_insideview' => 'ext_rest_insideview',
+    ],
+    'Contacts' => [
+        'ext_rest_twitter' => 'ext_rest_twitter',
+        //'ext_rest_insideview' => 'ext_rest_insideview',
+    ],
 
-  'Leads' =>
-  array (
-     'ext_rest_twitter' => 'ext_rest_twitter',
-    // 'ext_rest_insideview' => 'ext_rest_insideview',
-  ),
-  'Prospects' =>
-  array (
-     'ext_rest_twitter' => 'ext_rest_twitter',
-  ),
-  'Opportunities' =>
-  array (
-   // 'ext_rest_insideview' => 'ext_rest_insideview',
-  ),
-);
+    'Leads' => [
+        'ext_rest_twitter' => 'ext_rest_twitter',
+        // 'ext_rest_insideview' => 'ext_rest_insideview',
+    ],
+    'Prospects' => [
+        'ext_rest_twitter' => 'ext_rest_twitter',
+    ],
+    'Opportunities' => [
+        // 'ext_rest_insideview' => 'ext_rest_insideview',
+    ],
+];
 
-$previous_connectors = array();
+$previous_connectors = [];
 if (file_exists('custom/modules/Connectors/metadata/connectors.php')) {
     require 'custom/modules/Connectors/metadata/connectors.php';
 
@@ -56,7 +51,7 @@ if (file_exists('custom/modules/Connectors/metadata/display_config.php')) {
     foreach ($default_modules_sources as $module => $sources) {
         foreach ($sources as $source_key => $source) {
             foreach ($previous_connectors as $previous_connector) {
-                if (in_array($previous_connector, $default_modules_sources[$module])) {
+                if (safeInArray($previous_connector, $default_modules_sources[$module])) {
                     unset($default_modules_sources[$module][$previous_connector]);
                 }
             }
@@ -64,7 +59,7 @@ if (file_exists('custom/modules/Connectors/metadata/display_config.php')) {
     }
 
     // Merge in the new connector default settings with the current settings
-    if ( isset($modules_sources) && is_array($modules_sources) ) {
+    if (isset($modules_sources) && is_array($modules_sources)) {
         foreach ($modules_sources as $module => $sources) {
             if (!empty($default_modules_sources[$module])) {
                 $merged = array_merge($modules_sources[$module], $default_modules_sources[$module]);

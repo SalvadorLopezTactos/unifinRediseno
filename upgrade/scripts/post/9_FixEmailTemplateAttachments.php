@@ -34,7 +34,7 @@ class SugarUpgradeFixEmailTemplateAttachments extends UpgradeScript
      *
      * @return bool
      */
-    protected function shouldRun() : bool
+    protected function shouldRun(): bool
     {
         return version_compare($this->from_version, '12.0.0', '<');
     }

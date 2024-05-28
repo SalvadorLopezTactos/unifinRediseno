@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('sortable', function (Y, NAME) {
 
 
@@ -211,6 +204,7 @@ YUI.add('sortable', function (Y, NAME) {
         */
         _onDragEnd: function() {
             this.delegate.get(this.get(OPACITY_NODE)).setStyle(OPACITY, 1);
+            this.delegate.get(CURRENT_NODE).setStyle(ZINDEX, '');
             this.delegate.get(CURRENT_NODE).setStyles({
                 top: '',
                 left: ''
@@ -530,4 +524,4 @@ YUI.add('sortable', function (Y, NAME) {
 
 
 
-}, '3.15.0', {"requires": ["dd-delegate", "dd-drop-plugin", "dd-proxy"]});
+}, '3.18.1', {"requires": ["dd-delegate", "dd-drop-plugin", "dd-proxy"]});

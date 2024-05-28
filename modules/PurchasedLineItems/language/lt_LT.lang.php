@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Pirkimo eilutės prekių sąrašo ataskaitų sritis',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Pirkimo eilutės prekių įrašo ataskaitų sritis',
     'LBL_PARENT_PURCHASE' => 'Pirminis pirkimas',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Pirkimo eilutės prekės laiko juosta',
 ];

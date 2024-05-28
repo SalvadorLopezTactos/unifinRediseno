@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '데이터 프라이버시',
     'LBL_MODULE_NAME_SINGULAR' => '데이터 프라이버시',
     'LBL_NUMBER' => '숫자',
@@ -56,9 +56,10 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => '삭제로 표시된 필드 또는 기록이 없습니다.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => '데이터 개인 정보 기록 대시 보드',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => '데이터 프라이버시 포커스 서랍',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '데이터 프라이버시 타임라인',
 
     // list view
     'LBL_HELP_RECORDS' => '데이터 프라이버시 모듈은 개인 정보 보호 활동(동의 및 정보 요청 포함)을 추적하여 조직의 개인 정보 보호 절차를 지원합니다. 동의 기록을 추적하거나 개인 정보 요청에 대한 조치를 취하기 위해 개인 기록(예:연락처)과 관련된 데이터 개인 정보 기록을 만듭니다.',
     // record view
     'LBL_HELP_RECORD' => '데이터 프라이버시 모듈은 개인 정보 보호 활동 (동의 및 정보 요청 포함)을 추적하여 조직의 개인 정보 보호 절차를 지원합니다. 동의 기록을 추적하거나 개인 정보 요청에 대한 조치를 취하기 위해 개인 기록 (예:연락처)과 관련된 데이터 개인 정보 기록을 만듭니다. 필요한 작업이 완료되면 데이터 개인 정보 매니저(Data Privacy Manager)역할의 사용자는 "완료"또는 "거부"를 클릭하여 상태를 업데이트할 수 있습니다. 삭제 요청의 경우, 아래의 서브 패널에 나열된 개인 기록 각각에 대해 "삭제하기로 표시"를 선택하십시오. 원하는 필드가 모두 선택되면 "삭제 및 완료"를 클릭하면 필드의 값이 영구적으로 제거되고 데이터 개인 정보 기록이 완료된 것으로 표시됩니다.',
-);
+];

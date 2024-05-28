@@ -1,5 +1,8 @@
 <?php
-if(!defined('sugarEntry'))define('sugarEntry', true);
+
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,8 +15,8 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
  */
 
 define('ENTRY_POINT_TYPE', 'gui');
-include ('include/MVC/preDispatch.php');
-require_once('include/entryPoint.php');
+include 'include/MVC/preDispatch.php';
+require_once 'include/entryPoint.php';
 ob_start();
 
 SugarAutoLoader::requireWithCustom('include/MVC/SugarApplication.php');

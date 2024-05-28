@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Konzol konfiguráció',
     'LBL_MODULE_NAME_SINGULAR' => 'Konzol konfiguráció',
     'LBL_CONSOLE_CONFIG_TITLE' => 'Konzol',
@@ -55,4 +56,4 @@ $mod_strings = array(
     'LBL_CONSOLE_DIRECTIONS_CHANGE' => 'A módosítások azonnal láthatók, de az alkalmazásukhoz el kell mentenie az adatokat.',
     'LBL_CONSOLE_DIRECTIONS_FILTER_AND' => 'és ',
     'LBL_CONSOLE_DIRECTIONS_FILTER_OR' => 'vagy ',
-);
+];

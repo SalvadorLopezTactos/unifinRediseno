@@ -9,19 +9,19 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['KBContents']['base']['view']['record'] = array(
-    'buttons' => array(
-        array(
+$viewdefs['KBContents']['base']['view']['record'] = [
+    'buttons' => [
+        [
             'type' => 'button',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
-            'events' => array(
+            'events' => [
                 'click' => 'button:cancel_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
             'name' => 'save_button',
@@ -29,147 +29,147 @@ $viewdefs['KBContents']['base']['view']['record'] = array(
             'css_class' => 'btn btn-primary',
             'showOn' => 'edit',
             'acl_action' => 'edit',
-        ),
-        array(
+        ],
+        [
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
             'primary' => true,
             'showOn' => 'view',
-            'buttons' => array(
-                array(
+            'buttons' => [
+                [
                     'type' => 'rowaction',
                     'event' => 'button:edit_button:click',
                     'name' => 'edit_button',
                     'label' => 'LBL_EDIT_BUTTON_LABEL',
                     'acl_action' => 'edit',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'event' => 'button:create_localization_button:click',
                     'name' => 'create_localization_button',
                     'label' => 'LBL_CREATE_LOCALIZATION_BUTTON_LABEL',
                     'acl_action' => 'edit',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'event' => 'button:create_revision_button:click',
                     'name' => 'create_revision_button',
                     'label' => 'LBL_CREATE_REVISION_BUTTON_LABEL',
                     'acl_action' => 'edit',
-                ),
-                array(
+                ],
+                [
                     'type' => 'divider',
-                ),
-                array(
+                ],
+                [
                     'type' => 'shareaction',
                     'name' => 'share',
                     'label' => 'LBL_RECORD_SHARE_BUTTON',
                     'acl_action' => 'view',
-                ),
-                array(
+                ],
+                [
                     'type' => 'pdfaction',
                     'name' => 'download-pdf',
                     'label' => 'LBL_PDF_VIEW',
                     'action' => 'download',
                     'acl_action' => 'view',
-                ),
-                array(
+                ],
+                [
                     'type' => 'pdfaction',
                     'name' => 'email-pdf',
                     'label' => 'LBL_PDF_EMAIL',
                     'action' => 'email',
                     'acl_action' => 'view',
-                ),
-                array(
+                ],
+                [
                     'type' => 'divider',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'event' => 'button:duplicate_button:click',
                     'name' => 'duplicate_button',
                     'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
                     'acl_module' => 'KBContents',
                     'acl_action' => 'create',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'event' => 'button:audit_button:click',
                     'name' => 'audit_button',
                     'label' => 'LNK_VIEW_CHANGE_LOG',
                     'acl_action' => 'view',
-                ),
-                array(
+                ],
+                [
                     'type' => 'divider',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'event' => 'button:delete_button:click',
                     'name' => 'delete_button',
                     'label' => 'LBL_DELETE_BUTTON_LABEL',
                     'acl_action' => 'delete',
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-    'panels' => array(
-        array(
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_HEADER',
             'header' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'picture',
                     'type' => 'avatar',
                     'size' => 'large',
                     'dismiss_label' => true,
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'name',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'useful',
                         'notuseful',
                         'usefulness_user_vote',
                         'kbdocument_id',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'favorite',
                     'label' => 'LBL_FAVORITE',
                     'type' => 'favorite',
                     'dismiss_label' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'follow',
                     'label' => 'LBL_FOLLOW',
                     'type' => 'follow',
                     'readonly' => true,
                     'dismiss_label' => true,
-                ),
-                'status' => array(
+                ],
+                'status' => [
                     'name' => 'status',
                     'type' => 'status',
                     'enum_width' => 'auto',
                     'dropdown_width' => 'auto',
                     'dropdown_class' => 'select2-menu-only',
                     'container_class' => 'select2-menu-only',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'active_date',
                         'exp_date',
-                    ),
-                ),
-            ),
-        ),
-        array(
+                    ],
+                ],
+            ],
+        ],
+        [
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'placeholders' => true,
-            'fields' => array(
+            'fields' => [
                 [
                     'name' => 'kbdocument_body',
                     'type' => 'htmleditable_tinymce',
@@ -185,19 +185,19 @@ $viewdefs['KBContents']['base']['view']['record'] = array(
                             'kbtemplate',
                     ],
                 ],
-                array(
+                [
                     'name' => 'tag',
                     'span' => 12,
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'panel_hidden',
             'label' => 'LBL_SHOW_MORE',
             'hide' => true,
             'columns' => 2,
             'placeholders' => true,
-            'fields' => array(
+            'fields' => [
                 [
                     'name' => 'attachment_list',
                     'label' => 'LBL_ATTACHMENTS',
@@ -222,78 +222,78 @@ $viewdefs['KBContents']['base']['view']['record'] = array(
                         'upload_id',
                     ],
                 ],
-                'language' => array(
+                'language' => [
                     'name' => 'language',
                     'type' => 'enum-config',
                     'key' => 'languages',
                     'readonly' => false,
-                ),
-                'revision' => array(
+                ],
+                'revision' => [
                     'name' => 'revision',
                     'readonly' => true,
-                ),
-                'category_name' => array(
+                ],
+                'category_name' => [
                     'name' => 'category_name',
                     'label' => 'LBL_CATEGORY_NAME',
                     'initial_filter' => 'by_category',
                     'initial_filter_label' => 'LBL_FILTER_CREATE_NEW',
-                    'filter_relate' => array(
+                    'filter_relate' => [
                         'category_id' => 'category_id',
-                    ),
-                ),
-                'active_rev' => array(
+                    ],
+                ],
+                'active_rev' => [
                     'name' => 'active_rev',
                     'type' => 'bool',
-                ),
-                'viewcount' => array(
+                ],
+                'viewcount' => [
                     'name' => 'viewcount',
-                ),
-                'team_name' => array(
+                ],
+                'team_name' => [
                     'name' => 'team_name',
-                ),
-                'assigned_user_name' => array(
+                ],
+                'assigned_user_name' => [
                     'name' => 'assigned_user_name',
-                ),
-                'is_external' => array(
+                ],
+                'is_external' => [
                     'name' => 'is_external',
                     'type' => 'bool',
-                ),
-                'date_entered' => array(
+                ],
+                'date_entered' => [
                     'name' => 'date_entered',
-                ),
-                'created_by_name' => array(
+                ],
+                'created_by_name' => [
                     'name' => 'created_by_name',
-                ),
-                'date_modified' => array(
+                ],
+                'date_modified' => [
                     'name' => 'date_modified',
-                ),
-                'kbsapprover_name' => array(
+                ],
+                'kbsapprover_name' => [
                     'name' => 'kbsapprover_name',
-                ),
-                'active_date' => array(
+                ],
+                'active_date' => [
                     'name' => 'active_date',
-                ),
-                'kbscase_name' => array(
+                ],
+                'kbscase_name' => [
                     'name' => 'kbscase_name',
-                ),
-                'exp_date' => array(
+                ],
+                'exp_date' => [
                     'name' => 'exp_date',
-                ),
-            ),
-        ),
-    ),
-    'moreLessInlineFields' => array(
-        'usefulness' => array(
+                ],
+            ],
+        ],
+    ],
+    'moreLessInlineFields' => [
+        'usefulness' => [
             'name' => 'usefulness',
             'type' => 'usefulness',
             'span' => 6,
             'cell_css_class' => 'pull-right usefulness',
             'readonly' => true,
-            'fields' => array(
+            'fields' => [
                 'usefulness_user_vote',
                 'useful',
                 'notuseful',
-            ),
-        ),
-    )
-);
+            ],
+        ],
+    ],
+];

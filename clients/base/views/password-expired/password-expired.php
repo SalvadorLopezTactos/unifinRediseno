@@ -11,36 +11,36 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['password-expired'] = array(
+$viewdefs['base']['view']['password-expired'] = [
     'action' => 'list',
-    'buttons' => array(
-        array(
+    'buttons' => [
+        [
             'name' => 'save_button',
             'type' => 'button',
             'label' => 'LBL_SAVE_BUTTON_LABEL',
             'value' => 'save',
             'css_class' => 'btn-primary save-profile',
-        ),
-    ),
-    'panels' => array(
-        array(
+        ],
+    ],
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'expired_password_update',
                     'type' => 'change-my-password',
                     'label' => 'LBL_CONTACT_EDIT_PASSWORD',
-                    'displayParams' => array(
+                    'displayParams' => [
                         'colspan' => 2,
-                    ),
-                ),
-            ),
-            array(
+                    ],
+                ],
+            ],
+            [
                 'name' => 'name_field',
                 'type' => 'text',
                 'css_class' => 'hp',
-                'placeholder' => "LBL_HONEYPOT",
-            ),
-        ),
-    ),
-);
+                'placeholder' => 'LBL_HONEYPOT',
+            ],
+        ],
+    ],
+];

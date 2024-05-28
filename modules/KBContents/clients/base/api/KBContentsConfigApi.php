@@ -24,22 +24,22 @@ class KBContentsConfigApi extends ConfigModuleApi
     {
         $api = parent::registerApiRest();
 
-        $api['kbcontentsConfigCreate'] = array(
+        $api['kbcontentsConfigCreate'] = [
             'reqType' => 'POST',
-            'path' => array('KBContents', 'config'),
-            'pathVars' => array('module', ''),
+            'path' => ['KBContents', 'config'],
+            'pathVars' => ['module', ''],
             'method' => 'configSave',
             'shortHelp' => 'Creates the config entries for the KBContents module.',
             'longHelp' => 'modules/KBContents/clients/base/api/help/kb_config_put_help.html',
-        );
-        $api['kbcontentsConfigUpdate'] = array(
+        ];
+        $api['kbcontentsConfigUpdate'] = [
             'reqType' => 'PUT',
-            'path' => array('KBContents', 'config'),
-            'pathVars' => array('module', ''),
+            'path' => ['KBContents', 'config'],
+            'pathVars' => ['module', ''],
             'method' => 'configSave',
             'shortHelp' => 'Updates the config entries for the KBContents module',
             'longHelp' => 'modules/KBContents/clients/base/api/help/kb_config_put_help.html',
-        );
+        ];
 
         return $api;
     }
@@ -57,7 +57,7 @@ class KBContentsConfigApi extends ConfigModuleApi
         /** @var Administration $admin */
         $admin = BeanFactory::newBean('Administration');
 
-        $deletedLanguages = array();
+        $deletedLanguages = [];
         if (isset($params['deleted_languages'])) {
             $deletedLanguages = $params['deleted_languages'];
             unset($params['deleted_languages']);
@@ -75,23 +75,23 @@ class KBContentsConfigApi extends ConfigModuleApi
                     unset($language['primary']);
                     $languageKey = key($language);
 
-                    if (in_array($languageKey, $deletedLanguages)) {
+                    if (safeInArray($languageKey, $deletedLanguages)) {
                         // Case when we removed and after add the same language back.
                         unset($deletedLanguages[array_search($languageKey, $deletedLanguages)]);
                         continue;
                     }
 
-                    if (!in_array($languageKey, $initialLanguageList)) {
+                    if (!safeInArray($languageKey, $initialLanguageList)) {
                         if (isset($config['languages'][$key])) {
                             $_tmp = $config['languages'][$key];
                             unset($_tmp['primary']);
                             $configLanguageKey = key($_tmp);
-                            if (!in_array($configLanguageKey, $deletedLanguages)) {
+                            if (!safeInArray($configLanguageKey, $deletedLanguages)) {
                                 // $configLanguageKey - initial key
                                 // $languageKey - updated key
                                 $this->updateDocuments(
-                                    array('language' => $languageKey),
-                                    array($configLanguageKey)
+                                    ['language' => $languageKey],
+                                    [$configLanguageKey]
                                 );
                             }
                         }
@@ -100,7 +100,7 @@ class KBContentsConfigApi extends ConfigModuleApi
                 // Process documents for deleted languages
                 if (!empty($deletedLanguages)) {
                     $this->updateDocuments(
-                        array('deleted' => 1),
+                        ['deleted' => 1],
                         $deletedLanguages
                     );
                 }
@@ -144,7 +144,7 @@ class KBContentsConfigApi extends ConfigModuleApi
      */
     private function _getLanguagesAbbreviations($list)
     {
-        $result = array();
+        $result = [];
         foreach ($list as $item) {
             unset($item['primary']);
             $key = key($item);

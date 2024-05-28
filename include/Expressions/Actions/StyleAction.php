@@ -10,30 +10,31 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class StyleAction extends AbstractAction{
+class StyleAction extends AbstractAction
+{
     /**
      * @var mixed[]|string[][]|string[]|mixed
      */
     public $attributes;
-    protected $expression = "";
-	
+    protected $expression = '';
+
     public function __construct($params)
     {
-		$this->targetField = $params['target'];
-		$this->attributes = array();
-        foreach($params['attrs'] as $prop => $val)
-        {
-            $this->attributes[$prop] = str_replace("\n", "", $val);
+        $this->targetField = $params['target'];
+        $this->attributes = [];
+        foreach ($params['attrs'] as $prop => $val) {
+            $this->attributes[$prop] = str_replace("\n", '', $val);
         }
-	}
-	
-	/**
-	 * Returns the javascript class equavalent to this php class
-	 *
-	 * @return string javascript.
-	 */
-	static function getJavascriptClass() {
-		return  "
+    }
+
+    /**
+     * Returns the javascript class equavalent to this php class
+     *
+     * @return string javascript.
+     */
+    public static function getJavascriptClass()
+    {
+        return "
 /**
  * A style dependency is an object representation of a style change.
  */
@@ -73,42 +74,43 @@ SUGAR.util.extend(SUGAR.forms.StyleAction, SUGAR.forms.AbstractAction, {
         } catch (e) {return;}
     }
 });";
-	}
+    }
 
-	/**
-	 * Returns the javascript code to generate this actions equivalent. 
-	 *
-	 * @return string javascript.
-	 */
-	function getJavascriptFire() {
-		return  "new SUGAR.forms.StyleAction('{$this->targetField}'," .json_encode($this->attributes) . ")";
-	}
-	
-	
-	
-	/**
-	 * Applies the Action to the target.
-	 *
-	 * @param SugarBean $target
-	 */
-	function fire(&$target) {
+    /**
+     * Returns the javascript code to generate this actions equivalent.
+     *
+     * @return string javascript.
+     */
+    public function getJavascriptFire()
+    {
+        return "new SUGAR.forms.StyleAction('{$this->targetField}'," . json_encode($this->attributes) . ')';
+    }
 
-	}
-	
-	/**
-	 * Returns the definition of this action in array format.
-	 *
-	 */
-	function getDefinition() {
-        return array(
-            "action" => static::getActionName(),
-            "target" => $this->targetField,
-            "attrs" => $this->attributes,
-        );
-	}
-	
-	static function getActionName() {
-		return "Style";
-	}
+
+    /**
+     * Applies the Action to the target.
+     *
+     * @param SugarBean $target
+     */
+    public function fire(&$target)
+    {
+    }
+
+    /**
+     * Returns the definition of this action in array format.
+     *
+     */
+    public function getDefinition()
+    {
+        return [
+            'action' => static::getActionName(),
+            'target' => $this->targetField,
+            'attrs' => $this->attributes,
+        ];
+    }
+
+    public static function getActionName()
+    {
+        return 'Style';
+    }
 }
-

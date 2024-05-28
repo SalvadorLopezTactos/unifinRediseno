@@ -59,7 +59,7 @@ class AverageRelatedExpression extends NumericExpression
             }
         }
 
-        return SugarMath::init($ret)->div(count($linkField))->result();
+        return SugarMath::init($ret)->div(safeCount($linkField))->result();
     }
 
     /**
@@ -133,7 +133,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return array('rollupAve', 'rollupAvg');
+        return ['rollupAve', 'rollupAvg'];
     }
 
     /**
@@ -141,7 +141,7 @@ JS;
      */
     public static function getParameterTypes()
     {
-        return array(AbstractExpression::$RELATE_TYPE, AbstractExpression::$STRING_TYPE);
+        return [AbstractExpression::$RELATE_TYPE, AbstractExpression::$STRING_TYPE];
     }
 
     /**

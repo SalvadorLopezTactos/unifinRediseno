@@ -44,6 +44,13 @@ $viewdefs['Dashboards']['base']['view']['selection-list'] = [
                     'enabled' => true,
                 ],
                 [
+                    'name' => 'is_template',
+                    'label' => 'LBL_TEMPLATE',
+                    'default' => true,
+                    'enabled' => true,
+                    'readonly' => true,
+                ],
+                [
                     'name' => 'assigned_user_name',
                     'label' => 'LBL_LIST_ASSIGNED_USER',
                     'id' => 'ASSIGNED_USER_ID',

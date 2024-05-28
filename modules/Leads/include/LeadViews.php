@@ -51,7 +51,7 @@ class LeadViews
      */
     protected function removeProductDashlets($convertDashboardMeta)
     {
-        $convertDashboardMeta['components'] = array_filter($convertDashboardMeta['components'], function($component) {
+        $convertDashboardMeta['components'] = array_filter($convertDashboardMeta['components'], function ($component) {
             return (empty($component['view']) || !in_array($component['view'], self::PRODUCT_DASHLETS));
         });
         return $convertDashboardMeta;
@@ -75,7 +75,7 @@ class LeadViews
         }
 
         // Add the dashlets that are missing
-        foreach($dashletsToAdd as $dashletView => $value) {
+        foreach ($dashletsToAdd as $dashletView => $value) {
             $convertDashboardMeta['components'][] = [
                 'view' => $dashletView
             ];

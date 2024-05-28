@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-    'LBL_SOURCE_ID'   => 'Externe bron-ID',
+$mod_strings = [
+    'LBL_SOURCE_ID' => 'Externe bron-ID',
     'LBL_SOURCE_TYPE' => 'Externe bron',
     'LBL_SOURCE_META' => 'Externe bron meta',
-);
+];

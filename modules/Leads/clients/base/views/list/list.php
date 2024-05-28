@@ -10,73 +10,73 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Leads']['base']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Leads']['base']['view']['list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array (
+            'fields' => [
+                [
                     'name' => 'name',
                     'type' => 'fullname',
-                    'fields' => array(
+                    'fields' => [
                         'salutation',
                         'first_name',
                         'last_name',
-                    ),
+                    ],
                     'link' => true,
                     'label' => 'LBL_LIST_NAME',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array (
+                ],
+                [
                     'name' => 'status',
                     'type' => 'status',
                     'label' => 'LBL_LIST_STATUS',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array (
+                ],
+                [
                     'name' => 'account_name',
                     'label' => 'LBL_LIST_ACCOUNT_NAME',
                     'enabled' => true,
                     'default' => true,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'account_id',
                         'converted',
-                    ),
-                ),
-                array (
-                    'name'  => 'phone_work',
+                    ],
+                ],
+                [
+                    'name' => 'phone_work',
                     'label' => 'LBL_LIST_PHONE',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array (
-                    'name'  => 'email',
+                ],
+                [
+                    'name' => 'email',
                     'label' => 'LBL_LIST_EMAIL_ADDRESS',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array (
-                    'name'  => 'assigned_user_name',
+                ],
+                [
+                    'name' => 'assigned_user_name',
                     'label' => 'LBL_LIST_ASSIGNED_USER',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_modified',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array (
-                    'name'  => 'date_entered',
+                ],
+                [
+                    'name' => 'date_entered',
                     'label' => 'LBL_DATE_ENTERED',
                     'enabled' => true,
                     'default' => true,
                     'readonly' => true,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

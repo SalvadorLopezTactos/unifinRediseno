@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = [
-    'LBL_GC_STATUS'=>'Статус геокодирования',
+    'LBL_GC_STATUS' => 'Статус геокодирования',
     'LBL_GC_LATITUDE' => 'Широта геокодирования',
     'LBL_GC_LONGITUDE' => 'Долгота геокодирования',
     'LBL_GC_STATUS_DETAIL' => 'Сведения о статусе геокодирования',

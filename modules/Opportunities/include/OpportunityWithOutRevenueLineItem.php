@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -25,8 +26,8 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
      *
      * @var array
      */
-    protected $field_vardef_setup = array(
-        'amount' => array(
+    protected $field_vardef_setup = [
+        'amount' => [
             'required' => true,
             'audited' => true,
             'calculated' => false,
@@ -35,36 +36,36 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
             'readonly' => false,
             'massupdate' => true,
             'importable' => 'required',
-        ),
+        ],
         'forecasted_likely' => [
             'formula' => 'ifElse(equal(indexOf($commit_stage, forecastIncludedCommitStages()), -1), 0, $amount)',
             'calculated' => true,
             'enforced' => true,
         ],
-        'best_case' => array(
+        'best_case' => [
             'calculated' => false,
             'enforced' => false,
             'formula' => '',
             'audited' => true,
             'readonly' => false,
             'massupdate' => true,
-        ),
-        'worst_case' => array(
+        ],
+        'worst_case' => [
             'calculated' => false,
             'enforced' => false,
             'formula' => '',
             'audited' => true,
             'readonly' => false,
             'massupdate' => true,
-        ),
-        'date_closed' => array(
+        ],
+        'date_closed' => [
             'audited' => true,
             'importable' => 'required',
             'required' => true,
             'massupdate' => true,
             'hidemassupdate' => false,
-        ),
-        'sales_stage' => array(
+        ],
+        'sales_stage' => [
             'calculated' => false,
             'enforced' => false,
             'formula' => '',
@@ -76,33 +77,33 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
             'workflow' => true,
             'importable' => 'required',
             'hidemassupdate' => false,
-        ),
-        'probability' => array(
+        ],
+        'probability' => [
             'audited' => true,
             'studio' => true,
             'massupdate' => true,
             'reportable' => true,
             'importable' => 'required',
-        ),
-        'sales_status' => array(
+        ],
+        'sales_status' => [
             'studio' => false,
             'reportable' => false,
             'audited' => true,
             'massupdate' => false,
             'importable' => false,
-        ),
-        'service_start_date' => array(
+        ],
+        'service_start_date' => [
             'studio' => false,
             'hidemassupdate' => false,
-        ),
-        'total_revenue_line_items' => array(
+        ],
+        'total_revenue_line_items' => [
             'reportable' => false,
-            'workflow' => false
-        ),
-        'closed_revenue_line_items' => array(
+            'workflow' => false,
+        ],
+        'closed_revenue_line_items' => [
             'reportable' => false,
-            'workflow' => false
-        ),
+            'workflow' => false,
+        ],
         'closed_won_revenue_line_items' => [
             'reportable' => false,
             'workflow' => false,
@@ -123,22 +124,22 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
             'workflow' => true,
             'studio' => true,
         ],
-    );
+    ];
 
     /**
      * Which reports should be shown and hidden.
      *
      * @var array
      */
-    protected $reportchange = array(
-        'show' => array('Current Quarter Forecast', 'Detailed Forecast'),
-        'hide' => array(),
-        'redefine' => array(
+    protected $reportchange = [
+        'show' => ['Current Quarter Forecast', 'Detailed Forecast'],
+        'hide' => [],
+        'redefine' => [
             'Opportunities Won By Lead Source' => '',
             'Pipeline By Type By Team' => '',
             'Pipeline By Team By User' => '',
-        )
-    );
+        ],
+    ];
 
     /**
      * Put any custom Convert Logic Here
@@ -152,7 +153,7 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
 
         // fix the record view first
         $this->fixRecordView(
-            array(
+            [
                 'forecasted_likely' => false,
                 'sales_status' => false,
                 'service_start_date' => false,
@@ -160,13 +161,13 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
                 'renewal' => false,
                 'renewal_parent_name' => false,
                 'service_duration' => false,
-                'commit_stage' => false,
-            )
+                'commit_stage' => $this->isForecastSetup(),
+            ]
         );
 
         // fix the various list views
         $this->fixListViews(
-            array(
+            [
                 'forecasted_likely' => false,
                 'service_start_date' => false,
                 'sales_status' => false,
@@ -174,24 +175,20 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
                 'renewal' => false,
                 'renewal_parent_name' => false,
                 'service_duration' => false,
-                'commit_stage' => false,
-            )
+                'commit_stage' => $this->isForecastSetup(),
+            ]
         );
 
         $this->fixFilter(
-            array(
+            [
                 'sales_stage' => true,
                 'sales_status' => false,
                 'service_start_date' => false,
                 'probability' => true,
                 'service_duration' => false,
                 'lost' => false,
-            )
+            ]
         );
-
-        if ($this->isForecastSetup()) {
-            $this->fixForecastFields(true);
-        }
     }
 
     /**
@@ -370,9 +367,9 @@ EOL;
         /* @var $rli RevenueLineItem */
         $rli = BeanFactory::newBean('RevenueLineItems');
 
-        $labels = array();
+        $labels = [];
 
-        $fields = array(
+        $fields = [
             'name',
             'sales_stage',
             'probability',
@@ -383,7 +380,7 @@ EOL;
             'best_case',
             'opportunity_id',
             'next_step',
-        );
+        ];
 
         // for now use the default config
         $default_lang = $GLOBALS['sugar_config']['default_language'];
@@ -414,19 +411,19 @@ EOL;
 
         $results = $sq->execute();
 
-        $chunk = array();
+        $chunk = [];
         $max_chunk_size = 10;
 
         $job_group = md5(microtime());
 
         foreach ($results as $row) {
             if (!isset($chunk[$row['opportunity_id']])) {
-                if (count($chunk) === $max_chunk_size) {
+                if (safeCount($chunk) === $max_chunk_size) {
                     // schedule job here
                     $this->scheduleOpportunityRevenueLineItemNoteCreate($labels, $chunk, $job_group);
-                    $chunk = array();
+                    $chunk = [];
                 }
-                $chunk[$row['opportunity_id']] = array();
+                $chunk[$row['opportunity_id']] = [];
             }
             // remove the fields added by the sorting in SugarQuery
             unset($row['revenue_line_items__opportunity_id']);
@@ -442,9 +439,9 @@ EOL;
     {
         /* @var $job SchedulersJob */
         $job = BeanFactory::newBean('SchedulersJobs');
-        $job->name = "Create Revenue Line Items Note On Opportunities";
-        $job->target = "class::SugarJobCreateRevenueLineItemNotes";
-        $job->data = json_encode(array('chunk' => $chunk, 'labels' => $labels));
+        $job->name = 'Create Revenue Line Items Note On Opportunities';
+        $job->target = 'class::SugarJobCreateRevenueLineItemNotes';
+        $job->data = json_encode(['chunk' => $chunk, 'labels' => $labels]);
         $job->retry_count = 0;
         $job->assigned_user_id = $GLOBALS['current_user']->id;
         $job->job_group = $job_group;
@@ -475,45 +472,45 @@ EOL;
         $def = $rli->getFieldDefinition('sales_stage');
 
         $db = DBManagerFactory::getInstance();
-        $list_value = array();
+        $list_value = [];
 
         // get the `options` param so we make sure if they customized it to use their custom version
         $sqlCase = '';
         $list = $def['options'];
         if (!empty($list) && isset($app_list_strings[$list])) {
             $i = 0;
-            $order_by_arr = array();
+            $order_by_arr = [];
             foreach ($app_list_strings[$list] as $key => $value) {
                 $list_value[$i] = $key;
                 if ($key == '') {
                     $order_by_arr[] = "WHEN (sales_stage='' OR sales_stage IS NULL) THEN " . $i++;
                 } else {
-                    $order_by_arr[] = "WHEN sales_stage=" . $db->quoted($key) . " THEN " . $i++;
+                    $order_by_arr[] = 'WHEN sales_stage=' . $db->quoted($key) . ' THEN ' . $i++;
                 }
             }
-            $sqlCase = "min(CASE " . implode("\n", $order_by_arr) . " ELSE $i END)";
+            $sqlCase = 'min(CASE ' . implode("\n", $order_by_arr) . " ELSE $i END)";
         }
 
         $fcsettings = Forecast::getSettings();
 
-        $stage_cases = array();
+        $stage_cases = [];
         $closed_stages = array_merge($fcsettings['sales_stage_won'], $fcsettings['sales_stage_lost']);
 
-        foreach($closed_stages as $stage) {
+        foreach ($closed_stages as $stage) {
             $stage_cases[] = $db->quoted($stage);
         }
 
         $stage_cases = implode(',', $stage_cases);
 
-        $lost_stages = array();
-        foreach($fcsettings['sales_stage_lost'] as $row) {
+        $lost_stages = [];
+        foreach ($fcsettings['sales_stage_lost'] as $row) {
             $lost_stages[] = $db->quoted($row);
         }
 
         $lost_stages = implode(',', $lost_stages);
 
         $sq = new SugarQuery();
-        $sq->select(array('opportunity_id'))
+        $sq->select(['opportunity_id'])
             ->fieldRaw('COUNT(opportunity_id)', 'rli_count')
             ->fieldRaw($sqlCase, 'sales_stage')
             ->fieldRaw($this->dateClosedMigration . '(CASE when sales_stage IN (' . $stage_cases . ') THEN date_closed END)', 'dc_closed')
@@ -525,7 +522,7 @@ EOL;
 
         $results = $sq->execute();
 
-        $opportunity_ids = array();
+        $opportunity_ids = [];
         foreach ($results as $result) {
             $opportunity_ids[] = $db->quoted($result['opportunity_id']);
         }
@@ -540,7 +537,7 @@ EOL;
         $closed_rli_sql = 'SELECT opportunity_id, COUNT(id) AS rli_count, SUM(best_case) AS best, SUM(likely_case) AS likely, SUM(worst_case) AS worst FROM revenue_line_items WHERE opportunity_id IN (' . $opportunity_ids . ') AND sales_stage IN (' . $lost_stages . ') GROUP BY opportunity_id';
         $closed_rli_result = $db->query($closed_rli_sql);
 
-        $closed_rlis = array();
+        $closed_rlis = [];
         while ($row = $db->fetchByAssoc($closed_rli_result)) {
             $closed_rlis[$row['opportunity_id']] = $row;
         }
@@ -602,7 +599,7 @@ EOL;
         $workFlow = BeanFactory::newBean('WorkFlow');
 
         $sq = new SugarQuery();
-        $sq->select(array('id'));
+        $sq->select(['id']);
         $sq->from($workFlow);
         $sq->where()
             ->equals('base_module', 'RevenueLineItems');
@@ -614,7 +611,6 @@ EOL;
         foreach ($rows as $row) {
             $workFlow->mark_deleted($row['id']);
         }
-
     }
 
     /**
@@ -628,12 +624,12 @@ EOL;
         $actionShells = BeanFactory::newBean('WorkFlowActionShells');
 
         $sq = new SugarQuery();
-        $sq->select(array('id', 'parent_id'));
+        $sq->select(['id', 'parent_id']);
         $sq->from($actionShells);
         $sq->where()
             ->queryOr()
-                ->equals('rel_module', 'revenuelineitems')
-                ->equals('action_module', 'revenuelineitems');
+            ->equals('rel_module', 'revenuelineitems')
+            ->equals('action_module', 'revenuelineitems');
 
         $rows = $sq->execute();
 
@@ -659,7 +655,7 @@ EOL;
         $triggerShells = BeanFactory::newBean('WorkFlowTriggerShells');
 
         $sq = new SugarQuery();
-        $sq->select(array('id', 'parent_id'));
+        $sq->select(['id', 'parent_id']);
         $sq->from($triggerShells);
         $sq->where()
             ->equals('rel_module', 'revenuelineitems');
@@ -691,7 +687,7 @@ EOL;
     {
         $projectBean = BeanFactory::newBean('pmse_Project');
         $q = new SugarQuery();
-        $q->select(array('id'));
+        $q->select(['id']);
         $q->from($projectBean);
         $q->where()->equals('prj_module', 'RevenueLineItems');
 
@@ -702,9 +698,9 @@ EOL;
 
         /* @var $job SchedulersJob */
         $job = BeanFactory::newBean('SchedulersJobs');
-        $job->name = "Mass Enable/Disable Process Definitions";
-        $job->target = "class::SugarJobUpdatePdStatus";
-        $job->data = json_encode(array('ids' => $ids, 'status' => 'INACTIVE'));
+        $job->name = 'Mass Enable/Disable Process Definitions';
+        $job->target = 'class::SugarJobUpdatePdStatus';
+        $job->data = json_encode(['ids' => $ids, 'status' => 'INACTIVE']);
 
         $jq = new SugarJobQueue();
         $jq->submitJob($job);
@@ -725,12 +721,12 @@ EOL;
     {
         // lets make sure the dir is there
         SugarAutoLoader::ensureDir($this->accModuleExtFolder . '/Vardefs');
-        
+
         $file_contents = <<<EOL
 <?php
 \$dictionary['Account']['fields']['next_renewal_date'] = null;
 EOL;
-        
+
         sugar_file_put_contents($this->accModuleExtFolder . '/Vardefs/' . $this->accModuleExtVardefFile, $file_contents);
     }
 

@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('tree-selectable', function (Y, NAME) {
 
 /*jshint expr:true, onevar:false */
@@ -293,4 +286,4 @@ NodeSelectable.prototype = {
 Y.Tree.Node.Selectable = NodeSelectable;
 
 
-}, '3.15.0', {"requires": ["tree"]});
+}, '3.18.1', {"requires": ["tree"]});

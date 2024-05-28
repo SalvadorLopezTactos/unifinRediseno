@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'Administration',
-    'Product' => '제품',
-    'User' => '사용자',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => '신규',
-    'Assigned' => '배정',
-    'Closed' => '완료',
-    'Pending Input' => '응답대기',
-    'Rejected' => '거부',
-    'Duplicate' => '복사하기',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => '높음',
-    'P2' => '보통',
-    'P3' => '낮음',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => '수락',
-    'Duplicate' => '복사하기',
-    'Closed' => '완료',
-    'Out of Date' => '기간만료',
-    'Invalid' => '무효',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => '관리',
+        'Product' => '제품',
+        'User' => '사용자',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => '신규',
+        'Assigned' => '할당됨',
+        'Closed' => '완료됨',
+        'Pending Input' => '입력대기',
+        'Rejected' => '거부됨',
+        'Duplicate' => '복사',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => '높음',
+        'P2' => '보통',
+        'P3' => '낮음',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => '수락됨',
+        'Duplicate' => '복사',
+        'Closed' => '완료됨',
+        'Out of Date' => '기간만료',
+        'Invalid' => '무효',
+    ],
+];

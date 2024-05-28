@@ -9,16 +9,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['CampaignLog']['base']['filter']['basic'] = array(
-    'create'               => false,
-    'quicksearch_field'    => array('campaign_name1'),
+$viewdefs['CampaignLog']['base']['filter']['basic'] = [
+    'create' => false,
+    'quicksearch_field' => ['campaign_name1'],
     'quicksearch_priority' => 1,
-    'filters'              => array(
-        array(
-            'id'                => 'all_records',
-            'name'              => 'LBL_LISTVIEW_FILTER_ALL',
-            'filter_definition' => array(),
-            'editable'          => false
-        ),
-    ),
-);
+    'filters' => [
+        [
+            'id' => 'all_records',
+            'name' => 'LBL_LISTVIEW_FILTER_ALL',
+            'filter_definition' => [],
+            'editable' => false,
+        ],
+    ],
+];

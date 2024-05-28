@@ -88,7 +88,7 @@ class ModuleFieldNameHandler extends AbstractHandler implements
      * check if ES version is 6.0+ and one index is enabled
      * @return bool
      */
-    protected function isOneIndexEnabledAndEsV6Above() : bool
+    protected function isOneIndexEnabledAndEsV6Above(): bool
     {
         return (IndexManager::isOneIndexEnabled() && IndexManager::isEsServerV6Above());
     }

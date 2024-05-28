@@ -11,21 +11,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['active-tasks'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['base']['view']['active-tasks'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_ACTIVE_TASKS_DASHLET',
             'description' => 'LBL_ACTIVE_TASKS_DASHLET_DESCRIPTION',
-            'config' => array(
+            'config' => [
                 'limit' => 10,
                 'visibility' => 'user',
-            ),
-            'preview' => array(
+            ],
+            'preview' => [
                 'limit' => 10,
                 'visibility' => 'user',
-            ),
-            'filter' => array(
-                'module' => array(
+            ],
+            'filter' => [
+                'module' => [
                     'Accounts',
                     'Bugs',
                     'Cases',
@@ -35,95 +35,95 @@ $viewdefs['base']['view']['active-tasks'] = array(
                     'Opportunities',
                     'Prospects',
                     'RevenueLineItems',
-                ),
+                ],
                 'view' => 'record',
-            ),
-        ),
-    ),
-    'custom_toolbar' => array(
-        'buttons' => array(
-            array(
+            ],
+        ],
+    ],
+    'custom_toolbar' => [
+        'buttons' => [
+            [
                 'type' => 'actiondropdown',
                 'no_default_action' => true,
                 'icon' => 'sicon-plus',
-                'buttons' => array(
-                    array(
+                'buttons' => [
+                    [
                         'type' => 'dashletaction',
                         'action' => 'createRecord',
-                        'params' => array(
+                        'params' => [
                             'module' => 'Tasks',
                             'link' => 'tasks',
-                        ),
+                        ],
                         'label' => 'LBL_CREATE_TASK',
                         'acl_action' => 'create',
                         'acl_module' => 'Tasks',
                         'name' => 'create_task',
-                    ),
-                ),
-            ),
-            array(
-                'dropdown_buttons' => array(
-                    array(
+                    ],
+                ],
+            ],
+            [
+                'dropdown_buttons' => [
+                    [
                         'type' => 'dashletaction',
                         'action' => 'editClicked',
                         'label' => 'LBL_DASHLET_CONFIG_EDIT_LABEL',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'action' => 'refreshClicked',
                         'label' => 'LBL_DASHLET_REFRESH_LABEL',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'action' => 'toggleClicked',
                         'label' => 'LBL_DASHLET_MINIMIZE',
                         'event' => 'minimize',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'action' => 'removeClicked',
                         'label' => 'LBL_DASHLET_REMOVE_LABEL',
-                    ),
-                ),
-            ),
-        ),
-    ),
-    'panels' => array(
-        array(
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_body',
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'visibility',
                     'label' => 'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY',
                     'type' => 'enum',
                     'options' => 'tasks_visibility_options',
-                ),
-                array(
+                ],
+                [
                     'name' => 'limit',
                     'label' => 'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS',
                     'type' => 'enum',
                     'options' => 'tasks_limit_options',
-                ),
-            ),
-        ),
-    ),
-    'tabs' => array(
-        array(
+                ],
+            ],
+        ],
+    ],
+    'tabs' => [
+        [
             'active' => true,
-            'filters' => array(
-                'status' => array('$not_in' => array('Completed', 'Deferred')),
-                'date_due' => array('$lte' => 'today'),
-            ),
+            'filters' => [
+                'status' => ['$not_in' => ['Completed', 'Deferred', 'Not Applicable']],
+                'date_due' => ['$lte' => 'today'],
+            ],
             'label' => 'LBL_ACTIVE_TASKS_DASHLET_DUE_NOW',
             'link' => 'tasks',
             'module' => 'Tasks',
             'order_by' => 'date_due:asc',
             'record_date' => 'date_due',
-            'row_actions' => array(
-                array(
+            'row_actions' => [
+                [
                     'type' => 'rowaction',
                     'icon' => 'sicon-remove',
                     'css_class' => 'btn btn-mini',
@@ -131,8 +131,8 @@ $viewdefs['base']['view']['active-tasks'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_ACTIVE_TASKS_DASHLET_COMPLETE_TASK',
                     'acl_action' => 'edit',
-                ),
-                array(
+                ],
+                [
                     'type' => 'unlink-action',
                     'icon' => 'sicon-unlink',
                     'css_class' => 'btn btn-mini',
@@ -140,32 +140,32 @@ $viewdefs['base']['view']['active-tasks'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_UNLINK_BUTTON',
                     'acl_action' => 'edit',
-                ),
-            ),
-            'overdue_badge' => array(
+                ],
+            ],
+            'overdue_badge' => [
                 'name' => 'date_due',
                 'type' => 'overdue-badge',
                 'css_class' => 'pull-right',
-            ),
-            'fields' => array(
+            ],
+            'fields' => [
                 'name',
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_due',
-            ),
-        ),
-        array(
-            'filters' => array(
-                'status' => array('$not_in' => array('Completed', 'Deferred')),
-                'date_due' => array('$gt' => 'today'),
-            ),
+            ],
+        ],
+        [
+            'filters' => [
+                'status' => ['$not_in' => ['Completed', 'Deferred', 'Not Applicable']],
+                'date_due' => ['$gt' => 'today'],
+            ],
             'label' => 'LBL_ACTIVE_TASKS_DASHLET_UPCOMING',
             'link' => 'tasks',
             'module' => 'Tasks',
             'order_by' => 'date_due:asc',
             'record_date' => 'date_due',
-            'row_actions' => array(
-                array(
+            'row_actions' => [
+                [
                     'type' => 'rowaction',
                     'icon' => 'sicon-remove',
                     'css_class' => 'btn btn-mini',
@@ -173,8 +173,8 @@ $viewdefs['base']['view']['active-tasks'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_ACTIVE_TASKS_DASHLET_COMPLETE_TASK',
                     'acl_action' => 'edit',
-                ),
-                array(
+                ],
+                [
                     'type' => 'unlink-action',
                     'icon' => 'sicon-unlink',
                     'css_class' => 'btn btn-mini',
@@ -182,26 +182,26 @@ $viewdefs['base']['view']['active-tasks'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_UNLINK_BUTTON',
                     'acl_action' => 'edit',
-                ),
-            ),
-            'fields' => array(
+                ],
+            ],
+            'fields' => [
                 'name',
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_due',
-            ),
-        ),
-        array(
-            'filters' => array(
-                'status' => array('$not_in' => array('Completed', 'Deferred')),
-                'date_due' => array('$is_null' => ''),
-            ),
+            ],
+        ],
+        [
+            'filters' => [
+                'status' => ['$not_in' => ['Completed', 'Deferred', 'Not Applicable']],
+                'date_due' => ['$is_null' => ''],
+            ],
             'label' => 'LBL_ACTIVE_TASKS_DASHLET_TODO',
             'link' => 'tasks',
             'module' => 'Tasks',
             'order_by' => 'date_entered:asc',
-            'row_actions' => array(
-                array(
+            'row_actions' => [
+                [
                     'type' => 'rowaction',
                     'icon' => 'sicon-remove',
                     'css_class' => 'btn btn-mini',
@@ -209,8 +209,8 @@ $viewdefs['base']['view']['active-tasks'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_ACTIVE_TASKS_DASHLET_COMPLETE_TASK',
                     'acl_action' => 'edit',
-                ),
-                array(
+                ],
+                [
                     'type' => 'unlink-action',
                     'icon' => 'sicon-unlink',
                     'css_class' => 'btn btn-mini',
@@ -218,18 +218,18 @@ $viewdefs['base']['view']['active-tasks'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_UNLINK_BUTTON',
                     'acl_action' => 'edit',
-                ),
-            ),
-            'fields' => array(
+                ],
+            ],
+            'fields' => [
                 'name',
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_entered',
-            ),
-        ),
-    ),
-    'visibility_labels' => array(
+            ],
+        ],
+    ],
+    'visibility_labels' => [
         'user' => 'LBL_ACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL',
         'group' => 'LBL_ACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL',
-    ),
-);
+    ],
+];

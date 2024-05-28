@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Reports\Types;
 
 use Sugarcrm\Sugarcrm\Reports\Traits\SummaryDetailsHelper;
@@ -18,6 +19,7 @@ use Sugarcrm\Sugarcrm\Reports\Constants\ReportType;
 class SummaryDetails extends Reporter
 {
     use SummaryDetailsHelper;
+
     /**
      * {@inheritDoc}
      */
@@ -29,7 +31,7 @@ class SummaryDetails extends Reporter
             && !empty($report->report_def['display_columns']);
 
         $noGroupDefs = (array_key_exists('group_defs', $report->report_def)
-            && empty($report->report_def['group_defs'])) || !array_key_exists('group_defs', $report->report_def);
+                && empty($report->report_def['group_defs'])) || !array_key_exists('group_defs', $report->report_def);
 
         // strange issue with some reports having the report type different in def than in bean
         if ($report->show_columns && $hasDisplayColumn && $noGroupDefs) {
@@ -55,11 +57,13 @@ class SummaryDetails extends Reporter
         $arguments = $this->getData();
 
         $reportDef = $report->report_def;
-        $groupDefs = (array) $reportDef['group_defs'];
+        $groupDefs = (array)$reportDef['group_defs'];
         $header = [];
 
-        $summaryColumns = (array) $report->report_def['summary_columns'];
-        $displayColumns = (array) $report->report_def['display_columns'];
+        $report->embeddedData = array_key_exists('embeddedData', $arguments) ? $arguments['embeddedData'] : false;
+
+        $summaryColumns = (array)$report->report_def['summary_columns'];
+        $displayColumns = (array)$report->report_def['display_columns'];
         $fieldsDef = [];
 
         foreach ($displayColumns as $displayColumn) {
@@ -82,7 +86,7 @@ class SummaryDetails extends Reporter
 
         $groupByIndexInHeaderRow = [];
 
-        for ($i = 0; $i < count($groupDefs); $i++) {
+        for ($i = 0; $i < safeCount($groupDefs); $i++) {
             $groupByColumnInfo = $this->getGroupByInfo($groupDefs[$i], $summaryColumns);
             $groupByIndexInHeaderRow[$this->getGroupByKey($groupDefs[$i])] = $groupByColumnInfo;
         }
@@ -92,7 +96,7 @@ class SummaryDetails extends Reporter
 
         $allData = [];
         $groupNr = 0;
-        $groupDefsCount = count($groupDefs);
+        $groupDefsCount = safeCount($groupDefs);
 
         while (($row = $this->getSummaryNextRow($report)) !== 0) {
             $this->generateSummaryDetailRowData($allData, $groupNr, $row, 0, $groupDefsCount, $report, $headerRow);
@@ -120,7 +124,7 @@ class SummaryDetails extends Reporter
         $header['queries'] = $report->query_list;
 
         if (array_key_exists('summaryDetailsCount', $arguments)) {
-            $header['countRecords'] =  $this->generateCount($allData);
+            $header['countRecords'] = $this->generateCount($allData);
         }
 
         $header['reportType'] = ReportType::SUMMARYDETAILS;

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kalendarz',
     'LBL_MODULE_NAME_SINGULAR' => 'Kalendarz',
     'LBL_MODULE_TITLE' => 'Kalendarz',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Ustawienia',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Wyświetl przedziały czasu w widoku dnia oraz tygodnia:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Czas rozpoczęcia:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Czas zakończenia:',
+    'LBL_SETTINGS_TIME_STARTS' => 'Czas rozpoczęcia:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Czas zakończenia:',
     'LBL_SETTINGS_CALLS_SHOW' => 'Wyświetl rozmowy telefoniczne:',
     'LBL_SETTINGS_TASKS_SHOW' => 'Pokaż zadania:',
 
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Utwórz kalendarz',
     'LNK_CALENDAR_LIST' => 'Wyświetl kalendarze',
     'LNK_CALENDAR_LEGACY' => 'Starsze kalendarze',
-    'LBL_IMPORT_CALENDAR'=> 'Importuj kalendarz',
+    'LBL_IMPORT_CALENDAR' => 'Importuj kalendarz',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Edytuj znacznik czasu',
     'LBL_INSERTFIELD' => 'Wstaw pole',
     'LBL_EVENT_START_ERROR' => 'Wybierz początek',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Wybierz kalendarz',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Nie udało się zapisanie kalendarzy.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Nie',
             'Pon',
             'Wt',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Czw',
             'Pt',
             'Sob',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Niedziela',
             'Poniedziałek',
             'Wtorek',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Czwartek',
             'Piątek',
             'Sobota',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Sty',
             'Lut',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Paź',
             'Lis',
             'Gru',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Styczeń',
             'Luty',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Październik',
             'Listopad',
             'Grudzień',
-        ),
-);
+        ],
+];

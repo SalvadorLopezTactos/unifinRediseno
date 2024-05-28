@@ -182,6 +182,23 @@ $dictionary['DocuSignEnvelope'] = [
             'len' => '36',
             'size' => '20',
         ],
+        'driveId' => [
+            'name' => 'driveId',
+            'vname' => 'LBL_CLOUD_DRIVE_ID',
+            'type' => 'varchar',
+            'required' => false,
+            'massupdate' => false,
+            'importable' => true,
+            'default' => '',
+            'no_default' => false,
+            'comments' => 'The driveId where the file should be saved  on sharepoint',
+            'importable' => true,
+            'duplicate_merge' => 'disabled',
+            'duplicate_merge_dom_value' => '0',
+            'reportable' => true,
+            'len' => '400',
+            'size' => '20',
+        ],
         'cloud_path' => [
             'name' => 'cloud_path',
             'vname' => 'LBL_CLOUD_PATH',
@@ -203,7 +220,7 @@ $dictionary['DocuSignEnvelope'] = [
     'indices' => [
         [
             'name' => 'idx_envelope_id',
-            'type' =>'index',
+            'type' => 'index',
             'fields' => [
                 'envelope_id',
             ],
@@ -229,5 +246,6 @@ VardefManager::createVardef(
         'team_security',
         'assignable',
         'taggable',
+        'audit',
     ]
 );

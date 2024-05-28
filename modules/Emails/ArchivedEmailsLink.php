@@ -50,16 +50,16 @@ class ArchivedEmailsLink extends Link2
      * Get all beans from link
      * @see Link2::query()
      */
-    public function query($params = array())
+    public function query($params = [])
     {
         unset($params['return_as_array']);
         $query = $this->getQuery($params);
         $result = $this->db->query($query);
-        $rows = array();
+        $rows = [];
         while ($row = $this->db->fetchByAssoc($result, false)) {
             $rows[$row['id']] = $row;
         }
-        return array("rows" => $rows);
+        return ['rows' => $rows];
     }
 
     /**
@@ -84,7 +84,7 @@ class ArchivedEmailsLink extends Link2
      */
     public function getType()
     {
-        return "many";
+        return 'many';
     }
 
     /**
@@ -117,9 +117,9 @@ class ArchivedEmailsLink extends Link2
      *
      * @see Link2::buildJoinSugarQuery()
      */
-    public function buildJoinSugarQuery($sugar_query, $options = array())
+    public function buildJoinSugarQuery($sugar_query, $options = [])
     {
-        $joinParams = array('joinType' => $options['joinType'] ?? 'INNER');
+        $joinParams = ['joinType' => $options['joinType'] ?? 'INNER'];
         $jta = 'emails';
         if (!empty($options['joinTableAlias'])) {
             $jta = $joinParams['alias'] = $options['joinTableAlias'];
@@ -152,7 +152,7 @@ class ArchivedEmailsLink extends Link2
      *            select, join, where, type, rel_key, and joined_tables
      * @return string/array join query for this link
      */
-    public function getJoin($params = array(), $return_as_array = false)
+    public function getJoin($params = [], $return_as_array = false)
     {
         $return_array = [];
         $return_array['join'] = $this->getEmailsJoin($params);
@@ -161,7 +161,7 @@ class ArchivedEmailsLink extends Link2
 
         if (isset($params['join_table_alias'])) {
             $return_array['join'] = "$join_type emails {$params['join_table_alias']} ON {$params['join_table_alias']}.deleted=0 " .
-                 $return_array['join'];
+                $return_array['join'];
         } else {
             $return_array['join'] = "$join_type emails ON emails.deleted=0 " . $return_array['join'];
         }
@@ -212,9 +212,9 @@ class ArchivedEmailsLink extends Link2
 )
 SQL;
 
-        $join = $query->joinTable($table, array(
+        $join = $query->joinTable($table, [
             'alias' => $alias,
-        ));
+        ]);
         $join->on()->equalsField($alias . '.email_id', $fromAlias . '.id');
 
         return $join;
@@ -225,7 +225,7 @@ SQL;
      * @param string $params
      * @return string JOIN clause
      */
-    protected function getEmailsJoin($params = array())
+    protected function getEmailsJoin($params = [])
     {
         $bean_id = $this->db->quoted($this->focus->id);
         if (!empty($params['join_table_alias'])) {
@@ -234,16 +234,16 @@ SQL;
             $table_name = 'emails';
         }
 
-        return "INNER JOIN (\n".
-                // directly assigned emails
+        return "INNER JOIN (\n" .
+            // directly assigned emails
             "select eb.email_id FROM emails_beans eb where eb.bean_module = '{$this->focus->module_dir}'
                 AND eb.bean_id = $bean_id AND eb.deleted=0\n" .
-  " UNION ".
-        // Related by directly by email
+            ' UNION ' .
+            // Related by directly by email
             "select DISTINCT eear.email_id  from emails_email_addr_rel eear INNER JOIN email_addr_bean_rel eabr
             ON eabr.bean_id = $bean_id AND eabr.bean_module = '{$this->focus->module_dir}' AND
             eabr.email_address_id = eear.email_address_id and eabr.deleted=0 where eear.deleted=0\n" .
-             ") email_ids ON $table_name.id=email_ids.email_id ";
+            ") email_ids ON $table_name.id=email_ids.email_id ";
     }
 
     /**
@@ -255,11 +255,11 @@ SQL;
      *
      * @deprecated Use ArchivedEmailsLink::query() instead
      */
-    public function getQuery($params = array())
+    public function getQuery($params = [])
     {
         $query_array = [];
-        $query_array['select'] = "SELECT DISTINCT emails.* ";
-        $query_array['from'] = "FROM emails ";
+        $query_array['select'] = 'SELECT DISTINCT emails.* ';
+        $query_array['from'] = 'FROM emails ';
         $query_array['join'] = $this->getEmailsJoin();
 
         $deleted = !empty($params['deleted']) ? 1 : 0;
@@ -281,13 +281,13 @@ SQL;
         }
 
         $query = $query_array['select'] . $query_array['from'] . $query_array['join'] .
-             $query_array['where'];
+            $query_array['where'];
         if (!empty($params['orderby'])) {
             $query .= "ORDER BY {$params['orderby']}";
         }
         if (!empty($params['limit']) && $params['limit'] > 0) {
             $offset = $params['offset'] ?? 0;
-            $query = $this->db->limitQuery($query, $offset, $params['limit'], false, "", false);
+            $query = $this->db->limitQuery($query, $offset, $params['limit'], false, '', false);
         }
         return $query;
     }
@@ -304,12 +304,12 @@ SQL;
      *            same as passing 'return_as_array' into parameters
      * @return string/array query to use when joining for subpanels
      */
-    public function getSubpanelQuery($params = array(), $return_array = false)
+    public function getSubpanelQuery($params = [], $return_array = false)
     {
         $query_array = [];
         $query_array['join'] = $this->getEmailsJoin($params);
-        $query_array['select'] = "";
-        $query_array['from'] = "";
+        $query_array['select'] = '';
+        $query_array['from'] = '';
         $query_array['join_tables'] = 'email_ids';
 
         if (!empty($params['return_as_array'])) {
@@ -328,13 +328,13 @@ SQL;
      */
     public function getRelationshipFieldMapping(SugarBean $seed = null)
     {
-        return array();
+        return [];
     }
 
     /**
      * use this function to create link between 2 objects
      */
-    public function add($rel_keys, $additional_values = array())
+    public function add($rel_keys, $additional_values = [])
     {
         // cannot add to this relationship as it is implicit
         return false;

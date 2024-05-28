@@ -11,4 +11,4 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['pmse_Inbox']['base']['layout']['show-case'] = array();
+$viewdefs['pmse_Inbox']['base']['layout']['show-case'] = [];

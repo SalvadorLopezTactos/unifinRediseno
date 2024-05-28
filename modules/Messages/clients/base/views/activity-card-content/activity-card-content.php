@@ -29,7 +29,10 @@ $viewdefs['Messages']['base']['view']['activity-card-content'] = [
         [
             'name' => 'panel_status',
             'css_class' => 'panel-status',
-            'fields' => [],
+            'fields' => [
+                'date_start',
+                'date_end',
+            ],
         ],
         [
             'name' => 'panel_conversation',

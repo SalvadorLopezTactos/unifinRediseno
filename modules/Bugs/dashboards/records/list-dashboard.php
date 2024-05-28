@@ -10,29 +10,29 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 return [
-    'metadata' => array(
-        'components' => array(
-            array(
-                'rows' => array(
-                    array(
-                        array(
-                            'view' => array(
+    'metadata' => [
+        'components' => [
+            [
+                'rows' => [
+                    [
+                        [
+                            'view' => [
                                 'type' => 'twitter',
                                 'label' => 'LBL_TWITTER_NAME',
                                 'twitter' => 'sugarcrm',
                                 'limit' => '5',
-                            ),
-                            'context' => array(
+                            ],
+                            'context' => [
                                 'module' => 'Home',
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
                 'width' => 12,
-            ),
-        ),
-    ),
+            ],
+        ],
+    ],
     'name' => 'LBL_BUGS_LIST_DASHBOARD',
     'id' => '5d673e80-7b52-11e9-833f-f218983a1c3e',
 ];

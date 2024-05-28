@@ -1,5 +1,8 @@
 <?php
- if(!defined('sugarEntry'))define('sugarEntry', true);
+
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,8 +14,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('service/core/SugarWebService.php');
-require_once('service/core/SugarWebServiceImpl.php');
+require_once 'service/core/SugarWebService.php';
+require_once 'service/core/SugarWebServiceImpl.php';
 
 /**
  * This is an abstract class for the soap implementation for using SOAP. This class is responsible for making
@@ -21,21 +24,21 @@ require_once('service/core/SugarWebServiceImpl.php');
  */
 abstract class SugarSoapService extends SugarWebService
 {
+    use SoapLogTrait;
     /**
      * @var mixed|bool
      */
     public $in_service;
-    use SoapLogTrait;
 
     /**
      * @var SoapFault
      */
     public $fault;
     protected $soap_version = SOAP_1_1;
-	protected $namespace = 'http://www.sugarcrm.com/sugarcrm';
-	protected $implementationClass = 'SugarWebServiceImpl';
-	protected $registryClass = "";
-	protected $soapURL = "";
+    protected $namespace = 'http://www.sugarcrm.com/sugarcrm';
+    protected $implementationClass = 'SugarWebServiceImpl';
+    protected $registryClass = '';
+    protected $soapURL = '';
 
     /**
      * This is the constructor. It creates an instance of SOAP server.
@@ -49,83 +52,90 @@ abstract class SugarSoapService extends SugarWebService
         $this->getLogger()->info('Begin: SugarSoapService->__construct');
         $this->setObservers();
         $this->soapURL = $url;
-        $options = array(
+        $options = [
             'soap_version' => SOAP_1_1,
             'uri' => $url,
-        );
+        ];
         $this->server = new \SoapServer($wsdl, $options);
         $this->server->setClass($this->getRegisteredImplClass());
         $this->getLogger()->info('End: SugarSoapService->__construct');
-	}
-	
-	/**
-	 * This method sets the soap server object on all the observers
-	 * @access public
-	 */
-	public function setObservers() {
-		global $observers;
-		if(!empty($observers)){
-			foreach($observers as $observer) {
-	   			if(method_exists($observer, 'set_soap_server')) {
-	   	 			 $observer->set_soap_server($this->server);
-	   			}
-			}
-		}
-	} // fn
-	
-	/**
-	 * This method returns the soapURL
-	 *
-	 * @return String - soapURL
-	 * @access public
-	 */
-	public function getSoapURL(){
-		return $this->soapURL;
-	}
-		
-	public function getSoapVersion(){
-		return $this->soap_version;
-	}
-	
-	/**
-	 * This method returns the namespace
-	 *
-	 * @return String - namespace
-	 * @access public
-	 */
-	public function getNameSpace(){
-		return $this->namespace;
-	}
-	
-	/**
-	 * This mehtod returns registered implementation class
-	 *
-	 * @return String - implementationClass
-	 * @access public
-	 */
-	public function getRegisteredImplClass() {
-		return $this->implementationClass;	
-	}
+    }
 
-	/**
-	 * This mehtod returns registry class
-	 *
-	 * @return String - registryClass
-	 * @access public
-	 */
-	public function getRegisteredClass() {
-		return $this->registryClass;	
-	}
-	
-	/**
-	 * This mehtod returns server
-	 *
-	 * @return String -server
-	 * @access public
-	 */
-	public function getServer() {
-		return $this->server;	
-	} // fn
+    /**
+     * This method sets the soap server object on all the observers
+     * @access public
+     */
+    public function setObservers()
+    {
+        global $observers;
+        if (!empty($observers)) {
+            foreach ($observers as $observer) {
+                if (method_exists($observer, 'set_soap_server')) {
+                    $observer->set_soap_server($this->server);
+                }
+            }
+        }
+    } // fn
+
+    /**
+     * This method returns the soapURL
+     *
+     * @return String - soapURL
+     * @access public
+     */
+    public function getSoapURL()
+    {
+        return $this->soapURL;
+    }
+
+    public function getSoapVersion()
+    {
+        return $this->soap_version;
+    }
+
+    /**
+     * This method returns the namespace
+     *
+     * @return String - namespace
+     * @access public
+     */
+    public function getNameSpace()
+    {
+        return $this->namespace;
+    }
+
+    /**
+     * This mehtod returns registered implementation class
+     *
+     * @return String - implementationClass
+     * @access public
+     */
+    public function getRegisteredImplClass()
+    {
+        return $this->implementationClass;
+    }
+
+    /**
+     * This mehtod returns registry class
+     *
+     * @return String - registryClass
+     * @access public
+     */
+    public function getRegisteredClass()
+    {
+        return $this->registryClass;
+    }
+
+    /**
+     * This mehtod returns server
+     *
+     * @return String -server
+     * @access public
+     */
+    public function getServer()
+    {
+        return $this->server;
+    } // fn
 
     /**
      * Fallback function to catch unexpected failure in SOAP
@@ -136,7 +146,7 @@ abstract class SugarSoapService extends SugarWebService
             $out = ob_get_contents();
             ob_end_clean();
             $this->getLogger()->fatal('SugarSoapService->shutdown: service died unexpectedly');
-            $this->server->fault('-1', "Unknown error in SOAP call: service died unexpectedly", '', $out);
+            $this->server->fault('-1', 'Unknown error in SOAP call: service died unexpectedly', '', $out);
         }
     }
 
@@ -149,7 +159,7 @@ abstract class SugarSoapService extends SugarWebService
         $this->getLogger()->info('Begin: SugarSoapService->serve');
         ob_clean();
         $this->in_service = true;
-        register_shutdown_function(array($this, "shutdown"));
+        register_shutdown_function([$this, 'shutdown']);
         ob_start();
         $this->server->handle();
         $this->in_service = false;

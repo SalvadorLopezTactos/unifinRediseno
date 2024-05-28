@@ -497,20 +497,25 @@
         this.model.trigger('change');
     },
     addItem: _.debounce(function (evt) {
-        var index = $(evt.currentTarget).data('index');
+        let target = $(evt.target);
+        let index = target.closest('button').data('index');
+
         //Only allow adding a Team when ones been selected (SP-534)
         if (!index || this.value[index].id) {
             this.addTeam();
         }
     }, 0),
     removeItem: _.debounce(function (evt) {
-        var index = $(evt.currentTarget).data('index');
+        let target = $(evt.target);
+        let index = target.closest('button').data('index');
+
         if (_.isNumber(index)) {
             this.removeTeam(index);
         }
     }, 0),
     setPrimaryItem: _.debounce(function (evt) {
-        var index = $(evt.currentTarget).data('index');
+        let target = $(evt.target);
+        let index = target.closest('button').data('index');
 
         //Don't allow setting to primary until user's selected an actual team (SP-530)
         if (!this.value[index] || !this.value[index].id) {

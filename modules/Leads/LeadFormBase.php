@@ -10,68 +10,68 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class LeadFormBase extends PersonFormBase {
-
-var $moduleName = 'Leads';
-var $objectName = 'Lead';
-
-/**
- * getDuplicateQuery
- *
- * This function returns the SQL String used for initial duplicate Leads check
- *
- * @see checkForDuplicates (method), ContactFormBase.php, LeadFormBase.php, ProspectFormBase.php
- * @param $focus sugarbean
- * @param $prefix String value of prefix that may be present in $_POST variables
- * @return SQL String of the query that should be used for the initial duplicate lookup check
- */
-public function getDuplicateQuery($focus, $prefix='')
+class LeadFormBase extends PersonFormBase
 {
-	$query = "SELECT leads.id, leads.first_name, leads.last_name, leads.account_name, leads.title FROM leads ";
+    public $moduleName = 'Leads';
+    public $objectName = 'Lead';
 
-    // Bug #46427 : Records from other Teams shown on Potential Duplicate Contacts screen during Lead Conversion
-    // add team security
-    if( !empty($focus) && !$focus->disable_row_level_security )
+    /**
+     * getDuplicateQuery
+     *
+     * This function returns the SQL String used for initial duplicate Leads check
+     *
+     * @param $focus sugarbean
+     * @param $prefix String value of prefix that may be present in $_POST variables
+     * @return SQL String of the query that should be used for the initial duplicate lookup check
+     * @see checkForDuplicates (method), ContactFormBase.php, LeadFormBase.php, ProspectFormBase.php
+     */
+    public function getDuplicateQuery($focus, $prefix = '')
     {
-        $focus->add_team_security_where_clause($query);
-    }
+        $query = 'SELECT leads.id, leads.first_name, leads.last_name, leads.account_name, leads.title FROM leads ';
 
-    $query .= " WHERE leads.deleted != 1 AND (leads.status <> 'Converted' OR leads.status IS NULL) AND ";
+        // Bug #46427 : Records from other Teams shown on Potential Duplicate Contacts screen during Lead Conversion
+        // add team security
+        if (!empty($focus) && !$focus->disable_row_level_security) {
+            $focus->add_team_security_where_clause($query);
+        }
+
+        $query .= " WHERE leads.deleted != 1 AND (leads.status <> 'Converted' OR leads.status IS NULL) AND ";
 
         $db = DBManagerFactory::getInstance();
-    //Use the first and last name from the $_POST to filter.  If only last name supplied use that
-	if(isset($_POST[$prefix.'first_name']) && strlen($_POST[$prefix.'first_name']) != 0 && isset($_POST[$prefix.'last_name']) && strlen($_POST[$prefix.'last_name']) != 0) {
-            $query .= " (leads.first_name = " . $db->quoted($_POST[$prefix.'first_name']) .
-            " AND leads.last_name = " . $db->quoted($_POST[$prefix.'last_name']) . ")";
-	} else {
-            $query .= " leads.last_name = " . $db->quoted($_POST[$prefix.'last_name']);
-	}
-    return $query;
-}
+        //Use the first and last name from the $_POST to filter.  If only last name supplied use that
+        if (isset($_POST[$prefix . 'first_name']) && strlen($_POST[$prefix . 'first_name']) != 0 && isset($_POST[$prefix . 'last_name']) && strlen($_POST[$prefix . 'last_name']) != 0) {
+            $query .= ' (leads.first_name = ' . $db->quoted($_POST[$prefix . 'first_name']) .
+                ' AND leads.last_name = ' . $db->quoted($_POST[$prefix . 'last_name']) . ')';
+        } else {
+            $query .= ' leads.last_name = ' . $db->quoted($_POST[$prefix . 'last_name']);
+        }
+        return $query;
+    }
 
 
-function getWideFormBody($prefix, $mod='', $formname=''){
-if(!ACLController::checkAccess('Leads', 'edit', true)){
-		return '';
-	}
-global $mod_strings;
-$temp_strings = $mod_strings;
-if(!empty($mod)){
-	global $current_language;
-	$mod_strings = return_module_language($current_language, $mod);
-}
-		global $app_strings;
-		global $current_user;
-		global $app_list_strings;
-		$primary_address_country_options = get_select_options_with_id($app_list_strings['countries_dom'], '');
-		$lbl_required_symbol = $app_strings['LBL_REQUIRED_SYMBOL'];
-		$lbl_first_name = $mod_strings['LBL_FIRST_NAME'];
-		$lbl_last_name = $mod_strings['LBL_LAST_NAME'];
-		$lbl_phone = $mod_strings['LBL_OFFICE_PHONE'];
-		$lbl_address =  $mod_strings['LBL_PRIMARY_ADDRESS'];
-		$user_id = $current_user->id;
-		$lbl_email_address = $mod_strings['LBL_EMAIL_ADDRESS'];
-		$form = <<<EOQ
+    public function getWideFormBody($prefix, $mod = '', $formname = '')
+    {
+        if (!ACLController::checkAccess('Leads', 'edit', true)) {
+            return '';
+        }
+        global $mod_strings;
+        $temp_strings = $mod_strings;
+        if (!empty($mod)) {
+            global $current_language;
+            $mod_strings = return_module_language($current_language, $mod);
+        }
+        global $app_strings;
+        global $current_user;
+        global $app_list_strings;
+        $primary_address_country_options = get_select_options_with_id($app_list_strings['countries_dom'], '');
+        $lbl_required_symbol = $app_strings['LBL_REQUIRED_SYMBOL'];
+        $lbl_first_name = $mod_strings['LBL_FIRST_NAME'];
+        $lbl_last_name = $mod_strings['LBL_LAST_NAME'];
+        $lbl_phone = $mod_strings['LBL_OFFICE_PHONE'];
+        $lbl_address = $mod_strings['LBL_PRIMARY_ADDRESS'];
+        $user_id = $current_user->id;
+        $lbl_email_address = $mod_strings['LBL_EMAIL_ADDRESS'];
+        $form = <<<EOQ
 		<input type="hidden" name="{$prefix}record" value="">
 		<input type="hidden" name="{$prefix}status" value="New">
 		<input type="hidden" name="{$prefix}assigned_user_id" value='{$user_id}'>
@@ -90,36 +90,37 @@ if(!empty($mod)){
 EOQ;
 
 
-$javascript = new javascript();
-$javascript->setFormName($formname);
-$javascript->setSugarBean(BeanFactory::newBean('Leads'));
-$javascript->addField('email1','false',$prefix);
-$javascript->addField('email2','false',$prefix);
-$javascript->addRequiredFields($prefix);
-$form .=$javascript->getScript();
-$mod_strings = $temp_strings;
-return $form;
-}
+        $javascript = new javascript();
+        $javascript->setFormName($formname);
+        $javascript->setSugarBean(BeanFactory::newBean('Leads'));
+        $javascript->addField('email1', 'false', $prefix);
+        $javascript->addField('email2', 'false', $prefix);
+        $javascript->addRequiredFields($prefix);
+        $form .= $javascript->getScript();
+        $mod_strings = $temp_strings;
+        return $form;
+    }
 
-function getFormBody($prefix, $mod='', $formname=''){
-	if(!ACLController::checkAccess('Leads', 'edit', true)){
-		return '';
-	}
-global $mod_strings;
-$temp_strings = $mod_strings;
-if(!empty($mod)){
-	global $current_language;
-	$mod_strings = return_module_language($current_language, $mod);
-}
-		global $app_strings;
-		global $current_user;
-		$lbl_required_symbol = $app_strings['LBL_REQUIRED_SYMBOL'];
-		$lbl_first_name = $mod_strings['LBL_FIRST_NAME'];
-		$lbl_last_name = $mod_strings['LBL_LAST_NAME'];
-		$lbl_phone = $mod_strings['LBL_PHONE'];
-		$user_id = $current_user->id;
-		$lbl_email_address = $mod_strings['LBL_EMAIL_ADDRESS'];
-		$form = <<<EOQ
+    public function getFormBody($prefix, $mod = '', $formname = '')
+    {
+        if (!ACLController::checkAccess('Leads', 'edit', true)) {
+            return '';
+        }
+        global $mod_strings;
+        $temp_strings = $mod_strings;
+        if (!empty($mod)) {
+            global $current_language;
+            $mod_strings = return_module_language($current_language, $mod);
+        }
+        global $app_strings;
+        global $current_user;
+        $lbl_required_symbol = $app_strings['LBL_REQUIRED_SYMBOL'];
+        $lbl_first_name = $mod_strings['LBL_FIRST_NAME'];
+        $lbl_last_name = $mod_strings['LBL_LAST_NAME'];
+        $lbl_phone = $mod_strings['LBL_PHONE'];
+        $user_id = $current_user->id;
+        $lbl_email_address = $mod_strings['LBL_EMAIL_ADDRESS'];
+        $form = <<<EOQ
 		<input type="hidden" name="{$prefix}record" value="">
 		<input type="hidden" name="{$prefix}email2" value="">
 		<input type="hidden" name="{$prefix}status" value="New">
@@ -136,52 +137,53 @@ if(!empty($mod)){
 EOQ;
 
 
-$javascript = new javascript();
-$javascript->setFormName($formname);
-$javascript->setSugarBean(BeanFactory::newBean('Leads'));
-$javascript->addField('email1','false',$prefix);
-$javascript->addField('email2','false',$prefix);
-$javascript->addRequiredFields($prefix);
-$form .=$javascript->getScript();
-$mod_strings = $temp_strings;
-return $form;
+        $javascript = new javascript();
+        $javascript->setFormName($formname);
+        $javascript->setSugarBean(BeanFactory::newBean('Leads'));
+        $javascript->addField('email1', 'false', $prefix);
+        $javascript->addField('email2', 'false', $prefix);
+        $javascript->addRequiredFields($prefix);
+        $form .= $javascript->getScript();
+        $mod_strings = $temp_strings;
+        return $form;
+    }
 
-}
-function getForm($prefix, $mod='Leads'){
-	if(!ACLController::checkAccess('Leads', 'edit', true)){
-		return '';
-	}
-if(!empty($mod)){
-	global $current_language;
-	$mod_strings = return_module_language($current_language, $mod);
-}else global $mod_strings;
-global $app_strings;
+    public function getForm($prefix, $mod = 'Leads')
+    {
+        if (!ACLController::checkAccess('Leads', 'edit', true)) {
+            return '';
+        }
+        if (!empty($mod)) {
+            global $current_language;
+            $mod_strings = return_module_language($current_language, $mod);
+        } else {
+            global $mod_strings;
+        }
+        global $app_strings;
 
-$lbl_save_button_title = $app_strings['LBL_SAVE_BUTTON_TITLE'];
-$lbl_save_button_key = $app_strings['LBL_SAVE_BUTTON_KEY'];
-$lbl_save_button_label = $app_strings['LBL_SAVE_BUTTON_LABEL'];
+        $lbl_save_button_title = $app_strings['LBL_SAVE_BUTTON_TITLE'];
+        $lbl_save_button_key = $app_strings['LBL_SAVE_BUTTON_KEY'];
+        $lbl_save_button_label = $app_strings['LBL_SAVE_BUTTON_LABEL'];
 
 
-$the_form = get_left_form_header($mod_strings['LBL_NEW_FORM_TITLE']);
-$the_form .= <<<EOQ
+        $the_form = get_left_form_header($mod_strings['LBL_NEW_FORM_TITLE']);
+        $the_form .= <<<EOQ
 
 		<form name="{$prefix}LeadSave" onSubmit="return check_form('{$prefix}LeadSave')" method="POST" action="index.php">
 			<input type="hidden" name="{$prefix}module" value="Leads">
 			<input type="hidden" name="{$prefix}action" value="Save">
 EOQ;
         $the_form .= $this->getFormBody($prefix, $mod, "{$prefix}LeadSave");
-$the_form .= <<<EOQ
+        $the_form .= <<<EOQ
 		<p><input title="$lbl_save_button_title" accessKey="$lbl_save_button_key" class="button" type="submit" name="{$prefix}button" value="  $lbl_save_button_label  " ></p>
 		</form>
 
 EOQ;
-$the_form .= get_left_form_footer();
-$the_form .= get_validate_record_js();
+        $the_form .= get_left_form_footer();
+        $the_form .= get_validate_record_js();
 
-return $the_form;
-
-
-}
+        return $the_form;
+    }
 
     /**
      *
@@ -194,17 +196,17 @@ return $the_form;
         $exist_lead = null,
         $acl_check = true
     ) {
-        require_once('modules/Campaigns/utils.php');
-        require_once('include/formbase.php');
 
-        if(empty($exist_lead)) {
+        require_once 'modules/Campaigns/utils.php';
+        require_once 'include/formbase.php';
+
+        if (empty($exist_lead)) {
             $focus = BeanFactory::newBean('Leads');
-        }
-        else {
+        } else {
             $focus = $exist_lead;
         }
 
-        if($useRequired &&  !checkRequired($prefix, array_keys($focus->required_fields))){
+        if ($useRequired && !checkRequired($prefix, array_keys($focus->required_fields))) {
             return null;
         }
         $focus = populateFromPost($prefix, $focus);
@@ -215,50 +217,43 @@ return $the_form;
         }
 
         //Check for duplicate Leads
-        if (empty($_POST['record']) && empty($_POST['dup_checked']))
-        {
+        if (empty($_POST['record']) && empty($_POST['dup_checked'])) {
             $duplicateLeads = $this->checkForDuplicates($prefix);
 
-            if(isset($duplicateLeads))
-            {
+            if (isset($duplicateLeads)) {
                 //Set the redirect location to call the ShowDuplicates action.  This will map to view.showduplicates.php
-                $location='module=Leads&action=ShowDuplicates';
+                $location = 'module=Leads&action=ShowDuplicates';
 
                 $get = '';
 
-                if(isset($_POST['inbound_email_id']) && !empty($_POST['inbound_email_id'])) {
-                    $get .= '&inbound_email_id='.$_POST['inbound_email_id'];
+                if (isset($_POST['inbound_email_id']) && !empty($_POST['inbound_email_id'])) {
+                    $get .= '&inbound_email_id=' . $_POST['inbound_email_id'];
                 }
 
-                if(isset($_POST['relate_to']) && !empty($_POST['relate_to'])) {
-                    $get .= '&Leadsrelate_to='.$_POST['relate_to'];
+                if (isset($_POST['relate_to']) && !empty($_POST['relate_to'])) {
+                    $get .= '&Leadsrelate_to=' . $_POST['relate_to'];
                 }
-                if(isset($_POST['relate_id']) && !empty($_POST['relate_id'])) {
-                    $get .= '&Leadsrelate_id='.$_POST['relate_id'];
+                if (isset($_POST['relate_id']) && !empty($_POST['relate_id'])) {
+                    $get .= '&Leadsrelate_id=' . $_POST['relate_id'];
                 }
 
                 //add all of the post fields to redirect get string
-                foreach ($focus->column_fields as $field)
-                {
-                    if (!empty($focus->$field) && !is_object($focus->$field))
-                    {
-                        $get .= "&Leads$field=".urlencode($focus->$field);
+                foreach ($focus->column_fields as $field) {
+                    if (!empty($focus->$field) && !is_object($focus->$field)) {
+                        $get .= "&Leads$field=" . urlencode($focus->$field);
                     }
                 }
 
-                foreach ($focus->additional_column_fields as $field)
-                {
-                    if (!empty($focus->$field))
-                    {
-                        $get .= "&Leads$field=".urlencode($focus->$field);
+                foreach ($focus->additional_column_fields as $field) {
+                    if (!empty($focus->$field)) {
+                        $get .= "&Leads$field=" . urlencode($focus->$field);
                     }
                 }
 
-                if($focus->hasCustomFields()) {
-                    foreach($focus->field_defs as $name=>$field) {
-                        if (!empty($field['source']) && $field['source'] == 'custom_fields')
-                        {
-                            $get .= "&Leads$name=".urlencode($focus->$name);
+                if ($focus->hasCustomFields()) {
+                    foreach ($focus->field_defs as $name => $field) {
+                        if (!empty($field['source']) && $field['source'] == 'custom_fields') {
+                            $get .= "&Leads$name=" . urlencode($focus->$name);
                         }
                     }
                 }
@@ -270,34 +265,31 @@ return $the_form;
                 $get .= get_teams_url('Leads');
 
                 //create list of suspected duplicate lead ids in redirect get string
-                $i=0;
-                foreach ($duplicateLeads as $lead)
-                {
-                    $get .= "&duplicate[$i]=".$lead['id'];
+                $i = 0;
+                foreach ($duplicateLeads as $lead) {
+                    $get .= "&duplicate[$i]=" . $lead['id'];
                     $i++;
                 }
 
                 //add return_module, return_action, and return_id to redirect get string
-    			$urlData = array('return_module' => 'Leads', 'return_action' => '');
-    			foreach (array('return_module', 'return_action', 'return_id', 'popup', 'create', 'start') as $var) {
-    			    if (!empty($_POST[$var])) {
-    			        $urlData[$var] = $_POST[$var];
-    			    }
-    			}
-    			$get .= "&".http_build_query($urlData);
-    			$_SESSION['SHOW_DUPLICATES'] = $get;
+                $urlData = ['return_module' => 'Leads', 'return_action' => ''];
+                foreach (['return_module', 'return_action', 'return_id', 'popup', 'create', 'start'] as $var) {
+                    if (!empty($_POST[$var])) {
+                        $urlData[$var] = $_POST[$var];
+                    }
+                }
+                $get .= '&' . http_build_query($urlData);
+                $_SESSION['SHOW_DUPLICATES'] = $get;
 
-                if (!empty($_POST['is_ajax_call']) && $_POST['is_ajax_call'] == '1')
-                {
+                if (!empty($_POST['is_ajax_call']) && $_POST['is_ajax_call'] == '1') {
                     ob_clean();
                     $json = getJSONobj();
-                    echo $json->encode(array('status' => 'dupe', 'get' => $location));
-                } else if(!empty($_REQUEST['ajax_load'])) {
+                    echo $json->encode(['status' => 'dupe', 'get' => $location]);
+                } elseif (!empty($_REQUEST['ajax_load'])) {
                     echo "<script>SUGAR.ajaxUI.loadContent('index.php?$location');</script>";
                 } else {
-                    if(!empty($_POST['to_pdf']))
-                    {
-                        $location .= '&to_pdf='.urlencode($_POST['to_pdf']);
+                    if (!empty($_POST['to_pdf'])) {
+                        $location .= '&to_pdf=' . urlencode($_POST['to_pdf']);
                     }
                     header("Location: index.php?$location");
                 }
@@ -305,44 +297,45 @@ return $the_form;
             }
         }
 
-        if (!isset($_POST[$prefix.'email_opt_out'])) $focus->email_opt_out = 0;
-        if (!isset($_POST[$prefix.'do_not_call'])) $focus->do_not_call = 0;
+        if (!isset($_POST[$prefix . 'email_opt_out'])) {
+            $focus->email_opt_out = 0;
+        }
+        if (!isset($_POST[$prefix . 'do_not_call'])) {
+            $focus->do_not_call = 0;
+        }
 
-        if($do_save) {
-            if(!empty($GLOBALS['check_notify'])) {
+        if ($do_save) {
+            if (!empty($GLOBALS['check_notify'])) {
                 $focus->save($GLOBALS['check_notify']);
-            }
-            else {
+            } else {
                 $focus->save(false);
             }
         }
 
         $return_id = $focus->id;
 
-        if (isset($_POST[$prefix.'prospect_id']) &&  !empty($_POST[$prefix.'prospect_id'])) {
-            $prospect = BeanFactory::getBean('Prospects', $_POST[$prefix.'prospect_id']);
-            $prospect->lead_id=$focus->id;
+        if (isset($_POST[$prefix . 'prospect_id']) && !empty($_POST[$prefix . 'prospect_id'])) {
+            $prospect = BeanFactory::getBean('Prospects', $_POST[$prefix . 'prospect_id']);
+            $prospect->lead_id = $focus->id;
             // Set to keep email in target
             $prospect->in_workflow = true;
             $prospect->save();
 
             //if prospect id exists, make sure we are coming from prospect detail
-            if(strtolower($_POST['return_module']) =='prospects' && strtolower($_POST['return_action']) == 'detailview'){
+            if (strtolower($_POST['return_module']) == 'prospects' && strtolower($_POST['return_action']) == 'detailview') {
                 //create campaing_log entry
 
-                if(isset($focus->campaign_id) && $focus->campaign_id != null){
-                    campaign_log_lead_entry($focus->campaign_id,$prospect, $focus,'lead');
+                if (isset($focus->campaign_id) && $focus->campaign_id != null) {
+                    campaign_log_lead_entry($focus->campaign_id, $prospect, $focus, 'lead');
                 }
             }
         }
 
-        $GLOBALS['log']->debug("Saved record with id of ".$return_id);
-        if($redirect){
+        $GLOBALS['log']->debug('Saved record with id of ' . $return_id);
+        if ($redirect) {
             handleRedirect($return_id, 'Leads');
-        }else{
+        } else {
             return $focus;
         }
     }
-
 }
-?>

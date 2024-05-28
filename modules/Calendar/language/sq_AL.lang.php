@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kalendari',
     'LBL_MODULE_NAME_SINGULAR' => 'Kalendari',
     'LBL_MODULE_TITLE' => 'Kalendari',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'parametrat',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Shfaq kohën e lojërave elektronike në ditë dhe pikëpamjet e javës:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Ora e nisjes',
-    'LBL_SETTINGS_TIME_ENDS'=>'Ora e përfundimit',
+    'LBL_SETTINGS_TIME_STARTS' => 'Ora e nisjes',
+    'LBL_SETTINGS_TIME_ENDS' => 'Ora e përfundimit',
     'LBL_SETTINGS_CALLS_SHOW' => 'Trego thirrjet:',
     'LBL_SETTINGS_TASKS_SHOW' => 'trego detyrat',
 
@@ -123,7 +123,7 @@ $mod_strings = array (
     'LBL_REPEAT_DOW' => 'në',
     'LBL_REPEAT_UNTIL' => 'përsërit deri',
     'LBL_REPEAT_COUNT' => 'Numri i ndodhive',
-    'LBL_RECURRING_LIMIT_ERROR' => 'Kjo përseritje e moduleve të titujve $  nuk mund të jetë e planifikuar për shkak se ajo e tejkalon përsëritjen maksimale e lejuar prej $ limitit.',
+    'LBL_RECURRING_LIMIT_ERROR' => '$moduleTitle i përsëritur nuk mund të planifikohet pasi tejkalon përsëritjen maksimale të lejuar të $limit.',
 
     'LBL_EDIT_ALL_RECURRENCES' => 'ndrysho të gjitha përsëritjet',
     'LBL_REMOVE_ALL_RECURRENCES' => 'Largo të gjitha përsëritjet',
@@ -155,8 +155,8 @@ $mod_strings = array (
     'LBL_RECORD_TEMPLATES_TAB' => 'Shabllonet',
     'LBL_RECORD_OTHER_TAB' => 'Tjetër',
     'LBL_EVENT_START' => 'Fillimi',
-    'LBL_EVENT_END' => 'Fundi',
-    'LBL_EVENT_END' => 'Fundi',
+    'LBL_EVENT_END' => 'Përfundo',
+    'LBL_EVENT_END' => 'Përfundo',
     'LBL_DAY_EVENT_TEMPLATE' => 'Ngjarje e ditës',
     'LBL_WEEK_EVENT_TEMPLATE' => 'Ngjarje e javës',
     'LBL_MONTH_EVENT_TEMPLATE' => 'Ngjarje e muajit',
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Krijo kalendar',
     'LNK_CALENDAR_LIST' => 'Shiko kalendarët',
     'LNK_CALENDAR_LEGACY' => 'Kalendar trashëgimie',
-    'LBL_IMPORT_CALENDAR'=> 'Importo kalendarin',
+    'LBL_IMPORT_CALENDAR' => 'Importo kalendarin',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Vula kohore e ngjarjes',
     'LBL_INSERTFIELD' => 'Fut fushën',
     'LBL_EVENT_START_ERROR' => 'Zgjidh një fillim',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Zgjidh një kalendar',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Nuk u arrit ruajtja e kalendarëve.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Diel',
             'Hën',
             'Mart',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Enjt',
             'Prem',
             'Shtu',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'E diel',
             'E hënë',
             'E martë',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'E enjte',
             'E premte',
             'E shtunë',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Jan',
             'Shku',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Tet',
             'Nënt',
             'Dhjet',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Janar',
             'Shkurt',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Tetor',
             'Nëntor',
             'Dhjetor',
-        ),
-);
+        ],
+];

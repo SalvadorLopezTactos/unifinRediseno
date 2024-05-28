@@ -1,5 +1,8 @@
 <?php
-if(!defined('sugarEntry'))define('sugarEntry', true);
+
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,24 +18,21 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
  * First step in removing getimage and getYUIComboFile -- at least this bypasses most of the app,
  * making assets load faster.
  */
-if( isset($_GET["entryPoint"]) )
-{
+if (isset($_GET['entryPoint'])) {
     require_once 'vendor/autoload.php';
 
     $GLOBALS['log'] = new SugarNullLogger();
 
-    if ($_GET["entryPoint"] == "getImage") {
+    if ($_GET['entryPoint'] == 'getImage') {
         SugarAutoLoader::requireWithCustom('include/SugarMetric/Helper.php');
         SugarMetric_Helper::run('image');
 
-		include("include/SugarTheme/getImage.php");
-		die();
-	}
-	else if($_GET["entryPoint"] == "getYUIComboFile")
-    {
+        include 'include/SugarTheme/getImage.php';
+        die();
+    } elseif ($_GET['entryPoint'] == 'getYUIComboFile') {
         SugarMetric_Helper::run('YUIComboFile');
 
-		include("include/javascript/getYUIComboFile.php");
-		die();
-	}
+        include 'include/javascript/getYUIComboFile.php';
+        die();
+    }
 }

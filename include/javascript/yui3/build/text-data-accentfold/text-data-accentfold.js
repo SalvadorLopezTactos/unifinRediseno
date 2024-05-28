@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('text-data-accentfold', function (Y, NAME) {
 
 // The following tool was very helpful in creating these mappings:
@@ -50,4 +43,4 @@ Y.namespace('Text.Data').AccentFold = {
 };
 
 
-}, '3.15.0', {"requires": ["yui-base"]});
+}, '3.18.1', {"requires": ["yui-base"]});

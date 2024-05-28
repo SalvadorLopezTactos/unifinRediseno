@@ -14,7 +14,6 @@
 // User is used to store customer information.
 class TimePeriod extends SugarBean
 {
-
     //Constants used by this class
     public const ANNUAL_TYPE = 'Annual';
     public const QUARTER_TYPE = 'Quarter';
@@ -36,7 +35,7 @@ class TimePeriod extends SugarBean
     public $is_fiscal_year = 0;
     public $is_fiscal;
     //end time period stored fields.
-    public $table_name = "timeperiods";
+    public $table_name = 'timeperiods';
     public $fiscal_year_checked;
     public $module_dir = 'TimePeriods';
     public $type;
@@ -46,15 +45,15 @@ class TimePeriod extends SugarBean
     public $periods_in_year;
     public $leaf_name_template;
     public $name_template;
-    public $object_name = "TimePeriod";
+    public $object_name = 'TimePeriod';
     public $user_preferences;
     public $date_modifier;
-    public $encodeFields = Array("name");
+    public $encodeFields = ['name'];
     public $priorSettings;
     public $currentSettings;
 
     // This is used to retrieve related fields from form posts.
-    public $additional_column_fields = Array('reports_to_name');
+    public $additional_column_fields = ['reports_to_name'];
 
     public $new_schema = true;
 
@@ -140,11 +139,10 @@ class TimePeriod extends SugarBean
     public function fill_in_additional_detail_fields()
     {
         if (isset($this->parent_id) && !empty($this->parent_id)) {
-
             $query = "SELECT name from timeperiods where id = '$this->parent_id' and deleted = 0";
-            $result = $this->db->query($query, true, "Error filling in additional detail fields");
+            $result = $this->db->query($query, true, 'Error filling in additional detail fields');
             $row = $this->db->fetchByAssoc($result);
-            $GLOBALS['log']->debug("additional detail query results: " . print_r($row, true));
+            $GLOBALS['log']->debug('additional detail query results: ' . print_r($row, true));
 
 
             if ($row != null) {
@@ -160,7 +158,7 @@ class TimePeriod extends SugarBean
         $timeperiod_fields['FISCAL_YEAR'] = $this->fiscal_year;
 
         if ($this->is_fiscal_year == 1) {
-            $timeperiod_fields['FISCAL_YEAR_CHECKED'] = "checked";
+            $timeperiod_fields['FISCAL_YEAR_CHECKED'] = 'checked';
         }
         return $timeperiod_fields;
     }
@@ -233,17 +231,16 @@ class TimePeriod extends SugarBean
         static $fiscal_years;
 
         if (!isset($fiscal_years)) {
-
             $query = 'SELECT id, name FROM timeperiods WHERE deleted=0 AND is_fiscal_year = 1 ORDER BY name';
             $db = DBManagerFactory::getInstance();
-            $result = $db->query($query, true, " Error filling in fiscal year domain: ");
+            $result = $db->query($query, true, ' Error filling in fiscal year domain: ');
 
             while (($row = $db->fetchByAssoc($result)) != null) {
                 $fiscal_years[$row['id']] = $row['name'];
             }
 
             if (!isset($fiscal_years)) {
-                $fiscal_years = array();
+                $fiscal_years = [];
             }
         }
         return $fiscal_years;
@@ -257,7 +254,7 @@ class TimePeriod extends SugarBean
      */
     public function getLeaves()
     {
-        $leaves = array();
+        $leaves = [];
         $db = DBManagerFactory::getInstance();
         $sql = 'SELECT id, type FROM timeperiods WHERE parent_id = ? AND deleted = 0 ORDER BY start_date_timestamp ASC';
         $result = $db->getConnection()->executeQuery($sql, [$this->id]);
@@ -275,7 +272,7 @@ class TimePeriod extends SugarBean
     public function hasLeaves()
     {
         $leaves = $this->getLeaves();
-        return (is_countable($leaves) ? count($leaves) : 0) > 0;
+        return safeCount($leaves) > 0;
     }
 
     /**
@@ -364,11 +361,11 @@ class TimePeriod extends SugarBean
      * @param string Timeperiod type
      * @return Timeperiod|bool Timeperiod if found, false if not
      */
-    protected static function getByDateAndType($date, $type = "")
+    protected static function getByDateAndType($date, $type = '')
     {
         global $app_strings;
         $db = DBManagerFactory::getInstance();
-        if ($date instanceOf SugarDateTime) {
+        if ($date instanceof SugarDateTime) {
             $date = $date->asDbDate(false);
         }
         $datetime = new DateTime($date, new DateTimeZone('UTC'));
@@ -376,13 +373,13 @@ class TimePeriod extends SugarBean
         $retVal = false;
 
         if (empty($type)) {
-            $admin = BeanFactory::newBean("Administration");
-            $config = $admin->getConfigForModule("Forecasts", "base");
-            $type = $config["timeperiod_leaf_interval"];
+            $admin = BeanFactory::newBean('Administration');
+            $config = $admin->getConfigForModule('Forecasts', 'base');
+            $type = $config['timeperiod_leaf_interval'];
         }
 
         $sq = new SugarQuery();
-        $sq->select(array('id'));
+        $sq->select(['id']);
         $sq->from(BeanFactory::newBean('TimePeriods'))->where()
             ->equals('type', $type)
             ->lte('start_date_timestamp', $timestamp)
@@ -412,7 +409,7 @@ class TimePeriod extends SugarBean
         static $timeperiods;
 
         if ($timeperiods === null) {
-            $timeperiods = array();
+            $timeperiods = [];
             $query = 'SELECT id, name FROM timeperiods WHERE deleted = 0';
             $stmt = DBManagerFactory::getConnection()
                 ->executeQuery($query);
@@ -433,7 +430,7 @@ class TimePeriod extends SugarBean
 
         if (!isset($not_fiscal_timeperiods)) {
             $db = DBManagerFactory::getInstance();
-            $not_fiscal_timeperiods = array();
+            $not_fiscal_timeperiods = [];
             $result = $db->query(
                 'SELECT id, name FROM timeperiods WHERE is_fiscal_year = 0 AND parent_id IS NOT NULL AND deleted = 0 ORDER BY start_date ASC'
             );
@@ -464,10 +461,10 @@ WHERE start_date = ' . $this->db->convert('?', 'date') . '
 AND type = ?
 AND deleted = 0';
         $id = $this->db->getConnection()
-            ->executeQuery($query, array(
+            ->executeQuery($query, [
                 $queryDate->asDbDate(),
                 $this->type,
-            ))->fetchOne();
+            ])->fetchOne();
 
         if (!$id) {
             return null;
@@ -494,11 +491,10 @@ WHERE end_date = ' . $this->db->convert('?', 'date') . '
 AND type = ?
 AND deleted = 0';
         $id = $this->db->getConnection()
-            ->executeQuery($query, array(
-                    $queryDate->asDbDate(),
-                    $this->type,
-                )
-            )->fetchOne();
+            ->executeQuery($query, [
+                $queryDate->asDbDate(),
+                $this->type,
+            ])->fetchOne();
 
         if (!$id) {
             return null;
@@ -545,9 +541,9 @@ AND deleted = 0';
      */
     public function upgradeLegacyTimePeriods()
     {
-        $sql = "SELECT id FROM timeperiods
+        $sql = 'SELECT id FROM timeperiods
                 WHERE (start_date_timestamp IS NULL OR end_date_timestamp IS NULL)
-                    AND deleted = 0";
+                    AND deleted = 0';
         $stmt = $this->db->getConnection()
             ->executeQuery($sql);
 
@@ -576,12 +572,12 @@ AND deleted = 0';
     public function createTimePeriods($priorSettings, $currentSettings, $currentDate)
     {
         $timedate = TimeDate::getInstance();
-        $settingsDate = $timedate->fromDbDate($currentSettings["timeperiod_start_date"]);
+        $settingsDate = $timedate->fromDbDate($currentSettings['timeperiod_start_date']);
         //set the target date based on the current year and the selected start month and day
         $targetStartDate = $timedate->getNow()->setDate(
-            $currentDate->format("Y"),
-            $settingsDate->format("m"),
-            $settingsDate->format("d")
+            $currentDate->format('Y'),
+            $settingsDate->format('m'),
+            $settingsDate->format('d')
         );
 
         // $quadrantCt is the count to check how many quadrants are between the current date and target date.
@@ -650,7 +646,7 @@ AND deleted = 0';
      */
     public function createTimePeriodsForUpgrade($currentSettings, $currentDate)
     {
-        $created = array();
+        $created = [];
         $isLeafTimePeriod = true;
         $timeperiodInterval = $currentSettings['timeperiod_interval'];
         $timePeriodLeafInterval = $currentSettings['timeperiod_leaf_interval'];
@@ -679,10 +675,9 @@ AND deleted = 0';
 
 
         if (empty($currentTimePeriod)) {
-
             //If no currentTimePeriod instance was found, just use the most recent upcoming TimePeriod instance
             $query = sprintf(
-                "SELECT id FROM timeperiods WHERE start_date > %s AND parent_id IS NOT NULL AND deleted = 0 ORDER BY start_date ASC",
+                'SELECT id FROM timeperiods WHERE start_date > %s AND parent_id IS NOT NULL AND deleted = 0 ORDER BY start_date ASC',
                 $db->convert($db->quoted($currentDate->asDbDate()), 'date')
             );
 
@@ -696,7 +691,7 @@ AND deleted = 0';
             if (empty($currentTimePeriod)) {
                 //One last attempt using timeperiods without parent_id
                 $query = sprintf(
-                    "SELECT id FROM timeperiods WHERE start_date <= %s AND end_date >= %s AND parent_id IS NULL AND deleted = 0 ORDER BY start_date ASC",
+                    'SELECT id FROM timeperiods WHERE start_date <= %s AND end_date >= %s AND parent_id IS NULL AND deleted = 0 ORDER BY start_date ASC',
                     $db->convert($db->quoted($currentDate->asDbDate()), 'date'),
                     $db->convert($db->quoted($currentDate->asDbDate()), 'date')
                 );
@@ -726,16 +721,16 @@ AND deleted = 0';
         //Now mark all TimePeriods that start after the current TimePeriod to be deleted
         $db->query(
             sprintf(
-                "UPDATE timeperiods SET deleted = 1 WHERE start_date >= %s",
+                'UPDATE timeperiods SET deleted = 1 WHERE start_date >= %s',
                 $db->convert($db->quoted($currentTimePeriod->start_date), 'date')
             )
         );
 
         //Delete the current TimePeriod itself since we will re-create it with the appropriate type attributes and adjusted end date
-        $db->query(sprintf("DELETE FROM timeperiods WHERE id = %s", $db->quoted($currentTimePeriod->id)));
+        $db->query(sprintf('DELETE FROM timeperiods WHERE id = %s', $db->quoted($currentTimePeriod->id)));
 
         $currentEndDate = $timedate->fromDbDate($currentTimePeriod->end_date);
-        $selectedStartDate = $timedate->fromDbDate($currentSettings["timeperiod_start_date"]);
+        $selectedStartDate = $timedate->fromDbDate($currentSettings['timeperiod_start_date']);
         $targetStartDate = $timedate->getNow()->setDate(
             $currentEndDate->format('Y'),
             $selectedStartDate->format('m'),
@@ -826,7 +821,7 @@ AND deleted = 0';
      */
     public function buildLeaves($shownBackwardDifference, $shownForwardDifference, $quadrantCt)
     {
-        $created = array();
+        $created = [];
         $timedate = TimeDate::getInstance();
 
         if ($shownBackwardDifference > 0) {
@@ -873,7 +868,7 @@ AND deleted = 0';
     public function buildTimePeriods($timePeriods, $direction, $quadrantCt = 0)
     {
         $leafPeriod = null;
-        $created = array();
+        $created = [];
         $timedate = TimeDate::getInstance();
         $startDate = $timedate->fromDbDate($this->start_date); //->modify($dateModifier);
 
@@ -919,7 +914,7 @@ AND deleted = 0';
             $created[] = $timePeriod;
 
             $leafStartDate = $timePeriod->start_date;
-            $leavesCreated = array();
+            $leavesCreated = [];
 
             for ($x = 1; $x <= $this->leaf_periods; $x++) {
                 $leafPeriod = TimePeriod::getByType($this->leaf_period_type);
@@ -970,9 +965,9 @@ AND deleted = 0';
         $settingsDate = $timedate->fromDbDate($priorSettings['timeperiod_start_date']);
 
         $priorDate->setDate(
-            intval($targetStartDate->format("Y")),
-            $settingsDate->format("m"),
-            $settingsDate->format("d")
+            intval($targetStartDate->format('Y')),
+            $settingsDate->format('m'),
+            $settingsDate->format('d')
         );
 
         return $targetStartDate != $priorDate;
@@ -1007,7 +1002,7 @@ AND deleted = 0';
     public function deleteTimePeriods($priorSettings, $currentSettings)
     {
         $db = DBManagerFactory::getInstance();
-        $db->query("UPDATE timeperiods SET deleted = 1");
+        $db->query('UPDATE timeperiods SET deleted = 1');
     }
 
     /**
@@ -1121,7 +1116,7 @@ AND deleted = 0';
     {
         $query = 'SELECT type FROM timeperiods WHERE id = ? AND deleted = 0';
         $type = DBManagerFactory::getConnection()
-            ->executeQuery($query, array($id))
+            ->executeQuery($query, [$id])
             ->fetchOne();
 
         if (!$type) {
@@ -1146,7 +1141,7 @@ AND deleted = 0';
         $query = 'SELECT id FROM timeperiods WHERE type = ? AND deleted = 0 ORDER BY start_date_timestamp ASC';
         $query = $platform->modifyLimitQuery($query, 1);
 
-        $id = $conn->executeQuery($query, array($type))
+        $id = $conn->executeQuery($query, [$type])
             ->fetchOne();
 
         if (!$id) {
@@ -1170,7 +1165,7 @@ AND deleted = 0';
         $query = 'SELECT id FROM timeperiods WHERE type = ? AND deleted = 0 ORDER BY start_date_timestamp DESC';
         $query = $platform->modifyLimitQuery($query, 1);
 
-        $id = $conn->executeQuery($query, array($type))
+        $id = $conn->executeQuery($query, [$type])
             ->fetchOne();
 
         if (!$id) {
@@ -1214,7 +1209,7 @@ AND deleted = 0';
         }
 
         $sq = new SugarQuery();
-        $sq->select(array('id'));
+        $sq->select(['id']);
         $sq->from(BeanFactory::newBean('TimePeriods'))->where()
             ->equals('is_fiscal_year', 0)
             ->equals('type', $type)
@@ -1223,7 +1218,7 @@ AND deleted = 0';
 
         $result = $sq->execute();
 
-        if (count($result) > 0) {
+        if (safeCount($result) > 0) {
             $r = array_shift($result);
             return $r['id'];
         }
@@ -1239,7 +1234,7 @@ AND deleted = 0';
     public function getGenericStartEndByDuration($duration, $start_date = null)
     {
         $end = null;
-        $mapping = array('current' => 0, 'next' => 3, 'year' => 12);
+        $mapping = ['current' => 0, 'next' => 3, 'year' => 12];
         if (array_key_exists($duration, $mapping)) {
             $duration = $mapping[$duration];
         } elseif (!is_numeric($duration)) {
@@ -1281,14 +1276,14 @@ AND deleted = 0';
 
         // since we are using timestamp, we need to convert this into UTC since that is
         // what the DB is storing as
-        $tz = new DateTimeZone("UTC");
+        $tz = new DateTimeZone('UTC');
 
-        return array(
+        return [
             'start_date' => $start->asDbDate(false),
             'start_date_timestamp' => $start->setTimezone($tz)->setTime(0, 0, 0)->format('U'),
             'end_date' => $end->asDbDate(false),
             'end_date_timestamp' => $end->setTimezone($tz)->setTime(0, 0, 0)->format('U'),
-        );
+        ];
     }
 }
 

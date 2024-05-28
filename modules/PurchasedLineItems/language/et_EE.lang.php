@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Ostetud reaüksuste loendi töölaud',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Ostetud reaüksuste kirje töölaud',
     'LBL_PARENT_PURCHASE' => 'Emaost',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ostetud reaüksuse ajaskaala',
 ];

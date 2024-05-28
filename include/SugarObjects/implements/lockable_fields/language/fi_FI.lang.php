@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_LOCKED_FIELDS_LINK' => 'Kentät on lukittu muokkausta varten',
     'LBL_LOCKED_FIELDS' => 'Kentät on lukittu muokkausta varten',
-);
+];

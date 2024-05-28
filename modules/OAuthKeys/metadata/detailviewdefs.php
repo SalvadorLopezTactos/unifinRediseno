@@ -10,33 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'OAuthKeys';
-$viewdefs[$module_name]['DetailView'] = array(
-'templateMeta' => array('form' => array('buttons'=>array('EDIT', 'DELETE')),
-                        'maxColumns' => '2',
-                        'widths' => array(
-                                        array('label' => '10', 'field' => '30'),
-                                        array('label' => '10', 'field' => '30')
-                                        ),
-                        ),
+$viewdefs[$module_name]['DetailView'] = [
+    'templateMeta' => ['form' => ['buttons' => ['EDIT', 'DELETE']],
+        'maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
 
-'panels' =>array (
-    array('name', 'oauth_type'),
-    array('c_key', 'client_type'),
-    array('description'),
+    'panels' => [
+        ['name', 'oauth_type'],
+        ['c_key', 'client_type'],
+        ['description'],
 
-  array (
-	array (
-      'name' => 'date_entered',
-      'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value|escape:"html":"UTF-8"}',
-      'label' => 'LBL_DATE_ENTERED',
-    ),
-    array (
-      'name' => 'date_modified',
-      'customCode' => '{$fields.date_modified.value} {$APP.LBL_BY} {$fields.modified_by_name.value|escape:"html":"UTF-8"}',
-      'label' => 'LBL_DATE_MODIFIED',
-    ),
-  ),
+        [
+            [
+                'name' => 'date_entered',
+                'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value|escape:"html":"UTF-8"}',
+                'label' => 'LBL_DATE_ENTERED',
+            ],
+            [
+                'name' => 'date_modified',
+                'customCode' => '{$fields.date_modified.value} {$APP.LBL_BY} {$fields.modified_by_name.value|escape:"html":"UTF-8"}',
+                'label' => 'LBL_DATE_MODIFIED',
+            ],
+        ],
 
-)
-);
-?>
+    ],
+];

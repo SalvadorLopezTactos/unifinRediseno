@@ -23,9 +23,9 @@
     </div>
 </div>
 
-<div class="massupdate-fields-container">
+<div class="massupdate-fields-container max-h-[215px] overflow-auto">
     {{#each fieldValues}}
-        <div class="filter-body clearfix border-t border-dashed border-separator">
+        <div class="filter-body clearfix border-t border-dashed border-[--separator-color]">
         <div class="row-fluid">
             <div class="filter-field controls span4">
                 <select class="select2 mu_attribute inherit-width" data-index="{{@index}}">
@@ -45,12 +45,12 @@
             </div>
             <div class="filter-actions btn-group">
                 {{#notEq ../fieldValues.length 1}}
-                    <button data-action="remove" class="btn btn-invisible btn-dark" data-index="{{@index}}" rel="tooltip" data-placement="bottom" title="{{str "LBL_MASS_UPDATE_REMOVE_FIELD"}}"
+                    <button data-action="remove" class="btn btn-invisible btn-dark" data-index="{{@index}}" rel="tooltip" data-bs-placement="bottom" title="{{str "LBL_MASS_UPDATE_REMOVE_FIELD"}}"
                     >
                         <i class="sicon sicon-minus"></i>
                     </button>
                 {{/notEq}}
-                <button data-action="add" class="btn btn-invisible btn-dark {{#eq ../fieldOptions.length 0}}disabled{{/eq}}" rel="tooltip" data-placement="bottom" title="{{str "LBL_MASS_UPDATE_ADD_FIELD"}}"
+                <button data-action="add" class="btn btn-invisible btn-dark {{#eq ../fieldOptions.length 0}}disabled{{/eq}}" rel="tooltip" data-bs-placement="bottom" title="{{str "LBL_MASS_UPDATE_ADD_FIELD"}}"
                 >
                     <i class="sicon sicon-plus"></i>
                 </button>

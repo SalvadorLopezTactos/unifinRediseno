@@ -20,11 +20,11 @@ use Sugarcrm\Sugarcrm\CustomerJourney\LogicHooks\ActivityHooksHelper;
  */
 class ActivityHooks
 {
-
     /**
      * @var \Sugarcrm\Sugarcrm\CustomerJourney\LogicHooks\ActivityHooksHelper|mixed
      */
     public $hooksHelper;
+
     public function __construct()
     {
         $this->hooksHelper = new ActivityHooksHelper();
@@ -39,11 +39,14 @@ class ActivityHooks
      */
     public function beforeSave($activity, $event, $arguments)
     {
+        if (!hasSystemAutomateLicense()) {
+            return;
+        }
         $this->hooksHelper->saveFetchedRow($activity);
+        $this->hooksHelper->validate($activity);
         $this->hooksHelper->reorder($activity);
         $this->hooksHelper->calculate($activity);
         $this->hooksHelper->calculateMomentum($activity);
-        $this->hooksHelper->validate($activity);
         $this->hooksHelper->beforeStatusChange($activity);
         $this->hooksHelper->setActualSortOrder($activity);
         $this->hooksHelper->checkRelatedSugarAction($activity, $event, $arguments);
@@ -62,8 +65,25 @@ class ActivityHooks
      */
     public function afterSave($activity, $event, $arguments)
     {
-        $this->hooksHelper->resaveIfChanged($activity);
-        $this->hooksHelper->startNextJourneyIfCompleted($activity, $event, $arguments);
+        if (!hasSystemAutomateLicense()) {
+            return;
+        }
+        if ($this->isStatusProgressUpdated($arguments)) {
+            $this->hooksHelper->resaveIfChanged($activity);
+            $this->hooksHelper->startNextJourneyIfCompleted($activity, $event, $arguments);
+        }
+    }
+
+    /**
+     * check if the data is changed or not
+     *
+     * @param array $arguments
+     */
+    public function isStatusProgressUpdated(array $arguments)
+    {
+        return (isset($arguments['dataChanges']['status']) &&
+                isset($arguments['dataChanges']['customer_journey_progress']) &&
+                isset($arguments['dataChanges']['customer_journey_score'])) || isset($arguments['dataChanges']['customer_journey_points']);
     }
 
     /**
@@ -75,6 +95,9 @@ class ActivityHooks
      */
     public function beforeDelete($activity, $event, $arguments)
     {
+        if (!hasSystemAutomateLicense()) {
+            return;
+        }
         $this->hooksHelper->beforeDelete($activity);
         $this->hooksHelper->removeChildren($activity);
     }
@@ -88,6 +111,9 @@ class ActivityHooks
      */
     public function afterDelete($activity, $event, $arguments)
     {
+        if (!hasSystemAutomateLicense()) {
+            return;
+        }
         $this->hooksHelper->afterDelete($activity);
         $this->hooksHelper->resave($activity);
     }

@@ -49,8 +49,7 @@ class ModuleCommand extends Command implements InstanceModeInterface
                 InputArgument::REQUIRED,
                 'enable or disable',
                 null
-            )
-        ;
+            );
     }
 
     /**
@@ -61,13 +60,13 @@ class ModuleCommand extends Command implements InstanceModeInterface
         $engine = SearchEngine::getInstance()->getEngine();
 
         if (!$engine instanceof Elastic) {
-            throw new RuntimeException("Backend search engine is not Elastic");
+            throw new RuntimeException('Backend search engine is not Elastic');
         }
 
         $module = $input->getArgument('module');
         $action = $input->getArgument('action');
 
-        if (!in_array($action, array('enable', 'disable'), true)) {
+        if (!in_array($action, ['enable', 'disable'], true)) {
             throw new RuntimeException("Please specify a proper action: 'enable' or 'disable'");
         }
 
@@ -78,20 +77,20 @@ class ModuleCommand extends Command implements InstanceModeInterface
             if (!in_array($module, $disabled)) {
                 throw new RuntimeException("Module $module cannot be enabled");
             }
-            $key =  array_search($module, $disabled);
+            $key = array_search($module, $disabled);
             unset($disabled[$key]);
             $enabled[] = $module;
         } else {
             if (!in_array($module, $enabled)) {
                 throw new RuntimeException("Module $module cannot be disabled");
             }
-            $key =  array_search($module, $enabled);
+            $key = array_search($module, $enabled);
             unset($enabled[$key]);
             $disabled[] = $module;
         }
 
         $settings->saveFTSModuleListSettings($enabled, $disabled);
-        MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_SERVERINFO, MetaDataManager::MM_MODULES));
+        MetaDataManager::refreshSectionCache([MetaDataManager::MM_SERVERINFO, MetaDataManager::MM_MODULES]);
         return 0;
     }
 }

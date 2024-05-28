@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Prosessimääritelmät',
-  'LBL_MODULE_TITLE' => 'Prosessimääritelmät',
-  'LBL_MODULE_NAME_SINGULAR' => 'Prosessimääritelmä',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Prosessimääritelmät',
+    'LBL_MODULE_TITLE' => 'Prosessimääritelmät',
+    'LBL_MODULE_NAME_SINGULAR' => 'Prosessimääritelmä',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Prosessimääritykset-tietolaatikko',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Prosessimääritykset-tietolaatikko',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Prosessimääritelmätietueiden työpöytä',
-  'LNK_LIST' => 'Näytä prosessimääritelmät',
-  'LNK_NEW_PMSE_PROJECT' => 'Luo prosessimääritelmä',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Tuo prosessimääritelmiä',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Prosessimääritelmätietueiden työpöytä',
+    'LNK_LIST' => 'Näytä prosessimääritelmät',
+    'LNK_NEW_PMSE_PROJECT' => 'Luo prosessimääritelmä',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Tuo prosessimääritelmiä',
 
-  'LBL_PRJ_STATUS' => 'Tila',
-  'LBL_PRJ_MODULE' => 'Kantamoduuli',
-  'LBL_PRJ_RUN_ORDER' => 'Suoritusjärjestys',
-  'LBL_PMSE_BUTTON_SAVE' => 'Tallenna',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Peruuta',
-  'LBL_PMSE_BUTTON_YES' => 'Kyllä',
-  'LBL_PMSE_BUTTON_NO' => 'Ei',
-  'LBL_PMSE_BUTTON_OK' => 'Ok',
+    'LBL_PRJ_STATUS' => 'Tila',
+    'LBL_PRJ_MODULE' => 'Kantamoduuli',
+    'LBL_PRJ_RUN_ORDER' => 'Suoritusjärjestys',
+    'LBL_PMSE_BUTTON_SAVE' => 'Tallenna',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Peruuta',
+    'LBL_PMSE_BUTTON_YES' => 'Kyllä',
+    'LBL_PMSE_BUTTON_NO' => 'Ei',
+    'LBL_PMSE_BUTTON_OK' => 'Ok',
     'LBL_PMSE_FORM_ERROR' => 'Korjaa virheet ennen jatkamista.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Suunnittele',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktiviteetit',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Toiminto',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Liidin aloitustapahtuma',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Myyntimahdollisuuden aloitustapahtuma' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Myyntimahdollisuuden aloitustapahtuma',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Dokumentin aloitustapahtuma',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Muun moduulin tapahtuma',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Odotustapahtuma',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Yrityssääntö',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Yrityssäännön toiminta',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Sähköpostimalli',
-);
+];

@@ -31,13 +31,12 @@ class SugarUpgradeFixSingularList extends UpgradeScript
             return;
         }
 
-        $app_list_strings = return_app_list_strings_language("en_us");
+        $app_list_strings = return_app_list_strings_language('en_us');
 
-        $changes = array();
+        $changes = [];
         $packages = $this->getPackages();
 
         foreach ($this->upgrader->state['MBModules'] as $MBModule) {
-
             // All custom modules will have package key in module name
             $keys = explode('_', $MBModule);
             $packageKey = $keys[0];
@@ -51,13 +50,13 @@ class SugarUpgradeFixSingularList extends UpgradeScript
                 $packages[$packageKey] = $packageKey;
             }
 
-            $changes[$packageKey] = $changes[$packageKey] ?? array();
+            $changes[$packageKey] = $changes[$packageKey] ?? [];
 
             // Try to add custom module to moduleList
             if (!isset($app_list_strings['moduleList'][$MBModule])) {
                 $langFile = $this->getLanguageFilePath($MBModule);
                 if (file_exists($langFile)) {
-                    $mod_strings = array();
+                    $mod_strings = [];
                     require $langFile;
 
                     $moduleName = $mod_strings['LBL_MODULE_NAME'] ?? false;
@@ -80,7 +79,6 @@ class SugarUpgradeFixSingularList extends UpgradeScript
         $rebuildLang = false;
 
         foreach ($changes as $packageKey => $content) {
-
             // if no changes - continue
             if (empty($content)) {
                 continue;
@@ -105,7 +103,7 @@ class SugarUpgradeFixSingularList extends UpgradeScript
         if ($rebuildLang) {
             $mi = new ModuleInstaller();
             $mi->silent = true;
-            $mi->rebuild_languages(array('en_us' => 'en_us'));
+            $mi->rebuild_languages(['en_us' => 'en_us']);
         }
     }
 
@@ -141,10 +139,10 @@ class SugarUpgradeFixSingularList extends UpgradeScript
     {
         $pattern = 'custom/modulebuilder/packages/*/manifest.php';
 
-        $packages = array();
+        $packages = [];
 
         foreach (glob($pattern) as $manifestFile) {
-            $manifest = array();
+            $manifest = [];
             include $manifestFile;
 
             if (!empty($manifest['key']) && !empty($manifest['name'])) {
@@ -165,7 +163,7 @@ class SugarUpgradeFixSingularList extends UpgradeScript
     protected function mergeCustomTranslations($filename, $content)
     {
         if (file_exists($filename)) {
-            $app_list_strings = array();
+            $app_list_strings = [];
             include $filename;
 
             $content = array_merge_recursive($app_list_strings, $content);

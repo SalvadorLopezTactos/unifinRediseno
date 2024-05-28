@@ -91,7 +91,7 @@ class GraphRequest
     /**
     * The timeout, in seconds
     *
-    * @var string
+    * @var int
     */
     protected $timeout;
     /**
@@ -211,7 +211,7 @@ class GraphRequest
     public function setReturnType($returnClass)
     {
         $this->returnType = $returnClass;
-        if ($this->returnType == "GuzzleHttp\Psr7\Stream") {
+        if ($this->returnType == "GuzzleHttp\Psr7\Stream" || $this->returnType === \Psr\Http\Message\StreamInterface::class) {
             $this->returnsStream  = true;
         } else {
             $this->returnsStream = false;
@@ -253,7 +253,7 @@ class GraphRequest
     public function attachBody($obj)
     {
         // Attach streams & JSON automatically
-        if (is_string($obj) || is_a($obj, 'GuzzleHttp\\Psr7\\Stream')) {
+        if (is_string($obj) || is_a($obj, \Psr\Http\Message\StreamInterface::class)) {
             $this->requestBody = $obj;
         }
         // By default, JSON-encode
@@ -276,7 +276,7 @@ class GraphRequest
     /**
     * Sets the timeout limit of the cURL request
     *
-    * @param string $timeout The timeout in seconds
+    * @param int $timeout The timeout in seconds
     *
     * @return $this object
     */
@@ -289,7 +289,7 @@ class GraphRequest
     /**
      * Gets the timeout value of the request
      *
-     * @return string
+     * @return int
      */
     public function getTimeout()
     {
@@ -466,7 +466,7 @@ class GraphRequest
         try {
             if (file_exists($path) && is_readable($path)) {
                 $file = fopen($path, 'r');
-                $stream = \GuzzleHttp\Psr7\stream_for($file);
+                $stream = \GuzzleHttp\Psr7\Utils::streamFor($file);
                 $this->requestBody = $stream;
                 return $this->execute($client);
             } else {
@@ -484,13 +484,12 @@ class GraphRequest
     */
     private function _getDefaultHeaders()
     {
-        $headers = [
+        return [
             'Host' => $this->baseUrl,
             'Content-Type' => 'application/json',
             'SdkVersion' => 'Graph-php-' . GraphConstants::SDK_VERSION,
             'Authorization' => 'Bearer ' . $this->accessToken
         ];
-        return $headers;
     }
 
     /**
@@ -546,8 +545,11 @@ class GraphRequest
             $clientSettings['verify'] = $this->proxyVerifySSL;
             $clientSettings['proxy'] = $this->proxyPort;
         }
-        $client = new Client($clientSettings);
+        if (extension_loaded('curl') && defined('CURL_VERSION_HTTP2') && (curl_version()["features"] & CURL_VERSION_HTTP2) == CURL_VERSION_HTTP2) {
 
-        return $client;
+            // Enable HTTP/2 if curl lib exists and supports it
+            $clientSettings['version'] = '2';
+        }
+        return new Client($clientSettings);
     }
 }

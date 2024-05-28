@@ -10,20 +10,20 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['pmse_Inbox']['base']['view']['unattendedCases-list-headerpane'] = array(
+$viewdefs['pmse_Inbox']['base']['view']['unattendedCases-list-headerpane'] = [
     'template' => 'headerpane',
     'title' => 'LBL_PMSE_TITLE_UNATTENDED_CASES',
-    'fields' => array(
-        array(
+    'fields' => [
+        [
             'name' => 'title',
             'type' => 'label',
             'default_value' => 'LBL_PMSE_TITLE_UNATTENDED_CASES',
-        ),
-    ),
-    'buttons' => array(
-        array(
+        ],
+    ],
+    'buttons' => [
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

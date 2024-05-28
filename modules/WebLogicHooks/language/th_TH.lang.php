@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'ฮุคของตรรกะเว็บ',
     'LBL_MODULE_NAME_SINGULAR' => 'ฮุคของตรรกะเว็บ',
     'LBL_MODULE_TITLE' => 'ฮุคของตรรกะเว็บ',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => 'วิธีของคำขอ',
     'LBL_TRIGGER_EVENT' => 'ทริกเกอร์เหตุการณ์',
     'LBL_URL' => 'URL',
-);
+];

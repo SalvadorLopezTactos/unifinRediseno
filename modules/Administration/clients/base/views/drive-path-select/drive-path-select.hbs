@@ -11,49 +11,56 @@
  */
 --}}
 <div class="row-fluid">
-    <table class="table ml-5">
-        <tr>
-            <td>
-                {{str 'LBL_NAME'}}
-            </td>
-            <td>
-                {{str 'LBL_SET_PATH' module}}
-            </td>
-        </tr>
-        {{#notEq currentFolderId "root"}}
+    <div class="ml-5">
+        <table class="table w-full">
             <tr>
-                <td>
-                    <span class="sicon sicon-folder-open"></span>
-                    <a data-id="{{parentId}}" data-driveId="{{#notEq parentId 'root'}}{{driveId}}{{/notEq}}" class="folder back">...</a>
+                <td class="p-2">
+                    {{str 'LBL_NAME'}}
                 </td>
-                <td></td>
+                <td class="p-2">
+                    {{str 'LBL_SET_PATH' module}}
+                </td>
             </tr>
-        {{/notEq}}
-        {{#each folders}}
-            <tr>
-                <td>
-                    {{#eq ../driveType "google"}}
-                        <a class="folder" data-id="{{id}}" data-name="{{name}}">{{name}}</a>
-                    {{else}}
-                        {{#if isFolder}}
-                            <a class="folder" data-id="{{id}}" data-name="{{name}}" {{#if driveId}}data-driveid="{{driveId}}"{{/if}}>{{name}}</a>
+            {{#notEq currentFolderId "root"}}
+                <tr>
+                    <td class="p-2">
+                        <span class="sicon sicon-folder-open"></span>
+                        <a data-id="{{parentId}}" data-driveId="{{#notEq parentId 'root'}}{{driveId}}{{/notEq}}" class="folder back">...</a>
+                    </td>
+                    <td class="p-2"></td>
+                </tr>
+            {{/notEq}}
+            {{#each folders}}
+                <tr>
+                    <td class="p-2">
+                        {{#eq ../driveType "google"}}
+                            <a class="folder" data-id="{{id}}" data-name="{{name}}">{{name}}</a>
                         {{else}}
-                            {{name}}
-                        {{/if}}
-                    {{/eq}}
-                </td>
-                <td>
-                    {{#eq ../driveType "google"}}
-                        <button class="btn setFolder" data-name="{{name}}"
-                            data-id="{{id}}">{{str 'LBL_SET_PATH' ../../module}}</button>
-                    {{else}}
-                        {{#if isFolder}}
+                            {{#if isFolder}}
+                                {{#if ../../../displayingSites}}
+                                    <span class="sicon sicon-web-lg"></span>
+                                {{else}}
+                                    <span class="sicon sicon-folder"></span>
+                                {{/if}}
+                                <a class="folder" data-id="{{id}}" {{#if ../../../displayingSites}}data-site=true{{/if}} {{#if ../../../displayingDocumentDrives}}data-documentlibrary=true{{/if}} data-name="{{name}}" {{#if driveId}}data-driveid="{{driveId}}"{{/if}}>{{name}}</a>
+                            {{else}}
+                                {{name}}
+                            {{/if}}
+                        {{/eq}}
+                    </td>
+                    <td class="p-2">
+                        {{#eq ../driveType "google"}}
                             <button class="btn setFolder" data-name="{{name}}"
-                                data-id="{{id}}" {{#if driveId}}data-driveid="{{driveId}}"{{/if}}>{{str 'LBL_SET_PATH' ../../../module}}</button>
-                        {{/if}}
-                    {{/eq}}
-                </td>
-            </tr>
-        {{/each}}
-    </table>
+                                data-id="{{id}}">{{str 'LBL_SET_PATH' ../../module}}</button>
+                        {{else}}
+                            {{#if isFolder}}
+                                <button class="btn setFolder" data-name="{{name}}"
+                                    data-id="{{id}}" {{#if ../../../displayingSites}}data-site=true{{/if}} {{#if ../../../displayingDocumentDrives}}data-documentlibrary=true{{/if}} {{#if driveId}}data-driveid="{{driveId}}"{{/if}}>{{str 'LBL_SET_PATH' ../../../module}}</button>
+                            {{/if}}
+                        {{/eq}}
+                    </td>
+                </tr>
+            {{/each}}
+        </table>
+    </div>
 </div>

@@ -19,18 +19,18 @@ class PortalCasesApi extends ModulePortalApi
     /**
      * {@inheritDoc}
      */
-    public function registerApiRest() : array
+    public function registerApiRest(): array
     {
-        return array(
-            'request_close' => array(
+        return [
+            'request_close' => [
                 'reqType' => 'PUT',
-                'path' => array('Cases', '?' ,'request_close'),
-                'pathVars' => array('module', 'record', ''),
+                'path' => ['Cases', '?', 'request_close'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'requestCloseCase',
                 'shortHelp' => 'This method sets the the case as "requested for closure"',
                 'longHelp' => 'include/api/help/cases_portal_request_close_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**

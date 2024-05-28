@@ -18,15 +18,15 @@ class MetaDataFiles
     /**
      * Constants for this class, used for pathing metadata files
      */
-    public const PATHBASE    = '';
-    public const PATHCUSTOM  = 'custom/';
+    public const PATHBASE = '';
+    public const PATHCUSTOM = 'custom/';
     public const PATHWORKING = 'custom/working/';
     public const PATHHISTORY = 'custom/history/';
 
     /**
      * Constant for component types... in our case, layouts and views
      */
-    public const COMPONENTVIEW   = 'view';
+    public const COMPONENTVIEW = 'view';
     public const COMPONENTLAYOUT = 'layout';
 
     /**
@@ -36,12 +36,12 @@ class MetaDataFiles
      * @access public
      * @static
      */
-    public static $paths = array(
-        MB_BASEMETADATALOCATION    => self::PATHBASE,
-        MB_CUSTOMMETADATALOCATION  => self::PATHCUSTOM,
+    public static $paths = [
+        MB_BASEMETADATALOCATION => self::PATHBASE,
+        MB_CUSTOMMETADATALOCATION => self::PATHCUSTOM,
         MB_WORKINGMETADATALOCATION => self::PATHWORKING,
         MB_HISTORYMETADATALOCATION => self::PATHHISTORY,
-    );
+    ];
 
     /**
      * The types of metadata files that could be loaded and their directory
@@ -51,11 +51,11 @@ class MetaDataFiles
      * @access public
      * @static
      */
-    public static $clients = array(
-        'base'    => 'base',
-        'portal'  => 'portal',
-        'mobile'  => 'mobile',
-    );
+    public static $clients = [
+        'base' => 'base',
+        'portal' => 'portal',
+        'mobile' => 'mobile',
+    ];
 
     /**
      * Listing of clients as they relate to their respective views
@@ -64,7 +64,7 @@ class MetaDataFiles
      * @access public
      * @static
      */
-    public static $clientsByView = array(
+    public static $clientsByView = [
         MB_WIRELESSDETAILVIEW => MB_WIRELESS,
         MB_WIRELESSEDITVIEW => MB_WIRELESS,
         MB_WIRELESSLISTVIEW => MB_WIRELESS,
@@ -75,7 +75,7 @@ class MetaDataFiles
         MB_PORTALRECORDVIEW => MB_PORTAL,
         MB_PORTALLISTVIEW => MB_PORTAL,
         MB_PORTALSEARCHVIEW => MB_PORTAL,
-    );
+    ];
 
     /**
      * Names of the files themselves
@@ -84,37 +84,37 @@ class MetaDataFiles
      * @access public
      * @static
      */
-    public static $names = array(
-        MB_POPUPSEARCH            => 'popupdefs',
-        MB_POPUPLIST              => 'popupdefs',
-        MB_LISTVIEW               => 'listviewdefs' ,
-        MB_SIDECARLISTVIEW        => 'list' ,
-        MB_BASICSEARCH            => 'searchdefs' ,
-        MB_ADVANCEDSEARCH         => 'searchdefs' ,
-        MB_EDITVIEW               => 'editviewdefs' ,
-        MB_DETAILVIEW             => 'detailviewdefs' ,
-        MB_QUICKCREATE            => 'quickcreatedefs',
-        MB_RECORDVIEW             => 'record',
-        MB_RECORDDASHLETVIEW      => 'recorddashlet',
-        MB_PREVIEWVIEW            => 'preview',
-        MB_SIDECARPOPUPVIEW       => 'selection-list',
-        MB_SIDECARDUPECHECKVIEW   => 'dupecheck-list',
-        MB_WIRELESSEDITVIEW       => 'edit' ,
-        MB_WIRELESSDETAILVIEW     => 'detail' ,
-        MB_WIRELESSLISTVIEW       => 'list' ,
-        MB_WIRELESSBASICSEARCH    => 'search' ,
-        MB_WIRELESSADVANCEDSEARCH => 'search' ,
-        MB_PORTALEDITVIEW         => 'edit',
-        MB_PORTALDETAILVIEW       => 'detail',
-        MB_PORTALRECORDVIEW       => 'record',
-        MB_PORTALLISTVIEW         => 'list',
-        MB_PORTALSEARCHVIEW       => 'search',
-        MB_FILTERVIEW             => 'default',
-        MB_BWCFILTERVIEW          => 'SearchFields',
+    public static $names = [
+        MB_POPUPSEARCH => 'popupdefs',
+        MB_POPUPLIST => 'popupdefs',
+        MB_LISTVIEW => 'listviewdefs',
+        MB_SIDECARLISTVIEW => 'list',
+        MB_BASICSEARCH => 'searchdefs',
+        MB_ADVANCEDSEARCH => 'searchdefs',
+        MB_EDITVIEW => 'editviewdefs',
+        MB_DETAILVIEW => 'detailviewdefs',
+        MB_QUICKCREATE => 'quickcreatedefs',
+        MB_RECORDVIEW => 'record',
+        MB_RECORDDASHLETVIEW => 'recorddashlet',
+        MB_PREVIEWVIEW => 'preview',
+        MB_SIDECARPOPUPVIEW => 'selection-list',
+        MB_SIDECARDUPECHECKVIEW => 'dupecheck-list',
+        MB_WIRELESSEDITVIEW => 'edit',
+        MB_WIRELESSDETAILVIEW => 'detail',
+        MB_WIRELESSLISTVIEW => 'list',
+        MB_WIRELESSBASICSEARCH => 'search',
+        MB_WIRELESSADVANCEDSEARCH => 'search',
+        MB_PORTALEDITVIEW => 'edit',
+        MB_PORTALDETAILVIEW => 'detail',
+        MB_PORTALRECORDVIEW => 'record',
+        MB_PORTALLISTVIEW => 'list',
+        MB_PORTALSEARCHVIEW => 'search',
+        MB_FILTERVIEW => 'default',
+        MB_BWCFILTERVIEW => 'SearchFields',
         MB_SIDECARQUOTEDATAGROUPLIST => 'quote-data-group-list',
         MB_QUOTEDATAGRANDTOTALHEADER => 'quote-data-grand-totals-header',
         MB_QUOTEDATAGRANDTOTALFOOTER => 'quote-data-grand-totals-footer',
-    );
+    ];
 
     /**
      * List of metadata def array vars
@@ -123,29 +123,29 @@ class MetaDataFiles
      * @access public
      * @var array
      */
-    public static $viewDefVars = array(
-        MB_EDITVIEW    => 'EditView' ,
-        MB_DETAILVIEW  => 'DetailView' ,
+    public static $viewDefVars = [
+        MB_EDITVIEW => 'EditView',
+        MB_DETAILVIEW => 'DetailView',
         MB_QUICKCREATE => 'QuickCreate',
-        MB_RECORDVIEW  => array('base', 'view', 'record'),
-        MB_RECORDDASHLETVIEW  => array('base', 'view', 'recorddashlet'),
-        MB_PREVIEWVIEW  => array('base', 'view', 'preview'),
-        MB_WIRELESSEDITVIEW => array('mobile','view','edit'),
-        MB_WIRELESSDETAILVIEW => array('mobile','view','detail'),
-        MB_PORTALEDITVIEW => array('portal','view','edit'),
-        MB_PORTALDETAILVIEW => array('portal','view','detail'),
-        MB_PORTALRECORDVIEW => array('portal','view','record'),
+        MB_RECORDVIEW => ['base', 'view', 'record'],
+        MB_RECORDDASHLETVIEW => ['base', 'view', 'recorddashlet'],
+        MB_PREVIEWVIEW => ['base', 'view', 'preview'],
+        MB_WIRELESSEDITVIEW => ['mobile', 'view', 'edit'],
+        MB_WIRELESSDETAILVIEW => ['mobile', 'view', 'detail'],
+        MB_PORTALEDITVIEW => ['portal', 'view', 'edit'],
+        MB_PORTALDETAILVIEW => ['portal', 'view', 'detail'],
+        MB_PORTALRECORDVIEW => ['portal', 'view', 'record'],
 
-    );
+    ];
 
     /**
      * Listing of components, used in pathing
      * @var array
      */
-    public static $components = array(
-        self::COMPONENTVIEW   => self::COMPONENTVIEW,
+    public static $components = [
+        self::COMPONENTVIEW => self::COMPONENTVIEW,
         self::COMPONENTLAYOUT => self::COMPONENTLAYOUT,
-    );
+    ];
 
     /**
      * The path inside the $client directories to the views
@@ -162,10 +162,10 @@ class MetaDataFiles
      * @var array
      * @static
      */
-    public static $moduleNamePlaceholders = array(
+    public static $moduleNamePlaceholders = [
         '<object_name>', '<_object_name>', '<OBJECT_NAME>',
         '<module_name>', '<_module_name>', '<MODULE_NAME>',
-    );
+    ];
 
     /**
      * Listing of excluded client file paths. This tells {@see getClientFiles} not
@@ -178,12 +178,12 @@ class MetaDataFiles
      *
      * @var array
      */
-    public static $excludedClientFilePaths = array(
-        'include/SugarObjects/templates/basic/clients/base/views/' => array(
+    public static $excludedClientFilePaths = [
+        'include/SugarObjects/templates/basic/clients/base/views/' => [
             'edit',
             'detail',
-        ),
-    );
+        ],
+    ];
 
     /**
      * The compiled list of excluded client files. This is based off
@@ -191,7 +191,7 @@ class MetaDataFiles
      *
      * @var array
      */
-    public static $excludedClientFiles = array();
+    public static $excludedClientFiles = [];
 
     /**
      * Gets the file base names array
@@ -207,7 +207,7 @@ class MetaDataFiles
     /**
      * Gets the file/variable name for a given view
      *
-     * @param  string $name The name of the view to get the variable/file name for
+     * @param string $name The name of the view to get the variable/file name for
      * @return string The name of the file/variable
      */
     public static function getName($name)
@@ -231,7 +231,7 @@ class MetaDataFiles
      * clients array.
      *
      * @static
-     * @param  string $client The client to get
+     * @param string $client The client to get
      * @return string
      */
     public static function getClient($client)
@@ -243,7 +243,7 @@ class MetaDataFiles
      * Gets a view client for a known view
      *
      * @static
-     * @param  string $view The view to get the client for
+     * @param string $view The view to get the client for
      * @return string
      */
     public static function getClientByView($view)
@@ -277,7 +277,7 @@ class MetaDataFiles
      * Gets the view type of a client based on the requested view
      *
      * @static
-     * @param  string $view The requested view
+     * @param string $view The requested view
      * @return string
      */
     public static function getViewClient($view)
@@ -310,19 +310,19 @@ class MetaDataFiles
 
     /**
      * helper to give us a parameterized path to create viewdefs for saving to file
-     * @param  string | array $path (path of keys to use for array)
-     * @param  mixed          $data the data to place at that path
+     * @param string | array $path (path of keys to use for array)
+     * @param mixed $data the data to place at that path
      * @return array          the data in the correct path
      */
     public static function mapPathToArray($path, $data)
     {
         if (!is_array($path)) {
-            return array($path => $data);
+            return [$path => $data];
         }
 
         $arr = $data;
         while ($key = array_pop($path)) {
-            $arr = array($key => $arr);
+            $arr = [$key => $arr];
         }
 
         return $arr;
@@ -330,8 +330,8 @@ class MetaDataFiles
 
     /**
      * helper to give us a parameterized path find our data from our viewdefs
-     * @param  string | array $path (path of keys to use for array)
-     * @param  mixed          $arr  the array to search for the path
+     * @param string | array $path (path of keys to use for array)
+     * @param mixed $arr the array to search for the path
      * @return array|         null the data in the correct path or null if a key isn't found.
      */
     public static function mapArrayToPath($path, $arr)
@@ -358,7 +358,6 @@ class MetaDataFiles
     }
 
 
-
     /**
      * Gets the list of view def array variable names
      *
@@ -379,7 +378,7 @@ class MetaDataFiles
      * filename counterparts
      *
      * @static
-     * @param  string $view The name of the view to get the def var for
+     * @param string $view The name of the view to get the def var for
      * @return string The def variable name
      */
     public static function getViewDefVar($view)
@@ -402,11 +401,11 @@ class MetaDataFiles
      * DeployedMetaDataImplementation instance.
      *
      * @static
-     * @param  string $view   The requested view type
-     * @param  string $module The module for this metadata file
-     * @param  string $type   The type of metadata file location (custom, working, etc)
-     * @param  string $client The client type for this file
-     * @param  array $params  Optional metadata file parameters
+     * @param string $view The requested view type
+     * @param string $module The module for this metadata file
+     * @param string $type The type of metadata file location (custom, working, etc)
+     * @param string $client The client type for this file
+     * @param array $params Optional metadata file parameters
      * @return string
      */
     public static function getDeployedFileName(
@@ -414,12 +413,13 @@ class MetaDataFiles
         $module,
         $type = MB_CUSTOMMETADATALOCATION,
         $client = '',
-        array $params = array()
+        array $params = []
     ) {
-        $file = self::getFile($view, $module, array_merge($params, array(
+
+        $file = self::getFile($view, $module, array_merge($params, [
             'client' => $client,
             'location' => $type,
-        )));
+        ]));
 
         return self::getFilePath($file);
     }
@@ -429,25 +429,25 @@ class MetaDataFiles
      * UndeployedMetaDataImplementation instance.
      *
      * @static
-     * @param  string $view        The requested view
-     * @param  string $module      The module for this metadata file
-     * @param  string $packageName The package for this metadata file
-     * @param  string $type        The type of metadata file to get (custom, working, etc)
-     * @param  string $client      The client type for this file
+     * @param string $view The requested view
+     * @param string $module The module for this metadata file
+     * @param string $packageName The package for this metadata file
+     * @param string $type The type of metadata file to get (custom, working, etc)
+     * @param string $client The client type for this file
      * @return string
      */
     public static function getUndeployedFileName($view, $module, $packageName, $type = MB_BASEMETADATALOCATION, $client = '')
     {
-        $file = self::getFile($view, $module, array(
+        $file = self::getFile($view, $module, [
             'package' => $packageName,
             'location' => $type,
             'client' => $client,
-        ));
+        ]);
 
         return self::getFilePath($file);
     }
 
-    public static function getFile($view, $module, array $params = array())
+    public static function getFile($view, $module, array $params = [])
     {
         $file = new MetaDataFile($view, $module);
 
@@ -490,11 +490,11 @@ class MetaDataFiles
      * Gets a $deftype metadata file for a given module
      *
      * @static
-     * @param  string      $module    The name of the module to get metadata for
-     * @param  string      $deftype   The def type to get (list, detail, edit, search)
-     * @param  string      $path      The path to the metadata (base path, custom path, working path, history path)
-     * @param  string      $client    The client making this request
-     * @param  string      $component Layout or view
+     * @param string $module The name of the module to get metadata for
+     * @param string $deftype The def type to get (list, detail, edit, search)
+     * @param string $path The path to the metadata (base path, custom path, working path, history path)
+     * @param string $client The client making this request
+     * @param string $component Layout or view
      * @return null|string Null if the request is invalid, path if it is good
      */
     public static function getModuleFileName($module, $deftype, $path = MB_BASEMETADATALOCATION, $client = '', $component = self::COMPONENTVIEW)
@@ -519,15 +519,15 @@ class MetaDataFiles
      * Gets a metadata file path for a module from its SugarObject template type
      *
      * @static
-     * @param  string $module    The name of the module to get metadata for
-     * @param  string $deftype   The def type to get (list, detail, edit, search)
-     * @param  string $client    The client making this request
-     * @param  string $component Layout or view
+     * @param string $module The name of the module to get metadata for
+     * @param string $deftype The def type to get (list, detail, edit, search)
+     * @param string $client The client making this request
+     * @param string $component Layout or view
      * @return string
      */
     public static function getSugarObjectFileName($module, $deftype, $client = '', $component = self::COMPONENTVIEW)
     {
-        $filename =  self::getSugarObjectFileDir($module, $client, $component) . '/' . $deftype . '.php';
+        $filename = self::getSugarObjectFileDir($module, $client, $component) . '/' . $deftype . '.php';
 
         return $filename;
     }
@@ -582,9 +582,9 @@ class MetaDataFiles
      * Gets a metadata directory path for a module from the ext framework type
      *
      * @static
-     * @param  string $module The name of the module to get metadata for
-     * @param  string $client The client making this request
-     * @param  string $component Layout or view
+     * @param string $module The name of the module to get metadata for
+     * @param string $client The client making this request
+     * @param string $component Layout or view
      * @return string
      */
     public static function getSugarExtensionFileDir($module = '', $client = 'base', $component = self::COMPONENTVIEW)
@@ -627,13 +627,13 @@ class MetaDataFiles
             $o = $module->object_name;
         }
 
-        $replacements = array(
-            "<object_name>"  => $m,
-            "<_object_name>" => strtolower($o),
-            "<OBJECT_NAME>"  => strtoupper($o),
-            "<module_name>"  => $m,
+        $replacements = [
+            '<object_name>' => $m,
+            '<_object_name>' => strtolower($o),
+            '<OBJECT_NAME>' => strtoupper($o),
+            '<module_name>' => $m,
             '<_module_name>' => strtolower($m),
-        );
+        ];
 
         return self::recursiveVariableReplace($defs, $replacements);
     }
@@ -649,7 +649,7 @@ class MetaDataFiles
      */
     public static function recursiveVariableReplace($source, $replacements)
     {
-        $ret = array();
+        $ret = [];
         foreach ($source as $key => $val) {
             if (is_array($val)) {
                 $newkey = $key;
@@ -675,38 +675,38 @@ class MetaDataFiles
      * @return mixed
      * hack for portal to use its own constants
      */
-    public static function getMBConstantForView($view, $client = "base")
+    public static function getMBConstantForView($view, $client = 'base')
     {
         // Sometimes client is set to a defined null
         if (empty($client)) {
             $client = 'base';
         }
 
-        $map = array(
-            "portal" => array(
+        $map = [
+            'portal' => [
                 'record' => MB_PORTALRECORDVIEW,
                 'search' => MB_PORTALSEARCHVIEW,
-                'list' => MB_PORTALLISTVIEW
-            ),
-            'mobile' => array(
+                'list' => MB_PORTALLISTVIEW,
+            ],
+            'mobile' => [
                 'edit' => MB_WIRELESSEDITVIEW,
                 'detail' => MB_WIRELESSDETAILVIEW,
-                'list' => MB_WIRELESSLISTVIEW
-            ),
-            "base" => array(
+                'list' => MB_WIRELESSLISTVIEW,
+            ],
+            'base' => [
                 'edit' => MB_EDITVIEW,
                 'detail' => MB_DETAILVIEW,
                 'advanced_search' => MB_ADVANCEDSEARCH,
                 'basic_search' => MB_BASICSEARCH,
                 'list' => MB_LISTVIEW,
-            ),
-        );
+            ],
+        ];
 
         // view variable sent to the factory has changed: remove 'view' suffix
         // in case of further change
         $view = strtolower($view);
-        if (substr_compare($view,'view',-4) === 0) {
-            $view = substr($view,0,-4);
+        if (substr_compare($view, 'view', -4) === 0) {
+            $view = substr($view, 0, -4);
         }
 
         return $map[$client][$view] ?? $view;
@@ -719,36 +719,36 @@ class MetaDataFiles
      *
      * @param array $modules The modules to clear the cache for. An empty array
      *                       clears caches for all modules
-     * @param string $type   The cache file to clear. An empty string clears all
+     * @param string $type The cache file to clear. An empty string clears all
      *                       cache files for a module
      * @param array $platforms A list of platforms to clear the caches for. An
      *                         empty platform list assumes all platforms.
      */
-    public static function clearModuleClientCache($modules = array(), $type = '', $platforms = array())
+    public static function clearModuleClientCache($modules = [], $type = '', $platforms = [])
     {
         // Clean up the module list
-        if ( is_string($modules) ) {
+        if (is_string($modules)) {
             // They just want one module
-            $modules = array($modules);
-        } elseif (is_null($modules) || count($modules) == 0) {
+            $modules = [$modules];
+        } elseif (is_null($modules) || safeCount($modules) == 0) {
             // They want all of the modules, so get them if they are already set
-            $modules = empty($GLOBALS['app_list_strings']['moduleList']) ? array() : array_keys($GLOBALS['app_list_strings']['moduleList']);
+            $modules = empty($GLOBALS['app_list_strings']['moduleList']) ? [] : array_keys($GLOBALS['app_list_strings']['moduleList']);
         }
 
         // Clean up the type
-        if ( empty($type) ) {
+        if (empty($type)) {
             $type = '*';
         }
 
         // Clean up the platforms
         if (empty($platforms)) {
-            $platforms = array('*');
+            $platforms = ['*'];
         }
 
         // Handle it
         foreach ($modules as $module) {
             // Start at the client dir level
-            $clientDirs = glob(sugar_cached('modules/'.$module.'/clients/'));
+            $clientDirs = glob(sugar_cached('modules/' . $module . '/clients/'));
             foreach ($clientDirs as $clientDir) {
                 foreach ($platforms as $platform) {
                     // Build up to the platform dir level
@@ -764,7 +764,6 @@ class MetaDataFiles
                         // Build up to the role dir level
                         $roleDirs = glob($platformDir . '*/');
                         foreach ($roleDirs as $roleDir) {
-
                             $cacheFiles = glob($roleDir . $type . '.php');
 
                             // Handle nuking the files
@@ -784,8 +783,8 @@ class MetaDataFiles
      *
      * @param array $platforms The list of platforms to get a module cache for.
      *                         Uses the first member of this list as the platform.
-     * @param string $type     The type of cache file to get.
-     * @param string $module   The module to get the cache for.
+     * @param string $type The type of cache file to get.
+     * @param string $module The module to get the cache for.
      * @param MetaDataContextInterface|null $context Metadata context
      * @return array
      */
@@ -803,22 +802,23 @@ class MetaDataFiles
      *
      * @param array $platforms A list of platforms to build for. Uses the first
      *                         platform in the list as the platform.
-     * @param string $type     The type of file to create the cache for.
-     * @param array $modules   The module to create the cache for.
+     * @param string $type The type of file to create the cache for.
+     * @param array $modules The module to create the cache for.
      * @param MetaDataContextInterface|null $context Metadata context
-     * @param bool $noCache    no cache flag
+     * @param bool $noCache no cache flag
      */
     public static function buildModuleClientCache(
         $platforms,
         $type,
-        $modules = array(),
+        $modules = [],
         MetaDataContextInterface $context = null,
         $noCache = false
     ) {
-        if ( is_string($modules) ) {
+
+        if (is_string($modules)) {
             // They just want one module
-            $modules = array($modules);
-        } elseif ( count($modules) == 0 ) {
+            $modules = [$modules];
+        } elseif (safeCount($modules) == 0) {
             // They want all of the modules
             $modules = array_keys($GLOBALS['app_list_strings']['moduleList']);
         }
@@ -830,7 +830,7 @@ class MetaDataFiles
             $fileList = static::getClientFiles($platforms, $type, $module, $context, $seed);
             $moduleResults = static::getClientFileContents($fileList, $type, $module, $seed, $platforms[0]);
 
-            if ($type == "view") {
+            if ($type == 'view') {
                 foreach ($moduleResults as $view => $defs) {
                     if (!is_array($defs) || empty($seed) || empty($seed->field_defs)) {
                         continue;
@@ -838,11 +838,11 @@ class MetaDataFiles
                     if (!empty($moduleResults[$view]['meta'])) {
                         static::normalizePanelFields($moduleResults[$view]['meta'], $seed);
                     }
-                    $meta = !empty($defs['meta']) ? $defs['meta'] : array();
-                    $deps = DependencyManager::getDependenciesForView($meta, ucfirst($view) . "View", $module);
+                    $meta = !empty($defs['meta']) ? $defs['meta'] : [];
+                    $deps = DependencyManager::getDependenciesForView($meta, ucfirst($view) . 'View', $module);
                     if (!empty($deps)) {
                         if (!isset($meta['dependencies']) || !is_array($meta['dependencies'])) {
-                            $moduleResults[$view]['meta']['dependencies'] = array();
+                            $moduleResults[$view]['meta']['dependencies'] = [];
                         }
                         foreach ($deps as $dep) {
                             $moduleResults[$view]['meta']['dependencies'][] = $dep->getDefinition();
@@ -853,7 +853,7 @@ class MetaDataFiles
                 if (!empty($seed) && !empty($seed->field_defs)) {
                     $modDeps = DependencyManager::getDependenciesForFields($seed->field_defs);
                     if (!empty($modDeps)) {
-                        $moduleResults['dependencies'] = array();
+                        $moduleResults['dependencies'] = [];
                         foreach ($modDeps as $dep) {
                             $moduleResults['dependencies'][] = $dep->getDefinition();
                         }
@@ -864,14 +864,14 @@ class MetaDataFiles
             if ($noCache) {
                 return $moduleResults;
             } else {
-                $basePath = sugar_cached('modules/'.$module.'/clients/'.$platforms[0]);
+                $basePath = sugar_cached('modules/' . $module . '/clients/' . $platforms[0]);
                 if ($context != null && $context->getHash()) {
                     $basePath .= '/' . $context->getHash();
                 }
-                sugar_mkdir($basePath,null,true);
+                sugar_mkdir($basePath, null, true);
 
-                $output = "<?php\n\$clientCache['".$module."']['".$platforms[0]."']['".$type."'] = ".var_export($moduleResults,true).";\n\n";
-                sugar_file_put_contents_atomic($basePath.'/'.$type.'.php', $output);
+                $output = "<?php\n\$clientCache['" . $module . "']['" . $platforms[0] . "']['" . $type . "'] = " . var_export($moduleResults, true) . ";\n\n";
+                sugar_file_put_contents_atomic($basePath . '/' . $type . '.php', $output);
             }
         }
     }
@@ -923,12 +923,12 @@ class MetaDataFiles
      * 1) Get a list of directories;
      * 2) Get the files in these directories.
      *
-     * @param string[]                      $platforms A list of platforms to build for. Uses the first
+     * @param string[] $platforms A list of platforms to build for. Uses the first
      *                                                 platform in the list as the platform.
-     * @param string                        $type      The type of file to retrieve for building metadata.
-     * @param string                        $module    The module to retrieve for building metadata.
-     * @param MetaDataContextInterface|null $context   Metadata context
-     * @param SugarBean|null                $bean
+     * @param string $type The type of file to retrieve for building metadata.
+     * @param string $module The module to retrieve for building metadata.
+     * @param MetaDataContextInterface|null $context Metadata context
+     * @param SugarBean|null $bean
      *
      * @return array<string,array<string,mixed>>
      */
@@ -939,7 +939,8 @@ class MetaDataFiles
         MetaDataContextInterface $context = null,
         ?SugarBean $bean = null
     ) {
-        $checkPaths = array();
+
+        $checkPaths = [];
         $dropdownViews = false;
 
         // First, build a list of paths to check
@@ -947,9 +948,9 @@ class MetaDataFiles
             foreach ($platforms as $platform) {
                 // These are sorted in order of priority.
                 // No templates for the non-module stuff
-                $checkPaths['custom/clients/'.$platform.'/'.$type.'s'] = array('platform'=>$platform,'template'=>false);
-                $checkPaths['clients/'.$platform.'/'.$type.'s'] = array('platform'=>$platform,'template'=>false);
-                $checkPaths[self::getSugarExtensionFileDir('', $platform, $type)] = array('platform' => $platform, 'template' => false);
+                $checkPaths['custom/clients/' . $platform . '/' . $type . 's'] = ['platform' => $platform, 'template' => false];
+                $checkPaths['clients/' . $platform . '/' . $type . 's'] = ['platform' => $platform, 'template' => false];
+                $checkPaths[self::getSugarExtensionFileDir('', $platform, $type)] = ['platform' => $platform, 'template' => false];
             }
         } else {
             foreach ($platforms as $platform) {
@@ -960,29 +961,29 @@ class MetaDataFiles
                 if (!$bean) {
                     $bean = BeanFactory::newBean($module);
                 }
-                $module_path  = $bean->module_dir ?? $module;
+                $module_path = $bean->module_dir ?? $module;
                 if ($type === 'dropdownViews') {
                     $type = 'view';
                     $dropdownViews = true;
-                    $checkPaths['custom/modules/'.$module_path.'/clients/'.$platform.'/'.$type.'s'] = ['platform'=>$platform,'template'=>false];
-                    $baseTemplateDir = 'include/SugarObjects/templates/basic/clients/'.$platform.'/'.$type.'s';
+                    $checkPaths['custom/modules/' . $module_path . '/clients/' . $platform . '/' . $type . 's'] = ['platform' => $platform, 'template' => false];
+                    $baseTemplateDir = 'include/SugarObjects/templates/basic/clients/' . $platform . '/' . $type . 's';
                     $nonBaseTemplateDir = self::getSugarObjectFileDir($module, $platform, $type, $bean);
                     if (!empty($nonBaseTemplateDir) && $nonBaseTemplateDir != $baseTemplateDir) {
-                        $checkPaths['custom/'.$nonBaseTemplateDir] = ['platform'=>$platform,'template'=>true];
+                        $checkPaths['custom/' . $nonBaseTemplateDir] = ['platform' => $platform, 'template' => true];
                     }
-                    $checkPaths['custom/'.$baseTemplateDir] = ['platform'=>$platform,'template'=>true];
+                    $checkPaths['custom/' . $baseTemplateDir] = ['platform' => $platform, 'template' => true];
                 } else {
-                    $checkPaths['custom/modules/'.$module_path.'/clients/'.$platform.'/'.$type.'s'] = array('platform'=>$platform,'template'=>false);
-                    $checkPaths['modules/'.$module_path.'/clients/'.$platform.'/'.$type.'s'] = array('platform'=>$platform,'template'=>false);
-                    $baseTemplateDir = 'include/SugarObjects/templates/basic/clients/'.$platform.'/'.$type.'s';
+                    $checkPaths['custom/modules/' . $module_path . '/clients/' . $platform . '/' . $type . 's'] = ['platform' => $platform, 'template' => false];
+                    $checkPaths['modules/' . $module_path . '/clients/' . $platform . '/' . $type . 's'] = ['platform' => $platform, 'template' => false];
+                    $baseTemplateDir = 'include/SugarObjects/templates/basic/clients/' . $platform . '/' . $type . 's';
                     $nonBaseTemplateDir = self::getSugarObjectFileDir($module, $platform, $type, $bean);
                     if (!empty($nonBaseTemplateDir) && $nonBaseTemplateDir != $baseTemplateDir) {
-                        $checkPaths['custom/'.$nonBaseTemplateDir] = array('platform'=>$platform,'template'=>true);
-                        $checkPaths[$nonBaseTemplateDir] = array('platform'=>$platform, 'template'=>true);
+                        $checkPaths['custom/' . $nonBaseTemplateDir] = ['platform' => $platform, 'template' => true];
+                        $checkPaths[$nonBaseTemplateDir] = ['platform' => $platform, 'template' => true];
                     }
-                    $checkPaths['custom/'.$baseTemplateDir] = array('platform'=>$platform,'template'=>true);
-                    $checkPaths[$baseTemplateDir] = array('platform'=>$platform,'template'=>true);
-                    $checkPaths[self::getSugarExtensionFileDir($module, $platform, $type)] = array('platform' => $platform, 'template' => false);
+                    $checkPaths['custom/' . $baseTemplateDir] = ['platform' => $platform, 'template' => true];
+                    $checkPaths[$baseTemplateDir] = ['platform' => $platform, 'template' => true];
+                    $checkPaths[self::getSugarExtensionFileDir($module, $platform, $type)] = ['platform' => $platform, 'template' => false];
                 }
             }
         }
@@ -1002,12 +1003,12 @@ class MetaDataFiles
      */
     public static function getClientFileList($checkPaths, MetaDataContextInterface $context = null, bool $dropdownViews = false)
     {
-        $fileLists = array();
+        $fileLists = [];
         foreach ($checkPaths as $path => $pathInfo) {
             // Looks at /modules/Accounts/clients/base/views/*
             // So should pull up "record","list","preview"
             $dirsInPath = SugarAutoLoader::getDirFiles($path, true, null, true);
-            $fileList = array();
+            $fileList = [];
 
             foreach ($dirsInPath as $fullSubPath) {
                 $subPath = basename($fullSubPath);
@@ -1024,15 +1025,15 @@ class MetaDataFiles
 
                     $file = basename($fullFile);
                     $fileIndex = $fullFile;
-                    if ( !isset($fileList[$fileIndex]) ) {
-                        $fileList[$fileIndex] = array(
+                    if (!isset($fileList[$fileIndex])) {
+                        $fileList[$fileIndex] = [
                             'path' => $fullFile,
                             'file' => $file,
                             'subPath' => $subPath,
                             'platform' => $pathInfo['platform'],
                             'template' => $pathInfo['template'] && substr($file, -4) == '.php',
                             'params' => self::getClientFileParams($fullFile),
-                        );
+                        ];
                     }
                 }
             }
@@ -1077,40 +1078,41 @@ class MetaDataFiles
     public static function getClientFileParams($path)
     {
         if (preg_match('/\/roles\/([^\/]+)\//', $path, $matches)) {
-            return array(
+            return [
                 'role' => $matches[1],
-            );
+            ];
         }
-        return array();
+        return [];
     }
+
     /**
      * Get the content from the global files.
      *
-     * @param array  $platform The platform for building metadata.
-     * @param string $type     The type of file to retrieve for building metadata.
-     * @param string $subPath  The subPath of file to retrieve for building metadata.
+     * @param array $platform The platform for building metadata.
+     * @param string $type The type of file to retrieve for building metadata.
+     * @param string $subPath The subPath of file to retrieve for building metadata.
      *
      * @return array
      */
     public static function getGlobalFileContent($platform, $type, $subPath)
     {
-        $checkPaths = array();
+        $checkPaths = [];
 
         //Add the global base files as the default ones for the extension files
         //Used when the corresponding files in custom module, module & template cannot be found
         //See the previously checked files in getClientFiles().
-        $checkPaths['custom/clients/'.$platform.'/'.$type.'s'] = array('platform' => $platform, 'template' => false);
-        $checkPaths['clients/'.$platform.'/'.$type.'s'] = array('platform' => $platform, 'template' => false);
+        $checkPaths['custom/clients/' . $platform . '/' . $type . 's'] = ['platform' => $platform, 'template' => false];
+        $checkPaths['clients/' . $platform . '/' . $type . 's'] = ['platform' => $platform, 'template' => false];
 
         //Find the files in the paths
         $fileList = self::getClientFileList($checkPaths);
 
         //Get the content of the files to find the metadata in $subPath
-        $results = array();
+        $results = [];
         foreach ($fileList as $fileIndex => $fileInfo) {
             $extension = substr($fileInfo['path'], -3);
             if ($extension == 'php') {
-                $viewdefs = array();
+                $viewdefs = [];
                 require $fileInfo['path'];
                 if (isset($viewdefs[$platform][$type][$subPath])) {
                     $results = $viewdefs[$platform][$type][$subPath];
@@ -1130,7 +1132,7 @@ class MetaDataFiles
      * @param $subPath record, list, etc
      * @return bool true if any metadata file exists, false otherwise
      */
-    protected static function hasPlatformSpecificMetaFile($module, $type, $platform, $subPath) : bool
+    protected static function hasPlatformSpecificMetaFile($module, $type, $platform, $subPath): bool
     {
         $metaFiles = [];
         if (empty($module)) {
@@ -1151,16 +1153,16 @@ class MetaDataFiles
     /**
      * Get the content of the given files to build metadata.
      *
-     * @param array  $fileList A list of files to retrieve for building metadata.
-     * @param string $type     The type of file to retrieve for building metadata.
-     * @param string $module   The module to retrieve for building metadata.
+     * @param array $fileList A list of files to retrieve for building metadata.
+     * @param string $type The type of file to retrieve for building metadata.
+     * @param string $module The module to retrieve for building metadata.
      * @param string $platform The platform to search for the client data (defaults to base)
      *
      * @return array
      */
     public static function getClientFileContents($fileList, $type, $module = '', $bean = null, $platform = 'base')
     {
-        $results = array();
+        $results = [];
         $dropdownView = false;
 
         if ($type === 'dropdownViews') {
@@ -1169,12 +1171,12 @@ class MetaDataFiles
         }
 
         foreach ($fileList as $fileInfo) {
-            $extension = substr($fileInfo['path'],-3);
+            $extension = substr($fileInfo['path'], -3);
             switch ($extension) {
                 case '.js':
                     $subpath = $fileInfo['subPath'];
-                    if (strpos($fileInfo['path'], "custom/") === 0) {
-                        $subpath = "custom" . ucfirst($subpath);
+                    if (strpos($fileInfo['path'], 'custom/') === 0) {
+                        $subpath = 'custom' . ucfirst($subpath);
                     }
                     if (isset($results[$subpath]['controller'][$fileInfo['platform']])) {
                         continue 2;
@@ -1183,8 +1185,8 @@ class MetaDataFiles
                     $results[$subpath]['controller'][$fileInfo['platform']] = $controller;
                     break;
                 case 'hbs':
-                    $layoutName = substr($fileInfo['file'],0,-4);
-                    if ( isset($results[$fileInfo['subPath']]['templates'][$layoutName]) ) {
+                    $layoutName = substr($fileInfo['file'], 0, -4);
+                    if (isset($results[$fileInfo['subPath']]['templates'][$layoutName])) {
                         continue 2;
                     }
                     $results[$fileInfo['subPath']]['templates'][$layoutName] = self::trimLicense(
@@ -1192,7 +1194,7 @@ class MetaDataFiles
                     );
                     break;
                 case 'php':
-                    $viewdefs = array();
+                    $viewdefs = [];
                     $ext = strstr($fileInfo['path'], '.ext.php');
                     if ((isset($results[$fileInfo['subPath']]['meta']) && !$ext)
                         || ($platform != $fileInfo['platform'] && $ext
@@ -1223,29 +1225,29 @@ class MetaDataFiles
                         if (!$bean) {
                             $bean = BeanFactory::newBean($module);
                         }
-                        if ( !is_a($bean,'SugarBean') ) {
+                        if (!is_a($bean, 'SugarBean')) {
                             // I'm not sure what this is, but it's not something we can template
                             continue 2;
                         }
                         $viewdefs = self::getModuleMetaDataDefsWithReplacements($bean, $viewdefs);
-                        if ( ! isset($viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']]) ) {
-                            $GLOBALS['log']->error('Could not generate a metadata file for module '.$module.', platform: '.$fileInfo['platform'].', type: '.$type);
+                        if (!isset($viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']])) {
+                            $GLOBALS['log']->error('Could not generate a metadata file for module ' . $module . ', platform: ' . $fileInfo['platform'] . ', type: ' . $type);
                             continue 2;
                         }
 
                         $results[$fileInfo['subPath']]['meta'] = $viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']];
                     } else {
                         require $fileInfo['path'];
-                        if($fileInfo['subPath'] != 'subpanels') {
+                        if ($fileInfo['subPath'] != 'subpanels') {
                             $extensionName = "sidecar{$type}{$fileInfo['platform']}{$fileInfo['subPath']}";
                             $extFile = SugarAutoLoader::loadExtension($extensionName, $module);
                             if ($extFile) {
                                 include FileLoader::validateFilePath($extFile);
                             }
                         }
-                        if ( empty($module) ) {
-                            if ( !isset($viewdefs[$fileInfo['platform']][$type][$fileInfo['subPath']]) ) {
-                                $GLOBALS['log']->error('No viewdefs for type: '.$type.' viewdefs @ '.$fileInfo['path']);
+                        if (empty($module)) {
+                            if (!isset($viewdefs[$fileInfo['platform']][$type][$fileInfo['subPath']])) {
+                                $GLOBALS['log']->error('No viewdefs for type: ' . $type . ' viewdefs @ ' . $fileInfo['path']);
                             } else {
                                 $results[$fileInfo['subPath']]['meta'] = $viewdefs[$fileInfo['platform']][$type][$fileInfo['subPath']];
                             }
@@ -1256,19 +1258,18 @@ class MetaDataFiles
                                         $viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']] ?? []
                                     );
                             }
-                            if ( !isset($viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']]) ) {
-                                $GLOBALS['log']->error('No viewdefs for module: '.$module.' viewdefs @ '.$fileInfo['path']);
+                            if (!isset($viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']])) {
+                                $GLOBALS['log']->error('No viewdefs for module: ' . $module . ' viewdefs @ ' . $fileInfo['path']);
                             } else {
-                                if(isset($results[$fileInfo['subPath']]['meta']) && $fileInfo['subPath'] == 'subpanels') {
+                                if (isset($results[$fileInfo['subPath']]['meta']) && $fileInfo['subPath'] == 'subpanels') {
                                     $results[$fileInfo['subPath']]['meta'] = self::mergeSubpanels($viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']], $results[$fileInfo['subPath']]['meta']);
-
                                 } else {
                                     // For custom modules or if there is no subpanel
                                     // layout defined and edits are made, we
                                     // need to capture the changes that all live
                                     // in one file for subpanels
-                                    if($fileInfo['subPath'] == 'subpanels') {
-                                        $results[$fileInfo['subPath']]['meta'] = self::mergeSubpanels($viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']], array('components' => array()));
+                                    if ($fileInfo['subPath'] == 'subpanels') {
+                                        $results[$fileInfo['subPath']]['meta'] = self::mergeSubpanels($viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']], ['components' => []]);
                                     } else {
                                         $meta = $viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']];
                                         if ($dropdownView) {
@@ -1305,12 +1306,12 @@ class MetaDataFiles
         foreach (safeIsIterable($mergeComponents) ? $mergeComponents : [] as $mergeComponent) {
             // if it is the only thing in the array its an override and it needs to be added to an existing component
             if (isset($currentDefs['components'], $mergeComponent['override_subpanel_list_view'])
-                && (is_countable($mergeComponent) ? count($mergeComponent) : 0) == 1
+                && safeCount($mergeComponent) == 1
             ) {
                 $overrideView = $mergeComponent['override_subpanel_list_view']['view'];
                 $mergeContext = $mergeComponent['override_subpanel_list_view']['link'];
                 foreach ($currentDefs['components'] as $key => $currentComponent) {
-                    if(!empty($currentComponent['context']['link']) && $currentComponent['context']['link'] == $mergeContext) {
+                    if (!empty($currentComponent['context']['link']) && $currentComponent['context']['link'] == $mergeContext) {
                         $currentDefs['components'][$key]['override_subpanel_list_view'] = $overrideView;
                         continue;
                     }
@@ -1325,7 +1326,7 @@ class MetaDataFiles
                         }
                     }
                 }
-                if(!$linkExists) {
+                if (!$linkExists) {
                     $currentDefs['components'][] = $mergeComponent;
                 }
             }
@@ -1407,15 +1408,15 @@ class MetaDataFiles
      */
     public static function loadSingleClientMetadata($type, $name, $platform = 'base')
     {
-        $fileList = array();
-        $platforms = array();
+        $fileList = [];
+        $platforms = [];
         if ($platform != 'base') {
             $platforms[] = $platform;
         }
         $platforms[] = 'base';
         foreach ($platforms as $platform) {
             $fileToCheck = "clients/$platform/{$type}s/$name/$name.php";
-            $fileList['custom/'.$fileToCheck] = $platform;
+            $fileList['custom/' . $fileToCheck] = $platform;
             $fileList[$fileToCheck] = $platform;
         }
 
@@ -1434,7 +1435,7 @@ class MetaDataFiles
     /**
      * Loads a specific client router's contents
      *
-     * @param string $module   The name of the module to get metadata for
+     * @param string $module The name of the module to get metadata for
      * @param string $platform The platform to search for the client data (defaults to base)
      *
      * @return string          Contents of the metadata file
@@ -1475,16 +1476,16 @@ class MetaDataFiles
      *
      * @return string
      */
-    protected static function trimLicense($text) {
-        $start = "{{!";
-        $end = "}}";
+    protected static function trimLicense($text)
+    {
+        $start = '{{!';
+        $end = '}}';
         if (substr($text, 0, 3) == $start) {
             $endOfLicense = strpos($text, $end) + strlen($end);
             $text = substr($text, $endOfLicense);
         }
 
         return $text;
-
     }
 
     /**

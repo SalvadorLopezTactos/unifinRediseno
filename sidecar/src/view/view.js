@@ -9,11 +9,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const Acl = require('core/acl');
-const Component = require('view/component');
-const PluginManager = require('core/plugin-manager');
-const Language = require('core/language');
-const Template = require('view/template');
+const Acl = require('../core/acl');
+const Component = require('./component');
+const PluginManager = require('../core/plugin-manager');
+const Language = require('../core/language');
+const Template = require('./template');
 
 /**
  * Base View class. Use {@link View.ViewManager} to create instances of views.

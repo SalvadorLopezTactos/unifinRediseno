@@ -9,62 +9,62 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['KBContents']['base']['layout']['config-drawer'] = array(
+$viewdefs['KBContents']['base']['layout']['config-drawer'] = [
     'type' => 'config-drawer',
-    'components' => array(
-        array(
-            'layout' => array(
-                'components' => array(
-                    array(
-                        'layout' => array(
-                            'components' => array(
-                                array(
+    'components' => [
+        [
+            'layout' => [
+                'components' => [
+                    [
+                        'layout' => [
+                            'components' => [
+                                [
                                     'view' => 'config-header-buttons',
-                                ),
-                                array(
+                                ],
+                                [
                                     'layout' => 'config-drawer-content',
-                                ),
-                            ),
+                                ],
+                            ],
                             'type' => 'simple',
                             'name' => 'main-pane',
                             'css_class' => 'main-pane span8',
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
-                            'components' => array(
-                                array(
+                        ],
+                    ],
+                    [
+                        'layout' => [
+                            'components' => [
+                                [
                                     'view' => 'config-drawer-howto',
-                                ),
-                            ),
+                                ],
+                            ],
                             'type' => 'simple',
                             'name' => 'side-pane',
                             'span' => 4,
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
-                            'components' => array(),
+                        ],
+                    ],
+                    [
+                        'layout' => [
+                            'components' => [],
                             'type' => 'simple',
                             'name' => 'dashboard-pane',
                             'span' => 4,
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
-                            'components' => array(),
+                        ],
+                    ],
+                    [
+                        'layout' => [
+                            'components' => [],
                             'type' => 'simple',
                             'name' => 'preview-pane',
                             'span' => 8,
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
                 'type' => 'default',
                 'name' => 'sidebar',
                 'span' => 12,
-            ),
-        ),
-    ),
+            ],
+        ],
+    ],
     'name' => 'base',
     'span' => 12,
-);
+];

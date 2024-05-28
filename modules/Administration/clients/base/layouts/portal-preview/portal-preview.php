@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Administration']['base']['layout']['portal-preview'] = array(
+$viewdefs['Administration']['base']['layout']['portal-preview'] = [
     'type' => 'portal-preview',
     'name' => 'portal-preview',
     // Manually force portal preview to use the light theme as Portal has not received the dark theme treatment yet
@@ -46,4 +46,4 @@ $viewdefs['Administration']['base']['layout']['portal-preview'] = array(
             ],
         ],
     ],
-);
+];

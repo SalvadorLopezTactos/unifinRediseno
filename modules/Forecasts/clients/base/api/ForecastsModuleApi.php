@@ -14,16 +14,16 @@ class ForecastsModuleApi extends ModuleApi
 {
     public function registerApiRest()
     {
-        return array(
-            'create' => array(
+        return [
+            'create' => [
                 'reqType' => 'POST',
-                'path' => array('Forecasts'),
-                'pathVars' => array('module'),
+                'path' => ['Forecasts'],
+                'pathVars' => ['module'],
                 'method' => 'createRecord',
                 'shortHelp' => 'This method creates a new record of the specified type',
                 'longHelp' => 'include/api/help/module_new_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     public function createRecord(ServiceBase $api, array $args)

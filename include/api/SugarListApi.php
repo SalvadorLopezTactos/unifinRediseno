@@ -11,11 +11,12 @@
  */
 
 
-abstract class SugarListApi extends SugarApi {
+abstract class SugarListApi extends SugarApi
+{
     protected $defaultLimit = 20;
     protected $allowOffsetEnd = true;
-    protected $defaultOrderBy = array('date_modified'=>'DESC');
-    protected $addDefaultFields = array('id','date_modified');
+    protected $defaultOrderBy = ['date_modified' => 'DESC'];
+    protected $addDefaultFields = ['id', 'date_modified'];
     protected $checkAcls = true;
 
     /**
@@ -31,16 +32,16 @@ abstract class SugarListApi extends SugarApi {
     public function parseArguments(ServiceBase $api, array $args, SugarBean $seed = null)
     {
         $limit = $this->defaultLimit;
-        if ( isset($args['max_num']) ) {
+        if (isset($args['max_num'])) {
             $limit = (int)$args['max_num'];
         }
 
         $limit = $this->checkMaxListLimit($limit);
 
         $offset = 0;
-        if ( isset($args['offset']) ) {
-            if ( $args['offset'] === 'end' ) {
-                if ( $this->allowOffsetEnd ) {
+        if (isset($args['offset'])) {
+            if ($args['offset'] === 'end') {
+                if ($this->allowOffsetEnd) {
                     $offset = 'end';
                 } else {
                     $offset = 0;
@@ -51,30 +52,30 @@ abstract class SugarListApi extends SugarApi {
             }
         }
 
-        $userFields = array();
+        $userFields = [];
         if (!empty($args['fields'])) {
-            $userFields = explode(",", $args["fields"]);
+            $userFields = explode(',', $args['fields']);
         }
-        foreach ( $this->addDefaultFields as $defaultField ) {
-            if ( !in_array($defaultField,$userFields) ) {
+        foreach ($this->addDefaultFields as $defaultField) {
+            if (!in_array($defaultField, $userFields)) {
                 $userFields[] = $defaultField;
             }
         }
 
         $orderBy = '';
-        if ( isset($args['order_by']) ) {
-            if ( strpos($args['order_by'],',') !== 0 ) {
+        if (isset($args['order_by'])) {
+            if (strpos($args['order_by'], ',') !== 0) {
                 // There is a comma, we are ordering by more than one thing
-                $orderBys = explode(',',$args['order_by']);
+                $orderBys = explode(',', $args['order_by']);
             } else {
-                $orderBys = array($args['order_by']);
+                $orderBys = [$args['order_by']];
             }
-            $orderByArray = array();
-            foreach ( $orderBys as $order ) {
-                if ( strpos($order,':') ) {
+            $orderByArray = [];
+            foreach ($orderBys as $order) {
+                if (strpos($order, ':')) {
                     // It has a :, it's specifying ASC / DESC
                     [$column, $direction] = explode(':', $order);
-                    if ( strtolower($direction) == 'desc' ) {
+                    if (strtolower($direction) == 'desc') {
                         $direction = 'DESC';
                     } else {
                         $direction = 'ASC';
@@ -84,28 +85,26 @@ abstract class SugarListApi extends SugarApi {
                     $column = $order;
                     $direction = 'ASC';
                 }
-                if ( $seed != null ) {
-                    if ( $this->checkAcls && !$seed->ACLFieldAccess($column,'list') ) {
-                        throw new SugarApiExceptionNotAuthorized('No access to view field: '.$column.' in module: '.$seed->module_dir);
+                if ($seed != null) {
+                    if ($this->checkAcls && !$seed->ACLFieldAccess($column, 'list')) {
+                        throw new SugarApiExceptionNotAuthorized('No access to view field: ' . $column . ' in module: ' . $seed->module_dir);
                     }
-                    if ( !isset($seed->field_defs[$column]) ) {
-                        throw new SugarApiExceptionNotAuthorized('No access to view field: '.$column.' in module: '.$seed->module_dir);
+                    if (!isset($seed->field_defs[$column])) {
+                        throw new SugarApiExceptionNotAuthorized('No access to view field: ' . $column . ' in module: ' . $seed->module_dir);
                     }
                 }
 
                 $orderByArray[$column] = $direction;
             }
-
         } else {
             $orderByArray = $this->defaultOrderBy;
         }
 
-        return array('limit' => $limit,
-                     'offset' => $offset,
-                     'fields' => $userFields,
-                     'orderBy' => $orderByArray,
-        );
-
+        return ['limit' => $limit,
+            'offset' => $offset,
+            'fields' => $userFields,
+            'orderBy' => $orderByArray,
+        ];
     }
 
     /**
@@ -113,12 +112,13 @@ abstract class SugarListApi extends SugarApi {
      * @param array $orderByArray an array of $column => $direction
      * @return string A SQL string of the order by.
      */
-    public function convertOrderByToSql(array $orderByArray) {
-        $sqlArray = array();
-        foreach ( $orderByArray as $column => $direction ) {
-            $sqlArray[] = $column." ".$direction;
+    public function convertOrderByToSql(array $orderByArray)
+    {
+        $sqlArray = [];
+        foreach ($orderByArray as $column => $direction) {
+            $sqlArray[] = $column . ' ' . $direction;
         }
 
-        return implode(',',$sqlArray);
+        return implode(',', $sqlArray);
     }
 }

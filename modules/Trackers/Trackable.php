@@ -10,8 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-interface Trackable {
+interface Trackable
+{
     public function getMetrics();
+
     public function getStores();
 }
-?>

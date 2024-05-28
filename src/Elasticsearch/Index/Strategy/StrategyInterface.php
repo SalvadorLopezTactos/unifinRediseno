@@ -44,7 +44,7 @@ interface StrategyInterface
      * @param array $context
      * return array
      */
-    public function getReadIndices($module, array $context = array());
+    public function getReadIndices($module, array $context = []);
 
     /**
      * Return the current active write index for given module. Only one
@@ -58,7 +58,7 @@ interface StrategyInterface
      * @param array $context
      * @return string
      */
-    public function getWriteIndex($module, array $context = array());
+    public function getWriteIndex($module, array $context = []);
 
     /**
      * Set configuration parameters

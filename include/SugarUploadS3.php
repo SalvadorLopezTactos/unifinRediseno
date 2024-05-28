@@ -11,6 +11,7 @@
  */
 require_once 'vendor/Zend/Service/Amazon/S3.php';
 require_once 'vendor/Zend/Service/Amazon/S3/Stream.php';
+
 use Psr\Log\LoggerInterface;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
@@ -28,7 +29,7 @@ class SugarUploadS3 extends UploadStream
     protected $bucket;
     protected $metadata;
 
-    public const S3_STREAM_NAME='uploads3';
+    public const S3_STREAM_NAME = 'uploads3';
 
     public function __construct()
     {
@@ -42,20 +43,20 @@ class SugarUploadS3 extends UploadStream
      */
     protected function init()
     {
-        if(!empty($this->s3)) {
+        if (!empty($this->s3)) {
             return;
         }
-        if(empty($GLOBALS['sugar_config']['aws'])
+        if (empty($GLOBALS['sugar_config']['aws'])
             || empty($GLOBALS['sugar_config']['aws']['aws_key'])
             || empty($GLOBALS['sugar_config']['aws']['aws_secret'])
             || empty($GLOBALS['sugar_config']['aws']['upload_bucket'])
-            ) {
-            $GLOBALS['log']->fatal("S3 keys are not set!");
-            throw new Exception("S3 keys are not set!");
+        ) {
+            $GLOBALS['log']->fatal('S3 keys are not set!');
+            throw new Exception('S3 keys are not set!');
         }
         Container::getInstance()->get(LoggerInterface::class)
             ->warning('S3 is deprecated since 10.3.0 and will be removed in future versions of SugarCRM.');
-        $this->metadata = array(Zend_Service_Amazon_S3::S3_ACL_HEADER =>Zend_Service_Amazon_S3::S3_ACL_PRIVATE);
+        $this->metadata = [Zend_Service_Amazon_S3::S3_ACL_HEADER => Zend_Service_Amazon_S3::S3_ACL_PRIVATE];
         $this->s3 = new Zend_Service_Amazon_S3($GLOBALS['sugar_config']['aws']['aws_key'], $GLOBALS['sugar_config']['aws']['aws_secret']);
         $this->s3->registerAsClient(self::S3_STREAM_NAME);
         $this->bucket = $GLOBALS['sugar_config']['aws']['upload_bucket'];
@@ -68,11 +69,11 @@ class SugarUploadS3 extends UploadStream
      */
     public function urlToObject($path, $prefix = false)
     {
-        $object = substr($path, strlen(self::STREAM_NAME)+3); // upload://
-        if($prefix) {
-            return self::S3_STREAM_NAME."://".$this->bucket."/".$object;
+        $object = substr($path, strlen(self::STREAM_NAME) + 3); // upload://
+        if ($prefix) {
+            return self::S3_STREAM_NAME . '://' . $this->bucket . '/' . $object;
         } else {
-            return $this->bucket."/".$object;
+            return $this->bucket . '/' . $object;
         }
     }
 
@@ -85,24 +86,27 @@ class SugarUploadS3 extends UploadStream
     protected function callS3($func, $args)
     {
         $s3stream = new Zend_Service_Amazon_S3_Stream();
-        if(count($args) > 0) {
+        if (safeCount($args) > 0) {
             $args[0] = $this->urlToObject($args[0], true);
         }
-        return call_user_func_array(array($s3stream, $func), $args);
+        return call_user_func_array([$s3stream, $func], $args);
     }
 
-   /**
+    /**
      * Register new file added to uploads by external means
      * @param string $path
      * @return boolean
      */
     public function registerFile($path)
     {
-        return $this->s3->putFileStream(parent::getFSPath($path), $this->urlToObject($path),
-            $this->metadata);
+        return $this->s3->putFileStream(
+            parent::getFSPath($path),
+            $this->urlToObject($path),
+            $this->metadata
+        );
     }
 
-   /**
+    /**
      * Fetch file if exists from S3 to local copy
      * @param string $path
      * @return string
@@ -127,7 +131,7 @@ class SugarUploadS3 extends UploadStream
      */
     public function isUploadUrl($path)
     {
-        return substr($path, 0, strlen(self::STREAM_NAME)+3) == self::STREAM_NAME."://";
+        return substr($path, 0, strlen(self::STREAM_NAME) + 3) == self::STREAM_NAME . '://';
     }
 
     public function dir_closedir()
@@ -135,13 +139,14 @@ class SugarUploadS3 extends UploadStream
         $this->s3dir = null;
     }
 
-    public function dir_opendir ($path, $options )
+    public function dir_opendir($path, $options)
     {
         $this->init(); // because of php bug not calling stream ctor
-        $this->s3dir = $this->s3->getObjectsAndPrefixesByBucket($this->bucket,
-            array("prefix" => $this->urlToObject($path), "delimiter" => "/")
+        $this->s3dir = $this->s3->getObjectsAndPrefixesByBucket(
+            $this->bucket,
+            ['prefix' => $this->urlToObject($path), 'delimiter' => '/']
         );
-        if(!empty($this->s3dir)) {
+        if (!empty($this->s3dir)) {
             $this->dir_rewinddir();
             return true;
         }
@@ -150,23 +155,27 @@ class SugarUploadS3 extends UploadStream
 
     public function dir_readdir()
     {
-        if(empty($this->s3dir)) return false;
+        if (empty($this->s3dir)) {
+            return false;
+        }
         // Go first through all prefixes then though all objects
         $pref = current($this->s3dir['prefixes']);
-        if($pref !== false) {
+        if ($pref !== false) {
             next($this->s3dir['prefixes']);
             return rtrim($pref, '/');
         }
         $obj = current($this->s3dir['objects']);
-        if($obj !== false) {
-        	next($this->s3dir['objects']);
+        if ($obj !== false) {
+            next($this->s3dir['objects']);
         }
         return $obj;
     }
 
     public function dir_rewinddir()
     {
-        if(empty($this->s3dir)) return false;
+        if (empty($this->s3dir)) {
+            return false;
+        }
         reset($this->s3dir['prefixes']);
         reset($this->s3dir['objects']);
     }
@@ -176,8 +185,8 @@ class SugarUploadS3 extends UploadStream
         $path = null;
         parent::rename($path_from, $path_to);
         $this->init(); // because of php bug not calling stream ctor
-        if($this->isUploadUrl($path_to)) {
-            if($this->isUploadURL($path_from)) {
+        if ($this->isUploadUrl($path_to)) {
+            if ($this->isUploadURL($path_from)) {
                 // from S3 to S3 - copy there
                 $this->s3->copyObject($this->urlToObject($path_from), $this->urlToObject($path_to));
             } else {
@@ -185,17 +194,17 @@ class SugarUploadS3 extends UploadStream
                 $this->registerFile($path);
             }
         }
-        if($this->isUploadURL($path_from)) {
+        if ($this->isUploadURL($path_from)) {
             $this->s3->removeObject($this->urlToObject($path_from));
         }
         return true;
     }
 
-    public function stream_flush ()
+    public function stream_flush()
     {
         parent::stream_flush();
-        if($this->write) {
-            if(file_exists($this->path) && filesize($this->path)) {
+        if ($this->write) {
+            if (file_exists($this->path) && filesize($this->path)) {
                 $this->registerFile($this->path);
             }
         }
@@ -210,7 +219,7 @@ class SugarUploadS3 extends UploadStream
             $this->write = true;
         } else {
             // reading
-            if(!file_exists($this->localpath)) {
+            if (!file_exists($this->localpath)) {
                 $this->fetchFile($path);
             }
         }
@@ -221,17 +230,17 @@ class SugarUploadS3 extends UploadStream
     {
         $this->init(); // because of php bug not calling stream ctor
         @unlink(parent::getFSPath($path));
-        return $this->callS3("unlink", func_get_args());
+        return $this->callS3('unlink', func_get_args());
     }
 
     public function url_stat($path, $flags)
     {
         $this->init(); // because of php bug not calling stream ctor
-        if(file_exists(parent::getFSPath($path))) {
+        if (file_exists(parent::getFSPath($path))) {
             return parent::url_stat($path, $flags);
         }
-        $stat = $this->callS3("url_stat", func_get_args());
-        if(empty($stat['size'])) {
+        $stat = $this->callS3('url_stat', func_get_args());
+        if (empty($stat['size'])) {
             return false;
         }
         return $stat;

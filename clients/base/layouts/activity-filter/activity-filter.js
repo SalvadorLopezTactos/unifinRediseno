@@ -35,24 +35,27 @@
      * @return {Array}
      */
     getFilterList: function() {
-        var modulesMeta = app.metadata.getView(this.module, 'activity-timeline');
-        var activityModules = (modulesMeta && modulesMeta.activity_modules) ? modulesMeta.activity_modules : [];
         var moduleSingular = app.lang.get('LBL_MODULE_NAME_SINGULAR', this.module) || this.module;
         var filters = [
-            {id: 'all_modules', text: app.lang.get('LBL_LINK_ALL')},
-            {id: 'audit', text: moduleSingular + ' ' + app.lang.get('LBL_UPDATES')},
+            {id: 'all_modules', text: app.lang.get('LBL_LINK_ALL')}
         ];
 
-        _.each(activityModules, function(item) {
-            var name = item.module;
-            if (name === 'Audit' || !app.metadata.getModule(name)) {
+        const moduleMeta = app.metadata.getModule(this.module);
+        if (moduleMeta && moduleMeta.isAudited) {
+            filters.push({id: 'Audit', text: moduleSingular + ' ' + app.lang.get('LBL_UPDATES')});
+        }
+
+        const enabledModules = this.context.get('enabledModules') || [];
+        enabledModules.map((module) => {
+            if (module === 'Audit' || !app.metadata.getModule(module)) {
                 return;
             }
+
             filters.push({
-                id: name.toLowerCase(),
-                text: app.lang.get('LBL_' + name.toUpperCase()),
+                id: module,
+                text: app.lang.get('LBL_MODULE_NAME', module),
             });
-        }, this);
+        });
 
         return filters;
     },

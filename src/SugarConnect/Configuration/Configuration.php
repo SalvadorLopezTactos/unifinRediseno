@@ -76,7 +76,7 @@ final class Configuration implements ConfigurationInterface
      *
      * @return bool
      */
-    public function isEnabled() : bool
+    public function isEnabled(): bool
     {
         return $this->get('enabled', false);
     }
@@ -86,7 +86,7 @@ final class Configuration implements ConfigurationInterface
      *
      * @return void
      */
-    public function enable() : void
+    public function enable(): void
     {
         $this->set('enabled', true);
     }
@@ -96,7 +96,7 @@ final class Configuration implements ConfigurationInterface
      *
      * @return void
      */
-    public function disable() : void
+    public function disable(): void
     {
         $this->set('enabled', false);
     }
@@ -106,7 +106,7 @@ final class Configuration implements ConfigurationInterface
      *
      * @return Client
      */
-    public function getClient() : Client
+    public function getClient(): Client
     {
         if (empty($this->client)) {
             $cache = Container::getInstance()->get(CacheInterface::class);
@@ -124,11 +124,11 @@ final class Configuration implements ConfigurationInterface
      *
      * @param CacheInterface $cache The webhook URL cached for reuse.
      *
+     * @return string
      * @throws \Exception Throws if the URL can't be discovered.
      *
-     * @return string
      */
-    private function getWebhookURL(CacheInterface $cache) : string
+    private function getWebhookURL(CacheInterface $cache): string
     {
         $webhook = $cache->get('sugar_connect_webhook_url');
 
@@ -185,7 +185,7 @@ final class Configuration implements ConfigurationInterface
      *
      * @return array Configuration expected by GenericProvider.
      */
-    private function getOAuth2Config() : array
+    private function getOAuth2Config(): array
     {
         $idm = new IdmConfig(\SugarConfig::getInstance());
         $settings = $idm->get(IdmConfig::IDM_MODE_KEY);
@@ -204,8 +204,8 @@ final class Configuration implements ConfigurationInterface
     /**
      * Returns the value for the given key.
      *
-     * @param string $key     The key for the value to retrieve.
-     * @param mixed  $default An optional default value in the event that there
+     * @param string $key The key for the value to retrieve.
+     * @param mixed $default An optional default value in the event that there
      *                        is no value under the key.
      *
      * @return mixed
@@ -222,12 +222,12 @@ final class Configuration implements ConfigurationInterface
     /**
      * Saves the value for the given key.
      *
-     * @param string $key   The key for the value to retrieve.
-     * @param mixed  $value The value to store.
+     * @param string $key The key for the value to retrieve.
+     * @param mixed $value The value to store.
      *
      * @return void
      */
-    private function set(string $key, $value) : void
+    private function set(string $key, $value): void
     {
         static::$admin->saveSetting(static::CATEGORY, $key, $value);
         static::$admin = static::$admin->retrieveSettings(static::CATEGORY);

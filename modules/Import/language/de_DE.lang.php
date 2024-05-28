@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Importdatei erfolgreich gelesen',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Der importierte Datensatz ist an einem Prozess beteiligt und kann nicht bearbeitet werden, da einige Felder für die Bearbeitung durch den Prozess gesperrt sind.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Datensätze wegen Fehlern ausgelassen. Siehe Registerkarte "Fehler" für nähere Informationen',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Wenn der Benutzer nicht existiert, verwenden Sie den derzeitigen Benutzer',
     'LBL_SHOW_HIDDEN' => 'Felder anzeigen, die normalerweise nicht importierbar sind',
     'LBL_UPDATE_RECORDS' => 'Aktualisieren von Datensätzen, anstatt sie zu importieren (kann nicht rückgängig gemacht werden)',
-    'LBL_TEST'=> 'Testimport (Daten werden nicht gespeichert oder geändert)',
+    'LBL_TEST' => 'Testimport (Daten werden nicht gespeichert oder geändert)',
     'LBL_TRUNCATE_TABLE' => 'Tabelle vor Datenimport leeren (alle Datensätze löschen)',
     'LBL_RELATED_ACCOUNTS' => 'Keine verknüpften Firmen erstellen',
     'LBL_NO_DATECHECK' => 'Datumsüberprüfung überspringen (schneller, aber scheitert bei einem falschen Datum)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Ungültiger Integer-Wert',
     'LBL_ERROR_INVALID_NUM' => 'Ungültiger numerischer Wert',
     'LBL_ERROR_INVALID_TIME' => 'Ungültige Zeit',
-    'LBL_ERROR_INVALID_EMAIL'=>'Ungültige E-Mail-Adresse',
-    'LBL_ERROR_INVALID_BOOL'=>'Ungültiger Wert (muss 1 oder 0 sein)',
-    'LBL_ERROR_INVALID_DATE'=>'Ungültiges Datum',
-    'LBL_ERROR_INVALID_USER'=>'Ungültiger Benutzername oder ID',
+    'LBL_ERROR_INVALID_EMAIL' => 'Ungültige E-Mail-Adresse',
+    'LBL_ERROR_INVALID_BOOL' => 'Ungültiger Wert (muss 1 oder 0 sein)',
+    'LBL_ERROR_INVALID_DATE' => 'Ungültiges Datum',
+    'LBL_ERROR_INVALID_USER' => 'Ungültiger Benutzername oder ID',
     'LBL_ERROR_INVALID_TEAM' => 'Ungültiger Teamname oder ID',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Ungültiger Firmenname oder ID',
     'LBL_ERROR_INVALID_RELATE' => 'Ungültiges verknüpftes Feld',
@@ -101,7 +100,7 @@ $mod_strings = array (
     'LBL_START_OVER' => 'Neu starten',
     'LBL_ERROR' => 'Fehler:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Die Importdatei enthält {0} Zeilen. Die optimale Zeilenanzahl ist {1}. Zu viele Datensätze können den Importvorgang verlangsamen. Bitte OK wählen, um weiter zu importieren. "Abbrechen" wählen, um die Daten in der Importdatei zu überprüfen.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Ein Administrator darf nicht importiert werden',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Ein Administrator darf nicht importiert werden',
     'ERR_REPORT_LOOP' => 'Das System hat eine Berichtsschleife entdeckt. Ein Benutzer kann keine Berichte an sich selbst senden, und auch keine Manager können an diese berichten.',
     'ERR_MULTIPLE' => 'Es wurden mehrere Spalten mit dem gleichen Feldnamen definiert.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Erforderliche Felder fehlen:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Ihre Importdatei enthält keine Zeilen. Stellen Sie sicher, dass diese keine leeren Zeilen enthält, und versuchen Sie es dann erneut.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Die Importdatei wurde schon verarbeitet oder existiert nicht',
     'LBL_SUCCESS' => 'Erfolg:',
-	'LBL_FAILURE' => 'Import fehlgeschlagen',
+    'LBL_FAILURE' => 'Import fehlgeschlagen',
     'LBL_SUCCESSFULLY' => 'Erfolgreich importiert',
     'LBL_LAST_IMPORT_UNDONE' => 'Ihr letzter Import wurde rückgängig gemacht.',
     'LBL_NO_IMPORT_TO_UNDO' => 'Import rückgängig machen nicht möglich.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Weitere importieren',
     'LBL_FINISHED' => 'Zurückkehren zu',
     'LBL_UNDO_LAST_IMPORT' => 'Letzten Import rückgängig machen',
-    'LBL_LAST_IMPORTED'=>'Zuletzt importiert',
+    'LBL_LAST_IMPORTED' => 'Zuletzt importiert',
     'ERR_MULTIPLE_PARENTS' => 'Sie können nur eine Parent-ID definieren',
     'LBL_DUPLICATES' => 'Duplikate gefunden',
     'LNK_DUPLICATE_LIST' => 'Liste der Duplikate herunterladen',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Notizen ausblenden',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Vorschau-Spalten anzeigen',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Vorschau-Spalten ausblenden',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Prüfen Sie auf Duplikate mit dem Operator:',
     'LBL_SAVE_MAPPING_AS' => 'Zuordnung speichern unter',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Hochkomma (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Doppeltes Hochkomma (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Um Datensätze einem anderen Team zuweisen, verwenden Sie die Spalte "Standardwert", um andere Teams auszuwählen.',
     'LBL_SIGN_IN_HELP' => 'Um diesen Dienst zu verwenden, melden Sie sich unter der Registerkarte "Externes Konto" an.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Die Verwaltung der E-Mail-Adressen wird von dem Bean nicht unterstützt.",
-);
+];

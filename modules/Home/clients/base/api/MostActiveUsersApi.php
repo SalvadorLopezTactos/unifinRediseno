@@ -15,16 +15,16 @@ class MostActiveUsersApi extends SugarApi
 {
     public function registerApiRest()
     {
-        return array(
-            'mostactiveusers' => array(
+        return [
+            'mostactiveusers' => [
                 'reqType' => 'GET',
-                'path' => array('mostactiveusers'),
-                'pathVars' => array(),
+                'path' => ['mostactiveusers'],
+                'pathVars' => [],
                 'method' => 'getMostActiveUsers',
                 'shortHelp' => 'Returns most active users',
                 'longHelp' => 'modules/Home/clients/base/api/help/MostActiveUsersApi.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -36,7 +36,7 @@ class MostActiveUsersApi extends SugarApi
      */
     public function getMostActiveUsers(ServiceBase $api, array $args)
     {
-        $days = isset($args['days']) ? (int) $args['days'] : 30;
+        $days = isset($args['days']) ? (int)$args['days'] : 30;
         $db = DBManagerFactory::getInstance();
 
         // meetings
@@ -45,14 +45,14 @@ class MostActiveUsersApi extends SugarApi
                 WHERE meetings.assigned_user_id = users.id
                     AND users.deleted = 0
                     AND meetings.status='Held'
-                    AND " . $db->convert('meetings.date_modified', 'add_date', array($days, 'DAY')) . " > " . $db->convert('', 'today') . "
+                    AND " . $db->convert('meetings.date_modified', 'add_date', [$days, 'DAY']) . ' > ' . $db->convert('', 'today') . '
                 GROUP BY meetings.assigned_user_id, users.first_name, users.last_name
-                ORDER BY meetings_count DESC";
+                ORDER BY meetings_count DESC';
 
-        $GLOBALS['log']->debug("Finding most active users for Meetings: ".$query);
+        $GLOBALS['log']->debug('Finding most active users for Meetings: ' . $query);
         $result = $db->limitQuery($query, 0, 1);
-        $meetings = array();
-        
+        $meetings = [];
+
         if (false !== $row = $db->fetchByAssoc($result)) {
             if (!empty($row)) {
                 $meetings['user_id'] = $row['assigned_user_id'];
@@ -68,13 +68,13 @@ class MostActiveUsersApi extends SugarApi
                 WHERE calls.assigned_user_id = users.id
                     AND users.deleted = 0
                     AND calls.status='Held'
-                    AND " . $db->convert('calls.date_modified', 'add_date', array($days, 'DAY')) . " > " . $db->convert('', 'today') . "
+                    AND " . $db->convert('calls.date_modified', 'add_date', [$days, 'DAY']) . ' > ' . $db->convert('', 'today') . '
                 GROUP BY calls.assigned_user_id, users.first_name, users.last_name
-                ORDER BY calls_count DESC";
+                ORDER BY calls_count DESC';
 
-        $GLOBALS['log']->debug("Finding most active users for Calls: ".$query);
+        $GLOBALS['log']->debug('Finding most active users for Calls: ' . $query);
         $result = $db->limitQuery($query, 0, 1);
-        $calls = array();
+        $calls = [];
 
         if (false !== $row = $db->fetchByAssoc($result)) {
             if (!empty($row)) {
@@ -91,13 +91,13 @@ class MostActiveUsersApi extends SugarApi
                 WHERE emails.assigned_user_id = users.id
                     AND users.deleted = 0
                     AND emails.type = 'inbound'
-                    AND " . $db->convert('emails.date_entered', 'add_date', array($days, 'DAY')) . " > " . $db->convert('', 'today') . "
+                    AND " . $db->convert('emails.date_entered', 'add_date', [$days, 'DAY']) . ' > ' . $db->convert('', 'today') . '
                 GROUP BY emails.assigned_user_id, users.first_name, users.last_name
-                ORDER BY emails_count DESC";
+                ORDER BY emails_count DESC';
 
-        $GLOBALS['log']->debug("Finding most active users for Inbound Emails: ".$query);
+        $GLOBALS['log']->debug('Finding most active users for Inbound Emails: ' . $query);
         $result = $db->limitQuery($query, 0, 1);
-        $inbounds = array();
+        $inbounds = [];
 
         if (false !== $row = $db->fetchByAssoc($result)) {
             if (!empty($row)) {
@@ -115,13 +115,13 @@ class MostActiveUsersApi extends SugarApi
                     AND users.deleted = 0
                     AND emails.status='sent'
                     AND emails.type = 'out'
-                    AND " . $db->convert('emails.date_entered', 'add_date', array($days, 'DAY')) . " > " . $db->convert('', 'today') . "
+                    AND " . $db->convert('emails.date_entered', 'add_date', [$days, 'DAY']) . ' > ' . $db->convert('', 'today') . '
                 GROUP BY emails.assigned_user_id, users.first_name, users.last_name
-                ORDER BY emails_count DESC";
+                ORDER BY emails_count DESC';
 
-        $GLOBALS['log']->debug("Finding most active users for Outbound Emails: ".$query);
+        $GLOBALS['log']->debug('Finding most active users for Outbound Emails: ' . $query);
         $result = $db->limitQuery($query, 0, 1);
-        $outbounds = array();
+        $outbounds = [];
 
         if (false !== $row = $db->fetchByAssoc($result)) {
             if (!empty($row)) {
@@ -132,11 +132,11 @@ class MostActiveUsersApi extends SugarApi
             }
         }
 
-        return array(
+        return [
             'meetings' => $meetings,
             'calls' => $calls,
             'inbound_emails' => $inbounds,
-            'outbound_emails' => $outbounds
-        );
+            'outbound_emails' => $outbounds,
+        ];
     }
 }

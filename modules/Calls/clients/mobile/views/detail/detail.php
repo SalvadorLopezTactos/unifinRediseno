@@ -25,7 +25,7 @@ $viewdefs['Calls']['mobile']['view']['detail'] = [
             'label' => 'LBL_PANEL_DEFAULT',
             'fields' => [
                 [
-                    'name'=>'name',
+                    'name' => 'name',
                     'displayParams' => [
                         'required' => true,
                         'wireless_edit_only' => true,
@@ -42,23 +42,23 @@ $viewdefs['Calls']['mobile']['view']['detail'] = [
                         'duration_hours',
                         'duration_minutes',
                     ],
-                    'label' => "LBL_DURATION",
+                    'label' => 'LBL_DURATION',
                     'fields' => [
                         [
                             'name' => 'duration_hours',
                         ],
                         [
-                            'type' => "label",
-                            'default' => "LBL_HOURS_ABBREV",
-                            'css_class' => "label_duration_hours hide",
+                            'type' => 'label',
+                            'default' => 'LBL_HOURS_ABBREV',
+                            'css_class' => 'label_duration_hours hide',
                         ],
                         [
                             'name' => 'duration_minutes',
                         ],
                         [
-                            'type' => "label",
-                            'default' => "LBL_MINSS_ABBREV",
-                            'css_class' => "label_duration_minutes hide",
+                            'type' => 'label',
+                            'default' => 'LBL_MINSS_ABBREV',
+                            'css_class' => 'label_duration_minutes hide',
 
                         ],
                     ],

@@ -25,8 +25,8 @@ class FileSource implements SourceInterface
 
     /**
      * constructor.
-     * @throws \InvalidArgumentException
      * @param array $options
+     * @throws \InvalidArgumentException
      */
     public function __construct(array $options)
     {
@@ -40,7 +40,7 @@ class FileSource implements SourceInterface
      * read file and return product definition array
      * @return string|null
      */
-    public function getDefinition():? string
+    public function getDefinition(): ?string
     {
         if (!file_exists($this->sourceFile)) {
             $this->getLogger()->error(sprintf('product definition file %s doesn\'t exist', $this->sourceFile));
@@ -48,7 +48,7 @@ class FileSource implements SourceInterface
         }
 
         $raw = file_get_contents($this->sourceFile);
-        return (string) $raw;
+        return (string)$raw;
     }
 
     /**

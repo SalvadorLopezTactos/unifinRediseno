@@ -21,14 +21,6 @@
         height: ~'calc(100% - 34px)';
         overflow: auto;
 
-        .expand-collapse {
-          &.fa-chevron-up,
-          &.fa-chevron-down {
-            position: relative;
-            z-index: 91;
-          }
-        }
-
         .service_start_date_should_cascade,
         .pagination .previous-fav,
         .pagination .next-fav {
@@ -123,4 +115,8 @@
       pointer-events: none;
     }
   }
+}
+
+.dashboard-grid .dashlet-container .dashlet.collapsed .list-pagination-wrapper {
+  overflow: hidden;
 }

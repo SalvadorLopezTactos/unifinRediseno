@@ -26,7 +26,7 @@ class SugarUpgradePortalSettings extends UpgradeScript
 
         // Grabs the portal config setting.
         $query = "SELECT value FROM config WHERE category='portal' AND name='on'";
-        $portalEnabled = (bool) $this->db->getOne($query);
+        $portalEnabled = (bool)$this->db->getOne($query);
 
         // Remove `portal_on` with platform equals to NULL or platform equals to empty string
         $query = "DELETE FROM config WHERE category='portal' AND name='on' AND (platform IS NULL OR platform='')";

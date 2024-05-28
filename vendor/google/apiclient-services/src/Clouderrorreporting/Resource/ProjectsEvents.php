@@ -26,7 +26,7 @@ use Google\Service\Clouderrorreporting\ReportedErrorEvent;
  * Typical usage is:
  *  <code>
  *   $clouderrorreportingService = new Google\Service\Clouderrorreporting(...);
- *   $events = $clouderrorreportingService->events;
+ *   $events = $clouderrorreportingService->projects_events;
  *  </code>
  */
 class ProjectsEvents extends \Google\Service\Resource
@@ -75,15 +75,13 @@ class ProjectsEvents extends \Google\Service\Resource
    * e}/events:report?key=123ABC456` **Note:** [Error Reporting]
    * (https://cloud.google.com/error-reporting) is a global service built on Cloud
    * Logging and doesn't analyze logs stored in regional log buckets or logs
-   * routed to other Google Cloud projects. For more information, see [Using Error
-   * Reporting with regionalized logs] (https://cloud.google.com/error-
-   * reporting/docs/regionalization). (events.report)
+   * routed to other Google Cloud projects. (events.report)
    *
    * @param string $projectName Required. The resource name of the Google Cloud
    * Platform project. Written as `projects/{projectId}`, where `{projectId}` is
    * the [Google Cloud Platform project
-   * ID](https://support.google.com/cloud/answer/6158840). Example: // `projects
-   * /my-project-123`.
+   * ID](https://support.google.com/cloud/answer/6158840). Example: //
+   * `projects/my-project-123`.
    * @param ReportedErrorEvent $postBody
    * @param array $optParams Optional parameters.
    * @return ReportErrorEventResponse

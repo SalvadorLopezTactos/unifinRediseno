@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="advanced-container shadow" data-container="advanced-container">
+<div class="advanced-container bg-[--dashlet-background] h-[calc(100%-2rem)] rounded-lg shadow w-[calc(100%-2rem)]" data-container="advanced-container">
     <h5 class="advanced-filters-title ml-4" data-title="title">{{str "LBL_ADVANCED_FILTERS"}}</h5>
-    <div class="advanced-filters-widget-container" data-container="advanced-filters-widget-container">
+    <div class="advanced-filters-widget-container h-[500px] overflow-y-auto relative" data-container="advanced-filters-widget-container">
         {{#if _hasFlattenFilters}}
             {{#each _flattenedFilters}}
                 {{partial type ../this data=this}}
             {{/each}}
         {{else}}
-            <div class="h-full report-no-data-available" data-widget="report-no-filters">
+            <div class="report-no-data-available h-full mr-5 text-center" data-widget="report-no-filters">
                 {{str "LBL_NO_FILTERS_REPORT_AVAILABLE"}}
             </div>
         {{/if}}

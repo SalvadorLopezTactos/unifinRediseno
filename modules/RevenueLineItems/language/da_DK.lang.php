@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Omsætning linjeelementer-liste dashboard',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Omsætning linjeelementer optegnelses-dashboard',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Produkttyper',
     'LBL_ASSIGNED_TO_NAME' => 'Tildelt til',
     'LBL_ASSIGNED_TO' => 'Tildelt til',
-    'LBL_ASSIGNED_TO_ID'=>'Tildelt bruger-id',
+    'LBL_ASSIGNED_TO_ID' => 'Tildelt bruger-id',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Tildelt brugernavn',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Tildelt bruger-id',
     'LBL_CAMPAIGN_ID' => 'Kampagne-id',
@@ -217,4 +217,5 @@ For at oprette en {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Viser top ti indtægt linje-emner i et boblediagram.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Mine indtægt linje-emner',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Mit teams indtægt linje-emner",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje for indtægtslinjeelement',
+];

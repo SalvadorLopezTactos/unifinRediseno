@@ -172,7 +172,7 @@ class Zend_Registry extends ArrayObject
      * Returns TRUE if the $index is a named value in the registry,
      * or FALSE if $index was not found in the registry.
      *
-     * @param  string $index
+     * @param string $index
      * @return boolean
      */
     public static function isRegistered($index)
@@ -190,7 +190,7 @@ class Zend_Registry extends ArrayObject
      * @param array $array data array
      * @param integer $flags ArrayObject flags
      */
-    public function __construct($array = array(), $flags = parent::ARRAY_AS_PROPS)
+    public function __construct($array = [], $flags = parent::ARRAY_AS_PROPS)
     {
         parent::__construct($array, $flags);
     }

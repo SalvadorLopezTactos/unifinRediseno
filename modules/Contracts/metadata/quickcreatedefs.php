@@ -14,34 +14,29 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$viewdefs ['Contracts'] = 
-array (
-  'QuickCreate' => 
-  array (
-    'templateMeta' => 
-    array (
-      'form' => 
-      array (
-        'buttons' => 
-        array (
-          'SAVE',
-          'CANCEL',
-        ),
-      ),
-      'maxColumns' => '2',
-      'widths' => 
-      array (
-        array (
-          'label' => '10',
-          'field' => '30',
-        ),
-        array (
-          'label' => '10',
-          'field' => '30',
-        ),
-      ),
-	 'javascript' => '<script type="text/javascript" language="javascript">
+
+$viewdefs ['Contracts'] =
+    [
+        'QuickCreate' => [
+            'templateMeta' => [
+                'form' => [
+                    'buttons' => [
+                        'SAVE',
+                        'CANCEL',
+                    ],
+                ],
+                'maxColumns' => '2',
+                'widths' => [
+                    [
+                        'label' => '10',
+                        'field' => '30',
+                    ],
+                    [
+                        'label' => '10',
+                        'field' => '30',
+                    ],
+                ],
+                'javascript' => '<script type="text/javascript" language="javascript">
 		function setvalue(source)  {ldelim} 
 			src= new String(source.value);
 			target=new String(source.form.name.value);
@@ -84,57 +79,54 @@ array (
 			 {rdelim} 
 		 {rdelim} 
 	</script>',
-	),
-'panels' =>array (
-  'lbl_contract_information' => 
-  array (
-    
-    array (
-      'name',
-      'status',
-    ),
-    
-    array (
-      'reference_code',
-      array('name'=>'start_date', 'displayParams'=>array('showFormats'=>true)),
-    ),
-    
-    array (
-      'account_name',
-      array('name'=>'end_date', 'displayParams'=>array('showFormats'=>true)),
-    ),
-    
-    array (
-      'opportunity_name',
-    ),
-    
-    array (
-    	'type',
-    	array('name'=>'customer_signed_date', 'displayParams'=>array('showFormats'=>true)),
-    ),
-    
-    array (
-    	array('name'=>'currency_id','label'=>'LBL_CURRENCY'),
-    	array('name'=>'company_signed_date', 'displayParams'=>array('showFormats'=>true)),
-    ),
-    
-    array (
-    	array('name'=>'total_contract_value', 'displayParams'=>array('size'=>15, 'maxlength'=>25)),
-    	array('name'=>'expiration_notice', 'type'=>'datetimecombo', 'displayParams'=>array('showFormats'=>true)),      
-    ),
-    
-    array (
-      array('name' => 'description'),
-    ),
-    ),
-	'LBL_PANEL_ASSIGNMENT' => 
-	array(
-	    array (
-      'assigned_user_name',
-      array('name'=>'team_name','displayParams'=>array('required'=>true)),
-      ),
-  ),
-)
-)
-);
-?>      
+            ],
+            'panels' => [
+                'lbl_contract_information' => [
+
+                    [
+                        'name',
+                        'status',
+                    ],
+
+                    [
+                        'reference_code',
+                        ['name' => 'start_date', 'displayParams' => ['showFormats' => true]],
+                    ],
+
+                    [
+                        'account_name',
+                        ['name' => 'end_date', 'displayParams' => ['showFormats' => true]],
+                    ],
+
+                    [
+                        'opportunity_name',
+                    ],
+
+                    [
+                        'type',
+                        ['name' => 'customer_signed_date', 'displayParams' => ['showFormats' => true]],
+                    ],
+
+                    [
+                        ['name' => 'currency_id', 'label' => 'LBL_CURRENCY'],
+                        ['name' => 'company_signed_date', 'displayParams' => ['showFormats' => true]],
+                    ],
+
+                    [
+                        ['name' => 'total_contract_value', 'displayParams' => ['size' => 15, 'maxlength' => 25]],
+                        ['name' => 'expiration_notice', 'type' => 'datetimecombo', 'displayParams' => ['showFormats' => true]],
+                    ],
+
+                    [
+                        ['name' => 'description'],
+                    ],
+                ],
+                'LBL_PANEL_ASSIGNMENT' => [
+                    [
+                        'assigned_user_name',
+                        ['name' => 'team_name', 'displayParams' => ['required' => true]],
+                    ],
+                ],
+            ],
+        ],
+    ];

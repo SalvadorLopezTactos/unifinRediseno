@@ -20,7 +20,7 @@ class PdfManagerHooks
      * @param array $params
      * @return void
      */
-    public function fixAmp(PdfManager $bean, $event, $params = array())
+    public function fixAmp(PdfManager $bean, $event, $params = [])
     {
         $bean->body_html = str_replace('&amp;', '&', $bean->body_html);
     }

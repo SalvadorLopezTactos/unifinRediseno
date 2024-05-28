@@ -32,7 +32,7 @@ $mod_strings = [
 
     'LBL_RESOURCE' => 'Изпълнител: ',
     'LBL_PERSON_TYPE' => 'Категория на изпълнителя',
-    'LBL_RELATED_MODULE'=> 'Свързан модул:',
+    'LBL_RELATED_MODULE' => 'Свързан модул:',
 
     // For HolidaysQuickCreate.php
     'LBL_SELECT_RESOURCE_TYPE' => 'Изберете категория на изпълнители...',

@@ -10,20 +10,20 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['KBContents']['base']['view']['subpanel-list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['KBContents']['base']['view']['subpanel-list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'label' => 'LBL_NAME',
                     'default' => true,
                     'enabled' => true,
                     'link' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'language',
                     'label' => 'LBL_LANG',
                     'default' => true,
@@ -31,49 +31,49 @@ $viewdefs['KBContents']['base']['view']['subpanel-list'] = array(
                     'link' => true,
                     'type' => 'enum-config',
                     'key' => 'languages',
-                ),
-                array(
+                ],
+                [
                     'name' => 'revision',
                     'label' => 'LBL_DOCUMENT_REVISION',
                     'default' => true,
                     'enabled' => true,
                     'link' => false,
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'active_rev',
                     'label' => 'LBL_ACTIVE_REV',
                     'type' => 'bool',
                     'default' => true,
                     'enabled' => true,
                     'link' => false,
-                ),
-                array(
+                ],
+                [
                     'label' => 'LBL_DATE_ENTERED',
                     'enabled' => true,
                     'default' => true,
                     'name' => 'date_entered',
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'label' => 'LBL_DATE_MODIFIED',
                     'enabled' => true,
                     'default' => true,
                     'name' => 'date_modified',
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'status',
                     'label' => 'LBL_STATUS',
                     'enabled' => true,
                     'default' => true,
                     'type' => 'status',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'active_date',
                         'exp_date',
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

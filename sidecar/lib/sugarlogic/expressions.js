@@ -1233,7 +1233,13 @@ SUGAR.util.DateUtils = {
 			//Otherwise give up
 			return false;
 		}
-		var jsDate = new Date("Jan 1, 1970 00:00:00");
+        let dateParts = {
+            Y: 1970,
+            m: 0,
+            d: 1,
+            H: 0,
+            i: 0
+        };
 		var part = "";
 		var dateRemain = date.trim();
 		oldFormat = oldFormat.trim() + " "; // Trailing space to read as last separator.
@@ -1247,13 +1253,16 @@ SUGAR.util.DateUtils = {
 				switch (part) {
 					case 'm':
 						if (!(v > 0 && v < 13)) return false;
-						jsDate.setMonth(v - 1); break;
+                        dateParts.m = v - 1;
+                        break;
 					case 'd':
 						if(!(v > 0 && v < 32)) return false;
-						jsDate.setDate(v); break;
+                        dateParts.d = v;
+                        break;
 					case 'Y':
 						if(!(v > 0)) return false;
-						jsDate.setYear(v); break;
+                        dateParts.Y = v;
+                        break;
 					case 'h':
 						//Read time, assume minutes are at end of date string (we do not accept seconds)
 						var timeformat = oldFormat.substring(oldFormat.length - 4);
@@ -1266,18 +1275,19 @@ SUGAR.util.DateUtils = {
 							}
 						}
 					case 'H':
-						jsDate.setHours(v);
+                        dateParts.H = v;
 						break;
 					case 'i':
 						v = v.substring(0, 2);
-						jsDate.setMinutes(v); break;
+                        dateParts.i = v;
+                        break;
 				}
 				part = "";
 			} else {
 				part = c;
 			}
 		}
-		return jsDate;
+        return new Date(dateParts.Y, dateParts.m, dateParts.d, dateParts.H, dateParts.i);
 	},
 	guessFormat: function(date) {
 		if (typeof date != "string")

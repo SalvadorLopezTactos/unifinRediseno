@@ -10,6 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs["pmse_Emails_Templates"]["base"]["view"]["compose-varbook-list-bottom"] = array(
+$viewdefs['pmse_Emails_Templates']['base']['view']['compose-varbook-list-bottom'] = [
     'template' => 'list-bottom',
-);
+];

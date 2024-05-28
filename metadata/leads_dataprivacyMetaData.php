@@ -9,59 +9,59 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['leads_dataprivacy'] = array(
+$dictionary['leads_dataprivacy'] = [
     'table' => 'leads_dataprivacy',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'lead_id' => array(
+        ],
+        'lead_id' => [
             'name' => 'lead_id',
             'type' => 'id',
-        ),
-        'dataprivacy_id' => array(
+        ],
+        'dataprivacy_id' => [
             'name' => 'dataprivacy_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'leads_dataprivacypk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_lead_dataprivacy_dataprivacy',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'dataprivacy_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_leads_dataprivacy',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'lead_id',
                 'dataprivacy_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'leads_dataprivacy' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'leads_dataprivacy' => [
             'lhs_module' => 'Leads',
             'lhs_table' => 'leads',
             'lhs_key' => 'id',
@@ -72,6 +72,6 @@ $dictionary['leads_dataprivacy'] = array(
             'join_table' => 'leads_dataprivacy',
             'join_key_lhs' => 'lead_id',
             'join_key_rhs' => 'dataprivacy_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

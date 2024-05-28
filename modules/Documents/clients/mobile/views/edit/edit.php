@@ -10,18 +10,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Documents']['mobile']['view']['edit'] = array(
-    'templateMeta' => array(
+$viewdefs['Documents']['mobile']['view']['edit'] = [
+    'templateMeta' => [
         'maxColumns' => '1',
-        'widths' => array(
-            array('label' => '10', 'field' => '30'),
-            array('label' => '10', 'field' => '30')
-        ),
-    ),
-    'panels' => array (
-        array (
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
+            'fields' => [
                 'document_name',
                 'category_id',
                 'subcategory_id',
@@ -30,7 +30,7 @@ $viewdefs['Documents']['mobile']['view']['edit'] = array(
                 'exp_date',
                 'assigned_user_name',
                 'team_name',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

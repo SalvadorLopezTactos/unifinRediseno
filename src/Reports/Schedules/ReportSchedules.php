@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Reports\Schedules;
 
 use ReportsApi;
@@ -73,7 +74,7 @@ class ReportSchedules
             $tpl = $this->getMatrixHtml();
 
             //need to add table border without modifying the original templates
-            $tpl = str_replace("border=\"0\"", 'border=1', $tpl);
+            $tpl = str_replace('border="0"', 'border=1', $tpl);
         }
 
         return $tpl;
@@ -92,6 +93,7 @@ class ReportSchedules
         $args = [
             'record' => $this->reporter->saved_report_id,
             'reportType' => $this->savedReport->report_type,
+            'embeddedData' => true,
             'use_save_filters' => true,
             'reportSchedulesEnablePaging' => false,
             'summaryDetailsCount' => true,
@@ -149,13 +151,13 @@ class ReportSchedules
      */
     protected function getGroupData($group)
     {
-        if (array_key_exists('records', $group) && $group['records']) {
+        if (is_array($group) && array_key_exists('records', $group) && $group['records']) {
             return $group['records'];
         }
 
         $groupKeys = array_keys($group);
 
-        if (count($groupKeys) === 1) {
+        if (safeCount($groupKeys) === 1) {
             return $this->getGroupData($group[$groupKeys[0]]);
         }
 
@@ -177,14 +179,14 @@ class ReportSchedules
      */
     protected function getGroupHeaders($group, $headers)
     {
-        if (array_key_exists('records', $group) && $group['records']) {
+        if (is_array($group) && array_key_exists('records', $group) && $group['records']) {
             $headers[] = ['' => $group['header']];
             return $headers;
         }
 
         $groupKeys = array_keys($group);
 
-        if (count($groupKeys) === 1) {
+        if (safeCount($groupKeys) === 1) {
             return $this->getGroupHeaders($group[$groupKeys[0]], $headers);
         }
 
@@ -206,7 +208,7 @@ class ReportSchedules
 
         require_once 'modules/Reports/templates/templates_list_view.php';
 
-        $args = array('reporter' => $this->reporter);
+        $args = ['reporter' => $this->reporter];
 
         $summaryColumnsArray = $this->reporter->report_def['summary_columns'];
         $addedColumns = 0;
@@ -219,7 +221,7 @@ class ReportSchedules
             if (isset($valueArray['group_function'])) {
                 if ($valueArray['group_function'] === 'avg') {
                     $isAvgExists = true;
-                    $indexOfAvg  = $key;
+                    $indexOfAvg = $key;
                 }
 
                 if ($valueArray['group_function'] === 'sum') {
@@ -241,7 +243,7 @@ class ReportSchedules
                 $sumArray['group_function'] = 'sum';
                 $this->reporter->report_def['summary_columns'][] = $sumArray;
                 $addedColumns = $addedColumns + 1;
-                $summaryColumnsArray[] = array('label' => 'sum');
+                $summaryColumnsArray[] = ['label' => 'sum'];
             }
 
             if (!$isCountExists) {
@@ -251,7 +253,7 @@ class ReportSchedules
                 $countArray['group_function'] = 'count';
                 $this->reporter->report_def['summary_columns'][] = $countArray;
                 $addedColumns = $addedColumns + 1;
-                $summaryColumnsArray[] = array('label' => 'count');
+                $summaryColumnsArray[] = ['label' => 'count'];
             }
         }
 
@@ -265,9 +267,9 @@ class ReportSchedules
         $groupDefArray = $this->reporter->report_def['group_defs'];
 
         replaceHeaderRowdataWithSummaryColumns($headerRow, $summaryColumnsArray, $this->reporter);
-        $groupByIndexInHeaderRow = array();
+        $groupByIndexInHeaderRow = [];
 
-        for ($i = 0; $i < (is_countable($groupDefArray) ? count($groupDefArray) : 0); $i++) {
+        for ($i = 0; $i < safeCount($groupDefArray); $i++) {
             $groupByColumnInfo = getGroupByInfo($groupDefArray[$i], $summaryColumnsArray);
             $groupByIndexInHeaderRow[getGroupByKey($groupDefArray[$i])] = $groupByColumnInfo;
         }
@@ -291,9 +293,9 @@ class ReportSchedules
         if (!isset($this->reporter->report_def['layout_options'])) {
             $matrixHtml = $report_smarty->fetch('modules/Reports/templates/_template_summary_list_view.tpl');
         } else {
-            if ((is_countable($groupDefArray) ? count($groupDefArray) : 0) === 1 || (is_countable($groupDefArray) ? count($groupDefArray) : 0) > 3) {
+            if (safeCount($groupDefArray) === 1 || safeCount($groupDefArray) > 3) {
                 $matrixHtml = $report_smarty->fetch('modules/Reports/templates/_template_summary_list_view.tpl');
-            } elseif ((is_countable($groupDefArray) ? count($groupDefArray) : 0) === 2) {
+            } elseif (safeCount($groupDefArray) === 2) {
                 $matrixHtml = $report_smarty->fetch('modules/Reports/templates/_template_summary_list_view_2gpby.tpl');
             } else {
                 if ($this->reporter->report_def['layout_options'] === '1x2') {
@@ -325,21 +327,21 @@ class ReportSchedules
         $matrixCount = null;
         $summationDetailsCount = null;
 
-        if (array_key_exists('records', $data)) {
-            $rowsAndSummaryCount = is_countable($data['records']) ? count($data['records']) : 0;
+        if (is_array($data) && array_key_exists('records', $data)) {
+            $rowsAndSummaryCount = safeCount($data['records']);
         }
 
-        if (array_key_exists('data', $data)) {
-            $matrixCount = is_countable($data['data']) ? count($data['data']) : 0;
+        if (is_array($data) && array_key_exists('data', $data)) {
+            $matrixCount = safeCount($data['data']);
         }
 
-        if (array_key_exists('countRecords', $data)) {
+        if (is_array($data) && array_key_exists('countRecords', $data)) {
             $summationDetailsCount = $data['countRecords'];
         }
 
         if ($rowsAndSummaryCount > $rowsLimit || $matrixCount > $rowsLimit ||
             $summationDetailsCount > $rowsLimit) {
-                $noBodyReport = true;
+            $noBodyReport = true;
         }
 
         //we don't need a report body if we have a report without data
@@ -358,7 +360,7 @@ class ReportSchedules
      */
     private function translateHeader($data)
     {
-        if ($data && array_key_exists('header', $data)) {
+        if ($data && is_array($data) && array_key_exists('header', $data)) {
             foreach ($data['header'] as &$header) {
                 if ($header['isvNameTranslated'] === false) {
                     $header['vname'] = translate($header['vname'], $header['module']);

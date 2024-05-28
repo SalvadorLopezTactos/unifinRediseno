@@ -91,7 +91,7 @@
                     messages: 'ERR_RESOLVE_ERRORS'
                 });
             },
-            showNoAccessError: function() {
+            showNoAccessError: function(error) {
                 if (!this instanceof app.view.View) {
                     app.logger.error('This method should be invoked by Function.prototype.call(), passing in as argument' +
                     'an instance of this view.');
@@ -102,7 +102,7 @@
                 // display no access error
                 app.alert.show('server-error', {
                     level: 'error',
-                    messages: 'ERR_HTTP_404_TEXT_LINE1'
+                    messages: this._getNoAccessErrorMessage(error)
                 });
                 // discard any changes before redirect
                 this.handleCancel();
@@ -549,6 +549,20 @@
      * is allowed
      */
     setEditableFields: function() {
+        const fieldModuleData = app.metadata.getModule(this.module) || {};
+        const templateEditableFields = fieldModuleData.templateEditableFields || [];
+
+        if (this.model.get('is_template') &&
+            templateEditableFields.length > 0 &&
+            this.fields &&
+            this.fields.length > 0) {
+            this.editableFields = _.filter(this.fields, function(field) {
+                return _.includes(templateEditableFields, field.name);
+            }, this);
+
+            return;
+        }
+
         // Get the locked fields from the model
         var lockedFields = this.model.get('locked_fields') || [];
 

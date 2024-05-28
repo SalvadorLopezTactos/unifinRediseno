@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Контракты',
-	'LBL_MODULE_NAME_SINGULAR' => 'Контракт',
-	'LBL_MODULE_TITLE' => 'Контракты: Главная',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Контракты',
+    'LBL_MODULE_NAME_SINGULAR' => 'Контракт',
+    'LBL_MODULE_TITLE' => 'Контракты: Главная',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Новый контракт',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'ID валюты',
     'LBL_CURRENCY' => 'Валюта:',
     'LBL_CURRENCY_RATE' => 'Валютный курс',
-    'LBL_ASSIGNED_TO_NAME'=>'Ответственный (-ая):',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Ответственный (-ая):',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Список контрактов',	
+    'LBL_LIST_FORM_TITLE' => 'Список контрактов',
     'LBL_LIST_CONTRACT_NAME' => 'Контракт',
     'LBL_LIST_ACCOUNT_NAME' => 'Контрагент',
     'LBL_LIST_START_DATE' => 'Начало',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Название',
     'LBL_LIST_CONTRACT_VALUE' => 'Значение',
 
-    'LBL_TYPE'=>'Тип',
+    'LBL_TYPE' => 'Тип',
     'LBL_TYPE_NAME' => 'Имя типа',
-    'LBL_CONTRACT_TYPE'=>'Тип:',
+    'LBL_CONTRACT_TYPE' => 'Тип:',
 
     'LBL_CREATED_USER' => 'Создано пользователем',
     'LBL_MODIFIED_USER' => 'Изменено пользователем',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для контрактов',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Информационная панель записей контрактов',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Временная шкала контракта',
+];

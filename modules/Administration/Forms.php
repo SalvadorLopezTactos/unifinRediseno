@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Contains a variety of utility functions specific to this module.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -20,7 +19,7 @@
 
 function get_chooser_js()
 {
-$the_script  = <<<EOQ
+    $the_script = <<<EOQ
 
 <script type="text/javascript" language="Javascript">
 <!--  to hide script contents from old browsers
@@ -46,8 +45,5 @@ document.EditView.display_tabs_def.value = display_tabs_def;
 </script>
 EOQ;
 
-return $the_script;
+    return $the_script;
 }
-
-
-?>

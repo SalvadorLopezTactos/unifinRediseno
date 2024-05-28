@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Συμβάσεις',
-	'LBL_MODULE_NAME_SINGULAR' => 'Σύμβαση',
-	'LBL_MODULE_TITLE' => 'Συμβάσεις: Αρχή',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Συμβάσεις',
+    'LBL_MODULE_NAME_SINGULAR' => 'Σύμβαση',
+    'LBL_MODULE_TITLE' => 'Συμβάσεις: Αρχή',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Δημιουργία Σύμβασης',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'Ταυτότητα Νομίσματος:',
     'LBL_CURRENCY' => 'Νόμισμα:',
     'LBL_CURRENCY_RATE' => 'Ισοτιμία Νομίσματος',
-    'LBL_ASSIGNED_TO_NAME'=>'Ανατέθηκε σε:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Ανατέθηκε σε:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Λίστα Συμβάσεων',	
+    'LBL_LIST_FORM_TITLE' => 'Λίστα Συμβάσεων',
     'LBL_LIST_CONTRACT_NAME' => 'Όνομα Σύμβασης',
     'LBL_LIST_ACCOUNT_NAME' => 'Όνομα Λογαριασμού',
     'LBL_LIST_START_DATE' => 'Έναρξη',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Όνομα',
     'LBL_LIST_CONTRACT_VALUE' => 'Τιμή',
 
-    'LBL_TYPE'=>'Τύπος',
+    'LBL_TYPE' => 'Τύπος',
     'LBL_TYPE_NAME' => 'Τύπος Ονόματος',
-    'LBL_CONTRACT_TYPE'=>'Τύπος:',
+    'LBL_CONTRACT_TYPE' => 'Τύπος:',
 
     'LBL_CREATED_USER' => 'Δημιουργημένος Χειριστής',
     'LBL_MODIFIED_USER' => 'Τροποποιημένος Χειριστής',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης συμβάσεων',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Συμβάσεων',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Χρονολόγιο σύμβασης',
+];

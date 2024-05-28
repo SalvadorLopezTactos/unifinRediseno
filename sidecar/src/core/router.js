@@ -9,14 +9,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const Acl = require('core/acl');
-const Alert = require('view/alert');
-const Utils = require('utils/utils');
-const Language = require('core/language');
-const ErrorHandler = require('core/error');
-const Events = require('core/events');
-const Routing = require('core/routing');
-const User = require('core/user');
+const Acl = require('./acl');
+const Alert = require('../view/alert');
+const Utils = require('../utils/utils');
+const Language = require('./language');
+const ErrorHandler = require('./error');
+const Events = require('./events');
+const Routing = require('./routing');
+const User = require('./user');
 
 /**
  * App router. It extends the standard Backbone.js router.
@@ -28,7 +28,7 @@ const User = require('core/user');
  *
  * Example:
  * ```
- * const Events = require('core/events');
+ * const Events = require('./events');
  * Events.on('router:init', function(router) {
  *     var routes = [
  *         {

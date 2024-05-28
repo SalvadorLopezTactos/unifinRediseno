@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Plantilles de la Knowledge Base',
     'LBL_MODULE_NAME_SINGULAR' => 'Plantilla de la Knowledge Base',
     'LBL_MODULE_TITLE' => 'Plantilla de la Knowledge Base',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Veure plantilles',
     'LBL_TEXT_BODY' => 'Cos',
     'LBL_LIST_TEMPLATE_NAME' => 'Nom de Plantilla',
-);
+];

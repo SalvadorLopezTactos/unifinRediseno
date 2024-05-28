@@ -9,10 +9,8 @@
   left: 0;
   z-index: @zindexPopover;
   display: none;
-  width: 236px;
   text-align: left; // Reset given new insertion method
   background-clip: padding-box;
-  border: @borderWidget;
   border-radius: 6px;
   box-shadow: @borderWidget;
 
@@ -20,10 +18,11 @@
   white-space: normal;
 
   // Offset the popover to account for the popover arrow
-  &.top { margin-top: -10px; }
-  &.right { margin-left: 10px; }
-  &.bottom { margin-top: 10px; }
-  &.left { margin-left: -10px; }
+  &[data-popper-placement="top"] { margin-top: -10px; }
+  &[data-popper-placement="right"] { margin-left: 10px; }
+  &[data-popper-placement="bottom"] { margin-top: 10px; }
+  &[data-popper-placement="left"] { margin-left: -10px; }
+  &.show { display: block; }
 }
 
 .popover-title {
@@ -61,7 +60,7 @@
 }
 
 .popover {
-  &.top .arrow {
+  &[data-popper-placement="top"] .arrow {
     left: 50%;
     margin-left: -@popoverArrowOuterWidth;
     border-bottom-width: 0;
@@ -76,7 +75,7 @@
     }
   }
 
-  &.right .arrow {
+  &[data-popper-placement="right"] .arrow {
     top: 50%;
     left: -@popoverArrowOuterWidth;
 
@@ -88,7 +87,7 @@
     }
   }
 
-  &.bottom .arrow {
+  &[data-popper-placement="bottom"] .arrow {
     left: 50%;
     margin-left: -@popoverArrowOuterWidth;
     border-top-width: 0;
@@ -103,7 +102,7 @@
     }
   }
 
-  &.left .arrow {
+  &[data-popper-placement="left"] .arrow {
     top: 50%;
     right: -@popoverArrowOuterWidth;
 
@@ -119,20 +118,13 @@
 /* twitter-bootstrap import END */
 
 .popover {
-  background-color: @gray90;
-  padding: 2px;
-
   .close {
     position: absolute;
     top: 10px;
     right: 20px;
   }
 
-  .fa-times {
-    color: @white !important;
-  }
-
-  &.right .arrow {
+  &[data-popper-placement="right"] .arrow {
     margin-top: -8px;
     border-width: 8px 0 8px 5px;
     border-right: 8px solid @black;
@@ -142,7 +134,7 @@
     }
   }
 
-  &.left .arrow {
+  &[data-popper-placement="left"] .arrow {
     margin-top: -8px;
     border-width: 8px 5px 8px 0;
     border-left: 8px solid @black;

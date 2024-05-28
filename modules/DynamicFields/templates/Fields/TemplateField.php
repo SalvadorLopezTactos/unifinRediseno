@@ -13,7 +13,8 @@
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
-$GLOBALS['studioReadOnlyFields'] = array('date_entered'=>1, 'date_modified'=>1, 'created_by'=>1, 'id'=>1, 'modified_user_id'=>1);
+$GLOBALS['studioReadOnlyFields'] = ['date_entered' => 1, 'date_modified' => 1, 'created_by' => 1, 'id' => 1, 'modified_user_id' => 1];
+
 class TemplateField
 {
     public $hidemassupdate;
@@ -48,19 +49,19 @@ class TemplateField
      * @var mixed
      */
     public $tablename;
-	/*
-		The view is the context this field will be used in
-		-edit
-		-list
-		-detail
-		-search
-		*/
-	var $view = 'edit';
-	var $name = '';
-	var $vname = '';
+    /*
+        The view is the context this field will be used in
+        -edit
+        -list
+        -detail
+        -search
+        */
+    public $view = 'edit';
+    public $name = '';
+    public $vname = '';
     public $label = '';
-	var $id = '';
-	var $size = '20';
+    public $id = '';
+    public $size = '20';
 
     /**
      * The DB length of the field
@@ -69,19 +70,19 @@ class TemplateField
      */
     public $len;
 
-	var $required = false;
-	var $default = null;
-	var $default_value = null;
-	var $type = 'varchar';
-	var $comment = '';
-	var $bean;
-	var $ext1 = '';
-	var $ext2 = '';
-	var $ext3 = '';
-	var $ext4 = '';
-	var $audited= 0;
-	var $massupdate = 0;
-	var $importable = 'true' ;
+    public $required = false;
+    public $default = null;
+    public $default_value = null;
+    public $type = 'varchar';
+    public $comment = '';
+    public $bean;
+    public $ext1 = '';
+    public $ext2 = '';
+    public $ext3 = '';
+    public $ext4 = '';
+    public $audited = 0;
+    public $massupdate = 0;
+    public $importable = 'true';
     public $autoinc_next = '';
     public $pii = false;
     public $readonly = false;
@@ -125,50 +126,50 @@ class TemplateField
      */
     public $duplicate_merge = 1;
 
-	var $new_field_definition;
-	var $reportable = true;
-	var $label_value = '';
-	var $help = '';
-	var $formula = '';
-    var $unified_search = 0;
-    var $supports_unified_search = false;
+    public $new_field_definition;
+    public $reportable = true;
+    public $label_value = '';
+    public $help = '';
+    public $formula = '';
+    public $unified_search = 0;
+    public $supports_unified_search = false;
     // Bug 58560 - Allow fields to be "grouped", like address fields
     // THIS NEEDS TO BE NULL UNLESS IT IS TO BE USED SO IT DOESN'T SAVE AS AN EMPTY
     // VALUE IN DynamicField::saveExtendedAttributes() WHICH USES isset() RATHER THAN empty()
-    var $group = null;
+    public $group = null;
     public $group_label = null;
-	var $vardef_map = array(
-		'name'=>'name',
-		'label'=>'vname',
-	// bug 15801 - need to ALWAYS keep default and default_value consistent as some methods/classes use one, some use another...
-		'default_value'=>'default',
-		'default'=>'default_value',
-		'display_default'=>'default_value',
-		'len'=>'len',
-		'required'=>'required',
-		'type'=>'type',
-		'audited'=>'audited',
-		'massupdate'=>'massupdate',
+    public $vardef_map = [
+        'name' => 'name',
+        'label' => 'vname',
+        // bug 15801 - need to ALWAYS keep default and default_value consistent as some methods/classes use one, some use another...
+        'default_value' => 'default',
+        'default' => 'default_value',
+        'display_default' => 'default_value',
+        'len' => 'len',
+        'required' => 'required',
+        'type' => 'type',
+        'audited' => 'audited',
+        'massupdate' => 'massupdate',
         'hidemassupdate' => 'hidemassupdate',
-		'options'=>'ext1',
-		'help'=>'help',
-	    'comments'=>'comment',
-	    'importable'=>'importable',
-		'duplicate_merge'=>'duplicate_merge',
-		'duplicate_merge_dom_value'=>'duplicate_merge_dom_value', //bug #14897
-		'merge_filter'=>'merge_filter',
-		'reportable' => 'reportable',
-		'ext2'=>'ext2',
-		'ext4'=>'ext4',
-	    'ext3'=>'ext3',
+        'options' => 'ext1',
+        'help' => 'help',
+        'comments' => 'comment',
+        'importable' => 'importable',
+        'duplicate_merge' => 'duplicate_merge',
+        'duplicate_merge_dom_value' => 'duplicate_merge_dom_value', //bug #14897
+        'merge_filter' => 'merge_filter',
+        'reportable' => 'reportable',
+        'ext2' => 'ext2',
+        'ext4' => 'ext4',
+        'ext3' => 'ext3',
         'labelValue' => 'label_value',
-		'unified_search'=>'unified_search',
-        'full_text_search'=>'full_text_search',
+        'unified_search' => 'unified_search',
+        'full_text_search' => 'full_text_search',
         // Bug 58560 - Add a group index here so it gets written to the custom vardefs
         // for cases such as address fields
         'group' => 'group',
         'group_label' => 'group_label',
-		'calculated' => 'calculated',
+        'calculated' => 'calculated',
         'formula' => 'formula',
         'enforced' => 'enforced',
         'dependency' => 'dependency',
@@ -180,7 +181,7 @@ class TemplateField
         'calculation_visible' => 'calculation_visible',
         'convertToBase' => 'convertToBase',
         'showTransactionalAmount' => 'showTransactionalAmount',
-	);
+    ];
 
     /**
      * Optional custom validation for fields being used by
@@ -191,189 +192,211 @@ class TemplateField
      *
      * @var array
      */
-    protected $vardefMapValidation = array(
-        'full_text_search' => array(
-            'Assert\All' => array(
-                'constraints' => array('Assert\Type' => array('type' => 'string')),
-            ),
-        ),
-    );
+    protected $vardefMapValidation = [
+        'full_text_search' => [
+            'Assert\All' => [
+                'constraints' => ['Assert\Type' => ['type' => 'string']],
+            ],
+        ],
+    ];
 
     // Bug #48826
     // fields to decode from post request
-    public $decode_from_request_fields_map = array('formula', 'dependency', 'required_formula', 'readonly_formula');
-	/*
-		HTML FUNCTIONS
-		*/
-	function get_html(){
-		$view = $this->view;
-		if(!empty($GLOBALS['studioReadOnlyFields'][$this->name]))$view = 'detail';
-		switch($view){
-			case 'search':return $this->get_html_search();
-			case 'edit': return $this->get_html_edit();
-			case 'list': return $this->get_html_list();
-			case 'detail': return $this->get_html_detail();
+    public $decode_from_request_fields_map = ['formula', 'dependency', 'required_formula', 'readonly_formula'];
 
-		}
-	}
-	function set($values){
-		foreach($values as $name=>$value){
-			$this->$name = $value;
-		}
+    /*
+        HTML FUNCTIONS
+        */
+    public function get_html()
+    {
+        $view = $this->view;
+        if (!empty($GLOBALS['studioReadOnlyFields'][$this->name])) {
+            $view = 'detail';
+        }
+        switch ($view) {
+            case 'search':
+                return $this->get_html_search();
+            case 'edit':
+                return $this->get_html_edit();
+            case 'list':
+                return $this->get_html_list();
+            case 'detail':
+                return $this->get_html_detail();
+        }
+    }
 
-	}
+    public function set($values)
+    {
+        foreach ($values as $name => $value) {
+            $this->$name = $value;
+        }
+    }
 
-	function get_html_edit(){
-		return 'not implemented';
-	}
+    public function get_html_edit()
+    {
+        return 'not implemented';
+    }
 
-	function get_html_list(){
-		return $this->get_html_detail();
-	}
+    public function get_html_list()
+    {
+        return $this->get_html_detail();
+    }
 
-	function get_html_detail(){
-		return 'not implemented';
-	}
+    public function get_html_detail()
+    {
+        return 'not implemented';
+    }
 
-	function get_html_search(){
-		return $this->get_html_edit();
-	}
-	function get_html_label(){
+    public function get_html_search()
+    {
+        return $this->get_html_edit();
+    }
 
-		$label =  "{MOD." .$this->vname . "}";
-		if(!empty($GLOBALS['app_strings'][$this->vname])){
-			$label = "{APP." .$this->label . "}";
-		}
-		if($this->view == 'edit' && $this->is_required()){
-			$label .= '<span class="required">*</span>';
-		}
-		if($this->view == 'list'){
-			if(isset($this->bean)){
-				if(!empty($this->id)){
-					$name = $this->bean->table_name . '_cstm.'. $this->name;
-					$arrow = $this->bean->table_name . '_cstm_'. $this->name;
-				}else{
-					$name = $this->bean->table_name . '.'. $this->name;
-					$arrow = $this->bean->table_name . '_'. $this->name;
-				}
-			}else{
-				$name = $this->name;
-				$arrow = $name;
-			}
-			$label = "<a href='{ORDER_BY}$name' class='listViewThLinkS1'>{MOD.$this->label}{arrow_start}{".$arrow."_arrow}{arrow_end}</a>";
-		}
-		return $label;
+    public function get_html_label()
+    {
 
-	}
+        $label = '{MOD.' . $this->vname . '}';
+        if (!empty($GLOBALS['app_strings'][$this->vname])) {
+            $label = '{APP.' . $this->label . '}';
+        }
+        if ($this->view == 'edit' && $this->is_required()) {
+            $label .= '<span class="required">*</span>';
+        }
+        if ($this->view == 'list') {
+            if (isset($this->bean)) {
+                if (!empty($this->id)) {
+                    $name = $this->bean->table_name . '_cstm.' . $this->name;
+                    $arrow = $this->bean->table_name . '_cstm_' . $this->name;
+                } else {
+                    $name = $this->bean->table_name . '.' . $this->name;
+                    $arrow = $this->bean->table_name . '_' . $this->name;
+                }
+            } else {
+                $name = $this->name;
+                $arrow = $name;
+            }
+            $label = "<a href='{ORDER_BY}$name' class='listViewThLinkS1'>{MOD.$this->label}{arrow_start}{" . $arrow . '_arrow}{arrow_end}</a>';
+        }
+        return $label;
+    }
 
-	/*
-		XTPL FUNCTIONS
-		*/
+    /*
+        XTPL FUNCTIONS
+        */
 
-	function get_xtpl($bean = false){
-		if($bean)
-		$this->bean = $bean;
-		$view = $this->view;
-		if(!empty($GLOBALS['studioReadOnlyFields'][$this->name]))$view = 'detail';
-		switch($view){
-			case 'search':return $this->get_xtpl_search();
-			case 'edit': return $this->get_xtpl_edit();
-			case 'list': return $this->get_xtpl_list();
-			case 'detail': return $this->get_xtpl_detail();
+    public function get_xtpl($bean = false)
+    {
+        if ($bean) {
+            $this->bean = $bean;
+        }
+        $view = $this->view;
+        if (!empty($GLOBALS['studioReadOnlyFields'][$this->name])) {
+            $view = 'detail';
+        }
+        switch ($view) {
+            case 'search':
+                return $this->get_xtpl_search();
+            case 'edit':
+                return $this->get_xtpl_edit();
+            case 'list':
+                return $this->get_xtpl_list();
+            case 'detail':
+                return $this->get_xtpl_detail();
+        }
+    }
 
-		}
-	}
+    public function get_xtpl_edit()
+    {
+        return '/*not implemented*/';
+    }
 
-	function get_xtpl_edit(){
-		return '/*not implemented*/';
-	}
+    public function get_xtpl_list()
+    {
+        return get_xtpl_detail();
+    }
 
-	function get_xtpl_list(){
-		return get_xtpl_detail();
-	}
+    public function get_xtpl_detail()
+    {
+        return '/*not implemented*/';
+    }
 
-	function get_xtpl_detail(){
-		return '/*not implemented*/';
-	}
+    public function get_xtpl_search()
+    {
+        //return get_xtpl_edit();
+    }
 
-	function get_xtpl_search(){
-		//return get_xtpl_edit();
-	}
-
-	function is_required(){
-		if($this->required){
-			return true;
-		}
-		return false;
-
-	}
-
+    public function is_required()
+    {
+        if ($this->required) {
+            return true;
+        }
+        return false;
+    }
 
 
+    /*
+        DB FUNCTIONS
+        */
 
-	/*
-		DB FUNCTIONS
-		*/
-
-	function get_db_type(){
-	    if(!empty($this->type)) {
-	        $type = $GLOBALS['db']->getColumnType($this->type);
-	    }
-	    if(!empty($type)) return " $type";
-	    $type = $GLOBALS['db']->getColumnType("varchar");
+    public function get_db_type()
+    {
+        if (!empty($this->type)) {
+            $type = $GLOBALS['db']->getColumnType($this->type);
+        }
+        if (!empty($type)) {
+            return " $type";
+        }
+        $type = $GLOBALS['db']->getColumnType('varchar');
         return " $type({$this->len})";
-	}
+    }
 
-	function get_db_default($modify=false){
-		$GLOBALS['log']->debug('get_db_default(): default_value='.$this->default_value);
-		if (!$modify or empty($this->new_field_definition['default_value']) or $this->new_field_definition['default_value'] != $this->default_value ) {
-			if(!is_null($this->default_value)){ // add a default value if it is not null - we want to set a default even if default_value is '0', which is not null, but which is empty()
-				if(NULL == trim($this->default_value)){
-					return " DEFAULT NULL";
-				}
-				else {
-					return " DEFAULT '$this->default_value'";
-				}
-			}else{
-				return '';
-			}
-		}
-	}
+    public function get_db_default($modify = false)
+    {
+        $GLOBALS['log']->debug('get_db_default(): default_value=' . $this->default_value);
+        if (!$modify or empty($this->new_field_definition['default_value']) or $this->new_field_definition['default_value'] != $this->default_value) {
+            if (!is_null($this->default_value)) { // add a default value if it is not null - we want to set a default even if default_value is '0', which is not null, but which is empty()
+                if (null == trim($this->default_value)) {
+                    return ' DEFAULT NULL';
+                } else {
+                    return " DEFAULT '$this->default_value'";
+                }
+            } else {
+                return '';
+            }
+        }
+    }
 
-	/*
-	 * Return the required clause for this field
-	 * Confusingly, when modifying an existing field ($modify=true) there are two exactly opposite cases:
-	 * 1. if called by Studio, only $this->required is set. If set, we return "NOT NULL" otherwise we return "NULL"
-	 * 2. if not called by Studio, $this->required holds the OLD value of required, and new_field_definition['required'] is the NEW
-	 * So if not called by Studio we want to return NULL if required=true (because we are changing FROM this setting)
-	 */
+    /*
+     * Return the required clause for this field
+     * Confusingly, when modifying an existing field ($modify=true) there are two exactly opposite cases:
+     * 1. if called by Studio, only $this->required is set. If set, we return "NOT NULL" otherwise we return "NULL"
+     * 2. if not called by Studio, $this->required holds the OLD value of required, and new_field_definition['required'] is the NEW
+     * So if not called by Studio we want to return NULL if required=true (because we are changing FROM this setting)
+     */
 
-	function get_db_required($modify=false){
-		//		$GLOBALS['log']->debug('get_db_required required='.$this->required." and ".(($modify)?"true":"false")." and ".print_r($this->new_field_definition,true));
-		$req = "";
+    public function get_db_required($modify = false)
+    {
+        //		$GLOBALS['log']->debug('get_db_required required='.$this->required." and ".(($modify)?"true":"false")." and ".print_r($this->new_field_definition,true));
+        $req = '';
 
-		if ($modify) {
-			if (!empty($this->new_field_definition['required'])) {
-				if ($this->required and $this->new_field_definition['required'] != $this->required) {
-					$req = " NULL ";
-				}
-			}
-			else
-			{
-				$req = ($this->required) ? " NOT NULL " : ''; // bug 17184 tyoung - set required correctly when modifying custom field in Studio
-			}
-		}
-		else
-		{
-			if (empty($this->new_field_definition['required']) or $this->new_field_definition['required'] != $this->required ) {
-				if(!empty($this->required) && $this->required){
-					$req = " NOT NULL";
-				}
-			}
-		}
+        if ($modify) {
+            if (!empty($this->new_field_definition['required'])) {
+                if ($this->required and $this->new_field_definition['required'] != $this->required) {
+                    $req = ' NULL ';
+                }
+            } else {
+                $req = ($this->required) ? ' NOT NULL ' : ''; // bug 17184 tyoung - set required correctly when modifying custom field in Studio
+            }
+        } else {
+            if (empty($this->new_field_definition['required']) or $this->new_field_definition['required'] != $this->required) {
+                if (!empty($this->required) && $this->required) {
+                    $req = ' NOT NULL';
+                }
+            }
+        }
 
-		return $req;
-	}
+        return $req;
+    }
 
     /**
      * Oracle Support: do not set required constraint if no default value is supplied.
@@ -404,13 +427,13 @@ class TemplateField
         return $db->alterColumnSQL($table, $this->get_field_def());
     }
 
-	/*
-	 * BEAN FUNCTIONS
-	 *
-	 */
+    /*
+     * BEAN FUNCTIONS
+     *
+     */
     public function get_field_def()
     {
-        $array = array(
+        $array = [
             'required' => $this->convertBooleanValue($this->required),
             'readonly' => $this->convertBooleanValue($this->readonly),
             'source' => 'custom_fields',
@@ -429,9 +452,9 @@ class TemplateField
             'audited' => $this->convertBooleanValue($this->audited) || $this->convertBooleanValue($this->pii),
             'reportable' => $this->convertBooleanValue($this->reportable),
             'unified_search' => $this->convertBooleanValue($this->unified_search),
-            'merge_filter' => empty($this->merge_filter) ? "disabled" : $this->merge_filter,
+            'merge_filter' => empty($this->merge_filter) ? 'disabled' : $this->merge_filter,
             'pii' => $this->convertBooleanValue($this->pii),
-        );
+        ];
 
         if (isset($this->default)) {
             $array['default'] = $this->default;
@@ -494,44 +517,45 @@ class TemplateField
         return $array;
     }
 
-	protected function convertBooleanValue($value)
-	{
-		if ($value === 'true' || $value === '1' || $value === 1)
-		return  true;
-		else if ($value === 'false' || $value === '0' || $value === 0)
-		return  false;
-		else
-		return $value;
-	}
+    protected function convertBooleanValue($value)
+    {
+        if ($value === 'true' || $value === '1' || $value === 1) {
+            return true;
+        } elseif ($value === 'false' || $value === '0' || $value === 0) {
+            return false;
+        } else {
+            return $value;
+        }
+    }
 
 
-	/* if the field is duplicate merge enabled this function will return the vardef entry for the same.
-	 */
-	function get_dup_merge_def(&$def) {
+    /* if the field is duplicate merge enabled this function will return the vardef entry for the same.
+     */
+    public function get_dup_merge_def(&$def)
+    {
         switch ($def['duplicate_merge_dom_value']) {
-			case 0:
-				$def['duplicate_merge']='disabled';
-                $def['merge_filter']='disabled';
-				break;
-			case 1:
-				$def['duplicate_merge']='enabled';
-                $def['merge_filter']='disabled';
-				break;
-			case 2:
-				$def['merge_filter']='enabled';
-				$def['duplicate_merge']='enabled';
-				break;
-			case 3:
-				$def['merge_filter']='selected';
-				$def['duplicate_merge']='enabled';
-				break;
-			case 4:
-				$def['merge_filter']='enabled';
-				$def['duplicate_merge']='disabled';
-				break;
-		}
-
-	}
+            case 0:
+                $def['duplicate_merge'] = 'disabled';
+                $def['merge_filter'] = 'disabled';
+                break;
+            case 1:
+                $def['duplicate_merge'] = 'enabled';
+                $def['merge_filter'] = 'disabled';
+                break;
+            case 2:
+                $def['merge_filter'] = 'enabled';
+                $def['duplicate_merge'] = 'enabled';
+                break;
+            case 3:
+                $def['merge_filter'] = 'selected';
+                $def['duplicate_merge'] = 'enabled';
+                break;
+            case 4:
+                $def['merge_filter'] = 'enabled';
+                $def['duplicate_merge'] = 'disabled';
+                break;
+        }
+    }
 
     /**
      * duplicate_merge_dom_value drives the dropdown in the studio editor. This dropdown drives two fields though,
@@ -541,28 +565,29 @@ class TemplateField
      * than a string as well.
      * @return int
      */
-    function getDupMergeDomValue(){
+    public function getDupMergeDomValue()
+    {
         if (isset($this->duplicate_merge_dom_value)) {
             return $this->duplicate_merge_dom_value;
         }
 
         //If duplicate merge is numeric rather than a string, it is probably what duplicate_merge_dom_value was set to.
-        if (is_numeric($this->duplicate_merge))
+        if (is_numeric($this->duplicate_merge)) {
             return $this->duplicate_merge;
+        }
 
 
         //Figure out the duplicate_merge_dom_value based on the values of merge filter and duplicate merge
-        if (empty($this->merge_filter) || $this->merge_filter === 'disabled' )
-        {
+        if (empty($this->merge_filter) || $this->merge_filter === 'disabled') {
             if (empty($this->duplicate_merge) || $this->duplicate_merge === 'disabled') {
                 $this->duplicate_merge_dom_value = 0;
             } else {
                 $this->duplicate_merge_dom_value = 1;
             }
         } else {
-            if ($this->merge_filter === "selected")
+            if ($this->merge_filter === 'selected') {
                 $this->duplicate_merge_dom_value = 3;
-            else if (empty($this->duplicate_merge) || $this->duplicate_merge === 'disabled') {
+            } elseif (empty($this->duplicate_merge) || $this->duplicate_merge === 'disabled') {
                 $this->duplicate_merge_dom_value = 4;
             } else {
                 $this->duplicate_merge_dom_value = 2;
@@ -572,16 +597,17 @@ class TemplateField
         return $this->duplicate_merge_dom_value;
     }
 
-	/*
-		HELPER FUNCTIONS
-		*/
+    /*
+        HELPER FUNCTIONS
+        */
 
 
-	function prepare(){
-		if(empty($this->id)){
-			$this->id = $this->name;
-		}
-	}
+    public function prepare()
+    {
+        if (empty($this->id)) {
+            $this->id = $this->name;
+        }
+    }
 
     /**
      * This function supports setting the values of all TemplateField instances.
@@ -601,7 +627,7 @@ class TemplateField
             }
         }
 
-        foreach($row as $key => $value) {
+        foreach ($row as $key => $value) {
             $this->$key = $value;
         }
     }
@@ -623,27 +649,25 @@ class TemplateField
             if ($value !== null) {
                 // Bug #48826. Some fields are allowed to have special characters and must be decoded from the request
                 // Bug 49774, 49775: Strip html tags from 'formula' and 'dependency'.
-                if (is_string($value) && in_array($vardef, $this->decode_from_request_fields_map)) {
+                if (is_string($value) && safeInArray($vardef, $this->decode_from_request_fields_map)) {
                     $this->$vardef = strip_tags($value);
                 } else {
                     $this->$vardef = $value;
                 }
 
                 //Remove potential xss code from help field
-                if($field == 'help' && !empty($this->$vardef))
-                {
+                if ($field == 'help' && !empty($this->$vardef)) {
                     $this->$vardef = htmlspecialchars(remove_xss($this->$vardef), ENT_COMPAT, 'UTF-8');
                 }
 
-				if($vardef != $field){
-					$this->$field = $this->$vardef;
-				}
-			}
-		}
-		$this->applyVardefRules();
-		$GLOBALS['log']->debug('populate: '.print_r($this,true));
-
-	}
+                if ($vardef != $field) {
+                    $this->$field = $this->$vardef;
+                }
+            }
+        }
+        $this->applyVardefRules();
+        $GLOBALS['log']->debug('populate: ' . print_r($this, true));
+    }
 
     /**
      * Applies rules for type specific fields vardefs. This can be overridden in
@@ -658,8 +682,7 @@ class TemplateField
         }
 
         if (!empty($this->calculated) && !empty($this->formula)
-            && is_string($this->formula) && !empty($this->enforced) && $this->enforced)
-        {
+            && is_string($this->formula) && !empty($this->enforced) && $this->enforced) {
             $this->importable = 'false';
             $this->duplicate_merge = 0;
             $this->duplicate_merge_dom_value = 0;
@@ -667,29 +690,31 @@ class TemplateField
 
         // Handle full_text_search configuration
         if (!empty($this->full_text_search)) {
-
             // configure correct enabled/searchable flags
             switch ($this->full_text_search['enabled']) {
                 case '2':
                     $this->full_text_search['enabled'] = true;
                     $this->full_text_search['searchable'] = true;
+                    if ($this instanceof TemplateAutoIncrement) {
+                        $this->full_text_search['type'] = 'int';
+                    }
                     break;
                 default:
                     // only set value for searchable, no set for enabled! see BR-2852
                     $this->full_text_search['searchable'] = false;
             }
-
-
         }
     }
 
-	function get_additional_defs(){
-		return array();
-	}
+    public function get_additional_defs()
+    {
+        return [];
+    }
 
-	function delete($df){
-		$df->deleteField($this);
-	}
+    public function delete($df)
+    {
+        $df->deleteField($this);
+    }
 
     /**
      * get_field_name
@@ -703,13 +728,12 @@ class TemplateField
      */
     protected function get_field_name($module, $name)
     {
-       $bean = BeanFactory::newBean($module);
-       if(empty($bean) || is_null($bean))
-       {
-       	  return $name;
-       }
+        $bean = BeanFactory::newBean($module);
+        if (empty($bean) || is_null($bean)) {
+            return $name;
+        }
 
-       $field_defs = $bean->field_defs;
+        $field_defs = $bean->field_defs;
         return $field_defs[$name]['name'] ?? $name;
     }
 
@@ -722,17 +746,16 @@ class TemplateField
      */
     public function save($df)
     {
-		$df->addFieldObject($this);
+        $df->addFieldObject($this);
 
-        $searchFieldParser = new ParserSearchFields( $df->getModuleName() , $df->getPackageName() ) ;
-	    //If unified_search is enabled for this field, then create the SearchFields entry
-	    $fieldName = $this->get_field_name($df->getModuleName(), $this->name);
-        if($this->unified_search && !isset($searchFieldParser->searchFields[$df->getModuleName()][$fieldName]))
-        {
-           $searchFieldParser->addSearchField($fieldName, array('query_type'=>'default'));
-           $searchFieldParser->saveSearchFields($searchFieldParser->searchFields);
+        $searchFieldParser = new ParserSearchFields($df->getModuleName(), $df->getPackageName());
+        //If unified_search is enabled for this field, then create the SearchFields entry
+        $fieldName = $this->get_field_name($df->getModuleName(), $this->name);
+        if ($this->unified_search && !isset($searchFieldParser->searchFields[$df->getModuleName()][$fieldName])) {
+            $searchFieldParser->addSearchField($fieldName, ['query_type' => 'default']);
+            $searchFieldParser->saveSearchFields($searchFieldParser->searchFields);
         }
-	}
+    }
 
     /**
      * Gets mapping of fields_meta_data to DynamicField properties. This can be
@@ -742,7 +765,7 @@ class TemplateField
      */
     public function getFieldMetaDataMapping()
     {
-        return array(
+        return [
             'comments' => 'comment',
             'require_option' => 'required',
             'label' => 'vname',
@@ -750,7 +773,7 @@ class TemplateField
             'max_size' => 'len',
             'default_value' => 'default',
             'id_name' => 'ext3',
-        );
+        ];
     }
 
     /**
@@ -778,9 +801,9 @@ class TemplateField
     /**
      * Field defs of which this field consists: list with single item (field itself) for simple fields, list of
      * components for composite. Used for database change verification.
-     * @see DynamicFieldVerification
      * @param DynamicField $dynamicField needed to check field existence in some ancestors
      * @return array
+     * @see DynamicFieldVerification
      */
     public function getContainedDefs(DynamicField $dynamicField): array
     {

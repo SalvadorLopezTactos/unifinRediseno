@@ -177,7 +177,7 @@ abstract class SugarVisibility implements Strategy
      */
     public function beforeSseIndexing()
     {
-        $GLOBALS['log']->deprecated("SugarVisibility::beforeSseIndexing is deprecated !");
+        $GLOBALS['log']->deprecated('SugarVisibility::beforeSseIndexing is deprecated !');
     }
 
     /**
@@ -189,7 +189,7 @@ abstract class SugarVisibility implements Strategy
      */
     public function addSseVisibilityFilter(SugarSearchEngineInterface $engine, $filter)
     {
-        $GLOBALS['log']->deprecated("SugarVisibility::addSseVisibilityFilter is deprecated !");
+        $GLOBALS['log']->deprecated('SugarVisibility::addSseVisibilityFilter is deprecated !');
         return $filter;
     }
 }

@@ -58,7 +58,7 @@
         {assign var="field" value=$col.name}
         <div class='le_field' data-name="{$field}" id='{$idCount}'>
             {if ! $fromModuleBuilder && ($col.name != '(filler)')}
-                {capture assign="otherAttributes"}class="le_edit" style="float:right; cursor:pointer;" onclick="editFieldProperties('{$idCount}', '{$col.label|escape:'javascript'}');"{/capture}
+                {capture assign="otherAttributes"}class="le_edit" style="float:right; cursor:pointer;" onclick="editFieldProperties('{$idCount}', '{$col.label|escape:'javascript'|escape:'html':'UTF-8'}');"{/capture}
                 {sugar_getimage name="edit_inline" ext=".gif" other_attributes=$otherAttributes}
             {/if}
             {if isset($col.type) && ($col.type == 'address')}
@@ -181,7 +181,7 @@
                 {assign var="field" value=$col.name}
                 <div class='le_field' data-name="{$col.name}" id='{$idCount}'>
                     {if ! $fromModuleBuilder && ($col.name != '(filler)')}
-                        {capture assign="otherAttributes"}class="le_edit" style="float:right; cursor:pointer;" onclick="editFieldProperties('{$idCount}', '{$col.label|escape:'javascript'}');"{/capture}
+                        {capture assign="otherAttributes"}class="le_edit" style="float:right; cursor:pointer;" onclick="editFieldProperties('{$idCount}', '{$col.label|escape:'javascript'|escape:'html':'UTF-8'}');"{/capture}
                         {sugar_getimage name="edit_inline" ext=".gif" other_attributes=$otherAttributes}
                     {/if}
 

@@ -34,12 +34,20 @@
                         // the tile view config was opened it wouldn't have the updated metadata until refreshed
                         app.api.call('read', app.api.buildURL('ping'), null, {
                             success: function(data) {
-                                app.drawer.open({
+                                let prevLayout = app.controller.context.get('layout');
+                                if (prevLayout && !_.contains(['login', 'bwc'], prevLayout)) {
+                                    app.drawer.open({
+                                        layout: 'config-drawer',
+                                        context: {
+                                            module: 'VisualPipeline',
+                                            fromRouter: true
+                                        }
+                                    });
+                                    return;
+                                }
+                                app.controller.loadView({
                                     layout: 'config-drawer',
-                                    context: {
-                                        module: 'VisualPipeline',
-                                        fromRouter: true
-                                    }
+                                    module: 'VisualPipeline'
                                 });
                             },
                         });

@@ -71,7 +71,7 @@ class MetaDataFileUndeployed implements MetaDataFileInterface
             case MB_HISTORYMETADATALOCATION:
                 $path = array_merge(
                     explode('/', trim(MetaDataFiles::$paths[MB_WORKINGMETADATALOCATION], '/')),
-                    array('modulebuilder','packages', $this->package),
+                    ['modulebuilder', 'packages', $this->package],
                     $path
                 );
                 break;

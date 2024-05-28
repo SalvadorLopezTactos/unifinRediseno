@@ -25,6 +25,12 @@ class PMSEUserAssignmentHandler
     private $wrapper;
 
     /**
+     * PMSEEmailHandler object
+     * @var PMSEEmailHandler
+     */
+    private $emailHandler;
+
+    /**
      *
      * @var PMSELogger
      */
@@ -38,6 +44,7 @@ class PMSEUserAssignmentHandler
     public function __construct()
     {
         $this->wrapper = ProcessManager\Factory::getPMSEObject('PMSEWrapper');
+        $this->emailHandler = ProcessManager\Factory::getPMSEObject('PMSEEmailHandler');
         $this->logger = PMSELogger::getInstance();
     }
 
@@ -109,14 +116,20 @@ class PMSEUserAssignmentHandler
         $currentUserId = $flowData['cas_user_id'];
         $currentSugarId = $flowData['cas_sugar_object_id'];
         $currentSugarModule = $flowData['cas_sugar_module'];
-        $today =  TimeDate::getInstance()->nowDb();
+        $today = TimeDate::getInstance()->nowDb();
 
-        $activitiesDef = $activityDefinitionBean->get_list('pmse_bpm_activity_definition.id',
-            "pmse_bpm_activity_definition.id = '$actId' ", 0, -1, -1, array());
+        $activitiesDef = $activityDefinitionBean->get_list(
+            'pmse_bpm_activity_definition.id',
+            "pmse_bpm_activity_definition.id = '$actId' ",
+            0,
+            -1,
+            -1,
+            []
+        );
         if (!isset($activitiesDef['list'][0])) {
             //$this->bpmLog('ERROR', "[$flowData['cas_id']][$flowData['cas_index']] Activity Definition not found using act_id: $actId");
             $this->logger->error("[{$flowData['cas_id']}][{$flowData['cas_index']}] Activity Definition not found using act_id: $actId");
-            $activityDefRow = array();
+            $activityDefRow = [];
         } else {
             $activityDefRow = get_object_vars($activitiesDef['list'][0]);
         }
@@ -197,20 +210,28 @@ class PMSEUserAssignmentHandler
         $caseData['cas_user_id'] = $userId;
 
         $flowRow = $this->retrieveBean('pmse_BpmFlow');
-        $flowRow->retrieve_by_string_fields(array(
-                'cas_id' => $caseData['cas_id'],
-                'cas_index' => $caseData['cas_index']
-            ));
+        $flowRow->retrieve_by_string_fields([
+            'cas_id' => $caseData['cas_id'],
+            'cas_index' => $caseData['cas_index'],
+        ]);
 
-        $selectFields = array("max(cas_index) as max_index");
-        $maxIndexFlow = $this->wrapper->getSelectRows($caseBean, '', 'cas_id=' . $caseData['cas_id'], 0, -1, -1,
-            $selectFields, array());
+        $selectFields = ['max(cas_index) as max_index'];
+        $maxIndexFlow = $this->wrapper->getSelectRows(
+            $caseBean,
+            '',
+            'cas_id=' . $caseData['cas_id'],
+            0,
+            -1,
+            -1,
+            $selectFields,
+            []
+        );
 
         $newFlowRow = $this->retrieveBean('pmse_BpmFlow');
-        $newFlowRow->retrieve_by_string_fields(array(
-                'cas_id' => $caseData['cas_id'],
-                'cas_index' => $caseData['cas_index']
-            ));
+        $newFlowRow->retrieve_by_string_fields([
+            'cas_id' => $caseData['cas_id'],
+            'cas_index' => $caseData['cas_index'],
+        ]);
 
         $newFlowRow->id = null;
         $newFlowRow->cas_index = $maxIndexFlow['rowList'][0]['max_index'] + 1;
@@ -223,7 +244,7 @@ class PMSEUserAssignmentHandler
             $newFlowRow->cas_adhoc_actions = $flowRow->cas_adhoc_actions;
         } else {
             if ($isFormRequest) {
-                $newFlowRow->cas_adhoc_actions = json_encode(array('link_cancel', 'route', 'edit'));
+                $newFlowRow->cas_adhoc_actions = json_encode(['link_cancel', 'route', 'edit']);
             } else {
                 $newFlowRow->cas_adhoc_actions = $caseData['cas_adhoc_actions'];
             }
@@ -242,7 +263,7 @@ class PMSEUserAssignmentHandler
         }
 
         if ($newFlowRow->cas_reassign_level <= 0) {
-            $newFlowRow->cas_adhoc_type = "";
+            $newFlowRow->cas_adhoc_type = '';
         }
 
         $caseData['cas_index'] = $newFlowRow->cas_index;
@@ -269,15 +290,23 @@ class PMSEUserAssignmentHandler
 
         $flowList = $caseBean->get_list('', $where);
         $flowRow = $flowList['list'][0];
-        $selectFields = array("max(cas_index) as max_index");
-        $maxIndexFlow = $this->wrapper->getSelectRows($caseBean, '', 'cas_id=' . $caseData['cas_id'], 0, -1, -1,
-            $selectFields, array());
+        $selectFields = ['max(cas_index) as max_index'];
+        $maxIndexFlow = $this->wrapper->getSelectRows(
+            $caseBean,
+            '',
+            'cas_id=' . $caseData['cas_id'],
+            0,
+            -1,
+            -1,
+            $selectFields,
+            []
+        );
 
         $newFlowRow = $this->retrieveBean('pmse_BpmFlow');
-        $newFlowRow->retrieve_by_string_fields(array(
-                'cas_id' => $caseData['cas_id'],
-                'cas_index' => $caseData['cas_index']
-            ));
+        $newFlowRow->retrieve_by_string_fields([
+            'cas_id' => $caseData['cas_id'],
+            'cas_index' => $caseData['cas_index'],
+        ]);
         $newFlowRow->id = null;
         $newFlowRow->cas_index = $maxIndexFlow['rowList'][0]['max_index'] + 1;
         $newFlowRow->cas_previous = $caseData['cas_index'];
@@ -312,10 +341,10 @@ class PMSEUserAssignmentHandler
     {
         $db = DBManagerFactory::getInstance();
         $caseBean = $this->retrieveBean('pmse_BpmFlow'); //new BpmFlow();
-        $caseBean->retrieve_by_string_fields(array(
-                'cas_id' => $caseData['cas_id'],
-                'cas_index' => $caseData['cas_index']
-            ));
+        $caseBean->retrieve_by_string_fields([
+            'cas_id' => $caseData['cas_id'],
+            'cas_index' => $caseData['cas_index'],
+        ]);
         $previousFlow = $this->retrieveBean('pmse_BpmFlow'); //new BpmFlow();
         $where = sprintf(
             'bpmn_id=%s AND cas_id=%d AND bpmn_type=%s AND bpmn_id=%s AND cas_reassign_level=%d AND cas_index=
@@ -345,10 +374,10 @@ class PMSEUserAssignmentHandler
     {
         $result = false;
         $caseBean = $this->retrieveBean('pmse_BpmFlow'); //new BpmFlow();
-        $caseBean->retrieve_by_string_fields(array(
-                'cas_id' => $caseData['cas_id'],
-                'cas_index' => $caseData['cas_index']
-            ));
+        $caseBean->retrieve_by_string_fields([
+            'cas_id' => $caseData['cas_id'],
+            'cas_index' => $caseData['cas_index'],
+        ]);
         if ($caseBean->bpmn_type == 'bpmnActivity' && $caseBean->cas_adhoc_type == 'ROUND_TRIP') {
             $result = true;
         }
@@ -362,10 +391,10 @@ class PMSEUserAssignmentHandler
     public function oneWayReassign($caseData)
     {
         $caseBean = $this->retrieveBean('pmse_BpmFlow'); //new BpmFlow();
-        $caseBean->retrieve_by_string_fields(array(
-                'cas_id' => $caseData['cas_id'],
-                'cas_index' => $caseData['cas_index']
-            ));
+        $caseBean->retrieve_by_string_fields([
+            'cas_id' => $caseData['cas_id'],
+            'cas_index' => $caseData['cas_index'],
+        ]);
         $firstDerivatedFlow = $this->retrieveBean('pmse_BpmFlow', $caseBean->cas_adhoc_parent_id); //new BpmFlow();
         $originalFlow = $this->retrieveBean('pmse_BpmFlow', $firstDerivatedFlow->cas_adhoc_parent_id); //new BpmFlow();
         $caseData['cas_adhoc_type'] = $originalFlow->cas_adhoc_type;
@@ -384,10 +413,10 @@ class PMSEUserAssignmentHandler
     {
         $result = false;
         $caseBean = $this->retrieveBean('pmse_BpmFlow'); //new BpmFlow();
-        $caseBean->retrieve_by_string_fields(array(
-                'cas_id' => $caseData['cas_id'],
-                'cas_index' => $caseData['cas_index']
-            ));
+        $caseBean->retrieve_by_string_fields([
+            'cas_id' => $caseData['cas_id'],
+            'cas_index' => $caseData['cas_index'],
+        ]);
         if ($caseBean->bpmn_type == 'bpmnActivity' && $caseBean->cas_adhoc_type == 'ONE_WAY') {
             $result = true;
         }
@@ -403,14 +432,14 @@ class PMSEUserAssignmentHandler
     {
         $result = false;
         $caseBean = $this->retrieveBean('pmse_BpmFlow'); //new BpmFlow();
-        $caseBean->retrieve_by_string_fields(array(
-                'cas_id' => $caseData['cas_id'],
-                'cas_index' => $caseData['cas_index']
-            ));
-        $caseBean->retrieve_by_string_fields(array(
-                'cas_id' => $caseBean->cas_id,
-                'cas_index' => $caseBean->cas_previous
-            ));
+        $caseBean->retrieve_by_string_fields([
+            'cas_id' => $caseData['cas_id'],
+            'cas_index' => $caseData['cas_index'],
+        ]);
+        $caseBean->retrieve_by_string_fields([
+            'cas_id' => $caseBean->cas_id,
+            'cas_index' => $caseBean->cas_previous,
+        ]);
         if ($caseBean->bpmn_type == 'bpmnActivity' && $caseBean->cas_adhoc_type == '') {
             $result = true;
         }
@@ -426,12 +455,24 @@ class PMSEUserAssignmentHandler
     public function reassignCaseToUser($caseData, $userId)
     {
         $caseBean = $this->retrieveBean('pmse_BpmFlow'); //new BpmFlow();
-        $caseBean->retrieve_by_string_fields(array(
-                'cas_id' => $caseData['cas_id'],
-                'cas_index' => $caseData['cas_index']
-            ));
+        $caseBean->retrieve_by_string_fields([
+            'cas_id' => $caseData['cas_id'],
+            'cas_index' => $caseData['cas_index'],
+        ]);
         $caseBean->cas_user_id = $userId;
         if ($caseBean->save()) {
+            if ($caseBean->cas_flow_status === 'FORM' && $caseBean->bpmn_type === 'bpmnActivity') {
+                $activityDefinitionBean = BeanFactory::getBean('pmse_BpmActivityDefinition', $caseBean->bpmn_id);
+                if (trim($activityDefinitionBean->act_assignment_method) === 'selfservice') {
+                    if ($activityDefinitionBean->act_email_process_user) {
+                        $flowData = [
+                            'cas_sugar_module' => $caseBean->cas_sugar_module,
+                            'cas_sugar_object_id' => $caseBean->cas_sugar_object_id,
+                        ];
+                        $this->emailHandler->queueActivityEmail($flowData, $activityDefinitionBean, $userId);
+                    }
+                }
+            }
             return true;
         } else {
             return false;
@@ -447,10 +488,10 @@ class PMSEUserAssignmentHandler
     public function reassignRecordToUser($caseData, $userId)
     {
         $caseBean = $this->retrieveBean('pmse_BpmFlow'); //$this->beanFactory->getBean('BpmFlow');
-        $caseBean->retrieve_by_string_fields(array(
-                'cas_id' => $caseData['cas_id'],
-                'cas_index' => $caseData['cas_index']
-            ));
+        $caseBean->retrieve_by_string_fields([
+            'cas_id' => $caseData['cas_id'],
+            'cas_index' => $caseData['cas_index'],
+        ]);
         $beanObject = $this->retrieveBean($caseBean->cas_sugar_module, $caseBean->cas_sugar_object_id);
         if (is_null($beanObject)) {
             return false;
@@ -481,7 +522,7 @@ class PMSEUserAssignmentHandler
         $reassignList = $flowBean->get_full_list('', $where);
         //$reassignList = $this->wrapper->getSelectRows($flowBean, '', $where);
         //$reassignList = $reassignList['rowList'];
-        $assignedUsers = array();
+        $assignedUsers = [];
         foreach ($reassignList as $reassign) {
             $assignedUsers[] = $reassign->cas_user_id;
         }
@@ -525,16 +566,20 @@ class PMSEUserAssignmentHandler
      */
     public function getAssignableUserList($beanFlow, $fullList = false, $type = 'ADHOC', $filter = null)
     {
-        $membersList = array();
-        $membersIds = array();
-        $reassignedUsers = array();
-        $assignableUsers = array();
+        $membersList = [];
+        $membersIds = [];
+        $reassignedUsers = [];
+        $assignableUsers = [];
         if (!$fullList) {
-            $reassignedUsers = $this->getReassignedUserList($beanFlow->cas_id, $beanFlow->bpmn_id, $beanFlow->bpmn_type,
-                $beanFlow->cas_reassign_level);
+            $reassignedUsers = $this->getReassignedUserList(
+                $beanFlow->cas_id,
+                $beanFlow->bpmn_id,
+                $beanFlow->bpmn_type,
+                $beanFlow->cas_reassign_level
+            );
         }
         $activityDefinition = $this->retrieveBean('pmse_BpmActivityDefinition');
-        $memberList = array();
+        $memberList = [];
         if ($beanFlow->bpmn_type == 'bpmnActivity') {
             $activityDefinition->retrieve($beanFlow->bpmn_id);
             $teamBean = $this->retrieveBean('Teams'); //$this->beanFactory->getBean('Teams');
@@ -568,7 +613,7 @@ class PMSEUserAssignmentHandler
         }
         if (!empty($membersList)) {
             foreach ($membersList as $member) {
-                if (!in_array($member->user_id, $reassignedUsers)) {
+                if (!safeInArray($member->user_id, $reassignedUsers)) {
                     $assignableUsers[] = $member;
                 }
             }
@@ -724,7 +769,7 @@ class PMSEUserAssignmentHandler
                 // no pre-defined user is set
                 $nextUserId = '';
                 $this->getLogger()->info("[{$flowData['cas_id']}][{$flowData['cas_index']}] no default user " .
-                    "is defined from Round Robin action");
+                    'is defined from Round Robin action');
             }
         } else {
             //updating last user selected only if its from assigned team
@@ -854,7 +899,7 @@ class PMSEUserAssignmentHandler
                     return true;
                 }
             } elseif ($checkTime >= $date_start && $checkTime <= $date_end) {
-                $weekDay = strtolower($checkTime->format("l"));
+                $weekDay = strtolower($checkTime->format('l'));
 
                 $dayShift = $this->getShiftTimeForDay($shiftBean, $weekDay, $checkTime);
 
@@ -962,11 +1007,12 @@ class PMSEUserAssignmentHandler
     protected function getFirstAndFullWeekAvailabilityInShift(
         \SugarDateTime $nowTime,
         \SugarDateTime $checkTime,
-        array $shiftTimes,
-        int $daysInFirstWeek,
-        int $daysInLastWeek,
-        int $numOfWeeks
+        array          $shiftTimes,
+        int            $daysInFirstWeek,
+        int            $daysInLastWeek,
+        int            $numOfWeeks
     ) {
+
         $timeAvail = 0;
         $todayNum = intval($nowTime->format('w'));
 
@@ -1188,17 +1234,17 @@ class PMSEUserAssignmentHandler
     protected function prepareTeamUserIdsQuery($teamId, $shiftAvailable = false)
     {
         $q = new SugarQuery();
-        $q->select(array('id'));
+        $q->select(['id']);
         $q->from(BeanFactory::newBean('Users'));
 
-        $q->joinTable('team_memberships', array('alias' => 'membership'))->on()
+        $q->joinTable('team_memberships', ['alias' => 'membership'])->on()
             ->equals('membership.team_id', $teamId)
             ->equalsField('membership.user_id', 'id')
             ->equals('membership.explicit_assign', 1)
             ->equals('membership.deleted', 0);
 
         if ($shiftAvailable) {
-            $q->joinTable('shifts_users', array('alias' => 'shift'))->on()
+            $q->joinTable('shifts_users', ['alias' => 'shift'])->on()
                 ->equalsField('shift.user_id', 'id')
                 ->equals('shift.deleted', 0);
         }
@@ -1213,8 +1259,8 @@ class PMSEUserAssignmentHandler
 
     /**
      * Get the id of the current user
-     * @global type $current_user
      * @return type
+     * @global type $current_user
      */
     public function getCurrentUserId()
     {
@@ -1243,9 +1289,9 @@ class PMSEUserAssignmentHandler
 
     /**
      * Get the supervisor id from a determined user.
-     * @global type $db
      * @param type $currentUserId
      * @return type
+     * @global type $db
      */
     public function getSupervisorId($currentUserId)
     {
@@ -1273,7 +1319,7 @@ class PMSEUserAssignmentHandler
         $options['add_deleted'] = true;
 
         if (!empty($args['max_num'])) {
-            $options['limit'] = (int) $args['max_num'];
+            $options['limit'] = (int)$args['max_num'];
         }
 
         if (!empty($args['deleted'])) {
@@ -1284,29 +1330,29 @@ class PMSEUserAssignmentHandler
             if ($args['offset'] == 'end') {
                 $options['offset'] = 'end';
             } else {
-                $options['offset'] = (int) $args['offset'];
+                $options['offset'] = (int)$args['offset'];
             }
         }
 
         // Get the list of members
         $membersBean = BeanFactory::newBean('TeamMemberships');
 
-        $fields = array(
-            'user_id'
-        );
+        $fields = [
+            'user_id',
+        ];
 
         $q = new SugarQuery();
-        $q->from($membersBean, array('add_deleted' => true));
+        $q->from($membersBean, ['add_deleted' => true]);
         $q->distinct(false);
 
-        $q->joinTable('users', array('alias' => 'users', 'joinType' => 'INNER', 'linkingTable' => true))
+        $q->joinTable('users', ['alias' => 'users', 'joinType' => 'INNER', 'linkingTable' => true])
             ->on()
             ->equalsField('users.id', 'user_id')
             ->equals('users.deleted', 0);
 
-        $fields[] = array('users.first_name', 'first_name');
-        $fields[] = array('users.last_name', 'last_name');
-        $fields[] = array('users.status', 'status');
+        $fields[] = ['users.first_name', 'first_name'];
+        $fields[] = ['users.last_name', 'last_name'];
+        $fields[] = ['users.status', 'status'];
 
         $q->where()
             ->equals('team_id', $teamBean->id)
@@ -1325,12 +1371,11 @@ class PMSEUserAssignmentHandler
 
         $member_list = $q->execute();
 
-        $user_list = Array();
+        $user_list = [];
 
-        foreach($member_list as $current_member)
-        {
+        foreach ($member_list as $current_member) {
             $user = BeanFactory::getBean('Users', $current_member['user_id']);
-            if($user->status == 'Active'){
+            if ($user->status == 'Active') {
                 $user_list[] = $user;
             }
         }
@@ -1338,4 +1383,3 @@ class PMSEUserAssignmentHandler
         return $user_list;
     }
 }
-

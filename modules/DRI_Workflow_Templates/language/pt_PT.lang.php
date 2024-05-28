@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Ativo',
     'LBL_ASSIGNEE_RULE' => 'Regra do Atribuído',
     'LBL_TARGET_ASSIGNEE' => 'Atribuído Alvo',
+    'LBL_STAGE_NUMBERS' => 'Numeração de estágios',
     'LBL_EXPORT_BUTTON_LABEL' => 'Exportar',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Importar',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Crie/atualize automaticamente um novo registo de Modelo do Guia Inteligente ao importar um ficheiro *.json a partir do seu sistema de ficheiros.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Se selecionado, Se Atribuído Alvo = Atribuído Principal, quando o utilizar "Atribuído A" é alterado num principal, os utilizadores "Atribuído A" também serão alterados automaticamente nos guias inteligentes, nas fases e nas atividades. Observe que as definições do Atribuído Alvo nos Modelos de Atividade prevalecem em relação ao Modelo do Guia Inteligente',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Quando deve um utilizador ser atribuído às Atividades',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Quem deve ser atribuído às Atividades',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Este botão permite-lhe mostrar ou ocultar a numeração de estágios automática.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Modelo de Atividade/Fase/Guia Inteligente',
 ];

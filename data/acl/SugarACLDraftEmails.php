@@ -56,7 +56,7 @@ class SugarACLDraftEmails extends SugarACLStrategy
             'assigned_user_name',
         ];
 
-        if (in_array($context['field'], $immutableFields)) {
+        if (safeInArray($context['field'], $immutableFields)) {
             return false;
         }
 

@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'הצג הסלמות',
     'LBL_LIST_RELATED_TO_ID' => 'קשור אל מזהה',
     'LNK_IMPORT_ESCALATIONS' => 'ייבוא הסלמות',
-    
+
     'LBL_LIST_SUBJECT' => 'נושא',
     'LBL_LIST_NUMBER' => 'מס&#39;',
     'LBL_LIST_RELATED_TO_TYPE' => 'סוג קשור',

@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_SALUTATION' => 'ברכות',
     'LBL_NAME' => 'שם',
     'LBL_FIRST_NAME' => 'שם פרטי',
@@ -68,4 +68,4 @@ $mod_strings = array(
     'LBL_GOOGLEPLUS' => 'ID בגוגל פלוס',
     'NTC_COPY_ALTERNATE_ADDRESS' => 'היתק כתובת משנית לכתובת ראשית',
     'NTC_COPY_PRIMARY_ADDRESS' => 'העתק כתובת ראשית לכתובת משנית',
-);
+];

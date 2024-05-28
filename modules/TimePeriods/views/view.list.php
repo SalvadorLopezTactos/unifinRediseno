@@ -16,19 +16,20 @@ class TimePeriodsViewList extends ViewList
     /**
      * Return the "breadcrumbs" to display at the top of the page
      *
-     * @param  bool $show_help optional, true if we show the help links
+     * @param bool $show_help optional, true if we show the help links
      * @return HTML string containing breadcrumb title
      */
-     public function getModuleTitle(
-         $show_help = true
-         )
-    {
-    	global $app_list_strings, $mod_strings;
+    public function getModuleTitle(
+        $show_help = true
+    ) {
 
-        $warningText = string_format($mod_strings['LBL_LIST_WARNING'], array(
+
+        global $app_list_strings, $mod_strings;
+
+        $warningText = string_format($mod_strings['LBL_LIST_WARNING'], [
             $app_list_strings['moduleList']['Forecasts'],
             $app_list_strings['moduleList'][$this->module],
-        ));
+        ]);
 
         $float = SugarThemeRegistry::current()->directionality == 'rtl' ? 'right' : 'left';
 
@@ -38,15 +39,16 @@ class TimePeriodsViewList extends ViewList
     }
 
 
- 	public function preDisplay()
- 	{
- 	    global $current_user;
-        
-        if ( !is_admin($current_user) 
-                && !is_admin_for_module($current_user,'Forecasts'))
-            sugar_die("Unauthorized access to administration.");
- 	    
- 		$this->lv = new ListViewSmarty();
- 		$this->lv->showMassupdateFields = false;
- 	}
+    public function preDisplay()
+    {
+        global $current_user;
+
+        if (!is_admin($current_user)
+            && !is_admin_for_module($current_user, 'Forecasts')) {
+            sugar_die('Unauthorized access to administration.');
+        }
+
+        $this->lv = new ListViewSmarty();
+        $this->lv->showMassupdateFields = false;
+    }
 }

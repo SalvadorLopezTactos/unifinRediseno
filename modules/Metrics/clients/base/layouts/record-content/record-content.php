@@ -9,10 +9,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Metrics']['base']['layout']['record-content'] = array(
-    'components' => array(
-        array(
+$viewdefs['Metrics']['base']['layout']['record-content'] = [
+    'components' => [
+        [
             'view' => 'record-content-tabs',
-        ),
-    ),
-);
+        ],
+    ],
+];

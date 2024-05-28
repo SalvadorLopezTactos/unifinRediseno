@@ -21,11 +21,11 @@ if (!function_exists('verifyAndCleanup')) {
     function verifyAndCleanup($user)
     {
         $status = $user->verify_data();
-        $data = array(
+        $data = [
             'status' => $status,
             'error_string' => $user->error_string,
             'error_password' => '',
-        );
+        ];
 
         if ($user->portal_only && !$user->check_password_rules($_POST['new_password'])) {
             $data['status'] = false;
@@ -69,9 +69,9 @@ $display_tabs_def = isset($_REQUEST['display_tabs_def']) ? html_entity_decode($_
 $hide_tabs_def = isset($_REQUEST['hide_tabs_def']) ? html_entity_decode($_REQUEST['hide_tabs_def'], ENT_COMPAT) : '';
 $remove_tabs_def = isset($_REQUEST['remove_tabs_def']) ? html_entity_decode($_REQUEST['remove_tabs_def'], ENT_COMPAT) : '';
 
-$DISPLAY_ARR = array();
-$HIDE_ARR = array();
-$REMOVE_ARR = array();
+$DISPLAY_ARR = [];
+$HIDE_ARR = [];
+$REMOVE_ARR = [];
 
 parse_str($display_tabs_def, $DISPLAY_ARR);
 parse_str($hide_tabs_def, $HIDE_ARR);
@@ -81,12 +81,12 @@ if (isset($_POST['id'])) {
     sugar_die('Unauthorized access to administration.');
 }
 if (isset($_POST['record']) && !is_admin($current_user) &&
-     !$GLOBALS['current_user']->isAdminForModule('Users') &&
-     $_POST['record'] != $current_user->id
+    !$GLOBALS['current_user']->isAdminForModule('Users') &&
+    $_POST['record'] != $current_user->id
 ) {
     sugar_die('Unauthorized access to administration.');
 } elseif (!isset($_POST['record']) && !is_admin($current_user) &&
-     !$GLOBALS['current_user']->isAdminForModule('Users')) {
+    !$GLOBALS['current_user']->isAdminForModule('Users')) {
     sugar_die('Unauthorized access to user administration.');
 }
 
@@ -105,9 +105,9 @@ if (!$focus->ACLAccess('edit')) {
 $focus->incrementETag('mainMenuETag');
 
 // [BR-200] Set the reauth forcing array of fields now for comparison later
-$userApi = new CurrentUserApi;
+$userApi = new CurrentUserApi();
 $reauthFields = array_keys($userApi->getUserPrefsToCache());
-$currentReauthPrefs = array();
+$currentReauthPrefs = [];
 foreach ($reauthFields as $field) {
     $currentReauthPrefs[$field] = $focus->getPreference($field);
 }
@@ -129,9 +129,9 @@ if (!$current_user->is_admin && !$GLOBALS['current_user']->isAdminForModule('Use
         (!empty($_POST['UserType']) && $_POST['UserType'] == 'Administrator') ||
         (!$newUser && !empty($_POST['user_name']) && $_POST['user_name'] != $focus->user_name)
     ) {
-        $GLOBALS['log']->fatal("SECURITY:Non-Admin " . $current_user->id .
-            " attempted to change settings for user:". $focus->id);
-        header("Location: index.php?module=Users&action=Logout");
+        $GLOBALS['log']->fatal('SECURITY:Non-Admin ' . $current_user->id .
+            ' attempted to change settings for user:' . $focus->id);
+        header('Location: index.php?module=Users&action=Logout');
         exit;
     }
 }
@@ -155,8 +155,8 @@ if (!$newUser && $teamSetField != null) {
     $teamSetField->save($focus, $_POST, 'team_name', '');
 }
 
-$portal = array('user_name', 'last_name', 'status', 'portal_only');
-$group = array('user_name', 'last_name', 'status', 'is_group');
+$portal = ['user_name', 'last_name', 'status', 'portal_only'];
+$group = ['user_name', 'last_name', 'status', 'is_group'];
 if (isset($_POST['portal_only']) && ($_POST['portal_only'] == '1' || $focus->portal_only)) {
     foreach ($portal as $field) {
         if (isset($_POST[$field])) {
@@ -223,7 +223,7 @@ if (!$focus->is_group && !$focus->portal_only) {
 
     // change user type to/from admin if desired
     if ((isset($_POST['is_admin']) && ($_POST['is_admin'] == 'on' || $_POST['is_admin'] == '1')) ||
-       (isset($_POST['UserType']) && $_POST['UserType'] == "Administrator")
+        (isset($_POST['UserType']) && $_POST['UserType'] == 'Administrator')
     ) {
         $focus->setAdmin(true);
     } elseif (isset($_POST['is_admin']) && empty($_POST['is_admin'])) {
@@ -303,7 +303,7 @@ if (!$focus->is_group && !$focus->portal_only) {
         if (isset($HIDE_ARR['hide_tabs'])) {
             $tabs->set_user_tabs($HIDE_ARR['hide_tabs'], $focus, 'hide');
         } else {
-            $tabs->set_user_tabs(array(), $focus, 'hide');
+            $tabs->set_user_tabs([], $focus, 'hide');
         }
     }
 
@@ -311,7 +311,7 @@ if (!$focus->is_group && !$focus->portal_only) {
         if (isset($REMOVE_ARR['remove_tabs'])) {
             $tabs->set_user_tabs($REMOVE_ARR['remove_tabs'], $focus, 'remove');
         } else {
-            $tabs->set_user_tabs(array(), $focus, 'remove');
+            $tabs->set_user_tabs([], $focus, 'remove');
         }
     }
 
@@ -458,7 +458,7 @@ if (!$focus->is_group && !$focus->portal_only) {
     ///////////////////////////////////////////////////////////////////////////
     ////    PDF SETTINGS
     foreach ($_POST as $k => $v) {
-        if (strpos($k, "sugarpdf_pdf") !== false) {
+        if (strpos($k, 'sugarpdf_pdf') !== false) {
             $focus->setPreference($k, $v, 0, 'global');
         }
     }
@@ -569,7 +569,7 @@ if (!$focus->verify_data()) {
                     $sendHeader = true;
                 }
                 if ($sendHeader) {
-                    header('Location: index.php?'.http_build_query($queryParams));
+                    header('Location: index.php?' . http_build_query($queryParams));
                     exit;
                 }
             }
@@ -589,7 +589,7 @@ if (!$focus->verify_data()) {
     // If a user is not allowed to use the default system outbound account then they will be
     // saving their own username/password for the system account
     $sysOutboundAccount = new OutboundEmail();
-    if (! $sysOutboundAccount->isAllowUserAccessToSystemDefaultOutbound()) {
+    if (!$sysOutboundAccount->isAllowUserAccessToSystemDefaultOutbound()) {
         $userOverrideOE = $sysOutboundAccount->getUsersMailerForSystemOverride($focus->id);
         if ($userOverrideOE != null) {
             // User is allowed to clear username and pass so no need to check for blanks.
@@ -639,12 +639,12 @@ if (!$focus->verify_data()) {
         $ie->disable_row_level_security = true;
         if (false === $ie->savePersonalEmailAccount($return_id, $focus->user_name)) {
             header('Location: index.php?' . http_build_query([
-                'action' => 'Error',
-                'module' => 'Users',
-                'error_string' => '',
-                'ie_error' => 'true',
-                'id' => $return_id,
-            ]));
+                    'action' => 'Error',
+                    'module' => 'Users',
+                    'error_string' => '',
+                    'ie_error' => 'true',
+                    'id' => $return_id,
+                ]));
             die(); // die here, else the header redirect below takes over.
         }
     } elseif (isset($_REQUEST['ie_id']) && !empty($_REQUEST['ie_id']) && empty($_REQUEST['server_url'])) {
@@ -667,40 +667,40 @@ if (!$focus->verify_data()) {
 
 //handle navigation from user wizard
 if (isset($_REQUEST['whatnext'])) {
-    if ($_REQUEST['whatnext']== 'import') {
-        header("Location:index.php?module=Import&action=step1&import_module=Administration");
+    if ($_REQUEST['whatnext'] == 'import') {
+        header('Location:index.php?module=Import&action=step1&import_module=Administration');
         return;
-    } elseif ($_REQUEST['whatnext']== 'users') {
-        header("Location:index.php?module=Users&action=index");
+    } elseif ($_REQUEST['whatnext'] == 'users') {
+        header('Location:#Users');
         return;
-    } elseif ($_REQUEST['whatnext']== 'settings') {
-        header("Location:index.php?module=Configurator&action=EditView");
+    } elseif ($_REQUEST['whatnext'] == 'settings') {
+        header('Location:index.php?module=Configurator&action=EditView');
         return;
-    } elseif ($_REQUEST['whatnext']== 'studio') {
-        header("Location:index.php?module=ModuleBuilder&action=index&type=studio");
+    } elseif ($_REQUEST['whatnext'] == 'studio') {
+        header('Location:index.php?module=ModuleBuilder&action=index&type=studio');
         return;
     } else {
         //do nothing, let the navigation continue as normal using code below
     }
 }
 
-if (isset($_REQUEST['return_module']) && $_REQUEST['return_module'] != "") {
+if (isset($_REQUEST['return_module']) && $_REQUEST['return_module'] != '') {
     $return_module = $_REQUEST['return_module'];
 } else {
-    $return_module = "Users";
+    $return_module = 'Users';
 }
-if (isset($_REQUEST['return_action']) && $_REQUEST['return_action'] != "") {
+if (isset($_REQUEST['return_action']) && $_REQUEST['return_action'] != '') {
     $return_action = $_REQUEST['return_action'];
 } else {
-    $return_action = "DetailView";
+    $return_action = 'DetailView';
 }
-if (isset($_REQUEST['return_id']) && $_REQUEST['return_id'] != "" &&
-    (!isset($_REQUEST['isDuplicate']) || $_REQUEST['isDuplicate'] == "0")
+if (isset($_REQUEST['return_id']) && $_REQUEST['return_id'] != '' &&
+    (!isset($_REQUEST['isDuplicate']) || $_REQUEST['isDuplicate'] == '0')
 ) {
     $return_id = $_REQUEST['return_id'];
 }
 
-$GLOBALS['log']->debug("Saved record with id of ".$return_id);
+$GLOBALS['log']->debug('Saved record with id of ' . $return_id);
 
 $queryParams = [
     'action' => $return_action,

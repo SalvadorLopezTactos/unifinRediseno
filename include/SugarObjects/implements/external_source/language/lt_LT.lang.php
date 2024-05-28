@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-    'LBL_SOURCE_ID'   => 'Išorinio šaltinio ID',
+$mod_strings = [
+    'LBL_SOURCE_ID' => 'Išorinio šaltinio ID',
     'LBL_SOURCE_TYPE' => 'Išorinis šaltinis',
     'LBL_SOURCE_META' => 'Išorinio šaltinio metaduomenys',
-);
+];

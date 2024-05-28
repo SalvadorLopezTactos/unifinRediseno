@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Andmete privaatsus',
     'LBL_MODULE_NAME_SINGULAR' => 'Andmete privaatsus',
     'LBL_NUMBER' => 'Number',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Kustutamiseks pole märgitud ühtegi välja ega kirjet.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Andmete privaatsuse kirjete töölaud',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Andmete privaatsuse fookuse sahtel',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Andmete privaatsuse ajaskaala',
 
     // list view
     'LBL_HELP_RECORDS' => 'Andmete privaatsuse moodul jälgib privaatsustegevusi, sealhulgas nõusolekuid ja teema taotlusi, et toetada teie organisatsiooni privaatsuspõhimõtteid. Looge üksikisiku kirjega (nt kontaktiga) seotud andmete privaatsuse kirjeid, et jälgida nõusolekut ja tegeleda privaatsustaotlustega.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Andmete privaatsuse moodul jälgib privaatsustegevusi, sealhulgas nõusolekuid ja teema taotlusi, et toetada teie organisatsiooni privaatsuspõhimõtteid. Looge üksikisiku kirjega (nt kontaktiga) seotud andmete privaatsuse kirjeid, et jälgida nõusolekut ja tegeleda privaatsustaotlustega. Kui vajalik tegevus on lõpetatud, saavad andmete privaatsuse haldaja rolliga kasutajad oleku värskendamiseks klõpsata nuppe „Lõpeta“ või „Hülga“.
 
 Kustutamistaotluste puhul klõpsake allpool olevates alampaneelides loetletud iga üksikisiku kirje jaoks nuppu „Märgi kustutamiseks“. Kui kõik vajalikud väljad on valitud, siis nupu „Kustuta ja lõpeta“ vajutamine kustutab püsivalt nende väljade väärtused ja märgib andmete privaatsuse kirje lõpetatud olekule.',
-);
+];

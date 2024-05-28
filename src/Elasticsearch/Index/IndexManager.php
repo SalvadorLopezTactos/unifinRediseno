@@ -60,12 +60,12 @@ class IndexManager
     /**
      * @var array Configuration index_settings
      */
-    protected $config = array();
+    protected $config = [];
 
     /**
      * @var array Default index settings
      */
-    protected $defaultSettings = array(
+    protected $defaultSettings = [
         // Ignore malformed fields when index a document
         'index.mapping.ignore_malformed' => true,
         // Coerce numeric values
@@ -77,18 +77,18 @@ class IndexManager
         // max ngram diff, is only for ES 7.x and up
         // 'index.max_ngram_diff' => 50,
         'index.mapping.total_fields.limit' => self::DEFAULT_MAX_NUMBER_OF_FIELDS,
-    );
+    ];
 
     /**
      * @var array Default type mapping
      */
-    protected $defaultMapping = array(
+    protected $defaultMapping = [
         // Avoid wasting space on _all field which we don't need
         // this option only works in ES 5.x and 6.x, it's been removed in ES 7.x
-        '_all' => array('enabled' => false),
+        '_all' => ['enabled' => false],
         // Ignore new fields for which no mapping exists
         'dynamic' => false,
-    );
+    ];
 
     /**
      * Value used as refresh_interval when performing a reindex. When no more
@@ -155,7 +155,7 @@ class IndexManager
     public function setReindexRefreshInterval($interval)
     {
         if (!is_numeric($interval) && !is_string($interval)) {
-            throw new IndexManagerException("Index refresh_interval needs to be an int or string");
+            throw new IndexManagerException('Index refresh_interval needs to be an int or string');
         }
         $this->reindexRefreshInterval = $interval;
     }
@@ -175,14 +175,14 @@ class IndexManager
      */
     public function setReindexZeroReplica($flag)
     {
-        $this->reindexZeroReplica = (bool) $flag;
+        $this->reindexZeroReplica = (bool)$flag;
     }
 
     /**
      * Verify if the system is ready to create/change indices.
      * @return boolean
      */
-    protected function readyForIndexChanges() : bool
+    protected function readyForIndexChanges(): bool
     {
         $count = 0;
         $available = false;
@@ -212,7 +212,7 @@ class IndexManager
      * @param boolean $recreateIndices
      * @return boolean False on failure, true on success
      */
-    public function scheduleIndexing(array $modules = array(), $recreateIndices = false)
+    public function scheduleIndexing(array $modules = [], $recreateIndices = false)
     {
         // make sure to get the latest elastic version from server directly
         $this->getServerVersion(true);
@@ -241,7 +241,7 @@ class IndexManager
      * @param boolean $recreateIndices
      * @return boolean False on failure, true on success
      */
-    public function checkAndSyncIndices(array $modules = array(), $recreateIndices = false)
+    public function checkAndSyncIndices(array $modules = [], $recreateIndices = false)
     {
         if (!$this->readyForIndexChanges()) {
             $this->container->logger->critical('IndexManager: System not ready for full reindex, cancelling');
@@ -260,7 +260,7 @@ class IndexManager
      * @param array $modules
      * @return bool
      */
-    public function addMappings(array $modules = array())
+    public function addMappings(array $modules = [])
     {
         if (!$this->readyForIndexChanges()) {
             $this->container->logger->critical('IndexManager: System not ready for full reindex, cancelling');
@@ -338,8 +338,8 @@ class IndexManager
     /**
      * Sync new index settings to Elasticsearch backend
      * @param array $modules List of modules to sync
-     * @param boolean $dropExist, force to drop exist index
-     * @param boolean $createNew, create new index if doesn't exist
+     * @param boolean $dropExist , force to drop exist index
+     * @param boolean $createNew , create new index if doesn't exist
      */
     protected function syncIndices(array $modules, bool $dropExist = false, bool $createNew = false)
     {
@@ -384,7 +384,7 @@ class IndexManager
      * @param array $modules the list of enabled modules
      * @return MappingCollection
      */
-    protected function buildMapping(ProviderCollection $providerCollection, array $modules = array())
+    protected function buildMapping(ProviderCollection $providerCollection, array $modules = [])
     {
         return $this->container->mappingManager->buildMapping($providerCollection, $modules);
     }
@@ -409,7 +409,7 @@ class IndexManager
     protected function getIndexSettingsFromConfig(Index $index)
     {
         $indexName = $index->getBaseName();
-        $settings = array();
+        $settings = [];
 
         // explicit index configuration
         if (isset($this->config[$indexName])) {
@@ -440,12 +440,13 @@ class IndexManager
      * @param boolean $dropExist Drop indices if already they already exist
      */
     public function createIndices(
-        IndexCollection $indexCollection,
-        AnalysisBuilder $analysisBuilder,
+        IndexCollection   $indexCollection,
+        AnalysisBuilder   $analysisBuilder,
         MappingCollection $mappingCollection,
         $dropExist = false,
         $createNew = false
     ) {
+
         foreach ($indexCollection as $index) {
             $isNewIndex = false;
             if ($dropExist === true || ($createNew === true && !$index->exists())) {
@@ -497,10 +498,10 @@ class IndexManager
      * @param MappingCollection $mappingCollection
      * @return array
      */
-    protected function getAggSourceExcludes(Index $index, MappingCollection $mappingCollection) : array
+    protected function getAggSourceExcludes(Index $index, MappingCollection $mappingCollection): array
     {
         $types = $index->getTypes();
-        $count = count($types);
+        $count = safeCount($types);
         $aggeExcludeSettings = [];
         foreach ($types as $module => $type) {
             /* @var $fieldMappings Mapping */
@@ -516,7 +517,7 @@ class IndexManager
     /**
      * Update Mappings of list of indices, it doesn't require re-index
      *
-     * @param array $moduels, module names
+     * @param array $moduels , module names
      * @param MappingHandlerInterface[] $handlers
      *
      */
@@ -564,9 +565,9 @@ class IndexManager
     protected function getSourceSettings(array $excludes = [])
     {
         // base settings
-        $source = array(
+        $source = [
             'enabled' => true,
-        );
+        ];
 
         // add excludes
         if (!empty($excludes)) {
@@ -707,6 +708,7 @@ class IndexManager
         }
         return $status;
     }
+
     /**
      * Enable replicas for all indices. This method is primarily called by the
      * scheduler when no more records are in the fts_queue table. This implies
@@ -718,11 +720,11 @@ class IndexManager
     public function enableReplicas()
     {
         if (!$this->reindexZeroReplica) {
-            return array();
+            return [];
         }
 
         $modules = $this->getAllEnabledModules();
-        $status = array();
+        $status = [];
         foreach ($this->getManagedIndices($modules)->getIterator() as $index) {
             $status[$index->getName()] = $this->enableIndexReplicas($index)->getStatus();
         }
@@ -777,10 +779,10 @@ class IndexManager
     public function disableReplicas(array $modules)
     {
         if (!$this->reindexZeroReplica) {
-            return array();
+            return [];
         }
 
-        $status = array();
+        $status = [];
         foreach ($this->getManagedIndices($modules)->getIterator() as $index) {
             $status[$index->getName()] = $this->setNumberOfReplicas($index, 0)->getStatus();
         }
@@ -800,7 +802,7 @@ class IndexManager
         }
 
         $this->container->logger->info(sprintf(
-            "IndexManager: Set refresh interval %s for %s",
+            'IndexManager: Set refresh interval %s for %s',
             $interval,
             $index->getName()
         ));
@@ -815,7 +817,7 @@ class IndexManager
     {
         $config = $this->getIndexSettingsFromConfig($index);
         if (!isset($config['index.refresh_interval'])) {
-            throw new IndexManagerException("No refresh_interval config setting available");
+            throw new IndexManagerException('No refresh_interval config setting available');
         }
         $this->setIndexRefresh($index, $config['index.refresh_interval']);
     }
@@ -829,7 +831,7 @@ class IndexManager
     protected function setNumberOfReplicas(Index $index, $replicas)
     {
         $this->container->logger->info(sprintf(
-            "IndexManager: Set replicas to %s for %s",
+            'IndexManager: Set replicas to %s for %s',
             $replicas,
             $index->getName()
         ));
@@ -845,7 +847,7 @@ class IndexManager
     {
         $config = $this->getIndexSettingsFromConfig($index);
         if (!isset($config['index.number_of_replicas'])) {
-            throw new IndexManagerException("No number_of_replicas config setting available");
+            throw new IndexManagerException('No number_of_replicas config setting available');
         }
         return $this->setNumberOfReplicas($index, $config['index.number_of_replicas']);
     }
@@ -854,7 +856,7 @@ class IndexManager
      * factory, to get the right Mapping for the version
      * @return \Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Mapping
      */
-    protected function getMapping() : \Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Mapping
+    protected function getMapping(): \Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Mapping
     {
         $esVersion = $this->getServerVersion();
         // check elastic version to get the right version
@@ -873,11 +875,11 @@ class IndexManager
 
     /**
      * get the version of elastic server
-     * @param bool $forceRefresh    flag to get from server directly
+     * @param bool $forceRefresh flag to get from server directly
      * @return string
      * @throws \Exception
      */
-    protected function getServerVersion(bool $forceRefresh = false) : string
+    protected function getServerVersion(bool $forceRefresh = false): string
     {
         return $this->container->client->getElasticServerVersion($forceRefresh);
     }
@@ -886,7 +888,7 @@ class IndexManager
      * get default settings
      * @return array
      */
-    protected function getDefaultSettings() : array
+    protected function getDefaultSettings(): array
     {
         // check elastic version to get the right version
         if (version_compare($this->getServerVersion(), '7.0', '<')) {
@@ -902,7 +904,7 @@ class IndexManager
      * get default mapping
      * @return array
      */
-    protected function getDefaultMapping() : array
+    protected function getDefaultMapping(): array
     {
         // check elastic version to get the right version
         if (version_compare($this->getServerVersion(), '7.0', '<')) {
@@ -916,7 +918,7 @@ class IndexManager
      * check config for 'enable_one_index'
      * @return bool
      */
-    public static function isOneIndexEnabled() : bool
+    public static function isOneIndexEnabled(): bool
     {
         return SugarContainer::getInstance()
             ->get(\SugarConfig::class)
@@ -939,7 +941,7 @@ class IndexManager
                     ->get('full_text_engine.Elastic', []);
                 $client = new ElasticaClient($ftsConfig);
                 $data = $client->request('')->getData();
-                $version = $data['version']['number'] ?? "0";
+                $version = $data['version']['number'] ?? '0';
                 $result = version_compare($version, '6.0', '>=');
             } catch (Exception $e) {
                 $GLOBALS['log']->fatal('exception in getting Elastic version:' . $e->getMessage());

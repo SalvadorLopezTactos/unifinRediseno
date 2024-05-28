@@ -38,7 +38,7 @@ class GraphList extends BaseItem
             return null;
         }
     }
-    
+
     /**
     * Sets the displayName
     * The displayable title of the list.
@@ -52,7 +52,7 @@ class GraphList extends BaseItem
         $this->_propDict["displayName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the list
     * Provides additional details about the list.
@@ -71,7 +71,7 @@ class GraphList extends BaseItem
         }
         return null;
     }
-    
+
     /**
     * Sets the list
     * Provides additional details about the list.
@@ -85,10 +85,9 @@ class GraphList extends BaseItem
         $this->_propDict["list"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the sharepointIds
-    * Returns identifiers useful for SharePoint REST compatibility. Read-only.
     *
     * @return SharepointIds|null The sharepointIds
     */
@@ -104,10 +103,9 @@ class GraphList extends BaseItem
         }
         return null;
     }
-    
+
     /**
     * Sets the sharepointIds
-    * Returns identifiers useful for SharePoint REST compatibility. Read-only.
     *
     * @param SharepointIds $val The sharepointIds
     *
@@ -118,7 +116,7 @@ class GraphList extends BaseItem
         $this->_propDict["sharepointIds"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the system
     * If present, indicates that this is a system-managed list. Read-only.
@@ -137,7 +135,7 @@ class GraphList extends BaseItem
         }
         return null;
     }
-    
+
     /**
     * Sets the system
     * If present, indicates that this is a system-managed list. Read-only.
@@ -151,9 +149,9 @@ class GraphList extends BaseItem
         $this->_propDict["system"] = $val;
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the activities
     * The recent activities that took place within this list.
      *
@@ -167,12 +165,12 @@ class GraphList extends BaseItem
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the activities
     * The recent activities that took place within this list.
     *
-    * @param ItemActivityOLD $val The activities
+    * @param ItemActivityOLD[] $val The activities
     *
     * @return GraphList
     */
@@ -181,11 +179,10 @@ class GraphList extends BaseItem
         $this->_propDict["activities"] = $val;
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the columns
-    * The collection of field definitions for this list.
      *
      * @return array|null The columns
      */
@@ -197,12 +194,11 @@ class GraphList extends BaseItem
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the columns
-    * The collection of field definitions for this list.
     *
-    * @param ColumnDefinition $val The columns
+    * @param ColumnDefinition[] $val The columns
     *
     * @return GraphList
     */
@@ -211,11 +207,10 @@ class GraphList extends BaseItem
         $this->_propDict["columns"] = $val;
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the contentTypes
-    * The collection of content types present in this list.
      *
      * @return array|null The contentTypes
      */
@@ -227,12 +222,11 @@ class GraphList extends BaseItem
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the contentTypes
-    * The collection of content types present in this list.
     *
-    * @param ContentType $val The contentTypes
+    * @param ContentType[] $val The contentTypes
     *
     * @return GraphList
     */
@@ -241,7 +235,7 @@ class GraphList extends BaseItem
         $this->_propDict["contentTypes"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the drive
     * Only present on document libraries. Allows access to the list as a [drive][] resource with [driveItems][driveItem].
@@ -260,7 +254,7 @@ class GraphList extends BaseItem
         }
         return null;
     }
-    
+
     /**
     * Sets the drive
     * Only present on document libraries. Allows access to the list as a [drive][] resource with [driveItems][driveItem].
@@ -274,9 +268,9 @@ class GraphList extends BaseItem
         $this->_propDict["drive"] = $val;
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the items
     * All items contained in the list.
      *
@@ -290,12 +284,12 @@ class GraphList extends BaseItem
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the items
     * All items contained in the list.
     *
-    * @param ListItem $val The items
+    * @param ListItem[] $val The items
     *
     * @return GraphList
     */
@@ -304,9 +298,39 @@ class GraphList extends BaseItem
         $this->_propDict["items"] = $val;
         return $this;
     }
-    
 
-     /** 
+
+     /**
+     * Gets the operations
+    * The collection of long running operations for the list.
+     *
+     * @return array|null The operations
+     */
+    public function getOperations()
+    {
+        if (array_key_exists("operations", $this->_propDict)) {
+           return $this->_propDict["operations"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the operations
+    * The collection of long running operations for the list.
+    *
+    * @param RichLongRunningOperation[] $val The operations
+    *
+    * @return GraphList
+    */
+    public function setOperations($val)
+    {
+        $this->_propDict["operations"] = $val;
+        return $this;
+    }
+
+
+     /**
      * Gets the subscriptions
     * The set of subscriptions on the list.
      *
@@ -320,12 +344,12 @@ class GraphList extends BaseItem
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the subscriptions
     * The set of subscriptions on the list.
     *
-    * @param Subscription $val The subscriptions
+    * @param Subscription[] $val The subscriptions
     *
     * @return GraphList
     */
@@ -334,5 +358,5 @@ class GraphList extends BaseItem
         $this->_propDict["subscriptions"] = $val;
         return $this;
     }
-    
+
 }

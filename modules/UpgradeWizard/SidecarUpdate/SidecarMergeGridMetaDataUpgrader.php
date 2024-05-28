@@ -21,45 +21,45 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
      * sugar7view => [ 'sugar6view1' => ['metadatadefs1', 'view1'], 'sugar6view2' => ['metadatadefs2', 'view2'] ]
      * @var array
      */
-    protected $mergeViews = array(
-        MB_RECORDVIEW => array(
-            'detail' => array('detailviewdefs', MB_DETAILVIEW),
-            'edit' => array('editviewdefs', MB_EDITVIEW),
-        ),
-        MB_PORTALRECORDVIEW => array(
-            'detail' => array('detailviewdefs', MB_DETAILVIEW),
-            'edit' => array('editviewdefs', MB_EDITVIEW),
-        ),
-    );
+    protected $mergeViews = [
+        MB_RECORDVIEW => [
+            'detail' => ['detailviewdefs', MB_DETAILVIEW],
+            'edit' => ['editviewdefs', MB_EDITVIEW],
+        ],
+        MB_PORTALRECORDVIEW => [
+            'detail' => ['detailviewdefs', MB_DETAILVIEW],
+            'edit' => ['editviewdefs', MB_EDITVIEW],
+        ],
+    ];
 
-    protected $mergeViewsSidecar = array(
-        MB_PORTALRECORDVIEW => array(
-            'detail' => array('detail', MB_PORTALDETAILVIEW),
-            'edit' => array('edit', MB_PORTALEDITVIEW),
-        ),
-    );
+    protected $mergeViewsSidecar = [
+        MB_PORTALRECORDVIEW => [
+            'detail' => ['detail', MB_PORTALDETAILVIEW],
+            'edit' => ['edit', MB_PORTALEDITVIEW],
+        ],
+    ];
 
     /**
      * Panels where fields from each view are placed
      * @var array
      */
-    protected $viewPanels = array(
-        MB_RECORDVIEW => array(
+    protected $viewPanels = [
+        MB_RECORDVIEW => [
             MB_DETAILVIEW => 'LBL_RECORD_BODY',
             MB_EDITVIEW => 'LBL_RECORD_SHOWMORE',
-        ),
-        MB_PORTALRECORDVIEW => array(
+        ],
+        MB_PORTALRECORDVIEW => [
             MB_PORTALDETAILVIEW => 'LBL_RECORD_BODY',
             MB_PORTALEDITVIEW => 'LBL_RECORD_BODY',
             MB_DETAILVIEW => 'LBL_RECORD_BODY',
             MB_EDITVIEW => 'LBL_RECORD_BODY',
-        ),
-    );
+        ],
+    ];
 
     /**
      * List of upgraded dir to prevent double upgrades
      */
-    protected static $upgraded = array();
+    protected static $upgraded = [];
 
     /**
      * Fields that need to be removed entirely as they no longer have context in
@@ -67,12 +67,12 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
      *
      * @var array
      */
-    protected $removeFields = array(
+    protected $removeFields = [
         // currency_id is now set with the currency field
         'currency_id' => 1,
         // This is now part of a combination field
         'portal_password1' => 1,
-    );
+    ];
 
     /**
      * Field defs for address type fieldset fields that were previously handled
@@ -80,216 +80,216 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
      *
      * @var array
      */
-    protected $addressFields = array(
-        'shipping_address_street' => array(
+    protected $addressFields = [
+        'shipping_address_street' => [
             'name' => 'shipping_address',
             'type' => 'fieldset',
             'css_class' => 'address',
             'label' => 'LBL_SHIPPING_ADDRESS',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'shipping_address_street',
                     'css_class' => 'address_street',
                     'placeholder' => 'LBL_SHIPPING_ADDRESS_STREET',
-                ),
-                array(
+                ],
+                [
                     'name' => 'shipping_address_city',
                     'css_class' => 'address_city',
                     'placeholder' => 'LBL_SHIPPING_ADDRESS_CITY',
-                ),
-                array(
+                ],
+                [
                     'name' => 'shipping_address_state',
                     'css_class' => 'address_state',
                     'placeholder' => 'LBL_SHIPPING_ADDRESS_STATE',
-                ),
-                array(
+                ],
+                [
                     'name' => 'shipping_address_postalcode',
                     'css_class' => 'address_zip',
                     'placeholder' => 'LBL_SHIPPING_ADDRESS_POSTALCODE',
-                ),
-                array(
+                ],
+                [
                     'name' => 'shipping_address_country',
                     'css_class' => 'address_country',
                     'placeholder' => 'LBL_SHIPPING_ADDRESS_COUNTRY',
-                ),
-                array(
+                ],
+                [
                     'name' => 'copy',
                     'label' => 'NTC_COPY_BILLING_ADDRESS',
                     'type' => 'copy',
-                    'mapping' => array(
+                    'mapping' => [
                         'billing_address_street' => 'shipping_address_street',
                         'billing_address_city' => 'shipping_address_city',
                         'billing_address_state' => 'shipping_address_state',
                         'billing_address_postalcode' => 'shipping_address_postalcode',
                         'billing_address_country' => 'shipping_address_country',
-                    ),
-                ),
-            ),
-        ),
-        'billing_address_street' => array(
+                    ],
+                ],
+            ],
+        ],
+        'billing_address_street' => [
             'name' => 'billing_address',
             'type' => 'fieldset',
             'css_class' => 'address',
             'label' => 'LBL_BILLING_ADDRESS',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'billing_address_street',
                     'css_class' => 'address_street',
                     'placeholder' => 'LBL_BILLING_ADDRESS_STREET',
-                ),
-                array(
+                ],
+                [
                     'name' => 'billing_address_city',
                     'css_class' => 'address_city',
                     'placeholder' => 'LBL_BILLING_ADDRESS_CITY',
-                ),
-                array(
+                ],
+                [
                     'name' => 'billing_address_state',
                     'css_class' => 'address_state',
                     'placeholder' => 'LBL_BILLING_ADDRESS_STATE',
-                ),
-                array(
+                ],
+                [
                     'name' => 'billing_address_postalcode',
                     'css_class' => 'address_zip',
                     'placeholder' => 'LBL_BILLING_ADDRESS_POSTALCODE',
-                ),
-                array(
+                ],
+                [
                     'name' => 'billing_address_country',
                     'css_class' => 'address_country',
                     'placeholder' => 'LBL_BILLING_ADDRESS_COUNTRY',
-                ),
-            ),
-        ),
-        'primary_address_street' => array(
+                ],
+            ],
+        ],
+        'primary_address_street' => [
             'name' => 'primary_address',
             'type' => 'fieldset',
             'css_class' => 'address',
             'label' => 'LBL_PRIMARY_ADDRESS',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'primary_address_street',
                     'css_class' => 'address_street',
                     'placeholder' => 'LBL_PRIMARY_ADDRESS_STREET',
-                ),
-                array(
+                ],
+                [
                     'name' => 'primary_address_city',
                     'css_class' => 'address_city',
                     'placeholder' => 'LBL_PRIMARY_ADDRESS_CITY',
-                ),
-                array(
+                ],
+                [
                     'name' => 'primary_address_state',
                     'css_class' => 'address_state',
                     'placeholder' => 'LBL_PRIMARY_ADDRESS_STATE',
-                ),
-                array(
+                ],
+                [
                     'name' => 'primary_address_postalcode',
                     'css_class' => 'address_zip',
                     'placeholder' => 'LBL_PRIMARY_ADDRESS_POSTALCODE',
-                ),
-                array(
+                ],
+                [
                     'name' => 'primary_address_country',
                     'css_class' => 'address_country',
                     'placeholder' => 'LBL_PRIMARY_ADDRESS_COUNTRY',
-                ),
-            ),
-        ),
-        'alt_address_street' => array(
+                ],
+            ],
+        ],
+        'alt_address_street' => [
             'name' => 'alt_address',
             'type' => 'fieldset',
             'css_class' => 'address',
             'label' => 'LBL_ALT_ADDRESS',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'alt_address_street',
                     'css_class' => 'address_street',
                     'placeholder' => 'LBL_ALT_ADDRESS_STREET',
-                ),
-                array(
+                ],
+                [
                     'name' => 'alt_address_city',
                     'css_class' => 'address_city',
                     'placeholder' => 'LBL_ALT_ADDRESS_CITY',
-                ),
-                array(
+                ],
+                [
                     'name' => 'alt_address_state',
                     'css_class' => 'address_state',
                     'placeholder' => 'LBL_ALT_ADDRESS_STATE',
-                ),
-                array(
+                ],
+                [
                     'name' => 'alt_address_postalcode',
                     'css_class' => 'address_zip',
                     'placeholder' => 'LBL_ALT_ADDRESS_POSTALCODE',
-                ),
-                array(
+                ],
+                [
                     'name' => 'alt_address_country',
                     'css_class' => 'address_country',
                     'placeholder' => 'LBL_ALT_ADDRESS_COUNTRY',
-                ),
-                array(
+                ],
+                [
                     'name' => 'copy',
                     'label' => 'NTC_COPY_PRIMARY_ADDRESS',
                     'type' => 'copy',
-                    'mapping' => array(
+                    'mapping' => [
                         'primary_address_street' => 'alt_address_street',
                         'primary_address_city' => 'alt_address_city',
                         'primary_address_state' => 'alt_address_state',
                         'primary_address_postalcode' => 'alt_address_postalcode',
                         'primary_address_country' => 'alt_address_country',
-                    ),
-                ),
-            ),
-        ),
-    );
+                    ],
+                ],
+            ],
+        ],
+    ];
 
     /**
      * Settings for fields we know how to handle
      */
-    protected $knownFields = array(
-        "date_entered" => array(
+    protected $knownFields = [
+        "date_entered" => [
             'name' => 'date_entered_by',
             'readonly' => true,
             'type' => 'fieldset',
             'label' => 'LBL_DATE_ENTERED',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'date_entered',
-                ),
-                array(
+                ],
+                [
                     'type' => 'label',
                     'default_value' => 'LBL_BY',
-                ),
-                array(
+                ],
+                [
                     'name' => 'created_by_name',
-                ),
-            ),
-        ),
-        "date_modified" => array(
+                ],
+            ],
+        ],
+        "date_modified" => [
             'name' => 'date_modified_by',
             'readonly' => true,
             'type' => 'fieldset',
             'label' => 'LBL_DATE_MODIFIED',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'date_modified',
-                ),
-                array(
+                ],
+                [
                     'type' => 'label',
                     'default_value' => 'LBL_BY',
-                ),
-                array(
+                ],
+                [
                     'name' => 'modified_by_name',
-                ),
-            ),
-        ),
-    );
+                ],
+            ],
+        ],
+    ];
 
     /**
      * List of acceptable templateMeta properties for new metadata
      *
      * @var array
      */
-    protected $templateMetaProps = array(
+    protected $templateMetaProps = [
         'useTabs' => 1,
         'maxColumns' => 1,
-    );
+    ];
 
     /**
      * List of invalid label regular expressions. Needed for cases in which some
@@ -298,23 +298,23 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
      *
      * @var array
      */
-    protected $invalidLabelRegex = array(
+    protected $invalidLabelRegex = [
         // Products module, because they liked Smarty code as labels. WUT?
         '/\{\$MOD.(.*)|strip_semicolon/',
-    );
+    ];
 
     protected function getOriginalFile($filepath)
     {
         $files = explode("/", $filepath);
         // drop prefixes like custom/
-        while(!empty($files) && $files[0] != 'modules') {
+        while (!empty($files) && $files[0] != 'modules') {
             array_shift($files);
         }
-        if(empty($files)) {
+        if (empty($files)) {
             return $filepath;
         }
 
-        if($this->client == 'portal' && !$this->sidecar) {
+        if ($this->client == 'portal' && !$this->sidecar) {
             // old portal view paths originate from porta/ and will look like
             // portal/modules/MODULE/metadata/detailviewdefs.php
             array_unshift($files, 'portal');
@@ -328,7 +328,7 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
      */
     protected function getDir()
     {
-        if($this->sidecar) {
+        if ($this->sidecar) {
             // For sidecar it's path/views/edit/edit.php
             return dirname(dirname($this->fullpath));
         } else {
@@ -344,7 +344,7 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
     public function upgradeCheck()
     {
         $dirname = $this->getDir();
-        if(!empty(self::$upgraded[$this->viewtype][$dirname])) {
+        if (!empty(self::$upgraded[$this->viewtype][$dirname])) {
             // we already did this path for this viewtype
             $this->logUpgradeStatus("Already upgraded $dirname {$this->viewtype}");
             return false;
@@ -360,7 +360,7 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
     public function setLegacyViewdefs()
     {
         $views = $this->sidecar ? $this->mergeViewsSidecar : $this->mergeViews;
-        if(empty($views[$this->viewtype])) {
+        if (empty($views[$this->viewtype])) {
             $this->logUpgradeStatus("Did not find merge views for {$this->viewtype}");
             return;
         }
@@ -369,7 +369,7 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
 
         $foundCustom = false;
         // Load all views for this combined view
-        foreach($views[$this->viewtype] as $view => $data) {
+        foreach ($views[$this->viewtype] as $view => $data) {
             list($file, $lViewtype) = $data;
 
             if ($this->sidecar) {
@@ -378,7 +378,7 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
                 $customFilePath = "$dirname/$file.php";
             }
 
-            // If this is a history file, add the timestamp back since we need 
+            // If this is a history file, add the timestamp back since we need
             // that. This should only come into play on history upgrades
             if ($this->timestamp) {
                 $customFilePath .= '_' . $this->timestamp;
@@ -388,7 +388,7 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
             $origExists = file_exists($originalFilePath);
             $custExists = file_exists($customFilePath);
             // try without custom/, as this is a merge
-            if(!$origExists && !$custExists) {
+            if (!$origExists && !$custExists) {
                 $this->logUpgradeStatus("Could not find $originalFilePath or $customFilePath for $lViewtype");
                 continue;
             }
@@ -398,22 +398,22 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
             } else {
                 $this->originalLegacyViewdefs[$lViewtype] = $this->loadLayout($view, $originalFilePath, $lViewtype);
             }
-            if($custExists) {
+            if ($custExists) {
                 $foundCustom = true;
                 $this->legacyViewdefs[$lViewtype] = $this->loadLayout($view, $customFilePath, $lViewtype);
             } else {
                 $this->legacyViewdefs[$lViewtype] = $this->originalLegacyViewdefs[$lViewtype];
             }
-
         }
         // If we didn't find any custom files - we don't need to do anything
-        if(!$foundCustom) {
-            $this->legacyViewdefs = array();
+        if (!$foundCustom) {
+            $this->legacyViewdefs = [];
             $this->logUpgradeStatus("Did not find customizations for {$this->viewtype}");
         }
     }
 
-    protected function loadLayout($view, $filepath, $lViewtype){
+    protected function loadLayout($view, $filepath, $lViewtype)
+    {
         $this->logUpgradeStatus("Loading $filepath for $lViewtype");
         include $filepath;
         // There is an odd case where custom modules are pathed without the
@@ -426,29 +426,28 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
             $module = $this->module;
         }
 
-
-        $ret = array();
+        $ret = [];
 
         $var = $this->variableMap[$this->client][$view];
         if (isset($$var)) {
             $defs = $$var;
-            if($this->sidecar) {
-                if(!empty($defs[$module][$this->client]['view'][$view])) {
+            if ($this->sidecar) {
+                if (!empty($defs[$module][$this->client]['view'][$view])) {
                     $ret = $defs[$module][$this->client]['view'][$view];
                 }
             } else {
-                if (isset($this->vardefIndexes[$this->client.$view])) {
-                    $index = $this->vardefIndexes[$this->client.$view];
+                if (isset($this->vardefIndexes[$this->client . $view])) {
+                    $index = $this->vardefIndexes[$this->client . $view];
                     // This is a rarity, but it does happen in the wild... if the
                     // known module name is the key of the defs use it, otherwise
                     // get the key from the defs and use that
                     reset($defs);
                     $key = isset($defs[$module]) ? $module : key($defs);
                     $ret = empty($index) ? $defs[$key] : $defs[$key][$index];
-                    if($this->client == 'portal' && !empty($ret['data'])) {
+                    if ($this->client == 'portal' && !empty($ret['data'])) {
                         // Portal views are in 'data', not 'panels'
                         // Because it'd be boring if all data formats were the same, right?
-                        $ret['panels'] = array($ret['data']);
+                        $ret['panels'] = [$ret['data']];
                     }
                 }
             }
@@ -463,7 +462,7 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
      */
     public function handleSave()
     {
-        if(empty($this->sidecarViewdefs)) {
+        if (empty($this->sidecarViewdefs)) {
             // if we didn't create any new defs, nothing to save
             return true;
         }
@@ -480,7 +479,7 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
      */
     protected function convertFieldData($fieldname, $data)
     {
-        if(!empty($this->knownFields[$fieldname])) {
+        if (!empty($this->knownFields[$fieldname])) {
             return $this->knownFields[$fieldname];
         } elseif (isset($data['type']) && $data['type'] == 'address' && isset($data['displayParams']['key'])) {
             // If this is an address combo handle it
@@ -490,7 +489,7 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
             }
         }
 
-        $newdata = array('name' => $fieldname);
+        $newdata = ['name' => $fieldname];
         if (is_array($data)) {
             if (!empty($data['readonly']) || !empty($data['readOnly'])) {
                 $newdata['readonly'] = true;
@@ -525,7 +524,7 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
     protected function loadDefaultMetadata()
     {
         $defaultDefs = parent::loadDefaultMetadata();
-        if(!empty($defaultDefs) && !empty($this->base_defsfile) && !empty($this->defsfile)) {
+        if (!empty($defaultDefs) && !empty($this->base_defsfile) && !empty($this->defsfile)) {
             // If we loaded template one, copy it to base file so we could load the parser
             // We only do this if the module is deployed though
             if ((file_exists($this->base_defsfile) || !file_exists($this->defsfile)) && $this->deployed) {
@@ -534,13 +533,12 @@ class SidecarMergeGridMetaDataUpgrader extends SidecarGridMetaDataUpgrader
                 $client = $this->client == 'wireless' ? 'mobile' : $this->client;
                 $viewname = pathinfo($this->defsfile, PATHINFO_FILENAME);
                 $export = var_export($defaultDefs, true);
-                $data  = <<<END
+                $data = <<<END
 <?php
 /* Generated by SugarCRM Upgrader */
 \$viewdefs['{$this->getNormalizedModuleName()}']['{$client}']['view']['{$viewname}'] = {$export};
 END;
                 sugar_file_put_contents($this->defsfile, $data);
-
             }
         }
         return $defaultDefs;
@@ -561,11 +559,11 @@ END;
 
         // Check bool true instead of truthy since studio would set this to boolean
         $useTabs = isset($this->legacyViewdefs[$view]['templateMeta']['useTabs'])
-                   && $this->legacyViewdefs[$view]['templateMeta']['useTabs'] === true;
+            && $this->legacyViewdefs[$view]['templateMeta']['useTabs'] === true;
 
         // Make sure there are tab defs and they are an array
         $hasDefs = !empty($this->legacyViewdefs[$view]['templateMeta']['tabDefs'])
-                   && is_array($this->legacyViewdefs[$view]['templateMeta']['tabDefs']);
+            && is_array($this->legacyViewdefs[$view]['templateMeta']['tabDefs']);
 
         return $useTabs && $hasDefs;
     }
@@ -575,7 +573,7 @@ END;
      */
     public function convertLegacyViewDefsToSidecar()
     {
-        if(empty($this->legacyViewdefs)) {
+        if (empty($this->legacyViewdefs)) {
             return;
         }
 
@@ -585,20 +583,25 @@ END;
             // This is the marker that decides our fate
             $found = false;
 
-
-            // The undeployed implementation uses history then working, where 
-            // working translates to the base file and history translates to 
-            // working. 
-            $types = array(
+            // The undeployed implementation uses history then working, where
+            // working translates to the base file and history translates to
+            // working.
+            $types = [
                 MB_HISTORYMETADATALOCATION,
                 MB_WORKINGMETADATALOCATION,
-            );
+            ];
 
             // Check each type for file existence. This is done similarly to the
-            // implementation, without the overhead of constructing that object 
+            // implementation, without the overhead of constructing that object
             // or the parser just yet.
             foreach ($types as $type) {
-                $file = MetaDataFiles::getUndeployedFileName($this->viewtype, $this->module, $this->package, $type, $this->client);
+                $file = MetaDataFiles::getUndeployedFileName(
+                    $this->viewtype,
+                    $this->module,
+                    $this->package,
+                    $type,
+                    $this->client
+                );
                 if (file_exists($file)) {
                     $found = true;
                     break;
@@ -616,7 +619,7 @@ END;
         $this->logUpgradeStatus('Converting ' . $this->client . ' ' . $this->viewtype . ' view defs for ' . $this->module);
 
         // Holds merged defs and final defs
-        $newdefs = $tempdefs = $finaldefs = array();
+        $newdefs = $tempdefs = $finaldefs = [];
 
         // This needs to be called before the parser is instantiated to prevent
         // custom metadata from being created from basic module template
@@ -625,14 +628,14 @@ END;
         // Get the parser now that default metadata has been fetched
         $parser = ParserFactory::getParser($this->viewtype, $this->module, $this->package, null, $this->client);
 
-        // Get the fields that are on the default defs panels since we may need 
+        // Get the fields that are on the default defs panels since we may need
         // those as well
         $defaultDefsFields = $parser->getFieldsFromPanels($defaultDefs['panels']);
 
         // Go through merge views, add fields added to detail view to base panel
         // and fields added to edit view not in detail view or hidden panel
-        $customFields = array();
-        foreach($this->legacyViewdefs as $lViewtype => $data) {
+        $customFields = [];
+        foreach ($this->legacyViewdefs as $lViewtype => $data) {
             // We will need a parser no matter what
             $legacyParser = $this->getLegacyParser($lViewtype);
             // Step 1, handle tabDef changes
@@ -641,23 +644,23 @@ END;
             // Tabdefs holds tab def customizations. If there are tab customizations
             // then the defaultDefs need to be derived from the customize layout
             // instead of the default viewdef
-            $tabdefs = array();
+            $tabdefs = [];
             if ($hasTabDefCustomizations) {
                 // Used for converting tab names. Tabs and panels need to match
                 // and that matching gets handled here and in handleConversion
                 $c = 0;
 
                 // pull out the tab definitions from the originals, put them into the Canonical Form
-                foreach($data['templateMeta']['tabDefs'] as $tabName => $tabContent) {
+                foreach ($data['templateMeta']['tabDefs'] as $tabName => $tabContent) {
                     // Handle panel labels for matching later
                     $panelNames = $this->getConvertedPanelName($tabName, $c);
                     $tabName = $panelNames['label'];
 
                     // Save these for later to prevent conflict with new panels later
-                    $tabdefs[$tabName] = array(
+                    $tabdefs[$tabName] = [
                         'newTab' => $tabContent['newTab'],
-                        'panelDefault' => $tabContent['panelDefault']
-                    );
+                        'panelDefault' => $tabContent['panelDefault'],
+                    ];
 
                     // Increment the counter
                     $c++;
@@ -684,13 +687,16 @@ END;
                 if (!isset($parser->_viewdefs['templateMeta'])) {
                     $parser->_viewdefs['templateMeta'] = $defaultDefs['templateMeta'];
                 } else {
-                    $parser->_viewdefs['templateMeta'] = array_merge($parser->_viewdefs['templateMeta'], $defaultDefs['templateMeta']);
+                    $parser->_viewdefs['templateMeta'] = array_merge(
+                        $parser->_viewdefs['templateMeta'],
+                        $defaultDefs['templateMeta']
+                    );
                 }
             }
 
             // Make a header fields array so that fields that may be in legacy
             // defs can be plucked out
-            $headerFields = array();
+            $headerFields = [];
             foreach ($defaultDefs['panels'][0]['fields'] as $hField) {
                 // Handle array type fields first
                 if (is_array($hField)) {
@@ -718,13 +724,13 @@ END;
             }
 
             // Step 2, convert panels if there are any to handle
-            if(!empty($data['panels'])) {
+            if (!empty($data['panels'])) {
                 // Add spans fields as needed
                 $maxSpan = $parser->getMaxSpan();
                 // Need to send the entire data array as we need templateData.maxColumns
                 $data = $this->addSpansToFields($data, $maxSpan);
                 $legacyPanelFields = $legacyParser->getFieldsFromPanels($data['panels']);
-                foreach($legacyPanelFields as $fieldname => $fielddef) {
+                foreach ($legacyPanelFields as $fieldname => $fielddef) {
                     // Handle removal of fields from customFields (legacy defs) as needed
                     $skip = false;
                     if (empty($fieldname) || !$this->isValidField($fieldname)) {
@@ -749,7 +755,7 @@ END;
                     if ($skip) {
                         continue;
                     }
-                    $customFields[$fieldname] = array('data' => $fielddef, 'source' => $lViewtype);
+                    $customFields[$fieldname] = ['data' => $fielddef, 'source' => $lViewtype];
                 }
             }
 
@@ -764,7 +770,6 @@ END;
             // email1 <=> email conversion
             foreach ($defaultDefs['panels'] as $panelIndex => $panel) {
                 foreach ($panel['fields'] as $fieldIndex => $fieldName) {
-
                     // Turn a field name into a string for searching convenience
                     if (is_array($fieldName)) {
                         $lookupFieldName = (isset($fieldName['name'])) ? $fieldName['name'] : null;
@@ -823,47 +828,51 @@ END;
             // header panel
             reset($defaultDefs['panels']);
 
-            $origFields = array();
+            $origFields = [];
             // replace viewdefs with defaults, since parser's viewdefs can be already customized by other parts
             // of the upgrade
             $parser->_viewdefs['panels'] = $parser->convertFromCanonicalForm($defaultDefs['panels']);
             // get field list
             $origData = $parser->getFieldsFromPanels($defaultDefs['panels']);
             // Go through existing fields and remove those not in the new data
-            foreach($origData as $fname => $fielddef) {
+            foreach ($origData as $fname => $fielddef) {
                 if (!$this->isValidField($fname)) {
                     continue;
                 }
-                if(is_array($fielddef) && !empty($fielddef['fields'])) {
+                if (is_array($fielddef) && !empty($fielddef['fields'])) {
                     // fieldsets - iterate over each field
                     $setExists = false;
-                    if(!empty($customFields[$fielddef['name']])) {
+                    if (!empty($customFields[$fielddef['name']])) {
                         $setExists = true;
                     } else {
-                        foreach($fielddef['fields'] as $setfielddef) {
-                            if(!is_array($setfielddef)) {
+                        foreach ($fielddef['fields'] as $setfielddef) {
+                            if (!is_array($setfielddef)) {
                                 $setfname = $setfielddef;
                             } else {
                                 // skip weird nameless ones
-                                if(empty($setfielddef['name'])) continue;
+                                if (empty($setfielddef['name'])) {
+                                    continue;
+                                }
                                 $setfname = $setfielddef['name'];
                             }
                             // if we have one field - we take all set
-                            if(isset($customFields[$setfname])) {
+                            if (isset($customFields[$setfname])) {
                                 $setExists = true;
                                 break;
                             }
                         }
                     }
-                    if($setExists) {
+                    if ($setExists) {
                         $origFields[$fielddef['name']] = $fielddef;
                         // if fields exist, we take all the set as existing fields
-                        foreach($fielddef['fields'] as $setfielddef) {
-                            if(!is_array($setfielddef)) {
+                        foreach ($fielddef['fields'] as $setfielddef) {
+                            if (!is_array($setfielddef)) {
                                 $setfname = $setfielddef;
                             } else {
                                 // skip werid nameless ones
-                                if(empty($setfielddef['name'])) continue;
+                                if (empty($setfielddef['name'])) {
+                                    continue;
+                                }
                                 $setfname = $setfielddef['name'];
                             }
                             $origFields[$setfname] = $fielddef;
@@ -876,7 +885,7 @@ END;
                     }
                 } else {
                     // if it's a regular field, check against existing field in new data
-                    if(!isset($customFields[$fname]) && !isset($headerFields[$fname])) {
+                    if (!isset($customFields[$fname]) && !isset($headerFields[$fname])) {
                         // not there - remove it
                         $parser->removeField($fname);
                     } else {
@@ -888,8 +897,8 @@ END;
 
             // now go through new fields and add those not in original data
             // $customFields is legacy defs, $origFields are Sugar7 OOTB defs
-            foreach($customFields as $fieldname => $data) {
-                if(isset($origFields[$fieldname])) {
+            foreach ($customFields as $fieldname => $data) {
+                if (isset($origFields[$fieldname])) {
                     // If the field is special, massage it into latest format being
                     // sure to maintain its current position in the layout
                     if ($this->isSpecialField($fieldname)) {
@@ -899,7 +908,7 @@ END;
                 } else {
                     $fielddata = $this->convertFieldData($fieldname, $data['data']);
                     // FIXME: hack since addField cuts field defs
-                    if($this->isSpecialField($fieldname) && empty($parser->_originalViewDef[$fielddata['name']])) {
+                    if ($this->isSpecialField($fieldname) && empty($parser->_originalViewDef[$fielddata['name']])) {
                         $parser->_originalViewDef[$fielddata['name']] = $fielddata;
                     }
                     $parser->addField($fielddata, $this->getPanelName($parser->_viewdefs['panels'], $data['source']));
@@ -907,11 +916,11 @@ END;
             }
 
             // Convert the panels array to something useful
-            $panels = $parser->convertToCanonicalForm($parser->_viewdefs['panels'] ,$parser->_fielddefs);
+            $panels = $parser->convertToCanonicalForm($parser->_viewdefs['panels'], $parser->_fielddefs);
 
             // Add back in tabDefs on the panels if there are any
             if (!empty($tabdefs)) {
-                foreach($panels as $key => $panel) {
+                foreach ($panels as $key => $panel) {
                     if (!empty($panel['label']) && isset($tabdefs[$panel['label']])) {
                         $panels[$key]['newTab'] = $tabdefs[$panel['label']]['newTab'];
                         $panels[$key]['panelDefault'] = $tabdefs[$panel['label']]['panelDefault'];
@@ -941,24 +950,24 @@ END;
         $this->sidecarViewdefs[$this->getNormalizedModuleName()][$this->client]['view'][MetaDataFiles::getName($this->viewtype)] = $finaldefs;
     }
 
-   /**
-    * Get panel name where new field should be placed
-    * @param array $panels Panel data for viewdef
-    * @param string $source Source view for field
-    * @return string|null
-    */
-   protected function getPanelName($panels, $source)
-   {
-       if(isset($this->viewPanels[$this->viewtype][$source])) {
-           $panelName = $this->viewPanels[$this->viewtype][$source];
-       }
-       if(empty($panelName) || !isset($panels[$panelName])) {
-           // will use last available panel
-           $panelNames = array_keys($panels);
-           $panelName = array_pop($panelNames);
-       }
-       return $panelName;
-   }
+    /**
+     * Get panel name where new field should be placed
+     * @param array $panels Panel data for viewdef
+     * @param string $source Source view for field
+     * @return string|null
+     */
+    protected function getPanelName($panels, $source)
+    {
+        if (isset($this->viewPanels[$this->viewtype][$source])) {
+            $panelName = $this->viewPanels[$this->viewtype][$source];
+        }
+        if (empty($panelName) || !isset($panels[$panelName])) {
+            // will use last available panel
+            $panelNames = array_keys($panels);
+            $panelName = array_pop($panelNames);
+        }
+        return $panelName;
+    }
 
     /**
      * Gets address field recordview defs to replace previous address fields from
@@ -973,7 +982,7 @@ END;
             return $this->addressFields[$name];
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -993,7 +1002,7 @@ END;
         // need to make sure that this field is not one of those special fields
         // we know about. This loops over those special fields before delegating
         // to the bean.
-        $props = array('addressFields', 'knownFields');
+        $props = ['addressFields', 'knownFields'];
 
         foreach ($props as $prop) {
             $array = $this->$prop;
@@ -1124,13 +1133,14 @@ END;
      * @param array $newDefs
      * @param array $defaultDefs
      */
-    protected function addNewFieldsToLayout(array $newDefs) {
+    protected function addNewFieldsToLayout(array $newDefs)
+    {
         $defaultDefs = $this->loadDefaultMetadata();
         $parser = ParserFactory::getParser($this->viewtype, $this->module, $this->package, null, $this->client);
         $defaultFields = $parser->getFieldsFromPanels($defaultDefs['panels']);
         $currentFields = $parser->getFieldsFromPanels($newDefs['panels']);
-        $origFields = array();
-        foreach($this->originalLegacyViewdefs as $lViewtype => $data) {
+        $origFields = [];
+        foreach ($this->originalLegacyViewdefs as $lViewtype => $data) {
             // We will need a parser no matter what
             $legacyParser = $this->getLegacyParser($lViewtype);
             // replace viewdefs with defaults, since parser's viewdefs can be already customized by other parts
@@ -1146,7 +1156,7 @@ END;
             $this->logUpgradeStatus("Unable to find panels to add to");
         }
 
-        foreach($defaultFields as $field => $def) {
+        foreach ($defaultFields as $field => $def) {
             // If the special field was not present on legacy layout we shouldn't add it.
             if ($this->isSpecialFieldBySidecarName($field) && empty($currentFields[$field])) {
                 continue;
@@ -1163,26 +1173,26 @@ END;
     /**
      * Applies hacks and patches to fielddefs that have changes since the previous
      * version
-     * 
+     *
      * @param array $data The current custom defs to check
      * @return array The hacked together defs
      */
     public function applyFieldConversionPatches($data)
     {
         // We need to keep the order of fields in tact when changing field names.
-        // The basics are, when changing a field name like email1 to email, 
+        // The basics are, when changing a field name like email1 to email,
         // "renaming" it basically removed it from the current array and added a
         // new field to the end of the array:
         // $data = array('a' => '', 'b1' => '', 'c' => '') gets turned into
         // $data = array('a' => '', 'c' => '', 'b' => '')
         // Keeping order fixes that issue
-        $order = array();
+        $order = [];
         foreach ($data as $key => $val) {
             $order[$key] = $key;
         }
 
         // Hack: we've moved email1 to email
-        if(isset($data['email1'])) {
+        if (isset($data['email1'])) {
             // Get the defs for the email1 field into the email field
             $data['email'] = $data['email1'];
 
@@ -1208,7 +1218,7 @@ END;
         }
 
         // Reset the return data to use the proper order
-        $return = array();
+        $return = [];
         foreach ($order as $new) {
             $return[$new] = $data[$new];
         }
@@ -1219,7 +1229,7 @@ END;
     /**
      * Checks a bean to see if the module needs to have the twitter_id field
      * converted
-     * 
+     *
      * @return boolean
      */
     public function needsTwitterConversion()
@@ -1229,7 +1239,7 @@ END;
 
         if (!empty($bean)) {
             // Check our type
-            $checkType  = $bean instanceof Company || $bean instanceof Person;
+            $checkType = $bean instanceof Company || $bean instanceof Person;
 
             // Check the tables... there are exceptions, eg, Employees, Styleguide
             $checkTable = !empty($bean->table_name) && $bean->table_name != 'users' && $bean->table_name != 'styleguide';
@@ -1242,9 +1252,9 @@ END;
     }
 
     /**
-     * Modifies the panels originally picked up in the scraping of layouts for 
+     * Modifies the panels originally picked up in the scraping of layouts for
      * upgrading. This will add necessary spans to defs if they aren't there yet.
-     * 
+     *
      * @param array $panels The metadata array
      * @param int $maxSpan The span size to cover for a cell across a row
      * @return array
@@ -1273,11 +1283,11 @@ END;
                         // Index for the last cell in the row
                         $i = $count - 1;
 
-                        // This is the total span for the last row, including the 
+                        // This is the total span for the last row, including the
                         // last cell in the row
                         $totalSpan = $span * ($maxCols - $i);
                         if (!is_array($row[$i])) {
-                            $newRow = array('name' => $row[$i]);
+                            $newRow = ['name' => $row[$i]];
                         } else {
                             $newRow = $row[$i];
                         }
@@ -1290,10 +1300,10 @@ END;
                     $count = count($panel);
                     if ($count < $maxCols) {
                         $totalSpan = $span * ($maxCols - ($count - 1));
-                        $newRow = array(
+                        $newRow = [
                             'name' => $row,
                             'span' => $totalSpan,
-                        );
+                        ];
 
                         $row = $newRow;
                     }

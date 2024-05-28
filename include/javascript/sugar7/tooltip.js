@@ -48,7 +48,7 @@
          * needed.
          */
         _onShow: function(event) {
-            if (event.namespace !== 'bs.tooltip') {
+            if (event && event.namespace !== 'bs.tooltip') {
                 return;
             }
             var target = event.target;
@@ -90,7 +90,7 @@
                 return;
             }
             var $target = $(event.target);
-            this._$currentTip = $target.data('bs.tooltip').tip();
+            this._$currentTip = $.fn.tooltip.Constructor.getInstance($target);
             $target.on('remove', this.clear);
         },
 
@@ -103,10 +103,12 @@
          * @private
          */
         _disable: function() {
-
             var $html = $('html');
-            $html.tooltip('destroy');
+            if (typeof $html.tooltip !== 'function') {
+                return;
+            }
 
+            $html.tooltip('dispose');
             $html.off('.tooltip');
 
             /**
@@ -133,10 +135,18 @@
             $.fn.tooltip = this._tooltip || $.fn.tooltip;
 
             var $html = $('html');
+            if (typeof $html.tooltip !== 'function') {
+                return;
+            }
+
             $html.tooltip({
                 selector: '.ellipsis_inline, [rel=tooltip]',
                 container: 'body',
-                trigger: 'hover'
+                trigger: 'hover',
+                title: (el) => {
+                    return $(el).attr('data-original-title');
+                },
+                html: true,
             });
 
             _.bindAll(this, '_saveTip', 'clear');
@@ -160,10 +170,12 @@
          *     this.on('render', app.tooltip.clear);
          */
         clear: function() {
-            if (this._$currentTip) {
-                this._$currentTip.detach();
+            if (this._$currentTip && this._$currentTip._element) {
+                this._$currentTip.dispose();
             }
-            $('body > .tooltip').tooltip('hide');
+            const tooltipEl = $('body > .tooltip');
+            tooltipEl.tooltip('hide');
+            tooltipEl.remove();
         }
     });
 

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_LOCKED_FIELDS_LINK' => 'Pole je uzamčeno pro úpravy',
     'LBL_LOCKED_FIELDS' => 'Pole je uzamčeno pro úpravy',
-);
+];

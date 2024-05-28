@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => 'Rastet',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Mundësitë',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Kuotat',
-    'LBL_NOTES'=>'Shënimet',
+    'LBL_NOTES' => 'Shënimet',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => 'Paneli i regjistrit të përdoruesve të jashtëm',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e përdoruesit të jashtëm',
 ];

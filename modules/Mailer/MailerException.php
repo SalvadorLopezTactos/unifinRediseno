@@ -12,38 +12,43 @@
 
 class MailerException extends Exception
 {
-    public const ResourceNotFound              = 1;
-    public const InvalidConfiguration          = 2;
-    public const InvalidHeader                 = 3;
-    public const InvalidEmailAddress           = 4;
-    public const FailedToSend                  = 5;
+    public const ResourceNotFound = 1;
+    public const InvalidConfiguration = 2;
+    public const InvalidHeader = 3;
+    public const InvalidEmailAddress = 4;
+    public const FailedToSend = 5;
     public const FailedToConnectToRemoteServer = 6;
-    public const FailedToTransferHeaders       = 7;
-    public const InvalidMessageBody            = 8;
-    public const InvalidAttachment             = 9;
-    public const InvalidMailer                 = 10;
-    public const ExecutableAttachment          = 11;
+    public const FailedToTransferHeaders = 7;
+    public const InvalidMessageBody = 8;
+    public const InvalidAttachment = 9;
+    public const InvalidMailer = 10;
+    public const ExecutableAttachment = 11;
 
-    static protected $errorMessageMappings = array(
-        self::ResourceNotFound              => 'LBL_INTERNAL_ERROR',
-        self::InvalidConfiguration          => 'LBL_INVALID_CONFIGURATION',
-        self::InvalidHeader                 => 'LBL_INVALID_HEADER',
-        self::InvalidEmailAddress           => 'LBL_INVALID_EMAIL',
-        self::FailedToSend                  => 'LBL_INTERNAL_ERROR',
+    protected static $errorMessageMappings = [
+        self::ResourceNotFound => 'LBL_INTERNAL_ERROR',
+        self::InvalidConfiguration => 'LBL_INVALID_CONFIGURATION',
+        self::InvalidHeader => 'LBL_INVALID_HEADER',
+        self::InvalidEmailAddress => 'LBL_INVALID_EMAIL',
+        self::FailedToSend => 'LBL_INTERNAL_ERROR',
         self::FailedToConnectToRemoteServer => 'LBL_FAILED_TO_CONNECT',
-        self::FailedToTransferHeaders       => 'LBL_INTERNAL_ERROR',
-        self::InvalidAttachment             => 'LBL_INVALID_ATTACHMENT',
-        self::InvalidMailer                 => 'LBL_INTERNAL_ERROR',
-        self::ExecutableAttachment          => 'LBL_EXECUTABLE_ATTACHMENT',
-    );
+        self::FailedToTransferHeaders => 'LBL_INTERNAL_ERROR',
+        self::InvalidAttachment => 'LBL_INVALID_ATTACHMENT',
+        self::InvalidMailer => 'LBL_INTERNAL_ERROR',
+        self::ExecutableAttachment => 'LBL_EXECUTABLE_ATTACHMENT',
+    ];
 
-    public function getLogMessage() {
-        return "MailerException - @(" . basename($this->getFile()) . ":" .  $this->getLine() . " [" . $this->getCode() . "]" . ") - " . $this->getMessage();
+    public function getLogMessage()
+    {
+        return 'MailerException - @(' . basename($this->getFile()) . ':' . $this->getLine() . ' [' . $this->getCode() . ']' . ') - ' . $this->getMessage();
     }
-    public function getTraceMessage() {
+
+    public function getTraceMessage()
+    {
         return "MailerException: (Trace)\n" . $this->getTraceAsString();
     }
-    public function getUserFriendlyMessage() {
+
+    public function getUserFriendlyMessage()
+    {
         $moduleName = 'Emails';
         if (isset(self::$errorMessageMappings[$this->getCode()])) {
             $exception_code = self::$errorMessageMappings[$this->getCode()];

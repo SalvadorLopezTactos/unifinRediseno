@@ -1,6 +1,9 @@
 <?php
 
-if(!defined('sugarEntry'))define('sugarEntry', true);
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,11 +19,10 @@ use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\SearchEngine\Engine\Elastic;
 
-
 //change directories to where this file is located.
 chdir(__DIR__);
 define('ENTRY_POINT_TYPE', 'api');
-require_once('include/entryPoint.php');
+require_once 'include/entryPoint.php';
 
 $sapi_type = php_sapi_name();
 if (substr($sapi_type, 0, 3) != 'cli') {
@@ -82,9 +84,8 @@ try {
             echo "Please run 'php -f cron.php' to complete indexing the documents.\n";
         }
     }
-
 } catch (Exception $e) {
-    echo "Exception: ".$e->getMessage()."\n";
+    echo 'Exception: ' . $e->getMessage() . "\n";
     exit(1);
 }
 exit(0);

@@ -26,12 +26,12 @@ class SugarUpgradeClearImageCache extends UpgradeScript
 
         $cacheDir = sugar_cached('images/');
         if (!is_dir($cacheDir)) {
-            $this->upgrader->log("Cache directory does not exist, nothing to do");
+            $this->upgrader->log('Cache directory does not exist, nothing to do');
             return;
         }
         $directory = dir($cacheDir);
         while (($entry = $directory->read()) !== false) {
-            if (in_array($entry, [".", "..", "index.html"])) {
+            if (in_array($entry, ['.', '..', 'index.html'])) {
                 continue;
             }
             $this->upgrader->removeDir("$cacheDir/$entry");

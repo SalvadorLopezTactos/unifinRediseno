@@ -103,6 +103,7 @@ class TabMetadata implements ModelInterface, ArrayAccess
         'scale_value' => '?string',
         'selected' => '?string',
         'shared' => '?string',
+        'signature_provider_id' => '?string',
         'stamp_type' => '?string',
         'stamp_type_metadata' => '\DocuSign\eSign\Model\PropertyMetadata',
         'tab_label' => '?string',
@@ -110,6 +111,7 @@ class TabMetadata implements ModelInterface, ArrayAccess
         'underline' => '?string',
         'validation_message' => '?string',
         'validation_pattern' => '?string',
+        'validation_type' => '?string',
         'width' => '?string'
     ];
 
@@ -163,6 +165,7 @@ class TabMetadata implements ModelInterface, ArrayAccess
         'scale_value' => null,
         'selected' => null,
         'shared' => null,
+        'signature_provider_id' => null,
         'stamp_type' => null,
         'stamp_type_metadata' => null,
         'tab_label' => null,
@@ -170,6 +173,7 @@ class TabMetadata implements ModelInterface, ArrayAccess
         'underline' => null,
         'validation_message' => null,
         'validation_pattern' => null,
+        'validation_type' => null,
         'width' => null
     ];
 
@@ -244,6 +248,7 @@ class TabMetadata implements ModelInterface, ArrayAccess
         'scale_value' => 'scaleValue',
         'selected' => 'selected',
         'shared' => 'shared',
+        'signature_provider_id' => 'signatureProviderId',
         'stamp_type' => 'stampType',
         'stamp_type_metadata' => 'stampTypeMetadata',
         'tab_label' => 'tabLabel',
@@ -251,6 +256,7 @@ class TabMetadata implements ModelInterface, ArrayAccess
         'underline' => 'underline',
         'validation_message' => 'validationMessage',
         'validation_pattern' => 'validationPattern',
+        'validation_type' => 'validationType',
         'width' => 'width'
     ];
 
@@ -304,6 +310,7 @@ class TabMetadata implements ModelInterface, ArrayAccess
         'scale_value' => 'setScaleValue',
         'selected' => 'setSelected',
         'shared' => 'setShared',
+        'signature_provider_id' => 'setSignatureProviderId',
         'stamp_type' => 'setStampType',
         'stamp_type_metadata' => 'setStampTypeMetadata',
         'tab_label' => 'setTabLabel',
@@ -311,6 +318,7 @@ class TabMetadata implements ModelInterface, ArrayAccess
         'underline' => 'setUnderline',
         'validation_message' => 'setValidationMessage',
         'validation_pattern' => 'setValidationPattern',
+        'validation_type' => 'setValidationType',
         'width' => 'setWidth'
     ];
 
@@ -364,6 +372,7 @@ class TabMetadata implements ModelInterface, ArrayAccess
         'scale_value' => 'getScaleValue',
         'selected' => 'getSelected',
         'shared' => 'getShared',
+        'signature_provider_id' => 'getSignatureProviderId',
         'stamp_type' => 'getStampType',
         'stamp_type_metadata' => 'getStampTypeMetadata',
         'tab_label' => 'getTabLabel',
@@ -371,6 +380,7 @@ class TabMetadata implements ModelInterface, ArrayAccess
         'underline' => 'getUnderline',
         'validation_message' => 'getValidationMessage',
         'validation_pattern' => 'getValidationPattern',
+        'validation_type' => 'getValidationType',
         'width' => 'getWidth'
     ];
 
@@ -478,6 +488,7 @@ class TabMetadata implements ModelInterface, ArrayAccess
         $this->container['scale_value'] = isset($data['scale_value']) ? $data['scale_value'] : null;
         $this->container['selected'] = isset($data['selected']) ? $data['selected'] : null;
         $this->container['shared'] = isset($data['shared']) ? $data['shared'] : null;
+        $this->container['signature_provider_id'] = isset($data['signature_provider_id']) ? $data['signature_provider_id'] : null;
         $this->container['stamp_type'] = isset($data['stamp_type']) ? $data['stamp_type'] : null;
         $this->container['stamp_type_metadata'] = isset($data['stamp_type_metadata']) ? $data['stamp_type_metadata'] : null;
         $this->container['tab_label'] = isset($data['tab_label']) ? $data['tab_label'] : null;
@@ -485,6 +496,7 @@ class TabMetadata implements ModelInterface, ArrayAccess
         $this->container['underline'] = isset($data['underline']) ? $data['underline'] : null;
         $this->container['validation_message'] = isset($data['validation_message']) ? $data['validation_message'] : null;
         $this->container['validation_pattern'] = isset($data['validation_pattern']) ? $data['validation_pattern'] : null;
+        $this->container['validation_type'] = isset($data['validation_type']) ? $data['validation_type'] : null;
         $this->container['width'] = isset($data['width']) ? $data['width'] : null;
     }
 
@@ -1173,7 +1185,7 @@ class TabMetadata implements ModelInterface, ArrayAccess
     /**
      * Sets locale_policy
      *
-     * @param \DocuSign\eSign\Model\LocalePolicyTab $locale_policy locale_policy
+     * @param \DocuSign\eSign\Model\LocalePolicyTab $locale_policy Reserved for DocuSign.
      *
      * @return $this
      */
@@ -1269,7 +1281,7 @@ class TabMetadata implements ModelInterface, ArrayAccess
     /**
      * Sets merge_field
      *
-     * @param \DocuSign\eSign\Model\MergeField $merge_field merge_field
+     * @param \DocuSign\eSign\Model\MergeField $merge_field Contains the information necessary to map the tab to a field in SalesForce.
      *
      * @return $this
      */
@@ -1569,6 +1581,30 @@ class TabMetadata implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets signature_provider_id
+     *
+     * @return ?string
+     */
+    public function getSignatureProviderId()
+    {
+        return $this->container['signature_provider_id'];
+    }
+
+    /**
+     * Sets signature_provider_id
+     *
+     * @param ?string $signature_provider_id 
+     *
+     * @return $this
+     */
+    public function setSignatureProviderId($signature_provider_id)
+    {
+        $this->container['signature_provider_id'] = $signature_provider_id;
+
+        return $this;
+    }
+
+    /**
      * Gets stamp_type
      *
      * @return ?string
@@ -1605,7 +1641,7 @@ class TabMetadata implements ModelInterface, ArrayAccess
     /**
      * Sets stamp_type_metadata
      *
-     * @param \DocuSign\eSign\Model\PropertyMetadata $stamp_type_metadata stamp_type_metadata
+     * @param \DocuSign\eSign\Model\PropertyMetadata $stamp_type_metadata Metadata that indicates whether the `stampType` property is editable.
      *
      * @return $this
      */
@@ -1732,6 +1768,30 @@ class TabMetadata implements ModelInterface, ArrayAccess
     public function setValidationPattern($validation_pattern)
     {
         $this->container['validation_pattern'] = $validation_pattern;
+
+        return $this;
+    }
+
+    /**
+     * Gets validation_type
+     *
+     * @return ?string
+     */
+    public function getValidationType()
+    {
+        return $this->container['validation_type'];
+    }
+
+    /**
+     * Sets validation_type
+     *
+     * @param ?string $validation_type 
+     *
+     * @return $this
+     */
+    public function setValidationType($validation_type)
+    {
+        $this->container['validation_type'] = $validation_type;
 
         return $this;
     }

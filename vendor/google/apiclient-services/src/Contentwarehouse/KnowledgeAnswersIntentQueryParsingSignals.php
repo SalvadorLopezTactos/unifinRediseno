@@ -20,8 +20,20 @@ namespace Google\Service\Contentwarehouse;
 class KnowledgeAnswersIntentQueryParsingSignals extends \Google\Model
 {
   public $calibratedParsingScore;
+  /**
+   * @var float
+   */
+  public $effectiveArgSpanLength;
+  /**
+   * @var float
+   */
+  public $inQueryMaxEffectiveArgSpanLength;
   protected $qrewriteCallPathInfoType = NlpLoggingQRewriteClientCallPathInfo::class;
   protected $qrewriteCallPathInfoDataType = '';
+  /**
+   * @var string
+   */
+  public $qrewriteCallPathInfoFingerprint;
   /**
    * @var string
    */
@@ -36,6 +48,34 @@ class KnowledgeAnswersIntentQueryParsingSignals extends \Google\Model
     return $this->calibratedParsingScore;
   }
   /**
+   * @param float
+   */
+  public function setEffectiveArgSpanLength($effectiveArgSpanLength)
+  {
+    $this->effectiveArgSpanLength = $effectiveArgSpanLength;
+  }
+  /**
+   * @return float
+   */
+  public function getEffectiveArgSpanLength()
+  {
+    return $this->effectiveArgSpanLength;
+  }
+  /**
+   * @param float
+   */
+  public function setInQueryMaxEffectiveArgSpanLength($inQueryMaxEffectiveArgSpanLength)
+  {
+    $this->inQueryMaxEffectiveArgSpanLength = $inQueryMaxEffectiveArgSpanLength;
+  }
+  /**
+   * @return float
+   */
+  public function getInQueryMaxEffectiveArgSpanLength()
+  {
+    return $this->inQueryMaxEffectiveArgSpanLength;
+  }
+  /**
    * @param NlpLoggingQRewriteClientCallPathInfo
    */
   public function setQrewriteCallPathInfo(NlpLoggingQRewriteClientCallPathInfo $qrewriteCallPathInfo)
@@ -48,6 +88,20 @@ class KnowledgeAnswersIntentQueryParsingSignals extends \Google\Model
   public function getQrewriteCallPathInfo()
   {
     return $this->qrewriteCallPathInfo;
+  }
+  /**
+   * @param string
+   */
+  public function setQrewriteCallPathInfoFingerprint($qrewriteCallPathInfoFingerprint)
+  {
+    $this->qrewriteCallPathInfoFingerprint = $qrewriteCallPathInfoFingerprint;
+  }
+  /**
+   * @return string
+   */
+  public function getQrewriteCallPathInfoFingerprint()
+  {
+    return $this->qrewriteCallPathInfoFingerprint;
   }
   /**
    * @param string

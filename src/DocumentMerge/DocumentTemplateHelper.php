@@ -47,6 +47,7 @@ function getTargetModules()
     ];
 
     $allModules = array_diff_key(array_merge($modules, $hiddenModules), array_flip($badModules));
+    array_push($allModules, 'Users');
     $translatedModules = [];
 
     foreach ($allModules as $module) {

@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-    'LBL_SOURCE_ID'   => 'ID-ja e burimit të jashtëm',
+$mod_strings = [
+    'LBL_SOURCE_ID' => 'ID-ja e burimit të jashtëm',
     'LBL_SOURCE_TYPE' => 'Burimi i jashtëm',
     'LBL_SOURCE_META' => 'Meta e burimit të jashtëm',
-);
+];

@@ -21,6 +21,7 @@
      */
     initialize: function(options) {
         this._super('initialize', [options]);
+        this.saveCallback = this.saveCallbackCustom;
         this.listenTo(this.context, 'button:export_button:click', this.exportClicked);
 
         if (!app.user.hasAutomateLicense()) {
@@ -78,5 +79,13 @@
                 this._modelToDelete = false;
             }, this),
         });
+    },
+
+    /**
+    * @inheritdoc
+    */
+    saveCallbackCustom: function() {
+        this._super('saveCallback');
+        this.model.trigger('workflow-template:hide-show:click', null);
     },
 });

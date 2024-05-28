@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'גוף',
     'LBL_BASE_MODULE' => 'מודול מטרה',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'יצירת תבנית מייל תהליך מקובץ נכשלה',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'תבנית דואר אלקטרוני זו נמצאת כעת בשימוש בהגדרת תהליך. האם אתה עדיין רוצה לערוך תבנית דואר אלקטרוני זו?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "אתה לא יכול למחוק תבנית דואר אלקטרוני זו משום שהיא משמשת כעת בהגדרת תהליך.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'אתה לא יכול למחוק תבנית דואר אלקטרוני זו משום שהיא משמשת כעת בהגדרת תהליך.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'בורר שדות',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'בחר',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'סוג ערך שדה',
-);
+];

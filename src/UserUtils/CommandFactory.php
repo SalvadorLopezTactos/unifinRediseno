@@ -39,7 +39,7 @@ class CommandFactory
                 $log->error('UserUtils: ' . $t->getMessage());
             }
         } else {
-            $log->error('UserUtils: command class ' . $commandClass .' doesn\'t exist.');
+            $log->error('UserUtils: command class ' . $commandClass . ' doesn\'t exist.');
         }
 
         return null;

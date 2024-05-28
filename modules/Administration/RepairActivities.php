@@ -9,27 +9,28 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-if(!is_admin($current_user)) sugar_die("Unauthorized access to administration.");
+if (!is_admin($current_user)) {
+    sugar_die('Unauthorized access to administration.');
+}
 
 global $timedate;
 
 $callBean = BeanFactory::newBean('Calls');
 $callQuery = "SELECT * FROM calls where calls.status != 'Held' and calls.deleted=0";
 
-$result = $callBean->db->query($callQuery, true, "");
+$result = $callBean->db->query($callQuery, true, '');
 $row = $callBean->db->fetchByAssoc($result);
 while ($row != null) {
     $dateCalled = $timedate->fromDb($row['date_start']);
-    if (!empty($dateCalled))
-    {
+    if (!empty($dateCalled)) {
         $date_end = $dateCalled->modify("+{$row['duration_hours']} hours {$row['duration_minutes']} mins")->asDb();
         $call = BeanFactory::newBean('Calls');
         $call->db->getConnection()
-        ->update(
-            'calls',
-            ['date_end' => $date_end],
-            ['id' => $row['id']]
-        );
+            ->update(
+                'calls',
+                ['date_end' => $date_end],
+                ['id' => $row['id']]
+            );
         $row = $callBean->db->fetchByAssoc($result);
     }
 }
@@ -37,12 +38,11 @@ while ($row != null) {
 $meetingBean = BeanFactory::newBean('Meetings');
 $meetingQuery = "SELECT * FROM meetings where meetings.status != 'Held' and meetings.deleted=0";
 
-$result = $meetingBean->db->query($meetingQuery, true, "");
+$result = $meetingBean->db->query($meetingQuery, true, '');
 $row = $meetingBean->db->fetchByAssoc($result);
 while ($row != null) {
     $dateCalled = $timedate->fromDb($row['date_start']);
-    if (!empty($dateCalled))
-    {
+    if (!empty($dateCalled)) {
         $date_end = $dateCalled->modify("+{$row['duration_hours']} hours {$row['duration_minutes']} mins")->asDb();
         $call = BeanFactory::newBean('Calls');
         $call->db->getConnection()
@@ -55,4 +55,3 @@ while ($row != null) {
     }
 }
 echo $mod_strings['LBL_DIAGNOSTIC_DONE'];
-

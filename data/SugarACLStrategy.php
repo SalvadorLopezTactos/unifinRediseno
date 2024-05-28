@@ -32,7 +32,7 @@ abstract class SugarACLStrategy
      */
     public function getCurrentUser($context)
     {
-        if(isset($context['user'])) {
+        if (isset($context['user'])) {
             return $context['user'];
         }
         return $GLOBALS['current_user'] ?? null;
@@ -45,13 +45,13 @@ abstract class SugarACLStrategy
      */
     public function getUserID($context)
     {
-        if(isset($context['user'])) {
+        if (isset($context['user'])) {
             return $context['user']->id;
         }
-        if(isset($context['user_id'])) {
+        if (isset($context['user_id'])) {
             return $context['user_id'];
         }
-        if(isset($GLOBALS['current_user'])) {
+        if (isset($GLOBALS['current_user'])) {
             return $GLOBALS['current_user']->id;
         }
         return null;
@@ -67,9 +67,9 @@ abstract class SugarACLStrategy
      */
     public function checkFieldList($module, $field_list, $action, $context)
     {
-        $result = array();
-        foreach($field_list as $key => $field) {
-            $result[$key] = $this->checkAccess($module, "field", $context + array("field" => $field, "action" => $action));
+        $result = [];
+        foreach ($field_list as $key => $field) {
+            $result[$key] = $this->checkAccess($module, 'field', $context + ['field' => $field, 'action' => $action]);
         }
         return $result;
     }
@@ -83,11 +83,11 @@ abstract class SugarACLStrategy
      */
     public function getFieldListAccess($module, $field_list, $context)
     {
-        $result = array();
-        foreach($field_list as $key => $field) {
-            if($this->checkAccess($module, "field", $context + array("field" => $field, "action" => "edit"))) {
+        $result = [];
+        foreach ($field_list as $key => $field) {
+            if ($this->checkAccess($module, 'field', $context + ['field' => $field, 'action' => 'edit'])) {
                 $result[$key] = SugarACL::ACL_READ_WRITE;
-            } else if($this->checkAccess($module, "field", $context + array("field" => $field, "action" => "detail"))) {
+            } elseif ($this->checkAccess($module, 'field', $context + ['field' => $field, 'action' => 'detail'])) {
                 $result[$key] = SugarACL::ACL_READ_ONLY;
             } else {
                 $result[$key] = SugarACL::ACL_NO_ACCESS;
@@ -107,20 +107,20 @@ abstract class SugarACLStrategy
         // default implementation, specific ACLs can override
         $access = $access_list;
         // check 'access' first - if it's false all others will be false
-        if(isset($access_list['access'])) {
-            if(!$this->checkAccess($module, 'access', $context)) {
-        	    foreach($access_list as $action => $value) {
-        		    $access[$action] = false;
-        	    }
-        		return $access;
+        if (isset($access_list['access'])) {
+            if (!$this->checkAccess($module, 'access', $context)) {
+                foreach ($access_list as $action => $value) {
+                    $access[$action] = false;
+                }
+                return $access;
             }
             // no need to check it second time
             unset($access_list['access']);
         }
-        foreach($access_list as $action => $value) {
-        	if(!$this->checkAccess($module, $action, $context)) {
-        		$access[$action] = false;
-        	}
+        foreach ($access_list as $action => $value) {
+            if (!$this->checkAccess($module, $action, $context)) {
+                $access[$action] = false;
+            }
         }
         return $access;
     }
@@ -132,12 +132,11 @@ abstract class SugarACLStrategy
      */
     public static function fixUpActionName($actionToCheck)
     {
-        if ( empty($actionToCheck) ) {
+        if (empty($actionToCheck)) {
             return $actionToCheck;
         }
         $input = strtolower($actionToCheck);
-        switch ($input)
-        {
+        switch ($input) {
             case 'index':
             case 'listview':
             case 'subpanel':
@@ -160,7 +159,7 @@ abstract class SugarACLStrategy
 
         return $output;
     }
-    
+
     /**
      * Helper function to determine if a user is attempting to perform a write operation
      * @param string $view A view name as passed in to checkAccess, will be sanitized using fixUpActionName
@@ -171,11 +170,11 @@ abstract class SugarACLStrategy
     {
         // Let's make it a little easier on ourselves and fix up the actions nice and quickly
         $action = self::fixUpActionName($view);
-        if ( $action == 'field' ) {
+        if ($action == 'field') {
             $action = self::fixUpActionName($context['action']);
         }
 
-        if ( $action == 'edit' || $action == 'delete' || $action == 'import' || $action == 'massupdate' ) {
+        if ($action == 'edit' || $action == 'delete' || $action == 'import' || $action == 'massupdate') {
             return true;
         } else {
             return false;

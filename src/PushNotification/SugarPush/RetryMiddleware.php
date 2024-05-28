@@ -27,7 +27,7 @@ class RetryMiddleware
      *
      * @return GuzzleRetryMiddleware
      */
-    public function __invoke(callable $handler) : GuzzleRetryMiddleware
+    public function __invoke(callable $handler): GuzzleRetryMiddleware
     {
         $config = \SugarConfig::getInstance()->get('sugar_push');
         $maxRetries = $config['max_retries'] ?? 0;
@@ -45,7 +45,7 @@ class RetryMiddleware
      *
      * @return \Closure
      */
-    private function shouldRetry(int $maxRetries) : \Closure
+    private function shouldRetry(int $maxRetries): \Closure
     {
         return function (
             $retries,

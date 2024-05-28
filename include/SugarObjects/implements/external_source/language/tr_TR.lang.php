@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-    'LBL_SOURCE_ID'   => 'Dış kaynak kimliği',
+$mod_strings = [
+    'LBL_SOURCE_ID' => 'Dış kaynak kimliği',
     'LBL_SOURCE_TYPE' => 'Dış kaynak',
     'LBL_SOURCE_META' => 'Dış kaynak metası',
-);
+];

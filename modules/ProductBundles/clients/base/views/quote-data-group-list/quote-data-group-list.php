@@ -9,24 +9,24 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ProductBundles']['base']['view']['quote-data-group-list'] = array(
-    'selection' => array(
+$viewdefs['ProductBundles']['base']['view']['quote-data-group-list'] = [
+    'selection' => [
         'type' => 'multi',
-        'actions' => array(
-            array(
+        'actions' => [
+            [
                 'type' => 'rowaction',
                 'name' => 'edit_row_button',
                 'label' => 'LBL_EDIT_BUTTON',
                 'tooltip' => 'LBL_EDIT_BUTTON',
                 'acl_action' => 'edit',
-            ),
-            array(
+            ],
+            [
                 'type' => 'rowaction',
                 'name' => 'delete_row_button',
                 'label' => 'LBL_DELETE_BUTTON',
                 'tooltip' => 'LBL_DELETE_BUTTON',
                 'acl_action' => 'delete',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

@@ -42,7 +42,7 @@ class Bulk extends BaseBulk
      * factory, to get the right action for the version
      * @return AbstractDocumentAction
      */
-    protected function getAction(AbstractDocumentAction $action, ?string $opType = null) : AbstractDocumentAction
+    protected function getAction(AbstractDocumentAction $action, ?string $opType = null): AbstractDocumentAction
     {
         $esVersion = $this->getServerVersion();
         if (!version_compare($esVersion, '7.0', '<')) {
@@ -73,7 +73,7 @@ class Bulk extends BaseBulk
      * @return string
      * @throws \Exception
      */
-    protected function getServerVersion() : string
+    protected function getServerVersion(): string
     {
         return $this->_client->getElasticServerVersion();
     }

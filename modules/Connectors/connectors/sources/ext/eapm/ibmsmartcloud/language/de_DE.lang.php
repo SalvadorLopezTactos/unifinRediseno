@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Erhalten Sie einen Key und Secret-Code von IBM SmartCloud, indem Sie Ihre Sugar-Instanz als neue Anwendung registrieren.<br>
 &nbsp;<br>
 Vorgehensweise zur Registrierung:<br>
@@ -28,5 +28,4 @@ Vorgehensweise zur Registrierung:<br>
 </td></tr></table>',
     'oauth_consumer_key' => 'OAuth-Kunden-Schlüssel',
     'oauth_consumer_secret' => 'OAuth-Kunden-Secret',
-);
-
+];

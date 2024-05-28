@@ -29,403 +29,402 @@ if (!defined('ACL_ALLOW_NONE')) {
 
 // These are rendering descriptions for Access Levels giving information such as
 // the label, color, and text color to use when rendering the access level
-$GLOBALS['ACLActionAccessLevels'] = array(
-    ACL_ALLOW_ALL => array(
+$GLOBALS['ACLActionAccessLevels'] = [
+    ACL_ALLOW_ALL => [
         'color' => '#008000',
         'label' => 'LBL_ACCESS_ALL',
         'text_color' => 'white',
-    ),
-    ACL_ALLOW_OWNER => array(
+    ],
+    ACL_ALLOW_OWNER => [
         'color' => '#6F6800',
         'label' => 'LBL_ACCESS_OWNER',
         'text_color' => 'white',
-    ),
-    ACL_ALLOW_SELECTED_TEAMS => array(
+    ],
+    ACL_ALLOW_SELECTED_TEAMS => [
         'color' => '#FFAA00',
         'label' => 'LBL_ACCESS_SELECTED_TEAMS',
         'text_color' => 'white',
-    ),
-    ACL_ALLOW_NONE => array(
+    ],
+    ACL_ALLOW_NONE => [
         'color' => '#FF0000',
         'label' => 'LBL_ACCESS_NONE',
         'text_color' => 'white',
-    ),
-    ACL_ALLOW_ENABLED => array(
+    ],
+    ACL_ALLOW_ENABLED => [
         'color' => '#008000',
         'label' => 'LBL_ACCESS_ENABLED',
         'text_color' => 'white',
-    ),
-    ACL_ALLOW_DISABLED => array(
+    ],
+    ACL_ALLOW_DISABLED => [
         'color' => '#FF0000',
         'label' => 'LBL_ACCESS_DISABLED',
         'text_color' => 'white',
-    ),
-    ACL_ALLOW_ADMIN => array(
+    ],
+    ACL_ALLOW_ADMIN => [
         'color' => '#0000FF',
         'label' => 'LBL_ACCESS_ADMIN',
         'text_color' => 'white',
-    ),
-    ACL_ALLOW_NORMAL => array(
+    ],
+    ACL_ALLOW_NORMAL => [
         'color' => '#008000',
         'label' => 'LBL_ACCESS_NORMAL',
         'text_color' => 'white',
-    ),
-    ACL_ALLOW_DEFAULT => array(
+    ],
+    ACL_ALLOW_DEFAULT => [
         'color' => '#008000',
         'label' => 'LBL_ACCESS_DEFAULT',
         'text_color' => 'white',
-    ),
-    ACL_ALLOW_DEV => array(
+    ],
+    ACL_ALLOW_DEV => [
         'color' => '#0000FF',
         'label' => 'LBL_ACCESS_DEV',
         'text_color' => 'white',
-    ),
-    ACL_ALLOW_ADMIN_DEV => array(
+    ],
+    ACL_ALLOW_ADMIN_DEV => [
         'color' => '#0000FF',
         'label' => 'LBL_ACCESS_ADMIN_DEV',
         'text_color' => 'white',
-    ),
-);
+    ],
+];
 
-$actionsDropdown = array(
+$actionsDropdown = [
     ACL_ALLOW_ALL,
     ACL_ALLOW_OWNER,
-);
+];
 if ($tbaConfig->isEnabledGlobally()) {
     $actionsDropdown[] = ACL_ALLOW_SELECTED_TEAMS;
 }
 $actionsDropdown[] = ACL_ALLOW_DEFAULT;
 $actionsDropdown[] = ACL_ALLOW_NONE;
 
-// These are the actions for a given type. It includes the ACCESS Levels for 
+// These are the actions for a given type. It includes the ACCESS Levels for
 // that action and the label for that action.
-$GLOBALS['ACLActions'] = array(
-    'module' => array(
-        'actions' => array(
-            'admin' => array(
-                'aclaccess' => array(
+$GLOBALS['ACLActions'] = [
+    'module' => [
+        'actions' => [
+            'admin' => [
+                'aclaccess' => [
                     ACL_ALLOW_NORMAL,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_ADMIN,
                     ACL_ALLOW_DEV,
                     ACL_ALLOW_ADMIN_DEV,
-                ),
+                ],
                 'label' => 'LBL_ACTION_ADMIN',
                 'default' => ACL_ALLOW_NORMAL,
-            ),
-            'access' => array(
-                'aclaccess' => array(
+            ],
+            'access' => [
+                'aclaccess' => [
                     ACL_ALLOW_ENABLED,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_DISABLED,
-                ),
+                ],
                 'label' => 'LBL_ACTION_ACCESS',
                 'default' => ACL_ALLOW_ENABLED,
-            ),
-            'view' => array(
+            ],
+            'view' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_RECORD_VIEW',
                 'default' => ACL_ALLOW_ALL,
-            ),
-            'list' => array(
+            ],
+            'list' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_LIST',
                 'default' => ACL_ALLOW_ALL,
-            ),
-            'edit' => array(
+            ],
+            'edit' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_EDIT',
                 'default' => ACL_ALLOW_ALL,
-            ),
-            'delete' => array(
+            ],
+            'delete' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_DELETE',
                 'default' => ACL_ALLOW_ALL,
-            ),
-            'import' => array(
-                'aclaccess' => array(
+            ],
+            'import' => [
+                'aclaccess' => [
                     ACL_ALLOW_ALL,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_NONE,
-                ),
+                ],
                 'label' => 'LBL_ACTION_IMPORT',
                 'default' => ACL_ALLOW_ALL,
-            ),
-            'export' => array(
+            ],
+            'export' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_EXPORT',
                 'default' => ACL_ALLOW_ALL,
-            ),
-            'massupdate' => array(
-                'aclaccess' => array(
+            ],
+            'massupdate' => [
+                'aclaccess' => [
                     ACL_ALLOW_ALL,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_NONE,
-                ),
+                ],
                 'label' => 'LBL_ACTION_MASSUPDATE',
                 'default' => ACL_ALLOW_ALL,
-            ),
-        ),
-    ),
-    'Tracker' => array(
-        'actions' => array(
-            'admin' => array(
-                'aclaccess' => array(
+            ],
+        ],
+    ],
+    'Tracker' => [
+        'actions' => [
+            'admin' => [
+                'aclaccess' => [
                     ACL_ALLOW_NORMAL,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_ADMIN,
-                ),
+                ],
                 'label' => 'LBL_ACTION_ADMIN',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'access' => array(
-                'aclaccess' => array(
+            ],
+            'access' => [
+                'aclaccess' => [
                     ACL_ALLOW_ENABLED,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_DISABLED,
-                ),
+                ],
                 'label' => 'LBL_ACTION_ACCESS',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'view' => array(
+            ],
+            'view' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_VIEW',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'list' => array(
+            ],
+            'list' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_LIST',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'edit' => array(
+            ],
+            'edit' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_EDIT',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'delete' => array(
+            ],
+            'delete' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_DELETE',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'import' => array(
-                'aclaccess' => array(
+            ],
+            'import' => [
+                'aclaccess' => [
                     ACL_ALLOW_ALL,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_NONE,
-                ),
+                ],
                 'label' => 'LBL_ACTION_IMPORT',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'export' => array(
+            ],
+            'export' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_EXPORT',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'massupdate' => array(
-                'aclaccess' => array(
+            ],
+            'massupdate' => [
+                'aclaccess' => [
                     ACL_ALLOW_ALL,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_NONE,
-                ),
+                ],
                 'label' => 'LBL_ACTION_MASSUPDATE',
                 'default' => ACL_ALLOW_ALL,
-            ),
-        ),
-    ),
-    'TrackerQuery' => array(
-        'actions' => array(
-            'admin' => array(
-                'aclaccess' => array(
+            ],
+        ],
+    ],
+    'TrackerQuery' => [
+        'actions' => [
+            'admin' => [
+                'aclaccess' => [
                     ACL_ALLOW_NORMAL,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_ADMIN,
-                ),
+                ],
                 'label' => 'LBL_ACTION_ADMIN',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'access' => array(
-                'aclaccess' => array(
+            ],
+            'access' => [
+                'aclaccess' => [
                     ACL_ALLOW_ENABLED,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_DISABLED,
-                ),
+                ],
                 'label' => 'LBL_ACTION_ACCESS',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'view' => array(
+            ],
+            'view' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_VIEW',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'list' => array(
+            ],
+            'list' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_LIST',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'edit' => array(
+            ],
+            'edit' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_EDIT',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'delete' => array(
+            ],
+            'delete' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_DELETE',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'import' => array(
-                'aclaccess' => array(
+            ],
+            'import' => [
+                'aclaccess' => [
                     ACL_ALLOW_ALL,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_NONE,
-                ),
+                ],
                 'label' => 'LBL_ACTION_IMPORT',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'export' => array(
+            ],
+            'export' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_EXPORT',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'massupdate' => array(
-                'aclaccess' => array(
+            ],
+            'massupdate' => [
+                'aclaccess' => [
                     ACL_ALLOW_ALL,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_NONE,
-                ),
+                ],
                 'label' => 'LBL_ACTION_MASSUPDATE',
                 'default' => ACL_ALLOW_ALL,
-            ),
-        ),
-    ),
-    'TrackerPerf' => array(
-        'actions' => array(
-            'admin' => array(
-                'aclaccess' => array(
+            ],
+        ],
+    ],
+    'TrackerPerf' => [
+        'actions' => [
+            'admin' => [
+                'aclaccess' => [
                     ACL_ALLOW_NORMAL,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_ADMIN,
-                ),
+                ],
                 'label' => 'LBL_ACTION_ADMIN',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'access' => array(
-                'aclaccess' => array(
+            ],
+            'access' => [
+                'aclaccess' => [
                     ACL_ALLOW_ENABLED,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_DISABLED,
-                ),
+                ],
                 'label' => 'LBL_ACTION_ACCESS',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'view' => array(
+            ],
+            'view' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_VIEW',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'list' => array(
+            ],
+            'list' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_LIST',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'edit' => array(
+            ],
+            'edit' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_EDIT',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'delete' => array(
+            ],
+            'delete' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_DELETE',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'import' => array(
-                'aclaccess' => array(
+            ],
+            'import' => [
+                'aclaccess' => [
                     ACL_ALLOW_ALL,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_NONE,
-                ),
+                ],
                 'label' => 'LBL_ACTION_IMPORT',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'export' => array(
+            ],
+            'export' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_EXPORT',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'massupdate' => array(
-                'aclaccess' => array(
+            ],
+            'massupdate' => [
+                'aclaccess' => [
                     ACL_ALLOW_ALL,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_NONE,
-                ),
+                ],
                 'label' => 'LBL_ACTION_MASSUPDATE',
                 'default' => ACL_ALLOW_ALL,
-            ),
-        ),
-    ),
-    'TrackerSession' => array(
-        'actions' => array(
-            'admin' => array(
-                'aclaccess' => array(
+            ],
+        ],
+    ],
+    'TrackerSession' => [
+        'actions' => [
+            'admin' => [
+                'aclaccess' => [
                     ACL_ALLOW_NORMAL,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_ADMIN,
-                ),
+                ],
                 'label' => 'LBL_ACTION_ADMIN',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'access' => array(
-                'aclaccess' => array(
+            ],
+            'access' => [
+                'aclaccess' => [
                     ACL_ALLOW_ENABLED,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_DISABLED,
-                ),
+                ],
                 'label' => 'LBL_ACTION_ACCESS',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'view' => array(
+            ],
+            'view' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_VIEW',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'list' => array(
+            ],
+            'list' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_LIST',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'edit' => array(
+            ],
+            'edit' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_EDIT',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'delete' => array(
+            ],
+            'delete' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_DELETE',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'import' => array(
-                'aclaccess' => array(
+            ],
+            'import' => [
+                'aclaccess' => [
                     ACL_ALLOW_ALL,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_NONE,
-                ),
+                ],
                 'label' => 'LBL_ACTION_IMPORT',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'export' => array(
+            ],
+            'export' => [
                 'aclaccess' => $actionsDropdown,
                 'label' => 'LBL_ACTION_EXPORT',
                 'default' => ACL_ALLOW_NONE,
-            ),
-            'massupdate' => array(
-                'aclaccess' => array(
+            ],
+            'massupdate' => [
+                'aclaccess' => [
                     ACL_ALLOW_ALL,
                     ACL_ALLOW_DEFAULT,
                     ACL_ALLOW_NONE,
-                ),
+                ],
                 'label' => 'LBL_ACTION_MASSUPDATE',
                 'default' => ACL_ALLOW_ALL,
-            ),
-        ),
-    ),
-);
-
+            ],
+        ],
+    ],
+];

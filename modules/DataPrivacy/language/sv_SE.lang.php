@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Datasekretess',
     'LBL_MODULE_NAME_SINGULAR' => 'Datasekretess',
     'LBL_NUMBER' => 'Antal',
@@ -56,9 +56,10 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Inga fält eller poster har markerats för radering.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Datasekretess för posternas översikt',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för datasekretess',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje för datasekretess',
 
     // list view
     'LBL_HELP_RECORDS' => 'Datasekretess modulen spårar sekretessaktiviteter, inklusive samtycke och ämnesförfrågningar, för att stödja ditt företags sekretessförfaranden. Skapa datasekretess poster (t.ex. en kontakt) för att spåra samtycke eller vidta åtgärder för en sekretessbegäran.',
     // record view
     'LBL_HELP_RECORD' => 'Datasekretess modulen spårar sekretessaktiviteter, inklusive samtycke och ämnesförfrågningar, för att stödja ditt företags sekretessförfaranden. Skapa datasekretess poster som är relaterade till personliga poster (t.ex. kontakt) för att spåra samtycke eller vidta åtgärder gällande en sekretessbegäran. När den nödvändiga åtgärder slutförts, kan användare som har Datasekretess chefsrollen klicka "slutförd" eller "avvisa" för att uppdatera status. För raderingsförfrågningar, välja "markera för att radera" för varje persons poster som är listade i underpanelen nedan. När alla önskade fält är valda, klickar man på "radera och slutför", vilket permanent kommer att radera fältens information och markera posten datasekretess som slutförd.',
-);
+];

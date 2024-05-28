@@ -13,8 +13,8 @@
 {{#each value}}
     {{#if nameIsErased}}
         <span
-            {{#if emailIsErased}}rel="tooltip" data-placement="top" title="{{str 'LBL_VALUE_ERASED' ../module}}"{{/if}}
-            {{#if attributes.email_address}}rel="tooltip" data-placement="top" title="{{attributes.email_address}}"{{/if}}
+            {{#if emailIsErased}}rel="tooltip" data-bs-placement="top" title="{{str 'LBL_VALUE_ERASED' ../module}}"{{/if}}
+            {{#if attributes.email_address}}rel="tooltip" data-bs-placement="top" title="{{attributes.email_address}}"{{/if}}
         >
             <span class="label">
                 {{#if href}}<a href="{{href}}">{{/if}}{{str 'LBL_VALUE_ERASED' ../module}}{{#if href}}</a>{{/if}}
@@ -24,8 +24,8 @@
     {{else}}
         {{#if attributes.parent_name}}
             <span
-                {{#if emailIsErased}}rel="tooltip" data-placement="top" title="{{str 'LBL_VALUE_ERASED' ../module}}"{{/if}}
-                {{#if attributes.email_address}}rel="tooltip" data-placement="top" title="{{attributes.email_address}}"{{/if}}
+                {{#if emailIsErased}}rel="tooltip" data-bs-placement="top" title="{{str 'LBL_VALUE_ERASED' ../module}}"{{/if}}
+                {{#if attributes.email_address}}rel="tooltip" data-bs-placement="top" title="{{attributes.email_address}}"{{/if}}
             >
                 {{#if href}}<a href="{{href}}">{{/if}}{{attributes.parent_name}}{{#if href}}</a>{{/if}}
                 {{#unless @last}}, {{/unless}}

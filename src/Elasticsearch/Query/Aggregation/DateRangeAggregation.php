@@ -39,15 +39,15 @@ class DateRangeAggregation extends RangeAggregation
     /**
      * {@inheritdoc}
      */
-    protected $acceptedOptions = array(
+    protected $acceptedOptions = [
         'field',
-    );
+    ];
 
     /**
      * The list of pre-defined dates to be used for the aggregation
      * @var array
      */
-    protected $dateNames = array(
+    protected $dateNames = [
         'today',
         'yesterday',
         'tomorrow',
@@ -61,7 +61,7 @@ class DateRangeAggregation extends RangeAggregation
         'last_year',
         'this_year',
         'next_year',
-    );
+    ];
 
     /**
      * Ctor
@@ -92,19 +92,19 @@ class DateRangeAggregation extends RangeAggregation
      */
     protected function initRanges()
     {
-        $ranges = array();
+        $ranges = [];
         foreach ($this->dateNames as $dateName) {
             $date = $this->parseDateRange($dateName);
             if (!empty($date)) {
                 $from = $this->timestampToDate($date[0]->getTimestamp());
-                $to =  $this->timestampToDate($date[1]->getTimestamp());
+                $to = $this->timestampToDate($date[1]->getTimestamp());
 
                 // Here the date name is the id/key of the range
-                $ranges[$dateName] = array(
+                $ranges[$dateName] = [
                     'from' => $from,
                     'to' => $to,
-                    'key' => $dateName
-                );
+                    'key' => $dateName,
+                ];
             }
         }
         return $ranges;

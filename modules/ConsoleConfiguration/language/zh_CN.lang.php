@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '控制台配置',
     'LBL_MODULE_NAME_SINGULAR' => '控制台配置',
     'LBL_CONSOLE_CONFIG_TITLE' => '控制台',
@@ -55,4 +56,4 @@ $mod_strings = array(
     'LBL_CONSOLE_DIRECTIONS_CHANGE' => '更改将立即体现，但是您必须保存才可生效。',
     'LBL_CONSOLE_DIRECTIONS_FILTER_AND' => '和 ',
     'LBL_CONSOLE_DIRECTIONS_FILTER_OR' => '或',
-);
+];

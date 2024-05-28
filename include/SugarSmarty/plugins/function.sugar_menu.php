@@ -61,30 +61,30 @@
  */
 function smarty_function_sugar_menu($params, &$smarty)
 {
-    $root_options = array(
-        "id" => array_key_exists('id', $params) ? $params['id'] : ""
-    );
-    if(array_key_exists('htmlOptions', $params)) {
-        foreach($params['htmlOptions'] as $attr => $value) {
+    $root_options = [
+        'id' => array_key_exists('id', $params) ? $params['id'] : '',
+    ];
+    if (array_key_exists('htmlOptions', $params)) {
+        foreach ($params['htmlOptions'] as $attr => $value) {
             $root_options[$attr] = $value;
         }
     }
-    $output = SugarHtml::createOpenTag("ul", $root_options);
-    foreach($params['items'] as $item) {
-        if(strpos($item['html'], "</") === 0) {
+    $output = SugarHtml::createOpenTag('ul', $root_options);
+    foreach ($params['items'] as $item) {
+        if (strpos($item['html'], '</') === 0) {
             $output .= $item['html'];
             continue;
         }
-        $output .= SugarHtml::createOpenTag('li', !empty($params['itemOptions']) ? $params['itemOptions'] : array())
-            .$item['html'];
-        if (isset($item['items']) && (is_countable($item['items']) ? count($item['items']) : 0)) {
-            $output .= smarty_function_sugar_menu(array(
+        $output .= SugarHtml::createOpenTag('li', !empty($params['itemOptions']) ? $params['itemOptions'] : [])
+            . $item['html'];
+        if (isset($item['items']) && safeCount($item['items'])) {
+            $output .= smarty_function_sugar_menu([
                 'items' => $item['items'],
-                'htmlOptions' => !empty($params['submenuHtmlOptions']) ? $params['submenuHtmlOptions'] : (!empty($item['submenuHtmlOptions']) ? $item['submenuHtmlOptions'] : array())
-            ), $smarty);
+                'htmlOptions' => !empty($params['submenuHtmlOptions']) ? $params['submenuHtmlOptions'] : (!empty($item['submenuHtmlOptions']) ? $item['submenuHtmlOptions'] : []),
+            ], $smarty);
         }
-        $output .= SugarHtml::createCloseTag("li");
+        $output .= SugarHtml::createCloseTag('li');
     }
-    $output .= SugarHtml::createCloseTag("ul");
+    $output .= SugarHtml::createCloseTag('ul');
     return $output;
 }

@@ -10,25 +10,25 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['KBDocument'] = array(
+$dictionary['KBDocument'] = [
     'reassignable' => false,
     'table' => 'kbdocuments',
     'favorites' => true,
     'unified_search' => true,
     'full_text_search' => false,
     'comment' => 'Knowledge Base management',
-    'fields' => array(
-    ),
-    'uses' => array(
+    'fields' => [
+    ],
+    'uses' => [
         'basic',
         'team_security',
         'assignable',
-    ),
-    'ignore_templates' => array(
+    ],
+    'ignore_templates' => [
         'taggable',
         'commentlog',
-    ),
-);
+    ],
+];
 VardefManager::createVardef(
     'KBDocuments',
     'KBDocument'

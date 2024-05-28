@@ -10,11 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="ellipsis_inline relate-field-container" data-placement="bottom" title="{{value}}">
+<div class="ellipsis_inline relate-field-container" data-bs-placement="bottom" title="{{value}}">
     {{#if href}}
-        <a class="ellipsis_inline date-name-link" href="{{#if def.events}}javascript:void(0);{{else}}{{href}}{{/if}}"
+        <a class="ellipsis_inline date-name-link {{module}}" href="{{#if def.events}}javascript:void(0);{{else}}{{href}}{{/if}}"
            data-link-target="{{linkTarget}}" data-module="{{module}}" data-model-id="{{modelId}}"
-           data-placement="bottom" rel="tooltip" title="{{value}}"
+           data-bs-placement="bottom" rel="tooltip" title="{{value}}"
         >
             {{#notEq serviceStartDate serviceEndDate}}
                 {{serviceStartDate}} -
@@ -23,7 +23,7 @@
         </a>
         {{partial 'focus-icon' this this}}
     {{else}}
-        <span class="ellipsis_inline" data-placement="bottom" rel="tooltip" title="{{value}}">
+        <span class="ellipsis_inline" data-bs-placement="bottom" rel="tooltip" title="{{value}}">
             {{#notEq serviceStartDate serviceEndDate}}
                 {{serviceStartDate}} -
             {{/notEq}}

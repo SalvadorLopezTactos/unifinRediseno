@@ -10,17 +10,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description: TODO:  To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 global $app_strings, $mod_strings;
-echo "<br><br>";
+echo '<br><br>';
 ?>
 <span class='error'>
-<?php echo $mod_strings['ERR_DUP_NAME'];?>
+<?php echo $mod_strings['ERR_DUP_NAME']; ?>
 <br><br>
-<?php echo $app_strings['NTC_CLICK_BACK'];?>
+<?php echo $app_strings['NTC_CLICK_BACK']; ?>
 </span>

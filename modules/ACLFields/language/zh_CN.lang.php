@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_DEFAULT' => '未设置',
     'LBL_READ_WRITE' => '读/写',
     'LBL_READ_OWNER_WRITE' => '读/写负责人',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_READ_SELECTED_TEAMS_WRITE' => '读/（负责人与选择的团队）写',
     'LBL_SELECTED_TEAMS_READ_OWNER_WRITE' => '（负责人与选择的团队）读/写',
     'LBL_SELECTED_TEAMS_READ_WRITE' => '（负责人与选择的团队）读/（负责人与选择的团队）写',
-);
+];

@@ -16,7 +16,7 @@ class chartjsReports extends chartjs
      * @var mixed[]
      */
     public $super_set_data;
-    private $processed_report_keys = array();
+    private $processed_report_keys = [];
 
     /**
      * @var Report
@@ -72,9 +72,9 @@ class chartjsReports extends chartjs
 
         // rearrange $dataset to get the correct order for the first row
         if ($first) {
-            $temp_dataset = array();
+            $temp_dataset = [];
             foreach ($this->super_set as $key) {
-                $temp_dataset[$key] = $dataset[$key] ?? array();
+                $temp_dataset[$key] = $dataset[$key] ?? [];
             }
             $dataset = $temp_dataset;
         }
@@ -83,12 +83,12 @@ class chartjsReports extends chartjs
             if ($first && empty($value)) {
                 $data .= $this->processDataGroup(4, $key, 'NULL', '', '');
             } elseif (array_key_exists('numerical_value', $dataset)) {
-                $link = (isset($dataset['link'])) ? '#'.$dataset['link'] : '';
+                $link = (isset($dataset['link'])) ? '#' . $dataset['link'] : '';
                 $data .= $this->processDataGroup($level, $dataset['group_base_text'], $dataset['numerical_value'], $dataset['numerical_value'], $link);
                 array_push($this->processed_report_keys, $dataset['group_base_text']);
                 return $data;
             } else {
-                $data .= $this->processReportData($value, $level+1);
+                $data .= $this->processReportData($value, $level + 1);
             }
         }
 
@@ -102,15 +102,15 @@ class chartjsReports extends chartjs
      */
     private function processReportGroup($dataset)
     {
-        $super_set = array();
-        $super_set_data = array();
+        $super_set = [];
+        $super_set_data = [];
 
         foreach ($dataset as $groupBy => $groups) {
             $prev_super_set = $super_set;
             foreach ($groups as $group => $groupData) {
                 $super_set_data[$group] = $groupData;
             }
-            if ((is_countable($groups) ? count($groups) : 0) > count($super_set)) {
+            if (safeCount($groups) > safeCount($super_set)) {
                 $super_set = array_keys($groups);
                 foreach ($prev_super_set as $prev_group) {
                     if (!in_array($prev_group, $groups)) {
@@ -150,7 +150,7 @@ class chartjsReports extends chartjs
         $lastgroupfield = end($firstTwoGroups);
 
         if ($this->isDateSort($lastgroupfield)) {
-            usort($super_set, array($this, "runDateSort"));
+            usort($super_set, [$this, 'runDateSort']);
         } elseif (is_string($lastgroupfield) && $this->isEnumSort($lastgroupfield)) {
             $this->sortDropdownData($lastgroupfield, $super_set);
         } else {
@@ -188,7 +188,7 @@ class chartjsReports extends chartjs
     protected function isDateSort($field)
     {
         if (isset($this->reporter->focus->field_defs[$field])) {
-            $dateTypes = array('date', 'datetime', 'datetimecombo');
+            $dateTypes = ['date', 'datetime', 'datetimecombo'];
             $type = $this->reporter->focus->field_defs[$field]['type'];
             return in_array($type, $dateTypes);
         }
@@ -334,10 +334,10 @@ class chartjsReports extends chartjs
 
             $label = $total;
             if ($this->isCurrencyReportGroupTotal($dataset)) {
-                $label = currency_format_number($this->chart_properties['thousands'] ? $total / 1000 : $total, array(
+                $label = currency_format_number($this->chart_properties['thousands'] ? $total / 1000 : $total, [
                     'currency_symbol' => $this->currency_symbol,
                     'decimals' => ($this->chart_properties['thousands'] ? 0 : null),
-                ));
+                ]);
             } elseif (is_numeric($label)) {
                 $label = $this->formatNumber($this->chart_properties['thousands'] ? $label / 1000 : $label, 0);
             }
@@ -350,9 +350,9 @@ class chartjsReports extends chartjs
             $data .= $this->tab('<subgroups>', 3);
 
             if ((!is_float($total) && isset($dataset[$total]) && $total != $dataset[$total]['numerical_value'])
-                || !array_key_exists($key, $dataset) || $key == "") {
+                || !array_key_exists($key, $dataset) || $key == '') {
                 $data .= $this->processReportData($dataset, 4, $first);
-            } elseif (count($this->data_set) == 1 && $first) {
+            } elseif (safeCount($this->data_set) == 1 && $first) {
                 foreach ($dataset as $k => $v) {
                     if (isset($v['numerical_value'])) {
                         $data .= $this->processDataGroup(4, $k, $v['numerical_value'], $v['numerical_value'], '');
@@ -362,7 +362,7 @@ class chartjsReports extends chartjs
 
             if (!$first) {
                 $not_processed = array_diff($this->super_set, $this->processed_report_keys);
-                $processed_diff_count = count($this->super_set) - count($not_processed);
+                $processed_diff_count = safeCount($this->super_set) - safeCount($not_processed);
 
                 if ($processed_diff_count != 0) {
                     foreach ($not_processed as $title) {
@@ -373,7 +373,7 @@ class chartjsReports extends chartjs
 
             $data .= $this->tab('</subgroups>', 3);
             $data .= $this->tab('</group>', 2);
-            $this->processed_report_keys = array();
+            $this->processed_report_keys = [];
             // we're done with the first row!
             //$first = false;
         }
@@ -388,7 +388,7 @@ class chartjsReports extends chartjs
         $single_value = false;
 
         foreach ($this->data_set as $key => $dataset) {
-            if ((isset($dataset[$key]) && (is_countable($this->data_set[$key]) ? count($this->data_set[$key]) : 0) == 1)) {
+            if ((isset($dataset[$key]) && safeCount($this->data_set[$key]) == 1)) {
                 $single_value = true;
             } else {
                 $single_value = false;
@@ -406,7 +406,7 @@ class chartjsReports extends chartjs
     /**
      * wrapper function to return the html code containing the chart in a div
      *
-     * @param     string $name     name of the div
+     * @param string $name name of the div
      *            string $xmlFile    location of the XML file
      *            string $style    optional additional styles for the div
      * @return    string returns the html code through smarty
@@ -414,7 +414,7 @@ class chartjsReports extends chartjs
     public function display($name, $xmlFile, $width = '320', $height = '480', $resize = false)
     {
         if (empty($name)) {
-            $name = "unsavedReport";
+            $name = 'unsavedReport';
         }
 
         return parent::display($name, $xmlFile, $width, $height, $resize = false);

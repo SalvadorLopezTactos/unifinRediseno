@@ -8,7 +8,7 @@
         self_disposiciones=this;
         this._super('initialize', [options]);
 
-        this.getDisposicionesDWH();
+        //this.getDisposicionesDWH();
     },
 
     getDisposicionesDWH: function (options) {

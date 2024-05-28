@@ -14,17 +14,24 @@ $viewdefs['Calls']['base']['view']['activity-card-content'] = [
     'panels' => [
         [
             'name' => 'panel_header',
-            'label' => 'LBL_PANEL_HEADER',
             'css_class' => 'panel-header',
             'fields' => [
                 [
                     'name' => 'duration',
+                    'type' => 'duration',
+                    'fields' => [
+                        'date_start',
+                        'date_end',
+                    ],
+                    'related_fields' => [
+                        'duration_hours',
+                        'duration_minutes',
+                    ],
                 ],
             ],
         ],
         [
             'name' => 'panel_sentiment',
-            'label' => 'LBL_PANEL_1',
             'css_class' => 'panel-body',
             'fields' => [
                 [
@@ -35,7 +42,6 @@ $viewdefs['Calls']['base']['view']['activity-card-content'] = [
         ],
         [
             'name' => 'panel_body',
-            'label' => 'LBL_PANEL_1',
             'css_class' => 'panel-body',
             'fields' => [
                 [

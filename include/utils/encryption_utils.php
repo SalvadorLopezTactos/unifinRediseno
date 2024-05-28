@@ -9,16 +9,19 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\Security\Crypto\Blowfish;
 
-function sugarEncode($key, $data){
-	return base64_encode($data);
+function sugarEncode($key, $data)
+{
+    return base64_encode($data);
 }
 
 
-function sugarDecode($key, $encoded){
-	$data = base64_decode($encoded);
-	return $data;
+function sugarDecode($key, $encoded)
+{
+    $data = base64_decode($encoded);
+    return $data;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -41,7 +44,8 @@ function blowfishGetKey($type)
  * @return string
  * @deprecated Use Blowfish::encode()
  */
-function blowfishEncode($key, $data){
+function blowfishEncode($key, $data)
+{
     return Blowfish::encode($key, $data);
 }
 
@@ -52,6 +56,7 @@ function blowfishEncode($key, $data){
  * @return string
  * @deprecated Use Blowfish::decode()
  */
-function blowfishDecode($key, $encoded){
+function blowfishDecode($key, $encoded)
+{
     return Blowfish::decode($key, $encoded);
 }

@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Videnbase',
     'LBL_MODULE_NAME_SINGULAR' => 'Videnbaseartikel',
     'LBL_MODULE_TITLE' => 'Videnbaseartikel',
     'LBL_REVISIONS_SUBPANEL_TITLE' => 'Revisioner',
-);
+];

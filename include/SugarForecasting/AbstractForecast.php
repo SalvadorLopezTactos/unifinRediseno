@@ -17,7 +17,7 @@ abstract class SugarForecasting_AbstractForecast extends SugarForecasting_Abstra
      *
      * @var array
      */
-    protected $dataArray = array();
+    protected $dataArray = [];
 
     /**
      * Return the data array
@@ -40,13 +40,13 @@ abstract class SugarForecasting_AbstractForecast extends SugarForecasting_Abstra
         /* @var $timeperiod TimePeriod */
         $timeperiod = BeanFactory::getBean('TimePeriods', $timeperiod_id);
 
-        $months = array();
+        $months = [];
 
         $start = strtotime($timeperiod->start_date);
         $end = strtotime($timeperiod->end_date);
         while ($start < $end) {
             $months[] = date('F Y', $start);
-            $start = strtotime("+1 month", $start);
+            $start = strtotime('+1 month', $start);
         }
 
         return $months;
@@ -55,7 +55,7 @@ abstract class SugarForecasting_AbstractForecast extends SugarForecasting_Abstra
     /**
      * Utility method to convert a date time string into an ISO data time string for Sidecar usage.
      *
-     * @param string $dt_string     Date Time value to from the db to convert into ISO format for Sidecar to consume
+     * @param string $dt_string Date Time value to from the db to convert into ISO format for Sidecar to consume
      * @return string               The ISO version of the string
      */
     protected function convertDateTimeToISO($dt_string)

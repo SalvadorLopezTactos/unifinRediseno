@@ -11,60 +11,50 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-return array(
-    'metadata' =>
-    array(
-        'components' =>
-        array(
-            array(
-                'rows' =>
-                array(
-                    array(
-                        array(
-                            'view' =>
-                            array(
+return [
+    'metadata' => [
+        'components' => [
+            [
+                'rows' => [
+                    [
+                        [
+                            'view' => [
                                 'type' => 'dashablelist',
                                 'label' => 'TPL_DASHLET_MY_MODULE',
-                                'display_columns' =>
-                                array(
+                                'display_columns' => [
                                     'name',
                                     'email',
                                     'phone_work',
                                     'status',
-                                ),
-                            ),
-                            'context' =>
-                            array(
+                                ],
+                            ],
+                            'context' => [
                                 'module' => 'Leads',
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' =>
-                            array(
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
                                 'type' => 'dashablelist',
                                 'label' => 'TPL_DASHLET_MY_MODULE',
-                                'display_columns' =>
-                                array(
+                                'display_columns' => [
                                     'bug_number',
                                     'name',
                                     'status',
-                                ),
-                            ),
-                            'context' =>
-                            array(
+                                ],
+                            ],
+                            'context' => [
                                 'module' => 'Bugs',
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
                 'width' => 12,
-            ),
-        ),
-    ),
+            ],
+        ],
+    ],
     'name' => 'LBL_TASKS_LIST_DASHBOARD',
-);
-
+];

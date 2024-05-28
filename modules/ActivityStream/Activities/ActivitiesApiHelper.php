@@ -22,7 +22,7 @@ class ActivitiesApiHelper extends SugarBeanApiHelper
      * @param $options array Currently no options are supported
      * @return array The bean in array format, ready for passing out the API to clients.
      */
-    public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(SugarBean $bean, array $fieldList = [], array $options = [])
     {
         $record = parent::formatForApi($bean, $fieldList, $options);
 
@@ -37,16 +37,16 @@ class ActivitiesApiHelper extends SugarBeanApiHelper
     /**
      * For non-homepage requests and link/unlink activities, flip the parent
      * record that's displayed so that the event is noticeable.
-     * @param  array     $record The individual activity, as an array.
-     * @param  SugarBean $requestBean   The request's context's bean.
+     * @param array $record The individual activity, as an array.
+     * @param SugarBean $requestBean The request's context's bean.
      * @return array     Associative array with two keys, 'module' and 'id'.
      */
     protected function getDisplayModule(array $record, SugarBean $requestBean = null)
     {
-        $array = array(
+        $array = [
             'module' => $record['parent_type'] ?? '',
             'id' => $record['parent_id'] ?? '',
-        );
+        ];
 
         if (!is_null($requestBean) && $this->isRecordLinkAction($record)) {
             // Verify that the context matches record's parent module.

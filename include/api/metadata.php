@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$apiSettings = array(
+$apiSettings = [
     'minVersion' => '10',
-    'maxVersion' => '11.20',
-    'minClientVersions' => array(
+    'maxVersion' => '11.24',
+    'minClientVersions' => [
         'nomad' => '6.0.2',
-    ),
-);
+    ],
+];

@@ -12,17 +12,19 @@
 --}}
 <div class="omni-detail-wrapper">
     <div class="omni-detail-content omni-detail-title sticky">
-        {{#if summaryTitle}}
-            <div class="omni-detail-title-text">{{summaryTitle}}</div>
-        {{else}}
-            <div class="omni-detail-title-text">{{str 'LBL_OMNICHANNEL_CONFIG_SUMMARY'}}</div>
-        {{/if}}
+        <div class="omni-detail-title-text font-bold">
+            {{#if summaryTitle}}
+                {{summaryTitle}}
+            {{else}}
+                {{str 'LBL_OMNICHANNEL_CONFIG_SUMMARY'}}
+            {{/if}}
+        </div>
 
-        <div class="loading ml-1">
+        <div class="loading ml-1 text-[--label-color]">
             - <span></span>
-            <i class="l1">.</i>
-            <i class="l2">.</i>
-            <i class="l3">.</i>
+            <i class="l1 m-0">.</i>
+            <i class="l2 m-0">.</i>
+            <i class="l3 m-0">.</i>
         </div>
     </div>
 

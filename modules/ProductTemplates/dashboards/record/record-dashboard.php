@@ -13,27 +13,45 @@
 
 return [
     'metadata' => [
-        'dashlets' => [
+        'components' => [
             [
-                'view' => [
-                    'type' => 'product-catalog-dashlet',
-                    'label' => 'LBL_PRODUCT_CATALOG_DASHLET_NAME',
-                ],
-                'context' => [
-                    'module' => 'ProductTemplates',
-                ],
                 'width' => 12,
-                'x' => 0,
-                'y' => 0,
-            ],
-            [
-                'view' => [
-                    'type' => 'commentlog-dashlet',
-                    'label' => 'LBL_DASHLET_COMMENTLOG_NAME',
+                'rows' => [
+                    [
+                        [
+                            'view' => [
+                                'module' => 'ProductTemplates',
+                                'type' => 'activity-timeline',
+                                'label' => 'TPL_ACTIVITY_TIMELINE_DASHLET',
+                            ],
+                            'context' => [
+                                'module' => 'ProductTemplates',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
+                                'type' => 'product-catalog-dashlet',
+                                'label' => 'LBL_PRODUCT_CATALOG_DASHLET_NAME',
+                            ],
+                            'context' => [
+                                'module' => 'ProductTemplates',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
+                                'type' => 'commentlog-dashlet',
+                                'label' => 'LBL_DASHLET_COMMENTLOG_NAME',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
                 ],
-                'width' => 12,
-                'x' => 0,
-                'y' => 6,
             ],
         ],
     ],

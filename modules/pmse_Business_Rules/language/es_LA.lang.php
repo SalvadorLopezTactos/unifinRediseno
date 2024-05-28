@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Proceso de Reglas Empresariales',
-  'LBL_MODULE_TITLE' => 'Proceso de Reglas Empresariales',
-  'LBL_MODULE_NAME_SINGULAR' => 'Proceso de Regla Empresarial',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Proceso de Reglas Empresariales',
+    'LBL_MODULE_TITLE' => 'Proceso de Reglas Empresariales',
+    'LBL_MODULE_NAME_SINGULAR' => 'Proceso de Regla Empresarial',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Panel de Enfoque de Proceso de Reglas Empresariales',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Panel de Enfoque de Proceso de Reglas Empresariales',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Tablero de Registro de Reglas de Proceso de Negocio',
-  'LBL_RST_UID' => 'ID de Regla Empresarial',
-  'LBL_RST_TYPE' => 'Tipo de Regla Empresarial',
-  'LBL_RST_DEFINITION' => 'Definición de Regla Empresarial',
-  'LBL_RST_EDITABLE' => 'Editable de Regla Empresarial',
-  'LBL_RST_SOURCE' => 'Origen de Regla Empresarial',
-  'LBL_RST_SOURCE_DEFINITION' => 'Definición de Origen de la Regla Empresarial',
-  'LBL_RST_MODULE' => 'Módulo Objetivo',
-  'LBL_RST_FILENAME' => 'Nombre de Archivo de la Regla Empresarial',
-  'LBL_RST_CREATE_DATE' => 'Fecha de creación de la regla empresarial',
-  'LBL_RST_UPDATE_DATE' => 'Fecha de actualización de la regla empresarial',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Tablero de Registro de Reglas de Proceso de Negocio',
+    'LBL_RST_UID' => 'ID de Regla Empresarial',
+    'LBL_RST_TYPE' => 'Tipo de Regla Empresarial',
+    'LBL_RST_DEFINITION' => 'Definición de Regla Empresarial',
+    'LBL_RST_EDITABLE' => 'Editable de Regla Empresarial',
+    'LBL_RST_SOURCE' => 'Origen de Regla Empresarial',
+    'LBL_RST_SOURCE_DEFINITION' => 'Definición de Origen de la Regla Empresarial',
+    'LBL_RST_MODULE' => 'Módulo Objetivo',
+    'LBL_RST_FILENAME' => 'Nombre de Archivo de la Regla Empresarial',
+    'LBL_RST_CREATE_DATE' => 'Fecha de creación de la regla empresarial',
+    'LBL_RST_UPDATE_DATE' => 'Fecha de actualización de la regla empresarial',
 
     'LNK_LIST' => 'Ver Proceso de las Reglas Empresariales',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Crear Proceso de Regla Empresarial',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'La Regla Comercial es inválida porque utiliza campos inválidos o campos que no se encuentran en su instancia de SugarCRM. Solucione los errores debajo y guarde la Regla Comercial.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Esta regla empresarial está siendo utilizada actualmente en una definición de proceso. ¿Aún desea editar esta regla empresarial?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "No puede eliminar esta plantilla de correo electrónico, al estar siendo utilizada en una definición de proceso.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'No puede eliminar esta plantilla de correo electrónico, al estar siendo utilizada en una definición de proceso.',
+];

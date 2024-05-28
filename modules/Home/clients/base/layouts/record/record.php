@@ -11,44 +11,46 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Home']['base']['layout']['record'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['Home']['base']['layout']['record'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'base',
                 'name' => 'main-pane',
-                'css_class' => 'main-pane home-dashboard row-fluid bg-secondary-content-background',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'css_class' => 'main-pane home-dashboard row-fluid bg-[--secondary-content-background]',
+                'components' => [
+                    [
+                        'layout' => [
                             'name' => 'dashboard',
                             'type' => 'dashboard',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'view' => 'dashboard-headerpane',
-                                    'loadModule' => 'Dashboards',
-                                ),
-                                array(
+                                    'xmeta' => [
+                                        'loadModule' => 'Dashboards',
+                                    ],
+                                ],
+                                [
                                     'view' => 'tabbed-dashboard',
-                                ),
-                                array(
-                                    'layout' => 'dashlet-main',
-                                ),
+                                ],
+                                [
+                                    'layout' => 'dashboard-main',
+                                ],
                                 [
                                     'view' => 'dashboard-fab',
                                 ],
-                            ),
-                            'last_state' => array(
+                            ],
+                            'last_state' => [
                                 'id' => 'last-visit',
-                            ),
-                        ),
+                            ],
+                        ],
                         'loadModule' => 'Dashboards',
-                    ),
-                ),
-            ),
-        ),
-    ),
-    'last_state' => array(
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'last_state' => [
         'id' => 'last-visit',
-    ),
-);
+    ],
+];

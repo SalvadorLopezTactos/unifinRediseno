@@ -29,7 +29,7 @@ $viewdefs['Notes']['base']['view']['activity-card-content'] = [
         [
             'name' => 'panel_attachments',
             'label' => 'LBL_PANEL_3',
-            'css_class' => 'panel-attachments',
+            'css_class' => 'panel-attachments mt-2',
             'fields' => [
                 [
                     'name' => 'attachment_list',

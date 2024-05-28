@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$moduleList = array();
+$moduleList = [];
 // this list defines the modules shown in the top tab list of the app
 //the order of this list is the default order displayed - do not change the order unless it is on purpose
 $moduleList[] = 'Home';
@@ -55,61 +55,61 @@ $moduleList[] = 'OutboundEmail';
 $moduleList[] = 'DataPrivacy';
 // this list defines all of the module names and bean names in the app
 // to create a new module's bean class, add the bean definition here
-$beanList = array();
+$beanList = [];
 //ACL Objects
-$beanList['ACLRoles']       = 'ACLRole';
-$beanList['ACLRoleSets']    = 'ACLRoleSet';
-$beanList['ACLActions']     = 'ACLAction';
-$beanList['ACLFields']       = 'ACLField';
+$beanList['ACLRoles'] = 'ACLRole';
+$beanList['ACLRoleSets'] = 'ACLRoleSet';
+$beanList['ACLActions'] = 'ACLAction';
+$beanList['ACLFields'] = 'ACLField';
 //END ACL OBJECTS
-$beanList['Leads']          = 'Lead';
-$beanList['Cases']          = 'aCase';
-$beanList['Bugs']           = 'Bug';
-$beanList['ProspectLists']      = 'ProspectList';
-$beanList['Prospects']  = 'Prospect';
-$beanList['Project']            = 'Project';
-$beanList['ProjectTask']            = 'ProjectTask';
-$beanList['Campaigns']          = 'Campaign';
-$beanList['EmailMarketing']  = 'EmailMarketing';
-$beanList['CampaignLog']        = 'CampaignLog';
-$beanList['CampaignTrackers']   = 'CampaignTracker';
-$beanList['Releases']       = 'Release';
+$beanList['Leads'] = 'Lead';
+$beanList['Cases'] = 'aCase';
+$beanList['Bugs'] = 'Bug';
+$beanList['ProspectLists'] = 'ProspectList';
+$beanList['Prospects'] = 'Prospect';
+$beanList['Project'] = 'Project';
+$beanList['ProjectTask'] = 'ProjectTask';
+$beanList['Campaigns'] = 'Campaign';
+$beanList['EmailMarketing'] = 'EmailMarketing';
+$beanList['CampaignLog'] = 'CampaignLog';
+$beanList['CampaignTrackers'] = 'CampaignTracker';
+$beanList['Releases'] = 'Release';
 $beanList['EmailMan'] = 'EmailMan';
-$beanList['Schedulers']  = 'Scheduler';
-$beanList['SchedulersJobs']  = 'SchedulersJob';
-$beanList['Contacts']       = 'Contact';
-$beanList['Accounts']       = 'Account';
-$beanList['DynamicFields']  = 'DynamicField';
-$beanList['EditCustomFields']   = 'FieldsMetaData';
-$beanList['Opportunities']  = 'Opportunity';
+$beanList['Schedulers'] = 'Scheduler';
+$beanList['SchedulersJobs'] = 'SchedulersJob';
+$beanList['Contacts'] = 'Contact';
+$beanList['Accounts'] = 'Account';
+$beanList['DynamicFields'] = 'DynamicField';
+$beanList['EditCustomFields'] = 'FieldsMetaData';
+$beanList['Opportunities'] = 'Opportunity';
 
-$beanList['EmailTemplates']     = 'EmailTemplate';
+$beanList['EmailTemplates'] = 'EmailTemplate';
 $beanList['UserSignatures'] = 'UserSignature';
-$beanList['Notes']          = 'Note';
-$beanList['Calls']          = 'Call';
-$beanList['Emails']         = 'Email';
-$beanList['Meetings']       = 'Meeting';
-$beanList['Tasks']          = 'Task';
-$beanList['Users']          = 'User';
-$beanList['Currencies']     = 'Currency';
-$beanList['Trackers']       = 'Tracker';
-$beanList['Connectors']     = 'Connectors';
-$beanList['TrackerSessions']= 'TrackerSession';
-$beanList['TrackerPerfs']   = 'TrackerPerf';
+$beanList['Notes'] = 'Note';
+$beanList['Calls'] = 'Call';
+$beanList['Emails'] = 'Email';
+$beanList['Meetings'] = 'Meeting';
+$beanList['Tasks'] = 'Task';
+$beanList['Users'] = 'User';
+$beanList['Currencies'] = 'Currency';
+$beanList['Trackers'] = 'Tracker';
+$beanList['Connectors'] = 'Connectors';
+$beanList['TrackerSessions'] = 'TrackerSession';
+$beanList['TrackerPerfs'] = 'TrackerPerf';
 $beanList['TrackerQueries'] = 'TrackerQuery';
-$beanList['Import_1']         = 'ImportMap';
-$beanList['Import_2']       = 'UsersLastImport';
-$beanList['Versions']       = 'Version';
+$beanList['Import_1'] = 'ImportMap';
+$beanList['Import_2'] = 'UsersLastImport';
+$beanList['Versions'] = 'Version';
 $beanList['Administration'] = 'Administration';
 $beanList['SessionManager'] = 'SessionManager';
-$beanList['vCals']          = 'vCal';
-$beanList['CustomFields']       = 'CustomFields';
+$beanList['vCals'] = 'vCal';
+$beanList['CustomFields'] = 'CustomFields';
 
 
-$beanList['Documents']  = 'Document';
-$beanList['DocumentRevisions']  = 'DocumentRevision';
+$beanList['Documents'] = 'Document';
+$beanList['DocumentRevisions'] = 'DocumentRevision';
 
-$beanList['Audit']  = 'Audit';
+$beanList['Audit'] = 'Audit';
 
 $beanList['Styleguide'] = 'Styleguide';
 // deferred
@@ -118,60 +118,60 @@ $beanList['Styleguide'] = 'Styleguide';
 $beanList['InboundEmail'] = 'InboundEmail';
 
 
-$beanList['SavedSearch']            = 'SavedSearch';
-$beanList['UserPreferences']        = 'UserPreference';
+$beanList['SavedSearch'] = 'SavedSearch';
+$beanList['UserPreferences'] = 'UserPreference';
 $beanList['EmailAddresses'] = 'EmailAddress';
 $beanList['EmailText'] = 'EmailText';
 $beanList['Relationships'] = 'Relationship';
-$beanList['Employees']      = 'Employee';
-$beanList['Reports']        = 'SavedReport';
-$beanList['Teams']          = 'Team';
-$beanList['TeamMemberships']            = 'TeamMembership';
-$beanList['TeamSets']            = 'TeamSet';
-$beanList['TeamSetModules']            = 'TeamSetModule';
-$beanList['Quotes']         = 'Quote';
+$beanList['Employees'] = 'Employee';
+$beanList['Reports'] = 'SavedReport';
+$beanList['Teams'] = 'Team';
+$beanList['TeamMemberships'] = 'TeamMembership';
+$beanList['TeamSets'] = 'TeamSet';
+$beanList['TeamSetModules'] = 'TeamSetModule';
+$beanList['Quotes'] = 'Quote';
 $beanList['RevenueLineItems'] = 'RevenueLineItem';
-$beanList['Products']       = 'Product';
-$beanList['ProductBundles']     = 'ProductBundle';
+$beanList['Products'] = 'Product';
+$beanList['ProductBundles'] = 'ProductBundle';
 $beanList['ProductBundleNotes'] = 'ProductBundleNote';
-$beanList['ProductTemplates']= 'ProductTemplate';
-$beanList['ProductTypes']   = 'ProductType';
-$beanList['ProductCategories']= 'ProductCategory';
-$beanList['Manufacturers']  = 'Manufacturer';
-$beanList['Shippers']       = 'Shipper';
-$beanList['TaxRates']       = 'TaxRate';
-$beanList['TeamNotices']        = 'TeamNotice';
-$beanList['TimePeriods']    = 'TimePeriod';
+$beanList['ProductTemplates'] = 'ProductTemplate';
+$beanList['ProductTypes'] = 'ProductType';
+$beanList['ProductCategories'] = 'ProductCategory';
+$beanList['Manufacturers'] = 'Manufacturer';
+$beanList['Shippers'] = 'Shipper';
+$beanList['TaxRates'] = 'TaxRate';
+$beanList['TeamNotices'] = 'TeamNotice';
+$beanList['TimePeriods'] = 'TimePeriod';
 $beanList['AnnualTimePeriods'] = 'AnnualTimePeriod';
-$beanList['QuarterTimePeriods']    = 'QuarterTimePeriod';
-$beanList['Quarter544TimePeriods']    = 'Quarter544TimePeriod';
-$beanList['Quarter445TimePeriods']    = 'Quarter445TimePeriod';
-$beanList['Quarter454TimePeriods']    = 'Quarter454TimePeriod';
-$beanList['MonthTimePeriods']    = 'MonthTimePeriod';
-$beanList['Forecasts']  = 'Forecast';
-$beanList['ForecastWorksheets']  = 'ForecastWorksheet';
-$beanList['ForecastManagerWorksheets']  = 'ForecastManagerWorksheet';
-$beanList['ForecastOpportunities']  = 'ForecastOpportunities';
+$beanList['QuarterTimePeriods'] = 'QuarterTimePeriod';
+$beanList['Quarter544TimePeriods'] = 'Quarter544TimePeriod';
+$beanList['Quarter445TimePeriods'] = 'Quarter445TimePeriod';
+$beanList['Quarter454TimePeriods'] = 'Quarter454TimePeriod';
+$beanList['MonthTimePeriods'] = 'MonthTimePeriod';
+$beanList['Forecasts'] = 'Forecast';
+$beanList['ForecastWorksheets'] = 'ForecastWorksheet';
+$beanList['ForecastManagerWorksheets'] = 'ForecastManagerWorksheet';
+$beanList['ForecastOpportunities'] = 'ForecastOpportunities';
 $beanList['ForecastDirectReports'] = 'ForecastDirectReports';
-$beanList['Quotas']     = 'Quota';
-$beanList['WorkFlow']  = 'WorkFlow';
-$beanList['WorkFlowTriggerShells']  = 'WorkFlowTriggerShell';
-$beanList['WorkFlowAlertShells']  = 'WorkFlowAlertShell';
-$beanList['WorkFlowAlerts']  = 'WorkFlowAlert';
-$beanList['WorkFlowActionShells']  = 'WorkFlowActionShell';
-$beanList['WorkFlowActions']  = 'WorkFlowAction';
-$beanList['Expressions']  = 'Expression';
-$beanList['Contracts']  = 'Contract';
-$beanList['ContractTypes']  = 'ContractType';
+$beanList['Quotas'] = 'Quota';
+$beanList['WorkFlow'] = 'WorkFlow';
+$beanList['WorkFlowTriggerShells'] = 'WorkFlowTriggerShell';
+$beanList['WorkFlowAlertShells'] = 'WorkFlowAlertShell';
+$beanList['WorkFlowAlerts'] = 'WorkFlowAlert';
+$beanList['WorkFlowActionShells'] = 'WorkFlowActionShell';
+$beanList['WorkFlowActions'] = 'WorkFlowAction';
+$beanList['Expressions'] = 'Expression';
+$beanList['Contracts'] = 'Contract';
+$beanList['ContractTypes'] = 'ContractType';
 $beanList['Holidays'] = 'Holiday';
 $beanList['SessionManager'] = 'SessionManager';
 $beanList['DocuSignEnvelopes'] = 'DocuSignEnvelope';
 
-$beanList['CustomQueries']  = 'CustomQuery';
-$beanList['DataSets']  = 'DataSet';
-$beanList['DataSet_Attribute']  = 'DataSet_Attribute';
+$beanList['CustomQueries'] = 'CustomQuery';
+$beanList['DataSets'] = 'DataSet';
+$beanList['DataSet_Attribute'] = 'DataSet_Attribute';
 $beanList['DataSet_Layout'] = 'DataSet_Layout';
-$beanList['ReportMaker']  = 'ReportMaker';
+$beanList['ReportMaker'] = 'ReportMaker';
 $beanList['pmse_Project'] = 'pmse_Project';
 $beanList['pmse_Inbox'] = 'pmse_Inbox';
 $beanList['pmse_Business_Rules'] = 'pmse_Business_Rules';
@@ -227,60 +227,60 @@ $beanList['ReportSchedules'] = 'ReportSchedule';
 $beanList['Calendar'] = 'Calendar';
 // this list defines all of the files that contain the SugarBean class definitions from $beanList
 // to create a new module's bean class, add the file definition here
-$beanFiles = array();
+$beanFiles = [];
 
 $beanFiles['ACLAction'] = 'modules/ACLActions/ACLAction.php';
 $beanFiles['ACLRole'] = 'modules/ACLRoles/ACLRole.php';
-$beanFiles['Relationship']  = 'modules/Relationships/Relationship.php';
+$beanFiles['Relationship'] = 'modules/Relationships/Relationship.php';
 
 // do not add any bean files before this point, otherwise the application may fail to install
 $beanFiles['ACLRoleSet'] = 'modules/ACLRoles/ACLRoleSet.php';
-$beanFiles['Lead']          = 'modules/Leads/Lead.php';
-$beanFiles['aCase']         = 'modules/Cases/Case.php';
-$beanFiles['Bug']           = 'modules/Bugs/Bug.php';
-$beanFiles['CampaignLog']  = 'modules/CampaignLog/CampaignLog.php';
-$beanFiles['Project']           = 'modules/Project/Project.php';
-$beanFiles['ProjectTask']           = 'modules/ProjectTask/ProjectTask.php';
-$beanFiles['Campaign']          = 'modules/Campaigns/Campaign.php';
-$beanFiles['ProspectList']      = 'modules/ProspectLists/ProspectList.php';
-$beanFiles['Prospect']  = 'modules/Prospects/Prospect.php';
+$beanFiles['Lead'] = 'modules/Leads/Lead.php';
+$beanFiles['aCase'] = 'modules/Cases/Case.php';
+$beanFiles['Bug'] = 'modules/Bugs/Bug.php';
+$beanFiles['CampaignLog'] = 'modules/CampaignLog/CampaignLog.php';
+$beanFiles['Project'] = 'modules/Project/Project.php';
+$beanFiles['ProjectTask'] = 'modules/ProjectTask/ProjectTask.php';
+$beanFiles['Campaign'] = 'modules/Campaigns/Campaign.php';
+$beanFiles['ProspectList'] = 'modules/ProspectLists/ProspectList.php';
+$beanFiles['Prospect'] = 'modules/Prospects/Prospect.php';
 
-$beanFiles['EmailMarketing']          = 'modules/EmailMarketing/EmailMarketing.php';
-$beanFiles['CampaignTracker']  = 'modules/CampaignTrackers/CampaignTracker.php';
-$beanFiles['Release']           = 'modules/Releases/Release.php';
-$beanFiles['EmailMan']          = 'modules/EmailMan/EmailMan.php';
+$beanFiles['EmailMarketing'] = 'modules/EmailMarketing/EmailMarketing.php';
+$beanFiles['CampaignTracker'] = 'modules/CampaignTrackers/CampaignTracker.php';
+$beanFiles['Release'] = 'modules/Releases/Release.php';
+$beanFiles['EmailMan'] = 'modules/EmailMan/EmailMan.php';
 
-$beanFiles['Scheduler']  = 'modules/Schedulers/Scheduler.php';
-$beanFiles['SchedulersJob']  = 'modules/SchedulersJobs/SchedulersJob.php';
-$beanFiles['Contact']       = 'modules/Contacts/Contact.php';
-$beanFiles['Account']       = 'modules/Accounts/Account.php';
-$beanFiles['Opportunity']   = 'modules/Opportunities/Opportunity.php';
-$beanFiles['EmailTemplate']         = 'modules/EmailTemplates/EmailTemplate.php';
+$beanFiles['Scheduler'] = 'modules/Schedulers/Scheduler.php';
+$beanFiles['SchedulersJob'] = 'modules/SchedulersJobs/SchedulersJob.php';
+$beanFiles['Contact'] = 'modules/Contacts/Contact.php';
+$beanFiles['Account'] = 'modules/Accounts/Account.php';
+$beanFiles['Opportunity'] = 'modules/Opportunities/Opportunity.php';
+$beanFiles['EmailTemplate'] = 'modules/EmailTemplates/EmailTemplate.php';
 $beanFiles['UserSignature'] = 'modules/UserSignatures/UserSignature.php';
-$beanFiles['Note']          = 'modules/Notes/Note.php';
-$beanFiles['Call']          = 'modules/Calls/Call.php';
-$beanFiles['Email']         = 'modules/Emails/Email.php';
-$beanFiles['Meeting']       = 'modules/Meetings/Meeting.php';
-$beanFiles['Task']          = 'modules/Tasks/Task.php';
-$beanFiles['User']          = 'modules/Users/User.php';
-$beanFiles['Employee']      = 'modules/Employees/Employee.php';
-$beanFiles['Currency']          = 'modules/Currencies/Currency.php';
-$beanFiles['Tracker']          = 'modules/Trackers/Tracker.php';
-$beanFiles['TrackerPerf']      = 'modules/Trackers/TrackerPerf.php';
-$beanFiles['TrackerSession']   = 'modules/Trackers/TrackerSession.php';
-$beanFiles['TrackerQuery']     = 'modules/Trackers/TrackerQuery.php';
-$beanFiles['ImportMap']     = 'modules/Import/maps/ImportMap.php';
-$beanFiles['UsersLastImport']= 'modules/Import/UsersLastImport.php';
-$beanFiles['Administration']= 'modules/Administration/Administration.php';
-$beanFiles['UpgradeHistory']= 'modules/Administration/UpgradeHistory.php';
-$beanFiles['vCal']          = 'modules/vCals/vCal.php';
-$beanFiles['Calendar']      = 'modules/Calendar/Calendar.php';
+$beanFiles['Note'] = 'modules/Notes/Note.php';
+$beanFiles['Call'] = 'modules/Calls/Call.php';
+$beanFiles['Email'] = 'modules/Emails/Email.php';
+$beanFiles['Meeting'] = 'modules/Meetings/Meeting.php';
+$beanFiles['Task'] = 'modules/Tasks/Task.php';
+$beanFiles['User'] = 'modules/Users/User.php';
+$beanFiles['Employee'] = 'modules/Employees/Employee.php';
+$beanFiles['Currency'] = 'modules/Currencies/Currency.php';
+$beanFiles['Tracker'] = 'modules/Trackers/Tracker.php';
+$beanFiles['TrackerPerf'] = 'modules/Trackers/TrackerPerf.php';
+$beanFiles['TrackerSession'] = 'modules/Trackers/TrackerSession.php';
+$beanFiles['TrackerQuery'] = 'modules/Trackers/TrackerQuery.php';
+$beanFiles['ImportMap'] = 'modules/Import/maps/ImportMap.php';
+$beanFiles['UsersLastImport'] = 'modules/Import/UsersLastImport.php';
+$beanFiles['Administration'] = 'modules/Administration/Administration.php';
+$beanFiles['UpgradeHistory'] = 'modules/Administration/UpgradeHistory.php';
+$beanFiles['vCal'] = 'modules/vCals/vCal.php';
+$beanFiles['Calendar'] = 'modules/Calendar/Calendar.php';
 
-$beanFiles['Version']           = 'modules/Versions/Version.php';
+$beanFiles['Version'] = 'modules/Versions/Version.php';
 
-$beanFiles['Document']  = 'modules/Documents/Document.php';
-$beanFiles['DocumentRevision']  = 'modules/DocumentRevisions/DocumentRevision.php';
-$beanFiles['FieldsMetaData']    = 'modules/DynamicFields/FieldsMetaData.php';
+$beanFiles['Document'] = 'modules/Documents/Document.php';
+$beanFiles['DocumentRevision'] = 'modules/DocumentRevisions/DocumentRevision.php';
+$beanFiles['FieldsMetaData'] = 'modules/DynamicFields/FieldsMetaData.php';
 //$beanFiles['Audit']           = 'modules/Audit/Audit.php';
 
 // deferred
@@ -289,59 +289,58 @@ $beanFiles['FieldsMetaData']    = 'modules/DynamicFields/FieldsMetaData.php';
 $beanFiles['InboundEmail'] = 'modules/InboundEmail/InboundEmail.php';
 
 
-
-$beanFiles['SavedSearch']  = 'modules/SavedSearch/SavedSearch.php';
-$beanFiles['UserPreference']  = 'modules/UserPreferences/UserPreference.php';
+$beanFiles['SavedSearch'] = 'modules/SavedSearch/SavedSearch.php';
+$beanFiles['UserPreference'] = 'modules/UserPreferences/UserPreference.php';
 $beanFiles['EmailAddress'] = 'modules/EmailAddresses/EmailAddress.php';
 $beanFiles['EmailText'] = 'modules/EmailText/EmailText.php';
-$beanFiles['SavedReport']   = 'modules/Reports/SavedReport.php';
+$beanFiles['SavedReport'] = 'modules/Reports/SavedReport.php';
 $beanFiles['ACLField'] = 'modules/ACLFields/ACLField.php';
-$beanFiles['Contract']  = 'modules/Contracts/Contract.php';
-$beanFiles['Team']          = 'modules/Teams/Team.php';
-$beanFiles['TeamMembership']            = 'modules/Teams/TeamMembership.php';
-$beanFiles['TeamSet']            = 'modules/Teams/TeamSet.php';
-$beanFiles['TeamSetModule']            = 'modules/Teams/TeamSetModule.php';
-$beanFiles['TeamNotice']            = 'modules/TeamNotices/TeamNotice.php';
-$beanFiles['ProductTemplate']= 'modules/ProductTemplates/ProductTemplate.php';
-$beanFiles['ProductType']   = 'modules/ProductTypes/ProductType.php';
-$beanFiles['ProductCategory']= 'modules/ProductCategories/ProductCategory.php';
-$beanFiles['Manufacturer']  = 'modules/Manufacturers/Manufacturer.php';
-$beanFiles['Quote']         = 'modules/Quotes/Quote.php';
+$beanFiles['Contract'] = 'modules/Contracts/Contract.php';
+$beanFiles['Team'] = 'modules/Teams/Team.php';
+$beanFiles['TeamMembership'] = 'modules/Teams/TeamMembership.php';
+$beanFiles['TeamSet'] = 'modules/Teams/TeamSet.php';
+$beanFiles['TeamSetModule'] = 'modules/Teams/TeamSetModule.php';
+$beanFiles['TeamNotice'] = 'modules/TeamNotices/TeamNotice.php';
+$beanFiles['ProductTemplate'] = 'modules/ProductTemplates/ProductTemplate.php';
+$beanFiles['ProductType'] = 'modules/ProductTypes/ProductType.php';
+$beanFiles['ProductCategory'] = 'modules/ProductCategories/ProductCategory.php';
+$beanFiles['Manufacturer'] = 'modules/Manufacturers/Manufacturer.php';
+$beanFiles['Quote'] = 'modules/Quotes/Quote.php';
 $beanFiles['ProductBundleNote'] = 'modules/ProductBundleNotes/ProductBundleNote.php';
-$beanFiles['Product']       = 'modules/Products/Product.php';
-$beanFiles['ProductBundle']     = 'modules/ProductBundles/ProductBundle.php';
+$beanFiles['Product'] = 'modules/Products/Product.php';
+$beanFiles['ProductBundle'] = 'modules/ProductBundles/ProductBundle.php';
 $beanFiles['RevenueLineItem'] = 'modules/RevenueLineItems/RevenueLineItem.php';
-$beanFiles['Shipper']       = 'modules/Shippers/Shipper.php';
-$beanFiles['TaxRate']       = 'modules/TaxRates/TaxRate.php';
-$beanFiles['TimePeriod']        = 'modules/TimePeriods/TimePeriod.php';
-$beanFiles['AnnualTimePeriod']        = 'modules/TimePeriods/AnnualTimePeriod.php';
-$beanFiles['QuarterTimePeriod']    = 'modules/TimePeriods/QuarterTimePeriod.php';
-$beanFiles['Quarter544TimePeriod']    = 'modules/TimePeriods/Quarter544TimePeriod.php';
-$beanFiles['Quarter454TimePeriod']    = 'modules/TimePeriods/Quarter454TimePeriod.php';
-$beanFiles['Quarter445TimePeriod']    = 'modules/TimePeriods/Quarter445TimePeriod.php';
-$beanFiles['MonthTimePeriod']    = 'modules/TimePeriods/MonthTimePeriod.php';
-$beanFiles['Forecast']      = 'modules/Forecasts/Forecast.php';
+$beanFiles['Shipper'] = 'modules/Shippers/Shipper.php';
+$beanFiles['TaxRate'] = 'modules/TaxRates/TaxRate.php';
+$beanFiles['TimePeriod'] = 'modules/TimePeriods/TimePeriod.php';
+$beanFiles['AnnualTimePeriod'] = 'modules/TimePeriods/AnnualTimePeriod.php';
+$beanFiles['QuarterTimePeriod'] = 'modules/TimePeriods/QuarterTimePeriod.php';
+$beanFiles['Quarter544TimePeriod'] = 'modules/TimePeriods/Quarter544TimePeriod.php';
+$beanFiles['Quarter454TimePeriod'] = 'modules/TimePeriods/Quarter454TimePeriod.php';
+$beanFiles['Quarter445TimePeriod'] = 'modules/TimePeriods/Quarter445TimePeriod.php';
+$beanFiles['MonthTimePeriod'] = 'modules/TimePeriods/MonthTimePeriod.php';
+$beanFiles['Forecast'] = 'modules/Forecasts/Forecast.php';
 $beanFiles['ForecastWorksheet'] = 'modules/ForecastWorksheets/ForecastWorksheet.php';
 $beanFiles['ForecastManagerWorksheet'] = 'modules/ForecastManagerWorksheets/ForecastManagerWorksheet.php';
-$beanFiles['ForecastOpportunities']  = 'modules/Forecasts/ForecastOpportunities.php';
+$beanFiles['ForecastOpportunities'] = 'modules/Forecasts/ForecastOpportunities.php';
 $beanFiles['ForecastDirectReports'] = 'modules/Forecasts/ForecastDirectReports.php';
-$beanFiles['Quota']  = 'modules/Quotas/Quota.php';
-$beanFiles['WorkFlow']  = 'modules/WorkFlow/WorkFlow.php';
-$beanFiles['WorkFlowTriggerShell']  = 'modules/WorkFlowTriggerShells/WorkFlowTriggerShell.php';
-$beanFiles['WorkFlowAlertShell']  = 'modules/WorkFlowAlertShells/WorkFlowAlertShell.php';
-$beanFiles['WorkFlowAlert']  = 'modules/WorkFlowAlerts/WorkFlowAlert.php';
-$beanFiles['WorkFlowActionShell']  = 'modules/WorkFlowActionShells/WorkFlowActionShell.php';
-$beanFiles['WorkFlowAction']  = 'modules/WorkFlowActions/WorkFlowAction.php';
-$beanFiles['Expression']  = 'modules/Expressions/Expression.php';
-$beanFiles['SessionManager']      = 'modules/Administration/SessionManager.php';
-$beanFiles['ContractType']  = 'modules/ContractTypes/ContractType.php';
+$beanFiles['Quota'] = 'modules/Quotas/Quota.php';
+$beanFiles['WorkFlow'] = 'modules/WorkFlow/WorkFlow.php';
+$beanFiles['WorkFlowTriggerShell'] = 'modules/WorkFlowTriggerShells/WorkFlowTriggerShell.php';
+$beanFiles['WorkFlowAlertShell'] = 'modules/WorkFlowAlertShells/WorkFlowAlertShell.php';
+$beanFiles['WorkFlowAlert'] = 'modules/WorkFlowAlerts/WorkFlowAlert.php';
+$beanFiles['WorkFlowActionShell'] = 'modules/WorkFlowActionShells/WorkFlowActionShell.php';
+$beanFiles['WorkFlowAction'] = 'modules/WorkFlowActions/WorkFlowAction.php';
+$beanFiles['Expression'] = 'modules/Expressions/Expression.php';
+$beanFiles['SessionManager'] = 'modules/Administration/SessionManager.php';
+$beanFiles['ContractType'] = 'modules/ContractTypes/ContractType.php';
 $beanFiles['Holiday'] = 'modules/Holidays/Holiday.php';
 $beanFiles['DocuSignEnvelope'] = 'modules/DocuSignEnvelopes/DocuSignEnvelope.php';
-$beanFiles['CustomQuery']= 'modules/CustomQueries/CustomQuery.php';
-$beanFiles['DataSet']= 'modules/DataSets/DataSet.php';
-$beanFiles['DataSet_Attribute']= 'modules/DataSets/DataSet_Attribute.php';
+$beanFiles['CustomQuery'] = 'modules/CustomQueries/CustomQuery.php';
+$beanFiles['DataSet'] = 'modules/DataSets/DataSet.php';
+$beanFiles['DataSet_Attribute'] = 'modules/DataSets/DataSet_Attribute.php';
 $beanFiles['DataSet_Layout'] = 'modules/DataSets/DataSet_Layout.php';
-$beanFiles['ReportMaker']= 'modules/ReportMaker/ReportMaker.php';
+$beanFiles['ReportMaker'] = 'modules/ReportMaker/ReportMaker.php';
 $beanFiles['pmse_Project'] = 'modules/pmse_Project/pmse_Project.php';
 $beanFiles['pmse_Inbox'] = 'modules/pmse_Inbox/pmse_Inbox.php';
 $beanFiles['pmse_Business_Rules'] = 'modules/pmse_Business_Rules/pmse_Business_Rules.php';
@@ -388,7 +387,7 @@ $beanFiles['PurchasedLineItem'] = 'modules/PurchasedLineItems/PurchasedLineItem.
 $beanFiles['PushNotification'] = 'modules/PushNotifications/PushNotification.php';
 $beanFiles['ExternalUser'] = 'modules/ExternalUsers/ExternalUser.php';
 
-$beanFiles['Configurator']          = 'modules/Configurator/Configurator.php';
+$beanFiles['Configurator'] = 'modules/Configurator/Configurator.php';
 $beanFiles['EmptyBean'] = 'data/EmptyBean.php';
 $beanFiles['Styleguide'] = 'modules/Styleguide/Styleguide.php';
 $beanFiles['OutboundEmail'] = 'include/OutboundEmail/OutboundEmail.php';
@@ -396,18 +395,19 @@ $beanFiles['EmailParticipant'] = 'modules/EmailParticipants/EmailParticipant.php
 $beanFiles['DataPrivacy'] = 'modules/DataPrivacy/DataPrivacy.php';
 $beanFiles['ReportSchedule'] = 'modules/ReportSchedules/ReportSchedule.php';
 // added these lists for security settings for tabs
-$modInvisList = array('Administration', 'CustomFields', 'Connectors',
+$modInvisList = ['Administration', 'CustomFields', 'Connectors',
     'Dropdown', 'Dynamic', 'DynamicFields', 'DynamicLayout', 'EditCustomFields',
-    'Help', 'Import',  'MySettings', 'EditCustomFields','FieldsMetaData',
+    'Help', 'Import', 'MySettings', 'EditCustomFields', 'FieldsMetaData',
     'UpgradeWizard', 'Trackers', 'Connectors', 'Employees',
     'Manufacturers', 'ProductBundles', 'ProductBundleNotes', 'ProductCategories', 'ProductTypes',
     'Shippers', 'TaxRates', 'TeamNotices', 'Teams', 'TimePeriods', 'ForecastOpportunities', 'Quotas',
     'ContractTypes',
     'ACLFields', 'Holidays', 'SNIP', 'ForecastDirectReports',
-    'Releases','Sync',
-    'Users',  'Versions','EmailMarketing'
-    ,'OptimisticLock', 'TeamMemberships', 'TeamSets', 'TeamSetModule', 'Audit', 'MailMerge', 'EmailAddresses','EmailText',
-    'Schedulers','Schedulers_jobs', /*'Queues',*/ 'EmailTemplates','UserSignature',
+    'Releases', 'Sync',
+    'Users', 'Versions', 'EmailMarketing'
+    , 'OptimisticLock', 'TeamMemberships', 'TeamSets', 'TeamSetModule', 'Audit', 'MailMerge', 'EmailAddresses', 'EmailText',
+    'Schedulers', 'Schedulers_jobs', /*'Queues',*/
+    'EmailTemplates', 'UserSignature',
     'CampaignTrackers', 'CampaignLog', 'EmailMan', 'Prospects', 'ProspectLists',
     'InboundEmail',
     'ACLActions', 'ACLRoles',
@@ -448,27 +448,27 @@ $modInvisList = array('Administration', 'CustomFields', 'Connectors',
     'pmse_BpmGroupUser',
     'pmse_EmailMessage',
     'ReportSchedules',
-);
-$adminOnlyList = array(
-                    //module => list of actions  (all says all actions are admin only)
-                   //'Administration'=>array('all'=>1, 'SupportPortal'=>'allow'),
-                    'Dropdown'=>array('all'=>1),
-                    'Dynamic'=>array('all'=>1),
-                    'DynamicFields'=>array('all'=>1),
-                    'Currencies'=>array('all'=>1),
-                    'EditCustomFields'=>array('all'=>1),
-                    'FieldsMetaData'=>array('all'=>1),
-                    'ACL'=>array('all'=>1),
-                    'ACLActions'=>array('all'=>1),
-                    'ACLRoles'=>array('all'=>1),
-                    'ACLFields'=>array('all'=>1),
-                    'UpgradeWizard' => array('all' => 1),
-                    'Studio' => array('all' => 1),
-                    'Schedulers' => array('all' => 1),
-                    'WebLogicHooks' => array('all' => 1),
-                    );
+];
+$adminOnlyList = [
+    //module => list of actions  (all says all actions are admin only)
+    //'Administration'=>array('all'=>1, 'SupportPortal'=>'allow'),
+    'Dropdown' => ['all' => 1],
+    'Dynamic' => ['all' => 1],
+    'DynamicFields' => ['all' => 1],
+    'Currencies' => ['all' => 1],
+    'EditCustomFields' => ['all' => 1],
+    'FieldsMetaData' => ['all' => 1],
+    'ACL' => ['all' => 1],
+    'ACLActions' => ['all' => 1],
+    'ACLRoles' => ['all' => 1],
+    'ACLFields' => ['all' => 1],
+    'UpgradeWizard' => ['all' => 1],
+    'Studio' => ['all' => 1],
+    'Schedulers' => ['all' => 1],
+    'WebLogicHooks' => ['all' => 1],
+];
 
-$apiModuleList = array('Users', 'ActivityStream');
+$apiModuleList = ['Users', 'ActivityStream'];
 
 $modInvisList[] = 'CustomQueries';
 $modInvisList[] = 'DataSets';
@@ -502,23 +502,23 @@ $modInvisList[] = 'Styleguide';
 $modInvisList[] = 'EmailParticipants';
 $modInvisList[] = 'ReportSchedules';
 
-$report_include_modules = array();
+$report_include_modules = [];
 //add prospects
-$report_include_modules['Prospects']='Prospect';
+$report_include_modules['Prospects'] = 'Prospect';
 $report_include_modules['DocumentRevisions'] = 'DocumentRevision';
 $report_include_modules['ProductCategories'] = 'ProductCategory';
 $report_include_modules['ProductTypes'] = 'ProductType';
 $report_include_modules['ProductTemplates'] = 'ProductTemplate';
-$report_include_modules['Contracts']='Contract';
+$report_include_modules['Contracts'] = 'Contract';
 //add Tracker modules
 
-$report_include_modules['Trackers']         = 'Tracker';
-$report_include_modules['Tags']         = 'Tag';
+$report_include_modules['Trackers'] = 'Tracker';
+$report_include_modules['Tags'] = 'Tag';
 
-$report_include_modules['TrackerPerfs']     = 'TrackerPerf';
-$report_include_modules['TrackerSessions']  = 'TrackerSession';
-$report_include_modules['TrackerQueries']   = 'TrackerQuery';
-$report_include_modules['Quotas']    = 'Quota';
+$report_include_modules['TrackerPerfs'] = 'TrackerPerf';
+$report_include_modules['TrackerSessions'] = 'TrackerSession';
+$report_include_modules['TrackerQueries'] = 'TrackerQuery';
+$report_include_modules['Quotas'] = 'Quota';
 
 
 $beanList['Notifications'] = 'Notifications';
@@ -526,7 +526,7 @@ $beanFiles['Notifications'] = 'modules/Notifications/Notifications.php';
 $modInvisList[] = 'Notifications';
 // This is the mapping for modules that appear under a different module's tab
 // Be sure to also add the modules to $modInvisList, otherwise their tab will still appear
-$GLOBALS['moduleTabMap'] = array(
+$GLOBALS['moduleTabMap'] = [
     'UpgradeWizard' => 'Administration',
     'KBDocuments' => 'KBContents',
     'KBArticles' => 'KBContents',
@@ -547,7 +547,7 @@ $GLOBALS['moduleTabMap'] = array(
     'Activities' => 'Home',
     'WorkFlowAlertShells' => 'WorkFlow',
     'UserSignatures' => 'Emails',
- );
+];
 $beanList['EAPM'] = 'EAPM';
 $beanFiles['EAPM'] = 'modules/EAPM/EAPM.php';
 $modules_exempt_from_availability_check['EAPM'] = 'EAPM';
@@ -608,25 +608,25 @@ $adminOnlyList['PubSub_ModuleEvent_PushSubs'] = ['all' => 1];
 //Object list is only here to correct for modules that break
 //the bean class name == dictionary entry/object name convention
 //No future module should need an entry here.
-$objectList = array();
-$objectList['Cases'] =  'Case';
-$objectList['Users'] =  'User';
+$objectList = [];
+$objectList['Cases'] = 'Case';
+$objectList['Users'] = 'User';
 $objectList['ActivityStream/Activities'] = 'Activities';
 $objectList['ActivityStream/Comments'] = 'Comments';
-$objectList['TrackerSessions'] =  'tracker_sessions';
-$objectList['TrackerPerfs'] =  'tracker_perf';
-$objectList['TrackerQueries'] =  'tracker_queries';
-$objectList['TeamNotices'] =  'TeamNotices';
-$objectList['OutboundEmail'] =  'OutboundEmail';
+$objectList['TrackerSessions'] = 'tracker_sessions';
+$objectList['TrackerPerfs'] = 'tracker_perf';
+$objectList['TrackerQueries'] = 'tracker_queries';
+$objectList['TeamNotices'] = 'TeamNotices';
+$objectList['OutboundEmail'] = 'OutboundEmail';
 $objectList['ReportSchedules'] = 'ReportSchedule';
 
-$beanList['PdfManager']     = 'PdfManager';
-$beanFiles['PdfManager']     = 'modules/PdfManager/PdfManager.php';
+$beanList['PdfManager'] = 'PdfManager';
+$beanFiles['PdfManager'] = 'modules/PdfManager/PdfManager.php';
 $modInvisList[] = 'PdfManager';
-$adminOnlyList['PdfManager'] = array('all' => 1);
+$adminOnlyList['PdfManager'] = ['all' => 1];
 
 // TODO: this definition should be grouped with all the others definitions like $beanList, $beanFiles and so on
-$bwcModules = array(
+$bwcModules = [
     'ACLFields',
     'ACLRoles',
     'ACLActions',
@@ -682,7 +682,6 @@ $bwcModules = array(
     'TrackerPerfs',
     'TrackerQueries',
     'UserPreferences',
-    'Users',
     'vCals',
     'vCards',
     'Versions',
@@ -691,8 +690,8 @@ $bwcModules = array(
     'WorkFlowActionShells',
     'WorkFlowAlerts',
     'WorkFlowAlertShells',
-    'WorkFlowTriggerShells'
-);
+    'WorkFlowTriggerShells',
+];
 
 $beanList['KBDocuments'] = 'KBDocument';
 $beanFiles['KBDocument'] = 'modules/KBDocuments/KBDocument.php';
@@ -714,15 +713,15 @@ $beanList['EmbeddedFiles'] = 'EmbeddedFile';
 $beanFiles['EmbeddedFile'] = 'modules/EmbeddedFiles/EmbeddedFile.php';
 $modInvisList[] = 'EmbeddedFiles';
 
-$beanList['VisualPipeline']  = 'VisualPipeline';
+$beanList['VisualPipeline'] = 'VisualPipeline';
 $beanFiles['VisualPipeline'] = 'modules/VisualPipeline/VisualPipeline.php';
 $modInvisList[] = 'VisualPipeline';
 
-$beanList['ConsoleConfiguration']  = 'ConsoleConfiguration';
+$beanList['ConsoleConfiguration'] = 'ConsoleConfiguration';
 $beanFiles['ConsoleConfiguration'] = 'modules/ConsoleConfiguration/ConsoleConfiguration.php';
 $modInvisList[] = 'ConsoleConfiguration';
 
-$beanList['SugarLive']  = 'SugarLive';
+$beanList['SugarLive'] = 'SugarLive';
 $beanFiles['SugarLive'] = 'modules/SugarLive/SugarLive.php';
 $modInvisList[] = 'SugarLive';
 
@@ -766,10 +765,8 @@ $beanList['DocumentMerges'] = 'DocumentMerge';
 $beanFiles['DocumentMerge'] = 'modules/DocumentMerges/DocumentMerge.php';
 $modInvisList[] = 'DocumentMerges';
 
-$moduleList[] = 'CloudDrivePaths';
 $beanList['CloudDrivePaths'] = 'CloudDrivePath';
 $beanFiles['CloudDrivePath'] = 'modules/CloudDrivePaths/CloudDrivePath.php';
-$modInvisList[] = 'CloudDrivePaths';
 
 $beanList['Geocode'] = 'Geocode';
 $beanFiles['Geocode'] = 'modules/Maps/Geocode/Geocode.php';
@@ -806,6 +803,6 @@ $moduleList[] = 'DRI_SubWorkflow_Templates';
 $beanList['DRI_SubWorkflow_Templates'] = 'DRI_SubWorkflow_Template';
 $beanFiles['DRI_SubWorkflow_Template'] = 'modules/DRI_SubWorkflow_Templates/DRI_SubWorkflow_Template.php';
 
-foreach(SugarAutoLoader::existing('include/modules_override.php', SugarAutoLoader::loadExtension("modules")) as $modExtFile) {
+foreach (SugarAutoLoader::existing('include/modules_override.php', SugarAutoLoader::loadExtension('modules')) as $modExtFile) {
     include $modExtFile;
 }

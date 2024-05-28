@@ -10,56 +10,56 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-* Description: This file handles the Data base functionality for the application.
-* It acts as the DB abstraction layer for the application. It depends on helper classes
-* which generate the necessary SQL. This sql is then passed to PEAR DB classes.
-* The helper class is chosen in DBManagerFactory, which is driven by 'db_type' in 'dbconfig' under config.php.
-*
-* All the functions in this class will work with any bean which implements the meta interface.
-* The passed bean is passed to helper class which uses these functions to generate correct sql.
-*
-* The meta interface has the following functions:
-* getTableName()	        	Returns table name of the object.
-* getFieldDefinitions()	    	Returns a collection of field definitions in order.
-* getFieldDefintion(name)		Return field definition for the field.
-* getFieldValue(name)	    	Returns the value of the field identified by name.
-*                           	If the field is not set, the function will return boolean FALSE.
-* getPrimaryFieldDefinition()	Returns the field definition for primary key
-*
-* The field definition is an array with the following keys:
-*
-* name 		This represents name of the field. This is a required field.
-* type 		This represents type of the field. This is a required field and valid values are:
-*      		int
-*      		long
-*      		varchar
-*      		text
-*      		date
-*      		datetime
-*      		double
-*      		float
-*      		uint
-*      		ulong
-*      		time
-*      		short
-*      		enum
-* length	This is used only when the type is varchar and denotes the length of the string.
-*  			The max value is 255.
-* enumvals  This is a list of valid values for an enum separated by "|".
-*			It is used only if the type is ?enum?;
-* required	This field dictates whether it is a required value.
-*			The default value is ?FALSE?.
-* isPrimary	This field identifies the primary key of the table.
-*			If none of the fields have this flag set to ?TRUE?,
-*			the first field definition is assume to be the primary key.
-*			Default value for this field is ?FALSE?.
-* default	This field sets the default value for the field definition.
-*
-*
-* Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
-* All Rights Reserved.
-* Contributor(s): ______________________________________..
-********************************************************************************/
+ * Description: This file handles the Data base functionality for the application.
+ * It acts as the DB abstraction layer for the application. It depends on helper classes
+ * which generate the necessary SQL. This sql is then passed to PEAR DB classes.
+ * The helper class is chosen in DBManagerFactory, which is driven by 'db_type' in 'dbconfig' under config.php.
+ *
+ * All the functions in this class will work with any bean which implements the meta interface.
+ * The passed bean is passed to helper class which uses these functions to generate correct sql.
+ *
+ * The meta interface has the following functions:
+ * getTableName()                Returns table name of the object.
+ * getFieldDefinitions()            Returns a collection of field definitions in order.
+ * getFieldDefintion(name)        Return field definition for the field.
+ * getFieldValue(name)            Returns the value of the field identified by name.
+ *                            If the field is not set, the function will return boolean FALSE.
+ * getPrimaryFieldDefinition()    Returns the field definition for primary key
+ *
+ * The field definition is an array with the following keys:
+ *
+ * name        This represents name of the field. This is a required field.
+ * type        This represents type of the field. This is a required field and valid values are:
+ *            int
+ *            long
+ *            varchar
+ *            text
+ *            date
+ *            datetime
+ *            double
+ *            float
+ *            uint
+ *            ulong
+ *            time
+ *            short
+ *            enum
+ * length    This is used only when the type is varchar and denotes the length of the string.
+ *            The max value is 255.
+ * enumvals  This is a list of valid values for an enum separated by "|".
+ *            It is used only if the type is ?enum?;
+ * required    This field dictates whether it is a required value.
+ *            The default value is ?FALSE?.
+ * isPrimary    This field identifies the primary key of the table.
+ *            If none of the fields have this flag set to ?TRUE?,
+ *            the first field definition is assume to be the primary key.
+ *            Default value for this field is ?FALSE?.
+ * default    This field sets the default value for the field definition.
+ *
+ *
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
 
 /**
  * SQL Server (mssql) manager
@@ -76,24 +76,24 @@ abstract class MssqlManager extends DBManager
     public $variant = 'mssql';
     public $label = 'LBL_MSSQL';
 
-    protected $capabilities = array(
-        "affected_rows" => true,
-        "select_rows" => true,
-        "fix:expandDatabase" => true, // Support expandDatabase fix
-        "create_user" => true,
-        "create_db" => true,
-        "recursive_query" => true,
-    );
+    protected $capabilities = [
+        'affected_rows' => true,
+        'select_rows' => true,
+        'fix:expandDatabase' => true, // Support expandDatabase fix
+        'create_user' => true,
+        'create_db' => true,
+        'recursive_query' => true,
+    ];
 
     /**
      * Maximum length of identifiers
      */
-    protected $maxNameLengths = array(
+    protected $maxNameLengths = [
         'table' => 128,
         'column' => 128,
         'index' => 128,
-        'alias' => 128
-    );
+        'alias' => 128,
+    ];
 
     protected $connectOptions = null;
     /**
@@ -101,31 +101,32 @@ abstract class MssqlManager extends DBManager
      */
     public $lastsql;
 
-	/**
+    /**
      * @see DBManager::version()
      */
     public function version()
     {
         if (!isset(static::$version)) {
-            static::$version = $this->getOne("SELECT @@VERSION as version");
+            static::$version = $this->getOne('SELECT @@VERSION as version');
         }
         return static::$version;
-	}
+    }
 
     /**
      * This function take in the sql for a union query, the start and offset,
      * and wraps it around an "mssql friendly" limit query
      *
-     * @param  string $sql
-     * @param  int    $start record to start at
-     * @param  int    $count number of records to retrieve
+     * @param string $sql
+     * @param int $start record to start at
+     * @param int $count number of records to retrieve
      * @return string SQL statement
      */
     private function handleUnionLimitQuery($sql, $start, $count)
     {
         //set the start to 0, no negs
-        if ($start < 0)
-            $start=0;
+        if ($start < 0) {
+            $start = 0;
+        }
 
         $this->logger->debug(print_r(func_get_args(), true));
 
@@ -135,20 +136,20 @@ abstract class MssqlManager extends DBManager
         $orderByArray = preg_split('/order by/i', $sql);
 
         //count the number of array elements
-        $unionOrderByCount = is_countable($orderByArray) ? count($orderByArray) : 0;
+        $unionOrderByCount = safeCount($orderByArray);
         $arr_count = 0;
 
         if ($unionOrderByCount > 1) {
             //we really want the last order by, so reconstruct string
             //adding a 1 to count, as we dont wish to process the last element
             $unionsql = '';
-            while ($unionOrderByCount>$arr_count+1) {
+            while ($unionOrderByCount > $arr_count + 1) {
                 $unionsql .= $orderByArray[$arr_count];
-                $arr_count = $arr_count+1;
+                $arr_count = $arr_count + 1;
                 //add an "order by" string back if we are coming into loop again
                 //remember they were taken out when array was created
-                if ($unionOrderByCount>$arr_count+1) {
-                    $unionsql .= "order by";
+                if ($unionOrderByCount > $arr_count + 1) {
+                    $unionsql .= 'order by';
                 }
             }
             //grab the last order by element, set both order by's'
@@ -157,15 +158,14 @@ abstract class MssqlManager extends DBManager
 
             //if last element contains a "select", then this is part of the union query,
             //and there is no order by to use
-            if (stripos($unionOrderBy, "select")) {
+            if (stripos($unionOrderBy, 'select')) {
                 $unionsql = $sql;
                 //with no guidance on what to use for required order by in rownumber function,
                 //resort to using name column.
                 $rowNumOrderBy = 'id';
-                $unionOrderBy = "";
+                $unionOrderBy = '';
             }
-        }
-        else {
+        } else {
             //there are no order by elements, so just pass back string
             $unionsql = $sql;
             //with no guidance on what to use for required order by in rownumber function,
@@ -184,17 +184,14 @@ abstract class MssqlManager extends DBManager
         //to create limit query when paging is needed. Otherwise,
         //it shows duplicates when paging on activities subpanel.
         //If not for paging, no need to use rownumber() function
-        if ($count == 1)
-        {
-            $limitUnionSQL = "SELECT TOP $count * FROM (" .$unionsql .") as top_count ".$unionOrderBy;
-        }
-        else
-        {
+        if ($count == 1) {
+            $limitUnionSQL = "SELECT TOP $count * FROM (" . $unionsql . ') as top_count ' . $unionOrderBy;
+        } else {
             $limitUnionSQL = "SELECT TOP $count * FROM( select ROW_NUMBER() OVER ( order by "
-            .$rowNumOrderBy.") AS row_number, * FROM ("
-            .$unionsql .") As numbered) "
-            . "As top_count_limit WHERE row_number > $start "
-            .$unionOrderBy;
+                . $rowNumOrderBy . ') AS row_number, * FROM ('
+                . $unionsql . ') As numbered) '
+                . "As top_count_limit WHERE row_number > $start "
+                . $unionOrderBy;
         }
 
         return $limitUnionSQL;
@@ -232,8 +229,8 @@ abstract class MssqlManager extends DBManager
         return false;
     }
 
-	/**
-	 * FIXME: verify and thoroughly test this code, these regexps look fishy
+    /**
+     * FIXME: verify and thoroughly test this code, these regexps look fishy
      * @see DBManager::limitQuery()
      */
     public function limitQuery($sql, $start, $count, $dieOnError = false, $msg = '', $execute = true)
@@ -245,66 +242,66 @@ abstract class MssqlManager extends DBManager
         $sql = preg_replace('/\/\*(\*(?!\/)|[^*])*\*\//', ' ', $sql);
 
         $newSQL = $sql;
-        $distinctSQLARRAY = array();
-        if ($this->isUnionQuery($sql))
-            $newSQL = $this->handleUnionLimitQuery($sql,$start,$count);
-        else {
-            if ($start < 0)
+        $distinctSQLARRAY = [];
+        if ($this->isUnionQuery($sql)) {
+            $newSQL = $this->handleUnionLimitQuery($sql, $start, $count);
+        } else {
+            if ($start < 0) {
                 $start = 0;
+            }
             $this->logger->debug(print_r(func_get_args(), true));
             $this->lastsql = $sql;
-            $matches = array();
+            $matches = [];
             preg_match('/^(.*?SELECT\s+?)(.*?FROM.*WHERE)(.*?)$/si', $sql, $matches);
             if (!empty($matches[3])) {
                 if ($start == 0) {
                     $match_two = strtolower($matches[2]);
-                    if (!strpos($match_two, "distinct")> 0 && strpos($match_two, "distinct") !==0) {
-                        $orderByMatch = array();
-                        preg_match('/^(.*)(ORDER BY)(.*)$/is',$matches[3], $orderByMatch);
+                    if (!strpos($match_two, 'distinct') > 0 && strpos($match_two, 'distinct') !== 0) {
+                        $orderByMatch = [];
+                        preg_match('/^(.*)(ORDER BY)(.*)$/is', $matches[3], $orderByMatch);
                         if (!empty($orderByMatch[3])) {
-                            $selectPart = array();
+                            $selectPart = [];
                             preg_match('/^(.*)(\bFROM\s+.*)$/isU', $matches[2], $selectPart);
                             $newSQL = "SELECT TOP $count * FROM
                                 (
-                                    " . $matches[1] . $selectPart[1] . ", ROW_NUMBER()
-                                    OVER (ORDER BY " . $this->returnOrderBy($sql, $orderByMatch[3]) . ") AS row_number
-                                    " . $selectPart[2] . $orderByMatch[1]. "
+                                    " . $matches[1] . $selectPart[1] . ', ROW_NUMBER()
+                                    OVER (ORDER BY ' . $this->returnOrderBy($sql, $orderByMatch[3]) . ') AS row_number
+                                    ' . $selectPart[2] . $orderByMatch[1] . "
                                 ) AS a
                                 WHERE row_number > $start";
-                        }
-                        else {
+                        } else {
                             $newSQL = $matches[1] . " TOP $count " . $matches[2] . $matches[3];
                         }
-                    }
-                    else {
-                        $distinct_o = strpos($match_two, "distinct");
+                    } else {
+                        $distinct_o = strpos($match_two, 'distinct');
                         $up_to_distinct_str = substr($match_two, 0, $distinct_o);
                         //check to see if the distinct is within a function, if so, then proceed as normal
-                        if (strpos($up_to_distinct_str,"(")) {
+                        if (strpos($up_to_distinct_str, '(')) {
                             //proceed as normal
                             $newSQL = $matches[1] . " TOP $count " . $matches[2] . $matches[3];
-                        }
-                        else {
+                        } else {
                             //if distinct is not within a function, then parse
                             //string contains distinct clause, "TOP needs to come after Distinct"
                             //get position of distinct
                             $match_zero = strtolower($matches[0]);
-                            $distinct_pos = strpos($match_zero , "distinct");
+                            $distinct_pos = strpos($match_zero, 'distinct');
                             //get position of where
-                            $where_pos = strpos($match_zero, "where");
+                            $where_pos = strpos($match_zero, 'where');
                             //parse through string
-                            $beg = substr($matches[0], 0, $distinct_pos+9 );
-                            $mid = substr($matches[0], strlen($beg), ($where_pos+5) - (strlen($beg)));
-                            $end = substr($matches[0], strlen($beg) + strlen($mid) );
+                            $beg = substr($matches[0], 0, $distinct_pos + 9);
+                            $mid = substr($matches[0], strlen($beg), ($where_pos + 5) - (strlen($beg)));
+                            $end = substr($matches[0], strlen($beg) + strlen($mid));
                             //repopulate matches array
-                            $matches[1] = $beg; $matches[2] = $mid; $matches[3] = $end;
+                            $matches[1] = $beg;
+                            $matches[2] = $mid;
+                            $matches[3] = $end;
 
                             $newSQL = $matches[1] . " TOP $count " . $matches[2] . $matches[3];
                         }
                     }
                 } else {
-                    $orderByMatch = array();
-                    preg_match('/^(.*)(ORDER BY)(.*)$/is',$matches[3], $orderByMatch);
+                    $orderByMatch = [];
+                    preg_match('/^(.*)(ORDER BY)(.*)$/is', $matches[3], $orderByMatch);
 
                     //if there is a distinct clause, parse sql string as we will have to insert the rownumber
                     //for paging, AFTER the distinct clause
@@ -326,23 +323,23 @@ abstract class MssqlManager extends DBManager
                         //take out the select and distinct from string so we can reuse in group by
                         $dist_str = ' distinct ';
                         $distinct_pos = strpos($matches_sql, $dist_str);
-                        $matches_sql = substr($matches_sql,$distinct_pos+ strlen($dist_str));
+                        $matches_sql = substr($matches_sql, $distinct_pos + strlen($dist_str));
                         //get the position of where and from for further processing
-                        $from_pos = strpos($matches_sql , " from ");
-                        $where_pos = strpos($matches_sql, "where");
+                        $from_pos = strpos($matches_sql, ' from ');
+                        $where_pos = strpos($matches_sql, 'where');
                         //split the sql into a string before and after the from clause
                         //we will use the columns being selected to construct the group by clause
-                        if ($from_pos>0 ) {
-                            $distinctSQLARRAY[0] = substr($matches_sql,0, $from_pos+1);
-                            $distinctSQLARRAY[1] = substr($matches_sql,$from_pos+1);
+                        if ($from_pos > 0) {
+                            $distinctSQLARRAY[0] = substr($matches_sql, 0, $from_pos + 1);
+                            $distinctSQLARRAY[1] = substr($matches_sql, $from_pos + 1);
                             //get position of order by (if it exists) so we can strip it from the string
-                            $ob_pos = strpos($distinctSQLARRAY[1], "order by");
+                            $ob_pos = strpos($distinctSQLARRAY[1], 'order by');
                             if ($ob_pos) {
-                                $distinctSQLARRAY[1] = substr($distinctSQLARRAY[1],0,$ob_pos);
+                                $distinctSQLARRAY[1] = substr($distinctSQLARRAY[1], 0, $ob_pos);
                             }
 
                             // strip off last closing parentheses from the where clause
-                            $distinctSQLARRAY[1] = preg_replace('/\)\s$/',' ',$distinctSQLARRAY[1]);
+                            $distinctSQLARRAY[1] = preg_replace('/\)\s$/', ' ', $distinctSQLARRAY[1]);
                         }
 
                         //place group by string into array
@@ -354,16 +351,16 @@ abstract class MssqlManager extends DBManager
 
                             //clean out the extra stuff added if we are concatenating first_name and last_name together
                             //this way both fields are added in correctly to the group by
-                            $gb = str_replace("isnull(","",$gb);
-                            $gb = str_replace("'') + ' ' + ","",$gb);
+                            $gb = str_replace('isnull(', '', $gb);
+                            $gb = str_replace("'') + ' ' + ", '', $gb);
 
                             //remove outer reference if they exist
-                            if (strpos($gb,"'")!==false){
+                            if (strpos($gb, "'") !== false) {
                                 continue;
                             }
                             //if there is a space, then an alias exists, remove alias
-                            if (strpos($gb,' ')){
-                                $gb = substr( $gb, 0,strpos($gb,' '));
+                            if (strpos($gb, ' ')) {
+                                $gb = substr($gb, 0, strpos($gb, ' '));
                             }
 
                             //if resulting string is not empty then add to new group by string
@@ -384,31 +381,30 @@ abstract class MssqlManager extends DBManager
                             $newSQL = "SELECT TOP $count * FROM
                                         (
                                             SELECT ROW_NUMBER()
-                                                OVER (ORDER BY ".$this->returnOrderBy($sql, $orderByMatch[3]).") AS row_number,
-                                                count(*) counter, " . $distinctSQLARRAY[0] . "
-                                                " . $distinctSQLARRAY[1] . "
-                                                group by " . $grpByStr . "
+                                                OVER (ORDER BY " . $this->returnOrderBy($sql, $orderByMatch[3]) . ') AS row_number,
+                                                count(*) counter, ' . $distinctSQLARRAY[0] . '
+                                                ' . $distinctSQLARRAY[1] . '
+                                                group by ' . $grpByStr . "
                                         ) AS a
                                         WHERE row_number > $start";
-                        }
-                        else {
-                        $newSQL = "SELECT TOP $count * FROM
+                        } else {
+                            $newSQL = "SELECT TOP $count * FROM
                                     (
-                                        " . $matches[1] . " ROW_NUMBER()
-                                        OVER (ORDER BY " . $this->returnOrderBy($sql, $orderByMatch[3]) . ") AS row_number,
-                                        " . $matches[2] . $orderByMatch[1]. "
+                                        " . $matches[1] . ' ROW_NUMBER()
+                                        OVER (ORDER BY ' . $this->returnOrderBy($sql, $orderByMatch[3]) . ') AS row_number,
+                                        ' . $matches[2] . $orderByMatch[1] . "
                                     ) AS a
                                     WHERE row_number > $start";
                         }
-                    }else{
+                    } else {
                         //bug: 22231 Records in campaigns' subpanel may not come from
                         //table of $_REQUEST['module']. Get it directly from query
                         $upperQuery = strtoupper($matches[2]);
-                        if (!strpos($upperQuery,"JOIN")){
-                            $from_pos = strpos($upperQuery , "FROM") + 4;
-                            $where_pos = strpos($upperQuery, "WHERE");
-                            $tablename = trim(substr($upperQuery,$from_pos, $where_pos - $from_pos));
-                        }else{
+                        if (!strpos($upperQuery, 'JOIN')) {
+                            $from_pos = strpos($upperQuery, 'FROM') + 4;
+                            $where_pos = strpos($upperQuery, 'WHERE');
+                            $tablename = trim(substr($upperQuery, $from_pos, $where_pos - $from_pos));
+                        } else {
                             // FIXME: this looks really bad. Probably source for tons of bug
                             // needs to be removed
                             $moduleName = $this->request->getValidInputRequest('module', 'Assert\Mvc\ModuleName');
@@ -417,19 +413,18 @@ abstract class MssqlManager extends DBManager
                         }
                         //if there is a distinct clause, form query with rownumber after distinct
                         if ($hasDistinct) {
-                             $newSQL = "SELECT TOP $count * FROM
+                            $newSQL = "SELECT TOP $count * FROM
                                             (
-                            SELECT ROW_NUMBER() OVER (ORDER BY ".$tablename.".id) AS row_number, count(*) counter, " . $distinctSQLARRAY[0] . "
-                                                        " . $distinctSQLARRAY[1] . "
-                                                    group by " . $grpByStr . "
+                            SELECT ROW_NUMBER() OVER (ORDER BY " . $tablename . '.id) AS row_number, count(*) counter, ' . $distinctSQLARRAY[0] . '
+                                                        ' . $distinctSQLARRAY[1] . '
+                                                    group by ' . $grpByStr . "
                                             )
                                             AS a
                                             WHERE row_number > $start";
-                        }
-                        else {
-                             $newSQL = "SELECT TOP $count * FROM
+                        } else {
+                            $newSQL = "SELECT TOP $count * FROM
                                            (
-                                  " . $matches[1] . " ROW_NUMBER() OVER (ORDER BY ".$tablename.".id) AS row_number, " . $matches[2] . $matches[3]. "
+                                  " . $matches[1] . ' ROW_NUMBER() OVER (ORDER BY ' . $tablename . '.id) AS row_number, ' . $matches[2] . $matches[3] . "
                                            )
                                            AS a
                                            WHERE row_number > $start";
@@ -440,8 +435,8 @@ abstract class MssqlManager extends DBManager
         }
 
         $this->logger->debug('Limit Query: ' . $newSQL);
-        if($execute) {
-            $result =  $this->query($newSQL, $dieOnError, $msg);
+        if ($execute) {
+            $result = $this->query($newSQL, $dieOnError, $msg);
             $this->dump_slow_queries($newSQL);
             return $result;
         } else {
@@ -455,49 +450,48 @@ abstract class MssqlManager extends DBManager
      * an array and replaces contents in original string.  This is used to account for use of
      * nested functions while aliasing column names
      *
-     * @param  string $p_sql     SQL statement
-     * @param  string $strip_beg Beginning character
-     * @param  string $strip_end Ending character
-     * @param  string $patt      Optional, pattern to
+     * @param string $p_sql SQL statement
+     * @param string $strip_beg Beginning character
+     * @param string $strip_end Ending character
+     * @param string $patt Optional, pattern to
      */
     private function removePatternFromSQL($p_sql, $strip_beg, $strip_end, $patt = 'patt')
     {
         //strip all single quotes out
-        $count = substr_count ( $p_sql, $strip_beg);
+        $count = substr_count($p_sql, $strip_beg);
         $increment = 1;
-        if ($strip_beg != $strip_end)
+        if ($strip_beg != $strip_end) {
             $increment = 2;
+        }
 
-        $i=0;
+        $i = 0;
         $offset = 0;
-        $strip_array = array();
-        while ($i<$count && $offset<strlen($p_sql)) {
-            if ($offset > strlen($p_sql))
-            {
-				break;
+        $strip_array = [];
+        while ($i < $count && $offset < strlen($p_sql)) {
+            if ($offset > strlen($p_sql)) {
+                break;
             }
 
             $beg_sin = strpos($p_sql, $strip_beg, $offset);
-            if (!$beg_sin)
-            {
+            if (!$beg_sin) {
                 break;
             }
-            $sec_sin = strpos($p_sql, $strip_end, $beg_sin+1);
-            $strip_array[$patt.$i] = substr($p_sql, $beg_sin, $sec_sin - $beg_sin +1);
+            $sec_sin = strpos($p_sql, $strip_end, $beg_sin + 1);
+            $strip_array[$patt . $i] = substr($p_sql, $beg_sin, $sec_sin - $beg_sin + 1);
             if ($increment > 1) {
                 //we are in here because beginning and end patterns are not identical, so search for nesting
-                $exists = strpos($strip_array[$patt.$i], $strip_beg );
-                if ($exists>=0) {
-                    $nested_pos = (strrpos($strip_array[$patt.$i], $strip_beg ));
-                    $strip_array[$patt.$i] = substr($p_sql,$nested_pos+$beg_sin,$sec_sin - ($nested_pos+$beg_sin)+1);
-                    $p_sql = substr($p_sql, 0, $nested_pos+$beg_sin) . " ##". $patt.$i."## " . substr($p_sql, $sec_sin+1);
+                $exists = strpos($strip_array[$patt . $i], $strip_beg);
+                if ($exists >= 0) {
+                    $nested_pos = (strrpos($strip_array[$patt . $i], $strip_beg));
+                    $strip_array[$patt . $i] = substr($p_sql, $nested_pos + $beg_sin, $sec_sin - ($nested_pos + $beg_sin) + 1);
+                    $p_sql = substr($p_sql, 0, $nested_pos + $beg_sin) . ' ##' . $patt . $i . '## ' . substr($p_sql, $sec_sin + 1);
                     $i = $i + 1;
                     continue;
                 }
             }
-            $p_sql = substr($p_sql, 0, $beg_sin) . " ##". $patt.$i."## " . substr($p_sql, $sec_sin+1);
+            $p_sql = substr($p_sql, 0, $beg_sin) . ' ##' . $patt . $i . '## ' . substr($p_sql, $sec_sin + 1);
             //move the marker up
-            $offset = $sec_sin+1;
+            $offset = $sec_sin + 1;
 
             $i = $i + 1;
         }
@@ -509,17 +503,17 @@ abstract class MssqlManager extends DBManager
     /**
      * adds a pattern
      *
-     * @param  string $token
-     * @param  array  $pattern_array
+     * @param string $token
+     * @param array $pattern_array
      * @return string
      */
-	private function addPatternToSQL($token, array $pattern_array)
+    private function addPatternToSQL($token, array $pattern_array)
     {
         //strip all single quotes out
         $pattern_array = array_reverse($pattern_array);
 
         foreach ($pattern_array as $key => $replace) {
-            $token = str_replace( "##".$key."##", $replace,$token);
+            $token = str_replace('##' . $key . '##', $replace, $token);
         }
 
         return $token;
@@ -528,27 +522,27 @@ abstract class MssqlManager extends DBManager
     /**
      * gets an alias from the sql statement
      *
-     * @param  string $sql
-     * @param  string $alias
+     * @param string $sql
+     * @param string $alias
      * @return string
      */
-	private function getAliasFromSQL($sql, $alias)
+    private function getAliasFromSQL($sql, $alias)
     {
-        $matches = array();
+        $matches = [];
         preg_match('/SELECT(.*?)FROM/isU', $sql, $matches);
         //parse all single and double  quotes out of array
-        $sin_array = $this->removePatternFromSQL($matches[1], "'", "'", "sin_");
+        $sin_array = $this->removePatternFromSQL($matches[1], "'", "'", 'sin_');
         $new_sql = array_pop($sin_array);
-        $dub_array = $this->removePatternFromSQL($new_sql, "\"", "\"","dub_");
+        $dub_array = $this->removePatternFromSQL($new_sql, '"', '"', 'dub_');
         $new_sql = array_pop($dub_array);
 
         //search for parenthesis
-        $paren_array = $this->removePatternFromSQL($new_sql, "(", ")", "par_");
+        $paren_array = $this->removePatternFromSQL($new_sql, '(', ')', 'par_');
         $new_sql = array_pop($paren_array);
 
         //all functions should be removed now, so split the array on commas
-        $mstr_sql_array = explode(",", $new_sql);
-        foreach($mstr_sql_array as $token ) {
+        $mstr_sql_array = explode(',', $new_sql);
+        foreach ($mstr_sql_array as $token) {
             if (strpos($token, $alias)) {
                 //found token, add back comments
                 $token = $this->addPatternToSQL($token, $paren_array);
@@ -566,18 +560,18 @@ abstract class MssqlManager extends DBManager
     /**
      * Finds the alias of the order by column, and then return the preceding column name
      *
-     * @param  string $sql
-     * @param  string $orderMatch
+     * @param string $sql
+     * @param string $orderMatch
      * @return string
      */
     private function findColumnByAlias($sql, $orderMatch)
     {
         //change case to lowercase
         $sql = strtolower($sql);
-        $patt = '/\s+'.trim($orderMatch).'\s*(,|from)/';
+        $patt = '/\s+' . trim($orderMatch) . '\s*(,|from)/';
 
         //check for the alias, it should contain comma, may contain space, \n, or \t
-        $matches = array();
+        $matches = [];
         preg_match($patt, $sql, $matches, PREG_OFFSET_CAPTURE);
         $found_in_sql = $matches[0][1] ?? false;
 
@@ -586,7 +580,7 @@ abstract class MssqlManager extends DBManager
         $found = $found_in_sql;
 
         //if still no match found, then we need to parse through the string
-        if (!$found_in_sql){
+        if (!$found_in_sql) {
             //get count of how many times the match exists in string
             $found_count = substr_count($sql, $orderMatch);
             $i = 0;
@@ -595,21 +589,21 @@ abstract class MssqlManager extends DBManager
             //loop through string as many times as there is a match
             while ($found_count > $i) {
                 //get the first match
-                $found_in_sql = strpos($sql, $orderMatch,$first_);
+                $found_in_sql = strpos($sql, $orderMatch, $first_);
                 //make sure there was a match
-                if($found_in_sql){
+                if ($found_in_sql) {
                     //grab the next 2 individual characters
-                    $str_plusone = substr($sql,$found_in_sql + $len,1);
-                    $str_plustwo = substr($sql,$found_in_sql + $len+1,1);
+                    $str_plusone = substr($sql, $found_in_sql + $len, 1);
+                    $str_plustwo = substr($sql, $found_in_sql + $len + 1, 1);
                     //if one of those characters is a comma, then we have our alias
-                    if ($str_plusone === "," || $str_plustwo === ","){
+                    if ($str_plusone === ',' || $str_plustwo === ',') {
                         //keep track of this position
                         $found = $found_in_sql;
                     }
                 }
                 //set the offset and increase the iteration counter
-                $first_ = $found_in_sql+$len;
-                $i = $i+1;
+                $first_ = $found_in_sql + $len;
+                $i = $i + 1;
             }
         }
         //return $found, defaults have been set, so if no match was found it will be a negative number
@@ -620,8 +614,8 @@ abstract class MssqlManager extends DBManager
     /**
      * Return the order by string to use in case the column has been aliased
      *
-     * @param  string $sql
-     * @param  string $orig_order_match
+     * @param string $sql
+     * @param string $orig_order_match
      * @return string
      */
     private function returnOrderBy($sql, $orig_order_match)
@@ -636,20 +630,21 @@ abstract class MssqlManager extends DBManager
             return implode(',', $parts);
         }
 
-        if (strpos($orig_order_match, ".") != 0)
+        if (strpos($orig_order_match, '.') != 0) {
             //this has a tablename defined, pass in the order match
             return $orig_order_match;
+        }
 
         // If there is no ordering direction (ASC/DESC), use ASC by default
-        if (strpos($orig_order_match, " ") === false) {
-        	$orig_order_match .= " ASC";
+        if (strpos($orig_order_match, ' ') === false) {
+            $orig_order_match .= ' ASC';
         }
 
         //grab first space in order by
-        $firstSpace = strpos($orig_order_match, " ");
+        $firstSpace = strpos($orig_order_match, ' ');
 
         //split order by into column name and ascending/descending
-        $orderMatch = " " . strtolower(substr($orig_order_match, 0, $firstSpace));
+        $orderMatch = ' ' . strtolower(substr($orig_order_match, 0, $firstSpace));
         $asc_desc = substr($orig_order_match, $firstSpace + 1);
 
         //look for column name as an alias in sql string
@@ -657,22 +652,22 @@ abstract class MssqlManager extends DBManager
 
         if (!$found_in_sql) {
             //check if this column needs the tablename prefixed to it
-            $orderMatch = ".".trim($orderMatch);
+            $orderMatch = '.' . trim($orderMatch);
             $colMatchPos = strpos($sql, $orderMatch);
             if ($colMatchPos !== false) {
                 //grab sub string up to column name
-                $containsColStr = substr($sql,0, $colMatchPos);
+                $containsColStr = substr($sql, 0, $colMatchPos);
                 //get position of first space, so we can grab table name
-                $lastSpacePos = strrpos($containsColStr, " ");
+                $lastSpacePos = strrpos($containsColStr, ' ');
                 //use positions of column name, space before name, and length of column to find the correct column name
-                $col_name = substr($sql, $lastSpacePos, $colMatchPos-$lastSpacePos+strlen($orderMatch));
-				//bug 25485. When sorting by a custom field in Account List and then pressing NEXT >, system gives an error
-				$containsCommaPos = strpos($col_name, ",");
-				if($containsCommaPos !== false) {
-					$col_name = substr($col_name, $containsCommaPos+1);
-				}
+                $col_name = substr($sql, $lastSpacePos, $colMatchPos - $lastSpacePos + strlen($orderMatch));
+                //bug 25485. When sorting by a custom field in Account List and then pressing NEXT >, system gives an error
+                $containsCommaPos = strpos($col_name, ',');
+                if ($containsCommaPos !== false) {
+                    $col_name = substr($col_name, $containsCommaPos + 1);
+                }
                 //add the "asc/desc" order back
-                $col_name = $col_name. " ". $asc_desc;
+                $col_name = $col_name . ' ' . $asc_desc;
 
                 //return column name
                 return $col_name;
@@ -680,20 +675,20 @@ abstract class MssqlManager extends DBManager
             //break out of here, log this
             $this->logger->debug("No match was found for order by, pass string back untouched as: $orig_order_match");
             return $orig_order_match;
-        }
-        else {
+        } else {
             //if found, then parse and return
             //grab string up to the aliased column
-            $this->logger->debug("order by found, process sql string");
+            $this->logger->debug('order by found, process sql string');
 
-            $psql = (trim($this->getAliasFromSQL($sql, $orderMatch )));
-            if (empty($psql))
+            $psql = (trim($this->getAliasFromSQL($sql, $orderMatch)));
+            if (empty($psql)) {
                 $psql = trim(substr($sql, 0, $found_in_sql));
+            }
 
             //grab the last comma before the alias
-            $comma_pos = strrpos($psql, " ");
+            $comma_pos = strrpos($psql, ' ');
             //substring between the comma and the alias to find the joined_table alias and column name
-            $col_name = substr($psql,0, $comma_pos);
+            $col_name = substr($psql, 0, $comma_pos);
 
             //make sure the string does not have an end parenthesis
             //and is not part of a function (i.e. "ISNULL(leads.last_name,'') as name"  )
@@ -703,18 +698,18 @@ abstract class MssqlManager extends DBManager
             // e.g. cast(contacts_cstm.account_type_c as varchar(8000))
 
             $alias_beg_pos = 0;
-            if (strpos($psql, " as ") && substr($col_name, 0, 4) !== "cast") {
-                $alias_beg_pos = strpos($psql, " as ");
+            if (strpos($psql, ' as ') && substr($col_name, 0, 4) !== 'cast') {
+                $alias_beg_pos = strpos($psql, ' as ');
             }
 
             if ($alias_beg_pos > 0) {
-                $col_name = substr($psql,0, $alias_beg_pos );
+                $col_name = substr($psql, 0, $alias_beg_pos);
             }
             //add the "asc/desc" order back
-            $col_name = $col_name. " ". $asc_desc;
+            $col_name = $col_name . ' ' . $asc_desc;
 
             //pass in new order by
-            $this->logger->debug("order by being returned is " . $col_name);
+            $this->logger->debug('order by being returned is ' . $col_name);
             return $col_name;
         }
     }
@@ -722,55 +717,55 @@ abstract class MssqlManager extends DBManager
     /**
      * Take in a string of the module and retrieve the correspondent table name
      *
-     * @param  string $module_str module name
-     * @param  string $sql        SQL statement
+     * @param string $module_str module name
+     * @param string $sql SQL statement
      * @return string table name
      */
     private function getTableNameFromModuleName($module_str, $sql)
     {
-        $this->logger->debug("Module being processed is " . $module_str);
+        $this->logger->debug('Module being processed is ' . $module_str);
         //get the right module files
         //the module string exists in bean list, then process bean for correct table name
         //note that we exempt the reports module from this, as queries from reporting module should be parsed for
         //correct table name.
         $module_bean = BeanFactory::newBean($module_str);
-        if (($module_str != 'Reports' && $module_str != 'SavedReport') && !empty($module_bean)){
+        if (($module_str != 'Reports' && $module_str != 'SavedReport') && !empty($module_bean)) {
             //get table name from bean
             $tbl_name = $module_bean->table_name;
             //make sure table name is not just a blank space, or empty
             $tbl_name = trim($tbl_name);
 
-            if(empty($tbl_name)){
+            if (empty($tbl_name)) {
                 $this->logger->debug("Could not find table name for module $module_str. ");
                 $tbl_name = $module_str;
             }
-        }
-        else {
+        } else {
             //since the module does NOT exist in beanlist, then we have to parse the string
             //and grab the table name from the passed in sql
-            $this->logger->debug("Could not find table name from module in request, retrieve from passed in sql");
+            $this->logger->debug('Could not find table name from module in request, retrieve from passed in sql');
             $tbl_name = $module_str;
             $sql = strtolower($sql);
 
             // Bug #45625 : Getting Multi-part identifier (reports.id) could not be bound error when navigating to next page in reprots in mssql
             // there is cases when sql string is multiline string and it we cannot find " from " string in it
-            $sql = str_replace(array("\n", "\r"), " ", $sql);
+            $sql = str_replace(["\n", "\r"], ' ', $sql);
 
             //look for the location of the "from" in sql string
-            $fromLoc = strpos($sql," from " );
-            if ($fromLoc>0){
+            $fromLoc = strpos($sql, ' from ');
+            if ($fromLoc > 0) {
                 //found from, substring from the " FROM " string in sql to end
-                $tableEnd = substr($sql, $fromLoc+6);
+                $tableEnd = substr($sql, $fromLoc + 6);
                 //We know that tablename will be next parameter after from, so
                 //grab the next space after table name.
                 // MFH BUG #14009: Also check to see if there are any carriage returns before the next space so that we don't grab any arbitrary joins or other tables.
-                $carriage_ret = strpos($tableEnd,"\n");
-                $next_space = strpos($tableEnd," " );
-                if ($carriage_ret < $next_space)
+                $carriage_ret = strpos($tableEnd, "\n");
+                $next_space = strpos($tableEnd, ' ');
+                if ($carriage_ret < $next_space) {
                     $next_space = $carriage_ret;
+                }
                 if ($next_space > 0) {
-                    $tbl_name= substr($tableEnd,0, $next_space);
-                    if(empty($tbl_name)){
+                    $tbl_name = substr($tableEnd, 0, $next_space);
+                    if (empty($tbl_name)) {
                         $this->logger->debug("Could not find table name sql either, return $module_str. ");
                         $tbl_name = $module_str;
                     }
@@ -778,30 +773,29 @@ abstract class MssqlManager extends DBManager
 
                 //grab the table, to see if it is aliased
                 $aliasTableEnd = trim(substr($tableEnd, $next_space));
-                $alias_space = strpos ($aliasTableEnd, " " );
-                if ($alias_space > 0){
-                    $alias_tbl_name= substr($aliasTableEnd,0, $alias_space);
+                $alias_space = strpos($aliasTableEnd, ' ');
+                if ($alias_space > 0) {
+                    $alias_tbl_name = substr($aliasTableEnd, 0, $alias_space);
                     strtolower($alias_tbl_name);
-                    if(empty($alias_tbl_name)
-                        || $alias_tbl_name == "where"
-                        || $alias_tbl_name == "inner"
-                        || $alias_tbl_name == "left"
-                        || $alias_tbl_name == "join"
-                        || $alias_tbl_name == "outer"
-                        || $alias_tbl_name == "right") {
+                    if (empty($alias_tbl_name)
+                        || $alias_tbl_name == 'where'
+                        || $alias_tbl_name == 'inner'
+                        || $alias_tbl_name == 'left'
+                        || $alias_tbl_name == 'join'
+                        || $alias_tbl_name == 'outer'
+                        || $alias_tbl_name == 'right') {
                         //not aliased, do nothing
-                    }
-                    elseif ($alias_tbl_name == "as") {
-                            //the next word is the table name
-                            $aliasTableEnd = trim(substr($aliasTableEnd, $alias_space));
-                            $alias_space = strpos ($aliasTableEnd, " " );
-                            if ($alias_space > 0) {
-                                $alias_tbl_name= trim(substr($aliasTableEnd,0, $alias_space));
-                                if (!empty($alias_tbl_name))
-                                    $tbl_name = $alias_tbl_name;
+                    } elseif ($alias_tbl_name == 'as') {
+                        //the next word is the table name
+                        $aliasTableEnd = trim(substr($aliasTableEnd, $alias_space));
+                        $alias_space = strpos($aliasTableEnd, ' ');
+                        if ($alias_space > 0) {
+                            $alias_tbl_name = trim(substr($aliasTableEnd, 0, $alias_space));
+                            if (!empty($alias_tbl_name)) {
+                                $tbl_name = $alias_tbl_name;
                             }
-                    }
-                    else {
+                        }
+                    } else {
                         //this is table alias
                         $tbl_name = $alias_tbl_name;
                     }
@@ -809,21 +803,21 @@ abstract class MssqlManager extends DBManager
             }
         }
         //return table name
-        $this->logger->debug("Table name for module $module_str is: ".$tbl_name);
+        $this->logger->debug("Table name for module $module_str is: " . $tbl_name);
         return $tbl_name;
     }
 
     /**
+     * @param resource $result query result resource
+     * @return int
      * @see DBManager::getAffectedRowCount()
      *
      * Returns the number of rows affected by the last query
-	 * See also affected_rows capability, will return 0 unless the DB supports it
-     * @param resource $result query result resource
-     * @return int
+     * See also affected_rows capability, will return 0 unless the DB supports it
      */
     public function getAffectedRowCount($result)
     {
-        return $this->getOne("SELECT @@ROWCOUNT");
+        return $this->getOne('SELECT @@ROWCOUNT');
     }
 
     /**
@@ -831,10 +825,10 @@ abstract class MssqlManager extends DBManager
      */
     public function quote($string)
     {
-        if(is_array($string)) {
+        if (is_array($string)) {
             return $this->arrayQuote($string);
         }
-        return str_replace("'","''", $this->quoteInternal($string));
+        return str_replace("'", "''", $this->quoteInternal($string));
     }
 
     /**
@@ -851,10 +845,10 @@ WHERE TABLE_NAME = ?
     AND TABLE_TYPE = ?';
 
             $result = $this->getConnection()
-                ->executeQuery($query, array(
+                ->executeQuery($query, [
                     $tableName,
                     'BASE TABLE',
-                ))->fetchOne();
+                ])->fetchOne();
 
             return !empty($result);
         }
@@ -869,12 +863,12 @@ WHERE TABLE_NAME = ?
     public function tablesLike($like)
     {
         if ($this->getDatabase()) {
-            $tables = array();
-            $r = $this->query('SELECT TABLE_NAME tn FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE=\'BASE TABLE\' AND TABLE_NAME LIKE '.$this->quoted($like));
+            $tables = [];
+            $r = $this->query('SELECT TABLE_NAME tn FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE=\'BASE TABLE\' AND TABLE_NAME LIKE ' . $this->quoted($like));
             if (!empty($r)) {
                 while ($a = $this->fetchByAssoc($r)) {
                     $row = array_values($a);
-					$tables[]=$row[0];
+                    $tables[] = $row[0];
                 }
                 return $tables;
             }
@@ -889,12 +883,13 @@ WHERE TABLE_NAME = ?
     {
         $this->logger->debug('MSSQL fetching table list');
 
-        if($this->getDatabase()) {
-            $tables = array();
+        if ($this->getDatabase()) {
+            $tables = [];
             $r = $this->query('SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES');
             if (is_resource($r)) {
-                while ($a = $this->fetchByAssoc($r))
+                while ($a = $this->fetchByAssoc($r)) {
                     $tables[] = $a['TABLE_NAME'];
+                }
 
                 return $tables;
             }
@@ -903,32 +898,32 @@ WHERE TABLE_NAME = ?
         return false; // no database available
     }
 
-    protected $date_formats = array(
+    protected $date_formats = [
         '%Y-%m-%d' => 10,
         '%Y-%m' => 7,
         '%Y' => 4,
         '%x' => [
             'format' => 'isoyear',
         ],
-        '%v' => array(
+        '%v' => [
             'format' => 'isoww',
             'function' => 'datepart',
-        ),
-    );
+        ],
+    ];
 
     /**
      * @see DBManager::convert()
      */
-    public function convert($string, $type, array $additional_parameters = array())
+    public function convert($string, $type, array $additional_parameters = [])
     {
         // convert the parameters array into a comma delimited string
         if (!empty($additional_parameters)) {
-            $additional_parameters_string = ','.implode(',',$additional_parameters);
+            $additional_parameters_string = ',' . implode(',', $additional_parameters);
         } else {
             $additional_parameters_string = '';
         }
         $all_parameters = $additional_parameters;
-        if(is_array($string)) {
+        if (is_array($string)) {
             $all_parameters = array_merge($string, $all_parameters);
         } elseif (!is_null($string)) {
             array_unshift($all_parameters, $string);
@@ -936,14 +931,14 @@ WHERE TABLE_NAME = ?
 
         switch (strtolower($type ?? '')) {
             case 'today':
-                return "GETDATE()";
+                return 'GETDATE()';
             case 'left':
                 return "LEFT($string$additional_parameters_string)";
             case 'date_format':
-                if(!empty($additional_parameters[0]) && $additional_parameters[0][0] == "'") {
+                if (!empty($additional_parameters[0]) && $additional_parameters[0][0] == "'") {
                     $additional_parameters[0] = trim($additional_parameters[0], "'");
                 }
-                if(!empty($additional_parameters) && isset($this->date_formats[$additional_parameters[0]])) {
+                if (!empty($additional_parameters) && isset($this->date_formats[$additional_parameters[0]])) {
                     $parameters = $this->date_formats[$additional_parameters[0]];
                     if (is_array($parameters) && isset($parameters['format']) && isset($parameters['function'])) {
                         // because unlike other DBs, MsSql returns single digit response `1-9` for first 9 weeks
@@ -961,20 +956,21 @@ WHERE TABLE_NAME = ?
                         return "LEFT(CONVERT(varchar($parameters)," . $string . ",120),$parameters)";
                     }
                 } else {
-                   return "LEFT(CONVERT(varchar(10),". $string . ",120),10)";
+                    return 'LEFT(CONVERT(varchar(10),' . $string . ',120),10)';
                 }
+                // no break
             case 'ifnull':
-                if(empty($additional_parameters_string)) {
+                if (empty($additional_parameters_string)) {
                     $additional_parameters_string = ",''";
                 }
                 return "ISNULL($string$additional_parameters_string)";
             case 'concat':
-                return count($all_parameters) === 1 ? $all_parameters[0] : "CONCAT(" . implode(",", $all_parameters) . ")";
+                return safeCount($all_parameters) === 1 ? $all_parameters[0] : 'CONCAT(' . implode(',', $all_parameters) . ')';
             case 'text2char':
                 return "CAST($string AS varchar(8000))";
             case 'quarter':
                 return "DATENAME(quarter, $string)";
-            case "length":
+            case 'length':
                 return "LEN($string)";
             case 'month':
                 return "MONTH($string)";
@@ -982,10 +978,10 @@ WHERE TABLE_NAME = ?
                 return "DATEADD({$additional_parameters[1]},{$additional_parameters[0]},$string)";
             case 'add_time':
                 return "DATEADD(hh, {$additional_parameters[0]}, DATEADD(mi, {$additional_parameters[1]}, $string))";
-            case 'add_tz_offset' :
+            case 'add_tz_offset':
                 $getUserUTCOffset = $GLOBALS['timedate']->getUserUTCOffset();
                 $operation = $getUserUTCOffset < 0 ? '-' : '+';
-                return 'DATEADD(minute, ' . $operation . abs($getUserUTCOffset) . ', ' . $string. ')';
+                return 'DATEADD(minute, ' . $operation . abs($getUserUTCOffset) . ', ' . $string . ')';
             case 'avg':
                 return "avg($string)";
             case 'substr':
@@ -1002,6 +998,9 @@ WHERE TABLE_NAME = ?
      */
     public function fromConvert($string, $type)
     {
+        if (is_null($string)) {
+            return '';
+        }
         switch ($type) {
             case 'char':
                 return rtrim($string, ' ');
@@ -1016,14 +1015,16 @@ WHERE TABLE_NAME = ?
     /**
      * @see DBManager::createTableSQLParams()
      */
-	public function createTableSQLParams($tablename, $fieldDefs, $indices)
+    public function createTableSQLParams($tablename, $fieldDefs, $indices)
     {
-        if (empty($tablename) || empty($fieldDefs))
+        if (empty($tablename) || empty($fieldDefs)) {
             return '';
+        }
 
         $columns = $this->columnSQLRep($fieldDefs, false, $tablename);
-        if (empty($columns))
+        if (empty($columns)) {
             return '';
+        }
 
         return "CREATE TABLE $tablename ($columns)";
     }
@@ -1035,8 +1036,10 @@ WHERE TABLE_NAME = ?
     public function isTextType($type)
     {
         $type = strtolower($type);
-        if(!isset($this->type_map[$type])) return false;
-        return in_array($this->type_map[$type], array('ntext','text','image', 'nvarchar(max)'));
+        if (!isset($this->type_map[$type])) {
+            return false;
+        }
+        return in_array($this->type_map[$type], ['ntext', 'text', 'image', 'nvarchar(max)']);
     }
 
     /**
@@ -1056,20 +1059,20 @@ WHERE TABLE_NAME = ?
     {
         if ($type == 'datetime' || $type == 'datetimecombo') {
             return $forPrepared
-                ? "1970-01-01 00:00:00"
-                : $this->convert($this->quoted("1970-01-01 00:00:00"), "datetime");
+                ? '1970-01-01 00:00:00'
+                : $this->convert($this->quoted('1970-01-01 00:00:00'), 'datetime');
         }
 
         if ($type == 'date') {
             return $forPrepared
-                ? "1970-01-01"
-                : $this->convert($this->quoted("1970-01-01"), "datetime");
+                ? '1970-01-01'
+                : $this->convert($this->quoted('1970-01-01'), 'datetime');
         }
 
         if ($type == 'time') {
             return $forPrepared
-                ? "00:00:00"
-                : $this->convert($this->quoted("00:00:00"), "time");
+                ? '00:00:00'
+                : $this->convert($this->quoted('00:00:00'), 'time');
         }
 
         return parent::emptyValue($type, $forPrepared);
@@ -1113,10 +1116,10 @@ WHERE TABLE_NAME = ?
     {
         $sql = $sql2 = '';
         $constraints = $this->get_field_default_constraint_name($tablename);
-        $columns = array();
+        $columns = [];
 
-        if(!$this->isFieldArray($fieldDefs)) {
-            $fieldDefs = array($fieldDefs);
+        if (!$this->isFieldArray($fieldDefs)) {
+            $fieldDefs = [$fieldDefs];
         }
 
         foreach ($fieldDefs as $def) {
@@ -1128,73 +1131,72 @@ WHERE TABLE_NAME = ?
             //check to see if we need to drop related indexes before the alter
             $indices = $this->get_indices($tablename);
 
-            foreach ( $indices as $index ) {
-                if ( in_array($def['name'],$index['fields']) ) {
-                    $sql  .= ' ' . $this->add_drop_constraint($tablename,$index,true) . "\n";
-                    $sql2 .= ' ' . $this->add_drop_constraint($tablename,$index,false) . "\n";
+            foreach ($indices as $index) {
+                if (safeInArray($def['name'], $index['fields'])) {
+                    $sql .= ' ' . $this->add_drop_constraint($tablename, $index, true) . "\n";
+                    $sql2 .= ' ' . $this->add_drop_constraint($tablename, $index, false) . "\n";
                 }
             }
 
-            switch($action) {
+            switch ($action) {
                 case 'add':
-                    if(!empty($def['auto_increment']) && false !== $this->checkIdentity($tablename)) {
+                    if (!empty($def['auto_increment']) && false !== $this->checkIdentity($tablename)) {
                         // error we can't add identity to table where identity already exists.
                         // so remove auto_increment from this column.
                         LoggerManager::getLogger()->error("Can't add identity to table $tablename where identity already exists.");
                         unset($def['auto_increment']);
                     }
-                    $columns[] = (count($columns) == 0 ? 'ADD ' : '')
+                    $columns[] = (safeCount($columns) == 0 ? 'ADD ' : '')
                         . $this->oneColumnSQLRep($def, $ignoreRequired, $tablename, false, $action);
                     break;
 
                 case 'drop':
-                    $columns[] = (count($columns) == 0 ? 'DROP COLUMN ' : 'COLUMN ') . $def['name'];
+                    $columns[] = (safeCount($columns) == 0 ? 'DROP COLUMN ' : 'COLUMN ') . $def['name'];
                     break;
 
                 case 'modify':
-
                     $identity = $this->checkIdentity($tablename);
 
                     // if was identity then we need to drop this column, create a new column and copy data.
-                    if(empty($def['auto_increment']) && false !== $identity && $identity['column_name'] == $def['name']) {
+                    if (empty($def['auto_increment']) && false !== $identity && $identity['column_name'] == $def['name']) {
                         $tmpColumnName = $def['name'] . '_temp';
                         // mssql not provide batches via one statement, so we must use some hack with reuse db in one statement.
-                        $modifyDef =  $this->oneColumnSQLRep($def, $ignoreRequired, $tablename, true);
+                        $modifyDef = $this->oneColumnSQLRep($def, $ignoreRequired, $tablename, true);
                         $sqlVarIndex = random_int(0, PHP_INT_MAX);
-                        $sql .="
+                        $sql .= "
                             DECLARE @useDbSql_$sqlVarIndex varchar(100);
                             DECLARE @sql_$sqlVarIndex nvarchar(4000);
 
                             SET @useDbSql_$sqlVarIndex = 'USE " . $this->connectOptions['db_name'] . "; ';\n";
 
                         // create a temporary column
-                        $tmpColumnDef = array_merge($def, array(
+                        $tmpColumnDef = array_merge($def, [
                             'name' => $tmpColumnName,
                             'isnull' => true,
-                        ));
+                        ]);
                         unset($tmpColumnDef['default']);
-                        $sql .="SET @sql_$sqlVarIndex = @useDbSql_$sqlVarIndex + 'EXEC sp_executesql N''ALTER TABLE $tablename ADD " . str_replace("'", "''''", $this->oneColumnSQLRep($tmpColumnDef, $ignoreRequired, $tablename, false)) . "''';
+                        $sql .= "SET @sql_$sqlVarIndex = @useDbSql_$sqlVarIndex + 'EXEC sp_executesql N''ALTER TABLE $tablename ADD " . str_replace("'", "''''", $this->oneColumnSQLRep($tmpColumnDef, $ignoreRequired, $tablename, false)) . "''';
                             EXEC (@sql_$sqlVarIndex);\n";
 
                         // copy data to temporary column
-                        $sql .="SET @sql_$sqlVarIndex = @useDbSql_$sqlVarIndex + 'EXEC sp_executesql N''UPDATE $tablename SET $tmpColumnName = " . $def['name'] . "''';
+                        $sql .= "SET @sql_$sqlVarIndex = @useDbSql_$sqlVarIndex + 'EXEC sp_executesql N''UPDATE $tablename SET $tmpColumnName = " . $def['name'] . "''';
                             EXEC (@sql_$sqlVarIndex);\n";
 
                         // drop origin column
-                        $sql .="SET @sql_$sqlVarIndex = @useDbSql_$sqlVarIndex + 'EXEC sp_executesql N''ALTER TABLE $tablename DROP COLUMN " . $def['name'] . "''';
+                        $sql .= "SET @sql_$sqlVarIndex = @useDbSql_$sqlVarIndex + 'EXEC sp_executesql N''ALTER TABLE $tablename DROP COLUMN " . $def['name'] . "''';
                             EXEC (@sql_$sqlVarIndex);\n";
 
                         // create a new origin column
-                        $sql .="SET @sql_$sqlVarIndex = @useDbSql_$sqlVarIndex + 'EXEC sp_executesql N''ALTER TABLE $tablename
-                                        ADD " . str_replace("'", "''''", $this->oneColumnSQLRep(array_merge($def, array('isnull' => true)), $ignoreRequired, $tablename, false)) . "''';
+                        $sql .= "SET @sql_$sqlVarIndex = @useDbSql_$sqlVarIndex + 'EXEC sp_executesql N''ALTER TABLE $tablename
+                                        ADD " . str_replace("'", "''''", $this->oneColumnSQLRep(array_merge($def, ['isnull' => true]), $ignoreRequired, $tablename, false)) . "''';
                             EXEC (@sql_$sqlVarIndex);\n";
 
                         // copy data into origin column from temporary column
-                        $sql .="SET @sql_$sqlVarIndex = @useDbSql_$sqlVarIndex + 'EXEC sp_executesql N''UPDATE $tablename SET " . $def['name'] . " = $tmpColumnName''';
+                        $sql .= "SET @sql_$sqlVarIndex = @useDbSql_$sqlVarIndex + 'EXEC sp_executesql N''UPDATE $tablename SET " . $def['name'] . " = $tmpColumnName''';
                             EXEC (@sql_$sqlVarIndex);\n";
 
                         // change null flags on origin column after copy data
-                        $sql .="SET @sql_$sqlVarIndex = @useDbSql_$sqlVarIndex + 'EXEC sp_executesql N''ALTER TABLE $tablename ALTER COLUMN " . $modifyDef['name'] . ' ' . $modifyDef['colType'] . ' ' .
+                        $sql .= "SET @sql_$sqlVarIndex = @useDbSql_$sqlVarIndex + 'EXEC sp_executesql N''ALTER TABLE $tablename ALTER COLUMN " . $modifyDef['name'] . ' ' . $modifyDef['colType'] . ' ' .
                             $modifyDef['required'];
 
                         // drop temporary column
@@ -1211,20 +1213,20 @@ WHERE TABLE_NAME = ?
                     }
 
                     // if we want to leave identity unchanged
-                    if((empty($def['auto_increment']) && false === $identity) || (!empty($def['auto_increment']) && false !== $identity)) {
-                        if(!empty($def['auto_increment']) && false !== $identity && $identity['column_name'] != $def['name']) {
+                    if ((empty($def['auto_increment']) && false === $identity) || (!empty($def['auto_increment']) && false !== $identity)) {
+                        if (!empty($def['auto_increment']) && false !== $identity && $identity['column_name'] != $def['name']) {
                             // error we can't add identity to table where identity already exists.
                             // so remove auto_increment from this column.
                             LoggerManager::getLogger()->error("Can't add identity to table $tablename where identity already exists.");
                             unset($def['auto_increment']);
                         }
-                        $modifyDef =  $this->oneColumnSQLRep($def, $ignoreRequired, $tablename, true);
+                        $modifyDef = $this->oneColumnSQLRep($def, $ignoreRequired, $tablename, true);
                         $modifySql = 'ALTER COLUMN ' . $modifyDef['name'] . ' ' . $modifyDef['colType'] . ' ' .
                             $modifyDef['required'] . "\n";
 
                         // we can add default value only for non-identical columns.
                         if (empty($def['auto_increment']) && !empty($modifyDef['default'])) {
-                            $modifySql .= ' ALTER TABLE ' . $tablename .  ' ADD  ' . $modifyDef['default'] . ' FOR ' . $modifyDef['name'] . "\n";
+                            $modifySql .= ' ALTER TABLE ' . $tablename . ' ADD  ' . $modifyDef['default'] . ' FOR ' . $modifyDef['name'] . "\n";
                         }
                         $columns[] = $modifySql;
 
@@ -1232,7 +1234,7 @@ WHERE TABLE_NAME = ?
                     }
                     $sqlVarIndex = random_int(0, PHP_INT_MAX);
                     $tempTableName = $tablename . '_' . $sqlVarIndex;
-                    $sql .="
+                    $sql .= "
                             DECLARE @useDbSql_$sqlVarIndex varchar(100);
                             DECLARE @sql_$sqlVarIndex nvarchar(4000);
 
@@ -1294,8 +1296,8 @@ WHERE TABLE_NAME = ?
             }
         }
 
-        if(count($columns)) {
-            $sql .= " ALTER TABLE $tablename " . implode(", ", $columns) . " \n";
+        if (safeCount($columns)) {
+            $sql .= " ALTER TABLE $tablename " . implode(', ', $columns) . " \n";
         }
         $sql .= $sql2;
 
@@ -1304,8 +1306,8 @@ WHERE TABLE_NAME = ?
 
     protected function setAutoIncrement($table, $field_name, array $platformOptions = [], $action = null)
     {
-		return "identity(1,1)";
-	}
+        return 'identity(1,1)';
+    }
 
     /**
      * @see DBManager::setAutoIncrementStart()
@@ -1323,7 +1325,7 @@ WHERE TABLE_NAME = ?
         return true;
     }
 
-	/**
+    /**
      * @see DBManager::getAutoIncrement()
      */
     public function getAutoIncrement($table, $field_name)
@@ -1334,7 +1336,7 @@ WHERE TABLE_NAME = ?
 
             return $prev_rows === false ? $result : $result + 1;
         }
-        return "";
+        return '';
     }
 
     /** {@inheritDoc} */
@@ -1343,7 +1345,7 @@ WHERE TABLE_NAME = ?
         $filterByTable = $table_name !== null;
         $filterByIndex = $index_name !== null;
 
-        $columns = array();
+        $columns = [];
         if (!$filterByTable) {
             $columns[] = 't.name AS table_name';
         }
@@ -1367,7 +1369,7 @@ INNER JOIN sys.columns c
     ON c.object_id = t.object_id
         AND c.column_id = ic.column_id';
 
-        $where = $params = array();
+        $where = $params = [];
         if ($filterByTable) {
             $where[] = 't.name = ?';
             $params[] = $table_name;
@@ -1382,7 +1384,7 @@ INNER JOIN sys.columns c
             $query .= ' WHERE ' . implode(' AND ', $where);
         }
 
-        $order = array();
+        $order = [];
         if (!$filterByTable) {
             $order[] = 't.name';
         }
@@ -1398,7 +1400,7 @@ INNER JOIN sys.columns c
             ->getConnection()
             ->executeQuery($query, $params);
 
-        $data = array();
+        $data = [];
         while (($row = $stmt->fetchAssociative())) {
             if (!$filterByTable) {
                 $table_name = $row['table_name'];
@@ -1430,46 +1432,51 @@ INNER JOIN sys.columns c
      */
     public function add_drop_constraint(string $table, array $definition, bool $drop = false): string
     {
-        $type         = $definition['type'];
+        $type = $definition['type'];
         $fieldsListSQL = implode(',', $definition['fields']);
         $fieldsListSQLNotNull = implode(' IS NOT NULL AND ', $definition['fields']) . ' IS NOT NULL';
-        $name         = $definition['name'];
-        $sql          = '';
+        $name = $definition['name'];
+        $sql = '';
 
-        switch ($type){
-        // generic indices
-        case 'index':
-        case 'alternate_key':
-            if ($drop)
-                $sql = "DROP INDEX {$name} ON {$table}";
-            else
-                $sql = "CREATE INDEX {$name} ON {$table} ({$fieldsListSQL})";
-            break;
-        case 'clustered':
-            if ($drop)
-                $sql = "DROP INDEX {$name} ON {$table}";
-            else
-                $sql = "CREATE CLUSTERED INDEX $name ON $table ($fieldsListSQL)";
-            break;
-            // constraints as indices
-        case 'unique':
-            if ($drop)
-                $sql = "ALTER TABLE {$table} DROP CONSTRAINT $name";
-            else
-                $sql = "CREATE UNIQUE INDEX {$name} ON {$table} ({$fieldsListSQL}) WHERE " . $fieldsListSQLNotNull;
-            break;
-        case 'primary':
-            if ($drop)
-                $sql = "ALTER TABLE {$table} DROP CONSTRAINT {$name}";
-            else
-                $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} PRIMARY KEY ({$fieldsListSQL})";
-            break;
-        case 'foreign':
-            if ($drop)
-                $sql = "ALTER TABLE {$table} DROP FOREIGN KEY ({$fieldsListSQL})";
-            else
-                $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name}  FOREIGN KEY ({$fieldsListSQL}) REFERENCES {$definition['foreignTable']}({$definition['foreignFields']})";
-            break;
+        switch ($type) {
+            // generic indices
+            case 'index':
+            case 'alternate_key':
+                if ($drop) {
+                    $sql = "DROP INDEX {$name} ON {$table}";
+                } else {
+                    $sql = "CREATE INDEX {$name} ON {$table} ({$fieldsListSQL})";
+                }
+                break;
+            case 'clustered':
+                if ($drop) {
+                    $sql = "DROP INDEX {$name} ON {$table}";
+                } else {
+                    $sql = "CREATE CLUSTERED INDEX $name ON $table ($fieldsListSQL)";
+                }
+                break;
+                // constraints as indices
+            case 'unique':
+                if ($drop) {
+                    $sql = "ALTER TABLE {$table} DROP CONSTRAINT $name";
+                } else {
+                    $sql = "CREATE UNIQUE INDEX {$name} ON {$table} ({$fieldsListSQL}) WHERE " . $fieldsListSQLNotNull;
+                }
+                break;
+            case 'primary':
+                if ($drop) {
+                    $sql = "ALTER TABLE {$table} DROP CONSTRAINT {$name}";
+                } else {
+                    $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} PRIMARY KEY ({$fieldsListSQL})";
+                }
+                break;
+            case 'foreign':
+                if ($drop) {
+                    $sql = "ALTER TABLE {$table} DROP FOREIGN KEY ({$fieldsListSQL})";
+                } else {
+                    $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name}  FOREIGN KEY ({$fieldsListSQL}) REFERENCES {$definition['foreignTable']}({$definition['foreignFields']})";
+                }
+                break;
         }
         return $sql;
     }
@@ -1478,11 +1485,11 @@ INNER JOIN sys.columns c
      * Function returns name of the constraint automatically generated by sql-server.
      * We request this for default, primary key, required
      *
-     * @param  string $table
-     * @param  string $column
+     * @param string $table
+     * @param string $column
      * @return string
      */
-	protected function get_field_default_constraint_name($table, $column = null)
+    protected function get_field_default_constraint_name($table, $column = null)
     {
         $results = [];
         $query = <<<EOQ
@@ -1496,67 +1503,78 @@ select s.name, o.name, c.name dtrt, d.name ctrt
             on s.schema_id = o.schema_id
     where o.name = '$table'
 EOQ;
-        if ( !empty($column) )
+        if (!empty($column)) {
             $query .= " and c.name = '$column'";
-        $res = $this->query($query);
-        if ( !empty($column) ) {
-            $row = $this->fetchByAssoc($res);
-            if (!empty($row))
-                return $row['ctrt'];
         }
-        else {
-            $returnResult = array();
-            while ( $row = $this->fetchByAssoc($res) )
+        $res = $this->query($query);
+        if (!empty($column)) {
+            $row = $this->fetchByAssoc($res);
+            if (!empty($row)) {
+                return $row['ctrt'];
+            }
+        } else {
+            $returnResult = [];
+            while ($row = $this->fetchByAssoc($res)) {
                 $returnResult[$row['dtrt']] = $row['ctrt'];
+            }
             $results[$table] = $returnResult;
             return $returnResult;
         }
 
         return null;
-	}
+    }
 
     /**
      * {@inheritDoc}
      */
-    public function massageFieldDef(array &$fieldDef) : void
+    public function massageFieldDef(array &$fieldDef): void
     {
         parent::massageFieldDef($fieldDef);
 
-        if ($fieldDef['type'] == 'int')
+        if ($fieldDef['type'] == 'int') {
             $fieldDef['len'] = '4';
+        }
 
         if ($fieldDef['type'] == 'bit') {
             $fieldDef['len'] = '1';
         }
 
-        if(empty($fieldDef['len']))
-        {
-            switch($fieldDef['type']) {
-                case 'bool'     : $fieldDef['len'] = '1'; break;
-                case 'smallint' : $fieldDef['len'] = '2'; break;
-                case 'float'    : $fieldDef['len'] = '8'; break;
-                case 'varchar'  :
-                case 'nvarchar' :
-                                  $fieldDef['len'] = $this->isTextType($fieldDef['dbType']) ? 'max' : '255';
-                                  break;
-                case 'image'    : $fieldDef['len'] = '2147483647'; break;
-                case 'ntext'    : $fieldDef['len'] = '2147483646'; break;   // Note: this is from legacy code, don't know if this is correct
+        if (empty($fieldDef['len'])) {
+            switch ($fieldDef['type']) {
+                case 'bool':
+                    $fieldDef['len'] = '1';
+                    break;
+                case 'smallint':
+                    $fieldDef['len'] = '2';
+                    break;
+                case 'float':
+                    $fieldDef['len'] = '8';
+                    break;
+                case 'varchar':
+                case 'nvarchar':
+                    $fieldDef['len'] = $this->isTextType($fieldDef['dbType']) ? 'max' : '255';
+                    break;
+                case 'image':
+                    $fieldDef['len'] = '2147483647';
+                    break;
+                case 'ntext':
+                    $fieldDef['len'] = '2147483646';
+                    break;   // Note: this is from legacy code, don't know if this is correct
             }
         }
-        if($fieldDef['type'] == 'decimal'
-           && empty($fieldDef['precision'])
-           && !strpos($fieldDef['len'], ','))
-        {
-             $fieldDef['len'] .= ',0'; // Adding 0 precision if it is not specified
+        if ($fieldDef['type'] == 'decimal'
+            && empty($fieldDef['precision'])
+            && !strpos($fieldDef['len'], ',')) {
+            $fieldDef['len'] .= ',0'; // Adding 0 precision if it is not specified
         }
 
-        if(empty($fieldDef['default'])
-            && in_array($fieldDef['type'],array('bit','bool')))
-        {
+        if (empty($fieldDef['default'])
+            && in_array($fieldDef['type'], ['bit', 'bool'])) {
             $fieldDef['default'] = '0';
         }
-		if (isset($fieldDef['required']) && $fieldDef['required'] && !isset($fieldDef['default']) )
-			$fieldDef['default'] = '';
+        if (isset($fieldDef['required']) && $fieldDef['required'] && !isset($fieldDef['default'])) {
+            $fieldDef['default'] = '';
+        }
     }
 
     /**
@@ -1614,12 +1632,13 @@ EOQ;
             }
         }
 
-		// always return as array for post-processing
+        // always return as array for post-processing
         $ref = parent::oneColumnSQLRep($fieldDef, $ignoreRequired, $table, true, $action);
 
-		// Bug 24307 - Don't add precision for float fields.
-		if ( stristr($ref['colType'],'float') )
-			$ref['colType'] = preg_replace('/(,\d+)/','',$ref['colType']);
+        // Bug 24307 - Don't add precision for float fields.
+        if (stristr($ref['colType'], 'float')) {
+            $ref['colType'] = preg_replace('/(,\d+)/', '', $ref['colType']);
+        }
 
         // If a field has a default value defined, it is expected when the column is added to the table that
         // the default value will be populated for existing rows. MSSQL only does that automatically if the
@@ -1640,17 +1659,17 @@ EOQ;
     /**
      * Saves changes to module's audit table
      *
-     * @param object $bean    Sugarbean instance
-     * @param array  $changes changes
+     * @param object $bean Sugarbean instance
+     * @param array $changes changes
      */
     public function save_audit_records(SugarBean $bean, $changes)
-	{
-		//Bug 25078 fixed by Martin Hu: sqlserver haven't 'date' type, trim extra "00:00:00"
-		if($changes['data_type'] == 'date'){
-			$changes['before'] = str_replace(' 00:00:00','',$changes['before']);
-		}
-		parent::save_audit_records($bean,$changes);
-	}
+    {
+        //Bug 25078 fixed by Martin Hu: sqlserver haven't 'date' type, trim extra "00:00:00"
+        if ($changes['data_type'] == 'date') {
+            $changes['before'] = str_replace(' 00:00:00', '', $changes['before']);
+        }
+        parent::save_audit_records($bean, $changes);
+    }
 
     /**
      * (non-PHPdoc)
@@ -1658,7 +1677,7 @@ EOQ;
      */
     public function getDbInfo()
     {
-        return array("version" => $this->version());
+        return ['version' => $this->version()];
     }
 
     /**
@@ -1667,12 +1686,12 @@ EOQ;
      */
     public function validateQuery($query)
     {
-        if(!$this->isSelect($query)) {
+        if (!$this->isSelect($query)) {
             return false;
         }
-        $this->query("SET SHOWPLAN_TEXT ON");
+        $this->query('SET SHOWPLAN_TEXT ON');
         $res = $this->getOne($query);
-        $this->query("SET SHOWPLAN_TEXT OFF");
+        $this->query('SET SHOWPLAN_TEXT OFF');
         return !empty($res);
     }
 
@@ -1686,12 +1705,13 @@ EOQ;
     protected function _appendN($sql)
     {
         // If there are no single quotes, don't bother, will just assume there is no character data
-        if (strpos($sql, "'") === false)
+        if (strpos($sql, "'") === false) {
             return $sql;
+        }
 
         // Flag if there are odd number of single quotes, just continue without trying to append N
         if ((substr_count($sql, "'") & 1)) {
-            $this->logger->error("SQL statement[" . $sql . "] has odd number of single quotes.");
+            $this->logger->error('SQL statement[' . $sql . '] has odd number of single quotes.');
             return $sql;
         }
 
@@ -1699,41 +1719,44 @@ EOQ;
         $sql = preg_replace('/(?<!\')(\'{3})(?!\')/', "'<@#@#@PAIR@#@#@>", $sql);
 
         // Remove any remaining '' and do not parse... replace later (hopefully we don't even have any)
-        $pairs        = array();
-        $regexp       = '/(\'{2})/';
-        $pair_matches = array();
+        $pairs = [];
+        $regexp = '/(\'{2})/';
+        $pair_matches = [];
         preg_match_all($regexp, $sql, $pair_matches);
         if ($pair_matches) {
-            foreach (array_unique($pair_matches[0]) as $key=>$value) {
-                $pairs['<@PAIR-'.$key.'@>'] = $value;
+            foreach (array_unique($pair_matches[0]) as $key => $value) {
+                $pairs['<@PAIR-' . $key . '@>'] = $value;
             }
             if (!empty($pairs)) {
                 $sql = str_replace($pairs, array_keys($pairs), $sql);
             }
         }
 
-        $regexp  = "/(N?'.+?')/is";
-        $matches = array();
+        $regexp = "/(N?'.+?')/is";
+        $matches = [];
         preg_match_all($regexp, $sql, $matches);
-        $replace = array();
+        $replace = [];
         if (!empty($matches)) {
             foreach ($matches[0] as $value) {
                 // We are assuming that all nvarchar columns are no more than 200 characters in length
                 // One problem we face is the image column type in reports which cannot accept nvarchar data
-                if (!empty($value) && !is_numeric(trim(str_replace(array("'", ","), "", $value))) && !preg_match('/^\'[\,]\'$/', $value)) {
-                    $replace[$value] = 'N' . trim($value, "N");
+                if (!empty($value) && !is_numeric(trim(str_replace(["'", ','], '', $value))) && !preg_match('/^\'[\,]\'$/', $value)) {
+                    $replace[$value] = 'N' . trim($value, 'N');
                 }
             }
         }
 
-        if (!empty($replace))
+        if (!empty($replace)) {
             $sql = str_replace(array_keys($replace), $replace, $sql);
+        }
 
-        if (!empty($pairs))
+        if (!empty($pairs)) {
             $sql = str_replace(array_keys($pairs), $pairs, $sql);
+        }
 
-        if(strpos($sql, "<@#@#@PAIR@#@#@>"))
-            $sql = str_replace(array('<@#@#@PAIR@#@#@>'), array("''"), $sql);
+        if (strpos($sql, '<@#@#@PAIR@#@#@>')) {
+            $sql = str_replace(['<@#@#@PAIR@#@#@>'], ["''"], $sql);
+        }
 
         return $sql;
     }
@@ -1745,8 +1768,8 @@ EOQ;
      */
     protected function quoteTerm($term)
     {
-        $term = str_replace("%", "*", $term); // Mssql wildcard is *
-        return '"'.$term.'"';
+        $term = str_replace('%', '*', $term); // Mssql wildcard is *
+        return '"' . $term . '"';
     }
 
     /**
@@ -1755,7 +1778,7 @@ EOQ;
      */
     public function dbExists($dbname)
     {
-        $db = $this->getOne("SELECT name FROM master..sysdatabases WHERE name = N".$this->quoted($dbname));
+        $db = $this->getOne('SELECT name FROM master..sysdatabases WHERE name = N' . $this->quoted($dbname));
         return !empty($db);
     }
 
@@ -1765,8 +1788,8 @@ EOQ;
      */
     public function userExists($username)
     {
-        $this->selectDb("master");
-        $user = $this->getOne("select count(*) from sys.sql_logins where name =".$this->quoted($username));
+        $this->selectDb('master');
+        $user = $this->getOne('select count(*) from sys.sql_logins where name =' . $this->quoted($username));
         // FIXME: go back to the original DB
         return !empty($user);
     }
@@ -1816,25 +1839,25 @@ EOQ;
     public function isDatabaseNameValid($name)
     {
         // No funny chars, does not begin with number
-        return preg_match('/^[0-9#@]+|[\"\'\*\/\\?\:\\<\>\-\ \&\!\(\)\[\]\{\}\;\,\.\`\~\|\\\\]+/', $name)==0;
+        return preg_match('/^[0-9#@]+|[\"\'\*\/\\?\:\\<\>\-\ \&\!\(\)\[\]\{\}\;\,\.\`\~\|\\\\]+/', $name) == 0;
     }
 
     public function installConfig()
     {
-        return array(
-        	'LBL_DBCONFIG_MSG3' =>  array(
-                "setup_db_database_name" => array("label" => 'LBL_DBCONF_DB_NAME', "required" => true),
-            ),
-            'LBL_DBCONFIG_MSG2' =>  array(
-                "setup_db_host_name" => array("label" => 'LBL_DBCONF_HOST_NAME', "required" => true),
-                "setup_db_host_instance" => array("label" => 'LBL_DBCONF_HOST_INSTANCE'),
-            ),
-            'LBL_DBCONF_TITLE_USER_INFO' => array(),
-            'LBL_DBCONFIG_B_MSG1' => array(
-                "setup_db_admin_user_name" => array("label" => 'LBL_DBCONF_DB_ADMIN_USER', "required" => true),
-                "setup_db_admin_password" => array("label" => 'LBL_DBCONF_DB_ADMIN_PASSWORD', "type" => "password"),
-            )
-        );
+        return [
+            'LBL_DBCONFIG_MSG3' => [
+                'setup_db_database_name' => ['label' => 'LBL_DBCONF_DB_NAME', 'required' => true],
+            ],
+            'LBL_DBCONFIG_MSG2' => [
+                'setup_db_host_name' => ['label' => 'LBL_DBCONF_HOST_NAME', 'required' => true],
+                'setup_db_host_instance' => ['label' => 'LBL_DBCONF_HOST_INSTANCE'],
+            ],
+            'LBL_DBCONF_TITLE_USER_INFO' => [],
+            'LBL_DBCONFIG_B_MSG1' => [
+                'setup_db_admin_user_name' => ['label' => 'LBL_DBCONF_DB_ADMIN_USER', 'required' => true],
+                'setup_db_admin_password' => ['label' => 'LBL_DBCONF_DB_ADMIN_PASSWORD', 'type' => 'password'],
+            ],
+        ];
     }
 
     /**
@@ -1854,9 +1877,9 @@ EOQ;
      * @return string
      */
 
-	public function getGuidSQL()
+    public function getGuidSQL()
     {
-      	return 'NEWID()';
+        return 'NEWID()';
     }
 
     /**
@@ -1875,7 +1898,7 @@ EOQ;
      */
     public function sqlLikeString($str, $wildcard = '%', $appendWildcard = true)
     {
-        $str = str_replace(array('['), array('[[]'), $str);
+        $str = str_replace(['['], ['[[]'], $str);
         return parent::sqlLikeString($str, $wildcard, $appendWildcard);
     }
 }

@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Quadre de comandament del llistat d&#39;elements de línia comprats',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Quadre de comandament del registre d&#39;elements de línia comprats',
     'LBL_PARENT_PURCHASE' => 'Compra principal',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia de l&#39;element de línia comprat',
 ];

@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Contracten',
-	'LBL_MODULE_NAME_SINGULAR' => 'Contract',
-	'LBL_MODULE_TITLE' => 'Contracten: Start',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Contracten',
+    'LBL_MODULE_NAME_SINGULAR' => 'Contract',
+    'LBL_MODULE_TITLE' => 'Contracten: Start',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Nieuw Contract',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'Valuta ID:',
     'LBL_CURRENCY' => 'Valuta:',
     'LBL_CURRENCY_RATE' => 'Valutakoers',
-    'LBL_ASSIGNED_TO_NAME'=>'Toegewezen aan:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Toegewezen aan:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Contractenijst',	
+    'LBL_LIST_FORM_TITLE' => 'Contractenijst',
     'LBL_LIST_CONTRACT_NAME' => 'Contractnaam',
     'LBL_LIST_ACCOUNT_NAME' => 'Organisatie',
     'LBL_LIST_START_DATE' => 'Begindatum',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Naam',
     'LBL_LIST_CONTRACT_VALUE' => 'Waarde',
 
-    'LBL_TYPE'=>'Type',
+    'LBL_TYPE' => 'Type',
     'LBL_TYPE_NAME' => 'Type Naam',
-    'LBL_CONTRACT_TYPE'=>'Type:',
+    'LBL_CONTRACT_TYPE' => 'Type:',
 
     'LBL_CREATED_USER' => 'Gebruiker aangemaakt',
     'LBL_MODIFIED_USER' => 'Gebruiker gewijzigd',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer contracten',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Dashboard Contractenrecord',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn contract',
+];

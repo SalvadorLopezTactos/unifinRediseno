@@ -10,30 +10,30 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Bugs']['base']['filter']['default'] = array(
-    'quicksearch_field' => array('name', 'bug_number'),
+$viewdefs['Bugs']['base']['filter']['default'] = [
+    'quicksearch_field' => ['name', 'bug_number'],
     'quicksearch_priority' => 2,
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'status' => array(),
-        'priority' => array(),
-        'found_in_release' => array(),
-        'fixed_in_release' => array(),
-        'resolution' => array(),
-        'bug_number' => array(),
-        'date_entered' => array(),
-        'date_modified' => array(),
-        'assigned_user_name' => array(),
-        'tag' => array(),
-        '$owner' => array(
+    'fields' => [
+        'name' => [],
+        'status' => [],
+        'priority' => [],
+        'found_in_release' => [],
+        'fixed_in_release' => [],
+        'resolution' => [],
+        'bug_number' => [],
+        'date_entered' => [],
+        'date_modified' => [],
+        'assigned_user_name' => [],
+        'tag' => [],
+        '$owner' => [
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',
-        ),
-        '$favorite' => array(
+        ],
+        '$favorite' => [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        ),
+        ],
         'is_escalated' => [],
-    ),
-);
+    ],
+];

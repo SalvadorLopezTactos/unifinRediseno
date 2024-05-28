@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Dashbord for kjøpsoppføring',
     'LBL_RELATED_ACCOUNT' => 'Relatert konto',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Kjøp fokusskuff',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Kjøptidslinje',
 ];

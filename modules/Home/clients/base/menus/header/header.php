@@ -10,28 +10,28 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'Home';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
         'route' => '#' . $module_name . '/create',
         'label' => 'LBL_CREATE_DASHBOARD_MENU',
         'acl_action' => 'edit',
         'acl_module' => $module_name,
         'icon' => 'sicon-plus',
-    ),
-    array(
+    ],
+    [
         'route' => '#activities',
         'label' => 'LBL_ACTIVITIES',
         'icon' => 'sicon-clock',
-    ),
-    array(
+    ],
+    [
         'type' => 'divider',
-    ),
-    array(
+    ],
+    [
         'route' => '#Dashboards?moduleName=Home',
         'label' => 'LBL_MANAGE_DASHBOARDS',
         'acl_action' => 'read',
         'acl_module' => 'Dashboards',
         'icon' => 'sicon-reports',
         'label_module' => 'Dashboards',
-    ),
-);
+    ],
+];

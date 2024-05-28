@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => '知識庫清單儀表板',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => '知識庫記錄儀表板',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => '知識庫焦點抽屜',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '知識庫時間軸',
 
     'LBL_MODULE_NAME' => '知識庫',
     'LBL_MODULE_NAME_SINGULAR' => '知識庫文章',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => '設定為主要值',
     'LBL_ITEM_REMOVE' => '移除項目',
     'LBL_ITEM_ADD' => '新增項目',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => '修訂 ID',
     'LBL_DOCUMENT_REVISION' => '修訂',
     'LBL_NUMBER' => '編號',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => '更多 {{module}} 文章...',
     'LBL_LIST_FORM_TITLE' => '知識庫清單',
     'LBL_SEARCH_FORM_TITLE' => '知識庫搜尋',
-);
+];

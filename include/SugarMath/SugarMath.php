@@ -39,7 +39,6 @@
  */
 class SugarMath
 {
-
     /**
      * the current value being applied
      *
@@ -71,7 +70,7 @@ class SugarMath
      *
      * @return string result value
      */
-    public function __toString()
+    public function __toString(): string
     {
         return (string)$this->result();
     }
@@ -80,11 +79,11 @@ class SugarMath
      * create a new object statically, can directly chain
      * example: $foo = SugarMath::init(500,2)->add(45)->mul(3);
      *
-     * @param  mixed $value
-     * @param  int   $scale
+     * @param mixed $value
+     * @param int $scale
      * @return SugarMath
      */
-    static public function init($value = '0', $scale = null)
+    public static function init($value = '0', $scale = null)
     {
         return new self($value, $scale);
     }
@@ -92,7 +91,7 @@ class SugarMath
     /**
      * set the scale value
      *
-     * @param  int $scale
+     * @param int $scale
      * @return SugarMath object
      */
     public function setScale($scale)
@@ -115,7 +114,7 @@ class SugarMath
     /**
      * set the current value
      *
-     * @param  mixed $value
+     * @param mixed $value
      * @return SugarMath object
      */
     public function setValue($value)
@@ -139,10 +138,10 @@ class SugarMath
     /**
      * apply a math operation
      *
-     * @param  string     $operator string type of math operation
-     * @param  array|null $params array|null parameter values for operation
-     * @throws SugarMath_Exception
+     * @param string $operator string type of math operation
+     * @param array|null $params array|null parameter values for operation
      * @return string     operation result
+     * @throws SugarMath_Exception
      */
     protected function _applyOperation($operator, $params = null)
     {
@@ -171,9 +170,9 @@ class SugarMath
 
                     return bcdiv($numerator, $denominator, $this->scale);
                 } catch (DivisionByZeroError $e) {
-                    LoggerManager::getLogger()->fatal('Division by zero bcdiv: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
+                    LoggerManager::getLogger()->warn('Division by zero bcdiv: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
                 } catch (InvalidArgumentException $e) {
-                    LoggerManager::getLogger()->fatal('Invalid argument in bcdiv: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
+                    LoggerManager::getLogger()->warn('Invalid argument in bcdiv: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
                 }
                 return '0';
                 break;
@@ -193,9 +192,9 @@ class SugarMath
 
                     return bcmod($numerator, $denominator, $this->scale);
                 } catch (DivisionByZeroError $e) {
-                    LoggerManager::getLogger()->fatal('Division by zero in bcmod: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
+                    LoggerManager::getLogger()->warn('Division by zero in bcmod: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
                 } catch (InvalidArgumentException $e) {
-                    LoggerManager::getLogger()->fatal('Invalid argument in bcmod: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
+                    LoggerManager::getLogger()->warn('Invalid argument in bcmod: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
                 }
                 return '0';
                 break;
@@ -212,9 +211,9 @@ class SugarMath
 
                     return bcpowmod($base, $exponent, $modulus, $this->scale);
                 } catch (DivisionByZeroError $e) {
-                    LoggerManager::getLogger()->fatal('Division by zero in bcpowmod: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
+                    LoggerManager::getLogger()->warn('Division by zero in bcpowmod: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
                 } catch (InvalidArgumentException $e) {
-                    LoggerManager::getLogger()->fatal('Invalid argument in bcpowmod: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
+                    LoggerManager::getLogger()->warn('Invalid argument in bcpowmod: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
                 }
                 return '0';
                 break;
@@ -222,7 +221,7 @@ class SugarMath
                 try {
                     return bcsqrt($params[0] ?? '0', $this->scale);
                 } catch (ValueError $e) {
-                    LoggerManager::getLogger()->fatal(
+                    LoggerManager::getLogger()->warn(
                         $e->getMessage() . PHP_EOL . $e->getTraceAsString()
                     );
                 }
@@ -239,85 +238,85 @@ class SugarMath
     /**
      * add to current value
      *
-     * @param mixed    $value
+     * @param mixed $value
      * @return SugarMath object
      */
     public function add($value)
     {
-        $this->value = $this->_applyOperation('add', array($this->value, $value));
+        $this->value = $this->_applyOperation('add', [$this->value, $value]);
         return $this;
     }
 
     /**
      * subtract from current value
      *
-     * @param mixed    $value
+     * @param mixed $value
      * @return SugarMath object
      */
     public function sub($value)
     {
-        $this->value = $this->_applyOperation('sub', array($this->value, $value));
+        $this->value = $this->_applyOperation('sub', [$this->value, $value]);
         return $this;
     }
 
     /**
      * multiply current value
      *
-     * @param mixed    $value
+     * @param mixed $value
      * @return SugarMath object
      */
     public function mul($value)
     {
-        $this->value = $this->_applyOperation('mul', array($this->value, $value));
+        $this->value = $this->_applyOperation('mul', [$this->value, $value]);
         return $this;
     }
 
     /**
      * divide current value
      *
-     * @param mixed    $value
+     * @param mixed $value
      * @return SugarMath object
      */
     public function div($value)
     {
-        $this->value = $this->_applyOperation('div', array($this->value, $value));
+        $this->value = $this->_applyOperation('div', [$this->value, $value]);
         return $this;
     }
 
     /**
      * find modulus of current value
      *
-     * @param int      $mod
+     * @param int $mod
      * @return SugarMath object
      */
     public function mod($mod)
     {
-        $this->value = $this->_applyOperation('mod', array($this->value, $mod));
+        $this->value = $this->_applyOperation('mod', [$this->value, $mod]);
         return $this;
     }
 
     /**
      * find power of current value
      *
-     * @param int      $pow
+     * @param int $pow
      * @return SugarMath object
      */
     public function pow($pow)
     {
-        $this->value = $this->_applyOperation('pow', array($this->value, $pow));
+        $this->value = $this->_applyOperation('pow', [$this->value, $pow]);
         return $this;
     }
 
     /**
      * find power of current value and return its modulus
      *
-     * @param mixed    $pow
-     * @param int      $mod
+     * @param mixed $pow
+     * @param int $mod
      * @return SugarMath object
      */
     public function powmod($pow, $mod)
     {
-        $this->value = $this->_applyOperation('powmod', array($this->value, $pow, $mod));
+        $this->value = $this->_applyOperation('powmod', [$this->value, $pow, $mod]);
         return $this;
     }
 
@@ -328,19 +327,19 @@ class SugarMath
      */
     public function sqrt()
     {
-        $this->value = $this->_applyOperation('sqrt', array($this->value));
+        $this->value = $this->_applyOperation('sqrt', [$this->value]);
         return $this;
     }
 
     /**
      * compare current value to this one
      *
-     * @param mixed    $value
+     * @param mixed $value
      * @return int  0 if equal, 1 if current value is greater, -1 otherwise
      */
     public function comp($value)
     {
-        return $this->_applyOperation('comp', array($this->value, $value));
+        return $this->_applyOperation('comp', [$this->value, $value]);
     }
 
     /**
@@ -356,7 +355,7 @@ class SugarMath
             $scale = $this->scale;
         }
         if (false !== ($pos = strpos($value, '.')) && (strlen($value) - $pos - 1) > $scale) {
-            $zeros = str_repeat("0", $scale);
+            $zeros = str_repeat('0', $scale);
             return bcadd($value, (($value < 0) ? '-' : '') . "0.{$zeros}5", $scale);
         } else {
             return bcadd($value, '0', $scale);
@@ -367,10 +366,10 @@ class SugarMath
      * test that value is numeric
      *
      * @param number|string $value
-     * @param string        $type Optional type of test
-     * @param string        $errorMsg Optional error message to show
-     * @throws SugarMath_Exception
+     * @param string $type Optional type of test
+     * @param string $errorMsg Optional error message to show
      * @return boolean false on failure
+     * @throws SugarMath_Exception
      */
     protected function testValue($value, $type = 'numeric', $errorMsg = null)
     {
@@ -406,12 +405,12 @@ class SugarMath
      *
      * exp("23.33 + ? * (4 - ?) / ?", array($v1, $v2, $v3))->result();
      *
-     * @param string   $exp math expression
-     * @param array    $args values for the ? parts of the expression
-     * @throws SugarMath_Exception
+     * @param string $exp math expression
+     * @param array $args values for the ? parts of the expression
      * @return SugarMath object
+     * @throws SugarMath_Exception
      */
-    public function exp($exp, $args = array())
+    public function exp($exp, $args = [])
     {
         if (strlen($exp) == 0) {
             // expression empty, set to 0
@@ -419,7 +418,7 @@ class SugarMath
             return $this;
         }
         if (!isset($args)) {
-            $args = array();
+            $args = [];
         }
         if (!is_string($exp)) {
             throw new SugarMath_Exception('expression must be a string');
@@ -427,13 +426,13 @@ class SugarMath
         if (!is_array($args)) {
             throw new SugarMath_Exception('expression args must be an array');
         }
-        if (count($args) > 0) {
+        if (safeCount($args) > 0) {
             foreach ($args as $arg) {
                 $this->testValue($arg, 'numeric', 'arguments must be numeric');
             }
         }
         // number of ? must match number of args
-        if (substr_count($exp, '?') !== count($args)) {
+        if (substr_count($exp, '?') !== safeCount($args)) {
             throw new SugarMath_Exception('number of args mismatch number of ? in exp');
         }
         // expression parenthesis must be balanced
@@ -443,22 +442,22 @@ class SugarMath
         // give us ample of precision for the internal calculations
         $this->scale += 10;
         // convert infix expression into postfix (reverse polish notation)
-        $output = array(); // our output queue for RPN
-        $stack = array(); // our operand stack
+        $output = []; // our output queue for RPN
+        $stack = []; // our operand stack
         $isAfterOperand = false; // track if we are right after an operand
         // define operator precedence/associativity
-        $ops = array(
-            '+' => array(2, 'L'),
-            '-' => array(2, 'L'),
-            '*' => array(3, 'L'),
-            '/' => array(3, 'L'),
-            '%' => array(3, 'L'),
-            '^' => array(4, 'R'),
-        );
+        $ops = [
+            '+' => [2, 'L'],
+            '-' => [2, 'L'],
+            '*' => [3, 'L'],
+            '/' => [3, 'L'],
+            '%' => [3, 'L'],
+            '^' => [4, 'R'],
+        ];
         // define possible values for an operator (or sign)
         $opsVals = array_keys($ops);
         // define possible values for an operand
-        $nums = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.');
+        $nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
         $thisNum = '';
         // loop through the expression left-to-right, placing operators
         // and operands onto the stack, and ultimately onto the output queue
@@ -485,15 +484,14 @@ class SugarMath
                 $isAfterOperand = true;
             } elseif (in_array($char, $opsVals)) {
                 // do not allow operators immediately after another operator (except + or -)
-                if (!$isAfterOperand && !in_array($char, array('+', '-'))) {
-                    throw new SugarMath_Exception("grouped operators error");
+                if (!$isAfterOperand && !in_array($char, ['+', '-'])) {
+                    throw new SugarMath_Exception('grouped operators error');
                 }
                 // if operator, see if operator at the top of stack has
                 // higher precedence, and if so continue to pop from stack
                 // and push onto the output queue until false
                 while (in_array($last_op = end($stack), $opsVals)) {
-                    if (
-                        ($ops[$char][1] == 'L' && $ops[$char][0] <= $ops[$last_op][0])
+                    if (($ops[$char][1] == 'L' && $ops[$char][0] <= $ops[$last_op][0])
                         || ($ops[$char][0] < $ops[$last_op][0])
                     ) {
                         $output[] = array_pop($stack);
@@ -523,7 +521,7 @@ class SugarMath
                 }
             } else {
                 // throw error for invalid chars in expression
-                if (!in_array($char, array(' '))) {
+                if (!in_array($char, [' '])) {
                     throw new SugarMath_Exception('invalid expression syntax');
                 }
             }
@@ -536,7 +534,7 @@ class SugarMath
             $output[] = $last_op;
         }
         // calculate using reverse polish notation from output queue
-        $result = array();
+        $result = [];
         foreach ($output as $val) {
             if (!in_array($val, $opsVals)) {
                 // not an operator, push onto result stack
@@ -547,22 +545,22 @@ class SugarMath
                 $p2 = array_pop($result);
                 switch ($val) {
                     case '+':
-                        $result[] = $this->_applyOperation('add', array($p2, $p1));
+                        $result[] = $this->_applyOperation('add', [$p2, $p1]);
                         break;
                     case '-':
-                        $result[] = $this->_applyOperation('sub', array($p2, $p1));
+                        $result[] = $this->_applyOperation('sub', [$p2, $p1]);
                         break;
                     case '*':
-                        $result[] = $this->_applyOperation('mul', array($p2, $p1));
+                        $result[] = $this->_applyOperation('mul', [$p2, $p1]);
                         break;
                     case '/':
-                        $result[] = $this->_applyOperation('div', array($p2, $p1));
+                        $result[] = $this->_applyOperation('div', [$p2, $p1]);
                         break;
                     case '%':
-                        $result[] = $this->_applyOperation('mod', array($p2, $p1));
+                        $result[] = $this->_applyOperation('mod', [$p2, $p1]);
                         break;
                     case '^':
-                        $result[] = $this->_applyOperation('pow', array($p2, $p1));
+                        $result[] = $this->_applyOperation('pow', [$p2, $p1]);
                         break;
                 }
             }

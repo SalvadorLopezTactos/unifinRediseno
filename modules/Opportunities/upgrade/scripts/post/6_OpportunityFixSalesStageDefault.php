@@ -14,7 +14,7 @@
 class SugarUpgradeOpportunityFixSalesStageDefault extends UpgradeScript
 {
     public $order = 6500;
-    public $version = "7.5.0.0";
+    public $version = '7.5.0.0';
     public $type = self::UPGRADE_CUSTOM;
 
     public function run()
@@ -22,7 +22,7 @@ class SugarUpgradeOpportunityFixSalesStageDefault extends UpgradeScript
         // this always needs to be ran
 
         // get the get_widget helper and the StandardField Helper
-        require_once('modules/DynamicFields/FieldCases.php');
+        require_once 'modules/DynamicFields/FieldCases.php';
 
         // we are working with opportunities
         $bean = BeanFactory::newBean('Opportunities');

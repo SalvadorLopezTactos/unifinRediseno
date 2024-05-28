@@ -257,7 +257,8 @@
             assigned_user_id: void 0,
             assigned_user_name: void 0,
             team_name: void 0,
-            default_dashboard: void 0
+            default_dashboard: void 0,
+            is_template: void 0
         };
 
         newModel.unset(clearAttributes, {silent: true});
@@ -453,9 +454,10 @@
      * Trigger the logic responsible for the visibility of certain inner buttons.
      */
     updateButtonVisibilities: function() {
-        var isDashboard = this.isDashboard();
-        var btnList = ['add_dashlet_button', 'restore_dashboard_button'];
-        this.toggleFabButton(btnList, isDashboard);
+        const isDashboard = this.isDashboard();
+
+        this.toggleFabButton(['restore_dashboard_button'], isDashboard);
+        this.toggleFabButton(['add_dashlet_button'], isDashboard && !this.model.get('is_template'));
     },
 
     /**

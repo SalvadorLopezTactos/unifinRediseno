@@ -116,20 +116,20 @@ class HealthCheckScanner
     /**
      * @var array List of modules which excluded from table check.
      */
-    protected $excludeModules = array(
+    protected $excludeModules = [
         'Audit',
         'Connectors',
         'DynamicFields',
         'MergeRecords',
-    );
+    ];
 
     /**
      * @var array List of unsupported modules.
      */
-    protected $unsupportedModules = array(
+    protected $unsupportedModules = [
         'Feeds',
-        'iFrames'
-    );
+        'iFrames',
+    ];
 
     /**
      *
@@ -148,7 +148,7 @@ class HealthCheckScanner
      *
      * @var array
      */
-    protected $status_log = array();
+    protected $status_log = [];
 
     /**
      * @var resource
@@ -160,18 +160,18 @@ class HealthCheckScanner
      *
      * @var array
      */
-    protected $logMeta = array();
+    protected $logMeta = [];
 
     /**
      * Health Check module properties
      *
      * @var array
      */
-    protected $healthCheckModule = array(
+    protected $healthCheckModule = [
         'bean' => 'HealthCheck',
         'file' => 'modules/HealthCheck/HealthCheck.php',
-        'md5' => './modules/HealthCheck/HealthCheck.php'
-    );
+        'md5' => './modules/HealthCheck/HealthCheck.php',
+    ];
 
 
     /**
@@ -179,25 +179,25 @@ class HealthCheckScanner
      *
      * @var array
      */
-    protected $ignoredFiles = array(
+    protected $ignoredFiles = [
         'custom/Extension/modules/Administration/Ext/Administration/upgrader2.php',
-        'custom/Extension/modules/Administration/Ext/Administration/healthcheck.php'
-    );
+        'custom/Extension/modules/Administration/Ext/Administration/healthcheck.php',
+    ];
 
     /**
      * Array of files which will not be scanned for output
      * @var array
      */
-    protected $ignoreOutputCheckFiles = array(
+    protected $ignoreOutputCheckFiles = [
         'modules/Connectors/connectors/sources/ext/rest/insideview/InsideViewLogicHook.php',
         'modules/Connectors/connectors/sources/ext/rest/inbox25/InboxViewLogicHook.php',
-    );
+    ];
 
     /**
      * Array of files which will be ignored if missing in 7.x
      * @var array
      */
-    protected $ignoreMissingCustomFiles = array(
+    protected $ignoreMissingCustomFiles = [
         'modules/Connectors/connectors/sources/ext/rest/insideview/InsideViewLogicHook.php',
         'modules/Connectors/connectors/sources/ext/rest/inbox25/InboxViewLogicHook.php',
         'modules/Contacts/SugarFeeds/ContactFeed.php',
@@ -205,7 +205,7 @@ class HealthCheckScanner
         'modules/SugarFeed/SugarFeed.php',
         'modules/Cases/SugarFeeds/CaseFeed.php',
         'modules/Opportunities/SugarFeeds/OppFeed.php',
-    );
+    ];
 
     protected $ignoredTplPatterns = [
         '~/LinkedinParserSettings\.tpl$~i',
@@ -239,7 +239,7 @@ class HealthCheckScanner
      * Dirs that are moved to vendor
      * @var array
      */
-    protected $removed_directories = array(
+    protected $removed_directories = [
         'include/HTMLPurifier',
         'include/HTTP_WebDAV_Server',
         'include/Smarty',
@@ -250,12 +250,12 @@ class HealthCheckScanner
         'include/tcpdf',
         'include/ytree',
         'include/SugarSearchEngine/Elastic/Elastica',
-    );
+    ];
     /**
      * dirs or files that have been deleted
      * @var array
      */
-    protected $removed_files = array(
+    protected $removed_files = [
         'include/Smarty/plugins/function.sugar_help.php',
         // Removed in Sugar 7.8
         'modules/pmse_Inbox/engine/Crypt.php',
@@ -263,34 +263,34 @@ class HealthCheckScanner
         'modules/pmse_Inbox/engine/PMSELicenseManager.php',
         'modules/pmse_Project/pmse_BpmAccessManagement',
         'modules/Notifications/controller.php',
-    );
+    ];
 
     /**
      * Specific files that should be excluded from SH include check
      * @var array
      */
-    protected $specificSugarFiles = array(
-        'include/Smarty/plugins/function.sugar_action_menu.php'
-    );
+    protected $specificSugarFiles = [
+        'include/Smarty/plugins/function.sugar_action_menu.php',
+    ];
 
-    protected $excludedScanDirectories = array(
+    protected $excludedScanDirectories = [
         'backup',
         'tmp',
         'temp',
-    );
-    protected $filesToFix = array();
+    ];
+    protected $filesToFix = [];
 
-    protected $specificSugarFilesToFix = array();
+    protected $specificSugarFilesToFix = [];
 
-    protected $sessionUsages = array();
+    protected $sessionUsages = [];
 
-    protected $deletedFilesReferenced = array();
+    protected $deletedFilesReferenced = [];
 
     /**
      * regex'es for removed code
      * @var array
      */
-    protected $deprecatedPHPCodePatterns = array(
+    protected $deprecatedPHPCodePatterns = [
         '/[^\w]SugarSession[^\w]/i' => 'deprecatedCodeSugarSession', //report id
         '/[^\w]SugarAuthenticate[^\w]/i' => 'deprecatedAuthN',
         '/[^\w]SugarAuthenticateUser[^\w]/i' => 'deprecatedAuthN',
@@ -300,9 +300,11 @@ class HealthCheckScanner
         '/[^\w]SAMLAuthenticateUser[^\w]/i' => 'deprecatedAuthN',
         '/[^\w]SAMLRequestRegistry[^\w]/i' => 'deprecatedAuthN',
         '/\bMonolog\\\\Handler\\\\(HipChatHandler|SlackbotHandler|RavenHandler)\b/i' => 'incompatibleMonologCustomization',
-    );
+        '/\bZend_Mime(\b|_Exception|_Decode|_Message|_Part)/i' => 'removedZendComponent',
+        '/\b(SugarUploadS3|Zend_Service_|Zend_Gdata\b|Zend_Gdata_|Zend_Version)/i' => 'deprecatedZendComponent',
+    ];
 
-    protected $deprecatedJsAPIPatterns = array(
+    protected $deprecatedJsAPIPatterns = [
         // Removed in 7.8
         '/(_\.bindAll)\s*\([\s\w]+[^,][\s\w]+\)/U' => 'useOfUnderscoreBindAll',
         '/\.(setDefaultAttributes)\W/' => 'removedSidecarAPI_Bean',
@@ -318,7 +320,7 @@ class HealthCheckScanner
         '/(metadata\.getField\([\'"])/' => 'useOfMetadataGetFieldOldSignature',
         // Deprecated in 7.10
         '/\.(initButtons)/' => 'useOfInitButtons',
-    );
+    ];
 
     protected $deprecatedHBSPatterns = [];
 
@@ -393,7 +395,7 @@ class HealthCheckScanner
     ];
 
     //Removed in 7.8
-    protected $removedSidecarFiles = array(
+    protected $removedSidecarFiles = [
         'clients/base/views/news',
         'clients/base/layouts/subpanels-create/subpanels-create',
         'clients/base/views/history-summary-preview-header',
@@ -408,10 +410,10 @@ class HealthCheckScanner
         'modules/KBContents/clients/base/views/prefilteredlist',
         'modules/Quotes/clients/base/views/panel-top-for-accounts',
         'modules/RevenueLineItems/clients/base/views/subpanel-list-with-massupdate',
-    );
+    ];
 
     //Removed in 7.8
-    protected $removedSidecarClasses = array(
+    protected $removedSidecarClasses = [
         'NewsView',
         'SubpanelsCreateLayout',
         'HistorySummaryPreviewHeaderView',
@@ -426,9 +428,9 @@ class HealthCheckScanner
         'KBContentsPrefilteredlistView',
         'QuotesPanelTopForAccountsView',
         'RevenueLineItemsSubpanelListWithMassupdateView',
-    );
+    ];
 
-    protected $filesWithDeprecatedCode = array();
+    protected $filesWithDeprecatedCode = [];
 
     protected $filesWithIncompatibleInheritance = [];
 
@@ -439,54 +441,54 @@ class HealthCheckScanner
      * failures
      * @var array
      */
-    protected $unserializeFailureWarnings = array();
+    protected $unserializeFailureWarnings = [];
 
     /**
      * Listing of unserialization failure warnings
      * @var array
      */
-    protected $unserializeFailureReasons = array(
+    protected $unserializeFailureReasons = [
         self::UNSERIALIZE_FAIL_DATA => 'LBL_PA_UNSERIALIZE_DATA_FAILURE',
-        self::UNSERIALIZE_FAIL_OBJECTS => 'LBL_PA_UNSERIALIZE_OBJECT_FAILURE'
-    );
+        self::UNSERIALIZE_FAIL_OBJECTS => 'LBL_PA_UNSERIALIZE_OBJECT_FAILURE',
+    ];
 
     /**
      * Listing of methods that are run during the PA unserialize upgrade. At a
      * minimum this requires a task name that maps to a table name and columns.
      * @var array
      */
-    protected $unserializeTasks = array(
-        'lockedVariables' => array(
+    protected $unserializeTasks = [
+        'lockedVariables' => [
             'table' => 'pmse_bpm_process_definition',
-            'cols' => array('pro_locked_variables'),
-        ),
-        'dynamicFormTable' => array(
+            'cols' => ['pro_locked_variables'],
+        ],
+        'dynamicFormTable' => [
             'table' => 'pmse_bpm_dynamic_forms',
-            'cols' => array('dyn_view_defs'),
-            'functions' => array('base64_decode'),
+            'cols' => ['dyn_view_defs'],
+            'functions' => ['base64_decode'],
             'decode' => false,
-        ),
-        'bpmFlowTable' => array(
+        ],
+        'bpmFlowTable' => [
             'table' => 'pmse_bpm_flow',
-            'cols' => array('cas_adhoc_actions'),
-        ),
-    );
+            'cols' => ['cas_adhoc_actions'],
+        ],
+    ];
 
     /**
      * Methods to run as part of the SugarBPM invalid field check
      * @var array
      */
-    protected $invalidFieldUseMethods = array(
+    protected $invalidFieldUseMethods = [
         'checkActionsForInvalidFields',
         'checkBusinesRulesForInvalidFields',
-    );
+    ];
 
     /**
      * List of fields blacklisted for SugarBPM as of 7.6.2
      * @var array
      */
-    protected $blacklistedPAFields = array(
-        'ALL' => array(
+    protected $blacklistedPAFields = [
+        'ALL' => [
             'deleted',
             'mkto_id',
             'parent_type',
@@ -497,8 +499,8 @@ class HealthCheckScanner
             'portal_name',
             'password',
             'is_admin',
-        ),
-        'BR' => array(
+        ],
+        'BR' => [
             'duration_hours',
             'duration_minutes',
             'repeat_type',
@@ -506,65 +508,65 @@ class HealthCheckScanner
             'modified_user_id',
             'date_entered',
             'date_modified',
-        ),
-        'BRR' => array(),
-        'CF' => array(
+        ],
+        'BRR' => [],
+        'CF' => [
             'created_by',
             'modified_user_id',
             'date_entered',
             'date_modified',
-        ),
-    );
+        ],
+    ];
 
     /**
      * PA special fields
      * @var array
      */
-    protected $whitelistedPAFields = array(
-        'ALL' => array('created_by', 'modified_user_id'),
-        'BR' => array('assigned_user_id', 'email1', 'outlook_id'),
-        'BRR' => array('assigned_user_id', 'email1', 'outlook_id'),
-        'ET' => array('email1'),
-        'AC' => array('assigned_user_id', 'likely_case', 'worst_case', 'best_case', 'teams'),
-        'CF' => array('assigned_user_id', 'likely_case', 'worst_case', 'best_case', 'teams'),
-        'RR' => array(),
-    );
+    protected $whitelistedPAFields = [
+        'ALL' => ['created_by', 'modified_user_id'],
+        'BR' => ['assigned_user_id', 'email1', 'outlook_id'],
+        'BRR' => ['assigned_user_id', 'email1', 'outlook_id'],
+        'ET' => ['email1'],
+        'AC' => ['assigned_user_id', 'likely_case', 'worst_case', 'best_case', 'teams'],
+        'CF' => ['assigned_user_id', 'likely_case', 'worst_case', 'best_case', 'teams'],
+        'RR' => [],
+    ];
 
     /**
      * List of field types that are blacklisted throughout SugarBPM
      * @var array
      */
-    protected $blacklistedPAFieldTypes = array('image','password','file');
+    protected $blacklistedPAFieldTypes = ['image', 'password', 'file'];
 
     /**
      * List of validation types needed when checking SugarBPM fields
      * @var array
      */
-    protected $processFieldValidationTypes = array(
+    protected $processFieldValidationTypes = [
         'ADD_RELATED_RECORD' => 'AC',
         'CHANGE_FIELD' => 'CF',
         'BUSINESS_RULE' => 'BR',
-    );
+    ];
 
     /**
      * List of business rule validation types
      * @var array
      */
-    protected $businessRuleTypes = array(
+    protected $businessRuleTypes = [
         'BRR' => 'conditions',
         'BR' => 'conclusions',
-    );
+    ];
 
     /**
      * Stack of invalid SugarBPM fields used in context, and their counts
      * @var array
      */
-    protected $invalidPAFields = array();
+    protected $invalidPAFields = [];
 
     /**
      * @var array
      */
-    protected $md5_files = array();
+    protected $md5_files = [];
 
     /**
      * @return string[]
@@ -594,7 +596,7 @@ class HealthCheckScanner
     {
         $this->meta = HealthCheckScannerMeta::getInstance();
         if (!class_exists('LoggerManager')) {
-            $this->logfile = "healthcheck-" . time() . ".log";
+            $this->logfile = 'healthcheck-' . time() . '.log';
         }
     }
 
@@ -607,6 +609,7 @@ class HealthCheckScanner
     {
         return $this->ignoreOutputCheckFiles;
     }
+
     /**
      * Set point to UpgradeDriver object
      * @param UpgradeDriver $upgrader
@@ -626,7 +629,7 @@ class HealthCheckScanner
     protected function log(string $msg, string $tag = 'INFO')
     {
         if (null === $this->logfile && empty($this->fp)) {
-            $fmsg = sprintf("[Scanner] [%s] %s", $tag, $msg);
+            $fmsg = sprintf('[Scanner] [%s] %s', $tag, $msg);
             $tagsToLevelMap = [
                 'STATUS' => 'fatal',
                 'ERROR' => 'error',
@@ -673,10 +676,10 @@ class HealthCheckScanner
      */
     protected function logReason($status, $code, $reason)
     {
-        $this->status_log[$status][] = array(
+        $this->status_log[$status][] = [
             'code' => $code,
-            'reason' => $reason
-        );
+            'reason' => $reason,
+        ];
     }
 
     /**
@@ -702,7 +705,7 @@ class HealthCheckScanner
         $code = $scanMeta['id'];
         $report = $scanMeta['report'];
         $this->logMeta[] = $scanMeta;
-        $issueNo = count($this->logMeta);
+        $issueNo = $this->safeCount($this->logMeta);
 
         $reason = "[Issue $issueNo][$report][$code][" . vsprintf($scanMeta['log'], $params) . ']';
 
@@ -868,8 +871,8 @@ class HealthCheckScanner
     {
         $sugar_version = '9.9.9';
         $sugar_flavor = 'unknown';
-        include "sugar_version.php";
-        return array($sugar_version, $sugar_flavor);
+        include 'sugar_version.php';
+        return [$sugar_version, $sugar_flavor];
     }
 
     /**
@@ -890,7 +893,7 @@ class HealthCheckScanner
         if (defined('E_DEPRECATED')) {
             $flags = $flags & ~E_DEPRECATED;
         }
-        set_error_handler(array($this, 'scriptErrorHandler'), $flags);
+        set_error_handler([$this, 'scriptErrorHandler'], $flags);
         $upgraderVersionInfo = $this->getVersion();
         $this->log(vsprintf("HealthCheck v.%s (build %s) starting scanning $this->instance", $upgraderVersionInfo));
         if (!$this->init()) {
@@ -918,14 +921,14 @@ class HealthCheckScanner
                 if ((!version_compare($sugar_version, $manifestVersion) && !strcasecmp($sugar_flavor, $manifestFlavor)) ||
                     version_compare($sugar_version, $manifestVersion, '>')
                 ) {
-                    $this->updateStatus("alreadyUpgraded");
-                    $this->log("Instance already upgraded to " . $manifestVersion);
+                    $this->updateStatus('alreadyUpgraded');
+                    $this->log('Instance already upgraded to ' . $manifestVersion);
                     return $this->logMeta;
                 }
             }
 
             if ($GLOBALS['sugar_config']['site_url']) {
-                $this->ping(array("instance" => $GLOBALS['sugar_config']['site_url'], "version" => $sugar_version));
+                $this->ping(['instance' => $GLOBALS['sugar_config']['site_url'], 'version' => $sugar_version]);
             }
 
             $this->checkDbDriver();
@@ -943,10 +946,10 @@ class HealthCheckScanner
             $this->updateCustomDirScanStatus();
 
             // Check global hooks
-            $this->log("Checking global hooks");
-            $hook_files = array();
-            $this->extractHooks("custom/modules/logic_hooks.php", $hook_files, true);
-            $this->extractHooks("custom/application/Ext/LogicHooks/logichooks.ext.php", $hook_files, true);
+            $this->log('Checking global hooks');
+            $hook_files = [];
+            $this->extractHooks('custom/modules/logic_hooks.php', $hook_files, true);
+            $this->extractHooks('custom/application/Ext/LogicHooks/logichooks.ext.php', $hook_files, true);
             foreach ($hook_files as $hookname => $hooks) {
                 foreach ($hooks as $hook_data) {
                     $this->log("Checking global hook $hookname:{$hook_data[1]}");
@@ -965,9 +968,11 @@ class HealthCheckScanner
                 $this->checkSmartyTemplatesSyntax();
             }
 
+            $this->checkSmartyTemplatesModifierDeprecationErrors();
+
             // TODO: custom dashlets
             if ($GLOBALS['sugar_config']['site_url']) {
-                $this->ping(array("instance" => $GLOBALS['sugar_config']['site_url'], "verdict" => $this->status));
+                $this->ping(['instance' => $GLOBALS['sugar_config']['site_url'], 'verdict' => $this->status]);
             }
         } catch (\Error $error) {
             $this->reportPhpError(E_ERROR, $error->getMessage(), $error->getFile(), $error->getLine());
@@ -997,7 +1002,7 @@ class HealthCheckScanner
         $dbErrors = [];
         foreach ($templates as $template) {
             $dbErrors = $converter->scanDatabaseTpl($template);
-            if (!(is_countable($dbErrors) ? count($dbErrors) : 0)) {
+            if (!$this->safeCount($dbErrors)) {
                 $this->updateStatus('smartyCustomPdf', $template['name']);
             } else {
                 $this->updateStatus('smartyOutdatedCustomPdf', $template['name'], implode(', ', $dbErrors));
@@ -1025,7 +1030,7 @@ class HealthCheckScanner
             $curFile = $match[0];
             if (defined('SUGAR_SHADOW_TEMPLATEPATH')) {
                 $realName = realpath(str_replace(SHADOW_INSTANCE_DIR . '/', '', $curFile));
-                if (0 === strpos($realName, SUGAR_SHADOW_TEMPLATEPATH)) {
+                if (0 === strpos($realName, (string) SUGAR_SHADOW_TEMPLATEPATH)) {
                     continue;
                 }
             } elseif (isset($this->md5_files[str_replace('\\', '/', $curFile)])) {// Stock file
@@ -1036,7 +1041,7 @@ class HealthCheckScanner
                 continue;
             }
             $errors = $converter->scanFilesystemTpl($curFile);
-            if (!(is_countable($errors) ? count($errors) : 0)) {
+            if (!$this->safeCount($errors)) {
                 $this->updateStatus('smartyCustomization', $curFile);
             } else {
                 $this->updateStatus('smartyOutdatedCustomization', $curFile);
@@ -1047,7 +1052,7 @@ class HealthCheckScanner
         if (file_exists($cacheDir)) {
             rmdir_recursive($cacheDir);
         }
-        if (is_countable($errors) ? count($errors) : 0) {
+        if ($this->safeCount($errors)) {
             rmdir_recursive('./_smarty3_');
         }
         $converter::unmuteExpectedErrors();
@@ -1067,13 +1072,87 @@ class HealthCheckScanner
         return false;
     }
 
+    protected function checkSmartyTemplatesModifierDeprecationErrors()
+    {
+        $sql = "SELECT * FROM pdfmanager WHERE deleted='0'";
+        $templates = DBManagerFactory::getConnection()->fetchAllAssociative($sql);
+
+        foreach ($templates as $template) {
+            $oldErrorReporting = error_reporting();
+            error_reporting(E_USER_DEPRECATED);
+            $deprecationError = $this->getSmartyTemplateDeprecationError((string) $template['body_html']);
+            error_reporting($oldErrorReporting);
+            if ($deprecationError !== null) {
+                $this->updateStatus('smarty4ModifierDeprecation', $template['name'], $deprecationError);
+                $this->log('Errors: ' . $deprecationError, 'ERROR');
+            }
+        }
+
+        if (!is_dir('./custom') && !is_dir('./modules')) {
+            return;
+        }
+
+        $iterator = new AppendIterator();
+        if (is_dir('./custom')) {
+            $customRecursiveIterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator('./custom'));
+            $customRegexIterator = new RegexIterator($customRecursiveIterator, '/^.+\.tpl$/i', RecursiveRegexIterator::GET_MATCH);
+            $iterator->append($customRegexIterator);
+        }
+        if (is_dir('./modules')) {
+            $modulesRecursiveIterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator('./modules'));
+            $modulesRegexIterator = new RegexIterator($modulesRecursiveIterator, '/^.+\.tpl$/i', RecursiveRegexIterator::GET_MATCH);
+            $iterator->append($modulesRegexIterator);
+        }
+        foreach ($iterator as $match) {
+            $curFile = $match[0];
+            if (defined('SUGAR_SHADOW_TEMPLATEPATH')) {
+                $realName = realpath(str_replace(SHADOW_INSTANCE_DIR . '/', '', $curFile));
+                if (0 === strpos($realName, SUGAR_SHADOW_TEMPLATEPATH)) {
+                    continue;
+                }
+            } elseif (isset($this->md5_files[str_replace('\\', '/', $curFile)])) {// Stock file
+                continue;
+            }
+            $oldErrorReporting = error_reporting();
+            error_reporting(E_USER_DEPRECATED);
+            $deprecationError = $this->getSmartyTemplateDeprecationError((string) file_get_contents($curFile));
+            error_reporting($oldErrorReporting);
+            if ($deprecationError !== null) {
+                $this->updateStatus('smarty4ModifierDeprecation', $curFile, $deprecationError);
+                $this->log('Errors: ' . $deprecationError, 'ERROR');
+            }
+        }
+    }
+
+    protected function getSmartyTemplateDeprecationError(string $tpl): ?string
+    {
+        $ss = new Sugar_Smarty();
+        $ss->force_compile = true;
+        ob_start();
+        try {
+            error_clear_last();
+            $ss->display('string:' . $tpl);
+        } catch (Throwable $e) {
+            return null;
+        } finally {
+            ob_end_clean();
+        }
+
+        $lastError = error_get_last();
+        if (strstr($lastError['message'] ?? '', 'as a modifier is deprecated and will be removed ')) {
+            error_clear_last();
+            return $lastError['message'];
+        }
+        return null;
+    }
+
     public function initPackageScan()
     {
         $flags = E_ALL & ~E_STRICT;
         if (defined('E_DEPRECATED')) {
             $flags = $flags & ~E_DEPRECATED;
         }
-        set_error_handler(array($this, 'scriptErrorHandler'), $flags);
+        set_error_handler([$this, 'scriptErrorHandler'], $flags);
         $this->init();
         return $this->logMeta;
     }
@@ -1083,9 +1162,9 @@ class HealthCheckScanner
         $this->log("VERDICT: {$this->status}", 'STATUS');
         ksort($this->status_log);
         foreach ($this->status_log as $status => $items) {
-            $this->log("=> $status: " . (is_countable($items) ? count($items) : 0) . " total", 'BUCKET');
+            $this->log("=> $status: " . $this->safeCount($items) . ' total', 'BUCKET');
             foreach ($items as $item) {
-                $this->log(sprintf("=> %s: %s", $status, $item['reason']), 'BUCKET');
+                $this->log(sprintf('=> %s: %s', $status, $item['reason']), 'BUCKET');
             }
         }
         restore_error_handler();
@@ -1118,7 +1197,7 @@ class HealthCheckScanner
         [, $flavor] = $this->getVersionAndFlavor();
 
         // only run this for ENT or ULT flavors
-        if (in_array(strtolower($flavor), array('ent', 'ult'))) {
+        if (in_array(strtolower($flavor), ['ent', 'ult'])) {
             $warnings = $this->checkLockedFieldGroups();
             foreach ($warnings as $warning) {
                 $this->updateStatus('invalidAWFLockedFieldGroup', $warning['group'], $warning['pd'], $warning['module'], $warning['fields']);
@@ -1164,28 +1243,28 @@ class HealthCheckScanner
                         if (isset($locked[$def['group']])) {
                             $locked[$def['group']][] = $lockedField;
                         } else {
-                            $locked[$def['group']] = array($lockedField);
+                            $locked[$def['group']] = [$lockedField];
                         }
                     } else {
                         // if a locked field does not belong to any group, default itself as the locked group
                         if (!empty($locked[$lockedField])) {
-                            $locked[$lockedField] = array_merge($locked[$lockedField], array($lockedField));
+                            $locked[$lockedField] = array_merge($locked[$lockedField], [$lockedField]);
                         } else {
-                            $locked[$lockedField] = array($lockedField);
+                            $locked[$lockedField] = [$lockedField];
                         }
                     }
                     if ($checkDuration && in_array($lockedField, $durationFields)) {
                         if (isset($locked[$durationGroup])) {
                             $locked[$durationGroup][] = $lockedField;
                         } else {
-                            $locked[$durationGroup] = array($lockedField);
+                            $locked[$durationGroup] = [$lockedField];
                         }
                     }
                 }
                 // tally the number of fields in each group
                 foreach ($locked as $group => $fields) {
                     if ($checkDuration && $group == $durationGroup) {
-                        $total = count($durationFields);
+                        $total = $this->safeCount($durationFields);
                     } else {
                         $total = 0;
                         foreach ($bean->field_defs as $def) {
@@ -1196,14 +1275,14 @@ class HealthCheckScanner
                             }
                         }
                     }
-                    if ($total > count($fields)) {
+                    if ($total > $this->safeCount($fields)) {
                         // Add this failure to the stack
-                        $warnings[] = array(
+                        $warnings[] = [
                             'fields' => implode(',', $fields),
                             'group' => $group,
                             'pd' => $row['name'],
                             'module' => $row['pro_module'],
-                        );
+                        ];
                     }
                 }
             }
@@ -1255,7 +1334,7 @@ class HealthCheckScanner
         );
 
         // Builds a list of not empty SQL bits.
-        $whereCols = $updateCols = array();
+        $whereCols = $updateCols = [];
         foreach ($cols as $col) {
             $whereCols[] = $this->getNotEmptyFieldSQL($col);
         }
@@ -1263,7 +1342,7 @@ class HealthCheckScanner
         $whereNotEmpty = implode(' AND ', $whereCols);
 
         // Build the query and run it
-        $select = "SELECT id, %s FROM %s WHERE %s";
+        $select = 'SELECT id, %s FROM %s WHERE %s';
         $sql = sprintf($select, $selectCols, $table, $whereNotEmpty);
         $result = $this->db->query($sql);
 
@@ -1389,7 +1468,8 @@ class HealthCheckScanner
      * @param boolean $decode Whether to html entity decode the input
      * @return boolean
      */
-    protected function secondaryUnserialize($string) {
+    protected function secondaryUnserialize($string)
+    {
         // For reference, please see the following links...
         //http://magp.ie/2014/08/13/php-unserialize-string-after-non-utf8-characters-stripped-out/
         //https://dzone.com/articles/mulit-byte-unserialize
@@ -1398,7 +1478,7 @@ class HealthCheckScanner
             '!s:(\d+):"(.*?)";!s',
             function ($matches) {
                 if (isset($matches[2])) {
-                    return 's:'.strlen($matches[2]).':"'.$matches[2].'";';
+                    return 's:' . strlen($matches[2]) . ':"' . $matches[2] . '";';
                 }
             },
             $string
@@ -1421,7 +1501,7 @@ class HealthCheckScanner
 
         // Now use the same logic as the unserialize validator
         preg_match('/[oc]:[^:]*\d+:/i', $cleared, $matches);
-        return count($matches) > 0;
+        return $this->safeCount($matches) > 0;
     }
 
     /**
@@ -1447,16 +1527,16 @@ class HealthCheckScanner
     protected function getUnserializeFailureWarnings()
     {
         // Order is important, so make it count... col... table.. reason
-        $return = array();
+        $return = [];
         foreach ($this->unserializeFailureWarnings as $table => $cols) {
             foreach ($cols as $col => $reasons) {
                 foreach ($reasons as $reason => $count) {
-                    $return[] = array(
+                    $return[] = [
                         'count' => $count,
                         'col' => $col,
                         'table' => $table,
                         'reason' => $this->getUnserializeFailureReason($reason),
-                    );
+                    ];
                 }
             }
         }
@@ -1505,29 +1585,29 @@ ENDP;
         $contents = preg_replace("#$sePattern#i", '', $contents);
 
         $tokens = token_get_all($contents);
-        $tokens = array_filter($tokens, array($this, 'ignoreWhitespace'));
+        $tokens = array_filter($tokens, [$this, 'ignoreWhitespace']);
         $tokens = array_values($tokens);
         foreach ($tokens as $index => $token) {
             if (is_array($token)) {
                 if ($token[0] == T_INLINE_HTML) {
                     $inlineHTMLStatus = (strlen(trim($token[1])) != 0) ? 'inlineHtml' : 'inlineHtmlSpacing';
-                    $args = array($inlineHTMLStatus, $phpfile, $token[2]);
+                    $args = [$inlineHTMLStatus, $phpfile, $token[2]];
                 } elseif ($processOutput && $token[0] == T_ECHO) {
-                    $args = array('foundEcho', $phpfile, $token[2]);
+                    $args = ['foundEcho', $phpfile, $token[2]];
                 } elseif ($processOutput && $token[0] == T_PRINT) {
-                    $args = array('foundPrint', $phpfile, $token[2]);
+                    $args = ['foundPrint', $phpfile, $token[2]];
                 } elseif ($token[0] == T_EXIT) {
-                    $args = array('foundDieExit', $phpfile, $token[2]);
+                    $args = ['foundDieExit', $phpfile, $token[2]];
                 } elseif ($processOutput && $token[0] == T_STRING && $token[1] == 'print_r' && $this->checkPrintR($index, $tokens)) {
-                    $args = array('foundPrintR', $phpfile, $token[2]);
+                    $args = ['foundPrintR', $phpfile, $token[2]];
                 } elseif ($processOutput && $token[0] == T_STRING && $token[1] == 'var_dump') {
-                    $args = array('foundVarDump', $phpfile, $token[2]);
+                    $args = ['foundVarDump', $phpfile, $token[2]];
                 } elseif ($token[0] == T_STRING && strpos($token[1], 'ob_') === 0) {
-                    $args = array('inlineHtml', $token[1], $phpfile, $token[2]);
+                    $args = ['inlineHtml', $token[1], $phpfile, $token[2]];
                 } else {
                     continue;
                 }
-                call_user_func_array(array($this, 'updateStatus'), $args);
+                call_user_func_array([$this, 'updateStatus'], $args);
             }
         }
     }
@@ -1738,7 +1818,7 @@ ENDP;
      */
     protected function getInvalidPAActionFieldLogMessage($module, $field, $action, $processName, $actionName, $id)
     {
-        $msg  = "-----\n%s->%s field is not a valid action field for the %s action type.\n";
+        $msg = "-----\n%s->%s field is not a valid action field for the %s action type.\n";
         $msg .= "Process Definition Name: %s\nAction Name: %s\n";
         $msg .= "Table: pmse_bpm_activity_definition\nColumn: act_fields\nID: %s\n-----";
 
@@ -1764,7 +1844,7 @@ ENDP;
      */
     protected function getInvalidPANotFoundFieldLogMessage($module, $field, $processName, $actionName, $id)
     {
-        $msg  = "-----\n%s was not found as a field on the %s module.\n";
+        $msg = "-----\n%s was not found as a field on the %s module.\n";
         $msg .= "Process Definition Name: %s\nAction Name: %s\n";
         $msg .= "Table: pmse_bpm_activity_definition\nColumn: act_fields\nID: %s\n-----";
 
@@ -1795,7 +1875,7 @@ ENDP;
             return $return;
         }
 
-        if ($this->isWhitelistedPAField($def['name'], $type)){
+        if ($this->isWhitelistedPAField($def['name'], $type)) {
             return true;
         }
 
@@ -1847,7 +1927,7 @@ ENDP;
 
             // If the marker is a string or an array, it is mapped to a method
             if (is_string($def['processes'])) {
-                $def['processes'] = array($def['processes']);
+                $def['processes'] = [$def['processes']];
             }
 
             // For a field validation list, run through until you hit a false,
@@ -1880,7 +1960,7 @@ ENDP;
             $list = array_merge($list, $this->whitelistedPAFields[$type]);
         }
 
-        return in_array($field, $list);
+        return $this->safeInArray($field, $list);
     }
 
     /**
@@ -1896,7 +1976,7 @@ ENDP;
             $list = array_merge($list, $this->blacklistedPAFields[$type]);
         }
 
-        return in_array($field, $list);
+        return $this->safeInArray($field, $list);
     }
 
     /**
@@ -1927,7 +2007,7 @@ ENDP;
      */
     protected function isCalculatedField($def, $type)
     {
-        return in_array($type, array('AC', 'CF', 'BR')) && isset($def['formula']);
+        return in_array($type, ['AC', 'CF', 'BR']) && isset($def['formula']);
     }
 
     /**
@@ -1938,7 +2018,7 @@ ENDP;
      */
     protected function isReadonlyField($def, $type)
     {
-        return in_array($type, array('RR', 'AC', 'CF', 'BR')) && isset($def['readonly']);
+        return in_array($type, ['RR', 'AC', 'CF', 'BR']) && isset($def['readonly']);
     }
 
     /**
@@ -2084,12 +2164,12 @@ ENDP;
      */
     protected function getInvalidFieldUseWarnings()
     {
-        $return = array();
+        $return = [];
         foreach ($this->invalidPAFields as $type => $count) {
-            $return[] = array(
+            $return[] = [
                 'type' => $type,
                 'count' => $count,
-            );
+            ];
         }
 
         return $return;
@@ -2116,7 +2196,7 @@ ENDP;
      */
     protected function getInvalidBusinessRuleFieldLogMessage($module, $field, $type, $name, $id)
     {
-        $msg  = "-----\n%s->%s field is not a valid business rule %s field.\n";
+        $msg = "-----\n%s->%s field is not a valid business rule %s field.\n";
         $msg .= "Business Rule Name: %s\nID: %s\n-----";
 
         return sprintf(
@@ -2139,7 +2219,7 @@ ENDP;
      */
     protected function getInvalidPABRNotFoundFieldLogMessage($module, $field, $name, $id)
     {
-        $msg  = "-----\n%s was not found as a field on the %s module.\n";
+        $msg = "-----\n%s was not found as a field on the %s module.\n";
         $msg .= "Business Rule Name: %s\nID: %s\n-----";
 
         return sprintf(
@@ -2162,15 +2242,15 @@ ENDP;
         $data = json_decode($def, true);
 
         // Now set the return, using some parts of the definition that we need
-        $return = array(
+        $return = [
             'id' => $data['id'],
             'name' => $data['name'],
             'module' => $data['base_module'],
-            'scan' => array(
-                'BR' => array(),
-                'BRR' => array(),
-            ),
-        );
+            'scan' => [
+                'BR' => [],
+                'BRR' => [],
+            ],
+        ];
 
         // We are going to need the bean for the target module, so get that
         $bean = BeanFactory::newBean($data['base_module']);
@@ -2189,10 +2269,10 @@ ENDP;
 
                 // Create a scannable row of business rule condition fields
                 // by module
-                $return['scan']['BRR'][$key] = array(
+                $return['scan']['BRR'][$key] = [
                     'module' => $module,
                     'field' => $row['field'],
-                );
+                ];
             }
 
             // Handle the rulesets, or what is actually checked and returned
@@ -2208,10 +2288,10 @@ ENDP;
                         $key = $this->getBusinessRuleKey($module, $condition['variable_name']);
 
                         // Add this module:field to the stack of READ ops checks
-                        $return['scan']['BRR'][$key] = array(
+                        $return['scan']['BRR'][$key] = [
                             'module' => $module,
                             'field' => $condition['variable_name'],
-                        );
+                        ];
                     }
                 }
 
@@ -2227,10 +2307,10 @@ ENDP;
                         $key = $this->getBusinessRuleKey($data['base_module'], $conclusion['conclusion_value']);
 
                         // Add this module:field to the stack of WRITE ops checks
-                        $return['scan']['BR'][$key] = array(
+                        $return['scan']['BR'][$key] = [
                             'module' => $data['base_module'],
                             'field' => $conclusion['conclusion_value'],
-                        );
+                        ];
                     }
                 }
             }
@@ -2253,8 +2333,8 @@ ENDP;
 
     /**
      * Loads up the package check list
-     * @see Scanner::checkPackages()
      * @return array
+     * @see Scanner::checkPackages()
      */
     protected function loadPackageChecklist()
     {
@@ -2272,11 +2352,10 @@ ENDP;
     {
         $this->loadPackageChecklist();
 
-        $this->log("Checking packages");
+        $this->log('Checking packages');
         $pm = $this->getPackageManager();
         $packages = $pm->getinstalledPackages();
         foreach ($packages as $pack) {
-
             if ($pack['enabled'] == 'DISABLED') {
                 if (isset($this->packages[$pack['name']]['checkDisabled']) &&
                     $this->packages[$pack['name']]['checkDisabled'] === false
@@ -2301,7 +2380,7 @@ ENDP;
                     if (!empty($req['author'])) {
                         $uh = new UpgradeHistory();
                         $uh->retrieve_by_string_fields(
-                            array('name' => $pack['name'], 'version' => $pack['version']),
+                            ['name' => $pack['name'], 'version' => $pack['version']],
                             true,
                             false
                         );
@@ -2315,7 +2394,7 @@ ENDP;
                     }
 
                     if (!empty($req['path']) && is_dir($req['path']) &&
-                        is_callable(array('SugarAutoLoader', 'addDirectory'))
+                        is_callable(['SugarAutoLoader', 'addDirectory'])
                     ) {
                         SugarAutoLoader::addDirectory($req['path']);
                     }
@@ -2325,7 +2404,7 @@ ENDP;
                     }
                 }
                 if ($incompatible) {
-                    $this->updateStatus("incompatIntegration" . (!empty($req['__MetaSuffix']) ? $req['__MetaSuffix'] : ''), $pack['name'], $pack['version']);
+                    $this->updateStatus('incompatIntegration' . (!empty($req['__MetaSuffix']) ? $req['__MetaSuffix'] : ''), $pack['name'], $pack['version']);
                 }
             }
         }
@@ -2395,12 +2474,12 @@ ENDP;
      */
     protected function getLineNumberOfPattern($file, $pattern, $directory = '')
     {
-        $foundInfo = array();
+        $foundInfo = [];
 
         $fileContentsLined = file($file);
         $linesFound = preg_grep('/' . preg_quote($pattern, '/') . '/', $fileContentsLined);
 
-        if ((is_countable($linesFound) ? count($linesFound) : 0) > 0) {
+        if ($this->safeCount($linesFound) > 0) {
             foreach ($linesFound as $linePosition => $lineContent) {
                 $foundInfo['line'] = ((int)$linePosition + 1);
                 $foundInfo['directory'] = $directory;
@@ -2417,9 +2496,9 @@ ENDP;
         $this->checkCreateActions();
         $this->checkSidecarJSFiles();
         $this->checkSidecarTemplateFiles();
-        $this->checkCustomLessFiles(array("custom_themes_dir" => "themes"));
-        $this->log("Checking custom directory for no longer valid code");
-        $files = $this->getPhpFiles("custom/");
+        $this->checkCustomLessFiles(['custom_themes_dir' => 'themes']);
+        $this->log('Checking custom directory for no longer valid code');
+        $files = $this->getPhpFiles('custom/');
         foreach ($files as $name => $file) {
             // check for any occurrence of the directories and flag them
             $fileContents = file_get_contents($file);
@@ -2465,19 +2544,19 @@ ENDP;
             $m
         )) {
             $vendorFileFound = false;
-            $includedVendors = array();
+            $includedVendors = [];
             foreach ($m[1] as $value) {
                 foreach ($this->removed_directories as $directory) {
                     if (preg_match(
-                            "#(include|require|require_once|include_once)[\s('\"]*({$directory})#",
-                            $value
-                        ) > 0
+                        "#(include|require|require_once|include_once)[\s('\"]*({$directory})#",
+                        $value
+                    ) > 0
                     ) {
                         foreach ($this->specificSugarFiles as $specificSugarFile) {
                             if (preg_match(
-                                    "#(include|require|require_once|include_once)[\s('\"]*(\b{$specificSugarFile}\b)#",
-                                    $value
-                                ) > 0
+                                "#(include|require|require_once|include_once)[\s('\"]*(\b{$specificSugarFile}\b)#",
+                                $value
+                            ) > 0
                             ) {
                                 if (empty($this->specificSugarFilesToFix[$specificSugarFile][$file])) {
                                     $fileInfo = $this->getLineNumberOfPattern($file, $value, $directory);
@@ -2499,16 +2578,16 @@ ENDP;
                 }
             }
             if ($vendorFileFound) {
-                $this->filesToFix[] = array(
+                $this->filesToFix[] = [
                     'file' => $file,
-                    'vendors' => $includedVendors
-                );
+                    'vendors' => $includedVendors,
+                ];
             }
-            foreach ($this->removed_files AS $deletedFile) {
+            foreach ($this->removed_files as $deletedFile) {
                 if (preg_match(
-                        "#(include|require|require_once|include_once)[\s('\"]*({$deletedFile})#",
-                        $fileContents
-                    ) > 0
+                    "#(include|require|require_once|include_once)[\s('\"]*({$deletedFile})#",
+                    $fileContents
+                ) > 0
                 ) {
                     $this->log("Found $deletedFile in $file");
                     $this->deletedFilesReferenced[] = $file;
@@ -2527,19 +2606,19 @@ ENDP;
      */
     public function scanFileForSessionArrayReferences($file, $fileContents)
     {
-        $array_functions = array(
-            "array_change_key_case", "array_chunk", "array_column", "array_combine", "array_count_values",
-            "array_diff_assoc", "array_diff_key", "array_diff_uassoc", "array_diff_ukey", "array_diff",
-            "array_fill_keys", "array_fill", "array_filter", "array_flip", "array_intersect_assoc",
-            "array_intersect_key", "array_intersect_uassoc", "array_intersect_ukey", "array_intersect",
-            "array_key_exists", "array_keys", "array_map", "array_merge_recursive", "array_merge", "array_multisort",
-            "array_pad", "array_pop", "array_product", "array_push", "array_rand", "array_reduce",
-            "array_replace_recursive", "array_replace", "array_reverse", "array_search", "array_shift", "array_slice",
-            "array_splice", "array_sum", "array_udiff_assoc", "array_udiff_uassoc", "array_udiff",
-            "array_uintersect_assoc", "array_uintersect_uassoc", "array_uintersect", "array_unique", "array_unshift",
-            "array_values", "array_walk_recursive", "array_walk", "array", "arsort", "asort", "in_array", "is_array",
-            "key_exists", "krsort", "ksort", "natcasesort", "natsort", "rsort", "sort", "uasort", "uksort", "usort"
-        );
+        $array_functions = [
+            'array_change_key_case', 'array_chunk', 'array_column', 'array_combine', 'array_count_values',
+            'array_diff_assoc', 'array_diff_key', 'array_diff_uassoc', 'array_diff_ukey', 'array_diff',
+            'array_fill_keys', 'array_fill', 'array_filter', 'array_flip', 'array_intersect_assoc',
+            'array_intersect_key', 'array_intersect_uassoc', 'array_intersect_ukey', 'array_intersect',
+            'array_key_exists', 'array_keys', 'array_map', 'array_merge_recursive', 'array_merge', 'array_multisort',
+            'array_pad', 'array_pop', 'array_product', 'array_push', 'array_rand', 'array_reduce',
+            'array_replace_recursive', 'array_replace', 'array_reverse', 'array_search', 'array_shift', 'array_slice',
+            'array_splice', 'array_sum', 'array_udiff_assoc', 'array_udiff_uassoc', 'array_udiff',
+            'array_uintersect_assoc', 'array_uintersect_uassoc', 'array_uintersect', 'array_unique', 'array_unshift',
+            'array_values', 'array_walk_recursive', 'array_walk', 'array', 'arsort', 'asort', 'in_array', 'is_array',
+            'key_exists', 'krsort', 'ksort', 'natcasesort', 'natsort', 'rsort', 'sort', 'uasort', 'uksort', 'usort',
+        ];
         if (preg_match_all(
             '/(\w*(array|sort)[\w\s]*)\([^)]*\$_SESSION/',
             $fileContents,
@@ -2592,22 +2671,23 @@ ENDP;
             return;
         }
 
-        $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
+        $parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
         try {
             $stmts = $parser->parse($fileContents);
         } catch (\PhpParser\Error $error) {
-            $this->updateStatus("phpError", 'E_UNKNOWN', $error->getMessage(), $file, $error->getLine());
+            $this->updateStatus('phpError', 'E_UNKNOWN', $error->getMessage(), $file, $error->getLine());
             return;
         }
 
-        $traverser = new NodeTraverser;
+        $traverser = new NodeTraverser();
         $traverser->addVisitor(new NameResolver());
         $traverser->addVisitor(new ParentConnectingVisitor());
         $methodSignatureVisitor = $this->getMethodSignatureVisitor($this->inheritanceRules);
         $traverser->addVisitor($methodSignatureVisitor);
         $traverser->traverse($stmts);
 
-        if ((is_countable($methodSignatureVisitor->getIssues()) ? count($methodSignatureVisitor->getIssues()) : 0) > 0) {
+        $issues = $methodSignatureVisitor->getIssues();
+        if ($this->safeCount($issues) > 0) {
             $this->filesWithIncompatibleInheritance['incompatibleMonologCustomization'][] = $file;
         }
     }
@@ -2619,7 +2699,7 @@ ENDP;
         // need it to load PHPParser classes
         require_once __DIR__ . '/Checks/Dbal.php';
 
-        $check = new DbalHealthCheck;
+        $check = new DbalHealthCheck();
         $issues = $check->check($fileContents);
         foreach ($issues as $issue) {
             $message = $issue->getMessage();
@@ -2628,7 +2708,8 @@ ENDP;
         }
     }
 
-    protected function updateCustomDirScanStatus() {
+    protected function updateCustomDirScanStatus()
+    {
         if (!empty($this->filesToFix)) {
             $files_to_fix = '';
             foreach ($this->filesToFix as $fileToFix) {
@@ -2637,10 +2718,10 @@ ENDP;
                     $files_to_fix .= " '{$vendor['directory']}' found in line {$vendor['line']}" . PHP_EOL;
                 }
             }
-            $this->updateStatus("vendorFilesInclusion", $files_to_fix);
+            $this->updateStatus('vendorFilesInclusion', $files_to_fix);
         }
         if (!empty($this->deletedFilesReferenced)) {
-            $this->updateStatus("deletedFilesReferenced", $this->deletedFilesReferenced);
+            $this->updateStatus('deletedFilesReferenced', $this->deletedFilesReferenced);
         }
         if (!empty($this->specificSugarFilesToFix)) {
             $specificFiles = '';
@@ -2650,15 +2731,15 @@ ENDP;
                     $specificFiles .= " '$file' file in line {$info['line']}" . PHP_EOL;
                 }
             }
-            $this->updateStatus("sugarSpecificFilesInclusion", $specificFiles);
+            $this->updateStatus('sugarSpecificFilesInclusion', $specificFiles);
         }
-        if(!empty($this->sessionUsages)) {
+        if (!empty($this->sessionUsages)) {
             $filesWithSession = '';
             foreach ($this->sessionUsages as $file => $func) {
                 $arrayFunctions = implode(', ', $func);
                 $filesWithSession .= "'$file' using \$_SESSION with array function '$arrayFunctions'. " . PHP_EOL;
             }
-            $this->updateStatus("arraySessionUsage", $filesWithSession);
+            $this->updateStatus('arraySessionUsage', $filesWithSession);
         }
         foreach ($this->filesWithDeprecatedCode as $reportId => $files) {
             $this->updateStatus($reportId, array_unique($files));
@@ -2670,7 +2751,6 @@ ENDP;
             $this->updateStatus($reportId, array_unique($files));
         }
     }
-
 
 
     /**
@@ -2689,7 +2769,7 @@ ENDP;
         }
 
         if (in_array($module, $this->unsupportedModules)) {
-            $this->updateStatus("incompatModule", $module);
+            $this->updateStatus('incompatModule', $module);
             return;
         }
         // TODO: check if module table is OK
@@ -2699,17 +2779,17 @@ ENDP;
 
         $isNewModule = false;
         if ($this->isNewModule($module)) {
-            $this->updateStatus("notStockModule", $module);
+            $this->updateStatus('notStockModule', $module);
             // not a stock module, check if it's working at least with BWC
             $this->checkMBModule($module);
             $isNewModule = true;
         } else {
             $this->checkStockModule($module);
         }
-        $options = array(
+        $options = [
             'module' => $module,
             'isNewModule' => $isNewModule,
-        );
+        ];
         $this->checkCreateActions($options);
         $this->checkSidecarJSFiles($options);
         $this->checkSidecarTemplateFiles($options);
@@ -2744,7 +2824,7 @@ ENDP;
             return;
         }
 
-        $viewdefs = array();
+        $viewdefs = [];
         require $customRecordViewFileName;
         // search for htmleditable_tinymce field
         foreach ($viewdefs['KBContents']['base']['view']['record']['panels'] as $panel) {
@@ -2796,16 +2876,17 @@ ENDP;
      *     create-actions components. If passed, the clients/ folder will not
      *     be scanned.
      *
-     *     @type string $module The module to scan the custom/$module/clients/*
+     * @type string $module The module to scan the custom/$module/clients/*
      *       directory with.
-     *     @type boolean $isNewModule `true` to scan both the
+     * @type boolean $isNewModule `true` to scan both the
      *       custom/$module/clients/* and modules/$module/clients/* directories.
      *       If `false` or no value passed, only the custom/$module/clients/*
      *       directory will be scanned.
      * }
      */
-    protected function checkCreateActions($options = array()) {
-        $files = array();
+    protected function checkCreateActions($options = [])
+    {
+        $files = [];
         $createActionsPath = 'clients' . DIRECTORY_SEPARATOR .
             '*' . DIRECTORY_SEPARATOR .
             '{layouts,views}' . DIRECTORY_SEPARATOR .
@@ -2832,7 +2913,7 @@ ENDP;
                 ));
             }
         } else {
-            $this->log("Checking for customized create-actions components in custom/clients");
+            $this->log('Checking for customized create-actions components in custom/clients');
             $files = glob(
                 'custom' . DIRECTORY_SEPARATOR .
                 $createActionsPath,
@@ -2851,7 +2932,7 @@ ENDP;
      * Check sidecar javascript files for deprecated code and removed files
      * @param array $options
      */
-    protected function checkSidecarJSFiles($options = array())
+    protected function checkSidecarJSFiles($options = [])
     {
         $files = $this->getSidecarFiles('js', $options);
 
@@ -2992,7 +3073,7 @@ ENDP;
     public function scanFileForDeprecatedJSCode($file, $fileContents)
     {
         foreach ($this->getDeprecatedPatterns($this->deprecatedJsAPIPatterns) as $pattern => $reportId) {
-            $matches = array();
+            $matches = [];
             if ($val = preg_match($pattern, $fileContents, $matches)) {
                 $this->log("Found $matches[1] in $file");
                 $this->filesWithDeprecatedCode[$reportId][] = $file;
@@ -3001,7 +3082,7 @@ ENDP;
         foreach ($this->removedSidecarClasses as $className) {
             if (preg_match('/\s+extendsFrom:\s*[\'"]' . $className . '[\'"]/', $fileContents)) {
                 $this->log("Found $className in $file");
-                $this->filesWithDeprecatedCode["extendsFromRemovedSidecarClass"][] = $file;
+                $this->filesWithDeprecatedCode['extendsFromRemovedSidecarClass'][] = $file;
             }
         }
     }
@@ -3014,7 +3095,7 @@ ENDP;
     public function scanFileForDeprecatedHBSCode($file, $fileContents)
     {
         foreach ($this->getDeprecatedPatterns($this->deprecatedHBSPatterns) as $pattern => $reportId) {
-            $matches = array();
+            $matches = [];
             if ($val = preg_match($pattern, $fileContents, $matches)) {
                 $this->log("Found $matches[1] in $file");
                 $this->filesWithDeprecatedCode[$reportId][] = $file;
@@ -3031,7 +3112,7 @@ ENDP;
     public function scanFileForDeprecatedLESSColorVariables($file, $fileContents)
     {
         foreach ($this->getDeprecatedPatterns($this->deprecatedLESSColorVariables) as $pattern => $reportId) {
-            $matches = array();
+            $matches = [];
             if ($val = preg_match($pattern, $fileContents, $matches)) {
                 $this->log("Found $matches[0] in $file");
                 $this->filesWithDeprecatedCode[$reportId][] = $file;
@@ -3047,7 +3128,7 @@ ENDP;
     {
         if (!empty($this->newModules[$module])) {
             // we have a name clash
-            $this->updateStatus("sameModuleName", $module);
+            $this->updateStatus('sameModuleName', $module);
         }
 
         // Check if ModuleBuilder module needs to be run as BWC
@@ -3055,7 +3136,7 @@ ENDP;
         $bwc = false;
         if (!$this->isMBModule($module) && !$this->isSidecarModule($module)) {
             $bwc = true;
-            $this->updateStatus("toBeRunAsBWC", $module);
+            $this->updateStatus('toBeRunAsBWC', $module);
         } else {
             $this->log("$module is upgradeable MB module");
         }
@@ -3065,7 +3146,7 @@ ENDP;
         $defs = $this->getPhpFiles("modules/$module/metadata/subpanels");
         if (!empty($defs) && !empty($this->beanList[$module])) {
             foreach ($defs as $deffile) {
-                $this->checkListFields($deffile, "subpanel_layout", 'list_fields', $module, $objectName);
+                $this->checkListFields($deffile, 'subpanel_layout', 'list_fields', $module, $objectName);
             }
         }
 
@@ -3073,8 +3154,8 @@ ENDP;
         if (!empty($defs) && !empty($this->beanList[$module])) {
             $this->log("$module has custom subpanels");
             foreach ($defs as $deffile) {
-                $this->checkCustomCode($deffile, "subpanel_layout", "modules/$module/metadata/" . basename($deffile));
-                $this->checkListFields($deffile, "subpanel_layout", 'list_fields', $module, $objectName);
+                $this->checkCustomCode($deffile, 'subpanel_layout', "modules/$module/metadata/" . basename($deffile));
+                $this->checkListFields($deffile, 'subpanel_layout', 'list_fields', $module, $objectName);
             }
         }
 
@@ -3098,7 +3179,7 @@ ENDP;
      * Isn't it fun that we use so many differen ones?
      * @var array
      */
-    protected $vardefnames = array(
+    protected $vardefnames = [
         'SearchFields.php' => 'searchFields',
         'listviewdefs.php' => 'listViewDefs',
         'popupdefs.php' => 'popupMeta',
@@ -3106,7 +3187,7 @@ ENDP;
         'subpaneldefs.php' => 'layout_defs',
         'wireless.subpaneldefs.php' => 'layout_defs',
 
-    );
+    ];
 
     /**
      * Check stock module for customizations not compatible with 7
@@ -3118,7 +3199,7 @@ ENDP;
 
         $history = $this->getPhpFiles("custom/history/modules/$module");
         if (!empty($history)) {
-            $this->updateStatus("hasStudioHistory", $module);
+            $this->updateStatus('hasStudioHistory', $module);
         }
 
         $objectName = $this->getObjectName($module);
@@ -3131,7 +3212,7 @@ ENDP;
         // Check for extension files
         $extfiles = $this->getPhpFiles("custom/Extension/modules/$module/Ext");
         if (!empty($extfiles)) {
-            $this->updateStatus("hasExtensions", $module, $extfiles);
+            $this->updateStatus('hasExtensions', $module, $extfiles);
         }
         // skip check for output for bwc module
         if (!$bwc) {
@@ -3143,9 +3224,9 @@ ENDP;
         // Check custom vardefs
         $defs = $this->getPhpFiles("custom/Extension/modules/$module/Ext/Vardefs");
         if (!empty($defs)) {
-            $this->updateStatus("hasCustomVardefs", $module);
+            $this->updateStatus('hasCustomVardefs', $module);
             foreach ($defs as $deffile) {
-                $this->checkCustomCode($deffile, "dictionary", "modules/$module/vardefs.php");
+                $this->checkCustomCode($deffile, 'dictionary', "modules/$module/vardefs.php");
                 $this->checkForOtherModuleDefinition($deffile, 'dictionary', $objectName);
             }
         }
@@ -3153,9 +3234,9 @@ ENDP;
         // check layout defs
         $defs = $this->getPhpFiles("custom/Extension/modules/$module/Ext/Layoutdefs");
         if (!empty($defs)) {
-            $this->updateStatus("hasCustomLayoutdefs", $module);
+            $this->updateStatus('hasCustomLayoutdefs', $module);
             foreach ($defs as $deffile) {
-                $this->checkCustomCode($deffile, "layout_defs", "modules/$module/metadata/subpaneldefs.php");
+                $this->checkCustomCode($deffile, 'layout_defs', "modules/$module/metadata/subpaneldefs.php");
                 $this->checkSubpanelLayoutDefs($module, $objectName, $deffile);
             }
         }
@@ -3163,16 +3244,16 @@ ENDP;
         // check custom viewdefs
         $defs = array_filter(
             $this->getPhpFiles("custom/modules/$module/metadata"),
-            array($this, 'filterViewDefs')
+            [$this, 'filterViewDefs']
         );
 
-        if ($module == "Connectors") {
-            $pos = array_search("custom/modules/Connectors/metadata/connectors.php", $defs);
+        if ($module == 'Connectors') {
+            $pos = array_search('custom/modules/Connectors/metadata/connectors.php', $defs);
             if ($pos !== false) {
                 unset($defs[$pos]);
                 // TODO: any checks for connectors.php?
             }
-            $pos = array_search("custom/modules/Connectors/metadata/display_config.php", $defs);
+            $pos = array_search('custom/modules/Connectors/metadata/display_config.php', $defs);
             if ($pos !== false) {
                 unset($defs[$pos]);
                 // TODO: any checks for display_config.php?
@@ -3181,18 +3262,18 @@ ENDP;
 
         // check viewdefs
         if (!empty($defs)) {
-            $this->updateStatus("hasCustomViewdefs", $module);
+            $this->updateStatus('hasCustomViewdefs', $module);
             foreach ($defs as $deffile) {
-                if (strpos($deffile, "/subpanels/") !== false) {
+                if (strpos($deffile, '/subpanels/') !== false) {
                     // special case for subpanels, since subpanels are special
-                    $base = basename(dirname($deffile)) . "/" . basename($deffile);
+                    $base = basename(dirname($deffile)) . '/' . basename($deffile);
                     $defsname = 'subpanel_layout';
                 } else {
                     $base = basename($deffile);
                     if (!empty($this->vardefnames[$base])) {
                         $defsname = $this->vardefnames[$base];
                     } else {
-                        $defsname = "viewdefs";
+                        $defsname = 'viewdefs';
                     }
                 }
                 if (!$bwc) {
@@ -3210,29 +3291,29 @@ ENDP;
             // check for custom views
             $defs = array_filter(
                 $this->getPhpFiles("custom/modules/$module/views"),
-                array($this, 'sideQuickCreateFilter')
+                [$this, 'sideQuickCreateFilter']
             );
             if (!empty($defs)) {
-                $this->updateStatus("hasCustomViews", $module, $defs);
+                $this->updateStatus('hasCustomViews', $module, $defs);
             }
             $defs = array_filter(
                 $this->getPhpFiles("modules/$module/views"),
-                array($this, 'sideQuickCreateMD5Filter')
+                [$this, 'sideQuickCreateMD5Filter']
             );
             if (!empty($defs)) {
-                $this->updateStatus("hasCustomViewsModDir", $module, $defs);
+                $this->updateStatus('hasCustomViewsModDir', $module, $defs);
             }
 
             // Check custom extensions which aren't Studio
-            $badExts = array(
-                "ActionViewMap",
-                "ActionFileMap",
-                "ActionReMap",
-                "EntryPointRegistry",
-                "FileAccessControlMap",
-                "WirelessModuleRegistry",
-                "JSGroupings"
-            );
+            $badExts = [
+                'ActionViewMap',
+                'ActionFileMap',
+                'ActionReMap',
+                'EntryPointRegistry',
+                'FileAccessControlMap',
+                'WirelessModuleRegistry',
+                'JSGroupings',
+            ];
             $badExts = array_flip($badExts);
             foreach ($this->glob("custom/modules/$module/Ext/*") as $extdir) {
                 if (isset($badExts[basename($extdir)])) {
@@ -3243,7 +3324,7 @@ ENDP;
                         }
                     }
                     if (!empty($extfiles)) {
-                        $this->updateStatus("extensionDir", $extdir);
+                        $this->updateStatus('extensionDir', $extdir);
                     }
                 }
             }
@@ -3259,13 +3340,13 @@ ENDP;
      */
     public function filterViewDefs($file)
     {
-        $filesToExclude = array(
+        $filesToExclude = [
             'quickcreatedefs.php', // CRYS-426 - exclude quickcreatedefs.php
             'wireless.editviewdefs.php',
             'wireless.detailviewdefs.php',
             'wireless.listviewdefs.php',
             'convertdefs.php',     // CRYS-536 - exclude */Leads/metadata/convertdefs.php
-        );
+        ];
         return !in_array(basename($file), $filesToExclude);
     }
 
@@ -3309,14 +3390,14 @@ ENDP;
     protected function glob($pattern)
     {
         $dirs = glob($pattern);
-        return ($dirs ?: array());
+        return ($dirs ?: []);
     }
 
     /**
      * Types that are BLOBs in the DB
      * @var array
      */
-    protected $blob_types = array('text', 'longtext', 'multienum', 'html', 'blob', 'longblob');
+    protected $blob_types = ['text', 'longtext', 'multienum', 'html', 'blob', 'longblob'];
 
     /**
      * Check if any original vardef changed type
@@ -3341,7 +3422,7 @@ ENDP;
         }
         // return vardefs back to old state
         $GLOBALS['dictionary'][$object] = $full_vardefs;
-        $original_vardefs['fields'] = (is_array($original_vardefs['fields'])) ? $original_vardefs['fields'] : array();
+        $original_vardefs['fields'] = (is_array($original_vardefs['fields'])) ? $original_vardefs['fields'] : [];
         foreach ($original_vardefs['fields'] as $name => $def) {
             if (empty($def['type']) || empty($def['name'])) {
                 continue;
@@ -3356,7 +3437,7 @@ ENDP;
             $original_type = $this->db->getFieldType($def);
             if (empty($real_type)) {
                 // If we can't find the type, this is some serious breakage
-                $this->updateStatus("fieldTypeMissing", $module, $name);
+                $this->updateStatus('fieldTypeMissing', $module, $name);
                 continue;
             }
             if (!in_array($real_type, $this->blob_types)) {
@@ -3365,7 +3446,7 @@ ENDP;
             }
             if (!in_array($original_type, $this->blob_types)) {
                 // We have changed from non-blob type to blob type, not good
-                $this->updateStatus("typeChange", $module, $name, $original_type, $real_type);
+                $this->updateStatus('typeChange', $module, $name, $original_type, $real_type);
             }
         }
     }
@@ -3379,16 +3460,16 @@ ENDP;
     protected function loadFromFile($deffile, $varname)
     {
         if (!file_exists($deffile)) {
-            return array();
+            return [];
         }
         $l = new FileLoaderWrapper();
         $res = $l->loadFile($deffile, $varname);
         if (is_null($res)) {
             $this->log("Weird, loaded $deffile but no $varname there");
-            return array();
+            return [];
         }
         if ($res === false) {
-            $this->updateStatus("thisUsage", $deffile);
+            $this->updateStatus('thisUsage', $deffile);
         }
         return $res;
     }
@@ -3416,21 +3497,21 @@ ENDP;
      */
     protected function checkCustomElastic()
     {
-        $this->log("Checking the files of Elastic Search customization");
-        $baseDir = "custom/include/SugarSearchEngine/";
-        $fileNames = array(
-            "Elastic/SugarSearchEngineElastic.php",
-            "Elastic/SugarSearchEngineElasticMapping.php",
-            "Elastic/SugarSearchEngineElasticIndexStrategy*.php",
-            "Elastic/Facets/Facet*.php",
-            "SugarSearchEngineQueueManager.php"
-        );
-        $files = array();
+        $this->log('Checking the files of Elastic Search customization');
+        $baseDir = 'custom/include/SugarSearchEngine/';
+        $fileNames = [
+            'Elastic/SugarSearchEngineElastic.php',
+            'Elastic/SugarSearchEngineElasticMapping.php',
+            'Elastic/SugarSearchEngineElasticIndexStrategy*.php',
+            'Elastic/Facets/Facet*.php',
+            'SugarSearchEngineQueueManager.php',
+        ];
+        $files = [];
         foreach ($fileNames as $fileName) {
-            $files = array_merge($files, glob($baseDir.$fileName));
+            $files = array_merge($files, glob($baseDir . $fileName));
         }
         if (!empty($files)) {
-            $this->updateStatus("foundCustomElastic", $files);
+            $this->updateStatus('foundCustomElastic', $files);
         }
     }
 
@@ -3471,7 +3552,7 @@ ENDP;
         foreach ($definition as $key => $data) {
             if ($key !== $object) {
                 $foundName = $flippedModules[$key] ?? $key;
-                $this->updateStatus("foundOtherModuleVardefs", $moduleName, $foundName, $file);
+                $this->updateStatus('foundOtherModuleVardefs', $moduleName, $foundName, $file);
             }
         }
     }
@@ -3483,7 +3564,7 @@ ENDP;
      * @param string $original Original defs file
      * @param array $history Studio history files
      */
-    protected function checkCustomCode($deffile, $varname, $original, $history = array())
+    protected function checkCustomCode($deffile, $varname, $original, $history = [])
     {
         $this->log("Checking $deffile for custom code");
         $defs = $this->loadFromFile($deffile, $varname);
@@ -3493,9 +3574,9 @@ ENDP;
 
         $origdefs = $this->loadFromFile($original, $varname);
 
-        $defs_code = $this->lookupCustomCode('', $defs, array());
-        $orig_code = $this->lookupCustomCode('', $origdefs, array());
-        $foundCustomCode = array();
+        $defs_code = $this->lookupCustomCode('', $defs, []);
+        $orig_code = $this->lookupCustomCode('', $origdefs, []);
+        $foundCustomCode = [];
         foreach ($defs_code as $code => $places) {
             if (!isset($orig_code[$code])) {
                 $foundCustomCode[$code] = $places;
@@ -3504,24 +3585,23 @@ ENDP;
 
         // We found something, do more precise check through all available history
         if (!empty($foundCustomCode) && !empty($history)) {
-
-            $historyFiles = array();
+            $historyFiles = [];
             foreach ($history as $key => $file) {
                 if (strpos(basename($file), basename($deffile, '.php')) !== false) {
                     $historyFiles[$key] = $file;
                 }
             }
 
-            $allHistoryCode = array();
+            $allHistoryCode = [];
             foreach ($historyFiles as $file) {
                 //for history files check internal functions and replace them with random names CRYS-498
-                $replacedNames = array();
+                $replacedNames = [];
                 $tmpName = tempnam(sys_get_temp_dir(), $file);
                 if ($tmpName && is_writable($tmpName) && file_exists($file)) {
                     $tmpContents = file_get_contents($file);
-                    $matches = array();
+                    $matches = [];
                     if (preg_match_all('/function\s+(\w+)\s*\(/', $tmpContents, $matches) && isset($matches[1])) {
-                        $tmpMatch = array();
+                        $tmpMatch = [];
                         foreach ($matches[1] as $key => $value) {
                             $tmpMatch[$key] = $replacedNames[] = $value . md5($tmpName);
                         }
@@ -3541,7 +3621,7 @@ ENDP;
                     @unlink($tmpName);
                 }
 
-                $historyCode = $this->lookupCustomCode('', $historyDefs, array());
+                $historyCode = $this->lookupCustomCode('', $historyDefs, []);
                 $allHistoryCode = array_merge($allHistoryCode, $historyCode);
             }
 
@@ -3550,7 +3630,7 @@ ENDP;
 
         // finally output status, if there is any
         foreach ($foundCustomCode as $code => $places) {
-            $this->updateStatus("foundCustomCode", $code, $places, $deffile);
+            $this->updateStatus('foundCustomCode', $code, $places, $deffile);
         }
     }
 
@@ -3608,31 +3688,31 @@ ENDP;
 
             // check subpanel module. This param should refer to existing module
             if (!empty($panel['module']) && empty($this->beanList[$panel['module']])) {
-                $this->updateStatus("subpanelLinkNonExistModule", $panel['module'], $deffile);
+                $this->updateStatus('subpanelLinkNonExistModule', $panel['module'], $deffile);
             }
 
             if (!empty($panel['get_subpanel_data']) && strpos($panel['get_subpanel_data'], 'function:') !== false) {
-                $this->updateStatus("subPanelWithFunction", $deffile);
+                $this->updateStatus('subPanelWithFunction', $deffile);
             }
             if (!empty($panel['get_subpanel_data']) && !$this->isValidLink(
-                    $module,
-                    $object,
-                    $panel['get_subpanel_data']
-                )
+                $module,
+                $object,
+                $panel['get_subpanel_data']
+            )
             ) {
-                $this->updateStatus("badSubpanelLink", $panel['get_subpanel_data'], $deffile);
+                $this->updateStatus('badSubpanelLink', $panel['get_subpanel_data'], $deffile);
             }
         }
     }
 
-    protected $knownWidgetClasses = array(
+    protected $knownWidgetClasses = [
         'SubPanelDetailViewLink',
         'SubPanelEmailLink',
         'SubPanelEditButton',
         'SubPanelRemoveButton',
         'SubPanelIcon',
         'SubPanelDeleteButton',
-    );
+    ];
 
     /**
      * Check list view type metadata for bad fields
@@ -3679,7 +3759,7 @@ ENDP;
             $key = strtolower($key);
             if (!empty($data['widget_class']) && !in_array($data['widget_class'], $this->knownWidgetClasses)) {
                 if (!file_exists("include/generic/SugarWidgets/SugarWidget{$data['widget_class']}.php")) {
-                    $this->updateStatus("unknownWidgetClass", $data['widget_class'], $key, $module, $deffile);
+                    $this->updateStatus('unknownWidgetClass', $data['widget_class'], $key, $module, $deffile);
                 }
             }
             // Unknown fields handled by CRYS-36, so no more checks here
@@ -3695,7 +3775,7 @@ ENDP;
     protected function checkHooks($module, $status = HealthCheckScannerMeta::MANUAL, $bwc = false)
     {
         $this->log("Checking hooks for $module");
-        $hook_files = array();
+        $hook_files = [];
         $this->extractHooks("custom/modules/$module/logic_hooks.php", $hook_files);
         $this->extractHooks("custom/modules/$module/Ext/LogicHooks/logichooks.ext.php", $hook_files);
 
@@ -3703,13 +3783,35 @@ ENDP;
             foreach ($hooks as $hook_data) {
                 $hookDescription = (!empty($hook_data[1])) ? $hook_data[1] : '';
                 $this->log("Checking module hook $hookname: $hookDescription");
-                if (empty($hook_data[2])) {
-                    $this->updateStatus("badHookFile", $hookname, '');
+                if (!$this->isValidHookFile($hook_data)) {
+                    $this->updateStatus('badHookFile', $hookname, '');
                 } elseif (!$bwc) {
                     $this->checkFileForOutput($hook_data[2], $hook_data[3]);
                 }
             }
         }
+    }
+
+    /**
+     * Test if hook definition uses a valid file
+     *
+     * @param array $hookDefinition
+     * @return bool
+     */
+    protected function isValidHookFile(array $hookDefinition) : bool
+    {
+        $file = $hookDefinition[2] ?? '';
+        $class = $hookDefinition[3] ?? '';
+
+        if (empty($file)) {
+            if (!empty($class) && class_exists($class)) {
+                return true;
+            }
+
+            return false;
+        }
+
+        return file_exists($file);
     }
 
     /**
@@ -3722,14 +3824,14 @@ ENDP;
         $this->setupHealthCheckModule();
 
         return array_map(
-            array($this, 'cutOffModuleFromName'),
-            glob("modules/*", GLOB_ONLYDIR)
+            [$this, 'cutOffModuleFromName'],
+            glob('modules/*', GLOB_ONLYDIR)
         );
     }
 
     protected function loadModulesList()
     {
-        $beanList = $beanFiles = $objectList = array();
+        $beanList = $beanFiles = $objectList = [];
         require 'include/modules.php';
         $this->beanList = $beanList;
         $this->beanFiles = $beanFiles;
@@ -3754,9 +3856,9 @@ ENDP;
     {
         $this->db = DBManagerFactory::getInstance();
 
-        $md5_string = array();
+        $md5_string = [];
         if (!file_exists('files.md5')) {
-            return $this->fail("files.md5 not found");
+            return $this->fail('files.md5 not found');
         }
 
         require 'files.md5';
@@ -3824,7 +3926,7 @@ ENDP;
             }
 
             // ignore files which should have been automatically removed by previous upgrades but still sometimes exist
-            if (in_array($file, array(
+            if (in_array($file, [
                 'include/SugarPDF.php',
                 'modules/Opportunities/views/view.sidequickcreate.php',
                 'include/database/MssqlManager2.php',
@@ -3832,7 +3934,7 @@ ENDP;
                 'include/FCKeditor_Sugar/FCKeditor_Sugar.php',
                 'include/database/OracleHelper.php',
                 'modules/Documents/DocumentTreeView.php',
-            ))) {
+            ])) {
                 continue;
             }
 
@@ -3846,7 +3948,7 @@ ENDP;
 
     private function findUnsupportedApiUsages($file, $contents)
     {
-        $methods = array(
+        $methods = [
             'compilesql' => true,
             'deletesql' => true,
             'joinraw' => true,
@@ -3858,11 +3960,11 @@ ENDP;
             'preparetypedata' => true,
             'retrievesql' => true,
             'updatesql' => true,
-        );
+        ];
 
-        $properties = array(
+        $properties = [
             'field_name_map' => true,
-        );
+        ];
 
         $tokens = token_get_all($contents);
 
@@ -3905,25 +4007,25 @@ ENDP;
      */
     protected function getPhpFiles($path)
     {
-        $data = array();
+        $data = [];
         if (!is_dir($path)) {
-            return array();
+            return [];
         }
-        $path = rtrim($path, "/") . "/";
-        $iter = new DirectoryIterator("./" . $path);
+        $path = rtrim($path, '/') . '/';
+        $iter = new DirectoryIterator('./' . $path);
         foreach ($iter as $item) {
             if ($item->isDot()) {
                 continue;
             }
 
             $filename = $item->getFilename();
-            if (strpos($filename, ".suback.php") !== false || strpos($filename, "_backup") !== false) {
+            if (strpos($filename, '.suback.php') !== false || strpos($filename, '_backup') !== false) {
                 // we'll ignore .suback files, they are old upgrade backups
                 continue;
             }
 
             $extension = explode('.', $filename);
-            $extension = count($extension) >= 2 ? $extension[count($extension) - 1] : $extension[0];
+            $extension = $this->safeCount($extension) >= 2 ? $extension[$this->safeCount($extension) - 1] : $extension[0];
             if ($item->isDir() && in_array($filename, $this->excludedScanDirectories)) {
                 continue;
             } elseif ($item->isDir()) {
@@ -3931,7 +4033,7 @@ ENDP;
                     // skip disable dirs
                     continue;
                 }
-                $data = array_merge($data, $this->getPhpFiles($path . $filename . "/"));
+                $data = array_merge($data, $this->getPhpFiles($path . $filename . '/'));
             } elseif (!preg_match('/php(_\d+)?\b/', $extension)) {
                 // we need only php and php Studio-history (.php_{timestamp} extension) files
                 continue;
@@ -3951,7 +4053,7 @@ ENDP;
      */
     public function extractHooks($hookfile, &$hooks_array, $detectAfterUiHooks = false)
     {
-        $hook_array = array();
+        $hook_array = [];
         if (!is_readable($hookfile)) {
             return;
         }
@@ -3962,10 +4064,10 @@ ENDP;
             return;
         }
         if ($detectAfterUiHooks && !empty($hook_array['after_ui_footer'])) {
-            $this->updateStatus("logicHookAfterUIFooter", $hookfile);
+            $this->updateStatus('logicHookAfterUIFooter', $hookfile);
         }
         if ($detectAfterUiHooks && !empty($hook_array['after_ui_frame'])) {
-            $this->updateStatus("logicHookAfterUIFrame", $hookfile);
+            $this->updateStatus('logicHookAfterUIFrame', $hookfile);
         }
         foreach ($hook_array as $hooks) {
             foreach ($hooks as $hook) {
@@ -3975,7 +4077,7 @@ ENDP;
                 }
                 if (!file_exists($hookFileLocation) && !in_array($hookFileLocation, $this->ignoreMissingCustomFiles)) {
                     // putting it as custom since LogicHook checks file_exists
-                    $this->updateStatus("badHookFile", $hookfile, $hookFileLocation);
+                    $this->updateStatus('badHookFile', $hookfile, $hookFileLocation);
                 }
             }
         }
@@ -4000,7 +4102,7 @@ ENDP;
             }
         }
         if (!file_exists($phpfile)) {
-            $this->updateStatus("missingCustomFile", $phpfile);
+            $this->updateStatus('missingCustomFile', $phpfile);
             return;
         }
         $contents = file_get_contents($phpfile);
@@ -4016,9 +4118,9 @@ ENDP;
 
     /**
      * Returns false if $item is T_WHITESPACE token.
-     * @see \HealthCheckScanner::checkFileForOutput
      * @param $item
      * @return bool
+     * @see \HealthCheckScanner::checkFileForOutput
      */
     protected function ignoreWhitespace($item)
     {
@@ -4040,13 +4142,13 @@ ENDP;
         $tokens = token_get_all($content);
         foreach ($tokens as $token) {
             switch ($token[0]) {
-                case T_CLOSE_TAG :
-                case T_COMMENT :
-                case T_DOC_COMMENT :
-                case T_OPEN_TAG :
-                case T_WHITESPACE :
+                case T_CLOSE_TAG:
+                case T_COMMENT:
+                case T_DOC_COMMENT:
+                case T_OPEN_TAG:
+                case T_WHITESPACE:
                     break;
-                default :
+                default:
                     return false;
             }
         }
@@ -4068,7 +4170,7 @@ ENDP;
     {
         $curlyBracketsCount = 0;
         $found = false;
-        $count = is_countable($tokens) ? count($tokens) : 0;
+        $count = $this->safeCount($tokens);
         for ($i = $index + 1; $i < $count; $i++) {
             if ($tokens[$i] === '(') {
                 $curlyBracketsCount += 1;
@@ -4099,23 +4201,22 @@ ENDP;
      */
     public function scriptErrorHandler($errno, $errstr, $errfile, $errline)
     {
-        // error was suppressed with the @-operator
-        if (error_reporting() === 0) {
+        // error was suppressed with the @-operator or does not correspond to current error level
+        if (!(error_reporting() & $errno)) {
             return false;
         }
         return $this->reportPhpError($errno, $errstr, $errfile, $errline);
-
     }
 
-    public $names = array(
+    public $names = [
         'Gryffindor',
         'Hufflepuff',
         'Ravenclaw',
         'Slytherin',
         'Death Eater',
         'Voldemort',
-        'Dumbledore'
-    );
+        'Dumbledore',
+    ];
 
     /* Copypaste from 6_ScanModules */
 
@@ -4139,21 +4240,21 @@ ENDP;
         // bad vardefs means no conversion to Sugar 7
         $this->checkVardefs($module_name, $bean, false, HealthCheckScannerMeta::STUDIO_MB_BWC);
 
-        $mbFiles = array("Dashlets", "Menu.php", "language", "metadata", "vardefs.php", "clients", "workflow");
+        $mbFiles = ['Dashlets', 'Menu.php', 'language', 'metadata', 'vardefs.php', 'clients', 'workflow'];
         $mbFiles[] = basename($this->beanFiles[$bean]);
-        $mbFiles[] = pathinfo($this->beanFiles[$bean], PATHINFO_FILENAME) . "_sugar.php";
+        $mbFiles[] = pathinfo($this->beanFiles[$bean], PATHINFO_FILENAME) . '_sugar.php';
 
         // to make checks faster
         $mbFiles = array_flip($mbFiles);
 
-        $hook_files = array();
+        $hook_files = [];
         $this->extractHooks("custom/$module_dir/logic_hooks.php", $hook_files);
         $this->extractHooks("custom/$module_dir/Ext/LogicHooks/logichooks.ext.php", $hook_files);
-        $hook_files_list = array();
+        $hook_files_list = [];
         foreach ($hook_files as $hookname => $hooks) {
             foreach ($hooks as $hook_data) {
                 if (empty($hook_data[2])) {
-                    $this->updateStatus("badHookFile", $hookname, '');
+                    $this->updateStatus('badHookFile', $hookname, '');
                 } else {
                     $hook_files_list[] = $hook_data[2];
                 }
@@ -4161,7 +4262,7 @@ ENDP;
         }
         $hook_files = array_unique($hook_files_list);
 
-        $unknownMBModuleFiles = array();
+        $unknownMBModuleFiles = [];
         // For now, the check is just checking if we have any files
         // in the directory that we do not recognize. If we do, we
         // put the module in BC.
@@ -4170,10 +4271,10 @@ ENDP;
                 // logic hook files are OK
                 continue;
             }
-            if (basename($file) == "views") {
+            if (basename($file) == 'views') {
                 // check views separately because of file template that has view.edit.php
                 if (!$this->checkViewsDir("$module_dir/views")) {
-                    $this->updateStatus("unknownFileViews", $module_name);
+                    $this->updateStatus('unknownFileViews', $module_name);
                     return false;
                 } else {
                     continue;
@@ -4181,14 +4282,14 @@ ENDP;
             }
             if (basename($file) == 'Forms.php') {
                 if (filesize($file) > 0) {
-                    $this->updateStatus("nonEmptyFormFile", $file, $module_name);
+                    $this->updateStatus('nonEmptyFormFile', $file, $module_name);
                     return false;
                 }
                 continue;
             }
             if (!isset($mbFiles[basename($file)])) {
                 // unknown file, not MB module
-                if (count($unknownMBModuleFiles) > $this->numberOfFilesToReport) {
+                if ($this->safeCount($unknownMBModuleFiles) > $this->numberOfFilesToReport) {
                     break;
                 }
                 $unknownMBModuleFiles[] = $file;
@@ -4206,7 +4307,7 @@ ENDP;
             }
             if (!isset($mbFiles[basename($file)])) {
                 // unknown file, not MB module
-                if (count($unknownMBModuleFiles) > $this->numberOfFilesToReport) {
+                if ($this->safeCount($unknownMBModuleFiles) > $this->numberOfFilesToReport) {
                     break;
                 }
                 $unknownMBModuleFiles[] = $file;
@@ -4215,19 +4316,19 @@ ENDP;
 
         if (!empty($unknownMBModuleFiles)) {
             $filesToReport = array_slice($unknownMBModuleFiles, 0, $this->numberOfFilesToReport);
-            $moreMessage = (count($unknownMBModuleFiles) > $this->numberOfFilesToReport) ? PHP_EOL . 'and there are more...' : '';
-            $this->updateStatus("isNotMBModule", $filesToReport, $moreMessage, $module_name);
+            $moreMessage = ($this->safeCount($unknownMBModuleFiles) > $this->numberOfFilesToReport) ? PHP_EOL . 'and there are more...' : '';
+            $this->updateStatus('isNotMBModule', $filesToReport, $moreMessage, $module_name);
             return false;
         }
 
-        $badExts = array(
-            "ActionViewMap",
-            "ActionFileMap",
-            "ActionReMap",
-            "EntryPointRegistry",
-            "FileAccessControlMap",
-            "WirelessModuleRegistry"
-        );
+        $badExts = [
+            'ActionViewMap',
+            'ActionFileMap',
+            'ActionReMap',
+            'EntryPointRegistry',
+            'FileAccessControlMap',
+            'WirelessModuleRegistry',
+        ];
         $badExts = array_flip($badExts);
         // Check Ext for any "dangerous" extensions
         $return = true;
@@ -4240,7 +4341,7 @@ ENDP;
                     }
                 }
                 if (!empty($extfiles)) {
-                    $this->updateStatus("extensionDirDetected", $extdir, $module_name);
+                    $this->updateStatus('extensionDirDetected', $extdir, $module_name);
                     $return = false;
                 }
             }
@@ -4256,10 +4357,10 @@ ENDP;
      */
     protected function isSidecarModule($module)
     {
-        $directoriesToCheck = array(
+        $directoriesToCheck = [
             "$module/clients/base",
             "custom/$module/clients/base",
-        );
+        ];
 
         foreach ($directoriesToCheck as $dir) {
             if (file_exists($dir)) {
@@ -4281,7 +4382,7 @@ ENDP;
         foreach ($this->glob("$view_dir/*") as $file) {
             // for now we allow only view.edit.php
             if (basename($file) != 'view.edit.php') {
-                $this->updateStatus("unknownFile", $view_dir, $file);
+                $this->updateStatus('unknownFile', $view_dir, $file);
                 return false;
             }
             $data = file_get_contents($file);
@@ -4301,7 +4402,7 @@ ENDP;
              */
             $md5 = md5($data);
             if (($md5 !== '794b5f58a557c243ddea04382996891f') && ($md5 !== 'c8251f6b50e3e814135c936f6b5292eb')) {
-                $this->updateStatus("badMd5", $file);
+                $this->updateStatus('badMd5', $file);
                 return false;
             }
         }
@@ -4314,24 +4415,24 @@ ENDP;
      * Only non-BWC modules here, since BWC ones aren't checked for vardefs
      * @var array
      */
-    protected $bad_vardefs = array(
-        'Forecasts' => array('closed_count'),
-        'ForecastOpportunities' => array('description'),
-        'Quotas' => array('assigned_user_id'),
-        'ProductTemplates' => array('assigned_user_link'),
-        'Calls' => array('contact_id'),
-        'Meetings' => array('contact_id'),
-        'KBDocuments' => array(
+    protected $bad_vardefs = [
+        'Forecasts' => ['closed_count'],
+        'ForecastOpportunities' => ['description'],
+        'Quotas' => ['assigned_user_id'],
+        'ProductTemplates' => ['assigned_user_link'],
+        'Calls' => ['contact_id'],
+        'Meetings' => ['contact_id'],
+        'KBDocuments' => [
             'case_name',
             'keywords',
             'modified_user_name',
-        ),
-        'KBContents' => array('created_by_link', 'modified_user_link'),
-        'KBDocumentRevisions' => array('document_revisions'),
-        'KBTags' => array(
+        ],
+        'KBContents' => ['created_by_link', 'modified_user_link'],
+        'KBDocumentRevisions' => ['document_revisions'],
+        'KBTags' => [
             'created_by_name',
-        ),
-    );
+        ],
+    ];
 
     /**
      * Check that all fields in array exist
@@ -4354,14 +4455,14 @@ ENDP;
      * @var array List of fields that can use html function in vardefs.
      * These fields are allowed to use in stock and non-stock modules.
      */
-    protected $templateFields = array(
-        "email" => true,
-        "email1" => true,
-        "email2" => true,
-        "currency_id" => true,
-        "currency_name" => true,
-        "currency_symbol" => true
-    );
+    protected $templateFields = [
+        'email' => true,
+        'email1' => true,
+        'email2' => true,
+        'currency_id' => true,
+        'currency_name' => true,
+        'currency_symbol' => true,
+    ];
 
     /**
      * Check vardefs for module
@@ -4400,27 +4501,26 @@ ENDP;
         if (!empty($stockFieldsDef[$seed->object_name]['fields']) && is_array($stockFieldsDef[$seed->object_name]['fields'])) {
             $stockFieldsDef = $stockFieldsDef[$seed->object_name]['fields'];
         } else {
-            $stockFieldsDef = array();
+            $stockFieldsDef = [];
         }
         $stockFields = array_keys($stockFieldsDef);
 
         foreach ($fieldDefs as $key => $value) {
-            if (!empty($this->bad_vardefs[$module]) && in_array($key, $this->bad_vardefs[$module])) {
+            if (!empty($this->bad_vardefs[$module]) && $this->safeInArray($key, $this->bad_vardefs[$module])) {
                 continue;
             }
             if (empty($value['name']) || $key != $value['name']) {
                 if (empty($stockFieldsDef[$key]) || $stockFieldsDef[$key] != $value) {
                     $nameValue = (!empty($value['name'])) ? $value['name'] : '';
-                    $this->updateStatus("badVardefsKey", $key, $nameValue, $module);
+                    $this->updateStatus('badVardefsKey', $key, $nameValue, $module);
                     continue;
                 }
             }
 
             // Check "name" field type, @see CRYS-130
             if ($key == 'name' && $value['type'] != 'name') {
-
                 // Assume those types are valid, cause they used in stock modules
-                $validNameTypes = array('id', 'fullname', 'varchar');
+                $validNameTypes = ['id', 'fullname', 'varchar'];
                 if (!in_array($value['type'], $validNameTypes)) {
                     $this->updateStatus('badVardefsName', $value['type'], $module);
                     continue;
@@ -4429,7 +4529,7 @@ ENDP;
 
             if ($key == 'team_name') {
                 if (empty($value['module'])) {
-                    $this->updateStatus("badVardefsRelate", $key, $module);
+                    $this->updateStatus('badVardefsRelate', $key, $module);
                 }
                 // this field is really weird, let's leave it alone for now
                 continue;
@@ -4439,18 +4539,18 @@ ENDP;
                 $value['function']['returns'] == 'html' &&  // that returns html
                 !isset($this->templateFields[$key]) &&      // and field isn't in white-list
                 (!$stock || !in_array(
-                        $key,
-                        $stockFields
-                    ))  // and it is non-stock module or it is stock module but field is non-stock
+                    $key,
+                    $stockFields
+                ))  // and it is non-stock module or it is stock module but field is non-stock
             ) {
-                $this->updateStatus("vardefHtmlFunctionName" . $custom, $value['function']['name'], $module, $key);
+                $this->updateStatus('vardefHtmlFunctionName' . $custom, $value['function']['name'], $module, $key);
             }
 
             if (!empty($value['type'])) {
                 switch ($value['type']) {
-                    case 'date' :
-                    case 'datetime' :
-                    case 'time' :
+                    case 'date':
+                    case 'datetime':
+                    case 'time':
                         if (!empty($value['display_default']) && preg_match('/^\-.+\-$/', $value['display_default'])) {
                             $this->updateStatus('vardefIncorrectDisplayDefault', $key, $module);
                         }
@@ -4459,7 +4559,7 @@ ENDP;
                     case 'multienum':
                         if (!empty($value['function']['returns']) && $value['function']['returns'] == 'html') {
                             // found html functional field
-                            $this->updateStatus("vardefHtmlFunction" . $custom, $key);
+                            $this->updateStatus('vardefHtmlFunction' . $custom, $key);
                         }
 
                         // Check option-list multienum fields
@@ -4467,7 +4567,6 @@ ENDP;
                             && !empty($value['options'])
                             && !empty($GLOBALS['app_list_strings'][$value['options']])
                         ) {
-
                             $optionKeys = array_keys($GLOBALS['app_list_strings'][$value['options']]);
                             // Strip all valid characters in dropdown keys - a-zA-Z0-9. and spaces
                             $result = preg_replace('/[\w\d\s\.,\(\)]/', '', $optionKeys);
@@ -4476,7 +4575,7 @@ ENDP;
                             $result = count_chars(implode('', $result), 3);
 
                             if ($result) {
-                                $this->updateStatus("badVardefsMultienum", $value['name'], $value['options'], $result, $module);
+                                $this->updateStatus('badVardefsMultienum', $value['name'], $value['options'], $result, $module);
                             }
                         }
 
@@ -4485,13 +4584,13 @@ ENDP;
                         if (isset($value['link_file'], $value['link_class']) && file_exists($value['link_file']) && !class_exists($value['link_class'])) {
                             require_once $value['link_file'];
                             if (class_exists($value['link_class'])) {
-                                $this->updateStatus("badVardefsClassAutoloading", $key, $module);
+                                $this->updateStatus('badVardefsClassAutoloading', $key, $module);
                             }
                             break;
                         }
                         $seed->load_relationship($key);
                         if (empty($seed->$key)) {
-                            $this->updateStatus("badVardefsLink", $key, $module);
+                            $this->updateStatus('badVardefsLink', $key, $module);
                         }
                         break;
                     case 'relate':
@@ -4499,12 +4598,12 @@ ENDP;
                             $lname = $value['link'];
                             if (empty($fieldDefs[$lname])) {
                                 ;
-                                $this->updateStatus("badVardefsKey", $key, $lname, $module);
+                                $this->updateStatus('badVardefsKey', $key, $lname, $module);
                                 break;
                             }
                             $seed->load_relationship($lname);
                             if (empty($seed->$lname)) {
-                                $this->updateStatus("badVardefsRelate", $key, $module);
+                                $this->updateStatus('badVardefsRelate', $key, $module);
                                 break;
                             }
                             $relatedModuleName = $seed->$lname->getRelatedModuleName();
@@ -4519,7 +4618,7 @@ ENDP;
                         if (!$this->hasValidLinkAndModule($value)
                             && (empty($stockFieldsDef[$key])
                                 || $this->hasValidLinkAndModule($stockFieldsDef[$key]))) {
-                            $this->updateStatus("badVardefsRelate", $key, $module);
+                            $this->updateStatus('badVardefsRelate', $key, $module);
                         }
                         break;
                 }
@@ -4539,7 +4638,7 @@ ENDP;
                     if (is_array($value['sort_on'])) {
                         $sort = $value['sort_on'];
                     } else {
-                        $sort = array($value['sort_on']);
+                        $sort = [$value['sort_on']];
                     }
                     $this->checkFields($key, $sort, $fieldDefs, $custom, $module);
                 }
@@ -4556,7 +4655,7 @@ ENDP;
     {
         return !((empty($value['link_type'])
                 || $value['link_type'] != 'relationship_info')
-                && empty($value['module']));
+            && empty($value['module']));
     }
 
     /**
@@ -4565,7 +4664,7 @@ ENDP;
      */
     protected function ping($data)
     {
-        $url = $this->ping_url . "?" . http_build_query($data);
+        $url = $this->ping_url . '?' . http_build_query($data);
         $curlHandler = curl_init($url);
         if ($curlHandler !== false) {
             curl_setopt($curlHandler, CURLOPT_RETURNTRANSFER, true);
@@ -4579,7 +4678,7 @@ ENDP;
      * List of standard BWC modules
      * @var array
      */
-    protected $bwcModules = array(
+    protected $bwcModules = [
         'ACLFields',
         'ACLRoles',
         'ACLActions',
@@ -4667,13 +4766,13 @@ ENDP;
         'WorkFlowAlertShells',
         'WorkFlowTriggerShells',
         'HealthCheck',
-    );
+    ];
 
     /**
      * List of modules we have added in Sugar7
      * @var array
      */
-    protected $newModules = array(
+    protected $newModules = [
         'Comments' => 'Comments',
         'Filters' => 'Filters',
         'RevenueLineItems' => 'Revenue Line Items',
@@ -4682,7 +4781,7 @@ ENDP;
         'UserSignatures' => 'Email Signatures',
         'WebLogicHooks' => 'Web Logic Hooks',
         'Words' => 'Words',
-    );
+    ];
 
     /**
      * Retrieve version.json file path
@@ -4693,7 +4792,7 @@ ENDP;
         $versionFile = null;
         if (file_exists(__DIR__ . '/' . self::VERSION_FILE)) {
             $versionFile = __DIR__ . '/' . self::VERSION_FILE;
-        } elseif ($this->upgrader && isset ($this->upgrader->context['upgrader_dir']) &&
+        } elseif ($this->upgrader && isset($this->upgrader->context['upgrader_dir']) &&
             file_exists($this->upgrader->context['upgrader_dir'] . '/' . self::VERSION_FILE)
         ) {
             $versionFile = $this->upgrader->context['upgrader_dir'] . '/' . self::VERSION_FILE;
@@ -4723,17 +4822,14 @@ ENDP;
          * We can skip step #2 and only go with step #1 once we only support upgrades from 7.6.1 going forward.
          *
          */
-        if (is_callable(array($this->upgrader, 'getManifest'))){
+        if (is_callable([$this->upgrader, 'getManifest'])) {
             return $this->upgrader->getManifest();
-        }
-        else if (!empty($this->upgrader->context['extract_dir'])) {
+        } elseif (!empty($this->upgrader->context['extract_dir'])) {
             $fileReader = new FileLoaderWrapper();
             $manifest = $fileReader->loadFile($this->upgrader->context['extract_dir'] . '/manifest.php', 'manifest');
-            return !empty($manifest) ? $manifest : array();
+            return !empty($manifest) ? $manifest : [];
         }
-        return array();
-
-
+        return [];
     }
 
     /**
@@ -4742,10 +4838,10 @@ ENDP;
     public function getVersion()
     {
         global $sugar_version, $sugar_build;
-        $version = array(
+        $version = [
             'version' => 'N/A',
             'build' => 'N/A',
-        );
+        ];
         $versionFile = $this->getVersionFile();
         if ($versionFile) {
             $json = file_get_contents($versionFile);
@@ -4754,10 +4850,10 @@ ENDP;
         } elseif ($sugar_version && $sugar_build) {
             $version = array_merge(
                 $version,
-                array(
+                [
                     'version' => $sugar_version,
-                    'build' => $sugar_build
-                )
+                    'build' => $sugar_build,
+                ]
             );
         } elseif (file_exists('sugar_version.php')) {
             if (!defined('sugarEntry')) {
@@ -4766,14 +4862,13 @@ ENDP;
             include 'sugar_version.php';
             $version = array_merge(
                 $version,
-                array(
+                [
                     'version' => $sugar_version,
-                    'build' => $sugar_build
-                )
+                    'build' => $sugar_build,
+                ]
             );
         }
-        return array($version['version'], $version['build']);
-
+        return [$version['version'], $version['build']];
     }
 
     /**
@@ -4854,7 +4949,7 @@ ENDP;
         }
 
         // ignore errors in smarty cache
-        if (false !== strpos($errfile, sugar_cached('smarty3/'))) {
+        if (false !== strpos($errfile, (string) sugar_cached('smarty3/'))) {
             return false;
         }
 
@@ -4902,6 +4997,10 @@ ENDP;
                 $e_type = 'E_DEPRECATED';
                 break;
             case 16384:
+                if (basename($errfile) === 'smarty_internal_compile_private_modifier.php') {
+                    @trigger_error($errstr, E_USER_DEPRECATED);
+                    return;
+                }
                 $e_type = 'E_USER_DEPRECATED';
                 break;
             case 30719:
@@ -4911,7 +5010,7 @@ ENDP;
                 $e_type = 'E_UNKNOWN';
                 break;
         }
-        $this->updateStatus("phpError", $e_type, $errstr, $errfile, $errline);
+        $this->updateStatus('phpError', $e_type, $errstr, $errfile, $errline);
     }
 
     private function getMethodSignatureVisitor(array $rules): NodeVisitor
@@ -4920,7 +5019,7 @@ ENDP;
             return new MethodSignatureVisitor($rules);
         }
         // copy of MethodSignatureVisitor class, which is unavailable in HealthCheck context during upgrade to 12.3
-        return new class($rules) extends ForbiddenStatementVisitor {
+        return new class ($rules) extends ForbiddenStatementVisitor {
             private $rules = [];
 
             public function __construct(array $rules)
@@ -4947,6 +5046,26 @@ ENDP;
             }
         };
     }
+
+    private function safeCount($potentiallyCountable): int
+    {
+        if (function_exists('safeCount')) {
+            return safeCount($potentiallyCountable);
+        }
+        if (is_countable($potentiallyCountable)) {
+            return count($potentiallyCountable);
+        }
+        LoggerManager::getLogger()->warn('count() called on non-countable argument: ' . PHP_EOL . (new Exception())->getTraceAsString());
+        return 0;
+    }
+
+    private function safeInArray($needle, $haystack, bool $strict = false) : bool
+    {
+        if (!is_array($haystack)) {
+            return false;
+        }
+        return in_array($needle, $haystack, $strict);
+    }
 }
 
 /**
@@ -4961,20 +5080,20 @@ class BlackHole implements ArrayAccess, Countable, Iterator
      * Fields to be stubbed.
      * @var array
      */
-    protected $stubFields = array();
+    protected $stubFields = [];
 
     /**
      * Methods to be stubbed.
      * @var array
      */
-    protected $stubMethods = array();
+    protected $stubMethods = [];
 
     /**
      * You can set fields and methods to be stubbed when __get() or __call() are triggered on a BlackHole.
      * @param array $fields list of fields (name => value)
      * @param array $methods list of methods (name => returnValue)
      */
-    public function __construct($fields = array(), $methods = array())
+    public function __construct($fields = [], $methods = [])
     {
         $this->stubFields = $fields;
         $this->stubMethods = $methods;
@@ -4992,7 +5111,7 @@ class BlackHole implements ArrayAccess, Countable, Iterator
         return array_key_exists($n, $this->stubMethods) ? $this->stubMethods[$n] : $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return '';
     }
@@ -5023,7 +5142,7 @@ class BlackHole implements ArrayAccess, Countable, Iterator
         return 0;
     }
 
-    function __invoke()
+    public function __invoke()
     {
         $this->called = true;
         return $this;
@@ -5075,12 +5194,12 @@ class FileLoaderWrapper extends BlackHole
         parent::__construct();
 
         $this->nullUser = new BlackHole(
-            array(
+            [
                 'id' => null,
-            ),
-            array(
+            ],
+            [
                 'getPreference' => null,
-            )
+            ]
         );
     }
 

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 
 global $current_user;
@@ -20,11 +21,13 @@ $url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar
     $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Microsoft' .
     '&products=' . $productCodes;
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
         'Registrera din Sugar-instans med Microsoft Azure för att aktivera konfigurationen av Microsoft-konton så att de kan användas inom Sugar. ' .
         'Se <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Microsoft" target=\'_blank\'>Konnektordokumentation</a>' .
         '\' target=\'_blank\'>Samordnardokumentation</a> för ytterligare information.</td></tr></table>',
     'oauth2_client_id' => 'Klient-ID',
     'oauth2_client_secret' => 'Klienthemlighet',
-);
+    'oauth2_single_tenant_enabled' => 'Anslut till ett enda boendeprogram',
+    'oauth2_single_tenant_id' => 'Boende-ID',
+];

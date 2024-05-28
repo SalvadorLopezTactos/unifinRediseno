@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'U dient een recordnummer op te geven om een gebruiker toe te wijzen aan dit team.',
     'ERR_DUP_NAME' => 'Teamnaam bestaat reeds, kies a.u.b. een andere teamnaam.',
     'ERR_DELETE_RECORD' => 'U dient een recordnummer op te geven om om dit team te verwijderen.',
@@ -66,17 +66,17 @@ $mod_strings = array(
     'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
 Op teams gebaseerde machtigingen voor een module overschrijven alle gegevens die aan op teams gebaseerde machtigingen zijn gekoppeld voor die module, waaronder Procesdefinities of Processen die de functie gebruiken. Dit is inclusief Rollen die de optie "Eigenaar & Geselecteerd team" gebruiken voor die module en eventuele op teams gebaseerde machtigingen voor records in die module. We raden u aan het middel Snel repareren en opnieuw opbouwen te gebruiken om uw systeemcache te legen nadat u op teams gebaseerde machtigingen hebt uitgeschakeld voor een module.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Waarschuwing:</strong> Op teams gebaseerde machtigingen voor een module overschrijven alle gegevens die aan op teams gebaseerde machtigingen zijn gekoppeld voor die module, waaronder Procesdefinities of Processen die de functie gebruiken. Dit is inclusief Rollen die de optie "Eigenaar & Geselecteerd team" gebruiken voor die module en eventuele op teams gebaseerde machtigingen voor records in die module. We raden u aan het middel Snel repareren en opnieuw opbouwen te gebruiken om uw systeemcache te legen nadat u op teams gebaseerde machtigingen hebt uitgeschakeld voor een module.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Op teams gebaseerde machtigingen voor een module overschrijven alle gegevens die aan op teams gebaseerde machtigingen zijn gekoppeld voor die module, waaronder Procesdefinities of Processen die de functie gebruiken. Dit is inclusief Rollen die de optie "Eigenaar & Geselecteerd team" gebruiken voor die module en eventuele op teams gebaseerde machtigingen voor records in die module. We raden u aan het middel Snel repareren en opnieuw opbouwen te gebruiken om uw systeemcache te legen nadat u op teams gebaseerde machtigingen hebt uitgeschakeld voor een module. Neem contact op met een beheerder die toegang heeft tot het menu Reparatie als u geen toegang heeft tot Snel repareren en opnieuw opbouwen.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Waarschuwing:</strong>Op teams gebaseerde machtigingen voor een module overschrijven alle gegevens die aan op teams gebaseerde machtigingen zijn gekoppeld voor die module, waaronder Procesdefinities of Processen die de functie gebruiken. Dit is inclusief Rollen die de optie "Eigenaar & Geselecteerd team" gebruiken voor die module en eventuele op teams gebaseerde machtigingen voor records in die module. We raden u aan het middel Snel repareren en opnieuw opbouwen te gebruiken om uw systeemcache te legen nadat u op teams gebaseerde machtigingen hebt uitgeschakeld voor een module. Neem contact op met een beheerder die toegang heeft tot het menu Reparatie als u geen toegang heeft tot Snel repareren en opnieuw opbouwen.
 STR
-,
-);
+    ,
+];

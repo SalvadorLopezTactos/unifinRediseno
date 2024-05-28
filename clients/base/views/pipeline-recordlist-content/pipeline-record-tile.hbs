@@ -10,28 +10,30 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class='tile portlet'>
-    <div class='pipeline-tile'>
+<div class='tile portlet mb-4 p-0.5 rounded-lg bg-[--primary-content-background] text-sm hover:shadow-md hover:bg-[--dashlet-background-hover]'>
+    <div class='pipeline-tile min-h-[3.125rem] hover:cursor-pointer'>
         {{#each meta.tileDef.panels}}
             {{#if is_header}}
-                <div class='tile-header portlet-header'>
-                    <div class='name ellipsis_inline pull-left'>
+                <div class='tile-header portlet-header py-0.5 pr-1.25 pl-2.5 font-bold'>
+                    <div class='name ellipsis_inline'>
                         {{#each fields}}
-                            <a href="#{{buildRoute module=../../../model.attributes._module id=../../../model.attributes.id}}">{{field ../../../view model=../../../model template='list'}}</a>
+                            <div data-type="{{type}}">
+                                {{field ../../../view model=../../../model template='list'}}
+                            </div>
                         {{/each}}
                     </div>
-                    <div class='pull-right'>
-                        {{#each buttons}}
-                            {{field ../../../view model=../../../model}}
-                        {{/each}}
-                    </div>
-                    <div class='clearfix'></div>
                 </div>
             {{else}}
-                <div class='tile-body'>
-                    <div class='info-container span12 tile-field-wrapper'>
+                <div class='tile-body pb-1.25 pr-1.25 pl-2.5'>
+                    <div class='info-container tile-field-wrapper ml-0 w-full'>
                         {{#each fields}}
-                            {{field ../../../view model=../../../model template='list'}}
+                            <div class="mb-1" data-type="{{type}}">
+                                {{#eq type 'currency'}}
+                                    {{field ../../../../view model=../../../../model template='tile'}}
+                                {{else}}
+                                    {{field ../../../../view model=../../../../model template='list'}}
+                                {{/eq}}
+                            </div>
                         {{/each}}
                     </div>
                     <div class='clearfix'></div>

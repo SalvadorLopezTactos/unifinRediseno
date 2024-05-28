@@ -20,7 +20,7 @@ class ContactsApiHelper extends SugarBeanApiHelper
      * @param array $options
      * @return array
      */
-    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = array())
+    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = [])
     {
         global $current_user;
         $data = parent::populateFromApi($bean, $submittedData, $options);
@@ -38,6 +38,4 @@ class ContactsApiHelper extends SugarBeanApiHelper
 
         return $data;
     }
-
-
 }

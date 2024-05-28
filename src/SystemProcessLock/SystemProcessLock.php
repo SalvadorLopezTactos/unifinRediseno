@@ -37,8 +37,8 @@ class SystemProcessLock
         $this->uniqueId = $uniqueId;
         $this->additionalKey = $additionalKey;
         // Oracle workaround
-        if ($this->additionalKey == "") {
-            $this->additionalKey = "#";
+        if ($this->additionalKey == '') {
+            $this->additionalKey = '#';
         }
         $this->db = new DbImplementation();
         $this->setOptions($options);
@@ -57,10 +57,11 @@ class SystemProcessLock
      * @return void|null|mixed
      */
     public function isolatedCall(
-        callable $checkCondition,
-        callable $longRunningFunction,
+        callable  $checkCondition,
+        callable  $longRunningFunction,
         ?callable $onRefused = null
     ) {
+
         if (self::$lockLevel > 0 || !$this->db->isAvailable) {
             return $longRunningFunction($this->lockAttemptCounter);
         }

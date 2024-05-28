@@ -10,17 +10,17 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$hook_array['before_relationship_add'][] = array(
+$hook_array['before_relationship_add'][] = [
     1,
     'AddManagerToTeam',
     'modules/Teams/TeamHooks.php',
     'TeamHooks',
     'addManagerToTeam',
-);
-$hook_array['after_relationship_delete'][] = array(
+];
+$hook_array['after_relationship_delete'][] = [
     2,
     'RemoveManagerFromTeam',
     'modules/Teams/TeamHooks.php',
     'TeamHooks',
     'removeManagerFromTeam',
-);
+];

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-'LBL_ASSIGNED_TO_ID'=>'ID ผู้ใช้ที่ระบุ',
-'LBL_ASSIGNED_TO_NAME' => 'ระบุให้',
-);
+$mod_strings = [
+    'LBL_ASSIGNED_TO_ID' => 'ID ผู้ใช้ที่ระบุ',
+    'LBL_ASSIGNED_TO_NAME' => 'ระบุให้',
+];

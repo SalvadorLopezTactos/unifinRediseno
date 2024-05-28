@@ -28,7 +28,7 @@ use Google\Service\Essentialcontacts\GoogleProtobufEmpty;
  * Typical usage is:
  *  <code>
  *   $essentialcontactsService = new Google\Service\Essentialcontacts(...);
- *   $contacts = $essentialcontactsService->contacts;
+ *   $contacts = $essentialcontactsService->organizations_contacts;
  *  </code>
  */
 class OrganizationsContacts extends \Google\Service\Resource
@@ -138,14 +138,15 @@ class OrganizationsContacts extends \Google\Service\Resource
    * Updates a contact. Note: A contact's email address cannot be changed.
    * (contacts.patch)
    *
-   * @param string $name The identifier for the contact. Format:
+   * @param string $name Output only. The identifier for the contact. Format:
    * {resource_type}/{resource_id}/contacts/{contact_id}
    * @param GoogleCloudEssentialcontactsV1Contact $postBody
    * @param array $optParams Optional parameters.
    *
    * @opt_param string updateMask Optional. The update mask applied to the
-   * resource. For the `FieldMask` definition, see https://developers.google.com
-   * /protocol-buffers/docs/reference/google.protobuf#fieldmask
+   * resource. For the `FieldMask` definition, see
+   * https://developers.google.com/protocol-
+   * buffers/docs/reference/google.protobuf#fieldmask
    * @return GoogleCloudEssentialcontactsV1Contact
    */
   public function patch($name, GoogleCloudEssentialcontactsV1Contact $postBody, $optParams = [])

@@ -31,7 +31,7 @@ class RestResponse extends Zend_Http_Response
      * Data from $_SERVER
      * @var array
      */
-    protected $server_data = array();
+    protected $server_data = [];
 
     /**
      * Filename to read response from
@@ -60,7 +60,7 @@ class RestResponse extends Zend_Http_Response
     {
         $this->code = 200;
         $this->shouldSendBody = true;
-        if(!empty($server['SERVER_PROTOCOL'])) {
+        if (!empty($server['SERVER_PROTOCOL'])) {
             [$http, $version] = explode('/', $server['SERVER_PROTOCOL']);
             $this->version = $version;
         } else {
@@ -69,7 +69,7 @@ class RestResponse extends Zend_Http_Response
         $this->server_data = $server;
 
         // Add in some extra sugar-specific HTTP codes
-        self::$messages[433] = "Client Out Of Date";
+        self::$messages[433] = 'Client Out Of Date';
     }
 
     /**
@@ -107,16 +107,16 @@ class RestResponse extends Zend_Http_Response
         return array_key_exists($header, $this->headers);
     }
 
-   /**
+    /**
      * Get a specific header as string, or null if it is not set
      *
-     * @param string$header
+     * @param string $header
      * @return string|null
      */
     public function getHeader($header)
     {
         //$header = ucwords(strtolower($header));
-        if (! is_string($header) || ! isset($this->headers[$header])) {
+        if (!is_string($header) || !isset($this->headers[$header])) {
             return null;
         }
 
@@ -143,7 +143,7 @@ class RestResponse extends Zend_Http_Response
     public function setType($type, $resetContentType = false)
     {
         $this->type = $type;
-        if($resetContentType) {
+        if ($resetContentType) {
             $this->setContentTypeByType();
         }
         return $this;
@@ -166,11 +166,11 @@ class RestResponse extends Zend_Http_Response
      */
     protected function setContentTypeByType()
     {
-        if($this->type == self::JSON_HTML) {
-            $this->setHeader("Content-Type", "text/html");
+        if ($this->type == self::JSON_HTML) {
+            $this->setHeader('Content-Type', 'text/html');
         }
-        if($this->type == self::JSON) {
-            $this->setHeader("Content-Type", "application/json");
+        if ($this->type == self::JSON) {
+            $this->setHeader('Content-Type', 'application/json');
         }
         return $this;
     }
@@ -181,12 +181,12 @@ class RestResponse extends Zend_Http_Response
      */
     public function processContent()
     {
-        switch($this->type) {
+        switch ($this->type) {
             case self::JSON:
-                $response = json_encode($this->body, JSON_HEX_APOS|JSON_HEX_QUOT|JSON_HEX_TAG|JSON_HEX_AMP);
+                $response = json_encode($this->body, JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP);
                 break;
             case self::JSON_HTML:
-                $response = htmlspecialchars(json_encode($this->body), ENT_QUOTES, "UTF-8");
+                $response = htmlspecialchars(json_encode($this->body), ENT_QUOTES, 'UTF-8');
                 break;
             case self::FILE:
                 // special case
@@ -197,11 +197,11 @@ class RestResponse extends Zend_Http_Response
                 break;
         }
 
-        if(!$this->hasHeader("Content-Type")) {
+        if (!$this->hasHeader('Content-Type')) {
             $this->setContentTypeByType();
         }
 
-        if (!$this->hasHeader("Content-Length") && ini_get('zlib.output_compression') == 0) {
+        if (!$this->hasHeader('Content-Length') && ini_get('zlib.output_compression') == 0) {
             // Files will overwrite this in $this->sendFile();
             $this->setHeader('Content-Length', strlen($response));
         }
@@ -235,23 +235,23 @@ class RestResponse extends Zend_Http_Response
      */
     public function sendHeaders()
     {
-        if($this->headersSent()) {
-    		return false;
-    	}
+        if ($this->headersSent()) {
+            return false;
+        }
 
         foreach ($this->removeHeaders as $header => $_) {
             header_remove($header);
         }
 
-    	if($this->code != 200) {
-    	    $text = self::responseCodeAsText($this->code, $this->version != '1.0');
-    	    $this->sendHeader("HTTP/{$this->version} {$this->code} {$text}");
-    	    $this->headers['Status'] = "{$this->code} {$text}";
-    	}
-    	foreach($this->headers as $header => $info) {
-    		$this->sendHeader("{$header}: {$info}");
-    	}
-    	return true;
+        if ($this->code != 200) {
+            $text = self::responseCodeAsText($this->code, $this->version != '1.0');
+            $this->sendHeader("HTTP/{$this->version} {$this->code} {$text}");
+            $this->headers['Status'] = "{$this->code} {$text}";
+        }
+        foreach ($this->headers as $header => $info) {
+            $this->sendHeader("{$header}: {$info}");
+        }
+        return true;
     }
 
     /**
@@ -284,7 +284,7 @@ class RestResponse extends Zend_Http_Response
         $this->removeHeader('Expires');
         $this->removeHeader('Pragma');
 
-        if (isset($this->server_data["HTTP_IF_NONE_MATCH"]) && $etag == $this->server_data["HTTP_IF_NONE_MATCH"]) {
+        if (isset($this->server_data['HTTP_IF_NONE_MATCH']) && $etag == $this->server_data['HTTP_IF_NONE_MATCH']) {
             // Same data, clean it up and return 304
             $this->code = 304;
             $this->shouldSendBody = false;
@@ -306,10 +306,10 @@ class RestResponse extends Zend_Http_Response
      */
     public function setPostHeaders()
     {
-    	$this->setHeader('Cache-Control', 'no-cache, must-revalidate');
-    	$this->setHeader('Pragma', 'no-cache');
-    	$this->setHeader('Expires', 'Sat, 26 Jul 1997 05:00:00 GMT');
-    	return $this;
+        $this->setHeader('Cache-Control', 'no-cache, must-revalidate');
+        $this->setHeader('Pragma', 'no-cache');
+        $this->setHeader('Expires', 'Sat, 26 Jul 1997 05:00:00 GMT');
+        return $this;
     }
 
     /**
@@ -318,21 +318,21 @@ class RestResponse extends Zend_Http_Response
      */
     protected function sendFile($file)
     {
-        if(!file_exists($file)) {
+        if (!file_exists($file)) {
             $this->body = '';
-            $this->headers = array();
+            $this->headers = [];
             $this->code = 404;
             $this->type = self::RAW;
             $this->sendHeaders();
             return;
         }
-        $this->setHeader("Content-Length", filesize($file));
+        $this->setHeader('Content-Length', filesize($file));
         $this->sendHeaders();
         set_time_limit(0);
-        if(function_exists('zend_send_file')) {
-        	zend_send_file($file);
+        if (function_exists('zend_send_file')) {
+            zend_send_file($file);
         } else {
-        	readfile($file);
+            readfile($file);
         }
     }
 
@@ -352,7 +352,7 @@ class RestResponse extends Zend_Http_Response
      */
     public function send()
     {
-        if($this->type == self::FILE) {
+        if ($this->type == self::FILE) {
             $this->sendFile($this->filename);
             return;
         }
@@ -378,6 +378,4 @@ class RestResponse extends Zend_Http_Response
     {
         return $this->type;
     }
-
 }
-

@@ -21,7 +21,7 @@ class SugarWidgetFieldTinyint extends SugarWidgetFieldInt
     public function queryFilterEquals(&$layout_def)
     {
         $column = $this->_get_column_select($layout_def);
-    
+
         if (in_array($layout_def['input_name0'][0], ['yes', '1'])) {
             return " {$column} = 1 \n";
         } else {

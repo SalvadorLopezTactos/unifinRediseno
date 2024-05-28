@@ -22,7 +22,7 @@
                 </th>
             {{/each}}
             {{#each fields}}
-                <th class="{{#isSortable ../../module this}}sorting{{#eq ../../../orderBy.field name}}_{{{../../../../orderBy.direction}}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if widthClass}} {{widthClass}}{{/if}}"
+                <th class="relative {{#isSortable ../../module this}}sorting{{#eq ../../../orderBy.field name}}_{{{../../../../orderBy.direction}}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if widthClass}} {{widthClass}}{{/if}}"
                     {{#if styles}} style="{{styles}}"{{/if}}
                     {{#if name}} data-fieldname="{{name}}"{{/if}} data-orderby="{{orderBy}}">
                     <span>

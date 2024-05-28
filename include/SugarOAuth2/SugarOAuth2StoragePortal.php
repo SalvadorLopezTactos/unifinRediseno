@@ -53,7 +53,7 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform
     public function getUserBean($user_id)
     {
         $userBean = $this->findPortalApiUser();
-        if ( $userBean == null ) {
+        if ($userBean == null) {
             return false;
         }
 
@@ -140,7 +140,7 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform
      */
     public function getIdsForUser($user_id, $client_id)
     {
-        $return = array('contact_id' => '', 'user_id' => '');
+        $return = ['contact_id' => '', 'user_id' => ''];
         $portalApiUser = $this->findPortalApiUser();
         if ($portalApiUser == null) {
             return $return;
@@ -228,38 +228,38 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform
     }
 
     /**
-   	 * Grant access tokens for basic user credentials.
-   	 *
-   	 * Check the supplied username and password for validity.
-   	 *
-   	 * You can also use the $client_id param to do any checks required based
-   	 * on a client, if you need that.
-   	 *
-   	 * Required for OAuth2::GRANT_TYPE_USER_CREDENTIALS.
-   	 *
-   	 * @param $client_id
-   	 * Client identifier to be check with.
-   	 * @param $username
-   	 * Username to be check with.
-   	 * @param $password
-   	 * Password to be check with.
-   	 *
-   	 * @return
-   	 * TRUE if the username and password are valid, and FALSE if it isn't.
-   	 * Moreover, if the username and password are valid, and you want to
-   	 * verify the scope of a user's access, return an associative array
-   	 * with the scope values as below. We'll check the scope you provide
-   	 * against the requested scope before providing an access token:
-   	 * @code
-   	 * return array(
-   	 * 'scope' => <stored scope values (space-separated string)>,
-   	 * );
-   	 * @endcode
-   	 *
-   	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.3
-   	 *
-   	 * @ingroup oauth2_section_4
-   	 */
+     * Grant access tokens for basic user credentials.
+     *
+     * Check the supplied username and password for validity.
+     *
+     * You can also use the $client_id param to do any checks required based
+     * on a client, if you need that.
+     *
+     * Required for OAuth2::GRANT_TYPE_USER_CREDENTIALS.
+     *
+     * @param $client_id
+     * Client identifier to be check with.
+     * @param $username
+     * Username to be check with.
+     * @param $password
+     * Password to be check with.
+     *
+     * @return
+     * TRUE if the username and password are valid, and FALSE if it isn't.
+     * Moreover, if the username and password are valid, and you want to
+     * verify the scope of a user's access, return an associative array
+     * with the scope values as below. We'll check the scope you provide
+     * against the requested scope before providing an access token:
+     * @code
+     * return array(
+     * 'scope' => <stored scope values (space-separated string)>,
+     * );
+     * @endcode
+     *
+     * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.3
+     *
+     * @ingroup oauth2_section_4
+     */
     public function checkUserCredentials(IOAuth2GrantUser $storage, $client_id, $username, $password)
     {
         if (empty($username)) {
@@ -272,21 +272,21 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform
 
         $portalApiUser = $this->findPortalApiUser();
         if ($portalApiUser == null) {
-           // Can't login as a portal user if there is no API user
+            // Can't login as a portal user if there is no API user
             throw new SugarApiExceptionPortalNotConfigured();
         }
 
         $contact = $this->loadUserFromName($username);
         if (!empty($contact) && !User::checkPassword($password, $contact->portal_password)) {
-           $contact = null;
+            $contact = null;
         }
 
         if (!empty($contact)) {
             $sessionManager = new SessionManager();
             if (!$sessionManager->canAddSession()) {
                 //not able to add another session right now
-                $GLOBALS['log']->error("Unable to add new session");
-                throw new SugarApiExceptionNeedLogin('too_many_concurrent_connections',array('Too many concurrent sessions'));
+                $GLOBALS['log']->error('Unable to add new session');
+                throw new SugarApiExceptionNeedLogin('too_many_concurrent_connections', ['Too many concurrent sessions']);
             }
 
             $this->contactBean = $contact;
@@ -296,7 +296,7 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform
 
             $contact->rehashPortalPassword($password);
 
-            return array('user_id'=>$contact->id);
+            return ['user_id' => $contact->id];
         } else {
             throw new SugarApiExceptionNeedLogin(translate('ERR_INVALID_PASSWORD', 'Users'));
         }
@@ -338,7 +338,7 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform
     {
         if (empty($tokenBean->contact_id)) {
             return false;
-        } 
+        }
 
         $tokenData['user_id'] = $tokenBean->assigned_user_id;
         $_SESSION['type'] = 'support_portal';

@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 declare(strict_types=1);
+
 namespace Sugarcrm\Sugarcrm\modules\Reports\Exporters;
 
 /**
@@ -62,7 +63,7 @@ class ReportCSVExporterSummationWithDetails extends ReportCSVExporterBase
      */
     private function buildTree(): array
     {
-        $tree = array();
+        $tree = [];
 
         // get display summary columns, split into count and non-count groups
         if (!isset($this->reporter->report_def['summary_columns'])) {
@@ -83,29 +84,29 @@ class ReportCSVExporterSummationWithDetails extends ReportCSVExporterBase
 
             // iterate over all non-group display summaries
             $cells = $groups['cells'];
-            $numCells = is_countable($cells) ? count($cells) : 0;
+            $numCells = safeCount($cells);
             for ($i = 0; $i < $numCells; $i++) {
                 $displaySummaryName = $cells[$i];
                 if (!isset($walker[$displaySummaryName])) {
                     // when the group is not set
-                    $walker[$displaySummaryName] = array();
+                    $walker[$displaySummaryName] = [];
                 }
 
                 $walker = &$walker[$displaySummaryName];
 
                 $displaySummaryValue = $rowData['cells'][$displaySummaryName];
                 if (!isset($walker[$displaySummaryValue])) {
-                    $walker[$displaySummaryValue] = array();
+                    $walker[$displaySummaryValue] = [];
                 }
                 $walker = &$walker[$displaySummaryValue];
             }
 
             $walker['count'] = $rowData['count'];
-            $walker['group_function_cells'] = array();
+            $walker['group_function_cells'] = [];
 
             // build the extra display summary
             $groupFunctionCells = $groups['group_function_cells'];
-            $numGroupFunctionCells = is_countable($groupFunctionCells) ? count($groupFunctionCells) : 0;
+            $numGroupFunctionCells = safeCount($groupFunctionCells);
             for ($i = 0; $i < $numGroupFunctionCells; $i++) {
                 $groupFunctionSummaryName = $groupFunctionCells[$i];
                 $groupFunctionSummaryValue = $rowData['cells'][$groupFunctionSummaryName];
@@ -127,10 +128,10 @@ class ReportCSVExporterSummationWithDetails extends ReportCSVExporterBase
      */
     private function buildMainTable(array &$tree, string $tabs = ''): array
     {
-        $mainTableData = array(
+        $mainTableData = [
             'content' => '',
             'count' => 0,
-        );
+        ];
 
         if (isset($tree['count'])) {
             // when we've reached the bottom of the tree, build the actual detail rows
@@ -147,7 +148,7 @@ class ReportCSVExporterSummationWithDetails extends ReportCSVExporterBase
         // iterate over all the value(s) of the group by
         $detailHeader = array_keys($tree)[0];
         foreach ($tree[$detailHeader] as $groupValue => $groupSummaryData) {
-            $mainTableData['content'] .= "$tabs\"" . $detailHeader . " = " . $groupValue;
+            $mainTableData['content'] .= "$tabs\"" . $detailHeader . ' = ' . $groupValue;
 
             // call this function recursively on either the next group by value or the actual results
             $lowerOutput = $this->buildMainTable($groupSummaryData);
@@ -220,11 +221,11 @@ class ReportCSVExporterSummationWithDetails extends ReportCSVExporterBase
     {
         // if there is no data, return empty array
         if ($row === 0) {
-            return array();
+            return [];
         }
 
         // if there is data, apply the data from the row to the header
-        $summaryData = array();
+        $summaryData = [];
         $summaryData['cells'] = array_combine($header, $row['cells']);
         $summaryData['count'] = intval($row['count']);
         return $summaryData;
@@ -243,10 +244,10 @@ class ReportCSVExporterSummationWithDetails extends ReportCSVExporterBase
      */
     private function determineGroups(array $summaryHeaders): array
     {
-        $groupData = array(
-            'cells' => array(),
-            'group_function_cells' => array(),
-        );
+        $groupData = [
+            'cells' => [],
+            'group_function_cells' => [],
+        ];
 
         // iterate through all the display summaries
         foreach ($summaryHeaders as $def) {

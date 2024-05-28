@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Audito žurnalas',
     'LBL_FIELD_NAME' => 'Laukas',
     'LBL_OLD_NAME' => 'Sena reikšmė',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Atnaujinti į',
     'LBL_BLANK' => '-tuščia-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Audito chronologija',
+    'LBL_CREATED' => 'Sukurta',
+];

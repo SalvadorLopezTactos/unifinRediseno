@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'แดชบอร์ดรายการไอเท็มไลน์ที่อ้างมา',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนไอเท็มไลน์ที่อ้างมา',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'รายการบรรทัดการเสนอราคาระบบลิ้นชัก',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์รายการสินค้าที่เสนอราคา',
 
     'LBL_CAMPAIGN_PRODUCT' => 'รายการบรรทัดการเสนอราคาของแคมเปญ',
     'LBL_MODULE_NAME' => 'รายการบรรทัดการเสนอราคา',
@@ -183,4 +184,4 @@ $mod_strings = array(
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (รายการบรรทัดการเสนอราคาใหม่)',
     'LBL_DISCOUNT_PERCENT' => '% เปอร์เซ็นต์',
     'LBL_DISCOUNT_TYPE' => 'ประเภทส่วนลด',
-);
+];

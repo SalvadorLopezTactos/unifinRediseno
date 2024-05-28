@@ -99,7 +99,7 @@ class ImapMailer implements Inbound
         restore_error_handler();
 
         if (empty($this->client)) {
-            throw new \Exception("There is error in Mail Protocol Imap!");
+            throw new \Exception('There is error in Mail Protocol Imap!');
         }
 
         if (!empty($this->eapmId)) {
@@ -109,10 +109,10 @@ class ImapMailer implements Inbound
 
     /**
      * catch error
-     * @param int    $errno
+     * @param int $errno
      * @param string $errstr
      * @param string $errfile
-     * @param int    $errline
+     * @param int $errline
      */
     public function errorHandler($errno, $errstr, $errfile, $errline)
     {
@@ -164,7 +164,7 @@ class ImapMailer implements Inbound
 
         // Oauth
         while (true) {
-            $response = "";
+            $response = '';
             $is_plus = $this->client->readLine($response, '+', true);
             if ($is_plus) {
                 // got an extra server challenge
@@ -174,7 +174,7 @@ class ImapMailer implements Inbound
                 if (preg_match('/^NO /i', $response) ||
                     preg_match('/^BAD /i', $response)) {
                     return false;
-                } elseif (preg_match("/^OK /i", $response)) {
+                } elseif (preg_match('/^OK /i', $response)) {
                     return true;
                 }
             }
@@ -186,7 +186,7 @@ class ImapMailer implements Inbound
      *
      * @return array
      */
-    public function getMailboxes() : array
+    public function getMailboxes(): array
     {
         $boxes = [];
         if (!empty($this->client)) {
@@ -246,7 +246,7 @@ class ImapMailer implements Inbound
      * @param int $uid
      * @return Mail\Storage\Message
      */
-    public function getMessageFromId(int $uid) : Mail\Storage\Message
+    public function getMessageFromId(int $uid): Mail\Storage\Message
     {
         if (isset($this->messageCache[$uid])) {
             return $this->messageCache[$uid];
@@ -270,11 +270,11 @@ class ImapMailer implements Inbound
         try {
             $message = $this->getMessageFromId($uid);
         } catch (Exception $e) {
-            $message = "ImapMailer is unable to retrieve message with id: " . $uid . "\n";
+            $message = 'ImapMailer is unable to retrieve message with id: ' . $uid . "\n";
             if ($e instanceof Laminas\Mail\Exception\InvalidArgumentException) {
-                $message .= "The email has invalid argument found in file: " . $e->getFile() . "\n";
-                $message .= "The invalid argument is at line: " . $e->getLine() . "\n";
-                $message .= "The invalid argument causes error message: " . $e->getMessage() . "\n";
+                $message .= 'The email has invalid argument found in file: ' . $e->getFile() . "\n";
+                $message .= 'The invalid argument is at line: ' . $e->getLine() . "\n";
+                $message .= 'The invalid argument causes error message: ' . $e->getMessage() . "\n";
                 $message .= "Current email is skipped for the process.\n";
             }
             throw new MailerException(
@@ -357,7 +357,7 @@ class ImapMailer implements Inbound
     /**
      * {@inheritDoc}
      */
-    public function getCc($uid) : string
+    public function getCc($uid): string
     {
         return $this->getHeaderAsString($uid, 'CC');
     }
@@ -365,7 +365,7 @@ class ImapMailer implements Inbound
     /**
      * {@inheritDoc}
      */
-    public function getBcc($uid) : string
+    public function getBcc($uid): string
     {
         return $this->getHeaderAsString($uid, 'BCC');
     }
@@ -373,7 +373,7 @@ class ImapMailer implements Inbound
     /**
      * {@inheritDoc}
      */
-    public function getReplyTo($uid) : string
+    public function getReplyTo($uid): string
     {
         return $this->getHeaderAsString($uid, 'Reply-To');
     }
@@ -384,7 +384,7 @@ class ImapMailer implements Inbound
      * @param string $type
      * @return string
      */
-    public function getHeaderAsString(int $uid, string $type) : string
+    public function getHeaderAsString(int $uid, string $type): string
     {
         $message = $this->getMessageFromId($uid);
         if (isset($message->$type)) {
@@ -396,7 +396,7 @@ class ImapMailer implements Inbound
     /**
      * {@inheritDoc}
      */
-    public function getFromAddress(int $uid) : array
+    public function getFromAddress(int $uid): array
     {
         $message = $this->getMessageFromId($uid);
         return $this->getAddressesFromHeader($message, 'From');
@@ -405,7 +405,7 @@ class ImapMailer implements Inbound
     /**
      * {@inheritDoc}
      */
-    public function getToAddresses(int $uid) : array
+    public function getToAddresses(int $uid): array
     {
         $message = $this->getMessageFromId($uid);
         return $this->getAddressesFromHeader($message, 'To');
@@ -414,7 +414,7 @@ class ImapMailer implements Inbound
     /**
      * {@inheritDoc}
      */
-    public function getCcAddresses(int $uid) : array
+    public function getCcAddresses(int $uid): array
     {
         $message = $this->getMessageFromId($uid);
         return $this->getAddressesFromHeader($message, 'CC');
@@ -423,7 +423,7 @@ class ImapMailer implements Inbound
     /**
      * {@inheritDoc}
      */
-    public function getBccAddresses(int $uid) : array
+    public function getBccAddresses(int $uid): array
     {
         $message = $this->getMessageFromId($uid);
         return $this->getAddressesFromHeader($message, 'BCC');
@@ -444,7 +444,7 @@ class ImapMailer implements Inbound
      * @param string $addressType Header address type like `To`, `From`, `CC`, `BCC`
      * @return array
      */
-    public function getAddressesFromHeader(Mail\Storage\Message $message, string $addressType) : array
+    public function getAddressesFromHeader(Mail\Storage\Message $message, string $addressType): array
     {
         if (!isset($message->$addressType)) {
             return [];
@@ -478,13 +478,13 @@ class ImapMailer implements Inbound
             case 'Cc':
             case 'Bcc':
             case 'ReplyTo':
-                $headerAddressType = "Laminas\\Mail\\Header\\" . $addressType;
+                $headerAddressType = 'Laminas\\Mail\\Header\\' . $addressType;
                 if ($header instanceof $headerAddressType) {
                     $list = $header->getAddressList();
                 } else {
-                    $message = "System is unable to get address list for " .  $addressType .
+                    $message = 'System is unable to get address list for ' . $addressType .
                         " address(es) from email header.\n";
-                    $message .= "The expected header object " . $headerAddressType . " is not formed properly.\n";
+                    $message .= 'The expected header object ' . $headerAddressType . " is not formed properly.\n";
                     $message .= "Current email is skipped for the process.\n";
                     throw new MailerException(
                         $message,
@@ -521,7 +521,7 @@ class ImapMailer implements Inbound
     /**
      * {@inheritDoc}
      */
-    public function getBody($uid) : array
+    public function getBody($uid): array
     {
         $messageObj = $this->getMessageFromId($uid);
         $textArray = [
@@ -576,7 +576,7 @@ class ImapMailer implements Inbound
     /**
      * {@inheritDoc}
      */
-    public function getAttachments($uid) : array
+    public function getAttachments($uid): array
     {
         $message = $this->getMessageFromId($uid);
         $attachments = [];

@@ -17,9 +17,10 @@ final class IbmDb2 extends Db
     public function migrateTemporaryTableChunk(
         string $targetTableName,
         string $targetFieldName,
-        int $offset,
-        int $limit
+        int    $offset,
+        int    $limit
     ): int {
+
         $offsetEnd = $offset + $limit + 1;
         $TemporaryTableName = $this->getTmpTableName();
 

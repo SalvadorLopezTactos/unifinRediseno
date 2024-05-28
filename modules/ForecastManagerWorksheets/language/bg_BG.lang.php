@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
 
     //module strings.
     'LBL_MODULE_NAME' => 'Прогнозни планове на мениджъра',
@@ -35,14 +35,14 @@ $mod_strings = array (
     'LBL_FORECAST_TYPE' => 'Тип на прогнозата',
     'LBL_FORECAST_OPP_COUNT' => 'Общ брой на възможностите',
     'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Брой на текущите възможности',
-    'LBL_FORECAST_OPP_WEIGH'=> 'Претеглена сума',
+    'LBL_FORECAST_OPP_WEIGH' => 'Претеглена сума',
     'LBL_FORECAST_USER' => 'Потребител',
-    'LBL_DATE_COMMITTED'=> 'Направена на',
+    'LBL_DATE_COMMITTED' => 'Направена на',
     'LBL_DATE_ENTERED' => 'Въведена на',
     'LBL_DATE_MODIFIED' => 'Модифицирано на',
     'LBL_CREATED_BY' => 'Създадено от',
     'LBL_DELETED' => 'Изтрити',
-    'LBL_MODIFIED_USER_ID'=>'Модифицирано от',
+    'LBL_MODIFIED_USER_ID' => 'Модифицирано от',
     'LBL_WK_VERSION' => 'Версия',
     'LBL_WK_REVISION' => 'Ревизия',
 
@@ -59,68 +59,68 @@ $mod_strings = array (
     'LBL_QC_UPCOMING_FORECASTS' => 'Моите прогнози',
     'LBL_QC_LAST_DATE_COMMITTED' => 'Дата на последно изпращане:',
     'LBL_QC_LAST_COMMIT_VALUE' => 'Последно изпратена сума:',
-    'LBL_QC_HEADER_DELIM'=> 'До',
+    'LBL_QC_HEADER_DELIM' => 'До',
 
     //opportunity worksheet list view labels
-    'LBL_OW_OPPORTUNITIES' => "Възможност",
-    'LBL_OW_ACCOUNTNAME' => "Организация",
-    'LBL_OW_REVENUE' => "Сума",
-    'LBL_OW_WEIGHTED' => "Претеглена сума",
-    'LBL_OW_MODULE_TITLE'=> 'Opportunity Worksheet',
-    'LBL_OW_PROBABILITY'=>'Вероятност',
-    'LBL_OW_NEXT_STEP'=>'Следваща стъпка',
-    'LBL_OW_DESCRIPTION'=>'Описание',
-    'LBL_OW_TYPE'=>'Тип',
+    'LBL_OW_OPPORTUNITIES' => 'Възможност',
+    'LBL_OW_ACCOUNTNAME' => 'Организация',
+    'LBL_OW_REVENUE' => 'Сума',
+    'LBL_OW_WEIGHTED' => 'Претеглена сума',
+    'LBL_OW_MODULE_TITLE' => 'Opportunity Worksheet',
+    'LBL_OW_PROBABILITY' => 'Вероятност',
+    'LBL_OW_NEXT_STEP' => 'Следваща стъпка',
+    'LBL_OW_DESCRIPTION' => 'Описание',
+    'LBL_OW_TYPE' => 'Тип',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'Direct Report',
-    'LBL_FDR_OPPORTUNITIES'=>'Възможности в прогнозата',
-    'LBL_FDR_WEIGH'=>'Претеглена стойност на възможностите:',
-    'LBL_FDR_COMMIT'=>'Прогнозирани суми',
-    'LBL_FDR_DATE_COMMIT'=>'Дата',
+    'LBL_FDR_USER_NAME' => 'Direct Report',
+    'LBL_FDR_OPPORTUNITIES' => 'Възможности в прогнозата',
+    'LBL_FDR_WEIGH' => 'Претеглена стойност на възможностите:',
+    'LBL_FDR_COMMIT' => 'Прогнозирани суми',
+    'LBL_FDR_DATE_COMMIT' => 'Дата',
 
     //detail view.
     'LBL_DV_HEADER' => 'Пргнози:План',
     'LBL_DV_MY_FORECASTS' => 'Моите прогнози',
-    'LBL_DV_MY_TEAM' => "Прогнози на моят екип" ,
+    'LBL_DV_MY_TEAM' => "Прогнози на моят екип",
     'LBL_DV_TIMEPERIODS' => 'Периоди:',
     'LBL_DV_FORECAST_PERIOD' => 'Период на прогнозата',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Прогнозирани възможности',
     'LBL_SEARCH' => 'Избери',
     'LBL_SEARCH_LABEL' => 'Избери',
     'LBL_COMMIT_HEADER' => 'Изпращане на прогноза',
-    'LBL_DV_LAST_COMMIT_DATE' =>'Потвърдена на:',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'Последно изпратени суми:',
+    'LBL_DV_LAST_COMMIT_DATE' => 'Потвърдена на:',
+    'LBL_DV_LAST_COMMIT_AMOUNT' => 'Последно изпратени суми:',
     'LBL_DV_FORECAST_ROLLUP' => 'Прогноза с натрупване',
     'LBL_DV_TIMEPERIOD' => 'Период:',
     'LBL_DV_TIMPERIOD_DATES' => 'Времеви обхват:',
     'LBL_LOADING_COMMIT_HISTORY' => 'Зареждане на история на прогнозите...',
 
     //list view
-    'LBL_LV_TIMPERIOD'=> 'Период',
-    'LBL_LV_TIMPERIOD_START_DATE'=> 'Начална дата:',
-    'LBL_LV_TIMPERIOD_END_DATE'=> 'Крайна дата',
-    'LBL_LV_TYPE'=> 'Тип на прогнозата',
-    'LBL_LV_COMMIT_DATE'=> 'Направена на',
-    'LBL_LV_OPPORTUNITIES'=> 'Възможности',
-    'LBL_LV_WEIGH'=> 'Претеглена сума',
-    'LBL_LV_COMMIT'=> 'Изпратена сума',
+    'LBL_LV_TIMPERIOD' => 'Период',
+    'LBL_LV_TIMPERIOD_START_DATE' => 'Начална дата:',
+    'LBL_LV_TIMPERIOD_END_DATE' => 'Крайна дата',
+    'LBL_LV_TYPE' => 'Тип на прогнозата',
+    'LBL_LV_COMMIT_DATE' => 'Направена на',
+    'LBL_LV_OPPORTUNITIES' => 'Възможности',
+    'LBL_LV_WEIGH' => 'Претеглена сума',
+    'LBL_LV_COMMIT' => 'Изпратена сума',
 
-    'LBL_COMMIT_NOTE'=> 'Въведете суми, които да зададете като прогноза за избран период:',
+    'LBL_COMMIT_NOTE' => 'Въведете суми, които да зададете като прогноза за избран период:',
 
-    'LBL_COMMIT_MESSAGE'=> 'Искате ли да потвърдите тези суми?',
+    'LBL_COMMIT_MESSAGE' => 'Искате ли да потвърдите тези суми?',
     'ERR_FORECAST_AMOUNT' => 'При потвърждение сумата е задължителна и следва да е число.',
 
     // js error strings
     'LBL_FC_START_DATE' => 'Начална дата:',
     'LBL_FC_USER' => 'Планиране за',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'Не са намерени активни периоди за модул прогнози.',
-    'LBL_FDR_ADJ_AMOUNT'=>'Коригирана сума',
-    'LBL_SAVE_WOKSHEET'=>'Запази плана',
-    'LBL_RESET_WOKSHEET'=>'Изтрий плана',
-    'LBL_SHOW_CHART'=>'Графика',
-    'LBL_RESET_CHECK'=>'Всички данни за избрания период на текущия потребител ще бъдат изтрити. Желаете ли да продължите?',
+    'LBL_NO_ACTIVE_TIMEPERIOD' => 'Не са намерени активни периоди за модул прогнози.',
+    'LBL_FDR_ADJ_AMOUNT' => 'Коригирана сума',
+    'LBL_SAVE_WOKSHEET' => 'Запази плана',
+    'LBL_RESET_WOKSHEET' => 'Изтрий плана',
+    'LBL_SHOW_CHART' => 'Графика',
+    'LBL_RESET_CHECK' => 'Всички данни за избрания период на текущия потребител ще бъдат изтрити. Желаете ли да продължите?',
 
     'LBL_CURRENCY' => 'Валута',
     'LBL_CURRENCY_ID' => 'Идентификатор на валутата',
@@ -149,6 +149,6 @@ $mod_strings = array (
     'LBL_HISTORY_LOG' => 'Последен ангажимент',
     'LBL_NO_COMMIT' => 'Няма предишни изпращания',
 
-    'LBL_MANGER_SAVED' => 'Мениджърът е съхранен'
+    'LBL_MANGER_SAVED' => 'Мениджърът е съхранен',
 
-);
+];

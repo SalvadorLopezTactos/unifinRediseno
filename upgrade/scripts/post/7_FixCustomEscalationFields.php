@@ -48,7 +48,7 @@ class SugarUpgradeFixCustomEscalationFields extends UpgradeScript
         $view = 'recorddashlet';
         $fieldName = 'is_escalated';
 
-        $this->log("Positioning $fieldName field for modules: " . implode(", ", $this->escalationEnabledModules));
+        $this->log("Positioning $fieldName field for modules: " . implode(', ', $this->escalationEnabledModules));
 
         foreach ($this->escalationEnabledModules as $module) {
             $fileName = "custom/modules/{$module}/clients/{$platform}/views/{$view}/{$view}.php";

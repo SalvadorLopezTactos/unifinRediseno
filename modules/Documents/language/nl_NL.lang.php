@@ -10,22 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     //module
     'LBL_MODULE_NAME' => 'Documenten',
     'LBL_MODULE_NAME_SINGULAR' => 'Document',
     'LBL_MODULE_TITLE' => 'Documenten: Start',
     'LNK_NEW_DOCUMENT' => 'Nieuw Document',
-    'LNK_DOCUMENT_LIST'=> 'Bekijk Documenten',
+    'LNK_DOCUMENT_LIST' => 'Bekijk Documenten',
     'LBL_DOC_REV_HEADER' => 'Documentrevisie',
-    'LBL_SEARCH_FORM_TITLE'=> 'Documenten Zoeken',
+    'LBL_SEARCH_FORM_TITLE' => 'Documenten Zoeken',
     //vardef labels
     'LBL_DOCUMENT_ID' => 'Document Id',
     'LBL_NAME' => 'Document Naam',
@@ -34,31 +33,31 @@ $mod_strings = array (
     'LBL_CATEGORY' => 'Categorie',
     'LBL_SUBCATEGORY' => 'Sub-categorie',
     'LBL_STATUS' => 'Status',
-    'LBL_CREATED_BY'=> 'Gemaakt door',
-    'LBL_DATE_ENTERED'=> 'Datum ingevoerd',
-    'LBL_DATE_MODIFIED'=> 'Datum gewijzigd',
+    'LBL_CREATED_BY' => 'Gemaakt door',
+    'LBL_DATE_ENTERED' => 'Datum ingevoerd',
+    'LBL_DATE_MODIFIED' => 'Datum gewijzigd',
     'LBL_DELETED' => 'Verwijderd',
-    'LBL_MODIFIED'=> 'Gewijzigd door ID',
+    'LBL_MODIFIED' => 'Gewijzigd door ID',
     'LBL_MODIFIED_USER' => 'Gewijzigd door',
-    'LBL_CREATED'=> 'Gemaakt door',
-    'LBL_REVISIONS'=>'Revisies',
-    'LBL_RELATED_DOCUMENT_ID'=>'Gerelateerd Document ID',
-    'LBL_RELATED_DOCUMENT_REVISION_ID'=>'Gerelateerd Document Revisie ID',
-    'LBL_IS_TEMPLATE'=>'Is een Sjabloon',
-    'LBL_TEMPLATE_TYPE'=>'Documenttype',
-    'LBL_ASSIGNED_TO_NAME'=>'Toegewezen aan:',
+    'LBL_CREATED' => 'Gemaakt door',
+    'LBL_REVISIONS' => 'Revisies',
+    'LBL_RELATED_DOCUMENT_ID' => 'Gerelateerd Document ID',
+    'LBL_RELATED_DOCUMENT_REVISION_ID' => 'Gerelateerd Document Revisie ID',
+    'LBL_IS_TEMPLATE' => 'Is een Sjabloon',
+    'LBL_TEMPLATE_TYPE' => 'Documenttype',
+    'LBL_ASSIGNED_TO_NAME' => 'Toegewezen aan:',
     'LBL_REVISION_NAME' => 'Revisienummer',
     'LBL_MIME' => 'Mime type',
     'LBL_REVISION' => 'Revisie',
     'LBL_DOCUMENT' => 'Gerelateerd Document',
     'LBL_LATEST_REVISION' => 'Laatste revisie',
     'LBL_DOCUMENT_REVISION_ID' => 'Document revisie ID',
-    'LBL_CHANGE_LOG'=> 'Wijzigingslog',
-    'LBL_ACTIVE_DATE'=> 'Publicatiedatum',
+    'LBL_CHANGE_LOG' => 'Wijzigingslog',
+    'LBL_ACTIVE_DATE' => 'Publicatiedatum',
     'LBL_EXPIRATION_DATE' => 'Expiratiedatum',
-    'LBL_FILE_EXTENSION'  => 'Bestandsextensie',
+    'LBL_FILE_EXTENSION' => 'Bestandsextensie',
     'LBL_LAST_REV_MIME_TYPE' => 'Laatste Revisie - Mime type',
-    'LBL_CAT_OR_SUBCAT_UNSPEC'=>'Ongespecificeerd',
+    'LBL_CAT_OR_SUBCAT_UNSPEC' => 'Ongespecificeerd',
     'LBL_HOMEPAGE_TITLE' => 'Mijn Documenten',
     //quick search
     'LBL_NEW_FORM_TITLE' => 'Nieuw Document',
@@ -70,25 +69,25 @@ $mod_strings = array (
     'LBL_FILE_UPLOAD' => 'Bestand:',
 
     'LBL_CATEGORY_VALUE' => 'Productcategorie',
-    'LBL_SUBCATEGORY_VALUE'=> 'Sub-categorie:',
-    'LBL_DOC_STATUS'=> 'Status:',
-    'LBL_DOC_STATUS_ID'=> 'Status ID:',
+    'LBL_SUBCATEGORY_VALUE' => 'Sub-categorie:',
+    'LBL_DOC_STATUS' => 'Status:',
+    'LBL_DOC_STATUS_ID' => 'Status ID:',
     'LBL_LAST_REV_CREATOR' => 'Revisie gemaakte door:',
     'LBL_LASTEST_REVISION_NAME' => 'Naam laatste revisie:',
     'LBL_SELECTED_REVISION_NAME' => 'Gekozen naam revisie',
     'LBL_CONTRACT_STATUS' => 'Contractstatus:',
     'LBL_CONTRACT_NAME' => 'Contractnaam:',
     'LBL_LAST_REV_DATE' => 'Revisie-datum:',
-    'LBL_DOWNNLOAD_FILE'=> 'Download Bestand:',
-    'LBL_DET_RELATED_DOCUMENT'=>'Gerelateerd document:',
-    'LBL_DET_RELATED_DOCUMENT_VERSION'=>"Revisie gerelateerde document:",
-    'LBL_DET_IS_TEMPLATE'=>'Sjabloon? :',
-    'LBL_DET_TEMPLATE_TYPE'=>'Documenttype:',
-    'LBL_TEAM'=> 'Team:',
+    'LBL_DOWNNLOAD_FILE' => 'Download Bestand:',
+    'LBL_DET_RELATED_DOCUMENT' => 'Gerelateerd document:',
+    'LBL_DET_RELATED_DOCUMENT_VERSION' => 'Revisie gerelateerde document:',
+    'LBL_DET_IS_TEMPLATE' => 'Sjabloon? :',
+    'LBL_DET_TEMPLATE_TYPE' => 'Documenttype:',
+    'LBL_TEAM' => 'Team:',
     'LBL_IS_SHARED' => 'Extern beschikbaar:',
-    'LBL_DOC_DESCRIPTION'=>'Beschrijving:',
-    'LBL_DOC_ACTIVE_DATE'=> 'Publicatiedatum:',
-    'LBL_DOC_EXP_DATE'=> 'Expiratiedatum:',
+    'LBL_DOC_DESCRIPTION' => 'Beschrijving:',
+    'LBL_DOC_ACTIVE_DATE' => 'Publicatiedatum:',
+    'LBL_DOC_EXP_DATE' => 'Expiratiedatum:',
 
     //document list view.
     'LBL_LIST_FORM_TITLE' => 'Documentenlijst',
@@ -98,11 +97,11 @@ $mod_strings = array (
     'LBL_LIST_REVISION' => 'Revisie',
     'LBL_LIST_LAST_REV_CREATOR' => 'Gepubliceerd door',
     'LBL_LIST_LAST_REV_DATE' => 'Revisiedatum',
-    'LBL_LIST_VIEW_DOCUMENT'=>'Bekijk',
-    'LBL_LIST_DOWNLOAD'=> 'Downloaden',
+    'LBL_LIST_VIEW_DOCUMENT' => 'Bekijk',
+    'LBL_LIST_DOWNLOAD' => 'Downloaden',
     'LBL_LIST_ACTIVE_DATE' => 'Publicatiedatum',
     'LBL_LIST_EXP_DATE' => 'Expiratiedatum',
-    'LBL_LIST_STATUS'=>'Status',
+    'LBL_LIST_STATUS' => 'Status',
     'LBL_LINKED_ID' => 'Gerelateerde ID',
     'LBL_SELECTED_REVISION_ID' => 'Gekozen revisie ID',
     'LBL_LATEST_REVISION_ID' => 'Laatste revisie ID',
@@ -114,33 +113,33 @@ $mod_strings = array (
     //document search form.
     'LBL_SF_DOCUMENT' => 'Documentnaam:',
     'LBL_SF_CATEGORY' => 'Productcategorie',
-    'LBL_SF_SUBCATEGORY'=> 'Sub-categorie:',
+    'LBL_SF_SUBCATEGORY' => 'Sub-categorie:',
     'LBL_SF_ACTIVE_DATE' => 'Publicatiedatum:',
-    'LBL_SF_EXP_DATE'=> 'Expiratiedatum:',
+    'LBL_SF_EXP_DATE' => 'Expiratiedatum:',
 
     'DEF_CREATE_LOG' => 'Document aangemaakt',
 
     //error messages
-    'ERR_DOC_NAME'=>'Documentnaam',
-    'ERR_DOC_ACTIVE_DATE'=>'Publicatiedatum',
-    'ERR_DOC_EXP_DATE'=> 'Expiratiedatum',
-    'ERR_FILENAME'=> 'Bestandsnaam',
-    'ERR_DOC_VERSION'=> 'Documentversie',
-    'ERR_DELETE_CONFIRM'=> 'Wilt u deze revisie van het document verwijderen?',
-    'ERR_DELETE_LATEST_VERSION'=> 'Het is niet toegestaan de laatste revisie van een document te verwijderen.',
+    'ERR_DOC_NAME' => 'Documentnaam',
+    'ERR_DOC_ACTIVE_DATE' => 'Publicatiedatum',
+    'ERR_DOC_EXP_DATE' => 'Expiratiedatum',
+    'ERR_FILENAME' => 'Bestandsnaam',
+    'ERR_DOC_VERSION' => 'Documentversie',
+    'ERR_DELETE_CONFIRM' => 'Wilt u deze revisie van het document verwijderen?',
+    'ERR_DELETE_LATEST_VERSION' => 'Het is niet toegestaan de laatste revisie van een document te verwijderen.',
     'LNK_NEW_MAIL_MERGE' => 'Mail samenvoegen',
     'LBL_MAIL_MERGE_DOCUMENT' => 'Documentsjabloon:',
     'ERR_MISSING_FILE' => 'Dit document mist een bestand, waarschijnlijk vanwege een fout tijdens het uploaden. Probeert u aub nogmaals het bestand te uploaden of neem contact op met uw administrator.',
 
     'LBL_TREE_TITLE' => 'Documenten',
     //sub-panel vardefs.
-    'LBL_LIST_DOCUMENT_NAME'=>'Documentnaam',
-    'LBL_LIST_IS_TEMPLATE'=>'Sjabloon?',
-    'LBL_LIST_TEMPLATE_TYPE'=>'Documenttype',
-    'LBL_LIST_SELECTED_REVISION'=>'Geselecteerde revisie',
-    'LBL_LIST_LATEST_REVISION'=>'Laatste revisie',
-    'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Gerelateerde contracten',
-    'LBL_LAST_REV_CREATE_DATE'=>'Laatste revisie: datum ingevoerd',
+    'LBL_LIST_DOCUMENT_NAME' => 'Documentnaam',
+    'LBL_LIST_IS_TEMPLATE' => 'Sjabloon?',
+    'LBL_LIST_TEMPLATE_TYPE' => 'Documenttype',
+    'LBL_LIST_SELECTED_REVISION' => 'Geselecteerde revisie',
+    'LBL_LIST_LATEST_REVISION' => 'Laatste revisie',
+    'LBL_CONTRACTS_SUBPANEL_TITLE' => 'Gerelateerde contracten',
+    'LBL_LAST_REV_CREATE_DATE' => 'Laatste revisie: datum ingevoerd',
     //'LNK_DOCUMENT_CAT'=>'Document Categories',
     'LBL_CONTRACTS' => 'Contracten',
     'LBL_CREATED_USER' => 'Aangemaakte gebruiker',
@@ -171,9 +170,11 @@ $mod_strings = array (
     // Dashboards
     'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Dashboard documentrecord',
     'LBL_MY_DOCUMENTS' => 'Mijn Documenten',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn documenten',
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Stuur naar DocuSign',
+    'LBL_SEND_TO_DOCUSIGN_TEMPLATE_BUTTON' => 'Verzenden naar DocuSign met een sjabloon',
 
     // Cloud Drive
 
@@ -183,4 +184,4 @@ $mod_strings = array (
     'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Synchroniseren met OneDrive',
     'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Alles synchroniseren met Dropbox',
     'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Synchroniseren met Dropbox',
-);
+];

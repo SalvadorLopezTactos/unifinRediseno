@@ -16,34 +16,34 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$viewdefs['Reports']['mobile']['view']['detail'] = array(
-    'templateMeta' => array(
+$viewdefs['Reports']['mobile']['view']['detail'] = [
+    'templateMeta' => [
         'maxColumns' => '1',
-        'widths' => array(
-            array('label' => '10', 'field' => '30'),
-        ),
-    ),
-    'panels' => array(
-        array(
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
+            'fields' => [
                 'name',
-                array(
+                [
                     'name' => 'module',
                     'readonly' => true,
                     'type' => 'enum',
                     'options' => 'moduleList',
-                ),
-                array(
+                ],
+                [
                     'name' => 'report_type',
                     'readonly' => true,
                     'type' => 'enum',
                     'options' => 'dom_report_types',
-                ),
+                ],
                 'tag',
                 'assigned_user_name',
                 'team_name',
-            )
-        )
-    ),
-);
+            ],
+        ],
+    ],
+];

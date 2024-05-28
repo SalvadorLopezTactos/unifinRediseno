@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Règles de gestion',
-  'LBL_MODULE_TITLE' => 'Règles de gestion',
-  'LBL_MODULE_NAME_SINGULAR' => 'Règle de gestion',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Règles de gestion',
+    'LBL_MODULE_TITLE' => 'Règles de gestion',
+    'LBL_MODULE_NAME_SINGULAR' => 'Règle de gestion',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Gestion des processus commerciaux',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Gestion des processus commerciaux',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de règles de gestion de processus',
-  'LBL_RST_UID' => 'Règle de gestion (ID)',
-  'LBL_RST_TYPE' => 'Type de règle de gestion',
-  'LBL_RST_DEFINITION' => 'Définition de la règle de gestion',
-  'LBL_RST_EDITABLE' => 'Règle de gestion editable',
-  'LBL_RST_SOURCE' => 'Source de la règle de gestion',
-  'LBL_RST_SOURCE_DEFINITION' => 'Définition de la source de la règle de gestion',
-  'LBL_RST_MODULE' => 'Module cible',
-  'LBL_RST_FILENAME' => 'Nom fichier de la règle de gestion',
-  'LBL_RST_CREATE_DATE' => 'Date création de la règle de gestion',
-  'LBL_RST_UPDATE_DATE' => 'Date de mise à jour de la règle de gestion',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de règles de gestion de processus',
+    'LBL_RST_UID' => 'Règle de gestion (ID)',
+    'LBL_RST_TYPE' => 'Type de règle de gestion',
+    'LBL_RST_DEFINITION' => 'Définition de la règle de gestion',
+    'LBL_RST_EDITABLE' => 'Règle de gestion editable',
+    'LBL_RST_SOURCE' => 'Source de la règle de gestion',
+    'LBL_RST_SOURCE_DEFINITION' => 'Définition de la source de la règle de gestion',
+    'LBL_RST_MODULE' => 'Module cible',
+    'LBL_RST_FILENAME' => 'Nom fichier de la règle de gestion',
+    'LBL_RST_CREATE_DATE' => 'Date création de la règle de gestion',
+    'LBL_RST_UPDATE_DATE' => 'Date de mise à jour de la règle de gestion',
 
     'LNK_LIST' => 'Afficher la règle de gestion',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Créer une règle de gestion',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'La règle de gestion n&#39;est pas valide car elle utilise des champs non valides ou des champs qui ne peuvent pas être trouvés dans votre instance de SugarCRM. Veuillez réparer les erreurs ci-dessous et enregistrer la règle de gestion.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Cette règle métier est actuellement utilisée dans une définition de processus. Voulez-vous toujours modifier cette règle métier ?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Vous ne pouvez pas supprimer cette règle métier car elle est actuellement utilisée dans une définition de processus.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Vous ne pouvez pas supprimer cette règle métier car elle est actuellement utilisée dans une définition de processus.',
+];

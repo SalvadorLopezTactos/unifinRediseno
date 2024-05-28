@@ -71,7 +71,7 @@ class SugarACLArchivedEmails extends SugarACLStrategy
             'type',
         ];
 
-        if (in_array($context['field'], $immutableFields)) {
+        if (safeInArray($context['field'], $immutableFields)) {
             return false;
         }
 

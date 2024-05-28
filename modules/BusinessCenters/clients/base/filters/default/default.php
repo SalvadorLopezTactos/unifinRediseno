@@ -10,14 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['BusinessCenters']['base']['filter']['default'] = array(
+$viewdefs['BusinessCenters']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'address_city' => array(),
-        'address_state' => array(),
-        'address_country' => array(),
-        'timezone' => array(),
+    'fields' => [
+        'name' => [],
+        'address_city' => [],
+        'address_state' => [],
+        'address_country' => [],
+        'timezone' => [],
         '$distance' => [
             'name' => '$distance',
             'vname' => 'LBL_MAPS_DISTANCE',
@@ -26,5 +26,5 @@ $viewdefs['BusinessCenters']['base']['filter']['default'] = array(
             'merge_filter' => 'enabled',
             'licenseFilter' => ['MAPS'],
         ],
-    ),
-);
+    ],
+];

@@ -30,7 +30,7 @@ $viewdefs['Administration']['base']['layout']['maps-config'] = [
                         'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane map-admin-border-right span3 min-w-92',
+                            'css_class' => 'main-pane map-admin-border-right span3 min-w-96 h-full overflow-y-auto',
                             'components' => [
                                 [
                                     'layout' => 'maps-controls',

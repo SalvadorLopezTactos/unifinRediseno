@@ -44,7 +44,7 @@ class SugarUpgradePreCJUninstall extends UpgradeScript
             array_push($this->CJPackages, $row);
         }
 
-        return count($this->CJPackages) > 0 && version_compare($this->from_version, '12.3.0', '<');
+        return is_countable($this->CJPackages) ? count($this->CJPackages) : 0 > 0 && version_compare($this->from_version, '12.3.0', '<');
     }
 
     /**
@@ -114,9 +114,9 @@ class SugarUpgradePreCJUninstall extends UpgradeScript
                 $this->log('CustomerJourney package:Mark this CJ Package Deleted: ');
                 $qb = DBManagerFactory::getConnection()->createQueryBuilder();
                 $qb->update('upgrade_history')
-                ->set('status', $qb->expr()->literal('staged'))
-                ->set('deleted', $qb->expr()->literal('1'))
-                ->where($qb->expr()->eq('id', $qb->expr()->literal($package['id'])));
+                    ->set('status', $qb->expr()->literal('staged'))
+                    ->set('deleted', $qb->expr()->literal('1'))
+                    ->where($qb->expr()->eq('id', $qb->expr()->literal($package['id'])));
                 $qb->execute();
                 $this->log('CustomerJourney package:Marked the CJ Package Deleted: ');
             } catch (Exception $e) {
@@ -124,6 +124,7 @@ class SugarUpgradePreCJUninstall extends UpgradeScript
             }
         }
     }
+
     /**
      * Get the files inside directory
      */

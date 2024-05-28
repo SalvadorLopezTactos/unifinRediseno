@@ -19,7 +19,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\Table;
 
-
 /**
  *
  * SearchEngine fields
@@ -54,8 +53,7 @@ class SearchFieldsCommand extends Command implements InstanceModeInterface
                 null,
                 InputOption::VALUE_NONE,
                 'Order the output by boost value.'
-            )
-        ;
+            );
     }
 
     /**
@@ -63,7 +61,7 @@ class SearchFieldsCommand extends Command implements InstanceModeInterface
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $args = array();
+        $args = [];
 
         if ($modules = $input->getOption('modules')) {
             $args['module_list'] = $modules;
@@ -80,25 +78,24 @@ class SearchFieldsCommand extends Command implements InstanceModeInterface
 
         $result = $this
             ->initApi($this->getApi())
-            ->callApi('searchFields', $args)
-        ;
+            ->callApi('searchFields', $args);
 
         // handle output which is different when ordered by boost
         $table = new Table($output);
 
         if ($byBoost) {
-            $table->setHeaders(array('Module', 'Field', 'Boost'));
+            $table->setHeaders(['Module', 'Field', 'Boost']);
             foreach ($result as $raw => $boost) {
                 $raw = explode('.', $raw);
-                $table->addRow(array($raw[0], $raw[1], $boost));
+                $table->addRow([$raw[0], $raw[1], $boost]);
             }
         } else {
-            $table->setHeaders(array('Module', 'Field', 'Type', 'Searchable', 'Boost'));
+            $table->setHeaders(['Module', 'Field', 'Type', 'Searchable', 'Boost']);
             foreach ($result as $module => $fields) {
                 foreach ($fields as $field => $props) {
                     $searchAble = !empty($props['searchable']) ? 'yes' : 'no';
                     $boost = $props['boost'] ?? 'n/a';
-                    $table->addRow(array($module, $field, $props['type'], $searchAble, $boost));
+                    $table->addRow([$module, $field, $props['type'], $searchAble, $boost]);
                 }
             }
         }

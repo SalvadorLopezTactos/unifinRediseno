@@ -13,7 +13,7 @@
 $vardefs = [
     'fields' => [],
     'relationships' => [
-        strtolower($module).'_audit' => [
+        strtolower($module) . '_audit' => [
             'lhs_module' => $module,
             'lhs_table' => $table_name,
             'lhs_key' => 'id',

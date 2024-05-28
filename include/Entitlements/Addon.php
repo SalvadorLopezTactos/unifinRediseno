@@ -36,11 +36,11 @@ class Addon
      * @var string[]
      */
     public const ATTRIBUTES =
-    [
-        'quantity',
-        'start_date_c',
-        'expiration_date',
-    ];
+        [
+            'quantity',
+            'start_date_c',
+            'expiration_date',
+        ];
 
     /**
      * attribute name for bundled products in license data
@@ -85,7 +85,7 @@ class Addon
         }
 
         // handle bundled products
-        $bundledProducts = isset($data[self::BUNDLED_PRODUCTS_KEY]) && is_array($data[self::BUNDLED_PRODUCTS_KEY])? $data[self::BUNDLED_PRODUCTS_KEY] : [];
+        $bundledProducts = isset($data[self::BUNDLED_PRODUCTS_KEY]) && is_array($data[self::BUNDLED_PRODUCTS_KEY]) ? $data[self::BUNDLED_PRODUCTS_KEY] : [];
         $this->data[self::BUNDLED_PRODUCTS_KEY] = [];
         foreach ($bundledProducts as $bundledId => $itemData) {
             $bundled = new Addon($bundledId, $itemData);
@@ -128,7 +128,7 @@ class Addon
      * to get bundled products
      * @return array
      */
-    public function getBundledProducts() : array
+    public function getBundledProducts(): array
     {
         return $this->data[self::BUNDLED_PRODUCTS_KEY] ?? [];
     }
@@ -137,16 +137,16 @@ class Addon
      * check if it has bundle products
      * @return bool
      */
-    public function hasBundledProducts() : bool
+    public function hasBundledProducts(): bool
     {
-        return count($this->getBundledProducts()) > 0;
+        return safeCount($this->getBundledProducts()) > 0;
     }
 
     /**
      * check if bundle is valid
      * @return bool
      */
-    public function isValidBundle() : bool
+    public function isValidBundle(): bool
     {
         $bundles = $this->getBundledProducts();
         if (empty($bundles)) {

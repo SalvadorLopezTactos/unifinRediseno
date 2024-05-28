@@ -9,9 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$searchFields['EmailTemplates'] = 
-	array (
-		'name' => array( 'query_type'=>'default'),
-		'description'=> array('query_type'=>'default'),
-	);
-?>
+$searchFields['EmailTemplates'] =
+    [
+        'name' => ['query_type' => 'default'],
+        'description' => ['query_type' => 'default'],
+    ];

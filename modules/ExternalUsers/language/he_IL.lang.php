@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => 'אירועים',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'הזדמנויות',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'הצעות מחיר',
-    'LBL_NOTES'=>'הערות',
+    'LBL_NOTES' => 'הערות',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => 'לוח מחוונים לרשומות של משתמשים חיצוניים',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן של משתמשים חיצוניים',
 ];

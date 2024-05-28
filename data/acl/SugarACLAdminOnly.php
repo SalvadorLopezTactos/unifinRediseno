@@ -20,11 +20,11 @@ class SugarACLAdminOnly extends SugarACLStrategy
 
     public function __construct($aclOptions)
     {
-        if ( is_array($aclOptions) ) {
-            if ( !empty($aclOptions['allowUserRead']) ) {
+        if (is_array($aclOptions)) {
+            if (!empty($aclOptions['allowUserRead'])) {
                 $this->allowUserRead = true;
             }
-            if ( !empty($aclOptions['adminFor']) ) {
+            if (!empty($aclOptions['adminFor'])) {
                 $this->adminFor = $aclOptions['adminFor'];
             }
         }
@@ -39,29 +39,28 @@ class SugarACLAdminOnly extends SugarACLStrategy
      */
     public function checkAccess($module, $view, $context)
     {
-        if ( $view == 'team_security' ) {
+        if ($view == 'team_security') {
             // Let the other modules decide
             return true;
         }
 
-        if ( !empty($this->adminFor) ) {
+        if (!empty($this->adminFor)) {
             $module = $this->adminFor;
         }
-        
+
         $current_user = $this->getCurrentUser($context);
-        if ( !$current_user ) {
+        if (!$current_user) {
             return false;
         }
 
-        if($current_user->isAdminForModule($module)) {
+        if ($current_user->isAdminForModule($module)) {
             return true;
         } else {
-            if ( $this->allowUserRead && !$this->isWriteOperation($view, $context) ) {
+            if ($this->allowUserRead && !$this->isWriteOperation($view, $context)) {
                 return true;
             } else {
                 return false;
             }
         }
     }
-
 }

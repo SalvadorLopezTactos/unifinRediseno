@@ -70,7 +70,7 @@ abstract class JobNotification
         }
 
         $sq = new SugarQuery();
-        $sq->select(array('job_group'))
+        $sq->select(['job_group'])
             ->fieldRaw('count(0)', 'total_jobs')
             ->fieldRaw('sum(case when status = \'done\' AND resolution = \'success\' then 1 else 0 END)', 'total_done');
         $sq->from(BeanFactory::newBean('SchedulersJobs'));
@@ -93,7 +93,6 @@ abstract class JobNotification
     protected function notifyAssignedUser($notification = true, $email = true)
     {
         if ($this->sendNotifications && $this->isJobGroupDone()) {
-
             $subject = $GLOBALS['app_strings'][$this->subjectLabel];
             $body = $GLOBALS['app_strings'][$this->bodyLabel];
 
@@ -157,7 +156,7 @@ abstract class JobNotification
      */
     protected function sendEmail($subject, $body)
     {
-        $mailTransmissionProtocol = "unknown";
+        $mailTransmissionProtocol = 'unknown';
 
         /* @var $user User */
         $user = BeanFactory::getBean('Users', $this->job->assigned_user_id);
@@ -177,7 +176,7 @@ abstract class JobNotification
             $mailer->send();
         } catch (MailerException $me) {
             $message = $me->getMessage();
-            $GLOBALS["log"]->warn(
+            $GLOBALS['log']->warn(
                 "Notifications: error sending e-mail (method: {$mailTransmissionProtocol}), (error: {$message})"
             );
         }

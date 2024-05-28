@@ -11,77 +11,32 @@
 /**
  * @class View.Views.Base.DocuSignEnvelopes.RecipientSelectionHeaderpaneView
  * @alias SUGAR.App.view.views.BaseDocuSignEnvelopesRecipientSelectionHeaderpaneView
- * @extends View.Views.Base.View
+ * @extends View.Views.Base.DocusignRecipientSelectionHeaderpaneView
  */
 ({
-    initialize: function(options) {
-        if (!options.context.get('templateDetails')) {
-            options.meta.buttons = _.filter(options.meta.buttons, function(button) {
-                return button.name !== 'back_button';
-            });
-        }
-
-        this._super('initialize', [options]);
-    },
+    extendsFrom: 'DocusignRecipientSelectionHeaderpaneView',
 
     /**
      * @inheritdoc
      */
-    _renderHtml: function() {
-        this._super('_renderHtml');
-
-        this.layout.off('selection:closedrawer:fire');
-        this.layout.once(
-            'selection:closedrawer:fire',
-            _.once(
-                _.bind(function closeDrawer() {
-                    this.$el.off();
-                    app.drawer.close({
-                        closeEvent: true
-                    });
-                }, this)
-            )
-        );
-
-        if (this.context.get('templateDetails')) {
-            this.layout.off('selection:back:fire');
-            this.layout.once(
-                'selection:back:fire',
-                _.once(
-                    _.bind(function backClicked() {
-                        this.$el.off();
-
-                        app.drawer.close({
-                            closeEvent: true
-                        });
-
-                        const openTemplatesDrawer = _.debounce(function() {
-                            const controllerCtx = app.controller.context;
-                            const controllerModel = controllerCtx.get('model');
-                            const module = controllerModel.get('_module');
-                            const modelId = controllerModel.get('id');
-                            let documentCollection = app.controller.context.get('documentCollection');
-                            if (documentCollection) {
-                                documents = _.pluck(documentCollection.models, 'id');
-                            } else {
-                                documents = [];
-                            }
-
-                            const data = {
-                                returnUrlParams: {
-                                    parentRecord: module,
-                                    parentId: modelId,
-                                    token: app.api.getOAuthToken()
-                                },
-                                documents: documents
-                            };
-                            const step = 'selectTemplate';
-                            app.events.trigger('docusign:send:initiate', data, step);
-                        }, 1000);
-                        openTemplatesDrawer();
-                    }, this)
-                )
-            );
+    initialize: function(options) {
+        if (_.isUndefined(options.context.get('templateDetails'))) {
+            options = this._removeBackButton(options);
         }
+        this._super('initialize', [options]);
+    },
+
+    /**
+     * Remove back button
+     *
+     * @param {Object} options
+     * @return {Object}
+     */
+    _removeBackButton: function(options) {
+        options.meta.buttons = _.filter(options.meta.buttons, function(button) {
+            return button.name !== 'back_button';
+        });
+
+        return options;
     },
 });

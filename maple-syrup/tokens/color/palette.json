@@ -4,7 +4,7 @@
     "white": { "value": "#ffffff" },
     "transparent": { "value": "transparent" },
     "gray": {
-      "980": { "value":  "#0f1215", "comment": "Gray 98" },
+      "980": { "value": "#0f1215", "comment": "Gray 98" },
       "950": { "value": "#16191d", "comment": "Gray 95" },
       "900": { "value": "#2b2d2e", "comment": "Gray 90" },
       "800": { "value": "#4d5154", "comment": "Gray 80" },
@@ -15,7 +15,7 @@
       "300": { "value": "#e5eaed", "comment": "Gray 30" },
       "200": { "value": "#f1f3f4", "comment": "Gray 20" },
       "100": { "value": "#f8fafc", "comment": "Gray 10" },
-      "50": { "value": "0f0f0f", "comment": "Gray 6" }
+      "50": { "value": "#0f0f0f", "comment": "Gray 6" }
     },
     "blue": {
       "900": { "value": "#002036", "comment": "Dark blue accent" },
@@ -30,7 +30,7 @@
     "army": {
       "600": { "value": "#537600", "comment": "Dark army" },
       "400": { "value": "#6cdf46", "comment": "Standard army" },
-      "200": { "value": "e4fbb4", "comment": "Light army" }
+      "200": { "value": "#e4fbb4", "comment": "Light army" }
     },
     "coral": {
       "600": { "value": "#a23354", "comment": "Dark coral" },

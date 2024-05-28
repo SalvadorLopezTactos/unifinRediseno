@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '报告日程',
     'LBL_MODULE_NAME_SINGULAR' => '报告日程',
     'LBL_REPORT_NAME' => '报告',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => '文件类型',
     'LBL_EMBED_REPORT' => '在电子邮件中嵌入报告',
     'LBL_EMBED_REPORT_INFO' => '注意：如果报告超过200行，我们会将报告附加为CSV文件。',
-);
+];

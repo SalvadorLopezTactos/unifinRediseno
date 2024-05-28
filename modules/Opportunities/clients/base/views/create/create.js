@@ -81,8 +81,8 @@
                     _.bind(this.validateSubpanelModelsWaterfall, this),
                     _.bind(this.validateModelWaterfall, this)
                 ], function(err) {
-                    // err is undefined if no errors
-                    cb(!_.isUndefined(err));
+                    // err is undefined or null if no errors
+                    cb(!(_.isUndefined(err) || _.isNull(err)));
                 });
             }, this),
             _.bind(this.dupeCheckWaterfall, this),

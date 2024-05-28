@@ -9,23 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description: view handler for step 2 of the import process
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
-
-
 class ImportViewStep2 extends ImportView
 {
- 	protected $pageTitleKey = 'LBL_STEP_2_TITLE';
+    protected $pageTitleKey = 'LBL_STEP_2_TITLE';
 
 
- 	/**
+    /**
      * @see SugarView::display()
      */
- 	public function display()
+    public function display()
     {
         global $mod_strings, $app_list_strings, $app_strings, $current_user, $import_bean_map, $import_mod_strings;
 
@@ -51,77 +49,76 @@ class ImportViewStep2 extends ImportView
         $this->ss->assign('IDM_UPDATE_INSTRUCTION', $idmUpdateInstruction);
         $this->ss->assign('INSTRUCTION', $instruction);
 
-        $this->ss->assign("MODULE_TITLE", $this->getModuleTitle(false));
-        $this->ss->assign("IMP", $import_mod_strings);
-        $this->ss->assign("CURRENT_STEP", $this->currentStep);
+        $this->ss->assign('MODULE_TITLE', $this->getModuleTitle(false));
+        $this->ss->assign('IMP', $import_mod_strings);
+        $this->ss->assign('CURRENT_STEP', $this->currentStep);
 
         $importType = $this->request->getValidInputRequest('type', null, '');
 
-        $singleCharConstraints = array(
-            'Assert\Type' => array('type' => 'string'),
-            'Assert\Length' => array('min' => 1, 'allowEmptyString' => true),
-        );
+        $singleCharConstraints = [
+            'Assert\Type' => ['type' => 'string'],
+            'Assert\Length' => ['min' => 1, 'allowEmptyString' => true],
+        ];
         $customEnclosure = $this->request->getValidInputRequest('custom_enclosure', $singleCharConstraints, '');
         $customEnclosureOther = $this->request->getValidInputRequest('custom_enclosure_other', null, '');
 
-        $this->ss->assign("TYPE",( !empty($importType) ? $importType : "import" ));
+        $this->ss->assign('TYPE', (!empty($importType) ? $importType : 'import'));
 
         $delimiters = $this->getDelimitersFromRequest();
-        $this->ss->assign("CUSTOM_DELIMITER", $delimiters['custom']);
-        $this->ss->assign("CUSTOM_DELIMITER_OTHER", $delimiters['other']);
-        $this->ss->assign("CUSTOM_ENCLOSURE", htmlentities((!empty($customEnclosure) && $customEnclosure != 'other' ? $customEnclosure : $customEnclosureOther), ENT_COMPAT));
+        $this->ss->assign('CUSTOM_DELIMITER', $delimiters['custom']);
+        $this->ss->assign('CUSTOM_DELIMITER_OTHER', $delimiters['other']);
+        $this->ss->assign('CUSTOM_ENCLOSURE', htmlentities((!empty($customEnclosure) && $customEnclosure != 'other' ? $customEnclosure : $customEnclosureOther), ENT_COMPAT));
 
         $importModule = $this->request->getValidInputRequest('import_module', 'Assert\Mvc\ModuleName', false);
-        $this->ss->assign("IMPORT_MODULE", $importModule);
-        $this->ss->assign("HEADER", $app_strings['LBL_IMPORT']." ". $mod_strings['LBL_MODULE_NAME']);
-        $this->ss->assign("JAVASCRIPT", $this->_getJS());
-        $this->ss->assign("SAMPLE_URL", "<a href=\"javascript: void(0);\" onclick=\"window.location.href='index.php?entryPoint=export&module=".urlencode($importModule)."&action=index&all=true&sample=true'\" >".$mod_strings['LBL_EXAMPLE_FILE']."</a>"); //FIXME
+        $this->ss->assign('IMPORT_MODULE', $importModule);
+        $this->ss->assign('HEADER', $app_strings['LBL_IMPORT'] . ' ' . $mod_strings['LBL_MODULE_NAME']);
+        $this->ss->assign('JAVASCRIPT', $this->_getJS());
+        $this->ss->assign('SAMPLE_URL', "<a href=\"javascript: void(0);\" onclick=\"window.location.href='index.php?entryPoint=export&module=" . urlencode($importModule) . "&action=index&all=true&sample=true'\" >" . $mod_strings['LBL_EXAMPLE_FILE'] . '</a>'); //FIXME
 
-        $displayBackBttn = isset($_REQUEST['action']) && $_REQUEST['action'] == 'Step2' && isset($_REQUEST['current_step']) && $_REQUEST['current_step']!=='2'? TRUE : FALSE; //bug 51239
-        $this->ss->assign("displayBackBttn", $displayBackBttn);
+        $displayBackBttn = isset($_REQUEST['action']) && $_REQUEST['action'] == 'Step2' && isset($_REQUEST['current_step']) && $_REQUEST['current_step'] !== '2' ? true : false; //bug 51239
+        $this->ss->assign('displayBackBttn', $displayBackBttn);
 
         // get user defined import maps
         $is_admin = is_admin($current_user);
-        if($is_admin)
+        if ($is_admin) {
             $savedMappingHelpText = $mod_strings['LBL_MY_SAVED_ADMIN_HELP'];
-        else
+        } else {
             $savedMappingHelpText = $mod_strings['LBL_MY_SAVED_HELP'];
+        }
 
-        $this->ss->assign('savedMappingHelpText',$savedMappingHelpText);
-        $this->ss->assign('is_admin',$is_admin);
+        $this->ss->assign('savedMappingHelpText', $savedMappingHelpText);
+        $this->ss->assign('is_admin', $is_admin);
 
         $import_map_seed = BeanFactory::newBean('Import_1');
-        $custom_imports_arr = $import_map_seed->retrieve_all_by_string_fields( array('assigned_user_id' => $current_user->id, 'is_published' => 'no','module' => $importModule));
+        $custom_imports_arr = $import_map_seed->retrieve_all_by_string_fields(['assigned_user_id' => $current_user->id, 'is_published' => 'no', 'module' => $importModule]);
 
-        if (is_countable($custom_imports_arr) ? count($custom_imports_arr) : 0) {
-            $custom = array();
-            foreach ( $custom_imports_arr as $import)
-            {
-                $custom[] = array( "IMPORT_NAME" => $import->name,"IMPORT_ID"   => $import->id);
+        if (safeCount($custom_imports_arr)) {
+            $custom = [];
+            foreach ($custom_imports_arr as $import) {
+                $custom[] = ['IMPORT_NAME' => $import->name, 'IMPORT_ID' => $import->id];
             }
-            $this->ss->assign('custom_imports',$custom);
+            $this->ss->assign('custom_imports', $custom);
         }
 
         // get globally defined import maps
-        $this->ss->assign('published_imports',self::getSavedImportSourceOptions(true));
+        $this->ss->assign('published_imports', self::getSavedImportSourceOptions(true));
         //End custom mapping
 
         // add instructions for anything other than custom_delimited
-        $instructions = array();
-        $lang_key = "CUSTOM";
+        $instructions = [];
+        $lang_key = 'CUSTOM';
 
-        for ($i = 1; isset($mod_strings["LBL_{$lang_key}_NUM_$i"]);$i++)
-        {
-            $instructions[] = array(
-                "STEP_NUM"         => $mod_strings["LBL_NUM_$i"],
-                "INSTRUCTION_STEP" => $mod_strings["LBL_{$lang_key}_NUM_$i"],
-            );
+        for ($i = 1; isset($mod_strings["LBL_{$lang_key}_NUM_$i"]); $i++) {
+            $instructions[] = [
+                'STEP_NUM' => $mod_strings["LBL_NUM_$i"],
+                'INSTRUCTION_STEP' => $mod_strings["LBL_{$lang_key}_NUM_$i"],
+            ];
         }
-        $this->ss->assign("INSTRUCTIONS_TITLE",$mod_strings["LBL_IMPORT_{$lang_key}_TITLE"]);
-        $this->ss->assign("instructions",$instructions);
+        $this->ss->assign('INSTRUCTIONS_TITLE', $mod_strings["LBL_IMPORT_{$lang_key}_TITLE"]);
+        $this->ss->assign('instructions', $instructions);
 
         $content = $this->ss->fetch('modules/Import/tpls/step2.tpl');
-        $this->ss->assign("CONTENT",$content);
+        $this->ss->assign('CONTENT', $content);
         $this->ss->display('modules/Import/tpls/wizardWrapper.tpl');
     }
 
@@ -239,5 +236,3 @@ if(deselectEl)
 EOJAVASCRIPT;
     }
 }
-
-

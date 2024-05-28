@@ -11,7 +11,7 @@
  */
 --}}
 <div class="record-icon" rel="tooltip" title={{moduleIconToolTip this.activity.attributes.icon_module}}>
-    <i class="{{buildIcon this.activity.attributes.icon_class}}"></i>
+    {{moduleLabel this.activity.attributes.icon_module 'lg'}}
 </div>
 {{#each meta.panels}}
     <div class="{{css_class}}">
@@ -20,3 +20,13 @@
         {{/each}}
     </div>
 {{/each}}
+<div class="record-details" rel="tooltip" data-bs-placement="bottom" title="{{str detailDateTimeTooltip baseModule}}">
+    <div class="record-date-details">
+        <div class="date-day">
+            {{detailDay}}
+        </div>
+        <div class="date-date-time">
+            {{detailDateTime}}
+        </div>
+    </div>
+</div>

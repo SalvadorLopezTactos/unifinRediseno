@@ -11,7 +11,8 @@
  */
 
 
-class RegisterLeadApi extends SugarApi {
+class RegisterLeadApi extends SugarApi
+{
     /**
      * Fields that are expected from the client
      * @var array
@@ -28,18 +29,19 @@ class RegisterLeadApi extends SugarApi {
         'preferred_language',
     ];
 
-    public function registerApiRest() {
-        return array(
-            'create' => array(
+    public function registerApiRest()
+    {
+        return [
+            'create' => [
                 'reqType' => 'POST',
-                'path' => array('Leads','register'),
-                'pathVars' => array('module'),
+                'path' => ['Leads', 'register'],
+                'pathVars' => ['module'],
                 'method' => 'createLeadRecord',
                 'shortHelp' => 'This method registers leads',
                 'longHelp' => 'include/api/help/leads_register_post_help.html',
                 'noLoginRequired' => true,
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -61,7 +63,7 @@ class RegisterLeadApi extends SugarApi {
         // In this case, lead_source is parsed in the email message that is sent out when a new lead is created.
         global $app_list_strings;
         global $current_language;
-        if(!isset($app_list_strings)){
+        if (!isset($app_list_strings)) {
             $app_list_strings = return_app_list_strings_language($current_language);
         }
 

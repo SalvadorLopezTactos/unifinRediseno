@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Task'] = array(
+$dictionary['Task'] = [
     'table' => 'tasks',
     'color' => 'purple',
     'icon' => 'sicon-task-lg',
@@ -17,23 +17,23 @@ $dictionary['Task'] = array(
     'unified_search' => true,
     'full_text_search' => true,
     'activity_enabled' => true,
-    'fields' => array(
-        'name' => array(
+    'fields' => [
+        'name' => [
             'name' => 'name',
             'vname' => 'LBL_SUBJECT',
             'dbType' => 'varchar',
             'type' => 'name',
             'len' => '255',
             'unified_search' => true,
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => true,
                 'boost' => 1.45,
-            ),
+            ],
             'importable' => 'required',
             'required' => true,
-        ),
-        'status' => array(
+        ],
+        'status' => [
             'name' => 'status',
             'vname' => 'LBL_STATUS',
             'type' => 'enum',
@@ -42,12 +42,12 @@ $dictionary['Task'] = array(
             'required' => true,
             'default' => 'Not Started',
             'duplicate_on_record_copy' => 'no',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => false,
-            ),
-        ),
-        'date_due_flag' => array(
+            ],
+        ],
+        'date_due_flag' => [
             'name' => 'date_due_flag',
             'vname' => 'LBL_DATE_DUE_FLAG',
             'type' => 'bool',
@@ -55,23 +55,23 @@ $dictionary['Task'] = array(
             'group' => 'date_due',
             'studio' => false,
             'massupdate' => false,
-        ),
-        'date_due' => array(
+        ],
+        'date_due' => [
             'name' => 'date_due',
             'vname' => 'LBL_DUE_DATE',
             'type' => 'datetimecombo',
             'dbType' => 'datetime',
             'group' => 'date_due',
-            'studio' => array('required' => true, 'no_duplicate' => true),
+            'studio' => ['required' => true, 'no_duplicate' => true],
             'enable_range_search' => true,
             'options' => 'date_range_search_dom',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'type' => 'datetime',
                 'enabled' => true,
                 'searchable' => false,
-            ),
-        ),
-        'time_due' => array(
+            ],
+        ],
+        'time_due' => [
             'name' => 'time_due',
             'vname' => 'LBL_DUE_TIME',
             'type' => 'datetime',
@@ -79,8 +79,8 @@ $dictionary['Task'] = array(
             'source' => 'non-db',
             'importable' => 'false',
             'massupdate' => false,
-        ),
-        'date_start_flag' => array(
+        ],
+        'date_start_flag' => [
             'name' => 'date_start_flag',
             'vname' => 'LBL_DATE_START_FLAG',
             'type' => 'bool',
@@ -88,23 +88,23 @@ $dictionary['Task'] = array(
             'default' => 0,
             'studio' => false,
             'massupdate' => false,
-        ),
-        'date_start' => array(
+        ],
+        'date_start' => [
             'name' => 'date_start',
             'vname' => 'LBL_START_DATE',
             'type' => 'datetimecombo',
             'dbType' => 'datetime',
             'group' => 'date_start',
-            'validation' => array(
+            'validation' => [
                 'type' => 'isbefore',
                 'compareto' => 'date_due',
-                'blank' => false
-            ),
-            'studio' => array('required' => true, 'no_duplicate' => true),
+                'blank' => false,
+            ],
+            'studio' => ['required' => true, 'no_duplicate' => true],
             'enable_range_search' => true,
             'options' => 'date_range_search_dom',
-        ),
-        'parent_type' => array(
+        ],
+        'parent_type' => [
             'name' => 'parent_type',
             'vname' => 'LBL_PARENT_NAME',
             'type' => 'parent_type',
@@ -114,49 +114,49 @@ $dictionary['Task'] = array(
             'required' => false,
             'len' => '255',
             'comment' => 'The Sugar object to which the call is related',
-            'studio' => array('wirelesslistview' => false),
+            'studio' => ['wirelesslistview' => false],
             'options' => 'parent_type_display',
-        ),
-        'parent_name' => array(
+        ],
+        'parent_name' => [
             'name' => 'parent_name',
             'parent_type' => 'record_type_display',
             'type_name' => 'parent_type',
             'id_name' => 'parent_id',
             'vname' => 'LBL_LIST_RELATED_TO',
             'type' => 'parent',
-            'related_fields' => array(
+            'related_fields' => [
                 'parent_id',
                 'parent_type',
-            ),
+            ],
             'group' => 'parent_name',
             'source' => 'non-db',
             'options' => 'parent_type_display',
             'studio' => true,
-        ),
-        'parent_id' => array(
+        ],
+        'parent_id' => [
             'name' => 'parent_id',
             'type' => 'id',
             'group' => 'parent_name',
             'reportable' => false,
             'vname' => 'LBL_PARENT_ID',
-        ),
-        'contact_id' => array(
+        ],
+        'contact_id' => [
             'name' => 'contact_id',
             'type' => 'id',
             'group' => 'contact_name',
             'reportable' => false,
             'vname' => 'LBL_CONTACT_ID',
-        ),
-        'contact_name' => array(
+        ],
+        'contact_name' => [
             'name' => 'contact_name',
             'rname' => 'name',
-            'db_concat_fields' => array(
+            'db_concat_fields' => [
                 0 => 'first_name',
-                1 => 'last_name'
-            ),
-            'related_fields' => array(
+                1 => 'last_name',
+            ],
+            'related_fields' => [
                 'contact_id',
-            ),
+            ],
             'source' => 'non-db',
             'len' => '510',
             'group' => 'contact_name',
@@ -168,13 +168,13 @@ $dictionary['Task'] = array(
             'module' => 'Contacts',
             'link' => 'contacts',
             'table' => 'contacts',
-        ),
-        'contact_phone' => array(
+        ],
+        'contact_phone' => [
             'name' => 'contact_phone',
             'type' => 'relate',
-            'related_fields' => array(
+            'related_fields' => [
                 'contact_id',
-            ),
+            ],
             'source' => 'non-db',
             'link' => 'contacts',
             'module' => 'Contacts',
@@ -182,25 +182,25 @@ $dictionary['Task'] = array(
             'id_name' => 'contact_id',
             'rname' => 'phone_work',
             'vname' => 'LBL_CONTACT_PHONE',
-            'studio' => array('listview' => true),
+            'studio' => ['listview' => true],
             'readonly' => true,
-        ),
-        'contact_email' => array(
+        ],
+        'contact_email' => [
             'name' => 'contact_email',
             'type' => 'varchar',
             'vname' => 'LBL_EMAIL_ADDRESS',
             'source' => 'non-db',
-            'studio' => false
-        ),
-        'priority' => array(
+            'studio' => false,
+        ],
+        'priority' => [
             'name' => 'priority',
             'vname' => 'LBL_PRIORITY',
             'type' => 'enum',
             'options' => 'task_priority_dom',
             'len' => 100,
             'required' => true,
-        ),
-        'contacts' => array(
+        ],
+        'contacts' => [
             'name' => 'contacts',
             'type' => 'link',
             'relationship' => 'contact_tasks',
@@ -208,72 +208,72 @@ $dictionary['Task'] = array(
             'side' => 'right',
             'link_type' => 'one',
             'vname' => 'LBL_CONTACT',
-        ),
-        'accounts' => array(
+        ],
+        'accounts' => [
             'name' => 'accounts',
             'type' => 'link',
             'relationship' => 'account_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_ACCOUNTS',
-        ),
-        'opportunities' => array(
+        ],
+        'opportunities' => [
             'name' => 'opportunities',
             'type' => 'link',
             'relationship' => 'opportunity_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_OPPORTUNITY',
-        ),
-        'revenuelineitems' => array(
+        ],
+        'revenuelineitems' => [
             'name' => 'revenuelineitems',
             'type' => 'link',
             'relationship' => 'revenuelineitem_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_REVENUELINEITEMS',
-            'workflow' => false
-        ),
-        'cases' => array(
+            'workflow' => false,
+        ],
+        'cases' => [
             'name' => 'cases',
             'type' => 'link',
             'relationship' => 'case_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_CASE',
-        ),
-        'bugs' => array(
+        ],
+        'bugs' => [
             'name' => 'bugs',
             'type' => 'link',
             'relationship' => 'bug_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_BUGS',
-        ),
-        'emails' => array(
+        ],
+        'emails' => [
             'name' => 'emails',
             'type' => 'link',
             'relationship' => 'emails_tasks_rel',
             'source' => 'non-db',
             'vname' => 'LBL_EMAILS',
-        ),
-        'leads' => array(
+        ],
+        'leads' => [
             'name' => 'leads',
             'type' => 'link',
             'relationship' => 'lead_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_LEADS',
-        ),
-        'projects' => array(
+        ],
+        'projects' => [
             'name' => 'projects',
             'type' => 'link',
             'relationship' => 'projects_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_PROJECTS',
-        ),
-        'project_tasks' => array(
+        ],
+        'project_tasks' => [
             'name' => 'project_tasks',
             'type' => 'link',
             'relationship' => 'project_tasks_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_PROJECT_TASKS',
-        ),
-        'notes' => array(
+        ],
+        'notes' => [
             'name' => 'notes',
             'type' => 'link',
             'relationship' => 'tasks_notes',
@@ -281,7 +281,7 @@ $dictionary['Task'] = array(
             'bean_name' => 'Note',
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
-        ),
+        ],
         'messages' => [
             'name' => 'messages',
             'type' => 'link',
@@ -298,54 +298,54 @@ $dictionary['Task'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_ESCALATIONS',
         ],
-        'quotes' => array(
+        'quotes' => [
             'name' => 'quotes',
             'type' => 'link',
             'relationship' => 'quote_tasks',
             'vname' => 'LBL_QUOTES',
             'source' => 'non-db',
-        ),
-        'contact_parent' => array(
+        ],
+        'contact_parent' => [
             'name' => 'contact_parent',
             'type' => 'link',
             'relationship' => 'contact_tasks_parent',
             'source' => 'non-db',
-            'reportable' => false
-        ),
-        'meetings_parent' => array(
+            'reportable' => false,
+        ],
+        'meetings_parent' => [
             'name' => 'meetings_parent',
             'type' => 'link',
             'relationship' => 'task_meetings_parent',
             'source' => 'non-db',
             'vname' => 'LBL_MEETINGS',
             'reportable' => false,
-        ),
-        'calls_parent' => array(
+        ],
+        'calls_parent' => [
             'name' => 'calls_parent',
             'type' => 'link',
             'relationship' => 'task_calls_parent',
             'source' => 'non-db',
             'vname' => 'LBL_CALLS',
             'reportable' => false,
-        ),
-        'project' => array(
+        ],
+        'project' => [
             'name' => 'project',
             'type' => 'link',
             'relationship' => 'projects_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_PROJECTS',
             'side' => 'right',
-        ),
-        'kbcontents' => array(
+        ],
+        'kbcontents' => [
             'name' => 'kbcontents',
             'type' => 'link',
             'relationship' => 'kbcontent_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_KBDOCUMENTS',
-        ),
-    ),
-    'relationships' => array(
-        'tasks_notes' => array(
+        ],
+    ],
+    'relationships' => [
+        'tasks_notes' => [
             'lhs_module' => 'Tasks',
             'lhs_table' => 'tasks',
             'lhs_key' => 'id',
@@ -354,8 +354,8 @@ $dictionary['Task'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Tasks'
-        ),
+            'relationship_role_column_value' => 'Tasks',
+        ],
         'tasks_messages' => [
             'lhs_module' => 'Tasks',
             'lhs_table' => 'tasks',
@@ -367,34 +367,34 @@ $dictionary['Task'] = array(
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Tasks',
         ],
-        'tasks_assigned_user' => array(
+        'tasks_assigned_user' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
             'rhs_module' => 'Tasks',
             'rhs_table' => 'tasks',
             'rhs_key' => 'assigned_user_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'tasks_modified_user' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'tasks_modified_user' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
             'rhs_module' => 'Tasks',
             'rhs_table' => 'tasks',
             'rhs_key' => 'modified_user_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'tasks_created_by' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'tasks_created_by' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
             'rhs_module' => 'Tasks',
             'rhs_table' => 'tasks',
             'rhs_key' => 'created_by',
-            'relationship_type' => 'one-to-many'
-        ),
-        'task_meetings_parent' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'task_meetings_parent' => [
             'lhs_module' => 'Tasks',
             'lhs_table' => 'tasks',
             'lhs_key' => 'id',
@@ -404,8 +404,8 @@ $dictionary['Task'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Tasks',
-        ),
-        'task_calls_parent' => array(
+        ],
+        'task_calls_parent' => [
             'lhs_module' => 'Tasks',
             'lhs_table' => 'tasks',
             'lhs_key' => 'id',
@@ -415,55 +415,56 @@ $dictionary['Task'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Tasks',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'idx_tsk_name',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'name',
                 'date_modified',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_task_con_del',
             'type' => 'index',
-            'fields' => array('contact_id', 'deleted')
-        ),
-        array(
+            'fields' => ['contact_id', 'deleted'],
+        ],
+        [
             'name' => 'idx_task_par_del',
             'type' => 'index',
-            'fields' => array('parent_id', 'parent_type', 'deleted')
-        ),
-        array(
+            'fields' => ['parent_id', 'parent_type', 'deleted'],
+        ],
+        [
             'name' => 'idx_task_status',
             'type' => 'index',
-            'fields' => array('status')
-        ),
-        array(
+            'fields' => ['status'],
+        ],
+        [
             'name' => 'idx_task_date_due',
             'type' => 'index',
-            'fields' => array('date_due')
-        ),
-    ),
-    'duplicate_check' => array(
-        'enabled' => false
-    ),
+            'fields' => ['date_due'],
+        ],
+    ],
+    'duplicate_check' => [
+        'enabled' => false,
+    ],
     //This enables optimistic locking for Saves From EditView
     'optimistic_locking' => true,
-);
+];
 
 VardefManager::createVardef(
     'Tasks',
     'Task',
-    array(
+    [
         'default',
         'assignable',
         'team_security',
         'customer_journey_activity',
-    )
+        'audit',
+    ]
 );
 
 //boost value for full text search

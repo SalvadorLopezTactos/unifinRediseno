@@ -943,12 +943,12 @@
     /**
      * Trigger on Remove button click
      */
-    removeItem: _.debounce(function(evt) {
+    removeItem: function(evt) {
         let index = $(evt.currentTarget).data('index');
         if (_.isNumber(index)) {
             this.removeSelectTo(index);
         }
-    }, 0),
+    },
 
     /**
      * @inheritdoc

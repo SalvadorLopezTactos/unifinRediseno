@@ -1,5 +1,9 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+
+if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,12 +18,12 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 use Sugarcrm\Sugarcrm\ProcessManager;
 
 if (empty($job_strings)) {
-    $job_strings = array();
+    $job_strings = [];
 }
 
 array_push($job_strings, 'PMSEEngineCron');
 
-if (!function_exists("PMSEEngineCron")) {
+if (!function_exists('PMSEEngineCron')) {
     function PMSEEngineCron()
     {
         // Calls and Meetings modules uses this session variable on save function,
@@ -33,7 +37,7 @@ if (!function_exists("PMSEEngineCron")) {
     }
 }
 
-if (!function_exists("PMSEJobRun")) {
+if (!function_exists('PMSEJobRun')) {
     function PMSEJobRun($job)
     {
         if (!empty($job->data)) {
@@ -47,4 +51,3 @@ if (!function_exists("PMSEJobRun")) {
         return true;
     }
 }
-

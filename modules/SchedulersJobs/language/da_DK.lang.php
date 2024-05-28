@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Jobkø',
     'LBL_MODULE_NAME_SINGULAR' => 'Jobkø',
     'LBL_MODULE_TITLE' => 'Jobkø: Hjem',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Løsning annulleret',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Løsning kører',
     // Errors
-    'ERR_CALL' => "Kan ikke kalde funktionen: %s",
-    'ERR_CURL' => "Ingen CURL - kan ikke køre URL jobs",
-    'ERR_FAILED' => "Uventet fejl. Venligst tjek PHP logs og sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s i %s på linie %d",
-    'ERR_NOUSER' => "Intet bruger id angivet for jobbet",
-    'ERR_NOSUCHUSER' => "Bruger id %s ikke fundet",
-    'ERR_JOBTYPE' => "Ukendt job type: %s",
-    'ERR_TIMEOUT' => "Fejl pga. timeout",
+    'ERR_CALL' => 'Kan ikke kalde funktionen: %s',
+    'ERR_CURL' => 'Ingen CURL - kan ikke køre URL jobs',
+    'ERR_FAILED' => 'Uventet fejl. Venligst tjek PHP logs og sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s i %s på linie %d',
+    'ERR_NOUSER' => 'Intet bruger id angivet for jobbet',
+    'ERR_NOSUCHUSER' => 'Bruger id %s ikke fundet',
+    'ERR_JOBTYPE' => 'Ukendt job type: %s',
+    'ERR_TIMEOUT' => 'Fejl pga. timeout',
     'ERR_JOB_FAILED_VERBOSE' => 'Job %1$s (%2$s) fejlede under CRON kørsel',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Kan ikke indlæse bønne med id: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Kan ikke finde føreren af rute %s',
@@ -95,13 +95,13 @@ Den understøtter programmatisk afsendelse af beskeder via web service-applikati
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Amazon SQS konfiguration Hjælp',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Amazon SQS konfigurationsafsnit.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Amazon SQS konfigurationsafsnit.</b></p>
 <ul>
     <li>Access Key ID: <i>Indtast din adgangsnøgle id-nummer til Amazon SQS</i></li>
     <li>Secret Access Key: <i>Indtast din hemmelige adgangsnøgle til Amazon SQS</i></li>
     <li>Region: <i>Indtast regionen for Amazon SQS server</i></li>
     <li>Queue Name: <i>Indtast kønavn for Amazon SQS server</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'AMQP konfiguration Hjælp',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>AMQP konfigurationsafsnit.</b></p>
 <ul>
@@ -122,4 +122,4 @@ Den understøtter programmatisk afsendelse af beskeder via web service-applikati
     'LBL_REGION' => 'Region',
     'LBL_ACCESS_KEY_SECRET' => 'Hemmelig adgangskode',
     'LBL_QUEUE_NAME' => 'Adapter navn',
-);
+];

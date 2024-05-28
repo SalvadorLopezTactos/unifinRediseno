@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Calendriers de rapports',
     'LBL_MODULE_NAME_SINGULAR' => 'Calendrier de rapports',
     'LBL_REPORT_NAME' => 'Rapport',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Type(s) de fichier',
     'LBL_EMBED_REPORT' => 'Intégrer le rapport dans un e-mail',
     'LBL_EMBED_REPORT_INFO' => 'Remarque : si le rapport dépasse 200 lignes, nous le joindrons en tant que fichier CSV.',
-);
+];

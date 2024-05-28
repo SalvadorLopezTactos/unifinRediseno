@@ -9,38 +9,35 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Holidays']['UsersQuickCreate'] = array(
-    'templateMeta' => array('maxColumns' => '2', 
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'), 
-                                            array('label' => '10', 'field' => '30')
-                                            ),
-    ),
- 'panels' =>array (
-  'default' => 
-  array (
-    
-    array (
-      
-      array (
-        'name' => 'holiday_date',
-      ),
-    ),
-    
-    array (
-      
-      array (
-        'name' => 'description',
-        'displayParams' => 
-        array (
-          'rows' => '4',
-          'cols' => '80',
-        ),
-      ),
-    ),
-  ),
-)
+$viewdefs['Holidays']['UsersQuickCreate'] = [
+    'templateMeta' => ['maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        'default' => [
+
+            [
+
+                [
+                    'name' => 'holiday_date',
+                ],
+            ],
+
+            [
+
+                [
+                    'name' => 'description',
+                    'displayParams' => [
+                        'rows' => '4',
+                        'cols' => '80',
+                    ],
+                ],
+            ],
+        ],
+    ],
 
 
-);
-?>
+];

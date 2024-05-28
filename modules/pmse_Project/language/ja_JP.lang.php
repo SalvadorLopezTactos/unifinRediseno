@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'プロセス定義',
-  'LBL_MODULE_TITLE' => 'プロセス定義',
-  'LBL_MODULE_NAME_SINGULAR' => 'プロセス定義',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'プロセス定義',
+    'LBL_MODULE_TITLE' => 'プロセス定義',
+    'LBL_MODULE_NAME_SINGULAR' => 'プロセス定義',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'プロセス定義 フォーカス ドロワ',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'プロセス定義 フォーカス ドロワ',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'プロセス定義レコードダッシュボード',
-  'LNK_LIST' => 'プロセス定義閲覧',
-  'LNK_NEW_PMSE_PROJECT' => 'プロセス定義を作成',
-  'LNK_IMPORT_PMSE_PROJECT' => 'プロセス定義をインポート',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'プロセス定義レコードダッシュボード',
+    'LNK_LIST' => 'プロセス定義閲覧',
+    'LNK_NEW_PMSE_PROJECT' => 'プロセス定義を作成',
+    'LNK_IMPORT_PMSE_PROJECT' => 'プロセス定義をインポート',
 
-  'LBL_PRJ_STATUS' => 'ステータス',
-  'LBL_PRJ_MODULE' => '対象モジュール',
-  'LBL_PRJ_RUN_ORDER' => '注文の実行',
-  'LBL_PMSE_BUTTON_SAVE' => '保存',
-  'LBL_PMSE_BUTTON_CANCEL' => 'キャンセル',
-  'LBL_PMSE_BUTTON_YES' => 'はい',
-  'LBL_PMSE_BUTTON_NO' => 'いいえ',
-  'LBL_PMSE_BUTTON_OK' => 'OK',
+    'LBL_PRJ_STATUS' => 'ステータス',
+    'LBL_PRJ_MODULE' => '対象モジュール',
+    'LBL_PRJ_RUN_ORDER' => '注文の実行',
+    'LBL_PMSE_BUTTON_SAVE' => '保存',
+    'LBL_PMSE_BUTTON_CANCEL' => 'キャンセル',
+    'LBL_PMSE_BUTTON_YES' => 'はい',
+    'LBL_PMSE_BUTTON_NO' => 'いいえ',
+    'LBL_PMSE_BUTTON_OK' => 'OK',
     'LBL_PMSE_FORM_ERROR' => '進める前にエラーを解決してください。',
 
     'LBL_PMSE_LABEL_DESIGN' => 'デザイン',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'アクティビティ',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'アクション',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'リード開始イベント',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => '商談開始イベント' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => '商談開始イベント',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'ドキュメント開始イベント',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => '開始イベント',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => '待機イベント',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'ビジネスルール',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'ビジネスルールのアクション',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Eメールテンプレート',
-);
+];

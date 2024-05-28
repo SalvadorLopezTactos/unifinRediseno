@@ -37,7 +37,7 @@ class PMSEEngineUtils
      * Lists of SugarBPM supported module names keyed to the module type (target vs related)
      * @var array
      */
-    protected static $supportedModules = array();
+    protected static $supportedModules = [];
 
     public static $uploadObject;
 
@@ -49,24 +49,24 @@ class PMSEEngineUtils
     /**
      * @var array supported business time unit - only business hour (bh) for now
      */
-    static protected $BusinessCenterTimeUnits = ['bh' => 'hours'];
+    protected static $BusinessCenterTimeUnits = ['bh' => 'hours'];
 
     /**
      * @var array support related or target at this moment
      */
-    static protected $beanTypes = ['related' => 'related', 'target' => 'target'];
+    protected static $beanTypes = ['related' => 'related', 'target' => 'target'];
 
     /**
      * @var array support id and type for now
      */
-    static protected $registryTypes = ['id' => 'id', 'type' => 'type'];
+    protected static $registryTypes = ['id' => 'id', 'type' => 'type'];
 
     /**
      * List of fields across all modules that should always be blacklisted
      * @var array
      */
-    protected static $blacklistedFields = array(
-        'ALL' => array(
+    protected static $blacklistedFields = [
+        'ALL' => [
             'deleted',
             'mkto_id',
             'user_name',
@@ -76,9 +76,9 @@ class PMSEEngineUtils
             'team_count',
             'sentiment_score_agent',
             'sentiment_score_customer',
-        ),
+        ],
         // list for BR conclusions and others (write)
-        'BR' => array(
+        'BR' => [
             'duration_hours',
             'kbdocument_body',
             'revision',
@@ -94,15 +94,15 @@ class PMSEEngineUtils
             'portal_app',
             'sentiment_score_agent_string',
             'sentiment_score_customer_string',
-        ),
+        ],
         // list for BR conditions (read)
-        'BRR' => array(
+        'BRR' => [
             'primary_contact_name',
             'portal_name',
             'portal_app',
-        ),
+        ],
         // Add related record Activity item in Process Definitions
-        'AC' => array(
+        'AC' => [
             'kbdocument_body',
             'revision',
             'viewcount',
@@ -111,25 +111,25 @@ class PMSEEngineUtils
             'portal_name',
             'portal_app',
             'parent_type',
-        ),
+        ],
         // Process Definitions
-        'PD' => array(
+        'PD' => [
             'kbdocument_body',
             'revision',
             'viewcount',
             'portal_name',
             'portal_app',
-        ),
-        'GT' => array(
+        ],
+        'GT' => [
             'kbdocument_body',
             'revision',
             'viewcount',
             'portal_name',
             'portal_app',
-        ),
+        ],
         // Change field action... this used to be the same as Add Related Record
         // but we needed different things from this
-        'CF' => array(
+        'CF' => [
             'dnb_principal_id',
             'system_generated_password',
             'duns_num',
@@ -145,7 +145,7 @@ class PMSEEngineUtils
             'sentiment_score_agent_string',
             'sentiment_score_customer_string',
             'parent_type',
-        ),
+        ],
         // Readonly and Required fields in Activity
         // Locked fields in Process Definition
         'RR' => [
@@ -153,33 +153,33 @@ class PMSEEngineUtils
             'portal_app',
             'parent_type',
         ],
-    );
+    ];
 
     /**
      * PA target blacklisted modules
      * @var array
      */
-    public static $targetBlacklistedModules = array(
+    public static $targetBlacklistedModules = [
         'Users',
         'Employees',
         'DataPrivacy',
         'ExternalUsers',
-    );
+    ];
 
     /**
      * PA related blacklisted modules
      * @var array
      */
-    public static $relatedBlacklistedModules = array(
+    public static $relatedBlacklistedModules = [
         'DataPrivacy',
         'ExternalUsers',
-    );
+    ];
 
     /**
      * PA related blacklisted links
      * @var array
      */
-    public static $relatedBlacklistedLinks = array(
+    public static $relatedBlacklistedLinks = [
         'contact',
         'following_link',
         'favorite_link',
@@ -190,40 +190,40 @@ class PMSEEngineUtils
         'attachments',
         'usefulness',
         'archived_emails',
-    );
+    ];
 
     /**
      * PA related blacklisted links by module
      * @var array
      */
-    public static $relatedBlacklistedLinksByModule = array(
-        'Accounts'=>array('revenuelineitems'),
-        'Leads' => array(
+    public static $relatedBlacklistedLinksByModule = [
+        'Accounts' => ['revenuelineitems'],
+        'Leads' => [
             'meetings_parent',
             'calls_parent',
-        ),
-    );
+        ],
+    ];
 
     /**
      * PA special fields
      * @var array
      */
-    public static $specialFields = array(
-        'All' => array('created_by_name', 'modified_by_name', 'primary_contact_name', 'reports_to_name'),
-        'BR' => array('assigned_user_id', 'email1', 'outlook_id'),
-        'BRR' => array('assigned_user_id', 'email1', 'outlook_id'),
-        'ET' => array('email1', 'portal_name', 'portal_app'),
-        'AC' => array('assigned_user_id', 'likely_case', 'worst_case', 'best_case', 'teams'),
-        'CF' => array('assigned_user_id', 'likely_case', 'worst_case', 'best_case', 'teams'),
-        'RR' => array(),
-        'CF' => array('assigned_user_id', 'likely_case', 'worst_case', 'best_case', 'teams'),
-    );
+    public static $specialFields = [
+        'All' => ['created_by_name', 'modified_by_name', 'primary_contact_name', 'reports_to_name'],
+        'BR' => ['assigned_user_id', 'email1', 'outlook_id'],
+        'BRR' => ['assigned_user_id', 'email1', 'outlook_id'],
+        'ET' => ['email1', 'portal_name', 'portal_app'],
+        'AC' => ['assigned_user_id', 'likely_case', 'worst_case', 'best_case', 'teams'],
+        'CF' => ['assigned_user_id', 'likely_case', 'worst_case', 'best_case', 'teams'],
+        'RR' => [],
+        'CF' => ['assigned_user_id', 'likely_case', 'worst_case', 'best_case', 'teams'],
+    ];
 
     /**
      * SugarBPM does not handle the below field types currently. So skip displaying them.
      * @var array
      */
-    public static $blacklistedFieldTypes = array('image','password','file');
+    public static $blacklistedFieldTypes = ['image', 'password', 'file'];
 
     /**
      * List of field types with a non-db source that are considered valid for
@@ -248,7 +248,7 @@ class PMSEEngineUtils
      * @param String $expValue expression value such as "2bh" or "4h"
      * @return bool true if business unit, false otherwise
      */
-    public static function isForBusinessTimeOp(String $expValue) : bool
+    public static function isForBusinessTimeOp(string $expValue): bool
     {
         $pattern = self::getBusinessTimePattern();
         return preg_match($pattern, $expValue) === 1;
@@ -258,7 +258,7 @@ class PMSEEngineUtils
      * @param String $key
      * @return String
      */
-    public static function getBusinessTimeUnit(String $key) : String
+    public static function getBusinessTimeUnit(string $key): string
     {
         return self::$BusinessCenterTimeUnits[$key] ?? '';
     }
@@ -267,7 +267,7 @@ class PMSEEngineUtils
      * @param bool $checkOnly true if no need to get the matches
      * @return String
      */
-    public static function getBusinessTimePattern(bool $checkOnly = true) : String
+    public static function getBusinessTimePattern(bool $checkOnly = true): string
     {
         $bcPattern = implode(array_keys(self::$BusinessCenterTimeUnits));
         if ($checkOnly) {
@@ -282,7 +282,7 @@ class PMSEEngineUtils
      * @param String $registryType
      * @return String
      */
-    public static function getRegistryKey(String $beanType, String $registryType) : String
+    public static function getRegistryKey(string $beanType, string $registryType): string
     {
         return 'pmse_' . self::$beanTypes[$beanType] . '_bean_' . self::$registryTypes[$registryType];
     }
@@ -405,7 +405,7 @@ class PMSEEngineUtils
      */
     public static function sanitizeBoundFields($row)
     {
-        $fields = array('bou_element', 'bou_element_type', 'bou_rel_position', 'bou_size_identical', 'bou_uid');
+        $fields = ['bou_element', 'bou_element_type', 'bou_rel_position', 'bou_size_identical', 'bou_uid'];
         foreach ($fields as $key) {
             unset($row[$key]);
         }
@@ -484,7 +484,7 @@ class PMSEEngineUtils
                 $sugarUploader->confirm_upload();
                 $sugarUploader->final_move($fileName . '_' . create_guid());
 
-                return array();
+                return [];
             }
         } catch (Exception $oException) {
             throw $oException;
@@ -499,333 +499,333 @@ class PMSEEngineUtils
     public static function reservedWordsSql()
     {
         //Reserved words SQL
-        $reservedWordsSql = array(
-            "ACCESSIBLE",
-            "ACTION",
-            "ADD",
-            "ALL",
-            "ALTER",
-            "ANALYZE",
-            "AND",
-            "ANY",
-            "AS",
-            "ASC",
-            "ASENSITIVE",
-            "AUTHORIZATION",
-            "BACKUP",
-            "BEFORE",
-            "BEGIN",
-            "BETWEEN",
-            "BIGINT",
-            "BINARY",
-            "BIT",
-            "BLOB",
-            "BOTH",
-            "BREAK",
-            "BROWSE",
-            "BULK",
-            "BY",
-            "CALL",
-            "CASCADE",
-            "CASE",
-            "CHANGE",
-            "CHAR",
-            "CHARACTER",
-            "CHECK",
-            "CHECKPOINT",
-            "CLOSE",
-            "CLUSTERED",
-            "COALESCE",
-            "COLLATE",
-            "COLUMN",
-            "COMMIT",
-            "COMPUTE",
-            "CONDITION",
-            "CONSTRAINT",
-            "CONTAINS",
-            "CONTAINSTABLE",
-            "CONTINUE",
-            "CONVERT",
-            "CREATE",
-            "CROSS",
-            "CURRENT",
-            "CURRENT_DATE",
-            "CURRENT_TIME",
-            "CURRENT_TIMESTAMP",
-            "CURRENT_USER",
-            "CURSOR",
-            "DATABASE",
-            "DATABASES",
-            "DATE",
-            "DAY_HOUR",
-            "DAY_MICROSECOND",
-            "DAY_MINUTE",
-            "DAY_SECOND",
-            "DBCC",
-            "DEALLOCATE",
-            "DEC",
-            "DECIMAL",
-            "DECLARE",
-            "DEFAULT",
-            "DELAYED",
-            "DELETE",
-            "DENY",
-            "DESC",
-            "DESCRIBE",
-            "DETERMINISTIC",
-            "DISK",
-            "DISTINCT",
-            "DISTINCTROW",
-            "DISTRIBUTED",
-            "DIV",
-            "DOUBLE",
-            "DROP",
-            "DUAL",
-            "DUMMY",
-            "DUMP",
-            "EACH",
-            "ELSE",
-            "ELSEIF",
-            "ENCLOSED",
-            "END",
-            "ENUM",
-            "ERRLVL",
-            "ESCAPE",
-            "ESCAPED",
-            "EXCEPT",
-            "EXEC",
-            "EXECUTE",
-            "EXISTS",
-            "EXIT",
-            "EXPLAIN",
-            "FALSE",
-            "FETCH",
-            "FILE",
-            "FILLFACTOR",
-            "FLOAT",
-            "FLOAT4",
-            "FLOAT8",
-            "FOR",
-            "FORCE",
-            "FOREIGN",
-            "FREETEXT",
-            "FREETEXTTABLE",
-            "FROM",
-            "FULL",
-            "FULLTEXT",
-            "FUNCTION",
-            "GENERAL",
-            "GOTO",
-            "GRANT",
-            "GROUP",
-            "HAVING",
-            "HIGH_PRIORITY",
-            "HOLDLOCK",
-            "HOUR_MICROSECOND",
-            "HOUR_MINUTE",
-            "HOUR_SECOND",
-            "IDENTITY",
-            "IDENTITYCOL",
-            "IDENTITY_INSERT",
-            "IF",
-            "IGNORE",
-            "IGNORE_SERVER_IDS",
-            "IN",
-            "INDEX",
-            "INFILE",
-            "INNER",
-            "INOUT",
-            "INSENSITIVE",
-            "INSERT",
-            "INT",
-            "INT1",
-            "INT2",
-            "INT3",
-            "INT4",
-            "INT8",
-            "INTEGER",
-            "INTERSECT",
-            "INTERVAL",
-            "INTO",
-            "IS",
-            "ITERATE",
-            "JOIN",
-            "KEY",
-            "KEYS",
-            "KILL",
-            "LEADING",
-            "LEAVE",
-            "LEFT",
-            "LIKE",
-            "LIMIT",
-            "LINEAR",
-            "LINENO",
-            "LINES",
-            "LOAD",
-            "LOCALTIME",
-            "LOCALTIMESTAMP",
-            "LOCK",
-            "LONG",
-            "LONGBLOB",
-            "LONGTEXT",
-            "LOOP",
-            "LOW_PRIORITY",
-            "MASTER_HEARTBEAT_PERIOD",
-            "MASTER_SSL_VERIFY_SERVER_CERT",
-            "MATCH",
-            "MAXVALUE",
-            "MEDIUMBLOB",
-            "MEDIUMINT",
-            "MEDIUMTEXT",
-            "MIDDLEINT",
-            "MINUTE_MICROSECOND",
-            "MINUTE_SECOND",
-            "MOD",
-            "MODIFIES",
-            "NATIONAL",
-            "NATURAL",
-            "NO",
-            "NOCHECK",
-            "NONCLUSTERED",
-            "NOT",
-            "NO_WRITE_TO_BINLOG",
-            "NULL",
-            "NULLIF",
-            "NUMERIC",
-            "OF",
-            "OFF",
-            "OFFSETS",
-            "ON",
-            "OPEN",
-            "OPENDATASOURCE",
-            "OPENQUERY",
-            "OPENROWSET",
-            "OPENXML",
-            "OPTIMIZE",
-            "OPTION",
-            "OPTIONALLY",
-            "OR",
-            "ORDER",
-            "OUT",
-            "OUTER",
-            "OUTFILE",
-            "OVER",
-            "PERCENT",
-            "PLAN",
-            "PRECISION",
-            "PRIMARY",
-            "PRINT",
-            "PROC",
-            "PROCEDURE",
-            "PUBLIC",
-            "PURGE",
-            "RAISERROR",
-            "RANGE",
-            "READ",
-            "READS",
-            "READTEXT",
-            "READ_WRITE",
-            "REAL",
-            "RECONFIGURE",
-            "REFERENCES",
-            "REGEXP",
-            "RELEASE",
-            "RENAME",
-            "REPEAT",
-            "REPLACE",
-            "REPLICATION",
-            "REQUIRE",
-            "RESIGNAL",
-            "RESTORE",
-            "RESTRICT",
-            "RETURN",
-            "REVOKE",
-            "RIGHT",
-            "RLIKE",
-            "ROLLBACK",
-            "ROWCOUNT",
-            "ROWGUIDCOL",
-            "RULE",
-            "SAVE",
-            "SCHEMA",
-            "SCHEMAS",
-            "SECOND_MICROSECOND",
-            "SELECT",
-            "SENSITIVE",
-            "SEPARATOR",
-            "SESSION_USER",
-            "SET",
-            "SETUSER",
-            "SHOW",
-            "SHUTDOWN",
-            "SIGNAL",
-            "SLOW",
-            "SMALLINT",
-            "SOME",
-            "SPATIAL",
-            "SPECIFIC",
-            "SQL",
-            "SQLEXCEPTION",
-            "SQLSTATE",
-            "SQLWARNING",
-            "SQL_BIG_RESULT",
-            "SQL_CALC_FOUND_ROWS",
-            "SQL_SMALL_RESULT",
-            "SSL",
-            "STARTING",
-            "STATISTICS",
-            "STRAIGHT_JOIN",
-            "SYSTEM_USER",
-            "TABLE",
-            "TERMINATED",
-            "TEXT",
-            "TEXTSIZE",
-            "THEN",
-            "TIME",
-            "TIMESTAMP",
-            "TINYBLOB",
-            "TINYINT",
-            "TINYTEXT",
-            "TO",
-            "TOP",
-            "TRAILING",
-            "TRAN",
-            "TRANSACTION",
-            "TRIGGER",
-            "TRUE",
-            "TRUNCATE",
-            "TSEQUAL",
-            "UNDO",
-            "UNION",
-            "UNIQUE",
-            "UNLOCK",
-            "UNSIGNED",
-            "UPDATE",
-            "UPDATETEXT",
-            "USAGE",
-            "USE",
-            "USER",
-            "USING",
-            "UTC_DATE",
-            "UTC_TIME",
-            "UTC_TIMESTAMP",
-            "VALUES",
-            "VARBINARY",
-            "VARCHAR",
-            "VARCHARACTER",
-            "VARYING",
-            "VIEW",
-            "WAITFOR",
-            "WHEN",
-            "WHERE",
-            "WHILE",
-            "WITH",
-            "WRITE",
-            "WRITETEXT",
-            "XOR",
-            "YEAR_MONTH",
-            "ZEROFILL"
-        );
+        $reservedWordsSql = [
+            'ACCESSIBLE',
+            'ACTION',
+            'ADD',
+            'ALL',
+            'ALTER',
+            'ANALYZE',
+            'AND',
+            'ANY',
+            'AS',
+            'ASC',
+            'ASENSITIVE',
+            'AUTHORIZATION',
+            'BACKUP',
+            'BEFORE',
+            'BEGIN',
+            'BETWEEN',
+            'BIGINT',
+            'BINARY',
+            'BIT',
+            'BLOB',
+            'BOTH',
+            'BREAK',
+            'BROWSE',
+            'BULK',
+            'BY',
+            'CALL',
+            'CASCADE',
+            'CASE',
+            'CHANGE',
+            'CHAR',
+            'CHARACTER',
+            'CHECK',
+            'CHECKPOINT',
+            'CLOSE',
+            'CLUSTERED',
+            'COALESCE',
+            'COLLATE',
+            'COLUMN',
+            'COMMIT',
+            'COMPUTE',
+            'CONDITION',
+            'CONSTRAINT',
+            'CONTAINS',
+            'CONTAINSTABLE',
+            'CONTINUE',
+            'CONVERT',
+            'CREATE',
+            'CROSS',
+            'CURRENT',
+            'CURRENT_DATE',
+            'CURRENT_TIME',
+            'CURRENT_TIMESTAMP',
+            'CURRENT_USER',
+            'CURSOR',
+            'DATABASE',
+            'DATABASES',
+            'DATE',
+            'DAY_HOUR',
+            'DAY_MICROSECOND',
+            'DAY_MINUTE',
+            'DAY_SECOND',
+            'DBCC',
+            'DEALLOCATE',
+            'DEC',
+            'DECIMAL',
+            'DECLARE',
+            'DEFAULT',
+            'DELAYED',
+            'DELETE',
+            'DENY',
+            'DESC',
+            'DESCRIBE',
+            'DETERMINISTIC',
+            'DISK',
+            'DISTINCT',
+            'DISTINCTROW',
+            'DISTRIBUTED',
+            'DIV',
+            'DOUBLE',
+            'DROP',
+            'DUAL',
+            'DUMMY',
+            'DUMP',
+            'EACH',
+            'ELSE',
+            'ELSEIF',
+            'ENCLOSED',
+            'END',
+            'ENUM',
+            'ERRLVL',
+            'ESCAPE',
+            'ESCAPED',
+            'EXCEPT',
+            'EXEC',
+            'EXECUTE',
+            'EXISTS',
+            'EXIT',
+            'EXPLAIN',
+            'FALSE',
+            'FETCH',
+            'FILE',
+            'FILLFACTOR',
+            'FLOAT',
+            'FLOAT4',
+            'FLOAT8',
+            'FOR',
+            'FORCE',
+            'FOREIGN',
+            'FREETEXT',
+            'FREETEXTTABLE',
+            'FROM',
+            'FULL',
+            'FULLTEXT',
+            'FUNCTION',
+            'GENERAL',
+            'GOTO',
+            'GRANT',
+            'GROUP',
+            'HAVING',
+            'HIGH_PRIORITY',
+            'HOLDLOCK',
+            'HOUR_MICROSECOND',
+            'HOUR_MINUTE',
+            'HOUR_SECOND',
+            'IDENTITY',
+            'IDENTITYCOL',
+            'IDENTITY_INSERT',
+            'IF',
+            'IGNORE',
+            'IGNORE_SERVER_IDS',
+            'IN',
+            'INDEX',
+            'INFILE',
+            'INNER',
+            'INOUT',
+            'INSENSITIVE',
+            'INSERT',
+            'INT',
+            'INT1',
+            'INT2',
+            'INT3',
+            'INT4',
+            'INT8',
+            'INTEGER',
+            'INTERSECT',
+            'INTERVAL',
+            'INTO',
+            'IS',
+            'ITERATE',
+            'JOIN',
+            'KEY',
+            'KEYS',
+            'KILL',
+            'LEADING',
+            'LEAVE',
+            'LEFT',
+            'LIKE',
+            'LIMIT',
+            'LINEAR',
+            'LINENO',
+            'LINES',
+            'LOAD',
+            'LOCALTIME',
+            'LOCALTIMESTAMP',
+            'LOCK',
+            'LONG',
+            'LONGBLOB',
+            'LONGTEXT',
+            'LOOP',
+            'LOW_PRIORITY',
+            'MASTER_HEARTBEAT_PERIOD',
+            'MASTER_SSL_VERIFY_SERVER_CERT',
+            'MATCH',
+            'MAXVALUE',
+            'MEDIUMBLOB',
+            'MEDIUMINT',
+            'MEDIUMTEXT',
+            'MIDDLEINT',
+            'MINUTE_MICROSECOND',
+            'MINUTE_SECOND',
+            'MOD',
+            'MODIFIES',
+            'NATIONAL',
+            'NATURAL',
+            'NO',
+            'NOCHECK',
+            'NONCLUSTERED',
+            'NOT',
+            'NO_WRITE_TO_BINLOG',
+            'NULL',
+            'NULLIF',
+            'NUMERIC',
+            'OF',
+            'OFF',
+            'OFFSETS',
+            'ON',
+            'OPEN',
+            'OPENDATASOURCE',
+            'OPENQUERY',
+            'OPENROWSET',
+            'OPENXML',
+            'OPTIMIZE',
+            'OPTION',
+            'OPTIONALLY',
+            'OR',
+            'ORDER',
+            'OUT',
+            'OUTER',
+            'OUTFILE',
+            'OVER',
+            'PERCENT',
+            'PLAN',
+            'PRECISION',
+            'PRIMARY',
+            'PRINT',
+            'PROC',
+            'PROCEDURE',
+            'PUBLIC',
+            'PURGE',
+            'RAISERROR',
+            'RANGE',
+            'READ',
+            'READS',
+            'READTEXT',
+            'READ_WRITE',
+            'REAL',
+            'RECONFIGURE',
+            'REFERENCES',
+            'REGEXP',
+            'RELEASE',
+            'RENAME',
+            'REPEAT',
+            'REPLACE',
+            'REPLICATION',
+            'REQUIRE',
+            'RESIGNAL',
+            'RESTORE',
+            'RESTRICT',
+            'RETURN',
+            'REVOKE',
+            'RIGHT',
+            'RLIKE',
+            'ROLLBACK',
+            'ROWCOUNT',
+            'ROWGUIDCOL',
+            'RULE',
+            'SAVE',
+            'SCHEMA',
+            'SCHEMAS',
+            'SECOND_MICROSECOND',
+            'SELECT',
+            'SENSITIVE',
+            'SEPARATOR',
+            'SESSION_USER',
+            'SET',
+            'SETUSER',
+            'SHOW',
+            'SHUTDOWN',
+            'SIGNAL',
+            'SLOW',
+            'SMALLINT',
+            'SOME',
+            'SPATIAL',
+            'SPECIFIC',
+            'SQL',
+            'SQLEXCEPTION',
+            'SQLSTATE',
+            'SQLWARNING',
+            'SQL_BIG_RESULT',
+            'SQL_CALC_FOUND_ROWS',
+            'SQL_SMALL_RESULT',
+            'SSL',
+            'STARTING',
+            'STATISTICS',
+            'STRAIGHT_JOIN',
+            'SYSTEM_USER',
+            'TABLE',
+            'TERMINATED',
+            'TEXT',
+            'TEXTSIZE',
+            'THEN',
+            'TIME',
+            'TIMESTAMP',
+            'TINYBLOB',
+            'TINYINT',
+            'TINYTEXT',
+            'TO',
+            'TOP',
+            'TRAILING',
+            'TRAN',
+            'TRANSACTION',
+            'TRIGGER',
+            'TRUE',
+            'TRUNCATE',
+            'TSEQUAL',
+            'UNDO',
+            'UNION',
+            'UNIQUE',
+            'UNLOCK',
+            'UNSIGNED',
+            'UPDATE',
+            'UPDATETEXT',
+            'USAGE',
+            'USE',
+            'USER',
+            'USING',
+            'UTC_DATE',
+            'UTC_TIME',
+            'UTC_TIMESTAMP',
+            'VALUES',
+            'VARBINARY',
+            'VARCHAR',
+            'VARCHARACTER',
+            'VARYING',
+            'VIEW',
+            'WAITFOR',
+            'WHEN',
+            'WHERE',
+            'WHILE',
+            'WITH',
+            'WRITE',
+            'WRITETEXT',
+            'XOR',
+            'YEAR_MONTH',
+            'ZEROFILL',
+        ];
         return $reservedWordsSql;
     }
 
@@ -838,7 +838,7 @@ class PMSEEngineUtils
     public static function transformEntity($type, $entity)
     {
         $entityDictionary = self::getEntityDictionary($type);
-        $newEntity = array();
+        $newEntity = [];
         if (strtoupper($type) == 'ROUTES') {
             if (isset($entity['GAT_UID']) && $entity['GAT_UID'] != '') {
                 unset($entity['ROU_NEXT_TASK']);
@@ -878,21 +878,21 @@ class PMSEEngineUtils
      */
     public static function getEntityDictionary($type)
     {
-        $entityDictionary = array();
+        $entityDictionary = [];
         $type = strtoupper($type);
         switch ($type) {
             case 'PROCESS':
-                $entityDictionary = array(
-                    "PRO_UID" => "prj_uid",
-                    "PRO_TITLE" => "prj_name",
-                    "PRO_UPDATE_DATE" => "prj_update_date",
-                    "PRO_CREATE_DATE" => "prj_create_date",
-                    "PRO_CREATE_USER" => "prj_author",
-                    "PRO_DESCRIPTION" => "prj_description",
-                );
+                $entityDictionary = [
+                    'PRO_UID' => 'prj_uid',
+                    'PRO_TITLE' => 'prj_name',
+                    'PRO_UPDATE_DATE' => 'prj_update_date',
+                    'PRO_CREATE_DATE' => 'prj_create_date',
+                    'PRO_CREATE_USER' => 'prj_author',
+                    'PRO_DESCRIPTION' => 'prj_description',
+                ];
                 break;
             case 'TASKS':
-                $entityDictionary = array(
+                $entityDictionary = [
                     'PRO_UID' => 'prj_uid',
                     'TAS_UID' => 'act_uid',
                     'TAS_TITLE' => 'act_name',
@@ -902,31 +902,31 @@ class PMSEEngineUtils
                     'TAS_POSX' => 'bou_x',
                     'TAS_POSY' => 'bou_y',
                     'TAS_WIDTH' => 'bou_width',
-                    'TAS_HEIGHT' => 'bou_height'
-                );
+                    'TAS_HEIGHT' => 'bou_height',
+                ];
                 break;
             case 'GATEWAYS':
-                $entityDictionary = array(
-                    "GAT_UID" => "gat_uid",
-                    "PRO_UID" => "prj_uid",
-                    "GAT_X" => "bou_x",
-                    "GAT_Y" => "bou_y",
-                    "GAT_TYPE" => "gat_type"
-                );
+                $entityDictionary = [
+                    'GAT_UID' => 'gat_uid',
+                    'PRO_UID' => 'prj_uid',
+                    'GAT_X' => 'bou_x',
+                    'GAT_Y' => 'bou_y',
+                    'GAT_TYPE' => 'gat_type',
+                ];
                 break;
             case 'ROUTES':
-                $entityDictionary = array(
-                    "ROU_UID" => "flo_uid",
-                    "PRO_UID" => "prj_uid",
-                    "TAS_UID" => "flo_element_origin",
-                    "ROU_NEXT_TASK" => "flo_element_dest",
-                    "ROU_TO_PORT" => "flo_element_dest_port",
-                    "ROU_FROM_PORT" => "flo_element_origin_port",
-                    "ROU_EVN_UID" => "flo_element_dest",
-                    "GAT_UID" => "flo_element_dest",
-                    "flo_element_dest_type" => "flo_element_dest_type",
-                    "flo_element_origin_type" => "flo_element_origin_type"
-                );
+                $entityDictionary = [
+                    'ROU_UID' => 'flo_uid',
+                    'PRO_UID' => 'prj_uid',
+                    'TAS_UID' => 'flo_element_origin',
+                    'ROU_NEXT_TASK' => 'flo_element_dest',
+                    'ROU_TO_PORT' => 'flo_element_dest_port',
+                    'ROU_FROM_PORT' => 'flo_element_origin_port',
+                    'ROU_EVN_UID' => 'flo_element_dest',
+                    'GAT_UID' => 'flo_element_dest',
+                    'flo_element_dest_type' => 'flo_element_dest_type',
+                    'flo_element_origin_type' => 'flo_element_origin_type',
+                ];
                 break;
             default:
                 break;
@@ -936,12 +936,12 @@ class PMSEEngineUtils
 
     /**
      * Method verifying invisible fields should always be hidden
-     * @deprecated deprecated since version 7.6.1
      * @param array $def
      * @param string $view
      * @return boolean
+     * @deprecated deprecated since version 7.6.1
      */
-    public static function isValidDefinitionField($def, $view = "")
+    public static function isValidDefinitionField($def, $view = '')
     {
         //Studio invisible fields should always be hidden
         if (isset($def['studio'])) {
@@ -961,8 +961,10 @@ class PMSEEngineUtils
         return
             (
                 (
-                    (empty($def ['source']) || $def ['source'] == 'db' || $def ['source'] == 'custom_fields') && isset($def ['type']) && $def ['type'] != 'id' && $def ['type'] != 'parent_type' && (empty($def ['dbType']) || $def ['dbType'] != 'id') && (isset($def ['name']) && strcmp($def ['name'],
-                            'deleted') != 0)
+                    (empty($def ['source']) || $def ['source'] == 'db' || $def ['source'] == 'custom_fields') && isset($def ['type']) && $def ['type'] != 'id' && $def ['type'] != 'parent_type' && (empty($def ['dbType']) || $def ['dbType'] != 'id') && (isset($def ['name']) && strcmp(
+                        $def ['name'],
+                        'deleted'
+                    ) != 0)
                 ) ||
                 // exclude fields named *_name regardless of their type...just convention
                 (isset($def ['name']) && substr($def ['name'], -5) === '_name'));
@@ -975,7 +977,7 @@ class PMSEEngineUtils
      */
     public static function getEntityUid($key)
     {
-        $data = array();
+        $data = [];
         switch ($key) {
             case 'bpmnActivity':
                 $data = 'act_uid';
@@ -1055,8 +1057,8 @@ class PMSEEngineUtils
             $widget_id = $_REQUEST[$module . '_email_widget_id'];
         }
 
-        while (isset($_REQUEST[$module . $widget_id . "emailAddress" . $widgetCount])) {
-            if (empty($_REQUEST[$module . $widget_id . "emailAddress" . $widgetCount])) {
+        while (isset($_REQUEST[$module . $widget_id . 'emailAddress' . $widgetCount])) {
+            if (empty($_REQUEST[$module . $widget_id . 'emailAddress' . $widgetCount])) {
                 $widgetCount++;
                 continue;
             }
@@ -1103,7 +1105,7 @@ class PMSEEngineUtils
      * @param object $bean
      * @param string $newEmailAddress
      */
-    static public function updateEmails($bean, $newEmailAddress)
+    public static function updateEmails($bean, $newEmailAddress)
     {
         //Note.- in the future will be an 'array' of change fields emails
         $moduleItem = '0';
@@ -1156,7 +1158,7 @@ class PMSEEngineUtils
 
     public static function addDateInterval($dateTime, $interval, $unit)
     {
-        switch($unit) {
+        switch ($unit) {
             case 'day':
                 $dateTime->add(new DateInterval('P' . $interval . 'D'));
                 break;
@@ -1170,26 +1172,28 @@ class PMSEEngineUtils
         return $dateTime;
     }
 
-    public static function getExpectedTimeLabel ($expectedTime) {
+    public static function getExpectedTimeLabel($expectedTime)
+    {
         $value = '';
         $number = 0;
         if (!empty($expectedTime) && !empty($expectedTime->time)) {
-            $number = (int) $expectedTime->time;
-            switch($expectedTime->unit) {
+            $number = (int)$expectedTime->time;
+            switch ($expectedTime->unit) {
                 case 'day':
-                    $value = ($number === 1) ? translate('LBL_DURATION_DAY') : translate('LBL_DURATION_DAYS') ;
+                    $value = ($number === 1) ? translate('LBL_DURATION_DAY') : translate('LBL_DURATION_DAYS');
                     break;
                 case 'hour':
-                    $value = ($number === 1) ? translate('LBL_DURATION_HOUR') : translate('LBL_DURATION_HOURS') ;
+                    $value = ($number === 1) ? translate('LBL_DURATION_HOUR') : translate('LBL_DURATION_HOURS');
                     break;
                 case 'minute':
-                    $value = ($number === 1) ? translate('LBL_DURATION_MINUTE') : translate('LBL_DURATION_MINUTES') ;
+                    $value = ($number === 1) ? translate('LBL_DURATION_MINUTE') : translate('LBL_DURATION_MINUTES');
                     break;
             }
             $value = $number . ' ' . $value;
         }
         return $value;
     }
+
     /**
      * @param $id
      * @return bool
@@ -1212,7 +1216,7 @@ class PMSEEngineUtils
         $replaced = false;
         if ($field_uid != '') {
             $beanAux = BeanFactory::newBean($bean->object_name);
-            $rows = $beanAux->retrieve_by_string_fields(array($field_uid => $bean->{$field_uid}));
+            $rows = $beanAux->retrieve_by_string_fields([$field_uid => $bean->{$field_uid}]);
             if ($rows) {
                 $bean->{$field_uid} = self::generateUniqueID();
                 $replaced = true;
@@ -1228,9 +1232,9 @@ class PMSEEngineUtils
      * @param $showValue
      * @return $projectData
      */
-    public static function unsetCommonFields($projectData, $except = array(), $showValue = false)
+    public static function unsetCommonFields($projectData, $except = [], $showValue = false)
     {
-        $special_fields = array(
+        $special_fields = [
             'id',
             'name',
             'date_entered',
@@ -1281,11 +1285,11 @@ class PMSEEngineUtils
             'tag_link',
             'tn_name',
             'tn_name_2',
-        );
+        ];
         //UNSET common fields
         foreach ($projectData as $key => $value) {
             $search = $showValue ? $value : $key;
-            if (in_array($search, $special_fields) && !in_array($search, $except)) {
+            if (safeInArray($search, $special_fields) && !safeInArray($search, $except)) {
                 unset($projectData[$key]);
             }
         }
@@ -1372,7 +1376,7 @@ class PMSEEngineUtils
         if (!empty($prop['enabled'])) {
             // If there is no type property, or there is one and it is defined
             // Then look for the field
-            if (!isset($prop['types'][$type]) || in_array($field, $prop['types'][$type])) {
+            if (!isset($prop['types'][$type]) || safeInArray($field, $prop['types'][$type])) {
                 return true;
             }
         }
@@ -1420,15 +1424,15 @@ class PMSEEngineUtils
             return false;
         }
 
-        if (in_array($type, array('AC', 'CF', 'BR', 'RR')) && !empty($def['calculated'])) {
+        if (in_array($type, ['AC', 'CF', 'BR', 'RR']) && !empty($def['calculated'])) {
             return false;
         }
 
-        if (in_array($type, array('AC', 'CF', 'BR', 'RR')) && isset($def['formula'])) {
+        if (in_array($type, ['AC', 'CF', 'BR', 'RR']) && isset($def['formula'])) {
             return false;
         }
 
-        if (in_array($type, array('AC', 'CF', 'BR', 'RR')) && !empty($def['readonly'])) {
+        if (in_array($type, ['AC', 'CF', 'BR', 'RR']) && !empty($def['readonly'])) {
             return false;
         }
 
@@ -1480,7 +1484,7 @@ class PMSEEngineUtils
                 }
             } elseif (is_string($def['processes'])) {
                 // If the marker is a string or an array, it is mapped to a method
-                $def['processes'] = array($def['processes']);
+                $def['processes'] = [$def['processes']];
 
                 // For a field validation list, run through until you hit a false,
                 // otherwise let the rest of the validation processes run
@@ -1520,7 +1524,7 @@ class PMSEEngineUtils
      * @param string $type The PMSE module type to check this field for
      * @return boolean
      */
-    public static function specialFields($def, $type= 'All')
+    public static function specialFields($def, $type = 'All')
     {
         // Without a name there is nothing to do
         if (!isset($def['name'])) {
@@ -1533,7 +1537,7 @@ class PMSEEngineUtils
         }
 
         // Get the special fields list for this type if it exists
-        $sf = empty(self::$specialFields[$type]) ? array() : self::$specialFields[$type];
+        $sf = empty(self::$specialFields[$type]) ? [] : self::$specialFields[$type];
 
         // Now merge the type special fields with special fields for all types
         if ($type !== 'All') {
@@ -1596,7 +1600,7 @@ class PMSEEngineUtils
 
         $date = $timedate->fromDbType($theDate, $type);
 
-        if ( $date == null && $bean instanceof SugarBean) {
+        if ($date == null && $bean instanceof SugarBean) {
             // Could not parse date... try User format
             $date = $timedate->fromUserType($bean->$fieldName, $type);
             if ($date == null) {
@@ -1604,10 +1608,10 @@ class PMSEEngineUtils
             }
         }
 
-        if ( $type == 'date' ) {
+        if ($type == 'date') {
             // It's just a date, not a datetime
             $data = $timedate->asIsoDate($date);
-        } else if ( $type== 'time' ) {
+        } elseif ($type == 'time') {
             $data = $timedate->asIsoTime($date);
         } else {
             $data = $timedate->asIso($date);
@@ -1616,7 +1620,8 @@ class PMSEEngineUtils
         return $data;
     }
 
-    public static function getStudioModules($type = '') {
+    public static function getStudioModules($type = '')
+    {
         $pmseModulesList = null;
         include 'modules/pmse_Inbox/engine/PMSEModules.php';
         $studioBrowser = new StudioBrowser();
@@ -1648,7 +1653,7 @@ class PMSEEngineUtils
         global $current_user, $beanList, $moduleList;
 
         $access = $current_user->getDeveloperModules();
-        $allModules = array();
+        $allModules = [];
         foreach ($moduleList as $module) {
             if (isset($beanList[$module]) && in_array($module, $access)) {
                 $allModules[$module] = $beanList[$module];
@@ -1684,13 +1689,20 @@ class PMSEEngineUtils
     public static function getSupportedModules($type = '')
     {
         if (!isset(self::$supportedModules[$type])) {
-            self::$supportedModules[$type] = array();
+            self::$supportedModules[$type] = [];
             $moduleList = self::getModules($type);
             foreach ($moduleList as $key => $module) {
                 self::$supportedModules[$type][] = $module->module;
             }
         }
         return self::$supportedModules[$type];
+    }
+
+    public static function isPMSEModule($moduleName)
+    {
+        $pmseModulesList = [];
+        include 'modules/pmse_Inbox/engine/PMSEModules.php';
+        return safeInArray($moduleName, $pmseModulesList);
     }
 
     /**
@@ -1751,7 +1763,7 @@ class PMSEEngineUtils
             // if it is actually an array before trying to use it as one
             if (is_array($fieldData)) {
                 // Set the variable that will hold the data
-                $newData = array();
+                $newData = [];
 
                 foreach ($fieldData as $fieldDef) {
                     $field = $fieldDef['field'];
@@ -1809,7 +1821,8 @@ class PMSEEngineUtils
         $subject = new SugarBPM(
             BeanFactory::getBean(
                 'pmse_Project',
-                empty($attrs['project_id']) ? null : $attrs['project_id']
+                empty($attrs['project_id']) ? null : $attrs['project_id'],
+                ['disable_row_level_security' => true]
             )
         );
 
@@ -1843,7 +1856,7 @@ class PMSEEngineUtils
             isset($sugar_config['default_currency_iso4217'])
         ) {
             $defaultCurrencyLabel = $sugar_config['default_currency_symbol'] .
-                " (" . $sugar_config['default_currency_iso4217'] . ")";
+                ' (' . $sugar_config['default_currency_iso4217'] . ')';
         }
         if (!empty($currencyObj->expLabel)) {
             // Labels in pre 7.7 versions were of the type
@@ -1855,7 +1868,7 @@ class PMSEEngineUtils
         }
 
         if (!empty($currencyObj->expValue) && (is_string($currencyObj->expValue))) {
-            $currencyObj->expValue = (float) $currencyObj->expValue;
+            $currencyObj->expValue = (float)$currencyObj->expValue;
         }
     }
 
@@ -1886,7 +1899,7 @@ class PMSEEngineUtils
     public static function isTargetModuleNotProcessModule($flowData)
     {
         return isset($flowData['rel_process_module'], $flowData['rel_element_relationship'], $flowData['rel_element_module'])
-        && $flowData['rel_element_module'] !== $flowData['rel_process_module'];
+            && $flowData['rel_element_module'] !== $flowData['rel_process_module'];
     }
 
     /**
@@ -1956,7 +1969,7 @@ class PMSEEngineUtils
 
         // Generate and set the data here into the cache
         if (empty(static::$parentBeanCache[$cacheKey]) || !$isCacheEnabled) {
-            $parentBeans = $bean->$linkName->getBeans(array('limit' => 1));
+            $parentBeans = $bean->$linkName->getBeans(['limit' => 1]);
             if (empty($parentBeans)) {
                 // Parent Bean not found
                 PMSELogger::getInstance()->warning('No parent beans found for ' . $mName);
@@ -2003,7 +2016,7 @@ class PMSEEngineUtils
         // So we need to Explicitly set _saved of TeamSetLink class to false so that the new teams
         // get saved
         if (!empty($bean->teams) && !empty($field->value) && is_array($field->value)) {
-            $teamParams = array();
+            $teamParams = [];
             $bean->teams->setSaved(false);
 
             // Set primary team if a primary team has been set
@@ -2013,7 +2026,7 @@ class PMSEEngineUtils
 
             // If Team based ACLs are enabled on any team then include them in the parameter list
             if (!empty($field->selected_teams) && $tbaModuleEnabled) {
-                $teamParams = array('selected_teams' => $field->selected_teams);
+                $teamParams = ['selected_teams' => $field->selected_teams];
             }
 
             // Determines if teams have to be added to existing teams or
@@ -2095,16 +2108,16 @@ class PMSEEngineUtils
     {
         $whitelist = SugarCache::instance()->{static::MODULES_WHITELIST_CACHE_KEY};
         if (!is_array($whitelist)) {
-            $fields = array('evn_module', 'rel_element_module');
-            $queries = array();
+            $fields = ['evn_module', 'rel_element_module'];
+            $queries = [];
             foreach ($fields as $field) {
                 $queries[] = "(SELECT $field AS module "
-                    . "FROM pmse_bpm_related_dependency "
+                    . 'FROM pmse_bpm_related_dependency '
                     . "WHERE deleted = 0 AND pro_status != 'INACTIVE')\n";
             }
             $query = implode("UNION\n", $queries);
 
-            $whitelist = array();
+            $whitelist = [];
             $result = $bean->db->query($query);
             while ($row = $bean->db->fetchByAssoc($result)) {
                 if ($row['module']) {
@@ -2115,7 +2128,7 @@ class PMSEEngineUtils
             SugarCache::instance()->{static::MODULES_WHITELIST_CACHE_KEY} = $whitelist;
         }
 
-        return in_array($bean->getModuleName(), $whitelist);
+        return safeInArray($bean->getModuleName(), $whitelist);
     }
 
     /**
@@ -2147,15 +2160,15 @@ class PMSEEngineUtils
         if (!isset(SugarCache::instance()->{static::getModuleLockedFieldsCacheKey($moduleName)})) {
             $db = DBManagerFactory::getInstance();
 
-            $query = "SELECT id FROM locked_field_bean_rel ";
-            $query .= "WHERE bean_module= ? AND deleted = 0";
+            $query = 'SELECT id FROM locked_field_bean_rel ';
+            $query .= 'WHERE bean_module= ? AND deleted = 0';
             $query = $db->limitQuerySql($query, 0, 1);
 
             $result = $db->getConnection()
-                       ->executeQuery($query, array($moduleName))
-                       ->fetchOne();
+                ->executeQuery($query, [$moduleName])
+                ->fetchOne();
 
-            SugarCache::instance()->{static::getModuleLockedFieldsCacheKey($moduleName)} = (bool) $result;
+            SugarCache::instance()->{static::getModuleLockedFieldsCacheKey($moduleName)} = (bool)$result;
         }
 
         return SugarCache::instance()->{static::getModuleLockedFieldsCacheKey($moduleName)};

@@ -9,30 +9,31 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('modules/ModuleBuilder/MB/ModuleBuilder.php');
- 
+require_once 'modules/ModuleBuilder/MB/ModuleBuilder.php';
+
 class Viewdeletemodule extends SugarView
 {
-/**
-	 * @see SugarView::_getModuleTitleParams()
-	 */
-	protected function _getModuleTitleParams($browserTitle = false)
-	{
-	    global $mod_strings;
-	    
-    	return array(
-    	   translate('LBL_MODULE_NAME','Administration'),
-    	   ModuleBuilderController::getModuleTitle(),
-    	   );
+    /**
+     * @see SugarView::_getModuleTitleParams()
+     */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _getModuleTitleParams($browserTitle = false)
+    {
+        global $mod_strings;
+
+        return [
+            translate('LBL_MODULE_NAME', 'Administration'),
+            ModuleBuilderController::getModuleTitle(),
+        ];
     }
 
-	function display()
-	{
+    public function display()
+    {
 
-		$module = $this->request->getValidInputRequest('module', 'Assert\ComponentName');
-		$package = $this->request->getValidInputRequest('package', 'Assert\ComponentName');
-		$ajax = new AjaxCompose();
-		$ajax->addSection('center', 'Module Deleted', $module . ' was deleted from ' . $package);
-		echo $ajax->getJavascript(); 
- 	}
+        $module = $this->request->getValidInputRequest('module', 'Assert\ComponentName');
+        $package = $this->request->getValidInputRequest('package', 'Assert\ComponentName');
+        $ajax = new AjaxCompose();
+        $ajax->addSection('center', 'Module Deleted', $module . ' was deleted from ' . $package);
+        echo $ajax->getJavascript();
+    }
 }

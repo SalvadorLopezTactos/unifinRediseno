@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'prebieha',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na správy',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Informačný panel so záznamom správ',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová os správ',
 ];

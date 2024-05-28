@@ -10,25 +10,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
 
-  'LBL_NAME' =>'Nom',
-  'LBL_NUMBER' => 'Número:',
-  'LBL_STATUS' => 'Estat:',
-  'LBL_PRIORITY' => 'Prioritat:',
-  'LBL_DESCRIPTION' => 'Descripció:',
-  'LBL_RESOLUTION' => 'Resolució',
-  'LBL_LAST_MODIFIED' => 'Última Modificació',
-  'LBL_ASSIGNED_TO_ID'=>'Assignat a:',
-  'LBL_ASSIGNED_TO_NAME' => 'Usuari:',
-  'LBL_WORK_LOG' => 'Registre d&#39;Activitat:',
+    'LBL_NAME' => 'Nom',
+    'LBL_NUMBER' => 'Número:',
+    'LBL_STATUS' => 'Estat:',
+    'LBL_PRIORITY' => 'Prioritat:',
+    'LBL_DESCRIPTION' => 'Descripció:',
+    'LBL_RESOLUTION' => 'Resolució',
+    'LBL_LAST_MODIFIED' => 'Última Modificació',
+    'LBL_ASSIGNED_TO_ID' => 'Assignat a:',
+    'LBL_ASSIGNED_TO_NAME' => 'Usuari:',
+    'LBL_WORK_LOG' => 'Registre d&#39;Activitat:',
     'LBL_FOLLOW_UP' => 'Seguiment',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
     'LBL_RESOLVED_DATETIME' => 'Data de resolució',
@@ -36,19 +35,19 @@ $mod_strings = array (
     'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Hores laborals per a la resolució',
     'LBL_PENDING_PROCESSING' => 'Processament pendent',
     'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Data de seguiment',
-  'LBL_CREATED_BY' => 'Creat Per:',
-  'LBL_DATE_CREATED' => 'Data de creació:',
-  'LBL_DATE_ENTERED' => 'Data de creació:',
-  'LBL_DATE_MODIFIED'=>'Data de modificació:',
-  'LBL_MODIFIED_BY' => 'Modificat per darrera vegada per:',
-  'LBL_ASSIGNED_USER' => 'Usuari assignat:',
-  'LBL_ASSIGNED_USER_NAME' => 'Assignat a',
-  'LBL_TEAM_NAME' =>'Nom de l&#39;equip:',
-  'LBL_TYPE'=>'Tipus:',
-  'LBL_SUBJECT' => 'Assumpte:',
+    'LBL_CREATED_BY' => 'Creat Per:',
+    'LBL_DATE_CREATED' => 'Data de creació:',
+    'LBL_DATE_ENTERED' => 'Data de creació:',
+    'LBL_DATE_MODIFIED' => 'Data de modificació:',
+    'LBL_MODIFIED_BY' => 'Modificat per darrera vegada per:',
+    'LBL_ASSIGNED_USER' => 'Usuari assignat:',
+    'LBL_ASSIGNED_USER_NAME' => 'Assignat a',
+    'LBL_TEAM_NAME' => 'Nom de l&#39;equip:',
+    'LBL_TYPE' => 'Tipus:',
+    'LBL_SUBJECT' => 'Assumpte:',
 
     'LBL_EDIT_BUTTON' => 'Edita',
     'LBL_REMOVE' => 'Suprimir',
 
 
-  );
+];

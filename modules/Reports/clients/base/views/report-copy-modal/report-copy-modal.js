@@ -68,7 +68,7 @@
             this._currentRecordType = this.model.get('report_type');
         }
 
-        if (forceRender) {
+        if (forceRender === true) {
             this.render();
         }
     },

@@ -34,7 +34,7 @@ $viewdefs['DocuSignEnvelopes']['base']['view']['subpanel-list'] = [
                     'enabled' => true,
                     'name' => 'assigned_user_name',
                 ],
-              ],
+            ],
         ],
     ],
 ];

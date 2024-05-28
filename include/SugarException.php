@@ -21,7 +21,7 @@ class SugarException extends Exception
      * Extra data attached to the exception
      * @var array
      */
-    public $extraData = array();
+    public $extraData = [];
 
     /**
      * @param string $messageLabel optional Label for error message.  Used to load the appropriate translated message.
@@ -105,5 +105,4 @@ class SugarException extends Exception
         $this->extraData[$key] = $data;
         return $this;
     }
-
 }

@@ -21,7 +21,6 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Bean\SelectToOption as SelectToOption;
  */
 class Email
 {
-
     /**
      * return the Email Template
      *
@@ -151,30 +150,24 @@ class Email
             }
 
             $email->sendEmail($config);
-        } catch (MailerException $e) {
+        } catch (\MailerException $e) {
             switch ($e->getCode()) {
                 case MailerException::FailedToSend:
-                    // no break
                 case MailerException::FailedToConnectToRemoteServer:
-                    // no break
                 case MailerException::InvalidConfiguration:
                     $GLOBALS['log']->fatal('smtp_server_error : ' . $e->getUserFriendlyMessage());
                     // no break
                 case MailerException::InvalidHeader:
-                    // no break
                 case MailerException::InvalidEmailAddress:
-                    // no break
                 case MailerException::InvalidAttachment:
-                    // no break
                 case MailerException::FailedToTransferHeaders:
-                    // no break
                 case MailerException::ExecutableAttachment:
                     $GLOBALS['log']->fatal('smtp_payload_error : ' . $e->getUserFriendlyMessage());
                     // no break
                 default:
                     $GLOBALS['log']->fatal($e->getUserFriendlyMessage());
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $GLOBALS['log']->fatal('Failed to send the email: ' . $e->getMessage());
         }
     }
@@ -229,11 +222,11 @@ class Email
 
         if (version_compare($GLOBALS['sugar_config']['sugar_version'], '11.0', '>=')) {
             $query->where()
-                    ->equals('email_type', 'EmailTemplates');
+                ->equals('email_type', 'EmailTemplates');
         } else {
             $query->where()->queryOr()
-                    ->equals('email_type', 'Emails')
-                    ->equals('email_type', 'EmailTemplates');
+                ->equals('email_type', 'Emails')
+                ->equals('email_type', 'EmailTemplates');
         }
 
         $results = $query->execute();

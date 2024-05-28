@@ -11,21 +11,14 @@
  */
 
 
-class SugarPortalFunctions{
-
-	function getNodes()
-	{
-	    global $mod_strings;
-		$nodes = array();
-        $nodes[] = array( 'name'=>$mod_strings['LBL_PORTAL_CONFIGURE'], 'action'=>'module=ModuleBuilder&action=portalconfig','imageTitle' => 'SPSync', );
-        $nodes[] = array( 'name'=>$mod_strings['LBL_PORTAL_THEME'], 'action'=>'javascript: window.parent.App.router.navigate("Administration/config/portaltheme",{trigger: true});','imageTitle' => 'SPUploadCSS', );
-		return $nodes;
-	}
-	
-	
-	
-	
-	
-	
+class SugarPortalFunctions
+{
+    public function getNodes()
+    {
+        global $mod_strings;
+        $nodes = [];
+        $nodes[] = ['name' => $mod_strings['LBL_PORTAL_CONFIGURE'], 'action' => 'module=ModuleBuilder&action=portalconfig', 'imageTitle' => 'SPSync',];
+        $nodes[] = ['name' => $mod_strings['LBL_PORTAL_THEME'], 'action' => 'javascript: window.parent.App.router.navigate("Administration/config/portaltheme",{trigger: true});', 'imageTitle' => 'SPUploadCSS',];
+        return $nodes;
+    }
 }
-?>

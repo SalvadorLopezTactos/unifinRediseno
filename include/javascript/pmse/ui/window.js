@@ -306,7 +306,7 @@ PMSE.Window.prototype.createHTML = function() {
 
     if (this.closeButton) {
         closeBtn = this.createHTMLElement('span');
-        closeBtn.className = 'adam-window-close';
+        closeBtn.className = 'adam-window-close sicon sicon-close';
         windowHeader.appendChild(closeBtn);
         this.html.insertBefore(windowHeader, this.body);
         this.closeButtonObject = closeBtn;

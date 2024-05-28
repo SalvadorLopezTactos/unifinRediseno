@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('autocomplete-filters', function (Y, NAME) {
 
 /**
@@ -243,4 +236,4 @@ Filters = Y.mix(Y.namespace('AutoCompleteFilters'), {
 });
 
 
-}, '3.15.0', {"requires": ["array-extras", "text-wordbreak"]});
+}, '3.18.1', {"requires": ["array-extras", "text-wordbreak"]});

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,6 +10,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class Comment extends Basic
 {
     public $table_name = 'comments';
@@ -42,7 +44,7 @@ class Comment extends Basic
 
         $this->retrieve();
         $sfh = new SugarFieldHandler();
-        $data = array();
+        $data = [];
         $service = new RestService();
         $service->user = $current_user;
         foreach ($this->field_defs as $fieldName => $properties) {
@@ -50,7 +52,7 @@ class Comment extends Basic
 
             $field = $sfh->getSugarField($type);
             if ($field != null && isset($this->$fieldName)) {
-                $field->apiFormatField($data, $this, array(), $fieldName, $properties, array(), $service);
+                $field->apiFormatField($data, $this, [], $fieldName, $properties, [], $service);
             }
         }
         return json_encode($data);
@@ -58,7 +60,7 @@ class Comment extends Basic
 
     /**
      * Saves the current comment.
-     * @param  boolean $check_notify
+     * @param boolean $check_notify
      * @return string|bool           GUID of saved comment or false.
      */
     public function save($check_notify = false)
@@ -68,7 +70,7 @@ class Comment extends Basic
             $this->data = json_decode($this->data, true);
         }
 
-        if(!empty($this->data['value'])) {
+        if (!empty($this->data['value'])) {
             $this->data['value'] = SugarCleaner::cleanHtml($this->data['value']);
         }
 
@@ -109,9 +111,9 @@ class Comment extends Basic
      * SugarBean's signature states that encode is true by default. However, as
      * we store JSON data, we want to modify that behaviour to be false so that
      * the JSON data does not have characters replaced by HTML entities.
-     * @param  string  $id      GUID of the Comment record
-     * @param  boolean $encode  Encode quotes and other special characters
-     * @param  boolean $deleted Flag to allow retrieval of deleted records
+     * @param string $id GUID of the Comment record
+     * @param boolean $encode Encode quotes and other special characters
+     * @param boolean $deleted Flag to allow retrieval of deleted records
      * @return Comment
      */
     public function retrieve($id = '-1', $encode = false, $deleted = true)
@@ -132,6 +134,6 @@ class Comment extends Basic
 
     public function get_notification_recipients()
     {
-        return array();
+        return [];
     }
 }

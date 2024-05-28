@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'ลายเซ็นนี้ต้องมีชื่อ',
     'LBL_DEFAULT_SIGNATURE' => 'ค่าเริ่มต้น',
     'LBL_MODULE_NAME' => 'ลายเซ็นอีเมล',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'ใช้ลายเซ็นหรือไม่',
     'LBL_SIGNATURE_PREPEND' => 'ลายเซ็นอยู่บนการตอบกลับหรือไม่',
     'LBL_SIGNATURES' => 'ลายเซ็น',
-);
+];

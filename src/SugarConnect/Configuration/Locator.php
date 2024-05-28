@@ -29,7 +29,7 @@ final class Locator
      *
      * @return ConfigurationInterface
      */
-    public static function get() : ConfigurationInterface
+    public static function get(): ConfigurationInterface
     {
         if (empty(static::$config)) {
             return new Configuration();
@@ -48,7 +48,7 @@ final class Locator
      *
      * @return void
      */
-    public static function set(ConfigurationInterface $config) : void
+    public static function set(ConfigurationInterface $config): void
     {
         static::$config = $config;
     }
@@ -58,7 +58,7 @@ final class Locator
      *
      * @return void
      */
-    public static function reset() : void
+    public static function reset(): void
     {
         static::$config = null;
     }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,30 +10,34 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-class TemplateIFrame extends TemplateURL{
+
+class TemplateIFrame extends TemplateURL
+{
     public $height;
-	var $type='iframe';
-	
-function get_html_edit(){
+    public $type = 'iframe';
+
+    public function get_html_edit()
+    {
         $this->prepare();
-        return "<input type='text' name='". $this->name. "' id='".$this->name."' size='".$this->size."' title='{" . strtoupper($this->name) ."_HELP}' value='{". strtoupper($this->name). "}'>";
+        return "<input type='text' name='" . $this->name . "' id='" . $this->name . "' size='" . $this->size . "' title='{" . strtoupper($this->name) . "_HELP}' value='{" . strtoupper($this->name) . "}'>";
     }
-	
-	function get_html_label() {
-		return "LALALALA";
-	}
-	
-	function get_xtpl_detail(){
+
+    public function get_html_label()
+    {
+        return 'LALALALA';
+    }
+
+    public function get_xtpl_detail()
+    {
         $value = parent::get_xtpl_detail();
-        $value .= "BLAH BLAH";
+        $value .= 'BLAH BLAH';
         return $value;
     }
-    
-	function get_field_def(){
-		$def = parent::get_field_def();
-		$def['height'] = !empty($this->height) ? $this->height : $this->ext4;
-		return $def;	
-	} 
 
+    public function get_field_def()
+    {
+        $def = parent::get_field_def();
+        $def['height'] = !empty($this->height) ? $this->height : $this->ext4;
+        return $def;
+    }
 }
-?>

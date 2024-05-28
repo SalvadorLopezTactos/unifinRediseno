@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => '审计日志',
     'LBL_FIELD_NAME' => '字段',
     'LBL_OLD_NAME' => '旧值',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => '更新为',
     'LBL_BLANK' => '-空-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '审核时间轴',
+    'LBL_CREATED' => '已创建',
+];

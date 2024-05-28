@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'Administration',
-    'Product' => 'Продукт',
-    'User' => 'Користувач',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => 'Новий',
-    'Assigned' => 'Призначений',
-    'Closed' => 'Закритий',
-    'Pending Input' => 'Очікує рішення',
-    'Rejected' => 'Відхилений',
-    'Duplicate' => 'Дублікат',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => 'Високий',
-    'P2' => 'Середній',
-    'P3' => 'Низький',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => 'Прийнятий',
-    'Duplicate' => 'Дублікат',
-    'Closed' => 'Закритий',
-    'Out of Date' => 'Застарілий',
-    'Invalid' => 'Недійсний',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => 'Адміністрування',
+        'Product' => 'Продукт',
+        'User' => 'Користувач',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => 'Новий',
+        'Assigned' => 'Призначений',
+        'Closed' => 'Закритий',
+        'Pending Input' => 'Очікування введення',
+        'Rejected' => 'Відхилений',
+        'Duplicate' => 'Дублювати',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => 'Високий',
+        'P2' => 'Середній',
+        'P3' => 'Низький',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => 'Прийнятий',
+        'Duplicate' => 'Дублювати',
+        'Closed' => 'Закритий',
+        'Out of Date' => 'Застарілий',
+        'Invalid' => 'Недійсний',
+    ],
+];

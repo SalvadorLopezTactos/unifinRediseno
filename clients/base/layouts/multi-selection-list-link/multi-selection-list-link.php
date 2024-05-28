@@ -10,50 +10,50 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['multi-selection-list-link'] = array(
-    'css_class'=> 'flex-list-layout flex flex-column h-full',
+$viewdefs['base']['layout']['multi-selection-list-link'] = [
+    'css_class' => 'flex-list-layout flex flex-col group/records h-full overflow-hidden',
     'type' => 'multi-selection-list',
-    'components' => array(
-        array(
-            'layout' => array(
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
                 'css_class' => 'h-full',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8 flex flex-column',
-                            'components' => array(
-                                array(
+                            'css_class' => 'main-pane span8 flex flex-col overflow-hidden h-[calc(100%-55px)]',
+                            'components' => [
+                                [
                                     'view' => 'selection-headerpane',
-                                ),
-                                array(
+                                ],
+                                [
                                     'view' => 'selection-list-context',
-                                ),
-                                array(
-                                    'layout' => array(
-                                        'css_class' => 'multi-selection-flex flex flex-column h-full',
+                                ],
+                                [
+                                    'layout' => [
+                                        'css_class' => 'multi-selection-flex flex flex-col h-[calc(100%-78px)]',
                                         'type' => 'filterpanel',
-                                        'availableToggles' => array(),
-                                        'filter_options' => array(
+                                        'availableToggles' => [],
+                                        'filter_options' => [
                                             'stickiness' => false,
-                                        ),
-                                        'components' => array(
-                                            array(
+                                        ],
+                                        'components' => [
+                                            [
                                                 'layout' => 'filter',
                                                 'loadModule' => 'Filters',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'filter-rows',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'filter-actions',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'mass-link',
-                                            ),
+                                            ],
                                             [
                                                 'layout' => [
                                                     'css_class' => 'paginated-flex-list',
@@ -65,32 +65,32 @@ $viewdefs['base']['layout']['multi-selection-list-link'] = array(
                                                         [
                                                             'view' => [
                                                                 'name' => 'list-pagination',
-                                                                'css_class' => 'flex-table-pagination',
+                                                                'css_class' => 'flex-table-pagination absolute bg-[--primary-content-background] w-full z-30',
                                                             ],
                                                         ],
                                                     ],
                                                 ],
                                             ],
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'preview-pane',
                             'css_class' => 'preview-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'preview',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

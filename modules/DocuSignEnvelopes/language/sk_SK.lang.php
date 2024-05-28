@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Získať obálku',
     'LBL_CLOUD_SERVICE_TYPE' => 'Typ cloudovej služby',
     'LBL_CLOUD_PATH' => 'Cesta ku cloudu',
+    'LBL_CLOUD_DRIVE_ID' => 'ID disku',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Informačný panel zoznamu obálok DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'Informačný panel záznamu obálok DocuSign',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Nedávne obálky DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania obálok DocuSign',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová os obálky DocuSign',
 
     'LBL_NEW_ENVELOPE' => 'Nová obálka',
     'LBL_DOCUMENT_IS_NOW' => ' je teraz ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Odoslať',
     'LBL_BUTTON_CLEAR' => 'Zmazať',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Použiť šablónu',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Odoslať so šablónou',
     'LBL_PLEASE_LOG_IN' => 'Najprv sa prihláste do DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Tento dokument si nemôžete stiahnuť. Vytvoril ho iný používateľ!',
     'LBL_SEND_NOT_ALLOWED' => 'Túto obálku nemôžete odoslať. Vytvoril ju iný používateľ!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Návrh bol zmenený. Chcete aktualizovať stav na aktuálny ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'Obálka DocuSign aktualizovaná!',
     'LBL_DRAFT_CHANGED_ERROR' => 'Stav obálky DocuSign sa neaktualizoval. Podrobnosti nájdete v denníkoch!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'Šablónu DocuSign nie je možné použiť',
     'LBL_ENVELOPE_NOT_SENT' => 'Obálka sa neodoslala!',
     'LBL_ENVELOPE_SENT' => 'Obálka bola znova odoslaná!',
     'LBL_DOCUMENT_ADDED' => 'Dokument pridaný do záznamu!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Rola',
     'LBL_SELECT_BUTTON_LABEL' => 'Vybrať',
     'LBL_BACK_BUTTON_LABEL' => 'Späť',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Vyhľadávať podľa názvu šablóny',
+    'LBL_ENVELOPE_NAME' => 'Názov obálky',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Názov obálky nemôže byť prázdny',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Nepodarilo sa získať potenciálnych príjemcov!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Nepodarilo sa získať šablóny!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Vyberte rolu pre každého príjemcu',
+    
+    'LBL_DOWNLOAD' => 'Stiahnuť',
+    'LBL_OPEN_DRAFT' => 'Otvoriť návrh',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Dokumenty bez súboru nie je možné odoslať do DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Kliknutím na tlačidlo Plus spustíte proces podpisovania',
+    'LBL_NO_DOC_SELECTED' => 'Najprv vyberte dokumenty',
+    'LBL_SELECT_RECIPIENTS' => 'Vyberte podpisujúceho príjemcu',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Vylúčiť',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Pre lepšie používanie je potrebné nainštalovať aplikáciu DocuSign.',
 ];

@@ -21,6 +21,6 @@ class SugarUpgradeRepairSugarfavorites extends UpgradeScript
     public function run()
     {
         // run for any Sugar version
-        $this->db->query("UPDATE sugarfavorites SET created_by = modified_user_id WHERE created_by IS NULL");
+        $this->db->query('UPDATE sugarfavorites SET created_by = modified_user_id WHERE created_by IS NULL');
     }
 }

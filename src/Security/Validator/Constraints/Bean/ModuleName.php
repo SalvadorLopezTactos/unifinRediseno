@@ -23,9 +23,9 @@ class ModuleName extends Constraint
 {
     public const ERROR_UNKNOWN_MODULE = 1;
 
-    protected static $errorNames = array(
+    protected static $errorNames = [
         self::ERROR_UNKNOWN_MODULE => 'ERROR_UNKNOWN_MODULE',
-    );
+    ];
 
     public $message = 'Invalid module %module%';
 }

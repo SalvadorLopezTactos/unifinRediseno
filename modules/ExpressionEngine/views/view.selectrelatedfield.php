@@ -22,50 +22,47 @@ class ViewSelectRelatedField extends SugarView
      */
     public $selLink;
     public $tmodule;
-    var $vars = array("tmodule", "selLink");
+    public $vars = ['tmodule', 'selLink'];
 
     public function __construct()
     {
 
         parent::__construct();
-        foreach($this->vars as $var)
-        {
-            if (!isset($_REQUEST[$var]))
+        foreach ($this->vars as $var) {
+            if (!isset($_REQUEST[$var])) {
                 sugar_die("Required paramter $var not set in ViewRelFields");
+            }
             $this->$var = $_REQUEST[$var];
         }
         $mb = new ModuleBuilder();
-        $this->package = empty($_REQUEST['package']) || $_REQUEST['package'] == 'studio' ? "" : $mb->getPackage($_REQUEST['package']);
-
+        $this->package = empty($_REQUEST['package']) || $_REQUEST['package'] == 'studio' ? '' : $mb->getPackage($_REQUEST['package']);
     }
 
-    function display() {
-        $rmodules = array();
+    public function display()
+    {
+        $rmodules = [];
         $links = FormulaHelper::getLinksForModule($this->tmodule, $this->package);
-        $rfields = array();
-        foreach($links as $lname => $link) {
+        $rfields = [];
+        foreach ($links as $lname => $link) {
             $rmodules[$lname] = $link['label'];
         }
 
         //Preload the related fields from the first relationship
-        if (!empty($links))
-        {
+        if (!empty($links)) {
             $link = $links[$this->selLink] ?? $links[array_key_first($links)];
             $rfields = FormulaHelper::getRelatableFieldsForLink($link, $this->package);
         }
 
-        $this->ss->assign("rmodules", $rmodules);
-        $this->ss->assign("rfields", $rfields);
-        $this->ss->assign("tmodule", $this->tmodule);
-        $this->ss->assign("selLink", $this->selLink);
-        $this->ss->assign("rollup_types", array(
-            "rollupSum" => "Sum",
-            "rollupMin" => "Minimum",
-            "rollupMax" => "Maximum",
-            "rollupAverage" => "Average",
-        ));
+        $this->ss->assign('rmodules', $rmodules);
+        $this->ss->assign('rfields', $rfields);
+        $this->ss->assign('tmodule', $this->tmodule);
+        $this->ss->assign('selLink', $this->selLink);
+        $this->ss->assign('rollup_types', [
+            'rollupSum' => 'Sum',
+            'rollupMin' => 'Minimum',
+            'rollupMax' => 'Maximum',
+            'rollupAverage' => 'Average',
+        ]);
         $this->ss->display('modules/ExpressionEngine/tpls/selectRelatedField.tpl');
     }
-
-
 }

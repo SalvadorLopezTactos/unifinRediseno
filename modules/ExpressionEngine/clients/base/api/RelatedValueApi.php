@@ -22,26 +22,26 @@ class RelatedValueApi extends SugarApi
      */
     public function registerApiRest()
     {
-        $parentApi = array(
-            'related_value_deprecated' => array(
+        $parentApi = [
+            'related_value_deprecated' => [
                 'reqType' => 'GET',
-                'path' => array('ExpressionEngine', '?', 'related'),
-                'pathVars' => array('', 'record', ''),
+                'path' => ['ExpressionEngine', '?', 'related'],
+                'pathVars' => ['', 'record', ''],
                 'method' => 'deprecatedGetRelatedValues',
                 'shortHelp' => 'Retrieve the Chart data for the given data in the Forecast Module (deprecated)',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastChartApi.html',
                 'maxVersion' => '12',
-            ),
-            'related_value' => array(
+            ],
+            'related_value' => [
                 'reqType' => 'POST',
-                'path' => array('ExpressionEngine', '?', 'related'),
-                'pathVars' => array('', 'record', ''),
+                'path' => ['ExpressionEngine', '?', 'related'],
+                'pathVars' => ['', 'record', ''],
                 'method' => 'getRelatedValues',
                 'shortHelp' => 'Retrieves the related fields for a given module record',
                 'longHelp' => 'modules/ExpressionEngine/clients/base/api/help/related_value_api_post_help.html',
                 'minVersion' => '11.8',
-            ),
-        );
+            ],
+        ];
         return $parentApi;
     }
 
@@ -64,7 +64,7 @@ class RelatedValueApi extends SugarApi
      */
     public function getRelatedValues(ServiceBase $api, array $args)
     {
-        $ret = array();
+        $ret = [];
         if (empty($args['module']) || empty($args['fields'])) {
             return $ret;
         }
@@ -82,10 +82,10 @@ class RelatedValueApi extends SugarApi
             $type = $rfDef['type'];
             $rField = '';
             if (!isset($ret[$link])) {
-                $ret[$link] = array();
+                $ret[$link] = [];
             }
             if (empty($ret[$link][$type])) {
-                $ret[$link][$type] = array();
+                $ret[$link][$type] = [];
             }
             // count formulas don't have a relate attribute
             if (isset($rfDef['relate'])) {
@@ -95,15 +95,15 @@ class RelatedValueApi extends SugarApi
             // Switch the type to the correct name
             if ($type == 'rollupAvg') {
                 $type = 'rollupAve';
-            } else if ($type == 'rollupCurrencySum') {
+            } elseif ($type == 'rollupCurrencySum') {
                 $type = 'rollupSum';
             }
 
             switch ($type) {
                 //The Related function is used for pulling a sing field from a related record
-                case "related":
+                case 'related':
                     //Default it to a blank value
-                    $ret[$link]['related'][$rfDef['relate']] = "";
+                    $ret[$link]['related'][$rfDef['relate']] = '';
 
                     //If we have neither a focus id nor a related record id, we can't retrieve anything
                     $relBean = null;
@@ -135,17 +135,17 @@ class RelatedValueApi extends SugarApi
                     }
 
                     break;
-                case "count":
+                case 'count':
                     if ($focus->load_relationship($link)) {
-                        $ret[$link][$type] = is_countable($focus->$link->get()) ? count($focus->$link->get()) : 0;
+                        $ret[$link][$type] = safeCount($focus->$link->get());
                     } else {
                         $ret[$link][$type] = 0;
                     }
                     break;
-                case "rollupSum":
-                case "rollupAve":
-                case "rollupMin":
-                case "rollupMax":
+                case 'rollupSum':
+                case 'rollupAve':
+                case 'rollupMin':
+                case 'rollupMax':
                     //If we are going to calculate one rollup, calculate all the rollups since there is so little cost
                     if ($focus->load_relationship($link)) {
                         $relBeans = $focus->$link->getBeansForSugarLogic();
@@ -153,7 +153,7 @@ class RelatedValueApi extends SugarApi
                         $count = 0;
                         $min = false;
                         $max = false;
-                        $values = array();
+                        $values = [];
                         if (!empty($relBeans)) {
                             //Check if the related record vardef has banned this field from formulas
                             $relBean = reset($relBeans);
@@ -171,7 +171,7 @@ class RelatedValueApi extends SugarApi
                                 //ensure the user can access the fields we are using.
                                 ACLField::hasAccess($rField, $bean->module_dir, $GLOBALS['current_user']->id, true)
                             ) {
-                                if(is_null($isCurrency)) {
+                                if (is_null($isCurrency)) {
                                     $isCurrency = $this->isFieldCurrency($bean, $rField);
                                 }
 
@@ -192,19 +192,19 @@ class RelatedValueApi extends SugarApi
                                 $values[$bean->id] = $value;
                             }
                         }
-                        if ($type == "rollupSum") {
+                        if ($type == 'rollupSum') {
                             $ret[$link][$type][$rField] = $sum;
                             $ret[$link][$type][$rField . '_values'] = $values;
                         }
-                        if ($type == "rollupAve") {
+                        if ($type == 'rollupAve') {
                             $ret[$link][$type][$rField] = $count == 0 ? 0 : SugarMath::init($sum)->div($count)->result();
                             $ret[$link][$type][$rField . '_values'] = $values;
                         }
-                        if ($type == "rollupMin") {
+                        if ($type == 'rollupMin') {
                             $ret[$link][$type][$rField] = $min;
                             $ret[$link][$type][$rField . '_values'] = $values;
                         }
-                        if ($type == "rollupMax") {
+                        if ($type == 'rollupMax') {
                             $ret[$link][$type][$rField] = $max;
                             $ret[$link][$type][$rField . '_values'] = $values;
                         }
@@ -212,7 +212,7 @@ class RelatedValueApi extends SugarApi
                         $ret[$link][$type][$rField] = 0;
                     }
                     break;
-                case "countConditional":
+                case 'countConditional':
                     $sum = 0;
                     $values = [];
 
@@ -236,7 +236,7 @@ class RelatedValueApi extends SugarApi
                         $ret[$link][$type] = $sum;
                     }
                     break;
-                case "rollupConditionalSum":
+                case 'rollupConditionalSum':
                     $ret[$link][$type][$rField] = '0';
                     $values = [];
 
@@ -244,7 +244,7 @@ class RelatedValueApi extends SugarApi
                         if (preg_match('/^[a-zA-Z0-9_\-$]+\(.*\)$/', $rfDef['condition_expr'])) {
                             $condition_values = Parser::evaluate($rfDef['condition_expr'])->evaluate();
                         } else {
-                            $condition_values = array($rfDef['condition_expr']);
+                            $condition_values = [$rfDef['condition_expr']];
                         }
                         $toRate = $focus->base_rate ?? null;
                         $relBeans = $focus->$link->getBeansForSugarLogic();
@@ -295,14 +295,15 @@ class RelatedValueApi extends SugarApi
                         }
                     }
                     // Fall through
+                    // no break
                 case 'maxRelatedDate':
-                    $ret[$link][$type][$rField] = "";
+                    $ret[$link][$type][$rField] = '';
                     if ($focus->load_relationship($link)) {
                         $td = TimeDate::getInstance();
                         $isTimestamp = true;
                         $resDate = 0;
                         $relBeans = $focus->$link->getBeansForSugarLogic();
-                        $valueMap = array();
+                        $valueMap = [];
                         foreach ($relBeans as $bean) {
                             // If this is a rollupConditionalMinDate, make sure the bean conditions hold
                             if (!empty($isRollupMinDate) && !empty($conditions) && is_array($conditions)) {
@@ -356,12 +357,12 @@ class RelatedValueApi extends SugarApi
 
                         //if nothing was done, return an empty string
                         if ($resDate == 0 && $isTimestamp) {
-                            $resDate = "";
-                        } else if ($isTimestamp === false) {
+                            $resDate = '';
+                        } elseif ($isTimestamp === false) {
                             $date = new DateTime();
                             $date->setTimestamp($resDate);
 
-                            $resDate = $date->format("Y-m-d");
+                            $resDate = $date->format('Y-m-d');
                         }
 
 

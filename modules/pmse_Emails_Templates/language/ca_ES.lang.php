@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Cos',
     'LBL_BASE_MODULE' => 'Mòdul objectiu',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'No s&#39;ha pogut crear la plantilla de correu electrònic de processos des de l&#39;arxiu',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Aquesta plantilla de correu electrònic s&#39;està utilitzant en una Definició de procés. Encara voleu editar aquesta Plantilla de correu electrònic?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "No pot eliminar aquesta Plantilla de correu electrònic perquè s'està utilitzant en una Definició de procés.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'No pot eliminar aquesta Plantilla de correu electrònic perquè s&#39;està utilitzant en una Definició de procés.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Selector de camps',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Selecciona',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Tipus de valor del camp',
-);
+];

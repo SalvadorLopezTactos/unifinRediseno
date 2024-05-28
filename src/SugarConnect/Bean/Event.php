@@ -20,13 +20,13 @@ class Event extends SugarBean
     /**
      * Determines how to handle bean events for Meetings and Calls.
      *
-     * @param \SugarBean $bean  The bean that was changed.
-     * @param string     $event The type of event.
-     * @param array      $args  Additional arguments.
+     * @param \SugarBean $bean The bean that was changed.
+     * @param string $event The type of event.
+     * @param array $args Additional arguments.
      *
      * @return void
      */
-    public function publish(\SugarBean $bean, string $event, array $args) : void
+    public function publish(\SugarBean $bean, string $event, array $args): void
     {
         // Don't announce changes to events that belong to a series.
         if (!empty($bean->repeat_type)) {

@@ -49,6 +49,7 @@ class SugarUpgradeRevenueLineItemCreateForecastWorksheetRecords extends UpgradeS
 
         $this->insertRows($r);
     }
+
     /**
      * Process all the results and insert them back into the db
      *

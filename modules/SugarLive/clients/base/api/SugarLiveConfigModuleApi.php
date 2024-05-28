@@ -48,10 +48,10 @@ class SugarLiveConfigModuleApi extends ConsoleConfigModuleApi
     /**
      * Save function for the config settings.
      *
-     * @throws SugarApiExceptionNotAuthorized
      * @param ServiceBase $api
      * @param array $args
      * @return array
+     * @throws SugarApiExceptionNotAuthorized
      */
     public function configSave(ServiceBase $api, array $args)
     {

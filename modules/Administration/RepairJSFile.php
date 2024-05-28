@@ -29,7 +29,7 @@ $postData = http_build_query([
     'action' => 'callJSRepair',
     'js_admin_repair' => 'concat',
     'root_directory' => getcwd(),
-    'csrf_token' => smarty_function_sugar_csrf_form_token(array('raw' => true), $smarty),
+    'csrf_token' => smarty_function_sugar_csrf_form_token(['raw' => true], $smarty),
 ]);
 
 $js = <<<JS

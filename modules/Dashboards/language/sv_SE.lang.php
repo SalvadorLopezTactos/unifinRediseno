@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_DASHBOARD_MODULE' => 'Modul',
     'LBL_MODULE_NAME' => 'Instrumentpaneler',
     'LBL_MODULE_NAME_SINGULAR' => 'Instrumentpanel',
@@ -26,8 +26,12 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Alla instrumentpaneler för {{module}} modul {{view}} visa',
     'LBL_COPY_OF' => 'Kopia av {{{name}}}',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Skapa Dashboard',
-    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
-    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Vill du verkligen återställa panelen till standardlayouten?",
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => 'Are you sure you want to restore this tab to the default layout?',
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => 'Vill du verkligen återställa panelen till standardlayouten?',
     'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Vill du verkligen återställa instrumentpanelen till standardlayouten?',
     'LBL_FILTER_UTILS_SELECT' => 'Tilldelad',
-);
+    'LBL_FILTER_UPDATES_SINCE_LAST_REFRESH' => 'Den här instrumentpanelen innehåller filter för körningstid som har ändrats sedan den senaste uppdateringen.',
+    'LBL_TEMPLATE' => 'Mall',
+    'LBL_UNSELECT_DELETE_TEMPLATES' => 'Ditt val innehåller kontrollpanel-mallar, som inte går att massradera. Avmarkera mallar för att fortsätta.',
+    'LBL_UNSELECT_UPDATE_TEMPLATES' => 'Ditt val innehåller kontrollpanel-mallar, som inte går att massuppdatera. Avmarkera mallar för att fortsätta.',
+];

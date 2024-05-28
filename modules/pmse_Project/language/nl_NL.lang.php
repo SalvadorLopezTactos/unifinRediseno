@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Procesdefinities',
-  'LBL_MODULE_TITLE' => 'Procesdefinities',
-  'LBL_MODULE_NAME_SINGULAR' => 'Procesdefinitie',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Procesdefinities',
+    'LBL_MODULE_TITLE' => 'Procesdefinities',
+    'LBL_MODULE_NAME_SINGULAR' => 'Procesdefinitie',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer procesdefinities',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer procesdefinities',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Dashboard record procesdefinities',
-  'LNK_LIST' => 'Bekijk Process Definities',
-  'LNK_NEW_PMSE_PROJECT' => 'Nieuwe Process Definitie',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Import Process Definities',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Dashboard record procesdefinities',
+    'LNK_LIST' => 'Bekijk Process Definities',
+    'LNK_NEW_PMSE_PROJECT' => 'Nieuwe Process Definitie',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Import Process Definities',
 
-  'LBL_PRJ_STATUS' => 'Status',
-  'LBL_PRJ_MODULE' => 'Doel Module',
-  'LBL_PRJ_RUN_ORDER' => 'Volgorde uitvoering',
-  'LBL_PMSE_BUTTON_SAVE' => 'Opslaan',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Annuleren',
-  'LBL_PMSE_BUTTON_YES' => 'Ja',
-  'LBL_PMSE_BUTTON_NO' => 'Nee',
-  'LBL_PMSE_BUTTON_OK' => 'OK',
+    'LBL_PRJ_STATUS' => 'Status',
+    'LBL_PRJ_MODULE' => 'Doel Module',
+    'LBL_PRJ_RUN_ORDER' => 'Volgorde uitvoering',
+    'LBL_PMSE_BUTTON_SAVE' => 'Opslaan',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Annuleren',
+    'LBL_PMSE_BUTTON_YES' => 'Ja',
+    'LBL_PMSE_BUTTON_NO' => 'Nee',
+    'LBL_PMSE_BUTTON_OK' => 'OK',
     'LBL_PMSE_FORM_ERROR' => 'Los eventuele fouten op voordat u verder gaat.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Ontwerpen',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Activiteit',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Actie',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Lead Start gebeurtenis',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Mogelijkheid gebeurtenis starten' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Mogelijkheid gebeurtenis starten',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Document gebeurtenis starten',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Doel Module',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Wacht gebeurtenis',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Zakelijke regel',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Actie zakelijke regel',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'E-mailsjabloon',
-);
+];

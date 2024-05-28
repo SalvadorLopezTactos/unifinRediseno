@@ -9,84 +9,84 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Dashboards']['base']['layout']['records'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['Dashboards']['base']['layout']['records'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
                 'default_hide' => '1',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
                             'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'view' => 'list-headerpane',
-                                ),
-                                array(
-                                    'layout' => array(
+                                ],
+                                [
+                                    'layout' => [
                                         'type' => 'filterpanel',
-                                        'last_state' => array(
+                                        'last_state' => [
                                             'id' => 'list-filterpanel',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'toggle-view' => 'list',
-                                            ),
-                                        ),
+                                            ],
+                                        ],
                                         'refresh_button' => true,
-                                        'availableToggles' => array(
-                                            array(
+                                        'availableToggles' => [
+                                            [
                                                 'name' => 'list',
                                                 'icon' => 'sicon-list-view',
                                                 'label' => 'LBL_LISTVIEW',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'name' => 'activitystream',
                                                 'icon' => 'sicon-clock',
                                                 'label' => 'LBL_ACTIVITY_STREAM',
-                                            ),
-                                        ),
-                                        'components' => array(
-                                            array(
+                                            ],
+                                        ],
+                                        'components' => [
+                                            [
                                                 'layout' => 'filter',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'filter-rows',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'filter-actions',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'layout' => 'activitystream',
-                                                'context' => array(
+                                                'context' => [
                                                     'module' => 'Activities',
-                                                ),
-                                            ),
-                                            array(
+                                                ],
+                                            ],
+                                            [
                                                 'layout' => 'list',
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'help-pane',
                             'css_class' => 'help-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'help',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

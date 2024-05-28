@@ -10,29 +10,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$popupMeta = array('moduleMain' => 'CustomQuery',
-						'varName' => 'CUSTOMQUERY',
-						'className' => 'CustomQuery',
-						'orderBy' => 'name',
-						'whereClauses' => 
-							array('name' => 'custom_queries.name',
-								  'description' => 'custom_queries.description'),
-						'listviewdefs' => array(
-											'NAME' => array(
-												'width' => '20', 
-												'label' => 'LBL_LIST_NAME',
-												'link' => true,
-										        'default' => true),
-											'DESCRIPTION' => array(
-												'width' => '20', 
-												'label' => 'LBL_LIST_DESCRIPTION', 
-												'link' => false,
-										        'default' => true),
-											),
-						'searchdefs'   => array(
-										 	'name', 
-											'description',
-										  )
-						);
-?>
- 
+$popupMeta = ['moduleMain' => 'CustomQuery',
+    'varName' => 'CUSTOMQUERY',
+    'className' => 'CustomQuery',
+    'orderBy' => 'name',
+    'whereClauses' => ['name' => 'custom_queries.name',
+        'description' => 'custom_queries.description'],
+    'listviewdefs' => [
+        'NAME' => [
+            'width' => '20',
+            'label' => 'LBL_LIST_NAME',
+            'link' => true,
+            'default' => true],
+        'DESCRIPTION' => [
+            'width' => '20',
+            'label' => 'LBL_LIST_DESCRIPTION',
+            'link' => false,
+            'default' => true],
+    ],
+    'searchdefs' => [
+        'name',
+        'description',
+    ],
+];

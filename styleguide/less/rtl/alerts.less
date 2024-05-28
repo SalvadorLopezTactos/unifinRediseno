@@ -15,8 +15,8 @@
 .alert-confirmation {
   .alert {
     .text {
-      .pr-0();
-      .pl-4();
+      padding-right: 0;
+      padding-left: 1rem;
     }
   }
 }
@@ -27,8 +27,35 @@
   }
 }
 
-.alert-top {
-  .alert {
-    .text-right();
+div.alert {
+  .copy-clipboard-info {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    align-items: top;
+    justify-content: center;
+    position: relative;
+    height: inherit;
+    width: 48px;
+
+    i {
+      display: block;
+      top: calc(~"50% - 15px");
+    }
+  }
+}
+
+.alert-confirmation {
+  .alert-info,
+  .alert-info .alert-heading {
+    .copy-clipboard-info {
+      i {
+        color: @alertInfo;
+      }
+    }
+
+    a {
+      font-weight: 700;
+    }
   }
 }

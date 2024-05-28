@@ -11,9 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' =>
-'<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
+        '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
 Merr një kod konsumatori nga "LogMeIn" duke regjistruar një aplikacion të ri "GoToMeeting".<br>
 &nbsp;<br>
 Hapat për regjistrimin e instancës tënde:<br>
@@ -36,4 +36,4 @@ Hapat për regjistrimin e instancës tënde:<br>
 </ol>
 </td></tr></table>',
     'oauth_consumer_key' => 'Kodi i konsumatorit',
-);
+];

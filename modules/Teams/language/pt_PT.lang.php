@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Um número de registo deverá ser especificado para adicionar um Utilizador a esta equipa.',
     'ERR_DUP_NAME' => 'O Nome da Equipa já existe, por favor escolha outro.',
     'ERR_DELETE_RECORD' => 'Um número de registo deverá ser especificado para eliminar esta equipa.',
@@ -66,17 +66,17 @@ $mod_strings = array(
     'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
 Desativar as permissões de equipa num módulo irá reverter todos os dados associados com as permissões de equipa nesse módulo, incluindo todas as Definições de Processo ou Processos usando esse recurso. Isto inclui todas as Funções usando a opção "Proprietário e equipa selecionada" nesse módulo e todos os dados de permissões de equipa em registos nesse módulo. Além disso, recomendamos que utilize a ferramenta de Reconstrução e Reparação Rápida, para limpar a cache do sistema depois de desativar as permissões de equipa em qualquer módulo.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Aviso:</strong> Desativar as permissões de equipa num módulo irá reverter todos os dados associados com as permissões de equipa nesse módulo, incluindo todas as Definições de Processo ou Processos usando esse recurso. Isto inclui todas as Funções usando a opção "Proprietário e equipa selecionada" nesse módulo e todos os dados de permissões de equipa em registos nesse módulo. Além disso, recomendamos que utilize a ferramenta de Reconstrução e Reparação Rápida, para limpar a cache do sistema depois de desativar as permissões de equipa em qualquer módulo.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Desativar as permissões de equipa num módulo irá reverter todos os dados associados com as permissões de equipa nesse módulo, incluindo todas as Definições de Processo ou Processos usando esse recurso. Isso inclui todas as Funções usando a opção "Proprietário e equipa selecionada" nesse módulo e todos os dados de permissões de equipa em registos nesse módulo. Além disso, recomendamos o uso da ferramenta de Reconstrução e Reparação Rápida, para limpar a cache do sistema após desativar as permissões de equipa em qualquer módulo. Se não deseja usar a Reconstrução e Reparação Rápida, entre em contacto com um administrador com acesso ao menu Reparar.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Aviso:</strong> Desativar as permissões de equipa num módulo irá reverter todos os dados associados com as permissões de equipa nesse módulo, incluindo todas as Definições de Processo ou Processos usando esse recurso. Isso inclui todas as Funções usando a opção "Proprietário e equipa selecionada" nesse módulo e todos os dados de permissões de equipa em registos nesse módulo. Além disso, recomendamos o uso da ferramenta de Reconstrução e Reparação Rápida, para limpar a cache do sistema após desativar as permissões de equipa em qualquer módulo. Se não deseja usar a Reconstrução e Reparação Rápida, entre em contacto com um administrador com acesso ao menu Reparar.
 STR
-,
-);
+    ,
+];

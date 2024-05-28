@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Fase Gruppo:',
-    'LBL_DEAL_TOT'=>'sconto totale',
-    'LBL_DEAL_TOT_USDOLLAR'=>'sconto totale (Dollari US)',
+    'LBL_DEAL_TOT' => 'sconto totale',
+    'LBL_DEAL_TOT_USDOLLAR' => 'sconto totale (Dollari US)',
     'LBL_NEW_SUB' => 'Subtotale Scontato:',
     'LBL_SHIPPING' => 'Spedizione:',
-    'LBL_SHIPPING_USDOLLAR'=>'Spedizione (US Dollar)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Subtotale (US Dollar)',
+    'LBL_SHIPPING_USDOLLAR' => 'Spedizione (US Dollar)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Subtotale (US Dollar)',
     'LBL_SUBTOTAL' => 'Subtotale:',
     'LBL_TAXABLE_SUBTOTAL' => 'Subtotale tassabile',
-    'LBL_TAX_USDOLLAR'=>'Imposte (US Dollar)',
+    'LBL_TAX_USDOLLAR' => 'Imposte (US Dollar)',
     'LBL_TAX' => 'Imposte:',
-    'LBL_TOTAL_USDOLLAR'=>'Totale (US Dollar)',
+    'LBL_TOTAL_USDOLLAR' => 'Totale (US Dollar)',
     'LBL_TOTAL' => 'Totale:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Posizione Pacchetto Offerta',
     'EXCEPTION_INVALID_QUOTE_ID' => 'ID Offerta mancante dal payload',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'L´Offerta richiesta non è stata trovata',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'L´Offerta richiesta non è stata trovata',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Sconto gruppo supplementare',
     'LBL_GROUP_TOTAL' => 'Totale gruppo',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Intestazione gruppo',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Il gruppo Aggregazione prodotto predefinito per l&#39;offerta',
     'LBL_ALERT_DELETING_ITEM' => 'Eliminazione delle voci',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Voce eliminata correttamente',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia del pacchetto di prodotti',
+];

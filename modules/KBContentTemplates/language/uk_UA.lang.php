@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Шаблони бази знань',
     'LBL_MODULE_NAME_SINGULAR' => 'Шаблон бази знань',
     'LBL_MODULE_TITLE' => 'Шаблон бази знань',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Переглянути шаблони',
     'LBL_TEXT_BODY' => 'Текст',
     'LBL_LIST_TEMPLATE_NAME' => 'Назва шаблону',
-);
+];

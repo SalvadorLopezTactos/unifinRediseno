@@ -11,6 +11,5 @@
  */
 
 
-$GLOBALS['tabStructure'] = array(
-);
-
+$GLOBALS['tabStructure'] = [
+];

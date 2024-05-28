@@ -39,6 +39,7 @@
         this._hasData = false;
 
         this.RECORD_NOT_FOUND_ERROR_CODE = 404;
+        this.SERVER_ERROR_CODES = [500, 502, 503, 504];
     },
 
     /**
@@ -111,6 +112,10 @@
      * @param {Error} error
      */
     _failedLoadReportData: function(error) {
+        if (this.disposed) {
+            return;
+        }
+
         this._matrixTable = [];
         this._hasData = false;
 
@@ -124,6 +129,22 @@
             reportModel = this.layout.model;
         }
 
+        let showErrorAlert = error && _.isString(error.message);
+
+        // don't show no access alert for dashlet
+        if (error && reportModel.get('filter') && _.has(error, 'status') &&
+            error.status === this.RECORD_NOT_FOUND_ERROR_CODE) {
+            showErrorAlert = false;
+        }
+
+        if (showErrorAlert) {
+            app.alert.show('failed_to_load_report', {
+                level: 'error',
+                messages: error.message,
+                autoClose: true,
+            });
+        }
+
         // don't show alert for dashlets
         if (!reportModel.get('list')) {
             const message = app.utils.tryParseJSONObject(error.responseText);
@@ -133,6 +154,10 @@
 
             if (_.isEmpty(errorMessage) || error.status === this.RECORD_NOT_FOUND_ERROR_CODE) {
                 errorMessage = app.lang.get('LBL_NO_ACCESS', 'Reports');
+            }
+
+            if (this.SERVER_ERROR_CODES.includes(error.status)) {
+                errorMessage = app.lang.get('LBL_SERVER_ERROR', 'Reports');
             }
 
             app.alert.show('report-data-error', {
@@ -168,7 +193,9 @@
 
             this.render();
 
-            this.context.trigger('report:data:table:loaded', false, 'table');
+            if (this.context) {
+                this.context.trigger('report:data:table:loaded', false, 'table');
+            }
 
             return;
         }

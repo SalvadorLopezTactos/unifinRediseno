@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => '處理程序商務規則',
-  'LBL_MODULE_TITLE' => '流程商務規則',
-  'LBL_MODULE_NAME_SINGULAR' => '流程商務規則',
+$mod_strings = [
+    'LBL_MODULE_NAME' => '處理程序商務規則',
+    'LBL_MODULE_TITLE' => '流程商務規則',
+    'LBL_MODULE_NAME_SINGULAR' => '流程商務規則',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => '流程商務規則焦點抽屜',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => '流程商務規則焦點抽屜',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => '流程商業規則紀錄儀表板',
-  'LBL_RST_UID' => '商務規則 ID',
-  'LBL_RST_TYPE' => '商務規則類型',
-  'LBL_RST_DEFINITION' => '商務規則定義',
-  'LBL_RST_EDITABLE' => '商務規則可編輯',
-  'LBL_RST_SOURCE' => '商務規則來源',
-  'LBL_RST_SOURCE_DEFINITION' => '商務規則來源定義',
-  'LBL_RST_MODULE' => '目標模組',
-  'LBL_RST_FILENAME' => '商務規則檔名',
-  'LBL_RST_CREATE_DATE' => '商務規則建立日期',
-  'LBL_RST_UPDATE_DATE' => '商務規則更新日期',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => '流程商業規則紀錄儀表板',
+    'LBL_RST_UID' => '商務規則 ID',
+    'LBL_RST_TYPE' => '商務規則類型',
+    'LBL_RST_DEFINITION' => '商務規則定義',
+    'LBL_RST_EDITABLE' => '商務規則可編輯',
+    'LBL_RST_SOURCE' => '商務規則來源',
+    'LBL_RST_SOURCE_DEFINITION' => '商務規則來源定義',
+    'LBL_RST_MODULE' => '目標模組',
+    'LBL_RST_FILENAME' => '商務規則檔名',
+    'LBL_RST_CREATE_DATE' => '商務規則建立日期',
+    'LBL_RST_UPDATE_DATE' => '商務規則更新日期',
 
     'LNK_LIST' => '檢視處理程序商務規則',
     'LNK_NEW_PMSE_BUSINESS_RULES' => '建立處理程序商務規則',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => '由於其使用了無效的欄位或欄位未在您的 SugarCRM 實例中找到，因此此商務規則無效。請修復下方錯誤並儲存商務規則。',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => '「流程定義」目前在使用此「商務規則」。仍然要編輯此「商務規則」嗎？',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "您無法刪除此「商務規則」，因為「流程定義」目前在使用該規則。",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => '您無法刪除此「商務規則」，因為「流程定義」目前在使用該規則。',
+];

@@ -14,14 +14,14 @@ class ActivityErasure
 {
     public const ERASED_LABEL = 'LBL_VALUE_ERASED';
 
-    protected $referencedActivities = array();
-    protected $entityNames = array();
-    protected $changedNames = array();
-    protected $erasedFields = array();
-    protected $lastActivityUpdate = array();
+    protected $referencedActivities = [];
+    protected $entityNames = [];
+    protected $changedNames = [];
+    protected $erasedFields = [];
+    protected $lastActivityUpdate = [];
     protected $activitiesUpdated = 0;
     protected $commentsUpdated = 0;
-    protected $activityIdsProcessed = array();
+    protected $activityIdsProcessed = [];
 
     /**
      * Find and erase all activities record fields containing data that has since been erased as a result of the Data
@@ -31,7 +31,7 @@ class ActivityErasure
      * @return array Erasure statistics and data, including the erased field info, lastActivity processed, and stats on
      * the number of DataPrivacy records processed and number of Activities and Comments records updated.
      */
-    public function process($dataPrivacyIds = array())
+    public function process($dataPrivacyIds = [])
     {
         $this->activitiesUpdated = 0;
         $this->commentsUpdated = 0;
@@ -50,7 +50,7 @@ class ActivityErasure
             $this->processUnreferencedActivities();
         }
 
-        return array(
+        return [
             'dpRecordsProcessed' => $dpRecordsProcessed,
             'activitiesUpdated' => $this->activitiesUpdated,
             'commentsUpdated' => $this->commentsUpdated,
@@ -58,7 +58,7 @@ class ActivityErasure
             'entityNames' => $this->entityNames,
             'changedNames' => $this->changedNames,
             'lastActivityUpdate' => $this->lastActivityUpdate,
-        );
+        ];
     }
 
     /**
@@ -66,10 +66,10 @@ class ActivityErasure
      */
     protected function processComments()
     {
-        $this->referencedActivities = array();
+        $this->referencedActivities = [];
         if (!empty($this->erasedFields)) {
             $sql = '';
-            $params = array();
+            $params = [];
             foreach ($this->erasedFields as $module => $erasedObjects) {
                 if (!empty($erasedObjects)) {
                     foreach ($erasedObjects as $objectId => $objectFields) {
@@ -99,9 +99,9 @@ class ActivityErasure
                     $commentData = $row['data'];
                     $references = $this->getReferences($commentData, '@[', ']');
 
-                    $updateFrom = array();
-                    $updateTo = array();
-                    $updateModules = array();
+                    $updateFrom = [];
+                    $updateTo = [];
+                    $updateModules = [];
                     foreach ($references as $reference) {
                         [$module, $moduleId, $name] = explode(':', $reference);
                         if (isset($this->changedNames[$module][$moduleId])) {
@@ -114,14 +114,14 @@ class ActivityErasure
                             }
 
                             if (!isset($this->referencedActivities[$activityId])) {
-                                $this->referencedActivities[$activityId] = array();
+                                $this->referencedActivities[$activityId] = [];
                             }
-                            $this->referencedActivities[$activityId][] = array(
+                            $this->referencedActivities[$activityId][] = [
                                 'commentId' => $row['id'],
                                 'module' => $module,
                                 'moduleId' => $moduleId,
                                 'reference' => $reference,
-                            );
+                            ];
                         }
                     }
 
@@ -139,7 +139,7 @@ class ActivityErasure
     protected function processModuleActivities()
     {
         $sql = '';
-        $params = array();
+        $params = [];
         $activityParentIdLists = $this->getActivityParentIdLists();
         if (!empty($activityParentIdLists)) {
             $sql = 'SELECT * from activities';
@@ -191,7 +191,7 @@ class ActivityErasure
     {
         if (!empty($this->entityNames)) {
             $sql = '';
-            $params = array();
+            $params = [];
             foreach ($this->entityNames as $name => $bool) {
                 if ($sql === '') {
                     $sql = 'SELECT * from activities WHERE (';
@@ -311,7 +311,7 @@ class ActivityErasure
         $parentType = empty($activity['parent_type']) ? '' : $activity['parent_type'];
         $parentId = empty($activity['parent_id']) ? '' : $activity['parent_id'];
 
-        $references = array();
+        $references = [];
         if (!empty($activity['data'])) {
             $references = array_merge($references, $this->getReferences($activity['data'], '@[', ']'));
         };
@@ -320,9 +320,9 @@ class ActivityErasure
             $references = array_merge($references, $this->getReferences($activity['last_comment'], '@[', ']'));
         }
 
-        $from = array();
-        $updateFrom = array();
-        $updateTo = array();
+        $from = [];
+        $updateFrom = [];
+        $updateTo = [];
         if (!empty($references)) {
             foreach ($references as $reference) {
                 [$module, $moduleId, $name] = explode(':', $reference);
@@ -350,12 +350,12 @@ class ActivityErasure
             }
         }
 
-        $data = array();
+        $data = [];
         if (!empty($activity['data'])) {
             $data = json_decode($activity['data'], true);
         }
 
-        $comment = array();
+        $comment = [];
         if (!empty($activity['last_comment'])) {
             $comment = json_decode($activity['last_comment'], true);
         }
@@ -475,7 +475,7 @@ class ActivityErasure
     protected function getReferencedActivityIdList()
     {
         $activityIdList = '';
-        $objectIds = array();
+        $objectIds = [];
         foreach ($this->referencedActivities as $activityId => $referenceData) {
             $objectIds[$activityId] = $GLOBALS['db']->quoted($activityId);
         }
@@ -492,10 +492,10 @@ class ActivityErasure
      */
     protected function getActivityParentIdLists()
     {
-        $moduleIdLists = array();
+        $moduleIdLists = [];
         foreach ($this->erasedFields as $module => $fields) {
             if (!empty($fields) && !empty(array_keys($fields))) {
-                $objectIds = array();
+                $objectIds = [];
                 foreach (array_keys($fields) as $objectId) {
                     $objectIds[$objectId] = $GLOBALS['db']->quoted($objectId);
                 }
@@ -514,8 +514,8 @@ class ActivityErasure
      */
     protected function initialize(array $dataPrivacyIds)
     {
-        $this->erasedFields = array();
-        $this->changedNames = array();
+        $this->erasedFields = [];
+        $this->changedNames = [];
         $dpRecordsProcessed = 0;
         foreach ($dataPrivacyIds as $dataPrivacyId) {
             $dataPrivacy = BeanFactory::retrieveBean('DataPrivacy', $dataPrivacyId);
@@ -581,7 +581,7 @@ class ActivityErasure
      */
     protected function getReferences($str, $startDelimiter, $endDelimiter)
     {
-        $contents = array();
+        $contents = [];
         $startDelimiterLength = strlen($startDelimiter);
         $endDelimiterLength = strlen($endDelimiter);
         $startFrom = $contentStart = $contentEnd = 0;

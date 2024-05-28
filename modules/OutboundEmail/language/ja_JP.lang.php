@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '送信Eメールアカウント',
     'LBL_MODULE_NAME_SINGULAR' => '送信Eメールアカウント',
     'LBL_STATUS' => 'ステータス',
@@ -40,4 +40,4 @@ $mod_strings = array(
     'LBL_PREFERRED_SENDING_ACCOUNT' => '優先送信アカウント',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Eメール設定 フォーカス ドロワ―',
-);
+];

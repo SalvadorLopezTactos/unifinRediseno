@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\ACL\Cache as AclCacheInterface;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
@@ -25,7 +26,7 @@ class ACLRoleUserRelationship extends M2MRelationship
     /**
      * {@inheritDoc}
      */
-    public function add($lhs, $rhs, $additionalFields = array())
+    public function add($lhs, $rhs, $additionalFields = [])
     {
         $result = parent::add($lhs, $rhs, $additionalFields);
         if ($result) {

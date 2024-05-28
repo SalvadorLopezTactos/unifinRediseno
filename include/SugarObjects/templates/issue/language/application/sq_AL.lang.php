@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'Administration',
-    'Product' => 'Produkti',
-    'User' => 'Përdorues',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => 'E re',
-    'Assigned' => 'Drejtuar',
-    'Closed' => 'Mbyllur',
-    'Pending Input' => 'Të hyrat e pezulluara',
-    'Rejected' => 'Anuluar',
-    'Duplicate' => 'Dublo',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => 'I lartë',
-    'P2' => 'Mesatar',
-    'P3' => 'I ulët',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => 'I pranuar',
-    'Duplicate' => 'Dublo',
-    'Closed' => 'Mbyllur',
-    'Out of Date' => 'Jashtë datës',
-    'Invalid' => 'Jo valide',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => 'Administrimi',
+        'Product' => 'Produkti',
+        'User' => 'Përdoruesi',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => 'E re',
+        'Assigned' => 'Caktuar',
+        'Closed' => 'Mbyllur',
+        'Pending Input' => 'Hyrje në pritje',
+        'Rejected' => 'Refuzuar',
+        'Duplicate' => 'Dublikatë',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => 'I lartë',
+        'P2' => 'Mesatar',
+        'P3' => 'I ulët',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => 'Pranuar',
+        'Duplicate' => 'Dublikatë',
+        'Closed' => 'Mbyllur',
+        'Out of Date' => 'I papërditësuar',
+        'Invalid' => 'I pavlefshëm',
+    ],
+];

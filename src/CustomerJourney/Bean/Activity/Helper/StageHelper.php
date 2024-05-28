@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper;
 
 /**
@@ -21,7 +22,7 @@ class StageHelper
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\activityHelper
      */
     private $activityHelper;
-    
+
     /**
      * @var mixed
      */
@@ -82,7 +83,7 @@ class StageHelper
      * Checks if a activity with a given order exist on stage
      *
      * @param string $stageId
-     * @param int    $order
+     * @param int $order
      * @param string $skipId
      * @return bool
      * @throws \SugarQueryException
@@ -102,7 +103,7 @@ class StageHelper
 
         $results = $query->execute();
 
-        return count($results) > 0;
+        return safeCount($results) > 0;
     }
 
     /**
@@ -125,11 +126,12 @@ class StageHelper
      * @param \DRI_Workflow_Task_Template $activityTemplate
      */
     public function populateFromStage(
-        \SugarBean $activity,
-        \SugarBean $parent,
-        \DRI_SubWorkflow $stage,
+        \SugarBean                  $activity,
+        \SugarBean                  $parent,
+        \DRI_SubWorkflow            $stage,
         \DRI_Workflow_Task_Template $activityTemplate
     ) {
+
         $activity->dri_subworkflow_id = $stage->id;
         $activity->dri_subworkflow_name = $stage->name;
         $activity->dri_workflow_id = $stage->dri_workflow_id;

@@ -60,8 +60,7 @@ class SilentReindexCommand extends Command implements InstanceModeInterface
                 null,
                 InputOption::VALUE_NONE,
                 'Clear the data of the involved index/indices before reindexing the records.'
-            )
-        ;
+            );
     }
 
     /**
@@ -72,7 +71,7 @@ class SilentReindexCommand extends Command implements InstanceModeInterface
         $engine = SearchEngine::getInstance()->getEngine();
 
         if (!$engine instanceof Elastic) {
-            throw new RuntimeException("Backend search engine is not Elastic");
+            throw new RuntimeException('Backend search engine is not Elastic');
         }
 
         $this->container = $engine->getContainer();
@@ -83,20 +82,20 @@ class SilentReindexCommand extends Command implements InstanceModeInterface
             $modules = $this->getAllModules();
         }
 
-        $clearData = (bool) $input->getOption('clearData');
+        $clearData = (bool)$input->getOption('clearData');
 
-        $output->writeln("Scheduling reindex ... ");
+        $output->writeln('Scheduling reindex ... ');
         if ($this->scheduleIndexing($modules, $clearData)) {
-            $output->writeln("Consuming queue ... please be patient");
+            $output->writeln('Consuming queue ... please be patient');
             $count = 0;
             while ($this->hasMoreRecords()) {
                 $this->consumeQueue();
                 $count++;
-                $output->writeln("Consuming queue ... finish batch #" . $count);
+                $output->writeln('Consuming queue ... finish batch #' . $count);
             }
             $this->reportIndexingDone();
         }
-        $output->writeln("Reindexing complete");
+        $output->writeln('Reindexing complete');
         return 0;
     }
 

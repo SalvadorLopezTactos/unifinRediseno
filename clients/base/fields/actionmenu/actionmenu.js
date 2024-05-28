@@ -33,6 +33,8 @@
      * documentation.
      */
     initialize: function(options) {
+        options.def.no_default_action = true;
+
         this._super('initialize', [options]);
 
         this.events = _.extend({}, this.events, {
@@ -40,7 +42,6 @@
             'click [data-check=one]': 'check'
         });
 
-        this.def.no_default_action = true;
         this.def.css_class = this.def.css_class + ' actionmenu';
         /**
          * The checkbox tag.

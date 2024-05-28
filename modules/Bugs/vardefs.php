@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Bug'] = array(
+$dictionary['Bug'] = [
     'table' => 'bugs',
     'audited' => true,
     'escalatable' => true,
@@ -21,8 +21,8 @@ $dictionary['Bug'] = array(
     'unified_search' => true,
     'full_text_search' => true,
     'unified_search_default_enabled' => true,
-    'fields' => array(
-        'found_in_release' => array(
+    'fields' => [
+        'found_in_release' => [
             'name' => 'found_in_release',
             'type' => 'enum',
             'function' => 'getReleaseDropDown',
@@ -31,17 +31,17 @@ $dictionary['Bug'] = array(
             'comment' => 'The software or service release that manifested the bug',
             'duplicate_merge' => 'disabled',
             'audited' => true,
-            'studio' => array(
+            'studio' => [
                 'fields' => 'false',
                 'listview' => false,
                 // Bug 54507 - Add wireless and portal to exclude list
                 'wirelesslistview' => false,
                 'portalrecordview' => false,
                 'portallistview' => false,
-            ),
+            ],
             'massupdate' => true,
-        ),
-        'release_name' => array(
+        ],
+        'release_name' => [
             'name' => 'release_name',
             'rname' => 'name',
             'vname' => 'LBL_FOUND_IN_RELEASE',
@@ -57,7 +57,7 @@ $dictionary['Bug'] = array(
             'module' => 'Releases',
             'link' => 'release_link',
             'massupdate' => false,
-            'studio' => array(
+            'studio' => [
                 'editview' => false,
                 'detailview' => false,
                 'recordview' => false,
@@ -73,10 +73,10 @@ $dictionary['Bug'] = array(
                 'portalrecordview' => false,
                 'portallistview' => false,
                 'portalsearchview' => false,
-            ),
+            ],
             'exportable' => true,
-        ),
-        'fixed_in_release' => array(
+        ],
+        'fixed_in_release' => [
             'name' => 'fixed_in_release',
             'type' => 'enum',
             'function' => 'getReleaseDropDown',
@@ -85,17 +85,17 @@ $dictionary['Bug'] = array(
             'comment' => 'The software or service release that corrected the bug',
             'duplicate_merge' => 'disabled',
             'audited' => true,
-            'studio' => array(
+            'studio' => [
                 'fields' => 'false',
                 'listview' => false,
                 // Bug 54507 - Add wireless and portal to exclude list
                 'wirelesslistview' => false,
                 'portalrecordview' => false,
                 'portallistview' => false,
-            ),
+            ],
             'massupdate' => true,
-        ),
-        'fixed_in_release_name' => array(
+        ],
+        'fixed_in_release_name' => [
             'name' => 'fixed_in_release_name',
             'rname' => 'name',
             'group' => 'fixed_in_release',
@@ -110,7 +110,7 @@ $dictionary['Bug'] = array(
             'len' => 36,
             'source' => 'non-db',
             'link' => 'fixed_in_release_link',
-            'studio' => array(
+            'studio' => [
                 'editview' => false,
                 'detailview' => false,
                 'recordview' => false,
@@ -126,18 +126,18 @@ $dictionary['Bug'] = array(
                 'portalrecordview' => false,
                 'portallistview' => false,
                 'portalsearchview' => false,
-            ),
+            ],
             'exportable' => true,
-        ),
-        'source' => array(
+        ],
+        'source' => [
             'name' => 'source',
             'vname' => 'LBL_SOURCE',
             'type' => 'enum',
             'options' => 'source_dom',
             'len' => 255,
             'comment' => 'An indicator of how the bug was entered (ex: via web, email, etc.)',
-        ),
-        'product_category' => array(
+        ],
+        'product_category' => [
             'name' => 'product_category',
             'vname' => 'LBL_PRODUCT_CATEGORY',
             'type' => 'enum',
@@ -145,14 +145,14 @@ $dictionary['Bug'] = array(
             'len' => 255,
             'comment' => 'Where the bug was discovered (ex: Accounts, Contacts, Leads)',
             'sortable' => true,
-        ),
-        'portal_viewable' => array(
+        ],
+        'portal_viewable' => [
             'name' => 'portal_viewable',
             'vname' => 'LBL_SHOW_IN_PORTAL',
             'type' => 'bool',
             'default' => 1,
             'reportable' => false,
-        ),
+        ],
         'messages' => [
             'name' => 'messages',
             'type' => 'link',
@@ -178,79 +178,79 @@ $dictionary['Bug'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_EXTERNAL_USERS',
         ],
-        'tasks' => array(
+        'tasks' => [
             'name' => 'tasks',
             'type' => 'link',
             'relationship' => 'bug_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_TASKS',
-        ),
-        'notes' => array(
+        ],
+        'notes' => [
             'name' => 'notes',
             'type' => 'link',
             'relationship' => 'bug_notes',
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
-        ),
-        'meetings' => array(
+        ],
+        'meetings' => [
             'name' => 'meetings',
             'type' => 'link',
             'relationship' => 'bug_meetings',
             'source' => 'non-db',
             'vname' => 'LBL_MEETINGS',
             'module' => 'Meetings',
-        ),
-        'calls' => array(
+        ],
+        'calls' => [
             'name' => 'calls',
             'type' => 'link',
             'relationship' => 'bug_calls',
             'source' => 'non-db',
             'vname' => 'LBL_CALLS',
             'module' => 'Calls',
-        ),
-        'emails' => array(
+        ],
+        'emails' => [
             'name' => 'emails',
             'type' => 'link',
             'relationship' => 'emails_bugs_rel',
             'source' => 'non-db',
             'vname' => 'LBL_EMAILS',
-        ),
-        'documents' => array(
+        ],
+        'documents' => [
             'name' => 'documents',
             'type' => 'link',
             'relationship' => 'documents_bugs',
             'source' => 'non-db',
             'vname' => 'LBL_DOCUMENTS_SUBPANEL_TITLE',
-        ),
-        'contacts' => array(
+        ],
+        'contacts' => [
             'name' => 'contacts',
             'type' => 'link',
             'relationship' => 'contacts_bugs',
             'source' => 'non-db',
             'vname' => 'LBL_CONTACTS',
-        ),
-        'accounts' => array(
+        ],
+        'accounts' => [
             'name' => 'accounts',
             'type' => 'link',
             'relationship' => 'accounts_bugs',
             'source' => 'non-db',
             'vname' => 'LBL_ACCOUNTS',
-        ),
-        'cases' => array(
+        ],
+        'cases' => [
             'name' => 'cases',
             'type' => 'link',
             'relationship' => 'cases_bugs',
             'source' => 'non-db',
             'vname' => 'LBL_CASES',
-        ),
-        'project' => array(
+        ],
+        'project' => [
             'name' => 'project',
             'type' => 'link',
             'relationship' => 'projects_bugs',
             'source' => 'non-db',
             'vname' => 'LBL_PROJECTS',
-        ),
-        'release_link' => array(
+        ],
+        'release_link' => [
             'name' => 'release_link',
             'type' => 'link',
             'relationship' => 'bugs_release',
@@ -259,8 +259,8 @@ $dictionary['Bug'] = array(
             'module' => 'Releases',
             'bean_name' => 'Release',
             'source' => 'non-db',
-        ),
-        'fixed_in_release_link' => array(
+        ],
+        'fixed_in_release_link' => [
             'name' => 'fixed_in_release_link',
             'type' => 'link',
             'relationship' => 'bugs_fixed_in_release',
@@ -269,13 +269,13 @@ $dictionary['Bug'] = array(
             'module' => 'Releases',
             'bean_name' => 'Release',
             'source' => 'non-db',
-        ),
-    ),
-    'indices' => array(
+        ],
+    ],
+    'indices' => [
 
-    ),
-    'relationships' => array(
-        'bug_tasks' => array(
+    ],
+    'relationships' => [
+        'bug_tasks' => [
             'lhs_module' => 'Bugs',
             'lhs_table' => 'bugs',
             'lhs_key' => 'id',
@@ -285,8 +285,8 @@ $dictionary['Bug'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Bugs',
-        ),
-        'bug_meetings' => array(
+        ],
+        'bug_meetings' => [
             'lhs_module' => 'Bugs',
             'lhs_table' => 'bugs',
             'lhs_key' => 'id',
@@ -296,8 +296,8 @@ $dictionary['Bug'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Bugs',
-        ),
-        'bug_calls' => array(
+        ],
+        'bug_calls' => [
             'lhs_module' => 'Bugs',
             'lhs_table' => 'bugs',
             'lhs_key' => 'id',
@@ -307,8 +307,8 @@ $dictionary['Bug'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Bugs',
-        ),
-        'bug_emails' => array(
+        ],
+        'bug_emails' => [
             'lhs_module' => 'Bugs',
             'lhs_table' => 'bugs',
             'lhs_key' => 'id',
@@ -318,8 +318,8 @@ $dictionary['Bug'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Bugs',
-        ),
-        'bug_notes' => array(
+        ],
+        'bug_notes' => [
             'lhs_module' => 'Bugs',
             'lhs_table' => 'bugs',
             'lhs_key' => 'id',
@@ -329,7 +329,7 @@ $dictionary['Bug'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Bugs',
-        ),
+        ],
         'bug_messages' => [
             'lhs_module' => 'Bugs',
             'lhs_table' => 'bugs',
@@ -352,7 +352,7 @@ $dictionary['Bug'] = array(
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Bugs',
         ],
-        'bugs_assigned_user' => array(
+        'bugs_assigned_user' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
@@ -360,8 +360,8 @@ $dictionary['Bug'] = array(
             'rhs_table' => 'bugs',
             'rhs_key' => 'assigned_user_id',
             'relationship_type' => 'one-to-many',
-        ),
-        'bugs_modified_user' => array(
+        ],
+        'bugs_modified_user' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
@@ -369,8 +369,8 @@ $dictionary['Bug'] = array(
             'rhs_table' => 'bugs',
             'rhs_key' => 'modified_user_id',
             'relationship_type' => 'one-to-many',
-        ),
-        'bugs_created_by' => array(
+        ],
+        'bugs_created_by' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
@@ -378,8 +378,8 @@ $dictionary['Bug'] = array(
             'rhs_table' => 'bugs',
             'rhs_key' => 'created_by',
             'relationship_type' => 'one-to-many',
-        ),
-        'bugs_release' => array(
+        ],
+        'bugs_release' => [
             'lhs_module' => 'Releases',
             'lhs_table' => 'releases',
             'lhs_key' => 'id',
@@ -387,8 +387,8 @@ $dictionary['Bug'] = array(
             'rhs_table' => 'bugs',
             'rhs_key' => 'found_in_release',
             'relationship_type' => 'one-to-many',
-        ),
-        'bugs_fixed_in_release' => array(
+        ],
+        'bugs_fixed_in_release' => [
             'lhs_module' => 'Releases',
             'lhs_table' => 'releases',
             'lhs_key' => 'id',
@@ -396,35 +396,35 @@ $dictionary['Bug'] = array(
             'rhs_table' => 'bugs',
             'rhs_key' => 'fixed_in_release',
             'relationship_type' => 'one-to-many',
-        ),
-    ),
-    'duplicate_check' => array(
+        ],
+    ],
+    'duplicate_check' => [
         'enabled' => true,
-        'FilterDuplicateCheck' => array(
-            'filter_template' => array(
-                array(
-                    '$and' => array(
-                        array(
-                            'name' => array(
+        'FilterDuplicateCheck' => [
+            'filter_template' => [
+                [
+                    '$and' => [
+                        [
+                            'name' => [
                                 '$starts' => '$name',
-                            ),
-                        ),
-                        array(
-                            'status' => array(
+                            ],
+                        ],
+                        [
+                            'status' => [
                                 '$not_equals' => 'Closed',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'ranking_fields' => array(
-                array(
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'ranking_fields' => [
+                [
                     'in_field_name' => 'name',
                     'dupe_field_name' => 'name',
-                ),
-            ),
-        ),
-    ),
+                ],
+            ],
+        ],
+    ],
 
     // This enables optimistic locking for Saves From EditView
     'optimistic_locking' => true,
@@ -435,16 +435,17 @@ $dictionary['Bug'] = array(
             'Contacts' => 'contacts',
         ],
     ],
-);
+];
 
-VardefManager::createVardef('Bugs', 'Bug', array(
+VardefManager::createVardef('Bugs', 'Bug', [
     'default',
     'assignable',
     'team_security',
     'issue',
     'external_source',
     'escalatable',
-));
+    'audit',
+]);
 
 //jc - adding for refactor for import to not use the required_fields array
 //defined in the field_arrays.php file
@@ -455,4 +456,3 @@ $dictionary['Bug']['fields']['name']['full_text_search']['boost'] = 1.51;
 $dictionary['Bug']['fields']['bug_number']['full_text_search']['boost'] = 1.27;
 $dictionary['Bug']['fields']['description']['full_text_search']['boost'] = 0.68;
 $dictionary['Bug']['fields']['work_log']['full_text_search']['boost'] = 0.67;
-

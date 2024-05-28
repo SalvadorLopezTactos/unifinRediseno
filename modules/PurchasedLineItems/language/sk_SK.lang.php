@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Informačný panel so zoznamom zakúpených riadkových položiek',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Informačný panel so záznamom zakúpených riadkových položiek',
     'LBL_PARENT_PURCHASE' => 'Nadradený nákup',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová os zakúpenej riadkovej položky',
 ];

@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'în desfășurare',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare mesaje',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare mesaje',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia mesajelor',
 ];

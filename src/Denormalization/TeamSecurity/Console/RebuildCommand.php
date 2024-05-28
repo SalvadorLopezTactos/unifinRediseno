@@ -38,8 +38,7 @@ class RebuildCommand extends Command implements InstanceModeInterface
                 null,
                 InputOption::VALUE_NONE,
                 'Run even if the data is up to date'
-            )
-        ;
+            );
     }
 
     /**

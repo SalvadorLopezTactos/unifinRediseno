@@ -60,7 +60,7 @@ class SugarUpgradeRunFTSIndex extends UpgradeScript
      * @return string elasticsearch version
      * have to use raw Elastic Client's request method, not method in mango version.
      */
-    protected function getEsVersion() : string
+    protected function getEsVersion(): string
     {
         $esVersion = null;
         $engine = SearchEngine::getInstance()->getEngine();
@@ -84,7 +84,7 @@ class SugarUpgradeRunFTSIndex extends UpgradeScript
      *
      * @return bool
      */
-    protected function isOneIndexEnabled() : bool
+    protected function isOneIndexEnabled(): bool
     {
         return $GLOBALS['sugar_config']['enable_one_index'] ?? false;
     }

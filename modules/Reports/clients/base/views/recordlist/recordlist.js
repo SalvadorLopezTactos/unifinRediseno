@@ -23,9 +23,19 @@
         this.contextEvents = _.extend({}, this.contextEvents, {
             'list:editreport:fire': 'editReport',
             'list:schedulereport:fire': 'scheduleReport',
-            'list:viewschedules:fire': 'viewSchedules'
+            'list:viewschedules:fire': 'viewSchedules',
+            'list:copy:fire': 'copyTemplate',
         });
         this._super('initialize', [options]);
+
+        this._initProperties();
+    },
+
+    /**
+     * Property initialization
+     */
+    _initProperties: function() {
+        this._fieldsToFetch = ['is_template'];
     },
 
     /**
@@ -38,8 +48,10 @@
         var route = app.bwc.buildRoute('Reports', null, 'ReportCriteriaResults', {
             id: model.id,
             page: 'report',
-            mode: 'edit'
+            mode: 'edit',
+            fromListView: true,
         });
+
         app.router.navigate(route, {trigger: true});
     },
 
@@ -82,5 +94,20 @@
             layout: 'records',
             filterOptions: filterOptions.format()
         });
-    }
+    },
+
+    /**
+     * Event handler for open copy modal.
+     */
+    copyTemplate: function(model) {
+        const modal = app.view.createView({
+            name: 'report-copy-modal',
+            type: 'report-copy-modal',
+            model: model
+        });
+
+        $('body').append(modal.$el);
+
+        modal.openModal();
+    },
 })

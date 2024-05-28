@@ -26,7 +26,8 @@ abstract class PMSEFilterApi extends FilterApi
      * Return $apiRoute value
      * @return String
      */
-    public function getApiRoute() {
+    public function getApiRoute()
+    {
         return $this->apiRoute;
     }
 
@@ -34,7 +35,8 @@ abstract class PMSEFilterApi extends FilterApi
      * Returns $filterModuleField value
      * @return String
      */
-    public static function getFilterModuleField() {
+    public static function getFilterModuleField()
+    {
         return static::$filterModuleField;
     }
 
@@ -44,35 +46,36 @@ abstract class PMSEFilterApi extends FilterApi
      */
     public function registerApiRest()
     {
-        return array(
-            'filterModuleAll' => array(
+        return [
+            'filterModuleAll' => [
                 'reqType' => 'GET',
-                'path' => array($this->getApiRoute()),
-                'pathVars' => array('module'),
+                'path' => [$this->getApiRoute()],
+                'pathVars' => ['module'],
                 'method' => 'filterList',
-                'jsonParams' => array('filter'),
+                'jsonParams' => ['filter'],
                 'shortHelp' => 'List of all records in this module',
                 'longHelp' => 'include/api/help/module_filter_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**
      * @inheritdoc
      */
-    protected static function addFilters(array $filterDefs, SugarQuery_Builder_Where $where, SugarQuery $q) {
+    protected static function addFilters(array $filterDefs, SugarQuery_Builder_Where $where, SugarQuery $q)
+    {
         // Adding new filter to respect ACL PA Target module
-        $newFilter = array(
-            self::getFilterModuleField() => array(
-                '$in' => SugarACL::filterModuleList(PMSEEngineUtils::getSupportedModules(), 'access', true)
-            )
-        );
+        $newFilter = [
+            self::getFilterModuleField() => [
+                '$in' => SugarACL::filterModuleList(PMSEEngineUtils::getSupportedModules(), 'access', true),
+            ],
+        ];
         $filterDefs[] = $newFilter;
         parent::addFilters($filterDefs, $where, $q);
     }

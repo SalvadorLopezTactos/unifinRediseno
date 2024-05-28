@@ -14,23 +14,24 @@ use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
 
 class ViewPortalConfig extends SugarView
 {
-	/**
-	 * @see SugarView::_getModuleTitleParams()
-	 */
-	protected function _getModuleTitleParams($browserTitle = false)
-	{
-	    global $mod_strings;
-	    
-    	return array(
-    	   translate('LBL_MODULE_NAME','Administration'),
-    	   ModuleBuilderController::getModuleTitle(),
-    	   );
+    /**
+     * @see SugarView::_getModuleTitleParams()
+     */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _getModuleTitleParams($browserTitle = false)
+    {
+        global $mod_strings;
+
+        return [
+            translate('LBL_MODULE_NAME', 'Administration'),
+            ModuleBuilderController::getModuleTitle(),
+        ];
     }
 
-	// DO NOT REMOVE - overrides parent ViewEdit preDisplay() which attempts to load a bean for a non-existent module
-	function preDisplay() 
-	{
-	}
+    // DO NOT REMOVE - overrides parent ViewEdit preDisplay() which attempts to load a bean for a non-existent module
+    public function preDisplay()
+    {
+    }
 
     /**
      * Strips any HTML tags from an array of User IDs => names to prevent XSS
@@ -51,7 +52,7 @@ class ViewPortalConfig extends SugarView
      * @param array $tabsList the list of Portal module names to format
      * @return array the list of formatted Portal module name objects
      */
-    public function formatTabsList($tabsList) : array
+    public function formatTabsList($tabsList): array
     {
         // Remove the "Home" module from the list so that it isn't shown in the
         // config UI. It is re-inserted when the configuration is saved.
@@ -87,14 +88,14 @@ class ViewPortalConfig extends SugarView
     /**
      * This function loads portal config vars from db and sets them for the view
      * @see SugarView::display() for more info
-   	 */
-	function display() 
-	{
+     */
+    public function display()
+    {
         $isServe = PortalFactory::getInstance('Settings')->isServe();
         $portalFields = [
             'appStatus' => 'offline',
             'logoURL' => '',
-            'logomarkURL'=> '',
+            'logomarkURL' => '',
             'maxQueryResult' => '20',
             'maxSearchQueryResult' => '5',
             'defaultUser' => '',
@@ -114,23 +115,23 @@ class ViewPortalConfig extends SugarView
         $userList = BeanFactory::newBean('Users')->getUserArray();
         $userList[''] = '';
         $this->sanitizeUserList($userList);
-        
+
         $portalTabsList = TabController::getPortalTabs();
         $displayedPortalTabs = $this->formatTabsList($portalTabsList);
         $hiddenPortalTabs = $this->formatTabsList(array_diff(TabController::getAllPortalTabs(), $portalTabsList));
 
         $admin = Administration::getSettings();
 
-        $portalConfig = $admin->getConfigForModule('portal','support', true);
+        $portalConfig = $admin->getConfigForModule('portal', 'support', true);
         $portalConfig['appStatus'] = !empty($portalConfig['on']) ? 'online' : 'offline';
         $smarty = new Sugar_Smarty();
         $smarty->assign('displayedPortalTabs', array_values($displayedPortalTabs));
         $smarty->assign('hiddenPortalTabs', array_values($hiddenPortalTabs));
-        foreach ($portalFields as $fieldName=>$fieldDefault) {
+        foreach ($portalFields as $fieldName => $fieldDefault) {
             if (isset($portalConfig[$fieldName])) {
                 $smarty->assign($fieldName, $this->decodeConfig($portalConfig[$fieldName]));
             } else {
-                $smarty->assign($fieldName,$fieldDefault);
+                $smarty->assign($fieldName, $fieldDefault);
             }
         }
         $smarty->assign('userList', $userList);
@@ -150,5 +151,5 @@ class ViewPortalConfig extends SugarView
         $ajax->addSection('center', translate('LBL_SUGARPORTAL', 'ModuleBuilder'), $smarty->fetch('modules/ModuleBuilder/tpls/portalconfig.tpl'));
 
         echo $ajax->getJavascript();
-	}
+    }
 }

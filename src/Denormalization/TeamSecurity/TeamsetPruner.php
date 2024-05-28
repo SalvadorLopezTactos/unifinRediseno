@@ -105,7 +105,7 @@ class TeamsetPruner
      */
     public function prune()
     {
-        $this->stdOut("Starting prune");
+        $this->stdOut('Starting prune');
         $this->scan();
 
         foreach ($this->tablesToPrune as $tableName => $idColumnName) {
@@ -113,7 +113,7 @@ class TeamsetPruner
         }
         $this->saveBackupTableMappings();
 
-        $this->stdOut("Finished prune");
+        $this->stdOut('Finished prune');
     }
 
 
@@ -138,25 +138,25 @@ class TeamsetPruner
      */
     public function scan()
     {
-        $this->stdOut("Starting Scan");
+        $this->stdOut('Starting Scan');
         // query the db.
         $unusedTeamSets = $this->searchForUnusedTeamsets();
 
         // compute total count of team sets and denorm entries.
-        $count = count($unusedTeamSets);
+        $count = safeCount($unusedTeamSets);
 
         // log those values.
         $this->stdOut("TeamsetPruner::scan() found $count unused team sets");
 
         // write a complete dump to a separate file.
         if ($count > 0) {
-            $dateStamp = date("Y_m_d_H_i_s");
+            $dateStamp = date('Y_m_d_H_i_s');
             $filePath = "TeamsetPruner/scan/unused_teamsets_{$dateStamp}";
             $this->stdOut("Details have been written to $filePath. This will be an array of unused team set id's.");
             $dataAsString = print_r($unusedTeamSets, true);
             $this->writeFile($filePath, $dataAsString);
         }
-        $this->stdOut("Finished Scan");
+        $this->stdOut('Finished Scan');
     }
 
 
@@ -201,7 +201,7 @@ class TeamsetPruner
      * @param array $userIDs
      * @return string
      */
-    public function buildUnusedTeamsetsQuery($unused = true, $teamSetsTableName = 'team_sets') : string
+    public function buildUnusedTeamsetsQuery($unused = true, $teamSetsTableName = 'team_sets'): string
     {
         $teamTables = $this->getTablesWithTeams();
         $aclTables = $this->getTeamACLTables();
@@ -212,7 +212,7 @@ class TeamsetPruner
                 $teamSetsTableName = $this->backedUpTables['team_sets'];
             } else {
                 $msg = "$teamSetsTableName has not been backed up, so we can't use the backup in our queries "
-                . "for buildUnusedTeamsetsQuery(). Resorting to using original table $teamSetsTableName";
+                    . "for buildUnusedTeamsetsQuery(). Resorting to using original table $teamSetsTableName";
                 $this->stdOut($msg);
             }
         }
@@ -226,7 +226,7 @@ class TeamsetPruner
         $sql = "select ts.id team_set_id from $teamSetsTableName ts";
         $sql .= "\nwhere ts.id $whereInOperator (";
         $sql .= "\n$unions\n";
-        $sql .= ")";
+        $sql .= ')';
         return $sql;
     }
 
@@ -241,7 +241,7 @@ class TeamsetPruner
      * @param string $teamSetsTableName - the name of the team_sets table (probably team_sets).
      * @return string - an sql query that will return every actively used team_set_id value.
      */
-    public function buildUnionStatements($teamTables, $aclTables, $teamSetsTableName = 'team_sets') : string
+    public function buildUnionStatements($teamTables, $aclTables, $teamSetsTableName = 'team_sets'): string
     {
         $unionStatements = [];
         foreach ($teamTables as $table) {
@@ -299,7 +299,7 @@ SQL;
             return false;
         }
 
-        $dateStamp = date("mdHi");
+        $dateStamp = date('mdHi');
         $backupName = "tsp_{$tableName}_$dateStamp";
         $backupSQL = "create table {$backupName} as select * from {$tableName}";
         $this->db->query($backupSQL);
@@ -392,11 +392,11 @@ SQL;
      */
     public function getFieldsForTable($tableName)
     {
-        $tableNameToDictionaryMapping = array(
+        $tableNameToDictionaryMapping = [
             'team_sets_teams' => 'team_sets_teams',
             'team_sets' => 'TeamSet',
             'team_sets_modules' => 'TeamSetModule',
-        );
+        ];
 
         if ($this->denormIsUsed()) {
             $tableNameToDictionaryMapping[$this->denormTableName] = $this->denormTableName;
@@ -502,7 +502,7 @@ SQL;
      */
     public function saveBackupTableMappings()
     {
-        $backupString = "<?php\n\$backedupTables = " . var_export($this->backedUpTables, true) . ";";
+        $backupString = "<?php\n\$backedupTables = " . var_export($this->backedUpTables, true) . ';';
         $this->writeFile('TeamsetPruner/backupTables.php', $backupString);
     }
 
@@ -518,7 +518,7 @@ SQL;
      */
     public function restoreFromBackup()
     {
-        $this->stdOut("Starting Restore");
+        $this->stdOut('Starting Restore');
         $backedupTables = [];
         if (!file_exists('TeamsetPruner/backupTables.php')) {
             $this->stdOut("'TeamsetPruner/backupTables.php' does not exist - cannot restore from non-existent backups.");
@@ -533,7 +533,7 @@ SQL;
             $this->db->query($resetSQL);
             $this->stdOut("Restored $tableName from $backupTableName");
         }
-        $this->stdOut("Finished Restore");
+        $this->stdOut('Finished Restore');
         return true;
     }
 

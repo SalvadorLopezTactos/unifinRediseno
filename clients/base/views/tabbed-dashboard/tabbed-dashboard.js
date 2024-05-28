@@ -14,10 +14,10 @@
  * @extends View.View
  */
 ({
-    className: 'tabbed-dashboard-pane bg-primary-content-background',
+    className: 'tabbed-dashboard-pane bg-[--primary-content-background]',
 
     events: {
-        'click [data-toggle=tab]': 'tabClicked',
+        'click [data-bs-toggle=tab]': 'tabClicked',
     },
 
     activeTab: 0,
@@ -107,7 +107,26 @@
             event.stopPropagation();
             return;
         }
-        this.context.trigger('tabbed-dashboard:switch-tab', index);
+
+        let listComponent = null;
+        const dashboardComponent = this.closestComponent('dashboard');
+        if (dashboardComponent) {
+            const dashboardMain = dashboardComponent
+                .getComponent('dashboard-main');
+
+            if (dashboardMain) {
+                listComponent = dashboardMain
+                    .getComponent('dashlet-main')
+                    .getComponent('multi-line-list');
+            }
+        }
+
+        const callback = () =>
+            this.context.trigger('tabbed-dashboard:switch-tab', index);
+
+        listComponent ?
+            app.events.trigger('tabbed-dashboard:switch-tab-clicked', callback) :
+            callback();
     },
 
     /**
@@ -118,9 +137,8 @@
     canSwitchTab: function(index) {
         var components = [];
 
-        var sideDrawer = this._getSideDrawer();
-        if (sideDrawer && sideDrawer.isOpen()) {
-            components.push(sideDrawer);
+        if (app.sideDrawer && app.sideDrawer.isOpen()) {
+            components.push(app.sideDrawer);
         }
 
         var omniDashboard = this._getOmnichannelDashboard();
@@ -159,7 +177,7 @@
         if (this.tabs && this.tabs[index]) {
             this.tabs[index].enabled = mode;
         }
-        var $tab = this.$('a[data-index="' + index + '"]').closest('.tab');
+        var $tab = this.$('.tab[data-index="' + index + '"]');
         if ($tab) {
             mode ? $tab.removeClass('disabled') : $tab.addClass('disabled');
         }
@@ -186,7 +204,7 @@
         }
         _.each(this.tabs, function(tab, index) {
             if (index !== this.activeTab && !this._isDashboardTab(index)) {
-                var $tab = this.$('a[data-index="' + index + '"]').closest('.tab');
+                var $tab = this.$('.tab[data-index="' + index + '"]');
                 if (state === 'edit') {
                     // disable non-dahsboard tabs
                     $tab.addClass('disabled');
@@ -274,7 +292,7 @@
     _getSideDrawer: function() {
         var dashboard = this.closestComponent('dashboard');
         if (dashboard) {
-            var dmComponent = dashboard.getComponent('dashlet-main');
+            var dmComponent = dashboard.getComponent('dashboard-main');
 
             return dmComponent.getComponent('side-drawer');
         }

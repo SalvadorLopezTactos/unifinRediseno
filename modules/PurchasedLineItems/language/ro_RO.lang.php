@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Tabloul de bord Listă articole de linie achiziționate',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare articole de linie achiziționate',
     'LBL_PARENT_PURCHASE' => 'Achiziție părinte',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia articolelor de linie achiziționate',
 ];

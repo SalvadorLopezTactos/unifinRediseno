@@ -9,8 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['footer-actions'] = array(
-    'last_state' => array(
+$viewdefs['base']['view']['footer-actions'] = [
+    'last_state' => [
         'id' => 'footer-tutorial',
-    ),
-);
+    ],
+];

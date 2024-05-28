@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Dodaj',
     'LBL_ADDRCITY' => 'Miasto',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Informacje' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Zamknij' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'Stwierdzono brak złącza dla identyfikatora danego źródła.',
-);
-
+];

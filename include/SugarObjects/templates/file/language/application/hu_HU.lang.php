@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Marketing',
-    'Knowledge Base' => 'Tudásbázis',
-    'Sales' => 'Eladások',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Marketinganyagok',
-    'Product Brochures' => 'Termékismertetők',
-    'FAQ' => 'GYIK',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Marketing',
+        'Knowledge Base' => 'Tudásbázis',
+        'Sales' => 'Eladások',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Aktív',
-    'Draft' => 'Piszkozat',
-    'FAQ' => 'GYIK',
-    'Expired' => 'Lejárt',
-    'Under Review' => 'Felülvizsgálat alatt',
-    'Pending' => 'Függőben lévő',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Marketinganyagok',
+        'Product Brochures' => 'Termékismertetők',
+        'FAQ' => 'GYIK',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Aktív',
+        'Draft' => 'Piszkozat',
+        'FAQ' => 'GYIK',
+        'Expired' => 'Lejárt',
+        'Under Review' => 'Felülvizsgálat alatt',
+        'Pending' => 'Függőben lévő',
+    ],
+];

@@ -9,59 +9,59 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['prospects_dataprivacy'] = array(
+$dictionary['prospects_dataprivacy'] = [
     'table' => 'prospects_dataprivacy',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'prospect_id' => array(
+        ],
+        'prospect_id' => [
             'name' => 'prospect_id',
             'type' => 'id',
-        ),
-        'dataprivacy_id' => array(
+        ],
+        'dataprivacy_id' => [
             'name' => 'dataprivacy_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'prospects_dataprivacypk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_prospect_dataprivacy_dataprivacy',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'dataprivacy_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_prospects_dataprivacy',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'prospect_id',
                 'dataprivacy_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'prospects_dataprivacy' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'prospects_dataprivacy' => [
             'lhs_module' => 'Prospects',
             'lhs_table' => 'prospects',
             'lhs_key' => 'id',
@@ -72,6 +72,6 @@ $dictionary['prospects_dataprivacy'] = array(
             'join_table' => 'prospects_dataprivacy',
             'join_key_lhs' => 'prospect_id',
             'join_key_rhs' => 'dataprivacy_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

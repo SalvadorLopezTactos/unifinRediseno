@@ -11,7 +11,6 @@
  */
 
 
-
 class QuotesApiHelper extends SugarBeanApiHelper
 {
     /**
@@ -22,12 +21,12 @@ class QuotesApiHelper extends SugarBeanApiHelper
      * @param array $options Any Options that may have been passed in.
      * @return array|boolean An array of validation errors if any occurred, otherwise `true`.
      */
-    public function populateFromApi(SugarBean $quote, array $submittedData, array $options = array())
+    public function populateFromApi(SugarBean $quote, array $submittedData, array $options = [])
     {
         parent::populateFromApi($quote, $submittedData, $options);
 
         // valid relate modules
-        $valid_relate_modules = array('Contacts', 'Accounts');
+        $valid_relate_modules = ['Contacts', 'Accounts'];
         // Bug #57888 : REST API: Create related quote must populate billing/shipping contact and account
         if (isset($submittedData['relate_module'], $submittedData['relate_record']) &&
             in_array($submittedData['relate_module'], $valid_relate_modules)
@@ -115,7 +114,6 @@ class QuotesApiHelper extends SugarBeanApiHelper
 
         // set the billing address
         $this->processBeanAddressFields($fromBean, $quote, 'billing', $typeKey, $altTypeKey);
-
     }
 
     /**
@@ -129,14 +127,14 @@ class QuotesApiHelper extends SugarBeanApiHelper
      */
     protected function processBeanAddressFields($fromBean, $quote, $type, $primaryField, $altField)
     {
-        $fields = array('street', 'city', 'state', 'postalcode', 'country');
+        $fields = ['street', 'city', 'state', 'postalcode', 'country'];
         foreach ($fields as $field) {
-            $quoteField = $type . "_address_" . $field;
+            $quoteField = $type . '_address_' . $field;
             $quote->$quoteField = $this->getAddressFormContact(
                 $quote->$quoteField,
                 $fromBean,
-                $primaryField . "_address_" . $field,
-                $altField . "_address_" . $field
+                $primaryField . '_address_' . $field,
+                $altField . '_address_' . $field
             );
         }
     }

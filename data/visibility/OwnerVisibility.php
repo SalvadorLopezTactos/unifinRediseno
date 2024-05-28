@@ -36,7 +36,7 @@ class OwnerVisibility extends SugarVisibility
     /**
      * {@inheritdoc}
      */
-    public function addVisibilityWhereQuery(SugarQuery $sugarQuery, $options = array())
+    public function addVisibilityWhereQuery(SugarQuery $sugarQuery, $options = [])
     {
         $where = null;
         $this->addVisibilityWhere($where);

@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Marketing',
-    'Knowledge Base' => 'Knowledge Base',
-    'Sales' => 'Verkoop',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Marketingmateriaal',
-    'Product Brochures' => 'Productbrochures',
-    'FAQ' => 'FAQ',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Marketing',
+        'Knowledge Base' => 'Knowledge Base',
+        'Sales' => 'Verkoop',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Actief',
-    'Draft' => 'Concept',
-    'FAQ' => 'FAQ',
-    'Expired' => 'Verlopen',
-    'Under Review' => 'Onder revisie',
-    'Pending' => 'Niet toegewezen',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Marketingmateriaal',
+        'Product Brochures' => 'Productbrochures',
+        'FAQ' => 'FAQ',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Actief',
+        'Draft' => 'Concept',
+        'FAQ' => 'FAQ',
+        'Expired' => 'Verlopen',
+        'Under Review' => 'Wordt beoordeeld',
+        'Pending' => 'Niet toegewezen',
+    ],
+];

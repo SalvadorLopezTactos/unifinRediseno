@@ -9,23 +9,23 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['layout']['subpanel-with-massupdate']  = array (
+$viewdefs['base']['layout']['subpanel-with-massupdate'] = [
     'template' => 'panel',
-    'components' => array (
-        array (
+    'components' => [
+        [
             'view' => 'panel-top',
-        ),
-        array (
+        ],
+        [
             'view' => 'massupdate',
-        ),
-        array (
+        ],
+        [
             'view' => 'subpanel-list-with-massupdate',
-        ),
-        array (
+        ],
+        [
             'view' => 'list-pagination',
-        ),
-    ),
-    'last_state' => array(
-        'id' => 'subpanel'
-    ),
-);
+        ],
+    ],
+    'last_state' => [
+        'id' => 'subpanel',
+    ],
+];

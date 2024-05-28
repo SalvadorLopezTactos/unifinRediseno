@@ -9,14 +9,14 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['CampaignLog']['base']['view']['panel-top'] = array(
-    'buttons' => array(
-        array(
+$viewdefs['CampaignLog']['base']['view']['panel-top'] = [
+    'buttons' => [
+        [
             'type' => 'actiondropdown',
             'name' => 'panel_dropdown',
             'css_class' => 'pull-right',
-            'buttons' => array(
-                array(
+            'buttons' => [
+                [
                     'type' => 'sticky-rowaction',
                     'icon' => 'sicon-plus',
                     'name' => 'create_button',
@@ -24,16 +24,16 @@ $viewdefs['CampaignLog']['base']['view']['panel-top'] = array(
                     'acl_action' => 'create',
                     'css_class' => 'disabled',
                     'tooltip' => 'LBL_CREATE_BUTTON_LABEL',
-                ),
-                array(
+                ],
+                [
                     'type' => 'sticky-rowaction',
                     'name' => 'select_button',
                     'label' => 'LBL_ASSOC_RELATED_RECORD',
                     'icon' => 'sicon-edit',
                     'css_class' => 'disabled',
-                ),
-            ),
-        ),
-    ),
+                ],
+            ],
+        ],
+    ],
 
-);
+];

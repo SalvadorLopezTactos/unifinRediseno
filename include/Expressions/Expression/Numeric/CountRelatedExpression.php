@@ -29,7 +29,7 @@ class CountRelatedExpression extends NumericExpression
             return false;
         }
 
-        return count($linkField);
+        return safeCount($linkField);
     }
 
     /**
@@ -91,7 +91,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return array("count");
+        return ['count'];
     }
 
     /**
@@ -99,7 +99,7 @@ JS;
      */
     public static function getParameterTypes()
     {
-        return array(AbstractExpression::$RELATE_TYPE);
+        return [AbstractExpression::$RELATE_TYPE];
     }
 
     /**

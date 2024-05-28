@@ -17,21 +17,21 @@ class ForecastManagerWorksheetsExportApi extends ExportApi
      */
     public function registerApiRest()
     {
-        return array(
-            'exportGet' => array(
+        return [
+            'exportGet' => [
                 'reqType' => 'GET',
-                'path' => array('ForecastManagerWorksheets', 'export'),
-                'pathVars' => array('module', ''),
+                'path' => ['ForecastManagerWorksheets', 'export'],
+                'pathVars' => ['module', ''],
                 'method' => 'export',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
                 'shortHelp' => 'Returns a record set in CSV format along with HTTP headers to indicate content type.',
                 'longHelp' => 'include/api/help/module_export_get_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
-    public function export(ServiceBase $api, array $args = array())
+    public function export(ServiceBase $api, array $args = [])
     {
         ob_start();
         // Load up a seed bean

@@ -9,6 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Notes']['base']['layout']['subpanels'] = array(
-    'components' => array(),
-);
+$viewdefs['Notes']['base']['layout']['subpanels'] = [
+    'components' => [],
+];

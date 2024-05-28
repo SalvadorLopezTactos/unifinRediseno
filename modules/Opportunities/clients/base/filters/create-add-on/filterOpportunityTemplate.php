@@ -12,11 +12,11 @@
 $viewdefs['Opportunities']['base']['filter']['create-add-on']['filters'][] = [
     'id' => 'filterOpportunityTemplate',
     'name' => 'LBL_FILTER_OPPORTUNITY_TEMPLATE',
-    'filter_definition' => array(
-        array(
+    'filter_definition' => [
+        [
             'account_id' => '',
-        ),
-    ),
+        ],
+    ],
     'editable' => true,
     'is_template' => true,
 ];

@@ -13,15 +13,15 @@
 // Needed by VarDef manager when running the load_fields directive
 SugarAutoLoader::load('modules/pmse_Project/pmse_BpmProcessDefinition/LockedFieldsRelatedModulesUtilities.php');
 
-$dictionary['pmse_BpmProcessDefinition'] = array(
+$dictionary['pmse_BpmProcessDefinition'] = [
     'table' => 'pmse_bpm_process_definition',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'reassignable' => false,
-    'fields' => array(
-        'prj_id' => array(
+    'fields' => [
+        'prj_id' => [
             'required' => true,
             'name' => 'prj_id',
             'vname' => 'Project Identifier',
@@ -41,8 +41,8 @@ $dictionary['pmse_BpmProcessDefinition'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'pro_module' => array(
+        ],
+        'pro_module' => [
             'required' => true,
             'name' => 'pro_module',
             'vname' => 'The default Module Name for the whole process',
@@ -62,8 +62,8 @@ $dictionary['pmse_BpmProcessDefinition'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'pro_status' => array(
+        ],
+        'pro_status' => [
             'required' => true,
             'name' => 'pro_status',
             'vname' => 'The process status, can be ACTIVE, INACTIVE',
@@ -83,8 +83,8 @@ $dictionary['pmse_BpmProcessDefinition'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'pro_locked_variables' => array(
+        ],
+        'pro_locked_variables' => [
             'required' => true,
             'name' => 'pro_locked_variables',
             'vname' => 'array of locked variables, these variables are not able to be modified by SugarCrm Forms',
@@ -104,8 +104,8 @@ $dictionary['pmse_BpmProcessDefinition'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'pro_terminate_variables' => array(
+        ],
+        'pro_terminate_variables' => [
             'required' => true,
             'name' => 'pro_terminate_variables',
             'vname' => 'array of variables and their values used to halt (terminate) the case',
@@ -125,8 +125,8 @@ $dictionary['pmse_BpmProcessDefinition'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'execution_mode' => array(
+        ],
+        'execution_mode' => [
             'required' => true,
             'name' => 'execution_mode',
             'vname' => 'script to be executed',
@@ -146,39 +146,39 @@ $dictionary['pmse_BpmProcessDefinition'] = array(
             'calculated' => false,
             'len' => '10',
             'size' => '10',
-        ),
-    ),
+        ],
+    ],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'relationships' => array(),
-    'indices' => array(
-        'prj_id' => array(
+    'relationships' => [],
+    'indices' => [
+        'prj_id' => [
             'name' => 'idx_pd_prj_id',
             'type' => 'index',
-            'fields' => array('prj_id'),
-        ),
-        'pro_status' => array(
+            'fields' => ['prj_id'],
+        ],
+        'pro_status' => [
             'name' => 'idx_pd_pro_status',
             'type' => 'index',
-            'fields' => array('pro_status'),
-        ),
-    ),
-    'uses' => array(
+            'fields' => ['pro_status'],
+        ],
+    ],
+    'uses' => [
         'basic',
         'assignable',
-    ),
-    'load_fields' => array(
-        'class' =>'LockedFieldsRelatedModulesUtilities',
+    ],
+    'load_fields' => [
+        'class' => 'LockedFieldsRelatedModulesUtilities',
         'method' => 'getRelatedFields',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmProcessDefinition', 'pmse_BpmProcessDefinition');

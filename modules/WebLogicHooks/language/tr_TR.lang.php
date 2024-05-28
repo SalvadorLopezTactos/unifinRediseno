@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Web Mantık Çengelleri',
     'LBL_MODULE_NAME_SINGULAR' => 'Web Mantık Çengelleri',
     'LBL_MODULE_TITLE' => 'Web Mantık Çengelleri',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => 'İstek Yöntemi',
     'LBL_TRIGGER_EVENT' => 'Tetikleyici Olay',
     'LBL_URL' => 'URL',
-);
+];

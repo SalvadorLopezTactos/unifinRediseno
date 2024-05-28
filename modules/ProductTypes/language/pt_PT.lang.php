@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tipos de Produtos',
     'LBL_MODULE_NAME_SINGULAR' => 'Tipo de Produto',
     'LBL_MODULE_TITLE' => 'Tipos de Produtos: Ecrã Principal',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Tem a certeza que pretende eliminar este registo?',
     'ERR_DELETE_RECORD' => 'Um número de registo necessita ser especificado para eliminar este tipo de produto.',
     'NTC_LIST_ORDER' => 'Indique a ordem pela qual este tipo de produto irá aparecer nas listas dropdown do campo Tipo de Produto',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Importar Tipos de Produtos',
-    'LBL_CREATED_BY'=>'Criado Por',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Importar Tipos de Produtos',
+    'LBL_CREATED_BY' => 'Criado Por',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Atribuído ao ID',
-    'LBL_EXPORT_CREATED_BY'=>'Criado Por',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Importar Categorias de Produtos',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Atribuído ao ID',
+    'LBL_EXPORT_CREATED_BY' => 'Criado Por',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Importar Categorias de Produtos',
+];

@@ -23,22 +23,16 @@ $viewdefs['CJ_Forms']['base']['view']['subpanel-list'] = [
                     'link' => true,
                 ],
                 [
+                    'name' => 'main_trigger_type',
+                    'label' => 'LBL_MAIN_TRIGGER_TYPE',
+                    'default' => true,
+                    'enabled' => true,
+                ],
+                [
                     'name' => 'active',
                     'label' => 'LBL_ACTIVE',
                     'enabled' => true,
                     'default' => true,
-                ],
-                [
-                    'name' => 'trigger_event',
-                    'label' => 'LBL_TRIGGER_EVENT',
-                    'default' => true,
-                    'enabled' => true,
-                ],
-                [
-                    'name' => 'action_type',
-                    'label' => 'LBL_ACTION_TYPE',
-                    'default' => true,
-                    'enabled' => true,
                 ],
                 [
                     'name' => 'date_modified',

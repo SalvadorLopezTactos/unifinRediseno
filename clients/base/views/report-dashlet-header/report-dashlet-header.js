@@ -74,6 +74,9 @@
 
         this.context.trigger('report-dashlet:change:view-type', {type});
 
+        //after the upgrade to bootstrap 5.x we have to handle it manually
+        this._setSelectedButton();
+
         this.$('.nav-tabs').toggleClass('hidden', type === 'list');
     },
 
@@ -84,7 +87,7 @@
         this._super('_render');
 
         if (this._shouldManuallyHandleButtons) {
-            this._setSelectedButton();
+            this._setSelectedButton(true);
         }
     },
 
@@ -92,8 +95,10 @@
      * Since we are caching the selected button
      * first time when the view is loaded if we have something cached
      * we have to manually select the button
+     *
+     * @param {boolean} manuallyHandle
      */
-    _setSelectedButton: function() {
+    _setSelectedButton: function(manuallyHandle = false) {
         const buttons = this.$('[data-type=button]');
 
         if (buttons && buttons.length < 1) {
@@ -115,9 +120,13 @@
                 button.removeClass('active');
             }
 
-            this._shouldManuallyHandleButtons = false;
+            if (manuallyHandle) {
+                this._shouldManuallyHandleButtons = false;
+            }
         }, this);
 
-        this.$('.nav-tabs').toggleClass('hidden', this._selectedView === 'list');
+        if (manuallyHandle) {
+            this.$('.nav-tabs').toggleClass('hidden', this._selectedView === 'list');
+        }
     },
 });

@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Contractes',
-	'LBL_MODULE_NAME_SINGULAR' => 'Contracte',
-	'LBL_MODULE_TITLE' => 'Contractes: inici',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Contractes',
+    'LBL_MODULE_NAME_SINGULAR' => 'Contracte',
+    'LBL_MODULE_TITLE' => 'Contractes: inici',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Nou Contracte',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'ID Moneda:',
     'LBL_CURRENCY' => 'Moneda:',
     'LBL_CURRENCY_RATE' => 'Divisa',
-    'LBL_ASSIGNED_TO_NAME'=>'Assignat a:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Assignat a:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Llista de contractes',	
+    'LBL_LIST_FORM_TITLE' => 'Llista de contractes',
     'LBL_LIST_CONTRACT_NAME' => 'Nom de Contracte',
     'LBL_LIST_ACCOUNT_NAME' => 'Nom del compte',
     'LBL_LIST_START_DATE' => 'Començar',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Nom',
     'LBL_LIST_CONTRACT_VALUE' => 'Valor',
 
-    'LBL_TYPE'=>'Tipus',
+    'LBL_TYPE' => 'Tipus',
     'LBL_TYPE_NAME' => 'Nom del tipus',
-    'LBL_CONTRACT_TYPE'=>'Tipus:',
+    'LBL_CONTRACT_TYPE' => 'Tipus:',
 
     'LBL_CREATED_USER' => 'Creat per usuari',
     'LBL_MODIFIED_USER' => 'Modificar per usuari',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als contractes',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Quadre de comandament del registre de contractes',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Durada del contracte',
+];

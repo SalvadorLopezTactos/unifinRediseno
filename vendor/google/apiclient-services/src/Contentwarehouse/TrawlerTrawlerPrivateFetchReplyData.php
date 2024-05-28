@@ -131,6 +131,10 @@ class TrawlerTrawlerPrivateFetchReplyData extends \Google\Model
    */
   public $authenticationInfo;
   /**
+   * @var bool
+   */
+  public $bypassedHostOverfull;
+  /**
    * @var int
    */
   public $cacheAcceptableAfterDate;
@@ -166,6 +170,10 @@ class TrawlerTrawlerPrivateFetchReplyData extends \Google\Model
    * @var bool
    */
   public $isBidiStreamingFetch;
+  /**
+   * @var bool
+   */
+  public $isDedicatedHostload;
   /**
    * @var bool
    */
@@ -514,6 +522,20 @@ class TrawlerTrawlerPrivateFetchReplyData extends \Google\Model
     return $this->authenticationInfo;
   }
   /**
+   * @param bool
+   */
+  public function setBypassedHostOverfull($bypassedHostOverfull)
+  {
+    $this->bypassedHostOverfull = $bypassedHostOverfull;
+  }
+  /**
+   * @return bool
+   */
+  public function getBypassedHostOverfull()
+  {
+    return $this->bypassedHostOverfull;
+  }
+  /**
    * @param int
    */
   public function setCacheAcceptableAfterDate($cacheAcceptableAfterDate)
@@ -638,6 +660,20 @@ class TrawlerTrawlerPrivateFetchReplyData extends \Google\Model
   public function getIsBidiStreamingFetch()
   {
     return $this->isBidiStreamingFetch;
+  }
+  /**
+   * @param bool
+   */
+  public function setIsDedicatedHostload($isDedicatedHostload)
+  {
+    $this->isDedicatedHostload = $isDedicatedHostload;
+  }
+  /**
+   * @return bool
+   */
+  public function getIsDedicatedHostload()
+  {
+    return $this->isDedicatedHostload;
   }
   /**
    * @param bool

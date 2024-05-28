@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'ฐานความรู้',
     'LBL_MODULE_NAME_SINGULAR' => 'บทความฐานความรู้',
     'LBL_MODULE_TITLE' => 'บทความฐานความรู้',
@@ -17,4 +17,4 @@ $mod_strings = array(
     'LBL_KEYWORDS' => 'คำหลัก',
     'LBL_CONTENT' => 'เนื้อหา',
     'LBL_ATTACHMENTS' => 'ไฟล์แนบ',
-);
+];

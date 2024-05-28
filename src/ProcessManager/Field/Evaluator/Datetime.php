@@ -126,7 +126,7 @@ class Datetime extends Base implements EvaluatorInterface
     /**
      * Takes a SugarDateTime object and pushes it through TimeDate to get a
      * string value for comparison
-     * @param  \SugarDateTime $datetime SugarDateTime object
+     * @param \SugarDateTime $datetime SugarDateTime object
      * @return string
      */
     protected function getComparisonValue(\SugarDateTime $datetime)

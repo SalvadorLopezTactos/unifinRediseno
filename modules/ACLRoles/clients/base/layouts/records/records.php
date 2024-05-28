@@ -10,11 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['ACLRoles']['base']['layout']['records'] = array(
+$viewdefs['ACLRoles']['base']['layout']['records'] = [
     'type' => 'bwc',
-    'components' => array(
-        array(
+    'components' => [
+        [
             'view' => 'bwc',
-        ),
-    ),
-);
+        ],
+    ],
+];

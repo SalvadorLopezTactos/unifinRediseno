@@ -9,88 +9,88 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['EmailTemplates']['base']['filter']['basic'] = array(
+$viewdefs['EmailTemplates']['base']['filter']['basic'] = [
     'create' => true,
-    'quicksearch_field' => array('name'),
+    'quicksearch_field' => ['name'],
     'quicksearch_priority' => 1,
-    'filters' => array(
-        array(
+    'filters' => [
+        [
             'id' => 'all_records',
             'name' => 'LBL_LISTVIEW_FILTER_ALL',
-            'filter_definition' => array(),
+            'filter_definition' => [],
             'editable' => false,
-        ),
-        array(
-            'id'                => 'all_email_type',
-            'name'              => 'LBL_FILTER_EMAIL_TYPE_TEMPLATES',
-            'filter_definition' => array(
-                '$or' => array(
-                    array(
-                        'type' => array('$is_null' => ''),
-                    ),
-                    array(
-                        'type' => array('$equals' => ''),
-                    ),
-                    array(
-                        'type' => array('$equals' => 'email'),
-                    ),
-                ),
-            ),
-            'editable'          => false,
-        ),
-        array(
-            'id'                => 'all_campaign_type',
-            'name'              => 'LBL_FILTER_CAMPAIGN_TYPE_TEMPLATES',
-            'filter_definition' => array(
-                '$or' => array(
-                    array(
-                        'type' => array('$is_null' => ''),
-                    ),
-                    array(
-                        'type' => array('$equals' => ''),
-                    ),
-                    array(
-                        'type' => array('$equals' => 'campaign'),
-                    ),
-                ),
-            ),
-            'editable'          => false,
-        ),
-        array(
-            'id'                => 'all_workflow_type',
-            'name'              => 'LBL_FILTER_WORKFLOW_TYPE_TEMPLATES',
-            'filter_definition' => array(
-                '$or' => array(
-                    array(
-                        'type' => array('$is_null' => ''),
-                    ),
-                    array(
-                        'type' => array('$equals' => ''),
-                    ),
-                    array(
-                        'type' => array('$equals' => 'workflow'),
-                    ),
-                ),
-            ),
-            'editable'          => false,
-        ),
-        array(
-            'id'                => 'all_system_type',
-            'name'              => 'LBL_FILTER_SYSTEM_TYPE_TEMPLATES',
-            'filter_definition' => array(
-                '$or' => array(
-                    array(
-                        'type' => array('$is_null' => ''),
-                    ),
-                    array(
-                        'type' => array('$equals' => ''),
-                    ),
-                    array(
-                        'type' => array('$equals' => 'system'),
-                    ),
-                ),
-            ),
-            'editable'          => false,
-        ),
-    ),
-);
+        ],
+        [
+            'id' => 'all_email_type',
+            'name' => 'LBL_FILTER_EMAIL_TYPE_TEMPLATES',
+            'filter_definition' => [
+                '$or' => [
+                    [
+                        'type' => ['$is_null' => ''],
+                    ],
+                    [
+                        'type' => ['$equals' => ''],
+                    ],
+                    [
+                        'type' => ['$equals' => 'email'],
+                    ],
+                ],
+            ],
+            'editable' => false,
+        ],
+        [
+            'id' => 'all_campaign_type',
+            'name' => 'LBL_FILTER_CAMPAIGN_TYPE_TEMPLATES',
+            'filter_definition' => [
+                '$or' => [
+                    [
+                        'type' => ['$is_null' => ''],
+                    ],
+                    [
+                        'type' => ['$equals' => ''],
+                    ],
+                    [
+                        'type' => ['$equals' => 'campaign'],
+                    ],
+                ],
+            ],
+            'editable' => false,
+        ],
+        [
+            'id' => 'all_workflow_type',
+            'name' => 'LBL_FILTER_WORKFLOW_TYPE_TEMPLATES',
+            'filter_definition' => [
+                '$or' => [
+                    [
+                        'type' => ['$is_null' => ''],
+                    ],
+                    [
+                        'type' => ['$equals' => ''],
+                    ],
+                    [
+                        'type' => ['$equals' => 'workflow'],
+                    ],
+                ],
+            ],
+            'editable' => false,
+        ],
+        [
+            'id' => 'all_system_type',
+            'name' => 'LBL_FILTER_SYSTEM_TYPE_TEMPLATES',
+            'filter_definition' => [
+                '$or' => [
+                    [
+                        'type' => ['$is_null' => ''],
+                    ],
+                    [
+                        'type' => ['$equals' => ''],
+                    ],
+                    [
+                        'type' => ['$equals' => 'system'],
+                    ],
+                ],
+            ],
+            'editable' => false,
+        ],
+    ],
+];

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Datu privātums',
     'LBL_MODULE_NAME_SINGULAR' => 'Datu privātums',
     'LBL_NUMBER' => 'Numurs',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Neviens lauks vai ieraksts nav atzīmēts dzēšanai.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Datu privātuma ierakstu informācijas panelis',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Datu privātuma fokusa panelis',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Datu privātuma laika josla',
 
     // list view
     'LBL_HELP_RECORDS' => 'Datu privātuma modulis izseko privātuma darbības, tostarp piekrišanas un tematu pieprasījumus, lai atbalstītu jūsu organizācijas privātuma procedūras. Lai izsekotu piekrišanu vai veiktu darbību ar privātuma pieprasījumu, Izveidojiet ar indivīda ierakstu (piemēram, kontaktinformāciju) saistītus datu privātuma ierakstus.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Datu privātuma modulis izseko privātuma darbības, tostarp piekrišanas un tematu pieprasījumus, lai atbalstītu jūsu organizācijas privātuma procedūras. Lai izsekotu piekrišanu vai veiktu darbību ar privātuma pieprasījumu, Izveidojiet ar indivīda ierakstu (piemēram, kontaktinformāciju) saistītus datu privātuma ierakstus. Kad nepieciešamā darbība ir pabeigta, lietotāji datu privātuma pārvaldnieka lomā, lai atjauninātu statusu, var noklikšķināt “Pabeigt” vai “Noraidīt”.
 
 Pieprasījumu dzēšanai katram zemāk esošajā apakšpanelī minētajam indivīda ierakstam atlasiet “Atzīmēt dzēšanai”. Kad visi vēlamie lauki ir atlasīti, ar noklikšķināšanu uz “Izdzēst un pabeigt” tiks neatgriezeniski noņemtas šo lauku vērtības un datu privātuma ieraksts atzīmēts kā pabeigts.',
-);
+];

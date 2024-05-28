@@ -31,7 +31,7 @@
             component: this,
             description: 'LBL_SHORTCUT_QUICK_CREATE',
             handler: function() {
-                this.$('[data-toggle=dropdown]').click();
+                this.$('[data-bs-toggle=dropdown]').click();
             }
         });
     },

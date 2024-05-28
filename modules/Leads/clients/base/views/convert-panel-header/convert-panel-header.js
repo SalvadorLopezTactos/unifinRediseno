@@ -349,22 +349,23 @@
      * @param {boolean} [activate]
      */
     setAssociateButtonState: function(activate) {
-        var $associateButton = this.$('[name="associate_button"]'),
-            panelActive = this.$('.accordion-heading').hasClass('active');
+        let shouldActivate = _.isUndefined(activate) ? null : false;
+        const $associateButton = this.$('[name="associate_button"]');
+        const panelActive = this.$('.accordion-heading').hasClass('active');
 
         //use current state to determine activate if not explicit in call
-        if (_.isUndefined(activate)) {
+        if (shouldActivate === null) {
             if (this.layout.currentToggle === this.layout.TOGGLE_CREATE_LAYOUT) {
-                activate = true;
+                shouldActivate = true;
             } else {
-                activate = this.layout.currentState.dupeSelected;
+                shouldActivate = this.layout.currentState.dupeSelected;
             }
         }
 
         this.setAssociateButtonLabel(this.layout.currentToggle === this.layout.TOGGLE_CREATE_LAYOUT);
 
         //only activate if current panel is active
-        if (activate && panelActive) {
+        if (shouldActivate && panelActive) {
             $associateButton.removeClass('disabled');
         } else {
             $associateButton.addClass('disabled');

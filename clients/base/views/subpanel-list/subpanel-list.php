@@ -9,37 +9,37 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['subpanel-list'] = array(
+$viewdefs['base']['view']['subpanel-list'] = [
     'template' => 'flex-list',
     'sticky_resizable_columns' => true,
     'favorite' => true,
-    'rowactions' => array(
-        'actions' => array(
-            array(
+    'rowactions' => [
+        'actions' => [
+            [
                 'type' => 'rowaction',
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
                 'icon' => 'sicon-preview',
                 'acl_action' => 'view',
-            ),
-            array(
+            ],
+            [
                 'type' => 'rowaction',
                 'name' => 'edit_button',
                 'icon' => 'sicon-pencil',
                 'label' => 'LBL_EDIT_BUTTON',
                 'event' => 'list:editrow:fire',
                 'acl_action' => 'edit',
-            ),
-            array(
+            ],
+            [
                 'type' => 'unlink-action',
                 'name' => 'unlink_button',
                 'icon' => 'sicon-unlink',
                 'label' => 'LBL_UNLINK_BUTTON',
-            ),
-        ),
-    ),
-    'last_state' => array(
+            ],
+        ],
+    ],
+    'last_state' => [
         'id' => 'subpanel-list',
-    ),
-);
+    ],
+];

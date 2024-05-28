@@ -24,4 +24,20 @@ class ExternalUser extends Person
     {
         return false;
     }
+
+    /**
+     * {@inheritDoc}
+     * @see Person::mark_deleted()
+     */
+    public function mark_deleted($id)
+    {
+        if (!empty($this->parent_type) && !empty($this->parent_id)) {
+            $parentBean = BeanFactory::getBean($this->parent_type, $this->parent_id);
+            if ($parentBean) {
+                $parentBean->external_user_id = null;
+                $parentBean->save();
+            }
+        }
+        parent::mark_deleted($id);
+    }
 }

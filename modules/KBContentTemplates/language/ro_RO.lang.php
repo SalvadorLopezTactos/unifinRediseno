@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Modele bază de cunoştinţe',
     'LBL_MODULE_NAME_SINGULAR' => 'Model bază de cunoştinţe',
     'LBL_MODULE_TITLE' => 'Model bază de cunoştinţe',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Vizualizare şabloane',
     'LBL_TEXT_BODY' => 'Corp',
     'LBL_LIST_TEMPLATE_NAME' => 'Nume Sablon',
-);
+];

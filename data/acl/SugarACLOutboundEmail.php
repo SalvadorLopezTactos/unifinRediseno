@@ -11,6 +11,7 @@
  */
 
 require_once 'data/SugarACLStrategy.php';
+
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 
 
@@ -21,7 +22,7 @@ class SugarACLOutboundEmail extends SugarACLStrategy
      */
     public function checkAccess($module, $view, $context)
     {
-        if (in_array($view, ['access', 'team_security'])) {
+        if (safeInArray($view, ['access', 'team_security'])) {
             return true;
         }
 
@@ -63,10 +64,10 @@ class SugarACLOutboundEmail extends SugarACLStrategy
                 switch ($bean->type) {
                     case OutboundEmail::TYPE_SYSTEM:
                         // The name and teams cannot be changed.
-                        return !in_array($context['field'], ['name', 'team_id', 'team_set_id', 'team_name']);
+                        return !safeInArray($context['field'], ['name', 'team_id', 'team_set_id', 'team_name']);
                     case OutboundEmail::TYPE_SYSTEM_OVERRIDE:
                         // Only the account credentials information can be changed.
-                        return in_array($context['field'], [
+                        return safeInArray($context['field'], [
                             'id',
                             'mail_smtpuser',
                             'mail_smtppass',
@@ -89,7 +90,7 @@ class SugarACLOutboundEmail extends SugarACLStrategy
             OutboundEmail::TYPE_SYSTEM_OVERRIDE,
         ];
 
-        if ($view === 'delete' && in_array($bean->type, $systemTypes)) {
+        if ($view === 'delete' && safeInArray($bean->type, $systemTypes)) {
             return false;
         }
 

@@ -23,12 +23,21 @@ class AuthApi extends SugarApi
     {
         return [
             'getAuthInfo' => [
-                'reqType'   => 'GET',
-                'path' => array('EAPM', 'auth'),
-                'pathVars' => array('module', ''),
-                'method'    => 'getAuthInfo',
+                'reqType' => 'GET',
+                'path' => ['EAPM', 'auth'],
+                'pathVars' => ['module', ''],
+                'method' => 'getAuthInfo',
                 'shortHelp' => 'Get auth info for an application',
-                'longHelp'  => 'include/api/help/module_get_help.html',
+                'longHelp' => 'include/api/help/module_get_help.html',
+            ],
+            'getFullAPIList' => [
+                'reqType' => 'GET',
+                'path' => ['EAPM', 'list'],
+                'pathVars' => ['module', ''],
+                'method' => 'getFullAPIList',
+                'minVersion' => '11.23',
+                'shortHelp' => 'Get full API list for the application',
+                'longHelp' => 'include/api/help/eapm_list.html',
             ],
         ];
     }
@@ -83,5 +92,13 @@ class AuthApi extends SugarApi
     public function getExternalApi(string $application)
     {
         return ExternalAPIFactory::loadAPI($application, true);
+    }
+
+    /**
+     * Load the full exteranl api list
+     */
+    public function getFullAPIList()
+    {
+        return ExternalAPIFactory::loadFullAPIList(false, true);
     }
 }

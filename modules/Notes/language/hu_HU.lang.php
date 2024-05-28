@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Megjegyzések listája műszerfal',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Feljegyzések bejegyzések műszerfal',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Megjegyzések figyelemfelhívás',
     'LBL_EXTERNAL_USER' => 'Külső felhasználó',
     'LBL_EXTERNAL_USER_NAME' => 'Külső felhasználó',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Megjegyzés Idővonal',
 
     'LBL_RELATED_CONTACT' => 'Kapcsolódó kapcsolat',
     'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót a kliens törléséhez!',
@@ -120,4 +121,4 @@ $mod_strings = array(
 - A kötelező mezők kitöltése nélkül mentés nem lehetséges. 
 - Ha hiányzó mezőt talál, kattintson a "Több mutatása" opcióra a további mezők felfedéséhez! 
 2. Kattintson a "Mentés" gombra a rekord mentéséhez és a korábbi nézetre való visszatéréshez.',
-);
+];

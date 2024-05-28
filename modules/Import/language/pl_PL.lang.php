@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Importowane pliki zostały wczytane poprawnie',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Zaimportowany rekord bierze udział w procesie i nie może być edytowany, ponieważ niektóre pola są zablokowane do edycji przez proces.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => '- liczba znalezionych błędów. Wyświetl zakładkę błędów, aby zobaczyć wiersze pominięte z powodu błędu',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Jeśli ten użytkownik nie istnieje, użyj bieżącego',
     'LBL_SHOW_HIDDEN' => 'Pokaż pola, które nie są normalnie importowane',
     'LBL_UPDATE_RECORDS' => 'Aktualizuj istniejące rekordy, zamiast importować je (cofnięcie operacji nie będzie możliwe)',
-    'LBL_TEST'=> 'Test importu (nie zapisuj ani nie zmieniaj danych)',
+    'LBL_TEST' => 'Test importu (nie zapisuj ani nie zmieniaj danych)',
     'LBL_TRUNCATE_TABLE' => 'Opróżnij tabelę przed importem (usuń wszystkie rekordy)',
     'LBL_RELATED_ACCOUNTS' => 'Nie twórz powiązanych kont',
     'LBL_NO_DATECHECK' => 'Pomiń sprawdzanie dat (szybsze, lecz nie powiedzie w przypadku wykrycia błędnej daty)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Nieprawidłowa liczba całkowita',
     'LBL_ERROR_INVALID_NUM' => 'Nieprawidłowa wartość numeryczna',
     'LBL_ERROR_INVALID_TIME' => 'Nieprawidłowy czas',
-    'LBL_ERROR_INVALID_EMAIL'=>'Niewłaściwy adres e-mail',
-    'LBL_ERROR_INVALID_BOOL'=>'Nieprawidłowa wartość (powinno być  1 lub 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Nieprawidłowy ciąg znaków daty',
-    'LBL_ERROR_INVALID_USER'=>'Nieprawidłowa nazwa użytkownika lub ID',
+    'LBL_ERROR_INVALID_EMAIL' => 'Niewłaściwy adres e-mail',
+    'LBL_ERROR_INVALID_BOOL' => 'Nieprawidłowa wartość (powinno być  1 lub 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Nieprawidłowy ciąg znaków daty',
+    'LBL_ERROR_INVALID_USER' => 'Nieprawidłowa nazwa użytkownika lub ID',
     'LBL_ERROR_INVALID_TEAM' => 'Nieprawidłowa nazwa zespołu lub ID',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Nieprawidłowa nazwa kontrahenta lub ID',
     'LBL_ERROR_INVALID_RELATE' => 'Nieprawidłowe pole zależne',
@@ -101,7 +100,7 @@ $mod_strings = array (
     'LBL_START_OVER' => 'Zacznij od początku',
     'LBL_ERROR' => 'Błąd:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Liczba wierszy w pliku importu — {0}. Optymalna liczba wierszy to {1}. Większa liczba wierszy może spowolnić proces importu. Kliknij OK, aby kontynuować importowanie. Kliknij Anuluj, aby poprawić i ponownie przesłać plik importu.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Nie możesz importować użytkownika, który jest administratorem systemu',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Nie możesz importować użytkownika, który jest administratorem systemu',
     'ERR_REPORT_LOOP' => 'System wykrył pętlę raportowania. Użytkownik nie może raportować sam do siebie ani żaden z jego przełożonych nie może raportować do niego.',
     'ERR_MULTIPLE' => 'Zdefiniowano kilka kolumn z tą samą nazwą pola.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Brak wymaganych pól:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Nie wykryto wierszy w pliku importu. Upewnij się, że nie ma w nim pustych linii i spróbuj ponownie.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Plik importu nie istnieje lub został już przetworzony',
     'LBL_SUCCESS' => 'Sukces:',
-	'LBL_FAILURE' => 'Import nie powiódł się:',
+    'LBL_FAILURE' => 'Import nie powiódł się:',
     'LBL_SUCCESSFULLY' => 'Poprawnie zaimportowano dane',
     'LBL_LAST_IMPORT_UNDONE' => 'Operacja importu została cofnięta.',
     'LBL_NO_IMPORT_TO_UNDO' => 'Nie można cofnąć operacji importu.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Importuj ponownie',
     'LBL_FINISHED' => 'Zakończono',
     'LBL_UNDO_LAST_IMPORT' => 'Cofnij import',
-    'LBL_LAST_IMPORTED'=>'Utworzono',
+    'LBL_LAST_IMPORTED' => 'Utworzono',
     'ERR_MULTIPLE_PARENTS' => 'Możesz zdefiniować tylko jedno ID elementu nadrzędnego',
     'LBL_DUPLICATES' => 'Znaleziono duplikaty',
     'LNK_DUPLICATE_LIST' => 'Pobierz listę duplikatów',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Ukryj notatki',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Pokaż podgląd kolumny',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Ukryj podgląd kolumny',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Sprawdź występowanie duplikatów za pomocą operatora:',
     'LBL_SAVE_MAPPING_AS' => 'Aby zapisać ustawienia importu, podaj nazwę zapisanych ustawień:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Pojedynczy cudzysłów (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Podwójny cudzysłów (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Aby przydzielić nowe rekordy do zespołu innego niż Twój domyślny, użyj kolumny domyślnej wartości, aby wybrać inny zespół.',
     'LBL_SIGN_IN_HELP' => 'Aby włączyć tę opcję, zaloguj się przez zakładkę Konta zewnętrzne na swojej stronie ustawień użytkownika.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Próba obsługi adresu e-mail w pliku bean, który go nie obsługuje.",
-);
+];

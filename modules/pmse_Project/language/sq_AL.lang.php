@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Definime procesi',
-  'LBL_MODULE_TITLE' => 'Definime procesi',
-  'LBL_MODULE_NAME_SINGULAR' => 'Definimi procesit',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Definime procesi',
+    'LBL_MODULE_TITLE' => 'Definime procesi',
+    'LBL_MODULE_NAME_SINGULAR' => 'Definimi procesit',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te përkufizimet e proceseve',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te përkufizimet e proceseve',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Paneli i regjistrimit të përkufizimeve të procesit',
-  'LNK_LIST' => 'Shiko definimet e procesit',
-  'LNK_NEW_PMSE_PROJECT' => 'Krijo definimet e procesit',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Importo definimet e procesit',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Paneli i regjistrimit të përkufizimeve të procesit',
+    'LNK_LIST' => 'Shiko definimet e procesit',
+    'LNK_NEW_PMSE_PROJECT' => 'Krijo definimet e procesit',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Importo definimet e procesit',
 
-  'LBL_PRJ_STATUS' => 'Statusi',
-  'LBL_PRJ_MODULE' => 'Moduli i synimit',
-  'LBL_PRJ_RUN_ORDER' => 'Ekzekuto porosinë',
-  'LBL_PMSE_BUTTON_SAVE' => 'Ruaj',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Anulo',
-  'LBL_PMSE_BUTTON_YES' => 'Po',
-  'LBL_PMSE_BUTTON_NO' => 'Jo',
-  'LBL_PMSE_BUTTON_OK' => 'OK',
+    'LBL_PRJ_STATUS' => 'Statusi',
+    'LBL_PRJ_MODULE' => 'Moduli i synimit',
+    'LBL_PRJ_RUN_ORDER' => 'Ekzekuto porosinë',
+    'LBL_PMSE_BUTTON_SAVE' => 'Ruaj',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Anulo',
+    'LBL_PMSE_BUTTON_YES' => 'Po',
+    'LBL_PMSE_BUTTON_NO' => 'Jo',
+    'LBL_PMSE_BUTTON_OK' => 'OK',
     'LBL_PMSE_FORM_ERROR' => 'Zgjidh gabimet para se të vazhdosh.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Dizajno',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktivitetet',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Veprim',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Ngjarje e fillimit të udhëheqjes',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Ngjarja e fillimit të mundësisë' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Ngjarja e fillimit të mundësisë',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Ngjarja e fillimit të dokumentit',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Ngjarje të moduleve të tjera',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Ngjarja e pritjes',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Rregullat e biznesit',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Veprimet lidhur me rregullat e biznesit',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Shablloni i emailit',
-);
+];

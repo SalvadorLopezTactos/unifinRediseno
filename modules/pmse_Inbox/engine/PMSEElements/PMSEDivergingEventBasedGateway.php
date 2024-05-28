@@ -20,7 +20,7 @@ class PMSEDivergingEventBasedGateway extends PMSEDivergingGateway
      * @param type $externalAction
      * @return type
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         $routeAction = 'ROUTE';
         $flowAction = 'CREATE';

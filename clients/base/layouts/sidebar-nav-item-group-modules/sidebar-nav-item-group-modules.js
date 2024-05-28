@@ -16,7 +16,9 @@
 ({
     extendsFrom: 'SidebarNavItemGroupLayout',
 
-    className: 'sidebar-nav-item-group sidebar-nav-item-group-modules relative overflow-hidden flex flex-column',
+    className: `sidebar-nav-item-group sidebar-nav-item-group-modules border-t-[1px]
+border-[--sidebar-nav-group-divider-color] flex flex-col overflow-hidden relative
+group-[.expanded:not(.collapsing):not(.expanding)]/sidebar:overflow-y-auto`,
 
     /**
      * Stores the integer maximum number of pinned module items

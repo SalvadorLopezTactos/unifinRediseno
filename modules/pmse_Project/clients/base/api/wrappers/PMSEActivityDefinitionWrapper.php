@@ -19,7 +19,6 @@
  */
 class PMSEActivityDefinitionWrapper
 {
-
     /**
      * Activity bean attribute
      * @var \BpmnActivity
@@ -103,25 +102,29 @@ class PMSEActivityDefinitionWrapper
      */
     public function _get(array $args)
     {
-        $result = array("success" => false);
-//        $this->activity = new BpmnActivity();
-        $this->activity->retrieve_by_string_fields(array('act_uid' => $args['record']));
+        $result = ['success' => false];
+        //        $this->activity = new BpmnActivity();
+        $this->activity->retrieve_by_string_fields(['act_uid' => $args['record']]);
         if (!empty($this->activity->fetched_row)) {
-//            $this->activityDefinition = new BpmActivityDefinition();
+            //            $this->activityDefinition = new BpmActivityDefinition();
             $this->activityDefinition->retrieve($this->activity->id);
             if (!empty($this->activityDefinition->fetched_row)) {
                 $result['success'] = true;
                 if (empty($this->activityDefinition->fetched_row['act_readonly_fields'])) {
                     $this->activityDefinition->fetched_row['act_readonly_fields'] = $this->getDefaultReadOnlyFields();
                 } else {
-                    $this->activityDefinition->fetched_row['act_readonly_fields'] = $this->getReadOnlyFields(array(),
-                        json_decode(base64_decode($this->activityDefinition->fetched_row['act_readonly_fields'])));
+                    $this->activityDefinition->fetched_row['act_readonly_fields'] = $this->getReadOnlyFields(
+                        [],
+                        json_decode(base64_decode($this->activityDefinition->fetched_row['act_readonly_fields']))
+                    );
                 }
                 if (empty($this->activityDefinition->fetched_row['act_required_fields'])) {
                     $this->activityDefinition->fetched_row['act_required_fields'] = $this->getDefaultRequiredFields();
                 } else {
-                    $this->activityDefinition->fetched_row['act_required_fields'] = $this->getRequiredFields(array(),
-                        json_decode(base64_decode($this->activityDefinition->fetched_row['act_required_fields'])));
+                    $this->activityDefinition->fetched_row['act_required_fields'] = $this->getRequiredFields(
+                        [],
+                        json_decode(base64_decode($this->activityDefinition->fetched_row['act_required_fields']))
+                    );
                 }
                 if (empty($this->activityDefinition->fetched_row['act_expected_time'])) {
                     $this->activityDefinition->fetched_row['act_expected_time'] = $this->getDefaultExpectedTime();
@@ -131,8 +134,10 @@ class PMSEActivityDefinitionWrapper
                 if (empty($this->activityDefinition->fetched_row['act_related_modules'])) {
                     $this->activityDefinition->fetched_row['act_related_modules'] = $this->getRelatedModules($args['module']);
                 } else {
-                    $this->activityDefinition->fetched_row['act_related_modules'] = $this->getRelatedModules($args['module'],
-                        json_decode(base64_decode($this->activityDefinition->fetched_row['act_related_modules']))); //json_decode(base64_decode($this->activityDefinition->fetched_row['act_related_modules']));
+                    $this->activityDefinition->fetched_row['act_related_modules'] = $this->getRelatedModules(
+                        $args['module'],
+                        json_decode(base64_decode($this->activityDefinition->fetched_row['act_related_modules']))
+                    ); //json_decode(base64_decode($this->activityDefinition->fetched_row['act_related_modules']));
                 }
                 if (!empty($this->activityDefinition->fetched_row['act_fields'])) {
                     $act_fields = json_decode($this->activityDefinition->fetched_row['act_fields']);
@@ -161,7 +166,7 @@ class PMSEActivityDefinitionWrapper
                 $result = array_merge($result, $this->activityDefinition->fetched_row);
             }
         }
-//        $result = ADAMEngineUtils::sanitizeKeyFields($result);
+        //        $result = ADAMEngineUtils::sanitizeKeyFields($result);
         return $result;
     }
 
@@ -173,9 +178,9 @@ class PMSEActivityDefinitionWrapper
     public function _post(array $args)
     {
         //$primaryKeyField = $this->getPrimaryFieldName($this->activity);
-        $this->activity->retrieve_by_string_fields(array('act_uid' => $args['act_uid']));
-        $data = array("success" => false);
-        if (count($args) > 0) {
+        $this->activity->retrieve_by_string_fields(['act_uid' => $args['act_uid']]);
+        $data = ['success' => false];
+        if (safeCount($args) > 0) {
             if (!empty($this->activity->fetched_row)) {
                 $args['id'] = $this->activity->id; //$primaryKeyField;
                 foreach ($args as $key => $value) {
@@ -194,7 +199,7 @@ class PMSEActivityDefinitionWrapper
                 $this->activityDefinition->new_with_id = true;
                 $this->activityDefinition->save();
                 if (!$this->activityDefinition->in_save) {
-                    $data = array("success" => true);
+                    $data = ['success' => true];
                 }
             }
         }
@@ -209,9 +214,9 @@ class PMSEActivityDefinitionWrapper
 
     public function _put(array $args)
     {
-        $data = array("success" => false);
-        if (isset($args['record']) && count($args) > 0) {
-            if ($this->activity->retrieve_by_string_fields(array('act_uid' => $args['record']))) {
+        $data = ['success' => false];
+        if (isset($args['record']) && safeCount($args) > 0) {
+            if ($this->activity->retrieve_by_string_fields(['act_uid' => $args['record']])) {
                 if (!empty($this->activity->fetched_row)) {
                     $args['id'] = $this->activity->id;
                     $this->activityDefinition->retrieve($this->activity->id);
@@ -234,7 +239,7 @@ class PMSEActivityDefinitionWrapper
                     }
                     $this->activityDefinition->save();
                     if (!$this->activityDefinition->in_save) {
-                        $data = array("success" => true);
+                        $data = ['success' => true];
                     }
                 }
             }
@@ -249,7 +254,6 @@ class PMSEActivityDefinitionWrapper
      */
     public function _delete(array $args)
     {
-
     }
 
     /**
@@ -260,22 +264,25 @@ class PMSEActivityDefinitionWrapper
     {
         $this->processDefinition->retrieve($this->activityDefinition->pro_id);
         $bean = $this->factory->getBean($this->processDefinition->pro_module);
-        $fieldsData = $bean->field_defs ?? array();
+        $fieldsData = $bean->field_defs ?? [];
 
-        $output = array();
+        $output = [];
         foreach ($fieldsData as $field) {
             if (isset($field['vname']) && PMSEEngineUtils::isValidField($field, 'RR') &&
                 PMSEEngineUtils::isSupportedField($bean->object_name, $field['name'], 'ROF')) {
-                $tmpField = array();
+                $tmpField = [];
                 $tmpField['name'] = $field['name'];
-                $tmpField['label'] = str_replace(':', '',
-                    translate($field['vname'], $this->processDefinition->pro_module));
+                $tmpField['label'] = str_replace(
+                    ':',
+                    '',
+                    translate($field['vname'], $this->processDefinition->pro_module)
+                );
                 $tmpField['readonly'] = false;
                 $output[] = $tmpField;
             }
         }
 
-        $text = array();
+        $text = [];
         foreach ($output as $key => $row) {
             $text[$key] = strtolower($row['label']);
         }
@@ -292,18 +299,21 @@ class PMSEActivityDefinitionWrapper
     {
         $this->processDefinition->retrieve($this->activityDefinition->pro_id);
         $bean = $this->factory->getBean($this->processDefinition->pro_module);
-        $fieldsData = $bean->field_defs ?? array();
+        $fieldsData = $bean->field_defs ?? [];
 
-        $output = array();
+        $output = [];
         foreach ($fieldsData as $field) {
             if (isset($field['vname']) && PMSEEngineUtils::isValidField($field, 'RR') &&
                 PMSEEngineUtils::isSupportedField($bean->object_name, $field['name'], 'RQF')) {
-                if ($field['type'] != 'bool' && $field['type'] != 'radioenum' ) {
+                if ($field['type'] != 'bool' && $field['type'] != 'radioenum') {
                     if (!(isset($field['required']) && $field['required'])) {
-                        $tmpField = array();
+                        $tmpField = [];
                         $tmpField['name'] = $field['name'];
-                        $tmpField['label'] = str_replace(':', '',
-                            translate($field['vname'], $this->processDefinition->pro_module));
+                        $tmpField['label'] = str_replace(
+                            ':',
+                            '',
+                            translate($field['vname'], $this->processDefinition->pro_module)
+                        );
                         $tmpField['required'] = false;
                         $output[] = $tmpField;
                     }
@@ -311,7 +321,7 @@ class PMSEActivityDefinitionWrapper
             }
         }
 
-        $text = array();
+        $text = [];
         foreach ($output as $key => $row) {
             $text[$key] = strtolower($row['label']);
         }
@@ -326,11 +336,11 @@ class PMSEActivityDefinitionWrapper
      * @param arary $readOnlyFields
      * @return array
      */
-    public function getReadOnlyFields($fields = array(), $readOnlyFields = array())
+    public function getReadOnlyFields($fields = [], $readOnlyFields = [])
     {
         $fields = empty($fields) ? $this->getDefaultReadOnlyFields() : $fields;
         foreach ($fields as $key => $field) {
-            if (in_array($field['name'], $readOnlyFields)) {
+            if (safeInArray($field['name'], $readOnlyFields)) {
                 $field['readonly'] = true;
                 $fields[$key] = $field;
             }
@@ -344,11 +354,11 @@ class PMSEActivityDefinitionWrapper
      * @param array $requiredFields
      * @return array
      */
-    public function getRequiredFields($fields = array(), $requiredFields = array())
+    public function getRequiredFields($fields = [], $requiredFields = [])
     {
         $fields = empty($fields) ? $this->getDefaultRequiredFields() : $fields;
         foreach ($fields as $key => $field) {
-            if (in_array($field['name'], $requiredFields)) {
+            if (safeInArray($field['name'], $requiredFields)) {
                 $field['required'] = true;
                 $fields[$key] = $field;
             }
@@ -364,33 +374,33 @@ class PMSEActivityDefinitionWrapper
     public function getDefaultExpectedTime()
     {
         $output = new stdClass();
-        $output->time = "";
-        $output->unit = "hour";
+        $output->time = '';
+        $output->unit = 'hour';
         return $output;
     }
 
     /**
      * Get the list of related modules
-     * @global array $beanList
      * @param String $filter
      * @param String $json
      * @return array
      * @codeCoverageIgnore
+     * @global array $beanList
      */
     public function getRelatedModules($filter, $json = null)
     {
-//        $res = new stdClass();
-//        $res->search = $filter;
-//        $res->success = true;
+        //        $res = new stdClass();
+        //        $res->search = $filter;
+        //        $res->success = true;
         global $beanList;
         if (isset($beanList[$filter])) {
             $newModuleFilter = $filter;
         } else {
             $newModuleFilter = array_search($filter, $beanList);
         }
-        $output_11 = array();
-        $output_1m = array();
-        $output = array();
+        $output_11 = [];
+        $output_1m = [];
+        $output = [];
         $moduleBean = $this->factory->getBean($newModuleFilter);
         //$relatedModules = is_object($moduleBean) ? $moduleBean->get_linked_fields() : array();
         $filter_11 = 'one-to-one';
@@ -400,21 +410,24 @@ class PMSEActivityDefinitionWrapper
             //$relationships = new DeployedRelationships($newModuleFilter);
             $relationships = $this->getDeployedRelationships($newModuleFilter);
             $ajaxRelationships = $this->getAjaxRelationships($relationships);
-            if ("ProjectTask" == $newModuleFilter) {
+            if ('ProjectTask' == $newModuleFilter) {
                 //special case
-                $newModuleFilter = "Project Tasks";
+                $newModuleFilter = 'Project Tasks';
             }
-            $options = array(
+            $options = [
                 //array('value'=>'add','text'=>translate('LBL_PMSE_LABEL_ADD', 'ProcessMaker'),'checked'=>false),
-                array('value' => 'view', 'text' => translate('LBL_PMSE_LABEL_VIEW', 'ProcessMaker'), 'checked' => false)
-            );
+                ['value' => 'view', 'text' => translate('LBL_PMSE_LABEL_VIEW', 'ProcessMaker'), 'checked' => false],
+            ];
             foreach ($ajaxRelationships as $related) {
                 if (($newModuleFilter == $related['lhs_module'] || strtolower($newModuleFilter) == $related['lhs_table']) && $related['rhs_module'] != $newModuleFilter && ($related['relationship_type'] == $filter_11 || $related['relationship_type'] == $filter_1m)) {
-                    $tmpField = array();
+                    $tmpField = [];
                     $tmpField['value'] = $related['name'];
                     $tmpField['text'] = $related['rhs_module']; // . " (" . $related['name'] . " - " . $related['relationship_type'] . ")";
-                    $tmpField['options'] = isset($json) ? $this->searchModules($related['relationship_name'], $options,
-                        $json) : $options;
+                    $tmpField['options'] = isset($json) ? $this->searchModules(
+                        $related['relationship_name'],
+                        $options,
+                        $json
+                    ) : $options;
                     if ($related['relationship_type'] == $filter_11) {
                         $output_11[] = $tmpField;
                     } else {
@@ -426,13 +439,13 @@ class PMSEActivityDefinitionWrapper
             }
             $output = array_merge($output_11, $output_1m);
         }
-        $text = array();
+        $text = [];
         foreach ($output as $key => $row) {
             $text[$key] = strtolower($row['label']);
         }
         array_multisort($text, SORT_ASC, $output);
 
-//        $res->result = $output;
+        //        $res->result = $output;
         return $output;
     }
 
@@ -443,7 +456,7 @@ class PMSEActivityDefinitionWrapper
      */
     public function getAjaxRelationships($relationships)
     {
-        $ajaxrels = array();
+        $ajaxrels = [];
         $relationshipList = $relationships->getRelationshipList();
         foreach ($relationshipList as $relationshipName) {
             $rel = $relationships->get($relationshipName)->getDefinition();
@@ -469,7 +482,7 @@ class PMSEActivityDefinitionWrapper
             }
             $rel ['name'] = $relationshipName;
             if ($rel ['is_custom'] && isset($rel ['from_studio']) && $rel ['from_studio']) {
-                $rel ['name'] = $relationshipName . "*";
+                $rel ['name'] = $relationshipName . '*';
             }
             $ajaxrels [] = $rel;
         }

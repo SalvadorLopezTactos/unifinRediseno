@@ -15,7 +15,6 @@ use Sugarcrm\Sugarcrm\ProcessManager;
 
 class PMSEEventObserver implements PMSEObserver
 {
-
     /**
      *
      * @var type
@@ -84,16 +83,15 @@ class PMSEEventObserver implements PMSEObserver
     public function update($subject)
     {
         if (method_exists($subject, 'getEventDefinition')) {
-            $this->logger->debug("Trigger update of a Related Relationship for a Event Definition update");
+            $this->logger->debug('Trigger update of a Related Relationship for a Event Definition update');
             $event = $subject->getEvent();
             $eventData = $event->fetched_row;
             $eventDefinition = $subject->getEventDefinition();
             $eventDefinitionData = $eventDefinition->fetched_row;
             $processDefinition = $subject->getProcessDefinition();
-            $processDefinitionData = $processDefinition->fetched_row ?: array();
+            $processDefinitionData = $processDefinition->fetched_row ?: [];
             $completeData = $eventData + $eventDefinitionData + $processDefinitionData;
             $this->relatedDependency->processRelatedDependencies($completeData);
         }
     }
-
 }

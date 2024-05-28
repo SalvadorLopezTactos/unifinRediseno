@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Terméktípus',
     'LBL_MODULE_NAME_SINGULAR' => 'Terméktípus',
     'LBL_MODULE_TITLE' => 'Terméktípus: Főoldal',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Biztos benne, hogy törölni kívánja ezt rekordot?',
     'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót a terméktípus törléséhez!',
     'NTC_LIST_ORDER' => 'Állítsa be a sorrendet, ahogy a típus meg fog jelenni a terméktípus legördülő listában',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Terméktípusok importálása',
-    'LBL_CREATED_BY'=>'Létrehozta',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Terméktípusok importálása',
+    'LBL_CREATED_BY' => 'Létrehozta',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Felelős azonosító:',
-    'LBL_EXPORT_CREATED_BY'=>'Létrehozói azonosító:',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Termékkategóriák importálása',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Felelős azonosító:',
+    'LBL_EXPORT_CREATED_BY' => 'Létrehozói azonosító:',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Termékkategóriák importálása',
+];

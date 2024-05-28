@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '數據存檔程序',
     'LBL_MODULE_NAME' => '數據存檔程序',
     'LBL_FILTER_DEF_FIELD' => '篩選器',
@@ -28,7 +27,7 @@ $mod_strings = array (
     'LBL_MANAGE_ARCHIVE_JOB_LIST_TITLE' => '已安排存檔',
     'LBL_MANAGE_ARCHIVE_JOB_IS_NOT_SCHEDULED' => '沒有安排存檔',
     'LBL_ARCHIVE_FILTER' => '篩選器設置',
-    "LBL_MANAGE_ARCHIVE_SETUP" => '設置數據存檔',
+    'LBL_MANAGE_ARCHIVE_SETUP' => '設置數據存檔',
     'LBL_LIST_ARCHIVE_NAME' => '存檔名稱',
     'LBL_PERFORM_NOW_BTN' => '立刻執行',
     'LBL_ARCHIVE_SUCCESS_TITLE' => '成功',
@@ -45,4 +44,4 @@ $mod_strings = array (
         . '因為它會影響系統性能。您確定要立即執行此操作嗎？',
 
     'TPL_PMSE_INBOX_ERROR_MESSAGE' => '{{moduleName}} 模塊的存檔程序必須將 {{fieldName}} 設置為篩選器',
-);
+];

@@ -15,20 +15,17 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
+
 $module_name = '<module_name>';
 $object_name = '<object_name>';
 $_module_name = '<_module_name>';
 
-$popupMeta = array('moduleMain' => $module_name,
-						'varName' => $object_name,
-						'orderBy' => $_module_name.'.name',
-						'whereClauses' =>
-							array('name' => $module_name.'.name'),
+$popupMeta = ['moduleMain' => $module_name,
+    'varName' => $object_name,
+    'orderBy' => $_module_name . '.name',
+    'whereClauses' => ['name' => $module_name . '.name'],
 
-						'searchInputs' =>
-							array('name'),
+    'searchInputs' => ['name'],
 
 
-			);
-
+];

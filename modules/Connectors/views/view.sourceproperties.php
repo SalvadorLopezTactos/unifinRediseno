@@ -10,7 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class ViewSourceProperties extends ViewList {
+class ViewSourceProperties extends ViewList
+{
     public function display()
     {
         global $sugar_config;
@@ -18,8 +19,8 @@ class ViewSourceProperties extends ViewList {
         $source_id = $this->request->getValidInputRequest('source_id', 'Assert\ComponentName');
 
         // Default needed variables
-        $required_fields = array();
-        $properties = array();
+        $required_fields = [];
+        $properties = [];
         $hasTestingEnabled = false;
         $noConnector = true;
 
@@ -66,6 +67,7 @@ class ViewSourceProperties extends ViewList {
         $this->ss->assign('app', $GLOBALS['app_strings']);
         $this->ss->assign('connector_language', $connector_language);
         $this->ss->assign('hasTestingEnabled', $hasTestingEnabled);
+        $this->ss->assign('visibilityCheckBoxConfigForFields', $source->getVisibilityCheckBoxConfigForFields());
 
         echo $this->ss->fetch($this->getCustomFilePathIfExists('modules/Connectors/tpls/source_properties.tpl'));
     }

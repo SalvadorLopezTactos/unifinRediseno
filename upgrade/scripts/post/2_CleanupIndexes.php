@@ -126,7 +126,7 @@ class SugarUpgradeCleanupIndexes extends UpgradeScript
         $this->dropIndexes('workflow_alertshells', ['idx_workflowalertshell']);
         $this->dropIndexes('workflow_schedules', ['idx_wkfl_schedule']);
 
-// Ent/Ult-only tables
+        // Ent/Ult-only tables
         $this->dropIndexes('business_centers_audit', ['idx_business_centers_audit_parent_id']);
         $this->dropIndexes('messages_audit', ['idx_messages_audit_parent_id']);
         $this->dropIndexes('messages_contacts', ['idx_contact_message_message']);

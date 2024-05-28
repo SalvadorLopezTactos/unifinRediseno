@@ -53,7 +53,7 @@ $viewdefs['ExternalUsers']['base']['view']['list'] = [
                     'readonly' => true,
                 ],
                 [
-                    'name'  => 'date_entered',
+                    'name' => 'date_entered',
                     'label' => 'LBL_DATE_ENTERED',
                     'enabled' => true,
                     'default' => true,

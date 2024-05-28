@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o kupnjama',
     'LBL_RELATED_ACCOUNT' => 'Povezani račun',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za kupnje',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija kupnje',
 ];

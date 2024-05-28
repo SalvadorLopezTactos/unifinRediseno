@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\AuthProviderManagerBuilder;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\UsernamePasswordTokenFactory;
@@ -46,7 +47,7 @@ class BaseAuthenticate
             $authenticated = $this->validateIP();
         }
         if ($authenticated) {
-            $GLOBALS['log']->debug('Current user is: '.$GLOBALS['current_user']->user_name);
+            $GLOBALS['log']->debug('Current user is: ' . $GLOBALS['current_user']->user_name);
         }
         return $authenticated;
     }
@@ -60,33 +61,33 @@ class BaseAuthenticate
     {
         global $module, $action, $allowed_actions;
         $authenticated = false;
-        $allowed_actions = array ("Authenticate", "Login"); // these are actions where the user/server keys aren't compared
+        $allowed_actions = ['Authenticate', 'Login']; // these are actions where the user/server keys aren't compared
         if (isset($_SESSION['authenticated_user_id'])) {
-            $GLOBALS['log']->debug("We have an authenticated user id: ".$_SESSION["authenticated_user_id"]);
+            $GLOBALS['log']->debug('We have an authenticated user id: ' . $_SESSION['authenticated_user_id']);
             $authenticated = $this->postSessionAuthenticate();
             if (!$authenticated) {
                 // postSessionAuthenticate failed, nuke the session
                 if (session_id()) {
                     session_destroy();
                 }
-                header("Location: index.php?action=Login&module=Users&loginErrorMessage=LBL_SESSION_EXPIRED");
+                header('Location: index.php?action=Login&module=Users&loginErrorMessage=LBL_SESSION_EXPIRED');
                 sugar_cleanup(true);
             }
         } else {
-            if (isset($action) && isset($module) && $action == "Authenticate" && $module == "Users") {
-                $GLOBALS['log']->debug("We are authenticating user now");
+            if (isset($action) && isset($module) && $action == 'Authenticate' && $module == 'Users') {
+                $GLOBALS['log']->debug('We are authenticating user now');
             } else {
-                $GLOBALS['log']->debug("The current user does not have a session.  Going to the login page");
-                $action = "Login";
-                $module = "Users";
+                $GLOBALS['log']->debug('The current user does not have a session.  Going to the login page');
+                $action = 'Login';
+                $module = 'Users';
                 $_REQUEST['action'] = $action;
                 $_REQUEST['module'] = $module;
             }
         }
         if (empty($GLOBALS['current_user']->id) && !in_array($action, $allowed_actions)) {
-            $GLOBALS['log']->debug("The current user is not logged in going to login page");
-            $action = "Login";
-            $module = "Users";
+            $GLOBALS['log']->debug('The current user is not logged in going to login page');
+            $action = 'Login';
+            $module = 'Users';
             $_REQUEST['action'] = $action;
             $_REQUEST['module'] = $module;
         }
@@ -172,7 +173,7 @@ class BaseAuthenticate
      * get IdmMode config
      * @return array
      */
-    protected function getIdmModeConfig() : array
+    protected function getIdmModeConfig(): array
     {
         $config = new Config(\SugarConfig::getInstance());
         return $config->getIDMModeConfig();

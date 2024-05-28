@@ -18,8 +18,9 @@ class SugarCacheMemory extends SugarCacheAbstract
     /**
      * @see SugarCacheAbstract::$_priority
      */
+    // @codingStandardsIgnoreLine PSR2.Classes.PropertyDeclaration.Underscore
     protected $_priority = 999;
-    
+
     /**
      * @see SugarCacheAbstract::useBackend()
      */
@@ -28,16 +29,17 @@ class SugarCacheMemory extends SugarCacheAbstract
         // we'll always have this backend available
         return true;
     }
-    
+
     /**
      * @see SugarCacheAbstract::_setExternal()
      *
      * Does nothing; cache is gone after request is done.
      */
-    protected function _setExternal($key,$value)
+    // @codingStandardsIgnoreStart PSR2.Methods.MethodDeclaration.Underscore
+    protected function _setExternal($key, $value)
     {
     }
-    
+
     /**
      * @see SugarCacheAbstract::_getExternal()
      *
@@ -46,7 +48,7 @@ class SugarCacheMemory extends SugarCacheAbstract
     protected function _getExternal($key)
     {
     }
-    
+
     /**
      * @see SugarCacheAbstract::_clearExternal()
      *
@@ -55,7 +57,7 @@ class SugarCacheMemory extends SugarCacheAbstract
     protected function _clearExternal($key)
     {
     }
-    
+
     /**
      * @see SugarCacheAbstract::_resetExternal()
      *
@@ -64,4 +66,5 @@ class SugarCacheMemory extends SugarCacheAbstract
     protected function _resetExternal()
     {
     }
+    // @codingStandardsIgnoreEnd PSR2.Methods.MethodDeclaration.Underscore
 }

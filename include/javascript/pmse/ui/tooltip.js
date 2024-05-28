@@ -40,7 +40,7 @@ PMSE.Tooltip.prototype.family = 'PMSE.Tooltip';
 PMSE.Tooltip.prototype.initObject = function(options, parent) {
     var defaults = {
         message: null,
-        icon: 'adam-tooltip-icon-default',
+        icon: 'adam-tooltip-icon-default sicon sicon-info',
         css: '',
         parent: parent || null,
         hoverParent: true,

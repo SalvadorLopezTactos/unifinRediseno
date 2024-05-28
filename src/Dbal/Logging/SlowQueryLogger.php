@@ -40,7 +40,7 @@ final class SlowQueryLogger implements SQLLogger
     /**
      * @var array
      */
-    private $query = array();
+    private $query = [];
 
     public function __construct(LoggerInterface $logger, int $threshold)
     {

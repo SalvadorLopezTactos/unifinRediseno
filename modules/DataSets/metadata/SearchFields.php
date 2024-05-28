@@ -9,8 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$searchFields['DataSets'] = 
-    array (
-        'name' => array( 'query_type'=>'default'),
-    );
-?>
+$searchFields['DataSets'] =
+    [
+        'name' => ['query_type' => 'default'],
+    ];

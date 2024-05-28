@@ -60,7 +60,7 @@ class HTTP_WebDAV_Server_Calendar_iCal extends HTTP_WebDAV_Server_iCal
                 $calConfigsRes = $qb->execute();
                 $calendars = $calConfigsRes->fetchAll();
 
-                if (is_array($calendars) && count($calendars) === 1 &&
+                if (is_array($calendars) && safeCount($calendars) === 1 &&
                     !empty($calendars[0]['calendar_configurations'])) {
                     $calendarConfigurations = json_decode($calendars[0]['calendar_configurations'], true);
 
@@ -71,7 +71,7 @@ class HTTP_WebDAV_Server_Calendar_iCal extends HTTP_WebDAV_Server_iCal
                     //when export we only store calendars for one time use
                     $qb = DBManagerFactory::getConnection()->createQueryBuilder();
                     $qb->delete('calendar_ical_configs')
-                    ->where($qb->expr()->eq('id', "'$this->calendars_uid'"));
+                        ->where($qb->expr()->eq('id', "'$this->calendars_uid'"));
 
                     $qb->execute();
                 }

@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Importa fails nolasīts veiksmīgi',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Importētais ieraksts ir iesaistīts procesā, un to nevar rediģēt, jo šis process ir bloķējis dažu lauku rediģēšanu.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'ieraksti nav importēti kļūdu dēl',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Ja lietotājs neeksistē, tad izmanto pašreizējo lietotāju',
     'LBL_SHOW_HIDDEN' => 'Parādīt laukus, kuri nav normāli importējami',
     'LBL_UPDATE_RECORDS' => 'Atjaunināt esošos ierakstus nevis importēt (nav atceļams)',
-    'LBL_TEST'=> 'Testēt importu (nesaglabāt un nemainīt datus)',
+    'LBL_TEST' => 'Testēt importu (nesaglabāt un nemainīt datus)',
     'LBL_TRUNCATE_TABLE' => 'Iztukšot tabulu pirms importa (dzēst visus ierakstus)',
     'LBL_RELATED_ACCOUNTS' => 'Neveidot saistītos uzņēmumus',
     'LBL_NO_DATECHECK' => 'Izlaist datuma pārbaudi (darbosies ātrāk, bet neizdosies, ja kāds datums būs nepareizs)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Nederīgs integer vērtība',
     'LBL_ERROR_INVALID_NUM' => 'Nederīgs numurs',
     'LBL_ERROR_INVALID_TIME' => 'Nederīga laika vērtība',
-    'LBL_ERROR_INVALID_EMAIL'=>'Nederīga e-pasta adrese',
-    'LBL_ERROR_INVALID_BOOL'=>'Nederīga vērtība (jābūt 1 vai 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Nederīga datuma vērtība',
-    'LBL_ERROR_INVALID_USER'=>'Nederīgs lietotāja vārds vai ID',
+    'LBL_ERROR_INVALID_EMAIL' => 'Nederīga e-pasta adrese',
+    'LBL_ERROR_INVALID_BOOL' => 'Nederīga vērtība (jābūt 1 vai 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Nederīga datuma vērtība',
+    'LBL_ERROR_INVALID_USER' => 'Nederīgs lietotāja vārds vai ID',
     'LBL_ERROR_INVALID_TEAM' => 'Nederīgs darba grupas nosaukums vai ID',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Nederīgs uzņēmuma nosaukums vai ID',
     'LBL_ERROR_INVALID_RELATE' => 'Nederīgs relācijas lauks',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'nav vai tajā nevar ierakstīt',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Fails nav veiksmīgi augšupielādēts. Iespējams, ka &#39;upload_max_filesize&#39; iestatījums Jūsu php.ini failā ir iestatīts uz pārāk mazu vērtību.',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Fails ir pārāk liels. Maksimālais:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Baiti. Mainīt $sugar_config[&#39;upload_maxsize&#39;] failā config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Baiti. Mainīt $sugar_config[&#39;upload_maxsize&#39;] config.php',
     'LBL_MODULE_NAME' => 'Importēšana',
     'LBL_MODULE_NAME_SINGULAR' => 'Imports',
     'LBL_TRY_AGAIN' => 'Mēģiniet vēlreiz',
     'LBL_START_OVER' => 'Sākt no jauna',
     'LBL_ERROR' => 'Kļūda:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Importējamajā failā ir {0} rindas. Optimālais rindu skaits ir {1}. Lielāks rindu skaits var palēnināt importa procesu. Spiediet Labi lai turpinātu importu. Spiediet Atcelt, lai pārskatītu importējamo failu un atkārtoti ielādējiet importējamo failu.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Sistēmas administratora lietotāju nevar ieimportēt',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Sistēmas administratora lietotāju nevar ieimportēt',
     'ERR_REPORT_LOOP' => 'Konstatēta cilpa norādot tiešo vadītāju. Lietotājs nevar būt pats sev tiešais vadītājs.',
     'ERR_MULTIPLE' => 'Vairāku kolonnu lauku nosaukumi ir vienādi.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Iztrūkst obligātie lauki:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Importēšanas failā nebija rindu. Pārbaudi vai failā nav tukšu rindu, un mēģini vēl.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Importēšanas fails ir jau apstrādāts vai neeksistē.',
     'LBL_SUCCESS' => 'Paveikts:',
-	'LBL_FAILURE' => 'Imports neizdevās:',
+    'LBL_FAILURE' => 'Imports neizdevās:',
     'LBL_SUCCESSFULLY' => 'Veiksmīgi importēts',
     'LBL_LAST_IMPORT_UNDONE' => 'Importēšana ir atcelta',
     'LBL_NO_IMPORT_TO_UNDO' => 'Nav importēšanas procesa, kuru atcelt.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Importēt vēlreiz',
     'LBL_FINISHED' => 'Pabeigts',
     'LBL_UNDO_LAST_IMPORT' => 'Atcelt Importēšanu',
-    'LBL_LAST_IMPORTED'=>'Izveidots',
+    'LBL_LAST_IMPORTED' => 'Izveidots',
     'ERR_MULTIPLE_PARENTS' => 'Var nodefinēt tikai vienu Priekšteča ID',
     'LBL_DUPLICATES' => 'Atrasti dublikāti',
     'LNK_DUPLICATE_LIST' => 'Lejuplādēt dublikātu sarakstu',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Slēpt piezīmes',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Aplūkot priekšapskates kolonnas',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Slēpt priekšapskates kolonnas',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Pārbaudiet dublikātu, izmantojot operatoru:',
     'LBL_SAVE_MAPPING_AS' => 'Lai saglabātu importa uzstādījumus, ievadiet nosaukumu:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Parastas pēdiņas ($#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Dubultas pēdiņas (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Lai piešķirtu jaunos ierakstus citām darba grupām, nevis savai darba grupai, izmanto kolonnu Noklusētā vērtība, lai atlasītu citas darba grupas.',
     'LBL_SIGN_IN_HELP' => 'Lai aktivizētu šo servisu, lūdzu pieraksties Ārējo kontu cilnē , Lietotāju iestatījumu lapā.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Mēģina apstrādāt e-pasta adreses modulī, kas to neatbalsta.",
-);
+];

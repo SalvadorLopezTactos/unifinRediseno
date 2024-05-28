@@ -9,6 +9,4 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('modules/ACL/Roles/Save.php');
-
-?>
+require_once 'modules/ACL/Roles/Save.php';

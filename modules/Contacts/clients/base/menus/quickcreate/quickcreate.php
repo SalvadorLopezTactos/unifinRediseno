@@ -11,18 +11,18 @@
  */
 
 $module_name = 'Contacts';
-$viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
+$viewdefs[$module_name]['base']['menu']['quickcreate'] = [
     'layout' => 'create',
     'visible' => true,
     'order' => 1,
-    'related' => array(
-        array(
+    'related' => [
+        [
             'module' => 'Accounts',
             'link' => 'contacts',
-        ),
-        array(
+        ],
+        [
             'module' => 'Opportunities',
             'link' => 'contacts',
-        ),
-    ),
-);
+        ],
+    ],
+];

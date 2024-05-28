@@ -9,7 +9,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const Events = require('core/events');
+const Events = require('./events');
 
 /**
  * Local storage manager. Provides handy methods to interact with local
@@ -96,7 +96,7 @@ let migrateStorage = function(cache) {
             value = cache.store.deserialize(value);
         } catch (e) {
             if (typeof value === 'string') {
-                // only call unquote if it's already quoted, or is an object-like string 
+                // only call unquote if it's already quoted, or is an object-like string
                 if ((value[0] === "'" && value[value.length - 1] === "'")
                     || (value[0] === '"' && value[value.length - 1] === '"')
                     || (value[0] === "{" && value[value.length - 1] === "}")) {

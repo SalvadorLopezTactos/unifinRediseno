@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -53,11 +56,11 @@ class GenericSearchApi extends SugarApi
      *
      * @param ServiceBase $api
      * @param array $args
-     * @throws SugarApiExceptionMissingParameter
-     * @throws SugarApiExceptionRequestMethodFailure
      * @return array
+     * @throws SugarApiExceptionRequestMethodFailure
+     * @throws SugarApiExceptionMissingParameter
      */
-    public function genericSearch(ServiceBase $api, array $args) : array
+    public function genericSearch(ServiceBase $api, array $args): array
     {
         $this->requireArgs($args, ['q']);
 
@@ -74,7 +77,7 @@ class GenericSearchApi extends SugarApi
             $modulesToSearch = explode(',', $args['module_list']);
             foreach ($modulesToSearch as $module) {
                 // ensure all passed in modules are suppoorted
-                if (!in_array($module, $settings['modules'])) {
+                if (!safeInArray($module, $settings['modules'])) {
                     throw new SugarApiExceptionInvalidParameter('Module not supported: ' . $module);
                 }
             }

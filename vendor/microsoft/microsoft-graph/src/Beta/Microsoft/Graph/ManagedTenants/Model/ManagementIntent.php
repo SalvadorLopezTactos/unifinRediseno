@@ -26,6 +26,7 @@ class ManagementIntent extends \Beta\Microsoft\Graph\Model\Entity
 {
     /**
     * Gets the displayName
+    * The display name for the management intent. Optional. Read-only.
     *
     * @return string|null The displayName
     */
@@ -37,9 +38,10 @@ class ManagementIntent extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the displayName
+    * The display name for the management intent. Optional. Read-only.
     *
     * @param string $val The displayName
     *
@@ -50,9 +52,10 @@ class ManagementIntent extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["displayName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the isGlobal
+    * A flag indicating whether the management intent is global. Required. Read-only.
     *
     * @return bool|null The isGlobal
     */
@@ -64,9 +67,10 @@ class ManagementIntent extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the isGlobal
+    * A flag indicating whether the management intent is global. Required. Read-only.
     *
     * @param bool $val The isGlobal
     *
@@ -77,10 +81,11 @@ class ManagementIntent extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["isGlobal"] = boolval($val);
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the managementTemplates
+    * The collection of management templates associated with the management intent. Optional. Read-only.
      *
      * @return array|null The managementTemplates
      */
@@ -92,11 +97,12 @@ class ManagementIntent extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the managementTemplates
+    * The collection of management templates associated with the management intent. Optional. Read-only.
     *
-    * @param ManagementTemplateDetailedInfo $val The managementTemplates
+    * @param ManagementTemplateDetailedInfo[] $val The managementTemplates
     *
     * @return ManagementIntent
     */
@@ -105,5 +111,5 @@ class ManagementIntent extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["managementTemplates"] = $val;
         return $this;
     }
-    
+
 }

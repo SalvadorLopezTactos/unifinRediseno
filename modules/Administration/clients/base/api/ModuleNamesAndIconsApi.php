@@ -206,7 +206,7 @@ class ModuleNamesAndIconsApi extends AdministrationApi
         $this->changeStringsInRelatedModules();
         $this->changeGlobalAppStrings();
 
-        if (count($this->rebuild_modules) > 0) {
+        if (safeCount($this->rebuild_modules) > 0) {
             include_once 'modules/Administration/QuickRepairAndRebuild.php';
             $repair = new \RepairAndClear();
             $repair->repairAndClearAll(['rebuildExtensions'], $this->rebuild_modules, true, false);
@@ -320,16 +320,16 @@ class ModuleNamesAndIconsApi extends AdministrationApi
         }
 
         if ($changed) {
-            $out =  "<?php\n // created: " . date('Y-m-d H:i:s') . "\n";
+            $out = "<?php\n // created: " . date('Y-m-d H:i:s') . "\n";
             foreach ($values as $property => $value) {
-                $out .= override_value_to_string_recursive([$moduleName, $property], "dictionary", $value);
+                $out .= override_value_to_string_recursive([$moduleName, $property], 'dictionary', $value);
                 $out .= "\n";
             }
 
             // Write to the file
-            $dir = "custom/Extension/modules/" . basename($key) . "/Ext/Vardefs";
+            $dir = 'custom/Extension/modules/' . basename($key) . '/Ext/Vardefs';
             mkdir_recursive($dir);
-            $file = $dir . "/" . self::EXT_FILE_NAME;
+            $file = $dir . '/' . self::EXT_FILE_NAME;
             sugar_file_put_contents_atomic($file, $out);
             array_push($this->rebuild_modules, $key);
         }
@@ -379,7 +379,7 @@ class ModuleNamesAndIconsApi extends AdministrationApi
     {
         $this->setRenameDefs();
         if (!isset($this->renameDefs['global']) || !is_array($this->renameDefs['global'])) {
-            $GLOBALS['log']->warn("No rename defs found for global app strings");
+            $GLOBALS['log']->warn('No rename defs found for global app strings');
             return;
         }
 
@@ -444,7 +444,7 @@ class ModuleNamesAndIconsApi extends AdministrationApi
         $contents = return_custom_app_list_strings_file_contents($this->selectedLanguage);
 
         // Clean up the closing PHP tag
-        $contents = str_replace("?>", '', $contents);
+        $contents = str_replace('?>', '', $contents);
 
         // Create our file opening
         if (empty($contents)) {
@@ -461,9 +461,9 @@ class ModuleNamesAndIconsApi extends AdministrationApi
         foreach ($appStrings as $key => $value) {
             if (!isset($all_app_strings[$key]) || $all_app_strings[$key] !== $value) {
                 //clear out the old value
-                $pattern_match = '/\s*\$app_strings\s*\[\s*\''.$key.'\'\s*\]\s*=\s*[\'\"]{1}.*?[\'\"]{1};\s*/ism';
+                $pattern_match = '/\s*\$app_strings\s*\[\s*\'' . $key . '\'\s*\]\s*=\s*[\'\"]{1}.*?[\'\"]{1};\s*/ism';
                 $contents = preg_replace($pattern_match, "\n", $contents);
-                $contents .= "\n\$app_strings['$key']=" . var_export_helper($value) . ";";
+                $contents .= "\n\$app_strings['$key']=" . var_export_helper($value) . ';';
                 $changed = true;
             }
         }
@@ -496,8 +496,8 @@ class ModuleNamesAndIconsApi extends AdministrationApi
     /**
      * Rename subpanels for a particular module.
      *
-     * @param  string $moduleName The name of the module to be renamed
-     * @param  string $beanName  The name of the SugarBean to be renamed.
+     * @param string $moduleName The name of the module to be renamed
+     * @param string $beanName The name of the SugarBean to be renamed.
      * @return void
      */
     private function renameModuleSubpanel($moduleName, $beanName)
@@ -520,7 +520,7 @@ class ModuleNamesAndIconsApi extends AdministrationApi
             $GLOBALS['log']->debug("Examining subpanel definition for potential rename: $subpanelName ");
             //For each subpanel def, check if they are in our changed modules set.
             foreach ($this->changedModules as $changedModuleName => $renameFields) {
-                if (!(isset($subpanelMetaData['type']) &&  $subpanelMetaData['type'] == 'collection') //Dont bother with collections
+                if (!(isset($subpanelMetaData['type']) && $subpanelMetaData['type'] == 'collection') //Dont bother with collections
                     && isset($subpanelMetaData['module'])
                     && $subpanelMetaData['module'] == $changedModuleName
                     && isset($subpanelMetaData['title_key'])
@@ -537,7 +537,7 @@ class ModuleNamesAndIconsApi extends AdministrationApi
         }
 
         //Now we can write out the replaced language strings for each module
-        if (count($replacementStrings) > 0) {
+        if (safeCount($replacementStrings) > 0) {
             $GLOBALS['log']->debug("Writing out labels for subpanel changes for module $moduleName, labels: " . var_export($replacementStrings, true));
             ParserLabel::addLabels($this->selectedLanguage, $replacementStrings, $moduleName);
             $this->renamedModules[$moduleName] = true;
@@ -548,7 +548,7 @@ class ModuleNamesAndIconsApi extends AdministrationApi
      * Retrieve the subpanel definitions for a given SugarBean object. Unforunately we can't reuse
      * any of the SubPanelDefinion.php functions.
      *
-     * @param  SugarBean $bean
+     * @param SugarBean $bean
      * @return array The subpanel definitions.
      */
     private function getSubpanelDefs($bean)
@@ -702,8 +702,8 @@ class ModuleNamesAndIconsApi extends AdministrationApi
     /**
      * Rename the related links within a module.
      *
-     * @param  string $moduleName The module to be renamed
-     * @param  string $moduleClass The class name of the module to be renamed
+     * @param string $moduleName The module to be renamed
+     * @param string $moduleClass The class name of the module to be renamed
      * @return void
      */
     private function renameModuleRelatedLinks($moduleName, $moduleClass)
@@ -722,7 +722,7 @@ class ModuleNamesAndIconsApi extends AdministrationApi
         foreach ($linkedFields as $link => $linkEntry) {
             //For each linked field check if the module referenced to is in our changed module list.
             foreach ($this->changedModules as $changedModuleName => $renameFields) {
-                if (isset($linkEntry['module']) && $linkEntry['module'] ==  $changedModuleName) {
+                if (isset($linkEntry['module']) && $linkEntry['module'] == $changedModuleName) {
                     $GLOBALS['log']->debug("Begining to rename for link field {$link}");
                     if (!isset($linkEntry['vname'])
                         || (isset($linkEntry['vname']) && !isset($mod_strings[$linkEntry['vname']]))) {
@@ -740,7 +740,7 @@ class ModuleNamesAndIconsApi extends AdministrationApi
         }
 
         //Now we can write out the replaced language strings for each module
-        if (count($replacementStrings) > 0) {
+        if (safeCount($replacementStrings) > 0) {
             $GLOBALS['log']->debug("Writing out labels for link changes for module $moduleName, labels: " . var_export($replacementStrings, true));
             ParserLabel::addLabels($this->selectedLanguage, $replacementStrings, $moduleName);
             $this->renamedModules[$moduleName] = true;
@@ -761,8 +761,8 @@ class ModuleNamesAndIconsApi extends AdministrationApi
     /**
      * Rename all module strings within the leads module.
      *
-     * @param  string $targetModule The name of the module that owns the labels to be changed.
-     * @param  array $labelKeysToReplace The labels to be changed.
+     * @param string $targetModule The name of the module that owns the labels to be changed.
+     * @param array $labelKeysToReplace The labels to be changed.
      */
     private function renameCertainModuleModStrings($targetModule, $labelKeysToReplace)
     {
@@ -775,10 +775,10 @@ class ModuleNamesAndIconsApi extends AdministrationApi
     /**
      * For a particular module, rename any relevant module strings that need to be replaced.
      *
-     * @param  string $moduleName The name of the module to be renamed.
+     * @param string $moduleName The name of the module to be renamed.
      * @param  $replacementLabels
-     * @param  string $targetModule The name of the module that owns the labels to be changed.
-     * @param  array $labelKeysToReplace The labels to be changed.
+     * @param string $targetModule The name of the module that owns the labels to be changed.
+     * @param array $labelKeysToReplace The labels to be changed.
      * @return void
      */
     private function changeCertainModuleModStrings($moduleName, $replacementLabels, $targetModule, $labelKeysToReplace)
@@ -814,7 +814,7 @@ class ModuleNamesAndIconsApi extends AdministrationApi
     /**
      * For a particular module, rename any relevant module strings that need to be replaced.
      *
-     * @param  string $moduleName The name of the module to be renamed.
+     * @param string $moduleName The name of the module to be renamed.
      * @param  $replacementLabels
      * @return array
      */
@@ -868,8 +868,8 @@ class ModuleNamesAndIconsApi extends AdministrationApi
     /**
      * Format our dynamic keys containing module strings to a valid key depending on the module.
      *
-     * @param  string $unformatedKey
-     * @param  string $replacementStrings
+     * @param string $unformatedKey
+     * @param string $replacementStrings
      * @return string
      */
     private function formatModuleLanguageKey($unformatedKey, $replacementStrings)
@@ -892,8 +892,8 @@ class ModuleNamesAndIconsApi extends AdministrationApi
         $mod_strings = [];
         // Check for the label in the static defaults file in case we need it later
         if ($this->changedModule &&
-            file_exists('modules/'.$this->changedModule.'/language/'.$this->selectedLanguage.'.lang.php')) {
-            include FileLoader::validateFilePath('modules/'.$this->changedModule.'/language/'.$this->selectedLanguage.'.lang.php');
+            file_exists('modules/' . $this->changedModule . '/language/' . $this->selectedLanguage . '.lang.php')) {
+            include FileLoader::validateFilePath('modules/' . $this->changedModule . '/language/' . $this->selectedLanguage . '.lang.php');
             return (!empty($mod_strings[$key]) && strpos($mod_strings[$key], $substring) !== false);
         }
         return false;
@@ -902,9 +902,9 @@ class ModuleNamesAndIconsApi extends AdministrationApi
     /**
      * Replace a label with a new value based on metadata which specifies the label as either singular or plural.
      *
-     * @param  string $oldStringValue
-     * @param  string $replacementLabels
-     * @param  array $replacementMetaData
+     * @param string $oldStringValue
+     * @param string $replacementLabels
+     * @param array $replacementMetaData
      * @return string
      */
     protected function replaceSingleLabel($oldStringValue, $replacementLabels, $replacementMetaData, $modifier = '')
@@ -941,19 +941,19 @@ class ModuleNamesAndIconsApi extends AdministrationApi
         // then it's impossible to say if the old value is already updated.
         // If oldStringValue is already updated, don't re-update it.
         // Also handle the corner case where we actually DO want a repeat in the string.
-        if (strpos($search, $replace) !== false
-            || strpos($oldStringValue, $replace) === false
+        if (strpos($search, (string) $replace) !== false
+            || strpos($oldStringValue, (string) $replace) === false
             || $this->checkDefaultsForSubstring($modKey, $replace)
         ) {
             // Handle resetting routes in strings, since some modules like Forecasting
             // include links in their strings.
-            $oldStringValue = str_replace("#{$search}/", "____TEMP_ROUTER_HOLDER____", $oldStringValue);
+            $oldStringValue = str_replace("#{$search}/", '____TEMP_ROUTER_HOLDER____', $oldStringValue);
 
             $regex = '/(?<=\W|^)(' . preg_quote($search, '/') . ')(?=\W|$)/u';
             $result = preg_replace($regex, $replace, $oldStringValue);
 
             // Add the route back in if it was found
-            $result = str_replace("____TEMP_ROUTER_HOLDER____", "#{$search}/", $result);
+            $result = str_replace('____TEMP_ROUTER_HOLDER____', "#{$search}/", $result);
 
             return $result;
         }
@@ -1147,7 +1147,7 @@ class ModuleNamesAndIconsApi extends AdministrationApi
      * in the app string moduleList array.  If no entry is found, simply return the moduleName as this is consistant with modules
      * built by moduleBuilder.
      *
-     * @param  string $moduleName
+     * @param string $moduleName
      * @return string The 'singular' name of a module.
      */
     public function getModuleSingularKey($moduleName)

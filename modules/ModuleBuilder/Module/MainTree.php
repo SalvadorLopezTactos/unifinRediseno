@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,13 +10,14 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-class MainTree extends MBPackageTree{
+
+class MainTree extends MBPackageTree
+{
     public function __construct()
     {
-		$this->tree = new Tree('package_tree');
-		$this->tree->id = 'package_tree';
-		$this->mb = new StudioBrowser();
-		$this->populateTree(array(), $this->tree);
-	}
-	
+        $this->tree = new Tree('package_tree');
+        $this->tree->id = 'package_tree';
+        $this->mb = new StudioBrowser();
+        $this->populateTree([], $this->tree);
+    }
 }

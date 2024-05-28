@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Додати',
     'LBL_ADDRCITY' => 'Місто',
@@ -78,7 +78,7 @@ $mod_strings = array(
     'ERROR_EMPTY_SOURCE_ID' => 'Помилка: ідентифікатор Джерела не зазначений, або порожній.',
     'ERROR_EMPTY_RECORD_ID' => 'Помилка: ідентифікатор Запису не зазначений, або порожній.',
     'ERROR_NO_ADDITIONAL_DETAIL' => 'Помилка: не знайдено додаткових деталей для запису.',
-    'ERROR_NO_SEARCHDEFS_DEFINED' => 'Жоден з модулів не включений для цього з\єднувача. Виберіть модуль для цього з\єднувача на сторінці Включити З\єднувачі.',
+    'ERROR_NO_SEARCHDEFS_DEFINED' => 'Жоден з модулів не включений для цього з\\єднувача. Виберіть модуль для цього з\\єднувача на сторінці Включити З\\єднувачі.',
     'ERROR_NO_SEARCHDEFS_MAPPED' => 'Намеє жодних включених з&#39;єднувачів,у яких визначені поля пошуку.',
     'ERROR_NO_SOURCEDEFS_FILE' => 'Помилка: sourcedefs.php файл не може бути знайдений.',
     'ERROR_NO_SOURCEDEFS_SPECIFIED' => 'Помилка: Жодні джерела не були вказані, з яких зчитуються дані.',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Інформація' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Закрити' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'Не вдалося знайти з&#39;єднувач для даного ідентифікатора джерела.',
-);
-
+];

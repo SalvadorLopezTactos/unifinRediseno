@@ -10,49 +10,49 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['sales-pipeline'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['base']['view']['sales-pipeline'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_DASHLET_SALES_PIPELINE_CHART_NAME',
             'description' => 'LBL_DASHLET_SALES_PIPELINE_CHART_DESC',
-            'config' => array(
-            ),
-            'filter' => array(
-                'module' => array(
+            'config' => [
+            ],
+            'filter' => [
+                'module' => [
                     'Home',
                     'Accounts',
                     'Opportunities',
-                    'RevenueLineItems'
-                ),
-                'view' => array(
+                    'RevenueLineItems',
+                ],
+                'view' => [
                     'record',
-                    'records'
-                )
-            )
-        ),
-    ),
-    'panels' => array(
-        array(
+                    'records',
+                ],
+            ],
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_body',
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'visibility',
                     'label' => 'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY',
                     'type' => 'enum',
                     'options' => 'forecast_pipeline_visibility_options',
                     'enum_width' => 'auto',
-                ),
-            ),
-        ),
-    ),
-    'timeperiod' => array(
-        array(
+                ],
+            ],
+        ],
+    ],
+    'timeperiod' => [
+        [
             'name' => 'selectedTimePeriod',
             'label' => 'TimePeriod',
             'type' => 'timeperiod',
-        ),
-    )
-);
+        ],
+    ],
+];

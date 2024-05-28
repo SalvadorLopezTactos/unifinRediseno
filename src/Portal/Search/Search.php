@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,6 +11,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Portal\Search;
 
 /**
@@ -27,7 +30,7 @@ abstract class Search
      * @param array $data
      * @return array
      */
-    public function formatData(array $data) : array
+    public function formatData(array $data): array
     {
         return $data;
     }

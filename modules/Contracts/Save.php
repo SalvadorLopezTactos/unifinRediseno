@@ -11,14 +11,12 @@
  */
 
 
-
-require_once ('include/formbase.php');
-
+require_once 'include/formbase.php';
 
 
 global $timedate;
-if(!empty($_POST['expiration_notice_time_meridiem']) && !empty($_POST['expiration_notice_time'])) {
-	$_POST['expiration_notice_time'] = $timedate->merge_time_meridiem($_POST['expiration_notice_time'],$timedate->get_time_format(), $_POST['expiration_notice_time_meridiem']);
+if (!empty($_POST['expiration_notice_time_meridiem']) && !empty($_POST['expiration_notice_time'])) {
+    $_POST['expiration_notice_time'] = $timedate->merge_time_meridiem($_POST['expiration_notice_time'], $timedate->get_time_format(), $_POST['expiration_notice_time_meridiem']);
 }
 
 
@@ -26,10 +24,10 @@ $sugarbean = BeanFactory::newBean('Contracts');
 $sugarbean = populateFromPost('', $sugarbean);
 
 if (!$sugarbean->ACLAccess('Save')) {
-	ACLController :: displayNoAccess(true);
-	sugar_cleanup(true);
+    ACLController::displayNoAccess(true);
+    sugar_cleanup(true);
 }
-if(empty($sugarbean->id)) {
+if (empty($sugarbean->id)) {
     $sugarbean->id = create_guid();
     $sugarbean->new_with_id = true;
 }
@@ -39,18 +37,18 @@ $sugarbean->save($check_notify);
 $return_id = $sugarbean->id;
 
 if (!empty($_POST['type']) && $_POST['type'] !== $_POST['old_type']) {
-	//attach all documents from contract type into contract.
-	$ctype = BeanFactory::getBean('ContractTypes', $_POST['type']);
-	if (!empty($ctype->id)) {
-		$ctype->load_relationship('documents');
-		$doc = BeanFactory::newBean('Documents');
-		$documents=$ctype->documents->getBeans($doc);
-        if ((is_countable($documents) ? count($documents) : 0) > 0) {
-			$sugarbean->load_relationship('contracts_documents');
-			foreach($documents as $document) {
-				$sugarbean->contracts_documents->add($document->id,array('document_revision_id'=>$document->document_revision_id));
-			}			
-		}	
-	}
+    //attach all documents from contract type into contract.
+    $ctype = BeanFactory::getBean('ContractTypes', $_POST['type']);
+    if (!empty($ctype->id)) {
+        $ctype->load_relationship('documents');
+        $doc = BeanFactory::newBean('Documents');
+        $documents = $ctype->documents->getBeans($doc);
+        if (safeCount($documents) > 0) {
+            $sugarbean->load_relationship('contracts_documents');
+            foreach ($documents as $document) {
+                $sugarbean->contracts_documents->add($document->id, ['document_revision_id' => $document->document_revision_id]);
+            }
+        }
+    }
 }
 handleRedirect($return_id, 'Contracts');

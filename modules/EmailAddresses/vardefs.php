@@ -10,18 +10,18 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['EmailAddress'] = array(
+$dictionary['EmailAddress'] = [
     'table' => 'email_addresses',
     'archive' => false,
     'audited' => true,
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
             'vname' => 'LBL_EMAIL_ADDRESS_ID',
             'required' => true,
-        ),
-        'email_address' => array(
+        ],
+        'email_address' => [
             'name' => 'email_address',
             'type' => 'varchar',
             'vname' => 'LBL_EMAIL_ADDRESS',
@@ -29,8 +29,8 @@ $dictionary['EmailAddress'] = array(
             'required' => true,
             'audited' => true,
             'pii' => true,
-        ),
-        'email_address_caps' => array(
+        ],
+        'email_address_caps' => [
             'name' => 'email_address_caps',
             'type' => 'varchar',
             'vname' => 'LBL_EMAIL_ADDRESS_CAPS',
@@ -39,88 +39,88 @@ $dictionary['EmailAddress'] = array(
             'reportable' => false,
             'audited' => true,
             'pii' => true,
-        ),
-        'invalid_email' => array(
+        ],
+        'invalid_email' => [
             'name' => 'invalid_email',
             'type' => 'bool',
             'default' => 0,
             'vname' => 'LBL_INVALID_EMAIL',
             'audited' => true,
-        ),
-        'opt_out' => array(
+        ],
+        'opt_out' => [
             'name' => 'opt_out',
             'type' => 'bool',
             'default' => 0,
             'vname' => 'LBL_OPT_OUT',
             'audited' => true,
-        ),
-        'date_created' => array(
+        ],
+        'date_created' => [
             'name' => 'date_created',
             'type' => 'datetime',
             'vname' => 'LBL_DATE_CREATE',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
             'vname' => 'LBL_DATE_MODIFIED',
-        ),
-        'confirmation_requested_on' => array(
+        ],
+        'confirmation_requested_on' => [
             'name' => 'confirmation_requested_on',
             'type' => 'datetime',
             'vname' => 'LBL_CONFIRMATION_REQUESTED_ON',
             'audited' => true,
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'default' => 0,
             'vname' => 'LBL_DELETED',
-        ),
-        'email_participants' => array(
+        ],
+        'email_participants' => [
             'name' => 'email_participants',
             'vname' => 'LBL_EMAIL_PARTICIPANTS',
             'type' => 'link',
             'relationship' => 'emailaddresses_emailparticipants',
             'source' => 'non-db',
             'reportable' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'email_addressespk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_ea_caps_opt_out_invalid',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'email_address_caps',
                 'opt_out',
                 'invalid_email',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_ea_opt_out_invalid',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'email_address',
                 'opt_out',
                 'invalid_email',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_ea_del_ea_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'email_address',
                 'id',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];
 
 VardefManager::createVardef('EmailAddresses', 'EmailAddress', []);

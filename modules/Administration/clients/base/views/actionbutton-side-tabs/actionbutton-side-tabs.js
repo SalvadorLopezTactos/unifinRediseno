@@ -17,7 +17,7 @@
  */
 ({
     events: {
-        'click a[data-tabId]': 'tabButtonClicked',
+        'click li [data-tabId]': 'tabButtonClicked',
     },
 
     /**

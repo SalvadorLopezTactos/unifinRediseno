@@ -30,12 +30,12 @@ class PhpSerialized extends Constraint implements ConstraintReturnValueInterface
     public const ERROR_BASE64_DECODE = 3;
     public const ERROR_REFERENCE_NOT_ALLOWED = 4;
 
-    protected static $errorNames = array(
+    protected static $errorNames = [
         self::ERROR_OBJECT_NOT_ALLOWED => 'ERROR_OBJECT_NOT_ALLOWED',
         self::ERROR_REFERENCE_NOT_ALLOWED => 'ERROR_REFERENCE_NOT_ALLOWED',
         self::ERROR_UNSERIALIZE => 'ERROR_UNSERIALIZE',
         self::ERROR_BASE64_DECODE => 'ERROR_BASE64_DECODE',
-    );
+    ];
 
     public $message = 'PHP serialized data violation: %msg%';
     public $base64Encoded = false;

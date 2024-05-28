@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('dom-base', function (Y, NAME) {
 
 /**
@@ -322,8 +315,8 @@ var re_tag = /<([a-z]+)/i,
     re_tbody = /(?:\/(?:thead|tfoot|tbody|caption|col|colgroup)>)+\s*<tbody/,
 
     TABLE_OPEN = '<table>',
-    TABLE_CLOSE = '</table>', 
-    
+    TABLE_CLOSE = '</table>',
+
     selectedIndex;
 
 Y.mix(Y.DOM, {
@@ -403,7 +396,7 @@ Y.mix(Y.DOM, {
                     tag = creator;
                 }
             }
-            
+
             node = create(html, doc, tag);
             nodes = node.childNodes;
 
@@ -411,7 +404,7 @@ Y.mix(Y.DOM, {
                 ret = node.removeChild(nodes[0]);
             } else if (nodes[0] && nodes[0].className === 'yui3-big-dummy') { // using dummy node to preserve some attributes (e.g. OPTION not selected)
                 selectedIndex = node.selectedIndex;
-                
+
                 if (nodes.length === 2) {
                     ret = nodes[0].nextSibling;
                 } else {
@@ -530,7 +523,7 @@ Y.mix(Y.DOM, {
         if (node.nodeName == "SELECT" && selectedIndex > 0) {
             node.selectedIndex = selectedIndex - 1;
         }
-        
+
         return ret;
     },
 
@@ -699,4 +692,4 @@ Y.mix(Y.DOM, {
 });
 
 
-}, '3.15.0', {"requires": ["dom-core"]});
+}, '3.18.1', {"requires": ["dom-core"]});

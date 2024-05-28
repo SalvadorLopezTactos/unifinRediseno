@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '發送電子郵件帳戶',
     'LBL_MODULE_NAME_SINGULAR' => '發送電子郵件帳戶',
     'LBL_STATUS' => '狀態',
@@ -40,4 +40,4 @@ $mod_strings = array(
     'LBL_PREFERRED_SENDING_ACCOUNT' => '首選發送帳戶',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => '電子郵件設置焦點抽屜',
-);
+];

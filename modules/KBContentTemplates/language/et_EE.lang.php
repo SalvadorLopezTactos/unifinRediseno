@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Teadmusbaasi mallid',
     'LBL_MODULE_NAME_SINGULAR' => 'Teadmusbaasi mall',
     'LBL_MODULE_TITLE' => 'Teadmusbaasi mall',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Vaata malle',
     'LBL_TEXT_BODY' => 'Keha',
     'LBL_LIST_TEMPLATE_NAME' => 'Malli nimi',
-);
+];

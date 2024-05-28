@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_ANY_EMAIL' => 'Email:',
     'LBL_EMAIL' => 'Адреса Email:',
     'LBL_PRIMARY_EMAIL' => 'Основна адреса електронної пошти',
@@ -18,7 +18,7 @@ $mod_strings = array (
     'LBL_OTHER_EMAIL_ADDRESS' => 'Інший Email:',
     'LBL_EMAIL_ADDRESS' => 'Адреса Email',
     'LBL_EMAIL_ADDRESSES' => 'Адреса(и) Email',
-    'LBL_INVALID_EMAIL'=>'Недійсний Email:',
+    'LBL_INVALID_EMAIL' => 'Недійсний Email:',
     'LBL_EMAIL_OPT_OUT' => 'Відмова від отримання Email-повідомлень:',
     'LBL_EMAIL_NON_PRIMARY' => 'Неосновні emails',
-);
+];

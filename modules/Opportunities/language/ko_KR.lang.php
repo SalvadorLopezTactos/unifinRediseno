@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => '영업기회 목록 대시보드',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => '영업기회 기록 대시보드',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => '견적 목록',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => '동적인 계정에 따른 기회 목록',
+    'LBL_TOP_10_OPP' => '상위 10개 열린 영업기회',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => '대시릿: 나의 활성 영업기회',
+    'LBL_MY_ACTIVE_OPP' => '나의 활성 영업기회',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => '파이프라인 총합은',
 
-    'LBL_OPPORTUNITY_ROLE'=>'영업기회 역할',
+    'LBL_OPPORTUNITY_ROLE' => '영업기회 역할',
     'LBL_NOTES_SUBPANEL_TITLE' => '메모 목록',
     'LBL_TAB_OPPORTUNITY' => '{{module}} 리뷰',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => '확인을 클릭해, 모든 예측 데이터를 삭제하고 기회보기를 변경하십시오. 이것을 원하지 않는 경우, 이전 설정으로 돌아가려면 취소를 클릭하십시오.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         '확인을 누르시면, 모든 예측 데이터가 삭제되며 영업기회 정보가 수정됩니다. '
-        .'또한, 매출 품목의 대상 모듈이 포함된 모든 프로세스 정의는 비활성화됩니다. '
-        .'이를 원치 않으시고 이전 설정으로 돌아가려면, 취소를 클릭하십시오.',
+        . '또한, 매출 품목의 대상 모듈이 포함된 모든 프로세스 정의는 비활성화됩니다. '
+        . '이를 원치 않으시고 이전 설정으로 돌아가려면, 취소를 클릭하십시오.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => '모든 영업선 항목이 폐쇄되고,  적어도 하나의 항목이 승인된다면,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => '기회 판매 단계는 "청산 원"으로 설정되어 있습니다.',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => '모든 영업선 항목이 "비승인" 판매 단계에 있다면,',
@@ -220,19 +223,19 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => '이 변화를 시작한 후에, 영업선 항목 기록이기존의 각  {{module_name}}을 위해 백그라운드에 생성됩니다. 영업선 항목이 완전하고 사용할 수있는 경우, 알림이 사용자 프로필의 이메일 주소로 전송됩니다. 알림이 전송되도록하려면 관리자>이메일 설정을 통해  이메일을 보내도록 인스턴스가 설정되어야 함을 주의하십시오.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} 모듈을 통해 개별 판매를 시작부터 끝까지 추적할 수 있습니다. 각각의 {{module_name}} 기록는 예상 판매를 나타내며 관련 판매 데이터는 물론, {{quotes_module}}, {{contacts_module}} 등과 같은 다른 중요한 기록와 관련된 것을 포함합니다. {{module_name}}은 "판매 성공" 또는 "판매 실패"로 표시될 때까지 전형적인 몇 가지 판매 단계로 진행됩니다. Sugar의{{forecasts_singular_module}} 예측 모듈을 사용하면 판매 추세를 이해 및 예측하고 판매 할당량의 달성에 업무를 집중하는 데 {{plural_module_name}}을 더욱 유용하게 활용할 수 있습니다.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} 모듈을 통해 개별 판매를 시작부터 끝까지 추적할 수 있습니다. 각각의 {{module_name}} 기록은 예상 판매를 나타내며 관련 판매 데이터는 물론, {{quotes_module}}, {{contacts_module}} 등과 같은 다른 중요한 기록과 관련된 것을 포함합니다. {{module_name}}은 "판매 성공" 또는 "판매 실패"로 표시될 때까지 전형적인 몇 가지 판매 단계로 진행됩니다. Sugar의{{forecasts_singular_module}} 예측 모듈을 사용하면 판매 추세를 이해 및 예측하고 판매 할당량의 달성에 업무를 집중하는 데 {{plural_module_name}}을 더욱 유용하게 활용할 수 있습니다.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} 모듈을 통해 개별 판매 및 그 판매에 속한 라인 항목을 시작부터 끝까지 추적할 수 있습니다. 각각의 {{module_name}} 기록는 예상 판매를 나타내며 관련 판매 데이터는 물론, {{quotes_module}}, {{contacts_module}} 등과 같은 다른 중요한 기록와 관련된 것을 포함합니다. 
+    'LBL_HELP_RECORD' => '{{plural_module_name}} 모듈을 통해 개별 판매 및 그 판매에 속한 라인 항목을 시작부터 끝까지 추적할 수 있습니다. 각각의 {{module_name}} 기록은 예상 판매를 나타내며 관련 판매 데이터는 물론, {{quotes_module}}, {{contacts_module}} 등과 같은 다른 중요한 기록과 관련된 것을 포함합니다.
 
 - 개별 필드 또는 편집 버튼을 클릭하여 이 기록의 필드를 편집합니다.
 - 아래 왼쪽 창을 "데이터 보기"로 토글하여 하위패널 내의 다른 기록으로의 링크를 보거나 수정합니다.
 - 아래 왼쪽 창을 "활동 흐름"으로 토글하여 {{activitystream_singular_module}} 내의 사용자 의견 및 기록 변경 이력을 작성하고 봅니다.
-- 기록 이름 오른쪽의 아이콘을 사용하여 이 기록를 추적하거나 즐겨찾기로 찾아봅니다.
+- 기록 이름 오른쪽의 아이콘을 사용하여 이 기록을 추적하거나 즐겨찾기로 찾아봅니다.
 - 편집 버튼 오른쪽의 드롭다운 작업 메뉴에서 추가 작업이 가능합니다.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} 모듈을 통해 개별 판매 및 그 판매에 속한 라인 항목을 시작부터 끝까지 추적할 수 있습니다. 각각의 {{module_name}} 기록는 예상 판매를 나타내며 관련 판매 데이터는 물론, {{quotes_module}}, {{contacts_module}} 등과 같은 다른 중요한 기록와 관련된 것을 포함합니다.
+    'LBL_HELP_CREATE' => '{{plural_module_name}} 모듈을 통해 개별 판매 및 그 판매에 속한 라인 항목을 시작부터 끝까지 추적할 수 있습니다. 각각의 {{module_name}} 기록은 예상 판매를 나타내며 관련 판매 데이터는 물론, {{quotes_module}}, {{contacts_module}} 등과 같은 다른 중요한 기록과 관련된 것을 포함합니다.
 
 {{module_name}}을 생성하려면:
 1. 원하는 필드 값을 제공합니다.
@@ -260,4 +263,9 @@ $mod_strings = array(
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => '영업기회 종료 예측',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => '특정 영업기회에 대한 예측 정보 보기',
-);
+    'LBL_AI_WINRATE' => '승률',
+    'LBL_AI_WONOPP' => '영업기회 획득',
+    'LBL_AI_CLOSINGTIME' => '클로징 시간',
+    'LBL_AI_CLOSEDOPP' => '종료한 영업기회',
+    'LBL_AI_LEADTIMESPAN' => '영업기회 창출과 종료된 획득 사이의 시간',
+];

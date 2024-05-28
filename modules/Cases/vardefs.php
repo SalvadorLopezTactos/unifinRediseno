@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['Case'] = array(
+$dictionary['Case'] = [
     'table' => 'cases',
     'audited' => true,
     'escalatable' => true,
@@ -27,16 +27,16 @@ $dictionary['Case'] = array(
         'status',
         'assigned_user_id',
     ],
-    'fields' => array(
-        'account_name' => array(
+    'fields' => [
+        'account_name' => [
             'name' => 'account_name',
             'rname' => 'name',
             'id_name' => 'account_id',
             'vname' => 'LBL_ACCOUNT_NAME',
             'type' => 'relate',
-            'related_fields' => array(
+            'related_fields' => [
                 'account_id',
-            ),
+            ],
             'link' => 'accounts',
             'table' => 'accounts',
             'join_name' => 'accounts',
@@ -50,12 +50,12 @@ $dictionary['Case'] = array(
             'required' => true,
             'importable' => 'required',
             'exportable' => true,
-            'studio' => array(
+            'studio' => [
                 'portalrecordview' => false,
                 'portallistview' => false,
-            ),
-        ),
-        'account_id' => array(
+            ],
+        ],
+        'account_id' => [
             'name' => 'account_id',
             'type' => 'relate',
             'dbType' => 'id',
@@ -67,8 +67,8 @@ $dictionary['Case'] = array(
             'audited' => true,
             'massupdate' => false,
             'comment' => 'The account to which the case is associated',
-        ),
-        'service_level' => array(
+        ],
+        'service_level' => [
             'name' => 'service_level',
             'rname' => 'service_level',
             'id_name' => 'account_id',
@@ -84,8 +84,8 @@ $dictionary['Case'] = array(
             'massupdate' => false,
             'comment' => 'Service level of the associated account of case',
             'readonly' => true,
-        ),
-        'business_center_name' => array(
+        ],
+        'business_center_name' => [
             'name' => 'business_center_name',
             'rname' => 'name',
             'id_name' => 'business_center_id',
@@ -102,8 +102,8 @@ $dictionary['Case'] = array(
             'unified_search' => true,
             'comment' => 'The name of the business center represented by the business_center_id field',
             'required' => false,
-        ),
-        'business_center_id' => array(
+        ],
+        'business_center_id' => [
             'name' => 'business_center_id',
             'type' => 'relate',
             'dbType' => 'id',
@@ -115,8 +115,8 @@ $dictionary['Case'] = array(
             'audited' => true,
             'massupdate' => false,
             'comment' => 'The business center to which the case is associated',
-        ),
-        'business_centers' => array(
+        ],
+        'business_centers' => [
             'name' => 'business_centers',
             'type' => 'link',
             'relationship' => 'business_center_cases',
@@ -124,16 +124,16 @@ $dictionary['Case'] = array(
             'side' => 'right',
             'source' => 'non-db',
             'vname' => 'LBL_BUSINESS_CENTER',
-        ),
-        'source' => array(
+        ],
+        'source' => [
             'name' => 'source',
             'vname' => 'LBL_SOURCE',
             'type' => 'enum',
             'options' => 'cases_source_dom',
             'len' => 255,
             'comment' => 'An indicator of how the case was entered (ex: via web, email, etc.)',
-        ),
-        'status' => array(
+        ],
+        'status' => [
             'name' => 'status',
             'vname' => 'LBL_STATUS',
             'type' => 'enum',
@@ -143,8 +143,8 @@ $dictionary['Case'] = array(
             'comment' => 'The status of the case',
             'merge_filter' => 'enabled',
             'sortable' => true,
-        ),
-        'priority' => array(
+        ],
+        'priority' => [
             'name' => 'priority',
             'vname' => 'LBL_PRIORITY',
             'type' => 'enum',
@@ -154,18 +154,18 @@ $dictionary['Case'] = array(
             'comment' => 'The priority of the case',
             'merge_filter' => 'enabled',
             'sortable' => true,
-        ),
-        'resolution' => array(
+        ],
+        'resolution' => [
             'name' => 'resolution',
             'vname' => 'LBL_RESOLUTION',
             'type' => 'text',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => true,
                 'boost' => 0.65,
-            ),
+            ],
             'comment' => 'The resolution of the case',
-        ),
+        ],
         'request_close' => [
             'name' => 'request_close',
             'type' => 'bool',
@@ -174,7 +174,7 @@ $dictionary['Case'] = array(
             'audited' => true,
             'reportable' => true,
             'vname' => 'LBL_REQUEST_CLOSE',
-            'comment'=> 'The request close status of the case',
+            'comment' => 'The request close status of the case',
         ],
         'request_close_date' => [
             'name' => 'request_close_date',
@@ -186,13 +186,13 @@ $dictionary['Case'] = array(
             'vname' => 'LBL_REQUEST_CLOSE_DATE',
             'comment' => 'The date/time that the request close was initiated',
         ],
-        'portal_viewable' => array(
+        'portal_viewable' => [
             'name' => 'portal_viewable',
             'vname' => 'LBL_SHOW_IN_PORTAL',
             'type' => 'bool',
             'default' => 1,
             'reportable' => false,
-        ),
+        ],
         'changetimers' => [
             'name' => 'changetimers',
             'type' => 'link',
@@ -246,36 +246,36 @@ $dictionary['Case'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_EXTERNAL_USERS',
         ],
-        'tasks' => array(
+        'tasks' => [
             'name' => 'tasks',
             'type' => 'link',
             'relationship' => 'case_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_TASKS',
-        ),
-        'notes' => array(
+        ],
+        'notes' => [
             'name' => 'notes',
             'type' => 'link',
             'relationship' => 'case_notes',
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
-        ),
-        'meetings' => array(
+        ],
+        'meetings' => [
             'name' => 'meetings',
             'type' => 'link',
             'relationship' => 'case_meetings',
             'bean_name' => 'Meeting',
             'source' => 'non-db',
             'vname' => 'LBL_MEETINGS',
-        ),
-        'emails' => array(
+        ],
+        'emails' => [
             'name' => 'emails',
             'type' => 'link',
             'relationship' => 'emails_cases_rel',
             'source' => 'non-db',
             'vname' => 'LBL_EMAILS',
-        ),
-        'archived_emails' => array(
+        ],
+        'archived_emails' => [
             'name' => 'archived_emails',
             'type' => 'link',
             'link_class' => 'CaseEmailsLink',
@@ -287,36 +287,36 @@ $dictionary['Case'] = array(
             'relationship' => '',
             'hideacl' => true,
             'readonly' => true,
-        ),
-        'documents' => array(
+        ],
+        'documents' => [
             'name' => 'documents',
             'type' => 'link',
             'relationship' => 'documents_cases',
             'source' => 'non-db',
             'vname' => 'LBL_DOCUMENTS_SUBPANEL_TITLE',
-        ),
-        'calls' => array(
+        ],
+        'calls' => [
             'name' => 'calls',
             'type' => 'link',
             'relationship' => 'case_calls',
             'source' => 'non-db',
             'vname' => 'LBL_CALLS',
-        ),
-        'bugs' => array(
+        ],
+        'bugs' => [
             'name' => 'bugs',
             'type' => 'link',
             'relationship' => 'cases_bugs',
             'source' => 'non-db',
             'vname' => 'LBL_BUGS',
-        ),
-        'contacts' => array(
+        ],
+        'contacts' => [
             'name' => 'contacts',
             'type' => 'link',
             'relationship' => 'contacts_cases',
             'source' => 'non-db',
             'vname' => 'LBL_CONTACTS',
-        ),
-        'accounts' => array(
+        ],
+        'accounts' => [
             'name' => 'accounts',
             'type' => 'link',
             'relationship' => 'account_cases',
@@ -324,15 +324,15 @@ $dictionary['Case'] = array(
             'side' => 'right',
             'source' => 'non-db',
             'vname' => 'LBL_ACCOUNT',
-        ),
-        'project' => array(
+        ],
+        'project' => [
             'name' => 'project',
             'type' => 'link',
             'relationship' => 'projects_cases',
             'source' => 'non-db',
             'vname' => 'LBL_PROJECTS',
-        ),
-        'kbcontents' => array(
+        ],
+        'kbcontents' => [
             'name' => 'kbcontents',
             'type' => 'link',
             'vname' => 'LBL_KBCONTENTS_SUBPANEL_TITLE',
@@ -340,7 +340,7 @@ $dictionary['Case'] = array(
             'source' => 'non-db',
             'link_type' => 'many',
             'side' => 'right',
-        ),
+        ],
         'primary_contact_name' => [
             'name' => 'primary_contact_name',
             'rname' => 'name',
@@ -427,55 +427,142 @@ $dictionary['Case'] = array(
                 ],
             ],
         ],
-    ),
-    'indices' => array(
-        array(
+        'action_claim' => [
+            'name' => 'action_claim',
+            'source' => 'non-db',
+            'vname' => 'LBL_ACTION_CLAIM',
+            'type' => 'actionbutton',
+            'massupdate' => false,
+            'hidemassupdate' => false,
+            'no_default' => false,
+            'importable' => true,
+            'duplicate_merge' => 'enabled',
+            'duplicate_merge_dom_value' => 1,
+            'audited' => false,
+            'reportable' => false,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+            'studio' => [
+                'editField' => true,
+                'recordview' => false,
+                'previewview' => false,
+                'recorddashletview' => false,
+                'listview' => false,
+                'wirelesseditview' => false,
+                'wirelesslistview' => false,
+                'wirelessdetailview' => false,
+                'wireless_basic_search' => false,
+                'wireless_advanced_search' => false,
+            ],
+            'options' => '{"settings":{"type":"YnV0dG9u","size":"ZGVmYXVsdA==","showFieldLabel":false,"showInRecordHeader":true,"hideOnEdit":false,"displayOnFocusDashboard":true},"actionMenu":{"orderNumber":1,"listView":true,"recordView":true,"recordViewDashlet":true,"focusDashboardHeader":true,"subpanels":true},"buttons":{"52d8b90b-9ae1-4dd5-a2fc-bfb3dec0782c":{"active":true,"buttonId":"NTJkOGI5MGItOWFlMS00ZGQ1LWEyZmMtYmZiM2RlYzA3ODJj","orderNumber":0,"properties":{"label":"TEJMX0NMQUlNX0JVVFRPTl9URVhU","description":"","showLabel":true,"showIcon":false,"colorScheme":"cHJpbWFyeQ==","icon":"c2ljb24tc2V0dGluZ3M=","isDependent":true,"stopOnError":false,"formula":"bm90KGlzT3duZXIoKSk="},"actions":{"23cea3f5-9b41-499c-bbd2-e0d6e467f25a":{"actionType":"YXNzaWduLXJlY29yZA==","orderNumber":0,"properties":{"id":"","name":"","assignToCurrentUser":true}}}}}}',
+        ],
+        'action_close' => [
+            'name' => 'action_close',
+            'source' => 'non-db',
+            'vname' => 'LBL_ACTION_CLOSE',
+            'type' => 'actionbutton',
+            'massupdate' => false,
+            'hidemassupdate' => false,
+            'no_default' => false,
+            'importable' => true,
+            'duplicate_merge' => 'enabled',
+            'duplicate_merge_dom_value' => 1,
+            'audited' => false,
+            'reportable' => false,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+            'studio' => [
+                'editField' => true,
+                'recordview' => false,
+                'previewview' => false,
+                'recorddashletview' => false,
+                'listview' => false,
+                'wirelesseditview' => false,
+                'wirelesslistview' => false,
+                'wirelessdetailview' => false,
+                'wireless_basic_search' => false,
+                'wireless_advanced_search' => false,
+            ],
+            'options' => '{"settings":{"type":"YnV0dG9u","size":"ZGVmYXVsdA==","showFieldLabel":false,"showInRecordHeader":true,"hideOnEdit":false,"displayOnFocusDashboard":true},"actionMenu":{"orderNumber":2,"listView":true,"recordView":true,"recordViewDashlet":true,"focusDashboardHeader":true,"subpanels":true},"buttons":{"2f7d92f4-133f-4f66-aebf-c84e34575bd3":{"active":true,"buttonId":"MmY3ZDkyZjQtMTMzZi00ZjY2LWFlYmYtYzg0ZTM0NTc1YmQz","orderNumber":0,"properties":{"label":"TEJMX0NMT1NFX0JVVFRPTl9URVhU","description":"","showLabel":true,"showIcon":false,"colorScheme":"cHJpbWFyeQ==","icon":"","isDependent":true,"stopOnError":false,"formula":"bm90KGVxdWFsKCRzdGF0dXMsICJDbG9zZWQiKSk="},"actions":{"85baf0f5-ad48-4159-b22e-796a206e934e":{"actionType":"dXBkYXRlLXJlY29yZA==","orderNumber":0,"properties":{"fieldsToBeUpdated":{"status":{"fieldName":"c3RhdHVz","isCalculated":false,"formula":"","value":{"status":"Q2xvc2Vk"}}},"autoSave":true}}}}}}',
+        ],
+        'action_unassign' => [
+            'name' => 'action_unassign',
+            'source' => 'non-db',
+            'vname' => 'LBL_ACTION_UNASSIGN',
+            'type' => 'actionbutton',
+            'massupdate' => false,
+            'hidemassupdate' => false,
+            'no_default' => false,
+            'importable' => false,
+            'duplicate_merge' => 'enabled',
+            'duplicate_merge_dom_value' => 1,
+            'audited' => false,
+            'reportable' => false,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+            'studio' => [
+                'editField' => true,
+                'recordview' => false,
+                'previewview' => false,
+                'recorddashletview' => false,
+                'listview' => false,
+                'wirelesseditview' => false,
+                'wirelesslistview' => false,
+                'wirelessdetailview' => false,
+                'wireless_basic_search' => false,
+                'wireless_advanced_search' => false,
+            ],
+            'options' => '{"settings":{"type":"YnV0dG9u","size":"ZGVmYXVsdA==","showFieldLabel":false,"showInRecordHeader":false,"hideOnEdit":false,"displayOnFocusDashboard":false},"actionMenu":{"orderNumber":"MQ==","listView":true,"recordView":true,"recordViewDashlet":true,"focusDashboardHeader":true,"subpanels":true},"buttons":{"f2b0c260-fd7c-4130-a5d5-de9b9bc9717b":{"active":true,"buttonId":"ZjJiMGMyNjAtZmQ3Yy00MTMwLWE1ZDUtZGU5YjliYzk3MTdi","orderNumber":0,"properties":{"label":"TEJMX1VOQVNTSUdOX0JVVFRPTl9URVhU","description":"","showLabel":true,"showIcon":false,"colorScheme":"cHJpbWFyeQ==","icon":"c2ljb24tc2V0dGluZ3M=","isDependent":true,"stopOnError":false,"formula":"aXNBc3NpZ25lZCgp"},"actions":{"9d083eae-199a-43b7-b206-b36e474d1c94":{"actionType":"YXNzaWduLXJlY29yZA==","orderNumber":0,"properties":{"id":"","name":"","assignToCurrentUser":false},"id":"OWQwODNlYWUtMTk5YS00M2I3LWIyMDYtYjM2ZTQ3NGQxYzk0"}}}}}',
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'idx_case_del_nam_dm',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'name',
                 'date_modified',
                 'id',
                 'team_set_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_account_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'account_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_cases_stat_del',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'assigned_user_id',
                 'status',
                 'deleted',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_cases_del_prim_contact_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'primary_contact_id',
                 'deleted',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_cases_del_businesscenter',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'business_center_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'case_calls' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'case_calls' => [
             'lhs_module' => 'Cases',
             'lhs_table' => 'cases',
             'lhs_key' => 'id',
@@ -485,8 +572,8 @@ $dictionary['Case'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Cases',
-        ),
-        'case_tasks' => array(
+        ],
+        'case_tasks' => [
             'lhs_module' => 'Cases',
             'lhs_table' => 'cases',
             'lhs_key' => 'id',
@@ -496,8 +583,8 @@ $dictionary['Case'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Cases',
-        ),
-        'case_notes' => array(
+        ],
+        'case_notes' => [
             'lhs_module' => 'Cases',
             'lhs_table' => 'cases',
             'lhs_key' => 'id',
@@ -509,7 +596,7 @@ $dictionary['Case'] = array(
                 'parent_type' => 'Cases',
                 'attachment_flag' => 0,
             ],
-        ),
+        ],
         'case_messages' => [
             'lhs_module' => 'Cases',
             'lhs_table' => 'cases',
@@ -532,7 +619,7 @@ $dictionary['Case'] = array(
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Cases',
         ],
-        'case_meetings' => array(
+        'case_meetings' => [
             'lhs_module' => 'Cases',
             'lhs_table' => 'cases',
             'lhs_key' => 'id',
@@ -542,8 +629,8 @@ $dictionary['Case'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Cases',
-        ),
-        'case_emails' => array(
+        ],
+        'case_emails' => [
             'lhs_module' => 'Cases',
             'lhs_table' => 'cases',
             'lhs_key' => 'id',
@@ -553,8 +640,8 @@ $dictionary['Case'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Cases',
-        ),
-        'cases_assigned_user' => array(
+        ],
+        'cases_assigned_user' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
@@ -562,8 +649,8 @@ $dictionary['Case'] = array(
             'rhs_table' => 'cases',
             'rhs_key' => 'assigned_user_id',
             'relationship_type' => 'one-to-many',
-        ),
-        'cases_modified_user' => array(
+        ],
+        'cases_modified_user' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
@@ -571,8 +658,8 @@ $dictionary['Case'] = array(
             'rhs_table' => 'cases',
             'rhs_key' => 'modified_user_id',
             'relationship_type' => 'one-to-many',
-        ),
-        'cases_created_by' => array(
+        ],
+        'cases_created_by' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
@@ -580,7 +667,7 @@ $dictionary['Case'] = array(
             'rhs_table' => 'cases',
             'rhs_key' => 'created_by',
             'relationship_type' => 'one-to-many',
-        ),
+        ],
         'contact_cases' => [
             'lhs_module' => 'Contacts',
             'lhs_table' => 'contacts',
@@ -605,46 +692,46 @@ $dictionary['Case'] = array(
                 'attachment_flag' => 1,
             ],
         ],
-    ),
-    'acls' => array(
+    ],
+    'acls' => [
         'SugarACLStatic' => true,
-    ),
-    'duplicate_check' => array(
+    ],
+    'duplicate_check' => [
         'enabled' => true,
-        'FilterDuplicateCheck' => array(
-            'filter_template' => array(
-                array(
-                    '$and' => array(
-                        array(
-                            'name' => array(
+        'FilterDuplicateCheck' => [
+            'filter_template' => [
+                [
+                    '$and' => [
+                        [
+                            'name' => [
                                 '$starts' => '$name',
-                            ),
-                        ),
-                        array(
-                            'status' => array(
+                            ],
+                        ],
+                        [
+                            'status' => [
                                 '$not_equals' => 'Closed',
-                            ),
-                        ),
-                        array(
-                            'account_id' => array(
+                            ],
+                        ],
+                        [
+                            'account_id' => [
                                 '$equals' => '$account_id',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'ranking_fields' => array(
-                array(
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'ranking_fields' => [
+                [
                     'in_field_name' => 'name',
                     'dupe_field_name' => 'name',
-                ),
-                array(
+                ],
+                [
                     'in_field_name' => 'account_id',
                     'dupe_field_name' => 'account_id',
-                ),
-            ),
-        ),
-    ),
+                ],
+            ],
+        ],
+    ],
 
     // This enables optimistic locking for Saves From EditView
     'optimistic_locking' => true,
@@ -655,9 +742,9 @@ $dictionary['Case'] = array(
             'Contacts' => 'contacts',
         ],
     ],
-);
+];
 
-VardefManager::createVardef('Cases', 'Case', array(
+VardefManager::createVardef('Cases', 'Case', [
     'default',
     'assignable',
     'team_security',
@@ -667,7 +754,7 @@ VardefManager::createVardef('Cases', 'Case', array(
     'sla_fields',
     'escalatable',
     'customer_journey_parent',
-), 'case');
+], 'case');
 
 //jc - adding for refactor for import to not use the required_fields array
 //defined in the field_arrays.php file

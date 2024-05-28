@@ -77,13 +77,13 @@ class FieldApi extends SugarApi
      * @param string $module
      * @return bool
      */
-    protected function isValidModule(string $module) : bool
+    protected function isValidModule(string $module): bool
     {
         if (empty($this->validator)) {
             $this->buildModuleNameValidator();
         }
         $errors = $this->validator->validate($module, $this->moduleNameConstraints);
-        return count($errors) == 0;
+        return safeCount($errors) == 0;
     }
 
     /**
@@ -103,7 +103,7 @@ class FieldApi extends SugarApi
 
         // Only an admin can create new custom fields
         if (!is_admin($current_user)) {
-            throw new SugarApiExceptionNotAuthorized("Current user is not authorized.");
+            throw new SugarApiExceptionNotAuthorized('Current user is not authorized.');
         }
 
         $this->requireArgs($args, ['module', 'data']);
@@ -118,19 +118,19 @@ class FieldApi extends SugarApi
         $bean = BeanFactory::newBean($module);
         if (!empty($bean->field_defs) &&
             array_key_exists($args['data']['name'] . '_c', $bean->field_defs)) {
-            throw new SugarApiExceptionInvalidParameter("This field already exists: " . $args['data']['name'] . '_c');
+            throw new SugarApiExceptionInvalidParameter('This field already exists: ' . $args['data']['name'] . '_c');
         }
 
         require_once 'modules/DynamicFields/FieldCases.php';
         $field = get_widget($args['data']['type']);
         // TemplateText is returned if the field type doesn't match anything from FieldCases widget
         if ($field && get_class($field) === 'TemplateText' &&
-            !in_array($args['data']['type'], ['char', 'varchar', 'varchar2'])) {
+            !safeInArray($args['data']['type'], ['char', 'varchar', 'varchar2'])) {
             throw new SugarApiExceptionInvalidParameter("Invalid field type: {$args['data']['type']}.");
         }
 
         foreach ($args['data'] as $name => $value) {
-            if (!array_key_exists($name, $field->vardef_map) && !in_array($name, ['appendToViews', 'addIndex'])) {
+            if (!array_key_exists($name, $field->vardef_map) && !safeInArray($name, ['appendToViews', 'addIndex'])) {
                 throw new SugarApiExceptionInvalidParameter("Invalid field attribute: {$name}.");
             }
         }
@@ -138,14 +138,14 @@ class FieldApi extends SugarApi
         // If options is an array, a new dropdown definition array should be specified for creation.
         // If options is a string, an existing dropdown is used.
         if (($args['data']['type'] === 'enum' ||
-            $args['data']['type'] === 'multienum') &&
+                $args['data']['type'] === 'multienum') &&
             isset($args['data']['options'])) {
             if (is_array($args['data']['options'])) {
                 $newDropdown = $this->createDropdownList($args['data']['options'], $args['localizations']);
                 if ($newDropdown) {
                     $args['data']['options'] = $newDropdown;
                 } else {
-                    throw new SugarApiExceptionInvalidParameter("Invalid field attribute: options.");
+                    throw new SugarApiExceptionInvalidParameter('Invalid field attribute: options.');
                 }
             }
             $args['data']['ext1'] = $args['data']['options'];
@@ -200,7 +200,7 @@ class FieldApi extends SugarApi
 
         // Only an admin can delete custom fields
         if (!is_admin($current_user)) {
-            throw new SugarApiExceptionNotAuthorized("Current user is not authorized.");
+            throw new SugarApiExceptionNotAuthorized('Current user is not authorized.');
         }
 
         $this->requireArgs($args, ['module', 'field']);

@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,39 +12,39 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['themeroller'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['base']['layout']['themeroller'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'css_class' => 'main-pane span8 overflow-y-auto',
+                            'components' => [
+                                [
                                     'view' => 'themeroller',
                                     'primary' => true,
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'side-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'view' => 'themerollerpreview',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

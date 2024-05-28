@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'יומן ביקורת',
     'LBL_FIELD_NAME' => 'שדה',
     'LBL_OLD_NAME' => 'ערך ישן',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'עדכן ל',
     'LBL_BLANK' => '-blank-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן של הביקורת',
+    'LBL_CREATED' => 'נוצר',
+];

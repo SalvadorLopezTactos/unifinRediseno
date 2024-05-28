@@ -21,7 +21,7 @@ class PMSEHistoryData
      * Log data contains module name, fields pre data and fields post data.
      * @var array
      */
-    private $log_data = array();
+    private $log_data = [];
 
     /**
      * If is repeated
@@ -40,11 +40,11 @@ class PMSEHistoryData
      */
     public function __construct()
     {
-        $this->log_data = array(
+        $this->log_data = [
             'module' => null,
-            'before_data' => array(),
-            'after_data' => array()
-        );
+            'before_data' => [],
+            'after_data' => [],
+        ];
         $this->repeated = false;
         $this->lock = false;
     }

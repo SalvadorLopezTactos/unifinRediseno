@@ -27,15 +27,15 @@
  * Available vardef settings:
  *
  * array(
- * 	'type' => 'relatedcollection'
+ *  'type' => 'relatedcollection'
  *   'link' => pointer to a vardef link field defining the relationship
- *   	Required parameter without a default
- * 	'collection_fields' => array of fields to return from related object
- * 		Optional, defaults to id and name field
- * 	'collection_limit' => maximum amount of related records to return
- * 		Optional, defaults to unlimited
+ *      Required parameter without a default
+ *  'collection_fields' => array of fields to return from related object
+ *      Optional, defaults to id and name field
+ *  'collection_limit' => maximum amount of related records to return
+ *      Optional, defaults to unlimited
  *  'collection_create' =>  ability to create new objects while linking
- *  	Optional, defaults to false
+ *      Optional, defaults to false
  * )
  *
  */
@@ -46,10 +46,10 @@ class SugarFieldRelatecollection extends SugarFieldBase
      * Base fields for collection
      * @var array
      */
-    protected static $baseFields = array(
+    protected static $baseFields = [
         'id',
         'name',
-    );
+    ];
 
     /**
      *
@@ -89,7 +89,6 @@ class SugarFieldRelatecollection extends SugarFieldBase
          * present links are maintained if not explicitly defined during save.
          */
         foreach ($params[$field] as $record) {
-
             // validate required fields
             if (!$this->validateRequiredFields($record)) {
                 continue;
@@ -97,7 +96,6 @@ class SugarFieldRelatecollection extends SugarFieldBase
 
             // handle (new) related records
             if (empty($record['removed'])) {
-
                 // create new bean first if supported when no id is provided
                 if ($record['id'] === false && $create) {
                     $new = $this->createNewBeanBeforeLink($bean, $relName, $record);
@@ -111,9 +109,8 @@ class SugarFieldRelatecollection extends SugarFieldBase
                     $bean->$relName->add($record['id']);
                 }
 
-            // handle related records flagged for removal
+                // handle related records flagged for removal
             } elseif (!empty($record['removed']) && !empty($record['id'])) {
-
                 // just remove the link, Link2 will take care of the checks
                 $bean->$relName->delete($bean->id, $record['id']);
             }
@@ -157,16 +154,16 @@ class SugarFieldRelatecollection extends SugarFieldBase
      *
      * Return linked object data for given bean/relationship.
      * @param SugarBean $parent
-     * @param string    $relName
-     * @param array     $fields
-     * @param integer   $limit
+     * @param string $relName
+     * @param array $fields
+     * @param integer $limit
      * @param string|array $orderBy field name or array of field name and direction to sort by
      * @return array
      */
     protected function getLinkedRecords(SugarBean $parent, $relName, array $fields, $limit, $orderBy = '')
     {
-        if (! $relSeed = $this->getRelatedSeedBean($parent, $relName)) {
-            return array();
+        if (!$relSeed = $this->getRelatedSeedBean($parent, $relName)) {
+            return [];
         }
 
         // base query object for related module
@@ -187,7 +184,7 @@ class SugarFieldRelatecollection extends SugarFieldBase
         // join against parent module
         $sq->joinSubpanel($parent, $relName);
 
-        $result = array();
+        $result = [];
         foreach ($sq->execute() as $record) {
             $result[$record['id']] = $record;
         }
@@ -212,19 +209,19 @@ class SugarFieldRelatecollection extends SugarFieldBase
         }
 
         // maximum related records
-        $limit = (int) empty($properties['collection_limit']) ? self::$baseLimit : $properties['collection_limit'];
+        $limit = (int)empty($properties['collection_limit']) ? self::$baseLimit : $properties['collection_limit'];
 
         // create linked object (disabled by default)
         $create = !empty($properties['collection_create']) ?: false;
 
-        return array($link, $fields, $limit, $create);
+        return [$link, $fields, $limit, $create];
     }
 
     /**
      *
      * Return a SugarBean for the other end of a given bean/relationship.
      * @param SugarBean $bean
-     * @param string     $rel Link name
+     * @param string $rel Link name
      * @return mixed (SugarBean|null)
      */
     protected function getRelatedSeedBean(SugarBean $bean, $rel)
@@ -247,9 +244,9 @@ class SugarFieldRelatecollection extends SugarFieldBase
     /**
      * Used during mass update process
      * @param SugarBean $bean
-     * @param array     $params
-     * @param string    $fieldName
-     * @param array     $properties
+     * @param array $params
+     * @param string $fieldName
+     * @param array $properties
      * @return void
      */
     public function apiMassUpdate(SugarBean $bean, array $params, $fieldName, $properties)

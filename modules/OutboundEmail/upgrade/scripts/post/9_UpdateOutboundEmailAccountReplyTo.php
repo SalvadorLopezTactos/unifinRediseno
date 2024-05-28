@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Add reply-to fields to OutboundEmail.
  */
@@ -34,21 +35,21 @@ class SugarUpgradeUpdateOutboundEmailAccountReplyTo extends UpgradeDBScript
         $query = new SugarQuery();
         $bean = BeanFactory::newBean('OutboundEmail');
 
-        $query->from($bean, array('team_security' => false, 'add_deleted' => false, 'alias' => 'oe'));
+        $query->from($bean, ['team_security' => false, 'add_deleted' => false, 'alias' => 'oe']);
 
         // system-override accounts only
         $query->where()->equals('type', OutboundEmail::TYPE_SYSTEM_OVERRIDE);
-  
+
         // retrieve users' reply-to addresses
         $query->joinTable('email_addr_bean_rel', ['alias' => 'ear'])
             ->on()->equals('ear.bean_module', 'Users')->equalsField('ear.bean_id', 'oe.user_id')
             ->equals('ear.reply_to_address', 1)->equals('ear.deleted', 0);
 
-        $query->select(array(
+        $query->select([
             ['oe.id', 'oe_id'],
             ['oe.name', 'reply_to_name'],
             ['ear.email_address_id', 'reply_to_email_address_id'],
-        ));
+        ]);
 
         $rows = $query->execute();
 
@@ -57,7 +58,7 @@ class SugarUpgradeUpdateOutboundEmailAccountReplyTo extends UpgradeDBScript
                 $replyToName = $row['reply_to_name'] ?? '';
 
                 // update reply-to fields
-                $sql = "UPDATE outbound_email SET reply_to_name = ?, reply_to_email_address_id = ? WHERE id = ?";
+                $sql = 'UPDATE outbound_email SET reply_to_name = ?, reply_to_email_address_id = ? WHERE id = ?';
                 $this->executeUpdate($sql, [$replyToName, $row['reply_to_email_address_id'], $row['oe_id']]);
             }
         }

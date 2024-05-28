@@ -12,7 +12,7 @@
 --}}
 
 {{#if tagList}}
-    <div class="ellipsis_inline" data-placement="bottom" data-container="body" title="{{tagList}}" rel="tooltip">
+    <div class="ellipsis_inline" data-bs-placement="bottom" data-container="body" title="{{tagList}}" rel="tooltip">
         {{#each value}}
         <a class="ellipsis-inline" href="#search/?tags={{encodedValue}}" track="click:{{name}}" data-action="tag-search" data-tag="{{this.name}}">
             {{this.name}}</a>{{#unless @last}}, {{/unless}}

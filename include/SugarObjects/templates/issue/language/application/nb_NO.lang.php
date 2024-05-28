@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'Administration',
-    'Product' => 'Produkt',
-    'User' => 'Bruker',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => 'Ny',
-    'Assigned' => 'Tildelt',
-    'Closed' => 'Lukket',
-    'Pending Input' => 'Venter på informasjon',
-    'Rejected' => 'Avvist',
-    'Duplicate' => 'Dupliser',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => 'Høy',
-    'P2' => 'Medium',
-    'P3' => 'Lav',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => 'Godtatt',
-    'Duplicate' => 'Dupliser',
-    'Closed' => 'Lukket',
-    'Out of Date' => 'Foreldet',
-    'Invalid' => 'Ugyldig',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => 'Administrering',
+        'Product' => 'Produkt',
+        'User' => 'Bruker',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => 'Ny',
+        'Assigned' => 'Tildelt',
+        'Closed' => 'Lukket',
+        'Pending Input' => 'Venter på informasjon',
+        'Rejected' => 'Avvist',
+        'Duplicate' => 'Dupliser',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => 'Høy',
+        'P2' => 'Medium',
+        'P3' => 'Lav',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => 'Godtatt',
+        'Duplicate' => 'Dupliser',
+        'Closed' => 'Lukket',
+        'Out of Date' => 'Utdatert',
+        'Invalid' => 'Ugyldig',
+    ],
+];

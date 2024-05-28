@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Corps',
     'LBL_BASE_MODULE' => 'Module cible',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'La création du modèle de mail pour les processus à partir du fichier a échoué',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Ce modèle d&#39;E-mail est actuellement utilisé dans une définition de processus. Voulez-vous toujours modifier ce modèle d&#39;E-mail ?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Vous ne pouvez pas supprimer ce modèle d'E-mail car il est actuellement utilisé dans une définition de processus.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Vous ne pouvez pas supprimer ce modèle d&#39;E-mail car il est actuellement utilisé dans une définition de processus.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Sélecteur de champs',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Sélectionner',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Type de valeur du champ',
-);
+];

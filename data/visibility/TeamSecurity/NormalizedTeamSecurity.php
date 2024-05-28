@@ -27,7 +27,7 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
      * $sugar_config base key for performance profile
      * @var string
      */
-    public const CONFIG_PERF_KEY = "perfProfile.TeamSecurity.%s";
+    public const CONFIG_PERF_KEY = 'perfProfile.TeamSecurity.%s';
 
     /**
      * Default teamSet prefetch count
@@ -51,7 +51,7 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
         $team_table_alias = 'team_memberships';
         $table_alias = $this->getOption('table_alias');
         if (!empty($table_alias)) {
-            $team_table_alias = $this->bean->db->getValidDBName($team_table_alias.$table_alias, true, 'table');
+            $team_table_alias = $this->bean->db->getValidDBName($team_table_alias . $table_alias, true, 'table');
         } else {
             $table_alias = $this->bean->table_name;
         }
@@ -72,7 +72,7 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
         $usePrefetch = false;
         if ($this->getOption('teamset_prefetch')) {
             $teamSets = TeamSet::getTeamSetIdsForUser($currentUserId);
-            $count = count($teamSets);
+            $count = safeCount($teamSets);
             if ($count <= $this->getOption('teamset_prefetch_max', self::TEAMSET_PREFETCH_MAX)) {
                 $usePrefetch = true;
             } else {
@@ -114,13 +114,13 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
         $table_name = $this->bean->table_name;
 
         if ($table_alias && $table_alias !== $table_name) {
-            $team_table_alias = $this->bean->db->getValidDBName($team_table_alias.$table_alias, true, 'table');
+            $team_table_alias = $this->bean->db->getValidDBName($team_table_alias . $table_alias, true, 'table');
         } else {
             $table_alias = $table_name;
         }
 
         $tf_alias = $this->bean->db->getValidDBName($table_alias . '_tf', true, 'alias');
-        $query = " INNER JOIN (select tst.team_set_id from team_sets_teams tst";
+        $query = ' INNER JOIN (select tst.team_set_id from team_sets_teams tst';
         $query .= " INNER JOIN team_memberships {$team_table_alias} ON tst.team_id = {$team_table_alias}.team_id
                     AND {$team_table_alias}.user_id = '$current_user_id'
                     AND {$team_table_alias}.deleted=0 group by tst.team_set_id) {$tf_alias} on {$tf_alias}.team_set_id  = {$table_alias}.team_set_id ";
@@ -136,9 +136,9 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
      * @param SugarQuery $query
      * @param string $user_id
      *
-     * @see static::getJoin(), should be kept synced
      * @throws SugarQueryException
      * @throws Exception
+     * @see static::getJoin(), should be kept synced
      */
     protected function join(SugarQuery $query, $user_id)
     {
@@ -146,7 +146,7 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
         $table_alias = $this->getOption('table_alias');
         if (!empty($table_alias)) {
             $team_table_alias = $this->bean->db->getValidDBName(
-                $team_table_alias.$table_alias,
+                $team_table_alias . $table_alias,
                 true,
                 'table'
             );
@@ -174,9 +174,9 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
 
         $query->joinTable(
             $subQuery,
-            array(
+            [
                 'alias' => $tf_alias,
-            )
+            ]
         )->on()->equalsField($tf_alias . '.team_set_id', $table_alias . '.team_set_id');
 
         if ($this->getOption('join_teams')) {
@@ -261,7 +261,7 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
         if ($useWhereCondition) {
             $cond = $this->getCondition($current_user_id);
             if ($query) {
-                $query .= " AND ".ltrim($cond);
+                $query .= ' AND ' . ltrim($cond);
             } else {
                 $query = $cond;
             }
@@ -301,7 +301,7 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
     /**
      * {@inheritdoc}
      */
-    public function addVisibilityFromQuery(SugarQuery $sugarQuery, array $options = array())
+    public function addVisibilityFromQuery(SugarQuery $sugarQuery, array $options = [])
     {
         // We'll get it on where clause
         if ($this->useCondition() || $this->useSubqueryOptimizerHint()) {
@@ -316,7 +316,7 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
     /**
      * {@inheritdoc}
      */
-    public function addVisibilityWhereQuery(SugarQuery $sugarQuery, array $options = array())
+    public function addVisibilityWhereQuery(SugarQuery $sugarQuery, array $options = [])
     {
         if (!$this->useCondition() && !$this->useSubqueryOptimizerHint()) {
             return $sugarQuery;
@@ -366,7 +366,7 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
 
         // Ability to skip perf profile - use with caution
         if (!$this->getOption('skip_perf_profile')) {
-            $options = empty($this->options) ? array() : $this->options;
+            $options = empty($this->options) ? [] : $this->options;
             $this->options = $this->getTuningOptions($options);
         }
 
@@ -385,12 +385,12 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
     {
         // module specific config
         $configKey = sprintf(self::CONFIG_PERF_KEY, $this->bean->module_dir);
-        $tune = SugarConfig::getInstance()->get($configKey, array());
+        $tune = SugarConfig::getInstance()->get($configKey, []);
 
         // if no module specific config, try default config
         $configKey = sprintf(self::CONFIG_PERF_KEY, 'default');
         if (empty($tune)) {
-            $tune = SugarConfig::getInstance()->get($configKey, array());
+            $tune = SugarConfig::getInstance()->get($configKey, []);
         }
 
         // if still empty use stock DBAL profile
@@ -411,7 +411,7 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
         //if parameter is not defined, make sure the tuning options have been loaded prior to calling parent
         if (!isset($this->options[$name])) {
             //send in the defined options or a blank array.
-            $options = !empty($this->options) ? $this->options : array();
+            $options = !empty($this->options) ? $this->options : [];
             $this->options = $this->getTuningOptions($options);
         }
 
@@ -450,7 +450,7 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
     public function elasticGetBeanIndexFields($module, Visibility $provider)
     {
         // nominate team_set_id field to be retrievable directly
-        return array('team_set_id' => 'id');
+        return ['team_set_id' => 'id'];
     }
 
     /**

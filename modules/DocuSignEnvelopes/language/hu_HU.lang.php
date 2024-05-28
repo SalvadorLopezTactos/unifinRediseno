@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Boríték begyűjtése',
     'LBL_CLOUD_SERVICE_TYPE' => 'Felhőszolgáltatás típusa',
     'LBL_CLOUD_PATH' => 'Felhőútvonal',
+    'LBL_CLOUD_DRIVE_ID' => 'Driveazonosító',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign borítékok listájának kezelőfelülete',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'DocuSign borítékok rekordjainak kezelőfelülete',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Legutóbbi DocuSign borítékok',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign borítékok fókuszfiókja',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'DocuSign boríték idővonala',
 
     'LBL_NEW_ENVELOPE' => 'Új boríték',
     'LBL_DOCUMENT_IS_NOW' => ' most ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Küldés',
     'LBL_BUTTON_CLEAR' => 'Töröl',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Sablon használata',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Küldés sablonnal',
     'LBL_PLEASE_LOG_IN' => 'Kérjük, először jelentkezzen be a DocuSignba!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Nem tudja letölteni ezt a dokuemtumot. Egy másik felhasználó hozta létre!',
     'LBL_SEND_NOT_ALLOWED' => 'Nem tudja elküldeni ezt a borítékot. Egy másik felhasználó hozta létre!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'A piszkozat módosítva lett. Frissíti az állapotát a jelenlegi ({{status}}) állapotra?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'DocuSign boríték frissítve!',
     'LBL_DRAFT_CHANGED_ERROR' => 'A DocuSign boríték állapota nem frissült. Tekintse meg a naplófájlt részletekért!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'A DocuSign sablon nem alkalmazható',
     'LBL_ENVELOPE_NOT_SENT' => 'A boríték nem lett elküldve!',
     'LBL_ENVELOPE_SENT' => 'A boríték újra el lett küldve!',
     'LBL_DOCUMENT_ADDED' => 'A dokumentum hozzá lett adva a rekordhoz!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Szerepkör',
     'LBL_SELECT_BUTTON_LABEL' => 'Kiválasztás',
     'LBL_BACK_BUTTON_LABEL' => 'Vissza',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Keresés sablonnév alapján',
+    'LBL_ENVELOPE_NAME' => 'Boríték neve',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'A boríték neve nem lehet üres',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'A lehetséges címzettek betöltése sikertelen!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'A sablonok betöltése sikertelen!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Kérjük, válasszon ki egy szerepkört minden címzetthez',
+    
+    'LBL_DOWNLOAD' => 'Letöltés',
+    'LBL_OPEN_DRAFT' => 'Vázlat megnyitása',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Fájl nélküli dokumentumok nem küldhetőek a DocuSign szolgáltatásra.',
+    'LBL_START_SIGN_PROMPT' => 'Kattintson a Plusz gombra az aláírási folyamat megkezdéséhez',
+    'LBL_NO_DOC_SELECTED' => 'Kérjük, először válassza ki a dokumentumokat',
+    'LBL_SELECT_RECIPIENTS' => 'Válassza ki a címzett aláírót',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Kihagyás',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Ha jobb élményt szeretne, telepítenie kell a DocuSign alkalmazást.',
 ];

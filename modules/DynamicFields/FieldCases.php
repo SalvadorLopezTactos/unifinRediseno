@@ -17,8 +17,8 @@
  */
 function get_widget($type)
 {
-	$local_temp = null;
-	switch(strtolower($type)){
+    $local_temp = null;
+    switch (strtolower($type)) {
         case 'char':
         case 'varchar':
         case 'varchar2':
@@ -115,15 +115,15 @@ function get_widget($type)
             $local_temp = new TemplateGeocodeStatus();
             break;
         default:
-            if (SugarAutoLoader::requireWithCustom('modules/DynamicFields/templates/Fields/Template'. ucfirst($type) . '.php')) {
-                $class  = SugarAutoLoader::customClass('Template' . ucfirst($type));
+            if (SugarAutoLoader::requireWithCustom('modules/DynamicFields/templates/Fields/Template' . ucfirst($type) . '.php')) {
+                $class = SugarAutoLoader::customClass('Template' . ucfirst($type));
                 $local_temp = new $class();
                 break;
             } else {
                 $local_temp = new TemplateText();
                 break;
             }
-	}
+    }
 
-	return $local_temp;
+    return $local_temp;
 }

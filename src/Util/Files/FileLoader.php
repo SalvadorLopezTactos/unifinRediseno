@@ -26,7 +26,7 @@ use Sugarcrm\Sugarcrm\Security\Validator\Constraints\File;
  */
 class FileLoader
 {
-    protected static $sugarBaseDirs = array();
+    protected static $sugarBaseDirs = [];
 
     /**
      * Validate given file name. Whenever insecure input variables are used
@@ -38,12 +38,12 @@ class FileLoader
      * directories and whether any invalid characters are present.
      * characters are described in FileValidator.
      *
-     * @see \Sugarcrm\Sugarcrm\Security\Validator\Constraints\FileValidator
-     *
      * @param string $file File name
      * @param boolean $upload Allow validation in upload directory
      * @return string File name
      * @throws \RuntimeException
+     * @see \Sugarcrm\Sugarcrm\Security\Validator\Constraints\FileValidator
+     *
      */
     public static function validateFilePath($file, $upload = false)
     {
@@ -55,9 +55,9 @@ class FileLoader
             $baseDirs[] = self::getRealPath($uploadDir ?: sys_get_temp_dir());
         }
 
-        $constraint = new File(array('baseDirs' => $baseDirs));
+        $constraint = new File(['baseDirs' => $baseDirs]);
         $violations = Validator::getService()->validate($file, $constraint);
-        if (count($violations) > 0) {
+        if (safeCount($violations) > 0) {
             $msg = array_reduce(iterator_to_array($violations), function ($msg, $violation) {
                 return empty($msg) ? $violation->getMessage() : $msg . ' - ' . $violation->getMessage();
             });
@@ -77,7 +77,7 @@ class FileLoader
      */
     public static function varFromInclude($file, $returnVar)
     {
-        $result = self::varsFromInclude($file, array($returnVar));
+        $result = self::varsFromInclude($file, [$returnVar]);
         return $result[$returnVar] ?? null;
     }
 
@@ -93,7 +93,7 @@ class FileLoader
     public static function varsFromInclude($file, array $returnVars)
     {
         include self::validateFilePath($file);
-        $returnVarsResult = array();
+        $returnVarsResult = [];
         foreach ($returnVars as $returnVar) {
             $returnVarsResult[$returnVar] = ${$returnVar} ?? null;
         }
@@ -108,7 +108,7 @@ class FileLoader
     public static function getBaseDirs()
     {
         if (empty(self::$sugarBaseDirs)) {
-            self::$sugarBaseDirs = array(SUGAR_BASE_DIR);
+            self::$sugarBaseDirs = [SUGAR_BASE_DIR];
             if (defined('SHADOW_INSTANCE_DIR')) {
                 self::$sugarBaseDirs[] = SHADOW_INSTANCE_DIR;
             }
@@ -133,5 +133,4 @@ class FileLoader
         }
         return $realpath;
     }
-
 }

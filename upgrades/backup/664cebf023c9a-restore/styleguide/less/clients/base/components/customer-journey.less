@@ -1,0 +1,1026 @@
+/*
+* Sugar Automate modules components CSS
+*/
+
+#cj-widget-config-toggle-label {
+  .mt-1();
+}
+
+.cj-select-to-email-address-subfield {
+  .w-62\.5();
+  .inline-block();
+}
+
+.cj-related-fieldset-detail-view {
+  .w-62\.5();
+}
+
+.cj-populate-fields-subfield {
+  .w-62\.5();
+  .inline-block();
+}
+
+.cj-populate-fields-subfield-fieldset {
+  .inline-block();
+  .w-3\/5();
+}
+
+.cj-populate-fields-subfield-fieldset .fieldset-inline .fieldset-field {
+  .inline-block();
+  .pr-0\.75;
+
+  vertical-align: top;
+  margin-top: -3px;
+}
+
+.controls-two.btn-fit {
+  .mb-1\.25();
+
+  #empty-field {
+    float: left;
+  }
+}
+
+.dri-workflows-header-panel-row {
+  .m-0();
+  .h-10();
+}
+
+.dri-workflows-header-panel-header {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+.dri-workflows-header-active-inactive-panel {
+  font-weight: bold;
+}
+
+.dri-workflows-actions-footer {
+  border-top: 0;
+  .pb-3\.5();
+}
+
+.dri-workflows-user-limit-warning {
+  color: @red;
+  .text-center();
+
+  margin-top: 1%;
+}
+
+/*
+* Sugar Automate DRIWorkflow View
+*/
+
+.dri-workflow-wrapper *:focus {
+  outline: none;
+}
+
+body.sugar-light-theme .dri-workflow-wrapper-closed {
+  background: #f8fafc;
+  cursor: move;
+}
+
+body.sugar-dark-theme {
+  .dri-workflow-wrapper.open-border {
+    border: @borderWidget;
+  }
+
+  .dri-workflow-wrapper-closed {
+    cursor: move;
+    border: none;
+    background: @subpanelBackground;
+  }
+}
+
+.dri-workflow-wrapper {
+  .dri-workflow-card {
+    .pt-0();
+    .px-6();
+    .pb-6();
+    .rounded-b-md();
+
+    min-height: 20px;
+  }
+
+  .dri-workflow-info {
+    .pt-6();
+    .px-6();
+    .pb-2\.5();
+
+    cursor: move;
+    border-top-left-radius: 0.425rem;
+    border-top-right-radius: 0.425rem;
+
+    .pull-left {
+      h4 {
+        .overflow-hidden();
+        .my-0();
+        .mx-2();
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      span.label.label-info {
+        .mt-0\.5();
+
+        color: @black;
+      }
+    }
+
+    .dri-workflow-desc {
+      .flex();
+
+      width: calc(~'100% - 110px');
+    }
+  }
+}
+
+.dri-workflow-wrapper .block-footer {
+  border-top: 0;
+}
+
+.dri-workflow-wrapper .well {
+  .mb-0();
+
+  box-shadow: none;
+}
+
+.dri-workflow-wrapper .loading-wrapper .span {
+  .ml-1\.25();
+}
+
+.dri-workflow-wrapper .lead {
+  .m-0();
+}
+
+.dri-workflow-wrapper .dri-subworkflow {
+  .mt-2\.5();
+  .relative();
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-activity-show-children,
+.dri-workflow-wrapper .dri-subworkflow .dri-activity-hide-children {
+  cursor: pointer;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-stage-activities {
+  min-height: 60px;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-activity-children {
+  .pl-2\.5();
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow {
+  .h-10();
+  .relative();
+  .ml-5();
+  .mr-1\.25();
+
+  background: @gray30;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow::before {
+  .w-0();
+  .h-0();
+  .absolute();
+
+  content: "";
+  top: 0;
+  left: -20px;
+  border-top: 20px solid @gray30;
+  border-bottom: 20px solid @gray30;
+  border-left: 20px solid transparent;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow::after {
+  .w-0();
+  .h-0();
+  .absolute();
+
+  content: "";
+  top: 0;
+  right: -20px;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid @gray30;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-not_started {
+  background: @gray30;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-not_started::before {
+  border-top: 20px solid @gray30;
+  border-bottom: 20px solid @gray30;
+  border-left: 20px solid transparent;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-not_started::after {
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid @gray30;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-in_progress {
+  background: @lightOcean;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-in_progress::before {
+  border-top: 20px solid @lightOcean;
+  border-bottom: 20px solid @lightOcean;
+  border-left: 20px solid transparent;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-in_progress::after {
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid @lightOcean;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-ready_for_next_step {
+  background: @lust;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-ready_for_next_step::before {
+  border-top: 20px solid @lust;
+  border-bottom: 20px solid @lust;
+  border-left: 20px solid transparent;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-ready_for_next_step::after {
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid @lust;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-completed {
+  background: @lightGreen;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-completed::before {
+  border-top: 20px solid @lightGreen;
+  border-bottom: 20px solid @lightGreen;
+  border-left: 20px solid transparent;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-completed::after {
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid @lightGreen;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-cancelled {
+  background: @lightYellow;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-cancelled::before {
+  border-top: 20px solid @lightYellow;
+  border-bottom: 20px solid @lightYellow;
+  border-left: 20px solid transparent;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-cancelled::after {
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid @lightYellow;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-not_completed {
+  background: @lightYellow;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-not_completed::before {
+  border-top: 20px solid @lightYellow;
+  border-bottom: 20px solid @lightYellow;
+  border-left: 20px solid transparent;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-not_completed::after {
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid @lightYellow;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-info {
+  .pt-3();
+  .pr-0();
+  .pb-2\.5();
+  .pl-1\.5();
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-info a {
+  font-weight: 500;
+}
+
+.dri-workflow-wrapper {
+  .dri-subworkflow {
+    .dri-subworkflow-activity {
+      .dri-activity-info {
+        a {
+          color: @activityInfoColor;
+        }
+      }
+
+      &.dri-subworkflow-activity-completed {
+        border-top: @activityBaseColor;
+      }
+
+      &.dri-subworkflow-activity-held {
+        border-top: @activityBaseColor;
+      }
+    }
+
+    .dri-subworkflow-activity-wrapper {
+      .dri-subworkflow-activity {
+        &.dri-subworkflow-activity-in-progress {
+          border-top: 0.25rem solid @blue;
+        }
+      }
+
+      .dri-subworkflow-activity-completed {
+        border-top: @activityBaseColor;
+      }
+
+      .dri-subworkflow-activity-deferred {
+        border-top: 0.25rem solid @red;
+      }
+
+      .dri-subworkflow-activity-pending-input {
+        border-top: 0.25rem solid @red;
+      }
+
+      .dri-subworkflow-activity-not-held {
+        border-top: 0.25rem solid @yellow;
+      }
+
+      .dri-subworkflow-activity-not-applicable {
+        border-top: 0.25rem solid @yellow;
+      }
+
+      .dri-activity-children {
+        .dri-subworkflow-activity {
+          .dri-activity-child {
+            .dri-subworkflow-activity-in-progress {
+              border-top: 0.25rem solid @blue;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity {
+  margin: 5px;
+  border-bottom: none;
+  .p-1\.5();
+
+  background: @activityBackgroundColor;
+  border-top: 0.25rem solid @activityBorderTopColor;
+  color: @activityColor;
+  .relative();
+
+  line-height: 2.5em;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .dri-subworkflow-activity-buttons {
+  .w-13\.75();
+  .inline-block();
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .btn-group {
+  text-align: left;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .dri-subworkflow-activity-actions {
+  text-align: right;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-form {
+  .ml-0();
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-url {
+  .ml-0();
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-due-date {
+  color: @white;
+  white-space: nowrap;
+  border-radius: 3px;
+  padding: 0 5px;
+  .inline-block();
+
+  background: @cerulean;
+  line-height: 2em;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-due-date i {
+  color: @white;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-due-date.overdue {
+  background: @lightRed;
+  color: @darkRed;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-due-date.overdue i {
+  color: @darkRed;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-due-date.future {
+  background: @lightOcean;
+  color: @darkOcean;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-due-date.future i {
+  color: @darkOcean;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity-completed .activity-due-date,
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity-held .activity-due-date {
+  display: none;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .dri-subworkflow-activity-completed {
+  background: #0f7799;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .dri-activity-info .assigned-user-wrapper {
+  .relative();
+}
+
+body.sugar-dark-theme .dri-workflow-wrapper .dri-subworkflow-activity .dri-activity-info a {
+  color: @gray60;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .dri-activity-info i.assigned-user-icon {
+  color: var(--label-color);
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .dri-activity-info img.assigned-user-icon {
+  .h-6();
+  .w-6();
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity.customer_task .dri-activity-info i.activity-type-icon {
+  color: @green;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity i.sicon-star-fill {
+  color: @green;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity.milestone .dri-activity-info i.activity-type-icon {
+  color: @orange;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity i.sicon-trophy {
+  color: @orange;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity.internal_task .dri-activity-info i.activity-type-icon {
+  color: @pink;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .dri-subworkflow-activity-buttons i.sicon-user {
+  color: @gray70;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity i.sicon-user {
+  color: @pink;
+}
+
+.dri-workflow-wrapper .dri-subworkflow i.activity-type-icon {
+  color: @gray70;
+}
+
+body.sugar-dark-theme .dri-workflow-wrapper .dri-subworkflow i.sicon.sicon-refresh.activity-type-icon {
+  color: @gray60;
+}
+
+body.sugar-dark-theme .dri-workflow-wrapper .dri-subworkflow i.sicon.sicon-account.activity-type-icon {
+  color: @gray60;
+}
+
+body.sugar-dark-theme .dri-workflow-wrapper .dri-subworkflow i.sicon.sicon-calendar.activity-type-icon {
+  color: @gray60;
+}
+
+body.sugar-dark-theme .dri-workflow-wrapper .dri-subworkflow i.sicon.sicon-phone.activity-type-icon {
+  color: @gray60;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity.cj_blocked .fa-ban {
+  cursor: pointer;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity.cj_blocked_by_stage .fa-ban {
+  cursor: pointer;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .fa-link {
+  color: @blue;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .add-stage-button-wrapper {
+  .absolute();
+
+  z-index: 1000;
+  right: 36px;
+  top: 6px;
+  .h-7();
+  .w-7();
+
+  display: none;
+}
+
+.dri-workflow-wrapper .dri-subworkflow:hover .add-stage-button-wrapper {
+  .block();
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-activity-child {
+  border-left: none;
+}
+
+.record-panel .record-panel-header .panel-inactive .pull-left {
+  font-weight: normal;
+}
+
+.record-panel .record-panel-header .panel-active .pull-left {
+  font-weight: normal;
+}
+
+div.customer-journey-chart-wrapper,
+div.customer-journey-momentum-chart-wrapper {
+  .p-0();
+}
+
+div.customer-journey-chart-wrapper .nv-chart,
+div.customer-journey-momentum-chart-wrapper .nv-chart {
+  min-width: 12.5rem;
+}
+
+div.customer-journey-chart-wrapper .nv-chart .completed,
+div.customer-journey-momentum-chart-wrapper .nv-chart .completed {
+  fill: @green;
+}
+
+div.customer-journey-chart-wrapper .nv-chart .not_completed,
+div.customer-journey-momentum-chart-wrapper .nv-chart .not_completed {
+  fill: #fbc02d;
+}
+
+div.customer-journey-chart-wrapper .nv-chart .in_progress,
+div.customer-journey-momentum-chart-wrapper .nv-chart .in_progress {
+  fill: @blue;
+}
+
+div.customer-journey-chart-wrapper .nv-chart .not_started,
+div.customer-journey-momentum-chart-wrapper .nv-chart .not_started {
+  fill: #ccc;
+}
+
+div.dashlet-container div.dashlet div.dashlet-content div.customer-journey-chart-wrapper .nv-chart,
+div.dashlet-container div.dashlet div.dashlet-content div.customer-journey-momentum-chart-wrapper .nv-chart {
+  .h-full();
+}
+
+div.dashlet-container div.dashlet div.dashlet-content div.customer-journey-chart-wrapper div[data-content="chart"],
+div.dashlet-container div.dashlet div.dashlet-content div.customer-journey-momentum-chart-wrapper div[data-content="chart"] {
+  height: calc(100% - 16px);
+}
+
+.dri-workflows-header-wrapper {
+  margin-bottom: -3px;
+  .relative();
+}
+
+.dri-workflows-header-wrapper .block-footer {
+  border-top: 0;
+}
+
+.dri-workflows-header-wrapper .no-workflows {
+  text-align: center;
+}
+
+.dri-workflows-header-wrapper .record-panel-header {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+.dri-workflows-header-wrapper .record-panel-header span {
+  padding: 12px 15px 0;
+}
+
+.dri-workflows-header-wrapper .dri-workflows-actions {
+  .absolute();
+
+  top: 5px;
+  right: 0;
+}
+
+.dri-workflows-header-wrapper .dri-workflows-actions .dri-workflows-actions-buttons {
+  .w-11();
+
+  min-height: 1px;
+}
+
+.dri-workflow-details-horizontal .row-fluid .dri-subworkflow {
+  .w-full();
+
+  max-width: 265px;
+  flex-shrink: 0;
+}
+
+.dri-workflow-details-horizontal .row-fluid {
+  .flex();
+
+  overflow-x: auto;
+}
+
+.tab-content div[id*="customer_journey_tab"] {
+  .pt-1\.25();
+}
+
+@media (max-width: 1400px) {
+  body.sugar-dark-theme .dri-workflows-header-wrapper {
+    .relative();
+
+    top: initial;
+    background: transparent;
+    .p-1\.25();
+
+    border-bottom: transparent;
+    .flex();
+
+    flex-flow: row-reverse wrap;
+  }
+}
+
+@media (max-width: 1400px) {
+  .dri-workflows-header-wrapper .dri-workflows-actions {
+    .relative();
+
+    top: initial;
+    background: #f6f6f6;
+    .p-1\.25();
+
+    border-bottom: transparent;
+    .flex();
+
+    flex-flow: row-reverse wrap;
+  }
+}
+
+@media (min-width: 501px) {
+  .dri-workflows-header-wrapper .dri-workflows-actions .dri-workflows-actions-fields {
+    .w-62\.5();
+  }
+}
+
+@media (min-width: 401px) and (max-width: 500px) {
+  .dri-workflows-header-wrapper .dri-workflows-actions .dri-workflows-actions-fields {
+    .w-62\.5();
+  }
+}
+
+@media (max-width: 400px) {
+  .dri-workflows-header-wrapper .dri-workflows-actions .dri-workflows-actions-fields {
+    .w-30();
+  }
+}
+
+.dri-workflows-header-wrapper .dri-workflows-actions .dri-workflows-actions-spinner {
+  .mt-0\.25();
+  .mr-1\.25();
+}
+
+.dri-workflows-header-wrapper .record-panel .record-panel-header > .row-fluid {
+  background: @activityRowFluidColor;
+  border-bottom: @activityRowFluidBorderColor;
+}
+
+.dri-workflows-header-wrapper *:focus {
+  outline: none;
+}
+
+.cj-template-import {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+.config-cj-module {
+  .config_container {
+    .ml-7\.5();
+    .mr-7\.5();
+
+    .config_values {
+      margin: 10px 0;
+
+      input {
+        width: 60%;
+      }
+    }
+  }
+
+  .pull-left {
+    padding: 5px 0;
+  }
+
+  .config_container p {
+    .m-0();
+  }
+
+  #content .headerpane {
+    .relative();
+
+    top: 0;
+  }
+
+  .record.bottom {
+    .ml-2\.5();
+    .mr-2\.5();
+    .mb-2\.5();
+  }
+
+  .record-panel.top {
+    .m-0();
+  }
+
+  .record-panel.bottom {
+    margin: -1px 0;
+  }
+
+  .record-panel .record-panel-header {
+    background: var(--headerpane-background);
+    padding: 0 5px 0 15px;
+    border-top: @borderWidget;
+    border-bottom: @borderWidget;
+    .h-13\.75();
+
+    text-transform: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+  }
+
+  .record-panel .record-panel-header:hover {
+    background: @primaryContentHoverBackground;
+  }
+
+  .record-link-wrapper.span4 span.normal.index {
+    width: 50%;
+  }
+}
+
+@dri-workflow-default-color: #cdcccb;
+@dri-workflow-in-progress-color: @blue; // old: #176de5
+@dri-workflow-not-started-color: #ccc;
+@dri-workflow-completed-color: @green; // old: 33800d
+@dri-workflow-stopped-color: @lust;
+@dri-workflow-not-completed-color: #fbc02d; // old: e5a117 - #e4263b
+
+@dri-workflow-completed-background-color: #ceecc0; // old: #d3e8c9
+@dri-workflow-not-completed-background-color: #fff1d4;
+@dri-workflow-stopped-background-color: #f9ddd9;
+@dri-workflow-in-progress-background-color: #dfecff;
+@dri-workflow-not-started-background-color: #e9e9e9;
+
+.rounded(@radius: 2px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.dri-subworkflow-arrow(@color) {
+  background: @color;
+
+  &::before {
+    border-top: 20px solid @color;
+    border-bottom: 20px solid @color;
+    border-left: 20px solid transparent;
+  }
+
+  &::after {
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid @color;
+  }
+}
+
+.content-tabs {
+  div[id*="customer_journey_tab"] {
+    .pt-1\.25();
+  }
+}
+
+.dri-subworkflow-arrow-not_started .dri-subworkflow-arrow-info a {
+  color: @gray70;
+}
+
+.dri-subworkflow-arrow-in_progress .dri-subworkflow-arrow-info a {
+  color: @darkOcean;
+}
+
+.dri-subworkflow-arrow-cancelled .dri-subworkflow-arrow-info a {
+  color: @darkYellow;
+}
+
+.dri-subworkflow-arrow-completed .dri-subworkflow-arrow-info a {
+  color: @darkGreen;
+}
+
+.dri-subworkflow-arrow-not_completed .dri-subworkflow-arrow-info a {
+  color: @darkYellow;
+}
+
+.dri-workflow-wrapper .progress {
+  background-color: @guideProgressColor;
+}
+
+.dri-workflow-toggle-switch {
+  .relative();
+  .inline-block();
+
+  .w-12\.5();
+  .h-6();
+}
+
+.dri-workflow-toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  .absolute();
+
+  cursor: pointer;
+  inset: 0;
+  background-color: @starCommandBlue;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider::before {
+  .absolute();
+
+  content: "";
+  .h-5();
+  .w-5();
+
+  left: 2px;
+  right: 2px;
+  bottom: 1px;
+  background-color: @white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider::before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round::before {
+  border-radius: 50%;
+}
+
+.widget-container {
+  .inline-block();
+}
+
+.archiveActive {
+  #cj-widget-config-toggle-label-left {
+    .flex();
+
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    .mr-1();
+  }
+
+  #cj-widget-toggle-left {
+    .flex();
+
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  #cj-widget-config-toggle-label-right {
+    .w-12\/12();
+    .p-0\.5();
+
+    white-space: nowrap;
+    .flex();
+
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    .ml-1();
+  }
+}
+
+.horizontalVertical {
+  #cj-widget-config-toggle-label-left {
+    .w-12\/12();
+    .p-0\.5();
+
+    white-space: nowrap;
+    .flex();
+
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    .mr-1();
+  }
+
+  #cj-widget-toggle-left {
+    .flex();
+
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  #cj-widget-config-toggle-label-right {
+    .w-12\/12();
+    .p-0\.5();
+
+    white-space: nowrap;
+    .flex();
+
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    .ml-1();
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.clearfix-wrapper {
+  .flex();
+
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+body.sugar-dark-theme .cj-configure-recordview-display-content-field .select2-result-unselectable.select2-disabled {
+  background: @gray70;
+}
+
+.record .dri-workflow-wrapper .btn-group.actions > ul.dropdown-menu {
+  .mt-0();
+
+  right: 0;
+  left: auto;
+}
+
+.dri-workflow-wrapper .progress-cancelled .bar {
+  background-color: @lust;
+}
+
+.label-cancelled {
+  border: 0.063rem solid @lightRed;
+  background: @lightRed;
+  background-color: @lightRed;
+  color: @darkRed;
+}
+
+.cj-bar-green {
+  background-color: @green;
+  background-image: linear-gradient(to bottom, @green, @green);
+}
+
+.cj-bar-red {
+  background-color: @red;
+  background-image: linear-gradient(to bottom, @red, @red);
+}
+
+.cj-bar-yellow {
+  background-color: @yellow;
+  background-image: linear-gradient(to bottom, @yellow, @yellow);
+}
+
+.cj-bar-orange {
+  background-color: @orange;
+  background-image: linear-gradient(to bottom, @orange, @orange);
+}

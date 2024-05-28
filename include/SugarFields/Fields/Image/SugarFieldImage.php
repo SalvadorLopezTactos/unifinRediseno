@@ -12,29 +12,28 @@
 
 class SugarFieldImage extends SugarFieldBase
 {
-
-    function getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex, $searchView = false)
+    public function getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex, $searchView = false)
     {
         $displayParams['bean_id'] = 'id';
         $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
         return $this->fetch($this->findTemplate('EditView'));
     }
 
-    function getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex, $searchView = false)
+    public function getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex, $searchView = false)
     {
         $displayParams['bean_id'] = 'id';
         $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
         return $this->fetch($this->findTemplate('DetailView'));
     }
 
-    function getUserEditView($parentFieldArray, $vardef, $displayParams, $tabindex, $searchView = false)
+    public function getUserEditView($parentFieldArray, $vardef, $displayParams, $tabindex, $searchView = false)
     {
         $displayParams['bean_id'] = 'id';
         $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex, false);
         return $this->fetch($this->findTemplate('UserEditView'));
     }
 
-    function getUserDetailView($parentFieldArray, $vardef, $displayParams, $tabindex, $searchView = false)
+    public function getUserDetailView($parentFieldArray, $vardef, $displayParams, $tabindex, $searchView = false)
     {
         $displayParams['bean_id'] = 'id';
         $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex, false);
@@ -48,7 +47,7 @@ class SugarFieldImage extends SugarFieldBase
         //remove file
         if (isset($_REQUEST['remove_imagefile_' . $field]) && $_REQUEST['remove_imagefile_' . $field] == 1) {
             $upload_file->unlink_file($bean->$field);
-            $bean->$field = "";
+            $bean->$field = '';
         }
 
         //uploadfile
@@ -58,7 +57,6 @@ class SugarFieldImage extends SugarFieldBase
                 if ($upload_file->confirm_upload()) {
                     // for saveTempImage API
                     if (isset($params['temp']) && $params['temp'] === true) {
-
                         // Create the new field value
                         $bean->$field = create_guid();
 
@@ -68,7 +66,6 @@ class SugarFieldImage extends SugarFieldBase
                             $this->error = $upload_file->getErrorMessage();
                         }
                     } else {
-
                         // Capture the old value in case of error
                         $oldvalue = $bean->$field;
 
@@ -79,7 +76,7 @@ class SugarFieldImage extends SugarFieldBase
                         if (!$upload_file->final_move($bean->$field)) {
                             // If this was a fail, reset the bean field to original
                             $bean->$field = $oldvalue;
-                            $this->error  = $upload_file->getErrorMessage();
+                            $this->error = $upload_file->getErrorMessage();
                         }
                     }
                 } else {
@@ -92,10 +89,10 @@ class SugarFieldImage extends SugarFieldBase
                 if (false !== $imgInfo) {
                     $this->error = string_format(
                         $GLOBALS['app_strings']['LBL_UPLOAD_IMAGE_FILE_NOT_SUPPORTED'],
-                        array($imgInfo['mime'])
+                        [$imgInfo['mime']]
                     );
                 } else {
-                    $this->error = $GLOBALS['app_strings']["LBL_UPLOAD_IMAGE_FILE_INVALID"];
+                    $this->error = $GLOBALS['app_strings']['LBL_UPLOAD_IMAGE_FILE_INVALID'];
                 }
             }
         }
@@ -118,10 +115,10 @@ class SugarFieldImage extends SugarFieldBase
      * Override apiSave to call save method instead of using parent apiSave
      *
      * @override
-     * @param SugarBean $bean       - the bean performing the save
-     * @param array     $params     - an array of parameters array from passed up to the API
-     * @param string    $field      - The name of the field to save (the vardef name, not the form element name)
-     * @param array     $properties - Any properties for this field
+     * @param SugarBean $bean - the bean performing the save
+     * @param array $params - an array of parameters array from passed up to the API
+     * @param string $field - The name of the field to save (the vardef name, not the form element name)
+     * @param array $properties - Any properties for this field
      */
     public function apiSave(SugarBean $bean, array $params, $field, $properties)
     {

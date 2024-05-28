@@ -40,16 +40,16 @@ $dictionary['ChangeTimer'] = [
             'vname' => 'LBL_VALUE',
             'type' => 'varchar',
         ],
-        'from_datetime' => array(
+        'from_datetime' => [
             'name' => 'from_datetime',
             'vname' => 'LBL_FROM_DATETIME',
             'type' => 'datetime',
-        ),
-        'to_datetime' => array(
+        ],
+        'to_datetime' => [
             'name' => 'to_datetime',
             'vname' => 'LBL_TO_DATETIME',
             'type' => 'datetime',
-        ),
+        ],
         'hours' => [
             'name' => 'hours',
             'vname' => 'LBL_HOURS',

@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => '購入レコードダッシュボード',
     'LBL_RELATED_ACCOUNT' => '関連アカウント',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => '購入フォーカス ドロワ',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '購入のタイムライン',
 ];

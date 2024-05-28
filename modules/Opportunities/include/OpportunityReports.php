@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -24,10 +25,10 @@ class OpportunityReports
      *
      * @var array
      */
-    protected $rli_table_def = array(
+    protected $rli_table_def = [
         'name' => 'Opportunities  >  Revenue Line Items',
         'parent' => 'self',
-        'link_def' => array(
+        'link_def' => [
             'name' => 'revenuelineitems',
             'relationship_name' => 'opportunities_revenuelineitems',
             'bean_is_lhs' => true,
@@ -35,10 +36,10 @@ class OpportunityReports
             'label' => 'Revenue Line Items',
             'module' => 'RevenueLineItems',
             'table_key' => 'Opportunities:revenuelineitems',
-        ),
+        ],
         'module' => 'RevenueLineItems',
         'label' => 'Revenue Line Items',
-    );
+    ];
 
     /**
      * @var DBManager
@@ -65,8 +66,8 @@ class OpportunityReports
                 $this->rli_table_name = 'revenuelineitems';
             } elseif (isset($report['full_table_list'])) {
                 if (isset($report['full_table_list']['self']['children']) &&
-                        is_array($report['full_table_list']['self']['children'])) {
-                    $this->rli_table_name = 'self_link_' . (is_countable($report['full_table_list']) ? count($report['full_table_list']) : 0);
+                    is_array($report['full_table_list']['self']['children'])) {
+                    $this->rli_table_name = 'self_link_' . safeCount($report['full_table_list']);
                     $report['full_table_list']['self']['children'][$this->rli_table_name] = $this->rli_table_name;
                 }
                 $report['full_table_list'][$this->rli_table_name] = $this->rli_table_def;
@@ -76,7 +77,7 @@ class OpportunityReports
             }
 
             // lets loop though all the display_columns and find anyone that is sales_stage
-            foreach (array('group_defs', 'display_columns', 'summary_columns') as $type) {
+            foreach (['group_defs', 'display_columns', 'summary_columns'] as $type) {
                 foreach ($report[$type] as $key => $column) {
                     if ($column['name'] == 'sales_stage' && $column['table_key'] == 'self') {
                         $report[$type][$key]['table_key'] = $this->rli_table_name;
@@ -86,11 +87,10 @@ class OpportunityReports
 
             // now lets fix all the filters.
             foreach ($report['filters_def'] as $name => $filter) {
-
                 $returnSingleFilter = false;
                 if (isset($filter['name']) && isset($filter['table_key'])) {
                     $returnSingleFilter = true;
-                    $filter = array($filter);
+                    $filter = [$filter];
                 }
 
                 $filter = $this->fixFilters($filter, $this->rli_table_name);
@@ -124,10 +124,9 @@ class OpportunityReports
                 $this->rli_table_name = 'revenuelineitems';
             } elseif (isset($report['full_table_list'])) {
                 if (isset($report['full_table_list']['self']['children']) &&
-                        is_array($report['full_table_list']['self']['children'])) {
-
+                    is_array($report['full_table_list']['self']['children'])) {
                     // find the RLI module
-                    foreach($report['full_table_list']['self']['children'] as $child) {
+                    foreach ($report['full_table_list']['self']['children'] as $child) {
                         if (isset($report['full_table_list'][$child]['module']) &&
                             $report['full_table_list'][$child]['module'] === 'RevenueLineItems') {
                             $this->rli_table_name = $child;
@@ -146,7 +145,7 @@ class OpportunityReports
             }
 
             // lets loop though all the display_columns and find anyone that is sales_stage
-            foreach (array('group_defs', 'display_columns', 'summary_columns') as $type) {
+            foreach (['group_defs', 'display_columns', 'summary_columns'] as $type) {
                 foreach ($report[$type] as $key => $column) {
                     if ($column['name'] == 'sales_stage' && $column['table_key'] == $this->rli_table_name) {
                         $report[$type][$key]['table_key'] = 'self';
@@ -156,11 +155,10 @@ class OpportunityReports
 
             // now lets fix all the filters.
             foreach ($report['filters_def'] as $name => $filter) {
-
                 $returnSingleFilter = false;
                 if (isset($filter['name']) && isset($filter['table_key'])) {
                     $returnSingleFilter = true;
-                    $filter = array($filter);
+                    $filter = [$filter];
                 }
 
                 $filter = $this->fixFilters($filter, 'self');
@@ -181,9 +179,9 @@ class OpportunityReports
     {
         $query = 'SELECT id, content FROM saved_reports WHERE module = ? AND content LIKE ? AND deleted = 0';
         $conn = $this->db->getConnection();
-        $stmt = $conn->executeQuery($query, array('Opportunities', '%"name":"sales_stage"%'));
+        $stmt = $conn->executeQuery($query, ['Opportunities', '%"name":"sales_stage"%']);
 
-        $reports = array();
+        $reports = [];
         while ($row = $stmt->fetchAssociative()) {
             $reports[$row['id']] = json_decode($row['content'], true);
         }
@@ -194,11 +192,11 @@ class OpportunityReports
     protected function saveReport($id, array $report)
     {
         $conn = $this->db->getConnection();
-        $conn->update('saved_reports', array(
+        $conn->update('saved_reports', [
             'content' => json_encode($report, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT),
-        ), array(
+        ], [
             'id' => $id,
-        ));
+        ]);
     }
 
     /**

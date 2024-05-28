@@ -26,6 +26,7 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
 {
     /**
     * Gets the cloudPcStatus
+    * The status of the cloud PC. Possible values are: notProvisioned, provisioning, provisioned, upgrading, inGracePeriod, deprovisioning, failed. Required. Read-only.
     *
     * @return string|null The cloudPcStatus
     */
@@ -37,9 +38,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the cloudPcStatus
+    * The status of the cloud PC. Possible values are: notProvisioned, provisioning, provisioned, upgrading, inGracePeriod, deprovisioning, failed. Required. Read-only.
     *
     * @param string $val The cloudPcStatus
     *
@@ -50,9 +52,39 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["cloudPcStatus"] = $val;
         return $this;
     }
-    
+
+    /**
+    * Gets the deviceSpecification
+    * The specification of the cloud PC device. Required. Read-only.
+    *
+    * @return string|null The deviceSpecification
+    */
+    public function getDeviceSpecification()
+    {
+        if (array_key_exists("deviceSpecification", $this->_propDict)) {
+            return $this->_propDict["deviceSpecification"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the deviceSpecification
+    * The specification of the cloud PC device. Required. Read-only.
+    *
+    * @param string $val The deviceSpecification
+    *
+    * @return CloudPcDevice
+    */
+    public function setDeviceSpecification($val)
+    {
+        $this->_propDict["deviceSpecification"] = $val;
+        return $this;
+    }
+
     /**
     * Gets the displayName
+    * The display name  of the cloud PC device. Required. Read-only.
     *
     * @return string|null The displayName
     */
@@ -64,9 +96,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the displayName
+    * The display name  of the cloud PC device. Required. Read-only.
     *
     * @param string $val The displayName
     *
@@ -77,9 +110,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["displayName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the lastRefreshedDateTime
+    * Date and time the entity was last updated in the multi-tenant management platform. Required. Read-only.
     *
     * @return \DateTime|null The lastRefreshedDateTime
     */
@@ -95,9 +129,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the lastRefreshedDateTime
+    * Date and time the entity was last updated in the multi-tenant management platform. Required. Read-only.
     *
     * @param \DateTime $val The lastRefreshedDateTime
     *
@@ -108,9 +143,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["lastRefreshedDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the managedDeviceId
+    * The managed device identifier of the cloud PC device. Optional. Read-only.
     *
     * @return string|null The managedDeviceId
     */
@@ -122,9 +158,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the managedDeviceId
+    * The managed device identifier of the cloud PC device. Optional. Read-only.
     *
     * @param string $val The managedDeviceId
     *
@@ -135,9 +172,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["managedDeviceId"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the managedDeviceName
+    * The managed device display name of the cloud PC device. Optional. Read-only.
     *
     * @return string|null The managedDeviceName
     */
@@ -149,9 +187,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the managedDeviceName
+    * The managed device display name of the cloud PC device. Optional. Read-only.
     *
     * @param string $val The managedDeviceName
     *
@@ -162,9 +201,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["managedDeviceName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the provisioningPolicyId
+    * The provisioning policy identifier for the cloud PC device. Required. Read-only.
     *
     * @return string|null The provisioningPolicyId
     */
@@ -176,9 +216,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the provisioningPolicyId
+    * The provisioning policy identifier for the cloud PC device. Required. Read-only.
     *
     * @param string $val The provisioningPolicyId
     *
@@ -189,9 +230,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["provisioningPolicyId"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the servicePlanName
+    * The service plan name of the cloud PC device. Required. Read-only.
     *
     * @return string|null The servicePlanName
     */
@@ -203,9 +245,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the servicePlanName
+    * The service plan name of the cloud PC device. Required. Read-only.
     *
     * @param string $val The servicePlanName
     *
@@ -216,9 +259,39 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["servicePlanName"] = $val;
         return $this;
     }
-    
+
+    /**
+    * Gets the servicePlanType
+    * The service plan type of the cloud PC device. Required. Read-only.
+    *
+    * @return string|null The servicePlanType
+    */
+    public function getServicePlanType()
+    {
+        if (array_key_exists("servicePlanType", $this->_propDict)) {
+            return $this->_propDict["servicePlanType"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the servicePlanType
+    * The service plan type of the cloud PC device. Required. Read-only.
+    *
+    * @param string $val The servicePlanType
+    *
+    * @return CloudPcDevice
+    */
+    public function setServicePlanType($val)
+    {
+        $this->_propDict["servicePlanType"] = $val;
+        return $this;
+    }
+
     /**
     * Gets the tenantDisplayName
+    * The display name for the managed tenant. Required. Read-only.
     *
     * @return string|null The tenantDisplayName
     */
@@ -230,9 +303,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the tenantDisplayName
+    * The display name for the managed tenant. Required. Read-only.
     *
     * @param string $val The tenantDisplayName
     *
@@ -243,9 +317,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["tenantDisplayName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the tenantId
+    * The Azure Active Directory tenant identifier for the managed tenant. Required. Read-only.
     *
     * @return string|null The tenantId
     */
@@ -257,9 +332,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the tenantId
+    * The Azure Active Directory tenant identifier for the managed tenant. Required. Read-only.
     *
     * @param string $val The tenantId
     *
@@ -270,9 +346,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["tenantId"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the userPrincipalName
+    * The user principal name (UPN) of the user assigned to the cloud PC device. Required. Read-only.
     *
     * @return string|null The userPrincipalName
     */
@@ -284,9 +361,10 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the userPrincipalName
+    * The user principal name (UPN) of the user assigned to the cloud PC device. Required. Read-only.
     *
     * @param string $val The userPrincipalName
     *
@@ -297,5 +375,5 @@ class CloudPcDevice extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["userPrincipalName"] = $val;
         return $this;
     }
-    
+
 }

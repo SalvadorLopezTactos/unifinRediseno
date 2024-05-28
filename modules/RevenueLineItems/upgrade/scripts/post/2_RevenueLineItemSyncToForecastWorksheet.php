@@ -29,7 +29,7 @@ class SugarUpgradeRevenueLineItemSyncToForecastWorksheet extends UpgradeScript
 
         $this->log('Updating Revenue Line Item Rows in Forecast Worksheet');
 
-        $fields = array(
+        $fields = [
             'name',
             'account_id',
             'account_name',
@@ -65,12 +65,12 @@ class SugarUpgradeRevenueLineItemSyncToForecastWorksheet extends UpgradeScript
             'discount_price',
             'discount_amount',
             'quantity',
-            'total_amount'
-        );
+            'total_amount',
+        ];
 
         $sqlSet = "%s=(SELECT %s from revenue_line_items r WHERE r.id = forecast_worksheets.parent_id and forecast_worksheets.parent_type = 'RevenueLineItems')";
 
-        $sqlSetArray = array();
+        $sqlSetArray = [];
 
         foreach ($fields as $field) {
             $key = $field;
@@ -115,13 +115,13 @@ class SugarUpgradeRevenueLineItemSyncToForecastWorksheet extends UpgradeScript
                         $field
                     );
                     break;
-                default;
+                default:
                     $sqlSetArray[] = sprintf($sqlSet, $key, $field);
                     break;
             }
         }
 
-        $sql = "update forecast_worksheets SET " . join(",", $sqlSetArray) . "
+        $sql = 'update forecast_worksheets SET ' . join(',', $sqlSetArray) . "
           where exists (SELECT * from revenue_line_items r WHERE r.id = forecast_worksheets.parent_id and forecast_worksheets.parent_type = 'RevenueLineItems')";
 
         $r = $this->db->query($sql);
@@ -132,8 +132,5 @@ class SugarUpgradeRevenueLineItemSyncToForecastWorksheet extends UpgradeScript
                 (SELECT * from revenue_line_items r WHERE r.deleted = 1 and
                     r.id = forecast_worksheets.parent_id and forecast_worksheets.parent_type = 'RevenueLineItems')";
         $this->db->query($sql_delete);
-
-
-
     }
 }

@@ -44,6 +44,10 @@ class GoogleChromeManagementV1TelemetryDevice extends \Google\Collection
   protected $graphicsInfoDataType = '';
   protected $graphicsStatusReportType = GoogleChromeManagementV1GraphicsStatusReport::class;
   protected $graphicsStatusReportDataType = 'array';
+  protected $heartbeatStatusReportType = GoogleChromeManagementV1HeartbeatStatusReport::class;
+  protected $heartbeatStatusReportDataType = 'array';
+  protected $kioskAppStatusReportType = GoogleChromeManagementV1KioskAppStatusReport::class;
+  protected $kioskAppStatusReportDataType = 'array';
   protected $memoryInfoType = GoogleChromeManagementV1MemoryInfo::class;
   protected $memoryInfoDataType = '';
   protected $memoryStatusReportType = GoogleChromeManagementV1MemoryStatusReport::class;
@@ -64,6 +68,8 @@ class GoogleChromeManagementV1TelemetryDevice extends \Google\Collection
   public $orgUnitId;
   protected $osUpdateStatusType = GoogleChromeManagementV1OsUpdateStatus::class;
   protected $osUpdateStatusDataType = 'array';
+  protected $peripheralsReportType = GoogleChromeManagementV1PeripheralsReport::class;
+  protected $peripheralsReportDataType = 'array';
   /**
    * @var string
    */
@@ -216,6 +222,34 @@ class GoogleChromeManagementV1TelemetryDevice extends \Google\Collection
     return $this->graphicsStatusReport;
   }
   /**
+   * @param GoogleChromeManagementV1HeartbeatStatusReport[]
+   */
+  public function setHeartbeatStatusReport($heartbeatStatusReport)
+  {
+    $this->heartbeatStatusReport = $heartbeatStatusReport;
+  }
+  /**
+   * @return GoogleChromeManagementV1HeartbeatStatusReport[]
+   */
+  public function getHeartbeatStatusReport()
+  {
+    return $this->heartbeatStatusReport;
+  }
+  /**
+   * @param GoogleChromeManagementV1KioskAppStatusReport[]
+   */
+  public function setKioskAppStatusReport($kioskAppStatusReport)
+  {
+    $this->kioskAppStatusReport = $kioskAppStatusReport;
+  }
+  /**
+   * @return GoogleChromeManagementV1KioskAppStatusReport[]
+   */
+  public function getKioskAppStatusReport()
+  {
+    return $this->kioskAppStatusReport;
+  }
+  /**
    * @param GoogleChromeManagementV1MemoryInfo
    */
   public function setMemoryInfo(GoogleChromeManagementV1MemoryInfo $memoryInfo)
@@ -326,6 +360,20 @@ class GoogleChromeManagementV1TelemetryDevice extends \Google\Collection
   public function getOsUpdateStatus()
   {
     return $this->osUpdateStatus;
+  }
+  /**
+   * @param GoogleChromeManagementV1PeripheralsReport[]
+   */
+  public function setPeripheralsReport($peripheralsReport)
+  {
+    $this->peripheralsReport = $peripheralsReport;
+  }
+  /**
+   * @return GoogleChromeManagementV1PeripheralsReport[]
+   */
+  public function getPeripheralsReport()
+  {
+    return $this->peripheralsReport;
   }
   /**
    * @param string

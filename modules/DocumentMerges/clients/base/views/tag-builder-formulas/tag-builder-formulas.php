@@ -10,8 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['DocumentMerges']['base']['view']['tag-builder-formulas'] = [
-    'components' =>
-    [
+    'components' => [
         [
             'field' => 'formula-builder',
         ],

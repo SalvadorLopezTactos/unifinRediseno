@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('sugarEntry') || !sugarEntry) {
     die('Not A Valid Entry Point');
 }
@@ -18,9 +19,9 @@ if (!defined('sugarEntry') || !sugarEntry) {
  * Variables to customize the look and feel of Bootstrap
  */
 
-$lessdefs = array(
+$lessdefs = [
 
-    'colors' => array(
+    'colors' => [
         /**
          * Primary Color:
          * 3 pixel line on the navbar
@@ -52,5 +53,5 @@ $lessdefs = array(
          * - Uses @darkModeBlue in dark mode
          */
         'LinkColor' => '#0679c8',
-    ),
-);
+    ],
+];

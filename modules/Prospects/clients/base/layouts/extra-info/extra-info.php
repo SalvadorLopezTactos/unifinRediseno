@@ -11,10 +11,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Prospects']['base']['layout']['extra-info'] = array(
-    'components' => array(
-        array(
+$viewdefs['Prospects']['base']['layout']['extra-info'] = [
+    'components' => [
+        [
             'view' => 'convert-results',
-        ),
-    ),
-);
+        ],
+    ],
+];

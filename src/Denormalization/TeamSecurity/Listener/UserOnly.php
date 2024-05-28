@@ -94,7 +94,7 @@ final class UserOnly implements Listener
     /**
      * {@inheritDoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf('UserOnly(%s, %s)', $this->matchingListener, $this->nonMatchingListener);
     }

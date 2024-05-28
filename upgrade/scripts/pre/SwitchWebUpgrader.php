@@ -24,8 +24,7 @@ class SugarUpgradeSwitchWebUpgrader extends UpgradeScript
             return;
         }
 
-        if (!is_file($_SESSION['upgrade_dir'] . 'modules/UpgradeWizard/UpgradeDriver.php'))
-        {
+        if (!is_file($_SESSION['upgrade_dir'] . 'modules/UpgradeWizard/UpgradeDriver.php')) {
             return;
         }
         $this->log('Switch to WebUpgrader from the package.');
@@ -38,5 +37,4 @@ class SugarUpgradeSwitchWebUpgrader extends UpgradeScript
 
         session_write_close();
     }
-
 }

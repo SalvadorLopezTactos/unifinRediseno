@@ -10,48 +10,44 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_CREATED_ID'=>'Létrehozó azonosítója',
-  'LBL_MODIFIED_ID'=>'Módosító azonosítója',
-  'LBL_MODULE_NAME' => 'Gyártók',
-  'LBL_MODULE_NAME_SINGULAR' => 'Gyártó',
-  'LBL_MODULE_TITLE' => 'Gyártók: Főoldal',
-  'LBL_SEARCH_FORM_TITLE' => 'Gyártó keresése',
-  'LBL_LIST_FORM_TITLE' => 'Gyártó lista',
-  'LBL_NEW_FORM_TITLE' => 'Új gyártó',
-  'LBL_MANUFACTURER' => 'Gyártó:',
-  'LBL_LIST_NAME' => 'Gyártó',
-  'LBL_NAME' => 'Gyártó:',
-  'LBL_ID' => 'Azonosító',
-  'LBL_MODIFIED_BY' => 'Módosította',
-  'LBL_CREATED_BY' => 'Létrehozta',
-  'LBL_LIST_LIST_ORDER' => 'Sorrend',
-  'LBL_LIST_ORDER' => 'Sorrend:',
-  'LBL_LIST_STATUS' => 'Állapot',
-  'LBL_STATUS' => 'Állapot:',
-  'LNK_PRODUCT_LIST' => 'Termékkatalógus megtekintése',
+$mod_strings = [
+    'LBL_CREATED_ID' => 'Létrehozó azonosítója',
+    'LBL_MODIFIED_ID' => 'Módosító azonosítója',
+    'LBL_MODULE_NAME' => 'Gyártók',
+    'LBL_MODULE_NAME_SINGULAR' => 'Gyártó',
+    'LBL_MODULE_TITLE' => 'Gyártók: Főoldal',
+    'LBL_SEARCH_FORM_TITLE' => 'Gyártó keresése',
+    'LBL_LIST_FORM_TITLE' => 'Gyártó lista',
+    'LBL_NEW_FORM_TITLE' => 'Új gyártó',
+    'LBL_MANUFACTURER' => 'Gyártó:',
+    'LBL_LIST_NAME' => 'Gyártó',
+    'LBL_NAME' => 'Gyártó:',
+    'LBL_ID' => 'Azonosító',
+    'LBL_MODIFIED_BY' => 'Módosította',
+    'LBL_CREATED_BY' => 'Létrehozta',
+    'LBL_LIST_LIST_ORDER' => 'Sorrend',
+    'LBL_LIST_ORDER' => 'Sorrend:',
+    'LBL_LIST_STATUS' => 'Állapot',
+    'LBL_STATUS' => 'Állapot:',
+    'LNK_PRODUCT_LIST' => 'Termékkatalógus megtekintése',
     'LNK_NEW_PRODUCT' => 'Create Product',
     'LNK_NEW_MANUFACTURER' => 'Create Manufacturer',
     'LNK_VIEW_MANUFACTURERS' => 'View Manufacturers',
-  'LNK_NEW_SHIPPER' => 'Szállítók',
-  'LNK_NEW_PRODUCT_CATEGORY' => 'Termékkategóriák',
-  'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Termékkategóriák importálása',
-  'LNK_NEW_PRODUCT_TYPE' => 'Terméktípusok',
-  'NTC_DELETE_CONFIRMATION' => 'Biztos benne, hogy törölni kívánja ezt rekordot?',
-  'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót a gyártó törléséhez!',
-  'NTC_STATUS' => 'Ahhoz, hogy eltávolítsa a gyártót a legördülő listából, állítsa annak állapotát inaktívra',
-  'NTC_LIST_ORDER' => 'Állítsa be a sorrendet, ahogy a gyártó meg fog jelenni a gyártók legördülő listájában',
-  'LNK_IMPORT_MANUFACTURERS'=>'Gyártók importálása',
-	'LBL_EDITLAYOUT' => 'Elrendezés szerkesztése' /*for 508 compliance fix*/,
-  'LBL_REVENUELINEITEMS' => 'Bevételi Sor Tételek',
-);
-
-
-?>
+    'LNK_NEW_SHIPPER' => 'Szállítók',
+    'LNK_NEW_PRODUCT_CATEGORY' => 'Termékkategóriák',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Termékkategóriák importálása',
+    'LNK_NEW_PRODUCT_TYPE' => 'Terméktípusok',
+    'NTC_DELETE_CONFIRMATION' => 'Biztos benne, hogy törölni kívánja ezt rekordot?',
+    'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót a gyártó törléséhez!',
+    'NTC_STATUS' => 'Ahhoz, hogy eltávolítsa a gyártót a legördülő listából, állítsa annak állapotát inaktívra',
+    'NTC_LIST_ORDER' => 'Állítsa be a sorrendet, ahogy a gyártó meg fog jelenni a gyártók legördülő listájában',
+    'LNK_IMPORT_MANUFACTURERS' => 'Gyártók importálása',
+    'LBL_EDITLAYOUT' => 'Elrendezés szerkesztése' /*for 508 compliance fix*/,
+    'LBL_REVENUELINEITEMS' => 'Bevételi Sor Tételek',
+];

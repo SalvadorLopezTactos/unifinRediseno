@@ -52,22 +52,21 @@ class SugarSearchEngineHighlighter
      */
     public function processHighlightText(array $results)
     {
-        $ret = array();
+        $ret = [];
         foreach ($results as $field => $fragments) {
-            $ret[$field] = array(
+            $ret[$field] = [
                 'text' => '',
                 'module' => $this->module,
-                'label' => $this->getLabel($field)
+                'label' => $this->getLabel($field),
 
-            );
+            ];
             $first = true;
 
             foreach ($fragments as $fragment) {
-
                 // check if $fragment is an array
                 // E.g. if $field = 'email', $fragment could be an array.
                 // make sure to use its value only
-                if (is_array($fragment) && count($fragment) == 1) {
+                if (is_array($fragment) && safeCount($fragment) == 1) {
                     $fragment = $fragment[0];
                 }
                 if (!is_string($fragment)) {

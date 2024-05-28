@@ -12,9 +12,12 @@
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
-require_once('soap/SoapHelperFunctions.php');
-class MailMergeController extends SugarController{
-    public function action_search(){
+require_once 'soap/SoapHelperFunctions.php';
+
+class MailMergeController extends SugarController
+{
+    public function action_search()
+    {
         //set ajax view
         $this->view = 'ajax';
         //get the module
@@ -38,11 +41,11 @@ class MailMergeController extends SugarController{
         );
 
         $max = !empty($_REQUEST['max']) ? (int)$_REQUEST['max'] : 10;
-        $order_by = !empty($_REQUEST['order_by']) ? $_REQUEST['order_by'] : $table.".name";
+        $order_by = !empty($_REQUEST['order_by']) ? $_REQUEST['order_by'] : $table . '.name';
         $offset = !empty($_REQUEST['offset']) ? (int)$_REQUEST['offset'] : 0;
-        $response = array();
-        
-        if(!empty($module)){
+        $response = [];
+
+        if (!empty($module)) {
             $where = '';
             $deleted = '0';
             $using_cp = false;
@@ -68,36 +71,33 @@ class MailMergeController extends SugarController{
                 $where = "{$relTable}.first_name LIKE '%{$term}%' OR {$relTable}.last_name LIKE '%{$term}%'";
 
                 if ($campaignWhere) {
-                    $where .= " AND " . $campaignWhere;
+                    $where .= ' AND ' . $campaignWhere;
                 }
-                $where .= " AND related_type = " . $relBean->db->quoted($relModule);
+                $where .= ' AND related_type = ' . $relBean->db->quoted($relModule);
             }
 
             $seed = BeanFactory::newBean($module);
 
-            if($using_cp){
-                $fields = array('id', 'first_name', 'last_name');
-                $dataList = $seed->retrieveTargetList($where, $fields, $offset,-1,$max,$deleted);
-
-            }else{
-                $dataList = $seed->get_list($order_by, $where, $offset,-1,$max,$deleted);
+            if ($using_cp) {
+                $fields = ['id', 'first_name', 'last_name'];
+                $dataList = $seed->retrieveTargetList($where, $fields, $offset, -1, $max, $deleted);
+            } else {
+                $dataList = $seed->get_list($order_by, $where, $offset, -1, $max, $deleted);
             }
 
             $list = $dataList['list'];
             $row_count = $dataList['row_count'];
 
-            $output_list = array();
-            foreach($list as $value)
-            {
+            $output_list = [];
+            foreach ($list as $value) {
                 $output_list[] = get_return_value($value, $module);
             }
 
-            $response['result'] = array('result_count'=>$row_count,'entry_list'=>$output_list);
+            $response['result'] = ['result_count' => $row_count, 'entry_list' => $output_list];
         }
-        
+
         $json = getJSONobj();
         $json_response = $json->encode($response);
         print $json_response;
     }
 }
-

@@ -50,6 +50,21 @@
     },
 
     /**
+     * Return array of moludules
+     *
+     * @param baseModule
+     * @return {any[]|*[]}
+     */
+    getEnabledModules: function(baseModule) {
+        const meta = this.getModulesMeta(baseModule);
+        if (!meta.activity_modules) {
+            return [];
+        }
+
+        return _.map(meta.activity_modules, 'module');
+    },
+
+    /**
      * @inheritdoc
      */
     _getBaseModel: function(options) {
@@ -70,7 +85,7 @@
      * @param {Event} event
      */
     openNoteDrawer: function(event) {
-        var model = this.createLinkModel(this.model, this.moduleLinkMapping.Notes);
+        var model = this.createLinkModel(this.model, 'notes');
 
         app.drawer.open({
             layout: 'create',

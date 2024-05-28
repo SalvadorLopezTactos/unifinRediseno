@@ -10,77 +10,77 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['team_sets_teams'] = array(
+$dictionary['team_sets_teams'] = [
     'table' => 'team_sets_teams',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'vname' => 'LBL_ID',
             'type' => 'id',
             'required' => true,
-        ),
-        'team_set_id' => array(
+        ],
+        'team_set_id' => [
             'name' => 'team_set_id',
             'type' => 'id',
             'required' => true,
-        ),
-        'team_id' => array(
+        ],
+        'team_id' => [
             'name' => 'team_id',
             'type' => 'id',
             'required' => true,
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'idx_ud_id',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_ud_set_id',
             'type' => 'unique',
-            'fields' => array(
+            'fields' => [
                 'team_set_id',
                 'team_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_ud_team_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'team_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_ud_team_set_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'team_set_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_ud_team_id_team_set_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'team_id',
                 'team_set_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'team_sets_teams' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'team_sets_teams' => [
             'lhs_module' => 'TeamSets',
             'lhs_table' => 'team_sets',
             'lhs_key' => 'id',
@@ -91,6 +91,6 @@ $dictionary['team_sets_teams'] = array(
             'join_table' => 'team_sets_teams',
             'join_key_lhs' => 'team_set_id',
             'join_key_rhs' => 'team_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

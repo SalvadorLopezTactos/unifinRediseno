@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'em andamento',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco em mensagens',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Painel de registro de mensagens',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Linha do tempo da mensagem',
 ];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Painel da lista de Itens de linha de receita',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Painel de registo de Itens de linha de receita',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Tipos de produtos',
     'LBL_ASSIGNED_TO_NAME' => 'Usuário atribuído',
     'LBL_ASSIGNED_TO' => 'Atribuído a',
-    'LBL_ASSIGNED_TO_ID'=>'ID de usuário atribuído',
+    'LBL_ASSIGNED_TO_ID' => 'ID de usuário atribuído',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nome de usuário atribuído',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'ID de usuário atribuído',
     'LBL_CAMPAIGN_ID' => 'ID da Campanha',
@@ -216,4 +216,5 @@ Para criar um {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Exibe os dez principais Itens da linha de receita em um gráfico de bolhas.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Meus Itens da linha de receita',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Itens da linha de receita da minha equipe",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Linha do tempo de item da linha de receita',
+];

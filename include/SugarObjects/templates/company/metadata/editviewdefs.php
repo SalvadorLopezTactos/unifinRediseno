@@ -11,59 +11,59 @@
  */
 $module_name = '<module_name>';
 $_object_name = '<_object_name>';
-$viewdefs[$module_name]['EditView'] = array(
-    'templateMeta' => array(
-                            'form' => array('buttons'=>array('SAVE', 'CANCEL')),
-                            'maxColumns' => '2',
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'),
-                                            array('label' => '10', 'field' => '30'),
-                                            ),
-                            'includes'=> array(
-                                            array('file'=>'modules/Accounts/Account.js'),
-                                         ),
-                           ),
+$viewdefs[$module_name]['EditView'] = [
+    'templateMeta' => [
+        'form' => ['buttons' => ['SAVE', 'CANCEL']],
+        'maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+        'includes' => [
+            ['file' => 'modules/Accounts/Account.js'],
+        ],
+    ],
 
-    'panels' => array(
-	   'lbl_account_information'=>array(
-		        array('name','phone_office'),
-		        array('website', 'phone_fax'),
-		        array('ticker_symbol', 'phone_alternate'),
-		        array('rating', 'employees'),
-		        array('ownership','industry'),
+    'panels' => [
+        'lbl_account_information' => [
+            ['name', 'phone_office'],
+            ['website', 'phone_fax'],
+            ['ticker_symbol', 'phone_alternate'],
+            ['rating', 'employees'],
+            ['ownership', 'industry'],
 
-		        array($_object_name . '_type', 'annual_revenue'),
-                array('service_level'),
-			    array (
-			      array('name'=>'team_name', 'displayParams'=>array('display'=>true)),
-			      ''
-			    ),
-                array('assigned_user_name'),
-	   ),
-	   'lbl_address_information'=>array(
-				array (
-				      array (
-					  'name' => 'billing_address_street',
-				      'hideLabel'=> true,
-				      'type' => 'address',
-				      'displayParams'=>array('key'=>'billing', 'rows'=>2, 'cols'=>30, 'maxlength'=>150),
-				      ),
-				array (
-				      'name' => 'shipping_address_street',
-				      'hideLabel' => true,
-				      'type' => 'address',
-				      'displayParams'=>array('key'=>'shipping', 'copy'=>'billing', 'rows'=>2, 'cols'=>30, 'maxlength'=>150),
-				      ),
-				),
-	   ),
+            [$_object_name . '_type', 'annual_revenue'],
+            ['service_level'],
+            [
+                ['name' => 'team_name', 'displayParams' => ['display' => true]],
+                '',
+            ],
+            ['assigned_user_name'],
+        ],
+        'lbl_address_information' => [
+            [
+                [
+                    'name' => 'billing_address_street',
+                    'hideLabel' => true,
+                    'type' => 'address',
+                    'displayParams' => ['key' => 'billing', 'rows' => 2, 'cols' => 30, 'maxlength' => 150],
+                ],
+                [
+                    'name' => 'shipping_address_street',
+                    'hideLabel' => true,
+                    'type' => 'address',
+                    'displayParams' => ['key' => 'shipping', 'copy' => 'billing', 'rows' => 2, 'cols' => 30, 'maxlength' => 150],
+                ],
+            ],
+        ],
 
-  	   'lbl_email_addresses'=>array(
-  				array('email1')
-  	   ),
+        'lbl_email_addresses' => [
+            ['email1'],
+        ],
 
-	   'lbl_description_information' =>array(
-		        array('description'),
-	   ),
+        'lbl_description_information' => [
+            ['description'],
+        ],
 
-    )
-);
+    ],
+];

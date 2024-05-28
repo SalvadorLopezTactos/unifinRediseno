@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['dupecheck-list-select'] = array(
+$viewdefs['base']['view']['dupecheck-list-select'] = [
     'template' => 'flex-list',
-    'selection' => array(
+    'selection' => [
         'type' => 'single',
-        'label' => 'LBL_LINK_SELECT'
-    ),
-);
+        'label' => 'LBL_LINK_SELECT',
+    ],
+];

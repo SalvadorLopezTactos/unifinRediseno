@@ -20,7 +20,7 @@ $viewdefs['Administration']['base']['layout']['config'] = [
                         'layout' => [
                             'type' => 'simple',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span12 admin-config',
+                            'css_class' => 'main-pane span12 admin-config overflow-y-auto',
                             'components' => [],
                         ],
                     ],

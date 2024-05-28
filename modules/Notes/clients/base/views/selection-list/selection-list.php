@@ -9,20 +9,20 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Notes']['base']['view']['selection-list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Notes']['base']['view']['selection-list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'label' => 'LBL_LIST_SUBJECT',
                     'link' => true,
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'contact_name',
                     'label' => 'LBL_LIST_CONTACT',
                     'link' => true,
@@ -31,12 +31,11 @@ $viewdefs['Notes']['base']['view']['selection-list'] = array(
                     'enabled' => true,
                     'default' => true,
                     'ACLTag' => 'CONTACT',
-                    'related_fields' =>
-                        array(
-                            'contact_id',
-                        ),
-                ),
-                array(
+                    'related_fields' => [
+                        'contact_id',
+                    ],
+                ],
+                [
                     'name' => 'parent_name',
                     'label' => 'LBL_LIST_RELATED_TO',
                     'dynamic_module' => 'PARENT_TYPE',
@@ -46,21 +45,20 @@ $viewdefs['Notes']['base']['view']['selection-list'] = array(
                     'default' => true,
                     'sortable' => false,
                     'ACLTag' => 'PARENT',
-                    'related_fields' =>
-                        array(
-                            'parent_id',
-                            'parent_type',
-                        ),
-                ),
-                array(
+                    'related_fields' => [
+                        'parent_id',
+                        'parent_type',
+                    ],
+                ],
+                [
                     'name' => 'created_by_name',
                     'type' => 'relate',
                     'label' => 'LBL_CREATED_BY',
                     'enabled' => true,
                     'default' => false,
-                    'related_fields' => array('created_by'),
-                ),
-            ),
-        ),
-    ),
-);
+                    'related_fields' => ['created_by'],
+                ],
+            ],
+        ],
+    ],
+];

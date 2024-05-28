@@ -14,36 +14,38 @@ use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 class ModuleBuilderParser
 {
-	
-	var $_defMap; // private - mapping from view to variable name inside the viewdef file
-	var $_variables = array(); // private - set of additional variables (other than the viewdefs) found in the viewdef file that need to be added to the file again when it is saved - used by ModuleBuilder
-	
+    // @codingStandardsIgnoreStart PSR2.Classes.PropertyDeclaration.Underscore
+    public $_defMap; // private - mapping from view to variable name inside the viewdef file
+    public $_variables = []; // private - set of additional variables (other than the viewdefs) found in the viewdef file that need to be added to the file again when it is saved - used by ModuleBuilder
+
+    // @codingStandardsIgnoreEnd PSR2.Classes.PropertyDeclaration.Underscore
+
     public function __construct()
-	{
-		$this->_defMap = array(
-            'listview'=>'listViewDefs',
-            'searchview'=>'searchdefs',
-            'editview'=>'viewdefs',
-            'detailview'=>'viewdefs',
-            'quickcreate'=>'viewdefs'
-        );
-	}
+    {
+        $this->_defMap = [
+            'listview' => 'listViewDefs',
+            'searchview' => 'searchdefs',
+            'editview' => 'viewdefs',
+            'detailview' => 'viewdefs',
+            'quickcreate' => 'viewdefs',
+        ];
+    }
 
     /**
-	 * Initialize this parser
+     * Initialize this parser
      *
      * @param string $module_name
-	 */
+     */
     public function init($module_name)
-	{
-	}
-	
-	/*
-	 * Dummy function used to ease the transition to the new parser structure
-	 */
-	function populateFromPost()
-	{
-	}
+    {
+    }
+
+    /*
+     * Dummy function used to ease the transition to the new parser structure
+     */
+    public function populateFromPost()
+    {
+    }
 
     /**
      * Loads defs from a file into this object
@@ -53,13 +55,15 @@ class ModuleBuilderParser
      * @param string $moduleName The name of the module to load defs for
      * @return array
      */
-	function _loadFromFile($view, $file, $moduleName) {
-        $variables = array();
-	    if (!file_exists($file)) {
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    public function _loadFromFile($view, $file, $moduleName)
+    {
+        $variables = [];
+        if (!file_exists($file)) {
             $this->_fatalError("ModuleBuilderParser: required viewdef file {$file} does not exist");
         }
 
-        $GLOBALS['log']->info('ModuleBuilderParser->_loadFromFile(): file='.$file);        
+        $GLOBALS['log']->info('ModuleBuilderParser->_loadFromFile(): file=' . $file);
         require FileLoader::validateFilePath($file); // loads in a $viewdefs
 
         // Check to see if we have the module name set as a variable rather than embedded in the $viewdef array
@@ -68,7 +72,7 @@ class ModuleBuilderParser
         // Traditional Sugar modules don't use this format
         // We must do this in ParserModifyLayout (rather than just in ParserBuildLayout) because we might be
         // editing the layout of a MB created module in Studio after it has been deployed
-        $moduleVariables = array('module_name','_module_name', 'OBJECT_NAME', '_object_name');
+        $moduleVariables = ['module_name', '_module_name', 'OBJECT_NAME', '_object_name'];
         foreach ($moduleVariables as $name) {
             if (isset(${$name})) {
                 $variables[$name] = ${$name};
@@ -81,85 +85,78 @@ class ModuleBuilderParser
         $defs = ${$viewVariable};
 
         if (isset($variables['module_name'])) {
-        	$mbName = $variables['module_name'];
-        	if ($mbName != $moduleName) {
-	        	$GLOBALS['log']->debug('ModuleBuilderParser->_loadFromFile(): tidying module names from '.$mbName.' to '.$moduleName);
-	        	$defs[$moduleName] = $defs[$mbName];
-	        	unset($defs[$mbName]);
-        	}
+            $mbName = $variables['module_name'];
+            if ($mbName != $moduleName) {
+                $GLOBALS['log']->debug('ModuleBuilderParser->_loadFromFile(): tidying module names from ' . $mbName . ' to ' . $moduleName);
+                $defs[$moduleName] = $defs[$mbName];
+                unset($defs[$mbName]);
+            }
         }
-//	    $GLOBALS['log']->debug('ModuleBuilderParser->_loadFromFile(): '.print_r($defs,true));
-        return (array('viewdefs' => $defs, 'variables' => $variables));
-	}
-	
+        //	    $GLOBALS['log']->debug('ModuleBuilderParser->_loadFromFile(): '.print_r($defs,true));
+        return (['viewdefs' => $defs, 'variables' => $variables]);
+    }
+
     public function handleSave()
-	{
-	}
-	
-	
-	/*
-	 * Save the new layout
-	 */
-	function _writeToFile ($file,$view,$moduleName,$defs,$variables)
-	{
-	        if(file_exists($file))
-	            unlink($file);
-	        
-	        mkdir_recursive ( dirname ( $file ) ) ;
-	        $GLOBALS['log']->debug("ModuleBuilderParser->_writeFile(): file=".$file);
-            $useVariables = ((is_countable($variables) ? count($variables) : 0)>0);
-            if( $fh = @sugar_fopen( $file, 'w' ) )
-            {
-                $out = "<?php\n";    
-                if ($useVariables)
-                {
-                    // write out the $<variable>=<modulename> lines
-                    foreach($variables as $key=>$value)
-                    {
-                    	$out .= "\$$key = '".$value."';\n";
-                    }
-                }
-                
-                // write out the defs array itself
-                switch (strtolower($view))
-                {
-                	case 'editview':
-                	case 'detailview':
-                	case 'quickcreate':
-                		$defs = array($view => $defs);
-                		break;
-                	default:
-                		break;
-                }
-                $viewVariable = $this->_defMap[strtolower($view)];
-                $out .= "\$$viewVariable = ";
-                $out .= ($useVariables) ? "array (\n\$module_name =>\n".var_export_helper($defs) : var_export_helper( array($moduleName => $defs) );
-                
-                // tidy up the parenthesis
-                if ($useVariables)
-                {
-                	$out .= "\n)"; 
-                }
-                $out .= ";\n?>\n";
-                
-//           $GLOBALS['log']->debug("parser.modifylayout.php->_writeFile(): out=".print_r($out,true));
-            fputs( $fh, $out);
-            fclose( $fh );
-            }
-            else
-            {
-                $GLOBALS['log']->fatal("ModuleBuilderParser->_writeFile() Could not write new viewdef file ".$file);
-            }
-	}
+    {
+    }
 
 
-    function _fatalError ($msg)
+    /*
+     * Save the new layout
+     */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    public function _writeToFile($file, $view, $moduleName, $defs, $variables)
+    {
+        if (file_exists($file)) {
+            unlink($file);
+        }
+
+        mkdir_recursive(dirname($file));
+        $GLOBALS['log']->debug('ModuleBuilderParser->_writeFile(): file=' . $file);
+        $useVariables = (safeCount($variables) > 0);
+        if ($fh = @sugar_fopen($file, 'w')) {
+            $out = "<?php\n";
+            if ($useVariables) {
+                // write out the $<variable>=<modulename> lines
+                foreach ($variables as $key => $value) {
+                    $out .= "\$$key = '" . $value . "';\n";
+                }
+            }
+
+            // write out the defs array itself
+            switch (strtolower($view)) {
+                case 'editview':
+                case 'detailview':
+                case 'quickcreate':
+                    $defs = [$view => $defs];
+                    break;
+                default:
+                    break;
+            }
+            $viewVariable = $this->_defMap[strtolower($view)];
+            $out .= "\$$viewVariable = ";
+            $out .= ($useVariables) ? "array (\n\$module_name =>\n" . var_export_helper($defs) : var_export_helper([$moduleName => $defs]);
+
+            // tidy up the parenthesis
+            if ($useVariables) {
+                $out .= "\n)";
+            }
+            $out .= ";\n?>\n";
+
+            //           $GLOBALS['log']->debug("parser.modifylayout.php->_writeFile(): out=".print_r($out,true));
+            fputs($fh, $out);
+            fclose($fh);
+        } else {
+            $GLOBALS['log']->fatal('ModuleBuilderParser->_writeFile() Could not write new viewdef file ' . $file);
+        }
+    }
+
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    public function _fatalError($msg)
     {
         $GLOBALS ['log']->fatal($msg);
         echo $msg;
         sugar_cleanup();
         die();
     }
-    
 }
-

@@ -21,8 +21,8 @@
 
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
-class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument {
-
+class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting, WebDocument
+{
     /**
      * @var mixed|array<string, mixed>
      */
@@ -40,7 +40,7 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
      */
     public $subscriberID;
 
-    static protected $llMimeWhitelist = array(
+    protected static $llMimeWhitelist = [
         'application/msword',
         'application/pdf',
         'application/postscript',
@@ -77,38 +77,40 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
         'application/vnd.ms-powerpoint.slide.macroEnabled.12',
         'application/vnd.ms-officetheme',
         'application/onenote',
-        );
+    ];
     protected $dateFormat = 'm/d/Y H:i:s';
 
     public $authMethod = 'oauth';
-    public $supportedModules = array('Meetings','Notes', 'Documents');
+    public $supportedModules = ['Meetings', 'Notes', 'Documents'];
     public $supportMeetingPassword = false;
     public $docSearch = true;
     public $restrictUploadsByExtension = false;
-    public $connector = "ext_eapm_lotuslive";
+    public $connector = 'ext_eapm_lotuslive';
 
     public $hostURL;
-    protected $oauthReq = "/manage/oauth/getRequestToken";
+    protected $oauthReq = '/manage/oauth/getRequestToken';
     protected $oauthAuth = '/manage/oauth/authorizeToken';
     protected $oauthAccess = '/manage/oauth/getAccessToken';
-    protected $oauthParams = array(
+    protected $oauthParams = [
         'signatureMethod' => 'PLAINTEXT',
-    );
+    ];
     protected $url = 'https://apps.lotuslive.com/'; // 'https://collabserv.com/';
 
     public $canInvite = false;
     public $sendsInvites = false;
     public $needsUrl = false;
+
     // public $sharingOptions = array('private'=>'LBL_SHARE_PRIVATE','company'=>'LBL_SHARE_COMPANY','public'=>'LBL_SHARE_PUBLIC');
 
-    function __construct() {
-        if ( isset($GLOBALS['sugar_config']['ll_base_url']) ) {
+    public function __construct()
+    {
+        if (isset($GLOBALS['sugar_config']['ll_base_url'])) {
             $this->url = $GLOBALS['sugar_config']['ll_base_url'];
         }
-        $this->hostURL = $this->url.'meetings/host';
-        $this->oauthReq = $this->url.'manage/oauth/getRequestToken';
-        $this->oauthAuth = $this->url.'manage/oauth/authorizeToken';
-        $this->oauthAccess = $this->url.'manage/oauth/getAccessToken';
+        $this->hostURL = $this->url . 'meetings/host';
+        $this->oauthReq = $this->url . 'manage/oauth/getRequestToken';
+        $this->oauthAuth = $this->url . 'manage/oauth/authorizeToken';
+        $this->oauthAccess = $this->url . 'manage/oauth/getAccessToken';
         $this->_appStringErrorPrefix = $_appStringErrorPrefix = self::APP_STRING_ERROR_PREFIX . 'LOTUS_LIVE';
         parent::__construct();
     }
@@ -117,13 +119,13 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
     {
         parent::loadEAPM($eapmBean);
 
-        if($eapmBean->url) {
+        if ($eapmBean->url) {
             $this->url = $eapmBean->url;
         }
 
-        if ( !empty($eapmBean->api_data) ) {
+        if (!empty($eapmBean->api_data)) {
             $this->api_data = json_decode(base64_decode($eapmBean->api_data), true);
-            if ( isset($this->api_data['subscriberID']) ) {
+            if (isset($this->api_data['subscriberID'])) {
                 $this->meetingID = $this->api_data['meetingID'];
                 $this->hostURL = $this->api_data['hostURL'];
                 $this->joinURL = $this->api_data['joinURL'];
@@ -132,24 +134,25 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
         }
     }
 
-    public function quickCheckLogin() {
+    public function quickCheckLogin()
+    {
         $reply = parent::quickCheckLogin();
-        $GLOBALS['log']->debug(__FILE__.'('.__LINE__.'): Parent Reply: '.print_r($reply,true));
-        if ( $reply['success'] ) {
+        $GLOBALS['log']->debug(__FILE__ . '(' . __LINE__ . '): Parent Reply: ' . print_r($reply, true));
+        if ($reply['success']) {
             $reply = $this->makeRequest('/lotuslive-shindig-server/social/rest/people/@me/@self');
-            $GLOBALS['log']->debug(__FILE__.'('.__LINE__.'): LL Reply: '.print_r($reply,true));
-            if ( $reply['success'] == true ) {
-                if ( !empty($reply['responseJSON']['entry']['objectId']) ) {
-                    $GLOBALS['log']->debug(__FILE__.'('.__LINE__.'): Has objectId: '.print_r($reply['responseJSON']['entry']['objectId'],true));
+            $GLOBALS['log']->debug(__FILE__ . '(' . __LINE__ . '): LL Reply: ' . print_r($reply, true));
+            if ($reply['success'] == true) {
+                if (!empty($reply['responseJSON']['entry']['objectId'])) {
+                    $GLOBALS['log']->debug(__FILE__ . '(' . __LINE__ . '): Has objectId: ' . print_r($reply['responseJSON']['entry']['objectId'], true));
                     return $reply;
                 } else {
-                    $GLOBALS['log']->debug(__FILE__.'('.__LINE__.'): No objectId: '.print_r($reply['responseJSON']['entry']['objectId'],true));
+                    $GLOBALS['log']->debug(__FILE__ . '(' . __LINE__ . '): No objectId: ' . print_r($reply['responseJSON']['entry']['objectId'], true));
                     $reply['success'] = false;
-                    $reply['errorMessage'] = translate('LBL_ERR_NO_RESPONSE', 'EAPM')." #QK1";
+                    $reply['errorMessage'] = translate('LBL_ERR_NO_RESPONSE', 'EAPM') . ' #QK1';
                 }
             }
         }
-        $GLOBALS['log']->debug(__FILE__.'('.__LINE__.'): Bad reply: '.print_r($reply,true));
+        $GLOBALS['log']->debug(__FILE__ . '(' . __LINE__ . '): Bad reply: ' . print_r($reply, true));
 
         return $reply;
     }
@@ -157,38 +160,38 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
     public function checkLogin($eapmBean = null)
     {
         $reply = parent::checkLogin($eapmBean);
-        if ( $reply['success'] != true ) {
+        if ($reply['success'] != true) {
             // $GLOBALS['log']->debug(__FILE__.'('.__LINE__.'): Bad reply: '.print_r($reply,true));
             return $reply;
         }
         try {
             // get meeting details
             $reply = $this->makeRequest('/meetings/api/getMeetingDetails');
-            if ( $reply['success'] == true ) {
-                if ( $reply['responseJSON']['status'] != 'ok') {
+            if ($reply['success'] == true) {
+                if ($reply['responseJSON']['status'] != 'ok') {
                     $reply['success'] = false;
                     $reply['errorMessage'] = $reply['responseJSON']['details'];
                     return $reply;
                 }
-                $this->api_data = array(
-                    'meetingID'=>$reply['responseJSON']['details']['meetingID'],
-                    'hostURL'=>$reply['responseJSON']['details']['hostURL'],
-                    'joinURL'=>$reply['responseJSON']['details']['joinURL'],
-                );
+                $this->api_data = [
+                    'meetingID' => $reply['responseJSON']['details']['meetingID'],
+                    'hostURL' => $reply['responseJSON']['details']['hostURL'],
+                    'joinURL' => $reply['responseJSON']['details']['joinURL'],
+                ];
             } else {
                 // $GLOBALS['log']->debug(__FILE__.'('.__LINE__.'): Bad reply: '.print_r($reply,true));
                 return $reply;
             }
             // get user details
             $reply = $this->makeRequest('/lotuslive-shindig-server/social/rest/people/@me/@self');
-            if ( $reply['success'] == true ) {
+            if ($reply['success'] == true) {
                 $this->api_data['subscriberId'] = $reply['responseJSON']['entry']['objectId'];
             } else {
                 // $GLOBALS['log']->debug(__FILE__.'('.__LINE__.'): Bad reply: '.print_r($reply,true));
                 return $reply;
             }
-        } catch(Exception $e) {
-            $reply['success'] = FALSE;
+        } catch (Exception $e) {
+            $reply['success'] = false;
             $reply['errorMessage'] = $e->getMessage();
             // $GLOBALS['log']->debug(__FILE__.'('.__LINE__.'): Bad reply: '.print_r($reply,true));
             return $reply;
@@ -208,12 +211,13 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
      * @param string $password
      * return: boolean
      */
-    function scheduleMeeting($bean) {
+    public function scheduleMeeting($bean)
+    {
         global $current_user;
-        $bean->join_url = $this->api_data['joinURL'].'&TagCode=SugarCRM&TagID='.$bean->id;
-        $bean->host_url = $this->api_data['hostURL'].'?TagCode=SugarCRM&TagID='.$bean->id;
+        $bean->join_url = $this->api_data['joinURL'] . '&TagCode=SugarCRM&TagID=' . $bean->id;
+        $bean->host_url = $this->api_data['hostURL'] . '?TagCode=SugarCRM&TagID=' . $bean->id;
         $bean->creator = $this->account_name;
-        return array('success'=>TRUE);
+        return ['success' => true];
     }
 
     /**
@@ -224,7 +228,8 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
      * @param string $password
      * return: boolean
      */
-    function editMeeting($bean) {
+    public function editMeeting($bean)
+    {
         return $this->scheduleMeeting($bean);
     }
 
@@ -233,9 +238,10 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
      * @param string $meeting - The Lotus meeting key.
      * return: boolean
      */
-    function unscheduleMeeting($bean) {
+    public function unscheduleMeeting($bean)
+    {
         // There is nothing to do here.
-        return array('success'=>TRUE);
+        return ['success' => true];
     }
 
     /**
@@ -245,9 +251,10 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
      * @param array $attendee - An array with entries for 'name' and 'email'
      * return: boolean.
      */
-    function inviteAttendee($bean, $attendee, $sendInvites = false) {
+    public function inviteAttendee($bean, $attendee, $sendInvites = false)
+    {
         // There is nothing to do here, this is not supported by Lotus Live
-        return array('success'=>TRUE);
+        return ['success' => true];
     }
 
     /**
@@ -259,17 +266,19 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
      * @param array $attendeeID - Lotus attendee ID.
      * return: boolean.
      */
-    function uninviteAttendee($bean,$attendeeID) {
+    public function uninviteAttendee($bean, $attendeeID)
+    {
         // There is nothing to do here, this is not supported by Lotus Live
-        return array('success'=>TRUE);
+        return ['success' => true];
     }
 
     /**
      * List all meetings created by this object's Lotus user.
      */
-    function listMyMeetings() {
+    public function listMyMeetings()
+    {
         // There is nothing to do here, this is not supported by Lotus Live
-        return array('success'=>TRUE);
+        return ['success' => true];
     }
 
     /**
@@ -278,9 +287,10 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
      * @param string meeting- The Lotus meeting key.
      * return: The XML response from the Lotus server.
      */
-    function getMeetingDetails($bean) {
+    public function getMeetingDetails($bean)
+    {
         // TODO: Implement this, get the meeting information from the provided tags.
-        return array('success'=>TRUE);
+        return ['success' => true];
     }
 
     /**
@@ -299,27 +309,27 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
     public function uploadDoc($bean, $fileToUpload, $docName, $mimeType)
     {
         // Let's see if this is not on the whitelist of mimeTypes
-        if ( empty($mimeType) || ! in_array($mimeType,self::$llMimeWhitelist)) {
+        if (empty($mimeType) || !in_array($mimeType, self::$llMimeWhitelist)) {
             // It's not whitelisted
             $mimeType = 'application/octet-stream';
         }
 
         $client = $this->getClient();
-        $url = $this->url."files/basic/cmis/repository/p!{$this->api_data['subscriberId']}/folderc/snx:files";
-        if ( $this->getVersion() == 1 ) {
+        $url = $this->url . "files/basic/cmis/repository/p!{$this->api_data['subscriberId']}/folderc/snx:files";
+        if ($this->getVersion() == 1) {
             $url .= "!{$this->api_data['subscriberId']}";
         }
         $GLOBALS['log']->debug("LOTUS REQUEST: $url");
         $rawResponse = $client->setUri($url)
             ->setRawData(file_get_contents($fileToUpload), $mimeType)
-            ->setHeaders("slug", $docName)
-            ->request("POST");
-        $reply = array('rawResponse' => $rawResponse->getBody());
+            ->setHeaders('slug', $docName)
+            ->request('POST');
+        $reply = ['rawResponse' => $rawResponse->getBody()];
 
         //$GLOBALS['log']->debug("REQUEST: ".var_export($client->getLastRequest(), true));
         //$GLOBALS['log']->debug("RESPONSE: ".var_export($rawResponse, true));
 
-        if(!$rawResponse->isSuccessful() || empty($reply['rawResponse'])) {
+        if (!$rawResponse->isSuccessful() || empty($reply['rawResponse'])) {
             $reply['success'] = false;
             $reply['errorMessage'] = $this->getErrorStringFromCode($rawResponse->getMessage());
             return $reply;
@@ -329,7 +339,7 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
         $xml->preserveWhiteSpace = false;
         $xml->strictErrorChecking = false;
         $xml->loadXML($reply['rawResponse']);
-        if ( !is_object($xml) ) {
+        if (!is_object($xml)) {
             $reply['success'] = false;
             $reply['errorMessage'] = $this->getErrorStringFromCode(libxml_get_errors());
             return $reply;
@@ -340,92 +350,98 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
         $directUrl = $xp->query('//atom:entry/atom:link[attribute::rel="edit-media"]');
         $id = $xp->query('//atom:entry/cmisra:pathSegment');
 
-        if ( !is_object($url) || !is_object($directUrl) || !is_object($id) ) {
+        if (!is_object($url) || !is_object($directUrl) || !is_object($id)) {
             $reply['success'] = false;
             $reply['errorMessage'] = $this->getErrorStringFromCode();
             return $reply;
         }
-        $bean->doc_url = $url->item(0)->getAttribute("href");
-        $bean->doc_direct_url = $directUrl->item(0)->getAttribute("href");
+        $bean->doc_url = $url->item(0)->getAttribute('href');
+        $bean->doc_direct_url = $directUrl->item(0)->getAttribute('href');
         $bean->doc_id = $id->item(0)->textContent;
 
         // Refresh the document cache
         $this->loadDocCache(true);
 
-        return array('success'=>TRUE);
+        return ['success' => true];
     }
 
     public function deleteDoc($document)
     {
         $client = $this->getClient();
-        $url = $this->url."files/basic/cmis/repository/p!{$this->api_data['subscriberId']}/object/snx:file!{$document->doc_id}";
+        $url = $this->url . "files/basic/cmis/repository/p!{$this->api_data['subscriberId']}/object/snx:file!{$document->doc_id}";
         $GLOBALS['log']->debug("LOTUS REQUEST: $url");
         $rawResponse = $client->setUri($url)
-            ->request("DELETE");
-        $reply = array('rawResponse' => $rawResponse->getBody());
-        $GLOBALS['log']->debug("REQUEST: ".var_export($client->getLastRequest(), true));
-        $GLOBALS['log']->debug("RESPONSE: ".var_export($rawResponse, true));
+            ->request('DELETE');
+        $reply = ['rawResponse' => $rawResponse->getBody()];
+        $GLOBALS['log']->debug('REQUEST: ' . var_export($client->getLastRequest(), true));
+        $GLOBALS['log']->debug('RESPONSE: ' . var_export($rawResponse, true));
 
         // Refresh the document cache
         $this->loadDocCache(true);
 
-        return array('success'=>TRUE);
+        return ['success' => true];
     }
 
-    public function downloadDoc($documentId, $documentFormat){}
-    public function shareDoc($documentId, $emails){}
+    public function downloadDoc($documentId, $documentFormat)
+    {
+    }
 
-    public function loadDocCache($forceReload = false) {
+    public function shareDoc($documentId, $emails)
+    {
+    }
+
+    public function loadDocCache($forceReload = false)
+    {
         $docCache = [];
         global $db, $current_user;
 
         create_cache_directory('/include/externalAPI/');
-        $cacheFileBase = 'cache/include/externalAPI/docCache_'.$current_user->id.'_LotusLiveDirect';
-        if ( !$forceReload && file_exists($cacheFileBase.'.php') ) {
+        $cacheFileBase = 'cache/include/externalAPI/docCache_' . $current_user->id . '_LotusLiveDirect';
+        if (!$forceReload && file_exists($cacheFileBase . '.php')) {
             // File exists
-            include_once FileLoader::validateFilePath($cacheFileBase.'.php');
-            if ( abs(time()-$docCache['loadTime']) < 3600 ) {
+            include_once FileLoader::validateFilePath($cacheFileBase . '.php');
+            if (abs(time() - $docCache['loadTime']) < 3600) {
                 // And was last updated an hour or less ago
                 return $docCache['results'];
             }
         }
-        $requestUrl = '/files/basic/cmis/repository/p!'.$this->api_data['subscriberId'].'/folderc/snx:files';
-        if ( $this->getVersion() == 1 ) {
-            $requestUrl .= '!'.$this->api_data['subscriberId'];
+        $requestUrl = '/files/basic/cmis/repository/p!' . $this->api_data['subscriberId'] . '/folderc/snx:files';
+        if ($this->getVersion() == 1) {
+            $requestUrl .= '!' . $this->api_data['subscriberId'];
         }
         $requestUrl .= '?maxItems=50';
-        $reply = $this->makeRequest($requestUrl,'GET',false);
+        $reply = $this->makeRequest($requestUrl, 'GET', false);
 
         $xml = new DOMDocument();
         $xml->preserveWhiteSpace = false;
         $xml->strictErrorChecking = false;
         $xml->loadXML($reply['rawResponse']);
-        if ( !is_object($xml) ) {
+        if (!is_object($xml)) {
             $reply['success'] = false;
             // FIXME: Translate
-            $reply['errorMessage'] = $GLOBALS['app_strings']['ERR_BAD_RESPONSE_FROM_SERVER'].': '.print_r(libxml_get_errors(),true);
+            $reply['errorMessage'] = $GLOBALS['app_strings']['ERR_BAD_RESPONSE_FROM_SERVER'] . ': ' . print_r(libxml_get_errors(), true);
             return;
         }
 
         $xp = new DOMXPath($xml);
 
-        $results = array();
+        $results = [];
 
         $fileNodes = $xp->query('//atom:feed/atom:entry');
-        foreach ( $fileNodes as $fileNode ) {
-            $result = array();
+        foreach ($fileNodes as $fileNode) {
+            $result = [];
 
-            $idTmp = $xp->query('.//atom:id',$fileNode);
-            [$dontcare, $result['id']] = explode("!", $idTmp->item(0)->textContent);
+            $idTmp = $xp->query('.//atom:id', $fileNode);
+            [$dontcare, $result['id']] = explode('!', $idTmp->item(0)->textContent);
 
-            $nameTmp = $xp->query('.//atom:title',$fileNode);
+            $nameTmp = $xp->query('.//atom:title', $fileNode);
             $result['name'] = $nameTmp->item(0)->textContent;
 
-            $timeTmp = $xp->query('.//atom:updated',$fileNode);
+            $timeTmp = $xp->query('.//atom:updated', $fileNode);
             $timeTmp2 = $timeTmp->item(0)->textContent;
-            $result['date_modified'] = preg_replace('/^([^T]*)T([^.]*)\....Z$/','\1 \2',$timeTmp2);
+            $result['date_modified'] = preg_replace('/^([^T]*)T([^.]*)\....Z$/', '\1 \2', $timeTmp2);
 
-            $result['url'] = $this->url.'files/filer2/home.do#files.do?subContent=fileDetails.do?fileId='.$result['id'];
+            $result['url'] = $this->url . 'files/filer2/home.do#files.do?subContent=fileDetails.do?fileId=' . $result['id'];
 
             $results[] = $result;
         }
@@ -433,26 +449,28 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
 
         $docCache['loadTime'] = time();
         $docCache['results'] = $results;
-        $fd = fopen($cacheFileBase.'_tmp.php','w');
-        fwrite($fd,'<'."?php\n// This file was auto generated by ".basename(__FILE__)." do not overwrite.\n\n".'$docCache = '.var_export($docCache,true).";\n");
+        $fd = fopen($cacheFileBase . '_tmp.php', 'w');
+        fwrite($fd, '<' . "?php\n// This file was auto generated by " . basename(__FILE__) . " do not overwrite.\n\n" . '$docCache = ' . var_export($docCache, true) . ";\n");
         fclose($fd);
-        rename($cacheFileBase.'_tmp.php',$cacheFileBase.'.php');
+        rename($cacheFileBase . '_tmp.php', $cacheFileBase . '.php');
 
         return $results;
     }
-    public function searchDoc($keywords,$flushDocCache=false){
+
+    public function searchDoc($keywords, $flushDocCache = false)
+    {
         $docList = $this->loadDocCache($flushDocCache);
 
-        $results = array();
+        $results = [];
 
         $searchLen = strlen($keywords);
 
-        foreach ( $docList as $doc ) {
-            if ( empty($keywords) || strncasecmp($doc['name'],$keywords,strlen($keywords)) == 0 ) {
+        foreach ($docList as $doc) {
+            if (empty($keywords) || strncasecmp($doc['name'], $keywords, strlen($keywords)) == 0) {
                 // It matches
                 $results[] = $doc;
 
-                if ( count($results) > 15 ) {
+                if (safeCount($results) > 15) {
                     // Only return the first 15 results
                     break;
                 }
@@ -471,21 +489,21 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
     protected function makeRequest($urlReq, $method = 'GET', $json = true)
     {
         $client = $this->getClient();
-        $url = rtrim($this->url,"/")."/".ltrim($urlReq, "/");
+        $url = rtrim($this->url, '/') . '/' . ltrim($urlReq, '/');
         $GLOBALS['log']->debug("REQUEST: $url");
         $rawResponse = $client->setUri($url)->request($method);
-        $reply = array('rawResponse' => $rawResponse->getBody());
-        $GLOBALS['log']->debug("RESPONSE: ".var_export($rawResponse, true));
-        if($json) {
-            $response = json_decode($reply['rawResponse'],true);
-            $GLOBALS['log']->debug("RESPONSE-JSON: ".var_export($response, true));
-            if ( empty($rawResponse) || !is_array($response) ) {
-                $reply['success'] = FALSE;
+        $reply = ['rawResponse' => $rawResponse->getBody()];
+        $GLOBALS['log']->debug('RESPONSE: ' . var_export($rawResponse, true));
+        if ($json) {
+            $response = json_decode($reply['rawResponse'], true);
+            $GLOBALS['log']->debug('RESPONSE-JSON: ' . var_export($response, true));
+            if (empty($rawResponse) || !is_array($response)) {
+                $reply['success'] = false;
                 // FIXME: Translate
                 $reply['errorMessage'] = $GLOBALS['app_strings']['ERR_BAD_RESPONSE_FROM_SERVER'];
             } else {
                 $reply['responseJSON'] = $response;
-                $reply['success'] = TRUE;
+                $reply['success'] = true;
             }
         } else {
             $reply['success'] = true;
@@ -501,15 +519,15 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
     {
         static $cacheVersion;
 
-        if ( isset($cacheVersion) ) {
+        if (isset($cacheVersion)) {
             return $cacheVersion;
         }
 
 
         $defaultVersion = 2;
 
-        $reply = $this->makeRequest('/files/basic/cmis/my/servicedoc','GET',false);
-        if ( !$reply['success'] ) {
+        $reply = $this->makeRequest('/files/basic/cmis/my/servicedoc', 'GET', false);
+        if (!$reply['success']) {
             // Return the default version, not much else we can do except not cache this
             return $defaultVersion;
         }
@@ -518,20 +536,20 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
         $xml->preserveWhiteSpace = false;
         $xml->strictErrorChecking = false;
         $xml->loadXML($reply['rawResponse']);
-        if ( !is_object($xml) ) {
+        if (!is_object($xml)) {
             // Return the default version, not much else we can do except not cache this
             return $defaultVersion;
         }
 
         $xp = new DOMXPath($xml);
 
-        $results = array();
+        $results = [];
 
         $versionNodes = $xp->query('//cmisra:repositoryInfo/cmis:productName');
 
         $versionLabel = $versionNodes->item(0)->textContent;
 
-        switch ( $versionLabel ) {
+        switch ($versionLabel) {
             case 'LotusLive Files':
                 $version = 1;
                 break;
@@ -539,7 +557,7 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
                 $version = 2;
                 break;
             default:
-                $GLOBALS['log']->error('Lotus Live API version could not be detected, the version label returned was: '.$versionLabel);
+                $GLOBALS['log']->error('Lotus Live API version could not be detected, the version label returned was: ' . $versionLabel);
                 $version = 2;
                 break;
         }
@@ -550,31 +568,29 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
 
 
     /**
-   	 * getErrorStringFromCode
+     * getErrorStringFromCode
      *
      * This method overrides the getErrorStringFromCode method from the ExternalAPIBase class and provides
      * for custom error messages specific to the Lotus Live web service.
-   	 *
-   	 * @param $error Mixed variable of the error message, number or object returned from Lotus Live web service
+     *
+     * @param $error Mixed variable of the error message, number or object returned from Lotus Live web service
      * @return String Translated string label for the error message
-   	 */
-   	protected function getErrorStringFromCode($error='')
-   	{
+     */
+    protected function getErrorStringFromCode($error = '')
+    {
         $language_key = null;
         //For non-string or empty error number/message, just return a generic message for now
-        if(empty($error) || !is_string($error))
-        {
+        if (empty($error) || !is_string($error)) {
             return $GLOBALS['app_strings']['ERR_EXTERNAL_API_SAVE_FAIL'];
         }
 
         //Create the error key to match against from the language files
-   	    $language_key = $this->_appStringErrorPrefix . '_' . strtoupper($error);
+        $language_key = $this->_appStringErrorPrefix . '_' . strtoupper($error);
 
-   	    if(isset($GLOBALS['app_strings'][$language_key]))
-        {
-   	       return $GLOBALS['app_strings'][$language_key];
+        if (isset($GLOBALS['app_strings'][$language_key])) {
+            return $GLOBALS['app_strings'][$language_key];
         }
 
         return $GLOBALS['app_strings']['ERR_EXTERNAL_API_SAVE_FAIL'];
-   	}
+    }
 }

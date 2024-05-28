@@ -10,64 +10,64 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['contacts_bugs'] = array(
+$dictionary['contacts_bugs'] = [
     'table' => 'contacts_bugs',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'contact_id' => array(
+        ],
+        'contact_id' => [
             'name' => 'contact_id',
             'type' => 'id',
-        ),
-        'bug_id' => array(
+        ],
+        'bug_id' => [
             'name' => 'bug_id',
             'type' => 'id',
-        ),
-        'contact_role' => array(
+        ],
+        'contact_role' => [
             'name' => 'contact_role',
             'type' => 'varchar',
             'len' => '50',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'contacts_bugspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_con_bug_bug',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'bug_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_contact_bug',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'contact_id',
                 'bug_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'contacts_bugs' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'contacts_bugs' => [
             'lhs_module' => 'Contacts',
             'lhs_table' => 'contacts',
             'lhs_key' => 'id',
@@ -78,6 +78,6 @@ $dictionary['contacts_bugs'] = array(
             'join_table' => 'contacts_bugs',
             'join_key_lhs' => 'contact_id',
             'join_key_rhs' => 'bug_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

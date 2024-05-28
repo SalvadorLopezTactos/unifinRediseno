@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Zaštita osobnih podataka',
     'LBL_MODULE_NAME_SINGULAR' => 'Zaštita osobnih podataka',
     'LBL_NUMBER' => 'Broj',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Nema polja ili zapisa označenih za brisanje.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Nadzorna ploča zapisa o zaštiti osobnih podataka',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za privatnost podataka',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija privatnosti podataka',
 
     // list view
     'LBL_HELP_RECORDS' => 'Modul za zaštitu osobnih podataka prati aktivnosti zaštite, uključujući davanje privola i primanje zahtjeva u svrhu podrške postupaka vaše organizacije za zaštitu osobnih podataka. Stvorite zapise o zaštiti osobnih podataka koji se odnose na zapis pojedinca (npr. kontakta) za praćenje privola ili poduzimanje radnji na zahtjevu za zaštitu osobnih podataka.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Modul za zaštitu osobnih podataka prati aktivnosti zaštite, uključujući davanje privola i primanje zahtjeva u svrhu podrške postupaka vaše organizacije za zaštitu osobnih podataka. Stvorite zapise o zaštiti osobnih podataka koji se odnose na zapis pojedinca (npr. kontakta) za praćenje privola ili poduzimanje radnji na zahtjevu za zaštitu osobnih podataka. Kada je potrebna radnja dovršena, korisnici u ulozi Voditelja zaštite osobnih podataka mogu kliknuti „Dovrši“ ili „Odbij“ za ažuriranje statusa.
 
 Za zahtjeve brisanja, odaberi „Označi za brisanje“ za svaki zapis pojedinca navedenog na podploči u nastavku. Kada su sva željena polja označena, klikanjem na „Izbriši i dovrši“ trajno se uklanjaju vrijednosti polja i označavaju zapisi o zaštiti osobnih poadataka završenima.',
-);
+];

@@ -10,40 +10,40 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['KBContentTemplate'] = array(
+$dictionary['KBContentTemplate'] = [
     'table' => 'kbcontent_templates',
     'audited' => true,
     'activity_enabled' => true,
     'comment' => 'A template is used as a body for KBContent.',
-    'fields' => array(
-        'body' => array(
+    'fields' => [
+        'body' => [
             'name' => 'body',
             'vname' => 'LBL_TEXT_BODY',
             'type' => 'longtext',
             'comment' => 'Template body',
             'audited' => true,
-        ),
-    ),
-    'relationships' => array(),
-    'duplicate_check' => array(
+        ],
+    ],
+    'relationships' => [],
+    'duplicate_check' => [
         'enabled' => false,
-    ),
-    'uses' => array(
+    ],
+    'uses' => [
         'basic',
         'team_security',
-    ),
-    'ignore_templates' => array(
+    ],
+    'ignore_templates' => [
         'taggable',
         'commentlog',
-    ),
-    'acls' => array(
+    ],
+    'acls' => [
         'SugarACLKB' => true,
-        'SugarACLDeveloperOrAdmin' => array(
+        'SugarACLDeveloperOrAdmin' => [
             'aclModule' => 'KBContents',
-            'allowUserRead' => true
-        ),
-    ),
-);
+            'allowUserRead' => true,
+        ],
+    ],
+];
 
 VardefManager::createVardef(
     'KBContentTemplates',

@@ -28,7 +28,7 @@ class GeoProperty extends RawProperty implements PropertyInterface
      * Field data settings
      * @var array
      */
-    protected $fieldData = array();
+    protected $fieldData = [];
 
     /**
      * {@inheritdoc}
@@ -38,9 +38,9 @@ class GeoProperty extends RawProperty implements PropertyInterface
         // base mapping
         $mapping = array_merge(
             $this->mapping,
-            array(
+            [
                 'type' => $this->type,
-            )
+            ]
         );
 
         // field data

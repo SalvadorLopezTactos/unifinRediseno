@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Gruppnivå:',
-    'LBL_DEAL_TOT'=>'total rabatt',
-    'LBL_DEAL_TOT_USDOLLAR'=>'total rabatt (US Dollar)',
+    'LBL_DEAL_TOT' => 'total rabatt',
+    'LBL_DEAL_TOT_USDOLLAR' => 'total rabatt (US Dollar)',
     'LBL_NEW_SUB' => 'Rabatterad deltotal:',
     'LBL_SHIPPING' => 'Frakt:',
-    'LBL_SHIPPING_USDOLLAR'=>'Frakt (US Dollar)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Deltotal (US Dollar)',
+    'LBL_SHIPPING_USDOLLAR' => 'Frakt (US Dollar)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Deltotal (US Dollar)',
     'LBL_SUBTOTAL' => 'Deltotal',
     'LBL_TAXABLE_SUBTOTAL' => 'Delsumma, brutto',
-    'LBL_TAX_USDOLLAR'=>'Moms (US Dollar)',
+    'LBL_TAX_USDOLLAR' => 'Moms (US Dollar)',
     'LBL_TAX' => 'Moms;',
-    'LBL_TOTAL_USDOLLAR'=>'Total (US Dollar)',
+    'LBL_TOTAL_USDOLLAR' => 'Total (US Dollar)',
     'LBL_TOTAL' => 'Totalt:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Offertbundligsposition',
     'EXCEPTION_INVALID_QUOTE_ID' => 'Offert-ID saknas från datan',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'Offerten du sökte kunde inte hittas',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'Offerten du sökte kunde inte hittas',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Ytterligare grupprabatt',
     'LBL_GROUP_TOTAL' => 'Gruppsumma',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Grupphuvud',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Standard-produktpaketsgruppen för Offerten',
     'LBL_ALERT_DELETING_ITEM' => 'Raderar radartikel(ar)',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Radartikeln raderades',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tislinje för produktpaket',
+];

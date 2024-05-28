@@ -16,7 +16,7 @@
 ({
     extendsFrom: 'QuicksearchBarView',
 
-    className: 'table-cell omnichannel-search-bar-wrapper',
+    className: 'omnichannel-search-bar-wrapper table-cell w-full',
 
     /**
      * @inheritdoc

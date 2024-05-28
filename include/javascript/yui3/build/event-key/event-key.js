@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('event-key', function (Y, NAME) {
 
 /**
@@ -23,6 +16,7 @@ var ALT      = "+alt",
     eventDef = {
         KEY_MAP: {
             enter    : 13,
+            space    : 32,
             esc      : 27,
             backspace: 8,
             tab      : 9,
@@ -152,7 +146,7 @@ eventDef.detachDelegate = eventDef.detach;
  *   <dt>modifier</dt>
  *   <dd><code>"shift", "ctrl", "alt", or "meta"</code></dd>
  *   <dt>keyName</dt>
- *   <dd><code>"enter", "backspace", "esc", "tab", "pageup", or "pagedown"</code></dd>
+ *   <dd><code>"enter", "space", "backspace", "esc", "tab", "pageup", or "pagedown"</code></dd>
  * </dl>
  *
  * <p>Examples:</p>
@@ -175,4 +169,4 @@ eventDef.detachDelegate = eventDef.detach;
 Y.Event.define('key', eventDef, true);
 
 
-}, '3.15.0', {"requires": ["event-synthetic"]});
+}, '3.18.1', {"requires": ["event-synthetic"]});

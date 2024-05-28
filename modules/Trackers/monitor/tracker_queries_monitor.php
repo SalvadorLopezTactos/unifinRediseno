@@ -10,28 +10,29 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class tracker_queries_monitor extends Monitor implements Trackable {
-
+class tracker_queries_monitor extends Monitor implements Trackable
+{
     public $date_modified;
     public $query_id;
-    var $cached_data = array();
+    public $cached_data = [];
 
     /**
      * save
      * This method retrieves the Store instances associated with monitor and calls
      * the flush method passing with the montior ($this) instance.
-     * 
+     *
      */
-    public function save($flush=true) {
+    public function save($flush = true)
+    {
         if (empty($this->date_modified)) {
             $this->date_modified = $GLOBALS['timedate']->nowDb();
         }
         $this->cached_data[] = $this->toArray();
 
-    	if($flush && empty($GLOBALS['tracker_' . $this->table_name]) && !empty($this->cached_data)) {
-            $write_entries = array();
+        if ($flush && empty($GLOBALS['tracker_' . $this->table_name]) && !empty($this->cached_data)) {
+            $write_entries = [];
 
-            foreach($this->cached_data as $entry) {
+            foreach ($this->cached_data as $entry) {
                 $query = str_replace(["\r", "\n", "\r\n", "\t"], ' ', (string)$entry['text']);
                 $query = preg_replace("/\s{2,}/", ' ', $query);
                 $query = TrackerUtility::getGenericSQL($query);
@@ -39,16 +40,15 @@ class tracker_queries_monitor extends Monitor implements Trackable {
 
                 $md5 = md5($query);
 
-                if(!isset($write_entries[$md5])) {
+                if (!isset($write_entries[$md5])) {
+                    $entry['query_hash'] = $md5;
+                    $result = $GLOBALS['db']->query("SELECT * FROM tracker_queries WHERE query_hash = '{$md5}'");
 
-                   $entry['query_hash'] = $md5;
-                   $result = $GLOBALS['db']->query("SELECT * FROM tracker_queries WHERE query_hash = '{$md5}'");
-
-                   if ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+                    if ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                         $entry['query_id'] = $row['query_id'];
                         $entry['run_count'] = $row['run_count'] + 1;
                         $entry['sec_total'] = $row['sec_total'] + $entry['sec_total'];
-                        $entry['sec_avg'] =  ($entry['sec_total'] / $entry['run_count']);
+                        $entry['sec_avg'] = ($entry['sec_total'] / $entry['run_count']);
                     } else {
                         $entry['query_id'] = create_guid();
                         $entry['run_count'] = 1;
@@ -66,12 +66,12 @@ class tracker_queries_monitor extends Monitor implements Trackable {
 
             $trackerManager = TrackerManager::getInstance();
 
-            if($monitor2 = $trackerManager->getMonitor('tracker_tracker_queries')){
+            if ($monitor2 = $trackerManager->getMonitor('tracker_tracker_queries')) {
                 $trackerManager->pause();
                 //Loop through the stored cached data entries
-                foreach($write_entries as $write_e) {
+                foreach ($write_entries as $write_e) {
                     //Set the values from the cached data entries
-                    foreach($write_e as $name=>$value) {
+                    foreach ($write_e as $name => $value) {
                         $this->$name = $value;
                     } //foreach
 
@@ -81,7 +81,7 @@ class tracker_queries_monitor extends Monitor implements Trackable {
                     $monitor2->setValue('query_id', $this->query_id);
                     $monitor2->save($flush); // <--- save to tracker_tracker_monitor
 
-                    foreach($this->stores as $s) {
+                    foreach ($this->stores as $s) {
                         $store = $this->getStore($s);
                         //Flush to the store
                         $store->flush($this);
@@ -91,8 +91,7 @@ class tracker_queries_monitor extends Monitor implements Trackable {
                 } //foreach
                 $trackerManager->unPause();
             }
-        unset($this->cached_data);
-    	} //if
-   } //save
+            unset($this->cached_data);
+        } //if
+    } //save
 }
-

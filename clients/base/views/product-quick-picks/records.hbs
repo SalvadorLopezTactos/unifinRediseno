@@ -15,7 +15,7 @@
     {{#if recentCollection.length}}
         <ul class="unstyled listed recent-records-list">
             {{#each recentCollection.models}}
-                <li class="recent-records" data-record-id="{{fieldValue this "id"}}">
+                <li class="recent-records text-sm" data-record-id="{{fieldValue this "id"}}">
                     <i class="sicon sicon-list quick-picks-list"></i>
                     <a href="javascript:void(0)">
                         <span class="recent-link" rel="tooltip" data-original-title="{{fieldValue this "name"}}">{{fieldValue this "name"}}</span>

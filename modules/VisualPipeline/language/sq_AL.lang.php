@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Pamja në kuadrat',
     'LBL_MODULE_NAME_SINGULAR' => 'Pamja në kuadrat',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'Pamja në kuadrat',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => 'Modulet e aktivizuara',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'Modulet e pamjes në kuadrat',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'Cilësimet e modulit',
-    'LBL_PIPELINE_TABLE_HEADER' => "Zgjidh fushën, vlerat e së cilës do të përdoren si kolona",
+    'LBL_PIPELINE_TABLE_HEADER' => 'Zgjidh fushën, vlerat e së cilës do të përdoren si kolona',
     'LBL_PIPELINE_TILE_HEADER' => 'Fusha e titullit në kuadrat',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => 'Kolonat e disponueshme',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => 'Fushat e trupit në kuadrat',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'Pamja paraprake e pllakëzave',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'Shumë fusha në kuadrat',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => 'Zgjidh gabimet në skedat e cilësimeve të mëposhtme të modulit para se të vazhdosh:<br><br>',
-);
+    'LBL_MODULE_SELECTION' => 'Zgjidh modulin që dëshiron të shikosh dhe konfiguro më poshtë',
+    'LBL_SHOW_COLUMN_COUNT' => 'Shfaq numrin e kolonave',
+    'LBL_SHOW_COLUMN_TOTAL' => 'Shfaq numrin total të kolonave',
+    'LBL_TOTAL_FIELD' => 'Fusha e totalit',
+];

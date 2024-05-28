@@ -10,15 +10,17 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$config = array(
+$config = [
     'name' => 'Microsoft',
-    'eapm' => array(
+    'eapm' => [
         'enabled' => true,
         'only' => true,
-    ),
+    ],
     'order' => 12,
-    'properties' => array (
+    'properties' => [
         'oauth2_client_id' => '',
         'oauth2_client_secret' => '',
-    ),
-);
+        'oauth2_single_tenant_enabled' => false,
+        'oauth2_single_tenant_id' => '',
+    ],
+];

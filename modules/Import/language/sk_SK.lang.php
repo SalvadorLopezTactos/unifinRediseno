@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Import súboru prebehol úspešne',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Importovaný záznam je súčasťou procesu a nedá sa upraviť, pretože proces uzamkol niektoré polia pre úpravy.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'našiel sa počet chýb.  Pozrite si záložku s chybami pre riadky, ktoré neboli importované z dôvodu chyby',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Ak používateľ neexistuje, použite aktuálneho používateľa',
     'LBL_SHOW_HIDDEN' => 'Zobraziť polia, ktoré štandardne nie sú importovateľné',
     'LBL_UPDATE_RECORDS' => 'Aktualizovať existujúce záznamy namiesto ich importovania (nie späť)',
-    'LBL_TEST'=> 'Testovací import (neukladať ani nemeniť dáta)',
+    'LBL_TEST' => 'Testovací import (neukladať ani nemeniť dáta)',
     'LBL_TRUNCATE_TABLE' => 'Pred importom vyprázdniť tabuľku (vymazať všetky záznamy)',
     'LBL_RELATED_ACCOUNTS' => 'Nevytvárať súvisiace účty',
     'LBL_NO_DATECHECK' => 'Preskočiť kontrolu dátumu (rýchlejší postup, ktorý však zlyhá, ak je niektorý dátum nesprávny)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Neplatná celočíselná hodnota',
     'LBL_ERROR_INVALID_NUM' => 'Neplatná číselná hodnota',
     'LBL_ERROR_INVALID_TIME' => 'Neplatný čas',
-    'LBL_ERROR_INVALID_EMAIL'=>'Neplatná e-mailová adresa',
-    'LBL_ERROR_INVALID_BOOL'=>'Nesprávna hodnota (má byť 1 alebo 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Neplatný reťazec pre dátum',
-    'LBL_ERROR_INVALID_USER'=>'Neplatné používateľské meno alebo ID',
+    'LBL_ERROR_INVALID_EMAIL' => 'Neplatná e-mailová adresa',
+    'LBL_ERROR_INVALID_BOOL' => 'Nesprávna hodnota (má byť 1 alebo 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Neplatný reťazec pre dátum',
+    'LBL_ERROR_INVALID_USER' => 'Neplatné používateľské meno alebo ID',
     'LBL_ERROR_INVALID_TEAM' => 'Neplatný názov tímu alebo ID',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Neplatné názov účtu alebo ID',
     'LBL_ERROR_INVALID_RELATE' => 'Neplatné súvisiace pole',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => ' neexistuje alebo nie je zapisovateľný',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Súbor nebol úspešne nahratý. Mohlo to spôsobiť nastavenie možnosti &#39;upload_max_filesize&#39; v súbore php.ini na malé číslo',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Súbor je príliš veľký. Max:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'bajty/-ov. Zmeňte $sugar_config[&#39;upload_maxsize&#39;] v config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bajty. Zmeniť $sugar_config[&#39;upload_maxsize&#39;] v config.php',
     'LBL_MODULE_NAME' => 'Import',
     'LBL_MODULE_NAME_SINGULAR' => 'Import',
     'LBL_TRY_AGAIN' => 'Skúsiť znova',
     'LBL_START_OVER' => 'Začať znova',
     'LBL_ERROR' => 'Chyba:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Importovaný súbor obsahuje {0} riadkov. Optimálny počet riadkov je {1}. Viac riadkov môže spomaliť proces importu. Kliknite na tlačidlo OK a pokračujte v importovaní. Kliknite na možnosť Zrušiť a skontrolujte a opäť nahrajte importovaný súbor.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Nemôžete importovať používateľa v role systémového administrátora',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Nemôžete importovať používateľa v role systémového administrátora',
     'ERR_REPORT_LOOP' => 'Systém objavil slučku hlásení. Používateľ nemôže predkladať hlásenia sám sebe, ani žiadny z manažérov nemôže predkladať hlásenia manažérom.',
     'ERR_MULTIPLE' => 'Viaceré stĺpce sú označené rovnakým názvom poľa.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Chýbajú povinné polia:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'V importovanom súbore neboli zistené žiadne riadky. Uistite sa, že  v súbore nie sú žiadne prázdne riadky a skúste to znova.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Importovaný súbor už bol spracovaný alebo neexistuje',
     'LBL_SUCCESS' => 'Úspech:',
-	'LBL_FAILURE' => 'Import sa nepodarilo vykonať:',
+    'LBL_FAILURE' => 'Import sa nepodarilo vykonať:',
     'LBL_SUCCESSFULLY' => 'Importovanie prebehlo úspešne',
     'LBL_LAST_IMPORT_UNDONE' => 'Import bol vrátený späť.',
     'LBL_NO_IMPORT_TO_UNDO' => 'Žiadny import nebol vrátený späť.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'importovať znova',
     'LBL_FINISHED' => 'Dokončené',
     'LBL_UNDO_LAST_IMPORT' => 'Vrátiť import',
-    'LBL_LAST_IMPORTED'=>'Vytvorené',
+    'LBL_LAST_IMPORTED' => 'Vytvorené',
     'ERR_MULTIPLE_PARENTS' => 'Môžete mať definované iba jedno nadradené ID',
     'LBL_DUPLICATES' => 'Našli sa duplikáty',
     'LNK_DUPLICATE_LIST' => 'Prevziať zoznam duplikátov',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Skryť poznámky',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Zobraziť náhľad stĺpcov',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Skryť náhľad stĺpcov',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Skontrolujte duplikáty pomocou operátora:',
     'LBL_SAVE_MAPPING_AS' => 'Ak chcete uložiť nastavenia importu, zadajte názov pre uložené nastavenia:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Jedna ponuka (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Dvojitá ponuka (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Ak chcete priradiť nové záznamy iným tímom ako svojim predvoleným tímom, použite stĺpec Predvolená hodnota a vyberte iné tímy.',
     'LBL_SIGN_IN_HELP' => 'Ak chcete povoliť túto službu, prihláste sa v záložke Externé účty na stránke vašich používateľských nastavení.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Pokus o spracovanie e-mailových adries v objekte bean, ktorý ich nepodporuje.",
-);
+];

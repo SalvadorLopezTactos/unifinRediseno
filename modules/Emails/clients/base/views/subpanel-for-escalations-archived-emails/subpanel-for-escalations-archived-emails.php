@@ -40,7 +40,7 @@ $viewdefs['Emails']['base']['view']['subpanel-for-escalations-archived-emails'] 
                     'default' => true,
                     'link' => 'true',
                     'readonly' => true,
-                    'width' =>  'xlarge',
+                    'width' => 'xlarge',
                     'related_fields' => [
                         'total_attachments',
                         'state',

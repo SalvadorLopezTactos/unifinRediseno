@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Tudásbázis-lista műszerfal',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Tudásbázis-bejegyzés műszerfal',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Tudásbázis figyelemfelhívás',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tudásbázis idővonal',
 
     'LBL_MODULE_NAME' => 'Tudásbázis',
     'LBL_MODULE_NAME_SINGULAR' => 'Tudásbázis cikk',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Érték beállítása elsődlegesként',
     'LBL_ITEM_REMOVE' => 'Elem eltávolítása',
     'LBL_ITEM_ADD' => 'Elem hozzáadása',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => 'Ellenőrzés-azonosító',
     'LBL_DOCUMENT_REVISION' => 'Felülvizsgálat',
     'LBL_NUMBER' => 'Szám',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'Több {{module}} cikk...',
     'LBL_LIST_FORM_TITLE' => 'Tudásbázis Lista',
     'LBL_SEARCH_FORM_TITLE' => 'Tudásbázis keresés',
-);
+];

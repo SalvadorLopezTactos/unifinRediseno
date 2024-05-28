@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_LISTVIEW_FILTER_ALL' => 'الكل {0}',
     'LBL_TEAM' => 'الفرق',
     'LBL_TEAMS' => 'الفرق',
@@ -77,4 +77,4 @@ $mod_strings = array(
     'LBL_OPEN_ISSUES' => 'فتح {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'التي تم حلها مؤخرًا',
     'LBL_FILTER_UTILS_CREATED' => 'إنشاء بواسطة',
-);
+];

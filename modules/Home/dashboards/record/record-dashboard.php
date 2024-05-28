@@ -9,71 +9,71 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-return array(
-    'metadata' => array(
-        'components' => array(
-            array(
-                'rows' => array(
-                    array(
-                        array(
-                            'view' => array(
+return [
+    'metadata' => [
+        'components' => [
+            [
+                'rows' => [
+                    [
+                        [
+                            'view' => [
                                 'type' => 'twitter',
                                 'label' => 'LBL_DASHLET_RECENT_TWEETS_SUGARCRM_NAME',
                                 'twitter' => 'sugarcrm',
                                 'limit' => 20,
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' => array(
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
                                 'type' => 'dashablelist',
                                 'label' => 'TPL_DASHLET_MY_MODULE',
-                                'display_columns' => array(
+                                'display_columns' => [
                                     'name',
                                     'account_name',
                                     'phone_work',
                                     'title',
-                                ),
+                                ],
                                 'limit' => 15,
-                            ),
-                            'context' => array(
+                            ],
+                            'context' => [
                                 'module' => 'Contacts',
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
                 'width' => 4,
-            ),
-            array(
-                'rows' => array(
-                    array(
-                        array(
-                            'view' => array(
+            ],
+            [
+                'rows' => [
+                    [
+                        [
+                            'view' => [
                                 'type' => 'sales-pipeline',
                                 'label' => 'LBL_DASHLET_PIPLINE_NAME',
                                 'visibility' => 'user',
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' => array(
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
                                 'type' => 'bubblechart',
                                 'label' => 'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME',
                                 'filter_duration' => 'current',
                                 'visibility' => 'user',
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
                 'width' => 8,
-            ),
-        ),
-    ),
+            ],
+        ],
+    ],
     'name' => 'LBL_HOME_DASHBOARD',
-);
+];

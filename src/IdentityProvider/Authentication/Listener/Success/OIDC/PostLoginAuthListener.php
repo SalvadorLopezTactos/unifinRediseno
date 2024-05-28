@@ -13,7 +13,7 @@
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\OIDC;
 
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\PostLoginAuthListener as
-    BasePostLoginAuthListener;
+BasePostLoginAuthListener;
 
 use Symfony\Component\Security\Core\Event\AuthenticationEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;

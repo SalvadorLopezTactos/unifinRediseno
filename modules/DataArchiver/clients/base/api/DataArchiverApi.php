@@ -39,16 +39,16 @@ class DataArchiverApi extends ModuleApi
      */
     public function registerApiRest()
     {
-        return array(
-            'run' => array(
+        return [
+            'run' => [
                 'reqType' => 'POST',
-                'path' => array('DataArchiver', '?', 'run'),
-                'pathVars' => array('module', 'record', ''),
+                'path' => ['DataArchiver', '?', 'run'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'performArchive',
                 'shortHelp' => 'Performs the archiving process for the given archive',
                 'longHelp' => 'include/api/help/archiver_run.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -109,7 +109,7 @@ class DataArchiverApi extends ModuleApi
         $archiveRunsBean->source_module = $bean->filter_module_name;
         $archiveRunsBean->filter_def = $bean->filter_def;
         $archiveRunsBean->date_of_archive = (new TimeDate())->nowDb();
-        $archiveRunsBean->num_processed = is_countable($returnedIds) ? count($returnedIds) : 0;
+        $archiveRunsBean->num_processed = safeCount($returnedIds);
         $archiveRunsBean->ids_processed = json_encode($returnedIds);
         $archiveRunsBean->save();
 

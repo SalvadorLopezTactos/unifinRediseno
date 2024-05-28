@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Raporti i planifikimeve',
     'LBL_MODULE_NAME_SINGULAR' => 'Raporti i planifikimit',
     'LBL_REPORT_NAME' => 'Raport',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Lloji(et) e skedarëve',
     'LBL_EMBED_REPORT' => 'Ngulit raportin në email',
     'LBL_EMBED_REPORT_INFO' => 'Shënim: Nëse raporti tejkalon 200 rreshta, do ta bashkëngjisim raportin si skedar CVS.',
-);
+];

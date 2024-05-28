@@ -10,61 +10,61 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['SchedulersJob'] = array(
+$dictionary['SchedulersJob'] = [
     'table' => 'job_queue',
     'favorites' => true,
     'activity_enabled' => true,
     'comment' => 'Job queue keeps the list of the jobs executed by this instance',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'vname' => 'LBL_NAME',
             'type' => 'id',
             'required' => true,
             'reportable' => false,
-        ),
-       'name' => array(
+        ],
+        'name' => [
             'name' => 'name',
             'vname' => 'LBL_NAME',
             'type' => 'name',
             'dbType' => 'varchar',
             'len' => 255,
             'required' => true,
-        ),
-        'deleted' => array (
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'vname' => 'LBL_DELETED',
             'type' => 'bool',
             'required' => true,
             'default' => '0',
             'reportable' => false,
-        ),
-        'date_entered' => array(
+        ],
+        'date_entered' => [
             'name' => 'date_entered',
             'vname' => 'LBL_DATE_ENTERED',
             'type' => 'datetime',
             'required' => true,
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'vname' => 'LBL_DATE_MODIFIED',
             'type' => 'datetime',
             'required' => true,
-        ),
-        'scheduler_id' => array(
+        ],
+        'scheduler_id' => [
             'name' => 'scheduler_id',
             'vname' => 'LBL_SCHEDULER',
             'type' => 'id',
             'required' => false,
             'reportable' => false,
-        ),
-        'execute_time' => array(
+        ],
+        'execute_time' => [
             'name' => 'execute_time',
             'vname' => 'LBL_EXECUTE_TIME',
             'type' => 'datetime',
             'required' => false,
-        ),
-        'status' => array(
+        ],
+        'status' => [
             'name' => 'status',
             'vname' => 'LBL_STATUS',
             'type' => 'enum',
@@ -73,8 +73,8 @@ $dictionary['SchedulersJob'] = array(
             'required' => true,
             'reportable' => true,
             'readonly' => true,
-        ),
-        'resolution' => array(
+        ],
+        'resolution' => [
             'name' => 'resolution',
             'vname' => 'LBL_RESOLUTION',
             'type' => 'enum',
@@ -83,120 +83,120 @@ $dictionary['SchedulersJob'] = array(
             'required' => true,
             'reportable' => true,
             'readonly' => true,
-        ),
-        'message' => array(
+        ],
+        'message' => [
             'name' => 'message',
             'vname' => 'LBL_MESSAGE',
             'type' => 'text',
             'required' => false,
             'reportable' => false,
-        ),
-        'target' => array(
+        ],
+        'target' => [
             'name' => 'target',
             'vname' => 'LBL_TARGET_ACTION',
             'type' => 'varchar',
             'len' => 255,
             'required' => true,
             'reportable' => true,
-        ),
-        'data' => array(
+        ],
+        'data' => [
             'name' => 'data',
             'vname' => 'LBL_DATA',
             'type' => 'longtext',
             'required' => false,
             'reportable' => true,
-        ),
-        'requeue' => array(
+        ],
+        'requeue' => [
             'name' => 'requeue',
             'vname' => 'LBL_REQUEUE',
             'type' => 'bool',
             'default' => 0,
             'required' => false,
             'reportable' => true,
-        ),
-        'retry_count' => array(
+        ],
+        'retry_count' => [
             'name' => 'retry_count',
             'vname' => 'LBL_RETRY_COUNT',
             'type' => 'tinyint',
             'required' => false,
             'reportable' => true,
             'readonly' => true,
-        ),
-        'failure_count' => array(
+        ],
+        'failure_count' => [
             'name' => 'failure_count',
             'vname' => 'LBL_FAIL_COUNT',
             'type' => 'tinyint',
             'required' => false,
             'reportable' => true,
             'readonly' => true,
-        ),
-        'job_delay' => array(
+        ],
+        'job_delay' => [
             'name' => 'job_delay',
             'vname' => 'LBL_INTERVAL',
             'type' => 'int',
             'required' => false,
             'reportable' => false,
-        ),
-        'client' => array(
+        ],
+        'client' => [
             'name' => 'client',
             'vname' => 'LBL_CLIENT',
             'type' => 'varchar',
             'len' => 255,
             'required' => true,
             'reportable' => true,
-        ),
-        'percent_complete' => array(
+        ],
+        'percent_complete' => [
             'name' => 'percent_complete',
             'vname' => 'LBL_PERCENT',
             'type' => 'int',
             'required' => false,
-        ),
-        'job_group' => array(
+        ],
+        'job_group' => [
             'name' => 'job_group',
             'vname' => 'LBL_JOB_GROUP',
             'type' => 'varchar',
             'len' => 255,
             'required' => false,
             'reportable' => true,
-        ),
-        'schedulers' => array(
+        ],
+        'schedulers' => [
             'name' => 'schedulers',
             'vname' => 'LBL_SCHEDULER_ID',
             'type' => 'link',
             'relationship' => 'schedulers_jobs_rel',
             'source' => 'non-db',
             'link_type' => 'one',
-        ),
-        'module' => array(
+        ],
+        'module' => [
             'name' => 'module',
             'vname' => 'LBL_MODULE',
             'type' => 'varchar',
             'len' => 255,
             'required' => false,
             'reportable' => true,
-        ),
-        'fallible' => array(
+        ],
+        'fallible' => [
             'name' => 'fallible',
             'vname' => 'LBL_FALLIBLE',
             'type' => 'bool',
             'default' => '0',
-            'comment' => 'An indicator of whether parents failure depends on subtask.'
-        ),
-        'rerun' => array(
+            'comment' => 'An indicator of whether parents failure depends on subtask.',
+        ],
+        'rerun' => [
             'name' => 'rerun',
             'vname' => 'LBL_RERUN',
             'type' => 'bool',
             'default' => '0',
-            'comment' => 'If a job can be rerun.'
-        ),
-        'interface' => array(
+            'comment' => 'If a job can be rerun.',
+        ],
+        'interface' => [
             'name' => 'interface',
             'vname' => 'LBL_INTERFACE',
             'type' => 'bool',
             'default' => '0',
-            'comment' => 'Mark the task as interface for a job in job server.'
-        ),
-        'notes' => array(
+            'comment' => 'Mark the task as interface for a job in job server.',
+        ],
+        'notes' => [
             'name' => 'notes',
             'vname' => 'LBL_NOTES',
             'type' => 'link',
@@ -204,10 +204,10 @@ $dictionary['SchedulersJob'] = array(
             'module' => 'Notes',
             'bean_name' => 'Note',
             'source' => 'non-db',
-        ),
-    ),
-    'relationships' => array(
-        'schedulersjob_notes' => array(
+        ],
+    ],
+    'relationships' => [
+        'schedulersjob_notes' => [
             'lhs_module' => 'SchedulersJobs',
             'lhs_table' => 'job_queue',
             'lhs_key' => 'id',
@@ -216,16 +216,16 @@ $dictionary['SchedulersJob'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'job_queuepk',
             'type' => 'primary',
-            'fields' => array(
-                'id'
-            )
-        ),
+            'fields' => [
+                'id',
+            ],
+        ],
         [
             'name' => 'idx_resolution_executetime',
             'type' => 'index',
@@ -260,14 +260,14 @@ $dictionary['SchedulersJob'] = array(
                 'status',
             ],
         ],
-    ),
-    'acls' => array(
+    ],
+    'acls' => [
         'SugarACLAdminOnly' => true,
-    ),
-    'uses' => array(
+    ],
+    'uses' => [
         'following',
         'favorite',
-    ),
-);
+    ],
+];
 
-VardefManager::createVardef('SchedulersJobs', 'SchedulersJob', array('assignable'));
+VardefManager::createVardef('SchedulersJobs', 'SchedulersJob', ['assignable']);

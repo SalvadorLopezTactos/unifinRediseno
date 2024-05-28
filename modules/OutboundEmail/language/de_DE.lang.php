@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Ausgehende E-Mail-Konten',
     'LBL_MODULE_NAME_SINGULAR' => 'Ausgehendes E-Mail-Konto',
     'LBL_STATUS' => 'Status',
@@ -40,4 +40,4 @@ $mod_strings = array(
     'LBL_PREFERRED_SENDING_ACCOUNT' => 'Bevorzugtes Absenderkonto',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für E-Mail-Einstellungen',
-);
+];

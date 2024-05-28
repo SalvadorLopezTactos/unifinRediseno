@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -49,7 +50,7 @@ class ContentSecurityPolicy
 
     public static function fromDirectivesList(Directive ...$directives): ContentSecurityPolicy
     {
-        $csp = new self;
+        $csp = new self();
         foreach ($directives as $directive) {
             $csp->setDirective($directive);
         }
@@ -172,7 +173,7 @@ class ContentSecurityPolicy
 
     private function serializeDirectives(): string
     {
-        if (!count($this->directives) && !count($this->directivesHidden)) {
+        if (!safeCount($this->directives) && !safeCount($this->directivesHidden)) {
             throw new \DomainException('No CSP directives defined');
         }
         $map = [];
@@ -193,7 +194,8 @@ class ContentSecurityPolicy
         $sugarDomains = '*.sugarcrm.com *.salesfusion.com *.salesfusion360.com *.sugarapps.com *.sugarapps.eu *.sugarapps.com.au sugarcrm-release-archive.s3.amazonaws.com';
         $pendoDomains = 'https://*.pendo.io pendo-io-static.storage.googleapis.com pendo-static-5197307572387840.storage.googleapis.com pendo-eu-static.storage.googleapis.com pendo-eu-static-5197307572387840.storage.googleapis.com';
         $bingDomains = '*.bing.com *.virtualearth.net';
-        $trustedDomains = $sugarDomains . ' ' . $pendoDomains . ' ' . $bingDomains;
+        $oktopostDomains = 'https://board.oktopost.com';
+        $trustedDomains = $sugarDomains . ' ' . $pendoDomains . ' ' . $bingDomains . ' ' . $oktopostDomains;
         return [
             'default-src' => "'self' 'unsafe-inline' 'unsafe-eval'  " . $trustedDomains,
             //Advanced form defaults

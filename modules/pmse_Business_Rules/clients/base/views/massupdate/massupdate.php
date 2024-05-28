@@ -11,29 +11,28 @@
  */
 
 $module_name = 'pmse_Business_Rules';
-$viewdefs[$module_name]['base']['view']['massupdate'] = array(
-    'buttons' => array(
-        array(
+$viewdefs[$module_name]['base']['view']['massupdate'] = [
+    'buttons' => [
+        [
             'name' => 'update_button',
             'type' => 'button',
             'label' => 'Update',
             'acl_action' => 'massupdate',
             'css_class' => 'btn-primary',
             'primary' => true,
-        ),
-        array(
+        ],
+        [
             'type' => 'button',
             'value' => 'cancel',
             'css_class' => 'btn-invisible cancel_button',
             'icon' => 'sicon-close',
             'primary' => false,
-        ),
-    ),
-    'panels' =>
-    array(
-        array(
-            'fields' => array(
-            )
-        )
-    )
-);
+        ],
+    ],
+    'panels' => [
+        [
+            'fields' => [
+            ],
+        ],
+    ],
+];

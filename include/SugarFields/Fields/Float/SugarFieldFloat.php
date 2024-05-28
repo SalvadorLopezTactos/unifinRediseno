@@ -12,42 +12,45 @@
  */
 
 
-class SugarFieldFloat extends SugarFieldInt 
+class SugarFieldFloat extends SugarFieldInt
 {
-    public function formatField($rawField, $vardef){
+    public function formatField($rawField, $vardef)
+    {
         // A null precision uses the user prefs / system prefs by default
         $precision = null;
-        if ( isset($vardef['precision']) ) {
+        if (isset($vardef['precision'])) {
             $precision = $vardef['precision'];
         }
-        
-        if ( $rawField === '' || $rawField === NULL ) {
+
+        if ($rawField === '' || $rawField === null) {
             return '';
         }
 
-        return format_number($rawField,$precision,$precision);
+        return format_number($rawField, $precision, $precision);
     }
 
     /**
      * {@inheritDoc}
      */
     public function apiFormatField(
-        array &$data,
-        SugarBean $bean,
-        array $args,
+        array       &$data,
+        SugarBean   $bean,
+        array       $args,
         $fieldName,
         $properties,
-        array $fieldList = null,
+        array       $fieldList = null,
         ServiceBase $service = null
     ) {
+
         $this->ensureApiFormatFieldArguments($fieldList, $service);
 
         $data[$fieldName] = isset($bean->$fieldName) && is_numeric($bean->$fieldName)
-                            ? (float)$bean->$fieldName : null;
+            ? (float)$bean->$fieldName : null;
     }
 
-    public function unformatField($formattedField, $vardef){
-        if ( $formattedField === '' || $formattedField === NULL ) {
+    public function unformatField($formattedField, $vardef)
+    {
+        if ($formattedField === '' || $formattedField === null) {
             return '';
         }
         if (is_array($formattedField)) {
@@ -64,17 +67,17 @@ class SugarFieldFloat extends SugarFieldInt
         $vardef,
         $focus,
         ImportFieldSanitize $settings
-        )
-    {
-        $value = str_replace((string)$settings->num_grp_sep, "", (string)$value);
+    ) {
+
+        $value = str_replace((string)$settings->num_grp_sep, '', (string)$value);
         $dec_sep = $settings->dec_sep;
-        if ( $dec_sep != '.' ) {
-            $value = str_replace($dec_sep,".",$value);
+        if ($dec_sep != '.') {
+            $value = str_replace($dec_sep, '.', $value);
         }
-        if ( !is_numeric($value) ) {
+        if (!is_numeric($value)) {
             return false;
         }
-        
+
         return $value;
     }
 
@@ -93,6 +96,7 @@ class SugarFieldFloat extends SugarFieldInt
         SugarQuery_Builder_Where $where,
         $op
     ) {
+
         $inputValues = is_array($value) ? array_values($value) : [$value];
         $separatorPosition = strlen(substr($inputValues[0], strpos($inputValues[0], '.') + 1));
         $format = $separatorPosition === 0 ? '%d' : "%.{$separatorPosition}F";
@@ -101,7 +105,7 @@ class SugarFieldFloat extends SugarFieldInt
             return sprintf($format, $inputValue);
         }, $inputValues);
 
-        switch($op){
+        switch ($op) {
             case '$equals':
                 $q->whereRaw("$field = {$literals[0]}");
                 return false;
@@ -109,7 +113,7 @@ class SugarFieldFloat extends SugarFieldInt
                 $q->whereRaw("$field != {$literals[0]}");
                 return false;
             case '$between':
-                if (count($literals) != 2) {
+                if (safeCount($literals) != 2) {
                     throw new SugarApiExceptionInvalidParameter('$between requires an array with two values');
                 }
                 $q->whereRaw("$field BETWEEN {$literals[0]} AND {$literals[1]}");

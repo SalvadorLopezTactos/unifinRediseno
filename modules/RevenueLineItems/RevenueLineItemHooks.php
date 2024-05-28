@@ -41,6 +41,7 @@ class RevenueLineItemHooks
         return false;
     }
 
+
     /**
      * Generate Purchases/PLIs for the RLI only if all of the following are true
      * 1. We're in Opps+RLIs mode
@@ -67,8 +68,8 @@ class RevenueLineItemHooks
         // Check parent opp and this bean for sales stage
         $opp = BeanFactory::retrieveBean('Opportunities', $bean->opportunity_id);
         $closedStages = $opp->getRliClosedWonStages();
-        if (!in_array($bean->sales_stage, $closedStages) ||
-            !in_array($opp->sales_stage, $closedStages)) {
+        if (!safeInArray($bean->sales_stage, $closedStages) ||
+            !safeInArray($opp->sales_stage, $closedStages)) {
             return false;
         }
         // At this point, we know that generate_purchase has changed to yes,
@@ -78,6 +79,7 @@ class RevenueLineItemHooks
         RevenueLineItem::schedulePurchaseGenerationJob($data);
         return true;
     }
+
     /**
      * Generate Renewal for parent opportunity for a new RLI if
      * 1. The new Revenue Line Item is 'Closed Won'
@@ -95,7 +97,7 @@ class RevenueLineItemHooks
                 $bean->renewable == 1 &&
                 $opportunityBean &&
                 $opportunityBean->sales_status === Opportunity::STATUS_CLOSED_WON &&
-                in_array($bean->sales_stage, $opportunityBean->getRliClosedWonStages())) {
+                safeInArray($bean->sales_stage, $opportunityBean->getRliClosedWonStages())) {
                 // Spoof that sales status has changed in the Opportunity to
                 // trigger renewal opportunity update
                 $args['dataChanges']['sales_status']['after'] = Opportunity::STATUS_CLOSED_WON;

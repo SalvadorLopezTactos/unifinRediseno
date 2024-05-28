@@ -28,7 +28,36 @@ class ForecastMetricsApi extends FilterApi
                 'shortHelp' => 'Retrieve metrics for Forecast data',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastMetricsApiPost.html',
             ],
+            'forecasts_metrics_named' => [
+                'reqType' => 'POST',
+                'path' => ['Forecasts', 'metrics', 'named'],
+                'pathVars' => ['', '', ''],
+                'method' => 'getMetricsByName',
+                'shortHelp' => 'Retrieve named metrics for Forecast data',
+                'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastMetricsByNameApiPost.html',
+                'minVersion' => '11.20',
+            ],
         ];
+    }
+
+    /**
+     * Returns metrics by name for a filtered list of Forecasts-related data
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array[]
+     * @throws SugarApiExceptionMissingParameter
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    public function getMetricsByName(ServiceBase $api, array $args)
+    {
+        $this->requireArgs($args, ['user_id', 'type', 'metrics']);
+        $engine = new ForecastMetricsEngine(
+            $args['user_id'],
+            ($args['type'] === 'Rollup'),
+            $args['time_period'] ?? TimePeriod::getCurrentId()
+        );
+        return $engine->getMetrics($args['metrics']);
     }
 
     /**
@@ -42,13 +71,10 @@ class ForecastMetricsApi extends FilterApi
      */
     public function getMetrics(ServiceBase $api, array $args)
     {
-
         $this->requireArgs($args, [
             'module',
-            'filter',
             'user_id',
             'type',
-            'time_period',
             'metrics',
         ]);
 
@@ -120,7 +146,7 @@ class ForecastMetricsApi extends FilterApi
     {
         $baseFilter = $args['filter'] ?? [];
         $assignedToFilter = $this->buildBaseAssigneeFilter($args['user_id'], $args['type']);
-        $dateClosedFilter = $this->buildBaseTimePeriodFilter($args['time_period']);
+        $dateClosedFilter = $this->buildBaseTimePeriodFilter($args['time_period'] ?? null);
         array_push($baseFilter, $assignedToFilter, $dateClosedFilter);
 
         return $baseFilter;
@@ -163,6 +189,10 @@ class ForecastMetricsApi extends FilterApi
     protected function buildBaseTimePeriodFilter($timePeriodId)
     {
         $filter = [];
+
+        if (empty($timePeriodId)) {
+            $timePeriodId = TimePeriod::getCurrentId();
+        }
 
         $timePeriodBean = BeanFactory::retrieveBean('TimePeriods', $timePeriodId);
         if (!empty($timePeriodBean)) {
@@ -252,7 +282,7 @@ class ForecastMetricsApi extends FilterApi
             foreach ($metric['sum_fields'] as $sumField) {
                 $validSumField = $query->getDBManager()->getValidDBName($sumField);
 
-                if (in_array($validSumField, $metric['currencyConvertFields'])) {
+                if (safeInArray($validSumField, $metric['currencyConvertFields'])) {
                     $query->select()->fieldRaw("SUM($validSumField / base_rate) * $systemBaseRate", $validSumField);
                 } else {
                     $query->select()->fieldRaw("SUM($validSumField)", $validSumField);

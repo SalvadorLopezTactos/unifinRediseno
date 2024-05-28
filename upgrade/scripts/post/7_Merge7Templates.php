@@ -62,7 +62,7 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
      */
     protected function loadFile($filename, $module_name, $platform, $viewname)
     {
-        $viewdefs = array();
+        $viewdefs = [];
         include $filename;
         if (empty($viewdefs) || empty($viewdefs[$module_name][$platform]['view'][$viewname]['panels'])) {
             // we do not handle non-panel views for now
@@ -81,8 +81,8 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
      */
     protected function fieldList($panels)
     {
-        $fields = array();
-        $panel_labels = array();
+        $fields = [];
+        $panel_labels = [];
         foreach ($panels as $pindex => $panel) {
             if (empty($panel['fields'])) {
                 continue;
@@ -105,18 +105,18 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
                 } else {
                     $fname = $field;
                 }
-                $fields[$fname] = array("pname" => $pname, "pindex" => $pindex, "findex" => $fieldno, "data" => $field);
+                $fields[$fname] = ['pname' => $pname, 'pindex' => $pindex, 'findex' => $fieldno, 'data' => $field];
             }
         }
 
-        return array($fields, $panel_labels);
+        return [$fields, $panel_labels];
     }
 
     /**
      * Merge view data
      *
      * @param string $filename
-     * @param array  $old_viewdefs
+     * @param array $old_viewdefs
      */
     protected function mergeView($filename, $old_viewdefs)
     {
@@ -129,7 +129,7 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
         // These checks duplicate ones in Merge7, but better safe than sorry
         if (empty($old_viewdefs) || empty($new_viewdefs) || empty($custom_viewdefs)) {
             // defs missing - can't do anything here
-            $this->log("Merge7Templates At least one of three necessary defs are missing... skipping");
+            $this->log('Merge7Templates At least one of three necessary defs are missing... skipping');
 
             return;
         }
@@ -140,7 +140,7 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
         $customDefs = $custom_viewdefs[$module_name][$platform]['view'][$viewname];
         if ($this->defsUnchanged($oldDefs, $newDefs, $customDefs)) {
             // no changes to handle
-            $this->log("Merge7Templates No changes to merge...");
+            $this->log('Merge7Templates No changes to merge...');
 
             return;
         }
@@ -183,18 +183,15 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
 
         // Here we care only for field presence, not for changes in field metadata
         $removed_fields = array_udiff_assoc($old_fields, $new_fields, function () {
-                return 0;
-            }
-        );
+            return 0;
+        });
         $added_fields = array_udiff_assoc($new_fields, $old_fields, function () {
-                return 0;
-            }
-        );
+            return 0;
+        });
         // This may include also added & removed fields, we'll remove them later
         $changed_fields = array_udiff_assoc($new_fields, $old_fields, function ($a, $b) {
-                return $a == $b ? 0 : -1;
-            }
-        );
+            return $a == $b ? 0 : -1;
+        });
 
         // Index custom fields too
         [$custom_fields, $custom_panel_labels] = $this->fieldList(
@@ -204,7 +201,7 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
         if (empty($added_fields) && empty($removed_fields) && empty($changed_fields)) {
             if ($old_panel_labels == $new_panel_labels) {
                 // nothing to do
-                $this->log("Merge7Templates mergePanelDefs No changes to merge... skipping");
+                $this->log('Merge7Templates mergePanelDefs No changes to merge... skipping');
 
                 return $custom_viewdefs;
             } else {
@@ -216,8 +213,8 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
                 );
             }
         }
-        $this->log("Fields added: " . var_export($added_fields, true));
-        $this->log("Fields removed: " . var_export($removed_fields, true));
+        $this->log('Fields added: ' . var_export($added_fields, true));
+        $this->log('Fields removed: ' . var_export($removed_fields, true));
 
         foreach ($added_fields as $field => $data) {
             unset($changed_fields[$field]);
@@ -251,7 +248,7 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
         }
 
         if (!empty($changed_fields)) {
-            $this->log("Fields changed: " . var_export($changed_fields, true));
+            $this->log('Fields changed: ' . var_export($changed_fields, true));
             foreach ($changed_fields as $field => $data) {
                 if (empty($custom_fields[$field]) || empty($old_fields[$field]) || empty($new_fields[$field])) {
                     // Custom has no such field - ignore it
@@ -299,7 +296,7 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
         });
         $cVdefs = $custom_viewdefs[$this->moduleName][$this->clientType]['view'][$this->viewName]['panels'];
         if (!empty($added_panel_labels)) {
-            $this->log("Panel labels added: " . var_export($added_panel_labels, true));
+            $this->log('Panel labels added: ' . var_export($added_panel_labels, true));
             foreach ($added_panel_labels as $pindex => $label) {
                 unset($changed_panel_labels[$pindex]);
                 if (!empty($custom_panel_labels[$pindex])) {
@@ -310,7 +307,7 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
             }
         }
         if (!empty($removed_panel_labels)) {
-            $this->log("Panel labels removed: " . var_export($removed_panel_labels, true));
+            $this->log('Panel labels removed: ' . var_export($removed_panel_labels, true));
             foreach ($removed_panel_labels as $pindex => $label) {
                 unset($changed_panel_labels[$pindex]);
                 if (empty($custom_panel_labels[$pindex])) {
@@ -321,17 +318,21 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
             }
         }
         if (!empty($changed_panel_labels)) {
-            $this->log("Panel labels changed: " . var_export($changed_panel_labels, true));
+            $this->log('Panel labels changed: ' . var_export($changed_panel_labels, true));
             foreach ($changed_panel_labels as $pindex => $label) {
-                if (empty($custom_panel_labels[$pindex]) ||
-                    empty($old_panel_labels[$pindex]) ||
-                    empty($new_panel_labels[$pindex])) {
+                if ($this->hasInvalidViewDefs([
+                    'customPanelLabels' => $custom_panel_labels,
+                    'newPanelLabels' => $new_panel_labels,
+                    'oldPanelLabels' => $old_panel_labels,
+                    'customPanelDefs' => $cVdefs,
+                    'index' => $pindex,
+                ])) {
                     // Custom has no such index - ignore it
                     continue;
                 }
                 // Change only if custom matches old data
                 if ($custom_panel_labels[$pindex] == $old_panel_labels[$pindex]) {
-                    $cVdefs[$pindex]['label'] = $new_panel_labels[$pindex]['label'];
+                    $cVdefs[$pindex]['label'] = $new_panel_labels[$pindex];
                     $this->needSave = true;
                 }
             }
@@ -413,7 +414,7 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
      */
     protected function checkComboFields($field, $data, $old_fields)
     {
-        $needle_list = array();
+        $needle_list = [];
         // If field to check is of type 'fieldset',
         // add each field in the fieldset to the list of fields to check
         // else, only check the field
@@ -503,5 +504,34 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
         }
 
         return $viewdefs;
+    }
+
+    /**
+     * Checks if the viewdefs are able to merge
+     *
+     * @param array $viewdefsOptions
+     * @return bool
+     */
+    private function hasInvalidViewDefs(array $viewdefsOptions): bool
+    {
+        $customPanelLabels = $viewdefsOptions['customPanelLabels'] ?? [];
+        $newPanelLabels = $viewdefsOptions['newPanelLabels'] ?? [];
+        $oldPanelLabels = $viewdefsOptions['oldPanelLabels'] ?? [];
+        $customPanelDefs = $viewdefsOptions['customPanelDefs'];
+        $index = $viewdefsOptions['index'];
+
+        if (empty($customPanelLabels[$index]) || empty($oldPanelLabels[$index]) || empty($newPanelLabels[$index])) {
+            return true;
+        }
+
+        if (!is_array($customPanelDefs) || !is_array($customPanelDefs[$index])) {
+            return true;
+        }
+
+        if (!isset($customPanelDefs[$index])) {
+            return true;
+        }
+
+        return false;
     }
 }

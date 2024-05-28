@@ -1,4 +1,4 @@
-<?PHP
+<?php
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,32 +18,33 @@ class EAPMController extends SugarController
      */
     protected $api;
 
-    var $action_remap = array('detailview'=>'editview', 'DetailView'=>'EditView');
+    public $action_remap = ['detailview' => 'editview', 'DetailView' => 'EditView'];
 
-    var $admin_actions = array('listview', 'index');
+    public $admin_actions = ['listview', 'index'];
 
     //use for check result of Connect
     protected $failed = false;
 
-	public function process() {
-		if(!is_admin($GLOBALS['current_user']) && in_array(strtolower($this->action), $this->admin_actions)) {
-			$this->hasAccess = false;
-		}
-		parent::process();
-	}
+    public function process()
+    {
+        if (!is_admin($GLOBALS['current_user']) && in_array(strtolower($this->action), $this->admin_actions)) {
+            $this->hasAccess = false;
+        }
+        parent::process();
+    }
 
     protected function failed($error)
     {
         SugarApplication::appendErrorMessage($error);
         $GLOBALS['log']->error("Login error: $error");
-        $url = 'index.php?module=EAPM&action=EditView&record='.$this->bean->id;
+        $url = 'index.php?module=EAPM&action=EditView&record=' . $this->bean->id;
 
-        if($this->return_module == 'Import'){
+        if ($this->return_module == 'Import') {
             $url .= "&application={$this->bean->application}&return_module={$this->return_module}&return_action={$this->return_action}";
         } elseif ($this->failed && empty($this->bean->id) && $this->action === 'Save') {
             //Save recently entered data, when creating a new record
-            $redirectArgs = array();
-            foreach (array('name', 'url', 'application') as $key) {
+            $redirectArgs = [];
+            foreach (['name', 'url', 'application'] as $key) {
                 if (!empty($_POST[$key])) {
                     $redirectArgs[$key] = $_POST[$key];
                 }
@@ -61,13 +62,13 @@ class EAPMController extends SugarController
             unset($_POST['password']);
         }
         parent::pre_save();
-        $this->api = ExternalAPIFactory::loadAPI($this->bean->application,true);
-        if(empty($this->api)) {
+        $this->api = ExternalAPIFactory::loadAPI($this->bean->application, true);
+        if (empty($this->api)) {
             return $this->failed(translate('LBL_AUTH_UNSUPPORTED', $this->bean->module_dir));
         }
-        if(empty($this->bean->id)){
-            $eapmBean = EAPM::getLoginInfo($this->bean->application,true);
-            if($eapmBean){
+        if (empty($this->bean->id)) {
+            $eapmBean = EAPM::getLoginInfo($this->bean->application, true);
+            if ($eapmBean) {
                 SugarApplication::appendErrorMessage(translate('LBL_APPLICATION_FOUND_NOTICE', $this->bean->module_dir));
                 $this->bean->id = $eapmBean->id;
             }
@@ -88,7 +89,8 @@ class EAPMController extends SugarController
         }
     }
 
-    public function action_save(){
+    public function action_save()
+    {
         //Check result of the Connect
         if (!$this->failed) {
             $this->bean->save(!empty($this->bean->notify_on_save));
@@ -99,48 +101,47 @@ class EAPMController extends SugarController
     {
         global $current_user;
 
-        if(!$this->bean->deleted) {
+        if (!$this->bean->deleted) {
             // do not load bean here since password is already encoded
-            if ( $this->api->authMethod != 'oauth' ) {
+            if ($this->api->authMethod != 'oauth') {
                 // OAuth beans have to be handled specially.
-                
+
                 $reply = $this->api->checkLogin();
-                if ( !$reply['success'] ) {
+                if (!$reply['success']) {
                     return $this->failed(translate('LBL_AUTH_ERROR', $this->bean->module_dir));
                 } else {
                     $this->bean->validated();
                 }
             }
         }
-        if($this->return_module == 'Users'){
+        if ($this->return_module == 'Users') {
             $this->return_action = 'EditView';
         }
         parent::post_save();
 
-        if($this->return_module == 'Import'){
-            $this->set_redirect("index.php?module=Import&action=Step1&import_module=". $this->return_action . "&application=" . $this->bean->application);
+        if ($this->return_module == 'Import') {
+            $this->set_redirect('index.php?module=Import&action=Step1&import_module=' . $this->return_action . '&application=' . $this->bean->application);
         }
-        if($this->module == 'EAPM') {
-            $this->set_redirect('index.php?module=Users&action=EditView&record=' . $current_user->id);
+        if ($this->module == 'EAPM') {
+            $this->set_redirect('#Users/' . $current_user->id);
         }
         // Override the redirect location to add the hash
-        $this->redirect_url = $this->redirect_url.'#tab5';
-        if ( $this->api->authMethod == 'oauth' && !$this->bean->deleted ) {
+        $this->redirect_url = $this->redirect_url . '#tab5';
+        if ($this->api->authMethod == 'oauth' && !$this->bean->deleted) {
             // It's OAuth, we have to handle this specially.
             // We need to create a new window to handle the OAuth, and redirect this window back to the edit view
             // So we will handle that in javascript.
-            $popup_warning_msg = string_format($GLOBALS['mod_strings']['LBL_ERR_POPUPS_DISABLED'], array($_SERVER['HTTP_HOST']) );
-            echo('<script src="'.getJSPath('modules/EAPM/EAPMEdit.js').'" type="text/javascript"></script><script type="text/javascript">EAPMPopupAndRedirect("index.php?module=EAPM&action=oauth&record='.$this->bean->id.'", "'.$this->redirect_url.'", \''.$popup_warning_msg.'\'); </script>');
+            $popup_warning_msg = string_format($GLOBALS['mod_strings']['LBL_ERR_POPUPS_DISABLED'], [$_SERVER['HTTP_HOST']]);
+            echo('<script src="' . getJSPath('modules/EAPM/EAPMEdit.js') . '" type="text/javascript"></script><script type="text/javascript">EAPMPopupAndRedirect("index.php?module=EAPM&action=oauth&record=' . $this->bean->id . '", "' . $this->redirect_url . '", \'' . $popup_warning_msg . '\'); </script>');
 
             // To prevent the normal handler from issuing a header call and destroying our neat little javascript we'll
             // end right here.
             sugar_cleanup(true);
         } elseif ($this->api->authMethod == 'oauth2' && !$this->bean->deleted) {
-
             $client = $this->api->getClient();
             $loginUrl = $client->createAuthUrl();
 
-            echo '<script src="' . getJSPath('modules/EAPM/EAMPOauth.js') . '" type="text/javascript"></script><script type="text/javascript">EAMPOauth.startOauthAuthentication("' . $loginUrl . '","index.php?module=EAPM&action=oauth&record='.$this->bean->id . '");</script>';
+            echo '<script src="' . getJSPath('modules/EAPM/EAMPOauth.js') . '" type="text/javascript"></script><script type="text/javascript">EAMPOauth.startOauthAuthentication("' . $loginUrl . '","index.php?module=EAPM&action=oauth&record=' . $this->bean->id . '");</script>';
 
             // To prevent the normal handler from issuing a header call and destroying our neat little javascript we'll
             // end right here.
@@ -150,16 +151,16 @@ class EAPMController extends SugarController
 
     protected function action_oauth()
     {
-        if(empty($this->bean->id)) {
+        if (empty($this->bean->id)) {
             return $this->set_redirect('index.php');
         }
-		if(!$this->bean->ACLAccess('save')){
-			ACLController::displayNoAccess(true);
-			sugar_cleanup(true);
-			return true;
-		}
-        if(empty($_REQUEST['oauth_error'])) {
-            $this->api = ExternalAPIFactory::loadAPI($this->bean->application,true);
+        if (!$this->bean->ACLAccess('save')) {
+            ACLController::displayNoAccess(true);
+            sugar_cleanup(true);
+            return true;
+        }
+        if (empty($_REQUEST['oauth_error'])) {
+            $this->api = ExternalAPIFactory::loadAPI($this->bean->application, true);
             $this->api->getConnector();
             $source = $this->api->connector_source;
 
@@ -174,82 +175,83 @@ class EAPMController extends SugarController
             }
 
             $reply = $this->api->checkLogin($this->bean);
-            if ( !$reply['success'] ) {
+            if (!$reply['success']) {
                 return $this->failed(translate('LBL_AUTH_ERROR', $this->bean->module_dir));
             } else {
                 $this->bean->validated();
             }
         }
-        
+
         // This is a tweak so that we can automatically close windows if requested by the external account system
-        if ( isset($_REQUEST['closeWhenDone']) && $_REQUEST['closeWhenDone'] == 1 ) {
+        if (isset($_REQUEST['closeWhenDone']) && $_REQUEST['closeWhenDone'] == 1) {
             $callback = $this->request->getValidInputRequest(
                 'callbackFunction',
-                array(
-                    'Assert\Choice' => array(
-                        'choices' => array(
+                [
+                    'Assert\Choice' => [
+                        'choices' => [
                             'hideExternalDiv',
                             'reload',
                             'close',
                             '',
-                        )
-                    )
-                ),
+                        ],
+                    ],
+                ],
                 ''
             );
 
             $application = $this->request->getValidInputRequest(
                 'application',
-                array(
-                    'Assert\Choice' => array(
-                        'choices' => array_keys(ExternalAPIFactory::loadFullAPIList())
-                    )
-                )
+                [
+                    'Assert\Choice' => [
+                        'choices' => array_keys(ExternalAPIFactory::loadFullAPIList()),
+                    ],
+                ]
             );
 
             if (!empty($callback) && !empty($application)) {
                 $js = printf(
-                    "<script type=\"text/javascript\">window.opener.%s(\"%s\"); window.close();</script>",
+                    '<script type="text/javascript">window.opener.%s("%s"); window.close();</script>',
                     $callback,
                     $application
                 );
-            }else if(!empty($_REQUEST['refreshParentWindow'])){
+            } elseif (!empty($_REQUEST['refreshParentWindow'])) {
                 $js = '<script type="text/javascript">window.opener.location.reload();window.close();</script>';
-            }else{
+            } else {
                 $js = '<script type="text/javascript">window.close();</script>';
             }
             echo($js);
             return;
-        }            
-        
+        }
+
         // redirect to detail view, as in save
         return parent::post_save();
     }
 
-    protected function pre_QuickSave(){
-        if(!empty($_REQUEST['application'])){
-            $eapmBean = EAPM::getLoginInfo($_REQUEST['application'],true);
+    protected function pre_QuickSave()
+    {
+        if (!empty($_REQUEST['application'])) {
+            $eapmBean = EAPM::getLoginInfo($_REQUEST['application'], true);
             if (!$eapmBean) {
                 $this->bean->application = $_REQUEST['application'];
                 $this->bean->assigned_user_id = $GLOBALS['current_user']->id;
-            }else{
+            } else {
                 $this->bean = $eapmBean;
             }
             $this->pre_save();
-                    
-        }else{
-            sugar_die("Please pass an application name.");
+        } else {
+            sugar_die('Please pass an application name.');
         }
     }
-    
-	public function action_QuickSave(){
-        $this->api = ExternalAPIFactory::loadAPI($this->bean->application,true);
+
+    public function action_QuickSave()
+    {
+        $this->api = ExternalAPIFactory::loadAPI($this->bean->application, true);
         $this->action_save();
 
-        if ( $this->api->authMethod == 'oauth' ) {
+        if ($this->api->authMethod == 'oauth') {
             $this->action_oauth();
         }
-	}
+    }
 
     /** {@inheritdoc} */
     protected function action_delete()
@@ -285,20 +287,23 @@ class EAPMController extends SugarController
         $this->view = 'dropboxoauth2redirect';
     }
 
-    protected function post_QuickSave(){
+    protected function post_QuickSave()
+    {
         $this->post_save();
     }
 
-    protected function pre_Reauthenticate(){
+    protected function pre_Reauthenticate()
+    {
         $this->pre_save();
     }
 
-    protected function action_Reauthenticate(){
-        if ( $this->api->authMethod == 'oauth' ) {
+    protected function action_Reauthenticate()
+    {
+        if ($this->api->authMethod == 'oauth') {
             // OAuth beans have to be handled specially.
-            
+
             $reply = $this->api->checkLogin();
-            if ( !$reply['success'] ) {
+            if (!$reply['success']) {
                 return $this->failed(translate('LBL_AUTH_ERROR', $this->bean->module_dir));
             } else {
                 $this->bean->validated();
@@ -309,32 +314,33 @@ class EAPMController extends SugarController
         }
     }
 
-    protected function post_Reauthenticate(){
+    protected function post_Reauthenticate()
+    {
         $this->post_save();
     }
 
     protected function action_FlushFileCache()
     {
         $api = ExternalAPIFactory::loadAPI($_REQUEST['api']);
-        if ( $api == false ) {
+        if ($api == false) {
             echo 'FAILED';
             return;
         }
 
-        if ( method_exists($api,'loadDocCache') ) {
+        if (method_exists($api, 'loadDocCache')) {
             $api->loadDocCache(true);
         }
 
         echo $GLOBALS['mod_strings']['LBL_SUCCESS'];
     }
 
-    protected function remapAction() {
-        if ( $this->do_action == 'DetailView' ) {
+    protected function remapAction()
+    {
+        if ($this->do_action == 'DetailView') {
             $this->do_action = 'EditView';
             $this->action = 'EditView';
         }
-        
+
         parent::remapAction();
     }
-
 }

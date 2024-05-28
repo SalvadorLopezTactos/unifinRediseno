@@ -30,9 +30,11 @@
         {{/each}}
     </h4>
 {{else}}
-    <h4 data-toggle="dashlet" class="dashlet-title flex-grow m-0 ml-1.5 overflow-hidden" rel="tooltip" data-placement="bottom" data-original-title="{{meta.label}}">{{meta.label}}</h4>
+    <h4 data-toggle="dashlet" class="dashlet-title flex-grow m-0 ml-1.5 truncate overflow-hidden" rel="tooltip" data-bs-placement="bottom" data-original-title="{{meta.label}}">
+        {{meta.label}}{{#if modulesNumber}} ({{modulesNumber}}){{/if}}
+    </h4>
 {{/if}}
-<div class="btn-toolbar ml-4 my-0 pl-0">
+<div class="btn-toolbar !ml-4 !my-0 !pl-0">
 {{#each buttons}}
     {{#if type}}
         {{field ../../this model=../../this.model}}
@@ -42,19 +44,22 @@
                 {{#if (or ../../../this.canEdit alwaysOnDisplay)}}
                     <button
                         type="button"
-                        data-toggle="dropdown"
-                        rel="tooltip"
-                        title="{{#if custom_dashlet_label}}{{str custom_dashlet_label}}{{else}}{{str "LBL_DASHLET_CONFIGURE"}}{{/if}}"
+                        data-bs-toggle="dropdown"
                         class="btn btn-invisible dropdown-toggle"
-                        data-placement="bottom"
                         aria-label="{{#if custom_dashlet_label}}{{str custom_dashlet_label}}{{else}}{{str "LBL_DASHLET_CONFIGURE"}}{{/if}}"
                         aria-haspopup="true"
                         aria-expanded="false"
                     >
                         <i data-action="loading" class="sicon{{#if custom_dashlet_icon}} {{custom_dashlet_icon}}{{else}} sicon-settings{{/if}}" track="click:dashletToolbarCog"></i>
+
+                        <span class="absolute h-full w-full top-0 left-0" rel="tooltip"
+                              data-bs-placement="bottom"
+                              {{#if custom_dashlet_label}}title="{{str custom_dashlet_label}}"
+                              {{else}}title="{{str "LBL_DASHLET_CONFIGURE"}}"{{/if}}>
+                        </span>
                     </button>
 
-                    <ul class="dropdown-menu left" role="menu">
+                    <ul class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl left" role="menu">
                         {{#each dropdown_buttons}}
                             {{#if (or ../../../../../this.canEdit this.alwaysOnDisplay)}}
                                 <li role="menuitem">{{field ../../../../../../this model=../../../../../../this.model}}</li>

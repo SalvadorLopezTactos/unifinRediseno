@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('content-editable', function (Y, NAME) {
 
     /*jshint maxlen: 500 */
@@ -800,4 +793,5 @@ YUI.add('content-editable', function (Y, NAME) {
 
     Y.Plugin.ContentEditable = ContentEditable;
 
-}, '3.15.0', {"requires": ["node-base", "editor-selection", "stylesheet", "plugin"]});
+
+}, '3.18.1', {"requires": ["node-base", "editor-selection", "stylesheet", "plugin"]});

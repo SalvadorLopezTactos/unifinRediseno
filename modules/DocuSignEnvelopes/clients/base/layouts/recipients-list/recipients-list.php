@@ -11,7 +11,7 @@
  */
 
 $viewdefs['DocuSignEnvelopes']['base']['layout']['recipients-list'] = [
-    'css_class'=> 'flex-list-layout flex flex-column h-full',
+    'css_class' => 'flex-list-layout flex flex-col group/records h-full overflow-hidden',
     'components' => [
         [
             'layout' => [
@@ -23,14 +23,14 @@ $viewdefs['DocuSignEnvelopes']['base']['layout']['recipients-list'] = [
                         'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8 flex flex-column',
+                            'css_class' => 'main-pane span8 flex flex-col overflow-hidden',
                             'components' => [
                                 [
                                     'view' => 'recipient-selection-headerpane',
                                 ],
                                 [
                                     'layout' => [
-                                        'css_class' => 'flex flex-column h-full',
+                                        'css_class' => 'flex flex-col h-full',
                                         'type' => 'filterpanel',
                                         'availableToggles' => [],
                                         'filter_options' => [
@@ -51,7 +51,7 @@ $viewdefs['DocuSignEnvelopes']['base']['layout']['recipients-list'] = [
                                                         [
                                                             'view' => [
                                                                 'name' => 'list-pagination',
-                                                                'css_class' => 'flex-table-pagination',
+                                                                'css_class' => 'flex-table-pagination absolute bottom-0 bg-[--primary-content-background] w-full z-30',
                                                             ],
                                                         ],
                                                     ],

@@ -24,12 +24,12 @@ interface ConfigurationInterface
      *
      * @return bool
      */
-    public function isEnabled() : bool;
+    public function isEnabled(): bool;
 
     /**
      * Returns the Sugar Connect webhook client.
      *
      * @return Client
      */
-    public function getClient() : Client;
+    public function getClient(): Client;
 }

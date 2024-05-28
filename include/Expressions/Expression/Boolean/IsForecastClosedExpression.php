@@ -72,7 +72,7 @@ JS;
      */
     public static function getParameterTypes()
     {
-        return array('string');
+        return ['string'];
     }
 
     /**

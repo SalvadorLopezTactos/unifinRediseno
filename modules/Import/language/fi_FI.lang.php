@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Tiedosto luettu',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Tuotu tietue osallistuu prosessiin, eikä sitä voi muokata, koska prosessi on lukinnut osan kentistä muokkausta varten.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'riviä ei tuotu virheestä johtuen',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Jos käyttäjää ei ole, käytä nykyistä käyttäjää',
     'LBL_SHOW_HIDDEN' => 'Näytä kentät, jotka eivät ole normaalisti tuotavia',
     'LBL_UPDATE_RECORDS' => 'Päivitä olemassa olevat tietueet tuomisen sijaan (ei kumottavissa)',
-    'LBL_TEST'=> 'Testituonti (älä tallenna tai muuta dataa)',
+    'LBL_TEST' => 'Testituonti (älä tallenna tai muuta dataa)',
     'LBL_TRUNCATE_TABLE' => 'Tyhjennä taulu ennen tuontia (poistaa kaikki tietueet)',
     'LBL_RELATED_ACCOUNTS' => 'Älä luo liittyviä tilejä',
     'LBL_NO_DATECHECK' => 'Ohita päivämäärän tarkastus (nopeampi, mutta epäonnistuu, jos jokin päivämäärä on väärä)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Virheellinen kokonaislukuarvo',
     'LBL_ERROR_INVALID_NUM' => 'Virheellinen numeerinen arvo',
     'LBL_ERROR_INVALID_TIME' => 'Virheellinen aika',
-    'LBL_ERROR_INVALID_EMAIL'=>'Virheellinen sähköpostiosoite',
-    'LBL_ERROR_INVALID_BOOL'=>'Virheellinen arvo (pitäisi olla 1 tai 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Virheellinen päivämäärä',
-    'LBL_ERROR_INVALID_USER'=>'Virheellinen käyttäjänimi tai ID',
+    'LBL_ERROR_INVALID_EMAIL' => 'Virheellinen sähköpostiosoite',
+    'LBL_ERROR_INVALID_BOOL' => 'Virheellinen arvo (pitäisi olla 1 tai 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Virheellinen päivämäärä',
+    'LBL_ERROR_INVALID_USER' => 'Virheellinen käyttäjänimi tai ID',
     'LBL_ERROR_INVALID_TEAM' => 'Virheellinen tiimin nimi tai ID',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Virheellinen asiakkaan nimi tai ID',
     'LBL_ERROR_INVALID_RELATE' => 'Virheellinen relaatio-kenttä',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'ei ole olemassa tai se ei ole kirjoitettavissa',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Tiedostoa ei saatu ladattua. Saattaa olla, että asetus ‘upload_max_filesize’ php.ini-tiedostossasi on liian pieni. Katso myös ‘post_max_size’ -asetus samassa tiedostossa.',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Tiedosto on liian suuri. Maksimi on',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'tavua. Muuta muuttujaa $sugar_config[&#39;upload_maxsize&#39;] tiedostossa config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Tavua. Muuta $sugar_config[&#39;upload_maxsize&#39;] kohteessa config.php',
     'LBL_MODULE_NAME' => 'Tuonti',
     'LBL_MODULE_NAME_SINGULAR' => 'Tuo',
     'LBL_TRY_AGAIN' => 'Yritä uudelleen',
     'LBL_START_OVER' => 'Aloita alusta',
     'LBL_ERROR' => 'Virhe',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Tuotava tiedosto sisältää {0} riviä. Optimaalinen rivien lukumäärä on {1}. Suuri rivimäärä voi hidastaa tuontiprosessia. Napsauta OK jatkaaksesi tuontia. Napsauta Peruuta tarkistaaksesi ja ladataksesi tiedoston myöhemmin uudelleen.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Et voi tuoda järjestelmänvalvoja-käyttäjää',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Et voi tuoda järjestelmänvalvoja-käyttäjää',
     'ERR_REPORT_LOOP' => 'Järjestelmä havaitsi raportointisilmukan. Käyttäjä ei voi raportoida itselleen, eivätkä mitkään hänen managereistaan voi raportoida hänelle.',
     'ERR_MULTIPLE' => 'Useita sarakkeita on määritelty samalla kentän nimellä.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Syötä tieto vaadittuihin kenttiin:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Tuotavassa tiedostossa ei ole laisinkaan rivejä.  Varmista, ettei tiedostossa ole tyhjiä rivejä ja yritä uudelleen.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Tuotava tiedosto on jo käsitelty tai sitä ei löydy',
     'LBL_SUCCESS' => 'Onnistuneet:',
-	'LBL_FAILURE' => 'Tuonti epäonnistui:',
+    'LBL_FAILURE' => 'Tuonti epäonnistui:',
     'LBL_SUCCESSFULLY' => 'Tuotiin&nbsp;',
     'LBL_LAST_IMPORT_UNDONE' => 'Tuonti peruutettiin.',
     'LBL_NO_IMPORT_TO_UNDO' => 'Ei tuontia, jota kumota.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Tuo lisää',
     'LBL_FINISHED' => 'Valmiit',
     'LBL_UNDO_LAST_IMPORT' => 'Kumoa tuonti',
-    'LBL_LAST_IMPORTED'=>'Luotu',
+    'LBL_LAST_IMPORTED' => 'Luotu',
     'ERR_MULTIPLE_PARENTS' => 'Voit määritellä vain yhden vanhemman ID:n',
     'LBL_DUPLICATES' => 'Duplikaatteja löytyi',
     'LNK_DUPLICATE_LIST' => 'Lataa lista duplikaateista',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Piilota muistiot',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Näytä esikatselusarakkeet',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Piilota esikatselusarakkeet',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Tarkista kaksoiskappaleet käyttäen operaattoria:',
     'LBL_SAVE_MAPPING_AS' => 'Voit tallentaa tuontiasetukset, anna nimi tallennetuille asetuksille:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Heittomerkki (&nbsp;&#39;&nbsp;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Lainausmerkki',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Osoittaaksesi uudet tietueet jollekin muulle kuin oletustiimillesi, käytä Oletusarvo-saraketta valitaksesi toisen tiimin.',
     'LBL_SIGN_IN_HELP' => 'Mahdollistaaksesi tämän palvelun käytön, kirjaudu sisään Ulkoiset tilit -kohdassa Käyttäjän asetukset -sivulla.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Yritetään käsitellä sähköpostiosoitteita Beanissa, joka ei tue niitä.",
-);
+];

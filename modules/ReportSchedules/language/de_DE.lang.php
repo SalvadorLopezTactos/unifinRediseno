@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Berichtzeitpläne',
     'LBL_MODULE_NAME_SINGULAR' => 'Berichtzeitplan',
     'LBL_REPORT_NAME' => 'Bericht',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Dateityp(en)',
     'LBL_EMBED_REPORT' => 'Bericht in E-Mail einfügen',
     'LBL_EMBED_REPORT_INFO' => 'Hinweis: Weist der Bericht mehr als 200 Zeilen auf, wird er als CSV-Datei angehängt.',
-);
+];

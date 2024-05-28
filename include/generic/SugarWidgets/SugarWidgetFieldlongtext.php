@@ -11,10 +11,6 @@
  */
 
 
-
 class SugarWidgetFieldLongtext extends SugarWidgetFieldText
 {
- 
 }
-
-?>

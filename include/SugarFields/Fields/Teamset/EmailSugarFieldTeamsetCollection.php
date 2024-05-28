@@ -19,8 +19,8 @@
 
 require_once 'modules/Teams/TeamSetManager.php';
 
-class EmailSugarFieldTeamsetCollection extends ViewSugarFieldTeamsetCollection {
-
+class EmailSugarFieldTeamsetCollection extends ViewSugarFieldTeamsetCollection
+{
     /**
      * @var mixed
      */
@@ -32,31 +32,31 @@ class EmailSugarFieldTeamsetCollection extends ViewSugarFieldTeamsetCollection {
         $module = null;
         parent::__construct(false);
 
-    	$this->tpl_path = SugarAutoLoader::existingCustomOne('include/SugarFields/Fields/Teamset/TeamsetCollectionEmailView.tpl');
-    	//$this->module_dir = $module;
+        $this->tpl_path = SugarAutoLoader::existingCustomOne('include/SugarFields/Fields/Teamset/TeamsetCollectionEmailView.tpl');
+        //$this->module_dir = $module;
         $this->bean_id = $bean->id;
         $this->form_name = $form_name;
         $this->customMethod = $customMethod;
 
-    	$this->bean = $bean;
+        $this->bean = $bean;
 
-    	if(empty($this->bean)) {
-    	   echo "Unable to load module {$module}";
-    	   return;
-    	}
+        if (empty($this->bean)) {
+            echo "Unable to load module {$module}";
+            return;
+        }
 
-    	//Initialize displayParams
-		$this->displayParams['formName'] = $this->form_name;
-		$this->displayParams['primaryChecked'] = true;
+        //Initialize displayParams
+        $this->displayParams['formName'] = $this->form_name;
+        $this->displayParams['primaryChecked'] = true;
 
-    	$this->vardef = $field_defs['team_name'];
-    	$this->name = $this->vardef['name'];
-		$this->related_module = 'Teams';
+        $this->vardef = $field_defs['team_name'];
+        $this->name = $this->vardef['name'];
+        $this->related_module = 'Teams';
         $this->value_name = 'team_set_id_values';
         $this->numFields = 1;
         $this->ss = new Sugar_Smarty();
-        $this->extra_var = array();
-        $this->field_to_name_array = array();
+        $this->extra_var = [];
+        $this->field_to_name_array = [];
     }
 
     /*
@@ -65,16 +65,16 @@ class EmailSugarFieldTeamsetCollection extends ViewSugarFieldTeamsetCollection {
      * Retrieve the related module and load the bean and the relationship
      * call retrieve values()
      */
-    function setup()
+    public function setup()
     {
         $this->related_module = 'Teams';
         $this->value_name = 'team_set_id_values';
         $this->vardef['name'] = $this->name;
-        $secondaries = array();
+        $secondaries = [];
         $primary = false;
-        $this->bean->{$this->value_name} = array('role_field' => 'team_name');
+        $this->bean->{$this->value_name} = ['role_field' => 'team_name'];
         if (!empty($this->bean->team_set_id)) {
-            $selectedTeamIds = array();
+            $selectedTeamIds = [];
             if (!empty($this->bean->acl_team_set_id)) {
                 $selectedTeamIds = array_map(function ($el) {
                     return $el['id'];
@@ -85,21 +85,21 @@ class EmailSugarFieldTeamsetCollection extends ViewSugarFieldTeamsetCollection {
                 if (empty($primary) && $this->bean->team_id == $row['id']) {
                     $this->bean->{$this->value_name} = array_merge(
                         $this->bean->{$this->value_name},
-                        array(
-                            'primary' => array(
+                        [
+                            'primary' => [
                                 'id' => $row['id'],
                                 'name' => $row['display_name'],
                                 'selected' => in_array($row['id'], $selectedTeamIds),
-                            )
-                        )
+                            ],
+                        ]
                     );
                     $primary = true;
                 } else {
-                    $secondaries['secondaries'][] = array(
+                    $secondaries['secondaries'][] = [
                         'id' => $row['id'],
                         'name' => $row['display_name'],
                         'selected' => in_array($row['id'], $selectedTeamIds),
-                    );
+                    ];
                 }
             } //foreach
         }
@@ -113,81 +113,83 @@ class EmailSugarFieldTeamsetCollection extends ViewSugarFieldTeamsetCollection {
      * display
      * Display the widget
      */
-    function get_code($includeMassUpdateField = FALSE) {
-		$this->setup();
+    public function get_code($includeMassUpdateField = false)
+    {
+        $this->setup();
         $this->ss->assign('displayParams', $this->displayParams);
-        $this->ss->assign('vardef',$this->vardef);
-        $this->ss->assign('module',$this->related_module);
+        $this->ss->assign('vardef', $this->vardef);
+        $this->ss->assign('module', $this->related_module);
 
-        if(!empty($this->bean)){
-      	   $this->ss->assign('values', $this->bean->{$this->value_name});
+        if (!empty($this->bean)) {
+            $this->ss->assign('values', $this->bean->{$this->value_name});
         }
-        $this->ss->assign('includeMassUpdateField',$includeMassUpdateField);
-        $this->ss->assign('hideShowHideButton',$this->hideShowHideButton);
+        $this->ss->assign('includeMassUpdateField', $includeMassUpdateField);
+        $this->ss->assign('hideShowHideButton', $this->hideShowHideButton);
         $this->ss->assign('showSelectButton', $this->showSelectButton);
         $this->ss->assign('APP', $GLOBALS['app_strings']);
         $this->ss->assign('isTBAEnabled', TeamBasedACLConfigurator::isAccessibleForModule($this->bean->module_dir));
         $this->ss->assign('CUSTOM_METHOD', $this->customMethod);
-        $this->ss->assign("USER_ID", (!empty($this->user_id) ? $this->user_id : ''));
+        $this->ss->assign('USER_ID', (!empty($this->user_id) ? $this->user_id : ''));
         $this->ss->assign('quickSearchCode', $this->createQuickSearchCode());
-		$this->process();
-		return $this->display();
+        $this->process();
+        return $this->display();
     }
 
-	function getClassicViewQS() {
-		return $this->createQuickSearchCode();
-	}
+    public function getClassicViewQS()
+    {
+        return $this->createQuickSearchCode();
+    }
 
 
     /*
      * Create the quickSearch code for the collection field.
      * return the javascript code which define sqs_objects.
      */
-    function createQuickSearchCode($returnAsJavascript=true){
-        $sqs_objects = array();
+    public function createQuickSearchCode($returnAsJavascript = true)
+    {
+        $sqs_objects = [];
         $qsd = QuickSearchDefaults::getQuickSearchDefaults();
         $qsd->setFormName($this->form_name);
-        for($i=0; $i<$this->numFields; $i++) {
+        for ($i = 0; $i < $this->numFields; $i++) {
             $name1 = "{$this->form_name}_{$this->name}_collection_{$i}";
             $sqs_objects[$name1] = $qsd->getQSParent($this->related_module);
-            $sqs_objects[$name1]['populate_list'] = array("{$this->vardef['name']}_collection_{$i}", "id_{$this->vardef['name']}_collection_{$i}");
-            $sqs_objects[$name1]['field_list'] = array('name', 'id');
+            $sqs_objects[$name1]['populate_list'] = ["{$this->vardef['name']}_collection_{$i}", "id_{$this->vardef['name']}_collection_{$i}"];
+            $sqs_objects[$name1]['field_list'] = ['name', 'id'];
 
-            if(!empty($this->user_id)) {
- 				$sqs_objects[$name1]['conditions'][] = array('name'=>'user_id', 'value'=>$this->user_id);
+            if (!empty($this->user_id)) {
+                $sqs_objects[$name1]['conditions'][] = ['name' => 'user_id', 'value' => $this->user_id];
             }
 
-            if(!empty($this->customMethod)) {
+            if (!empty($this->customMethod)) {
                 $sqs_objects[$name1]['method'] = $this->customMethod;
-        	}
+            }
         }
 
         $id = "{$this->form_name}_{$this->name}_collection_0";
 
-        if(!empty($sqs_objects) && count($sqs_objects) > 0) {
-            foreach($sqs_objects[$id]['field_list'] as $k=>$v){
+        if (!empty($sqs_objects) && safeCount($sqs_objects) > 0) {
+            foreach ($sqs_objects[$id]['field_list'] as $k => $v) {
                 $this->field_to_name_array[$v] = $sqs_objects[$id]['populate_list'][$k];
             }
-            if($returnAsJavascript){
-	            $quicksearch_js = '<script language="javascript">';
-	            $quicksearch_js.= "if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}";
+            if ($returnAsJavascript) {
+                $quicksearch_js = '<script language="javascript">';
+                $quicksearch_js .= "if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}";
 
-	            foreach($sqs_objects as $sqsfield=>$sqsfieldArray){
-	               $quicksearch_js .= "sqs_objects['$sqsfield']={$this->json->encode($sqsfieldArray)};";
-	            }
+                foreach ($sqs_objects as $sqsfield => $sqsfieldArray) {
+                    $quicksearch_js .= "sqs_objects['$sqsfield']={$this->json->encode($sqsfieldArray)};";
+                }
 
-	            return $quicksearch_js .= '</script>';
-            }else{
-            	return $sqs_objects;
+                return $quicksearch_js .= '</script>';
+            } else {
+                return $sqs_objects;
             }
-       }
-       return '';
+        }
+        return '';
     }
 
 
-    function process() {
+    public function process()
+    {
         $this->process_editview();
     }
-
 }
-

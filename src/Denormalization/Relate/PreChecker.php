@@ -150,7 +150,7 @@ final class PreChecker
             return $yValues[0];
         }
 
-        $size = is_countable($xValues) ? count($xValues) : 0;
+        $size = safeCount($xValues);
         $minDelta = null;
         $firstI = 0;
         $secondI = 0;

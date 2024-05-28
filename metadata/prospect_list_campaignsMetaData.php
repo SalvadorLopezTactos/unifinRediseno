@@ -10,58 +10,58 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['prospect_list_campaigns'] = array(
+$dictionary['prospect_list_campaigns'] = [
     'table' => 'prospect_list_campaigns',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'prospect_list_id' => array(
+        ],
+        'prospect_list_id' => [
             'name' => 'prospect_list_id',
             'type' => 'id',
-        ),
-        'campaign_id' => array(
+        ],
+        'campaign_id' => [
             'name' => 'campaign_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'prospect_list_campaignspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_cam_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'campaign_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_prospect_list_campaigns',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'prospect_list_id',
                 'campaign_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'prospect_list_campaigns' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'prospect_list_campaigns' => [
             'lhs_module' => 'ProspectLists',
             'lhs_table' => 'prospect_lists',
             'lhs_key' => 'id',
@@ -72,6 +72,6 @@ $dictionary['prospect_list_campaigns'] = array(
             'join_table' => 'prospect_list_campaigns',
             'join_key_lhs' => 'prospect_list_id',
             'join_key_rhs' => 'campaign_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

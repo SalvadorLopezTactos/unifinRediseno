@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('editor-selection', function (Y, NAME) {
 
     /**
@@ -895,7 +888,11 @@ YUI.add('editor-selection', function (Y, NAME) {
             node = Y.Node.getDOMNode(node);
             var range = this.createRange();
             if (range.selectNode) {
-                range.selectNode(node);
+                try {
+                    range.selectNode(node);
+                } catch (err) {
+                    // Ignore selection errors like INVALID_NODE_TYPE_ERR
+                }
                 this._selection.removeAllRanges();
                 this._selection.addRange(range);
                 if (collapse) {
@@ -934,7 +931,7 @@ YUI.add('editor-selection', function (Y, NAME) {
         * @return {Node}
         */
         getCursor: function() {
-            return Y.EditorSelection.ROOT.all('#' + Y.EditorSelection.CURID);
+            return Y.EditorSelection.ROOT.all('.' + Y.EditorSelection.CURID).get('parentNode');
         },
         /**
         * Remove the cursor placeholder from the DOM.
@@ -944,9 +941,8 @@ YUI.add('editor-selection', function (Y, NAME) {
         */
         removeCursor: function(keep) {
             var cur = this.getCursor();
-            if (cur) {
+            if (cur && cur.remove) {
                 if (keep) {
-                    cur.removeAttribute('id');
                     cur.set('innerHTML', '<br class="yui-cursor">');
                 } else {
                     cur.remove();
@@ -1027,4 +1023,4 @@ YUI.add('editor-selection', function (Y, NAME) {
 
 
 
-}, '3.15.0', {"requires": ["node"]});
+}, '3.18.1', {"requires": ["node"]});

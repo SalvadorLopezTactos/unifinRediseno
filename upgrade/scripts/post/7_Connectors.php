@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Update connectors & refresh connector metadata files
  */
@@ -19,8 +20,8 @@ class SugarUpgradeConnectors extends UpgradeScript
 
     public function run()
     {
-        require_once('include/connectors/utils/ConnectorUtils.php');
-        if(!ConnectorUtils::updateMetaDataFiles()) {
+        require_once 'include/connectors/utils/ConnectorUtils.php';
+        if (!ConnectorUtils::updateMetaDataFiles()) {
             $this->log('Cannot update metadata files for connectors');
         }
 

@@ -13,7 +13,6 @@
 
 class SugarJobKBContentUpdateArticles implements RunnableSchedulerJob
 {
-
     /**
      * @var $job Job object.
      */
@@ -78,7 +77,7 @@ class SugarJobKBContentUpdateArticles implements RunnableSchedulerJob
     protected function getExpiredArticles()
     {
         $sq = new SugarQuery();
-        $sq->select(array('id'));
+        $sq->select(['id']);
         $sq->from(BeanFactory::newBean('KBContents'));
         $sq->where()
             ->in('status', KBContent::getPublishedStatuses())
@@ -94,7 +93,7 @@ class SugarJobKBContentUpdateArticles implements RunnableSchedulerJob
     protected function getApprovedArticles()
     {
         $sq = new SugarQuery();
-        $sq->select(array('id'));
+        $sq->select(['id']);
         $sq->from(BeanFactory::newBean('KBContents'));
         $sq->where()
             ->equals('status', KBContent::ST_APPROVED)

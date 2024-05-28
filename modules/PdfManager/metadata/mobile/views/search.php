@@ -11,15 +11,15 @@
  */
 
 
-$searchdefs['PdfManager'] = array(
-    'templateMeta' => array(
+$searchdefs['PdfManager'] = [
+    'templateMeta' => [
         'maxColumns' => '1',
-        'widths' => array('label' => '10', 'field' => '30'),
-    ),
-    'layout' => array(
-        'basic_search' => array(
+        'widths' => ['label' => '10', 'field' => '30'],
+    ],
+    'layout' => [
+        'basic_search' => [
             'name',
-        ),
-        'advanced_search' => array(),
-    ),
-);
+        ],
+        'advanced_search' => [],
+    ],
+];

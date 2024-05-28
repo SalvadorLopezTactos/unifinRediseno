@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'FW:',
     'LBL_RE' => 'Ref:',
     'LBL_BUTTON_CREATE' => 'Criar',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Escolher a partir de um Email de uma Conta',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Escolher assinatura',
     'LBL_SIGNATURE' => 'Assinatura',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Assinatura por defeito",
-    "LBL_SHOW_MORE_SIGNATURES" => "Mais assinaturas…",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Assinatura por defeito',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Mais assinaturas…',
     'LBL_SUBJECT' => 'Assunto:',
     'LBL_TEMPLATE' => 'Modelo',
     'LBL_TEXT_BODY' => 'Corpo do Texto',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Hora de Envio',
     'LBL_LIST_TO_ADDR' => 'Para',
     'LBL_LIST_TYPE' => 'Tipo',
-    "LBL_SELECTED_RECIPIENTS" => "Destinatários selecionados",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Mais destinatários…",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Livro de Endereços",
+    'LBL_SELECTED_RECIPIENTS' => 'Destinatários selecionados',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Mais destinatários…',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Livro de Endereços',
     'NTC_REMOVE_INVITEE' => 'Tem certeza de que pretende eliminar este destinatário do e-mail?',
     'WARNING_SETTINGS_NOT_CONF' => 'As suas configurações de e-mail não estão corretamente configuradas para o envio de e-mail. Deve ser configurado um servidor SMTP' .
         'em <a href="#bwc/index.php?module=EmailMan&action=config">Definições de E-mail</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Os anexos podem falhar: Foi detetado um valor incorreto ou não utilizável para "upload_tmp_dir".' .
         'a situação no seu ficheiro php.ini.',
     'LBL_MESSAGE_UID' => 'UID da Mensagem',
-    'LBL_OPEN_DRAFT_ALERT' => 'O e-mail é um rascunho. Clique em'.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'O e-mail é um rascunho. Clique em' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         'para editar.',
     'LBL_EMAIL_BODY' => 'Mensagem de e-mail',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco de E-mails',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Dashboard de registo de e-mails',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Timeline do E-mail',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'sem destinatários especificados',
@@ -473,4 +474,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'Enviar e-mail',
     'LBL_MAILBOX' => 'Conta de entrada',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Configure uma conta de e-mail de saída através de <a href="#OutboundEmail">Definições de E-mail</a> para enviar e-mails.',
-);
+    'LBL_TOO_SHORT' => 'Escreva pelo menos {0} caracteres...',
+];

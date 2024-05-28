@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Bevételi sor tételek listája műszerfal',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Bevételi sor tételek bejegyzése műszerfal',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Terméktípusok',
     'LBL_ASSIGNED_TO_NAME' => 'Hozzárendelt felhasználó:',
     'LBL_ASSIGNED_TO' => 'Felelős',
-    'LBL_ASSIGNED_TO_ID'=>'Felelős Felhasználó Azonosítója',
+    'LBL_ASSIGNED_TO_ID' => 'Felelős Felhasználó Azonosítója',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Felelős Felhasználó Neve',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Felelős Felhasználó Azonosítója',
     'LBL_CAMPAIGN_ID' => 'Kampány Azonosító',
@@ -211,4 +211,5 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'A tíz legjobb Eladási Lehetőség Termékeit jeleníti meg egy diagramon.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Bevételi Sor Tételeim',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Csapatom Bevételi Sor Tételei",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Bevételi sor tétel idővonala',
+];

@@ -44,7 +44,7 @@ class IntrospectToken extends AbstractToken
      * @param string $crmOAuthScope CRM OAuth Scope
      * @param array $roles
      */
-    public function __construct($credentials, $tenant, $crmOAuthScope, $roles = array())
+    public function __construct($credentials, $tenant, $crmOAuthScope, $roles = [])
     {
         parent::__construct($roles);
 

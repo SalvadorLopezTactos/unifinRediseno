@@ -82,10 +82,11 @@ class EmailsRelateRecordApi extends RelateRecordApi
      */
     public function createRelatedLinks(
         ServiceBase $api,
-        array $args,
+        array       $args,
         $securityTypeLocal = 'view',
         $securityTypeRemote = 'view'
     ) {
+
         if ($args['link_name'] === 'from') {
             throw new SugarApiExceptionNotAuthorized('Cannot link an existing sender');
         } elseif (in_array($args['link_name'], ['to', 'cc', 'bcc'])) {

@@ -11,41 +11,41 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$searchdefs = array(
-    'ext_rest_zoominfocompany' => array(
-        'Leads' => array(
+$searchdefs = [
+    'ext_rest_zoominfocompany' => [
+        'Leads' => [
             'companyname',
             'state',
-            'countrycode'
-        ),
-        'Accounts' => array(
+            'countrycode',
+        ],
+        'Accounts' => [
             'companyname',
             'state',
-            'countrycode'
-        ),
-        'Contacts' => array(
+            'countrycode',
+        ],
+        'Contacts' => [
             'companyname',
             'state',
-            'countrycode'
-        )
-    ),
+            'countrycode',
+        ],
+    ],
 
-    'ext_rest_zoominfoperson' => array(
-        'Leads' => array(
+    'ext_rest_zoominfoperson' => [
+        'Leads' => [
             'firstname',
             'lastname',
             'email',
-            'companyname'
-        ),
-        'Accounts' => array(
+            'companyname',
+        ],
+        'Accounts' => [
             'email',
-            'companyname'
-        ),
-        'Contacts' => array(
+            'companyname',
+        ],
+        'Contacts' => [
             'firstname',
             'lastname',
             'email',
-            'companyname'
-        )
-    ),
-);
+            'companyname',
+        ],
+    ],
+];

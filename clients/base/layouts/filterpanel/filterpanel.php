@@ -11,16 +11,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['filterpanel'] = array(
-    'components' => array(
-        array(
+$viewdefs['base']['layout']['filterpanel'] = [
+    'components' => [
+        [
             'layout' => 'filter-dropdown',
-        ),
-        array(
+        ],
+        [
             'view' => 'filter-rows',
-        ),
-        array(
+        ],
+        [
             'view' => 'filter-actions',
-        ),
-    ),
-);
+        ],
+    ],
+];

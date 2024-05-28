@@ -51,12 +51,12 @@ class SugarOAuth2Server extends OAuth2
             }
             $isIDMModeEnabled = $idpConfig->isIDMModeEnabled() && $platform != SugarOAuth2ServerOIDC::PORTAL_PLATFORM;
             $oidcPostfix = $isIDMModeEnabled ? 'OIDC' : '';
-            SugarAutoLoader::requireWithCustom('include/SugarOAuth2/SugarOAuth2Storage'.$oidcPostfix.'.php');
-            $oauthStorageName = SugarAutoLoader::customClass('SugarOAuth2Storage'.$oidcPostfix);
+            SugarAutoLoader::requireWithCustom('include/SugarOAuth2/SugarOAuth2Storage' . $oidcPostfix . '.php');
+            $oauthStorageName = SugarAutoLoader::customClass('SugarOAuth2Storage' . $oidcPostfix);
             $oauthStorage = new $oauthStorageName();
 
-            SugarAutoLoader::requireWithCustom('include/SugarOAuth2/SugarOAuth2Server'.$oidcPostfix.'.php');
-            $oauthServerName = SugarAutoLoader::customClass('SugarOAuth2Server'.$oidcPostfix);
+            SugarAutoLoader::requireWithCustom('include/SugarOAuth2/SugarOAuth2Server' . $oidcPostfix . '.php');
+            $oauthServerName = SugarAutoLoader::customClass('SugarOAuth2Server' . $oidcPostfix);
             $config = $idpConfig->get('oauth2', []);
             static::$currentOAuth2Server = new $oauthServerName($oauthStorage, $config);
             if ($isIDMModeEnabled) {
@@ -127,7 +127,7 @@ class SugarOAuth2Server extends OAuth2
      * of raw JSON-encoded stuff.
      * @see OAuth2::grantAccessToken()
      */
-    public function grantAccessToken(array $inputData = NULL, array $authHeaders = NULL)
+    public function grantAccessToken(array $inputData = null, array $authHeaders = null)
     {
         // grantAccessToken directly echo's (BAD), but it's a 3rd party library, so what are you going to do?
         $authData = parent::grantAccessToken($inputData, $authHeaders);
@@ -135,7 +135,7 @@ class SugarOAuth2Server extends OAuth2
         $token = $this->storage->refreshToken;
         $downloadToken = $token->download_token;
 
-        $authData['refresh_expires_in'] = $token->expire_ts-time();
+        $authData['refresh_expires_in'] = $token->expire_ts - time();
         $authData['download_token'] = $token->download_token;
 
         if (!empty($_SESSION['oauth2']['client_id']) && !empty($token->id)) {
@@ -144,7 +144,6 @@ class SugarOAuth2Server extends OAuth2
             $storage = $this->storage;
             $_SESSION['oauth2']['token_check_time'] = time() + $storage::TOKEN_CHECK_TIME;
         }
-
 
 
         return $authData;
@@ -184,6 +183,7 @@ class SugarOAuth2Server extends OAuth2
         bool $allowInactive = false,
         bool $needRefresh = false
     ) {
+
         $sudoUserId = $GLOBALS['current_user']->id;
 
         $this->setPlatform($platform);

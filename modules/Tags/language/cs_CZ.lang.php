@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tagy',
     'LBL_GENERIC_LINK' => 'Související objekty',
     'LBL_NAME_LOWER' => 'Název značky malými písmeny',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'Moje značky',
     'LBL_MY_FAVORITE_TAGS' => 'Moje oblíbené značky',
     'LBL_MORE_TAGS' => '{{tagsNumber}} značek',
-);
+];

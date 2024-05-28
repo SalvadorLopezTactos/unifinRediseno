@@ -1178,10 +1178,10 @@ AdamProject.prototype.updateToolbar = function () {
     $savebutton.removeClass();
     if (this.isDirty) {
         //value = "*" + this.name;
-        $savebutton.addClass('fa fa-save save-on');
+        $savebutton.addClass('sicon sicon-save-lg save-on');
     } else {
         //value = this.name;
-        $savebutton.addClass('fa fa-save save-off');
+        $savebutton.addClass('sicon sicon-save-lg save-off');
     }
     $title.html(this.name);
     $title_box.html(this.name);
@@ -1197,11 +1197,11 @@ AdamProject.prototype.updateUndoRedo = function () {
     redo = (this.canvas.commandStack.getRedoSize() > 0);
 
     $undobutton.removeClass();
-    undoClass = (undo) ? 'fa fa-undo undo-on' : 'fa fa-undo undo-off';
+    undoClass = (undo) ? 'sicon sicon-undo-lg undo-on' : 'sicon sicon-undo-lg undo-off';
     $undobutton.addClass(undoClass);
 
     $redobutton.removeClass();
-    redoClass = (redo) ? 'fa fa-undo fa-flip-horizontal undo-on' : 'fa fa-undo fa-flip-horizontal undo-off';
+    redoClass = (redo) ? 'sicon sicon-redo-lg undo-on' : 'sicon sicon-redo-lg undo-off';
     $redobutton.addClass(redoClass);
 
     //this.canvas.commandStack.debug(true);

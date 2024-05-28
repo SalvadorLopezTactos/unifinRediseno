@@ -11,25 +11,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Emails']['base']['view']['compose-addressbook-recipientscontainer'] = array(
+$viewdefs['Emails']['base']['view']['compose-addressbook-recipientscontainer'] = [
     'template' => 'record',
-    'panels' => array(
-        array(
+    'panels' => [
+        [
             'name' => 'selected_recipients',
             'columns' => 1,
             'labels' => true,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'to_collection',
                     'type' => 'email-recipients',
                     'label' => 'LBL_SELECTED_RECIPIENTS',
                     'readonly' => true,
                     'span' => 12,
-                ),
-            ),
-        ),
-    ),
-);
-
+                ],
+            ],
+        ],
+    ],
+];

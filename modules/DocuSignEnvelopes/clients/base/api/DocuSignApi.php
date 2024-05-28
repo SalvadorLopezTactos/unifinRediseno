@@ -24,6 +24,7 @@ class DocuSignApi extends SugarApi
      * @var int
      */
     public $limit;
+
     /**
      * {@inheritDoc}
      */
@@ -277,7 +278,13 @@ class DocuSignApi extends SugarApi
                 $sugarEnvelopeId = Uuid::uuid4();
                 $args['returnUrlParams'] = $returnUrlParams;
                 $args['sugarEnvelopeId'] = $sugarEnvelopeId;
-                $envelopeDetails = $extApi->createANewEnvelope($args);
+                if (isset($args['composite'])) {
+                    $this->requireArgs($args, ['documents', 'templateSelected']);
+
+                    $envelopeDetails = $extApi->createANewCompositeEnvelope($args);
+                } else {
+                    $envelopeDetails = $extApi->createANewEnvelope($args);
+                }
                 $createdEnvelopeId = $envelopeDetails['id'];
                 $envelopeSubject = $envelopeDetails['subject'];
 
@@ -296,6 +303,9 @@ class DocuSignApi extends SugarApi
                 $newEnvelopeBean->team_id = $current_user->team_id;
                 if (isset($args['cloudServiceName'])) {
                     $newEnvelopeBean->cloud_service_type = $args['cloudServiceName'];
+                    if ($args['cloudServiceName'] === 'sharepoint') {
+                        $newEnvelopeBean->driveId = $returnUrlParams['driveId'];
+                    }
                 }
                 if (isset($args['cloudPath'])) {
                     $newEnvelopeBean->cloud_path = $args['cloudPath'];
@@ -313,7 +323,7 @@ class DocuSignApi extends SugarApi
 
             $return_url_request = new DocuSign\Model\ReturnUrlRequest();
             $return_url_request->setReturnUrl($returnUrl);
-           
+
             $senderView = $extApi->createSenderView($createdEnvelopeId, $return_url_request);
             if (is_array($senderView) && isset($senderView['status']) && $senderView['status'] === 'error') {
                 throw new Exception($senderView['message']);
@@ -325,10 +335,15 @@ class DocuSignApi extends SugarApi
             $responseBody = $ex->getResponseBody();
             $message = 'Exception: ' . $ex->getMessage() . var_export($responseBody, true);
             $log->error($message);
-            
-            if (is_object($responseBody) && $responseBody->errorCode  && !empty($responseBody->message)) {
-                $message = $responseBody->message;
+
+            if (is_object($responseBody) && $responseBody->errorCode && !empty($responseBody->message)) {
+                if ($responseBody->errorCode === 'TAB_REFERS_TO_MISSING_DOCUMENT') {
+                    $message = translate('LBL_ENVELOPE_TEMPLATE_ERROR', 'DocuSignEnvelopes');
+                } else {
+                    $message = $responseBody->message;
+                }
             }
+
             $res = [
                 'status' => 'error',
                 'message' => $message,
@@ -369,8 +384,8 @@ class DocuSignApi extends SugarApi
     /**
      * Method called by DocuSign tab
      *
-     * @param  ServiceBase $api
-     * @param  Array $args
+     * @param ServiceBase $api
+     * @param Array $args
      * @return string
      */
     public function sendReturn(ServiceBase $api, $args)
@@ -586,7 +601,7 @@ HTML;
                 'message' => $errorMessage,
             ];
         }
-        
+
         $extApi = new ExtAPIDocuSign();
         $options = [
             'envelopeId' => $envelopeBean->envelope_id,
@@ -905,7 +920,7 @@ HTML;
      */
     public function setGlobalConfig(ServiceBase $api, $args)
     {
-        if (!$api->user->isAdmin()) {
+        if (!$api->user->isAdmin() && !$api->user->isDeveloperForModule('DocuSignEnvelopes')) {
             throw new SugarApiExceptionNotAuthorized(
                 $GLOBALS['app_strings']['EXCEPTION_CHANGE_MODULE_CONFIG_NOT_AUTHORIZED'],
                 ['moduleName' => 'DocuSignEnvelopes']
@@ -979,10 +994,10 @@ HTML;
 
         $numberOfRecipientsInAPage = intval($GLOBALS['sugar_config']['list_max_entries_per_page']);
         $nextOffset = $offset + $numberOfRecipientsInAPage;
-        if ((is_countable($recipients) ? count($recipients) : 0) < $nextOffset) {
+        if (safeCount($recipients) < $nextOffset) {
             $nextOffset = -1;
         }
-        $totalNumberOfRecipients = is_countable($recipients) ? count($recipients) : 0;
+        $totalNumberOfRecipients = safeCount($recipients);
         $recipients = array_slice($recipients, $offset, $numberOfRecipientsInAPage);
 
         return [
@@ -999,7 +1014,7 @@ HTML;
      * @param $moduleWithEmail string module name where we check for email
      * @return Array
      */
-    public function getRelatedFieldsIdNames($contextModule, $moduleWithEmail) : array
+    public function getRelatedFieldsIdNames($contextModule, $moduleWithEmail): array
     {
         global $dictionary;
         $res = [];
@@ -1026,10 +1041,10 @@ HTML;
      * @param Array $recipients
      */
     public function addRelatedRecordEmails(
-        string $module,
-        string $moduleWithEmailEmbeded,
+        string    $module,
+        string    $moduleWithEmailEmbeded,
         SugarBean $contextBean,
-        array &$recipients
+        array     &$recipients
     ) {
         $relatedIdNames = $this->getRelatedFieldsIdNames($module, $moduleWithEmailEmbeded);
 
@@ -1075,10 +1090,10 @@ HTML;
      * @param Array $recipients
      */
     public function addEmailsFromRelations(
-        string $module,
-        string $moduleWithEmailEmbeded,
+        string    $module,
+        string    $moduleWithEmailEmbeded,
         SugarBean $contextBean,
-        array &$recipients
+        array     &$recipients
     ) {
         $links = $this->getLinkNames($module, $moduleWithEmailEmbeded);
         foreach ($links as $link) {
@@ -1111,6 +1126,7 @@ HTML;
             }
         }
     }
+
     /**
      * Check if item is already in the result
      *
@@ -1118,7 +1134,7 @@ HTML;
      * @param string $relatedId
      * @return bool
      */
-    public function checkItemAdded(array $result, string $relatedId) : bool
+    public function checkItemAdded(array $result, string $relatedId): bool
     {
         foreach ($result as $row) {
             if ($row['id'] === $relatedId) {
@@ -1245,10 +1261,10 @@ HTML;
             ];
         }
 
-        $res["id"] = $templateId;
-        $res["name"] = $args["template"]["name"];
-        $res["roles"] = $extRes['roles'];
-        $res["predefined_recipients"] = $extRes['predefined_recipients'];
+        $res['id'] = $templateId;
+        $res['name'] = $args['template']['name'];
+        $res['roles'] = $extRes['roles'];
+        $res['predefined_recipients'] = $extRes['predefined_recipients'];
 
         return $res;
     }

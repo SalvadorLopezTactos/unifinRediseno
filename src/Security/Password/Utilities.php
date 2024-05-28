@@ -69,8 +69,8 @@ class Utilities
 
         $db = \DBManagerFactory::getInstance();
         $query = sprintf(
-            "INSERT INTO users_password_link (id, bean_id, bean_type, username, date_generated, platform)
-        VALUES(%s, %s, %s, %s, %s, %s) ",
+            'INSERT INTO users_password_link (id, bean_id, bean_type, username, date_generated, platform)
+        VALUES(%s, %s, %s, %s, %s, %s) ',
             $db->quoted($values['guid']),
             $db->quoted($values['bean_id']),
             $db->quoted($values['bean_type']),
@@ -89,7 +89,7 @@ class Utilities
      * @param string $type the type of password email template to create
      * @return string|null
      */
-    public static function addPortalPasswordSeedData(string $teamId, array $mod_strings, string $type) : ?string
+    public static function addPortalPasswordSeedData(string $teamId, array $mod_strings, string $type): ?string
     {
         if (!in_array($type, self::$validTemplateTypes)) {
             return null;

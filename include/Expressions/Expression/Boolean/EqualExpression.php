@@ -21,7 +21,7 @@ class EqualExpression extends BooleanExpression
     /**
      * Returns itself when evaluating.
      */
-    function evaluate()
+    public function evaluate()
     {
         $params = $this->getParameters();
 
@@ -50,7 +50,7 @@ class EqualExpression extends BooleanExpression
     /**
      * Returns the JS Equivalent of the evaluate function.
      */
-    static function getJSEvaluate()
+    public static function getJSEvaluate()
     {
         return <<<EOQ
             var SEE = SUGAR.expressions.Expression,
@@ -70,15 +70,15 @@ EOQ;
     /**
      * Any generic type will suffice.
      */
-    static function getParameterTypes()
+    public static function getParameterTypes()
     {
-        return array(AbstractExpression::$GENERIC_TYPE, AbstractExpression::$GENERIC_TYPE);
+        return [AbstractExpression::$GENERIC_TYPE, AbstractExpression::$GENERIC_TYPE];
     }
 
     /**
      * Returns the maximum number of parameters needed.
      */
-    static function getParamCount()
+    public static function getParamCount()
     {
         return 2;
     }
@@ -87,7 +87,7 @@ EOQ;
      * Returns the opreation name that this Expression should be
      * called by.
      */
-    static function getOperationName()
+    public static function getOperationName()
     {
         return 'equal';
     }
@@ -95,7 +95,7 @@ EOQ;
     /**
      * Returns the String representation of this Expression.
      */
-    function toString()
+    public function toString()
     {
     }
 
@@ -105,7 +105,8 @@ EOQ;
      *
      * @return bool
      */
-    protected function isTruthy($val) {
+    protected function isTruthy($val)
+    {
         if ($val instanceof BooleanConstantExpression) {
             return $val == AbstractExpression::$TRUE;
         }

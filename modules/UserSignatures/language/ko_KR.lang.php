@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => '이 서명은 이름이 필요합니다',
     'LBL_DEFAULT_SIGNATURE' => '기본설정',
     'LBL_MODULE_NAME' => '이메일 서명',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => '서명을 사용하시겠습니까?',
     'LBL_SIGNATURE_PREPEND' => '위 답장에 서명하시겠습니까?',
     'LBL_SIGNATURES' => '서명',
-);
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Bilgi Tabanı Şablonları',
     'LBL_MODULE_NAME_SINGULAR' => 'Bilgi Bankası Şablonu',
     'LBL_MODULE_TITLE' => 'Bilgi Bankası Şablonu',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Şablonları Göster',
     'LBL_TEXT_BODY' => 'Gövde',
     'LBL_LIST_TEMPLATE_NAME' => 'Şablon İsmi',
-);
+];

@@ -13,7 +13,6 @@
 
 class ConfigModuleApi extends ModuleApi
 {
-
     /**
      * Set this to true in a subclass if this is being handled by the subclass in additional scripts
      *
@@ -28,47 +27,47 @@ class ConfigModuleApi extends ModuleApi
      */
     public function registerApiRest()
     {
-        return array(
-            'config' => array(
+        return [
+            'config' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', 'config'),
-                'pathVars' => array('module', ''),
+                'path' => ['<module>', 'config'],
+                'pathVars' => ['module', ''],
                 'method' => 'config',
                 'shortHelp' => 'Retrieves the config settings for a given module',
                 'longHelp' => 'include/api/help/module_config_get_help.html',
-            ),
-            'configCreate' => array(
+            ],
+            'configCreate' => [
                 'reqType' => 'POST',
-                'path' => array('<module>', 'config'),
-                'pathVars' => array('module', ''),
+                'path' => ['<module>', 'config'],
+                'pathVars' => ['module', ''],
                 'method' => 'configSave',
                 'shortHelp' => 'Creates the config entries for the given module',
                 'longHelp' => 'include/api/help/module_config_post_help.html',
-            ),
-            'configUpdate' => array(
+            ],
+            'configUpdate' => [
                 'reqType' => 'PUT',
-                'path' => array('<module>', 'config'),
-                'pathVars' => array('module', ''),
+                'path' => ['<module>', 'config'],
+                'pathVars' => ['module', ''],
                 'method' => 'configSave',
                 'shortHelp' => 'Updates the config entries for given module',
                 'longHelp' => 'include/api/help/module_config_put_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
      * Returns the config settings for the given module
      *
-     * @throws SugarApiExceptionNotAuthorized
      * @param ServiceBase $api
      * @param array $args 'module' is required, 'platform' is optional and defaults to 'base'
      * @return array
+     * @throws SugarApiExceptionNotAuthorized
      */
     public function config(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module'));
+        $this->requireArgs($args, ['module']);
         $seed = BeanFactory::newBean($args['module']);
-        $adminBean = BeanFactory::newBean("Administration");
+        $adminBean = BeanFactory::newBean('Administration');
 
         //acl check
         if (!$seed->ACLAccess('access')) {
@@ -80,7 +79,7 @@ class ConfigModuleApi extends ModuleApi
             }
             $args = null;
             if (!empty($moduleName)) {
-                $args = array('moduleName' => $moduleName);
+                $args = ['moduleName' => $moduleName];
             }
             throw new SugarApiExceptionNotAuthorized(
                 $GLOBALS['app_strings']['EXCEPTION_ACCESS_MODULE_CONFIG_NOT_AUTHORIZED'],
@@ -97,14 +96,14 @@ class ConfigModuleApi extends ModuleApi
     /**
      * Save function for the config settings for a given module.
      *
-     * @throws SugarApiExceptionNotAuthorized
      * @param ServiceBase $api
-     * @param array $args           'module' is required, 'platform' is optional and defaults to 'base'
+     * @param array $args 'module' is required, 'platform' is optional and defaults to 'base'
      * @return array
+     * @throws SugarApiExceptionNotAuthorized
      */
     public function configSave(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module'));
+        $this->requireArgs($args, ['module']);
 
         $module = $args['module'];
 
@@ -120,7 +119,7 @@ class ConfigModuleApi extends ModuleApi
 
             $args = null;
             if (!empty($moduleName)) {
-                $args = array('moduleName' => $moduleName);
+                $args = ['moduleName' => $moduleName];
             }
 
             throw new SugarApiExceptionNotAuthorized(
@@ -134,7 +133,7 @@ class ConfigModuleApi extends ModuleApi
         }
 
         if ($this->skipMetadataRefresh === false) {
-            MetaDataManager::refreshModulesCache(array($module));
+            MetaDataManager::refreshModulesCache([$module]);
         }
 
         $admin = BeanFactory::newBean('Administration');
@@ -151,7 +150,7 @@ class ConfigModuleApi extends ModuleApi
     protected function save(ServiceBase $api, $params, $module)
     {
         $admin = BeanFactory::newBean('Administration');
-        
+
         $platform = $this->getPlatform($api->platform);
 
         foreach ($params as $name => $value) {
@@ -172,7 +171,7 @@ class ConfigModuleApi extends ModuleApi
         // if the platform is not a valid registered platform, default it back to base
         $platforms = MetaDataManager::getPlatformList();
 
-        if (!in_array($platform, $platforms)) {
+        if (!safeInArray($platform, $platforms)) {
             $platform = 'base';
         }
 

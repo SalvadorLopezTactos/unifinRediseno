@@ -30,7 +30,7 @@ class SugarMetric_Manager
     /**
      * @var SugarMetric_Provider_Interface[]
      */
-    protected $metricProviders = array();
+    protected $metricProviders = [];
 
     /**
      * @var SugarMetric_Manager
@@ -60,15 +60,14 @@ class SugarMetric_Manager
 
         if (isset($sugar_config['metric_providers'])) {
             foreach ($sugar_config['metric_providers'] as $name => $path) {
-
                 // Could not use SugarAutoLoader there, because in case of
                 // entryPoint=getYUIComboFile script do not loads SugarAutoLoader
                 if (file_exists($path)) {
                     require_once $path;
 
-                    $additionalConfig = $sugar_config['metric_settings'][$name] ?? array();
+                    $additionalConfig = $sugar_config['metric_settings'][$name] ?? [];
 
-                    /** @var SugarMetric_Provider_Interface $metric  */
+                    /** @var SugarMetric_Provider_Interface $metric */
                     $metric = new $name($additionalConfig);
 
                     if ($metric->isLoaded()) {
@@ -88,7 +87,6 @@ class SugarMetric_Manager
      */
     protected function __clone()
     {
-
     }
 
     /**
@@ -210,5 +208,4 @@ class SugarMetric_Manager
             }
         }
     }
-
 }

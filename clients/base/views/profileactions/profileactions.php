@@ -9,10 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
 
-$idpConfig  = new Config(\SugarConfig::getInstance());
-$isIDMModeEnabled  = $idpConfig->isIDMModeEnabled();
+$idpConfig = new Config(\SugarConfig::getInstance());
+$isIDMModeEnabled = $idpConfig->isIDMModeEnabled();
 
 $viewdefs['base']['view']['profileactions'] = [
     [
@@ -24,34 +25,38 @@ $viewdefs['base']['view']['profileactions'] = [
     ],
 ];
 
+$changePassword = [
+    'label' => 'LBL_CHANGE_PASSWORD',
+    'css_class' => 'profileactions-change-password',
+    'acl_action' => 'view',
+    'icon' => 'sicon-lock',
+    'name' => 'change_password',
+];
 if ($isIDMModeEnabled) {
-    $viewdefs['base']['view']['profileactions'][] = [
-        'route' => $idpConfig->getIDMModeConfig()['profileUrls']['changePassword'],
-        'label' => 'LBL_CHANGE_PASSWORD',
-        'css_class' => 'profileactions-change-password',
-        'acl_action' => 'view',
-        'icon' => 'sicon-lock',
-    ];
+    $changePassword['route'] = $idpConfig->getIDMModeConfig()['profileUrls']['changePassword'];
+} else {
+    $changePassword['route'] = '#changePassword';
 }
+$viewdefs['base']['view']['profileactions'][] = $changePassword;
 
 $viewdefs['base']['view']['profileactions'] = array_merge(
     $viewdefs['base']['view']['profileactions'],
     [
-        array(
-            'route'=> '#bwc/index.php?module=Employees&action=index&query=true',
+        [
+            'route' => '#bwc/index.php?module=Employees&action=index&query=true',
             'label' => 'LBL_EMPLOYEES',
             'css_class' => 'profileactions-employees',
             'acl_action' => 'list',
             'icon' => 'sicon-user-group',
-        ),
-        array(
+        ],
+        [
             'route' => '#Administration',
             'label' => 'LBL_ADMIN',
             'css_class' => 'administration',
             'module' => 'Administration',
             'acl_action' => 'admin',
             'icon' => 'sicon-settings',
-        ),
+        ],
         [
             'label' => 'LNK_MOBILE',
             'css_class' => 'profileactions-mobile',
@@ -62,19 +67,19 @@ $viewdefs['base']['view']['profileactions'] = array_merge(
             'css_class' => 'profileactions-shortcuts',
             'icon' => 'sicon-shortcuts-lg',
         ],
-        array(
+        [
             'route' => '#about',
             'label' => 'LNK_ABOUT',
             'css_class' => 'profileactions-about',
             'acl_action' => 'view',
             'icon' => 'sicon-info',
-        ),
-        array(
+        ],
+        [
             'route' => '#logout/?clear=1',
             'label' => 'LBL_LOGOUT',
             'css_class' => 'profileactions-logout',
             'icon' => 'sicon-logout',
-        ),
+        ],
 
     ]
 );

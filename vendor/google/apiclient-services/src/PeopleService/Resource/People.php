@@ -214,10 +214,10 @@ class People extends \Google\Service\Resource
    * `person.`: for example, `person.names` or `person.photos`.
    * @opt_param string resourceNames Required. The resource names of the people to
    * provide information about. It's repeatable. The URL query parameter should be
-   * resourceNames==&... - To get information about the authenticated user,
-   * specify `people/me`. - To get information about a google account, specify
-   * `people/{account_id}`. - To get information about a contact, specify the
-   * resource name that identifies the contact as returned by
+   * resourceNames=&resourceNames=&... - To get information about the
+   * authenticated user, specify `people/me`. - To get information about a google
+   * account, specify `people/{account_id}`. - To get information about a contact,
+   * specify the resource name that identifies the contact as returned by
    * `people.connections.list`. There is a maximum of 200 resource names.
    * @opt_param string sources Optional. A mask of what source types to return.
    * Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
@@ -370,8 +370,7 @@ class People extends \Google\Service\Resource
    * failures. (people.updateContact)
    *
    * @param string $resourceName The resource name for the person, assigned by the
-   * server. An ASCII string with a max length of 27 characters, in the form of
-   * `people/{person_id}`.
+   * server. An ASCII string in the form of `people/{person_id}`.
    * @param Person $postBody
    * @param array $optParams Optional parameters.
    *

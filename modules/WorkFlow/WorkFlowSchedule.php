@@ -12,78 +12,80 @@
 
 use Doctrine\DBAL\Connection;
 
-require_once('include/workflow/workflow_utils.php');
-require_once('include/workflow/action_utils.php');
+require_once 'include/workflow/workflow_utils.php';
+require_once 'include/workflow/action_utils.php';
 
 /**
  *  WorkFlowSchedule is used to process workflow time cron objects
  */
-class WorkFlowSchedule extends SugarBean {
+class WorkFlowSchedule extends SugarBean
+{
     // Stored fields
-    var $id;
-    var $deleted;
-    var $date_entered;
-    var $date_modified;
-    var $modified_user_id;
-    var $created_by;
-    var $created_by_name;
-    var $modified_by_name;
+    public $id;
+    public $deleted;
+    public $date_entered;
+    public $date_modified;
+    public $modified_user_id;
+    public $created_by;
+    public $created_by_name;
+    public $modified_by_name;
 
-    var $date_expired;
-    var $module;
-    var $workflow_id;
-    var $bean_id;
+    public $date_expired;
+    public $module;
+    public $workflow_id;
+    public $bean_id;
 
-    var $parameters;
+    public $parameters;
 
-    var $table_name = "workflow_schedules";
-    var $module_dir = "WorkFlow";
-    var $object_name = "WorkFlowSchedule";
-    var $module_name = 'WorkFlowSchedule';
-    var $disable_custom_fields = true;
+    public $table_name = 'workflow_schedules';
+    public $module_dir = 'WorkFlow';
+    public $object_name = 'WorkFlowSchedule';
+    public $module_name = 'WorkFlowSchedule';
+    public $disable_custom_fields = true;
 
-    var $rel_triggershells_table = 	"workflow_triggershells";
-    var $rel_triggers_table = 		"workflow_triggers";
-    var $rel_alertshells_table = 	"workflow_alertshells";
-    var $rel_alerts_table = 		"workflow_alerts";
-    var $rel_actionshells_table = 	"workflow_actionshells";
-    var $rel_actions_table = 		"workflow_actions";
-    var $rel_workflow_table = 		"workflow";
+    public $rel_triggershells_table = 'workflow_triggershells';
+    public $rel_triggers_table = 'workflow_triggers';
+    public $rel_alertshells_table = 'workflow_alertshells';
+    public $rel_alerts_table = 'workflow_alerts';
+    public $rel_actionshells_table = 'workflow_actionshells';
+    public $rel_actions_table = 'workflow_actions';
+    public $rel_workflow_table = 'workflow';
 
 
-    var $new_schema = true;
+    public $new_schema = true;
 
-    var $column_fields = Array("id"
-        ,"module"
-        ,"date_entered"
-        ,"date_modified"
-        ,"modified_user_id"
-        ,"created_by"
-        ,"date_expired"
-        ,"workflow_id"
-        ,"bean_id"
-        ,"parameters"
-        );
+    public $column_fields = ['id'
+        , 'module'
+        , 'date_entered'
+        , 'date_modified'
+        , 'modified_user_id'
+        , 'created_by'
+        , 'date_expired'
+        , 'workflow_id'
+        , 'bean_id'
+        , 'parameters',
+    ];
 
 
     // This is used to retrieve related fields from form posts.
-    var $additional_column_fields = Array();
+    public $additional_column_fields = [];
 
     // This is the list of fields that are in the lists.
-    var $list_fields = array();
+    public $list_fields = [];
 
-    var $relationship_fields = Array();
+    public $relationship_fields = [];
 
 
     // This is the list of fields that are required
-    var $required_fields =  array("module"=>1, 'bean_id'=>1, 'workflow_id'=>1);
+    public $required_fields = ['module' => 1, 'bean_id' => 1, 'workflow_id' => 1];
 
-    var $disable_row_level_security = true;
+    public $disable_row_level_security = true;
 
 
-    public function __construct() {
+    public function __construct()
+    {
         global $dictionary;
-        if(isset($this->module_dir) && isset($this->object_name) && !isset($dictionary[$this->object_name])){
+        if (isset($this->module_dir) && isset($this->object_name) && !isset($dictionary[$this->object_name])) {
             require SugarAutoLoader::existingCustomOne('metadata/workflow_schedulesMetaData.php');
         }
 
@@ -91,30 +93,26 @@ class WorkFlowSchedule extends SugarBean {
     }
 
 
-
-    function get_summary_text()
+    public function get_summary_text()
     {
         return "$this->module";
     }
 
-    public function save_relationship_changes($is_update, $exclude = array())
+    public function save_relationship_changes($is_update, $exclude = [])
     {
     }
 
 
-    function mark_relationships_deleted($id)
+    public function mark_relationships_deleted($id)
     {
     }
 
-    function fill_in_additional_list_fields()
+    public function fill_in_additional_list_fields()
     {
-
     }
 
-    function fill_in_additional_detail_fields()
+    public function fill_in_additional_detail_fields()
     {
-
-
     }
 
 
@@ -126,86 +124,86 @@ class WorkFlowSchedule extends SugarBean {
         global $current_user;
         return $temp_array;
     }
+
     /**
-        builds a generic search based on the query string using or
-        do not include any $this-> because this is called on without having the class instantiated
-    */
-    function build_generic_where_clause ($the_query_string) {
-    $where_clauses = Array();
-    $the_query_string = addslashes($the_query_string);
-    array_push($where_clauses, "module like '$the_query_string%'");
-
-    $the_where = "";
-    foreach($where_clauses as $clause)
+     * builds a generic search based on the query string using or
+     * do not include any $this-> because this is called on without having the class instantiated
+     */
+    public function build_generic_where_clause($the_query_string)
     {
-        if($the_where != "") $the_where .= " or ";
-        $the_where .= $clause;
+        $where_clauses = [];
+        $the_query_string = addslashes($the_query_string);
+        array_push($where_clauses, "module like '$the_query_string%'");
+
+        $the_where = '';
+        foreach ($where_clauses as $clause) {
+            if ($the_where != '') {
+                $the_where .= ' or ';
+            }
+            $the_where .= $clause;
+        }
+
+
+        return $the_where;
     }
-
-
-    return $the_where;
-}
-
 
 
 ////////////////Time Cron Scheduling Components///////////////////////
 
-    function check_existing_trigger($bean_id, $workflow_id){
+    public function check_existing_trigger($bean_id, $workflow_id)
+    {
 
         $query = "	SELECT id
                     FROM $this->table_name
-                    WHERE $this->table_name.bean_id = '".$bean_id."'
-                    AND $this->table_name.workflow_id = '".$workflow_id."'
+                    WHERE $this->table_name.bean_id = '" . $bean_id . "'
+                    AND $this->table_name.workflow_id = '" . $workflow_id . "'
                     AND $this->table_name.deleted=0";
-        $result = $this->db->query($query,true," Error checking for existing scheduled trigger: ");
+        $result = $this->db->query($query, true, ' Error checking for existing scheduled trigger: ');
 
         // Get the id and the name.
         $row = $this->db->fetchByAssoc($result);
 
-        if($row != null)
-        {
+        if ($row != null) {
             $this->retrieve($row['id']);
             return true;
-        }
-        else
-        {
-
+        } else {
             return false;
         }
-    //end function check_existing_trigger
+        //end function check_existing_trigger
     }
 
 
-    function set_time_interval($bean_object, $time_array, $update = false){
+    public function set_time_interval($bean_object, $time_array, $update = false)
+    {
 
-        if($update == false && $time_array['time_int_type']=="normal") {
+        if ($update == false && $time_array['time_int_type'] == 'normal') {
             //take current date and add the time interval
-            $this->date_expired = get_expiry_date("datetime", $time_array['time_int']);
+            $this->date_expired = get_expiry_date('datetime', $time_array['time_int']);
             //end if update is false, then create a new time expiry
         }
 
-        if($update == true || $time_array['time_int_type']=="datetime") {
+        if ($update == true || $time_array['time_int_type'] == 'datetime') {
             // Bug # 46938, cannot call get_expiry_date in action_utils directly
             $this->date_expired = $this->get_expiry_date($bean_object, $time_array['time_int'], true, $time_array['target_field']);
             //end if update is true, then just update existing expiry
         }
-    //end function set_time_interval
+        //end function set_time_interval
     }
 
     /**
      * @deprecated
      */
-    function get_expiry_date($bean_object, $time_interval, $is_update = false, $target_field="none")
+    public function get_expiry_date($bean_object, $time_interval, $is_update = false, $target_field = 'none')
     {
         $target_stamp = null;
 
         if ($is_update) {
-            if ($target_field == "none") {
+            if ($target_field == 'none') {
                 $target_stamp = TimeDate::getInstance()->nowDb();
             } else {
                 if (!empty($bean_object->$target_field)) {
                     //Date fields need to be reformated to datetimes to be used with scheduler
-                    if ($bean_object->field_defs[$target_field]['type'] == "date" &&
+                    if ($bean_object->field_defs[$target_field]['type'] == 'date' &&
                         is_string($bean_object->$target_field)) {
                         $date = TimeDate::getInstance()->fromDbDate($bean_object->$target_field);
                         $target_stamp = TimeDate::getInstance()->asDb($date);
@@ -216,10 +214,11 @@ class WorkFlowSchedule extends SugarBean {
             }
         }
 
-        return get_expiry_date("datetime", $time_interval, false, $is_update, $target_stamp);
+        return get_expiry_date('datetime', $time_interval, false, $is_update, $target_stamp);
     }
 
-    function process_scheduled() {
+    public function process_scheduled()
+    {
         $current_stamp = $this->db->now();
 
         $query = "SELECT *
@@ -231,22 +230,22 @@ class WorkFlowSchedule extends SugarBean {
         $result = $this->db->query(
             $query,
             true,
-            " Error checking scheduled triggers to process: "
+            ' Error checking scheduled triggers to process: '
         );
 
         // Collect workflows related to the same bean_id, and process them together
-        $removeExpired = array();
-        $beans = array();
+        $removeExpired = [];
+        $beans = [];
         while ($row = $this->db->fetchByAssoc($result)) {
             if (!isset($beans[$row['bean_id']])) {
-                $beans[$row['bean_id']] = array(
+                $beans[$row['bean_id']] = [
                     'id' => $row['bean_id'],
                     'module' => $row['target_module'],
-                    'workflows' => array($row['workflow_id']),
-                    'parameters' => array(
-                        $row['workflow_id'] => $row['parameters']
-                    ),
-                );
+                    'workflows' => [$row['workflow_id']],
+                    'parameters' => [
+                        $row['workflow_id'] => $row['parameters'],
+                    ],
+                ];
             } else {
                 $beans[$row['bean_id']]['workflows'][] = $row['workflow_id'];
                 $beans[$row['bean_id']]['parameters'][$row['workflow_id']] = $row['parameters'];
@@ -255,7 +254,7 @@ class WorkFlowSchedule extends SugarBean {
         }
 
         foreach ($beans as $bean) {
-            $_SESSION['workflow_cron'] = "Yes";
+            $_SESSION['workflow_cron'] = 'Yes';
             $_SESSION['workflow_id_cron'] = $bean['workflows'];
             // Set the extension variables in case we need them
             $_SESSION['workflow_parameters'] = $bean['parameters'];

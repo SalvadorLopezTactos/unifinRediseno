@@ -26,6 +26,7 @@ class CloudPcUserSetting extends Entity
 {
     /**
     * Gets the createdDateTime
+    * The date and time the setting was created. The Timestamp type represents the date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 looks like this: '2014-01-01T00:00:00Z'.
     *
     * @return \DateTime|null The createdDateTime
     */
@@ -41,9 +42,10 @@ class CloudPcUserSetting extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the createdDateTime
+    * The date and time the setting was created. The Timestamp type represents the date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 looks like this: '2014-01-01T00:00:00Z'.
     *
     * @param \DateTime $val The createdDateTime
     *
@@ -54,9 +56,10 @@ class CloudPcUserSetting extends Entity
         $this->_propDict["createdDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the displayName
+    * The setting name displayed in the user interface.
     *
     * @return string|null The displayName
     */
@@ -68,9 +71,10 @@ class CloudPcUserSetting extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the displayName
+    * The setting name displayed in the user interface.
     *
     * @param string $val The displayName
     *
@@ -81,9 +85,10 @@ class CloudPcUserSetting extends Entity
         $this->_propDict["displayName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the lastModifiedDateTime
+    * The last date and time the setting was modified. The Timestamp type represents the date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 looks like this: '2014-01-01T00:00:00Z'.
     *
     * @return \DateTime|null The lastModifiedDateTime
     */
@@ -99,9 +104,10 @@ class CloudPcUserSetting extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the lastModifiedDateTime
+    * The last date and time the setting was modified. The Timestamp type represents the date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 looks like this: '2014-01-01T00:00:00Z'.
     *
     * @param \DateTime $val The lastModifiedDateTime
     *
@@ -112,9 +118,10 @@ class CloudPcUserSetting extends Entity
         $this->_propDict["lastModifiedDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the localAdminEnabled
+    * Indicates whether the local admin option is enabled. Default value is false. To enable the local admin option, change the setting to true. If the local admin option is enabled, the end user can be an admin of the Cloud PC device.
     *
     * @return bool|null The localAdminEnabled
     */
@@ -126,9 +133,10 @@ class CloudPcUserSetting extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the localAdminEnabled
+    * Indicates whether the local admin option is enabled. Default value is false. To enable the local admin option, change the setting to true. If the local admin option is enabled, the end user can be an admin of the Cloud PC device.
     *
     * @param bool $val The localAdminEnabled
     *
@@ -139,9 +147,43 @@ class CloudPcUserSetting extends Entity
         $this->_propDict["localAdminEnabled"] = boolval($val);
         return $this;
     }
-    
+
+    /**
+    * Gets the restorePointSetting
+    * Defines how frequently a restore point is created that is, a snapshot is taken) for users' provisioned Cloud PCs (default is 12 hours), and whether the user is allowed to restore their own Cloud PCs to a backup made at a specific point in time.
+    *
+    * @return CloudPcRestorePointSetting|null The restorePointSetting
+    */
+    public function getRestorePointSetting()
+    {
+        if (array_key_exists("restorePointSetting", $this->_propDict)) {
+            if (is_a($this->_propDict["restorePointSetting"], "\Beta\Microsoft\Graph\Model\CloudPcRestorePointSetting") || is_null($this->_propDict["restorePointSetting"])) {
+                return $this->_propDict["restorePointSetting"];
+            } else {
+                $this->_propDict["restorePointSetting"] = new CloudPcRestorePointSetting($this->_propDict["restorePointSetting"]);
+                return $this->_propDict["restorePointSetting"];
+            }
+        }
+        return null;
+    }
+
+    /**
+    * Sets the restorePointSetting
+    * Defines how frequently a restore point is created that is, a snapshot is taken) for users' provisioned Cloud PCs (default is 12 hours), and whether the user is allowed to restore their own Cloud PCs to a backup made at a specific point in time.
+    *
+    * @param CloudPcRestorePointSetting $val The restorePointSetting
+    *
+    * @return CloudPcUserSetting
+    */
+    public function setRestorePointSetting($val)
+    {
+        $this->_propDict["restorePointSetting"] = $val;
+        return $this;
+    }
+
     /**
     * Gets the selfServiceEnabled
+    * Indicates whether the self-service option is enabled. Default value is false. To enable the self-service option, change the setting to true. If the self-service option is enabled, the end user is allowed to perform some self-service operations, such as upgrading the Cloud PC through the end user portal.
     *
     * @return bool|null The selfServiceEnabled
     */
@@ -153,9 +195,10 @@ class CloudPcUserSetting extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the selfServiceEnabled
+    * Indicates whether the self-service option is enabled. Default value is false. To enable the self-service option, change the setting to true. If the self-service option is enabled, the end user is allowed to perform some self-service operations, such as upgrading the Cloud PC through the end user portal.
     *
     * @param bool $val The selfServiceEnabled
     *
@@ -166,10 +209,11 @@ class CloudPcUserSetting extends Entity
         $this->_propDict["selfServiceEnabled"] = boolval($val);
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the assignments
+    * Represents the set of Microsoft 365 groups and security groups in Azure Active Directory that have cloudPCUserSetting assigned. Returned only on $expand. For an example, see Get cloudPcUserSettingample.
      *
      * @return array|null The assignments
      */
@@ -181,11 +225,12 @@ class CloudPcUserSetting extends Entity
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the assignments
+    * Represents the set of Microsoft 365 groups and security groups in Azure Active Directory that have cloudPCUserSetting assigned. Returned only on $expand. For an example, see Get cloudPcUserSettingample.
     *
-    * @param CloudPcUserSettingAssignment $val The assignments
+    * @param CloudPcUserSettingAssignment[] $val The assignments
     *
     * @return CloudPcUserSetting
     */
@@ -194,5 +239,5 @@ class CloudPcUserSetting extends Entity
         $this->_propDict["assignments"] = $val;
         return $this;
     }
-    
+
 }

@@ -14,7 +14,8 @@
  * @extends View.View
  */
 ({
-    className: 'sidebar-nav-item relative bg-sidebar-nav hover:bg-sidebar-nav-hover h-10',
+    className: `sidebar-nav-item transition-transform ease-in-out duration-300 relative bg-[--sidebar-nav-background]
+hover:bg-[--sidebar-nav-background-hover] h-10 min-h-[2.5rem] group/nav-item`,
 
     /**
      * Set id property on the element
@@ -82,6 +83,7 @@
         this.event = viewMeta.event || '';
         this.icon = viewMeta.icon || '';
         this.secondaryAction = viewMeta.secondary_action || false;
+        this.track = viewMeta.track;
     },
 
     /**
@@ -97,7 +99,8 @@
      */
     setActive: function(active) {
         this.active = !!active;
-        this.$el.toggleClass('active', !!active);
+        this.$el.toggleClass('bg-[--sidebar-nav-background]', !active);
+        this.$el.toggleClass('active bg-[--sidebar-nav-background-hover]', !!active);
     },
 
     /**
@@ -234,6 +237,7 @@
 
         this.listenTo(this.flyout, 'popover:opened popover:closed', this._determineActiveStatus);
 
+        const placement = app.lang.direction === 'rtl' ? 'left' : 'right';
         anchor.popover({
             html: true,
             trigger: 'manual',
@@ -241,10 +245,12 @@
             //during resizes.
             template: templateTpl(),
             animation: false,
-            placement: app.lang.direction === 'rtl' ? 'left' : 'right',
+            placement: placement,
+            fallbackPlacements: [placement],
             content: _.bind(function() {
                 return this.flyout.$el;
-            }, this)
+            }, this),
+            offset: [0, 0],
         });
     },
 

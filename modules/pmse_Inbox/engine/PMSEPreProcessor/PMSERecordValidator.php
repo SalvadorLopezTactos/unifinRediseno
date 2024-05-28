@@ -20,8 +20,8 @@ class PMSERecordValidator extends PMSEBaseValidator implements PMSEValidate
      */
     public function validateRequest(PMSERequest $request)
     {
-        $this->logger->info("Validate Request " . get_class($this));
-        $this->logger->debug(array("Request data:", $request));
+        $this->logger->info('Validate Request ' . get_class($this));
+        $this->logger->debug(['Request data:', $request]);
 
         $request->validate();
         return $request;

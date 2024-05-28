@@ -9,25 +9,25 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['history-summary'] = array(
+$viewdefs['base']['view']['history-summary'] = [
     'template' => 'flex-list',
     'sticky_resizable_columns' => true,
-    'rowactions' => array(
-        'actions' => array(
-            array(
+    'rowactions' => [
+        'actions' => [
+            [
                 'type' => 'preview-button',
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
                 'icon' => 'sicon-preview',
-                'acl_action' => 'view'
-            ),
-        ),
-    ),
-    'panels' => array(
-        array(
-            'fields' => array(
-                array(
+                'acl_action' => 'view',
+            ],
+        ],
+    ],
+    'panels' => [
+        [
+            'fields' => [
+                [
                     'name' => 'picture',
                     'type' => 'avatar',
                     'align' => 'center',
@@ -38,8 +38,8 @@ $viewdefs['base']['view']['history-summary'] = array(
                     'default' => true,
                     'isSortable' => true,
                     'width' => 'small',
-                ),
-                array(
+                ],
+                [
                     'name' => 'name',
                     'label' => 'LBL_SUBJECT',
                     'type' => 'name',
@@ -48,69 +48,69 @@ $viewdefs['base']['view']['history-summary'] = array(
                     'link' => true,
                     'isSortable' => true,
                     'width' => 'large',
-                ),
-                array(
+                ],
+                [
                     'name' => 'status',
                     'label' => 'LBL_STATUS',
                     'type' => 'status',
                     'enabled' => true,
-                    'default' => true
-                ),
-                array(
+                    'default' => true,
+                ],
+                [
                     'name' => 'description',
                     'type' => 'textarea',
                     'label' => 'LBL_DESCRIPTION',
                     'enabled' => true,
                     'default' => true,
-                    'width' => 'xlarge'
-                ),
-                array(
+                    'width' => 'xlarge',
+                ],
+                [
                     'name' => 'to_addrs',
                     'type' => 'email',
                     'label' => 'LBL_HISTORICAL_SUMMARY_EMAIL_TO',
                     'enabled' => true,
                     'default' => true,
-                ),
+                ],
 
-                array(
+                [
                     'name' => 'from_addr',
                     'type' => 'email',
                     'label' => 'LBL_HISTORICAL_SUMMARY_EMAIL_FROM',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_entered',
                     'label' => 'LBL_LIST_DATE_ENTERED',
                     'type' => 'datetimecombo',
                     'enabled' => true,
                     'default' => false,
                     'isSortable' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_modified',
                     'label' => 'LBL_DATE_MODIFIED',
                     'type' => 'datetimecombo',
                     'enabled' => true,
                     'default' => true,
                     'isSortable' => true,
-                ),
-                array (
+                ],
+                [
                     'name' => 'assigned_user_name',
                     'label' => 'LBL_LIST_ASSIGNED_USER',
                     'id_name' => 'assigned_user_id',
                     'link' => 'assigned_user_link',
                     'module' => 'Users',
-                    'rname'=> 'full_name',
+                    'rname' => 'full_name',
                     'type' => 'relate',
                     'isSortable' => false,
                     'enabled' => true,
                     'default' => false,
-                ),
-            )
-        )
-    ),
-    'last_state' => array(
+                ],
+            ],
+        ],
+    ],
+    'last_state' => [
         'id' => 'history-summary',
-    ),
-);
+    ],
+];

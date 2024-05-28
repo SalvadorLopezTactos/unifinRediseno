@@ -30,19 +30,19 @@ class BasicTerms
      * list of terms, the entry of terms could be either string or BasicTerms object
      * @var array
      */
-    protected $terms = array();
+    protected $terms = [];
 
     /**
      * ctor
      * @param $operator
      * @param array $terms
      */
-    public function __construct($operator, array $terms = array())
+    public function __construct($operator, array $terms = [])
     {
 
         $this->operator = TermParserHelper::getOperator($operator);
         if (!$this->operator) {
-            throw new QueryBuilderException("invalid operator: " . $operator);
+            throw new QueryBuilderException('invalid operator: ' . $operator);
         }
         $this->terms = $terms;
     }
@@ -93,14 +93,14 @@ class BasicTerms
     public function toArray()
     {
         // ignore the first operator if is single node and is not 'NOT' operator
-        if (count($this->terms) === 1 && !TermParserHelper::isNotOperator($this->operator)) {
+        if (safeCount($this->terms) === 1 && !TermParserHelper::isNotOperator($this->operator)) {
             if ($this->terms[0] instanceof BasicTerms) {
                 return $this->terms[0]->toArray();
             }
         }
 
-        $operand = array();
-        $singleTerms = array();
+        $operand = [];
+        $singleTerms = [];
         foreach ($this->terms as $term) {
             if (is_string($term)) {
                 if (TermParserHelper::isOrOperator($this->operator)) {
@@ -119,6 +119,6 @@ class BasicTerms
             $operand[] = $singleTermsStr;
         }
 
-        return array($this->operator => $operand);
+        return [$this->operator => $operand];
     }
 }

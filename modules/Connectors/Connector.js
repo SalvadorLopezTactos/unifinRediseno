@@ -95,3 +95,12 @@ function findPosY(obj)
         curtop += obj.y;
     return curtop;
 }
+
+// jscs:disable
+function toggleConfigBlock(cb)
+{
+    const isChecked = cb.checked;
+    const cbBlocks = $(cb).closest('table').find("tr[data-cb-block='" + cb.getAttribute('data-cb') + "']");
+    isChecked ? cbBlocks.show() : cbBlocks.hide();
+}
+// jscs:enable

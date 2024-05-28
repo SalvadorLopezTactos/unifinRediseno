@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Ataskaitos planai',
     'LBL_MODULE_NAME_SINGULAR' => 'Ataskaitos planas',
     'LBL_REPORT_NAME' => 'Ataskaita',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Failo tipas (-ai)',
     'LBL_EMBED_REPORT' => 'Įterpti ataskaitą į el. laišką',
     'LBL_EMBED_REPORT_INFO' => 'Pastaba: jei ataskaita viršija 200 eilučių, ją pridėsime kaip CSV failą.',
-);
+];

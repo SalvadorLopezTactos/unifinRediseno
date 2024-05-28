@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Потребителският подпис изисква да се въведе име.',
     'LBL_DEFAULT_SIGNATURE' => 'По подразбиране',
     'LBL_MODULE_NAME' => 'Подписи на електронната поща',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'Да се използва ли подпис?',
     'LBL_SIGNATURE_PREPEND' => 'Да се постави подписа над отговора?',
     'LBL_SIGNATURES' => 'Подписи',
-);
+];

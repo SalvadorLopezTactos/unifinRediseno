@@ -12,10 +12,10 @@
  */
 
 $module_name = 'pmse_Business_Rules';
-$viewdefs[$module_name]['mobile']['layout']['edit'] = array(
-    'components' => array(
-        array(
+$viewdefs[$module_name]['mobile']['layout']['edit'] = [
+    'components' => [
+        [
             'view' => 'edit',
-        )
-    ),
-);
+        ],
+    ],
+];

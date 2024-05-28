@@ -11,6 +11,6 @@
  */
 
 
-class SugarWidgetFieldRadioEnum extends SugarWidgetFieldEnum {
-
+class SugarWidgetFieldRadioEnum extends SugarWidgetFieldEnum
+{
 }

@@ -127,17 +127,17 @@ class Notes extends Portal
             'cases',
             'c',
             'c.id = n.parent_id and n.parent_type = ' . $casesQb->createPositionalParameter('Cases') .
-                ' and n.deleted = ' . $casesQb->createPositionalParameter(0) .
-                ' and c.deleted = ' . $casesQb->createPositionalParameter(0) .
-                ' and c.portal_viewable = ' . $casesQb->createPositionalParameter(1)
+            ' and n.deleted = ' . $casesQb->createPositionalParameter(0) .
+            ' and c.deleted = ' . $casesQb->createPositionalParameter(0) .
+            ' and c.portal_viewable = ' . $casesQb->createPositionalParameter(1)
         );
 
         $accountsOfContact = PortalFactory::getInstance('Session')->getAccountIds();
-        if ((is_countable($accountsOfContact) ? count($accountsOfContact) : 0) > 1) {
+        if (safeCount($accountsOfContact) > 1) {
             $casesQb->where(
                 $casesQb->expr()->in(
                     'c.account_id',
-                    $casesQb->createPositionalParameter((array) $accountsOfContact, \Doctrine\DBAL\Connection::PARAM_STR_ARRAY)
+                    $casesQb->createPositionalParameter((array)$accountsOfContact, \Doctrine\DBAL\Connection::PARAM_STR_ARRAY)
                 )
             );
         } else {
@@ -172,9 +172,9 @@ class Notes extends Portal
                 'bugs',
                 'b',
                 'b.id = n.parent_id and n.parent_type = ' . $bugsQb->createPositionalParameter('Bugs') .
-                    ' and n.deleted = ' . $bugsQb->createPositionalParameter(0) .
-                    ' and b.deleted = ' . $bugsQb->createPositionalParameter(0) .
-                    ' and b.portal_viewable = ' . $bugsQb->createPositionalParameter(1)
+                ' and n.deleted = ' . $bugsQb->createPositionalParameter(0) .
+                ' and b.deleted = ' . $bugsQb->createPositionalParameter(0) .
+                ' and b.portal_viewable = ' . $bugsQb->createPositionalParameter(1)
             );
 
             $this->visibilityQueryOr->in($options['table_alias'] . '.id', $bugsQb);

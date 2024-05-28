@@ -15,12 +15,13 @@ $viewdefs['Administration']['base']['view']['drive-path-buttons'] = [
             'name' => 'shared_button',
             'type' => 'button',
             'label' => 'LBL_SHARED_WITH_ME',
+            'css_class' => 'ml-2',
         ],
         [
             'name' => 'cancel_button',
             'type' => 'button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
-            'css_class' => 'btn-invisible btn-link',
+            'css_class' => 'btn-invisible btn-link ml-2',
         ],
         [
             'type' => 'actiondropdown',
@@ -30,7 +31,8 @@ $viewdefs['Administration']['base']['view']['drive-path-buttons'] = [
                 [
                     'type' => 'rowaction',
                     'name' => 'save_button',
-                    'label' => 'LBL_SET_PATH',
+                    'label' => 'LBL_GOOGLE_DRIVE_SAVE_BUTTON',
+                    'css_class' => 'ml-2',
                 ],
             ],
         ],

@@ -285,9 +285,6 @@
      * @return {Object} dashlet metadata updated after being added to the grid
      */
     addDashlet: function(dashletDef) {
-        // Components are indexed in the order they're added for reference later
-        var dashletGridWrapper = this._initializeDashlet(dashletDef);
-
         // Obtain a copy of the default options so we can extend them without
         // changing object-level defaults
         var defaultOptions = app.utils.deepCopy(this.defaultElementOptions);
@@ -296,6 +293,9 @@
         // Generate a UUID for components to be stored with metadata so each
         // dashlet can be uniquely ID'd both on the frontend and in the DB
         options.id = options.id || app.utils.generateUUID();
+
+        // Components are indexed in the order they're added for reference later
+        var dashletGridWrapper = this._initializeDashlet(dashletDef, options.id);
 
         // Depending on the options set above for positioning, the dashlet
         // metadata may need to be updated after being added to the grid
@@ -347,9 +347,10 @@
      * future page loads will respect the user's positioning.
      *
      * @param {Object} dashletDef dashlet metadata
+     * @param {bool} autoPosition
      */
-    addNewDashlet: function(dashletDef) {
-        dashletDef.autoPosition = true;
+    addNewDashlet: function(dashletDef, autoPosition = true) {
+        dashletDef.autoPosition = autoPosition;
         dashletDef = this.addDashlet(dashletDef);
         dashletDef.autoPosition = false;
         this.dashlets.push(dashletDef);
@@ -508,15 +509,18 @@
      * in
      *
      * @param {Object} dashletDef Dashlet metadata
+     * @param {string} dashletMetaId Dashlet metadata id
+     *
      * @return {View.Layout} Dashlet Grid Item layout
      * @private
      */
-    _initializeDashlet: function(dashletDef) {
-        var dashletGridWrapper = app.view.createLayout({
+    _initializeDashlet: function(dashletDef, dashletMetaId) {
+        let dashletGridWrapper = app.view.createLayout({
             name: 'dashlet-grid-wrapper',
             layout: this,
             meta: {name: _.size(this._components)},
-            context: this.context
+            context: this.context,
+            dashletMetaId: dashletMetaId
         });
         this._components.push(dashletGridWrapper);
         dashletGridWrapper.addDashlet(dashletDef);
@@ -712,8 +716,33 @@
             this.dashlets[index].height = 1;
 
             if (this.dashlets[index].view.ui_type === 'multi') {
-                this.dashlets[index].minHeight = 4;
-                this.dashlets[index].height = 4;
+                // Get value for dashlet height
+                let q = this._getMultiDashletHeight();
+                if (isNaN(q)) {
+                    q = 4; // default value before SS-3346
+                }
+                this.dashlets[index].minHeight = q;
+                this.dashlets[index].height = q;
+            }
+        }, this);
+
+        //Handle the height recalculation on window resize
+        $(window).on('resize', _.debounce(_.bind(this._resizeMultiDashlet, this), 100));
+    },
+
+    /**
+     * Change grid column mode if window was resized
+     */
+    _resizeMultiDashlet: function() {
+        let q = this._getMultiDashletHeight();
+
+        _.each(this.dashlets, function(dashletMeta, index) {
+            if (this.dashlets[index].view.ui_type === 'multi') {
+                let $multiDashlet = this.grid.$el.find(`[data-gs-id='${this.dashlets[index].id}']`)[0];
+                if ($multiDashlet) {
+                    $multiDashlet.setAttribute('data-gs-min-height', q);
+                    $multiDashlet.setAttribute('data-gs-height', q);
+                }
             }
         }, this);
     },
@@ -728,6 +757,7 @@
         }
         this.grid.off('change');
         this.grid.off('removed');
+        $(window).off('resize', this._resizeMultiDashlet, this);
         this._super('_dispose');
     },
 
@@ -743,5 +773,19 @@
             // value is still set when `initialize` is called
             this.defaultElementOptions.minWidth = 2;
         }
+    },
+
+    /**
+     * Calculate dashlet height for multi type dashlet. This formula was obtained empirically.
+     * @return {number}
+     * @private
+     */
+    _getMultiDashletHeight: function() {
+        let h = $('.dashboard.bg-secondary-content-background.w-full.absolute').outerHeight();
+        let d = 97 - (h * 0.02);
+        //divide-by-zero protection
+        d = d > 0 ? d : 1;
+        let q = Math.floor(h / d);
+        return q;
     },
 })

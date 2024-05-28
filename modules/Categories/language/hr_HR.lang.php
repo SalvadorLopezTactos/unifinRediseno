@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kategorije',
     'LBL_MODULE_NAME_SINGULAR' => 'Kategorija',
     'LBL_MODULE_TITLE' => 'Kategorije',
@@ -31,4 +31,4 @@ $mod_strings = array(
 Sve ugniježđene kategorije također će biti uklonjene',
     'LBL_WRONG_MOVE_PATH' => 'Ne možete premjestiti mapu samu u sebe.',
     'ERR_EMPTY_NODE_NAME' => 'Ne možete dodati kategoriju bez naslova',
-);
+];

@@ -52,12 +52,12 @@ class MarketingExtras
         $helper = $this->getMarketingExtrasHelper();
 
         $sugarDetails = $helper->getSugarDetails();
-        $queryParams = array(
+        $queryParams = [
             'language' => $helper->chooseLanguage($language),
             'version' => $sugarDetails['version'],
             'flavor' => strtolower($sugarDetails['flavor']),
             'build' => $sugarDetails['build'],
-        );
+        ];
 
         $marketingExtrasSandboxTest = $helper->getSugarConfig('marketing_extras_sandbox_test');
         if (isset($marketingExtrasSandboxTest)) {
@@ -253,11 +253,11 @@ class MarketingExtras
     {
         $urlConstraintBuilder = new ConstraintBuilder();
         return $urlConstraintBuilder->build(
-            array(
+            [
                 // only allows HTTP and HTTPS by default, which is what we want
                 // (i.e. we don't want file://)
                 'Assert\Url',
-            )
+            ]
         );
     }
 
@@ -302,7 +302,7 @@ class MarketingExtras
         $validator = $this->getValidator();
         $constraints = $this->getUrlConstraints();
         $errors = $validator->validate($url, $constraints);
-        return count($errors) === 0;
+        return safeCount($errors) === 0;
     }
 
     /**
@@ -315,6 +315,6 @@ class MarketingExtras
         $validator = $this->getValidator();
         $constraints = $this->getFileConstraints();
         $errors = $validator->validate($file, $constraints);
-        return count($errors) === 0;
+        return safeCount($errors) === 0;
     }
 }

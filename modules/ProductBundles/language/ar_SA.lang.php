@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'مرحلة المجموعة:',
-    'LBL_DEAL_TOT'=>'إجمالي الخصم',
-    'LBL_DEAL_TOT_USDOLLAR'=>'إجمالي الخصم (بالدولار الأمريكي)',
+    'LBL_DEAL_TOT' => 'إجمالي الخصم',
+    'LBL_DEAL_TOT_USDOLLAR' => 'إجمالي الخصم (بالدولار الأمريكي)',
     'LBL_NEW_SUB' => 'الإجمالي الفرعي المخصوم:',
     'LBL_SHIPPING' => 'الشحن:',
-    'LBL_SHIPPING_USDOLLAR'=>'الشحن (بالدولار الأمريكي)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'الإجمالي الفرعي (بالدولار الأمريكي)',
+    'LBL_SHIPPING_USDOLLAR' => 'الشحن (بالدولار الأمريكي)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'الإجمالي الفرعي (بالدولار الأمريكي)',
     'LBL_SUBTOTAL' => 'الإجمالي الفرعي:',
     'LBL_TAXABLE_SUBTOTAL' => 'الإجمالي الفرعي القابل لتطبيق الضريبة',
-    'LBL_TAX_USDOLLAR'=>'الضريبة (بالدولار الأمريكي)',
+    'LBL_TAX_USDOLLAR' => 'الضريبة (بالدولار الأمريكي)',
     'LBL_TAX' => 'الضريبة:',
-    'LBL_TOTAL_USDOLLAR'=>'الإجمالي (بالدولار الأمريكي)',
+    'LBL_TOTAL_USDOLLAR' => 'الإجمالي (بالدولار الأمريكي)',
     'LBL_TOTAL' => 'الإجمالي:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'موضع حزمة العرض',
     'EXCEPTION_INVALID_QUOTE_ID' => 'معرّف العرض مفقود من حمولة الدفع',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'لم يتم العثور على الرمز الذي طلبته',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'لم يتم العثور على الرمز الذي طلبته',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'الخصم الجماعي الإضافي',
     'LBL_GROUP_TOTAL' => 'الإجمالي التجميعي',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'عنوان المجموعة',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'مجموعة حزم المنتجات الافتراضية لعرض السعر',
     'LBL_ALERT_DELETING_ITEM' => 'حذف بند (بنود)',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'تم حذف البند بنجاح',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني لحزمة المنتج',
+];

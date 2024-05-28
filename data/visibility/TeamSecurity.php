@@ -116,7 +116,7 @@ class TeamSecurity extends NormalizedTeamSecurity
         }
 
         if (!empty($this->options['prefetch_for_retrieve'])
-            && !empty($this->options['bean_id']) ) {
+            && !empty($this->options['bean_id'])) {
             return new Retrieve($this->user, $this->options['bean_id']);
         }
 

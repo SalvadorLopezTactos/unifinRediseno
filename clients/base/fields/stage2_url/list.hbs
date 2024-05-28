@@ -12,10 +12,10 @@
 --}}
 {{#if value}}
     {{#if def.isClickable}}
-        <a class="ellipsis_inline" data-action="recordLinkClick" data-placement="bottom"
+        <a class="ellipsis_inline" data-action="recordLinkClick" data-bs-placement="bottom"
            title="{{value}}"
            {{#if def.link_target}}target="{{def.link_target}}"{{/if}} href="{{value}}">{{value}}</a>
     {{else}}
-        <span class="ellipsis_inline" data-placement="bottom" title="{{value}}">{{value}}</span>
+        <span class="ellipsis_inline" data-bs-placement="bottom" title="{{value}}">{{value}}</span>
     {{/if}}
 {{/if}}

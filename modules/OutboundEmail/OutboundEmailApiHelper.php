@@ -65,9 +65,11 @@ class OutboundEmailApiHelper extends SugarBeanApiHelper
             case OutboundEmail::TYPE_SYSTEM_OVERRIDE:
                 $unset = array_merge($unset, $this->unsetSysOverrides);
                 // Fall through to unset fields specified in $unsetSys.
+                // no break
             case OutboundEmail::TYPE_SYSTEM:
                 $unset = array_merge($unset, $this->unsetSys);
                 // Fall through to unset fields specified in $unsetDefault.
+                // no break
             default:
                 $unset = array_merge($unset, $this->unsetDefault);
                 break;
@@ -85,7 +87,7 @@ class OutboundEmailApiHelper extends SugarBeanApiHelper
      *
      * The password field will return true if the field was requested and a password exists.
      */
-    public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(SugarBean $bean, array $fieldList = [], array $options = [])
     {
         /*
          * When retrieving a list of OutboundEmail records that includes the system account, FilterApi::populateRelatedFields()

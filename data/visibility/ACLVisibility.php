@@ -60,7 +60,7 @@ class ACLVisibility extends SugarVisibility implements StrategyInterface
                 );
             } elseif ($this->tbaConfig->isValidAccess($actualAccess)) {
                 $tbaVisibility = new TeamBasedACLVisibility($this->bean);
-                $options = array('where_condition' => true);
+                $options = ['where_condition' => true];
                 if (!empty($this->getOption('table_alias'))) {
                     $options['table_alias'] = $this->getOption('table_alias');
                 }
@@ -79,7 +79,8 @@ class ACLVisibility extends SugarVisibility implements StrategyInterface
     /**
      * {@inheritdoc}
      */
-    public function addVisibilityWhereQuery(SugarQuery $sugarQuery, $options = array()) {
+    public function addVisibilityWhereQuery(SugarQuery $sugarQuery, $options = [])
+    {
         $where = null;
         $this->addVisibilityWhere($where);
         if (!empty($where)) {
@@ -127,7 +128,7 @@ class ACLVisibility extends SugarVisibility implements StrategyInterface
      */
     public function elasticGetBeanIndexFields($module, Visibility $provider)
     {
-        $result = array();
+        $result = [];
         // retrieve the owner field directly from the bean
         if ($ownerField = $this->bean->getOwnerField()) {
             $result[$ownerField] = 'id';

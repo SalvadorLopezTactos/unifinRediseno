@@ -9,10 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
-  * Store old modules list so we could use it to compare to new modules list
-  * and update display tabs, etc.
-  */
+ * Store old modules list so we could use it to compare to new modules list
+ * and update display tabs, etc.
+ */
 class SugarUpgradeStoreModules extends UpgradeScript
 {
     public $order = 400;
@@ -21,6 +22,7 @@ class SugarUpgradeStoreModules extends UpgradeScript
 
     public function run()
     {
+        $moduleList = null;
         $app_list_strings = [];
         include 'include/modules.php';
         $this->upgrader->state['old_modules'] = $moduleList;

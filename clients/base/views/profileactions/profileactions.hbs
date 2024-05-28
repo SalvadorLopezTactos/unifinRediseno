@@ -13,15 +13,19 @@
 <ul class="nav megamenu" id="userList">
     <li class="dropdown" id="userActions" data-menu="user-actions">
         <div class="btn-group pt-2 pb-1 px-2">
-            <button data-toggle="dropdown" class="btn btn-invisible btn-link dropdown-toggle" rel="tooltip" data-placement="bottom" title="{{userName}}" track="click:userActions" aria-label="{{str 'LBL_USER_MENU'}}" role="button" aria-haspop="true" aria-expanded="false">
-                {{#if pictureUrl}}
-                    <img src="{{pictureUrl}}" alt="{{userName}}" class="avatar avatar-btn">
-                {{else}}
-                    <i class="sicon sicon-lg sicon-user"></i>
-                {{/if}}
-                <i class="sicon sicon-chevron-down"></i>
+            <button data-bs-toggle="dropdown" class="btn btn-invisible btn-link dropdown-toggle"
+                    track="click:userActions" aria-label="{{str 'LBL_USER_MENU'}}" role="button" aria-haspopup="true"
+                    aria-expanded="false">
+                <span class="block" rel="tooltip" data-bs-placement="bottom" title="{{userName}}">
+                    {{#if pictureUrl}}
+                        <img src="{{pictureUrl}}" alt="{{userName}}" class="avatar avatar-btn">
+                    {{else}}
+                        <i class="sicon sicon-lg sicon-user"></i>
+                    {{/if}}
+                    <i class="sicon sicon-chevron-down"></i>
+                </span>
             </button>
-            <div class="dropdown-menu rounded-t-none scroll pull-right">
+            <div class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl rounded-t-none scroll pull-right">
                 <ul role="menu">
                     {{#each menulist}}
                         {{#if css_class}}

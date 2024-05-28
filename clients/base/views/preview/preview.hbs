@@ -10,13 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="block preview-data">
+<div class="block preview-data rounded-md shadow">
 {{#each meta.panels}}
 {{#each fields}}
     {{#if name}}
     <div class="record-cell field-row{{#if ../../hide}}{{#if ../../../../hidePanel}} hide{{/if}} panel_hidden{{/if}}">
         <div class="field-label ellipsis_inline" data-name="{{../name}}">
-            <span class="preview-lock-link-wrapper hide" data-name="{{../name}}" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-placement="left">
+            <span class="preview-lock-link-wrapper hide" data-name="{{../name}}" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-bs-placement="left">
                 <i class="sicon sicon-lock"></i>
             </span>
             {{#if icon}}

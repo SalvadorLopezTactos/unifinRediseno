@@ -34,11 +34,15 @@
 
   i {
     width: 20px;
-    display: inline;
     position: absolute;
     right: 0;
     line-height: inherit;
     top: 5px;
+    outline: none;
+
+    &:not(.hidden) {
+      display: inline;
+    }
   }
 }
 

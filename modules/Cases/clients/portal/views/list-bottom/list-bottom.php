@@ -10,34 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Cases']['portal']['view']['list-bottom'] = array(
-    'listNav' =>
-    array(
+$viewdefs['Cases']['portal']['view']['list-bottom'] = [
+    'listNav' => [
         0 =>
-        array(
-            'name' => 'create_new',
-            'type' => 'navelement',
-            'icon' => 'sicon-plus',
-            'label' => ' ',
-            'route' =>
-            array(
-                'action' => 'create',
-                'module' => 'Cases',
-            ),
-        ),
+            [
+                'name' => 'create_new',
+                'type' => 'navelement',
+                'icon' => 'sicon-plus',
+                'label' => ' ',
+                'route' => [
+                    'action' => 'create',
+                    'module' => 'Cases',
+                ],
+            ],
         1 =>
-        array(
-            'name' => 'show_more_button_back',
-            'type' => 'navelement',
-            'icon' => 'sicon-chevron-left',
-            'label' => ' '
-        ),
+            [
+                'name' => 'show_more_button_back',
+                'type' => 'navelement',
+                'icon' => 'sicon-chevron-left',
+                'label' => ' ',
+            ],
         2 =>
-        array(
-            'name' => 'show_more_button_forward',
-            'type' => 'navelement',
-            'icon' => 'sicon-chevron-right',
-            'label' => ' '
-        ),
-    ),
-);
+            [
+                'name' => 'show_more_button_forward',
+                'type' => 'navelement',
+                'icon' => 'sicon-chevron-right',
+                'label' => ' ',
+            ],
+    ],
+];

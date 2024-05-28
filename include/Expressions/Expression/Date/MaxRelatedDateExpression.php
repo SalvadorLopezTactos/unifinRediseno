@@ -18,14 +18,13 @@
  */
 class MaxRelatedDateExpression extends DateExpression
 {
-
     /**
      * Returns the opreation name that this Expression should be
      * called by.
      */
     public static function getOperationName()
     {
-        return array("maxRelatedDate");
+        return ['maxRelatedDate'];
     }
 
     public function evaluate()
@@ -89,10 +88,11 @@ class MaxRelatedDateExpression extends DateExpression
         $date = new DateTime();
         $date->setTimestamp($ret);
 
-        return $date->format("Y-m-d");
+        return $date->format('Y-m-d');
     }
 
     //todo: javascript version here
+
     /**
      * Returns the JS Equivalent of the evaluate function.
      */
@@ -155,7 +155,6 @@ class MaxRelatedDateExpression extends DateExpression
             );
         }
 JS;
-
     }
 
     /**
@@ -163,6 +162,6 @@ JS;
      */
     public static function getParameterTypes()
     {
-        return array(AbstractExpression::$RELATE_TYPE, AbstractExpression::$STRING_TYPE);
+        return [AbstractExpression::$RELATE_TYPE, AbstractExpression::$STRING_TYPE];
     }
 }

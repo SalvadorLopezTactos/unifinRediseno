@@ -16,8 +16,8 @@ use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 $wizard = InputValidation::getService()->getValidInputRequest('wizard', null, 'StudioWizard');
 
-if (file_exists('modules/Studio/wizards/'. $wizard . '.php')) {
-    require_once FileLoader::validateFilePath('modules/Studio/wizards/'. $wizard . '.php');
+if (file_exists('modules/Studio/wizards/' . $wizard . '.php')) {
+    require_once FileLoader::validateFilePath('modules/Studio/wizards/' . $wizard . '.php');
     $thewiz = new $wizard();
 } else {
     unset($_SESSION['studio']['lastWizard']);

@@ -11,15 +11,15 @@
  */
 --}}
 {{#if appIsSynced}}
-    <a class="sidebar-nav-item-btn h-full w-full bg-transparent absolute text-base"
+    <a class="sidebar-nav-item-btn absolute bg-transparent h-full rtl:text-right text-base  w-full"
         href="{{logoTargetUrl}}"
         target="_blank"
         rel="tooltip"
-        data-placement="{{tooltipPlacement}}"
+        data-bs-placement="{{tooltipPlacement}}"
         title="{{str label module}}"
     >
-        <span class="collapsed {{buildIcon icon}} inline-flex items-center justify-center h-full w-15 text-white"></span>
-        <span class="expanded inline-flex items-center h-full w-full mx-5.5">
+        <span class="collapsed {{buildIcon icon}} inline-flex items-center justify-center h-full text-white w-full"></span>
+        <span class="expanded inline-flex items-center h-full w-10/12 pl-6 pr-4 rtl:pl-4 rtl:!pr-6">
             <img class="expanded sidebar-nav-item-sugarcrm-logo" src="{{logoImageUrl}}"></img>
         </span>
     </a>

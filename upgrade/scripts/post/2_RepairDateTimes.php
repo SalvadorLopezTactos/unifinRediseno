@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Repair datetime columns which is not supported by DBManager out of the box
  */
@@ -69,7 +70,7 @@ class SugarUpgradeRepairDateTimes extends UpgradeScript
         }
     }
 
-    private function analyze(DBManager $db, string $table, array $definitions, array &$tablesToRepair) : void
+    private function analyze(DBManager $db, string $table, array $definitions, array &$tablesToRepair): void
     {
         if (isset($tablesToRepair[$table])) {
             return;
@@ -105,7 +106,7 @@ class SugarUpgradeRepairDateTimes extends UpgradeScript
         $tablesToRepair[$table] = $definitions;
     }
 
-    private function repair(DBManager $db, string $table, array $definitions) : void
+    private function repair(DBManager $db, string $table, array $definitions): void
     {
         $this->log(sprintf('Repairing %s (%s)', $table, implode(', ', array_keys($definitions))));
 

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => '產品類型',
     'LBL_MODULE_NAME_SINGULAR' => '產品類型',
     'LBL_MODULE_TITLE' => '產品類型：首頁',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => '確定要刪除此記錄嗎？',
     'ERR_DELETE_RECORD' => '必須指定記錄編號才能刪除產品類型。',
     'NTC_LIST_ORDER' => '設定此類型在「產品類型」下拉式清單中的顯示順序',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'匯入產品類型',
-    'LBL_CREATED_BY'=>'建立人',
+    'LNK_IMPORT_PRODUCT_TYPES' => '匯入產品類型',
+    'LBL_CREATED_BY' => '建立人',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> '已指派至 ID',
-    'LBL_EXPORT_CREATED_BY'=>'按 ID 建立',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'匯入產品類別',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => '已指派至 ID',
+    'LBL_EXPORT_CREATED_BY' => '按 ID 建立',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => '匯入產品類別',
+];

@@ -36,11 +36,11 @@ class ConstraintBuilder
      * Available namespace to load constraints in order of priority
      * @var array
      */
-    protected $namespaces = array(
+    protected $namespaces = [
         'Sugarcrm\Sugarcrm\custom\Security\Validator\Constraints',
         'Sugarcrm\Sugarcrm\Security\Validator\Constraints',
         'Symfony\Component\Validator\Constraints',
-    );
+    ];
 
     /**
      * Set namespaces to search for constraints
@@ -69,19 +69,18 @@ class ConstraintBuilder
     {
         // empty definitions are possible
         if (empty($constraints)) {
-            return array();
+            return [];
         }
 
         if (!is_array($constraints)) {
-            $constraints = array($constraints);
+            $constraints = [$constraints];
         }
 
-        $result = array();
+        $result = [];
         foreach ($constraints as $assert => $options) {
-
             if (is_numeric($assert)) {
                 $assert = $options;
-                $options = array();
+                $options = [];
             }
 
             $result[] = $this->buildConstraint($assert, $options);
@@ -94,10 +93,10 @@ class ConstraintBuilder
      * Build constraint with options
      * @param string $assert
      * @param array $options
-     * @throws ConstraintBuilderException
      * @return Constraint
+     * @throws ConstraintBuilderException
      */
-    protected function buildConstraint($assert, $options = array())
+    protected function buildConstraint($assert, $options = [])
     {
         if (!$this->isAssert($assert)) {
             if (is_string($assert)) {
@@ -118,8 +117,8 @@ class ConstraintBuilder
         if (!is_array($options)) {
             throw new ConstraintBuilderException(sprintf(
                 'Assert options expected to be an array, %s given',
-                gettype($options))
-            );
+                gettype($options)
+            ));
         }
 
         return new $class($this->parseOptions($options));
@@ -132,9 +131,8 @@ class ConstraintBuilder
      */
     protected function parseOptions(array $options)
     {
-        $result = array();
+        $result = [];
         foreach ($options as $key => $value) {
-
             if ($this->isAssert($key)) {
                 $result[] = $this->buildConstraint($key, $value);
                 continue;
@@ -168,8 +166,8 @@ class ConstraintBuilder
     /**
      * Figure out classname for given assert definition
      * @param string $assert
-     * @throws ConstraintBuilderException
      * @return string
+     * @throws ConstraintBuilderException
      */
     protected function getAssertClass($assert)
     {

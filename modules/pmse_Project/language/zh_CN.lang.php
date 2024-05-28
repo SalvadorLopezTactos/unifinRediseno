@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => '流程定义',
-  'LBL_MODULE_TITLE' => '流程定义',
-  'LBL_MODULE_NAME_SINGULAR' => '流程定义',
+$mod_strings = [
+    'LBL_MODULE_NAME' => '流程定义',
+    'LBL_MODULE_TITLE' => '流程定义',
+    'LBL_MODULE_NAME_SINGULAR' => '流程定义',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => '流程定义焦点抽屉',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => '流程定义焦点抽屉',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => '流程定义记录仪表板',
-  'LNK_LIST' => '查看流程定义',
-  'LNK_NEW_PMSE_PROJECT' => '新增流程定义',
-  'LNK_IMPORT_PMSE_PROJECT' => '导入流程定义',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => '流程定义记录仪表板',
+    'LNK_LIST' => '查看流程定义',
+    'LNK_NEW_PMSE_PROJECT' => '新增流程定义',
+    'LNK_IMPORT_PMSE_PROJECT' => '导入流程定义',
 
-  'LBL_PRJ_STATUS' => '状态',
-  'LBL_PRJ_MODULE' => '目标模块',
-  'LBL_PRJ_RUN_ORDER' => '运行顺序',
-  'LBL_PMSE_BUTTON_SAVE' => '保存',
-  'LBL_PMSE_BUTTON_CANCEL' => '取消',
-  'LBL_PMSE_BUTTON_YES' => '是',
-  'LBL_PMSE_BUTTON_NO' => '否',
-  'LBL_PMSE_BUTTON_OK' => '确定',
+    'LBL_PRJ_STATUS' => '状态',
+    'LBL_PRJ_MODULE' => '目标模块',
+    'LBL_PRJ_RUN_ORDER' => '运行顺序',
+    'LBL_PMSE_BUTTON_SAVE' => '保存',
+    'LBL_PMSE_BUTTON_CANCEL' => '取消',
+    'LBL_PMSE_BUTTON_YES' => '是',
+    'LBL_PMSE_BUTTON_NO' => '否',
+    'LBL_PMSE_BUTTON_OK' => '确定',
     'LBL_PMSE_FORM_ERROR' => '安装前，请先解决全部错误。',
 
     'LBL_PMSE_LABEL_DESIGN' => '设计',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => '活动',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => '动作',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => '潜在客户开始事件',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => '商业机会开始事件' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => '商业机会开始事件',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => '文档开始事件',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => '开始事件',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => '稍等事件',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => '商务规则',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => '商务规则操作',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => '电子邮件模板',
-);
+];

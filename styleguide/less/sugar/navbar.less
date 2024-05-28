@@ -6,13 +6,6 @@
 // COMMON STYLES
 // -------------
 
-// Base class and wrapper
-.navbar {
-  border-bottom: 1px solid var(--navbar-border-color);
-  height: @headerNavHeight;
-  overflow: visible;
-}
-
 .navbar-inner {
   // Prevent floats from breaking the navbar
   .clearfix();
@@ -179,19 +172,6 @@
   box-shadow: inset 0 1px 0 fade(@white, 10%), 0 1px 0 fade(@white, 7.5%);
 }
 
-.navbar .btn-navbar .fa-bar {
-  display: block;
-  width: 18px;
-  height: 2px;
-  background-color: @gray20;
-  border-radius: 1px;
-  box-shadow: 0 1px 0 fade(@black, 25%);
-}
-
-.btn-navbar .fa-bar + .fa-bar {
-  margin-top: 3px;
-}
-
 // Dropdown menus
 // --------------
 
@@ -318,18 +298,9 @@
     margin: 0;
   }
 
-  .fa {
-    font-size: 14px;
-  }
-
   .btn-group:hover > .routeLink,
   .btn-group > .routeLink:focus {
     color: @navbarLinkColorActive !important;
-  }
-
-  .btn-group:hover > .btn .fa,
-  .btn-group > .btn:focus .fa {
-    color: @navbarLinkColorActive;
   }
 }
 
@@ -484,8 +455,7 @@
             color: @dropdownLinkColor;
             background: @dropdownLinkBackgroundHover;
 
-            i.sicon,
-            i.fa {
+            i.sicon {
               color: @dropdownLinkColor;
             }
           }
@@ -494,8 +464,7 @@
             color: @dropdownLinkColorActive;
             background: @dropdownLinkBackgroundActive;
 
-            i.sicon,
-            i.fa {
+            i.sicon {
               color: @dropdownLinkColorActive;
             }
           }
@@ -528,20 +497,21 @@
     &.more {
       .btn-group {
         .dropdown-toggle {
-          .ml-0();
-          .p-2();
+          margin-left: 0;
+          padding: 0.5rem;
         }
       }
     }
 
     &.hidden.more {
       display: inline-block; /* UIUX-1610 */
+      visibility: hidden;
     }
 
     .btn-group {
       .dropdown-toggle {
         margin-left: 2px;
-        .p-1();
+        padding: 0.25rem;
 
         .sicon {
           vertical-align: top;
@@ -613,28 +583,8 @@
       min-width: 26px;
     }
 
-    .fa-user {
-      width: 26px;
-      height: 26px;
-      line-height: 26px;
-      top: 0;
-      font-size: 16px;
-    }
-
     .sicon {
       vertical-align: middle;
-    }
-  }
-
-  .profileactions-change-password {
-    .fa-lock {
-      text-indent: -9px;
-    }
-  }
-
-  .profileactions-reset-mfa {
-    .fa-lock {
-      text-indent: -9px;
     }
   }
 
@@ -653,7 +603,7 @@
 #createList {
   .btn-group {
     .dropdown-toggle {
-      .p-2();
+      padding: 0.5rem;
     }
   }
 }
@@ -681,7 +631,7 @@
     > .dropdown {
       &:hover {
         .btn-group {
-          .bg-tab-background-hover-color();
+          background-color: var(--tab-background-hover-color);
         }
       }
 

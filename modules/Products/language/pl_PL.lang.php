@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Pulpit pozycji wiersza ofert',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Pulpit rekordów pozycji oferty',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy pozycji oferty',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Oś czasu pozycji oferty',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Pozycje oferty kampanii',
     'LBL_MODULE_NAME' => 'Pozycje oferty',
@@ -183,4 +184,4 @@ Aby utworzyć {{module_name}}:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nowa pozycja oferty)',
     'LBL_DISCOUNT_PERCENT' => '% procent',
     'LBL_DISCOUNT_TYPE' => 'Typ rabatu',
-);
+];

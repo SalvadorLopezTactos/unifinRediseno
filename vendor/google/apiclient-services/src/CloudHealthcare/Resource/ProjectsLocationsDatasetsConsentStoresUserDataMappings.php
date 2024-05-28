@@ -28,7 +28,7 @@ use Google\Service\CloudHealthcare\UserDataMapping;
  * Typical usage is:
  *  <code>
  *   $healthcareService = new Google\Service\CloudHealthcare(...);
- *   $userDataMappings = $healthcareService->userDataMappings;
+ *   $userDataMappings = $healthcareService->projects_locations_datasets_consentStores_userDataMappings;
  *  </code>
  */
 class ProjectsLocationsDatasetsConsentStoresUserDataMappings extends \Google\Service\Resource
@@ -146,9 +146,10 @@ class ProjectsLocationsDatasetsConsentStoresUserDataMappings extends \Google\Ser
    * @param array $optParams Optional parameters.
    *
    * @opt_param string updateMask Required. The update mask that applies to the
-   * resource. For the `FieldMask` definition, see https://developers.google.com
-   * /protocol-buffers/docs/reference/google.protobuf#fieldmask. Only the
-   * `data_id`, `user_id` and `resource_attributes` fields can be updated.
+   * resource. For the `FieldMask` definition, see
+   * https://developers.google.com/protocol-
+   * buffers/docs/reference/google.protobuf#fieldmask. Only the `data_id`,
+   * `user_id` and `resource_attributes` fields can be updated.
    * @return UserDataMapping
    */
   public function patch($name, UserDataMapping $postBody, $optParams = [])

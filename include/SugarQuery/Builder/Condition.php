@@ -23,7 +23,7 @@ class SugarQuery_Builder_Condition
     /**
      * @var array
      */
-    public $values = array();
+    public $values = [];
     /**
      * @var bool|SugarBean
      */
@@ -68,7 +68,7 @@ class SugarQuery_Builder_Condition
      */
     public function setValues($values)
     {
-        if (is_array($values) && count($values) == 1 && key($values) === '$field') {
+        if (is_array($values) && safeCount($values) == 1 && key($values) === '$field') {
             $values = new SugarQuery_Builder_Field(current($values), $this->query);
         } else {
             $this->field->verifyCondition($values, $this->query);

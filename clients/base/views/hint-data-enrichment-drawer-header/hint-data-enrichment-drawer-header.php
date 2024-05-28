@@ -12,15 +12,15 @@
 $viewdefs['base']['view']['hint-data-enrichment-drawer-header'] = [
     'buttons' => [
         [
-            'name'      => 'cancel_button',
-            'type'      => 'button',
-            'label'     => 'LBL_CANCEL_BUTTON_LABEL',
+            'name' => 'cancel_button',
+            'type' => 'button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
         ],
         [
-            'name'      => 'save_button',
-            'type'      => 'button',
-            'label'     => 'LBL_SAVE_BUTTON_LABEL',
+            'name' => 'save_button',
+            'type' => 'button',
+            'label' => 'LBL_SAVE_BUTTON_LABEL',
             'css_class' => 'btn-primary hint-config-save',
         ],
     ],

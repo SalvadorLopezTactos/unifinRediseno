@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="tab-pane fade active in">
+<div class="tab-pane active in">
     <div class="row-fluid">
         <div class="padded" data-type="title">
-            <h4 class="tbold">{{this.options.widgetModule}} {{str 'LBL_MAPS_MODULE_MAPPINGS' module}}</h4>
+            <h4 class="font-bold">{{this.options.widgetModule}} {{str 'LBL_MAPS_MODULE_MAPPINGS' module}}</h4>
         </div>
     <div class="subpanel subpanel-header">
         <div>
@@ -23,12 +23,12 @@
         <div class="subpanel-controls btn-toolbar pull-right">
             <span class="pull-right maps-small-margin-right">
                 <span class="small">
-                    <a class="rowaction btn" rel="tooltip" data-action="reset-default" data-placement="bottom" title="{{str 'LBL_MAPS_RESET_DEFAULT' module}}">
+                    <a class="rowaction btn" rel="tooltip" data-action="reset-default" data-bs-placement="bottom" title="{{str 'LBL_MAPS_RESET_DEFAULT' module}}">
                         <i class="sicon sicon-refresh"></i>
                     </a>
                 </span>
                 <span class="small">
-                    <a class="rowaction btn" rel="tooltip" data-action="add-column" data-placement="bottom" title="{{str 'LBL_MAPS_ADD_COLUMN' module}}">
+                    <a class="rowaction btn" rel="tooltip" data-action="add-column" data-bs-placement="bottom" title="{{str 'LBL_MAPS_ADD_COLUMN' module}}">
                         <i class="sicon sicon-plus"></i>
                     </a>
                 </span>
@@ -36,14 +36,14 @@
         </div>
     </div>
     <div class="flex-list-view">
-        <div class="flex-list-view-content">
+        <div class="flex-list-view-content h-full overflow-auto relative">
             <div style="min-width: 100%;">
-                <table class="table table-striped dataTable reorderable-columns">
+                <table class="table table-striped dataTable reorderable-columns overflow-auto">
                     <thead>
                         <tr>
                             {{#each _fields.all}}
                                 <th class="maps-config-th-min-width" data-fieldname="{{name}}">
-                                    <div class="sortable-row-header-container record-cell">
+                                    <div class="sortable-row-header-container p-2 record-cell">
                                         <span data-draggable="true" class="record-edit-link-wrapper">
                                         </span>
                                         <div class="th-droppable-placeholder ui-droppable" data-droppableindex="{{position}}"></div>
@@ -52,7 +52,7 @@
                                         </h5>
                                         {{#notEq ../this._fields.all.length "1"}}
                                             <a data-action="remove-column" data-fieldname="{{name}}">
-                                                <i class="fa fa-times"></i>
+                                                <i class="sicon sicon-close"></i>
                                             </a>
                                         {{/notEq}}
                                     </div>

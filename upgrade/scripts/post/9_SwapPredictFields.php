@@ -48,7 +48,7 @@ class SugarUpgradeSwapPredictFields extends UpgradeScript
      *
      * @return bool
      */
-    protected function shouldRun() : bool
+    protected function shouldRun(): bool
     {
         $isFromBelow12Ent = $this->toFlavor('ent') && version_compare($this->from_version, '12.0.0', '<');
         return $isFromBelow12Ent;
@@ -364,7 +364,7 @@ class SugarUpgradeSwapPredictFields extends UpgradeScript
 
         if ($changed) {
             write_array_to_file(
-                "popupMeta",
+                'popupMeta',
                 $popupMeta,
                 $customPopupSearchList['file']
             );
@@ -436,7 +436,7 @@ class SugarUpgradeSwapPredictFields extends UpgradeScript
             $subquery = $this->db->getConnection()->createQueryBuilder();
             $subquery->select($field)
                 ->from($customTable)
-                ->where($subquery->expr()->eq($customTable . '.id_c', $table .'.id'));
+                ->where($subquery->expr()->eq($customTable . '.id_c', $table . '.id'));
 
             $qb->set($replacement, '(' . $subquery->getSQL() . ')');
         }

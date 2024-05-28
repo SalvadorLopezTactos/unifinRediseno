@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmnEvent'] = array(
+$dictionary['pmse_BpmnEvent'] = [
     'table' => 'pmse_bpmn_event',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'reassignable' => false,
-    'fields' => array(
-        'evn_uid' => array(
+    'fields' => [
+        'evn_uid' => [
             'required' => true,
             'name' => 'evn_uid',
             'vname' => '',
@@ -38,8 +38,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'prj_id' => array(
+        ],
+        'prj_id' => [
             'required' => true,
             'name' => 'prj_id',
             'vname' => '',
@@ -59,8 +59,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'pro_id' => array(
+        ],
+        'pro_id' => [
             'required' => true,
             'name' => 'pro_id',
             'vname' => '',
@@ -80,8 +80,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'evn_type' => array(
+        ],
+        'evn_type' => [
             'required' => true,
             'name' => 'evn_type',
             'vname' => '',
@@ -101,8 +101,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'calculated' => false,
             'len' => '30',
             'size' => '30',
-        ),
-        'evn_marker' => array(
+        ],
+        'evn_marker' => [
             'required' => true,
             'name' => 'evn_marker',
             'vname' => '',
@@ -122,8 +122,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'calculated' => false,
             'len' => '30',
             'size' => '30',
-        ),
-        'evn_is_interrupting' => array(
+        ],
+        'evn_is_interrupting' => [
             'required' => true,
             'name' => 'evn_is_interrupting',
             'vname' => '',
@@ -147,8 +147,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'evn_attached_to' => array(
+        ],
+        'evn_attached_to' => [
             'required' => false,
             'name' => 'evn_attached_to',
             'vname' => '',
@@ -172,8 +172,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'evn_cancel_activity' => array(
+        ],
+        'evn_cancel_activity' => [
             'required' => true,
             'name' => 'evn_cancel_activity',
             'vname' => '',
@@ -197,8 +197,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'evn_activity_ref' => array(
+        ],
+        'evn_activity_ref' => [
             'required' => false,
             'name' => 'evn_activity_ref',
             'vname' => '',
@@ -222,8 +222,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'evn_wait_for_completion' => array(
+        ],
+        'evn_wait_for_completion' => [
             'required' => true,
             'name' => 'evn_wait_for_completion',
             'vname' => '',
@@ -247,8 +247,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'evn_error_name' => array(
+        ],
+        'evn_error_name' => [
             'required' => true,
             'name' => 'evn_error_name',
             'vname' => '',
@@ -268,8 +268,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'evn_error_code' => array(
+        ],
+        'evn_error_code' => [
             'required' => true,
             'name' => 'evn_error_code',
             'vname' => '',
@@ -289,8 +289,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'evn_escalation_name' => array(
+        ],
+        'evn_escalation_name' => [
             'required' => true,
             'name' => 'evn_escalation_name',
             'vname' => '',
@@ -310,8 +310,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'evn_escalation_code' => array(
+        ],
+        'evn_escalation_code' => [
             'required' => true,
             'name' => 'evn_escalation_code',
             'vname' => '',
@@ -331,8 +331,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'evn_condition' => array(
+        ],
+        'evn_condition' => [
             'required' => true,
             'name' => 'evn_condition',
             'vname' => '',
@@ -352,8 +352,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'evn_message' => array(
+        ],
+        'evn_message' => [
             'required' => false,
             'name' => 'evn_message',
             'vname' => '',
@@ -373,8 +373,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'evn_operation_name' => array(
+        ],
+        'evn_operation_name' => [
             'required' => true,
             'name' => 'evn_operation_name',
             'vname' => '',
@@ -394,8 +394,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'evn_operation_implementation' => array(
+        ],
+        'evn_operation_implementation' => [
             'required' => true,
             'name' => 'evn_operation_implementation',
             'vname' => '',
@@ -415,8 +415,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'evn_time_date' => array(
+        ],
+        'evn_time_date' => [
             'required' => true,
             'name' => 'evn_time_date',
             'vname' => '',
@@ -436,8 +436,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'evn_time_cycle' => array(
+        ],
+        'evn_time_cycle' => [
             'required' => true,
             'name' => 'evn_time_cycle',
             'vname' => '',
@@ -457,8 +457,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'evn_time_duration' => array(
+        ],
+        'evn_time_duration' => [
             'required' => true,
             'name' => 'evn_time_duration',
             'vname' => '',
@@ -478,8 +478,8 @@ $dictionary['pmse_BpmnEvent'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'evn_behavior' => array(
+        ],
+        'evn_behavior' => [
             'required' => true,
             'name' => 'evn_behavior',
             'vname' => '',
@@ -499,23 +499,23 @@ $dictionary['pmse_BpmnEvent'] = array(
             'calculated' => false,
             'len' => '20',
             'size' => '20',
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmnEvent', 'pmse_BpmnEvent');

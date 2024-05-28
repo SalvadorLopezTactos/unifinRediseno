@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Değişiklik Tarihçesi Günlüğü',
     'LBL_FIELD_NAME' => 'Alan',
     'LBL_OLD_NAME' => 'Eski Değer',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Şuna güncelle:',
     'LBL_BLANK' => '-boşluk-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Denetim Zaman Çizelgesi',
+    'LBL_CREATED' => 'Oluşturuldu',
+];

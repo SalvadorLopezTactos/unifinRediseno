@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = [
-    'LBL_GC_STATUS'=>'Statut du géocodage',
+    'LBL_GC_STATUS' => 'Statut du géocodage',
     'LBL_GC_LATITUDE' => 'Latitude du géocodage',
     'LBL_GC_LONGITUDE' => 'Longitude du géocodage',
     'LBL_GC_STATUS_DETAIL' => 'Détails du statut du géocodage',

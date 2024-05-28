@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => '營收單項清單儀表板',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => '營收單項紀錄儀表板',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => '產品類型',
     'LBL_ASSIGNED_TO_NAME' => '指派至：',
     'LBL_ASSIGNED_TO' => '指派至',
-    'LBL_ASSIGNED_TO_ID'=>'指派的使用者 ID',
+    'LBL_ASSIGNED_TO_ID' => '指派的使用者 ID',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => '指派的使用者名稱',
     'LBL_EXPORT_ASSIGNED_USER_ID' => '指派的使用者 ID',
     'LBL_CAMPAIGN_ID' => '推廣活動 ID',
@@ -217,4 +217,5 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => '在泡泡圖中顯示前十個「營收項目」。',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => '我的營收項目',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "我的小組的營收項目",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '營收項目時間軸',
+];

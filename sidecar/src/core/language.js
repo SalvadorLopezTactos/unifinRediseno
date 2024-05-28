@@ -9,8 +9,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const Template = require('view/template');
-const User = require('core/user');
+const Template = require('../view/template');
+const User = require('./user');
 
 /**
  * Language Helper.

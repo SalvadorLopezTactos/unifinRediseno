@@ -10,25 +10,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/Administration/Common.php');
+require_once 'modules/Administration/Common.php';
+
 class DropDownHelper
 {
-    public $modules = array();
+    public $modules = [];
+
     public function getDropDownModules()
     {
         $dir = dir('modules');
         while ($entry = $dir->read()) {
-            if (file_exists('modules/'. $entry . '/EditView.php')) {
-                $this->scanForDropDowns('modules/'. $entry . '/EditView.php', $entry);
+            if (file_exists('modules/' . $entry . '/EditView.php')) {
+                $this->scanForDropDowns('modules/' . $entry . '/EditView.php', $entry);
             }
         }
-
     }
 
     public function scanForDropDowns($filepath, $module)
     {
         $contents = file_get_contents($filepath);
-        $matches = array();
+        $matches = [];
         preg_match_all('/app_list_strings\s*\[\s*[\'\"]([^\]]*)[\'\"]\s*]/', $contents, $matches);
         if (!empty($matches[1])) {
             foreach ($matches[1] as $match) {
@@ -44,9 +45,9 @@ class DropDownHelper
      * @param array dropdown
      * @return array Filtered dropdown list
      */
-    public function filterDropDown($name,$dropdown)
+    public function filterDropDown($name, $dropdown)
     {
-        $results = array();
+        $results = [];
         switch ($name) {
             //When renaming tabs ensure that the modList dropdown is filtered properly.
             case 'moduleList':
@@ -94,7 +95,7 @@ class DropDownHelper
             if ($key == 'BLANK') {
                 $key = '';
             }
-            
+
             $key = trim($key);
             $value = trim($value);
             if (empty($params['delete_' . $index])) {
@@ -106,7 +107,7 @@ class DropDownHelper
             return false;
         }
         return save_custom_dropdown_strings(
-            array($dropdown_name => $dropdown),
+            [$dropdown_name => $dropdown],
             $selected_lang,
             false,
             $postponeQRR

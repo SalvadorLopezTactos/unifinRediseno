@@ -1,11 +1,6 @@
 /* RESPONSIVE
   ----------------*/
 
-.hidden {
-  display: none;
-  visibility: hidden;
-}
-
 // IPHONE PORTRAIT MODE
 // ---------------------
 @media only screen
@@ -81,10 +76,6 @@
       padding: 7px 6px;
     }
 
-    .avatar-btn .fa-caret-down {
-      margin-left: -4px;
-    }
-
     #userActions > .btn-group {
       padding-right: 0;
     }
@@ -119,7 +110,7 @@
   }
   // But don't let it screw up prepend/append inputs
   .input-prepend input[class*="span"],
-    .input-append input[class*="span"] {
+  .input-append input[class*="span"] {
     width: auto;
   }
 
@@ -224,9 +215,6 @@
       margin-left: 0;
     }
   }
-  .filter-value [rel=datepicker] .add-on .fa-calendar {
-    display: none;
-  }
 }
 
 @media (max-width: 540px) {
@@ -242,10 +230,6 @@
         > .btn {
           background-color: @black;
           border-radius: 3px;
-
-          .fa-search {
-            color: @white;
-          }
         }
       }
 
@@ -294,7 +278,7 @@
   }
   // Make all columns even
   .row > [class*="span"],
-    .container-fluid .row-fluid > [class*="span"] {
+  .container-fluid .row-fluid > [class*="span"] {
     float: none;
     display: block;
     width: auto;
@@ -548,15 +532,6 @@
       width: 72px;
     }
   }
-
-  .flex-list-view.right-actions.scroll-width .dataTable {
-    td:last-child > span,
-    th:last-child .dropdown,
-    th:last-child > span {
-      width: 55px;
-      right: 0;
-    }
-  }
 }
 
 @media (max-width: 700px) {
@@ -607,7 +582,6 @@
 
   /* additive */
   .megamenu > .dropdown .btn-group > .dropdown-toggle .sicon-caret-down,
-  .megamenu > .dropdown .btn-group > .dropdown-toggle .fa-caret-down,
   th.sorting_asc span::after,
   th.sorting_desc span::after,
   th.sorting span::after,
@@ -619,15 +593,15 @@
 // Specific fix for Forecasts worksheet view
 .responsiveTopline() {
   .topline {
-    .flex-column();
+    flex-direction: column;
 
     .span4 {
       &::before {
         height: 7.25rem;
       }
 
-      .w-full();
-      .ml-8();
+      margin-left: 2rem;
+      width: 100%;
     }
   }
 }

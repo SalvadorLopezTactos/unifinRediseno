@@ -10,53 +10,55 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class pmse_Emails_Templates_sugar extends Basic {
-	var $new_schema = true;
-    var $module_name = 'pmse_Emails_Templates';
-	var $module_dir = 'pmse_Emails_Templates';
-	var $object_name = 'pmse_Emails_Templates';
-	var $table_name = 'pmse_emails_templates';
-	var $importable = false;
-		var $id;
-		var $name;
-		var $date_entered;
-		var $date_modified;
-		var $modified_user_id;
-		var $modified_by_name;
-		var $created_by;
-		var $created_by_name;
-		var $description;
-		var $deleted;
-		var $created_by_link;
-		var $modified_user_link;
-		var $activities;
-		var $assigned_user_id;
-		var $assigned_user_name;
-		var $assigned_user_link;
-		var $from_name;
-		var $from_address;
-		var $subject;
-		var $body;
-		var $body_html;
-		var $type;
-		var $base_module;
-		var $text_only;
-		var $published;
-        var $disable_row_level_security = true;
+class pmse_Emails_Templates_sugar extends Basic
+{
+    public $new_schema = true;
+    public $module_name = 'pmse_Emails_Templates';
+    public $module_dir = 'pmse_Emails_Templates';
+    public $object_name = 'pmse_Emails_Templates';
+    public $table_name = 'pmse_emails_templates';
+    public $importable = false;
+    public $id;
+    public $name;
+    public $date_entered;
+    public $date_modified;
+    public $modified_user_id;
+    public $modified_by_name;
+    public $created_by;
+    public $created_by_name;
+    public $description;
+    public $deleted;
+    public $created_by_link;
+    public $modified_user_link;
+    public $activities;
+    public $assigned_user_id;
+    public $assigned_user_name;
+    public $assigned_user_link;
+    public $from_name;
+    public $from_address;
+    public $subject;
+    public $body;
+    public $body_html;
+    public $type;
+    public $base_module;
+    public $text_only;
+    public $published;
+    public $disable_row_level_security = true;
 
     public const CURRENT_ACTIVITY_LINK = 'current_activity';
 
 
-	public function __construct(){
-		parent::__construct();
-	}
-	
-	public function bean_implements($interface){
-		switch($interface){
-			case 'ACL': return true;
-		}
-		return false;
-}
-		
-}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
+    public function bean_implements($interface)
+    {
+        switch ($interface) {
+            case 'ACL':
+                return true;
+        }
+        return false;
+    }
+}

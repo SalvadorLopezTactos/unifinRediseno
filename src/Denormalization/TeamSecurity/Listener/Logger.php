@@ -88,7 +88,7 @@ final class Logger implements Listener
     /**
      * {@inheritDoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf('Logger');
     }

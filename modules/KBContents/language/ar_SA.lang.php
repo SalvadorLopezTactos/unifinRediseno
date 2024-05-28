@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'لوحة معلومات قائمة قاعدة المعارف',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'لوحة معلومات سجل قاعدة المعارف',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم قاعدة المعارف',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني لقاعدة المعارف',
 
     'LBL_MODULE_NAME' => 'قاعدة المعارف',
     'LBL_MODULE_NAME_SINGULAR' => 'مقالة قاعدة المعارف',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'تعيين قيمة كأساسية',
     'LBL_ITEM_REMOVE' => 'إزالة عنصر',
     'LBL_ITEM_ADD' => 'إضافة عنصر',
-    'LBL_MODULE_ID'=> 'محتويات KB',
+    'LBL_MODULE_ID' => 'محتويات KB',
     'LBL_DOCUMENT_REVISION_ID' => 'معرف المراجعة',
     'LBL_DOCUMENT_REVISION' => 'المراجعة',
     'LBL_NUMBER' => 'العدد',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'المزيد من مقالات {{module}}...',
     'LBL_LIST_FORM_TITLE' => 'قائمة قاعدة المعارف',
     'LBL_SEARCH_FORM_TITLE' => 'بحث قاعدة المعارف',
-);
+];

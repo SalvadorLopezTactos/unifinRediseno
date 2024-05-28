@@ -28,15 +28,14 @@ $vardefs = [
             'precision' => '2',
             'comment' => 'The sentiment score for the agent ranging from -5 to 5',
             'reportable' => false,
-            'displayParams' =>
-                [
-                    'type' => 'sentiment',
-                    'readonly' => true,
-                    'icon' => [
-                        'type' => 'sicon-sugar-predict',
-                        'tooltip' => 'LBL_PREDICT_TOOLTIP',
-                    ],
+            'displayParams' => [
+                'type' => 'sentiment',
+                'readonly' => true,
+                'icon' => [
+                    'type' => 'sicon-sugar-predict',
+                    'tooltip' => 'LBL_PREDICT_TOOLTIP',
                 ],
+            ],
         ],
         'sentiment_score_agent_string' => [
             'name' => 'sentiment_score_agent_string',
@@ -63,15 +62,14 @@ $vardefs = [
             'precision' => '2',
             'comment' => 'The sentiment score for the customer ranging from -5 to 5',
             'reportable' => false,
-            'displayParams' =>
-                [
-                    'type' => 'sentiment',
-                    'readonly' => true,
-                    'icon' => [
-                        'type' => 'sicon-sugar-predict',
-                        'tooltip' => 'LBL_PREDICT_TOOLTIP',
-                    ],
+            'displayParams' => [
+                'type' => 'sentiment',
+                'readonly' => true,
+                'icon' => [
+                    'type' => 'sicon-sugar-predict',
+                    'tooltip' => 'LBL_PREDICT_TOOLTIP',
                 ],
+            ],
         ],
         'sentiment_score_customer_string' => [
             'name' => 'sentiment_score_customer_string',

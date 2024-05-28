@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => '正文',
     'LBL_BASE_MODULE' => '目標模組',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => '從檔案建立「流程電子郵件範本」失敗',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => '「流程定義」目前在使用此「電子郵件範本」。仍然要編輯此「電子郵件範本」嗎？',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "您無法刪除此「電子郵件範本」，因為「流程定義」目前在使用該範本。",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => '您無法刪除此「電子郵件範本」，因為「流程定義」目前在使用該範本。',
 
     'LBL_SUGAR_FIELD_SELECTOR' => '欄位選擇器',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => '選擇',
     'LBL_FIELD_SELECTOR_DROPDOWN' => '欄位值類型',
-);
+];

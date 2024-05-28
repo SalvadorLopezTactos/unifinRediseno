@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Confidențialitate date',
     'LBL_MODULE_NAME_SINGULAR' => 'Confidențialitate date',
     'LBL_NUMBER' => 'Număr',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Nu s-au marcat câmpuri sau înregistrări pentru ștergere.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Tablou de bord înregistrări de confidențialitate a datelor',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare confidențialitatea datelor',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia confidențialității datelor',
 
     // list view
     'LBL_HELP_RECORDS' => 'Modulul de Confidențialitate a datelor monitorizează activitățile de confidențialitate, inclusiv consimțământul și solicitările subiecților, pentru a susține procedurile de confidențialitate ale organizației dvs. Creați înregistrări de confidențialitate a datelor legate de înregistrarea unui individ (de ex. un contact) pentru a monitoriza consimțământul sau pentru a lua măsuri în privința unei solicitări de confidențialitate.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Modulul de Confidențialitate a datelor monitorizează activitățile de confidențialitate, inclusiv consimțământul și solicitările subiecților, pentru a susține procedurile de confidențialitate ale organizației dvs. Creați înregistrări de confidențialitate a datelor legate de înregistrarea unui individ (de ex. un contact) pentru a monitoriza consimțământul sau pentru a lua măsuri în privința unei solicitări de confidențialitate. După ce se finalizează acțiunea necesară, utilizatorii cu rol de Manager de confidențialitate a datelor pot face clic pe „Finalizare” sau „Respingere” pentru a actualiza starea.
 
 Pentru solicitări de ștergere, selectați „Marcare pentru ștergere” pentru fiecare înregistrare a individului listată în subpanourile de mai jos. După ce selectați toate câmpurile dorite, făcând clic pe „Ștergere și finalizare”, se vor elimina definitiv valorile câmpurilor și se va marca înregistrarea de confidențialitate a datelor ca finalizată.',
-);
+];

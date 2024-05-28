@@ -12,18 +12,18 @@
 
 class SugarACLOpi extends SugarACLStrategy
 {
-    protected static $syncingViews = array(
+    protected static $syncingViews = [
         'edit',
         'delete',
-    );
+    ];
 
-    protected static $platformSourceMap = array(
+    protected static $platformSourceMap = [
         'base' => 'Sugar',
         'portal' => 'Sugar',
         'mobile' => 'Sugar',
         'opi' => 'Outlook',
-        'lpi' => 'LotusNotes'
-    );
+        'lpi' => 'LotusNotes',
+    ];
 
     /**
      * Check recurring source to determine edit
@@ -42,7 +42,7 @@ class SugarACLOpi extends SugarACLStrategy
         }
 
         // if the recurring source is Sugar allow modifications
-        if (in_array($view, self::$syncingViews)
+        if (safeInArray($view, self::$syncingViews)
             && !empty($bean->recurring_source)
             && !empty($bean->fetched_row['recurring_source'])
             && $bean->recurring_source == 'Sugar'
@@ -52,7 +52,7 @@ class SugarACLOpi extends SugarACLStrategy
 
         $view = SugarACLStrategy::fixUpActionName($view);
 
-        if (in_array($view, self::$syncingViews)
+        if (safeInArray($view, self::$syncingViews)
             && isset($_SESSION['platform'])
             && isset(self::$platformSourceMap[$_SESSION['platform']])
             && !empty($bean->recurring_source) && !empty($bean->fetched_row['recurring_source'])
@@ -71,7 +71,7 @@ class SugarACLOpi extends SugarACLStrategy
      * @param array $context
      * @return SugarBean
      */
-    protected static function loadBean($module, $context = array())
+    protected static function loadBean($module, $context = [])
     {
         if (isset($context['bean']) && $context['bean'] instanceof SugarBean
             && $context['bean']->module_dir == $module) {
@@ -81,5 +81,4 @@ class SugarACLOpi extends SugarACLStrategy
         }
         return $bean;
     }
-
 }

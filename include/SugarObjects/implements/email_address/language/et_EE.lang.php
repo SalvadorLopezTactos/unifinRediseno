@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_ANY_EMAIL' => 'Meil:',
     'LBL_EMAIL' => 'Meiliaadress:',
     'LBL_PRIMARY_EMAIL' => 'Esmane meiliaadress',
@@ -18,7 +18,7 @@ $mod_strings = array (
     'LBL_OTHER_EMAIL_ADDRESS' => 'Teine meiliaadress:',
     'LBL_EMAIL_ADDRESS' => 'Meiliaadress',
     'LBL_EMAIL_ADDRESSES' => 'Meiliaadress(id)',
-    'LBL_INVALID_EMAIL'=>'Kehtetu meiliaadress:',
+    'LBL_INVALID_EMAIL' => 'Kehtetu meiliaadress:',
     'LBL_EMAIL_OPT_OUT' => 'Meilisõnumitest keeldumine:',
     'LBL_EMAIL_NON_PRIMARY' => 'Mitteesmased meiliaadressid',
-);
+];

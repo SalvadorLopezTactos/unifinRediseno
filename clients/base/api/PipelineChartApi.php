@@ -18,21 +18,21 @@ class PipelineChartApi extends SugarApi
      *
      * @var array
      */
-    protected $allowedModules = array(
+    protected $allowedModules = [
         'RevenueLineItems',
         'Opportunities',
-        'Products'
-    );
+        'Products',
+    ];
 
     /**
      * Map of what the amount field is for a given module
      * @var array
      */
-    protected $moduleAmountField = array(
+    protected $moduleAmountField = [
         'RevenueLineItems' => 'likely_case',
         'Opportunities' => 'amount',
-        'Products' => 'likely_case'
-    );
+        'Products' => 'likely_case',
+    ];
 
     /**
      * Endpoints to register
@@ -41,32 +41,32 @@ class PipelineChartApi extends SugarApi
      */
     public function registerApiRest()
     {
-        return array(
-            'pipeline' => array(
+        return [
+            'pipeline' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', 'chart', 'pipeline'),
-                'pathVars' => array('module', '', ''),
+                'path' => ['<module>', 'chart', 'pipeline'],
+                'pathVars' => ['module', '', ''],
                 'method' => 'pipeline',
                 'shortHelp' => 'Get the current opportunity pipeline data for the current timeperiod',
                 'longHelp' => 'modules/Opportunities/clients/base/api/help/OpportunitiesPipelineChartApi.html',
-            ),
-            'pipelineWithTimeperiod' => array(
+            ],
+            'pipelineWithTimeperiod' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', 'chart', 'pipeline', '?'),
-                'pathVars' => array('module', '', '', 'timeperiod_id'),
+                'path' => ['<module>', 'chart', 'pipeline', '?'],
+                'pathVars' => ['module', '', '', 'timeperiod_id'],
                 'method' => 'pipeline',
                 'shortHelp' => 'Get the current opportunity pipeline data for a specific timeperiod',
                 'longHelp' => 'modules/Opportunities/clients/base/api/help/OpportunitiesPipelineChartApi.html',
-            ),
-            'pipelineWithTimeperiodAndTeam' => array(
+            ],
+            'pipelineWithTimeperiodAndTeam' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', 'chart', 'pipeline', '?', '?'),
-                'pathVars' => array('module', '', '', 'timeperiod_id', 'type'),
+                'path' => ['<module>', 'chart', 'pipeline', '?', '?'],
+                'pathVars' => ['module', '', '', 'timeperiod_id', 'type'],
                 'method' => 'pipeline',
                 'shortHelp' => 'Get the current opportunity pipeline data for the current timeperiod',
                 'longHelp' => 'modules/Opportunities/clients/base/api/help/OpportunitiesPipelineChartApi.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -81,7 +81,7 @@ class PipelineChartApi extends SugarApi
     {
 
         // if not in the allowed module list, then we throw a 404 not found
-        if (!in_array($args['module'], $this->allowedModules)) {
+        if (!safeInArray($args['module'], $this->allowedModules)) {
             throw new SugarApiExceptionNotFound();
         }
 
@@ -113,19 +113,19 @@ class PipelineChartApi extends SugarApi
         // run the query
         $rows = $sq->execute();
         // data storage
-        $data = array();
+        $data = [];
         // keep track of the total for later user
         $total = SugarMath::init('0');
 
         foreach ($rows as $row) {
             // if the sales stage is one we need to ignore, the just continue to the next record
-            if (in_array($row['sales_stage'], $ignore_stages)) {
+            if (safeInArray($row['sales_stage'], $ignore_stages)) {
                 continue;
             }
 
             // if we have not seen this sales stage before, set the value to zero (0)
             if (!isset($data[$row['sales_stage']])) {
-                $data[$row['sales_stage']] = array('count' => 0, 'total' => '0');
+                $data[$row['sales_stage']] = ['count' => 0, 'total' => '0'];
             }
 
             // if customers have made amount not required, it saves to the DB as NULL
@@ -151,17 +151,17 @@ class PipelineChartApi extends SugarApi
         $currency = Currency::getUserCurrency();
 
         // setup for return format
-        $return_data = array();
+        $return_data = [];
         $series = 0;
         $previous_value = SugarMath::init('0');
         foreach ($data as $key => $item) {
             $value = SugarCurrency::convertAmountFromBase($item['total'], $currency->id);
             // set up each return key
-            $return_data[] = array(
+            $return_data[] = [
                 'key' => $key,          // the label/sales stage
                 'count' => $item['count'],
-                'values' => array(      // the values used in the grid
-                    array(
+                'values' => [      // the values used in the grid
+                    [
                         'series' => $series++,
                         'label' => SugarCurrency::formatAmount($value, $currency->id, 0),
                         // sending value by itself as 'y' gets manipulated by scale on the frontend
@@ -169,10 +169,10 @@ class PipelineChartApi extends SugarApi
                         'value' => floatval($value),
                         'x' => 0,
                         'y' => intval($value),                  // this needs to be an integer
-                        'y0' => intval($previous_value->result())         // this needs to be an integer
-                    )
-                )
-            );
+                        'y0' => intval($previous_value->result()),         // this needs to be an integer
+                    ],
+                ],
+            ];
             // save the previous value for use in the next item in the series
             $previous_value->add($value);
         }
@@ -181,15 +181,15 @@ class PipelineChartApi extends SugarApi
         $mod_strings = return_module_language($GLOBALS['current_language'], $seed->module_name);
         //return the total from the SugarMath Object.
         $total = SugarCurrency::convertAmountFromBase($total->result(), $currency->id);
-        return array(
-            'properties' => array(
+        return [
+            'properties' => [
                 'title' => $mod_strings['LBL_PIPELINE_TOTAL_IS'] . SugarCurrency::formatAmount($total, $currency->id),
                 'total' => $total,
                 'scale' => 1000,
-                'units' => $currency->symbol
-            ),
-            'data' => $return_data
-        );
+                'units' => $currency->symbol,
+            ],
+            'data' => $return_data,
+        ];
     }
 
     /**
@@ -205,7 +205,7 @@ class PipelineChartApi extends SugarApi
     {
         // build out the query
         $sq = new SugarQuery();
-        $sq->select(array('id', 'sales_stage', $amount_field, 'base_rate'));
+        $sq->select(['id', 'sales_stage', $amount_field, 'base_rate']);
         $sq->from($seed)
             ->where()
             ->gte('date_closed_timestamp', $tp->start_date_timestamp)
@@ -267,7 +267,6 @@ class PipelineChartApi extends SugarApi
     }
 
 
-
     /**
      * Recursive Method to Retrieve the full tree of reportees for your team.
      *
@@ -276,7 +275,7 @@ class PipelineChartApi extends SugarApi
      */
     protected function getReportingUsers($user_id)
     {
-        $final_users = array();
+        $final_users = [];
         $reporting_users = User::getReporteesWithLeafCount($user_id);
 
         foreach ($reporting_users as $user => $reportees) {

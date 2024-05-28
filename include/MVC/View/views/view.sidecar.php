@@ -19,14 +19,13 @@ class ViewSidecar extends SidecarView
      *
      * @see SidecarView::SidecarView()
      */
- 	public function __construct($bean = null, $view_object_map = array())
- 	{
+    public function __construct($bean = null, $view_object_map = [])
+    {
         $this->options['show_title'] = false;
         $this->options['show_header'] = false;
         $this->options['show_javascript'] = false;
         $this->options['show_subpanels'] = false;
         $this->options['show_search'] = false;
         parent::__construct();
- 	}
-
+    }
 }

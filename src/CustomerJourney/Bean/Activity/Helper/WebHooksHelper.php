@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper;
 
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\ActivityHandlerFactory;
@@ -20,27 +21,26 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Exception as CJException;
  */
 class WebHooksHelper
 {
-
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\parentHelper
      */
     private $parentHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\ActivityHelper
      */
     private $activityHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\childActivityHelper
      */
     private $childActivityHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\statusHelper
      */
     private $statusHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\stageHelper
      */
@@ -203,6 +203,8 @@ class WebHooksHelper
             $parent = $stage->getParent();
         } catch (CJException\ParentNotFoundException $e) {
             $parent = null;
+        } catch (CJException\NotFoundException $e) {
+            return;
         }
         $journey = $stage->getJourney();
 

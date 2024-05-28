@@ -18,9 +18,13 @@ use Doctrine\DBAL\Portability\Middleware as PortableMiddleware;
 use Doctrine\DBAL\Logging\SQLLogger;
 use Psr\Log\LoggerInterface;
 use Sugarcrm\Sugarcrm\Dbal\Connection;
+
 use Sugarcrm\Sugarcrm\Dbal\IbmDb2\Driver as IbmDb2Driver;
+
 use Sugarcrm\Sugarcrm\Dbal\Mysqli\Driver as MysqliDriver;
+
 use Sugarcrm\Sugarcrm\Dbal\Oci8\Driver as Oci8Driver;
+
 use Sugarcrm\Sugarcrm\Dbal\SqlSrv\Driver as SqlSrvDriver;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
@@ -35,7 +39,7 @@ class DBManagerFactory
     /**
      * @var DBManager[]
      */
-    static $instances = array();
+    public static $instances = [];
 
     /** @var SQLLogger instance of Doctrine Dbal logger class */
     protected static $dbalLogger;
@@ -59,7 +63,7 @@ class DBManagerFactory
      * @param string $class Implementation class
      * @throws Exception
      */
-    public static function setDriverClass(string $name, string $class) : void
+    public static function setDriverClass(string $name, string $class): void
     {
         if (!isset(self::$driverClasses[$name])) {
             throw new Exception('Unsupported DB driver ' . $name);
@@ -71,34 +75,34 @@ class DBManagerFactory
     /**
      * Returns a reference to the DB object of specific type
      *
-     * @param  string $type DB type
+     * @param string $type DB type
      * @param array $config DB configuration
      * @return DBManager
      */
-    public static function getTypeInstance($type, $config = array())
+    public static function getTypeInstance($type, $config = [])
     {
-        if(empty($config['db_manager'])) {
+        if (empty($config['db_manager'])) {
             $my_db_manager = self::getManagerByType($type, false);
 
             if (!$my_db_manager) {
                 display_stack_trace();
                 static::getLogger()->alert("unable to load DB manager for: $type");
-                sugar_die("Cannot load DB manager");
+                sugar_die('Cannot load DB manager');
             }
         } else {
             $my_db_manager = $config['db_manager'];
         }
 
         // sanitize the name
-        $my_db_manager = preg_replace("/[^A-Za-z0-9_-]/", "", $my_db_manager);
+        $my_db_manager = preg_replace('/[^A-Za-z0-9_-]/', '', $my_db_manager);
 
-        if(!empty($config['db_manager_class'])){
+        if (!empty($config['db_manager_class'])) {
             $my_db_manager = $config['db_manager_class'];
         } else {
             SugarAutoLoader::requireWithCustom("include/database/{$my_db_manager}.php");
         }
 
-        if(class_exists($my_db_manager)) {
+        if (class_exists($my_db_manager)) {
             return static::createInstance($my_db_manager);
         } else {
             return null;
@@ -106,37 +110,36 @@ class DBManagerFactory
     }
 
     /**
-	 * Returns a reference to the DB object for instance $instanceName, or the default
+     * Returns a reference to the DB object for instance $instanceName, or the default
      * instance if one is not specified
      *
-     * @param  string $instanceName optional, name of the instance
+     * @param string $instanceName optional, name of the instance
      * @return DBManager Database instance
      */
-	public static function getInstance($instanceName = '')
+    public static function getInstance($instanceName = '')
     {
         global $sugar_config;
         static $count = 0, $old_count = 0;
-        if(empty($sugar_config['dbconfig'])) {
+        if (empty($sugar_config['dbconfig'])) {
             return false;
         }
         //fall back to the default instance name
-        if(empty($sugar_config['db'][$instanceName])){
-        	$instanceName = '';
+        if (empty($sugar_config['db'][$instanceName])) {
+            $instanceName = '';
         }
-        if(!isset(self::$instances[$instanceName])){
+        if (!isset(self::$instances[$instanceName])) {
             $config = $sugar_config['dbconfig'];
             $count++;
-            if(!empty($instanceName)){
+            if (!empty($instanceName)) {
                 $config = $sugar_config['db'][$instanceName];
                 //trace the parent dbs until we get a real db
                 $parentInstanceName = '';
-                while(!empty($config['parent_db'])){
-                    if(empty($sugar_config['db'][$config['parent_db']])){
+                while (!empty($config['parent_db'])) {
+                    if (empty($sugar_config['db'][$config['parent_db']])) {
                         $config = $sugar_config['dbconfig'];
                         $parentInstanceName = '';
                         break;
-                    }
-                    else{
+                    } else {
                         $parentInstanceName = $config['parent_db'];
                         $config = $sugar_config['db'][$config['parent_db']];
                     }
@@ -144,15 +147,14 @@ class DBManagerFactory
             }
 
 
-            if(!empty($parentInstanceName) && !empty(self::$instances[$parentInstanceName])){
+            if (!empty($parentInstanceName) && !empty(self::$instances[$parentInstanceName])) {
                 self::$instances[$instanceName] = self::$instances[$parentInstanceName];
                 $old_count++;
                 self::$instances[$parentInstanceName]->references = $old_count;
                 self::$instances[$parentInstanceName]->children[] = $instanceName;
-            }
-            else{
+            } else {
                 self::$instances[$instanceName] = self::getTypeInstance($config['db_type'], $config);
-                if(!empty($sugar_config['dbconfigoption'])) {
+                if (!empty($sugar_config['dbconfigoption'])) {
                     self::$instances[$instanceName]->setOptions($sugar_config['dbconfigoption']);
                 }
                 self::$instances[$instanceName]->connect($config, true);
@@ -194,11 +196,11 @@ class DBManagerFactory
             throw new Exception('Unsupported DB driver ' . $instance->variant);
         }
 
-        $params = array(
+        $params = [
             'wrapperClass' => Connection::class,
             'driverClass' => self::$driverClasses[$instance->variant],
             'connection' => $instance->getDatabase(),
-        );
+        ];
 
         $configuration = new Doctrine\DBAL\Configuration();
         // we only need the to fix case on Oracle and IBM DB2, and we do not on SQL Server,
@@ -217,7 +219,7 @@ class DBManagerFactory
         return $conn;
     }
 
-    private static function getLogger() : LoggerInterface
+    private static function getLogger(): LoggerInterface
     {
         return LoggerFactory::getLogger('db');
     }
@@ -252,10 +254,10 @@ class DBManagerFactory
      */
     public static function disconnectAll()
     {
-        foreach(self::$instances as $instance) {
+        foreach (self::$instances as $instance) {
             $instance->disconnect();
         }
-        self::$instances = array();
+        self::$instances = [];
         BeanFactory::clearCache();
         $GLOBALS['db'] = null;
     }
@@ -271,7 +273,7 @@ class DBManagerFactory
     public static function getManagerByType($type, $validate = true)
     {
         $drivers = self::getDbDrivers($validate);
-        if(!empty($drivers[$type])) {
+        if (!empty($drivers[$type])) {
             return get_class($drivers[$type]);
         }
         return false;
@@ -285,36 +287,45 @@ class DBManagerFactory
      */
     protected static function scanDriverDir($dir, &$drivers, $validate = true)
     {
-        if(!is_dir($dir)) return;
+        if (!is_dir($dir)) {
+            return;
+        }
         $scandir = opendir($dir);
-        if($scandir === false) return;
-        while(($name = readdir($scandir)) !== false) {
-            if(substr($name, -11) != "Manager.php") continue;
-            if($name == "DBManager.php") continue;
+        if ($scandir === false) {
+            return;
+        }
+        while (($name = readdir($scandir)) !== false) {
+            if (substr($name, -11) != 'Manager.php') {
+                continue;
+            }
+            if ($name == 'DBManager.php') {
+                continue;
+            }
             require_once "$dir/$name";
             $classname = substr($name, 0, -4);
-            if(!class_exists($classname)) continue;
+            if (!class_exists($classname)) {
+                continue;
+            }
             $re = new ReflectionClass($classname);
             if ($re->isAbstract()) {
                 continue;
             }
             $driver = static::createInstance($classname);
-            if(!$validate || $driver->valid()) {
-                if(empty($drivers[$driver->dbType])) {
-                    $drivers[$driver->dbType]  = array();
+            if (!$validate || $driver->valid()) {
+                if (empty($drivers[$driver->dbType])) {
+                    $drivers[$driver->dbType] = [];
                 }
                 $drivers[$driver->dbType][] = $driver;
             }
         }
-
     }
 
     /**
      * Compares two drivers by priority
-     * @internal
      * @param object $a
      * @param object $b
      * @return int
+     * @internal
      */
     public static function _compareDrivers($a, $b)
     {
@@ -328,15 +339,17 @@ class DBManagerFactory
      */
     public static function getDbDrivers($validate = true)
     {
-        $drivers = array();
-        self::scanDriverDir("include/database", $drivers, $validate);
-        self::scanDriverDir("custom/include/database", $drivers, $validate);
+        $drivers = [];
+        self::scanDriverDir('include/database', $drivers, $validate);
+        self::scanDriverDir('custom/include/database', $drivers, $validate);
 
-        $result = array();
-        foreach($drivers as $type => $tdrivers) {
-            if(empty($tdrivers)) continue;
-            if ((is_countable($tdrivers) ? count($tdrivers) : 0) > 1) {
-                usort($tdrivers, array(self::class, "_compareDrivers"));
+        $result = [];
+        foreach ($drivers as $type => $tdrivers) {
+            if (empty($tdrivers)) {
+                continue;
+            }
+            if (safeCount($tdrivers) > 1) {
+                usort($tdrivers, [self::class, '_compareDrivers']);
             }
             $result[$type] = $tdrivers[0];
         }
@@ -349,7 +362,7 @@ class DBManagerFactory
      * @param string $class
      * @return DBManager
      */
-    private static function createInstance(string $class) : DBManager
+    private static function createInstance(string $class): DBManager
     {
         /** @var DBManager $instance */
         $instance = new $class();

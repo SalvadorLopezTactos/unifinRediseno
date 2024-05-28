@@ -9,6 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['panel-top-create'] = array(
-    'buttons' => array(),
-);
+$viewdefs['base']['view']['panel-top-create'] = [
+    'buttons' => [],
+];

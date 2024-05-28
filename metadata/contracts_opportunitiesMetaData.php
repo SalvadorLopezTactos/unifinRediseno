@@ -10,51 +10,51 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['contracts_opportunities'] = array(
+$dictionary['contracts_opportunities'] = [
     'table' => 'contracts_opportunities',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'opportunity_id' => array(
+        ],
+        'opportunity_id' => [
             'name' => 'opportunity_id',
             'type' => 'id',
-        ),
-        'contract_id' => array(
+        ],
+        'contract_id' => [
             'name' => 'contract_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'contracts_opp_pk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'contracts_opp_alt',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'contract_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'contracts_opportunities' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'contracts_opportunities' => [
             'lhs_module' => 'Opportunities',
             'lhs_table' => 'opportunities',
             'lhs_key' => 'id',
@@ -66,6 +66,6 @@ $dictionary['contracts_opportunities'] = array(
             'join_key_lhs' => 'opportunity_id',
             'join_key_rhs' => 'contract_id',
             'true_relationship_type' => 'one-to-many',
-        ),
-    ),
-);
+        ],
+    ],
+];

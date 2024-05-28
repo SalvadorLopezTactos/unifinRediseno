@@ -15,25 +15,25 @@
  * External source support
  * @var array
  */
-$vardefs = array(
-    'fields' => array(
-        'source_id' => array(
+$vardefs = [
+    'fields' => [
+        'source_id' => [
             'name' => 'source_id',
             'vname' => 'LBL_SOURCE_ID',
             'type' => 'varchar',
             'comment' => '',
-        ),
-        'source_type' => array(
+        ],
+        'source_type' => [
             'name' => 'source_type',
             'vname' => 'LBL_SOURCE_TYPE',
             'type' => 'varchar',
             'comment' => '',
-        ),
-        'source_meta' => array(
+        ],
+        'source_meta' => [
             'name' => 'source_meta',
             'vname' => 'LBL_SOURCE_META',
             'type' => 'text',
             'comment' => '',
-        ),
-    ),
-);
+        ],
+    ],
+];

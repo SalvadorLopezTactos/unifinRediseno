@@ -25,6 +25,7 @@ class WorkloadAction extends \Beta\Microsoft\Graph\Model\Entity
 {
     /**
     * Gets the actionId
+    * The unique identifier for the workload action. Required. Read-only.
     *
     * @return string|null The actionId
     */
@@ -39,6 +40,7 @@ class WorkloadAction extends \Beta\Microsoft\Graph\Model\Entity
 
     /**
     * Sets the actionId
+    * The unique identifier for the workload action. Required. Read-only.
     *
     * @param string $val The value of the actionId
     *
@@ -52,6 +54,7 @@ class WorkloadAction extends \Beta\Microsoft\Graph\Model\Entity
 
     /**
     * Gets the category
+    * The category for the workload action. Possible values are: automated, manual, unknownFutureValue. Optional. Read-only.
     *
     * @return WorkloadActionCategory|null The category
     */
@@ -70,6 +73,7 @@ class WorkloadAction extends \Beta\Microsoft\Graph\Model\Entity
 
     /**
     * Sets the category
+    * The category for the workload action. Possible values are: automated, manual, unknownFutureValue. Optional. Read-only.
     *
     * @param WorkloadActionCategory $val The value to assign to the category
     *
@@ -82,6 +86,7 @@ class WorkloadAction extends \Beta\Microsoft\Graph\Model\Entity
     }
     /**
     * Gets the description
+    * The description for the workload action. Optional. Read-only.
     *
     * @return string|null The description
     */
@@ -96,6 +101,7 @@ class WorkloadAction extends \Beta\Microsoft\Graph\Model\Entity
 
     /**
     * Sets the description
+    * The description for the workload action. Optional. Read-only.
     *
     * @param string $val The value of the description
     *
@@ -108,6 +114,7 @@ class WorkloadAction extends \Beta\Microsoft\Graph\Model\Entity
     }
     /**
     * Gets the displayName
+    * The display name for the workload action. Optional. Read-only.
     *
     * @return string|null The displayName
     */
@@ -122,6 +129,7 @@ class WorkloadAction extends \Beta\Microsoft\Graph\Model\Entity
 
     /**
     * Sets the displayName
+    * The display name for the workload action. Optional. Read-only.
     *
     * @param string $val The value of the displayName
     *
@@ -133,7 +141,34 @@ class WorkloadAction extends \Beta\Microsoft\Graph\Model\Entity
         return $this;
     }
     /**
+    * Gets the licenses
+    *
+    * @return string|null The licenses
+    */
+    public function getLicenses()
+    {
+        if (array_key_exists("licenses", $this->_propDict)) {
+            return $this->_propDict["licenses"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the licenses
+    *
+    * @param string $val The value of the licenses
+    *
+    * @return WorkloadAction
+    */
+    public function setLicenses($val)
+    {
+        $this->_propDict["licenses"] = $val;
+        return $this;
+    }
+    /**
     * Gets the service
+    * The service associated with workload action. Optional. Read-only.
     *
     * @return string|null The service
     */
@@ -148,6 +183,7 @@ class WorkloadAction extends \Beta\Microsoft\Graph\Model\Entity
 
     /**
     * Sets the service
+    * The service associated with workload action. Optional. Read-only.
     *
     * @param string $val The value of the service
     *
@@ -161,6 +197,7 @@ class WorkloadAction extends \Beta\Microsoft\Graph\Model\Entity
 
     /**
     * Gets the settings
+    * The collection of settings associated with the workload action. Optional. Read-only.
     *
     * @return Setting|null The settings
     */
@@ -179,6 +216,7 @@ class WorkloadAction extends \Beta\Microsoft\Graph\Model\Entity
 
     /**
     * Sets the settings
+    * The collection of settings associated with the workload action. Optional. Read-only.
     *
     * @param Setting $val The value to assign to the settings
     *

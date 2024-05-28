@@ -11,34 +11,33 @@
  */
 
 
-$viewdefs['pmse_Emails_Templates']['base']['view']['compose-varbook-list'] = array(
-    'template'   => 'flex-list',
-    'panels'     => array(
-        array(
-            'fields' => array(
-                array(
+$viewdefs['pmse_Emails_Templates']['base']['view']['compose-varbook-list'] = [
+    'template' => 'flex-list',
+    'panels' => [
+        [
+            'fields' => [
+                [
                     'name' => 'process_et_field_type',
                     'label' => 'LBL_FIELD_SELECTOR_DROPDOWN',
                     'type' => 'enum',
                     'options' => 'process_et_field_type',
                     'sortable' => false,
                     'default' => 'none',
-                ),
-                array(
-                    'name'    => 'name',
-                    'label'   => 'LBL_LIST_NAME',
+                ],
+                [
+                    'name' => 'name',
+                    'label' => 'LBL_LIST_NAME',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
-                    'name'     => '_module',
-                    'label'    => 'LBL_MODULE',
+                ],
+                [
+                    'name' => '_module',
+                    'label' => 'LBL_MODULE',
                     'sortable' => false,
-                    'enabled'  => true,
-                    'default'  => true,
-                ),
-            ),
-        ),
-    ),
-);
-
+                    'enabled' => true,
+                    'default' => true,
+                ],
+            ],
+        ],
+    ],
+];

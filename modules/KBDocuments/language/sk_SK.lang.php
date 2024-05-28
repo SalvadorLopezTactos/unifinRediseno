@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Báza znalostí',
     'LBL_MODULE_NAME_SINGULAR' => 'Článok vo vedomostnej databáze',
     'LBL_MODULE_TITLE' => 'Článok znalostnej bázy',
@@ -17,4 +17,4 @@ $mod_strings = array(
     'LBL_KEYWORDS' => 'Kľúčové slová:',
     'LBL_CONTENT' => 'Obsah',
     'LBL_ATTACHMENTS' => 'Prílohy:',
-);
+];

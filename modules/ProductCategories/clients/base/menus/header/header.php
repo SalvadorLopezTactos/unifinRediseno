@@ -10,48 +10,48 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'ProductCategories';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
-        'route'=>"#$module_name/create",
-        'label' =>'LNK_NEW_PRODUCT_CATEGORY',
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
+        'route' => "#$module_name/create",
+        'label' => 'LNK_NEW_PRODUCT_CATEGORY',
         'acl_action' => 'create',
         'acl_module' => $module_name,
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route'=>'#ProductCategories',
-        'label' =>'LNK_VIEW_PRODUCT_CATEGORIES',
+    ],
+    [
+        'route' => '#ProductCategories',
+        'label' => 'LNK_VIEW_PRODUCT_CATEGORIES',
         'acl_action' => 'list',
         'acl_module' => 'ProductCategories',
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=>'#ProductTemplates',
-        'label' =>'LNK_PRODUCT_LIST',
+    ],
+    [
+        'route' => '#ProductTemplates',
+        'label' => 'LNK_PRODUCT_LIST',
         'acl_action' => 'list',
         'acl_module' => 'ProductTemplates',
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=>'#Manufacturers',
-        'label' =>'LNK_NEW_MANUFACTURER',
+    ],
+    [
+        'route' => '#Manufacturers',
+        'label' => 'LNK_NEW_MANUFACTURER',
         'acl_action' => 'list',
         'acl_module' => 'Manufacturers',
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=>'#ProductTypes',
-        'label' =>'LNK_NEW_PRODUCT_TYPE',
+    ],
+    [
+        'route' => '#ProductTypes',
+        'label' => 'LNK_NEW_PRODUCT_TYPE',
         'acl_action' => 'list',
         'acl_module' => 'ProductTypes',
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=>'#bwc/index.php?module=Import&action=Step1&import_module=ProductCategories&return_module=ProductCategories&return_action=index',
-        'label' =>'LNK_IMPORT_PRODUCT_CATEGORIES',
+    ],
+    [
+        'route' => '#bwc/index.php?module=Import&action=Step1&import_module=ProductCategories&return_module=ProductCategories&return_action=index',
+        'label' => 'LNK_IMPORT_PRODUCT_CATEGORIES',
         'acl_action' => 'create',
         'acl_module' => $module_name,
         'icon' => 'sicon-upload',
-    ),
+    ],
 
-);
+];

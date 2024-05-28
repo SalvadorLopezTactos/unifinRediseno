@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Gaukite raktą ir slaptažodį iš „IBM SmartCloud“ užregistravę savo „Sugar“ egzempliorių kaip naują programą.<br>
 &nbsp;<br>
 Kaip užregistruoti egzempliorių:<br>
@@ -28,5 +28,4 @@ Kaip užregistruoti egzempliorių:<br>
 </td></tr></table>',
     'oauth_consumer_key' => 'OAuth vartotojo raktas',
     'oauth_consumer_secret' => 'OAuth slaptas raktas',
-);
-
+];

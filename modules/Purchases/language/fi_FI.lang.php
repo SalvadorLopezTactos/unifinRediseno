@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Ostojen tietueiden koontinäyttö',
     'LBL_RELATED_ACCOUNT' => 'Tähän liittyvä tili',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Ostot-tietolaatikko',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ostojen aikajana',
 ];

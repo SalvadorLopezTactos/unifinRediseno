@@ -24,21 +24,21 @@ require_once 'vendor/Zend/Gdata/Contacts.php';
  */
 class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
 {
-    public $supportedModules = array('Documents', 'Import');
+    public $supportedModules = ['Documents', 'Import'];
     public $authMethod = 'oauth2';
     public $connector = 'ext_eapm_google';
 
     public $useAuth = true;
     public $requireAuth = true;
 
-    protected $scopes = array(
+    protected $scopes = [
         'https://www.googleapis.com/auth/contacts.readonly',
         Drive::DRIVE_READONLY,
         Drive::DRIVE_FILE,
         Drive::DRIVE,
         Drive::DRIVE_APPDATA,
         Drive::DRIVE_METADATA,
-    );
+    ];
 
     public $docSearch = true;
     public $needsUrl = false;
@@ -118,16 +118,16 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
         $client->setClientId($config['properties']['oauth2_client_id']);
         $client->setClientSecret($config['properties']['oauth2_client_secret']);
         $client->setRedirectUri($config['redirect_uri']);
-
         $client->setAccessType('offline');
         $client->setScopes($this->scopes);
+        $client->setPrompt('consent');
 
         return $client;
     }
 
     protected function getGoogleOauth2Config()
     {
-        $config = array();
+        $config = [];
         require SugarAutoLoader::existingCustomOne('modules/Connectors/connectors/sources/ext/eapm/google/config.php');
         $config['redirect_uri'] = rtrim(SugarConfig::getInstance()->get('site_url'), '/')
             . '/index.php?module=EAPM&action=GoogleOauth2Redirect';
@@ -170,10 +170,10 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
                 'fields' => 'id,webViewLink',
             ]);
         } catch (Google_Exception $e) {
-            return array(
+            return [
                 'success' => false,
                 'errorMessage' => $GLOBALS['app_strings']['ERR_EXTERNAL_API_SAVE_FAIL'],
-            );
+            ];
         }
 
         $bean->doc_id = $createdFile->id;
@@ -210,10 +210,10 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
             ]);
         } catch (Google_Exception $e) {
             $GLOBALS['log']->fatal($e->getMessage());
-            return array(
+            return [
                 'success' => false,
                 'errorMessage' => $GLOBALS['app_strings']['ERR_EXTERNAL_API_SAVE_FAIL'],
-            );
+            ];
         }
 
         $bean->doc_id = $createdFile->id;
@@ -250,10 +250,10 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
             ]);
         } catch (Google_Exception $e) {
             $GLOBALS['log']->fatal($e->getMessage());
-            return array(
+            return [
                 'success' => false,
                 'errorMessage' => $GLOBALS['app_strings']['ERR_EXTERNAL_API_SAVE_FAIL'],
-            );
+            ];
         }
 
         return [
@@ -343,16 +343,16 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
             'fields' => 'files(id,name,webViewLink,modifiedTime)',
         ];
 
-        $queryString = "trashed = false ";
+        $queryString = 'trashed = false ';
         if (!empty($keywords)) {
-             $queryString .= "and name contains '{$keywords}'";
+            $queryString .= "and name contains '{$keywords}'";
         }
         $options['q'] = $queryString;
 
         try {
             $files = $drive->files->listFiles($options);
         } catch (Google_Exception $e) {
-            $GLOBALS['log']->fatal('Unable to retrieve google drive files:' .  $e);
+            $GLOBALS['log']->fatal('Unable to retrieve google drive files:' . $e);
             return false;
         }
 
@@ -362,7 +362,7 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
                 'url' => $file->webViewLink,
                 'name' => $file->name,
                 'date_modified' => $file->modifiedTime,
-                'id' => $file->id
+                'id' => $file->id,
             ];
         }
 
@@ -403,10 +403,10 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
             return $createdFile;
         } catch (Google_Exception $e) {
             $GLOBALS['log']->fatal($e->getMessage());
-            return array(
+            return [
                 'success' => false,
                 'errorMessage' => $GLOBALS['app_strings']['ERR_EXTERNAL_API_SAVE_FAIL'],
-            );
+            ];
         }
 
         return null;

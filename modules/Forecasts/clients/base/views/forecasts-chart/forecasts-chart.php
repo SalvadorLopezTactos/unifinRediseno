@@ -9,38 +9,38 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Forecasts']['base']['view']['forecasts-chart'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['Forecasts']['base']['view']['forecasts-chart'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_DASHLET_FORECASTS_CHART_NAME',
             'description' => 'LBL_DASHLET_FORECASTS_CHART_DESC',
-            'config' => array(
-                'module' => 'Forecasts'
-            ),
-            'preview' => array(),
-            'filter' => array(
-                'module' => array(
-                    'Forecasts'
-                )
-            )
-        )
-    ),
-    'chart' => array(
+            'config' => [
+                'module' => 'Forecasts',
+            ],
+            'preview' => [],
+            'filter' => [
+                'module' => [
+                    'Forecasts',
+                ],
+            ],
+        ],
+    ],
+    'chart' => [
         'name' => 'paretoChart',
         'label' => 'Pareto Chart',
         'type' => 'forecast-pareto-chart',
-    ),
-    'timeperiod' => array(
-        array(
+    ],
+    'timeperiod' => [
+        [
             'name' => 'selectedTimePeriod',
             'label' => 'TimePeriod',
             'type' => 'enum',
             'default' => true,
             'enabled' => true,
             'view' => 'edit',
-        ),
-    ),
-    'group_by' => array(
+        ],
+    ],
+    'group_by' => [
         'name' => 'group_by',
         'label' => 'LBL_DASHLET_FORECASTS_GROUPBY',
         'type' => 'enum',
@@ -48,9 +48,9 @@ $viewdefs['Forecasts']['base']['view']['forecasts-chart'] = array(
         'default' => true,
         'enabled' => true,
         'view' => 'edit',
-        'options' => 'forecasts_chart_options_group'
-    ),
-    'dataset' => array(
+        'options' => 'forecasts_chart_options_group',
+    ],
+    'dataset' => [
         'name' => 'dataset',
         'label' => 'LBL_DASHLET_FORECASTS_DATASET',
         'type' => 'enum',
@@ -58,6 +58,6 @@ $viewdefs['Forecasts']['base']['view']['forecasts-chart'] = array(
         'default' => true,
         'enabled' => true,
         'view' => 'edit',
-        'options' => 'forecasts_options_dataset'
-    )
-);
+        'options' => 'forecasts_options_dataset',
+    ],
+];

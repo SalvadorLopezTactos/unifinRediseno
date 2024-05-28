@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tuotetyypit',
     'LBL_MODULE_NAME_SINGULAR' => 'Tuotetyyppi',
     'LBL_MODULE_TITLE' => 'Tuotetyypit: Etusivu',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Haluatko varmasti poistaa tämän tietueen?',
     'ERR_DELETE_RECORD' => 'Tietuenumero tulee määritellä, jotta voit poistaa tuotetyypin.',
     'NTC_LIST_ORDER' => 'Aseta järjestys, jossa tämä tuotetyyppi näkyy Tuotetyypit-pudotusvalikossa',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Tuo tuotetyyppejä',
-    'LBL_CREATED_BY'=>'Tekijä:',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Tuo tuotetyyppejä',
+    'LBL_CREATED_BY' => 'Tekijä:',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Vastuuhenkilön ID',
-    'LBL_EXPORT_CREATED_BY'=>'Tekijän ID',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Tuo tuotekategorioita',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Vastuuhenkilön ID',
+    'LBL_EXPORT_CREATED_BY' => 'Tekijän ID',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Tuo tuotekategorioita',
+];

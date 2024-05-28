@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Noteeritud reaüksuste loendi töölaud',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Pakkumuse reaüksuste kirje töölaud',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Pakkumiste reaüksuste fookuse sahtel',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tsiteeritud rea üksuse ajaskaala',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Campaign Quoted Line Item',
     'LBL_MODULE_NAME' => 'Pakkumuse artiklid',
@@ -183,4 +184,4 @@ To create a {{module_name}}:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => '(Uus pakkumuse reaüksus)',
     'LBL_DISCOUNT_PERCENT' => '% protsenti',
     'LBL_DISCOUNT_TYPE' => 'Allahindluse tüüp',
-);
+];

@@ -15,8 +15,8 @@ class Calendar extends Basic
     public $new_schema = true;
     public $module_dir = 'Calendar';
     public $object_name = 'Calendar';
-    public $table_name  = 'calendar';
-    public $importable  = true;
+    public $table_name = 'calendar';
+    public $importable = true;
     public $team_id;
     public $team_set_id;
     public $team_count;
@@ -73,7 +73,7 @@ class Calendar extends Basic
      */
     public $intervalType = '';
 
-    public static $INTERVAL_TIME     = 'time';
+    public static $INTERVAL_TIME = 'time';
     public static $INTERVAL_DURATION = 'duration';
 
     /**

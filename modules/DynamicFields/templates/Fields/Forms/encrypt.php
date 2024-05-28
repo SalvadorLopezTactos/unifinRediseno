@@ -14,9 +14,9 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-function get_body(&$ss, $vardef){
+
+function get_body(&$ss, $vardef)
+{
     $ss->assign('hideReportable', true);
-	return $ss->fetch('modules/DynamicFields/templates/Fields/Forms/encrypt.tpl');
- }
-?>
+    return $ss->fetch('modules/DynamicFields/templates/Fields/Forms/encrypt.tpl');
+}

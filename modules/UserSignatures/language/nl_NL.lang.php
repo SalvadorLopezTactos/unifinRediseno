@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Deze handtekening heeft een naam nodig',
     'LBL_DEFAULT_SIGNATURE' => 'Standaard',
     'LBL_MODULE_NAME' => 'E-mailhandtekeningen',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'Gebruik handtekening?',
     'LBL_SIGNATURE_PREPEND' => 'Handtekening bovenaan antwoord?',
     'LBL_SIGNATURES' => 'Handtekeningen',
-);
+];

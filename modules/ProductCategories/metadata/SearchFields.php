@@ -9,6 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$searchFields['ProductCategories'] = array(
-    'name' => array('query_type' => 'default'),
-);
+$searchFields['ProductCategories'] = [
+    'name' => ['query_type' => 'default'],
+];

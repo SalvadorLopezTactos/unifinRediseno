@@ -16,43 +16,43 @@
 
 global $app_strings;
 
-$checkList = ExternalAPIFactory::listAPI('',true);
+$checkList = ExternalAPIFactory::listAPI('', true);
 
-if ( !empty($_REQUEST['api']) ) {
+if (!empty($_REQUEST['api'])) {
     // Check just one login type
-    $newCheckList = array();
-    if ( isset($checkList[$_REQUEST['api']]) ) {
+    $newCheckList = [];
+    if (isset($checkList[$_REQUEST['api']])) {
         $newCheckList[$_REQUEST['api']] = $checkList[$_REQUEST['api']];
     }
-    
+
     $checkList = $newCheckList;
 }
 
-$failList = array();
+$failList = [];
 
-if ( is_array($checkList) ) {
-    foreach ( $checkList as $apiName => $apiOpts ) {
-        if ( $apiOpts['authMethod'] == 'oauth' ) {
+if (is_array($checkList)) {
+    foreach ($checkList as $apiName => $apiOpts) {
+        if ($apiOpts['authMethod'] == 'oauth') {
             $api = ExternalAPIFactory::loadAPI($apiName);
-            if ( is_object($api) ) {
+            if (is_object($api)) {
                 $loginCheck = $api->quickCheckLogin();
             } else {
                 $loginCheck['success'] = false;
             }
-            if ( ! $loginCheck['success'] ) {
-                $thisFail = array();
-                
-                $thisFail['checkURL'] = 'index.php?module=EAPM&closeWhenDone=1&action=QuickSave&application='.$apiName;
+            if (!$loginCheck['success']) {
+                $thisFail = [];
 
-                $translateKey = 'LBL_EXTAPI_'.strtoupper($apiName);
-                if ( ! empty($app_strings[$translateKey]) ) {
+                $thisFail['checkURL'] = 'index.php?module=EAPM&closeWhenDone=1&action=QuickSave&application=' . $apiName;
+
+                $translateKey = 'LBL_EXTAPI_' . strtoupper($apiName);
+                if (!empty($app_strings[$translateKey])) {
                     $apiLabel = $app_strings[$translateKey];
                 } else {
                     $apiLabel = $apiName;
                 }
 
-                $thisFail['label'] = str_replace('{0}',$apiLabel,translate('LBL_ERR_FAILED_QUICKCHECK','EAPM'));
-                
+                $thisFail['label'] = str_replace('{0}', $apiLabel, translate('LBL_ERR_FAILED_QUICKCHECK', 'EAPM'));
+
                 $failList[$apiName] = $thisFail;
             }
         }

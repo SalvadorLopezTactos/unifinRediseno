@@ -1,5 +1,5 @@
 <?php
-// created: 2019-06-04 19:10:00
+// created: 2020-10-12 12:05:12
 $listViewDefs['Users'] = array (
   'name' => 
   array (
@@ -58,6 +58,13 @@ $listViewDefs['Users'] = array (
     'width' => '10',
     'label' => 'LBL_LIST_GROUP',
     'link' => true,
+    'default' => false,
+  ),
+  'LICENSE_TYPE' => 
+  array (
+    'width' => '20',
+    'label' => 'LBL_LICENSE_TYPE',
+    'link' => false,
     'default' => false,
   ),
 );

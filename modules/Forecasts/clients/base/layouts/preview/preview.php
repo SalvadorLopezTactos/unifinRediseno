@@ -11,26 +11,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Forecasts']['base']['layout']['preview'] = array(
-    'components' => array(
-        array(
-            'view' => array(
+$viewdefs['Forecasts']['base']['layout']['preview'] = [
+    'components' => [
+        [
+            'view' => [
                 'type' => 'preview-header',
-            ),
-        ),
-        array(
-            'view' => array(
+            ],
+        ],
+        [
+            'view' => [
                 'type' => 'preview',
-            ),
-        ),
-        array(
-            'layout' => array(
+            ],
+        ],
+        [
+            'layout' => [
                 'type' => 'preview-activitystream',
-            ),
-            'context' => array(
+            ],
+            'context' => [
                 'module' => 'Forecasts',
                 'forceNew' => true,
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

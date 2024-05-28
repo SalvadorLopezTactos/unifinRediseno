@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -22,7 +23,7 @@ class CasesApiHelper extends SugarBeanApiHelper
      * @param array $options
      * @return array
      */
-    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = array())
+    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = [])
     {
         $data = parent::populateFromApi($bean, $submittedData, $options);
 

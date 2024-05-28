@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 /**
 The YUI module contains the components required for building the YUI seed file.
 This includes the script loading mechanism, a simple queue, and the core
@@ -139,6 +132,7 @@ available.
 
             // bind the specified additional modules for this instance
             if (!l) {
+                Y._afterConfig();
                 Y._setup();
             }
         }
@@ -152,6 +146,7 @@ available.
                 Y.applyConfig(args[i]);
             }
 
+            Y._afterConfig();
             Y._setup();
         }
 
@@ -163,7 +158,7 @@ available.
 (function() {
 
     var proto, prop,
-        VERSION = '3.15.0',
+        VERSION = '3.18.1',
         PERIOD = '.',
         BASE = 'http://yui.yahooapis.com/',
         /*
@@ -206,7 +201,7 @@ available.
             YUI.Env.DOMReady = true;
             if (hasWin) {
                 remove(doc, 'DOMContentLoaded', handleReady);
-            }        
+            }
         },
         handleLoad = function() {
             YUI.Env.windowLoaded = true;
@@ -356,7 +351,7 @@ proto = {
                 mods: {}, // flat module map
                 versions: {}, // version module map
                 base: BASE,
-                cdn: BASE + VERSION + '/build/',
+                cdn: BASE + VERSION + '/',
                 // bootstrapped: false,
                 _idx: 0,
                 _used: {},
@@ -483,8 +478,7 @@ proto = {
             throwFail: true,
             useBrowserConsole: true,
             useNativeES5: true,
-            win: win,
-            global: Function('return this')()
+            win: win
         };
 
         //Register the CSS stamp element
@@ -503,7 +497,9 @@ proto = {
 
         Y.config.lang = Y.config.lang || 'en-US';
 
-        Y.config.base = YUI.config.base || Y.Env.getBase(Y.Env._BASE_RE);
+        Y.config.base = YUI.config.base ||
+                (YUI.config.defaultBase && YUI.config.root && YUI.config.defaultBase + YUI.config.root) ||
+                Y.Env.getBase(Y.Env._BASE_RE);
 
         if (!filter || (!('mindebug').indexOf(filter))) {
             filter = 'min';
@@ -511,6 +507,25 @@ proto = {
         filter = (filter) ? '-' + filter : filter;
         Y.config.loaderPath = YUI.config.loaderPath || 'loader/loader' + filter + '.js';
 
+    },
+
+    /**
+    This method is called after all other configuration has been applied to
+    the YUI instance.
+
+    @method _afterConfig
+    @private
+    **/
+    _afterConfig: function () {
+        var Y = this;
+
+        // We need to set up Y.config.global after the rest of the configuration
+        // so that setting it in user configuration prevents the library from
+        // using eval(). This is critical for Content Security Policy enabled
+        // sites and other environments like Chrome extensions
+        if (!Y.config.hasOwnProperty('global')) {
+            Y.config.global = Function('return this')();
+        }
     },
 
     /**
@@ -524,8 +539,9 @@ proto = {
         var i, Y = this,
             core = [],
             mods = YUI.Env.mods,
-            extras = Y.config.core || [].concat(YUI.Env.core); //Clone it..
-
+            extendedCore = Y.config.extendedCore || [],
+            extras = Y.config.core || [].concat(YUI.Env.core).concat(extendedCore); //Clone it..
+   
         for (i = 0; i < extras.length; i++) {
             if (mods[extras[i]]) {
                 core.push(extras[i]);
@@ -606,15 +622,15 @@ with any configuration info required for the module.
 @param {String} version Module version number. This is currently used only for
     informational purposes, and is not used internally by YUI.
 
-@param {Object} [config] Module config.
-    @param {Array} [config.requires] Array of other module names that must be
+@param {Object} [details] Module config.
+    @param {Array} [details.requires] Array of other module names that must be
         attached before this module can be attached.
-    @param {Array} [config.optional] Array of optional module names that should
+    @param {Array} [details.optional] Array of optional module names that should
         be attached before this module is attached if they've already been
         loaded. If the `loadOptional` YUI option is `true`, optional modules
         that have not yet been loaded will be loaded just as if they were hard
         requirements.
-    @param {Array} [config.use] Array of module names that are included within
+    @param {Array} [details.use] Array of module names that are included within
         or otherwise provided by this module, and which should be attached
         automatically when this module is attached. This makes it possible to
         create "virtual rollup" modules that simply attach a collection of other
@@ -633,7 +649,7 @@ with any configuration info required for the module.
             },
             //Instance hash so we don't apply it to the same instance twice
             applied = {},
-            loader, inst,
+            loader, inst, modInfo,
             i, versions = env.versions;
 
         env.mods[name] = mod;
@@ -647,7 +663,8 @@ with any configuration info required for the module.
                     applied[inst.id] = true;
                     loader = inst.Env._loader;
                     if (loader) {
-                        if (!loader.moduleInfo[name] || loader.moduleInfo[name].temp) {
+                        modInfo = loader.getModuleInfo(name);
+                        if (!modInfo || modInfo.temp) {
                             loader.addModule(details, name);
                         }
                     }
@@ -679,7 +696,7 @@ with any configuration info required for the module.
             exported = Y.Env._exported,
             len = r.length, loader, def, go,
             c = [],
-            modArgs, esCompat, reqlen,
+            modArgs, esCompat, reqlen, modInfo,
             condition,
             __exports__, __imports__;
 
@@ -714,8 +731,9 @@ with any configuration info required for the module.
                     continue;
                 }
                 if (!mod) {
-                    if (loader && loader.moduleInfo[name]) {
-                        mod = loader.moduleInfo[name];
+                    modInfo = loader && loader.getModuleInfo(name);
+                    if (modInfo) {
+                        mod = modInfo;
                         moot = true;
                     }
 
@@ -739,6 +757,17 @@ with any configuration info required for the module.
                             Y.Env._missed.splice(j, 1);
                         }
                     }
+
+                    // Optional dependencies normally work by modifying the
+                    // dependency list of a module. If the dependency's test
+                    // passes it is added to the list. If not, it's not loaded.
+                    // This following check ensures that optional dependencies
+                    // are not attached when they were already loaded into the
+                    // page (when bundling for example)
+                    if (loader && !loader._canBeAttached(name)) {
+                        return true;
+                    }
+
                     /*
                         If it's a temp module, we need to redo it's requirements if it's already loaded
                         since it may have been loaded by another instance and it's dependencies might
@@ -747,8 +776,9 @@ with any configuration info required for the module.
                     if (loader && cache && cache[name] && cache[name].temp) {
                         loader.getRequires(cache[name]);
                         req = [];
-                        for (j in loader.moduleInfo[name].expanded_map) {
-                            if (loader.moduleInfo[name].expanded_map.hasOwnProperty(j)) {
+                        modInfo = loader.getModuleInfo(name);
+                        for (j in modInfo.expanded_map) {
+                            if (modInfo.expanded_map.hasOwnProperty(j)) {
                                 req.push(j);
                             }
                         }
@@ -1700,16 +1730,6 @@ failure. If not set, no timeout will be enforced.
 **/
 
 /**
-Callback for the 'CSSComplete' event. When dynamically loading YUI components
-with CSS, this property fires when the CSS is finished loading.
-
-This provides an opportunity to enhance the presentation of a loading page a
-little bit before the entire loading process is done.
-
-@property {Function} onCSS
-**/
-
-/**
 A hash of module definitions to add to the list of available YUI modules. These
 modules can then be dynamically loaded via the `use()` method.
 
@@ -2242,14 +2262,14 @@ L.now = Date.now || function () {
 };
 
 /**
- * Performs `{placeholder}` substitution on a string. The object passed as the 
+ * Performs `{placeholder}` substitution on a string. The object passed as the
  * second parameter provides values to replace the `{placeholder}`s.
  * `{placeholder}` token names must match property names of the object. For example,
- * 
+ *
  *`var greeting = Y.Lang.sub("Hello, {who}!", { who: "World" });`
  *
- * `{placeholder}` tokens that are undefined on the object map will be left 
- * in tact (leaving unsightly `{placeholder}`'s in the output string). 
+ * `{placeholder}` tokens that are undefined on the object map will be left
+ * in tact (leaving unsightly `{placeholder}`'s in the output string).
  *
  * @method sub
  * @param {string} s String to be modified.
@@ -2259,8 +2279,40 @@ L.now = Date.now || function () {
  * @since 3.2.0
  */
 L.sub = function(s, o) {
+
+    /**
+    Finds the value of `key` in given object.
+    If the key has a 'dot' notation e.g. 'foo.bar.baz', the function will
+    try to resolve this path if it doesn't exist as a property
+    @example
+        value({ 'a.b': 1, a: { b: 2 } }, 'a.b'); // 1
+        value({ a: { b: 2 } }          , 'a.b'); // 2
+    @param {Object} obj A key/value pairs object
+    @param {String} key
+    @return {Any}
+    @private
+    **/
+    function value(obj, key) {
+
+        var subkey;
+
+        if ( typeof obj[key] !== 'undefined' ) {
+            return obj[key];
+        }
+
+        key    = key.split('.');         // given 'a.b.c'
+        subkey = key.slice(1).join('.'); // 'b.c'
+        key    = key[0];                 // 'a'
+
+        // special case for null as typeof returns object and we don't want that.
+        if ( subkey && typeof obj[key] === 'object' && obj[key] !== null ) {
+            return value(obj[key], subkey);
+        }
+    }
+
     return s.replace ? s.replace(SUBREGEX, function (match, key) {
-        return L.isUndefined(o[key]) ? match : o[key];
+        var val = key.indexOf('.')>-1 ? value(o, key) : o[key];
+        return typeof val === 'undefined' ? match : val;
     }) : s;
 };
 
@@ -3567,6 +3619,13 @@ YUI.Env.parseUA = function(subUA) {
          */
         silk: 0,
         /**
+         * Detects Ubuntu version
+         * @property ubuntu
+         * @type float
+         * @static
+         */
+        ubuntu: 0,
+        /**
          * Detects Kindle Silk Acceleration
          * @property accel
          * @type Boolean
@@ -3597,7 +3656,10 @@ YUI.Env.parseUA = function(subUA) {
         secure: false,
 
         /**
-         * The operating system.  Currently only detecting windows or macintosh
+         * The operating system.
+         *
+         * Possible values are `windows`, `macintosh`, `android`, `symbos`, `linux`, `rhino` and `ios`.
+         *
          * @property os
          * @type string
          * @default null
@@ -3717,9 +3779,7 @@ YUI.Env.parseUA = function(subUA) {
                     }
                 }
                 if (/ Android/.test(ua)) {
-                    if (/Mobile/.test(ua)) {
-                        o.mobile = 'Android';
-                    }
+                    o.mobile = 'Android';
                     m = ua.match(/Android ([^\s]*);/);
                     if (m && m[1]) {
                         o.android = numberify(m[1]);
@@ -3761,6 +3821,25 @@ YUI.Env.parseUA = function(subUA) {
                         o.air = m[0]; // Adobe AIR 1.0 or better
                     }
                 }
+            }
+        }
+
+        m = ua.match(/Ubuntu\ (\d+\.\d+)/);
+        if (m && m[1]) {
+
+            o.os = 'linux';
+            o.ubuntu = numberify(m[1]);
+
+            m = ua.match(/\ WebKit\/([^\s]*)/);
+            if (m && m[1]) {
+                o.webkit = numberify(m[1]);
+            }
+            m = ua.match(/\ Chromium\/([^\s]*)/);
+            if (m && m[1]) {
+                o.chrome = numberify(m[1]);
+            }
+            if (/ Mobile$/.test(ua)) {
+                o.mobile = 'Ubuntu';
             }
         }
 
@@ -3922,6 +4001,7 @@ YUI.Env.aliases = {
     "io": ["io-base","io-xdr","io-form","io-upload-iframe","io-queue"],
     "json": ["json-parse","json-stringify"],
     "loader": ["loader-base","loader-rollup","loader-yui3"],
+    "loader-pathogen-encoder": ["loader-base","loader-rollup","loader-yui3","loader-pathogen-combohandler"],
     "node": ["node-base","node-event-delegate","node-pluginhost","node-screen","node-style"],
     "pluginhost": ["pluginhost-base","pluginhost-config"],
     "querystring": ["querystring-parse","querystring-stringify"],
@@ -3934,7 +4014,7 @@ YUI.Env.aliases = {
 };
 
 
-}, '3.15.0', {"use": ["get", "features", "intl-base", "yui-log", "yui-later"]});
+}, '3.18.1', {"use": ["get", "features", "intl-base", "yui-log", "yui-later"]});
 YUI.add('get', function (Y, NAME) {
 
 /*jslint boss:true, expr:true, laxbreak: true */
@@ -5209,7 +5289,7 @@ Transaction.prototype = {
 };
 
 
-}, '3.15.0', {"requires": ["yui-base"]});
+}, '3.18.1', {"requires": ["yui-base"]});
 YUI.add('features', function (Y, NAME) {
 
 var feature_tests = {};
@@ -5277,7 +5357,7 @@ Y.mix(Y.namespace('Features'), {
         return (result.length) ? result.join(';') : '';
     },
     /**
-    * Run a sepecific test and return a Boolean response.
+    * Run a specific test and return a Boolean response.
     *
     *   ```
     *   Y.Features.test("load", "1");
@@ -5446,7 +5526,7 @@ add('load', '8', {
         useSVG = !Y.config.defaultGraphicEngine || Y.config.defaultGraphicEngine != "canvas",
 		canvas = DOCUMENT && DOCUMENT.createElement("canvas"),
         svg = (DOCUMENT && DOCUMENT.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1"));
-    
+
     return svg && (useSVG || !canvas);
 },
     "trigger": "graphics"
@@ -5459,7 +5539,7 @@ add('load', '9', {
         useSVG = !Y.config.defaultGraphicEngine || Y.config.defaultGraphicEngine != "canvas",
 		canvas = DOCUMENT && DOCUMENT.createElement("canvas"),
         svg = (DOCUMENT && DOCUMENT.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1"));
-    
+
     return svg && (useSVG || !canvas);
 },
     "trigger": "graphics"
@@ -5512,7 +5592,7 @@ add('load', '14', {
     function workingNative( k, v ) {
         return k === "ok" ? true : v;
     }
-    
+
     // Double check basic functionality.  This is mainly to catch early broken
     // implementations of the JSON API in Firefox 3.1 beta1 and beta2
     if ( nativeSupport ) {
@@ -5599,25 +5679,22 @@ add('load', '20', {
     */
     return (!Y.UA.nodejs && !Y.UA.winjs);
 },
-    "trigger": "yql",
-    "when": "after"
+    "trigger": "yql"
 });
 // yql-nodejs
 add('load', '21', {
     "name": "yql-nodejs",
     "trigger": "yql",
-    "ua": "nodejs",
-    "when": "after"
+    "ua": "nodejs"
 });
 // yql-winjs
 add('load', '22', {
     "name": "yql-winjs",
     "trigger": "yql",
-    "ua": "winjs",
-    "when": "after"
+    "ua": "winjs"
 });
 
-}, '3.15.0', {"requires": ["yui-base"]});
+}, '3.18.1', {"requires": ["yui-base"]});
 YUI.add('intl-base', function (Y, NAME) {
 
 /**
@@ -5705,7 +5782,7 @@ Y.mix(Y.namespace('Intl'), {
 });
 
 
-}, '3.15.0', {"requires": ["yui-base"]});
+}, '3.18.1', {"requires": ["yui-base"]});
 YUI.add('yui-log', function (Y, NAME) {
 
 /**
@@ -5765,9 +5842,8 @@ INSTANCE.log = function(msg, cat, src, silent) {
                 bail = excl[src];
             }
 
-            // Set a default category of info if the category was not defined or was not
-            // a real category.
-            if ((typeof cat === 'undefined') || !(cat in LEVELS)) {
+            // Set a default category of info if the category was not defined.
+            if ((typeof cat === 'undefined')) {
                 cat = 'info';
             }
 
@@ -5831,7 +5907,7 @@ INSTANCE.message = function() {
 };
 
 
-}, '3.15.0', {"requires": ["yui-base"]});
+}, '3.18.1', {"requires": ["yui-base"]});
 YUI.add('yui-later', function (Y, NAME) {
 
 /**
@@ -5909,5 +5985,5 @@ Y.Lang.later = Y.later;
 
 
 
-}, '3.15.0', {"requires": ["yui-base"]});
-YUI.add('yui', function (Y, NAME) {}, '3.15.0', {"use": ["get", "features", "intl-base", "yui-log", "yui-later"]});
+}, '3.18.1', {"requires": ["yui-base"]});
+YUI.add('yui', function (Y, NAME) {}, '3.18.1', {"use": ["get", "features", "intl-base", "yui-log", "yui-later"]});

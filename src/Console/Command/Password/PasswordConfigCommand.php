@@ -37,7 +37,7 @@ class PasswordConfigCommand extends Command implements InstanceModeInterface
      * Password rules
      * @var array
      */
-    protected $pwdRules = array(
+    protected $pwdRules = [
         'minpwdlength' => 'Minimum length',
         'maxpwdlength' => 'Maximum length',
         'onelower' => 'Require lowercase',
@@ -45,7 +45,7 @@ class PasswordConfigCommand extends Command implements InstanceModeInterface
         'onenumber' => 'Require number',
         'onespecial' => 'Require special char',
         'customregex' => 'Custom regex',
-    );
+    ];
 
     /**
      * {inheritdoc}
@@ -54,8 +54,7 @@ class PasswordConfigCommand extends Command implements InstanceModeInterface
     {
         $this
             ->setName('password:config')
-            ->setDescription('Show password hash configuration')
-        ;
+            ->setDescription('Show password hash configuration');
     }
 
     /**
@@ -63,10 +62,10 @@ class PasswordConfigCommand extends Command implements InstanceModeInterface
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(array('', 'Password Configuration:'));
+        $output->writeln(['', 'Password Configuration:']);
         $this->showPasswordSettings($output);
 
-        $output->writeln(array('', 'Hashing Configuration:'));
+        $output->writeln(['', 'Hashing Configuration:']);
         $this->showHashingInfo($output);
         return 0;
     }
@@ -85,7 +84,7 @@ class PasswordConfigCommand extends Command implements InstanceModeInterface
             if (is_bool($value)) {
                 $value = $value ? 'yes' : 'no';
             }
-            $table->addRow(array($label, $value));
+            $table->addRow([$label, $value]);
         }
 
         $table->render();
@@ -97,7 +96,7 @@ class PasswordConfigCommand extends Command implements InstanceModeInterface
      */
     protected function getConfig()
     {
-        return SugarConfig::getInstance()->get('passwordsetting', array());
+        return SugarConfig::getInstance()->get('passwordsetting', []);
     }
 
     /**
@@ -113,11 +112,11 @@ class PasswordConfigCommand extends Command implements InstanceModeInterface
 
         // Rehash capability
         $rehash = $this->getProtectedValue($hash, 'rehash') ? '<info>yes</info>' : '<comment>no</comment>';
-        $table->addRow(array("Rehash enabled", $rehash));
+        $table->addRow(['Rehash enabled', $rehash]);
 
         // Hash backend
         $backend = $this->getProtectedValue($hash, 'backend');
-        $table->addRow(array("Backend class", get_class($backend)));
+        $table->addRow(['Backend class', get_class($backend)]);
 
         $table->render();
     }

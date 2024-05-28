@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Графіки звітів',
     'LBL_MODULE_NAME_SINGULAR' => 'Графік звітів',
     'LBL_REPORT_NAME' => 'Звіт',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Тип(-и) файлу',
     'LBL_EMBED_REPORT' => 'Вставити звіт в електронне повідомлення',
     'LBL_EMBED_REPORT_INFO' => 'Примітка. Якщо кількість рядків у звіті перевищує 200, звіт буде прикріплено як файл CSV.',
-);
+];

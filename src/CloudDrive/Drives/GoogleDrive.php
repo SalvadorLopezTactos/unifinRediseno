@@ -25,7 +25,6 @@ use SugarException;
 
 class GoogleDrive extends Drive
 {
-
     public $usableMimeTypes = [
         'application/vnd.google-apps.spreadsheet' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         'application/vnd.google-apps.document' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
@@ -70,17 +69,17 @@ class GoogleDrive extends Drive
                 $parents = ['files' => [['id' => $parentId]]];
             }
 
-            if (is_array($parents) && (is_countable($parents['files']) ? count($parents['files']) : 0) > 0) {
-                    $parent = $parents['files'][0];
-                    $parentId = $parent->id;
-                    $folders = $this->listFolders([
-                        'folderName' => $folderName,
-                        'parentId' => $parentId,
-                        'orderBy' => $orderBy,
-                        'sharedWithMe' => $sharedWithMe,
-                    ]);
-                    $folders['parentId'] = $parentId;
-                    return $folders;
+            if (is_array($parents) && safeCount($parents['files']) > 0) {
+                $parent = $parents['files'][0];
+                $parentId = $parent->id;
+                $folders = $this->listFolders([
+                    'folderName' => $folderName,
+                    'parentId' => $parentId,
+                    'orderBy' => $orderBy,
+                    'sharedWithMe' => $sharedWithMe,
+                ]);
+                $folders['parentId'] = $parentId;
+                return $folders;
             } else {
                 return false;
             }
@@ -343,7 +342,7 @@ class GoogleDrive extends Drive
 
         if ($parentId) {
             if ($sharedWithMe && $parentId === 'root') {
-                $q .= " and sharedWithMe";
+                $q .= ' and sharedWithMe';
             } else {
                 $q .= " and '{$parentId}' in parents";
             }
@@ -422,7 +421,7 @@ class GoogleDrive extends Drive
             return false;
         }
 
-        if ((is_countable($files) ? count($files) : 0) > 0) {
+        if (safeCount($files) > 0) {
             $file['exists'] = true;
             $file['file'] = $files[0];
         }

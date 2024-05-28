@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = [
-    'LBL_GC_STATUS'=>'Coğrafi Kodlama Durumu',
+    'LBL_GC_STATUS' => 'Coğrafi Kodlama Durumu',
     'LBL_GC_LATITUDE' => 'Coğrafi Kodlama Enlem',
     'LBL_GC_LONGITUDE' => 'Coğrafi Kodlama Boylam',
     'LBL_GC_STATUS_DETAIL' => 'Coğrafi Kodlama Durum Ayrıntıları',

@@ -316,7 +316,7 @@ class AccountSharedAccess implements ModelInterface, ArrayAccess
     /**
      * Sets error_details
      *
-     * @param \DocuSign\eSign\Model\ErrorDetails $error_details error_details
+     * @param \DocuSign\eSign\Model\ErrorDetails $error_details Array or errors.
      *
      * @return $this
      */

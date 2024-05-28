@@ -25,55 +25,58 @@
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
-require_once('vendor/ytree/Tree.php');
-require_once('vendor/ytree/Node.php');
-require_once('modules/Teams/TeamSetManager.php');
+require_once 'vendor/ytree/Tree.php';
+require_once 'vendor/ytree/Node.php';
+require_once 'modules/Teams/TeamSetManager.php';
 
-class TeamSet extends SugarBean{
+class TeamSet extends SugarBean
+{
     /*
     * char(36) GUID
     */
-    var $id;
+    public $id;
     /*
     * This is not being used right now for any purpose within the application. However, in the future we will have
     * named team sets called aliases so that you instead of selecting the same teams,  you can have 'macros' which
     * will allows the user to select an alias and get all of the teams associated with that team set.
     */
-    var $name;
+    public $name;
     /*
     * When saving a team set we need to ensure that the combination does not exist, so rather than looking it up
     * by joining on the teams within the set, we save the md5 of the sorted ids of the teams for easy look up.
     */
-    var $team_md5;
+    public $team_md5;
     /*
     * This is NOT A DB FIELD, but simply used to return the primary team id
     */
-    var $primary_team_id;
+    public $primary_team_id;
     /*
     * The number of teams associated with a team set.
     */
-    var $team_count = 0;
+    public $team_count = 0;
 
-    var $date_modified;
+    public $date_modified;
     /*
     * Whether this record has been soft deleted or not.
     */
-    var $deleted;
+    public $deleted;
 
-    var $team_ids;
+    public $team_ids;
 
-    var $table_name = "team_sets";
-    var $object_name = "TeamSet";
-    var $module_name = "TeamSets";
-    var $module_dir = 'Teams';
-    var $disable_custom_fields = true;
+    public $table_name = 'team_sets';
+    public $object_name = 'TeamSet';
+    public $module_name = 'TeamSets';
+    public $module_dir = 'Teams';
+    public $disable_custom_fields = true;
+
     /**
-    * Default constructor
-    *
-    */
-    public function __construct(){
+     * Default constructor
+     *
+     */
+    public function __construct()
+    {
         parent::__construct();
-        $this->disable_row_level_security =true;
+        $this->disable_row_level_security = true;
     }
 
     /**
@@ -82,14 +85,15 @@ class TeamSet extends SugarBean{
      * @param string $team_set_id
      * @return Team[]
      */
-    public function getTeams($team_set_id){
+    public function getTeams($team_set_id)
+    {
         ///TODO CONCAT
         $sql = 'SELECT teams.id, teams.name, teams.name_2 FROM teams
             INNER JOIN team_sets_teams ON team_sets_teams.team_id = teams.id
             WHERE team_sets_teams.team_set_id = ?
             ORDER BY teams.name';
-        $stmt = $this->db->getConnection()->executeQuery($sql, array($team_set_id));
-        $teams = array();
+        $stmt = $this->db->getConnection()->executeQuery($sql, [$team_set_id]);
+        $teams = [];
 
         while ($row = $stmt->fetchAssociative()) {
             $team = BeanFactory::newBean('Teams');
@@ -100,31 +104,35 @@ class TeamSet extends SugarBean{
     }
 
     /**
-    * Returns an array of team ids associated with a given team set id
-    *
-    * @param id $team_set_id
-    * @return array of team ids
-    */
-    public function getTeamIds($team_set_id){
+     * Returns an array of team ids associated with a given team set id
+     *
+     * @param id $team_set_id
+     * @return array of team ids
+     */
+    public function getTeamIds($team_set_id)
+    {
         $teams_arr = TeamSetManager::getUnformattedTeamsFromSet($team_set_id);
-        $team_ids = array();
-        if ( is_array($teams_arr) )
-            foreach($teams_arr as $team)
+        $team_ids = [];
+        if (is_array($teams_arr)) {
+            foreach ($teams_arr as $team) {
                 $team_ids[] = $team['id'];
+            }
+        }
 
         return $team_ids;
     }
 
     /**
-    * Given an array of team_ids, determine if the set already exists, if it does return the set_id, if not,
-    * create the set and return the id.
-    *
-    * @param array $team_ids
-    * @return id	the id of the newly created team set
-    */
-    public function addTeams($team_ids){
-        if(!is_array($team_ids)){
-        $team_ids = array($team_ids);
+     * Given an array of team_ids, determine if the set already exists, if it does return the set_id, if not,
+     * create the set and return the id.
+     *
+     * @param array $team_ids
+     * @return id    the id of the newly created team set
+     */
+    public function addTeams($team_ids)
+    {
+        if (!is_array($team_ids)) {
+            $team_ids = [$team_ids];
         }
         $stats = $this->_getStatistics($team_ids);
         $team_md5 = $stats['team_md5'];
@@ -135,10 +143,10 @@ class TeamSet extends SugarBean{
         $sql = "SELECT id FROM $this->table_name WHERE team_md5 = ?";
         $stmt = $this->db->getConnection()->executeQuery($sql, [$team_md5]);
         $row = $stmt->fetchAssociative();
-        if (!$row){
+        if (!$row) {
             //we did not find a set with this combination of teams
             //so we should create the set and associate the teams with the set and return the set id.
-            if ((is_countable($team_ids) ? count($team_ids) : 0) == 1) {
+            if (safeCount($team_ids) == 1) {
                 $this->new_with_id = true;
                 $this->id = $this->db->fromConvert($team_ids[0], 'id');
                 if ($this->db->getConnection()->fetchOne(
@@ -159,14 +167,14 @@ class TeamSet extends SugarBean{
             $this->name = $team_md5;
             $this->team_count = $team_count;
             $this->save();
-            foreach($team_ids as $team_id){
+            foreach ($team_ids as $team_id) {
                 $this->_addTeamToSet($team_id);
             }
 
             Container::getInstance()->get(Listener::class)->teamSetCreated($this->id, $team_ids);
 
             return $this->id;
-        }else{
+        } else {
             $id = $this->db->fromConvert($row['id'], 'id');
             $primaryTeamId = $this->primary_team_id ?? '';
             $this->retrieve($id);
@@ -176,33 +184,34 @@ class TeamSet extends SugarBean{
     }
 
     /**
-    * Compute generic statistics we need when saving a team set.
-    *
-    * @param array $team_ids
-    * @return array
-    */
-    protected function _getStatistics($team_ids){
+     * Compute generic statistics we need when saving a team set.
+     *
+     * @param array $team_ids
+     * @return array
+     */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _getStatistics($team_ids)
+    {
         $team_md5 = '';
         sort($team_ids, SORT_STRING);
         $primary_team_id = '';
         //remove any dups
-        $teams = array();
+        $teams = [];
 
-        $team_count = count($team_ids);
-        if($team_count == 1) {
+        $team_count = safeCount($team_ids);
+        if ($team_count == 1) {
             $team_md5 = md5($team_ids[0]);
             $teams[] = $team_ids[0];
-            if(empty($this->primary_team_id)) {
-            $primary_team_id = $team_ids[0];
+            if (empty($this->primary_team_id)) {
+                $primary_team_id = $team_ids[0];
             }
         } else {
-            for($i=0; $i<$team_count; $i++) {
-
+            for ($i = 0; $i < $team_count; $i++) {
                 $team_id = $team_ids[$i];
 
-                if(!array_key_exists("$team_id", $teams)){
+                if (!array_key_exists("$team_id", $teams)) {
                     $team_md5 .= $team_id;
-                    if(empty($this->primary_team_id)){
+                    if (empty($this->primary_team_id)) {
                         $primary_team_id = $team_id;
                     }
                     $teams["$team_id"] = $team_id;
@@ -210,15 +219,16 @@ class TeamSet extends SugarBean{
             }
             $team_md5 = md5($team_md5);
         }
-        return array('team_ids' => $team_ids, 'team_md5' => $team_md5, 'primary_team_id' => $primary_team_id, 'team_count' => $team_count);
+        return ['team_ids' => $team_ids, 'team_md5' => $team_md5, 'primary_team_id' => $primary_team_id, 'team_count' => $team_count];
     }
 
     /**
-    * Given a team_id remove that team from this particular set
-    *
-    * @param string $team_id
-    */
-    public function removeTeamFromSet($team_id){
+     * Given a team_id remove that team from this particular set
+     *
+     * @param string $team_id
+     */
+    public function removeTeamFromSet($team_id)
+    {
         $GLOBALS['log']->info("Removing team_id: {$team_id} from team set: {$this->id}");
         $this->db->getConnection()->delete(
             'team_sets_teams',
@@ -233,28 +243,32 @@ class TeamSet extends SugarBean{
     }
 
 
-    public function getPrimaryTeamId(){
+    public function getPrimaryTeamId()
+    {
         return $this->primary_team_id;
     }
 
     /**
-    * Associate the teams with the team set
-    *
-    * @param id $team_id	the team id to associate with the team set
-    */
-    private function _addTeamToSet($team_id){
-        if($this->load_relationship('teams')){
+     * Associate the teams with the team set
+     *
+     * @param id $team_id the team id to associate with the team set
+     */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    private function _addTeamToSet($team_id)
+    {
+        if ($this->load_relationship('teams')) {
             $this->teams->add($team_id);
         }
     }
 
     /**
-    * Used in export to generate the proper sql to join on team sets
-    *
-    * @param String $table_name	the table name of the module we are using
-    * @return String
-    */
-    public static function getTeamNameJoinSql($table_name){
+     * Used in export to generate the proper sql to join on team sets
+     *
+     * @param String $table_name the table name of the module we are using
+     * @return String
+     */
+    public static function getTeamNameJoinSql($table_name)
+    {
         return " LEFT JOIN  team_sets ts ON $table_name.team_set_id=ts.id  AND ts.deleted=0
                 LEFT JOIN  teams teams ON teams.id=ts.id AND teams.deleted=0 AND teams.deleted=0 ";
     }
@@ -270,8 +284,9 @@ class TeamSet extends SugarBean{
         global $db;
         $cacheKey = "teamSetIdByUser{$user_id}";
         $cachedResults = sugar_cache_retrieve($cacheKey);
-        if($cachedResults)
+        if ($cachedResults) {
             return $cachedResults;
+        }
 
         $sql = 'SELECT tst.team_set_id from team_sets_teams tst
             INNER JOIN team_memberships team_memberships ON tst.team_id = team_memberships.team_id
@@ -280,28 +295,30 @@ class TeamSet extends SugarBean{
         $stmt = $GLOBALS['db']->getConnection()->executeQuery($sql, [$user_id]);
         $results = $stmt->iterateColumn();
 
-        $newResults = array();
+        $newResults = [];
         foreach ($results as $result) {
             $newResults[] = $db->fromConvert($result, 'id');
         }
         sugar_cache_put($cacheKey, $newResults);
         return $newResults;
     }
+
     /**
-    * Determine whether a user has access to any of the teams on a team set.
-    *
-    * @param id $user_id
-    * @param id $team_set_id
-    * @return boolean	true if the user has acces, false otherwise
-    */
-    function isUserAMember($user_id, $team_set_id = '', $team_ids = array()){
+     * Determine whether a user has access to any of the teams on a team set.
+     *
+     * @param id $user_id
+     * @param id $team_set_id
+     * @return boolean   true if the user has acces, false otherwise
+     */
+    public function isUserAMember($user_id, $team_set_id = '', $team_ids = [])
+    {
         // determine whether the user is already on the team
-        if(!empty($team_set_id)){
+        if (!empty($team_set_id)) {
             $sql = 'SELECT team_memberships.id FROM team_memberships
                 INNER JOIN team_sets_teams ON team_sets_teams.team_id = team_memberships.team_id
                 WHERE user_id = ? AND team_sets_teams.team_set_id = ? AND team_memberships.deleted = 0';
             $result = $this->db->getConnection()->fetchOne($sql, [$user_id, $team_set_id]);
-        }elseif(!empty($team_ids)){
+        } elseif (!empty($team_ids)) {
             $sql = 'SELECT team_memberships.id FROM team_memberships
                 WHERE user_id = ? AND team_id IN (?) AND team_memberships.deleted = 0';
             $stmt = $this->db->getConnection()->executeQuery(
@@ -310,7 +327,7 @@ class TeamSet extends SugarBean{
                 [null, \Doctrine\DBAL\Connection::PARAM_STR_ARRAY]
             );
             $result = $stmt->fetchOne();
-        }else{
+        } else {
             return false;
         }
 
@@ -321,22 +338,23 @@ class TeamSet extends SugarBean{
     }
 
     /**
-    * Returns all the users of teams of teamset
-    *
-    * @param id $team_set_id
-    * @param boolean $only_active_users
-    * @return array - users
-    */
-    function getTeamSetUsers($team_set_id, $only_active_users = false) {
-        $usersArray = array();
+     * Returns all the users of teams of teamset
+     *
+     * @param id $team_set_id
+     * @param boolean $only_active_users
+     * @return array - users
+     */
+    public function getTeamSetUsers($team_set_id, $only_active_users = false)
+    {
+        $usersArray = [];
         $teamIds = $this->getTeamIds($team_set_id);
-        if(!empty($teamIds)) {
-            foreach($teamIds as $team_id) {
+        if (!empty($teamIds)) {
+            foreach ($teamIds as $team_id) {
                 $team = BeanFactory::newBean('Teams');
                 $team->id = $team_id;
                 $usersList = $team->get_team_members($only_active_users);
                 if (!empty($usersList)) {
-                    foreach($usersList as $user) {
+                    foreach ($usersList as $user) {
                         $usersArray[$user->id] = $user;
                     } // foreach
                 } // if

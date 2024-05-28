@@ -9,44 +9,44 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Quotes']['mobile']['view']['quote-data-grand-totals-footer'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Quotes']['mobile']['view']['quote-data-grand-totals-footer'] = [
+    'panels' => [
+        [
             'name' => 'panel_quote_data_grand_totals_footer',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'deal_tot',
                     'type' => 'currency',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'deal_tot_discount_percentage',
-                    ),
+                    ],
                     'label' => 'LBL_LIST_DEAL_TOT',
-                ),
-                array(
+                ],
+                [
                     'name' => 'new_sub',
                     'type' => 'currency',
                     'label' => 'LBL_NEW_SUB',
-                ),
-                array(
+                ],
+                [
                     'name' => 'tax',
                     'type' => 'currency',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'taxrate_value',
-                    ),
+                    ],
                     'label' => 'LBL_TAX',
-                ),
-                array(
+                ],
+                [
                     'name' => 'shipping',
                     'type' => 'currency',
                     'default' => '0.00',
                     'label' => 'LBL_SHIPPING',
-                ),
-                array(
+                ],
+                [
                     'name' => 'total',
                     'label' => 'LBL_LIST_GRAND_TOTAL',
                     'type' => 'currency',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

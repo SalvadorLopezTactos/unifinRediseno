@@ -96,16 +96,11 @@
      */
     handleFilter: function(filterModule, silent) {
         if (!silent || !this.filter.module) {
-            var selectedModule = filterModule;
-            if (selectedModule !== 'all_modules') {
-                selectedModule = _.findKey(this.moduleLinkMapping, function(item) {
-                    return item === selectedModule;
-                });
-            }
-
-            var isModuleAvailable = app.metadata.getModule(selectedModule);
-            this.filter.module = isModuleAvailable ? selectedModule : 'all_modules';
+            const isModuleAvailable = filterModule === 'Audit' ? true :
+                app.metadata.getModule(filterModule);
+            this.filter.module = isModuleAvailable ? filterModule : 'all_modules';
             this._setActivityModulesAndFields(this.baseModule);
+            this._initCollection();
             this.reloadData();
         }
     },
@@ -139,6 +134,18 @@
      */
     getModulesMeta: function(baseModule) {
         return app.metadata.getView(baseModule, 'activity-timeline');
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Get the activity-timeline dashlet metadata for the baseModule
+     * @param {string} baseModule module name
+     */
+    getModulesCardMeta: function(baseModule) {
+        const customName = 'activity-card-definition-for-' + baseModule.toLowerCase();
+        return app.metadata.getView(this.baseModule, customName) ||
+            app.metadata.getView(baseModule, 'activity-card-definition');
     },
 
     /**

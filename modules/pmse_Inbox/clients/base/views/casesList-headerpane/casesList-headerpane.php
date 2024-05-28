@@ -10,20 +10,20 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['pmse_Inbox']['base']['view']['casesList-headerpane'] = array(
+$viewdefs['pmse_Inbox']['base']['view']['casesList-headerpane'] = [
     'template' => 'headerpane',
-    'title' => "LBL_PMSE_TITLE_PROCESSESS_LIST",
-    'fields' => array(
-        array(
+    'title' => 'LBL_PMSE_TITLE_PROCESSESS_LIST',
+    'fields' => [
+        [
             'name' => 'title',
             'type' => 'label',
             'default_value' => 'LBL_PMSE_TITLE_PROCESSESS_LIST',
-        ),
-    ),
-    'buttons' => array(
-        array(
+        ],
+    ],
+    'buttons' => [
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

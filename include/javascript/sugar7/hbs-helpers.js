@@ -268,14 +268,14 @@
          *
          * Example:
          *
-         * {{moduleLabel 'Accounts' 'lg' rel="tooltip" data-placement="right" title="tooltip"}}
+         * {{moduleLabel 'Accounts' 'lg' rel="tooltip" data-bs-placement="right" title="tooltip"}}
          *
          * When the Accounts color is set to "green" and is set to show by
          * the abbreviation "Ac", the above returns:
          *
          * <span class="label-module label-module-size-lg
          *     label-module-color-green" rel="tooltip"
-         *     data-placement="right" title="tooltip">
+         *     data-bs-placement="right" title="tooltip">
          *     Ac
          * </span>
          *
@@ -295,7 +295,7 @@
             // Determine the color and contents based on module metadata
             let moduleMeta = app.metadata.getModule(module) || {};
 
-            let color = moduleMeta.color || 'ocean';
+            let color = _.has(attributes, 'color') ? attributes.color : moduleMeta.color || 'ocean';
             attributes.class += ` label-module-color-${color}`;
 
             if (moduleMeta.display_type === 'abbreviation') {
@@ -313,6 +313,40 @@
             return new Handlebars.SafeString(
                 `<span ${attributes.trim()}>${contents.trim()}</span>`
             );
+        });
+
+        /**
+         * Helper that returns the HTML to display a tooltip.
+         * Bootstrap v5 doesn't support different instances for one element.
+         * For example, it's impossible to use dropdown and tooltip for the same <a> tag.
+         *
+         * Usage:
+         *
+         * {{tooltipTemplate <title> <placement>}}
+         *
+         * Examples:
+         *
+         * {{tooltipTemplate (str 'LBL_TEST_STRING' 'Accounts') 'bottom'}}
+         * Placement is 'top' by default in Bootstrap:
+         * {{tooltipTemplate (str 'LBL_TEST_STRING')}}
+         *
+         * Example of generated template:
+         *
+         * <span class="absolute h-full w-full top-0 left-0" rel="tooltip"
+         *        data-bs-placement="bottom" title="Test String"></span>
+         *
+         * @param {string} title The title
+         * @param {string} placement The placement
+         */
+        Handlebars.registerHelper('tooltipTemplate', function(title, placement) {
+            let html = `<span class="absolute h-full w-full top-0 left-0" rel="tooltip" `;
+
+            if (placement && _.isString(placement)) {
+                html += `data-bs-placement="${placement}" `;
+            }
+
+            html += `data-original-title="${title}"></span>`;
+            return new Handlebars.SafeString(html);
         });
 
         /**
@@ -394,6 +428,12 @@
                 options.hash.parent.fields.push(field);
             }
 
+            if (field.type === 'htmleditable_tinymce') {
+                field.render();
+
+                return new Handlebars.SafeString(field.$el.html());
+            }
+
             if (html) {
                 if (field.type === 'enum') {
                     if (_.has(self, 'options')) {
@@ -413,6 +453,28 @@
             }
 
             return field.getPlaceholder();
+        });
+
+        /**
+         * Helper that returns true if a value is found inside an object false otherwise
+         *
+         * Usage:
+         *
+         * {{includes myObject 'myValue'}}
+         *
+         * @param {Object} haystack The object which we search in
+         * @param {string} needle The value we're searching for
+         */
+        Handlebars.registerHelper('includes', function(haystack, needle, options) {
+            if (haystack && (_.has(haystack, needle) ||
+                (_.isString(haystack) && _.isString(needle) &&
+                    haystack.toLowerCase().includes(needle.toLowerCase())) ||
+                (_.isArray(haystack) && _.isString(needle) && haystack.includes(needle))
+                )) {
+                return options.fn(this); // Key exists, execute the content within the block
+            } else {
+                return options.inverse(this); // Key does not exist, execute the else block
+            }
         });
 
         /**

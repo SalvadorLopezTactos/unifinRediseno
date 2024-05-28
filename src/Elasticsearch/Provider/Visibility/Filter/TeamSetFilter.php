@@ -40,12 +40,12 @@ class TeamSetFilter implements FilterInterface
      */
     protected $commonFields = [
         'acl_team_set_id.set',
-        ];
+    ];
 
     /**
      * {@inheritdoc}
      */
-    public function buildFilter(array $options = array())
+    public function buildFilter(array $options = [])
     {
         $teamSetIds = $this->getTeamSetIds($options['user']);
         $field = !empty($options['field']) ? $options['field'] : $this->defaultField;
@@ -89,11 +89,11 @@ class TeamSetFilter implements FilterInterface
             $stmt = $GLOBALS['db']->getConnection()->executeQuery($sql, [$user->id]);
             $results = $stmt->iterateColumn();
             //Initialize with Global team set id by default
-            $newResults = array('1');
+            $newResults = ['1'];
             foreach ($results as $result) {
                 $newResults[] = $db->fromConvert($result, 'id');
             }
-            static::$teamSetIdsByUser[$user->id] =  $newResults;
+            static::$teamSetIdsByUser[$user->id] = $newResults;
         }
         return static::$teamSetIdsByUser[$user->id];
     }

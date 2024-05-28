@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => '활성',
     'LBL_ASSIGNEE_RULE' => '피할당자 규칙',
     'LBL_TARGET_ASSIGNEE' => '대상 피할당자',
+    'LBL_STAGE_NUMBERS' => '단계 번호 매기기',
     'LBL_EXPORT_BUTTON_LABEL' => '자료 내보내기',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => '자료 가져오기',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => '파일 시스템에서 *.json 파일을 가져와 새Smart Guide 템플릿 레코드를 자동으로 생성/업데이트합니다.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => '선택된 경우, 대상 피할당자 = 상위 피할당자일 경우, “할당된 담당자:” 사용자가 상위에서 변경되면, “할당된 담당자:” 사용자도 Smart Guide, 단계, 활동에서 자동으로 변경됩니다. 활동 템플릿의 대상 피할당자 설정이 Smart Guide 템플릿보다 우선합니다.',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => '사용자가 활동에 배정되는 시기',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => '활동을 배정받아야 하는 사람',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => '이 토글을 사용하면 자동 단계 번호 매기기를 표시하거나 숨길 수 있습니다.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Smart Guide/단계/활동 템플릿',
 ];

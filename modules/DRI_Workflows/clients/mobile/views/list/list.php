@@ -15,10 +15,10 @@ $viewdefs['DRI_Workflows']['mobile']['view']['list']['panels'] = [
         'label' => 'LBL_PANEL_DEFAULT',
         'fields' => [
             [
-                'name' => 'name',
                 'label' => 'LBL_NAME',
-                'default' => true,
                 'enabled' => true,
+                'default' => true,
+                'name' => 'name',
                 'link' => true,
             ],
             [
@@ -34,12 +34,21 @@ $viewdefs['DRI_Workflows']['mobile']['view']['list']['panels'] = [
                 'type' => 'cj-progress-bar',
                 'enabled' => true,
                 'default' => true,
+                'related_fields' => [
+                    'score',
+                    'points',
+                ],
             ],
             [
-                'name' => 'state',
-                'label' => 'LBL_STATE',
-                'enabled' => true,
+                'name' => 'momentum_ratio',
+                'label' => 'LBL_MOMENTUM_RATIO',
+                'type' => 'cj-momentum-bar',
                 'default' => true,
+                'enabled' => true,
+                'related_fields' => [
+                    'momentum_score',
+                    'momentum_points',
+                ],
             ],
             [
                 'name' => 'current_stage_name',
@@ -72,20 +81,6 @@ $viewdefs['DRI_Workflows']['mobile']['view']['list']['panels'] = [
                 'default' => true,
                 'name' => 'date_entered',
                 'readonly' => true,
-            ],
-            [
-                'name' => 'score',
-                'label' => 'LBL_SCORE',
-                'enabled' => true,
-                'readonly' => true,
-                'default' => false,
-            ],
-            [
-                'name' => 'points',
-                'label' => 'LBL_POINTS',
-                'enabled' => true,
-                'readonly' => true,
-                'default' => false,
             ],
             [
                 'name' => 'lead_name',
@@ -127,12 +122,39 @@ $viewdefs['DRI_Workflows']['mobile']['view']['list']['panels'] = [
                 'default' => false,
             ],
             [
+                'name' => 'score',
+                'label' => 'LBL_SCORE',
+                'enabled' => true,
+                'readonly' => true,
+                'default' => false,
+            ],
+            [
+                'name' => 'points',
+                'label' => 'LBL_POINTS',
+                'enabled' => true,
+                'readonly' => true,
+                'default' => false,
+            ],
+            [
+                'name' => 'state',
+                'label' => 'LBL_STATE',
+                'enabled' => true,
+                'readonly' => true,
+                'default' => false,
+            ],
+            [
                 'name' => 'dri_workflow_template_name',
                 'label' => 'LBL_DRI_WORKFLOW_TEMPLATE',
                 'enabled' => true,
                 'id' => 'DRI_WORKFLOW_TEMPLATE_ID',
                 'link' => true,
                 'sortable' => false,
+                'default' => false,
+            ],
+            [
+                'name' => 'archived',
+                'label' => 'LBL_ARCHIVED',
+                'enabled' => true,
                 'default' => false,
             ],
             [

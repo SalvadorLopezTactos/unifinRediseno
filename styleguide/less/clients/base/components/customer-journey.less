@@ -2,48 +2,19 @@
 * Sugar Automate modules components CSS
 */
 
-#cj-widget-config-toggle-label {
-  .mt-1();
-}
-
-.cj-select-to-email-address-subfield {
-  .w-62\.5();
-  .inline-block();
-}
-
-.cj-related-fieldset-detail-view {
-  .w-62\.5();
-}
-
-.cj-populate-fields-subfield {
-  .w-62\.5();
-  .inline-block();
-}
-
-.cj-populate-fields-subfield-fieldset {
-  .inline-block();
-  .w-3\/5();
-}
-
 .cj-populate-fields-subfield-fieldset .fieldset-inline .fieldset-field {
-  .inline-block();
-  .pr-0\.75;
-
-  vertical-align: top;
+  display: inline-block;
   margin-top: -3px;
+  padding-right: 1rem;
+  vertical-align: top;
 }
 
 .controls-two.btn-fit {
-  .mb-1\.25();
+  margin-bottom: 0.3125rem;
 
   #empty-field {
     float: left;
   }
-}
-
-.dri-workflows-header-panel-row {
-  .m-0();
-  .h-10();
 }
 
 .dri-workflows-header-panel-header {
@@ -58,14 +29,7 @@
 
 .dri-workflows-actions-footer {
   border-top: 0;
-  .pb-3\.5();
-}
-
-.dri-workflows-user-limit-warning {
-  color: @red;
-  .text-center();
-
-  margin-top: 1%;
+  padding-bottom: 0.875rem;
 }
 
 /*
@@ -94,45 +58,46 @@ body.sugar-dark-theme {
 }
 
 .dri-workflow-wrapper {
-  .dri-workflow-card {
-    .pt-0();
-    .px-6();
-    .pb-6();
-    .rounded-b-md();
-
-    min-height: 20px;
-  }
-
   .dri-workflow-info {
-    .pt-6();
-    .px-6();
-    .pb-2\.5();
-
-    cursor: move;
-    border-top-left-radius: 0.425rem;
-    border-top-right-radius: 0.425rem;
-
     .pull-left {
-      h4 {
-        .overflow-hidden();
-        .my-0();
-        .mx-2();
-
-        white-space: nowrap;
-        text-overflow: ellipsis;
+      span.label.label-info {
+        margin-top: 0.125rem;
+        color: @color-black;
       }
 
-      span.label.label-info {
-        .mt-0\.5();
+      .more,
+      .less {
+        cursor: all-scroll;
+      }
 
-        color: @black;
+      span.label.label-success,
+      span.label.label-cancelled {
+        margin-top: 0.125rem;
       }
     }
 
-    .dri-workflow-desc {
-      .flex();
+    .dri-workflow-archived {
+      color: @gray80;
+      background-color: @gray40;
+      border: 0.063rem solid @gray40;
+      margin-left: 0.375rem;
+      margin-top: 0.125rem;
+    }
 
-      width: calc(~'100% - 110px');
+    .pull-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .dri-workflow-assigned-user {
+      line-height: 38px;
+      margin: -2px 24px auto auto;
+      column-gap: 5px;
+
+      i.sicon-user.assigned-user-icon::before {
+        border-color: var(--border-color);
+        padding: 5px 5px 5px 5.5px;
+      }
     }
   }
 }
@@ -142,22 +107,16 @@ body.sugar-dark-theme {
 }
 
 .dri-workflow-wrapper .well {
-  .mb-0();
-
   box-shadow: none;
+  margin-bottom: 0;
 }
 
 .dri-workflow-wrapper .loading-wrapper .span {
-  .ml-1\.25();
+  margin-left: 0.3125rem;
 }
 
 .dri-workflow-wrapper .lead {
-  .m-0();
-}
-
-.dri-workflow-wrapper .dri-subworkflow {
-  .mt-2\.5();
-  .relative();
+  margin: 0;
 }
 
 .dri-workflow-wrapper .dri-subworkflow .dri-activity-show-children,
@@ -169,43 +128,28 @@ body.sugar-dark-theme {
   min-height: 60px;
 }
 
-.dri-workflow-wrapper .dri-subworkflow .dri-activity-children {
-  .pl-2\.5();
-}
-
-.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow {
-  .h-10();
-  .relative();
-  .ml-5();
-  .mr-1\.25();
-
-  background: @gray30;
-}
-
 .dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow::before {
-  .w-0();
-  .h-0();
-  .absolute();
-
-  content: "";
-  top: 0;
-  left: -20px;
   border-top: 20px solid @gray30;
   border-bottom: 20px solid @gray30;
   border-left: 20px solid transparent;
+  content: "";
+  height: 0;
+  left: -20px;
+  position: absolute;
+  top: 0;
+  width: 0;
 }
 
 .dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow::after {
-  .w-0();
-  .h-0();
-  .absolute();
-
-  content: "";
-  top: 0;
-  right: -20px;
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
   border-left: 20px solid @gray30;
+  content: "";
+  height: 0;
+  position: absolute;
+  right: -20px;
+  top: 0;
+  width: 0;
 }
 
 .dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-not_started {
@@ -304,13 +248,6 @@ body.sugar-dark-theme {
   border-left: 20px solid @lightYellow;
 }
 
-.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-info {
-  .pt-3();
-  .pr-0();
-  .pb-2\.5();
-  .pl-1\.5();
-}
-
 .dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-arrow-info a {
   font-weight: 500;
 }
@@ -344,6 +281,14 @@ body.sugar-dark-theme {
         border-top: @activityBaseColor;
       }
 
+      .dri-subworkflow-activity-not-started {
+        border-top: 0.25rem solid @activityBorderTopColor;
+      }
+
+      .dri-subworkflow-activity-planned {
+        border-top: 0.25rem solid @activityBorderTopColor;
+      }
+
       .dri-subworkflow-activity-deferred {
         border-top: 0.25rem solid @red;
       }
@@ -360,35 +305,73 @@ body.sugar-dark-theme {
         border-top: 0.25rem solid @yellow;
       }
 
+      &.agency_task {
+        .dri-activity-info i {
+          &.activity-type-icon {
+            color: @activityBaseIconColor;
+          }
+        }
+      }
+
+      &.automatic_task {
+        .dri-activity-info i {
+          &.activity-type-icon {
+            color: @activityBaseIconColor;
+          }
+        }
+      }
+
+      &.dri-activity-info a {
+        color: @activityInfoColor;
+      }
+
+      &.dri-subworkflow-activity-completed {
+        border-top: @activityBaseColor;
+      }
+
+      &.dri-subworkflow-activity-held {
+        border-top: @activityBaseColor;
+      }
+    }
+
+    .dri-subworkflow-activity-wrapper {
+      .dri-subworkflow-activity {
+        &.dri-subworkflow-activity-in-progress {
+          border-top: @activityInProgressColor;
+        }
+      }
+
+      .dri-subworkflow-activity-completed {
+        border-top: @activityBaseColor;
+      }
+
+      .dri-subworkflow-activity-deferred {
+        border-top: @activityBaseCancellationColor;
+      }
+
+      .dri-subworkflow-activity-pending-input {
+        border-top: @activityBaseCancellationColor;
+      }
+
+      .dri-subworkflow-activity-not-held {
+        border-top: @activityBaseNotColor;
+      }
+
+      .dri-subworkflow-activity-not-applicable {
+        border-top: @activityBaseNotColor;
+      }
+
       .dri-activity-children {
         .dri-subworkflow-activity {
           .dri-activity-child {
             .dri-subworkflow-activity-in-progress {
-              border-top: 0.25rem solid @blue;
+              border-top: @activityInProgressColor;
             }
           }
         }
       }
     }
   }
-}
-
-.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity {
-  margin: 5px;
-  border-bottom: none;
-  .p-1\.5();
-
-  background: @activityBackgroundColor;
-  border-top: 0.25rem solid @activityBorderTopColor;
-  color: @activityColor;
-  .relative();
-
-  line-height: 2.5em;
-}
-
-.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .dri-subworkflow-activity-buttons {
-  .w-13\.75();
-  .inline-block();
 }
 
 .dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .btn-group {
@@ -400,26 +383,15 @@ body.sugar-dark-theme {
 }
 
 .dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-form {
-  .ml-0();
+  margin-left: 0;
 }
 
 .dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-url {
-  .ml-0();
-}
-
-.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-due-date {
-  color: @white;
-  white-space: nowrap;
-  border-radius: 3px;
-  padding: 0 5px;
-  .inline-block();
-
-  background: @cerulean;
-  line-height: 2em;
+  margin-left: 0;
 }
 
 .dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-due-date i {
-  color: @white;
+  color: @color-white;
 }
 
 .dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-due-date.overdue {
@@ -432,11 +404,22 @@ body.sugar-dark-theme {
 }
 
 .dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-due-date.future {
+  background: @color-gray-500;
+  color: @color-white;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-due-date.future i {
+  color: @color-white;
+}
+
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-due-date.tomorrow,
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-due-date.today {
   background: @lightOcean;
   color: @darkOcean;
 }
 
-.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-due-date.future i {
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-due-date.tomorrow i,
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .activity-due-date.today i {
   color: @darkOcean;
 }
 
@@ -449,21 +432,12 @@ body.sugar-dark-theme {
   background: #0f7799;
 }
 
-.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .dri-activity-info .assigned-user-wrapper {
-  .relative();
-}
-
 body.sugar-dark-theme .dri-workflow-wrapper .dri-subworkflow-activity .dri-activity-info a {
   color: @gray60;
 }
 
 .dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .dri-activity-info i.assigned-user-icon {
   color: var(--label-color);
-}
-
-.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .dri-activity-info img.assigned-user-icon {
-  .h-6();
-  .w-6();
 }
 
 .dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity.customer_task .dri-activity-info i.activity-type-icon {
@@ -514,32 +488,16 @@ body.sugar-dark-theme .dri-workflow-wrapper .dri-subworkflow i.sicon.sicon-phone
   color: @gray60;
 }
 
-.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity.cj_blocked .fa-ban {
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity.cj_blocked .sicon-ban {
   cursor: pointer;
 }
 
-.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity.cj_blocked_by_stage .fa-ban {
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity.cj_blocked_by_stage .sicon-ban {
   cursor: pointer;
 }
 
-.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .fa-link {
+.dri-workflow-wrapper .dri-subworkflow .dri-subworkflow-activity .sicon-link {
   color: @blue;
-}
-
-.dri-workflow-wrapper .dri-subworkflow .add-stage-button-wrapper {
-  .absolute();
-
-  z-index: 1000;
-  right: 36px;
-  top: 6px;
-  .h-7();
-  .w-7();
-
-  display: none;
-}
-
-.dri-workflow-wrapper .dri-subworkflow:hover .add-stage-button-wrapper {
-  .block();
 }
 
 .dri-workflow-wrapper .dri-subworkflow .dri-activity-child {
@@ -554,9 +512,8 @@ body.sugar-dark-theme .dri-workflow-wrapper .dri-subworkflow i.sicon.sicon-phone
   font-weight: normal;
 }
 
-div.customer-journey-chart-wrapper,
-div.customer-journey-momentum-chart-wrapper {
-  .p-0();
+div.customer-journey-chart-wrapper {
+  padding: 0;
 }
 
 div.customer-journey-chart-wrapper .nv-chart,
@@ -586,17 +543,12 @@ div.customer-journey-momentum-chart-wrapper .nv-chart .not_started {
 
 div.dashlet-container div.dashlet div.dashlet-content div.customer-journey-chart-wrapper .nv-chart,
 div.dashlet-container div.dashlet div.dashlet-content div.customer-journey-momentum-chart-wrapper .nv-chart {
-  .h-full();
+  height: 100%;
 }
 
 div.dashlet-container div.dashlet div.dashlet-content div.customer-journey-chart-wrapper div[data-content="chart"],
 div.dashlet-container div.dashlet div.dashlet-content div.customer-journey-momentum-chart-wrapper div[data-content="chart"] {
   height: calc(100% - 16px);
-}
-
-.dri-workflows-header-wrapper {
-  margin-bottom: -3px;
-  .relative();
 }
 
 .dri-workflows-header-wrapper .block-footer {
@@ -613,96 +565,126 @@ div.dashlet-container div.dashlet div.dashlet-content div.customer-journey-momen
   -moz-box-shadow: none;
 }
 
-.dri-workflows-header-wrapper .record-panel-header span {
-  padding: 12px 15px 0;
+.dri-workflows-header-wrapper .record-panel-header .dri-workflows-header-active-inactive-panel {
+  padding: 12px 13px 0;
+}
+
+.dri-workflows-header-wrapper .row-fluid .panel-active {
+  padding: 3px;
+}
+
+body.sugar-dark-theme .dri-workflows-header-wrapper .dri-workflows-actions {
+  top: 7px;
+  right: 0;
+
+  .dri-workflows-actions-buttons {
+    margin-left: 10px;
+    min-height: 1px;
+  }
+
+  .fieldset-empty .dri-workflows-header {
+    margin-left: -10px;
+  }
 }
 
 .dri-workflows-header-wrapper .dri-workflows-actions {
-  .absolute();
-
-  top: 5px;
+  top: 7px;
   right: 0;
+
+  .dri-workflows-actions-buttons {
+    margin-left: 9px;
+    min-height: 1px;
+  }
+
+  .fieldset-empty .dri-workflows-header {
+    margin-left: -10px;
+  }
+}
+
+.dri-workflows-header-wrapper .dri-workflows-actions {
+  .filter-dropdown-close {
+    right: 15px;
+    background: @color-white;
+    color: @color-gray-900;
+    outline: none;
+    border: 0.0625rem solid @color-gray-300;
+
+    &:hover {
+      background: @color-white;
+      outline: none;
+      border: 0.0625rem solid @color-gray-300;
+    }
+
+    span.sicon.sicon-chevron-down {
+      color: @color-gray-900;
+    }
+  }
+
+  .filter-dropdown-open {
+    background: @color-white;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+      color: @color-blue-400;
+
+      span.sicon.sicon-chevron-down {
+        color: @color-blue-400;
+      }
+    }
+
+    span.sicon.sicon-chevron-down {
+      color: @color-blue-400;
+    }
+  }
 }
 
 .dri-workflows-header-wrapper .dri-workflows-actions .dri-workflows-actions-buttons {
-  .w-11();
-
-  min-height: 1px;
+  .fieldset.fieldset-empty.actions.edit.btn-group.open .workflow-filter-dropdown .edit a.rowaction i.sicon.sicon-check {
+    color: @color-blue-400;
+  }
 }
 
 .dri-workflow-details-horizontal .row-fluid .dri-subworkflow {
-  .w-full();
-
   max-width: 265px;
   flex-shrink: 0;
+  width: 100%;
 }
 
 .dri-workflow-details-horizontal .row-fluid {
-  .flex();
-
+  display: flex;
   overflow-x: auto;
 }
 
 .tab-content div[id*="customer_journey_tab"] {
-  .pt-1\.25();
-}
-
-@media (max-width: 1400px) {
-  body.sugar-dark-theme .dri-workflows-header-wrapper {
-    .relative();
-
-    top: initial;
-    background: transparent;
-    .p-1\.25();
-
-    border-bottom: transparent;
-    .flex();
-
-    flex-flow: row-reverse wrap;
-  }
+  padding-top: 0.3125rem;
 }
 
 @media (max-width: 1400px) {
   .dri-workflows-header-wrapper .dri-workflows-actions {
-    .relative();
-
-    top: initial;
-    background: #f6f6f6;
-    .p-1\.25();
-
-    border-bottom: transparent;
-    .flex();
-
+    display: flex;
     flex-flow: row-reverse wrap;
+    position: relative;
+    top: initial;
+    padding: 0.3125rem;
   }
 }
 
 @media (min-width: 501px) {
   .dri-workflows-header-wrapper .dri-workflows-actions .dri-workflows-actions-fields {
-    .w-62\.5();
+    width: 15.625rem;
   }
 }
 
 @media (min-width: 401px) and (max-width: 500px) {
   .dri-workflows-header-wrapper .dri-workflows-actions .dri-workflows-actions-fields {
-    .w-62\.5();
+    width: 15.625rem;
   }
 }
 
 @media (max-width: 400px) {
   .dri-workflows-header-wrapper .dri-workflows-actions .dri-workflows-actions-fields {
-    .w-30();
+    width: 7.5rem;
   }
-}
-
-.dri-workflows-header-wrapper .dri-workflows-actions .dri-workflows-actions-spinner {
-  .mt-0\.25();
-  .mr-1\.25();
-}
-
-.dri-workflows-header-wrapper .record-panel .record-panel-header > .row-fluid {
-  background: @activityRowFluidColor;
-  border-bottom: @activityRowFluidBorderColor;
 }
 
 .dri-workflows-header-wrapper *:focus {
@@ -717,9 +699,6 @@ div.dashlet-container div.dashlet div.dashlet-content div.customer-journey-momen
 
 .config-cj-module {
   .config_container {
-    .ml-7\.5();
-    .mr-7\.5();
-
     .config_values {
       margin: 10px 0;
 
@@ -734,23 +713,22 @@ div.dashlet-container div.dashlet div.dashlet-content div.customer-journey-momen
   }
 
   .config_container p {
-    .m-0();
+    margin: 0;
   }
 
   #content .headerpane {
-    .relative();
-
+    position: relative;
     top: 0;
   }
 
   .record.bottom {
-    .ml-2\.5();
-    .mr-2\.5();
-    .mb-2\.5();
+    margin-left: 0.625rem;
+    margin-right: 0.625rem;
+    margin-bottom: 0.625rem;
   }
 
   .record-panel.top {
-    .m-0();
+    margin: 0;
   }
 
   .record-panel.bottom {
@@ -762,8 +740,7 @@ div.dashlet-container div.dashlet div.dashlet-content div.customer-journey-momen
     padding: 0 5px 0 15px;
     border-top: @borderWidget;
     border-bottom: @borderWidget;
-    .h-13\.75();
-
+    height: 3.4375rem;
     text-transform: none;
     box-shadow: none;
     -webkit-box-shadow: none;
@@ -816,7 +793,7 @@ div.dashlet-container div.dashlet div.dashlet-content div.customer-journey-momen
 
 .content-tabs {
   div[id*="customer_journey_tab"] {
-    .pt-1\.25();
+    padding-top: 0.3125rem;
   }
 }
 
@@ -841,15 +818,7 @@ div.dashlet-container div.dashlet div.dashlet-content div.customer-journey-momen
 }
 
 .dri-workflow-wrapper .progress {
-  background-color: @guideProgressColor;
-}
-
-.dri-workflow-toggle-switch {
-  .relative();
-  .inline-block();
-
-  .w-12\.5();
-  .h-6();
+  background-color: @activityProgressColor;
 }
 
 .dri-workflow-toggle-switch input {
@@ -859,28 +828,25 @@ div.dashlet-container div.dashlet div.dashlet-content div.customer-journey-momen
 }
 
 .slider {
-  .absolute();
-
+  background-color: @starCommandBlue;
   cursor: pointer;
   inset: 0;
-  background-color: @starCommandBlue;
-  -webkit-transition: 0.4s;
+  position: absolute;
   transition: 0.4s;
+  -webkit-transition: 0.4s;
 }
 
 .slider::before {
-  .absolute();
-
-  content: "";
-  .h-5();
-  .w-5();
-
-  left: 2px;
-  right: 2px;
-  bottom: 1px;
   background-color: @white;
-  -webkit-transition: 0.4s;
+  bottom: 1px;
+  content: "";
+  height: 1.25rem;
+  left: 2px;
+  position: absolute;
+  right: 2px;
   transition: 0.4s;
+  -webkit-transition: 0.4s;
+  width: 1.25rem;
 }
 
 input:checked + .slider {
@@ -906,69 +872,81 @@ input:checked + .slider::before {
   border-radius: 50%;
 }
 
-.widget-container {
-  .inline-block();
+.slider.detail {
+  background-color: @gray50;
+  cursor: pointer;
+  inset: 0;
+  position: absolute;
+  transition: 0.4s;
+  -webkit-transition: 0.4s;
+}
+
+.slider.detail::before {
+  background-color: @white;
+  bottom: 1px;
+  content: "";
+  height: 1.25rem;
+  left: 2px;
+  position: absolute;
+  right: 2px;
+  transition: 0.4s;
+  -webkit-transition: 0.4s;
+  width: 1.25rem;
+}
+
+/* Rounded sliders */
+.slider.detail.round {
+  border-radius: 34px;
+}
+
+.slider.detail.round::before {
+  border-radius: 50%;
+}
+
+input:checked + .slider.detail {
+  background-color: @gray50;
+}
+
+input:focus + .slider.detail {
+  box-shadow: 0 0 1px @gray50;
+}
+
+input:checked + .slider.detail::before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
 }
 
 .archiveActive {
-  #cj-widget-config-toggle-label-left {
-    .flex();
-
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    .mr-1();
-  }
-
   #cj-widget-toggle-left {
-    .flex();
-
+    display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
   }
 
   #cj-widget-config-toggle-label-right {
-    .w-12\/12();
-    .p-0\.5();
-
+    padding: 0.125rem;
     white-space: nowrap;
-    .flex();
-
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    .ml-1();
+    width: 100%;
   }
 }
 
-.horizontalVertical {
+.horizontal-vertical {
   #cj-widget-config-toggle-label-left {
-    .w-12\/12();
-    .p-0\.5();
-
+    padding: 0.125rem;
     white-space: nowrap;
-    .flex();
-
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    .mr-1();
+    width: 100%;
   }
 
   #cj-widget-toggle-left {
-    .flex();
-
+    display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
   }
 
   #cj-widget-config-toggle-label-right {
-    .w-12\/12();
-    .p-0\.5();
-
+    padding: 0.125rem 0.5rem 0 0.35rem;
     white-space: nowrap;
-    .flex();
-
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    .ml-1();
   }
 }
 
@@ -976,22 +954,14 @@ input:checked + .slider::before {
   font-weight: bold;
 }
 
-.clearfix-wrapper {
-  .flex();
-
-  flex-wrap: nowrap;
-  justify-content: space-between;
-}
-
 body.sugar-dark-theme .cj-configure-recordview-display-content-field .select2-result-unselectable.select2-disabled {
   background: @gray70;
 }
 
 .record .dri-workflow-wrapper .btn-group.actions > ul.dropdown-menu {
-  .mt-0();
-
   right: 0;
   left: auto;
+  margin-top: 0;
 }
 
 .dri-workflow-wrapper .progress-cancelled .bar {
@@ -1023,4 +993,283 @@ body.sugar-dark-theme .cj-configure-recordview-display-content-field .select2-re
 .cj-bar-orange {
   background-color: @orange;
   background-image: linear-gradient(to bottom, @orange, @orange);
+}
+
+.record-link-wrapper .record-label-wrapper.target-action-label {
+  margin-left: -6px;
+  width: 9vw;
+}
+
+[data-fieldname="field_trigger"] .filter-body,
+[data-name="field_trigger"] .filter-body {
+  margin-left: 0;
+}
+
+.cj-validation-error {
+  .add-on {
+    font-size: 0.75rem;
+    position: relative;
+    right: 2.5rem;
+    top: -0.125rem;
+  }
+
+  .select2-container .select2-choice {
+    border-color: @darkRed;
+    color: @darkRed;
+  }
+
+  .sicon.sicon-warning-circle {
+    color: @darkRed;
+  }
+}
+
+.cj-filter-validation-error .error-tooltip.add-on {
+  .pull-right();
+
+  height: 0;
+  position: relative;
+  right: 1.25rem;
+  top: -1.563rem;
+  font-size: 0.75rem;
+
+  .sicon.sicon-warning-circle {
+    color: @darkRed;
+  }
+}
+
+.cj-target-action-subfield {
+  width: 40%;
+}
+
+[data-fieldname="field_trigger"] .filter-body {
+  margin-left: 0;
+}
+
+.dri-workflow-card .data-skeleton-loader {
+  background: @automateSkeletonLoader;
+  background-repeat: no-repeat;
+  animation: move 2s infinite linear;
+}
+
+body.sugar-dark-theme .dri-workflows-header-active-inactive-panel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: @color-white;
+
+  .sicon-chevron-down {
+    margin-right: 0.375rem;
+  }
+}
+
+body.sugar-light-theme .dri-workflows-header-active-inactive-panel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #2b2d2e;
+
+  .sicon-chevron-down {
+    margin-right: 0.375rem;
+  }
+}
+
+.dri-workflows-header-active-inactive-panel .sicon-chevron-right {
+  width: 1.125rem;
+}
+
+.sicon-chevron-left {
+  font-size: 0.75rem;
+}
+
+.sicon-chevron-right {
+  font-size: 0.75rem;
+}
+
+.sicon-chevron-down {
+  font-size: 0.75rem;
+}
+
+.dropdown-menu a.filter-check-hidden {
+  padding-left: 30px;
+  background-color: @color-white;
+}
+
+body.sugar-dark-theme {
+  .filter-view.select2-container.select2-choice.select2-chosen.workflow-filter-view {
+    color: @color-gray-600;
+  }
+
+  .filter-dropdown-close .filter-view.select2-container.select2-choice.select2-chosen.workflow-filter-view {
+    color: @color-gray-600;
+  }
+
+  .dri-workflows-header-wrapper .dri-workflows-actions .filter-dropdown-open {
+    background-color: @color-gray-900;
+  }
+
+  .filter-dropdown-span-open {
+    background-color: @color-gray-600;
+  }
+
+  .filter-dropdown-span-close {
+    background-color: @color-gray-900;
+  }
+
+  .dropdown-menu {
+    a.filter-check-hidden {
+      padding-left: 30px;
+      background-color: @color-gray-900;
+    }
+
+    a.filter-check-shown.highlight {
+      background-color: @color-gray-700;
+    }
+
+    a.filter-check-shown {
+      background-color: @color-gray-900;
+    }
+
+    a.filter-check-shown:hover {
+      background-color: @color-gray-700;
+    }
+
+    a.filter-check-hidden:hover {
+      background-color: @color-gray-700;
+    }
+  }
+
+  .dropDownToggleButtonBg:hover {
+    border-color: @borderColorFocus;
+  }
+
+  .dropDownToggleButtonBg.filterBg:hover {
+    border-color: @borderColorFocus;
+  }
+
+  .dropDownToggleButtonBg {
+    border: 0.0625rem solid @color-gray-800;
+    background-color: @color-gray-950;
+  }
+
+  .dropDownToggleButtonBg.filterBg {
+    border: 0.0625rem solid @color-gray-800;
+    background-color: @color-gray-900;
+  }
+
+  span.dropDownToggleButtonBg a.btn.dropdown-toggle.btn-invisible span.sicon.sicon-chevron-down {
+    color: @color-dark-sicon-base;
+  }
+
+  .dri-workflows-header-wrapper .dri-workflows-actions .dri-workflows-actions-buttons {
+    .fieldset.fieldset-empty.actions.edit.btn-group.open .workflow-filter-dropdown .edit a.rowaction i.sicon.sicon-check {
+      color: @color-dark-sicon-base;
+    }
+  }
+
+  .toggleButtonBg .btn.rowaction {
+    background-color: @color-gray-900;
+    outline: none;
+  }
+}
+
+.dropDownToggleButtonBg a.btn.dropdown-toggle.btn-invisible {
+  border: 1px @color-gray-300;
+  box-shadow: none;
+}
+
+.dropDownToggleButtonBg a.btn.dropdown-toggle.btn-invisible.show {
+  border: 1px @color-gray-300;
+  box-shadow: none;
+}
+
+.dropdown-menu a.filter-check-shown.highlight {
+  background-color: @color-blue-100;
+}
+
+.dropdown-menu a.filter-check-shown {
+  i.sicon.sicon-check {
+    color: @color-blue-400;
+  }
+}
+
+.filter-view.select2-container.select2-choice.select2-chosen.workflow-filter-view {
+  color: @color-gray-900;
+  min-height: 0;
+  font-weight: 600;
+}
+
+.filter-dropdown-open .filter-view.select2-container.select2-choice.select2-chosen.workflow-filter-view {
+  color: @color-blue-400;
+}
+
+.filter-dropdown-close .filter-view.select2-container.select2-choice.select2-chosen.workflow-filter-view {
+  color: @color-gray-900;
+}
+
+a.btn.dropdown-toggle.btn-invisible span,
+a.btn.dropdown-toggle.btn-invisible span.sicon-chevron-down {
+  color: @color-gray-700;
+}
+
+a.btn.dropdown-toggle.filter-dropdown-open span,
+a.btn.dropdown-toggle.filter-dropdown-open span.sicon-chevron-down {
+  color: @color-blue-400;
+}
+
+.dropDownToggleButtonBg {
+  margin-left: -15px;
+  background-color: @white;
+  border-radius: 3px;
+  border: 1px solid @color-gray-300;
+
+  a.btn.dropdown-toggle.btn-invisible {
+    padding: 4px 10px;
+    vertical-align: middle;
+    margin: 4px 0;
+    height: 10px;
+    line-height: 0;
+  }
+}
+
+a.btn.dropdown-toggle.btn-invisible:not(.disabled):not(:active):focus {
+  outline: none;
+}
+
+.toggleButtonBg .btn.rowaction {
+  background-color: @color-gray-800;
+  border: 1px solid @color-gray-300;
+
+  .sicon {
+    color: @color-white;
+  }
+}
+
+.dropDownToggleButtonBg:hover {
+  border-color: @borderColorFocus;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.toggleButtonBg .sicon::before {
+  color: @white;
+}
+
+.horizontalScrollButtonBorderRight a {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.verticalScrollButtontBorderLeft a {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.dri-workflows-header-wrapper .data-skeleton-loader {
+  background: @automateSkeletonLoader;
+  background-repeat: no-repeat;
+  animation: move 2s infinite linear;
+}
+
+.record .btn-group.actions > ul.dropdown-menu.workflow-filter-view-items {
+  right: 0;
+  left: auto;
+  margin-left: 0;
+  top: 2.25rem;
 }

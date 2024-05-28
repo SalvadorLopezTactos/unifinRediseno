@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => '这个签名需要一个名字。',
     'LBL_DEFAULT_SIGNATURE' => '默认',
     'LBL_MODULE_NAME' => '电子邮件签名',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => '使用签名?',
     'LBL_SIGNATURE_PREPEND' => '在回复上签名吗?',
     'LBL_SIGNATURES' => '签名',
-);
+];

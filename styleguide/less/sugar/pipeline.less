@@ -1,31 +1,10 @@
-.control-group {
-  .controls.has-refresh.btn-group-fit {
-    .filter-view {
-      margin-right: 30px;
-    }
-
-    .toggle-actions {
-      .pipeline-refresh-btn {
-        right: 88px;
-      }
-    }
-
-    .btn-group {
-      .pipeline-view-button {
-        .fa-align-left {
-          transform: rotate(90deg);
-        }
-      }
-    }
-  }
-}
-
 .pipeline-records {
   .main-pane {
     margin-left: 0;
 
     .headerpane {
       display: block;
+      max-width: calc(100% ~"-" @sidebarNavWidth);
 
       .btn-toolbar {
         padding: 12px 24px 0 0;
@@ -41,12 +20,12 @@
         border-top: none;
 
         .detail {
-          .inline-block();
+          display: inline-block;
 
           h1 {
-            .inline-block();
-            .mt-4();
-            .ml-4();
+            display: inline-block;
+            margin-left: 1rem;
+            margin-top: 1rem;
           }
         }
 
@@ -65,11 +44,6 @@
           &.pull-left {
             .tab {
               margin-left: 20px;
-
-              &:not(:first-child) {
-                min-width: 200px;
-                width: 200px;
-              }
             }
           }
         }
@@ -80,22 +54,12 @@
           &.btn-toolbar .btn {
             font-size: 14px;
           }
-
-          .btn-group {
-            a > .fa {
-              color: @gray80;
-            }
-
-            a > .fa-align-left {
-              transform: rotate(90deg);
-            }
-          }
         }
       }
     }
 
     .my-pipeline-content {
-      overflow: auto;
+      border-top: 1px solid var(--border-color);
 
       #noData {
         position: absolute;
@@ -109,27 +73,18 @@
       }
 
       .table-responsive {
+        .pipeline-fade {
+          height: ~"calc(100% - 4rem)";
+          background-image: var(--pipeline-fade-gradient);
+          right: 0;
+          z-index: 1;
+        }
+
         .table {
-          thead th:not(.arrowholder) {
-            min-width: 200px;
-          }
-
-          thead th {
-            padding: 5px;
-            text-align: center;
-            vertical-align: middle;
-
-            &.arrowholder {
-              max-width: 50px;
-
-              &.left {
-                text-align: left;
-              }
-
-              &.right {
-                text-align: right;
-              }
-            }
+          td {
+            vertical-align: top;
+            border-top: none;
+            padding: 0;
 
             .header-column {
               color: @white;
@@ -155,81 +110,51 @@
                 }
               }
             }
+
+            .badge {
+              bottom: 0.06rem;
+              padding: 0 0.31rem;
+              text-shadow: none;
+            }
+
+            .one-digit-badge {
+              min-width: 0.625rem;
+            }
+          }
+
+          tr {
+            position: relative;
           }
 
           td {
-            padding: 5px;
-            text-align: center;
             vertical-align: top;
+
+            ul {
+              li {
+                &.ui-sortable-helper {
+                  box-shadow: 0 0 4px fade(@color-black, 25%);
+                }
+              }
+            }
 
             .column {
               list-style-type: none;
               margin-left: auto;
-              min-height: 100px;
 
-              .tile {
-                text-align: left;
-                border: @borderWidget;
-                border-radius: 4px;
-                margin: 0 auto 10px;
-                width: 100%;
-                position: relative;
-
-                &:hover .pipeline-tile .tile-header .pull-right .btn.delete {
-                  position: absolute;
-                  top: 2px;
-                  right: 4px;
-                  display: inline;
-
-                  &:not(.disabled):hover > .fa {
-                    color: @black;
-                  }
-                }
-
-                .pipeline-tile {
-                  cursor: pointer;
-                  max-width: 250px;
-                  min-height: 50px;
-
-                  .tile-header {
-                    font-size: 14px;
-                    line-height: 25px;
-                    padding: 0 15px 0 10px;
-                    border-radius: 5px 5px 0 0;
-
-                    .pull-right {
-                      .btn.delete {
-                        background: transparent none;
-                        margin: 0;
-                        padding: 0;
-                        display: none;
-                        border: none;
-
-                        i {
-                          font-size: 12px;
-                        }
-                      }
-                    }
-
-                    .name {
-                      max-width: 200px;
-                      color: @black;
-                    }
-                  }
-
-                  .tile-body {
-                    padding: 0 0 5px;
-                    border-bottom-right-radius: 5px;
-
-                    .info-container {
-                      margin-left: 10px;
-                      margin-right: 10px;
-                      width: calc(~'100% - 20px');
-                    }
-                  }
-                }
+              div.blue-border {
+                border: 0.125rem solid @color-blue-400;
               }
             }
+
+            .column-bottom-controls {
+              bottom: 0;
+            }
+          }
+        }
+
+        &.no-scroll {
+          .pipeline-fade {
+            display: none;
           }
         }
       }
@@ -251,20 +176,19 @@
 
       .nav-arrow-left,
       .nav-arrow-right {
-        width: 36px;
-        height: 40px;
+        border: 1px solid @sicon-color-light;
         border-radius: 3px;
-        background-color: @btnSecondaryBackground;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+        background-color: var(--contrast-color);
+        margin-top: 1.3rem;
+        z-index: 1;
 
         .arrow {
           font-family: 'SugarIcons';
+          color: @sicon-color-light;
         }
 
         &:hover {
-          text-underline: none;
+          border-color: @sicon-hover-color;
 
           .arrow {
             color: @sicon-hover-color;
@@ -273,13 +197,20 @@
       }
 
       .portlet-placeholder {
-        text-align: left;
-        border: @borderWidget;
-        border-radius: 5px;
-        margin: 0 auto 20px;
-        width: 100%;
-        background: @secondaryContentBackground;
-        height: 100px;
+        background-color: var(--contrast-color);
+        opacity: 0.5;
+        height: 5.75rem;
+        display: none;
+
+        &:first-child {
+          margin-bottom: 1rem;
+        }
+      }
+
+      .start-column {
+        .portlet-placeholder {
+          display: block;
+        }
       }
     }
 
@@ -310,38 +241,6 @@
         &.table_header {
           background: @darkYellow;
         }
-      }
-
-      .nav-arrow-left,
-      .nav-arrow-right {
-        width: 36px;
-        height: 40px;
-        border-radius: 3px;
-        background-color: @btnSecondaryBackground;
-        text-align: center;
-        display: inline-flex;
-
-        .arrow {
-          font-family: 'SugarIcons';
-        }
-
-        &:hover {
-          text-decoration: none;
-
-          .arrow {
-            color: @sicon-hover-color;
-          }
-        }
-      }
-
-      .portlet-placeholder {
-        text-align: left;
-        border: @borderWidget;
-        border-radius: 5px;
-        margin: 0 auto 20px;
-        width: 100%;
-        background: @secondaryContentBackground;
-        height: 100px;
       }
     }
   }
@@ -371,6 +270,10 @@
     display: inline-block;
     color: @gray80;
   }
+}
+
+.pipeline.ui-sortable-helper {
+  list-style-type: none;
 }
 
 //Pipeline Config
@@ -466,7 +369,6 @@
     .ui-tabs-panel {
       padding: 10px;
       border: @borderWidget;
-      border-top: none;
       display: block;
 
       &.console-config-fields {
@@ -603,24 +505,8 @@
 }
 
 .sidebar-content {
-  width: 100%;
-  border-right: none;
-  position: absolute;
-  top: 64px;
-  bottom: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-
   .pipeline-records {
     .tile {
-      cursor: pointer;
-      margin: 30% auto 0;
-      width: 250px;
-      text-align: left;
-      background: @primaryContentBackground;
-      border: @borderWidget;
-      border-radius: 5px;
-
       .tile_header {
         font-size: 14px;
         line-height: 25px;

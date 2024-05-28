@@ -13,10 +13,10 @@
 $dictionary['product_definition'] = [
     'table' => 'product_definition',
     'fields' => [
-        'data' => array(
+        'data' => [
             'name' => 'data',
             'type' => 'json',
             'dbType' => 'text',
-        ),
+        ],
     ],
 ];

@@ -12,53 +12,55 @@
  */
 
 
-class SugarFieldParent extends SugarFieldRelate {
-
+class SugarFieldParent extends SugarFieldRelate
+{
     public $needsSecondaryQuery = true;
 
-	function getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
-		$nolink = array('Users', 'Teams');
-		if(in_array($vardef['module'], $nolink)){
-			$this->ss->assign('nolink', true);
-		}else{
-			$this->ss->assign('nolink', false);
-		}
+    public function getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
+        $nolink = ['Users', 'Teams'];
+        if (in_array($vardef['module'], $nolink)) {
+            $this->ss->assign('nolink', true);
+        } else {
+            $this->ss->assign('nolink', false);
+        }
         $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
         return $this->fetch($this->findTemplate('DetailView'));
     }
 
-    function getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
-    	$form_name = 'EditView';
-    	if(isset($displayParams['formName'])) {
-    		$form_name = $displayParams['formName'];
-    	}
+    public function getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
+        $form_name = 'EditView';
+        if (isset($displayParams['formName'])) {
+            $form_name = $displayParams['formName'];
+        }
 
-    	$popup_request_data = array(
-			'call_back_function' => 'set_return',
-			'form_name' => $form_name,
-			'field_to_name_array' => array(
-											'id' => $vardef['id_name'],
-											'name' => $vardef['name'],
-									 ),
-		);
+        $popup_request_data = [
+            'call_back_function' => 'set_return',
+            'form_name' => $form_name,
+            'field_to_name_array' => [
+                'id' => $vardef['id_name'],
+                'name' => $vardef['name'],
+            ],
+        ];
 
 
-		global $app_list_strings;
-		$parent_types = $app_list_strings['record_type_display'];
+        global $app_list_strings;
+        $parent_types = $app_list_strings['record_type_display'];
 
-		$disabled_parent_types = SugarACL::disabledModuleList($parent_types);
-		foreach($disabled_parent_types as $disabled_parent_type){
-			if($disabled_parent_type != $focus->parent_type){
-				unset($parent_types[$disabled_parent_type]);
-			}
-		}
-		asort($parent_types);
-		$json = getJSONobj();
-		$displayParams['popupData'] = '{literal}'.$json->encode($popup_request_data).'{/literal}';
-    	$displayParams['disabled_parent_types'] = '<script>var disabledModules='. $json->encode($disabled_parent_types).';</script>';
-    	$this->ss->assign('quickSearchCode', $this->createQuickSearchCode($form_name, $vardef));
+        $disabled_parent_types = SugarACL::disabledModuleList($parent_types);
+        foreach ($disabled_parent_types as $disabled_parent_type) {
+            if ($disabled_parent_type != $focus->parent_type) {
+                unset($parent_types[$disabled_parent_type]);
+            }
+        }
+        asort($parent_types);
+        $json = getJSONobj();
+        $displayParams['popupData'] = '{literal}' . $json->encode($popup_request_data) . '{/literal}';
+        $displayParams['disabled_parent_types'] = '<script>var disabledModules=' . $json->encode($disabled_parent_types) . ';</script>';
+        $this->ss->assign('quickSearchCode', $this->createQuickSearchCode($form_name, $vardef));
 
-        $keys = $this->getAccessKey($vardef,'PARENT',$vardef['module']);
+        $keys = $this->getAccessKey($vardef, 'PARENT', $vardef['module']);
         $displayParams['accessKeySelect'] = $keys['accessKeySelect'];
         $displayParams['accessKeySelectLabel'] = $keys['accessKeySelectLabel'];
         $displayParams['accessKeySelectTitle'] = $keys['accessKeySelectTitle'];
@@ -66,47 +68,47 @@ class SugarFieldParent extends SugarFieldRelate {
         $displayParams['accessKeyClearLabel'] = $keys['accessKeyClearLabel'];
         $displayParams['accessKeyClearTitle'] = $keys['accessKeyClearTitle'];
 
-    	$this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
+        $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
         return $this->fetch($this->findTemplate('EditView'));
     }
 
-    function getSearchViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
-		$form_name = 'search_form';
+    public function getSearchViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
+        $form_name = 'search_form';
 
-    	if(isset($displayParams['formName'])) {
-    		$form_name = $displayParams['formName'];
-    	}
+        if (isset($displayParams['formName'])) {
+            $form_name = $displayParams['formName'];
+        }
 
-    	if(preg_match('/(_basic|_advanced)$/', $vardef['name'], $match))
-    	{
-    	   $vardef['type_name'] = $vardef['type_name'] . $match[1];
-    	}
+        if (preg_match('/(_basic|_advanced)$/', $vardef['name'], $match)) {
+            $vardef['type_name'] = $vardef['type_name'] . $match[1];
+        }
 
-    	$this->ss->assign('form_name', $form_name);
+        $this->ss->assign('form_name', $form_name);
 
-    	$popup_request_data = array(
-			'call_back_function' => 'set_return',
-			'form_name' => $form_name,
-			'field_to_name_array' => array(
-											'id' => $vardef['id_name'],
-											'name' => $vardef['name'],
-									 ),
-		);
+        $popup_request_data = [
+            'call_back_function' => 'set_return',
+            'form_name' => $form_name,
+            'field_to_name_array' => [
+                'id' => $vardef['id_name'],
+                'name' => $vardef['name'],
+            ],
+        ];
 
 
-		global $app_list_strings;
-		$parent_types = $app_list_strings['record_type_display'];
-		$disabled_parent_types = SugarACL::disabledModuleList($parent_types);
-		foreach($disabled_parent_types as $disabled_parent_type){
-			if($disabled_parent_type != $focus->parent_type){
-				unset($parent_types[$disabled_parent_type]);
-			}
-		}
+        global $app_list_strings;
+        $parent_types = $app_list_strings['record_type_display'];
+        $disabled_parent_types = SugarACL::disabledModuleList($parent_types);
+        foreach ($disabled_parent_types as $disabled_parent_type) {
+            if ($disabled_parent_type != $focus->parent_type) {
+                unset($parent_types[$disabled_parent_type]);
+            }
+        }
 
-		$json = getJSONobj();
-		$displayParams['popupData'] = '{literal}'.$json->encode($popup_request_data).'{/literal}';
-    	$displayParams['disabled_parent_types'] = '<script>var disabledModules='. $json->encode($disabled_parent_types).';</script>';
-    	$this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
+        $json = getJSONobj();
+        $displayParams['popupData'] = '{literal}' . $json->encode($popup_request_data) . '{/literal}';
+        $displayParams['disabled_parent_types'] = '<script>var disabledModules=' . $json->encode($disabled_parent_types) . ';</script>';
+        $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
         return $this->fetch($this->findTemplate('SearchView'));
     }
 
@@ -118,18 +120,19 @@ class SugarFieldParent extends SugarFieldRelate {
         $vardef,
         $focus,
         ImportFieldSanitize $settings
-        )
-    {
+    ) {
+
+
         global $beanList;
 
-        if ( isset($vardef['type_name']) ) {
+        if (isset($vardef['type_name'])) {
             $moduleName = $vardef['type_name'];
-            if ( isset($focus->$moduleName) && isset($beanList[$focus->$moduleName]) ) {
+            if (isset($focus->$moduleName) && isset($beanList[$focus->$moduleName])) {
                 $vardef['module'] = $focus->$moduleName;
                 $vardef['rname'] = 'name';
                 $relatedBean = BeanFactory::newBean($focus->$moduleName);
                 $vardef['table'] = $relatedBean->table_name;
-                return parent::importSanitize($value,$vardef,$focus,$settings);
+                return parent::importSanitize($value, $vardef, $focus, $settings);
             }
         }
 
@@ -145,19 +148,19 @@ class SugarFieldParent extends SugarFieldRelate {
     {
         $json = getJSONobj();
 
-        $dynamicParentTypePlaceHolder = "**@**"; //Placeholder for dynamic parent so smarty tags are not escaped in json encoding.
+        $dynamicParentTypePlaceHolder = '**@**'; //Placeholder for dynamic parent so smarty tags are not escaped in json encoding.
         $dynamicParentType = '{/literal}{if !empty($fields.parent_type.value)}{$fields.parent_type.value}{else}Accounts{/if}{literal}';
 
         //Get the parent sqs definition
         $qsd = QuickSearchDefaults::getQuickSearchDefaults();
         $qsd->setFormName($formName);
         $sqsFieldArray = $qsd->getQSParent($dynamicParentTypePlaceHolder);
-        $qsFieldName = $formName . "_" . $vardef['name'];
+        $qsFieldName = $formName . '_' . $vardef['name'];
 
         //Build the javascript
         $quicksearch_js = '<script language="javascript">{literal}';
-        $quicksearch_js.= "if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}";
-        $quicksearch_js .= "sqs_objects['$qsFieldName']=" . str_replace($dynamicParentTypePlaceHolder, $dynamicParentType,$json->encode($sqsFieldArray)) .';';
+        $quicksearch_js .= "if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}";
+        $quicksearch_js .= "sqs_objects['$qsFieldName']=" . str_replace($dynamicParentTypePlaceHolder, $dynamicParentType, $json->encode($sqsFieldArray)) . ';';
 
         return $quicksearch_js .= '{/literal}</script>';
     }
@@ -172,23 +175,21 @@ class SugarFieldParent extends SugarFieldRelate {
      * @param $args Mixed value containing haystack to search for value in
      * @return $value Mixed value that the SugarField should return
      */
-    function getSearchInput($key='', $args=array())
+    public function getSearchInput($key = '', $args = [])
     {
-    	//Nothing specified return empty string
-    	if(empty($key) || empty($args))
-    	{
-    		return '';
-    	}
+        //Nothing specified return empty string
+        if (empty($key) || empty($args)) {
+            return '';
+        }
 
-    	//We are probably getting "parent_type" as the $key value, but this is likely not set since there are
-    	//advanced and basic tabs.  This next section attempts to resolve this issue.
-    	$isBasicSearch = isset($args['searchFormTab']) && $args['searchFormTab'] == 'basic_search' ? true : false;
-    	$searchKey = $isBasicSearch ? "{$key}_basic" : "{$key}_advanced";
+        //We are probably getting "parent_type" as the $key value, but this is likely not set since there are
+        //advanced and basic tabs.  This next section attempts to resolve this issue.
+        $isBasicSearch = isset($args['searchFormTab']) && $args['searchFormTab'] == 'basic_search' ? true : false;
+        $searchKey = $isBasicSearch ? "{$key}_basic" : "{$key}_advanced";
 
-    	if(isset($args[$searchKey]))
-    	{
-    	   return $args[$searchKey];
-    	}
+        if (isset($args[$searchKey])) {
+            return $args[$searchKey];
+        }
 
         return $args[$key] ?? '';
     }
@@ -197,21 +198,22 @@ class SugarFieldParent extends SugarFieldRelate {
      * {@inheritDoc}
      */
     public function apiFormatField(
-        array &$data,
-        SugarBean $bean,
-        array $args,
+        array       &$data,
+        SugarBean   $bean,
+        array       $args,
         $fieldName,
         $properties,
-        array $fieldList = null,
+        array       $fieldList = null,
         ServiceBase $service = null
     ) {
+
         $this->ensureApiFormatFieldArguments($fieldList, $service);
 
         // API will fill in the name
-        if(empty($bean->$fieldName)) {
-        	$data[$fieldName] = '';
+        if (empty($bean->$fieldName)) {
+            $data[$fieldName] = '';
         } else {
-        	$data[$fieldName] = $this->formatField($bean->$fieldName, $properties);
+            $data[$fieldName] = $this->formatField($bean->$fieldName, $properties);
         }
 
         $this->formatParentField($bean, $data, $fieldName, $service);
@@ -233,11 +235,11 @@ class SugarFieldParent extends SugarFieldRelate {
 
             //processing case when parent_type contains name of non-existing bean
             if ($parent === null) {
-                $data['parent'] = array();
+                $data['parent'] = [];
                 return;
             }
 
-            $row = array('id' => $bean->parent_id);
+            $row = ['id' => $bean->parent_id];
             if (isset($bean->parent_name_owner)) {
                 $row['assigned_user_id'] = $bean->parent_name_owner;
             }
@@ -246,18 +248,18 @@ class SugarFieldParent extends SugarFieldRelate {
             $parent->fetched_row = $parent->populateFromRow($row);
 
             $mm = MetaDataManager::getManager($service->platform);
-            $data['parent'] = array(
+            $data['parent'] = [
                 '_acl' => $mm->getAclForModule($parent->module_dir, $service->user, $parent),
                 'id' => $bean->parent_id,
                 'type' => $bean->parent_type,
                 'name' => $data[$fieldName],
-            );
+            ];
 
             if (isset($bean->parent_erased_fields)) {
                 $data['parent']['_erased_fields'] = $bean->parent_erased_fields;
             }
         } else {
-            $data['parent'] = array();
+            $data['parent'] = [];
         }
     }
 
@@ -272,13 +274,13 @@ class SugarFieldParent extends SugarFieldRelate {
             return;
         }
 
-        $child_info = array();
+        $child_info = [];
         foreach ($beans as $bean) {
             if (!empty($bean->id) && !empty($bean->parent_type)) {
-                $child_info[$bean->parent_type][] = array(
+                $child_info[$bean->parent_type][] = [
                     'child_id' => $bean->id,
                     'parent_id' => $bean->parent_id,
-                );
+                ];
             }
         }
 

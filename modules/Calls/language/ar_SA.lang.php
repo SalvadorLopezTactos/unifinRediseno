@@ -9,15 +9,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'لوحة معلومات قائمة المكالمات',
     'LBL_CALLS_RECORD_DASHBOARD' => 'لوحة معلومات سجل المكالمات',
     'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم المكالمات',
 
-	'LBL_BLANK'	=> ' ',
+    'LBL_BLANK' => ' ',
     'LBL_MODULE_NAME' => 'المكالمات',
-    'LBL_MODULE_NAME_SINGULAR'	=> 'المكالمة',
+    'LBL_MODULE_NAME_SINGULAR' => 'المكالمة',
     'LBL_MODULE_TITLE' => 'المكالمات: الصفحة الرئيسية',
     'LBL_SEARCH_FORM_TITLE' => 'البحث عن المكالمة',
     'LBL_LIST_FORM_TITLE' => 'قائمة المكالمات',
@@ -33,7 +33,7 @@ $mod_strings = array (
     'LBL_LIST_DIRECTION' => 'الاتجاه',
     'LBL_SUBJECT' => 'الموضوع:',
     'LBL_CONTACT_NAME' => 'جهة الاتصال:',
-    'LBL_CONTACT_ID'   => 'معرّف جهة الاتصال',
+    'LBL_CONTACT_ID' => 'معرّف جهة الاتصال',
     'LBL_DESCRIPTION_INFORMATION' => 'معلومات الوصف',
     'LBL_DESCRIPTION' => 'الوصف:',
     'LBL_INTERNAL_NOTES' => 'ملاحظات داخلية:',
@@ -58,13 +58,13 @@ $mod_strings = array (
     'NTC_REMOVE_INVITEE' => 'هل تريد بالتأكيد إزالة هذا المدعو من المكالمة؟',
     'LBL_INVITEE' => 'المدعوون',
     'LNK_NEW_APPOINTMENT' => 'إنشاء موعد',
-	'LBL_SCHEDULING_FORM_TITLE' => 'الجدولة',
+    'LBL_SCHEDULING_FORM_TITLE' => 'الجدولة',
     'LBL_ADD_INVITEE' => 'إضافة مدعوين',
     'LBL_NAME' => 'الاسم',
     'LBL_FIRST_NAME' => 'الاسم الأول',
     'LBL_LAST_NAME' => 'الاسم الأخير',
     'LBL_EMAIL' => 'البريد الإلكتروني',
-    'LBL_ACCOUNT_NAME' => 'الحساب',    
+    'LBL_ACCOUNT_NAME' => 'الحساب',
     'LBL_PHONE' => 'الهاتف',
     'LBL_REMINDER' => 'التذكيرات:',
     'LBL_REMINDER_POPUP' => 'منبثق',
@@ -73,21 +73,21 @@ $mod_strings = array (
     'LBL_EMAIL_REMINDER' => 'التذكير بالبريد الإلكتروني',
     'LBL_EMAIL_REMINDER_TIME' => 'وقت تذكير البريد الإلكتروني',
     'LBL_POPUP_REMINDER_TIME' => 'وقت تذكير الرسائل المنبثقة',
-    'LBL_SEND_BUTTON_TITLE'=>'حفظ الدعوات وإرسالها [Alt+I]',
-    'LBL_SEND_BUTTON_KEY'=>'I',
-    'LBL_SEND_BUTTON_LABEL'=>'حفظ الدعوات وإرسالها',
-	'LBL_DATE_END'=>'تاريخ الانتهاء',
-	'LBL_TIME_END'=>'وقت الانتهاء',
-    'LBL_REMINDER_TIME'=>'وقت التذكير',
+    'LBL_SEND_BUTTON_TITLE' => 'حفظ الدعوات وإرسالها [Alt+I]',
+    'LBL_SEND_BUTTON_KEY' => 'I',
+    'LBL_SEND_BUTTON_LABEL' => 'حفظ الدعوات وإرسالها',
+    'LBL_DATE_END' => 'تاريخ الانتهاء',
+    'LBL_TIME_END' => 'وقت الانتهاء',
+    'LBL_REMINDER_TIME' => 'وقت التذكير',
     'LBL_EMAIL_REMINDER_SENT' => 'تم إرسال التذكير بالبريد الإلكتروني',
-    'LBL_SEARCH_BUTTON'=> 'بحث',
+    'LBL_SEARCH_BUTTON' => 'بحث',
     'LBL_ACTIVITIES_REPORTS' => 'تقرير الأنشطة',
-    'LBL_ADD_BUTTON'=> 'إضافة',
-	'LBL_DEFAULT_SUBPANEL_TITLE' => 'المكالمات',
-    'LBL_LOG_CALL'=> 'سجل المكالمات',
-    'LNK_SELECT_ACCOUNT'=> 'تحديد حساب',
-    'LNK_NEW_ACCOUNT'=> 'حساب جديد',
-    'LNK_NEW_OPPORTUNITY'=> 'فرصة جديدة',
+    'LBL_ADD_BUTTON' => 'إضافة',
+    'LBL_DEFAULT_SUBPANEL_TITLE' => 'المكالمات',
+    'LBL_LOG_CALL' => 'سجل المكالمات',
+    'LNK_SELECT_ACCOUNT' => 'تحديد حساب',
+    'LNK_NEW_ACCOUNT' => 'حساب جديد',
+    'LNK_NEW_OPPORTUNITY' => 'فرصة جديدة',
     'LBL_DEL' => 'حذف',
     'LBL_LEADS_SUBPANEL_TITLE' => 'العملاء المتوقعون',
     'LBL_CONTACTS_SUBPANEL_TITLE' => 'جهات الاتصال',
@@ -100,9 +100,10 @@ $mod_strings = array (
     'LBL_MY_SCHEDULED_CALLS' => 'المكالمات المجدولة الخاصة بي',
     'LBL_GUEST_CALLS' => 'مكالماتي كضيف',
     'LBL_GUEST_SCHEDULED_CALLS' => 'مكالماتي المجدولة كضيف',
+    'LBL_AVAILABLE_CALLS' => 'المكالمات المتاحة',
     'LBL_SELECT_FROM_DROPDOWN' => 'يرجى التحديد من القائمة ذات الصلة المنسدلة أولاً.',
-	'LBL_ASSIGNED_TO_NAME' => 'تعيين إلى',
-	'LBL_ASSIGNED_TO_ID' => 'المستخدم المعين',
+    'LBL_ASSIGNED_TO_NAME' => 'تعيين إلى',
+    'LBL_ASSIGNED_TO_ID' => 'المستخدم المعين',
     'NOTICE_DURATION_TIME' => 'يجب أن يكون وقت المدة أكبر من 0',
     'LBL_CALL_INFORMATION' => 'نظرة عامة',
     'LBL_REMOVE' => 'تذكير',
@@ -114,7 +115,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'معرّف المستخدم المعين',
     'LBL_EXPORT_DATE_START' => 'تاريخ ووقت البدء',
     'LBL_EXPORT_PARENT_TYPE' => 'الوحدة ذات الصلة',
-    'LBL_EXPORT_REMINDER_TIME' =>'وقت التذكير (بالدقائق)',
+    'LBL_EXPORT_REMINDER_TIME' => 'وقت التذكير (بالدقائق)',
 
     // create invitee functionallity
     'LBL_CREATE_INVITEE' => 'إنشاء مدعو',
@@ -123,7 +124,7 @@ $mod_strings = array (
     'LBL_CREATE_AND_ADD' => 'إنشاء وإضافة',
     'LBL_CANCEL_CREATE_INVITEE' => 'إلغاء',
     'LBL_EMPTY_SEARCH_RESULT' => 'معذرة، لم يتم العثور على نتائج. يرجى إنشاء المدعو التالي.',
-    'LBL_NO_ACCESS' => 'لا يمكنك الوصول لإنشاء وحدة $',
+    'LBL_NO_ACCESS' => 'ليس لديك حق الوصول لإنشاء $module',
 
     'LBL_TRANSCRIPT' => 'Transcript',
     'LBL_CONNECT_CONTACT_ID' => 'معرف اتصال Amazon Connect',
@@ -144,7 +145,7 @@ $mod_strings = array (
     'LBL_CALENDAR_RECURRENCE_ID' => 'معرف تكرار الاتصال. تاريخ بدء الاتصال الأصلي',
     'LBL_RECURRING_SOURCE' => 'المصدر المتكرر',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'هل تريد بالتأكيد إزالة جميع السجلات المتكررة؟',
-    'LBL_RECURRING_LIMIT_ERROR' => 'لا يمكن جدولة المكالمة المتكررة لأنها تعدت الحد الأقصى المسموح به للتكرار $.',
+    'LBL_RECURRING_LIMIT_ERROR' => 'لا يمكن جدولة هذا الاتصال المتكرر لأنه يتجاوز الحد الأقصى المسموح به للتكرار وهو $limit.',
     'LBL_RECURRENCE' => 'التكرار',
     'LBL_SYNCED_RECURRING_MSG' => 'تم إنشاء هذه المكالمة في نظام آخر وتمت مزامنتها إلى Sugar. للتغيير، انتقل إلى المكالمة الأصلية داخل النظام الآخر. ويمكن مزامنة التغييرات التي يتم إجراؤها في النظام الآخر مع هذا السجل.',
     'LBL_RELATED_TO' => 'ذو صلة:',
@@ -154,6 +155,10 @@ $mod_strings = array (
     'LBL_REMINDER_TITLE' => 'المكالمة:',
     'LBL_CALL_RECORDING_URL' => 'عنوان URL التسجيل',
     'LBL_CALL_RECORDING' => 'التسجيل',
+    'LBL_RSET' => 'RSet',
+    'LBL_EVENT_TYPE' => 'نوع الحدث',
+    'LBL_ICAL_UID' => 'iCal UID',
+    'LBL_ORIGINAL_DATE' => 'يوم البدء الأصلي للحدث المتكرر',
 
     'LBL_LEAD_ID' => 'معرّف العميل المتوقع',
     'LBL_LEAD_NAME' => 'العميل المتوقع',
@@ -177,11 +182,11 @@ $mod_strings = array (
     // Record View Help Text
     'LBL_HELP_RECORD' => 'يتيح عرض هذا السجل من خلال البيانات الخاصة بفرد السجل بجانب بعض تفاصيل السجلات المرتبطة به.
 
-- قم بتعديل حقول هذا السجل (السجلات) بواسطة النقر فوق حقل فردي، أو فوق الزر \"تحرير\".
-- اعرض أو قم بتعديل الارتباطات إلى سجلات أخرى في اللوحات الفرعية بواسطة تبديل الجزء الأيسر السفلي إلى \"عرض البيانات\".
-- قم بعمل وعرض تعليقات المستخدم وسجل تغيير السجلات بواسطة تبديل الجزء الأيسر السفلي إلى \"سير النشاط\".
+- قم بتعديل حقول هذا السجل (السجلات) بواسطة النقر فوق حقل فردي، أو فوق الزر \\"تحرير\\".
+- اعرض أو قم بتعديل الارتباطات إلى سجلات أخرى في اللوحات الفرعية بواسطة تبديل الجزء الأيسر السفلي إلى \\"عرض البيانات\\".
+- قم بعمل وعرض تعليقات المستخدم وسجل تغيير السجلات بواسطة تبديل الجزء الأيسر السفلي إلى \\"سير النشاط\\".
 - اتبع أو اجعل هذا السجل مفضلاً لديك باستخدام الرموز الموجودة على يمين اسم السجل.
-- تتوفر إجراءات إضافية في القائمة المنسدلة \"الإجراءات\" الموجودة على يمين الزر \"تحرير\".',
+- تتوفر إجراءات إضافية في القائمة المنسدلة \\"الإجراءات\\" الموجودة على يمين الزر \\"تحرير\\".',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => 'تتكون الوحدة {{plural_module_name}} من سجلات {{calls_singular_module}} المسجلة من خلال المستخدمين في المنظمة الخاصة بك. قد تكون الوحدة {{plural_module_name}} في حالة "تمت الجدولة"، أو "تم الإجراء"، أو "تم الإلغاء". يمكن إضافة مستخدمي Sugar، وجهات الاتصال، والعملاء المحتملين كمدعوين.
@@ -196,8 +201,10 @@ $mod_strings = array (
 3. انقر فوق "حفظ" لإنهاء السجل الجديد وللعودة إلى الصفحة السابقة.',
 
     // Sugar Automate
-    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "هي مكالمة دليل ذكي",
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'هي مكالمة دليل ذكي',
     'LBL_PARENT_CALL_OF_TASK_REL' => 'المهام الفرعية',
     'LBL_PARENT_CALL_OF_MEETING_REL' => 'الاجتماعات الفرعية',
     'LBL_PARENT_CALL_OF_CALL_REL' => 'المكالمات الفرعية',
-);
+
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني للمكالمة',
+];

@@ -16,8 +16,8 @@ use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
 global $sugar_config;
 
 $moduleName = 'Users';
-$idpConfig  = new Config(\SugarConfig::getInstance());
-$isIDMModeEnabled  = $idpConfig->isIDMModeEnabled();
+$idpConfig = new Config(\SugarConfig::getInstance());
+$isIDMModeEnabled = $idpConfig->isIDMModeEnabled();
 if ($isIDMModeEnabled) {
     $newUserLink = [
         'route' => $idpConfig->buildCloudConsoleUrl('userCreate'),
@@ -29,12 +29,7 @@ if ($isIDMModeEnabled) {
     ];
 } else {
     $newUserLink = [
-        'route' => '#bwc/index.php?' . http_build_query(
-            [
-                'module' => $moduleName,
-                'action' => 'EditView',
-            ]
-        ),
+        'route' => '#' . $moduleName . '/create',
         'label' => 'LNK_NEW_USER',
         'acl_action' => 'admin',
         'acl_module' => $moduleName,
@@ -45,15 +40,7 @@ if ($isIDMModeEnabled) {
 $viewdefs[$moduleName]['base']['menu']['header'] = [
     $newUserLink,
     [
-        'route' => '#bwc/index.php?' . http_build_query(
-            [
-                'module' => $moduleName,
-                'action' => 'EditView',
-                'usertype'=>'group',
-                'return_module' => $moduleName,
-                'return_action' => 'DetailView',
-            ]
-        ),
+        'route' => '#' . $moduleName . '/create/group',
         'label' => 'LNK_NEW_GROUP_USER',
         'acl_action' => 'admin',
         'acl_module' => $moduleName,
@@ -63,15 +50,7 @@ $viewdefs[$moduleName]['base']['menu']['header'] = [
 if (!empty($sugar_config['enable_web_services_user_creation'])) {
     $viewdefs[$moduleName]['base']['menu']['header'][] =
         [
-            'route' => '#bwc/index.php?' . http_build_query(
-                [
-                    'module' => $moduleName,
-                    'action' => 'EditView',
-                    'usertype'=>'portal',
-                    'return_module' => $moduleName,
-                    'return_action' => 'DetailView',
-                ]
-            ),
+            'route' => '#' . $moduleName . '/create/portalapi',
             'label' => 'LNK_NEW_PORTAL_USER',
             'acl_action' => 'admin',
             'acl_module' => $moduleName,
@@ -80,15 +59,7 @@ if (!empty($sugar_config['enable_web_services_user_creation'])) {
 }
 $viewdefs[$moduleName]['base']['menu']['header'][] =
     [
-        'route' => '#bwc/index.php?' . http_build_query(
-            [
-                'module' => $moduleName,
-                'action' => 'EditView',
-                'usertype'=>'portal',
-                'return_module' => $moduleName,
-                'return_action' => 'DetailView',
-            ]
-        ),
+        'route' => '#' . $moduleName . '/create/portalapi',
         'label' => 'LNK_NEW_PORTAL_USER',
         'acl_action' => 'admin',
         'acl_module' => $moduleName,
@@ -113,9 +84,9 @@ $viewdefs[$moduleName]['base']['menu']['header'][] = [
 $viewdefs[$moduleName]['base']['menu']['header'][] = [
     'route' => '#bwc/index.php?' . http_build_query(
         [
-            'module' => $moduleName,
-            'action' => 'reassignUserRecords',
-        ]
+                'module' => $moduleName,
+                'action' => 'reassignUserRecords',
+            ]
     ),
     'label' => 'LNK_REASSIGN_RECORDS',
     'acl_action' => 'admin',
@@ -125,12 +96,12 @@ $viewdefs[$moduleName]['base']['menu']['header'][] = [
 
 $viewdefs[$moduleName]['base']['menu']['header'][] = [
     'route' => '#bwc/index.php?' . http_build_query([
-        'module' => 'Import',
-        'action' => 'Step1',
-        'import_module' => $moduleName,
-        'return_module' => $moduleName,
-        'return_action' => 'index',
-    ]),
+            'module' => 'Import',
+            'action' => 'Step1',
+            'import_module' => $moduleName,
+            'return_module' => $moduleName,
+            'return_action' => 'index',
+        ]),
     'label' => 'LNK_IMPORT_USERS',
     'acl_action' => 'admin',
     'acl_module' => $moduleName,

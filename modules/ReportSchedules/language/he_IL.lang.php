@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'דווח על לוחות זמנים',
     'LBL_MODULE_NAME_SINGULAR' => 'דווח על לוח זמנים',
     'LBL_REPORT_NAME' => 'דוח',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'סוגי קבצים',
     'LBL_EMBED_REPORT' => 'הטמע דוח בדוא"ל',
     'LBL_EMBED_REPORT_INFO' => 'הערה: אם הדוח ארוך מ-200 שורות, אנו נצרף את הדוח כקובץ CSV.',
-);
+];

@@ -16,15 +16,15 @@ class VisibilityAction extends AbstractAction
      * @var mixed|string
      */
     public $view;
-    protected $targetField = array();
-    protected $expression = "";
+    protected $targetField = [];
+    protected $expression = '';
 
     public function __construct($params)
     {
         $this->params = $params;
         $this->targetField = $params['target'];
-        $this->expression = str_replace("\n", "", $params['value']);
-        $this->view = $params['view'] ?? "";
+        $this->expression = str_replace("\n", '', $params['value']);
+        $this->view = $params['view'] ?? '';
     }
 
     /**
@@ -32,7 +32,7 @@ class VisibilityAction extends AbstractAction
      *
      * @return string javascript.
      */
-    static function getJavascriptClass()
+    public static function getJavascriptClass()
     {
         return "
         var App = App || null;
@@ -255,7 +255,7 @@ class VisibilityAction extends AbstractAction
      *
      * @return string javascript.
      */
-    function getJavascriptFire()
+    public function getJavascriptFire()
     {
         return "new SUGAR.forms.SetVisibilityAction('{$this->targetField}','{$this->expression}', '{$this->view}')";
     }
@@ -265,7 +265,7 @@ class VisibilityAction extends AbstractAction
      *
      * @param SugarBean $target
      */
-    function fire(&$target)
+    public function fire(&$target)
     {
         $result = Parser::evaluate($this->expression, $target)->evaluate();
         if ($result === AbstractExpression::$FALSE) {
@@ -275,9 +275,8 @@ class VisibilityAction extends AbstractAction
         }
     }
 
-    static function getActionName()
+    public static function getActionName()
     {
-        return "SetVisibility";
+        return 'SetVisibility';
     }
-
 }

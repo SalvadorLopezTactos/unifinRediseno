@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Tableau de bord de l&#39;enregistrement de achats',
     'LBL_RELATED_ACCOUNT' => 'Compte relatif',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Achats',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie d&#39;achat',
 ];

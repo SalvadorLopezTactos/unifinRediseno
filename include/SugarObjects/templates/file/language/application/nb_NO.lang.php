@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Markedsføring',
-    'Knowledge Base' => 'Kunnskapsbase',
-    'Sales' => 'Salgsside',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Markedsmateriell',
-    'Product Brochures' => 'Produktark',
-    'FAQ' => 'Ofte stilte spørsmål',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Markedsføring',
+        'Knowledge Base' => 'Kunnskapsbase',
+        'Sales' => 'Salg',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Aktiv',
-    'Draft' => 'Utkast',
-    'FAQ' => 'Ofte stilte spørsmål',
-    'Expired' => 'Foreldet',
-    'Under Review' => 'Til vurdering',
-    'Pending' => 'Ventende',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Markedsmateriell',
+        'Product Brochures' => 'Produktark',
+        'FAQ' => 'Ofte stilte spørsmål',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Aktive',
+        'Draft' => 'Utkast',
+        'FAQ' => 'Ofte stilte spørsmål',
+        'Expired' => 'Utløpt',
+        'Under Review' => 'Til vurdering',
+        'Pending' => 'Ventende',
+    ],
+];

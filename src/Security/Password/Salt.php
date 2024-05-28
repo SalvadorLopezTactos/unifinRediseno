@@ -61,7 +61,7 @@ class Salt
         $salt = $this->csprng->generate($size, true);
 
         if (!$salt) {
-            throw RuntimeException("Error generating salt");
+            throw RuntimeException('Error generating salt');
         }
 
         return $this->substitution ? $this->substitute($salt) : $salt;

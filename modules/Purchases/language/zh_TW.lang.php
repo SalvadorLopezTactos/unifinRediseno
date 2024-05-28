@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => '購買紀錄儀表板',
     'LBL_RELATED_ACCOUNT' => '關聯帳戶',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => '購買焦點抽屜',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '購買時間軸',
 ];

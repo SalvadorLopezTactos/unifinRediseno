@@ -9,11 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-    'LBL_CURRENCY'=>'Валюта',
+$mod_strings = [
+    'LBL_CURRENCY' => 'Валюта',
     'LBL_CURRENCIES' => 'Валюти',
-    'LBL_CURRENCY_NAME'=>'Назва валюти',
-    'LBL_CURRENCY_SYMBOL'=>'Символ валюти',
+    'LBL_CURRENCY_NAME' => 'Назва валюти',
+    'LBL_CURRENCY_SYMBOL' => 'Символ валюти',
     'LBL_CURRENCY_RATE' => 'Базова процентна ставка',
     'LBL_CURRENCY_ID' => 'Валюта (ID)',
-);
+];

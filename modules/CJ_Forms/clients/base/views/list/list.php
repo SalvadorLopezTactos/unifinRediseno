@@ -22,14 +22,8 @@ $viewdefs['CJ_Forms']['base']['view']['list'] = [
                     'link' => true,
                 ],
                 [
-                    'name' => 'trigger_event',
-                    'label' => 'LBL_TRIGGER_EVENT',
-                    'default' => true,
-                    'enabled' => true,
-                ],
-                [
-                    'name' => 'action_type',
-                    'label' => 'LBL_ACTION_TYPE',
+                    'name' => 'main_trigger_type',
+                    'label' => 'LBL_MAIN_TRIGGER_TYPE',
                     'default' => true,
                     'enabled' => true,
                 ],

@@ -21,7 +21,7 @@ class SugarUpgradeHomeDefaultConfigSettings extends UpgradeScript
             $properties = ['color', 'icon', 'display_type',];
             foreach ($properties as $property) {
                 if (empty(HomeDefaults::getSettings($property))) {
-                    $this->log('Adding '. $property .' to Home module config settings');
+                    $this->log('Adding ' . $property . ' to Home module config settings');
                     HomeDefaults::setupHomeSettings($property);
                     $this->log('Finished adding ' . $property . ' as home module config settings');
                 } else {

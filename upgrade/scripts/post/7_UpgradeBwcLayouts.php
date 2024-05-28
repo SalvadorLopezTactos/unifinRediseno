@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 /**
  * Upgrade BWC layouts to Sidecar
  */
@@ -59,7 +58,6 @@ class SugarUpgradeUpgradeBwcLayouts extends UpgradeScript
 
         return $bwcModules;
     }
-
 }
 
 /**

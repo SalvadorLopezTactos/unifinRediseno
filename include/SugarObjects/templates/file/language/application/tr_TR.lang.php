@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Pazarlama',
-    'Knowledge Base' => 'Bilgi Bankası',
-    'Sales' => 'Satışlar',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Pazarlama Teminatı',
-    'Product Brochures' => 'Ürün Broşürleri',
-    'FAQ' => 'SSS',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Pazarlama',
+        'Knowledge Base' => 'Bilgi Bankası',
+        'Sales' => 'Satışlar',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Aktif',
-    'Draft' => 'Taslak',
-    'FAQ' => 'SSS',
-    'Expired' => 'Süresi Geçmiş',
-    'Under Review' => 'İncelemede',
-    'Pending' => 'Beklemede',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Pazarlama Teminatı',
+        'Product Brochures' => 'Ürün Broşürleri',
+        'FAQ' => 'SSS',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Aktif',
+        'Draft' => 'Taslak',
+        'FAQ' => 'SSS',
+        'Expired' => 'Süresi Geçmiş',
+        'Under Review' => 'İncelemede',
+        'Pending' => 'Beklemede',
+    ],
+];

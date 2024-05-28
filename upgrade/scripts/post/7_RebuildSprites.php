@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Rebuild image sprites
  */
@@ -30,12 +31,18 @@ class SugarUpgradeRebuildSprites extends UpgradeScript
         $sb->addDirectory('default', 'themes/default/images/SugarLogic');
 
         // add all theme image directories
-        foreach(array('themes', 'custom/themes') as $themedir) {
-            if(!file_exists($themedir)) continue;
-            foreach(new DirectoryIterator($themedir) as $fileInfo) {
-                if($fileInfo->isDot() || !$fileInfo->isDir()) continue;
+        foreach (['themes', 'custom/themes'] as $themedir) {
+            if (!file_exists($themedir)) {
+                continue;
+            }
+            foreach (new DirectoryIterator($themedir) as $fileInfo) {
+                if ($fileInfo->isDot() || !$fileInfo->isDir()) {
+                    continue;
+                }
                 $dir = $fileInfo->getFilename();
-                if($dir == 'default' || !is_dir("$themedir/{$dir}/images")) continue;
+                if ($dir == 'default' || !is_dir("$themedir/{$dir}/images")) {
+                    continue;
+                }
                 $sb->addDirectory($dir, "$themedir/{$dir}/images");
             }
         }

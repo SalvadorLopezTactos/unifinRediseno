@@ -11,14 +11,13 @@
  */
 
 
-
 class PMSEConvergingParallelGateway extends PMSEConvergingGateway
 {
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         $routeAction = 'WAIT';
         $flowAction = 'NONE';
-        $filters = array();
+        $filters = [];
         $complete = false;
         $previousFlows = $this->retrievePreviousFlows('PASSED', $flowData['bpmn_id'], $flowData['cas_id']);
         $totalFlows = $this->retrievePreviousFlows('ALL', $flowData['bpmn_id']);
@@ -32,7 +31,7 @@ class PMSEConvergingParallelGateway extends PMSEConvergingGateway
             $result['previous_flows'] = $previousFlows;
             $result['create_thread'] = true;
         } else {
-            $result['previous_flows'] = array();
+            $result['previous_flows'] = [];
             $result['close_thread'] = true;
             // We should close current flow if it's not the last one in the Converging Parallel Gateway
             $result['close_flow'] = true;
@@ -40,5 +39,4 @@ class PMSEConvergingParallelGateway extends PMSEConvergingGateway
 
         return $result;
     }
-
 }

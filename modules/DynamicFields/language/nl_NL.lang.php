@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Nieuw Telefoongesprek',
     'LNK_NEW_MEETING' => 'Nieuwe Afspraak',
     'LNK_NEW_TASK' => 'Nieuwe Taak',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Extra Meta Veld 2',
     'COLUMN_TITLE_EXT3' => 'Extra Meta Veld 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'Frame hoogte',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'Standaard URL',
     'COLUMN_TITLE_AUDIT' => 'Auditeren',
     'COLUMN_TITLE_PII' => 'Persoonsgegevens',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Standaard waarde',
     'LBL_AUDITED' => 'Gecontroleerd',
     'LBL_REPORTABLE' => 'Rapporteerbaar',
-    'ERR_RESERVED_FIELD_NAME' => "Gereserveerd sleutelwoord",
+    'ERR_RESERVED_FIELD_NAME' => 'Gereserveerd sleutelwoord',
     'ERR_SELECT_FIELD_TYPE' => 'Selecteer een veldtype',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Veldnaam bestaat reeds',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Het veld &#39;naam&#39; mag alleen de volgende karakters bevatten: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Gereed',
     'LBL_EXE_NON_SIM_MODE' => 'Voer niet-simulatie modus uit',
     'LBL_CALCULATION_VISIBLE' => 'Zichtbaar maken voor berekeningen',
-);
+];

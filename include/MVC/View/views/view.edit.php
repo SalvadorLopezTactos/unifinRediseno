@@ -11,14 +11,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/EditView/EditView2.php');
+require_once 'include/EditView/EditView2.php';
+
 class ViewEdit extends SugarView
 {
- 	var $ev;
- 	var $type ='edit';
- 	var $useForSubpanel = false;  //boolean variable to determine whether view can be used for subpanel creates
- 	var $useModuleQuickCreateTemplate = false; //boolean variable to determine whether or not SubpanelQuickCreate has a separate display function
- 	var $showTitle = true;
+    public $ev;
+    public $type = 'edit';
+    public $useForSubpanel = false;  //boolean variable to determine whether view can be used for subpanel creates
+    public $useModuleQuickCreateTemplate = false; //boolean variable to determine whether or not SubpanelQuickCreate has a separate display function
+    public $showTitle = true;
 
     /**
      * @see SugarView::preDisplay()
@@ -31,10 +32,11 @@ class ViewEdit extends SugarView
         $this->ev->setup($this->module, $this->bean, $metadataFile, SugarAutoLoader::existingCustomOne('include/EditView/EditView.tpl'));
     }
 
- 	function display(){
-		$this->ev->process();
-		echo $this->ev->display($this->showTitle);
- 	}
+    public function display()
+    {
+        $this->ev->process();
+        echo $this->ev->display($this->showTitle);
+    }
 
     /**
      * Get EditView object
@@ -45,4 +47,3 @@ class ViewEdit extends SugarView
         return new EditView();
     }
 }
-

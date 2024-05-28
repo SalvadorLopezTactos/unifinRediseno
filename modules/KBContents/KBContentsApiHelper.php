@@ -10,16 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use \Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
-use \Sugarcrm\Sugarcrm\SearchEngine\MetaDataHelper;
-use \Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\SearchFields;
-use \Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\Implement\MultiFieldHandler;
-
+use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
+use Sugarcrm\Sugarcrm\SearchEngine\MetaDataHelper;
+use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\SearchFields;
+use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\Implement\MultiFieldHandler;
 
 class KBContentsApiHelper extends SugarBeanApiHelper
 {
-
-    public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(SugarBean $bean, array $fieldList = [], array $options = [])
     {
         if ($this->api->action == 'view' && !empty($this->api->getRequest()->args['viewed'])) {
             $bean->viewcount = $bean->viewcount + 1;
@@ -34,16 +32,16 @@ class KBContentsApiHelper extends SugarBeanApiHelper
         $result = parent::formatForApi($bean, $fieldList, $options);
 
         $query = new SugarQuery();
-        $query->select(array('language'));
+        $query->select(['language']);
         $query->distinct(true);
-        $fromOptions = array('team_security' => false);
+        $fromOptions = ['team_security' => false];
         $query->from(BeanFactory::newBean('KBContents'), $fromOptions);
         $query->where()
             ->equals('kbdocument_id', $bean->kbdocument_id);
-        
+
         $langs = $query->execute();
         if ($langs) {
-            $result['related_languages'] = array();
+            $result['related_languages'] = [];
             foreach ($langs as $lang) {
                 $result['related_languages'][] = $lang['language'];
             }
@@ -52,7 +50,7 @@ class KBContentsApiHelper extends SugarBeanApiHelper
         return $result;
     }
 
-    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = array())
+    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = [])
     {
         $result = parent::populateFromApi($bean, $submittedData, $options);
 
@@ -70,7 +68,7 @@ class KBContentsApiHelper extends SugarBeanApiHelper
      */
     public function getElasticSearchFields(array $fields)
     {
-        $result = array();
+        $result = [];
         $engineContainer = SearchEngine::getInstance()->getEngine()->getContainer();
         $metaDataHelper = new MetaDataHelper($engineContainer->logger);
         $ftsFields = $metaDataHelper->getFtsFields('KBContents');

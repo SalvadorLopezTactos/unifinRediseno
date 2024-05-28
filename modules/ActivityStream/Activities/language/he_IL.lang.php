@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'TPL_ACTIVITY_CREATE' => 'תאריך יצירה',
     'TPL_ACTIVITY_POST' => 'הפעלת פוסט',
     'TPL_ACTIVITY_UPDATE' => 'תאריך עדכון',
@@ -28,4 +28,4 @@ $mod_strings = array(
     'TPL_MORE_COMMENT' => 'הערה נוספת',
     'TPL_MORE_COMMENTS' => 'הערות נוספות',
     'TPL_SHOW_MORE_MODULE' => 'פוסטים נוספים',
-);
+];

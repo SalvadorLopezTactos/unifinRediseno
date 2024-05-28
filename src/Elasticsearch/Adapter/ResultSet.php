@@ -80,9 +80,9 @@ class ResultSet implements \Iterator, \Countable, ResultSetInterface
      * @param array $args
      * @return mixed
      */
-    public function __call($method, array $args = array())
+    public function __call($method, array $args = [])
     {
-        return call_user_func_array(array($this->resultSet, $method), $args);
+        return call_user_func_array([$this->resultSet, $method], $args);
     }
 
     /**
@@ -155,7 +155,7 @@ class ResultSet implements \Iterator, \Countable, ResultSetInterface
     public function getTotalHits()
     {
         $data = $this->resultSet->getResponse()->getData();
-        return (int) ($data['hits']['total']['value'] ?? $data['hits']['total'] ?? 0);
+        return (int)($data['hits']['total']['value'] ?? $data['hits']['total'] ?? 0);
     }
 
     /**
@@ -171,7 +171,7 @@ class ResultSet implements \Iterator, \Countable, ResultSetInterface
      */
     public function getAggregations()
     {
-        $aggs = array();
+        $aggs = [];
 
         if (empty($this->aggregationStack)) {
             return $aggs;
@@ -179,7 +179,6 @@ class ResultSet implements \Iterator, \Countable, ResultSetInterface
 
         // iterate raw results and use the stack to parse them
         foreach ($this->resultSet->getAggregations() as $id => $results) {
-
             if (!is_array($results)) {
                 continue;
             }
@@ -189,9 +188,9 @@ class ResultSet implements \Iterator, \Countable, ResultSetInterface
                 continue;
             }
 
-            $aggs[$id] = array(
+            $aggs[$id] = [
                 'results' => $agg->parseResults($id, $results),
-            );
+            ];
         }
         return $aggs;
     }

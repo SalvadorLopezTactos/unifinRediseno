@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_DASHBOARD_MODULE' => '모듈',
     'LBL_MODULE_NAME' => '대시보드',
     'LBL_MODULE_NAME_SINGULAR' => '대시보드',
@@ -26,8 +26,12 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE_AND_VIEW' => '{{module}} 모듈 {{view}} 보기에 대한 모든 대시보드',
     'LBL_COPY_OF' => '{{{name}}} 사본',
     'LBL_CREATE_DASHBOARD_BUTTON' => '대시보드 만들기',
-    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
-    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "이 대시보드를 기본 레이아웃으로 복원하시겠습니까?",
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => 'Are you sure you want to restore this tab to the default layout?',
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => '이 대시보드를 기본 레이아웃으로 복원하시겠습니까?',
     'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => '대시보드 패널을 기본 레이아웃으로 복원하시겠습니까?',
     'LBL_FILTER_UTILS_SELECT' => '배정',
-);
+    'LBL_FILTER_UPDATES_SINCE_LAST_REFRESH' => '이 대시보드에는 마지막 새로고침 이후 수정된 런타임 필터가 포함되어 있습니다.',
+    'LBL_TEMPLATE' => '템플릿',
+    'LBL_UNSELECT_DELETE_TEMPLATES' => '선택 항목에는 대량 삭제가 불가능한 대시보드 템플릿이 포함되어 있습니다. 계속하려면 템플릿 선택을 취소하세요.',
+    'LBL_UNSELECT_UPDATE_TEMPLATES' => '선택 항목에는 대량 업데이트가 불가능한 대시보드 템플릿이 포함되어 있습니다. 계속하려면 템플릿 선택을 취소하세요.',
+];

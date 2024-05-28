@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Calendario',
     'LBL_MODULE_NAME_SINGULAR' => 'Calendario',
     'LBL_MODULE_TITLE' => 'Calendario',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Configuración',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Mostrar espacios de tiempo en vistas de día y semana:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Hora inicio:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Hora fin:',
+    'LBL_SETTINGS_TIME_STARTS' => 'Hora inicio:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Hora fin:',
     'LBL_SETTINGS_CALLS_SHOW' => 'Ver llamadas:',
     'LBL_SETTINGS_TASKS_SHOW' => 'Ver tareas:',
 
@@ -123,7 +123,7 @@ $mod_strings = array (
     'LBL_REPEAT_DOW' => 'En',
     'LBL_REPEAT_UNTIL' => 'Repetir Hasta',
     'LBL_REPEAT_COUNT' => 'Número de ocurrencias',
-    'LBL_RECURRING_LIMIT_ERROR' => 'Este $moduleTitle recurrente no se puede programar debido a que excede el máximo de $límite recurrencias permitidas.',
+    'LBL_RECURRING_LIMIT_ERROR' => 'Este $moduleTitle recurrente no se puede programar debido a que excede el máximo de $limit recurrencias permitidas.',
 
     'LBL_EDIT_ALL_RECURRENCES' => 'Editar todas las recurrencias',
     'LBL_REMOVE_ALL_RECURRENCES' => 'Eliminar todas las recurrencias',
@@ -156,7 +156,7 @@ $mod_strings = array (
     'LBL_RECORD_OTHER_TAB' => 'Otros',
     'LBL_EVENT_START' => 'Inicio',
     'LBL_EVENT_END' => 'Fin',
-    'LBL_EVENT_END' => 'Fin',
+    'LBL_EVENT_END' => 'Finalización',
     'LBL_DAY_EVENT_TEMPLATE' => 'Evento de día',
     'LBL_WEEK_EVENT_TEMPLATE' => 'Evento de semana',
     'LBL_MONTH_EVENT_TEMPLATE' => 'Evento de mes',
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Crear calendario',
     'LNK_CALENDAR_LIST' => 'Ver Calendarios',
     'LNK_CALENDAR_LEGACY' => 'Calendario heredado',
-    'LBL_IMPORT_CALENDAR'=> 'Importar calendario',
+    'LBL_IMPORT_CALENDAR' => 'Importar calendario',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Marca de tiempo del evento',
     'LBL_INSERTFIELD' => 'Insertar campo',
     'LBL_EVENT_START_ERROR' => 'Elija un inicio',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Seleccione un calendario',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Error al guardar Calendarios.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Dom',
             'Lun',
             'Mar',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Jue',
             'Vie',
             'Sáb',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Domingo',
             'Lunes',
             'Martes',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Jueves',
             'Viernes',
             'Sábado',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Ene',
             'Feb',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Oct',
             'Nov',
             'Dic',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Enero',
             'Febrero',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Octubre',
             'Noviembre',
             'Diciembre',
-        ),
-);
+        ],
+];

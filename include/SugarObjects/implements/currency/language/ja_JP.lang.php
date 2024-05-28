@@ -9,11 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-    'LBL_CURRENCY'=>'通貨',
+$mod_strings = [
+    'LBL_CURRENCY' => '通貨',
     'LBL_CURRENCIES' => '通貨',
-    'LBL_CURRENCY_NAME'=>'通貨名',
-    'LBL_CURRENCY_SYMBOL'=>'通貨シンボル',
+    'LBL_CURRENCY_NAME' => '通貨名',
+    'LBL_CURRENCY_SYMBOL' => '通貨シンボル',
     'LBL_CURRENCY_RATE' => '基本レート',
     'LBL_CURRENCY_ID' => '通貨ID',
-);
+];

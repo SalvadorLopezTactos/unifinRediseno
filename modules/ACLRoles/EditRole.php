@@ -23,40 +23,39 @@ $sugar_smarty->assign('APP', $app_strings);
 $sugar_smarty->assign('APP_LIST', $app_list_strings);
 $role = BeanFactory::newBean('ACLRoles');
 $role_name = '';
-$return= array('module'=>'ACLRoles', 'action'=>'index', 'record'=>'');
+$return = ['module' => 'ACLRoles', 'action' => 'index', 'record' => ''];
 
 $request = InputValidation::getService();
 $record = $request->getValidInputRequest('record', 'Assert\Guid');
 $isDuplicate = $request->getValidInputRequest('isDuplicate');
 
 if (!empty($record)) {
-	$role->retrieve($record);
-	$categories = ACLRole::getRoleActions($record);
-	
-	$role_name =  $role->name;
-	if (!empty($isDuplicate)) {
-		//role id is stripped here in duplicate so anything using role id after this will not have it
-		$role->id = '';
-	} else {
-		$return['record']= $role->id;
-		$return['action']='DetailView';
-	}
-	
+    $role->retrieve($record);
+    $categories = ACLRole::getRoleActions($record);
+
+    $role_name = $role->name;
+    if (!empty($isDuplicate)) {
+        //role id is stripped here in duplicate so anything using role id after this will not have it
+        $role->id = '';
+    } else {
+        $return['record'] = $role->id;
+        $return['action'] = 'DetailView';
+    }
 } else {
-	$categories = ACLRole::getRoleActions('');
+    $categories = ACLRole::getRoleActions('');
 }
 
 // Skipping modules that have 'hidden_to_role_assignment' property
 foreach ($categories as $name => $category) {
-	if (isset($dictionary[$name]) &&
-		isset($dictionary[$name]['hidden_to_role_assignment']) &&
-		$dictionary[$name]['hidden_to_role_assignment']
-	) {
-		unset($categories[$name]);
-	}
+    if (isset($dictionary[$name]) &&
+        isset($dictionary[$name]['hidden_to_role_assignment']) &&
+        $dictionary[$name]['hidden_to_role_assignment']
+    ) {
+        unset($categories[$name]);
+    }
 }
 
-if (in_array('Project', $modInvisList)) {
+if (safeInArray('Project', $modInvisList)) {
     unset($categories['Project']);
     unset($categories['ProjectTask']);
 }
@@ -67,19 +66,21 @@ $returnModule = $request->getValidInputRequest('return_module', 'Assert\Mvc\Modu
 $returnAction = $request->getValidInputRequest('return_action');
 $returnRecord = $request->getValidInputRequest('return_record', 'Assert\Guid');
 if ($returnModule !== null) {
-	$return['module'] = $returnModule;
-	if($returnAction !== null) {
-		$return['action'] = $returnAction;
-	}
-	if($returnRecord !== null) {
-		$return['record'] = $returnRecord;
-	}
+    $return['module'] = $returnModule;
+    if ($returnAction !== null) {
+        $return['action'] = $returnAction;
+    }
+    if ($returnRecord !== null) {
+        $return['record'] = $returnRecord;
+    }
 }
 $categoryName = $request->getValidInputRequest('category_name');
 
 $sugar_smarty->assign('RETURN', $return);
 $names = ACLAction::setupCategoriesMatrix($categories);
-if(!empty($names))$tdwidth = 100 / sizeof($names);
+if (!empty($names)) {
+    $tdwidth = 100 / sizeof($names);
+}
 $sugar_smarty->assign('CATEGORIES', $categories);
 $sugar_smarty->assign('CATEGORY_NAME', $categoryName);
 $sugar_smarty->assign('TDWIDTH', $tdwidth);
@@ -93,21 +94,21 @@ if (isset($categories[$_REQUEST['category_name']]['module'])) {
 $sugar_smarty->assign('ACTIONS', $actions);
 ob_clean();
 
-if($categoryName == 'All'){
-	echo $sugar_smarty->fetch('modules/ACLRoles/EditAllBody.tpl');	
-}else{
-//WDong Bug 23195: Strings not localized in Role Management.
-echo getClassicModuleTitle(
-    $categoryName,
-    array($app_list_strings['moduleList'][$categoryName]),
-    false
-);
-echo $sugar_smarty->fetch('modules/ACLRoles/EditRole.tpl');
-if (!isset($dictionary[$categoryName]['hide_fields_to_edit_role']) ||
-    $dictionary[$categoryName]['hide_fields_to_edit_role'] === false
-) {
-    echo ACLFieldsEditView::getView($categoryName, $role->id);
-}
-echo '</form>';
+if ($categoryName == 'All') {
+    echo $sugar_smarty->fetch('modules/ACLRoles/EditAllBody.tpl');
+} else {
+    //WDong Bug 23195: Strings not localized in Role Management.
+    echo getClassicModuleTitle(
+        $categoryName,
+        [$app_list_strings['moduleList'][$categoryName]],
+        false
+    );
+    echo $sugar_smarty->fetch('modules/ACLRoles/EditRole.tpl');
+    if (!isset($dictionary[$categoryName]['hide_fields_to_edit_role']) ||
+        $dictionary[$categoryName]['hide_fields_to_edit_role'] === false
+    ) {
+        echo ACLFieldsEditView::getView($categoryName, $role->id);
+    }
+    echo '</form>';
 }
 sugar_cleanup(true);

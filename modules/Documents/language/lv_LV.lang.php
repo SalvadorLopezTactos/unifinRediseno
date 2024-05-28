@@ -10,22 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     //module
     'LBL_MODULE_NAME' => 'Dokumenti',
     'LBL_MODULE_NAME_SINGULAR' => 'Dokuments',
     'LBL_MODULE_TITLE' => 'Dokumenti: Sākums',
     'LNK_NEW_DOCUMENT' => 'Izveidot dokumentu',
-    'LNK_DOCUMENT_LIST'=> 'Aplūkot dokumentus',
+    'LNK_DOCUMENT_LIST' => 'Aplūkot dokumentus',
     'LBL_DOC_REV_HEADER' => 'Dokumenta versijas',
-    'LBL_SEARCH_FORM_TITLE'=> 'Dokumentu meklēšana',
+    'LBL_SEARCH_FORM_TITLE' => 'Dokumentu meklēšana',
     //vardef labels
     'LBL_DOCUMENT_ID' => 'Dokumenta ID',
     'LBL_NAME' => 'Dokumenta nosaukums',
@@ -34,31 +33,31 @@ $mod_strings = array (
     'LBL_CATEGORY' => 'Kategorija',
     'LBL_SUBCATEGORY' => 'Apakškategorija',
     'LBL_STATUS' => 'Statuss',
-    'LBL_CREATED_BY'=> 'Izveidoja',
-    'LBL_DATE_ENTERED'=> 'Izveides datums',
-    'LBL_DATE_MODIFIED'=> 'Modificēšanas datums',
+    'LBL_CREATED_BY' => 'Izveidoja',
+    'LBL_DATE_ENTERED' => 'Izveides datums',
+    'LBL_DATE_MODIFIED' => 'Modificēšanas datums',
     'LBL_DELETED' => 'Dzēsts',
-    'LBL_MODIFIED'=> 'Modificēja',
+    'LBL_MODIFIED' => 'Modificēja',
     'LBL_MODIFIED_USER' => 'Modificēja',
-    'LBL_CREATED'=> 'Izveidoja',
-    'LBL_REVISIONS'=>'Versijas',
-    'LBL_RELATED_DOCUMENT_ID'=>'Saistītā dokumenta Id',
-    'LBL_RELATED_DOCUMENT_REVISION_ID'=>'Saistītā dokumenta versijas Id',
-    'LBL_IS_TEMPLATE'=>'Ir veidne',
-    'LBL_TEMPLATE_TYPE'=>'Dokumenta tips',
-    'LBL_ASSIGNED_TO_NAME'=>'Piešķirts lietotājam:',
+    'LBL_CREATED' => 'Izveidoja',
+    'LBL_REVISIONS' => 'Versijas',
+    'LBL_RELATED_DOCUMENT_ID' => 'Saistītā dokumenta Id',
+    'LBL_RELATED_DOCUMENT_REVISION_ID' => 'Saistītā dokumenta versijas Id',
+    'LBL_IS_TEMPLATE' => 'Ir veidne',
+    'LBL_TEMPLATE_TYPE' => 'Dokumenta tips',
+    'LBL_ASSIGNED_TO_NAME' => 'Piešķirts lietotājam:',
     'LBL_REVISION_NAME' => 'Versijas numurs',
     'LBL_MIME' => 'MIME tips',
     'LBL_REVISION' => 'Versija',
     'LBL_DOCUMENT' => 'Saistītais dokuments',
     'LBL_LATEST_REVISION' => 'Jaunākā versija',
     'LBL_DOCUMENT_REVISION_ID' => 'Dokumenta revīzijas Id',
-    'LBL_CHANGE_LOG'=> 'Izmaiņu žurnāls',
-    'LBL_ACTIVE_DATE'=> 'Publicēšanas datums',
+    'LBL_CHANGE_LOG' => 'Izmaiņu žurnāls',
+    'LBL_ACTIVE_DATE' => 'Publicēšanas datums',
     'LBL_EXPIRATION_DATE' => 'Derīgs līdz',
-    'LBL_FILE_EXTENSION'  => 'Faila paplašinājums',
+    'LBL_FILE_EXTENSION' => 'Faila paplašinājums',
     'LBL_LAST_REV_MIME_TYPE' => 'Pēdējas versijas MIME tips',
-    'LBL_CAT_OR_SUBCAT_UNSPEC'=>'Nav norādīts',
+    'LBL_CAT_OR_SUBCAT_UNSPEC' => 'Nav norādīts',
     'LBL_HOMEPAGE_TITLE' => 'Mani dokumenti',
     //quick search
     'LBL_NEW_FORM_TITLE' => 'Jauns dokuments',
@@ -70,25 +69,25 @@ $mod_strings = array (
     'LBL_FILE_UPLOAD' => 'Fails:',
 
     'LBL_CATEGORY_VALUE' => 'Kategorija:',
-    'LBL_SUBCATEGORY_VALUE'=> 'Apakškategorija:',
-    'LBL_DOC_STATUS'=> 'Statuss:',
-    'LBL_DOC_STATUS_ID'=> 'Statusa Id:',
+    'LBL_SUBCATEGORY_VALUE' => 'Apakškategorija:',
+    'LBL_DOC_STATUS' => 'Statuss:',
+    'LBL_DOC_STATUS_ID' => 'Statusa Id:',
     'LBL_LAST_REV_CREATOR' => 'Versiju izveidoja:',
     'LBL_LASTEST_REVISION_NAME' => 'Pēdējās versijas nosaukums:',
     'LBL_SELECTED_REVISION_NAME' => 'Izvēlētās versijas nosaukums',
     'LBL_CONTRACT_STATUS' => 'Līguma statuss:',
     'LBL_CONTRACT_NAME' => 'Līguma nosaukums:',
     'LBL_LAST_REV_DATE' => 'Versijas datums:',
-    'LBL_DOWNNLOAD_FILE'=> 'Lejupielādēt failu:',
-    'LBL_DET_RELATED_DOCUMENT'=>'Saistītais dokuments:',
-    'LBL_DET_RELATED_DOCUMENT_VERSION'=>"Saistītā dokumenta versija:",
-    'LBL_DET_IS_TEMPLATE'=>'Vai šī ir dokumenta veidne? :',
-    'LBL_DET_TEMPLATE_TYPE'=>'Dokumenta tips:',
-    'LBL_TEAM'=> 'Darba grupa:',
+    'LBL_DOWNNLOAD_FILE' => 'Lejupielādēt failu:',
+    'LBL_DET_RELATED_DOCUMENT' => 'Saistītais dokuments:',
+    'LBL_DET_RELATED_DOCUMENT_VERSION' => 'Saistītā dokumenta versija:',
+    'LBL_DET_IS_TEMPLATE' => 'Vai šī ir dokumenta veidne? :',
+    'LBL_DET_TEMPLATE_TYPE' => 'Dokumenta tips:',
+    'LBL_TEAM' => 'Darba grupa:',
     'LBL_IS_SHARED' => 'Pieejams ārēji:',
-    'LBL_DOC_DESCRIPTION'=>'Apraksts:',
-    'LBL_DOC_ACTIVE_DATE'=> 'Publicēšanas datums:',
-    'LBL_DOC_EXP_DATE'=> 'Derīgs līdz:',
+    'LBL_DOC_DESCRIPTION' => 'Apraksts:',
+    'LBL_DOC_ACTIVE_DATE' => 'Publicēšanas datums:',
+    'LBL_DOC_EXP_DATE' => 'Derīgs līdz:',
 
     //document list view.
     'LBL_LIST_FORM_TITLE' => 'Dokumentu saraksts',
@@ -98,11 +97,11 @@ $mod_strings = array (
     'LBL_LIST_REVISION' => 'Versija',
     'LBL_LIST_LAST_REV_CREATOR' => 'Publicēja',
     'LBL_LIST_LAST_REV_DATE' => 'Versijas datums',
-    'LBL_LIST_VIEW_DOCUMENT'=>'Skatījums',
-    'LBL_LIST_DOWNLOAD'=> 'Lejupielādēt',
+    'LBL_LIST_VIEW_DOCUMENT' => 'Skatījums',
+    'LBL_LIST_DOWNLOAD' => 'Lejupielādēt',
     'LBL_LIST_ACTIVE_DATE' => 'Publicēšanas datums',
     'LBL_LIST_EXP_DATE' => 'Derīgs līdz',
-    'LBL_LIST_STATUS'=>'Statuss',
+    'LBL_LIST_STATUS' => 'Statuss',
     'LBL_LINKED_ID' => 'Saistītais ID',
     'LBL_SELECTED_REVISION_ID' => 'Izvēlētās versijas ID',
     'LBL_LATEST_REVISION_ID' => 'Jaunākās versijas ID',
@@ -114,33 +113,33 @@ $mod_strings = array (
     //document search form.
     'LBL_SF_DOCUMENT' => 'Dokumenta nosaukums:',
     'LBL_SF_CATEGORY' => 'Kategorija:',
-    'LBL_SF_SUBCATEGORY'=> 'Apakškategorija:',
+    'LBL_SF_SUBCATEGORY' => 'Apakškategorija:',
     'LBL_SF_ACTIVE_DATE' => 'Publicēšanas datums:',
-    'LBL_SF_EXP_DATE'=> 'Derīgs līdz:',
+    'LBL_SF_EXP_DATE' => 'Derīgs līdz:',
 
     'DEF_CREATE_LOG' => 'Dokuments izveidots',
 
     //error messages
-    'ERR_DOC_NAME'=>'Dokumenta nosaukums',
-    'ERR_DOC_ACTIVE_DATE'=>'Publicēšanas datums',
-    'ERR_DOC_EXP_DATE'=> 'Derīgs līdz',
-    'ERR_FILENAME'=> 'Faila nosaukums',
-    'ERR_DOC_VERSION'=> 'Dokumenta versija',
-    'ERR_DELETE_CONFIRM'=> 'Vai vēlaties dzēst šo dokumenta versiju?',
-    'ERR_DELETE_LATEST_VERSION'=> 'Jums nav atļauts dzēst šī dokumenta pēdējo versiju.',
+    'ERR_DOC_NAME' => 'Dokumenta nosaukums',
+    'ERR_DOC_ACTIVE_DATE' => 'Publicēšanas datums',
+    'ERR_DOC_EXP_DATE' => 'Derīgs līdz',
+    'ERR_FILENAME' => 'Faila nosaukums',
+    'ERR_DOC_VERSION' => 'Dokumenta versija',
+    'ERR_DELETE_CONFIRM' => 'Vai vēlaties dzēst šo dokumenta versiju?',
+    'ERR_DELETE_LATEST_VERSION' => 'Jums nav atļauts dzēst šī dokumenta pēdējo versiju.',
     'LNK_NEW_MAIL_MERGE' => 'Pasta sapludināšana',
     'LBL_MAIL_MERGE_DOCUMENT' => 'Pasta sapludināšanas veidne:',
     'ERR_MISSING_FILE' => 'Šim dokumentam nav pieejams fails, iespējams augšupielādes kļūdas dēļ. Lūdzu atkārtoti augšupielādējiet failu vai sazinieties ar administratoru.',
 
     'LBL_TREE_TITLE' => 'Dokumenti',
     //sub-panel vardefs.
-    'LBL_LIST_DOCUMENT_NAME'=>'Nosaukums',
-    'LBL_LIST_IS_TEMPLATE'=>'Vai šī ir dokumenta veidne?',
-    'LBL_LIST_TEMPLATE_TYPE'=>'Dokumenta tips',
-    'LBL_LIST_SELECTED_REVISION'=>'Atzīmētā versija',
-    'LBL_LIST_LATEST_REVISION'=>'Jaunākā versija',
-    'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Saistītie līgumi',
-    'LBL_LAST_REV_CREATE_DATE'=>'Pēdējās versijas izveidošanas datums',
+    'LBL_LIST_DOCUMENT_NAME' => 'Nosaukums',
+    'LBL_LIST_IS_TEMPLATE' => 'Vai šī ir dokumenta veidne?',
+    'LBL_LIST_TEMPLATE_TYPE' => 'Dokumenta tips',
+    'LBL_LIST_SELECTED_REVISION' => 'Atzīmētā versija',
+    'LBL_LIST_LATEST_REVISION' => 'Jaunākā versija',
+    'LBL_CONTRACTS_SUBPANEL_TITLE' => 'Saistītie līgumi',
+    'LBL_LAST_REV_CREATE_DATE' => 'Pēdējās versijas izveidošanas datums',
     //'LNK_DOCUMENT_CAT'=>'Document Categories',
     'LBL_CONTRACTS' => 'Līgumi',
     'LBL_CREATED_USER' => 'Izveidoja lietotājs',
@@ -171,9 +170,11 @@ $mod_strings = array (
     // Dashboards
     'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Daokumentu ierakstu instrumentu panelis',
     'LBL_MY_DOCUMENTS' => 'Mani dokumenti',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Dokumentu laika josla',
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Nosūtīt uz DocuSign',
+    'LBL_SEND_TO_DOCUSIGN_TEMPLATE_BUTTON' => 'Sūtīt uz DocuSign ar veidni',
 
     // Cloud Drive
 
@@ -183,4 +184,4 @@ $mod_strings = array (
     'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Sinhronizēt uz OneDrive',
     'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Sinhronizēt visu uz Dropbox',
     'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Sinhronizēt uz Dropbox',
-);
+];

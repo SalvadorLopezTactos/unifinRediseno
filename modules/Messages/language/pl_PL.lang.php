@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'w toku',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy wiadomości',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Pulpit rekordów wiadomości',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Oś czasu wiadomości',
 ];

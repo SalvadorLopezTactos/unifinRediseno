@@ -10,6 +10,7 @@
  * SugarCRM Changelog
  * 06/08/2020 Changed isValid function to remove character validation
  */
+
 namespace Laminas\Mail\Header;
 
 final class HeaderName
@@ -25,13 +26,13 @@ final class HeaderName
      * Filter the header name according to RFC 2822
      *
      * @see    http://www.rfc-base.org/txt/rfc-2822.txt (section 2.2)
-     * @param  string $name
+     * @param string $name
      * @return string
      */
     public static function filter($name)
     {
         $result = '';
-        $tot    = strlen($name);
+        $tot = strlen($name);
         for ($i = 0; $i < $tot; $i += 1) {
             $ord = ord($name[$i]);
             if ($ord > 32 && $ord < 127 && $ord !== 58) {
@@ -59,12 +60,12 @@ final class HeaderName
      * Raises an exception if invalid.
      *
      * @param string $name
-     * @throws Exception\RuntimeException
      * @return void
+     * @throws Exception\RuntimeException
      */
     public static function assertValid($name)
     {
-        if (! self::isValid($name)) {
+        if (!self::isValid($name)) {
             throw new Exception\RuntimeException('Invalid header name detected');
         }
     }

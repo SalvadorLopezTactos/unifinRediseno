@@ -21,6 +21,7 @@ $vardefs = [
             'importable' => 'true',
             'massupdate' => false,
             'type' => 'id',
+            'processes' => false,
         ],
         'dri_workflow_name' => [
             'name' => 'dri_workflow_name',
@@ -38,6 +39,7 @@ $vardefs = [
             'sort_on' => 'name',
             'module' => 'DRI_Workflows',
             'link' => 'dri_workflow_link',
+            'processes' => false,
         ],
         'dri_workflow_link' => [
             'name' => 'dri_workflow_link',
@@ -46,8 +48,9 @@ $vardefs = [
             'type' => 'link',
             'side' => 'right',
             'bean_name' => 'DRI_Workflow',
-            'relationship' => strtolower($object_name).'_dri_workflows',
+            'relationship' => strtolower($object_name) . '_dri_workflows',
             'module' => 'DRI_Workflows',
+            'processes' => false,
         ],
         'current_cj_activity_at' => [
             'name' => 'current_cj_activity_at',
@@ -56,8 +59,9 @@ $vardefs = [
             'type' => 'link',
             'side' => 'left',
             'bean_name' => 'DRI_Workflow',
-            'relationship' => strtolower($module).'_flex_relate_dri_workflows',
+            'relationship' => strtolower($module) . '_flex_relate_dri_workflows',
             'module' => 'DRI_Workflows',
+            'processes' => false,
         ],
         'dri_subworkflow_id' => [
             'name' => 'dri_subworkflow_id',
@@ -68,6 +72,7 @@ $vardefs = [
             'importable' => 'true',
             'massupdate' => false,
             'type' => 'id',
+            'processes' => false,
         ],
         'dri_subworkflow_name' => [
             'name' => 'dri_subworkflow_name',
@@ -85,6 +90,7 @@ $vardefs = [
             'sort_on' => 'name',
             'module' => 'DRI_SubWorkflows',
             'link' => 'dri_subworkflow_link',
+            'processes' => false,
         ],
         'dri_subworkflow_link' => [
             'name' => 'dri_subworkflow_link',
@@ -93,8 +99,9 @@ $vardefs = [
             'type' => 'link',
             'side' => 'right',
             'bean_name' => 'DRI_SubWorkflow',
-            'relationship' => strtolower($object_name).'_dri_subworkflows',
+            'relationship' => strtolower($object_name) . '_dri_subworkflows',
             'module' => 'DRI_SubWorkflows',
+            'processes' => false,
         ],
         'dri_subworkflow_template_id' => [
             'name' => 'dri_subworkflow_template_id',
@@ -105,6 +112,7 @@ $vardefs = [
             'importable' => 'true',
             'massupdate' => false,
             'type' => 'id',
+            'processes' => false,
         ],
         'dri_subworkflow_template_name' => [
             'name' => 'dri_subworkflow_template_name',
@@ -122,6 +130,7 @@ $vardefs = [
             'sort_on' => 'name',
             'module' => 'DRI_SubWorkflow_Templates',
             'link' => 'dri_subworkflow_template_link',
+            'processes' => false,
         ],
         'dri_subworkflow_template_link' => [
             'name' => 'dri_subworkflow_template_link',
@@ -130,8 +139,9 @@ $vardefs = [
             'type' => 'link',
             'side' => 'right',
             'bean_name' => 'DRI_SubWorkflow_Template',
-            'relationship' => strtolower($object_name).'_dri_subworkflow_templates',
+            'relationship' => strtolower($object_name) . '_dri_subworkflow_templates',
             'module' => 'DRI_SubWorkflow_Templates',
+            'processes' => false,
         ],
         'dri_workflow_template_id' => [
             'name' => 'dri_workflow_template_id',
@@ -142,6 +152,7 @@ $vardefs = [
             'importable' => 'true',
             'massupdate' => false,
             'type' => 'id',
+            'processes' => false,
         ],
         'dri_workflow_template_name' => [
             'name' => 'dri_workflow_template_name',
@@ -159,6 +170,7 @@ $vardefs = [
             'sort_on' => 'name',
             'module' => 'DRI_Workflow_Templates',
             'link' => 'dri_workflow_template_link',
+            'processes' => false,
         ],
         'dri_workflow_template_link' => [
             'name' => 'dri_workflow_template_link',
@@ -167,8 +179,9 @@ $vardefs = [
             'type' => 'link',
             'side' => 'right',
             'bean_name' => 'DRI_Workflow_Template',
-            'relationship' => strtolower($object_name).'_dri_workflow_templates',
+            'relationship' => strtolower($object_name) . '_dri_workflow_templates',
             'module' => 'DRI_Workflow_Templates',
+            'processes' => false,
         ],
         'dri_workflow_task_template_id' => [
             'name' => 'dri_workflow_task_template_id',
@@ -196,6 +209,7 @@ $vardefs = [
             'sort_on' => 'name',
             'module' => 'DRI_Workflow_Task_Templates',
             'link' => 'cj_activity_tpl_link',
+            'processes' => false,
         ],
         'cj_activity_tpl_link' => [
             'name' => 'cj_activity_tpl_link',
@@ -204,8 +218,9 @@ $vardefs = [
             'type' => 'link',
             'side' => 'right',
             'bean_name' => 'DRI_Workflow_Task_Template',
-            'relationship' => strtolower($object_name).'_dri_workflow_task_templates',
+            'relationship' => strtolower($object_name) . '_dri_workflow_task_templates',
             'module' => 'DRI_Workflow_Task_Templates',
+            'processes' => false,
         ],
         'dri_workflow_sort_order' => [
             'name' => 'dri_workflow_sort_order',
@@ -219,6 +234,7 @@ $vardefs = [
             'len' => 255,
             'default' => 1,
             'dependency' => 'not(equal($dri_subworkflow_id, ""))',
+            'processes' => false,
         ],
         'cj_actual_sort_order' => [
             'name' => 'cj_actual_sort_order',
@@ -231,6 +247,7 @@ $vardefs = [
             'type' => 'varchar',
             'len' => 255,
             'dependency' => 'not(equal($dri_subworkflow_id, ""))',
+            'processes' => false,
         ],
         'customer_journey_score' => [
             'name' => 'customer_journey_score',
@@ -245,6 +262,7 @@ $vardefs = [
             'options' => 'numeric_range_search_dom',
             'enable_range_search' => true,
             'readonly' => true,
+            'processes' => false,
         ],
         'cj_momentum_points' => [
             'name' => 'cj_momentum_points',
@@ -259,6 +277,7 @@ $vardefs = [
             'options' => 'numeric_range_search_dom',
             'enable_range_search' => true,
             'readonly' => true,
+            'processes' => false,
         ],
         'cj_momentum_score' => [
             'name' => 'cj_momentum_score',
@@ -273,6 +292,7 @@ $vardefs = [
             'options' => 'numeric_range_search_dom',
             'enable_range_search' => true,
             'readonly' => true,
+            'processes' => false,
         ],
         'cj_allow_activity_by' => [
             'name' => 'cj_allow_activity_by',
@@ -284,6 +304,7 @@ $vardefs = [
             'massupdate' => false,
             'type' => 'text',
             'studio' => false,
+            'processes' => false,
         ],
         'customer_journey_progress' => [
             'name' => 'customer_journey_progress',
@@ -298,6 +319,7 @@ $vardefs = [
             'enable_range_search' => true,
             'default' => 0,
             'readonly' => true,
+            'processes' => false,
         ],
         'cj_momentum_ratio' => [
             'name' => 'cj_momentum_ratio',
@@ -312,6 +334,7 @@ $vardefs = [
             'enable_range_search' => true,
             'default' => 0,
             'readonly' => true,
+            'processes' => false,
         ],
         'customer_journey_points' => [
             'name' => 'customer_journey_points',
@@ -327,6 +350,7 @@ $vardefs = [
             'default' => 10,
             'dbType' => 'int',
             'len' => 3,
+            'processes' => false,
         ],
         'cj_parent_activity_type' => [
             'name' => 'cj_parent_activity_type',
@@ -338,6 +362,7 @@ $vardefs = [
             'massupdate' => false,
             'options' => 'dri_cj_parent_activity_type_list',
             'type' => 'enum',
+            'processes' => false,
         ],
         'customer_journey_blocked_by' => [
             'name' => 'customer_journey_blocked_by',
@@ -350,6 +375,7 @@ $vardefs = [
             'type' => 'json',
             'dbType' => 'text',
             'isMultiSelect' => true,
+            'processes' => false,
         ],
         'cj_blocked_by_stages' => [
             'name' => 'cj_blocked_by_stages',
@@ -362,6 +388,7 @@ $vardefs = [
             'type' => 'json',
             'dbType' => 'text',
             'isMultiSelect' => true,
+            'processes' => false,
         ],
         'is_cj_parent_activity' => [
             'name' => 'is_cj_parent_activity',
@@ -373,6 +400,7 @@ $vardefs = [
             'massupdate' => false,
             'type' => 'bool',
             'default' => false,
+            'processes' => false,
         ],
         'is_customer_journey_activity' => [
             'name' => 'is_customer_journey_activity',
@@ -387,6 +415,7 @@ $vardefs = [
             'enforced' => true,
             'calculated' => true,
             'formula' => 'not(equal($dri_subworkflow_id, ""))',
+            'processes' => false,
         ],
         'cj_momentum_start_date' => [
             'name' => 'cj_momentum_start_date',
@@ -397,6 +426,7 @@ $vardefs = [
             'importable' => 'true',
             'massupdate' => false,
             'type' => 'datetime',
+            'processes' => false,
         ],
         'cj_momentum_end_date' => [
             'name' => 'cj_momentum_end_date',
@@ -407,6 +437,7 @@ $vardefs = [
             'importable' => 'true',
             'massupdate' => false,
             'type' => 'datetime',
+            'processes' => false,
         ],
         'cj_url' => [
             'name' => 'cj_url',
@@ -418,6 +449,7 @@ $vardefs = [
             'massupdate' => false,
             'type' => 'url',
             'dbType' => 'varchar',
+            'processes' => false,
         ],
         'cj_parent_activity_id' => [
             'name' => 'cj_parent_activity_id',
@@ -428,6 +460,7 @@ $vardefs = [
             'importable' => 'true',
             'massupdate' => false,
             'type' => 'id',
+            'processes' => false,
         ],
         'start_next_journey_id' => [
             'name' => 'start_next_journey_id',
@@ -439,33 +472,33 @@ $vardefs = [
             'massupdate' => false,
             'type' => 'id',
         ],
-        'parent_'.strtolower($object_name).'_of_call_rel' => [
-            'name' => 'parent_'.strtolower($object_name).'_of_call_rel',
+        'parent_' . strtolower($object_name) . '_of_call_rel' => [
+            'name' => 'parent_' . strtolower($object_name) . '_of_call_rel',
             'type' => 'link',
-            'relationship' => 'parent_'.strtolower($object_name).'_of_call_rel',
+            'relationship' => 'parent_' . strtolower($object_name) . '_of_call_rel',
             'source' => 'non-db',
-            'vname' => 'LBL_PARENT_'.strtoupper($object_name).'_OF_CALL_REL',
+            'vname' => 'LBL_PARENT_' . strtoupper($object_name) . '_OF_CALL_REL',
             'reportable' => true,
         ],
-        'parent_'.strtolower($object_name).'_of_meeting_rel' => [
-            'name' => 'parent_'.strtolower($object_name).'_of_meeting_rel',
+        'parent_' . strtolower($object_name) . '_of_meeting_rel' => [
+            'name' => 'parent_' . strtolower($object_name) . '_of_meeting_rel',
             'type' => 'link',
-            'relationship' => 'parent_'.strtolower($object_name).'_of_meeting_rel',
+            'relationship' => 'parent_' . strtolower($object_name) . '_of_meeting_rel',
             'source' => 'non-db',
-            'vname' => 'LBL_PARENT_'.strtoupper($object_name).'_OF_MEETING_REL',
+            'vname' => 'LBL_PARENT_' . strtoupper($object_name) . '_OF_MEETING_REL',
             'reportable' => true,
         ],
-        'parent_'.strtolower($object_name).'_of_task_rel' => [
-            'name' => 'parent_'.strtolower($object_name).'_of_task_rel',
+        'parent_' . strtolower($object_name) . '_of_task_rel' => [
+            'name' => 'parent_' . strtolower($object_name) . '_of_task_rel',
             'type' => 'link',
-            'relationship' => 'parent_'.strtolower($object_name).'_of_task_rel',
+            'relationship' => 'parent_' . strtolower($object_name) . '_of_task_rel',
             'source' => 'non-db',
-            'vname' => 'LBL_PARENT_'.strtoupper($object_name).'_OF_TASK_REL',
+            'vname' => 'LBL_PARENT_' . strtoupper($object_name) . '_OF_TASK_REL',
             'reportable' => true,
         ],
     ],
     'relationships' => [
-        strtolower($object_name).'_dri_workflows' => [
+        strtolower($object_name) . '_dri_workflows' => [
             'relationship_type' => 'one-to-many',
             'lhs_key' => 'id',
             'lhs_module' => 'DRI_Workflows',
@@ -485,7 +518,7 @@ $vardefs = [
             'relationship_role_column_value' => $module,
             'relationship_role_column' => 'parent_type',
         ],
-        strtolower($object_name).'_dri_subworkflows' => [
+        strtolower($object_name) . '_dri_subworkflows' => [
             'relationship_type' => 'one-to-many',
             'lhs_key' => 'id',
             'lhs_module' => 'DRI_SubWorkflows',
@@ -494,7 +527,7 @@ $vardefs = [
             'rhs_table' => strtolower($module),
             'rhs_key' => 'dri_subworkflow_id',
         ],
-        strtolower($object_name).'_dri_subworkflow_templates' => [
+        strtolower($object_name) . '_dri_subworkflow_templates' => [
             'relationship_type' => 'one-to-many',
             'lhs_key' => 'id',
             'lhs_module' => 'DRI_SubWorkflow_Templates',
@@ -503,7 +536,7 @@ $vardefs = [
             'rhs_table' => strtolower($module),
             'rhs_key' => 'dri_subworkflow_template_id',
         ],
-        strtolower($object_name).'_dri_workflow_templates' => [
+        strtolower($object_name) . '_dri_workflow_templates' => [
             'relationship_type' => 'one-to-many',
             'lhs_key' => 'id',
             'lhs_module' => 'DRI_Workflow_Templates',
@@ -512,7 +545,7 @@ $vardefs = [
             'rhs_table' => strtolower($module),
             'rhs_key' => 'dri_workflow_template_id',
         ],
-        strtolower($object_name).'_dri_workflow_task_templates' => [
+        strtolower($object_name) . '_dri_workflow_task_templates' => [
             'relationship_type' => 'one-to-many',
             'lhs_key' => 'id',
             'lhs_module' => 'DRI_Workflow_Task_Templates',
@@ -521,7 +554,7 @@ $vardefs = [
             'rhs_table' => strtolower($module),
             'rhs_key' => 'dri_workflow_task_template_id',
         ],
-        'parent_'.strtolower($object_name).'_of_call_rel' => [
+        'parent_' . strtolower($object_name) . '_of_call_rel' => [
             'lhs_module' => $module,
             'lhs_table' => strtolower($module),
             'lhs_key' => 'id',
@@ -532,7 +565,7 @@ $vardefs = [
             'relationship_role_column' => 'cj_parent_activity_type',
             'relationship_role_column_value' => $module,
         ],
-        'parent_'.strtolower($object_name).'_of_meeting_rel' => [
+        'parent_' . strtolower($object_name) . '_of_meeting_rel' => [
             'lhs_module' => $module,
             'lhs_table' => strtolower($module),
             'lhs_key' => 'id',
@@ -543,7 +576,7 @@ $vardefs = [
             'relationship_role_column' => 'cj_parent_activity_type',
             'relationship_role_column_value' => $module,
         ],
-        'parent_'.strtolower($object_name).'_of_task_rel' => [
+        'parent_' . strtolower($object_name) . '_of_task_rel' => [
             'lhs_module' => $module,
             'lhs_table' => strtolower($module),
             'lhs_key' => 'id',
@@ -556,8 +589,8 @@ $vardefs = [
         ],
     ],
     'indices' => [
-        'idx_del_wf_tpl_sub_subtpl_'.strtolower($object_name).'_name' => [
-            'name' => 'idx_del_wf_tpl_sub_subtpl_'.strtolower($object_name).'_name',
+        'idx_del_wf_tpl_sub_subtpl_' . strtolower($object_name) . '_name' => [
+            'name' => 'idx_del_wf_tpl_sub_subtpl_' . strtolower($object_name) . '_name',
             'type' => 'index',
             'fields' => [
                 'deleted',
@@ -569,8 +602,8 @@ $vardefs = [
                 'name',
             ],
         ],
-        'idx_del_wf_tpl_sub_subtpl_'.strtolower($object_name).'_status' => [
-            'name' => 'idx_del_wf_tpl_sub_subtpl_'.strtolower($object_name).'_status',
+        'idx_del_wf_tpl_sub_subtpl_' . strtolower($object_name) . '_status' => [
+            'name' => 'idx_del_wf_tpl_sub_subtpl_' . strtolower($object_name) . '_status',
             'type' => 'index',
             'fields' => [
                 'deleted',
@@ -582,36 +615,36 @@ $vardefs = [
                 'status',
             ],
         ],
-        'idx_'.strtolower($object_name).'_cj_stage_id' => [
-            'name' => 'idx_'.strtolower($object_name).'_cj_stage_id',
+        'idx_' . strtolower($object_name) . '_cj_stage_id' => [
+            'name' => 'idx_' . strtolower($object_name) . '_cj_stage_id',
             'type' => 'index',
             'fields' => [
                 'dri_subworkflow_id',
             ],
         ],
-        'idx_'.strtolower($object_name).'_cj_stage_tpl_id' => [
-            'name' => 'idx_'.strtolower($object_name).'_cj_stage_tpl_id',
+        'idx_' . strtolower($object_name) . '_cj_stage_tpl_id' => [
+            'name' => 'idx_' . strtolower($object_name) . '_cj_stage_tpl_id',
             'type' => 'index',
             'fields' => [
                 'dri_subworkflow_template_id',
             ],
         ],
-        'idx_'.strtolower($object_name).'_cj_journey_tpl_id' => [
-            'name' => 'idx_'.strtolower($object_name).'_cj_journey_tpl_id',
+        'idx_' . strtolower($object_name) . '_cj_journey_tpl_id' => [
+            'name' => 'idx_' . strtolower($object_name) . '_cj_journey_tpl_id',
             'type' => 'index',
             'fields' => [
                 'dri_workflow_template_id',
             ],
         ],
-        'idx_'.strtolower($object_name).'_cj_activity_tpl_id' => [
-            'name' => 'idx_'.strtolower($object_name).'_cj_activity_tpl_id',
+        'idx_' . strtolower($object_name) . '_cj_activity_tpl_id' => [
+            'name' => 'idx_' . strtolower($object_name) . '_cj_activity_tpl_id',
             'type' => 'index',
             'fields' => [
                 'dri_workflow_task_template_id',
             ],
         ],
-        'idx_'.strtolower($object_name).'_cj_parent_activity' => [
-            'name' => 'idx_'.strtolower($object_name).'_cj_parent_activity',
+        'idx_' . strtolower($object_name) . '_cj_parent_activity' => [
+            'name' => 'idx_' . strtolower($object_name) . '_cj_parent_activity',
             'type' => 'index',
             'fields' => [
                 'deleted',
@@ -636,6 +669,7 @@ if ($module == 'Tasks') {
         'type' => 'enum',
         'dependency' => 'not(equal($dri_subworkflow_id, ""))',
         'no_default' => true,
+        'processes' => false,
     ];
     $vardefs['fields']['cj_activity_start_date'] = [
         'name' => 'cj_activity_start_date',
@@ -647,6 +681,7 @@ if ($module == 'Tasks') {
         'importable' => false,
         'massupdate' => false,
         'type' => 'datetime',
+        'processes' => false,
     ];
     $vardefs['fields']['cj_activity_completion_date'] = [
         'name' => 'cj_activity_completion_date',
@@ -658,6 +693,7 @@ if ($module == 'Tasks') {
         'importable' => false,
         'massupdate' => false,
         'type' => 'datetime',
+        'processes' => false,
     ];
     $vardefs['fields']['cj_days_to_complete'] = [
         'name' => 'cj_days_to_complete',
@@ -669,5 +705,6 @@ if ($module == 'Tasks') {
         'importable' => false,
         'massupdate' => false,
         'type' => 'varchar',
+        'processes' => false,
     ];
 }

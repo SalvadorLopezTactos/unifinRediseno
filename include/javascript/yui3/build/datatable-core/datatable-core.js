@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('datatable-core', function (Y, NAME) {
 
 /**
@@ -239,7 +232,7 @@ Y.mix(Table.prototype, {
         var col, columns, i, len, cols;
 
         if (isObject(name) && !isArray(name)) {
-            if (name instanceof Y.Node) {
+            if (name && name._node) {
                 col = this.body.getColumn(name);
             } else {
                 col = name;
@@ -1323,4 +1316,4 @@ when a cell references more than one header.
 */
 
 
-}, '3.15.0', {"requires": ["escape", "model-list", "node-event-delegate"]});
+}, '3.18.1', {"requires": ["escape", "model-list", "node-event-delegate"]});

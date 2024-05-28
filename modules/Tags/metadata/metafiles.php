@@ -9,6 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$metafiles['Tags'] = array(
+$metafiles['Tags'] = [
     'listviewdefs' => 'modules/Tags/metadata/listviewdefs.php',
-);
+];

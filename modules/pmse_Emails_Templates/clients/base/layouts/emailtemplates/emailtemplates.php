@@ -11,31 +11,31 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['pmse_Emails_Templates']['base']['layout']['emailtemplates'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['pmse_Emails_Templates']['base']['layout']['emailtemplates'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
                             'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'view' => 'compose',
                                     'primary' => true,
-                                ),
-                                array(
+                                ],
+                                [
                                     'layout' => 'extra-info',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

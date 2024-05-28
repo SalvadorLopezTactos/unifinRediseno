@@ -26,7 +26,7 @@ class DocumentsViewDuplicate extends DocumentsViewEdit
     /**
      * @see SugarView::process()
      */
-    public function process($params = array())
+    public function process($params = [])
     {
         //Return view type to edit to render EditView page.
         $this->type = 'edit';

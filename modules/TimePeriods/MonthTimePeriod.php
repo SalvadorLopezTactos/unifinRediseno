@@ -9,13 +9,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Implements the annual representation of a time period
  * @api
  */
-class MonthTimePeriod extends TimePeriod implements TimePeriodInterface {
-
-    public function __construct() {
+class MonthTimePeriod extends TimePeriod implements TimePeriodInterface
+{
+    public function __construct()
+    {
         parent::__construct();
 
         //The time period type
@@ -39,7 +41,7 @@ class MonthTimePeriod extends TimePeriod implements TimePeriodInterface {
         $this->name_template = translate('LBL_MONTH_TIMEPERIOD_FORMAT');
 
         //The chart label
-        $this->chart_label = "n/j";
+        $this->chart_label = 'n/j';
 
         //The chart data interval modifier
         $this->chart_data_modifier = '+1 week';
@@ -58,12 +60,12 @@ class MonthTimePeriod extends TimePeriod implements TimePeriodInterface {
         $timedate = TimeDate::getInstance();
 
         $start = $timedate->fromDbDate($this->start_date);
-        if(isset($this->currentSettings['timeperiod_fiscal_year']) &&
+        if (isset($this->currentSettings['timeperiod_fiscal_year']) &&
             $this->currentSettings['timeperiod_fiscal_year'] == 'next_year') {
             $start->modify('+1 year');
         }
 
-        return string_format($this->name_template, array($start->format('F Y')));
+        return string_format($this->name_template, [$start->format('F Y')]);
     }
 
 
@@ -75,9 +77,9 @@ class MonthTimePeriod extends TimePeriod implements TimePeriodInterface {
      */
     public function getChartLabels($chartData)
     {
-        $weeks = array();
-        $start = strtotime($this->start_date . " 00:00:00");
-        $end = strtotime($this->end_date . " 23:59:59");
+        $weeks = [];
+        $start = strtotime($this->start_date . ' 00:00:00');
+        $end = strtotime($this->end_date . ' 23:59:59');
         $count = 0;
         $timedate = TimeDate::getInstance();
 
@@ -117,16 +119,16 @@ class MonthTimePeriod extends TimePeriod implements TimePeriodInterface {
         $key = $this->id . '-keys';
         $keys = sugar_cache_retrieve($key);
 
-        if(!empty($keys)) {
-            foreach($keys as $timestamp=>$count) {
-               if($ts < $timestamp) {
-                   return $count;
-               }
+        if (!empty($keys)) {
+            foreach ($keys as $timestamp => $count) {
+                if ($ts < $timestamp) {
+                    return $count;
+                }
             }
-            return is_countable($keys) ? count($keys) : 0;
+            return safeCount($keys);
         }
 
-        $keys = array();
+        $keys = [];
         $start = $timedate->fromDbDate($this->start_date);
         $end = $timedate->fromDbDate($this->end_date);
         $count = 0;
@@ -140,12 +142,12 @@ class MonthTimePeriod extends TimePeriod implements TimePeriodInterface {
 
         sugar_cache_put($key, $keys);
 
-        foreach($keys as $tsKey=>$count) {
-            if($ts < $tsKey) {
+        foreach ($keys as $tsKey => $count) {
+            if ($ts < $tsKey) {
                 return $count;
             }
         }
 
-        return count($keys);
+        return safeCount($keys);
     }
 }

@@ -23,13 +23,13 @@ $names = ACLAction::setupCategoriesMatrix($categories);
 
 // Skipping modules that have 'hidden_to_role_assignment' property
 $hidden_categories = [
-    "Campaigns",
-    "EmailTemplates",
-    "EmailMarketing",
-    "Forecasts",
-    "PdfManager",
-    "Reports",
-    "ReportSchedules",
+    'Campaigns',
+    'EmailTemplates',
+    'EmailMarketing',
+    'Forecasts',
+    'PdfManager',
+    'Reports',
+    'ReportSchedules',
     'Metrics',
 ];
 $metadataManager = MetaDataManager::getManager('base');
@@ -50,20 +50,22 @@ foreach ($categories as $name => $category) {
     }
 }
 
-$categories2=$categories;
-foreach($hidden_categories as $v){
-	if (isset($categories2[$v])) {
-	   unset($categories2[$v]);
-	}
+$categories2 = $categories;
+foreach ($hidden_categories as $v) {
+    if (isset($categories2[$v])) {
+        unset($categories2[$v]);
+    }
 }
 $sugar_smarty->assign('CATEGORIES2', $categories2);
-if(!empty($names))$tdwidth = 100 / sizeof($names);
+if (!empty($names)) {
+    $tdwidth = 100 / sizeof($names);
+}
 $sugar_smarty->assign('ROLE', $role->toArray());
 $sugar_smarty->assign('CATEGORIES', $categories);
 $sugar_smarty->assign('TDWIDTH', $tdwidth);
 $sugar_smarty->assign('ACTION_NAMES', $names);
 
-$return= array('module'=>'ACLRoles', 'action'=>'DetailView', 'record'=>$role->id);
+$return = ['module' => 'ACLRoles', 'action' => 'DetailView', 'record' => $role->id];
 $sugar_smarty->assign('RETURN', $return);
 
 $buttons = [
@@ -84,7 +86,7 @@ foreach ($buttons as $button) {
     $sugar_smarty->append('buttons', $button);
 }
 
-echo getClassicModuleTitle("ACLRoles", [
+echo getClassicModuleTitle('ACLRoles', [
     sprintf('<a href="index.php?module=ACLRoles&action=index">%s</a>', htmlspecialchars($mod_strings['LBL_MODULE_NAME'], ENT_COMPAT)),
     htmlspecialchars($role->get_summary_text(), ENT_COMPAT),
 ], true);

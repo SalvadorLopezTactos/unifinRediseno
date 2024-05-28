@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Recupera busta',
     'LBL_CLOUD_SERVICE_TYPE' => 'Tipo di servizio cloud',
     'LBL_CLOUD_PATH' => 'Percorso cloud',
+    'LBL_CLOUD_DRIVE_ID' => 'ID Drive',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Dashboard elenco buste DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'Dashboard record buste DocuSign',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Buste DocuSign recenti',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Cassetto buste DocuSign',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Sequenza temporale busta DocuSign',
 
     'LBL_NEW_ENVELOPE' => 'Nuova busta',
     'LBL_DOCUMENT_IS_NOW' => ' è ora ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Invia',
     'LBL_BUTTON_CLEAR' => 'Cancella',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Usa modello',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Invia con modello',
     'LBL_PLEASE_LOG_IN' => 'Accedi prima a DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Non è possibile scaricare questo documento. È stato creato da un altro utente!',
     'LBL_SEND_NOT_ALLOWED' => 'Non è possibile inviare questa busta. È stata creata da un altro utente!',
@@ -104,6 +107,7 @@ $mod_strings = [
  ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'Busta DocuSign aggiornata!',
     'LBL_DRAFT_CHANGED_ERROR' => 'Lo stato della busta di DocuSign non è stato aggiornato. Controlla i log per i dettagli!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'Impossibile applicare il modello DocuSign',
     'LBL_ENVELOPE_NOT_SENT' => 'Busta non inviata!',
     'LBL_ENVELOPE_SENT' => 'Busta inviata di nuovo!',
     'LBL_DOCUMENT_ADDED' => 'Documento aggiunto al record!',
@@ -130,7 +134,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Ruolo',
     'LBL_SELECT_BUTTON_LABEL' => 'Seleziona',
     'LBL_BACK_BUTTON_LABEL' => 'Indietro',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Ricerca per nome del modello',
+    'LBL_ENVELOPE_NAME' => 'Nome della busta',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Il nome della busta può essere vuoto',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Recupero dei potenziali destinatari non riuscito!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Impossibile recuperare i modelli!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Selezionare un ruolo per ciascun destinatario',
+    
+    'LBL_DOWNLOAD' => 'Scarica',
+    'LBL_OPEN_DRAFT' => 'Apri bozza',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'I documenti senza file non possono essere inviati a DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Fare clic sul pulsante Più per avviare il processo di firma',
+    'LBL_NO_DOC_SELECTED' => 'Selezionare prima i documenti',
+    'LBL_SELECT_RECIPIENTS' => 'Selezionare il destinatario firmatario',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Escludi',
+    'LBL_DOCUSIGN_MISSING_APP' => 'È necessario installare l&#39;applicazione DocuSign per una migliore esperienza.',
 ];

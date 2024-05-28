@@ -10,13 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<tr class="flex-list-row-header">
+<tr class="flex-list-row-header sticky top-0 z-30">
     {{#each view._fields.visible}}
-        <th class="reports-row-header-padding sortable sorting{{#eq ../view.orderBy.field name}}_{{../../view.orderBy.direction}}{{/eq}} orderBy{{name}}" data-tablekey="{{column_key}}" class="{{#if widthClass}} {{widthClass}}{{/if}}"
+        <th class="reports-row-header-padding relative sortable sorting{{#eq ../view.orderBy.field name}}_{{../../view.orderBy.direction}}{{/eq}} orderBy{{name}} {{#if widthClass}}{{widthClass}}{{/if}}
+            {{#if ../view.isFirstColumnFreezed}}{{#if @first}} sticky{{#eq ../../../view.leftColumns.length 0}} left-0{{else}} stick-first{{/eq}}{{/if}}{{/if}} z-10"
+            data-tablekey="{{column_key}}"
             {{#if styles}} style="{{styles}}"{{/if}}
             {{#if name}} data-fieldname="{{name}}" data-realname="{{rname}}"{{/if}} data-orderby="{{orderBy}}">
 
-            <div class="sortable-row-header-container">
+            <div class="sortable-row-header-container p-2">
                 <span class="sortable-row-header-column-name">
                     {{#if icon}}
                         <i class="{{buildIcon icon.type}}" rel="tooltip"  title="{{str icon.tooltip ../../view.module}}"></i>

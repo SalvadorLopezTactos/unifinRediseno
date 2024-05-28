@@ -18,7 +18,7 @@ class SugarACLParentModule extends SugarACLStrategy
     protected $parentModule = '';
     protected $parentLink = '';
     //Can only validate owner against a known subset of the normal check acccess actions
-    protected static $requiresOwnerCheck = array('delete', 'edit', 'detail', 'view', 'read');
+    protected static $requiresOwnerCheck = ['delete', 'edit', 'detail', 'view', 'read'];
 
     public function __construct($aclOptions)
     {
@@ -35,7 +35,7 @@ class SugarACLParentModule extends SugarACLStrategy
      *
      * @param string $module
      * @param string $view
-     * @param array  $context
+     * @param array $context
      *
      * @return bool|void
      */
@@ -43,7 +43,7 @@ class SugarACLParentModule extends SugarACLStrategy
     {
         $action = static::fixUpActionName($action);
 
-        if ($action == "field") {
+        if ($action == 'field') {
             return true;
         }
 
@@ -54,14 +54,14 @@ class SugarACLParentModule extends SugarACLStrategy
             if (empty($bean->$linkName)) {
                 throw new SugarException("Invalid link $linkName for parent ACL");
             }
-            if ($bean->$linkName->getType() == "many") {
+            if ($bean->$linkName->getType() == 'many') {
                 throw new SugarException("Cannot serch for owners through multi-link $linkName");
             }
             $parentModule = $bean->$linkName->getRelatedModuleName();
             if (!empty($this->parentModule) && $parentModule != $this->parentModule) {
                 throw new SugarException("Cannot search for owners through link with incorrect module $parentModule");
             }
-            if (in_array($action, self::$requiresOwnerCheck)) {
+            if (safeInArray($action, self::$requiresOwnerCheck)) {
                 //Check ACL's that require a parent such as edit/detail
                 $parentIds = $bean->$linkName->get();
                 if (is_array($parentIds) && !empty($parentIds)) {
@@ -74,7 +74,6 @@ class SugarACLParentModule extends SugarACLStrategy
                     $context['bean'] = $parentBean;
                     return $parentBean->ACLAccess($action, $context);
                 }
-
             } else {
                 //Fall here for ACL's like list that don't require a parent to check
                 //Don't pass the context since the bean won't match the module.
@@ -93,7 +92,7 @@ class SugarACLParentModule extends SugarACLStrategy
      * Get user access for the list of actions
      *
      * @param string $module
-     * @param array  $access_list List of actions
+     * @param array $access_list List of actions
      *
      * @returns array - List of access levels. Access levels not returned are assumed to be "all allowed".
      */
@@ -101,15 +100,13 @@ class SugarACLParentModule extends SugarACLStrategy
     {
         if (!empty($this->parentModule)) {
             //Don't pass the context bean since it won't match the module.
-            $parentContext = array('owner_override' => true);
+            $parentContext = ['owner_override' => true];
             if (!empty($context['user'])) {
                 $parentContext['user'] = $context['user'];
             }
             return SugarACL::getUserAccess($this->parentModule, $access_list, $parentContext);
         }
 
-        return array();
-
+        return [];
     }
-
 }

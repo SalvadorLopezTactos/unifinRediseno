@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Recupera el sobre',
     'LBL_CLOUD_SERVICE_TYPE' => 'Tipus de servei al núvol',
     'LBL_CLOUD_PATH' => 'Ruta del núvol',
+    'LBL_CLOUD_DRIVE_ID' => 'Identificador de unitat',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Quadre de comandament de la llista de sobres de DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'Quadre de comandament del registre de sobres de DocuSign',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Sobres de DocuSign recents',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als sobres de DocuSign',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia del sobre de DocuSign',
 
     'LBL_NEW_ENVELOPE' => 'Nou sobre',
     'LBL_DOCUMENT_IS_NOW' => ' és ara ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Envia',
     'LBL_BUTTON_CLEAR' => 'Esborra',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Fes servir la plantilla',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Enviar amb plantilla',
     'LBL_PLEASE_LOG_IN' => 'Primer inicieu la sessió a DocuSign.',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'No podeu baixar aquest document. L&#39;ha creat un altre usuari.',
     'LBL_SEND_NOT_ALLOWED' => 'No podeu enviar aquest sobre. L&#39;ha creat un altre usuari.',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'S&#39;ha canviat l&#39;esborrany. Voleu actualitzar-ne l&#39;estat a l&#39;actual ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'S&#39;ha actualitzat el sobre de DocuSign.',
     'LBL_DRAFT_CHANGED_ERROR' => 'No s&#39;ha actualitzat l&#39;estat del sobre de DocuSign. Reviseu els registres per obtenir-ne més detalls.',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'La plantilla DocuSign no es pot aplicar',
     'LBL_ENVELOPE_NOT_SENT' => 'No s&#39;ha enviat el sobre.',
     'LBL_ENVELOPE_SENT' => 'S&#39;ha tornat a enviar el sobre.',
     'LBL_DOCUMENT_ADDED' => 'S&#39;ha afegit el document al registre.',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Funció',
     'LBL_SELECT_BUTTON_LABEL' => 'Selecciona',
     'LBL_BACK_BUTTON_LABEL' => 'Enrere',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Cercar per nom de plantilla',
+    'LBL_ENVELOPE_NAME' => 'Nom del sobre',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'El nom del sobre no pot estar buit',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Error en recuperar els destinataris potencials!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Error en recuperar les plantilles!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Seleccioneu un rol per a cada destinatari',
+    
+    'LBL_DOWNLOAD' => 'Baixa',
+    'LBL_OPEN_DRAFT' => 'Obre l&#39;esborrany',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Els documents sense fitxer no es poden enviar a DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Feu clic al botó Més per començar el procés de signat',
+    'LBL_NO_DOC_SELECTED' => 'Primer seleccioneu els documents',
+    'LBL_SELECT_RECIPIENTS' => 'Seleccioneu el destinatari del signant',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Excloure',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Heu d&#39;instal·lar l&#39;aplicació DocuSign per obtenir una millor experiència.',
 ];

@@ -101,7 +101,9 @@
                     } else {
                         this.setDisabled(false);
                         button.attr('data-event', this.def.event);
-                        button.tooltip('destroy');
+                        if ($.fn.tooltip && $.fn.tooltip.Constructor) {
+                            button.tooltip('dispose');
+                        }
                     }
                 }
                 this.running = false;

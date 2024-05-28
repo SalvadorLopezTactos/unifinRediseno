@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
 
     //module strings.
     'LBL_MODULE_NAME' => 'Prognožu menedžera darblapas',
@@ -35,14 +35,14 @@ $mod_strings = array (
     'LBL_FORECAST_TYPE' => 'Prognozes veids',
     'LBL_FORECAST_OPP_COUNT' => 'Kopējais iespēju skaits',
     'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Piltuves iespēju skaits',
-    'LBL_FORECAST_OPP_WEIGH'=> 'Svērtā summa',
+    'LBL_FORECAST_OPP_WEIGH' => 'Svērtā summa',
     'LBL_FORECAST_USER' => 'Lietotājs',
-    'LBL_DATE_COMMITTED'=> 'Nodošanas datums',
+    'LBL_DATE_COMMITTED' => 'Nodošanas datums',
     'LBL_DATE_ENTERED' => 'Izveidots',
     'LBL_DATE_MODIFIED' => 'Modificēšanas datums',
     'LBL_CREATED_BY' => 'Izveidoja',
     'LBL_DELETED' => 'Dzēsts',
-    'LBL_MODIFIED_USER_ID'=>'Modificēja',
+    'LBL_MODIFIED_USER_ID' => 'Modificēja',
     'LBL_WK_VERSION' => 'Versija',
     'LBL_WK_REVISION' => 'Revīzija',
 
@@ -59,68 +59,68 @@ $mod_strings = array (
     'LBL_QC_UPCOMING_FORECASTS' => 'Manas prognozes',
     'LBL_QC_LAST_DATE_COMMITTED' => 'Pedējā nodevuma datums:',
     'LBL_QC_LAST_COMMIT_VALUE' => 'Pedējas prognozes summa:',
-    'LBL_QC_HEADER_DELIM'=> 'To',
+    'LBL_QC_HEADER_DELIM' => 'To',
 
     //opportunity worksheet list view labels
-    'LBL_OW_OPPORTUNITIES' => "Iespēja",
-    'LBL_OW_ACCOUNTNAME' => "Klients",
-    'LBL_OW_REVENUE' => "Summa",
-    'LBL_OW_WEIGHTED' => "Svērtā summa",
-    'LBL_OW_MODULE_TITLE'=> 'Iespējas darblapa',
-    'LBL_OW_PROBABILITY'=>'Varbūtība',
-    'LBL_OW_NEXT_STEP'=>'Nākamais solis',
-    'LBL_OW_DESCRIPTION'=>'Apraksts',
-    'LBL_OW_TYPE'=>'Veids',
+    'LBL_OW_OPPORTUNITIES' => 'Iespēja',
+    'LBL_OW_ACCOUNTNAME' => 'Klients',
+    'LBL_OW_REVENUE' => 'Summa',
+    'LBL_OW_WEIGHTED' => 'Svērtā summa',
+    'LBL_OW_MODULE_TITLE' => 'Iespējas darblapa',
+    'LBL_OW_PROBABILITY' => 'Varbūtība',
+    'LBL_OW_NEXT_STEP' => 'Nākamais solis',
+    'LBL_OW_DESCRIPTION' => 'Apraksts',
+    'LBL_OW_TYPE' => 'Veids',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'Tiešais ziņotājs',
-    'LBL_FDR_OPPORTUNITIES'=>'Iespējas prognozē:',
-    'LBL_FDR_WEIGH'=>'Iespēju svērtā summa:',
-    'LBL_FDR_COMMIT'=>'Apsolītā summa',
-    'LBL_FDR_DATE_COMMIT'=>'Nodošanas datums',
+    'LBL_FDR_USER_NAME' => 'Tiešais ziņotājs',
+    'LBL_FDR_OPPORTUNITIES' => 'Iespējas prognozē:',
+    'LBL_FDR_WEIGH' => 'Iespēju svērtā summa:',
+    'LBL_FDR_COMMIT' => 'Apsolītā summa',
+    'LBL_FDR_DATE_COMMIT' => 'Nodošanas datums',
 
     //detail view.
     'LBL_DV_HEADER' => 'Prognozes: Darblapa',
     'LBL_DV_MY_FORECASTS' => 'Manas prognozes',
-    'LBL_DV_MY_TEAM' => "Manas darba grupas prognozes" ,
+    'LBL_DV_MY_TEAM' => "Manas darba grupas prognozes",
     'LBL_DV_TIMEPERIODS' => 'Laika periodi:',
     'LBL_DV_FORECAST_PERIOD' => 'Prognozes laika periods',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Prognozētās iespējas',
     'LBL_SEARCH' => 'Atzīmēt',
     'LBL_SEARCH_LABEL' => 'Atzīmēt',
     'LBL_COMMIT_HEADER' => 'Prognozes solījums',
-    'LBL_DV_LAST_COMMIT_DATE' =>'Pēdējā solījuma datums:',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'Pēdējās solītās summas:',
+    'LBL_DV_LAST_COMMIT_DATE' => 'Pēdējā solījuma datums:',
+    'LBL_DV_LAST_COMMIT_AMOUNT' => 'Pēdējās solītās summas:',
     'LBL_DV_FORECAST_ROLLUP' => 'Prognozes apkopojums',
     'LBL_DV_TIMEPERIOD' => 'Laika periods:',
     'LBL_DV_TIMPERIOD_DATES' => 'Datumu diapazons:',
     'LBL_LOADING_COMMIT_HISTORY' => 'Iesniegto prognožu vēstures ielāde ...',
 
     //list view
-    'LBL_LV_TIMPERIOD'=> 'Laika periods',
-    'LBL_LV_TIMPERIOD_START_DATE'=> 'Sākuma datums',
-    'LBL_LV_TIMPERIOD_END_DATE'=> 'Beigu datums',
-    'LBL_LV_TYPE'=> 'Prognozes veids',
-    'LBL_LV_COMMIT_DATE'=> 'Nodošanas datums',
-    'LBL_LV_OPPORTUNITIES'=> 'Iespējas',
-    'LBL_LV_WEIGH'=> 'Svērtā summa',
-    'LBL_LV_COMMIT'=> 'Apsolītā summa',
+    'LBL_LV_TIMPERIOD' => 'Laika periods',
+    'LBL_LV_TIMPERIOD_START_DATE' => 'Sākuma datums',
+    'LBL_LV_TIMPERIOD_END_DATE' => 'Beigu datums',
+    'LBL_LV_TYPE' => 'Prognozes veids',
+    'LBL_LV_COMMIT_DATE' => 'Nodošanas datums',
+    'LBL_LV_OPPORTUNITIES' => 'Iespējas',
+    'LBL_LV_WEIGH' => 'Svērtā summa',
+    'LBL_LV_COMMIT' => 'Apsolītā summa',
 
-    'LBL_COMMIT_NOTE'=> 'Ievadiet summas, kuras plānojat nodot izvēlētajā laika periodā:',
+    'LBL_COMMIT_NOTE' => 'Ievadiet summas, kuras plānojat nodot izvēlētajā laika periodā:',
 
-    'LBL_COMMIT_MESSAGE'=> 'Vai nodot šīs summas?',
+    'LBL_COMMIT_MESSAGE' => 'Vai nodot šīs summas?',
     'ERR_FORECAST_AMOUNT' => 'Norādiet nodošanas summu ar cipari.',
 
     // js error strings
     'LBL_FC_START_DATE' => 'Sākuma datums',
     'LBL_FC_USER' => 'Ieplānot priekš',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'Nav aktīvu laika posmu prognozēm.',
-    'LBL_FDR_ADJ_AMOUNT'=>'Koriģētā summa',
-    'LBL_SAVE_WOKSHEET'=>'Saglabāt darblapu',
-    'LBL_RESET_WOKSHEET'=>'Atiestatīt darblapu',
-    'LBL_SHOW_CHART'=>'Apskatīt diargammu',
-    'LBL_RESET_CHECK'=>'Visa darblapas informācija atzīmētam laika posmam ielogotam lietotājam būs dzēsta. Vai turpināt?',
+    'LBL_NO_ACTIVE_TIMEPERIOD' => 'Nav aktīvu laika posmu prognozēm.',
+    'LBL_FDR_ADJ_AMOUNT' => 'Koriģētā summa',
+    'LBL_SAVE_WOKSHEET' => 'Saglabāt darblapu',
+    'LBL_RESET_WOKSHEET' => 'Atiestatīt darblapu',
+    'LBL_SHOW_CHART' => 'Apskatīt diargammu',
+    'LBL_RESET_CHECK' => 'Visa darblapas informācija atzīmētam laika posmam ielogotam lietotājam būs dzēsta. Vai turpināt?',
 
     'LBL_CURRENCY' => 'Valūta',
     'LBL_CURRENCY_ID' => 'Valūtas ID',
@@ -149,6 +149,6 @@ $mod_strings = array (
     'LBL_HISTORY_LOG' => 'Pēdējā iesniegšana',
     'LBL_NO_COMMIT' => 'Nav agrāku prognožu',
 
-    'LBL_MANGER_SAVED' => 'Vadītājs saglabāts'
+    'LBL_MANGER_SAVED' => 'Vadītājs saglabāts',
 
-);
+];

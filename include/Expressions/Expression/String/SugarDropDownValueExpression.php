@@ -17,33 +17,33 @@
  * This list must be defined in the DropDown editor.<br/>
  * ex: <i>getDropdownValue("my_list", "foo")</i>
  */
-class SugarDropDownValueExpression extends StringExpression {
-	
-	/**
-	 * Returns the negative of the expression that it contains.
-	 */
-	function evaluate() {
-		global $app_list_strings;
-		$params = $this->getParameters();
+class SugarDropDownValueExpression extends StringExpression
+{
+    /**
+     * Returns the negative of the expression that it contains.
+     */
+    public function evaluate()
+    {
+        global $app_list_strings;
+        $params = $this->getParameters();
         $list = $params[0]->evaluate();
         $key = $params[1]->evaluate();
-		
-        if (isset($app_list_strings[$list]) && is_array($app_list_strings[$list]) 
-                && isset($app_list_strings[$list][$key])) 
-        {
+
+        if (isset($app_list_strings[$list]) && is_array($app_list_strings[$list])
+            && isset($app_list_strings[$list][$key])) {
             return $app_list_strings[$list][$key];
         }
-        
-        
-        
-        return ""; 
-	}
-	
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+
+
+        return '';
+    }
+
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
 		    var params = this.getParameters();
 		    var list = params[0].evaluate();
 		    var key = params[1].evaluate();
@@ -55,21 +55,22 @@ class SugarDropDownValueExpression extends StringExpression {
             }
             return "";
 EOQ;
-	}
-	
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return array("getDropdownValue", "getDDValue");
-	}
+    }
 
-	/**
-	 * Returns the maximum number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 2;
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return ['getDropdownValue', 'getDDValue'];
+    }
+
+    /**
+     * Returns the maximum number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 2;
+    }
 }
-?>

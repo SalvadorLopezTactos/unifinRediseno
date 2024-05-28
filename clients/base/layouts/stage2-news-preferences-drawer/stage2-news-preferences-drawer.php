@@ -20,7 +20,7 @@ $viewdefs['base']['layout']['stage2-news-preferences-drawer'] = [
                         'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8 stage2-preferences-drawer',
+                            'css_class' => 'main-pane span8 stage2-preferences-drawer overflow-y-auto',
                             'components' => [
                                 [
                                     'view' => 'stage2-news-preferences-headerpane',

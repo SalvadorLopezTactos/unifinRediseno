@@ -16,7 +16,6 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\ActivityHandlerFactory;
 
 class MomentumCalculator
 {
-
     /**
      * @var \DRI_SubWorkflow
      */
@@ -55,7 +54,8 @@ class MomentumCalculator
     {
         $this->load();
 
-        $count = count((array) $this->activities);
+        $this->activities = (array)$this->activities;
+        $count = safeCount($this->activities);
 
         $this->stage->momentum_points = 0;
         $this->stage->momentum_score = 0;
@@ -88,7 +88,7 @@ class MomentumCalculator
         $fieldsToBeCheck = ['momentum_points', 'momentum_score', 'momentum_ratio'];
         foreach ($fieldsToBeCheck as $field) {
             if ($this->stage->isFieldChanged($field)) {
-                $isMomentumChanged =  true;
+                $isMomentumChanged = true;
                 break;
             }
         }

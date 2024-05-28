@@ -10,22 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     //module
     'LBL_MODULE_NAME' => '문서',
     'LBL_MODULE_NAME_SINGULAR' => '문서',
     'LBL_MODULE_TITLE' => '문서목록:홈',
     'LNK_NEW_DOCUMENT' => '문서 추가하기',
-    'LNK_DOCUMENT_LIST'=> '문서목록 보기',
+    'LNK_DOCUMENT_LIST' => '문서목록 보기',
     'LBL_DOC_REV_HEADER' => '문서 개정',
-    'LBL_SEARCH_FORM_TITLE'=> '문서 검색',
+    'LBL_SEARCH_FORM_TITLE' => '문서 검색',
     //vardef labels
     'LBL_DOCUMENT_ID' => '문서 ID',
     'LBL_NAME' => '이름',
@@ -34,31 +33,31 @@ $mod_strings = array (
     'LBL_CATEGORY' => '범주',
     'LBL_SUBCATEGORY' => '하위 범주',
     'LBL_STATUS' => '상태',
-    'LBL_CREATED_BY'=> '생성자',
-    'LBL_DATE_ENTERED'=> '생성일자:',
-    'LBL_DATE_MODIFIED'=> '수정일',
+    'LBL_CREATED_BY' => '생성자',
+    'LBL_DATE_ENTERED' => '생성일자:',
+    'LBL_DATE_MODIFIED' => '수정일',
     'LBL_DELETED' => '삭제 완료',
-    'LBL_MODIFIED'=> '수정자 ID',
+    'LBL_MODIFIED' => '수정자 ID',
     'LBL_MODIFIED_USER' => '수정자:',
-    'LBL_CREATED'=> '생성자',
-    'LBL_REVISIONS'=>'개정',
-    'LBL_RELATED_DOCUMENT_ID'=>'관련 문서 ID',
-    'LBL_RELATED_DOCUMENT_REVISION_ID'=>'관련 문서 개정 ID',
-    'LBL_IS_TEMPLATE'=>'템플릿 여부',
-    'LBL_TEMPLATE_TYPE'=>'문서 유형',
-    'LBL_ASSIGNED_TO_NAME'=>'담당자:',
+    'LBL_CREATED' => '생성자',
+    'LBL_REVISIONS' => '개정',
+    'LBL_RELATED_DOCUMENT_ID' => '관련 문서 ID',
+    'LBL_RELATED_DOCUMENT_REVISION_ID' => '관련 문서 개정 ID',
+    'LBL_IS_TEMPLATE' => '템플릿 여부',
+    'LBL_TEMPLATE_TYPE' => '문서 유형',
+    'LBL_ASSIGNED_TO_NAME' => '담당자:',
     'LBL_REVISION_NAME' => '개정 번호',
     'LBL_MIME' => 'Mime유형',
     'LBL_REVISION' => '개정:',
     'LBL_DOCUMENT' => '관련 문서',
     'LBL_LATEST_REVISION' => '최신 개정',
     'LBL_DOCUMENT_REVISION_ID' => '문서개정 ID',
-    'LBL_CHANGE_LOG'=> '변경 로그',
-    'LBL_ACTIVE_DATE'=> '배포일',
+    'LBL_CHANGE_LOG' => '변경 로그',
+    'LBL_ACTIVE_DATE' => '배포일',
     'LBL_EXPIRATION_DATE' => '만료일',
-    'LBL_FILE_EXTENSION'  => '파일 확장자',
+    'LBL_FILE_EXTENSION' => '파일 확장자',
     'LBL_LAST_REV_MIME_TYPE' => '마지막 개정 MME유형',
-    'LBL_CAT_OR_SUBCAT_UNSPEC'=>'명시되지 않음',
+    'LBL_CAT_OR_SUBCAT_UNSPEC' => '명시되지 않음',
     'LBL_HOMEPAGE_TITLE' => '내 문서',
     //quick search
     'LBL_NEW_FORM_TITLE' => '새 문서',
@@ -70,25 +69,25 @@ $mod_strings = array (
     'LBL_FILE_UPLOAD' => '파일',
 
     'LBL_CATEGORY_VALUE' => '카테고리',
-    'LBL_SUBCATEGORY_VALUE'=> '하위 카테고리',
-    'LBL_DOC_STATUS'=> '상태',
-    'LBL_DOC_STATUS_ID'=> '상태 ID',
+    'LBL_SUBCATEGORY_VALUE' => '하위 카테고리',
+    'LBL_DOC_STATUS' => '상태',
+    'LBL_DOC_STATUS_ID' => '상태 ID',
     'LBL_LAST_REV_CREATOR' => '개정 생성자',
     'LBL_LASTEST_REVISION_NAME' => '최신 개정명',
     'LBL_SELECTED_REVISION_NAME' => '선택된 개정명',
     'LBL_CONTRACT_STATUS' => '계약 상태',
     'LBL_CONTRACT_NAME' => '계약서명',
     'LBL_LAST_REV_DATE' => '개정일',
-    'LBL_DOWNNLOAD_FILE'=> '파일 다운로드',
-    'LBL_DET_RELATED_DOCUMENT'=>'관련 문서',
-    'LBL_DET_RELATED_DOCUMENT_VERSION'=>"관련 문서 개정",
-    'LBL_DET_IS_TEMPLATE'=>'템플릿',
-    'LBL_DET_TEMPLATE_TYPE'=>'문서 형식:',
-    'LBL_TEAM'=> '팀',
+    'LBL_DOWNNLOAD_FILE' => '파일 다운로드',
+    'LBL_DET_RELATED_DOCUMENT' => '관련 문서',
+    'LBL_DET_RELATED_DOCUMENT_VERSION' => '관련 문서 개정',
+    'LBL_DET_IS_TEMPLATE' => '템플릿',
+    'LBL_DET_TEMPLATE_TYPE' => '문서 형식:',
+    'LBL_TEAM' => '팀',
     'LBL_IS_SHARED' => '외부 사용 가능:',
-    'LBL_DOC_DESCRIPTION'=>'설명',
-    'LBL_DOC_ACTIVE_DATE'=> '배포일',
-    'LBL_DOC_EXP_DATE'=> '만료일',
+    'LBL_DOC_DESCRIPTION' => '설명',
+    'LBL_DOC_ACTIVE_DATE' => '배포일',
+    'LBL_DOC_EXP_DATE' => '만료일',
 
     //document list view.
     'LBL_LIST_FORM_TITLE' => '문서 목록',
@@ -98,11 +97,11 @@ $mod_strings = array (
     'LBL_LIST_REVISION' => '개정',
     'LBL_LIST_LAST_REV_CREATOR' => '배포자',
     'LBL_LIST_LAST_REV_DATE' => '개정일',
-    'LBL_LIST_VIEW_DOCUMENT'=>'보기',
-    'LBL_LIST_DOWNLOAD'=> '다운로드',
+    'LBL_LIST_VIEW_DOCUMENT' => '보기',
+    'LBL_LIST_DOWNLOAD' => '다운로드',
     'LBL_LIST_ACTIVE_DATE' => '배포일',
     'LBL_LIST_EXP_DATE' => '만료일',
-    'LBL_LIST_STATUS'=>'상태',
+    'LBL_LIST_STATUS' => '상태',
     'LBL_LINKED_ID' => '링크된 ID',
     'LBL_SELECTED_REVISION_ID' => '선택된 개정ID',
     'LBL_LATEST_REVISION_ID' => '최신 개정ID',
@@ -114,33 +113,33 @@ $mod_strings = array (
     //document search form.
     'LBL_SF_DOCUMENT' => '문서명:',
     'LBL_SF_CATEGORY' => '카테고리',
-    'LBL_SF_SUBCATEGORY'=> '하위 카테고리',
+    'LBL_SF_SUBCATEGORY' => '하위 카테고리',
     'LBL_SF_ACTIVE_DATE' => '배포일',
-    'LBL_SF_EXP_DATE'=> '만료일',
+    'LBL_SF_EXP_DATE' => '만료일',
 
     'DEF_CREATE_LOG' => '문서 생성완료',
 
     //error messages
-    'ERR_DOC_NAME'=>'문서명',
-    'ERR_DOC_ACTIVE_DATE'=>'배포일',
-    'ERR_DOC_EXP_DATE'=> '만료일',
-    'ERR_FILENAME'=> '파일명',
-    'ERR_DOC_VERSION'=> '문서 버전',
-    'ERR_DELETE_CONFIRM'=> '이 문서 개정을 삭제하시겠습니까?',
-    'ERR_DELETE_LATEST_VERSION'=> '문서의 최신 개정 삭제 권한이 없습니다.',
+    'ERR_DOC_NAME' => '문서명',
+    'ERR_DOC_ACTIVE_DATE' => '배포일',
+    'ERR_DOC_EXP_DATE' => '만료일',
+    'ERR_FILENAME' => '파일명',
+    'ERR_DOC_VERSION' => '문서 버전',
+    'ERR_DELETE_CONFIRM' => '이 문서 개정을 삭제하시겠습니까?',
+    'ERR_DELETE_LATEST_VERSION' => '문서의 최신 개정 삭제 권한이 없습니다.',
     'LNK_NEW_MAIL_MERGE' => '메일 머지',
     'LBL_MAIL_MERGE_DOCUMENT' => '메일 머지 템플릿',
     'ERR_MISSING_FILE' => '이 문서는 전송중 발생한 오류로 인해 분실된 파일입니다. 파일 전송을 다시 시도하거나 관리자에 문의하십시오.',
 
     'LBL_TREE_TITLE' => '문서목록',
     //sub-panel vardefs.
-    'LBL_LIST_DOCUMENT_NAME'=>'이름',
-    'LBL_LIST_IS_TEMPLATE'=>'템플릿',
-    'LBL_LIST_TEMPLATE_TYPE'=>'문서 형식',
-    'LBL_LIST_SELECTED_REVISION'=>'선택된 개정',
-    'LBL_LIST_LATEST_REVISION'=>'최신 개정',
-    'LBL_CONTRACTS_SUBPANEL_TITLE'=>'관련 계약',
-    'LBL_LAST_REV_CREATE_DATE'=>'최근 개정 생성일',
+    'LBL_LIST_DOCUMENT_NAME' => '이름',
+    'LBL_LIST_IS_TEMPLATE' => '템플릿',
+    'LBL_LIST_TEMPLATE_TYPE' => '문서 형식',
+    'LBL_LIST_SELECTED_REVISION' => '선택된 개정',
+    'LBL_LIST_LATEST_REVISION' => '최신 개정',
+    'LBL_CONTRACTS_SUBPANEL_TITLE' => '관련 계약',
+    'LBL_LAST_REV_CREATE_DATE' => '최근 개정 생성일',
     //'LNK_DOCUMENT_CAT'=>'Document Categories',
     'LBL_CONTRACTS' => '계약목록',
     'LBL_CREATED_USER' => '생성자',
@@ -171,9 +170,11 @@ $mod_strings = array (
     // Dashboards
     'LBL_DOCUMENTS_RECORD_DASHBOARD' => '문서 기록 대시보드',
     'LBL_MY_DOCUMENTS' => '내 문서',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '문서 타임라인',
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'DocuSign에 전송',
+    'LBL_SEND_TO_DOCUSIGN_TEMPLATE_BUTTON' => '템플릿을 사용하여 DocuSign으로 보내기',
 
     // Cloud Drive
 
@@ -183,4 +184,4 @@ $mod_strings = array (
     'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'OneDrive에 동기화',
     'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Dropbox에 모두 동기화',
     'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Dropbox에 동기화',
-);
+];

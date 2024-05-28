@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Pievienot',
     'LBL_ADDRCITY' => 'Pilsēta',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Informācija' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Aizvērt' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'Norādītajam avota ID netika atrasts neviens konektors.',
-);
-
+];

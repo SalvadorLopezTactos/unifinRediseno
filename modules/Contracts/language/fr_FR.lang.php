@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Contrats',
-	'LBL_MODULE_NAME_SINGULAR' => 'Contrat',
-	'LBL_MODULE_TITLE' => 'Contrats : Accueil',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Contrats',
+    'LBL_MODULE_NAME_SINGULAR' => 'Contrat',
+    'LBL_MODULE_TITLE' => 'Contrats : Accueil',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Nouveau Contrat',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'Devise:',
     'LBL_CURRENCY' => 'Devise:',
     'LBL_CURRENCY_RATE' => 'Taux de change',
-    'LBL_ASSIGNED_TO_NAME'=>'Assigné à :',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Assigné à :',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Listes des Contrats',	
+    'LBL_LIST_FORM_TITLE' => 'Listes des Contrats',
     'LBL_LIST_CONTRACT_NAME' => 'Nom du Contrat',
     'LBL_LIST_ACCOUNT_NAME' => 'Nom Compte',
     'LBL_LIST_START_DATE' => 'Début',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Nom',
     'LBL_LIST_CONTRACT_VALUE' => 'Valeur',
 
-    'LBL_TYPE'=>'Type',
+    'LBL_TYPE' => 'Type',
     'LBL_TYPE_NAME' => 'Nom du type',
-    'LBL_CONTRACT_TYPE'=>'Type :',
+    'LBL_CONTRACT_TYPE' => 'Type :',
 
     'LBL_CREATED_USER' => 'Créé par',
     'LBL_MODIFIED_USER' => 'Modifié par',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Contrats',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de contrats',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie de contrat',
+];

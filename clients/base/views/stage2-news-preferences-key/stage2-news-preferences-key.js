@@ -18,27 +18,25 @@
      */
     setKeys: function() {
         this.keys = [{
-            icon: 'newspaper-o',
+            icon: 'sicon-news-lg',
             title: app.lang.get('LBL_NOTIFICATIONS_KEY_TITLE_DASHLET')
         }, {
-            icon: 'bell',
+            icon: 'sicon-bell-lg',
             title: app.lang.get('LBL_NOTIFICATIONS_KEY_TITLE_BROWSER'),
             details: app.lang.get('LBL_NOTIFICATIONS_KEY_DESCR_BROWSER')
         }, {
-            icon: 'bell-slash',
+            icon: 'sicon-bell-cross-lg',
             disabledClass: 'icon-disabled',
             details: app.lang.get('LBL_NOTIFICATIONS_KEY_DESCR_BROWSER_DISABLED')
         }, {
-            icon: 'envelope',
+            icon: 'sicon-email-lg',
             title: app.lang.get('LBL_NOTIFICATIONS_KEY_TITLE_EMAIL')
         }, {
-            icon: 'calendar-o',
+            icon: 'sicon-calendar-lg',
             title: app.lang.get('LBL_NOTIFICATIONS_KEY_TITLE_DAILY'),
-            iconStack: '1'
         }, {
-            icon: 'calendar-o',
+            icon: 'sicon-calendar-lg',
             title: app.lang.get('LBL_NOTIFICATIONS_KEY_TITLE_WEEKLY'),
-            iconStack: '7'
         }];
     },
 

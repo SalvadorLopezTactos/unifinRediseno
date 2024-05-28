@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$action_view_map = array(
+$action_view_map = [
     'index' => 'index',
     'cfTest' => 'cfTest',
     'editFormula' => 'editFormula',
@@ -17,5 +17,4 @@ $action_view_map = array(
     'relFields' => 'relFields',
     'functionDetail' => 'functionDetail',
     'selectRelatedField' => 'selectRelatedField',
-);
-?>
+];

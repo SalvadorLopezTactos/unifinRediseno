@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -21,8 +22,8 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
      *
      * @var array
      */
-    protected $field_vardef_setup = array(
-        'amount' => array(
+    protected $field_vardef_setup = [
+        'amount' => [
             'required' => false,
             'audited' => false,
             'calculated' => true,
@@ -31,29 +32,29 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
             'readonly' => true,
             'massupdate' => false,
             'importable' => true,
-        ),
+        ],
         'forecasted_likely' => [
             'formula' => 'rollupSum($revenuelineitems, "forecasted_likely")',
             'calculated' => true,
             'enforced' => true,
         ],
-        'best_case' => array(
+        'best_case' => [
             'calculated' => true,
             'enforced' => true,
             'formula' => 'rollupConditionalSum($revenuelineitems, "best_case", "sales_stage", forecastSalesStages(true, false))',
             'audited' => false,
             'readonly' => true,
             'massupdate' => false,
-        ),
-        'worst_case' => array(
+        ],
+        'worst_case' => [
             'calculated' => true,
             'enforced' => true,
             'formula' => 'rollupConditionalSum($revenuelineitems, "worst_case", "sales_stage", forecastSalesStages(true, false))',
             'audited' => false,
             'readonly' => true,
             'massupdate' => false,
-        ),
-        'date_closed' => array(
+        ],
+        'date_closed' => [
             'calculated' => false,
             'formula' => '',
             'audited' => false,
@@ -61,8 +62,8 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
             'required' => false,
             'massupdate' => false,
             'hidemassupdate' => true,
-        ),
-        'sales_stage' => array(
+        ],
+        'sales_stage' => [
             'calculated' => false,
             'formula' => '',
             'audited' => true,
@@ -72,35 +73,35 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
             'workflow' => false,
             'importable' => 'false',
             'hidemassupdate' => true,
-        ),
-        'probability' => array(
+        ],
+        'probability' => [
             'audited' => false,
             'studio' => false,
             'massupdate' => false,
             'reportable' => false,
             'importable' => false,
-        ),
-        'sales_status' => array(
+        ],
+        'sales_status' => [
             'studio' => true,
             'reportable' => true,
             'audited' => true,
             'massupdate' => true,
             'importable' => true,
-        ),
-        'service_start_date' => array(
+        ],
+        'service_start_date' => [
             'studio' => true,
             'massupdate' => false,
             'hidemassupdate' => true,
             'importable' => 'false',
-        ),
-        'total_revenue_line_items' => array(
+        ],
+        'total_revenue_line_items' => [
             'reportable' => true,
-            'workflow' => true
-        ),
-        'closed_revenue_line_items' => array(
+            'workflow' => true,
+        ],
+        'closed_revenue_line_items' => [
             'reportable' => true,
-            'workflow' => true
-        ),
+            'workflow' => true,
+        ],
         'closed_won_revenue_line_items' => [
             'reportable' => true,
             'workflow' => true,
@@ -120,24 +121,24 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
             'workflow' => true,
             'studio' => true,
         ],
-    );
+    ];
 
     /**
      * Which reports should be shown and hidden.
      *
      * @var array
      */
-    protected $reportchange = array(
-        'show' => array(),
-        'hide' => array('Current Quarter Forecast', 'Detailed Forecast'),
-        'redefine' => array(
+    protected $reportchange = [
+        'show' => [],
+        'hide' => ['Current Quarter Forecast', 'Detailed Forecast'],
+        'redefine' => [
             // @codingStandardsIgnoreStart
             'Opportunities Won By Lead Source' => '{"display_columns":[],"module":"Opportunities","group_defs":[{"name":"lead_source","label":"Lead Source","table_key":"self","type":"enum"}],"summary_columns":[{"name":"lead_source","label":"Opportunities: Lead Source","table_key":"self"},{"name":"likely_case","label":"SUM: Likely","field_type":"currency","group_function":"sum","table_key":"Opportunities:revenuelineitems"},{"name":"count","label":"Count","field_type":"","group_function":"count","table_key":"self"}],"report_name":"Opportunities Won By Lead Source","chart_type":"hBarF","do_round":1,"chart_description":"","numerical_chart_column":"Opportunities:revenuelineitems:likely_case:sum","numerical_chart_column_type":"currency","assigned_user_id":"1","report_type":"summary","full_table_list":{"self":{"value":"Opportunities","module":"Opportunities","label":"Opportunities","dependents":[]},"Opportunities:revenuelineitems":{"name":"Opportunities  \u003E  Revenue Line Items","parent":"self","link_def":{"name":"revenuelineitems","relationship_name":"opportunities_revenuelineitems","bean_is_lhs":true,"link_type":"many","label":"Revenue Line Items","module":"RevenueLineItems","table_key":"Opportunities:revenuelineitems"},"module":"RevenueLineItems","label":"Revenue Line Items","dependents":["Filter.1_table_filter_row_1","display_summaries_row_2"]}},"filters_def":{"Filter_1":{"operator":"AND","0":{"name":"sales_stage","table_key":"Opportunities:revenuelineitems","qualifier_name":"is","input_name0":["Closed Won"]}}}}',
             'Pipeline By Type By Team' => '{"display_columns":[],"module":"Opportunities","group_defs":[{"name":"name","label":"Primary Team Name","table_key":"Opportunities:team_link","type":"name"},{"name":"opportunity_type","label":"Type","table_key":"self","type":"enum"}],"summary_columns":[{"name":"name","label":"Team: Team Name","table_key":"Opportunities:team_link"},{"name":"opportunity_type","label":"Opportunities: Type","table_key":"self"},{"name":"likely_case","label":"SUM: Likely","field_type":"currency","group_function":"sum","table_key":"Opportunities:revenuelineitems"}],"report_name":"Pipeline By Type By Team","chart_type":"hBarF","do_round":1,"chart_description":"","numerical_chart_column":"Opportunities:revenuelineitems:likely_case:sum","numerical_chart_column_type":"currency","assigned_user_id":"1","report_type":"summary","full_table_list":{"self":{"value":"Opportunities","module":"Opportunities","label":"Opportunities","dependents":[]},"Opportunities:team_link":{"parent":"self","label":"Team","link_def":{"name":"team_link","relationship_name":"opportunities_team","bean_is_lhs":"","link_type":"one","label":"Team","table_key":"Opportunities:team_link"},"module":"Teams","name":"Opportunities  \u003E  Teams","dependents":["group_by_row_1","display_summaries_row_group_by_row_1"]},"Opportunities:revenuelineitems":{"name":"Opportunities  \u003E  Revenue Line Items","parent":"self","link_def":{"name":"revenuelineitems","relationship_name":"opportunities_revenuelineitems","bean_is_lhs":true,"link_type":"many","label":"Revenue Line Items","module":"RevenueLineItems","table_key":"Opportunities:revenuelineitems"},"module":"RevenueLineItems","label":"Revenue Line Items","dependents":["Filter.1_table_filter_row_1","display_summaries_row_3"]}},"filters_def":{"Filter_1":{"operator":"AND","0":{"name":"sales_stage","table_key":"Opportunities:revenuelineitems","qualifier_name":"one_of","input_name0":["Prospecting","Qualification","Needs Analysis","Value Proposition","Id. Decision Makers","Perception Analysis","Proposal\/Price Quote","Negotiation\/Review"]}}}}',
             'Pipeline By Team By User' => '{"display_columns":[],"module":"Opportunities","group_defs":[{"name":"name","label":"Primary Team Name","table_key":"Opportunities:team_link","type":"name"},{"name":"user_name","label":"User Name","table_key":"Opportunities:assigned_user_link","type":"username"}],"summary_columns":[{"name":"name","label":"Team: Team Name","table_key":"Opportunities:team_link"},{"name":"user_name","label":"Assigned to User: User Name","table_key":"Opportunities:assigned_user_link"},{"name":"likely_case","label":"SUM: Likely","field_type":"currency","group_function":"sum","table_key":"Opportunities:revenuelineitems"}],"report_name":"Pipeline By Team By User","chart_type":"hBarF","do_round":1,"chart_description":"","numerical_chart_column":"Opportunities:revenuelineitems:likely_case:sum","numerical_chart_column_type":"currency","assigned_user_id":"1","report_type":"summary","full_table_list":{"self":{"value":"Opportunities","module":"Opportunities","label":"Opportunities","dependents":[]},"Opportunities:team_link":{"parent":"self","label":"Team","link_def":{"name":"team_link","relationship_name":"opportunities_team","bean_is_lhs":"","link_type":"one","label":"Team","table_key":"Opportunities:team_link"},"module":"Teams","name":"Opportunities  \u003E  Teams","dependents":["group_by_row_1","display_summaries_row_group_by_row_1"]},"Opportunities:assigned_user_link":{"parent":"self","label":"Assigned to User","link_def":{"name":"assigned_user_link","relationship_name":"opportunities_assigned_user","bean_is_lhs":"","link_type":"one","label":"Assigned to User","table_key":"Opportunities:assigned_user_link"},"module":"Users","name":"Opportunities  \u003E  Assigned to User","dependents":["group_by_row_2","display_summaries_row_group_by_row_2"]},"Opportunities:revenuelineitems":{"name":"Opportunities  \u003E  Revenue Line Items","parent":"self","link_def":{"name":"revenuelineitems","relationship_name":"opportunities_revenuelineitems","bean_is_lhs":true,"link_type":"many","label":"Revenue Line Items","module":"RevenueLineItems","table_key":"Opportunities:revenuelineitems"},"module":"RevenueLineItems","label":"Revenue Line Items","dependents":["Filter.1_table_filter_row_1","display_summaries_row_3"]}},"filters_def":{"Filter_1":{"operator":"AND","0":{"name":"sales_stage","table_key":"Opportunities:revenuelineitems","qualifier_name":"one_of","input_name0":["Prospecting","Qualification","Needs Analysis","Value Proposition","Id. Decision Makers","Perception Analysis","Proposal\/Price Quote","Negotiation\/Review"]}}}}',
             // @codingStandardsIgnoreEnd
-        )
-    );
+        ],
+    ];
 
     /**
      * Handle The Metadata Conversion
@@ -151,7 +152,7 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
 
         // fix the view defs now
         $this->fixRecordView(
-            array(
+            [
                 'forecasted_likely' => true,
                 'sales_status' => true,
                 'service_start_date' => true,
@@ -159,36 +160,32 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
                 'renewal' => true,
                 'renewal_parent_name' => true,
                 'service_duration' => true,
-                'commit_stage' => true,
-            )
+                'commit_stage' => $this->isForecastSetup(),
+            ]
         );
 
         $this->fixListViews(
-            array(
+            [
                 'forecasted_likely' => true,
                 'service_start_date' => true,
                 'sales_stage' => true,
                 'sales_status' => true,
                 'probability' => false,
                 'service_duration' => true,
-                'commit_stage' => true,
-            )
+                'commit_stage' => $this->isForecastSetup(),
+            ]
         );
 
         $this->fixFilter(
-            array(
+            [
                 'sales_stage' => true,
                 'sales_status' => true,
                 'service_start_date' => true,
                 'probability' => false,
                 'service_duration' => true,
                 'lost' => true,
-            )
+            ]
         );
-
-        if ($this->isForecastSetup()) {
-            $this->fixForecastFields(true);
-        }
     }
 
     /**
@@ -359,7 +356,7 @@ EOL;
     {
         // get the list of opps that are not deleted
         $sq = new SugarQuery();
-        $sq->select(array('id'));
+        $sq->select(['id']);
         $sq->from($this->bean);
         $sq->orderBy('date_modified', 'DESC');
 
@@ -376,9 +373,9 @@ EOL;
 
         $job_group = md5(microtime());
 
-        if(count($bean_chunks) > 1) {
+        if (safeCount($bean_chunks) > 1) {
             // process any remaining in the background
-            for ($x = 1; $x < count($bean_chunks); $x++) {
+            for ($x = 1; $x < safeCount($bean_chunks); $x++) {
                 $this->createRevenueLineItemJob($bean_chunks[$x], $job_group);
             }
         } else {
@@ -396,9 +393,9 @@ EOL;
     {
         /* @var $job SchedulersJob */
         $job = BeanFactory::newBean('SchedulersJobs');
-        $job->name = "Create RevenueLineItems for Opportunities";
-        $job->target = "class::SugarJobCreateRevenueLineItems";
-        $job->data = json_encode(array('data' => $data));
+        $job->name = 'Create RevenueLineItems for Opportunities';
+        $job->target = 'class::SugarJobCreateRevenueLineItems';
+        $job->data = json_encode(['data' => $data]);
         $job->retry_count = 0;
         $job->assigned_user_id = $GLOBALS['current_user']->id;
         $job->job_group = $job_group;

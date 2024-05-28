@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Konfigurimi i panelit',
     'LBL_MODULE_NAME_SINGULAR' => 'Konfigurimi i panelit',
     'LBL_CONSOLE_CONFIG_TITLE' => 'Paneli',
@@ -55,4 +56,4 @@ $mod_strings = array(
     'LBL_CONSOLE_DIRECTIONS_CHANGE' => 'Ndryshimet do të pasqyrohen menjëherë, por që të zbatohen duhet t&#39;i ruash.',
     'LBL_CONSOLE_DIRECTIONS_FILTER_AND' => 'dhe ',
     'LBL_CONSOLE_DIRECTIONS_FILTER_OR' => 'ose ',
-);
+];

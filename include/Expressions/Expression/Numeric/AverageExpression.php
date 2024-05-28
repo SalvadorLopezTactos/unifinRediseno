@@ -59,7 +59,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return array('average', 'avg');
+        return ['average', 'avg'];
     }
 
     /**
@@ -67,15 +67,15 @@ JS;
      */
     public function toString()
     {
-        $str = "";
+        $str = '';
 
         foreach ($this->getParameters() as $expr) {
             if (!$expr instanceof ConstantExpression) {
-                $str .= "(";
+                $str .= '(';
             }
             $str .= $expr->toString();
             if (!$expr instanceof ConstantExpression) {
-                $str .= ")";
+                $str .= ')';
             }
         }
     }

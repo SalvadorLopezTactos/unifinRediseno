@@ -11,10 +11,9 @@
  */
 
 
-
 class ReportsSugarpdfSummary_combo extends ReportsSugarpdfReports
 {
-    function display()
+    public function display()
     {
         global $app_list_strings, $locale;
 
@@ -36,7 +35,7 @@ class ReportsSugarpdfSummary_combo extends ReportsSugarpdfReports
                 $shouldIncludeImage = false;
             }
             if ($sugarChart->supports_image_export && $shouldIncludeImage) {
-                $imageFile = $sugarChart->get_image_cache_file_name($xmlFile, ".".$sugarChart->image_export_type);
+                $imageFile = $sugarChart->get_image_cache_file_name($xmlFile, '.' . $sugarChart->image_export_type);
                 // check image size is not '0'
                 if (file_exists($imageFile) && getimagesize($imageFile) > 0) {
                     $this->AddPage();
@@ -64,11 +63,11 @@ class ReportsSugarpdfSummary_combo extends ReportsSugarpdfReports
                     $leftOffset = $this->GetX() + ($freeWidth - $imageWidth) / 2;
                     $topOffset = $this->GetY() + ($freeHeight - $imageHeight) / 2;
 
-                    $this->Image($imageFile, $leftOffset, $topOffset, $imageWidth, $imageHeight, "", "", "N", false, 300, "", false, false, 0, true);
+                    $this->Image($imageFile, $leftOffset, $topOffset, $imageWidth, $imageHeight, '', '', 'N', false, 300, '', false, false, 0, true);
 
                     if ($sugarChart->print_html_legend_pdf) {
                         $legend = $sugarChart->buildHTMLLegend($xmlFile);
-                        $this->writeHTML($legend, true, false, false, true, "");
+                        $this->writeHTML($legend, true, false, false, true, '');
                     }
                 }
             }
@@ -78,32 +77,31 @@ class ReportsSugarpdfSummary_combo extends ReportsSugarpdfReports
 
         //disable paging so we get all results in one pass
         $this->bean->enable_paging = false;
-        $cols = is_countable($this->bean->report_def['display_columns']) ? count($this->bean->report_def['display_columns']) : 0;
+        $cols = safeCount($this->bean->report_def['display_columns']);
         $this->bean->run_summary_combo_query();
 
         $header_row = $this->bean->get_summary_header_row();
         $columns_row = $this->bean->get_header_row();
 
         // build options for the writeHTMLTable from options for the writeCellTable
-        $options = array('header' =>
-            array(
-                "tr" => array(
-                    "bgcolor" => $this->options['header']['fill'],
-                    "color"   => $this->options['header']['textColor']),
-                "td"      => array()
-            ),
+        $options = ['header' => [
+            'tr' => [
+                'bgcolor' => $this->options['header']['fill'],
+                'color' => $this->options['header']['textColor']],
+            'td' => [],
+        ],
             'evencolor' => $this->options['evencolor'],
             'oddcolor' => $this->options['oddcolor'],
-        );
+        ];
 
         while (($row = $this->bean->get_summary_next_row()) != 0) {
             // summary columns
-            $item = array();
+            $item = [];
             $count = 0;
 
-            for ($j=0; $j < sizeof($row['cells']); $j++) {
-                if ($j > (is_countable($header_row) ? count($header_row) : 0) - 1) {
-                    $label = $header_row[(is_countable($header_row) ? count($header_row) : 0) - 1];
+            for ($j = 0; $j < sizeof($row['cells']); $j++) {
+                if ($j > safeCount($header_row) - 1) {
+                    $label = $header_row[safeCount($header_row) - 1];
                 } else {
                     $label = $header_row[$j];
                 }
@@ -131,12 +129,12 @@ class ReportsSugarpdfSummary_combo extends ReportsSugarpdfReports
             }
 
             // display columns
-            $item = array();
+            $item = [];
             $count = 0;
 
-            for ($i=0; $i < $this->bean->current_summary_row_count; $i++) {
+            for ($i = 0; $i < $this->bean->current_summary_row_count; $i++) {
                 if (($column_row = $this->bean->get_next_row('result', 'display_columns', false, true)) != 0) {
-                    for ($j=0; $j < sizeof($columns_row); $j++) {
+                    for ($j = 0; $j < sizeof($columns_row); $j++) {
                         $label = $columns_row[$j];
                         $item[$count][$label] = $column_row['cells'][$j];
                     }
@@ -155,10 +153,10 @@ class ReportsSugarpdfSummary_combo extends ReportsSugarpdfReports
         if ($this->bean->has_summary_columns()) {
             $this->bean->run_total_query();
             $total_row = $this->bean->get_summary_total_row();
-            $item = array();
+            $item = [];
             $count = 0;
 
-            for ($j=0; $j < sizeof($header_row); $j++) {
+            for ($j = 0; $j < sizeof($header_row); $j++) {
                 $label = $header_row[$j];
                 $value = $total_row['cells'][$j];
                 $item[$count][$label] = $value;
@@ -166,6 +164,5 @@ class ReportsSugarpdfSummary_combo extends ReportsSugarpdfReports
 
             $this->writeHTMLTable($item, false, $options);
         }
-
     }
 }

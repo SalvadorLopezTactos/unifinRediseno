@@ -4,40 +4,16 @@
 // Tables
 // --------------------------------------------------
 
-
-// BASE TABLES
-// -----------------
-
-table {
-  max-width: 100%;
-  background-color: @tableBackground;
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
 // BASELINE STYLES
 // ---------------
 
 .table {
-  width: 100%;
-  margin-bottom: @baseLineHeight;
   // Cells
   th,
   td {
-    padding: 8px;
     line-height: @baseLineHeight;
-    text-align: left;
-    vertical-align: top;
-    border-top: @borderWidget;
   }
 
-  th {
-    font-weight: bold;
-  }
-  // Bottom align for column headings
-  thead th {
-    vertical-align: bottom;
-  }
   // Remove top border from thead by default
   caption + thead tr:first-child th,
   caption + thead tr:first-child td,

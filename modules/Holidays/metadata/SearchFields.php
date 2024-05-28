@@ -9,9 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$searchFields['Holidays'] = 
-    array (
-        'holiday_date' => array( 'query_type'=>'default'),
-        'description'  => array( 'query_type'=>'default'),
-    );
-?>
+$searchFields['Holidays'] =
+    [
+        'holiday_date' => ['query_type' => 'default'],
+        'description' => ['query_type' => 'default'],
+    ];

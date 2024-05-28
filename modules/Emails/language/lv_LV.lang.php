@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'Pārsūtīts:',
     'LBL_RE' => 'Atb.:',
     'LBL_BUTTON_CREATE' => 'Izveidot',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Izvēlieties sūtītāja epasta kontu',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Izvēlēties Parakstu',
     'LBL_SIGNATURE' => 'Paraksts',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Noklusētais paraksts",
-    "LBL_SHOW_MORE_SIGNATURES" => "Vairāk parakstu...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Noklusētais paraksts',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Vairāk parakstu...',
     'LBL_SUBJECT' => 'Temats:',
     'LBL_TEMPLATE' => 'Veidne',
     'LBL_TEXT_BODY' => 'Teksts',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Nosūtīšanas laiks',
     'LBL_LIST_TO_ADDR' => 'Kam',
     'LBL_LIST_TYPE' => 'Tips',
-    "LBL_SELECTED_RECIPIENTS" => "Atlasītie saņēmēji",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Vairāk saņēmēju..",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Adrešu grāmata",
+    'LBL_SELECTED_RECIPIENTS' => 'Atlasītie saņēmēji',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Vairāk saņēmēju..',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Adrešu grāmata',
     'NTC_REMOVE_INVITEE' => 'Vai tiešām vēlaties izņemt šo saņēmēja adresi no e-pasta?',
     'WARNING_SETTINGS_NOT_CONF' => 'Jūsu epasta iestatījumi nav pareizi nokonfigurēti e-pasta sūtīšanai. SMTP serveris ' .
         'ir jānokonfigurē <a href="#bwc/index.php?module=EmailMan&action=config">e-pasta iestatījumos</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Pielikumi var nebūt sekmīgi pievienoti: "upload_tmp_dir" tika noteikta nepareiza vai neizmantojama ' .
         'vērtība. Izlabojiet to php.ini failā.',
     'LBL_MESSAGE_UID' => 'Ziņojuma UID',
-    'LBL_OPEN_DRAFT_ALERT' => 'E-pasts ir uzmetums. Uzklikšķiniet uz '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>,'.
+    'LBL_OPEN_DRAFT_ALERT' => 'E-pasts ir uzmetums. Uzklikšķiniet uz ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>,' .
         '  lai rediģētu.',
     'LBL_EMAIL_BODY' => 'E-pasta ziņojums',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'E-pastu fokusa panelis',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'E-pastu ierakstu instrumentu panelis',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'E-pasta laika josla',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'nav norādīti saņēmēji',
@@ -475,4 +476,5 @@ Jūs variet izmantot iepriekš definētas veidnes izmantojot pogu "Veidnes" vai 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Sūtīt e-pastu',
     'LBL_MAILBOX' => 'Ienākošais klients',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Konfigurējiet izejošā e-pasta kontu, izmantojot <a href="#OutboundEmail">E-pasta iestatījumi</a>, lai varētu sūtīt e-pastus.',
-);
+    'LBL_TOO_SHORT' => 'Ierakstiet vismaz {0} rakstzīmes...',
+];

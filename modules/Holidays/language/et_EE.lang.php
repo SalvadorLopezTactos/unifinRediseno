@@ -32,7 +32,7 @@ $mod_strings = [
 
     'LBL_RESOURCE' => 'Allikas:',
     'LBL_PERSON_TYPE' => 'Isiku tüüp:',
-    'LBL_RELATED_MODULE'=> 'Seotud moodul:',
+    'LBL_RELATED_MODULE' => 'Seotud moodul:',
 
     // For HolidaysQuickCreate.php
     'LBL_SELECT_RESOURCE_TYPE' => 'Valige ressursi tüüp ...',

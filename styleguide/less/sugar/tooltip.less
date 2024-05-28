@@ -39,34 +39,28 @@
 }
 
 .tooltip {
-  &.top .tooltip-arrow {
+  &[data-popper-placement="top"] .tooltip-arrow {
     bottom: 0;
-    left: 50%;
-    margin-left: -@tooltipArrowWidth;
     border-width: @tooltipArrowWidth @tooltipArrowWidth 0;
     border-top-color: @tooltipArrowColor;
   }
 
-  &.right .tooltip-arrow {
-    top: 50%;
-    left: 0;
-    margin-top: -@tooltipArrowWidth;
+  &[data-popper-placement="right"] .tooltip-arrow {
+    margin-left: -5px;
     border-width: @tooltipArrowWidth @tooltipArrowWidth @tooltipArrowWidth 0;
     border-right-color: @tooltipArrowColor;
   }
 
-  &.left .tooltip-arrow {
+  &[data-popper-placement="left"] .tooltip-arrow {
     top: 50%;
     right: 0;
-    margin-top: -@tooltipArrowWidth;
     border-width: @tooltipArrowWidth 0 @tooltipArrowWidth @tooltipArrowWidth;
     border-left-color: @tooltipArrowColor;
   }
 
-  &.bottom .tooltip-arrow {
+  &[data-popper-placement="bottom"] .tooltip-arrow {
     top: 0;
     left: 50%;
-    margin-left: -@tooltipArrowWidth;
     border-width: 0 @tooltipArrowWidth @tooltipArrowWidth;
     border-bottom-color: @tooltipArrowColor;
   }
@@ -80,11 +74,8 @@
   word-wrap: break-word;
   pointer-events: none;
 
-  &.bottom {
-    margin-top: 8px;
-  }
-
-  &.in {
+  &.in,
+  &.show {
     opacity: 1;
   }
 

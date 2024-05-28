@@ -24,12 +24,12 @@ class ProviderCollection implements \IteratorAggregate
     /**
      * @var AbstractProvider[]
      */
-    private $providers = array();
+    private $providers = [];
 
     /**
      * @param array $providers Provider list
      */
-    public function __construct(Container $container, array $providers = array())
+    public function __construct(Container $container, array $providers = [])
     {
         foreach ($providers as $provider) {
             if (!$provider instanceof ProviderInterface) {

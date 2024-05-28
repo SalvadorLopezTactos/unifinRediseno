@@ -16,7 +16,6 @@ use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 class UndeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementation implements MetaDataImplementationInterface
 {
-
     /**
      * @var \MetaDataConverter|mixed
      */
@@ -68,7 +67,7 @@ class UndeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementa
         $this->module->mbvardefs->updateVardefs();
 
         $templates = $this->module->config['templates'];
-        $template_def = "";
+        $template_def = '';
         foreach ($templates as $template => $a) {
             if ($a === 1) {
                 $template_def = $template;
@@ -77,7 +76,7 @@ class UndeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementa
 
         $template_subpanel_def = "include/SugarObjects/templates/{$template_def}/clients/{$this->client}/views/subpanel-list/subpanel-list.php";
 
-        $viewdefs = array();
+        $viewdefs = [];
         if (file_exists($template_subpanel_def)) {
             include $template_subpanel_def;
             if (isset($viewdefs['<module_name>'])) {
@@ -99,12 +98,12 @@ class UndeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementa
         if (file_exists($this->sidecarFile)) {
             include FileLoader::validateFilePath($this->sidecarFile);
         }
-        $viewdefs = empty($viewdefs) ? array() : $viewdefs;
+        $viewdefs = empty($viewdefs) ? [] : $viewdefs;
 
         $this->_viewdefs = $this->getNewViewDefs($viewdefs);
 
         $this->_fielddefs = $this->getFieldDefs();
-        $this->_paneldefs = $this->_viewdefs['panels'] ?? array();
+        $this->_paneldefs = $this->_viewdefs['panels'] ?? [];
 
         // Set the global mod_strings directly as Sugar does not automatically load the
         // language files for undeployed modules (how could it?)
@@ -126,7 +125,7 @@ class UndeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementa
             return $viewDefs[$this->module->key_name][$this->client]['view'][$this->sidecarSubpanelName];
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -145,7 +144,7 @@ class UndeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementa
      */
     public function getLanguage()
     {
-        return ""; // '' is the signal to translate() to use the global mod_strings
+        return ''; // '' is the signal to translate() to use the global mod_strings
     }
 
     /**
@@ -181,10 +180,9 @@ class UndeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementa
 
         if (!is_dir(dirname($this->sidecarFile))) {
             if (!mkdir(dirname($this->sidecarFile), 0755, true)) {
-                throw new Exception(sprintf("Cannot create directory %s", $this->sidecarFile));
+                throw new Exception(sprintf('Cannot create directory %s', $this->sidecarFile));
             }
         }
         $this->module->saveAvailableSubpanelDef($this->sidecarSubpanelName, $this->_viewdefs);
     }
-
 }

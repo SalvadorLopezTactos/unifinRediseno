@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\UserUtils\Managers;
 
 use Sugarcrm\Sugarcrm\UserUtils\Invoker\payloads\InvokerBasePayload;
@@ -48,7 +49,7 @@ class GeneralManager extends Manager
         $this->sourceUser = $payload->getSourceUser();
         $this->destinationUsers = $payload->getDestinationUsers();
 
-        if (count($this->destinationUsers) > self::MAX_USER) {
+        if (safeCount($this->destinationUsers) > self::MAX_USER) {
             $this->useScheduledJob = true;
         }
     }
@@ -81,12 +82,12 @@ class GeneralManager extends Manager
 
         $favoritesBean = \BeanFactory::newBean('SugarFavorites');
         $fieldDefs = $favoritesBean->getFieldDefinitions();
-        $db->updateParams($favoritesBean->getTableName(), $fieldDefs, array(
+        $db->updateParams($favoritesBean->getTableName(), $fieldDefs, [
             'deleted' => '1',
-        ), array(
+        ], [
             'module' => 'Reports',
             'assigned_user_id' => $userId,
-        ));
+        ]);
     }
 
     /**

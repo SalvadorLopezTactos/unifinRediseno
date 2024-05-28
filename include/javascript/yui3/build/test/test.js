@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('test', function (Y, NAME) {
 
 
@@ -26,7 +19,7 @@ if (YUI.YUITest) {
 
     //Make this global for back compat
     YUITest = {
-        version: "3.15.0",
+        version: "3.18.1",
         guid: function(pre) {
             return Y.guid(pre);
         }
@@ -281,7 +274,7 @@ YUITest.TestCase.DEFAULT_WAIT = 10000;
 /**
 Calls `YUITest.Assert.fail()` with a message indicating `wait()` was called,
 but `resume()` was never called.
- 
+
 @method _waitTimeout
 @static
 @protected
@@ -343,6 +336,8 @@ YUITest.TestCase.prototype = {
 
     @method next
     @param {Function} callback Callback to call after resuming the test.
+    @param {Object} [context] The value of `this` inside the callback.
+        If not given, the original context of the function will be used.
     @return {Function} wrapped callback that resumes the test.
     @example
     ```
@@ -361,12 +356,16 @@ YUITest.TestCase.prototype = {
     test.wait();
     ```
     **/
-    next: function (callback) {
+    next: function (callback, context) {
         var self = this;
+        context = arguments.length >= 2 ? arguments[1] : undefined;
         return function () {
             var args = arguments;
+            if (context === undefined) {
+                context = this;
+            }
             self.resume(function () {
-                callback.apply(this, args);
+                callback.apply(context, args);
             });
         };
     },
@@ -375,9 +374,9 @@ YUITest.TestCase.prototype = {
     Delays the current test until _condition_ returns a truthy value. If
     _condition_ fails to return a truthy value before _timeout_ milliseconds
     have passed, the test fails. Default _timeout_ is 10s.
-    
+
     _condition_ will be executed every _increment_ milliseconds (default 100).
-    
+
     @method waitFor
     @param {Function} condition Function executed to indicate whether to
                         execute _segment_
@@ -391,22 +390,22 @@ YUITest.TestCase.prototype = {
     waitFor: function (condition, segment, timeout, increment) {
         var self = this,
             endTime;
- 
+
         if ((typeof condition !== 'function') ||
             (typeof segment !== 'function')) {
             self.fail('waitFor() called with invalid parameters.');
         }
-        
+
         if (typeof timeout !== 'number') {
             timeout = YUITest.TestCase.DEFAULT_WAIT;
         }
-        
+
         endTime = (+new Date()) + timeout;
-        
+
         if (typeof increment !== 'number') {
             increment = 100;
         }
-        
+
         self.wait(function () {
             var now;
 
@@ -414,7 +413,7 @@ YUITest.TestCase.prototype = {
                 segment.call(self);
             } else {
                 now = (+new Date());
-                
+
                 if (now > endTime) {
                     YUITest.TestCase._waitTimeout();
                 } else {
@@ -3867,4 +3866,4 @@ if (!YUI.YUITest) {
 } //End if for YUI.YUITest
 
 
-}, '3.15.0', {"requires": ["event-simulate", "event-custom", "json-stringify"]});
+}, '3.18.1', {"requires": ["event-simulate", "event-custom", "json-stringify"]});

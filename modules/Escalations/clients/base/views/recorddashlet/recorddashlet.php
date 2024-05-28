@@ -55,11 +55,11 @@ $viewdefs['Escalations']['base']['view']['recorddashlet'] = [
             'header' => true,
             'fields' => [
                 [
-                    'name'          => 'picture',
-                    'type'          => 'avatar',
-                    'size'          => 'large',
+                    'name' => 'picture',
+                    'type' => 'avatar',
+                    'size' => 'large',
                     'dismiss_label' => true,
-                    'readonly'      => true,
+                    'readonly' => true,
                 ],
                 'name',
                 [

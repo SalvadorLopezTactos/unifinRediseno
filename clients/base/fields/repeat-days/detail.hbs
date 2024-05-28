@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="ellipsis_inline" data-placement="bottom" title="{{value}}">
-    {{value}}
-</div>
+{{#each value}}
+    <div class="inline-block font-semibold border-0 shadow-none py-0.5 px-1.5 whitespace-no-wrap text-center reccurrences-tag-values" data-placement="bottom" title="{{this}}">
+        {{this}}
+    </div>
+{{/each}}

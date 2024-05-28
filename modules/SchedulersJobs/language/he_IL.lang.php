@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'תור משרות',
     'LBL_MODULE_NAME_SINGULAR' => 'תור משרות',
     'LBL_MODULE_TITLE' => 'תור משרות: בית',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'החלטה בוטלה',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'החלטה רצה',
     // Errors
-    'ERR_CALL' => "לא מצליח לקורא לפונקציה: %s",
-    'ERR_CURL' => "אין CURL - לא ניתן להריץ משרות URL",
-    'ERR_FAILED' => "כישלון לא צפוי בדוק יומני PHP או היומן של שוגר",
-    'ERR_PHP' => "%s [%d]: %s בתוך %s בשורה %d",
-    'ERR_NOUSER' => "לא סופק זהוי משתמש לגוב המבוקש",
-    'ERR_NOSUCHUSER' => "מזהה משתמש %s לא נמצא",
-    'ERR_JOBTYPE' => "סוג משרה לא ידוע: %s",
-    'ERR_TIMEOUT' => "הכרח כישלון בעת שיהות",
+    'ERR_CALL' => 'לא מצליח לקורא לפונקציה: %s',
+    'ERR_CURL' => 'אין CURL - לא ניתן להריץ משרות URL',
+    'ERR_FAILED' => 'כישלון לא צפוי בדוק יומני PHP או היומן של שוגר',
+    'ERR_PHP' => '%s [%d]: %s בתוך %s בשורה %d',
+    'ERR_NOUSER' => 'לא סופק זהוי משתמש לגוב המבוקש',
+    'ERR_NOSUCHUSER' => 'מזהה משתמש %s לא נמצא',
+    'ERR_JOBTYPE' => 'סוג משרה לא ידוע: %s',
+    'ERR_TIMEOUT' => 'הכרח כישלון בעת שיהות',
     'ERR_JOB_FAILED_VERBOSE' => 'משרה %1$s (%2$s) נכשלה בהרצת CRON',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'לא ניתן לטעון bean עם מזהה: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'לא ניתן למצוא מטפל עבור נתיב %s',
@@ -90,14 +90,14 @@ $mod_strings = array(
 </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'עזרה בתצורת Amazon SQS',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>אזור תצורה של Amazon SQS
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>אזור תצורה של Amazon SQS
 </b></p>
 <ul>
 <li>מזהה מפתח גישה: <i>הזן את מספר המזהה של מפתח הגישה שלך עבור Amazon SQS</i></li>
 <li>מפתח גישה סודי: <i>הזן את מפתח הגישה הסודי שלך עבור Amazon SQS</i></li>
 <li>אזור: <i>הזן את האזור של שרת Amazon SQS שלך</i></li>
 <li>שם תור: <i>הזן את שם התור של שרת Amazon SQS</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'עזרה בתצורת AMQP',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>אזור תצורת AMQP.</b></p>
 <ul>
@@ -119,4 +119,4 @@ $mod_strings = array(
     'LBL_REGION' => 'אזור',
     'LBL_ACCESS_KEY_SECRET' => 'מפתח גישה סודי',
     'LBL_QUEUE_NAME' => 'שם מתאם',
-);
+];

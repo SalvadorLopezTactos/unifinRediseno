@@ -38,35 +38,35 @@ class ProductBundleNote extends SugarBean
     public $contact_id;
     public $related_product_id;
 
-    public $table_name = "product_bundle_notes";
-    public $rel_quotes = "product_bundle_quote";
-    public $rel_products = "product_bundle_product";
-    public $rel_notes = "product_bundle_note";
+    public $table_name = 'product_bundle_notes';
+    public $rel_quotes = 'product_bundle_quote';
+    public $rel_products = 'product_bundle_product';
+    public $rel_notes = 'product_bundle_note';
 
-    public $module_dir = "ProductBundleNotes";
-    public $object_name = "ProductBundleNote";
+    public $module_dir = 'ProductBundleNotes';
+    public $object_name = 'ProductBundleNote';
 
     public $new_schema = true;
 
-    public $column_fields = Array(
-        "id",
-        "description",
-        "date_entered",
-        "date_modified",
-        "modified_user_id",
-        "created_by"
-    );
+    public $column_fields = [
+        'id',
+        'description',
+        'date_entered',
+        'date_modified',
+        'modified_user_id',
+        'created_by',
+    ];
 
     // This is used to retrieve related fields from form posts.
-    public $additional_column_fields = Array();
+    public $additional_column_fields = [];
 
     // This is the list of fields that are copied over from product template.
 
 
     // This is the list of fields that are in the lists.
-    public $list_fields = array('id');
+    public $list_fields = ['id'];
     // This is the list of fields that are required
-    public $required_fields = array();
+    public $required_fields = [];
 
     //deletes related products might want to change this in the future if we allow for sharing of products
 
@@ -78,14 +78,14 @@ class ProductBundleNote extends SugarBean
     }
 
     /**
-     * @deprecated
      * @param string $bundle_id
+     * @deprecated
      */
     public function clear_product_bundle_product_notes_relationship($bundle_id)
     {
         $query = "DELETE FROM $this->rel_notes WHERE (bundle_id='$bundle_id') AND deleted=0";
 
-        $this->db->query($query, true, "Error clearing note to product to product bundle relationship");
+        $this->db->query($query, true, 'Error clearing note to product to product bundle relationship');
     }
 
     public function fill_in_additional_list_fields()
@@ -109,13 +109,13 @@ class ProductBundleNote extends SugarBean
      */
     public function build_generic_where_clause($the_query_string)
     {
-        $where_clauses = Array();
+        $where_clauses = [];
         $the_query_string = addslashes($the_query_string);
         array_push($where_clauses, "name like '$the_query_string%'");
-        $the_where = "";
+        $the_where = '';
         foreach ($where_clauses as $clause) {
-            if ($the_where != "") {
-                $the_where .= " or ";
+            if ($the_where != '') {
+                $the_where .= ' or ';
             }
             $the_where .= $clause;
         }

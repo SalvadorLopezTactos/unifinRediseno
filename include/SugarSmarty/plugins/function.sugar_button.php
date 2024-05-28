@@ -256,15 +256,15 @@ r22618 - 2007-05-09 15:36:06 -0700 (Wed, 09 May 2007) - clee - Added file.
  * ...
  * $viewdefs['Accounts']['EditView'] = array(
  * 'templateMeta' => array(
- *	'form' => array('buttons'=>array('SAVE',
- *	                                 array('customCode'=>'<input title="{$APP.LBL_CLOSE_AND_CREATE_BUTTON_TITLE}" ' .
- *	                                 		'                    accessKey="{$APP.LBL_CLOSE_AND_CREATE_BUTTON_KEY}" ' .
- *	                                 		'                    class="button" ' .
- *	                                 		'					 onclick="alert(\'hello {$id} \')"; ' .
- *	                                 		'                    type="submit" ' .
- *	                                 		'                    name="button" ' .
- *	                                 		'                    value="{$APP.LBL_CLOSE_AND_CREATE_BUTTON_LABEL}">')
- *	                                 )),
+ *  'form' => array('buttons'=>array('SAVE',
+ *                                   array('customCode'=>'<input title="{$APP.LBL_CLOSE_AND_CREATE_BUTTON_TITLE}" ' .
+ *                                          '                    accessKey="{$APP.LBL_CLOSE_AND_CREATE_BUTTON_KEY}" ' .
+ *                                          '                    class="button" ' .
+ *                                          '                    onclick="alert(\'hello {$id} \')"; ' .
+ *                                          '                    type="submit" ' .
+ *                                          '                    name="button" ' .
+ *                                          '                    value="{$APP.LBL_CLOSE_AND_CREATE_BUTTON_LABEL}">')
+ *                                   )),
  * ...
  *
  * Please note that you should ensure that your customCode is generic in the sense that there are no
@@ -291,34 +291,34 @@ r22618 - 2007-05-09 15:36:06 -0700 (Wed, 09 May 2007) - clee - Added file.
 function smarty_function_sugar_button($params, $smarty)
 {
     $output = null;
-   if(empty($params['module'])) {
-   	  $smarty->trigger_error("sugar_button: missing required param (module)");
-   } else if(empty($params['id'])) {
-   	  $smarty->trigger_error("sugar_button: missing required param (id)");
-   } else if(empty($params['view'])) {
-   	  $smarty->trigger_error("sugar_button: missing required param (view)");
-   }
+    if (empty($params['module'])) {
+        $smarty->trigger_error('sugar_button: missing required param (module)');
+    } elseif (empty($params['id'])) {
+        $smarty->trigger_error('sugar_button: missing required param (id)');
+    } elseif (empty($params['view'])) {
+        $smarty->trigger_error('sugar_button: missing required param (view)');
+    }
 
-   $js_form = (empty($params['form_id'])) ? "var _form = (this.form) ? this.form : document.forms[0];" : "var _form = document.getElementById('{$params['form_id']}');";
+    $js_form = (empty($params['form_id'])) ? 'var _form = (this.form) ? this.form : document.forms[0];' : "var _form = document.getElementById('{$params['form_id']}');";
 
-   $type = $params['id'];
-   $location = (empty($params['location'])) ? "" : "_".$params['location'];
+    $type = $params['id'];
+    $location = (empty($params['location'])) ? '' : '_' . $params['location'];
 
-    if (isset($GLOBALS['sugar_config']['enable_action_menu']) && $GLOBALS['sugar_config']['enable_action_menu']===false) {
+    if (isset($GLOBALS['sugar_config']['enable_action_menu']) && $GLOBALS['sugar_config']['enable_action_menu'] === false) {
         $enable_action_menu = false;
     } else {
         $enable_action_menu = true;
     }
 
-   if(!is_array($type)) {
-   	  $module = $params['module'];
-   	  $view = $params['view'];
-   	  switch(strtoupper($type)) {
-			case "SEARCH":
+    if (!is_array($type)) {
+        $module = $params['module'];
+        $view = $params['view'];
+        switch (strtoupper($type)) {
+            case 'SEARCH':
                 $output = '<input tabindex="2" title="{$APP.LBL_SEARCH_BUTTON_TITLE}" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="{$APP.LBL_SEARCH_BUTTON_LABEL}" id="search_form_submit"/>&nbsp;';
-			break;
+                break;
 
-			case "CANCEL":
+            case 'CANCEL':
                 $cancelButton = '{capture name="cancelReturnUrl" assign="cancelReturnUrl"}';
                 $cancelButton .= '{if !empty($smarty.request.return_action) && $smarty.request.return_action == "DetailView" && !empty($fields.id.value) && empty($smarty.request.return_id)}';
                 $cancelButton .= 'parent.SUGAR.App.router.buildRoute(\'{$smarty.request.return_module|escape:"url"}\', \'{$fields.id.value|escape:"url"}\', \'{$smarty.request.return_action|escape:"url"}\')';
@@ -330,196 +330,195 @@ function smarty_function_sugar_button($params, $smarty)
                 $cancelButton .= '{/capture}';
                 $cancelButton .= '<input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick="parent.SUGAR.App.bwc.revertAttributes();parent.SUGAR.App.router.navigate({$cancelReturnUrl}, {literal}{trigger: true}{/literal}); return false;" type="button" name="button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}" id="' . $type . $location . '"> ';
                 $output = $cancelButton;
-			break;
+                break;
 
-			case "DELETE":
-                $output = '{if $bean->aclAccess("delete")}<input title="{$APP.LBL_DELETE_BUTTON_TITLE}" accessKey="{$APP.LBL_DELETE_BUTTON_KEY}" class="button" onclick="'.$js_form.' _form.return_module.value=\'' . $module . '\'; _form.return_action.value=\'ListView\'; _form.action.value=\'Delete\'; if(confirm(\'{$APP.NTC_DELETE_CONFIRMATION}\')) SUGAR.ajaxUI.submitForm(_form);" type="submit" name="Delete" value="{$APP.LBL_DELETE_BUTTON_LABEL}" id="delete_button">{/if} ';
-            break;
+            case 'DELETE':
+                $output = '{if $bean->aclAccess("delete")}<input title="{$APP.LBL_DELETE_BUTTON_TITLE}" accessKey="{$APP.LBL_DELETE_BUTTON_KEY}" class="button" onclick="' . $js_form . ' _form.return_module.value=\'' . $module . '\'; _form.return_action.value=\'ListView\'; _form.action.value=\'Delete\'; if(confirm(\'{$APP.NTC_DELETE_CONFIRMATION}\')) SUGAR.ajaxUI.submitForm(_form);" type="submit" name="Delete" value="{$APP.LBL_DELETE_BUTTON_LABEL}" id="delete_button">{/if} ';
+                break;
 
-			case "DUPLICATE":
+            case 'DUPLICATE':
                 $output = '{if $bean->ACLAccess("edit")}<input title="{$APP.LBL_DUPLICATE_BUTTON_TITLE}" ' .
                     'accessKey="{$APP.LBL_DUPLICATE_BUTTON_KEY}" class="button" ' .
                     'onclick="' . $js_form . ' _form.return_module.value=\'' . $module . '\'; ' .
-                        '_form.return_action.value=\'DetailView\'; ' .
-                        '_form.isDuplicate.value=true; ' .
-                        '_form.action.value=\'DuplicateView\'; ' .
-                        '_form.return_id.value=\'{$id}\';SUGAR.ajaxUI.submitForm(_form);" ' .
+                    '_form.return_action.value=\'DetailView\'; ' .
+                    '_form.isDuplicate.value=true; ' .
+                    '_form.action.value=\'DuplicateView\'; ' .
+                    '_form.return_id.value=\'{$id}\';SUGAR.ajaxUI.submitForm(_form);" ' .
                     'type="button" name="Duplicate" value="{$APP.LBL_DUPLICATE_BUTTON_LABEL}" ' .
                     'id="duplicate_button">{/if} ';
-            break;
+                break;
 
-			case "EDIT";
-			    $output = '{if $bean->aclAccess("edit")}<input title="{$APP.LBL_EDIT_BUTTON_TITLE}" accessKey="{$APP.LBL_EDIT_BUTTON_KEY}" class="button primary" onclick="'.$js_form.' _form.return_module.value=\'' . $module . '\'; _form.return_action.value=\'DetailView\'; _form.return_id.value=\'{$id}\'; _form.action.value=\'EditView\';SUGAR.ajaxUI.submitForm(_form);" type="button" name="Edit" id="edit_button" value="{$APP.LBL_EDIT_BUTTON_LABEL}">{/if} ';
-            break;
+            case 'EDIT':
+                $output = '{if $bean->aclAccess("edit")}<input title="{$APP.LBL_EDIT_BUTTON_TITLE}" accessKey="{$APP.LBL_EDIT_BUTTON_KEY}" class="button primary" onclick="' . $js_form . ' _form.return_module.value=\'' . $module . '\'; _form.return_action.value=\'DetailView\'; _form.return_id.value=\'{$id}\'; _form.action.value=\'EditView\';SUGAR.ajaxUI.submitForm(_form);" type="button" name="Edit" id="edit_button" value="{$APP.LBL_EDIT_BUTTON_LABEL}">{/if} ';
+                break;
 
-			case "FIND_DUPLICATES":
-			    $output = '{if $bean->aclAccess("edit") && $bean->aclAccess("delete")}<input title="{$APP.LBL_DUP_MERGE}" class="button" onclick="'.$js_form.' _form.return_module.value=\'' . $module . '\'; _form.return_action.value=\'DetailView\'; _form.return_id.value=\'{$id}\'; _form.action.value=\'Step1\'; _form.module.value=\'MergeRecords\';SUGAR.ajaxUI.submitForm(_form);" type="button" name="Merge" value="{$APP.LBL_DUP_MERGE}" id="merge_duplicate_button">{/if} ';
-            break;
+            case 'FIND_DUPLICATES':
+                $output = '{if $bean->aclAccess("edit") && $bean->aclAccess("delete")}<input title="{$APP.LBL_DUP_MERGE}" class="button" onclick="' . $js_form . ' _form.return_module.value=\'' . $module . '\'; _form.return_action.value=\'DetailView\'; _form.return_id.value=\'{$id}\'; _form.action.value=\'Step1\'; _form.module.value=\'MergeRecords\';SUGAR.ajaxUI.submitForm(_form);" type="button" name="Merge" value="{$APP.LBL_DUP_MERGE}" id="merge_duplicate_button">{/if} ';
+                break;
 
-			case "SAVE":
-				$view = ($_REQUEST['action'] == 'EditView') ? 'EditView' : (($view == 'EditView') ? 'EditView' : $view);
-				$output = '{if $bean->aclAccess("save") || $isDuplicate}<input title="{$APP.LBL_SAVE_BUTTON_TITLE}" accessKey="{$APP.LBL_SAVE_BUTTON_KEY}" class="button primary" onclick="'.$js_form.' {if $isDuplicate}_form.return_id.value=\'\'; {/if}_form.action.value=\'Save\'; if(check_form(\'' . $view . '\'))SUGAR.ajaxUI.submitForm(_form);return false;" type="submit" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL}" id="'.$type.$location.'">{/if} ';
-			break;
+            case 'SAVE':
+                $view = ($_REQUEST['action'] == 'EditView') ? 'EditView' : (($view == 'EditView') ? 'EditView' : $view);
+                $output = '{if $bean->aclAccess("save") || $isDuplicate}<input title="{$APP.LBL_SAVE_BUTTON_TITLE}" accessKey="{$APP.LBL_SAVE_BUTTON_KEY}" class="button primary" onclick="' . $js_form . ' {if $isDuplicate}_form.return_id.value=\'\'; {/if}_form.action.value=\'Save\'; if(check_form(\'' . $view . '\'))SUGAR.ajaxUI.submitForm(_form);return false;" type="submit" name="button" value="{$APP.LBL_SAVE_BUTTON_LABEL}" id="' . $type . $location . '">{/if} ';
+                break;
 
-			case "SUBPANELSAVE":
-                if($view == 'QuickCreate' || (isset($_REQUEST['target_action']) && strtolower($_REQUEST['target_action']) == 'quickcreate')) $view =  "form_SubpanelQuickCreate_{$module}";
-                $output = '{if $bean->aclAccess("save")}<input title="{$APP.LBL_SAVE_BUTTON_TITLE}"  class="button" onclick="'.$js_form.' _form.action.value=\'Save\';if(check_form(\''.$view.'\'))return SUGAR.subpanelUtils.inlineSave(_form.id, \'' . $params['module'] . '_subpanel_save_button\');return false;" type="submit" name="' . $params['module'] . '_subpanel_save_button" id="' . $params['module'] . '_subpanel_save_button" value="{$APP.LBL_SAVE_BUTTON_LABEL}">{/if} ';
+            case 'SUBPANELSAVE':
+                if ($view == 'QuickCreate' || (isset($_REQUEST['target_action']) && strtolower($_REQUEST['target_action']) == 'quickcreate')) {
+                    $view = "form_SubpanelQuickCreate_{$module}";
+                }
+                $output = '{if $bean->aclAccess("save")}<input title="{$APP.LBL_SAVE_BUTTON_TITLE}"  class="button" onclick="' . $js_form . ' _form.action.value=\'Save\';if(check_form(\'' . $view . '\'))return SUGAR.subpanelUtils.inlineSave(_form.id, \'' . $params['module'] . '_subpanel_save_button\');return false;" type="submit" name="' . $params['module'] . '_subpanel_save_button" id="' . $params['module'] . '_subpanel_save_button" value="{$APP.LBL_SAVE_BUTTON_LABEL}">{/if} ';
 
-            break;
-			case "SUBPANELCANCEL":
+                break;
+            case 'SUBPANELCANCEL':
                 $output = '<input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" class="button" onclick="return SUGAR.subpanelUtils.cancelCreate($(this).attr(\'id\'));return false;" type="submit" name="' . $params['module'] . '_subpanel_cancel_button" id="' . $params['module'] . '_subpanel_cancel_button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}"> ';
 
-            break;
-		    case "SUBPANELFULLFORM":
-                $output = '<input title="{$APP.LBL_FULL_FORM_BUTTON_TITLE}" class="button" onclick="'.$js_form.' _form.return_action.value=\'DetailView\'; _form.action.value=\'EditView\'; if(typeof(_form.to_pdf)!=\'undefined\') _form.to_pdf.value=\'0\';" type="submit" name="' . $params['module'] . '_subpanel_full_form_button" id="' . $params['module'] . '_subpanel_full_form_button" value="{$APP.LBL_FULL_FORM_BUTTON_LABEL}"> ';
+                break;
+            case 'SUBPANELFULLFORM':
+                $output = '<input title="{$APP.LBL_FULL_FORM_BUTTON_TITLE}" class="button" onclick="' . $js_form . ' _form.return_action.value=\'DetailView\'; _form.action.value=\'EditView\'; if(typeof(_form.to_pdf)!=\'undefined\') _form.to_pdf.value=\'0\';" type="submit" name="' . $params['module'] . '_subpanel_full_form_button" id="' . $params['module'] . '_subpanel_full_form_button" value="{$APP.LBL_FULL_FORM_BUTTON_LABEL}"> ';
                 $output .= '<input type="hidden" name="full_form" value="full_form">';
-            break;
-            case "DCMENUCANCEL":
+                break;
+            case 'DCMENUCANCEL':
                 $output = '<input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick="javascript:lastLoadedMenu=undefined;DCMenu.closeOverlay();return false;" type="submit" name="' . $params['module'] . '_dcmenu_cancel_button" id="' . $params['module'] . '_dcmenu_cancel_button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}"> ';
-            break;
-            case "DCMENUSAVE":
-                if ($view == 'QuickCreate')
-                {
+                break;
+            case 'DCMENUSAVE':
+                if ($view == 'QuickCreate') {
                     $view = "form_DCQuickCreate_{$module}";
-                }
-                else if ($view == 'EditView')
-                {
+                } elseif ($view == 'EditView') {
                     $view = "form_DCEditView_{$module}";
                 }
-                $output = '{if $bean->aclAccess("save")}<input title="{$APP.LBL_SAVE_BUTTON_TITLE}" accessKey="{$APP.LBL_SAVE_BUTTON_KEY}" class="button primary" onclick="'.$js_form.' _form.action.value=\'Save\';if(check_form(\''.$view.'\'))return DCMenu.save(_form.id, \'' . $params['module'] . '_subpanel_save_button\');return false;" type="submit" name="' . $params['module'] . '_dcmenu_save_button" id="' . $params['module'] . '_dcmenu_save_button" value="{$APP.LBL_SAVE_BUTTON_LABEL}">{/if} ';
-            break;
-            case "DCMENUFULLFORM":
-                $output = '<input title="{$APP.LBL_FULL_FORM_BUTTON_TITLE}" accessKey="{$APP.LBL_FULL_FORM_BUTTON_KEY}" class="button" onclick="'.$js_form.' _form.return_action.value=\'DetailView\'; _form.action.value=\'EditView\'; _form.return_module.value=\'' . $params['module'] . '\';_form.return_id.value=_form.record.value;if(typeof(_form.to_pdf)!=\'undefined\') _form.to_pdf.value=\'0\';SUGAR.ajaxUI.submitForm(_form,null,true);DCMenu.closeOverlay();" type="button" name="' . $params['module'] . '_subpanel_full_form_button" id="' . $params['module'] . '_subpanel_full_form_button" value="{$APP.LBL_FULL_FORM_BUTTON_LABEL}"> ';
+                $output = '{if $bean->aclAccess("save")}<input title="{$APP.LBL_SAVE_BUTTON_TITLE}" accessKey="{$APP.LBL_SAVE_BUTTON_KEY}" class="button primary" onclick="' . $js_form . ' _form.action.value=\'Save\';if(check_form(\'' . $view . '\'))return DCMenu.save(_form.id, \'' . $params['module'] . '_subpanel_save_button\');return false;" type="submit" name="' . $params['module'] . '_dcmenu_save_button" id="' . $params['module'] . '_dcmenu_save_button" value="{$APP.LBL_SAVE_BUTTON_LABEL}">{/if} ';
+                break;
+            case 'DCMENUFULLFORM':
+                $output = '<input title="{$APP.LBL_FULL_FORM_BUTTON_TITLE}" accessKey="{$APP.LBL_FULL_FORM_BUTTON_KEY}" class="button" onclick="' . $js_form . ' _form.return_action.value=\'DetailView\'; _form.action.value=\'EditView\'; _form.return_module.value=\'' . $params['module'] . '\';_form.return_id.value=_form.record.value;if(typeof(_form.to_pdf)!=\'undefined\') _form.to_pdf.value=\'0\';SUGAR.ajaxUI.submitForm(_form,null,true);DCMenu.closeOverlay();" type="button" name="' . $params['module'] . '_subpanel_full_form_button" id="' . $params['module'] . '_subpanel_full_form_button" value="{$APP.LBL_FULL_FORM_BUTTON_LABEL}"> ';
                 $output .= '<input type="hidden" name="full_form" value="full_form">';
                 $output .= '<input type="hidden" name="is_admin" value="">';
-            break;
-			case "POPUPSAVE":
-				$view = ($view == 'QuickCreate') ? "form_QuickCreate_{$module}" : $view;
-				$output = '{if $bean->aclAccess("save")}<input title="{$APP.LBL_SAVE_BUTTON_TITLE}" accessKey="{$APP.LBL_SAVE_BUTTON_KEY}" '
-					 . 'class="button primary" onclick="'.$js_form.' _form.action.value=\'Popup\';'
-					 . 'return check_form(\''.$view.'\')" type="submit" name="' . $params['module']
-					 . '_popupcreate_save_button" id="' . $params['module']
-					 . '_popupcreate_save_button" value="{$APP.LBL_SAVE_BUTTON_LABEL}">{/if} ';
-            break;
-			case "POPUPCANCEL":
+                break;
+            case 'POPUPSAVE':
+                $view = ($view == 'QuickCreate') ? "form_QuickCreate_{$module}" : $view;
+                $output = '{if $bean->aclAccess("save")}<input title="{$APP.LBL_SAVE_BUTTON_TITLE}" accessKey="{$APP.LBL_SAVE_BUTTON_KEY}" '
+                    . 'class="button primary" onclick="' . $js_form . ' _form.action.value=\'Popup\';'
+                    . 'return check_form(\'' . $view . '\')" type="submit" name="' . $params['module']
+                    . '_popupcreate_save_button" id="' . $params['module']
+                    . '_popupcreate_save_button" value="{$APP.LBL_SAVE_BUTTON_LABEL}">{/if} ';
+                break;
+            case 'POPUPCANCEL':
                 $output = '<input title="{$APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{$APP.LBL_CANCEL_BUTTON_KEY}" '
-					 . 'class="button" onclick="toggleDisplay(\'addform\');return false;" '
-					 . 'name="' . $params['module'] . '_popup_cancel_button" type="submit"'
-					 . 'id="' . $params['module'] . '_popup_cancel_button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}"> ';
-            break;
-			case "AUDIT":
-	            $popup_request_data = array(
-			        'call_back_function' => 'set_return',
-			        'form_name' => 'EditView',
-			        'field_to_name_array' => array(),
-			    );
-	            $json = getJSONobj();
+                    . 'class="button" onclick="toggleDisplay(\'addform\');return false;" '
+                    . 'name="' . $params['module'] . '_popup_cancel_button" type="submit"'
+                    . 'id="' . $params['module'] . '_popup_cancel_button" value="{$APP.LBL_CANCEL_BUTTON_LABEL}"> ';
+                break;
+            case 'AUDIT':
+                $popup_request_data = [
+                    'call_back_function' => 'set_return',
+                    'form_name' => 'EditView',
+                    'field_to_name_array' => [],
+                ];
+                $json = getJSONobj();
 
-	            $encoded_popup_request_data = MetaParser::parseDelimiters($json->encode($popup_request_data));
+                $encoded_popup_request_data = MetaParser::parseDelimiters($json->encode($popup_request_data));
                 $audit_link = '<input id="btn_view_change_log" title="{$APP.LNK_VIEW_CHANGE_LOG}" class="button" onclick=\'open_popup("Audit", "600", "400", "&record={$fields.id.value}&module_name=' . $params['module'] . '", true, false, ' . $encoded_popup_request_data . '); return false;\' type="button" value="{$APP.LNK_VIEW_CHANGE_LOG}">';
-                $output = '{if $bean->aclAccess("detail")}{if !empty($fields.id.value) && $isAuditEnabled}'.$audit_link.'{/if}{/if}';
-            break;
+                $output = '{if $bean->aclAccess("detail")}{if !empty($fields.id.value) && $isAuditEnabled}' . $audit_link . '{/if}{/if}';
+                break;
 
-			//Button for the Connector intergration wizard
-			case "CONNECTOR":
-				require_once('include/connectors/utils/ConnectorUtils.php');
-				$modules_sources = ConnectorUtils::getDisplayConfig();
-				if(!is_null($modules_sources) && !empty($modules_sources))
-				{
-					foreach($modules_sources as $mod=>$entry) {
-					    if($mod == $module && !empty($entry)) {
-					    	foreach($entry as $source_id) {
-					    		$source = SourceFactory::getSource($source_id);
-					    		if($source->isEnabledInWizard()) {
-					    			$output = '<input title="{$APP.LBL_MERGE_CONNECTORS}" type="button" class="button" onClick="document.location=\'index.php?module=Connectors&action=Step1&record={$fields.id.value}&merge_module={$module}\'" name="merge_connector" value="{$APP.LBL_MERGE_CONNECTORS}">';
-                                    if(isset($params['appendTo'])) {
+                //Button for the Connector intergration wizard
+            case 'CONNECTOR':
+                require_once 'include/connectors/utils/ConnectorUtils.php';
+                $modules_sources = ConnectorUtils::getDisplayConfig();
+                if (!is_null($modules_sources) && !empty($modules_sources)) {
+                    foreach ($modules_sources as $mod => $entry) {
+                        if ($mod == $module && !empty($entry)) {
+                            foreach ($entry as $source_id) {
+                                $source = SourceFactory::getSource($source_id);
+                                if ($source->isEnabledInWizard()) {
+                                    $output = '<input title="{$APP.LBL_MERGE_CONNECTORS}" type="button" class="button" onClick="document.location=\'index.php?module=Connectors&action=Step1&record={$fields.id.value}&merge_module={$module}\'" name="merge_connector" value="{$APP.LBL_MERGE_CONNECTORS}">';
+                                    if (isset($params['appendTo'])) {
                                         $smarty->append($params['appendTo'], $output);
                                         return;
                                     }
                                     return $output;
-					    		}
-					    	}
-					    }
-					}
-				}
-				return '';
-            case "PDFVIEW":
-                $output='{sugar_button module="$module" id="REALPDFVIEW" view="$view" form_id="formDetailView" record=$fields.id.value}';
+                                }
+                            }
+                        }
+                    }
+                }
+                return '';
+            case 'PDFVIEW':
+                $output = '{sugar_button module="$module" id="REALPDFVIEW" view="$view" form_id="formDetailView" record=$fields.id.value}';
                 break;
-            case "REALPDFVIEW":
-                if(empty($params['record'])) {
-                    $smarty->trigger_error("sugar_button: missing required param (record)");
+            case 'REALPDFVIEW':
+                if (empty($params['record'])) {
+                    $smarty->trigger_error('sugar_button: missing required param (record)');
                 }
                 $record = $params['record'];
 
                 require_once 'modules/PdfManager/PdfManagerHelper.php';
                 $pdfManagerList = PdfManagerHelper::getPublishedTemplatesForModule($module);
                 //quote legacy templates
-                if($module == "Quotes") {
+                if ($module == 'Quotes') {
                     require_once 'modules/Quotes/Layouts.php';
                     $tplLayouts = get_layouts();
                 }
 
                 $output = '';
                 if (!empty($pdfManagerList) || !empty($tplLayouts)) {
-                    if(SugarThemeRegistry::current()->name != "Classic") {
-                        if ($enable_action_menu)
-                        $output = '
+                    if (SugarThemeRegistry::current()->name != 'Classic') {
+                        if ($enable_action_menu) {
+                            $output = '
                             <input id="pdfview_button" value="' . translate('LBL_PDF_VIEW') . '" type="button" class="button"  />';
-                            $pdfItems = array();
-                            if (!empty($pdfManagerList)) {
-                            foreach($pdfManagerList as $pdfTemplate){
+                        }
+                        $pdfItems = [];
+                        if (!empty($pdfManagerList)) {
+                            foreach ($pdfManagerList as $pdfTemplate) {
                                 if (!$enable_action_menu) {
-                                    $urlParams[] = array(
+                                    $urlParams[] = [
                                         'module' => $module,
                                         'record' => $record,
                                         'action' => 'sugarpdf',
                                         'sugarpdf' => 'pdfmanager',
                                         'pdf_template_id' => $pdfTemplate->id,
                                         'name' => $pdfTemplate->name,
-                                    );
+                                    ];
                                 } else {
-                                    $urlParams = array(
+                                    $urlParams = [
                                         'module' => $module,
                                         'record' => $record,
                                         'action' => 'sugarpdf',
                                         'sugarpdf' => 'pdfmanager',
                                         'pdf_template_id' => $pdfTemplate->id,
 
-                                    );
-                                    $pdfItems[] = array(    'html'  =>  '<a id="'.$pdfTemplate->name.'_pdfview" href="index.php?' . http_build_query($urlParams, '', '&') . '">' . $pdfTemplate->name . '</a>',
-                                                            'items' => array(),
-                                                        );
+                                    ];
+                                    $pdfItems[] = ['html' => '<a id="' . $pdfTemplate->name . '_pdfview" href="index.php?' . http_build_query($urlParams, '', '&') . '">' . $pdfTemplate->name . '</a>',
+                                        'items' => [],
+                                    ];
                                 }
                             }
-                            }
-                            //quote legacy templates
-                            if($module == "Quotes") {
-                                foreach($tplLayouts as $sugarpdf=>$path) {
-                                    if (!$enable_action_menu) {
-                                        $urlParams[] = array(
-                                            'module' => $module,
-                                            'record' => $record,
-                                            'action' => 'sugarpdf',
-                                            'sugarpdf' => $sugarpdf,
-                                            'email_action' => '',
-                                            'name' => $path,
-                                        );
-                                    } else {
-                                        $urlParams = array(
-                                            'module' => $module,
-                                            'record' => $record,
-                                            'action' => 'sugarpdf',
-                                            'sugarpdf' => $sugarpdf,
-                                            'email_action' => '',
+                        }
+                        //quote legacy templates
+                        if ($module == 'Quotes') {
+                            foreach ($tplLayouts as $sugarpdf => $path) {
+                                if (!$enable_action_menu) {
+                                    $urlParams[] = [
+                                        'module' => $module,
+                                        'record' => $record,
+                                        'action' => 'sugarpdf',
+                                        'sugarpdf' => $sugarpdf,
+                                        'email_action' => '',
+                                        'name' => $path,
+                                    ];
+                                } else {
+                                    $urlParams = [
+                                        'module' => $module,
+                                        'record' => $record,
+                                        'action' => 'sugarpdf',
+                                        'sugarpdf' => $sugarpdf,
+                                        'email_action' => '',
 
-                                        );
-                                        $pdfItems[] = array(    'html'  =>  '<a href="index.php?' . http_build_query($urlParams, '', '&') . '">' . $GLOBALS['app_strings']['LBL_EXISTING'].'_'.$path . '</a>',
-                                                                'items' => array(),
-                                                            );
-                                    }
+                                    ];
+                                    $pdfItems[] = ['html' => '<a href="index.php?' . http_build_query($urlParams, '', '&') . '">' . $GLOBALS['app_strings']['LBL_EXISTING'] . '_' . $path . '</a>',
+                                        'items' => [],
+                                    ];
                                 }
                             }
+                        }
 
                         sort($pdfItems);
 
@@ -527,302 +526,298 @@ function smarty_function_sugar_button($params, $smarty)
                             if (!empty($urlParams)) {
                                 $output .= '<ul class="clickMenu fancymenu">';
                                 $output .= '<li class="sugar_action_button">';
-                                $output .= '<a>'.translate('LBL_PDF_VIEW').'</a>';
+                                $output .= '<a>' . translate('LBL_PDF_VIEW') . '</a>';
                                 $output .= '<ul class="subnav" style="display: none;">';
                                 foreach ($urlParams as $tplButton) {
                                     if (isset($tplButton['pdf_template_id'])) {
-                                        $parentLocation = 'index.php?module='.$module.'&record='.$tplButton['record'].'&action='.$tplButton['action'].'&sugarpdf='.$tplButton['sugarpdf'].'&pdf_template_id='.$tplButton['pdf_template_id'];
-                                        $output .= '<li><a id="'.$tplButton['name'].'_pdfview" '. 'href="'.$parentLocation.'">'.$tplButton['name'].'</a></li>';
+                                        $parentLocation = 'index.php?module=' . $module . '&record=' . $tplButton['record'] . '&action=' . $tplButton['action'] . '&sugarpdf=' . $tplButton['sugarpdf'] . '&pdf_template_id=' . $tplButton['pdf_template_id'];
+                                        $output .= '<li><a id="' . $tplButton['name'] . '_pdfview" ' . 'href="' . $parentLocation . '">' . $tplButton['name'] . '</a></li>';
                                     } else {
                                         // legacy templates
-                                        $parentLocation = 'index.php?module='.$module.'&record='.$tplButton['record'].'&action='.$tplButton['action'].'&sugarpdf='.$tplButton['sugarpdf'].'&email_action='.$tplButton['email_action'];
-                                        $output .= '<li><a id="'.$tplButton['name'].'_pdfview" '. 'href="'.$parentLocation.'">'.$GLOBALS['app_strings']['LBL_EXISTING'].'_'.$tplButton['name'].'</a></li>';
+                                        $parentLocation = 'index.php?module=' . $module . '&record=' . $tplButton['record'] . '&action=' . $tplButton['action'] . '&sugarpdf=' . $tplButton['sugarpdf'] . '&email_action=' . $tplButton['email_action'];
+                                        $output .= '<li><a id="' . $tplButton['name'] . '_pdfview" ' . 'href="' . $parentLocation . '">' . $GLOBALS['app_strings']['LBL_EXISTING'] . '_' . $tplButton['name'] . '</a></li>';
                                     }
                                 }
                                 $output .= '</ul><span class="ab"></span></li></ul>';
                             }
                         } else {
-                            require_once('include/SugarSmarty/plugins/function.sugar_menu.php');
-                            $output .= smarty_function_sugar_menu(array(    'id'                    => "pdfview_action_menu",
-                                                                            'items'                 => $pdfItems,
-                                                                            'htmlOptions'           => array( 'class' => 'subnav-sub',),
-                                                                            'itemOptions'           => array(),
-                                                                            'submenuHtmlOptions'    => array(),
-                                                                        )
-                                                                    , $smarty);
+                            require_once 'include/SugarSmarty/plugins/function.sugar_menu.php';
+                            $output .= smarty_function_sugar_menu(['id' => 'pdfview_action_menu',
+                                'items' => $pdfItems,
+                                'htmlOptions' => ['class' => 'subnav-sub',],
+                                'itemOptions' => [],
+                                'submenuHtmlOptions' => [],
+                            ], $smarty);
                         }
                     } else {
                         $output = '
                             <script type="text/javascript">
                                 function display_pdf_list(el) {
                                     var menu = \'';
-                                if (!empty($pdfManagerList)) {
-                                foreach($pdfManagerList as $pdfTemplate){
-                                    $urlParams = array(
-                                        'module' => $module,
-                                        'record' => $record,
-                                        'action' => 'sugarpdf',
-                                        'sugarpdf' => 'pdfmanager',
-                                        'pdf_template_id' => $pdfTemplate->id,
+                        if (!empty($pdfManagerList)) {
+                            foreach ($pdfManagerList as $pdfTemplate) {
+                                $urlParams = [
+                                    'module' => $module,
+                                    'record' => $record,
+                                    'action' => 'sugarpdf',
+                                    'sugarpdf' => 'pdfmanager',
+                                    'pdf_template_id' => $pdfTemplate->id,
 
-                                    );
-                                    $output .= '<a style="width: 150px" class="menuItem" onmouseover="hiliteItem(this,\\\'yes\\\');" onmouseout="unhiliteItem(this);" onclick="" href="index.php?' . http_build_query($urlParams, '', '&') . '">' . $pdfTemplate->name . '</a>' ;
-                                }
-                                }
+                                ];
+                                $output .= '<a style="width: 150px" class="menuItem" onmouseover="hiliteItem(this,\\\'yes\\\');" onmouseout="unhiliteItem(this);" onclick="" href="index.php?' . http_build_query($urlParams, '', '&') . '">' . $pdfTemplate->name . '</a>';
+                            }
+                        }
 
-                                //quote legacy templates
-                                if($module == "Quotes") {
-                                    require_once 'modules/Quotes/Layouts.php';
-                                    $tplLayouts = get_layouts();
-                                    foreach($tplLayouts as $sugarpdf=>$path) {
-                                        $urlParams = array(
-                                            'module' => $module,
-                                            'record' => $record,
-                                            'action' => 'sugarpdf',
-                                            'sugarpdf' => $sugarpdf,
-                                            'email_action' => '',
-                                        );
-                                        $output .= '<a style="width: 150px" class="menuItem" onmouseover="hiliteItem(this,\\\'yes\\\');" onmouseout="unhiliteItem(this);" onclick="" href="index.php?' . http_build_query($urlParams, '', '&') . '">' . $path . '</a>' ;
-                                    }
-                                }
+                        //quote legacy templates
+                        if ($module == 'Quotes') {
+                            require_once 'modules/Quotes/Layouts.php';
+                            $tplLayouts = get_layouts();
+                            foreach ($tplLayouts as $sugarpdf => $path) {
+                                $urlParams = [
+                                    'module' => $module,
+                                    'record' => $record,
+                                    'action' => 'sugarpdf',
+                                    'sugarpdf' => $sugarpdf,
+                                    'email_action' => '',
+                                ];
+                                $output .= '<a style="width: 150px" class="menuItem" onmouseover="hiliteItem(this,\\\'yes\\\');" onmouseout="unhiliteItem(this);" onclick="" href="index.php?' . http_build_query($urlParams, '', '&') . '">' . $path . '</a>';
+                            }
+                        }
 
-                                $output .= '\';
+                        $output .= '\';
                                 SUGAR.util.showHelpTips(el,menu);
                                 }
                             </script>
                             <a onclick="display_pdf_list(this);" />' . translate('LBL_PDF_VIEW') . '</a>
                           ';
-                        }
                     }
+                }
                 break;
-            case "PDFEMAIL":
-                $output='{sugar_button module="$module" id="REALPDFEMAIL" view="$view" form_id="formDetailView" record=$fields.id.value}';
+            case 'PDFEMAIL':
+                $output = '{sugar_button module="$module" id="REALPDFEMAIL" view="$view" form_id="formDetailView" record=$fields.id.value}';
                 break;
-            case "REALPDFEMAIL":
+            case 'REALPDFEMAIL':
                 $output = '';
 
                 global $current_user, $sugar_config;
                 $userPref = $current_user->getPreference('email_link_type');
                 $defaultPref = $sugar_config['email_default_client'];
-                if($userPref != '') {
-                  $client = $userPref;
+                if ($userPref != '') {
+                    $client = $userPref;
                 } else {
-                  $client = $defaultPref;
+                    $client = $defaultPref;
                 }
-                if($client == 'sugar') {
-                if(empty($params['record'])) {
-                    $smarty->trigger_error("sugar_button: missing required param (record)");
-                }
-                $record = $params['record'];
+                if ($client == 'sugar') {
+                    if (empty($params['record'])) {
+                        $smarty->trigger_error('sugar_button: missing required param (record)');
+                    }
+                    $record = $params['record'];
 
-                require_once 'modules/PdfManager/PdfManagerHelper.php';
-                $pdfManagerList = PdfManagerHelper::getPublishedTemplatesForModule($module);
+                    require_once 'modules/PdfManager/PdfManagerHelper.php';
+                    $pdfManagerList = PdfManagerHelper::getPublishedTemplatesForModule($module);
                     //quote legacy templates
-                    if($module == "Quotes") {
+                    if ($module == 'Quotes') {
                         require_once 'modules/Quotes/Layouts.php';
                         $tplLayouts = get_layouts();
                     }
 
                     if (!empty($pdfManagerList) || !empty($tplLayouts)) {
-                    if(SugarThemeRegistry::current()->name != "Classic") {
-                        if ($enable_action_menu)
-                        $output = '
+                        if (SugarThemeRegistry::current()->name != 'Classic') {
+                            if ($enable_action_menu) {
+                                $output = '
                             <input id="pdfemail_button" value="' . translate('LBL_PDF_EMAIL') . '" type="button" class="button"  />';
-                            $pdfItems = array();
-                                if (!empty($pdfManagerList)) {
-                            foreach($pdfManagerList as $pdfTemplate){
-                                if (!$enable_action_menu) {
-                                    $urlParams[] = array(
-                                        'module' => $module,
-                                        'record' => $record,
-                                        'action' => 'sugarpdf',
-                                        'sugarpdf' => 'pdfmanager',
-                                        'pdf_template_id' => $pdfTemplate->id,
-                                        'to_email' => "1",
-                                        'name' => $pdfTemplate->name,
-                                    );
-                                } else {
-                                    $urlParams = array(
-                                        'module' => $module,
-                                        'record' => $record,
-                                        'action' => 'sugarpdf',
-                                        'sugarpdf' => 'pdfmanager',
-                                        'pdf_template_id' => $pdfTemplate->id,
-                                        'to_email' => "1",
-                                    );
+                            }
+                            $pdfItems = [];
+                            if (!empty($pdfManagerList)) {
+                                foreach ($pdfManagerList as $pdfTemplate) {
+                                    if (!$enable_action_menu) {
+                                        $urlParams[] = [
+                                            'module' => $module,
+                                            'record' => $record,
+                                            'action' => 'sugarpdf',
+                                            'sugarpdf' => 'pdfmanager',
+                                            'pdf_template_id' => $pdfTemplate->id,
+                                            'to_email' => '1',
+                                            'name' => $pdfTemplate->name,
+                                        ];
+                                    } else {
+                                        $urlParams = [
+                                            'module' => $module,
+                                            'record' => $record,
+                                            'action' => 'sugarpdf',
+                                            'sugarpdf' => 'pdfmanager',
+                                            'pdf_template_id' => $pdfTemplate->id,
+                                            'to_email' => '1',
+                                        ];
 
-                                    $pdfItems[] = array(    'html'  =>  '<a id="'.$pdfTemplate->name.'_pdfemail" href="index.php?' . http_build_query($urlParams, '', '&') . '">' . $pdfTemplate->name . '</a>',
-                                                            'items' => array(),
-                                                        );
+                                        $pdfItems[] = ['html' => '<a id="' . $pdfTemplate->name . '_pdfemail" href="index.php?' . http_build_query($urlParams, '', '&') . '">' . $pdfTemplate->name . '</a>',
+                                            'items' => [],
+                                        ];
+                                    }
                                 }
                             }
-                                }
 
-                                //quote legacy templates
-                                if($module == "Quotes") {
-                                    foreach($tplLayouts as $sugarpdf=>$path) {
-                                        if (!$enable_action_menu) {
-                                            $urlParams[] = array(
-                                                'module' => $module,
-                                                'record' => $record,
-                                                'action' => 'sugarpdf',
-                                                'sugarpdf' => $sugarpdf,
-                                                'email_action' => 'EmailLayout',
-                                                'name' => $path,
-                                            );
+                            //quote legacy templates
+                            if ($module == 'Quotes') {
+                                foreach ($tplLayouts as $sugarpdf => $path) {
+                                    if (!$enable_action_menu) {
+                                        $urlParams[] = [
+                                            'module' => $module,
+                                            'record' => $record,
+                                            'action' => 'sugarpdf',
+                                            'sugarpdf' => $sugarpdf,
+                                            'email_action' => 'EmailLayout',
+                                            'name' => $path,
+                                        ];
+                                    } else {
+                                        $urlParams = [
+                                            'module' => $module,
+                                            'record' => $record,
+                                            'action' => 'sugarpdf',
+                                            'sugarpdf' => $sugarpdf,
+                                            'email_action' => 'EmailLayout',
+                                        ];
+                                        $pdfItems[] = ['html' => '<a href="index.php?' . http_build_query($urlParams, '', '&') . '">' . $GLOBALS['app_strings']['LBL_EXISTING'] . '_' . $path . '</a>',
+                                            'items' => [],
+                                        ];
+                                    }
+                                }
+                            }
+
+                            sort($pdfItems);
+
+                            if (!$enable_action_menu) {
+                                if (!empty($urlParams)) {
+                                    $output .= '<ul class="clickMenu fancymenu">';
+                                    $output .= '<li class="sugar_action_button">';
+                                    $output .= '<a>' . translate('LBL_PDF_EMAIL') . '</a>';
+                                    $output .= '<ul class="subnav" style="display: none;">';
+                                    foreach ($urlParams as $tplButton) {
+                                        if (isset($tplButton['pdf_template_id'])) {
+                                            $parentLocation = 'index.php?module=' . $module . '&record=' . $tplButton['record'] . '&action=' . $tplButton['action'] . '&sugarpdf=' . $tplButton['sugarpdf'] . '&pdf_template_id=' . $tplButton['pdf_template_id'] . '&to_email=' . $tplButton['to_email'];
+                                            $output .= '<li><a id="' . $tplButton['name'] . '_pdfemail" ' . 'href="' . $parentLocation . '">' . $tplButton['name'] . '</a></li>';
                                         } else {
-                                            $urlParams = array(
-                                                'module' => $module,
-                                                'record' => $record,
-                                                'action' => 'sugarpdf',
-                                                'sugarpdf' => $sugarpdf,
-                                                'email_action' => 'EmailLayout',
-                                            );
-                                            $pdfItems[] = array(    'html'  =>  '<a href="index.php?' . http_build_query($urlParams, '', '&') . '">' . $GLOBALS['app_strings']['LBL_EXISTING'].'_'.$path . '</a>',
-                                                                    'items' => array(),
-                                                                );
+                                            // legacy templates
+                                            $parentLocation = 'index.php?module=' . $module . '&record=' . $tplButton['record'] . '&action=' . $tplButton['action'] . '&sugarpdf=' . $tplButton['sugarpdf'] . '&email_action=' . $tplButton['email_action'];
+                                            $output .= '<li><a id="' . $tplButton['name'] . '_pdfemail" ' . 'href="' . $parentLocation . '">' . $GLOBALS['app_strings']['LBL_EXISTING'] . '_' . $tplButton['name'] . '</a></li>';
                                         }
                                     }
+                                    $output .= '</ul><span class="ab"></span></li></ul>';
                                 }
-
-                        sort($pdfItems);
-
-                        if (!$enable_action_menu) {
-                            if (!empty($urlParams)) {
-                                $output .= '<ul class="clickMenu fancymenu">';
-                                $output .= '<li class="sugar_action_button">';
-                                $output .= '<a>'.translate('LBL_PDF_EMAIL').'</a>';
-                                $output .= '<ul class="subnav" style="display: none;">';
-                                foreach ($urlParams as $tplButton) {
-                                    if (isset($tplButton['pdf_template_id'])) {
-                                        $parentLocation = 'index.php?module='.$module.'&record='.$tplButton['record'].'&action='.$tplButton['action'].'&sugarpdf='.$tplButton['sugarpdf'].'&pdf_template_id='.$tplButton['pdf_template_id'].'&to_email='.$tplButton['to_email'];
-                                        $output .= '<li><a id="'.$tplButton['name'].'_pdfemail" '. 'href="'.$parentLocation.'">'.$tplButton['name'].'</a></li>';
-                                    } else {
-                                        // legacy templates
-                                        $parentLocation = 'index.php?module='.$module.'&record='.$tplButton['record'].'&action='.$tplButton['action'].'&sugarpdf='.$tplButton['sugarpdf'].'&email_action='.$tplButton['email_action'];
-                                        $output .= '<li><a id="'.$tplButton['name'].'_pdfemail" '. 'href="'.$parentLocation.'">'.$GLOBALS['app_strings']['LBL_EXISTING'].'_'.$tplButton['name'].'</a></li>';
-                                    }
-                                }
-                                $output .= '</ul><span class="ab"></span></li></ul>';
+                            } else {
+                                require_once 'include/SugarSmarty/plugins/function.sugar_menu.php';
+                                $output .= smarty_function_sugar_menu(['id' => 'pdfview_action_menu',
+                                    'items' => $pdfItems,
+                                    'htmlOptions' => ['class' => 'subnav-sub',],
+                                    'itemOptions' => [],
+                                    'submenuHtmlOptions' => [],
+                                ], $smarty);
                             }
                         } else {
-                            require_once('include/SugarSmarty/plugins/function.sugar_menu.php');
-                            $output .= smarty_function_sugar_menu(array(    'id'                    => "pdfview_action_menu",
-                                                                            'items'                 => $pdfItems,
-                                                                            'htmlOptions'           => array( 'class' => 'subnav-sub',),
-                                                                            'itemOptions'           => array(),
-                                                                            'submenuHtmlOptions'    => array(),
-                                                                        )
-                                                                    , $smarty);
-                        }
-                    } else {
-                        $output = '
+                            $output = '
                             <script language="javascript">
                                 function display_pdf_email_list(el) {
                                     var menu = \'';
-                                    if (!empty($pdfManagerList)) {
-                                foreach($pdfManagerList as $pdfTemplate){
-                                    $urlParams = array(
+                            if (!empty($pdfManagerList)) {
+                                foreach ($pdfManagerList as $pdfTemplate) {
+                                    $urlParams = [
                                         'module' => $module,
                                         'record' => $record,
                                         'action' => 'sugarpdf',
                                         'sugarpdf' => 'pdfmanager',
                                         'pdf_template_id' => $pdfTemplate->id,
-                                        'to_email' => "1",
+                                        'to_email' => '1',
 
-                                    );
+                                    ];
 
-                                    $output .= '<a style="width: 150px" class="menuItem" onmouseover="hiliteItem(this,\\\'yes\\\');" onmouseout="unhiliteItem(this);" onclick="" href="index.php?' . http_build_query($urlParams, '', '&') . '">' . $pdfTemplate->name . '</a>' ;
+                                    $output .= '<a style="width: 150px" class="menuItem" onmouseover="hiliteItem(this,\\\'yes\\\');" onmouseout="unhiliteItem(this);" onclick="" href="index.php?' . http_build_query($urlParams, '', '&') . '">' . $pdfTemplate->name . '</a>';
                                 }
-                                    }
-                                    //quote legacy templates
-                                    if($module == "Quotes") {
-                                        require_once 'modules/Quotes/Layouts.php';
-                                        $tplLayouts = get_layouts();
-                                        foreach($tplLayouts as $sugarpdf=>$path) {
-                                            $urlParams = array(
-                                                'module' => $module,
-                                                'record' => $record,
-                                                'action' => 'sugarpdf',
-                                                'sugarpdf' => $sugarpdf,
-                                                'email_action' => 'EmailLayout',
+                            }
+                            //quote legacy templates
+                            if ($module == 'Quotes') {
+                                require_once 'modules/Quotes/Layouts.php';
+                                $tplLayouts = get_layouts();
+                                foreach ($tplLayouts as $sugarpdf => $path) {
+                                    $urlParams = [
+                                        'module' => $module,
+                                        'record' => $record,
+                                        'action' => 'sugarpdf',
+                                        'sugarpdf' => $sugarpdf,
+                                        'email_action' => 'EmailLayout',
 
-                                            );
-                                            $output .= '<a style="width: 150px" class="menuItem" onmouseover="hiliteItem(this,\\\'yes\\\');" onmouseout="unhiliteItem(this);" onclick="" href="index.php?' . http_build_query($urlParams, '', '&') . '">' . $sugarpdf . '</a>' ;
-                                        }
-                                    }
+                                    ];
+                                    $output .= '<a style="width: 150px" class="menuItem" onmouseover="hiliteItem(this,\\\'yes\\\');" onmouseout="unhiliteItem(this);" onclick="" href="index.php?' . http_build_query($urlParams, '', '&') . '">' . $sugarpdf . '</a>';
+                                }
+                            }
 
-                                $output .= '\';
+                            $output .= '\';
                                 SUGAR.util.showHelpTips(el,menu);
                                 }
                             </script>
                                 <a onclick="display_pdf_email_list(this);" />' . translate('LBL_PDF_EMAIL') . '</a>
                           ';
+                        }
                     }
-                }
                 }
                 break;
 
-          case 'SHARE':
-
-              // TODO we shouldn't rely on the name field only, but we don't
-              // have this information anywhere and this is BWC code...
-              $shareButton = <<<ENDB
+            case 'SHARE':
+                // TODO we shouldn't rely on the name field only, but we don't
+                // have this information anywhere and this is BWC code...
+                $shareButton = <<<ENDB
 <form>
 <input type="hidden" id="share_button_name" value="{\$fields.name.value}">
 <input title="{\$APP.LBL_SHARE_BUTTON_TITLE}" accessKey="{\$APP.LBL_SHARE_BUTTON_KEY}"
   class="button" onclick="parent.SUGAR.App.bwc.shareRecord('{$params['module']}', '{\$fields.id.value}', this.form.share_button_name.value)" type="button" name="button" value="{\$APP.LBL_SHARE_BUTTON_LABEL}">
 </form>
 ENDB;
-              $output = $shareButton;
-              break;
-   	  } //switch
-      if(isset($params['appendTo'])) {
-          $smarty->append($params['appendTo'], $output);
-          return;
-      }
-      return $output;
-   } else if(is_array($type) && isset($type['sugar_html'])) {
+                $output = $shareButton;
+                break;
+        } //switch
+        if (isset($params['appendTo'])) {
+            $smarty->append($params['appendTo'], $output);
+            return;
+        }
+        return $output;
+    } elseif (is_array($type) && isset($type['sugar_html'])) {
+        $dom_tree = SugarHtml::parseSugarHtml($type['sugar_html']);
+        replaceFormClick($dom_tree, $js_form);
+        $output = SugarHtml::createHtml($dom_tree);
 
-       $dom_tree = SugarHtml::parseSugarHtml($type['sugar_html']);
-       replaceFormClick($dom_tree, $js_form);
-       $output = SugarHtml::createHtml($dom_tree);
+        if (isset($params['appendTo'])) {
+            $smarty->append($params['appendTo'], $output);
+            return;
+        }
+        return $output;
+    } elseif (is_array($type) && isset($type['customCode'])) {
+        $dom_tree = SugarHtml::parseHtmlTag($type['customCode']);
+        $hidden_exists = false;
 
-       if(isset($params['appendTo'])) {
-           $smarty->append($params['appendTo'], $output);
-           return;
-       }
-       return $output;
-   } else if(is_array($type) && isset($type['customCode'])) {
-
-       $dom_tree = SugarHtml::parseHtmlTag($type['customCode']);
-       $hidden_exists = false;
-
-       replaceFormClick($dom_tree, $js_form, $hidden_exists);
-       if($hidden_exists) {
-           //If the customCode contains hidden fields, the extracted hidden fields need to append in the original form
+        replaceFormClick($dom_tree, $js_form, $hidden_exists);
+        if ($hidden_exists) {
+            //If the customCode contains hidden fields, the extracted hidden fields need to append in the original form
             $form = $smarty->getTemplateVars('form');
-           $hidden_fields = $dom_tree;
-           extractHiddenInputs($hidden_fields);
-           if(!isset($form)) {
-               $form = array();
-           }
-           if(!isset($form['hidden'])) {
-               $form['hidden'] = array();
-           }
-           $form['hidden'][] = SugarHtml::createHtml($hidden_fields);
-           $smarty->assign('form', $form);
-       }
-       $output = SugarHtml::createHtml($dom_tree);
+            $hidden_fields = $dom_tree;
+            extractHiddenInputs($hidden_fields);
+            if (!isset($form)) {
+                $form = [];
+            }
+            if (!isset($form['hidden'])) {
+                $form['hidden'] = [];
+            }
+            $form['hidden'][] = SugarHtml::createHtml($hidden_fields);
+            $smarty->assign('form', $form);
+        }
+        $output = SugarHtml::createHtml($dom_tree);
 
-       if(isset($params['appendTo'])) {
-           $smarty->append($params['appendTo'], $output);
-           return;
-       }
-       return $output;
-   }
-
+        if (isset($params['appendTo'])) {
+            $smarty->append($params['appendTo'], $output);
+            return;
+        }
+        return $output;
+    }
 }
+
 /**
  * Bug#51862: Reproduce the JS onclick for upgraded instances
  *
@@ -833,83 +828,83 @@ ENDB;
  *                 $set_submit - whether the replace operation is excuted or not
  *                 $is_hidden_field - where current attributes contains the key "hidden" or not
  */
-function replaceFormClick(&$dom_tree = array(), $js_form = '', &$hidden_field_exists = false) {
+function replaceFormClick(&$dom_tree = [], $js_form = '', &$hidden_field_exists = false)
+{
     $set_submit = false;
     $is_hidden_field = false;
     //if the code is wrapped with the form element, it will escape the operation for JS replacement
-    if(isset($dom_tree['tag']) && $dom_tree['tag'] == 'form')
+    if (isset($dom_tree['tag']) && $dom_tree['tag'] == 'form') {
         return false;
+    }
 
-    if(isset($dom_tree['type']) && $dom_tree['type'] == 'hidden') {
+    if (isset($dom_tree['type']) && $dom_tree['type'] == 'hidden') {
         $is_hidden_field = true;
     }
 
     //Replace the JS syntax where the sugar_button contains the event handler for this.form
-    if(isset($dom_tree['onclick'])) {
-        if(strpos($dom_tree['onclick'], "this.form") !== false) {
-            $dom_tree['onclick'] = str_replace("this.form", "_form", $dom_tree['onclick']);
-            if(substr($dom_tree['onclick'], -1) != ';')
-                $dom_tree['onclick'] .= ";";
+    if (isset($dom_tree['onclick'])) {
+        if (strpos($dom_tree['onclick'], 'this.form') !== false) {
+            $dom_tree['onclick'] = str_replace('this.form', '_form', $dom_tree['onclick']);
+            if (substr($dom_tree['onclick'], -1) != ';') {
+                $dom_tree['onclick'] .= ';';
+            }
             //Onclick handler contains returning a variable, for example it prompts a confirm message.
-            if(strpos($dom_tree['onclick'], "return ") !== false ) {
-                $dom_tree['onclick'] = $js_form.' var _onclick=(function(){ldelim}'.$dom_tree['onclick']."{rdelim}()); if(_onclick!==false) _form.submit();";
-            }
-            else if(strpos($dom_tree['onclick'], "_form.submit()") === false ) {
-                $dom_tree['onclick'] = $js_form.$dom_tree['onclick']."_form.submit();";
-            }
-            else {
-                $dom_tree['onclick'] = $js_form.$dom_tree['onclick'];
+            if (strpos($dom_tree['onclick'], 'return ') !== false) {
+                $dom_tree['onclick'] = $js_form . ' var _onclick=(function(){ldelim}' . $dom_tree['onclick'] . '{rdelim}()); if(_onclick!==false) _form.submit();';
+            } elseif (strpos($dom_tree['onclick'], '_form.submit()') === false) {
+                $dom_tree['onclick'] = $js_form . $dom_tree['onclick'] . '_form.submit();';
+            } else {
+                $dom_tree['onclick'] = $js_form . $dom_tree['onclick'];
             }
 
             $set_submit = true;
         }
     }
-    foreach($dom_tree as $key => $sub_tree) {
-        if(is_array($sub_tree)) {
+    foreach ($dom_tree as $key => $sub_tree) {
+        if (is_array($sub_tree)) {
             [$_submit, $_hidden] = replaceFormClick($dom_tree[$key], $js_form, $hidden_field_exists);
             $set_submit = $set_submit ?: $_submit;
             $is_hidden_field = $is_hidden_field ?: $_hidden;
         }
     }
 
-    if($set_submit && isset($dom_tree['type'])) {
-        $dom_tree['type'] = "button";
+    if ($set_submit && isset($dom_tree['type'])) {
+        $dom_tree['type'] = 'button';
         $set_submit = false;
     }
-    if($is_hidden_field && isset($dom_tree['tag']) && $dom_tree['tag'] == 'input' ) {
+    if ($is_hidden_field && isset($dom_tree['tag']) && $dom_tree['tag'] == 'input') {
         $hidden_field_exists = true;
         $is_hidden_field = false;
     }
 
-    return array($set_submit, $is_hidden_field);
+    return [$set_submit, $is_hidden_field];
 }
 
 /**
  * Bug#51862: Extract hidden field form the original dom structure
  * @param array $dom_tree - Cascade array form generated by SugarHtml::parseHtmlTag
  */
-function extractHiddenInputs(&$dom_tree = array()) {
-    $allow_types = array(
-        'hidden'
-    );
+function extractHiddenInputs(&$dom_tree = [])
+{
+    $allow_types = [
+        'hidden',
+    ];
     //all hidden fields in the form elements must NOT attach in the original form
-    if(isset($dom_tree['tag']) && $dom_tree['tag'] == 'form') {
-        $dom_tree = array();
+    if (isset($dom_tree['tag']) && $dom_tree['tag'] == 'form') {
+        $dom_tree = [];
     }
-    foreach($dom_tree as $key => $sub_tree) {
-        if(is_numeric($key) && isset($sub_tree['tag']) && $sub_tree['tag'] == 'input') {
-            if( !isset($sub_tree['type']) || in_array($sub_tree['type'], $allow_types) === false ) {
+    foreach ($dom_tree as $key => $sub_tree) {
+        if (is_numeric($key) && isset($sub_tree['tag']) && $sub_tree['tag'] == 'input') {
+            if (!isset($sub_tree['type']) || in_array($sub_tree['type'], $allow_types) === false) {
                 unset($dom_tree[$key]);
             }
-        } else if(is_array($sub_tree)) {
+        } elseif (is_array($sub_tree)) {
             extractHiddenInputs($dom_tree[$key]);
         }
     }
-    if(isset($dom_tree['tag']) && $dom_tree['tag'] == 'input') {
-        if( !isset($dom_tree['type']) || in_array($dom_tree['type'], $allow_types) === false ) {
-            $dom_tree = array();
+    if (isset($dom_tree['tag']) && $dom_tree['tag'] == 'input') {
+        if (!isset($dom_tree['type']) || in_array($dom_tree['type'], $allow_types) === false) {
+            $dom_tree = [];
         }
     }
 }
-
-

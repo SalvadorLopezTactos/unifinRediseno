@@ -242,11 +242,11 @@ class PackageManifest
                         continue;
                     }
                     $parts = explode('.', (string) $version);
-                    $countParts = count($parts);
+                    $countParts = safeCount($parts);
                     if ($countParts < 3) {
                         $parts = array_merge($parts, array_fill($countParts, 3 - $countParts, '([0-9]+)'));
                     }
-                    $regexMatches[] = '^'.implode('\.', $parts);
+                    $regexMatches[] = '^' . implode('\.', $parts);
                     $addBuildInVersionCheck = false;
                 }
             } else {

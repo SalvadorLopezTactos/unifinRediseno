@@ -19,6 +19,18 @@ return [
                     [
                         [
                             'view' => [
+                                'type' => 'activity-timeline',
+                                'label' => 'TPL_ACTIVITY_TIMELINE_DASHLET',
+                            ],
+                            'context' => [
+                                'module' => 'Meetings',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
                                 'type' => 'dashablelist',
                                 'label' => 'LBL_MY_SCHEDULED_MEETINGS',
                                 'display_columns' => [

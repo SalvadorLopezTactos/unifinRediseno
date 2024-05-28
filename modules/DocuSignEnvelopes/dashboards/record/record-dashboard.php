@@ -14,6 +14,18 @@ return [
         'dashlets' => [
             [
                 'view' => [
+                    'type' => 'activity-timeline',
+                    'label' => 'TPL_ACTIVITY_TIMELINE_DASHLET',
+                ],
+                'context' => [
+                    'module' => 'DocuSignEnvelopes',
+                ],
+                'width' => 12,
+                'x' => 0,
+                'y' => 0,
+            ],
+            [
+                'view' => [
                     'type' => 'dashablelist',
                     'label' => 'LBL_HOMEPAGE_TITLE',
                     'filter_id' => 'assigned_to_me',

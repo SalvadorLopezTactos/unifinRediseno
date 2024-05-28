@@ -15,55 +15,57 @@
  * PLEASE DO NOT CHANGE THIS CLASS
  * PLACE ANY CUSTOMIZATIONS IN pmse_BpmnEvent
  */
-class pmse_BpmnEvent_sugar extends Basic {
-	var $new_schema = true;
-	var $module_dir = 'pmse_Project/pmse_BpmnEvent';
+class pmse_BpmnEvent_sugar extends Basic
+{
+    public $new_schema = true;
+    public $module_dir = 'pmse_Project/pmse_BpmnEvent';
     public $module_name = 'pmse_BpmnEvent';
-	var $object_name = 'pmse_BpmnEvent';
-	var $table_name = 'pmse_bpmn_event';
-	var $importable = false;
-    var $disable_custom_fields = true;
-        var $id;
-		var $name;
-		var $date_entered;
-		var $date_modified;
-		var $modified_user_id;
-		var $modified_by_name;
-		var $created_by;
-		var $created_by_name;
-		var $description;
-		var $deleted;
-		var $created_by_link;
-		var $modified_user_link;
-		var $activities;
-		var $assigned_user_id;
-		var $assigned_user_name;
-		var $assigned_user_link;
-    var $evn_uid;
-    var $prj_id;
-    var $pro_id;
-    var $evn_type;
-    var $evn_marker;
-    var $evn_is_interrupting;
-    var $evn_attached_to;
-    var $evn_cancel_activity;
-    var $evn_activity_ref;
-    var $evn_wait_for_completion;
-    var $evn_error_name;
-    var $evn_error_code;
-    var $evn_escalation_name;
-    var $evn_escalation_code;
-    var $evn_condition;
-    var $evn_message;
-    var $evn_operation_name;
-    var $evn_operation_implementation;
-    var $evn_time_date;
-    var $evn_time_cycle;
-    var $evn_time_duration;
-    var $evn_behavior;
+    public $object_name = 'pmse_BpmnEvent';
+    public $table_name = 'pmse_bpmn_event';
+    public $importable = false;
+    public $disable_custom_fields = true;
+    public $id;
+    public $name;
+    public $date_entered;
+    public $date_modified;
+    public $modified_user_id;
+    public $modified_by_name;
+    public $created_by;
+    public $created_by_name;
+    public $description;
+    public $deleted;
+    public $created_by_link;
+    public $modified_user_link;
+    public $activities;
+    public $assigned_user_id;
+    public $assigned_user_name;
+    public $assigned_user_link;
+    public $evn_uid;
+    public $prj_id;
+    public $pro_id;
+    public $evn_type;
+    public $evn_marker;
+    public $evn_is_interrupting;
+    public $evn_attached_to;
+    public $evn_cancel_activity;
+    public $evn_activity_ref;
+    public $evn_wait_for_completion;
+    public $evn_error_name;
+    public $evn_error_code;
+    public $evn_escalation_name;
+    public $evn_escalation_code;
+    public $evn_condition;
+    public $evn_message;
+    public $evn_operation_name;
+    public $evn_operation_implementation;
+    public $evn_time_date;
+    public $evn_time_cycle;
+    public $evn_time_duration;
+    public $evn_behavior;
 
 
-	public function __construct(){
-		parent::__construct();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 }

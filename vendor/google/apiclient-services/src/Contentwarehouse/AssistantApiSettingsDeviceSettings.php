@@ -96,14 +96,6 @@ class AssistantApiSettingsDeviceSettings extends \Google\Collection
    * @var bool
    */
   public $faceMatchEnabled;
-  /**
-   * @var bool
-   */
-  public $flAudioCacheEnabled;
-  /**
-   * @var bool
-   */
-  public $flVisualFramesCacheEnabled;
   protected $gcmSettingsType = AssistantApiSettingsGcmSettings::class;
   protected $gcmSettingsDataType = '';
   protected $homeGraphDataType = AssistantApiSettingsHomeGraphData::class;
@@ -208,10 +200,6 @@ class AssistantApiSettingsDeviceSettings extends \Google\Collection
    * @var string
    */
   public $truncatedLocalNetworkId;
-  /**
-   * @var bool
-   */
-  public $trustedVoiceEnabled;
   /**
    * @var string
    */
@@ -554,34 +542,6 @@ class AssistantApiSettingsDeviceSettings extends \Google\Collection
   public function getFaceMatchEnabled()
   {
     return $this->faceMatchEnabled;
-  }
-  /**
-   * @param bool
-   */
-  public function setFlAudioCacheEnabled($flAudioCacheEnabled)
-  {
-    $this->flAudioCacheEnabled = $flAudioCacheEnabled;
-  }
-  /**
-   * @return bool
-   */
-  public function getFlAudioCacheEnabled()
-  {
-    return $this->flAudioCacheEnabled;
-  }
-  /**
-   * @param bool
-   */
-  public function setFlVisualFramesCacheEnabled($flVisualFramesCacheEnabled)
-  {
-    $this->flVisualFramesCacheEnabled = $flVisualFramesCacheEnabled;
-  }
-  /**
-   * @return bool
-   */
-  public function getFlVisualFramesCacheEnabled()
-  {
-    return $this->flVisualFramesCacheEnabled;
   }
   /**
    * @param AssistantApiSettingsGcmSettings
@@ -1114,20 +1074,6 @@ class AssistantApiSettingsDeviceSettings extends \Google\Collection
   public function getTruncatedLocalNetworkId()
   {
     return $this->truncatedLocalNetworkId;
-  }
-  /**
-   * @param bool
-   */
-  public function setTrustedVoiceEnabled($trustedVoiceEnabled)
-  {
-    $this->trustedVoiceEnabled = $trustedVoiceEnabled;
-  }
-  /**
-   * @return bool
-   */
-  public function getTrustedVoiceEnabled()
-  {
-    return $this->trustedVoiceEnabled;
   }
   /**
    * @param string

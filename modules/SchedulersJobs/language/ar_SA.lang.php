@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'قائمة انتظار المهمة',
     'LBL_MODULE_NAME_SINGULAR' => 'قائمة انتظار المهمة',
     'LBL_MODULE_TITLE' => 'قائمة انتظار المهمة: الرئيسية',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'تم إلغاء الحل',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'الحل قيد التشغيل',
     // Errors
-    'ERR_CALL' => "لا يمكن استدعاء الوظيفة: %s",
-    'ERR_CURL' => "بدون CURL - لا يمكن تشغيل وظائف URL",
-    'ERR_FAILED' => "حدث عطل غير متوقع، يرجى التحقق من سجلات PHP وsugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s في %s في السطر %d",
-    'ERR_NOUSER' => "لم يتم تحديد معرّف مستخدم للوظيفة",
-    'ERR_NOSUCHUSER' => "معرّف المستخدم %s غير موجود",
-    'ERR_JOBTYPE' => "نوع الوظيفة غير معروف: %s",
-    'ERR_TIMEOUT' => "فشل مفروض في المهلة",
+    'ERR_CALL' => 'لا يمكن استدعاء الوظيفة: %s',
+    'ERR_CURL' => 'بدون CURL - لا يمكن تشغيل وظائف URL',
+    'ERR_FAILED' => 'حدث عطل غير متوقع، يرجى التحقق من سجلات PHP وsugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s في %s في السطر %d',
+    'ERR_NOUSER' => 'لم يتم تحديد معرّف مستخدم للوظيفة',
+    'ERR_NOSUCHUSER' => 'معرّف المستخدم %s غير موجود',
+    'ERR_JOBTYPE' => 'نوع الوظيفة غير معروف: %s',
+    'ERR_TIMEOUT' => 'فشل مفروض في المهلة',
     'ERR_JOB_FAILED_VERBOSE' => 'فشلت الوظيفة %1$s (%2$s) في تشغيل CRON.',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'يتعذر تحميل تطبيق باستخدام المعرف: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'يتعذر العثور على المعالج للتوجيه %s',
@@ -91,13 +91,13 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'تعليمات تكوين Amazon SQS',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>قسم تكوين Amazon SQS.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>قسم تكوين Amazon SQS.</b></p>
 <ul>
     <li>معرف رمز الوصول: <i>أدخل رقم معرف رمز الوصول لـ Amazon SQS</i></li>
     <li>رمز الوصول السري: <i>أدخل رمز الوصول السري لـ Amazon SQS</i></li>
     <li>المنطقة: <i>أدخل منطقة خادم Amazon SQS</i></li>
     <li>اسم قائمة الانتظار: <i>أدخل اسم قائمة انتظار خادم Amazon SQS</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'تعليمات تكوين AMQP',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>قسم تكوين AMQP.</b></p>
 <ul>
@@ -118,4 +118,4 @@ $mod_strings = array(
     'LBL_REGION' => 'المنطقة',
     'LBL_ACCESS_KEY_SECRET' => 'رمز الوصول السري',
     'LBL_QUEUE_NAME' => 'اسم المهايئ',
-);
+];

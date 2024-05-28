@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Cola de trabajos',
     'LBL_MODULE_NAME_SINGULAR' => 'Cola de trabajos',
     'LBL_MODULE_TITLE' => 'Cola de trabajo: Inicio',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Resolución cancelada',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Resolución en ejecución',
     // Errors
-    'ERR_CALL' => "No se puede llamar a la función: %s",
-    'ERR_CURL' => "No CURL - no se puede ejecutar trabajos de URL",
-    'ERR_FAILED' => "Error inesperado, consulte los registros de PHP y sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s en %s on line %d",
-    'ERR_NOUSER' => "No hay ID de usuario especificado para el trabajo",
-    'ERR_NOSUCHUSER' => "ID %s de usuario no encontrado",
-    'ERR_JOBTYPE' => "Tipo de tarea desconocido: %s",
-    'ERR_TIMEOUT' => "Fracaso forzoso por tiempo de espera",
+    'ERR_CALL' => 'No se puede llamar a la función: %s',
+    'ERR_CURL' => 'No CURL - no se puede ejecutar trabajos de URL',
+    'ERR_FAILED' => 'Error inesperado, consulte los registros de PHP y sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s en %s on line %d',
+    'ERR_NOUSER' => 'No hay ID de usuario especificado para el trabajo',
+    'ERR_NOSUCHUSER' => 'ID %s de usuario no encontrado',
+    'ERR_JOBTYPE' => 'Tipo de tarea desconocido: %s',
+    'ERR_TIMEOUT' => 'Fracaso forzoso por tiempo de espera',
     'ERR_JOB_FAILED_VERBOSE' => 'Tarea %1$s (%2$s) falló en la ejecución del CRON',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'No se puede cargar bean con id.: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'No se puede encontrar controlador para la ruta %s',
@@ -91,14 +91,14 @@ Admite el envío programático de mensajes mediante aplicaciones del servicio we
 </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Ayuda de configuración de Amazon SQS',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Sección de configuración de Amazon SQS.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Sección de configuración de Amazon SQS.</b></p>
 <ul>
 <li>Id. de clave de acceso: <i>escriba su número de id. de la clave de acceso de Amazon SQS</i></li>
 <li>Clave de acceso secreta: <i>escriba su clave de acceso secreta de Amazon SQS</i></li>
 <li>Región: <i>escriba la región del servidor Amazon SQS</i>
 </li>
 <li>Nombre de la cola: <i>ingrese el nombre de cola del servidor Amazon SQS</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'Ayuda de configuración de AMQP',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>Sección de configuración de AMQP.</b></p>
 <ul>
@@ -119,4 +119,4 @@ Admite el envío programático de mensajes mediante aplicaciones del servicio we
     'LBL_REGION' => 'Región',
     'LBL_ACCESS_KEY_SECRET' => 'Clave de acceso secreta',
     'LBL_QUEUE_NAME' => 'Nombre del adaptador',
-);
+];

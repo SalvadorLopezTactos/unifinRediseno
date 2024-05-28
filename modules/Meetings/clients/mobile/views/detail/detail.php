@@ -16,57 +16,56 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$viewdefs['Meetings']['mobile']['view']['detail'] = array(
-    'templateMeta' => array(
+$viewdefs['Meetings']['mobile']['view']['detail'] = [
+    'templateMeta' => [
         'maxColumns' => '1',
-        'widths' => array(
-            array('label' => '10', 'field' => '30'),
-        ),
-    ),
-    'panels' => array(
-        array(
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
-                    'displayParams' => array(
+                    'displayParams' => [
                         'required' => true,
-                        'wireless_edit_only' => true,)),
+                        'wireless_edit_only' => true,]],
                 'date_start',
                 'status',
-                array(
+                [
                     'name' => 'duration',
                     'type' => 'fieldset',
                     'orientation' => 'horizontal',
-                    'related_fields' => array('duration_hours', 'duration_minutes'),
-                    'label' => "LBL_DURATION",
-                    'fields' => array(
-                        array(
+                    'related_fields' => ['duration_hours', 'duration_minutes'],
+                    'label' => 'LBL_DURATION',
+                    'fields' => [
+                        [
                             'name' => 'duration_hours',
-                        ),
-                        array(
-                            'type' => "label",
-                            'default' => "LBL_HOURS_ABBREV",
-                            'css_class' => "label_duration_hours hide",
-                        ),
-                        array(
+                        ],
+                        [
+                            'type' => 'label',
+                            'default' => 'LBL_HOURS_ABBREV',
+                            'css_class' => 'label_duration_hours hide',
+                        ],
+                        [
                             'name' => 'duration_minutes',
-                        ),
-                        array(
-                            'type' => "label",
-                            'default' => "LBL_MINSS_ABBREV",
-                            'css_class' => "label_duration_minutes hide",
+                        ],
+                        [
+                            'type' => 'label',
+                            'default' => 'LBL_MINSS_ABBREV',
+                            'css_class' => 'label_duration_minutes hide',
 
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
                 'description',
                 'tag',
                 'parent_name',
                 'assigned_user_name',
                 'team_name',
-            )
-        )
-    ),
-);
-?>
+            ],
+        ],
+    ],
+];

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:
  ********************************************************************************/
 
@@ -21,21 +20,23 @@ if (!is_admin($current_user)) {
     sugar_die($app_strings['LBL_UNAUTH_ADMIN']);
 }
 
-if(!isset($_REQUEST['record']))
-	sugar_die($mod_strings['ERR_DELETE_RECORD']);
+if (!isset($_REQUEST['record'])) {
+    sugar_die($mod_strings['ERR_DELETE_RECORD']);
+}
 
 $focus = BeanFactory::deleteBean('CustomQueries', $_REQUEST['record']);
 
-if(!$focus)
-	sugar_die($mod_strings['ERR_DELETE_RECORD']);
+if (!$focus) {
+    sugar_die($mod_strings['ERR_DELETE_RECORD']);
+}
 
 //Remove the query_id from any data_sets that are currently using it.
 
 $focus->mark_relationships_deleted($_REQUEST['record']);
 
 $location = 'index.php?' . http_build_query([
-        'module' => $_REQUEST['return_module'],
-        'action' => $_REQUEST['return_action'],
-        'record' => $_REQUEST['return_id'],
+        'module' => $_REQUEST['return_module'] ?? null,
+        'action' => $_REQUEST['return_action'] ?? null,
+        'record' => $_REQUEST['return_id'] ?? null,
     ]);
 header("Location: $location");

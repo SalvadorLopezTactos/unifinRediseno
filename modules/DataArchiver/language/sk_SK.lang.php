@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Archivátor údajov',
     'LBL_MODULE_NAME' => 'Archivátor údajov',
     'LBL_FILTER_DEF_FIELD' => 'Filter',
@@ -28,7 +27,7 @@ $mod_strings = array (
     'LBL_MANAGE_ARCHIVE_JOB_LIST_TITLE' => 'Naplánované archivácie',
     'LBL_MANAGE_ARCHIVE_JOB_IS_NOT_SCHEDULED' => 'Nie sú naplánované žiadne archivácie',
     'LBL_ARCHIVE_FILTER' => 'Nastavenia filtra',
-    "LBL_MANAGE_ARCHIVE_SETUP" => 'Nastaviť archiváciu údajov',
+    'LBL_MANAGE_ARCHIVE_SETUP' => 'Nastaviť archiváciu údajov',
     'LBL_LIST_ARCHIVE_NAME' => 'Názov archivácie',
     'LBL_PERFORM_NOW_BTN' => 'Vykonať teraz',
     'LBL_ARCHIVE_SUCCESS_TITLE' => 'Úspech',
@@ -45,4 +44,4 @@ $mod_strings = array (
         . 'pretože môže ovplyvniť výkon systému. Naozaj chcete túto akciu vykonať teraz?',
 
     'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Archivátor pre modul {{moduleName}} musí mať pole {{fieldName}} nastavené ako filter',
-);
+];

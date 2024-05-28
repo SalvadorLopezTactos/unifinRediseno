@@ -11,41 +11,33 @@
  */
 
 
-
-
-
-
-
-
-
-
-
 /**
  *
  */
-class ProjectResource extends SugarBean {
-	// database table columns
-	var $id;
-	var $date_modified;
-	var $assigned_user_id;
-	var $modified_user_id;
-	var $created_by;
+class ProjectResource extends SugarBean
+{
+    // database table columns
+    public $id;
+    public $date_modified;
+    public $assigned_user_id;
+    public $modified_user_id;
+    public $created_by;
 
-	var $team_id;
-	var $deleted;
+    public $team_id;
+    public $deleted;
 
-	// related information
-	var $modified_by_name;
-	var $created_by_name;
+    // related information
+    public $modified_by_name;
+    public $created_by_name;
 
-	var $team_name;
+    public $team_name;
 
-	var $project_id;
-	var $resource_id;
-	var $resource_type;
-	
-	var $object_name = 'ProjectResource';
-	var $module_dir = 'ProjectResources';
-	var $new_schema = true;
-	var $table_name = 'project_resources';
+    public $project_id;
+    public $resource_id;
+    public $resource_type;
+
+    public $object_name = 'ProjectResource';
+    public $module_dir = 'ProjectResources';
+    public $new_schema = true;
+    public $table_name = 'project_resources';
 }

@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Μάρκετινγκ',
-    'Knowledge Base' => 'Βάση Γνώσεων',
-    'Sales' => 'Πωλήσεις',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Υλικό Μάρκετινγκ',
-    'Product Brochures' => 'Φυλλάδια Προϊόντων',
-    'FAQ' => 'Συχνές Ερωτήσεις',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Μάρκετινγκ',
+        'Knowledge Base' => 'Βάση Γνώσεων',
+        'Sales' => 'Πωλήσεις',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Ενεργός',
-    'Draft' => 'Πρόχειρο',
-    'FAQ' => 'Συχνές Ερωτήσεις',
-    'Expired' => 'Ληγμένο',
-    'Under Review' => 'Σε Αναθεώρηση',
-    'Pending' => 'Σε Εκκρεμότητα',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Υλικό Μάρκετινγκ',
+        'Product Brochures' => 'Φυλλάδια Προϊόντων',
+        'FAQ' => 'Συχνές Ερωτήσεις',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Ενεργό',
+        'Draft' => 'Πρόχειρο',
+        'FAQ' => 'Συχνές Ερωτήσεις',
+        'Expired' => 'Ληγμένο',
+        'Under Review' => 'Σε Αναθεώρηση',
+        'Pending' => 'Σε Εκκρεμότητα',
+    ],
+];

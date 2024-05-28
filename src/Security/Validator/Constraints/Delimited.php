@@ -36,7 +36,7 @@ class Delimited extends All implements ConstraintReturnValueInterface
     {
         // If no constraints are explicitly defined we assume string constraint
         if (is_array($options) && empty($options['constraints'])) {
-            $options['constraints'] = new Assert\Type(array('type' => 'scalar'));
+            $options['constraints'] = new Assert\Type(['type' => 'scalar']);
         }
 
         parent::__construct($options);

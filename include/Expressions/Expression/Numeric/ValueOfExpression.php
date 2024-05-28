@@ -24,12 +24,12 @@ class ValueOfExpression extends NumericExpression
     {
         $val = $this->getParameters()->evaluate();
         if (is_string($val)) {
-            $val = str_replace(",", "", $val);
+            $val = str_replace(',', '', $val);
             $val = empty($val) ? 0 : $val;
             if (!is_numeric($val)) {
                 throw new Exception("Error: '$val' is not a number");
             }
-            if (strpos($val, ".") !== false) {
+            if (strpos($val, '.') !== false) {
                 $val = $val;
             } else {
                 $val = (int)$val;
@@ -71,7 +71,7 @@ EOQ;
      */
     public static function getOperationName()
     {
-        return "number";
+        return 'number';
     }
 
     /**

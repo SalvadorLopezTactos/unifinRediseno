@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Audit\Formatter;
 
 use Sugarcrm\Sugarcrm\Audit\Formatter;
@@ -25,7 +26,7 @@ class Subject implements Formatter
 
     public function formatRows(array &$rows)
     {
-        $subjects = array();
+        $subjects = [];
         $impersonations = [];
         // gather all subjects
         foreach ($rows as $k => $v) {
@@ -41,7 +42,7 @@ class Subject implements Formatter
         }
 
         $formattedSubjects = $this->formatter->formatBatch($subjects);
-        if (count($impersonations) > 0) {
+        if (safeCount($impersonations) > 0) {
             $formattedImpersonations = $this->formatter->formatBatch($impersonations);
         }
 

@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'pågår',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för meddelanden',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Instrumentpanel för meddelandeposter',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje för meddelande',
 ];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = [
-    'LBL_GC_STATUS'=>'Ģeokodēšanas statuss',
+    'LBL_GC_STATUS' => 'Ģeokodēšanas statuss',
     'LBL_GC_LATITUDE' => 'Ģeokodēšanas platums',
     'LBL_GC_LONGITUDE' => 'Ģeokodēšanas garums',
     'LBL_GC_STATUS_DETAIL' => 'Ģeokodēšanas statusa informācija',

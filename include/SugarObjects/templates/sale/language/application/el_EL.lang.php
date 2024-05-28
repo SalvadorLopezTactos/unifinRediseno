@@ -15,14 +15,13 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
- $app_list_strings = array (
 
-  strtolower($object_name).'_type_dom' =>
-  array (
-    '' => '',
-    'Existing Business' => 'Υφιστάμενη επιχείρηση',
-    'New Business' => 'Νέα επιχείρηση',
-  ),
+$app_list_strings = [
 
-  );
+    strtolower($object_name) . '_type_dom' => [
+        '' => '',
+        'Existing Business' => 'Υφιστάμενη επιχείρηση',
+        'New Business' => 'Νέα επιχείρηση',
+    ],
+
+];

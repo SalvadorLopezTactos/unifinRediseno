@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => '추가',
     'LBL_ADDRCITY' => '시',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => '정보' /*for 508 compliance fix*/,
     'LBL_CLOSE' => '닫기' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => '제공된 소스 ID에 대한 커넥터가 없습니다.',
-);
-
+];

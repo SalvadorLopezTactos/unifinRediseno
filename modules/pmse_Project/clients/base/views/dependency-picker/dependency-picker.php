@@ -9,13 +9,13 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['pmse_Project']['base']['view']['dependency-picker'] = array(
+$viewdefs['pmse_Project']['base']['view']['dependency-picker'] = [
     'template' => 'dependency-picker',
-    'fields' => array(
-        array(
+    'fields' => [
+        [
             'type' => 'name',
             'name' => 'name',
             'sortable' => false,
-        ),
-    ),
-);
+        ],
+    ],
+];

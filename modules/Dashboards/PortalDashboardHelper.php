@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -38,12 +39,12 @@ class PortalDashboardHelper
             if (!empty($args[1]['id_query']) && $args[1]['id_query'] instanceof SugarQuery) {
                 $oldLimit = $args[1]['id_query']->limit;
                 if (isset($oldLimit)) {
-                    $args[1]['id_query']->limit($oldLimit + count(self::$portalDashboards));
+                    $args[1]['id_query']->limit($oldLimit + safeCount(self::$portalDashboards));
                 }
             } else {
                 $oldLimit = $args[0]->limit;
                 if (isset($oldLimit)) {
-                    $args[0]->limit($oldLimit + count(self::$portalDashboards));
+                    $args[0]->limit($oldLimit + safeCount(self::$portalDashboards));
                 }
             }
         }
@@ -72,7 +73,8 @@ class PortalDashboardHelper
      * Util to check if current user is admin
      * @return boolean True if user is admin, else false
      */
-    protected function isAdminUser() {
+    protected function isAdminUser()
+    {
         global $current_user;
         return $current_user->isAdmin();
     }

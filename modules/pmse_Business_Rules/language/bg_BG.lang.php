@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Бизнес правила в процеси',
-  'LBL_MODULE_TITLE' => 'Бизнес правила в процеси',
-  'LBL_MODULE_NAME_SINGULAR' => 'Бизне правило в процес',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Бизнес правила в процеси',
+    'LBL_MODULE_TITLE' => 'Бизнес правила в процеси',
+    'LBL_MODULE_NAME_SINGULAR' => 'Бизне правило в процес',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на бизнес правила на процес',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на бизнес правила на процес',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Електронно табло със запис на бизнес правила за обработка',
-  'LBL_RST_UID' => 'Идентификитар на бизнес правилото',
-  'LBL_RST_TYPE' => 'Тип на бизнес правилото',
-  'LBL_RST_DEFINITION' => 'Дефиниция на бизнес правилото',
-  'LBL_RST_EDITABLE' => 'Редакция на бизнес правило',
-  'LBL_RST_SOURCE' => 'Източник на бизнес правилото',
-  'LBL_RST_SOURCE_DEFINITION' => 'Описание на източника на бизнес правилото',
-  'LBL_RST_MODULE' => 'Основен модул',
-  'LBL_RST_FILENAME' => 'Име на файла с бизнес правила',
-  'LBL_RST_CREATE_DATE' => 'Дата на създаване на бизнес правилото',
-  'LBL_RST_UPDATE_DATE' => 'Дата на актуализация на бизнес правилото',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Електронно табло със запис на бизнес правила за обработка',
+    'LBL_RST_UID' => 'Идентификитар на бизнес правилото',
+    'LBL_RST_TYPE' => 'Тип на бизнес правилото',
+    'LBL_RST_DEFINITION' => 'Дефиниция на бизнес правилото',
+    'LBL_RST_EDITABLE' => 'Редакция на бизнес правило',
+    'LBL_RST_SOURCE' => 'Източник на бизнес правилото',
+    'LBL_RST_SOURCE_DEFINITION' => 'Описание на източника на бизнес правилото',
+    'LBL_RST_MODULE' => 'Основен модул',
+    'LBL_RST_FILENAME' => 'Име на файла с бизнес правила',
+    'LBL_RST_CREATE_DATE' => 'Дата на създаване на бизнес правилото',
+    'LBL_RST_UPDATE_DATE' => 'Дата на актуализация на бизнес правилото',
 
     'LNK_LIST' => 'Списък на бизнес правилата',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Създай бизнес правило в процес',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Това бизнес правило е невалидно, тъй като използва невалидни полета или полета, които не могат да бъдат намерени във вашето копие на SugarCRM. Моля, поправете грешките по-долу и запазете бизнес правилото.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Това Бизнес правило в момента се използва в Дефиниция на процес. Все още ли желаете да редактирате това Бизнес правило?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Не можете да изтриете това Бизнес правило, защото в момента се използва в Дефиниция на процес.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Не можете да изтриете това Бизнес правило, защото в момента се използва в Дефиниция на процес.',
+];

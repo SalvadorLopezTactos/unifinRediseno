@@ -1,17 +1,27 @@
 <?php
-$searchdefs['Campaigns'] = 
-array (
+// created: 2024-05-21 12:49:42
+$searchdefs['Campaigns'] = array (
+  'templateMeta' => 
+  array (
+    'maxColumns' => '3',
+    'maxColumnsBasic' => '4',
+    'widths' => 
+    array (
+      'label' => '10',
+      'field' => '30',
+    ),
+  ),
   'layout' => 
   array (
     'basic_search' => 
     array (
-      'name' => 
+      0 => 
       array (
         'name' => 'name',
         'default' => true,
         'width' => 10,
       ),
-      'start_date' => 
+      1 => 
       array (
         'name' => 'start_date',
         'type' => 'date',
@@ -22,7 +32,7 @@ array (
         'width' => 10,
         'default' => true,
       ),
-      'end_date' => 
+      2 => 
       array (
         'name' => 'end_date',
         'type' => 'date',
@@ -33,7 +43,7 @@ array (
         'width' => 10,
         'default' => true,
       ),
-      'current_user_only' => 
+      3 => 
       array (
         'name' => 'current_user_only',
         'label' => 'LBL_CURRENT_USER_FILTER',
@@ -41,7 +51,7 @@ array (
         'default' => true,
         'width' => 10,
       ),
-      'favorites_only' => 
+      4 => 
       array (
         'name' => 'favorites_only',
         'label' => 'LBL_FAVORITES_FILTER',
@@ -52,12 +62,12 @@ array (
     ),
     'advanced_search' => 
     array (
-      'name' => 
+      0 => 
       array (
         'name' => 'name',
         'default' => true,
       ),
-      'start_date' => 
+      1 => 
       array (
         'name' => 'start_date',
         'type' => 'date',
@@ -67,7 +77,7 @@ array (
         ),
         'default' => true,
       ),
-      'end_date' => 
+      2 => 
       array (
         'name' => 'end_date',
         'type' => 'date',
@@ -77,17 +87,17 @@ array (
         ),
         'default' => true,
       ),
-      'status' => 
+      3 => 
       array (
         'name' => 'status',
         'default' => true,
       ),
-      'campaign_type' => 
+      4 => 
       array (
         'name' => 'campaign_type',
         'default' => true,
       ),
-      'assigned_user_id' => 
+      5 => 
       array (
         'name' => 'assigned_user_id',
         'label' => 'LBL_ASSIGNED_TO',
@@ -102,23 +112,13 @@ array (
         ),
         'default' => true,
       ),
-      'favorites_only' => 
+      6 => 
       array (
         'name' => 'favorites_only',
         'label' => 'LBL_FAVORITES_FILTER',
         'type' => 'bool',
         'default' => true,
       ),
-    ),
-  ),
-  'templateMeta' => 
-  array (
-    'maxColumns' => '3',
-    'maxColumnsBasic' => '4',
-    'widths' => 
-    array (
-      'label' => '10',
-      'field' => '30',
     ),
   ),
 );

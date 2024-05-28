@@ -14,7 +14,7 @@ $viewdefs['Reports']['base']['layout']['report-chart'] = [
         [
             'view' => [
                 'name' => 'report-chart',
-                'css_class' => 'report-chart-container multi-line-list-view',
+                'css_class' => 'report-chart-container multi-line-list-view bg-[--dashlet-background] overflow-auto',
             ],
         ],
         [
@@ -23,5 +23,5 @@ $viewdefs['Reports']['base']['layout']['report-chart'] = [
             ],
         ],
     ],
-    'css_class' => 'flex-records-layout',
+    'css_class' => 'flex-records-layout h-[calc(100%-55px)]',
 ];

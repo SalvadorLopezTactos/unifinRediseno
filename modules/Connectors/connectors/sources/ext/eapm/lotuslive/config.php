@@ -11,18 +11,18 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$config = array (
-  'name' => 'LotusLive',
-  'eapm' => array(
-    'enabled' => true,
-    'only' => true,
-  ),
-  'order' => 16,
-  'properties' => array (
-      'oauth_consumer_key' => '',
-      'oauth_consumer_secret' => '',
-  ),
-  'encrypt_properties' => array (
-      'oauth_consumer_secret',
-  ),
-);
+$config = [
+    'name' => 'LotusLive',
+    'eapm' => [
+        'enabled' => true,
+        'only' => true,
+    ],
+    'order' => 16,
+    'properties' => [
+        'oauth_consumer_key' => '',
+        'oauth_consumer_secret' => '',
+    ],
+    'encrypt_properties' => [
+        'oauth_consumer_secret',
+    ],
+];

@@ -12,13 +12,13 @@
 --}}
 {{#eq templateComponent.activeButtonMeta.settings.type 'dropdown'}}
     <div class="btn-group" id="{{buttonId}}_loading" is_action_button_loading="true">
-        <a class="btn actionButtonLoading" data-toggle="dropdown"></a>
-        <a class="btn actionButtonLoading" data-toggle="dropdown">
+        <a class="btn actionButtonLoading" data-bs-toggle="dropdown"></a>
+        <a class="btn actionButtonLoading" data-bs-toggle="dropdown">
             <i class="sicon sicon-chevron-down actionButtonLoading"></i>
         </a>
     </div>
 {{/eq}}
 
 {{#notEq templateComponent.activeButtonMeta.settings.type 'dropdown'}}
-    <a id="{{buttonId}}_loading" class="btn actionButtonLoading" data-toggle="dropdown" is_action_button_loading="true"></a>
+    <a id="{{buttonId}}_loading" class="btn actionButtonLoading" data-bs-toggle="dropdown" is_action_button_loading="true"></a>
 {{/notEq}}

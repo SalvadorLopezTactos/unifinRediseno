@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'סוגי מוצרים',
     'LBL_MODULE_NAME_SINGULAR' => 'סוג מוצר',
     'LBL_MODULE_TITLE' => 'סוגי מוצרים: דף הבית',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'אתה בטוח בשברצונך למחוק רשומה זו?',
     'ERR_DELETE_RECORD' => 'כדי למחוק סוג מוצר עליך להזין מספר רשומה.',
     'NTC_LIST_ORDER' => 'קבע את הסדר שבו יופיעו המוצרים ברשימה הנגללת',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'ייבוא סוגי מוצרים',
-    'LBL_CREATED_BY'=>'נוצר על ידי',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'ייבוא סוגי מוצרים',
+    'LBL_CREATED_BY' => 'נוצר על ידי',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'הוקצה עבור ID',
-    'LBL_EXPORT_CREATED_BY'=>'נוצר על ידי ID',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'ייבא קוגוריות מוצרים',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'הוקצה עבור ID',
+    'LBL_EXPORT_CREATED_BY' => 'נוצר על ידי ID',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'ייבא קוגוריות מוצרים',
+];

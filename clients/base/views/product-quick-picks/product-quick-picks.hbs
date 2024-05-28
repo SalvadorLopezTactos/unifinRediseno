@@ -13,16 +13,16 @@
 <div class="dashboard quotes-create">
     <div class="cols row-fluid">
         <ul class="dashlets row-fluid">
-            <li class="span-12">
+            <li class="span12">
                 <ul class="dashlet-row">
                     <li class="row-fluid">
                         <div class="rows well well-invisible">
                             <ul class="dashlet-cell rows row-fluid">
                                 <li
-                                    class="dashlet-container rounded-md h-full mx-2 my-2 p-0 shadow hover:shadow-lg transition-shadow bg-dashlet-background hover:bg-dashlet-background-hover"
+                                    class="dashlet-container rounded-md h-full mx-2 my-2 p-0 shadow hover:shadow-lg transition-shadow bg-[--dashlet-background] hover:bg-[--dashlet-background-hover]"
                                 >
                                     <div
-                                        class="thumbnail dashlet h-full flex flex-column relative p-0 mb-0 border-none"
+                                        class="dashlet h-full flex flex-col relative p-0 mb-0 border-none"
                                         data-type="dashlet"
                                     >
                                         <div data-dashlet="toolbar">
@@ -34,7 +34,7 @@
                                         </div>
                                         <div data-dashlet="dashlet" class="dashlet-content">
                                             <div class="dashlet-unordered-list recent-used-product">
-                                                <div class="dashlet-tabs tab{{tabs.length}}">
+                                                <div class="dashlet-tabs sticky top-0 z-[200] tab{{tabs.length}}">
                                                     {{{tabsHtml}}}
                                                 </div>
                                                 <div class="tab-content">

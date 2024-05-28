@@ -17,7 +17,7 @@
  * @extends View.View
  */
 ({
-    className: 'omnichannel-search-filter-wrapper',
+    className: 'omnichannel-search-filter-wrapper w-4/12',
 
     events: {
         'click .omnichannel-search-facet-select': 'facetClicked'

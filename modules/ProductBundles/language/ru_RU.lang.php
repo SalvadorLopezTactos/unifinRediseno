@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Стадия группы:',
-    'LBL_DEAL_TOT'=>'скидка итого',
-    'LBL_DEAL_TOT_USDOLLAR'=>'скидка итого (доллары США)',
+    'LBL_DEAL_TOT' => 'скидка итого',
+    'LBL_DEAL_TOT_USDOLLAR' => 'скидка итого (доллары США)',
     'LBL_NEW_SUB' => 'Общая сумма со скидкой:',
     'LBL_SHIPPING' => 'Стоимость доставки:',
-    'LBL_SHIPPING_USDOLLAR'=>'Стоимость доставки (в долларах США)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Общая сумма (Доллары США)',
+    'LBL_SHIPPING_USDOLLAR' => 'Стоимость доставки (в долларах США)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Общая сумма (Доллары США)',
     'LBL_SUBTOTAL' => 'Общая сумма:',
     'LBL_TAXABLE_SUBTOTAL' => 'Сумма без учета НДС, подлежащая налогообложению',
-    'LBL_TAX_USDOLLAR'=>'Налог (в долларах США)',
+    'LBL_TAX_USDOLLAR' => 'Налог (в долларах США)',
     'LBL_TAX' => 'Налог:',
-    'LBL_TOTAL_USDOLLAR'=>'Итого (Доллары США)',
+    'LBL_TOTAL_USDOLLAR' => 'Итого (Доллары США)',
     'LBL_TOTAL' => 'Итого:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Позиция набора коммерческих предложений',
     'EXCEPTION_INVALID_QUOTE_ID' => 'ID коммерческого предложения отсутствует в коммерческой нагрузке',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'Запрашиваемое коммерческое предложение не найдено',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'Запрашиваемое коммерческое предложение не найдено',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Дополнительная групповая скидка',
     'LBL_GROUP_TOTAL' => 'Итог по группе',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Начало группы',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Группа связки продуктов для коммерческого предложения по умолчанию',
     'LBL_ALERT_DELETING_ITEM' => 'Удаление элемента (-ов) строки',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Элемент строки успешно удален',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Временная шкала связки продуктов',
+];

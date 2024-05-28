@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Planlæg opkald',
     'LNK_NEW_MEETING' => 'Planlæg møde',
     'LNK_NEW_TASK' => 'Opret opgave',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Ekstra Meta Felt 2',
     'COLUMN_TITLE_EXT3' => 'Ekstra Meta Felt 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'IFrame højde',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'Standard URL',
     'COLUMN_TITLE_AUDIT' => 'Revision',
     'COLUMN_TITLE_PII' => 'Personlige oplysninger',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Standardværdi',
     'LBL_AUDITED' => 'Revision',
     'LBL_REPORTABLE' => 'Rapporterbar',
-    'ERR_RESERVED_FIELD_NAME' => "Reserveret nøgleord",
+    'ERR_RESERVED_FIELD_NAME' => 'Reserveret nøgleord',
     'ERR_SELECT_FIELD_TYPE' => 'Venligst vælg en felt type',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Feltnavnet findes allerede',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Feltnavn bør kun indeholde følgende tegn: a-za-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Udført',
     'LBL_EXE_NON_SIM_MODE' => 'Udfør ikke-simulationsmodus',
     'LBL_CALCULATION_VISIBLE' => 'Gør synligt for beregninger',
-);
+];

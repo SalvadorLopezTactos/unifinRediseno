@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Programes d&#39;informes',
     'LBL_MODULE_NAME_SINGULAR' => 'Programa d&#39;informes',
     'LBL_REPORT_NAME' => 'Informe',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Tipus de fitxer',
     'LBL_EMBED_REPORT' => 'Informe incrustat al correu electrònic',
     'LBL_EMBED_REPORT_INFO' => 'Nota: Si l&#39;informe supera les 200 files, adjuntarem l&#39;informe com a fitxer CSV.',
-);
+];

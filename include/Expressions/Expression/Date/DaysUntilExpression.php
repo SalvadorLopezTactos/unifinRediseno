@@ -16,28 +16,30 @@
  */
 class DaysUntilExpression extends NumericExpression
 {
-	/**
-	 * Returns the entire enumeration bare.
-	 */
-	function evaluate() {
+    /**
+     * Returns the entire enumeration bare.
+     */
+    public function evaluate()
+    {
         $params = DateExpression::parse($this->getParameters()->evaluate());
-        if(!$params) {
+        if (!$params) {
             return false;
         }
         $now = TimeDate::getInstance()->getNow(true);
         //set the time to 0, as we are returning an integer based on the date.
         $params->setTime(0, 0, 0); // this will be the timestamp delimiter of the day.
         $tsdiff = $params->ts - $now->ts;
-        $diff = (int)ceil($tsdiff/86400);
+        $diff = (int)ceil($tsdiff / 86400);
         return $diff;
-	}
+    }
 
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
             var then = SUGAR.util.DateUtils.parse(this.getParameters().evaluate(), 'user');
 			var now = new Date();
 			then.setHours(0);
@@ -48,34 +50,38 @@ class DaysUntilExpression extends NumericExpression
 
 			return days;
 EOQ;
-	}
+    }
 
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return "daysUntil";
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return 'daysUntil';
+    }
 
-	/**
-	 * All parameters have to be a date.
-	 */
-    static function getParameterTypes() {
-		return array(AbstractExpression::$DATE_TYPE);
-	}
+    /**
+     * All parameters have to be a date.
+     */
+    public static function getParameterTypes()
+    {
+        return [AbstractExpression::$DATE_TYPE];
+    }
 
-	/**
-	 * Returns the maximum number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 1;
-	}
+    /**
+     * Returns the maximum number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 1;
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 }

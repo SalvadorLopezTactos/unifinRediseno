@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Fronta úloh',
     'LBL_MODULE_NAME_SINGULAR' => 'Fronta úloh',
     'LBL_MODULE_TITLE' => 'Fronta úloh: Domů',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Řešení zrušeno',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Řešení probíhá',
     // Errors
-    'ERR_CALL' => "Nelze zavolat funkci: %s",
-    'ERR_CURL' => "Nelze spustit naplánovanou úlohu pomocí CURL",
-    'ERR_FAILED' => "Neočekávaná chyba, zkontrolujte PHP logy a sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s v %s na řádku %d",
-    'ERR_NOUSER' => "Žádné uživatelské ID není přiřazeno k této naplánované úloze",
-    'ERR_NOSUCHUSER' => "Nebylo nalezeno ID uživatele %s",
-    'ERR_JOBTYPE' => "Neznámý typ naplánované úlohy",
-    'ERR_TIMEOUT' => "Vynucená chyba z důvodů překročení časového limitu",
+    'ERR_CALL' => 'Nelze zavolat funkci: %s',
+    'ERR_CURL' => 'Nelze spustit naplánovanou úlohu pomocí CURL',
+    'ERR_FAILED' => 'Neočekávaná chyba, zkontrolujte PHP logy a sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s v %s na řádku %d',
+    'ERR_NOUSER' => 'Žádné uživatelské ID není přiřazeno k této naplánované úloze',
+    'ERR_NOSUCHUSER' => 'Nebylo nalezeno ID uživatele %s',
+    'ERR_JOBTYPE' => 'Neznámý typ úlohy: %s',
+    'ERR_TIMEOUT' => 'Vynucená chyba z důvodů překročení časového limitu',
     'ERR_JOB_FAILED_VERBOSE' => 'Naplánovaná úloha %1$s (%2$s) se nepodařila spustit',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Nejle načíst objekt bean s ID: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Nelze najít obslužnou rutinu pro trasu %s',
@@ -94,13 +94,13 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Nápověda ke konfiguraci Amazon SQS',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Sekce konfigurace Amazon SQS.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Sekce konfigurace Amazon SQS.</b></p>
 <ul>
     <li>ID přístupového klíče: <i>Zadejte identifikační číslo vašeho přístupového klíče pro Amazon SQS</i></li>
     <li>Tajný přístupový klíč: <i>Zadejte váš tajný přístupový klíč pro Amazon SQS</i></li>
     <li>Region: <i>Zadejte region serveru Amazon SQS</i></li>
     <li>Název fronty: <i>Zadejte název fronty serveru Amazon SQS</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'Nápověda ke konfiguraci AMQP',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>Sekce konfigurace AMQP.</b></p>
 <ul>
@@ -121,4 +121,4 @@ $mod_strings = array(
     'LBL_REGION' => 'Region',
     'LBL_ACCESS_KEY_SECRET' => 'Tajný přístupový klíč',
     'LBL_QUEUE_NAME' => 'Název adaptéru',
-);
+];

@@ -10,72 +10,72 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['calls_users'] = array(
+$dictionary['calls_users'] = [
     'table' => 'calls_users',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'call_id' => array(
+        ],
+        'call_id' => [
             'name' => 'call_id',
             'type' => 'id',
-        ),
-        'user_id' => array(
+        ],
+        'user_id' => [
             'name' => 'user_id',
             'type' => 'id',
-        ),
-        'required' => array(
+        ],
+        'required' => [
             'name' => 'required',
             'type' => 'varchar',
             'len' => '1',
             'default' => '1',
-        ),
-        'accept_status' => array(
+        ],
+        'accept_status' => [
             'name' => 'accept_status',
             'type' => 'varchar',
             'len' => '25',
             'default' => 'none',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'calls_userspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_usr_call_usr',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'user_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_call_users_del',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'call_id',
                 'user_id',
                 'deleted',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'calls_users' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'calls_users' => [
             'lhs_module' => 'Calls',
             'lhs_table' => 'calls',
             'lhs_key' => 'id',
@@ -86,6 +86,6 @@ $dictionary['calls_users'] = array(
             'join_table' => 'calls_users',
             'join_key_lhs' => 'call_id',
             'join_key_rhs' => 'user_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

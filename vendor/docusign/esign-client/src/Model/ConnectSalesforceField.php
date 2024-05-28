@@ -37,6 +37,7 @@ use DocuSign\eSign\ObjectSerializer;
  * ConnectSalesforceField Class Doc Comment
  *
  * @category    Class
+ * @description This object is used to match a DocuSign field to a Salesforce field so that Docusign can send information to your Salesforce account.
  * @package     DocuSign\eSign
  * @author      Swagger Codegen team <apihelp@docusign.com>
  * @license     The DocuSign PHP Client SDK is licensed under the MIT License.

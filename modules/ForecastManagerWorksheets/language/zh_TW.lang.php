@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
 
     //module strings.
     'LBL_MODULE_NAME' => '預測管理員工作表',
@@ -35,14 +35,14 @@ $mod_strings = array (
     'LBL_FORECAST_TYPE' => '預測類型',
     'LBL_FORECAST_OPP_COUNT' => '總商機計數',
     'LBL_FORECAST_PIPELINE_OPP_COUNT' => '案源商機計數',
-    'LBL_FORECAST_OPP_WEIGH'=> '加權金額',
+    'LBL_FORECAST_OPP_WEIGH' => '加權金額',
     'LBL_FORECAST_USER' => '使用者',
-    'LBL_DATE_COMMITTED'=> '提交日期',
+    'LBL_DATE_COMMITTED' => '提交日期',
     'LBL_DATE_ENTERED' => '輸入日期',
     'LBL_DATE_MODIFIED' => '修改日期',
     'LBL_CREATED_BY' => '建立人',
     'LBL_DELETED' => '已刪除',
-    'LBL_MODIFIED_USER_ID'=>'修改人',
+    'LBL_MODIFIED_USER_ID' => '修改人',
     'LBL_WK_VERSION' => '版本',
     'LBL_WK_REVISION' => '修訂',
 
@@ -59,68 +59,68 @@ $mod_strings = array (
     'LBL_QC_UPCOMING_FORECASTS' => '我的預測',
     'LBL_QC_LAST_DATE_COMMITTED' => '上次提交日期：',
     'LBL_QC_LAST_COMMIT_VALUE' => '上次提交金額：',
-    'LBL_QC_HEADER_DELIM'=> '至',
+    'LBL_QC_HEADER_DELIM' => '至',
 
     //opportunity worksheet list view labels
-    'LBL_OW_OPPORTUNITIES' => "商機",
-    'LBL_OW_ACCOUNTNAME' => "帳戶",
-    'LBL_OW_REVENUE' => "金額",
-    'LBL_OW_WEIGHTED' => "加權金額",
-    'LBL_OW_MODULE_TITLE'=> '商機工作表',
-    'LBL_OW_PROBABILITY'=>'可能性',
-    'LBL_OW_NEXT_STEP'=>'下一步',
-    'LBL_OW_DESCRIPTION'=>'描述',
-    'LBL_OW_TYPE'=>'類型',
+    'LBL_OW_OPPORTUNITIES' => '商機',
+    'LBL_OW_ACCOUNTNAME' => '帳戶',
+    'LBL_OW_REVENUE' => '金額',
+    'LBL_OW_WEIGHTED' => '加權金額',
+    'LBL_OW_MODULE_TITLE' => '商機工作表',
+    'LBL_OW_PROBABILITY' => '可能性',
+    'LBL_OW_NEXT_STEP' => '下一步',
+    'LBL_OW_DESCRIPTION' => '描述',
+    'LBL_OW_TYPE' => '類型',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'直屬員工',
-    'LBL_FDR_OPPORTUNITIES'=>'預測中的商機：',
-    'LBL_FDR_WEIGH'=>'商機加權金額：',
-    'LBL_FDR_COMMIT'=>'已提交金額',
-    'LBL_FDR_DATE_COMMIT'=>'提交日期',
+    'LBL_FDR_USER_NAME' => '直屬員工',
+    'LBL_FDR_OPPORTUNITIES' => '預測中的商機：',
+    'LBL_FDR_WEIGH' => '商機加權金額：',
+    'LBL_FDR_COMMIT' => '已提交金額',
+    'LBL_FDR_DATE_COMMIT' => '提交日期',
 
     //detail view.
     'LBL_DV_HEADER' => '預測：工作表',
     'LBL_DV_MY_FORECASTS' => '我的預測',
-    'LBL_DV_MY_TEAM' => "我的小組的預測" ,
+    'LBL_DV_MY_TEAM' => "我的小組的預測",
     'LBL_DV_TIMEPERIODS' => '時間週期：',
     'LBL_DV_FORECAST_PERIOD' => '預測時間週期',
     'LBL_DV_FORECAST_OPPORTUNITY' => '預測商機',
     'LBL_SEARCH' => '選擇',
     'LBL_SEARCH_LABEL' => '選擇',
     'LBL_COMMIT_HEADER' => '預測提交',
-    'LBL_DV_LAST_COMMIT_DATE' =>'上次提交日期：',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'上次提交金額：',
+    'LBL_DV_LAST_COMMIT_DATE' => '上次提交日期：',
+    'LBL_DV_LAST_COMMIT_AMOUNT' => '上次提交金額：',
     'LBL_DV_FORECAST_ROLLUP' => '預測彙總',
     'LBL_DV_TIMEPERIOD' => '時間週期：',
     'LBL_DV_TIMPERIOD_DATES' => '日期範圍：',
     'LBL_LOADING_COMMIT_HISTORY' => '載入提交歷史...',
 
     //list view
-    'LBL_LV_TIMPERIOD'=> '時間週期',
-    'LBL_LV_TIMPERIOD_START_DATE'=> '開始日期',
-    'LBL_LV_TIMPERIOD_END_DATE'=> '結束日期',
-    'LBL_LV_TYPE'=> '預測類型',
-    'LBL_LV_COMMIT_DATE'=> '提交日期',
-    'LBL_LV_OPPORTUNITIES'=> '商機',
-    'LBL_LV_WEIGH'=> '加權金額',
-    'LBL_LV_COMMIT'=> '已提交金額',
+    'LBL_LV_TIMPERIOD' => '時間週期',
+    'LBL_LV_TIMPERIOD_START_DATE' => '開始日期',
+    'LBL_LV_TIMPERIOD_END_DATE' => '結束日期',
+    'LBL_LV_TYPE' => '預測類型',
+    'LBL_LV_COMMIT_DATE' => '提交日期',
+    'LBL_LV_OPPORTUNITIES' => '商機',
+    'LBL_LV_WEIGH' => '加權金額',
+    'LBL_LV_COMMIT' => '已提交金額',
 
-    'LBL_COMMIT_NOTE'=> '為選取的時間週期選取您想要提交的金額。',
+    'LBL_COMMIT_NOTE' => '為選取的時間週期選取您想要提交的金額。',
 
-    'LBL_COMMIT_MESSAGE'=> '您想要提交這些金額嗎？',
+    'LBL_COMMIT_MESSAGE' => '您想要提交這些金額嗎？',
     'ERR_FORECAST_AMOUNT' => '必須填寫提交金額，且必須為一個數字。',
 
     // js error strings
     'LBL_FC_START_DATE' => '開始日期',
     'LBL_FC_USER' => '排程',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'預測模組沒有使用中時間週期。',
-    'LBL_FDR_ADJ_AMOUNT'=>'已調整的金額',
-    'LBL_SAVE_WOKSHEET'=>'儲存工作表',
-    'LBL_RESET_WOKSHEET'=>'重置工作表',
-    'LBL_SHOW_CHART'=>'檢視圖表',
-    'LBL_RESET_CHECK'=>'已選取時間週期的所有工作表資料和已登入的使用者都將被刪除。確定要繼續嗎？',
+    'LBL_NO_ACTIVE_TIMEPERIOD' => '預測模組沒有使用中時間週期。',
+    'LBL_FDR_ADJ_AMOUNT' => '已調整的金額',
+    'LBL_SAVE_WOKSHEET' => '儲存工作表',
+    'LBL_RESET_WOKSHEET' => '重置工作表',
+    'LBL_SHOW_CHART' => '檢視圖表',
+    'LBL_RESET_CHECK' => '已選取時間週期的所有工作表資料和已登入的使用者都將被刪除。確定要繼續嗎？',
 
     'LBL_CURRENCY' => '貨幣',
     'LBL_CURRENCY_ID' => '貨幣 ID',
@@ -149,6 +149,6 @@ $mod_strings = array (
     'LBL_HISTORY_LOG' => '最後提交',
     'LBL_NO_COMMIT' => '無上次提交記錄',
 
-    'LBL_MANGER_SAVED' => '管理員已儲存'
+    'LBL_MANGER_SAVED' => '管理員已儲存',
 
-);
+];

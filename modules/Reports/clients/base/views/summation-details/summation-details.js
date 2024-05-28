@@ -212,6 +212,11 @@
         this.data = data;
         this.reportComplexity = this._getReportComplexity(data.recordsNo, _.size(data.header));
 
+        if (_.has(this, 'layout') && this.layout) {
+            this.exportAccess = app.acl.hasAccess('export', this.layout.module) &&
+                            app.utils.reports.hasAccessToAllReport(this.layout.model, 'export');
+        }
+
         if (this.reportComplexity === this.complexities.medium) {
             this.context.trigger('report:data:table:loaded', false, 'table');
             this.render();

@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Įvykdyto pasiūlymo eilutės prekių sąrašo ataskaitų sritis',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Įvykdyto pasiūlymo eilutės prekių įrašų ataskaitų sritis',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ įvykdyto pasiūlymo eilučių prekės',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Įvykdyto pasiūlymo eilutės prekės laiko juosta',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Campaign Quoted Line Item',
     'LBL_MODULE_NAME' => 'Quoted Line Items',
@@ -183,4 +184,4 @@ To create a {{module_name}}:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nauja įvykdyto pasiūlymo eilutės prekė)',
     'LBL_DISCOUNT_PERCENT' => '% Procentai',
     'LBL_DISCOUNT_TYPE' => 'Nuolaidos tipas',
-);
+];

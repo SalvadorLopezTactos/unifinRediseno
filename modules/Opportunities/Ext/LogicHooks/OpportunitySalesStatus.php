@@ -13,11 +13,11 @@
 /**
  * Define the before_save hook that will set the Opportunity Sales Status in Ent Only
  */
-$hook_array['before_save'][] = array(
+$hook_array['before_save'][] = [
     1,
     'setSalesStatus',
     'modules/Opportunities/OpportunityHooks.php',
     'OpportunityHooks',
     'setSalesStatus',
     'Before Opportunity Save',
-);
+];

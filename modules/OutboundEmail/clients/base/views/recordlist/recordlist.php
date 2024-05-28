@@ -9,35 +9,35 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['OutboundEmail']['base']['view']['recordlist'] = array(
+$viewdefs['OutboundEmail']['base']['view']['recordlist'] = [
     'favorite' => true,
     'following' => false,
     'sticky_resizable_columns' => false,
-    'selection' => array(),
-    'rowactions' => array(
-        'actions' => array(
-            array(
+    'selection' => [],
+    'rowactions' => [
+        'actions' => [
+            [
                 'type' => 'rowaction',
                 'name' => 'edit_button',
                 'dismiss_label' => true,
                 'icon' => 'sicon-edit',
                 'tooltip' => 'LBL_EDIT_BUTTON',
                 'acl_action' => 'edit',
-                'route' => array(
+                'route' => [
                     'action' => 'edit',
                     'module' => 'OutboundEmail',
-                ),
-            ),
-            array(
+                ],
+            ],
+            [
                 'type' => 'rowaction',
                 'name' => 'delete_button',
                 'event' => 'list:deleterow:fire',
                 'label' => 'LBL_DELETE_BUTTON',
                 'acl_action' => 'delete',
-            ),
-        ),
-    ),
-    'last_state' => array(
+            ],
+        ],
+    ],
+    'last_state' => [
         'id' => 'record-list',
-    ),
-);
+    ],
+];

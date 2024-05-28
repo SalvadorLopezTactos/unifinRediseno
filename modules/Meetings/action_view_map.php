@@ -10,4 +10,4 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$action_view_map['listbytype']='listbytype';
+$action_view_map['listbytype'] = 'listbytype';

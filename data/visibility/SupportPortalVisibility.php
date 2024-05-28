@@ -52,7 +52,7 @@ class SupportPortalVisibility extends SugarVisibility implements StrategyInterfa
      */
     protected function ignoreVisibilityQuery(\SugarBean $bean)
     {
-        return (in_array($bean->getModuleName(), $this->modulesToIgnore)) ? true : false;
+        return (safeInArray($bean->getModuleName(), $this->modulesToIgnore)) ? true : false;
     }
 
     /**
@@ -63,7 +63,7 @@ class SupportPortalVisibility extends SugarVisibility implements StrategyInterfa
      *
      * @return SugarQuery
      */
-    public function addVisibilityQuery(SugarQuery $sugarQuery, $options = array())
+    public function addVisibilityQuery(SugarQuery $sugarQuery, $options = [])
     {
         if (!PortalFactory::getInstance('Session')->isActive()) {
             $GLOBALS['log']->error('Not a portal user, but running through the portal visibility class.');

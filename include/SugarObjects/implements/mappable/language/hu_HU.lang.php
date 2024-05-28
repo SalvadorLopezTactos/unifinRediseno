@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = [
-    'LBL_GC_STATUS'=>'Geokódolás állapota',
+    'LBL_GC_STATUS' => 'Geokódolás állapota',
     'LBL_GC_LATITUDE' => 'Geokódolás szélessége',
     'LBL_GC_LONGITUDE' => 'Geokódolás hosszúsága',
     'LBL_GC_STATUS_DETAIL' => 'Geokódolás állapotának részletei',

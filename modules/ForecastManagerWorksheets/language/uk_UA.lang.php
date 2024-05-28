@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
 
     //module strings.
     'LBL_MODULE_NAME' => 'Таблиці менеджеру прогнозів',
@@ -35,14 +35,14 @@ $mod_strings = array (
     'LBL_FORECAST_TYPE' => 'Тип прогнозу',
     'LBL_FORECAST_OPP_COUNT' => 'Підсумкова сума продажів',
     'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Кількість продажів по воронці',
-    'LBL_FORECAST_OPP_WEIGH'=> 'Середнє значення',
+    'LBL_FORECAST_OPP_WEIGH' => 'Середнє значення',
     'LBL_FORECAST_USER' => 'Користувач',
-    'LBL_DATE_COMMITTED'=> 'Дата підтверджена',
+    'LBL_DATE_COMMITTED' => 'Дата підтверджена',
     'LBL_DATE_ENTERED' => 'Введена дата',
     'LBL_DATE_MODIFIED' => 'Дата змінення',
     'LBL_CREATED_BY' => 'Створено',
     'LBL_DELETED' => 'Видалено',
-    'LBL_MODIFIED_USER_ID'=>'Змінено:',
+    'LBL_MODIFIED_USER_ID' => 'Змінено:',
     'LBL_WK_VERSION' => 'Версія',
     'LBL_WK_REVISION' => 'Редакція',
 
@@ -59,68 +59,68 @@ $mod_strings = array (
     'LBL_QC_UPCOMING_FORECASTS' => 'Мої прогнози',
     'LBL_QC_LAST_DATE_COMMITTED' => 'Остання підтверджена дата:',
     'LBL_QC_LAST_COMMIT_VALUE' => 'Останнє підтверджене значення:',
-    'LBL_QC_HEADER_DELIM'=> 'Кому',
+    'LBL_QC_HEADER_DELIM' => 'Кому',
 
     //opportunity worksheet list view labels
-    'LBL_OW_OPPORTUNITIES' => "Угода",
-    'LBL_OW_ACCOUNTNAME' => "Контрагент",
-    'LBL_OW_REVENUE' => "Сума",
-    'LBL_OW_WEIGHTED' => "Середнє значення",
-    'LBL_OW_MODULE_TITLE'=> 'Лист продажів',
-    'LBL_OW_PROBABILITY'=>'Ймовірність',
-    'LBL_OW_NEXT_STEP'=>'Наступний крок',
-    'LBL_OW_DESCRIPTION'=>'Опис',
-    'LBL_OW_TYPE'=>'Тип',
+    'LBL_OW_OPPORTUNITIES' => 'Угода',
+    'LBL_OW_ACCOUNTNAME' => 'Контрагент',
+    'LBL_OW_REVENUE' => 'Сума',
+    'LBL_OW_WEIGHTED' => 'Середнє значення',
+    'LBL_OW_MODULE_TITLE' => 'Лист продажів',
+    'LBL_OW_PROBABILITY' => 'Ймовірність',
+    'LBL_OW_NEXT_STEP' => 'Наступний крок',
+    'LBL_OW_DESCRIPTION' => 'Опис',
+    'LBL_OW_TYPE' => 'Тип',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'Прямий звіт',
-    'LBL_FDR_OPPORTUNITIES'=>'Продажі в прогнозі:',
-    'LBL_FDR_WEIGH'=>'Середнє значення в Продажах:',
-    'LBL_FDR_COMMIT'=>'Підтверджене значення',
-    'LBL_FDR_DATE_COMMIT'=>'Підтвердити дату',
+    'LBL_FDR_USER_NAME' => 'Прямий звіт',
+    'LBL_FDR_OPPORTUNITIES' => 'Продажі в прогнозі:',
+    'LBL_FDR_WEIGH' => 'Середнє значення в Продажах:',
+    'LBL_FDR_COMMIT' => 'Підтверджене значення',
+    'LBL_FDR_DATE_COMMIT' => 'Підтвердити дату',
 
     //detail view.
     'LBL_DV_HEADER' => 'Прогнози:Таблиця',
     'LBL_DV_MY_FORECASTS' => 'Мої прогнози',
-    'LBL_DV_MY_TEAM' => "Прогнози моєї команди" ,
+    'LBL_DV_MY_TEAM' => "Прогнози моєї команди",
     'LBL_DV_TIMEPERIODS' => 'Проміжки часу:',
     'LBL_DV_FORECAST_PERIOD' => 'Проміжок часу прогнозу',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Угоди прогнозу',
     'LBL_SEARCH' => 'Вибрати',
     'LBL_SEARCH_LABEL' => 'Вибрати',
     'LBL_COMMIT_HEADER' => 'Підтвердити прогноз',
-    'LBL_DV_LAST_COMMIT_DATE' =>'Остання підтверджена дата:',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'Останнє підтверджене значення',
+    'LBL_DV_LAST_COMMIT_DATE' => 'Остання підтверджена дата:',
+    'LBL_DV_LAST_COMMIT_AMOUNT' => 'Останнє підтверджене значення',
     'LBL_DV_FORECAST_ROLLUP' => 'Зсув прогнозу',
     'LBL_DV_TIMEPERIOD' => 'Період:',
     'LBL_DV_TIMPERIOD_DATES' => 'Діапазон дат:',
     'LBL_LOADING_COMMIT_HISTORY' => 'Завантаження підтвердження історії...',
 
     //list view
-    'LBL_LV_TIMPERIOD'=> 'Проміжок часу',
-    'LBL_LV_TIMPERIOD_START_DATE'=> 'Дата початку',
-    'LBL_LV_TIMPERIOD_END_DATE'=> 'Дата завершення',
-    'LBL_LV_TYPE'=> 'Тип прогнозу',
-    'LBL_LV_COMMIT_DATE'=> 'Дата підтверджена',
-    'LBL_LV_OPPORTUNITIES'=> 'Угоди',
-    'LBL_LV_WEIGH'=> 'Середнє значення',
-    'LBL_LV_COMMIT'=> 'Підтверджене значення',
+    'LBL_LV_TIMPERIOD' => 'Проміжок часу',
+    'LBL_LV_TIMPERIOD_START_DATE' => 'Дата початку',
+    'LBL_LV_TIMPERIOD_END_DATE' => 'Дата завершення',
+    'LBL_LV_TYPE' => 'Тип прогнозу',
+    'LBL_LV_COMMIT_DATE' => 'Дата підтверджена',
+    'LBL_LV_OPPORTUNITIES' => 'Угоди',
+    'LBL_LV_WEIGH' => 'Середнє значення',
+    'LBL_LV_COMMIT' => 'Підтверджене значення',
 
-    'LBL_COMMIT_NOTE'=> 'Ввекдіть значення яке б ви хотіли підтвердити для обраного періоду часу',
+    'LBL_COMMIT_NOTE' => 'Ввекдіть значення яке б ви хотіли підтвердити для обраного періоду часу',
 
-    'LBL_COMMIT_MESSAGE'=> 'Ви бажаєте підтвертити це значення?',
+    'LBL_COMMIT_MESSAGE' => 'Ви бажаєте підтвертити це значення?',
     'ERR_FORECAST_AMOUNT' => 'Підтвердження кількості необхідне і повинно бути  цілим числом',
 
     // js error strings
     'LBL_FC_START_DATE' => 'Дата початку',
     'LBL_FC_USER' => 'Розклад для',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'Немає активного періоду часу для прогнозованого модуля',
-    'LBL_FDR_ADJ_AMOUNT'=>'встановлена сума',
-    'LBL_SAVE_WOKSHEET'=>'Зберегти робочий лист',
-    'LBL_RESET_WOKSHEET'=>'Скинути дані з листа',
-    'LBL_SHOW_CHART'=>'Переглянути графік',
-    'LBL_RESET_CHECK'=>'Всі дані листа обраного часового діапазону та зареєстрованого користувача, будуть видалені. Продовжити?',
+    'LBL_NO_ACTIVE_TIMEPERIOD' => 'Немає активного періоду часу для прогнозованого модуля',
+    'LBL_FDR_ADJ_AMOUNT' => 'встановлена сума',
+    'LBL_SAVE_WOKSHEET' => 'Зберегти робочий лист',
+    'LBL_RESET_WOKSHEET' => 'Скинути дані з листа',
+    'LBL_SHOW_CHART' => 'Переглянути графік',
+    'LBL_RESET_CHECK' => 'Всі дані листа обраного часового діапазону та зареєстрованого користувача, будуть видалені. Продовжити?',
 
     'LBL_CURRENCY' => 'Валюта',
     'LBL_CURRENCY_ID' => 'Валюта (ID)',
@@ -149,6 +149,6 @@ $mod_strings = array (
     'LBL_HISTORY_LOG' => 'Останнє підтвердження',
     'LBL_NO_COMMIT' => 'Без попереднього підтвердження',
 
-    'LBL_MANGER_SAVED' => 'Manager збережено'
+    'LBL_MANGER_SAVED' => 'Manager збережено',
 
-);
+];

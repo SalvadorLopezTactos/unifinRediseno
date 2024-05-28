@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 
 global $current_user;
@@ -20,10 +21,10 @@ $url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar
     $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Google&products=' .
     $productCodes;
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
         'Registrera din Sugar-instans med Dropbox för att aktivera konfigurationen av Dropbox-konton så att de kan användas inom ' .
         'Sugar. </td></tr></table>',
     'client_id' => 'Klient-ID',
     'client_secret' => 'Klienthemlighet',
-);
+];

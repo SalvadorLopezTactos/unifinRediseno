@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
 
 /**

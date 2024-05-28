@@ -13,7 +13,7 @@
  * This dependency sets the status field to read only if the purchase has been converted.
  */
 $dependencies['Purchases']['read_only_fields'] = [
-    'hooks' => ["edit"],
+    'hooks' => ['edit'],
     'trigger' => 'true',
     'triggerFields' => ['product_template_name'],
     'onload' => true,

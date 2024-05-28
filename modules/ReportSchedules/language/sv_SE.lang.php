@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Rapportscheman',
     'LBL_MODULE_NAME_SINGULAR' => 'Rapportschema',
     'LBL_REPORT_NAME' => 'Rapport',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Filtyp(er)',
     'LBL_EMBED_REPORT' => 'Bädda in rapport i e-post',
     'LBL_EMBED_REPORT_INFO' => 'OBS! Om rapporten överstiger 200 rader bifogar vi rapporten som CSV-fil.',
-);
+];

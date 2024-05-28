@@ -41,7 +41,7 @@ EOQ;
      */
     public static function getOperationName()
     {
-        return "negate";
+        return 'negate';
     }
 
     /**

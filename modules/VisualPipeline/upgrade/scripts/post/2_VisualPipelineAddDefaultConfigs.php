@@ -22,8 +22,7 @@ class SugarUpgradeVisualPipelineAddDefaultConfigs extends UpgradeScript
         $adminConfig = $admin->getConfigForModule('VisualPipeline');
         if ($this->shouldInstallPipelineDefaults()) {
             VisualPipelineDefaults::setupPipelineSettings();
-        }
-        elseif ($this->shouldUpdatePipelineDefaults()) {
+        } elseif ($this->shouldUpdatePipelineDefaults()) {
             $new93Config = $this->getNew93Defaults();
             VisualPipelineDefaults::addDefaults($new93Config);
         }
@@ -78,7 +77,7 @@ class SugarUpgradeVisualPipelineAddDefaultConfigs extends UpgradeScript
                 ],
                 'Opportunities' => [
                     'sales_stage' => [
-                        'Prospecting' =>  'Prospecting',
+                        'Prospecting' => 'Prospecting',
                         'Qualification' => 'Qualification',
                         'Needs Analysis' => 'Needs Analysis',
                         'Value Proposition' => 'Value Proposition',

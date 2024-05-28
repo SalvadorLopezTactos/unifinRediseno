@@ -12,12 +12,12 @@
 --}}
 {{#each collection.models}}
     <li class="megamenu-dropdown-item-container">
-        <a class="ellipsis_inline megamenu-dropdown-item" tabindex="-1" href="#{{buildRoute model=this}}"
+        <a class="megamenu-dropdown-item" tabindex="-1" href="#{{buildRoute model=this}}"
            data-route="#{{buildRoute model=this}}" title="{{fieldValue this 'name'}}"
          >
             <i class="sicon sicon-clock active"></i>
             {{!FIXME this should be improved by SC-2622}}
-            <span class="text-overflow">
+            <span class="ellipsis_inline">
                 {{#if attributes.name}}
                     {{fieldValue this 'name'}}
                 {{else}}

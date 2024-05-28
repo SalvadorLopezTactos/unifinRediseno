@@ -9,43 +9,43 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ProductTemplates']['base']['filter']['basic'] = array(
+$viewdefs['ProductTemplates']['base']['filter']['basic'] = [
     'create' => true,
-    'quicksearch_field' => array('name', 'category_name', 'type_name'),
+    'quicksearch_field' => ['name', 'category_name', 'type_name'],
     'quicksearch_priority' => 1,
-    'filters' => array(
-        array(
+    'filters' => [
+        [
             'id' => 'all_records',
             'name' => 'LBL_LISTVIEW_FILTER_ALL',
-            'filter_definition' => array(),
+            'filter_definition' => [],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'recently_viewed',
             'name' => 'LBL_RECENTLY_VIEWED',
-            'filter_definition' => array(
+            'filter_definition' => [
                 '$tracker' => '-7 day',
-            ),
+            ],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'recently_created',
             'name' => 'LBL_NEW_RECORDS',
-            'filter_definition' => array(
-                'date_entered' => array(
+            'filter_definition' => [
+                'date_entered' => [
                     '$dateRange' => 'last_7_days',
-                ),
-            ),
+                ],
+            ],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'favorites',
             'name' => 'LBL_FAVORITES',
-            'filter_definition' => array(
+            'filter_definition' => [
                 '$favorite' => '',
-            ),
+            ],
             'editable' => false,
-        ),
+        ],
         [
             'id' => 'product_template_status',
             'name' => 'LBL_FILTER_ACTIVE_STATUS',
@@ -59,5 +59,5 @@ $viewdefs['ProductTemplates']['base']['filter']['basic'] = array(
             'editable' => true,
             'is_template' => true,
         ],
-    ),
-);
+    ],
+];

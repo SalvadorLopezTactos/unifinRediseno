@@ -92,28 +92,28 @@ class Container
      * Registered providers
      * @var array
      */
-    protected $providers = array();
+    protected $providers = [];
 
     /**
      * Configuration parameters
      * @var array
      */
-    protected $config = array(
-        'engine' => array(),
-        'global' => array(),
-    );
+    protected $config = [
+        'engine' => [],
+        'global' => [],
+    ];
 
     /**
      * Provider initialization callbacks
      * @var array
      */
-    protected $providerInit = array();
+    protected $providerInit = [];
 
     /**
      * Resource initialization callbacks
      * @var array
      */
-    protected $resourceInit = array();
+    protected $resourceInit = [];
 
     /**
      * To instantiate this container self::create() should be used instead
@@ -180,7 +180,6 @@ class Container
         // Lazy load resources when accessed
         $init = 'init' . ucfirst($resource);
         if (property_exists($this, $resource) && method_exists($this, $init)) {
-
             // instantiate resource
             $this->$init();
 
@@ -260,7 +259,7 @@ class Container
     protected function initIndexPool()
     {
         $prefix = SugarConfig::getInstance()->get('unique_key', 'sugarcrm');
-        $config = SugarArray::staticGet($this->getConfig('engine'), 'index_strategy', array());
+        $config = SugarArray::staticGet($this->getConfig('engine'), 'index_strategy', []);
         $this->indexPool = new IndexPool($prefix, $config, $this);
     }
 
@@ -269,7 +268,7 @@ class Container
      */
     protected function initIndexManager()
     {
-        $config = SugarArray::staticGet($this->getConfig('engine'), 'index_settings', array());
+        $config = SugarArray::staticGet($this->getConfig('engine'), 'index_settings', []);
         $this->indexManager = new IndexManager($config, $this);
 
         // reindex refresh interval from config
@@ -322,7 +321,7 @@ class Container
      * @param array $default Default array if not found
      * @return array
      */
-    public function getConfig($key, array $default = array())
+    public function getConfig($key, array $default = [])
     {
         if (isset($this->config[$key])) {
             return $this->config[$key];
@@ -389,8 +388,8 @@ class Container
     /**
      * Lazy load provider object
      * @param string $identifier Provider identifier
-     * @throws ContainerException
      * @return ProviderInterface
+     * @throws ContainerException
      */
     public function getProvider($identifier)
     {
@@ -422,8 +421,8 @@ class Container
 
     /**
      * Get current user
-     * @throws ContainerException
      * @return \User
+     * @throws ContainerException
      */
     protected function getCurrentUser()
     {

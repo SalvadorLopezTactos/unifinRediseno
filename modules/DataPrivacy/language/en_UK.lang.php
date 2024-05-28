@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Data Privacy',
     'LBL_MODULE_NAME_SINGULAR' => 'Data Privacy',
     'LBL_NUMBER' => 'Number',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'No Fields or Records have been marked to erase.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Data Privacy Record Dashboard',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Data Privacy Focus Drawer',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Data Privacy Timeline',
 
     // list view
     'LBL_HELP_RECORDS' => 'The Data Privacy module tracks privacy activities, including consent and subject requests, to support your organization&#39;s privacy procedures. Create data privacy records related to an individual&#39;s record (e.g. a contact) to track consent or take action on a privacy request.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'The Data Privacy module tracks privacy activities, including consent and subject requests, to support your organization&#39;s privacy procedures. Create data privacy records related to an individual&#39;s record (e.g. a contact) to track consent or take action on a privacy request. Once the needed action has been completed, users in the Data Privacy Manager role can click "Complete" or "Reject" to update the status.
 
 For erasure requests, select "Mark to Erase" for each of the individual&#39;s records listed in the subpanels below. Once all desired fields have been selected, clicking "Erase and Complete" will permanently remove the fields&#39; values and mark the data privacy record as completed.',
-);
+];

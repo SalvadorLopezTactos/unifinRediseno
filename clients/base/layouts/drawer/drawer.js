@@ -689,6 +689,7 @@
         // sure there actually is a context to use on the layout
         if (layout.context) {
             app.trigger('app:view:change', layout.options.type, _.extend(layout.context.attributes, {drawer: true}));
+            layout.context.trigger('animation-completed');
         }
 
         this._enterState(this.STATES.IDLE);

@@ -28,7 +28,23 @@ $viewdefs['DRI_SubWorkflow_Templates']['mobile']['view']['edit'] = [
             'label' => 'LBL_PANEL_DEFAULT',
             'fields' => [
                 'name',
+                'dri_workflow_template_name',
+                'sort_order',
+                'points',
+                'related_activities',
+                [
+                    'name' => 'description',
+                    'span' => 12,
+                ],
+                'start_next_journey_name',
+                'date_modified',
+                'modified_by_name',
+                'date_entered',
+                'created_by_name',
                 'team_name',
+                [
+                    'name' => 'tag',
+                ],
             ],
         ],
     ],

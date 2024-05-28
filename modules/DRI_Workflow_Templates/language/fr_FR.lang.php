@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Actif',
     'LBL_ASSIGNEE_RULE' => 'Règle du destinataire',
     'LBL_TARGET_ASSIGNEE' => 'Destinataire cible',
+    'LBL_STAGE_NUMBERS' => 'Numération d&#39;étape',
     'LBL_EXPORT_BUTTON_LABEL' => 'Exporter',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Importer',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Crée/met à jour automatiquement un nouvel enregistrement de modèle de guide intelligent en important un fichier *.json depuis votre système de fichiers.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Si cette option est cochée, si Destinataire cible = Destinataire parent, lorsque l&#39;utilisateur "Assigné à" est modifié sur un parent, les utilisateurs "Assigné à" seront aussi automatiquement modifiés sur les guides intelligents, les étapes et les activités. Notez que les paramètres de Destinataire cible sur les modèles d&#39;activité ont la priorité sur le modèle de guide intelligent',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Quand un utilisateur doit-il être assigné aux activités',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Qui doit être assigné aux activités',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Cette bascule vous permet d’afficher ou de masquer la numérotation automatique des étapes.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Modèle d&#39;activité/d&#39;étape/de guide intelligent',
 ];

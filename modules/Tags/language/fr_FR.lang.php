@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Balises',
     'LBL_GENERIC_LINK' => 'Objets liés',
     'LBL_NAME_LOWER' => 'Nom de balise en minuscules',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'Mes balises',
     'LBL_MY_FAVORITE_TAGS' => 'Mes balises favorites',
     'LBL_MORE_TAGS' => '{{tagsNumber}} balises',
-);
+];

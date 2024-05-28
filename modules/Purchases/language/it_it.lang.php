@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Dashboard record acquisti',
     'LBL_RELATED_ACCOUNT' => 'Account correlato',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Acquisti Focus Drawer',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Sequenza temporale acquisto',
 ];

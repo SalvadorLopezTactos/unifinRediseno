@@ -10,4 +10,4 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$action_view_map['authorize']= 'authorize';
+$action_view_map['authorize'] = 'authorize';

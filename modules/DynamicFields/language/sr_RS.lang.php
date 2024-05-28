@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Evidentiraj poziv',
     'LNK_NEW_MEETING' => 'Zakaži sastanak',
     'LNK_NEW_TASK' => 'Kreiraj zadatak',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Dodatno meta polje 2',
     'COLUMN_TITLE_EXT3' => 'Dodatno meta polje 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'IFrame visina',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'Podrazumevani URL',
     'COLUMN_TITLE_AUDIT' => 'Praćenje promena',
     'COLUMN_TITLE_PII' => 'Lične informacije',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Podrazumevana vrednost:',
     'LBL_AUDITED' => 'Praćenje promena',
     'LBL_REPORTABLE' => 'Dostupno u izveštajima',
-    'ERR_RESERVED_FIELD_NAME' => "Rezervisana ključna reč",
+    'ERR_RESERVED_FIELD_NAME' => 'Rezervisana ključna reč',
     'ERR_SELECT_FIELD_TYPE' => 'Molimo odaberite tip polja',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Naziv polja već postoji',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Polje ime može sadržati samo sledeće karaktere: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Završeno',
     'LBL_EXE_NON_SIM_MODE' => 'Izvršavanje ne-simulacionog moda',
     'LBL_CALCULATION_VISIBLE' => 'Napravite vidljivim za izračunavanja',
-);
+];

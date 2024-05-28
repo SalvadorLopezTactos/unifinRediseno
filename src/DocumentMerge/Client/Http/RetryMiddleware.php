@@ -44,7 +44,7 @@ class RetryMiddleware
      *
      * @return GuzzleRetryMiddleware
      */
-    public function __invoke(callable $handler) : GuzzleRetryMiddleware
+    public function __invoke(callable $handler): GuzzleRetryMiddleware
     {
         return new GuzzleRetryMiddleware(
             $this->shouldRetry($this->maxRetries),
@@ -59,7 +59,7 @@ class RetryMiddleware
      *
      * @return \Closure
      */
-    private function shouldRetry(int $maxRetries) : \Closure
+    private function shouldRetry(int $maxRetries): \Closure
     {
         return function (
             $retries,

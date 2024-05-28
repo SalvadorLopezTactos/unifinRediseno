@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_NOTE_POSITION' => 'Položaj paketa proizvoda',
     'LBL_PRODUCT_BUNDLE_NOTES_QUOTE_DATA_LIST' => 'Popis podataka o ponudama s napomenama o paketu proizvoda',
-);
+];

@@ -13,10 +13,10 @@
 /**
  * Reset the date_modified so we have the seconds on it
  */
-$hook_array['before_save'][] = array(
+$hook_array['before_save'][] = [
     1,
     'setManagerSavedFlag',
     'modules/ForecastManagerWorksheets/ForecastManagerWorksheetHooks.php',
     'ForecastManagerWorksheetHooks',
     'setManagerSavedFlag',
-);
+];

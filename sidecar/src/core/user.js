@@ -9,7 +9,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const Events = require('core/events');
+const Events = require('./events');
 
 function makeLastState() {
     var keySeparator = ':',
@@ -292,7 +292,7 @@ function makeLastState() {
  * }
  *
  * // Use it like this:
- * const User = require('core/user');
+ * const User = require('./user');
  * var userId = User.get('id');
  * // Set app specific settings
  * User.set('sortBy:Cases', 'case_number');
@@ -728,7 +728,7 @@ var User = Backbone.Model.extend({
      * @return {boolean}
      */
     isSetupCompleted: function() {
-        return this.get('cookie_consent') && !this.get('show_wizard');
+        return !this.get('show_wizard');
     },
 
     lastState: makeLastState()

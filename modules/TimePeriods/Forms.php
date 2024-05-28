@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Contains a variety of utility functions used to display UI
  * components such as form headers and footers.  Intended to be modified on a per
  * theme basis.
@@ -25,21 +24,22 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  */
-function get_validate_record_js () {
-global $mod_strings;
-global $app_strings;
+function get_validate_record_js()
+{
+    global $mod_strings;
+    global $app_strings;
 
-$lbl_name = $mod_strings['LBL_TP_NAME'];
-$lbl_start_date = $mod_strings['LBL_TP_START_DATE'];
-$lbl_end_date=$mod_strings['LBL_TP_END_DATE'];
-$lbl_fiscal_year=$mod_strings['LBL_TP_END_DATE'];
-$lbl_fiscal_year=$mod_strings['LBL_TP_IS_FISCAL_YEAR'];
-
-
-$err_missing_required_fields = $app_strings['ERR_MISSING_REQUIRED_FIELDS'];
+    $lbl_name = $mod_strings['LBL_TP_NAME'];
+    $lbl_start_date = $mod_strings['LBL_TP_START_DATE'];
+    $lbl_end_date = $mod_strings['LBL_TP_END_DATE'];
+    $lbl_fiscal_year = $mod_strings['LBL_TP_END_DATE'];
+    $lbl_fiscal_year = $mod_strings['LBL_TP_IS_FISCAL_YEAR'];
 
 
-$the_script  = <<<EOQ
+    $err_missing_required_fields = $app_strings['ERR_MISSING_REQUIRED_FIELDS'];
+
+
+    $the_script = <<<EOQ
 
 <script type="text/javascript" language="Javascript">
 function verify_data(form) {
@@ -76,12 +76,12 @@ function verify_data(form) {
 
 EOQ;
 
-return $the_script;
+    return $the_script;
 }
 
 function get_chooser_js()
 {
-$the_script  = <<<EOQ
+    $the_script = <<<EOQ
 
 <script type="text/javascript" language="Javascript">
 <!--  to hide script contents from old browsers
@@ -107,7 +107,5 @@ document.EditView.display_tabs_def.value = display_tabs_def;
 </script>
 EOQ;
 
-return $the_script;
+    return $the_script;
 }
-
-?>

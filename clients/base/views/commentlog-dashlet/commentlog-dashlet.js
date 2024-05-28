@@ -136,7 +136,8 @@
      */
     hasUnsavedChanges: function() {
         return _.any(this.fields, function(field) {
-            return _.isFunction(field.getCurrentCommentText) && !_.isEmpty(field.getCurrentCommentText().trim());
+            return _.isFunction(field.getCurrentCommentText) &&
+                !_.isEmpty(field.getCurrentCommentText().trim()) && !field.isSaving;
         }, this);
     }
 })

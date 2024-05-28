@@ -74,7 +74,7 @@ class PMSEExporter
     protected function deprecateConstructor()
     {
         $msg = 'Constructors for PMSE Exporters will be deprecated in a future release. ' .
-               'Please use $this->getBean() when a process bean is needed.';
+            'Please use $this->getBean() when a process bean is needed.';
         LoggerManager::getLogger()->deprecated($msg);
         $this->setBean();
     }
@@ -147,7 +147,7 @@ class PMSEExporter
      */
     public function exportProject($id, ServiceBase $api)
     {
-        $projectContent = $this->getProject(array('id' => $id));
+        $projectContent = $this->getProject(['id' => $id]);
 
         // add dependencies when exporting a process definition
         if ($this->getBean() instanceof pmse_Project) {
@@ -157,12 +157,12 @@ class PMSEExporter
         //File Name
         $filename = str_replace(' ', '_', $projectContent['project'][$this->name]) . '.' . $this->extension;
 
-        $api->setHeader("Content-Disposition", "attachment; filename=\"" . $filename . "\"");
-        $api->setHeader("Content-Type", "application/" . $this->extension);
-        $api->setHeader("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
-        $api->setHeader("Last-Modified", TimeDate::httpTime());
-        $api->setHeader("Cache-Control", "max-age=0");
-        $api->setHeader("Pragma", "public");
+        $api->setHeader('Content-Disposition', 'attachment; filename="' . $filename . '"');
+        $api->setHeader('Content-Type', 'application/' . $this->extension);
+        $api->setHeader('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT');
+        $api->setHeader('Last-Modified', TimeDate::httpTime());
+        $api->setHeader('Cache-Control', 'max-age=0');
+        $api->setHeader('Pragma', 'public');
 
         return json_encode($projectContent);
     }
@@ -197,7 +197,7 @@ class PMSEExporter
      */
     private function getDependentElementIds(string $dependency, array $projectContent)
     {
-        $ids = array();
+        $ids = [];
 
         switch ($dependency) {
             case 'email_template':
@@ -236,12 +236,12 @@ class PMSEExporter
      */
     public function getDependentContent(array $ids, string $type)
     {
-        $content = array();
+        $content = [];
         foreach ($ids as $value) {
             // get the exporter type
             $exporter = $this->getExporter($type);
             // we don't wanna add metadata again
-            $projectData = $exporter->getProject(array('id' => $value, 'project_only' => true));
+            $projectData = $exporter->getProject(['id' => $value, 'project_only' => true]);
             if (isset($projectData['project'])) {
                 $content[] = $projectData['project'];
             }
@@ -270,7 +270,7 @@ class PMSEExporter
     {
         // If there is a fetched row for this bean, grab the data
         if (!empty($bean->fetched_row)) {
-            $ret = (array) $bean->fetched_row;
+            $ret = (array)$bean->fetched_row;
 
             // Add tags as a collection property of the bean
             if (($tags = $bean->getTags()) !== []) {
@@ -310,7 +310,7 @@ class PMSEExporter
 
             return $ret;
         } else {
-            return array('error' => true);
+            return ['error' => true];
         }
     }
 
@@ -328,7 +328,7 @@ class PMSEExporter
         global $sugar_flavor, $sugar_version, $sugar_config;
         $toolName = 'SugarCRM Business Process Management Suite';
         $toolVersion = '0.1';
-        $metadataObject = array();
+        $metadataObject = [];
         $metadataObject['SugarCRMFlavor'] = $sugar_flavor;
         $metadataObject['SugarCRMVersion'] = $sugar_version;
         $metadataObject['SugarCRMHost'] = $sugar_config['host_name'];

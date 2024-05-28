@@ -16,7 +16,7 @@ class RevisionsLink extends Link2
     /**
      * {@inheritdoc}
      */
-    function buildJoinSugarQuery($sugar_query, $options = array())
+    public function buildJoinSugarQuery($sugar_query, $options = [])
     {
         $sugar_query->where()
             ->notEquals('id', $this->focus->id)

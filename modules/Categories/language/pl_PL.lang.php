@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kategorie',
     'LBL_MODULE_NAME_SINGULAR' => 'Kategoria',
     'LBL_MODULE_TITLE' => 'Kategorie',
@@ -31,4 +31,4 @@ $mod_strings = array(
 Wszystkie kategorie zagnieżdżone zostaną także usunięte',
     'LBL_WRONG_MOVE_PATH' => 'Nie można przenieść folderu do siebie samego.',
     'ERR_EMPTY_NODE_NAME' => 'Nie można dodać kategorii bez tytułu',
-);
+];

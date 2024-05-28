@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Bilgi Tabanı',
     'LBL_MODULE_NAME_SINGULAR' => 'Bilgi Bankası Makalesi',
     'LBL_MODULE_TITLE' => 'Bilgi Tabanı Makalesi',
@@ -17,4 +17,4 @@ $mod_strings = array(
     'LBL_KEYWORDS' => 'Anahtar Kelimeler:',
     'LBL_CONTENT' => 'Kapsam',
     'LBL_ATTACHMENTS' => 'Ekler:',
-);
+];

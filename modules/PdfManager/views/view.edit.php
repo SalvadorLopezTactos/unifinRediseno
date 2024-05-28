@@ -11,7 +11,6 @@
  */
 
 
-
 class PdfManagerViewEdit extends ViewEdit
 {
     public function display()
@@ -21,7 +20,7 @@ class PdfManagerViewEdit extends ViewEdit
         $this->ev->showVCRControl = false;
 
         // Default Team as Global
-        if ((empty($this->bean->id))  && !$this->ev->isDuplicate) {
+        if ((empty($this->bean->id)) && !$this->ev->isDuplicate) {
             $this->bean->team_id = 1;
             $this->bean->team_set_id = 1;
         }
@@ -32,10 +31,10 @@ class PdfManagerViewEdit extends ViewEdit
 
         // Load TinyMCE
         $tiny = new SugarTinyMCE();
-        $tiny->defaultConfig['apply_source_formatting']=true;
-        $tiny->defaultConfig['cleanup_on_startup']=true;
-        $tiny->defaultConfig['relative_urls']=false;
-        $tiny->defaultConfig['convert_urls']=false;
+        $tiny->defaultConfig['apply_source_formatting'] = true;
+        $tiny->defaultConfig['cleanup_on_startup'] = true;
+        $tiny->defaultConfig['relative_urls'] = false;
+        $tiny->defaultConfig['convert_urls'] = false;
         $ed = $tiny->getInstance('body_html');
         $this->ss->assign('tiny_script', $ed);
 

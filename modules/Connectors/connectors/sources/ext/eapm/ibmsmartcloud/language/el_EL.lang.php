@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Λάβετε ένα Κλειδί και Μυστικό από το IBM SmartCloud εγγράφοντας την Sugar παρουσία σας ως νέα εφαρμογή.<br>
 &nbsp;<br>
 Βήματα για εγγραφή της παρουσίας σας:<br>
@@ -28,5 +28,4 @@ $connector_strings = array (
 </td></tr></table>',
     'oauth_consumer_key' => 'Κλειδί Καταναλωτή OAuth',
     'oauth_consumer_secret' => 'Μυστικό Καταναλωτή OAuth',
-);
-
+];

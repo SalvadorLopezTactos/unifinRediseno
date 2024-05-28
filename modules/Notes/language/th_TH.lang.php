@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'แดชบอร์ดรายการโน้ต',
     'LBL_NOTES_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกหมายเหตุ',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'หมายเหตุระบบลิ้นชัก',
     'LBL_EXTERNAL_USER' => 'ผู้ใช้จากภายนอก',
     'LBL_EXTERNAL_USER_NAME' => 'ผู้ใช้จากภายนอก',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์หมายเหตุ',
 
     'LBL_RELATED_CONTACT' => 'ที่อยู่ติดต่อที่เกี่ยวข้อง',
     'ERR_DELETE_RECORD' => 'คุณต้องระบุเลขที่ระเบียนเพื่อลบบัญชี',
@@ -126,4 +127,4 @@ $mod_strings = array(
  - คุณต้องป้อนข้อมูลในฟิลด์ที่มีคำว่า "ต้องระบุ" กำกับไว้ ก่อนที่จะบันทึก
  - คลิก "แสดงเพิ่มเติม" เพื่อแสดงฟิลด์อื่นๆ หากจำเป็น
 2. คลิก "บันทึก" เพื่อสิ้นสุดการสร้างระเบียนใหม่ และกลับสู่เพจก่อนหน้า',
-);
+];

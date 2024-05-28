@@ -16,8 +16,8 @@ use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
 use Sugarcrm\Sugarcrm\Audit\Formatter\Subject;
 use Sugarcrm\Sugarcrm\Security\Subject\Formatter as SubjectFormatter;
 
-class ModuleApi extends SugarApi {
-
+class ModuleApi extends SugarApi
+{
     /** @var RelateRecordApi */
     protected $relateRecordApi;
     private $aclCheckOptions = ['source' => 'module_api'];
@@ -27,10 +27,10 @@ class ModuleApi extends SugarApi {
      *
      * @var array
      */
-    protected $disabledUpdateFields = array(
+    protected $disabledUpdateFields = [
         'deleted',
         'created_by',
-    );
+    ];
 
     /**
      * is IDM mode auth provider enabled?
@@ -49,87 +49,88 @@ class ModuleApi extends SugarApi {
      */
     public function __construct()
     {
-        $idpConfig =  new Config(\SugarConfig::getInstance());
+        $idpConfig = new Config(\SugarConfig::getInstance());
         $this->isIDMModeEnabled = $idpConfig->isIDMModeEnabled();
         $this->idmModeDisabledModules = $idpConfig->getIDMModeDisabledModules();
     }
 
-    public function registerApiRest() {
-        return array(
-            'create' => array(
+    public function registerApiRest()
+    {
+        return [
+            'create' => [
                 'reqType' => 'POST',
-                'path' => array('<module>'),
-                'pathVars' => array('module'),
+                'path' => ['<module>'],
+                'pathVars' => ['module'],
                 'method' => 'createRecord',
                 'shortHelp' => 'This method creates a new record of the specified type',
                 'longHelp' => 'include/api/help/module_post_help.html',
-            ),
-            'retrieve' => array(
+            ],
+            'retrieve' => [
                 'reqType' => 'GET',
-                'path' => array('<module>','?'),
-                'pathVars' => array('module','record'),
+                'path' => ['<module>', '?'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'retrieveRecord',
                 'shortHelp' => 'Returns a single record',
                 'longHelp' => 'include/api/help/module_record_get_help.html',
-            ),
-            'update' => array(
+            ],
+            'update' => [
                 'reqType' => 'PUT',
-                'path' => array('<module>','?'),
-                'pathVars' => array('module','record'),
+                'path' => ['<module>', '?'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'updateRecord',
                 'shortHelp' => 'This method updates a record of the specified type',
                 'longHelp' => 'include/api/help/module_record_put_help.html',
-            ),
-            'delete' => array(
+            ],
+            'delete' => [
                 'reqType' => 'DELETE',
-                'path' => array('<module>','?'),
-                'pathVars' => array('module','record'),
+                'path' => ['<module>', '?'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'deleteRecord',
                 'shortHelp' => 'This method deletes a record of the specified type',
                 'longHelp' => 'include/api/help/module_record_delete_help.html',
-            ),
-            'favorite' => array(
+            ],
+            'favorite' => [
                 'reqType' => 'PUT',
-                'path' => array('<module>','?', 'favorite'),
-                'pathVars' => array('module','record', 'favorite'),
+                'path' => ['<module>', '?', 'favorite'],
+                'pathVars' => ['module', 'record', 'favorite'],
                 'method' => 'setFavorite',
                 'shortHelp' => 'This method sets a record of the specified type as a favorite',
                 'longHelp' => 'include/api/help/module_record_favorite_put_help.html',
-            ),
-            'deleteFavorite' => array(
+            ],
+            'deleteFavorite' => [
                 'reqType' => 'DELETE',
-                'path' => array('<module>','?', 'favorite'),
-                'pathVars' => array('module','record', 'favorite'),
+                'path' => ['<module>', '?', 'favorite'],
+                'pathVars' => ['module', 'record', 'favorite'],
                 'method' => 'unsetFavorite',
                 'shortHelp' => 'This method unsets a record of the specified type as a favorite',
                 'longHelp' => 'include/api/help/module_record_favorite_delete_help.html',
-            ),
-            'unfavorite' => array(
+            ],
+            'unfavorite' => [
                 'reqType' => 'PUT',
-                'path' => array('<module>','?', 'unfavorite'),
-                'pathVars' => array('module','record', 'unfavorite'),
+                'path' => ['<module>', '?', 'unfavorite'],
+                'pathVars' => ['module', 'record', 'unfavorite'],
                 'method' => 'unsetFavorite',
                 'shortHelp' => 'This method unsets a record of the specified type as a favorite',
                 'longHelp' => 'include/api/help/module_record_favorite_delete_help.html',
-            ),
-            'enum' => array(
+            ],
+            'enum' => [
                 'reqType' => 'GET',
-                'path' => array('<module>','enum','?'),
-                'pathVars' => array('module', 'enum', 'field'),
+                'path' => ['<module>', 'enum', '?'],
+                'pathVars' => ['module', 'enum', 'field'],
                 'method' => 'getEnumValues',
                 'shortHelp' => 'This method returns enum values for a specified field',
                 'longHelp' => 'include/api/help/module_enum_get_help.html',
-            ),
-            'pii' => array(
+            ],
+            'pii' => [
                 'reqType' => 'GET',
-                'path' => array('<module>','?', 'pii'),
-                'pathVars' => array('module','record', 'pii'),
+                'path' => ['<module>', '?', 'pii'],
+                'pathVars' => ['module', 'record', 'pii'],
                 'minVersion' => '11.1',
                 'method' => 'getPiiFields',
                 'shortHelp' => 'Returns pii fields',
                 'longHelp' => 'include/api/help/module_record_pii_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -150,13 +151,13 @@ class ModuleApi extends SugarApi {
      */
     public function getPiiFields(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module','record'));
+        $this->requireArgs($args, ['module', 'record']);
 
         $bean = $this->loadBean($api, $args, 'view');
         //get the list of pii fields
-        $piiFields = array_keys($bean->getFieldDefinitions('pii', array(true)));
+        $piiFields = array_keys($bean->getFieldDefinitions('pii', [true]));
         $filter = $this->getFieldsFromArgs($api, $args);
-        if (count($filter) > 0) {
+        if (safeCount($filter) > 0) {
             $piiFields = array_intersect($piiFields, $filter);
         }
         $args['fields'] = $piiFields;
@@ -240,9 +241,9 @@ class ModuleApi extends SugarApi {
             $value = [
                 'id' => $email['email_address_id'],
                 'email_address' => $email['email_address'],
-                'opt_out' => (bool) $email['opt_out'],
-                'invalid_email' => (bool) $email['invalid_email'],
-                'primary_address' => (bool) $email['primary_address'],
+                'opt_out' => (bool)$email['opt_out'],
+                'invalid_email' => (bool)$email['invalid_email'],
+                'primary_address' => (bool)$email['primary_address'],
             ];
             $fields[] = $this->mergeFieldWithEvent(
                 'email',
@@ -268,11 +269,11 @@ class ModuleApi extends SugarApi {
      */
     public function getEnumValues(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module','field'));
+        $this->requireArgs($args, ['module', 'field']);
 
         $bean = BeanFactory::newBean($args['module']);
 
-        if(!isset($bean->field_defs[$args['field']])) {
+        if (!isset($bean->field_defs[$args['field']])) {
             throw new SugarApiExceptionNotFound('field not found');
         }
 
@@ -281,7 +282,7 @@ class ModuleApi extends SugarApi {
         $value = null;
         $cache_age = 0;
 
-        if(isset($vardef['function'])) {
+        if (isset($vardef['function'])) {
             $cache_age = 60;
         } else {
             $cache_age = 3600;
@@ -292,7 +293,7 @@ class ModuleApi extends SugarApi {
         }
         // If a particular field has an option list that is expensive to calculate and/or rarely changes,
         // set the cache_setting property on the vardef to the age in seconds you want browsers to wait before refreshing
-        if(isset($vardef['cache_setting'])) {
+        if (isset($vardef['cache_setting'])) {
             $cache_age = $vardef['cache_setting'];
         }
         generateEtagHeader(md5(serialize($value)), $cache_age);
@@ -330,15 +331,15 @@ class ModuleApi extends SugarApi {
      * @throws SugarApiExceptionMissingParameter
      * @throws SugarApiExceptionNotAuthorized
      */
-    public function createBean(ServiceBase $api, array $args, array $additionalProperties = array())
+    public function createBean(ServiceBase $api, array $args, array $additionalProperties = [])
     {
         $api->action = 'save';
-        $this->requireArgs($args,array('module'));
+        $this->requireArgs($args, ['module']);
 
         // Users can be created only in cloud console for IDM mode.
         if (safeInArray($args['module'], $this->idmModeDisabledModules)
-                && $this->isIDMModeEnabled()
-                && empty($args['skip_idm_mode_restrictions'])) {
+            && $this->isIDMModeEnabled()
+            && empty($args['skip_idm_mode_restrictions'])) {
             throw new SugarApiExceptionNotAuthorized();
         }
 
@@ -352,13 +353,13 @@ class ModuleApi extends SugarApi {
         if (!$bean->ACLAccess('save', $this->aclCheckOptions)) {
             // No create access so we construct an error message and throw the exception
             $moduleName = null;
-            if(isset($args['module'])){
+            if (isset($args['module'])) {
                 $failed_module_strings = return_module_language($GLOBALS['current_language'], $args['module']);
                 $moduleName = $failed_module_strings['LBL_MODULE_NAME'];
             }
             $args = null;
-            if(!empty($moduleName)){
-                $args = array('moduleName' => $moduleName);
+            if (!empty($moduleName)) {
+                $args = ['moduleName' => $moduleName];
             }
             throw new SugarApiExceptionNotAuthorized('EXCEPTION_CREATE_MODULE_NOT_AUTHORIZED', $args);
         }
@@ -368,7 +369,7 @@ class ModuleApi extends SugarApi {
             if (BeanFactory::getBean(
                 $args['module'],
                 $args['id'],
-                array('strict_retrieve' => true, 'disable_row_level_security' => true)
+                ['strict_retrieve' => true, 'disable_row_level_security' => true]
             )) {
                 throw new SugarApiExceptionInvalidParameter(
                     'Record already exists: ' . $args['id'] . ' in module: ' . $args['module']
@@ -424,7 +425,7 @@ class ModuleApi extends SugarApi {
         }
 
         $api->action = 'view';
-        $this->requireArgs($args,array('module','record'));
+        $this->requireArgs($args, ['module', 'record']);
 
         $bean = $this->loadBean($api, $args, 'save', $this->aclCheckOptions);
         $api->action = 'save';
@@ -458,18 +459,17 @@ class ModuleApi extends SugarApi {
 
         $relateArgs = $this->getRelatedRecordArguments($bean, $args, 'create');
         $this->createRelatedRecords($api, $bean, $relateArgs);
-
     }
 
     public function retrieveRecord(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args,array('module','record'));
+        $this->requireArgs($args, ['module', 'record']);
 
         $bean = $this->loadBean($api, $args, 'view');
 
         // formatBean is soft on view so that creates without view access will still work
         if (!$bean->ACLAccess('view', $this->aclCheckOptions)) {
-            throw new SugarApiExceptionNotAuthorized('SUGAR_API_EXCEPTION_RECORD_NOT_AUTHORIZED',array('view'));
+            throw new SugarApiExceptionNotAuthorized('SUGAR_API_EXCEPTION_RECORD_NOT_AUTHORIZED', ['view']);
         }
 
         $api->action = 'view';
@@ -480,24 +480,24 @@ class ModuleApi extends SugarApi {
 
     public function deleteRecord(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args,array('module','record'));
+        $this->requireArgs($args, ['module', 'record']);
 
         // Users can be deleted only in cloud console for IDM mode.
         if (safeInArray($args['module'], $this->idmModeDisabledModules)
-                && $this->isIDMModeEnabled()
-                && empty($args['skip_idm_mode_restrictions'])) {
+            && $this->isIDMModeEnabled()
+            && empty($args['skip_idm_mode_restrictions'])) {
             throw new SugarApiExceptionNotAuthorized();
         }
 
         $bean = $this->loadBean($api, $args, 'delete', $this->aclCheckOptions);
         $bean->mark_deleted($args['record']);
 
-        return array('id'=>$bean->id);
+        return ['id' => $bean->id];
     }
 
     public function setFavorite(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'record'));
+        $this->requireArgs($args, ['module', 'record']);
         $bean = $this->loadBean($api, $args, 'view');
 
         if (!$bean->ACLAccess('view', $this->aclCheckOptions)) {
@@ -509,13 +509,13 @@ class ModuleApi extends SugarApi {
             }
             $args = null;
             if (!empty($moduleName)) {
-                $args = array('moduleName' => $moduleName);
+                $args = ['moduleName' => $moduleName];
             }
             throw new SugarApiExceptionNotAuthorized('EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED', $args);
         }
 
         $this->toggleFavorites($bean, true);
-        $bean = BeanFactory::getBean($bean->module_dir, $bean->id, array('use_cache' => false));
+        $bean = BeanFactory::getBean($bean->module_dir, $bean->id, ['use_cache' => false]);
         $api->action = 'view';
         $data = $this->formatBean($api, $args, $bean);
         return $data;
@@ -523,7 +523,7 @@ class ModuleApi extends SugarApi {
 
     public function unsetFavorite(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'record'));
+        $this->requireArgs($args, ['module', 'record']);
         $bean = $this->loadBean($api, $args, 'view');
 
         if (!$bean->ACLAccess('view', $this->aclCheckOptions)) {
@@ -535,13 +535,13 @@ class ModuleApi extends SugarApi {
             }
             $args = null;
             if (!empty($moduleName)) {
-                $args = array('moduleName' => $moduleName);
+                $args = ['moduleName' => $moduleName];
             }
             throw new SugarApiExceptionNotAuthorized('EXCEPTION_FAVORITE_MODULE_NOT_AUTHORIZED', $args);
         }
 
         $this->toggleFavorites($bean, false);
-        $bean = BeanFactory::getBean($bean->module_dir, $bean->id, array('use_cache' => false));
+        $bean = BeanFactory::getBean($bean->module_dir, $bean->id, ['use_cache' => false]);
         $api->action = 'view';
         $data = $this->formatBean($api, $args, $bean);
         return $data;
@@ -556,7 +556,7 @@ class ModuleApi extends SugarApi {
      */
     protected function getRelatedFields(array $args, SugarBean $bean)
     {
-        $additional_rel_fields = array();
+        $additional_rel_fields = [];
 
         foreach ($bean->field_defs as $fieldName => $fieldDef) {
             if (isset($fieldDef['rname_link']) && !empty($args[$fieldDef['name']])) {
@@ -578,7 +578,7 @@ class ModuleApi extends SugarApi {
     protected function moveTemporaryFiles(array $args, SugarBean $bean)
     {
 
-        $fileFields = $bean->getFieldDefinitions('type', array('file', 'image'));
+        $fileFields = $bean->getFieldDefinitions('type', ['file', 'image']);
         $sfh = new SugarFieldHandler();
         // FIXME This path should be changed with BR-1955.
         $basepath = UploadStream::path('upload://tmp/');
@@ -614,7 +614,7 @@ class ModuleApi extends SugarApi {
                 ) {
                     throw new SugarApiExceptionInvalidParameter(string_format(
                         $GLOBALS['app_strings']['LBL_UPLOAD_IMAGE_FILE_NOT_SUPPORTED'],
-                        array($extension)
+                        [$extension]
                     ));
                 }
 
@@ -624,8 +624,8 @@ class ModuleApi extends SugarApi {
 
             // FIXME BR-1956 will address having multiple files
             // associated with a record.
-            $from = UploadStream::STREAM_NAME . "://tmp/" . $args[$fieldName . '_guid'];
-            $to = UploadStream::STREAM_NAME . "://" . $filename;
+            $from = UploadStream::STREAM_NAME . '://tmp/' . $args[$fieldName . '_guid'];
+            $to = UploadStream::STREAM_NAME . '://' . $filename;
             UploadStream::move_temp_file($from, $to);
         }
     }
@@ -661,7 +661,7 @@ class ModuleApi extends SugarApi {
     {
         // Load the bean fresh to ensure the cache entry from the create process
         // doesn't get in the way of visibility checks
-        return $this->loadBean($api, $args, 'view', array('use_cache' => false));
+        return $this->loadBean($api, $args, 'view', ['use_cache' => false]);
     }
 
     /**
@@ -677,9 +677,9 @@ class ModuleApi extends SugarApi {
     protected function formatBeanAfterSave(ServiceBase $api, array $args, SugarBean $bean)
     {
         $api->action = 'view';
-        $data = $this->formatBean($api, $args, $bean, array(
+        $data = $this->formatBean($api, $args, $bean, [
             'display_acl' => true,
-        ));
+        ]);
 
         return $data;
     }
@@ -694,7 +694,7 @@ class ModuleApi extends SugarApi {
      */
     protected function processAfterCreateOperations(array $args, SugarBean $bean)
     {
-        $this->requireArgs($args, array('module'));
+        $this->requireArgs($args, ['module']);
 
         global $dictionary;
         $afterCreateKey = 'after_create';
@@ -732,7 +732,7 @@ class ModuleApi extends SugarApi {
      */
     protected function getRelatedRecordArguments(SugarBean $bean, array $args, $action)
     {
-        $arguments = array();
+        $arguments = [];
         foreach ($bean->getFieldDefinitions() as $field => $definition) {
             if (!isset($definition['type']) || $definition['type'] != 'link') {
                 continue;
@@ -783,20 +783,21 @@ class ModuleApi extends SugarApi {
      */
     protected function linkRelatedRecords(
         ServiceBase $service,
-        SugarBean $bean,
-        array $ids,
+        SugarBean   $bean,
+        array       $ids,
         $securityTypeLocal = 'view',
         $securityTypeRemote = 'view'
     ) {
+
         $api = $this->getRelateRecordApi();
         foreach ($ids as $linkName => $items) {
             if (!empty($items)) {
-                $api->createRelatedLinks($service, array(
+                $api->createRelatedLinks($service, [
                     'module' => $bean->module_name,
                     'record' => $bean->id,
                     'link_name' => $linkName,
                     'ids' => $items,
-                ), $securityTypeLocal, $securityTypeRemote);
+                ], $securityTypeLocal, $securityTypeRemote);
             }
         }
     }
@@ -815,12 +816,12 @@ class ModuleApi extends SugarApi {
         $api = $this->getRelateRecordApi();
         foreach ($ids as $linkName => $items) {
             foreach ($items as $id) {
-                $api->deleteRelatedLink($service, array(
+                $api->deleteRelatedLink($service, [
                     'module' => $bean->module_name,
                     'record' => $bean->id,
                     'link_name' => $linkName,
                     'remote_id' => $id,
-                ));
+                ]);
             }
         }
     }

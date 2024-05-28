@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Інформаційна панель списку продуктів комерційної пропозиції',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Інформаційна панель записів про продукти комерційної пропозиції',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель продуктів комерційної пропозиції',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Часова шкала продуктів комерційної пропозиції',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Продукт маркетингової кампанії',
     'LBL_MODULE_NAME' => 'Продукти комерційної пропозиції',
@@ -183,4 +184,4 @@ $mod_strings = array(
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Новий продукт)',
     'LBL_DISCOUNT_PERCENT' => '%, відсотки',
     'LBL_DISCOUNT_TYPE' => 'Тип знижки',
-);
+];

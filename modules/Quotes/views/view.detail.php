@@ -19,9 +19,9 @@ class QuotesViewDetail extends ViewDetail
     public function display()
     {
         global $beanFiles;
-        require_once($beanFiles['Quote']);
-        require_once($beanFiles['TaxRate']);
-        require_once($beanFiles['Shipper']);
+        require_once $beanFiles['Quote'];
+        require_once $beanFiles['TaxRate'];
+        require_once $beanFiles['Shipper'];
 
         if ($this->bean->fetched_row['date_quote_expected_closed'] == '1970-01-01' ||
             $this->bean->fetched_row['date_quote_expected_closed'] == '0001-01-01') {
@@ -31,7 +31,7 @@ class QuotesViewDetail extends ViewDetail
         $this->bean->load_relationship('product_bundles');
         $product_bundle_list = $this->bean->product_bundles->getBeans();
         if (is_array($product_bundle_list)) {
-            usort($product_bundle_list, array('ProductBundle', 'compareProductBundlesByIndex'));
+            usort($product_bundle_list, ['ProductBundle', 'compareProductBundlesByIndex']);
         }
 
         $this->ss->assign('ordered_bundle_list', $product_bundle_list);

@@ -17,30 +17,33 @@
  **/
 class AddDaysExpression extends DateExpression
 {
-	/**
-	 * Returns the entire enumeration bare.
-	 */
-	function evaluate() {
+    /**
+     * Returns the entire enumeration bare.
+     */
+    public function evaluate()
+    {
         $params = $this->getParameters();
 
         $date = DateExpression::parse($params[0]->evaluate());
-        if(!$date) {
+        if (!$date) {
             return false;
         }
-        $days = (int) $params[1]->evaluate();
-        
-        if ($days < 0)
-           return $date->modify("$days day");
+        $days = (int)$params[1]->evaluate();
+
+        if ($days < 0) {
+            return $date->modify("$days day");
+        }
 
         return $date->modify("+$days day");
-	}
+    }
 
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
 		    var params = this.getParameters();
             var fromDate = params[0].evaluate();
             if (!fromDate) {
@@ -64,29 +67,34 @@ class AddDaysExpression extends DateExpression
 
             return d;
 EOQ;
-	}
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return "addDays";
-	}
-    static function getParameterTypes() {
-		return array("date", "number");
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return 'addDays';
+    }
 
-	/**
-	 * Returns the maximum number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 2;
-	}
+    public static function getParameterTypes()
+    {
+        return ['date', 'number'];
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * Returns the maximum number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 2;
+    }
+
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 }

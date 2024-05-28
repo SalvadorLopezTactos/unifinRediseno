@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -28,7 +30,7 @@ final class InMemory implements KeyStorage
     /**
      * {@inheritDoc}
      */
-    public function getKey() : ?UuidInterface
+    public function getKey(): ?UuidInterface
     {
         return $this->key;
     }
@@ -36,7 +38,7 @@ final class InMemory implements KeyStorage
     /**
      * {@inheritDoc}
      */
-    public function updateKey(UuidInterface $key) : void
+    public function updateKey(UuidInterface $key): void
     {
         $this->key = $key;
     }

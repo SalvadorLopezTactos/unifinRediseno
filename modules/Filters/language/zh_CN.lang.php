@@ -10,12 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_LISTVIEW_FILTER_ALL' => '所有{0}',
     'LBL_TEAM' => '团队',
     'LBL_TEAMS' => '团队',
     'LBL_TEAM_ID' => '团队编号',
-    'LBL_ASSIGNED_TO_ID' => '分配的用户 ID',
+    'LBL_ASSIGNED_TO_ID' => '担当ID',
     'LBL_ASSIGNED_TO_NAME' => '负责人',
     'LBL_ID' => 'ID',
     'LBL_DATE_ENTERED' => '创建日期',
@@ -77,4 +77,4 @@ $mod_strings = array(
     'LBL_OPEN_ISSUES' => '打开 {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => '最近已解决',
     'LBL_FILTER_UTILS_CREATED' => '创建人',
-);
+];

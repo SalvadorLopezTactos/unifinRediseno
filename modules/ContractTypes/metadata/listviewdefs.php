@@ -11,16 +11,15 @@
  */
 
 
-$listViewDefs['ContractTypes'] = array(
-    'NAME' => array(
-        'width' => '80', 
-        'label' => 'LBL_NAME', 
+$listViewDefs['ContractTypes'] = [
+    'NAME' => [
+        'width' => '80',
+        'label' => 'LBL_NAME',
         'link' => true,
-        'default' => true),
-    'LIST_ORDER' => array(
-        'width' => '20', 
+        'default' => true],
+    'LIST_ORDER' => [
+        'width' => '20',
         'label' => 'LBL_LIST_ORDER',
-        'default' => true),
-        
-);
-?>
+        'default' => true],
+
+];

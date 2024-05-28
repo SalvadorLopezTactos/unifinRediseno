@@ -11,11 +11,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['ProjectTask']['base']['layout']['records'] = array(
+$viewdefs['ProjectTask']['base']['layout']['records'] = [
     'type' => 'bwc',
-    'components' => array(
-        array(
+    'components' => [
+        [
             'view' => 'bwc',
-        ),
-    ),
-);
+        ],
+    ],
+];

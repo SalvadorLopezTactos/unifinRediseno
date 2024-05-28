@@ -33,107 +33,107 @@ if (substr($_SERVER['REQUEST_URI'], -1) == '/') {
 <!DOCTYPE HTML>
 <html>
 
-    <head>
-        <title>SugarCRM Auto Generated API Exceptions Documentation</title>
-        <?php
-        foreach ($css_files as $css) {
-            echo '<link rel="stylesheet" href="' . $base_path . $css . '">';
+<head>
+    <title>SugarCRM Auto Generated API Exceptions Documentation</title>
+    <?php
+    foreach ($css_files as $css) {
+        echo '<link rel="stylesheet" href="' . $base_path . $css . '">';
+    }
+?>
+    <style>
+
+        body {
+            padding: 5px;
         }
-        ?>
-        <style>
 
-            body {
-                padding: 5px;
-            }
+        .container-fluid div {
+            background-color: @NavigationBar;
+        }
 
-            .container-fluid div{
-                background-color: @NavigationBar;
-            }
+        .line {
+            border-bottom: 1px solid black;
+        }
 
-            .line{
-                border-bottom: 1px solid black;
-            }
+        .score {
+            text-align: right;
+        }
 
-            .score{
-                text-align: right;
-            }
+        .pre-scrollable {
+            width: 600px;
+            background-color: white;
+            color: red;
+        }
 
-            .pre-scrollable {
-                width: 600px;
-                background-color: white;
-                color: red;
-            }
+        .table {
 
-            .table {
+            background-color: white;
+        }
 
-                background-color: white;
-            }
+        .table td {
+            white-space: normal;
+            word-wrap: break-word;
+        }
 
-            .table td {
-                white-space: normal;
-                word-wrap: break-word;
-            }
+        h2 {
+            padding-top: 30px;
+        }
 
-            h2{
-                padding-top: 30px;
-            }
+        .well-small {
+            background-color: white;
+        }
 
-            .well-small {
-                background-color: white;
-            }
+        .alert {
+            padding: 20px;
+            text-align: center;
+        }
 
-            .alert {
-                padding: 20px;
-                text-align: center;
-            }
+    </style>
 
-        </style>
+    <?php foreach ($jsfiles as $file) : ?>
+        <script type="text/javascript" src="<?php echo $base_path . $file ?>"></script>
+    <?php endforeach; ?>
+</head>
 
-        <?php foreach ($jsfiles as $file): ?>
-        <script type="text/javascript" src="<?php echo $base_path . $file ?>"></script> 
-        <?php endforeach; ?>
-    </head>
+<body>
 
-    <body>
+<h2>SugarCRM API Exceptions</h2>
 
-        <h2>SugarCRM API Exceptions</h2>
+<p><a href="<?php echo $link_path ?>help">SugarAPI help documentation</a></p>
+<div class="container-fluid">
 
-        <p><a href="<?php echo $link_path ?>help">SugarAPI help documentation</a></p>
-        <div class="container-fluid">
+    <div class="row-fluid">
 
+        <div class="span2"><h1>Type</h1></div>
+        <div class="span1"><h1>HTTP Code</h1></div>
+        <div class="span4"><h1>Description</h1></div>
+        <div class="span2"><h1>Default error code</h1></div>
+        <div class="span3"><h1>Default error message</h1></div>
+    </div>
+
+    <?php foreach ($exceptions as $exception) : ?>
+
+        <div class="row-fluid line" id="<?php echo $exception['element_id'] ?>">
             <div class="row-fluid">
-
-                <div class="span2"><h1>Type</h1></div>
-                <div class="span1"><h1>HTTP Code</h1></div>
-                <div class="span4"><h1>Description</h1></div>
-                <div class="span2"><h1>Default error code</h1></div>
-                <div class="span3"><h1>Default error message</h1></div>
-            </div>
-
-        <?php foreach ($exceptions as $exception): ?>
-
-            <div class="row-fluid line" id="<?php echo $exception['element_id'] ?>">
-                <div class="row-fluid">
-                    <div class="span2">
-                        <?php echo $exception['type'] ?>
-                    </div>
-                    <div class="span1">
-                        <?php echo $exception['code'] ?>
-                    </div>
-                    <div class="span4">
-                        <?php echo $exception['desc'] ?>
-                    </div>
-                    <div class="span2">
-                        <?php echo $exception['label'] ?>
-                    </div>
-                    <div class="span3">
-                        <?php echo $exception['message'] ?>
-                    </div>
+                <div class="span2">
+                    <?php echo $exception['type'] ?>
+                </div>
+                <div class="span1">
+                    <?php echo $exception['code'] ?>
+                </div>
+                <div class="span4">
+                    <?php echo $exception['desc'] ?>
+                </div>
+                <div class="span2">
+                    <?php echo $exception['label'] ?>
+                </div>
+                <div class="span3">
+                    <?php echo $exception['message'] ?>
                 </div>
             </div>
-
-        <?php endforeach; ?>
-
         </div>
-    </body>
+
+    <?php endforeach; ?>
+
+</div>
+</body>
 </html>

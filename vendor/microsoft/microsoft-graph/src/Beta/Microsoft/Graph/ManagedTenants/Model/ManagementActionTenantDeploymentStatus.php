@@ -25,8 +25,9 @@ namespace Beta\Microsoft\Graph\ManagedTenants\Model;
 class ManagementActionTenantDeploymentStatus extends \Beta\Microsoft\Graph\Model\Entity
 {
 
-     /** 
+     /**
      * Gets the statuses
+    * The collection of deployment status for each instance of a management action. Optional.
      *
      * @return array|null The statuses
      */
@@ -38,11 +39,12 @@ class ManagementActionTenantDeploymentStatus extends \Beta\Microsoft\Graph\Model
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the statuses
+    * The collection of deployment status for each instance of a management action. Optional.
     *
-    * @param ManagementActionDeploymentStatus $val The statuses
+    * @param ManagementActionDeploymentStatus[] $val The statuses
     *
     * @return ManagementActionTenantDeploymentStatus
     */
@@ -51,9 +53,10 @@ class ManagementActionTenantDeploymentStatus extends \Beta\Microsoft\Graph\Model
         $this->_propDict["statuses"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the tenantGroupId
+    * The identifier for the tenant group that is associated with the management action. Required. Read-only.
     *
     * @return string|null The tenantGroupId
     */
@@ -65,9 +68,10 @@ class ManagementActionTenantDeploymentStatus extends \Beta\Microsoft\Graph\Model
             return null;
         }
     }
-    
+
     /**
     * Sets the tenantGroupId
+    * The identifier for the tenant group that is associated with the management action. Required. Read-only.
     *
     * @param string $val The tenantGroupId
     *
@@ -78,9 +82,10 @@ class ManagementActionTenantDeploymentStatus extends \Beta\Microsoft\Graph\Model
         $this->_propDict["tenantGroupId"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the tenantId
+    * The Azure Active Directory tenant identifier for the managed tenant. Required. Read-only.
     *
     * @return string|null The tenantId
     */
@@ -92,9 +97,10 @@ class ManagementActionTenantDeploymentStatus extends \Beta\Microsoft\Graph\Model
             return null;
         }
     }
-    
+
     /**
     * Sets the tenantId
+    * The Azure Active Directory tenant identifier for the managed tenant. Required. Read-only.
     *
     * @param string $val The tenantId
     *
@@ -105,5 +111,5 @@ class ManagementActionTenantDeploymentStatus extends \Beta\Microsoft\Graph\Model
         $this->_propDict["tenantId"] = $val;
         return $this;
     }
-    
+
 }

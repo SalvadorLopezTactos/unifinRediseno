@@ -31,55 +31,25 @@ table.rc-table-resizing thead > th > a {
   cursor: ew-resize;
 }
 
-// Common styling for all list layouts that implment flex styling and
-// implment sticky headers and columns
+// Common styling for all list layouts that implement flex styling and
+// implement sticky headers and columns
 .frozen-list-headers.flex-list-layout .main-pane {
-  height: calc(~'100% - 50px');
-  .overflow-hidden();
-
-  .multi-selection-flex {
-    height: calc(~'100% - 78px');
-  }
-
-  .search-filter .filter-options .filter-definition-container {
-    max-height: 215px;
-    .overflow-auto();
-  }
-
-  .massupdate-fields-container {
-    max-height: 215px;
-    .overflow-auto();
-  }
-
   .main-content {
-    .h-full();
-    .overflow-auto();
-
     .paginated-flex-list {
       height: 100%;
 
       .flex-table-pagination {
-        .absolute();
-        .flex();
-        .w-full;
-        .bg-primary-content-background();
-
-        bottom: 0;
-        z-index: 200;
-        border-top: @borderWidget;
+        background-color: var(--primary-content-background);
+        display: flex;
+        position: absolute;
+        width: 100%;
       }
 
       .flex-list-view {
         height: calc(~'100% - 37px');
 
         .flex-list-view-container {
-          .h-full();
-
           .flex-list-view-content {
-            .h-full();
-            .relative();
-            .overflow-auto();
-
             .rc-handle-container {
               position: absolute;
               top: 0;
@@ -87,34 +57,9 @@ table.rc-table-resizing thead > th > a {
             }
 
             table {
-              .overflow-auto();
-
               thead {
-                .sticky();
-
-                top: 0;
-                z-index: 100;
-
                 tr {
                   box-shadow: inset 0 1px 0 @borderColor, inset 0 -2px 0 @borderColor;
-                }
-
-                th.sticky-column.stick-left {
-                  .sticky();
-
-                  left: 0;
-                  z-index: 101;
-                }
-
-                th.sticky-column.stick-first {
-                  z-index: 100;
-                }
-
-                th.sticky-column.stick-right {
-                  .sticky();
-
-                  right: 0;
-                  z-index: 10;
                 }
 
                 .alert {
@@ -123,32 +68,13 @@ table.rc-table-resizing thead > th > a {
                       all: unset;
                     }
 
-                    .relative();
-                    .p-0();
-
-                    .alert-list-contents {
-                      .sticky();
-                      .mt-0();
-
-                      top: 0;
-                    }
+                    padding: 0;
+                    position: relative;
                   }
                 }
               }
 
-              tbody td.sticky-column.stick-left {
-                .sticky();
-
-                left: 0;
-                z-index: 10;
-              }
-
               td.sticky-column.stick-right {
-                .sticky();
-
-                right: 0;
-                z-index: 10;
-
                 &:focus-within {
                   z-index: 11;
                 }
@@ -159,6 +85,26 @@ table.rc-table-resizing thead > th > a {
       }
     }
   }
+}
+
+.drawer.frozen-list-headers.flex-list-layout .main-pane {
+  .main-content {
+    .flex-list-view {
+      height: calc(~'100% - 78px');
+    }
+  }
+}
+
+.dashboard .flex-table-pagination {
+  .block-footer {
+    text-align: left;
+  }
+}
+
+.dashboard .multi-line > .flex-table-pagination {
+  bottom: 0;
+  z-index: 10;
+  border-top: @borderWidget;
 }
 
 .vis_action_hidden input {

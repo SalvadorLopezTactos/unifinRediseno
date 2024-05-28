@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Radha e punës',
     'LBL_MODULE_NAME_SINGULAR' => 'Radha e punës',
     'LBL_MODULE_TITLE' => 'Radha e punës: Shtëpi',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Rezolucioni u anulua',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Rezolucioni aktiv',
     // Errors
-    'ERR_CALL' => "Nuk mund të thërras funksionin: %s",
-    'ERR_CURL' => "Nu ka CURL - nuk mund të hapë punë URL",
-    'ERR_FAILED' => "Dështim i papritur, ju lutemi kontrolloni hyrjet PHP dhe sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s në %s në linje %d",
-    'ERR_NOUSER' => "Nuk ka ID të specifikuar të përdoruesit për këtë punë.",
-    'ERR_NOSUCHUSER' => "ID e përdoruesit %s nuk është gjetur",
-    'ERR_JOBTYPE' => "Lloj i panjohur i punës.%s",
-    'ERR_TIMEOUT' => "Dështim i detyruar në skadim kohe",
+    'ERR_CALL' => 'Nuk mund të thërras funksionin: %s',
+    'ERR_CURL' => 'Nu ka CURL - nuk mund të hapë punë URL',
+    'ERR_FAILED' => 'Dështim i papritur, ju lutemi kontrolloni hyrjet PHP dhe sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s në %s në linje %d',
+    'ERR_NOUSER' => 'Nuk ka ID të specifikuar të përdoruesit për këtë punë.',
+    'ERR_NOSUCHUSER' => 'ID e përdoruesit %s nuk është gjetur',
+    'ERR_JOBTYPE' => 'Lloj i panjohur i punës.%s',
+    'ERR_TIMEOUT' => 'Dështim i detyruar në skadim kohe',
     'ERR_JOB_FAILED_VERBOSE' => 'Puna %1$s (%2$s) dështoi në drejtim të CRON',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Nuk mund të ngarkojë detyrën me id: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Nuk mund të gjejë emrin për itinerarin %s',
@@ -92,13 +92,13 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Ndihmë në konfigurimin e Amazon SQS',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Seksioni i konfigurimit të Amazon SQS.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Seksioni i konfigurimit të Amazon SQS.</b></p>
 <ul>
     <li>ID-ja e çelësit të hyrjes: <i>Vendosni numrin e ID-së së çelësit të hyrjes për Amazon SQS</i></li>
     <li>Çelësi sekret i hyrjes: <i>Vendosni çelësin sekret të hyrjes për Amazon SQS</i></li>
     <li>Rajoni: <i>Vendosni rajonin e serverit Amazon SQS</i></li>
     <li>Emri i radhës: <i>Vendosni emrin e radhës së serverit të Amazon SQS</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'Ndihmë në konfigurimin e AMQP',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>Seksioni i konfigurimit të AMQP.</b></p>
 <ul>
@@ -119,4 +119,4 @@ $mod_strings = array(
     'LBL_REGION' => 'Rajoni',
     'LBL_ACCESS_KEY_SECRET' => 'Çelës sekret hyrjeje',
     'LBL_QUEUE_NAME' => 'Emri i përshatësit',
-);
+];

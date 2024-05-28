@@ -18,75 +18,14 @@
 ({
     extendsFrom: 'FieldsetField',
 
-    _addressBookState: 'closed',
-
     /**
      * @inheritdoc
      */
     initialize: function(options) {
         this.events = _.extend({}, this.events, {
-            'click [data-toggle-field]': '_handleToggleButtonClick',
-            'click .fieldset-field': '_showEditField'
+            'click [data-toggle-field]': '_handleToggleButtonClick'
         });
         this._super('initialize', [options]);
-    },
-
-    /**
-     * @inheritdoc
-     */
-    bindDataChange: function() {
-        this._super('bindDataChange');
-
-        this.listenTo(this.view, 'address-book-state', function(state) {
-            this._addressBookState = state;
-        });
-        this.listenTo(this.view, 'tinymce:focus', this._hideEditField);
-        this.listenTo(this, 'recipients:edit:hide', this._hideEditField);
-    },
-
-    /**
-     * Toggles whether the editable subfields are shown in edit mode
-     *
-     * @param {bool} show whether or not the editable subfields should be shown
-     * @private
-     */
-    _handleFieldEditToggle: function(show) {
-        if (this.disposed || this.action !== 'edit') {
-            return;
-        }
-
-        // Always show the subfields if there are no recipients selected
-        let to = this.model.get('to_collection');
-        let cc = this.model.get('cc_collection');
-        let bcc = this.model.get('bcc_collection');
-        let hasRecipients = to.length > 0 || cc.length > 0 || bcc.length > 0;
-        if (this.view.createMode && !hasRecipients) {
-            show = true;
-        }
-
-        this.$el.toggleClass('edit-toggled', show);
-    },
-
-    /**
-     * Shows the editable subfields
-     *
-     * @private
-     */
-    _showEditField: function() {
-        this._handleFieldEditToggle(true);
-    },
-
-    /**
-     * Hides the editable subfields
-     *
-     * @private
-     */
-    _hideEditField: function() {
-        // Don't hide if the address book is open.
-        if (this._addressBookState === 'open') {
-            return;
-        }
-        this._handleFieldEditToggle(false);
     },
 
     /**
@@ -239,12 +178,5 @@
         }
 
         this.view.trigger('email-recipients:toggled');
-    },
-
-    /**
-     * @inheritdoc
-     */
-    _dispose: function() {
-        this._super('_dispose');
     }
 })

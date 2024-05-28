@@ -11,38 +11,38 @@
  */
 
 $module_name = 'Project';
-$viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
+$viewdefs[$module_name]['base']['menu']['quickcreate'] = [
     'layout' => 'create',
     'visible' => false,
-    'related' => array(
-        array(
+    'related' => [
+        [
             'module' => 'Accounts',
             'link' => 'project',
-        ),
-        array(
+        ],
+        [
             'module' => 'Contacts',
             'link' => 'project',
-        ),
-        array(
+        ],
+        [
             'module' => 'Opportunities',
             'link' => 'project',
-        ),
-        array(
+        ],
+        [
             'module' => 'Tasks',
             'link' => 'project',
-        ),
-        array(
+        ],
+        [
             'module' => 'Meetings',
             'link' => 'project',
-        ),
-        array(
+        ],
+        [
             'module' => 'Calls',
             'link' => 'project',
-        ),
-        array(
+        ],
+        [
             'module' => 'Cases',
             'link' => 'project',
-        ),
-    ),
+        ],
+    ],
 
-);
+];

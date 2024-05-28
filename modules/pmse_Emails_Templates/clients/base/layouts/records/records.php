@@ -10,117 +10,117 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['pmse_Emails_Templates']['base']['layout']['records'] = array(
-    'css_class'=> 'flex-list-layout flex flex-column h-full',
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['pmse_Emails_Templates']['base']['layout']['records'] = [
+    'css_class' => 'flex-list-layout flex flex-col group/records h-full overflow-hidden',
+    'components' => [
+        [
+            'layout' => [
                 'css_class' => 'h-full',
-                'components' => array(
-                    array(
-                        'layout' => array(
-                            'css_class' => 'main-pane span8 flex flex-column',
-                            'components' => array(
-                                array(
+                'components' => [
+                    [
+                        'layout' => [
+                            'css_class' => 'main-pane span8 flex flex-col overflow-hidden h-[calc(100%-55px)]',
+                            'components' => [
+                                [
                                     'view' => 'list-headerpane',
-                                ),
-                                array(
-                                    'layout' => array(
-                                        'css_class' => 'flex flex-column h-full',
+                                ],
+                                [
+                                    'layout' => [
+                                        'css_class' => 'flex flex-col h-full overflow-hidden',
                                         'type' => 'filterpanel',
                                         'span' => 12,
-                                        'last_state' => array(
+                                        'last_state' => [
                                             'id' => 'list-filterpanel',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'toggle-view' => 'list',
-                                            ),
-                                        ),
+                                            ],
+                                        ],
                                         'refresh_button' => true,
-                                        'availableToggles' => array(
-                                            array(
+                                        'availableToggles' => [
+                                            [
                                                 'name' => 'list',
                                                 'icon' => 'sicon-list-view',
                                                 'label' => 'LBL_LISTVIEW',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'name' => 'activitystream',
                                                 'icon' => 'sicon-clock',
                                                 'label' => 'LBL_ACTIVITY_STREAM',
-                                            ),
-                                        ),
-                                        'components' => array(
-                                            array(
+                                            ],
+                                        ],
+                                        'components' => [
+                                            [
                                                 'layout' => 'filter',
                                                 'targetEl' => '.filter',
                                                 'position' => 'prepend',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'filter-rows',
                                                 'targetEl' => '.filter-options',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'filter-actions',
                                                 'targetEl' => '.filter-options',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'layout' => 'activitystream',
-                                                'context' => array(
+                                                'context' => [
                                                     'module' => 'Activities',
-                                                ),
-                                            ),
-                                            array(
+                                                ],
+                                            ],
+                                            [
                                                 'layout' => 'list',
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
                             'type' => 'simple',
                             'name' => 'main-pane',
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
-                            'components' => array(
-                                array(
-                                    'layout' => array(
+                        ],
+                    ],
+                    [
+                        'layout' => [
+                            'components' => [
+                                [
+                                    'layout' => [
                                         'type' => 'dashboard',
-                                        'last_state' => array(
+                                        'last_state' => [
                                             'id' => 'last-visit',
-                                        )
-                                    ),
-                                    'context' => array(
+                                        ],
+                                    ],
+                                    'context' => [
                                         'forceNew' => true,
                                         'module' => 'Home',
-                                    ),
+                                    ],
                                     'loadModule' => 'Dashboards',
-                                ),
-                            ),
+                                ],
+                            ],
                             'type' => 'simple',
                             'name' => 'dashboard-pane',
                             'css_class' => 'dashboard-pane',
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
-                            'components' => array(
-                                array(
+                        ],
+                    ],
+                    [
+                        'layout' => [
+                            'components' => [
+                                [
                                     'layout' => 'preview',
-                                ),
-                            ),
+                                ],
+                            ],
                             'type' => 'simple',
                             'name' => 'preview-pane',
                             'css_class' => 'preview-pane',
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
                 'type' => 'default',
                 'name' => 'sidebar',
                 'span' => 12,
-            ),
-        ),
-    ),
+            ],
+        ],
+    ],
     'type' => 'records',
     'name' => 'base',
     'span' => 12,
-);
+];

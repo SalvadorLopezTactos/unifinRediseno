@@ -479,7 +479,7 @@
                     // the cursor to use when dragging
                     cursor: 'move',
                     // Don't allow dragging to start from clicking in the actions menu
-                    cancel: '.dropdown-toggle, .dropdown-menu'
+                    cancel: '.not-sortable, .dropdown-toggle, .dropdown-menu'
                 });
             }, this);
         }

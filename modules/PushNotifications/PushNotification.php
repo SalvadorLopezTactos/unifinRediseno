@@ -32,7 +32,7 @@ class PushNotification extends Basic
      *
      * @return bool
      */
-    public function send() : bool
+    public function send(): bool
     {
         $service = $this->getService();
         $user = $this->getAssignedUser();

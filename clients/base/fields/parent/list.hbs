@@ -11,20 +11,21 @@
  */
 --}}
 <div class="relate-field-container">
-    {{# if href}}
-        <div class="ellipsis_inline">
-            <span class="parent_avatar"></span>
-            <a href="{{href}}" rel="tooltip" data-placement="bottom"
-               title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}"
-               data-link-target="{{linkTarget}}" data-module="{{module}}" data-model-id="{{modelId}}"
-            >
-                {{value}}
-            </a>
-
-        </div>
-        {{partial 'focus-icon' this this}}
+    {{#if href}}
+        {{#if value}}
+            <div class="ellipsis_inline">
+                <span class="parent_avatar"></span>
+                <a href="{{href}}" rel="tooltip" data-bs-placement="bottom" class="{{module}}"
+                   title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}"
+                   data-link-target="{{linkTarget}}" data-module="{{module}}" data-model-id="{{modelId}}"
+                >
+                    {{value}}
+                </a>
+            </div>
+            {{partial 'focus-icon' this this}}
+        {{/if}}
     {{else}}
-        <span class="ellipsis_inline" data-placement="bottom"
+        <span class="ellipsis_inline" data-bs-placement="bottom"
             title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}"
         >
             {{value}}

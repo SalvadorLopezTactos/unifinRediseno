@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Zināšanu bāzes veidnes',
     'LBL_MODULE_NAME_SINGULAR' => 'Zināšanu bāzes veidnis',
     'LBL_MODULE_TITLE' => 'Zināšanu bāzes veidnis',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Skatīt sagataves',
     'LBL_TEXT_BODY' => 'Paziņojuma teksts',
     'LBL_LIST_TEMPLATE_NAME' => 'Veidnes nosaukums',
-);
+];

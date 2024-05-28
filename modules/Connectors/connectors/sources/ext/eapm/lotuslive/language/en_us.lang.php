@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Obtain a Key and Secret from IBM SmartCloud by registering your Sugar instance as a new application. The ability to register will be possible starting May 8, 2011.<br>
 &nbsp;<br>
 Steps to register your instance:<br>
@@ -28,5 +28,4 @@ Steps to register your instance:<br>
 </td></tr></table>',
     'oauth_consumer_key' => 'OAuth Consumer Key',
     'oauth_consumer_secret' => 'OAuth Consumer Secret',
-);
-
+];

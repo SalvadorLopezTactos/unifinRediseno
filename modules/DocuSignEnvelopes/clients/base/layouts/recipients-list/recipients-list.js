@@ -66,6 +66,10 @@
      * @param {Object} data
      */
     successCallback: function(data) {
+        if (this.disposed) {
+            return;
+        }
+
         this.collection.reset();
 
         _.each(data.recipients, function(recipientData) {

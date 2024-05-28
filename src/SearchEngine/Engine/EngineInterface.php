@@ -82,7 +82,7 @@ interface EngineInterface
      * @param string $clearData
      * @return boolean
      */
-    public function scheduleIndexing(array $modules = array(), $clearData = false);
+    public function scheduleIndexing(array $modules = [], $clearData = false);
 
     /**
      * Create the mappings for given modules without re-creating the indices if exist,
@@ -90,7 +90,7 @@ interface EngineInterface
      * @param array $modules
      * @return bool
      */
-    public function addMappings(array $modules = array());
+    public function addMappings(array $modules = []);
 
     /**
      * Index given bean
@@ -98,7 +98,7 @@ interface EngineInterface
      * @param \SugarBean $bean The bean to index
      * @param array $options Optional options
      */
-    public function indexBean(\SugarBean $bean, array $options = array());
+    public function indexBean(\SugarBean $bean, array $options = []);
 
     /**
      * Run full reindexing inline

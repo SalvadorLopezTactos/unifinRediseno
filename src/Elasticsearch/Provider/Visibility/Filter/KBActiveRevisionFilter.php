@@ -26,7 +26,7 @@ class KBActiveRevisionFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    public function buildFilter(array $options = array())
+    public function buildFilter(array $options = [])
     {
         $field = $options['module'] . Mapping::PREFIX_SEP . 'active_rev.kbvis';
         $filter = new \Elastica\Query\Term();

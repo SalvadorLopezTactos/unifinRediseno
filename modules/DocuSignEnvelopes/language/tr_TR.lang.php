@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Zarfı getir',
     'LBL_CLOUD_SERVICE_TYPE' => 'Bulut hizmeti türü',
     'LBL_CLOUD_PATH' => 'Bulut yolu',
+    'LBL_CLOUD_DRIVE_ID' => 'Sürücü Kimliği',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign Zarfları Listesi Panosu',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'DocuSign Zarfları Kayıt Panosu',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'En Son DocuSign Zarfları',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign Zarfları Odak Bölmesi',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'DocuSign Zarfı Zaman Çizelgesi',
 
     'LBL_NEW_ENVELOPE' => 'Yeni Zarf',
     'LBL_DOCUMENT_IS_NOW' => 'şimdi',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Gönder',
     'LBL_BUTTON_CLEAR' => 'Temizle',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Şablon kullan',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Şablonla gönder',
     'LBL_PLEASE_LOG_IN' => 'Lütfen önce DocuSign&#39;a giriş yapın!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Bu belgeyi indiremezsiniz. Başka bir kullanıcı tarafından oluşturuldu!',
     'LBL_SEND_NOT_ALLOWED' => 'Bu zarfı gönderemezsiniz. Başka bir kullanıcı tarafından oluşturdu!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Taslak değiştirildi. Durum mevcut bir ({{status}}) durumu olarak güncellensin mi?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'DocuSign Zarfı güncellendi!',
     'LBL_DRAFT_CHANGED_ERROR' => 'DocuSign Zarfı durumu güncellenmedi. Ayrıntılar için günlükleri kontrol edin!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'DocuSign Sablonu uygulanamaz',
     'LBL_ENVELOPE_NOT_SENT' => 'Zarf gönderilmedi!',
     'LBL_ENVELOPE_SENT' => 'Zarf tekrar gönderildi!',
     'LBL_DOCUMENT_ADDED' => 'Belge kayda eklendi!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Görev',
     'LBL_SELECT_BUTTON_LABEL' => 'Seç',
     'LBL_BACK_BUTTON_LABEL' => 'Geri',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Şablon adına göre ara',
+    'LBL_ENVELOPE_NAME' => 'Zarf adı',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Zarf adı boş bırakılamaz',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Potansiyel alıcılar alınamadı!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Şablonlar alınamadı!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Lütfen her alıcı için bir rol seçin',
+    
+    'LBL_DOWNLOAD' => 'İndir',
+    'LBL_OPEN_DRAFT' => 'Taslak Aç',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Dosyası olmayan belgeler DocuSign&#39;a gönderilemez.',
+    'LBL_START_SIGN_PROMPT' => 'İmzalama işlemini başlatmak için Artı düğmesine tıklayın',
+    'LBL_NO_DOC_SELECTED' => 'Lütfen önce belgeleri seçin',
+    'LBL_SELECT_RECIPIENTS' => 'İmzalayan alıcıyı seçin',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Hariç',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Daha iyi bir deneyim için DocuSign uygulamasını yüklemeniz gerekir.',
 ];

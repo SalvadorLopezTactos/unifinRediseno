@@ -21,13 +21,15 @@
      */
     setUsersFields: function() {
         var panel = this.getUsersPanel();
-        this.leftUserField = _.find(panel.fields, function(field) {
-            return field.name === 'from_collection';
-        });
-        this.rightUserField = _.find(panel.fields, function(field) {
-            return field.name === 'to_collection';
+
+        const fieldsToDisplay = ['from', 'to', 'cc', 'bcc'];
+
+        fieldsToDisplay.map((name) => {
+            this[`${name}Field`] = _.find(panel.fields, (field) =>
+                field.name === `${name}_collection`
+            );
         });
 
-        this.hasAvatarUser = !!this.leftUserField && !!this.rightUserField;
+        this.hasAvatarUser = !!this.fromField && !!this.toField;
     }
 })

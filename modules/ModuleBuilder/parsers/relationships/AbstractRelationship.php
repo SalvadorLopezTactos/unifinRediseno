@@ -27,7 +27,6 @@ use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 #[AllowDynamicProperties]
 class AbstractRelationship
 {
-
     public $readonly;
     /**
      * @var bool
@@ -43,7 +42,7 @@ class AbstractRelationship
     public $lhs_label;
     public $joinKeyLHS;
     public $joinKeyRHS;
-    protected $definition ; // enough information to rebuild this relationship
+    protected $definition; // enough information to rebuild this relationship
 
 
     /*
@@ -52,38 +51,38 @@ class AbstractRelationship
      * The base set of keys are those used in the Relationships table
      * Defined as Public as MBRelationship uses these to read the _POST data
      */
-    public static $definitionKeys = array (
+    public static $definitionKeys = [
         // atttributes of this relationship - here in the definition so they are preserved across saves and loads
         'for_activities',
-    	'is_custom',
+        'is_custom',
         'from_studio',
-        'readonly' , // a readonly relationship cannot be Built by subclasses of AbstractRelationships
-        'deleted' , // a deleted relationship will not be built, and if it had been built previously the built relationship will be removed
-        'relationship_only' , // means that we won't build any UI components for this relationship - required while the Subpanel code is restricted to one subpanel only from any module, and probably useful afterwards also for developers to build relationships for new code - it's a feature!
+        'readonly', // a readonly relationship cannot be Built by subclasses of AbstractRelationships
+        'deleted', // a deleted relationship will not be built, and if it had been built previously the built relationship will be removed
+        'relationship_only', // means that we won't build any UI components for this relationship - required while the Subpanel code is restricted to one subpanel only from any module, and probably useful afterwards also for developers to build relationships for new code - it's a feature!
         // keys not found in Relationships table
-        'label' , // optional
+        'label', // optional
         'rhs_label', // optional
         'lhs_label', // optional
-        'lhs_subpanel' , // subpanel FROM the lhs_module to display on the rhs_module detail view
-        'rhs_subpanel' , // subpanel FROM the rhs_module to display on the lhs_module detail view
+        'lhs_subpanel', // subpanel FROM the lhs_module to display on the rhs_module detail view
+        'rhs_subpanel', // subpanel FROM the rhs_module to display on the lhs_module detail view
         // keys from Relationships table
-        'relationship_name' ,
-        'lhs_module' ,
-        'lhs_table' ,
-        'lhs_key' ,
-        'lhs_vname' ,
-        'rhs_module' ,
-        'rhs_table' ,
-        'rhs_key' ,
-        'rhs_vname' ,
-        'join_table' ,
-        'join_key_lhs' ,
-        'join_key_rhs' ,
-        'relationship_type' ,
-        'relationship_role_column' ,
-        'relationship_role_column_value' ,
-        'relationship_role_columns' ,
-        'reverse' ) ;
+        'relationship_name',
+        'lhs_module',
+        'lhs_table',
+        'lhs_key',
+        'lhs_vname',
+        'rhs_module',
+        'rhs_table',
+        'rhs_key',
+        'rhs_vname',
+        'join_table',
+        'join_key_lhs',
+        'join_key_rhs',
+        'relationship_type',
+        'relationship_role_column',
+        'relationship_role_column_value',
+        'relationship_role_columns',
+        'reverse'];
 
     /*
      * Relationship_role_column and relationship_role_column_value:
@@ -103,65 +102,66 @@ class AbstractRelationship
      * Constructor
      * @param string $definition    Definition array for this relationship. Parameters are given in self::keys
      */
-    function __construct ($definition)
+    public function __construct($definition)
     {
         // set any undefined attributes to the default value
-        foreach ( array ( 'readonly' , 'deleted' , 'relationship_only', 'for_activities', 'is_custom', 'from_studio' ) as $key )
-            if (! isset ( $definition [ $key ] ))
-                $definition [ $key ] = false ;
-
-        foreach ( self::$definitionKeys as $key )
-        {
-            $this->$key = $definition [ $key ] ?? '' ;
+        foreach (['readonly', 'deleted', 'relationship_only', 'for_activities', 'is_custom', 'from_studio'] as $key) {
+            if (!isset($definition [$key])) {
+                $definition [$key] = false;
+            }
         }
-        $this->definition = $definition ;
+
+        foreach (self::$definitionKeys as $key) {
+            $this->$key = $definition [$key] ?? '';
+        }
+        $this->definition = $definition;
     }
 
     /*
      * Get the unique name of this relationship
      * @return string   The unique name (actually just that given to the constructor)
      */
-    public function getName ()
+    public function getName()
     {
-        return $this->definition [ 'relationship_name' ] ?? null ;
+        return $this->definition ['relationship_name'] ?? null;
     }
 
-    public function setName ($relationshipName)
+    public function setName($relationshipName)
     {
-        $this->relationship_name = $this->definition [ 'relationship_name' ] = $relationshipName ;
+        $this->relationship_name = $this->definition ['relationship_name'] = $relationshipName;
     }
 
     /*
      * Is this relationship readonly or not?
      * @return boolean True if cannot be changed; false otherwise
      */
-    public function readonly ()
+    public function readonly()
     {
-        return $this->definition [ 'readonly' ] ;
+        return $this->definition ['readonly'];
     }
 
-    public function setReadonly ($set = true)
+    public function setReadonly($set = true)
     {
-        $this->readonly = $this->definition [ 'readonly' ] = $set ;
+        $this->readonly = $this->definition ['readonly'] = $set;
     }
 
-    public function setFromStudio ()
+    public function setFromStudio()
     {
-        $this->from_studio = $this->definition [ 'from_studio' ] = true ;
+        $this->from_studio = $this->definition ['from_studio'] = true;
     }
 
     /*
      * Has this relationship been deleted? A deleted relationship does not get built, and is no longer visible in the list of relationships
      * @return boolean True if it has been deleted; false otherwise
      */
-    public function deleted ()
+    public function deleted()
     {
-        return $this->definition [ 'deleted' ] ;
+        return $this->definition ['deleted'];
     }
 
-    public function delete ()
+    public function delete()
     {
-        $this->deleted = $this->definition [ 'deleted' ] = true ;
+        $this->deleted = $this->definition ['deleted'] = true;
     }
 
     public function getFromStudio()
@@ -179,19 +179,19 @@ class AbstractRelationship
         return $this->rhs_module;
     }
 
-    public function getType ()
+    public function getType()
     {
-        return $this->relationship_type ;
+        return $this->relationship_type;
     }
 
-    public function relationship_only ()
+    public function relationship_only()
     {
-        return $this->definition [ 'relationship_only' ] ;
+        return $this->definition ['relationship_only'];
     }
 
-    public function setRelationship_only ()
+    public function setRelationship_only()
     {
-        $this->relationship_only = $this->definition [ 'relationship_only' ] = true ;
+        $this->relationship_only = $this->definition ['relationship_only'] = true;
     }
 
     /*
@@ -202,9 +202,9 @@ class AbstractRelationship
      * `relationship_name`, `lhs_module`, `lhs_table`, `lhs_key`, `rhs_module`, `rhs_table`,`rhs_key`, `join_table`, `join_key_lhs`, `join_key_rhs`, `relationship_type`, `relationship_role_column`, `relationship_role_column_value`, `reverse`,
      * @return array    Set of parameters to pass to an AbstractRelationship constructor - must contain at least ['relationship_type']='OneToOne' or 'OneToMany' or 'ManyToMany'
      */
-    function getDefinition ()
+    public function getDefinition()
     {
-        return $this->definition ;
+        return $this->definition;
     }
 
     /*
@@ -215,25 +215,24 @@ class AbstractRelationship
      * Define the labels to be added to the module for the new relationships
      * @return array    An array of system value => display value
      */
-    function buildLabels ($update=false)
+    public function buildLabels($update = false)
     {
         $layout_defs = [];
-        $labelDefinitions = array ( ) ;
-        if (!$this->relationship_only)
-        {
-        	if(!$this->is_custom && $update && file_exists("modules/{$this->rhs_module}/metadata/subpaneldefs.php")){
-        		include FileLoader::validateFilePath("modules/{$this->rhs_module}/metadata/subpaneldefs.php");
-        		if(isset($layout_defs[$this->rhs_module]['subpanel_setup'][strtolower($this->lhs_module)]['title_key'])){
-        			$rightSysLabel = $layout_defs[$this->rhs_module]['subpanel_setup'][strtolower($this->lhs_module)]['title_key'];
-        		}
-        		$layout_defs = array();
-        	}
-        	if(!$this->is_custom && $update && file_exists("modules/{$this->lhs_module}/metadata/subpaneldefs.php")){
-        		include FileLoader::validateFilePath("modules/{$this->lhs_module}/metadata/subpaneldefs.php");
-        		if(isset($layout_defs[$this->lhs_module]['subpanel_setup'][strtolower($this->rhs_module)]['title_key'])){
-        			$leftSysLabel = $layout_defs[$this->lhs_module]['subpanel_setup'][strtolower($this->rhs_module)]['title_key'];
-        		}
-        	}
+        $labelDefinitions = [];
+        if (!$this->relationship_only) {
+            if (!$this->is_custom && $update && file_exists("modules/{$this->rhs_module}/metadata/subpaneldefs.php")) {
+                include FileLoader::validateFilePath("modules/{$this->rhs_module}/metadata/subpaneldefs.php");
+                if (isset($layout_defs[$this->rhs_module]['subpanel_setup'][strtolower($this->lhs_module)]['title_key'])) {
+                    $rightSysLabel = $layout_defs[$this->rhs_module]['subpanel_setup'][strtolower($this->lhs_module)]['title_key'];
+                }
+                $layout_defs = [];
+            }
+            if (!$this->is_custom && $update && file_exists("modules/{$this->lhs_module}/metadata/subpaneldefs.php")) {
+                include FileLoader::validateFilePath("modules/{$this->lhs_module}/metadata/subpaneldefs.php");
+                if (isset($layout_defs[$this->lhs_module]['subpanel_setup'][strtolower($this->rhs_module)]['title_key'])) {
+                    $leftSysLabel = $layout_defs[$this->lhs_module]['subpanel_setup'][strtolower($this->rhs_module)]['title_key'];
+                }
+            }
 
             $lhs_label = $this->getLHSLabel($update);
             $lhs_label_id = $this->getLHSLabelId($update);
@@ -256,45 +255,44 @@ class AbstractRelationship
                     strtoupper($this->relationship_name . '_FROM_' . $this->getRightModuleSystemLabel()) . '_TITLE';
             }
 
-            $labelDefinitions [] = array(
+            $labelDefinitions [] = [
                 'module' => $this->lhs_module,
                 'system_label' => $from_right_title_system_label,
                 'display_label' => $rhs_label,
-            );
+            ];
 
             // if all labels are equal we should get the right module name
             // (it's one-to-many scenario for the same module)
             if ($from_right_title_system_label != $from_left_title_system_label) {
-                $labelDefinitions [] = array(
+                $labelDefinitions [] = [
                     'module' => $this->rhs_module,
                     'system_label' => $from_left_title_system_label,
                     'display_label' => $lhs_label,
-                );
+                ];
             } elseif ($from_right_title_system_label != $from_left_title_id_system_label) {
-                $labelDefinitions[] = array(
-                    'module' => $this->rhs_module ,
+                $labelDefinitions[] = [
+                    'module' => $this->rhs_module,
                     'system_label' => $from_left_title_id_system_label,
                     'display_label' => $lhs_label_id,
-                );
+                ];
             }
 
             // ltr and rtl directions are the same for equal modules
             if ($this->rhs_module != $this->lhs_module) {
-                $labelDefinitions [] = array(
+                $labelDefinitions [] = [
                     'module' => $this->lhs_module,
                     'system_label' => $from_left_title_system_label,
                     'display_label' => $rhs_label,
-                );
+                ];
 
-                $labelDefinitions[] = array(
+                $labelDefinitions[] = [
                     'module' => $this->rhs_module,
                     'system_label' => $from_right_title_system_label,
                     'display_label' => $lhs_label,
-                );
+                ];
             }
-
         }
-        return $labelDefinitions ;
+        return $labelDefinitions;
     }
 
     protected function getRHSLabel($update)
@@ -333,30 +331,31 @@ class AbstractRelationship
         return $lhs_label_id;
     }
 
-	function getLeftModuleSystemLabel()
+    public function getLeftModuleSystemLabel()
     {
-		if($this->lhs_module == $this->rhs_module){
-			return $this->lhs_module.'_L';
-		}
-		return $this->lhs_module;
+        if ($this->lhs_module == $this->rhs_module) {
+            return $this->lhs_module . '_L';
+        }
+        return $this->lhs_module;
     }
 
-    function getRightModuleSystemLabel()
+    public function getRightModuleSystemLabel()
     {
-		if($this->lhs_module == $this->rhs_module){
-			return $this->rhs_module.'_R';
-		}
-		return $this->rhs_module;
+        if ($this->lhs_module == $this->rhs_module) {
+            return $this->rhs_module . '_R';
+        }
+        return $this->rhs_module;
     }
 
     /**
      * Returns a key=>value set of labels used in this relationship for use when desplaying the relationship in MB
      * @return array labels used in this relationship
      */
-    public function getLabels() {
-        $labels = array();
+    public function getLabels()
+    {
+        $labels = [];
         $labelDefinitions = $this->buildLabels();
-        foreach($labelDefinitions as $def){
+        foreach ($labelDefinitions as $def) {
             $labels[$def['module']][$def['system_label']] = $def['display_label'];
         }
 
@@ -379,52 +378,54 @@ class AbstractRelationship
      * @param string $subpanelName      Name of the subpanel provided by the sourceModule
      * @param string $titleKeyName      Name of the subpanel title , if none, we will use the module name as the subpanel title.
      */
-    protected function getSubpanelDefinition ($relationshipName , $sourceModule , $subpanelName, $titleKeyName = '', $source = "")
+    protected function getSubpanelDefinition($relationshipName, $sourceModule, $subpanelName, $titleKeyName = '', $source = '')
     {
-        if (empty($source))
+        if (empty($source)) {
             $source = static::getValidDBName($relationshipName);
-    	$subpanelDefinition = array ( ) ;
-        $subpanelDefinition [ 'order' ] = 100 ;
-        $subpanelDefinition [ 'module' ] = $sourceModule ;
-        $subpanelDefinition [ 'subpanel_name' ] = $subpanelName ;
+        }
+        $subpanelDefinition = [];
+        $subpanelDefinition ['order'] = 100;
+        $subpanelDefinition ['module'] = $sourceModule;
+        $subpanelDefinition ['subpanel_name'] = $subpanelName;
         // following two lines are required for the subpanel pagination code in ListView.php->processUnionBeans() to correctly determine the relevant field for sorting
-        $subpanelDefinition [ 'sort_order' ] = 'asc' ;
-        $subpanelDefinition [ 'sort_by' ] = 'id' ;
-		if(!empty($titleKeyName)){
-			$subpanelDefinition [ 'title_key' ] = 'LBL_' . strtoupper ( $relationshipName . '_FROM_' . $titleKeyName ) . '_TITLE' ;
-		}else{
-			$subpanelDefinition [ 'title_key' ] = 'LBL_' . strtoupper ( $relationshipName . '_FROM_' . $sourceModule ) . '_TITLE' ;
-		}
-        $subpanelDefinition [ 'get_subpanel_data' ] = $source ;
+        $subpanelDefinition ['sort_order'] = 'asc';
+        $subpanelDefinition ['sort_by'] = 'id';
+        if (!empty($titleKeyName)) {
+            $subpanelDefinition ['title_key'] = 'LBL_' . strtoupper($relationshipName . '_FROM_' . $titleKeyName) . '_TITLE';
+        } else {
+            $subpanelDefinition ['title_key'] = 'LBL_' . strtoupper($relationshipName . '_FROM_' . $sourceModule) . '_TITLE';
+        }
+        $subpanelDefinition ['get_subpanel_data'] = $source;
 
         // dont create a quick create link to users. this usually doesn't work
         if ($sourceModule !== 'Users') {
-            $subpanelDefinition [ 'top_buttons' ][]=array('widget_class' => "SubPanelTopButtonQuickCreate");
+            $subpanelDefinition ['top_buttons'][] = ['widget_class' => 'SubPanelTopButtonQuickCreate'];
         }
-        $subpanelDefinition [ 'top_buttons' ][] = array(
+        $subpanelDefinition ['top_buttons'][] = [
             'widget_class' => 'SubPanelTopSelectButton',
-            'mode'=>'MultiSelect'
-        );
+            'mode' => 'MultiSelect',
+        ];
 
-        return array ( $subpanelDefinition );
+        return [$subpanelDefinition];
     }
 
-    protected function getWirelessSubpanelDefinition ($relationshipName , $sourceModule , $subpanelName, $titleKeyName = '', $source = "")
+    protected function getWirelessSubpanelDefinition($relationshipName, $sourceModule, $subpanelName, $titleKeyName = '', $source = '')
     {
-        if (empty($source))
+        if (empty($source)) {
             $source = static::getValidDBName($relationshipName);
-    	$subpanelDefinition = array ( ) ;
-        $subpanelDefinition [ 'order' ] = 100 ;
-        $subpanelDefinition [ 'module' ] = $sourceModule ;
-        $subpanelDefinition [ 'subpanel_name' ] = $subpanelName ;
-        if(!empty($titleKeyName)){
-			$subpanelDefinition [ 'title_key' ] = 'LBL_' . strtoupper ( $relationshipName . '_FROM_' . $titleKeyName ) . '_TITLE' ;
-		}else{
-			$subpanelDefinition [ 'title_key' ] = 'LBL_' . strtoupper ( $relationshipName . '_FROM_' . $sourceModule ) . '_TITLE' ;
-		}
-        $subpanelDefinition [ 'get_subpanel_data' ] = $source ;
+        }
+        $subpanelDefinition = [];
+        $subpanelDefinition ['order'] = 100;
+        $subpanelDefinition ['module'] = $sourceModule;
+        $subpanelDefinition ['subpanel_name'] = $subpanelName;
+        if (!empty($titleKeyName)) {
+            $subpanelDefinition ['title_key'] = 'LBL_' . strtoupper($relationshipName . '_FROM_' . $titleKeyName) . '_TITLE';
+        } else {
+            $subpanelDefinition ['title_key'] = 'LBL_' . strtoupper($relationshipName . '_FROM_' . $sourceModule) . '_TITLE';
+        }
+        $subpanelDefinition ['get_subpanel_data'] = $source;
 
-        return array ( $subpanelDefinition );
+        return [$subpanelDefinition];
     }
 
 
@@ -434,27 +435,29 @@ class AbstractRelationship
      * @param string $sourceModule      Name of the source module for this field
      * @param string $relationshipName  Name of the relationship
      */
-    protected function getLinkFieldDefinition ($sourceModule , $relationshipName, $right_side = false, $vname = "", $id_name = false)
+    protected function getLinkFieldDefinition($sourceModule, $relationshipName, $right_side = false, $vname = '', $id_name = false)
     {
-        $vardef = array ( ) ;
+        $vardef = [];
 
-        $vardef [ 'name' ] = static::getValidDBName($relationshipName) ;
-        $vardef [ 'type' ] = 'link' ;
-        $vardef [ 'relationship' ] = $relationshipName ;
-        $vardef [ 'source' ] = 'non-db' ;
-        $vardef [ 'module' ] = $sourceModule ;
-        $vardef [ 'bean_name' ] = BeanFactory::getObjectName($sourceModule) ;
-        if ($right_side)
-        	$vardef [ 'side' ] = 'right' ;
-        if (!empty($vname))
-            $vardef [ 'vname' ] = $vname;
+        $vardef ['name'] = static::getValidDBName($relationshipName);
+        $vardef ['type'] = 'link';
+        $vardef ['relationship'] = $relationshipName;
+        $vardef ['source'] = 'non-db';
+        $vardef ['module'] = $sourceModule;
+        $vardef ['bean_name'] = BeanFactory::getObjectName($sourceModule);
+        if ($right_side) {
+            $vardef ['side'] = 'right';
+        }
+        if (!empty($vname)) {
+            $vardef ['vname'] = $vname;
+        }
         if (!empty($id_name)) {
             $vardef['id_name'] = $id_name;
         } else {
             $vardef['id_name'] = $this->getIDName($sourceModule);
         }
 
-        return $vardef ;
+        return $vardef;
     }
 
     /*
@@ -465,21 +468,22 @@ class AbstractRelationship
      * @param string $sourceModule      Name of the source module for this field
      * @param string $relationshipName  Name of the relationship
      */
-    protected function getLink2FieldDefinition ($sourceModule , $relationshipName, $right_side = false,  $vname = "")
+    protected function getLink2FieldDefinition($sourceModule, $relationshipName, $right_side = false, $vname = '')
     {
         $vardef = $this->getRelateFieldDefinition($sourceModule, $relationshipName, $vname);
         unset($vardef['db_concat_fields']);
 
         if (!empty($vname)) {
-             $vardef ['vname'] = $vname . '_ID';
+            $vardef ['vname'] = $vname . '_ID';
         }
 
-        $vardef [ 'name' ] = $this->getIDName( $sourceModule ) ; // must match the id_name field value in the relate field definition
-		$vardef ['reportable'] = false;
-        if ($right_side)
-        	$vardef [ 'side' ] = 'right' ;
-        else
-        	$vardef [ 'side' ] = 'left' ;
+        $vardef ['name'] = $this->getIDName($sourceModule); // must match the id_name field value in the relate field definition
+        $vardef ['reportable'] = false;
+        if ($right_side) {
+            $vardef ['side'] = 'right';
+        } else {
+            $vardef ['side'] = 'left';
+        }
 
         $vardef['rname'] = 'id';
         $vardef['type'] = 'id';
@@ -489,7 +493,7 @@ class AbstractRelationship
         $vardef['duplicate_merge'] = 'disabled';
         $vardef['hideacl'] = true;
 
-        return $vardef ;
+        return $vardef;
     }
 
     /*
@@ -499,28 +503,28 @@ class AbstractRelationship
      * @param string $relationshipName  Name of the relationship
      * @param string $moduleType        Optional - "Types" of the module - array of SugarObject types such as "file" or "basic"
      */
-    protected function getRelateFieldDefinition ($sourceModule , $relationshipName , $vnameLabel='')
+    protected function getRelateFieldDefinition($sourceModule, $relationshipName, $vnameLabel = '')
     {
-        $vardef = array ( ) ;
-        $vardef [ 'name' ] = static::getValidDBName($relationshipName . "_name") ; // must end in _name for the QuickSearch code in TemplateHandler->createQuickSearchCode
-        $vardef [ 'type' ] = 'relate' ;
+        $vardef = [];
+        $vardef ['name'] = static::getValidDBName($relationshipName . '_name'); // must end in _name for the QuickSearch code in TemplateHandler->createQuickSearchCode
+        $vardef ['type'] = 'relate';
 
-        $vardef [ 'source' ] = 'non-db' ;
-		if(!empty($vnameLabel)){
-			$vardef [ 'vname' ] = 'LBL_' . strtoupper ( $relationshipName . '_FROM_' . $vnameLabel ) . '_TITLE' ;
-		}else{
-			$vardef [ 'vname' ] = 'LBL_' . strtoupper ( $relationshipName . '_FROM_' . $sourceModule ) . '_TITLE' ;
-		}
+        $vardef ['source'] = 'non-db';
+        if (!empty($vnameLabel)) {
+            $vardef ['vname'] = 'LBL_' . strtoupper($relationshipName . '_FROM_' . $vnameLabel) . '_TITLE';
+        } else {
+            $vardef ['vname'] = 'LBL_' . strtoupper($relationshipName . '_FROM_' . $sourceModule) . '_TITLE';
+        }
 
-        $vardef [ 'save' ] = true; // the magic value to tell SugarBean to save this relate field even though it is not listed in the $relationship_fields array
+        $vardef ['save'] = true; // the magic value to tell SugarBean to save this relate field even though it is not listed in the $relationship_fields array
 
         // id_name matches the join_key_ column in the relationship table for the sourceModule - that is, the column in the relationship table containing the id of the corresponding field in the source module's table (vardef['table'])
-        $vardef [ 'id_name' ] = $this->getIDName( $sourceModule ) ;
+        $vardef ['id_name'] = $this->getIDName($sourceModule);
 
         // link cannot match id_name otherwise the $bean->$id_name value set from the POST is overwritten by the Link object created by this 'link' entry
-        $vardef [ 'link' ] = static::getValidDBName($relationshipName) ; // the name of the link field that points to the relationship - required for the save to function
-        $vardef [ 'table' ] = $this->getTablename( $sourceModule ) ;
-        $vardef [ 'module' ] = $sourceModule ;
+        $vardef ['link'] = static::getValidDBName($relationshipName); // the name of the link field that points to the relationship - required for the save to function
+        $vardef ['table'] = $this->getTablename($sourceModule);
+        $vardef ['module'] = $sourceModule;
 
         $module = null;
 
@@ -548,7 +552,7 @@ class AbstractRelationship
 
         if ($module) {
             $class = BeanFactory::newBean($module);
-            $tplconfig = array();
+            $tplconfig = [];
 
             if (!$class) {
                 $parsedModuleName = AbstractRelationships::parseDeployedModuleName($sourceModule);
@@ -566,13 +570,13 @@ class AbstractRelationship
                 $vardef['rname'] = 'document_name';
             } elseif (is_subclass_of($class, 'Person') || in_array('person', $tplconfig)) {
                 $vardef['rname'] = 'full_name';
-                $vardef['db_concat_fields'] = array(0 => 'first_name', 1 => 'last_name');
+                $vardef['db_concat_fields'] = [0 => 'first_name', 1 => 'last_name'];
             } elseif ($class && $class->getFieldDefinition('name')) {
                 $vardef['rname'] = 'name';
             }
         }
 
-        return $vardef ;
+        return $vardef;
     }
 
     /*
@@ -585,149 +589,146 @@ class AbstractRelationship
      * @param string $relationshipType  Cardinality of the relationship, for example, MB_ONETOONE or MB_ONETOMANY or MB_MANYTOMANY
      * @param bool $checkExisting check if a realtionship with the given name is already depolyed in this instance. If so, we will clones its table and column names to preserve existing data.
      */
-    function getRelationshipMetaData ($relationshipType, $checkExisting = true)
+    public function getRelationshipMetaData($relationshipType, $checkExisting = true)
     {
         global $dictionary;
-        $relationshipName = $this->definition [ 'relationship_name' ] ;
-        $lhs_module = $this->lhs_module ;
-        $rhs_module = $this->rhs_module ;
+        $relationshipName = $this->definition ['relationship_name'];
+        $lhs_module = $this->lhs_module;
+        $rhs_module = $this->rhs_module;
 
-        $lhs_table = $this->getTablename ( $lhs_module ) ;
-        $rhs_table = $this->getTablename ( $rhs_module ) ;
+        $lhs_table = $this->getTablename($lhs_module);
+        $rhs_table = $this->getTablename($rhs_module);
 
-        $properties = array ( ) ;
+        $properties = [];
 
         //bug 47903
         if ($checkExisting && !empty($dictionary[$relationshipName])
-            && !empty($dictionary[$relationshipName][ 'true_relationship_type' ])
-            && $dictionary[$relationshipName][ 'true_relationship_type' ]  == $relationshipType
-            && !empty($dictionary[$relationshipName]['relationships'][$relationshipName]))
-        {
+            && !empty($dictionary[$relationshipName]['true_relationship_type'])
+            && $dictionary[$relationshipName]['true_relationship_type'] == $relationshipType
+            && !empty($dictionary[$relationshipName]['relationships'][$relationshipName])) {
             //bug 51336
-            $properties [ 'true_relationship_type' ] = $relationshipType ;
+            $properties ['true_relationship_type'] = $relationshipType;
             $rel_properties = $dictionary[$relationshipName]['relationships'][$relationshipName];
-        } else
-        {
+        } else {
             // first define section 1, the relationship element of the metadata entry
 
-            $rel_properties = array ( ) ;
-            $rel_properties [ 'lhs_module' ] = $lhs_module ;
-            $rel_properties [ 'lhs_table' ] = $lhs_table ;
-            $rel_properties [ 'lhs_key' ] = 'id' ;
-            $rel_properties [ 'rhs_module' ] = $rhs_module ;
-            $rel_properties [ 'rhs_table' ] = $rhs_table ;
-            $rel_properties [ 'rhs_key' ] = 'id' ;
+            $rel_properties = [];
+            $rel_properties ['lhs_module'] = $lhs_module;
+            $rel_properties ['lhs_table'] = $lhs_table;
+            $rel_properties ['lhs_key'] = 'id';
+            $rel_properties ['rhs_module'] = $rhs_module;
+            $rel_properties ['rhs_table'] = $rhs_table;
+            $rel_properties ['rhs_key'] = 'id';
 
             // because the implementation of one-to-many relationships within SugarBean does not use a join table and so requires schema changes to add a foreign key for each new relationship,
             // we currently implement all new relationships as many-to-many regardless of the real type and enforce cardinality through the relate fields and subpanels
-            $rel_properties [ 'relationship_type' ] = MB_MANYTOMANY ;
+            $rel_properties ['relationship_type'] = MB_MANYTOMANY;
             // but as we need to display the true cardinality in Studio and ModuleBuilder we also record the actual relationship type
             // this property is only used by Studio/MB
-            $properties [ 'true_relationship_type' ] = $relationshipType ;
-            if ($this->from_studio)
-                $properties [ 'from_studio' ] = true;
+            $properties ['true_relationship_type'] = $relationshipType;
+            if ($this->from_studio) {
+                $properties ['from_studio'] = true;
+            }
 
-            $rel_properties [ 'join_table' ] = static::getValidDBName($relationshipName."_c") ;
+            $rel_properties ['join_table'] = static::getValidDBName($relationshipName . '_c');
             // a and b are in case the module relates to itself
-            $rel_properties [ 'join_key_lhs' ] = $this->getJoinKeyLHS() ;
-            $rel_properties [ 'join_key_rhs' ] = $this->getJoinKeyRHS() ;
+            $rel_properties ['join_key_lhs'] = $this->getJoinKeyLHS();
+            $rel_properties ['join_key_rhs'] = $this->getJoinKeyRHS();
         }
 
         // set the extended properties if they exist = for now, many-to-many definitions do not have to contain a role_column even if role_column_value is set; we'll just create a likely name if missing
-        if (isset ( $this->definition [ 'relationship_role_column_value' ] ))
-        {
-            if (! isset ( $this->definition [ 'relationship_role_column' ] ))
-                $this->definition [ 'relationship_role_column' ] = 'relationship_role_column' ;
-            $rel_properties [ 'relationship_role_column' ] = $this->definition [ 'relationship_role_column' ] ;
-            $rel_properties [ 'relationship_role_column_value' ] = $this->definition [ 'relationship_role_column_value' ] ;
+        if (isset($this->definition ['relationship_role_column_value'])) {
+            if (!isset($this->definition ['relationship_role_column'])) {
+                $this->definition ['relationship_role_column'] = 'relationship_role_column';
+            }
+            $rel_properties ['relationship_role_column'] = $this->definition ['relationship_role_column'];
+            $rel_properties ['relationship_role_column_value'] = $this->definition ['relationship_role_column_value'];
         }
 
-        $properties [ 'relationships' ] [ $relationshipName ] = $rel_properties ;
+        $properties ['relationships'] [$relationshipName] = $rel_properties;
 
         // construct section 2, the name of the join table
 
-        $properties [ 'table' ] = $rel_properties [ 'join_table' ] ;
+        $properties ['table'] = $rel_properties ['join_table'];
 
         // now construct section 3, the fields in the join table
 
-        $properties['fields']['id'] = array(
+        $properties['fields']['id'] = [
             'name' => 'id',
             'type' => 'id',
-        );
-        $properties['fields']['date_modified'] = array(
+        ];
+        $properties['fields']['date_modified'] = [
             'name' => 'date_modified',
             'type' => 'datetime',
-        );
-        $properties['fields']['deleted'] = array(
+        ];
+        $properties['fields']['deleted'] = [
             'name' => 'deleted',
             'type' => 'bool',
             'default' => 0,
-        );
-        $properties['fields'][$rel_properties['join_key_lhs']] = array(
+        ];
+        $properties['fields'][$rel_properties['join_key_lhs']] = [
             'name' => $rel_properties['join_key_lhs'],
             'type' => 'id',
-        );
-        $properties['fields'][$rel_properties['join_key_rhs']] = array(
+        ];
+        $properties['fields'][$rel_properties['join_key_rhs']] = [
             'name' => $rel_properties['join_key_rhs'],
             'type' => 'id',
-        );
+        ];
 
-        if (strtolower ( $lhs_module ) == 'documents' || strtolower ( $rhs_module ) == 'documents' )
-        {
-            $properties['fields']['document_revision_id'] = array(
+        if (strtolower($lhs_module) == 'documents' || strtolower($rhs_module) == 'documents') {
+            $properties['fields']['document_revision_id'] = [
                 'name' => 'document_revision_id',
                 'type' => 'id',
-            );
+            ];
         }
         // if we have an extended relationship condition, then add in the corresponding relationship_role_column to the relationship (join) table
         // for now this is restricted to extended relationships that can be specified by a varchar
-        if (isset ( $this->definition [ 'relationship_role_column_value' ] ))
-        {
-            $properties['fields'][$this->definition['relationship_role_column_value']] = array(
+        if (isset($this->definition ['relationship_role_column_value'])) {
+            $properties['fields'][$this->definition['relationship_role_column_value']] = [
                 'name' => $this->definition['relationship_role_column_value'],
                 'type' => 'varchar',
-            );
+            ];
         }
 
         // finally, wrap up with section 4, the indices on the join table
 
-        $indexBase = static::getValidDBName($relationshipName) ;
-        $properties['indices'] = array(
-            array(
+        $indexBase = static::getValidDBName($relationshipName);
+        $properties['indices'] = [
+            [
                 'name' => 'idx_' . $indexBase . '_pk',
                 'type' => 'primary',
-                'fields' => array('id'),
-            ),
-            array(
+                'fields' => ['id'],
+            ],
+            [
                 'name' => 'idx_' . $indexBase . '_ida1_deleted',
                 'type' => 'index',
-                'fields' => array($rel_properties['join_key_lhs'], 'deleted'),
-            ),
-            array(
+                'fields' => [$rel_properties['join_key_lhs'], 'deleted'],
+            ],
+            [
                 'name' => 'idx_' . $indexBase . '_idb2_deleted',
                 'type' => 'index',
-                'fields' => array($rel_properties['join_key_rhs'], 'deleted'),
-            ),
-        );
+                'fields' => [$rel_properties['join_key_rhs'], 'deleted'],
+            ],
+        ];
 
         switch ($relationshipType) {
             case MB_ONETOONE:
-                $alternateKeys = array();
+                $alternateKeys = [];
                 break;
             case MB_ONETOMANY:
-                $alternateKeys = array($rel_properties['join_key_rhs']);
+                $alternateKeys = [$rel_properties['join_key_rhs']];
                 break;
             default:
-                $alternateKeys = array($rel_properties['join_key_lhs'], $rel_properties['join_key_rhs']);
+                $alternateKeys = [$rel_properties['join_key_lhs'], $rel_properties['join_key_rhs']];
                 break;
         }
 
         if ($alternateKeys) {
-            $properties['indices'][] = array(
+            $properties['indices'][] = [
                 'name' => $indexBase . '_alt',
                 'type' => 'alternate_key',
                 'fields' => $alternateKeys,
-            );
+            ];
         }
 
         return $properties;
@@ -743,9 +744,9 @@ class AbstractRelationship
      * Used primarily in UndeployedRelationships to ensure that the subpanels we construct for Activities get their data from the correct relationships
      * @param string $activitiesSubModuleName Name of the activities submodule, such as Tasks
      */
-    function getActivitiesSubModuleRelationshipName ( $activitiesSubModuleName )
+    public function getActivitiesSubModuleRelationshipName($activitiesSubModuleName)
     {
-        return $this->lhs_module . "_" . strtolower ( $activitiesSubModuleName ) ;
+        return $this->lhs_module . '_' . strtolower($activitiesSubModuleName);
     }
 
     /*
@@ -756,10 +757,10 @@ class AbstractRelationship
      * @param string $ensureUnique
      * @return string Valid column name trimmed to right length and with invalid characters removed
      */
-    static function getValidDBName ($name, $ensureUnique = true)
+    public static function getValidDBName($name, $ensureUnique = true)
     {
 
-        require_once 'modules/ModuleBuilder/parsers/constants.php' ;
+        require_once 'modules/ModuleBuilder/parsers/constants.php';
         return getValidDBName($name, $ensureUnique, MB_MAXDBIDENTIFIERLENGTH);
     }
 
@@ -768,33 +769,35 @@ class AbstractRelationship
      * @param string $type Relationship type
      * @return string Canonical type
      */
-    static function parseRelationshipType ($type)
+    public static function parseRelationshipType($type)
     {
-        $type = strtolower ( $type ) ;
-        $type = preg_replace ( '/[^\w]+/i', '', strtolower ( $type ) ) ;
-        $canonicalTypes = array ( ) ;
-        foreach ( array ( MB_ONETOONE , MB_ONETOMANY , MB_MANYTOMANY , MB_MANYTOONE) as $canonicalType )
-        {
-            if ($type == preg_replace ( '/[^\w]+/i', '', strtolower ( $canonicalType ) ))
-                return $canonicalType ;
+        $type = strtolower($type);
+        $type = preg_replace('/[^\w]+/i', '', strtolower($type));
+        $canonicalTypes = [];
+        foreach ([MB_ONETOONE, MB_ONETOMANY, MB_MANYTOMANY, MB_MANYTOONE] as $canonicalType) {
+            if ($type == preg_replace('/[^\w]+/i', '', strtolower($canonicalType))) {
+                return $canonicalType;
+            }
         }
         // ok, we give up...
-        return MB_MANYTOMANY ;
+        return MB_MANYTOMANY;
     }
 
 
-    function getJoinKeyLHS()
+    public function getJoinKeyLHS()
     {
-        if (!isset($this->joinKeyLHS))
-            $this->joinKeyLHS = static::getValidDBName($this->relationship_name . $this->lhs_module . "_ida", true);
+        if (!isset($this->joinKeyLHS)) {
+            $this->joinKeyLHS = static::getValidDBName($this->relationship_name . $this->lhs_module . '_ida', true);
+        }
 
         return $this->joinKeyLHS;
     }
 
-    function getJoinKeyRHS()
+    public function getJoinKeyRHS()
     {
-        if (!isset($this->joinKeyRHS))
-            $this->joinKeyRHS = static::getValidDBName($this->relationship_name . $this->rhs_module . "_idb", true);
+        if (!isset($this->joinKeyRHS)) {
+            $this->joinKeyRHS = static::getValidDBName($this->relationship_name . $this->rhs_module . '_idb', true);
+        }
 
         return $this->joinKeyRHS;
     }
@@ -804,9 +807,9 @@ class AbstractRelationship
      * @param string $sourceModule  The name of the primary module in the relationship
      * @return string Name of the id field
      */
-    function getIDName( $sourceModule )
+    public function getIDName($sourceModule)
     {
-        return ($sourceModule == $this->lhs_module ) ? $this->getJoinKeyLHS() : $this->getJoinKeyRHS() ;
+        return ($sourceModule == $this->lhs_module) ? $this->getJoinKeyLHS() : $this->getJoinKeyRHS();
     }
 
     /*
@@ -814,48 +817,49 @@ class AbstractRelationship
      * @param string $moduleName    Name of the module for which we are to find the table
      * @return string Tablename
      */
-    protected function getTablename ($moduleName)
+    protected function getTablename($moduleName)
     {
         $module = BeanFactory::newBean($moduleName);
-        if(!empty($module)) {
-            return $module->table_name ;
+        if (!empty($module)) {
+            return $module->table_name;
         }
-        return strtolower ( $moduleName ) ;
+        return strtolower($moduleName);
     }
 
-    public function getTitleKey($left=false){
+    public function getTitleKey($left = false)
+    {
         $layout_defs = [];
-		if(!$this->is_custom && !$left && file_exists("modules/{$this->rhs_module}/metadata/subpaneldefs.php")){
-    		include FileLoader::validateFilePath("modules/{$this->rhs_module}/metadata/subpaneldefs.php");
-    		if(isset($layout_defs[$this->rhs_module]['subpanel_setup'][strtolower($this->lhs_module)]['title_key'])){
-    			return $layout_defs[$this->rhs_module]['subpanel_setup'][strtolower($this->lhs_module)]['title_key'];
-    		}
-    	}else if(!$this->is_custom &&  file_exists("modules/{$this->lhs_module}/metadata/subpaneldefs.php")){
-    		include FileLoader::validateFilePath("modules/{$this->lhs_module}/metadata/subpaneldefs.php");
-    		if(isset($layout_defs[$this->lhs_module]['subpanel_setup'][strtolower($this->rhs_module)]['title_key'])){
-    			return $layout_defs[$this->lhs_module]['subpanel_setup'][strtolower($this->rhs_module)]['title_key'];
-    		}
-    	}
+        if (!$this->is_custom && !$left && file_exists("modules/{$this->rhs_module}/metadata/subpaneldefs.php")) {
+            include FileLoader::validateFilePath("modules/{$this->rhs_module}/metadata/subpaneldefs.php");
+            if (isset($layout_defs[$this->rhs_module]['subpanel_setup'][strtolower($this->lhs_module)]['title_key'])) {
+                return $layout_defs[$this->rhs_module]['subpanel_setup'][strtolower($this->lhs_module)]['title_key'];
+            }
+        } elseif (!$this->is_custom && file_exists("modules/{$this->lhs_module}/metadata/subpaneldefs.php")) {
+            include FileLoader::validateFilePath("modules/{$this->lhs_module}/metadata/subpaneldefs.php");
+            if (isset($layout_defs[$this->lhs_module]['subpanel_setup'][strtolower($this->rhs_module)]['title_key'])) {
+                return $layout_defs[$this->lhs_module]['subpanel_setup'][strtolower($this->rhs_module)]['title_key'];
+            }
+        }
 
-    	if($left){
-    		$titleKeyName = $this->getRightModuleSystemLabel();
-    		$sourceModule = $this->rhs_module;
-    	}else{
-    		$titleKeyName = $this->getLeftModuleSystemLabel();
-    		$sourceModule = $this->lhs_module;
-    	}
+        if ($left) {
+            $titleKeyName = $this->getRightModuleSystemLabel();
+            $sourceModule = $this->rhs_module;
+        } else {
+            $titleKeyName = $this->getLeftModuleSystemLabel();
+            $sourceModule = $this->lhs_module;
+        }
 
-		if(!empty($titleKeyName)){
-			$title_key = 'LBL_' . strtoupper ( $this->relationship_name . '_FROM_' . $titleKeyName ) . '_TITLE' ;
-		}else{
-			$title_key = 'LBL_' . strtoupper ( $this->relationship_name . '_FROM_' . $sourceModule ) . '_TITLE' ;
-		}
+        if (!empty($titleKeyName)) {
+            $title_key = 'LBL_' . strtoupper($this->relationship_name . '_FROM_' . $titleKeyName) . '_TITLE';
+        } else {
+            $title_key = 'LBL_' . strtoupper($this->relationship_name . '_FROM_' . $sourceModule) . '_TITLE';
+        }
 
-		return $title_key;
-	}
+        return $title_key;
+    }
 
     public function buildClientFiles()
     {
-        return array();
+        return [];
     }
 }

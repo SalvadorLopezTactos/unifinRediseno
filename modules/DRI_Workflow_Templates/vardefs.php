@@ -33,13 +33,9 @@ $dictionary['DRI_Workflow_Template'] = [
             'options' => null,
             'type' => 'multienum',
             'isMultiSelect' => true,
-            'help' =>  'LBL_SMART_GUIDE_ACCESSIBLE',
+            'help' => 'LBL_SMART_GUIDE_ACCESSIBLE',
             'function' => [
-                'include' => 'modules/DRI_Workflow_Templates/DRI_Workflow_Template.php',
-                'name' => [
-                    'DRI_Workflow_Template',
-                    'listEnabledModulesEnumOptions',
-                ],
+                'name' => 'listTemplateAvailableModulesEnumOptions',
             ],
         ],
         'disabled_stage_actions' => [
@@ -160,6 +156,22 @@ $dictionary['DRI_Workflow_Template'] = [
             'type' => 'enum',
             'default' => 'current_user',
             'help' => 'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED',
+        ],
+        'stage_numbering' => [
+            'name' => 'stage_numbering',
+            'vname' => 'LBL_STAGE_NUMBERS',
+            'required' => false,
+            'reportable' => false,
+            'audited' => false,
+            'importable' => 'true',
+            'massupdate' => true,
+            'type' => 'toggle',
+            'dbType' => 'bool',
+            'default' => '0',
+            'studio' => true,
+            'help' => 'LBL_SMART_GUIDE_STAGE_NUMBERS',
+            'label_right' => 'LBL_CUSTOMER_JOURNEY_STAGE_NUMBER_SHOW',
+            'label_left' => 'LBL_CUSTOMER_JOURNEY_STAGE_NUMBER_HIDE',
         ],
         'cancel_action' => [
             'name' => 'cancel_action',

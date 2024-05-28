@@ -338,7 +338,7 @@
 
         _.each(this._components, function(component) {
             var link = component.context.get('link');
-            if (!linkName || linkName === 'all_modules') {
+            if (!(linkName || _.isNull(linkName)) || linkName === 'all_modules') {
                 component.show();
             } else if (linkName === link) {
                 component.show();

@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_ASSIGNED_TO_ID' => 'Felelős felhasználói azonosító',
     'LBL_ASSIGNED_TO_NAME' => 'Felelős',
     'LBL_ID' => 'Azonosító',
@@ -52,4 +52,4 @@ $mod_strings = array(
     'LBL_UNREAD' => 'Olvasatlan',
     'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Megemlítette Önt',
     'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Megemlítették Önt',
-);
+];

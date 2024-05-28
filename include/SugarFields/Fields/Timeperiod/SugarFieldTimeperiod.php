@@ -12,6 +12,6 @@
  */
 
 
-class SugarFieldTimeperiod extends SugarFieldEnum {
-
+class SugarFieldTimeperiod extends SugarFieldEnum
+{
 }

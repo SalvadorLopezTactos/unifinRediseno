@@ -23,42 +23,42 @@ class PMSEProjectImportExportApi extends vCardApi
      */
     public function registerApiRest()
     {
-        return array(
-            'projectImportPost' => array(
+        return [
+            'projectImportPost' => [
                 'reqType' => 'POST',
-                'path' => array('pmse_Project', 'file', 'project_import'),
-                'pathVars' => array('module', '', ''),
+                'path' => ['pmse_Project', 'file', 'project_import'],
+                'pathVars' => ['module', '', ''],
                 'method' => 'projectImport',
                 'rawPostContents' => true,
                 'acl' => 'create',
                 'shortHelp' => 'Imports a Process Definition from a .bpm file',
-                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_import_help.html',
-                'exceptions' => array(
+                'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_import_help.html',
+                'exceptions' => [
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionRequestMethodFailure',
                     'SugarApiExceptionMissingParameter',
-                ),
-            ),
-            'projectDownload' => array(
+                ],
+            ],
+            'projectDownload' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Project', '?', 'dproject'),
-                'pathVars' => array('module', 'record', ''),
+                'path' => ['pmse_Project', '?', 'dproject'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'projectDownload',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
                 'acl' => 'view',
                 'shortHelp' => 'Exports a .bpm file with a Process Definition',
-                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_export_help.html',
-            ),
-        );
+                'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_export_help.html',
+            ],
+        ];
     }
 
     public function projectDownload(ServiceBase $api, array $args)
     {
         ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
         $projectBean = ProcessManager\Factory::getPMSEObject('PMSEProjectExporter');
-        $requiredFields = array('record', 'module');
+        $requiredFields = ['record', 'module'];
         foreach ($requiredFields as $fieldName) {
             if (!array_key_exists($fieldName, $args)) {
                 $sugarApiExceptionMissingParameter = new SugarApiExceptionMissingParameter(
@@ -68,7 +68,7 @@ class PMSEProjectImportExportApi extends vCardApi
                 throw $sugarApiExceptionMissingParameter;
             }
         }
-        
+
         if (PMSEEngineUtils::isExportDisabled($args['module'])) {
             $sugarApiExceptionNotAuthorized = new SugarApiExceptionNotAuthorized(
                 $GLOBALS['app_strings']['ERR_EXPORT_DISABLED']
@@ -83,7 +83,7 @@ class PMSEProjectImportExportApi extends vCardApi
     public function projectImport(ServiceBase $api, array $args)
     {
         ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
-        $this->requireArgs($args, array('module'));
+        $this->requireArgs($args, ['module']);
 
         $bean = BeanFactory::newBean($args['module']);
         if (!$bean->ACLAccess('save') || !$bean->ACLAccess('import')) {
@@ -92,7 +92,7 @@ class PMSEProjectImportExportApi extends vCardApi
             throw $sugarApiExceptionNotAuthorized;
         }
 
-        if (isset($_FILES) && count($_FILES) === 1) {
+        if (isset($_FILES) && safeCount($_FILES) === 1) {
             $first_key = array_key_first($_FILES);
             if (isset($_FILES[$first_key]['tmp_name'])
                 && $this->isUploadedFile($_FILES[$first_key]['tmp_name'])
@@ -101,7 +101,7 @@ class PMSEProjectImportExportApi extends vCardApi
             ) {
                 $importerObject = PMSEImporterFactory::getImporter('project');
                 $name = $_FILES[$first_key]['name'];
-                $extension = pathinfo($name,  PATHINFO_EXTENSION);
+                $extension = pathinfo($name, PATHINFO_EXTENSION);
                 $options = $this->getOptions();
                 if ($extension == $importerObject->getExtension()) {
                     try {
@@ -111,8 +111,8 @@ class PMSEProjectImportExportApi extends vCardApi
                         PMSELogger::getInstance()->alert($e->getMessage());
                         throw $e;
                     }
-                    $results = array('project_import' => $data);
-                } else  {
+                    $results = ['project_import' => $data];
+                } else {
                     $sugarApiExceptionRequestMethodFailure = new SugarApiExceptionRequestMethodFailure(
                         'ERROR_UPLOAD_FAILED'
                     );
@@ -137,10 +137,9 @@ class PMSEProjectImportExportApi extends vCardApi
         $options = [];
         $sids = $_POST['selectedIds'] ?? '';
         $violations = Validator::getService()->validate($sids, new JSONConstraint());
-        if (count($violations) === 0) {
+        if (safeCount($violations) === 0) {
             $options['selectedIds'] = json_decode($sids, true);
         }
         return $options;
     }
 }
-

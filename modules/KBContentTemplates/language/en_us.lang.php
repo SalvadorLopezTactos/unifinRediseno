@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Knowledge Base Templates',
     'LBL_MODULE_NAME_SINGULAR' => 'Knowledge Base Template',
     'LBL_MODULE_TITLE' => 'Knowledge Base Template',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'View Templates',
     'LBL_TEXT_BODY' => 'Body',
     'LBL_LIST_TEMPLATE_NAME' => 'Template Name',
-);
+];

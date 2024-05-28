@@ -11,7 +11,6 @@
  */
 
 
-
 /**
  * Newrelic data provider class
  *
@@ -34,14 +33,12 @@ class SugarMetric_Provider_Newrelic implements SugarMetric_Provider_Interface
     public function __construct(array $additionalParams)
     {
         if ($this->isLoaded = extension_loaded('newrelic')) {
-
             foreach ($additionalParams as $name => $param) {
-
                 switch (strtolower($name)) {
-                    case 'applicationname' :
+                    case 'applicationname':
                         newrelic_set_appname($param);
                         break;
-                    default :
+                    default:
                         break;
                 }
             }

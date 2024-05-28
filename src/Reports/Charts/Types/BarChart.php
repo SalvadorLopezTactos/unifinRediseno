@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Reports\Charts\Types;
 
 class BarChart extends BaseChart
@@ -34,7 +35,7 @@ class BarChart extends BaseChart
 
         $config['y_axis_label'] = $this->getYAxisLabel($reportDef);
         $config['x_axis_label'] = $this->getXAxisLabel($props, $config, $reportDef);
-        $config['stacked'] = $config['barType'] === 'stacked' || $config['barType'] === 'basic' ? true: false;
+        $config['stacked'] = $config['barType'] === 'stacked' || $config['barType'] === 'basic' ? true : false;
 
         $this->minDatapointThickness = $config['orientation'] === 'horizontal' ? 15 : 30;
 
@@ -116,7 +117,7 @@ class BarChart extends BaseChart
                     'barPercentage' => $this->barPercentage,
                     'maxBarThickness' => $this->maxBarThickness,
                     'label' => $label,
-                    'backgroundColor' => array_fill(0, is_countable($this->data['values'][0]) ? count($this->data['values'][0]) : 0, $this->getColor($index)),
+                    'backgroundColor' => array_fill(0, safeCount($this->data['values'][0]), $this->getColor($index)),
                     'data' => $this->getSeriesData($this->data['values'], $index),
                 ];
             }
@@ -287,7 +288,7 @@ class BarChart extends BaseChart
      */
     private function isSingleDataset($data): bool
     {
-        return $data['values'] && $data['values'][0] && (is_countable($data['values'][0]['values']) ? count($data['values'][0]['values']) : 0) === 1;
+        return $data['values'] && $data['values'][0] && safeCount($data['values'][0]['values']) === 1;
     }
 
     /**

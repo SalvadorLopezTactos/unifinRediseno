@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'インポートファイルの読み込みに成功しました',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'インポートされたレコードはプロセスに参加中で、一部のフィールドが編集中のためプロセスによりロックされているので編集できません。',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'エラーが発生したためいくつかの行がインポートされませんでした',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'もしユーザが存在しなければ現在のユーザが利用されます',
     'LBL_SHOW_HIDDEN' => '通常ではインポートできないフィールドの表示',
     'LBL_UPDATE_RECORDS' => 'インポートする代わりに既存のレコードを更新する (Undoできません)',
-    'LBL_TEST'=> 'テストインポート (保存および日付の変更は行われません)',
+    'LBL_TEST' => 'テストインポート (保存および日付の変更は行われません)',
     'LBL_TRUNCATE_TABLE' => 'インポート前にテーブルを空にする (すべてのレコードの削除)',
     'LBL_RELATED_ACCOUNTS' => '関連する取引先を作成しない',
     'LBL_NO_DATECHECK' => 'データチェックをスキップする(処理は早くなりますが、不正なデータが含まれていた場合処理に失敗します)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => '無効なinteger値',
     'LBL_ERROR_INVALID_NUM' => '無効なnumeric値',
     'LBL_ERROR_INVALID_TIME' => '無効なtime値',
-    'LBL_ERROR_INVALID_EMAIL'=>'無効なEメールアドレス',
-    'LBL_ERROR_INVALID_BOOL'=>'無効な値 (値には 1 か 0 のみが有効です)',
-    'LBL_ERROR_INVALID_DATE'=>'不正な日付文字列',
-    'LBL_ERROR_INVALID_USER'=>'無効なユーザ名/ID',
+    'LBL_ERROR_INVALID_EMAIL' => '無効なEメールアドレス',
+    'LBL_ERROR_INVALID_BOOL' => '無効な値 (値には 1 か 0 のみが有効です)',
+    'LBL_ERROR_INVALID_DATE' => '不正な日付文字列',
+    'LBL_ERROR_INVALID_USER' => '無効なユーザ名/ID',
     'LBL_ERROR_INVALID_TEAM' => '無効なチーム名/ID',
     'LBL_ERROR_INVALID_ACCOUNT' => '不正な取引先名/ID',
     'LBL_ERROR_INVALID_RELATE' => '無効な関連フィールド',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => '」が存在しないか書き込み権限がありません。',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'ファイルが正常にアップロードされませんでした。php.iniのupload_max_filesizeで、アップロードファイルサイズの設定が小さすぎる可能性があります。',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'ファイルが大きすぎます。最大:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'バイト数です。config.php の$sugar_config[&#39;upload_maxsize&#39;] 設定を変更してください。',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'バイト。config.php で $sugar_config[&#39;upload_maxsize&#39;] を変更してください',
     'LBL_MODULE_NAME' => 'インポート',
     'LBL_MODULE_NAME_SINGULAR' => 'インポート',
     'LBL_TRY_AGAIN' => '再度試す',
     'LBL_START_OVER' => 'やりなおす',
     'LBL_ERROR' => 'エラー:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'インポートファイルには{0}行が含まれています。最適な行数は{1}行です。より多くの行をインポートする場合、実行に時間がかかる場合があります。インポートを実行するにはOKをクリックしてください。インポートファイルを修正してファイルを再アップロードする場合はキャンセルをクリックしてください。',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'システム管理者ユーザはインポートできません。',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'システム管理者ユーザはインポートできません。',
     'ERR_REPORT_LOOP' => 'システムは報告ルートがループしていることを検出しました。ユーザは自身を上司にすることはできません。また、上司がユーザを報告先にすることもできません。',
     'ERR_MULTIPLE' => '複数行が同じフィールド名で定義されています。',
     'ERR_MISSING_REQUIRED_FIELDS' => '必要なフィールドが存在しません:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'インポートファイルにデータがありません',
     'LBL_FILE_ALREADY_BEEN_OR' => 'インポートファイルはすでにインポートされているか、存在しません',
     'LBL_SUCCESS' => '成功:',
-	'LBL_FAILURE' => 'インポート失敗:',
+    'LBL_FAILURE' => 'インポート失敗:',
     'LBL_SUCCESSFULLY' => 'インポートが完了しました。',
     'LBL_LAST_IMPORT_UNDONE' => '最後のインポートは実施されませんでした',
     'LBL_NO_IMPORT_TO_UNDO' => '元に戻すインポートはありません',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'さらにインポート',
     'LBL_FINISHED' => 'インポート完了:',
     'LBL_UNDO_LAST_IMPORT' => '最後のインポートを元に戻す',
-    'LBL_LAST_IMPORTED'=>'インポートされた',
+    'LBL_LAST_IMPORTED' => 'インポートされた',
     'ERR_MULTIPLE_PARENTS' => '親IDは規定のID１つしか設定できません',
     'LBL_DUPLICATES' => '重複が見つかりました。',
     'LNK_DUPLICATE_LIST' => '重複リストのダウンロード',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'メモを非表示',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'プレビュー列の表示',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'プレビュー列の非表示',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => '演算子を使用して重複をチェックします：',
     'LBL_SAVE_MAPPING_AS' => '以下にマッピングを保存',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'シングルクォート(&amp;amp;#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'ダブルクォート(")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => '新規レコードにデフォルトチーム以外のチームをアサインするにはデフォルト値を使用して設定したいチームを選択してください。',
     'LBL_SIGN_IN_HELP' => 'このサービスを有効にするにはユーザ設定ページの外部アカウントタブでサインインしてください。',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Bean内のサポートしないEメールアドレスを処理しようとしています",
-);
+];

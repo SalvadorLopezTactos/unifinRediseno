@@ -9,39 +9,39 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ProductCategories']['base']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['ProductCategories']['base']['view']['list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'enabled' => true,
                     'default' => true,
                     'link' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'parent_name',
                     'enabled' => true,
                     'default' => true,
-                    'related_fields' => array(
-                        'parent_id'
-                    ),
+                    'related_fields' => [
+                        'parent_id',
+                    ],
                     'id' => 'parent_id',
                     'label' => 'LBL_PARENT_CATEGORY',
-                ),
-                array(
+                ],
+                [
                     'name' => 'description',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'list_order',
                     'enabled' => true,
                     'default' => true,
-                ),
-            )
-        )
-    )
-);
+                ],
+            ],
+        ],
+    ],
+];

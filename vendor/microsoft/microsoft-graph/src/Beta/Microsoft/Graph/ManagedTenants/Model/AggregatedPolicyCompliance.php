@@ -26,6 +26,7 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
 {
     /**
     * Gets the compliancePolicyId
+    * Identifier for the device compliance policy. Optional. Read-only.
     *
     * @return string|null The compliancePolicyId
     */
@@ -37,9 +38,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the compliancePolicyId
+    * Identifier for the device compliance policy. Optional. Read-only.
     *
     * @param string $val The compliancePolicyId
     *
@@ -50,9 +52,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["compliancePolicyId"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the compliancePolicyName
+    * Name of the device compliance policy. Optional. Read-only.
     *
     * @return string|null The compliancePolicyName
     */
@@ -64,9 +67,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the compliancePolicyName
+    * Name of the device compliance policy. Optional. Read-only.
     *
     * @param string $val The compliancePolicyName
     *
@@ -77,9 +81,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["compliancePolicyName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the compliancePolicyPlatform
+    * Platform for the device compliance policy. Possible values are: android, androidForWork, iOS, macOS, windowsPhone81, windows81AndLater, windows10AndLater, androidWorkProfile, androidAOSP, all. Optional. Read-only.
     *
     * @return string|null The compliancePolicyPlatform
     */
@@ -91,9 +96,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the compliancePolicyPlatform
+    * Platform for the device compliance policy. Possible values are: android, androidForWork, iOS, macOS, windowsPhone81, windows81AndLater, windows10AndLater, androidWorkProfile, androidAOSP, all. Optional. Read-only.
     *
     * @param string $val The compliancePolicyPlatform
     *
@@ -104,9 +110,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["compliancePolicyPlatform"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the compliancePolicyType
+    * The type of compliance policy. Optional. Read-only.
     *
     * @return string|null The compliancePolicyType
     */
@@ -118,9 +125,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the compliancePolicyType
+    * The type of compliance policy. Optional. Read-only.
     *
     * @param string $val The compliancePolicyType
     *
@@ -131,9 +139,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["compliancePolicyType"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the lastRefreshedDateTime
+    * Date and time the entity was last updated in the multi-tenant management platform. Optional. Read-only.
     *
     * @return \DateTime|null The lastRefreshedDateTime
     */
@@ -149,9 +158,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the lastRefreshedDateTime
+    * Date and time the entity was last updated in the multi-tenant management platform. Optional. Read-only.
     *
     * @param \DateTime $val The lastRefreshedDateTime
     *
@@ -162,9 +172,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["lastRefreshedDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the numberOfCompliantDevices
+    * The number of devices that are in a compliant status. Optional. Read-only.
     *
     * @return int|null The numberOfCompliantDevices
     */
@@ -176,9 +187,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the numberOfCompliantDevices
+    * The number of devices that are in a compliant status. Optional. Read-only.
     *
     * @param int $val The numberOfCompliantDevices
     *
@@ -189,9 +201,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["numberOfCompliantDevices"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the numberOfErrorDevices
+    * The number of devices that are in an error status. Optional. Read-only.
     *
     * @return int|null The numberOfErrorDevices
     */
@@ -203,9 +216,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the numberOfErrorDevices
+    * The number of devices that are in an error status. Optional. Read-only.
     *
     * @param int $val The numberOfErrorDevices
     *
@@ -216,9 +230,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["numberOfErrorDevices"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the numberOfNonCompliantDevices
+    * The number of device that are in a non-compliant status. Optional. Read-only.
     *
     * @return int|null The numberOfNonCompliantDevices
     */
@@ -230,9 +245,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the numberOfNonCompliantDevices
+    * The number of device that are in a non-compliant status. Optional. Read-only.
     *
     * @param int $val The numberOfNonCompliantDevices
     *
@@ -243,9 +259,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["numberOfNonCompliantDevices"] = intval($val);
         return $this;
     }
-    
+
     /**
     * Gets the policyModifiedDateTime
+    * The date and time the device policy was last modified. Optional. Read-only.
     *
     * @return \DateTime|null The policyModifiedDateTime
     */
@@ -261,9 +278,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the policyModifiedDateTime
+    * The date and time the device policy was last modified. Optional. Read-only.
     *
     * @param \DateTime $val The policyModifiedDateTime
     *
@@ -274,9 +292,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["policyModifiedDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the tenantDisplayName
+    * The display name for the managed tenant. Optional. Read-only.
     *
     * @return string|null The tenantDisplayName
     */
@@ -288,9 +307,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the tenantDisplayName
+    * The display name for the managed tenant. Optional. Read-only.
     *
     * @param string $val The tenantDisplayName
     *
@@ -301,9 +321,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["tenantDisplayName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the tenantId
+    * The Azure Active Directory tenant identifier for the managed tenant. Optional. Read-only.
     *
     * @return string|null The tenantId
     */
@@ -315,9 +336,10 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the tenantId
+    * The Azure Active Directory tenant identifier for the managed tenant. Optional. Read-only.
     *
     * @param string $val The tenantId
     *
@@ -328,5 +350,5 @@ class AggregatedPolicyCompliance extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["tenantId"] = $val;
         return $this;
     }
-    
+
 }

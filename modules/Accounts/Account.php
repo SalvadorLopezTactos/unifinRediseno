@@ -10,208 +10,210 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the Account SugarBean Account entity with the necessary
  * methods and variables.
  ********************************************************************************/
-
-
 // Account is used to store account information.
-class Account extends Company {
-	// Stored fields
-	var $date_entered;
-	var $date_modified;
-	var $modified_user_id;
-	var $assigned_user_id;
-	var $annual_revenue;
-	var $billing_address_street;
-	var $billing_address_city;
-	var $billing_address_state;
-	var $billing_address_country;
-	var $billing_address_postalcode;
+class Account extends Company
+{
+    // Stored fields
+    public $date_entered;
+    public $date_modified;
+    public $modified_user_id;
+    public $assigned_user_id;
+    public $annual_revenue;
+    public $billing_address_street;
+    public $billing_address_city;
+    public $billing_address_state;
+    public $billing_address_country;
+    public $billing_address_postalcode;
 
-    var $billing_address_street_2;
-    var $billing_address_street_3;
-    var $billing_address_street_4;
+    public $billing_address_street_2;
+    public $billing_address_street_3;
+    public $billing_address_street_4;
 
-	var $description;
-	var $email1;
-	var $email2;
-	var $email_opt_out;
-	var $invalid_email;
-	var $employees;
-	var $id;
-	var $industry;
-	var $name;
-	var $ownership;
-	var $parent_id;
-	var $phone_alternate;
-	var $phone_fax;
-	var $phone_office;
-	var $rating;
-	var $shipping_address_street;
-	var $shipping_address_city;
-	var $shipping_address_state;
-	var $shipping_address_country;
-	var $shipping_address_postalcode;
+    public $description;
+    public $email1;
+    public $email2;
+    public $email_opt_out;
+    public $invalid_email;
+    public $employees;
+    public $id;
+    public $industry;
+    public $name;
+    public $ownership;
+    public $parent_id;
+    public $phone_alternate;
+    public $phone_fax;
+    public $phone_office;
+    public $rating;
+    public $shipping_address_street;
+    public $shipping_address_city;
+    public $shipping_address_state;
+    public $shipping_address_country;
+    public $shipping_address_postalcode;
 
-    var $shipping_address_street_2;
-    var $shipping_address_street_3;
-    var $shipping_address_street_4;
+    public $shipping_address_street_2;
+    public $shipping_address_street_3;
+    public $shipping_address_street_4;
 
-    var $campaign_id;
+    public $campaign_id;
 
-	var $sic_code;
-	var $ticker_symbol;
-	var $account_type;
-	var $website;
-	var $custom_fields;
+    public $sic_code;
+    public $ticker_symbol;
+    public $account_type;
+    public $website;
+    public $custom_fields;
 
-	var $created_by;
-	var $created_by_name;
-	var $modified_by_name;
+    public $created_by;
+    public $created_by_name;
+    public $modified_by_name;
 
     public $service_level;
 
-	// These are for related fields
-	var $opportunity_id;
-	var $case_id;
-	var $contact_id;
-	var $task_id;
-	var $note_id;
-	var $meeting_id;
-	var $call_id;
-	var $email_id;
-	var $member_id;
-	var $parent_name;
-	var $assigned_user_name;
-	var $account_id = '';
-	var $account_name = '';
-	var $bug_id ='';
-	var $module_dir = 'Accounts';
-	var $emailAddress;
+    // These are for related fields
+    public $opportunity_id;
+    public $case_id;
+    public $contact_id;
+    public $task_id;
+    public $note_id;
+    public $meeting_id;
+    public $call_id;
+    public $email_id;
+    public $member_id;
+    public $parent_name;
+    public $assigned_user_name;
+    public $account_id = '';
+    public $account_name = '';
+    public $bug_id = '';
+    public $module_dir = 'Accounts';
+    public $emailAddress;
 
     public $business_center_name;
     public $business_center_id;
 
-	var $team_name;
-	var $team_id;
-	var $quote_id;
-	var $rel_quote_account_table = "quotes_accounts";
-	var $quote_table = "quotes";
+    public $team_name;
+    public $team_id;
+    public $quote_id;
+    public $rel_quote_account_table = 'quotes_accounts';
+    public $quote_table = 'quotes';
 
-	var $table_name = "accounts";
-	var $object_name = "Account";
-	var $importable = true;
-	var $new_schema = true;
-	// This is used to retrieve related fields from form posts.
-	var $additional_column_fields = Array('assigned_user_name', 'assigned_user_id', 'opportunity_id', 'bug_id', 'case_id', 'contact_id', 'task_id', 'note_id', 'meeting_id', 'call_id', 'email_id', 'parent_name', 'member_id'
-	, "quote_id"
-	);
-    public $relationship_fields = array(
+    public $table_name = 'accounts';
+    public $object_name = 'Account';
+    public $importable = true;
+    public $new_schema = true;
+    // This is used to retrieve related fields from form posts.
+    public $additional_column_fields = ['assigned_user_name', 'assigned_user_id', 'opportunity_id', 'bug_id', 'case_id', 'contact_id', 'task_id', 'note_id', 'meeting_id', 'call_id', 'email_id', 'parent_name', 'member_id'
+        , 'quote_id',
+    ];
+    public $relationship_fields = [
         'bug_id' => 'bugs',
-        'business_center_id'=>'business_centers',
-        'call_id'=>'calls',
-        'case_id'=>'cases',
-        'contact_id'=>'contacts',
-        'email_id'=>'emails',
-        'meeting_id'=>'meetings',
-        'member_id'=>'members',
-        'note_id'=>'notes',
-        'opportunity_id'=>'opportunities',
-        'project_id'=>'project',
-        'quote_id'=>'quotes',
-        'task_id'=>'tasks',
-    );
+        'business_center_id' => 'business_centers',
+        'call_id' => 'calls',
+        'case_id' => 'cases',
+        'contact_id' => 'contacts',
+        'email_id' => 'emails',
+        'meeting_id' => 'meetings',
+        'member_id' => 'members',
+        'note_id' => 'notes',
+        'opportunity_id' => 'opportunities',
+        'project_id' => 'project',
+        'quote_id' => 'quotes',
+        'task_id' => 'tasks',
+    ];
 
     //Meta-Data Framework fields
-    var $push_billing;
-    var $push_shipping;
+    public $push_billing;
+    public $push_shipping;
 
 
-	public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         //Email logic
-		if (!empty($_REQUEST['parent_id']) && !empty($_REQUEST['parent_type']) && $_REQUEST['parent_type'] == 'Emails'
-        	&& !empty($_REQUEST['return_module']) && $_REQUEST['return_module'] == 'Emails') {
-			$_REQUEST['parent_name'] = '';
-			$_REQUEST['parent_id'] = '';
-		}
-	}
+        if (!empty($_REQUEST['parent_id']) && !empty($_REQUEST['parent_type']) && $_REQUEST['parent_type'] == 'Emails'
+            && !empty($_REQUEST['return_module']) && $_REQUEST['return_module'] == 'Emails') {
+            $_REQUEST['parent_name'] = '';
+            $_REQUEST['parent_id'] = '';
+        }
+    }
 
-	function get_summary_text()
-	{
-		return $this->name;
-	}
+    public function get_summary_text()
+    {
+        return $this->name;
+    }
 
-	function get_contacts() {
-		return $this->get_linked_beans('contacts','Contact');
-	}
+    public function get_contacts()
+    {
+        return $this->get_linked_beans('contacts', 'Contact');
+    }
 
     public function get_list_view_data($filter_fields = [])
     {
 
-		$temp_array = parent::get_list_view_data();
+        $temp_array = parent::get_list_view_data();
 
-		$temp_array["ENCODED_NAME"] = $this->name;
+        $temp_array['ENCODED_NAME'] = $this->name;
 
-		if(!empty($this->billing_address_state))
-		{
-			$temp_array["CITY"] = $this->billing_address_city . ', '. $this->billing_address_state;
-		}
-		else
-		{
-			$temp_array["CITY"] = $this->billing_address_city;
-		}
-		$temp_array["BILLING_ADDRESS_STREET"]  = $this->billing_address_street;
-		$temp_array["SHIPPING_ADDRESS_STREET"] = $this->shipping_address_street;
+        if (!empty($this->billing_address_state)) {
+            $temp_array['CITY'] = $this->billing_address_city . ', ' . $this->billing_address_state;
+        } else {
+            $temp_array['CITY'] = $this->billing_address_city;
+        }
+        $temp_array['BILLING_ADDRESS_STREET'] = $this->billing_address_street;
+        $temp_array['SHIPPING_ADDRESS_STREET'] = $this->shipping_address_street;
 
-		return $temp_array;
-	}
+        return $temp_array;
+    }
 
-	/**
-		builds a generic search based on the query string using or
-		do not include any $this-> because this is called on without having the class instantiated
-	*/
-	function build_generic_where_clause ($the_query_string) {
-	$where_clauses = Array();
-	$the_query_string = $this->db->quote($the_query_string);
-	array_push($where_clauses, "accounts.name like '$the_query_string%'");
-	if (is_numeric($the_query_string)) {
-		array_push($where_clauses, "accounts.phone_alternate like '%$the_query_string%'");
-		array_push($where_clauses, "accounts.phone_fax like '%$the_query_string%'");
-		array_push($where_clauses, "accounts.phone_office like '%$the_query_string%'");
-	}
+    /**
+     * builds a generic search based on the query string using or
+     * do not include any $this-> because this is called on without having the class instantiated
+     */
+    public function build_generic_where_clause($the_query_string)
+    {
+        $where_clauses = [];
+        $the_query_string = $this->db->quote($the_query_string);
+        array_push($where_clauses, "accounts.name like '$the_query_string%'");
+        if (is_numeric($the_query_string)) {
+            array_push($where_clauses, "accounts.phone_alternate like '%$the_query_string%'");
+            array_push($where_clauses, "accounts.phone_fax like '%$the_query_string%'");
+            array_push($where_clauses, "accounts.phone_office like '%$the_query_string%'");
+        }
 
-	$the_where = "";
-	foreach($where_clauses as $clause)
-	{
-		if(!empty($the_where)) $the_where .= " or ";
-		$the_where .= $clause;
-	}
+        $the_where = '';
+        foreach ($where_clauses as $clause) {
+            if (!empty($the_where)) {
+                $the_where .= ' or ';
+            }
+            $the_where .= $clause;
+        }
 
-	return $the_where;
-}
+        return $the_where;
+    }
 
-	function set_notification_body($xtpl, $account)
-	{
-		$xtpl->assign("ACCOUNT_NAME", $account->name);
-		$xtpl->assign("ACCOUNT_TYPE", $account->account_type);
-		$xtpl->assign("ACCOUNT_DESCRIPTION", $account->description);
+    public function set_notification_body($xtpl, $account)
+    {
+        $xtpl->assign('ACCOUNT_NAME', $account->name);
+        $xtpl->assign('ACCOUNT_TYPE', $account->account_type);
+        $xtpl->assign('ACCOUNT_DESCRIPTION', $account->description);
 
-		return $xtpl;
-	}
+        return $xtpl;
+    }
 
-	function bean_implements($interface){
-		switch($interface){
-			case 'ACL':return true;
-		}
-		return false;
-	}
-	function get_unlinked_email_query($type=array()) {
+    public function bean_implements($interface)
+    {
+        switch ($interface) {
+            case 'ACL':
+                return true;
+        }
+        return false;
+    }
 
-		return get_unlinked_email_query($type, $this);
-	}
+    public function get_unlinked_email_query($type = [])
+    {
 
+        return get_unlinked_email_query($type, $this);
+    }
 }

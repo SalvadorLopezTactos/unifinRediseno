@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Добавить',
     'LBL_ADDRCITY' => 'Город',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Информация' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Закрыть' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'Не удалось найти соединитель с данным идентификатором источника.',
-);
-
+];

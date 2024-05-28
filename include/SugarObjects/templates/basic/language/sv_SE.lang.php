@@ -10,28 +10,28 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-'LBL_ID'=>'ID',
-'LBL_DATE_ENTERED'=>'Datum skapat',
-'LBL_DATE_MODIFIED'=>'Modifierat Datum', 
-'LBL_MODIFIED'=>'Modifierat Av',
-'LBL_MODIFIED_ID'=>'Modifierat Av Id',
-'LBL_MODIFIED_NAME'=>'Modifierat Av Namn',
-'LBL_CREATED'=>'Skapat Av',
-'LBL_CREATED_ID'=>'Skapat Av',
-'LBL_DOC_OWNER'=>'Ägare av dokument',
-'LBL_USER_FAVORITES'=>'Användare som favorite',
-'LBL_DESCRIPTION'=>'Beskrivning',
-'LBL_DELETED'=>'Raderad',
-'LBL_NAME'=>'Namn',
-'LBL_CREATED_USER'=>'Skapat Av Användare',
-'LBL_MODIFIED_USER'=>'Modifierat Av Användare',
-'LBL_LIST_NAME'=>'Namn',
-'LBL_EDIT_BUTTON' => 'Redigera',
- 'LBL_REMOVE' => 'Ta bort',
+$mod_strings = [
+    'LBL_ID' => 'ID',
+    'LBL_DATE_ENTERED' => 'Datum skapat',
+    'LBL_DATE_MODIFIED' => 'Modifierat Datum',
+    'LBL_MODIFIED' => 'Modifierat Av',
+    'LBL_MODIFIED_ID' => 'Modifierat Av Id',
+    'LBL_MODIFIED_NAME' => 'Modifierat Av Namn',
+    'LBL_CREATED' => 'Skapat Av',
+    'LBL_CREATED_ID' => 'Skapat Av',
+    'LBL_DOC_OWNER' => 'Ägare av dokument',
+    'LBL_USER_FAVORITES' => 'Användare som favorite',
+    'LBL_DESCRIPTION' => 'Beskrivning',
+    'LBL_DELETED' => 'Raderad',
+    'LBL_NAME' => 'Namn',
+    'LBL_CREATED_USER' => 'Skapat Av Användare',
+    'LBL_MODIFIED_USER' => 'Modifierat Av Användare',
+    'LBL_LIST_NAME' => 'Namn',
+    'LBL_EDIT_BUTTON' => 'Redigera',
+    'LBL_REMOVE' => 'Ta bort',
     //define label(s) to be used for overriding local values during import/export
     'LBL_EXPORT_MODIFIED_BY_NAME' => 'Ändrad av namn',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Skapad av namn',
 
     'LBL_COMMENTLOG' => 'Comment Log',
-);
+];

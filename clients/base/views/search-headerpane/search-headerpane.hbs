@@ -10,12 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="headerpane">
+<div class="headerpane bg-[--primary-content-background] box-border fixed table">
     <h1>
         <span class="record-cell" data-type="label" data-name="title">
             <span class="table-cell-wrapper">
                 <span class="index" data-fieldname="title" data-index="">
-                    <div class="ellipsis_inline" data-placement="bottom" title="" >
+                    <div class="ellipsis_inline" data-bs-placement="bottom" title="" >
                         {{str 'LBL_SEARCH_RESULTS_FOR'}}
                             {{#if searchTerm.term}}"{{searchTerm.term}}"{{/if}}
                             {{#if searchTerm.tags}}&nbsp;<i class="sicon sicon-tag"></i>"{{searchTerm.tags}}"{{/if}}

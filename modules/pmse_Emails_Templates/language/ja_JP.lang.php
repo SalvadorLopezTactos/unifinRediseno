@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => '本文',
     'LBL_BASE_MODULE' => '対象モジュール',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'ファイルからプロセスEメールテンプレートを作成できませんでした',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'このEメールテンプレートはプロセス定義において現在使われている。あなたはまだこのEメールテンプレートを編集したいか？',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "このEメールテンプレートはプロセス定義により現在使用中のため削除できません。",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'このEメールテンプレートはプロセス定義により現在使用中のため削除できません。',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'フィールドセレクター',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => '選択',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'フィールド値のタイプ',
-);
+];

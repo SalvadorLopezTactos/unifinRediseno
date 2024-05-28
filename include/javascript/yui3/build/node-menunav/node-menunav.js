@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('node-menunav', function (Y, NAME) {
 
 /**
@@ -909,7 +902,7 @@ Y.extend(NodeMenuNav, Y.Plugin.Base, {
 
 		menu.setXY(aXY);
 
-		if (UA.ie < 8) {
+		if (UA.ie && UA.ie < 8) {
 
 			if (UA.ie === 6 && !menu.hasIFrameShim) {
 
@@ -2192,4 +2185,4 @@ Y.namespace('Plugin');
 Y.Plugin.NodeMenuNav = NodeMenuNav;
 
 
-}, '3.15.0', {"requires": ["node", "classnamemanager", "plugin", "node-focusmanager"], "skinnable": true});
+}, '3.18.1', {"requires": ["node", "classnamemanager", "plugin", "node-focusmanager"], "skinnable": true});

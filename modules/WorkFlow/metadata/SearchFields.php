@@ -9,9 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$searchFields['WorkFlow'] = 
-	array (
-		'name' => array( 'query_type'=>'default'),
-		'base_module' => array( 'query_type'=>'default'),
-		);
-?>
+$searchFields['WorkFlow'] =
+    [
+        'name' => ['query_type' => 'default'],
+        'base_module' => ['query_type' => 'default'],
+    ];

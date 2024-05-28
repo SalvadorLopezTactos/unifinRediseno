@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Zināšanu bāzes saraksta instrumentu panelis',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Zināšanu bāzes ierakstu instrumentu panelis',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Zināšanu bāzes fokusa panelis',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Zināšanu bāzes laika josla',
 
     'LBL_MODULE_NAME' => 'Zināšanu bāze',
     'LBL_MODULE_NAME_SINGULAR' => 'Zināšanu bāzes raksts',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Iestatīt vērtību kā primāro',
     'LBL_ITEM_REMOVE' => 'Dzēst vienumu',
     'LBL_ITEM_ADD' => 'Pievienot vienumu',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => 'Versijas ID',
     'LBL_DOCUMENT_REVISION' => 'Revīzija',
     'LBL_NUMBER' => 'Numurs',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'Vairāk {{module}} rakstu...',
     'LBL_LIST_FORM_TITLE' => 'Zināšanu bāzes saraksts',
     'LBL_SEARCH_FORM_TITLE' => 'Meklēšana zināšanu bāzē',
-);
+];

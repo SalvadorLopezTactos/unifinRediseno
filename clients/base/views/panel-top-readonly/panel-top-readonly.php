@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['panel-top-readonly'] = array(
-    'buttons' => array(
-    ),
-);
+$viewdefs['base']['view']['panel-top-readonly'] = [
+    'buttons' => [
+    ],
+];

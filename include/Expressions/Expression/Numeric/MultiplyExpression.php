@@ -55,7 +55,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return array('multiply', 'currencyMultiply', 'mul');
+        return ['multiply', 'currencyMultiply', 'mul'];
     }
 
     /**
@@ -63,15 +63,15 @@ JS;
      */
     public function toString()
     {
-        $str = "";
+        $str = '';
 
         foreach ($this->getParameters() as $expr) {
             if (!$expr instanceof ConstantExpression) {
-                $str .= "(";
+                $str .= '(';
             }
-            $str .= $expr->toString() . " * ";
+            $str .= $expr->toString() . ' * ';
             if (!$expr instanceof ConstantExpression) {
-                $str .= ")";
+                $str .= ')';
             }
         }
     }

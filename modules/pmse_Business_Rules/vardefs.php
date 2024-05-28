@@ -11,7 +11,7 @@
  */
 
 
-$dictionary['pmse_Business_Rules'] = array(
+$dictionary['pmse_Business_Rules'] = [
     'table' => 'pmse_business_rules',
     'color' => 'orange',
     'icon' => 'sicon-process-business-rules-lg',
@@ -23,8 +23,8 @@ $dictionary['pmse_Business_Rules'] = array(
     //'unified_search' => true,
     //'full_text_search' => true,
     //'unified_search_default_enabled' => true,
-    'fields' => array(
-        'name' => array(
+    'fields' => [
+        'name' => [
             'name' => 'name',
             'vname' => 'LBL_NAME',
             'type' => 'name',
@@ -45,9 +45,9 @@ $dictionary['pmse_Business_Rules'] = array(
             'reportable' => true,
             'calculated' => false,
             'size' => '20',
-            'full_text_search' => array('enabled' => true, 'searchable' => true, 'boost' => 1.55),
-        ),
-        'rst_uid' => array(
+            'full_text_search' => ['enabled' => true, 'searchable' => true, 'boost' => 1.55],
+        ],
+        'rst_uid' => [
             'name' => 'rst_uid',
             'vname' => 'LBL_RST_UID',
             'type' => 'varchar',
@@ -65,8 +65,8 @@ $dictionary['pmse_Business_Rules'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '20',
-        ),
-        'rst_type' => array(
+        ],
+        'rst_type' => [
             'required' => true,
             'name' => 'rst_type',
             'vname' => 'LBL_RST_TYPE',
@@ -89,8 +89,8 @@ $dictionary['pmse_Business_Rules'] = array(
             'options' => 'business_rule_type_list',
             'studio' => 'visible',
             'dependency' => false,
-        ),
-        'rst_definition' => array(
+        ],
+        'rst_definition' => [
             'required' => false,
             'name' => 'rst_definition',
             'vname' => 'LBL_RST_DEFINITION',
@@ -111,8 +111,8 @@ $dictionary['pmse_Business_Rules'] = array(
             'studio' => 'visible',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'rst_editable' => array(
+        ],
+        'rst_editable' => [
             'required' => false,
             'name' => 'rst_editable',
             'vname' => 'LBL_RST_EDITABLE',
@@ -136,8 +136,8 @@ $dictionary['pmse_Business_Rules'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'rst_source' => array(
+        ],
+        'rst_source' => [
             'required' => false,
             'name' => 'rst_source',
             'vname' => 'LBL_RST_SOURCE',
@@ -156,8 +156,8 @@ $dictionary['pmse_Business_Rules'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'rst_source_definition' => array(
+        ],
+        'rst_source_definition' => [
             'required' => false,
             'name' => 'rst_source_definition',
             'vname' => 'LBL_RST_SOURCE_DEFINITION',
@@ -178,8 +178,8 @@ $dictionary['pmse_Business_Rules'] = array(
             'studio' => 'visible',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'rst_module' => array(
+        ],
+        'rst_module' => [
             'required' => true,
             'name' => 'rst_module',
             'vname' => 'LBL_RST_MODULE',
@@ -201,12 +201,12 @@ $dictionary['pmse_Business_Rules'] = array(
             'options' => '',
             'studio' => 'visible',
             'dependency' => false,
-            'function' => array(
+            'function' => [
                 'name' => 'getTargetsModules',
                 'include' => 'modules/pmse_Project/pmse_ProjectHelper.php',
-            ),
-        ),
-        'rst_filename' => array(
+            ],
+        ],
+        'rst_filename' => [
             'required' => false,
             'name' => 'rst_filename',
             'vname' => 'LBL_RST_FILENAME',
@@ -225,8 +225,8 @@ $dictionary['pmse_Business_Rules'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'rst_create_date' => array(
+        ],
+        'rst_create_date' => [
             'required' => false,
             'name' => 'rst_create_date',
             'vname' => 'LBL_RST_CREATE_DATE',
@@ -246,8 +246,8 @@ $dictionary['pmse_Business_Rules'] = array(
             'size' => '20',
             'enable_range_search' => false,
             'dbType' => 'datetime',
-        ),
-        'rst_update_date' => array(
+        ],
+        'rst_update_date' => [
             'required' => false,
             'name' => 'rst_update_date',
             'vname' => 'LBL_RST_UPDATE_DATE',
@@ -267,22 +267,22 @@ $dictionary['pmse_Business_Rules'] = array(
             'size' => '20',
             'enable_range_search' => false,
             'dbType' => 'datetime',
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'acls' => array(
-        'SugarACLDeveloperForTarget' => array(
+    'acls' => [
+        'SugarACLDeveloperForTarget' => [
             'targetModuleField' => 'rst_module',
             'allowUserRead' => false,
-        ),
-    ),
-    'visibility' => array(
-        'TargetModuleDeveloperVisibility' => array(
+        ],
+    ],
+    'visibility' => [
+        'TargetModuleDeveloperVisibility' => [
             'targetModuleField' => 'rst_module',
-        ),
-    ),
+        ],
+    ],
     'hidden_to_role_assignment' => true,
     // @TODO Fix the Default and Basic SugarObject templates so that Basic
     // implements Default. This would allow the application of various
@@ -293,17 +293,17 @@ $dictionary['pmse_Business_Rules'] = array(
     // implementation fields. Once there is a separation of default and basic
     // templates we can safely remove these as this module will implement
     // default instead of basic.
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'lockable_fields',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'team_security',
         'assignable',
         'taggable',
-    ),
-);
+    ],
+];
 VardefManager::createVardef('pmse_Business_Rules', 'pmse_Business_Rules');

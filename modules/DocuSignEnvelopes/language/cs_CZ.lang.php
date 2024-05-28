@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Načíst obálku',
     'LBL_CLOUD_SERVICE_TYPE' => 'Typ cloudové služby',
     'LBL_CLOUD_PATH' => 'Cesta cloudu',
+    'LBL_CLOUD_DRIVE_ID' => 'ID disku',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Řídicí panel seznamu obálek DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'Řídicí panel záznamu obálek DocuSign',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Nedávné obálky DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření obálek DocuSign',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová osa obálky DocuSign',
 
     'LBL_NEW_ENVELOPE' => 'Nová obálka',
     'LBL_DOCUMENT_IS_NOW' => ' je nyní ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Odeslat',
     'LBL_BUTTON_CLEAR' => 'Vymazat',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Použít šablonu',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Odeslat se šablonou',
     'LBL_PLEASE_LOG_IN' => 'Nejprve se prosím přihlaste do DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Tento dokument nelze stáhnout. Byl vytvořen jiným uživatelem!',
     'LBL_SEND_NOT_ALLOWED' => 'Tuto obálku nelze odeslat. Byla vytvořena jiným uživatelem!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Koncept byl změněn. Aktualizovat stav na aktuální ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'DocuSign Envelope updated!',
     'LBL_DRAFT_CHANGED_ERROR' => 'Stav obálky DocuSign nebyl aktualizován. Podrobnosti najdete v protokolech!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'Šablonu DocuSign nelze použít',
     'LBL_ENVELOPE_NOT_SENT' => 'Obálka nebyla odeslána!',
     'LBL_ENVELOPE_SENT' => 'Obálka byla odeslána znovu!',
     'LBL_DOCUMENT_ADDED' => 'Dokument přidán do záznamu!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Role',
     'LBL_SELECT_BUTTON_LABEL' => 'Vybrat',
     'LBL_BACK_BUTTON_LABEL' => 'Zpět',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Hledat podle názvu šablony',
+    'LBL_ENVELOPE_NAME' => 'Název obálky',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Název obálky nesmí být prázdný',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Nepodařilo se načíst potenciální příjemce.',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Nepodařilo se načíst šablony.',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Vyberte roli pro každého příjemce',
+    
+    'LBL_DOWNLOAD' => 'Stáhnout',
+    'LBL_OPEN_DRAFT' => 'Otevřít návrh',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Dokumenty bez souboru nelze odeslat do DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Kliknutím na tlačítko Plus zahájíte proces podepisování',
+    'LBL_NO_DOC_SELECTED' => 'Nejprve vyberte dokumenty',
+    'LBL_SELECT_RECIPIENTS' => 'Vyberte podepisujícího příjemce',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Vyloučit',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Pro lepší práci je třeba nainstalovat aplikaci DocuSign.',
 ];

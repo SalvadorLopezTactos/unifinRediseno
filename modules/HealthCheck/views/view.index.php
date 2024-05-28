@@ -24,7 +24,7 @@ class ViewIndex extends SugarView
      *
      * @see SugarView::__construct()
      */
-    public function __construct($bean = null, $view_object_map = array())
+    public function __construct($bean = null, $view_object_map = [])
     {
         $this->suppressDisplayErrors = true;
 

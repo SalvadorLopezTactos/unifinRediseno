@@ -21,40 +21,38 @@
         <img src="{{logoImage}}" alt="{{str 'LBL_SUGAR_CUBE_ALT' module}}">
     </a>
     {{#if actions}}
-        <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown"
+        <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-bs-toggle="dropdown"
                 class="btn btn-invisible dropdown-toggle p-1" track="click:cube-dropdown"
                 aria-label="{{getModuleName module plural=true}} - {{str 'LBL_LINK_MORE' module}}"
                 role="button" aria-haspopup="true" aria-expanded="false"
         >
             <i class="sicon sicon-chevron-down"></i>
         </button>
-        <div class="dropdown-menu rounded-t-none scroll">
+        <div class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl rounded-t-none scroll">
             <ul role="menu">
                 {{#each actions}}
                     {{#eq type 'divider'}}
                         <li class="divider"></li>
                     {{else}}
                         <li class="megamenu-dropdown-item-container" role="menuitem">
-                            <a class="ellipsis_inline megamenu-dropdown-item" tabindex="-1"
-                            <a class="megamenu-dropdown-item" tabindex="-1"
-                            data-navbar-menu-item="{{label}}"
+                            <a class="megamenu-dropdown-item" tabindex="-1" data-navbar-menu-item="{{label}}"
                             {{#if event}}
-                            href="javascript:void(0);"
-                            data-event="{{event}}"
-                            track="click:{{event}}"
+                                href="javascript:void(0);"
+                                data-event="{{event}}"
+                                track="click:{{event}}"
                             {{else}}
-                            href="{{route}}"
-                            data-route="{{route}}"
-                            {{#if openwindow}}
-                            data-openwindow="true"
-                            {{/if}}
-                            track="click:{{route}}"
+                                href="{{route}}"
+                                data-route="{{route}}"
+                                {{#if openwindow}}
+                                data-openwindow="true"
+                                {{/if}}
+                                track="click:{{route}}"
                             {{/if}}
                             >
                             {{#if icon}}
                                 <i class="{{buildIcon icon}}"></i>
                             {{/if}}
-                            <span class="text-overflow">
+                            <span class="ellipsis_inline">
                                 {{#if label_module}}
                                     {{str label label_module}}
                                 {{else}}

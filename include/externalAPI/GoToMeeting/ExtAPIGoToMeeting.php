@@ -19,10 +19,10 @@ class ExtAPIGoToMeeting extends OAuthPluginBase implements WebMeeting
     protected $dateFormat = 'Y-m-d\TH:i:s';
     protected $url = 'https://api.getgo.com/';
 
-    public $supportedModules = array('Meetings');
+    public $supportedModules = ['Meetings'];
     public $supportMeetingPassword = false;
     public $authMethod = 'oauth';
-    public $connector = "ext_eapm_gotomeeting";
+    public $connector = 'ext_eapm_gotomeeting';
 
     protected $oauthAuth = 'oauth/authorize';
     protected $oauthAccess = 'oauth/access_token';
@@ -52,10 +52,10 @@ class ExtAPIGoToMeeting extends OAuthPluginBase implements WebMeeting
         try {
             $client = new Zend_Http_Client($url);
 
-            $headers = array(
-                    'Accept: application/json',
-                    'Content-type: application/json'
-            );
+            $headers = [
+                'Accept: application/json',
+                'Content-type: application/json',
+            ];
             if (!empty($this->eapmBean->oauth_token)) {
                 $headers[] = 'Authorization: OAuth oauth_token=' . $this->eapmBean->oauth_token;
             }
@@ -87,22 +87,22 @@ class ExtAPIGoToMeeting extends OAuthPluginBase implements WebMeeting
             $callback = $sugar_config['site_url'] . '/index.php?module=EAPM&action=oauth&record=' . $this->eapmBean->id;
             $callback = $this->formatCallbackURL($callback);
 
-            $queryData = array(
+            $queryData = [
                 'client_id' => $apiKey,
-                'redirect_uri' => $callback
-            );
+                'redirect_uri' => $callback,
+            ];
 
             SugarApplication::redirect($this->getOauthAuthURL() . '?' . http_build_query($queryData));
         } else {
             $code = $_REQUEST['code'];
 
-            $queryData = array(
+            $queryData = [
                 'grant_type' => 'authorization_code',
                 'code' => $code,
-                'client_id' => $apiKey
-            );
+                'client_id' => $apiKey,
+            ];
 
-            $accReq = $this->getOauthAccessURL() . '?' .  http_build_query($queryData);
+            $accReq = $this->getOauthAccessURL() . '?' . http_build_query($queryData);
 
             $rawResponse = $this->makeRequest($accReq);
 
@@ -131,10 +131,10 @@ class ExtAPIGoToMeeting extends OAuthPluginBase implements WebMeeting
     public function scheduleMeeting($bean)
     {
         if (!$this->eapmBean->validated || empty($this->eapmBean->oauth_token)) {
-            return array(
+            return [
                 'success' => false,
-                'errorMessage' => $GLOBALS['app_strings']['ERR_EXTERNAL_API_NO_OAUTH_TOKEN']
-            );
+                'errorMessage' => $GLOBALS['app_strings']['ERR_EXTERNAL_API_NO_OAUTH_TOKEN'],
+            ];
         }
 
         if (empty($bean->external_id)) {
@@ -176,12 +176,12 @@ class ExtAPIGoToMeeting extends OAuthPluginBase implements WebMeeting
                     $bean->host_url = preg_replace('/http[s]?:/', '', $bean->host_url);
                     $bean->creator = $this->account_name;
 
-                    return array('success' => true);
+                    return ['success' => true];
                 }
             }
         }
 
-        $return = array('success' => false, 'errorMessage' => $rawResponse->getBody());
+        $return = ['success' => false, 'errorMessage' => $rawResponse->getBody()];
 
         return $return;
     }
@@ -206,14 +206,14 @@ class ExtAPIGoToMeeting extends OAuthPluginBase implements WebMeeting
         $rawResponse = $this->makeRequest($url, $method, json_encode($data));
 
         if ($rawResponse->isSuccessful()) {
-            $return = array('success' => true);
+            $return = ['success' => true];
         } else {
             $bean->join_url = '';
             $bean->host_url = '';
             $bean->external_id = '';
             $bean->creator = '';
-            
-            $return = array('success' => false, 'errorMessage' => $rawResponse->getBody());
+
+            $return = ['success' => false, 'errorMessage' => $rawResponse->getBody()];
         }
 
         return $return;
@@ -229,7 +229,7 @@ class ExtAPIGoToMeeting extends OAuthPluginBase implements WebMeeting
     {
         global $timedate;
 
-        $data = array();
+        $data = [];
         $data['subject'] = $bean->name;
         $data['conferencecallinfo'] = 'Hybrid';
         $data['timezonekey'] = '';
@@ -287,9 +287,9 @@ class ExtAPIGoToMeeting extends OAuthPluginBase implements WebMeeting
         $rawResponse = $this->makeRequest($url, $method);
 
         if ($rawResponse && $rawResponse->isSuccessful()) {
-            $return = array('success' => true);
+            $return = ['success' => true];
         } else {
-            $return = array('success' => false);
+            $return = ['success' => false];
         }
 
         return $return;

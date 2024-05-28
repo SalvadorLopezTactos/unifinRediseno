@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Cuadro de mando de la lista de partidas presupuestadas',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Cuadro de mando de registros de elementos presupuestados',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Panel de enfoque en las líneas de presupuesto',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Línea de tiempo de la línea de presupuesto',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Línea de presupuesto de campaña',
     'LBL_MODULE_NAME' => 'Elementos presupuestados',
@@ -183,4 +184,4 @@ Para crear un {{module_name}}:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nuevo elemento de las líneas de presupuesto)',
     'LBL_DISCOUNT_PERCENT' => '% Porcentaje',
     'LBL_DISCOUNT_TYPE' => 'Tipo de descuento',
-);
+];

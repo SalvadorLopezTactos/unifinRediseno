@@ -11,9 +11,6 @@
  */
 
 
-
-
 class PMSEIntermediateEvent extends PMSEEvent
 {
-    
 }

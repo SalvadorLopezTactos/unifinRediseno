@@ -15,14 +15,13 @@
  * SugarQuery_Builder_Field_Condition
  * @api
  */
-
 class SugarQuery_Builder_Field_Condition extends SugarQuery_Builder_Field
 {
     protected $rNameExists = false;
 
     public function expandField()
     {
-        if(!isset($this->def['source']) || $this->def['source'] == 'db') {
+        if (!isset($this->def['source']) || $this->def['source'] == 'db') {
             return;
         }
         // Exists only checks
@@ -31,13 +30,13 @@ class SugarQuery_Builder_Field_Condition extends SugarQuery_Builder_Field
             $this->rNameExists = true;
             return;
         }
-        if(!empty($this->def['rname']) && !empty($this->def['link'])) {
+        if (!empty($this->def['rname']) && !empty($this->def['link'])) {
             //if related module is not defined, lets get the related module through the link
             if (empty($this->def['module'])) {
                 $linkName = $this->def['link'];
                 $from = $this->query->from;
                 if ($from->load_relationship($linkName)) {
-                    $this->def['module'] =$from->$linkName->getRelatedModuleName();
+                    $this->def['module'] = $from->$linkName->getRelatedModuleName();
                 }
             }
             $this->table = $this->query->getJoinAlias($this->def['link']);
@@ -45,7 +44,7 @@ class SugarQuery_Builder_Field_Condition extends SugarQuery_Builder_Field
         } elseif (!empty($this->def['rname']) && !empty($this->def['table'])) {
             $this->table = $this->query->getJoinAlias($this->def['table'], false);
             $this->field = $this->def['rname'];
-        }  elseif(!empty($this->def['rname_link']) && !empty($this->def['link'])) {
+        } elseif (!empty($this->def['rname_link']) && !empty($this->def['link'])) {
             $this->field = $this->def['rname_link'];
         }
 
@@ -82,7 +81,7 @@ class SugarQuery_Builder_Field_Condition extends SugarQuery_Builder_Field
     public function shouldMarkNonDb()
     {
         // if its a linking table let it slide
-        if(!empty($this->query->join[$this->table]->options['linkingTable'])) {
+        if (!empty($this->query->join[$this->table]->options['linkingTable'])) {
             $this->nonDb = 0;
             return;
         }

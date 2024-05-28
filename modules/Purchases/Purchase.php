@@ -68,8 +68,8 @@ class Purchase extends Basic
     /**
      * This function saves changes to accounts in Purchases' related module PurchasedLineItems.
      *
-     * @param boolean $is_update    true if this save is an update
-     * @param array $exclude        exclude relationships
+     * @param boolean $is_update true if this save is an update
+     * @param array $exclude exclude relationships
      */
     public function save_relationship_changes($is_update, $exclude = [])
     {

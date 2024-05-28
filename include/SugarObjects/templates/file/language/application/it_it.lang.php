@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Marketing',
-    'Knowledge Base' => 'Knowledge Base',
-    'Sales' => 'Vendite',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Materiale di Marketing',
-    'Product Brochures' => 'Brochure Prodotto',
-    'FAQ' => 'Domande Più Frequenti',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Marketing',
+        'Knowledge Base' => 'Knowledge Base',
+        'Sales' => 'Vendite',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Attivo',
-    'Draft' => 'Bozza',
-    'FAQ' => 'Domande Più Frequenti',
-    'Expired' => 'Scaduto',
-    'Under Review' => 'In Revisione',
-    'Pending' => 'In attesa',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Materiale Marketing',
+        'Product Brochures' => 'Brochure prodotti',
+        'FAQ' => 'Domande frequenti',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Attivo',
+        'Draft' => 'Bozza',
+        'FAQ' => 'Domande frequenti',
+        'Expired' => 'Scaduto',
+        'Under Review' => 'In revisione',
+        'Pending' => 'In sospeso',
+    ],
+];

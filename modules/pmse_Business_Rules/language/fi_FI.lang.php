@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Prosessiyrityssäännöt',
-  'LBL_MODULE_TITLE' => 'Prosessiyrityssäännöt',
-  'LBL_MODULE_NAME_SINGULAR' => 'Prosessiyrityssääntö',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Prosessiyrityssäännöt',
+    'LBL_MODULE_TITLE' => 'Prosessiyrityssäännöt',
+    'LBL_MODULE_NAME_SINGULAR' => 'Prosessiyrityssääntö',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Yrityssääntöjen prosessointi -tietolaatikko',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Yrityssääntöjen prosessointi -tietolaatikko',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Yrityssääntöjen prosessointitietueiden työpöytä',
-  'LBL_RST_UID' => 'Yrityssäännön ID',
-  'LBL_RST_TYPE' => 'Yrityssäännön tyyppi',
-  'LBL_RST_DEFINITION' => 'Yrityssäännön määritelmä',
-  'LBL_RST_EDITABLE' => 'Yrityssäännön muokkausstatus',
-  'LBL_RST_SOURCE' => 'Yrityssäännön lähde',
-  'LBL_RST_SOURCE_DEFINITION' => 'Yrityssäännön lähteen määritelmän',
-  'LBL_RST_MODULE' => 'Kantamoduuli',
-  'LBL_RST_FILENAME' => 'Yrityssäännön tiedostonimi',
-  'LBL_RST_CREATE_DATE' => 'Yrityssäännön luontipäivämäärä',
-  'LBL_RST_UPDATE_DATE' => 'Yrityssäännön päivityspäivämäärä',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Yrityssääntöjen prosessointitietueiden työpöytä',
+    'LBL_RST_UID' => 'Yrityssäännön ID',
+    'LBL_RST_TYPE' => 'Yrityssäännön tyyppi',
+    'LBL_RST_DEFINITION' => 'Yrityssäännön määritelmä',
+    'LBL_RST_EDITABLE' => 'Yrityssäännön muokkausstatus',
+    'LBL_RST_SOURCE' => 'Yrityssäännön lähde',
+    'LBL_RST_SOURCE_DEFINITION' => 'Yrityssäännön lähteen määritelmän',
+    'LBL_RST_MODULE' => 'Kantamoduuli',
+    'LBL_RST_FILENAME' => 'Yrityssäännön tiedostonimi',
+    'LBL_RST_CREATE_DATE' => 'Yrityssäännön luontipäivämäärä',
+    'LBL_RST_UPDATE_DATE' => 'Yrityssäännön päivityspäivämäärä',
 
     'LNK_LIST' => 'Näytä prosessiyrityssäännöt',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Luo prosessiyrityssääntö',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Tämä yrityssääntö ei kelpaa, koska siinä käytetään kelpaamattomia kenttiä tai kenttiä, joita ei ole omassa SugarCRM-instanssissasi. Korjaa alla mainitut virheet ja tallenna yrityssääntö.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Tätä yrityssääntöä käytetään tällä hetkellä prosessimääritelmässä. Haluatko silti muokata tätä yrityssääntöä?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Et voi poistaa tätä yrityssääntöä, koska sitä käytetään tällä hetkellä prosessimääritelmässä.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Et voi poistaa tätä yrityssääntöä, koska sitä käytetään tällä hetkellä prosessimääritelmässä.',
+];

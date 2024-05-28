@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'marketingu',
-    'Knowledge Base' => 'Baza e njohurive',
-    'Sales' => 'Shitjet',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'marketingu kolateral',
-    'Product Brochures' => 'Broshurë e produkteve',
-    'FAQ' => 'Pyetje të shpeshta',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Marketing',
+        'Knowledge Base' => 'Baza e njohurive',
+        'Sales' => 'Shitjet',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'aktive',
-    'Draft' => 'Skicë',
-    'FAQ' => 'Pyetje të shpeshta',
-    'Expired' => 'Skaduar',
-    'Under Review' => 'Në shqyrtim',
-    'Pending' => 'Pezull',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Kolaterali i marketingut',
+        'Product Brochures' => 'Broshurat e produktit',
+        'FAQ' => 'Pyetje të shpeshta',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Aktive',
+        'Draft' => 'Draft',
+        'FAQ' => 'Pyetje të shpeshta',
+        'Expired' => 'Skaduar',
+        'Under Review' => 'Në shqyrtim',
+        'Pending' => 'Në pritje',
+    ],
+];

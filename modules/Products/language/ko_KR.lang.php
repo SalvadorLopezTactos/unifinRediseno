@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => '견적 라인 상품 목록 대시보드',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => '견적 완료 라인아이템 기록 대시보드',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => '견적 라인아이템 포커스 서랍',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '견적 라인아이템 타임라인',
 
     'LBL_CAMPAIGN_PRODUCT' => '견적라인 품목 캠페인',
     'LBL_MODULE_NAME' => '견적 라인아이템',
@@ -177,4 +178,4 @@ $mod_strings = array(
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (새 견적 상품)',
     'LBL_DISCOUNT_PERCENT' => '% 퍼센트',
     'LBL_DISCOUNT_TYPE' => '할인 유형',
-);
+];

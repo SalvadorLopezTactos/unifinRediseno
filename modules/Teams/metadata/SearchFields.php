@@ -9,8 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$searchFields['Teams'] = 
-	array (
-		'name' => array('query_type' => 'default', 'db_field' => array('name', 'name_2'), 'force_unifiedsearch' => true),
-	);
-?>
+$searchFields['Teams'] =
+    [
+        'name' => ['query_type' => 'default', 'db_field' => ['name', 'name_2'], 'force_unifiedsearch' => true],
+    ];

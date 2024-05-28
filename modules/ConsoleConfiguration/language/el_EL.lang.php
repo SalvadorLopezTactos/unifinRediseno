@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Διαμόρφωση Κονσόλας',
     'LBL_MODULE_NAME_SINGULAR' => 'Διαμόρφωση Κονσόλας',
     'LBL_CONSOLE_CONFIG_TITLE' => 'Κονσόλα',
@@ -55,4 +56,4 @@ $mod_strings = array(
     'LBL_CONSOLE_DIRECTIONS_CHANGE' => 'Οι αλλαγές θα εμφανιστούν αμέσως, αλλά θα πρέπει να τις αποθηκεύσετε για να τεθούν σε ισχύ.',
     'LBL_CONSOLE_DIRECTIONS_FILTER_AND' => 'και ',
     'LBL_CONSOLE_DIRECTIONS_FILTER_OR' => 'ή ',
-);
+];

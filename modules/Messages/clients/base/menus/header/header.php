@@ -14,37 +14,37 @@
 $module_name = 'Messages';
 $viewdefs[$module_name]['base']['menu']['header'] = [
     [
-        'label' =>'LNK_NEW_MESSAGE',
-        'acl_action'=>'create',
-        'acl_module'=>$module_name,
+        'label' => 'LNK_NEW_MESSAGE',
+        'acl_action' => 'create',
+        'acl_module' => $module_name,
         'icon' => 'sicon-plus',
-        'route'=>'#'.$module_name.'/create',
+        'route' => '#' . $module_name . '/create',
     ],
     [
-        'route'=>'#'.$module_name,
-        'label' =>'LNK_MESSAGE_LIST',
-        'acl_action'=>'list',
-        'acl_module'=>$module_name,
+        'route' => '#' . $module_name,
+        'label' => 'LNK_MESSAGE_LIST',
+        'acl_action' => 'list',
+        'acl_module' => $module_name,
         'icon' => 'sicon-list-view',
     ],
     [
         'route' => '#Reports?filterModule=' . $module_name,
-        'label' =>'LNK_MESSAGE_REPORTS',
-        'acl_action'=>'list',
+        'label' => 'LNK_MESSAGE_REPORTS',
+        'acl_action' => 'list',
         'acl_module' => 'Reports',
         'icon' => 'sicon-reports',
     ],
     [
         'route' => '#bwc/index.php?' . http_build_query(
             [
-                'module' => 'Import',
-                'action' => 'Step1',
-                'import_module' => $module_name,
-            ]
+                    'module' => 'Import',
+                    'action' => 'Step1',
+                    'import_module' => $module_name,
+                ]
         ),
-        'label' =>'LNK_IMPORT_MESSAGES',
-        'acl_action'=>'import',
-        'acl_module'=>$module_name,
+        'label' => 'LNK_IMPORT_MESSAGES',
+        'acl_action' => 'import',
+        'acl_module' => $module_name,
         'icon' => 'sicon-upload',
     ],
 ];

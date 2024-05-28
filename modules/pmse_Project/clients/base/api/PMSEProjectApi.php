@@ -76,42 +76,42 @@ class PMSEProjectApi extends ModuleApi
      */
     public function registerApiRest()
     {
-        return array(
-            'readCustomProject' => array(
+        return [
+            'readCustomProject' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Project', 'project', '?'),
-                'pathVars' => array('module', 'customAction', 'record'),
+                'path' => ['pmse_Project', 'project', '?'],
+                'pathVars' => ['module', 'customAction', 'record'],
                 'method' => 'retrieveCustomProject',
                 'acl' => 'view',
                 'shortHelp' => 'Retrieves the schema data to be used by the Process Definition designer',
-                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_project_get_help.html',
-            ),
-            'updateCustomProject' => array(
+                'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_project_get_help.html',
+            ],
+            'updateCustomProject' => [
                 'reqType' => 'PUT',
-                'path' => array('pmse_Project', 'project', '?'),
-                'pathVars' => array('module', 'customAction', 'record'),
+                'path' => ['pmse_Project', 'project', '?'],
+                'pathVars' => ['module', 'customAction', 'record'],
                 'method' => 'updateCustomProject',
                 'acl' => 'create',
                 'shortHelp' => 'Updates the schema data from the Process Definition designer',
-                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_project_put_help.html',
-            ),
-            'readBRFields' => array(
+                'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_project_put_help.html',
+            ],
+            'readBRFields' => [
                 'reqType' => 'GET',
-                'path' => array('ProcessBusinessRules', 'fields', '?'),
-                'pathVars' => array('module', 'data', 'filter'),
+                'path' => ['ProcessBusinessRules', 'fields', '?'],
+                'pathVars' => ['module', 'data', 'filter'],
                 'method' => 'getBRFields',
                 'acl' => 'view',
 //                'shortHelp' => 'Returns information about Fields to be exposed in the Business Rules designer.',
-            ),
-            'readCrmData' => array(
+            ],
+            'readCrmData' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Project', 'CrmData', '?', '?'),
-                'pathVars' => array('module', '', 'data', 'filter'),
+                'path' => ['pmse_Project', 'CrmData', '?', '?'],
+                'pathVars' => ['module', '', 'data', 'filter'],
                 'method' => 'getCrmData',
                 'acl' => 'view',
                 'shortHelp' => 'Retrieves information about Fields, Modules, Users, Roles, etc.',
-                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_crm_data_get_help.html',
-            ),
+                'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_crm_data_get_help.html',
+            ],
             'validateCrmData' => [
                 'reqType' => 'GET',
                 'path' => ['pmse_Project', 'validateCrmData', '?', '?'],
@@ -122,23 +122,23 @@ class PMSEProjectApi extends ModuleApi
                 'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_validate_crm_data_get_help.html',
                 'minVersion' => '11.10',
             ],
-            'updateCrmData' => array(
+            'updateCrmData' => [
                 'reqType' => 'PUT',
-                'path' => array('pmse_Project', 'CrmData', '?', '?'),
-                'pathVars' => array('module', '', 'record', 'filter'),
+                'path' => ['pmse_Project', 'CrmData', '?', '?'],
+                'pathVars' => ['module', '', 'record', 'filter'],
                 'method' => 'putCrmData',
                 'acl' => 'create',
                 'shortHelp' => 'Updates information about Fields, Modules, Users, Roles, etc.',
-                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_crm_data_put_help.html',
-            ),
-            'readCrmDataWithoutFilters' => array(
+                'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_crm_data_put_help.html',
+            ],
+            'readCrmDataWithoutFilters' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Project', 'CrmData', '?'),
-                'pathVars' => array('module', '', 'data'),
+                'path' => ['pmse_Project', 'CrmData', '?'],
+                'pathVars' => ['module', '', 'data'],
                 'method' => 'getCrmData',
                 'acl' => 'view',
 //                'shortHelp' => 'Returns information without send filter about Fields, Modules, Users, Roles,',
-            ),
+            ],
             'validateCrmDataWithoutFilters' => [
                 'reqType' => 'GET',
                 'path' => ['pmse_Project', 'validateCrmData', '?'],
@@ -149,77 +149,77 @@ class PMSEProjectApi extends ModuleApi
                 'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_validate_crm_data_get_help.html',
                 'minVersion' => '11.10',
             ],
-            'readActivityDefinition' => array(
+            'readActivityDefinition' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Project', 'ActivityDefinition', '?'),
-                'pathVars' => array('module', '', 'record'),
+                'path' => ['pmse_Project', 'ActivityDefinition', '?'],
+                'pathVars' => ['module', '', 'record'],
                 'method' => 'getActivityDefinition',
                 'acl' => 'view',
                 'shortHelp' => 'Retrieves the definition data for an activity',
-                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_activity_get_help.html',
-            ),
-            'updateActivityDefinition' => array(
+                'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_activity_get_help.html',
+            ],
+            'updateActivityDefinition' => [
                 'reqType' => 'PUT',
-                'path' => array('pmse_Project', 'ActivityDefinition', '?'),
-                'pathVars' => array('module', '', 'record'),
+                'path' => ['pmse_Project', 'ActivityDefinition', '?'],
+                'pathVars' => ['module', '', 'record'],
                 'method' => 'putActivityDefinition',
                 'acl' => 'create',
                 'shortHelp' => 'Updates the definition data for an activity',
-                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_activity_put_help.html',
-            ),
-            'readEventDefinition' => array(
+                'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_activity_put_help.html',
+            ],
+            'readEventDefinition' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Project', 'EventDefinition', '?'),
-                'pathVars' => array('module', '', 'record'),
+                'path' => ['pmse_Project', 'EventDefinition', '?'],
+                'pathVars' => ['module', '', 'record'],
                 'method' => 'getEventDefinition',
                 'acl' => 'view',
                 'shortHelp' => 'Retrieves the definition data for an event',
-                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_event_get_help.html',
-            ),
-            'updateEventDefinition' => array(
+                'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_event_get_help.html',
+            ],
+            'updateEventDefinition' => [
                 'reqType' => 'PUT',
-                'path' => array('pmse_Project', 'EventDefinition', '?'),
-                'pathVars' => array('module', '', 'record'),
+                'path' => ['pmse_Project', 'EventDefinition', '?'],
+                'pathVars' => ['module', '', 'record'],
                 'method' => 'putEventDefinition',
                 'acl' => 'create',
                 'shortHelp' => 'Updates the definition data for an event',
-                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_event_put_help.html',
-            ),
-            'readGatewayDefinition' => array(
+                'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_event_put_help.html',
+            ],
+            'readGatewayDefinition' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Project', 'GatewayDefinition', '?'),
-                'pathVars' => array('module', '', 'record'),
+                'path' => ['pmse_Project', 'GatewayDefinition', '?'],
+                'pathVars' => ['module', '', 'record'],
                 'method' => 'getGatewayDefinition',
                 'acl' => 'view',
                 'shortHelp' => 'Retrieves the definition data for a gateway',
-                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_gateway_get_help.html',
-            ),
-            'updateGatewayDefinition' => array(
+                'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_gateway_get_help.html',
+            ],
+            'updateGatewayDefinition' => [
                 'reqType' => 'PUT',
-                'path' => array('pmse_Project', 'GatewayDefinition', '?'),
-                'pathVars' => array('module', '', 'record'),
+                'path' => ['pmse_Project', 'GatewayDefinition', '?'],
+                'pathVars' => ['module', '', 'record'],
                 'method' => 'putGatewayDefinition',
                 'acl' => 'create',
                 'shortHelp' => 'Updates the definition data for a gateway',
-                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_gateway_put_help.html',
-            ),
-            'verifyRunningProcess' => array(
+                'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_gateway_put_help.html',
+            ],
+            'verifyRunningProcess' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Project', '?', 'verify'),
-                'pathVars' => array('module', 'record', 'verify'),
+                'path' => ['pmse_Project', '?', 'verify'],
+                'pathVars' => ['module', 'record', 'verify'],
                 'method' => 'verifyRunningProcess',
                 'acl' => 'view',
                 'shortHelp' => 'Verifies whether the Process Definition has any pending processes',
-                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_record_verify_help.html',
-            )
-        );
+                'longHelp' => 'modules/pmse_Project/clients/base/api/help/project_record_verify_help.html',
+            ],
+        ];
     }
 
     public function retrieveCustomProject(ServiceBase $api, array $args)
     {
         ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
-        $api->action = "read";
-        $this->requireArgs($args, array('record'));
+        $api->action = 'read';
+        $this->requireArgs($args, ['record']);
 
         return $this->projectWrapper->retrieveProject($args['record']);
     }
@@ -227,8 +227,8 @@ class PMSEProjectApi extends ModuleApi
     public function updateCustomProject(ServiceBase $api, array $args)
     {
         ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
-        $api->action = "update";
-        $this->requireArgs($args, array('record'));
+        $api->action = 'update';
+        $this->requireArgs($args, ['record']);
 
         return $this->projectWrapper->updateProject($args['record'], $args);
     }
@@ -249,7 +249,7 @@ class PMSEProjectApi extends ModuleApi
         // Load the bean fresh to ensure the cache entry from the create process
         // doesn't get in the way of visibility checks
         try {
-            $bean = $this->loadBean($api, $args, 'view', array('use_cache' => false));
+            $bean = $this->loadBean($api, $args, 'view', ['use_cache' => false]);
         } catch (SugarApiExceptionNotAuthorized $e) {
             // If there was an exception thrown from the load process then strip
             // the field list down and return only id and date_modified. This will
@@ -264,10 +264,10 @@ class PMSEProjectApi extends ModuleApi
         $data = $this->formatBean($api, $args, $bean);
 
         if ($addNoAccessAcl) {
-            $data['_acl'] = array(
+            $data['_acl'] = [
                 'access' => 'no',
                 'view' => 'no',
-            );
+            ];
         }
 
         return $data;
@@ -368,9 +368,12 @@ class PMSEProjectApi extends ModuleApi
     {
         ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
         if (empty($args['baseModule'])) {
-            $projectBean = BeanFactory::getBean($args['module'], $args['record'],
-                array('strict_retrieve' => true, 'disable_row_level_security' => true));
-            $processBean = BeanFactory::newBean('pmse_BpmnProcess')->retrieve_by_string_fields(array("prj_id" => $projectBean->id));
+            $projectBean = BeanFactory::getBean(
+                $args['module'],
+                $args['record'],
+                ['strict_retrieve' => true, 'disable_row_level_security' => true]
+            );
+            $processBean = BeanFactory::newBean('pmse_BpmnProcess')->retrieve_by_string_fields(['prj_id' => $projectBean->id]);
             $casesBean = BeanFactory::newBean('pmse_Inbox');
             $sql = new SugarQuery();
             $sql->select('id');
@@ -399,7 +402,7 @@ class PMSEProjectApi extends ModuleApi
             }
             $id = $args['record'];
             $sql = new SugarQuery();
-            $sql->select(array('pro_id'));
+            $sql->select(['pro_id']);
             $sql->from($bean);
             $sql->where()->equals($where, $id);
             $processes = $sql->execute();

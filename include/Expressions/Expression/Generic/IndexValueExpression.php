@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * <b>valueAt(Number index, Enum values)</b><br>
  * Returns the value at position <i>index</i> in the collection <i>values</i>.<br/>
@@ -16,29 +17,33 @@
  */
 class IndexValueExpression extends GenericExpression
 {
-	/**
-	 * Returns the entire enumeration bare.
-	 */
-	function evaluate() {
-		$params = $this->getParameters();
-		$array  = $params[1]->evaluate();
-		$index  = $params[0]->evaluate();
+    /**
+     * Returns the entire enumeration bare.
+     */
+    public function evaluate()
+    {
+        $params = $this->getParameters();
+        $array = $params[1]->evaluate();
+        $index = $params[0]->evaluate();
 
-		if (is_numeric($index))
-			$index = intval($index);
+        if (is_numeric($index)) {
+            $index = intval($index);
+        }
 
-		if ( $index >= sizeof($array) || $index < 0 )
-            throw new Exception(static::getOperationName() . ": Attempt to access an index out of bounds");
+        if ($index >= sizeof($array) || $index < 0) {
+            throw new Exception(static::getOperationName() . ': Attempt to access an index out of bounds');
+        }
 
-		return $array[$index];
-	}
+        return $array[$index];
+    }
 
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
 			var params = this.getParameters();
 			var array  = params[1].evaluate();
 			var index  = params[0].evaluate();
@@ -51,33 +56,37 @@ class IndexValueExpression extends GenericExpression
 
 			return array[index];
 EOQ;
-	}
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return "valueAt";
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return 'valueAt';
+    }
 
-	/**
-	 * The first parameter is a number and the second is the list.
-	 */
-    static function getParameterTypes() {
-		return array("number", "enum");
-	}
+    /**
+     * The first parameter is a number and the second is the list.
+     */
+    public static function getParameterTypes()
+    {
+        return ['number', 'enum'];
+    }
 
-	/**
-	 * Returns the maximum number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 2;
-	}
+    /**
+     * Returns the maximum number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 2;
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 }

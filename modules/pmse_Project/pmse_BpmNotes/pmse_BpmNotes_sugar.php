@@ -15,43 +15,45 @@
  * PLEASE DO NOT CHANGE THIS CLASS
  * PLACE ANY CUSTOMIZATIONS IN pmse_BpmNotes
  */
-class pmse_BpmNotes_sugar extends Basic {
-	var $new_schema = true;
-	var $module_dir = 'pmse_Project/pmse_BpmNotes';
+class pmse_BpmNotes_sugar extends Basic
+{
+    public $new_schema = true;
+    public $module_dir = 'pmse_Project/pmse_BpmNotes';
     public $module_name = 'pmse_BpmNotes';
-	var $object_name = 'pmse_BpmNotes';
-	var $table_name = 'pmse_bpm_notes';
-	var $importable = false;
-	var $disable_custom_fields = true;
-        var $id;
-		var $name;
-		var $date_entered;
-		var $date_modified;
-		var $modified_user_id;
-		var $modified_by_name;
-		var $created_by;
-		var $created_by_name;
-		var $description;
-		var $deleted;
-		var $created_by_link;
-		var $modified_user_link;
-		var $activities;
-		var $assigned_user_id;
-		var $assigned_user_name;
-		var $assigned_user_link;
-    var $cas_id;
-    var $cas_index;
-    var $not_user_id;
-    var $not_user_recipient_id;
-    var $not_type;
-    var $not_date;
-    var $not_status;
-    var $not_availability;
-    var $not_content;
-    var $not_recipients;
+    public $object_name = 'pmse_BpmNotes';
+    public $table_name = 'pmse_bpm_notes';
+    public $importable = false;
+    public $disable_custom_fields = true;
+    public $id;
+    public $name;
+    public $date_entered;
+    public $date_modified;
+    public $modified_user_id;
+    public $modified_by_name;
+    public $created_by;
+    public $created_by_name;
+    public $description;
+    public $deleted;
+    public $created_by_link;
+    public $modified_user_link;
+    public $activities;
+    public $assigned_user_id;
+    public $assigned_user_name;
+    public $assigned_user_link;
+    public $cas_id;
+    public $cas_index;
+    public $not_user_id;
+    public $not_user_recipient_id;
+    public $not_type;
+    public $not_date;
+    public $not_status;
+    public $not_availability;
+    public $not_content;
+    public $not_recipients;
 
 
-	public function __construct(){
-		parent::__construct();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 }

@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Màrketing',
-    'Knowledge Base' => 'Base de coneixement',
-    'Sales' => 'Página de Vendes',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Impresos de Màrqueting',
-    'Product Brochures' => 'Fullets de Producte',
-    'FAQ' => 'PREGUNTES FREQÜENTS',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Màrketing',
+        'Knowledge Base' => 'Base de coneixement',
+        'Sales' => 'Vendes',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Actiu',
-    'Draft' => 'Esborrany',
-    'FAQ' => 'PREGUNTES FREQÜENTS',
-    'Expired' => 'Caducat',
-    'Under Review' => 'En Revisió',
-    'Pending' => 'Pendent',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Garantia de màrqueting',
+        'Product Brochures' => 'Fullets de producte',
+        'FAQ' => 'Preguntes freqüents',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Actiu',
+        'Draft' => 'Esborrany',
+        'FAQ' => 'Preguntes freqüents',
+        'Expired' => 'Caducat',
+        'Under Review' => 'En revisió',
+        'Pending' => 'Pendent',
+    ],
+];

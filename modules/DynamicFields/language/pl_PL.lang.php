@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Dodaj rozmowę telefoniczną do dziennika',
     'LNK_NEW_MEETING' => 'Zaplanuj spotkanie',
     'LNK_NEW_TASK' => 'Utwórz zadanie',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Dodatkowe meta pole 2',
     'COLUMN_TITLE_EXT3' => 'Dodatkowe meta pole 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'Wysokość IFrame',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'Domyślne łącze URL',
     'COLUMN_TITLE_AUDIT' => 'Śledzenie zmian',
     'COLUMN_TITLE_PII' => 'Informacje osobiste',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Wartość domyślna',
     'LBL_AUDITED' => 'Przeprowadzono śledzenie zmian',
     'LBL_REPORTABLE' => 'Raportowalne',
-    'ERR_RESERVED_FIELD_NAME' => "Zarezerwowane słowo kluczowe",
+    'ERR_RESERVED_FIELD_NAME' => 'Zarezerwowane słowo kluczowe',
     'ERR_SELECT_FIELD_TYPE' => 'Wybierz typ pola',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Pole o takiej nazwie już istnieje',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Nazwa pola powinna zawierać tylko następujące znaki: a-z A-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Wykonano',
     'LBL_EXE_NON_SIM_MODE' => 'Uruchom tryb niesymulacyjny',
     'LBL_CALCULATION_VISIBLE' => 'Uwzględnianie w obliczeniach',
-);
+];

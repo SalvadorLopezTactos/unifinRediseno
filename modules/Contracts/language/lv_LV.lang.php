@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Līgumi',
-	'LBL_MODULE_NAME_SINGULAR' => 'Līgums',
-	'LBL_MODULE_TITLE' => 'Līgumi: Sākums',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Līgumi',
+    'LBL_MODULE_NAME_SINGULAR' => 'Līgums',
+    'LBL_MODULE_TITLE' => 'Līgumi: Sākums',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Izveidot līgumu',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'Valūtas ID:',
     'LBL_CURRENCY' => 'Valūta:',
     'LBL_CURRENCY_RATE' => 'Valūtas kurss',
-    'LBL_ASSIGNED_TO_NAME'=>'Piešķirts lietotājam:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Piešķirts lietotājam:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Līgumu saraksts',	
+    'LBL_LIST_FORM_TITLE' => 'Līgumu saraksts',
     'LBL_LIST_CONTRACT_NAME' => 'Līguma nosaukums',
     'LBL_LIST_ACCOUNT_NAME' => 'Uzņēmuma nosaukums',
     'LBL_LIST_START_DATE' => 'Sākums',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Nosaukums',
     'LBL_LIST_CONTRACT_VALUE' => 'Vērtība',
 
-    'LBL_TYPE'=>'Tips',
+    'LBL_TYPE' => 'Tips',
     'LBL_TYPE_NAME' => 'Veida nosaukums',
-    'LBL_CONTRACT_TYPE'=>'Tips:',
+    'LBL_CONTRACT_TYPE' => 'Tips:',
 
     'LBL_CREATED_USER' => 'Izveidoja lietotājs',
     'LBL_MODIFIED_USER' => 'Modificēja lietotājs',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Līgumu fokusa panelis',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Līgumu ierakstu instrumentu panelis',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Līguma laika josla',
+];

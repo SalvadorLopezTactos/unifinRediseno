@@ -116,7 +116,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return ["forecastOnlySalesStages"];
+        return ['forecastOnlySalesStages'];
     }
 
     /**

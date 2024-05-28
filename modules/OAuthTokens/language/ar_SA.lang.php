@@ -11,18 +11,18 @@
  */
 
 
-$mod_strings = array (
-    'LBL_OAUTH_REQUEST' => "مقطع الطلب",
-    'LBL_OAUTH_AUTHORIZE' => "مقطع الترخيص",
-	'LBL_OAUTH_CONSUMERREQ' => "مقطع الترخيص من العميل <b>%s</b>؟",
-    'LBL_OAUTH_ROLE' => "دور المقطع",
-	'LBL_OAUTH_VALIDATION' => "رمز التحقق",
-  	'LBL_ASSIGNED_TO_NAME' => 'المستخدم',
-  	'LBL_ID' => 'المعرّف',
+$mod_strings = [
+    'LBL_OAUTH_REQUEST' => 'مقطع الطلب',
+    'LBL_OAUTH_AUTHORIZE' => 'مقطع الترخيص',
+    'LBL_OAUTH_CONSUMERREQ' => 'مقطع الترخيص من العميل <b>%s</b>؟',
+    'LBL_OAUTH_ROLE' => 'دور المقطع',
+    'LBL_OAUTH_VALIDATION' => 'رمز التحقق',
+    'LBL_ASSIGNED_TO_NAME' => 'المستخدم',
+    'LBL_ID' => 'المعرّف',
     'LBL_STATUS' => 'الحالة',
     'LBL_TS' => 'الطابع الزمني',
     'LBL_LIST_DELETE' => 'حذف المقطع',
     'LBL_CONSUMER' => 'اسم العميل',
     'LBL_OAUTH_DISABLED' => 'لم يتم تمكين دعم OAuth. قد يكون امتداد oauth لـ PHP مفقودًا. يُرجى الاتصال بالمسؤول الخاص بك.',
     'LBL_CONTACTS' => 'اسم جهة الاتصال',
-);
+];

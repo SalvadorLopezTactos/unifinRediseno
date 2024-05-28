@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'FW:',
     'LBL_RE' => 'Re:',
     'LBL_BUTTON_CREATE' => 'Create',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Choose From Email Account',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Choose Signature',
     'LBL_SIGNATURE' => 'Signature',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Default Signature",
-    "LBL_SHOW_MORE_SIGNATURES" => "More Signatures...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Default Signature',
+    'LBL_SHOW_MORE_SIGNATURES' => 'More Signatures...',
     'LBL_SUBJECT' => 'Subject:',
     'LBL_TEMPLATE' => 'Template',
     'LBL_TEXT_BODY' => 'Text Body',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Time Sent',
     'LBL_LIST_TO_ADDR' => 'To',
     'LBL_LIST_TYPE' => 'Type',
-    "LBL_SELECTED_RECIPIENTS" => "Selected Recipients",
-    "LBL_SHOW_MORE_RECIPIENTS" => "More Recipients...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Address Book",
+    'LBL_SELECTED_RECIPIENTS' => 'Selected Recipients',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'More Recipients...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Address Book',
     'NTC_REMOVE_INVITEE' => 'Are you sure you want to remove this recipient from the email?',
     'WARNING_SETTINGS_NOT_CONF' => 'Your email settings are not correctly configured to send email. An SMTP server ' .
         'must be configured in <a href="#bwc/index.php?module=EmailMan&action=config">Email Settings</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Attachments may fail: An incorrect or unusable value for "upload_tmp_dir" ' .
         'was detected.  Please correct this in your php.ini file.',
     'LBL_MESSAGE_UID' => 'Message UID',
-    'LBL_OPEN_DRAFT_ALERT' => 'Email is a draft. Click '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'Email is a draft. Click ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  to edit.',
     'LBL_EMAIL_BODY' => 'Email Message',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Emails Focus Drawer',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Emails Record Dashboard',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Email Timeline',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'no recipients specified',
@@ -475,4 +476,5 @@ You may apply a predefined template using the Template button or include one of 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Send email',
     'LBL_MAILBOX' => 'Inbound Account',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Please configure an outbound email account via <a href="#OutboundEmail">Email Settings</a> in order to send emails.',
-);
+    'LBL_TOO_SHORT' => 'Type at least {0} characters...',
+];

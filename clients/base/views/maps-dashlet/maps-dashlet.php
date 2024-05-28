@@ -18,7 +18,7 @@ $viewdefs['base']['view']['maps-dashlet'] = [
             'config' => [
             ],
             'filter' => [
-                'view' => ['record','records'],
+                'view' => ['record', 'records'],
                 'licenseType' => ['MAPS'],
                 'blacklist' => [
                     'module' => [

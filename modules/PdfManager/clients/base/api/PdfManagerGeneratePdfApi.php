@@ -14,23 +14,23 @@ class PdfManagerGeneratePdfApi extends SugarApi
 {
     public function registerApiRest()
     {
-        return array(
-            'generatePdf' => array(
+        return [
+            'generatePdf' => [
                 'reqType' => 'GET',
-                'path' => array('PdfManager', 'generate'),
-                'pathVars' => array('', ''),
+                'path' => ['PdfManager', 'generate'],
+                'pathVars' => ['', ''],
                 'method' => 'generatePdf',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
                 'shortHelp' => 'Generate a PDF',
                 'longHelp' => 'modules/PdfManager/clients/base/api/help/generate_pdf_api.html',
-            ),
-        );
+            ],
+        ];
     }
 
     public function generatePdf(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'record', 'pdf_template_id'));
+        $this->requireArgs($args, ['module', 'record', 'pdf_template_id']);
 
         $bean = $this->loadBean($api, $args);
 
@@ -43,7 +43,7 @@ class PdfManagerGeneratePdfApi extends SugarApi
             $args['sugarpdf'] = 'pdfmanager';
         }
 
-        $sugarpdfBean = SugarpdfFactory::loadSugarpdf($args['sugarpdf'], $args['module'], $bean, array());
+        $sugarpdfBean = SugarpdfFactory::loadSugarpdf($args['sugarpdf'], $args['module'], $bean, []);
         $sugarpdfBean->module = $args['module'];
         $sugarpdfBean->process();
 

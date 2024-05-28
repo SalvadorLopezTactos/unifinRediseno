@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Knowledge Base List Dashboard',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Knowledge Base Record Dashboard',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Knowledge Base Focus Dashboard',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Knowledge Base Timeline',
 
     'LBL_MODULE_NAME' => 'Knowledge Base',
     'LBL_MODULE_NAME_SINGULAR' => 'Knowledge Base Article',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Set Value as Primary',
     'LBL_ITEM_REMOVE' => 'Remove Item',
     'LBL_ITEM_ADD' => 'Add Item',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => 'Revision ID',
     'LBL_DOCUMENT_REVISION' => 'Revision',
     'LBL_NUMBER' => 'Number',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'More {{module}} articles...',
     'LBL_LIST_FORM_TITLE' => 'Knowledge Base List',
     'LBL_SEARCH_FORM_TITLE' => 'Knowledge Base Search',
-);
+];

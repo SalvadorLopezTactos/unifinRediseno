@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$layout_defs['Employees'] = array(
+$layout_defs['Employees'] = [
     // default subpanel provided by this SugarBean
-    'subpanel_setup' => array(
-        'shifts' => array(
+    'subpanel_setup' => [
+        'shifts' => [
             'order' => 31,
             'sort_by' => 'name',
             'sort_order' => 'asc',
@@ -21,10 +21,10 @@ $layout_defs['Employees'] = array(
             'subpanel_name' => 'default',
             'get_subpanel_data' => 'shifts',
             'refresh_page' => 1,
-            'top_buttons' => array(),
+            'top_buttons' => [],
             'title_key' => 'LBL_SHIFTS_SUBPANEL_TITLE',
-        ),
-        'shifts_exceptions' => array(
+        ],
+        'shifts_exceptions' => [
             'order' => 32,
             'sort_by' => 'name',
             'sort_order' => 'asc',
@@ -32,8 +32,8 @@ $layout_defs['Employees'] = array(
             'subpanel_name' => 'default',
             'get_subpanel_data' => 'shift_exceptions',
             'refresh_page' => 1,
-            'top_buttons' => array(),
+            'top_buttons' => [],
             'title_key' => 'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE',
-        ),
-    ),
-);
+        ],
+    ],
+];

@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'לוח המחוונים של רשימת מאגר המידע',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'לוח המחוונים של רשומת מאגר המידע',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס מאגר ידע',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן של מאגר הידע',
 
     'LBL_MODULE_NAME' => 'מרכז מידע',
     'LBL_MODULE_NAME_SINGULAR' => 'מאמר במרכז המידע',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'הגדר ערך כראשי',
     'LBL_ITEM_REMOVE' => 'הסר פריט',
     'LBL_ITEM_ADD' => 'הוסף פריט',
-    'LBL_MODULE_ID'=> 'תוכן KB',
+    'LBL_MODULE_ID' => 'תוכן KB',
     'LBL_DOCUMENT_REVISION_ID' => 'מזהה מהדורה',
     'LBL_DOCUMENT_REVISION' => 'שכתוב',
     'LBL_NUMBER' => 'מספר',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'מאמרי {{module}} נוספים...',
     'LBL_LIST_FORM_TITLE' => 'רשימת מרכז מידע',
     'LBL_SEARCH_FORM_TITLE' => 'חיפוש במרכז המידע',
-);
+];

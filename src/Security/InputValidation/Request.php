@@ -78,11 +78,11 @@ class Request implements LoggerAwareInterface
      * Supported input type mapping
      * @var array
      */
-    protected $inputTypes = array(
-        Superglobals::GET => array('get' => 'getGet', 'has' => 'hasGet'),
-        Superglobals::POST => array('get' => 'getPost', 'has' => 'hasPost'),
-        Superglobals::REQUEST => array('get' => 'getRequest', 'has' => 'hasRequest'),
-    );
+    protected $inputTypes = [
+        Superglobals::GET => ['get' => 'getGet', 'has' => 'hasGet'],
+        Superglobals::POST => ['get' => 'getPost', 'has' => 'hasPost'],
+        Superglobals::REQUEST => ['get' => 'getRequest', 'has' => 'hasRequest'],
+    ];
 
     /**
      * Ctor
@@ -92,11 +92,12 @@ class Request implements LoggerAwareInterface
      * @param LoggerInterface $logger
      */
     public function __construct(
-        Superglobals $superglobals,
+        Superglobals       $superglobals,
         ValidatorInterface $validator,
-        ConstraintBuilder $constraintBuilder,
-        LoggerInterface $logger
+        ConstraintBuilder  $constraintBuilder,
+        LoggerInterface    $logger
     ) {
+
         $this->superglobals = $superglobals;
         $this->validator = $validator;
         $this->constraintBuilder = $constraintBuilder;
@@ -130,7 +131,7 @@ class Request implements LoggerAwareInterface
      */
     public function setSoftFail($toggle)
     {
-        $this->softFail = (bool) $toggle;
+        $this->softFail = (bool)$toggle;
     }
 
     /**
@@ -229,7 +230,6 @@ class Request implements LoggerAwareInterface
     protected function validateConstraints($value, array $constraints)
     {
         foreach ($constraints as $constraint) {
-
             // update value using constraint sanitizer
             $value = $this->applyConstraintSanitizer($constraint, $value);
 
@@ -238,14 +238,12 @@ class Request implements LoggerAwareInterface
 
             // update value if constraint supplies a formatted return value
             if ($constraint instanceof ConstraintReturnValueInterface) {
-
                 // if any violations exist we cannot continue
-                if (count($this->context->getViolations()) !== 0) {
+                if (safeCount($this->context->getViolations()) !== 0) {
                     break;
                 }
 
                 $value = $constraint->getFormattedReturnValue();
-
             }
         }
         return $value;
@@ -272,8 +270,7 @@ class Request implements LoggerAwareInterface
     protected function handleViolations($type, $key)
     {
         $violations = $this->context->getViolations();
-        if (count($violations) !== 0) {
-
+        if (safeCount($violations) !== 0) {
             $this->logViolations($type, $key, $violations);
 
             if (!$this->softFail) {
@@ -322,7 +319,6 @@ class Request implements LoggerAwareInterface
     protected function logViolations($type, $key, ConstraintViolationListInterface $violations)
     {
         foreach ($violations as $violation) {
-
             /* @var $violation ConstraintViolationInterface */
             $message = sprintf(
                 'InputValidation: [%s] %s -> %s',
@@ -352,17 +348,17 @@ class Request implements LoggerAwareInterface
 
         // If no constraint explicitly specified, make sure that the value is a string
         if (empty($constraints)) {
-            $constraints = array(
-                new AssertBasic\Type(array(
+            $constraints = [
+                new AssertBasic\Type([
                     'type' => 'scalar',
-                )),
-            );
+                ]),
+            ];
         }
 
         // Attach generic input validation
-        $inputConstraint = new Assert\InputParameters(array(
+        $inputConstraint = new Assert\InputParameters([
             'inputType' => $type,
-        ));
+        ]);
 
         array_unshift($constraints, $inputConstraint);
 

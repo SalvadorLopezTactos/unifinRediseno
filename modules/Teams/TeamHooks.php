@@ -43,7 +43,8 @@ class TeamHooks
     {
         if ($team instanceof Team) {
             if (isset($args['relationship']) && $args['relationship'] == 'team_memberships') {
-                $membership = BeanFactory::newBean('TeamMemberships'); /**@var TeamMembership $membership*/
+                $membership = BeanFactory::newBean('TeamMemberships');
+                /**@var TeamMembership $membership */
                 $membership->retrieve_by_user_and_team($args['related_id'], $team->id);
                 if ($membership->id && !isset(self::$removedLinks[$membership->id])) {
                     self::$removedLinks[$membership->id] = 1;

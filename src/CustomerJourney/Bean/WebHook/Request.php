@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\WebHook;
 
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\ParseData as ParseData;
@@ -17,7 +18,6 @@ use Sugarcrm\Sugarcrm\Security\HttpClient\RequestException;
 
 class Request
 {
-
     /**
      * @var \CJ_WebHook
      */
@@ -146,9 +146,9 @@ class Request
         $returnHeaders = [];
 
         if ($this->webHook->request_format === \CJ_WebHook::REQUEST_FORMAT_JSON) {
-            $returnHeaders['Content-Type'] =  'application/json';
+            $returnHeaders['Content-Type'] = 'application/json';
         } elseif ($this->webHook->request_format === \CJ_WebHook::REQUEST_FORMAT_HTTP_QUERY) {
-            $returnHeaders['Content-Type'] =  'application/x-www-form-urlencoded';
+            $returnHeaders['Content-Type'] = 'application/x-www-form-urlencoded';
         }
 
         if (!empty($this->webHook->headers)) {
@@ -191,7 +191,7 @@ class Request
 
         $this->debug('Throwing error');
         throw new \SugarApiException(
-            $status .' Check Sugar Logs for more details',
+            $status . ' Check Sugar Logs for more details',
             null,
             null,
             $httpCode ?: 500

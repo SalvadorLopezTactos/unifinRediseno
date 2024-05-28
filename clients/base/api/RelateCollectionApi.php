@@ -42,30 +42,30 @@ class RelateCollectionApi extends CollectionApi
      */
     public function registerApiRest()
     {
-        return array(
-            'getCollection' => array(
+        return [
+            'getCollection' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'collection', '?'),
-                'pathVars' => array('module', 'record', '', 'collection_name'),
+                'path' => ['<module>', '?', 'collection', '?'],
+                'pathVars' => ['module', 'record', '', 'collection_name'],
                 'method' => 'getCollection',
                 'shortHelp' => 'Lists collection records.',
                 'longHelp' => 'include/api/help/module_record_collection_collection_name_get_help.html',
-            ),
-            'getCollectionCount' => array(
+            ],
+            'getCollectionCount' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'collection', '?', 'count'),
-                'pathVars' => array('module', 'record', '', 'collection_name', ''),
+                'path' => ['<module>', '?', 'collection', '?', 'count'],
+                'pathVars' => ['module', 'record', '', 'collection_name', ''],
                 'method' => 'getCollectionCount',
                 'shortHelp' => 'Counts collection records.',
                 'longHelp' => 'include/api/help/module_record_collection_collection_name_count_get_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /** {@inheritDoc} */
     protected function getCollectionDefinition(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'collection_name'));
+        $this->requireArgs($args, ['module', 'collection_name']);
         $bean = $this->bean = BeanFactory::newBean($args['module']);
 
         $definition = new RelateCollectionDefinition($bean, $args['collection_name']);

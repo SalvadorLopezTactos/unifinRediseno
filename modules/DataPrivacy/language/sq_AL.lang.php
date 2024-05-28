@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Privatësia e të dhënave',
     'LBL_MODULE_NAME_SINGULAR' => 'Privatësia e të dhënave',
     'LBL_NUMBER' => 'Numri',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Nuk ka fusha ose të dhëna të shënuara për fshirje.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Paneli i regjistrit të privatësisë së të dhënave',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te privatësia e të dhënave',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e privatësisë së të dhënave',
 
     // list view
     'LBL_HELP_RECORDS' => 'Moduli i të privatësisë së të dhënave monitoron aktivitetet e privatësisë, duke përfshirë miratimet dhe kërkesat e subjektit, për të ndihmuar procedurat e privatësisë së organizatës tënde. Krijo regjistrin e privatësisë së të dhënave në lidhje me regjistrin e një individi (p.sh. një kontakt) për të monitoruar miratimin ose për të ndërmarrë veprime në lidhje me kërkesën për privatësi.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Moduli i privatësisë së të dhënave monitoron aktivitetet e privatësisë, duke përfshirë kërkesat e miratimit dhe kërkesat e subjektit që mbështesin procedurat e privatësisë së organizatës tënde. Krijo regjistrime të privatësisë së të dhënave që lidhen me regjistrimin e një individi (si p.sh. një kontakt) për të mund të monitoruar pëlqimin ose për të ndërmarrë veprime në kërkesën për privatësi. Pasi veprimi i kërkuar të ketë përfunduar, përdoruesit në rolin e menaxherit të të dhënave personale mund të klikojnë "Përfundo" ose "Refuzo" për të përditësuar statusin.
 
 Në rastin e kërkesave për fshirje, zgjidh "Shëno për fshirje" për çdo regjistrim të individit të renditur në nënpanelin e mëposhtëm. Pas zgjedhjes së të gjitha fushave të dëshiruara, duke klikuar "Fshi dhe përfundo" do të fshish përgjithmonë vlerat e fushave dhe regjistri i privatësisë së të dhënave do të shënohet si i përfunduar.',
-);
+];

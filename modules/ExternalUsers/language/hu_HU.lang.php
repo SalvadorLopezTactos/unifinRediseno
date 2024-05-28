@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => 'Esetek',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Lehetőségek',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Árajánlatok',
-    'LBL_NOTES'=>'Megjegyzések',
+    'LBL_NOTES' => 'Megjegyzések',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => 'Külső felhasználók bejegyzéseinek irányítópultja',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Külső felhasználók idővonala',
 ];

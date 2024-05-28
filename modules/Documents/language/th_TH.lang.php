@@ -10,22 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     //module
     'LBL_MODULE_NAME' => 'เอกสาร',
     'LBL_MODULE_NAME_SINGULAR' => 'เอกสาร',
     'LBL_MODULE_TITLE' => 'เอกสาร: หน้าแรก',
     'LNK_NEW_DOCUMENT' => 'สร้างเอกสาร',
-    'LNK_DOCUMENT_LIST'=> 'ดูเอกสาร',
+    'LNK_DOCUMENT_LIST' => 'ดูเอกสาร',
     'LBL_DOC_REV_HEADER' => 'รุ่นเอกสาร',
-    'LBL_SEARCH_FORM_TITLE'=> 'การค้นหาเอกสาร',
+    'LBL_SEARCH_FORM_TITLE' => 'การค้นหาเอกสาร',
     //vardef labels
     'LBL_DOCUMENT_ID' => 'ID เอกสาร',
     'LBL_NAME' => 'ชื่อ',
@@ -34,31 +33,31 @@ $mod_strings = array (
     'LBL_CATEGORY' => 'หมวดหมู่',
     'LBL_SUBCATEGORY' => 'หมวดหมู่ย่อย',
     'LBL_STATUS' => 'สถานะ',
-    'LBL_CREATED_BY'=> 'สร้างโดย',
-    'LBL_DATE_ENTERED'=> 'วันที่สร้าง',
-    'LBL_DATE_MODIFIED'=> 'วันที่แก้ไข',
+    'LBL_CREATED_BY' => 'สร้างโดย',
+    'LBL_DATE_ENTERED' => 'วันที่สร้าง',
+    'LBL_DATE_MODIFIED' => 'วันที่แก้ไข',
     'LBL_DELETED' => 'ลบ',
-    'LBL_MODIFIED'=> 'แก้ไขโดย ID',
+    'LBL_MODIFIED' => 'แก้ไขโดย ID',
     'LBL_MODIFIED_USER' => 'แก้ไขโดย',
-    'LBL_CREATED'=> 'สร้างโดย',
-    'LBL_REVISIONS'=>'รุ่น',
-    'LBL_RELATED_DOCUMENT_ID'=>'ID เอกสารที่เกี่ยวข้อง',
-    'LBL_RELATED_DOCUMENT_REVISION_ID'=>'ID รุ่นเอกสารที่เกี่ยวข้อง',
-    'LBL_IS_TEMPLATE'=>'เป็นเทมเพลท',
-    'LBL_TEMPLATE_TYPE'=>'ประเภทเอกสาร',
-    'LBL_ASSIGNED_TO_NAME'=>'ระบุให้:',
+    'LBL_CREATED' => 'สร้างโดย',
+    'LBL_REVISIONS' => 'รุ่น',
+    'LBL_RELATED_DOCUMENT_ID' => 'ID เอกสารที่เกี่ยวข้อง',
+    'LBL_RELATED_DOCUMENT_REVISION_ID' => 'ID รุ่นเอกสารที่เกี่ยวข้อง',
+    'LBL_IS_TEMPLATE' => 'เป็นเทมเพลท',
+    'LBL_TEMPLATE_TYPE' => 'ประเภทเอกสาร',
+    'LBL_ASSIGNED_TO_NAME' => 'ระบุให้:',
     'LBL_REVISION_NAME' => 'เลขที่รุ่น',
     'LBL_MIME' => 'ประเภท Mime',
     'LBL_REVISION' => 'รุ่น',
     'LBL_DOCUMENT' => 'เอกสารที่เกี่ยวข้อง',
     'LBL_LATEST_REVISION' => 'รุ่นล่าสุด',
     'LBL_DOCUMENT_REVISION_ID' => 'ID รุ่นเอกสาร',
-    'LBL_CHANGE_LOG'=> 'ล็อกการเปลี่ยนแปลง',
-    'LBL_ACTIVE_DATE'=> 'วันที่เผยแพร่',
+    'LBL_CHANGE_LOG' => 'ล็อกการเปลี่ยนแปลง',
+    'LBL_ACTIVE_DATE' => 'วันที่เผยแพร่',
     'LBL_EXPIRATION_DATE' => 'วันที่หมดอายุ',
-    'LBL_FILE_EXTENSION'  => 'นามสกุลไฟล์',
+    'LBL_FILE_EXTENSION' => 'นามสกุลไฟล์',
     'LBL_LAST_REV_MIME_TYPE' => 'ประเภท MIME ของรุ่นสุดท้าย',
-    'LBL_CAT_OR_SUBCAT_UNSPEC'=>'ไม่ระบุ',
+    'LBL_CAT_OR_SUBCAT_UNSPEC' => 'ไม่ระบุ',
     'LBL_HOMEPAGE_TITLE' => 'เอกสารของฉัน',
     //quick search
     'LBL_NEW_FORM_TITLE' => 'เอกสารใหม่',
@@ -70,25 +69,25 @@ $mod_strings = array (
     'LBL_FILE_UPLOAD' => 'ไฟล์:',
 
     'LBL_CATEGORY_VALUE' => 'หมวดหมู่:',
-    'LBL_SUBCATEGORY_VALUE'=> 'หมวดหมู่ย่อย:',
-    'LBL_DOC_STATUS'=> 'สถานะ:',
-    'LBL_DOC_STATUS_ID'=> 'ID สถานะ:',
+    'LBL_SUBCATEGORY_VALUE' => 'หมวดหมู่ย่อย:',
+    'LBL_DOC_STATUS' => 'สถานะ:',
+    'LBL_DOC_STATUS_ID' => 'ID สถานะ:',
     'LBL_LAST_REV_CREATOR' => 'สร้างรุ่นโดย:',
     'LBL_LASTEST_REVISION_NAME' => 'ชื่อรุ่นล่าสุด:',
     'LBL_SELECTED_REVISION_NAME' => 'ชื่อรุ่นที่เลือก:',
     'LBL_CONTRACT_STATUS' => 'สถานะของสัญญา:',
     'LBL_CONTRACT_NAME' => 'ชื่อสัญญา:',
     'LBL_LAST_REV_DATE' => 'วันที่ของรุ่น:',
-    'LBL_DOWNNLOAD_FILE'=> 'ดาวน์โหลดไฟล์:',
-    'LBL_DET_RELATED_DOCUMENT'=>'เอกสารที่เกี่ยวข้อง:',
-    'LBL_DET_RELATED_DOCUMENT_VERSION'=>"รุ่นเอกสารที่เกี่ยวข้อง:",
-    'LBL_DET_IS_TEMPLATE'=>'เทมเพลท? :',
-    'LBL_DET_TEMPLATE_TYPE'=>'ประเภทเอกสาร:',
-    'LBL_TEAM'=> 'ทีม:',
+    'LBL_DOWNNLOAD_FILE' => 'ดาวน์โหลดไฟล์:',
+    'LBL_DET_RELATED_DOCUMENT' => 'เอกสารที่เกี่ยวข้อง:',
+    'LBL_DET_RELATED_DOCUMENT_VERSION' => 'รุ่นเอกสารที่เกี่ยวข้อง:',
+    'LBL_DET_IS_TEMPLATE' => 'เทมเพลท? :',
+    'LBL_DET_TEMPLATE_TYPE' => 'ประเภทเอกสาร:',
+    'LBL_TEAM' => 'ทีม:',
     'LBL_IS_SHARED' => 'ใช้งานได้ภายนอก:',
-    'LBL_DOC_DESCRIPTION'=>'คำอธิบาย:',
-    'LBL_DOC_ACTIVE_DATE'=> 'วันที่เผยแพร่:',
-    'LBL_DOC_EXP_DATE'=> 'วันที่หมดอายุ:',
+    'LBL_DOC_DESCRIPTION' => 'คำอธิบาย:',
+    'LBL_DOC_ACTIVE_DATE' => 'วันที่เผยแพร่:',
+    'LBL_DOC_EXP_DATE' => 'วันที่หมดอายุ:',
 
     //document list view.
     'LBL_LIST_FORM_TITLE' => 'รายการเอกสาร',
@@ -98,11 +97,11 @@ $mod_strings = array (
     'LBL_LIST_REVISION' => 'รุ่น',
     'LBL_LIST_LAST_REV_CREATOR' => 'เผยแพร่โดย',
     'LBL_LIST_LAST_REV_DATE' => 'วันที่ของรุ่น',
-    'LBL_LIST_VIEW_DOCUMENT'=>'ดู',
-    'LBL_LIST_DOWNLOAD'=> 'ดาวน์โหลด',
+    'LBL_LIST_VIEW_DOCUMENT' => 'ดู',
+    'LBL_LIST_DOWNLOAD' => 'ดาวน์โหลด',
     'LBL_LIST_ACTIVE_DATE' => 'วันที่เผยแพร่',
     'LBL_LIST_EXP_DATE' => 'วันที่หมดอายุ',
-    'LBL_LIST_STATUS'=>'สถานะ',
+    'LBL_LIST_STATUS' => 'สถานะ',
     'LBL_LINKED_ID' => 'ID ที่เชื่อมโยง',
     'LBL_SELECTED_REVISION_ID' => 'ID รุ่นที่เลือก',
     'LBL_LATEST_REVISION_ID' => 'Id รุ่นล่าสุด',
@@ -114,33 +113,33 @@ $mod_strings = array (
     //document search form.
     'LBL_SF_DOCUMENT' => 'ชื่อเอกสาร:',
     'LBL_SF_CATEGORY' => 'หมวดหมู่:',
-    'LBL_SF_SUBCATEGORY'=> 'หมวดหมู่ย่อย:',
+    'LBL_SF_SUBCATEGORY' => 'หมวดหมู่ย่อย:',
     'LBL_SF_ACTIVE_DATE' => 'วันที่เผยแพร่:',
-    'LBL_SF_EXP_DATE'=> 'วันที่หมดอายุ:',
+    'LBL_SF_EXP_DATE' => 'วันที่หมดอายุ:',
 
     'DEF_CREATE_LOG' => 'สร้างเอกสารแล้ว',
 
     //error messages
-    'ERR_DOC_NAME'=>'ชื่อเอกสาร',
-    'ERR_DOC_ACTIVE_DATE'=>'วันที่เผยแพร่',
-    'ERR_DOC_EXP_DATE'=> 'วันที่หมดอายุ',
-    'ERR_FILENAME'=> 'ชื่อไฟล์',
-    'ERR_DOC_VERSION'=> 'เวอร์ชันของเอกสาร',
-    'ERR_DELETE_CONFIRM'=> 'คุณต้องการลบรุ่นเอกสารนี้หรือไม่',
-    'ERR_DELETE_LATEST_VERSION'=> 'คุณไม่ได้รับอนุญาตให้ลบเอกสารรุ่นล่าสุดนี้',
+    'ERR_DOC_NAME' => 'ชื่อเอกสาร',
+    'ERR_DOC_ACTIVE_DATE' => 'วันที่เผยแพร่',
+    'ERR_DOC_EXP_DATE' => 'วันที่หมดอายุ',
+    'ERR_FILENAME' => 'ชื่อไฟล์',
+    'ERR_DOC_VERSION' => 'เวอร์ชันของเอกสาร',
+    'ERR_DELETE_CONFIRM' => 'คุณต้องการลบรุ่นเอกสารนี้หรือไม่',
+    'ERR_DELETE_LATEST_VERSION' => 'คุณไม่ได้รับอนุญาตให้ลบเอกสารรุ่นล่าสุดนี้',
     'LNK_NEW_MAIL_MERGE' => 'จดหมายเวียน',
     'LBL_MAIL_MERGE_DOCUMENT' => 'เทมเพลทจดหมายเวียน:',
     'ERR_MISSING_FILE' => 'เอกสารนี้ไม่มีไฟล์ สาเหตุที่เป็นไปได้มากที่สุดคือเกิดข้อผิดพลาดระหว่างการอัปโหลด โปรดลองอัปโหลดไฟล์อีกครั้งหรือติดต่อผู้ดูแลระบบของคุณ',
 
     'LBL_TREE_TITLE' => 'เอกสาร',
     //sub-panel vardefs.
-    'LBL_LIST_DOCUMENT_NAME'=>'ชื่อ',
-    'LBL_LIST_IS_TEMPLATE'=>'เทมเพลท?',
-    'LBL_LIST_TEMPLATE_TYPE'=>'ประเภทเอกสาร',
-    'LBL_LIST_SELECTED_REVISION'=>'รุ่นที่เลือก',
-    'LBL_LIST_LATEST_REVISION'=>'รุ่นล่าสุด',
-    'LBL_CONTRACTS_SUBPANEL_TITLE'=>'สัญญาที่เกี่ยวข้อง',
-    'LBL_LAST_REV_CREATE_DATE'=>'วันที่สร้างรุ่นสุดท้าย',
+    'LBL_LIST_DOCUMENT_NAME' => 'ชื่อ',
+    'LBL_LIST_IS_TEMPLATE' => 'เทมเพลท?',
+    'LBL_LIST_TEMPLATE_TYPE' => 'ประเภทเอกสาร',
+    'LBL_LIST_SELECTED_REVISION' => 'รุ่นที่เลือก',
+    'LBL_LIST_LATEST_REVISION' => 'รุ่นล่าสุด',
+    'LBL_CONTRACTS_SUBPANEL_TITLE' => 'สัญญาที่เกี่ยวข้อง',
+    'LBL_LAST_REV_CREATE_DATE' => 'วันที่สร้างรุ่นสุดท้าย',
     //'LNK_DOCUMENT_CAT'=>'Document Categories',
     'LBL_CONTRACTS' => 'สัญญา',
     'LBL_CREATED_USER' => 'ผู้ใช้ที่สร้าง',
@@ -171,9 +170,11 @@ $mod_strings = array (
     // Dashboards
     'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนเอกสาร',
     'LBL_MY_DOCUMENTS' => 'เอกสารของฉัน',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์เอกสาร',
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'ส่งไปยัง DocuSign',
+    'LBL_SEND_TO_DOCUSIGN_TEMPLATE_BUTTON' => 'ส่งไปยัง DocuSign ด้วยเทมเพลท',
 
     // Cloud Drive
 
@@ -183,4 +184,4 @@ $mod_strings = array (
     'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'ซิงค์ไปยัง OneDrive',
     'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'ซิงค์ทั้งหมดไปยัง Dropbox',
     'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'ซิงค์ไปยัง Dropbox',
-);
+];

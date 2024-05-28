@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Mrežne logičke kuke',
     'LBL_MODULE_NAME_SINGULAR' => 'Mrežna logička kuka',
     'LBL_MODULE_TITLE' => 'Mrežne logičke kuke',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => 'Zatraži način',
     'LBL_TRIGGER_EVENT' => 'Događaj okidača',
     'LBL_URL' => 'URL',
-);
+];

@@ -26,24 +26,24 @@ class chartjs extends JsChart
     public function getChartResources()
     {
         return '
-        <script src="'.getJSPath('include/javascript/chartjs/chart.min.js').'"></script>
-        <script src="'.getJSPath('include/javascript/chartjs/chartjs-chart-treemap.min.js').'"></script>
-        <script src="'.getJSPath('include/javascript/chartjs/chartjs-plugin-datalabels.min.js').'"></script>
-        <script type="text/javascript" src="'.getJSPath('include/SugarCharts/chartjs/js/sugarCharts.js').'"></script>
-        <script src="'.getJSPath('include/javascript/chartjs/Chart_2_9_4.js').'"></script>
-        <script src="'.getJSPath('include/javascript/chartjs/chartjs-plugin-datalabels-v1.js').'"></script>
-        <script src="'.getJSPath('include/javascript/chartjs/chart.funnel.js').'"></script>
+        <script src="' . getJSPath('include/javascript/chartjs/chart.min.js') . '"></script>
+        <script src="' . getJSPath('include/javascript/chartjs/chartjs-chart-treemap.min.js') . '"></script>
+        <script src="' . getJSPath('include/javascript/chartjs/chartjs-plugin-datalabels.min.js') . '"></script>
+        <script type="text/javascript" src="' . getJSPath('include/SugarCharts/chartjs/js/sugarCharts.js') . '"></script>
+        <script src="' . getJSPath('include/javascript/chartjs/Chart_2_9_4.js') . '"></script>
+        <script src="' . getJSPath('include/javascript/chartjs/chartjs-plugin-datalabels-v1.js') . '"></script>
+        <script src="' . getJSPath('include/javascript/chartjs/chart.funnel.js') . '"></script>
         ';
     }
 
     /**
      * Display method to invoke Smarty instance with template variables
      *
-     * @param   string $name chart id assigned for template
-     * @param   string $xmlFile chart data in xml format to be processed
-     * @param   string $width default width of chart container
-     * @param   string $height default height of chart container
-     * @param   string $resize allow resizing of chart container (deprecated)
+     * @param string $name chart id assigned for template
+     * @param string $xmlFile chart data in xml format to be processed
+     * @param string $width default width of chart container
+     * @param string $height default height of chart container
+     * @param string $resize allow resizing of chart container (deprecated)
      * @return  string Smarty template instance with chart containers and source files
      */
     public function display($name, $xmlFile, $width = '320', $height = '480', $resize = false)

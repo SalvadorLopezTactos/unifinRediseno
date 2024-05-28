@@ -29,7 +29,7 @@
             var href = app.router.buildRoute('Employees', this.model.get('created_by'), 'detail', true);
             value += ' <a href="#' + href + '">' + this.model.get('created_by_name') + '</a>';
         } else if (this.name === 'description') {
-            value = DOMPurify.sanitize(value);
+            value = DOMPurify.sanitize(value, {FORBID_TAGS: ['form']});
         }
 
         return value;

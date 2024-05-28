@@ -20,18 +20,18 @@ class SugarUpgradeUpgradeAccess extends UpgradeScript
 
     public function run()
     {
-        require_once "install/install_utils.php";
+        require_once 'install/install_utils.php';
 
-        $htaccess_file = $this->context['source_dir']."/.htaccess";
-        $webconfig_file = $this->context['source_dir']."/web.config";
+        $htaccess_file = $this->context['source_dir'] . '/.htaccess';
+        $webconfig_file = $this->context['source_dir'] . '/web.config';
 
-        if(file_exists($webconfig_file) ||
-            (!empty($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER["SERVER_SOFTWARE"],'Microsoft-IIS') !== false
-        )) {
+        if (file_exists($webconfig_file) ||
+            (
+                !empty($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') !== false
+            )) {
             $this->handleWebConfig();
         }
-        if (!file_exists($webconfig_file) || file_exists($htaccess_file))
-        {
+        if ((!file_exists($webconfig_file) || file_exists($htaccess_file)) && !isMts()) {
             $this->handleHtaccess();
         }
     }
@@ -43,9 +43,11 @@ class SugarUpgradeUpgradeAccess extends UpgradeScript
 
     protected function handleHtaccess()
     {
-        $htaccess_file = $this->context['source_dir']."/.htaccess";
+        $htaccess_file = $this->context['source_dir'] . '/.htaccess';
         $basePath = parse_url($this->upgrader->config['site_url'], PHP_URL_PATH);
-        if(empty($basePath)) $basePath = '/';
+        if (empty($basePath)) {
+            $basePath = '/';
+        }
 
         /**
          * .htaccess change between 6.7 and 7.0.
@@ -53,7 +55,6 @@ class SugarUpgradeUpgradeAccess extends UpgradeScript
          * Thus we have to delete this piece prior to rebuild the htaccess, so we avoid duplicate rules
          */
         if (file_exists($htaccess_file)) {
-
             //There are two versions of cache_headers: one list ends with ico, the other list ends with woff.
             $cache_headers_ico = <<<EOQ
 <FilesMatch "\.(jpg|png|gif|js|css|ico)$">
@@ -103,23 +104,22 @@ EOQ;
 </IfModule>
 EOQ;
 
-        
+
             $htaccess_contents = file_get_contents($htaccess_file);
             $htaccess_contents = str_replace($cache_headers_ico, '', $htaccess_contents);
             $htaccess_contents = str_replace($cache_headers_woff, '', $htaccess_contents);
             $htaccess_contents = str_replace($mod_rewrite, '', $htaccess_contents);
-            $status =  $this->putFile($htaccess_file, $htaccess_contents);
-            if( $status === false){
+            $status = $this->putFile($htaccess_file, $htaccess_contents);
+            if ($status === false) {
                 $this->fail(sprintf($this->mod_strings['ERROR_HT_NO_WRITE'], $htaccess_file));
                 return;
             }
         }
 
-        $status =  $this->putFile($htaccess_file, getHtaccessData($htaccess_file));
-        if( $status === false ){
+        $status = $this->putFile($htaccess_file, getHtaccessData($htaccess_file));
+        if ($status === false) {
             $this->fail(sprintf($this->mod_strings['ERROR_HT_NO_WRITE'], $htaccess_file));
             return;
         }
-
     }
 }

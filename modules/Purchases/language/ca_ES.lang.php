@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Quadre de comandament del registre de compres',
     'LBL_RELATED_ACCOUNT' => 'Compte relacionat',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a les compres',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia de compra',
 ];

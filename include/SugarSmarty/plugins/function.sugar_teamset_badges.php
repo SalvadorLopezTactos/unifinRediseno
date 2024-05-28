@@ -17,7 +17,7 @@ function smarty_function_sugar_teamset_badges($params, &$smarty)
         return;
     }
 
-    $badges = array();
+    $badges = [];
     if (!empty($params['items']['primary'])) {
         $badges[] = $GLOBALS['app_strings']['LBL_COLLECTION_PRIMARY'];
     }

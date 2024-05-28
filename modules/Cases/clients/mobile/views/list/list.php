@@ -10,56 +10,56 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Cases']['mobile']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Cases']['mobile']['view']['list'] = [
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
-		            'label' => 'LBL_SUBJECT',
+                    'label' => 'LBL_SUBJECT',
                     'link' => true,
                     'default' => true,
                     'enabled' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'status',
-		            'label' => 'LBL_STATUS',
+                    'label' => 'LBL_STATUS',
                     'default' => true,
                     'enabled' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'case_number',
                     'label' => 'LBL_NUMBER',
                     'link' => true,
                     'default' => true,
                     'enabled' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'priority',
                     'label' => 'LBL_PRIORITY',
                     'default' => true,
                     'enabled' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'resolution',
                     'label' => 'LBL_RESOLUTION',
                     'default' => true,
                     'enabled' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'team_name',
                     'label' => 'LBL_TEAM',
                     'default' => true,
                     'enabled' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'assigned_user_name',
                     'label' => 'LBL_ASSIGNED_USER',
                     'default' => true,
                     'enabled' => true,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

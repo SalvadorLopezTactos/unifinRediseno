@@ -37,6 +37,19 @@ class SugarPlugins
             'soap_version' => SOAP_1_1,
             'exceptions' => 0,
         ];
+
+        $proxy_config = Administration::getSettings('proxy');
+        if (!empty($proxy_config)
+            && !empty($proxy_config->settings['proxy_on'])
+            && $proxy_config->settings['proxy_on'] == 1) {
+            $params['proxy_host'] = $proxy_config->settings['proxy_host'];
+            $params['proxy_port'] = $proxy_config->settings['proxy_port'];
+            if (!empty($proxy_config->settings['proxy_auth'])) {
+                $params['proxy_login'] = $proxy_config->settings['proxy_username'];
+                $params['proxy_password'] = $proxy_config->settings['proxy_password'];
+            }
+        }
+
         try {
             $this->client = new \SoapClient(self::SUGAR_PLUGIN_SERVER . '?wsdl', $params);
         } catch (SoapFault $e) {
@@ -55,8 +68,12 @@ class SugarPlugins
             return [];
         }
 
+        if (empty($GLOBALS['license'])) {
+            loadLicense();
+        }
+
         $result = $this->client->get_plugin_list(
-            $GLOBALS['license']->settings['license_key'],
+            $GLOBALS['license']->settings['license_key'] ?? null,
             $GLOBALS['sugar_version']
         );
         $result = object_to_array_deep($result);
@@ -71,7 +88,7 @@ class SugarPlugins
     /**
      * Returns the download token for the given plugin
      *
-     * @param  string $plugin_id
+     * @param string $plugin_id
      * @return string token
      */
     private function getPluginDownloadToken($plugin_id)
@@ -99,5 +116,17 @@ class SugarPlugins
         $token = $this->getPluginDownloadToken($plugin_id);
         ob_clean();
         SugarApplication::redirect(self::SUGAR_PLUGIN_SERVER . '?token=' . urlencode($token));
+    }
+
+    /**
+     * Returns a download link for the given plugin
+     *
+     * @param string $pluginId the plugin ID as stored on the plugin server
+     * @return string
+     */
+    public function getPluginLink($pluginId)
+    {
+        $token = $this->getPluginDownloadToken($pluginId);
+        return self::SUGAR_PLUGIN_SERVER . '?token=' . urlencode($token);
     }
 }

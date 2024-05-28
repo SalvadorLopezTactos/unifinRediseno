@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'แดชบอร์ดรายการพื้นฐานความรู้',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกพื้นฐานความรู้',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'ฐานความรู้ระบบลิ้นชัก',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์ฐานความรู้',
 
     'LBL_MODULE_NAME' => 'ฐานความรู้',
     'LBL_MODULE_NAME_SINGULAR' => 'บทความฐานความรู้',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'ตั้งค่าเป็นค่าหลัก',
     'LBL_ITEM_REMOVE' => 'นำรายการออก',
     'LBL_ITEM_ADD' => 'เพิ่มรายการ',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => 'ID รุ่น',
     'LBL_DOCUMENT_REVISION' => 'รุ่น',
     'LBL_NUMBER' => 'ตัวเลข',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'บทความอื่นๆ {{module}} รายการ...',
     'LBL_LIST_FORM_TITLE' => 'รายการฐานความรู้',
     'LBL_SEARCH_FORM_TITLE' => 'การค้นหาฐานความรู้',
-);
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Web logički izrazi',
     'LBL_MODULE_NAME_SINGULAR' => 'Web logički izraz',
     'LBL_MODULE_TITLE' => 'Web logički izrazi',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => 'Metod zahteva',
     'LBL_TRIGGER_EVENT' => 'Okidač',
     'LBL_URL' => 'URL',
-);
+];

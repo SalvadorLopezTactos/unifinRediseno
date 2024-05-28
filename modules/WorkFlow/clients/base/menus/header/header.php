@@ -11,33 +11,33 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['WorkFlow']['base']['menu']['header'] = array(
-    array(
-        'route'=>'#bwc/index.php?module=WorkFlow&action=EditView&return_module=WorkFlow&return_action=DetailView',
-        'label' =>'LNK_NEW_WORKFLOW',
-        'acl_action'=>'',
-        'acl_module'=>'',
+$viewdefs['WorkFlow']['base']['menu']['header'] = [
+    [
+        'route' => '#bwc/index.php?module=WorkFlow&action=EditView&return_module=WorkFlow&return_action=DetailView',
+        'label' => 'LNK_NEW_WORKFLOW',
+        'acl_action' => '',
+        'acl_module' => '',
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route'=>'#bwc/index.php?module=WorkFlow&action=index&return_module=WorkFlow&return_action=DetailView',
-        'label' =>'LNK_WORKFLOW',
-        'acl_action'=>'',
-        'acl_module'=>'',
+    ],
+    [
+        'route' => '#bwc/index.php?module=WorkFlow&action=index&return_module=WorkFlow&return_action=DetailView',
+        'label' => 'LNK_WORKFLOW',
+        'acl_action' => '',
+        'acl_module' => '',
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=>'#bwc/index.php?module=WorkFlow&action=WorkFlowListView&return_module=WorkFlow&return_action=index',
-        'label' =>'LNK_ALERT_TEMPLATES',
-        'acl_action'=>'',
-        'acl_module'=>'',
+    ],
+    [
+        'route' => '#bwc/index.php?module=WorkFlow&action=WorkFlowListView&return_module=WorkFlow&return_action=index',
+        'label' => 'LNK_ALERT_TEMPLATES',
+        'acl_action' => '',
+        'acl_module' => '',
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route'=>'#bwc/index.php?module=WorkFlow&action=ProcessListView&return_module=WorkFlow&return_action=index',
-        'label' =>'LNK_PROCESS_VIEW',
-        'acl_action'=>'',
-        'acl_module'=>'',
+    ],
+    [
+        'route' => '#bwc/index.php?module=WorkFlow&action=ProcessListView&return_module=WorkFlow&return_action=index',
+        'label' => 'LNK_PROCESS_VIEW',
+        'acl_action' => '',
+        'acl_module' => '',
         'icon' => 'sicon-list-view',
-    ),
-);
+    ],
+];

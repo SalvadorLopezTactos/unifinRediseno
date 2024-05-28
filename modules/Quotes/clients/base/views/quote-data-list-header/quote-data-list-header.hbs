@@ -10,14 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<tr class="flex-list-row-header">
+<tr class="flex-list-row-header sticky table-row top-0 z-30">
     {{#each leftColumns}}
-        <th{{#if name}} data-fieldname="{{name}}"{{/if}}>
+        <th class="left-0 sticky table-cell" {{#if name}} data-fieldname="{{name}}"{{/if}}>
             {{field ../this model=../model template='list'}}
         </th>
     {{/each}}
     {{#each _fields}}
-        <th class="{{widthClass}}" {{#if name}} data-fieldname="{{name}}"{{/if}}>
+        <th class="table-cell {{widthClass}}" {{#if name}} data-fieldname="{{name}}"{{/if}}>
         <span>
             {{str label labelModule}}
         </span>

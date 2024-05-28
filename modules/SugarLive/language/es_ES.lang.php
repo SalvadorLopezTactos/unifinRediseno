@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'SugarLive',
     'LBL_MODULE_NAME_SINGULAR' => 'SugarLive',
     'LBL_SUGARLIVE_LAYOUT' => 'Diseño',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_SUGARLIVE_SUMMARY_HEADER' => 'Panel del resumen de SugarLive',
     'LBL_CONSOLE_DIRECTIONS_RESTORE_DEFAULTS_LINK' => 'Click here',
     'LBL_CONSOLE_DIRECTIONS_RESTORE_DEFAULTS' => ' to restore default settings',
-);
+];

@@ -11,9 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' =>
-'<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
+        '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
 รับคีย์ผู้บริโภคจาก LogMeIn โดยลงทะเบียนแอปพลิเคชั่น GoToMeeting ใหม่<br> 
 &nbsp;<br>
 ขั้นตอนการลงทะเบียนอินซแตนซ์ของคุณ:<br> 
@@ -36,4 +36,4 @@ $connector_strings = array(
 </ol> 
 </td></tr></table>',
     'oauth_consumer_key' => 'คีย์ผู้บริโภค',
-);
+];

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  *  Quotas are used to store quota information on certain users.
  */
@@ -37,9 +38,9 @@ class Quota extends SugarBean
     public $currency_symbol;
     public $committed;
 
-    public $table_name = "quotas";
+    public $table_name = 'quotas';
     public $module_dir = 'Quotas';
-    public $object_name = "Quota";
+    public $object_name = 'Quota';
 
     //Here value of tracker_visibility is false, as this module should not be tracked.
     public $tracker_visibility = false;
@@ -47,7 +48,7 @@ class Quota extends SugarBean
     public $new_schema = true;
 
     // This is used to retrieve related fields from form posts.
-    public $additional_column_fields = Array();
+    public $additional_column_fields = [];
 
 
     public function __construct()
@@ -64,7 +65,7 @@ class Quota extends SugarBean
         /**
          * @var TimePeriod
          */
-        $timeperiod = BeanFactory::retrieveBean("TimePeriods", $this->timeperiod_id);
+        $timeperiod = BeanFactory::retrieveBean('TimePeriods', $this->timeperiod_id);
         // make sure we have the full name before display happens
         if (empty($this->user_full_name) && !empty($this->user_id)) {
             $user = BeanFactory::getBean('Users', $this->user_id);
@@ -77,8 +78,7 @@ class Quota extends SugarBean
         if (!empty($this->quota_type)) {
             if ($this->quota_type == 'Direct') {
                 $quota_type = $mod_strings['LBL_MODULE_NAME_SINGULAR'] . ' ';
-            }
-            else if ($this->quota_type == 'Rollup') {
+            } elseif ($this->quota_type == 'Rollup') {
                 $quota_type = $mod_strings['LBL_MODULE_NAME_SINGULAR'] . ' (' . $mod_strings['LBL_ADJUSTED'] . ') ';
             }
         }
@@ -93,26 +93,26 @@ class Quota extends SugarBean
      * @param $where
      * @param $show_deleted
      */
-    public function create_new_list_query($order_by, $where, $filter = array(), $params = array(), $show_deleted = 0, $join_type = '', $return_array = false, $parentbean = null, $singleSelect = false, $retrieve_created_by = true)
+    public function create_new_list_query($order_by, $where, $filter = [], $params = [], $show_deleted = 0, $join_type = '', $return_array = false, $parentbean = null, $singleSelect = false, $retrieve_created_by = true)
     {
         $ret_array = [];
         global $current_user;
 
-        $ret_array['select'] = "SELECT users.first_name as name, users.last_name, users.id users_id, quotas.* ";
+        $ret_array['select'] = 'SELECT users.first_name as name, users.last_name, users.id users_id, quotas.* ';
 
-        $ret_array['from'] = " FROM users, quotas ";
+        $ret_array['from'] = ' FROM users, quotas ';
 
         $us = BeanFactory::newBean('Users');
-        $us->addVisibilityFrom($ret_array['from'], array('where_condition' => true));
-        $us->addVisibilityFrom($where, array('where_condition' => true));
+        $us->addVisibilityFrom($ret_array['from'], ['where_condition' => true]);
+        $us->addVisibilityFrom($where, ['where_condition' => true]);
 
         $where_query = ' WHERE ';
 
         if (trim($where) != '') {
-            $where_query .= $where . " AND ";
+            $where_query .= $where . ' AND ';
         }
 
-        $where_query .= " users.id = quotas.user_id";
+        $where_query .= ' users.id = quotas.user_id';
 
         if ($retrieve_created_by) {
             $where_query .= " AND quotas.created_by = '" . $current_user->id . "'";
@@ -165,9 +165,9 @@ class Quota extends SugarBean
         $temp_array = $this->get_list_view_array();
 
         if ($this->currency_id == -99) {
-            $temp_array['AMOUNT'] = format_number($this->amount_base_currency, 2, 2, array('convert' => true, 'currency_symbol' => true));
+            $temp_array['AMOUNT'] = format_number($this->amount_base_currency, 2, 2, ['convert' => true, 'currency_symbol' => true]);
         } else {
-            $temp_array['AMOUNT'] = format_number($this->amount_base_currency, 2, 2, array('convert' => true, 'currency_symbol' => false)) . " ( " . $this->currency_symbol . " )";
+            $temp_array['AMOUNT'] = format_number($this->amount_base_currency, 2, 2, ['convert' => true, 'currency_symbol' => false]) . ' ( ' . $this->currency_symbol . ' )';
         }
 
         if ($this->committed == 1) {
@@ -196,9 +196,9 @@ class Quota extends SugarBean
     {
         global $sugar_config;
 
-        $xtpl->assign("QUOTA_AMOUNT", format_number($quota->amount, 2, 2, array('convert' => true, 'currency_symbol' => true)));
-        $xtpl->assign("QUOTA_URL", $sugar_config['site_url'] . '/index.php?module=Quotas&action=index&timeperiod_id=' . $quota->timeperiod_id);
-        $xtpl->assign("QUOTA_TIMEPERIOD", $quota->getTimePeriod($quota->timeperiod_id));
+        $xtpl->assign('QUOTA_AMOUNT', format_number($quota->amount, 2, 2, ['convert' => true, 'currency_symbol' => true]));
+        $xtpl->assign('QUOTA_URL', $sugar_config['site_url'] . '/index.php?module=Quotas&action=index&timeperiod_id=' . $quota->timeperiod_id);
+        $xtpl->assign('QUOTA_TIMEPERIOD', $quota->getTimePeriod($quota->timeperiod_id));
 
         return $xtpl;
     }
@@ -230,16 +230,16 @@ class Quota extends SugarBean
         global $locale;
 
         // Get the user's full name to display in the table
-        $qry = "SELECT U.first_name, U.last_name " .
-            "FROM users U " .
-            "WHERE U.id = " . $this->db->quoted($user_id);
+        $qry = 'SELECT U.first_name, U.last_name ' .
+            'FROM users U ' .
+            'WHERE U.id = ' . $this->db->quoted($user_id);
 
-        $result = $this->db->query($qry, true, " Error filling in additional detail fields: ");
+        $result = $this->db->query($qry, true, ' Error filling in additional detail fields: ');
 
-        $row = Array();
+        $row = [];
         $row = $this->db->fetchByAssoc($result);
 
-        if ($row != NULL) {
+        if ($row != null) {
             $user_full_name = $locale->formatName('Users', $row);
             return $user_full_name;
         }
@@ -259,29 +259,26 @@ class Quota extends SugarBean
     {
         global $mod_strings;
 
-        $qry = "SELECT id, name FROM timeperiods where deleted=0 and is_fiscal_year=0 ";
+        $qry = 'SELECT id, name FROM timeperiods where deleted=0 and is_fiscal_year=0 ';
 
         $result = $this->db->query($qry, true, 'Error retrieving timeperiods: ');
 
         $options = '';
-        if ($id == null) // timeperiods is not defined, print "Select Time Period..."
-        {
+        if ($id == null) { // timeperiods is not defined, print "Select Time Period..."
             $options .= '<option value="?action=index&module=Quotas" SELECTED>'
                 . $mod_strings['LBL_SELECT_TIME_PERIOD']
                 . '</option>';
         }
 
         while ($row = $this->db->fetchByAssoc($result)) {
-
-            if ($row['id'] == $id) // timeperiod is selected, default to this one
-            {
+            if ($row['id'] == $id) { // timeperiod is selected, default to this one
                 $options .= '<option value="?edit=true&action=index&module=Quotas&timeperiod_id='
                     . $row['id']
                     . '" SELECTED>'
                     . $row['name']
                     . '</option>';
             } else {
-            // print all other time periods
+                // print all other time periods
                 $options .= '<option value="?edit=true&action=index&module=Quotas&timeperiod_id='
                     . $row['id']
                     . '">'
@@ -311,7 +308,7 @@ class Quota extends SugarBean
      * Find a users assigned quota for a given time period and return it.  The method will default to the current user
      * if no user is passed in.
      *
-     * @param string           $timeperiod_id
+     * @param string $timeperiod_id
      * @param null|string|User $user
      *
      * @return array
@@ -328,13 +325,13 @@ class Quota extends SugarBean
             }
         }
 
-        $qry = "SELECT quotas.currency_id, quotas.amount, timeperiods.name as timeperiod_name " .
-            "FROM quotas INNER JOIN users ON quotas.user_id = users.id, timeperiods " .
-            "WHERE quotas.timeperiod_id = timeperiods.id " .
-            "AND quotas.user_id = " . $this->db->quoted($user) .
-            " AND ((quotas.created_by <> " . $this->db->quoted($user) . " AND quotas.quota_type = 'Direct')" .
+        $qry = 'SELECT quotas.currency_id, quotas.amount, timeperiods.name as timeperiod_name ' .
+            'FROM quotas INNER JOIN users ON quotas.user_id = users.id, timeperiods ' .
+            'WHERE quotas.timeperiod_id = timeperiods.id ' .
+            'AND quotas.user_id = ' . $this->db->quoted($user) .
+            ' AND ((quotas.created_by <> ' . $this->db->quoted($user) . " AND quotas.quota_type = 'Direct')" .
             "OR (users.reports_to_id IS NULL AND quotas.quota_type = 'Rollup')) " . //for top-level manager
-            "AND timeperiods.id = " . $this->db->quoted($timeperiod_id) . " AND quotas.committed = 1";
+            'AND timeperiods.id = ' . $this->db->quoted($timeperiod_id) . ' AND quotas.committed = 1';
 
         $result = $this->db->query($qry, true, 'Error retrieving Current User Quota Information: ');
 
@@ -344,12 +341,11 @@ class Quota extends SugarBean
             $row['currency_id'] = -99;
         }
 
-        if ($row['currency_id'] == -99) // print the default currency
-        {
-            $row['formatted_amount'] = format_number($row['amount'], 2, 2, array('convert' => true, 'currency_symbol' => true));
+        if ($row['currency_id'] == -99) { // print the default currency
+            $row['formatted_amount'] = format_number($row['amount'], 2, 2, ['convert' => true, 'currency_symbol' => true]);
         } else {
             // print the foreign currency, must retrieve currency symbol
-            $row['formatted_amount'] = format_number($row['amount'], 2, 2, array('convert' => true, 'currency_symbol' => false)) . " ( " . $this->getCurrencySymbol($row['currency_id']) . " )";
+            $row['formatted_amount'] = format_number($row['amount'], 2, 2, ['convert' => true, 'currency_symbol' => false]) . ' ( ' . $this->getCurrencySymbol($row['currency_id']) . ' )';
         }
 
         return $row;
@@ -362,7 +358,7 @@ class Quota extends SugarBean
      *
      * @param $timeperiod_id
      * @param $formatted - boolean to test if output should be formatted
-     * @param $id        - to pass in an user_id in case it is necessary
+     * @param $id - to pass in an user_id in case it is necessary
      */
     public function getGroupQuota($timeperiod_id, $formatted = true, $id = null)
     {
@@ -371,22 +367,22 @@ class Quota extends SugarBean
             $id = $current_user->id;
         }
 
-        $query = "SELECT {$this->db->convert('SUM(quotas.amount_base_currency)', 'ifnull', array(0))} as group_amount" .
-            " FROM users, quotas " .
-            " WHERE quotas.timeperiod_id = " . $this->db->quoted($timeperiod_id) .
-            " AND quotas.deleted = 0" .
-            " AND users.id = quotas.user_id" .
-               " AND users.deleted = 0" .
-            " AND quotas.created_by = " .$this->db->quoted($id) .
-            " AND (users.reports_to_id = " . $this->db->quoted($id) .
-            " OR (users.id = " . $this->db->quoted($id) .
+        $query = "SELECT {$this->db->convert('SUM(quotas.amount_base_currency)', 'ifnull', [0])} as group_amount" .
+            ' FROM users, quotas ' .
+            ' WHERE quotas.timeperiod_id = ' . $this->db->quoted($timeperiod_id) .
+            ' AND quotas.deleted = 0' .
+            ' AND users.id = quotas.user_id' .
+            ' AND users.deleted = 0' .
+            ' AND quotas.created_by = ' . $this->db->quoted($id) .
+            ' AND (users.reports_to_id = ' . $this->db->quoted($id) .
+            ' OR (users.id = ' . $this->db->quoted($id) .
             " AND quotas.quota_type <> 'Rollup'))"; //for top-level manager
 
         $result = $this->db->query($query, true, 'Error retrieving Group Quota: ');
         $row = $this->db->fetchByAssoc($result);
 
         if ($formatted) {
-            return format_number($row['group_amount'], 2, 2, array('convert' => true, 'currency_symbol' => true));
+            return format_number($row['group_amount'], 2, 2, ['convert' => true, 'currency_symbol' => true]);
         } else {
             return $row['group_amount'];
         } // return an unformmated version (for insertion/update into DB)
@@ -423,7 +419,7 @@ class Quota extends SugarBean
         }
 
         $sq = new SugarQuery();
-        $sq->select(array('quotas.currency_id', 'quotas.amount'));
+        $sq->select(['quotas.currency_id', 'quotas.amount']);
         $sq->from(BeanFactory::newBean('Quotas'));
         $sq->where()
             ->equals('user_id', $user_id)
@@ -438,10 +434,10 @@ class Quota extends SugarBean
 
         if (empty($row)) {
             // This is to prevent return value of false when a given timeperiod has no quota.
-            $row = array(
+            $row = [
                 'currency_id' => -99,
                 'amount' => 0,
-            );
+            ];
         }
         $row['formatted_amount'] = SugarCurrency::formatAmountUserLocale($row['amount'], $row['currency_id']);
 
@@ -462,7 +458,6 @@ AND quotas.user_id = ?
 SQL;
         $this->db->getConnection()
             ->executeUpdate($query, [$timeperiod_id, $current_user->id]);
-
     }
 
 
@@ -537,79 +532,79 @@ SQL;
      *
      * @param $timeperiod_id
      * @param $id - if the id is given, use this idea as the selected choice
-    */
+     */
     public function getUserManagedSelectList($timeperiod_id, $id = '')
     {
-    global $mod_strings;
-    global $locale;
+        global $mod_strings;
+        global $locale;
 
-    $data = $this->getUserManagedSelectData($timeperiod_id);
-    $options = '';
+        $data = $this->getUserManagedSelectData($timeperiod_id);
+        $options = '';
 
-    if ($id == null) {
-     $options .= '<option value="?action=index&module=Quotas" SELECTED>'
-              . $mod_strings['LBL_SELECT_USER']
-              . '</option>' ;
-    }
+        if ($id == null) {
+            $options .= '<option value="?action=index&module=Quotas" SELECTED>'
+                . $mod_strings['LBL_SELECT_USER']
+                . '</option>';
+        }
 
-    foreach($data as $row) {
-     if ($row['user_id'] == $id) {
-         $options .= '<option value="?edit=true&action=index&module=Quotas&record='
-                  . $row['quota_id']
-                  . '&user_id=' . $row['user_id']
-                  . '&timeperiod_id=' . $timeperiod_id
-                  . '" SELECTED>'
-                  . $locale->formatName('Users', $row)
-                  . '</option>';
-     } else {
-         if ($row['quota_id'] == null){
-             $options .= '<option value="?edit=true&action=index&module=Quotas&record=new'
-                  . '&user_id=' . $row['user_id']
-                  . '&timeperiod_id=' . $timeperiod_id
-                  . '">'
-                  . $locale->formatName('Users', $row)
-                  . '</option>' ;
-         } else {
-             $options .= '<option value="?edit=true&action=index&module=Quotas&record='
-                  . $row['quota_id']
-                  . '&user_id=' . $row['user_id']
-                  . '&timeperiod_id=' . $timeperiod_id
-                  . '">'
-                  . $locale->formatName('Users', $row)
-                  . '</option>' ;
-         }
-     }
-    }
+        foreach ($data as $row) {
+            if ($row['user_id'] == $id) {
+                $options .= '<option value="?edit=true&action=index&module=Quotas&record='
+                    . $row['quota_id']
+                    . '&user_id=' . $row['user_id']
+                    . '&timeperiod_id=' . $timeperiod_id
+                    . '" SELECTED>'
+                    . $locale->formatName('Users', $row)
+                    . '</option>';
+            } else {
+                if ($row['quota_id'] == null) {
+                    $options .= '<option value="?edit=true&action=index&module=Quotas&record=new'
+                        . '&user_id=' . $row['user_id']
+                        . '&timeperiod_id=' . $timeperiod_id
+                        . '">'
+                        . $locale->formatName('Users', $row)
+                        . '</option>';
+                } else {
+                    $options .= '<option value="?edit=true&action=index&module=Quotas&record='
+                        . $row['quota_id']
+                        . '&user_id=' . $row['user_id']
+                        . '&timeperiod_id=' . $timeperiod_id
+                        . '">'
+                        . $locale->formatName('Users', $row)
+                        . '</option>';
+                }
+            }
+        }
 
-    return $options;
+        return $options;
     }
 
 
     /**
-    * Return data for building options in Quota::getUserManagedSelectList
-    * @param string $timeperiod_id
-    * @return array
-    */
+     * Return data for building options in Quota::getUserManagedSelectList
+     * @param string $timeperiod_id
+     * @return array
+     */
     protected function getUserManagedSelectData($timeperiod_id)
     {
-        $result = array();
+        $result = [];
         global $current_user;
-        $query = "SELECT U.id as user_id, Q.id as quota_id, Q.timeperiod_id as timeperiod_id, user_name, first_name, last_name " .
-               "FROM users U " .
-               "LEFT OUTER JOIN (SELECT quotas.id, quotas.user_id, quotas.timeperiod_id, quotas.quota_type " .
-               "FROM quotas, users " .
-               "WHERE quotas.timeperiod_id = {$this->db->quoted($timeperiod_id)}" .
-               "AND quotas.user_id = users.id " .
-               "AND quotas.created_by = {$this->db->quoted($current_user->id)}" .
-               "AND (users.reports_to_id = {$this->db->quoted($current_user->id)}" .
-               "OR (quotas.quota_type = 'Direct' AND users.id = {$this->db->quoted($current_user->id)}) ) ) Q " .
-               "ON Q.user_id = U.id  " .
-               "WHERE (U.reports_to_id = {$this->db->quoted($current_user->id)}" .
-               " OR U.id = {$this->db->quoted($current_user->id)}) AND U.deleted = 0  " .
-               "ORDER BY first_name";
+        $query = 'SELECT U.id as user_id, Q.id as quota_id, Q.timeperiod_id as timeperiod_id, user_name, first_name, last_name ' .
+            'FROM users U ' .
+            'LEFT OUTER JOIN (SELECT quotas.id, quotas.user_id, quotas.timeperiod_id, quotas.quota_type ' .
+            'FROM quotas, users ' .
+            "WHERE quotas.timeperiod_id = {$this->db->quoted($timeperiod_id)}" .
+            'AND quotas.user_id = users.id ' .
+            "AND quotas.created_by = {$this->db->quoted($current_user->id)}" .
+            "AND (users.reports_to_id = {$this->db->quoted($current_user->id)}" .
+            "OR (quotas.quota_type = 'Direct' AND users.id = {$this->db->quoted($current_user->id)}) ) ) Q " .
+            'ON Q.user_id = U.id  ' .
+            "WHERE (U.reports_to_id = {$this->db->quoted($current_user->id)}" .
+            " OR U.id = {$this->db->quoted($current_user->id)}) AND U.deleted = 0  " .
+            'ORDER BY first_name';
         $resource = $this->db->query($query, true, 'Error retrieving quotas for managed users for current user: ');
-        while($row = $this->db->fetchByAssoc($resource)){
-           array_push($result, $row);
+        while ($row = $this->db->fetchByAssoc($resource)) {
+            array_push($result, $row);
         }
         return $result;
     }
@@ -626,8 +621,8 @@ SQL;
     {
         global $current_user;
 
-        $qry = "SELECT * " .
-            "FROM users " .
+        $qry = 'SELECT * ' .
+            'FROM users ' .
             "WHERE reports_to_id = '" . $id . "'";
 
         $result = $this->db->query($this->create_list_count_query($qry), true, 'Error retrieving row count from quotas: ');
@@ -666,11 +661,10 @@ SQL;
 /**
  * Function to allow for Quotas module reporting to display TimePeriods as a filter for timeperiod_id value
  *
- * @see modules/Quotas/vardefs.php
  * @return array Array of TimePeriod names with TimePeriod instance id as key
+ * @see modules/Quotas/vardefs.php
  */
 function getTimePeriodsDropDownForQuotas()
 {
-	return TimePeriod::get_timeperiods_dom();
+    return TimePeriod::get_timeperiods_dom();
 }
-

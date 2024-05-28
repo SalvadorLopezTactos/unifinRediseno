@@ -9,47 +9,47 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Team'] = array(
+$dictionary['Team'] = [
     'table' => 'teams',
     'color' => 'teal',
     'icon' => 'sicon-team-perm',
     'archive' => false,
-    'fields' => array(
-        'name' => array(
+    'fields' => [
+        'name' => [
             'name' => 'name',
             'vname' => 'LBL_PRIMARY_TEAM_NAME',
             'type' => 'name',
             'dbType' => 'varchar',
             'len' => 128,
-            'fields' => array(0 => 'name', 1 => 'name_2'),
-        ),
-        'name_2' => array(
+            'fields' => [0 => 'name', 1 => 'name_2'],
+        ],
+        'name_2' => [
             'name' => 'name_2',
             'vname' => 'LBL_NAME_2',
             'type' => 'name',
             'dbType' => 'varchar',
             'len' => 128,
             'reportable' => false,
-        ),
-        'associated_user_id' => array(
+        ],
+        'associated_user_id' => [
             'name' => 'associated_user_id',
             'type' => 'id',
             'reportable' => false,
-        ),
-        'private' => array(
+        ],
+        'private' => [
             'name' => 'private',
             'vname' => 'LBL_PRIVATE',
             'type' => 'bool',
             'default' => 0,
-        ),
-        'users' => array(
+        ],
+        'users' => [
             'name' => 'users',
             'type' => 'link',
             'relationship' => 'team_memberships',
             'source' => 'non-db',
             'vname' => 'LBL_USERS',
-        ),
-        'teams_sets' => array(
+        ],
+        'teams_sets' => [
             'name' => 'teams_sets',
             'type' => 'link',
             'relationship' => 'team_sets_teams',
@@ -59,8 +59,8 @@ $dictionary['Team'] = array(
             'vname' => 'LBL_TEAMS',
             'studio' => false,
             'duplicate_merge' => 'disabled',
-        ),
-        'activities_teams' => array(
+        ],
+        'activities_teams' => [
             'name' => 'activities_teams',
             'type' => 'link',
             'relationship' => 'activities_teams',
@@ -68,101 +68,101 @@ $dictionary['Team'] = array(
             'module' => 'Activities',
             'bean_name' => 'Activity',
             'source' => 'non-db',
-        ),
-    ),
-    'acls' => array(
-        'SugarACLAdminOnly' => array(
+        ],
+    ],
+    'acls' => [
+        'SugarACLAdminOnly' => [
             'adminFor' => 'Users',
-            'allowUserRead' => true
-        ),
-    ),
-    'indices' => array(
-        array(
+            'allowUserRead' => true,
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'idx_team_del',
             'type' => 'index',
-            'fields' => array('name'),
-        ),
-        array(
+            'fields' => ['name'],
+        ],
+        [
             'name' => 'idx_team_del_name',
             'type' => 'index',
-            'fields' => array('deleted', 'name'),
-        ),
-    ),
-);
+            'fields' => ['deleted', 'name'],
+        ],
+    ],
+];
 
-VardefManager::createVardef('Teams', 'Team', array('basic'));
+VardefManager::createVardef('Teams', 'Team', ['basic']);
 
-$dictionary['TeamMembership'] = array(
+$dictionary['TeamMembership'] = [
     'table' => 'team_memberships',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
             'required' => true,
-        ),
-        'team_id' => array(
+        ],
+        'team_id' => [
             'name' => 'team_id',
             'type' => 'id',
-        ),
-        'user_id' => array(
+        ],
+        'user_id' => [
             'name' => 'user_id',
             'type' => 'id',
-        ),
-        'explicit_assign' => array(
+        ],
+        'explicit_assign' => [
             'name' => 'explicit_assign',
             'type' => 'bool',
             'len' => 1,
             'default' => 0,
             'required' => true,
-        ),
-        'implicit_assign' => array(
+        ],
+        'implicit_assign' => [
             'name' => 'implicit_assign',
             'type' => 'bool',
             'len' => 1,
             'default' => 0,
             'required' => true,
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => 1,
             'default' => 0,
-        ),
-    ),
-    'acls' => array(
-        'SugarACLAdminOnly' => array(
+        ],
+    ],
+    'acls' => [
+        'SugarACLAdminOnly' => [
             'adminFor' => 'Users',
             'allowUserRead' => true,
-        )
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'team_membershipspk',
             'type' => 'primary',
-            'fields' => array('id'),
-        ),
-        array(
+            'fields' => ['id'],
+        ],
+        [
             'name' => 'idx_team_membership',
             'type' => 'index',
-            'fields' => array('user_id', 'team_id'),
-        ),
-        array(
+            'fields' => ['user_id', 'team_id'],
+        ],
+        [
             'name' => 'idx_del_team_user',
             'type' => 'index',
-            'fields' => array('deleted', 'team_id', 'user_id'),
-        ),
-        array(
+            'fields' => ['deleted', 'team_id', 'user_id'],
+        ],
+        [
             'name' => 'idx_teammemb_team_user',
             'type' => 'alternate_key',
-            'fields' => array('team_id', 'user_id'),
-        ),
-    ),
-    'relationships' => array(
-        'team_memberships' => array(
+            'fields' => ['team_id', 'user_id'],
+        ],
+    ],
+    'relationships' => [
+        'team_memberships' => [
             'lhs_module' => 'Teams',
             'lhs_table' => 'teams',
             'lhs_key' => 'id',
@@ -173,54 +173,54 @@ $dictionary['TeamMembership'] = array(
             'join_table' => 'team_memberships',
             'join_key_lhs' => 'team_id',
             'join_key_rhs' => 'user_id',
-        ),
-    ),
-);
+        ],
+    ],
+];
 
-$dictionary['TeamSet'] = array(
+$dictionary['TeamSet'] = [
     'table' => 'team_sets',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
             'required' => true,
-        ),
-        'name' => array(
+        ],
+        'name' => [
             'name' => 'name',
             'vname' => 'LBL_NAME',
             'type' => 'name',
             'dbType' => 'varchar',
             'len' => 128,
-        ),
-        'team_md5' => array(
+        ],
+        'team_md5' => [
             'name' => 'team_md5',
             'vname' => 'LBL_NAME',
             'type' => 'name',
             'dbType' => 'varchar',
             'len' => 32,
-        ),
-        'team_count' => array(
+        ],
+        'team_count' => [
             'name' => 'team_count',
             'type' => 'int',
             'default' => 0,
-        ),
-        'primary_team_id' => array(
+        ],
+        'primary_team_id' => [
             'name' => 'primary_team_id',
             'type' => 'id',
             'required' => true,
             'source' => 'non-db',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => 1,
             'default' => 0,
-        ),
-        'created_by' => array(
+        ],
+        'created_by' => [
             'name' => 'created_by',
             'rname' => 'user_name',
             'id_name' => 'modified_user_id',
@@ -230,8 +230,8 @@ $dictionary['TeamSet'] = array(
             'isnull' => 'false',
             'dbType' => 'id',
             'reportable' => true,
-        ),
-        'teams' => array(
+        ],
+        'teams' => [
             'name' => 'teams',
             'type' => 'link',
             'relationship' => 'team_sets_teams',
@@ -239,43 +239,43 @@ $dictionary['TeamSet'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_ACCOUNT',
             'duplicate_merge' => 'disabled',
-        ),
-    ),
-    'acls' => array(
-        'SugarACLAdminOnly' => array(
+        ],
+    ],
+    'acls' => [
+        'SugarACLAdminOnly' => [
             'adminFor' => 'Users',
             'allowUserRead' => true,
-        )
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'team_setspk',
             'type' => 'primary',
-            'fields' => array('id'),
-        ),
-        array(
+            'fields' => ['id'],
+        ],
+        [
             'name' => 'idx_team_sets_md5',
             'type' => 'index',
-            'fields' => array('team_md5'),
-        ),
-    ),
-);
+            'fields' => ['team_md5'],
+        ],
+    ],
+];
 
-$dictionary['TeamSetModule'] = array(
+$dictionary['TeamSetModule'] = [
     'table' => 'team_sets_modules',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
             'required' => true,
-        ),
-        'team_set_id' => array(
+        ],
+        'team_set_id' => [
             'name' => 'team_set_id',
             'type' => 'id',
             'isnull' => false,
             'required' => true,
-        ),
-        'module_table_name' => array(
+        ],
+        'module_table_name' => [
             'name' => 'module_table_name',
             'vname' => 'LBL_NAME',
             'type' => 'name',
@@ -283,30 +283,30 @@ $dictionary['TeamSetModule'] = array(
             'len' => 128,
             'isnull' => false,
             'required' => true,
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => 1,
             'default' => 0,
-        ),
-    ),
-    'acls' => array(
-        'SugarACLAdminOnly' => array(
+        ],
+    ],
+    'acls' => [
+        'SugarACLAdminOnly' => [
             'adminFor' => 'Users',
             'allowUserRead' => true,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'team_sets_modulespk',
             'type' => 'primary',
-            'fields' => array('id'),
-        ),
-        array(
+            'fields' => ['id'],
+        ],
+        [
             'name' => 'idx_team_sets_modules',
             'type' => 'index',
-            'fields' => array('team_set_id'),
-        ),
-    ),
-);
+            'fields' => ['team_set_id'],
+        ],
+    ],
+];

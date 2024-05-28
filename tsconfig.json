@@ -6,11 +6,7 @@
         "experimentalDecorators": true,
         "allowJs": true
     },
-    "extends": "./node_modules/@sugarcrm/seedbed/tsconfig.json",
     "exclude": [
         "./node_modules"
-    ],
-    "include": [
-        "tests/end-to-end/**/*.ts"
     ]
 }

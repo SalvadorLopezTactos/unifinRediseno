@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Planificación de informes',
     'LBL_MODULE_NAME_SINGULAR' => 'Planificación de informes',
     'LBL_REPORT_NAME' => 'Informe',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Tipo(s) de Archivo',
     'LBL_EMBED_REPORT' => 'Insertar informe en el correo electrónico',
     'LBL_EMBED_REPORT_INFO' => 'Nota: Si el informe supera las 200 filas, lo adjuntaremos como archivo CSV.',
-);
+];

@@ -9,15 +9,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const Currency = require('utils/currency');
-const DateUtils = require('utils/date');
-const Field = require('view/field');
-const Utils = require('utils/utils');
-const Language = require('core/language');
-const Layout = require('view/layout');
-const Template = require('view/template');
-const View = require('view/view');
-const ViewManager = require('view/view-manager');
+const Currency = require('../utils/currency');
+const DateUtils = require('../utils/date');
+const Field = require('./field');
+const Utils = require('../utils/utils');
+const Language = require('../core/language');
+const Layout = require('./layout');
+const Template = require('./template');
+const View = require('./view');
+const ViewManager = require('./view-manager');
 
 /**
  * Handlebars helpers.
@@ -28,10 +28,10 @@ const ViewManager = require('view/view-manager');
  * Example:
  * ```
  * // to register all the helpers at once
- * Handlebars.registerHelper(require('view/hbs-helpers'));
+ * Handlebars.registerHelper(require('./hbs-helpers'));
  *
  * // to register a single helper
- * const HbsHelpers = require('view/hbs-helpers');
+ * const HbsHelpers = require('./hbs-helpers');
  * Handlebars.registerHelper('fieldOfType', HbsHelpers.fieldOfType);
  * ```
  *

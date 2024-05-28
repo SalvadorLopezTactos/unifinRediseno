@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint\Iss;
 
 use Psr\Log\LoggerAwareInterface;
@@ -71,7 +72,7 @@ class Manager implements LoggerAwareInterface
      */
     public function sendCommands($commands)
     {
-        if ((is_countable($commands) ? count($commands) : 0) == 0) {
+        if (safeCount($commands) == 0) {
             // nothing to do this round
             return;
         }

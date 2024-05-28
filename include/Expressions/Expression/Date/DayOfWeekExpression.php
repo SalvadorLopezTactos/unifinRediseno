@@ -17,16 +17,17 @@
  */
 class DayOfWeekExpression extends NumericExpression
 {
-	/**
-	 * Returns day of week for the date.
-	 */
-	function evaluate() {
-		$params = DateExpression::parse($this->getParameters()->evaluate());
-        if(!$params) {
+    /**
+     * Returns day of week for the date.
+     */
+    public function evaluate()
+    {
+        $params = DateExpression::parse($this->getParameters()->evaluate());
+        if (!$params) {
             return false;
         }
-		return $params->day_of_week;
-	}
+        return $params->day_of_week;
+    }
 
 
     /**
@@ -52,31 +53,35 @@ class DayOfWeekExpression extends NumericExpression
 EOQ;
     }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return "dayofweek";
-	}
-
-	/**
-	 * Returns the maximum number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 1;
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return 'dayofweek';
+    }
 
     /**
-	 * All parameters have to be a date.
-	 */
-    static function getParameterTypes() {
-		return array(AbstractExpression::$DATE_TYPE);
-	}
+     * Returns the maximum number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 1;
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * All parameters have to be a date.
+     */
+    public static function getParameterTypes()
+    {
+        return [AbstractExpression::$DATE_TYPE];
+    }
+
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 }

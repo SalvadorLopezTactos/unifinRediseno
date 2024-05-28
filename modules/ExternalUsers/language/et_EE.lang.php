@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => 'Juhtumid',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Müügivõimalused',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Pakkumused',
-    'LBL_NOTES'=>'Märkused',
+    'LBL_NOTES' => 'Märkused',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => 'Väliskasutajate kirjete armatuurlaud',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Väliskasutaja ajaskaala',
 ];

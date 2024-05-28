@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => 'ケース',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => '商談',
     'LBL_QUOTES_SUBPANEL_TITLE' => '見積もり',
-    'LBL_NOTES'=>'メモ',
+    'LBL_NOTES' => 'メモ',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => '外部ユーザレコードダッシュボード',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '外部ユーザーのタイムライン',
 ];

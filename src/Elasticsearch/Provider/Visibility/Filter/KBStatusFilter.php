@@ -26,7 +26,7 @@ class KBStatusFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    public function buildFilter(array $options = array())
+    public function buildFilter(array $options = [])
     {
         $field = $options['module'] . Mapping::PREFIX_SEP . 'status.kbvis';
         return new \Elastica\Query\Terms($field, $options['published_statuses']);

@@ -136,7 +136,7 @@ div {
     .relate-field-container {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
 
       .parent_avatar {
@@ -262,6 +262,76 @@ div {
       &:hover {
         .date-name-link {
           margin-right: -32px;
+        }
+      }
+    }
+  }
+}
+
+// Activity Timeline dashlet styling
+.activity-timeline {
+  .relate-field-container {
+    display: flex;
+    padding: 0;
+
+    .focus-icon-container {
+      margin-top: 0.125rem;
+    }
+
+    .focus-icon {
+      padding: 0;
+    }
+  }
+
+  .activity-card-header {
+    .panel-header {
+      .relate-field-container {
+        .focus-icon-container {
+          margin-left: 0.625rem;
+          margin-right: 2rem;
+        }
+      }
+
+      &:hover {
+        .focus-icon-container:not(.hide) {
+          display: block;
+        }
+      }
+    }
+
+    .panel-users {
+      .relate-field-container {
+        .focus-icon-container {
+          flex: 0 0 1em;
+          margin-top: 0.25rem;
+          width: 0;
+        }
+
+        &:hover {
+          .focus-icon-container:not(.hide) {
+            display: block;
+          }
+        }
+      }
+
+      .user-value {
+        .focus-icon-container {
+          margin-top: 0.125rem;
+        }
+      }
+    }
+  }
+
+  .activity-card-content {
+    .relate-field-container {
+      .focus-icon-container {
+        flex: 0 0 1em;
+        width: 0;
+      }
+
+      &:hover {
+        .focus-icon-container:not(.hide) {
+          display: block;
         }
       }
     }

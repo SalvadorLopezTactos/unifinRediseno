@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -23,7 +25,9 @@ class CommentLogApiHelper extends SugarBeanApiHelper
     public function formatForApi(SugarBean $bean, array $fieldList = [], array $options = [])
     {
         $data = parent::formatForApi($bean, $fieldList, $options);
-        $data['entry'] = $this->formatEntryForApi($data['entry']);
+        if (safeInArray('entry', $fieldList)) {
+            $data['entry'] = $this->formatEntryForApi($data['entry']);
+        }
         return $data;
     }
 

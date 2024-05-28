@@ -37,7 +37,15 @@ class SugarUpgradeEncodeUploadFiles extends UpgradeScript
                 }
 
                 $path = $fileInfo->getPathname();
-                $encPath = $fileConverter->convert($path);
+
+                try {
+                    //We can skip file from converting process. It won't influence on further Sugar work
+                    $encPath = $fileConverter->convert($path);
+                } catch (SugarException $exception) {
+                    $GLOBALS['log']->fatal(self::class . ': ' . $exception->getMessage());
+
+                    continue;
+                }
 
                 rename($encPath, $path);
             }

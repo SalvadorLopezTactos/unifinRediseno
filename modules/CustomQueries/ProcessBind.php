@@ -10,54 +10,47 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
- * Description:  
+ * Description:
  ********************************************************************************/
-
-
-
-
 
 
 $focus = BeanFactory::newBean('CustomQueries');
 
-if(!empty($_REQUEST['record']) && $_REQUEST['record']!=""){
-	$focus->retrieve($_REQUEST['record']);
-	$temp_select = $focus->repair_column_binding();
-	unset($temp_select['Remove']);
-}	
+if (!empty($_REQUEST['record']) && $_REQUEST['record'] != '') {
+    $focus->retrieve($_REQUEST['record']);
+    $temp_select = $focus->repair_column_binding();
+    unset($temp_select['Remove']);
+}
 
 
+foreach ($_SESSION['old_column_array'] as $key => $value) {
+    //eliminate direct matches
+    if (!empty($temp_select[$value])) {
+        unset($temp_select[$value]);
+        //end eliminate direct matches
+    }
 
-foreach($_SESSION['old_column_array'] as $key => $value){
-	
-		//eliminate direct matches
-		if(!empty($temp_select[$value])){
-			unset($temp_select[$value]);
-		//end eliminate direct matches
-		}
-		
-	//check to see if this post select is available
-	$temp_var = "column_".$key;
-	if(!empty($_POST[$temp_var])){
-		//action exists on this old column name
-		//run action on this var
-		if($_POST[$temp_var]=="Remove"){
-		//remove layout data for this old column
-		
-			$focus->remove_layout($value);
-		} else {
-		//modify this old_column's layout data into the key column data
-			$focus->modify_layout($value, $_POST[$temp_var]);
+    //check to see if this post select is available
+    $temp_var = 'column_' . $key;
+    if (!empty($_POST[$temp_var])) {
+        //action exists on this old column name
+        //run action on this var
+        if ($_POST[$temp_var] == 'Remove') {
+            //remove layout data for this old column
 
-		//remove from the temp_select array
-		unset($temp_select[$_POST[$temp_var]]);		
-		//end ifelse remove or edit old column
-		}
-	//if this was an option selected.
-	}		
+            $focus->remove_layout($value);
+        } else {
+            //modify this old_column's layout data into the key column data
+            $focus->modify_layout($value, $_POST[$temp_var]);
 
-//end foreach
+            //remove from the temp_select array
+            unset($temp_select[$_POST[$temp_var]]);
+            //end ifelse remove or edit old column
+        }
+        //if this was an option selected.
+    }
+
+    //end foreach
 }
 
 
@@ -65,18 +58,24 @@ foreach($_SESSION['old_column_array'] as $key => $value){
 //need to then be added as layout records for all data sets that use this query
 //with custom_layout enable
 
-foreach($temp_select as $key => $value){
-
-	$focus->add_column_to_layouts($value);
-
+foreach ($temp_select as $key => $value) {
+    $focus->add_column_to_layouts($value);
 }
 
 $return_id = $focus->id;
-if(isset($_REQUEST['return_module']) && $_REQUEST['return_module'] != "") $return_module = $_REQUEST['return_module'];
-else $return_module = "CustomQueries";
-if(isset($_REQUEST['return_action']) && $_REQUEST['return_action'] != "") $return_action = $_REQUEST['return_action'];
-else $return_action = "DetailView";
-if(isset($_REQUEST['return_id']) && $_REQUEST['return_id'] != "") $return_id = $_REQUEST['return_id'];
+if (isset($_REQUEST['return_module']) && $_REQUEST['return_module'] != '') {
+    $return_module = $_REQUEST['return_module'];
+} else {
+    $return_module = 'CustomQueries';
+}
+if (isset($_REQUEST['return_action']) && $_REQUEST['return_action'] != '') {
+    $return_action = $_REQUEST['return_action'];
+} else {
+    $return_action = 'DetailView';
+}
+if (isset($_REQUEST['return_id']) && $_REQUEST['return_id'] != '') {
+    $return_id = $_REQUEST['return_id'];
+}
 
 $query_data = [
     'action' => $return_action,
@@ -91,7 +90,7 @@ if (!empty($_REQUEST['edit'])) {
 
 //cleanup the session variable we have been using to pass the old_column_array information
 unset($_SESSION['old_column_array']);
-$GLOBALS['log']->debug("Process Bind record with id of ".$return_id);
+$GLOBALS['log']->debug('Process Bind record with id of ' . $return_id);
 
 $location = 'index.php?' . http_build_query($query_data);
 header("Location: $location");

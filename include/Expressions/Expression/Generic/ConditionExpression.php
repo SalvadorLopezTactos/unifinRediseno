@@ -22,7 +22,7 @@ class ConditionExpression extends GenericExpression
     /**
      * Returns the entire enumeration bare.
      */
-    function evaluate()
+    public function evaluate()
     {
         $params = $this->getParameters();
         $cond = $params[0]->evaluate();
@@ -37,7 +37,7 @@ class ConditionExpression extends GenericExpression
     /**
      * Returns the JS Equivalent of the evaluate function.
      */
-    static function getJSEvaluate()
+    public static function getJSEvaluate()
     {
         return <<<EOQ
             var SEE = SUGAR.expressions.Expression,
@@ -55,27 +55,27 @@ EOQ;
      * Returns the opreation name that this Expression should be
      * called by.
      */
-    static function getOperationName()
+    public static function getOperationName()
     {
-        return array('ifElse', 'cond');
+        return ['ifElse', 'cond'];
     }
 
     /**
      * The first parameter is a number and the second is the list.
      */
-    static function getParameterTypes()
+    public static function getParameterTypes()
     {
-        return array(
+        return [
             AbstractExpression::$BOOLEAN_TYPE,
             AbstractExpression::$GENERIC_TYPE,
-            AbstractExpression::$GENERIC_TYPE
-        );
+            AbstractExpression::$GENERIC_TYPE,
+        ];
     }
 
     /**
      * Returns the maximum number of parameters needed.
      */
-    static function getParamCount()
+    public static function getParamCount()
     {
         return 3;
     }
@@ -83,7 +83,7 @@ EOQ;
     /**
      * Returns the String representation of this Expression.
      */
-    function toString()
+    public function toString()
     {
     }
 }

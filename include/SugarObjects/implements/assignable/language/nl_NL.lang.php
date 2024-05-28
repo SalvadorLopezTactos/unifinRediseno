@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-'LBL_ASSIGNED_TO_ID'=>'Toegewezen aan ID',
-'LBL_ASSIGNED_TO_NAME' => 'Toegewezen aan',
-);
+$mod_strings = [
+    'LBL_ASSIGNED_TO_ID' => 'Toegewezen aan ID',
+    'LBL_ASSIGNED_TO_NAME' => 'Toegewezen aan',
+];

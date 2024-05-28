@@ -22,6 +22,7 @@
         'change [data-fieldname=recordView]': 'changeRecordView',
         'change [data-fieldname=recordViewDashlet]': 'changeRecordViewDashlet',
         'change [data-fieldname=subpanels]': 'changeSubpanels',
+        'change [data-fieldname=focusDashboardHeader]': 'changeSetting',
     },
 
     /**
@@ -68,6 +69,7 @@
                 listView: false,
                 recordView: false,
                 recordViewDashlet: false,
+                focusDashboardHeader: false,
                 subpanels: false
             };
         }
@@ -138,6 +140,18 @@
      */
     changeRecordViewDashlet: function(e) {
         this._actionMenu.recordViewDashlet = e.currentTarget.checked;
+
+        this._updateActionMenuSettings();
+    },
+
+    /**
+     * Update setting.
+     *
+     * @param {UIEvent} e
+     */
+    changeSetting: function(e) {
+        let settingName = $(e.currentTarget).data('fieldname');
+        this._actionMenu[settingName] = e.currentTarget.checked;
 
         this._updateActionMenuSettings();
     },

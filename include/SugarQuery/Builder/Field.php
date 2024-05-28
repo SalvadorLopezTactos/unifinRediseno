@@ -15,7 +15,6 @@
  * SugarQuery_Builder_Field
  * @api
  */
-
 class SugarQuery_Builder_Field
 {
     /**
@@ -60,7 +59,7 @@ class SugarQuery_Builder_Field
     /**
      * @var array the field defs
      */
-    public $def = array();
+    public $def = [];
 
     /**
      * @var bool future use, is this field FTS enabled
@@ -94,8 +93,8 @@ class SugarQuery_Builder_Field
         if ($query->getFromBean()) {
             $this->setupField($query);
             $this->shouldMarkNonDb();
-            }
         }
+    }
 
     /**
      * Setup the field parts
@@ -108,7 +107,7 @@ class SugarQuery_Builder_Field
         $this->def = $this->getFieldDef();
 
         // if its a linking table let it slide
-        if (!empty($this->query->join[$this->table]->options['linkingTable'])){
+        if (!empty($this->query->join[$this->table]->options['linkingTable'])) {
             $this->nonDb = 0;
         } elseif (empty($this->def) && $this->field != 'id_c' && $this->field != '*') {
             $this->markNonDb();
@@ -130,7 +129,7 @@ class SugarQuery_Builder_Field
         $bean = $this->query->getFromBean();
         $this->table = $bean->getTableName();
 
-        $def = array();
+        $def = [];
 
         if (strstr($this->field, '.')) {
             [$this->table, $this->field] = explode('.', $this->field);
@@ -143,8 +142,7 @@ class SugarQuery_Builder_Field
             $this->table = $this->query->getFromAlias();
             $def = $bean->field_defs[$this->field];
             $this->moduleName = $bean->module_name;
-        }
-        else if ($bean && ($bean->getTableName().'_cstm') == $this->table && !empty($bean->field_defs[$this->field])) {
+        } elseif ($bean && ($bean->getTableName() . '_cstm') == $this->table && !empty($bean->field_defs[$this->field])) {
             $def = $bean->field_defs[$this->field];
             $this->moduleName = $bean->module_name;
         } else {
@@ -177,7 +175,7 @@ class SugarQuery_Builder_Field
         $defs = empty($bean->field_defs) ? VardefManager::getFieldDefs($this->moduleName) : $bean->field_defs;
         if (!empty($defs)) {
             // Initialize def for now, in case $this->field isn't in field_defs
-            $def = array();
+            $def = [];
             if (isset($defs[$this->field])) {
                 $def = $defs[$this->field];
             }
@@ -186,9 +184,9 @@ class SugarQuery_Builder_Field
                 $this->custom = true;
                 $this->custom_bean_table = $bean->get_custom_table_name();
                 $this->bean_table = $bean->getTableName();
-                if (substr($this->table, -5) != "_cstm") {
+                if (substr($this->table, -5) != '_cstm') {
                     $this->standardTable = $this->table;
-                    $this->table = $this->table . "_cstm";
+                    $this->table = $this->table . '_cstm';
                 } else {
                     $this->standardTable = substr($this->table, 0, -5);
                 }
@@ -207,14 +205,14 @@ class SugarQuery_Builder_Field
     public function getJoin()
     {
         $jta = false;
-        if(!isset($this->def['source']) || $this->def['source'] == 'db') {
+        if (!isset($this->def['source']) || $this->def['source'] == 'db') {
             return false;
         }
         $related = false;
         $bean = $this->query->getFromBean();
         if (isset($this->def['type'])) {
             if ($bean instanceof SugarBean) {
-                $related = in_array($this->def['type'], $bean::$relateFieldTypes);
+                $related = safeInArray($this->def['type'], $bean::$relateFieldTypes);
             } else {
                 $related = ($this->def['type'] == 'related');
             }
@@ -224,12 +222,12 @@ class SugarQuery_Builder_Field
                 // For some reason the full_name field has 'link' => true
                 && isset($this->def['link']) && $this->def['link'] !== true)
         ) {
-            $params = array(
+            $params = [
                 'joinType' => 'LEFT',
-            );
+            ];
             if (!isset($this->def['link'])) {
                 if (!isset($this->def['id_name']) || !isset($this->def['module'])) {
-                    throw new SugarQueryException("No ID field Name or Module Name");
+                    throw new SugarQueryException('No ID field Name or Module Name');
                 }
                 // we may need to put on our detective hat and see if we can
                 // hunt down a relationship
@@ -249,11 +247,11 @@ class SugarQuery_Builder_Field
                     }
                     //Now actually join the related table
                     $jta = $this->query->getJoinTableAlias($this->def['name']);
-                    $this->query->joinTable($farBean->table_name, array(
+                    $this->query->joinTable($farBean->table_name, [
                         'joinType' => 'LEFT',
                         'bean' => $farBean,
                         'alias' => $jta,
-                    ))
+                    ])
                         ->addLinkName($this->def['id_name'])
                         ->on()->equalsField("{$idField->table}.{$this->def['id_name']}", "{$jta}.id")
                         ->equals("{$jta}.deleted", 0);
@@ -275,7 +273,7 @@ class SugarQuery_Builder_Field
                 }
                 $join = $this->query->join($this->def['link'], $params);
                 $jta = $join->joinName();
-            } elseif(!empty($this->def['link']) && $this->query->getJoinAlias($this->def['link'])) {
+            } elseif (!empty($this->def['link']) && $this->query->getJoinAlias($this->def['link'])) {
                 $jta = $this->query->getJoinAlias($this->def['link']);
             }
 
@@ -310,10 +308,11 @@ class SugarQuery_Builder_Field
      */
     public function shouldMarkNonDb()
     {
-        if ((isset($this->def['source'])
+        if ((
+            isset($this->def['source'])
                 && ($this->def['source'] === 'non-db'
-                || $this->def['source'] === 'function')
-            )
+                    || $this->def['source'] === 'function')
+        )
             && empty($this->def['rname_link'])
             && empty($this->def['db_concat_fields'])
         ) {

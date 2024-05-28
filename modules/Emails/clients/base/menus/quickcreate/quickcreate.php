@@ -11,8 +11,8 @@
  */
 
 $module_name = 'Emails';
-$viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
+$viewdefs[$module_name]['base']['menu']['quickcreate'] = [
     'layout' => 'compose',
     'visible' => true,
     'order' => 6,
-);
+];

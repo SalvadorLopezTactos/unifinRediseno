@@ -12,18 +12,20 @@
 --}}
 {{#if value}}
     {{#if ../ellipsis}}
-        <div class="ellipsis_inline relate-field-container" data-placement="bottom" title="{{value}}">
+        <div class="ellipsis_inline relate-field-container" data-bs-placement="bottom" title="{{value}}">
     {{/if}}
     {{#if href}}
-        <a class="ellipsis_inline" href="{{#if def.events}}javascript:void(0);{{else}}{{href}}{{/if}}"
-            data-link-target="{{linkTarget}}" data-module="{{module}}" data-model-id="{{modelId}}"
-            data-placement="bottom" title="{{value}}"
-        >
-            {{value}}
-        </a>
-        {{partial 'focus-icon' this this}}
+        {{#if value}}
+            <a class="ellipsis_inline {{module}}" href="{{#if def.events}}javascript:void(0);{{else}}{{href}}{{/if}}"
+                data-link-target="{{linkTarget}}" data-module="{{module}}" data-model-id="{{modelId}}"
+                data-bs-placement="bottom" title="{{value}}"
+            >
+                {{value}}
+            </a>
+            {{partial 'focus-icon' this this}}
+        {{/if}}
     {{else}}
-        <span class="ellipsis_inline" data-placement="bottom" title="{{value}}">
+        <span class="ellipsis_inline" data-bs-placement="bottom" title="{{value}}">
             {{value}}
         </span>
     {{/if}}

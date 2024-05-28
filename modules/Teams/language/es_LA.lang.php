@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Debe especificar un número de registro para agregar a este usuario al equipo.',
     'ERR_DUP_NAME' => 'El Nombre de Equipo ya existe, por favor elija otro distinto.',
     'ERR_DELETE_RECORD' => 'Debe especificar un número de registro para eliminar este equipo.',
@@ -66,17 +66,17 @@ $mod_strings = array(
     'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
 Deshabilitar los permisos de trabajo en equipo de un módulo anulará cualquier dato asociado con los permisos de trabajo en equipo de ese módulo, incluyendo las definiciones de proceso o los procesos que utilicen la función. Esto incluye los roles que utilicen la opción "equipo de Propietario y Seleccionado" de dicho módulo y cualquier dato de los permisos de trabajo en equipo de los registros del módulo. También recomendamos que utilice Reparación y reconstrucción Rápida para limpiar la caché del sistema luego de deshabilitar los permisos de trabajo en equipo de cualquier módulo.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Advertencia:</strong> Deshabilitar los permisos de trabajo en equipo de un módulo anulará cualquier dato asociado con los permisos de trabajo en equipo de ese módulo, incluyendo las definiciones de proceso o los procesos que utilicen la función. Esto incluye los roles que utilicen la opción "equipo de Propietario y Seleccionado" de dicho módulo y cualquier dato de los permisos de trabajo en equipo de los registros del módulo. También recomendamos que utilice Reparación y reconstrucción Rápida para limpiar la caché del sistema luego de deshabilitar los permisos de trabajo en equipo de cualquier módulo.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Deshabilitar los permisos de trabajo en equipo de un módulo anulará cualquier dato asociado con los permisos de trabajo en equipo de ese módulo, incluyendo las definiciones de proceso o los procesos que utilicen la función. Esto incluye los roles que utilicen la opción "equipo de Propietario y Seleccionado" de dicho módulo y cualquier dato de los permisos de trabajo en equipo de los registros del módulo. También recomendamos que utilice Reparación Rápida y la herramienta de reconstrucción para limpiar la caché del sistema luego de deshabilitar los permisos de trabajo en equipo de cualquier módulo. Si no tiene acceso para utilizar Reparación y Reconstrucción rápida, contacte a un administrador con acceso al menú Reparar.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Advertencia:</strong> Deshabilitar los permisos de trabajo en equipo de un módulo anulará cualquier dato asociado con los permisos de trabajo en equipo de ese módulo, incluyendo las definiciones de proceso o los procesos que utilicen la función. Esto incluye los roles que utilicen la opción "equipo de Propietario y Seleccionado" de dicho módulo y cualquier dato de los permisos de trabajo en equipo de los registros del módulo. También recomendamos que utilice Reparación Rápida y la herramienta de reconstrucción para limpiar la caché del sistema luego de deshabilitar los permisos de trabajo en equipo de cualquier módulo. Si no tiene acceso para utilizar Reparación y Reconstrucción rápida, contacte a un administrador con acceso al menú Reparar.
 STR
-,
-);
+    ,
+];

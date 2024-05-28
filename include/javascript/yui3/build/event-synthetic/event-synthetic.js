@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('event-synthetic', function (Y, NAME) {
 
 /**
@@ -849,4 +842,4 @@ Y.Event.define = function (type, config, force) {
 };
 
 
-}, '3.15.0', {"requires": ["node-base", "event-custom-complex"]});
+}, '3.18.1', {"requires": ["node-base", "event-custom-complex"]});

@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -33,7 +34,7 @@ class SugarUpgradeRepairDb2Sequences extends UpgradeScript
         while ($row = $this->db->fetchByAssoc($res)) {
             $this->log("Altering sequence {$row['seqname']} using NO CACHE");
             $tableNameQuoted = $this->db->getValidDBName($row['seqname'], false, 'table');
-            $alter = 'ALTER SEQUENCE '.$tableNameQuoted.' NO CACHE';
+            $alter = 'ALTER SEQUENCE ' . $tableNameQuoted . ' NO CACHE';
 
             $this->db->query($alter, false, "Error altering sequence {$row['seqname']} using NO CACHE");
         }

@@ -11,18 +11,18 @@
  */
 
 
-$mod_strings = array (
-    'LBL_OAUTH_REQUEST' => "Nõua luba",
-    'LBL_OAUTH_AUTHORIZE' => "Luba luba",
-	'LBL_OAUTH_CONSUMERREQ' => "Luba luba kliendilt <b>%s</b>?",
-    'LBL_OAUTH_ROLE' => "Loa roll",
-	'LBL_OAUTH_VALIDATION' => "Kontrollkood",
-  	'LBL_ASSIGNED_TO_NAME' => 'Kasutaja',
-  	'LBL_ID' => 'ID',
+$mod_strings = [
+    'LBL_OAUTH_REQUEST' => 'Nõua luba',
+    'LBL_OAUTH_AUTHORIZE' => 'Luba luba',
+    'LBL_OAUTH_CONSUMERREQ' => 'Luba luba kliendilt <b>%s</b>?',
+    'LBL_OAUTH_ROLE' => 'Loa roll',
+    'LBL_OAUTH_VALIDATION' => 'Kontrollkood',
+    'LBL_ASSIGNED_TO_NAME' => 'Kasutaja',
+    'LBL_ID' => 'ID',
     'LBL_STATUS' => 'Olek',
     'LBL_TS' => 'Ajatempel',
     'LBL_LIST_DELETE' => 'Kustuta luba',
     'LBL_CONSUMER' => 'Tarbija nimi',
     'LBL_OAUTH_DISABLED' => 'OAuth-tugi pole lubatud. PHP oauth laiend võib olla puudu. Võtke ühendust oma administraatoriga.',
     'LBL_CONTACTS' => 'Kontaktisiku nimi',
-);
+];

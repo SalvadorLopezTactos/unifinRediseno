@@ -14,7 +14,7 @@ function removeACLActions($current_user, $beanList, $beanFiles, $silent)
 {
     $actionarr = ACLAction::getDefaultActions();
     if (is_admin($current_user)) {
-        $arr = array();
+        $arr = [];
         foreach ($actionarr as $actionobj) {
             if (empty($actionobj->category)) {
                 continue;
@@ -33,5 +33,3 @@ function removeACLActions($current_user, $beanList, $beanFiles, $silent)
         }
     }
 }
-
-?>

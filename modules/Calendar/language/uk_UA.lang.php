@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Календар',
     'LBL_MODULE_NAME_SINGULAR' => 'Календар',
     'LBL_MODULE_TITLE' => 'Календар',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Налаштування',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Відобразити тимчасові проміжки при огляді дня і тижня:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Час початку:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Час закінчення:',
+    'LBL_SETTINGS_TIME_STARTS' => 'Час початку:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Час закінчення:',
     'LBL_SETTINGS_CALLS_SHOW' => 'Показати дзвінки:',
     'LBL_SETTINGS_TASKS_SHOW' => 'Показати задачі:',
 
@@ -155,8 +155,8 @@ $mod_strings = array (
     'LBL_RECORD_TEMPLATES_TAB' => 'Шаблони',
     'LBL_RECORD_OTHER_TAB' => 'Інше',
     'LBL_EVENT_START' => 'Початок',
-    'LBL_EVENT_END' => 'Завершення',
-    'LBL_EVENT_END' => 'Завершення',
+    'LBL_EVENT_END' => 'Завершити',
+    'LBL_EVENT_END' => 'Завершити',
     'LBL_DAY_EVENT_TEMPLATE' => 'Подія дня',
     'LBL_WEEK_EVENT_TEMPLATE' => 'Подія тижня',
     'LBL_MONTH_EVENT_TEMPLATE' => 'Подія місяця',
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Створити календар',
     'LNK_CALENDAR_LIST' => 'Переглянути календарі',
     'LNK_CALENDAR_LEGACY' => 'Застарілий календар',
-    'LBL_IMPORT_CALENDAR'=> 'Імпорт календаря',
+    'LBL_IMPORT_CALENDAR' => 'Імпорт календаря',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Мітка часу події',
     'LBL_INSERTFIELD' => 'Вставити поле',
     'LBL_EVENT_START_ERROR' => 'Виберіть дату початку',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Виберіть календар',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Не вдалося зберегти календарі.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Нд',
             'Пн',
             'Вт',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Чт',
             'Пт',
             'Сб',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Неділя',
             'Понеділок',
             'Вівторок',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Четвер',
             'П&#39;ятниця',
             'Субота',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Січ.',
             'Лют.',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Жовт.',
             'Лист.',
             'Груд.',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Січень',
             'Лютий',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Жовтень',
             'Листопад',
             'Грудень',
-        ),
-);
+        ],
+];

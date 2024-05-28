@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Zināšanu bāze',
     'LBL_MODULE_NAME_SINGULAR' => 'Zināšanu bāzes raksts',
     'LBL_MODULE_TITLE' => 'Zināšanu bāzes raksts',
@@ -17,4 +17,4 @@ $mod_strings = array(
     'LBL_KEYWORDS' => 'Atslēgvārdi:',
     'LBL_CONTENT' => 'Saturs',
     'LBL_ATTACHMENTS' => 'Pielikumi:',
-);
+];

@@ -10,71 +10,71 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['meetings_leads'] = array(
+$dictionary['meetings_leads'] = [
     'table' => 'meetings_leads',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'meeting_id' => array(
+        ],
+        'meeting_id' => [
             'name' => 'meeting_id',
             'type' => 'id',
-        ),
-        'lead_id' => array(
+        ],
+        'lead_id' => [
             'name' => 'lead_id',
             'type' => 'id',
-        ),
-        'required' => array(
+        ],
+        'required' => [
             'name' => 'required',
             'type' => 'varchar',
             'len' => '1',
             'default' => '1',
-        ),
-        'accept_status' => array(
+        ],
+        'accept_status' => [
             'name' => 'accept_status',
             'type' => 'varchar',
             'len' => '25',
             'default' => 'none',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'meetings_leadspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_lead_meeting_lead',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'lead_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_meeting_lead',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'meeting_id',
                 'lead_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'meetings_leads' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'meetings_leads' => [
             'lhs_module' => 'Meetings',
             'lhs_table' => 'meetings',
             'lhs_key' => 'id',
@@ -85,6 +85,6 @@ $dictionary['meetings_leads'] = array(
             'join_table' => 'meetings_leads',
             'join_key_lhs' => 'meeting_id',
             'join_key_rhs' => 'lead_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

@@ -52,7 +52,7 @@ abstract class AbstractForecastHooks
     /**
      * Utility method to load Forecast Settings
      *
-     * @param bool $reload      Forecast Reload the settings
+     * @param bool $reload Forecast Reload the settings
      */
     protected static function loadForecastSettings($reload = false)
     {

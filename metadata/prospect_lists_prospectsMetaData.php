@@ -10,65 +10,65 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['prospect_lists_prospects'] = array(
+$dictionary['prospect_lists_prospects'] = [
     'table' => 'prospect_lists_prospects',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'prospect_list_id' => array(
+        ],
+        'prospect_list_id' => [
             'name' => 'prospect_list_id',
             'type' => 'id',
-        ),
-        'related_id' => array(
+        ],
+        'related_id' => [
             'name' => 'related_id',
             'type' => 'id',
-        ),
-        'related_type' => array(
+        ],
+        'related_type' => [
             'name' => 'related_type',
             'type' => 'varchar',
             'len' => '25',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'prospect_lists_prospectspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_plp_pro_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'prospect_list_id',
                 'deleted',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_plp_rel_id',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'related_id',
                 'related_type',
                 'prospect_list_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'prospect_list_contacts' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'prospect_list_contacts' => [
             'lhs_module' => 'ProspectLists',
             'lhs_table' => 'prospect_lists',
             'lhs_key' => 'id',
@@ -81,8 +81,8 @@ $dictionary['prospect_lists_prospects'] = array(
             'join_key_rhs' => 'related_id',
             'relationship_role_column' => 'related_type',
             'relationship_role_column_value' => 'Contacts',
-        ),
-        'prospect_list_prospects' => array(
+        ],
+        'prospect_list_prospects' => [
             'lhs_module' => 'ProspectLists',
             'lhs_table' => 'prospect_lists',
             'lhs_key' => 'id',
@@ -95,8 +95,8 @@ $dictionary['prospect_lists_prospects'] = array(
             'join_key_rhs' => 'related_id',
             'relationship_role_column' => 'related_type',
             'relationship_role_column_value' => 'Prospects',
-        ),
-        'prospect_list_leads' => array(
+        ],
+        'prospect_list_leads' => [
             'lhs_module' => 'ProspectLists',
             'lhs_table' => 'prospect_lists',
             'lhs_key' => 'id',
@@ -109,8 +109,8 @@ $dictionary['prospect_lists_prospects'] = array(
             'join_key_rhs' => 'related_id',
             'relationship_role_column' => 'related_type',
             'relationship_role_column_value' => 'Leads',
-        ),
-        'prospect_list_users' => array(
+        ],
+        'prospect_list_users' => [
             'lhs_module' => 'ProspectLists',
             'lhs_table' => 'prospect_lists',
             'lhs_key' => 'id',
@@ -123,8 +123,8 @@ $dictionary['prospect_lists_prospects'] = array(
             'join_key_rhs' => 'related_id',
             'relationship_role_column' => 'related_type',
             'relationship_role_column_value' => 'Users',
-        ),
-        'prospect_list_accounts' => array(
+        ],
+        'prospect_list_accounts' => [
             'lhs_module' => 'ProspectLists',
             'lhs_table' => 'prospect_lists',
             'lhs_key' => 'id',
@@ -137,6 +137,6 @@ $dictionary['prospect_lists_prospects'] = array(
             'join_key_rhs' => 'related_id',
             'relationship_role_column' => 'related_type',
             'relationship_role_column_value' => 'Accounts',
-        ),
-    ),
-);
+        ],
+    ],
+];

@@ -2,6 +2,16 @@
   ----------------*/
 .subpanels-layout {
   .subpanel {
+    td.stick-right {
+      position: absolute;
+    }
+
+    tr:last-child {
+      td.stick-right {
+        border-radius: 0 0 6px;
+      }
+    }
+
     &.closed {
       .subpanel-list {
         display: none;
@@ -162,13 +172,6 @@
     .flex-list-view-container {
       overflow: hidden;
       border-radius: 0 0 0.425rem 0.425rem;
-      position: static;
-    }
-
-    .flex-list-view.scroll-width {
-      .flex-list-view-container {
-        margin-bottom: -1px;
-      }
     }
   }
 
@@ -248,17 +251,6 @@
         }
 
         &:not(.tr-inline-edit) {
-          td.stick-right {
-            a.btn {
-              border: none;
-              background: none;
-
-              &:hover {
-                box-shadow: none;
-              }
-            }
-          }
-
           &:hover {
             td.sticky-column:not(.stick-first) {
               background: none;
@@ -320,6 +312,10 @@
       }
     }
   }
+}
+
+.subpanels-container .main-content {
+  overflow: visible;
 }
 
 .sugar-dark-theme {

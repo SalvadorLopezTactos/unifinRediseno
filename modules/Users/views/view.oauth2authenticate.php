@@ -30,7 +30,7 @@ class UsersViewOAuth2Authenticate extends SidecarView
     /**
      * @inheritdoc
      */
-    public function preDisplay($params = array()) : void
+    public function preDisplay($params = []): void
     {
         $code = $this->request->getValidInputGet('code');
         $scope = $this->request->getValidInputGet('scope');
@@ -95,7 +95,7 @@ class UsersViewOAuth2Authenticate extends SidecarView
             $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
             $sidecarConfig = $moduleInstallerClass::getBaseConfig();
             $this->ss->assign('appPrefix', $sidecarConfig['env'] . ':' . $sidecarConfig['appId'] . ':');
-            $this->ss->assign("siteUrl", SugarConfig::getInstance()->get('site_url'));
+            $this->ss->assign('siteUrl', SugarConfig::getInstance()->get('site_url'));
             $this->ss->display('modules/Users/tpls/AuthenticateMobile.tpl');
         } else {
             parent::display($params);
@@ -105,7 +105,7 @@ class UsersViewOAuth2Authenticate extends SidecarView
     /**
      * @return OAuth2StateRegistry
      */
-    protected function getStateRegistry() : OAuth2StateRegistry
+    protected function getStateRegistry(): OAuth2StateRegistry
     {
         return new OAuth2StateRegistry();
     }

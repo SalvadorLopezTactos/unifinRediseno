@@ -11,14 +11,14 @@
  */
 
 // TODO: remove when SIDECAR-236 is ready.
-$listViewDefs['KBContents'] = array(
-    'NAME' => array(
+$listViewDefs['KBContents'] = [
+    'NAME' => [
         'label' => 'LBL_NAME',
         'default' => true,
         'link' => true,
         'width' => '20',
-    ),
-    'LANGUAGE' => array(
+    ],
+    'LANGUAGE' => [
         'label' => 'LBL_LANG',
         'default' => true,
         'link' => true,
@@ -26,28 +26,28 @@ $listViewDefs['KBContents'] = array(
         'module' => 'KBDocuments',
         'key' => 'languages',
         'width' => '5',
-    ),
-    'STATUS' => array(
+    ],
+    'STATUS' => [
         'label' => 'LBL_STATUS',
         'default' => true,
         'type' => 'status',
         'width' => '10',
-    ),
-    'ACTIVE_DATE' => array(
+    ],
+    'ACTIVE_DATE' => [
         'label' => 'LBL_PUBLISH_DATE',
         'type' => 'date',
         'default' => true,
         'width' => '10',
-    ),
-    'EXP_DATE' => array(
+    ],
+    'EXP_DATE' => [
         'label' => 'LBL_EXP_DATE',
         'type' => 'date',
         'default' => true,
         'width' => '10',
-    ),
-    'DATE_ENTERED' => array(
+    ],
+    'DATE_ENTERED' => [
         'width' => '5',
         'label' => 'LBL_DATE_ENTERED',
         'default' => true,
-    ),
-);
+    ],
+];

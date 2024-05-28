@@ -9,49 +9,49 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * <b>toString(val)</b><br/>
  * Converts the given value to a string.<br>
  * ex: <i>toString(5.5)</i> = "5.5"
  */
-class DefineStringExpression extends StringExpression {
-	/**
-	 * Returns itself when evaluating.
-	 */
-	function evaluate() {
+class DefineStringExpression extends StringExpression
+{
+    /**
+     * Returns itself when evaluating.
+     */
+    public function evaluate()
+    {
         try {
             $val = $this->getParameters()->evaluate();
             //Dates should be formated before being cast to a string
-            if(($val instanceof SugarDateTime) && !empty($val->def))
-            {
+            if (($val instanceof SugarDateTime) && !empty($val->def)) {
                 global $timedate;
                 $date = DateExpression::roundTime($val);
-                if ($val->def['type'] == "date")
-                {
+                if ($val->def['type'] == 'date') {
                     //Date
-                    $date->setTimezone(new DateTimeZone("UTC"));
+                    $date->setTimezone(new DateTimeZone('UTC'));
                     $retstr = $timedate->asUserDate($date);
-                } else
-                {
+                } else {
                     //Datetime
                     $retstr = $timedate->asUser($date);
                 }
-            }
-            else {
-                $retstr = $val . "";
+            } else {
+                $retstr = $val . '';
             }
         } catch (Exception $e) {
-            $GLOBALS['log']->warn('DefineStringExpression::evaluate() returned empty string due to received exception: '.$e->getMessage());
-            $retstr = "";
+            $GLOBALS['log']->warn('DefineStringExpression::evaluate() returned empty string due to received exception: ' . $e->getMessage());
+            $retstr = '';
         }
-		return $retstr;
-	}
+        return $retstr;
+    }
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
         var value = this.getParameters().evaluate(),
             string;
         if (value instanceof Date) {
@@ -62,33 +62,37 @@ class DefineStringExpression extends StringExpression {
         }
         return string;
 EOQ;
-	}
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return array("toString", "string");
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return ['toString', 'string'];
+    }
 
-	/**
-	 * Returns the exact number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 1;
-	}
+    /**
+     * Returns the exact number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 1;
+    }
 
-	/**
-	 * Any generic type will suffice.
-	 */
-    static function getParameterTypes() {
-		return array("generic");
-	}
+    /**
+     * Any generic type will suffice.
+     */
+    public static function getParameterTypes()
+    {
+        return ['generic'];
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 }

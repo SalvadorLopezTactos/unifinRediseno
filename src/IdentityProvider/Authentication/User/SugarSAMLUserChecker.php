@@ -57,7 +57,6 @@ class SugarSAMLUserChecker extends UserChecker
     public function checkPostAuth(UserInterface $user)
     {
         $this->loadSugarUser($user);
-        parent::checkPostAuth($user);
     }
 
     /**

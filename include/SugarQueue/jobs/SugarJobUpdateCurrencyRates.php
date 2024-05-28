@@ -20,7 +20,6 @@
  */
 class SugarJobUpdateCurrencyRates implements RunnableSchedulerJob
 {
-
     /**
      * @var $job the job object
      */
@@ -48,25 +47,22 @@ class SugarJobUpdateCurrencyRates implements RunnableSchedulerJob
         // Searches across modules for rate update scheduler jobs and executes them.
         // Each module that has currency rates in its model(s) *must* have a scheduler
         // job defined in order to update its rates when a currency rate is updated.
-        $globPaths = array(
+        $globPaths = [
             'custom/modules/*/jobs/Custom*CurrencyRateUpdate.php',
-            'modules/*/jobs/*CurrencyRateUpdate.php'
-        );
-        foreach ($globPaths as $entry)
-        {
+            'modules/*/jobs/*CurrencyRateUpdate.php',
+        ];
+        foreach ($globPaths as $entry) {
             $jobFiles = glob($entry, GLOB_NOSORT);
 
-            if(!empty($jobFiles))
-            {
-                foreach($jobFiles as $jobFile)
-                {
-                    $jobClass = basename($jobFile,'.php');
-                    require_once($jobFile);
-                    if(!class_exists($jobClass)) {
-                        $GLOBALS['log']->error(string_format($GLOBALS['app_strings']['ERR_DB_QUERY'],array(get_class($this),'uknown class: '.$jobClass)));
+            if (!empty($jobFiles)) {
+                foreach ($jobFiles as $jobFile) {
+                    $jobClass = basename($jobFile, '.php');
+                    require_once $jobFile;
+                    if (!class_exists($jobClass)) {
+                        $GLOBALS['log']->error(string_format($GLOBALS['app_strings']['ERR_DB_QUERY'], [get_class($this), 'uknown class: ' . $jobClass]));
                         continue;
                     }
-                    $jobObject = new $jobClass;
+                    $jobObject = new $jobClass();
                     $data = $this->job->data;
                     $jobObject->run($data);
                 }
@@ -76,5 +72,4 @@ class SugarJobUpdateCurrencyRates implements RunnableSchedulerJob
         $this->job->succeedJob();
         return true;
     }
-
 }

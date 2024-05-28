@@ -20,7 +20,7 @@ $viewdefs['Administration']['base']['layout']['module-names-and-icons-drawer'] =
                         'layout' => [
                             'type' => 'simple',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span12',
+                            'css_class' => 'main-pane span12 overflow-y-auto',
                             'components' => [
                                 ['view' => 'module-names-and-icons'],
                             ],

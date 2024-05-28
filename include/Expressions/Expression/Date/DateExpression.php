@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,14 +10,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 abstract class DateExpression extends AbstractExpression
 {
-	/**
-	 * All parameters have to be a string.
-	 */
-    static function getParameterTypes() {
-		return AbstractExpression::$DATE_TYPE;
-	}
+    /**
+     * All parameters have to be a string.
+     */
+    public static function getParameterTypes()
+    {
+        return AbstractExpression::$DATE_TYPE;
+    }
 
     /**
      * @static
@@ -28,8 +31,9 @@ abstract class DateExpression extends AbstractExpression
      */
     public static function parse($date)
     {
-        if ($date instanceof DateTime)
+        if ($date instanceof DateTime) {
             return $date;
+        }
 
         if (empty($date)) {
             return false;
@@ -50,7 +54,7 @@ abstract class DateExpression extends AbstractExpression
             }
             return $resdate;
         }
-        throw new Exception("attempt to convert invalid non-string value to date");
+        throw new Exception('attempt to convert invalid non-string value to date');
     }
 
     /**
@@ -70,7 +74,7 @@ abstract class DateExpression extends AbstractExpression
     /**
      * Rounds a DateTime object to the nearest 15 minute interval
      *
-     * @static  
+     * @static
      * @param DateTime $date the DateTime object to perform rounding on
      * @param string $direction the direction in which to round. Options are 'down' or 'up', default is 'up'
      * @return DateTime $date rounded to the nearest 15 minute interval in the given direction
@@ -81,7 +85,7 @@ abstract class DateExpression extends AbstractExpression
             return false;
         }
 
-        $min = $date->format("i");
+        $min = $date->format('i');
         $remainder = $min % 15;
         if ($remainder != 0) {
             if ($direction === 'down') {

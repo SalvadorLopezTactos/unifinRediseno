@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'İş Kuralını İşlet',
-  'LBL_MODULE_TITLE' => 'İş Kuralını İşlet',
-  'LBL_MODULE_NAME_SINGULAR' => 'İş Kuralını İşlet',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'İş Kuralını İşlet',
+    'LBL_MODULE_TITLE' => 'İş Kuralını İşlet',
+    'LBL_MODULE_NAME_SINGULAR' => 'İş Kuralını İşlet',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Süreç İş Kuralları Odak Bölmesi',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Süreç İş Kuralları Odak Bölmesi',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Süreç İş Kuralları Kaydı Panosu',
-  'LBL_RST_UID' => 'İş Kuralı ID',
-  'LBL_RST_TYPE' => 'İş Kuralı Tipi',
-  'LBL_RST_DEFINITION' => 'İş Kuralı Tanımı',
-  'LBL_RST_EDITABLE' => 'İş Kuralı Değiştirilebilir',
-  'LBL_RST_SOURCE' => 'İş Kuralı Kaynağı',
-  'LBL_RST_SOURCE_DEFINITION' => 'İş Kuralı Veri Kaynağı',
-  'LBL_RST_MODULE' => 'Hedef Modül',
-  'LBL_RST_FILENAME' => 'İş Kuralı Dosya İsmi',
-  'LBL_RST_CREATE_DATE' => 'İş Kuralı Oluşturma Tarihi',
-  'LBL_RST_UPDATE_DATE' => 'İş Kuralı Güncelleme Tarihi',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Süreç İş Kuralları Kaydı Panosu',
+    'LBL_RST_UID' => 'İş Kuralı ID',
+    'LBL_RST_TYPE' => 'İş Kuralı Tipi',
+    'LBL_RST_DEFINITION' => 'İş Kuralı Tanımı',
+    'LBL_RST_EDITABLE' => 'İş Kuralı Değiştirilebilir',
+    'LBL_RST_SOURCE' => 'İş Kuralı Kaynağı',
+    'LBL_RST_SOURCE_DEFINITION' => 'İş Kuralı Veri Kaynağı',
+    'LBL_RST_MODULE' => 'Hedef Modül',
+    'LBL_RST_FILENAME' => 'İş Kuralı Dosya İsmi',
+    'LBL_RST_CREATE_DATE' => 'İş Kuralı Oluşturma Tarihi',
+    'LBL_RST_UPDATE_DATE' => 'İş Kuralı Güncelleme Tarihi',
 
     'LNK_LIST' => 'Süreç İş Kurallarını Gör',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Süreç İş Kuralı oluştur',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Bu İş Kuralı, geçersiz alanlar veya SugarCRM&#39;nin kurulumunuzda bulunmayan alanlar kullandığı için geçersizdir. Lütfen aşağıdaki hataları düzelterek İş Kuralını kaydedin.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Bu İş Kuralı, şu anda bir Süreç Tanımında kullanılmaktadır. Yine de bu İş Kuralını düzenlemek istiyor musunuz?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Şu anda bir Süreç Tanımında kullanıldığı için bu İş Kuralını silemezsiniz.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Şu anda bir Süreç Tanımında kullanıldığı için bu İş Kuralını silemezsiniz.',
+];

@@ -31,7 +31,7 @@ $allowed_mime_types = [
 /* we got from client something likes data:image/png;base64 */
 $mtype_processed = [];
 foreach ($allowed_mime_types as $ext => $mt) {
-    $mtype_processed['data:'.$mt.';base64'] = $ext;
+    $mtype_processed['data:' . $mt . ';base64'] = $ext;
 }
 
 /* check mime type. */
@@ -41,8 +41,8 @@ if (!array_key_exists($mtype, $mtype_processed)) {
 
 /* build file name  */
 $file_extension = $mtype_processed[$mtype];
-$file_name = $priv_guid.'_'.$chart_id.'_saved_chart.'.$file_extension;
-$filepath = sugar_cached('images/'.$file_name);
+$file_name = $priv_guid . '_' . $chart_id . '_saved_chart.' . $file_extension;
+$filepath = sugar_cached('images/' . $file_name);
 
 /* process image */
 $image = str_replace(' ', '+', $image);
@@ -54,7 +54,7 @@ if (strlen($image) > $sugar_config['upload_maxsize']) {
 }
 
 /* upload file to cache/image */
-if (!sugar_mkdir(sugar_cached("images"), 0777, true)) {
+if (!sugar_mkdir(sugar_cached('images'), 0777, true)) {
     throw new \RuntimeException(sprintf("Can't create directory '%s'", sugar_cached('images')));
 }
 

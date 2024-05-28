@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'Administrácia',
-    'Product' => 'Produkt',
-    'User' => 'Používateľ',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => 'Nový',
-    'Assigned' => 'Pridelené',
-    'Closed' => 'Zatvorené',
-    'Pending Input' => 'Čakajúci na vstup',
-    'Rejected' => 'Zamietnutý',
-    'Duplicate' => 'Duplikovať',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => 'Vysoká',
-    'P2' => 'Stredná',
-    'P3' => 'Nízko',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => 'Akceptovaný',
-    'Duplicate' => 'Duplikovať',
-    'Closed' => 'Zatvorené',
-    'Out of Date' => 'Zastaraný',
-    'Invalid' => 'Neplatný',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => 'Administrácia',
+        'Product' => 'Produkt',
+        'User' => 'Používateľ',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => 'Nové',
+        'Assigned' => 'Priradené',
+        'Closed' => 'Uzatvorené',
+        'Pending Input' => 'Čaká sa na vstup',
+        'Rejected' => 'Zamietnuté',
+        'Duplicate' => 'Duplikát',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => 'Vysoký',
+        'P2' => 'Stredný',
+        'P3' => 'Nízky',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => 'Prijaté',
+        'Duplicate' => 'Duplikát',
+        'Closed' => 'Uzatvorené',
+        'Out of Date' => 'Zastarané',
+        'Invalid' => 'Neplatné',
+    ],
+];

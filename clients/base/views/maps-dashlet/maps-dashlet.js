@@ -75,7 +75,10 @@
      * @private
      */
     _noAccess: function() {
-        this.$el.html(this._noAccessTemplate());
+        this.template = this._noAccessTemplate;
+
+        this.$el.empty();
+        this.$el.html(this.template(this));
 
         return false;
     },

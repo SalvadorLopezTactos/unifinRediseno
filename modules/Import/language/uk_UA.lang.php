@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Файл імпорту успішно прочитаний',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Імпортований запис бере участь у процесі. Його не можна редагувати, оскільки деякі поля заблоковані для редагування процесом.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Записи пропущені через помилки',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Якщо користувач не існує - використовуйте поточного користувача',
     'LBL_SHOW_HIDDEN' => 'Показати поля, які не можуть бути коректно імпортовані',
     'LBL_UPDATE_RECORDS' => 'Оновлення існуючих записів (операцію не можна скасувати)',
-    'LBL_TEST'=> 'Тестування імпорту (не додавайте дані і не вносьте зміни)',
+    'LBL_TEST' => 'Тестування імпорту (не додавайте дані і не вносьте зміни)',
     'LBL_TRUNCATE_TABLE' => 'Очистити таблицю перед імпортом (видалення всіх записів)',
     'LBL_RELATED_ACCOUNTS' => 'Не створювати пов&#39;язаних контрагентів',
     'LBL_NO_DATECHECK' => 'Пропустити перевірку дати (це прискорить виконання операції, але призведе до помилки, якщо буде виявлена хоча б одна невірна дата)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Неправильне ціле значення',
     'LBL_ERROR_INVALID_NUM' => 'Неправильне числове значення',
     'LBL_ERROR_INVALID_TIME' => 'Неправильний час',
-    'LBL_ERROR_INVALID_EMAIL'=>'Неправильна адреса електронної пошти',
-    'LBL_ERROR_INVALID_BOOL'=>'Неправильне логічне значення',
-    'LBL_ERROR_INVALID_DATE'=>'Неправильна дата',
-    'LBL_ERROR_INVALID_USER'=>'Неправильне ім&#39;я користувача або ID',
+    'LBL_ERROR_INVALID_EMAIL' => 'Неправильна адреса електронної пошти',
+    'LBL_ERROR_INVALID_BOOL' => 'Неправильне логічне значення',
+    'LBL_ERROR_INVALID_DATE' => 'Неправильна дата',
+    'LBL_ERROR_INVALID_USER' => 'Неправильне ім&#39;я користувача або ID',
     'LBL_ERROR_INVALID_TEAM' => 'Неправильна назва команди або ID',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Неправильна назва Контрагента або ID',
     'LBL_ERROR_INVALID_RELATE' => 'Неправильне реляційне поле',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'не існує або недоступний для запису',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Файл не був завантажений успішно. Можливо, що задано замале число в параметрі "upload_max_filesize" у файлі php.ini',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Занадто великий файл. Макс:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Байти. Замініть $sugar_config[&#39;upload_maxsize&#39;] в config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Байти. Змініть $sugar_config[&#39;upload_maxsize&#39;] у config.php',
     'LBL_MODULE_NAME' => 'Імпорт',
     'LBL_MODULE_NAME_SINGULAR' => 'Імпорт',
     'LBL_TRY_AGAIN' => 'Спробуйте ще раз',
     'LBL_START_OVER' => 'Почати спочатку',
     'LBL_ERROR' => 'Помилка:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Файл для імпорту містить {0} строк.Оптимальна кількість рядків - {1}. Більша кількість рядків може уповільнити процес імпорту. Натисніть OK для продовження імпорту. Натисніть Скасування для зміни і повторної завантаження файлу для імпорту.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Ви не можете імпортувати системного адміністратора',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Ви не можете імпортувати системного адміністратора',
     'ERR_REPORT_LOOP' => 'Виявлена помилка в звітах. Користувач не може звітувати перед самим собою, а його керівники не можуть звітувати перед ним.',
     'ERR_MULTIPLE' => 'Декілька колонок мають одну і ту ж назву поля.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Відсутні необхідні поля:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'У файлі для імпорту не були виявлені рядків. Будь ласка, переконайтеся, що немає ніяких порожніх рядків у файлі і повторіть спробу.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Файл для імпорту вже був оброблений або не існує',
     'LBL_SUCCESS' => 'Успішно виконано',
-	'LBL_FAILURE' => 'Помилка імпорту:',
+    'LBL_FAILURE' => 'Помилка імпорту:',
     'LBL_SUCCESSFULLY' => 'Успішно імпортовано',
     'LBL_LAST_IMPORT_UNDONE' => 'Файл не було імпортовано',
     'LBL_NO_IMPORT_TO_UNDO' => 'Не було імпорту для відміни',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Імпортувати знову',
     'LBL_FINISHED' => 'Завершено',
     'LBL_UNDO_LAST_IMPORT' => 'Скасувати імпорт',
-    'LBL_LAST_IMPORTED'=>'Створено',
+    'LBL_LAST_IMPORTED' => 'Створено',
     'ERR_MULTIPLE_PARENTS' => 'Тільки один батьківський ID може бути визначений',
     'LBL_DUPLICATES' => 'Знайдено дублікати',
     'LNK_DUPLICATE_LIST' => 'Завантажити список дублікатів',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Приховати примітки',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Показати колонки попереднього перегляду',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Приховати колонки попереднього перегляду',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Перевірити наявність дублікатів за допомогою оператора:',
     'LBL_SAVE_MAPPING_AS' => 'Щоб зберегти настройки імпорту, вкажіть назву для збережених налаштувань:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Одинарні лапки (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Подвійні лапки (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Щоб призначити команди, які не є командою (-ами) за замовчуванням, відповідальними за нові записи, використовуйте колонку Значення за замовчуванням для вибору інших команд.',
     'LBL_SIGN_IN_HELP' => 'Для активації даної послуги, будь ласка, увійдіть в систему під вкладкою Зовнішні Контрагенти зі сторінки користувача налаштувань.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Намається  обробити електронні адрес в Bean, який це не підтримує.",
-);
+];

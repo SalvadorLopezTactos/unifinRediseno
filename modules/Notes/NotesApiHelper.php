@@ -23,7 +23,7 @@ class NotesApiHelper extends SugarBeanApiHelper
      * @param array $options
      * @return array
      */
-    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = array())
+    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = [])
     {
         //TODO: need a more generic way to deal with file types
         if (isset($submittedData['file_mime_type'])) {

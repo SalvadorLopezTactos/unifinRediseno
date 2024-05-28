@@ -152,8 +152,8 @@
          *
          */
         UpdateRecord.prototype.fetchAndApplyChanges = function(model, updatedFields, currentExecution) {
-            let changes = model.changedAttributes();
-
+            let changes = model.changedAttributes(model.getSynced());
+            changes = !_.isEmpty(changes) ? _.pick(model.changedAttributes(), _.keys(changes)) : {};
             changes = _.omit(changes, _.keys(updatedFields));
             changes = _.omit(changes, ['date_modified']);
 
@@ -395,6 +395,10 @@
                 } else if (opts.recordView && opts.recordView.name === 'dashlet-toolbar') {
                     opts.recordView.layout.getComponent('dashablerecord').editRecord();
                 } else {
+                    if (opts.recordView && opts.recordView.context) {
+                        opts.recordView.context.trigger('button:edit_button:click');
+                    }
+
                     app.controller.context.trigger('button:edit_button:click');
                 }
 

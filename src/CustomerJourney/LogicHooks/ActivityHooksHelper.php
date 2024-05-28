@@ -27,7 +27,6 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\ActivityDatesHelper;
  */
 class ActivityHooksHelper
 {
-
     /**
      * @var bool
      */
@@ -42,6 +41,11 @@ class ActivityHooksHelper
      * @var array
      */
     private static $disabled = [];
+
+    /**
+     * @var bool
+     */
+    private static $allowedByError = false;
 
     /**
      * @param string $id
@@ -124,8 +128,8 @@ class ActivityHooksHelper
      * Some logic that should run before status change
      *
      * @param \SugarBean $activity
-     * @throws SugarApiExceptionError
      * @return void
+     * @throws SugarApiExceptionError
      */
     public function beforeStatusChange(\SugarBean $activity)
     {
@@ -177,12 +181,12 @@ class ActivityHooksHelper
      * Also triggers the completed events if applicable
      *
      * @param \SugarBean $activity
-     * @throws CustomerJourneyException\NotFoundException
+     * @return void
      * @throws ParentCustomerJourneyException\NotFoundException
      * @throws SugarApiExceptionError
      * @throws SugarApiExceptionInvalidParameter
      * @throws SugarQueryException
-     * @return void
+     * @throws CustomerJourneyException\NotFoundException
      */
     public function resaveIfChanged(\SugarBean $activity)
     {
@@ -206,11 +210,6 @@ class ActivityHooksHelper
                 return;
             }
 
-            // do not resave Journey when points have been changed
-            if (!$handler->haveChangedStatus($activity) && $handler->haveChangedPoints($activity)) {
-                return;
-            }
-
             // do not resave Journey when parent have been changed
             if (!$handler->haveChangedStatus($activity) && $handler->haveChangedParent($activity)) {
                 return;
@@ -229,6 +228,8 @@ class ActivityHooksHelper
             $this->afterNotApplicable($handler, $activity);
             $this->afterInProgress($handler, $activity);
 
+            $this->updateChildrenCache($handler, $activity);
+
             $this->calculateMomentumForParent($handler, $activity);
             $this->doResave($journey, $handler, $activity);
         } catch (CustomerJourneyException\InvalidLicenseException $e) {
@@ -239,6 +240,28 @@ class ActivityHooksHelper
             // this error gets thrown when a complete journey/stage is deleted since the related stage has already
             // been deleted when updating the activities relationships, it's not a real error so we can just skip it
             $GLOBALS['log']->error('Smart Guide: Smart Guide/stage not found - ' . $activity->id);
+        }
+    }
+
+    /**
+     * Update Static children array in case the activity that is being updated here is a child
+     * @param $handler
+     * @param $activity
+     * @return void
+     */
+    private function updateChildrenCache($handler, $activity)
+    {
+        if (!empty($handler) && !empty($activity) &&
+            !empty($handler->getParent($activity)) &&
+            !empty(!empty($handler->getParent($activity)))) {
+            $parentId = $handler->getParent($activity)->id;
+            if (!empty($parentId) && !empty($handler->childActivityHelper::$children[$parentId])) {
+                foreach ($handler->childActivityHelper::$children[$parentId] as &$child) {
+                    if ($child->id == $activity->id) {
+                        $child = $activity;
+                    }
+                }
+            }
         }
     }
 
@@ -277,13 +300,13 @@ class ActivityHooksHelper
      * @param \SugarBean $activity
      * @param string $event
      * @param array $arguments
+     * @return void
      * @throws CustomerJourneyException\NotFoundException
      * @throws ParentCustomerJourneyException\NotFoundException
      * @throws SugarApiExceptionError
      * @throws SugarApiExceptionInvalidParameter
      * @throws SugarQueryException
      * @throws Exception
-     * @return void
      */
     public function startNextJourneyIfCompleted(\SugarBean $activity, $event, array $arguments)
     {
@@ -416,12 +439,12 @@ class ActivityHooksHelper
      * Resaves Journey after Activity gets deleted
      *
      * @param \SugarBean $activity
-     * @throws CustomerJourneyException\NotFoundException
+     * @return void
      * @throws ParentCustomerJourneyException\NotFoundException
      * @throws SugarApiExceptionError
      * @throws SugarApiExceptionInvalidParameter
      * @throws SugarQueryException
-     * @return void
+     * @throws CustomerJourneyException\NotFoundException
      */
     public function resave(\SugarBean $activity)
     {
@@ -506,20 +529,23 @@ class ActivityHooksHelper
      * @param DRI_Workflow $journey
      * @param ActivityHelper $handler
      * @param \SugarBean $activity
-     * @throws CustomerJourneyException\NotFoundException
+     * @return void
      * @throws ParentCustomerJourneyException\NotFoundException
      * @throws SugarApiExceptionError
      * @throws SugarApiExceptionInvalidParameter
      * @throws SugarQueryException
-     * @return void
+     * @throws CustomerJourneyException\NotFoundException
      */
     private function doResave(\DRI_Workflow $journey, ActivityHelper $handler, \SugarBean $activity)
     {
         try {
             if ($handler->hasParent($activity)) {
                 $parent = $handler->getParent($activity);
-
                 if ($parent) {
+                    if (!empty($activity->ignore_blocked_by) && $activity->ignore_blocked_by) {
+                        $parent->ignore_blocked_by = true;
+                    }
+
                     $handler = ActivityHandlerFactory::factory($parent->module_dir);
 
                     $handler->insertChild($parent, $activity);
@@ -530,19 +556,20 @@ class ActivityHooksHelper
                         (new ActivityDatesHelper())->setActivityStartAndEndDates($parent, $parent->status);
                     }
 
-                    if ($handler->isPointsChanged($parent) ||
-                            $handler->isStatusChanged($parent) ||
-                            $handler->isScoreChanged($parent) ||
-                            $handler->isProgressChanged($parent) ||
-                            !$handler->isParent($parent)
-                    ) {
+                    if (($handler->isPointsChanged($parent) ||
+                        $handler->isStatusChanged($parent) ||
+                        $handler->isScoreChanged($parent) ||
+                        $handler->isProgressChanged($parent) ||
+                        !$handler->isParent($parent))) {
                         $parent->is_cj_parent_activity = true;
                         $parent->save();
+                        $this->setActivityCache($journey, $parent);
                     }
 
                     if (empty($handler->getChildren($parent))) {
                         $parent->is_cj_parent_activity = false;
                         $parent->save();
+                        $this->setActivityCache($journey, $parent);
                     }
                 }
             }
@@ -562,6 +589,25 @@ class ActivityHooksHelper
         }
     }
 
+    /**
+     * Set Activity Cache
+     *
+     * @param DRI_Workflow $journey
+     * @param \SugarBean $activity
+     */
+    public function setActivityCache(\DRI_Workflow $journey, \SugarBean $activity)
+    {
+        // Check if the journey is not disabled and has stages
+        $stages = $journey->getStages();
+        if (!empty($stages)) {
+            $stages = array_column($stages, null, 'id');
+            if (isset($stages[$activity->dri_subworkflow_id])) {
+                // Update the activity in the cache
+                $stages[$activity->dri_subworkflow_id]->setActivity($activity);
+            }
+        }
+    }
+    
     /**
      * Return the Smart Guide/stage of activity
      *
@@ -672,7 +718,7 @@ class ActivityHooksHelper
     public function updateParentMomentum(\SugarBean $activity, $table_name)
     {
         global $db;
-    
+
         $sql = <<<SQL
                     UPDATE
                         {$table_name}
@@ -690,8 +736,8 @@ SQL;
      * Reorder the acitivites
      *
      * @param \SugarBean $bean
-     * @throws SugarQueryException
      * @return void
+     * @throws SugarQueryException
      */
     public function reorder(\SugarBean $bean)
     {
@@ -715,7 +761,7 @@ SQL;
             }
 
             $stage = $activityHandler->getStage($bean);
-            $order = (int) $activityHandler->getSortOrder($bean);
+            $order = (int)$activityHandler->getSortOrder($bean);
 
             self::$inReorderActivities = true;
 
@@ -723,7 +769,7 @@ SQL;
 
             foreach ($stage->getActivities() as $activity) {
                 $handler = ActivityHandlerFactory::factory($activity->module_dir);
-                $sortOrder = (int) $handler->getSortOrder($activity);
+                $sortOrder = (int)$handler->getSortOrder($activity);
 
                 // start sequence check on the duplicated index
                 if ($sortOrder === $order) {
@@ -780,9 +826,9 @@ SQL;
      * validates the activity
      *
      * @param \SugarBean $activity
-     * @throws \SugarApiExceptionInvalidParameter
-     * @throws CustomerJourneyException\NotFoundException
      * @return void
+     * @throws CustomerJourneyException\NotFoundException
+     * @throws \SugarApiExceptionInvalidParameter
      */
     public function validate(\SugarBean $activity)
     {
@@ -825,9 +871,9 @@ SQL;
      *
      * @param \SugarBean $activity
      * @param ActivityHelper $activityHandler
-     * @throws \SugarApiExceptionInvalidParameter
-     * @throws CustomerJourneyException\NotFoundException
      * @return void
+     * @throws CustomerJourneyException\NotFoundException
+     * @throws \SugarApiExceptionInvalidParameter
      */
     protected function validateDependency(\SugarBean $activity, ActivityHelper $activityHandler)
     {
@@ -836,10 +882,14 @@ SQL;
         // we should do the simple check if the status is changed
         // first to not cause an performance impact for non status updates
         if (!$activityHandler->haveChangedStatus($activity) ||
-                (!$activityHandler->isCompleted($activity) &&
+            (!$activityHandler->isCompleted($activity) &&
                 !$activityHandler->isInProgress($activity) &&
                 !$activityHandler->isNotApplicable($activity))
         ) {
+            return;
+        }
+
+        if (isset($activity->ignore_blocked_by) && $activity->ignore_blocked_by === true) {
             return;
         }
 
@@ -849,7 +899,6 @@ SQL;
 
             $names = [];
             foreach ($activityHandler->getBlockedBy($activity) as $blockedBy) {
-
                 if ($activityHandler->isCancelled($blockedBy)) {
                     return;
                 }
@@ -864,14 +913,13 @@ SQL;
                 )
             );
         }
-        
+
         if ($activityHandler->isBlockedByStage($activity)) {
             $stage = $activityHandler->getStage($activity);
             $journey = $stage->getJourney();
 
             $names = [];
             foreach ($activityHandler->getNotCompletedBlockedByStages($activity) as $blockedByStage) {
-
                 if ($blockedByStage->state == \DRI_SubWorkflow::STATE_CANCELLED) {
                     return;
                 }
@@ -893,28 +941,59 @@ SQL;
      *
      * @param \SugarBean $activity
      * @param ActivityHelper $activityHandler
-     * @throws \SugarApiExceptionInvalidParameter
      * @return void
+     * @throws \SugarApiExceptionInvalidParameter
      */
-    protected function validateAllowedBy(\SugarBean $activity, ActivityHelper $activityHandler)
+    public function validateAllowedBy(\SugarBean $activity, ActivityHelper $activityHandler)
     {
+        if (isset($activity->is_cj_parent_activity) && isTruthy($activity->is_cj_parent_activity) &&
+        !$this->hasChildInProgress($activity, $activityHandler)) {
+            return ;
+        }
+
         if ($activityHandler->haveChangedStatus($activity) && $activityHandler->isCompleted($activity)) {
             if (!empty($activity->cj_allow_activity_by) && !$GLOBALS['current_user']->is_admin) {
                 $allowFlag = AllowActivityBy::isActivityAllow($activity, $activity->cj_allow_activity_by);
                 if (!$allowFlag) {
-                    throw new \SugarApiExceptionInvalidParameter(translate('LBL_CURRENT_USER_UNABLE_TO_COMPLETE_STATUS', 'DRI_Workflow_Task_Templates'));
+                    if (!isset($activity->processing_smart_guide)) {
+                        throw new \SugarApiExceptionInvalidParameter(
+                            translate('LBL_CURRENT_USER_UNABLE_TO_COMPLETE_STATUS', 'DRI_Workflow_Task_Templates')
+                        );
+                    } else {
+                        self::$allowedByError = true;
+                    }
                 }
             }
         }
     }
-    
+
+    /**
+     * Checks if at least a child is in progress
+     *
+     * @param \SugarBean $activity
+     * @param ActivityHelper $activityHandler
+     * @return bool
+     */
+    protected function hasChildInProgress(\SugarBean $activity, ActivityHelper $activityHandler) : bool
+    {
+        $children = $activityHandler->childActivityHelper->getChildren($activity);
+
+        foreach ($children as $child) {
+            if (!$activityHandler->isCompleted($child) && !$activityHandler->isNotApplicable($child)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * Validate uniqueness of Name for activity
      *
      * @param \SugarBean $activity
      * @param ActivityHelper $activityHandler
-     * @throws \SugarApiExceptionInvalidParameter
      * @return void
+     * @throws \SugarApiExceptionInvalidParameter
      */
     protected function validateUniqueName(\SugarBean $activity, ActivityHelper $activityHandler)
     {
@@ -932,9 +1011,9 @@ SQL;
      * @param \SugarBean $activity
      * @param ActivityHelper $activityHandler
      * @param \SugarBean $RSABean
-     * @throws \SugarApiExceptionError
-     * @throws \SugarApiExceptionInvalidParameter
      * @return void
+     * @throws \SugarApiExceptionInvalidParameter
+     * @throws \SugarApiExceptionError
      */
     private function performRelatedSugarAction(\SugarBean $activity, ActivityHelper $handler, \SugarBean $RSABean)
     {
@@ -943,8 +1022,8 @@ SQL;
         }
 
         if (($handler->getCompletedStatus($activity) === $activity->status && $RSABean->trigger_event === \CJ_Form::TRIGGER_EVENT_COMPLETED) ||
-                ($handler->isInProgress($activity) && $RSABean->trigger_event === \CJ_Form::TRIGGER_EVENT_IN_PROGRESS) ||
-                ($handler->isNotApplicable($activity) && $RSABean->trigger_event === \CJ_Form::TRIGGER_EVENT_NOT_APPLICABLE)
+            ($handler->isInProgress($activity) && $RSABean->trigger_event === \CJ_Form::TRIGGER_EVENT_IN_PROGRESS) ||
+            ($handler->isNotApplicable($activity) && $RSABean->trigger_event === \CJ_Form::TRIGGER_EVENT_NOT_APPLICABLE)
         ) {
             $stage = $handler->getStage($activity);
             $finder = new TargetResolver($RSABean);
@@ -965,11 +1044,11 @@ SQL;
             $allBeans = $response['allBeans'];
 
             if (empty($parent->id) ||
-                    (
+                (
                     $RSABean->action_type === \CJ_Form::ACTION_TYPE_UPDATE_RECORD &&
                     $RSABean->action_trigger_type === \CJ_Form::ACTION_TRIGGER_AUTOMATIC_UPDATE &&
                     empty($target->id)
-                    )
+                )
             ) {
                 if (!$RSABean->ignore_errors) {
                     throw new \SugarApiExceptionInvalidParameter(translate('LBL_COULD_NOT_FIND_RELATED_RECORD', 'CJ_Forms'));
@@ -995,13 +1074,13 @@ SQL;
         }
 
         if ((
-                $RSABean->action_type === \CJ_Form::ACTION_TYPE_CREATE_RECORD &&
+            $RSABean->action_type === \CJ_Form::ACTION_TYPE_CREATE_RECORD &&
                 $RSABean->action_trigger_type != \CJ_Form::ACTION_TRIGGER_AUTOMATIC_CREATE
-                ) ||
-                (
+        ) ||
+            (
                 $RSABean->action_type === \CJ_Form::ACTION_TYPE_UPDATE_RECORD &&
                 $RSABean->action_trigger_type != \CJ_Form::ACTION_TRIGGER_AUTOMATIC_UPDATE
-                )
+            )
         ) {
             return false;
         }
@@ -1022,7 +1101,7 @@ SQL;
     {
         if ($RSABean->action_type === \CJ_Form::ACTION_TYPE_CREATE_RECORD && $RSABean->action_trigger_type === \CJ_Form::ACTION_TRIGGER_AUTOMATIC_CREATE) {
             $child = \BeanFactory::getBean($module, null);
-            
+
             if (!empty($activity->parent_id) && !empty($activity->parent_type) && !empty($linkName)) {
                 $child->parent_id = $activity->parent_id;
                 $child->parent_type = $activity->parent_type;
@@ -1039,7 +1118,7 @@ SQL;
             }
         }
     }
-    
+
     /**
      * Update action of RSA against activity
      *
@@ -1077,10 +1156,30 @@ SQL;
         if ($activity->getModuleName() === 'Tasks' && !empty($activity->cj_activity_start_date) && !empty($activity->cj_activity_completion_date)) {
             $dt1 = $GLOBALS['timedate']->fromDb($activity->cj_activity_start_date);
             $dt2 = $GLOBALS['timedate']->fromDb($activity->cj_activity_completion_date);
-            
+
             if (!is_null($dt1) || !is_null($dt2)) {
                 $activity->cj_days_to_complete = $dt2->diff($dt1)->format('%a days, %h hours, %i minutes and %s seconds');
             }
         }
+    }
+
+    /**
+     * Resets the allowed by error field to false
+     *
+     * @return void
+     */
+    public static function resetAllowedByError()
+    {
+        self::$allowedByError = false;
+    }
+
+    /**
+     * Returns the allowed by error field
+     *
+     * @return void
+     */
+    public static function getAllowedByError()
+    {
+        return self::$allowedByError;
     }
 }

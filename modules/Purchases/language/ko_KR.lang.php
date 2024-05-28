@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => '구매 기록 대시보드',
     'LBL_RELATED_ACCOUNT' => '관련 계정',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => '구매 포커스 서랍',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '구매 타임라인',
 ];

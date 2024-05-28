@@ -10,10 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['Dashboard'] = array(
+$dictionary['Dashboard'] = [
     'table' => 'dashboards',
-    'fields' => array(
-        'dashboard_module' => array(
+    'template_restricted_actions' => ['delete'],
+    'template_editable_fields' => ['default_dashboard', 'assigned_user_name', 'team_name'],
+    'fields' => [
+        'dashboard_module' => [
             'required' => false,
             'name' => 'dashboard_module',
             'vname' => 'LBL_DASHBOARD_MODULE',
@@ -33,8 +35,8 @@ $dictionary['Dashboard'] = array(
             'merge_filter' => 'disabled',
             'calculated' => false,
             'options' => 'moduleList',
-        ),
-        'view_name' => array(
+        ],
+        'view_name' => [
             'required' => false,
             'name' => 'view_name',
             'vname' => 'LBL_VIEW',
@@ -54,8 +56,8 @@ $dictionary['Dashboard'] = array(
             'merge_filter' => 'disabled',
             'calculated' => false,
             'options' => 'dashboard_view_name_list',
-        ),
-        'metadata' => array(
+        ],
+        'metadata' => [
             'required' => false,
             'name' => 'metadata',
             'vname' => 'LBL_METADATA',
@@ -73,8 +75,8 @@ $dictionary['Dashboard'] = array(
             'unified_search' => false,
             'merge_filter' => 'disabled',
             'calculated' => false,
-        ),
-        'default_dashboard' => array(
+        ],
+        'default_dashboard' => [
             'name' => 'default_dashboard',
             'vname' => 'LBL_DEFAULT_DASHBOARD',
             'type' => 'bool',
@@ -84,28 +86,40 @@ $dictionary['Dashboard'] = array(
             'merge_filter' => 'disabled',
             'comments' => '',
             'massupdate' => 0,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+        'is_template' => [
+            'name' => 'is_template',
+            'vname' => 'LBL_TEMPLATE',
+            'type' => 'bool',
+            'default' => false,
+            'readonly' => true,
+            'reportable' => true,
+            'importable' => true,
+            'full_text_search' => [
+                'enabled' => true,
+                'searchable' => true,
+            ],
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'user_module_view',
             'type' => 'index',
-            'fields' => array('assigned_user_id', 'dashboard_module', 'view_name')
-        ),
-    ),
-    'relationships' =>
-        array(),
-    'uses' => array(
+            'fields' => ['assigned_user_id', 'dashboard_module', 'view_name'],
+        ],
+    ],
+    'relationships' => [],
+    'uses' => [
         'team_security',
-    ),
-    'acls' => array(
+    ],
+    'acls' => [
         'SugarACLOwnerWrite' => true,
-        'SugarACLAdminOnlyFields' => array(
-            'non_writable_fields' => array(
+        'SugarACLAdminOnlyFields' => [
+            'non_writable_fields' => [
                 'default_dashboard',
-            ),
-        ),
-    ),
+            ],
+        ],
+    ],
     // FIXME TY-1675 Fix the Default and Basic SugarObject templates so that
     // Basic implements Default. This would allow the application of various
     // implementations on Basic without forcing Default to have those so that
@@ -115,15 +129,15 @@ $dictionary['Dashboard'] = array(
     // implementation fields. Once there is a separation of default and basic
     // templates we can safely remove these as this module will implement
     // default instead of basic.
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'Dashboards',
     ],
-);
+];
 
 if (!class_exists('VardefManager')) {
 }
-VardefManager::createVardef('Dashboards', 'Dashboard', array('basic', 'assignable'));
+VardefManager::createVardef('Dashboards', 'Dashboard', ['basic', 'assignable']);

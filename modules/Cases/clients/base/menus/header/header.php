@@ -10,33 +10,33 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'Cases';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
-        'route'=>'#'.$module_name.'/create',
-        'label' =>'LNK_NEW_CASE',
-        'acl_action'=>'create',
-        'acl_module'=>$module_name,
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
+        'route' => '#' . $module_name . '/create',
+        'label' => 'LNK_NEW_CASE',
+        'acl_action' => 'create',
+        'acl_module' => $module_name,
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route'=>'#'.$module_name,
-        'label' =>'LNK_CASE_LIST',
-        'acl_action'=>'list',
-        'acl_module'=>$module_name,
+    ],
+    [
+        'route' => '#' . $module_name,
+        'label' => 'LNK_CASE_LIST',
+        'acl_action' => 'list',
+        'acl_module' => $module_name,
         'icon' => 'sicon-list-view',
-    ),
-    array(
+    ],
+    [
         'route' => '#Reports?filterModule=' . $module_name,
-        'label' =>'LNK_CASE_REPORTS',
-        'acl_action'=>'list',
+        'label' => 'LNK_CASE_REPORTS',
+        'acl_action' => 'list',
         'acl_module' => 'Reports',
         'icon' => 'sicon-reports',
-    ),
-    array(
-        'route'=>'#bwc/index.php?module=Import&action=Step1&import_module=Cases&return_module=Cases&return_action=index',
-        'label' =>'LNK_IMPORT_CASES',
-        'acl_action'=>'import',
-        'acl_module'=>$module_name,
+    ],
+    [
+        'route' => '#bwc/index.php?module=Import&action=Step1&import_module=Cases&return_module=Cases&return_action=index',
+        'label' => 'LNK_IMPORT_CASES',
+        'acl_action' => 'import',
+        'acl_module' => $module_name,
         'icon' => 'sicon-upload',
-    ),
-);
+    ],
+];

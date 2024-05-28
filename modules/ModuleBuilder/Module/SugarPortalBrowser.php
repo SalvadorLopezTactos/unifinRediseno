@@ -14,34 +14,35 @@
 
 class SugarPortalBrowser
 {
-    var $modules = array();
+    public $modules = [];
 
-    function loadModules()
+    public function loadModules()
     {
-        foreach(SugarAutoLoader::getDirFiles("modules", true) as $mdir) {
+        foreach (SugarAutoLoader::getDirFiles('modules', true) as $mdir) {
             // strip modules/ from name
             $mname = substr($mdir, 8);
-            if(SugarAutoLoader::existingCustomOne("modules/{$mname}/metadata/studio.php")  && $this->isPortalModule($mname)) {
+            if (SugarAutoLoader::existingCustomOne("modules/{$mname}/metadata/studio.php") && $this->isPortalModule($mname)) {
                 $this->modules[$mname] = new SugarPortalModule($mname);
             }
         }
     }
 
-    function getNodes(){
-        $nodes = array();
+    public function getNodes()
+    {
+        $nodes = [];
         $functions = new SugarPortalFunctions();
         $nodes = $functions->getNodes();
         $this->loadModules();
-        $layouts = array();
-        foreach($this->modules as $module){
+        $layouts = [];
+        foreach ($this->modules as $module) {
             $layouts[$module->name] = $module->getNodes();
         }
-        $nodes[] = array(
-            'name'=> translate('LBL_LAYOUTS'),
+        $nodes[] = [
+            'name' => translate('LBL_LAYOUTS'),
             'imageTitle' => 'Layouts',
-            'type'=>'Folder',
-            'children'=>$layouts,
-            'action'=>'module=ModuleBuilder&action=wizard&portal=1&layout=1');
+            'type' => 'Folder',
+            'children' => $layouts,
+            'action' => 'module=ModuleBuilder&action=wizard&portal=1&layout=1'];
         ksort($nodes);
         return $nodes;
     }
@@ -57,7 +58,7 @@ class SugarPortalBrowser
      * @param string $module The module to check portal validity on
      * @return bool True if a portal/view/$type.php file was found
      */
-    function isPortalModule($module)
+    public function isPortalModule($module)
     {
         // If this module isn't studio enabled for portal, don't bother with the
         // rest of the validation
@@ -93,25 +94,25 @@ class SugarPortalBrowser
     protected function isStudioEnabled($module)
     {
         global $dictionary;
-        
+
         // Grab the bean to make sure this is a legit module
         $bean = BeanFactory::newBean($module);
-        
+
         // Do some simple sanity checking before checking portal status
         if (is_object($bean) && !empty($bean->object_name) && isset($dictionary[$bean->object_name])) {
             $vardef = $dictionary[$bean->object_name];
-            
+
             // No expectation set, means it does not explicitly disallow studio
             // Explicit setting to true for the module means the same
             if (!isset($vardef['studio_enabled']) || $vardef['studio_enabled'] === true) {
                 return true;
             }
-            
+
             // Explicit setting to true for the platform within an array
             $hasPortal = is_array($vardef['studio_enabled']) && isset($vardef['studio_enabled']['portal']);
             return $hasPortal && $vardef['studio_enabled']['portal'] === true;
         }
-        
+
         // Return the default value
         return false;
     }

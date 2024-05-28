@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Pravidla obchodních procesů',
-  'LBL_MODULE_TITLE' => 'Pravidla obchodních procesů.',
-  'LBL_MODULE_NAME_SINGULAR' => 'Pravidla obchodních procesů.',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Pravidla obchodních procesů',
+    'LBL_MODULE_TITLE' => 'Pravidla obchodních procesů.',
+    'LBL_MODULE_NAME_SINGULAR' => 'Pravidla obchodních procesů.',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na zpracování obchodních pravidel',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na zpracování obchodních pravidel',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Řídicí panel záznamů obchodních pravidel procesů',
-  'LBL_RST_UID' => 'ID obchodního pravidla',
-  'LBL_RST_TYPE' => 'Typ obchodního pravidla',
-  'LBL_RST_DEFINITION' => 'Definice obchodního pravidla',
-  'LBL_RST_EDITABLE' => 'Obchodní pravidlo je možné evidovat',
-  'LBL_RST_SOURCE' => 'Zdroj obchodního pravidla',
-  'LBL_RST_SOURCE_DEFINITION' => 'Definice zdroje obchodního pravidla',
-  'LBL_RST_MODULE' => 'Cílový Modul:',
-  'LBL_RST_FILENAME' => 'Souborový název obchodního pravidla',
-  'LBL_RST_CREATE_DATE' => 'Datum vytvoření obchodního pravidla',
-  'LBL_RST_UPDATE_DATE' => 'Datum aktualizace obchodního pravidla',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Řídicí panel záznamů obchodních pravidel procesů',
+    'LBL_RST_UID' => 'ID obchodního pravidla',
+    'LBL_RST_TYPE' => 'Typ obchodního pravidla',
+    'LBL_RST_DEFINITION' => 'Definice obchodního pravidla',
+    'LBL_RST_EDITABLE' => 'Obchodní pravidlo je možné evidovat',
+    'LBL_RST_SOURCE' => 'Zdroj obchodního pravidla',
+    'LBL_RST_SOURCE_DEFINITION' => 'Definice zdroje obchodního pravidla',
+    'LBL_RST_MODULE' => 'Cílový Modul:',
+    'LBL_RST_FILENAME' => 'Souborový název obchodního pravidla',
+    'LBL_RST_CREATE_DATE' => 'Datum vytvoření obchodního pravidla',
+    'LBL_RST_UPDATE_DATE' => 'Datum aktualizace obchodního pravidla',
 
     'LNK_LIST' => 'Zobrazit proces obchodních pravidel',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Vytvořit procesové obchodní pravidlo',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Toto obchodní pravidlo je neplatné, protože používá neplatná pole nebo pole, která nejsou k dispozici v této instanci SugarCRM. Opravte chyby a uložte obchodní pravidlo.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Obchodní pravidlo se aktuálně používá v definici procesu. Opravdu chcete upravit obchodní pravidlo?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Toto obchodní pravidlo nelze odstranit, protože se aktuálně používá v definici procesu.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Toto obchodní pravidlo nelze odstranit, protože se aktuálně používá v definici procesu.',
+];

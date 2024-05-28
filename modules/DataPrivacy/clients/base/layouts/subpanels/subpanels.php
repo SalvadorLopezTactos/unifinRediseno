@@ -9,35 +9,35 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['DataPrivacy']['base']['layout']['subpanels'] = array(
-    'components' => array(
-        array(
+$viewdefs['DataPrivacy']['base']['layout']['subpanels'] = [
+    'components' => [
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_LEADS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'leads',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_CONTACTS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'contacts',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_PROSPECTS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'prospects',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_ACCOUNTS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'accounts',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

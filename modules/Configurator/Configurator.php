@@ -20,11 +20,11 @@ class Configurator
      */
     public $config;
 
-	var $override = '';
-	var $errors = array ('main' => '');
-	var $logger = NULL;
-	var $previous_sugar_override_config_array = array();
-	var $useAuthenticationClass = false;
+    public $override = '';
+    public $errors = ['main' => ''];
+    public $logger = null;
+    public $previous_sugar_override_config_array = [];
+    public $useAuthenticationClass = false;
 
     public const COMPANY_LOGO_UPLOAD_PATH = 'upload://tmp_logo_company_upload/logo.png';
     public const COMPANY_LOGO_UPLOAD_PATH_DARK = 'upload://tmp_logo_company_upload/logo_dark.png';
@@ -32,7 +32,7 @@ class Configurator
      * List of allowed undefined `$sugar_config` keys to be set
      * @var array
      */
-    protected $allowUndefined = array(
+    protected $allowUndefined = [
         'stack_trace_errors',
         'export_delimiter',
         'use_real_names',
@@ -59,24 +59,24 @@ class Configurator
         'enable_action_menu',
         'offlineEnabled',
         'noPrivateTeamUpdate',
-    );
+    ];
 
     /**
      * List of keys allowed to be accepted through POST. If this list is empty
      * then no filtering will happen when populating this object from POST.
      * @var array
      */
-    protected $allowKeys = array();
+    protected $allowKeys = [];
 
     /**
      * List of POST keys to be ignored when populating from POST
      * @var array
      */
-    protected $ignoreKeys = array(
+    protected $ignoreKeys = [
         'action',
         'module',
         'save',
-    );
+    ];
 
     /**
      * Ctor
@@ -92,9 +92,9 @@ class Configurator
      */
     public function loadConfig()
     {
-		global $sugar_config;
-		$this->config = $sugar_config;
-	}
+        global $sugar_config;
+        $this->config = $sugar_config;
+    }
 
     /**
      * Setter for allowKeys
@@ -118,7 +118,6 @@ class Configurator
         $filterAllowKeys = empty($this->allowKeys) ? false : true;
 
         foreach ($_POST as $key => $value) {
-
             // Skip ignored keys silently
             if (in_array($key, $this->ignoreKeys)) {
                 continue;
@@ -131,26 +130,25 @@ class Configurator
             }
 
             // Validate logger file name
-            if ($key === "logger_file_name" && strcmp(trim($value), '') == 0) {
-                $GLOBALS['log']->error("Invalid log file name: Log file name should not blank.");
+            if ($key === 'logger_file_name' && strcmp(trim($value), '') == 0) {
+                $GLOBALS['log']->error('Invalid log file name: Log file name should not blank.');
                 continue;
             }
 
             // Validate logger file max size
-            if ($key === "logger_file_maxSize" && strcmp(trim($value), '') == 0) {
-                $GLOBALS['log']->error("Invalid log file max size: Log file max size should not be blank.");
+            if ($key === 'logger_file_maxSize' && strcmp(trim($value), '') == 0) {
+                $GLOBALS['log']->error('Invalid log file max size: Log file max size should not be blank.');
                 continue;
             }
 
             // Validate logger file max logs
-            if ($key === "logger_file_maxLogs" && $value <= 0) {
-                $GLOBALS['log']->error("Invalid maximum number of logs: should be 1 or greater.");
+            if ($key === 'logger_file_maxLogs' && $value <= 0) {
+                $GLOBALS['log']->error('Invalid maximum number of logs: should be 1 or greater.');
                 continue;
             }
 
             // We can set the value directly if key exists or if allowed as undefined
             if (isset($this->config[$key]) || in_array($key, $this->allowUndefined)) {
-
                 // compensate booleans as strings
                 if (strcmp("$value", 'true') === 0) {
                     $value = true;
@@ -161,9 +159,10 @@ class Configurator
 
                 // set config key
                 $this->config[$key] = $value;
-
+            } elseif ($key === 'document_merge_service_urls_default') {
+                $serviceUrl = $this->config['document_merge']['service_urls'][$value];
+                $this->config['document_merge']['service_urls']['default'] = $serviceUrl;
             } else {
-
                 // Check if key exists by looking up value for multidimensional
                 // keys. This is pretty sketchy as some newer keys can have
                 // underscores.
@@ -174,57 +173,59 @@ class Configurator
                 }
             }
         }
-	}
+    }
 
-	function handleOverride()
-	{
-		global $sugar_config, $sugar_version;
-		$sc = SugarConfig::getInstance();
+    public function handleOverride()
+    {
+        global $sugar_config, $sugar_version;
+        $sc = SugarConfig::getInstance();
         [$oldConfig, $overrideArray] = $this->readOverride();
-		$this->previous_sugar_override_config_array = $overrideArray;
-		$diffArray = deepArrayDiff($this->config, $sugar_config);
-		$overrideArray = sugarArrayMergeRecursive($overrideArray, $diffArray);
+        $this->previous_sugar_override_config_array = $overrideArray;
+        $diffArray = deepArrayDiff($this->config, $sugar_config);
+        $overrideArray = sugarArrayMergeRecursive($overrideArray, $diffArray);
 
-		if(isset($overrideArray['authenticationClass']) && empty($overrideArray['authenticationClass'])) {
-		    unset($overrideArray['authenticationClass']);
-		}
+        if (isset($overrideArray['authenticationClass']) && empty($overrideArray['authenticationClass'])) {
+            unset($overrideArray['authenticationClass']);
+        }
 
-		$overideString = "<?php\n/***CONFIGURATOR***/\n";
+        $overideString = "<?php\n/***CONFIGURATOR***/\n";
 
-		$GLOBALS['sugar_config'] = $this->config;
+        $GLOBALS['sugar_config'] = $this->config;
 
-		//print_r($overrideArray);
+        //print_r($overrideArray);
         //Bug#53013: Clean the tpl cache if action menu style has been changed.
-        if( isset($overrideArray['enable_action_menu']) &&
-                ( !isset($this->previous_sugar_override_config_array['enable_action_menu']) ||
-                    $overrideArray['enable_action_menu'] != $this->previous_sugar_override_config_array['enable_action_menu'] )
+        if (isset($overrideArray['enable_action_menu']) &&
+            (!isset($this->previous_sugar_override_config_array['enable_action_menu']) ||
+                $overrideArray['enable_action_menu'] != $this->previous_sugar_override_config_array['enable_action_menu'])
         ) {
-            $repair = new RepairAndClear;
-            $repair->module_list = array();
+            $repair = new RepairAndClear();
+            $repair->module_list = [];
             $repair->clearTpls();
         }
 
-		foreach($overrideArray as $key => $val) {
-            if (in_array($key, $this->allowUndefined) || isset ($sugar_config[$key])) {
-				if (is_string($val) && strcmp($val, 'true') == 0) {
-					$val = true;
-					$this->config[$key] = $val;
-				}
-				if (is_string($val) && strcmp($val, 'false') == 0) {
-					$val = false;
-					$this->config[$key] = false;
-				}
-			}
-			$overideString .= override_value_to_string_recursive2('sugar_config', $key, $val, true, $oldConfig);
-		}
-		$overideString .= '/***CONFIGURATOR***/';
+        foreach ($overrideArray as $key => $val) {
+            if (in_array($key, $this->allowUndefined) || isset($sugar_config[$key])) {
+                if (is_string($val) && strcmp($val, 'true') == 0) {
+                    $val = true;
+                    $this->config[$key] = $val;
+                }
+                if (is_string($val) && strcmp($val, 'false') == 0) {
+                    $val = false;
+                    $this->config[$key] = false;
+                }
+            }
+            $overideString .= override_value_to_string_recursive2('sugar_config', $key, $val, true, $oldConfig);
+        }
+        $overideString .= '/***CONFIGURATOR***/';
 
-		$this->saveOverride($overideString);
-		if(isset($this->config['logger']['level']) && $this->logger) $this->logger->setLevel($this->config['logger']['level']);
-	}
+        $this->saveOverride($overideString);
+        if (isset($this->config['logger']['level']) && $this->logger) {
+            $this->logger->setLevel($this->config['logger']['level']);
+        }
+    }
 
     //bug #27947 , if previous $sugar_config['stack_trace_errors'] is true and now we disable it , we should clear all the cache.
-    function clearCache()
+    public function clearCache()
     {
         global $sugar_config, $sugar_version;
 
@@ -234,10 +235,10 @@ class Configurator
         ];
 
         [$oldConfig, $currentConfigArray] = $this->readOverride();
-        foreach($currentConfigArray as $key => $val) {
-            if (in_array($key, $this->allowUndefined) || isset ($sugar_config[$key])) {
-                if (empty($val) ) {
-                    if(!empty($this->previous_sugar_override_config_array['stack_trace_errors']) && $key == 'stack_trace_errors'){
+        foreach ($currentConfigArray as $key => $val) {
+            if (in_array($key, $this->allowUndefined) || isset($sugar_config[$key])) {
+                if (empty($val)) {
+                    if (!empty($this->previous_sugar_override_config_array['stack_trace_errors']) && $key == 'stack_trace_errors') {
                         TemplateHandler::clearAll();
                         return;
                     }
@@ -246,10 +247,11 @@ class Configurator
         }
 
         //Module metadata needs to be refreshed if Activity Stream system setting is changed
-        if ((isset($currentConfigArray['activity_streams_enabled'])
+        if ((
+            isset($currentConfigArray['activity_streams_enabled'])
                 && (!isset($oldConfig['activity_streams_enabled']) ||
                     $currentConfigArray['activity_streams_enabled'] != $oldConfig['activity_streams_enabled'])
-            ) ||
+        ) ||
             (isset($oldConfig['activity_streams_enabled']) && !isset($currentConfigArray['activity_streams_enabled']))
         ) {
             $sections[] = MetaDataManager::MM_MODULES;
@@ -274,57 +276,61 @@ class Configurator
         MetaDataManager::refreshSectionCache($sections);
     }
 
-	function saveConfig() {
-		$this->saveImages();
-		$this->populateFromPost();
-		$this->handleOverride();
-		$this->clearCache();
-	}
+    public function saveConfig()
+    {
+        $this->saveImages();
+        $this->populateFromPost();
+        $this->handleOverride();
+        $this->clearCache();
+    }
 
-	/**
-	 * Read config & config override, and return old config and their difference
-	 * @return array[old config, difference in configs]
-	 */
-	protected function readOverride() {
-		$sugar_config = array();
-		if(is_readable('config.php')) {
-		    include 'config.php';
-		}
-		$old_config = $sugar_config;
-		if (file_exists('config_override.php')) {
-		    if ( !is_readable('config_override.php') ) {
-		        $GLOBALS['log']->fatal("Unable to read the config_override.php file. Check the file permissions");
-		    }
-	        else {
-	            include('config_override.php');
-	        }
-		}
-		return array($old_config, deepArrayDiff($sugar_config, $old_config));
-	}
-	function saveOverride($override) {
-        require_once('install/install_utils.php');
+    /**
+     * Read config & config override, and return old config and their difference
+     * @return array[old config, difference in configs]
+     */
+    protected function readOverride()
+    {
+        $sugar_config = [];
+        if (is_readable('config.php')) {
+            include 'config.php';
+        }
+        $old_config = $sugar_config;
+        if (file_exists('config_override.php')) {
+            if (!is_readable('config_override.php')) {
+                $GLOBALS['log']->fatal('Unable to read the config_override.php file. Check the file permissions');
+            } else {
+                include 'config_override.php';
+            }
+        }
+        return [$old_config, deepArrayDiff($sugar_config, $old_config)];
+    }
+
+    public function saveOverride($override)
+    {
+        require_once 'install/install_utils.php';
 
         if (sugar_file_put_contents_atomic('config_override.php', $override) === false) {
-            $GLOBALS['log']->fatal("Unable to write to the config_override.php file. Check the php_errors for detail");
+            $GLOBALS['log']->fatal('Unable to write to the config_override.php file. Check the php_errors for detail');
         }
     }
 
-	function overrideClearDuplicates($array_name, $key) {
-		if (!empty ($this->override)) {
-			$pattern = '/.*CONFIGURATOR[^\$]*\$'.$array_name.'\[\''.$key.'\'\][\ ]*=[\ ]*[^;]*;\n/';
-			$this->override = preg_replace($pattern, '', $this->override);
-		} else {
-			$this->override = "<?php\n\n?>";
-		}
+    public function overrideClearDuplicates($array_name, $key)
+    {
+        if (!empty($this->override)) {
+            $pattern = '/.*CONFIGURATOR[^\$]*\$' . $array_name . '\[\'' . $key . '\'\][\ ]*=[\ ]*[^;]*;\n/';
+            $this->override = preg_replace($pattern, '', $this->override);
+        } else {
+            $this->override = "<?php\n\n?>";
+        }
+    }
 
-	}
-
-	function replaceOverride($array_name, $key, $value) {
-		$GLOBALS[$array_name][$key] = $value;
-		$this->overrideClearDuplicates($array_name, $key);
-		$new_entry = '/***CONFIGURATOR***/'.override_value_to_string($array_name, $key, $value);
-		$this->override = str_replace('?>', "$new_entry\n?>", $this->override);
-	}
+    public function replaceOverride($array_name, $key, $value)
+    {
+        $GLOBALS[$array_name][$key] = $value;
+        $this->overrideClearDuplicates($array_name, $key);
+        $new_entry = '/***CONFIGURATOR***/' . override_value_to_string($array_name, $key, $value);
+        $this->override = str_replace('?>', "$new_entry\n?>", $this->override);
+    }
 
     private function saveImages()
     {
@@ -335,14 +341,14 @@ class Configurator
         }
     }
 
-	function checkTempImage($path)
-	{
-	    if(!verify_uploaded_image($path)) {
-        	$GLOBALS['log']->fatal("A user ({$GLOBALS['current_user']->id}) attempted to use an invalid file for the logo - {$path}");
-        	sugar_die('Invalid File Type');
-		}
-		return $path;
-	}
+    public function checkTempImage($path)
+    {
+        if (!verify_uploaded_image($path)) {
+            $GLOBALS['log']->fatal("A user ({$GLOBALS['current_user']->id}) attempted to use an invalid file for the logo - {$path}");
+            sugar_die('Invalid File Type');
+        }
+        return $path;
+    }
 
     /**
      * Commits images uploaded by the user as the company logo for default theme
@@ -382,13 +388,12 @@ class Configurator
     }
 
 
-	/**
-	 * Add error message
-	 * @param string errstr Error message
-	 */
-	public function addError($errstr)
-	{
-	    $this->errors['main'] .= $errstr."<br>";
-	}
-
+    /**
+     * Add error message
+     * @param string errstr Error message
+     */
+    public function addError($errstr)
+    {
+        $this->errors['main'] .= $errstr . '<br>';
+    }
 }

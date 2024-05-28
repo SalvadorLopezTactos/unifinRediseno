@@ -45,6 +45,12 @@ class UploadMetadata extends \Google\Model
   public $contentType;
   protected $dlpMetricsMetadataType = AppsDynamiteSharedDlpMetricsMetadata::class;
   protected $dlpMetricsMetadataDataType = '';
+  protected $internalOnlyComponentSearchInfoType = AppsDynamiteSharedMessageComponentSearchInfo::class;
+  protected $internalOnlyComponentSearchInfoDataType = '';
+  /**
+   * @var string
+   */
+  public $latestVirusScanTimestamp;
   /**
    * @var string
    */
@@ -169,6 +175,34 @@ class UploadMetadata extends \Google\Model
   public function getDlpMetricsMetadata()
   {
     return $this->dlpMetricsMetadata;
+  }
+  /**
+   * @param AppsDynamiteSharedMessageComponentSearchInfo
+   */
+  public function setInternalOnlyComponentSearchInfo(AppsDynamiteSharedMessageComponentSearchInfo $internalOnlyComponentSearchInfo)
+  {
+    $this->internalOnlyComponentSearchInfo = $internalOnlyComponentSearchInfo;
+  }
+  /**
+   * @return AppsDynamiteSharedMessageComponentSearchInfo
+   */
+  public function getInternalOnlyComponentSearchInfo()
+  {
+    return $this->internalOnlyComponentSearchInfo;
+  }
+  /**
+   * @param string
+   */
+  public function setLatestVirusScanTimestamp($latestVirusScanTimestamp)
+  {
+    $this->latestVirusScanTimestamp = $latestVirusScanTimestamp;
+  }
+  /**
+   * @return string
+   */
+  public function getLatestVirusScanTimestamp()
+  {
+    return $this->latestVirusScanTimestamp;
   }
   /**
    * @param string

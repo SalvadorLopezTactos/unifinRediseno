@@ -17,6 +17,7 @@
 class PMSEExpressionEvaluationException extends Exception
 {
     protected $expressionArray;
+
     // Redefine the exception so message isn't optional
     public function __construct($message, $expressionArray, $code = 0, Exception $previous = null)
     {
@@ -26,12 +27,13 @@ class PMSEExpressionEvaluationException extends Exception
         $this->logMessage();
     }
 
-    public function getExpressionArray () {
+    public function getExpressionArray()
+    {
         return $this->expressionArray;
     }
 
     // custom string representation of object
-    public function __toString()
+    public function __toString(): string
     {
         return self::class . ": [{$this->code}]: {$this->message}\n";
     }

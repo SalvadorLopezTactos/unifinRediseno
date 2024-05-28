@@ -133,11 +133,16 @@ class ExternalResourceClient implements ClientInterface
 
     /**
      * Read timeout in seconds, specified by a float (e.g. 10.5)
+     * Specifying a negative value means an infinite timeout.
      * @param float $timeout
      * @return $this
      */
     public function setTimeout(float $timeout): ExternalResourceClient
     {
+        // Using `==` instead of `===` to catch both 0 and 0.0
+        if ($timeout == 0) {
+            throw new \InvalidArgumentException("Timeout can't be 0. Specifying a negative value means an infinite timeout.");
+        }
         $this->timeout = $timeout;
         return $this;
     }
@@ -284,8 +289,8 @@ class ExternalResourceClient implements ClientInterface
     {
         return $this->request(
             $request->getMethod(),
-            (string) $request->getUri(),
-            (string) $request->getBody(),
+            (string)$request->getUri(),
+            (string)$request->getBody(),
             array_map(static function (array $headerValues): string {
                 return implode(',', $headerValues);
             }, $request->getHeaders())
@@ -319,7 +324,7 @@ class ExternalResourceClient implements ClientInterface
                 'method' => $method,
                 'header' => $headerParam,
                 'follow_location' => 0, // mitigate SSRF via redirect
-                'content' => $body?? null,
+                'content' => $body ?? null,
                 'timeout' => $this->timeout,
                 'protocol_version' => 1.1,
                 'ignore_errors' => true,
@@ -328,7 +333,7 @@ class ExternalResourceClient implements ClientInterface
                 'peer_name' => $externalResource->getHost(),
             ]),
         ];
-        if (count($this->socketContextOptions)) {
+        if (safeCount($this->socketContextOptions)) {
             $options['socket'] = $this->socketContextOptions;
         }
 
@@ -434,7 +439,7 @@ class ExternalResourceClient implements ClientInterface
         $headers = $this->normalizeResponseHeaders($responseHeaders);
         $statusLine = array_shift($headers);
         [$code] = $this->getHttpStatus($statusLine);
-        return (int) $code;
+        return (int)$code;
     }
 
     /**
@@ -450,16 +455,16 @@ class ExternalResourceClient implements ClientInterface
         $boundary = '--------------------------' . microtime(true);
         $requestHeaders = array_merge(['Content-type' => 'multipart/form-data; boundary=' . $boundary], $headers);
         $fileContents = $file->get_file_contents();
-        $content = "--" . $boundary . "\r\n" .
-            "Content-Disposition: form-data; name=\"" . $file->field_name . "\"; filename=\"" . basename($file->get_temp_file_location()) . "\"\r\n" .
+        $content = '--' . $boundary . "\r\n" .
+            'Content-Disposition: form-data; name="' . $file->field_name . '"; filename="' . basename($file->get_temp_file_location()) . "\"\r\n" .
             "Content-Type: application/zip\r\n\r\n" .
             $fileContents . "\r\n";
         foreach ($body as $name => $value) {
-            $content .= "--" . $boundary . "\r\n" .
+            $content .= '--' . $boundary . "\r\n" .
                 "Content-Disposition: form-data; name=\"{$name}\"\r\n\r\n" .
                 "{$value}\r\n";
         }
-        $content .= "--" . $boundary . "--\r\n";
+        $content .= '--' . $boundary . "--\r\n";
         return $this->request($method, $url, $content, $requestHeaders);
     }
 
@@ -513,12 +518,12 @@ class ExternalResourceClient implements ClientInterface
     protected function getHttpStatus($statusLine): array
     {
         $parts = explode(' ', $statusLine, 3);
-        if (count($parts) < 2 || 0 !== stripos($parts[0], 'http/')) {
+        if (safeCount($parts) < 2 || 0 !== stripos($parts[0], 'http/')) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid HTTP status line', $statusLine));
         }
         $code = $parts[1];
         $reasonPhrase = $parts[2];
-        return array($code, $reasonPhrase);
+        return [$code, $reasonPhrase];
     }
 
     /**
@@ -532,7 +537,7 @@ class ExternalResourceClient implements ClientInterface
     {
         $oneSecondInMicroseconds = 1000000;
         $maxDelay = 64 * $oneSecondInMicroseconds;
-        $delay = pow(2, $attempt) * $oneSecondInMicroseconds;
+        $delay = 2 ** $attempt * $oneSecondInMicroseconds;
         $jitter = random_int(0, $oneSecondInMicroseconds);
 
         return min($delay + $jitter, $maxDelay);

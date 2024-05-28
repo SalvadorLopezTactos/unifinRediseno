@@ -15,6 +15,13 @@
  */
 ({
     /**
+     * drive types that do support variable paths
+     */
+    variablePathDisabled: ['onedrive', 'sharepoint',],
+
+    variablePathEnabled: ['google', 'dropbox',],
+
+    /**
      * field types to use in paths
      */
     acceptedFieldTypes: [
@@ -126,10 +133,18 @@
         /**
          * Make sure we have one empty path at the begining
          */
-        this.paths.unshift({
-            path: '',
-            pathDisplay: 'My files',
-        });
+        let rootName = app.lang.getAppString('LBL_MY_FILES');
+        if (this.driveType !== 'sharepoint') {
+            this.paths.unshift({
+                path: '',
+                pathDisplay: rootName,
+            });
+        } else {
+            this.paths.unshift({
+                path: '',
+                pathDisplay: app.lang.get('LBL_DEFAULT_STARTING_PATH', this.module),
+            });
+        }
         this.render();
     },
 
@@ -189,6 +204,7 @@
         this.$('.moduleList').select2({
             autoClear: true,
             containerCssClass: 'select2-choices-pills-close',
+            placeholder: app.lang.get('LBL_SELECT_MODULE', this.module),
         });
 
         this.$('.moduleList').trigger('change');
@@ -277,6 +293,8 @@
             .children('.span3')
             .children('select.moduleList').val();
 
+        const pathId = evt.target.dataset.id;
+
         if (_.isEmpty(pathModule)) {
             app.alert.show('module-required', {
                 level: 'error',
@@ -293,6 +311,7 @@
                 parentId: 'root',
                 folderName: '',
                 driveType: this.driveType,
+                pathId: pathId
             },
             layout: 'drive-path-select',
         }, _.bind(this.loadPaths, this));
@@ -308,6 +327,8 @@
             .parents('.row-fluid')
             .children('.span3')
             .children('select.moduleList').val();
+
+        const pathId = evt.target.dataset.id;
 
         // we cannot save a module path without module
         if (!pathModule) {
@@ -348,6 +369,7 @@
             isShared: isShared,
             folderId: folderId,
             driveId: driveId,
+            pathId: pathId
         } , {
             success: _.bind(function() {
                 app.alert.show('path-saved', {

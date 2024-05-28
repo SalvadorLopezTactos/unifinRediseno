@@ -15,7 +15,6 @@
  */
 class SugarACLDeveloperForTarget extends SugarACLStrategy
 {
-
     protected $allowUserRead = false;
     protected $targetModuleField = false;
 
@@ -36,7 +35,7 @@ class SugarACLDeveloperForTarget extends SugarACLStrategy
      *
      * @param string $module
      * @param string $view
-     * @param array  $context
+     * @param array $context
      *
      * @return bool|void
      */
@@ -52,23 +51,22 @@ class SugarACLDeveloperForTarget extends SugarACLStrategy
         }
 
         if (empty($context['bean'])) {
-
             if ($current_user->isAdmin()) {
                 return true;
             }
 
-            if ($module === "Administration" && $current_user->isDeveloperForAnyModule()) {
+            if ($module === 'Administration' && $current_user->isDeveloperForAnyModule()) {
                 return true;
             }
 
             $dev_mods = $current_user->getDeveloperModules();
-            $ret = count($dev_mods);
+            $ret = safeCount($dev_mods);
             if ($ret) {
                 $sup_mods = PMSEEngineUtils::getSupportedModules();
                 $valid_mods = array_intersect($dev_mods, $sup_mods);
                 $ret = !empty($valid_mods);
             }
-            return (bool) $ret;
+            return (bool)$ret;
         }
 
         if (!empty($this->targetModuleField) && !empty($context['bean'])) {
@@ -85,5 +83,4 @@ class SugarACLDeveloperForTarget extends SugarACLStrategy
 
         return false;
     }
-
 }

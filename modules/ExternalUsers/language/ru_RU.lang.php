@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => 'Обращения',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Сделки',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Коммерческие предложения',
-    'LBL_NOTES'=>'Заметки',
+    'LBL_NOTES' => 'Заметки',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => 'Информационная панель записи внешних пользователей',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Временная шкала внешнего пользователя',
 ];

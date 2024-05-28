@@ -12,59 +12,59 @@
  */
 
 $module_name = 'pmse_Inbox';
-$viewdefs[$module_name]['base']['layout']['reassignCases'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs[$module_name]['base']['layout']['reassignCases'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
                             'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'view' => 'reassignCases-headerpane',
-                                ),
-                                array(
-                                    'layout' => array(
+                                ],
+                                [
+                                    'layout' => [
                                         'type' => 'filterpanel',
-                                        'last_state' => array(
+                                        'last_state' => [
                                             'id' => 'list-filterpanel',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'toggle-view' => 'list',
-                                            ),
-                                        ),
-                                        'availableToggles' => array(),
-                                        'components' => array(
-                                            array(
+                                            ],
+                                        ],
+                                        'availableToggles' => [],
+                                        'components' => [
+                                            [
                                                 'view' => 'casesList-filter',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'layout' => 'reassignCases-list',
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'preview-pane',
                             'css_class' => 'preview-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'preview',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

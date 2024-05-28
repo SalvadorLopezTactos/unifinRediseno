@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => 'Talepler',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Fırsatlar',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Teklifler',
-    'LBL_NOTES'=>'Notlar',
+    'LBL_NOTES' => 'Notlar',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => 'Harici Kullanıcı Kayıt Panosu',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Harici Kullanıcı Zaman Çizelgesi',
 ];

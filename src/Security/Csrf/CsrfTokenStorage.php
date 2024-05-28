@@ -36,9 +36,10 @@ class CsrfTokenStorage implements TokenStorageInterface
      */
     protected $sessionStore;
 
-    public function __construct(SessionStorage $store) {
-        if(!$store->offsetExists(static::SESSION_NAMESPACE)) {
-            $store->offsetSet(static::SESSION_NAMESPACE, array());
+    public function __construct(SessionStorage $store)
+    {
+        if (!$store->offsetExists(static::SESSION_NAMESPACE)) {
+            $store->offsetSet(static::SESSION_NAMESPACE, []);
         }
         $this->sessionStore = $store->offsetGet(static::SESSION_NAMESPACE);
     }
@@ -49,10 +50,10 @@ class CsrfTokenStorage implements TokenStorageInterface
     public function getToken($tokenId)
     {
         if (!$this->sessionStore->offsetExists($tokenId)) {
-            throw new TokenNotFoundException('The CSRF token with ID '.$tokenId.' does not exist.');
+            throw new TokenNotFoundException('The CSRF token with ID ' . $tokenId . ' does not exist.');
         }
 
-        return (string) $this->sessionStore->offsetGet($tokenId);
+        return (string)$this->sessionStore->offsetGet($tokenId);
     }
 
     /**
@@ -60,7 +61,7 @@ class CsrfTokenStorage implements TokenStorageInterface
      */
     public function setToken($tokenId, $token)
     {
-        $this->sessionStore->offsetSet($tokenId, (string) $token);
+        $this->sessionStore->offsetSet($tokenId, (string)$token);
     }
 
     /**

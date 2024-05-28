@@ -9,24 +9,24 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['subpanel-list-create'] = array(
-    'rowactions' => array(
-        'actions' => array(
-            array(
+$viewdefs['base']['view']['subpanel-list-create'] = [
+    'rowactions' => [
+        'actions' => [
+            [
                 'type' => 'rowaction',
                 'css_class' => 'btn',
                 'icon' => 'sicon-plus',
                 'event' => 'list:addrow:fire',
-            ),
-            array(
+            ],
+            [
                 'type' => 'rowaction',
                 'css_class' => 'btn',
                 'icon' => 'sicon-minus',
                 'event' => 'list:deleterow:fire',
-            ),
-        ),
-    ),
-    'last_state' => array(
+            ],
+        ],
+    ],
+    'last_state' => [
         'id' => 'subpanel-list-create',
-    ),
-);
+    ],
+];

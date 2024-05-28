@@ -9,39 +9,39 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['ContractType'] = array(
+$dictionary['ContractType'] = [
     'favorites' => false,
     'table' => 'contract_types',
     'archive' => false,
     'comment' => 'Specifies the types of contracts available',
 
-    'fields' => array (
-        'list_order' => array (
+    'fields' => [
+        'list_order' => [
             'name' => 'list_order',
             'vname' => 'LBL_LIST_ORDER',
             'type' => 'int',
             'len' => '4',
             'comment' => 'Relative order in drop down list',
             'importable' => 'required',
-        ),
-        'documents' => array (
+        ],
+        'documents' => [
             'name' => 'documents',
             'type' => 'link',
             'relationship' => 'contracttype_documents',
-            'source'=>'non-db',
-            'vname'=>'LBL_DOCUMENTS',
-        ),
-    ),
-    'acls' => array(
-        'SugarACLDeveloperOrAdmin' => array(
+            'source' => 'non-db',
+            'vname' => 'LBL_DOCUMENTS',
+        ],
+    ],
+    'acls' => [
+        'SugarACLDeveloperOrAdmin' => [
             'aclModule' => 'Contracts',
             'allowUserRead' => true,
-        ),
-    ),
-    'uses' => array(
+        ],
+    ],
+    'uses' => [
         'basic',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef(
     'ContractTypes',

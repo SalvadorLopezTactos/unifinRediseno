@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Βάση Γνώσεων',
     'LBL_MODULE_NAME_SINGULAR' => 'Άρθρο Γνωσιακής Βάσης',
     'LBL_MODULE_TITLE' => 'Άρθρο Βάσης Γνώσεων',
@@ -17,4 +17,4 @@ $mod_strings = array(
     'LBL_KEYWORDS' => 'Λέξεις Κλειδιά:',
     'LBL_CONTENT' => 'Περιεχόμενο',
     'LBL_ATTACHMENTS' => 'Επισυνάψεις:',
-);
+];

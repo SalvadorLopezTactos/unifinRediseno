@@ -14,21 +14,27 @@ class QuoteConvertApi extends SugarApi
 {
     public function registerApiRest()
     {
-        return array(
-            'convert' => array(
+        return [
+            'convert' => [
                 'reqType' => 'POST',
-                'path' => array('Quotes', '?', 'opportunity'),
-                'pathVars' => array('module', 'record', 'opportunity'),
+                'path' => ['Quotes', '?', 'opportunity'],
+                'pathVars' => ['module', 'record', 'opportunity'],
                 'method' => 'convertQuote',
                 'shortHelp' => 'Convert a Quote into another record',
                 'longHelp' => 'modules/Quotes/clients/base/api/help/quote_convert.html',
-            )
-        );
+            ],
+        ];
     }
 
+    /**
+     * @throws SugarApiExceptionNotAuthorized
+     * @throws SugarApiExceptionEditConflict
+     * @throws SugarApiExceptionMissingParameter
+     * @throws SugarApiExceptionNotFound
+     */
     public function convertQuote(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('record'));
+        $this->requireArgs($args, ['record']);
         /* @var $quote Quote */
         $quote = $this->loadBean($api, $args);
 
@@ -38,14 +44,14 @@ class QuoteConvertApi extends SugarApi
 
         // first lets load up the bean to make sure we have access to the opportunity save
         /* @var $opportunity Opportunity */
-        $opportunity = $this->loadBean($api, array('module' => 'Opportunities', 'record' => ''));
+        $opportunity = $this->loadBean($api, ['module' => 'Opportunities', 'record' => '']);
         if (!$opportunity->ACLAccess('save')) {
             // No create access so we construct an error message and throw the exception
             $failed_module_strings = return_module_language($GLOBALS['current_language'], $opportunity->module_dir);
             $moduleName = $failed_module_strings['LBL_MODULE_NAME'];
             $args = null;
             if (!empty($moduleName)) {
-                $args = array('moduleName' => $moduleName);
+                $args = ['moduleName' => $moduleName];
             }
             throw new SugarApiExceptionNotAuthorized('EXCEPTION_CREATE_MODULE_NOT_AUTHORIZED', $args);
         }
@@ -54,11 +60,11 @@ class QuoteConvertApi extends SugarApi
         $quote->load_relationship('opportunities');
 
         $beans = $quote->opportunities->getBeans();
-        if (is_countable($beans) ? count($beans) : 0) {
+        if (safeCount($beans)) {
             // throw an exception here as we already have one.
             throw new SugarApiExceptionEditConflict(
                 'EXCEPTION_QUOTE_ALREADY_CONVERTED',
-                array(),
+                [],
                 'Quotes',
                 0,
                 'already_converted'
@@ -78,10 +84,10 @@ class QuoteConvertApi extends SugarApi
         // re-enable activity streams
         Activity::restoreToPreviousState();
 
-        return array(
+        return [
             'record' => $this->formatBean($api, $args, $opportunity),
-            'related_record' => $this->formatBean($api, $args, $quote)
-        );
+            'related_record' => $this->formatBean($api, $args, $quote),
+        ];
     }
 
     /**
@@ -145,8 +151,8 @@ class QuoteConvertApi extends SugarApi
         // load the revenue line items
         $opp->load_relationship('revenuelineitems');
 
-         $bundles = $quote->get_product_bundles();
-        foreach($bundles as $bundle) {
+        $bundles = $quote->get_product_bundles();
+        foreach ($bundles as $bundle) {
             $products = $bundle->getProducts();
             /* @var $product Product */
             foreach ($products as $product) {
@@ -171,8 +177,8 @@ class QuoteConvertApi extends SugarApi
         $forecastConfig = $this->getForecastConfig();
         $ranges = $forecastConfig[$forecastConfig['forecast_ranges'] . '_ranges'];
 
-        foreach($ranges as $commit_stage => $range) {
-            if ($range['min']<= $probability && $range['max'] >= $probability) {
+        foreach ($ranges as $commit_stage => $range) {
+            if ($range['min'] <= $probability && $range['max'] >= $probability) {
                 return $commit_stage;
             }
         }
@@ -221,7 +227,7 @@ class QuoteConvertApi extends SugarApi
         if (!empty($ids)) {
             $opp->load_relationship('contacts');
             foreach ($ids as $id) {
-                $opp->contacts->add($id, array('contact_role' => $default_role));
+                $opp->contacts->add($id, ['contact_role' => $default_role]);
             }
         }
     }

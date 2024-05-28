@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -41,8 +42,8 @@ class SugarACLLockedFields extends SugarACLStrategy
 
         // only need to check write type action, but not delete
         $action = self::fixUpActionName($context['action']);
-        $writes = array('edit', 'import', 'massupdate');
-        if (!in_array($action, $writes)) {
+        $writes = ['edit', 'import', 'massupdate'];
+        if (!safeInArray($action, $writes)) {
             return true;
         }
 
@@ -64,7 +65,7 @@ class SugarACLLockedFields extends SugarACLStrategy
         // If there are locked fields...
         if (!empty($lockedFields)) {
             // See if the requested field is in the locked list. If it is, return false.
-            if (in_array($context['field'], $lockedFields)) {
+            if (safeInArray($context['field'], $lockedFields)) {
                 return false;
             }
 
@@ -85,7 +86,7 @@ class SugarACLLockedFields extends SugarACLStrategy
      * @param array $context
      * @return SugarBean
      */
-    public static function loadBean($module, $context = array())
+    public static function loadBean($module, $context = [])
     {
         $bean = null;
         if (isset($context['bean']) && $context['bean'] instanceof SugarBean
@@ -108,7 +109,7 @@ class SugarACLLockedFields extends SugarACLStrategy
         foreach ($defs as $def) {
             // And check to see if the group is the same as the requested field
             if (isset($def['group']) && $def['group'] === $field) {
-                $groupSet = array();
+                $groupSet = [];
                 // Now find all fields in the group
                 foreach ($defs as $d) {
                     if ((isset($d['group']) && $d['group'] === $def['group']) || $d['name'] === $def['group']) {

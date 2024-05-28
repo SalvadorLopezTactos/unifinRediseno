@@ -13,14 +13,16 @@
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
 use Sugarcrm\IdentityProvider\Srn;
 
-class UsersViewEdit extends ViewEdit {
+class UsersViewEdit extends ViewEdit
+{
     /**
      * @var \UserViewHelper|mixed
      */
     public $fieldHelper;
-var $useForSubpanel = true;
+    public $useForSubpanel = true;
 
-    function preDisplay() {
+    public function preDisplay()
+    {
         $this->fieldHelper = UserViewHelper::create($this->ss, $this->bean, 'EditView');
         $this->fieldHelper->setupAdditionalFields();
 
@@ -35,10 +37,10 @@ var $useForSubpanel = true;
     public function getMetaDataFile($type = null)
     {
         $userType = 'Regular';
-        if($this->fieldHelper->usertype == 'PORTAL_ONLY'){
+        if ($this->fieldHelper->usertype == 'PORTAL_ONLY') {
             $userType = 'Portal';
         }
-        if($this->fieldHelper->usertype == 'GROUP'){
+        if ($this->fieldHelper->usertype == 'GROUP') {
             $userType = 'Group';
         }
 
@@ -66,19 +68,19 @@ var $useForSubpanel = true;
         $this->ss->assign('IS_ADMIN', $current_user->is_admin ? true : false);
 
         //make sure we can populate user type dropdown.  This usually gets populated in predisplay unless this is a quickeditform
-        if(!isset($this->fieldHelper)){
+        if (!isset($this->fieldHelper)) {
             $this->fieldHelper = UserViewHelper::create($this->ss, $this->bean, 'EditView');
             $this->fieldHelper->setupAdditionalFields();
         }
 
-        if(isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] == 'true') {
+        if (isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] == 'true') {
             $return_action = $this->request->getValidInputRequest('return_action');
             $this->ss->assign('RETURN_ACTION', $return_action);
             $record = $this->request->getValidInputRequest('record', 'Assert\Guid');
             $this->ss->assign('RETURN_ID', $record);
-            $this->bean->id = "";
-            $this->bean->user_name = "";
-            $this->ss->assign('ID','');
+            $this->bean->id = '';
+            $this->bean->user_name = '';
+            $this->ss->assign('ID', '');
         } else {
             if (!$return_module) {
                 $this->ss->assign('RETURN_MODULE', $this->bean->module_dir);
@@ -104,13 +106,13 @@ var $useForSubpanel = true;
 
         ///////////////////////////////////////////////////////////////////////////////
         ////	NEW USER CREATION ONLY
-        if(empty($this->bean->id)) {
-            $this->ss->assign('SHOW_ADMIN_CHECKBOX','height="30"');
-            $this->ss->assign('NEW_USER','1');
-        }else{
-            $this->ss->assign('NEW_USER','0');
-            $this->ss->assign('NEW_USER_TYPE','DISABLED');
-            $this->ss->assign('REASSIGN_JS', "return confirmReassignRecords();");
+        if (empty($this->bean->id)) {
+            $this->ss->assign('SHOW_ADMIN_CHECKBOX', 'height="30"');
+            $this->ss->assign('NEW_USER', '1');
+        } else {
+            $this->ss->assign('NEW_USER', '0');
+            $this->ss->assign('NEW_USER_TYPE', 'DISABLED');
+            $this->ss->assign('REASSIGN_JS', 'return confirmReassignRecords();');
         }
 
         ////	END NEW USER CREATION ONLY
@@ -119,21 +121,21 @@ var $useForSubpanel = true;
         global $sugar_flavor;
         $admin = Administration::getSettings();
 
-        if((isset($sugar_flavor) && $sugar_flavor != null) &&
-           (isset($admin->settings['license_enforce_user_limit']) && $admin->settings['license_enforce_user_limit'] == 1)) {
+        if ((isset($sugar_flavor) && $sugar_flavor != null) &&
+            (isset($admin->settings['license_enforce_user_limit']) && $admin->settings['license_enforce_user_limit'] == 1)) {
             if (empty($this->bean->id)) {
                 $license_users = $admin->settings['license_users'];
                 if ($license_users != '') {
                     $user_array = get_user_array(
                         false,
-                        "",
-                        "",
+                        '',
+                        '',
                         false,
                         null,
-                        " AND " . User::getLicensedUsersWhere(),
+                        ' AND ' . User::getLicensedUsersWhere(),
                         false
                     );
-                    $license_seats_needed = (is_countable($user_array) ? count($user_array) : 0) - $license_users;
+                    $license_seats_needed = safeCount($user_array) - $license_users;
                 } else {
                     $license_seats_needed = -1;
                 }
@@ -161,31 +163,32 @@ var $useForSubpanel = true;
         }
 
         // Build viewable versions of a few fields for non-admins
-        if(!empty($this->bean->id)) {
-            if( !empty($this->bean->status) ) {
-                $this->ss->assign('STATUS_READONLY',$app_list_strings['user_status_dom'][$this->bean->status]);
+        if (!empty($this->bean->id)) {
+            if (!empty($this->bean->status)) {
+                $this->ss->assign('STATUS_READONLY', $app_list_strings['user_status_dom'][$this->bean->status]);
             }
-            if( !empty($this->bean->employee_status) ) {
+            if (!empty($this->bean->employee_status)) {
                 $this->ss->assign('EMPLOYEE_STATUS_READONLY', $app_list_strings['employee_status_dom'][$this->bean->employee_status]);
             }
-            if( !empty($this->bean->reports_to_id) ) {
+            if (!empty($this->bean->reports_to_id)) {
                 $reportsToUserField = "<input type='text' name='reports_to_name' id='reports_to_name' value='{$this->bean->reports_to_name}' disabled>\n";
                 $reportsToUserField .= "<input type='hidden' name='reports_to_id' id='reports_to_id' value='{$this->bean->reports_to_id}'>";
                 $this->ss->assign('REPORTS_TO_READONLY', $reportsToUserField);
             }
-            if( !empty($this->bean->title) ) {
+            if (!empty($this->bean->title)) {
                 $this->ss->assign('TITLE_READONLY', $this->bean->title);
             }
-            if( !empty($this->bean->department) ) {
+            if (!empty($this->bean->department)) {
                 $this->ss->assign('DEPT_READONLY', $this->bean->department);
             }
         }
 
         $processSpecial = false;
         $processFormName = '';
-        if ( isset($this->fieldHelper->usertype) && ($this->fieldHelper->usertype == 'GROUP'
-             || $this->fieldHelper->usertype == 'PORTAL_ONLY'
-            )) {
+        if (isset($this->fieldHelper->usertype) && (
+            $this->fieldHelper->usertype == 'GROUP'
+                || $this->fieldHelper->usertype == 'PORTAL_ONLY'
+        )) {
             $this->ev->formName = 'EditViewGroup';
 
             $processSpecial = true;
@@ -193,7 +196,7 @@ var $useForSubpanel = true;
         }
 
         //Bug#51609 Replace {php} code block in EditViewHeader.tpl
-        $action_button = array();
+        $action_button = [];
         $APP = $this->ss->getTemplateVars('APP');
         $PWDSETTINGS = $this->ss->getTemplateVars('PWDSETTINGS');
         $REGEX = $this->ss->getTemplateVars('REGEX');
@@ -204,19 +207,17 @@ var $useForSubpanel = true;
         $RETURN_ID = $this->ss->getTemplateVars('RETURN_ID');
 
         $minpwdlength = !empty($PWDSETTINGS['minpwdlength']) ? $PWDSETTINGS['minpwdlength'] : '';
-        $maxpwdlength =  !empty($PWDSETTINGS['maxpwdlength']) ? $PWDSETTINGS['maxpwdlength'] : '';
+        $maxpwdlength = !empty($PWDSETTINGS['maxpwdlength']) ? $PWDSETTINGS['maxpwdlength'] : '';
         $action_button_header[] = <<<EOD
                     <input type="button" id="SAVE_HEADER" title="{$APP['LBL_SAVE_BUTTON_TITLE']}" accessKey="{$APP['LBL_SAVE_BUTTON_KEY']}"
                           class="button primary" onclick="var _form = $('#EditView')[0]; if (!set_password(_form,newrules('{$minpwdlength}','{$maxpwdlength}','{$REGEX}'))) return false; if (!Admin_check()) return false; _form.action.value='Save'; {$CHOOSER_SCRIPT} {$REASSIGN_JS} if(verify_data(EditView)) { submit_form(_form); }"
                           name="button" value="{$APP['LBL_SAVE_BUTTON_LABEL']}">
-EOD
-        ;
+EOD;
         $action_button_header[] = <<<EOD
                     <input	title="{$APP['LBL_CANCEL_BUTTON_TITLE']}" id="CANCEL_HEADER" accessKey="{$APP['LBL_CANCEL_BUTTON_KEY']}"
                               class="button" onclick="var _form = $('#EditView')[0]; _form.action.value='{$RETURN_ACTION}'; _form.module.value='{$RETURN_MODULE}'; _form.record.value='{$RETURN_ID}'; _form.submit()"
                               type="button" name="button" value="{$APP['LBL_CANCEL_BUTTON_LABEL']}">
-EOD
-        ;
+EOD;
         $action_button_header = array_merge($action_button_header, $this->ss->getTemplateVars('BUTTONS_HEADER'));
         $this->ss->assign('ACTION_BUTTON_HEADER', $action_button_header);
 
@@ -224,20 +225,18 @@ EOD
                     <input type="button" id="SAVE_FOOTER" title="{$APP['LBL_SAVE_BUTTON_TITLE']}" accessKey="{$APP['LBL_SAVE_BUTTON_KEY']}"
                           class="button primary" onclick="var _form = $('#EditView')[0]; if (!set_password(_form,newrules('{$minpwdlength}','{$maxpwdlength}','{$REGEX}'))) return false; if (!Admin_check()) return false; _form.action.value='Save'; {$CHOOSER_SCRIPT} {$REASSIGN_JS} if(verify_data(EditView)) { submit_form(_form); }"
                           name="button" value="{$APP['LBL_SAVE_BUTTON_LABEL']}">
-EOD
-        ;
+EOD;
         $action_button_footer[] = <<<EOD
                     <input	title="{$APP['LBL_CANCEL_BUTTON_TITLE']}" id="CANCEL_FOOTER" accessKey="{$APP['LBL_CANCEL_BUTTON_KEY']}"
                               class="button" onclick="var _form = $('#EditView')[0]; _form.action.value='{$RETURN_ACTION}'; _form.module.value='{$RETURN_MODULE}'; _form.record.value='{$RETURN_ID}'; _form.submit()"
                               type="button" name="button" value="{$APP['LBL_CANCEL_BUTTON_LABEL']}">
-EOD
-        ;
+EOD;
         $action_button_footer = array_merge($action_button_footer, $this->ss->getTemplateVars('BUTTONS_FOOTER'));
         $this->ss->assign('ACTION_BUTTON_FOOTER', $action_button_footer);
 
         //if the request object has 'scrolltocal' set, then we are coming here from the tour window box and need to set flag to true
         // so that footer.tpl fires off script to scroll to calendar section
-        if(!empty($_REQUEST['scrollToCal'])){
+        if (!empty($_REQUEST['scrollToCal'])) {
             $this->ss->assign('scroll_to_cal', true);
         }
 
@@ -273,10 +272,9 @@ EOD
             $this->ss->assign('NON_EDITABLE_FIELDS_MSG', $msg);
         }
 
-        $this->ev->process($processSpecial,$processFormName);
+        $this->ev->process($processSpecial, $processFormName);
 
-		echo $this->ev->display($this->showTitle);
-
+        echo $this->ev->display($this->showTitle);
     }
 
 
@@ -294,18 +292,18 @@ EOD
     {
         $theTitle = '';
 
-        if($GLOBALS['current_user']->isAdminForModule('Users')
+        if ($GLOBALS['current_user']->isAdminForModule('Users')
         ) {
-        $createImageURL = SugarThemeRegistry::current()->getImageURL('create-record.gif');
+            $createImageURL = SugarThemeRegistry::current()->getImageURL('create-record.gif');
             $url = 'index.php?' . http_build_query(
-                array(
-                    'module' => $module,
-                    'action' => 'EditView',
-                    'return_module' => $module,
-                    'return_action' => 'DetailView',
-                )
+                [
+                        'module' => $module,
+                        'action' => 'EditView',
+                        'return_module' => $module,
+                        'return_action' => 'DetailView',
+                    ]
             );
-        $theTitle = <<<EOHTML
+            $theTitle = <<<EOHTML
 &nbsp;
 <img src='{$createImageURL}' alt='{$GLOBALS['app_strings']['LNK_CREATE']}'>
 <a href="{$url}" class="utilsLink">
@@ -324,7 +322,7 @@ EOHTML;
     {
         $ss = new Sugar_Smarty();
         $error = string_format($GLOBALS['mod_strings']['ERR_CREATE_USER_FOR_IDM_MODE'], [$url]);
-        $ss->assign("error", $error);
+        $ss->assign('error', $error);
         $ss->display('modules/Users/tpls/errorMessage.tpl');
         sugar_cleanup(true);
     }

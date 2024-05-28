@@ -50,7 +50,7 @@ class PackageController
      */
     public function getPackagesInStaging(): void
     {
-        $this->sendJsonOutput(array('packages' => $this->packageManager->getPackagesInStaging()));
+        $this->sendJsonOutput(['packages' => $this->packageManager->getPackagesInStaging()]);
     }
 
     /**

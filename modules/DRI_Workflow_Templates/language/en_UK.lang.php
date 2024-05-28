@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Active',
     'LBL_ASSIGNEE_RULE' => 'Assignee Rule',
     'LBL_TARGET_ASSIGNEE' => 'Target Assignee',
+    'LBL_STAGE_NUMBERS' => 'Stage Numbering',
     'LBL_EXPORT_BUTTON_LABEL' => 'Export',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Import',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Automatically create/update a new Smart Guide Template record by importing a *.json file from your file system.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'If checked, If Target Assignee = Parent Assignee, when “Assigned To” user is changed on a parent, the “Assigned To” users will also automatically change on the smart guides, stages and activities. Note that the settings of Target Assignee on Activity Templates take precedence over Smart Guide Template',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'When should a user be assigned to the Activities',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Who should be assigned the Activities',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'This toggle allows you to show or hide automatic stage numbering.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Smart Guide/Stage/Activity Template',
 ];

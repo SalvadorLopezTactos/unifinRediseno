@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Prozess-Geschäftsregeln',
-  'LBL_MODULE_TITLE' => 'Prozess-Geschäftsregeln',
-  'LBL_MODULE_NAME_SINGULAR' => 'Prozess-Geschäftsregel',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Prozess-Geschäftsregeln',
+    'LBL_MODULE_TITLE' => 'Prozess-Geschäftsregeln',
+    'LBL_MODULE_NAME_SINGULAR' => 'Prozess-Geschäftsregel',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Prozess-Geschäftsregeln',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Prozess-Geschäftsregeln',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Prozess-Geschäftsregelnbericht-Dashboard',
-  'LBL_RST_UID' => 'Geschäftsregel-ID',
-  'LBL_RST_TYPE' => 'Geschäftsregel-Typ',
-  'LBL_RST_DEFINITION' => 'Geschäftsregel-Definition',
-  'LBL_RST_EDITABLE' => 'Geschäftsregel bearbeitbar',
-  'LBL_RST_SOURCE' => 'Geschäftsregel-Quelle',
-  'LBL_RST_SOURCE_DEFINITION' => 'Geschäftsregel-Quellendefinition',
-  'LBL_RST_MODULE' => 'Zielmodul:',
-  'LBL_RST_FILENAME' => 'Geschäftsregel-Dateiname',
-  'LBL_RST_CREATE_DATE' => 'Geschäftsregel-Erstellungsdatum',
-  'LBL_RST_UPDATE_DATE' => 'Geschäftsregel-Aktualisierungsdatum',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Prozess-Geschäftsregelnbericht-Dashboard',
+    'LBL_RST_UID' => 'Geschäftsregel-ID',
+    'LBL_RST_TYPE' => 'Geschäftsregel-Typ',
+    'LBL_RST_DEFINITION' => 'Geschäftsregel-Definition',
+    'LBL_RST_EDITABLE' => 'Geschäftsregel bearbeitbar',
+    'LBL_RST_SOURCE' => 'Geschäftsregel-Quelle',
+    'LBL_RST_SOURCE_DEFINITION' => 'Geschäftsregel-Quellendefinition',
+    'LBL_RST_MODULE' => 'Zielmodul:',
+    'LBL_RST_FILENAME' => 'Geschäftsregel-Dateiname',
+    'LBL_RST_CREATE_DATE' => 'Geschäftsregel-Erstellungsdatum',
+    'LBL_RST_UPDATE_DATE' => 'Geschäftsregel-Aktualisierungsdatum',
 
     'LNK_LIST' => 'Prozess-Geschäftsregeln anzeigen',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Prozess-Geschäftsregel erstellen',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Diese Geschäftsregel ist ungültig, da sie ungültige Felder oder Felder verwendet, die nicht in Ihrer Instanz von SugarCRM vorhanden sind. Bitte beheben Sie die nachfolgenden Fehler und speichern Sie die Geschäftsregel.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Diese Geschäftsregel wird derzeit in einer Prozess-Definition verwendet. Möchten Sie diese Geschäftsregel trotzdem bearbeiten?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Sie können diese Geschäftsregel nicht löschen, da sie derzeit in einer Prozess-Definition verwendet wird.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Sie können diese Geschäftsregel nicht löschen, da sie derzeit in einer Prozess-Definition verwendet wird.',
+];

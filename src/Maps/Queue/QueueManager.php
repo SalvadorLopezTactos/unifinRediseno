@@ -171,7 +171,7 @@ class QueueManager
      *
      * @return array
      */
-    public function consumeModuleFromQueue(string $module) : array
+    public function consumeModuleFromQueue(string $module): array
     {
         $start = time();
         $errorMsg = '';
@@ -226,7 +226,7 @@ class QueueManager
         $whereCondition = $queryBuilder->expr()->in(
             'id',
             $queryBuilder->createPositionalParameter(
-                (array) $ids,
+                (array)$ids,
                 \Doctrine\DBAL\Connection::PARAM_STR_ARRAY
             )
         );
@@ -243,7 +243,7 @@ class QueueManager
      *
      * @return array
      */
-    public function getQueuedModules() : array
+    public function getQueuedModules(): array
     {
         $modules = [];
 
@@ -452,7 +452,7 @@ class QueueManager
             $queueBuilder->execute();
         }
 
-        if (count($collectedGeocodeRecords) > 0) {
+        if (safeCount($collectedGeocodeRecords) > 0) {
             $this->markSentRecordsToGeocode($collectedGeocodeRecords);
         }
     }
@@ -511,7 +511,7 @@ class QueueManager
         foreach ($mappingTable as $clientKey => $sugarKey) {
             $value = null;
 
-            if ($targetBean !== null && property_exists(get_class($targetBean), $sugarKey)) {
+            if ($targetBean !== null && $sugarKey && $targetBean->getFieldDefinition($sugarKey)) {
                 $value = $targetBean->{$sugarKey};
             }
 
@@ -634,9 +634,9 @@ class QueueManager
      *
      * @return int
      */
-    protected function batchGeocodeBeans(array $targetBeans, array $geocodeBeans, array $mapsIds) : int
+    protected function batchGeocodeBeans(array $targetBeans, array $geocodeBeans, array $mapsIds): int
     {
-        $count = count($geocodeBeans);
+        $count = safeCount($geocodeBeans);
         $start = 0;
         $processed = 0;
 
@@ -667,14 +667,14 @@ class QueueManager
      * Batch given record id to be removed from queue and flush queue
      * when necessary.
      *
-     * @param array $ids        bean ids
-     * @param string $module    bean module
+     * @param array $ids bean ids
+     * @param string $module bean module
      */
     protected function batchDeleteFromQueue(array $ids, string $module)
     {
         $this->deleteFromQueue = array_merge($this->deleteFromQueue, $ids);
 
-        if (count($this->deleteFromQueue) >= $this->maxBulkDeleteThreshold) {
+        if (safeCount($this->deleteFromQueue) >= $this->maxBulkDeleteThreshold) {
             $this->flushDeleteFromQueue($module);
         }
     }

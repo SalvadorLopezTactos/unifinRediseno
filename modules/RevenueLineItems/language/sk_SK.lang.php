@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Informačný panel so zoznamom položiek riadkov výnosov',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Informačný panel so záznamom položiek riadkov výnosov',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Typy produktov',
     'LBL_ASSIGNED_TO_NAME' => 'Pridelený k',
     'LBL_ASSIGNED_TO' => 'Priradený k',
-    'LBL_ASSIGNED_TO_ID'=>'Pridelené užívateľské ID',
+    'LBL_ASSIGNED_TO_ID' => 'Pridelené užívateľské ID',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Pridelené meno užívateľa',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Pridelené užívateľské ID',
     'LBL_CAMPAIGN_ID' => 'Campaign ID',
@@ -217,4 +217,5 @@ To create a {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Displays top ten Revenue Line Items in a bubble chart.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'My Revenue Line Items',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "My Team's Revenue Line Items",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová os položky krivky výnosu',
+];

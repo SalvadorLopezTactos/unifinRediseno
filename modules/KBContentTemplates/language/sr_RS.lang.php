@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Šabloni za bazu znanja',
     'LBL_MODULE_NAME_SINGULAR' => 'Šabloni za bazu znanja',
     'LBL_MODULE_TITLE' => 'Šabloni za bazu znanja',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Pogledaj šablone',
     'LBL_TEXT_BODY' => 'Tekst',
     'LBL_LIST_TEMPLATE_NAME' => 'Naziv šablona',
-);
+];

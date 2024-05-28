@@ -21,7 +21,7 @@ class DataPrivacyHooks
      * @param string $event
      * @param array $params
      */
-    public static function unlinkRecordsFromErase(DataPrivacy $dp, $event, $params = array())
+    public static function unlinkRecordsFromErase(DataPrivacy $dp, $event, $params = [])
     {
         $dp->relatedRecordRemoved($params['link'], $params['related_id']);
     }
@@ -34,7 +34,7 @@ class DataPrivacyHooks
      * @param string $event
      * @param array $params
      */
-    public static function performActivityStreamErasure(DataPrivacy $dp, $event, $params = array())
+    public static function performActivityStreamErasure(DataPrivacy $dp, $event, $params = [])
     {
         if ($dp->type === 'Request to Erase Information' &&
             isset($dp->dataChanges) &&
@@ -82,9 +82,9 @@ class DataPrivacyHooks
             $exDateTime = $jobInfo['execute_time'];
             $data = json_decode(html_entity_decode($jobInfo['data'], ENT_COMPAT), true);
             $dataPrivacyIds = $data['dataPrivacyIds'];
-            if ((is_countable($dataPrivacyIds) ? count($dataPrivacyIds) : 0) < $maxDataPrivacyRecordsPerJob) {
+            if (safeCount($dataPrivacyIds) < $maxDataPrivacyRecordsPerJob) {
                 $dataPrivacyIds[] = $dp->id;
-                $data = json_encode(array('dataPrivacyIds' => $dataPrivacyIds));
+                $data = json_encode(['dataPrivacyIds' => $dataPrivacyIds]);
 
                 $sql = 'UPDATE job_queue SET data = ? WHERE id = ?';
                 $conn->executeUpdate($sql, [$data, $jobInfo['id']]);
@@ -103,7 +103,7 @@ class DataPrivacyHooks
             }
             $executeTime = $timedate->asDb($dtm->modify("+{$delay} seconds"));
 
-            $dataPrivacyIds = array($dp->id);
+            $dataPrivacyIds = [$dp->id];
             $data = ['dataPrivacyIds' => $dataPrivacyIds];
             $job = BeanFactory::newBean('SchedulersJobs');
             $job->name = 'ActivityStreamErasure';

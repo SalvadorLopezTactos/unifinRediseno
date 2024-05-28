@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_LOCKED_FIELDS_LINK' => 'Felt låst for redigering',
     'LBL_LOCKED_FIELDS' => 'Felt låst for redigering',
-);
+];

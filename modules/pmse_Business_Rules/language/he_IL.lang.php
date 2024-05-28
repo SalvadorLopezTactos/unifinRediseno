@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'תהליך- כללים עסקיים',
-  'LBL_MODULE_TITLE' => 'תהליך כללים עסקיים',
-  'LBL_MODULE_NAME_SINGULAR' => 'תהליך כלל עסקי',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'תהליך- כללים עסקיים',
+    'LBL_MODULE_TITLE' => 'תהליך כללים עסקיים',
+    'LBL_MODULE_NAME_SINGULAR' => 'תהליך כלל עסקי',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס של כללים עסקיים של תהליכים',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס של כללים עסקיים של תהליכים',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות מסוג כללים עסקיים',
-  'LBL_RST_UID' => 'ID כלי עסקיים',
-  'LBL_RST_TYPE' => 'סוג כלל עסקי',
-  'LBL_RST_DEFINITION' => 'הגדרות כלי עסקיים',
-  'LBL_RST_EDITABLE' => 'כלל עסקי ניתן לעריכה',
-  'LBL_RST_SOURCE' => 'מקור כלל עסקי',
-  'LBL_RST_SOURCE_DEFINITION' => 'הגדרת מקור של כלל עסקי',
-  'LBL_RST_MODULE' => 'מודול מטרה',
-  'LBL_RST_FILENAME' => 'שם קובץ כלל עסקי',
-  'LBL_RST_CREATE_DATE' => 'צור תאריך כלל עסקי',
-  'LBL_RST_UPDATE_DATE' => 'תאריך עדכון כלל עסקי',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות מסוג כללים עסקיים',
+    'LBL_RST_UID' => 'ID כלי עסקיים',
+    'LBL_RST_TYPE' => 'סוג כלל עסקי',
+    'LBL_RST_DEFINITION' => 'הגדרות כלי עסקיים',
+    'LBL_RST_EDITABLE' => 'כלל עסקי ניתן לעריכה',
+    'LBL_RST_SOURCE' => 'מקור כלל עסקי',
+    'LBL_RST_SOURCE_DEFINITION' => 'הגדרת מקור של כלל עסקי',
+    'LBL_RST_MODULE' => 'מודול מטרה',
+    'LBL_RST_FILENAME' => 'שם קובץ כלל עסקי',
+    'LBL_RST_CREATE_DATE' => 'צור תאריך כלל עסקי',
+    'LBL_RST_UPDATE_DATE' => 'תאריך עדכון כלל עסקי',
 
     'LNK_LIST' => 'צפה בתהליך כלל עסקי',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'צור תהליך כלל עסקי',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'כלל עסקי זה אינו חוקי מאחר שנעשה בו שימוש בשדות לא חוקיים או בשדות שאינם נמצאים במופע של SugarCRM במערכת שלך. תקן את השגיאות להלן ושמור את הכלל העסקי.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'כלל עסקים זה נמצא בשימוש כעת בהגדרת תהליך. האם אתה עדיין רוצה לערוך כלל עסקים זה?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "אתה לא יכול למחוק כלל עסקים זה משום שהוא משומש כעת בהגדרת תהליך.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'אתה לא יכול למחוק כלל עסקים זה משום שהוא משומש כעת בהגדרת תהליך.',
+];

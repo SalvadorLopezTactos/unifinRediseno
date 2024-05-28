@@ -17,51 +17,51 @@
 class aCase extends Issue
 {
     // Stored fields
-    var $id;
-    var $date_modified;
-    var $modified_user_id;
-    var $assigned_user_id;
-    var $team_id;
-    var $case_number;
-    var $resolution;
-    var $description;
-    var $name;
-    var $priority;
+    public $id;
+    public $date_modified;
+    public $modified_user_id;
+    public $assigned_user_id;
+    public $team_id;
+    public $case_number;
+    public $resolution;
+    public $description;
+    public $name;
+    public $priority;
 
     public $follow_up_datetime;
 
-    var $created_by;
-    var $created_by_name;
-    var $modified_by_name;
+    public $created_by;
+    public $created_by_name;
+    public $modified_by_name;
 
     // These are related
-    var $bug_id;
-    var $account_name;
-    var $account_id;
+    public $bug_id;
+    public $account_name;
+    public $account_id;
     public $business_center_name;
     public $business_center_id;
-    var $contact_id;
-    var $task_id;
-    var $note_id;
-    var $meeting_id;
-    var $call_id;
-    var $email_id;
-    var $assigned_user_name;
-    var $team_name;
+    public $contact_id;
+    public $task_id;
+    public $note_id;
+    public $meeting_id;
+    public $call_id;
+    public $email_id;
+    public $assigned_user_name;
+    public $team_name;
 
-    var $table_name = "cases";
-    var $rel_account_table = "accounts_cases";
-    var $rel_contact_table = "contacts_cases";
-    var $module_dir = 'Cases';
-    var $object_name = "Case";
-    var $importable = true;
+    public $table_name = 'cases';
+    public $rel_account_table = 'accounts_cases';
+    public $rel_contact_table = 'contacts_cases';
+    public $module_dir = 'Cases';
+    public $object_name = 'Case';
+    public $importable = true;
     /** "%1" is the case_number, for emails
      * leave the %1 in if you customize this
      * YOU MUST LEAVE THE BRACKETS AS WELL*/
-    var $emailSubjectMacro = '[CASE:%1]';
+    public $emailSubjectMacro = '[CASE:%1]';
 
     // This is used to retrieve related fields from form posts.
-    var $additional_column_fields = array(
+    public $additional_column_fields = [
         'bug_id',
         'assigned_user_name',
         'assigned_user_id',
@@ -70,19 +70,19 @@ class aCase extends Issue
         'note_id',
         'meeting_id',
         'call_id',
-        'email_id'
-    );
+        'email_id',
+    ];
 
-    var $relationship_fields = array(
-        'account_id'=>'accounts',
+    public $relationship_fields = [
+        'account_id' => 'accounts',
         'bug_id' => 'bugs',
-        'task_id'=>'tasks',
-        'note_id'=>'notes',
-        'meeting_id'=>'meetings',
-        'call_id'=>'calls',
-        'email_id'=>'emails',
-        'business_center_id'=>'business_centers',
-    );
+        'task_id' => 'tasks',
+        'note_id' => 'notes',
+        'meeting_id' => 'meetings',
+        'call_id' => 'calls',
+        'email_id' => 'emails',
+        'business_center_id' => 'business_centers',
+    ];
 
 
     public function __construct()
@@ -99,7 +99,7 @@ class aCase extends Issue
         }
     }
 
-    var $new_schema = true;
+    public $new_schema = true;
 
 
     /**
@@ -202,7 +202,8 @@ class aCase extends Issue
         return parent::save($check_notify);
     }
 
-    function listviewACLHelper()
+
+    public function listviewACLHelper()
     {
         $array_assign = parent::listviewACLHelper();
         $is_owner = false;
@@ -227,12 +228,12 @@ class aCase extends Issue
      * This function is a good location to save changes that have been made to a relationship.
      * This should be overridden in subclasses that have something to save.
      *
-     * @param boolean $is_update    true if this save is an update.
-     * @param array $exclude        a way to exclude relationships
+     * @param boolean $is_update true if this save is an update.
+     * @param array $exclude a way to exclude relationships
      *
      * @see SugarBean::save_relationship_changes()
      */
-    public function save_relationship_changes($is_update, $exclude = array())
+    public function save_relationship_changes($is_update, $exclude = [])
     {
         parent::save_relationship_changes($is_update);
 
@@ -245,30 +246,30 @@ class aCase extends Issue
         }
     }
 
-    function set_case_contact_relationship($contact_id)
+    public function set_case_contact_relationship($contact_id)
     {
         global $app_list_strings;
         $default = $app_list_strings['case_relationship_type_default_key'];
         $this->load_relationship('contacts');
-        $this->contacts->add($contact_id, array('contact_role'=>$default));
+        $this->contacts->add($contact_id, ['contact_role' => $default]);
     }
 
     /**
      * Returns a list of the associated contacts
      */
-    function get_contacts()
+    public function get_contacts()
     {
         $this->load_relationship('contacts');
-        $query_array=$this->contacts->getQuery(true);
+        $query_array = $this->contacts->getQuery(true);
 
         // update the select clause in the returned query.
-        $query_array['select'] = "SELECT contacts.id, contacts.first_name, contacts.last_name, contacts.title, contacts.email1, contacts.phone_work, contacts_cases.contact_role as case_role, contacts_cases.id as case_rel_id ";
+        $query_array['select'] = 'SELECT contacts.id, contacts.first_name, contacts.last_name, contacts.title, contacts.email1, contacts.phone_work, contacts_cases.contact_role as case_role, contacts_cases.id as case_rel_id ';
 
-        $query='';
+        $query = '';
         foreach ($query_array as $qstring) {
-            $query.=' '.$qstring;
+            $query .= ' ' . $qstring;
         }
-        $temp = array('id', 'first_name', 'last_name', 'title', 'email1', 'phone_work', 'case_role', 'case_rel_id');
+        $temp = ['id', 'first_name', 'last_name', 'title', 'email1', 'phone_work', 'case_role', 'case_rel_id'];
         return $this->build_related_list2($query, BeanFactory::newBean('Contacts'), $temp);
     }
 
@@ -278,31 +279,31 @@ class aCase extends Issue
         $app_list_strings = return_app_list_strings_language($current_language);
 
         $temp_array = $this->get_list_view_array();
-        $temp_array['NAME'] = (($this->name == "") ? "<em>blank</em>" : $this->name);
+        $temp_array['NAME'] = (($this->name == '') ? '<em>blank</em>' : $this->name);
         $temp_array['PRIORITY'] = empty($this->priority)
-            ? ""
+            ? ''
             : (!isset($app_list_strings[$this->field_defs['priority']['options']][$this->priority])
                 ? $this->priority
                 : $app_list_strings[$this->field_defs['priority']['options']][$this->priority]);
         $temp_array['STATUS'] = empty($this->status)
-            ? ""
+            ? ''
             : (!isset($app_list_strings[$this->field_defs['status']['options']][$this->status])
                 ? $this->status
                 : $app_list_strings[$this->field_defs['status']['options']][$this->status]);
         $temp_array['ENCODED_NAME'] = $this->name;
         $temp_array['CASE_NUMBER'] = $this->case_number;
-        $temp_array['SET_COMPLETE'] =  "<a href='index.php?return_module=Home&return_action=index&action=EditView&module=Cases&record=$this->id&status=Closed'>".SugarThemeRegistry::current()->getImage("close_inline", "title=".translate('LBL_LIST_CLOSE', 'Cases')." border='0'", null, null, '.gif', translate('LBL_LIST_CLOSE', 'Cases'))."</a>";
+        $temp_array['SET_COMPLETE'] = "<a href='index.php?return_module=Home&return_action=index&action=EditView&module=Cases&record=$this->id&status=Closed'>" . SugarThemeRegistry::current()->getImage('close_inline', 'title=' . translate('LBL_LIST_CLOSE', 'Cases') . " border='0'", null, null, '.gif', translate('LBL_LIST_CLOSE', 'Cases')) . '</a>';
         $temp_array['CASE_NUMBER'] = format_number_display($this->case_number);
         return $temp_array;
     }
 
     /**
-        builds a generic search based on the query string using or
-        do not include any $this-> because this is called on without having the class instantiated
-    */
-    function build_generic_where_clause($the_query_string)
+     * builds a generic search based on the query string using or
+     * do not include any $this-> because this is called on without having the class instantiated
+     */
+    public function build_generic_where_clause($the_query_string)
     {
-        $where_clauses = array();
+        $where_clauses = [];
         $the_query_string = $this->db->quote($the_query_string);
         array_push($where_clauses, "cases.name like '$the_query_string%'");
         array_push($where_clauses, "accounts.name like '$the_query_string%'");
@@ -311,37 +312,38 @@ class aCase extends Issue
             array_push($where_clauses, "cases.case_number like '$the_query_string%'");
         }
 
-        $the_where = "";
+        $the_where = '';
 
         foreach ($where_clauses as $clause) {
-            if ($the_where != "") {
-                $the_where .= " or ";
+            if ($the_where != '') {
+                $the_where .= ' or ';
             }
             $the_where .= $clause;
         }
 
-        if ($the_where != "") {
-            $the_where = "(".$the_where.")";
+        if ($the_where != '') {
+            $the_where = '(' . $the_where . ')';
         }
 
         return $the_where;
     }
 
-    function set_notification_body($xtpl, $case)
+    public function set_notification_body($xtpl, $case)
     {
         global $app_list_strings;
 
-        $xtpl->assign("CASE_SUBJECT", $case->name);
+        $xtpl->assign('CASE_SUBJECT', $case->name);
         $xtpl->assign(
-            "CASE_PRIORITY",
-            (isset($case->priority) ? $app_list_strings['case_priority_dom'][$case->priority]:""));
-        $xtpl->assign("CASE_STATUS", (isset($case->status) ? $app_list_strings['case_status_dom'][$case->status]:""));
-        $xtpl->assign("CASE_DESCRIPTION", $case->description);
+            'CASE_PRIORITY',
+            (isset($case->priority) ? $app_list_strings['case_priority_dom'][$case->priority] : '')
+        );
+        $xtpl->assign('CASE_STATUS', (isset($case->status) ? $app_list_strings['case_status_dom'][$case->status] : ''));
+        $xtpl->assign('CASE_DESCRIPTION', $case->description);
 
         return $xtpl;
     }
 
-    function bean_implements($interface)
+    public function bean_implements($interface)
     {
         switch ($interface) {
             case 'ACL':
@@ -354,7 +356,7 @@ class aCase extends Issue
      * retrieves the Subject line macro for InboundEmail parsing
      * @return string
      */
-    function getEmailSubjectMacro()
+    public function getEmailSubjectMacro()
     {
         global $sugar_config;
         return (isset($sugar_config['inbound_email_case_subject_macro']) && !empty($sugar_config['inbound_email_case_subject_macro'])) ?

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Privacidad de datos',
     'LBL_MODULE_NAME_SINGULAR' => 'Privacidad de datos',
     'LBL_NUMBER' => 'Número',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'No se ha marcado ningún campo ni registro para borrar.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Cuadro de mando de registros de privacidad de datos',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Panel de enfoque en la privacidad de datos',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Línea de tiempo de la privacidad de datos',
 
     // list view
     'LBL_HELP_RECORDS' => 'El módulo de Privacidad de datos controla las actividades de privacidad, incluido el consentimiento y las solicitudes del sujeto, para ayudar a los procedimientos de privacidad de su organización. Cree registros de privacidad de de datos relacionados con el registro de un individuo (por ejemplo, un contacto) para supervisar el consentimiento o emprender acciones respecto a una solicitud de privacidad.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'El módulo de Privacidad de datos controla las actividades de privacidad, incluido el consentimiento y las solicitudes del sujeto, para ayudar a los procedimientos de privacidad de su organización. Cree registros de privacidad de de datos relacionados con el registro de un individuo (por ejemplo, un contacto) para supervisar el consentimiento o emprender acciones respecto a una solicitud de privacidad. Una vez se haya completado la acción necesaria, los usuarios con el rol de Administrador de privacidad de datos pueden hacer clic en "Completar" o en "Rechazar" para actualizar el estado.
 
 Para las solicitudes de borrado, seleccione "Marcar para borrar" para cada uno de los registros que se enumeran en los subpaneles siguientes. Una vez haya seleccionado todos los campos deseados, si hace clic en "Borrar y completar" se eliminarán permanente los valores de los campos y los registros de privacidad de datos se marcarán como completados.',
-);
+];

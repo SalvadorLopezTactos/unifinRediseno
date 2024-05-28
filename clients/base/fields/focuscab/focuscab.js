@@ -29,7 +29,7 @@
      */
     handleClick: function() {
         if (!_.isEmpty(app.sideDrawer)) {
-            app.utils.openFocusDrawer(app.sideDrawer, this.module, this.view.model.get('id'));
+            app.utils.openFocusDrawer(app.sideDrawer, this.module, this.view.model.get('id'), this.$el);
         }
     },
 

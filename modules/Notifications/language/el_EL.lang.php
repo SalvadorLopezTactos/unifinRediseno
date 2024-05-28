@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_ASSIGNED_TO_ID' => 'Ταυτότητα Ανατεθειμένου Χειριστή',
     'LBL_ASSIGNED_TO_NAME' => 'Ανατέθηκε σε',
     'LBL_ID' => 'Ταυτότητα',
@@ -52,4 +52,4 @@ $mod_strings = array(
     'LBL_UNREAD' => 'Μη Αναγνωσμένο',
     'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Έχετε αναφερθεί από',
     'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Έχετε αναφερθεί',
-);
+];

@@ -120,11 +120,11 @@ $viewdefs['Purchases']['base']['view']['record'] = [
             'header' => true,
             'fields' => [
                 [
-                    'name'          => 'picture',
-                    'type'          => 'avatar',
-                    'size'          => 'large',
+                    'name' => 'picture',
+                    'type' => 'avatar',
+                    'size' => 'large',
                     'dismiss_label' => true,
-                    'readonly'      => true,
+                    'readonly' => true,
                 ],
                 'name',
                 [
@@ -135,7 +135,7 @@ $viewdefs['Purchases']['base']['view']['record'] = [
                 ],
                 [
                     'name' => 'follow',
-                    'label'=> 'LBL_FOLLOW',
+                    'label' => 'LBL_FOLLOW',
                     'type' => 'follow',
                     'readonly' => true,
                     'dismiss_label' => true,

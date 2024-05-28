@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-installLog("creating new user for Snip");
+installLog('creating new user for Snip');
 
 $snip = SugarSNIP::getInstance();
 $snip->getSnipUser();

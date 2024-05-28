@@ -52,9 +52,9 @@ class Manager
         $payload = $this->payload->serialize();
 
         $job = new SchedulersJob();
-        $job->name = "UserUtilities " . Uuid::uuid4();
+        $job->name = 'UserUtilities ' . Uuid::uuid4();
         $job->data = base64_encode($payload);
-        $job->target = "class::UserUtilitiesJob";
+        $job->target = 'class::UserUtilitiesJob';
         $job->assigned_user_id = $current_user->id;
         $jq = new SugarJobQueue();
         $jq->submitJob($job);

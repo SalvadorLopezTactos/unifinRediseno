@@ -16,7 +16,6 @@ use Sugarcrm\Sugarcrm\CustomerJourney\LogicHooks\ActivityOrStageTemplateHooksHel
 
 class StageTemplateHooks
 {
-
     /**
      * All  before_save logic hooks is inside this function.
      *
@@ -26,6 +25,10 @@ class StageTemplateHooks
      */
     public function beforeSave($bean, $event, $arguments)
     {
+        if (!hasSystemAutomateLicense()) {
+            return;
+        }
+
         ActivityOrStageTemplateHooksHelper::saveFetchedRow($bean);
         ActivityOrStageTemplateHooksHelper::checkAvailableModules($bean, $event, $arguments);
     }

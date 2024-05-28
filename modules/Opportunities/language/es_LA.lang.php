@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Tablero de Lista de Oportunidades',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Tablero de Registro de Oportunidades',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Cotizaciones',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Oportunidades por cuenta dinámica',
+    'LBL_TOP_10_OPP' => 'Las 10 mejores oportunidades abiertas',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Dashlet: Mis oportunidades activas',
+    'LBL_MY_ACTIVE_OPP' => 'Mis oportunidades activas',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Total de Proyectos de Ventas ',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Rol en Oportunidad',
+    'LBL_OPPORTUNITY_ROLE' => 'Rol en Oportunidad',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notas',
     'LBL_TAB_OPPORTUNITY' => 'Revisión de {{module}}',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'Al dar clic en Confirmar borrarás toda la información de pronósticos y también cambiará tu vista de Oportunidades. Si no deseas eso, dar clic en cancelar para regresar a la configuración previa.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'Al hacer clic en Confirmar, borrará TODOS los datos de Pronósticos y cambiará la vista Oportunidades. '
-        .'Además, se deshabilitarán TODAS las definiciones de procesos con un módulo de público objetivo de suboportunidades. '
-        .'Si no es lo que deseaba, haga clic en Cancelar para volver a la configuración anterior.',
+        . 'Además, se deshabilitarán TODAS las definiciones de procesos con un módulo de público objetivo de suboportunidades. '
+        . 'Si no es lo que deseaba, haga clic en Cancelar para volver a la configuración anterior.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Si todas las Sub-Oportunidades se encuentran cerradas y como mínimo haya una ganada,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'la Etapa de Venta de la Oportunidad se encuentra en "Cerrada/Ganada".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Si todas las Sub-Oportunidades están en Etapa de Venta "Cerrada/Perdida",',
@@ -220,25 +223,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Después de que haya iniciado este cambio, los registros de Sub-Oportunidades serán creados para cada {{module_name}} existente. Cuando las Sub-Oportunidades estén completadas y disponibles, será enviada una notificación al correo electrónico de registrado en tu perfil. Por favor toma en cuenta que la instancia debe estar configurada a través de Admin > Ajustes Email para que la notificaciónes sean enviadas.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales de principio a fin. Cada registro {{module_name}} representa una venta potencial e incluye datos de venta relevantes, así como relacionados con otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} normalmente avanzará a través de varias etapas de ventas hasta que se marque como "Cerrado ganado" o "Cerrado perdido". {{plural_module_name}} puede aprovecharse aún más utilizando el módulo de {{forecasts_singular_module}} de Sugar para comprender y predecir las tendencias de ventas, así como enfocar el trabajo para lograr las cuotas de ventas.',
+    'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales de principio a fin. Cada registro de {{module_name}} representa una posible venta e incluye datos relevantes de la venta, así como los relativos a otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} suele progresar a través de varias Etapas de Venta hasta que se marca como "Ganado" o "Perdido". {{plural_module_name}} se pueden aprovechar aún más mediante el uso del módulo de {{forecasts_singular_module}} de Sugar para comprender y predecir las tendencias de ventas, así como enfocar el trabajo para alcanzar las cuotas de ventas.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales y las partidas individuales pertenecientes a esas ventas de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos de venta relevantes, además de los relacionados con otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales y los artículos pertenecientes a esas ventas de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos de venta relevantes, además de los relacionados con otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc.
 
-- Edite los campos de este registro haciendo clic en un campo individual o en el botón Editar.
-- Vea o modifique enlaces a otros registros en los subpaneles moviendo el panel inferior izquierdo a "Vista de datos".
-- Haga comentarios y vea los de los usuarios y el historial de cambio de registros en {{activitystream_singular_module}} moviendo el panel inferior izquierdo a "Flujo de actividades".
-- Siga o coloque como favorito este registro utilizando los íconos a la derecha del nombre del registro.
+- Edite el registro haciendo clic en el campo individual o el botón Editar.
+- Vea o modifique enlaces a otros registros en los subpaneles cambiando el panel inferior izquierdo a "Vista de datos".
+- Comente o vea comentarios de otros usuarios y el historial de cambios del registro en {{activitystream_singular_module}} cambiando el panel inferior izquierdo a "Flujo de actividades".
+- Siga o guarde como favorito el registro con los iconos a la derecha del nombre del registro.
 - Hay acciones adicionales disponibles en el menú desplegable Acciones a la derecha del botón Editar.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales y las partidas individuales pertenecientes a esas ventas de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos de venta relevantes, además de los relacionados con otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales y los artículos pertenecientes a esas ventas de principio a fin. Cada registro {{module_name}} representa una posible venta e incluye datos relevantes de la venta, así como relativos a otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc.
 
 Para crear un {{module_name}}:
-1. Proporcione los valores para los campos según desee.
- - Debe completar los campos marcados como "Obligatorio" antes de guardar.
- - Haga clic en "Mostrar más" para mostrar campos adicionales si fuese necesario.
-2. Haga clic en "Guardar" para finalizar el registro nuevo y volver a la página anterior.',
+1. Proporcione valores para los campos que desee.
+ - Los campos marcados como "Obligatorio" se deben completar antes de guardar.
+ - Haga clic en "Mostrar Más" para ver los campos adicionales si es necesario.
+2. Haga clic en "Guardar" para finalizar el nuevo registro y volver a la página anterior.',
 
 // END ENT/ULT
 
@@ -260,4 +263,9 @@ Para crear un {{module_name}}:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Predicción de Cierre de Oportunidad',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Ver detalles de predicción para una Oportunidad específica',
-);
+    'LBL_AI_WINRATE' => 'Tasa de ganancias',
+    'LBL_AI_WONOPP' => 'Oportunidades ganadas',
+    'LBL_AI_CLOSINGTIME' => 'Horario de cierre',
+    'LBL_AI_CLOSEDOPP' => 'Oportunidades cerradas',
+    'LBL_AI_LEADTIMESPAN' => 'Tiempo transcurrido entre la creación de la oportunidad y la oportunidad ganada',
+];

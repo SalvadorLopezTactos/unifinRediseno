@@ -28,16 +28,37 @@ class UsersApiHelper extends SugarBeanApiHelper
      * @param $options array Currently no options are supported
      * @return array The bean in array format, ready for passing out the API to clients.
      */
-    public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(SugarBean $bean, array $fieldList = [], array $options = [])
     {
         $data = parent::formatForApi($bean, $fieldList, $options);
+        $data = array_merge($data, $this->getUserPreferenceFields($bean, $fieldList));
 
-        $args = $options['args'];
+        $args = $options['args'] ?? [];
         if (!empty($args['has_access_module']) && !empty($args['has_access_record'])) {
             $data['has_access'] = $this->checkUserAccess($bean, $args['has_access_module'], $args['has_access_record']);
         }
 
         return $data;
+    }
+
+    /**
+     * Retrieves values for any user preference fields that have been requested
+     *
+     * @param SugarBean $bean the User bean being updated
+     * @param array $fieldList the list of fields requested through the API
+     * @return array the map of {User preference field} => {Preference value}
+     */
+    protected function getUserPreferenceFields(SugarBean $bean, array $fieldList = [])
+    {
+        $result = [];
+        $settingsHelper = new UserPreferenceFieldsHelper();
+        $settingsFields = $bean->getFieldDefinitions('user_preference', [true]);
+        foreach ($fieldList as $fieldName) {
+            if (!empty($settingsFields[$fieldName]) && $bean->ACLFieldAccess($fieldName, 'read')) {
+                $result[$fieldName] = $settingsHelper->getPreferenceField($bean, $fieldName) ?? '';
+            }
+        }
+        return $result;
     }
 
     /**
@@ -57,10 +78,10 @@ class UsersApiHelper extends SugarBeanApiHelper
     }
 
 
-    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = array())
+    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = [])
     {
         if ($this->getIdpConfig()->isIDMModeEnabled()
-                && empty($submittedData['skip_idm_mode_restrictions'])) {
+            && empty($submittedData['skip_idm_mode_restrictions'])) {
             $submittedData = $this->filterIDMModeDisabledFields($bean, $submittedData);
         }
         parent::populateFromApi($bean, $submittedData, $options);
@@ -69,7 +90,7 @@ class UsersApiHelper extends SugarBeanApiHelper
         }
 
         if (empty($submittedData) || empty($submittedData['user_name'])) {
-            throw new SugarApiExceptionMissingParameter("Missing username");
+            throw new SugarApiExceptionMissingParameter('Missing username');
         }
 
         return true;
@@ -83,7 +104,7 @@ class UsersApiHelper extends SugarBeanApiHelper
      */
     protected function filterIDMModeDisabledFields(SugarBean $bean, array $submittedData)
     {
-        $submittedData = array_diff_key($submittedData, $this->getIdpConfig()->getIDMModeDisabledFields());
+        $submittedData = array_diff_key($submittedData, $this->getIdpConfig()->getIDMModeDisabledFields(['email']));
         if (!empty($submittedData['email'])) {
             $submittedData['email'] = $this->filterEmailField($bean, $submittedData['email']);
         }
@@ -98,10 +119,6 @@ class UsersApiHelper extends SugarBeanApiHelper
      */
     protected function filterEmailField(SugarBean $bean, array $emails)
     {
-        /** @var User $bean */
-        if (!is_array($emails)) {
-            return [];
-        }
         $primaryAddress = $bean->emailAddress->getPrimaryAddress($bean);
         $primaryAddressExists = false;
         foreach ($emails as $key => $email) {
@@ -141,9 +158,9 @@ class UsersApiHelper extends SugarBeanApiHelper
         return [
             'email_address_id' => $primaryEmailAddress->id,
             'email_address' => $primaryEmailAddress->email_address,
-            'invalid_email' => (bool) $primaryEmailAddress->invalid_email,
-            'opt_out' => (bool) $primaryEmailAddress->opt_out,
-            'reply_to_address' => (bool) $rawData['reply_to_address'],
+            'invalid_email' => (bool)$primaryEmailAddress->invalid_email,
+            'opt_out' => (bool)$primaryEmailAddress->opt_out,
+            'reply_to_address' => (bool)$rawData['reply_to_address'],
             'primary_address' => true,
         ];
     }

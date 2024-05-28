@@ -45,7 +45,7 @@ class PMSEEventDefinition
     private function processEventCriteria($eventCriteria, $event)
     {
         $criteria = json_decode($eventCriteria);
-        $resultArray = array();
+        $resultArray = [];
         if (is_array($criteria)) {
             foreach ($criteria as $token) {
                 if ($token->expType == 'MODULE') {
@@ -80,10 +80,10 @@ class PMSEEventDefinition
      */
     private function removeEventRelatedDependencies($event)
     {
-        $this->relDepBean->retrieve_by_string_fields(array(
-                'rel_element_id' => $event->evn_id,
-                'pro_id' => $event->pro_id
-            ));
+        $this->relDepBean->retrieve_by_string_fields([
+            'rel_element_id' => $event->evn_id,
+            'pro_id' => $event->pro_id,
+        ]);
         $this->relDepBean->deleted = 1;
         $this->relDepBean->save();
     }

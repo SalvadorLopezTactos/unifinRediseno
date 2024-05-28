@@ -49,38 +49,71 @@ class Client extends BaseClient
     public const VERSION_UNKNOWN = 'unknown';
 
     /**
-     * @var string, current installed elastic version
+     * @var string, current installed elastic version, not the opensearch Version
      */
     protected $version;
+
+    /**
+     * @var string, current installed opensearch version
+     */
+    protected $openSearchVersion;
+
+    /**
+     * indicator if server is OpenSearch
+     * @var bool
+     */
+    protected $openSearch = false;
+
+    /**
+     * flag to indicate if server has been pinged
+     * @var bool
+     */
+    protected $pinged = false;
 
     /**
      * Return allowed versions array
      * @var array
      */
-    protected $allowedVersions = array(
+    protected $allowedVersions = [
         '5.4',
         '5.6',
         '6.x',
         '7.x',
         '8.x',
-    );
+    ];
 
     /**
      * supported ES versions
      * @var array
      */
-    protected static $supportedVersions = array(
-        array('version' =>'5.4', 'operator' => '>='),
-        array('version' => '9.0', 'operator' => '<'),
-    );
+    protected static array $supportedVersions = [
+        ['version' => '5.4', 'operator' => '>='],
+        ['version' => '9.0', 'operator' => '<'],
+    ];
+
+    /**
+     * max supported versioin of OpenSearch
+     */
+    const OPENSEARCH_MAX_SUPPORTED_VERSION = '{"open": ["2.7"]}';
+
+    /**
+     * OpenSearch Version
+     * @var array[]
+     */
+    protected static array $supportedOpenSearchVersions = [
+        ['version' => '1.0', 'operator' => '>='],
+        ['version' => '2.8', 'operator' => '<'],
+    ];
 
     /**
      * List of supported $sugar_config Elastic configuration options
      * @see \Elastica\Client::$_config
      */
-    protected $connAllowedConfig = array(
+    protected $connAllowedConfig = [
         'host',
         'port',
+        'username',
+        'password',
         'path',
         'transport',
         'timeout',
@@ -92,7 +125,7 @@ class Client extends BaseClient
         'aws_secret_access_key',
         'aws_session_token',
         'aws_region',
-    );
+    ];
 
     /**
      * @var \Sugarcrm\Sugarcrm\Elasticsearch\Logger
@@ -105,25 +138,32 @@ class Client extends BaseClient
     protected $available;
 
     /**
+     *  Search Version Header name
+     */
+    const SEARCH_HEADER_NAME = 'SEARCHVERSION';
+
+    /**
      * Ctor
      * @param array $config Connection configuration from `$sugar_config`
+     * @param LoggerInterface $logger
+     * @param bool|null $isMts MTS flag
      */
-    public function __construct(array $config, LoggerInterface $logger)
+    public function __construct(array $config, LoggerInterface $logger, ?bool $isMts = null)
     {
         $this->setLogger($logger);
-        $config = $this->parseConfig($config);
-        parent::__construct($config, array($this, 'onConnectionFailure'), $logger);
+        $config = $this->parseConfig($config, $isMts);
+        parent::__construct($config, [$this, 'onConnectionFailure'], $logger);
     }
 
     /**
      * get the version of Elastic Server
      *
-     * @param bool $forceRefresh    to retrieve version info from server
-     * @param bool $useCache        to use cache
+     * @param bool $forceRefresh to retrieve version info from server
+     * @param bool $useCache to use cache
      * @return string elasticsearch version
      * @throws \Exception
      */
-    public function getElasticServerVersion(bool $forceRefresh = false, bool $useCache = true) : string
+    public function getElasticServerVersion(bool $forceRefresh = false, bool $useCache = true): string
     {
         $cacheKey = 'elastic_server_version';
         if (!$forceRefresh && $useCache) {
@@ -137,7 +177,8 @@ class Client extends BaseClient
             $result = $this->ping();
             if ($result->isOk()) {
                 $data = $result->getData();
-                $this->version = $data['version']['number']?? null;
+                $this->version = $this->getServerVersion($data);
+                $this->pinged = true;
                 if (!empty($this->version) && $useCache) {
                     sugar_cache_put($cacheKey, $this->version);
                 }
@@ -145,10 +186,33 @@ class Client extends BaseClient
         }
 
         if (empty($this->version)) {
-            $this->_logger->critical("Elasticsearch: not able to get ES version");
+            $this->pinged = true;
+            $this->_logger->critical('Elasticsearch: not able to get ES version');
             throw new \Exception('Elasticsearch: not able to get ES version');
         }
         return $this->version;
+    }
+
+    /**
+     * get Elastic server version
+     * @param array|null $data
+     * @return string
+     */
+    protected function getServerVersion(?array $data): string
+    {
+        if (empty($data)) {
+            return '';
+        }
+
+        if (isset($data['version']['distribution']) && $data['version']['distribution'] === 'opensearch') {
+            $this->openSearch = true;
+            $this->openSearchVersion = $data['version']['number'] ?? '';
+            $version = $data['version']['minimum_index_compatibility_version'] ?? '';
+        } else {
+            $version = $data['version']['number'] ?? '';
+        }
+
+        return $version;
     }
 
     /**
@@ -173,22 +237,43 @@ class Client extends BaseClient
     }
 
     /**
+     * check if this is open search
+     * @return bool
+     * @throws \Exception
+     */
+    public function isOpenSearch(): bool
+    {
+        if (!$this->pinged) {
+            $this->getElasticServerVersion(true, false);
+        }
+        return $this->openSearch;
+    }
+
+    /**
      * Check the data response to determine status.
-     * @param $data string the data response
+     * @param $data array the data response
      * @return string
      */
     protected function processDataResponse($data)
     {
-        if (empty($data['version']['number'])) {
+        $this->version = $this->getServerVersion($data);
+        if (empty($this->version)) {
             $status = self::CONN_NO_VERSION_AVAILABLE;
-            $this->_logger->critical("Elasticsearch verify conn: No valid version string available");
+            $this->_logger->critical('Elasticsearch verify conn: No valid version string available');
         } else {
-            $this->version = $data['version']['number'];
-            if ($this->checkEsVersion($this->version)) {
+            $version = $this->version;
+            if ($this->openSearch) {
+                $version = $this->openSearchVersion;
+            }
+            if ($this->checkEsVersion($version)) {
                 $status = self::CONN_SUCCESS;
             } else {
                 $status = self::CONN_VERSION_NOT_SUPPORTED;
-                $this->_logger->critical("Elasticsearch verify conn: Unsupported Elasticsearch version");
+                if (!$this->openSearch) {
+                    $this->_logger->critical('Elasticsearch verify conn: Unsupported Elasticsearch version: ' . $version);
+                } else {
+                    $this->_logger->critical('Elasticsearch verify conn: Unsupported OpenSearch version' . $version);
+                }
             }
         }
         return $status;
@@ -200,7 +285,7 @@ class Client extends BaseClient
      * called during install/upgrade and the search admin section. The usage
      * of `$this->isAvailable` is preferred.
      *
-     * @param boolean $updateAvailability, Update cached availability flag
+     * @param boolean $updateAvailability , Update cached availability flag
      * @return integer Connection status, see declared CONN_ constants
      */
     public function verifyConnectivity($updateAvailability = true)
@@ -209,6 +294,9 @@ class Client extends BaseClient
             $result = $this->ping();
             if ($result->isOk()) {
                 $data = $result->getData();
+                if (is_array($data)) {
+                    $this->_logger->info('ES Ping Response: ' . print_r($data, true));
+                }
                 $status = $this->processDataResponse($data);
             } else {
                 $status = self::CONN_ERROR;
@@ -216,7 +304,7 @@ class Client extends BaseClient
             }
         } catch (\Exception $e) {
             $status = self::CONN_FAILURE;
-            $this->_logger->critical("Elasticsearch verify conn: failure");
+            $this->_logger->critical('Elasticsearch verify conn: failure');
         }
 
         if ($updateAvailability) {
@@ -242,7 +330,7 @@ class Client extends BaseClient
     public function onConnectionFailure(Connection $conn, \Exception $e, Client $client)
     {
         $msg = sprintf(
-            "Elasticsearch: connection went away to %s:%s",
+            'Elasticsearch: connection went away to %s:%s',
             $conn->getHost(),
             $conn->getPort()
         );
@@ -261,15 +349,22 @@ class Client extends BaseClient
     /**
      * Verify if Elasticsearch version meets the supported list. In developer
      * mode only the minumum version applies.
-     * @param array $version Elasticsearch version array
+     * @param string $version Elasticsearch version
      * @return boolean
      */
-    protected function checkEsVersion($version)
+    protected function checkEsVersion(string $version) : bool
     {
         $result = true;
-        // verify supported versions
-        foreach (self::$supportedVersions as $check) {
-            $result = $result && version_compare($version, $check['version'], $check['operator']);
+        if (!$this->openSearch) {
+            // verify supported Elastic versions
+            foreach (self::$supportedVersions as $check) {
+                $result = $result && version_compare($version, $check['version'], $check['operator']);
+            }
+        } else {
+            // verify OpenSearch versions
+            foreach (self::$supportedOpenSearchVersions as $check) {
+                $result = $result && version_compare($version, $check['version'], $check['operator']);
+            }
         }
         return $result;
     }
@@ -296,9 +391,9 @@ class Client extends BaseClient
             $this->saveAdminStatus($status);
             $this->available = $status;
             if ($status) {
-                $this->_logger->info("Elasticsearch promoted as available");
+                $this->_logger->info('Elasticsearch promoted as available');
             } else {
-                $this->_logger->critical("Elasticsearch no longer available");
+                $this->_logger->critical('Elasticsearch no longer available');
             }
         }
         return $status;
@@ -340,14 +435,15 @@ class Client extends BaseClient
     /**
      * Build connection configuration from $sugar_config format
      * @param array $config `$sugar_config['full_text_search']`
+     * @param bool|null $isMts MTS indicator
      * @return array
      */
-    protected function parseConfig(array $config)
+    protected function parseConfig(array $config, ?bool $isMts = null) : array
     {
         // Currently only one connection is supported. This might be extended
         // in the future being able to use multiple connections and/or having
         // a split between search endpoints and index endpoints.
-        $connection = array();
+        $connection = [];
         foreach ($config as $k => $v) {
             if (in_array($k, $this->connAllowedConfig)) {
                 $connection[$k] = $v;
@@ -357,7 +453,11 @@ class Client extends BaseClient
         // Force the user-agent header to match SugarCRM's version
         $connection['curl'][CURLOPT_USERAGENT] = self::USER_AGENT . '/' . $this->getSugarVersion();
 
-        return array('connections' => array($connection));
+        // add header for MTS instance
+        if (($isMts === null && isMts()) || $isMts === true) {
+            $connection['headers'][self::SEARCH_HEADER_NAME] = self::OPENSEARCH_MAX_SUPPORTED_VERSION;
+        }
+        return ['connections' => [$connection]];
     }
 
     /**
@@ -398,7 +498,6 @@ class Client extends BaseClient
             }
 
             $this->_logger->onRequestSuccess($this->_lastRequest, $this->_lastResponse);
-
         } catch (\Exception $e) {
             $this->_logger->onRequestFailure($this->getConnection(), $e, $path, $method, $data);
 

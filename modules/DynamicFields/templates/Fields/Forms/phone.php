@@ -10,8 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-function get_body(&$ss, $vardef){
-	return $ss->fetch('modules/DynamicFields/templates/Fields/Forms/phone.tpl');
+function get_body(&$ss, $vardef)
+{
+    return $ss->fetch('modules/DynamicFields/templates/Fields/Forms/phone.tpl');
 }
-
-?>

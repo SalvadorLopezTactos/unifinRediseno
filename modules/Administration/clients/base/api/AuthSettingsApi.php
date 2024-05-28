@@ -88,7 +88,7 @@ class AuthSettingsApi extends SugarApi
      * @return array
      * @throws SugarApiExceptionNotAuthorized
      */
-    public function authSettings(ServiceBase $api, array $args) :array
+    public function authSettings(ServiceBase $api, array $args): array
     {
         $this->ensureMigrationEnabled();
         $this->ensureAdminUser();
@@ -125,7 +125,7 @@ class AuthSettingsApi extends SugarApi
      * @return array
      * @throws SugarApiExceptionMissingParameter
      */
-    public function switchOnIdmMode(ServiceBase $api, array $args) : array
+    public function switchOnIdmMode(ServiceBase $api, array $args): array
     {
         $this->ensureMigrationEnabled();
         $this->ensureAdminUser();
@@ -143,7 +143,7 @@ class AuthSettingsApi extends SugarApi
      * @param array $args
      * @return array
      */
-    public function switchOffIdmMode(ServiceBase $api, array $args) : array
+    public function switchOffIdmMode(ServiceBase $api, array $args): array
     {
         $this->ensureMigrationEnabled();
         $this->ensureAdminUser();
@@ -225,7 +225,7 @@ class AuthSettingsApi extends SugarApi
     private function getSAMLConfig(): array
     {
         $config = $this->getAuthConfig()->getSAMLConfig();
-        $mapping  = new Authentication\User\Mapping\SugarSAMLUserMapping($config);
+        $mapping = new Authentication\User\Mapping\SugarSAMLUserMapping($config);
         $signatureAlgorithmMap = [
             XMLSecurityKey::RSA_SHA256 => 'RSA_SHA256',
             XMLSecurityKey::RSA_SHA512 => 'RSA_SHA512',
@@ -248,7 +248,7 @@ class AuthSettingsApi extends SugarApi
                 'validate_request_id' => (bool)$config['security']['validateRequestId'],
                 'user_identity_field' => $mapping->getIdentityField(),
             ],
-            'attribute_mapping' => $this->reformatAttributeMapping((array) ($config['user_mapping'] ?? [])),
+            'attribute_mapping' => $this->reformatAttributeMapping((array)($config['user_mapping'] ?? [])),
         ];
     }
 
@@ -274,7 +274,7 @@ class AuthSettingsApi extends SugarApi
      * Configuration of local auth provider
      * @return array
      */
-    private function getLocalSettings() : array
+    private function getLocalSettings(): array
     {
         $passConfig = $this->getAuthConfig()->get('passwordsetting', []);
         $lockout = $this->getLockout();
@@ -301,7 +301,7 @@ class AuthSettingsApi extends SugarApi
      * @param array $passConfig
      * @return array formatted representation
      */
-    private function getPasswordExpiration(array $passConfig):array
+    private function getPasswordExpiration(array $passConfig): array
     {
         $expectedModes = [
             0 => 'disabled',
@@ -346,7 +346,7 @@ class AuthSettingsApi extends SugarApi
      *
      * @return Authentication\Config
      */
-    protected function getAuthConfig() : Authentication\Config
+    protected function getAuthConfig(): Authentication\Config
     {
         if (is_null($this->authConfig)) {
             $this->authConfig = new Authentication\Config(SugarConfig::getInstance());
@@ -358,7 +358,7 @@ class AuthSettingsApi extends SugarApi
      * Ensure current user has admin permissions
      * @throws SugarApiExceptionNotAuthorized
      */
-    private function ensureAdminUser() :void
+    private function ensureAdminUser(): void
     {
         if (empty($GLOBALS['current_user']) || !$GLOBALS['current_user']->isAdmin()) {
             throw new SugarApiExceptionNotAuthorized(

@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-    'LBL_SOURCE_ID'   => '외부 소스 ID',
+$mod_strings = [
+    'LBL_SOURCE_ID' => '외부 소스 ID',
     'LBL_SOURCE_TYPE' => '외부 소스',
     'LBL_SOURCE_META' => '외부 소스 메타',
-);
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_LISTVIEW_FILTER_ALL' => '전체 {0}',
     'LBL_TEAM' => '팀 목록',
     'LBL_TEAMS' => '팀 목록',
@@ -77,4 +77,4 @@ $mod_strings = array(
     'LBL_OPEN_ISSUES' => '열기 {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => '최근 해결됨',
     'LBL_FILTER_UTILS_CREATED' => '생성자',
-);
+];

@@ -25,7 +25,6 @@ $dictionary['Holiday'] = [
             'name' => 'date_entered',
             'vname' => 'LBL_DATE_ENTERED',
             'type' => 'datetime',
-            'required' => true,
             'group' => 'created_by_name',
             'comment' => 'Date record created',
             'enable_range_search' => true,
@@ -42,7 +41,6 @@ $dictionary['Holiday'] = [
             'name' => 'date_modified',
             'vname' => 'LBL_DATE_MODIFIED',
             'type' => 'datetime',
-            'required' => true,
             'group' => 'modified_by_name',
             'comment' => 'Date record last modified',
             'enable_range_search' => true,
@@ -110,7 +108,7 @@ $dictionary['Holiday'] = [
                 'searchable' => false,
             ],
         ],
-        'created_by_name' => array(
+        'created_by_name' => [
             'name' => 'created_by_name',
             'vname' => 'LBL_CREATED',
             'type' => 'relate',
@@ -128,7 +126,7 @@ $dictionary['Holiday'] = [
             'readonly' => true,
             'sort_on' => ['last_name'],
             'exportable' => true,
-        ),
+        ],
         // Link fields for assignment
         'created_by_link' => [
             'name' => 'created_by_link',
@@ -168,7 +166,7 @@ $dictionary['Holiday'] = [
             'name' => 'deleted',
             'vname' => 'LBL_DELETED',
             'type' => 'bool',
-            'reportable'=>false,
+            'reportable' => false,
         ],
         'person_id' => [
             'name' => 'person_id',
@@ -217,10 +215,17 @@ $dictionary['Holiday'] = [
             'name' => 'business_holidays',
             'type' => 'link',
             'relationship' => 'business_centers_holidays',
-            'source'=>'non-db',
-            'vname'=>'LBL_BUSINESS_HOLIDAYS',
-            'module'=>'BusinessCenters',
-            'bean_name'=>'BusinessCenter',
+            'source' => 'non-db',
+            'vname' => 'LBL_BUSINESS_HOLIDAYS',
+            'module' => 'BusinessCenters',
+            'bean_name' => 'BusinessCenter',
+        ],
+        'users' => [
+            'name' => 'users',
+            'type' => 'link',
+            'relationship' => 'users_holidays',
+            'source' => 'non-db',
+            'vname' => 'LBL_USERS',
         ],
     ],
     'relationships' => [

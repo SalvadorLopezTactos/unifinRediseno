@@ -93,8 +93,7 @@ $viewdefs['DRI_Workflow_Task_Templates']['base']['view']['selection-list'] = [
             ],
         ],
     ],
-    'orderBy' =>
-    [
+    'orderBy' => [
         'field' => 'date_modified',
         'direction' => 'desc',
     ],

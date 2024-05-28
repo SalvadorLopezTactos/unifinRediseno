@@ -41,7 +41,7 @@ $viewdefs['DocuSignEnvelopes']['base']['view']['recipients-list'] = [
                 ],
                 [
                     'name' => 'role',
-                    'type' => 'recipient-role',
+                    'type' => 'docusign-recipient-role',
                     'enabled' => true,
                     'default' => true,
                     'label' => 'LBL_RECIPIENT_ROLE',

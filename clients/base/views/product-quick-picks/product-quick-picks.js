@@ -213,13 +213,13 @@
                 tmpLeftEllipsesObject = {
                     isIcon: true,
                     listClass: 'favorite-pagination',
-                    subListClass: 'left-ellipsis-icon fa fa-ellipsis-h'
+                    subListClass: 'left-ellipsis-icon sicon sicon-ellipsis'
                 };
 
                 tmpRightEllipsesObject = {
                     isIcon: true,
                     listClass: 'favorite-pagination',
-                    subListClass: 'right-ellipsis-icon fa fa-ellipsis-h'
+                    subListClass: 'right-ellipsis-icon sicon sicon-ellipsis'
                 };
 
                 //Push details for each list item in the pagination

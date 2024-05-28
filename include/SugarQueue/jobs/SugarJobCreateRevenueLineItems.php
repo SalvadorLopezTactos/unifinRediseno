@@ -19,7 +19,6 @@
  */
 class SugarJobCreateRevenueLineItems extends JobNotification implements RunnableSchedulerJob
 {
-
     /**
      * @var SchedulersJob
      */
@@ -71,7 +70,7 @@ class SugarJobCreateRevenueLineItems extends JobNotification implements Runnable
         $settings = Opportunity::getSettings();
 
         if ((isset($settings['opps_view_by']) && $settings['opps_view_by'] !== 'RevenueLineItems')) {
-            $GLOBALS['log']->fatal("Opportunity are not being used with Revenue Line Items. " . self::class . " should not be running");
+            $GLOBALS['log']->fatal('Opportunity are not being used with Revenue Line Items. ' . self::class . ' should not be running');
             return false;
         }
 

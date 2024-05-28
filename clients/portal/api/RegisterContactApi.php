@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,6 +11,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class RegisterContactApi extends SugarApi
 {
     public function registerApiRest()
@@ -39,7 +42,7 @@ class RegisterContactApi extends SugarApi
      * @param array $args The arguments array passed in from the API
      * @return string
      */
-    protected function updateBean(SugarBean $bean, ServiceBase $api, array $args) : string
+    protected function updateBean(SugarBean $bean, ServiceBase $api, array $args): string
     {
         $bean->update_modified_by = false;
         $bean->set_created_by = false;
@@ -65,7 +68,7 @@ class RegisterContactApi extends SugarApi
      * @param array $args The arguments array passed in from the API
      * @return string
      */
-    public function createContactRecord(ServiceBase $api, array $args) : string
+    public function createContactRecord(ServiceBase $api, array $args): string
     {
         global $app_list_strings, $current_language;
 
@@ -140,7 +143,7 @@ class RegisterContactApi extends SugarApi
      * @param string $portal_name The portal name entered by user
      * @return bool
      */
-    public function doesUserNameExist(string $portal_name) : bool
+    public function doesUserNameExist(string $portal_name): bool
     {
         $contact = BeanFactory::newBean('Contacts');
 

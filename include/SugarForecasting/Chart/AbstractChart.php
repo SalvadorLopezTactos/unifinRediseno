@@ -31,14 +31,14 @@ abstract class SugarForecasting_Chart_AbstractChart extends SugarForecasting_Abs
      *
      * @var array
      */
-    protected $dataArray = array();
+    protected $dataArray = [];
 
     /**
      * The default properties that are passed back for the Chart
      *
      * @var array
      */
-    protected $defaultPropertiesArray = array(
+    protected $defaultPropertiesArray = [
         'gauge_target_list' => 'Array',
         'title' => null,
         'subtitle' => '',
@@ -47,31 +47,28 @@ abstract class SugarForecasting_Chart_AbstractChart extends SugarForecasting_Abs
         'labels' => 'value',
         'print' => 'on',
         'thousands' => '',
-        'goal_marker_type' =>
-        array(
+        'goal_marker_type' => [
             0 => 'group',
             1 => 'pareto',
-        ),
-        'goal_marker_color' =>
-        array(
+        ],
+        'goal_marker_color' => [
             0 => '#000000',
             1 => '#7D12B2',
-        ),
-        'goal_marker_label' =>
-        array(
+        ],
+        'goal_marker_label' => [
             0 => 'Quota',
             1 => '',
-        ),
+        ],
         'label_name' => '',
         'value_name' => '',
-    );
+    ];
 
     /**
      * Default Colors
      *
      * @var array
      */
-    protected $defaultColorsArray = array(
+    protected $defaultColorsArray = [
         0 => '#468c2b',
         1 => '#8c2b2b',
         2 => '#2b5d8c',
@@ -100,28 +97,28 @@ abstract class SugarForecasting_Chart_AbstractChart extends SugarForecasting_Abs
         25 => '#ccaa00',
         26 => '#6600cc',
         27 => '#005fcc',
-    );
+    ];
 
     /**
      * What the default chart value array looks like
      *
      * @var array
      */
-    protected $defaultValueArray = array(
+    protected $defaultValueArray = [
         'label' => '',
         'gvalue' => 0,
         'gvaluelabel' => 0,
-        'values' => array(),
-        'valuelabels' => array(),
-        'links' => array(),
-        'goalmarkervalue' => array(),
-        'goalmarkervaluelabel' => array()
-    );
+        'values' => [],
+        'valuelabels' => [],
+        'links' => [],
+        'goalmarkervalue' => [],
+        'goalmarkervaluelabel' => [],
+    ];
 
     /**
      * Class Constructor
      *
-     * @param array $args       Service Arguments
+     * @param array $args Service Arguments
      */
     public function __construct($args)
     {

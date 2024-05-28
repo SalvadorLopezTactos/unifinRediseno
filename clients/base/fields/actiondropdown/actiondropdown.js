@@ -44,7 +44,7 @@
     extendsFrom: 'FieldsetField',
 
     events: {
-        'click [data-toggle=dropdown]' : 'renderDropdown',
+        'click [data-bs-toggle=dropdown]': 'renderDropdown',
         'shown.bs.dropdown': '_toggleAria',
         'hidden.bs.dropdown': '_toggleAria'
     },
@@ -66,7 +66,7 @@
          *
          * @property {string}
          */
-        this.actionDropDownTag = '[data-toggle=dropdown]';
+        this.actionDropDownTag = '[data-bs-toggle=dropdown]';
 
         /**
          * Dom element selector for mobile dropdown selector.
@@ -113,6 +113,13 @@
          */
         this.caretIcon = this.def.icon || 'sicon-chevron-down';
 
+        /**
+         * The tooltip text.
+         *
+         * @property {string}
+         */
+        this.tooltip = this.def.tooltip || 'LBL_MORE';
+
         this.def.css_class = this.def.css_class ?
             this.def.css_class + ' actions' : 'actions';
 
@@ -127,7 +134,7 @@
             component: this,
             description: 'LBL_SHORTCUT_OPEN_MORE_ACTION',
             handler: function() {
-                var $primaryDropdown = this.$('.btn-primary[data-toggle=dropdown]');
+                var $primaryDropdown = this.$('.btn-primary[data-bs-toggle=dropdown]');
                 if ($primaryDropdown.is(':visible') && !$primaryDropdown.hasClass('disabled')) {
                     $primaryDropdown.click();
                 }
@@ -227,6 +234,9 @@
         $dropdown.append(dropdownTpl(this));
 
         _.each(this.dropdownFields, function(field) {
+            if (field.actionMeta && field.actionMeta.settings && field.actionMeta.settings.displayOnFocusDashboard) {
+                return;
+            }
             field.setElement(this.$('span[sfuuid="' + field.sfId + '"]'));
             if (this.def['switch_on_click'] && !this.def['no_default_action']) {
                 field.$el.on('click.' + this.cid, _.bind(this.switchButton, this));
@@ -307,7 +317,7 @@
         this._super('_render');
         this._updateCaret();
         this._renderDefaultActionBtn();
-        this.$el.toggleClass('btn-group', !_.isEmpty(this.dropdownFields));
+        this.$el.toggleClass('btn-group', !_.isEmpty(this.dropdownFields) || !!this.def.is_group);
 
         return this;
     },
@@ -364,7 +374,7 @@
         }
         //FIXME: SC-3365 Should not need to check for 'disabled' in css_class
         var caretEnabled = _.some(this.dropdownFields, function(field) {
-            if (_.isFunction(field.hasAccess) && field.hasAccess()) {
+            if (!_.isFunction(field.hasAccess) || field.hasAccess()) {
                 if (field.def.css_class && field.def.css_class.indexOf('disabled') > -1) {
                     //If action disabled in metadata
                     return false;

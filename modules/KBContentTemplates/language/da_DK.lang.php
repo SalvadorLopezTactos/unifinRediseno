@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Skabeloner for videnbase',
     'LBL_MODULE_NAME_SINGULAR' => 'Skabelon for videnbase',
     'LBL_MODULE_TITLE' => 'Skabelon for videnbase',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Vis skabeloner',
     'LBL_TEXT_BODY' => 'Skrivefelt',
     'LBL_LIST_TEMPLATE_NAME' => 'Skabelonnavn',
-);
+];

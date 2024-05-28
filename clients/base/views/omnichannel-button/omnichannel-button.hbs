@@ -18,10 +18,10 @@
 
     {{#if configAvailable}}
         <div class="config-menu dropdown" data-mode="init">
-            <i class="sicon sicon-kebab toggle dropdown-toggle" data-toggle="dropdown"></i>
+            <i class="sicon sicon-kebab toggle dropdown-toggle" data-bs-toggle="dropdown"></i>
             <i class="sicon sicon-kebab disabled" rel="tooltip" title="{{str 'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING'}}"></i>
 
-            <div class="option-layout-open dropdown-menu">{{str 'LBL_OMNICHANNEL_CONFIG_LAYOUT'}}</div>
+            <div class="option-layout-open dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl">{{str 'LBL_OMNICHANNEL_CONFIG_LAYOUT'}}</div>
         </div>
     {{/if}}
 {{/if}}

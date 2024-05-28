@@ -106,6 +106,7 @@
         massLink.link({
             success: _.bind(function(model, data, response) {
                 this.layout.trigger('list:masslink:complete', model, data, response);
+                app.events.trigger('link:added', parentModel);
             }, this)
         });
     }

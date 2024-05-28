@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\modules\HintNotificationTargets\NotificationTargetTypes;
 
 class SugarFieldHintAccountsetTargets extends \SugarFieldBase
@@ -34,7 +35,7 @@ class SugarFieldHintAccountsetTargets extends \SugarFieldBase
             $q = new SugarQuery();
             $q->from($bean);
 
-            $joinLink = $q->join($link, array('joinType'=>'LEFT'));
+            $joinLink = $q->join($link, ['joinType' => 'LEFT']);
 
             $q->select()->fieldRaw($joinLink->joinName() . '.type');
 
@@ -69,9 +70,9 @@ class SugarFieldHintAccountsetTargets extends \SugarFieldBase
         $q = new SugarQuery();
         $q->from($bean);
 
-        $joinLink = $q->join($link, array('joinType'=>'LEFT'));
+        $joinLink = $q->join($link, ['joinType' => 'LEFT']);
 
-        $q->select()->fieldRaw($joinLink->joinName() .'.id');
+        $q->select()->fieldRaw($joinLink->joinName() . '.id');
         $q->select()->fieldRaw($joinLink->joinName() . '.type');
 
         $q->where()->equals($bean->table_name . '.id', $bean->id);
@@ -110,7 +111,7 @@ class SugarFieldHintAccountsetTargets extends \SugarFieldBase
         }
 
         // resave browser targets as this type can be added separately
-        if (in_array(NotificationTargetTypes::BROWSER_TARGET_TYPE, $params[$field], true)) {
+        if (safeInArray(NotificationTargetTypes::BROWSER_TARGET_TYPE, $params[$field], true)) {
             $targets = $this->getAssignedTargetsByType($userId, NotificationTargetTypes::BROWSER_TARGET_TYPE);
             $bean->$link->add($targets);
         }

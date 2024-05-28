@@ -13,7 +13,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FEEDBACK_TEXT_PLACEHOLDER' => 'Geri bildirim açıklaması',
     'LBL_FEEDBACK_BTN_SUBMIT' => 'Gönder',
     'LBL_FEEDBACK_SENT' => 'Geri bildirim gönderildi.',
@@ -23,4 +23,4 @@ $mod_strings = array(
     'TPL_FEEDBACK_ASIDE' => 'Gönderme işlemi esnasında belirli kullanım verilerini toplamaktayız. {{learnMoreLink}}. İletişim bilgilerini toplamıyoruz. Bir cevap gerektiren hata ve diğer sorunlar için lütfen {{contactSupportLink}} üzerinden iletişime geçin.',
     'LBL_FEEDBACK_ASIDE_CLICK_MORE' => 'Daha fazla bilgi edinmek için buraya tıklayın',
     'LBL_FEEDBACK_ASIDE_CONTACT_SUPPORT' => 'Bize ulaşın',
-);
+];

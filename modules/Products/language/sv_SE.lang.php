@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Instrumentpanel med lista över citerade radartiklar',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Instrumentpanel med lista över offererade radartiklar',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för produkter',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje för offertpost',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Kampanj offert produkt',
     'LBL_MODULE_NAME' => 'Produkter',
@@ -178,4 +179,4 @@ För att skapa en {{module_name}}:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Ny offererad radartikel)',
     'LBL_DISCOUNT_PERCENT' => '% Procent',
     'LBL_DISCOUNT_TYPE' => 'Typ av rabatt',
-);
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_LOCKED_FIELDS_LINK' => 'Campos bloqueados para la edición',
     'LBL_LOCKED_FIELDS' => 'Campos bloqueados para la edición',
-);
+];

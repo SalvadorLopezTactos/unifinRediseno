@@ -21,6 +21,7 @@ use Sugarcrm\Sugarcrm\Security\Subject\IdentityAwareServiceAccount;
 use Sugarcrm\Sugarcrm\Security\Subject\ApiClient\Rest as RestApiClient;
 
 /** @noinspection PhpInconsistentReturnPointsInspection */
+
 class RestService extends ServiceBase
 {
     /**
@@ -31,7 +32,7 @@ class RestService extends ServiceBase
     /**
      * X-Header containging the clients metadata hash
      */
-    public const HEADER_META_HASH = "X_METADATA_HASH";
+    public const HEADER_META_HASH = 'X_METADATA_HASH';
     public const USER_META_HASH = 'X_USERPREF_HASH';
     public const DOWNLOAD_COOKIE = 'download_token';
 
@@ -41,7 +42,7 @@ class RestService extends ServiceBase
      * @var array
      */
 
-    public $request_headers = array();
+    public $request_headers = [];
 
     public $platform = 'base';
 
@@ -61,13 +62,13 @@ class RestService extends ServiceBase
      * The maximum version accepted
      * @var string
      */
-    protected $max_version = '11.20';
+    protected $max_version = '11.24';
 
     /**
      * An array of api settings
      * @var array
      */
-    public $api_settings = array();
+    public $api_settings = [];
 
     /**
      * The acl action attempting to be run
@@ -90,6 +91,7 @@ class RestService extends ServiceBase
         'createRecord',
         'updateRecord',
         'deleteRecord',
+        'filterList',
     ];
 
     /**
@@ -108,7 +110,7 @@ class RestService extends ServiceBase
      * Headers that have special meaning for API and should be imported into args
      * @var array
      */
-    public $special_headers = array("X_TIMESTAMP");
+    public $special_headers = ['X_TIMESTAMP'];
 
     /**
      * Get response object
@@ -127,7 +129,7 @@ class RestService extends ServiceBase
      */
     public function __construct()
     {
-        $apiSettings = array();
+        $apiSettings = [];
         require 'include/api/metadata.php';
         if (file_exists('custom/include/api/metadata.php')) {
             // Don't use requireWithCustom because we need the data out of it
@@ -154,7 +156,7 @@ class RestService extends ServiceBase
             // invalid if the request version is out of supported version range
             if (!$this->checkVersionSupport($this->getVersion(), $this->min_version, $this->max_version)) {
                 throw new SugarApiExceptionIncorrectVersion(
-                    "Please change your requested API version to value " .
+                    'Please change your requested API version to value ' .
                     "between {$this->min_version} and {$this->max_version}."
                 );
             }
@@ -169,7 +171,7 @@ class RestService extends ServiceBase
             $identityAwareDataSource = null;
             // Figure out the platform
             if ($isLoggedIn) {
-                if ( isset($_SESSION['platform']) ) {
+                if (isset($_SESSION['platform'])) {
                     $this->platform = $_SESSION['platform'];
                 }
 
@@ -187,7 +189,7 @@ class RestService extends ServiceBase
                 // Since we don't have a session we have to allow the user to specify their platform
                 // However, since the results from the same URL will be different with
                 // no variation in the oauth_token header we need to only take it as a GET request.
-                if ( !empty($_GET['platform']) ) {
+                if (!empty($_GET['platform'])) {
                     $this->platform = basename($_GET['platform']);
                 }
             }
@@ -201,16 +203,19 @@ class RestService extends ServiceBase
             $this->validatePlatform($this->platform);
             $this->request->setPlatform($this->platform);
 
-            $GLOBALS['logic_hook']->call_custom_logic('', 'before_routing', array("api" => $this, "request" => $this->request));
+            $userAgent = $this->getRequest()->getHeader('USER_AGENT') ?: '';
+            $this->validatePlatformClient($this->platform, $userAgent);
+
+            $GLOBALS['logic_hook']->call_custom_logic('', 'before_routing', ['api' => $this, 'request' => $this->request]);
 
             $route = $this->findRoute($this->request);
 
             if ($route == false) {
-                throw new SugarApiExceptionNoMethod('Could not find any route that accepted a path like: '.$this->request->rawPath);
+                throw new SugarApiExceptionNoMethod('Could not find any route that accepted a path like: ' . $this->request->rawPath);
             }
 
             $this->request->setRoute($route);
-            $GLOBALS['logic_hook']->call_custom_logic('', 'after_routing', array("api" => $this, "request" => $this->request));
+            $GLOBALS['logic_hook']->call_custom_logic('', 'after_routing', ['api' => $this, 'request' => $this->request]);
             // Get it back in case hook changed it
             $route = $this->request->getRoute();
 
@@ -220,7 +225,7 @@ class RestService extends ServiceBase
 
             // Get the request args early for use in current user api
             $argArray = $this->getRequestArgs($route);
-            if ( !$isLoggedIn && !empty($route['allowDownloadCookie'])) {
+            if (!$isLoggedIn && !empty($route['allowDownloadCookie'])) {
                 $isLoggedIn = $this->authenticateUserForDownload();
             }
 
@@ -236,12 +241,12 @@ class RestService extends ServiceBase
                 && empty($route['ignoreSystemStatusError'])) {
                 // The system is unhappy and the route isn't flagged to let them through
                 // but user detail request needs to be honored to check if user should be deactivated
-                if (isset($this->user) && $this->user->allowNonAdminToContinue($systemStatus)) {
+                $module = $argArray['module'] ?? $argArray['module_list'] ?? null;
+                if (isset($this->user)
+                    && ($this->user->allowNonAdminToContinue($systemStatus) || $this->user->isAdmin())) {
                     // let non admin with valid license go through
-                } elseif (!(!empty($argArray['module'])
-                    && $argArray['module'] === 'Users'
-                    && !empty($route['method'])
-                    && in_array($route['method'], $this->accessAllowedMethodsForUsersModuleApi))
+                } elseif ($module !== 'Users'
+                    || !in_array($route['method'] ?? null, $this->accessAllowedMethodsForUsersModuleApi)
                 ) {
                     $e = new SugarApiExceptionMaintenance(
                         $systemStatus['message'],
@@ -250,20 +255,20 @@ class RestService extends ServiceBase
                         0,
                         $systemStatus['level']
                     );
-                    $e->setExtraData("url", $systemStatus['url']);
+                    $e->setExtraData('url', $systemStatus['url']);
                     throw $e;
                 }
             }
             //END REQUIRED CODE DO NOT MODIFY
 
-            if ( !isset($route['noLoginRequired']) || $route['noLoginRequired'] == false ) {
+            if (!isset($route['noLoginRequired']) || $route['noLoginRequired'] == false) {
                 if (!$isLoggedIn) {
                     if (!$loginException) {
                         $this->needLogin();
                     } else {
                         throw $loginException;
                     }
-                } else if (empty($route['ignoreMetaHash'])) {
+                } elseif (empty($route['ignoreMetaHash'])) {
                     // Check metadata hash state and return an error to force a
                     // resync so that the new metadata gets picked up if it is
                     // out of date
@@ -282,18 +287,18 @@ class RestService extends ServiceBase
                 $this->loadGuestEnvironment();
             }
 
-            $headers = array();
+            $headers = [];
             foreach ($this->special_headers as $header) {
-                if(isset($this->request_headers[$header])) {
+                if (isset($this->request_headers[$header])) {
                     $headers[$header] = $this->request_headers[$header];
                 }
             }
-            if(!empty($headers)) {
+            if (!empty($headers)) {
                 $argArray['_headers'] = $headers;
             }
 
             $this->request->setArgs($argArray)->setRoute($route);
-            $GLOBALS['logic_hook']->call_custom_logic('', 'before_api_call', array("api" => $this, "request" => $this->request));
+            $GLOBALS['logic_hook']->call_custom_logic('', 'before_api_call', ['api' => $this, 'request' => $this->request]);
             // Get it back in case hook changed it
             $route = $this->request->getRoute();
             $argArray = $this->request->getArgs();
@@ -312,10 +317,10 @@ class RestService extends ServiceBase
             $apiClass = $this->loadApiClass($route);
             $apiMethod = $route['method'];
 
-            $this->response->setContent($apiClass->$apiMethod($this,$argArray));
+            $this->response->setContent($apiClass->$apiMethod($this, $argArray));
 
             $this->respond($route, $argArray);
-        } catch ( Exception $e ) {
+        } catch (Exception $e) {
             $this->handleException($e);
         }
 
@@ -324,7 +329,7 @@ class RestService extends ServiceBase
         }
 
         // last chance for hooks to mess with the response
-        $GLOBALS['logic_hook']->call_custom_logic('', "before_respond", $this->response);
+        $GLOBALS['logic_hook']->call_custom_logic('', 'before_respond', $this->response);
         $this->response->send();
     }
 
@@ -339,7 +344,7 @@ class RestService extends ServiceBase
     protected function checkVersionSupport($version, $minVersion, $maxVersion)
     {
         return (version_compare($minVersion, $version, '<=')
-        && version_compare($version, $maxVersion, '<='));
+            && version_compare($version, $maxVersion, '<='));
     }
 
     /**
@@ -359,14 +364,14 @@ class RestService extends ServiceBase
      *                               of path parts or as a string
      * @return string The path to the resource
      */
-    public function getResourceURI($resource, $options = array())
+    public function getResourceURI($resource, $options = [])
     {
         $this->setResourceURIBase($options);
 
         // Empty resources are simply the URI for the current request
         if (empty($resource)) {
             $siteUrl = $this->getSiteUrl();
-            return $siteUrl . (empty($this->request)?$_SERVER['REQUEST_URI']:$this->request->getRequestURI());
+            return $siteUrl . (empty($this->request) ? $_SERVER['REQUEST_URI'] : $this->request->getRequestURI());
         }
 
         if (is_string($resource)) {
@@ -418,27 +423,27 @@ class RestService extends ServiceBase
      * This will also be used by the exception handler when dispatching exceptions
      * under the same requested response type conditions.
      *
-     * @param  string $message
-     * @param  int    $code
+     * @param string $message
+     * @param int $code
      * @return array
      */
     public function getHXRReturnArray($message, $code = 200)
     {
-        return array(
-            'xhr' => array(
+        return [
+            'xhr' => [
                 'status' => $code,
                 'responseText' => $message,
                 // "code" and "message" are deprecated keys left for backward compatibility
                 'code' => $code,
                 'message' => $message,
-            ),
-        );
+            ],
+        ];
     }
 
     /**
      * Attempts to find the route for this request, API version and request method
      *
-     * @param  RestRequest $req REST request data
+     * @param RestRequest $req REST request data
      * @return mixed
      */
     public function findRoute(RestRequest $req)
@@ -456,13 +461,13 @@ class RestService extends ServiceBase
      */
     protected function handleException(\Throwable $exception)
     {
-        $GLOBALS['logic_hook']->call_custom_logic('', "handle_exception", $exception);
+        $GLOBALS['logic_hook']->call_custom_logic('', 'handle_exception', $exception);
         $httpError = 200;
-        if ( is_a($exception,"SugarApiException") ) {
+        if (is_a($exception, 'SugarApiException')) {
             $httpError = $exception->getHttpCode();
             $errorLabel = $exception->getErrorLabel();
             $message = $exception->getMessage();
-        } elseif ( is_a($exception,"OAuth2ServerException") ) {
+        } elseif (is_a($exception, 'OAuth2ServerException')) {
             //The OAuth2 Server uses a slightly different exception API
             $httpError = $exception->getHttpCode();
             $errorLabel = $exception->getMessage();
@@ -495,11 +500,11 @@ class RestService extends ServiceBase
             $this->response->setType(RestResponse::JSON, true);
         }
 
-        $this->response->setHeader("Cache-Control", "no-store");
+        $this->response->setHeader('Cache-Control', 'no-store');
 
-        $replyData = array(
-            'error'=>$errorLabel,
-        );
+        $replyData = [
+            'error' => $errorLabel,
+        ];
         if ($errorLabel === 'metadata_out_of_date') {
             $mM = $this->getMetadataManager();
             // In case of a `metadata_out_of_date` error, return the current
@@ -508,10 +513,10 @@ class RestService extends ServiceBase
             $replyData['metadata_hash'] = $mM->getMetadataHash();
             $replyData['user_hash'] = $this->user->getUserMDHash();
         }
-        if ( !empty($message) ) {
+        if (!empty($message)) {
             $replyData['error_message'] = $message;
         }
-        if(!empty($data)) {
+        if (!empty($data)) {
             $replyData = array_merge($replyData, $data);
         }
 
@@ -533,7 +538,7 @@ class RestService extends ServiceBase
         $token = $this->grabToken();
 
         $platform = !empty($_REQUEST['platform']) ? $_REQUEST['platform'] : 'base';
-        if ( !empty($token) ) {
+        if (!empty($token)) {
             try {
                 $oauthServer = \SugarOAuth2Server::getOAuth2Server($platform);
                 $tokenInfo = $oauthServer->verifyAccessToken($token);
@@ -552,10 +557,10 @@ class RestService extends ServiceBase
                         $e = new SugarApiExceptionInvalidGrant();
                     }
                 }
-            } catch ( OAuth2AuthenticateException $e ) {
+            } catch (OAuth2AuthenticateException $e) {
                 // This was failing if users were passing an oauth token up to a public url.
                 $valid = false;
-            } catch ( SugarApiException $e ) {
+            } catch (SugarApiException $e) {
                 // If we get an exception during this we'll assume authentication failed
                 $valid = false;
             }
@@ -568,13 +573,13 @@ class RestService extends ServiceBase
             // If token is invalid, clear the session for bwc
             // It looks like a big upload can cause no auth error,
             // so we do it here instead of the catch block above
-            $_SESSION = array();
+            $_SESSION = [];
             if ($csrfTokens) {
                 $_SESSION[CsrfTokenStorage::SESSION_NAMESPACE] = $csrfTokens;
             }
             $exception = $e ?? false;
 
-            return array('isLoggedIn' => false, 'exception' => $exception);
+            return ['isLoggedIn' => false, 'exception' => $exception];
         }
 
         $authResult = [
@@ -600,20 +605,20 @@ class RestService extends ServiceBase
         // Initialize the return var in case all conditionals fail
         $sessionId = '';
 
-        $allowGet = (bool) SugarConfig::getInstance()->get('allow_oauth_via_get', false);
+        $allowGet = (bool)SugarConfig::getInstance()->get('allow_oauth_via_get', false);
 
-        if ( isset($_SERVER['HTTP_OAUTH_TOKEN']) ) {
+        if (isset($_SERVER['HTTP_OAUTH_TOKEN'])) {
             // Passing a session id claiming to be an oauth token
             $sessionId = $_SERVER['HTTP_OAUTH_TOKEN'];
-        } elseif ( isset($_POST['oauth_token']) ) {
+        } elseif (isset($_POST['oauth_token'])) {
             $sessionId = $_POST['oauth_token'];
         } elseif ($allowGet && !empty($_GET['oauth_token'])) {
             $sessionId = $_GET['oauth_token'];
-        } elseif ( isset($_POST['OAuth-Token']) ) {
+        } elseif (isset($_POST['OAuth-Token'])) {
             $sessionId = $_POST['OAuth-Token'];
         } elseif ($allowGet && !empty($_GET['OAuth-Token'])) {
             $sessionId = $_GET['OAuth-Token'];
-        } elseif ( function_exists('apache_request_headers') ) {
+        } elseif (function_exists('apache_request_headers')) {
             // Some PHP implementations don't populate custom headers by default
             // So we have to go for a hunt
             $headers = apache_request_headers();
@@ -658,8 +663,8 @@ class RestService extends ServiceBase
 
         if (isset($_GET[self::DOWNLOAD_COOKIE])) {
             $token = $_GET[self::DOWNLOAD_COOKIE];
-        } else if (isset($_COOKIE[self::DOWNLOAD_COOKIE.'_'.$platform])) {
-            $token = $_COOKIE[self::DOWNLOAD_COOKIE.'_'.$platform];
+        } elseif (isset($_COOKIE[self::DOWNLOAD_COOKIE . '_' . $platform])) {
+            $token = $_COOKIE[self::DOWNLOAD_COOKIE . '_' . $platform];
         }
 
         if (!empty($token)) {
@@ -668,7 +673,7 @@ class RestService extends ServiceBase
 
             $tokenData = $oauthServer->verifyDownloadToken($token);
 
-            $GLOBALS['current_user'] = BeanFactory::getBean('Users',$tokenData['user_id']);
+            $GLOBALS['current_user'] = BeanFactory::getBean('Users', $tokenData['user_id']);
             $valid = $this->userAfterAuthenticate($tokenData['user_id'], $oauthServer, true);
         }
 
@@ -684,7 +689,7 @@ class RestService extends ServiceBase
     {
         $valid = false;
 
-        if(!empty($GLOBALS['current_user'])) {
+        if (!empty($GLOBALS['current_user'])) {
             $valid = true;
             $GLOBALS['logic_hook']->call_custom_logic('', 'after_load_user');
         }
@@ -745,8 +750,8 @@ class RestService extends ServiceBase
 
     /**
      * Set a response header
-     * @param  string $header
-     * @param  string $info
+     * @param string $header
+     * @param string $info
      * @return bool
      */
     public function setHeader($header, $info)
@@ -760,7 +765,7 @@ class RestService extends ServiceBase
 
     /**
      * Check if the response headers have a header set
-     * @param  string $header
+     * @param string $header
      * @return bool
      */
     public function hasHeader($header)
@@ -790,7 +795,7 @@ class RestService extends ServiceBase
      *
      * @access protected
      */
-    protected function setResourceURIBase($options = array())
+    protected function setResourceURIBase($options = [])
     {
         // Only do this if it hasn't been done already
         if (empty($this->resourceURIBase)) {
@@ -798,7 +803,7 @@ class RestService extends ServiceBase
             $apiBase = 'api/rest.php/';
 
             // Check rewritten URLs AND request uri vs script name
-            if (isset($_REQUEST['__sugar_url']) && strpos($_SERVER['REQUEST_URI'], $_SERVER['SCRIPT_NAME']) === false) {
+            if (isset($_REQUEST['__sugar_url']) && strpos($_SERVER['REQUEST_URI'], (string) $_SERVER['SCRIPT_NAME']) === false) {
                 // This is a forwarded rewritten URL
                 $apiBase = 'rest/';
             }
@@ -820,8 +825,8 @@ class RestService extends ServiceBase
     /**
      * Handles the response
      *
-     * @param array $route  The route for this request
-     * @param array  $args   The request arguments
+     * @param array $route The route for this request
+     * @param array $args The request arguments
      *
      * @return void
      */
@@ -850,7 +855,7 @@ class RestService extends ServiceBase
      * This function generates the necessary cache headers for using ETags with dynamic content. You
      * simply have to generate the ETag, pass it in, and the function handles the rest.
      *
-     * @param  string $etag ETag to use for this content.
+     * @param string $etag ETag to use for this content.
      * @param int $cache_age age in seconds for Cache-control max-age header
      * @return bool   Did we have a match?
      */
@@ -872,9 +877,9 @@ class RestService extends ServiceBase
             return false;
         }
         $this->response->setType(RestResponse::FILE)->setFilename($filename);
-        $this->response->setHeader("Pragma", "public");
-        $this->response->setHeader("Cache-Control", "max-age=1, post-check=0, pre-check=0");
-        $this->response->setHeader("X-Content-Type-Options", "nosniff");
+        $this->response->setHeader('Pragma', 'public');
+        $this->response->setHeader('Cache-Control', 'max-age=1, post-check=0, pre-check=0');
+        $this->response->setHeader('X-Content-Type-Options', 'nosniff');
     }
 
     /**
@@ -902,7 +907,7 @@ class RestService extends ServiceBase
     /**
      * Gets the full collection of arguments from the request
      *
-     * @param  array $route The route description for this request
+     * @param array $route The route description for this request
      * @return array
      */
     protected function getRequestArgs($route)
@@ -921,7 +926,7 @@ class RestService extends ServiceBase
                         && ($getVars[$fieldName][0] == '{'
                             || $getVars[$fieldName][0] == '[')) {
                         // This may be JSON data
-                        $jsonData = @json_decode($getVars[$fieldName],true,32);
+                        $jsonData = @json_decode($getVars[$fieldName], true, 32);
                         if (json_last_error() !== 0) {
                             // Bad JSON data, throw an exception instead of trying to process it
                             throw new SugarApiExceptionInvalidParameter();
@@ -933,23 +938,22 @@ class RestService extends ServiceBase
             }
         }
 
-        $postVars = array();
-        if ( isset($route['rawPostContents']) && $route['rawPostContents'] ) {
+        $postVars = [];
+        if (isset($route['rawPostContents']) && $route['rawPostContents']) {
             // This route wants the raw post contents
             // We just ignore it here, the function itself has to know how to deal with the raw post contents
             // this will mostly be used for binary file uploads.
-        } else if ( !empty($_POST) ) {
+        } elseif (!empty($_POST)) {
             // They have normal post arguments
             $postVars = $_POST;
         } else {
             $postContents = $this->request->getPostContents();
-            if ( !empty($postContents) ) {
+            if (!empty($postContents)) {
                 // BR-2916 Bulk API doesn't support requests containing body
                 // handling content body which has already been json decoded
                 if (is_array($postContents)) {
                     $postVars = $postContents;
-                }
-                else {
+                } else {
                     // This looks like the post contents are JSON
                     // Note: If we want to support rest based XML, we will need to change this
 
@@ -968,7 +972,7 @@ class RestService extends ServiceBase
         if (!is_array($postVars)) {
             $postVars = [];
         }
-        return array_merge($postVars,$getVars,$pathVars);
+        return array_merge($postVars, $getVars, $pathVars);
     }
 
     /**
@@ -1014,6 +1018,6 @@ class RestService extends ServiceBase
      */
     protected function getMetadataManager()
     {
-        return MetaDataManager::getManager(array($this->platform));
+        return MetaDataManager::getManager([$this->platform]);
     }
 }

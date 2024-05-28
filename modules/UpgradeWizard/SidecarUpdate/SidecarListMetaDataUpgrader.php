@@ -30,9 +30,10 @@ class SidecarListMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
      * each iteration and saving that into a 'fields' array inside of the panels
      * array.
      */
-    public function convertLegacyViewDefsToSidecar() {
+    public function convertLegacyViewDefsToSidecar()
+    {
         $this->logUpgradeStatus('Converting ' . $this->client . ' list view defs for ' . $this->module);
-        if(empty($this->legacyViewdefs)) {
+        if (empty($this->legacyViewdefs)) {
             $this->logUpgradeStatus('Empty metadata, doing nothing');
             return false;
         }
@@ -41,12 +42,12 @@ class SidecarListMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
         $defaults = $this->setDefaultsByKey($defaults);
 
         // Now get to the converting
-        $newdefs = array();
+        $newdefs = [];
         foreach ($this->legacyViewdefs as $field => $def) {
             if (!$this->isValidField($field)) {
                 continue;
             }
-            $defs = array();
+            $defs = [];
             $defs['name'] = strtolower($field);
             unset($def['name']); // Prevents old defs from overriding the new
 
@@ -96,9 +97,13 @@ class SidecarListMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
             // Some MergeTemplate merges leave type for fields like team_name as relate
             // ignoring custom_type. We can't fix it there so we fix it here.
             // Since list takes def from vardef anyway, we can delete type if it matches vardef
-            // See BR-1402
-            if(!empty($defs['type']) && !empty($this->field_defs)
-               && !empty($this->field_defs[$field]['type']) && $defs['type'] == $this->field_defs[$field]['type']
+            // See BR-1402.
+            // We also need to keep the type property for any fields that have a "fields"
+            // or "subfields" property, since these don't inherit their type metadata from vardefs
+            if (!empty($defs['type']) && !empty($this->field_defs)
+                && !empty($this->field_defs[$field]['type']) && $defs['type'] == $this->field_defs[$field]['type']
+                && !isset($defs['fields'])
+                && !isset($defs['subfields'])
             ) {
                 unset($defs['type']);
             }
@@ -121,26 +126,26 @@ class SidecarListMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
         // Clean up client to mobile for wireless clients
         $client = $this->client == 'wireless' ? 'mobile' : $this->client;
         $this->logUpgradeStatus("Setting new $client {$this->type} view defs internally for $module");
-        $this->sidecarViewdefs[$module][$client]['view']['list'] = array(
-            'panels' => array(
-                array(
+        $this->sidecarViewdefs[$module][$client]['view']['list'] = [
+            'panels' => [
+                [
                     'label' => 'LBL_PANEL_DEFAULT',
                     'fields' => $newdefs,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**
      * Scans the Sugar7 list view style metadata and keys the list defs on field
      * name for use later
-     * 
+     *
      * @param array $defaults Array of current defs
      * @return array
      */
-    public function setDefaultsByKey(Array $defaults)
+    public function setDefaultsByKey(array $defaults)
     {
-        $return = array();
+        $return = [];
         if (isset($defaults['panels'])) {
             foreach ($defaults['panels'] as $panel) {
                 if (isset($panel['fields']) && is_array($panel['fields'])) {
@@ -152,7 +157,7 @@ class SidecarListMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
                 }
             }
         }
-        
+
         return $return;
     }
 }

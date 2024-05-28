@@ -61,9 +61,9 @@ class Activity extends Basic
      * SugarBean's signature states that encode is true by default. However, as
      * we store JSON data, we want to modify that behaviour to be false so that
      * the JSON data does not have characters replaced by HTML entities.
-     * @param  string  $id      GUID of the Activity record
-     * @param  boolean $encode  Encode quotes and other special characters
-     * @param  boolean $deleted Flag to allow retrieval of deleted records
+     * @param string $id GUID of the Activity record
+     * @param boolean $encode Encode quotes and other special characters
+     * @param boolean $deleted Flag to allow retrieval of deleted records
      * @return Activity
      */
     public function retrieve($id = '-1', $encode = false, $deleted = true)
@@ -95,22 +95,22 @@ class Activity extends Basic
 
     /**
      * Removes a comment from the activity, handling the denormalized columns.
-     * @param  string $comment_id ID of the comment being deleted.
+     * @param string $comment_id ID of the comment being deleted.
      * @return void
      */
     public function deleteComment($comment_id)
     {
         if ($comment_id && $this->id) {
-            $comment = BeanFactory::getBean("Comments", $comment_id);
+            $comment = BeanFactory::getBean('Comments', $comment_id);
             if ($comment->parent_id == $this->id) {
                 $comment->mark_deleted($comment_id);
                 $this->comment_count--;
                 $this->load_relationship('comments');
-                $params = array('limit' => 1, 'orderby' => 'date_entered DESC');
+                $params = ['limit' => 1, 'orderby' => 'date_entered DESC'];
                 $linkResult = $this->comments->query($params);
                 $last_comment_id = null;
                 $linkResult = array_keys($linkResult['rows']);
-                if (count($linkResult)) {
+                if (safeCount($linkResult)) {
                     $last_comment_id = $linkResult[0];
                 }
                 $this->last_comment_bean = BeanFactory::getBean('Comments', $last_comment_id);
@@ -121,7 +121,7 @@ class Activity extends Basic
 
     /**
      * Saves the current activity.
-     * @param  boolean $check_notify
+     * @param boolean $check_notify
      * @return string|bool ID of the new post or false
      */
     public function save($check_notify = false)
@@ -204,7 +204,7 @@ class Activity extends Basic
         }
 
         $ignoreDeleted = true;
-        $beanParams = array();
+        $beanParams = [];
         if ($this->activity_type === 'delete') {
             $ignoreDeleted = false;
             $beanParams['disable_row_level_security'] = true;
@@ -220,13 +220,13 @@ class Activity extends Basic
      */
     protected function getChangedFieldsForUser(User $user, SugarBean $bean)
     {
-        $fields = array();
+        $fields = [];
         $activityData = $this->getDataArray();
         if ($this->activity_type === 'update' && isset($activityData['changes'])) {
             foreach ($activityData['changes'] as $field) {
                 $fields[$field['field_name']] = 1;
             }
-            $context = array('user' => $user);
+            $context = ['user' => $user];
             $bean->ACLFilterFieldList($fields, $context);
             $fields = array_keys($fields);
         }
@@ -270,7 +270,7 @@ class Activity extends Basic
         foreach ($tags as $tag) {
             //if tag is a User and the activity has a parent, we need to check access
             if ($tag['module'] === 'Users' && !empty($this->parent_id)) {
-                $this->processUserRelationships(array($tag['id']));
+                $this->processUserRelationships([$tag['id']]);
             } elseif ($tag['module'] !== 'Users' || $this->userHasViewAccessToParentModule($tag['id'])) {
                 $bean = BeanFactory::retrieveBean($tag['module'], $tag['id']);
                 $this->processRecord($bean);
@@ -295,7 +295,7 @@ class Activity extends Basic
 
     /**
      * Helper for processing record activities.
-     * @param  SugarBean $bean
+     * @param SugarBean $bean
      */
     public function processRecord(SugarBean $bean)
     {
@@ -310,7 +310,7 @@ class Activity extends Basic
      * @param array $userIds
      * @return boolean
      */
-    public function processUserRelationships(array $userIds = array())
+    public function processUserRelationships(array $userIds = [])
     {
         if (!$this->load_relationship('activities_users')) {
             $GLOBALS['log']->error('Could not load the activity/user relationship.');
@@ -341,7 +341,7 @@ class Activity extends Basic
     {
         if ($isADeleteActivity || $bean->checkUserAccess($user)) {
             $fields = $this->getChangedFieldsForUser($user, $bean);
-            $this->activities_users->add($user, array('fields' => json_encode($fields)));
+            $this->activities_users->add($user, ['fields' => json_encode($fields)]);
         } else {
             Subscription::unsubscribeUserFromRecord($user, $bean);
         }
@@ -356,11 +356,11 @@ class Activity extends Basic
             $bean = BeanFactory::getBean($this->parent_type, $this->parent_id);
             $subscriptionsBeanName = BeanFactory::getBeanClass('Subscriptions');
             $this->processRecord($bean);
-            $subscriptionsBeanName::processSubscriptions($bean, $this, array());
+            $subscriptionsBeanName::processSubscriptions($bean, $this, []);
         } else {
             $globalTeam = BeanFactory::getBean('Teams', '1');
             if ($this->load_relationship('activities_teams')) {
-                $this->activities_teams->add($globalTeam, array('fields' => '[]'));
+                $this->activities_teams->add($globalTeam, ['fields' => '[]']);
             }
         }
     }
@@ -371,7 +371,7 @@ class Activity extends Basic
      * @param $data array
      * @return array data
      */
-    public function processDataWithHtmlPurifier($activityType, $data = array())
+    public function processDataWithHtmlPurifier($activityType, $data = [])
     {
         if ($activityType === 'post' && !empty($data['value'])) {
             $data['value'] = SugarCleaner::cleanHtml($data['value']);
@@ -390,10 +390,10 @@ class Activity extends Basic
 
     public function get_notification_recipients()
     {
-        return array();
+        return [];
     }
 
-    public function save_relationship_changes($is_update, $exclude = array())
+    public function save_relationship_changes($is_update, $exclude = [])
     {
     }
 

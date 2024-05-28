@@ -20,7 +20,8 @@
              */
             onAttach: function(component, plugin) {
                 this.on('init', function registerActionrRunner() {
-                    if (!_.contains(['record', 'recordlist', 'subpanel-list'], this.type)) {
+                    if (app.config.platform === 'portal' ||
+                        !_.contains(['record', 'recordlist', 'subpanel-list', 'dashboard'], this.type)) {
                         return true;
                     }
 
@@ -43,7 +44,30 @@
                     this.insertInDashableRecord(rowActionButtons);
                 } else if (this.type === 'recordlist' || this.type === 'subpanel-list') {
                     this.insertInRecordList(rowActionButtons);
+                } else if (this.type === 'dashboard') {
+                    this.insertInDashboardHeader(rowActionButtons);
                 }
+            },
+
+            /**
+             * Insert buttons in dashboard header dropdown
+             * @param {Array} rowActionButtons
+             */
+            insertInDashboardHeader(rowActionButtons) {
+                if (_.isEmpty(rowActionButtons)) {
+                    return;
+                }
+                let rowActions = {
+                    type: 'actiondropdown',
+                    no_default_action: true,
+                    decodedOptions: {
+                        settings: {
+                            displayOnFocusDashboard: true
+                        }
+                    },
+                    buttons: rowActionButtons
+                };
+                this.meta.actionButtons.push(rowActions);
             },
 
             /**
@@ -93,10 +117,12 @@
                         _.isArray(metaButton.buttons)
                     ) {
                         _.each(rowActionButtons, function insertButton(actionButton) {
-                            if (metaButton.buttons.length > 1) {
-                                metaButton.buttons.push({type: 'divider'});
+                            if (!_.findWhere(metaButton.buttons, {name: actionButton.name})) {
+                                if (metaButton.buttons.length > 1) {
+                                    metaButton.buttons.push({type: 'divider'});
+                                }
+                                metaButton.buttons.push(actionButton);
                             }
-                            metaButton.buttons.push(actionButton);
                         }, this);
                     }
                 }, this);
@@ -129,6 +155,16 @@
             },
 
             /**
+             * Get current module.
+             * @return {string}
+             */
+            _getCurrentModule: function() {
+                return this.type === 'dashboard' &&
+                    !_.isEmpty(this.context) && !_.isEmpty(this.context.parent) ?
+                    this.context.parent.get('module') : this.module;
+            },
+
+            /**
              * Return button definitions from all ActionButton type fields
              * that are direct children of the component
              * @return {Array}
@@ -139,6 +175,7 @@
                     'recordlist': 'listView',
                     'subpanel-list': 'subpanels',
                     'dashablerecord': 'recordViewDashlet',
+                    'dashboard': 'focusDashboardHeader',
                 };
 
                 let validButtons = [];
@@ -147,9 +184,7 @@
                     return validButtons;
                 }
 
-                const fieldsDef = this.model.fields;
-
-                let actionButtons = app.utils.deepCopy(this.getActionButtons(fieldsDef));
+                let actionButtons = app.utils.deepCopy(this.getActionButtons());
 
                 _.each(actionButtons, function selectValidButtons(button) {
                     let parsedData = JSON.parse(button.options);
@@ -159,11 +194,6 @@
                         button.actionMenuOrder = decodedData.actionMenu.orderNumber;
                         decodedData.settings.type = 'button';
                         decodedData.settings.isRowAction = true;
-
-                        // remove icons
-                        _.each(decodedData.buttons, function removeIcon(buttonData) {
-                            buttonData.properties.showIcon = false;
-                        }, this);
 
                         let encodedData = this.base64Parse(decodedData, true);
                         button.options = JSON.stringify(encodedData);
@@ -184,11 +214,10 @@
              * @return {Array}
              */
             getActionButtonsMeta() {
-                const fieldsDef = this.model.fields;
                 const maxAllowedSize = 45;
 
-                let actionButtons = this.getActionButtons(fieldsDef);
-
+                let actionButtons = this.getActionButtons();
+                let currentModule = this._getCurrentModule();
                 let composedActionButtons = [];
                 let composedMeta = {
                     buttons: {},
@@ -228,10 +257,11 @@
                         let buttonProp = button.properties;
 
                         if (buttonProp.showLabel) {
-                            if (buttonProp.label.length < 3) {
+                            let label = app.lang.get(buttonProp.label, currentModule);
+                            if (label.length < 3) {
                                 currentSize += 3;
                             } else {
-                                currentSize += buttonProp.label.length;
+                                currentSize += label.length;
                             }
                         } else {
                             currentSize += 2;
@@ -314,13 +344,15 @@
             },
 
             /**
-             * Return all configured actions for a given button field definition
-             *
-             * @param {Object} fieldsDef
+             * Return all configured actions
              *
              * @return {Array}
              */
-            getActionButtons(fieldsDef) {
+            getActionButtons() {
+                let fieldsDef = this.model.fields;
+                if (_.isEmpty(fieldsDef) && _.isFunction(this.getFieldsForAB)) {
+                    fieldsDef = this.getFieldsForAB();
+                }
                 const actionButtons = _.filter(fieldsDef, function filter(field) {
                     if (field.type === 'actionbutton') {
                         field.readonly = false;

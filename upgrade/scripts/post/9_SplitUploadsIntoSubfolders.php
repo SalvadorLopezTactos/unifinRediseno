@@ -27,7 +27,7 @@ class SugarUpgradeSplitUploadsIntoSubfolders extends UpgradeScript
         $uploadDir = UploadStream::getDir();
         $dir = opendir($uploadDir);
         if (!$dir) {
-            $this->log("Cannot open upload directory");
+            $this->log('Cannot open upload directory');
             return;
         }
         $total = 0;

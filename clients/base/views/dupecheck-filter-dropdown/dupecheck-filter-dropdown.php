@@ -9,6 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['dupecheck-filter-dropdown'] = array(
+$viewdefs['base']['view']['dupecheck-filter-dropdown'] = [
     'template' => 'filter-filter-dropdown',
-);
+];

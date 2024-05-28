@@ -11,15 +11,15 @@
  */
 --}}
 <h1 class="mx-4 mt-4 mb-6">{{str "LBL_REPORTS_DASHLET_FILTER_PREVIEW"}}</h1>
-<div class="dashlet-container h-full rounded-md mx-4 mb-4 p-0 shadow hover:shadow-lg transition-shadow bg-dashlet-background hover:bg-dashlet-background-hover">
-    <div class="thumbnail dashlet h-full flex flex-column relative p-0 mb-0 border-none">
+<div class="dashlet-container h-full rounded-md mx-4 mb-4 p-0 shadow hover:shadow-lg transition-shadow bg-[--dashlet-background] hover:bg-[--dashlet-background-hover]">
+    <div class="dashlet h-full flex flex-col relative p-0 mb-0 border-none">
         <div class="dashlet-header flex flex-row items-center m-0.75">
             <h4 class="dashlet-title flex-grow m-0 ml-1.5 overflow-hidden">{{_dashletTitle}}</h4>
         </div>
         <div class="dashlet-content flex-grow scroll">
             <div class="btn-group p-2">
                 <button class="btn">
-                    <i class="sicon sicon-reports"></i>
+                    <i class="sicon sicon-add-dashlet-lg"></i>
                 </button>
                 <button class="btn">
                     <i class="sicon sicon-data-table"></i>
@@ -29,7 +29,7 @@
                 </button>
             </div>
             <div class="mt-2 mb-4 nav-tabs"></div>
-            <div data-container="previewBody"><div>
+            <div class="reports-dashlet-preview-body" data-container="previewBody"><div>
         </div>
     </div>
 </div>

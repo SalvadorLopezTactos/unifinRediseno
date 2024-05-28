@@ -34,7 +34,7 @@
      * Button should be hidden if meeting displayed is not recurring
      */
     _render: function() {
-        if (_.isEmpty(this.model.get('repeat_type'))) {
+        if (_.isEmpty(this.model.get('rset')) && _.isEmpty(this.model.get('repeat_type'))) {
             this.hide();
         } else {
             this._super('_render');

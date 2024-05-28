@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Importimi i dosjeve të lexuara ishte e suksesshme',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Regjistrimi i importuar është duke u përdorur në një proces dhe nuk mund të modifikohet, pasi disa fushave u është bllokuar modifikimi nga procesi.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Reshta nuk ëshin të importuara për shkak të një gabimi',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Në qoftë se përdoruesi nuk ekziston përdor përdoruesin aktual',
     'LBL_SHOW_HIDDEN' => 'Trego fushat që nuk janë normalisht të importuar',
     'LBL_UPDATE_RECORDS' => 'Azhurno të dhënat ekzistuese në vend të importimit të tyre (Pa Anulim)',
-    'LBL_TEST'=> 'Test Importi (nuk do të ruaj ose të ndryshojë të dhënat)',
+    'LBL_TEST' => 'Test Importi (nuk do të ruaj ose të ndryshojë të dhënat)',
     'LBL_TRUNCATE_TABLE' => 'Zbrazë tabelën para importit (fshini të gjitha të dhënat)',
     'LBL_RELATED_ACCOUNTS' => 'Mos krijoni llogaritë të lidhura',
     'LBL_NO_DATECHECK' => 'Kaloni datën e kotrollimit (shpejtë, por do të dështojnë nëse çdo datë është e gabuar)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Vlera jovalide e numrit të plotë',
     'LBL_ERROR_INVALID_NUM' => 'vlerë numeruese jo valide',
     'LBL_ERROR_INVALID_TIME' => 'Kohë jo valide',
-    'LBL_ERROR_INVALID_EMAIL'=>'Adresa jovalide e Emailit',
-    'LBL_ERROR_INVALID_BOOL'=>'Vlerë jo vlaide(duhet të jetë 1 ose 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Data jovalide në varg',
-    'LBL_ERROR_INVALID_USER'=>'Emër përdoruesi apo ID jo valide',
+    'LBL_ERROR_INVALID_EMAIL' => 'Adresa jovalide e Emailit',
+    'LBL_ERROR_INVALID_BOOL' => 'Vlerë jo vlaide(duhet të jetë 1 ose 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Data jovalide në varg',
+    'LBL_ERROR_INVALID_USER' => 'Emër përdoruesi apo ID jo valide',
     'LBL_ERROR_INVALID_TEAM' => 'Emri jovalid të ekipit ose ID',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Emri jovalid i llogarisë ose ID',
     'LBL_ERROR_INVALID_RELATE' => 'Relacioni jovalid i fushës',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'nuk ekzistojnë ose nuk janë të regjistruara',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Dosja nuk u ngarkua me sukses. Kjo mund të jetë sepse &#39;upload_max_filesize "vendosja në dosjen tuaj php.ini është vendosur në një numër të vogël',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Dosja është shumë e madhe. Maks:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bytes. Ndryshimi $ sugar_config [&#39;upload_maxsize&#39;] në config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bit. Ndrysho $sugar_config[&#39;upload_maxsize&#39;] në config.php',
     'LBL_MODULE_NAME' => 'Importo',
     'LBL_MODULE_NAME_SINGULAR' => 'Importo',
     'LBL_TRY_AGAIN' => 'Provo përsëri',
     'LBL_START_OVER' => 'Fillo përsëri',
     'LBL_ERROR' => 'Gabim:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Dosja e importit përmban {0} rreshta.Numri optimal i rreshtave është {1}. Më shumë rreshta mund të ngadalësojë procesin e importit. Kliko OK për të vazhduar importimin. Klikoni Anulo për rishikimin dhe ri-ngarkoni dosjen e  importit.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Nuk mund të importoni përdorues të sistemit administrues.',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Nuk mund të importoni përdorues të sistemit administrues.',
     'ERR_REPORT_LOOP' => 'Sistemi detektoi lak të raportimit. Përdoruesi nuk mund ti raportoj vetes, ose menaxherët e tyre ti raportojnë atyre.',
     'ERR_MULTIPLE' => 'Disa kolona janë të definuara me emër fushe të njejtë',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Mungojnë fushat e nevojshme:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Nuk kishte linja të zbuluara në dosjen tuaj të importit. Ju lutemi sigurohuni që nuk ka linja bosh në dosjen tuaj dhe provoni përsëri.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Dosja e importit ka qenë tashmë e përpunuar ose nuk ekziston',
     'LBL_SUCCESS' => 'sukses',
-	'LBL_FAILURE' => 'Importimi dështoi.',
+    'LBL_FAILURE' => 'Importimi dështoi.',
     'LBL_SUCCESSFULLY' => 'Importuar me sukses',
     'LBL_LAST_IMPORT_UNDONE' => 'Imorti është i papërfunduar.',
     'LBL_NO_IMPORT_TO_UNDO' => 'Nuk kishte asnjë import për të anuluar.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Importo përsëri',
     'LBL_FINISHED' => 'Përfundim',
     'LBL_UNDO_LAST_IMPORT' => 'Anuloni importin',
-    'LBL_LAST_IMPORTED'=>'Krijuar',
+    'LBL_LAST_IMPORTED' => 'Krijuar',
     'ERR_MULTIPLE_PARENTS' => 'Ju mund të keni vetëm një ID të Prindit të definuar',
     'LBL_DUPLICATES' => 'Dyfishime të gjetura',
     'LNK_DUPLICATE_LIST' => 'Shkarkoni listën e dublikatave',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Fshih shënimet',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Tregoni kolonat e parapamjes',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Fsheh kolonat e pamjes',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Kërko për dublime duke përdorur operatorin:',
     'LBL_SAVE_MAPPING_AS' => 'Për të ruajtur parametrat e importit, ofroni një emër për parametrat e ruajtura:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Citim i vetëm',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Thojëza (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Për të caktuar regjistrimet e reja për grupet tjera sesa ekipin tuaj të parazgjedhur, përdorni parazgjedhjen e vlerën së kolonës për të selektuar grupe të ndryshme.',
     'LBL_SIGN_IN_HELP' => 'Për të aktivizuar këtë shërbim, ju lutemi nënshkruani nën butonin e jashtëm të Llogarive brenda faqës së parametrave tuaja të përdoruesit.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Mundoheni të drejtoni email adresa në Bean e cila nuk e mbështet",
-);
+];

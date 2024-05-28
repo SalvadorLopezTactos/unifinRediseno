@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-    'LBL_SOURCE_ID'   => 'Külső forrásazonosító',
+$mod_strings = [
+    'LBL_SOURCE_ID' => 'Külső forrásazonosító',
     'LBL_SOURCE_TYPE' => 'Külső forrás',
     'LBL_SOURCE_META' => 'Külső forrás meta',
-);
+];

@@ -20,7 +20,7 @@ class FilterPortalApi extends FilterApi
             '$tracker',
             '$favorite',
         ];
-        if (in_array($field, $portalUnauthorizedFilters)) {
+        if (safeInArray($field, $portalUnauthorizedFilters)) {
             throw new SugarApiExceptionNotAuthorized('No access to ' . $field . ' filter');
         }
 

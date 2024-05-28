@@ -18,7 +18,6 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Bean\CustomerJourneyException;
 
 class StageHooks
 {
-
     /**
      * All after_save logic hooks is inside this function.
      *
@@ -28,6 +27,10 @@ class StageHooks
      */
     public function afterSave($bean, $event, $arguments)
     {
+        if (!hasSystemAutomateLicense()) {
+            return;
+        }
+
         $this->checkStatusUpdate($bean, $event, $arguments);
         $this->startNextJourneyOnStageComplete($bean, $event, $arguments);
     }
@@ -53,7 +56,10 @@ class StageHooks
     {
         $stateAfterValue = GeneralHooks::getBeanValueFromArgs($arguments, 'state', 'after');
 
-        if ($stateAfterValue === \DRI_SubWorkflow::STATE_COMPLETED && !empty($stage->start_next_journey_id)) {
+        if ($stateAfterValue === \DRI_SubWorkflow::STATE_COMPLETED &&
+            !empty($stage->start_next_journey_id) &&
+            !empty($arguments['dataChanges']) &&
+            !empty($arguments['dataChanges']['state'])) {
             try {
                 $journey = \BeanFactory::retrieveBean('DRI_Workflows', $stage->dri_workflow_id);
                 if (!empty($journey)) {

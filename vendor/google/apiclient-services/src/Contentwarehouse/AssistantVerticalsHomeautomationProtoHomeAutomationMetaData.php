@@ -49,6 +49,10 @@ class AssistantVerticalsHomeautomationProtoHomeAutomationMetaData extends \Googl
    */
   public $gcmExecutionAddress;
   /**
+   * @var string[]
+   */
+  public $groupIds;
+  /**
    * @var string
    */
   public $hashValue;
@@ -56,6 +60,8 @@ class AssistantVerticalsHomeautomationProtoHomeAutomationMetaData extends \Googl
    * @var bool
    */
   public $lanscanOptedIn;
+  protected $matterUniqueIdType = AssistantVerticalsHomeautomationProtoMatterUniqueId::class;
+  protected $matterUniqueIdDataType = '';
   /**
    * @var string
    */
@@ -78,6 +84,10 @@ class AssistantVerticalsHomeautomationProtoHomeAutomationMetaData extends \Googl
   public $operationalNodeId;
   protected $otherDeviceIdsType = AssistantVerticalsHomeautomationProtoAgentDeviceId::class;
   protected $otherDeviceIdsDataType = 'array';
+  /**
+   * @var string[]
+   */
+  public $otherDeviceSources;
   /**
    * @var string[]
    */
@@ -124,6 +134,10 @@ class AssistantVerticalsHomeautomationProtoHomeAutomationMetaData extends \Googl
    * @var string[]
    */
   public $targetDeviceSignalStrengths;
+  /**
+   * @var string
+   */
+  public $tdssUpdateTimestamp;
   protected $traitRoutingHintsType = HomeGraphCommonTraitRoutingHints::class;
   protected $traitRoutingHintsDataType = 'array';
   protected $traitRoutingTableType = HomeGraphCommonRoutingTable::class;
@@ -262,6 +276,20 @@ class AssistantVerticalsHomeautomationProtoHomeAutomationMetaData extends \Googl
     return $this->gcmExecutionAddress;
   }
   /**
+   * @param string[]
+   */
+  public function setGroupIds($groupIds)
+  {
+    $this->groupIds = $groupIds;
+  }
+  /**
+   * @return string[]
+   */
+  public function getGroupIds()
+  {
+    return $this->groupIds;
+  }
+  /**
    * @param string
    */
   public function setHashValue($hashValue)
@@ -288,6 +316,20 @@ class AssistantVerticalsHomeautomationProtoHomeAutomationMetaData extends \Googl
   public function getLanscanOptedIn()
   {
     return $this->lanscanOptedIn;
+  }
+  /**
+   * @param AssistantVerticalsHomeautomationProtoMatterUniqueId
+   */
+  public function setMatterUniqueId(AssistantVerticalsHomeautomationProtoMatterUniqueId $matterUniqueId)
+  {
+    $this->matterUniqueId = $matterUniqueId;
+  }
+  /**
+   * @return AssistantVerticalsHomeautomationProtoMatterUniqueId
+   */
+  public function getMatterUniqueId()
+  {
+    return $this->matterUniqueId;
   }
   /**
    * @param string
@@ -372,6 +414,20 @@ class AssistantVerticalsHomeautomationProtoHomeAutomationMetaData extends \Googl
   public function getOtherDeviceIds()
   {
     return $this->otherDeviceIds;
+  }
+  /**
+   * @param string[]
+   */
+  public function setOtherDeviceSources($otherDeviceSources)
+  {
+    $this->otherDeviceSources = $otherDeviceSources;
+  }
+  /**
+   * @return string[]
+   */
+  public function getOtherDeviceSources()
+  {
+    return $this->otherDeviceSources;
   }
   /**
    * @param string[]
@@ -582,6 +638,20 @@ class AssistantVerticalsHomeautomationProtoHomeAutomationMetaData extends \Googl
   public function getTargetDeviceSignalStrengths()
   {
     return $this->targetDeviceSignalStrengths;
+  }
+  /**
+   * @param string
+   */
+  public function setTdssUpdateTimestamp($tdssUpdateTimestamp)
+  {
+    $this->tdssUpdateTimestamp = $tdssUpdateTimestamp;
+  }
+  /**
+   * @return string
+   */
+  public function getTdssUpdateTimestamp()
+  {
+    return $this->tdssUpdateTimestamp;
   }
   /**
    * @param HomeGraphCommonTraitRoutingHints[]

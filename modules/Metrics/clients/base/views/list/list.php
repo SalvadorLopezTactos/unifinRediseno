@@ -53,7 +53,7 @@ $viewdefs['Metrics']['base']['view']['list'] = [
                     'type' => 'relate',
                     'enabled' => true,
                     'default' => true,
-                    'related_fields' =>  ['created_by'],
+                    'related_fields' => ['created_by'],
                 ],
                 [
                     'name' => 'assigned_user_name',

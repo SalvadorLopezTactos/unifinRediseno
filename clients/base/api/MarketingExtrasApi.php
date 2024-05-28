@@ -44,17 +44,17 @@ class MarketingExtrasApi extends SugarApi
 
     public function registerApiRest()
     {
-        return array(
-            'getMarketingExtras' => array(
+        return [
+            'getMarketingExtras' => [
                 'reqType' => 'GET',
-                'path' => array('login', 'content'),
+                'path' => ['login', 'content'],
                 'method' => 'getMarketingExtras',
                 'shortHelp' => 'An API to receive marketing extra URLs',
                 'longHelp' => 'include/api/help/marketing_extras_get_help.html',
                 'minVersion' => '11.2',
                 'maxVersion' => '11.8',
                 'noLoginRequired' => true,
-            ),
+            ],
             'getMarketingContentUrl' => [
                 'reqType' => 'GET',
                 'path' => ['login', 'marketingContentUrl'],
@@ -65,7 +65,7 @@ class MarketingExtrasApi extends SugarApi
                 'ignoreSystemStatusError' => true,
                 'minVersion' => '11.9',
             ],
-        );
+        ];
     }
 
     /**
@@ -85,11 +85,11 @@ class MarketingExtrasApi extends SugarApi
     /**
      * Retrieve JSON for receiving SugarCRM marketing content.
      *
-     * @todo To be deprecated in the future and replaced with login/marketingContentUrl
      * @param ServiceBase $api The REST API instance.
      * @param array $args REST API arguments.
-     * @deprecated Since 10.1.0.
      * @return array Information on how to receive SugarCRM marketing content.
+     * @deprecated Since 10.1.0.
+     * @todo To be deprecated in the future and replaced with login/marketingContentUrl
      */
     public function getMarketingExtras(ServiceBase $api, array $args): array
     {
@@ -132,13 +132,13 @@ class MarketingExtrasApi extends SugarApi
             $langConstraints = $this->getLanguageConstraints();
             $validator = $this->getValidator();
             $errors = $validator->validate($args['selected_language'], $langConstraints);
-            if (count($errors) === 0) {
+            if (safeCount($errors) === 0) {
                 $lang = $args['selected_language'];
             }
         }
-        return array(
+        return [
             'language' => $lang ?? null,
-        );
+        ];
     }
 
     /**
@@ -160,9 +160,9 @@ class MarketingExtrasApi extends SugarApi
     {
         $langConstraintBuilder = new ConstraintBuilder();
         return $langConstraintBuilder->build(
-            array(
+            [
                 'Assert\Language',
-            )
+            ]
         );
     }
 

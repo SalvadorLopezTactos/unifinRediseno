@@ -20,9 +20,9 @@
 class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
 {
     // constants used for documenting which security protocol configurations are valid
-    public const SecurityProtocolNone = "";
-    public const SecurityProtocolSsl  = "ssl";
-    public const SecurityProtocolTls  = "tls";
+    public const SecurityProtocolNone = '';
+    public const SecurityProtocolSsl = 'ssl';
+    public const SecurityProtocolTls = 'tls';
 
     // private members
     private $host;             // the hostname of the SMTP server to use
@@ -32,6 +32,7 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
     private $username;         // the username to use if authenticate=true
     private $password;         // the password to use if authenticate=true
     private $authType;         // the type of authentication to use when connecting to the smtp server
+    private $smtpType;         // the specific service used if applicable (google, exchange_online, etc)
     private $eapmId;           // the ID of the EAPM bean holding Oauth2 information to use if applicable
 
     /**
@@ -40,7 +41,8 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      *
      * @access public
      */
-    public function loadDefaultConfigs() {
+    public function loadDefaultConfigs()
+    {
         parent::loadDefaultConfigs(); // load the base defaults
 
         $this->setMode();
@@ -51,6 +53,7 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
         $this->setUsername();
         $this->setPassword();
         $this->setAuthType();
+        $this->setSmtpType();
         $this->setEAPMId();
     }
 
@@ -58,7 +61,8 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      * @param null|string $mode
      * @throws MailerException
      */
-    public function setMode($mode = null) {
+    public function setMode($mode = null)
+    {
         if (empty($mode)) {
             $mode = OutboundEmailConfigurationPeer::MODE_SMTP;
         }
@@ -78,10 +82,11 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      * @param string $host required
      * @throws MailerException
      */
-    public function setHost($host = "localhost") {
+    public function setHost($host = 'localhost')
+    {
         if (!is_string($host) && !is_null($host)) {
             throw new MailerException(
-                "Invalid Configuration: host must be a domain name or IP address (string) resolving to the SMTP server",
+                'Invalid Configuration: host must be a domain name or IP address (string) resolving to the SMTP server',
                 MailerException::InvalidConfiguration
             );
         }
@@ -95,7 +100,8 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      * @access public
      * @return string
      */
-    public function getHost() {
+    public function getHost()
+    {
         return $this->host;
     }
 
@@ -106,15 +112,16 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      * @param int $port required A numeric string is acceptable, as it can be casted to an integer.
      * @throws MailerException
      */
-    public function setPort($port = 25) {
+    public function setPort($port = 25)
+    {
         if (!is_numeric($port)) {
             throw new MailerException(
-                "Invalid Configuration: SMTP port must be an integer",
+                'Invalid Configuration: SMTP port must be an integer',
                 MailerException::InvalidConfiguration
             );
         }
 
-        $this->port = (int) $port;
+        $this->port = (int)$port;
     }
 
     /**
@@ -123,7 +130,8 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      * @access public
      * @return int
      */
-    public function getPort() {
+    public function getPort()
+    {
         return $this->port;
     }
 
@@ -134,10 +142,11 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      * @param string $securityProtocol required
      * @throws MailerException
      */
-    public function setSecurityProtocol($securityProtocol = self::SecurityProtocolNone) {
+    public function setSecurityProtocol($securityProtocol = self::SecurityProtocolNone)
+    {
         if (!self::isValidSecurityProtocol($securityProtocol)) {
             throw new MailerException(
-                "Invalid Configuration: security protocol is invalid",
+                'Invalid Configuration: security protocol is invalid',
                 MailerException::InvalidConfiguration
             );
         }
@@ -151,7 +160,8 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      * @access public
      * @return string
      */
-    public function getSecurityProtocol() {
+    public function getSecurityProtocol()
+    {
         return $this->securityProtocol;
     }
 
@@ -162,10 +172,11 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      * @param bool $required required
      * @throws MailerException
      */
-    public function setAuthenticationRequirement($required = false) {
+    public function setAuthenticationRequirement($required = false)
+    {
         if (!is_bool($required)) {
             throw new MailerException(
-                "Invalid Configuration: must be a boolean to determine authentication requirements",
+                'Invalid Configuration: must be a boolean to determine authentication requirements',
                 MailerException::InvalidConfiguration
             );
         }
@@ -179,7 +190,8 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      * @access public
      * @return boolean
      */
-    public function isAuthenticationRequired() {
+    public function isAuthenticationRequired()
+    {
         return $this->authenticate;
     }
 
@@ -190,10 +202,11 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      * @param string $username required
      * @throws MailerException
      */
-    public function setUsername($username = "") {
+    public function setUsername($username = '')
+    {
         if (!is_string($username) && !is_null($username)) {
             throw new MailerException(
-                "Invalid Configuration: username must be a string",
+                'Invalid Configuration: username must be a string',
                 MailerException::InvalidConfiguration
             );
         }
@@ -207,7 +220,8 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      * @access public
      * @return string
      */
-    public function getUsername() {
+    public function getUsername()
+    {
         return $this->username;
     }
 
@@ -218,10 +232,11 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      * @param string $password required
      * @throws MailerException
      */
-    public function setPassword($password = "") {
+    public function setPassword($password = '')
+    {
         if (!is_string($password) && !is_null($password)) {
             throw new MailerException(
-                "Invalid Configuration: password must be a string",
+                'Invalid Configuration: password must be a string',
                 MailerException::InvalidConfiguration
             );
         }
@@ -235,7 +250,8 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      * @access public
      * @return string
      */
-    public function getPassword() {
+    public function getPassword()
+    {
         return htmlspecialchars_decode($this->password, ENT_QUOTES);
     }
 
@@ -250,7 +266,7 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
     {
         if (!is_string($authType) && !is_null($authType)) {
             throw new MailerException(
-                "Invalid Configuration: authType must be a string",
+                'Invalid Configuration: authType must be a string',
                 MailerException::InvalidConfiguration
             );
         }
@@ -270,6 +286,34 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
     }
 
     /**
+     * Sets the SMTP service category used (google, google_oauth, exchange_online, etc)
+     *
+     * @param string $smtpType
+     * @throws MailerException
+     */
+    public function setSmtpType($smtpType = '')
+    {
+        if (!is_string($smtpType) && !is_null($smtpType)) {
+            throw new MailerException(
+                'Invalid Configuration: smtpType must be a string',
+                MailerException::InvalidConfiguration
+            );
+        }
+
+        $this->smtpType = trim((string)$smtpType);
+    }
+
+    /**
+     * Gets the SMTP service category used (google, google_oauth, exchange_online, etc)
+     *
+     * @return string
+     */
+    public function getSmtpType()
+    {
+        return $this->smtpType;
+    }
+
+    /**
      * Sets the ID of the EAPM bean storing any Oauth2 token credentials
      *
      * @param string $eapmId the ID of the EAPM bean
@@ -279,7 +323,7 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
     {
         if (!is_string($eapmId) && !is_null($eapmId)) {
             throw new MailerException(
-                "Invalid Configuration: eapmId must be a string",
+                'Invalid Configuration: eapmId must be a string',
                 MailerException::InvalidConfiguration
             );
         }
@@ -306,7 +350,8 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      * @param string $securityProtocol required
      * @return bool
      */
-    public static function isValidSecurityProtocol($securityProtocol) {
+    public static function isValidSecurityProtocol($securityProtocol)
+    {
         switch ($securityProtocol) {
             case self::SecurityProtocolNone:
             case self::SecurityProtocolSsl:
@@ -323,17 +368,18 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      * @access public
      * @return array
      */
-    public function toArray() {
-        $fields = array(
-            "host"         => $this->getHost(),
-            "port"         => $this->getPort(),
-            "authenticate" => $this->isAuthenticationRequired(),
-            "securityProtocol" => $this->getSecurityProtocol(),
-            "username"     => $this->getUsername(),
-            "password"     => $this->getPassword(),
-            'authType'     => $this->getAuthType(),
-            'eapmId'       => $this->getEAPMId(),
-        );
+    public function toArray()
+    {
+        $fields = [
+            'host' => $this->getHost(),
+            'port' => $this->getPort(),
+            'authenticate' => $this->isAuthenticationRequired(),
+            'securityProtocol' => $this->getSecurityProtocol(),
+            'username' => $this->getUsername(),
+            'password' => $this->getPassword(),
+            'authType' => $this->getAuthType(),
+            'eapmId' => $this->getEAPMId(),
+        ];
         return array_merge(parent::toArray(), $fields);
     }
 }

@@ -12,8 +12,8 @@
 
 require_once __DIR__ . '/pack_cli.php';
 
-$files = array(
-    "modules/UpgradeWizard/ShadowUpgrader.php" => 'ShadowUpgrader.php',
+$files = [
+    'modules/UpgradeWizard/ShadowUpgrader.php' => 'ShadowUpgrader.php',
     'modules/HealthCheck/Scanner/Scanner.php' => 'HealthCheck/Scanner/Scanner.php',
     'modules/HealthCheck/Scanner/ScannerCli.php' => 'HealthCheck/Scanner/ScannerCli.php',
     'modules/HealthCheck/Scanner/ScannerMeta.php' => 'HealthCheck/Scanner/ScannerMeta.php',
@@ -22,8 +22,8 @@ $files = array(
     'modules/HealthCheck/Scanner/package-checklist.php' => 'HealthCheck/Scanner/package-checklist.php',
     'modules/HealthCheck/HealthCheckClient.php' => 'HealthCheck/HealthCheckClient.php',
     'modules/HealthCheck/HealthCheckHelper.php' => 'HealthCheck/HealthCheckHelper.php',
-    'modules/HealthCheck/language/en_us.lang.php' => 'HealthCheck/language/en_us.lang.php'
-);
+    'modules/HealthCheck/language/en_us.lang.php' => 'HealthCheck/language/en_us.lang.php',
+];
 
 if (empty($argv[0]) || basename($argv[0]) != basename(__FILE__)) {
     return;
@@ -31,7 +31,7 @@ if (empty($argv[0]) || basename($argv[0]) != basename(__FILE__)) {
 
 $sapi_type = php_sapi_name();
 if (substr($sapi_type, 0, 3) != 'cli') {
-    die("This is command-line only script");
+    die('This is command-line only script');
 }
 
 if (empty($argv[1])) {
@@ -40,13 +40,13 @@ if (empty($argv[1])) {
 
 $pathinfo = pathinfo($argv[1]);
 
-if (isset($pathinfo['extension']) && in_array($pathinfo['extension'], array('zip', 'phar'))) {
+if (isset($pathinfo['extension']) && in_array($pathinfo['extension'], ['zip', 'phar'])) {
     $name = $pathinfo['dirname'] . DIRECTORY_SEPARATOR . $pathinfo['filename'];
 } else {
     $name = $argv[1];
 }
 
-$params = array();
+$params = [];
 if (isset($argv[2])) {
     $params['version'] = $argv[2];
 }

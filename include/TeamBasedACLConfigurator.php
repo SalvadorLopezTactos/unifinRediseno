@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -23,78 +24,78 @@ class TeamBasedACLConfigurator
     /**
      * @var array $stateCache Module state..
      */
-    protected static $moduleCache = array();
+    protected static $moduleCache = [];
 
     /**
      * @var array $implementationCache Implementation state of modules.
      */
-    protected static $implementationCache = array();
+    protected static $implementationCache = [];
 
     /**
      * @var array
      */
-    protected static $defaultConfig = array(
+    protected static $defaultConfig = [
         'enabled' => false,
-        'enabled_modules' => array(),
-    );
+        'enabled_modules' => [],
+    ];
 
     /**
      * Hidden modules.
      * These modules can't be enabled/disabled on Team-based Permissions admin page.
      * @var array
      */
-    protected static $hiddenModules = array(
+    protected static $hiddenModules = [
         'pmse_Inbox', // see RS-1275
         'Users', // see RS-1347
-    );
+    ];
 
     /**
      * Permanently enabled modules.
      * Useful in pair with self::$hiddenModules.
      * @var array
      */
-    private static $alwaysEnabledModules = array(
+    private static $alwaysEnabledModules = [
         'pmse_Inbox',
         'Users',
-    );
+    ];
 
     /**
      * @var array List of TBA field constants.
      */
-    protected $fieldOptions = array(
+    protected $fieldOptions = [
         'ACL_READ_SELECTED_TEAMS_WRITE' => 65,
         'ACL_SELECTED_TEAMS_READ_OWNER_WRITE' => 68,
         'ACL_SELECTED_TEAMS_READ_WRITE' => 71,
-    );
+    ];
 
     /**
      * @var array List of TBA module constants.
      */
-    protected $moduleOptions = array(
+    protected $moduleOptions = [
         // 78 to be suppressed by owner's 75.
         'ACL_ALLOW_SELECTED_TEAMS' => 78,
-    );
+    ];
 
     /**
      * @var string Fields fallback keys [from => to].
      */
-    protected $fieldFallbackOption = array(
+    protected $fieldFallbackOption = [
         'ACL_READ_SELECTED_TEAMS_WRITE' => 'ACL_READ_OWNER_WRITE',
         'ACL_SELECTED_TEAMS_READ_OWNER_WRITE' => 'ACL_OWNER_READ_WRITE',
         'ACL_SELECTED_TEAMS_READ_WRITE' => 'ACL_OWNER_READ_WRITE',
-    );
+    ];
 
     /**
      * @var string Modules fallback [from => to].
      */
-    protected $moduleFallbackOption = array(
+    protected $moduleFallbackOption = [
         'ACL_ALLOW_SELECTED_TEAMS' => 'ACL_ALLOW_OWNER',
-    );
+    ];
 
     /**
      * @var array Affected during fallback actions.
      */
-    protected $affectedRows = array();
+    protected $affectedRows = [];
 
     /**
      * Get TBA field options.
@@ -138,7 +139,7 @@ class TeamBasedACLConfigurator
      */
     protected function fallbackAsAccess()
     {
-        $res = array();
+        $res = [];
         foreach ($this->fieldFallbackOption + $this->moduleFallbackOption as $k => $v) {
             $res[constant($k)] = constant($v);
         }
@@ -195,7 +196,7 @@ class TeamBasedACLConfigurator
         if ($enable) {
             $actualList[] = $module;
         } else {
-            $actualList = array_values(array_diff($actualList, array($module)));
+            $actualList = array_values(array_diff($actualList, [$module]));
         }
         $actualList = array_unique($actualList);
         // Configurator doesn't handle lists, to remove an element overriding needed.
@@ -205,9 +206,9 @@ class TeamBasedACLConfigurator
         $this->saveConfig($cfg);
 
         if ($enable) {
-            $this->restoreTBA(array($module));
+            $this->restoreTBA([$module]);
         } else {
-            $this->fallbackTBA(array($module));
+            $this->fallbackTBA([$module]);
         }
         self::$moduleCache[$module] = $enable;
         $this->applyTBA($module);
@@ -236,7 +237,7 @@ class TeamBasedACLConfigurator
             if ($enable) {
                 $newList[] = $module;
             } else {
-                $newList = array_values(array_diff($newList, array($module)));
+                $newList = array_values(array_diff($newList, [$module]));
             }
             self::$moduleCache[$module] = $enable;
         }
@@ -348,7 +349,7 @@ class TeamBasedACLConfigurator
             $fields = $aclField->getACLFieldsByRole($role->id);
 
             foreach ($actions as $aclKey => $aclModule) {
-                if (!in_array($aclKey, $modules)) {
+                if (!safeInArray($aclKey, $modules)) {
                     continue;
                 }
                 $aclType = BeanFactory::newBean($aclKey)->acltype;
@@ -360,10 +361,10 @@ class TeamBasedACLConfigurator
             }
             if ($fields) {
                 $tbaRecords = array_filter($fields, function ($val) use ($modules, $fieldOptions) {
-                    if (!in_array($val['category'], $modules)) {
+                    if (!safeInArray($val['category'], $modules)) {
                         return false;
                     }
-                    return in_array($val['aclaccess'], $fieldOptions);
+                    return safeInArray($val['aclaccess'], $fieldOptions);
                 });
                 foreach ($tbaRecords as $fieldToReset) {
                     $this->fallbackField(
@@ -392,7 +393,7 @@ class TeamBasedACLConfigurator
         $aclField = new ACLField();
 
         foreach ($savedActions as $moduleName => $moduleActions) {
-            if (!in_array($moduleName, $modules)) {
+            if (!safeInArray($moduleName, $modules)) {
                 continue;
             }
             $aclType = BeanFactory::newBean($moduleName)->acltype;
@@ -400,7 +401,7 @@ class TeamBasedACLConfigurator
                 foreach ($moduleActions[$aclType] as $moduleRow) {
                     $accessOverride = $aclRole->retrieve_relationships(
                         'acl_roles_actions',
-                        array('role_id' => $moduleRow['role'], 'action_id' => $moduleRow['action']),
+                        ['role_id' => $moduleRow['role'], 'action_id' => $moduleRow['action']],
                         'access_override'
                     );
                     if (!empty($accessOverride[0]['access_override']) &&
@@ -459,7 +460,7 @@ class TeamBasedACLConfigurator
     protected function fallbackField($module, $role, $field, $access)
     {
         $arrObj = new ArrayObject($this->affectedRows);
-        $arrObj[$module]['field'][] = array('role' => $role, 'field' => $field, 'access' => $access);
+        $arrObj[$module]['field'][] = ['role' => $role, 'field' => $field, 'access' => $access];
         $this->affectedRows = $arrObj->getArrayCopy();
     }
 
@@ -474,7 +475,7 @@ class TeamBasedACLConfigurator
     {
         $aclType = BeanFactory::newBean($module)->acltype;
         $arrObj = new ArrayObject($this->affectedRows);
-        $arrObj[$module][$aclType][] = array('role' => $role, 'action' => $action, 'access' => $access);
+        $arrObj[$module][$aclType][] = ['role' => $role, 'action' => $action, 'access' => $access];
         $this->affectedRows = $arrObj->getArrayCopy();
     }
 
@@ -522,7 +523,7 @@ class TeamBasedACLConfigurator
         }
         $admin = BeanFactory::newBean('Administration');
         $admin->saveSetting(self::CONFIG_KEY, 'fallback', json_encode($this->affectedRows), 'base');
-        $this->affectedRows = array();
+        $this->affectedRows = [];
         // Calls ACLAction::clearACLCache.
         $aclField->clearACLCache();
     }

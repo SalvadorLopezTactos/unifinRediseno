@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use \Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
-use \Sugarcrm\Sugarcrm\Elasticsearch\Query\QueryBuilder;
-use \Sugarcrm\Sugarcrm\Elasticsearch\Query\KBQuery;
+use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
+use Sugarcrm\Sugarcrm\Elasticsearch\Query\QueryBuilder;
+use Sugarcrm\Sugarcrm\Elasticsearch\Query\KBQuery;
 
 /**
  * Class KBSDuplicateCheckApi
@@ -22,26 +22,27 @@ class KBSDuplicateCheckApi extends SugarListApi
 {
     public function registerApiRest()
     {
-        return array(
-            'duplicateCheck' => array(
+        return [
+            'duplicateCheck' => [
                 'reqType' => 'POST',
-                'path' => array('KBContents','duplicateCheck'),
-                'pathVars' => array('module',''),
+                'path' => ['KBContents', 'duplicateCheck'],
+                'pathVars' => ['module', ''],
                 'method' => 'checkForDuplicates',
                 'shortHelp' => 'Check for duplicate records within a module',
                 'longHelp' => 'include/api/help/module_duplicatecheck_post_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     //FIXME It's better to use DuplicateCheckStrategy, but impossible due architectural limitations.
+
     /**
      * Using the appropriate duplicate check service, search for duplicates in the system
-     * @see KBContentsApi::relatedDocuments
      * @param ServiceBase $api
      * @param array $args
      * @throws SugarApiExceptionInvalidParameter
      * @returns array
+     * @see KBContentsApi::relatedDocuments
      */
     public function checkForDuplicates(ServiceBase $api, array $args)
     {
@@ -62,10 +63,10 @@ class KBSDuplicateCheckApi extends SugarListApi
         $builder = new QueryBuilder($engineContainer);
         $builder
             ->setUser($GLOBALS['current_user'])
-            ->setModules(array($args['module']))
+            ->setModules([$args['module']])
             ->setOffset($options['offset'])
             ->setLimit($options['limit']);
-        $ftsFields = ApiHelper::getHelper($api, $bean)->getElasticSearchFields(array('name', 'kbdocument_body'));
+        $ftsFields = ApiHelper::getHelper($api, $bean)->getElasticSearchFields(['name', 'kbdocument_body']);
 
         //set the query using more_like_this query
         $query = new KBQuery();
@@ -78,7 +79,7 @@ class KBSDuplicateCheckApi extends SugarListApi
         $builder->addFilter($filter);
 
         $resultSet = $builder->executeSearch();
-        $returnedRecords = array();
+        $returnedRecords = [];
 
         foreach ($resultSet as $result) {
             $record = BeanFactory::retrieveBean($result->getType(), $result->getId());
@@ -96,6 +97,6 @@ class KBSDuplicateCheckApi extends SugarListApi
             $nextOffset = -1;
         }
 
-        return array('next_offset' => $nextOffset, 'records' => $returnedRecords);
+        return ['next_offset' => $nextOffset, 'records' => $returnedRecords];
     }
 }

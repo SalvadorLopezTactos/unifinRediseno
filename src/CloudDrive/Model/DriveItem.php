@@ -73,6 +73,61 @@ class DriveItem
     }
 
     /**
+     * Maps a model tp DriveItem
+     *
+     * @param ModelDriveItem $data
+     * @return DriveItem
+     */
+    public static function fromSharepoint(ModelDriveItem $data): DriveItem
+    {
+        $name = $data->getName();
+        $allProps = $data->getProperties();
+        $driveType = array_key_exists('driveType', $allProps) ? $allProps['driveType'] : null;
+
+        if (array_key_exists('displayName', $allProps)) {
+            $name = $allProps['displayName'];
+        }
+
+        $item = new self([
+            'id' => $data->getId(),
+            'name' => $name,
+        ]);
+
+        if ($data->getRemoteItem()) {
+            $data = $data->getRemoteItem();
+            $data->setShared(true);
+        }
+        $parentReference = $data->getParentReference();
+
+        if (!is_null($parentReference)) {
+            $item->setDriveId($parentReference->getDriveId());
+            $item->setParents($parentReference->getId());
+        }
+
+        $data->getFolder() || isset($allProps['siteCollection']) ? $item->setFolder(true) : $item->setFolder(false);
+        if ($driveType === 'documentLibrary') {
+            $item->setFolder(true);
+        }
+
+        $item::isGoodForDocuSign($data, $item->name) ? $item->setGoodForDocuSign(true) : $item->setGoodForDocuSign(false);
+
+        $createBy = $data->getCreatedBy();
+        $user = null;
+        if ($createBy) {
+            $user = $createBy->getUser();
+        }
+
+        $item->setOwners([$user]);
+        $item->setWebViewLink($data->getWebUrl());
+        if (!is_null($data->getLastModifiedDateTime())) {
+            $item->setDateModified($data->getLastModifiedDateTime()->format('c'));
+        }
+        $item->setDownloadUrl($item->downloadUrl);
+
+        return $item;
+    }
+
+    /**
      * Map google item to DriveItem
      *
      * @param mixed $data
@@ -98,7 +153,7 @@ class DriveItem
     public static function fromDropboxDrive($data): DriveItem
     {
         $item = new self([
-            'id' => $data['id'],
+            'id' => array_key_exists('id', $data) ? $data['id'] : $data['shared_folder_id'],
             'name' => $data['name'],
         ]);
 
@@ -106,13 +161,24 @@ class DriveItem
             $item->setShared(true);
         }
 
-        isset($data['.tag']) && $data['.tag'] === 'folder' ? $item->setFolder(true) : $item->setFolder(false);
+        if (array_key_exists('id', $data)) {
+            isset($data['.tag']) && $data['.tag'] === 'folder' ? $item->setFolder(true) : $item->setFolder(false);
+        } else {
+             isset($data['shared_folder_id']) ? $item->setFolder(true) : $item->setFolder(false);
+        }
 
         $item::isGoodForDocuSign($data, $item->name) ? $item->setGoodForDocuSign(true) : $item->setGoodForDocuSign(false);
 
         if (isset($data['client_modified']) && !is_null($data['client_modified'])) {
             $dateModified = new \DateTime($data['client_modified']);
             $item->setDateModified($dateModified->format('r'));
+        }
+        if (isset($data['time_invited'])) {
+            $dateModified = new \DateTime($data['time_invited']);
+            $item->setDateModified($dateModified->format('r'));
+        }
+        if (isset($data['preview_url'])) {
+            $item->setWebViewLink($data['preview_url']);
         }
 
         return $item;
@@ -129,9 +195,10 @@ class DriveItem
     {
         if (isset($data->mimeType) && (
             $data->mimeType === 'application/pdf' ||
-            $data->mimeType === 'application/msword' ||
-            $data->mimeType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
-            $data->mimeType === 'application/vnd.openxmlformats-officedocument.presentationml.presentation')) {
+                $data->mimeType === 'application/msword' ||
+                $data->mimeType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
+                $data->mimeType === 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+        )) {
             return true;
         }
 
@@ -139,7 +206,7 @@ class DriveItem
 
         foreach ($allowedExtensionsForDS as $extension) {
             $interestingCharNr = strlen($extension) + 1;
-            if (substr($fileName, $interestingCharNr * -1) === ".{$extension}") {
+            if (substr(strtolower($fileName), $interestingCharNr * -1) === ".{$extension}") {
                 return true;
             }
         }

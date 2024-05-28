@@ -11,28 +11,46 @@
  */
 return [
     'metadata' => [
-        'dashlets' => [
+        'components' => [
             [
-                'view' => [
-                    'type' => 'dashablelist',
-                    'label' => 'LBL_HOMEPAGE_TITLE',
-                    'filter_id' => 'assigned_to_me',
-                ],
-                'context' => [
-                    'module' => '<module_name>',
-                ],
                 'width' => 12,
-                'x' => 0,
-                'y' => 0,
-            ],
-            [
-                'view' => [
-                    'type' => 'commentlog-dashlet',
-                    'label' => 'LBL_DASHLET_COMMENTLOG_NAME',
+                'rows' => [
+                    [
+                        [
+                            'view' => [
+                                'module' => '<module_name>',
+                                'type' => 'activity-timeline',
+                                'label' => 'TPL_ACTIVITY_TIMELINE_DASHLET',
+                            ],
+                            'context' => [
+                                'module' => '<module_name>',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
+                                'type' => 'dashablelist',
+                                'label' => 'LBL_HOMEPAGE_TITLE',
+                                'filter_id' => 'assigned_to_me',
+                            ],
+                            'context' => [
+                                'module' => '<module_name>',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
+                                'type' => 'commentlog-dashlet',
+                                'label' => 'LBL_DASHLET_COMMENTLOG_NAME',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
                 ],
-                'width' => 12,
-                'x' => 0,
-                'y' => 6,
             ],
         ],
     ],

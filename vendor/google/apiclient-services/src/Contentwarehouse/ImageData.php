@@ -57,6 +57,10 @@ class ImageData extends \Google\Collection
    */
   public $clipartDetectorVersion;
   /**
+   * @var string
+   */
+  public $clusterId;
+  /**
    * @var int
    */
   public $codomainStrength;
@@ -82,6 +86,8 @@ class ImageData extends \Google\Collection
   protected $cropsDataType = '';
   protected $deepCropType = DeepCropIndexing::class;
   protected $deepCropDataType = '';
+  protected $deepImageEngagingnessType = ImageRepositoryDeepImageEngagingnessOutput::class;
+  protected $deepImageEngagingnessDataType = '';
   protected $deepTagsType = CommerceDatastoreImageDeepTags::class;
   protected $deepTagsDataType = '';
   /**
@@ -460,6 +466,20 @@ class ImageData extends \Google\Collection
     return $this->clipartDetectorVersion;
   }
   /**
+   * @param string
+   */
+  public function setClusterId($clusterId)
+  {
+    $this->clusterId = $clusterId;
+  }
+  /**
+   * @return string
+   */
+  public function getClusterId()
+  {
+    return $this->clusterId;
+  }
+  /**
    * @param int
    */
   public function setCodomainStrength($codomainStrength)
@@ -570,6 +590,20 @@ class ImageData extends \Google\Collection
   public function getDeepCrop()
   {
     return $this->deepCrop;
+  }
+  /**
+   * @param ImageRepositoryDeepImageEngagingnessOutput
+   */
+  public function setDeepImageEngagingness(ImageRepositoryDeepImageEngagingnessOutput $deepImageEngagingness)
+  {
+    $this->deepImageEngagingness = $deepImageEngagingness;
+  }
+  /**
+   * @return ImageRepositoryDeepImageEngagingnessOutput
+   */
+  public function getDeepImageEngagingness()
+  {
+    return $this->deepImageEngagingness;
   }
   /**
    * @param CommerceDatastoreImageDeepTags

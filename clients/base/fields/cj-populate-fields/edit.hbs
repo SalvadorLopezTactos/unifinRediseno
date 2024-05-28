@@ -25,7 +25,7 @@
             </select>
             {{#each ../populateFieldsMetaData}}
                 {{#eq @key ../id}}
-                    <div class="{{#eq type ../../../this.customDateFieldType}} cj-populate-fields-subfield-fieldset {{else}} cj-populate-fields-subfield {{/eq}}" id="{{name}}">
+                    <div class="inline-block {{#eq type ../../../this.customDateFieldType}}cj-populate-fields-subfield-fieldset w-3/5{{else}}cj-populate-fields-subfield w-[15.625rem]{{/eq}}" id="{{name}}">
                         {{field ../../../this.view model=../../../this.view.model template='edit'}}
                     </div>
                 {{/eq}}

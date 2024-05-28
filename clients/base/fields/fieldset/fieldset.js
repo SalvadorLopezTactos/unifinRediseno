@@ -72,6 +72,8 @@
         this.def.css_class = (this.def.css_class ? this.def.css_class + ' fieldset' :
             'fieldset') + inlineTag;
 
+        this.def.css_class += this.isFieldEmpty() ? ' fieldset-empty' : '';
+
         if (this.def.equal_spacing && this.def.inline) {
             this.def.css_class += ' fieldset-equal';
         }

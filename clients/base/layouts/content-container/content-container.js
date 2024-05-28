@@ -18,7 +18,7 @@
  */
 ({
     className: 'content-container rounded-md shadow hover:shadow-lg transition-shadow ' +
-        'bg-dashlet-background hover:bg-content-container-background-hover',
+        'bg-[--dashlet-background] hover:bg-[--content-container-background-hover]',
 
     /**
      * @inheritdoc

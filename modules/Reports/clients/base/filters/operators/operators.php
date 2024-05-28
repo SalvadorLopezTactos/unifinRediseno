@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Reports']['base']['filter']['operators'] = array(
+$viewdefs['Reports']['base']['filter']['operators'] = [
     // all of our enum fields are required so we don't want $empty and $not_empty
-    'enum' => array(
+    'enum' => [
         '$in' => 'LBL_OPERATOR_CONTAINS',
         '$not_in' => 'LBL_OPERATOR_NOT_CONTAINS',
-    ),
-);
+    ],
+];

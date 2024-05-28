@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kalendář',
     'LBL_MODULE_NAME_SINGULAR' => 'Kalendář',
     'LBL_MODULE_TITLE' => 'Kalendář',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Nastavení',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Zobrazení časových intervalů v zobrazení dne a týdne:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Počáteční čas',
-    'LBL_SETTINGS_TIME_ENDS'=>'Konečný čas',
+    'LBL_SETTINGS_TIME_STARTS' => 'Počáteční čas',
+    'LBL_SETTINGS_TIME_ENDS' => 'Konečný čas',
     'LBL_SETTINGS_CALLS_SHOW' => 'Přehled hovorů:',
     'LBL_SETTINGS_TASKS_SHOW' => 'Přehled úkolů:',
 
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Vytvořit kalendář',
     'LNK_CALENDAR_LIST' => 'Zobrazit kalendáře',
     'LNK_CALENDAR_LEGACY' => 'Starší verze kalendáře',
-    'LBL_IMPORT_CALENDAR'=> 'Importovat kalendář',
+    'LBL_IMPORT_CALENDAR' => 'Importovat kalendář',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Časové razítko události',
     'LBL_INSERTFIELD' => 'Vložit pole',
     'LBL_EVENT_START_ERROR' => 'Vyberte začátek',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Vyberte kalendář',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Kalendáře se nepodařilo uložit.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Ne',
             'Po',
             'Út',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Čt',
             'Pá',
             'So',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Neděle',
             'Pondělí',
             'Úterý',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Čtvrtek',
             'Pátek',
             'Sobota',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Led',
             'Úno',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Říj',
             'Lis',
             'Pro',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Leden',
             'Únor',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Říjen',
             'Listopad',
             'Prosinec',
-        ),
-);
+        ],
+];

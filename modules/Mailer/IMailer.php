@@ -12,8 +12,8 @@
 
 
 // external imports
-                                                                                  // OutboundEmailConfiguration or a
-                                                                                  // type that derives from it
+// OutboundEmailConfiguration or a
+// type that derives from it
 
 /**
  * This defines the basic interface that is expected from a Mailer.
@@ -59,8 +59,8 @@ interface IMailer
      * Adds or replaces header values.
      *
      * @access public
-     * @param string $key   required Should look like the real header it represents.
-     * @param mixed  $value          The value of the header.
+     * @param string $key required Should look like the real header it represents.
+     * @param mixed $value The value of the header.
      * @throws MailerException
      */
     public function setHeader($key, $value = null);
@@ -94,8 +94,8 @@ interface IMailer
      *
      * @abstract
      * @access public
-     * @param bool $to  true=clear the To list; false=leave the To list alone
-     * @param bool $cc  true=clear the CC list; false=leave the CC list alone
+     * @param bool $to true=clear the To list; false=leave the To list alone
+     * @param bool $cc true=clear the CC list; false=leave the CC list alone
      * @param bool $bcc true=clear the BCC list; false=leave the BCC list alone
      */
     public function clearRecipients($to = true, $cc = true, $bcc = true);
@@ -107,7 +107,7 @@ interface IMailer
      * @access public
      * @param array $recipients Array of EmailIdentity objects.
      */
-    public function addRecipientsTo($recipients = array());
+    public function addRecipientsTo($recipients = []);
 
     /**
      * Removes the recipients from the To list.
@@ -124,7 +124,7 @@ interface IMailer
      * @access public
      * @param array $recipients Array of EmailIdentity objects.
      */
-    public function addRecipientsCc($recipients = array());
+    public function addRecipientsCc($recipients = []);
 
     /**
      * Removes the recipients from the CC list.
@@ -141,7 +141,7 @@ interface IMailer
      * @access public
      * @param array $recipients Array of EmailIdentity objects.
      */
-    public function addRecipientsBcc($recipients = array());
+    public function addRecipientsBcc($recipients = []);
 
     /**
      * Removes the recipients from the BCC list.
@@ -216,8 +216,8 @@ interface IMailer
      *
      * @abstract
      * @access public
-     * @throws MailerException
      * @return string The complete MIME message that was sent.
+     * @throws MailerException
      */
     public function send();
 }

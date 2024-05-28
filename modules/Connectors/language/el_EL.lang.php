@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Προσθήκη',
     'LBL_ADDRCITY' => 'Πόλη',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Πληροφορίες' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Κλείσιμο' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'Δεν βρέθηκε συνδετήρας για τη συγκεκριμένη ταυτότητα πηγής.',
-);
-
+];

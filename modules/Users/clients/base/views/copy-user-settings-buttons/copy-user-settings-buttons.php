@@ -15,19 +15,19 @@ $viewdefs['Users']['base']['view']['copy-user-settings-buttons'] = [
             'name' => 'cancel_button',
             'type' => 'button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
-            'css_class' => 'btn-link',
+            'css_class' => 'btn-link ml-2',
         ],
         [
             'name' => 'clear_button',
             'type' => 'button',
             'label' => 'LBL_CLEAR',
-            'css_class' => 'btn',
+            'css_class' => 'btn ml-2',
         ],
         [
             'name' => 'copy_button',
             'type' => 'button',
-            'label'=> 'LBL_COPY',
-            'css_class' => 'btn btn-primary',
+            'label' => 'LBL_COPY',
+            'css_class' => 'btn btn-primary ml-2',
         ],
     ],
 ];

@@ -10,15 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:
  ********************************************************************************/
-
-
-
-
-
-
 
 
 global $mod_strings;
@@ -26,45 +19,43 @@ global $app_strings;
 global $app_list_strings;
 global $focus;
 $focus = BeanFactory::newBean('ReportMaker');
-if(!empty($_REQUEST['record'])) {
+if (!empty($_REQUEST['record'])) {
     $result = $focus->retrieve($_REQUEST['record']);
-    if($result == null)
-    {
-    	sugar_die($app_strings['ERROR_NO_RECORD']);
+    if ($result == null) {
+        sugar_die($app_strings['ERROR_NO_RECORD']);
     }
-}
-else {
-	header("Location: index.php?module=ReportMaker&action=index");
-}
-
-if(isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] == 'true') {
-	$focus->id = "";
+} else {
+    header('Location: index.php?module=ReportMaker&action=index');
 }
 
-echo getClassicModuleTitle("ReportMaker", [htmlspecialchars($focus->get_summary_text(), ENT_COMPAT)], true);
+if (isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] == 'true') {
+    $focus->id = '';
+}
 
-$GLOBALS['log']->info("ReportMaker detail view");
+echo getClassicModuleTitle('ReportMaker', [htmlspecialchars($focus->get_summary_text(), ENT_COMPAT)], true);
 
-$xtpl=new XTemplate ('modules/ReportMaker/DetailView.html');
-$sub_xtpl = new XTemplate ('modules/ReportMaker/DetailView.html');
-$xtpl->assign("MOD", $mod_strings);
-$xtpl->assign("APP", $app_strings);
-$xtpl->assign("GRIDLINE", $gridline);
+$GLOBALS['log']->info('ReportMaker detail view');
 
-$xtpl->assign("ID", $focus->id);
+$xtpl = new XTemplate('modules/ReportMaker/DetailView.html');
+$sub_xtpl = new XTemplate('modules/ReportMaker/DetailView.html');
+$xtpl->assign('MOD', $mod_strings);
+$xtpl->assign('APP', $app_strings);
+$xtpl->assign('GRIDLINE', $gridline);
+
+$xtpl->assign('ID', $focus->id);
 $xtpl->assign('NAME', $focus->name);
 $xtpl->assign('TITLE', $focus->title);
-$xtpl->assign("DESCRIPTION", nl2br($focus->description));
+$xtpl->assign('DESCRIPTION', nl2br($focus->description));
 
 
-$xtpl->assign("REPORT_ALIGN", $app_list_strings['report_align_dom'][$focus->report_align]);
+$xtpl->assign('REPORT_ALIGN', $app_list_strings['report_align_dom'][$focus->report_align]);
 
-$xtpl->assign("TEAM", $focus->assigned_name);
+$xtpl->assign('TEAM', $focus->assigned_name);
 
 global $current_user;
 
 // adding custom fields:
-require_once('modules/DynamicFields/templates/Files/DetailView.php');
+require_once 'modules/DynamicFields/templates/Files/DetailView.php';
 
 if (SugarACL::checkAccess('DataSets', 'edit')) {
     $xtpl->parse('edit_button');
@@ -76,32 +67,30 @@ if (SugarACL::checkAccess('DataSets', 'delete')) {
     $xtpl->assign('DELETE_BUTTON', $xtpl->text('delete_button'));
 }
 
-$xtpl->parse("main");
-$xtpl->out("main");
+$xtpl->parse('main');
+$xtpl->out('main');
 
 //Show the datasets
 
 $old_contents = ob_get_contents();
 ob_end_clean();
 
-if($sub_xtpl->var_exists('subpanel', 'SUBDATASETS')){
-ob_start();
-global $focus_list;
-$focus_list = $focus->get_data_sets("ORDER BY list_order_y ASC");
-include('modules/DataSets/SubPanelView.php');
-echo "<BR>\n";
-$subdatasets =ob_get_contents();
-ob_end_clean();
+if ($sub_xtpl->var_exists('subpanel', 'SUBDATASETS')) {
+    ob_start();
+    global $focus_list;
+    $focus_list = $focus->get_data_sets('ORDER BY list_order_y ASC');
+    include 'modules/DataSets/SubPanelView.php';
+    echo "<BR>\n";
+    $subdatasets = ob_get_contents();
+    ob_end_clean();
 }
 
 ob_start();
 echo $old_contents;
 
-if(!empty($subdatasets))$sub_xtpl->assign('SUBDATASETS', $subdatasets);
+if (!empty($subdatasets)) {
+    $sub_xtpl->assign('SUBDATASETS', $subdatasets);
+}
 
-$sub_xtpl->parse("subpanel");
-$sub_xtpl->out("subpanel");
-
-	
-		
-?>
+$sub_xtpl->parse('subpanel');
+$sub_xtpl->out('subpanel');

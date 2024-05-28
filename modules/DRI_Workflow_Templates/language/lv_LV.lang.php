@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Aktīvs',
     'LBL_ASSIGNEE_RULE' => 'Pilnvarotā noteikums',
     'LBL_TARGET_ASSIGNEE' => 'Mērķa pilnvarotais',
+    'LBL_STAGE_NUMBERS' => 'Posma numerācija',
     'LBL_EXPORT_BUTTON_LABEL' => 'Eksportēt',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Importēt',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Automātiski izveidot/atjaunināt jaunu Smart Guide veidnes ierakstu, importējot *.json failu no jūsu failu sistēmas.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Ja ir atzīmēts, ja mērķa pilnvarotais = priekšteča pilnvarotais, kad "Piešķirts" lietotājam ir mainīts uz priekšteci, "Piešķirts" lietotājiem arī tiks automātiski mainīts smart guides, posmos un aktivitātēs. Ņemiet vērā, ka mērķa pilnvarotā iestatījumiem aktivitātes veidnēs ir prioritāte salīdzinājumā ar Smart Guide veidni',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Kad lietotājam ir jāpiešķir Aktivitātes',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Kuram ir jāpiešķir Aktivitātes',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Šis slēdzis ļauj parādīt vai paslēpt automātisko posma numerāciju.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Smart Guide /posma/ aktivitātes veidne',
 ];

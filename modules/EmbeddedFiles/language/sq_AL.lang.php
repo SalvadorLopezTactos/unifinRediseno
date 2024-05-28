@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Skedalë të integruar',
     'LBL_MODULE_NAME_SINGULAR' => 'Skedar i integruar',
     'LBL_MODULE_TITLE' => 'Skedar i integruar',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => 'emri i dosjes',
     'LBL_FILENAME' => 'emri i dosjes',
     'LBL_UPLOAD_ONLY_IMAGE' => 'Skedari i zgjedhur duhet të jetë një figurë.',
-);
+];

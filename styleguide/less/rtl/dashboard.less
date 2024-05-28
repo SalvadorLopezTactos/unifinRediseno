@@ -13,13 +13,13 @@
 
   .dashlet-content {
     .forecast-details {
-      .span6.tright {
-        text-align: left !important; /*cannot avoid using !important since low level .tright is using important*/
+      .span6.text-right {
+        text-align: left;
       }
     }
 
     .bestNumbers {
-      .span6.tcenter:not(:first-child) {
+      .span6.text-center:not(:first-child) {
         margin-right: @fluidGridGutterWidth;
         margin-left: 0;
       }
@@ -50,7 +50,7 @@
     }
 
     .record-cell[data-type="avatar"],
-      .record-cell[data-type="image"] {
+    .record-cell[data-type="image"] {
       margin-right: 0;
       margin-left: 20px;
     }
@@ -94,11 +94,6 @@
 
           > a {
             padding: 4px 2px 4px 16px;
-
-            .fa-caret-down {
-              left: 0;
-              right: auto;
-            }
           }
         }
       }

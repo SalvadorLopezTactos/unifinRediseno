@@ -82,6 +82,21 @@
                     <td width="60%"></td>
                 </tr>
                 <tr class="shouldToggle">
+                    <td width="25%" scope="row" valign="middle">{$MOD.LBL_FTS_USERNAME|escape:'html':'UTF-8'}:&nbsp;{sugar_help text=$MOD.LBL_FTS_USERNAME_HELP}</td>
+                    <td width="25%" align="left" valign="middle"><input type="text" name="fts_username" id="fts_username" maxlength="255" size="50" value="{$fts_username|escape:'html':'UTF-8'}"></td>
+                    <td width="60%"></td>
+                </tr>
+                <tr class="shouldToggle">
+                    <td width="25%" scope="row" valign="middle">{$MOD.LBL_FTS_PASSWORD|escape:'html':'UTF-8'}:&nbsp;{sugar_help text=$MOD.LBL_FTS_PASSWORD_HELP}</td>
+                    <td width="25%" align="left" valign="middle"><input type="password" name="fts_password" id="fts_password" maxlength="255" size="50" value="{$fts_password|escape:'html':'UTF-8'}"></td>
+                    <td width="60%"></td>
+                </tr>
+                <tr class="shouldToggle">
+                    <td width="25%" scope="row" valign="middle">{$MOD.LBL_FTS_TRANSPORT|escape:'html':'UTF-8'}:&nbsp;{sugar_help text=$MOD.LBL_FTS_TRANSPORT_HELP}</td>
+                    <td width="25%" align="left" valign="middle"><select name="fts_transport" id="fts_transport" value="{$fts_transport|escape:'html':'UTF-8'}">{$fts_transport_list}</td>
+                    <td width="60%"></td>
+                </tr>
+                <tr class="shouldToggle">
                     <td colspan="2">&nbsp;</td>
                 </tr>
             </tbody>
@@ -192,6 +207,10 @@
         var port = document.getElementById('fts_port').value;
         var typeEl = document.getElementById('fts_type');
         var type = typeEl.options[typeEl.selectedIndex].value;
+        var username = document.getElementById('fts_username').value;
+        var password = document.getElementById('fts_password').value;
+        var transportSelection = document.getElementById('fts_transport');
+        var transport = transportSelection.options[transportSelection.selectedIndex].value;
 
         if( type != "")
         {
@@ -207,6 +226,9 @@
             host: host,
             port: port,
             type: type,
+            username: username,
+            password: password,
+            transport: transport,
             enabled_modules: enabled,
             disabled_modules: disabled,
             csrf_token: SUGAR.csrf.form_token
@@ -254,6 +276,10 @@
             var typeEl = document.getElementById('fts_type');
             var type = typeEl.options[typeEl.selectedIndex].value;
             var clearData = $('#clearDataOnIndex').prop('checked') ? 1 : 0;
+            var username = document.getElementById('fts_username').value;
+            var password = document.getElementById('fts_password').value;
+            var transportSelection = document.getElementById('fts_transport');
+            var transport = transportSelection.options[transportSelection.selectedIndex].value;
 
             var modules = SUGAR.getEnabledModulesForFTSSched();
             if(modules.length == 0)
@@ -268,11 +294,19 @@
                 check_form('GlobalSearchSettings');
                 return;
             }
+            // to support username and password
             var sUrl = 'index.php?to_pdf=1&module=Administration&action=ScheduleFTSIndex&sched=true&type='
-                            + encodeURIComponent(type) + '&host=' + encodeURIComponent(host) + '&port=' + encodeURIComponent(port)
-                            + "&clearData=" + clearData + '&modules=' + encodeURIComponent(modules);
+                + encodeURIComponent(type) + '&host=' + encodeURIComponent(host) + '&port=' + encodeURIComponent(port)
+                + "&clearData=" + clearData + '&modules=' + encodeURIComponent(modules);
 
-            var transaction = YAHOO.util.Connect.asyncRequest('GET', sUrl, null, null);
+            postData = 'csrf_token=' + SUGAR.csrf.form_token;
+            if (username != "") {
+                postData += '&username=' + encodeURIComponent(username)
+                    + '&password=' + encodeURIComponent(password);
+            }
+            postData += '&transport=' + encodeURIComponent(transport);
+
+            var transaction = YAHOO.util.Connect.asyncRequest('POST', sUrl, null, postData);
             alert(SUGAR.language.get('Administration','LBL_FTS_CONN_SUCCESS_SHORT'));
             SUGAR.FTS.selectFTSModulesDialog.cancel();
 
@@ -347,6 +381,11 @@
             var port = document.getElementById('fts_port').value;
             var typeEl = document.getElementById('fts_type');
             var type = typeEl.options[typeEl.selectedIndex].value;
+            var username = document.getElementById('fts_username').value;
+            var password = document.getElementById('fts_password').value;
+            var transportSelection = document.getElementById('fts_transport');
+            var transport = transportSelection.options[transportSelection.selectedIndex].value;
+
             if(type != "")
             {
                 if(!check_form('GlobalSearchSettings'))
@@ -389,11 +428,19 @@
             var sUrl = 'index.php?to_pdf=1&module=Administration&action=checkFTSConnection&type='
                 + encodeURIComponent(type) + '&host=' + encodeURIComponent(host) + '&port=' + encodeURIComponent(port);
 
-            var transaction = YAHOO.util.Connect.asyncRequest('GET', sUrl, callback, null);
+            postData = 'csrf_token=' + SUGAR.csrf.form_token;
+            if (username != "") {
+                postData += '&username=' + encodeURIComponent(username)
+                    + '&password=' + encodeURIComponent(password);
+            }
+            postData += '&transport=' + encodeURIComponent(transport);
+            var transaction = YAHOO.util.Connect.asyncRequest('POST', sUrl, callback, postData);
 
         }
     };
     addForm('GlobalSearchSettings');
     addToValidateMoreThan('GlobalSearchSettings', 'fts_port', 'int', true, '{$MOD.LBL_FTS_PORT|escape:javascript}', 1);
     addToValidate('GlobalSearchSettings', 'fts_host', 'varchar', 'true', '{$MOD.LBL_FTS_URL|escape:javascript}');
+    addToValidate('GlobalSearchSettings', 'fts_username', 'varchar', false, '{$MOD.LBL_FTS_USERNAME|escape:javascript}');
+    addToValidate('GlobalSearchSettings', 'fts_password', 'varchar', false, '{$MOD.LBL_FTS_PASSWORD|escape:javascript}');
 </script>

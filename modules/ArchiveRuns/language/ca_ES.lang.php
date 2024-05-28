@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_ARCHIVER_ID_FIELD' => 'ID d&#39;arxiu',
     'LBL_ARCHIVER_NAME_FIELD' => 'Nom de l&#39;arxiu',
     'LBL_DATE_OF_ARCHIVE_FIELD' => 'Data del procés',
@@ -28,4 +27,4 @@ $mod_strings = array (
     'LBL_FILTER_DEF_FIELD' => 'Definició de filtre',
     'LBL_SOURCE_FIELD' => 'Font',
     'LBL_DOWNLOAD_ID_LIST_BUTTON' => 'Baixa els ID processats',
-);
+];

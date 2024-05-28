@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Faza e grupit:',
-    'LBL_DEAL_TOT'=>'Totali i zbritjes',
-    'LBL_DEAL_TOT_USDOLLAR'=>'Zbritje totale (US Dollar)',
+    'LBL_DEAL_TOT' => 'Totali i zbritjes',
+    'LBL_DEAL_TOT_USDOLLAR' => 'Zbritje totale (US Dollar)',
     'LBL_NEW_SUB' => 'Nëntotali i zbritur',
     'LBL_SHIPPING' => 'Transporti:',
-    'LBL_SHIPPING_USDOLLAR'=>'Transporti (US Dollar)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Nëntotali (US Dollar)',
+    'LBL_SHIPPING_USDOLLAR' => 'Transporti (US Dollar)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Nëntotali (US Dollar)',
     'LBL_SUBTOTAL' => 'Nëntotali:',
     'LBL_TAXABLE_SUBTOTAL' => 'Nëntotali i tatueshëm',
-    'LBL_TAX_USDOLLAR'=>'Tatimi (US Dollar)',
+    'LBL_TAX_USDOLLAR' => 'Tatimi (US Dollar)',
     'LBL_TAX' => 'Tatimi:',
-    'LBL_TOTAL_USDOLLAR'=>'Totali (US Dollar)',
+    'LBL_TOTAL_USDOLLAR' => 'Totali (US Dollar)',
     'LBL_TOTAL' => 'Totali:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Pozicioni i kuotës deng',
     'EXCEPTION_INVALID_QUOTE_ID' => 'ID e kuotës mungon nga payload',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'Kuota të cilën e keni kërkuar nuk u gjet',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'Kuota të cilën e keni kërkuar nuk u gjet',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Skonto e mëtejshme në grup',
     'LBL_GROUP_TOTAL' => 'Totali i grupit',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Ballina e grupit',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Grupi bazë i paketës së produktit për citimin',
     'LBL_ALERT_DELETING_ITEM' => 'Fshirja e artikujve në rresht',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Artikulli në rresht u fshi me sukses',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e paketës së produktit',
+];

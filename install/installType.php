@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-if( !isset( $install_script ) || !$install_script ){
+if (!isset($install_script) || !$install_script) {
     die($mod_strings['ERR_NO_DIRECT_SCRIPT']);
 }
 // $mod_strings come from calling page.
@@ -18,11 +18,10 @@ if( !isset( $install_script ) || !$install_script ){
 $langDropDown = get_select_options_with_id($supportedLanguages, $current_language);
 
 
-
-if( !isset($_SESSION['licenseKey_submitted']) || !$_SESSION['licenseKey_submitted'] ) {
-    $_SESSION['setup_license_key_users']        = 0;
-    $_SESSION['setup_license_key_expire_date']  = "";
-    $_SESSION['setup_license_key']              = "";
+if (!isset($_SESSION['licenseKey_submitted']) || !$_SESSION['licenseKey_submitted']) {
+    $_SESSION['setup_license_key_users'] = 0;
+    $_SESSION['setup_license_key_expire_date'] = '';
+    $_SESSION['setup_license_key'] = '';
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -68,14 +67,13 @@ $out .= <<<EOQ1
 
 EOQ1;
 
-$typical_checked ='checked';
-$custom_checked ='';
-if(isset($_SESSION['install_type']) && $_SESSION['install_type']=='custom'){
-    $typical_checked ='';
-    $custom_checked ='checked';
-
-}else{
-//do nothing because defaults handle this condition
+$typical_checked = 'checked';
+$custom_checked = '';
+if (isset($_SESSION['install_type']) && $_SESSION['install_type'] == 'custom') {
+    $typical_checked = '';
+    $custom_checked = 'checked';
+} else {
+    //do nothing because defaults handle this condition
 }
 
 

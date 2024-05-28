@@ -15,7 +15,7 @@
  */
 ({
     tagName: "ul",
-    className: "dashlets row-fluid",
+    className: 'dashlets row-fluid h-full overflow-y-auto',
 
     /**
      * @inheritdoc
@@ -53,8 +53,7 @@
 
     /**
      * Replace all components based on the dashboard metadata value
-     * @param {Object} [options] Options.
-     * @param {number} [options.tabIndex=0] Index of the currently active tab.
+     * @param {Object} [options]
      */
     setMetadata: function(options) {
         if (!this.model.has('metadata')) {
@@ -70,9 +69,11 @@
         if (options && !_.isUndefined(options.tabIndex)) {
             tabIndex = options.tabIndex;
         } else {
-            var tabComp = this.layout.getComponent('tabbed-dashboard');
-            if (tabComp) {
-                tabIndex = tabComp.activeTab;
+            if (this.layout.layout) {
+                var tabComp = this.layout.layout.getComponent('tabbed-dashboard');
+                if (tabComp) {
+                    tabIndex = tabComp.activeTab;
+                }
             }
         }
 

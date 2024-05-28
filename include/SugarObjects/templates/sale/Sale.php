@@ -12,7 +12,6 @@
 
 class Sale extends Basic
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -25,8 +24,8 @@ class Sale extends Basic
     public function create_new_list_query(
         $order_by,
         $where,
-        $filter = array(),
-        $params = array(),
+        $filter = [],
+        $params = [],
         $show_deleted = 0,
         $join_type = '',
         $return_array = false,
@@ -34,6 +33,7 @@ class Sale extends Basic
         $singleSelect = false,
         $ifListForExport = false
     ) {
+
         //Ensure that amount is always on list view queries if amount_usdollar is as well.
         if (!empty($filter) && isset($filter['amount_usdollar']) && !isset($filter['amount'])) {
             $filter['amount'] = true;

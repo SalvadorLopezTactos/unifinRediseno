@@ -266,7 +266,7 @@ SUGAR.expressions.validateCurrExpression = function(silent, matchType)
 		            returnType = def.type;
 		    }
 		}
-		if (matchType && matchType != returnType) {
+            if (expression && matchType && matchType != returnType) {
 			Msg.show({
                 type: "alert",
                 title: SUGAR.language.get("ModuleBuilder", "LBL_FORMULA_INVALID"),

@@ -10,45 +10,45 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['products_category_tree'] = array(
+$dictionary['products_category_tree'] = [
     'table' => 'category_tree',
-    'fields' => array(
-        'self_id' => array(
+    'fields' => [
+        'self_id' => [
             'name' => 'self_id',
             'type' => 'id',
-        ),
-        'node_id' => array(
+        ],
+        'node_id' => [
             'name' => 'node_id',
             'type' => 'int',
             'auto_increment' => true,
             'required' => true,
             'isnull' => false,
-        ),
-        'parent_node_id' => array(
+        ],
+        'parent_node_id' => [
             'name' => 'parent_node_id',
             'type' => 'int',
             'default' => '0',
-        ),
-        'type' => array(
+        ],
+        'type' => [
             'name' => 'type',
             'type' => 'varchar',
             'len' => '36',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'categorytreepk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'node_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_categorytree',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'self_id',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

@@ -1,5 +1,8 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+
+if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -17,5 +20,4 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 header('HTTP/1.1 301 Moved Permanently');
-header('Location: index.php?entryPoint=WebToLeadCapture&'.$_SERVER["QUERY_STRING"]);
-?>
+header('Location: index.php?entryPoint=WebToLeadCapture&' . $_SERVER['QUERY_STRING']);

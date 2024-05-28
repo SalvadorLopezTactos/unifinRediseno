@@ -15,21 +15,16 @@ global $mod_strings;
 $popupMeta = ['moduleMain' => 'ProspectList',
     'varName' => 'PROSPECTLIST',
     'orderBy' => 'name',
-    'whereClauses' =>
-        ['name' => 'prospect_lists.name',
-            'list_type' => 'prospect_lists.list_type'],
-    'searchInputs' =>
-        ['name', 'list_type'],
-    'selectDoms' =>
-        ['LIST_OPTIONS' =>
-            ['dom' => 'prospect_list_type_dom', 'searchInput' => 'list_type'],
-        ],
-    'create' =>
-        ['formBase' => 'ProspectListFormBase.php',
-            'formBaseClass' => 'ProspectListFormBase',
-            'getFormBodyParams' => ['', '', 'ProspectListSave'],
-            'createButton' => 'LNK_NEW_PROSPECT_LIST',
-        ],
+    'whereClauses' => ['name' => 'prospect_lists.name',
+        'list_type' => 'prospect_lists.list_type'],
+    'searchInputs' => ['name', 'list_type'],
+    'selectDoms' => ['LIST_OPTIONS' => ['dom' => 'prospect_list_type_dom', 'searchInput' => 'list_type'],
+    ],
+    'create' => ['formBase' => 'ProspectListFormBase.php',
+        'formBaseClass' => 'ProspectListFormBase',
+        'getFormBodyParams' => ['', '', 'ProspectListSave'],
+        'createButton' => 'LNK_NEW_PROSPECT_LIST',
+    ],
     'listviewdefs' => [
         'NAME' => [
             'width' => '25',

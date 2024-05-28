@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
 
     //module strings.
     'LBL_MODULE_NAME' => 'Manažérska prognostická tabuľka',
@@ -35,14 +35,14 @@ $mod_strings = array (
     'LBL_FORECAST_TYPE' => 'Typ prognózy',
     'LBL_FORECAST_OPP_COUNT' => 'Počet príležitostí',
     'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Počet príležitostí na osi',
-    'LBL_FORECAST_OPP_WEIGH'=> 'Vážená čiastka',
+    'LBL_FORECAST_OPP_WEIGH' => 'Vážená čiastka',
     'LBL_FORECAST_USER' => 'Používateľ',
-    'LBL_DATE_COMMITTED'=> 'Dátum záväzku',
+    'LBL_DATE_COMMITTED' => 'Dátum záväzku',
     'LBL_DATE_ENTERED' => 'Dátum vloženia',
     'LBL_DATE_MODIFIED' => 'Dátum úpravy',
     'LBL_CREATED_BY' => 'Vytvoril',
     'LBL_DELETED' => 'Vymazaný',
-    'LBL_MODIFIED_USER_ID'=>'Upravené podľa',
+    'LBL_MODIFIED_USER_ID' => 'Upravené podľa',
     'LBL_WK_VERSION' => 'Verzia',
     'LBL_WK_REVISION' => 'Revízia',
 
@@ -59,68 +59,68 @@ $mod_strings = array (
     'LBL_QC_UPCOMING_FORECASTS' => 'Moje prognózy',
     'LBL_QC_LAST_DATE_COMMITTED' => 'Dátum posledného záväzku:',
     'LBL_QC_LAST_COMMIT_VALUE' => 'Suma posledného záväzku:',
-    'LBL_QC_HEADER_DELIM'=> 'K',
+    'LBL_QC_HEADER_DELIM' => 'K',
 
     //opportunity worksheet list view labels
-    'LBL_OW_OPPORTUNITIES' => "Obchodná príležitosť",
-    'LBL_OW_ACCOUNTNAME' => "Účet",
-    'LBL_OW_REVENUE' => "Čiastka",
-    'LBL_OW_WEIGHTED' => "Vážená čiastka",
-    'LBL_OW_MODULE_TITLE'=> 'Tabuľka príležitostí',
-    'LBL_OW_PROBABILITY'=>'Pravdepodobnosť',
-    'LBL_OW_NEXT_STEP'=>'Ďalší krok',
-    'LBL_OW_DESCRIPTION'=>'Popis',
-    'LBL_OW_TYPE'=>'Typ',
+    'LBL_OW_OPPORTUNITIES' => 'Obchodná príležitosť',
+    'LBL_OW_ACCOUNTNAME' => 'Účet',
+    'LBL_OW_REVENUE' => 'Čiastka',
+    'LBL_OW_WEIGHTED' => 'Vážená čiastka',
+    'LBL_OW_MODULE_TITLE' => 'Tabuľka príležitostí',
+    'LBL_OW_PROBABILITY' => 'Pravdepodobnosť',
+    'LBL_OW_NEXT_STEP' => 'Ďalší krok',
+    'LBL_OW_DESCRIPTION' => 'Popis',
+    'LBL_OW_TYPE' => 'Typ',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'Priamy report',
-    'LBL_FDR_OPPORTUNITIES'=>'Príležitosti v prognóze:',
-    'LBL_FDR_WEIGH'=>'Vážená čiastka príležitostí:',
-    'LBL_FDR_COMMIT'=>'Schválená čiastka',
-    'LBL_FDR_DATE_COMMIT'=>'Dátum schválenia',
+    'LBL_FDR_USER_NAME' => 'Priamy report',
+    'LBL_FDR_OPPORTUNITIES' => 'Príležitosti v prognóze:',
+    'LBL_FDR_WEIGH' => 'Vážená čiastka príležitostí:',
+    'LBL_FDR_COMMIT' => 'Schválená čiastka',
+    'LBL_FDR_DATE_COMMIT' => 'Dátum schválenia',
 
     //detail view.
     'LBL_DV_HEADER' => 'Prognózy: Tabuľka',
     'LBL_DV_MY_FORECASTS' => 'Moje prognózy',
-    'LBL_DV_MY_TEAM' => "Moje tímové prognózy" ,
+    'LBL_DV_MY_TEAM' => "Moje tímové prognózy",
     'LBL_DV_TIMEPERIODS' => 'Časové obdobia:',
     'LBL_DV_FORECAST_PERIOD' => 'Časové obdobie prognózy',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Prognóza príležitostí',
     'LBL_SEARCH' => 'Vybrať',
     'LBL_SEARCH_LABEL' => 'Vybrať',
     'LBL_COMMIT_HEADER' => 'Prognóza záväzku',
-    'LBL_DV_LAST_COMMIT_DATE' =>'Dátum posledného záväzku',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'Čiastky posledného záväzku:',
+    'LBL_DV_LAST_COMMIT_DATE' => 'Dátum posledného záväzku',
+    'LBL_DV_LAST_COMMIT_AMOUNT' => 'Čiastky posledného záväzku:',
     'LBL_DV_FORECAST_ROLLUP' => 'Prognóza kumulatívne',
     'LBL_DV_TIMEPERIOD' => 'Časové obdobie',
     'LBL_DV_TIMPERIOD_DATES' => 'Časový rozsah:',
     'LBL_LOADING_COMMIT_HISTORY' => 'Nahrávanie histórie schválení...',
 
     //list view
-    'LBL_LV_TIMPERIOD'=> 'Časové obdobie',
-    'LBL_LV_TIMPERIOD_START_DATE'=> 'Dátum začiatku',
-    'LBL_LV_TIMPERIOD_END_DATE'=> 'Dátum ukončenia',
-    'LBL_LV_TYPE'=> 'Typ prognózy',
-    'LBL_LV_COMMIT_DATE'=> 'Dátum schválenia',
-    'LBL_LV_OPPORTUNITIES'=> 'Príležitosti',
-    'LBL_LV_WEIGH'=> 'Vážená čiastka',
-    'LBL_LV_COMMIT'=> 'Schválená čiastka',
+    'LBL_LV_TIMPERIOD' => 'Časové obdobie',
+    'LBL_LV_TIMPERIOD_START_DATE' => 'Dátum začiatku',
+    'LBL_LV_TIMPERIOD_END_DATE' => 'Dátum ukončenia',
+    'LBL_LV_TYPE' => 'Typ prognózy',
+    'LBL_LV_COMMIT_DATE' => 'Dátum schválenia',
+    'LBL_LV_OPPORTUNITIES' => 'Príležitosti',
+    'LBL_LV_WEIGH' => 'Vážená čiastka',
+    'LBL_LV_COMMIT' => 'Schválená čiastka',
 
-    'LBL_COMMIT_NOTE'=> 'Zadajte čiastky, ktoré by ste chceli schváliť pre vybrané časové obdobie:',
+    'LBL_COMMIT_NOTE' => 'Zadajte čiastky, ktoré by ste chceli schváliť pre vybrané časové obdobie:',
 
-    'LBL_COMMIT_MESSAGE'=> 'Chcete schváliť tieto čiastky?',
+    'LBL_COMMIT_MESSAGE' => 'Chcete schváliť tieto čiastky?',
     'ERR_FORECAST_AMOUNT' => 'Vyžaduje sa schválenie čiastky ako číselný údaj.',
 
     // js error strings
     'LBL_FC_START_DATE' => 'Dátum začiatku',
     'LBL_FC_USER' => 'Plán pre',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'Žiadne aktívne časové obdobie pre prognostiku.',
-    'LBL_FDR_ADJ_AMOUNT'=>'Upravená čiastka',
-    'LBL_SAVE_WOKSHEET'=>'Uložiť pracovný list',
-    'LBL_RESET_WOKSHEET'=>'Zresetovať pracovný list',
-    'LBL_SHOW_CHART'=>'Zobraziť graf',
-    'LBL_RESET_CHECK'=>'Všetky dáta pracovného listu pre zvolené časové obdobie a prihláseného užívateľa, budú odstránené. Pokračovať?',
+    'LBL_NO_ACTIVE_TIMEPERIOD' => 'Žiadne aktívne časové obdobie pre prognostiku.',
+    'LBL_FDR_ADJ_AMOUNT' => 'Upravená čiastka',
+    'LBL_SAVE_WOKSHEET' => 'Uložiť pracovný list',
+    'LBL_RESET_WOKSHEET' => 'Zresetovať pracovný list',
+    'LBL_SHOW_CHART' => 'Zobraziť graf',
+    'LBL_RESET_CHECK' => 'Všetky dáta pracovného listu pre zvolené časové obdobie a prihláseného užívateľa, budú odstránené. Pokračovať?',
 
     'LBL_CURRENCY' => 'Mena',
     'LBL_CURRENCY_ID' => 'ID meny',
@@ -149,6 +149,6 @@ $mod_strings = array (
     'LBL_HISTORY_LOG' => 'Posledný záväzok',
     'LBL_NO_COMMIT' => 'Žiadne predchádzajúce schválenie',
 
-    'LBL_MANGER_SAVED' => 'Manager Saved'
+    'LBL_MANGER_SAVED' => 'Manager Saved',
 
-);
+];

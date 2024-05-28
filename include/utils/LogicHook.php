@@ -39,115 +39,118 @@ use Sugarcrm\Sugarcrm\Security\Subject\LogicHook as Subject;
  *
  * @api
  */
-class LogicHook{
-
+class LogicHook
+{
     /**
      * @var SugarBean
      */
-	var $bean = null;
+    public $bean = null;
 
-	/**
-	 * Static Function which returns and instance of LogicHook
-	 *
-	 * @return unknown
-	 */
-	static function initialize(){
-		if(empty($GLOBALS['logic_hook']))
-			$GLOBALS['logic_hook'] = new LogicHook();
-		return $GLOBALS['logic_hook'];
-	}
+    /**
+     * Static Function which returns and instance of LogicHook
+     *
+     * @return unknown
+     */
+    public static function initialize()
+    {
+        if (empty($GLOBALS['logic_hook'])) {
+            $GLOBALS['logic_hook'] = new LogicHook();
+        }
+        return $GLOBALS['logic_hook'];
+    }
 
-	function setBean($bean){
-		$this->bean = $bean;
-		return $this;
-	}
+    public function setBean($bean)
+    {
+        $this->bean = $bean;
+        return $this;
+    }
 
-	protected $hook_map = array();
-	protected $hookscan = array();
+    protected $hook_map = [];
+    protected $hookscan = [];
 
-	public function getHooksMap()
-	{
-	    return $this->hook_map;
-	}
+    public function getHooksMap()
+    {
+        return $this->hook_map;
+    }
 
-	public function getHooksList()
-	{
-	    return $this->hookscan;
-	}
+    public function getHooksList()
+    {
+        return $this->hookscan;
+    }
 
     public function scanHooksDir($extpath)
     {
-		if(is_dir($extpath)){
-		    $dir = dir($extpath);
-			while($entry = $dir->read()){
-				if($entry != '.' && $entry != '..' && strtolower(substr($entry, -4)) == ".php" && is_file($extpath.'/'.$entry)) {
-				    unset($hook_array);
-                    include($extpath.'/'.$entry);
-                    if(!empty($hook_array)) {
-                        foreach($hook_array as $type => $hookg) {
-                            foreach($hookg as $index => $hook) {
+        if (is_dir($extpath)) {
+            $dir = dir($extpath);
+            while ($entry = $dir->read()) {
+                if ($entry != '.' && $entry != '..' && strtolower(substr($entry, -4)) == '.php' && is_file($extpath . '/' . $entry)) {
+                    unset($hook_array);
+                    include $extpath . '/' . $entry;
+                    if (!empty($hook_array)) {
+                        foreach ($hook_array as $type => $hookg) {
+                            foreach ($hookg as $index => $hook) {
                                 $this->hookscan[$type][] = $hook;
-                                $idx = (is_countable($this->hookscan[$type]) ? count($this->hookscan[$type]) : 0)-1;
-                                $this->hook_map[$type][$idx] = array("file" => $extpath.'/'.$entry, "index" => $index);
+                                $idx = safeCount($this->hookscan[$type]) - 1;
+                                $this->hook_map[$type][$idx] = ['file' => $extpath . '/' . $entry, 'index' => $index];
                             }
                         }
                     }
-				}
-			}
-		}
-    }
-
-	protected static $hooks = array();
-
-    static public function refreshHooks()
-    {
-        self::$hooks = array();
-    }
-
-	public function loadHooks($module_dir)
-	{
-        $hook_array = array();
-	    if(!empty($module_dir)) {
-	        $custom = "custom/modules/$module_dir";
-	    } else {
-	        $custom = "custom/modules";
-	    }
-	    foreach(SugarAutoLoader::existing(
-		    "$custom/logic_hooks.php",
-	        SugarAutoLoader::loadExtension("logichooks", empty($module_dir)?"application":$module_dir)
-	    ) as $file) {
-            if(isset($GLOBALS['log'])){
-	    	    $GLOBALS['log']->debug('Including hook file: '.$file);
+                }
             }
-		    include $file;
-		}
-		return $hook_array;
-	}
+        }
+    }
 
-	public function getHooks($module_dir, $refresh = false)
-	{
-	    if($refresh || !isset(self::$hooks[$module_dir])) {
-	        self::$hooks[$module_dir] = $this->loadHooks($module_dir);
-	    }
-	    return self::$hooks[$module_dir];
-	}
+    protected static $hooks = [];
 
-	/**
-	 * Provide a means for developers to create upgrade safe business logic hooks.
-	 * If the bean is null, then we assume this call was not made from a SugarBean Object and
-	 * therefore we do not pass it to the method call.
-	 *
-	 * @param string $module_dir
-	 * @param string $event
-	 * @param array $arguments
+    public static function refreshHooks()
+    {
+        self::$hooks = [];
+    }
+
+    public function loadHooks($module_dir)
+    {
+        $hook_array = [];
+        if (!empty($module_dir)) {
+            $custom = "custom/modules/$module_dir";
+        } else {
+            $custom = 'custom/modules';
+        }
+        foreach (SugarAutoLoader::existing(
+            "$custom/logic_hooks.php",
+            SugarAutoLoader::loadExtension('logichooks', empty($module_dir) ? 'application' : $module_dir)
+        ) as $file) {
+            if (isset($GLOBALS['log'])) {
+                $GLOBALS['log']->debug('Including hook file: ' . $file);
+            }
+            include $file;
+        }
+        return $hook_array;
+    }
+
+    public function getHooks($module_dir, $refresh = false)
+    {
+        if ($refresh || !isset(self::$hooks[$module_dir])) {
+            self::$hooks[$module_dir] = $this->loadHooks($module_dir);
+        }
+        return self::$hooks[$module_dir];
+    }
+
+    /**
+     * Provide a means for developers to create upgrade safe business logic hooks.
+     * If the bean is null, then we assume this call was not made from a SugarBean Object and
+     * therefore we do not pass it to the method call.
+     *
+     * @param string $module_dir
+     * @param string $event
+     * @param array $arguments
      */
-    public function call_custom_logic($module_dir, $event, $arguments = array())
+    public function call_custom_logic($module_dir, $event, $arguments = [])
     {
         $origBean = $this->bean;
 
         if ($origBean === null) {
             $bean = BeanFactory::newBean($module_dir);
-            if ($bean instanceOf SugarBean) {
+            if ($bean instanceof SugarBean) {
                 $this->setBean($bean);
             }
         }
@@ -156,7 +159,7 @@ class LogicHook{
             $GLOBALS['log']->debug("Hook called: $module_dir::$event");
         }
 
-        $modules = array(null);
+        $modules = [null];
 
         if ($module_dir) {
             array_unshift($modules, $module_dir);
@@ -170,7 +173,7 @@ class LogicHook{
         if ($origBean === null) {
             $this->setBean($origBean);
         }
-	}
+    }
 
     /**
      * Apply sorting to the hooks using the sort index. Hooks with matching
@@ -181,7 +184,7 @@ class LogicHook{
      */
     protected function getProcessOrder(array $hookArray)
     {
-        $sortedIndices = array();
+        $sortedIndices = [];
         foreach ($hookArray as $idx => $hookDetails) {
             $sortedIndices[$idx] = $hookDetails[0];
         }
@@ -228,15 +231,17 @@ class LogicHook{
         }
     }
 
-	/**
-	 * This is called from call_custom_logic and actually performs the action as defined in the
-	 * logic hook. If the bean is null, then we assume this call was not made from a SugarBean Object and
-	 * therefore we do not pass it to the method call.
-	 *
-	 * @param array $hookArray
-	 * @param string $event
-	 * @param array $arguments
-	 */
+    /**
+     * This is called from call_custom_logic and actually performs the action as defined in the
+     * logic hook. If the bean is null, then we assume this call was not made from a SugarBean Object and
+     * therefore we do not pass it to the method call.
+     *
+     * @param array $hookArray
+     * @param string $event
+     * @param array $arguments
+     *
+     * @throws SugarApiExceptionInvalidParameter Throw stock or custom exception and interrupt save operation
+     */
     public function process_hooks($hookArray, $event, $arguments)
     {
         // Skip if event is unknown
@@ -255,7 +260,7 @@ class LogicHook{
             $hookLabel = $hookDetails[5] ?? null;
 
             if (!$this->loadHookClass($hookClass, $hookFile)) {
-                $this->log("error", "Unable to load custom logic class '$hookClass'");
+                $this->log('error', "Unable to load custom logic class '$hookClass'");
                 continue;
             }
 
@@ -265,14 +270,14 @@ class LogicHook{
 
             try {
                 if (strcasecmp($hookClass, $hookFunc) === 0) {
-                    $this->log("debug", "Creating new instance of hook class '$hookClass' with parameters");
+                    $this->log('debug', "Creating new instance of hook class '$hookClass' with parameters");
                     if (!is_null($this->bean)) {
                         new $hookClass($this->bean, $event, $arguments);
                     } else {
                         new $hookClass($event, $arguments);
                     }
                 } else {
-                    $this->log("debug", "Creating new instance of hook class '$hookClass' without parameters");
+                    $this->log('debug', "Creating new instance of hook class '$hookClass' without parameters");
                     if (!method_exists($hookClass, $hookFunc)) {
                         $this->log('error', "Method $hookFunc does not exist in class $hookClass");
                         continue;
@@ -291,6 +296,12 @@ class LogicHook{
                         $hookObject->$hookFunc($event, $arguments);
                     }
                 }
+            } catch (SugarApiExceptionInvalidParameter $e) {
+                throw $e;
+            } catch (Exception $e) {
+                if (!defined('SUGAR_PHPUNIT_RUNNER')) {
+                    throw $e;
+                }
             } catch (Throwable $e) {
                 $this->log('fatal', 'Error executing hook: ' . $e->getMessage());
             } finally {
@@ -298,7 +309,7 @@ class LogicHook{
             }
 
             if ($this->bean && $event === 'before_save') {
-                $this->bean->commitAuditedStateChanges($subject);
+                $this->bean->enqueueAuditedStateChanges($subject);
             }
         }
     }

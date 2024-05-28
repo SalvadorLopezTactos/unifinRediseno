@@ -16,9 +16,10 @@ class WorkflowController extends SugarController
     public function preProcess()
     {
         global $current_user;
-        
+
         $workflow_modules = get_workflow_admin_modules_for_user($current_user);
-        if (!is_admin($current_user) && empty($workflow_modules))
-            sugar_die("Unauthorized access to WorkFlow.");
+        if (!is_admin($current_user) && empty($workflow_modules)) {
+            sugar_die('Unauthorized access to WorkFlow.');
+        }
     }
 }

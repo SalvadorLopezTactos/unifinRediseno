@@ -11,18 +11,18 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['KBContents']['base']['view']['module-menu'] = array(
-    'config' => array(
+$viewdefs['KBContents']['base']['view']['module-menu'] = [
+    'config' => [
         'data_provider' => 'Categories',
         'config_provider' => 'KBContents',
-        'root_name' => 'category_root'
-    ),
+        'root_name' => 'category_root',
+    ],
     'label' => 'LNK_LIST_KBCATEGORIES',
-    'filterDef' => array(
-        array(
-            'active_rev' => array(
+    'filterDef' => [
+        [
+            'active_rev' => [
                 '$equals' => '1',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

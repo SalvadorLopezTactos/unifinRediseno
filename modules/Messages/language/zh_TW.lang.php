@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => '進行中',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => '郵件焦點抽屜',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => '訊息記錄儀表板',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '訊息時間軸',
 ];

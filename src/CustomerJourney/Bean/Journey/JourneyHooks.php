@@ -17,7 +17,6 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Bean\RSA\CheckAndPerformRSA as CheckAndPer
 
 class JourneyHooks
 {
-
     /**
      * All after_save logic hooks is inside this function.
      *
@@ -27,6 +26,9 @@ class JourneyHooks
      */
     public function afterSave($bean, $event, $arguments)
     {
+        if (!hasSystemAutomateLicense()) {
+            return;
+        }
 
         $this->checkStatusUpdate($bean, $event, $arguments);
 

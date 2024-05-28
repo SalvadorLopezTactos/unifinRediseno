@@ -39,7 +39,7 @@
     format: function(value) {
         let progress = parseFloat(value);
         progress *= 100;
-        return parseInt(progress);
+        return Math.round(progress);
     },
 
     /**

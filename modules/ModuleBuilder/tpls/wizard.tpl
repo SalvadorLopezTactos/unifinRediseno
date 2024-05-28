@@ -28,8 +28,8 @@
 			{else}
 				{assign var='buttonsize' value=$button.size}
 			{/if}
-			<td {if isset($button.help)}id="{$button.help}"{/if} width="16%" name=helpable" style="padding: 5px;"  valign="top" align="center">
-			     <table onclick='{if $button.action|substr:0:11 == "javascript:"}{$button.action|substr:11}{else}ModuleBuilder.getContent("{$button.action}");{/if}' 
+			<td {if isset($button.help)}id="{$button.help}"{/if} width="16%" name="helpable" style="padding: 5px;"  valign="top" align="center">
+			     <table onclick='{if $button.action|substr:0:11 == "javascript:"}{$button.action|substr:11:($button.action|count_characters:true)}{else}ModuleBuilder.getContent("{$button.action}");{/if}' 
 			         class='wizardButton' onmousedown="ModuleBuilder.buttonDown(this);return false;" onmouseout="ModuleBuilder.buttonOut(this);">
 			         <tr>
 						<td align="center"><a class='studiolink' href="javascript:void(0)" >

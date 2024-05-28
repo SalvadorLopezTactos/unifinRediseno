@@ -10,48 +10,46 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
 
-		  //Column header mapping
-		  'action' => 'Δράση',
-		  'active_users' => 'Καταμέτρηση Ενεργών Χειριστών',
-		  'date_modified' => 'Ημερομηνία Τελευταίας Δράσης',
-		  'different_modules_accessed' => 'Αριθμός Ενοτήτων Προσέγγισης',
-		  'first_name' => 'Όνομα',
-		  'item_id' => 'Ταυτότητα',
-		  'item_summary' => 'Όνομα',
-		  'last_action' => 'Τελευταία Δράση Ημερομηνία/Ώρα',
-		  'last_name' => 'Επώνυμο',
-		  'module_name' => 'Όνομα Ενότητας',
-		  'records_modified' => 'Σύνολο Τροποποιημένων Εγγραφών',
-		  'top_module' => 'Καλύτερη Ενότητα Προσέγγισης',
-		  'total_count' => 'Συνολικές Σελίδες',
-		  'total_login_time' => 'Ώρα (ωω:λλ:δδ)',
-		  'user_name' => 'Όνομα Χειριστή',
-		  'users' => 'Χειριστές',
-		  
-		  //Administration related labels
-		  'LBL_ENABLE' => 'Ενεργοποιημένος',
-		  'LBL_MODULE_NAME_TITLE' => 'Σημεία Εντοπισμού',
-		  'LBL_MODULE_NAME' => 'Σημεία Εντοπισμού',
-		  'LBL_MODULE_NAME_SINGULAR' => 'Tracker',
-		  'LBL_TRACKER_SETTINGS' => 'Ρυθμίσεις Tracker',
-		  'LBL_TRACKER_QUERIES_DESC' => 'Ερωτήματα Tracker',
-		  'LBL_TRACKER_QUERIES_HELP' => 'Παρακολούθηση εντοπισμού δηλώσεων SQL, όταν η "Σύνδεση αργών ερωτημάτων" είναι ενεργοποιημένη και το ερώτημα του χρόνου εκτέλεσης υπερβαίνει την αξία "Αργό ερώτημα ορίου χρόνου"',
-		  'LBL_TRACKER_PERF_DESC' => 'Απόδοση Tracker',
-		  'LBL_TRACKER_PERF_HELP' => 'Tracker βάσης δεδομένων, αρχεία πρόσβασης και χρήση μνήμης',
-		  'LBL_TRACKER_SESSIONS_DESC' => 'Περίοδος Συνεδρίας Tracker',
-		  'LBL_TRACKER_SESSIONS_HELP' => 'Ενεργοί χειριστές Tracker και πληροφορίες της περιόδου συνεδρίας των χειριστών',
-		  'LBL_TRACKER_DESC' => 'Περιγραφή Tracker',
-		  'LBL_TRACKER_HELP' => 'Προβολή σελίδας χειριστή διαδρομής Tracker (ενότητες και εγγραφές καταγράφονται) και οι εγγραφές αποθηκεύονται',
-		  'LBL_TRACKER_PRUNE_INTERVAL' => 'Αριθμός ημερών για αποθήκευση των δεδομένων του Tracker, όταν οι προγραμματισμένες εργασίες περικόπτουν τους πίνακες.',
-		  'LBL_TRACKER_PRUNE_RANGE' => 'Αριθμός Ημερών',
-);
-?>
+    //Column header mapping
+    'action' => 'Δράση',
+    'active_users' => 'Καταμέτρηση Ενεργών Χειριστών',
+    'date_modified' => 'Ημερομηνία Τελευταίας Δράσης',
+    'different_modules_accessed' => 'Αριθμός Ενοτήτων Προσέγγισης',
+    'first_name' => 'Όνομα',
+    'item_id' => 'Ταυτότητα',
+    'item_summary' => 'Όνομα',
+    'last_action' => 'Τελευταία Δράση Ημερομηνία/Ώρα',
+    'last_name' => 'Επώνυμο',
+    'module_name' => 'Όνομα Ενότητας',
+    'records_modified' => 'Σύνολο Τροποποιημένων Εγγραφών',
+    'top_module' => 'Καλύτερη Ενότητα Προσέγγισης',
+    'total_count' => 'Συνολικές Σελίδες',
+    'total_login_time' => 'Ώρα (ωω:λλ:δδ)',
+    'user_name' => 'Όνομα Χειριστή',
+    'users' => 'Χειριστές',
+
+    //Administration related labels
+    'LBL_ENABLE' => 'Ενεργοποιημένος',
+    'LBL_MODULE_NAME_TITLE' => 'Σημεία Εντοπισμού',
+    'LBL_MODULE_NAME' => 'Σημεία Εντοπισμού',
+    'LBL_MODULE_NAME_SINGULAR' => 'Tracker',
+    'LBL_TRACKER_SETTINGS' => 'Ρυθμίσεις Tracker',
+    'LBL_TRACKER_QUERIES_DESC' => 'Ερωτήματα Tracker',
+    'LBL_TRACKER_QUERIES_HELP' => 'Παρακολούθηση εντοπισμού δηλώσεων SQL, όταν η "Σύνδεση αργών ερωτημάτων" είναι ενεργοποιημένη και το ερώτημα του χρόνου εκτέλεσης υπερβαίνει την αξία "Αργό ερώτημα ορίου χρόνου"',
+    'LBL_TRACKER_PERF_DESC' => 'Απόδοση Tracker',
+    'LBL_TRACKER_PERF_HELP' => 'Tracker βάσης δεδομένων, αρχεία πρόσβασης και χρήση μνήμης',
+    'LBL_TRACKER_SESSIONS_DESC' => 'Περίοδος Συνεδρίας Tracker',
+    'LBL_TRACKER_SESSIONS_HELP' => 'Ενεργοί χειριστές Tracker και πληροφορίες της περιόδου συνεδρίας των χειριστών',
+    'LBL_TRACKER_DESC' => 'Περιγραφή Tracker',
+    'LBL_TRACKER_HELP' => 'Προβολή σελίδας χειριστή διαδρομής Tracker (ενότητες και εγγραφές καταγράφονται) και οι εγγραφές αποθηκεύονται',
+    'LBL_TRACKER_PRUNE_INTERVAL' => 'Αριθμός ημερών για αποθήκευση των δεδομένων του Tracker, όταν οι προγραμματισμένες εργασίες περικόπτουν τους πίνακες.',
+    'LBL_TRACKER_PRUNE_RANGE' => 'Αριθμός Ημερών',
+];

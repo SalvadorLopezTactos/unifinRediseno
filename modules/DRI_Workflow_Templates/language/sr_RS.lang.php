@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Aktivan',
     'LBL_ASSIGNEE_RULE' => 'Pravilo dodeljenog korisnika',
     'LBL_TARGET_ASSIGNEE' => 'Ciljni dodeljeni korisnik',
+    'LBL_STAGE_NUMBERS' => 'Numerisanje faze',
     'LBL_EXPORT_BUTTON_LABEL' => 'Izvoz',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Uvoz',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Automatski kreiraj/ažuriraj novi zapis Smart Guide šablona pomoću uvoza *.json dokumenta iz sopstvenog sistema fajlova.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Ako je polje potvrđeno i ako je Ciljni dodeljeni korisnik = Nadređeni dodeljeni korisnik kada je korisnik „Dodeljeno” promenjen na nadređenom korisniku, korisnici sa oznakom „Dodeljeno” će se takođe automatski promeniti u Smart Guide-ovima, fazama i aktivnostima. Imajte na umu da podešavanja za Ciljnjeg dodeljenog korisnika u Šablonima aktivnosti imaju prednost nad Smart Guide šablonom',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Kada korisniku treba dodeliti aktivnosti',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Kome treba dodeliti aktivnosti',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Ovaj preklopnik vam omogućava da prikažete ili sakrijete automatsko numerisanje faza.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Smart Guide/Faza/Šablon aktivnosti',
 ];

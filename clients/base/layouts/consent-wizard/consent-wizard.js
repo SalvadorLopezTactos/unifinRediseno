@@ -17,6 +17,15 @@
     extendsFrom: 'WizardLayout',
 
     /**
+     * @deprecated Since 14.0.0. Will be removed in 14.1.0.
+     * @param options
+     */
+    initialize: function(options) {
+        app.logger.warn('View.Layouts.Base.ConsentWizardLayout is deprecated and will be removed in 14.1.0');
+        this._super('initialize', [options]);
+    },
+
+    /**
      * Skip to the Layout addComponent to ignore logic around adding buttons to meta
      * inside wizard.js
      *

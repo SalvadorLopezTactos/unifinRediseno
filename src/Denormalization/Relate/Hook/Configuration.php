@@ -18,7 +18,7 @@ interface Configuration
         string $moduleName,
         string $fieldName,
         string $relationshipName,
-        array $value
+        array  $value
     ): void;
 
     public function getModuleConfiguration(string $moduleName): array;

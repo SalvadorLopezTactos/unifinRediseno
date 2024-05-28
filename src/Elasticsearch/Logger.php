@@ -59,7 +59,7 @@ class Logger extends BaseLogger
                 $partialData = substr($this->encodeData($response->getData()), 0, 256);
             }
             $msg = sprintf(
-                "Elasticsearch response failure: code %s [%s] [%s] [%s]",
+                'Elasticsearch response failure: code %s [%s] [%s] [%s]',
                 $response->getStatus(),
                 $request->getMethod(),
                 $partialData,
@@ -70,9 +70,8 @@ class Logger extends BaseLogger
 
         // Dump full request/response in debug mode
         if ($this->logger->wouldLog(LogLevel::DEBUG)) {
-
             $msg = sprintf(
-                "Elasticsearch request debug: [%s] %s %s",
+                'Elasticsearch request debug: [%s] %s %s',
                 $request->getMethod(),
                 $info['url'] ?? $request->getPath(),
                 $this->encodeData($request->getData())
@@ -80,7 +79,7 @@ class Logger extends BaseLogger
             $this->log(LogLevel::DEBUG, $msg);
 
             $msg = sprintf(
-                "Elasticsearch response debug: %s",
+                'Elasticsearch response debug: %s',
                 $this->encodeData($response->getData())
             );
             $this->log(LogLevel::DEBUG, $msg);
@@ -88,10 +87,10 @@ class Logger extends BaseLogger
 
         // xhprof tracking
         if (null !== $this->xhProf) {
-            $this->xhProf->trackElasticQuery(array(
+            $this->xhProf->trackElasticQuery([
                 $request->getMethod(),
-                $info['url'] ?? $request->getPath() ,
-            ), $request->getData(), $response->getQueryTime());
+                $info['url'] ?? $request->getPath(),
+            ], $request->getData(), $response->getQueryTime());
         }
     }
 
@@ -108,7 +107,7 @@ class Logger extends BaseLogger
 
             // Method expected to be "DELETE" and contains msg as 'no such index'
             // example: "no such index [index: ee8562926e4403e4d990035a1b1e407d_shared]"
-            if ($method === Request::DELETE && strpos($expMsg, "no such index") !== false) {
+            if ($method === Request::DELETE && strpos($expMsg, 'no such index') !== false) {
                 return true;
             }
         }
@@ -119,16 +118,16 @@ class Logger extends BaseLogger
      * Handle request logging on failure.
      * @param \Elastica\Connection
      * @param \Exception $e
-     * @param  string $path   request path
-     * @param  string $method request method
-     * @param  array  $data   request data
+     * @param string $path request path
+     * @param string $method request method
+     * @param array $data request data
      */
     public function onRequestFailure(Connection $connection, \Exception $e, $path, $method, $data)
     {
         // If the exception is from index deletion, no critical message is logged.
         if ($this->isDeleteMissingIndexRequest($e)) {
             $msg = sprintf(
-                "Elasticsearch request failure (non-critical): [%s] %s",
+                'Elasticsearch request failure (non-critical): [%s] %s',
                 $e->getRequest()->getMethod(),
                 $e->getMessage()
             );
@@ -140,14 +139,13 @@ class Logger extends BaseLogger
         if (!empty($data)) {
             $partialData = substr($this->encodeData($data), 0, 256);
         }
-        $this->log(LogLevel::CRITICAL, "Elasticsearch request failure: " . $e->getMessage() . ' request data: ' . $partialData);
+        $this->log(LogLevel::CRITICAL, 'Elasticsearch request failure: ' . $e->getMessage() . ' request data: ' . $partialData);
 
         // Additional debug logging
         if ($this->logger->wouldLog(LogLevel::DEBUG)) {
-
             // Request details
             $msg = sprintf(
-                "Elasticsearch request failure details: [%s] %s:%s %s %s",
+                'Elasticsearch request failure details: [%s] %s:%s %s %s',
                 $method,
                 $connection->getHost(),
                 $connection->getPort(),

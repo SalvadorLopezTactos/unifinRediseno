@@ -14,25 +14,25 @@ use Doctrine\DBAL\Connection;
 
 class Tracker extends SugarBean
 {
-    var $module_dir = 'Trackers';
-    var $table_name = 'tracker';
-    var $object_name = 'Tracker';
-    var $acltype = 'Tracker';
-    var $acl_category = 'Trackers';
-    var $disable_custom_fields = true;
-    var $disable_row_level_security = true;
-    var $column_fields = Array(
-        "id",
-        "monitor_id",
-        "user_id",
-        "module_name",
-        "item_id",
-        "item_summary",
-        "date_modified",
-        "action",
-        "session_id",
-        "visible"
-    );
+    public $module_dir = 'Trackers';
+    public $table_name = 'tracker';
+    public $object_name = 'Tracker';
+    public $acltype = 'Tracker';
+    public $acl_category = 'Trackers';
+    public $disable_custom_fields = true;
+    public $disable_row_level_security = true;
+    public $column_fields = [
+        'id',
+        'monitor_id',
+        'user_id',
+        'module_name',
+        'item_id',
+        'item_summary',
+        'date_modified',
+        'action',
+        'session_id',
+        'visible',
+    ];
 
     public function __construct()
     {
@@ -46,14 +46,14 @@ class Tracker extends SugarBean
      * @param mixed module_name Optional - return only items from this module, a string of the module or array of modules
      * @return array list
      */
-    function get_recently_viewed($user_id, $modules = '')
+    public function get_recently_viewed($user_id, $modules = '')
     {
-        if(empty($_SESSION['breadCrumbs'])) {
+        if (empty($_SESSION['breadCrumbs'])) {
             $breadCrumb = new BreadCrumbStack($user_id, $modules);
             $_SESSION['breadCrumbs'] = $breadCrumb;
-            $GLOBALS['log']->info(string_format($GLOBALS['app_strings']['LBL_BREADCRUMBSTACK_CREATED'], array($user_id)));
+            $GLOBALS['log']->info(string_format($GLOBALS['app_strings']['LBL_BREADCRUMBSTACK_CREATED'], [$user_id]));
         } else {
-			$breadCrumb = $_SESSION['breadCrumbs'];
+            $breadCrumb = $_SESSION['breadCrumbs'];
 
             if (!empty($modules)) {
                 $history_max_viewed = 10;
@@ -75,12 +75,12 @@ class Tracker extends SugarBean
             if (!empty($modules)) {
                 $qbSubquery->andWhere($expr->in(
                     'module_name',
-                    $qbSubquery->createPositionalParameter((array) $modules, Connection::PARAM_STR_ARRAY)
+                    $qbSubquery->createPositionalParameter((array)$modules, Connection::PARAM_STR_ARRAY)
                 ));
             }
 
             $qb = $conn->createQueryBuilder();
-            $qb->select(array('id', 'item_id', 'item_summary', 'module_name'))
+            $qb->select(['id', 'item_id', 'item_summary', 'module_name'])
                 ->from($this->table_name)
                 ->setMaxResults($history_max_viewed)
                 ->where('id = (' . $qb->importSubQuery($qbSubquery) . ')');
@@ -88,16 +88,16 @@ class Tracker extends SugarBean
             $stmt = $qb->execute();
 
             while ($row = $stmt->fetchAssociative()) {
-	               $breadCrumb->push($row);
-	        }
+                $breadCrumb->push($row);
+            }
         }
 
         $list = $breadCrumb->getBreadCrumbList($modules);
-        $GLOBALS['log']->info("Tracker: retrieving ".(is_countable($list) ? count($list) : 0)." items");
+        $GLOBALS['log']->info('Tracker: retrieving ' . safeCount($list) . ' items');
         return $list;
     }
 
-    function makeInvisibleForAll($item_id)
+    public function makeInvisibleForAll($item_id)
     {
         $builder = $this->db->getConnection()->createQueryBuilder();
         $query = $builder->update($this->table_name)
@@ -116,17 +116,20 @@ class Tracker extends SugarBean
      * Override this method to insert ACLActions for the tracker beans
      *
      */
-    function create_tables(){
+    public function create_tables()
+    {
         $path = 'modules/Trackers/config.php';
-        if(defined('TEMPLATE_URL'))$path = SugarTemplateUtilities::getFilePath($path);
-        require($path);
-        foreach($tracker_config as $key=>$configEntry) {
-        if(isset($configEntry['bean']) && $configEntry['bean'] != 'Tracker') {
-            $bean = BeanFactory::newBeanByName($configEntry['bean']);
-            if($bean->bean_implements('ACL')) {
-                  ACLAction::addActions($bean->getACLCategory(), $configEntry['bean']);
-               }
+        if (defined('TEMPLATE_URL')) {
+            $path = SugarTemplateUtilities::getFilePath($path);
         }
+        require $path;
+        foreach ($tracker_config as $key => $configEntry) {
+            if (isset($configEntry['bean']) && $configEntry['bean'] != 'Tracker') {
+                $bean = BeanFactory::newBeanByName($configEntry['bean']);
+                if ($bean->bean_implements('ACL')) {
+                    ACLAction::addActions($bean->getACLCategory(), $configEntry['bean']);
+                }
+            }
         }
         parent::create_tables();
     }
@@ -135,9 +138,11 @@ class Tracker extends SugarBean
      * bean_implements
      * Override method to support ACL roles
      */
-    function bean_implements($interface){
-        switch($interface){
-            case 'ACL': return true;
+    public function bean_implements($interface)
+    {
+        switch ($interface) {
+            case 'ACL':
+                return true;
         }
         return false;
     }

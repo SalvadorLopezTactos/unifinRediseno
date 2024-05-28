@@ -61,6 +61,11 @@
     dropdownCallback: null,
 
     /**
+     * Variable to track if dropdown is opened
+     */
+    isOpened: false,
+
+    /**
      * @inheritdoc
      */
     events: {
@@ -108,7 +113,7 @@
         $ddEl = this.$(this.ddEl);
         if ($ddEl.length !== 0 && this._dropdownExists()) {
             $ddEl.dropdown();
-            $ddEl.data('dropdown').opened = false;
+            this.isOpened = false;
             $ddEl.off('click.bs.dropdown');
             treeOptions = {
                 settings: {
@@ -154,15 +159,15 @@
         if (!this._dropdownExists()) {
             return;
         }
-        var dropdown = this.$(this.ddEl).data('dropdown');
-        if (dropdown.opened === true) {
+
+        if (this.isOpened === true) {
             return;
         }
         this.view.trigger('list:scrollLock', true);
         $('body').on('click.bs.dropdown.data-api', this.dropdownCallback);
         evt.stopPropagation();
         evt.preventDefault();
-        _.defer(function(dropdown, self) {
+        _.defer(function(self) {
             var treePosition, $input;
             if (self.disposed) {
                 return;
@@ -172,9 +177,9 @@
             self.$(self.ddEl).css({'left': treePosition.left - 1 + 'px', 'top': treePosition.top + 27 + 'px'});
             self.$(self.ddEl).dropdown('toggle');
             $input.val('');
-            dropdown.opened = true;
+            self.isOpened = true;
             $input.focus();
-        }, dropdown, this);
+        }, this);
     },
 
     /**
@@ -182,11 +187,7 @@
      * @return {Boolean} Return `true` if dropdown has been closed, `false` otherwise.
      */
     closeDropDown: function() {
-        var dropdown = this.$(this.ddEl).data('dropdown');
-        if (!dropdown) {
-            return false;
-        }
-        if (!dropdown.opened === true) {
+        if (!this.isOpened) {
             return false;
         }
         this.view.trigger('list:scrollLock', false);
@@ -194,7 +195,7 @@
         if (this.inCreation) {
             this.switchCreate();
         }
-        dropdown.opened = false;
+        this.isOpened = false;
         $('body').off('click.bs.dropdown.data-api', this.dropdownCallback);
         this.clearSelection();
         return true;
@@ -468,7 +469,7 @@
                 .tooltip('show');
             $input.focus().select();
         } else {
-            $input.tooltip('destroy');
+            $input.tooltip('dispose');
             $input.val('');
             $create.hide();
             $options.show();

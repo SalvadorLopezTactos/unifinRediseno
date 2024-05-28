@@ -26,5 +26,5 @@ interface PMSEDataParserInterface
 
     public function setCriteriaToken($criteriaToken);
 
-    public function parseCriteriaToken($criteriaToken, $params = array());
+    public function parseCriteriaToken($criteriaToken, $params = []);
 }

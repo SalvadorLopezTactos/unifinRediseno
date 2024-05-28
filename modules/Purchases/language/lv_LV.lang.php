@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Pirkumu ierakstu instrumentu panelis',
     'LBL_RELATED_ACCOUNT' => 'Saistītais uzņēmums',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Pirkumu fokusa panelis',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Iegādes laika josla',
 ];

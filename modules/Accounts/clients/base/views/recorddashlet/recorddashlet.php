@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -63,11 +64,11 @@ $viewdefs['Accounts']['base']['view']['recorddashlet'] = [
             'header' => true,
             'fields' => [
                 [
-                    'name'          => 'picture',
-                    'type'          => 'avatar',
-                    'size'          => 'large',
+                    'name' => 'picture',
+                    'type' => 'avatar',
+                    'size' => 'large',
                     'dismiss_label' => true,
-                    'readonly'      => true,
+                    'readonly' => true,
                 ],
                 'name',
             ],

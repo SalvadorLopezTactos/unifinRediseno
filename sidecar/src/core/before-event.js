@@ -96,7 +96,7 @@ const triggerEvents = function (events, args) {
  * Usage Example:
  *
  * ```
- * const BeforeEvent = require('core/before-event');
+ * const BeforeEvent = require('./before-event');
  * _.extend(MyObject, BeforeEvent);
  * ```
  *

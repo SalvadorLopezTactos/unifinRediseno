@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description: Bean class for the users_last_import table
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 
 
-require_once('modules/Import/Forms.php');
+require_once 'modules/Import/Forms.php';
 
 class UsersLastImport extends SugarBean
 {
@@ -35,18 +34,18 @@ class UsersLastImport extends SugarBean
      * Set the default settings from Sugarbean
      */
     public $module_dir = 'Import';
-    public $table_name = "users_last_import";
-    public $object_name = "UsersLastImport";
-    var $disable_custom_fields = true;
-    public $column_fields = array(
-        "id",
-        "assigned_user_id",
-        "bean_type",
-        "bean_id",
-        "deleted"
-        );
+    public $table_name = 'users_last_import';
+    public $object_name = 'UsersLastImport';
+    public $disable_custom_fields = true;
+    public $column_fields = [
+        'id',
+        'assigned_user_id',
+        'bean_type',
+        'bean_id',
+        'deleted',
+    ];
     public $new_schema = true;
-    public $additional_column_fields = Array();
+    public $additional_column_fields = [];
 
     /**
      * Constructor
@@ -54,7 +53,7 @@ class UsersLastImport extends SugarBean
     public function __construct()
     {
         parent::__construct();
-        $this->disable_row_level_security =true;
+        $this->disable_row_level_security = true;
     }
 
     /**
@@ -66,11 +65,10 @@ class UsersLastImport extends SugarBean
     {
         $array_assign = parent::listviewACLHelper();
         $is_owner = false;
-        if ( !ACLController::moduleSupportsACL('Accounts')
-                || ACLController::checkAccess('Accounts', 'view', $is_owner) ) {
+        if (!ACLController::moduleSupportsACL('Accounts')
+            || ACLController::checkAccess('Accounts', 'view', $is_owner)) {
             $array_assign['ACCOUNT'] = 'a';
-        }
-        else {
+        } else {
             $array_assign['ACCOUNT'] = 'span';
         }
         return $array_assign;
@@ -85,7 +83,7 @@ class UsersLastImport extends SugarBean
     {
         $query = "DELETE FROM {$this->table_name} WHERE assigned_user_id = ? ";
         $conn = $this->db->getConnection();
-        $conn->executeStatement($query, array($user_id));
+        $conn->executeStatement($query, [$user_id]);
     }
 
     /**
@@ -146,12 +144,13 @@ SQL;
      * @param $bean_id
      * @param $module
      */
-    protected function _deleteRecord($bean_id,$module)
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _deleteRecord($bean_id, $module)
     {
         static $focus;
 
         // load bean
-        if ( !( $focus instanceof $module) ) {
+        if (!($focus instanceof $module)) {
             $focus = BeanFactory::newBeanByName($module);
         }
 
@@ -201,7 +200,7 @@ SQL;
         if ($focus->hasCustomFields()) {
             $this->db->getConnection()
                 ->delete(
-                    $focus->table_name . "_cstm",
+                    $focus->table_name . '_cstm',
                     ['id_c' => $bean_id]
                 );
         }
@@ -210,7 +209,7 @@ SQL;
     /**
      * Get a list of bean types created in the import
      *
-     * @param string $module  module being imported into
+     * @param string $module module being imported into
      */
     public static function getBeansByImport($module)
     {
@@ -220,21 +219,21 @@ SQL;
 
         $query1 = sprintf(
             'SELECT DISTINCT bean_type FROM users_last_import WHERE assigned_user_id = %s'
-                . ' AND import_module = %s AND deleted=0',
+            . ' AND import_module = %s AND deleted=0',
             $db->quoted($current_user->id),
             $db->quoted($module)
         );
 
         $result1 = $db->query($query1);
-        if ( !$result1 )
-            return array($module);
+        if (!$result1) {
+            return [$module];
+        }
 
-        $returnarray = array();
+        $returnarray = [];
         while ($row1 = $db->fetchByAssoc($result1)) {
             $returnarray[] = $row1['bean_type'];
         }
 
         return $returnarray;
     }
-
 }

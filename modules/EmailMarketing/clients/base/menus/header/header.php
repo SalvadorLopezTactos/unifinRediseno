@@ -10,47 +10,47 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'EmailMarketing';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
-        'route'=>'#Campaigns/create',
-        'label' =>'LNK_NEW_CAMPAIGN',
-        'acl_action'=>'create',
-        'acl_module'=>'Campaigns',
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
+        'route' => '#Campaigns/create',
+        'label' => 'LNK_NEW_CAMPAIGN',
+        'acl_action' => 'create',
+        'acl_module' => 'Campaigns',
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route'=>'#Campaigns/',
-        'label' =>'LNK_NEW_CAMPAIGN',
-        'acl_action'=>'list',
-        'acl_module'=>'Campaigns',
+    ],
+    [
+        'route' => '#Campaigns/',
+        'label' => 'LNK_NEW_CAMPAIGN',
+        'acl_action' => 'list',
+        'acl_module' => 'Campaigns',
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=>'#ProspectLists/create',
-        'label' =>'LNK_NEW_PROSPECT_LIST',
-        'acl_action'=>'create',
-        'acl_module'=>'ProspectLists',
+    ],
+    [
+        'route' => '#ProspectLists/create',
+        'label' => 'LNK_NEW_PROSPECT_LIST',
+        'acl_action' => 'create',
+        'acl_module' => 'ProspectLists',
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route'=>'#ProspectLists/',
-        'label' =>'LNK_NEW_PROSPECT_LIST',
-        'acl_action'=>'list',
-        'acl_module'=>'ProspectLists',
+    ],
+    [
+        'route' => '#ProspectLists/',
+        'label' => 'LNK_NEW_PROSPECT_LIST',
+        'acl_action' => 'list',
+        'acl_module' => 'ProspectLists',
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=>'#Prospects/create',
-        'label' =>'LNK_NEW_PROSPECT',
-        'acl_action'=>'create',
-        'acl_module'=>'Prospects',
+    ],
+    [
+        'route' => '#Prospects/create',
+        'label' => 'LNK_NEW_PROSPECT',
+        'acl_action' => 'create',
+        'acl_module' => 'Prospects',
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route'=>'#Prospects/',
-        'label' =>'LNK_NEW_PROSPECT',
-        'acl_action'=>'list',
-        'acl_module'=>'Prospects',
+    ],
+    [
+        'route' => '#Prospects/',
+        'label' => 'LNK_NEW_PROSPECT',
+        'acl_action' => 'list',
+        'acl_module' => 'Prospects',
         'icon' => 'sicon-list-view',
-    ),
-);
+    ],
+];

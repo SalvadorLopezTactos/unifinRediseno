@@ -63,8 +63,11 @@
         </div>
     </div>
     <div class="row-fluid panel_body">
-        <div class="span6 record-cell edit ab-admin-display-setting" data-type="text">
-            <div class="ab-admin-button-property labels-on-side">
+        <h5 class="font-semibold">{{str "LBL_ACTIONBUTTON_RECORD_VIEW"}}</h5>
+    </div>
+    <div class="row-fluid panel_body">
+        <div class="span12 record-cell edit ab-admin-display-setting" data-type="text">
+            <div class="ab-admin-button-property labels-on-side flex flex-wrap-no items-center">
                 <div class="record-link-wrapper span1">
                     <span class="normal index">
                         <span class="edit">
@@ -73,7 +76,7 @@
                     </span>
                 </div>
                 <div class="record-label-wrapper">
-                    <div class="record-label">
+                    <div class="record-label block text-right">
                         {{str "LBL_ACTIONBUTTON_SHOW_FIELD_LABEL"}}
                     </div>
                 </div>
@@ -81,8 +84,8 @@
         </div>
     </div>
     <div class="row-fluid panel_body">
-        <div class="span6 record-cell edit ab-admin-display-setting" data-type="text">
-            <div class="ab-admin-button-property labels-on-side">
+        <div class="span12 record-cell edit ab-admin-display-setting" data-type="text">
+            <div class="ab-admin-button-property labels-on-side flex flex-wrap-no items-center">
                 <div class="record-link-wrapper span1">
                     <span class="normal index">
                         <span class="edit">
@@ -91,7 +94,7 @@
                     </span>
                 </div>
                 <div class="record-label-wrapper">
-                    <div class="record-label">
+                    <div class="record-label block text-right">
                         {{str "LBL_ACTIONBUTTON_SHOW_RECORD_HEADER"}}
                     </div>
                 </div>
@@ -99,8 +102,8 @@
         </div>
     </div>
     <div class="row-fluid panel_body">
-        <div class="span6 record-cell edit ab-admin-display-setting" data-type="text">
-            <div class="ab-admin-button-property labels-on-side">
+        <div class="span12 record-cell edit ab-admin-display-setting" data-type="text">
+            <div class="ab-admin-button-property labels-on-side flex flex-wrap-no items-center">
                 <div class="record-link-wrapper span1">
                     <span class="normal index">
                         <span class="edit">
@@ -109,8 +112,32 @@
                     </span>
                 </div>
                 <div class="record-label-wrapper">
-                    <div class="record-label">
+                    <div class="record-label block text-right">
                         {{str "LBL_ACTIONBUTTON_HIDE_ON_EDIT"}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid panel_body">
+        <h5 class="font-semibold">{{str "LBL_ACTIONBUTTON_DASHBOARD"}}</h5>
+    </div>
+
+    <div class="row-fluid panel_body">
+        <div class="span12 record-cell edit ab-admin-display-setting" data-type="text">
+            <div class="ab-admin-button-property labels-on-side flex flex-wrap-no items-center">
+                <div class="record-link-wrapper span1">
+                    <span class="normal index">
+                        <span class="edit">
+                            <input type="checkbox" data-fieldname="displayOnFocusDashboard" class="default-action"
+                                   {{#if _settings.displayOnFocusDashboard}}checked{{/if}}>
+                        </span>
+                    </span>
+                </div>
+                <div class="record-label-wrapper">
+                    <div class="record-label block text-right">
+                        {{str "LBL_ACTIONBUTTON_DISPLAY_ON_FOCUS_DASHBOARD"}}
                     </div>
                 </div>
             </div>

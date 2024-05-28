@@ -30,14 +30,14 @@ class PMSEExpressionEvaluator
      * 'unary', 'exponent', 'multiplication/division', 'addition/substraction', 'relations', 'logic'
      * @var array
      */
-    public $operationList = array (
-        'unary' => array('NOT', '!'), //unary operators
-        'exponent' => array('^'), //function for evalAritmetic
-        'multiply_divide' => array('x', '/'), //function for Multiplication Division
-        'add_substract' => array('+', '-'), //function for Add and Substraction
-        'relation' => array('<', '<=', '>', '>=', '==', '!='), //function for evalRelations
-        'logic' => array('AND', 'OR') //function for evalLogic
-    );
+    public $operationList = [
+        'unary' => ['NOT', '!'], //unary operators
+        'exponent' => ['^'], //function for evalAritmetic
+        'multiply_divide' => ['x', '/'], //function for Multiplication Division
+        'add_substract' => ['+', '-'], //function for Add and Substraction
+        'relation' => ['<', '<=', '>', '>=', '==', '!='], //function for evalRelations
+        'logic' => ['AND', 'OR'], //function for evalLogic
+    ];
 
     /**
      * history assessments by token
@@ -48,16 +48,16 @@ class PMSEExpressionEvaluator
     /**
      * exception codes
      */
-    protected static $exceptionCodes = array(
+    protected static $exceptionCodes = [
         'NO_BUSINESS_CENTER' => 100,
-    );
+    ];
 
     /**
      * Get exception code
      * @param string $key Key of exception code
      * @return int Exception code, or 0 if no $key is found.
      */
-    public static function getExceptionCode(string $key) : int
+    public static function getExceptionCode(string $key): int
     {
         return static::$exceptionCodes[$key] ?? 0;
     }
@@ -68,7 +68,7 @@ class PMSEExpressionEvaluator
      * @param int $code Exception code
      * @return void
      */
-    public static function addExceptionCode(string $key, int $code) : void
+    public static function addExceptionCode(string $key, int $code): void
     {
         static::$exceptionCodes[$key] = $code;
     }
@@ -78,7 +78,7 @@ class PMSEExpressionEvaluator
      * @param string $key Key of exception code
      * @return bool
      */
-    public static function removeExceptionCode(string $key) : bool
+    public static function removeExceptionCode(string $key): bool
     {
         $ret = static::hasExceptionCode($key);
         unset(static::$exceptionCodes[$key]);
@@ -90,7 +90,7 @@ class PMSEExpressionEvaluator
      * @param string $key Key of exception code
      * @return bool
      */
-    public static function hasExceptionCode(string $key) : bool
+    public static function hasExceptionCode(string $key): bool
     {
         return isset(static::$exceptionCodes[$key]);
     }
@@ -102,13 +102,12 @@ class PMSEExpressionEvaluator
 
     public function evaluateExpression($expression)
     {
-        $accArray = array();
+        $accArray = [];
         foreach ($this->operationList as $groupKey => $groupOperator) {
             while ($token = array_shift($expression)) {
-                if (in_array($token->expValue, $groupOperator)
-                        && $token->expType!=='VARIABLE'
-                        && $token->expType!=='CONSTANT') {
-
+                if (safeInArray($token->expValue, $groupOperator)
+                    && $token->expType !== 'VARIABLE'
+                    && $token->expType !== 'CONSTANT') {
                     if ($groupKey != 'unary') {
                         $firstOperand = array_pop($accArray);
                     } else {
@@ -125,7 +124,7 @@ class PMSEExpressionEvaluator
                 }
             }
             $expression = $accArray;
-            $accArray = array();
+            $accArray = [];
         }
         return $expression;
     }
@@ -188,33 +187,34 @@ class PMSEExpressionEvaluator
     {
         $firstTokenExpSubtype = PMSEEngineUtils::getExpressionSubtype($firstToken);
         $secondTokenExpSubtype = PMSEEngineUtils::getExpressionSubtype($secondToken);
-        if (strtolower($firstTokenExpSubtype)=='date' ||
-            strtolower($firstTokenExpSubtype)=='datetime') {
-            if (strtolower($secondTokenExpSubtype)=='date' ||
-                strtolower($secondTokenExpSubtype)=='datetime') {
+        if (strtolower($firstTokenExpSubtype) == 'date' ||
+            strtolower($firstTokenExpSubtype) == 'datetime') {
+            if (strtolower($secondTokenExpSubtype) == 'date' ||
+                strtolower($secondTokenExpSubtype) == 'datetime') {
                 $key = 'dateDateOp';
-            } elseif (strtolower($secondTokenExpSubtype)=='timespan') {
+            } elseif (strtolower($secondTokenExpSubtype) == 'timespan') {
                 if (PMSEEngineUtils::isForBusinessTimeOp($secondToken->expValue)) {
                     $key = 'dateSpanBusinessOp';
                 } else {
                     $key = 'dateSpanOp';
                 }
             }
-        } elseif (strtolower($firstTokenExpSubtype)=='timespan') {
-            if (strtolower($secondTokenExpSubtype)=='date' ||
-                strtolower($secondTokenExpSubtype)=='datetime') {
+        } elseif (strtolower($firstTokenExpSubtype) == 'timespan') {
+            if (strtolower($secondTokenExpSubtype) == 'date' ||
+                strtolower($secondTokenExpSubtype) == 'datetime') {
                 $key = 'spanDateOp';
-            } elseif (strtolower($secondTokenExpSubtype)=='timespan') {
+            } elseif (strtolower($secondTokenExpSubtype) == 'timespan') {
                 $key = 'spanSpanOp';
             }
         }
         return $key;
     }
 
-    public function checkCurrencyEvaluation($key, $firstToken, $operator, $secondToken) {
+    public function checkCurrencyEvaluation($key, $firstToken, $operator, $secondToken)
+    {
         $firstTokenExpSubtype = PMSEEngineUtils::getExpressionSubtype($firstToken);
         $secondTokenExpSubtype = PMSEEngineUtils::getExpressionSubtype($secondToken);
-        if (strtolower($firstTokenExpSubtype)  == 'currency' || strtolower($secondTokenExpSubtype) == 'currency') {
+        if (strtolower($firstTokenExpSubtype) == 'currency' || strtolower($secondTokenExpSubtype) == 'currency') {
             switch ($operator->expValue) {
                 case '+':
                 case '-':
@@ -229,9 +229,9 @@ class PMSEExpressionEvaluator
         return $key;
     }
 
-    public function processExpression($expression = array())
+    public function processExpression($expression = [])
     {
-        $resultGroup = array();
+        $resultGroup = [];
         while ($token = array_shift($expression)) {
             switch (true) {
                 case $token->expValue === '(':
@@ -245,7 +245,6 @@ class PMSEExpressionEvaluator
                     $resultGroup[] = $token;
                     break;
             }
-
         }
         return $this->evaluateExpression($resultGroup);
     }
@@ -269,6 +268,7 @@ class PMSEExpressionEvaluator
         $isUpdate = false,
         $secondOperandBean = null
     ) {
+
         switch ($operation) {
             case 'unary':
                 $result = $this->executeUnaryOp($operator, $secondOperand);
@@ -310,11 +310,13 @@ class PMSEExpressionEvaluator
         return $result;
     }
 
-    public function routeCurrencyFunctionOperator (
+    public function routeCurrencyFunctionOperator(
         $operation,
         $firstOperand,
         $operator,
-        $secondOperand) {
+        $secondOperand
+    ) {
+
         switch ($operation) {
             case 'currencyAddSubstract':
                 $result = $this->executeAddSubstractCurrency($firstOperand, $operator, $secondOperand);
@@ -344,7 +346,7 @@ class PMSEExpressionEvaluator
                 break;
             case is_bool($token->expValue):
                 $token->expSubtype = 'boolean';
-                $boolarray = array(false => 'false', true => 'true');
+                $boolarray = [false => 'false', true => 'true'];
                 $token->expLabel = $boolarray[$token->expValue];
                 break;
             case is_a($token->expValue, 'DateTime'):
@@ -395,7 +397,8 @@ class PMSEExpressionEvaluator
         return $result;
     }
 
-    public function isScalar ($expression) {
+    public function isScalar($expression)
+    {
         $expSubtype = PMSEEngineUtils::getExpressionSubtype($expression);
         $result = ($expression->expType == 'CONSTANT' && $expSubtype == 'number') ||
             ($expression->expType == 'VARIABLE' && ($expSubtype == 'Currency' ||
@@ -404,7 +407,9 @@ class PMSEExpressionEvaluator
         return $result;
     }
 
-    public function executeMultiplyDivideCurrency($value1, $operator, $value2) {
+    public function executeMultiplyDivideCurrency($value1, $operator, $value2)
+    {
+        $result = null;
         $value1ExpSubtype = PMSEEngineUtils::getExpressionSubtype($value1);
         $value2ExpSubtype = PMSEEngineUtils::getExpressionSubtype($value2);
         if ((strtolower($value1ExpSubtype) == 'currency' && $this->isScalar($value2)) ||
@@ -428,12 +433,12 @@ class PMSEExpressionEvaluator
                     if (strtolower($value1ExpSubtype) == 'currency' && (float)($value2->expValue ?? 0) != 0) {
                         $result = (float)($value1->expValue ?? 0) / (float)$value2->expValue;
                     } else {
-                        $error = "Impossible to divide an scalar value by a currency.";
+                        $error = 'Impossible to divide an scalar value by a currency.';
                     }
                     break;
             }
         } else {
-            $error = "Mutiply|Divide Currency - At least one operand must be currency type.";
+            $error = 'Mutiply|Divide Currency - At least one operand must be currency type.';
         }
         if (isset($error)) {
             throw new PMSEExpressionEvaluationException($error, func_get_args());
@@ -461,15 +466,16 @@ class PMSEExpressionEvaluator
         return $result;
     }
 
-    public function executeAddSubstractCurrency($value1, $operator, $value2) {
+    public function executeAddSubstractCurrency($value1, $operator, $value2)
+    {
         $result = null;
         global $current_user;
 
         $value1ExpSubtype = PMSEEngineUtils::getExpressionSubtype($value1);
         $value2ExpSubtype = PMSEEngineUtils::getExpressionSubtype($value2);
         if (!(strtolower($value1ExpSubtype) == 'currency' && strtolower($value2ExpSubtype) == 'currency')) {
-            throw new PMSEExpressionEvaluationException("Add|Substract Currency - ".
-                "Both operands must be currency types.", func_get_args());
+            throw new PMSEExpressionEvaluationException('Add|Substract Currency - ' .
+                'Both operands must be currency types.', func_get_args());
         }
 
         if ($value1->expField == $value2->expField) {
@@ -493,8 +499,10 @@ class PMSEExpressionEvaluator
         }
 
         if ($result < 0) {
-            throw new PMSEExpressionEvaluationException("Currency Subtraction - The result is a negative currency.",
-                func_get_args());
+            throw new PMSEExpressionEvaluationException(
+                'Currency Subtraction - The result is a negative currency.',
+                func_get_args()
+            );
         }
 
         $resultCurrency = new stdClass();
@@ -556,7 +564,7 @@ class PMSEExpressionEvaluator
      * @param String $bid business center id
      * @return DateTime The resulting DateTime value
      */
-    public function executeDateSpanBCOp($value1, String $operator, String $value2, String $bid) : DateTime
+    public function executeDateSpanBCOp($value1, string $operator, string $value2, string $bid): DateTime
     {
         $bean = BeanFactory::getBean('BusinessCenters', $bid);
         if (empty($bean) || empty($bean->id)) {
@@ -679,22 +687,22 @@ class PMSEExpressionEvaluator
         switch ($unit) {
             case 'y':
                 return 'P' . $value . 'Y';
-            break;
+                break;
             case 'm':
                 return 'P' . $value . 'M';
-            break;
+                break;
             case 'w':
                 return 'P' . $value . 'W';
-            break;
+                break;
             case 'd':
                 return 'P' . $value . 'D';
-            break;
+                break;
             case 'h':
                 return 'PT' . $value . 'H';
-            break;
+                break;
             case 'min':
                 return 'PT' . $value . 'M';
-            break;
+                break;
         }
     }
 
@@ -705,7 +713,8 @@ class PMSEExpressionEvaluator
      * @param $arr2
      * @return boolean
      */
-    public function evalEqualArrays($arr1, $arr2) {
+    public function evalEqualArrays($arr1, $arr2)
+    {
         $d1 = array_diff($arr1, $arr2);
         $d2 = array_diff($arr2, $arr1);
         return empty($d1) && empty($d2);
@@ -768,15 +777,15 @@ class PMSEExpressionEvaluator
             case 'varchar'://varchar
             case 'radioenum': //varchar
             case 'parent_type'://varchar
-                $newValue = (string) $value;
+                $newValue = (string)$value;
                 break;
             case 'bool'://bool
             case 'boolean':
             case 'checkbox':
-                if (!empty($value) && $value==='false') {
+                if (!empty($value) && $value === 'false') {
                     $newValue = false;
                 } else {
-                    $newValue = (boolean)$value;
+                    $newValue = (bool)$value;
                 }
                 break;
             case 'date'://date
@@ -815,19 +824,19 @@ class PMSEExpressionEvaluator
                 break;
             case 'enum'://int
             case 'int':
-                $newValue = (int) $value;
+                $newValue = (int)$value;
                 break;
             case 'float':
-                $newValue = (float) $value;
+                $newValue = (float)$value;
                 break;
             case 'integer':
-                $newValue = (int) $value;
+                $newValue = (int)$value;
                 break;
             case 'decimal': //decimal
                 $newValue = (float)$value;
                 break;
             case 'currency': //double
-                $newValue = (double)$value;
+                $newValue = (float)$value;
                 break;
             case 'encrypt':
             case 'html':

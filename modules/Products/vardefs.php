@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Product'] = array(
+$dictionary['Product'] = [
     'table' => 'products',
     'color' => 'purple',
     'icon' => 'sicon-quoted-line-items-lg',
@@ -20,16 +20,16 @@ $dictionary['Product'] = array(
     'full_text_search' => true,
     'unified_search_default_enabled' => true,
     'comment' => 'The user (not Admin)) view of a Product definition; an instance of a product',
-    'fields' => array(
-        'revenuelineitem_id' => array(
+    'fields' => [
+        'revenuelineitem_id' => [
             'name' => 'revenuelineitem_id',
             'type' => 'id',
             'vname' => 'LBL_REVENUELINEITEM_ID',
             'required' => false,
             'reportable' => false,
-            'comment' => 'Associated Revenue Line Item that served as the source.'
-        ),
-        'revenuelineitem_name' => array(
+            'comment' => 'Associated Revenue Line Item that served as the source.',
+        ],
+        'revenuelineitem_name' => [
             'name' => 'revenuelineitem_name',
             'rname' => 'name',
             'id_name' => 'revenuelineitem_id',
@@ -43,24 +43,24 @@ $dictionary['Product'] = array(
             'source' => 'non-db',
             'studio' => false,
             'massupdate' => false,
-        ),
-        'product_template_id' => array(
+        ],
+        'product_template_id' => [
             'name' => 'product_template_id',
             'type' => 'id',
             'vname' => 'LBL_PRODUCT_TEMPLATE_ID',
             'required' => false,
             'reportable' => false,
-            'related_fields' => array(
+            'related_fields' => [
                 'service',
                 'service_start_date',
                 'service_end_date',
                 'renewable',
                 'service_duration_value',
                 'service_duration_unit',
-            ),
-            'comment' => 'Product (in Admin Products) from which this product is derived (in user Products)'
-        ),
-        'product_template_name' => array(
+            ],
+            'comment' => 'Product (in Admin Products) from which this product is derived (in user Products)',
+        ],
+        'product_template_name' => [
             'name' => 'product_template_name',
             'rname' => 'name',
             'id_name' => 'product_template_id',
@@ -74,9 +74,9 @@ $dictionary['Product'] = array(
             'dbType' => 'varchar',
             'len' => '255',
             'source' => 'non-db',
-            'studio' => array('editview' => false, 'detailview' => false, 'quickcreate' => false),
+            'studio' => ['editview' => false, 'detailview' => false, 'quickcreate' => false],
             'auto_populate' => true,
-            'populate_list' => array(
+            'populate_list' => [
                 'name' => 'name',
                 'category_id' => 'category_id',
                 'category_name' => 'category_name',
@@ -101,8 +101,8 @@ $dictionary['Product'] = array(
                 'service_duration_unit' => ['service_duration_unit', 'catalog_service_duration_unit'],
                 'renewable' => 'renewable',
                 'service' => 'service',
-            ),
-        ),
+            ],
+        ],
         'lock_duration' => [
             'name' => 'lock_duration',
             'vname' => 'LBL_LOCK_DURATION',
@@ -115,7 +115,7 @@ $dictionary['Product'] = array(
             'formula' => 'related($product_templates_link, "lock_duration")',
             'comment' => 'Turn on or off a user ability to directly edit the duration field',
         ],
-        'account_id' => array(
+        'account_id' => [
             'name' => 'account_id',
             'type' => 'id',
             'vname' => 'LBL_ACCOUNT_ID',
@@ -123,9 +123,9 @@ $dictionary['Product'] = array(
             'reportable' => false,
             'audited' => true,
             'readonly' => true,
-            'comment' => 'Account this product is associated with'
-        ),
-        'contact_id' => array(
+            'comment' => 'Account this product is associated with',
+        ],
+        'contact_id' => [
             'name' => 'contact_id',
             'type' => 'id',
             'vname' => 'LBL_CONTACT_ID',
@@ -133,15 +133,15 @@ $dictionary['Product'] = array(
             'required' => false,
             'reportable' => false,
             'audited' => true,
-            'comment' => 'Contact this product is associated with'
-        ),
-        'subtotal' => array(
+            'comment' => 'Contact this product is associated with',
+        ],
+        'subtotal' => [
             'name' => 'subtotal',
             'vname' => 'LBL_SUBTOTAL',
             'type' => 'currency',
             'len' => '26,6',
             'default' => '0',
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
                 'base_rate',
                 'discount_price',
@@ -150,7 +150,7 @@ $dictionary['Product'] = array(
                 'service_duration_unit',
                 'catalog_service_duration_value',
                 'catalog_service_duration_unit',
-            ),
+            ],
             'formula' => '
                 ifElse(
                     and(isNumeric($discount_price), isNumeric($quantity)),
@@ -180,8 +180,8 @@ $dictionary['Product'] = array(
                 'discount_amount',
                 'discount_select',
             ],
-        ),
-        'total_amount' => array(
+        ],
+        'total_amount' => [
             'name' => 'total_amount',
             'default' => '0.00',
             'formula' => '
@@ -203,7 +203,7 @@ $dictionary['Product'] = array(
             'vname' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
             'reportable' => false,
             'type' => 'currency',
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
                 'base_rate',
                 'quantity',
@@ -211,9 +211,9 @@ $dictionary['Product'] = array(
                 'discount_select',
                 'discount_amount',
                 'subtotal',
-            ),
-        ),
-        'contact_name' => array(
+            ],
+        ],
+        'contact_name' => [
             'name' => 'contact_name',
             'rname' => 'name',
             'source' => 'non-db',
@@ -227,34 +227,34 @@ $dictionary['Product'] = array(
             'module' => 'Contacts',
             'link' => 'contact_link',
             'table' => 'contacts',
-        ),
-        'type_id' => array(
+        ],
+        'type_id' => [
             'name' => 'type_id',
             'vname' => 'LBL_TYPE',
             'type' => 'id',
             'required' => false,
             'reportable' => false,
-            'comment' => 'Product type (ex: hardware, software)'
-        ),
-        'quote_id' => array(
+            'comment' => 'Product type (ex: hardware, software)',
+        ],
+        'quote_id' => [
             'name' => 'quote_id',
             'type' => 'id',
             'vname' => 'LBL_QUOTE_ID',
             'required' => false,
             'reportable' => false,
             'comment' => 'If product created via Quote, this is quote ID',
-        ),
-        'manufacturer_id' => array(
+        ],
+        'manufacturer_id' => [
             'name' => 'manufacturer_id',
             'vname' => 'LBL_MANUFACTURER',
             'type' => 'id',
             'required' => false,
             'reportable' => false,
             'massupdate' => false,
-            'comment' => 'Manufacturer of product'
-        ),
-        'manufacturer_name' => array(
-                'name' => 'manufacturer_name',
+            'comment' => 'Manufacturer of product',
+        ],
+        'manufacturer_name' => [
+            'name' => 'manufacturer_name',
             'rname' => 'name',
             'id_name' => 'manufacturer_id',
             'type' => 'relate',
@@ -268,19 +268,19 @@ $dictionary['Product'] = array(
             'dbType' => 'varchar',
             'len' => '255',
             'massupdate' => false,
-            'related_fields' => array(
+            'related_fields' => [
                 'manufacturer_id',
-            ),
-        ),
-        'category_id' => array(
+            ],
+        ],
+        'category_id' => [
             'name' => 'category_id',
             'vname' => 'LBL_CATEGORY',
             'type' => 'id',
             'group' => 'category_name',
             'reportable' => true,
-            'comment' => 'Product category'
-        ),
-        'category_name' => array(
+            'comment' => 'Product category',
+        ],
+        'category_name' => [
             'name' => 'category_name',
             'rname' => 'name',
             'id_name' => 'category_id',
@@ -294,52 +294,52 @@ $dictionary['Product'] = array(
             'dbType' => 'varchar',
             'len' => '255',
             'source' => 'non-db',
-            'studio' => array('editview' => false, 'detailview' => false, 'quickcreate' => false),
-        ),
-        'name' => array(
+            'studio' => ['editview' => false, 'detailview' => false, 'quickcreate' => false],
+        ],
+        'name' => [
             'name' => 'name',
             'vname' => 'LBL_NAME',
             'dbType' => 'varchar',
             'type' => 'name',
             'len' => '255',
             'unified_search' => true,
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => true,
                 'boost' => 0.80,
-            ),
+            ],
             'comment' => 'Name of the product',
             'reportable' => true,
             'importable' => 'required',
             'required' => true,
             // always keep product_template_name in sync if it is not empty
             'formula' => 'ifElse(equal($product_template_name, ""), $name, $product_template_name)',
-        ),
-        'mft_part_num' => array(
+        ],
+        'mft_part_num' => [
             'name' => 'mft_part_num',
             'vname' => 'LBL_MFT_PART_NUM',
             'type' => 'varchar',
             'len' => '50',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => true,
                 'boost' => 1.15,
-            ),
-            'comment' => 'Manufacturer part number'
-        ),
-        'cost_price' => array(
+            ],
+            'comment' => 'Manufacturer part number',
+        ],
+        'cost_price' => [
             'name' => 'cost_price',
             'vname' => 'LBL_COST_PRICE',
             'type' => 'currency',
             'len' => '26,6',
             'audited' => true,
             'comment' => 'Product cost ("Cost" in Quote)',
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
-        ),
-        'discount_amount_signed' => array(
+                'base_rate',
+            ],
+        ],
+        'discount_amount_signed' => [
             'name' => 'discount_amount_signed',
             'vname' => 'LBL_DISCOUNT_AMOUNT_SIGNED',
             'type' => 'currency',
@@ -351,8 +351,8 @@ $dictionary['Product'] = array(
             'calculated' => true,
             'studio' => false,
             'enforced' => true,
-        ),
-        'discount_price' => array(
+        ],
+        'discount_price' => [
             'name' => 'discount_price',
             'vname' => 'LBL_DISCOUNT_PRICE',
             'type' => 'currency',
@@ -360,12 +360,12 @@ $dictionary['Product'] = array(
             'default' => '0',
             'audited' => true,
             'comment' => 'Discounted price ("Unit Price" in Quote)',
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
-        ),
-        'discount_amount' => array(
+                'base_rate',
+            ],
+        ],
+        'discount_amount' => [
             'name' => 'discount_amount',
             'vname' => 'LBL_DISCOUNT_AMOUNT',
             'dbType' => 'currency',
@@ -374,13 +374,13 @@ $dictionary['Product'] = array(
             'default' => '0',
             'precision' => '6',
             'comment' => 'Discounted amount',
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
                 'base_rate',
                 'discount_select',
-            ),
-        ),
-        'discount_rate_percent' => array(
+            ],
+        ],
+        'discount_rate_percent' => [
             'name' => 'discount_rate_percent',
             'formula' => 'ifElse(isNumeric($discount_price), ifElse(equal($discount_price, 0), 0, multiply(divide($discount_amount, $discount_price), 100)), 0)',
             'calculated' => true,
@@ -389,30 +389,30 @@ $dictionary['Product'] = array(
             'reportable' => false,
             'type' => 'decimal',
             'precision' => 2,
-            'len' => '26,2'
-        ),
-        'discount_amount_usdollar' => array(
+            'len' => '26,2',
+        ],
+        'discount_amount_usdollar' => [
             'name' => 'discount_amount_usdollar',
             'vname' => 'LBL_DISCOUNT_RATE_USDOLLAR',
             'type' => 'currency',
-            'currency_id'=> '-99',
+            'currency_id' => '-99',
             'len' => '26,6',
-            'studio' => array(
+            'studio' => [
                 'editview' => false,
                 'mobile' => false,
-            ),
+            ],
             'formula' => 'ifElse(isNumeric($discount_amount), currencyDivide($discount_amount, $base_rate), "")',
             'calculated' => true,
             'enforced' => true,
-        ),
-        'discount_select' => array(
+        ],
+        'discount_select' => [
             'name' => 'discount_select',
             'vname' => 'LBL_DISCOUNT_AS_PERCENT',
             'type' => 'bool',
             'default' => true,
             'reportable' => false,
-        ),
-        'deal_calc' => array(
+        ],
+        'deal_calc' => [
             'name' => 'deal_calc',
             'vname' => 'LBL_DISCOUNT_TOTAL',
             'type' => 'currency',
@@ -425,95 +425,95 @@ $dictionary['Product'] = array(
                         )',
             'calculated' => true,
             'enforced' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
                 'base_rate',
                 'discount_price',
                 'quantity',
                 'discount_amount',
                 'subtotal',
-            ),
-        ),
-        'deal_calc_usdollar' => array(
+            ],
+        ],
+        'deal_calc_usdollar' => [
             'name' => 'deal_calc_usdollar',
             'vname' => 'LBL_DISCOUNT_TOTAL_USDOLLAR',
             'type' => 'currency',
-            'currency_id'=> '-99',
+            'currency_id' => '-99',
             'len' => '26,6',
             'group' => 'deal_calc',
             'comment' => 'deal_calc_usdollar',
-            'studio' => array(
+            'studio' => [
                 'editview' => false,
                 'mobile' => false,
-            ),
-            'related_fields' => array(
+            ],
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
+                'base_rate',
+            ],
             'formula' => 'ifElse(isNumeric($deal_calc), currencyDivide($deal_calc, $base_rate), "")',
             'calculated' => true,
             'enforced' => true,
-        ),
-        'cost_usdollar' => array(
+        ],
+        'cost_usdollar' => [
             'name' => 'cost_usdollar',
             'vname' => 'LBL_COST_USDOLLAR',
             'dbType' => 'decimal',
             'group' => 'cost_price',
             'type' => 'currency',
-            'currency_id'=> '-99',
+            'currency_id' => '-99',
             'len' => '26,6',
             'comment' => 'Cost expressed in USD',
-            'studio' => array(
+            'studio' => [
                 'editview' => false,
                 'mobile' => false,
-            ),
-            'related_fields' => array(
+            ],
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
+                'base_rate',
+            ],
             'formula' => 'ifElse(isNumeric($cost_price), currencyDivide($cost_price, $base_rate), "")',
             'calculated' => true,
             'enforced' => true,
-        ),
-        'discount_usdollar' => array(
+        ],
+        'discount_usdollar' => [
             'name' => 'discount_usdollar',
             'vname' => 'LBL_DISCOUNT_USDOLLAR',
             'dbType' => 'decimal',
             'group' => 'discount_price',
             'type' => 'currency',
-            'currency_id'=> '-99',
+            'currency_id' => '-99',
             'len' => '26,6',
             'comment' => 'Discount price expressed in USD',
-            'studio' => array(
+            'studio' => [
                 'editview' => false,
                 'mobile' => false,
-            ),
+            ],
             'formula' => 'divide($discount_price, $base_rate)',
             'calculated' => true,
             'enforced' => true,
-        ),
-        'list_usdollar' => array(
+        ],
+        'list_usdollar' => [
             'name' => 'list_usdollar',
             'vname' => 'LBL_LIST_USDOLLAR',
             'dbType' => 'decimal',
             'type' => 'currency',
-            'currency_id'=> '-99',
+            'currency_id' => '-99',
             'group' => 'list_price',
             'len' => '26,6',
             'comment' => 'List price expressed in USD',
-            'studio' => array(
+            'studio' => [
                 'editview' => false,
                 'mobile' => false,
-            ),
-            'related_fields' => array(
+            ],
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
+                'base_rate',
+            ],
             'formula' => 'ifElse(isNumeric($list_price), currencyDivide($list_price, $base_rate), "")',
             'calculated' => true,
             'enforced' => true,
-        ),
-        'status' => array(
+        ],
+        'status' => [
             'name' => 'status',
             'vname' => 'LBL_STATUS',
             'type' => 'enum',
@@ -522,46 +522,46 @@ $dictionary['Product'] = array(
             'len' => 100,
             'audited' => true,
             'comment' => 'Product status (ex: Quoted, Ordered, Shipped)',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => false,
-            ),
-        ),
-        'book_value_usdollar' => array(
+            ],
+        ],
+        'book_value_usdollar' => [
             'name' => 'book_value_usdollar',
             'vname' => 'LBL_BOOK_VALUE_USDOLLAR',
             'group' => 'book_value',
             'type' => 'currency',
             'len' => '26,6',
             'comment' => 'Book value expressed in USD',
-            'studio' => array(
+            'studio' => [
                 'editview' => false,
                 'mobile' => false,
-            ),
-            'related_fields' => array(
+            ],
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
+                'base_rate',
+            ],
             'formula' => 'ifElse(isNumeric($book_value), currencyDivide($book_value, $base_rate), "")',
             'calculated' => true,
             'enforced' => true,
-        ),
-        'quotes' => array(
+        ],
+        'quotes' => [
             'name' => 'quotes',
             'type' => 'link',
             'relationship' => 'quote_products',
             'vname' => 'LBL_QUOTE',
             'source' => 'non-db',
-        ),
-        'revenuelineitems' => array(
+        ],
+        'revenuelineitems' => [
             'name' => 'revenuelineitems',
             'type' => 'link',
             'relationship' => 'products_revenuelineitems',
             'vname' => 'LBL_REVENUELINEITEM',
             'source' => 'non-db',
-            'workflow' => false
-        ),
-        'date_closed' => array(
+            'workflow' => false,
+        ],
+        'date_closed' => [
             'name' => 'date_closed',
             'vname' => 'LBL_DATE_CLOSED',
             'type' => 'date',
@@ -569,8 +569,8 @@ $dictionary['Product'] = array(
             'comment' => 'Expected or actual date the product (for opportunity) will close',
             'enable_range_search' => true,
             'options' => 'date_range_search_dom',
-        ),
-        'date_closed_timestamp' => array(
+        ],
+        'date_closed_timestamp' => [
             'name' => 'date_closed_timestamp',
             'vname' => 'LBL_DATE_CLOSED_TIMESTAMP',
             'type' => 'ulong',
@@ -580,16 +580,16 @@ $dictionary['Product'] = array(
             'calculated' => true,
             'formula' => 'timestamp($date_closed)',
             'importable' => false,
-        ),
-        'next_step' => array(
+        ],
+        'next_step' => [
             'name' => 'next_step',
             'vname' => 'LBL_NEXT_STEP',
             'type' => 'varchar',
             'len' => '100',
             'comment' => 'The next step in the sales process',
             'merge_filter' => 'enabled',
-        ),
-        'campaign_id' => array(
+        ],
+        'campaign_id' => [
             'name' => 'campaign_id',
             'comment' => 'Campaign that generated lead',
             'vname' => 'LBL_CAMPAIGN_ID',
@@ -602,8 +602,8 @@ $dictionary['Product'] = array(
             'reportable' => false,
             'massupdate' => false,
             'duplicate_merge' => 'disabled',
-        ),
-        'campaign_name' => array(
+        ],
+        'campaign_name' => [
             'name' => 'campaign_name',
             'rname' => 'name',
             'id_name' => 'campaign_id',
@@ -614,31 +614,31 @@ $dictionary['Product'] = array(
             'table' => 'campaigns',
             'module' => 'Campaigns',
             'source' => 'non-db',
-            'studio' => array(
+            'studio' => [
                 'mobile' => false,
-            ),
-        ),
-        'campaign_products' => array(
+            ],
+        ],
+        'campaign_products' => [
             'name' => 'campaign_products',
             'type' => 'link',
             'vname' => 'LBL_CAMPAIGN_PRODUCT',
             'relationship' => 'campaign_products',
             'source' => 'non-db',
-        ),
-        'related_products' => array(
+        ],
+        'related_products' => [
             'name' => 'related_products',
             'type' => 'link',
             'relationship' => 'product_product',
             'source' => 'non-db',
             'vname' => 'LBL_RELATED_PRODUCTS',
-        ),
-        'notes' => array(
+        ],
+        'notes' => [
             'name' => 'notes',
             'type' => 'link',
             'relationship' => 'product_notes',
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
-        ),
+        ],
         'messages' => [
             'name' => 'messages',
             'type' => 'link',
@@ -646,22 +646,22 @@ $dictionary['Product'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_MESSAGES',
         ],
-        'documents' => array(
+        'documents' => [
             'name' => 'documents',
             'type' => 'link',
             'relationship' => 'documents_products',
             'source' => 'non-db',
             'vname' => 'LBL_DOCUMENTS_SUBPANEL_TITLE',
-        ),
-        'contracts' => array(
+        ],
+        'contracts' => [
             'name' => 'contracts',
             'type' => 'link',
             'vname' => 'LBL_CONTRACTS',
             'relationship' => 'contracts_products',
             'link_type' => 'one',
             'source' => 'non-db',
-        ),
-        'quote_name' => array(
+        ],
+        'quote_name' => [
             'name' => 'quote_name',
             'rname' => 'name',
             'id_name' => 'quote_id',
@@ -675,18 +675,18 @@ $dictionary['Product'] = array(
             'len' => '255',
             'vname' => 'LBL_QUOTE_NAME',
             'source' => 'non-db',
-            'comment' => 'Quote Name'
-        ),
-        'opportunity_id' => array(
+            'comment' => 'Quote Name',
+        ],
+        'opportunity_id' => [
             'name' => 'opportunity_id',
             'type' => 'id',
             'vname' => 'LBL_OPPORTUNITY_ID',
             'required' => false,
             'isnull' => true,
             'reportable' => false,
-            'comment' => 'The opportunity id for the line item entry'
-        ),
-        'opportunity_name' => array(
+            'comment' => 'The opportunity id for the line item entry',
+        ],
+        'opportunity_name' => [
             'name' => 'opportunity_name',
             'rname' => 'name',
             'id_name' => 'opportunity_id',
@@ -700,12 +700,12 @@ $dictionary['Product'] = array(
             'source' => 'non-db',
             'comment' => 'The opportunity name associated with the opportunity_id',
             'auto_populate' => true,
-            'populate_list' => array(
+            'populate_list' => [
                 'account_id' => 'account_id',
-                'account_name' => 'account_name'
-            ),
-        ),
-        'opportunities' => array(
+                'account_name' => 'account_name',
+            ],
+        ],
+        'opportunities' => [
             'name' => 'opportunities',
             'type' => 'link',
             'relationship' => 'opportunities_products',
@@ -714,8 +714,8 @@ $dictionary['Product'] = array(
             'module' => 'Opportunities',
             'bean_name' => 'Opportunity',
             'vname' => 'LBL_OPPORTUNITIES',
-        ),
-        'type_name' => array(
+        ],
+        'type_name' => [
             'name' => 'type_name',
             'rname' => 'name',
             'id_name' => 'type_id',
@@ -730,8 +730,8 @@ $dictionary['Product'] = array(
             'dbType' => 'varchar',
             'len' => '255',
             'source' => 'non-db',
-        ),
-        'account_link' => array(
+        ],
+        'account_link' => [
             'name' => 'account_link',
             'type' => 'link',
             'relationship' => 'products_accounts',
@@ -741,8 +741,8 @@ $dictionary['Product'] = array(
             'module' => 'Accounts',
             'bean_name' => 'Account',
             'source' => 'non-db',
-        ),
-        'product_categories_link' => array(
+        ],
+        'product_categories_link' => [
             'name' => 'product_categories_link',
             'type' => 'link',
             'relationship' => 'product_categories',
@@ -751,8 +751,8 @@ $dictionary['Product'] = array(
             'module' => 'ProductCategories',
             'bean_name' => 'ProductCategory',
             'source' => 'non-db',
-        ),
-        'product_templates_link' => array(
+        ],
+        'product_templates_link' => [
             'name' => 'product_templates_link',
             'type' => 'link',
             'relationship' => 'product_templates',
@@ -761,8 +761,8 @@ $dictionary['Product'] = array(
             'module' => 'ProductTemplates',
             'bean_name' => 'ProductTemplate',
             'source' => 'non-db',
-        ),
-        'product_types_link' => array(
+        ],
+        'product_types_link' => [
             'name' => 'product_types_link',
             'type' => 'link',
             'relationship' => 'product_types',
@@ -771,8 +771,8 @@ $dictionary['Product'] = array(
             'module' => 'ProductTypes',
             'bean_name' => 'ProductType',
             'source' => 'non-db',
-        ),
-        'contact_link' => array(
+        ],
+        'contact_link' => [
             'name' => 'contact_link',
             'type' => 'link',
             'relationship' => 'contact_products',
@@ -782,7 +782,7 @@ $dictionary['Product'] = array(
             'bean_name' => 'Contact',
             'source' => 'non-db',
             'duplicate_merge' => 'disabled',
-        ), //bug 20184, add contact_link field
+        ], //bug 20184, add contact_link field
         'pli_addons_link' => [
             'name' => 'pli_addons_link',
             'type' => 'link',
@@ -803,7 +803,7 @@ $dictionary['Product'] = array(
             'bean_name' => 'RevenueLineItem',
             'source' => 'non-db',
         ],
-        'account_name' => array(
+        'account_name' => [
             'name' => 'account_name',
             'rname' => 'name',
             'id_name' => 'account_id',
@@ -815,8 +815,8 @@ $dictionary['Product'] = array(
             'module' => 'Accounts',
             'source' => 'non-db',
             'readonly' => true,
-        ),
-        'emails' => array(
+        ],
+        'emails' => [
             'name' => 'emails',
             'type' => 'link',
             'relationship' => 'emails_products_rel', /* reldef in emails */
@@ -824,26 +824,26 @@ $dictionary['Product'] = array(
             'bean_name' => 'Email',
             'source' => 'non-db',
             'vname' => 'LBL_EMAILS',
-            'studio' => array("formula" => false),
-        ),
-        'projects' => array(
+            'studio' => ['formula' => false],
+        ],
+        'projects' => [
             'name' => 'projects',
             'type' => 'link',
             'relationship' => 'projects_products',
             'source' => 'non-db',
             'vname' => 'LBL_PROJECTS',
-        ),
-        'product_bundles' => array(
+        ],
+        'product_bundles' => [
             'name' => 'product_bundles',
             'type' => 'link',
             'relationship' => 'product_bundle_product',
             'module' => 'ProductBundles',
             'bean_name' => 'ProductBundle',
             'source' => 'non-db',
-            'rel_fields' => array('product_index' => array('type' => 'integer')),
+            'rel_fields' => ['product_index' => ['type' => 'integer']],
             'vname' => 'LBL_PRODUCTS',
-        ),
-        'position' => array(
+        ],
+        'position' => [
             'massupdate' => false,
             'name' => 'position',
             'type' => 'integer',
@@ -853,8 +853,8 @@ $dictionary['Product'] = array(
             'importable' => false,
             'link' => 'product_bundles',
             'rname_link' => 'product_index',
-        ),
-        'calls' => array(
+        ],
+        'calls' => [
             'name' => 'calls',
             'type' => 'link',
             'relationship' => 'product_calls',
@@ -862,8 +862,8 @@ $dictionary['Product'] = array(
             'bean_name' => 'Call',
             'source' => 'non-db',
             'vname' => 'LBL_CALLS',
-        ),
-        'meetings' => array(
+        ],
+        'meetings' => [
             'name' => 'meetings',
             'type' => 'link',
             'relationship' => 'product_meetings',
@@ -871,8 +871,8 @@ $dictionary['Product'] = array(
             'bean_name' => 'Meeting',
             'source' => 'non-db',
             'vname' => 'LBL_MEETINGS',
-        ),
-        'manufacturers' => array(
+        ],
+        'manufacturers' => [
             'name' => 'manufacturers',
             'type' => 'link',
             'relationship' => 'product_manufacturers',
@@ -881,7 +881,7 @@ $dictionary['Product'] = array(
             'module' => 'Manufacturers',
             'bean_name' => 'Manufacturer',
             'source' => 'non-db',
-        ),
+        ],
         'parent_rli_id' => [
             'name' => 'parent_rli_id',
             'comment' => 'RLI this product was generated from',
@@ -967,28 +967,28 @@ $dictionary['Product'] = array(
                 'service_duration_unit' => 'catalog_service_duration_unit',
             ],
         ],
-    ),
-    'indices' => array(
-        array(
+    ],
+    'indices' => [
+        [
             'name' => 'idx_prod_user_dc_timestamp',
             'type' => 'index',
-            'fields' => array('id', 'assigned_user_id', 'date_closed_timestamp')
-        ),
-        array('name' => 'idx_product_quantity', 'type' => 'index', 'fields' => array('quantity')),
-        array('name' => 'idx_product_contact', 'type' => 'index', 'fields' => array('contact_id')),
-        array('name' => 'idx_product_account', 'type' => 'index', 'fields' => array('account_id')),
-        array('name' => 'idx_product_opp', 'type' => 'index', 'fields' => array('opportunity_id')),
-        array('name' => 'idx_product_quote', 'type' => 'index', 'fields' => array('quote_id')),
-        array('name' => 'idx_product_rli', 'type' => 'index', 'fields' => array('revenuelineitem_id')),
-        array(
+            'fields' => ['id', 'assigned_user_id', 'date_closed_timestamp'],
+        ],
+        ['name' => 'idx_product_quantity', 'type' => 'index', 'fields' => ['quantity']],
+        ['name' => 'idx_product_contact', 'type' => 'index', 'fields' => ['contact_id']],
+        ['name' => 'idx_product_account', 'type' => 'index', 'fields' => ['account_id']],
+        ['name' => 'idx_product_opp', 'type' => 'index', 'fields' => ['opportunity_id']],
+        ['name' => 'idx_product_quote', 'type' => 'index', 'fields' => ['quote_id']],
+        ['name' => 'idx_product_rli', 'type' => 'index', 'fields' => ['revenuelineitem_id']],
+        [
             'name' => 'idx_product_del_created_by_pt_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'created_by',
                 'product_template_id',
-            ),
-        ),
+            ],
+        ],
         [
             'name' => 'idx_del_p_rli_id',
             'type' => 'index',
@@ -997,9 +997,9 @@ $dictionary['Product'] = array(
                 'parent_rli_id',
             ],
         ],
-    ),
-    'relationships' => array(
-        'product_notes' => array(
+    ],
+    'relationships' => [
+        'product_notes' => [
             'lhs_module' => 'Products',
             'lhs_table' => 'products',
             'lhs_key' => 'id',
@@ -1008,8 +1008,8 @@ $dictionary['Product'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Products'
-        ),
+            'relationship_role_column_value' => 'Products',
+        ],
         'product_messages' => [
             'lhs_module' => 'Products',
             'lhs_table' => 'products',
@@ -1021,88 +1021,88 @@ $dictionary['Product'] = array(
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Products',
         ],
-        'opportunities_products' => array(
+        'opportunities_products' => [
             'lhs_module' => 'Opportunities',
             'lhs_table' => 'opportunities',
             'lhs_key' => 'id',
             'rhs_module' => 'Products',
             'rhs_table' => 'products',
             'rhs_key' => 'opportunity_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'products_accounts' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'products_accounts' => [
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',
             'lhs_key' => 'id',
             'rhs_module' => 'Products',
             'rhs_table' => 'products',
             'rhs_key' => 'account_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'product_categories' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'product_categories' => [
             'lhs_module' => 'ProductCategories',
             'lhs_table' => 'product_categories',
             'lhs_key' => 'id',
             'rhs_module' => 'Products',
             'rhs_table' => 'products',
             'rhs_key' => 'category_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'product_templates' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'product_templates' => [
             'lhs_module' => 'ProductTemplates',
             'lhs_table' => 'product_templates',
             'lhs_key' => 'id',
             'rhs_module' => 'Products',
             'rhs_table' => 'products',
             'rhs_key' => 'product_template_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'product_types' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'product_types' => [
             'lhs_module' => 'ProductTypes',
             'lhs_table' => 'product_types',
             'lhs_key' => 'id',
             'rhs_module' => 'Products',
             'rhs_table' => 'products',
             'rhs_key' => 'type_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'products_modified_user' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'products_modified_user' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
             'rhs_module' => 'Products',
             'rhs_table' => 'products',
             'rhs_key' => 'modified_user_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'products_assigned_user' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'products_assigned_user' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
             'rhs_module' => 'Products',
             'rhs_table' => 'products',
             'rhs_key' => 'assigned_user_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'products_created_by' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'products_created_by' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
             'rhs_module' => 'Products',
             'rhs_table' => 'products',
             'rhs_key' => 'created_by',
-            'relationship_type' => 'one-to-many'
-        ),
-        'products_revenuelineitems' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'products_revenuelineitems' => [
             'rhs_module' => 'Products',
             'rhs_table' => 'products',
             'rhs_key' => 'revenuelineitem_id',
             'lhs_module' => 'RevenueLineItems',
             'lhs_table' => 'revenue_line_items',
             'lhs_key' => 'id',
-            'relationship_type' => 'one-to-one'
-        ),
-        'product_calls' => array(
+            'relationship_type' => 'one-to-one',
+        ],
+        'product_calls' => [
             'lhs_module' => 'Products',
             'lhs_table' => 'products',
             'lhs_key' => 'id',
@@ -1111,9 +1111,9 @@ $dictionary['Product'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Products'
-        ),
-        'product_meetings' => array(
+            'relationship_role_column_value' => 'Products',
+        ],
+        'product_meetings' => [
             'lhs_module' => 'Products',
             'lhs_table' => 'products',
             'lhs_key' => 'id',
@@ -1122,17 +1122,17 @@ $dictionary['Product'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Products'
-        ),
-        'product_manufacturers' => array(
+            'relationship_role_column_value' => 'Products',
+        ],
+        'product_manufacturers' => [
             'lhs_module' => 'Manufacturers',
             'lhs_table' => 'manufacturers',
             'lhs_key' => 'id',
             'rhs_module' => 'Products',
             'rhs_table' => 'products',
             'rhs_key' => 'manufacturer_id',
-            'relationship_type' => 'one-to-many'
-        ),
+            'relationship_type' => 'one-to-many',
+        ],
         'products_parent_rli' => [
             'lhs_module' => 'RevenueLineItems',
             'lhs_table' => 'revenue_line_items',
@@ -1151,36 +1151,37 @@ $dictionary['Product'] = array(
             'rhs_key' => 'add_on_to_id',
             'relationship_type' => 'one-to-many',
         ],
-    ),
-    'duplicate_check' => array(
+    ],
+    'duplicate_check' => [
         'enabled' => true,
-        'FilterDuplicateCheck' => array(
-            'filter_template' => array(
-                array(
-                    '$and' => array(
-                        array('opportunity_id' => array('$equals' => '$opportunity_id')),
-                        array('name' => array('$starts' => '$name'))
-                    )
-                ),
-            ),
-            'ranking_fields' => array(
-                array('in_field_name' => 'opportunity_id', 'dupe_field_name' => 'opportunity_id'),
-                array('in_field_name' => 'name', 'dupe_field_name' => 'name'),
-            )
-        )
-    ),
-);
+        'FilterDuplicateCheck' => [
+            'filter_template' => [
+                [
+                    '$and' => [
+                        ['opportunity_id' => ['$equals' => '$opportunity_id']],
+                        ['name' => ['$starts' => '$name']],
+                    ],
+                ],
+            ],
+            'ranking_fields' => [
+                ['in_field_name' => 'opportunity_id', 'dupe_field_name' => 'opportunity_id'],
+                ['in_field_name' => 'name', 'dupe_field_name' => 'name'],
+            ],
+        ],
+    ],
+];
 
 VardefManager::createVardef(
     'Products',
     'Product',
-    array(
+    [
         'default',
         'assignable',
         'team_security',
         'sales_item',
         'commentlog',
-    )
+        'audit',
+    ]
 );
 
 //boost value for full text search

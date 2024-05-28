@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Proces forretningsregler',
-  'LBL_MODULE_TITLE' => 'Proces forretningsregler',
-  'LBL_MODULE_NAME_SINGULAR' => 'Proces forretningsregel',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Proces forretningsregler',
+    'LBL_MODULE_TITLE' => 'Proces forretningsregler',
+    'LBL_MODULE_NAME_SINGULAR' => 'Proces forretningsregel',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Regler for procesforretning',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Regler for procesforretning',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Betjeningspanel til optegnelser over proces-forretningsregler',
-  'LBL_RST_UID' => 'Forretningsregel ID',
-  'LBL_RST_TYPE' => 'Forretningsregel type',
-  'LBL_RST_DEFINITION' => 'Forretningsregel definition',
-  'LBL_RST_EDITABLE' => 'Forretningsregel redigerbar',
-  'LBL_RST_SOURCE' => 'Forretningsregel kilde',
-  'LBL_RST_SOURCE_DEFINITION' => 'Forretningsregel kildedefinition',
-  'LBL_RST_MODULE' => 'Mål modul',
-  'LBL_RST_FILENAME' => 'Forretningsregel filnavn',
-  'LBL_RST_CREATE_DATE' => 'Forretningsregel opret dato',
-  'LBL_RST_UPDATE_DATE' => 'Forretningsregel opdateringsdato',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Betjeningspanel til optegnelser over proces-forretningsregler',
+    'LBL_RST_UID' => 'Forretningsregel ID',
+    'LBL_RST_TYPE' => 'Forretningsregel type',
+    'LBL_RST_DEFINITION' => 'Forretningsregel definition',
+    'LBL_RST_EDITABLE' => 'Forretningsregel redigerbar',
+    'LBL_RST_SOURCE' => 'Forretningsregel kilde',
+    'LBL_RST_SOURCE_DEFINITION' => 'Forretningsregel kildedefinition',
+    'LBL_RST_MODULE' => 'Mål modul',
+    'LBL_RST_FILENAME' => 'Forretningsregel filnavn',
+    'LBL_RST_CREATE_DATE' => 'Forretningsregel opret dato',
+    'LBL_RST_UPDATE_DATE' => 'Forretningsregel opdateringsdato',
 
     'LNK_LIST' => 'Vis proces forretningsregler',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Opret proces forretningsregler',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Denne forretningsregel er ugyldig, da den bruge ugyldige felter eller felter der ikke findes på din version af SugarCRM. Ret venligst fejlene herunder og gem forretningsreglen.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Denne forretningsregel anvendes aktuelt i en fremgangsdefinition. Ønsker du stadig et redigere denne forretningsregel?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Du kan ikke slette denne forretningsregel, fordi den aktuelt anvendes i en procesdefinition.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Du kan ikke slette denne forretningsregel, fordi den aktuelt anvendes i en procesdefinition.',
+];

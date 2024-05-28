@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Uzdevumu rinda',
     'LBL_MODULE_NAME_SINGULAR' => 'Uzdevumu rinda',
     'LBL_MODULE_TITLE' => 'Uzdevumu rinda: Sākums',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Risinājums atcelts',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Risinājums tiek izpildīts',
     // Errors
-    'ERR_CALL' => "Nevar izsaukt funkciju: %s",
-    'ERR_CURL' => "Nav pieejams komandrindas rīks (CURL) URL uzdevumu izpildei",
-    'ERR_FAILED' => "Negaidīta kļūda, pārbaudiet PHP un SugarCRM žurnālus",
-    'ERR_PHP' => "%s [%d]: %s ir %s rindā %d",
-    'ERR_NOUSER' => "Uzdevumam nav norādīts lietotāja ID",
-    'ERR_NOSUCHUSER' => "Lietotāja ID %s netika atrasts",
-    'ERR_JOBTYPE' => "Nezināms uzdevuma tips: %s",
-    'ERR_TIMEOUT' => "Laika limita izsīkuma kļūda",
+    'ERR_CALL' => 'Nevar izsaukt funkciju: %s',
+    'ERR_CURL' => 'Nav pieejams komandrindas rīks (CURL) URL uzdevumu izpildei',
+    'ERR_FAILED' => 'Negaidīta kļūda, pārbaudiet PHP un SugarCRM žurnālus',
+    'ERR_PHP' => '%s [%d]: %s ir %s rindā %d',
+    'ERR_NOUSER' => 'Uzdevumam nav norādīts lietotāja ID',
+    'ERR_NOSUCHUSER' => 'Lietotāja ID %s netika atrasts',
+    'ERR_JOBTYPE' => 'Nezināms uzdevuma tips: %s',
+    'ERR_TIMEOUT' => 'Laika limita izsīkuma kļūda',
     'ERR_JOB_FAILED_VERBOSE' => 'Uzdevums %1$s (%2$s) neizpildījās CRON sesijā',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Nevar ielādēt bean ar id: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Nevar atrast apstrādes funkciju ceļam %s',
@@ -92,13 +92,13 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Amazon SQS konfigurācijas palīdzība',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Amazon SQS konfigurācijas sadaļa.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Amazon SQS konfigurācijas sadaļa.</b></p>
 <ul>
     <li>Piekļuves atslēgas Key ID: <i>Ievadiet savu Amazon SQS piekļuves atslēgas id numuru</i></li>
     <li>Slepetā piekļuves atslēga: <i>Ievadiet savu Amazon SQS slepeno piekļuves atslēgu</i></li>
     <li>Reģions: <i>Ievadiet Amazon SQS servera reģionu</i></li>
     <li>Rindas nosaukums: <i>Ievadiet Amazon SQS servera rindas nosaukumu</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'AMQP konfigurācijas palīdzība',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>AMQP konfigurācijas sadaļa.</b></p>
 <ul>
@@ -119,4 +119,4 @@ $mod_strings = array(
     'LBL_REGION' => 'Reģions',
     'LBL_ACCESS_KEY_SECRET' => 'Slepenā piekļuves atslēga',
     'LBL_QUEUE_NAME' => 'Adaptera nosaukums',
-);
+];

@@ -32,8 +32,12 @@ class CaseClassifications extends \Google\Service\Resource
   /**
    * Retrieve valid classifications to be used when creating a support case. The
    * classications are hierarchical, with each classification containing all
-   * levels of the hierarchy, separated by " > ". For example "Technical Issue >
-   * Compute > Compute Engine". (caseClassifications.search)
+   * levels of the hierarchy, separated by `" > "`. For example `"Technical Issue
+   * > Compute > Compute Engine"`. Classification IDs returned by
+   * `caseClassifications.search` are guaranteed to be valid for at least 6
+   * months. If a given classification is deactiveated, it will immediately stop
+   * being returned. After 6 months, `case.create` requests using the
+   * classification ID will fail. (caseClassifications.search)
    *
    * @param array $optParams Optional parameters.
    *
@@ -41,9 +45,9 @@ class CaseClassifications extends \Google\Service\Resource
    * request.
    * @opt_param string pageToken A token identifying the page of results to
    * return. If unspecified, the first page is retrieved.
-   * @opt_param string query An expression written in the Cloud filter language.
-   * If non-empty, then only cases whose fields match the filter are returned. If
-   * empty, then no messages are filtered out.
+   * @opt_param string query An expression written in the Google Cloud filter
+   * language. If non-empty, then only cases whose fields match the filter are
+   * returned. If empty, then no messages are filtered out.
    * @return SearchCaseClassificationsResponse
    */
   public function search($optParams = [])

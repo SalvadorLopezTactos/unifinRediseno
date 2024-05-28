@@ -9,29 +9,29 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Styleguide']['base']['layout']['views'] = array(
+$viewdefs['Styleguide']['base']['layout']['views'] = [
     'css_class' => 'styleguide',
-    'components' => array(
-        array(
-            'layout' => array(
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'base',
                 'name' => 'sidebar',
                 'css_class' => 'row-fluid',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span12',
-                            'components' => array(
-                                array(
+                            'css_class' => 'main-pane span12 overflow-y-auto',
+                            'components' => [
+                                [
                                     'view' => 'sg-headerpane',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

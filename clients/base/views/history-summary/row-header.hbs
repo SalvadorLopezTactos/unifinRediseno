@@ -19,7 +19,7 @@
         </th>
     {{/each}}
     {{#each view._fields.visible}}
-        <th class="{{#if isSortable}}sorting{{#eq ../../view.orderBy.field name}}_{{../../../view.orderBy.direction}}{{/eq}} orderBy{{name}}{{/if}}{{#if widthClass}} {{widthClass}}{{/if}}"
+        <th class="relative {{#if isSortable}}sorting{{#eq ../../view.orderBy.field name}}_{{../../../view.orderBy.direction}}{{/eq}} orderBy{{name}}{{/if}}{{#if widthClass}} {{widthClass}}{{/if}}"
             {{#if styles}} style="{{styles}}"{{/if}}
             {{#if name}} data-fieldname="{{name}}"{{/if}} data-orderby="{{orderBy}}">
             {{#has "ReorderableColumns" ../view.plugins}}
@@ -50,8 +50,13 @@
         {{#if isColumnDropdown}}
             <th class="nosort morecol">
                 <div class="dropdown">
-                    <button class="btn btn-invisible" data-toggle="dropdown" rel="tooltip" title="{{str 'LBL_COLUMNS'}}" data-placement="bottom" data-action="fields-toggle" track="click:morecol" aria-label="{{str 'LBL_COLUMNS'}}" aria-haspopup="true" aria-expanded="false"><i class="sicon sicon-settings"></i></button>
-                    <ul class="dropdown-menu left">
+                    <button class="btn btn-invisible" data-bs-toggle="dropdown" data-action="fields-toggle"
+                            track="click:morecol" aria-label="{{str 'LBL_COLUMNS'}}" aria-haspopup="true"
+                            aria-expanded="false">
+                        <i class="sicon sicon-settings"></i>
+                        {{tooltipTemplate (str 'LBL_COLUMNS') 'bottom'}}
+                    </button>
+                    <ul class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl left">
                         {{#each ../../view._fields.all}}
                             <li>
                                 <button class="{{#if selected}}active{{/if}}" data-field-toggle="{{name}}" track="click:{{name}}">

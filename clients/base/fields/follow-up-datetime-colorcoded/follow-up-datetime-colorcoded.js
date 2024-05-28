@@ -37,26 +37,33 @@
          * @private
          */
         this._colorCodeClasses = this.def.color_code_classes || {};
+        this._hideOnEdit = this.def.hide_on_edit || false;
+
     },
 
     /**
      * @inheritdoc
      *
      * Set color on render
+     * Don't render if action is edit and hideOnEdit is true
      */
     _render: function() {
+        if (this.action === 'edit' && this._hideOnEdit) {
+            return;
+        }
+
         this._super('_render');
         this.setColorCoding();
     },
 
     /**
      * Set color coding based on relative time value.
-     * This is only applied when the action is list
+     * This is only applied when the action is list or detail
      */
     setColorCoding: function() {
         this._clearColorCode();
 
-        if (!this.model || this.action !== 'list') {
+        if (!this.model || (this.action !== 'list' && this.action !== 'detail')) {
             return;
         }
 

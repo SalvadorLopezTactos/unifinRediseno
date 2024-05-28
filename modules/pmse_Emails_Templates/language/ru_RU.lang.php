@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Текст письма',
     'LBL_BASE_MODULE' => 'Основной модуль',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Не удалось создать запись процесса обработки шаблона Email из файла',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Этот шаблон сообщений в настоящее время используется в определении процесса. Вы все еще хотите изменить этот шаблон сообщений?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Этот шаблон сообщений нельзя удалить, поскольку он в настоящее время используется в определении процесса.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Этот шаблон сообщений нельзя удалить, поскольку он в настоящее время используется в определении процесса.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Выбор поля',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Выбрать',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Тип значения поля',
-);
+];

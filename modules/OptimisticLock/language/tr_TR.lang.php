@@ -10,22 +10,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-   'LBL_YOURS' => 'Sizinki',
-   'LBL_IN_DATABASE' => 'Veritabanın da',
-   'LBL_CONFLICT_EXISTS' => 'Çakışma Durumu-',
-   'LBL_ACCEPT_DATABASE' => 'Veritabanını Kabul Et',
-   'LBL_ACCEPT_YOURS' => 'Sizinkini Kabul Et',
-   'LBL_RECORDS_MATCH' => 'Uyan Kayıtlar',
-   'LBL_NO_LOCKED_OBJECTS' => 'Kilitli Nesne Yok',
-   
-);
+$mod_strings = [
+    'LBL_YOURS' => 'Sizinki',
+    'LBL_IN_DATABASE' => 'Veritabanın da',
+    'LBL_CONFLICT_EXISTS' => 'Çakışma Durumu-',
+    'LBL_ACCEPT_DATABASE' => 'Veritabanını Kabul Et',
+    'LBL_ACCEPT_YOURS' => 'Sizinkini Kabul Et',
+    'LBL_RECORDS_MATCH' => 'Uyan Kayıtlar',
+    'LBL_NO_LOCKED_OBJECTS' => 'Kilitli Nesne Yok',
 
-?>
+];

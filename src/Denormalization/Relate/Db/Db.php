@@ -22,7 +22,7 @@ use UnexpectedValueException;
 abstract class Db implements OfflineOperations, OnlineOperations
 {
     /** @var string */
-    protected const DEFAULT_TMP_TABLE_NAME = "denorm_tmp";
+    protected const DEFAULT_TMP_TABLE_NAME = 'denorm_tmp';
 
     /** @var string */
     protected const TMP_PRIMARY_INDEX_NAME = 'denorm_tmp_idx';
@@ -68,7 +68,7 @@ abstract class Db implements OfflineOperations, OnlineOperations
                 );
         }
 
-        return new $class;
+        return new $class();
     }
 
     public function createTemporaryTable(array $fieldDefForValue): void
@@ -122,7 +122,7 @@ abstract class Db implements OfflineOperations, OnlineOperations
     {
         $result = $this->connection->fetchOne("SELECT COUNT(*) FROM $tableName");
 
-        return (int) $result;
+        return (int)$result;
     }
 
     public function getAlterSql(string $tableName, array $fieldDef): ?string
@@ -189,6 +189,7 @@ abstract class Db implements OfflineOperations, OnlineOperations
         string $joinConditionTargetField,
         string $joinConditionSourceField
     ): void {
+
         $qb = $this->connection->createQueryBuilder();
         $qb->select(["t.$idField as id", "s.$sourceFieldName"])
             ->from($fromTable, 't')
@@ -198,19 +199,19 @@ abstract class Db implements OfflineOperations, OnlineOperations
                 's',
                 "t.$joinConditionTargetField = s.$joinConditionSourceField"
             )
-            ->where("t.deleted = 0");
+            ->where('t.deleted = 0');
 
         $tmpTableName = $this->getTmpTableName();
 
         $insertFieldList = ['target_id', 'value'];
 
-        $autoIncrementValue = $this->db->getAutoIncrementSQL($tmpTableName, "id");
+        $autoIncrementValue = $this->db->getAutoIncrementSQL($tmpTableName, 'id');
         if (!empty($autoIncrementValue)) {
             $qb->addSelect($autoIncrementValue);
             $insertFieldList[] = 'id';
         }
 
-        $insertSql = "INSERT INTO $tmpTableName (" . implode(', ', $insertFieldList) . ") " . $qb->getSQL();
+        $insertSql = "INSERT INTO $tmpTableName (" . implode(', ', $insertFieldList) . ') ' . $qb->getSQL();
 
         $this->connection->executeUpdate($insertSql);
     }
@@ -234,16 +235,17 @@ abstract class Db implements OfflineOperations, OnlineOperations
     }
 
     public function updateLinkedBean(
-        string $relateRecordId,
+        string  $relateRecordId,
         ?string $joinTableName,
         ?string $joinPrimaryKey,
         ?string $joinLinkedKey,
-        string $denormalizedFieldName,
-        string $primaryTableName,
-        string $primaryKey,
+        string  $denormalizedFieldName,
+        string  $primaryTableName,
+        string  $primaryKey,
         $value,
         $relatedId = null
     ): void {
+
         $update = $this->connection->createQueryBuilder();
 
         if ($relatedId) {
@@ -252,7 +254,7 @@ abstract class Db implements OfflineOperations, OnlineOperations
                 // No need to get the $primaryKey as it's always 'id' in this case
                 $update->update($primaryTableName)
                     ->set($denormalizedFieldName, ':value')
-                    ->where("id = :id")
+                    ->where('id = :id')
                     ->setParameter('value', $value)
                     ->setParameter('id', $relatedId);
             } else {
@@ -274,7 +276,7 @@ abstract class Db implements OfflineOperations, OnlineOperations
                 ->where("$joinLinkedKey = :link_id");
             $whereSql = $where->getSql();
         } else {
-            $whereSql = ":link_id";
+            $whereSql = ':link_id';
         }
 
         $update->update($primaryTableName)
@@ -288,13 +290,14 @@ abstract class Db implements OfflineOperations, OnlineOperations
 
     public function updateBeanWithLinkId(
         SugarBean $bean,
-        string $linkedFieldName,
-        string $linkedTableName,
-        string $linkedKey,
-        string $primaryTableName,
-        string $denormalizedFieldName,
-        string $linkId
+        string    $linkedFieldName,
+        string    $linkedTableName,
+        string    $linkedKey,
+        string    $primaryTableName,
+        string    $denormalizedFieldName,
+        string    $linkId
     ): void {
+
         $subQuery = $this->connection->createQueryBuilder();
         $subQuery->select($linkedFieldName)
             ->from($linkedTableName)
@@ -302,7 +305,7 @@ abstract class Db implements OfflineOperations, OnlineOperations
 
         $update = $this->connection->createQueryBuilder();
         $update->update($primaryTableName)
-            ->set($denormalizedFieldName, "(" . $subQuery->getSQL() . ")")
+            ->set($denormalizedFieldName, '(' . $subQuery->getSQL() . ')')
             ->where('id = :bean_id')
             ->setParameter('bean_id', $bean->id)
             ->setParameter('link_id', $linkId);
@@ -325,11 +328,12 @@ abstract class Db implements OfflineOperations, OnlineOperations
 
     public function updateTemporaryTable(
         SugarBean $bean,
-        string $relatedFieldName,
-        string $relatedTableName,
-        string $relatedKey,
-        ?string $temporaryTableName
+        string    $relatedFieldName,
+        string    $relatedTableName,
+        string    $relatedKey,
+        ?string   $temporaryTableName
     ): void {
+
         $subQuery = $this->connection->createQueryBuilder();
         $subQuery->select($relatedFieldName)
             ->from($relatedTableName)
@@ -353,7 +357,7 @@ abstract class Db implements OfflineOperations, OnlineOperations
         return $this->connection->createQueryBuilder()
             ->select($fieldName)
             ->from($tableName)
-            ->where("id = :link_id")
+            ->where('id = :link_id')
             ->setParameter('link_id', $id)
             ->execute()
             ->fetchOne();

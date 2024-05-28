@@ -13,39 +13,39 @@
 
 class pmse_Business_Rules_sugar extends Basic
 {
-    var $new_schema = true;
-    var $module_name = 'pmse_Business_Rules';
-    var $module_dir = 'pmse_Business_Rules';
-    var $object_name = 'pmse_Business_Rules';
-    var $table_name = 'pmse_business_rules';
-    var $importable = false;
-    var $id;
-    var $name;
-    var $date_entered;
-    var $date_modified;
-    var $modified_user_id;
-    var $modified_by_name;
-    var $created_by;
-    var $created_by_name;
-    var $description;
-    var $deleted;
-    var $created_by_link;
-    var $modified_user_link;
-    var $activities;
-    var $assigned_user_id;
-    var $assigned_user_name;
-    var $assigned_user_link;
-    var $rst_uid;
-    var $rst_type;
-    var $rst_definition;
-    var $rst_editable;
-    var $rst_source;
-    var $rst_source_definition;
-    var $rst_module;
-    var $rst_filename;
-    var $rst_create_date;
-    var $rst_update_date;
-    var $disable_row_level_security = true;
+    public $new_schema = true;
+    public $module_name = 'pmse_Business_Rules';
+    public $module_dir = 'pmse_Business_Rules';
+    public $object_name = 'pmse_Business_Rules';
+    public $table_name = 'pmse_business_rules';
+    public $importable = false;
+    public $id;
+    public $name;
+    public $date_entered;
+    public $date_modified;
+    public $modified_user_id;
+    public $modified_by_name;
+    public $created_by;
+    public $created_by_name;
+    public $description;
+    public $deleted;
+    public $created_by_link;
+    public $modified_user_link;
+    public $activities;
+    public $assigned_user_id;
+    public $assigned_user_name;
+    public $assigned_user_link;
+    public $rst_uid;
+    public $rst_type;
+    public $rst_definition;
+    public $rst_editable;
+    public $rst_source;
+    public $rst_source_definition;
+    public $rst_module;
+    public $rst_filename;
+    public $rst_create_date;
+    public $rst_update_date;
+    public $disable_row_level_security = true;
 
     public function __construct()
     {
@@ -54,8 +54,9 @@ class pmse_Business_Rules_sugar extends Basic
 
     public function bean_implements($interface)
     {
-        switch($interface){
-            case 'ACL': return true;
+        switch ($interface) {
+            case 'ACL':
+                return true;
         }
         return false;
     }

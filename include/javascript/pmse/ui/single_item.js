@@ -97,7 +97,7 @@ SingleItem.prototype.createHTML = function () {
 	itemContent.href = '#';
 	removeButton = this.createHTMLElement('a');
 	removeButton.href = "#";
-	removeButton.className = 'adam single-item-remove fa fa-times-circle';
+    removeButton.className = 'adam single-item-remove sicon sicon-close';
 	//append the components to its respective parent elements;
 	itemContent.appendChild(iconContainer);
 	itemContent.appendChild(textContainer);

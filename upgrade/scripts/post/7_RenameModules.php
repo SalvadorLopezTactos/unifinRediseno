@@ -22,12 +22,12 @@ class SugarUpgradeRenameModules extends UpgradeScript
 
     public function run()
     {
-        require_once('include/utils.php');
+        require_once 'include/utils.php';
 
         $languageDefault = $GLOBALS['sugar_config']['default_language']; // if empty
         $klass = $this->getRenameModulesInstance();
         $languages = $this->getLanguages();
-        $renamedList = array();
+        $renamedList = [];
 
         $default = $this->getDefaultAppListStrings();
         foreach ($languages as $langKey => $langName) {
@@ -43,16 +43,16 @@ class SugarUpgradeRenameModules extends UpgradeScript
                 continue;
             }
 
-            if(empty($app_list_strings['moduleList'])) {
+            if (empty($app_list_strings['moduleList'])) {
                 // broken language file
                 $this->log("Bad language file for $langKey, skipping");
                 continue;
             }
             //Keep only renamed modules
-            $renamedModules = array_diff($strings['moduleList'], $app_list_strings['moduleList']);
+            $renamedModules = array_diff($strings['moduleList'] ?: [], $app_list_strings['moduleList']);
 
             if (count($renamedModules) > 0) {
-                $renamedList[$langKey] = array();
+                $renamedList[$langKey] = [];
             }
             foreach ($renamedModules as $moduleId => $moduleName) {
                 $shouldUpdate = (
@@ -64,8 +64,7 @@ class SugarUpgradeRenameModules extends UpgradeScript
                 );
 
                 $shouldUpdateSingular = false;
-                if (
-                    empty($app_list_strings['moduleListSingular'][$moduleId])
+                if (empty($app_list_strings['moduleListSingular'][$moduleId])
                     && isset($strings['moduleListSingular'][$moduleId])
                     && isset($default['moduleListSingular'][$moduleId])
                     && !$this->quotedEquals(
@@ -74,8 +73,7 @@ class SugarUpgradeRenameModules extends UpgradeScript
                     )
                 ) {
                     $shouldUpdateSingular = true;
-                } elseif (
-                    !empty($app_list_strings['moduleListSingular'][$moduleId])
+                } elseif (!empty($app_list_strings['moduleListSingular'][$moduleId])
                     && isset($strings['moduleListSingular'][$moduleId])
                     && !$this->quotedEquals(
                         $strings['moduleListSingular'][$moduleId],
@@ -86,15 +84,13 @@ class SugarUpgradeRenameModules extends UpgradeScript
                 }
 
                 $shouldUpdatePlural = false;
-                if (
-                    empty($app_list_strings['moduleList'][$moduleId])
+                if (empty($app_list_strings['moduleList'][$moduleId])
                     && isset($strings['moduleList'][$moduleId])
                     && isset($default['moduleList'][$moduleId])
                     && !$this->quotedEquals($strings['moduleList'][$moduleId], $default['moduleList'][$moduleId])
                 ) {
                     $shouldUpdatePlural = true;
-                } elseif (
-                    !empty($app_list_strings['moduleList'][$moduleId])
+                } elseif (!empty($app_list_strings['moduleList'][$moduleId])
                     && isset($strings['moduleList'][$moduleId])
                     && !$this->quotedEquals($strings['moduleList'][$moduleId], $app_list_strings['moduleList'][$moduleId])
                 ) {
@@ -105,24 +101,24 @@ class SugarUpgradeRenameModules extends UpgradeScript
 
                 if ($shouldUpdate) {
                     $klass->selectedLanguage = $langKey;
-                    if(empty($strings['moduleListSingular'][$moduleId])) {
+                    if (empty($strings['moduleListSingular'][$moduleId])) {
                         $strings['moduleListSingular'][$moduleId] = $app_list_strings['moduleListSingular'][$moduleId];
                     }
-                    if(empty($strings['moduleList'][$moduleId])) {
+                    if (empty($strings['moduleList'][$moduleId])) {
                         $strings['moduleList'][$moduleId] = $app_list_strings['moduleList'][$moduleId];
                     }
-                    $replacementLabels = array(
+                    $replacementLabels = [
                         'singular' => $strings['moduleListSingular'][$moduleId],
                         'plural' => $strings['moduleList'][$moduleId],
                         'prev_singular' => $app_list_strings['moduleListSingular'][$moduleId] ?? null,
                         'prev_plural' => $app_list_strings['moduleList'][$moduleId] ?? null,
                         'key_plural' => $moduleId,
-                        'key_singular' => $klass->getModuleSingularKey($moduleId)
-                    );
+                        'key_singular' => $klass->getModuleSingularKey($moduleId),
+                    ];
 
                     $changed = $klass->changeModuleModStrings($moduleId, $replacementLabels);
                     if ($changed) {
-                        $klass->setChangedModules(array($moduleId => $replacementLabels));
+                        $klass->setChangedModules([$moduleId => $replacementLabels]);
                         $klass->changeStringsInRelatedModules();
                     }
 
@@ -132,7 +128,7 @@ class SugarUpgradeRenameModules extends UpgradeScript
             }
         }
 
-        return($renamedList);
+        return ($renamedList);
     }
 
     /**
@@ -179,7 +175,7 @@ class SugarUpgradeRenameModules extends UpgradeScript
     {
         $app_list_strings = false;
         if (file_exists('include/language/' . $lang . '.lang.php')) {
-            $app_list_strings = array();
+            $app_list_strings = [];
             include FileLoader::validateFilePath('include/language/' . $lang . '.lang.php');
         }
         return $app_list_strings;

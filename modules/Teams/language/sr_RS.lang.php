@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Morate navesti broj zapisa kako bi dodali korisnika ovom timu.',
     'ERR_DUP_NAME' => 'Ime tima već postoji, molim izaberite drugo ime.',
     'ERR_DELETE_RECORD' => 'Morate navesti broj zapisa kako bi obrisali ovaj tim.',
@@ -70,7 +70,7 @@ Onemogućavanje dozvola na bazi tima za neki modul će vratiti sve podatke povez
  Takođe preporučujemo da koristite alatku Brza popravka i ponovno sastavljanje kako biste obrisali keš sistema nakon onemogućavanja dozvola
  na bazi tima za bilo koji modul.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Upozorenje:</strong> Onemogućavanje dozvola na bazi tima za neki modul će vratiti sve podatke povezane sa
  dozvolama na bazi tima za taj modul, uključujuči sve Definicije procesa ili Procese koji koriste tu funkciju. To 
@@ -78,7 +78,7 @@ STR
  za zapise u tom modulu. Takođe preporučujemo da koristite alatku Brza popravka i ponovno sastavljanje kako biste obrisali keš sistema
  nakon onemogućavanja dozvola na bazi tima za bilo koji modul.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Onemogućavanje dozvola na bazi tima za neki modul će vratiti sve podatke povezane sa dozvolama na bazi tima za taj
  modul, uključujuči sve Definicije procesa ili Procese koji koriste tu funkciju. To obuhvata sve Uloge koje koriste
@@ -87,7 +87,7 @@ Onemogućavanje dozvola na bazi tima za neki modul će vratiti sve podatke povez
  na bazi tima za bilo koji modul. Ako nemate pristup alatki Brza popravka i ponovno sastavljanje, obratite se administratoru
  koji ima pristup meniju za popravke.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Upozorenje:</strong> Onemogućavanje dozvola na bazi tima za neki modul će vratiti sve podatke povezane sa
  dozvolama na bazi tima za taj modul, uključujuči sve Definicije procesa ili Procese koji koriste tu funkciju. To
@@ -96,5 +96,5 @@ STR
  onemogućavanja dozvola na bazi tima za bilo koji modul. Ako nemate pristup alatki Brza popravka i ponovno sastavljanje, obratite
  se administratoru koji ima pristup meniju za popravke.
 STR
-,
-);
+    ,
+];

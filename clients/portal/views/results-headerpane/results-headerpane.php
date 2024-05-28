@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['portal']['view']['results-headerpane'] = array(
+$viewdefs['portal']['view']['results-headerpane'] = [
     'template' => 'headerpane',
-    'buttons' => array(
-        array(
+    'buttons' => [
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

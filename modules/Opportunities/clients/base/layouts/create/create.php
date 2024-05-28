@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,44 +10,44 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Opportunities']['base']['layout']['create'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['Opportunities']['base']['layout']['create'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'css_class' => 'main-pane overflow-y-auto span8',
+                            'components' => [
+                                [
                                     'view' => 'create',
-                                ),
-                                array(
+                                ],
+                                [
                                     'layout' => 'subpanels-create',
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'preview-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'create-preview',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                'last_state' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                'last_state' => [
                     'id' => 'create-default',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

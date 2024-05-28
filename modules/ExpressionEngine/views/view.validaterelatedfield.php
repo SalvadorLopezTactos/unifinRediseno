@@ -25,40 +25,39 @@ class ViewValidateRelatedField extends ViewAjax
      * @var mixed[]|mixed
      */
     public $related;
-    var $vars = array("tmodule", "link", "related");
+    public $vars = ['tmodule', 'link', 'related'];
 
     public function __construct()
     {
         parent::__construct();
-        foreach($this->vars as $var)
-        {
-            if (empty($_REQUEST[$var]))
+        foreach ($this->vars as $var) {
+            if (empty($_REQUEST[$var])) {
                 sugar_die("Required paramter $var not set in ViewRelFields");
+            }
             $this->$var = $_REQUEST[$var];
         }
         $mb = new ModuleBuilder();
-        $this->package = empty($_REQUEST['package']) || $_REQUEST['package'] == 'studio' ? "" : $mb->getPackage($_REQUEST['package']);
+        $this->package = empty($_REQUEST['package']) || $_REQUEST['package'] == 'studio' ? '' : $mb->getPackage($_REQUEST['package']);
     }
 
-    function display() {
+    public function display()
+    {
         $linkName = $this->link;
 
-        if (empty ($this->package))
-        {
+        if (empty($this->package)) {
             //First, create a dummy bean to access the relationship info
             $focus = BeanFactory::newBean($this->tmodule);
             $focus->id = create_guid();
             //Next, figure out what the related module is
-            if(!$focus->load_relationship($linkName)){
+            if (!$focus->load_relationship($linkName)) {
                 echo "Invalid Link : \$$linkName";
                 return;
             }
             $relatedModule = $focus->$linkName->getRelatedModuleName();
         } else {
-            $module = $this->package->getModule ($this->tmodule);
+            $module = $this->package->getModule($this->tmodule);
             $linksFields = $module->getLinkFields();
-            if (empty($linksFields[$linkName]))
-            {
+            if (empty($linksFields[$linkName])) {
                 echo "Invalid Link \$$linkName";
                 return;
             }
@@ -66,8 +65,9 @@ class ViewValidateRelatedField extends ViewAjax
         }
 
         $mbModule = null;
-        if (!empty($this->package))
+        if (!empty($this->package)) {
             $mbModule = $this->package->getModuleByFullName($relatedModule);
+        }
 
         if (empty($mbModule)) {
             //If the related module is deployed, use create a seed bean with the bean factory
@@ -80,13 +80,10 @@ class ViewValidateRelatedField extends ViewAjax
         }
 
         //First check if the field exists
-        if(!isset($field_defs[$this->related]) || !is_array($field_defs[$this->related]))
-        {
+        if (!isset($field_defs[$this->related]) || !is_array($field_defs[$this->related])) {
             echo(json_encode("Unknown Field : $this->related"));
-        }
-        //Otherwise, send it to the formula builder to evaluate further
-        else
-        {
+        } //Otherwise, send it to the formula builder to evaluate further
+        else {
             echo json_encode($field_defs[$this->related]);
         }
     }

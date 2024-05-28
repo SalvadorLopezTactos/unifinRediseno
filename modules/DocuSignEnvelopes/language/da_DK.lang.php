@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Anskaf konvolut',
     'LBL_CLOUD_SERVICE_TYPE' => 'Cloud service-type',
     'LBL_CLOUD_PATH' => 'Cloud sti',
+    'LBL_CLOUD_DRIVE_ID' => 'Drev-id',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Betjeningspanel for liste med DocuSign-konvolutter',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'Betjeningspanel for register over DocuSign-konvolutter',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Seneste DocuSign-konvolutter',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffe for DocuSign-konvolutter',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje for DocuSign-konvolut',
 
     'LBL_NEW_ENVELOPE' => 'Ny konvolut',
     'LBL_DOCUMENT_IS_NOW' => ' er nu ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Send',
     'LBL_BUTTON_CLEAR' => 'Ryd',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Brug skabelon',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Send med skabelon',
     'LBL_PLEASE_LOG_IN' => 'Log ind på DocuSign først!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Du kan ikke hente dette dokument. Det er oprettet af en anden bruger!',
     'LBL_SEND_NOT_ALLOWED' => 'Du kan ikke sende denne konvolut. Den er oprettet af en anden bruger!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Kladde er ændret. Opdatér status til den aktuelle status ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'DocuSign-konvolut opdateret!',
     'LBL_DRAFT_CHANGED_ERROR' => 'Status for DocuSign-konvolut blev ikke opdateret. Se nærmere oplysninger i logge!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'DocuSign-skabelon kan ikke aktiveres',
     'LBL_ENVELOPE_NOT_SENT' => 'Konvolut ikke sendt!',
     'LBL_ENVELOPE_SENT' => 'Konvolut blev sendt igen!',
     'LBL_DOCUMENT_ADDED' => 'Dokument føjet til register!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Rolle',
     'LBL_SELECT_BUTTON_LABEL' => 'Vælg',
     'LBL_BACK_BUTTON_LABEL' => 'Tilbage',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Søg efter navn på skabelon',
+    'LBL_ENVELOPE_NAME' => 'Navn på konvolut',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Navn på konvolut skal udfyldes',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Kunne ikke hente potentielle modtagere!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Kunne ikke hente skabeloner!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Vælg en rolle for hver modtager',
+    
+    'LBL_DOWNLOAD' => 'Hent',
+    'LBL_OPEN_DRAFT' => 'Åbn kladde',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Dokumenter uden en fil kan ikke sendes til DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Klik på knappen Plus for at starte underskrivelsesprocessen',
+    'LBL_NO_DOC_SELECTED' => 'Vælg først dokumenter',
+    'LBL_SELECT_RECIPIENTS' => 'Vælg underskriverens modtager',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Udeluk',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Du skal installere appen DocuSign for at opnå en bedre oplevelse.',
 ];

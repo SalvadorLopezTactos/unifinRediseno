@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Konsolin määrittely',
     'LBL_MODULE_NAME_SINGULAR' => 'Konsolin määrittely',
     'LBL_CONSOLE_CONFIG_TITLE' => 'Konsoli',
@@ -55,4 +56,4 @@ $mod_strings = array(
     'LBL_CONSOLE_DIRECTIONS_CHANGE' => 'Muutokset näkyvät heti, mutta sinun on tallennettava, jotta ne tulevat voimaan.',
     'LBL_CONSOLE_DIRECTIONS_FILTER_AND' => 'ja ',
     'LBL_CONSOLE_DIRECTIONS_FILTER_OR' => 'tai ',
-);
+];

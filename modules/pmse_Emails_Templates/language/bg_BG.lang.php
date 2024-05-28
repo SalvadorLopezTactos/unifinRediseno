@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Съдържание',
     'LBL_BASE_MODULE' => 'Основен модул',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Неуспешен опит за създаване на Шаблон на писмо в процеси от файл',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Този Шаблон на имейл в момента се използва в Дефиниция на процес. Все още ли желаете да редактирате този Шаблон на имейл?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Не можете да изтриете този Шаблон на имейл, защото в момента се използва в Дефиниция на процес.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Не можете да изтриете този Шаблон на имейл, защото в момента се използва в Дефиниция на процес.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Селектор на полета',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Избери',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Тип на стойност на поле',
-);
+];

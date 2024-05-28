@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Evidencë auditimi',
     'LBL_FIELD_NAME' => 'Fusha',
     'LBL_OLD_NAME' => 'Vlera e vjetër',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Përditëso në',
     'LBL_BLANK' => '-bosh-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e auditimit',
+    'LBL_CREATED' => 'Krijuar',
+];

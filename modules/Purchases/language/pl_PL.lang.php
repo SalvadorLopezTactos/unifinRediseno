@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Pulpit rekordów zakupów',
     'LBL_RELATED_ACCOUNT' => 'Powiązany kontrahent',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy zakupów',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Oś czasu zakupu',
 ];

@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_EMAIL_ADDRESS_ID' => 'ID:',
     'LBL_EMAIL_ADDRESS' => '이메일 주소:',
     'LBL_EMAIL_ADDRESS_CAPS' => '이메일 주소 상한',
@@ -31,4 +30,4 @@ $mod_strings = array (
     'LBL_CONFIRMATION_REQUESTED_ON' => '확인 요청 동작 취해짐',
     'LBL_CONFIRMATION_TITLE' => '감사합니다',
     'LBL_CONFIRMATION_MESSAGE' => '구독이 확인되었습니다. 목록에 추가 완료되었으며 곧 이메일을 발송해 드립니다.',
-);
+];

@@ -10,13 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['ArchiveRuns']['base']['view']['panel-top'] = array(
-    'buttons' => array(
-    ),
-    'fields' => array(
-        array(
+$viewdefs['ArchiveRuns']['base']['view']['panel-top'] = [
+    'buttons' => [
+    ],
+    'fields' => [
+        [
             'name' => 'collection-count',
             'type' => 'collection-count',
-        ),
-    ),
-);
+        ],
+    ],
+];

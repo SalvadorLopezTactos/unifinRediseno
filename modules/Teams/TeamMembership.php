@@ -11,33 +11,34 @@
  */
 
 
-class TeamMembership extends SugarBean {
+class TeamMembership extends SugarBean
+{
     // Stored fields
-    var $id;
-    var $team_id;
-    var $user_id;
-    var $explicit_assign;
-    var $implicit_assign;
-    var $deleted;
-    var $date_modified;
+    public $id;
+    public $team_id;
+    public $user_id;
+    public $explicit_assign;
+    public $implicit_assign;
+    public $deleted;
+    public $date_modified;
 
-    var $table_name = "team_memberships";
-    var $object_name = "TeamMembership";
-    var $module_name = 'TeamMemberships';
-    var $module_dir = 'Teams';
-    var $disable_custom_fields = true;
+    public $table_name = 'team_memberships';
+    public $object_name = 'TeamMembership';
+    public $module_name = 'TeamMemberships';
+    public $module_dir = 'Teams';
+    public $disable_custom_fields = true;
 
-    var $encodeFields = Array("name", "description");
-
+    public $encodeFields = ['name', 'description'];
 
 
     // todo sort by username.
 
-    var $new_schema = true;
+    public $new_schema = true;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
-        $this->disable_row_level_security =true;
+        $this->disable_row_level_security = true;
     }
 
     public function get_list_view_data($filter_fields = [])
@@ -61,7 +62,7 @@ class TeamMembership extends SugarBean {
             $this->table_name,
             $this->db->quoted($this->id)
         );
-        $result = $this->db->query($query, TRUE, "Error deleting team membership ($this->id): ");
+        $result = $this->db->query($query, true, "Error deleting team membership ($this->id): ");
     }
 
     /**
@@ -81,7 +82,7 @@ class TeamMembership extends SugarBean {
         $stmt = $this->db->getConnection()->executeQuery($query, [$user_id, $team_id]);
         $row = $stmt->fetchAssociative();
 
-        if ($row!= null) {
+        if ($row != null) {
             $this->retrieve($row['id']);
             return true;
         }
@@ -89,4 +90,3 @@ class TeamMembership extends SugarBean {
         return false;
     }
 }
-

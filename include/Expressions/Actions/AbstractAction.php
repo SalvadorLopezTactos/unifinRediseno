@@ -14,36 +14,37 @@
  * Base action class
  * @api
  */
-abstract class AbstractAction {
-    protected $targetField = array();
-    protected $params = array();
+abstract class AbstractAction
+{
+    protected $targetField = [];
+    protected $params = [];
 
     /**
      * array Array of actions for which the Expression Action is not allowed
      */
-    protected $disallowedActions = array();
+    protected $disallowedActions = [];
 
-	/**
-	 * Actions are expressions which modify data or layouts.
-	 *
-	 * @param Array $params A set of parameters to use in this action.
-	 * @return AbstractAction
-	 */
+    /**
+     * Actions are expressions which modify data or layouts.
+     *
+     * @param Array $params A set of parameters to use in this action.
+     * @return AbstractAction
+     */
     public function __construct($params)
     {
-		$this->params = $params;
-		if (is_array($params) && isset($params['target'])) {
-			$this->targetField = $params['target'];
-		} else {
-			$this->targetField = $params;
-		}
-	}
+        $this->params = $params;
+        if (is_array($params) && isset($params['target'])) {
+            $this->targetField = $params['target'];
+        } else {
+            $this->targetField = $params;
+        }
+    }
 
-	/**
-	 * Returns the javascript class equavalent to this php class
-	 *
-	 * @return string javascript.
-	 */
+    /**
+     * Returns the javascript class equavalent to this php class
+     *
+     * @return string javascript.
+     */
     public static function getJavascriptClass()
     {
         throw new BadMethodCallException(__METHOD__ . ' is not implemented');
@@ -62,31 +63,32 @@ abstract class AbstractAction {
         return !in_array($action, $this->disallowedActions);
     }
 
-	/**
-	 * Returns the javascript code to create a new action of this type
-	 * and execute the action.
-	 *
-	 * @return string javascript.
-	 */
-	abstract function getJavascriptFire();
+    /**
+     * Returns the javascript code to create a new action of this type
+     * and execute the action.
+     *
+     * @return string javascript.
+     */
+    abstract public function getJavascriptFire();
 
-	/**
-	 * Applies the Action to the target.
-	 *
-	 * @param SugarBeam $target
-	 */
-	abstract function fire(&$target);
+    /**
+     * Applies the Action to the target.
+     *
+     * @param SugarBeam $target
+     */
+    abstract public function fire(&$target);
 
-	/**
-	 * Returns the definition of this action in array format.
-	 *
-	 */
-	function getDefinition() {
-		return array(
-            "action" => static::getActionName(),
-	        "params" => $this->params,
-	    );
-	}
+    /**
+     * Returns the definition of this action in array format.
+     *
+     */
+    public function getDefinition()
+    {
+        return [
+            'action' => static::getActionName(),
+            'params' => $this->params,
+        ];
+    }
 
     public static function getActionName()
     {

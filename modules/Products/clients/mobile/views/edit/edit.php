@@ -15,44 +15,44 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-$viewdefs['Products']['mobile']['view']['edit'] = array(
-    'templateMeta' => array(
+$viewdefs['Products']['mobile']['view']['edit'] = [
+    'templateMeta' => [
         'maxColumns' => '1',
-        'widths' => array(
-            array('label' => '10', 'field' => '30'),
-        ),
-    ),
-    'panels' => array(
-        array(
-            'fields' => array(
-                array(
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        [
+            'fields' => [
+                [
                     'name' => 'name',
                     'required' => true,
-                ),
+                ],
                 'product_template_name',
                 'status',
                 'account_name',
                 'quote_name',
                 'quantity',
-                array(
+                [
                     'name' => 'discount_price',
-                ),
-                array(
+                ],
+                [
                     'name' => 'cost_price',
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'list_price',
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'mft_part_num',
                     'readonly' => true,
-                ),
+                ],
                 'tag',
                 'assigned_user_name',
                 'team_name',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

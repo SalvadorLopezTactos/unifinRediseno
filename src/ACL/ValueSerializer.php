@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,6 +16,7 @@ namespace Sugarcrm\Sugarcrm\ACL;
 
 interface ValueSerializer
 {
-    function serialize($value): string;
-    function unserialize(string $value);
+    public function serialize($value): string;
+
+    public function unserialize(string $value);
 }

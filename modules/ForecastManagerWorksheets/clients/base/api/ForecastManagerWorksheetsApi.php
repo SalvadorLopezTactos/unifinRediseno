@@ -16,31 +16,31 @@ class ForecastManagerWorksheetsApi extends SugarApi
     public function registerApiRest()
     {
         //Extend with test method
-        return array(
-            'forecastManagerWorksheetAssignQuota' => array(
+        return [
+            'forecastManagerWorksheetAssignQuota' => [
                 'reqType' => 'POST',
-                'path' => array('ForecastManagerWorksheets', 'assignQuota'),
-                'pathVars' => array('module', 'action'),
+                'path' => ['ForecastManagerWorksheets', 'assignQuota'],
+                'pathVars' => ['module', 'action'],
                 'method' => 'assignQuota',
                 'shortHelp' => 'Assign the Quota for Users with out actually committing',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastWorksheetManagerAssignQuota.html',
-            )
-        );
+            ],
+        ];
     }
 
     /**
      * Run the assign Quota Code.
      *
-     * @param ServiceBase $api          API Service
-     * @param array $args               Args from the XHR Call
+     * @param ServiceBase $api API Service
+     * @param array $args Args from the XHR Call
      * @return array
      */
-    public function assignQuota(ServiceBase $api, array $args = array())
+    public function assignQuota(ServiceBase $api, array $args = [])
     {
         /* @var $mgr_worksheet ForecastManagerWorksheet */
         $mgr_worksheet = $this->getBean($args['module']);
         $ret = $mgr_worksheet->assignQuota($args['user_id'], $args['timeperiod_id']);
-        return array('success' => $ret);
+        return ['success' => $ret];
     }
 
     /**

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Reports\Types;
 
 require_once 'modules/Reports/templates/templates_list_view.php';
@@ -21,6 +22,7 @@ use Sugarcrm\Sugarcrm\Reports\Constants\ReportType;
 class Matrix extends Reporter
 {
     use SummaryDetailsHelper;
+
     /**
      * {@inheritDoc}
      */
@@ -50,9 +52,9 @@ class Matrix extends Reporter
      */
     private function generateData(\Report $report): array
     {
-        $reportDef = (array) $report->report_def;
-        $groupDefs = (array) $reportDef['group_defs'];
-        $summaryColumns = (array) $report->report_def['summary_columns'];
+        $reportDef = (array)$report->report_def;
+        $groupDefs = (array)$reportDef['group_defs'];
+        $summaryColumns = (array)$report->report_def['summary_columns'];
 
         $addedColumns = 0;
         $response = [];
@@ -63,10 +65,10 @@ class Matrix extends Reporter
         $report->fixGroupLabels();
         $this->setGroupDefsInfo($report);
 
-        $groupDefs = (array) $reportDef['group_defs'];
+        $groupDefs = (array)$reportDef['group_defs'];
         $layoutOptions = $this->getLayoutType($reportDef);
 
-        if (count($groupDefs) == 2) {
+        if (safeCount($groupDefs) == 2) {
             $data = $this->getDataForTwoGroupBy($report, $addedColumns);
         } else {
             $data = $this->getDataForThreeGroupBy($report, $addedColumns);
@@ -95,7 +97,7 @@ class Matrix extends Reporter
      * Generate matrix table data for two groups
      *
      * @param \Report $report
-     * @param int $addedColumns,
+     * @param int $addedColumns ,
      *
      * @return array
      */
@@ -107,7 +109,7 @@ class Matrix extends Reporter
         $groupByIndex = 1;
         $maximumCellSize = 0;
 
-        $reportDef = (array) $report->report_def;
+        $reportDef = (array)$report->report_def;
         $summaryColumns = $reportDef['summary_columns'];
         $groupDefs = $reportDef['group_defs'];
 
@@ -117,7 +119,7 @@ class Matrix extends Reporter
 
         $groupByIndexInHeaderRow = [];
 
-        for ($i = 0; $i < (is_countable($groupDefs) ? count($groupDefs) : 0); $i++) {
+        for ($i = 0; $i < safeCount($groupDefs); $i++) {
             $groupByColumnInfo = getGroupByInfo($groupDefs[$i], $summaryColumns);
             $groupByIndexInHeaderRow[getGroupByKey($groupDefs[$i])] = $groupByColumnInfo;
         }
@@ -154,7 +156,7 @@ class Matrix extends Reporter
      * Generate matrix table data for two groups
      *
      * @param \Report $report
-     * @param int $addedColumns,
+     * @param int $addedColumns ,
      *
      * @return array
      */
@@ -167,7 +169,7 @@ class Matrix extends Reporter
         $maximumCellSize = 0;
         $grandTotal = [];
 
-        $reportDef = (array) $report->report_def;
+        $reportDef = (array)$report->report_def;
         $summaryColumns = $reportDef['summary_columns'];
         $groupDefs = $reportDef['group_defs'];
 
@@ -177,7 +179,7 @@ class Matrix extends Reporter
 
         $groupByIndexInHeaderRow = [];
 
-        for ($i = 0; $i < (is_countable($groupDefs) ? count($groupDefs) : 0); $i++) {
+        for ($i = 0; $i < safeCount($groupDefs); $i++) {
             $groupByColumnInfo = getGroupByInfo($groupDefs[$i], $summaryColumns);
             $groupByIndexInHeaderRow[getGroupByKey($groupDefs[$i])] = $groupByColumnInfo;
         }
@@ -212,10 +214,10 @@ class Matrix extends Reporter
         foreach ($grandTotal as $gtKey => $gtValue) {
             if ($layoutType === '1x2') {
                 $shouldAdd = !in_array($gtKey, $columnDataForThirdGroup) ||
-                            in_array($gtKey, $columnDataForSecondGroup);
+                    in_array($gtKey, $columnDataForSecondGroup);
             } else {
                 $shouldAdd = !in_array($gtKey, $columnDataForSecondGroup) ||
-                            in_array($gtKey, $columnDataForThirdGroup);
+                    in_array($gtKey, $columnDataForThirdGroup);
             }
 
             if ($shouldAdd) {
@@ -237,28 +239,29 @@ class Matrix extends Reporter
      * Create data for table header
      *
      * @param \Report $report
-     * @param array $headerRow,
+     * @param array $headerRow ,
      * @param array $secondGroupColumns
      *
      * @return array
      */
     protected function createHeader(
         \Report $report,
-        array $headerRow,
-        string $layout,
-        array $secondGroupColumns,
-        ?array $thirdGroupColumns
+        array   $headerRow,
+        string  $layout,
+        array   $secondGroupColumns,
+        ?array  $thirdGroupColumns
     ): array {
+
         $firstHeader = [];
 
-        $groupDefs = (array) $report->report_def['group_defs'];
+        $groupDefs = (array)$report->report_def['group_defs'];
         $countAdjustment = 0;
 
         if ($thirdGroupColumns && $layout === '1x2') {
             $countAdjustment = 1;
         }
 
-        for ($i = 0; $i < count($groupDefs) - $countAdjustment; $i++) {
+        for ($i = 0; $i < safeCount($groupDefs) - $countAdjustment; $i++) {
             $firstHeader[] = $headerRow[$i];
         }
 
@@ -267,7 +270,7 @@ class Matrix extends Reporter
         $header = [$firstHeader, $secondGroupColumns];
 
         if ($countAdjustment === 1) {
-            $header[] = [$headerRow[count($groupDefs) - 1]];
+            $header[] = [$headerRow[safeCount($groupDefs) - 1]];
         }
 
         if ($thirdGroupColumns) {
@@ -284,16 +287,16 @@ class Matrix extends Reporter
      */
     protected function setGroupDefsInfo(\Report $report)
     {
-        $reportDef = (array) $report->report_def;
-        $groupDefs = (array) $reportDef['group_defs'];
-        $summaryColumns = (array) $report->report_def['summary_columns'];
+        $reportDef = (array)$report->report_def;
+        $groupDefs = (array)$reportDef['group_defs'];
+        $summaryColumns = (array)$report->report_def['summary_columns'];
 
         $headerRow = $report->get_summary_header_row();
         $headerRow = $this->replaceHeaderRowWithSummaryColumns($headerRow, $summaryColumns, $report, false);
 
         $groupByIndexInHeaderRow = [];
 
-        for ($i = 0; $i < count($groupDefs); $i++) {
+        for ($i = 0; $i < safeCount($groupDefs); $i++) {
             $groupByColumnInfo = $this->getGroupByInfo($groupDefs[$i], $summaryColumns);
             $groupByIndexInHeaderRow[$this->getGroupByKey($groupDefs[$i])] = $groupByColumnInfo;
         }

@@ -32,7 +32,7 @@ class BulkRestService extends RestService
     protected function authenticateUser()
     {
         $this->user = $this->parent->user;
-        return array('isLoggedIn' => true, 'exception' => false);
+        return ['isLoggedIn' => true, 'exception' => false];
     }
 
     /**
@@ -60,4 +60,3 @@ class BulkRestService extends RestService
     {
     }
 }
-

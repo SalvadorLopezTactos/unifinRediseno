@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Pridėti',
     'LBL_ADDRCITY' => 'Miestas',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Informacija' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Uždaryti:' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'Su nurodytu šaltinio ID nerasta jokių jungčių.',
-);
-
+];

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Ieplānot zvanu',
     'LNK_NEW_MEETING' => 'Ieplānot tikšanos',
     'LNK_NEW_TASK' => 'Izveidot uzdevumu',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Papildus metadatu lauks 2',
     'COLUMN_TITLE_EXT3' => 'Papildus metadatu lauksd 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'IFrame augstums',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'Noklusētais URL',
     'COLUMN_TITLE_AUDIT' => 'Audits',
     'COLUMN_TITLE_PII' => 'Personiskā informācija',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Noklusētā vērtība',
     'LBL_AUDITED' => 'Auditēts',
     'LBL_REPORTABLE' => 'Pieejams atskaitēs',
-    'ERR_RESERVED_FIELD_NAME' => "Rezervēts atslēgvārds",
+    'ERR_RESERVED_FIELD_NAME' => 'Rezervēts atslēgvārds',
     'ERR_SELECT_FIELD_TYPE' => 'Lūdzu norādiet lauka tipu',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Tāds lauka nosaukums jau ir',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Lauka nosaukumam jābūt tikai no sekojošiem simboliem: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Pabeigts',
     'LBL_EXE_NON_SIM_MODE' => 'Izpilda ne-simulācijas režīmā',
     'LBL_CALCULATION_VISIBLE' => 'Padarīt redzamu aprēķiniem',
-);
+];

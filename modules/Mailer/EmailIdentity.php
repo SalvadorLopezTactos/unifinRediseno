@@ -24,10 +24,11 @@ class EmailIdentity
 
     /**
      * @access public
-     * @param string      $email required
-     * @param string|null $name  Should be a string unless no name is associated with the email address.
+     * @param string $email required
+     * @param string|null $name Should be a string unless no name is associated with the email address.
      */
-    public function __construct($email, $name = null) {
+    public function __construct($email, $name = null)
+    {
         $this->setEmail($email);
         $this->setName($name);
     }
@@ -38,11 +39,12 @@ class EmailIdentity
      * @throws MailerException
      * @todo still need to do more to validate the email address
      */
-    public function setEmail($email) {
+    public function setEmail($email)
+    {
         // validate the email address
-        if (!is_string($email) || trim($email) == "") {
+        if (!is_string($email) || trim($email) == '') {
             //@todo stringify $email and add it to the message
-            throw new MailerException("Invalid email address", MailerException::InvalidEmailAddress);
+            throw new MailerException('Invalid email address', MailerException::InvalidEmailAddress);
         }
 
         $this->email = trim($email);
@@ -52,7 +54,8 @@ class EmailIdentity
      * @access public
      * @return string
      */
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
@@ -60,7 +63,8 @@ class EmailIdentity
      * @access public
      * @param string|null $name required Should be a string unless no name is associated with the email address.
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         // if $name is null, then trim will return an empty string, which is perfectly acceptable
         $this->name = trim((string)$name);
     }
@@ -71,7 +75,8 @@ class EmailIdentity
      * @access public
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
@@ -83,7 +88,8 @@ class EmailIdentity
      * @access public
      * @bug 31778
      */
-    public function decode() {
+    public function decode()
+    {
         // add back in html characters (apostrophe ' and ampersand &) to email addresses
         // this was causing email bounces in names like "O'Reilly@example.com" being sent over as "O&#039;Reilly@example.com"
         // transferred from the commit found at https://github.com/sugarcrm/Mango/commit/67b9144cd7bfa5425a98e28a1f7d9e994c7826bc

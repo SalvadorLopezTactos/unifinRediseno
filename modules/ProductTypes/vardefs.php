@@ -9,21 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['ProductType'] = array(
+$dictionary['ProductType'] = [
     'table' => 'product_types',
     'archive' => false,
     'favorites' => false,
     'comment' => 'Types of products',
-    'fields' => array (
-        'description' => array (
+    'fields' => [
+        'description' => [
             'name' => 'description',
             'vname' => 'LBL_DESCRIPTION',
             'type' => 'text',
             'comment' => 'Product type description',
             'massupdate' => true,
             'sortable' => false,
-        ),
-        'list_order' => array (
+        ],
+        'list_order' => [
             'name' => 'list_order',
             'vname' => 'LBL_LIST_ORDER',
             'type' => 'int',
@@ -31,13 +31,13 @@ $dictionary['ProductType'] = array(
             'comment' => 'Order within list',
             'importable' => 'required',
             'required' => true,
-        ),
-    ),
-    'acls' => array('SugarACLProduct' => true),
-    'uses' => array(
+        ],
+    ],
+    'acls' => ['SugarACLProduct' => true],
+    'uses' => [
         'basic',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef(
     'ProductTypes',

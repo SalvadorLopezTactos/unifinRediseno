@@ -57,7 +57,7 @@ class MetaDataFile implements MetaDataFileInterface
             sugar_die("View $this->view is not recognized");
         }
 
-        return array('modules', $this->module, $names[$this->view]);
+        return ['modules', $this->module, $names[$this->view]];
     }
 
     /**

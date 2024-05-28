@@ -31,7 +31,7 @@ class IdentityProtectionRoot implements \JsonSerializable
     * @var array $_propDict
     */
     protected $_propDict;
-    
+
     /**
     * Construct a new IdentityProtectionRoot
     *
@@ -54,10 +54,11 @@ class IdentityProtectionRoot implements \JsonSerializable
     {
         return $this->_propDict;
     }
-    
 
-     /** 
+
+     /**
      * Gets the riskDetections
+    * Risk detection in Azure AD Identity Protection and the associated information about the detection.
      *
      * @return array|null The riskDetections
      */
@@ -69,11 +70,12 @@ class IdentityProtectionRoot implements \JsonSerializable
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the riskDetections
+    * Risk detection in Azure AD Identity Protection and the associated information about the detection.
     *
-    * @param RiskDetection $val The riskDetections
+    * @param RiskDetection[] $val The riskDetections
     *
     * @return IdentityProtectionRoot
     */
@@ -82,10 +84,41 @@ class IdentityProtectionRoot implements \JsonSerializable
         $this->_propDict["riskDetections"] = $val;
         return $this;
     }
-    
 
-     /** 
+
+     /**
+     * Gets the riskyServicePrincipals
+    * Azure AD service principals that are at risk.
+     *
+     * @return array|null The riskyServicePrincipals
+     */
+    public function getRiskyServicePrincipals()
+    {
+        if (array_key_exists("riskyServicePrincipals", $this->_propDict)) {
+           return $this->_propDict["riskyServicePrincipals"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the riskyServicePrincipals
+    * Azure AD service principals that are at risk.
+    *
+    * @param RiskyServicePrincipal[] $val The riskyServicePrincipals
+    *
+    * @return IdentityProtectionRoot
+    */
+    public function setRiskyServicePrincipals($val)
+    {
+        $this->_propDict["riskyServicePrincipals"] = $val;
+        return $this;
+    }
+
+
+     /**
      * Gets the riskyUsers
+    * Users that are flagged as at-risk by Azure AD Identity Protection.
      *
      * @return array|null The riskyUsers
      */
@@ -97,11 +130,12 @@ class IdentityProtectionRoot implements \JsonSerializable
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the riskyUsers
+    * Users that are flagged as at-risk by Azure AD Identity Protection.
     *
-    * @param RiskyUser $val The riskyUsers
+    * @param RiskyUser[] $val The riskyUsers
     *
     * @return IdentityProtectionRoot
     */
@@ -110,17 +144,50 @@ class IdentityProtectionRoot implements \JsonSerializable
         $this->_propDict["riskyUsers"] = $val;
         return $this;
     }
-    
+
+
+     /**
+     * Gets the servicePrincipalRiskDetections
+    * Represents information about detected at-risk service principals in an Azure AD tenant.
+     *
+     * @return array|null The servicePrincipalRiskDetections
+     */
+    public function getServicePrincipalRiskDetections()
+    {
+        if (array_key_exists("servicePrincipalRiskDetections", $this->_propDict)) {
+           return $this->_propDict["servicePrincipalRiskDetections"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the servicePrincipalRiskDetections
+    * Represents information about detected at-risk service principals in an Azure AD tenant.
+    *
+    * @param ServicePrincipalRiskDetection[] $val The servicePrincipalRiskDetections
+    *
+    * @return IdentityProtectionRoot
+    */
+    public function setServicePrincipalRiskDetections($val)
+    {
+        $this->_propDict["servicePrincipalRiskDetections"] = $val;
+        return $this;
+    }
+
     /**
     * Gets the ODataType
     *
-    * @return string The ODataType
+    * @return string|null The ODataType
     */
     public function getODataType()
     {
-        return $this->_propDict["@odata.type"];
+        if (array_key_exists('@odata.type', $this->_propDict)) {
+            return $this->_propDict["@odata.type"];
+        }
+        return null;
     }
-    
+
     /**
     * Sets the ODataType
     *
@@ -133,13 +200,14 @@ class IdentityProtectionRoot implements \JsonSerializable
         $this->_propDict["@odata.type"] = $val;
         return $this;
     }
-    
+
     /**
     * Serializes the object by property array
     * Manually serialize DateTime into RFC3339 format
     *
     * @return array The list of properties
     */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $serializableProperties = $this->getProperties();
@@ -148,6 +216,10 @@ class IdentityProtectionRoot implements \JsonSerializable
                 $serializableProperties[$property] = $val->format(\DateTime::RFC3339);
             } else if (is_a($val, "\Microsoft\Graph\Core\Enum")) {
                 $serializableProperties[$property] = $val->value();
+            } else if (is_a($val, "\Entity")) {
+                $serializableProperties[$property] = $val->jsonSerialize();
+            } else if (is_a($val, "\GuzzleHttp\Psr7\Stream")) {
+                $serializableProperties[$property] = (string) $val;
             }
         }
         return $serializableProperties;

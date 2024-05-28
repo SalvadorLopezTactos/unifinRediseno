@@ -15,7 +15,7 @@ require SugarAutoLoader::loadWithMetafiles('Project', 'projecttemplate_listviewd
 
 require_once 'include/SearchForm/SearchForm.php';
 
-echo getClassicModuleTitle(htmlspecialchars($mod_strings['LBL_MODULE_NAME'], ENT_COMPAT), array(htmlspecialchars($mod_strings['LBL_PROJECT_TEMPLATES_TITLE'], ENT_COMPAT)), true);
+echo getClassicModuleTitle(htmlspecialchars($mod_strings['LBL_MODULE_NAME'], ENT_COMPAT), [htmlspecialchars($mod_strings['LBL_PROJECT_TEMPLATES_TITLE'], ENT_COMPAT)], true);
 
 $header_text = '';
 
@@ -34,8 +34,9 @@ global $current_user;
 global $focus_list;
 
 // clear the display columns back to default when clear query is called
-if(!empty($_REQUEST['clear_query']) && $_REQUEST['clear_query'] == 'true')
-    $current_user->setPreference('ListViewDisplayColumns', array(), 0, $currentModule);
+if (!empty($_REQUEST['clear_query']) && $_REQUEST['clear_query'] == 'true') {
+    $current_user->setPreference('ListViewDisplayColumns', [], 0, $currentModule);
+}
 
 $json = getJSONobj();
 
@@ -45,31 +46,34 @@ $searchForm = new SearchForm('Project', $seedProject); // new searchform instanc
 // setup listview smarty
 $lv = new ListViewSmarty();
 
-$displayColumns = array();
+$displayColumns = [];
 // check $_REQUEST if new display columns from post
-if(!empty($_REQUEST['displayColumns'])) {
-    foreach(explode('|', $_REQUEST['displayColumns']) as $num => $col) {
-        if(!empty($listViewDefs['ProjectTemplates'][$col]))
+if (!empty($_REQUEST['displayColumns'])) {
+    foreach (explode('|', $_REQUEST['displayColumns']) as $num => $col) {
+        if (!empty($listViewDefs['ProjectTemplates'][$col])) {
             $displayColumns[$col] = $listViewDefs['ProjectTemplates'][$col];
+        }
     }
-}
-else { // use columns defined in listviewdefs for default display columns
-	foreach($listViewDefs['ProjectTemplates'] as $col => $params) {
-        if(!empty($params['default']) && $params['default'])
+} else { // use columns defined in listviewdefs for default display columns
+    foreach ($listViewDefs['ProjectTemplates'] as $col => $params) {
+        if (!empty($params['default']) && $params['default']) {
             $displayColumns[$col] = $params;
+        }
     }
 }
-$params = array('massupdate' => true); // setup ListViewSmarty params
-if(!empty($_REQUEST['orderBy'])) { // order by coming from $_REQUEST
+$params = ['massupdate' => true]; // setup ListViewSmarty params
+if (!empty($_REQUEST['orderBy'])) { // order by coming from $_REQUEST
     $params['orderBy'] = $_REQUEST['orderBy'];
     $params['overrideOrder'] = true;
-    if(!empty($_REQUEST['sortOrder'])) $params['sortOrder'] = $_REQUEST['sortOrder'];
+    if (!empty($_REQUEST['sortOrder'])) {
+        $params['sortOrder'] = $_REQUEST['sortOrder'];
+    }
 }
 
 $lv->displayColumns = $displayColumns;
 
-if(!empty($_REQUEST['search_form_only']) && $_REQUEST['search_form_only']) { // handle ajax requests for search forms only
-    switch($_REQUEST['search_form_view']) {
+if (!empty($_REQUEST['search_form_only']) && $_REQUEST['search_form_only']) { // handle ajax requests for search forms only
+    switch ($_REQUEST['search_form_view']) {
         case 'basic_search':
             $searchForm->setup();
             $searchForm->displayBasic(false);
@@ -86,21 +90,22 @@ if(!empty($_REQUEST['search_form_only']) && $_REQUEST['search_form_only']) { // 
 }
 
 // use the stored query if there is one
-if (!isset($where)) $where = "";
+if (!isset($where)) {
+    $where = '';
+}
 $storeQuery = new StoreQuery();
-if(!isset($_REQUEST['query'])){
+if (!isset($_REQUEST['query'])) {
     $storeQuery->loadQuery($currentModule);
     $storeQuery->populateRequest();
-}else{
+} else {
     $storeQuery->saveFromGet($currentModule);
 }
-if(isset($_REQUEST['query']))
-{
+if (isset($_REQUEST['query'])) {
     // we have a query
     // first save columns
     $current_user->setPreference('ListViewDisplayColumns', $displayColumns, 0, $currentModule);
     $searchForm->populateFromRequest(); // gathers search field inputs from $_REQUEST
-    $where_clauses = $searchForm->generateSearchWhere(true, "Project"); // builds the where clause from search field inputs
+    $where_clauses = $searchForm->generateSearchWhere(true, 'Project'); // builds the where clause from search field inputs
 
     $GLOBALS['log']->info("Here is the where clause for the list view: $where");
 }
@@ -111,21 +116,20 @@ $where .= 'is_template = 1 ';
 $seedProject->create_action = 'ProjectTemplatesEditView';
 
 // awu: Bug 11452 - removing export for non-admin users without a mass update form
-if (!is_admin($current_user)){
-	$params = array( 'massupdate' => false );
-	$lv->export = false;
-}
-else{
-	$params = array( 'massupdate' => true, 'export' => true);
+if (!is_admin($current_user)) {
+    $params = ['massupdate' => false];
+    $lv->export = false;
+} else {
+    $params = ['massupdate' => true, 'export' => true];
 }
 $lv->setup($seedProject, 'include/ListView/ListViewGeneric.tpl', $where, $params);
 
 // Bug 49610
-for ($i = 0; $i < (is_countable($lv->data['data']) ? count($lv->data['data']) : 0); $i++) {
+for ($i = 0; $i < safeCount($lv->data['data']); $i++) {
     $lv->data['data'][$i]['OFFSET'] = $i + 1;
 }
 
-$lv->ss->assign('act','ProjectTemplatesEditView');
+$lv->ss->assign('act', 'ProjectTemplatesEditView');
 
 $savedSearchName = empty($_REQUEST['saved_search_select_name']) ? '' : (' - ' . $_REQUEST['saved_search_select_name']);
 echo get_form_header(htmlspecialchars($current_module_strings['LBL_LIST_FORM_TITLE'] . $savedSearchName, ENT_COMPAT), '', false);
@@ -138,8 +142,8 @@ echo $lv->display();
 <?php if (!is_admin($current_user)) : ?>
     <form action="index.php" id="MassUpdate" method="post" name="MassUpdate">
         <textarea id="uid" name="uid"></textarea>
-        <input name="action" value="index" />
-        <input name="module" value="Project" />
+        <input name="action" value="index"/>
+        <input name="module" value="Project"/>
     </form>
     <script>
         document.getElementById('MassUpdate').style.display = 'none';

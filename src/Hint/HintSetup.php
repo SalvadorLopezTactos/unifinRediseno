@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint;
 
 use Sugarcrm\Sugarcrm\Hint\Config\ConfigTrait;
@@ -74,7 +75,7 @@ class HintSetup
     /**
      * Creates required schedulers and jobs
      *
-     * @param string $hook: The name of the hook from which we are invoking this method from. Used to easily identify
+     * @param string $hook : The name of the hook from which we are invoking this method from. Used to easily identify
      * within the module loader which hook code is being called from.
      *
      * Note: On Upgrade the PHP code has the old version of addSchedulers, hence we extend it and add it in here.
@@ -133,7 +134,7 @@ class HintSetup
     /**
      * Deletes Hint schedulers and jobs
      *
-     * @param string $hook: The name of the hook from which we are invoking this method from. Used to easily identify
+     * @param string $hook : The name of the hook from which we are invoking this method from. Used to easily identify
      * within the module loader which hook code is being called from.
      */
     protected function deleteSchedulers(string $hook): void

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'FW:',
     'LBL_RE' => 'Re:',
     'LBL_BUTTON_CREATE' => 'Створити',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Вибрати з облікового запису ел. пошти',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Обрати підпис',
     'LBL_SIGNATURE' => 'Підпис',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Підпис за умовчанням",
-    "LBL_SHOW_MORE_SIGNATURES" => "Більше підписів...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Підпис за умовчанням',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Більше підписів...',
     'LBL_SUBJECT' => 'Тема:',
     'LBL_TEMPLATE' => 'Шаблон',
     'LBL_TEXT_BODY' => 'Основний текст',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Час надсилання',
     'LBL_LIST_TO_ADDR' => 'Кому',
     'LBL_LIST_TYPE' => 'Тип',
-    "LBL_SELECTED_RECIPIENTS" => "Вибрані одержувачі",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Більше одержувачів...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Адресна книга",
+    'LBL_SELECTED_RECIPIENTS' => 'Вибрані одержувачі',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Більше одержувачів...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Адресна книга',
     'NTC_REMOVE_INVITEE' => 'Ви дійсно бажаєте видалити цього одержувача з email-повідомлення?',
     'WARNING_SETTINGS_NOT_CONF' => 'Параметри вашої електронної пошти налаштовані неправильно для надсилання повідомлень електронної пошти. Сервер SMTP ' .
         'потрібно настроїти в розділі <a href="#bwc/index.php?module=EmailMan&action=config">Параметри електронної пошти</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Імовірно, вкладення не буде додано до повідомлення: виявлено неправильне або непридатне до використання значення змінної "upload_tmp_dir"  ' .
         'Виправте цю помилку у файлі php.ini.',
     'LBL_MESSAGE_UID' => 'UID повідомлення',
-    'LBL_OPEN_DRAFT_ALERT' => 'Повідомлення є чернеткою. Натисніть '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'Повідомлення є чернеткою. Натисніть ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  для редагування.',
     'LBL_EMAIL_BODY' => 'Електронне повідомлення',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель «Електронні листи»',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Інформаційна панель записів електронної пошти',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Часова шкала електронних листів',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'не вказані одержувачі',
@@ -475,4 +476,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'Надіслати повідомлення електронної пошти',
     'LBL_MAILBOX' => 'Обліковий запис вхідної пошти',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Щоб надсилати електронні листи, налаштуйте обліковий запис вихідної пошти в розділі <a href="#OutboundEmail">Налаштування електронної пошти</a>.',
-);
+    'LBL_TOO_SHORT' => 'Введіть принаймні {0} символ(и/ів)...',
+];

@@ -171,7 +171,10 @@
                 if ((contentType === 'dashboard' && this.focusIconEnabled) ||
                     contentType === 'record') {
                     var focusContext = this.getFocusContext(contentType, $el);
-                    this.openFocusDrawer(focusContext);
+                    if (!focusContext.context.module) {
+                        focusContext.context.module = this.module;
+                    }
+                    this.openFocusDrawer(focusContext, $el);
                 }
             },
 
@@ -197,8 +200,7 @@
                 if (contentType === 'record') {
                     return {
                         layout: 'record',
-                        dashboardName: _.isFunction(this.getFocusContextTitle) ?
-                            this.getFocusContextTitle() : $el.data('original-title'),
+                        dashboardName: this.getFocusContextTitle($el),
                         context: {
                             layout: 'record',
                             name: 'record-drawer',
@@ -225,6 +227,7 @@
                             parentContext: this.context,
                             fieldDefs: this.fieldDefs,
                             baseModelId: this.model.get('id'),
+                            evtSource: $el,
                             disableRecordSwitching: this._getDisableRecordSwitching()
                         }
                     };
@@ -262,8 +265,9 @@
              * Open the focus drawer with the given context
              *
              * @param context
+             * @param {Object} $el
              */
-            openFocusDrawer: function(context) {
+            openFocusDrawer: function(context, $el) {
                 if (app.sideDrawer) {
                     // If the drawer is already open to the same context, don't
                     // reload it unnecessarily
@@ -273,7 +277,7 @@
                         return;
                     }
                     var sideDrawerClick = !!this.$el && (this.$el.closest('#side-drawer').length > 0);
-                    app.sideDrawer.open(context, null, sideDrawerClick);
+                    app.sideDrawer.open(context, null, sideDrawerClick, $el);
                 }
             },
 

@@ -15,6 +15,6 @@ namespace Sugarcrm\Sugarcrm\Bean\Visibility;
 use Sugarcrm\Sugarcrm\Bean\Visibility\Layer\Sql;
 use Sugarcrm\Sugarcrm\Bean\Visibility\Layer\SugarQuery;
 
-interface Strategy extends SugarQuery, Sql/*, ElasticSearch*/
+interface Strategy extends SugarQuery, Sql /*, ElasticSearch*/
 {
 }

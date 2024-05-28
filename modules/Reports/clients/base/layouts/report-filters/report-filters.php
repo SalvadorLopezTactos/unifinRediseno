@@ -19,5 +19,5 @@ $viewdefs['Reports']['base']['layout']['report-filters'] = [
             'view' => 'report-filters',
         ],
     ],
-    'css_class' => 'flex-records-layout bg-primary-content-background report-filters-layout',
+    'css_class' => 'flex-records-layout bg-[--primary-content-background] report-filters-layout',
 ];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => '转发：',
     'LBL_RE' => '回复：',
     'LBL_BUTTON_CREATE' => '创建',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => '从电子邮件帐户中选择',
     'LBL_SELECT_SIGNATURE_TITLE' => '选择签名',
     'LBL_SIGNATURE' => '签名',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "默认签名",
-    "LBL_SHOW_MORE_SIGNATURES" => "更多签名…",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => '默认签名',
+    'LBL_SHOW_MORE_SIGNATURES' => '更多签名…',
     'LBL_SUBJECT' => '主题:',
     'LBL_TEMPLATE' => '模板',
     'LBL_TEXT_BODY' => '文本正文',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => '发送时间',
     'LBL_LIST_TO_ADDR' => '收件人',
     'LBL_LIST_TYPE' => '类型',
-    "LBL_SELECTED_RECIPIENTS" => "选择的收件人",
-    "LBL_SHOW_MORE_RECIPIENTS" => "更多收件人…",
-    "LBL_COMPOSE_ADDRESSBOOK" => "地址薄",
+    'LBL_SELECTED_RECIPIENTS' => '选择的收件人',
+    'LBL_SHOW_MORE_RECIPIENTS' => '更多收件人…',
+    'LBL_COMPOSE_ADDRESSBOOK' => '地址薄',
     'NTC_REMOVE_INVITEE' => '您确定要从这封电子邮件中删除收件人吗？',
     'WARNING_SETTINGS_NOT_CONF' => '您的电子邮件设置未正确配置，无法发送电子邮件。必须在' .
         '<a href="#bwc/index.php?module=EmailMan&action=config">电子邮件设置</a>中配置SMTP 服务器。',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => '附件可能失败：检测到“upload_tmp_dir”的值错误或不可用。' .
         '请在您的 php.ini 文件中更正。',
     'LBL_MESSAGE_UID' => '消息 UID',
-    'LBL_OPEN_DRAFT_ALERT' => '电子邮件是草稿。请点击'.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => '电子邮件是草稿。请点击' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  以编辑。',
     'LBL_EMAIL_BODY' => '电子邮件消息',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => '电子邮件焦点抽屉',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => '电子邮件记录仪表板',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '电子邮件时间轴',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => '没有指定收件人',
@@ -475,4 +476,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => '发送电子邮件',
     'LBL_MAILBOX' => '收件帐户',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => '请通过<a href="#OutboundEmail">电子邮件设置</a> 配置传出电子邮件帐户以发送电子邮件。',
-);
+    'LBL_TOO_SHORT' => '输入至少 {0} 个字符......',
+];

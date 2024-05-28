@@ -107,9 +107,9 @@ class PMSEDataParserGateway extends PMSEAbstractDataParser implements PMSEDataPa
      * @param array $params if additional parameters
      * @return object
      */
-    public function parseCriteriaArray($criteriaArray, $bean, $currentUser, $beanList = array(), $params = array())
+    public function parseCriteriaArray($criteriaArray, $bean, $currentUser, $beanList = [], $params = [])
     {
-        $parsedArray = array();
+        $parsedArray = [];
         if (!empty($criteriaArray) && is_array($criteriaArray)) {
             foreach ($criteriaArray as $key => $criteriaToken) {
                 $isDefault = false;
@@ -163,7 +163,7 @@ class PMSEDataParserGateway extends PMSEAbstractDataParser implements PMSEDataPa
      * @param array $params if additional parameters
      * @return object the modified token
      */
-    public function parseCriteriaToken($criteriaToken, $params = array())
+    public function parseCriteriaToken($criteriaToken, $params = [])
     {
         return $this->dataParser->parseCriteriaToken($criteriaToken, $params);
     }

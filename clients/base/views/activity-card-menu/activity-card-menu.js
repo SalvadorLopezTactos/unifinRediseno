@@ -31,11 +31,7 @@
      * @return {Array}
      */
     getCabMeta: function() {
-        var metaViewName = this.getViewNameForMeta();
-        var modulesMeta = this.getActivitiesMeta(metaViewName);
-        var meta = _.find(modulesMeta.activity_modules, _.bind(function(activityModule) {
-            return activityModule.module === this.module;
-        }, this));
+        const meta = app.metadata.getView(this.module, 'activity-card-definition');
 
         if (meta && meta.card_menu) {
             return meta.card_menu;
@@ -93,6 +89,8 @@
      * Reload dashlet content
      */
     reloadData: function() {
-        this.$el.closest('.dashlet').find('[data-dashletaction=reloadData]').trigger('click');
+        if (this.$el) {
+            this.$el.closest('.dashlet').find('[data-dashletaction=reloadData]').trigger('click');
+        }
     },
 })

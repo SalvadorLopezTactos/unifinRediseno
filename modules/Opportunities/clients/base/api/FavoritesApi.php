@@ -14,26 +14,26 @@ class FavoritesApi extends SugarApi
 {
     public function registerApiRest()
     {
-        return array(
-            'postFavoriteRecords' => array(
+        return [
+            'postFavoriteRecords' => [
                 'reqType' => 'POST',
-                'path' => array('<module>', 'favorites'),
-                'pathVars' => array('module', 'favorites'),
+                'path' => ['<module>', 'favorites'],
+                'pathVars' => ['module', 'favorites'],
                 'minVersion' => '11.4',
                 'method' => 'getFavoriteRecords',
                 'shortHelp' => 'Get all the favorite items in alphabetical order',
                 'longHelp' => 'modules/Opportunities/clients/base/api/help/favorites_post_help.html',
-            ),
-            'getFavoriteRecords' => array(
+            ],
+            'getFavoriteRecords' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', 'favorites'),
-                'pathVars' => array('module', 'favorites'),
+                'path' => ['<module>', 'favorites'],
+                'pathVars' => ['module', 'favorites'],
                 'minVersion' => '11.5',
                 'method' => 'getFavoriteRecords',
                 'shortHelp' => 'Get all the favorite items in alphabetical order',
                 'longHelp' => 'modules/Opportunities/clients/base/api/help/favorites_get_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -55,23 +55,23 @@ class FavoritesApi extends SugarApi
             //Getting product template ids in reverse chronological order
             $sugarFavoritesBean = BeanFactory::newBean('SugarFavorites');
 
-            $favoriteProductIdQuery->select(array('record_id'));
-            $favoriteProductIdQuery->from($sugarFavoritesBean, array('add_deleted' => true));
+            $favoriteProductIdQuery->select(['record_id']);
+            $favoriteProductIdQuery->from($sugarFavoritesBean, ['add_deleted' => true]);
             $favoriteProductIdQuery->where()
                 ->queryAnd()
-                ->equals('module', "ProductTemplates")
+                ->equals('module', 'ProductTemplates')
                 ->equals('assigned_user_id', "{$GLOBALS['current_user']->id}");
 
             $favoriteProductIdResult = $favoriteProductIdQuery->execute();
 
-            $totalPages = ceil(count($favoriteProductIdResult) / $max_num);
+            $totalPages = ceil(safeCount($favoriteProductIdResult) / $max_num);
             $pageNum = ($pageNum >= $totalPages ? $pageNum - 1 : $pageNum);
 
             $productTemplateIds = array_column($favoriteProductIdResult, 'record_id');
             $productTemplatesBean = BeanFactory::newBean('ProductTemplates');
 
-            $productTemplateNamesQuery->select(array('*'));
-            $productTemplateNamesQuery->from($productTemplatesBean, array('add_deleted' => true));
+            $productTemplateNamesQuery->select(['*']);
+            $productTemplateNamesQuery->from($productTemplatesBean, ['add_deleted' => true]);
             $productTemplateNamesQuery->where()->queryAnd()
                 ->in('id', $productTemplateIds)
                 ->equals('active_status', 'Active');
@@ -87,12 +87,12 @@ class FavoritesApi extends SugarApi
 
             $productTemplateNamesResult = $productTemplateNamesQuery->execute();
 
-            return array(
+            return [
                 'totalPages' => $totalPages,
                 'pageNum' => $pageNum,
                 'max_num' => $max_num,
                 'records' => $productTemplateNamesResult,
-            );
+            ];
         } catch (SugarQueryException $e) {
             // Swallow the exception.
             $GLOBALS['log']->warn(__METHOD__ . ': ' . $e->getMessage());

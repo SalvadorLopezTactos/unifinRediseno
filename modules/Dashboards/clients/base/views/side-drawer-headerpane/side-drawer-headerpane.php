@@ -36,9 +36,9 @@ $viewdefs['Dashboards']['base']['view']['side-drawer-headerpane'] = [
             'showOn' => 'create',
         ],
     ],
-    "panels" => [
+    'panels' => [
         [
-            "name" => "header",
+            'name' => 'header',
             'tabs' => [
                 [
                     'name' => 'picture',

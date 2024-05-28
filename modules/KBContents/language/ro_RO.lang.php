@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Tabloul de bord Listă bază de cunoștințe',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare bază de cunoștințe',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare bază de cunoștințe',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia bazei de cunoștințe',
 
     'LBL_MODULE_NAME' => 'Baza de cunoştinţe',
     'LBL_MODULE_NAME_SINGULAR' => 'Articolul de baza a cunoasterilor',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Setare valoare ca principală',
     'LBL_ITEM_REMOVE' => 'Eliminare element',
     'LBL_ITEM_ADD' => 'Adăugare element',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => 'ID revizuire',
     'LBL_DOCUMENT_REVISION' => 'Revizie',
     'LBL_NUMBER' => 'Numar',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'Mai multe articole {{module}}...',
     'LBL_LIST_FORM_TITLE' => 'Listă bază de cunoştinţe',
     'LBL_SEARCH_FORM_TITLE' => 'Căutare bază de cunoştinţe',
-);
+];

@@ -38,8 +38,8 @@ class SugarUpgradeRunSQL extends UpgradeScript
         } else {
             $script = "{$vfrom}_to_{$vto}";
         }
-        $script .= "_" . $this->db->getScriptName() . ".sql";
-        $filename = $this->context['new_source_dir'] . "/upgrade/scripts/sql/" . $script;
+        $script .= '_' . $this->db->getScriptName() . '.sql';
+        $filename = $this->context['new_source_dir'] . '/upgrade/scripts/sql/' . $script;
         $this->log("Checking script name: $script ($filename)");
         if (file_exists($filename)) {
             $this->log("Running script $filename");
@@ -54,15 +54,15 @@ class SugarUpgradeRunSQL extends UpgradeScript
         $anyScriptChanges = $contents;
         $resumeAfterFound = false;
         $completeLine = '';
-        foreach($contents as $line) {
+        foreach ($contents as $line) {
             if (strpos($line, '--') === false) {
-               $completeLine .= " " . trim($line);
-               if (strpos($line, ';') !== false) {
-                   $query = str_replace(';', '', $completeLine);
-                   if ($query != null) {
-                       $this->db->query($query);
-                   }
-                   $completeLine = '';
+                $completeLine .= ' ' . trim($line);
+                if (strpos($line, ';') !== false) {
+                    $query = str_replace(';', '', $completeLine);
+                    if ($query != null) {
+                        $this->db->query($query);
+                    }
+                    $completeLine = '';
                 }
             }
         } // foreach

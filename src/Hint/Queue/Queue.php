@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint\Queue;
 
 use Doctrine\DBAL\Platforms\DB2Platform;
@@ -24,7 +25,8 @@ use Psr\Log\LoggerAwareTrait;
 
 class Queue implements LoggerAwareInterface
 {
-    use LoggerAwareTrait, ConfigTrait;
+    use LoggerAwareTrait;
+    use ConfigTrait;
 
     /**
      * Queue instance
@@ -225,7 +227,7 @@ QUERY;
 
             $events = $this->db->executeQuery($fetchQuery);
             $events = $events->fetchAllAssociative();
-            $this->logger->debug(sprintf('Event queue: %d events were fetched', count($events)));
+            $this->logger->debug(sprintf('Event queue: %d events were fetched', safeCount($events)));
 
             return $events;
         } catch (\Throwable $e) {

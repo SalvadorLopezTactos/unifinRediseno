@@ -9,8 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -24,19 +24,19 @@ require_once 'modules/Audit/field_assoc.php';
 
 class Audit extends SugarBean
 {
-    public $module_dir = "Audit";
-    public $object_name = "Audit";
+    public $module_dir = 'Audit';
+    public $object_name = 'Audit';
 
     public $disable_vardefs = true;
     public $disable_custom_fields = true;
 
-    public $genericAssocFieldsArray = array();
-    public $moduleAssocFieldsArray = array();
+    public $genericAssocFieldsArray = [];
+    public $moduleAssocFieldsArray = [];
 
     private $fieldDefs;
 
     // This is used to retrieve related fields from form posts.
-    public $additional_column_fields = Array();
+    public $additional_column_fields = [];
 
     public function __construct()
     {
@@ -73,7 +73,6 @@ class Audit extends SugarBean
 
     public function get_audit_link()
     {
-
     }
 
     /**
@@ -84,10 +83,10 @@ class Audit extends SugarBean
     {
         global $genericAssocFieldsArray, $moduleAssocFieldsArray;
         $this->genericAssocFieldsArray = (!empty($genericAssocFieldsArray) &&
-            is_array($genericAssocFieldsArray)) ? $genericAssocFieldsArray : array();
+            is_array($genericAssocFieldsArray)) ? $genericAssocFieldsArray : [];
 
         $this->moduleAssocFieldsArray = (!empty($moduleAssocFieldsArray) &&
-            is_array($moduleAssocFieldsArray)) ? $moduleAssocFieldsArray : array();
+            is_array($moduleAssocFieldsArray)) ? $moduleAssocFieldsArray : [];
     }
 
     /**
@@ -111,10 +110,13 @@ class Audit extends SugarBean
      * @param SugarBean $bean
      * @return array
      */
-    public function getAuditLog(SugarBean $bean) : array
+    public function getAuditLog(SugarBean $bean): array
     {
-        if (!$bean->is_AuditEnabled() || $bean->id === null) {
-            return array();
+        global $current_user;
+        if (!$bean->is_AuditEnabled() ||
+            $current_user->portal_only ||
+            $bean->id === null) {
+            return [];
         }
 
         $query = $this->getAuditQuery($bean);
@@ -122,7 +124,7 @@ class Audit extends SugarBean
         $stmt = $query->execute();
 
         if (empty($stmt)) {
-            return array();
+            return [];
         }
 
         return $this->fetchAuditLogRows($bean, $stmt);
@@ -134,12 +136,12 @@ class Audit extends SugarBean
      * @param array $options
      * @return array
      */
-    public function getAuditLogChunk(SugarBean $bean, array $options) : array
+    public function getAuditLogChunk(SugarBean $bean, array $options): array
     {
-        if (!$bean->is_AuditEnabled()) {
-            return array();
+        global $current_user;
+        if (!$bean->is_AuditEnabled() || $current_user->portal_only) {
+            return [];
         }
-
         $query = $this->getAuditQuery($bean);
         // nagative limit means no limit
         if ($options['limit'] >= 0) {
@@ -151,7 +153,7 @@ class Audit extends SugarBean
         $stmt = $query->execute();
 
         if (empty($stmt)) {
-            return array();
+            return [];
         }
 
         return $this->fetchAuditLogRows($bean, $stmt);
@@ -211,7 +213,7 @@ class Audit extends SugarBean
      * @param array $row A row of database-queried audit table results.
      * @return array The API-formatted $row.
      */
-    protected function handleTeamSetField($row = array())
+    protected function handleTeamSetField($row = [])
     {
         if (empty($row)) {
             return $row;
@@ -232,7 +234,7 @@ class Audit extends SugarBean
      * @param array $row A row of database-queried audit table results.
      * @return array The API-formatted $row.
      */
-    protected function formatRowForApi($row = array())
+    protected function formatRowForApi($row = [])
     {
         if (empty($row)) {
             return $row;
@@ -274,95 +276,97 @@ class Audit extends SugarBean
         return $value;
     }
 
-   public static function get_audit_list()
+    public static function get_audit_list()
     {
         $dictionary = [];
         global $focus, $genericAssocFieldsArray, $moduleAssocFieldsArray, $current_user, $timedate, $app_strings;
-        $audit_list = array();
+        $audit_list = [];
         if (!empty($_REQUEST['record'])) {
-               $result = $focus->retrieve($_REQUEST['record']);
+            $result = $focus->retrieve($_REQUEST['record']);
 
-        if ($result == null || !$focus->ACLAccess('', $focus->isOwner($current_user->id))) {
+            if ($result == null || !$focus->ACLAccess('', $focus->isOwner($current_user->id))) {
                 sugar_die($app_strings['ERROR_NO_RECORD']);
             }
         }
 
         if ($focus->is_AuditEnabled()) {
-            $order= ' order by '.$focus->get_audit_table_name().'.date_created desc' ;//order by contacts_audit.date_created desc
-            $query = "SELECT ".$focus->get_audit_table_name().".*, users.user_name FROM ".$focus->get_audit_table_name().", users WHERE ".$focus->get_audit_table_name().".created_by = users.id AND ".$focus->get_audit_table_name().".parent_id = '$focus->id'".$order;
+            $order = ' order by ' . $focus->get_audit_table_name() . '.date_created desc';//order by contacts_audit.date_created desc
+            $query = 'SELECT ' . $focus->get_audit_table_name() . '.*, users.user_name FROM ' . $focus->get_audit_table_name() . ', users WHERE ' . $focus->get_audit_table_name() . '.created_by = users.id AND ' . $focus->get_audit_table_name() . ".parent_id = '$focus->id'" . $order;
 
             $result = $focus->db->query($query);
-                // We have some data.
-                require 'metadata/audit_templateMetaData.php';
-                $fieldDefs = $dictionary['audit']['fields'];
-                while (($row = $focus->db->fetchByAssoc($result))!= null) {
-                    if(!ACLField::hasAccess($row['field_name'], $focus->module_dir, $GLOBALS['current_user']->id, $focus->isOwner($GLOBALS['current_user']->id))) continue;
+            // We have some data.
+            require 'metadata/audit_templateMetaData.php';
+            $fieldDefs = $dictionary['audit']['fields'];
+            while (($row = $focus->db->fetchByAssoc($result)) != null) {
+                if (!ACLField::hasAccess($row['field_name'], $focus->module_dir, $GLOBALS['current_user']->id, $focus->isOwner($GLOBALS['current_user']->id))) {
+                    continue;
+                }
 
-                    //If the team_set_id field has a log entry, we retrieve the list of teams to display
-                    $viewName = array_search($row['field_name'], Team::$nameTeamsetMapping);
-                    if ($viewName) {
-                        $row['field_name'] = $viewName;
-                        require_once 'modules/Teams/TeamSetManager.php';
-                        $row['before_value_string'] = TeamSetManager::getCommaDelimitedTeams($row['before_value_string']);
-                        $row['after_value_string'] = TeamSetManager::getCommaDelimitedTeams($row['after_value_string']);
-                    }
-                    $temp_list = array();
+                //If the team_set_id field has a log entry, we retrieve the list of teams to display
+                $viewName = array_search($row['field_name'], Team::$nameTeamsetMapping);
+                if ($viewName) {
+                    $row['field_name'] = $viewName;
+                    require_once 'modules/Teams/TeamSetManager.php';
+                    $row['before_value_string'] = TeamSetManager::getCommaDelimitedTeams($row['before_value_string']);
+                    $row['after_value_string'] = TeamSetManager::getCommaDelimitedTeams($row['after_value_string']);
+                }
+                $temp_list = [];
 
-                    foreach ($fieldDefs as $field) {
-                            if (array_key_exists($field['name'], $row)) {
-                                if(($field['name'] == 'before_value_string' || $field['name'] == 'after_value_string') &&
-                                    (array_key_exists($row['field_name'], $genericAssocFieldsArray) || (!empty($moduleAssocFieldsArray[$focus->object_name]) && array_key_exists($row['field_name'], $moduleAssocFieldsArray[$focus->object_name])) )
-                                   ) {
+                foreach ($fieldDefs as $field) {
+                    if (array_key_exists($field['name'], $row)) {
+                        if (($field['name'] == 'before_value_string' || $field['name'] == 'after_value_string') &&
+                            (array_key_exists($row['field_name'], $genericAssocFieldsArray) || (!empty($moduleAssocFieldsArray[$focus->object_name]) && array_key_exists($row['field_name'], $moduleAssocFieldsArray[$focus->object_name])))
+                        ) {
+                            $temp_list[$field['name']] = self::getAssociatedFieldName($row['field_name'], $row[$field['name']]);
+                        } else {
+                            $temp_list[$field['name']] = $row[$field['name']];
+                        }
 
-                                   $temp_list[$field['name']] = self::getAssociatedFieldName($row['field_name'], $row[$field['name']]);
-                                } else {
-                                   $temp_list[$field['name']] = $row[$field['name']];
-                                }
-
-                                if ($field['name'] == 'date_created') {
-                                   $date_created = '';
-                                   if (!empty($temp_list[$field['name']])) {
-                                        $date_created = $timedate->to_display_date_time($temp_list[$field['name']]);
-                                        $date_created = !empty($date_created)?$date_created:$temp_list[$field['name']];
-                                   }
-                                   $temp_list[$field['name']]=$date_created;
-                                }
-                                 if (($field['name'] == 'before_value_string' || $field['name'] == 'after_value_string') && ($row['data_type'] == "enum" || $row['data_type'] == "multienum")) {
-                                     global $app_list_strings;
-                                    $enum_keys = unencodeMultienum($temp_list[$field['name']]);
-                                    $enum_values = array();
-                                    foreach ($enum_keys as $enum_key) {
-                                    if (isset($focus->field_defs[$row['field_name']]['options'])) {
-                                        $domain = $focus->field_defs[$row['field_name']]['options'];
-                                            if(isset($app_list_strings[$domain][$enum_key]))
-                                                $enum_values[] = $app_list_strings[$domain][$enum_key];
-                                    }
-                                    }
-                                    if (!empty($enum_values)) {
-                                        $temp_list[$field['name']] = implode(', ', $enum_values);
-                                    }
-                                    if ($temp_list['data_type']==='date') {
-                                        $temp_list[$field['name']]=$timedate->to_display_date($temp_list[$field['name']], false);
-                                    }
-                                 } elseif (($field['name'] == 'before_value_string' || $field['name'] == 'after_value_string') && ($row['data_type'] == "datetimecombo")) {
-                                     if (!empty($temp_list[$field['name']]) && $temp_list[$field['name']] != 'NULL') {
-                                         $temp_list[$field['name']]=$timedate->to_display_date_time($temp_list[$field['name']]);
-                                     } else {
-                                         $temp_list[$field['name']] = '';
-                                     }
-                                 } elseif ($field['name'] == 'field_name') {
-                                    global $mod_strings;
-                                    if (isset($focus->field_defs[$row['field_name']]['vname'])) {
-                                        $label = $focus->field_defs[$row['field_name']]['vname'];
-                                        $temp_list[$field['name']] = translate($label, $focus->module_dir);
+                        if ($field['name'] == 'date_created') {
+                            $date_created = '';
+                            if (!empty($temp_list[$field['name']])) {
+                                $date_created = $timedate->to_display_date_time($temp_list[$field['name']]);
+                                $date_created = !empty($date_created) ? $date_created : $temp_list[$field['name']];
+                            }
+                            $temp_list[$field['name']] = $date_created;
+                        }
+                        if (($field['name'] == 'before_value_string' || $field['name'] == 'after_value_string') && ($row['data_type'] == 'enum' || $row['data_type'] == 'multienum')) {
+                            global $app_list_strings;
+                            $enum_keys = unencodeMultienum($temp_list[$field['name']]);
+                            $enum_values = [];
+                            foreach ($enum_keys as $enum_key) {
+                                if (isset($focus->field_defs[$row['field_name']]['options'])) {
+                                    $domain = $focus->field_defs[$row['field_name']]['options'];
+                                    if (isset($app_list_strings[$domain][$enum_key])) {
+                                        $enum_values[] = $app_list_strings[$domain][$enum_key];
                                     }
                                 }
+                            }
+                            if (!empty($enum_values)) {
+                                $temp_list[$field['name']] = implode(', ', $enum_values);
+                            }
+                            if ($temp_list['data_type'] === 'date') {
+                                $temp_list[$field['name']] = $timedate->to_display_date($temp_list[$field['name']], false);
+                            }
+                        } elseif (($field['name'] == 'before_value_string' || $field['name'] == 'after_value_string') && ($row['data_type'] == 'datetimecombo')) {
+                            if (!empty($temp_list[$field['name']]) && $temp_list[$field['name']] != 'NULL') {
+                                $temp_list[$field['name']] = $timedate->to_display_date_time($temp_list[$field['name']]);
+                            } else {
+                                $temp_list[$field['name']] = '';
+                            }
+                        } elseif ($field['name'] == 'field_name') {
+                            global $mod_strings;
+                            if (isset($focus->field_defs[$row['field_name']]['vname'])) {
+                                $label = $focus->field_defs[$row['field_name']]['vname'];
+                                $temp_list[$field['name']] = translate($label, $focus->module_dir);
+                            }
                         }
                     }
-
-                    $temp_list['created_by'] = $row['user_name'];
-                    $audit_list[] = $temp_list;
                 }
+
+                $temp_list['created_by'] = $row['user_name'];
+                $audit_list[] = $temp_list;
+            }
         }
 
         return $audit_list;
@@ -453,7 +457,7 @@ SQL;
     private function fetchAuditLogRows(SugarBean $bean, \Doctrine\DBAL\Result $result): array
     {
         $fieldDefs = $this->fieldDefs;
-        $aclCheckContext = array('bean' => $bean);
+        $aclCheckContext = ['bean' => $bean];
         $rows = [];
         while ($row = $result->fetchAssociative()) {
             if (!SugarACL::checkField($bean->module_dir, $row['field_name'], 'access', $aclCheckContext)) {
@@ -461,7 +465,7 @@ SQL;
             }
 
             //convert date
-            $dateCreated = $GLOBALS['timedate']->fromDbType($bean->db->fromConvert($row['date_created'], 'datetime'), "datetime");
+            $dateCreated = $GLOBALS['timedate']->fromDbType($bean->db->fromConvert($row['date_created'], 'datetime'), 'datetime');
             $row['date_created'] = $GLOBALS['timedate']->asIso($dateCreated);
 
             $row['source'] = json_decode($row['source'], true);
@@ -483,7 +487,7 @@ SQL;
                 !empty($this->moduleAssocFieldsArray[$bean->object_name][$row['field_name']])
             ) {
                 foreach ($fieldDefs as $field) {
-                    if (in_array($field['name'], array('before_value_string', 'after_value_string'))) {
+                    if (in_array($field['name'], ['before_value_string', 'after_value_string'])) {
                         $row[$field['name']] =
                             $this->getNameForId($row['field_name'], $row[$field['name']]);
                     }

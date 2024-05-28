@@ -37,6 +37,10 @@ class KnowledgeAnswersValueType extends \Google\Model
   protected $durationTypeDataType = '';
   protected $entityTypeType = KnowledgeAnswersEntityType::class;
   protected $entityTypeDataType = '';
+  /**
+   * @var string
+   */
+  public $inputCompositionConfig;
   protected $measurementTypeType = KnowledgeAnswersMeasurementType::class;
   protected $measurementTypeDataType = '';
   protected $normalizedStringTypeType = KnowledgeAnswersNormalizedStringType::class;
@@ -47,18 +51,10 @@ class KnowledgeAnswersValueType extends \Google\Model
   protected $opaqueTypeDataType = '';
   protected $plexityRequirementType = KnowledgeAnswersPlexityRequirement::class;
   protected $plexityRequirementDataType = '';
-  /**
-   * @var string
-   */
-  public $pluralityType;
   protected $polarQuestionTypeType = KnowledgeAnswersPolarQuestionType::class;
   protected $polarQuestionTypeDataType = '';
   protected $semanticTypeType = KnowledgeAnswersSemanticType::class;
   protected $semanticTypeDataType = '';
-  /**
-   * @var string
-   */
-  public $slotName;
   protected $stateOfAffairsTypeType = KnowledgeAnswersStateOfAffairsType::class;
   protected $stateOfAffairsTypeDataType = '';
   protected $stringTypeType = KnowledgeAnswersStringType::class;
@@ -67,8 +63,6 @@ class KnowledgeAnswersValueType extends \Google\Model
   protected $timezoneTypeDataType = '';
   protected $trackingNumberTypeType = KnowledgeAnswersTrackingNumberType::class;
   protected $trackingNumberTypeDataType = '';
-  protected $withTraitType = KnowledgeAnswersTypeTrait::class;
-  protected $withTraitDataType = '';
 
   /**
    * @param KnowledgeAnswersAnyType
@@ -197,6 +191,20 @@ class KnowledgeAnswersValueType extends \Google\Model
     return $this->entityType;
   }
   /**
+   * @param string
+   */
+  public function setInputCompositionConfig($inputCompositionConfig)
+  {
+    $this->inputCompositionConfig = $inputCompositionConfig;
+  }
+  /**
+   * @return string
+   */
+  public function getInputCompositionConfig()
+  {
+    return $this->inputCompositionConfig;
+  }
+  /**
    * @param KnowledgeAnswersMeasurementType
    */
   public function setMeasurementType(KnowledgeAnswersMeasurementType $measurementType)
@@ -267,20 +275,6 @@ class KnowledgeAnswersValueType extends \Google\Model
     return $this->plexityRequirement;
   }
   /**
-   * @param string
-   */
-  public function setPluralityType($pluralityType)
-  {
-    $this->pluralityType = $pluralityType;
-  }
-  /**
-   * @return string
-   */
-  public function getPluralityType()
-  {
-    return $this->pluralityType;
-  }
-  /**
    * @param KnowledgeAnswersPolarQuestionType
    */
   public function setPolarQuestionType(KnowledgeAnswersPolarQuestionType $polarQuestionType)
@@ -307,20 +301,6 @@ class KnowledgeAnswersValueType extends \Google\Model
   public function getSemanticType()
   {
     return $this->semanticType;
-  }
-  /**
-   * @param string
-   */
-  public function setSlotName($slotName)
-  {
-    $this->slotName = $slotName;
-  }
-  /**
-   * @return string
-   */
-  public function getSlotName()
-  {
-    return $this->slotName;
   }
   /**
    * @param KnowledgeAnswersStateOfAffairsType
@@ -377,20 +357,6 @@ class KnowledgeAnswersValueType extends \Google\Model
   public function getTrackingNumberType()
   {
     return $this->trackingNumberType;
-  }
-  /**
-   * @param KnowledgeAnswersTypeTrait
-   */
-  public function setWithTrait(KnowledgeAnswersTypeTrait $withTrait)
-  {
-    $this->withTrait = $withTrait;
-  }
-  /**
-   * @return KnowledgeAnswersTypeTrait
-   */
-  public function getWithTrait()
-  {
-    return $this->withTrait;
   }
 }
 

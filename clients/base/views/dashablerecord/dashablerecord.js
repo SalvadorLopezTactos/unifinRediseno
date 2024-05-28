@@ -46,6 +46,7 @@
         'Pagination',
         'ConfigDrivenList',
         'ActionButton',
+        'RowEditable',
     ],
 
     /**
@@ -201,6 +202,11 @@
     toggledListModels: {},
 
     /**
+     * Disable extra metadata panels
+     */
+    showExtraMeta: false,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -221,13 +227,9 @@
         this._configListTemplate = app.template.get(this.name + '.list-config');
 
         // listen to tab events
-        this.events = _.extend(this.events || {}, {
+        this.events = _.extend(this.events || {}, this.rowEditEvents, {
             'click [class*="orderBy"]': 'setOrderBy',
             'click [data-action=tab-switcher]': 'tabSwitcher',
-            'click [data-action=edit-list-row]': '_handleRowEditClicked',
-            'click [data-action=cancel-list-row]': '_handleRowCancelClicked',
-            'click [data-action=save-list-row]': '_handleRowSaveClicked',
-            'dblclick tr.single': '_handleRowDoubleClick'
         });
 
         /**
@@ -285,34 +287,6 @@
     },
 
     /**
-     * Handles when the edit button is clicked on an editable list row
-     *
-     * @param event
-     * @private
-     */
-    _handleRowEditClicked: function(event) {
-        let row = this._getClickedRowElement(event);
-        this._toggleRow(row, true);
-    },
-
-    /**
-     * Handles when the cancel button is clicked on an editable list row
-     *
-     * @param event
-     * @private
-     */
-    _handleRowCancelClicked: function(event) {
-        let row = this._getClickedRowElement(event);
-
-        let model = this.collection.get(row.data('id'));
-        if (model) {
-            model.revertAttributes();
-        }
-
-        this._toggleRow(row, false);
-    },
-
-    /**
      * Handles when the save button is clicked on an editable list row
      *
      * @param event
@@ -325,9 +299,33 @@
             let fieldsToValidate = this.getFields(model.module, model);
             model.doValidate(fieldsToValidate, (isValid) => {
                 if (isValid) {
-                    model.save({}, {
+                    let cjFormBatch;
+                    const options = {
                         success: () => {
                             this._toggleRow(row, false);
+
+                            const saveRecordCallback = (view) => {
+                                cjFormBatch = view;
+
+                                if (!_.isUndefined(cjFormBatch)) {
+                                    const params = {
+                                        record: model.get('id'),
+                                        module: this.module,
+                                    };
+
+                                    cjFormBatch.startBatchingProcess(params);
+                                }
+                            };
+
+                            app.CJBaseHelper.fetchActiveSmartGuideCount(this.context, this.layout, this.module,
+                                model.get('id'),
+                                saveRecordCallback
+                            );
+                        },
+                        error: () => {
+                            if (!_.isUndefined(cjFormBatch)) {
+                                cjFormBatch.endBatchingProcess(false, false);
+                            }
                         },
                         showAlerts: {
                             'process': true,
@@ -335,118 +333,15 @@
                                 messages: app.lang.get('LBL_RECORD_SAVED', self.module)
                             }
                         },
-                    });
+                        params: {
+                            allowBatching: true
+                        },
+                    };
+
+                    model.save({}, options);
                 }
             });
         }
-    },
-
-    /**
-     * Handles when an editable list row has been double-clicked
-     *
-     * @param event
-     * @private
-     */
-    _handleRowDoubleClick: function(event) {
-        if (!this._isClickableElement(event.target)) {
-            let row = this._getClickedRowElement(event);
-            this._toggleRow(row, true);
-        }
-    },
-
-    /**
-     * Checks if the given element is "clickable" - that is, if it is an element that always
-     * performs some action, if it is a focus icon, or if it has an event associated in another way
-     * @param element
-     * @return {boolean}
-     */
-    _isClickableElement: function(element) {
-        let tagNames = [element.tagName, element.parentElement.tagName].map(tag => tag.toLowerCase());
-        if (['a', 'button', 'input'].some(tag => tagNames.includes(tag))) {
-            return true;
-        }
-        if (element.classList.contains('focus-icon')) {
-            return true;
-        }
-        return ['data-action', 'data-clipboard', 'data-event'].some(attr => {
-            return element.getAttribute(attr) || element.parentElement.getAttribute(attr);
-        });
-    },
-
-    /**
-     * Given a click event, gets the editable list row associated with the click target
-     *
-     * @param {Event} event the click event
-     * @return {jQuery} a jQuery element representing the row clicked
-     * @private
-     */
-    _getClickedRowElement: function(event) {
-        return $(event.currentTarget).closest('tr');
-    },
-
-    /**
-     * Toggles an editable list row between edit/detail mode
-     *
-     * @param {jQuery} row the jQuery row element object
-     * @param {bool} isEdit true to set the row to edit mode; false to set it to detail mode
-     */
-    _toggleRow(row, isEdit) {
-        if (!row) {
-            return;
-        }
-        let model = this.collection.get(row.data('id'));
-        if (model && app.acl.hasAccessToModel('edit', model)) {
-            row.toggleClass('tr-inline-edit', isEdit);
-
-            if (isEdit) {
-                this.toggledListModels[model.id] = model;
-            } else {
-                delete this.toggledListModels[model.id];
-            }
-
-            this.toggleFields(this.rowFields[model.cid], isEdit);
-        }
-    },
-
-    /**
-     * Given a list of model IDs, toggles edit mode on the list rows
-     * representing those IDs
-     *
-     * @param {Array} ids the list of model IDs
-     * @param {bool} isEdit true to set the rows to edit mode; false to set them to list mode
-     * @private
-     */
-    _toggleRowsByModelId(ids, isEdit) {
-        _.each(ids, function(id) {
-            let row = this.$el.find(`tr[data-id=${id}]`);
-            if (row.length) {
-                this._toggleRow(row, isEdit);
-            }
-        }, this);
-    },
-
-    /**
-     * @inheritdoc
-     *
-     * Adds checks to see if any list view tab models are dirty
-     */
-    hasUnsavedChanges: function() {
-        let formFields = [];
-        _.each(this.rowFields[_.first(_.keys(this.rowFields))], function(field) {
-            if (field.name) {
-                formFields.push(field.name);
-            }
-            if (field.def.fields) {
-                formFields = _.chain(field.def.fields).pluck('name').compact().union(formFields).value();
-            }
-        }, this);
-
-        let hasUnsavedListTabChanges = _.some(_.values(this.toggledListModels), function(model) {
-            var changedAttributes = model.changedAttributes(model.getSynced());
-            return !_.isEmpty(_.intersection(_.keys(changedAttributes), formFields));
-        }, this);
-
-        return hasUnsavedListTabChanges || this._super('hasUnsavedChanges');
     },
 
     /**
@@ -1221,6 +1116,7 @@
                     tab.model.fetch({
                         showAlerts: true,
                         success: _.bind(function(model) {
+                            callback(null);
                             if (self._isActiveTab(tab)) {
 
                                 // Check the metadata again. On the first switch to the tab,
@@ -1247,7 +1143,6 @@
                 self.context.set('collection', self.collection);
 
                 self.render();
-
                 if (_.isFunction(options.complete)) {
                     options.complete.call(self);
                 }
@@ -1441,7 +1336,9 @@
         var contextModel = this._getContextModel();
         if (tab.model.dataFetched || this.meta.pseudo || this.configLayout) {
             this.recordState = 'READY';
-        } else if (contextModel.dataFetched && _.isEmpty(tab.model.get('id'))) {
+        } else if ((contextModel.dataFetched && _.isEmpty(tab.model.get('id')) ||
+            (tab.link && _.isEmpty(tab.model.get('id')))
+        )) {
             this.recordState = 'NODATA';
         } else {
             this.recordState = 'LOADING';
@@ -1733,7 +1630,17 @@
      * @private
      */
     _getRecordMeta: function(module) {
-        return app.metadata.getView(module, 'record');
+        let recordMeta = app.metadata.getView(module, 'record');
+
+        // Disable extra meta on the dashlet for the Users module
+        if (module !== 'Users') {
+            let extraMeta = app.metadata.getView(module, 'record-extra-meta');
+            if (recordMeta && recordMeta.panels && extraMeta && extraMeta.panels) {
+                recordMeta.panels = recordMeta.panels.concat(extraMeta.panels);
+            }
+        }
+
+        return recordMeta;
     },
 
     /**
@@ -2150,7 +2057,7 @@
             } else if (tab.type === 'record') {
                 // Single record (record view tab)
                 module = tab.module;
-                tab.meta = app.metadata.getView(module, 'recorddashlet') || app.metadata.getView(module, 'record');
+                tab.meta = app.metadata.getView(module, 'recorddashlet') || this._getRecordMeta(module);
                 var contextModel = this._getContextModel() || app.data.createBean(module);
                 if (this.meta.pseudo) {
                     tab.model = app.data.createBean(module);
@@ -2166,6 +2073,11 @@
                     }
                     tab.model = app.data.createRelatedBean(contextModel, id, tab.link);
                 }
+
+                if (tab.module === 'Users') {
+                    this._initUserModuleRecordTab(tab);
+                }
+
                 if (this.configLayout) {
                     _.each(tab.meta.panels, function(panel) {
                         _.each(panel.fields, function(field) {
@@ -2180,6 +2092,33 @@
 
         // Set this to false if we pruned out all the tabs
         this.moduleIsAvailable = !((this.tabs.length === 0) && (dashletTabs.length > 0));
+    },
+
+    /**
+     * Updates Users module record tabs to take into account whether they are a
+     * Group or Portal API type User, as these User types have special views
+     *
+     * @param {Object} tab the tab's settings data
+     * @private
+     */
+    _initUserModuleRecordTab: function(tab) {
+        let modelFetchFields = tab.model.getOption('fields') || [];
+        modelFetchFields.push('is_group', 'portal_only');
+        tab.model.setOption('fields', _.uniq(modelFetchFields));
+
+        this.listenTo(tab.model, 'change:is_group change:portal_only', () => {
+            let viewType = tab.model.get('is_group') ? 'group' :
+                tab.model.get('portal_only') ? 'portalapi' :
+                    false;
+            if (['group', 'portalapi'].includes(viewType)) {
+                tab.meta = _.extend({}, tab.meta, app.metadata.getView('Users', `record-${viewType}`));
+            }
+
+            if (this._isActiveTab(tab)) {
+                this.meta = this._extendMeta(tab);
+                this.render();
+            }
+        });
     },
 
     /**
@@ -2723,34 +2662,5 @@
         this.scrollContainer = this.$el.find('.dashablerecord .tab-content');
         this._setRowFields();
         this._toggleRowsByModelId(_.keys(this.toggledListModels), true);
-    },
-
-    /**
-     * Stores references to all fields in the current view by model ID for quick access
-     *
-     * @private
-     */
-    _setRowFields: function() {
-        this.rowFields = {};
-        _.each(this.fields, function(field) {
-            if (field.model && field.model.cid && _.isUndefined(field.parent)) {
-                this.rowFields[field.model.cid] = this.rowFields[field.model.cid] || [];
-                this.rowFields[field.model.cid].push(field);
-            }
-        }, this);
-    },
-
-    /**
-     * For list tabs, marks collection models that the user does not have edit access to
-     *
-     * @private
-     */
-    _checkRowEditAccess: function() {
-        if (!this.collection) {
-            return;
-        }
-        _.each(this.collection.models, function(model) {
-            model.hasEditAccess = app.acl.hasAccessToModel('edit', model);
-        }, this);
     },
 })

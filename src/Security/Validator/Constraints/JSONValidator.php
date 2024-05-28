@@ -32,7 +32,7 @@ class JSONValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof JSON) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\JSON');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\JSON');
         }
 
         if (null === $value || '' === $value) {
@@ -43,7 +43,7 @@ class JSONValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, 'string');
         }
 
-        $value = (string) $value;
+        $value = (string)$value;
 
         if ($constraint->htmlDecode) {
             $value = html_entity_decode($value, ENT_QUOTES, 'UTF-8');

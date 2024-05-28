@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -38,10 +40,11 @@ class Redis implements Cache
     private $hashes = [];
 
     public function __construct(
-        Client $client,
-        KeyConverter $keyConverter,
+        Client          $client,
+        KeyConverter    $keyConverter,
         ValueSerializer $valueSerializer
     ) {
+
         $this->redis = $client;
         $this->keyConverter = $keyConverter;
         $this->valueSerializer = $valueSerializer;

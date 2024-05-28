@@ -10,28 +10,28 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$subpanel_layout = array(
-    'list_fields' => array(
-        'name' => array(
+$subpanel_layout = [
+    'list_fields' => [
+        'name' => [
             'vname' => 'LBL_NAME',
             'widget_class' => 'SubPanelDetailViewLink',
             'width' => '60%',
             'sortable' => true,
-        ),
-        'date_start' => array(
+        ],
+        'date_start' => [
             'vname' => 'LBL_START_DATE',
             'width' => '10%',
             'sortable' => true,
-        ),
-        'date_end' => array(
+        ],
+        'date_end' => [
             'vname' => 'LBL_END_DATE',
             'width' => '10%',
             'sortable' => true,
-        ),
-        'timezone' => array(
+        ],
+        'timezone' => [
             'vname' => 'LBL_TIMEZONE',
             'width' => '20%',
             'sortable' => true,
-        ),
-    ),
-);
+        ],
+    ],
+];

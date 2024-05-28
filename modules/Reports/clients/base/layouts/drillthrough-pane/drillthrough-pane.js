@@ -40,7 +40,8 @@
                 name: 'chart',
                 label: 'LBL_CHART',
                 view: 'detail',
-                module: metadata.module
+                module: metadata.module,
+                customLegend: true,
             };
 
         var component = {
@@ -57,10 +58,10 @@
 
         this.initComponents([{
             layout: {
-                type: 'dashlet',
-                css_class: 'dashlets mx-2 my-2',
+                type: 'dashlet-grid-wrapper',
+                css_class: 'dashlet-drill h-full mx-2',
                 config: false,
-                preview: false,
+                preview: true,
                 label: metadata.label,
                 module: metadata.module,
                 context: this.context,
@@ -82,13 +83,16 @@
         this.model.setDefault('title', $('<div/>').html(config.label).text());
         this._super('render');
 
-        var dashlet = this.getComponent('dashlet').getComponent('saved-reports-chart');
+        var dashlet = this.getComponent('dashlet-grid-wrapper').getComponent('saved-reports-chart');
         var config = this.context.get('dashConfig');
         var chartData = this.context.get('chartData');
         var reportData = this.context.get('reportData');
         var chartLabels = {groupLabel: config.groupLabel, seriesLabel: config.seriesLabel};
         this.context.set('chartLabels', chartLabels);
         var title = dashlet.$('.dashlet-title');
+
+        const dashletGridWrapper = this.getComponent('dashlet-grid-wrapper');
+        dashletGridWrapper.$el.removeClass('dashlet-preview pt-4 px-2');
 
         // This will allow scrolling when drilling thru from Report detail view
         // but will respect the dashlet setting when drilling thru from SRC
@@ -110,7 +114,7 @@
     refreshListChart: function() {
         var drawer = this.closestComponent('drawer').getComponent('drillthrough-drawer');
         drawer.updateList();
-        var dashlet = this.getComponent('dashlet').getComponent('saved-reports-chart');
+        var dashlet = this.getComponent('dashlet-grid-wrapper').getComponent('saved-reports-chart');
         dashlet.loadData();
     }
 })

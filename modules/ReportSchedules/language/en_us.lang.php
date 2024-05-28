@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Report Schedules',
     'LBL_MODULE_NAME_SINGULAR' => 'Report Schedule',
     'LBL_REPORT_NAME' => 'Report',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'File Type(s)',
     'LBL_EMBED_REPORT' => 'Embed report in Email',
     'LBL_EMBED_REPORT_INFO' => 'Note: If the report exceeds 200 rows, we will attach the report as CSV file.',
-);
+];

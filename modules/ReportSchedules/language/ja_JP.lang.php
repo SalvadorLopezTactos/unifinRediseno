@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'レポートスケジュール',
     'LBL_MODULE_NAME_SINGULAR' => 'レポートスケジュール',
     'LBL_REPORT_NAME' => 'レポート',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'ファイルタイプ',
     'LBL_EMBED_REPORT' => 'Eメールにレポートを埋め込む',
     'LBL_EMBED_REPORT_INFO' => '注意: レポートが200行を超える場合は、レポートをCSVファイルとして添付します。',
-);
+];

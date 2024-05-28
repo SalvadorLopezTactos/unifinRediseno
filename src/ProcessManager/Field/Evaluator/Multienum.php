@@ -29,7 +29,7 @@ class Multienum extends Base implements EvaluatorInterface
 
             // The data sent should already be an array, but cast it for safety's
             // sake
-            $dataValues = (array) $this->data[$this->name];
+            $dataValues = (array)$this->data[$this->name];
 
             // Lets calculate some diffs, shall we?
             $diff1 = array_diff($beanValues, $dataValues);

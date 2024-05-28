@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Planları Raporla',
     'LBL_MODULE_NAME_SINGULAR' => 'Planı Raporla',
     'LBL_REPORT_NAME' => 'Rapor',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Dosya Türü/Türleri',
     'LBL_EMBED_REPORT' => 'Raporu E-postaya yerleştir',
     'LBL_EMBED_REPORT_INFO' => 'Not: Rapor 200 satırı geçerse raporu CSV dosyası olarak ekleyeceğiz.',
-);
+];

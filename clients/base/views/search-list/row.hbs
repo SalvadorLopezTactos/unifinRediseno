@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="ellipsis_inline primary" data-placement="bottom" title="" data-original-title="">
+<div class="ellipsis_inline primary" data-bs-placement="bottom" title="" data-original-title="">
     {{#each model.primaryFields}}
         {{#notEq type 'avatar'}}<h3>{{/notEq}}
         {{#if highlighted}}
@@ -29,7 +29,7 @@
         {{#notEq type 'avatar'}}</h3>{{/notEq}}
     {{/each}}
 </div>
-<div class="ellipsis_inline secondary" data-placement="bottom" title="" data-original-title="">
+<div class="ellipsis_inline secondary" data-bs-placement="bottom" title="" data-original-title="">
     {{#each model.secondaryFields}}
         {{~#if highlighted~}}
         <span>{{str ../label ../../module}}:</span> <span>{{../value}}</span>{{#unless @last}}, {{/unless}}

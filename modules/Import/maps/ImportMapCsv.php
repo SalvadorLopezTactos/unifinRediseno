@@ -9,21 +9,19 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description: Holds import setting for CSV files
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
- 
-
 class ImportMapCsv extends ImportMapOther
 {
-	/**
+    /**
      * String identifier for this import
      */
     public $name = 'csv';
-	/**
+    /**
      * Field delimiter
      */
     public $delimiter = ',';
@@ -32,4 +30,3 @@ class ImportMapCsv extends ImportMapOther
      */
     public $enclosure;
 }
-?>

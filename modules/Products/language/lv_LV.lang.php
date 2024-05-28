@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Piedāvājuma rindas saraksta instrumentu panelis',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Piedāvājuma produktu ierakstu instrumentu panelis',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Piedāvājuma rindas vienumu fokusa panelis',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Piedāvājuma rindas vienuma laika josla',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Kampaņas produkts',
     'LBL_MODULE_NAME' => 'Piedāvājuma rindas',
@@ -183,4 +184,4 @@ Lai izveidotu {{module_name}}:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (jauns piedāvātais rindas produkts)',
     'LBL_DISCOUNT_PERCENT' => '% procenti',
     'LBL_DISCOUNT_TYPE' => 'Atlaides veids',
-);
+];

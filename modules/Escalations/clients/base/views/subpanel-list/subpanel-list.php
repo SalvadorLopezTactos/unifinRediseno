@@ -10,12 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['Escalations']['base']['view']['subpanel-list'] = [
-  'panels' => [
+    'panels' => [
         [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' =>
-            [
+            'fields' => [
                 [
                     'label' => 'LBL_LIST_NUMBER',
                     'enabled' => true,

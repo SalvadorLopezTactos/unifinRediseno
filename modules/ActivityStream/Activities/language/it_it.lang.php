@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'TPL_ACTIVITY_CREATE' => 'Creata {{{str "TPL_ACTIVITY_RECORD" "Activities" object}}} {{str "LBL_MODULE_NAME_SINGULAR" object.module}}.',
     'TPL_ACTIVITY_POST' => '{{{value}}}{{{str "TPL_ACTIVITY_ON" "Attività" this}}}',
     'TPL_ACTIVITY_UPDATE' => 'Aggiornata {{#if updateStr}}{{{updateStr}}} su {{/if}}{{{str "TPL_ACTIVITY_RECORD" "Activities" object}}}.',
@@ -28,4 +28,4 @@ $mod_strings = array(
     'TPL_MORE_COMMENT' => '{{this}} più commento&hellip;',
     'TPL_MORE_COMMENTS' => '{{this}} più commenti&hellip;',
     'TPL_SHOW_MORE_MODULE' => 'Più posts...',
-);
+];

@@ -20,7 +20,9 @@ class SugarUpgradeRepairWorkflow extends UpgradeScript
 
     public function run()
     {
-        if (!$this->toFlavor('pro')) return;
+        if (!$this->toFlavor('pro')) {
+            return;
+        }
 
 
         // Disable time-elapsed workflows that don't have a proper Primary trigger and change their description
@@ -33,7 +35,7 @@ class SugarUpgradeRepairWorkflow extends UpgradeScript
                     AND wt.frame_type = 'Primary'
                     AND wt.type NOT IN ('compare_any_time', 'compare_specific')";
         $brokenWorkflows = $this->db->query($query);
-        $descriptionFix = "THIS WORKFLOW WAS DEACTIVATED AUTOMATICALLY BY THE UPGRADE TO SUGAR 7 DUE TO INCOMPATIBILITY. PLEASE DELETE ALL CONDITIONS ON THE WORKFLOW AND RECREATE THEM.";
+        $descriptionFix = 'THIS WORKFLOW WAS DEACTIVATED AUTOMATICALLY BY THE UPGRADE TO SUGAR 7 DUE TO INCOMPATIBILITY. PLEASE DELETE ALL CONDITIONS ON THE WORKFLOW AND RECREATE THEM.';
         while ($row = $this->db->fetchByAssoc($brokenWorkflows)) {
             $workflow = BeanFactory::getBean('WorkFlow', $row['workflow_id']);
             $workflow->status = 0;
@@ -44,8 +46,8 @@ class SugarUpgradeRepairWorkflow extends UpgradeScript
             $workflow->save();
         }
 
-    	// Call repair workflow
-    	$workflow_object = new WorkFlow();
-    	$workflow_object->repair_workflow(true);
+        // Call repair workflow
+        $workflow_object = new WorkFlow();
+        $workflow_object->repair_workflow(true);
     }
 }

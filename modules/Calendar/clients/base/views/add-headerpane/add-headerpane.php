@@ -11,14 +11,14 @@
  */
 $viewdefs['Calendar']['base']['view']['add-headerpane'] = [
     'template' => 'headerpane',
-    'fields'   => [
+    'fields' => [
         [
             'name' => 'title',
             'type' => 'label',
             'default_value' => 'LBL_CALENDAR_ADD_CALENDAR',
         ],
     ],
-    'buttons'  => [
+    'buttons' => [
         [
             'name' => 'cancel_button',
             'type' => 'button',

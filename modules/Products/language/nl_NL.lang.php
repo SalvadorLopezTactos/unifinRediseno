@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Dashboard lijst met geciteerde regelitems',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Dashboard record geoffrereerde regelitems',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer regel geoffrereerde artikelen',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn geoffreerde regelitems',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Campagne Product',
     'LBL_MODULE_NAME' => 'Geoffreerde producten',
@@ -183,4 +184,4 @@ Om een {{module_name}} aan te maken:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => '(Nieuw geoffreerd regelitem)',
     'LBL_DISCOUNT_PERCENT' => '% Procent',
     'LBL_DISCOUNT_TYPE' => 'Type korting',
-);
+];

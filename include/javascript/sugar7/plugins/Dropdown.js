@@ -29,7 +29,7 @@
                     app.routing.before('route', this.closeDropdown, this);
                 });
                 this.on('render', function() {
-                    this.$('[data-toggle="dropdown"]')
+                    this.$('[data-bs-toggle="dropdown"]')
                         .attr('aria-haspopup', true)
                         .attr('aria-expanded', false);
                 });
@@ -41,9 +41,8 @@
              * @return {Boolean} `true` if dropdown menu is open, `false` otherwise.
              */
             isDropdownOpen: function() {
-                return !!this.$('[data-toggle="dropdown"]').
-                    parent().
-                    hasClass('open');
+                return !!this.$('[data-bs-toggle="dropdown"]').
+                    hasClass('show');
             },
 
             /**
@@ -163,6 +162,11 @@
                 if ($dropdownMenu.hasClass('scroll')) {
                     menuHeight = $dropdownMenu.height();
                     menuItemHeight = $menuItem.height();
+
+                    if (!$menuItem.position()) {
+                        return;
+                    }
+
                     menuItemTopPosition = $menuItem.position().top;
 
                     if ((menuItemTopPosition + menuItemHeight) > menuHeight) {
@@ -194,15 +198,15 @@
              * @private
              */
             _toggleAria: function(e) {
-                this.$('[data-toggle="dropdown"]').attr('aria-expanded', this.isDropdownOpen());
+                this.$('[data-bs-toggle="dropdown"]').attr('aria-expanded', this.isDropdownOpen());
             },
 
             /**
              * Close the dropdown menu.
              */
             closeDropdown: function() {
-                this.$('.open .dropdown-menu').trigger('click.bs.dropdown');
-                this.$('[data-toggle="dropdown"]').attr('aria-expanded', 'false');
+                this.$('.show').parent().find('.dropdown-menu').trigger('click.bs.dropdown');
+                this.$('[data-bs-toggle="dropdown"]').attr('aria-expanded', 'false');
             },
 
             /**

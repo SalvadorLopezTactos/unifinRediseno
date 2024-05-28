@@ -10,122 +10,122 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Leads']['base']['view']['recordlist'] = array(
-    'selection' => array(
+$viewdefs['Leads']['base']['view']['recordlist'] = [
+    'selection' => [
         'type' => 'multi',
-        'actions' => array(
-            array(
+        'actions' => [
+            [
                 'name' => 'mass_email_button',
                 'type' => 'mass-email-button',
                 'label' => 'LBL_EMAIL_COMPOSE',
                 'primary' => true,
-                'events' => array(
+                'events' => [
                     'click' => 'list:massaction:hide',
-                ),
+                ],
                 'acl_module' => 'Emails',
                 'acl_action' => 'edit',
-                'related_fields' => array('name', 'email'),
-            ),
-            array(
+                'related_fields' => ['name', 'email'],
+            ],
+            [
                 'name' => 'massupdate_button',
                 'type' => 'button',
                 'label' => 'LBL_MASS_UPDATE',
                 'primary' => true,
-                'events' => array(
+                'events' => [
                     'click' => 'list:massupdate:fire',
-                ),
+                ],
                 'acl_action' => 'massupdate',
-            ),
-            array(
+            ],
+            [
                 'name' => 'merge_button',
                 'type' => 'button',
                 'label' => 'LBL_MERGE',
                 'primary' => true,
-                'events' => array(
+                'events' => [
                     'click' => 'list:mergeduplicates:fire',
-                ),
+                ],
                 'acl_action' => 'edit',
-            ),
-            array(
+            ],
+            [
                 'name' => 'calc_field_button',
                 'type' => 'button',
                 'label' => 'LBL_UPDATE_CALC_FIELDS',
-                'events' => array(
+                'events' => [
                     'click' => 'list:updatecalcfields:fire',
-                ),
+                ],
                 'acl_action' => 'massupdate',
-            ),
-            array(
+            ],
+            [
                 'name' => 'addtolist_button',
                 'type' => 'button',
                 'label' => 'LBL_ADD_TO_PROSPECT_LIST_BUTTON_LABEL',
                 'primary' => true,
-                'events' => array(
+                'events' => [
                     'click' => 'list:massaddtolist:fire',
-                ),
+                ],
                 'acl_module' => 'ProspectLists',
                 'acl_action' => 'edit',
-            ),
-            array(
+            ],
+            [
                 'name' => 'massdelete_button',
                 'type' => 'button',
                 'label' => 'LBL_DELETE',
                 'acl_action' => 'delete',
                 'primary' => true,
-                'events' => array(
+                'events' => [
                     'click' => 'list:massdelete:fire',
-                ),
-            ),
-            array(
+                ],
+            ],
+            [
                 'name' => 'export_button',
                 'type' => 'button',
                 'label' => 'LBL_EXPORT',
                 'acl_action' => 'export',
                 'primary' => true,
-                'events' => array(
+                'events' => [
                     'click' => 'list:massexport:fire',
-                ),
-            ),
-        ),
-    ),
-    'rowactions' => array(
-        'actions' => array(
-            array(
+                ],
+            ],
+        ],
+    ],
+    'rowactions' => [
+        'actions' => [
+            [
                 'type' => 'rowaction',
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
                 'icon' => 'sicon-preview',
                 'acl_action' => 'view',
-            ),
-            array(
+            ],
+            [
                 'type' => 'rowaction',
                 'name' => 'edit_button',
                 'icon' => 'sicon-edit',
                 'label' => 'LBL_EDIT_BUTTON',
                 'event' => 'list:editrow:fire',
                 'acl_action' => 'edit',
-            ),
-            array(
+            ],
+            [
                 'type' => 'follow',
                 'name' => 'follow_button',
                 'event' => 'list:follow:fire',
                 'acl_action' => 'view',
-            ),
-            array(
+            ],
+            [
                 'type' => 'rowaction',
                 'name' => 'delete_button',
                 'icon' => 'sicon-trash',
                 'event' => 'list:deleterow:fire',
                 'label' => 'LBL_DELETE_BUTTON',
                 'acl_action' => 'delete',
-            ),
-            array(
+            ],
+            [
                 'type' => 'convertbutton',
                 'name' => 'lead_convert_button',
                 'label' => 'LBL_CONVERT_BUTTON_LABEL',
                 'acl_action' => 'edit',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

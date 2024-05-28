@@ -10,73 +10,73 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['opportunities_contacts'] = array(
+$dictionary['opportunities_contacts'] = [
     'table' => 'opportunities_contacts',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'contact_id' => array(
+        ],
+        'contact_id' => [
             'name' => 'contact_id',
             'type' => 'id',
-        ),
-        'opportunity_id' => array(
+        ],
+        'opportunity_id' => [
             'name' => 'opportunity_id',
             'type' => 'id',
-        ),
-        'contact_role' => array(
+        ],
+        'contact_role' => [
             'name' => 'contact_role',
             'type' => 'varchar',
             'len' => '50',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'opportunities_contactspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_con_opp_con',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'contact_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_opportunities_contacts',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'opportunity_id',
                 'contact_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_del_opp_con',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'opportunity_id',
                 'contact_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'opportunities_contacts' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'opportunities_contacts' => [
             'lhs_module' => 'Opportunities',
             'lhs_table' => 'opportunities',
             'lhs_key' => 'id',
@@ -87,6 +87,6 @@ $dictionary['opportunities_contacts'] = array(
             'join_table' => 'opportunities_contacts',
             'join_key_lhs' => 'opportunity_id',
             'join_key_rhs' => 'contact_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

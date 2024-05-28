@@ -82,7 +82,7 @@ class IntegrateApi extends SugarApi
         return $this->utils;
     }
 
-    public function getByField(ServiceBase $api, array $args) : array
+    public function getByField(ServiceBase $api, array $args): array
     {
         if (empty($args['sync_key_field_name'])) {
             $args['sync_key_field_name'] = $this->defaultField;
@@ -104,7 +104,7 @@ class IntegrateApi extends SugarApi
         return $response;
     }
 
-    public function deleteByField(ServiceBase $api, array $args) : array
+    public function deleteByField(ServiceBase $api, array $args): array
     {
         if (empty($args['sync_key_field_name'])) {
             $args['sync_key_field_name'] = $this->defaultField;
@@ -134,7 +134,7 @@ class IntegrateApi extends SugarApi
      * @param array $args
      * @return array
      */
-    public function upsertByField(ServiceBase $api, array $args) : array
+    public function upsertByField(ServiceBase $api, array $args): array
     {
         if (empty($args['sync_key_field_name'])) {
             $args['sync_key_field_name'] = $this->defaultField;
@@ -231,7 +231,7 @@ class IntegrateApi extends SugarApi
         return $response;
     }
 
-    public function setSyncKey(ServiceBase $api, array $args) : array
+    public function setSyncKey(ServiceBase $api, array $args): array
     {
         $this->requireArgs($args, ['module', 'record_id', 'sync_key_field_name', 'sync_key_field_value']);
         $this->utils()->integrationChecks($api);

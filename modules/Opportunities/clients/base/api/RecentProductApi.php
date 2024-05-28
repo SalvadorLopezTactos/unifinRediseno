@@ -14,26 +14,26 @@ class RecentProductApi extends SugarApi
 {
     public function registerApiRest()
     {
-        return array(
-            'postRecentRecords' => array(
+        return [
+            'postRecentRecords' => [
                 'reqType' => 'POST',
-                'path' => array('<module>', 'recent-product'),
-                'pathVars' => array('module', 'recent-product'),
+                'path' => ['<module>', 'recent-product'],
+                'pathVars' => ['module', 'recent-product'],
                 'minVersion' => '11.4',
                 'method' => 'getRecentRecords',
                 'shortHelp' => 'Get top 10 recently used items in reverse Chronological order',
                 'longHelp' => 'modules/Opportunities/clients/base/api/help/recent_product_post_help.html',
-            ),
-            'getRecentRecords' => array(
+            ],
+            'getRecentRecords' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', 'recent-product'),
-                'pathVars' => array('module', 'recent-product'),
+                'path' => ['<module>', 'recent-product'],
+                'pathVars' => ['module', 'recent-product'],
                 'minVersion' => '11.5',
                 'method' => 'getRecentRecords',
                 'shortHelp' => 'Get top 10 recently used items in reverse Chronological order',
                 'longHelp' => 'modules/Opportunities/clients/base/api/help/recent_product_get_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -48,7 +48,7 @@ class RecentProductApi extends SugarApi
     public function getRecentRecords(ServiceBase $api, array $args)
     {
         $this->checkAccess();
-        $this->requireArgs($args, array('module'));
+        $this->requireArgs($args, ['module']);
         $returnMostRecentRecords = [];
 
         try {
@@ -58,10 +58,10 @@ class RecentProductApi extends SugarApi
             $beanName = ($args['module'] === 'Opportunities') ? 'RevenueLineItems' : 'Products';
             $bean = BeanFactory::newBean($beanName);
 
-            $mostRecentQuery->select(array('product_template_id', 'date_entered'));
+            $mostRecentQuery->select(['product_template_id', 'date_entered']);
             // here the team security can be omitted as each RLI/Product was created by current user once,
             // and the return result is not linked to RLI/Product visibility
-            $mostRecentQuery->from($bean, array('add_deleted' => true, 'team_security' => false));
+            $mostRecentQuery->from($bean, ['add_deleted' => true, 'team_security' => false]);
             $mostRecentQuery->where()
                 ->equals('created_by', "{$GLOBALS['current_user']->id}")
                 ->notNull('product_template_id');
@@ -81,7 +81,7 @@ class RecentProductApi extends SugarApi
                 if (!$foundProductId) {
                     $returnMostRecentRecords[] = $res;
                 }
-                if (count($returnMostRecentRecords) === 10) {
+                if (safeCount($returnMostRecentRecords) === 10) {
                     break;
                 }
             }
@@ -90,31 +90,31 @@ class RecentProductApi extends SugarApi
 
             $productTemplatesBean = BeanFactory::newBean('ProductTemplates');
 
-            $productTemplateNamesQuery->select(array('*'));
-            $productTemplateNamesQuery->from($productTemplatesBean, array('add_deleted' => true));
+            $productTemplateNamesQuery->select(['*']);
+            $productTemplateNamesQuery->from($productTemplatesBean, ['add_deleted' => true]);
             $productTemplateNamesQuery->where()->queryAnd()
                 ->in('id', $productTemplateIds)
                 ->equals('active_status', 'Active');
 
             $productTemplateNamesResult = $productTemplateNamesQuery->execute();
 
-            $returnList = array();
+            $returnList = [];
 
-            $count = count($returnMostRecentRecords);
+            $count = safeCount($returnMostRecentRecords);
             $len = $count > 10 ? 10 : $count;
             for ($recentRecordCount = 0; $recentRecordCount < $len; $recentRecordCount++) {
                 foreach ($productTemplateNamesResult as $pt) {
                     if ($returnMostRecentRecords[$recentRecordCount]['product_template_id'] === $pt['id']) {
-                        $returnList[]= $pt;
+                        $returnList[] = $pt;
                         break;
                     }
                 }
             }
 
-            return array(
+            return [
                 'next_offset' => -1,
-                'records' =>$returnList,
-            );
+                'records' => $returnList,
+            ];
         } catch (SugarQueryException $e) {
             // Swallow the exception.
             $GLOBALS['log']->warn(__METHOD__ . ': ' . $e->getMessage());

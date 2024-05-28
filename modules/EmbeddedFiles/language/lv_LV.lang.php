@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Iegultie faili',
     'LBL_MODULE_NAME_SINGULAR' => 'Iegultais fails',
     'LBL_MODULE_TITLE' => 'Iegultais fails',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => 'Faila nosaukums',
     'LBL_FILENAME' => 'Faila nosaukums',
     'LBL_UPLOAD_ONLY_IMAGE' => 'Atlasītajam failam jābūt attēlam.',
-);
+];

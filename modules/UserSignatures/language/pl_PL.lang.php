@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Ten podpis wymaga podania nazwy.',
     'LBL_DEFAULT_SIGNATURE' => 'Domyślne',
     'LBL_MODULE_NAME' => 'Sygnatury wiadomości e-mail',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'Użyć podpisu?',
     'LBL_SIGNATURE_PREPEND' => 'Podpis nad oryginalną wiadomością?',
     'LBL_SIGNATURES' => 'Podpisy',
-);
+];

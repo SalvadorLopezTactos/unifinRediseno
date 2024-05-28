@@ -17,7 +17,7 @@ namespace Sugarcrm\Sugarcrm\AccessControl;
  *
  * @package Sugarcrm\Sugarcrm\AccessControl
  */
-Interface SugarVoterInterface
+interface SugarVoterInterface
 {
     /**
      *
@@ -26,5 +26,5 @@ Interface SugarVoterInterface
      * @param null|string $value
      * @return bool
      */
-    public function vote(string $key, string $subject, ?string $value = null) : bool;
+    public function vote(string $key, string $subject, ?string $value = null): bool;
 }

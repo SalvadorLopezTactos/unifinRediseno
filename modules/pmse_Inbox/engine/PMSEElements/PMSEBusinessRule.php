@@ -52,17 +52,17 @@ class PMSEBusinessRule extends PMSEScriptTask
      * @param type $externalAction
      * @return type
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         switch ($externalAction) {
             case 'RESUME_EXECUTION':
                 $flowAction = 'UPDATE';
                 break;
-            default :
+            default:
                 $flowAction = 'CREATE';
                 break;
         }
-        
+
         $logBR = '';
         $bpmnElement = $this->retrieveDefinitionData($flowData['bpmn_id']);
 
@@ -84,16 +84,13 @@ class PMSEBusinessRule extends PMSEScriptTask
         $row = $this->dbHandler->fetchByAssoc($result);
 
         if (!is_array($row)) {
-            $logBR .= "Error, Business Rule not defined!";
+            $logBR .= 'Error, Business Rule not defined!';
             $rst_name = '';
         } else {
             $rst_name = $row['name'];
         }
 
         if (is_array($row) && $rst_name != '' && !empty($sugarModule) && !empty($sugarRecord)) {
-            $encodedRstDefinition = $row['rst_definition'];
-            $rst_definition = base64_decode($encodedRstDefinition);
-            $rst_definition = htmlspecialchars_decode($rst_definition, ENT_QUOTES);
             $logBR .= "executing $rst_name \n";
             $bean = $this->caseFlowHandler->retrieveBean($sugarModule, $sugarRecord);
             PMSEEngineUtils::setRegistry($bean);
@@ -101,7 +98,7 @@ class PMSEBusinessRule extends PMSEScriptTask
             //go thru fetched_row to obtain the fields array, and then use the
             //bean property for each field.
             $fields = $bean->field_defs;
-            $appData = array();
+            $appData = [];
             foreach ($fields as $field => $value) {
                 if (isset($bean->{$field}) && !is_object($bean->{$field})) {
                     $appData[$field] = $bean->{$field};
@@ -110,7 +107,7 @@ class PMSEBusinessRule extends PMSEScriptTask
                 }
             }
 
-            $global = array();
+            $global = [];
             if (isset($bean->name)) {
                 $logBR .= "Bean: $sugarModule::$sugarRecord {$bean->name}\n";
             } else {
@@ -131,7 +128,7 @@ class PMSEBusinessRule extends PMSEScriptTask
 
             //if data was changed inside the BR, we need to update the Bean
             $historyData = $this->retrieveHistoryData($sugarModule);
-            if (is_array($newAppData) && count($newAppData) > 0) {
+            if (is_array($newAppData) && safeCount($newAppData) > 0) {
                 foreach ($newAppData as $key => $value) {
                     // if the $key attribute doesn't exists it's not saved.
                     // so it's not necessarily validate the attribute existence.
@@ -145,14 +142,14 @@ class PMSEBusinessRule extends PMSEScriptTask
             }
 
             //saving the return value in bpm_form_action table
-            $params = array();
+            $params = [];
             $params['cas_id'] = $flowData['cas_id'];
             $params['cas_index'] = $flowData['cas_index'];
             $params['act_id'] = $bpmnElement['id'];
             $params['pro_id'] = $processDefinitionBean->pro_id;
             $params['user_id'] = $this->getCurrentUser()->id;
             // TODO: find a better fix since probably a ; symbol could be part of a business rules evaluation response
-            $params['frm_action'] = str_replace(";", "", $returnBR);
+            $params['frm_action'] = str_replace(';', '', $returnBR);
             $params['frm_comment'] = $logBR;
             $params['log_data'] = $historyData->getLog();
             $this->caseFlowHandler->saveFormAction($params);
@@ -162,5 +159,4 @@ class PMSEBusinessRule extends PMSEScriptTask
         }
         return $this->prepareResponse($flowData, 'ROUTE', $flowAction);
     }
-
 }

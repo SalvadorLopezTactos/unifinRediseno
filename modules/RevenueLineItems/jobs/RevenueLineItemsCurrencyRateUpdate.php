@@ -54,9 +54,9 @@ class RevenueLineItemsCurrencyRateUpdate extends CurrencyRateUpdateAbstract
      * To custom processing, do here and return true.
      *
      * @access public
-     * @param  string $table
-     * @param  string $column
-     * @param  string $currencyId
+     * @param string $table
+     * @param string $column
+     * @param string $currencyId
      * @return boolean true if custom processing was done
      * @throws DBALException
      */
@@ -93,10 +93,10 @@ SQL;
      * To custom processing, do here and return true.
      *
      * @access public
-     * @param  string $tableName
-     * @param  string $usDollarColumn
-     * @param  string $amountColumn
-     * @param  string $currencyId
+     * @param string $tableName
+     * @param string $usDollarColumn
+     * @param string $amountColumn
+     * @param string $currencyId
      * @return boolean true if custom processing was done
      * @throws DBALException
      */
@@ -168,7 +168,7 @@ SQL;
                 ];
             }
 
-            if (count($queryParams) < self::CHUNK_SIZE) {
+            if (safeCount($queryParams) < self::CHUNK_SIZE) {
                 $sql = <<<SQL
 UPDATE opportunities
 SET amount = ? * base_rate,
@@ -192,8 +192,8 @@ SQL;
                 global $timedate, $current_user;
                 foreach ($chunks as $chunk) {
                     $job = BeanFactory::newBean('SchedulersJobs');
-                    $job->name = "SugarJobOpportunitiesCurrencyRateBatchUpdate: " . $timedate->getNow()->asDb();
-                    $job->target = "class::SugarJobOpportunitiesCurrencyRateBatchUpdate";
+                    $job->name = 'SugarJobOpportunitiesCurrencyRateBatchUpdate: ' . $timedate->getNow()->asDb();
+                    $job->target = 'class::SugarJobOpportunitiesCurrencyRateBatchUpdate';
                     $job->data = json_encode($chunk);
                     $job->retry_count = 0;
                     $job->assigned_user_id = $current_user->id;
@@ -222,6 +222,7 @@ SQL;
         }
         return $rli->getClosedStages();
     }
+
 
     /**
      * Returns the Opportunities module configuration

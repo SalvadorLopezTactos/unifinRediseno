@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Actiu',
     'LBL_ASSIGNEE_RULE' => 'Regla d&#39;assignat',
     'LBL_TARGET_ASSIGNEE' => 'Assignat objectiu',
+    'LBL_STAGE_NUMBERS' => 'Numeració de fases',
     'LBL_EXPORT_BUTTON_LABEL' => 'Exporta',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Importa',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Creeu/actualitzeu automàticament un registre de plantilla de Smart Guide nou important un fitxer *.json del vostre sistema de fitxers.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Si es marca, si Assignat objectiu = Cessionari principal, quan es canvia l&#39;usuari a "Assignat a" en un principal, els usuaris "Assignats a" també canviaran automàticament a les Smart Guides, a les fases i a les activitats. Tingueu en compte que la configuració del Assignat Objectiu a les plantilles d&#39;activitat preval sobre la plantilla de Smart Guide',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Quan s&#39;ha d&#39;assignar un usuari a les activitats',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'A qui s&#39;han d&#39;assignar les activitats',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Aquest commutador us permet mostrar o amagar la numeració automàtica de fases.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Plantilla de Smart Guide/Fase/Activitat',
 ];

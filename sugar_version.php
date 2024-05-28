@@ -1,5 +1,8 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+
+if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,9 +15,9 @@
  */
 
 
-$sugar_version      = '13.0.3';
-$sugar_db_version   = '13.0.3';
-$sugar_flavor       = 'ENT';
-$sugar_build        = '294';
-$sugar_timestamp    = '2024-02-23 2:21pm';
-$sugar_mar_version  = 'Q2 2023';
+$sugar_version = '14.0.0';
+$sugar_db_version = '14.0.0';
+$sugar_flavor = 'ENT';
+$sugar_build = '233';
+$sugar_timestamp = '2024-03-27 10:18pm';
+$sugar_mar_version = 'Q2 2024';

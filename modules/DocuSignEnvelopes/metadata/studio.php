@@ -10,4 +10,4 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- $GLOBALS['studioDefs']['DocuSignEnvelopes'] = [];
+$GLOBALS['studioDefs']['DocuSignEnvelopes'] = [];

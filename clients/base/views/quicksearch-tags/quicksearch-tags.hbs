@@ -10,17 +10,17 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="quicksearch-tags dropdown-menu hide">
-    <span class="qs-tags-row qs-tag-icon px-2.5 py-2 pull-left"><i class="{{buildIcon 'sicon-tag'}}"></i></span>
+<div class="quicksearch-tags absolute bg-[--primary-content-background] border-0 box-border hidden h-9 items-center mb-0.5 px-0.5 rounded-md rounded-b-none shadow-xl top-full w-auto">
+    <div class="qs-tags-row qs-tag-icon border-r border-[--border-color] inline-block px-2.5 py-2 pull-left relative"><i class="{{buildIcon 'sicon-tag'}}"></i></div>
     {{#if tagCollection}}
-    <div class="tags">
-        {{#each tagCollection}}
-            <span class="tag-wrapper">
-                <div class="tag-name qs-tag" rel="tooltip" data-placement="bottom" title="{{name}}">
-                    <a class="tag-name" href="javascript:void(0);" track="click:{{name}}">{{name}}</a>
-                </div>
-            </span>
-        {{/each}}
-    </div>
+        <ul class="tags flex">
+            {{#each tagCollection}}
+                <li class="tag-wrapper">
+                    <div class="tag-name qs-tag align-middle inline-block leading-3 overflow-hidden text-ellipsis text-xs whitespace-nowrap" rel="tooltip" data-placement="bottom" title="{{name}}">
+                        <a class="tag-name block border-t-0 overflow-hidden p-1" href="javascript:void(0);" track="click:{{name}}">{{name}}</a>
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
     {{/if}}
 </div>

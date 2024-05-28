@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'מרכז מידע',
     'LBL_MODULE_NAME_SINGULAR' => 'מאמר במרכז המידע',
     'LBL_MODULE_TITLE' => 'מאמר במרכז המידע',
@@ -17,4 +17,4 @@ $mod_strings = array(
     'LBL_KEYWORDS' => 'מילות מפתח:',
     'LBL_CONTENT' => 'תכולה',
     'LBL_ATTACHMENTS' => 'מסמכים מצורפים:',
-);
+];

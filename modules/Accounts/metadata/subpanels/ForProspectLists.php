@@ -10,46 +10,44 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$subpanel_layout = array(
-	'top_buttons' => array(
-		array('widget_class' => 'SubPanelTopCreateButton'),
-		array('widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'Accounts'),
-	),
+$subpanel_layout = [
+    'top_buttons' => [
+        ['widget_class' => 'SubPanelTopCreateButton'],
+        ['widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'Accounts'],
+    ],
 
-	'where' => '',
-	
+    'where' => '',
 
-	'list_fields' => array(
-		'name' => array(
- 		 	'vname' => 'LBL_LIST_NAME',
-			'widget_class' => 'SubPanelDetailViewLink',
-			'width' => '25%',
-		),
-		'phone_office' => array(
- 		 	'vname' => 'LBL_LIST_PHONE',
-			'width' => '20%',
-		),		
-		'email' => array(
- 		 	'vname' => 'LBL_LIST_EMAIL',
+
+    'list_fields' => [
+        'name' => [
+            'vname' => 'LBL_LIST_NAME',
+            'widget_class' => 'SubPanelDetailViewLink',
+            'width' => '25%',
+        ],
+        'phone_office' => [
+            'vname' => 'LBL_LIST_PHONE',
+            'width' => '20%',
+        ],
+        'email' => [
+            'vname' => 'LBL_LIST_EMAIL',
             'widget_class' => 'SubPanelEmailLink',
-			'width' => '20%',
+            'width' => '20%',
             'sortable' => false,
-		),		
-		'assigned_user_name' => array(
- 		 	'vname' => 'LBL_ASSIGNED_TO',
-			'width' => '20%',
-		),
-		'edit_button' => array(
-			'vname' => 'LBL_EDIT_BUTTON',
-			'widget_class' => 'SubPanelEditButton',
-			'width' => '4%',
-		),
-		'remove_button' => array(
-			'vname' => 'LBL_REMOVE',
-			'widget_class' => 'SubPanelRemoveButton',
-			'width' => '4%',
-		),
-	),
-);
-
-?>
+        ],
+        'assigned_user_name' => [
+            'vname' => 'LBL_ASSIGNED_TO',
+            'width' => '20%',
+        ],
+        'edit_button' => [
+            'vname' => 'LBL_EDIT_BUTTON',
+            'widget_class' => 'SubPanelEditButton',
+            'width' => '4%',
+        ],
+        'remove_button' => [
+            'vname' => 'LBL_REMOVE',
+            'widget_class' => 'SubPanelRemoveButton',
+            'width' => '4%',
+        ],
+    ],
+];

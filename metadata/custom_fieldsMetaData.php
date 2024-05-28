@@ -10,84 +10,84 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['custom_fields'] = array(
+$dictionary['custom_fields'] = [
     'table' => 'custom_fields',
-    'fields' => array(
-        'bean_id' => array(
+    'fields' => [
+        'bean_id' => [
             'name' => 'bean_id',
             'type' => 'id',
-        ),
-        'set_num' => array(
+        ],
+        'set_num' => [
             'name' => 'set_num',
             'type' => 'int',
             'len' => '11',
             'default' => '0',
-        ),
-        'field0' => array(
+        ],
+        'field0' => [
             'name' => 'field0',
             'type' => 'varchar',
             'len' => '255',
-        ),
-        'field1' => array(
+        ],
+        'field1' => [
             'name' => 'field1',
             'type' => 'varchar',
             'len' => '255',
-        ),
-        'field2' => array(
+        ],
+        'field2' => [
             'name' => 'field2',
             'type' => 'varchar',
             'len' => '255',
-        ),
-        'field3' => array(
+        ],
+        'field3' => [
             'name' => 'field3',
             'type' => 'varchar',
             'len' => '255',
-        ),
-        'field4' => array(
+        ],
+        'field4' => [
             'name' => 'field4',
             'type' => 'varchar',
             'len' => '255',
-        ),
-        'field5' => array(
+        ],
+        'field5' => [
             'name' => 'field5',
             'type' => 'varchar',
             'len' => '255',
-        ),
-        'field6' => array(
+        ],
+        'field6' => [
             'name' => 'field6',
             'type' => 'varchar',
             'len' => '255',
-        ),
-        'field7' => array(
+        ],
+        'field7' => [
             'name' => 'field7',
             'type' => 'varchar',
             'len' => '255',
-        ),
-        'field8' => array(
+        ],
+        'field8' => [
             'name' => 'field8',
             'type' => 'varchar',
             'len' => '255',
-        ),
-        'field9' => array(
+        ],
+        'field9' => [
             'name' => 'field9',
             'type' => 'varchar',
             'len' => '255',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'idx_beanid_set_num',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'bean_id',
                 'set_num',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

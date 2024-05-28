@@ -11,18 +11,18 @@
  */
 
 
-$mod_strings = array (
-    'LBL_OAUTH_REQUEST' => "Pyydä tunnistetta",
-    'LBL_OAUTH_AUTHORIZE' => "Valtuuta tunniste",
-	'LBL_OAUTH_CONSUMERREQ' => "Valtuuta kuluttajan <b>%s</b> tunniste?",
-    'LBL_OAUTH_ROLE' => "Tunnisteen rooli",
-	'LBL_OAUTH_VALIDATION' => "Varmistuskoodi",
-  	'LBL_ASSIGNED_TO_NAME' => 'Vastuuhenkilö',
-  	'LBL_ID' => 'ID',
+$mod_strings = [
+    'LBL_OAUTH_REQUEST' => 'Pyydä tunnistetta',
+    'LBL_OAUTH_AUTHORIZE' => 'Valtuuta tunniste',
+    'LBL_OAUTH_CONSUMERREQ' => 'Valtuuta kuluttajan <b>%s</b> tunniste?',
+    'LBL_OAUTH_ROLE' => 'Tunnisteen rooli',
+    'LBL_OAUTH_VALIDATION' => 'Varmistuskoodi',
+    'LBL_ASSIGNED_TO_NAME' => 'Vastuuhenkilö',
+    'LBL_ID' => 'ID',
     'LBL_STATUS' => 'Tila',
     'LBL_TS' => 'Aikaleima',
     'LBL_LIST_DELETE' => 'Poista tunniste',
     'LBL_CONSUMER' => 'Kuluttajan nimi',
     'LBL_OAUTH_DISABLED' => 'OAuth -tuki ei ole käytössä. PHP oauth-lisäosa saattaa puuttua. Ota yhteyttä järjestelmänvalvojaan.',
     'LBL_CONTACTS' => 'Kontaktin nimi',
-);
+];

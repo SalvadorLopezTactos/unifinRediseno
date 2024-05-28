@@ -12,8 +12,8 @@
 --}}
 <tr name="{{module}}_{{model.id}}" class="single">
     {{#each model}}
-        <td class="wrap-report-text overflow-hidden {{#if align}}{{align}}{{/if}}{{#if ../view.isFirstColumnFreezed}}{{#if @first}} sticky-column stick-first no-border{{#eq ../../../view.leftColumns.length 0}} no-left-column{{/eq}}{{/if}}{{/if}}" data-type="{{type}}">
-            <div class="ellipsis_inline" data-placement="bottom" data-html="true" data-original-title="{{this}}">
+        <td class="wrap-report-text bg-[--primary-content-background] overflow-hidden {{#if align}}{{align}}{{/if}}{{#if ../view.isFirstColumnFreezed}}{{#if @first}} sticky {{#eq ../../../view.leftColumns.length 0}} left-0{{/eq}}{{/if}}{{/if}}" data-type="{{type}}">
+            <div class="ellipsis_inline" data-bs-placement="bottom" data-html="true" data-original-title="{{this}}">
                 {{#sanitize}}
                     {{{this}}}
                 {{/sanitize}}
@@ -21,6 +21,6 @@
         </td>
     {{/each}}
     {{#each view.rightColumns}}
-            <td class="sticky-column stick-right"></td>
+            <td class="bg-[--primary-content-background] right-0 sticky z-10 stick-right"></td>
     {{/each}}
 </tr>

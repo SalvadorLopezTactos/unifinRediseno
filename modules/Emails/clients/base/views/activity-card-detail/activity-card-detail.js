@@ -29,6 +29,9 @@
             this.state = this.activity.get('state');
             const activityCard = this.getActivityCardLayout();
             this.setDateDetails(activityCard.getCreatedDate(this.state));
+            this.detailDateTimeTooltip = (this.state === this.STATE_ARCHIVED) ?
+                'LBL_DATE_SENT' :
+                'LBL_DATE_CREATED';
         }
     },
 })

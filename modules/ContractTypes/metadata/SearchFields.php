@@ -9,8 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$searchFields['ContractTypes'] = 
-    array (
-        'name' => array( 'query_type'=>'default'),
-    );
-?>
+$searchFields['ContractTypes'] =
+    [
+        'name' => ['query_type' => 'default'],
+    ];

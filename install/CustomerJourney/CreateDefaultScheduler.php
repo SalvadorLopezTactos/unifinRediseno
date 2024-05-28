@@ -54,7 +54,7 @@ function createSchedulerJob($args = [])
         return true;
     }
 
-    $GLOBALS['log']->fatal('Unable to create the scheduler '. $args['name']);
+    $GLOBALS['log']->fatal('Unable to create the scheduler ' . $args['name']);
     return false;
 }
 

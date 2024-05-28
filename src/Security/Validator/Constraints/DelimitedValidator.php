@@ -30,11 +30,11 @@ class DelimitedValidator extends AllValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof Delimited) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Delimited');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\Delimited');
         }
 
         if (null === $value || '' === $value) {
-            $constraint->setFormattedReturnValue(array());
+            $constraint->setFormattedReturnValue([]);
             return;
         }
 
@@ -42,7 +42,7 @@ class DelimitedValidator extends AllValidator
             throw new UnexpectedTypeException($value, 'string');
         }
 
-        $value = (string) $value;
+        $value = (string)$value;
 
         // parse string into array
         $array = explode($constraint->delimiter, $value);
@@ -51,7 +51,7 @@ class DelimitedValidator extends AllValidator
         $validator = $context->getValidator()->inContext($context);
 
         foreach ($array as $key => $element) {
-            $validator->atPath('['.$key.']')->validate($element, $constraint->constraints);
+            $validator->atPath('[' . $key . ']')->validate($element, $constraint->constraints);
         }
 
         $constraint->setFormattedReturnValue($array);

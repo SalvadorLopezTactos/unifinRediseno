@@ -50,7 +50,7 @@ class PMSETimerEvent extends PMSEIntermediateEvent
      * @param type $externalAction
      * @return type
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         if (empty($externalAction)) {
             $eventDefinition = $this->retrieveDefinitionData($flowData['bpmn_id']);
@@ -78,7 +78,7 @@ class PMSETimerEvent extends PMSEIntermediateEvent
                 } catch (PMSEExpressionEvaluationException $e) {
                     if ($e->getCode() === PMSEExpressionEvaluator::getExceptionCode('NO_BUSINESS_CENTER')) {
                         // throwing PMSEElementException to fail the process because we don't know how long to wait
-                        throw new PMSEElementException("TimerEvent: " . $e, $flowData, $this);
+                        throw new PMSEElementException('TimerEvent: ' . $e, $flowData, $this);
                     } else {
                         throw $e;
                     }
@@ -119,6 +119,4 @@ class PMSETimerEvent extends PMSEIntermediateEvent
         }
         return $result;
     }
-
-
 }

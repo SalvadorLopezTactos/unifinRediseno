@@ -50,7 +50,7 @@ class UserPasswordListener
         }
 
         $isExpired = false;
-        $expirationType = (int) $this->getConfigValue($user->getPasswordType(), 'expiration', 0);
+        $expirationType = (int)$this->getConfigValue($user->getPasswordType(), 'expiration', 0);
         switch ($expirationType) {
             case User::PASSWORD_EXPIRATION_TYPE_TIME:
                 $isExpired = $this->checkPasswordTime($user);

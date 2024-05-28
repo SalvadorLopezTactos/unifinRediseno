@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Γραμμής Στοιχείων που Αγοράστηκαν',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Γραμμής Στοιχείων που Αγοράστηκαν',
     'LBL_PARENT_PURCHASE' => 'Γονική Αγορά',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Χρονολόγιο γραμμής αγορασμένου στοιχείου',
 ];

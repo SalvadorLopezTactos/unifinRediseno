@@ -23,13 +23,13 @@ $_REQUEST['parent_folder'] = $_REQUEST['groupFoldersAdd'];
 $_REQUEST['group_id'] = $_REQUEST['groupFoldersUser'];
 $_REQUEST['team_id'] = $_REQUEST['primaryTeamId'];
 $teamSet = BeanFactory::newBean('TeamSets');
-$teamIds = explode(",", $_REQUEST['teamIds']);
+$teamIds = explode(',', $_REQUEST['teamIds']);
 $team_set_id = $teamSet->addTeams($teamIds);
 $_REQUEST['team_set_id'] = $team_set_id;
 if (empty($_REQUEST['record'])) {
-	$folder->setFolder($_REQUEST);
+    $folder->setFolder($_REQUEST);
 } else {
-	$folder->updateFolder($_REQUEST);
+    $folder->updateFolder($_REQUEST);
 }
 $body1 = "
 	<script type='text/javascript'>
@@ -39,5 +39,4 @@ $body1 = "
 		} // fn
 		refreshOpener();
 	</script>";
-echo  $body1;
-?>
+echo $body1;

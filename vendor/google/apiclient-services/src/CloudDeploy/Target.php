@@ -31,6 +31,10 @@ class Target extends \Google\Collection
    */
   public $createTime;
   /**
+   * @var string[]
+   */
+  public $deployParameters;
+  /**
    * @var string
    */
   public $description;
@@ -46,6 +50,8 @@ class Target extends \Google\Collection
    * @var string[]
    */
   public $labels;
+  protected $multiTargetType = MultiTarget::class;
+  protected $multiTargetDataType = '';
   /**
    * @var string
    */
@@ -110,6 +116,20 @@ class Target extends \Google\Collection
   public function getCreateTime()
   {
     return $this->createTime;
+  }
+  /**
+   * @param string[]
+   */
+  public function setDeployParameters($deployParameters)
+  {
+    $this->deployParameters = $deployParameters;
+  }
+  /**
+   * @return string[]
+   */
+  public function getDeployParameters()
+  {
+    return $this->deployParameters;
   }
   /**
    * @param string
@@ -180,6 +200,20 @@ class Target extends \Google\Collection
   public function getLabels()
   {
     return $this->labels;
+  }
+  /**
+   * @param MultiTarget
+   */
+  public function setMultiTarget(MultiTarget $multiTarget)
+  {
+    $this->multiTarget = $multiTarget;
+  }
+  /**
+   * @return MultiTarget
+   */
+  public function getMultiTarget()
+  {
+    return $this->multiTarget;
   }
   /**
    * @param string

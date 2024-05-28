@@ -60,19 +60,19 @@ $collect = function (?string $statement) use (&$collectors): void {
 
 $execute = $_REQUEST['execute'] ?? false;
 if (isset($_POST['raction'])) {
-    if (strtolower($_POST['raction']) === "execute") {
+    if (strtolower($_POST['raction']) === 'execute') {
         $sql = str_replace(
-            array(
+            [
                 "\n",
                 '&#039;',
-            ),
-            array(
+            ],
+            [
                 '',
                 "'",
-            ),
+            ],
             preg_replace('#(/\*.+?\*/\n*)#', '', $sessionStorage['repair_sql'])
         );
-        foreach (explode(";", $sql) as $stmt) {
+        foreach (explode(';', $sql) as $stmt) {
             $stmt = trim($stmt);
 
             if (!empty($stmt)) {
@@ -85,7 +85,7 @@ if (isset($_POST['raction'])) {
 } else {
     if (empty($_REQUEST['repair_silent'])) {
         if (empty($hideModuleMenu)) {
-            echo getClassicModuleTitle($mod_strings['LBL_REPAIR_DATABASE'], array($mod_strings['LBL_REPAIR_DATABASE']), true);
+            echo getClassicModuleTitle($mod_strings['LBL_REPAIR_DATABASE'], [$mod_strings['LBL_REPAIR_DATABASE']], true);
         }
         echo <<<HTML
 <h1 id="rdloading">
@@ -119,7 +119,7 @@ HTML;
                     // repair table indices only in case if the table previously existed, otherwise the table
                     // has already been created with indices despite skip_index_rebuild
                     if ($tableExists) {
-                        $compareIndices = $indices[$tableName] ?? array();
+                        $compareIndices = $indices[$tableName] ?? [];
                         $statement = $db->alterTableIndices(
                             $tableName,
                             $focus->getFieldDefinitions(),
@@ -168,7 +168,7 @@ HTML;
         $fielddefs = $meta['fields'];
         $definedIndices = $meta['indices'] ?? [];
         $deployedIndices = $indices[$tableName] ?? [];
-        $engine = $meta['engine'] ??  null;
+        $engine = $meta['engine'] ?? null;
         $tableExists = $db->tableExists($tableName);
         $statement = $db->repairTableParams($tableName, $fielddefs, $definedIndices, $execute, $engine);
         $collect($statement);
@@ -197,10 +197,10 @@ HTML;
  HTML;
 
         if (isset($sql) && !empty($sql)) {
-            $qry_str = "";
+            $qry_str = '';
             foreach (explode("\n", $sql) as $line) {
-                if (!empty($line) && substr($line, -2) != "*/") {
-                    $line .= ";";
+                if (!empty($line) && substr($line, -2) != '*/') {
+                    $line .= ';';
                 }
 
                 $qry_str .= $line . "\n";

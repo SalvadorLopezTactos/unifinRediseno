@@ -28,15 +28,15 @@ class IdpUsernamePasswordToken extends UsernamePasswordToken
     /**
      * Constructor.
      *
-     * @param string                   $tenant      Tenant SRN
-     * @param string|object            $user        The username (like a nickname, email address, etc.), or a UserInterface instance or an object implementing a __toString method
-     * @param string                   $credentials This usually is the password of the user
-     * @param string                   $providerKey The provider key
-     * @param RoleInterface[]|string[] $roles       An array of roles
+     * @param string $tenant Tenant SRN
+     * @param string|object $user The username (like a nickname, email address, etc.), or a UserInterface instance or an object implementing a __toString method
+     * @param string $credentials This usually is the password of the user
+     * @param string $providerKey The provider key
+     * @param RoleInterface[]|string[] $roles An array of roles
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($tenant, $user, $credentials, $providerKey, array $roles = array())
+    public function __construct($tenant, $user, $credentials, $providerKey, array $roles = [])
     {
         if (empty($tenant)) {
             throw new \InvalidArgumentException('Tenant must not be empty.');

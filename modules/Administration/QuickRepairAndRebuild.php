@@ -12,10 +12,10 @@
 
 //Used in rebuildExtensions
 
-use Configurator;
-use SugarConfig;
 use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
+use Sugarcrm\Sugarcrm\Cache\Middleware\MultiTenant;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\Session\SessionStorage;
 use Sugarcrm\Sugarcrm\SystemProcessLock\SystemProcessLock;
 
@@ -29,14 +29,14 @@ SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
 
 //clear out the api metadata cache
 
-require_once "include/utils.php";
+require_once 'include/utils.php';
 
 /**
  * Class for handling repairing of the sugar installation and rebuilding of caches
  */
 class RepairAndClear
 {
-    public $module_list = array();
+    public $module_list = [];
     public $show_output;
     protected $actions;
     public $execute;
@@ -49,7 +49,7 @@ class RepairAndClear
      *
      * @var array
      */
-    protected $called = array();
+    protected $called = [];
 
     /**
      * @var callable
@@ -79,7 +79,7 @@ class RepairAndClear
      *
      * @param callable $statementObserver
      */
-    public function setStatementObserver(callable $statementObserver) : void
+    public function setStatementObserver(callable $statementObserver): void
     {
         $this->statementObserver = $statementObserver;
     }
@@ -102,6 +102,7 @@ class RepairAndClear
         $metadata_sections = false,
         array $skipExtensionsSections = []
     ) {
+
         $systemProcessLock = new SystemProcessLock(__METHOD__);
 
         $checkCondition = function () {
@@ -118,7 +119,7 @@ class RepairAndClear
             $skipExtensionsSections
         ) {
             // if the lock was acquired immediately or if the current user is admin
-            if ($attempt ==1
+            if ($attempt == 1
                 || $GLOBALS['current_user']->isAdmin() || AccessControlManager::instance()->getAdminWork()) {
                 $this->repairAndClearAllUnsafe(
                     $selected_actions,
@@ -158,21 +159,22 @@ class RepairAndClear
         $metadata_sections = false,
         array $skipExtensionsSections = []
     ): void {
+
         // allow admin to access everything,
         // don't remove $adminWork until you don’t need the privilege anymore
         $adminWork = new AdminWork();
         $adminWork->startAdminWork();
 
         global $mod_strings;
-        $this->module_list= $modules;
+        $this->module_list = $modules;
         $this->show_output = $show_output;
         // Add repairDatabase to the actions stack
-        $actions = array_merge($selected_actions, array('repairDatabase'));
+        $actions = array_merge($selected_actions, ['repairDatabase']);
 
         // Unique the action stack to prevent duplicate processing
         $this->actions = array_unique($actions);
 
-        $this->execute=$autoexecute;
+        $this->execute = $autoexecute;
 
         // Clear vardefs and language cache always. Since this is called here it
         //  should not be in the actions
@@ -188,97 +190,99 @@ class RepairAndClear
         // process to carry itself out as needed without firing off continual
         // calls to the metadata manager.
         MetaDataManager::enableCacheRefreshQueue();
-        foreach ($this->actions as $current_action)
-        switch($current_action)
-        {
-            case 'repairDatabase':
-                if(in_array($mod_strings['LBL_ALL_MODULES'], $this->module_list)) {
+        foreach ($this->actions as $current_action) {
+            switch ($current_action) {
+                case 'repairDatabase':
+                    if (safeInArray($mod_strings['LBL_ALL_MODULES'], $this->module_list)) {
+                        $this->repairDatabase();
+                    } else {
+                        $this->repairDatabaseSelectModules();
+                    }
+                    break;
+                case 'rebuildExtensions':
+                    if (safeInArray($mod_strings['LBL_ALL_MODULES'], $this->module_list)) {
+                        $this->rebuildExtensions([], $skipExtensionsSections);
+                        // Mark this as called so it doesn't get ran again
+                        $this->called[$current_action] = true;
+                    } else {
+                        $this->rebuildExtensions($this->module_list, $skipExtensionsSections);
+                    }
+                    break;
+                case 'clearTpls':
+                    $this->clearTpls();
+                    break;
+                case 'clearJsFiles':
+                    $this->clearJsFiles();
+                    break;
+                case 'clearDashlets':
+                    $this->clearDashlets();
+                    break;
+                case 'clearThemeCache':
+                    $this->clearThemeCache();
+                    break;
+                case 'clearJsLangFiles':
+                    $this->clearJsLangFiles();
+                    break;
+                case 'rebuildAuditTables':
+                    $this->rebuildAuditTables();
+                    break;
+                case 'clearSearchCache':
+                    $this->clearSearchCache();
+                    break;
+                case 'clearAdditionalCaches':
+                    $this->clearAdditionalCaches();
+                    break;
+                case 'repairMetadataAPICache':
+                    $this->repairMetadataAPICache();
+                    break;
+                case 'clearPDFFontCache':
+                    $this->clearPDFFontCache();
+                    break;
+                case 'resetForecasting':
+                    $this->resetForecasting();
+                    break;
+                case 'repairConfigs':
+                    $this->repairBaseConfig();
+                    $this->repairPortalConfig();
+                    // no break
+                case 'clearAll':
+                    $this->clearTpls();
+                    $this->clearJsFiles();
+                    $this->clearJsLangFiles();
+                    $this->clearDashlets();
+                    $this->clearSmarty();
+                    $this->clearThemeCache();
+                    $this->clearXMLfiles();
+                    $this->clearSearchCache();
+                    $this->clearExternalAPICache();
+                    $this->clearAdditionalCaches();
+                    $this->clearPDFFontCache();
+                    $this->rebuildExtensions();
+                    $this->rebuildFileMap();
+                    $this->rebuildAuditTables();
                     $this->repairDatabase();
-                } else {
-                    $this->repairDatabaseSelectModules();
-                }
-                break;
-            case 'rebuildExtensions':
-                if(in_array($mod_strings['LBL_ALL_MODULES'], $this->module_list)) {
-                    $this->rebuildExtensions([], $skipExtensionsSections);
-                    // Mark this as called so it doesn't get ran again
-                    $this->called[$current_action] = true;
-                } else {
-                    $this->rebuildExtensions($this->module_list, $skipExtensionsSections);
-                }
-                break;
-            case 'clearTpls':
-                $this->clearTpls();
-                break;
-            case 'clearJsFiles':
-                $this->clearJsFiles();
-                break;
-            case 'clearDashlets':
-                $this->clearDashlets();
-                break;
-            case 'clearThemeCache':
-                $this->clearThemeCache();
-                break;
-            case 'clearJsLangFiles':
-                $this->clearJsLangFiles();
-                break;
-            case 'rebuildAuditTables':
-                $this->rebuildAuditTables();
-                break;
-            case 'clearSearchCache':
-                $this->clearSearchCache();
-                break;
-            case 'clearAdditionalCaches':
-                $this->clearAdditionalCaches();
-                break;
-            case 'repairMetadataAPICache':
-                $this->repairMetadataAPICache();
-                break;
-            case 'clearPDFFontCache':
-                $this->clearPDFFontCache();
-                break;
-            case 'resetForecasting':
-                $this->resetForecasting();
-                break;
-            case 'repairConfigs':
-                $this->repairBaseConfig();
-                $this->repairPortalConfig();
-            case 'clearAll':
-                $this->clearTpls();
-                $this->clearJsFiles();
-                $this->clearJsLangFiles();
-                $this->clearDashlets();
-                $this->clearSmarty();
-                $this->clearThemeCache();
-                $this->clearXMLfiles();
-                $this->clearSearchCache();
-                $this->clearExternalAPICache();
-                $this->clearAdditionalCaches();
-                $this->clearPDFFontCache();
-                $this->rebuildExtensions();
-                $this->rebuildFileMap();
-                $this->rebuildAuditTables();
-                $this->repairDatabase();
-                $this->repairBaseConfig();
-                $this->repairPortalConfig();
-                $this->repairMetadataAPICache($metadata_sections);
-                $this->rebuildJSCacheFiles();
-                break;
+                    $this->repairBaseConfig();
+                    $this->repairPortalConfig();
+                    $this->repairMetadataAPICache($metadata_sections);
+                    $this->rebuildJSCacheFiles();
+                    $this->clearMultiTenantCache();
+                    break;
+            }
         }
 
         // Reset this so that things work properly after this is over
-        $this->called = array();
+        $this->called = [];
 
         // Run the metadata cache refresh queue. This will turn queueing off
         // after it is run
         MetaDataManager::runCacheRefreshQueue();
     }
 
-	/////////////OLD
+    /////////////OLD
 
 
-	public function repairDatabase()
-	{
+    public function repairDatabase()
+    {
         // allow admin to access everything,
         // don't remove $adminWork until you don’t need the privilege anymore
         $adminWork = new AdminWork();
@@ -292,15 +296,16 @@ class RepairAndClear
 
         $this->called['repairDatabase'] = true;
 
-		global $dictionary, $mod_strings;
-		if(false == $this->show_output)
-			$_REQUEST['repair_silent']='1';
-		$_REQUEST['execute']=$this->execute;
+        global $dictionary, $mod_strings;
+        if (false == $this->show_output) {
+            $_REQUEST['repair_silent'] = '1';
+        }
+        $_REQUEST['execute'] = $this->execute;
         $GLOBALS['reload_vardefs'] = true;
         $hideModuleMenu = true;
 
         require 'modules/Administration/repairDatabase.php';
-	}
+    }
 
     /**
      * Rebuilds the base Sidecar configuration file.
@@ -316,6 +321,7 @@ class RepairAndClear
         $moduleInstallerClass::handleBaseConfig();
     }
 
+
     /**
      * Rebuild the portal javascript config file.
      */
@@ -330,104 +336,103 @@ class RepairAndClear
         $moduleInstallerClass::handlePortalConfig();
     }
 
-	public function repairDatabaseSelectModules()
-	{
+
+    public function repairDatabaseSelectModules()
+    {
         // allow admin to access everything,
         // don't remove $adminWork until you don’t need the privilege anymore
         $adminWork = new AdminWork();
         $adminWork->startAdminWork();
 
-		global $current_user, $mod_strings, $dictionary;
-		set_time_limit(3600);
+        global $current_user, $mod_strings, $dictionary;
+        set_time_limit(3600);
 
-		include('include/modules.php'); //bug 15661
-		$db = DBManagerFactory::getInstance();
+        include 'include/modules.php'; //bug 15661
+        $db = DBManagerFactory::getInstance();
 
-		if (is_admin($current_user) || is_admin_for_any_module($current_user))
-		{
-			$export = false;
-    		if($this->show_output) echo getClassicModuleTitle($mod_strings['LBL_REPAIR_DATABASE'], array($mod_strings['LBL_REPAIR_DATABASE']), false);
-            if($this->show_output) {
+        if (is_admin($current_user) || is_admin_for_any_module($current_user)) {
+            $export = false;
+            if ($this->show_output) {
+                echo getClassicModuleTitle($mod_strings['LBL_REPAIR_DATABASE'], [$mod_strings['LBL_REPAIR_DATABASE']], false);
+            }
+            if ($this->show_output) {
                 echo "<h1 id=\"rdloading\">{$mod_strings['LBL_REPAIR_DATABASE_PROCESSING']}</h1>";
                 ob_flush();
             }
-	    	$sql = '';
-			if($this->module_list && !in_array($mod_strings['LBL_ALL_MODULES'],$this->module_list))
-			{
-				$repair_related_modules = array_keys($dictionary);
-				//repair DB
-				$dm = inDeveloperMode();
-				$GLOBALS['sugar_config']['developerMode'] = true;
-				$GLOBALS['reload_vardefs'] = true;
-				foreach($this->module_list as $bean_name)
-				{
-				    $focus = BeanFactory::newBean($bean_name);
-					if (!empty($focus))
-					{
-						#30273
-						if(empty($focus->disable_vardefs)) {
+            $sql = '';
+            if ($this->module_list && !safeInArray($mod_strings['LBL_ALL_MODULES'], $this->module_list)) {
+                $repair_related_modules = array_keys($dictionary);
+                //repair DB
+                $dm = inDeveloperMode();
+                $GLOBALS['sugar_config']['developerMode'] = true;
+                $GLOBALS['reload_vardefs'] = true;
+                foreach ($this->module_list as $bean_name) {
+                    $focus = BeanFactory::newBean($bean_name);
+                    if (!empty($focus)) {
+                        #30273
+                        if (empty($focus->disable_vardefs)) {
                             if (empty($dictionary[$focus->object_name])) {
                                 VardefManager::loadVardef($bean_name, $focus->object_name);
                             }
-							if($this->show_output)
-								print_r("<p>" .$mod_strings['LBL_REPAIR_DB_FOR'].' '. $bean_name . "</p>");
-							$sql .= $db->repairTable($focus, $this->execute);
-						}
-					}
-				}
+                            if ($this->show_output) {
+                                print_r('<p>' . $mod_strings['LBL_REPAIR_DB_FOR'] . ' ' . $bean_name . '</p>');
+                            }
+                            $sql .= $db->repairTable($focus, $this->execute);
+                        }
+                    }
+                }
 
-				$GLOBALS['sugar_config']['developerMode'] = $dm;
+                $GLOBALS['sugar_config']['developerMode'] = $dm;
 
-		        if ($this->show_output) echo "<script type=\"text/javascript\">document.getElementById('rdloading').style.display = \"none\";</script>";
-	    		if (isset ($sql) && !empty ($sql))
-	    		{
-					$qry_str = "";
-					foreach (explode("\n", $sql) as $line) {
-						if (!empty ($line) && substr($line, -2) != "*/") {
-							$line .= ";";
-						}
+                if ($this->show_output) {
+                    echo "<script type=\"text/javascript\">document.getElementById('rdloading').style.display = \"none\";</script>";
+                }
+                if (isset($sql) && !empty($sql)) {
+                    $qry_str = '';
+                    foreach (explode("\n", $sql) as $line) {
+                        if (!empty($line) && substr($line, -2) != '*/') {
+                            $line .= ';';
+                        }
 
-						$qry_str .= $line . "\n";
-					}
-					if ($this->show_output){
-						echo "<h3>{$mod_strings['LBL_REPAIR_DATABASE_DIFFERENCES']}</h3>";
-						echo "<p>{$mod_strings['LBL_REPAIR_DATABASE_TEXT']}</p>";
+                        $qry_str .= $line . "\n";
+                    }
+                    if ($this->show_output) {
+                        echo "<h3>{$mod_strings['LBL_REPAIR_DATABASE_DIFFERENCES']}</h3>";
+                        echo "<p>{$mod_strings['LBL_REPAIR_DATABASE_TEXT']}</p>";
 
-						echo "<form method=\"post\" action=\"index.php?module=Administration&amp;action=repairDatabase\">";
-						echo "<textarea name=\"sql\" rows=\"24\" cols=\"150\" id=\"repairsql\">$qry_str</textarea>";
-						echo "<br /><input type=\"submit\" value=\"".$mod_strings['LBL_REPAIR_DATABASE_EXECUTE']."\" name=\"raction\" /> <input type=\"submit\" name=\"raction\" value=\"".$mod_strings['LBL_REPAIR_DATABASE_EXPORT']."\" />";
-					}
-				}
-				else
-					if ($this->show_output) echo "<h3>{$mod_strings['LBL_REPAIR_DATABASE_SYNCED']}</h3>";
-			}
-
-		}
-		else {
-			sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
-		}
-	}
+                        echo '<form method="post" action="index.php?module=Administration&amp;action=repairDatabase">';
+                        echo "<textarea name=\"sql\" rows=\"24\" cols=\"150\" id=\"repairsql\">$qry_str</textarea>";
+                        echo '<br /><input type="submit" value="' . $mod_strings['LBL_REPAIR_DATABASE_EXECUTE'] . '" name="raction" /> <input type="submit" name="raction" value="' . $mod_strings['LBL_REPAIR_DATABASE_EXPORT'] . '" />';
+                    }
+                } elseif ($this->show_output) {
+                    echo "<h3>{$mod_strings['LBL_REPAIR_DATABASE_SYNCED']}</h3>";
+                }
+            }
+        } else {
+            sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
+        }
+    }
 
     /**
      * @param array $objects
      * @param array $skipExtensionsSections
      */
-    public function rebuildExtensions(array $objects = [], array $skipExtensionsSections = []) : void
-	{
+    public function rebuildExtensions(array $objects = [], array $skipExtensionsSections = []): void
+    {
         // allow admin to access everything,
         // don't remove $adminWork until you don’t need the privilege anymore
         $adminWork = new AdminWork();
         $adminWork->startAdminWork();
 
-        $modules = array();
+        $modules = [];
         global $beanList;
         $modBeans = array_flip($beanList);
-        foreach($objects as $obj) {
+        foreach ($objects as $obj) {
             //We expect $objects to be a list of bean classes that we need to map back to modules
             //But also check if the list is actually modules
             if (isset($modBeans[$obj])) {
                 $modules[] = $modBeans[$obj];
-            } else if (isset($beanList[$obj])) {
+            } elseif (isset($beanList[$obj])) {
                 $modules[] = $obj;
             }
         }
@@ -436,22 +441,26 @@ class RepairAndClear
             return;
         }
 
-		global $mod_strings;
-		if($this->show_output) echo $mod_strings['LBL_QR_REBUILDEXT'];
+        global $mod_strings;
+        if ($this->show_output) {
+            echo $mod_strings['LBL_QR_REBUILDEXT'];
+        }
 
         $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
         $mi = new $moduleInstallerClass();
         foreach ($skipExtensionsSections as $skipExtensionsSection) {
             unset($mi->extensions[$skipExtensionsSection]);
         }
-		$mi->rebuild_all(!$this->show_output, $modules);
+        $mi->rebuild_all(!$this->show_output, $modules);
 
-		// Remove the "Rebuild Extensions" red text message on admin logins
+        // Remove the "Rebuild Extensions" red text message on admin logins
 
-        if($this->show_output) echo $mod_strings['LBL_REBUILD_REL_UPD_WARNING'];
-	}
+        if ($this->show_output) {
+            echo $mod_strings['LBL_REBUILD_REL_UPD_WARNING'];
+        }
+    }
 
-     /**
+    /**
      * rebuild mapping file
      */
     public function rebuildFileMap()
@@ -468,129 +477,149 @@ class RepairAndClear
         SugarAutoLoader::buildCache();
     }
 
-	//Cache Clear Methods
-	public function clearSmarty()
-	{
-		global $mod_strings;
-		if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_CLEARSMARTY']}</h3>";
-		$this->_clearCache(sugar_cached('smarty/templates_c'), '.tpl.php');
-	}
-	public function clearXMLfiles()
-	{
-		global $mod_strings;
-		if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_XMLFILES']}</h3>";
-		$this->_clearCache(sugar_cached("xml"), '.xml');
-	}
-	public function clearDashlets()
-	{
-		global $mod_strings;
-		if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_CLEARDASHLET']}</h3>";
-		$this->_clearCache(sugar_cached('dashlets'), '.php');
-	}
+    //Cache Clear Methods
+    public function clearSmarty()
+    {
+        global $mod_strings;
+        if ($this->show_output) {
+            echo "<h3>{$mod_strings['LBL_QR_CLEARSMARTY']}</h3>";
+        }
+        $this->_clearCache(sugar_cached('smarty/templates_c'), '.tpl.php');
+    }
+
+    public function clearXMLfiles()
+    {
+        global $mod_strings;
+        if ($this->show_output) {
+            echo "<h3>{$mod_strings['LBL_QR_XMLFILES']}</h3>";
+        }
+        $this->_clearCache(sugar_cached('xml'), '.xml');
+    }
+
+    public function clearDashlets()
+    {
+        global $mod_strings;
+        if ($this->show_output) {
+            echo "<h3>{$mod_strings['LBL_QR_CLEARDASHLET']}</h3>";
+        }
+        $this->_clearCache(sugar_cached('dashlets'), '.php');
+    }
+
     public function clearThemeCache()
     {
-		global $mod_strings;
-		if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_CLEARTHEMECACHE']}</h3>";
-		SugarThemeRegistry::clearAllCaches();
+        global $mod_strings;
+        if ($this->show_output) {
+            echo "<h3>{$mod_strings['LBL_QR_CLEARTHEMECACHE']}</h3>";
+        }
+        SugarThemeRegistry::clearAllCaches();
 
         //Clear Sidecar Themes CSS files
         $this->_clearCache(sugar_cached('themes/clients/'), '.css');
-	}
-	public function clearTpls()
-	{
-		global $mod_strings;
-		if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_CLEARTEMPLATE']}</h3>";
-		if(!in_array( translate('LBL_ALL_MODULES'),$this->module_list) && !empty($this->module_list))
-		{
+    }
+
+    public function clearTpls()
+    {
+        global $mod_strings;
+        if ($this->show_output) {
+            echo "<h3>{$mod_strings['LBL_QR_CLEARTEMPLATE']}</h3>";
+        }
+        if (!safeInArray(translate('LBL_ALL_MODULES'), $this->module_list) && !empty($this->module_list)) {
             foreach ($this->module_list as $module_name) {
                 $this->_clearCache(sugar_cached('modules/' . $module_name), '.tpl');
             }
-		}
-		else
-			$this->_clearCache(sugar_cached('modules/'), '.tpl');
-	}
-	public function clearVardefs()
-	{
-		global $mod_strings;
-		if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_CLEARVADEFS']}</h3>";
-		if(!empty($this->module_list) && is_array($this->module_list) && !in_array( translate('LBL_ALL_MODULES'),$this->module_list))
-		{
+        } else {
+            $this->_clearCache(sugar_cached('modules/'), '.tpl');
+        }
+    }
+
+    public function clearVardefs()
+    {
+        global $mod_strings;
+        if ($this->show_output) {
+            echo "<h3>{$mod_strings['LBL_QR_CLEARVADEFS']}</h3>";
+        }
+        if (!empty($this->module_list) && is_array($this->module_list) && !safeInArray(translate('LBL_ALL_MODULES'), $this->module_list)) {
             foreach ($this->module_list as $module_name) {
                 $this->_clearCache(sugar_cached('modules/' . $module_name), 'vardefs.php');
             }
-		}
-		else
-			$this->_clearCache(sugar_cached('modules/'), 'vardefs.php');
-	}
+        } else {
+            $this->_clearCache(sugar_cached('modules/'), 'vardefs.php');
+        }
+    }
 
-	public function clearJsFiles()
-	{
-		global $mod_strings;
-		if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_CLEARJS']}</h3>";
+    public function clearJsFiles()
+    {
+        global $mod_strings;
+        if ($this->show_output) {
+            echo "<h3>{$mod_strings['LBL_QR_CLEARJS']}</h3>";
+        }
 
-		if(!in_array( translate('LBL_ALL_MODULES'),$this->module_list) && !empty($this->module_list))
-		{
+        if (!safeInArray(translate('LBL_ALL_MODULES'), $this->module_list) && !empty($this->module_list)) {
             foreach ($this->module_list as $module_name) {
                 $this->_clearCache(sugar_cached('modules/' . $module_name), '.js');
             }
-		}
-		else {
+        } else {
             $this->_clearCache(sugar_cached('modules/'), '.js');
         }
         $this->_clearCache(sugar_cached('themes/'), '.js');
-	}
+    }
 
-	public function clearJsLangFiles()
-	{
-		global $mod_strings;
-		if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_CLEARJSLANG']}</h3>";
-		if(!in_array(translate('LBL_ALL_MODULES'),$this->module_list ) && !empty($this->module_list))
-		{
+    public function clearJsLangFiles()
+    {
+        global $mod_strings;
+        if ($this->show_output) {
+            echo "<h3>{$mod_strings['LBL_QR_CLEARJSLANG']}</h3>";
+        }
+        if (!safeInArray(translate('LBL_ALL_MODULES'), $this->module_list) && !empty($this->module_list)) {
             foreach ($this->module_list as $module_name) {
                 $this->_clearCache(sugar_cached('jsLanguage/' . $module_name), '.js');
             }
-		}
-		else
-			$this->_clearCache(sugar_cached('jsLanguage'), '.js');
-	}
-	/**
-	 * Remove the language cache files from cache/modules/<module>/language
-	 */
-	public function clearLanguageCache()
-	{
-		global $mod_strings;
+        } else {
+            $this->_clearCache(sugar_cached('jsLanguage'), '.js');
+        }
+    }
 
-		if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_CLEARLANG']}</h3>";
-		//clear cache using the list $module_list_from_cache
-		if ( !empty($this->module_list) && is_array($this->module_list) ) {
-            if( in_array(translate('LBL_ALL_MODULES'), $this->module_list))
-            {
+    /**
+     * Remove the language cache files from cache/modules/<module>/language
+     */
+    public function clearLanguageCache()
+    {
+        global $mod_strings;
+
+        if ($this->show_output) {
+            echo "<h3>{$mod_strings['LBL_QR_CLEARLANG']}</h3>";
+        }
+        //clear cache using the list $module_list_from_cache
+        if (!empty($this->module_list) && is_array($this->module_list)) {
+            if (safeInArray(translate('LBL_ALL_MODULES'), $this->module_list)) {
                 LanguageManager::clearLanguageCache();
-            }
-            else { //use the modules selected thrut the select list.
-                foreach($this->module_list as $module_name)
+            } else { //use the modules selected thrut the select list.
+                foreach ($this->module_list as $module_name) {
                     LanguageManager::clearLanguageCache($module_name);
+                }
             }
         }
         // Clear app* cache values too
-        if(!empty($GLOBALS['sugar_config']['languages'])) {
+        if (!empty($GLOBALS['sugar_config']['languages'])) {
             $languages = $GLOBALS['sugar_config']['languages'];
         } else {
-            $languages = array($GLOBALS['current_language'] => $GLOBALS['current_language']);
+            $languages = [$GLOBALS['current_language'] => $GLOBALS['current_language']];
         }
-        foreach(array_keys($languages) as $language) {
-        	sugar_cache_clear('app_strings.'.$language);
-        	sugar_cache_clear('app_list_strings.'.$language);
+        foreach (array_keys($languages) as $language) {
+            sugar_cache_clear('app_strings.' . $language);
+            sugar_cache_clear('app_list_strings.' . $language);
         }
+    }
 
-	}
-
-	/**
-	 * Remove the cached unified_search_modules.php file
-	 */
-    public function clearSearchCache() {
+    /**
+     * Remove the cached unified_search_modules.php file
+     */
+    public function clearSearchCache()
+    {
         global $mod_strings, $sugar_config;
-        if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_CLEARSEARCH']}</h3>";
+        if ($this->show_output) {
+            echo "<h3>{$mod_strings['LBL_QR_CLEARSEARCH']}</h3>";
+        }
         // clear sugar_cache backend for SugarSearchEngine
         SugarSearchEngineMetadataHelper::clearCache();
 
@@ -598,17 +627,23 @@ class RepairAndClear
         // clearCache otherwise
         UnifiedSearchAdvanced::unlinkUnifiedSearchModulesFile();
     }
+
     public function clearExternalAPICache()
-	{
+    {
         global $mod_strings, $sugar_config;
-        if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_CLEAR_EXT_API']}</h3>";
+        if ($this->show_output) {
+            echo "<h3>{$mod_strings['LBL_QR_CLEAR_EXT_API']}</h3>";
+        }
 
         ExternalAPIFactory::clearCache();
     }
+
     public function clearPDFFontCache()
-	{
+    {
         global $mod_strings, $sugar_config;
-        if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_CLEARPDFFONT']}</h3>";
+        if ($this->show_output) {
+            echo "<h3>{$mod_strings['LBL_QR_CLEARPDFFONT']}</h3>";
+        }
 
         $fontManager = new FontManager();
         $fontManager->clearCachedFile();
@@ -618,9 +653,12 @@ class RepairAndClear
      * Catch all function to clear out any misc. caches we may have
      */
 
-    public function clearAdditionalCaches() {
+    public function clearAdditionalCaches()
+    {
         global $mod_strings, $sugar_config;
-		if($this->show_output) echo "<h3>{$mod_strings['LBL_QR_CLEAR_ADD_CACHE']}</h3>";
+        if ($this->show_output) {
+            echo "<h3>{$mod_strings['LBL_QR_CLEAR_ADD_CACHE']}</h3>";
+        }
         // clear out the API Cache
 
         $sd = new ServiceDictionary();
@@ -640,7 +678,8 @@ class RepairAndClear
      *
      * Bug 55141 - Clear the metadata API cache
      */
-    public function clearMetadataAPICache() {
+    public function clearMetadataAPICache()
+    {
         // Bug 55141: Metadata Cache is a Smart cache so we can delete everything from the cache dir
         MetaDataManager::clearAPICache();
         if (empty($this->module_list)) {
@@ -656,14 +695,15 @@ class RepairAndClear
      * Cleans out current metadata cache and rebuilds it for
      * each platform and visibility
      */
-    public function repairMetadataAPICache($section = '') {
+    public function repairMetadataAPICache($section = '')
+    {
         // allow admin to access everything,
         // don't remove $adminWork until you don’t need the privilege anymore
         $adminWork = new AdminWork();
         $adminWork->startAdminWork();
 
         // Refresh metadata for selected modules only if there selected modules
-        if (is_array($this->module_list) && !empty($this->module_list) && !in_array(translate('LBL_ALL_MODULES'), $this->module_list)) {
+        if (is_array($this->module_list) && !empty($this->module_list) && !safeInArray(translate('LBL_ALL_MODULES'), $this->module_list)) {
             MetaDataFiles::clearModuleClientCache($this->module_list);
             MetaDataManager::refreshModulesCache($this->module_list);
         }
@@ -697,14 +737,14 @@ class RepairAndClear
             echo "<h3> {$mod_strings['LBL_QR_REBUILDAUDIT']}</h3>";
         }
 
-        if (!in_array(translate('LBL_ALL_MODULES'), $this->module_list) && !empty($this->module_list)) {
+        if (!safeInArray(translate('LBL_ALL_MODULES'), $this->module_list) && !empty($this->module_list)) {
             foreach ($this->module_list as $module_name) {
                 $bean = BeanFactory::newBean($module_name);
                 if (!empty($bean)) {
                     $this->rebuildAuditTablesHelper($bean);
                 }
             }
-        } elseif (in_array(translate('LBL_ALL_MODULES'), $this->module_list)) {
+        } elseif (safeInArray(translate('LBL_ALL_MODULES'), $this->module_list)) {
             foreach ($beanFiles as $bean => $file) {
                 $bean_instance = BeanFactory::newBeanByName($bean);
                 if (!empty($bean_instance)) {
@@ -730,7 +770,7 @@ class RepairAndClear
             $tableName = $focus->get_audit_table_name();
             if (!$focus->db->tableExists($tableName)) {
                 if ($this->show_output) {
-                    echo $mod_strings['LBL_QR_CREATING_TABLE'] . " " . $focus->get_audit_table_name() . ' ' .
+                    echo $mod_strings['LBL_QR_CREATING_TABLE'] . ' ' . $focus->get_audit_table_name() . ' ' .
                         $mod_strings['LBL_FOR'] . ' ' . $focus->object_name . '.<br/>';
                 }
                 $focus->create_audit_table();
@@ -756,15 +796,16 @@ class RepairAndClear
         }
     }
 
-	///////////////////////////////////////////////////////////////
-	////END REPAIR AUDIT TABLES
+    ///////////////////////////////////////////////////////////////
+    ////END REPAIR AUDIT TABLES
 
 
-	///////////////////////////////////////////////////////////////
-	//// Recursively unlink all files of the given $extension in the given $thedir.
-	//
-	private function _clearCache($thedir, $extension)
-	{
+    ///////////////////////////////////////////////////////////////
+    //// Recursively unlink all files of the given $extension in the given $thedir.
+    //
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    private function _clearCache($thedir, $extension)
+    {
         // allow admin to access everything,
         // don't remove $adminWork until you don’t need the privilege anymore
         $adminWork = new AdminWork();
@@ -776,23 +817,23 @@ class RepairAndClear
 
         if ($current = @opendir($thedir)) {
             while (false !== ($children = readdir($current))) {
-                if ($children != "." && $children != "..") {
-                    if (is_dir($thedir . "/" . $children)) {
-                        $this->_clearCache($thedir . "/" . $children, $extension);
-                    }
-                    elseif (is_file($thedir . "/" . $children) && (substr_count($children, $extension))) {
-                        unlink($thedir . "/" . $children);
+                if ($children != '.' && $children != '..') {
+                    if (is_dir($thedir . '/' . $children)) {
+                        $this->_clearCache($thedir . '/' . $children, $extension);
+                    } elseif (is_file($thedir . '/' . $children) && (substr_count($children, $extension))) {
+                        unlink($thedir . '/' . $children);
                     }
                 }
             }
         }
-	}
+    }
 
     /**
      * This is a private function to allow forecasts config settings to be reset
      *
      */
-    private function resetForecasting() {
+    private function resetForecasting()
+    {
         $db = DBManagerFactory::getInstance();
         $db->query("UPDATE config SET value = 0 WHERE name = 'is_setup'");
         $db->query("UPDATE config SET value = 0 WHERE name = 'has_commits'");
@@ -803,7 +844,7 @@ class RepairAndClear
      */
     public function rebuildJSCacheFiles()
     {
-        $jsFiles = array("sugar_grp1.js", "sugar_grp1_yui.js", "sugar_grp1_jquery.js");
+        $jsFiles = ['sugar_grp1.js', 'sugar_grp1_yui.js', 'sugar_grp1_jquery.js'];
         ensureJSCacheFilesExist($jsFiles);
         if (SugarConfig::getInstance()->get('update_js_custom_version_on_rebuild', true)) {
             $cfg = new Configurator();
@@ -811,6 +852,14 @@ class RepairAndClear
             $cfg->config[$jsCstmVersion] = (int)SugarConfig::getInstance()->get($jsCstmVersion, 1) + 1;
             $cfg->handleOverride();
             SugarConfig::getInstance()->clearCache($jsCstmVersion);
+        }
+    }
+
+    public function clearMultiTenantCache(): void
+    {
+        $multiTenantCache = Container::getInstance()->get(MultiTenant::class);
+        if ($multiTenantCache !== null) {
+            $multiTenantCache->clear();
         }
     }
 

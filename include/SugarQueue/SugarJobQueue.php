@@ -45,10 +45,10 @@ class SugarJobQueue
         $this->db = DBManagerFactory::getInstance();
         $job = BeanFactory::newBean('SchedulersJobs');
         $this->job_queue_table = $job->table_name;
-        if(!empty($GLOBALS['sugar_config']['jobs']['max_retries'])) {
+        if (!empty($GLOBALS['sugar_config']['jobs']['max_retries'])) {
             $this->jobTries = $GLOBALS['sugar_config']['jobs']['max_retries'];
         }
-        if(!empty($GLOBALS['sugar_config']['jobs']['timeout'])) {
+        if (!empty($GLOBALS['sugar_config']['jobs']['timeout'])) {
             $this->timeout = $GLOBALS['sugar_config']['jobs']['timeout'];
         }
     }
@@ -66,10 +66,10 @@ class SugarJobQueue
         $job->new_with_id = true;
         $job->status = SchedulersJob::JOB_STATUS_QUEUED;
         $job->resolution = SchedulersJob::JOB_PENDING;
-        if(empty($job->execute_time)) {
+        if (empty($job->execute_time)) {
             $job->execute_time = $GLOBALS['timedate']->nowDb();
         }
-        if(empty($job->assigned_user_id)) {
+        if (empty($job->assigned_user_id)) {
             $job->assigned_user_id = $GLOBALS['current_user']->id;
         }
         $job->save();
@@ -85,7 +85,7 @@ class SugarJobQueue
     protected function getJob($jobId)
     {
         $job = BeanFactory::getBean('SchedulersJobs', $jobId);
-        if(empty($job->id)) {
+        if (empty($job->id)) {
             $GLOBALS['log']->info("Job $jobId not found!");
             return null;
         }
@@ -102,7 +102,9 @@ class SugarJobQueue
     public function resolveJob($jobId, $resolution, $message = null)
     {
         $job = $this->getJob($jobId);
-        if(empty($job)) return false;
+        if (empty($job)) {
+            return false;
+        }
         return $job->resolveJob($resolution, $message);
     }
 
@@ -116,7 +118,9 @@ class SugarJobQueue
     public function postponeJob($jobId, $message = null, $delay = null)
     {
         $job = $this->getJob($jobId);
-        if(empty($job)) return false;
+        if (empty($job)) {
+            return false;
+        }
         return $job->postponeJob($message, $delay);
     }
 
@@ -139,9 +143,9 @@ class SugarJobQueue
         $ret = true;
         // bsitnikovski@sugarcrm.com bugfix #56144: Scheduler Bug
         $date = $this->db->convert($this->db->quoted($GLOBALS['timedate']->getNow()->modify("-{$this->timeout} seconds")->asDb()), 'datetime');
-        $res = $this->db->query("SELECT id FROM {$this->job_queue_table} WHERE status='".SchedulersJob::JOB_STATUS_RUNNING."' AND date_modified <= $date");
-        while($row = $this->db->fetchByAssoc($res)) {
-            $this->resolveJob($row["id"], SchedulersJob::JOB_FAILURE, translate('ERR_TIMEOUT', 'SchedulersJobs'));
+        $res = $this->db->query("SELECT id FROM {$this->job_queue_table} WHERE status='" . SchedulersJob::JOB_STATUS_RUNNING . "' AND date_modified <= $date");
+        while ($row = $this->db->fetchByAssoc($res)) {
+            $this->resolveJob($row['id'], SchedulersJob::JOB_FAILURE, translate('ERR_TIMEOUT', 'SchedulersJobs'));
             $ret = false;
         }
         // TODO: soft-delete old done jobs?
@@ -167,14 +171,14 @@ class SugarJobQueue
         $now = $this->db->now();
         $queued = SchedulersJob::JOB_STATUS_QUEUED;
         $try = $this->jobTries;
-        while($try--) {
+        while ($try--) {
             // TODO: tranaction start?
             $id = $this->db->getOne("SELECT id FROM {$this->job_queue_table} WHERE execute_time <= $now AND status = '$queued' AND deleted = 0 ORDER BY execute_time ASC");
-            if(empty($id)) {
+            if (empty($id)) {
                 return null;
             }
             $job = BeanFactory::getBean('SchedulersJobs', $id);
-            if(empty($job->id)) {
+            if (empty($job->id)) {
                 return null;
             }
             $job->status = SchedulersJob::JOB_STATUS_RUNNING;
@@ -183,7 +187,7 @@ class SugarJobQueue
             // using direct query here to be able to fetch affected count
             // if count is 0 this means somebody changed the job status and we have to try again
             $res = $this->db->query("UPDATE {$this->job_queue_table} SET status='{$job->status}', date_modified=$now, client='$client' WHERE id='{$job->id}' AND status='$queued'");
-            if($this->db->getAffectedRowCount($res) == 0) {
+            if ($this->db->getAffectedRowCount($res) == 0) {
                 // somebody stole our job, try again
                 continue;
             } else {

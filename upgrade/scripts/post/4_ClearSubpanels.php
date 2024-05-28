@@ -11,6 +11,7 @@
  */
 
 require_once 'ModuleInstall/ModuleInstaller.php';
+
 /**
  * Upgrade script to remove unexisting fields from subpanel definition.
  */
@@ -21,7 +22,7 @@ class SugarUpgradeClearSubpanels extends UpgradeScript
 
     public $type = self::UPGRADE_CUSTOM;
 
-    protected $updatedModules = array();
+    protected $updatedModules = [];
 
     /**
      * {@inheritdoc}
@@ -47,7 +48,7 @@ class SugarUpgradeClearSubpanels extends UpgradeScript
         $files = $this->getDefFiles($seed->module_dir);
         $defs = $this->getBeanDefs($seed);
 
-        $healthCheck = array();
+        $healthCheck = [];
         if (!empty($this->state['healthcheck'])) {
             foreach ($this->state['healthcheck'] as $healthMeta) {
                 if ($healthMeta['report'] == 'unknownWidgetClass' && $healthMeta['params'][2] == $seed->module_dir) {
@@ -57,11 +58,11 @@ class SugarUpgradeClearSubpanels extends UpgradeScript
         }
 
         foreach ($files as $file) {
-            $subpanel_layout = $layout_defs = array();
+            $subpanel_layout = $layout_defs = [];
             include $file;
             $changed = $this->checkWidgetClass($subpanel_layout);
             $changed = $this->checkListFields($subpanel_layout, $defs) || $changed;
-            foreach($healthCheck as $key) {
+            foreach ($healthCheck as $key) {
                 if (isset($subpanel_layout['list_fields'][$key])) {
                     unset($subpanel_layout['list_fields'][$key]);
                     $this->log('Field ' . $key . ' has been removed from $subpanel_layout[\'list_fields\'] in ' . $file);
@@ -131,10 +132,10 @@ class SugarUpgradeClearSubpanels extends UpgradeScript
         if (empty($layout['list_fields'])) {
             return $changed;
         }
-        $widgets = array(
+        $widgets = [
             'edit_button' => 'SubPanelEditButton',
-            'remove_button' => 'SubPanelRemoveButton'
-        );
+            'remove_button' => 'SubPanelRemoveButton',
+        ];
         foreach ($layout['list_fields'] as $key => $field) {
             if (array_key_exists($key, $widgets) && empty($field['widget_class'])) {
                 $layout['list_fields'][$key]['widget_class'] = $widgets[$key];
@@ -175,7 +176,7 @@ class SugarUpgradeClearSubpanels extends UpgradeScript
     {
         $basePath = "custom/modules/{$dir}/metadata/subpanels/";
         $extPath = "custom/Extension/modules/{$dir}/Ext/Layoutdefs/";
-        $files = array_merge(glob($basePath . "*.php"), glob($extPath . "*.php"));
+        $files = array_merge(glob($basePath . '*.php'), glob($extPath . '*.php'));
         return $files;
     }
 

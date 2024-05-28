@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Activ',
     'LBL_ASSIGNEE_RULE' => 'Regulă împuternicit',
     'LBL_TARGET_ASSIGNEE' => 'Împuternicit țintă',
+    'LBL_STAGE_NUMBERS' => 'Numerotare etape',
     'LBL_EXPORT_BUTTON_LABEL' => 'Export',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Import',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Creați/actualizați automat o înregistrare nouă de șablon de ghid inteligent importand un fisier *.json din sistemul dvs. de fișiere.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Dacă este bifată opțiunea Dacă Împuternicitul țintă = Împuternicitul părinte, atunci când utilizatorul „Atribuit lui” se modifică la un părinte, utilizatorii „Atribuit lui” se vor modifica automat și în ghidurile inteligente, etape și activități. Rețineți că setările împuternicitului țintă pe șabloane de activitate au prioritate față de șablonul de ghid inteligent',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Când ar trebui atribuit un utilizator la activități',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'La cine ar trebui să fie atribuite activitățile',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Acest comutator vă permite să afișați sau să ascundeți numerotarea automată a etapelor.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Șablon pentru ghid inteligent/etapă/activitate',
 ];

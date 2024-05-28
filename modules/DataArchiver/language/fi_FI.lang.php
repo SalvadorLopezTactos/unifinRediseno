@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Datan arkistoija',
     'LBL_MODULE_NAME' => 'Datan arkistoija',
     'LBL_FILTER_DEF_FIELD' => 'Suodatin',
@@ -28,7 +27,7 @@ $mod_strings = array (
     'LBL_MANAGE_ARCHIVE_JOB_LIST_TITLE' => 'Ajastetut arkistoinnit',
     'LBL_MANAGE_ARCHIVE_JOB_IS_NOT_SCHEDULED' => 'Ai ajastettuja arkistointeja',
     'LBL_ARCHIVE_FILTER' => 'Suodatusasetukset',
-    "LBL_MANAGE_ARCHIVE_SETUP" => 'Luo tietojen arkistointi',
+    'LBL_MANAGE_ARCHIVE_SETUP' => 'Luo tietojen arkistointi',
     'LBL_LIST_ARCHIVE_NAME' => 'Arkiston nimi',
     'LBL_PERFORM_NOW_BTN' => 'Suorita nyt',
     'LBL_ARCHIVE_SUCCESS_TITLE' => 'Onnistui',
@@ -45,4 +44,4 @@ $mod_strings = array (
         . 'koska se voi vaikuttaa järjestelmän suorituskykyyn. Oletko varma, että haluat suorittaa toiminnon nyt?',
 
     'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Arkistointipalvelussa moduulille {{moduleName}} on oltava suodattimena {{fieldName}}',
-);
+];

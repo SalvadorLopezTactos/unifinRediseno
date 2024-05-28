@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'Visa eskaleringar',
     'LBL_LIST_RELATED_TO_ID' => 'Relaterad till ID',
     'LNK_IMPORT_ESCALATIONS' => 'Importera eskaleringar',
-    
+
     'LBL_LIST_SUBJECT' => 'Ämne',
     'LBL_LIST_NUMBER' => 'Nr',
     'LBL_LIST_RELATED_TO_TYPE' => 'Relaterad typ',

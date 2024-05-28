@@ -38,20 +38,20 @@ class SugarForecasting_Export_Individual extends SugarForecasting_Export_Abstrac
         $api->user = $GLOBALS['current_user'];
         $data = $obj->forecastWorksheetsGet(
             $api,
-            array(
+            [
                 'module' => 'ForecastWorksheets',
                 'timeperiod_id' => $this->getArg('timeperiod_id'),
-                'user_id' => $this->getArg('user_id')
-            )
+                'user_id' => $this->getArg('user_id'),
+            ]
         );
 
-        $fields_array = array(
+        $fields_array = [
             'date_closed' => 'date_closed',
             'sales_stage' => 'sales_stage',
             'name' => 'name',
             'commit_stage' => 'commit_stage',
             'probability' => 'probability',
-        );
+        ];
 
         $admin = BeanFactory::newBean('Administration');
         $settings = $admin->getConfigForModule('Forecasts');
@@ -81,7 +81,6 @@ class SugarForecasting_Export_Individual extends SugarForecasting_Export_Abstrac
      */
     public function getFilename()
     {
-        return sprintf("%s_rep_forecast", parent::getFilename());
+        return sprintf('%s_rep_forecast', parent::getFilename());
     }
-
 }

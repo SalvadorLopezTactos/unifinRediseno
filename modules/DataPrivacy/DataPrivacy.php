@@ -146,7 +146,7 @@ class DataPrivacy extends Issue
      * @param string $newStatus
      * @return bool
      */
-    protected function isStatusChangeAllowed(bool $isAdmin, ?string $oldStatus, string $newStatus) : bool
+    protected function isStatusChangeAllowed(bool $isAdmin, ?string $oldStatus, string $newStatus): bool
     {
         if ($isAdmin) {
             if ((!empty($oldStatus) && $oldStatus !== 'Open' && $oldStatus != $newStatus)

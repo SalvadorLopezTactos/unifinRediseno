@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,21 +17,20 @@
  ********************************************************************************/
 
 
-
-
 global $mod_strings;
 global $current_user;
 
 
-if (!$GLOBALS['current_user']->isAdminForModule('Users')) sugar_die("Unauthorized access to administration.");
+if (!$GLOBALS['current_user']->isAdminForModule('Users')) {
+    sugar_die('Unauthorized access to administration.');
+}
 
 $focus = BeanFactory::newBean('Teams');
 
-if(!isset($_REQUEST['team_record']) || !isset($_REQUEST['record'])) {
-	sugar_die($mod_strings['ERR_DELETE_RECORD']);
-}
-else {
-	$focus->retrieve($_REQUEST['team_record']);
+if (!isset($_REQUEST['team_record']) || !isset($_REQUEST['record'])) {
+    sugar_die($mod_strings['ERR_DELETE_RECORD']);
+} else {
+    $focus->retrieve($_REQUEST['team_record']);
 }
 
 $focus->remove_user_from_team($_REQUEST['record']);

@@ -17,8 +17,13 @@
 
 namespace Google\Service\Baremetalsolution;
 
-class Volume extends \Google\Model
+class Volume extends \Google\Collection
 {
+  protected $collection_key = 'instances';
+  /**
+   * @var bool
+   */
+  public $attached;
   /**
    * @var string
    */
@@ -38,7 +43,15 @@ class Volume extends \Google\Model
   /**
    * @var string
    */
+  public $expireTime;
+  /**
+   * @var string
+   */
   public $id;
+  /**
+   * @var string[]
+   */
+  public $instances;
   /**
    * @var string[]
    */
@@ -100,8 +113,30 @@ class Volume extends \Google\Model
   /**
    * @var string
    */
+  public $storageAggregatePool;
+  /**
+   * @var string
+   */
   public $storageType;
+  /**
+   * @var string
+   */
+  public $workloadProfile;
 
+  /**
+   * @param bool
+   */
+  public function setAttached($attached)
+  {
+    $this->attached = $attached;
+  }
+  /**
+   * @return bool
+   */
+  public function getAttached()
+  {
+    return $this->attached;
+  }
   /**
    * @param string
    */
@@ -161,6 +196,20 @@ class Volume extends \Google\Model
   /**
    * @param string
    */
+  public function setExpireTime($expireTime)
+  {
+    $this->expireTime = $expireTime;
+  }
+  /**
+   * @return string
+   */
+  public function getExpireTime()
+  {
+    return $this->expireTime;
+  }
+  /**
+   * @param string
+   */
   public function setId($id)
   {
     $this->id = $id;
@@ -171,6 +220,20 @@ class Volume extends \Google\Model
   public function getId()
   {
     return $this->id;
+  }
+  /**
+   * @param string[]
+   */
+  public function setInstances($instances)
+  {
+    $this->instances = $instances;
+  }
+  /**
+   * @return string[]
+   */
+  public function getInstances()
+  {
+    return $this->instances;
   }
   /**
    * @param string[]
@@ -385,6 +448,20 @@ class Volume extends \Google\Model
   /**
    * @param string
    */
+  public function setStorageAggregatePool($storageAggregatePool)
+  {
+    $this->storageAggregatePool = $storageAggregatePool;
+  }
+  /**
+   * @return string
+   */
+  public function getStorageAggregatePool()
+  {
+    return $this->storageAggregatePool;
+  }
+  /**
+   * @param string
+   */
   public function setStorageType($storageType)
   {
     $this->storageType = $storageType;
@@ -395,6 +472,20 @@ class Volume extends \Google\Model
   public function getStorageType()
   {
     return $this->storageType;
+  }
+  /**
+   * @param string
+   */
+  public function setWorkloadProfile($workloadProfile)
+  {
+    $this->workloadProfile = $workloadProfile;
+  }
+  /**
+   * @return string
+   */
+  public function getWorkloadProfile()
+  {
+    return $this->workloadProfile;
   }
 }
 

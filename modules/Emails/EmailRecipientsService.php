@@ -13,13 +13,13 @@
 
 class EmailRecipientsService
 {
-    protected $sugarEmail,
-              $beanNames;
+    protected $sugarEmail;
+    protected $beanNames;
 
     public function __construct()
     {
         $this->sugarEmail = null;
-        $this->beanNames  = null;
+        $this->beanNames = null;
     }
 
     /**
@@ -29,11 +29,11 @@ class EmailRecipientsService
      * @param string $module
      * @return int
      */
-    public function findCount($term = "", $module = "LBL_DROPDOWN_LIST_ALL")
+    public function findCount($term = '', $module = 'LBL_DROPDOWN_LIST_ALL')
     {
         $totalRecords = 0;
         $inboundEmail = $this->setUpForRelatedEmailQueries();
-        $wheres       = array();
+        $wheres = [];
 
         if (!empty($term)) {
             $wheres['first_name'] = $term;
@@ -44,14 +44,14 @@ class EmailRecipientsService
 
         $relatedEmailQueries = $inboundEmail->email->et->getRelatedEmail($module, $wheres);
 
-        if (!empty($relatedEmailQueries["countQuery"])) {
+        if (!empty($relatedEmailQueries['countQuery'])) {
             $startTime = microtime(true);
-            $result    = $inboundEmail->db->query($relatedEmailQueries["countQuery"]);
-            $runTime   = microtime(true) - $startTime;
-            $GLOBALS["log"]->debug("EmailRecipientsService::findCount took {$runTime} milliseconds");
+            $result = $inboundEmail->db->query($relatedEmailQueries['countQuery']);
+            $runTime = microtime(true) - $startTime;
+            $GLOBALS['log']->debug("EmailRecipientsService::findCount took {$runTime} milliseconds");
 
             if ($row = $inboundEmail->db->fetchByAssoc($result)) {
-                $totalRecords = (int)$row["c"];
+                $totalRecords = (int)$row['c'];
             }
         }
 
@@ -63,16 +63,16 @@ class EmailRecipientsService
      *
      * @param string $term
      * @param string $module
-     * @param array  $orderBy
-     * @param int    $limit
-     * @param int    $offset
+     * @param array $orderBy
+     * @param int $limit
+     * @param int $offset
      * @return array
      */
-    public function find($term = "", $module = "LBL_DROPDOWN_LIST_ALL", $orderBy = array(), $limit = 0, $offset = 0)
+    public function find($term = '', $module = 'LBL_DROPDOWN_LIST_ALL', $orderBy = [], $limit = 0, $offset = 0)
     {
-        $records      = array();
+        $records = [];
         $inboundEmail = $this->setUpForRelatedEmailQueries();
-        $wheres       = array();
+        $wheres = [];
 
         if (!empty($term)) {
             $wheres['first_name'] = $term;
@@ -83,18 +83,18 @@ class EmailRecipientsService
 
         $relatedEmailQueries = $inboundEmail->email->et->getRelatedEmail($module, $wheres);
 
-        if (!empty($relatedEmailQueries["query"])) {
-            $sql             = $relatedEmailQueries["query"];
-            $sortableColumns = array(
+        if (!empty($relatedEmailQueries['query'])) {
+            $sql = $relatedEmailQueries['query'];
+            $sortableColumns = [
                 // column_from_$args => $args_column_mapped_to_real_database_column
-                "id"    => "id",
-                "email" => "email_address",
-                "name"  => "last_name",
-            );
-            $sort            = array();
+                'id' => 'id',
+                'email' => 'email_address',
+                'name' => 'last_name',
+            ];
+            $sort = [];
 
             if (empty($orderBy)) {
-                $orderBy["id"] = "DESC";
+                $orderBy['id'] = 'DESC';
             }
 
             foreach ($orderBy as $column => $direction) {
@@ -108,10 +108,10 @@ class EmailRecipientsService
             }
 
             if (!empty($sort)) {
-                $sql .= " ORDER BY " . implode(",", $sort);
+                $sql .= ' ORDER BY ' . implode(',', $sort);
             }
 
-            $result    = null;
+            $result = null;
             $startTime = microtime(true);
 
             if ($limit > 0) {
@@ -121,24 +121,24 @@ class EmailRecipientsService
             }
 
             $runTime = microtime(true) - $startTime;
-            $GLOBALS["log"]->debug("EmailRecipientsService::find took {$runTime} milliseconds");
+            $GLOBALS['log']->debug("EmailRecipientsService::find took {$runTime} milliseconds");
 
-            while($row = $inboundEmail->db->fetchByAssoc($result)) {
+            while ($row = $inboundEmail->db->fetchByAssoc($result)) {
                 // Account name is mapped to last_name in data set,
                 // otherwise format the name of the Person type object
-                $name = ($row["module"] === 'Accounts')
-                    ? $row["last_name"]
-                    : $GLOBALS["locale"]->formatName($row["module"], $row);
-                $records[] = array(
-                    "id"     => $row["id"],
-                    "_module" => $row["module"],
-                    "name"   => $name,
+                $name = ($row['module'] === 'Accounts')
+                    ? $row['last_name']
+                    : $GLOBALS['locale']->formatName($row['module'], $row);
+                $records[] = [
+                    'id' => $row['id'],
+                    '_module' => $row['module'],
+                    'name' => $name,
                     'first_name' => $row['first_name'],
                     'last_name' => $row['last_name'],
-                    "email"  => $row["email_address"],
+                    'email' => $row['email_address'],
                     'email_address_id' => $row['email_address_id'],
                     'opt_out' => !!$row['opt_out'],
-                );
+                ];
             }
         }
 
@@ -180,7 +180,7 @@ class EmailRecipientsService
      * @param $recipient
      * @return array
      */
-    public function lookup(array $recipient=array())
+    public function lookup(array $recipient = [])
     {
         $recipient['resolved'] = false;
         $beanId = null;
@@ -252,7 +252,7 @@ class EmailRecipientsService
                 // We use array_flip as a performance enhancement providing Keyed Lookup over Sequential Lookup
                 $this->beanNames = array_flip($beanList);
             }
-            foreach ($beans AS $bean) {
+            foreach ($beans as $bean) {
                 $beanType = get_class($bean);
                 if (isset($this->beanNames[$beanType])) {
                     $module = $this->beanNames[$beanType];
@@ -280,16 +280,16 @@ class EmailRecipientsService
      * in EmailRecipientsService::findCount and EmailRecipientsService::find. The InboundEmail object is also needed to
      * complete other logic found in those methods.
      *
-     * @see EmailRecipientsService::findCount()
-     * @see EmailRecipientsService::find()
      * @return InboundEmail
+     * @see EmailRecipientsService::find()
+     * @see EmailRecipientsService::findCount()
      */
     protected function setUpForRelatedEmailQueries()
     {
-        $email = new Email;
+        $email = new Email();
         $email->email2init();
 
-        $inboundEmail        = new InboundEmail;
+        $inboundEmail = new InboundEmail();
         $inboundEmail->email = $email;
 
         return $inboundEmail;

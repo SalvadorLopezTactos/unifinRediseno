@@ -32,42 +32,33 @@ class One2MRelationship extends M2MRelationship
         $lhsModule = $def['lhs_module'];
         $rhsModule = $def['rhs_module'];
 
-        if ($this->selfReferencing)
-        {
+        if ($this->selfReferencing) {
             $links = VardefManager::getLinkFieldForRelationship(
-                $lhsModule, BeanFactory::getObjectName($lhsModule), $this->name
+                $lhsModule,
+                BeanFactory::getObjectName($lhsModule),
+                $this->name
             );
-            if (empty($links))
-            {
+            if (empty($links)) {
                 $GLOBALS['log']->fatal("No Links found for relationship {$this->name}");
-            }
-            else {
+            } else {
                 if (!isset($links[0]) && !isset($links['name'])) {
                     $GLOBALS['log']->fatal("Bad link found for relationship {$this->name}");
-                }
-                else if (!isset($links[1])&&isset($links['name'])) //Only one link for a self referencing relationship, this is very bad.
-                {
+                } elseif (!isset($links[1]) && isset($links['name'])) { //Only one link for a self referencing relationship, this is very bad.
                     $this->lhsLinkDef = $this->rhsLinkDef = $links;
-                }
-                else if (!empty($links[0]) && !empty($links[1]))
-                {
-
-                    if ((!empty($links[0]['side']) && $links[0]['side'] == "right")
-                        || (!empty($links[0]['link_type']) && $links[0]['link_type'] == "one"))
-                    {
+                } elseif (!empty($links[0]) && !empty($links[1])) {
+                    if ((!empty($links[0]['side']) && $links[0]['side'] == 'right')
+                        || (!empty($links[0]['link_type']) && $links[0]['link_type'] == 'one')) {
                         //$links[0] is the RHS
                         $this->lhsLinkDef = $links[1];
                         $this->rhsLinkDef = $links[0];
-                    } else
-                    {
+                    } else {
                         //$links[0] is the LHS
                         $this->lhsLinkDef = $links[0];
                         $this->rhsLinkDef = $links[1];
                     }
                 }
             }
-        } else
-        {
+        } else {
             $this->lhsLinkDef = $this->getLinkedDefForModuleByRelationship($lhsModule);
             $this->rhsLinkDef = $this->getLinkedDefForModuleByRelationship($rhsModule);
         }
@@ -81,8 +72,9 @@ class One2MRelationship extends M2MRelationship
         }
     }
 
-    protected function linkIsLHS($link) {
-        if ( $this->lhsLink != $this->rhsLink ) {
+    protected function linkIsLHS($link)
+    {
+        if ($this->lhsLink != $this->rhsLink) {
             return $link->getSide() == REL_LHS;
         } else {
             return ($link->getSide() == REL_LHS && !$this->selfReferencing)
@@ -96,7 +88,7 @@ class One2MRelationship extends M2MRelationship
      * @param  $additionalFields key=>value pairs of fields to save on the relationship
      * @return boolean true if successful
      */
-    public function add($lhs, $rhs, $additionalFields = array())
+    public function add($lhs, $rhs, $additionalFields = [])
     {
         $success = false;
         $dataToInsert = $this->getRowToInsert($lhs, $rhs, $additionalFields);
@@ -141,10 +133,10 @@ class One2MRelationship extends M2MRelationship
 
     /**
      * Just overriding the function from M2M to prevent it from occuring
-     * 
+     *
      * The logic for dealing with adding self-referencing one-to-many relations is in the add() method
      */
-    protected function addSelfReferencing($lhs, $rhs, $additionalFields = array())
+    protected function addSelfReferencing($lhs, $rhs, $additionalFields = [])
     {
         //No-op on One2M.
     }
@@ -152,7 +144,7 @@ class One2MRelationship extends M2MRelationship
     /**
      * Just overriding the function from M2M to prevent it from occuring
      */
-    protected function removeSelfReferencing($lhs, $rhs, $additionalFields = array())
+    protected function removeSelfReferencing($lhs, $rhs, $additionalFields = [])
     {
         //No-op on One2M.
     }

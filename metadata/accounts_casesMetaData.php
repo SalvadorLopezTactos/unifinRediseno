@@ -10,54 +10,54 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['accounts_cases'] = array(
+$dictionary['accounts_cases'] = [
     'table' => 'accounts_cases',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'account_id' => array(
+        ],
+        'account_id' => [
             'name' => 'account_id',
             'type' => 'id',
-        ),
-        'case_id' => array(
+        ],
+        'case_id' => [
             'name' => 'case_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'required' => false,
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'accounts_casespk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_acc_case_acc',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'account_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_acc_acc_case',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'case_id',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

@@ -14,10 +14,10 @@
 /**
  * Before we save an opportunity, check if we need to set the commit stage
  */
-$hook_array['before_save'][] = array(
+$hook_array['before_save'][] = [
     1,
     'setCommitStageIfEmpty',
     'modules/Forecasts/ForecastHooks.php',
     'ForecastHooks',
     'setCommitStageIfEmpty',
-);
+];

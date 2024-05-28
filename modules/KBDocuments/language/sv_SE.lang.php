@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kunskapsbas',
     'LBL_MODULE_NAME_SINGULAR' => 'Kunskapsbasartikel',
     'LBL_MODULE_TITLE' => 'Kunskapsbasartikel',
@@ -17,4 +17,4 @@ $mod_strings = array(
     'LBL_KEYWORDS' => 'Nyckelord:',
     'LBL_CONTENT' => 'Innehåll',
     'LBL_ATTACHMENTS' => 'Bilagor:',
-);
+];

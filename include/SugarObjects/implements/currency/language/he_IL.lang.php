@@ -9,11 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-    'LBL_CURRENCY'=>'מטבע:',
+$mod_strings = [
+    'LBL_CURRENCY' => 'מטבע:',
     'LBL_CURRENCIES' => 'מטבעות',
-    'LBL_CURRENCY_NAME'=>'שם מטבע',
-    'LBL_CURRENCY_SYMBOL'=>'סימול מטבע',
+    'LBL_CURRENCY_NAME' => 'שם מטבע',
+    'LBL_CURRENCY_SYMBOL' => 'סימול מטבע',
     'LBL_CURRENCY_RATE' => 'שער בסיס',
     'LBL_CURRENCY_ID' => 'מטבע ID',
-);
+];

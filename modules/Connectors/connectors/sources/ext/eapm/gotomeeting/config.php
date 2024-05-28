@@ -11,14 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$config = array (
-  'name' => 'GoToMeeting',
-  'eapm' => array(
-    'enabled' => true,
-    'only' => true,
-  ),
-  'order' => 13,
-    'properties' => array(
+$config = [
+    'name' => 'GoToMeeting',
+    'eapm' => [
+        'enabled' => true,
+        'only' => true,
+    ],
+    'order' => 13,
+    'properties' => [
         'oauth_consumer_key' => '',
-    ),
-);
+    ],
+];

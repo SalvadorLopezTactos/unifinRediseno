@@ -11,4 +11,4 @@
  */
 --}}
 {{#if authWarning}}<p class="warning-block p-2.5 block">{{{authWarning}}}</p>{{/if}}
-{{#if authButton}}<span><button type="button" class="btn btn-primary auth-block{{#eq authButton 'disabled'}} disabled{{/eq}}" data-placement="bottom">{{str 'LBL_EMAIL_AUTHORIZE' this.module}}</button></span>{{/if}}
+{{#if authButton}}<span><button type="button" class="btn btn-primary auth-block m-0{{#eq authButton 'disabled'}} disabled{{/eq}}" data-bs-placement="bottom">{{str 'LBL_EMAIL_AUTHORIZE' this.module}}</button></span>{{/if}}

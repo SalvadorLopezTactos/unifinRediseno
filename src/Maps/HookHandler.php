@@ -72,7 +72,7 @@ class HookHandler
                 $bean
             );
 
-            if (count($changedAddressFields) > 0) {
+            if (safeCount($changedAddressFields) > 0) {
                 $geocodeBean->geocoded = false;
                 $geocodeBean->address = $this->getFormattedAddress($bean, $currentModule);
                 $rawAddress = str_replace(', ', '', $geocodeBean->address);
@@ -109,10 +109,11 @@ class HookHandler
      * @return bool
      */
     protected function manageNameFieldChanged(
-        array $changedFields,
+        array     $changedFields,
         SugarBean &$geocodeBean,
         SugarBean $recordBean
     ): bool {
+
         if (in_array('name', $changedFields)) {
             $geocodeBean->parent_name = $recordBean->name;
 
@@ -164,7 +165,7 @@ class HookHandler
             return false;
         }
 
-        if (!in_array($currentModule, $availableModules)) {
+        if (!safeInArray($currentModule, $availableModules)) {
             return false;
         }
 
@@ -199,7 +200,7 @@ class HookHandler
         foreach ($mappingTable as $clientKey => $sugarKey) {
             $value = null;
 
-            if (property_exists(get_class($targetBean), $sugarKey)) {
+            if ($sugarKey && $targetBean->getFieldDefinition($sugarKey)) {
                 $value = $targetBean->{$sugarKey};
             }
 

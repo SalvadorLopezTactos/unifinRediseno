@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Žymės',
     'LBL_GENERIC_LINK' => 'Susiję objektai',
     'LBL_NAME_LOWER' => 'Lowercase Tag Name',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'Mano žymos',
     'LBL_MY_FAVORITE_TAGS' => 'Mano mėgstamiausios žymos',
     'LBL_MORE_TAGS' => '{{tagsNumber}} žymos',
-);
+];

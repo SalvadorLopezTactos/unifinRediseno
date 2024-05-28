@@ -9,13 +9,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Config manager
  * @api
  */
 class SugarConfig implements SplSubject
 {
-    public $_cached_values = array();
+    // @codingStandardsIgnoreLine PSR2.Classes.PropertyDeclaration.Underscore
+    public $_cached_values = [];
 
     /**
      * Observers of the configuration changes
@@ -32,7 +34,8 @@ class SugarConfig implements SplSubject
         $this->observers = new SplObjectStorage();
     }
 
-    static function getInstance() {
+    public static function getInstance()
+    {
         static $instance = null;
         if (is_null($instance)) {
             $instance = new SugarConfig();
@@ -40,7 +43,8 @@ class SugarConfig implements SplSubject
         return $instance;
     }
 
-    function get($key, $default = null) {
+    public function get($key, $default = null)
+    {
         if (!isset($this->_cached_values[$key])) {
             $this->_cached_values[$key] = isset($GLOBALS['sugar_config']) ?
                 SugarArray::staticGet($GLOBALS['sugar_config'], $key, $default) :
@@ -49,9 +53,10 @@ class SugarConfig implements SplSubject
         return $this->_cached_values[$key];
     }
 
-    function clearCache($key = null) {
+    public function clearCache($key = null)
+    {
         if (is_null($key)) {
-            $this->_cached_values = array();
+            $this->_cached_values = [];
         } else {
             unset($this->_cached_values[$key]);
         }

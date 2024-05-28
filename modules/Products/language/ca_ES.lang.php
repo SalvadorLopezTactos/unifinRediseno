@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Quadre de comandament del llistat d&#39;elements de línia pressupostats',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Quadre de comandament del registre d&#39;elements de línia pressupostats',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als elements de línia pressupostats',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia de l&#39;element de línia esmentat',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Element de línia citat a la campanya',
     'LBL_MODULE_NAME' => 'Elements de línies d&#39;oferta',
@@ -183,4 +184,4 @@ Per crear un {{module_name}}:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nou element de línia pressupostat)',
     'LBL_DISCOUNT_PERCENT' => '% Per cent',
     'LBL_DISCOUNT_TYPE' => 'Tipus de descompte',
-);
+];

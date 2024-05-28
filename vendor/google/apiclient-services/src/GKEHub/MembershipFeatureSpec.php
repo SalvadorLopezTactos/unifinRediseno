@@ -19,29 +19,17 @@ namespace Google\Service\GKEHub;
 
 class MembershipFeatureSpec extends \Google\Model
 {
-  protected $anthosvmType = AnthosVMMembershipSpec::class;
-  protected $anthosvmDataType = '';
   protected $configmanagementType = ConfigManagementMembershipSpec::class;
   protected $configmanagementDataType = '';
+  protected $fleetobservabilityType = FleetObservabilityMembershipSpec::class;
+  protected $fleetobservabilityDataType = '';
   protected $identityserviceType = IdentityServiceMembershipSpec::class;
   protected $identityserviceDataType = '';
   protected $meshType = ServiceMeshMembershipSpec::class;
   protected $meshDataType = '';
+  protected $originType = Origin::class;
+  protected $originDataType = '';
 
-  /**
-   * @param AnthosVMMembershipSpec
-   */
-  public function setAnthosvm(AnthosVMMembershipSpec $anthosvm)
-  {
-    $this->anthosvm = $anthosvm;
-  }
-  /**
-   * @return AnthosVMMembershipSpec
-   */
-  public function getAnthosvm()
-  {
-    return $this->anthosvm;
-  }
   /**
    * @param ConfigManagementMembershipSpec
    */
@@ -55,6 +43,20 @@ class MembershipFeatureSpec extends \Google\Model
   public function getConfigmanagement()
   {
     return $this->configmanagement;
+  }
+  /**
+   * @param FleetObservabilityMembershipSpec
+   */
+  public function setFleetobservability(FleetObservabilityMembershipSpec $fleetobservability)
+  {
+    $this->fleetobservability = $fleetobservability;
+  }
+  /**
+   * @return FleetObservabilityMembershipSpec
+   */
+  public function getFleetobservability()
+  {
+    return $this->fleetobservability;
   }
   /**
    * @param IdentityServiceMembershipSpec
@@ -83,6 +85,20 @@ class MembershipFeatureSpec extends \Google\Model
   public function getMesh()
   {
     return $this->mesh;
+  }
+  /**
+   * @param Origin
+   */
+  public function setOrigin(Origin $origin)
+  {
+    $this->origin = $origin;
+  }
+  /**
+   * @return Origin
+   */
+  public function getOrigin()
+  {
+    return $this->origin;
   }
 }
 

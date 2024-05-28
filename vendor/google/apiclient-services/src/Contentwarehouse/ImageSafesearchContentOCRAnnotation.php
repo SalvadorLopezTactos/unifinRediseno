@@ -20,13 +20,13 @@ namespace Google\Service\Contentwarehouse;
 class ImageSafesearchContentOCRAnnotation extends \Google\Model
 {
   /**
-   * @var float
+   * @var string
    */
-  public $ocrProminenceScore;
+  public $ocrAnnotationVersion;
   /**
    * @var float
    */
-  public $offensiveScore;
+  public $ocrProminenceScore;
   /**
    * @var float
    */
@@ -53,6 +53,20 @@ class ImageSafesearchContentOCRAnnotation extends \Google\Model
   public $vulgarScore;
 
   /**
+   * @param string
+   */
+  public function setOcrAnnotationVersion($ocrAnnotationVersion)
+  {
+    $this->ocrAnnotationVersion = $ocrAnnotationVersion;
+  }
+  /**
+   * @return string
+   */
+  public function getOcrAnnotationVersion()
+  {
+    return $this->ocrAnnotationVersion;
+  }
+  /**
    * @param float
    */
   public function setOcrProminenceScore($ocrProminenceScore)
@@ -65,20 +79,6 @@ class ImageSafesearchContentOCRAnnotation extends \Google\Model
   public function getOcrProminenceScore()
   {
     return $this->ocrProminenceScore;
-  }
-  /**
-   * @param float
-   */
-  public function setOffensiveScore($offensiveScore)
-  {
-    $this->offensiveScore = $offensiveScore;
-  }
-  /**
-   * @return float
-   */
-  public function getOffensiveScore()
-  {
-    return $this->offensiveScore;
   }
   /**
    * @param float

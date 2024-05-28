@@ -29,6 +29,10 @@
         'hidden.bs.dropdown': '_toggleAria'
     },
 
+    plugins: [
+        'SugarLogic'
+    ],
+
     /**
      * Button states.
      */
@@ -44,6 +48,13 @@
      */
     headerFields: null,
 
+    /**
+     * The total number of search results for all modules.
+     *
+     * @property {number|null}
+     */
+    modulesNumber: null,
+
     initialize: function(options) {
         _.extend(options.meta, app.metadata.getView(null, 'dashlet-toolbar'), options.meta.toolbar);
         app.view.View.prototype.initialize.call(this, options);
@@ -58,6 +69,27 @@
         this.canEdit = app.acl.hasAccessToModel('edit', model) || false;
 
         this.buttons = this.meta.buttons;
+
+        // filter buttons depending on if the dashboard is a template or not
+        const templateRestrictedActions = ['editClicked', 'removeClicked'];
+        _.each(this.buttons, (buttons, buttonsIdx) => {
+            if (buttons.dropdown_buttons) {
+                const dButtons = buttons.dropdown_buttons;
+
+                for (let idx = dButtons.length - 1; idx >= 0; idx--) {
+                    const dButton = dButtons[idx];
+
+                    if (dButton &&
+                        this.layout &&
+                        this.layout.model &&
+                        templateRestrictedActions.indexOf(dButton.action) > -1 &&
+                        this.layout.model.get('is_template')) {
+                        this.buttons[buttonsIdx].dropdown_buttons.splice(idx, 1);
+                    }
+                }
+            }
+        });
+
         this.adjustHeaderPaneTitle = _.bind(_.debounce(this.adjustHeaderPaneTitle, 50), this);
         $(window).on('resize.' + this.cid, this.adjustHeaderPaneTitle);
     },
@@ -67,17 +99,38 @@
      */
     bindDataChange: function() {
         this._super('bindDataChange');
-        this.context.on('dashlet:toolbar:change', function(headerFields, headerButtons, dashletModel, dashlet) {
-            this.headerFields = headerFields;
-            this.buttons = _.union(headerButtons, this.meta.buttons);
-            if (dashletModel) {
-                this.dashletModel = dashletModel;
-            }
-            if (dashlet) {
-                this.dashlet = dashlet;
-            }
+        this.listenTo(this.context, 'dashlet:toolbar:change', this._handleToolbarChange);
+        this.listenTo(this.context.parent, 'search:modules:number:change', (modulesNumber) => {
+            this.modulesNumber = modulesNumber;
             this.render();
-        }, this);
+        });
+    },
+
+    /**
+     * Handles when the toolbar needs to change (new fields, buttons, model, etc.)
+     *
+     * @param {Array} headerFields the new header field definitions
+     * @param {Array} headerButtons the new header button definitions
+     * @param {Bean} dashletModel the model used in the dashlet if applicable
+     * @param {Object} dashlet the dashlet view
+     * @private
+     */
+    _handleToolbarChange: function(headerFields, headerButtons, dashletModel, dashlet) {
+        this.headerFields = headerFields;
+        this.buttons = _.union(headerButtons, this.meta.buttons);
+        if (dashletModel) {
+            this.dashletModel = dashletModel;
+        }
+        if (dashlet) {
+            this.dashlet = dashlet;
+        }
+        this.render();
+
+        // Restart SugarLogic to initialize dependencies for any changed module context
+        this.context.set('module', dashletModel ? dashletModel.module : 'Home');
+        this.collection.reset(dashletModel);
+        this.stopSugarLogic();
+        this.startSugarLogic();
     },
 
     /**
@@ -204,16 +257,21 @@
      */
     refreshClicked: function() {
         var $el = this.$('[data-action=loading]');
-        var self = this;
         var options = {};
         if ($el.length > 0) {
             $el.removeClass(this.cssIconDefault).addClass(this.cssIconRefresh);
-            options.complete = function() {
-                if (self.disposed) {
+            options.complete = _.bind(function() {
+                if (this.disposed) {
                     return;
                 }
-                $el.removeClass(self.cssIconRefresh).addClass(self.cssIconDefault);
-            };
+                $el.removeClass(this.cssIconRefresh).addClass(this.cssIconDefault);
+
+                // If the user refreshes a collapsed dashlet, set the right toggle icon
+                if (this.layout.isDashletCollapsed()) {
+                    this.$('.dashlet-toggle > i').toggleClass('sicon-chevron-down', true);
+                    this.$('.dashlet-toggle > i').toggleClass('sicon-chevron-up', false);
+                }
+            }, this);
         }
         this.layout.reloadDashlet(options);
     },
@@ -286,7 +344,7 @@
      * @private
      */
     _toggleAria: function() {
-        var $button = this.$('[data-toggle=dropdown]');
+        var $button = this.$('[data-bs-toggle=dropdown]');
         var $group = $button.parent();
         $button.attr('aria-expanded', $group.hasClass('open'));
     },
@@ -297,6 +355,7 @@
      */
     _dispose: function() {
         $(window).off('resize.' + this.cid);
+        this.stopListening();
         this._super('_dispose');
     }
 

@@ -9,22 +9,22 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs["base"]["view"]["dashletselect-headerpane"] = array(
+$viewdefs['base']['view']['dashletselect-headerpane'] = [
     'template' => 'headerpane',
-    'fields' => array(
-        array(
+    'fields' => [
+        [
             'name' => 'title',
             'type' => 'sugar-dashlet-label',
             'module' => 'Home',
             'label' => 'LBL_ADD',
-        ),
-    ),
-    "buttons" => array(
-        array(
-            "name"      => "cancel_button",
-            "type"      => "button",
-            "label"     => "LBL_CANCEL_BUTTON_LABEL",
-            "css_class" => "btn-invisible btn-link",
-        ),
-    ),
-);
+        ],
+    ],
+    'buttons' => [
+        [
+            'name' => 'cancel_button',
+            'type' => 'button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
+            'css_class' => 'btn-invisible btn-link',
+        ],
+    ],
+];

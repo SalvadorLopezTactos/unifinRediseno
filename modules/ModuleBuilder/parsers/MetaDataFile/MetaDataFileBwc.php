@@ -37,7 +37,7 @@ class MetaDataFileBwc implements MetaDataFileInterface
     public function getPath()
     {
         $path = $this->file->getPath();
-        array_splice($path, 2, 0, array('metadata'));
+        array_splice($path, 2, 0, ['metadata']);
 
         return $path;
     }

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Ganci logica web',
     'LBL_MODULE_NAME_SINGULAR' => 'Gancio logica web',
     'LBL_MODULE_TITLE' => 'Ganci logica web',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => 'Metodo Richiesto',
     'LBL_TRIGGER_EVENT' => 'Innesca evento',
     'LBL_URL' => 'URL',
-);
+];

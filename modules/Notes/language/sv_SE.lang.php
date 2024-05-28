@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Instrumentpanel med anteckningslistor',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Instrumentpanel med anteckningsposter',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för anteckningar',
     'LBL_EXTERNAL_USER' => 'Extern användare',
     'LBL_EXTERNAL_USER_NAME' => 'Extern användare',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Anteckningstidslinje',
 
     'LBL_RELATED_CONTACT' => 'Relaterad kontakt',
     'ERR_DELETE_RECORD' => 'Ett postnummer måste specificeras för att kunna radera organisationen.',
@@ -122,4 +123,4 @@ Varje {{module}} post kan då avse andra Sugardokument såsom {{accounts_module}
  - Fält markerade som &#39;Obligatoriska&#39; måste fyllas i innan du sparar.
  - Klicka på &#39;Visa fler&#39; för att få fler fält om det behövs.
 2. Klicka på &#39;Spara&#39; för att färdigställa posten och gå tillbaks till den förra sidan.',
-);
+];

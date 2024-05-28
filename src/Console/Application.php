@@ -92,7 +92,7 @@ class Application extends BaseApplication
 
         $registry = CommandRegistry::getInstance();
 
-        $registry->addCommands(array(
+        $registry->addCommands([
             // Elasticsearch specific
             new ElasticsearchIndicesCommand(),
             new ElasticsearchQueueCommand(),
@@ -134,7 +134,7 @@ class Application extends BaseApplication
 
             // ACL Cache dumper
             new DumpACLCacheCommand(),
-        ));
+        ]);
 
         $app = new Application();
         $app->setMode($mode);
@@ -208,16 +208,16 @@ class Application extends BaseApplication
      */
     protected function getSugarVersion()
     {
-        $default = "[standalone mode]";
+        $default = '[standalone mode]';
         $sugarVersionFile = SUGAR_BASE_DIR . '/sugar_version.php';
         if (file_exists($sugarVersionFile)) {
             include $sugarVersionFile;
 
             // sanity checks returning default
             if (empty($sugar_version) ||
-                empty($sugar_flavor)  ||
-                empty($sugar_build)   ||
-                strpos($sugar_version, '13.0.3') === 0
+                empty($sugar_flavor) ||
+                empty($sugar_build) ||
+                strpos($sugar_version, '14.0.0') === 0
             ) {
                 return $default;
             }

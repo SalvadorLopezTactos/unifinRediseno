@@ -9,44 +9,44 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['KBContents']['base']['view']['prefilteredlist'] = array(
+$viewdefs['KBContents']['base']['view']['prefilteredlist'] = [
     'favorite' => true,
     'following' => true,
     'sticky_resizable_columns' => true,
     'selection' => false,
-    'rowactions' => array(
-        'actions' => array(
-            array(
+    'rowactions' => [
+        'actions' => [
+            [
                 'type' => 'rowaction',
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
                 'icon' => 'sicon-preview',
                 'acl_action' => 'view',
-            ),
-            array(
+            ],
+            [
                 'type' => 'rowaction',
                 'name' => 'edit_button',
                 'label' => 'LBL_EDIT_BUTTON',
                 'event' => 'list:editrow:fire',
                 'acl_action' => 'edit',
-            ),
-            array(
+            ],
+            [
                 'type' => 'follow',
                 'name' => 'follow_button',
                 'event' => 'list:follow:fire',
                 'acl_action' => 'view',
-            ),
-            array(
+            ],
+            [
                 'type' => 'rowaction',
                 'name' => 'delete_button',
                 'event' => 'list:deleterow:fire',
                 'label' => 'LBL_DELETE_BUTTON',
                 'acl_action' => 'delete',
-            ),
-        ),
-    ),
-    'last_state' => array(
+            ],
+        ],
+    ],
+    'last_state' => [
         'id' => 'record-list',
-    ),
-);
+    ],
+];

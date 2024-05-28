@@ -9,103 +9,108 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once ('modules/ModuleBuilder/MB/ModuleBuilder.php') ;
+require_once 'modules/ModuleBuilder/MB/ModuleBuilder.php';
 
 class ExpressionEngineController extends SugarController
 {
-	var $action_remap = array ( ) ;
-    var $non_admin_actions = array("functionDetail", "getRelatedValues");
-	
-	function process(){
-    	$GLOBALS [ 'log' ]->info ( get_class($this).":" ) ;
+    public $action_remap = [];
+    public $non_admin_actions = ['functionDetail', 'getRelatedValues'];
+
+    public function process()
+    {
+        $GLOBALS ['log']->info(get_class($this) . ':');
         global $current_user;
         $access = get_admin_modules_for_user($current_user);
-		//Non admins can still execute functions
-        if((!empty($_REQUEST['action']) && in_array($_REQUEST['action'], $this->non_admin_actions))
-           || $this->isModuleAdmin($access))
-        {
+        //Non admins can still execute functions
+        if ((!empty($_REQUEST['action']) && in_array($_REQUEST['action'], $this->non_admin_actions))
+            || $this->isModuleAdmin($access)) {
             $this->hasAccess = true;
-        }
-        else
-        {
+        } else {
             $this->hasAccess = false;
         }
         parent::process();
     }
 
-    function isModuleAdmin($access)
+    public function isModuleAdmin($access)
     {
         global $current_user;
         //Global admins have full access
-        if (is_admin($current_user))
+        if (is_admin($current_user)) {
             return true;
+        }
 
-        $module = "";
-        if (!empty($_REQUEST['targetModule']))
+        $module = '';
+        if (!empty($_REQUEST['targetModule'])) {
             $module = $_REQUEST['targetModule'];
-        if (!empty($_REQUEST['tmodule']))
+        }
+        if (!empty($_REQUEST['tmodule'])) {
             $module = $_REQUEST['tmodule'];
+        }
 
         //If the user is an admin of some module, and no module was set, assume they have access.
-        if (is_admin_for_any_module($current_user) && empty($module) && (isset($_REQUEST['action']) && $_REQUEST['action'] != 'package')){
+        if (is_admin_for_any_module($current_user) && empty($module) && (isset($_REQUEST['action']) && $_REQUEST['action'] != 'package')) {
             return true;
         }
 
         //If the module was set, check that the user has access
-        if (!empty($module) && in_array($module, $access)) {
+        if (!empty($module) && safeInArray($module, $access)) {
             return true;
         }
     }
 
-	function action_editFormula ()
+    public function action_editFormula()
     {
-     	$this->view = 'editFormula';  
+        $this->view = 'editFormula';
     }
 
-    function action_editDepDropdown ()
+    public function action_editDepDropdown()
     {
-     	$this->view = 'editDepDropdown';
-    }
-    
-	function action_index ()
-    {
-     	$this->view = 'index';  
-    }
-    
-	function action_cfTest ()
-    {
-     	$this->view = 'cfTest';  
-    }
-    
-	function action_list ()
-    {
-     	$this->view = 'index';  
+        $this->view = 'editDepDropdown';
     }
 
-    function action_relFields ()
+    public function action_index()
     {
-     	$this->view = 'relFields';  
+        $this->view = 'index';
     }
 
-    function action_execFunction ()
+    public function action_cfTest()
     {
-     	$this->view = 'execFunction';  
+        $this->view = 'cfTest';
     }
 
-    function action_functionDetail() {
-    	$this->view = 'functionDetail'; 
+    public function action_list()
+    {
+        $this->view = 'index';
     }
 
-    function action_validateRelatedField(){
+    public function action_relFields()
+    {
+        $this->view = 'relFields';
+    }
+
+    public function action_execFunction()
+    {
+        $this->view = 'execFunction';
+    }
+
+    public function action_functionDetail()
+    {
+        $this->view = 'functionDetail';
+    }
+
+    public function action_validateRelatedField()
+    {
         $this->view = 'validateRelatedField';
     }
 
-    function action_selectRelatedField() {
-        $this->view ='selectRelatedField';
+    public function action_selectRelatedField()
+    {
+        $this->view = 'selectRelatedField';
     }
 
-    function action_rollupWizard() {
-        $this->view ='rollupWizard';
+    public function action_rollupWizard()
+    {
+        $this->view = 'rollupWizard';
     }
 
     /**
@@ -125,10 +130,11 @@ class ExpressionEngineController extends SugarController
         /** @var LoggerManager */
         global $log;
 
-        $ret = array();
+        $ret = [];
 
-        if (empty($_REQUEST['tmodule']) || empty($_REQUEST['fields']))
+        if (empty($_REQUEST['tmodule']) || empty($_REQUEST['fields'])) {
             return;
+        }
 
         $fields = json_decode(html_entity_decode($_REQUEST['fields'], ENT_COMPAT), true);
         if (!is_array($fields)) {
@@ -147,8 +153,7 @@ class ExpressionEngineController extends SugarController
             return;
         }
 
-        foreach($fields as $rfDef)
-        {
+        foreach ($fields as $rfDef) {
             if (!isset($rfDef['link'], $rfDef['type'])) {
                 $log->fatal('At least one of "link" and "type" attributes is not specified');
                 continue;
@@ -156,48 +161,47 @@ class ExpressionEngineController extends SugarController
 
             $link = $rfDef['link'];
             $type = $rfDef['type'];
-            if (!isset($ret[$link]))
-                $ret[$link] = array();
-            if (empty($ret[$link][$type]))
-                $ret[$link][$type] = array();
+            if (!isset($ret[$link])) {
+                $ret[$link] = [];
+            }
+            if (empty($ret[$link][$type])) {
+                $ret[$link][$type] = [];
+            }
 
-            switch($type){
+            switch ($type) {
                 //The Related function is used for pulling a sing field from a related record
-                case "related":
+                case 'related':
                     if (!isset($rfDef['relate'])) {
                         $log->fatal('"relate" attribute of related expression is not specified');
                         break;
                     }
 
                     //Default it to a blank value
-                    $ret[$link]['related'][$rfDef['relate']] = "";
+                    $ret[$link]['related'][$rfDef['relate']] = '';
 
                     //If we have neither a focus id nor a related record id, we can't retrieve anything
-                    if (!empty($id) || !empty($rfDef['relId']))
-                    {
+                    if (!empty($id) || !empty($rfDef['relId'])) {
                         $relBean = null;
-                        if (empty($rfDef['relId']) || empty($rfDef['relModule']))
-                        {
+                        if (empty($rfDef['relId']) || empty($rfDef['relModule'])) {
                             //If the relationship is invalid, just move onto another field
-                            if (!$focus->load_relationship($link))
+                            if (!$focus->load_relationship($link)) {
                                 break;
-                            $beans = $focus->$link->getBeans(array("enforce_teams" => true));
+                            }
+                            $beans = $focus->$link->getBeans(['enforce_teams' => true]);
                             //No related beans means no value
-                            if (empty($beans))
+                            if (empty($beans)) {
                                 break;
+                            }
                             //Grab the first bean on the list
                             reset($beans);
                             $relBean = current($beans);
-                        } else
-                        {
+                        } else {
                             $relBean = BeanFactory::getBean($rfDef['relModule'], $rfDef['relId']);
                         }
                         //If we found a bean and the current user has access to the related field, grab a value from it
-                        if (!empty($relBean) && ACLField::hasAccess($rfDef['relate'], $relBean->module_dir, $GLOBALS['current_user']->id, true))
-                        {
+                        if (!empty($relBean) && ACLField::hasAccess($rfDef['relate'], $relBean->module_dir, $GLOBALS['current_user']->id, true)) {
                             $validFields = FormulaHelper::cleanFields($relBean->field_defs, false, true, true);
-                            if (isset($validFields[$rfDef['relate']]))
-                            {
+                            if (isset($validFields[$rfDef['relate']])) {
                                 $ret[$link]['relId'] = $relBean->id;
                                 $ret[$link]['related'][$rfDef['relate']] =
                                     FormulaHelper::getFieldValue($relBean, $rfDef['relate']);
@@ -205,70 +209,69 @@ class ExpressionEngineController extends SugarController
                         }
                     }
                     break;
-                case "count":
-                    if(!empty($id) && $focus->load_relationship($link))
-                    {
-                        $ret[$link][$type] = is_countable($focus->$link->get()) ? count($focus->$link->get()) : 0;
-                    } else
-                    {
+                case 'count':
+                    if (!empty($id) && $focus->load_relationship($link)) {
+                        $ret[$link][$type] = safeCount($focus->$link->get());
+                    } else {
                         $ret[$link][$type] = 0;
                     }
                     break;
-                case "rollupSum":
-                case "rollupAve":
-                case "rollupMin":
-                case "rollupMax":
-                //If we are going to calculate one rollup, calculate all the rollups since there is so little cost
-                if (!isset($rfDef['relate'])) {
-                    $log->fatal('"relate" attribute of rollup expression is not specified');
+                case 'rollupSum':
+                case 'rollupAve':
+                case 'rollupMin':
+                case 'rollupMax':
+                    //If we are going to calculate one rollup, calculate all the rollups since there is so little cost
+                    if (!isset($rfDef['relate'])) {
+                        $log->fatal('"relate" attribute of rollup expression is not specified');
+                        break;
+                    }
+
+                    $rField = $rfDef['relate'];
+                    if (!empty($id) && $focus->load_relationship($link)) {
+                        $relBeans = $focus->$link->getBeans(['enforce_teams' => true]);
+                        $sum = 0;
+                        $count = 0;
+                        $min = false;
+                        $max = false;
+                        if (!empty($relBeans)) {
+                            //Check if the related record vardef has banned this field from formulas
+                            $relBean = reset($relBeans);
+                            $validFields = FormulaHelper::cleanFields($relBean->field_defs, false, true, true);
+                            if (!isset($validFields[$rField])) {
+                                break;
+                            }
+                        }
+                        foreach ($relBeans as $bean) {
+                            if (isset($bean->$rField) && is_numeric($bean->$rField) &&
+                                //ensure the user can access the fields we are using.
+                                ACLField::hasAccess($rField, $bean->module_dir, $GLOBALS['current_user']->id, true)
+                            ) {
+                                $count++;
+                                $sum += floatval($bean->$rField);
+                                if ($min === false || $bean->$rField < $min) {
+                                    $min = floatval($bean->$rField);
+                                }
+                                if ($max === false || $bean->$rField > $max) {
+                                    $max = floatval($bean->$rField);
+                                }
+                            }
+                        }
+                        if ($type == 'rollupSum') {
+                            $ret[$link][$type][$rField] = $sum;
+                        }
+                        if ($type == 'rollupAve') {
+                            $ret[$link][$type][$rField] = $count == 0 ? 0 : $sum / $count;
+                        }
+                        if ($type == 'rollupMin') {
+                            $ret[$link][$type][$rField] = $min;
+                        }
+                        if ($type == 'rollupMax') {
+                            $ret[$link][$type][$rField] = $max;
+                        }
+                    } else {
+                        $ret[$link][$type][$rField] = 0;
+                    }
                     break;
-                }
-
-                $rField = $rfDef['relate'];
-                if(!empty($id) && $focus->load_relationship($link))
-                {
-                    $relBeans = $focus->$link->getBeans(array("enforce_teams" => true));
-                    $sum = 0;
-                    $count = 0;
-                    $min = false;
-                    $max = false;
-                    if (!empty($relBeans))
-                    {
-                        //Check if the related record vardef has banned this field from formulas
-                        $relBean = reset($relBeans);
-                        $validFields = FormulaHelper::cleanFields($relBean->field_defs, false, true, true);
-                        if (!isset($validFields[$rField])) {
-                            break;
-                        }
-
-                    }
-                    foreach($relBeans as $bean)
-                    {
-                        if (isset($bean->$rField) && is_numeric($bean->$rField) &&
-                            //ensure the user can access the fields we are using.
-                            ACLField::hasAccess($rField, $bean->module_dir, $GLOBALS['current_user']->id, true)
-                        ) {
-                            $count++;
-                            $sum += floatval($bean->$rField);
-                            if ($min === false || $bean->$rField < $min)
-                                $min = floatval($bean->$rField);
-                            if ($max === false || $bean->$rField > $max)
-                                $max = floatval($bean->$rField);
-                        }
-                    }
-                    if ($type == "rollupSum")
-                        $ret[$link][$type][$rField] = $sum;
-                    if ($type == "rollupAve")
-                        $ret[$link][$type][$rField] = $count == 0 ? 0 : $sum / $count;
-                    if ($type == "rollupMin")
-                        $ret[$link][$type][$rField] = $min;
-                    if ($type == "rollupMax")
-                        $ret[$link][$type][$rField] = $max;
-                } else
-                {
-                    $ret[$link][$type][$rField] = 0;
-                }
-                break;
             }
         }
 

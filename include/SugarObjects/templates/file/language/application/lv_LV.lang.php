@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Mārketings',
-    'Knowledge Base' => 'Zināšanu bāze',
-    'Sales' => 'Pārdošana',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Mārketinga materiāli',
-    'Product Brochures' => 'Produktu brošūras',
-    'FAQ' => 'BUJ',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Mārketings',
+        'Knowledge Base' => 'Zināšanu bāze',
+        'Sales' => 'Pārdošana',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Aktīvs',
-    'Draft' => 'Uzmetums',
-    'FAQ' => 'BUJ',
-    'Expired' => 'Izbeidzies',
-    'Under Review' => 'Caurskatē',
-    'Pending' => 'Nepabeigta',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Mārketinga materiāli',
+        'Product Brochures' => 'Produktu brošūras',
+        'FAQ' => 'BUJ',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Aktīvs',
+        'Draft' => 'Uzmetums',
+        'FAQ' => 'BUJ',
+        'Expired' => 'Izbeidzies',
+        'Under Review' => 'Caurskatē',
+        'Pending' => 'Nepabeigts',
+    ],
+];

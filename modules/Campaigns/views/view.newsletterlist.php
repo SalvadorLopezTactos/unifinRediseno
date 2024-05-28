@@ -9,24 +9,22 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /*********************************************************************************
  ********************************************************************************/
-
-
-class ViewNewsLetterList extends ViewList 
-{    
-    function processSearchForm()
+class ViewNewsLetterList extends ViewList
+{
+    public function processSearchForm()
     {
         // we have a query
-        if(!empty($_SERVER['HTTP_REFERER']) && preg_match('/action=EditView/', $_SERVER['HTTP_REFERER'])) { // from EditView cancel
+        if (!empty($_SERVER['HTTP_REFERER']) && preg_match('/action=EditView/', $_SERVER['HTTP_REFERER'])) { // from EditView cancel
             $this->searchForm->populateFromArray($this->storeQuery->query);
-        }
-        else {
+        } else {
             $this->searchForm->populateFromRequest();
-        }   
+        }
         $where_clauses = $this->searchForm->generateSearchWhere(true, $this->seed->module_dir);
         $where_clauses[] = "campaigns.campaign_type in ('NewsLetter')";
-        if ((is_countable($where_clauses) ? count($where_clauses) : 0) > 0) {
+        if (safeCount($where_clauses) > 0) {
             $this->where = '(' . implode(' ) AND ( ', $where_clauses) . ')';
         }
         $GLOBALS['log']->info("List View Where Clause: $this->where");
@@ -34,18 +32,17 @@ class ViewNewsLetterList extends ViewList
 
         echo $this->searchForm->display($this->headers);
     }
-    
+
     /**
-	 * @see SugarView::preDisplay()
-	 */
-	public function preDisplay() 
-	{
+     * @see SugarView::preDisplay()
+     */
+    public function preDisplay()
+    {
         global $mod_strings;
         $mod_strings['LBL_MODULE_TITLE'] = $mod_strings['LBL_NEWSLETTER_TITLE'];
         $mod_strings['LBL_LIST_FORM_TITLE'] = $mod_strings['LBL_NEWSLETTER_LIST_FORM_TITLE'];
         parent::preDisplay();
-
-    }        
+    }
 
     /**
      * @see SugarView::_getModuleTitleParams()
@@ -54,7 +51,7 @@ class ViewNewsLetterList extends ViewList
     {
         global $mod_strings;
         $params = parent::_getModuleTitleParams($browserTitle);
-        $params[] = $mod_strings['LBL_NEWSLETTER_TITLE'];        
+        $params[] = $mod_strings['LBL_NEWSLETTER_TITLE'];
         return $params;
     }
 }

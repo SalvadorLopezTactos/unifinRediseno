@@ -68,7 +68,7 @@ class DRICustomerJourneyConfigApi extends ConfigModuleApi
         }
         if (isset($args['recordview_display_settings'])) {
             $configurator->config['customer_journey']['recordview_display_settings'] =
-            $args['recordview_display_settings'];
+                $args['recordview_display_settings'];
         }
         $configurator->saveConfig();
 

@@ -12,13 +12,13 @@
 --}}
 <tr name="{{model.module}}_{{model.cid}}" data-group-id="{{groupId}}" record-id="{{model.id}}"
     class="quote-data-group-list product-bundle-notes-row{{#if model.id}} sortable ui-sortable{{else}} not-sortable{{/if}}">
-    <td>
-        <span class="action-button-wrapper left-column-save-cancel">
+    <td class="bg-[--primary-content-background] box-border focus-within:z-30 left-0 sticky sticky-border-tl z-10">
+        <span class="absolute action-button-wrapper inset-0 left-column-save-cancel px-2 py-1">
             {{#each view.leftSaveCancelColumn}}
                 {{field ../view model=../model template=../view.viewName}}
             {{/each}}
         </span>
-        <span class="action-button-wrapper left-column-buttons">
+        <span class="absolute action-button-wrapper inset-0 left-column-buttons p-2">
             {{#each view.leftColumns}}
                 {{field ../view model=../model template=../view.viewName}}
             {{/each}}

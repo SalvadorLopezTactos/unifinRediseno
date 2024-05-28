@@ -18,28 +18,28 @@ use Sugarcrm\Sugarcrm\DataPrivacy\Erasure\Repository;
  */
 class SugarSpot
 {
-    protected $module = "";
+    protected $module = '';
 
     /**
      * @param string $current_module
      */
-    public function __construct($current_module = "")
+    public function __construct($current_module = '')
     {
         $this->module = $current_module;
     }
 
-	/**
-	 * Returns the array containing the $searchFields for a module.  This function
-	 * first checks the default installation directories for the SearchFields.php file and then
-	 * loads any custom definition (if found)
-	 *
-	 * @param  $moduleName String name of module to retrieve SearchFields entries for
-	 * @return array of SearchFields
-	 */
-	protected static function getSearchFields( $moduleName )
-	{
-	    return SugarAutoLoader::loadSearchFields($moduleName);
-	}
+    /**
+     * Returns the array containing the $searchFields for a module.  This function
+     * first checks the default installation directories for the SearchFields.php file and then
+     * loads any custom definition (if found)
+     *
+     * @param  $moduleName String name of module to retrieve SearchFields entries for
+     * @return array of SearchFields
+     */
+    protected static function getSearchFields($moduleName)
+    {
+        return SugarAutoLoader::loadSearchFields($moduleName);
+    }
 
     /**
      * Get count from query
@@ -64,7 +64,7 @@ class SugarSpot
         $unified_search_modules_display = $usa->getUnifiedSearchModulesDisplay();
 
         // load the list of unified search enabled modules
-        $modules = array();
+        $modules = [];
 
         //check to see if the user has  customized the list of modules available to search
         $users_modules = $GLOBALS['current_user']->getPreference('globalSearch', 'search');
@@ -76,8 +76,7 @@ class SugarSpot
                     $modules[$key] = $key;
                 }
             }
-        }
-        else {
+        } else {
             foreach ($unified_search_modules_display as $key => $data) {
                 if (!empty($data['visible'])) {
                     $modules[$key] = $key;
@@ -87,7 +86,7 @@ class SugarSpot
         // make sure the current module appears first in the list
         if (isset($modules[$this->module])) {
             unset($modules[$this->module]);
-            $modules = array_merge(array($this->module => $this->module), $modules);
+            $modules = array_merge([$this->module => $this->module], $modules);
         }
 
         return $modules;
@@ -102,15 +101,15 @@ class SugarSpot
      * @param  $options array  An array of options to better control how the result set is generated
      * @return array
      */
-    public function search($query, $offset = -1, $limit = 20, $options = array())
+    public function search($query, $offset = -1, $limit = 20, $options = [])
     {
-        if (isset($options['modules']) && !empty($options['modules']))
+        if (isset($options['modules']) && !empty($options['modules'])) {
             $modules = $options['modules'];
-        else
+        } else {
             $modules = $this->getSearchModules();
+        }
 
         return $this->_performSearch($query, $modules, $offset, $limit, $options);
-
     }
 
     /**
@@ -125,7 +124,8 @@ class SugarSpot
      * @param  $options array  An array of options to better control how the result set is generated
      * @return array
      */
-    protected function _performSearch($query, $modules, $offset = -1, $limit = 20, $options = array())
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _performSearch($query, $modules, $offset = -1, $limit = 20, $options = [])
     {
         if (empty($query)) {
             if (!((isset($options['my_items']) && $options['my_items'] == true)
@@ -133,18 +133,18 @@ class SugarSpot
                 || (isset($options['allowEmptySearch']) && $options['allowEmptySearch'] == true))
             ) {
                 // Make sure we aren't just searching for my items or favorites
-                return array();
+                return [];
             }
         }
         $primary_module = '';
-        $results = array();
+        $results = [];
         require_once 'include/SearchForm/SearchForm2.php';
         $where = '';
         $searchEmail = preg_match('/^([^%]|%)*@([^%]|%)*$/', $query);
 
         // bug49650 - strip out asterisks from query in case
         // user thinks asterisk is a wildcard value
-        $query = str_replace( '*' , '' , $query );
+        $query = str_replace('*', '', $query);
 
         $limit = !empty($GLOBALS['sugar_config']['max_spotresults_initial']) ? $GLOBALS['sugar_config']['max_spotresults_initial'] : 5;
         if ($offset !== -1) {
@@ -153,7 +153,7 @@ class SugarSpot
         $totalCounted = empty($GLOBALS['sugar_config']['disable_count_query']);
 
         if (empty($options['orderBy'])) {
-            $orderBy = "date_modified DESC";
+            $orderBy = 'date_modified DESC';
         } else {
             $orderBy = $options['orderBy'];
         }
@@ -170,10 +170,11 @@ class SugarSpot
             }
 
             $seed = BeanFactory::newBean($moduleName);
-            if(!$seed->ACLAccess('ListView')) continue;
+            if (!$seed->ACLAccess('ListView')) {
+                continue;
+            }
 
-            foreach ($searchFields[$moduleName] as $k => $v) 
-            {
+            foreach ($searchFields[$moduleName] as $k => $v) {
                 /*
                  * Restrict Bool searches from free-form text searches.
                  * Reasoning: cases.status is unified_search = true
@@ -193,21 +194,13 @@ class SugarSpot
                     continue;
                 }
 
-                if(!empty($GLOBALS['dictionary'][$seed->object_name]['unified_search']))
-                {
-                    if(empty($GLOBALS['dictionary'][$seed->object_name]['fields'][$k]['unified_search']))
-                    {
-                       
-                        if(isset($searchFields[$moduleName][$k]['db_field']))
-                        {
-                            foreach($searchFields[$moduleName][$k]['db_field'] as $field)
-                            {
-                                if(!empty($GLOBALS['dictionary'][$seed->object_name]['fields'][$field]['unified_search']))
-                                {
-                                    if(isset($GLOBALS['dictionary'][$seed->object_name]['fields'][$field]['type']))
-                                    {
-                                        if(!$this->filterSearchType($GLOBALS['dictionary'][$seed->object_name]['fields'][$field]['type'], $query))
-                                        {
+                if (!empty($GLOBALS['dictionary'][$seed->object_name]['unified_search'])) {
+                    if (empty($GLOBALS['dictionary'][$seed->object_name]['fields'][$k]['unified_search'])) {
+                        if (isset($searchFields[$moduleName][$k]['db_field'])) {
+                            foreach ($searchFields[$moduleName][$k]['db_field'] as $field) {
+                                if (!empty($GLOBALS['dictionary'][$seed->object_name]['fields'][$field]['unified_search'])) {
+                                    if (isset($GLOBALS['dictionary'][$seed->object_name]['fields'][$field]['type'])) {
+                                        if (!$this->filterSearchType($GLOBALS['dictionary'][$seed->object_name]['fields'][$field]['type'], $query)) {
                                             unset($searchFields[$moduleName][$k]);
                                             continue;
                                         }
@@ -218,29 +211,22 @@ class SugarSpot
                             } //foreach
                         }
                         # Bug 42961 Spot search for custom fields
-                        if (!$keep && (isset($v['force_unifiedsearch']) == false || $v['force_unifiedsearch'] != true)) 
-                        {
+                        if (!$keep && (isset($v['force_unifiedsearch']) == false || $v['force_unifiedsearch'] != true)) {
                             if (strpos($k, 'email') === false || !$searchEmail) {
                                 unset($searchFields[$moduleName][$k]);
                             }
                         }
-                    } 
-                    else 
-                    {
+                    } else {
                         if ($GLOBALS['dictionary'][$seed->object_name]['fields'][$k]['type'] == 'int' && !is_numeric($query)) {
                             unset($searchFields[$moduleName][$k]);
                         }
                     }
-                } 
-                else if (empty($GLOBALS['dictionary'][$seed->object_name]['fields'][$k])) 
-                {
+                } elseif (empty($GLOBALS['dictionary'][$seed->object_name]['fields'][$k])) {
                     //If module did not have unified_search defined, then check the exception for an email search before we unset
-                    if (strpos($k, 'email') === false || !$searchEmail) 
-                    {
+                    if (strpos($k, 'email') === false || !$searchEmail) {
                         unset($searchFields[$moduleName][$k]);
                     }
-                } else if (!$this->filterSearchType($GLOBALS['dictionary'][$seed->object_name]['fields'][$k]['type'], $query)) 
-                {
+                } elseif (!$this->filterSearchType($GLOBALS['dictionary'][$seed->object_name]['fields'][$k]['type'], $query)) {
                     unset($searchFields[$moduleName][$k]);
                 }
             } //foreach
@@ -248,8 +234,8 @@ class SugarSpot
             // reset these each time so we don't append my_items calls for tables not in the query
             // this would happen in global search
             $custom_select = $this->getOption($options, 'custom_select', $moduleName);
-            $custom_from   = $this->getOption($options, 'custom_from', $moduleName);
-            $custom_where  = $this->getOption($options, 'custom_where', $moduleName);
+            $custom_from = $this->getOption($options, 'custom_from', $moduleName);
+            $custom_where = $this->getOption($options, 'custom_where', $moduleName);
             if (isset($options['custom_where_module'][$moduleName])) {
                 if (!empty($custom_where)) {
                     $custom_where .= " AND {$options['custom_where_module'][$moduleName]}";
@@ -261,8 +247,8 @@ class SugarSpot
             // Add an extra search filter for my items
             // Verify the bean has assigned_user_id before we blindly assume it does
             if (!empty($options['my_items']) && $options['my_items'] == true && isset($seed->field_defs['assigned_user_id'])) {
-                if(!empty($custom_where)) {
-                    $custom_where .= " AND ";
+                if (!empty($custom_where)) {
+                    $custom_where .= ' AND ';
                 }
                 $custom_where .= "{$seed->table_name}.assigned_user_id = '{$GLOBALS['current_user']->id}'";
                 $allowBlankSearch = true;
@@ -270,20 +256,19 @@ class SugarSpot
 
             if (!empty($options['untouched']) && $options['untouched'] !== false && isset($GLOBALS['dictionary'][$class]['fields']['last_activity_date'])) {
                 if (!empty($custom_where)) {
-                    $custom_where .= " AND ";
+                    $custom_where .= ' AND ';
                 }
                 $days = (int)$options['untouched'];
-                $lastActivityDate = gmdate('Y-m-d',time() - ($days * 24 * 60 * 60));
+                $lastActivityDate = gmdate('Y-m-d', time() - ($days * 24 * 60 * 60));
                 $custom_where .= "{$seed->table_name}.last_activity_date <= '$lastActivityDate'";
-                if(isset($GLOBALS['dictionary'][$class]['fields']['sales_stage'])){
+                if (isset($GLOBALS['dictionary'][$class]['fields']['sales_stage'])) {
                     $custom_where .= " AND {$seed->table_name}.sales_stage != 'Closed Won' AND {$seed->table_name}.sales_stage != 'Closed Lost'";
                 }
-                if(isset($GLOBALS['dictionary'][$class]['fields']['date_closed'])){
-                                   $next30days = gmdate('Y-m-d',time() + (30 * 24 * 60 * 60));
-                                   $custom_where .= "AND {$seed->table_name}.date_closed <= '$next30days'";
+                if (isset($GLOBALS['dictionary'][$class]['fields']['date_closed'])) {
+                    $next30days = gmdate('Y-m-d', time() + (30 * 24 * 60 * 60));
+                    $custom_where .= "AND {$seed->table_name}.date_closed <= '$next30days'";
                 }
                 $allowBlankSearch = true;
-
             }
             // If we are just searching by favorites, add a no-op query parameter so we still search
             if (!empty($options['favorites']) && $options['favorites'] == 2) {
@@ -298,7 +283,7 @@ class SugarSpot
                 continue;
             }
 
-            $return_fields = array();
+            $return_fields = [];
             if (isset($seed->field_defs['name'])) {
                 $return_fields['name'] = $seed->field_defs['name'];
             }
@@ -344,19 +329,18 @@ class SugarSpot
                 }
             }
             if (!empty($options['fields'])) {
-                $extraFields = array();
+                $extraFields = [];
                 if (!empty($options['fields'][$moduleName])) {
                     $extraFields = $options['fields'][$moduleName];
-                } else if (!empty($options['fields']['_default'])) {
+                } elseif (!empty($options['fields']['_default'])) {
                     $extraFields = $options['fields']['_default'];
                 }
                 if (empty($extraFields)) {
                     // We set the 'fields' parameter, but left it blank, we should fetch all fields
-                    $return_fields = array();
+                    $return_fields = [];
                 } else {
-
-                    foreach ( $extraFields as $extraField ) {
-                        if ( $extraField == 'id' ) {
+                    foreach ($extraFields as $extraField) {
+                        if ($extraField == 'id') {
                             // Already in the list of fields it will return
                             continue;
                         }
@@ -370,7 +354,7 @@ class SugarSpot
             $searchFormClass = SugarAutoLoader::customClass('SearchForm');
             $searchForm = new $searchFormClass($seed, $moduleName);
 
-            $searchForm->setup(array($moduleName => array()), $searchFields, '', 'saved_views' /* hack to avoid setup doing further unwanted processing */);
+            $searchForm->setup([$moduleName => []], $searchFields, '', 'saved_views' /* hack to avoid setup doing further unwanted processing */);
             $where_clauses = $searchForm->generateSearchWhere();
 
             $orderBy = '';
@@ -379,11 +363,11 @@ class SugarSpot
             }
 
             $selectFields = '';
-            if (!empty($options['selectFields']) ) {
-                foreach ( $options['selectFields'] as $selectField ) {
-                    $selectFields .= $seed->table_name.".".$selectField." ".$selectField.", ";
+            if (!empty($options['selectFields'])) {
+                foreach ($options['selectFields'] as $selectField) {
+                    $selectFields .= $seed->table_name . '.' . $selectField . ' ' . $selectField . ', ';
                 }
-                $selectFields = rtrim($selectFields,', ');
+                $selectFields = rtrim($selectFields, ', ');
             }
 
             $showDeleted = $options['deleted'] ?? 0;
@@ -403,10 +387,10 @@ class SugarSpot
                     );
 
                     if (!empty($selectFields)) {
-                        $ret_array['select'] = "SELECT DISTINCT ".$selectFields;
+                        $ret_array['select'] = 'SELECT DISTINCT ' . $selectFields;
                     }
 
-                    if(!empty($custom_select)) {
+                    if (!empty($custom_select)) {
                         $ret_array['select'] .= $custom_select;
                     }
                     if (!empty($custom_from)) {
@@ -414,7 +398,7 @@ class SugarSpot
                     }
                     if (!empty($custom_where)) {
                         if (!empty($ret_array['where'])) {
-                            $ret_array['where'] .= " AND ";
+                            $ret_array['where'] .= ' AND ';
                         }
 
                         // If there are no where clauses but there is a custom
@@ -431,12 +415,12 @@ class SugarSpot
                         $ret_array['where'] .= $custom_where;
                     }
 
-                   $main_query = $ret_array['select'] . $ret_array['from'] . $ret_array['where'] . $ret_array['order_by'];
+                    $main_query = $ret_array['select'] . $ret_array['from'] . $ret_array['where'] . $ret_array['order_by'];
                 } else {
                     continue;
                 }
-            } elseif ((is_countable($where_clauses) ? count($where_clauses) : 0) > 1) {
-                $query_parts = array();
+            } elseif (safeCount($where_clauses) > 1) {
+                $query_parts = [];
 
                 $ret_array_start = $seed->create_new_list_query(
                     $orderBy,
@@ -476,10 +460,10 @@ class SugarSpot
                     );
 
                     if (!empty($selectFields)) {
-                        $ret_array_start['select'] = "SELECT DISTINCT ".$selectFields;
+                        $ret_array_start['select'] = 'SELECT DISTINCT ' . $selectFields;
                     }
 
-                    if(!empty($custom_select)) {
+                    if (!empty($custom_select)) {
                         $ret_array_start['select'] .= $custom_select;
                     }
                     if (!empty($custom_from)) {
@@ -487,7 +471,7 @@ class SugarSpot
                     }
                     if (!empty($custom_where)) {
                         if (!empty($ret_array['where'])) {
-                            $ret_array['where'] .= " AND ";
+                            $ret_array['where'] .= ' AND ';
                         }
                         $ret_array['where'] .= $custom_where;
                     }
@@ -495,12 +479,11 @@ class SugarSpot
                     $query_parts[] = $ret_array_start['select'] . $ret_array['from'] . $ret_array['where'];
                 }
                 // So we add it to the output of all of the unions
-                $main_query = "(".join(")\n UNION (", $query_parts).")";
-                if ( !empty($orderBy) ) {
-                    $main_query .= " ORDER BY ".$orderBy;
+                $main_query = '(' . join(")\n UNION (", $query_parts) . ')';
+                if (!empty($orderBy)) {
+                    $main_query .= ' ORDER BY ' . $orderBy;
                 }
-            }
-            else {
+            } else {
                 foreach ($searchFields[$moduleName] as $k => $v) {
                     if (isset($seed->field_defs[$k])) {
                         $return_fields[$k] = $seed->field_defs[$k];
@@ -520,9 +503,9 @@ class SugarSpot
                 );
 
                 if (!empty($selectFields)) {
-                    $ret_array['select'] = "SELECT DISTINCT ".$selectFields;
+                    $ret_array['select'] = 'SELECT DISTINCT ' . $selectFields;
                 }
-                if(!empty($custom_select)) {
+                if (!empty($custom_select)) {
                     $ret_array['select'] .= $custom_select;
                 }
                 if (!empty($custom_from)) {
@@ -530,7 +513,7 @@ class SugarSpot
                 }
                 if (!empty($custom_where)) {
                     if (!empty($ret_array['where'])) {
-                        $ret_array['where'] .= " AND ";
+                        $ret_array['where'] .= ' AND ';
                     }
                     $ret_array['where'] .= $custom_where;
                 }
@@ -541,8 +524,7 @@ class SugarSpot
             $totalCount = null;
             if ($limit < -1) {
                 $result = $seed->db->query($main_query);
-            }
-            else {
+            } else {
                 if ($limit == -1) {
                     $limit = $GLOBALS['sugar_config']['list_max_entries_per_page'];
                 }
@@ -562,7 +544,7 @@ class SugarSpot
                 $result = $seed->db->limitQuery($main_query, $offset, $limit + 1);
             }
 
-            $data = array();
+            $data = [];
             $count = 0;
             $ids = [];
             while ($count < $limit && ($row = $seed->db->fetchByAssoc($result))) {
@@ -572,7 +554,7 @@ class SugarSpot
                 // need to reload the seed because not all the fields will be filled in, for instance in bugs, all fields are wanted but the query does
                 // not contain description, so the loadFromRow will not load it
                 $temp->retrieve($temp->id, true, false); // this may be a deleted record
-                if ( isset($options['return_beans']) && $options['return_beans'] ) {
+                if (isset($options['return_beans']) && $options['return_beans']) {
                     $data[] = $temp;
                 } else {
                     $data[] = $temp->get_list_view_data($return_fields);
@@ -596,16 +578,16 @@ class SugarSpot
                     $nextOffset = $offset + $limit;
                 }
 
-                if($offset > 0) {
+                if ($offset > 0) {
                     $prevOffset = $offset - $limit;
                     if ($prevOffset < 0) {
                         $prevOffset = 0;
                     }
                 }
 
-                if( $count >= $limit && $totalCounted) {
-                    if(!isset($totalCount)) {
-                        $totalCount  = $this->_getCount($seed, $main_query);
+                if ($count >= $limit && $totalCounted) {
+                    if (!isset($totalCount)) {
+                        $totalCount = $this->_getCount($seed, $main_query);
                     }
                 } else {
                     $totalCount = $count + $offset;
@@ -616,14 +598,14 @@ class SugarSpot
             if (!empty($options['erased_fields'])) {
                 $erasedFields = $this->getModuleErasedFields($moduleName, $ids);
                 foreach ($data as $bean) {
-                    $bean->erased_fields = $erasedFields[$bean->id]?? null;
+                    $bean->erased_fields = $erasedFields[$bean->id] ?? null;
                 }
             }
 
-            $pageData['offsets'] = array('current' => $offset, 'next' => $nextOffset, 'prev' => $prevOffset, 'end' => $endOffset, 'total' => $totalCount, 'totalCounted' => $totalCounted);
-            $pageData['bean'] = array('objectName' => $seed->object_name, 'moduleDir' => $seed->module_dir);
+            $pageData['offsets'] = ['current' => $offset, 'next' => $nextOffset, 'prev' => $prevOffset, 'end' => $endOffset, 'total' => $totalCount, 'totalCounted' => $totalCounted];
+            $pageData['bean'] = ['objectName' => $seed->object_name, 'moduleDir' => $seed->module_dir];
 
-            $results[$moduleName] = array("data" => $data, "pageData" => $pageData);
+            $results[$moduleName] = ['data' => $data, 'pageData' => $pageData];
         }
 
         return $results;
@@ -632,9 +614,9 @@ class SugarSpot
     /**
      * Returns the value of specified option in the context of module
      *
-     * @param array  $options Search options
-     * @param string $name    Option name
-     * @param string $module  Module name
+     * @param array $options Search options
+     * @param string $name Option name
+     * @param string $module Module name
      *
      * @return mixed
      */
@@ -662,14 +644,13 @@ class SugarSpot
             $patterns[1] = substr($patterns[1], 0, (strlen($patterns[1]) - 1));
         }
 
-        $module_exists = stripos($key, $patterns[1]); //primary module name.
-        $pattern_exists = stripos($key, $patterns[0]); //pattern provided by the user.
+        $module_exists = stripos($key, (string) $patterns[1]); //primary module name.
+        $pattern_exists = stripos($key, (string) $patterns[0]); //pattern provided by the user.
         if ($module_exists !== false and $pattern_exists !== false) {
-            $GLOBALS['matching_keys'] = array_merge(array(array('NAME' => $key, 'ID' => $key, 'VALUE' => $item1)), $GLOBALS['matching_keys']);
-        }
-        else {
+            $GLOBALS['matching_keys'] = array_merge([['NAME' => $key, 'ID' => $key, 'VALUE' => $item1]], $GLOBALS['matching_keys']);
+        } else {
             if ($pattern_exists !== false) {
-                $GLOBALS['matching_keys'][] = array('NAME' => $key, 'ID' => $key, 'VALUE' => $item1);
+                $GLOBALS['matching_keys'][] = ['NAME' => $key, 'ID' => $key, 'VALUE' => $item1];
             }
         }
     }
@@ -703,6 +684,7 @@ class SugarSpot
                 if (!preg_match('/[0-9]{3,}/', $query)) {
                     return false;
                 }
+                // no break
             case 'decimal':
             case 'float':
                 if (!preg_match('/[0-9]/', $query)) {
@@ -719,10 +701,10 @@ class SugarSpot
      * @param array $ids
      * @return array
      */
-    protected function getModuleErasedFields(string $module, array $ids) : array
+    protected function getModuleErasedFields(string $module, array $ids): array
     {
         $erasedFields = [];
-        if (count($ids) === 0) {
+        if (safeCount($ids) === 0) {
             return $erasedFields;
         }
 
@@ -734,8 +716,8 @@ class SugarSpot
         array_walk($ids, function (&$val, $key, $seed) {
             $val = $seed->db->quoted($val);
         }, $seed);
-        $query = "SELECT data, bean_id FROM " .  Repository::DB_TABLE .
-            " WHERE table_name = $tableName AND bean_id IN (" . implode(", ", $ids) . ")";
+        $query = 'SELECT data, bean_id FROM ' . Repository::DB_TABLE .
+            " WHERE table_name = $tableName AND bean_id IN (" . implode(', ', $ids) . ')';
 
         $result = $seed->db->query($query);
 

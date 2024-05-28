@@ -10,30 +10,29 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /*********************************************************************************
- * $Id: view.detail.php 
+ * $Id: view.detail.php
  * Description: This file is used to override the default Meta-data EditView behavior
  * to provide customization specific to the Calls module.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-
-
-class ProjectTaskViewDetail extends ViewDetail 
+class ProjectTaskViewDetail extends ViewDetail
 {
     /**
- 	 * @see SugarView::display()
- 	 */
- 	public function display() 
- 	{
-		global $beanFiles;
-		require_once($beanFiles['ProjectTask']);
-		
-		$focus = BeanFactory::getBean('ProjectTask', $_REQUEST['record']);
-		
-		$this->ss->assign('resource', $focus->getResourceName());
-		
- 		parent::display();
- 	}
+     * @see SugarView::display()
+     */
+    public function display()
+    {
+        global $beanFiles;
+        require_once $beanFiles['ProjectTask'];
+
+        $focus = BeanFactory::getBean('ProjectTask', $_REQUEST['record']);
+
+        $this->ss->assign('resource', $focus->getResourceName());
+
+        parent::display();
+    }
 }

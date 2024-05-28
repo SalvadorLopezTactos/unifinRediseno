@@ -17,29 +17,29 @@
  */
 class ActivityQueueManager
 {
-    public static $linkBlacklist = array('user_sync', 'activities', 'contacts_sync', 'kbusefulness', 'usefulness');
-    public static $linkModuleBlacklist = array('ActivityStream/Activities', 'ACLRoles', 'Teams',
+    public static $linkBlacklist = ['user_sync', 'activities', 'contacts_sync', 'kbusefulness', 'usefulness'];
+    public static $linkModuleBlacklist = ['ActivityStream/Activities', 'ACLRoles', 'Teams',
         'KBArticles', 'KBDocuments', 'pmse_Project/pmse_BpmProcessDefinition',
-    );
-    public static $linkDupeCheck = array();
-    public static $moduleBlacklist = array('OAuthTokens', 'SchedulersJobs',
+    ];
+    public static $linkDupeCheck = [];
+    public static $moduleBlacklist = ['OAuthTokens', 'SchedulersJobs',
         'Activities', 'vCals', 'KBArticles', 'KBDocuments',
         'Forecasts', 'ForecastWorksheets', 'ForecastManagerWorksheets', 'Notifications',
         'Quotes', //Quotes should not allow admin to enable activities until Quotes are converted to sidecar
-    );
-    public static $moduleWhitelist = array('Notes', 'Tasks', 'Meetings', 'Calls', 'Emails', 'Home');
+    ];
+    public static $moduleWhitelist = ['Notes', 'Tasks', 'Meetings', 'Calls', 'Emails', 'Home'];
 
     /**
      * Logic hook arbiter for activity streams.
      *
-     * @param  SugarBean $bean
-     * @param  string    $event
-     * @param  array     $args
+     * @param SugarBean $bean
+     * @param string $event
+     * @param array $args
      */
     public function eventDispatcher(SugarBean $bean, $event, $args)
     {
         if (Activity::isEnabled()) {
-            $activity       = BeanFactory::newBean('Activities');
+            $activity = BeanFactory::newBean('Activities');
             $eventTriggered = false;
             if ($event == 'after_save' && self::isEnabledForModule($bean->getModuleName())) {
                 $eventTriggered = $this->createOrUpdate($bean, $args, $activity);
@@ -54,7 +54,7 @@ class ActivityQueueManager
             // potentially slow operation.
             if ($eventTriggered) {
                 $subscriptionsBeanName = BeanFactory::getBeanClass('Subscriptions');
-                $subscriptionsBeanName::processSubscriptions($bean, $activity, $args, array('disable_row_level_security' => true));
+                $subscriptionsBeanName::processSubscriptions($bean, $activity, $args, ['disable_row_level_security' => true]);
             }
         }
     }
@@ -95,7 +95,7 @@ class ActivityQueueManager
         if (SugarBean::inOperation('saving_related')) {
             return false;
         }
-        $blacklist  = in_array($args['link'], self::$linkBlacklist);
+        $blacklist = in_array($args['link'], self::$linkBlacklist);
         $lhs_module = in_array($args['module'], self::$linkModuleBlacklist);
         $rhs_module = in_array($args['related_module'], self::$linkModuleBlacklist);
         if ($blacklist || $lhs_module || $rhs_module) {
@@ -114,8 +114,8 @@ class ActivityQueueManager
 
     /**
      * Helper to check if a link or unlink activity is a duplicate.
-     * @param  array $args1
-     * @param  array $args2
+     * @param array $args1
+     * @param array $args2
      * @return bool
      */
     protected static function isLinkDupe($args1, $args2)
@@ -134,8 +134,8 @@ class ActivityQueueManager
      * Handler for create and update actions on a bean.
      *
      * @param SugarBean $bean
-     * @param array     $args
-     * @param Activity  $act
+     * @param array $args
+     * @param Activity $act
      * @return bool     eventProcessed
      */
     protected function createOrUpdate(SugarBean $bean, array $args, Activity $act)
@@ -147,12 +147,12 @@ class ActivityQueueManager
         // Add Appropriate Subscriptions for this Bean
         $this->addRecordSubscriptions($args, $bean);
 
-        $data = array(
+        $data = [
             'object' => self::getBeanAttributes($bean),
-        );
+        ];
         if ($args['isUpdate']) {
             $act->activity_type = 'update';
-            $data['changes']    = $args['dataChanges'];
+            $data['changes'] = $args['dataChanges'];
             $this->prepareChanges($bean, $data);
 
             //if no field changes to report, do not create the activity
@@ -163,9 +163,9 @@ class ActivityQueueManager
             $act->activity_type = 'create';
         }
 
-        $act->parent_id   = $bean->id;
+        $act->parent_id = $bean->id;
         $act->parent_type = $bean->module_name;
-        $act->data        = $data;
+        $act->data = $data;
         $act->save();
         $act->processRecord($bean);
         return true;
@@ -174,8 +174,8 @@ class ActivityQueueManager
     /**
      * Handler for link actions on two beans.
      *
-     * @param  array    $args
-     * @param  Activity $act
+     * @param array $args
+     * @param Activity $act
      * @return bool     eventProcessed
      */
     protected function link(array $args, Activity $act)
@@ -183,8 +183,8 @@ class ActivityQueueManager
         if (empty($args['id']) || empty($args['related_id'])) {
             return false;
         }
-        $lhs                = BeanFactory::getBean($args['module'], $args['id']);
-        $rhs                = BeanFactory::getBean($args['related_module'], $args['related_id']);
+        $lhs = BeanFactory::getBean($args['module'], $args['id']);
+        $rhs = BeanFactory::getBean($args['related_module'], $args['related_id']);
 
         // Submodules break this paradigm pretty badly, so until there is a mechanism
         // to handle $module_dir = $path/$sub_path this will have to do.
@@ -216,16 +216,16 @@ class ActivityQueueManager
         if (empty($rhs->id) && !empty($args['related_id'])) {
             $rhs->id = $args['related_id'];
         }
-        $data               = array(
-            'object'       => self::getBeanAttributes($lhs),
-            'subject'      => self::getBeanAttributes($rhs),
-            'link'         => $args['link'],
+        $data = [
+            'object' => self::getBeanAttributes($lhs),
+            'subject' => self::getBeanAttributes($rhs),
+            'link' => $args['link'],
             'relationship' => $args['relationship'],
-        );
+        ];
         $act->activity_type = 'link';
-        $act->parent_id     = $lhs->id;
-        $act->parent_type   = $lhs->module_name;
-        $act->data          = $data;
+        $act->parent_id = $lhs->id;
+        $act->parent_type = $lhs->module_name;
+        $act->data = $data;
         $act->save();
 
         self::$linkDupeCheck[] = $args;
@@ -237,8 +237,8 @@ class ActivityQueueManager
     /**
      * Handler for unlink actions on two beans.
      *
-     * @param  array    $args [description]
-     * @param  Activity $act  [description]
+     * @param array $args [description]
+     * @param Activity $act [description]
      * @return bool     eventProcessed
      */
     protected function unlink(array $args, Activity $act)
@@ -246,8 +246,8 @@ class ActivityQueueManager
         if (empty($args['id']) || empty($args['related_id'])) {
             return false;
         }
-        $lhs                = BeanFactory::getBean($args['module'], $args['id']);
-        $rhs                = BeanFactory::getBean($args['related_module'], $args['related_id']);
+        $lhs = BeanFactory::getBean($args['module'], $args['id']);
+        $rhs = BeanFactory::getBean($args['related_module'], $args['related_id']);
 
         // Submodules break this paradigm pretty badly, so until there is a mechanism
         // to handle $module_dir = $path/$sub_path this will have to do.
@@ -267,16 +267,16 @@ class ActivityQueueManager
             return false;
         }
 
-        $data               = array(
-            'object'       => self::getBeanAttributes($lhs),
-            'subject'      => self::getBeanAttributes($rhs),
-            'link'         => $args['link'],
+        $data = [
+            'object' => self::getBeanAttributes($lhs),
+            'subject' => self::getBeanAttributes($rhs),
+            'link' => $args['link'],
             'relationship' => $args['relationship'],
-        );
+        ];
         $act->activity_type = 'unlink';
-        $act->parent_id     = $lhs->id;
-        $act->parent_type   = $lhs->module_name;
-        $act->data          = $data;
+        $act->parent_id = $lhs->id;
+        $act->parent_type = $lhs->module_name;
+        $act->data = $data;
         $act->save();
 
         self::$linkDupeCheck[] = $args;
@@ -288,18 +288,18 @@ class ActivityQueueManager
     /**
      * Helper to denormalize critical bean attributes.
      *
-     * @param  SugarBean $bean
+     * @param SugarBean $bean
      *
      * @return array     Contains name, type, module and ID of the bean.
      */
     public static function getBeanAttributes(SugarBean $bean)
     {
-        return array(
-            'name'   => static::getDisplayName($bean),
-            'type'   => $bean->object_name,
+        return [
+            'name' => static::getDisplayName($bean),
+            'type' => $bean->object_name,
             'module' => $bean->module_name,
-            'id'     => $bean->id,
-        );
+            'id' => $bean->id,
+        ];
     }
 
     /**
@@ -308,7 +308,7 @@ class ActivityQueueManager
      */
     public static function resetDuplicateCheck()
     {
-        self::$linkDupeCheck = array();
+        self::$linkDupeCheck = [];
     }
 
     /**
@@ -326,8 +326,7 @@ class ActivityQueueManager
                 //strip out changes where the field has activity_enabled is false
                 // According to documentation the audited option is still supported and a field with
                 // neither of the options should not be in activities.
-                if (
-                    empty($def['audited']) ||
+                if (empty($def['audited']) ||
                     (isset($def['audited']) && $def['audited'] === false) ||
                     (isset($def['activity_enabled']) && $def['activity_enabled'] === false)
                 ) {
@@ -337,7 +336,7 @@ class ActivityQueueManager
 
                 if (isset($changeInfo['data_type']) &&
                     ($changeInfo['data_type'] === 'id' ||
-                        in_array($changeInfo['data_type'], $bean::$relateFieldTypes) ||
+                        safeInArray($changeInfo['data_type'], $bean::$relateFieldTypes) ||
                         $changeInfo['data_type'] === 'team_list')
                 ) {
                     if ($fieldName == 'team_set_id') {
@@ -361,9 +360,9 @@ class ActivityQueueManager
                                 $referenceModule = $def['module'];
                             } elseif ($changeInfo['data_type'] === 'id') {
                                 //find module from corresponding relate field
-                                foreach($bean->field_defs as $fieldDef) {
+                                foreach ($bean->field_defs as $fieldDef) {
                                     if (isset($fieldDef['type']) &&
-                                        in_array($fieldDef['type'], $bean::$relateFieldTypes) &&
+                                        safeInArray($fieldDef['type'], $bean::$relateFieldTypes) &&
                                         isset($fieldDef['id_name']) &&
                                         $fieldDef['id_name'] === $fieldName &&
                                         isset($fieldDef['module'])
@@ -397,7 +396,7 @@ class ActivityQueueManager
             $referenceModule,
             $data['changes'][$fieldName]['before']
         );
-        $data['changes'][$fieldName]['after']  = $this->getReferenceName(
+        $data['changes'][$fieldName]['after'] = $this->getReferenceName(
             $referenceModule,
             $data['changes'][$fieldName]['after']
         );
@@ -413,7 +412,7 @@ class ActivityQueueManager
      */
     protected function getReferenceName($module, $id)
     {
-        $val  = null;
+        $val = null;
         $bean = BeanFactory::retrieveBean($module, $id);
         if (!empty($bean)) {
             $val = $bean->name;
@@ -431,7 +430,7 @@ class ActivityQueueManager
     {
         $data['changes'][$fieldName]['before'] =
             $this->getTeamSetInfo($data['changes'][$fieldName]['before']);
-        $data['changes'][$fieldName]['after']  =
+        $data['changes'][$fieldName]['after'] =
             $this->getTeamSetInfo($data['changes'][$fieldName]['after']);
     }
 
@@ -448,13 +447,13 @@ class ActivityQueueManager
         if ($teamSet) {
             $teamSet->load_relationship('teams');
             $rows = $teamSet->getTeamIds($teamSetId);
-            $teams = array();
+            $teams = [];
             if (!empty($rows)) {
                 foreach ($rows as $teamId) {
                     $teams[] = $this->getTeamNameFromId($teamId);
                 }
             }
-            $info = implode(", ", $teams);
+            $info = implode(', ', $teams);
         }
         return $info;
     }
@@ -488,7 +487,7 @@ class ActivityQueueManager
 
         //then check the full list of data changes in case the assigned_user_id field is not audited
         if (!$assignmentChanged) {
-            $assignmentChanges = $bean->db->getDataChanges($bean, array('field_filter'=>array('assigned_user_id')));
+            $assignmentChanges = $bean->db->getDataChanges($bean, ['field_filter' => ['assigned_user_id']]);
             $assignmentChanged = isset($assignmentChanges['assigned_user_id']);
         }
 
@@ -500,15 +499,15 @@ class ActivityQueueManager
      *   (1) Assigned-To User
      *   (2) CreatedBy User if other than AssignedTo User and event is Not an Update
      *
-     * @param  array $args
-     * @param  SugarBean $bean
+     * @param array $args
+     * @param SugarBean $bean
      * @return void
      */
     protected function addRecordSubscriptions($args, SugarBean $bean)
     {
         // Subscribe the user assigned to this record if an existing non-Portal User and action is create or assignment changed
         if (isset($bean->assigned_user_id) && (!$args['isUpdate'] || $this->assignmentChanged($bean, $args))) {
-            $assigned_user = BeanFactory::getBean('Users', $bean->assigned_user_id, array('strict_retrieve' => true));
+            $assigned_user = BeanFactory::getBean('Users', $bean->assigned_user_id, ['strict_retrieve' => true]);
             if (!empty($assigned_user) && !$assigned_user->portal_only) {
                 $this->subscribeUserToRecord($assigned_user, $bean);
             }
@@ -520,7 +519,7 @@ class ActivityQueueManager
             if (isset($bean->created_by) &&
                 (!isset($bean->assigned_user_id) || ($bean->created_by !== $bean->assigned_user_id))
             ) {
-                $created_user = BeanFactory::getBean('Users', $bean->created_by, array('strict_retrieve' => true));
+                $created_user = BeanFactory::getBean('Users', $bean->created_by, ['strict_retrieve' => true]);
                 if (!empty($created_user) && !$created_user->portal_only) {
                     $this->subscribeUserToRecord($created_user, $bean);
                 }
@@ -531,20 +530,20 @@ class ActivityQueueManager
     /**
      * Subscribe supplied User to supplied Bean
      *
-     * @param  User $user
-     * @param  SugarBean $bean
+     * @param User $user
+     * @param SugarBean $bean
      * @return void
      */
     protected function subscribeUserToRecord(User $user, SugarBean $bean)
     {
         $subs = BeanFactory::getBeanClass('Subscriptions');
-        $subs::subscribeUserToRecord($user, $bean, array('disable_row_level_security' => true));
+        $subs::subscribeUserToRecord($user, $bean, ['disable_row_level_security' => true]);
     }
 
     /**
      * Get a bean's name. Returns `LBL_VALUE_ERASED` if the bean's name has been erased.
      *
-     * @param  SugarBean $bean
+     * @param SugarBean $bean
      * @return string
      */
     protected static function getDisplayName(SugarBean $bean)

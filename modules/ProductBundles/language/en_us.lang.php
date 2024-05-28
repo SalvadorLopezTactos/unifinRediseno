@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Group Stage:',
-    'LBL_DEAL_TOT'=>'discount total',
-    'LBL_DEAL_TOT_USDOLLAR'=>'discount total (US Dollar)',
+    'LBL_DEAL_TOT' => 'discount total',
+    'LBL_DEAL_TOT_USDOLLAR' => 'discount total (US Dollar)',
     'LBL_NEW_SUB' => 'Discounted Subtotal:',
     'LBL_SHIPPING' => 'Shipping:',
-    'LBL_SHIPPING_USDOLLAR'=>'Shipping (US Dollar)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Subtotal (US Dollar)',
+    'LBL_SHIPPING_USDOLLAR' => 'Shipping (US Dollar)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Subtotal (US Dollar)',
     'LBL_SUBTOTAL' => 'Subtotal:',
     'LBL_TAXABLE_SUBTOTAL' => 'Taxable Subtotal',
-    'LBL_TAX_USDOLLAR'=>'Tax (US Dollar)',
+    'LBL_TAX_USDOLLAR' => 'Tax (US Dollar)',
     'LBL_TAX' => 'Tax:',
-    'LBL_TOTAL_USDOLLAR'=>'Total (US Dollar)',
+    'LBL_TOTAL_USDOLLAR' => 'Total (US Dollar)',
     'LBL_TOTAL' => 'Total:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Quote Bundle Position',
     'EXCEPTION_INVALID_QUOTE_ID' => 'Quote ID is missing from the payload',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'The Quote you requested was not found',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'The Quote you requested was not found',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Additional Group Discount',
     'LBL_GROUP_TOTAL' => 'Group Total',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Group Header',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'The default Product Bundle group for the Quote',
     'LBL_ALERT_DELETING_ITEM' => 'Deleting line item(s)',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Line item deleted successfully',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Product Bundle Timeline',
+];

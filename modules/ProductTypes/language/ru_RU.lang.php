@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Виды продуктов',
     'LBL_MODULE_NAME_SINGULAR' => 'Вид продукта',
     'LBL_MODULE_TITLE' => 'Виды продуктов: Главная',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Вы действительно хотите удалить эту запись?',
     'ERR_DELETE_RECORD' => 'Вы должны указать номер записи перед удалением вида продукта.',
     'NTC_LIST_ORDER' => 'Укажите порядок, в котором этот вид будет выведен в выпадающем списке видов продуктов.',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Импортировать виды продуктов',
-    'LBL_CREATED_BY'=>'Создано',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Импортировать виды продуктов',
+    'LBL_CREATED_BY' => 'Создано',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Ответственный (-ая) (ID):',
-    'LBL_EXPORT_CREATED_BY'=>'Создано (ID):',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Импорт категорий продуктов',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Ответственный (-ая) (ID):',
+    'LBL_EXPORT_CREATED_BY' => 'Создано (ID):',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Импорт категорий продуктов',
+];

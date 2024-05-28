@@ -1,4 +1,5 @@
 <?php
+
 //FILE SUGARCRM flav=ent
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -16,26 +17,26 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$viewdefs['Contacts']['portal']['view']['tutorial'] = array(
-    'record' => array( //Record layout is used for the Portal profile
+$viewdefs['Contacts']['portal']['view']['tutorial'] = [
+    'record' => [ //Record layout is used for the Portal profile
         'version' => 1,
         'intro' => 'LBL_PORTAL_TOUR_PROFILE_INTRO',
-        'content' => array(
-            array(
+        'content' => [
+            [
                 'name' => '.btn-primary[name="edit_button"]',
                 'text' => 'LBL_PORTAL_TOUR_PROFILE_EDIT',
                 'full' => true,
-            ),
-            array(
+            ],
+            [
                 'name' => '.record-label[data-name="preferred_language"]',
                 'text' => 'LBL_PORTAL_TOUR_PROFILE_LANGUAGE',
                 'full' => true,
-            ),
-            array(
+            ],
+            [
                 'name' => 'li#userActions',
                 'text' => 'LBL_PORTAL_TOUR_PROFILE_RETURN',
                 'full' => true,
-            ),
-        )
-    ),
-);
+            ],
+        ],
+    ],
+];

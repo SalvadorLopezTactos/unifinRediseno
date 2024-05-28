@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Hoofdtekst',
     'LBL_BASE_MODULE' => 'Doel Module',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Aanmaken E-mailsjabloon verwerken uit bestand mislukt',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Dit e-mailsjabloon wordt momenteel in een procesdefinitie gebruikt. Wilt u dit e-mailsjabloon bewerken?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "U kunt dit e-mailsjabloon niet verwijderen omdat het in een procesdefinitie wordt gebruikt.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'U kunt dit e-mailsjabloon niet verwijderen omdat het in een procesdefinitie wordt gebruikt.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Veldselectie',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Kies',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Type veldwaarde',
-);
+];

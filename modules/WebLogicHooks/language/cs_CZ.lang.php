@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Webové háčky',
     'LBL_MODULE_NAME_SINGULAR' => 'Webový háček',
     'LBL_MODULE_TITLE' => 'Webové háčky',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => 'Vyžádat metodu',
     'LBL_TRIGGER_EVENT' => 'Spustit událost',
     'LBL_URL' => 'Adresa URL',
-);
+];

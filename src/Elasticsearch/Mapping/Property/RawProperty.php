@@ -25,7 +25,7 @@ class RawProperty implements PropertyInterface
     /**
      * @var array Mapping definition
      */
-    protected $mapping = array();
+    protected $mapping = [];
 
     /**
      * {@inheritdoc}
@@ -50,7 +50,7 @@ class RawProperty implements PropertyInterface
     {
         // initialize copy_to parameter if not set
         if (!isset($this->mapping['copy_to'])) {
-            $this->mapping['copy_to'] = array();
+            $this->mapping['copy_to'] = [];
         }
 
         // avoid duplicates just in case

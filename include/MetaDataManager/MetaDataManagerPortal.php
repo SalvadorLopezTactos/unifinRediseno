@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -31,7 +32,7 @@ class MetaDataManagerPortal extends MetaDataManager
      */
     protected function getModules($filtered = true)
     {
-        $modules = array();
+        $modules = [];
         foreach (SugarAutoLoader::getDirFiles('modules', true) as $mdir) {
             // do we have a core or custom portal directory for the module
             if (SugarAutoLoader::existingCustomOne($mdir . '/clients/portal/')) {
@@ -80,7 +81,8 @@ class MetaDataManagerPortal extends MetaDataManager
      *
      * @return array
      */
-    protected function getConfigs() {
+    protected function getConfigs()
+    {
         global $sugar_config;
 
         $admin = new Administration();
@@ -127,7 +129,8 @@ class MetaDataManagerPortal extends MetaDataManager
      * @param array $main Core app list strings
      * @return array
      */
-    protected function fillInAppListStrings(Array $public, Array $main) {
+    protected function fillInAppListStrings(array $public, array $main)
+    {
         $public['countries_dom'] = $main['countries_dom'];
         $public['state_dom'] = $main['state_dom'];
 
@@ -164,7 +167,8 @@ class MetaDataManagerPortal extends MetaDataManager
      *
      * @return string url of the portal logo
      */
-    public function getLogoUrl() {
+    public function getLogoUrl()
+    {
         global $sugar_config;
         $config = $this->getConfigs();
         if (!empty($config['logoURL'])) {
@@ -213,5 +217,15 @@ class MetaDataManagerPortal extends MetaDataManager
         // Rehash the hash
         $data['_hash'] = $this->hashChunk($data);
         return $data;
+    }
+
+    /**
+     * Not supported.
+     * {@inheritDoc}
+     * @see MetaDataManager::getModuleDropdownViews()
+     */
+    public function getModuleDropdownViews($moduleName, MetaDataContextInterface $context = null)
+    {
+        return [];
     }
 }

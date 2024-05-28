@@ -44,7 +44,7 @@ abstract class AbstractCollectionDefinition implements CollectionDefinitionInter
      *
      * @return array
      */
-    protected $storedFilters = array();
+    protected $storedFilters = [];
 
     /**
      * ORDER BY definition
@@ -178,25 +178,25 @@ abstract class AbstractCollectionDefinition implements CollectionDefinitionInter
     {
         if (!is_array($sources)) {
             throw new SugarApiExceptionError(
-                $this->getErrorMessage('Source definition must be array, %s is given for collection %s', array(
+                $this->getErrorMessage('Source definition must be array, %s is given for collection %s', [
                     gettype($sources),
                     $this->name,
-                ))
+                ])
             );
         }
 
-        $normalized = array();
+        $normalized = [];
         foreach ($sources as $i => $definition) {
             if (is_string($definition)) {
                 $name = $definition;
-                $definition = array();
+                $definition = [];
             } elseif (is_array($definition)) {
                 if (!isset($definition['name']) || !is_string($definition['name'])) {
                     throw new SugarApiExceptionError(
-                        $this->getErrorMessage('Source #%d name is not defined for collection %s', array(
+                        $this->getErrorMessage('Source #%d name is not defined for collection %s', [
                             $i,
                             $this->name,
-                        ))
+                        ])
                     );
                 }
                 $name = $definition['name'];
@@ -205,11 +205,11 @@ abstract class AbstractCollectionDefinition implements CollectionDefinitionInter
                 throw new SugarApiExceptionError(
                     $this->getErrorMessage(
                         'Source definition must be string or array, %s is given for source #%d, collection %s',
-                        array(
+                        [
                             gettype($definition),
                             $i,
                             $this->name,
-                        )
+                        ]
                     )
                 );
             }

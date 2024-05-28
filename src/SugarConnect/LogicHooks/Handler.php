@@ -40,13 +40,13 @@ final class Handler implements Publisher, ConfigurationAwareInterface
      * Triggered by logic hooks to begin publishing bean changes to the Sugar
      * Connect webhook.
      *
-     * @param \SugarBean $bean  The bean that was saved.
-     * @param string     $event The event type.
-     * @param array      $args  Additional arguments.
+     * @param \SugarBean $bean The bean that was saved.
+     * @param string $event The event type.
+     * @param array $args Additional arguments.
      *
      * @return void
      */
-    public function publish(\SugarBean $bean, string $event, array $args) : void
+    public function publish(\SugarBean $bean, string $event, array $args): void
     {
         $config = $this->getConfiguration();
 

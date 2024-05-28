@@ -10,53 +10,51 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$subpanel_layout = array(
-	'top_buttons' => array(
-        array('widget_class' => 'SubPanelTopCreateButton'),
-	),
+$subpanel_layout = [
+    'top_buttons' => [
+        ['widget_class' => 'SubPanelTopCreateButton'],
+    ],
 
-	'where' => '',
+    'where' => '',
 
 
-    'list_fields'=> array(
-        'name' => array(
-	 		'vname' => 'LBL_LIST_NAME',
-			'widget_class' => 'SubPanelDetailViewLink',
-		 	'width' => '40%',
-		),
-		'date_start'=>array(
-	 		'vname' => 'LBL_LIST_DATE_START',
-		 	'width' => '20%',
+    'list_fields' => [
+        'name' => [
+            'vname' => 'LBL_LIST_NAME',
+            'widget_class' => 'SubPanelDetailViewLink',
+            'width' => '40%',
+        ],
+        'date_start' => [
+            'vname' => 'LBL_LIST_DATE_START',
+            'width' => '20%',
 
-		),
-		'status'=>array(
-	 		'vname' => 'LBL_LIST_STATUS',
-		 	'width' => '15%',
-		),
-		'template_name'=>array(
-	 		'vname' => 'LBL_LIST_TEMPLATE_NAME',
-		 	'width' => '15%',
-			'widget_class' => 'SubPanelDetailViewLink',
-		  	'target_record_key' => 'template_id',
-		 	'target_module' => 'EmailTemplates',
-		 
-		),
-		'edit_button'=>array(
-			'vname' => 'LBL_EDIT_BUTTON',
-			'widget_class' => 'SubPanelEditButton',
-		 	'module' => 'EmailMarketing',
-			'width' => '5%',
-		),
-		'remove_button'=>array(
-			'vname' => 'LBL_REMOVE',
-			'widget_class' => 'SubPanelRemoveButton',
-		 	'module' => 'EmailMarketing',
-			'width' => '5%',
-		),
-	 	'time_start'=>array(
-	 		'usage'=>'query_only'
- 		),
-	),
-);
+        ],
+        'status' => [
+            'vname' => 'LBL_LIST_STATUS',
+            'width' => '15%',
+        ],
+        'template_name' => [
+            'vname' => 'LBL_LIST_TEMPLATE_NAME',
+            'width' => '15%',
+            'widget_class' => 'SubPanelDetailViewLink',
+            'target_record_key' => 'template_id',
+            'target_module' => 'EmailTemplates',
 
-?>
+        ],
+        'edit_button' => [
+            'vname' => 'LBL_EDIT_BUTTON',
+            'widget_class' => 'SubPanelEditButton',
+            'module' => 'EmailMarketing',
+            'width' => '5%',
+        ],
+        'remove_button' => [
+            'vname' => 'LBL_REMOVE',
+            'widget_class' => 'SubPanelRemoveButton',
+            'module' => 'EmailMarketing',
+            'width' => '5%',
+        ],
+        'time_start' => [
+            'usage' => 'query_only',
+        ],
+    ],
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'תבניות מאגר הידע',
     'LBL_MODULE_NAME_SINGULAR' => 'תבנית בסיס ידע',
     'LBL_MODULE_TITLE' => 'תבנית בסיס ידע',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'הצג תבניות',
     'LBL_TEXT_BODY' => 'גוף',
     'LBL_LIST_TEMPLATE_NAME' => 'שם תבנית',
-);
+];

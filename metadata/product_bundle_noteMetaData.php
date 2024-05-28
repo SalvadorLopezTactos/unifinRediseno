@@ -9,66 +9,66 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['product_bundle_note'] = array(
+$dictionary['product_bundle_note'] = [
     'table' => 'product_bundle_note',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-        'bundle_id' => array(
+        ],
+        'bundle_id' => [
             'name' => 'bundle_id',
             'type' => 'id',
-        ),
-        'note_id' => array(
+        ],
+        'note_id' => [
             'name' => 'note_id',
             'type' => 'id',
-        ),
-        'note_index' => array(
+        ],
+        'note_index' => [
             'name' => 'note_index',
             'type' => 'int',
             'len' => '11',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'prod_bundl_notepk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_pbn_bundle',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'bundle_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_pbn_pb_nb',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'note_id',
                 'bundle_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'product_bundle_note' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'product_bundle_note' => [
             'lhs_module' => 'ProductBundles',
             'lhs_table' => 'product_bundles',
             'lhs_key' => 'id',
@@ -80,6 +80,6 @@ $dictionary['product_bundle_note'] = array(
             'join_key_lhs' => 'bundle_id',
             'join_key_rhs' => 'note_id',
             'true_relationship_type' => 'one-to-many',
-        ),
-    ),
-);
+        ],
+    ],
+];

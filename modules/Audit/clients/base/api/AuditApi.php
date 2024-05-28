@@ -15,33 +15,33 @@ class AuditApi extends FilterApi
 {
     public function registerApiRest()
     {
-        return array(
-            'export_audit' => array(
+        return [
+            'export_audit' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', 'audit', 'export'),
-                'pathVars' => array('module', '', ''),
+                'path' => ['<module>', 'audit', 'export'],
+                'pathVars' => ['module', '', ''],
                 'method' => 'exportAudit',
                 'shortHelp' => 'Export Audit records for module',
                 'minVersion' => '11.11',
                 'longHelp' => 'include/api/help/audit_export_help.html',
-            ),
-            'view_change_log' => array(
+            ],
+            'view_change_log' => [
                 'reqType' => 'GET',
-                'path' => array('<module>','?', 'audit'),
-                'pathVars' => array('module','record','audit'),
+                'path' => ['<module>', '?', 'audit'],
+                'pathVars' => ['module', 'record', 'audit'],
                 'method' => 'viewChangeLog',
                 'shortHelp' => 'View audit log in record view',
                 'minVersion' => '11.11',
                 'longHelp' => 'include/api/help/audit_get_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     public function viewChangeLog(ServiceBase $api, array $args)
     {
         global $focus;
 
-        $this->requireArgs($args,array('module', 'record'));
+        $this->requireArgs($args, ['module', 'record']);
 
         $focus = BeanFactory::getBean($args['module'], $args['record']);
 
@@ -59,7 +59,7 @@ class AuditApi extends FilterApi
         } else {
             $options = $this->parseArguments($api, $args, $auditBean);
             $records = $auditBean->getAuditLogChunk($focus, $options);
-            if ($options['limit'] > 0 && (is_countable($records) ? count($records) : 0) > $options['limit']) {
+            if ($options['limit'] > 0 && safeCount($records) > $options['limit']) {
                 $next_offset = $options['limit'] + $options['offset'];
                 array_pop($records);
             } else {
@@ -85,7 +85,7 @@ class AuditApi extends FilterApi
         $options = $this->parseArguments($api, $args, $auditBean);
 
         $records = $auditBean->getAuditLogChunk($focus, $options);
-        if ($options['limit'] > 0 && (is_countable($records) ? count($records) : 0) > $options['limit']) {
+        if ($options['limit'] > 0 && safeCount($records) > $options['limit']) {
             $next_offset = $options['limit'] + $options['offset'];
             array_pop($records);
         } else {

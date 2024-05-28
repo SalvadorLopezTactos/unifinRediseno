@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => '追加',
     'LBL_ADDRCITY' => '市区町村',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => '情報' /*for 508 compliance fix*/,
     'LBL_CLOSE' => '完了' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => '指定されたソース ID のコネクタが見つかりませんでした。',
-);
-
+];

@@ -71,7 +71,7 @@ class SugarUpgradeUpgradeAuthenticationClass extends UpgradeScript
     /**
      * @return Configurator
      */
-    protected function getConfigurator():Configurator
+    protected function getConfigurator(): Configurator
     {
         if (is_null($this->configurator)) {
             $this->configurator = new Configurator();
@@ -82,7 +82,7 @@ class SugarUpgradeUpgradeAuthenticationClass extends UpgradeScript
     /**
      * @return SugarConfig
      */
-    protected function getConfigInstance():SugarConfig
+    protected function getConfigInstance(): SugarConfig
     {
         return SugarConfig::getInstance();
     }

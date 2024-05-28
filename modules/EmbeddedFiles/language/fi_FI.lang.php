@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Upotetut tiedostot',
     'LBL_MODULE_NAME_SINGULAR' => 'Upotettu tiedosto',
     'LBL_MODULE_TITLE' => 'Upotettu tiedosto',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => 'Tiedostonimi',
     'LBL_FILENAME' => 'Tiedostonimi',
     'LBL_UPLOAD_ONLY_IMAGE' => 'Valitun tiedoston tulee olla kuva.',
-);
+];

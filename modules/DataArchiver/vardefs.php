@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['DataArchiver'] = array(
+$dictionary['DataArchiver'] = [
     'table' => 'data_archivers',
     'archive' => false,
     'unified_search' => true,
@@ -18,8 +18,8 @@ $dictionary['DataArchiver'] = array(
     'unified_search_default_enabled' => true,
     'full_text_search' => false,
     'duplicate_merge' => true,
-    'fields' => array(
-        'filter_module_name' => array(
+    'fields' => [
+        'filter_module_name' => [
             'name' => 'filter_module_name',
             'vname' => 'LBL_MODULE_FIELD',
             'type' => 'enum',
@@ -27,15 +27,15 @@ $dictionary['DataArchiver'] = array(
             'function_bean' => 'DataArchiver',
             'required' => true,
             'comment' => 'Module associated with the archived data',
-        ),
-        'filter_def' => array(
+        ],
+        'filter_def' => [
             'name' => 'filter_def',
             'vname' => 'LBL_FILTER_DEF_FIELD',
             'type' => 'text',
             'required' => true,
             'comment' => 'The filter definitions defined for the archive',
-        ),
-        'process_type' => array(
+        ],
+        'process_type' => [
             'name' => 'process_type',
             'vname' => 'LBL_PROCESS_TYPE_FIELD',
             'type' => 'enum',
@@ -44,15 +44,15 @@ $dictionary['DataArchiver'] = array(
             'required' => true,
             'defaultToBlank' => true,
             'comment' => 'Whether the data should be truncated or archived',
-        ),
-        'active' => array(
+        ],
+        'active' => [
             'name' => 'active',
             'vname' => 'LBL_ACTIVE_FIELD',
             'type' => 'bool',
             'default' => true,
             'comment' => 'Whether the definition is active or not',
-        ),
-        'archive_runs' => array(
+        ],
+        'archive_runs' => [
             'name' => 'archive_runs',
             'type' => 'link',
             'relationship' => 'archiver_runs',
@@ -60,10 +60,10 @@ $dictionary['DataArchiver'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_ARCHIVE_RUNS_FIELD',
             'duplicate_merge' => 'disabled',
-        ),
-    ),
-    'relationships' => array(
-        'archiver_runs' => array(
+        ],
+    ],
+    'relationships' => [
+        'archiver_runs' => [
             'lhs_module' => 'DataArchiver',
             'lhs_table' => 'data_archivers',
             'lhs_key' => 'id',
@@ -71,8 +71,8 @@ $dictionary['DataArchiver'] = array(
             'rhs_table' => 'archive_runs',
             'rhs_key' => 'archiver_id',
             'relationship_type' => 'one-to-many',
-        ),
-    ),
-);
+        ],
+    ],
+];
 
 VardefManager::createVardef('DataArchiver', 'DataArchiver');

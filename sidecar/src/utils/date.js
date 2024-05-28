@@ -9,8 +9,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const User = require('core/user');
-const Language = require('core/language');
+const User = require('../core/user');
+const Language = require('../core/language');
 
 var date = moment;
 
@@ -717,7 +717,7 @@ _.extend(date, {
      *
      * Examples:
      * ```
-     * const DateManager = require('utils/date');
+     * const DateManager = require('./date');
      * DateManager.parseDisplayDefault('+1 day&06:00pm');
      * DateManager.parseDisplayDefault('-1 day&06:00pm');
      * DateManager.parseDisplayDefault('+1 week&06:00pm');

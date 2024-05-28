@@ -30,7 +30,7 @@ $viewdefs['Administration']['base']['layout']['maps-logger-config'] = [
                         'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'maps-bottom-border main-pane map-admin-border-right span3 min-w-92',
+                            'css_class' => 'maps-bottom-border main-pane map-admin-border-right span3 min-w-96',
                             'components' => [
                                 [
                                     'view' => 'maps-logger-controls',

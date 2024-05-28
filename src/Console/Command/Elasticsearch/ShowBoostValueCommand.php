@@ -43,8 +43,7 @@ class ShowBoostValueCommand extends Command implements InstanceModeInterface
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Comma separated list of modules to search.'
-            )
-        ;
+            );
     }
 
     /**
@@ -65,7 +64,7 @@ class ShowBoostValueCommand extends Command implements InstanceModeInterface
         $globalSearch->fieldBoost(true);
 
         $table = new Table($output);
-        $table->setHeaders(array('Module', 'Field Name', 'Sugar Type', 'ES Type', 'Orignal Boost Value', 'Calculated Boost Value'));
+        $table->setHeaders(['Module', 'Field Name', 'Sugar Type', 'ES Type', 'Orignal Boost Value', 'Calculated Boost Value']);
         foreach ($modules as $module) {
             $sfs = $globalSearch->buildSearchFields([$module]);
             foreach ($sfs->getIterator() as $it) {

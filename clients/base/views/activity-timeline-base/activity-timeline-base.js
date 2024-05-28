@@ -20,25 +20,6 @@
     plugins: ['EmailClientLaunch', 'LinkedModel'],
 
     /**
-     * Object icon names for modules
-     */
-    moduleIcons: {
-        Calls: 'sicon-phone-lg',
-        Emails: 'sicon-email-lg',
-        Meetings: 'sicon-meetings-lg',
-        Messages: 'sicon-message-lg',
-        Notes: 'sicon-note-lg',
-        Cases: 'sicon-case-lg',
-        Contacts: 'sicon-contact-lg',
-        Accounts: 'sicon-account-lg',
-        Leads: 'sicon-lead-lg',
-        Opportunities: 'sicon-opportunity-lg',
-        Quotes: 'sicon-quote-lg',
-        Escalations: 'sicon-escalation-lg',
-        Tasks: 'sicon-task-lg'
-    },
-
-    /**
      * Array default modules
      */
     defaultModules: [
@@ -47,21 +28,8 @@
         'Meetings',
         'Messages',
         'Notes',
-        'Tasks'
+        'Tasks',
     ],
-
-    /**
-     * Default mapping of module to link name
-     */
-    moduleLinkMapping: {
-        Calls: 'calls',
-        Emails: 'emails',
-        Meetings: 'meetings',
-        Messages: 'messages',
-        Notes: 'notes',
-        Tasks: 'tasks',
-        Audit: 'audit'
-    },
 
     /**
      * String id of the expanded model
@@ -96,6 +64,11 @@
     },
 
     /**
+     * Search term
+     */
+    searchTerm: '',
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -105,20 +78,69 @@
             this.baseRecord = this._getBaseModel(options);
         }
 
-        if (this.baseModule) {
-            this._setActivityModulesAndFields(this.baseModule);
-        }
-
         options.meta = _.extend({}, options.meta,
             {preview: this._getModuleFieldMeta()}
         );
 
         this._super('initialize', [options]);
 
+        if (this.baseModule) {
+            this._setActivityModulesAndFields(this.baseModule);
+        }
+
+        this.searchTerm = '';
+        this.renderedActivities = [];
+        this.fetchCompleted = false;
+        this.models = [];
+        this.filter = {module: null};
+        this.expandedModelId = '';
+
         this.events = _.extend({}, this.events, {
             'click .static-contents': 'handleExpandedClick',
             'click .btn.more': 'fetchModels',
+            'click .add-on.sicon-close': 'clearSearch',
+            'keyup [data-action="search"]': 'doSearch',
+            'paste [data-action="search"]': 'doSearch'
         });
+
+        app.events.on('focusdrawer:close', this.handleFocusDrawerClose, this);
+        app.events.on('link:added link:removed', this.handleLinkChanges, this);
+        app.events.on('timeline:link:added', this.handleTimelineLinkChanges, this);
+    },
+
+    /**
+     * Reload data if any records have been updated in focus drawer
+     * after the focus drawer is closed.
+     * @param {Array} updatedModels
+     */
+    handleFocusDrawerClose: function(updatedModels) {
+        if (!_.isEmpty(updatedModels)) {
+            this.reloadData();
+        }
+    },
+
+    /**
+     * Reload data if any link changes in timeline
+     * @param {string} parentModule
+     * @param {string} parentId
+     */
+    handleTimelineLinkChanges: function(parentModule, parentId) {
+        if (this.baseRecord.get('id') === parentId &&
+            this.baseRecord.get('_module') === parentModule) {
+            this.reloadData();
+        }
+    },
+
+    /**
+     * Reload data if any link changes
+     * @param {Object} parentModel
+     */
+    handleLinkChanges: function(parentModel) {
+        if (parentModel &&
+            this.baseRecord.get('id') === parentModel.get('id') &&
+            this.baseRecord.get('_module') === parentModel.get('_module')) {
+            this.reloadData();
+        }
     },
 
     /**
@@ -133,17 +155,102 @@
 
     /**
      * @inheritdoc
-     *
-     * Inject the singular module name.
      */
     _render: function() {
-        this.disposeActivities();
-
         this._super('_render');
+        this._renderCards();
+    },
 
-        if (this.models) {
-            this.appendCardsToView(this.models);
+    /**
+     * Add new cards to timeline or re-render existing cards.
+     */
+    _renderCards: function() {
+        if (this.fetchCompleted) {
+            this.$('.dashlet-footer').hide();
+        } else if (!_.isEmpty(this.models)) {
+            this.$('.dashlet-footer').show();
         }
+        this._hideSkeleton();
+        if (!_.isEmpty(this.models)) {
+            this.disposeActivities();
+            this.$('.activity-timeline-cards').html('');
+            this.appendCardsToView(this.models);
+        } else if (!this.fetchCompleted) {
+            this._showSkeleton();
+        } else {
+            const emptyTemplate = app.template.get('activity-timeline-base.empty-list');
+            this.$('.activity-timeline-cards').html(emptyTemplate(this));
+        }
+    },
+
+    /**
+     * Check if a module is audited.
+     * @param {string} module
+     * @return {boolean}
+     * @private
+     */
+    _isModuleAudited: function(module) {
+        const moduleMeta = app.metadata.getModule(module);
+        return moduleMeta && moduleMeta.isAudited;
+    },
+
+    /**
+     * Return list of enabled modules.
+     *
+     * @param {string} module
+     * @return {Array}
+     */
+    getEnabledModules: function(module) {
+        let configedModules = null;
+        if (app.config.timeline && app.config.timeline[module]) {
+            configedModules = app.config.timeline[module].enabledModules;
+        }
+        let enabledModules = [];
+
+        if (!_.isNull(configedModules)) {
+            configedModules.map((link) => {
+                const relatedModule = app.data.getRelatedModule(module, link);
+                if (relatedModule && !_.contains(enabledModules, relatedModule)) {
+                    enabledModules.push(relatedModule);
+                }
+            });
+        } else {
+            enabledModules = this.getDefaultModules(module);
+        }
+        if (this._isModuleAudited(module)) {
+            enabledModules.push('Audit');
+        }
+
+        return enabledModules;
+    },
+
+    /**
+     * Return available modules from subpanel metadata.
+     * @param {string} module
+     * @return {Array}
+     */
+    getDefaultModules: function(module) {
+        let enabledModules = [];
+
+        const meta = app.metadata.getModule(module);
+        const subpanels = meta && meta.layouts && meta.layouts.subpanels &&
+            meta.layouts.subpanels.meta && meta.layouts.subpanels.meta.components || [];
+        const hiddenSubpanels = app.metadata.getHiddenSubpanels();
+
+        subpanels.map((subpanel) => {
+            const link = subpanel.context && subpanel.context.link || '';
+            if (link) {
+                const relatedModule = app.data.getRelatedModule(module, link);
+
+                if (!_.contains(hiddenSubpanels, relatedModule.toLowerCase()) &&
+                    !_.contains(enabledModules, relatedModule) &&
+                    _.contains(this.defaultModules, relatedModule)) {
+                    enabledModules.push(relatedModule);
+                }
+            }
+        });
+
+        return enabledModules;
     },
 
     /**
@@ -183,29 +290,30 @@
     },
 
     /**
+     * Get the activity-timeline metadata for the baseModule
+     *
+     * @param {string} baseModule module name
+     */
+    getModulesCardMeta: function(baseModule) {
+        return app.metadata.getView(baseModule, 'activity-card-definition');
+    },
+
+    /**
      * Set activity modules and module field names
      *
      * @param {string} baseModule module name
      */
     _setActivityModulesAndFields: function(baseModule) {
-        var modulesMeta = this.getModulesMeta(baseModule);
-        var modules = [];
-
-        if (!modulesMeta) {
-            return;
+        const enabledModules = this.getEnabledModules(baseModule);
+        if (this.context) {
+            this.context.set('enabledModules', enabledModules);
         }
 
-        if (this.filter.module && this.filter.module !== 'all_modules') {
-            modules = _.filter(modulesMeta.activity_modules, function(module) {
-                return (module.module.toLowerCase() === this.filter.module.toLowerCase());
-            }, this);
+        if (this.filter.module && this.filter.module !== 'all_modules' && enabledModules.includes(this.filter.module)) {
+            this.activityModules = [this.filter.module];
         } else {
-            modules = modulesMeta.activity_modules;
+            this.activityModules = enabledModules;
         }
-
-        this.activityModules = _.map(modules, function(module) {
-            return module.module;
-        });
 
         if (this.activityModules.length === 0) {
             this.activityModules = this.defaultModules;
@@ -213,9 +321,12 @@
 
         this.moduleFieldNames = {};
         this.recordDateFields = {};
-        _.each(modules, function(module) {
-            this.moduleFieldNames[module.module] = module.fields;
-            this.recordDateFields[module.module] = module.record_date || 'date_entered';
+        _.each(this.activityModules, function(module) {
+            const meta = this.getModulesCardMeta(module);
+            if (!_.isEmpty(meta)) {
+                this.moduleFieldNames[module] = meta.fields;
+                this.recordDateFields[module] = meta.record_date || 'date_entered';
+            }
         }, this);
     },
 
@@ -260,46 +371,93 @@
         var self = this;
         var RelatedActivityCollection = app.MixedBeanCollection.extend({
             activityModules: this.activityModules,
-            buildURL: _.bind(function(params) {
-                params = params || {};
-
-                var url = app.api.serverUrl + '/' + this.baseModule + '/' +
-                    this.baseRecord.get('id') + '/' + 'link/related_activities';
-
-                if (this.activityModules.indexOf('Audit') !== -1 && !_.isEmpty(this.moduleFieldNames.Audit)) {
-                    params.field_list = {
-                        'Audit': this.moduleFieldNames.Audit.join(','),
-                    };
-                }
-
-                params.module_list = this.activityModules.join(',');
-
-                if (params.module_list === 'Audit') {
-                    params.ignore_field_presence = ['assigned_user_id'];
-                }
-
-                params = $.param(params);
-                if (params.length > 0) {
-                    url += '?' + params;
-                }
-                return url;
+            buildURL: _.bind(function() {
+                return app.api.serverUrl + '/' + this.baseModule + '/' +
+                    this.baseRecord.get('id') + '/related_activities';
             }, this),
             sync: function(method, model, options) {
-                options = app.data.parseOptionsForSync(method, model, options);
-                if (options.params.fields) {
-                    delete options.params.fields;
-                }
-                options.params.alias_fields = {
-                    'record_date': self.recordDateFields
-                };
-                options.params.order_by = 'record_date:desc';
+                options = self._getRequestOptions(method, model, options);
+
                 var url = this.buildURL(options.params);
                 var callbacks = app.data.getSyncCallbacks(method, model, options);
-
-                app.api.call(method, url, options.attributes, callbacks);
+                app.api.call('create', url, options.attributes, callbacks);
             }
         });
         this.relatedCollection = new RelatedActivityCollection();
+    },
+
+    /**
+     * Format params for Activities Timeline request
+     *
+     * @param method
+     * @param model
+     * @param options
+     * @return {Object}
+     * @private
+     */
+    _getRequestOptions: function(method, model, options) {
+        options = app.data.parseOptionsForSync(method, model, options);
+        options.attributes = _.extend(
+            options.params,
+            this.getRequestData()
+        );
+
+        if (options.params.fields) {
+            delete options.params.fields;
+        }
+
+        return options;
+    },
+
+    /**
+     * Return list of options for collection fetching
+     *
+     * @return {Object}
+     */
+    getRequestData: function() {
+        let options = {};
+
+        if (this.activityModules.indexOf('Audit') !== -1 && !_.isEmpty(this.moduleFieldNames.Audit)) {
+            options.field_list = {
+                'Audit': this.moduleFieldNames.Audit.join(','),
+            };
+        }
+
+        this.activityModules.map((module) => {
+            options.field_list = options.field_list || {};
+
+            if (_.isArray(this.moduleFieldNames[module])) {
+                options.field_list[module] = this.moduleFieldNames[module].join(',');
+            }
+        });
+
+        options.module_list = this.activityModules.join(',');
+
+        if (this.filter.module === 'all_modules') {
+            options.add_create_record = 1;
+        }
+
+        if (options.module_list === 'Audit') {
+            options.ignore_field_presence = ['assigned_user_id'];
+        }
+
+        options.alias_fields = {
+            'record_date': this.recordDateFields
+        };
+
+        if (this.searchTerm) {
+            let filtersBeanPrototype = app.data.getBeanClass('Filters').prototype;
+            let moduleFilters = {};
+            _.each(this.activityModules, (module) => {
+                moduleFilters[module] = filtersBeanPrototype.buildSearchTermFilter(
+                    module, this.searchTerm);
+            });
+            options.module_filters = moduleFilters;
+        }
+
+        options.order_by = 'record_date:desc';
+
+        return options;
     },
 
     /**
@@ -331,22 +489,53 @@
                     _.each(coll.models, function(model) {
                         model.set('record_date', model.get(this.recordDateFields[model.get('_module')]));
                     }, this);
-                    var appendToView = this.models.length !== 0;
                     this.models = this.models.concat(coll.models);
                     this.fetchCompleted = coll.next_offset === -1;
-                    if (this.fetchCompleted) {
-                        this.$('.dashlet-footer').hide();
-                    }
-
-                    if (appendToView) {
-                        this.appendCardsToView(coll.models);
-                    } else {
-                        this.render();
-                    }
+                    this._renderCards();
                 }, this)
             });
         }
     },
+
+    /**
+     * Gets the search term from the search input.
+     * @return {string}
+     * @private
+     */
+    _getSearchTerm: function() {
+        const $input = this.$('input[data-action=search]');
+
+        if ($input.val()) {
+            return $input.val().trim();
+        }
+
+        return '';
+    },
+
+    /**
+     * Sets search term to empty string and resets models.
+     */
+    clearSearch: function() {
+        this.$('input[data-action=search]').val('');
+        this.$('.sicon-close.add-on').addClass('hidden');
+        this.searchTerm = '';
+        this.doSearch();
+    },
+
+    /**
+     * Starts a new search.
+     */
+    doSearch: _.debounce(function() {
+        this.searchTerm = this._getSearchTerm();
+        this._initCollection();
+        this.reloadData();
+
+        const el = this.$('.sicon-close.add-on');
+        el.removeClass('hidden');
+        if (!this.searchTerm) {
+            el.addClass('hidden');
+        }
+    }, 400),
 
     /**
      * Set icon class attributess on related collection models base on module type
@@ -356,8 +545,9 @@
             _.each(this.models, function(model) {
                 // it's a change card if the model's module is Audit, use this.module
                 var mod = model.get('_module') == 'Audit' ? this.module : model.get('_module');
+                const moduleMeta = app.metadata.getModule(mod);
                 model.set('icon_module', mod);
-                model.set('icon_class', this.moduleIcons[mod]);
+                model.set('icon_class', moduleMeta.icon || 'sicon-default-module-lg');
             }, this);
         }
     },
@@ -432,15 +622,56 @@
     /**
      * Reload data.
      */
-    reloadData: function() {
+    reloadData: function(event) {
+        if (this.isRefreshClicked(event) && !this.fetchCompleted) {
+            return;
+        }
+
         if (this.relatedCollection) {
             this.relatedCollection.reset([], {silent: true});
             this.relatedCollection.resetPagination();
         }
         this.fetchCompleted = false;
         this.models = [];
-        this.render();
+        this.disposeActivities();
+        this.$('.activity-timeline-cards').html('');
+        this.$('.dashlet-footer').hide();
+        this._showSkeleton();
         this.loadData();
+    },
+
+    /**
+     * Check if the event related to click on refresh button
+     *
+     * @param event
+     * @return {boolean}
+     */
+    isRefreshClicked: function(event) {
+        if (!event) {
+            return false;
+        }
+
+        const parentEl = $(event.target).parent();
+        const attr = parentEl.attr('data-dashletaction');
+        return (attr === 'reloadData');
+    },
+
+    /**
+     * Shows Skeleton Loader
+     * @private
+     */
+    _showSkeleton: function() {
+        $('.activity-timeline').addClass('hidden-overflow');
+        this.$('.activity-timeline-cards').addClass('timeline-skeleton');
+    },
+
+    /**
+     * Hides Skeleton Loader
+     * @private
+     */
+    _hideSkeleton: function() {
+        $('.activity-timeline').removeClass('hidden-overflow');
+        this.$('.activity-timeline-cards').removeClass('timeline-skeleton');
     },
 
     /**
@@ -466,7 +697,9 @@
             if (!model) {
                 return;
             }
-            self.reloadData();
+            let baseModule = self.baseRecord.get('_module');
+            let baseId = self.baseRecord.get('id');
+            app.events.trigger('timeline:link:added', baseModule, baseId, model);
         });
     },
 
@@ -523,15 +756,16 @@
      */
     createCard: function(model) {
         var module = model.get('_module') || model.module || '';
-
+        model.link = {};
         if (module) {
-            model.link = {
-                name: this.getModuleLink(module),
-                bean: this.baseRecord,
-                type: 'card-link',
-            };
-        } else {
-            model.link = {};
+            let linkName = this.getModuleLink(module);
+            if (linkName) {
+                model.link = {
+                    name: linkName,
+                    bean: this.baseRecord,
+                    type: 'card-link',
+                };
+            }
         }
 
         if (module === 'Audit') {
@@ -541,7 +775,9 @@
         }
 
         var layout = app.view.createLayout({
-            type: 'activity-card',
+            type: model.get('event_action') === 'create' ?
+                'activity-card-create' :
+                'activity-card',
             context: this.context,
             module: module,
             model: model,
@@ -585,12 +821,25 @@
      * @return {string} The card module link.
      */
     getModuleLink: function(moduleName) {
-        let link;
-        let activityModules = this.getModulesMeta(this.baseModule).activity_modules;
-        let module = activityModules.find(item => item.module === moduleName);
+        if (!moduleName) {
+            return '';
+        }
 
-        if (module) {
-            link = module.link || this.moduleLinkMapping[moduleName] || moduleName.toLowerCase();
+        const cardMeta = this.getModulesCardMeta(moduleName);
+        if (cardMeta && cardMeta.link) {
+            return cardMeta.link;
+        }
+
+        let link = '';
+        if (this.baseModule && app.config.timeline && app.config.timeline[this.baseModule] &&
+            app.config.timeline[this.baseModule].enabledModules) {
+
+            link = _.find(app.config.timeline[this.baseModule].enabledModules, function(link) {
+                const relatedModule = app.data.getRelatedModule(this.baseModule, link);
+                if (relatedModule === moduleName) {
+                    return link;
+                }
+            }, this);
         }
 
         return link;
@@ -611,5 +860,8 @@
     _dispose: function() {
         this.disposeActivities();
         this._super('_dispose');
+        app.events.off('focusdrawer:close', this.handleFocusDrawerClose, this);
+        app.events.off('link:added link:removed', this.handleLinkChanges, this);
+        app.events.off('timeline:link:added timeline:link:removed', this.handleTimelineLinkChanges, this);
     }
 })

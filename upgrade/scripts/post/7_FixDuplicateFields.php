@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Remove duplicate fields from record view.
  * Class SugarUpgradeFixDuplicateFields
@@ -78,9 +79,9 @@ class UpgradeSidecarGridLayoutMetaDataParser extends SidecarGridLayoutMetaDataPa
     public function removeDubplicateFields()
     {
         $layout = $this->getLayout();
-        $empties = array(MBConstants::$EMPTY['name'], MBConstants::$FILLER['name']);
-        $exists = array();
-        $remove = array();
+        $empties = [MBConstants::$EMPTY['name'], MBConstants::$FILLER['name']];
+        $exists = [];
+        $remove = [];
         foreach ($layout as $panelID => $panel) {
             foreach ($panel as $row) {
                 foreach ($row as $field) {
@@ -112,7 +113,7 @@ class UpgradeSidecarGridLayoutMetaDataParser extends SidecarGridLayoutMetaDataPa
     public function removeDuplicateField($fieldName)
     {
         $found = false;
-        $newDefs = array();
+        $newDefs = [];
         foreach ($this->_viewdefs['panels'] as $panelID => $panel) {
             foreach ($panel as $rowIndex => $row) {
                 if (is_array($row)) {
@@ -132,7 +133,7 @@ class UpgradeSidecarGridLayoutMetaDataParser extends SidecarGridLayoutMetaDataPa
                 continue;
             }
 
-            $newRows = array();
+            $newRows = [];
             foreach ($panel as $rowIndex => $row) {
                 if (is_array($row)) {
                     $cols = count($row);
@@ -155,6 +156,6 @@ class UpgradeSidecarGridLayoutMetaDataParser extends SidecarGridLayoutMetaDataPa
                 $newDefs[$panelID] = $newRows;
             }
         }
-        $this->_viewdefs['panels']  = $newDefs;
+        $this->_viewdefs['panels'] = $newDefs;
     }
 }

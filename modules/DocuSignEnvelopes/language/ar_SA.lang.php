@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'إحضار المغلف',
     'LBL_CLOUD_SERVICE_TYPE' => 'نوع الخدمة السحابية',
     'LBL_CLOUD_PATH' => 'المسار السحابي',
+    'LBL_CLOUD_DRIVE_ID' => 'معرف المحرك',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'لوحة معلومات قائمة مغلفات DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'لوحة معلومات سجل مغلفات DocuSign',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'مغلفات DocuSign الأخيرة',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم مغلفات DocuSign',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني لمغلف DocuSign',
 
     'LBL_NEW_ENVELOPE' => 'مغلف جديد',
     'LBL_DOCUMENT_IS_NOW' => ' الآن ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'إرسال',
     'LBL_BUTTON_CLEAR' => 'مسح',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'استخدام القالب',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'إرسال مع القالب',
     'LBL_PLEASE_LOG_IN' => 'الرجاء تسجيل الدخول إلى DocuSign أولاً!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'لا يمكنك تنزيل هذا المستند. مستخدم آخر أنشأ المستند!',
     'LBL_SEND_NOT_ALLOWED' => 'لا يمكنك إرسال هذا المغلف. مستخدم آخر أنشأ المغلف!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'تم تغيير المسودة. هل تريد تحديث الحالة إلى الحالة الحالية ({{status}})؟',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'تم تحديث مغلف DocuSign!',
     'LBL_DRAFT_CHANGED_ERROR' => 'لم يتم تحديث حالة مغلف DocuSign. راجع السجلات لتفاصيل!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'لا يمكن تطبيق قالب DocuSign',
     'LBL_ENVELOPE_NOT_SENT' => 'لم يتم إرسال المغلف!',
     'LBL_ENVELOPE_SENT' => 'تم إرسال المغلف مرة أخرى!',
     'LBL_DOCUMENT_ADDED' => 'تمت إضافة المستند إلى السجل!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'الدور',
     'LBL_SELECT_BUTTON_LABEL' => 'تحديد',
     'LBL_BACK_BUTTON_LABEL' => 'للخلف',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'بحث حسب اسم القالب',
+    'LBL_ENVELOPE_NAME' => 'اسم المغلف',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'لا يمكن أن يكون اسم المغلف فارغًا',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'فشل في جلب المستلمين المحتملين!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'فشل في جلب القوالب!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'يرجى تحديد دور لكل مستلم',
+    
+    'LBL_DOWNLOAD' => 'تنزيل',
+    'LBL_OPEN_DRAFT' => 'فتح مسودة',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'لا يمكن إرسال المستندات التي لا تحتوي على ملف إلى DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'انقر على زر زائد لبدء عملية التوقيع',
+    'LBL_NO_DOC_SELECTED' => 'يرجى تحديد المستندات أولاً',
+    'LBL_SELECT_RECIPIENTS' => 'تحديد مستلم الموقِّع',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'استبعاد',
+    'LBL_DOCUSIGN_MISSING_APP' => 'تحتاج إلى تثبيت تطبيق DocuSign للتمتع بتجربة أفضل.',
 ];

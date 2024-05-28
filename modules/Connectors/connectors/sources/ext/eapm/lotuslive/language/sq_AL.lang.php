@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Merr një Çelës dhe Sekret nga IBM SmartCloud duke regjistruar instancën tënde të Sugar si aplikacion të ri. Mundësia për t\'u regjistruar do të jetë e mundshme duke filluar nga data 8 maj 2011<br>
 &nbsp;<br>
 Hapat për të regjistruar instancën:<br>
@@ -28,5 +28,4 @@ Hapat për të regjistruar instancën:<br>
 </td></tr></table>',
     'oauth_consumer_key' => 'Çelësi i konsumatorit OAuth',
     'oauth_consumer_secret' => 'Sekreti i konsumatorit OAuth',
-);
-
+];

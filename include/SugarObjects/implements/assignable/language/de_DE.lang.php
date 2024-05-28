@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-'LBL_ASSIGNED_TO_ID'=>'Zugewiesene Benutzer-Id',
-'LBL_ASSIGNED_TO_NAME' => 'Zugewiesen an',
-);
+$mod_strings = [
+    'LBL_ASSIGNED_TO_ID' => 'Zugewiesene Benutzer-Id',
+    'LBL_ASSIGNED_TO_NAME' => 'Zugewiesen an',
+];

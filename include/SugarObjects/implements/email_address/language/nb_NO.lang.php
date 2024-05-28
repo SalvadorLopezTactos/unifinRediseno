@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_ANY_EMAIL' => 'E-postadresse:',
     'LBL_EMAIL' => 'E-postadresse:',
     'LBL_PRIMARY_EMAIL' => 'Primær e-postadresse',
@@ -18,7 +18,7 @@ $mod_strings = array (
     'LBL_OTHER_EMAIL_ADDRESS' => 'Annen e-postadresse:',
     'LBL_EMAIL_ADDRESS' => 'E-postadresse',
     'LBL_EMAIL_ADDRESSES' => 'E-post Adresse(r)',
-    'LBL_INVALID_EMAIL'=>'Ugyldig e-postadresse:',
+    'LBL_INVALID_EMAIL' => 'Ugyldig e-postadresse:',
     'LBL_EMAIL_OPT_OUT' => 'Har avsagt seg e-post:',
     'LBL_EMAIL_NON_PRIMARY' => 'Ikke-primære e-poster',
-);
+];

@@ -9,15 +9,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Class for separate storage of Email texts
  */
 class EmailText extends SugarBean
 {
-	var $disable_row_level_security = true;
-    var $table_name = 'emails_text';
-    var $module_name = "EmailText";
-    var $module_dir = 'EmailText';
-    var $object_name = 'EmailText';
-    var $disable_custom_fields = true;
+    public $disable_row_level_security = true;
+    public $table_name = 'emails_text';
+    public $module_name = 'EmailText';
+    public $module_dir = 'EmailText';
+    public $object_name = 'EmailText';
+    public $disable_custom_fields = true;
 }

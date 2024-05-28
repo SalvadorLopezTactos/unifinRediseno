@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['documents_contacts'] = array(
+$dictionary['documents_contacts'] = [
     'true_relationship_type' => 'many-to-many',
-    'relationships' => array(
-        'documents_contacts' => array(
+    'relationships' => [
+        'documents_contacts' => [
             'lhs_module' => 'Documents',
             'lhs_table' => 'documents',
             'lhs_key' => 'id',
@@ -24,57 +24,57 @@ $dictionary['documents_contacts'] = array(
             'join_table' => 'documents_contacts',
             'join_key_lhs' => 'document_id',
             'join_key_rhs' => 'contact_id',
-        ),
-    ),
+        ],
+    ],
     'table' => 'documents_contacts',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => true,
-        ),
-        'document_id' => array(
+        ],
+        'document_id' => [
             'name' => 'document_id',
             'type' => 'id',
-        ),
-        'contact_id' => array(
+        ],
+        'contact_id' => [
             'name' => 'contact_id',
             'type' => 'id',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'documents_contactsspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'documents_contacts_contact_id',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'contact_id',
                 'document_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'documents_contacts_document_id',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'document_id',
                 'contact_id',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

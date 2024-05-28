@@ -14,30 +14,28 @@ class LocaleApi extends SugarApi
 {
     public function registerApiRest()
     {
-        return array(
-            'retrieve' => array(
+        return [
+            'retrieve' => [
                 'reqType' => 'GET',
-                'path' => array('locale'),
-                'pathVars' => array(),
+                'path' => ['locale'],
+                'pathVars' => [],
                 'method' => 'localeOptions',
                 'shortHelp' => 'Gets locale options so UI can populate the corresponding dropdowns',
                 'longHelp' => 'include/api/help/locale_options_get_help.html',
                 'ignoreMetaHash' => true,
                 'keepSession' => true,
-            ),
-        );
+            ],
+        ];
     }
 
     public function localeOptions(ServiceBase $api, array $args)
     {
         global $locale, $sugar_config;
-        return array(
+        return [
             'timepref' => $sugar_config['time_formats'],
             'datepref' => $sugar_config['date_formats'],
             'default_locale_name_format' => $locale->getUsableLocaleNameOptions($sugar_config['name_formats']),
             'timezone' => TimeDate::getTimezoneList(),
-        );
+        ];
     }
-
 }
-

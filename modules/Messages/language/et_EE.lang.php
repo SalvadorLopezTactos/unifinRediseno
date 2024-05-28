@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'pooleli',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Sõnumi fookuse sahtel',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Sõnumite kirjete töölaud',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Sõnumi ajaskaala',
 ];

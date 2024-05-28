@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Визначення процесу',
-  'LBL_MODULE_TITLE' => 'Визначення процесу',
-  'LBL_MODULE_NAME_SINGULAR' => 'Визначення процесу',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Визначення процесу',
+    'LBL_MODULE_TITLE' => 'Визначення процесу',
+    'LBL_MODULE_NAME_SINGULAR' => 'Визначення процесу',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель для визначень процесів',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель для визначень процесів',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Інформаційна панель записів щодо визначень процесів',
-  'LNK_LIST' => 'Переглянути визначення процесів',
-  'LNK_NEW_PMSE_PROJECT' => 'Створити процес обробки',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Імпортувати визначення процесу обробки',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Інформаційна панель записів щодо визначень процесів',
+    'LNK_LIST' => 'Переглянути визначення процесів',
+    'LNK_NEW_PMSE_PROJECT' => 'Створити процес обробки',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Імпортувати визначення процесу обробки',
 
-  'LBL_PRJ_STATUS' => 'Статус',
-  'LBL_PRJ_MODULE' => 'Основний модуль',
-  'LBL_PRJ_RUN_ORDER' => 'Порядок виконання',
-  'LBL_PMSE_BUTTON_SAVE' => 'Зберегти',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Скасувати',
-  'LBL_PMSE_BUTTON_YES' => 'Так',
-  'LBL_PMSE_BUTTON_NO' => 'Ні',
-  'LBL_PMSE_BUTTON_OK' => 'Ok',
+    'LBL_PRJ_STATUS' => 'Статус',
+    'LBL_PRJ_MODULE' => 'Основний модуль',
+    'LBL_PRJ_RUN_ORDER' => 'Порядок виконання',
+    'LBL_PMSE_BUTTON_SAVE' => 'Зберегти',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Скасувати',
+    'LBL_PMSE_BUTTON_YES' => 'Так',
+    'LBL_PMSE_BUTTON_NO' => 'Ні',
+    'LBL_PMSE_BUTTON_OK' => 'Ok',
     'LBL_PMSE_FORM_ERROR' => 'Перш ніж продовжити, необхідно виправити всі помилки.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Змоделювати',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Активність',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Дія',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Початкова подія інтереса',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Початкова подія угоди' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Початкова подія угоди',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Початкова подія документа',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Подія іншого модуля',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'очікування події',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Бізнес-правило',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Дія бізнес-правила',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Шаблон електронної пошти',
-);
+];

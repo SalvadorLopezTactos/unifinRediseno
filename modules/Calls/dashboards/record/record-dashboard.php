@@ -19,6 +19,18 @@ return [
                     [
                         [
                             'view' => [
+                                'type' => 'activity-timeline',
+                                'label' => 'TPL_ACTIVITY_TIMELINE_DASHLET',
+                            ],
+                            'context' => [
+                                'module' => 'Calls',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
                                 'type' => 'dashablelist',
                                 'label' => 'LBL_MY_SCHEDULED_CALLS',
                                 'display_columns' => [

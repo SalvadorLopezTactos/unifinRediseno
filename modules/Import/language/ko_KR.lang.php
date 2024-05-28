@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => '가져온 파일 읽기를 성공했습니다.',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => '삽입된 레코드는 프로세스에 동원되고 있으며, 해당 프로세스에 의해 일부 필드가 편집을 위해 잠겨있으므로 편집할 수 없습니다.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => '오류로 인해 줄을 가져오지 못했습니다.',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => '사용자가 존재하지 않으면 현재 사용자를 이용하십시오.',
     'LBL_SHOW_HIDDEN' => '일반적으로 가져올수 없는 필드를 보여줍니다.',
     'LBL_UPDATE_RECORDS' => '기존 기록을 가져오는 대신 업데이트합니다.',
-    'LBL_TEST'=> '가져오기 시범(저장하거나 데이타를 변경하지 않습니다.)',
+    'LBL_TEST' => '가져오기 시범(저장하거나 데이타를 변경하지 않습니다.)',
     'LBL_TRUNCATE_TABLE' => '가져오기전 테이블 비우기(모든 기록 지우기)',
     'LBL_RELATED_ACCOUNTS' => '관련 고객을 새로 만들지마십시오.',
     'LBL_NO_DATECHECK' => '날짜확인 생략(더 빠르지만 날짜가 잘못되면 실패합니다.)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => '유효하지 않은 정수가치',
     'LBL_ERROR_INVALID_NUM' => '유효하지 않은 숫자가치',
     'LBL_ERROR_INVALID_TIME' => '유효하지 않은 시간',
-    'LBL_ERROR_INVALID_EMAIL'=>'유효하지 않은 이메일 주소',
-    'LBL_ERROR_INVALID_BOOL'=>'유효하지 않은 가치',
-    'LBL_ERROR_INVALID_DATE'=>'유효하지 않은 날짜 기호열',
-    'LBL_ERROR_INVALID_USER'=>'유효하지 않은 사용자명이나 ID',
+    'LBL_ERROR_INVALID_EMAIL' => '유효하지 않은 이메일 주소',
+    'LBL_ERROR_INVALID_BOOL' => '유효하지 않은 가치',
+    'LBL_ERROR_INVALID_DATE' => '유효하지 않은 날짜 기호열',
+    'LBL_ERROR_INVALID_USER' => '유효하지 않은 사용자명이나 ID',
     'LBL_ERROR_INVALID_TEAM' => '유효하지 않은 팀명이나 ID',
     'LBL_ERROR_INVALID_ACCOUNT' => '유효하지 않은 고객명이나 ID',
     'LBL_ERROR_INVALID_RELATE' => '유효하지 않은 관계 필드',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => '존재하지 않거나 쓰기가 불가합니다.',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => '파일이 성공적으로 전송되지 않았습니다. 귀하의 php.ini 파일의 &#39;upload_max_filesize&#39; 설정 번호가 작십니다.',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => '파일이 너무 큽니다.',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bytes. Change $sugar_config[&#39;upload_maxsize&#39;] in config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => '바이트입니다. config.php의 $sugar_config[&#39;upload_maxsize&#39;]를 변경합니다.',
     'LBL_MODULE_NAME' => '자료 가져오기',
     'LBL_MODULE_NAME_SINGULAR' => '가져오기',
     'LBL_TRY_AGAIN' => '다시 시도해주십시오.',
     'LBL_START_OVER' => '시작',
     'LBL_ERROR' => '오류',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => '가져온 파일이 0줄을 포함하고 있습니다. 알맞은 줄 번호는 1입니다.  더 많은 줄은 진행속도를 늦출수 있습니다. 가져오기를 계속하려면 네를 클릭하고 가져오기파일을 수정하고 다시 전송하려면 취소를 클릭하십시오.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => '시스템 관리자를 가져올수 없습니다.',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => '시스템 관리자를 가져올수 없습니다.',
     'ERR_REPORT_LOOP' => '시스템일 보고 고리를 발견했습니다. 사용자는 본인이나 본인에게 보고하는 매니저에게 보고할수 없습니다.',
     'ERR_MULTIPLE' => '여러개의 칸이 같은 필드명으로 정의되었습니다.',
     'ERR_MISSING_REQUIRED_FIELDS' => '다음의 필수 항목을 입력하셔합니다:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => '파일 보내기에 줄이 발견되지 않았습니다.  빈 줄이 있는지 확인한후 다시 시도해주십시오.',
     'LBL_FILE_ALREADY_BEEN_OR' => '파일 보내기가 이미 진행중이거나 존재하지 않습니다.',
     'LBL_SUCCESS' => '성공',
-	'LBL_FAILURE' => '가져오기 실패',
+    'LBL_FAILURE' => '가져오기 실패',
     'LBL_SUCCESSFULLY' => '가져오기 성공',
     'LBL_LAST_IMPORT_UNDONE' => '가져오기가 미완료',
     'LBL_NO_IMPORT_TO_UNDO' => '원상태로 할 가져오기가 없습니다.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => '다시 가져오기',
     'LBL_FINISHED' => '완료',
     'LBL_UNDO_LAST_IMPORT' => '가져오기 원상태로 복구',
-    'LBL_LAST_IMPORTED'=>'새로 만들기',
+    'LBL_LAST_IMPORTED' => '새로 만들기',
     'ERR_MULTIPLE_PARENTS' => '정의된 단 하나의 모체ID만 가질수 있습니다.',
     'LBL_DUPLICATES' => '중복 발견',
     'LNK_DUPLICATE_LIST' => '중복목록 다운로드',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => '노트 숨기기',
     'LBL_SHOW_PREVIEW_COLUMNS' => '칼럼 미리보기 보여주기',
     'LBL_HIDE_PREVIEW_COLUMNS' => '칼럼 미리보기 숨기기',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => '다음 연산자를 사용하여 중복 여부 확인:',
     'LBL_SAVE_MAPPING_AS' => '가져오기 설정을 저장하려면 저장된 설정명을 입력하십시오',
     'LBL_OPTION_ENCLOSURE_QUOTE' => '작은 따옴표',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => '큰 따옴표',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => '새 기록을 초기설정팀이 아닌 팀에 배정하려면 다른 팀 선택을 위한 초기 설정 가치를 사용하십시오',
     'LBL_SIGN_IN_HELP' => '이 서버를 작동하려면 귀하의 사용자 설정 페이지의 외부 계정 탭아래 접속하십시오',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "지원하지 않는 Bean에서 이메일 주소를 처리 중입니다.",
-);
+];

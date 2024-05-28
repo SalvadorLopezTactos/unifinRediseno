@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  TODO To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -19,17 +18,16 @@
 
 global $mod_strings;
 global $current_user;
-$module_menu=Array();
+$module_menu = [];
 
-if( empty($_REQUEST['record']) ) { $employee_id = ''; }
-else { $employee_id = $_REQUEST['record']; }
-
-if( is_admin($current_user) )
-{
-$module_menu[] = Array("index.php?module=Employees&action=EditView&return_module=Employees&return_action=DetailView", $mod_strings['LNK_NEW_EMPLOYEE'],"CreateEmployees");
+if (empty($_REQUEST['record'])) {
+    $employee_id = '';
+} else {
+    $employee_id = $_REQUEST['record'];
 }
-	
-$module_menu[] = Array("index.php?module=Employees&action=index&return_module=Employees&return_action=DetailView", $mod_strings['LNK_EMPLOYEE_LIST'],"Employees");
 
+if (is_admin($current_user)) {
+    $module_menu[] = ['index.php?module=Employees&action=EditView&return_module=Employees&return_action=DetailView', $mod_strings['LNK_NEW_EMPLOYEE'], 'CreateEmployees'];
+}
 
-?>
+$module_menu[] = ['index.php?module=Employees&action=index&return_module=Employees&return_action=DetailView', $mod_strings['LNK_EMPLOYEE_LIST'], 'Employees'];

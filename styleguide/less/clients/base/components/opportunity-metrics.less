@@ -1,21 +1,23 @@
 div.opportunity-metrics-wrapper {
   padding: 0;
 
-  .opportunity-metrics-chart,
   .nv-chart {
     height: 250px;
     min-width: 250px;
+  }
 
+  .opportunity-metrics-chart,
+  .nv-chart {
     .won {
-      fill: @green;
+      fill: @color-green-400;
     }
 
     .lost {
-      fill: @red;
+      fill: @color-red-400;
     }
 
     .active {
-      fill: @ocean;
+      fill: @color-ocean-400;
     }
   }
 }
@@ -48,18 +50,18 @@ div.opportunity-metric {
     border: none;
 
     &.won {
-      background-color: @lightGreen;
-      color: @darkGreen;
+      background-color: @color-green-200;
+      color: @color-green-600;
     }
 
     &.lost {
-      background-color: @lightRed;
-      color: @darkRed;
+      background-color: @color-red-200;
+      color: @color-red-600;
     }
 
     &.active {
-      background-color: @lightOcean;
-      color: @darkOcean;
+      background-color: @color-ocean-200;
+      color: @color-ocean-600;
     }
   }
 
@@ -81,15 +83,15 @@ div.opportunity-metric {
     box-sizing: border-box;
 
     &.won {
-      color: @darkGreen;
+      color: @color-green-600;
     }
 
     &.lost {
-      color: @darkRed;
+      color: @color-red-600;
     }
 
     &.active {
-      color: @darkOcean;
+      color: @color-ocean-600;
     }
   }
 }

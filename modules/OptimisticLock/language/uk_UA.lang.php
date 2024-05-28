@@ -10,22 +10,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-   'LBL_YOURS' => 'Ваш',
-   'LBL_IN_DATABASE' => 'У базі даних',
-   'LBL_CONFLICT_EXISTS' => 'Є конфлікт для -',
-   'LBL_ACCEPT_DATABASE' => 'Прийняти з бази даних',
-   'LBL_ACCEPT_YOURS' => 'Прийняти Ваш',
-   'LBL_RECORDS_MATCH' => 'Відповідність записів',
-   'LBL_NO_LOCKED_OBJECTS' => 'Немає заблокованих об&#39;єктів',
-   
-);
+$mod_strings = [
+    'LBL_YOURS' => 'Ваш',
+    'LBL_IN_DATABASE' => 'У базі даних',
+    'LBL_CONFLICT_EXISTS' => 'Є конфлікт для -',
+    'LBL_ACCEPT_DATABASE' => 'Прийняти з бази даних',
+    'LBL_ACCEPT_YOURS' => 'Прийняти Ваш',
+    'LBL_RECORDS_MATCH' => 'Відповідність записів',
+    'LBL_NO_LOCKED_OBJECTS' => 'Немає заблокованих об&#39;єктів',
 
-?>
+];

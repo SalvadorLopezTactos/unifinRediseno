@@ -19,12 +19,12 @@ class SugarSystemInfo
     /**
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * @var array
      */
-    protected $sugarConfig = array();
+    protected $sugarConfig = [];
 
     /**
      * @var DBManager
@@ -87,9 +87,9 @@ class SugarSystemInfo
      */
     public function getDistroInfo()
     {
-        $info = array();
+        $info = [];
         if (file_exists('distro.php')) {
-            include('distro.php');
+            include 'distro.php';
             if (!empty($distro_name)) {
                 $info['distro_name'] = $distro_name;
             }
@@ -117,12 +117,12 @@ class SugarSystemInfo
      */
     public function getUsersInfo()
     {
-        return array(
+        return [
             'users' => $this->getActiveUsersCount(),
             'registered_users' => $this->getUsersCount(),
             'admin_users' => $this->getAdminCount(),
-            'users_active_30_days' => $this->getActiveUsersXDaysCount(30)
-        );
+            'users_active_30_days' => $this->getActiveUsersXDaysCount(30),
+        ];
     }
 
     /**
@@ -134,10 +134,10 @@ class SugarSystemInfo
     public function getActiveUsersXDaysCount($days)
     {
         $info = $this->getAppInfo();
-        if(version_compare($info['sugar_version'], '7.2', '>')) {
-            $query = "SELECT COUNT(users.id) AS user_count FROM users WHERE users.last_login >= %s AND %s";
+        if (version_compare($info['sugar_version'], '7.2', '>')) {
+            $query = 'SELECT COUNT(users.id) AS user_count FROM users WHERE users.last_login >= %s AND %s';
         } else {
-            $query = "SELECT COUNT(DISTINCT users.id) AS user_count FROM tracker, users WHERE users.id = tracker.user_id AND tracker.date_modified >= %s AND %s";
+            $query = 'SELECT COUNT(DISTINCT users.id) AS user_count FROM tracker, users WHERE users.id = tracker.user_id AND tracker.date_modified >= %s AND %s';
         }
         $query = sprintf($query, $this->getLastXDays($days), $this->getActiveUsersWhere('users'));
         return $this->db->getOne($query, false, 'fetching last 30 users count');
@@ -150,7 +150,7 @@ class SugarSystemInfo
      */
     public function getAdminCount()
     {
-        $query = "SELECT COUNT(id) AS count FROM users WHERE is_admin = 1 AND " . $this->getActiveUsersWhere();
+        $query = 'SELECT COUNT(id) AS count FROM users WHERE is_admin = 1 AND ' . $this->getActiveUsersWhere();
         return $this->db->getOne($query, false, 'fetching admin count');
     }
 
@@ -161,7 +161,7 @@ class SugarSystemInfo
      */
     public function getUsersCount()
     {
-        $query = "SELECT COUNT(id) AS count FROM users WHERE " . $this->getExcludeSystemUsersWhere();
+        $query = 'SELECT COUNT(id) AS count FROM users WHERE ' . $this->getExcludeSystemUsersWhere();
         return $this->db->getOne($query, false, 'fetching all users count');
     }
 
@@ -172,7 +172,7 @@ class SugarSystemInfo
      */
     public function getActiveUsersCount()
     {
-        $query = "SELECT COUNT(id) AS total FROM users WHERE " . $this->getActiveUsersWhere();
+        $query = 'SELECT COUNT(id) AS total FROM users WHERE ' . $this->getActiveUsersWhere();
         return $this->db->getOne($query, false, 'fetching active users count');
     }
 
@@ -197,7 +197,7 @@ class SugarSystemInfo
      */
     public function getSystemNameInfo()
     {
-        return array('system_name' => $this->getSystemName());
+        return ['system_name' => $this->getSystemName()];
     }
 
     /**
@@ -207,7 +207,7 @@ class SugarSystemInfo
      */
     public function getLicenseInfo()
     {
-        $info = array();
+        $info = [];
         if (!empty($this->settings)) {
             $info['license_users'] = $this->settings['license_users'];
             $info['license_expire_date'] = $this->settings['license_expire_date'];
@@ -230,9 +230,9 @@ class SugarSystemInfo
      */
     public function getLicensePortalInfo()
     {
-        $info = array();
+        $info = [];
         $query = sprintf(
-            "SELECT count(*) AS record_count FROM session_history WHERE is_violation = 1 AND date_entered >= %s",
+            'SELECT count(*) AS record_count FROM session_history WHERE is_violation = 1 AND date_entered >= %s',
             $this->getLastXDays(30)
         );
         $result = $this->db->getOne($query);
@@ -241,7 +241,7 @@ class SugarSystemInfo
         }
 
         $query = sprintf(
-            "SELECT MAX(num_active_sessions) AS record_max FROM session_history WHERE date_entered >= %s",
+            'SELECT MAX(num_active_sessions) AS record_max FROM session_history WHERE date_entered >= %s',
             $this->getLastXDays(30)
         );
         $result = $this->db->getOne($query);
@@ -260,7 +260,7 @@ class SugarSystemInfo
      */
     public function getEnvInfo()
     {
-        $info = array();
+        $info = [];
         $info['php_version'] = phpversion();
         if (isset($_SERVER['SERVER_SOFTWARE'])) {
             $info['server_software'] = $_SERVER['SERVER_SOFTWARE'];
@@ -284,7 +284,7 @@ class SugarSystemInfo
      */
     public function getAppInfo()
     {
-        $info = array();
+        $info = [];
         $sugar_db_version = $sugar_version = $sugar_flavor = '';
         require 'sugar_version.php';
         $info['sugar_db_version'] = $sugar_db_version;
@@ -301,7 +301,7 @@ class SugarSystemInfo
      */
     public function getApplicationKeyInfo()
     {
-        return array('application_key' => $this->sugarConfig['unique_key']);
+        return ['application_key' => $this->sugarConfig['unique_key']];
     }
 
     /**
@@ -311,8 +311,8 @@ class SugarSystemInfo
      */
     public function getLatestTrackerIdInfo()
     {
-        $info = array();
-        $query = "SELECT id FROM tracker ORDER BY date_modified desc";
+        $info = [];
+        $query = 'SELECT id FROM tracker ORDER BY date_modified desc';
         $id = $this->db->getOne($query, false, 'fetching most recent tracker entry');
         $info['latest_tracker_id'] = (int)$id;
         return $info;
@@ -348,7 +348,7 @@ class SugarSystemInfo
     {
         return BeanFactory::newBean('Administration')->retrieveSettings()->settings;
     }
-    
+
     /**
      * Returns where clause
      * This is a copy-paste from User::getSystemUsersWhere because that method is not available in 6.5
@@ -364,7 +364,7 @@ class SugarSystemInfo
         }
         return ' ' . $aliasQuery . 'deleted = 0 AND ' . $aliasQuery . 'user_name NOT IN(\'SugarCRMSupport\', \'SugarCRMUpgradeUser\')';
     }
-    
+
     /**
      * Returns where clause for active users
      *

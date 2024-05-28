@@ -15,4 +15,29 @@
  */
 ({
     extendsFrom: 'ActivityCardDetailView',
+
+    /**
+     * @inheritdoc
+     */
+    getModulesCardMeta: function(baseModule) {
+        this.setBaseModule();
+
+        const customName = 'activity-card-definition-for-' + baseModule.toLowerCase();
+        return app.metadata.getView(this.baseModule, customName) ||
+            app.metadata.getView(this.baseModule, 'activity-card-definition');
+    },
+
+    /**
+     * Set up base module variable
+     */
+    setBaseModule: function() {
+        if (this.baseModule) {
+            return;
+        }
+
+        const parentModel = this.activity.get('parent_model');
+        this.baseModule = (this.activity.module === 'Audit' && parentModel && parentModel.module) ?
+            parentModel.module :
+            this.activity.module;
+    },
 })

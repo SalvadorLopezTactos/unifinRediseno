@@ -113,13 +113,13 @@ class RevenueLineItem extends SugarBean
     public $renewal_rli_id;
     public $add_on_to_id;
 
-    public $table_name = "revenue_line_items";
-    public $rel_manufacturers = "manufacturers";
-    public $rel_types = "product_types";
-    public $rel_products = "product_product";
-    public $rel_categories = "product_categories";
+    public $table_name = 'revenue_line_items';
+    public $rel_manufacturers = 'manufacturers';
+    public $rel_types = 'product_types';
+    public $rel_products = 'product_product';
+    public $rel_categories = 'product_categories';
 
-    public $object_name = "RevenueLineItem";
+    public $object_name = 'RevenueLineItem';
     public $module_dir = 'RevenueLineItems';
     public $new_schema = true;
     public $importable = false;
@@ -133,7 +133,7 @@ class RevenueLineItem extends SugarBean
     public $experts;
 
     // This is used to retrieve related fields from form posts.
-    public $additional_column_fields = array('quote_id', 'quote_name', 'related_product_id');
+    public $additional_column_fields = ['quote_id', 'quote_name', 'related_product_id'];
 
     /** Fields to copy when generating a Purchase */
     public $purchaseCopyFields = [
@@ -154,7 +154,7 @@ class RevenueLineItem extends SugarBean
         'support_title', 'support_expires', 'support_starts',
         'support_contact', 'support_desc', 'product_template_id',
         'product_template_name', 'currency_id', 'renewal',
-        'catalog_service_duration_value' , 'catalog_service_duration_unit',
+        'catalog_service_duration_value', 'catalog_service_duration_unit',
     ];
 
     /** Fields to map when generating a Purchased Line Item */
@@ -188,7 +188,7 @@ class RevenueLineItem extends SugarBean
      */
     public function updateCurrencyBaseRate()
     {
-        return !in_array($this->sales_stage, $this->getClosedStages());
+        return !safeInArray($this->sales_stage, $this->getClosedStages());
     }
 
     /**
@@ -198,13 +198,13 @@ class RevenueLineItem extends SugarBean
     {
         if ($this->ACLFieldAccess('best_case', 'write') &&
             empty($this->best_case) &&
-            (string) $this->best_case !== '0'
+            (string)$this->best_case !== '0'
         ) {
             $this->best_case = $this->likely_case;
         }
         if ($this->ACLFieldAccess('worst_case', 'write') &&
             empty($this->worst_case) &&
-            (string) $this->worst_case !== '0'
+            (string)$this->worst_case !== '0'
         ) {
             $this->worst_case = $this->likely_case;
         }
@@ -267,9 +267,9 @@ class RevenueLineItem extends SugarBean
             $won = $settings['sales_stage_won'];
             $lost = $settings['sales_stage_lost'];
 
-            if (in_array($this->sales_stage, $won)) {
+            if (safeInArray($this->sales_stage, $won)) {
                 $this->commit_stage = 'include';
-            } elseif (in_array($this->sales_stage, $lost)) {
+            } elseif (safeInArray($this->sales_stage, $lost)) {
                 $this->commit_stage = 'exclude';
             }
         }
@@ -404,8 +404,7 @@ class RevenueLineItem extends SugarBean
      */
     protected function setDiscountPrice()
     {
-        if (
-            !is_numeric($this->discount_price) &&
+        if (!is_numeric($this->discount_price) &&
             empty($this->product_template_id) &&
             is_numeric($this->likely_case)
         ) {
@@ -458,6 +457,7 @@ class RevenueLineItem extends SugarBean
             $this->product_type = $opp->opportunity_type;
         }
     }
+
 
     /**
      * Save the updated product to the worksheet, this will create one if one does not exist
@@ -522,6 +522,7 @@ class RevenueLineItem extends SugarBean
             $this->weight = $pt->weight;
         }
     }
+
     /**
      * {@inheritdoc}
      */
@@ -695,11 +696,11 @@ class RevenueLineItem extends SugarBean
         // need
         $closedWon = Forecast::getSettings()['sales_stage_won'] ?? [Opportunity::STAGE_CLOSED_WON];
         if ($this->generate_purchase !== 'Yes' ||
-            !in_array($this->sales_stage, $closedWon)) {
+            !safeInArray($this->sales_stage, $closedWon)) {
             return false;
         }
         $parentOpp = BeanFactory::retrieveBean('Opportunities', $this->opportunity_id);
-        if (!in_array($parentOpp->sales_stage, $closedWon)) {
+        if (!safeInArray($parentOpp->sales_stage, $closedWon)) {
             return false;
         }
         return true;
@@ -714,8 +715,8 @@ class RevenueLineItem extends SugarBean
      *   [ 'id' => def,],
      * ]
      *
-     * @see OpportunityWithRevenueLineItem::processOpportunityIds for comparison
      * @param $data
+     * @see OpportunityWithRevenueLineItem::processOpportunityIds for comparison
      */
     public static function processRliIds(array $data): void
     {
@@ -809,7 +810,6 @@ class RevenueLineItem extends SugarBean
 
         $is_owner = false;
         if (!empty($this->contact_name)) {
-
             if (!empty($this->contact_name_owner)) {
                 global $current_user;
                 $is_owner = $current_user->id == $this->contact_name_owner;
@@ -822,7 +822,6 @@ class RevenueLineItem extends SugarBean
         }
         $is_owner = false;
         if (!empty($this->account_name)) {
-
             if (!empty($this->account_name_owner)) {
                 global $current_user;
                 $is_owner = $current_user->id == $this->account_name_owner;
@@ -835,7 +834,6 @@ class RevenueLineItem extends SugarBean
         }
         $is_owner = false;
         if (!empty($this->quote_name)) {
-
             if (!empty($this->quote_name_owner)) {
                 global $current_user;
                 $is_owner = $current_user->id == $this->quote_name_owner;
@@ -923,10 +921,9 @@ class RevenueLineItem extends SugarBean
             (array)$settings['sales_stage_lost']
         );
         // db quote values
-        foreach($stages as $stage_key => $stage_value) {
+        foreach ($stages as $stage_key => $stage_value) {
             $stages[$stage_key] = $this->db->quote($stage_value);
         }
         return $stages;
     }
-
 }

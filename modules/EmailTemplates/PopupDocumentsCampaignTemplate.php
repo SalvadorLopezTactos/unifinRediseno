@@ -15,7 +15,7 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-require_once('modules/Documents/Popup_picker.php');
+require_once 'modules/Documents/Popup_picker.php';
 $popup = new Popup_Picker();
 
 global $theme;
@@ -32,7 +32,6 @@ $where = '';
 $where = $popup->_get_where_clause();
 
 
-
 $name = empty($_REQUEST['name']) ? '' : $_REQUEST['name'];
 $document_name = empty($_REQUEST['document_name']) ? '' : $_REQUEST['document_name'];
 $category_id = empty($_REQUEST['category_id']) ? '' : $_REQUEST['category_id'];
@@ -43,17 +42,16 @@ $document_revision_id = empty($_REQUEST['document_revision_id']) ? '' : $_REQUES
 
 
 $hide_clear_button = empty($_REQUEST['hide_clear_button']) ? false : true;
-$button  = "<form action='index.php' method='post' name='form' id='form'>\n";
-if(!$hide_clear_button)
-{
-	$button .= "<input type='button' name='button' class='button' onclick=\"send_back('','');\" title='"
-		.$app_strings['LBL_CLEAR_BUTTON_TITLE']."' value='  "
-		.$app_strings['LBL_CLEAR_BUTTON_LABEL']."  ' />\n";
+$button = "<form action='index.php' method='post' name='form' id='form'>\n";
+if (!$hide_clear_button) {
+    $button .= "<input type='button' name='button' class='button' onclick=\"send_back('','');\" title='"
+        . $app_strings['LBL_CLEAR_BUTTON_TITLE'] . "' value='  "
+        . $app_strings['LBL_CLEAR_BUTTON_LABEL'] . "  ' />\n";
 }
 $button .= "<input type='submit' name='button' class='button' onclick=\"window.close();\" title='"
-	.$app_strings['LBL_CANCEL_BUTTON_TITLE']."' accesskey='"
-	.$app_strings['LBL_CANCEL_BUTTON_KEY']."' value='  "
-	.$app_strings['LBL_CANCEL_BUTTON_LABEL']."  ' />\n";
+    . $app_strings['LBL_CANCEL_BUTTON_TITLE'] . "' accesskey='"
+    . $app_strings['LBL_CANCEL_BUTTON_KEY'] . "' value='  "
+    . $app_strings['LBL_CANCEL_BUTTON_LABEL'] . "  ' />\n";
 $button .= "</form>\n";
 
 
@@ -64,15 +62,18 @@ $form->assign('THEME', $theme);
 $form->assign('MODULE_NAME', $currentModule);
 $form->assign('NAME', $name);
 $form->assign('DOCUMENT_NAME', $document_name);
-if(isset($_REQUEST['target'])) $form->assign('DOCUMENT_TARGET', $_REQUEST['target']);
-else $form->assign('DOCUMENT_TARGET', '');
+if (isset($_REQUEST['target'])) {
+    $form->assign('DOCUMENT_TARGET', $_REQUEST['target']);
+} else {
+    $form->assign('DOCUMENT_TARGET', '');
+}
 
 $form->assign('DOCUMENT_REVISION_ID', $document_revision_id);
 
-$form->assign("CATEGORY_OPTIONS", get_select_options_with_id($app_list_strings['document_category_dom'], $category_id));
-$form->assign("SUB_CATEGORY_OPTIONS", get_select_options_with_id($app_list_strings['document_subcategory_dom'], $subcategory_id));
-$form->assign("IS_TEMPLATE_OPTIONS", get_select_options_with_id($app_list_strings['checkbox_dom'], $is_template));
-$form->assign("TEMPLATE_TYPE_OPTIONS", get_select_options_with_id($app_list_strings['document_template_type_dom'], $template_type));
+$form->assign('CATEGORY_OPTIONS', get_select_options_with_id($app_list_strings['document_category_dom'], $category_id));
+$form->assign('SUB_CATEGORY_OPTIONS', get_select_options_with_id($app_list_strings['document_subcategory_dom'], $subcategory_id));
+$form->assign('IS_TEMPLATE_OPTIONS', get_select_options_with_id($app_list_strings['checkbox_dom'], $is_template));
+$form->assign('TEMPLATE_TYPE_OPTIONS', get_select_options_with_id($app_list_strings['document_template_type_dom'], $template_type));
 
 
 ob_start();
@@ -103,19 +104,8 @@ ob_start();
 $ListView->processListView($seed_bean, 'main', 'DOCUMENT');
 $output_html .= ob_get_contents();
 ob_end_clean();
-		
+
 $output_html .= insert_popup_footer();
 
 
 echo $output_html;
-
-
-
-
-
-
-
-
-
-
-?>

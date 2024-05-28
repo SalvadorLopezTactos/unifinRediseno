@@ -16,7 +16,7 @@
             {{#if name}} data-fieldname="{{name}}" data-realname="{{rname}}"{{/if}} data-orderby="{{orderBy}}">
 
             <div class="flex flex-row items-center w-max p-1">
-                <span class="header-hover">
+                <span class="cursor-pointer hover:underline">
                     {{#if labelValue}}
                         {{labelValue}}
                     {{else}}
@@ -24,8 +24,8 @@
                     {{/if}}
                 </span>
                 <span class="ml-1">
-                    <i class="sicon sicon-arrow-up {{#eq ../view.orderBy.field name}}{{#eq ../../view.orderBy.direction 'asc'}}text-default font-bold{{/eq}}{{/eq}}"></i>
-                    <i class="sicon sicon-arrow-down {{#eq ../view.orderBy.field name}}{{#eq ../../view.orderBy.direction 'desc'}}text-default font-bold{{/eq}}{{/eq}}"></i>
+                    <i class="sicon sicon-arrow-up {{#eq ../view.orderBy.field name}}{{#eq ../../view.orderBy.direction 'asc'}}text-[--text-color] font-bold{{/eq}}{{/eq}}"></i>
+                    <i class="sicon sicon-arrow-down {{#eq ../view.orderBy.field name}}{{#eq ../../view.orderBy.direction 'desc'}}text-[--text-color] font-bold{{/eq}}{{/eq}}"></i>
                 </span>
             </div>
         </th>

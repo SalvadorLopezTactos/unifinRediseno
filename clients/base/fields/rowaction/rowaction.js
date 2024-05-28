@@ -27,7 +27,7 @@
         });
 
         if (options.def.event === 'list:preview:fire') {
-            options.def.css_class += ' border-none bg-none';
+            options.def.css_class += ' !border-none !bg-transparent';
         }
 
         this._super('initialize', [options]);
@@ -71,5 +71,22 @@
         }
 
         return target;
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Adds capability to disable a rowaction based on whether the parent
+     * record is the current user's record
+     */
+    hasAccess: function() {
+        if (this.def.availability === 'parentSelf') {
+            let parentModel = this.context.get('parentModel');
+            if (parentModel && parentModel.get('id') !== app.user.get('id')) {
+                return false;
+            }
+        }
+
+        return this._super('hasAccess');
     }
 })

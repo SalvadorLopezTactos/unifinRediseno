@@ -38,7 +38,7 @@ class SugarUpgradePostCJUninstallDenormalization extends UpgradeScript
         $query->where()->starts('id_name', 'addoptify-customer-journey');
         $result = $query->execute();
 
-        return count($result) > 0 &&
+        return is_countable($result) ? count($result) : 0 > 0 &&
             version_compare($this->from_version, '12.2.0', '>=') &&
             version_compare($this->to_version, '13.1.0', '<=');
     }

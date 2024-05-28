@@ -213,10 +213,10 @@ $dictionary['Message'] = [
         ],
         'parent_name' => [
             'name' => 'parent_name',
-            'parent_type' => 'record_type_display' ,
+            'parent_type' => 'record_type_display',
             'type_name' => 'parent_type',
             'id_name' => 'parent_id',
-            'vname'=>'LBL_RELATED_TO',
+            'vname' => 'LBL_RELATED_TO',
             'type' => 'parent',
             'source' => 'non-db',
             'options' => 'record_type_display_notes',
@@ -444,7 +444,7 @@ $dictionary['Message'] = [
         [
             'name' => 'idx_aws_messages_contact_id',
             'type' => 'index',
-            'fields'=> ['aws_contact_id', 'deleted'],
+            'fields' => ['aws_contact_id', 'deleted'],
         ],
     ],
     'uses' => [
@@ -452,6 +452,7 @@ $dictionary['Message'] = [
         'assignable',
         'team_security',
         'sentiments_comprehend',
+        'audit',
     ],
     'portal_visibility' => [
         'class' => 'Messages',

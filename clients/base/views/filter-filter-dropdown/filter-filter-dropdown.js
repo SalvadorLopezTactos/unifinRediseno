@@ -107,7 +107,7 @@
                 app.api.call('read', url, null, {
                     success: _.bind(this.addModelFilterToLayoutFilters, this),
                     error: function() {
-                        app.logger.error('Filter can not be read, thus is not shared. Filter id: ' + filterId);
+                        app.logger.error('Filter can not be read, thus is not shared. Filter id: ' + modelFilterId);
                     }
                 });
             }

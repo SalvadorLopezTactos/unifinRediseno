@@ -9,15 +9,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['users_password_link'] = array(
+$dictionary['users_password_link'] = [
     'table' => 'users_password_link',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'vname' => 'LBL_ID',
             'type' => 'id',
             'required' => true,
-        ) ,
+        ],
         'bean_id' => [
             'name' => 'bean_id',
             'type' => 'id',
@@ -25,42 +25,42 @@ $dictionary['users_password_link'] = array(
         'bean_type' => [
             'name' => 'bean_type',
             'type' => 'varchar',
-            'len' =>'36',
+            'len' => '36',
             'default' => 'User',
         ],
-        'username' => array(
+        'username' => [
             'name' => 'username',
             'vname' => 'LBL_USERNAME',
             'type' => 'varchar',
             'len' => 36,
-        ) ,
-        'date_generated' => array(
+        ],
+        'date_generated' => [
             'name' => 'date_generated',
             'vname' => 'LBL_DATE_ENTERED',
             'type' => 'datetime',
-        ) ,
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'vname' => 'LBL_DELETED',
             'type' => 'bool',
             'required' => false,
             'reportable' => false,
-        ) ,
+        ],
         'platform' => [
             'name' => 'platform',
             'type' => 'varchar',
             'len' => 36,
             'default' => 'base',
         ],
-    ) ,
-    'indices' => array(
-        array(
+    ],
+    'indices' => [
+        [
             'name' => 'users_password_link_pk',
             'type' => 'primary',
-            'fields' => array(
-                'id'
-            )
-        ) ,
+            'fields' => [
+                'id',
+            ],
+        ],
         [
             'name' => 'idx_bean_id_users_password_link',
             'type' => 'index',
@@ -68,13 +68,13 @@ $dictionary['users_password_link'] = array(
                 'bean_id',
             ],
         ],
-        array(
+        [
             'name' => 'idx_username',
             'type' => 'index',
-            'fields' => array(
-                'username'
-            )
-        ),
+            'fields' => [
+                'username',
+            ],
+        ],
         [
             'name' => 'idx_id_deleted_platform',
             'type' => 'index',
@@ -84,5 +84,5 @@ $dictionary['users_password_link'] = array(
                 'platform',
             ],
         ],
-    ) ,
-);
+    ],
+];

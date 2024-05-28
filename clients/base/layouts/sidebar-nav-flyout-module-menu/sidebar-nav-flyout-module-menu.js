@@ -14,7 +14,7 @@
  * @extends View.Layout
  */
 ({
-    className: 'sidebar-nav-flyout-module-menu min-w-40 max-w-60',
+    className: 'sidebar-nav-flyout-module-menu min-w-[10rem] max-w-[15rem]',
 
     /**
      * Alternative endpoints that can be used when fetching collections. To use

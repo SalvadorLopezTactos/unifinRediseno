@@ -52,7 +52,7 @@ class MetaDataHelper
      * Cross module aggregations definitions
      * @var array
      */
-    protected $crossModuleAggDefs = array();
+    protected $crossModuleAggDefs = [];
 
 
     /**
@@ -60,7 +60,7 @@ class MetaDataHelper
      * both SugarCache and MetadataCache are disabled
      * @var array
      */
-    protected $inMemoryCache = array();
+    protected $inMemoryCache = [];
 
     /**
      * @param \MetaDataManager $mdm
@@ -79,9 +79,9 @@ class MetaDataHelper
      */
     public function disableCache($toggle)
     {
-        $this->disableCache = (bool) $toggle;
+        $this->disableCache = (bool)$toggle;
         if ($toggle) {
-            $this->logger->warning("MetaDataHelper: Performance degradation, cache disabled.");
+            $this->logger->warning('MetaDataHelper: Performance degradation, cache disabled.');
         }
     }
 
@@ -98,7 +98,7 @@ class MetaDataHelper
 
         // If the metadata manager cache is enabled but hash is not calculated, force the hash to be calculated
         if ($this->mdm->cacheEnabled() && empty($this->mdmHash)) {
-            $this->mdm->getMetadata(array(), $defaultContext);
+            $this->mdm->getMetadata([], $defaultContext);
             $this->mdmHash = $this->mdm->getCachedMetadataHash($defaultContext);
         }
 
@@ -106,9 +106,9 @@ class MetaDataHelper
         // our cache backend.
         if (empty($this->mdmHash)) {
             $this->disableCache(true);
-            $this->logger->warning("MetaDataHelper: No MetaDataHelper hash value available.");
+            $this->logger->warning('MetaDataHelper: No MetaDataHelper hash value available.');
         } else {
-            $this->logger->debug("MetaDataHelper: Using hash " . $this->mdmHash);
+            $this->logger->debug('MetaDataHelper: Using hash ' . $this->mdmHash);
         }
     }
 
@@ -123,7 +123,7 @@ class MetaDataHelper
             return $list;
         }
 
-        $list = array();
+        $list = [];
         // get all modules
         $modules = $this->mdm->getModuleList(false);
         foreach ($modules as $module) {
@@ -147,7 +147,7 @@ class MetaDataHelper
             return $list;
         }
 
-        $list = array();
+        $list = [];
         foreach ($this->getAllEnabledModules() as $module) {
             $vardefs = $this->getModuleVardefs($module);
             if (!empty($vardefs['full_text_search_async'])) {
@@ -188,13 +188,12 @@ class MetaDataHelper
             return $ftsFields;
         }
 
-        $ftsFields = array();
+        $ftsFields = [];
         $vardefs = $this->getModuleVardefs($module);
         if (!isset($vardefs['fields']) || !is_array($vardefs['fields'])) {
             return $ftsFields;
         }
         foreach ($vardefs['fields'] as $field => $defs) {
-
             // skip field if no type has been defined
             if (empty($defs['type'])) {
                 continue;
@@ -223,11 +222,11 @@ class MetaDataHelper
             return $list;
         }
 
-        $list = array();
+        $list = [];
 
         foreach ($this->getAllEnabledModules() as $module) {
             $seed = \BeanFactory::newBean($module);
-            if ($seed->ACLAccess('ListView', array('user' => $user))) {
+            if ($seed->ACLAccess('ListView', ['user' => $user])) {
                 $list[] = $module;
             }
         }
@@ -268,7 +267,7 @@ class MetaDataHelper
             return $incFields;
         }
 
-        $incFields = array();
+        $incFields = [];
         foreach ($this->getFtsFields($module) as $field => $defs) {
             if (!empty($defs['auto_increment'])) {
                 $incFields[] = $defs['name'];
@@ -289,7 +288,7 @@ class MetaDataHelper
             return $htmlFields;
         }
 
-        $htmlFields = array();
+        $htmlFields = [];
         foreach ($this->getFtsFields($module) as $field => $defs) {
             if (!empty($defs['type']) && $defs['type'] === 'htmleditable_tinymce') {
                 $htmlFields[] = $defs['name'];
@@ -378,7 +377,7 @@ class MetaDataHelper
      */
     protected function getRealCacheKey($key)
     {
-        return "mdmhelper_" . $this->mdmHash . "_" . $key;
+        return 'mdmhelper_' . $this->mdmHash . '_' . $key;
     }
 
     /**
@@ -392,7 +391,7 @@ class MetaDataHelper
         if (isset($aggDefs['modules'][$module])) {
             return $aggDefs['modules'][$module];
         }
-        return array();
+        return [];
     }
 
     /**
@@ -416,10 +415,10 @@ class MetaDataHelper
             return $list;
         }
 
-        $allAggDefs = array(
-            'cross' => array(),
-            'modules' => array(),
-        );
+        $allAggDefs = [
+            'cross' => [],
+            'modules' => [],
+        ];
         foreach ($this->getAllEnabledModules() as $module) {
             $aggDefs = $this->getAllAggDefsModule($module);
             $allAggDefs['cross'] = array_merge($allAggDefs['cross'], $aggDefs['cross']);
@@ -473,14 +472,13 @@ class MetaDataHelper
      */
     protected function getAllAggDefsModule($module)
     {
-        $allAggDefs = array(
-            'cross' => array(),
-            'module' => array(),
-        );
+        $allAggDefs = [
+            'cross' => [],
+            'module' => [],
+        ];
 
         $fieldDefs = $this->getFtsFields($module);
         foreach ($fieldDefs as $fieldName => $fieldDef) {
-
             // skip the field without aggregations defs
             if (empty($fieldDef['full_text_search']['aggregations'])) {
                 continue;
@@ -499,7 +497,7 @@ class MetaDataHelper
 
                 // set empty options array if nothing specified
                 if (empty($aggDef['options']) || !is_array($aggDef['options'])) {
-                    $aggDef['options'] = array();
+                    $aggDef['options'] = [];
                 }
 
                 // split module vs cross module aggregations

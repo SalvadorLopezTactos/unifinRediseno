@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint\Http\Adapter;
 
 use Sugarcrm\Sugarcrm\Hint\Http\ClientInterface;
@@ -116,7 +117,7 @@ class Curl implements ClientInterface
                 $len = strlen($header);
                 $header = explode(':', $header, 2);
                 // ignore invalid headers
-                if (count($header) < 2) {
+                if (safeCount($header) < 2) {
                     return $len;
                 }
 

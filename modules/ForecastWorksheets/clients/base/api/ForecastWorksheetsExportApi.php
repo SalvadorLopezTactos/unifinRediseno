@@ -17,21 +17,21 @@ class ForecastWorksheetsExportApi extends ExportApi
      */
     public function registerApiRest()
     {
-        return array(
-            'exportGet' => array(
+        return [
+            'exportGet' => [
                 'reqType' => 'GET',
-                'path' => array('ForecastWorksheets', 'export'),
-                'pathVars' => array('module', ''),
+                'path' => ['ForecastWorksheets', 'export'],
+                'pathVars' => ['module', ''],
                 'method' => 'export',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
                 'shortHelp' => 'Returns a record set in CSV format along with HTTP headers to indicate content type.',
                 'longHelp' => 'include/api/help/module_export_get_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
-    public function export(ServiceBase $api, array $args = array())
+    public function export(ServiceBase $api, array $args = [])
     {
         ob_start();
         // Load up a seed bean
@@ -44,9 +44,9 @@ class ForecastWorksheetsExportApi extends ExportApi
         $args['timeperiod_id'] = $args['timeperiod_id'] ?? TimePeriod::getCurrentId();
         $args['user_id'] = $args['user_id'] ?? $api->user->id;
         if (!isset($args['filters'])) {
-            $args['filters'] = array();
+            $args['filters'] = [];
         } elseif (!is_array($args['filters'])) {
-            $args['filters'] = array($args['filters']);
+            $args['filters'] = [$args['filters']];
         }
         // don't allow encoding to html for data used in export
         $args['encode_to_html'] = false;

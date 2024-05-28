@@ -9,8 +9,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const BeforeEvent = require('core/before-event');
-const Events = require('core/events');
+const BeforeEvent = require('./before-event');
+const Events = require('./events');
 
 /**
  * Manages routing behavior.

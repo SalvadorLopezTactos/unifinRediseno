@@ -11,20 +11,14 @@
  */
 --}}
 <div class='{{#if isValidVersion}}
-    {{#if oldHintPreview}}hint-preview-tabbed-layout{{else}}hint-preview{{/if}}
+    {{#if oldHintPreview}}hint-preview-tabbed-layout{{else}}hint-preview{{/if}} shadow
 {{else}}
     {{#if isListView}}hint-preview-list{{else}}hint-preview{{/if}}
 {{/if}} rounded-md'>
 <div class='headline rounded-t-md'>
     {{#unless _stage2ErrorCode}}
         {{#if shouldShowHintCloudLogo}}
-        <div class='{{#if isHintRequestLoading}}
-            {{#if isDarkMode}}
-                hint-preview-icon-darkmode--loading
-            {{else}}
-                hint-preview-icon--loading
-            {{/if}}
-        {{/if}}'
+        <div class='{{#if isHintRequestLoading}}hint-preview-icon--loading bg-transparent{{/if}}'
             aria-hidden='true' data-name='saveAll' data-action='copy' rel='tooltip'>
         </div>
         {{/if}}
@@ -51,7 +45,7 @@
         {{/eq}}
     </div>
 {{else}}
-    <div class='hint-preview-container rounded-b-md mb-4 p-0'>
+    <div class='hint-preview-container rounded-b-md mb-4'>
         {{#if isHintRequestLoading}}
             {{#eq moduleName 'Accounts'}}
                 {{#if isDarkMode}}
@@ -74,23 +68,12 @@
                 <div class='hint-preview-field-value record-cell record-cell--{{name}}' data-type='{{type}}' name='{{name}}' data-name='{{name}}'>
                     {{field ../../../this model=model}}
                 {{#if ../../../shouldShowHintCloudLogo}}
-                    {{#if ../../../../isDarkMode}}
-                        <button class='hidden hint-preview-icon-darkmode--cloud'
-                                data-name='{{name}}' data-action='copy' rel='tooltip'
-                                data-placement='left' data-title="{{str 'LBL_HINT_PREVIEW_CLICK_TO_SAVE'}}">
-                        </button>
-                    {{else}}
-                        <button class='hidden hint-preview-icon--cloud'
-                                data-name='{{name}}' data-action='copy' rel='tooltip'
-                                data-placement='left' data-title="{{str 'LBL_HINT_PREVIEW_CLICK_TO_SAVE'}}">
-                        </button>
-                    {{/if}}
+                    <button class='hidden hint-preview-icon--cloud bg-transparent'
+                            data-name='{{name}}' data-action='copy' rel='tooltip'
+                            data-bs-placement='left' data-title="{{str 'LBL_HINT_PREVIEW_CLICK_TO_SAVE'}}">
+                    </button>
                 {{/if}}
-                    {{#if ../../../../isDarkMode}}
-                        <button class='hidden hint-preview-icon-darkmode--locked' data-name='{{name}}' data-action='lock'></button>
-                    {{else}}
-                        <button class='hidden hint-preview-icon--locked' data-name='{{name}}' data-action='lock'></button>
-                    {{/if}}
+                    <button class='hidden hint-preview-icon--lock bg-transparent' data-name='{{name}}' data-action='lock'></button>
                 </div>
             {{/each}}
         </div>
@@ -107,7 +90,7 @@
                         data-type='{{type}}' style='{{#if ../../../isDarkMode}}color: #E5EAED;{{/if}}' name='{{name}}' data-name='{{name}}'>
                         {{#eq name 'hint_account_website'}}
                             <div id='hint_website_erased' class='hidden' style='float: right;'>
-                                <span class='label' rel='tooltip' data-placement='bottom' title=''
+                                <span class='label' rel='tooltip' data-bs-placement='bottom' title=''
                                     data-original-title="{{str 'LBL_HINT_VALUE_ERASED_TOOLTIP'}}">
                                     {{str 'LBL_HINT_VALUE_ERASED'}}
                                 </span>
@@ -115,25 +98,13 @@
                         {{/eq}}
                         {{field ../../../this model=model}}
                     {{#if ../../../shouldShowHintCloudLogo}}
-                        {{#if ../../../../isDarkMode}}
-                            <button class='hidden hint-preview-icon-darkmode--cloud'
-                                    data-name='{{name}}'
-                                    data-action='copy' rel='tooltip' data-placement='left'
-                                    data-title="{{str 'LBL_HINT_PREVIEW_CLICK_TO_SAVE'}}">
-                            </button>
-                        {{else}}
-                            <button class='hidden hint-preview-icon--cloud'
-                                    data-name='{{name}}'
-                                    data-action='copy' rel='tooltip' data-placement='left'
-                                    data-title="{{str 'LBL_HINT_PREVIEW_CLICK_TO_SAVE'}}">
-                            </button>
-                        {{/if}}
+                        <button class='hidden hint-preview-icon--cloud bg-transparent'
+                                data-name='{{name}}'
+                                data-action='copy' rel='tooltip' data-bs-placement='left'
+                                data-title="{{str 'LBL_HINT_PREVIEW_CLICK_TO_SAVE'}}">
+                        </button>
                     {{/if}}
-                        {{#if ../../../../isDarkMode}}
-                            <button class='hidden hint-preview-icon-darkmode--locked' data-name='{{name}}' data-action='lock'></button>
-                        {{else}}
-                            <button class='hidden hint-preview-icon--locked' data-name='{{name}}' data-action='lock'></button>
-                        {{/if}}
+                        <button class='hidden hint-preview-icon--lock bg-transparent' data-name='{{name}}' data-action='lock'></button>
                     </div>
                 </div>
             {{/each}}

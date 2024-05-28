@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '작업 대기열',
     'LBL_MODULE_NAME_SINGULAR' => '작업 대기열',
     'LBL_MODULE_TITLE' => '작업 대기열: 홈',
@@ -51,15 +51,15 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => '취소된 해결',
     'LBL_RESOLUTION_FILTER_RUNNING' => '실행 중인 해결책',
     // Errors
-    'ERR_CALL' => "전화상담 기능 불가:백분율",
-    'ERR_CURL' => "CURL  없음- URL 작업 실행 불가",
-    'ERR_FAILED' => "예기치못한 실패입니다. PHP일지와 Sugarcrm일지를 확인하십시오",
-    'ERR_PHP' => "%s [%d]: 라인 %d에 있는 %s에서 %s",
-    'ERR_NOUSER' => "작업을 위한 명시된 내 사용자 ID가 없습니다.",
-    'ERR_NOSUCHUSER' => "사용자 ID %가 발견되지 않았습니다.",
-    'ERR_JOBTYPE' => "알수없는 작업 유형:%",
-    'ERR_TIMEOUT' => "시간경과로 실패했습니다.",
-    'ERR_JOB_FAILED_VERBOSE' => 'CRON실행에서 실패한 작업 %',
+    'ERR_CALL' => '함수를 호출할 수 없음: %s',
+    'ERR_CURL' => 'CURL  없음- URL 작업 실행 불가',
+    'ERR_FAILED' => '예기치못한 실패입니다. PHP일지와 Sugarcrm일지를 확인하십시오',
+    'ERR_PHP' => '%s [%d]: 라인 %d에 있는 %s에서 %s',
+    'ERR_NOUSER' => '작업을 위한 명시된 내 사용자 ID가 없습니다.',
+    'ERR_NOSUCHUSER' => '사용자 ID %s을(를) 찾을 수 음',
+    'ERR_JOBTYPE' => '알 수 없는 작업 유형: %s',
+    'ERR_TIMEOUT' => '시간경과로 실패했습니다.',
+    'ERR_JOB_FAILED_VERBOSE' => 'CRON 실행에서 %1$s(%2$s) 작업 실패',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'id: %s 포함 빈을 로드할 수 없음',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => '경로 %s에 대한 핸들러를 찾을 수 없음',
     'ERR_CONFIG_MISSING_EXTENSION' => '이 대기열에 대한 확장자가 설치되어 있지 않음',
@@ -91,13 +91,13 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Amazon SQS 환경구성 도움말',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Amazon SQS 환경구성 섹션</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Amazon SQS 환경구성 섹션</b></p>
 <ul>
     <li>액세스 키 ID: <i>Amazon SQS에 대한 액세스 키 id 번호를 입력</i></li>
     <li>비밀 액세스 키: <i>Amazon SQS에 대한 비밀 액세스 키 입력</i></li>
     <li>지역: <i>Amazon SQS 서버의 지역 입력</i></li>
     <li>대기열 이름: <i>Amazon SQS 서버의 대기열 이름 입력</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'AMQP 환경구성 도움말',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>AMQP 환경구성 섹션</b></p>
 <ul>
@@ -118,4 +118,4 @@ $mod_strings = array(
     'LBL_REGION' => '지역',
     'LBL_ACCESS_KEY_SECRET' => '비밀 액세스 키',
     'LBL_QUEUE_NAME' => '어댑터 이름',
-);
+];

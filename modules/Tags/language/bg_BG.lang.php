@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Етикети',
     'LBL_GENERIC_LINK' => 'Свързани обекти',
     'LBL_NAME_LOWER' => 'Етикет с малки букви',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'Моите етикети',
     'LBL_MY_FAVORITE_TAGS' => 'Моите предпочитани етикети',
     'LBL_MORE_TAGS' => '{{tagsNumber}} етикети',
-);
+];

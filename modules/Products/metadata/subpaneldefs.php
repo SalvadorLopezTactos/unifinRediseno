@@ -9,41 +9,41 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- 
 
-$layout_defs['Products'] = array(
-	// list of what Subpanels to show in the DetailView 
-	'subpanel_setup' => array(
-		'products' => array(
-			'top_buttons' => array(
-				array('widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'Products'),
-			),
-			'order' => 10,
-			'module' => 'Products',
-			'sort_order' => 'desc',
-			'sort_by' => 'date_purchased',
-			'subpanel_name' => 'ForProducts',
-			'get_subpanel_data' => 'related_products',
-			'add_subpanel_data' => 'product_id',
-			'title_key' => 'LBL_RELATED_PRODUCTS_TITLE',
-			'get_distinct_data'=> true,
-		),
-		
-		'notes' => array(
-			'top_buttons' => array(
-				array('widget_class' => 'SubPanelTopCreateButton'),
-			),
-			'order' => 20,
-			'sort_order' => 'desc',
-			'sort_by' => 'date_modified',
-			'module' => 'Notes',
-			'subpanel_name' => 'default',
-			'get_subpanel_data' => 'notes',
-			'add_subpanel_data' => 'note_id',
-			'title_key' => 'LBL_NOTES_SUBPANEL_TITLE',
-		),
-		
-        'documents' => array(
+
+$layout_defs['Products'] = [
+    // list of what Subpanels to show in the DetailView
+    'subpanel_setup' => [
+        'products' => [
+            'top_buttons' => [
+                ['widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'Products'],
+            ],
+            'order' => 10,
+            'module' => 'Products',
+            'sort_order' => 'desc',
+            'sort_by' => 'date_purchased',
+            'subpanel_name' => 'ForProducts',
+            'get_subpanel_data' => 'related_products',
+            'add_subpanel_data' => 'product_id',
+            'title_key' => 'LBL_RELATED_PRODUCTS_TITLE',
+            'get_distinct_data' => true,
+        ],
+
+        'notes' => [
+            'top_buttons' => [
+                ['widget_class' => 'SubPanelTopCreateButton'],
+            ],
+            'order' => 20,
+            'sort_order' => 'desc',
+            'sort_by' => 'date_modified',
+            'module' => 'Notes',
+            'subpanel_name' => 'default',
+            'get_subpanel_data' => 'notes',
+            'add_subpanel_data' => 'note_id',
+            'title_key' => 'LBL_NOTES_SUBPANEL_TITLE',
+        ],
+
+        'documents' => [
             'order' => 25,
             'module' => 'Documents',
             'subpanel_name' => 'default',
@@ -51,33 +51,31 @@ $layout_defs['Products'] = array(
             'sort_by' => 'id',
             'title_key' => 'LBL_DOCUMENTS_SUBPANEL_TITLE',
             'get_subpanel_data' => 'documents',
-            'top_buttons' => 
-            array (
-                0 => 
-                array (
-                    'widget_class' => 'SubPanelTopButtonQuickCreate',
-                    ),
-                1 => 
-                array (
-                    'widget_class' => 'SubPanelTopSelectButton',
-                    'mode' => 'MultiSelect',
-                    ),
-                ),
-        ),
+            'top_buttons' => [
+                0 =>
+                    [
+                        'widget_class' => 'SubPanelTopButtonQuickCreate',
+                    ],
+                1 =>
+                    [
+                        'widget_class' => 'SubPanelTopSelectButton',
+                        'mode' => 'MultiSelect',
+                    ],
+            ],
+        ],
 
-		'contracts' => array(
-			'top_buttons' => array(
-				array('widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'Contracts'),
-			),
-			'order' => 30,
-			'sort_order' => 'desc',
-			'sort_by' => 'date_modified',
-			'module' => 'Contracts',
-			'subpanel_name' => 'default',
-			'get_subpanel_data' => 'contracts',
-			'add_subpanel_data' => 'contract_id',
-			'title_key' => 'LBL_CONTRACTS_SUBPANEL_TITLE',
-		),		
-	),
-);
-?>
+        'contracts' => [
+            'top_buttons' => [
+                ['widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'Contracts'],
+            ],
+            'order' => 30,
+            'sort_order' => 'desc',
+            'sort_by' => 'date_modified',
+            'module' => 'Contracts',
+            'subpanel_name' => 'default',
+            'get_subpanel_data' => 'contracts',
+            'add_subpanel_data' => 'contract_id',
+            'title_key' => 'LBL_CONTRACTS_SUBPANEL_TITLE',
+        ],
+    ],
+];

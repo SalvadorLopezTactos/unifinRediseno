@@ -41,7 +41,7 @@ class EmailsHookHandler
         $attachment = BeanFactory::retrieveBean(
             $args['related_module'],
             $args['related_id'],
-            array('disable_row_level_security' => true)
+            ['disable_row_level_security' => true]
         );
 
         if ($attachment) {

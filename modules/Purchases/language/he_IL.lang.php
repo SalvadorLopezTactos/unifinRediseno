@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות של רכישות',
     'LBL_RELATED_ACCOUNT' => 'חשבון קשור',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס רכישות',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן של רכישות',
 ];

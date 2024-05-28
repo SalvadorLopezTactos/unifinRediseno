@@ -13,11 +13,13 @@
 <ul class="nav megamenu" role="navigation" aria-label="{{str 'LBL_ARIA_MODULENAVIGATION' module}}" data-container="module-list">
     <li class="dropdown hidden more p-0" data-action="more-modules">
         <div class="btn-group p-2">
-            <button type="button" data-toggle="dropdown" class="btn btn-invisible dropdown-toggle p-1" title="{{str 'LBL_LINK_MORE'}}" track="click:navbar-more-modules" aria-label="{{str 'LBL_MORE_MODULES'}}" role="button"
+            <button type="button" data-bs-toggle="dropdown" class="btn btn-invisible dropdown-toggle p-1"
+                    title="{{str 'LBL_LINK_MORE'}}" track="click:navbar-more-modules"
+                    aria-label="{{str 'LBL_MORE_MODULES'}}" role="button" data-bs-display="static"
             >
                 <i class="sicon sicon-kebab"></i>
             </button>
-            <div class="dropdown-menu scroll rounded-t-none">
+            <div class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl scroll rounded-t-none">
                 <ul data-container="overflow" role="menu"></ul>
             </div>
         </div>

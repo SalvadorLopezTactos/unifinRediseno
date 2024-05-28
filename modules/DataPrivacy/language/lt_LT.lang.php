@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Duomenų privatumas',
     'LBL_MODULE_NAME_SINGULAR' => 'Duomenų privatumas',
     'LBL_NUMBER' => 'Numeris',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Nėra pažymėtų ištrinti laukų arba įrašų.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Duomenų privatumo įrašų ataskaitų sritis',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ duomenų privatumas',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Duomenų privatumo chronologija',
 
     // list view
     'LBL_HELP_RECORDS' => 'Duomenų privatumo modulis seka privatumo veiklas, įskaitant sutikimo ir temų užklausas, kad būtų palaikomos jūsų organizacijos privatumo procedūros. Kurkite duomenų privatumo įrašus, susietus su asmens įrašu (pvz., kontaktu), kad galėtumėte sekti sutikimą arba imtis veiksmų dėl privatumo užklausos.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Duomenų privatumo modulis seka privatumo veiklas, įskaitant sutikimo ir temų užklausas, kad būtų palaikomos jūsų organizacijos privatumo procedūros. Kurkite duomenų privatumo įrašus, susietus su asmens įrašu (pvz., kontaktu), kad galėtumėte sekti sutikimą arba imtis veiksmų dėl privatumo užklausos. Kai užbaigiamas reikiamas veiksmas, duomenų privatumo vadovo vaidmenį turintys vartotojai gali spustelėti „Užbaigti“ arba „Atmesti“ ir atnaujinti būseną.
 
 Dėl ištrynimo užklausų kiekvienam antriniame skydelyje (žemiau) pateiktam asmens įrašui pasirinkite „Žymėti ištrinti“. Pažymėję visus norimus laukus, spustelėkite „Ištrinti ir užbaigti“ ir visam laikui pašalinkite laukų vertes, o duomenų privatumo įrašą pažymėkite kaip užbaigtą.',
-);
+];

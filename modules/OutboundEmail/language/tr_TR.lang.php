@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Giden E-posta Hesapları',
     'LBL_MODULE_NAME_SINGULAR' => 'Giden E-posta Hesabı',
     'LBL_STATUS' => 'Durum',
@@ -40,4 +40,4 @@ $mod_strings = array(
     'LBL_PREFERRED_SENDING_ACCOUNT' => 'Tercih Edilen Gönderen Hesap',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'E-posta Ayarları Odak Bölmesi',
-);
+];

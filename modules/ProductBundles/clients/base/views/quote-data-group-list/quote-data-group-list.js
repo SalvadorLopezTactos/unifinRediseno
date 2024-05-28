@@ -546,13 +546,20 @@
         prepopulateData = prepopulateData || {};
 
         if (this.collection.length) {
+            this.collection.models.map((model, i) => {
+                let modelPosition = model.get('position');
+                if (!_.isNumber(modelPosition)) {
+                    model.set('position', i);
+                }
+            });
+
             // get the model with the highest position
             maxPositionModel = _.max(this.collection.models, function(model) {
-                return +model.get('position');
+                return model.get('position');
             });
 
             // get the position of the highest model's position and add one to it
-            position = +maxPositionModel.get('position') + 1;
+            position = maxPositionModel.get('position') + 1;
         }
 
         // if the data has a _module, remove it
@@ -894,9 +901,6 @@
         if (isEdit) {
             //disable drag/drop for this row
             $row.addClass('not-sortable');
-            $row.parent().sortable({
-                cancel: '.not-sortable, .dropdown-toggle, .dropdown-menu'
-            });
             $row.removeClass('ui-sortable');
 
             // Since the act of toggling the fields to "edit" mode is deferred

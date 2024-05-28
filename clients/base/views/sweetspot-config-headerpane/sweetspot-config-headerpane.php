@@ -9,33 +9,33 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['sweetspot-config-headerpane'] = array(
+$viewdefs['base']['view']['sweetspot-config-headerpane'] = [
     'template' => 'headerpane',
-    'fields' => array(
-        array(
+    'fields' => [
+        [
             'name' => 'title',
             'type' => 'label',
             'default_value' => 'LBL_SWEETSPOT_CONFIG',
-        ),
-    ),
-    'buttons' => array(
-        array(
+        ],
+    ],
+    'buttons' => [
+        [
             'name' => 'cancel_button',
             'type' => 'button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
-            'events' => array(
+            'events' => [
                 'click' => 'button:cancel_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'save_button',
             'type' => 'button',
             'label' => 'LBL_SAVE_BUTTON_LABEL',
             'primary' => true,
-            'events' => array(
+            'events' => [
                 'click' => 'button:save_button:click',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

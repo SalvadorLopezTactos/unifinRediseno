@@ -11,74 +11,74 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Prospects']['base']['filter']['default'] = array(
+$viewdefs['Prospects']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'first_name' => array(),
-        'last_name' => array(),
-        'email' => array(),
-        'do_not_call' => array(),
-        'phone' => array(
-            'dbFields' => array(
+    'fields' => [
+        'first_name' => [],
+        'last_name' => [],
+        'email' => [],
+        'do_not_call' => [],
+        'phone' => [
+            'dbFields' => [
                 'phone_mobile',
                 'phone_work',
                 'phone_other',
                 'phone_fax',
                 'phone_home',
-            ),
+            ],
             'type' => 'phone',
             'vname' => 'LBL_PHONE',
-        ),
-        'address_street' => array(
-            'dbFields' => array(
+        ],
+        'address_street' => [
+            'dbFields' => [
                 'primary_address_street',
                 'alt_address_street',
-            ),
+            ],
             'vname' => 'LBL_STREET',
             'type' => 'text',
-        ),
-        'address_city' => array(
-            'dbFields' => array(
+        ],
+        'address_city' => [
+            'dbFields' => [
                 'primary_address_city',
                 'alt_address_city',
-            ),
+            ],
             'vname' => 'LBL_CITY',
             'type' => 'text',
-        ),
-        'address_state' => array(
-            'dbFields' => array(
+        ],
+        'address_state' => [
+            'dbFields' => [
                 'primary_address_state',
                 'alt_address_state',
-            ),
+            ],
             'vname' => 'LBL_STATE',
             'type' => 'text',
-        ),
-        'address_postalcode' => array(
-            'dbFields' => array(
+        ],
+        'address_postalcode' => [
+            'dbFields' => [
                 'primary_address_postalcode',
                 'alt_address_postalcode',
-            ),
+            ],
             'vname' => 'LBL_POSTAL_CODE',
             'type' => 'text',
-        ),
-        'address_country' => array(
-            'dbFields' => array(
+        ],
+        'address_country' => [
+            'dbFields' => [
                 'primary_address_country',
                 'alt_address_country',
-            ),
+            ],
             'vname' => 'LBL_COUNTRY',
             'type' => 'text',
-        ),
-        'tag' => array(),
-        '$owner' => array(
+        ],
+        'tag' => [],
+        '$owner' => [
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',
-        ),
-        'assigned_user_name' => array(),
-        '$favorite' => array(
+        ],
+        'assigned_user_name' => [],
+        '$favorite' => [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        ),
+        ],
         '$distance' => [
             'name' => '$distance',
             'vname' => 'LBL_MAPS_DISTANCE',
@@ -86,5 +86,5 @@ $viewdefs['Prospects']['base']['filter']['default'] = array(
             'source' => 'non-db',
             'merge_filter' => 'enabled',
         ],
-    ),
-);
+    ],
+];

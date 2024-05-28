@@ -27,7 +27,7 @@ class IsForecastClosedWonExpression extends BooleanExpression
         // get the statuses
         $settings = Forecast::getSettings();
 
-        if (in_array($value, $settings['sales_stage_won'], true)) {
+        if (safeInArray($value, $settings['sales_stage_won'], true)) {
             return AbstractExpression::$TRUE;
         }
 
@@ -64,7 +64,7 @@ JS;
      */
     public static function getParameterTypes()
     {
-        return array('string');
+        return ['string'];
     }
 
     /**

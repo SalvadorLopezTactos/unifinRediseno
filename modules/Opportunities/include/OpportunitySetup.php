@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -36,7 +37,7 @@ abstract class OpportunitySetup
      *
      * @var array
      */
-    protected $field_vardef_setup = array();
+    protected $field_vardef_setup = [];
 
     /**
      * Where is the applications extension folder at
@@ -100,7 +101,7 @@ abstract class OpportunitySetup
      * @var string
      */
     protected $accModuleExtFolder = 'custom/Extension/modules/Accounts/Ext';
-    
+
     /**
      * Account Module Extension vardef dictionary change
      *
@@ -147,23 +148,22 @@ abstract class OpportunitySetup
         SugarAutoLoader::load('modules/ModuleBuilder/parsers/StandardField.php');
 
         foreach ($this->field_vardef_setup as $field => $new_defs) {
-
             // get the field defs
             $field_defs = $this->bean->getFieldDefinition($field);
 
-            $diff = array();
+            $diff = [];
             foreach ($new_defs as $k => $v) {
                 if (!isset($field_defs[$k])) {
                     switch ($k) {
-                        case 'massupdate' :
-                        case 'studio' :
-                        case 'reportable' :
-                        case 'workflow' :
+                        case 'massupdate':
+                        case 'studio':
+                        case 'reportable':
+                        case 'workflow':
                             if (!$v) {
                                 $diff[$k] = $v;
                             }
                             break;
-                        default :
+                        default:
                             if ($v) {
                                 $diff[$k] = $v;
                             }
@@ -240,13 +240,13 @@ abstract class OpportunitySetup
 
         // r&r the opp module
         $this->runRepairAndRebuild(
-            array(
+            [
                 'Opportunities',
                 'Products',
                 'Forecasts',
                 'Accounts',
                 'Leads',
-            )
+            ]
         );
 
         // regenerate the Opportunity Vardefs
@@ -254,7 +254,7 @@ abstract class OpportunitySetup
             $this->bean->getModuleName(),
             $this->bean->object_name,
             true,
-            array('bean' => $this->bean)
+            ['bean' => $this->bean]
         );
 
         $this->bean->clearLoadedDef($this->bean->object_name);
@@ -277,7 +277,7 @@ abstract class OpportunitySetup
 
         MetaDataManager::disableCacheRefreshQueue();
 
-        register_shutdown_function(array('SugarAutoLoader', 'buildCache'));
+        register_shutdown_function(['SugarAutoLoader', 'buildCache']);
     }
 
     /**
@@ -285,7 +285,7 @@ abstract class OpportunitySetup
      *
      * @param array $modules The list of modules
      */
-    private function runRepairAndRebuild(array $modules = array('Opportunities'))
+    private function runRepairAndRebuild(array $modules = ['Opportunities'])
     {
         SugarAutoLoader::load('modules/Administration/QuickRepairAndRebuild.php');
         $rac = new RepairAndClear();
@@ -306,7 +306,7 @@ abstract class OpportunitySetup
         /* @var $filterDefParser SidecarFilterLayoutMetaDataParser */
         $filterDefParser = ParserFactory::getParser(MB_BASICSEARCH, 'Opportunities', null, null, 'base');
 
-        foreach($fieldMap as $field => $add) {
+        foreach ($fieldMap as $field => $add) {
             if ($add === true) {
                 $filterDefParser->addField($field);
             } else {
@@ -454,7 +454,7 @@ abstract class OpportunitySetup
      *
      * @param array $modules Which modules to refresh, if left empty it wil only do `Opportunities`
      */
-    protected function refreshMetadataCache(array $modules = array())
+    protected function refreshMetadataCache(array $modules = [])
     {
         // if empty, default it to Opportunities
         if (empty($modules)) {
@@ -521,7 +521,7 @@ abstract class OpportunitySetup
         if ($show) {
             // if this is in the upgrade and RevenueLineItem is disabled in the tab before the upgrade,
             // it should not be enabled in the tab.
-            if ( !$this->isUpgrade || isset($tabs['RevenueLineItems'])) {
+            if (!$this->isUpgrade || isset($tabs['RevenueLineItems'])) {
                 $tabs['RevenueLineItems'] = 'RevenueLineItems';
             }
         } else {
@@ -594,12 +594,12 @@ SQL;
         $old_request = $_REQUEST;
 
         // What lists need updating
-        $listsToUpdate = array(
+        $listsToUpdate = [
             'moduleList',
             'parent_type_display',
             'record_type_display_notes',
-            'record_type_display'
-        );
+            'record_type_display',
+        ];
 
         // load the Dropdown parser so it can easily be saved
         SugarAutoLoader::load('modules/ModuleBuilder/parsers/ParserFactory.php');
@@ -630,12 +630,12 @@ SQL;
                 }
 
                 // the parser need all the values to be in their own array with the key first then the value
-                $new_list = array();
+                $new_list = [];
                 foreach ($list as $k => $v) {
-                    $new_list[] = array($k, $v);
+                    $new_list[] = [$k, $v];
                 }
 
-                $params = array(
+                $params = [
                     'dropdown_name' => $list_key,
                     'dropdown_lang' => $current_lang,
                     'list_value' => json_encode($new_list),
@@ -643,7 +643,7 @@ SQL;
                     'use_push' => ($list_key == 'moduleList'),
                     'skipSaveExemptDropdowns' => true,
                     'skip_sync' => true,
-                );
+                ];
                 // for some reason, the ParserDropDown class uses $_REQUEST vs getting it from what
                 // was passed in.
                 $_REQUEST['view_package'] = 'studio';
@@ -670,7 +670,7 @@ SQL;
 
         $modules = $cscb->getQuickCreateModules();
 
-        $enModules = array();
+        $enModules = [];
         foreach ($modules['enabled'] as $module => $def) {
             $enModules[$module] = $def['order'];
         }
@@ -679,7 +679,7 @@ SQL;
         if ($enable === true && $hasRLI === false) {
             // if it's upgrade, RLI must be disabled and $hasRLI is false. Hence it won't be enabled.
             if (!$this->isUpgrade) {
-                $enModules['RevenueLineItems'] = count($enModules);
+                $enModules['RevenueLineItems'] = safeCount($enModules);
             }
         } elseif ($enable === false && $hasRLI === true) {
             unset($enModules['RevenueLineItems']);
@@ -707,7 +707,7 @@ SQL;
         /* @var $workFlow WorkFlow */
         $workFlow = BeanFactory::newBean('WorkFlow');
         $sq = new SugarQuery();
-        $sq->select(array('id'));
+        $sq->select(['id']);
         $sq->from($workFlow);
         $sq->where()
             ->equals('status', 1)
@@ -735,12 +735,12 @@ SQL;
         $actionShells = BeanFactory::newBean('WorkFlowActionShells');
 
         $sq = new SugarQuery();
-        $sq->select(array('id', 'parent_id'));
+        $sq->select(['id', 'parent_id']);
         $sq->from($actionShells);
         $sq->where()
             ->queryOr()
-                ->equals('rel_module', 'opportunities')
-                ->equals('action_module', 'opportunities');
+            ->equals('rel_module', 'opportunities')
+            ->equals('action_module', 'opportunities');
 
         $rows = $sq->execute();
 
@@ -764,7 +764,7 @@ SQL;
         $triggerShells = BeanFactory::newBean('WorkFlowTriggerShells');
 
         $sq = new SugarQuery();
-        $sq->select(array('id', 'parent_id'));
+        $sq->select(['id', 'parent_id']);
         $sq->from($triggerShells);
         $sq->where()
             ->equals('rel_module', 'opportunities');
@@ -784,12 +784,12 @@ SQL;
     {
         // make sure all the links are visible in workflows
         /* @var $rli_bean = RevenueLineItem */
-        $rli_bean  = BeanFactory::newBean('RevenueLineItems');
+        $rli_bean = BeanFactory::newBean('RevenueLineItems');
         $rli_links = $rli_bean->get_linked_fields();
 
-        $rnr_modules = array();
+        $rnr_modules = [];
 
-        foreach($rli_links as $name => $link) {
+        foreach ($rli_links as $name => $link) {
             if ($rli_bean->load_relationship($name) && $rli_bean->$name instanceof Link2) {
                 $bean = BeanFactory::newBean($rli_bean->$name->getRelatedModuleName());
                 $rel_name = $rli_bean->$name->getRelatedModuleLinkName();
@@ -849,15 +849,15 @@ EOL;
      */
     protected function handleReports()
     {
-        require_once('modules/Reports/SeedReports.php');
+        require_once 'modules/Reports/SeedReports.php';
 
         $db = DBManagerFactory::getInstance();
 
-        $func = function($item) use ($db) {
-            return($db->quoted($item));
+        $func = function ($item) use ($db) {
+            return ($db->quoted($item));
         };
 
-        $hide = !empty($this->reportchange['hide']) ? array_map($func, $this->reportchange['hide']): array();
+        $hide = !empty($this->reportchange['hide']) ? array_map($func, $this->reportchange['hide']) : [];
 
         if (!empty($hide)) {
             $sql = 'UPDATE saved_reports SET deleted = 1 WHERE name IN (' . implode(',', $hide) . ') AND deleted = 0';
@@ -869,7 +869,7 @@ EOL;
         }
 
         if (!empty($this->reportchange['redefine'])) {
-            $default_reports_mapped = array();
+            $default_reports_mapped = [];
 
             $default_reports = array_merge(
                 get_sales_marketing_reports(),
@@ -905,7 +905,7 @@ EOL;
         SugarAutoLoader::load('modules/ModuleBuilder/parsers/StandardField.php');
 
         $f = get_widget($field_defs['type']);
-        $f->populateFromRow(array_merge($field_defs, array($attribute => $value)));
+        $f->populateFromRow(array_merge($field_defs, [$attribute => $value]));
 
         // now lets save, since these are OOB field, we use StandardField
         $df = new StandardField($products->module_name);

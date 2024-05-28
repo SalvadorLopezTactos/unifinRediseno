@@ -9,11 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Quotes']['base']['view']['config-summary'] = array(
-    'label'=>'LBL_QUOTE_CONFIG_SUMMARY_TITLE',
-    'panels' => array(
-        array(
-            'fields' => array(),
-        ),
-    ),
-);
+$viewdefs['Quotes']['base']['view']['config-summary'] = [
+    'label' => 'LBL_QUOTE_CONFIG_SUMMARY_TITLE',
+    'panels' => [
+        [
+            'fields' => [],
+        ],
+    ],
+];

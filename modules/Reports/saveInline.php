@@ -17,13 +17,13 @@ $field = $_REQUEST['save_field_name'];
 $type = $_REQUEST['type'];
 
 $bean = BeanFactory::getBean($module, $record);
-if ($type != 'currency')
+if ($type != 'currency') {
     $bean->$field = $field_value;
-else {
+} else {
     $bean->$field = unformat_number($field_value);
 }
 
-$ret_array = array();
+$ret_array = [];
 if (!$bean->ACLAccess('Save')
     || !$bean->ACLFieldAccess($field, 'Save')
     || ($bean->deleted === 1 && !$bean->ACLAccess('Delete'))) {
@@ -37,7 +37,7 @@ if (!$bean->ACLAccess('Save')
         $ret_array['value'] = $bean->$field;
     } else {
         global $locale;
-        $params = array();
+        $params = [];
         $params['currency_id'] = $_REQUEST['currency_id'];
         $params['convert'] = false;
         $params['currency_symbol'] = $_REQUEST['currency_symbol'];
@@ -47,7 +47,6 @@ if (!$bean->ACLAccess('Save')
     }
 }
 
-header("Content-Type: application/json");
+header('Content-Type: application/json');
 $json = getJSONobj();
 echo $json->encode($ret_array);
-?>

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'ILET:',
     'LBL_RE' => 'Re:',
     'LBL_BUTTON_CREATE' => 'Oluştur',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'E-posta Hesabından Seçin',
     'LBL_SELECT_SIGNATURE_TITLE' => 'İmza Seçin',
     'LBL_SIGNATURE' => 'İmza',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Varsayılan İmza",
-    "LBL_SHOW_MORE_SIGNATURES" => "Daha fazla İmza...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Varsayılan İmza',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Daha fazla İmza...',
     'LBL_SUBJECT' => 'Konusu:',
     'LBL_TEMPLATE' => 'Şablon',
     'LBL_TEXT_BODY' => 'Metin İçeriği',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Gönderilme Zamanı',
     'LBL_LIST_TO_ADDR' => 'Kime',
     'LBL_LIST_TYPE' => 'Tipi',
-    "LBL_SELECTED_RECIPIENTS" => "Seçilmiş Alıcılar",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Daha Fazla Alıcı...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Adres Defteri",
+    'LBL_SELECTED_RECIPIENTS' => 'Seçilmiş Alıcılar',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Daha Fazla Alıcı...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Adres Defteri',
     'NTC_REMOVE_INVITEE' => 'Alıcıyı E-Postadan kaldırmak istediğinizden emin misiniz?',
     'WARNING_SETTINGS_NOT_CONF' => 'E-posta ayarlarınız, e-posta gönderilmesi için doğru şekilde yapılandırılmamış. Bir SMTP sunucusu ' .
         '<a href="#bwc/index.php?module=EmailMan&action=config">E-posta Ayarları</a>&#39;nda yapılandırılmalıdır.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Ekler başarısız olabilir: "yüklenmiş_tmp_dir" için hatalı veya kullanılamayan değer ' .
         'algılandı. Lütfen bunu php.ini dosyanızda düzeltin.',
     'LBL_MESSAGE_UID' => 'Mesaj UID',
-    'LBL_OPEN_DRAFT_ALERT' => 'E-posta bir taslaktır. Düzenlemek '.
-        'için <a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'E-posta bir taslaktır. Düzenlemek ' .
+        'için <a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  tıklayın.',
     'LBL_EMAIL_BODY' => 'E-posta Mesajı',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'E-postalar Odak Bölmesi',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'E-postalar Kaydı Panosu',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'E-posta Zaman Çizelgesi',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'hiçbir alıcı belirtilmemiş',
@@ -474,4 +475,5 @@ Daha önceden tanımlanmış bir şablonu "Şablon" tuşuna basarak uygulayabili
     'LBL_SHORTCUT_EMAIL_SEND' => 'E-posta gönder',
     'LBL_MAILBOX' => 'Gelen Hesap',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'E-postalar göndermek için lütfen <a href="#OutboundEmail">E-posta Ayarları</a> vasıtasıyla bir giden e-posta hesabı yapılandırın.',
-);
+    'LBL_TOO_SHORT' => 'En az {0} karakter girin...',
+];

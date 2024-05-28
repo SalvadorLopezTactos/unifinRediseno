@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Ostude kirje töölaud',
     'LBL_RELATED_ACCOUNT' => 'Seotud konto',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Ostude fookuse sahtel',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ostu ajaskaala',
 ];

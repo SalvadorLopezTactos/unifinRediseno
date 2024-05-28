@@ -9,17 +9,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$searchdefs['Shippers'] = array(
-    'templateMeta' => array(
+$searchdefs['Shippers'] = [
+    'templateMeta' => [
         'maxColumns' => '3',
         'maxColumnsBasic' => '4',
-        'widths' => array('label' => '10', 'field' => '30'),
-    ),
-    'layout' => array(
-        'basic_search' => array(
-            'name' => array('name' => 'name', 'label' => 'LBL_NAME',),
-        ),
-        'advanced_search' => array(),
-    ),
-);
-?>
+        'widths' => ['label' => '10', 'field' => '30'],
+    ],
+    'layout' => [
+        'basic_search' => [
+            'name' => ['name' => 'name', 'label' => 'LBL_NAME',],
+        ],
+        'advanced_search' => [],
+    ],
+];

@@ -11,12 +11,11 @@
  */
 
 
-$popupMeta = array('moduleMain' => 'PdfManager',
-                        'varName' => 'PdfManager',
-                        'orderBy' => 'pdfmanager.name',
-                        'whereClauses' =>
-                            array('name' => 'pdfmanager.name',
-                                ),
-                            'searchInputs'=> array('pdfmanager_number', 'name', 'priority','status'),
+$popupMeta = ['moduleMain' => 'PdfManager',
+    'varName' => 'PdfManager',
+    'orderBy' => 'pdfmanager.name',
+    'whereClauses' => ['name' => 'pdfmanager.name',
+    ],
+    'searchInputs' => ['pdfmanager_number', 'name', 'priority', 'status'],
 
-                        );
+];

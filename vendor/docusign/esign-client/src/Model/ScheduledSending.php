@@ -59,6 +59,7 @@ class ScheduledSending implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'bulk_list_id' => '?string',
         'resume_date' => '?string',
         'rules' => '\DocuSign\eSign\Model\EnvelopeDelayRule[]',
         'status' => '?string'
@@ -70,6 +71,7 @@ class ScheduledSending implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'bulk_list_id' => null,
         'resume_date' => null,
         'rules' => null,
         'status' => null
@@ -102,6 +104,7 @@ class ScheduledSending implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'bulk_list_id' => 'bulkListId',
         'resume_date' => 'resumeDate',
         'rules' => 'rules',
         'status' => 'status'
@@ -113,6 +116,7 @@ class ScheduledSending implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'bulk_list_id' => 'setBulkListId',
         'resume_date' => 'setResumeDate',
         'rules' => 'setRules',
         'status' => 'setStatus'
@@ -124,6 +128,7 @@ class ScheduledSending implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'bulk_list_id' => 'getBulkListId',
         'resume_date' => 'getResumeDate',
         'rules' => 'getRules',
         'status' => 'getStatus'
@@ -189,6 +194,7 @@ class ScheduledSending implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        $this->container['bulk_list_id'] = isset($data['bulk_list_id']) ? $data['bulk_list_id'] : null;
         $this->container['resume_date'] = isset($data['resume_date']) ? $data['resume_date'] : null;
         $this->container['rules'] = isset($data['rules']) ? $data['rules'] : null;
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
@@ -219,6 +225,30 @@ class ScheduledSending implements ModelInterface, ArrayAccess
 
 
     /**
+     * Gets bulk_list_id
+     *
+     * @return ?string
+     */
+    public function getBulkListId()
+    {
+        return $this->container['bulk_list_id'];
+    }
+
+    /**
+     * Sets bulk_list_id
+     *
+     * @param ?string $bulk_list_id 
+     *
+     * @return $this
+     */
+    public function setBulkListId($bulk_list_id)
+    {
+        $this->container['bulk_list_id'] = $bulk_list_id;
+
+        return $this;
+    }
+
+    /**
      * Gets resume_date
      *
      * @return ?string
@@ -231,7 +261,7 @@ class ScheduledSending implements ModelInterface, ArrayAccess
     /**
      * Sets resume_date
      *
-     * @param ?string $resume_date 
+     * @param ?string $resume_date An ISO 8601 formatted datetime string indicating the date and time that the envelope is (or was) scheduled to be sent or null if the envelope has not yet been sent.
      *
      * @return $this
      */
@@ -255,7 +285,7 @@ class ScheduledSending implements ModelInterface, ArrayAccess
     /**
      * Sets rules
      *
-     * @param \DocuSign\eSign\Model\EnvelopeDelayRule[] $rules 
+     * @param \DocuSign\eSign\Model\EnvelopeDelayRule[] $rules A list of envelope delay rules specified by the user indicating how and when the envelope should be scheduled for sending in the future. Currently only 1 rule may be specified.
      *
      * @return $this
      */
@@ -279,7 +309,7 @@ class ScheduledSending implements ModelInterface, ArrayAccess
     /**
      * Sets status
      *
-     * @param ?string $status Indicates the envelope status. Valid values are:  * sent - The envelope is sent to the recipients.  * created - The envelope is saved as a draft and can be modified and sent later.
+     * @param ?string $status \\\"pending\\\" if the envelope has not yet been sent and the scheduled sending delay has not iniaited. \\\"started\\\" if the scheduled sending delay is in progress. \\\"completed\\\" if the scheduled sending delay has elapsed and the envelope has been sent.
      *
      * @return $this
      */

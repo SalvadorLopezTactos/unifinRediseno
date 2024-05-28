@@ -16,17 +16,17 @@
  * You have to extend this class, set the templateLocation to your smarty template
  * location and assign the Smarty variables ($this->ss->assign()) in the overriden
  * preDisplay method (don't forget to call the parent).
- * 
+ *
  * @author bsoufflet
  *
  */
-class SugarpdfSmarty extends Sugarpdf{
-    
+class SugarpdfSmarty extends Sugarpdf
+{
     /**
-     * 
+     *
      * @var String
      */
-    protected $templateLocation = "";
+    protected $templateLocation = '';
     /**
      * The Sugar_Smarty object
      * @var Sugar_Smarty
@@ -40,32 +40,34 @@ class SugarpdfSmarty extends Sugarpdf{
     protected $smartyFill = false;
     protected $smartyReseth = false;
     protected $smartyCell = false;
-    protected $smartyAlign = "";
-    
-    function preDisplay(){
+    protected $smartyAlign = '';
+
+    public function preDisplay()
+    {
         parent::preDisplay();
         $this->print_header = false;
         $this->print_footer = false;
         $this->initSmartyInstance();
     }
-    
-    function display(){
+
+    public function display()
+    {
         //turn off all error reporting so that PHP warnings don't munge the PDF code
         error_reporting(E_ALL);
         set_time_limit(1800);
-        
-        //Create new page           
+
+        //Create new page
         $this->AddPage();
-        $this->SetFont(PDF_FONT_NAME_MAIN,'',8);
-        
-        if(!empty($this->templateLocation)){
+        $this->SetFont(PDF_FONT_NAME_MAIN, '', 8);
+
+        if (!empty($this->templateLocation)) {
             $str = $this->ss->fetch($this->templateLocation);
             $this->writeHTML($str, $this->smartyLn, $this->smartyFill, $this->smartyReseth, $this->smartyCell, $this->smartyAlign);
-        }else{
+        } else {
             $this->Error('The class SugarpdfSmarty has to be extended and you have to set a location for the Smarty template.');
         }
     }
-    
+
     /**
      * Init the Sugar_Smarty object.
      */
@@ -83,7 +85,7 @@ class SugarpdfSmarty extends Sugarpdf{
             // disable all stream wrappers
             $securityPolicy->streams = null;
             // 'math' internally uses eval()
-            $securityPolicy->disabled_tags = ['eval', 'fetch', 'include_php', 'math', 'php', ];
+            $securityPolicy->disabled_tags = ['eval', 'fetch', 'include_php', 'math', 'php',];
             /**
              * Disable 'template_object' to prevent tricks like:  {$name=$smarty.template_object->disableSecurity()} {include "file://etc/passwd"}
              * Disable 'current_dir' to prevent filesystem info leakage
@@ -111,7 +113,7 @@ class SugarpdfSmarty extends Sugarpdf{
         $fileinfo = pathinfo($file);
         $q_pos = strpos($fileinfo['basename'], '?');
 
-        if (!empty($fileinfo['basename']) && $q_pos !== false ) {
+        if (!empty($fileinfo['basename']) && $q_pos !== false) {
             //split the file name and reassemble
             $splitName = substr($fileinfo['basename'], 0, $q_pos);
             $file = $fileinfo['dirname'] . '/' . $splitName;
@@ -119,5 +121,4 @@ class SugarpdfSmarty extends Sugarpdf{
 
         return parent::Image($file, $x, $y, $w, $h, $type, $link, $align, $resize, $dpi, $palign, $ismask, $imgmask, $border, $fitbox);
     }
-    
 }

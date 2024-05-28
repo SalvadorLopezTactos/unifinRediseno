@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Vista del mosaic',
     'LBL_MODULE_NAME_SINGULAR' => 'Vista del mosaic',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'Vista del mosaic',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => 'Mòduls habilitats',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'Mòduls de la vista de mosaic',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'Configuració del mòdul',
-    'LBL_PIPELINE_TABLE_HEADER' => "Seleccioneu el camp els valors del qual s'utilitzaran com a columnes",
+    'LBL_PIPELINE_TABLE_HEADER' => 'Seleccioneu el camp els valors del qual s&#39;utilitzaran com a columnes',
     'LBL_PIPELINE_TILE_HEADER' => 'Camp de capçalera del mosaic',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => 'Columnes disponibles',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => 'Camp de cos del mosaic',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'Vista prèvia del mosaic',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'Massa camps al mosaic.',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => 'Resoleu els errors a les pestanyes següents de configuració de mòduls abans de continuar:<br><br>',
-);
+    'LBL_MODULE_SELECTION' => 'Seleccioneu el mòdul que voleu visualitzar i configurar a continuació',
+    'LBL_SHOW_COLUMN_COUNT' => 'Mostra el recompte de la columna',
+    'LBL_SHOW_COLUMN_TOTAL' => 'Mostra el total de la columna',
+    'LBL_TOTAL_FIELD' => 'Camp total',
+];

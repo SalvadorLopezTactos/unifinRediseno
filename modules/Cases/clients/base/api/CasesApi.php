@@ -16,12 +16,12 @@ class CasesApi extends ModuleApi
     {
         return [
             'create' => [
-                'reqType'   => 'POST',
-                'path'      => ['Cases'],
-                'pathVars'  => ['module'],
-                'method'    => 'createRecord',
+                'reqType' => 'POST',
+                'path' => ['Cases'],
+                'pathVars' => ['module'],
+                'method' => 'createRecord',
                 'shortHelp' => 'Deprecated api kept for backward compatibility',
-                'longHelp'  => 'include/api/help/module_post_help.html',
+                'longHelp' => 'include/api/help/module_post_help.html',
                 'maxVersion' => '11.5',
             ],
         ];

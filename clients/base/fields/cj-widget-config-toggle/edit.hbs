@@ -10,17 +10,17 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class='widget-container'>
-    <div class='clearfix-wrapper'>
+<div class='widget-container inline-block'>
+    <div class='clearfix-wrapper flex flex-wrap justify-between'>
         <div class='{{this.css_class}}'>
-            <label id='cj-widget-config-toggle-label-left'> {{str def.label_right}}</label>
+            <label class="flex flex-wrap justify-between mr-1" id='cj-widget-config-toggle-label-left'> {{str def.label_right}}</label>
         </div>
-            <div class='clearfix-wrapper'>
-                <label class='dri-workflow-toggle-switch'>
+            <div class='clearfix-wrapper flex flex-wrap justify-between'>
+                <label class='dri-workflow-toggle-switch h-6 inline-block relative w-12'>
                     <input name='{{name}}' type='checkbox'{{#eq action 'disabled'}} disabled{{/eq}}{{#eq this.selectedValue true}} checked{{/eq}}{{#if def.tabindex}} tabindex='{{def.tabindex}}'{{/if}}>
                     <span class='slider round'></span>
                 </label>
             </div>
-        <label id='cj-widget-config-toggle-label-right' class='bold'> {{str def.label_left}} </label>
+        <label class="flex flex-wrap font-bold justify-between ml-1" id='cj-widget-config-toggle-label-right'> {{str def.label_left}} </label>
     </div>
 </div>

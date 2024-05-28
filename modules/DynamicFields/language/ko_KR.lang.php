@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => '통화일지',
     'LNK_NEW_MEETING' => '회의 일정잡기',
     'LNK_NEW_TASK' => '신규 업무 추가하기',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => '추가 Meta 필드 2',
     'COLUMN_TITLE_EXT3' => '추가 Meta 필드 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'IFrame 높이',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'URL 초기설정',
     'COLUMN_TITLE_AUDIT' => '회계감사',
     'COLUMN_TITLE_PII' => '개인정보',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => '초기설정값',
     'LBL_AUDITED' => '회계감사 완료',
     'LBL_REPORTABLE' => '보고할수 있는',
-    'ERR_RESERVED_FIELD_NAME' => "예비 키워드",
+    'ERR_RESERVED_FIELD_NAME' => '예비 키워드',
     'ERR_SELECT_FIELD_TYPE' => '필드유형을 선택해 주십시오',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => '필드명이 이미 존재합니다.',
     'ERR_FIELD_NAME_NON_DB_CHARS' => '필드 이름은 다음 문자를 포함해야합니다:a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => '완료',
     'LBL_EXE_NON_SIM_MODE' => '모의 형태가 아닌 실행',
     'LBL_CALCULATION_VISIBLE' => '계산 시 표시',
-);
+];

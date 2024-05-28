@@ -22,19 +22,19 @@ class TermsAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    protected $acceptedOptions = array(
+    protected $acceptedOptions = [
         'field',
         'size',
         'order',
-    );
+    ];
 
     /**
      * {@inheritdoc}
      */
-    protected $options = array(
+    protected $options = [
         'size' => 5,
-        'order' => array('_count', 'desc'),
-    );
+        'order' => ['_count', 'desc'],
+    ];
 
     /**
      * {@inheritdoc}

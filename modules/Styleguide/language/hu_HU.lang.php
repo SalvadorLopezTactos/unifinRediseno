@@ -10,17 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-	'LBL_MODULE_NAME' => 'Stílus kézikönyv',
-    'LBL_MODULE_NAME_SINGULAR'	=> 'Stílus kézikönyv: egyes szám',
-	'LBL_MODULE_TITLE' => 'Stílus kézikönyv: cím',
-);
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Stílus kézikönyv',
+    'LBL_MODULE_NAME_SINGULAR' => 'Stílus kézikönyv: egyes szám',
+    'LBL_MODULE_TITLE' => 'Stílus kézikönyv: cím',
+];

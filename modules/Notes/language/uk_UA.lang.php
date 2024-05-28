@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Інформаційна панель списку приміток',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Інформаційна панель записів у примітках',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель для приміток',
     'LBL_EXTERNAL_USER' => 'Зовнішній користувач',
     'LBL_EXTERNAL_USER_NAME' => 'Зовнішній користувач',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Часова шкала приміток',
 
     'LBL_RELATED_CONTACT' => 'Пов’язаний контакт',
     'ERR_DELETE_RECORD' => 'Необхідно вказати номер запису перед видаленням.',
@@ -126,4 +127,4 @@ $mod_strings = array(
   - Перед збереженням потрібно заповнити поля з позначкою "Обов&#39;язково".
  - Щоб переглянути додаткові поля, натисніть "Показати більше".
 2. Натисніть кнопку "Зберегти", щоб завершити створення нового запису й повернутися до попередньої сторінки.',
-);
+];

@@ -12,8 +12,8 @@
 
 class ChangeTimer extends SugarBean
 {
-    public $module_dir = "ChangeTimers";
-    public $object_name = "ChangeTimer";
+    public $module_dir = 'ChangeTimers';
+    public $object_name = 'ChangeTimer';
     public $table_name = 'changetimers';
     public $module_name = 'ChangeTimers';
 }

@@ -12,7 +12,7 @@
 --}}
 <div class="ellipsis_inline relate-field-container">
     {{#if href}}
-        <a class="ellipsis_inline" href="{{href}}" data-placement="bottom" data-container="body" target="_self"
+        <a class="ellipsis_inline {{module}}" href="{{href}}" data-bs-placement="bottom" data-container="body" target="_self"
             title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}"
             data-link-target="{{linkTarget}}" data-module="{{module}}" data-model-id="{{modelId}}"
         >
@@ -20,7 +20,7 @@
         </a>
         {{partial 'focus-icon' this this}}
     {{else}}
-        <span class="ellipsis_inline" data-placement="bottom" data-container="body"
+        <span class="ellipsis_inline" data-bs-placement="bottom" data-container="body"
             title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}"
         >
             {{value}}

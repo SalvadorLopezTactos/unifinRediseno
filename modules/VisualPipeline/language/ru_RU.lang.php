@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Представление плиток',
     'LBL_MODULE_NAME_SINGULAR' => 'Представление плиток',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'Представление плиток',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => 'Включенные модули',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'Модули с представлением плиток',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'Настройки модуля',
-    'LBL_PIPELINE_TABLE_HEADER' => "Выберите поле, значения которого будут использоваться в качестве столбцов",
+    'LBL_PIPELINE_TABLE_HEADER' => 'Выберите поле, значения которого будут использоваться в качестве столбцов',
     'LBL_PIPELINE_TILE_HEADER' => 'Поле заголовка плитки',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => 'Доступные столбцы',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => 'Поля содержания плитки',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'Предварительный просмотр плиток',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'Слишком много полей в мозаике.',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => 'Прежде чем продолжить, устраните ошибки на следующих вкладках настроек модуля:<br><br>',
-);
+    'LBL_MODULE_SELECTION' => 'Выберите модуль, который вы хотите просмотреть и настроить, ниже',
+    'LBL_SHOW_COLUMN_COUNT' => 'Показать число столбцов',
+    'LBL_SHOW_COLUMN_TOTAL' => 'Показать итог по столбцу',
+    'LBL_TOTAL_FIELD' => 'Поле «Итого»',
+];

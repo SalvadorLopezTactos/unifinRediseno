@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Ugovori',
-	'LBL_MODULE_NAME_SINGULAR' => 'Ugovor',
-	'LBL_MODULE_TITLE' => 'Ugovori: početno',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Ugovori',
+    'LBL_MODULE_NAME_SINGULAR' => 'Ugovor',
+    'LBL_MODULE_TITLE' => 'Ugovori: početno',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Stvori ugovor',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'ID valute:',
     'LBL_CURRENCY' => 'Valuta:',
     'LBL_CURRENCY_RATE' => 'Valutni tečaj',
-    'LBL_ASSIGNED_TO_NAME'=>'Dodijeljeno:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Dodijeljeno:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Popis ugovora',	
+    'LBL_LIST_FORM_TITLE' => 'Popis ugovora',
     'LBL_LIST_CONTRACT_NAME' => 'Naziv ugovora',
     'LBL_LIST_ACCOUNT_NAME' => 'Naziv računa',
     'LBL_LIST_START_DATE' => 'Početak',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Naziv',
     'LBL_LIST_CONTRACT_VALUE' => 'Vrijednost',
 
-    'LBL_TYPE'=>'Vrsta',
+    'LBL_TYPE' => 'Vrsta',
     'LBL_TYPE_NAME' => 'Naziv vrste',
-    'LBL_CONTRACT_TYPE'=>'Vrsta:',
+    'LBL_CONTRACT_TYPE' => 'Vrsta:',
 
     'LBL_CREATED_USER' => 'Stvoreni korisnik',
     'LBL_MODIFIED_USER' => 'Izmijenjeni korisnik',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za ugovore',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o ugovorima',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija ugovora',
+];

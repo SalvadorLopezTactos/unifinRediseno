@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Wachtrij voor taak',
     'LBL_MODULE_NAME_SINGULAR' => 'Wachtrij voor taak',
     'LBL_MODULE_TITLE' => 'Wachtrij voor taak: Home',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Oplossing geannuleerd',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Oplossing wordt uitgevoerd',
     // Errors
-    'ERR_CALL' => "Kan functie niet oproepen: %s",
-    'ERR_CURL' => "Geen CURL - kan geen URL taken uitvoeren",
-    'ERR_FAILED' => "Onverwachte fout, controleer PHP logs en sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s over %s op regel %d",
-    'ERR_NOUSER' => "Geen user ID gespecificeerd voor de JOB",
-    'ERR_NOSUCHUSER' => "Gebruiker-ID %s niet gevonden",
-    'ERR_JOBTYPE' => "Onbekend type taak: %s",
-    'ERR_TIMEOUT' => "Gedwongen fout na time-out",
+    'ERR_CALL' => 'Kan functie niet oproepen: %s',
+    'ERR_CURL' => 'Geen CURL - kan geen URL taken uitvoeren',
+    'ERR_FAILED' => 'Onverwachte fout, controleer PHP logs en sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s over %s op regel %d',
+    'ERR_NOUSER' => 'Geen user ID gespecificeerd voor de JOB',
+    'ERR_NOSUCHUSER' => 'Gebruiker-ID %s niet gevonden',
+    'ERR_JOBTYPE' => 'Onbekend type taak: %s',
+    'ERR_TIMEOUT' => 'Gedwongen fout na time-out',
     'ERR_JOB_FAILED_VERBOSE' => 'Taak %1$s (%2$s) mislukt tijdens CRON uitvoer',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Kan bean niet laden met id: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Kan handler niet vinden voor route %s',
@@ -92,13 +92,13 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Hulp bij Amazon SQS configuratie',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Hoofdstuk over Amazon SQS configuratie.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Hoofdstuk over Amazon SQS configuratie.</b></p>
 <ul>
     <li>Toegangssleutel-ID: <i>Voer uw toegangssleutel-id in voor Amazon SQS</i></li>
     <li>Geheime toegangssleutel: <i>Voer uw geheime toegangssleutel in voor Amazon SQS</i></li>
     <li>Regio: <i>Voer de regio van Amazon SQS server in</i></li>
     <li>Rijnaam: <i>Voer de rijnaam in van de Amazon SQS server</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'Hulp bij AMQP configuratie',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>Hoofdstuk over AMQP configuratie</b></p>
 <ul>
@@ -119,4 +119,4 @@ $mod_strings = array(
     'LBL_REGION' => 'Regio',
     'LBL_ACCESS_KEY_SECRET' => 'Geheime toegangssleutel',
     'LBL_QUEUE_NAME' => 'Adapter Naam',
-);
+];

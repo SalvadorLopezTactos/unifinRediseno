@@ -42,7 +42,7 @@ class Shift extends ChangeTrackedEntity
         }
         return null;
     }
-    
+
     /**
     * Sets the draftShift
     * The draft version of this shift that is viewable by managers. Required.
@@ -56,7 +56,7 @@ class Shift extends ChangeTrackedEntity
         $this->_propDict["draftShift"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the isStagedForDeletion
     *
@@ -70,7 +70,7 @@ class Shift extends ChangeTrackedEntity
             return null;
         }
     }
-    
+
     /**
     * Sets the isStagedForDeletion
     *
@@ -83,10 +83,9 @@ class Shift extends ChangeTrackedEntity
         $this->_propDict["isStagedForDeletion"] = boolval($val);
         return $this;
     }
-    
+
     /**
     * Gets the schedulingGroupId
-    * ID of the scheduling group the shift is part of. Required.
     *
     * @return string|null The schedulingGroupId
     */
@@ -98,10 +97,9 @@ class Shift extends ChangeTrackedEntity
             return null;
         }
     }
-    
+
     /**
     * Sets the schedulingGroupId
-    * ID of the scheduling group the shift is part of. Required.
     *
     * @param string $val The schedulingGroupId
     *
@@ -112,10 +110,9 @@ class Shift extends ChangeTrackedEntity
         $this->_propDict["schedulingGroupId"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the sharedShift
-    * The shared version of this shift that is viewable by both employees and managers. Required.
     *
     * @return ShiftItem|null The sharedShift
     */
@@ -131,10 +128,9 @@ class Shift extends ChangeTrackedEntity
         }
         return null;
     }
-    
+
     /**
     * Sets the sharedShift
-    * The shared version of this shift that is viewable by both employees and managers. Required.
     *
     * @param ShiftItem $val The sharedShift
     *
@@ -145,10 +141,9 @@ class Shift extends ChangeTrackedEntity
         $this->_propDict["sharedShift"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the userId
-    * ID of the user assigned to the shift. Required.
     *
     * @return string|null The userId
     */
@@ -160,10 +155,9 @@ class Shift extends ChangeTrackedEntity
             return null;
         }
     }
-    
+
     /**
     * Sets the userId
-    * ID of the user assigned to the shift. Required.
     *
     * @param string $val The userId
     *
@@ -174,5 +168,5 @@ class Shift extends ChangeTrackedEntity
         $this->_propDict["userId"] = $val;
         return $this;
     }
-    
+
 }

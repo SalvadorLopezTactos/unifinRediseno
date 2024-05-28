@@ -10,24 +10,22 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class FiltersFilterApi extends FilterApi {
-
-
+class FiltersFilterApi extends FilterApi
+{
     //Override the parent definition to allow responses to be cached for a short period client side
     public function registerApiRest()
     {
         $parentDef = parent::registerApiRest();
         if (!empty($parentDef['filterModuleAll'])) {
-            $def = array_merge($parentDef['filterModuleAll'], array(
-                'path' => array('Filters'),
+            $def = array_merge($parentDef['filterModuleAll'], [
+                'path' => ['Filters'],
                 //Should be the only change from the parent method
                 'cacheEtag' => true,
-            ));
+            ]);
 
-            return array('retrieve' => $def);
+            return ['retrieve' => $def];
         }
 
-        return array();
+        return [];
     }
-
 }

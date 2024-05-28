@@ -33,11 +33,11 @@ class OneDrive extends Drive
     public function listFolders(array $options)
     {
         $response = null;
-        $driveId = $options['driveId'];
+        $driveId = isset($options['driveId']) ? $options['driveId'] : null;
         $parentId = $options['parentId'] ?? null;
         $sharedWithMe = $options['sharedWithMe'];
-        $folderName = $options['folderName'];
-        $folderParent = $options['folderParent'];
+        $folderName = isset($options['folderName']) ? $options['folderName'] : null;
+        $folderParent = isset($options['folderParent']) ? $options['folderParent'] : null;
 
         $client = $this->getClient();
 
@@ -51,9 +51,10 @@ class OneDrive extends Drive
         if (!$sharedWithMe) {
             $url .= '?filter=folder ne null';
         }
+        $pageToken = isset($options['pageToken']) ? $options['pageToken'] : null;
 
-        if ($options['pageToken']) {
-            $url = $options['pageToken'];
+        if ($pageToken) {
+            $url = $pageToken;
         }
 
         if ($folderName) {
@@ -107,7 +108,7 @@ class OneDrive extends Drive
             if ($folderParent === 'root' && is_array($parent) && $parent['success'] === false) {
                 $filteredData[] = $item;
             } elseif ($item->getFolder() && $item->getName() === $folderName && $parent->name === $folderParent) {
-                    $filteredData[] = $item;
+                $filteredData[] = $item;
             }
         }
 
@@ -183,7 +184,7 @@ class OneDrive extends Drive
 
         $folderId = $options['folderId'] ?? 'root';
         $sharedWithMe = $options['sharedWithMe'] ?? false;
-        $driveId = $options['driveId'];
+        $driveId = isset($options['driveId']) ? $options['driveId'] : null;
         $sortOptions = $options['sortOptions'] ?? false;
 
         $top = $sugar_config['list_max_entries_per_page'];
@@ -193,10 +194,10 @@ class OneDrive extends Drive
         if (isset($options['nextPageToken']) && $options['nextPageToken']) {
             $url = $options['nextPageToken'];
             // limit result set
-            $url = $this->urlHasParam($url, '$top') ? $url : $url.'&$top='.$top;
+            $url = $this->urlHasParam($url, '$top') ? $url : $url . '&$top=' . $top;
         } else {
             // limit result set
-            $url .= '?$top='.$top;
+            $url .= '?$top=' . $top;
         }
 
         if ($sortOptions) {
@@ -230,7 +231,7 @@ class OneDrive extends Drive
     {
         $fileId = $options['fileId'];
         $driveId = $options['driveId'];
-        $select = $options['select'];
+        $select = isset($options['select']) ? $options['select'] : null;
         $client = $this->getClient();
 
         if (is_array($client) && !$client['success']) {
@@ -380,7 +381,7 @@ class OneDrive extends Drive
 
     private function getAccessibleDriveIds()
     {
-        $url = "/me/drive/sharedWithMe";
+        $url = '/me/drive/sharedWithMe';
         $client = $this->getClient();
         $request = $client->createRequest('GET', $url);
         $response = $request->execute();
@@ -402,11 +403,11 @@ class OneDrive extends Drive
 
     /**
      * Search all shared drives for a file
+     * @param string $folderName
+     * @return array
      * @todo - make this search smarter, because now it just returns all folders
      * with that name - mybe add a check br parent folder name
      *
-     * @param string $folderName
-     * @return array
      */
     private function searchSharedFiles(string $folderName)
     {
@@ -440,7 +441,7 @@ class OneDrive extends Drive
      * @param string $param
      * @return bool
      */
-    private function urlHasParam(string $url, string $param): bool
+    protected function urlHasParam(string $url, string $param): bool
     {
         $query = parse_url($url, PHP_URL_QUERY);
         parse_str($query, $queryParams);
@@ -457,7 +458,7 @@ class OneDrive extends Drive
      * @param array $options
      * @return array
      */
-    public function uploadFile($options):array
+    public function uploadFile($options): array
     {
         $client = $this->getClient();
 
@@ -551,7 +552,7 @@ class OneDrive extends Drive
      *
      * @return array
      */
-    protected function uploadChunks(string $uploadUrl, string $filePath, string $fileName, ?int $fileSize) : array
+    protected function uploadChunks(string $uploadUrl, string $filePath, string $fileName, ?int $fileSize): array
     {
         global $current_user;
 
@@ -563,9 +564,9 @@ class OneDrive extends Drive
         ];
 
         $job = new SchedulersJob();
-        $job->name = "OneDriveUploadJob- " . Uuid::uuid4();
+        $job->name = 'OneDriveUploadJob- ' . Uuid::uuid4();
         $job->data = base64_encode(serialize($payload));
-        $job->target = "class::OneDriveUploadJob";
+        $job->target = 'class::OneDriveUploadJob';
         $job->assigned_user_id = $current_user->id;
         $jq = new SugarJobQueue();
         $jq->submitJob($job);
@@ -581,7 +582,7 @@ class OneDrive extends Drive
      * @param array $options
      * @return array
      */
-    protected function syncDrive(array $options):array
+    protected function syncDrive(array $options): array
     {
         $client = $this->getClient();
         $driveId = $options['driveId'] ?? null;

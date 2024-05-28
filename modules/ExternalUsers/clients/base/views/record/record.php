@@ -65,7 +65,7 @@ $viewdefs['ExternalUsers']['base']['view']['record'] = [
                     'readonly' => true,
                 ],
                 [
-                    'name' => 'contact_name',
+                    'name' => 'parent_name',
                     'readonly' => true,
                 ],
             ],

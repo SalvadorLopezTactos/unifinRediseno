@@ -12,45 +12,45 @@
  */
 
 $module_name = 'pmse_Project';
-$viewdefs[$module_name]['base']['layout']['project-import'] = array(
-    'components' => array(
-        array(
-            'layout' =>  array(
+$viewdefs[$module_name]['base']['layout']['project-import'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
                             'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'view' => 'project-import-headerpane',
-                                ),
-                                array(
+                                ],
+                                [
                                     'view' => 'project-import',
-                                ),
-                                array(
+                                ],
+                                [
                                     'view' => 'dependency-picker',
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'preview-pane',
                             'css_class' => 'preview-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'preview',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

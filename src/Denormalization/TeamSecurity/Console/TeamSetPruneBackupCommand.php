@@ -33,10 +33,10 @@ class TeamSetPruneBackupCommand extends TeamSetPruneCommand implements InstanceM
     }
 
 
-
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->preflightCheck($output);
         $this->getPruner()->backupTables();
+        return 0;
     }
 }

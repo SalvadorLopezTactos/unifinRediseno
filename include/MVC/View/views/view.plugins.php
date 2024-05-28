@@ -11,6 +11,10 @@
  */
 
 
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\FeatureToggle\FeatureFlag;
+use Sugarcrm\Sugarcrm\FeatureToggle\Features\UserDownloadsHideOpiWpiPlugins;
+
 class ViewPlugins extends ViewAjax
 {
     /**
@@ -18,60 +22,63 @@ class ViewPlugins extends ViewAjax
      */
     public function display()
     {
-    	global $app_strings;
+        global $app_strings;
 
-		$sp = new SugarPlugins();
+        $sp = new SugarPlugins();
 
-		$plugins = $sp->getPluginList();
-		$pluginsCat = array(
-					"Outlook" => array(
-						"name" => $app_strings['LBL_PLUGIN_OUTLOOK_NAME'],
-						"desc" => $app_strings['LBL_PLUGIN_OUTLOOK_DESC'],
-						),
-					"Word" => array(
-						"name" => $app_strings['LBL_PLUGIN_WORD_NAME'],
-						"desc" => $app_strings['LBL_PLUGIN_WORD_DESC'],
-						),
-					"Excel" => array(
-						"name" => $app_strings['LBL_PLUGIN_EXCEL_NAME'],
-						"desc" => $app_strings['LBL_PLUGIN_EXCEL_DESC'],
-						),
-					);
-		$str = '<table cellpadding="0" cellspacing="0" class="detail view">';
-        $str .= "<tr><th>";
-		$str .= "<h4>{$app_strings['LBL_PLUGINS_TITLE']}</h4>";
-        $str .= "</th></tr>";
+        $plugins = $sp->getPluginList();
+        $pluginsCat = [
+            'Outlook' => [
+                'name' => $app_strings['LBL_PLUGIN_OUTLOOK_NAME'],
+                'desc' => $app_strings['LBL_PLUGIN_OUTLOOK_DESC'],
+            ],
+            'Word' => [
+                'name' => $app_strings['LBL_PLUGIN_WORD_NAME'],
+                'desc' => $app_strings['LBL_PLUGIN_WORD_DESC'],
+            ],
+            'Excel' => [
+                'name' => $app_strings['LBL_PLUGIN_EXCEL_NAME'],
+                'desc' => $app_strings['LBL_PLUGIN_EXCEL_DESC'],
+            ],
+        ];
+
+        $features = Container::getInstance()->get(FeatureFlag::class);
+        if ($features->isEnabled(UserDownloadsHideOpiWpiPlugins::getName())) {
+            unset($pluginsCat['Outlook']);
+            unset($pluginsCat['Word']);
+        }
+
+        $str = '<table cellpadding="0" cellspacing="0" class="detail view">';
+        $str .= '<tr><th>';
+        $str .= "<h4>{$app_strings['LBL_PLUGINS_TITLE']}</h4>";
+        $str .= '</th></tr>';
 
         $str .= "<tr><td style='padding-left: 10px;'>{$app_strings['LBL_PLUGINS_DESC']}</td></tr>";
 
-        foreach($pluginsCat as $key => $value )
-        {
-                $pluginContents = '';
+        foreach ($pluginsCat as $key => $value) {
+            $pluginContents = '';
 
-      			foreach($plugins as $plugin)
-                {
-      				$raw_name = urlencode($plugin['raw_name']);
-      				$display_name = str_replace('_', ' ' , $plugin['formatted_name']);
-      				if(strpos($display_name,$key)!==false)
-                    {
-      					$pluginContents .= "<li><a href='index.php?module=Home&action=DownloadPlugin&plugin={$raw_name}'>{$display_name}</a></li>";
-      				}
-      			}
-
-                //If we have pluginContents value, combine together
-      			if(!empty($pluginContents))
-                {
-                    $str .= "<tr><td valign='top' width='80' style='padding-right: 10px; padding-left: 10px;'>";
-                    $str .= "<b>{$value['name']}</b><br>";
-                    $str .= $value['desc'];
-                    $str .= '<ul id="pluginList">';
-                    $str .= $pluginContents;
-                    $str .= '</ul></td></tr>';
+            foreach ($plugins as $plugin) {
+                $raw_name = urlencode((string)$plugin['raw_name']);
+                $display_name = str_replace('_', ' ', (string)$plugin['formatted_name']);
+                if (strpos($display_name, $key) !== false) {
+                    $pluginContents .= "<li><a href='index.php?module=Home&action=DownloadPlugin&plugin={$raw_name}'>{$display_name}</a></li>";
                 }
-      	}
+            }
 
-		$str .= "</table>";
+            //If we have pluginContents value, combine together
+            if (!empty($pluginContents)) {
+                $str .= "<tr><td valign='top' width='80' style='padding-right: 10px; padding-left: 10px;'>";
+                $str .= "<b>{$value['name']}</b><br>";
+                $str .= $value['desc'];
+                $str .= '<ul id="pluginList">';
+                $str .= $pluginContents;
+                $str .= '</ul></td></tr>';
+            }
+        }
 
-		echo $str;
+        $str .= '</table>';
+
+        echo $str;
     }
 }

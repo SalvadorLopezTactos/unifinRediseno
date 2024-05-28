@@ -10,22 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     //module
     'LBL_MODULE_NAME' => 'Dokumenty',
     'LBL_MODULE_NAME_SINGULAR' => 'Dokument',
     'LBL_MODULE_TITLE' => 'Dokumenty: Domů',
     'LNK_NEW_DOCUMENT' => 'Přidat dokument',
-    'LNK_DOCUMENT_LIST'=> 'Seznam dokumentů',
+    'LNK_DOCUMENT_LIST' => 'Seznam dokumentů',
     'LBL_DOC_REV_HEADER' => 'Revize dokumentu',
-    'LBL_SEARCH_FORM_TITLE'=> 'Vyhledat dokument',
+    'LBL_SEARCH_FORM_TITLE' => 'Vyhledat dokument',
     //vardef labels
     'LBL_DOCUMENT_ID' => 'Identfikace dokumentu',
     'LBL_NAME' => 'Název',
@@ -34,31 +33,31 @@ $mod_strings = array (
     'LBL_CATEGORY' => 'Kategorie',
     'LBL_SUBCATEGORY' => 'Podkategorie',
     'LBL_STATUS' => 'Stav',
-    'LBL_CREATED_BY'=> 'Vytvořeno:',
-    'LBL_DATE_ENTERED'=> 'Datum zahájení',
-    'LBL_DATE_MODIFIED'=> 'Datum poslední úpravy',
+    'LBL_CREATED_BY' => 'Vytvořeno:',
+    'LBL_DATE_ENTERED' => 'Datum zahájení',
+    'LBL_DATE_MODIFIED' => 'Datum poslední úpravy',
     'LBL_DELETED' => 'Odstranit',
-    'LBL_MODIFIED'=> 'Změněno podle ID',
+    'LBL_MODIFIED' => 'Změněno podle ID',
     'LBL_MODIFIED_USER' => 'Změnil',
-    'LBL_CREATED'=> 'Vytvořeno:',
-    'LBL_REVISIONS'=>'Revize',
-    'LBL_RELATED_DOCUMENT_ID'=>'ID zpřízněného dokumentu',
-    'LBL_RELATED_DOCUMENT_REVISION_ID'=>'ID zpřízněné revize dokumentu',
-    'LBL_IS_TEMPLATE'=>'Je šablona',
-    'LBL_TEMPLATE_TYPE'=>'Typ dokumentu',
-    'LBL_ASSIGNED_TO_NAME'=>'Přiřazeno (komu):',
+    'LBL_CREATED' => 'Vytvořeno:',
+    'LBL_REVISIONS' => 'Revize',
+    'LBL_RELATED_DOCUMENT_ID' => 'ID zpřízněného dokumentu',
+    'LBL_RELATED_DOCUMENT_REVISION_ID' => 'ID zpřízněné revize dokumentu',
+    'LBL_IS_TEMPLATE' => 'Je šablona',
+    'LBL_TEMPLATE_TYPE' => 'Typ dokumentu',
+    'LBL_ASSIGNED_TO_NAME' => 'Přiřazeno (komu):',
     'LBL_REVISION_NAME' => 'Číslo revize',
     'LBL_MIME' => 'MIME typ',
     'LBL_REVISION' => 'Revize',
     'LBL_DOCUMENT' => 'Související dokument',
     'LBL_LATEST_REVISION' => 'Poslední revize',
     'LBL_DOCUMENT_REVISION_ID' => 'Revize dokumentu',
-    'LBL_CHANGE_LOG'=> 'Změna profilu',
-    'LBL_ACTIVE_DATE'=> 'Publikováno',
+    'LBL_CHANGE_LOG' => 'Změna profilu',
+    'LBL_ACTIVE_DATE' => 'Publikováno',
     'LBL_EXPIRATION_DATE' => 'Expirace',
-    'LBL_FILE_EXTENSION'  => 'Přípona souboru',
+    'LBL_FILE_EXTENSION' => 'Přípona souboru',
     'LBL_LAST_REV_MIME_TYPE' => 'Poslední revize MIME typu',
-    'LBL_CAT_OR_SUBCAT_UNSPEC'=>'Neurčeno',
+    'LBL_CAT_OR_SUBCAT_UNSPEC' => 'Neurčeno',
     'LBL_HOMEPAGE_TITLE' => 'Moje dokumenty',
     //quick search
     'LBL_NEW_FORM_TITLE' => 'Nový dokument:',
@@ -70,25 +69,25 @@ $mod_strings = array (
     'LBL_FILE_UPLOAD' => 'Název souboru',
 
     'LBL_CATEGORY_VALUE' => 'Kategorie:',
-    'LBL_SUBCATEGORY_VALUE'=> 'Podkategorie:',
-    'LBL_DOC_STATUS'=> 'Stav:',
-    'LBL_DOC_STATUS_ID'=> 'ID stavu:',
+    'LBL_SUBCATEGORY_VALUE' => 'Podkategorie:',
+    'LBL_DOC_STATUS' => 'Stav:',
+    'LBL_DOC_STATUS_ID' => 'ID stavu:',
     'LBL_LAST_REV_CREATOR' => 'Revizi vytvořil:',
     'LBL_LASTEST_REVISION_NAME' => 'Poslední název revize:',
     'LBL_SELECTED_REVISION_NAME' => 'Vybrané jméno revize:',
     'LBL_CONTRACT_STATUS' => 'Status kontraktu:',
     'LBL_CONTRACT_NAME' => 'Jméno kontaktu:',
     'LBL_LAST_REV_DATE' => 'Datum revize:',
-    'LBL_DOWNNLOAD_FILE'=> 'Načíst soubor:',
-    'LBL_DET_RELATED_DOCUMENT'=>'Zpřízněné dokumenty:',
-    'LBL_DET_RELATED_DOCUMENT_VERSION'=>"Zpřízněné revize dokumentů:",
-    'LBL_DET_IS_TEMPLATE'=>'Šablona? :',
-    'LBL_DET_TEMPLATE_TYPE'=>'Typ dokumentu:',
-    'LBL_TEAM'=> 'Tým:',
+    'LBL_DOWNNLOAD_FILE' => 'Načíst soubor:',
+    'LBL_DET_RELATED_DOCUMENT' => 'Zpřízněné dokumenty:',
+    'LBL_DET_RELATED_DOCUMENT_VERSION' => 'Zpřízněné revize dokumentů:',
+    'LBL_DET_IS_TEMPLATE' => 'Šablona? :',
+    'LBL_DET_TEMPLATE_TYPE' => 'Typ dokumentu:',
+    'LBL_TEAM' => 'Tým:',
     'LBL_IS_SHARED' => 'K dispozici externě:',
-    'LBL_DOC_DESCRIPTION'=>'Popis:',
-    'LBL_DOC_ACTIVE_DATE'=> 'Publikováno:',
-    'LBL_DOC_EXP_DATE'=> 'Expirace:',
+    'LBL_DOC_DESCRIPTION' => 'Popis:',
+    'LBL_DOC_ACTIVE_DATE' => 'Publikováno:',
+    'LBL_DOC_EXP_DATE' => 'Expirace:',
 
     //document list view.
     'LBL_LIST_FORM_TITLE' => 'Seznam dokumentů',
@@ -98,11 +97,11 @@ $mod_strings = array (
     'LBL_LIST_REVISION' => 'Revize',
     'LBL_LIST_LAST_REV_CREATOR' => 'Vydal',
     'LBL_LIST_LAST_REV_DATE' => 'Revidováno',
-    'LBL_LIST_VIEW_DOCUMENT'=>'Zobrazit',
-    'LBL_LIST_DOWNLOAD'=> 'Stahování',
+    'LBL_LIST_VIEW_DOCUMENT' => 'Zobrazit',
+    'LBL_LIST_DOWNLOAD' => 'Stahování',
     'LBL_LIST_ACTIVE_DATE' => 'Publikováno',
     'LBL_LIST_EXP_DATE' => 'Expirace',
-    'LBL_LIST_STATUS'=>'Stav',
+    'LBL_LIST_STATUS' => 'Stav',
     'LBL_LINKED_ID' => 'ID související',
     'LBL_SELECTED_REVISION_ID' => 'ID vybrané revize',
     'LBL_LATEST_REVISION_ID' => 'ID poslední revize',
@@ -114,33 +113,33 @@ $mod_strings = array (
     //document search form.
     'LBL_SF_DOCUMENT' => 'Název dokumentu:',
     'LBL_SF_CATEGORY' => 'Kategorie:',
-    'LBL_SF_SUBCATEGORY'=> 'Podkategorie:',
+    'LBL_SF_SUBCATEGORY' => 'Podkategorie:',
     'LBL_SF_ACTIVE_DATE' => 'Publikováno:',
-    'LBL_SF_EXP_DATE'=> 'Expirace:',
+    'LBL_SF_EXP_DATE' => 'Expirace:',
 
     'DEF_CREATE_LOG' => 'Dokument vytvořen',
 
     //error messages
-    'ERR_DOC_NAME'=>'Název dokumentu:',
-    'ERR_DOC_ACTIVE_DATE'=>'Publikováno',
-    'ERR_DOC_EXP_DATE'=> 'Expirace',
-    'ERR_FILENAME'=> 'Název souboru',
-    'ERR_DOC_VERSION'=> 'Verze dokumentu',
-    'ERR_DELETE_CONFIRM'=> 'Opravdu chcete smazat tuto revizi dokumentu ?',
-    'ERR_DELETE_LATEST_VERSION'=> 'nemáte povolení mazat poslední revizi dokumentu.',
+    'ERR_DOC_NAME' => 'Název dokumentu:',
+    'ERR_DOC_ACTIVE_DATE' => 'Publikováno',
+    'ERR_DOC_EXP_DATE' => 'Expirace',
+    'ERR_FILENAME' => 'Název souboru',
+    'ERR_DOC_VERSION' => 'Verze dokumentu',
+    'ERR_DELETE_CONFIRM' => 'Opravdu chcete smazat tuto revizi dokumentu ?',
+    'ERR_DELETE_LATEST_VERSION' => 'nemáte povolení mazat poslední revizi dokumentu.',
     'LNK_NEW_MAIL_MERGE' => 'Spojování mailů',
     'LBL_MAIL_MERGE_DOCUMENT' => 'Šablona na spojování pošty:',
     'ERR_MISSING_FILE' => 'Tento dokument chybí, pravděpodobně kvůli chybě během nahrávání. Zkuste prosím nahrát tento soubor znovu nebo se obraťte na správce.',
 
     'LBL_TREE_TITLE' => 'Dokumenty',
     //sub-panel vardefs.
-    'LBL_LIST_DOCUMENT_NAME'=>'Název',
-    'LBL_LIST_IS_TEMPLATE'=>'Šablona?',
-    'LBL_LIST_TEMPLATE_TYPE'=>'Typ dokumentu',
-    'LBL_LIST_SELECTED_REVISION'=>'Vybraná revize',
-    'LBL_LIST_LATEST_REVISION'=>'Poslední revize',
-    'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Propojené smlouvy',
-    'LBL_LAST_REV_CREATE_DATE'=>'Datum vytvoření - poslední revize',
+    'LBL_LIST_DOCUMENT_NAME' => 'Název',
+    'LBL_LIST_IS_TEMPLATE' => 'Šablona?',
+    'LBL_LIST_TEMPLATE_TYPE' => 'Typ dokumentu',
+    'LBL_LIST_SELECTED_REVISION' => 'Vybraná revize',
+    'LBL_LIST_LATEST_REVISION' => 'Poslední revize',
+    'LBL_CONTRACTS_SUBPANEL_TITLE' => 'Propojené smlouvy',
+    'LBL_LAST_REV_CREATE_DATE' => 'Datum vytvoření - poslední revize',
     //'LNK_DOCUMENT_CAT'=>'Document Categories',
     'LBL_CONTRACTS' => 'Smlouvy',
     'LBL_CREATED_USER' => 'Vytvořil',
@@ -171,9 +170,11 @@ $mod_strings = array (
     // Dashboards
     'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Řídicí panel záznamů dokumentů',
     'LBL_MY_DOCUMENTS' => 'Moje dokumenty',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová osa dokumentů',
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Odeslat do DocuSign',
+    'LBL_SEND_TO_DOCUSIGN_TEMPLATE_BUTTON' => 'Odeslat do DocuSign se šablonou',
 
     // Cloud Drive
 
@@ -183,4 +184,4 @@ $mod_strings = array (
     'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Synchronizovat se službou OneDrive',
     'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Synchronizovat vše se službou Dropbox',
     'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Synchronizovat se službou Dropbox',
-);
+];

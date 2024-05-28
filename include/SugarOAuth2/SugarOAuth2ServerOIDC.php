@@ -37,12 +37,11 @@ use Psr\Log\LoggerAwareTrait;
  */
 class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
     /**
      * @var string
      */
     protected $sudoFor = '';
-
-    use LoggerAwareTrait;
 
     public const PORTAL_PLATFORM = 'portal';
 
@@ -83,7 +82,7 @@ class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInte
      * @throws OAuth2ServerException
      * @throws \InvalidArgumentException
      */
-    public function grantAccessToken(array $inputData = null, array $authHeaders = null) : array
+    public function grantAccessToken(array $inputData = null, array $authHeaders = null): array
     {
         $oidcGrantType = [self::GRANT_TYPE_REFRESH_TOKEN, self::GRANT_TYPE_AUTH_CODE];
         $sourceToken = null;
@@ -143,7 +142,7 @@ class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInte
         try {
             $idpConfig = $this->getIdpConfig();
             $authManager = $this->getAuthProviderBasicBuilder($idpConfig)->buildAuthProviders();
-            /** @var TokenInterface  $resultToken */
+            /** @var TokenInterface $resultToken */
             $resultToken = $authManager->authenticate($sourceToken);
             return [
                 'access_token' => $resultToken->getAttribute('token'),
@@ -167,8 +166,8 @@ class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInte
      * @param string $token OIDC Access Token
      * @param string|null $scope
      *
-     * @throws OAuth2AuthenticateException
      * @return array
+     * @throws OAuth2AuthenticateException
      */
     public function verifyAccessToken($token, $scope = null)
     {
@@ -247,6 +246,7 @@ class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInte
     {
         return new Config(\SugarConfig::getInstance());
     }
+
     /**
      * get Idm mode Config
      * @return array
@@ -255,6 +255,7 @@ class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInte
     {
         return $this->getIdpConfig()->getIDMModeConfig();
     }
+
     /**
      * @inheritdoc
      */
@@ -287,12 +288,12 @@ class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInte
             $jwtBearerToken->setAttribute('platform', $this->platform);
             $accessToken = $authManager->authenticate($jwtBearerToken);
 
-            $token = array(
+            $token = [
                 'access_token' => $accessToken->getAttribute('token'),
                 'expires_in' => $accessToken->getAttribute('expires_in'),
                 'token_type' => $accessToken->getAttribute('token_type'),
                 'scope' => $accessToken->getAttribute('scope'),
-            );
+            ];
 
             if ($this->storage instanceof IOAuth2RefreshTokens && $accessToken->hasAttribute('refresh_token')) {
                 $token['refresh_token'] = $accessToken->getAttribute('refresh_token');
@@ -366,6 +367,7 @@ class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInte
         bool $allowInactive = false,
         bool $needRefresh = false
     ) {
+
         if ($allowInactive) {
             $this->sudoFor = $GLOBALS['current_user']->id;
         }
@@ -401,5 +403,4 @@ class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInte
     {
         $this->revokeToken($token);
     }
-
 }

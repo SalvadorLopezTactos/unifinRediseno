@@ -12,7 +12,6 @@
 
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 
-
 /**
  *
  * Globalsearch settings page
@@ -27,10 +26,10 @@ class AdministrationViewUnifiedSearchSettings extends SugarView
     {
         global $mod_strings;
 
-        return array(
-            "<a href='#Administration'>".translate('LBL_MODULE_NAME', 'Administration')."</a>",
+        return [
+            "<a href='#Administration'>" . translate('LBL_MODULE_NAME', 'Administration') . '</a>',
             $mod_strings['LBL_GLOBAL_SEARCH_SETTINGS'],
-        );
+        ];
     }
 
     /**

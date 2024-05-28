@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,25 +17,23 @@
  ********************************************************************************/
 
 
-
 global $mod_strings;
 
 $focus = BeanFactory::newBean('EmailMarketing');
 
-if(!isset($_REQUEST['record'])) {
-	sugar_die($mod_strings['LBL_SPECIFY_RECORD_NUM']);
+if (!isset($_REQUEST['record'])) {
+    sugar_die($mod_strings['LBL_SPECIFY_RECORD_NUM']);
 }
 $focus->retrieve($_REQUEST['record']);
-if(!$focus->ACLAccess('Delete')){
-	ACLController::displayNoAccess(true);
-	sugar_cleanup(true);
+if (!$focus->ACLAccess('Delete')) {
+    ACLController::displayNoAccess(true);
+    sugar_cleanup(true);
 }
 $focus->mark_deleted($_REQUEST['record']);
 
-if(isset($_REQUEST['record']))
-{
+if (isset($_REQUEST['record'])) {
     $query = 'DELETE FROM emailman WHERE marketing_id = ' . $focus->db->quoted($_REQUEST['record']);
-	$focus->db->query($query);
+    $focus->db->query($query);
 }
 
 $location = 'index.php?' . http_build_query([

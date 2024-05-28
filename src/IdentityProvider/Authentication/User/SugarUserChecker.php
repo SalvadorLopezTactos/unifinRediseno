@@ -39,8 +39,6 @@ class SugarUserChecker extends UserChecker
      */
     public function checkPreAuth(UserInterface $user)
     {
-        parent::checkPreAuth($user);
-
         if ($user instanceof User && $this->lockout->isEnabled() && $this->lockout->isUserLocked($user)) {
             $this->lockout->throwLockoutException($user);
         }
@@ -58,6 +56,5 @@ class SugarUserChecker extends UserChecker
          * @var User $user
          */
         $user->setPasswordExpired(false);
-        parent::checkPostAuth($user);
     }
 }

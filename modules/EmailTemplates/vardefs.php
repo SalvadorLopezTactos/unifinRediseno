@@ -9,47 +9,47 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['EmailTemplate'] = array(
+$dictionary['EmailTemplate'] = [
     'table' => 'email_templates',
     'archive' => false,
     'favorites' => false,
     'comment' => 'Templates used in email processing',
-	'fields' => array(
-		'id' => array(
-			'name' => 'id',
-			'vname' => 'LBL_ID',
-			'type' => 'id',
-			'required' => true,
-			'reportable'=>false,
-			'comment' => 'Unique identifier'
-		),
-		'date_entered' => array(
-			'name' => 'date_entered',
-			'vname' => 'LBL_DATE_ENTERED',
-			'type' => 'datetime',
+    'fields' => [
+        'id' => [
+            'name' => 'id',
+            'vname' => 'LBL_ID',
+            'type' => 'id',
             'required' => true,
-			'comment' => 'Date record created'
-		),
-		'date_modified' => array(
-			'name' => 'date_modified',
-			'vname' => 'LBL_DATE_MODIFIED',
-			'type' => 'datetime',
+            'reportable' => false,
+            'comment' => 'Unique identifier',
+        ],
+        'date_entered' => [
+            'name' => 'date_entered',
+            'vname' => 'LBL_DATE_ENTERED',
+            'type' => 'datetime',
             'required' => true,
-			'comment' => 'Date record last modified'
-		),
-		'modified_user_id' => array(
-			'name' => 'modified_user_id',
-			'rname' => 'user_name',
-			'id_name' => 'modified_user_id',
-			'vname' => 'LBL_ASSIGNED_TO',
-			'type' => 'assigned_user_name',
-			'table' => 'users',
-			'reportable'=>true,
-			'isnull' => 'false',
-			'dbType' => 'id',
-			'comment' => 'User who last modified record'
-		),
-        'modified_by_name' => array(
+            'comment' => 'Date record created',
+        ],
+        'date_modified' => [
+            'name' => 'date_modified',
+            'vname' => 'LBL_DATE_MODIFIED',
+            'type' => 'datetime',
+            'required' => true,
+            'comment' => 'Date record last modified',
+        ],
+        'modified_user_id' => [
+            'name' => 'modified_user_id',
+            'rname' => 'user_name',
+            'id_name' => 'modified_user_id',
+            'vname' => 'LBL_ASSIGNED_TO',
+            'type' => 'assigned_user_name',
+            'table' => 'users',
+            'reportable' => true,
+            'isnull' => 'false',
+            'dbType' => 'id',
+            'comment' => 'User who last modified record',
+        ],
+        'modified_by_name' => [
             'name' => 'modified_by_name',
             'vname' => 'LBL_MODIFIED',
             'type' => 'relate',
@@ -64,9 +64,9 @@ $dictionary['EmailTemplate'] = array(
             'massupdate' => false,
             'duplicate_on_record_copy' => 'no',
             'readonly' => true,
-            'sort_on' => array('last_name'),
-        ),
-        'modified_user_link' => array(
+            'sort_on' => ['last_name'],
+        ],
+        'modified_user_link' => [
             'name' => 'modified_user_link',
             'type' => 'link',
             'relationship' => 'emailtemplates_modified_user',
@@ -75,14 +75,14 @@ $dictionary['EmailTemplate'] = array(
             'module' => 'Users',
             'bean_name' => 'User',
             'source' => 'non-db',
-        ),
-        'created_by' => array(
-			'name' => 'created_by',
-			'vname' => 'LBL_CREATED_BY',
-			'type' => 'id',
-			'comment' => 'User who created record'
-		),
-        'created_by_name' => array(
+        ],
+        'created_by' => [
+            'name' => 'created_by',
+            'vname' => 'LBL_CREATED_BY',
+            'type' => 'id',
+            'comment' => 'User who created record',
+        ],
+        'created_by_name' => [
             'name' => 'created_by_name',
             'vname' => 'LBL_CREATED',
             'type' => 'relate',
@@ -98,9 +98,9 @@ $dictionary['EmailTemplate'] = array(
             'massupdate' => false,
             'duplicate_on_record_copy' => 'no',
             'readonly' => true,
-            'sort_on' => array('last_name'),
-        ),
-        'created_by_link' => array(
+            'sort_on' => ['last_name'],
+        ],
+        'created_by_link' => [
             'name' => 'created_by_link',
             'type' => 'link',
             'relationship' => 'emailtemplates_created_by',
@@ -109,96 +109,96 @@ $dictionary['EmailTemplate'] = array(
             'module' => 'Users',
             'bean_name' => 'User',
             'source' => 'non-db',
-        ),
-		'published' => array(
-			'name' => 'published',
-			'vname' => 'LBL_PUBLISHED',
-			'type' => 'varchar',
-			'len' => '3',
-			'comment' => ''
-		),
-		'name' => array(
-			'name' => 'name',
-			'vname' => 'LBL_NAME',
-			'type' => 'varchar',
-			'len' => '255',
-			'comment' => 'Email template name',
-			'importable' => 'required',
-            'required' => true
-		),
-		'description' => array(
-			'name' => 'description',
-			'vname' => 'LBL_DESCRIPTION',
-			'type' => 'text',
-			'comment' => 'Email template description'
-		),
-		'subject' => array(
-			'name' => 'subject',
-			'vname' => 'LBL_SUBJECT',
-			'type' => 'varchar',
-			'len' => '255',
-			'comment' => 'Email subject to be used in resulting email'
-		),
-		'body' => array(
-			'name' => 'body',
-			'vname' => 'LBL_BODY',
-			'type' => 'text',
-			'comment' => 'Plain text body to be used in resulting email'
-		),
-		'body_html' => array(
-			'name' => 'body_html',
-			'vname' => 'LBL_PLAIN_TEXT',
-			'type' => 'html',
-			'comment' => 'HTML formatted email body to be used in resulting email'
-		),
-		'deleted' => array(
-			'name' => 'deleted',
-			'vname' => 'LBL_DELETED',
-			'type' => 'bool',
-			'required' => false,
-			'reportable'=>false,
-			'comment' => 'Record deletion indicator'
-		),
-		'base_module' => array(
-			'name' => 'base_module',
-			'vname' => 'LBL_BASE_MODULE',
-			'type' => 'varchar',
-			'len' => '50',
-			'comment' => 'In Workflow alert templates, the module to which this template is associated'
-		),
-		'from_name' => array(
-			'name' => 'from_name',
-			'vname' => 'LBL_FROM_NAME',
-			'type' => 'varchar',
-			'len' => '255',
-			'reportable'=>false,
-		),
-		'from_address' => array(
-			'name' => 'from_address',
-			'vname' => 'LBL_FROM_ADDRESS',
-			'type' => 'varchar',
-			'len' => '255',
-			'reportable'=>false,
-		),
-        'text_only' => array(
+        ],
+        'published' => [
+            'name' => 'published',
+            'vname' => 'LBL_PUBLISHED',
+            'type' => 'varchar',
+            'len' => '3',
+            'comment' => '',
+        ],
+        'name' => [
+            'name' => 'name',
+            'vname' => 'LBL_NAME',
+            'type' => 'varchar',
+            'len' => '255',
+            'comment' => 'Email template name',
+            'importable' => 'required',
+            'required' => true,
+        ],
+        'description' => [
+            'name' => 'description',
+            'vname' => 'LBL_DESCRIPTION',
+            'type' => 'text',
+            'comment' => 'Email template description',
+        ],
+        'subject' => [
+            'name' => 'subject',
+            'vname' => 'LBL_SUBJECT',
+            'type' => 'varchar',
+            'len' => '255',
+            'comment' => 'Email subject to be used in resulting email',
+        ],
+        'body' => [
+            'name' => 'body',
+            'vname' => 'LBL_BODY',
+            'type' => 'text',
+            'comment' => 'Plain text body to be used in resulting email',
+        ],
+        'body_html' => [
+            'name' => 'body_html',
+            'vname' => 'LBL_PLAIN_TEXT',
+            'type' => 'html',
+            'comment' => 'HTML formatted email body to be used in resulting email',
+        ],
+        'deleted' => [
+            'name' => 'deleted',
+            'vname' => 'LBL_DELETED',
+            'type' => 'bool',
+            'required' => false,
+            'reportable' => false,
+            'comment' => 'Record deletion indicator',
+        ],
+        'base_module' => [
+            'name' => 'base_module',
+            'vname' => 'LBL_BASE_MODULE',
+            'type' => 'varchar',
+            'len' => '50',
+            'comment' => 'In Workflow alert templates, the module to which this template is associated',
+        ],
+        'from_name' => [
+            'name' => 'from_name',
+            'vname' => 'LBL_FROM_NAME',
+            'type' => 'varchar',
+            'len' => '255',
+            'reportable' => false,
+        ],
+        'from_address' => [
+            'name' => 'from_address',
+            'vname' => 'LBL_FROM_ADDRESS',
+            'type' => 'varchar',
+            'len' => '255',
+            'reportable' => false,
+        ],
+        'text_only' => [
             'name' => 'text_only',
             'vname' => 'LBL_TEXT_ONLY',
             'type' => 'bool',
             'required' => false,
-            'reportable'=>false,
-            'comment' => 'Should be checked if email template is to be sent in text only'
-        ),
-        'type' => array(
+            'reportable' => false,
+            'comment' => 'Should be checked if email template is to be sent in text only',
+        ],
+        'type' => [
             'name' => 'type',
             'vname' => 'LBL_TYPE',
             'type' => 'enum',
             'required' => false,
-            'reportable'=> false,
-            'default'=> 'email',
+            'reportable' => false,
+            'default' => 'email',
             'options' => 'emailTemplates_type_list',
-            'comment' => 'Type of the email template'
-       ),
-        'attachments' => array(
+            'comment' => 'Type of the email template',
+        ],
+        'attachments' => [
             'bean_name' => 'Note',
             'module' => 'Notes',
             'name' => 'attachments',
@@ -206,12 +206,12 @@ $dictionary['EmailTemplate'] = array(
             'source' => 'non-db',
             'type' => 'link',
             'vname' => 'LBL_ATTACHMENTS',
-        ),
-        'attachments_collection' => array(
+        ],
+        'attachments_collection' => [
             'name' => 'attachments_collection',
-            'links' => array(
+            'links' => [
                 'attachments',
-            ),
+            ],
             'order_by' => 'name:asc',
             'source' => 'non-db',
             'studio' => false,
@@ -219,8 +219,8 @@ $dictionary['EmailTemplate'] = array(
             'vname' => 'LBL_ATTACHMENTS',
             'reportable' => false,
             'hideacl' => true,
-        ),
-        'has_variables' => array(
+        ],
+        'has_variables' => [
             'name' => 'has_variables',
             'vname' => 'LBL_TEMPLATE_HAS_VARIABLES',
             'type' => 'bool',
@@ -229,52 +229,52 @@ $dictionary['EmailTemplate'] = array(
             'duplicate_on_record_copy' => 'no',
             'massupdate' => false,
             'importable' => false,
-        ),
-	),
-	'indices' => array(
-		array(
-			'name' => 'email_templatespk',
-			'type' =>'primary',
-			'fields'=>array('id')
-		),
-		array(
-			'name' => 'idx_email_template_name',
-			'type'=>'index',
-			'fields'=>array('name')
-		),
-        array('name' => 'idx_emailtemplate_type', 'type' => 'index', 'fields' => array('type')),
-        array('name' => 'idx_emailtemplate_date_modified', 'type' => 'index', 'fields' => array('date_modified')),
-        array('name' => 'idx_emailtemplate_date_entered', 'type' => 'index', 'fields' => array('date_entered')),
-	),
-    'relationships' => array(
-        'emailtemplates_assigned_user' => array(
-            'lhs_module'=> 'Users',
-            'lhs_table'=> 'users',
+        ],
+    ],
+    'indices' => [
+        [
+            'name' => 'email_templatespk',
+            'type' => 'primary',
+            'fields' => ['id'],
+        ],
+        [
+            'name' => 'idx_email_template_name',
+            'type' => 'index',
+            'fields' => ['name'],
+        ],
+        ['name' => 'idx_emailtemplate_type', 'type' => 'index', 'fields' => ['type']],
+        ['name' => 'idx_emailtemplate_date_modified', 'type' => 'index', 'fields' => ['date_modified']],
+        ['name' => 'idx_emailtemplate_date_entered', 'type' => 'index', 'fields' => ['date_entered']],
+    ],
+    'relationships' => [
+        'emailtemplates_assigned_user' => [
+            'lhs_module' => 'Users',
+            'lhs_table' => 'users',
             'lhs_key' => 'id',
-            'rhs_module'=> 'EmailTemplates',
-            'rhs_table'=> 'email_templates',
+            'rhs_module' => 'EmailTemplates',
+            'rhs_table' => 'email_templates',
             'rhs_key' => 'assigned_user_id',
-            'relationship_type'=>'one-to-many'
-        ),
-        'emailtemplates_modified_user' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'emailtemplates_modified_user' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
             'rhs_module' => 'EmailTemplates',
             'rhs_table' => 'email_templates',
             'rhs_key' => 'modified_user_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'emailtemplates_created_by' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'emailtemplates_created_by' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
             'rhs_module' => 'EmailTemplates',
             'rhs_table' => 'email_templates',
             'rhs_key' => 'created_by',
-            'relationship_type' => 'one-to-many'
-        ),
-        'emailtemplates_attachments' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'emailtemplates_attachments' => [
             'lhs_module' => 'EmailTemplates',
             'lhs_table' => 'email_templates',
             'lhs_key' => 'id',
@@ -284,14 +284,14 @@ $dictionary['EmailTemplate'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'email_type',
             'relationship_role_column_value' => 'EmailTemplates',
-        ),
-    ),
-    'uses' => array(
+        ],
+    ],
+    'uses' => [
         'assignable',
         'team_security',
         'taggable',
-    ),
-    'acls' => array('SugarACLStatic' => true),
-);
+    ],
+    'acls' => ['SugarACLStatic' => true],
+];
 
-VardefManager::createVardef('EmailTemplates', 'EmailTemplate', array());
+VardefManager::createVardef('EmailTemplates', 'EmailTemplate', []);

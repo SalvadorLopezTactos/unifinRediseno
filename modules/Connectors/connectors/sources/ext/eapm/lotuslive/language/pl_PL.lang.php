@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Zdobądź Poufny klucz klienta z IBM SmartCloud poprzez zarejestrowanie swojej instancji Sugar jako nowej aplikacji. Możliwość rejestracji będzie dostępna od 8 maja 2011 r.<br>
 &nbsp;<br>
 Kroki rejestracji aplikacji:<br>
@@ -28,5 +28,4 @@ Kroki rejestracji aplikacji:<br>
 </td></tr></table>',
     'oauth_consumer_key' => 'Klucz użytkownika OAuth',
     'oauth_consumer_secret' => 'Poufny klucz klienta OAuth',
-);
-
+];

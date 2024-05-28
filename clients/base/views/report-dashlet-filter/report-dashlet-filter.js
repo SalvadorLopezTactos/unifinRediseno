@@ -32,6 +32,7 @@
         this._runtimeFilters = {};
         this._filtersDef = false;
         this._usePreviewClasses = this.options.usePreviewClasses;
+        this.RECORD_NOT_FOUND_ERROR_CODE = 404;
     },
 
     /**
@@ -151,6 +152,25 @@
      * @param {Error} error
      */
     _failedLoadReportData: function(error) {
+        if (this.disposed) {
+            return;
+        }
+
+        let showErrorAlert = error && _.isString(error.message);
+
+        // don't show no access alert for dashlet
+        if (error && _.has(error, 'status') && error.status === this.RECORD_NOT_FOUND_ERROR_CODE) {
+            showErrorAlert = false;
+        }
+
+        if (showErrorAlert) {
+            app.alert.show('failed_to_load_report', {
+                level: 'error',
+                messages: error.message,
+                autoClose: true,
+            });
+        }
+
         this._showEmptyFilters(true);
     },
 

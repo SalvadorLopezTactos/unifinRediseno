@@ -111,7 +111,7 @@ class CommentLog extends Basic
         // No ids means nothing to do
         // Not use this in CommentLog module, use only for other modules
         if (empty($ids) || ($focus == null) || ($focus->table_name === 'commentlog')) {
-            return array();
+            return [];
         }
 
         $query = new SugarQuery($this->db);
@@ -121,7 +121,7 @@ class CommentLog extends Basic
         $query->where()->in('record_id', $ids);
         $results = $query->execute();
 
-        $returnArray = array();
+        $returnArray = [];
         foreach ($results as $result) {
             $returnArray[] = $result['commentlog_id'];
         }
@@ -302,7 +302,7 @@ class CommentLog extends Basic
     {
         $constraint = new Guid();
         $violations = Validator::getService()->validate($guid, $constraint);
-        return !(count($violations) > 0);
+        return !(safeCount($violations) > 0);
     }
 
     /**
@@ -423,7 +423,7 @@ class CommentLog extends Basic
     {
         $currentUser = $this->getCurrentUser();
         $initiatorName = $currentUser->full_name;
-        $mailTransmissionProtocol = "unknown";
+        $mailTransmissionProtocol = 'unknown';
         $record = $this->getBean($moduleName, $recordId);
         $recordName = $record->name;
 
@@ -473,7 +473,7 @@ class CommentLog extends Basic
             $mailer->send();
         } catch (MailerException $me) {
             $message = $me->getMessage();
-            $GLOBALS["log"]->warn(
+            $GLOBALS['log']->warn(
                 "Notifications: error sending e-mail (method: {$mailTransmissionProtocol}), (error: {$message})"
             );
         }

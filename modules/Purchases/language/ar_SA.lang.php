@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'لوحة معلومات سجل المشتريات',
     'LBL_RELATED_ACCOUNT' => 'الحساب المرتبط',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم المشتريات',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني للشراء',
 ];

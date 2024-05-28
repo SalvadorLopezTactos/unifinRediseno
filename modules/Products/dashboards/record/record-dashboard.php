@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,6 +14,18 @@
 return [
     'metadata' => [
         'dashlets' => [
+            [
+                'view' => [
+                    'type' => 'activity-timeline',
+                    'label' => 'TPL_ACTIVITY_TIMELINE_DASHLET',
+                ],
+                'context' => [
+                    'module' => 'Products',
+                ],
+                'width' => 12,
+                'x' => 0,
+                'y' => 0,
+            ],
             [
                 'view' => [
                     'type' => 'dashablerecord',

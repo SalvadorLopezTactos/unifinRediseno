@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$hook_array['before_save'][] = array(
+$hook_array['before_save'][] = [
     1,
     'setQuotaSubscriptions',
     'modules/Quotas/QuotaHooks.php',
     'QuotaHooks',
     'setQuotaSubscriptions',
-);
+];

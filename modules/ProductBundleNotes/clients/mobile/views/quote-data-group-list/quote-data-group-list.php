@@ -9,16 +9,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ProductBundleNotes']['mobile']['view']['quote-data-group-list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['ProductBundleNotes']['mobile']['view']['quote-data-group-list'] = [
+    'panels' => [
+        [
             'name' => 'product_bundle_notes_quote_data_group_list',
             'label' => 'LBL_PRODUCT_BUNDLE_NOTES_QUOTE_DATA_LIST',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'description',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

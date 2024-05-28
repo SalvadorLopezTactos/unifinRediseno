@@ -49,11 +49,7 @@ $dictionary['DRI_Workflow'] = [
             'isMultiSelect' => true,
             'source' => 'non-db',
             'function' => [
-                'include' => 'modules/DRI_Workflows/DRI_Workflow.php',
-                'name' => [
-                    'DRI_Workflow',
-                    'listEnabledModulesEnumOptions',
-                ],
+                'name' => 'listAutomateEnabledModulesEnumOptions',
             ],
         ],
         'state' => [
@@ -65,9 +61,13 @@ $dictionary['DRI_Workflow'] = [
             'importable' => 'true',
             'massupdate' => false,
             'options' => 'dri_workflows_state_list',
+            'dbType' => 'varchar',
             'type' => 'enum',
             'default' => 'not_started',
             'readonly' => true,
+            'related_fields' => [
+                'archived',
+            ],
         ],
         'assignee_rule' => [
             'name' => 'assignee_rule',
@@ -92,6 +92,21 @@ $dictionary['DRI_Workflow'] = [
             'options' => 'dri_workflow_templates_target_assignee_list',
             'type' => 'enum',
             'default' => 'current_user',
+        ],
+        'stage_numbering' => [
+            'name' => 'stage_numbering',
+            'vname' => 'LBL_STAGE_NUMBERS',
+            'required' => false,
+            'reportable' => false,
+            'audited' => false,
+            'importable' => 'true',
+            'massupdate' => true,
+            'type' => 'toggle',
+            'dbType' => 'bool',
+            'default' => '0',
+            'studio' => true,
+            'label_right' => 'LBL_CUSTOMER_JOURNEY_STAGE_NUMBER_SHOW',
+            'label_left' => 'LBL_CUSTOMER_JOURNEY_STAGE_NUMBER_HIDE',
         ],
         'progress' => [
             'name' => 'progress',
@@ -437,6 +452,29 @@ $dictionary['DRI_Workflow'] = [
             'relationship' => 'meetings_flex_relate_dri_workflows',
             'module' => 'Meetings',
         ],
+        'assigned_user_picture' => [
+            'name' => 'assigned_user_picture',
+            'link' => 'assigned_user_link',
+            'vname' => 'LBL_ASSIGNED_TO',
+            'rname' => 'picture',
+            'type' => 'relate',
+            'reportable' => false,
+            'source' => 'non-db',
+            'table' => 'users',
+            'id_name' => 'assigned_user_id',
+            'module' => 'Users',
+            'duplicate_merge' => 'disabled',
+            'duplicate_on_record_copy' => 'always',
+            'sort_on' =>
+            [
+                0 => 'last_name',
+            ],
+            'exportable' => true,
+            'related_fields' =>
+            [
+                0 => 'assigned_user_id',
+            ],
+        ],
     ],
     'relationships' => [
         'dri_workflow_current_stage_dri_subworkflows' => [
@@ -497,5 +535,5 @@ $dictionary['DRI_Workflow']['fields']['name']['readonly'] = true;
 
 $dictionary['DRI_Workflow']['fields']['description']['readonly'] = true;
 $dictionary['DRI_Workflow']['fields']['description']['full_text_search'] = [
-  'enabled' => false,
+    'enabled' => false,
 ];

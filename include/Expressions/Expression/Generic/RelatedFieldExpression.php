@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * <b>related(Relationship <i>link</i>, String <i>field</i>)</b><br>
  * Returns the value of <i>field</i> in the related module <i>link</i><br/>
@@ -16,21 +17,21 @@
  */
 class RelatedFieldExpression extends GenericExpression
 {
- /**
-	 * Returns the entire enumeration bare.
-	 */
-	function evaluate() {
-		$params = $this->getParameters();
+    /**
+     * Returns the entire enumeration bare.
+     */
+    public function evaluate()
+    {
+        $params = $this->getParameters();
         //This should be of relate type, which means an array of SugarBean objects
         $linkField = $params[0]->evaluate();
         $relfield = $params[1]->evaluate();
 
         if (empty($linkField)) {
-            return "";
+            return '';
         }
-        
-        foreach($linkField as $id => $bean)
-        {
+
+        foreach ($linkField as $id => $bean) {
             if (!empty($bean->field_defs[$relfield])) {
                 if (!empty($bean->field_defs[$relfield]['use_formula'])) {
                     $relfield = $bean->field_defs[$relfield]['use_formula'];
@@ -40,11 +41,9 @@ class RelatedFieldExpression extends GenericExpression
                     continue;
                 }
 
-                if (!empty($bean->field_defs[$relfield]['type']))
-                {
+                if (!empty($bean->field_defs[$relfield]['type'])) {
                     global $timedate;
-                    if ($bean->field_defs[$relfield]['type'] == "date")
-                    {
+                    if ($bean->field_defs[$relfield]['type'] == 'date') {
                         $ret = $bean->$relfield;
                         if (!empty($bean->$relfield)) {
                             $ret = $timedate->fromDbDate($bean->$relfield);
@@ -58,8 +57,8 @@ class RelatedFieldExpression extends GenericExpression
                         }
                         return $ret;
                     }
-                    if ($bean->field_defs[$relfield]['type'] == "datetime"
-                        || $bean->field_defs[$relfield]['type'] == "datetimecombo") {
+                    if ($bean->field_defs[$relfield]['type'] == 'datetime'
+                        || $bean->field_defs[$relfield]['type'] == 'datetimecombo') {
                         $ret = $bean->$relfield;
                         if (!empty($bean->$relfield)) {
                             $ret = $timedate->fromDb($bean->$relfield);
@@ -72,16 +71,16 @@ class RelatedFieldExpression extends GenericExpression
                         }
                         return $ret;
                     }
-                    if ($bean->field_defs[$relfield]['type'] == "bool")
-                    {
-                        if ($bean->$relfield)
+                    if ($bean->field_defs[$relfield]['type'] == 'bool') {
+                        if ($bean->$relfield) {
                             return BooleanExpression::$TRUE;
-                        else
+                        } else {
                             return BooleanExpression::$FALSE;
+                        }
                     }
                     //Currency values need to be converted to the current currency when the related value
                     //doesn't match this records currency
-                    if ($bean->field_defs[$relfield]['type'] == "currency") {
+                    if ($bean->field_defs[$relfield]['type'] == 'currency') {
                         if (!isset($this->context)) {
                             $this->setContext();
                         }
@@ -99,15 +98,16 @@ class RelatedFieldExpression extends GenericExpression
                 return $bean->$relfield;
             }
         }
-        
-        return "";
-	}
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+        return '';
+    }
+
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
 		    var params = this.getParameters(),
 			    linkField = params[0].evaluate(),
 			    relField = params[1].evaluate();
@@ -123,35 +123,37 @@ class RelatedFieldExpression extends GenericExpression
 
 			return "";
 EOQ;
-	}
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return array("related");
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return ['related'];
+    }
 
-	/**
-	 * The first parameter is a number and the second is the list.
-	 */
-    static function getParameterTypes() {
-		return array(AbstractExpression::$RELATE_TYPE, AbstractExpression::$STRING_TYPE);
-	}
+    /**
+     * The first parameter is a number and the second is the list.
+     */
+    public static function getParameterTypes()
+    {
+        return [AbstractExpression::$RELATE_TYPE, AbstractExpression::$STRING_TYPE];
+    }
 
-	/**
-	 * Returns the maximum number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 2;
-	}
+    /**
+     * Returns the maximum number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 2;
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 }
-
-?>

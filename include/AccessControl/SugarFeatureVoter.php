@@ -46,7 +46,7 @@ class SugarFeatureVoter extends SugarVoter
     /**
      * {@inheritdoc}
      */
-    public function vote(string $key, string $subject, ?string $value = null) : bool
+    public function vote(string $key, string $subject, ?string $value = null): bool
     {
         if (!$this->supports($key)) {
             return true;
@@ -70,7 +70,7 @@ class SugarFeatureVoter extends SugarVoter
      * @param string $key
      * @return array
      */
-    protected function getDeniedList(string $key) : array
+    protected function getDeniedList(string $key): array
     {
         return $this->deniedFeatureList[$key] ?? [];
     }
@@ -79,7 +79,7 @@ class SugarFeatureVoter extends SugarVoter
      * get System CrM key list
      * @return array
      */
-    protected function getSystemCrmkeys() : array
+    protected function getSystemCrmkeys(): array
     {
         return SubscriptionManager::instance()->getSystemCRMKeys();
     }

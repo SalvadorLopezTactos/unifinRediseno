@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => '机会列表仪表板',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => '机会记录仪表板',
@@ -124,7 +124,7 @@ $mod_strings = array(
     'LBL_EXPORT_CAMPAIGN_ID' => '市场活动 ID',
     'LBL_OPPORTUNITY_TYPE' => '商业机会类型',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => '分配的用户名',
-    'LBL_EXPORT_ASSIGNED_USER_ID' => '分配的用户 ID',
+    'LBL_EXPORT_ASSIGNED_USER_ID' => '担当ID',
     'LBL_EXPORT_MODIFIED_USER_ID' => '修改人 ID',
     'LBL_EXPORT_CREATED_BY' => '创建人 ID',
     'LBL_EXPORT_NAME' => '名字',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => '报价',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => '动态账户带来的商业机会',
+    'LBL_TOP_10_OPP' => '前 10 个开放机会',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Dashlet：我的活动机会',
+    'LBL_MY_ACTIVE_OPP' => '我的活动机会',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => '管道总计',
 
-    'LBL_OPPORTUNITY_ROLE'=>'商业机会角色',
+    'LBL_OPPORTUNITY_ROLE' => '商业机会角色',
     'LBL_NOTES_SUBPANEL_TITLE' => '笔记',
     'LBL_TAB_OPPORTUNITY' => '{{module}} 评论',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => '若单击确定，您将清除所有预测数据并更改您的商业机会视图。如果这不是您要的结果，请单击“取消”返回上一设置。',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         '点击确认，您将清除所有的预测数据，并更改您的机会视图。 '
-        .'此外，将禁用所有的流程定义，以及营收单项的目标模块。 '
-        .'如果您不打算这样做，请点击取消，返回上一设置界面。',
+        . '此外，将禁用所有的流程定义，以及营收单项的目标模块。 '
+        . '如果您不打算这样做，请点击取消，返回上一设置界面。',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => '如果所有营收单项均已关闭且至少有一个谈成，',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => '则商业机会销售阶段将设置为“谈成结束”。',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => '如果所有营收单项均处于“丢单结束”销售阶段，',
@@ -220,26 +223,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => '在您第一次执行此变更之后，系统会为每个现有的 {{module_name}} 在背景中创建营收单项记录。营收单项完成并可用后，系统会发送通知至您保存在用户资料中的电子邮件地址。请注意：您的实例必须通过“管理 > 电子邮件设置”配置为可发送电子邮件，才可能完成发送通知的动作。',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模块允许您从头到尾跟踪单个销售。每条 {{module_name}} 记录代表一个潜在的销售，包括相关的销售数据以及与其他重要记录（如 {{quotes_module}}、 {{contacts_module}} 等）相关的数据。{{module_name}} 通常会经历几个销售阶段，直到它被标记为“已结束并赢得客户”或“已结束但客户流失”。通过使用 Sugar 的 {{forecasts_singular_module}} 模块来了解和预测销售趋势，并专注于实现销售配额，可以进一步利用 {{plural_module_name}} 。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模块允许您从头到尾跟踪单笔销售。每条 {{module_name}} 记录代表一次预期销售，包括相关销售数据以及与其他重要记录相关的数据，例如 {{quotes_module}}, {{contacts_module}} 等。一个 {{module_name}} 通常会经过几个销售阶段，直到被标记为“已结束并赢得客户”或“已结束但客户流失”。 {{plural_module_name}} 可以通过使用 Sugar 的 {{forecasts_singular_module}}ing 模块，用于进一步了解和预测销售趋势，并集中精力实现销售配额。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} 模块允许您全程跟踪个别销售以及属于这些销售的明细项目。每条 {{module_name}} 记录代表一次潜在销售，包括相关销售数据以及与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关的销售数据。
+    'LBL_HELP_RECORD' => '{{plural_module_name}} 模块允许您从头到尾跟踪单次销售以及属于这些销售的明细项目。每条 {{module_name}} 记录代表一次预期销售，包括相关销售数据以及与其他重要记录相关的数据，例如 {{quotes_module}}, {{contacts_module}} 等。
 
-- 点击单个字段或编辑按钮编辑此记录的字段。
-- 通过将左下方窗格切换到 “数据视图”来查看或修改子面板中其他记录的链接。
-- 通过将左下窗格切换到“活动流”，在 {{activitystream_singular_module}} 中生成并查看用户注释并记录变更历史。
+- 通过单击单个字段或“编辑”按钮来编辑此记录的字段。
+- 通过将左下窗格切换为“数据视图”来查看或修改子面板中其他记录的链接。
+- 制作和查看用户评论，并在 {{activitystream_singular_module}} 通过将左下窗格切换为“活动流”。
 - 使用记录名称右侧的图标关注或收藏此记录。
-- 编辑按钮右侧的操作下拉菜单中提供了其他操作。',
+- 其他操作在“编辑”按钮右侧的“操作”下拉菜单中可用。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} 模块允许您从头到尾跟踪单个销售以及属于这些销售的行项目。每条 {{module_name}} 记录代表一个潜在的销售，包括相关的销售数据以及与其他重要记录（如 {{quotes_module}}、 {{contacts_module}}等）相关的数据。
+    'LBL_HELP_CREATE' => '{{plural_module_name}} 模块允许您从头到尾跟踪单次销售以及属于这些销售的明细项目。每条 {{module_name}} 记录代表一次预期销售，包括相关销售数据以及与其他重要记录相关的数据，例如 {{quotes_module}}, {{contacts_module}} 等。
 
-创建 {{module_name}}：
-1.根据需要为字段提供值。
+要创建 {{module_name}}：
+1. 根据需要为字段提供值。
  - 标有“必填”的字段必须在保存前填写。
  - 如有必要，单击“显示更多”以显示其他字段。
-2.单击“保存”以完成新记录并返回上一页。
-3. 保存后，使用 {{revenuelineitems_module}} 子面板将行项目添加到 {{module_name}}。',
+2. 单击“保存”以完成新记录并返回上一页。',
 
 // END ENT/ULT
 
@@ -261,4 +263,9 @@ $mod_strings = array(
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => '商业机会关闭预测',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => '查看特定商业机会的预测详细信息',
-);
+    'LBL_AI_WINRATE' => '胜率',
+    'LBL_AI_WONOPP' => '赢得的商机',
+    'LBL_AI_CLOSINGTIME' => '关门时间',
+    'LBL_AI_CLOSEDOPP' => '失去的商机',
+    'LBL_AI_LEADTIMESPAN' => '从创造商机到已结束并赢得客户之间的时间',
+];

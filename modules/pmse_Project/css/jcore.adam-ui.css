@@ -188,13 +188,8 @@
   width: 16px;
   height: 16px;
   float: right;
-  font-family: FontAwesome;
-  font-size: 14px;
   line-height: 13px;
   color: var(--sicon-color);
-}
-.adam-window-close:before {
-  content: "\f00d";
 }
 .adam-window-close:hover {
   color: var(--sicon-hover-color);
@@ -739,7 +734,6 @@ input[type="number"].required {
   margin-left: 2px;
   margin-right: -2px;
   color: #cee5fc;
-  font-size: 14px;
   line-height: 12px;
 }
 .adam.single-item-remove:hover {

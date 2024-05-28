@@ -17,11 +17,11 @@ class OAuth2Api extends SugarApi
 {
     public function registerApiRest()
     {
-        return array(
-            'token' => array(
+        return [
+            'token' => [
                 'reqType' => 'POST',
-                'path' => array('oauth2','token'),
-                'pathVars' => array('',''),
+                'path' => ['oauth2', 'token'],
+                'pathVars' => ['', ''],
                 'method' => 'token',
                 'shortHelp' => 'OAuth2 token requests.',
                 'longHelp' => 'include/api/help/oauth2_token_post_help.html',
@@ -29,50 +29,50 @@ class OAuth2Api extends SugarApi
                 'keepSession' => true,
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
-            ),
-            'oauth_logout' => array(
+            ],
+            'oauth_logout' => [
                 'reqType' => 'POST',
-                'path' => array('oauth2','logout'),
-                'pathVars' => array('',''),
+                'path' => ['oauth2', 'logout'],
+                'pathVars' => ['', ''],
                 'method' => 'logout',
                 'shortHelp' => 'OAuth2 logout.',
                 'longHelp' => 'include/api/help/oauth2_logout_post_help.html',
                 'keepSession' => true,
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
-            ),
-            'oauth_bwc_login' => array(
+            ],
+            'oauth_bwc_login' => [
                 'reqType' => 'POST',
-                'path' => array('oauth2','bwc', 'login'),
-                'pathVars' => array('','',''),
+                'path' => ['oauth2', 'bwc', 'login'],
+                'pathVars' => ['', '', ''],
                 'method' => 'bwcLogin',
                 'shortHelp' => 'Bwc login for bwc modules. Internal usage only.',
                 'longHelp' => 'include/api/help/oauth2_bwc_login_post_help.html',
                 'keepSession' => true,
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
-            ),
-            'oauth_bwc_logout' => array(
+            ],
+            'oauth_bwc_logout' => [
                 'reqType' => 'POST',
-                'path' => array('oauth2','bwc', 'logout'),
-                'pathVars' => array('','',''),
+                'path' => ['oauth2', 'bwc', 'logout'],
+                'pathVars' => ['', '', ''],
                 'method' => 'bwcLogout',
                 'shortHelp' => 'Bwc logout for bwc modules. Internal usage only.',
                 'longHelp' => 'include/api/help/oauth2_bwc_logout_post_help.html',
                 'keepSession' => true,
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
-            ),
-            'oauth_sudo' => array(
+            ],
+            'oauth_sudo' => [
                 'reqType' => 'POST',
-                'path' => array('oauth2','sudo','?'),
-                'pathVars' => array('','','user_name'),
+                'path' => ['oauth2', 'sudo', '?'],
+                'pathVars' => ['', '', 'user_name'],
                 'method' => 'sudo',
                 'shortHelp' => 'Get an access token for another user',
                 'longHelp' => 'include/api/help/oauth2_sudo_post_help.html',
                 'ignoreMetaHash' => true,
-            ),
-        );
+            ],
+        ];
     }
 
     protected function getOAuth2Server(array $args)
@@ -96,7 +96,7 @@ class OAuth2Api extends SugarApi
 
         $validVersion = $this->isSupportedClientVersion($api, $args);
 
-        if ( !$validVersion ) {
+        if (!$validVersion) {
             throw new SugarApiExceptionClientOutdated();
         }
 
@@ -111,11 +111,11 @@ class OAuth2Api extends SugarApi
 
             if (!empty($GLOBALS['current_user'])) {
                 //Update password expired since user's essentially logged in at this point
-                require_once('modules/Users/password_utils.php');
+                require_once 'modules/Users/password_utils.php';
 
                 $GLOBALS['current_user']->call_custom_logic('after_login');
             }
-            $cleanupChance = isset($GLOBALS['sugar_config']['token_cleanup_probability'])?(int)$GLOBALS['sugar_config']['token_cleanup_probability']:10;
+            $cleanupChance = isset($GLOBALS['sugar_config']['token_cleanup_probability']) ? (int)$GLOBALS['sugar_config']['token_cleanup_probability'] : 10;
             if (random_int(0, mt_getrandmax()) % $cleanupChance == 0) {
                 // cleanup based on probability
                 OAuthToken::cleanup();
@@ -124,7 +124,7 @@ class OAuth2Api extends SugarApi
             // failed to get token - something went wrong - list as failed login
             $GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
             throw $e;
-        } catch(SugarApiExceptionNeedLogin $e) {
+        } catch (SugarApiExceptionNeedLogin $e) {
             $GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
             // have API throw login exception wil full data
             $api->needLogin($e);
@@ -134,7 +134,7 @@ class OAuth2Api extends SugarApi
         global $current_user;
         if ($loginStatus !== true && $loginStatus['level'] != 'warning') {
             if (($loginStatus['level'] == 'admin_only' || $loginStatus['level'] == 'maintenance')
-                 && $current_user->isAdmin() ) {
+                && $current_user->isAdmin()) {
                 // Let them through
             } elseif (!empty($current_user) && $current_user->allowNonAdminToContinue($loginStatus)) {
                 // allow non admin user go through
@@ -174,7 +174,7 @@ class OAuth2Api extends SugarApi
                     $loginStatus['level']
                 );
                 if (!empty($loginStatus['url'])) {
-                    $e->setExtraData("url", $loginStatus['url']);
+                    $e->setExtraData('url', $loginStatus['url']);
                 }
                 $api->needLogin($e);
                 return;
@@ -184,7 +184,7 @@ class OAuth2Api extends SugarApi
         // Adding the setcookie() here instead of calling $api->setHeader() because
         // manually adding a cookie header will break 3rd party apps that use cookies
         setcookie(
-            RestService::DOWNLOAD_COOKIE.'_'.$platform,
+            RestService::DOWNLOAD_COOKIE . '_' . $platform,
             $authData['download_token'],
             [
                 'expires' => time() + $authData['refresh_expires_in'],
@@ -203,11 +203,11 @@ class OAuth2Api extends SugarApi
     {
         $externalLogin = !empty($_SESSION['externalLogin']) ? $_SESSION['externalLogin'] : false;
         $oauth2Server = $this->getOAuth2Server($args);
-        if(!empty($api->user)) {
+        if (!empty($api->user)) {
             $api->user->call_custom_logic('before_logout');
         }
 
-        if ( isset($args['refresh_token']) ) {
+        if (isset($args['refresh_token'])) {
             // Nuke the refresh token as well.
             // No security checks needed here to make sure the refresh token is theirs,
             // because if someone else has your refresh token logging out is the nicest possible thing they could do.
@@ -222,7 +222,7 @@ class OAuth2Api extends SugarApi
         }
 
         setcookie(
-            RestService::DOWNLOAD_COOKIE.'_'.$api->platform,
+            RestService::DOWNLOAD_COOKIE . '_' . $api->platform,
             false,
             [
                 'expires' => -1,
@@ -237,14 +237,14 @@ class OAuth2Api extends SugarApi
         SugarApplication::endSession();
 
         // The OAuth access token is actually just a session, so we can nuke that here.
-        $_SESSION = array();
+        $_SESSION = [];
 
         // Whack the cookie that was set in BWC mode
         $this->killSessionCookie();
         $GLOBALS['logic_hook']->call_custom_logic('Users', 'after_logout');
 
         $auth = AuthenticationController::getInstance();
-        $res = array('success'=>true);
+        $res = ['success' => true];
         if ($externalLogin && $auth->isExternal()) {
             $logout = $auth->getLogoutUrl();
             if ($logout) {
@@ -273,7 +273,6 @@ class OAuth2Api extends SugarApi
         // cookie lets check if the user matches the current user. If so we
         // do not need to send the BWC session cookie again.
         if (isset($_COOKIE[$sessionName]) && !empty($_COOKIE[$sessionName])) {
-
             // close current session
             $tokenSession = session_id();
             session_write_close();
@@ -302,7 +301,7 @@ class OAuth2Api extends SugarApi
         // Send back session_name so the client can use it for other bwc functions,
         // like studio, module builder, etc when sessions expire outside of the
         // ajax calls
-        return array('name' => $sessionName);
+        return ['name' => $sessionName];
     }
 
     /**
@@ -355,7 +354,7 @@ class OAuth2Api extends SugarApi
         $token = $oauth2Server->getSudoToken($args['user_name'], $clientId, $platform, $allowInactive, $needRefresh);
 
         if (!$token) {
-            throw new SugarApiExceptionRequestMethodFailure("Could not setup a token for the requested user");
+            throw new SugarApiExceptionRequestMethodFailure('Could not setup a token for the requested user');
         }
 
         return $token;
@@ -372,12 +371,11 @@ class OAuth2Api extends SugarApi
     {
         if (!empty($args['client_info']['app']['name'])
             && !empty($args['client_info']['app']['version'])) {
-
             $name = $args['client_info']['app']['name'];
             $version = $args['client_info']['app']['version'];
 
             if (isset($api->api_settings['minClientVersions'][$name])
-                && version_compare($api->api_settings['minClientVersions'][$name], $args['client_info']['app']['version'],'>') ) {
+                && version_compare($api->api_settings['minClientVersions'][$name], $args['client_info']['app']['version'], '>')) {
                 // Version is too old, force them to upgrade.
                 return false;
             }
@@ -442,7 +440,7 @@ class OAuth2Api extends SugarApi
     protected function killSessionCookie()
     {
         $sessionName = session_name();
-        $sessionId = $_COOKIE[$sessionName]?? null;
+        $sessionId = $_COOKIE[$sessionName] ?? null;
         if ($sessionId !== null) {
             session_id($sessionId);
             session_start();

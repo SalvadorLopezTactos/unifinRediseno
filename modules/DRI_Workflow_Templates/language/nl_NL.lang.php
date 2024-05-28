@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Actief',
     'LBL_ASSIGNEE_RULE' => 'Regel voor toewijzing',
     'LBL_TARGET_ASSIGNEE' => 'Toegewezen target',
+    'LBL_STAGE_NUMBERS' => 'Fasenummering',
     'LBL_EXPORT_BUTTON_LABEL' => 'Exporteren',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Importeren',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Automatisch een nieuw record van een slimme gids-sjabloon maken/updaten door een *.json-bestand uit uw bestandssysteem te importeren.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Als de optie Toegewezen target = Bovenliggende toegewezene ingeschakeld is, wanneer de gebruiker die is &#39;Toegewezen aan&#39; wordt gewijzigd op een bovenliggende, zullen de gebruikers die zijn &#39;Toegewezen aan&#39; ook automatisch veranderen in de slimme gidsen, fasen en activiteiten. Houd er rekening mee dat de instellingen van de Toegewezen target op activiteitssjablonen voorrang hebben op de sjabloon voor slimme gidsen',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Wanneer moet een gebruiker aan de activiteiten toegewezen worden',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Aan wie moeten de activiteiten toegewezen worden',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Met deze schakelaar kunt u automatische fasenummering weergeven of verbergen.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Sjabloon van slimme gids/fase/activiteit',
 ];

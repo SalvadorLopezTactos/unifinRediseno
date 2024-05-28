@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kunskapsbasmallar',
     'LBL_MODULE_NAME_SINGULAR' => 'Kunskapsbasmall',
     'LBL_MODULE_TITLE' => 'Kunskapsbasmall',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Visa mallar',
     'LBL_TEXT_BODY' => 'Meddelande:',
     'LBL_LIST_TEMPLATE_NAME' => 'Namn på mall',
-);
+];

@@ -16,7 +16,7 @@
 ({
     plugins: ['Dashlet', 'Chart', 'CssLoader'],
 
-    className: 'customer-journey-momentum-chart-wrapper',
+    className: 'customer-journey-momentum-chart-wrapper p-0',
     loaded: false,
     data: null,
     selected: null,

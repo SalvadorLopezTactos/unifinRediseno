@@ -26,12 +26,11 @@ ARGS:
   3) $_REQUEST['return_action']; :
 */
 
-require_once('include/formbase.php');
+require_once 'include/formbase.php';
 
 $focus = BeanFactory::newBean($_REQUEST['module']);
-if (  empty($_REQUEST['linked_id']) || empty($_REQUEST['linked_field'])  || empty($_REQUEST['record']))
-{
-	die("need linked_field, linked_id and record fields");
+if (empty($_REQUEST['linked_id']) || empty($_REQUEST['linked_field']) || empty($_REQUEST['record'])) {
+    die('need linked_field, linked_id and record fields');
 }
 $linked_field = $_REQUEST['linked_field'];
 $record = $_REQUEST['record'];
@@ -39,13 +38,12 @@ $linked_id = $_REQUEST['linked_id'];
 
 // cut it off:
 $focus->load_relationship($linked_field);
-$focus->$linked_field->delete($record,$linked_id);
+$focus->$linked_field->delete($record, $linked_id);
 
 BeanFactory::deleteBean('Holidays', $linked_id);
 
-$GLOBALS['log']->debug("deleted relationship: bean: {$_REQUEST['module']}, linked_field: $linked_field, linked_id:$linked_id" );
-if(empty($_REQUEST['refresh_page'])){
-	handleRedirect();
+$GLOBALS['log']->debug("deleted relationship: bean: {$_REQUEST['module']}, linked_field: $linked_field, linked_id:$linked_id");
+if (empty($_REQUEST['refresh_page'])) {
+    handleRedirect();
 }
 exit;
-?>

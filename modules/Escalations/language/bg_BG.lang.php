@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'Разгледай пренасочвания на по-високо ниво',
     'LBL_LIST_RELATED_TO_ID' => 'Свързано с идентификатор',
     'LNK_IMPORT_ESCALATIONS' => 'Импорт на пренасочвания на по-високо ниво',
-    
+
     'LBL_LIST_SUBJECT' => 'Относно',
     'LBL_LIST_NUMBER' => 'Ном.',
     'LBL_LIST_RELATED_TO_TYPE' => 'Тип на връзката',

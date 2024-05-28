@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => '몸',
     'LBL_BASE_MODULE' => '대상 모듈',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => '파일에서 프로세스 전자 메일 템플릿을 만들지 못했습니다',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => '이 전자 메일 템플릿은 현재 프로세스 정의에 사용 중입니다. 이 전자 메일 템플릿을 편집 하시겠습니까?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "현재 프로세스 정의에 사용 중이므로 이 전자 메일 템플릿을 삭제할 수 없습니다.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => '현재 프로세스 정의에 사용 중이므로 이 전자 메일 템플릿을 삭제할 수 없습니다.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => '필드 선택',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => '선택하기',
     'LBL_FIELD_SELECTOR_DROPDOWN' => '필드 값 유형',
-);
+];

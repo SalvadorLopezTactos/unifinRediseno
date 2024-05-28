@@ -29,14 +29,14 @@ class ProductsCurrencyRateUpdate extends CurrencyRateUpdateAbstract
     {
         parent::__construct();
         // set rate field definitions
-        $this->addRateColumnDefinition('products','base_rate');
+        $this->addRateColumnDefinition('products', 'base_rate');
         // set usdollar field definitions
-        $this->addUsDollarColumnDefinition('products','discount_amount','discount_amount_usdollar');
-        $this->addUsDollarColumnDefinition('products','discount_price','discount_usdollar');
-        $this->addUsDollarColumnDefinition('products','deal_calc','deal_calc_usdollar');
-        $this->addUsDollarColumnDefinition('products','cost_price','cost_usdollar');
-        $this->addUsDollarColumnDefinition('products','list_price','list_usdollar');
-        $this->addUsDollarColumnDefinition('products','book_value','book_value_usdollar');
+        $this->addUsDollarColumnDefinition('products', 'discount_amount', 'discount_amount_usdollar');
+        $this->addUsDollarColumnDefinition('products', 'discount_price', 'discount_usdollar');
+        $this->addUsDollarColumnDefinition('products', 'deal_calc', 'deal_calc_usdollar');
+        $this->addUsDollarColumnDefinition('products', 'cost_price', 'cost_usdollar');
+        $this->addUsDollarColumnDefinition('products', 'list_price', 'list_usdollar');
+        $this->addUsDollarColumnDefinition('products', 'book_value', 'book_value_usdollar');
     }
 
     /**
@@ -47,16 +47,16 @@ class ProductsCurrencyRateUpdate extends CurrencyRateUpdateAbstract
      * To custom processing, do here and return true.
      *
      * @access public
-     * @param  string $table
-     * @param  string $column
-     * @param  string $currencyId
+     * @param string $table
+     * @param string $column
+     * @param string $currencyId
      * @return boolean true if custom processing was done
      */
     public function doCustomUpdateRate($table, $column, $currencyId)
     {
         // get the conversion rate
         $sq = new SugarQuery();
-        $sq->select(array('conversion_rate'));
+        $sq->select(['conversion_rate']);
         $sq->from(BeanFactory::newBean('Currencies'));
         $sq->where()
             ->equals('id', $currencyId);
@@ -71,13 +71,14 @@ class ProductsCurrencyRateUpdate extends CurrencyRateUpdateAbstract
         }
 
         // setup SQL statement
-        $query = sprintf("UPDATE %s SET %s = %s
+        $query = sprintf(
+            'UPDATE %s SET %s = %s
         WHERE id IN (%s)
-        AND currency_id = %s",
+        AND currency_id = %s',
             $table,
             $column,
             $this->db->quote($rate),
-            implode(",", $ids),
+            implode(',', $ids),
             $this->db->quoted($currencyId)
         );
         // execute
@@ -86,7 +87,7 @@ class ProductsCurrencyRateUpdate extends CurrencyRateUpdateAbstract
             true,
             string_format(
                 $GLOBALS['app_strings']['ERR_DB_QUERY'],
-                array(self::class, $query)
+                [self::class, $query]
             )
         );
         return !empty($result);
@@ -100,10 +101,10 @@ class ProductsCurrencyRateUpdate extends CurrencyRateUpdateAbstract
      * To custom processing, do here and return true.
      *
      * @access public
-     * @param  string    $tableName
-     * @param  string    $usDollarColumn
-     * @param  string    $amountColumn
-     * @param  string    $currencyId
+     * @param string $tableName
+     * @param string $usDollarColumn
+     * @param string $amountColumn
+     * @param string $currencyId
      * @return boolean true if custom processing was done
      */
     public function doCustomUpdateUsDollarRate($tableName, $usDollarColumn, $amountColumn, $currencyId)
@@ -116,13 +117,14 @@ class ProductsCurrencyRateUpdate extends CurrencyRateUpdateAbstract
         }
 
         // setup SQL statement
-        $query = sprintf("UPDATE %s SET %s = %s / base_rate
+        $query = sprintf(
+            'UPDATE %s SET %s = %s / base_rate
             WHERE id IN (%s)
-            AND currency_id = %s",
+            AND currency_id = %s',
             $tableName,
             $usDollarColumn,
             $amountColumn,
-            implode(",", $ids),
+            implode(',', $ids),
             $this->db->quoted($currencyId)
         );
         // execute
@@ -131,7 +133,7 @@ class ProductsCurrencyRateUpdate extends CurrencyRateUpdateAbstract
             true,
             string_format(
                 $GLOBALS['app_strings']['ERR_DB_QUERY'],
-                array(self::class, $query)
+                [self::class, $query]
             )
         );
         return !empty($result);
@@ -142,18 +144,18 @@ class ProductsCurrencyRateUpdate extends CurrencyRateUpdateAbstract
         $product = BeanFactory::newBean('Products');
 
         $sq = new SugarQuery();
-        $sq->select(array('id'));
+        $sq->select(['id']);
         $sq->from($product);
 
         // join in the product bundles table
         $product->load_relationships();
         // we use a left join here so we can get products that do not have quotes
-        $product->product_bundles->buildJoinSugarQuery($sq, array('joinType' => 'LEFT'));
+        $product->product_bundles->buildJoinSugarQuery($sq, ['joinType' => 'LEFT']);
 
         // join in the quotes table off of Product Bundles
         $bundle = BeanFactory::newBean('ProductBundles');
         $bundle->load_relationship('quotes');
-        $bundle->quotes->buildJoinSugarQuery($sq, array('joinType' => 'LEFT'));
+        $bundle->quotes->buildJoinSugarQuery($sq, ['joinType' => 'LEFT']);
 
         $quote = BeanFactory::newBean('Quotes');
 
@@ -166,8 +168,8 @@ class ProductsCurrencyRateUpdate extends CurrencyRateUpdateAbstract
 
         $db = $this->db;
         // we just need the array, so use array_map to pull it out of the results
-        return array_map(function($a) use($db) {
-                return $db->quoted($a['id']);
-            }, $results);
+        return array_map(function ($a) use ($db) {
+            return $db->quoted($a['id']);
+        }, $results);
     }
 }

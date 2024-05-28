@@ -18,18 +18,18 @@
  */
 class MailRecord
 {
-    static private $statuses = array(
+    private static $statuses = [
         // Initial Status -  "Create" or "Update"
-        "draft", // draft
-        "scheduled", // scheduled for future date time
-        "ready", // ready to be sent
+        'draft', // draft
+        'scheduled', // scheduled for future date time
+        'ready', // ready to be sent
 
         // Intermediate 'In-Progess' Status
-        "sending", // transient status
+        'sending', // transient status
 
         // Terminal Status
-        "sent",
-    );
+        'sent',
+    ];
 
     public const ATTACHMENT_TYPE_UPLOAD = 'upload';
     public const ATTACHMENT_TYPE_DOCUMENT = 'document';
@@ -67,55 +67,55 @@ class MailRecord
     /**
      * Saves the email as a draft.
      *
-     * @deprecated This method is no longer used and is not recommended.
-     * @see MailApi::handleMail()
      * @return array
+     * @see MailApi::handleMail()
+     * @deprecated This method is no longer used and is not recommended.
      */
     public function saveAsDraft()
     {
         LoggerManager::getLogger()->deprecated('MailRecord::saveAsDraft() has been deprecated.');
 
-        return $this->toEmailBean("draft");
+        return $this->toEmailBean('draft');
     }
 
     /**
      * Saves and sends the email.
      *
-     * @deprecated This method is no longer used and is not recommended.
-     * @see MailApi::handleMail()
      * @return array
+     * @see MailApi::handleMail()
+     * @deprecated This method is no longer used and is not recommended.
      */
     public function send()
     {
         LoggerManager::getLogger()->deprecated('MailRecord::send() has been deprecated.');
 
-        return $this->toEmailBean("ready");
+        return $this->toEmailBean('ready');
     }
 
     /**
      * Saves the email as a draft.
      *
-     * @deprecated This method is no longer used and is not recommended.
-     * @see MailApi::archiveMail()
      * @return array
+     * @see MailApi::archiveMail()
+     * @deprecated This method is no longer used and is not recommended.
      */
     public function archive()
     {
         LoggerManager::getLogger()->deprecated('MailRecord::archive() has been deprecated.');
 
-        return $this->toEmailBean("archived");
+        return $this->toEmailBean('archived');
     }
 
     /**
      * Prepares and executes the email request according to the expectations of the status.
      *
-     * @deprecated This method is no longer used and is not recommended.
-     * @see MailRecord::saveAsDraft()
-     * @see MailRecord::send()
-     * @see MailRecord::archive()
      * @param $status
      * @return array - Mail API Response Record
      * @throws MailerException
+     * @see MailRecord::archive()
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailRecord::saveAsDraft()
+     * @see MailRecord::send()
      */
     protected function toEmailBean($status)
     {
@@ -156,7 +156,6 @@ class MailRecord
 
             $response = $this->toApiResponse($status, $email);
             return $response;
-
         } catch (Exception $e) {
             if (is_null($errorData)) {
                 $errorData = $this->endCapturingOutput();
@@ -165,9 +164,9 @@ class MailRecord
                 $e = new MailerException($e->getMessage());
             }
             if (empty($errorData)) {
-                $GLOBALS["log"]->error("Message: " . $e->getLogMessage());
+                $GLOBALS['log']->error('Message: ' . $e->getLogMessage());
             } else {
-                $GLOBALS["log"]->error("Message: " . $e->getLogMessage() . "  Data: " . $errorData);
+                $GLOBALS['log']->error('Message: ' . $e->getLogMessage() . '  Data: ' . $errorData);
             }
 
             throw $e;
@@ -177,74 +176,75 @@ class MailRecord
     /**
      * Constructs the email request that will passed on.
      *
-     * @deprecated This method is no longer used and is not recommended.
-     * @see MailRecord::toEmailBean()
      * @param string $status
-     * @param null   $from
+     * @param null $from
      * @param string $to
      * @param string $cc
      * @param string $bcc
      * @param array $attachments
      * @return array
+     * @see MailRecord::toEmailBean()
+     * @deprecated This method is no longer used and is not recommended.
      */
     protected function setupSendRequest(
-        $status = "ready",
+        $status = 'ready',
         $from = null,
-        $to = "",
-        $cc = "",
-        $bcc = "",
-        $attachments = array()
+        $to = '',
+        $cc = '',
+        $bcc = '',
+        $attachments = []
     ) {
+
         LoggerManager::getLogger()->deprecated('MailRecord::setupSendRequest() has been deprecated.');
 
-        $request = array(
-            "fromAccount" => $from,
-            "archive_from_address" => $this->fromAddress, // "archived" status only
-            "sendSubject" => $this->subject,
-            "sendTo" => $to,
-            "sendCc" => $cc,
-            "sendBcc" => $bcc,
-            "saveToSugar" => "1",
-            "sendDescription" => "", // defaulted to an empty string
-        );
+        $request = [
+            'fromAccount' => $from,
+            'archive_from_address' => $this->fromAddress, // "archived" status only
+            'sendSubject' => $this->subject,
+            'sendTo' => $to,
+            'sendCc' => $cc,
+            'sendBcc' => $bcc,
+            'saveToSugar' => '1',
+            'sendDescription' => '', // defaulted to an empty string
+        ];
 
         if (!empty($this->html_body)) {
-            $request["sendDescription"] = from_html($this->html_body);
-            $request["setEditor"] = "1";
+            $request['sendDescription'] = from_html($this->html_body);
+            $request['setEditor'] = '1';
         } elseif (!empty($this->text_body)) {
-            $request["sendDescription"] = from_html($this->text_body);
+            $request['sendDescription'] = from_html($this->text_body);
         }
 
-        $requestKeys = array(
+        $requestKeys = [
             self::ATTACHMENT_TYPE_UPLOAD => 'attachments',
             self::ATTACHMENT_TYPE_DOCUMENT => 'documents',
             self::ATTACHMENT_TYPE_TEMPLATE => 'templateAttachments',
-        );
+        ];
         foreach ($attachments as $key => $value) {
             $requestKey = $requestKeys[$key] ?? $key;
             $request[$requestKey] = implode('::', $attachments[$key]);
         }
 
-        if (is_array($this->related) && !empty($this->related["type"]) && !empty($this->related["id"])) {
-            $request["parent_type"] = $this->related["type"];
-            $request["parent_id"] = $this->related["id"];
+        if (is_array($this->related) && !empty($this->related['type']) && !empty($this->related['id'])) {
+            $request['parent_type'] = $this->related['type'];
+            $request['parent_id'] = $this->related['id'];
         }
 
-        if (is_array($this->teams) && !empty($this->teams["primary"])) {
-            $request["primaryteam"] = $this->teams["primary"];
-            $teamIds = array($this->teams["primary"]);
+        if (is_array($this->teams) && !empty($this->teams['primary'])) {
+            $request['primaryteam'] = $this->teams['primary'];
+            $teamIds = [$this->teams['primary']];
 
-            if (isset($this->teams["others"]) && is_array(($this->teams["others"]))) {
-                foreach ($this->teams["others"] as $teamId) {
+            if (isset($this->teams['others']) && is_array(($this->teams['others']))) {
+                foreach ($this->teams['others'] as $teamId) {
                     $teamIds[] = $teamId;
                 }
             }
 
-            $request["teamIds"] = implode(",", $teamIds);
+            $request['teamIds'] = implode(',', $teamIds);
         }
 
         if ($status === 'draft') {
-            $request["saveDraft"] = "true"; // send ("ready") is the default behavior
+            $request['saveDraft'] = 'true'; // send ("ready") is the default behavior
         } elseif ($status === 'archived') {
             if (!empty($this->date_sent)) {
                 $request['dateSent'] = $this->date_sent;
@@ -254,7 +254,7 @@ class MailRecord
             }
         }
 
-        $request["MAIL_RECORD_STATUS"] = $status;
+        $request['MAIL_RECORD_STATUS'] = $status;
 
         return $request;
     }
@@ -276,9 +276,9 @@ class MailRecord
      * Collects the contents from the output buffer and cleans the buffer. Wraps the function calls so that it is
      * possible to mock/stub this behavior.
      *
-     * @deprecated This method is no longer used and is not recommended.
-     * @see MailRecord::toEmailBean()
      * @return string
+     * @see MailRecord::toEmailBean()
+     * @deprecated This method is no longer used and is not recommended.
      */
     protected function endCapturingOutput()
     {
@@ -293,63 +293,63 @@ class MailRecord
     /**
      * Format recipient addresses as comma-separated strings.
      *
-     * @deprecated This method is no longer used and is not recommended.
-     * @see MailRecord::toEmailBean()
      * @param array $recipients
      * @return string
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailRecord::toEmailBean()
      */
-    protected function addRecipients($recipients = array())
+    protected function addRecipients($recipients = [])
     {
         LoggerManager::getLogger()->deprecated('MailRecord::addRecipients() has been deprecated.');
 
-        $addedRecipients = array();
+        $addedRecipients = [];
 
         if (is_array($recipients)) {
             foreach ($recipients as $recipient) {
                 $identity = $this->generateEmailIdentity($recipient);
 
                 if ($identity) {
-                    $formattedRecipient = array();
+                    $formattedRecipient = [];
                     $name = $identity->getName();
 
                     if (!empty($name)) {
                         $formattedRecipient[] = $name;
                     }
 
-                    $formattedRecipient[] = "<" . $identity->getEmail() . ">";
+                    $formattedRecipient[] = '<' . $identity->getEmail() . '>';
 
                     // add the formatted recipient to the array of all recipients to be imploded
                     // separate the name and email address by a single space
-                    $addedRecipients[] = implode(" ", $formattedRecipient);
+                    $addedRecipients[] = implode(' ', $formattedRecipient);
                 }
             }
         }
 
-        return implode(", ", $addedRecipients);
+        return implode(', ', $addedRecipients);
     }
 
     /**
      * Split attachment list into separate lists by type
      *
-     * @deprecated This method is no longer used and is not recommended.
-     * @see MailRecord::toEmailBean()
      * @param array $attachments
      * @return array
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailRecord::toEmailBean()
      */
-    protected function splitAttachments($attachments = array())
+    protected function splitAttachments($attachments = [])
     {
         LoggerManager::getLogger()->deprecated('MailRecord::splitAttachments() has been deprecated.');
 
-        $addedAttachments = array();
+        $addedAttachments = [];
 
         if (is_array($attachments)) {
             foreach ($attachments as $attachment) {
                 $type = $attachment['type'];
                 if (!array_key_exists($type, $addedAttachments)) {
-                    $addedAttachments[$type] = array();
+                    $addedAttachments[$type] = [];
                 }
                 if ($type === self::ATTACHMENT_TYPE_UPLOAD) {
-                    $addedAttachments[$type][] = $attachment['id'] . $attachment["name"];
+                    $addedAttachments[$type][] = $attachment['id'] . $attachment['name'];
                 } else {
                     $addedAttachments[$type][] = $attachment['id'];
                 }
@@ -362,10 +362,10 @@ class MailRecord
     /**
      * Returns an EmailIdentity object from the set of recipients data that is passed in.
      *
-     * @deprecated This method is no longer used and is not recommended.
-     * @see MailRecord::addRecipients()
      * @param $data
      * @return EmailIdentity
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailRecord::addRecipients()
      */
     protected function generateEmailIdentity($data)
     {
@@ -390,36 +390,36 @@ class MailRecord
     /**
      * Returns the Api Response Record
      *
-     * @deprecated This method is no longer used and is not recommended.
-     * @see MailRecord::toEmailBean()
      * @param string $status Status that came in on the request
      * @param Email $email
      * @return array
+     * @see MailRecord::toEmailBean()
+     * @deprecated This method is no longer used and is not recommended.
      */
     protected function toApiResponse($status, $email)
     {
         LoggerManager::getLogger()->deprecated('MailRecord::toApiResponse() has been deprecated.');
 
-        $response = array(
-            "id" => $email->id,
-            "date_entered" => $email->date_entered,
-            "date_modified" => $email->date_modified,
-            "assigned_user_id" => $email->assigned_user_id,
-            "modified_user_id" => $email->modified_user_id,
-            "created_by" => $email->created_by,
-            "deleted" => $email->deleted,
-            "to_addresses" => $this->toAddresses,
-            "cc_addresses" => $this->ccAddresses,
-            "bcc_addresses" => $this->bccAddresses,
-            "attachments" => $this->attachments,
-            "teams" => $this->teams,
-            "related" => $this->related,
-            "subject" => $this->subject,
-            "html_body" => $this->html_body,
-            "text_body" => $this->text_body,
-            "status" => ($status == 'ready') ? 'sent' : $status,
+        $response = [
+            'id' => $email->id,
+            'date_entered' => $email->date_entered,
+            'date_modified' => $email->date_modified,
+            'assigned_user_id' => $email->assigned_user_id,
+            'modified_user_id' => $email->modified_user_id,
+            'created_by' => $email->created_by,
+            'deleted' => $email->deleted,
+            'to_addresses' => $this->toAddresses,
+            'cc_addresses' => $this->ccAddresses,
+            'bcc_addresses' => $this->bccAddresses,
+            'attachments' => $this->attachments,
+            'teams' => $this->teams,
+            'related' => $this->related,
+            'subject' => $this->subject,
+            'html_body' => $this->html_body,
+            'text_body' => $this->text_body,
+            'status' => ($status == 'ready') ? 'sent' : $status,
             'state' => $email->state,
-        );
+        ];
 
         if (!empty($this->date_sent)) {
             $timedate = TimeDate::getInstance();

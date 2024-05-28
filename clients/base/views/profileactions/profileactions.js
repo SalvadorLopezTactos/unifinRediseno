@@ -106,9 +106,9 @@
 
 
             // in impersonation mode default logout replaced by finish impersonation strategy
-            // and also disabled possibility change password
+            // and also disabled possibility change password or reset multi-factor auth
             if (impersonationMode) {
-                if (item.label === 'LBL_LOGOUT' || item.label === 'LBL_CHANGE_PASSWORD') {
+                if (['LBL_LOGOUT', 'LBL_CHANGE_PASSWORD', 'LBL_RESET_MFA'].includes(item.label)) {
                     return;
                 }
             } else {
@@ -130,7 +130,7 @@
     filterMenuProperties:function(singleItem){
         if(singleItem['label'] === 'LBL_PROFILE'){
             singleItem['img_url'] = this.pictureUrl;
-        } else if (singleItem.label === 'LBL_CHANGE_PASSWORD') {
+        } else if (singleItem.label === 'LBL_CHANGE_PASSWORD' && app.config.idmModeEnabled) {
             singleItem.route += '?user_hint=' + encodeURIComponent(app.utils.createUserSrn(app.user.id));
         }
         return singleItem;

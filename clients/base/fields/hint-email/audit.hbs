@@ -15,14 +15,14 @@
         <div {{#if ../../dir}} dir="{{../../../dir}}"{{/if}} class="audit-email">
             <div class="{{#if ../../ellipsis}}ellipsis_inline{{/if}}"
             rel="tooltip" title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}"
-            data-placement="bottom" data-action="email" data-email-address-id="{{email_address_id}}">
+            data-bs-placement="bottom" data-action="email" data-email-address-id="{{email_address_id}}">
                 {{email_address}}
             </div>
             <a href="javascript:void(0);"
                data-action="audit-email-address"
                data-email-address-id="{{email_address_id}}"
                rel="tooltip"
-               data-placement="bottom"
+               data-bs-placement="bottom"
                title="{{str 'LBL_AUDIT_EMAIL_TOOLTIP' this.module}}">
                <i class="sicon sicon-list-view"></i>
             </a>

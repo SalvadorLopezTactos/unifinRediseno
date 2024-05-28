@@ -17,7 +17,7 @@ trait Oauth2RedirectTrait
      *
      * @param array $params Ignored
      */
-    public function process($params = array())
+    public function process($params = [])
     {
         global $sugar_config;
         $this->context = $this->request->getValidInputRequest(

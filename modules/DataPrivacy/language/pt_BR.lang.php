@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Privacidade de dados',
     'LBL_MODULE_NAME_SINGULAR' => 'Privacidade de dados',
     'LBL_NUMBER' => 'Número',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Nenhum Campo ou Registro foi marcado para ser apagado.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Painel de registros de privacidade de dados',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco em privacidade de dados',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Linha do tempo de privacidade de dados',
 
     // list view
     'LBL_HELP_RECORDS' => 'O módulo de Privacidade de dados controla as atividades de privacidade, incluindo a autorização e as solicitações do assunto, para ajudar os procedimentos de privacidade da sua organização. Crie registos de privacidade de dados relacionados com o registro de um indivíduo (por exemplo, um contato) para controlar a autorização ou tomar medidas referentes a uma solicitação de privacidade.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'O módulo de Privacidade de dados controla as atividades de privacidade, incluindo a autorização e as solicitações do assunto, para ajudar os procedimentos de privacidade da sua organização. Crie registros de privacidade de dados relacionados com o registro de um indivíduo (por exemplo, um contato) para controlar a autorização ou tomar medidas referentes a uma solicitação de privacidade. Depois de concluída a ação necessária, os usuários com a função de Administrador de Privacidade de dados podem clicar em "Concluir" ou "Rejeitar" para atualizar o estado.
 
 Para as solicitações de eliminação, selecione "Marcar para apagar" para cada um dos registros incluídos nos subpainéis seguintes. Depois de selecionados todos os campos desejados, ao clicar em "Apagar e Concluir" serão permanentemente eliminados os valores dos campos e os registros de privacidade de dados serão marcados como concluídos.',
-);
+];

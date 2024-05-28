@@ -11,27 +11,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'E-mail arkivering',
-    'LBL_SNIP_SUMMARY' => "E-mail arkivering er en automatisk import service, der giver brugerne mulighed for at importere e-mails til Sugar ved at sende dem fra enhver mail-klient eller service til en fra Sugar angivet e-mail-adresse. Hver Sugar instans har sin egen unikke e-mail-adresse. For at importere e-mails, sender brugeren mails til den medfølgende e-mail-adresse ved hjælp af Til, Cc og Bcc felterne. E-mail arkiveringsservicen importerer så modtagne e-mails til Sugar instansen. Servicen importerer e-mails, sammen med eventuelle vedhæftede filer, billeder og kalenderoplysninger og opretter poster i applikationen, der er forbundet med eksisterende poster baseret på matchende e-mail adresser.
+    'LBL_SNIP_SUMMARY' => 'E-mail arkivering er en automatisk import service, der giver brugerne mulighed for at importere e-mails til Sugar ved at sende dem fra enhver mail-klient eller service til en fra Sugar angivet e-mail-adresse. Hver Sugar instans har sin egen unikke e-mail-adresse. For at importere e-mails, sender brugeren mails til den medfølgende e-mail-adresse ved hjælp af Til, Cc og Bcc felterne. E-mail arkiveringsservicen importerer så modtagne e-mails til Sugar instansen. Servicen importerer e-mails, sammen med eventuelle vedhæftede filer, billeder og kalenderoplysninger og opretter poster i applikationen, der er forbundet med eksisterende poster baseret på matchende e-mail adresser.
 <br><br>Eksempel: Som bruger, når jeg får vist en konto, være i stand til at se alle de e-mails, der er forbundet med kontoen baseret på e-mail-adressen i konto posten. Jeg vil også kunne se e-mails, der er forbundet med kontaktpersoner relateret til kontoen.
 <br><br>Accepter vilkårene nedenfor og klik på Aktiver for at begynde at bruge servicen. Du kan deaktivere tjenesten til enhver tid. Når tjenesten er aktiveret, vises e-mailadressen der bruges af servicen.
-<br><br>",
-	'LBL_REGISTER_SNIP_FAIL' => 'Kunne ikke kontakte e-mail arkiveringsservicen: %s<br>',
-	'LBL_CONFIGURE_SNIP' => 'E-mail arkivering',
+<br><br>',
+    'LBL_REGISTER_SNIP_FAIL' => 'Kunne ikke kontakte e-mail arkiveringsservicen: %s<br>',
+    'LBL_CONFIGURE_SNIP' => 'E-mail arkivering',
     'LBL_DISABLE_SNIP' => 'Deaktivér',
     'LBL_SNIP_APPLICATION_UNIQUE_KEY' => 'Applikations unik nøgle',
     'LBL_SNIP_USER' => 'E-mail arkiveringsbruger',
     'LBL_SNIP_PWD' => 'E-mail arkiveringspassword',
     'LBL_SNIP_SUGAR_URL' => 'Sugar instans URL',
-	'LBL_SNIP_CALLBACK_URL' => 'E-mail arkiverings URL',
+    'LBL_SNIP_CALLBACK_URL' => 'E-mail arkiverings URL',
     'LBL_SNIP_USER_DESC' => 'E-mail arkiverings bruger',
     'LBL_SNIP_KEY_DESC' => 'E-mail arkiverings OAuth key. Bruges til at få adgang til denne instans i forbindelse med import af e-mails.',
     'LBL_SNIP_STATUS_OK' => 'Aktiveret',
@@ -42,17 +41,17 @@ $mod_strings = array(
     'LBL_SNIP_STATUS_FAIL_SUMMARY' => 'E-mail arkiverings servicen er ikke tilgængelig i øjeblikket. Enten er servicen nede eller forbindelsen til Sugar instansen er fejlet.',
     'LBL_SNIP_GENERIC_ERROR' => 'E-mail arkiverings servicen er ikke tilgængelig i øjeblikket. Enten er servicen nede eller forbindelsen til Sugar instansen er fejlet.',
 
-	'LBL_SNIP_STATUS_RESET' => 'Ikke kørt endnu',
-	'LBL_SNIP_STATUS_PROBLEM' => 'Problem: %s',
-    'LBL_SNIP_NEVER' => "Aldrig",
-    'LBL_SNIP_STATUS_SUMMARY' => "E-mail arkiverings service status:",
-    'LBL_SNIP_ACCOUNT' => "Virksomhed",
-    'LBL_SNIP_STATUS' => "Status",
-    'LBL_SNIP_LAST_SUCCESS' => "Sidste succesfulde kørsel",
-    "LBL_SNIP_DESCRIPTION" => "E-mail arkiverings servicen er et autoamtisk arkiveringssystem.",
-    "LBL_SNIP_DESCRIPTION_SUMMARY" => "Den tillader dig at se e-mails som er blevet sendt til eller fra dine kontakter i SugarCRM uden at du manuelt skal importere eller linke e-mails",
-    "LBL_SNIP_PURCHASE_SUMMARY" => "For at kunne bruge e-mail arkivering skal du købe en licens til din SugarCRM instans",
-    "LBL_SNIP_PURCHASE" => "Klik her for at købe",
+    'LBL_SNIP_STATUS_RESET' => 'Ikke kørt endnu',
+    'LBL_SNIP_STATUS_PROBLEM' => 'Problem: %s',
+    'LBL_SNIP_NEVER' => 'Aldrig',
+    'LBL_SNIP_STATUS_SUMMARY' => 'E-mail arkiverings service status:',
+    'LBL_SNIP_ACCOUNT' => 'Virksomhed',
+    'LBL_SNIP_STATUS' => 'Status',
+    'LBL_SNIP_LAST_SUCCESS' => 'Sidste succesfulde kørsel',
+    'LBL_SNIP_DESCRIPTION' => 'E-mail arkiverings servicen er et autoamtisk arkiveringssystem.',
+    'LBL_SNIP_DESCRIPTION_SUMMARY' => 'Den tillader dig at se e-mails som er blevet sendt til eller fra dine kontakter i SugarCRM uden at du manuelt skal importere eller linke e-mails',
+    'LBL_SNIP_PURCHASE_SUMMARY' => 'For at kunne bruge e-mail arkivering skal du købe en licens til din SugarCRM instans',
+    'LBL_SNIP_PURCHASE' => 'Klik her for at købe',
     'LBL_SNIP_EMAIL' => 'E-mail arkiverings adresse',
     'LBL_SNIP_AGREE' => "I agree to the above terms and the <a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>privacy policy</a>.",
     'LBL_SNIP_PRIVACY' => 'fortrolighedspolitik',
@@ -68,8 +67,8 @@ $mod_strings = array(
     'LBL_CONTACT_SUPPORT' => 'Venligst prøv igen eller kontakt SugarCRM support.',
     'LBL_SNIP_SUPPORT' => 'Venligst kontakt SugarCRM support for at få hjælp.',
     'ERROR_BAD_RESULT' => 'Servicen returnerede en fejl',
-	'ERROR_NO_CURL' => 'cURL udvidelser er påkrævet, men er ikke aktiveret.',
-	'ERROR_REQUEST_FAILED' => 'Kunne ikke få forbindelse til serveren',
+    'ERROR_NO_CURL' => 'cURL udvidelser er påkrævet, men er ikke aktiveret.',
+    'ERROR_REQUEST_FAILED' => 'Kunne ikke få forbindelse til serveren',
 
     'LBL_CANCEL_BUTTON_TITLE' => 'Annullér',
 
@@ -77,4 +76,4 @@ $mod_strings = array(
     'LBL_SNIP_MOUSEOVER_EMAIL' => 'Dette er e-mail arkiverings e-mail adressen som skal benyttes for at importere e-mail i Sugar.',
     'LBL_SNIP_MOUSEOVER_SERVICE_URL' => 'Dette er e-mail arkiveringsserverens URL. Alle forspørgsler såsom aktivering og deaktivering af e-mai arkiverings servicen vil blive sendt gennem denne URL.',
     'LBL_SNIP_MOUSEOVER_INSTANCE_URL' => 'Dette er din Sugar instans&#39; webservices URL. E-mail arkiveringsserveren tilslutter sig til din server via denne URL.',
-);
+];

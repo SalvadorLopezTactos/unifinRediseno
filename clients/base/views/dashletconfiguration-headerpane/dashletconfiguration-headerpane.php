@@ -9,32 +9,32 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs["base"]["view"]["dashletconfiguration-headerpane"] = array(
-    "buttons" => array(
-        array(
-            "name"      => "cancel_button",
-            "type"      => "button",
-            "label"     => "LBL_CANCEL_BUTTON_LABEL",
-            "css_class" => "btn-invisible btn-link",
-        ),
-        array(
-            "name"      => "save_button",
-            "type"      => "button",
-            "label"     => "LBL_SAVE_BUTTON_LABEL",
-            "css_class" => "btn-primary",
-        ),
-    ),
-    "panels" => array(
-        array(
-            "name" => "header",
-            "fields" => array(
-                array(
-                    "type" => "base",
-                    "name" => "label",
-                    "placeholder" => "LBL_NAME",
-                    "required" => true,
-                ),
-            )
-        )
-    )
-);
+$viewdefs['base']['view']['dashletconfiguration-headerpane'] = [
+    'buttons' => [
+        [
+            'name' => 'cancel_button',
+            'type' => 'button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
+            'css_class' => 'btn-invisible btn-link',
+        ],
+        [
+            'name' => 'save_button',
+            'type' => 'button',
+            'label' => 'LBL_SAVE_BUTTON_LABEL',
+            'css_class' => 'btn-primary',
+        ],
+    ],
+    'panels' => [
+        [
+            'name' => 'header',
+            'fields' => [
+                [
+                    'type' => 'base',
+                    'name' => 'label',
+                    'placeholder' => 'LBL_NAME',
+                    'required' => true,
+                ],
+            ],
+        ],
+    ],
+];

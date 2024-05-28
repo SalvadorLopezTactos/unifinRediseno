@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -19,5 +18,3 @@
 $contactForm = new ContactFormBase();
 $prefix = empty($_REQUEST['dup_checked']) ? '' : 'Contacts';
 $contactForm->handleSave($prefix, true, false);
-
-?>

@@ -9,26 +9,26 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['DataPrivacy']['base']['layout']['mark-for-erasure'] = array(
+$viewdefs['DataPrivacy']['base']['layout']['mark-for-erasure'] = [
     'css_class' => 'row-fluid',
-    'components' => array(
-        array(
-            'layout' => array(
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'base',
                 'name' => 'main-pane',
-                'css_class' => 'main-pane span12',
-                'components' => array(
-                    array(
+                'css_class' => 'main-pane span12 overflow-y-auto',
+                'components' => [
+                    [
                         'view' => 'mark-for-erasure-headerpane',
-                    ),
-                    array(
+                    ],
+                    [
                         'view' => 'filtered-search',
-                    ),
-                    array(
+                    ],
+                    [
                         'view' => 'mark-for-erasure',
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['access-denied'] = array(
-    'components' => array(
-        array(
+$viewdefs['base']['layout']['access-denied'] = [
+    'components' => [
+        [
             'view' => 'access-denied',
-        ),
-    ),
-);
+        ],
+    ],
+];

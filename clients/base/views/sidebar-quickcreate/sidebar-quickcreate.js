@@ -16,5 +16,5 @@
 ({
     extendsFrom: 'QuickcreateView',
 
-    className: 'flyout-quickcreate min-w-40 max-w-60',
+    className: 'flyout-quickcreate min-w-[10rem] max-w-[15rem]',
 })

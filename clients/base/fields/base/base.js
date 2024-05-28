@@ -77,6 +77,37 @@
     },
 
     /**
+     * @inheritdoc
+     */
+    render: function() {
+        this._super('render');
+
+        this.addElListeners();
+    },
+
+    /**
+     * Trigger click by edit block if user clicked on field
+     */
+    addElListeners: function() {
+        if (!this.$el) {
+            return;
+        }
+
+        this.$el.on('click', (e) => {
+            const isField = (target) => {
+                return $(target).hasClass('fieldset-inline') ||
+                    $(target).hasClass('ellipsis_inline') ||
+                    $(target).closest('.record-label').length;
+            };
+
+            if (isField(e.target) || isField(e.currentTarget)) {
+                $(e.target).closest('.record-cell:not(.edit)')
+                    .find('.record-edit-link-wrapper:not(.hide) > a').click();
+            }
+        });
+    },
+
+    /**
      * Takes care of building href for when there's a def.link and also if is
      * bwc enabled.
      *
@@ -107,6 +138,18 @@
     },
 
     /**
+     * Used by the FocusDrawer plugin to get the name of the record this
+     * field links to
+     * @param {Object} $el
+     * @return {string} the name of the related record
+     */
+    getFocusContextTitle: function($el) {
+        return $el.data('bs-original-title') ||
+            $el.data('originalTitle') ||
+            (this.model && this.model.get('name') ? this.model.get('name') : '');
+    },
+
+    /**
      * Set the default field value from metadata for a new model
      *  [
      *      ...
@@ -128,5 +171,13 @@
         if (_.isFunction(this.model.setDefault)) {
             this.model.setDefault(this.name, this.def.default);
         }
-    }
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        this.$el.off('click');
+        this._super('_dispose');
+    },
 })

@@ -33,6 +33,8 @@
      */
     bindDataChange: function() {
         this.collection.on('add remove reset', this.render, this);
+        this.collection.on('change:show_column_total', this._toggleDepedent, this);
+        this.listenTo(this.context, 'pipeline:config:set-active-module', this._setupActiveModule);
     },
 
     /**
@@ -40,19 +42,23 @@
      */
     render: function() {
         this._super('render');
-        this.$('#tabs').tabs({
-            active: this.context.get('activeTabIndex'),
-            classes: {
-                'ui-tabs-active': 'active',
-            },
-
-            activate: function(event, ui) {
-                self.$('#tabs').tabs('option', 'ui-tabs-active');
-            }
-        });
-
         //event used in tile preview
         this.context.trigger('pipeline:config:tabs-initialized');
+    },
+
+    /**
+     * @inheritdoc
+     * When rendering fields, handle the state of the axis labels
+     */
+    _renderField: function(field) {
+        let noTotalableFields = _.isEmpty(_.first(this.activeModule).get('tabContent').allTotalableFields);
+        if (field.name === 'show_column_total_options' && noTotalableFields) {
+            return;
+        }
+        this._super('_renderField', [field]);
+
+        // manage display state of fieldsets with toggle
+        this._toggleDepedent();
     },
 
     /**
@@ -77,5 +83,26 @@
         }, this);
 
         this.meta.customizedFields = customizedFields;
-    }
+    },
+
+    /**
+     * Set active module and render
+     *
+     * @param {string} activeModule
+     */
+    _setupActiveModule: function(activeModule) {
+        this.activeModule = _.filter(this.collection.models, function(model) {
+            model.set('selectedModule', model.get('enabled_module') === activeModule);
+            return model.get('enabled_module') === activeModule;
+        });
+        this.render();
+    },
+
+    /**
+     * Handle the conditional display of settings input field based on checkbox toggle state
+     */
+    _toggleDepedent: function() {
+        const checkboxField = this.getField('show_column_total').$('input');
+        this.getField('total_field').setDisabled(!checkboxField.prop('checked'));
+    },
 })

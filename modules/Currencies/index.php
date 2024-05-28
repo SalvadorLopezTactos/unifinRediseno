@@ -9,13 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- /*********************************************************************************
-
+/*********************************************************************************
  ********************************************************************************/
-
-
-
-
 
 
 global $theme;
@@ -26,43 +21,43 @@ global $current_user, $focus;
 
 echo getClassicModuleTitle(
     'Administration',
-    array(
+    [
         '<a href="#Administration">' . htmlspecialchars(translate('LBL_MODULE_NAME', 'Administration'), ENT_COMPAT) . '</a>',
         $mod_strings['LBL_MODULE_NAME'],
-    ),
+    ],
     false
 );
 
-if($current_user->is_admin){
+if ($current_user->is_admin) {
+    $focus = BeanFactory::newBean('Currencies');
+    $lc = new ListCurrency();
+    $lc->handleAdd();
 
-$focus = BeanFactory::newBean('Currencies');
-$lc = new ListCurrency();
-$lc->handleAdd();
-
-// Flag that tells the template whether to request a new metadata payload
-$refreshMetadata = !empty($lc->recordSaved);
+    // Flag that tells the template whether to request a new metadata payload
+    $refreshMetadata = !empty($lc->recordSaved);
 
     if (isset($_REQUEST['merge']) && $_REQUEST['merge'] === 'true') {
         $isMerge = true;
     }
-if(isset($_REQUEST['domerge'])){
-	$currencies = $_REQUEST['mergecur'];
-	
-	
-	$opp = BeanFactory::newBean('Opportunities');
-	$opp->update_currency_id($currencies, $_REQUEST['mergeTo'] );
-	
-	$product = BeanFactory::newBean('ProductTemplates');
-	$product->update_currency_id($currencies, $_REQUEST['mergeTo'] );
+    if (isset($_REQUEST['domerge'])) {
+        $currencies = $_REQUEST['mergecur'];
 
-	$quote = BeanFactory::newBean('Quotes');
-	$quote->update_currency_id($currencies, $_REQUEST['mergeTo'] );
-	foreach($currencies as $cur){
-		if($cur != $_REQUEST['mergeTo'])
-		$focus->mark_deleted($cur);
-	}
-}
-$lc->lookupCurrencies();
+
+        $opp = BeanFactory::newBean('Opportunities');
+        $opp->update_currency_id($currencies, $_REQUEST['mergeTo']);
+
+        $product = BeanFactory::newBean('ProductTemplates');
+        $product->update_currency_id($currencies, $_REQUEST['mergeTo']);
+
+        $quote = BeanFactory::newBean('Quotes');
+        $quote->update_currency_id($currencies, $_REQUEST['mergeTo']);
+        foreach ($currencies as $cur) {
+            if ($cur != $_REQUEST['mergeTo']) {
+                $focus->mark_deleted($cur);
+            }
+        }
+    }
+    $lc->lookupCurrencies();
     if (isset($focus->id)) {
         $focus_id = $focus->id;
     } else {
@@ -123,7 +118,7 @@ $lc->lookupCurrencies();
     $ListView->xTemplateAssign('POSTTABLE', '</form>');
     $ListView->setHeaderText($merge_button);
 
-    $ListView->processListView($lc->list, "main", "CURRENCY");
+    $ListView->processListView($lc->list, 'main', 'CURRENCY');
 
     if (!empty($_GET['record']) && !isset($_POST['edit'])) {
         $focus->retrieve($_GET['record']);
@@ -135,40 +130,44 @@ $lc->lookupCurrencies();
     } else {
         echo get_form_header(htmlspecialchars($app_strings['LBL_EDIT_BUTTON_LABEL'], ENT_COMPAT) . ' &raquo; ' . htmlspecialchars($focus->name, ENT_COMPAT) . $headerHTML, $editButtonHTML, false);
     }
-$sugar_smarty = new Sugar_Smarty();
+    $sugar_smarty = new Sugar_Smarty();
 
-	$sugar_smarty->assign("MOD", $mod_strings);
-	$sugar_smarty->assign("APP", $app_strings);
+    $sugar_smarty->assign('MOD', $mod_strings);
+    $sugar_smarty->assign('APP', $app_strings);
 
-// Load in the full ISO 4217 list, so we can dynamically populate the currency strings
-    require_once('modules/Currencies/iso4217.php');
+    // Load in the full ISO 4217 list, so we can dynamically populate the currency strings
+    require_once 'modules/Currencies/iso4217.php';
     $json = getJSONobj();
     $js_iso4217 = $json->encode($fullIsoList);
-    $sugar_smarty->assign('JS_ISO4217',$js_iso4217);
+    $sugar_smarty->assign('JS_ISO4217', $js_iso4217);
 
-	if (isset($_REQUEST['return_module'])) $sugar_smarty->assign("RETURN_MODULE", $_REQUEST['return_module']);
-	if (isset($_REQUEST['return_action'])) $sugar_smarty->assign("RETURN_ACTION", $_REQUEST['return_action']);
-	if (isset($_REQUEST['return_id'])) $sugar_smarty->assign("RETURN_ID", $_REQUEST['return_id']);
+    if (isset($_REQUEST['return_module'])) {
+        $sugar_smarty->assign('RETURN_MODULE', $_REQUEST['return_module']);
+    }
+    if (isset($_REQUEST['return_action'])) {
+        $sugar_smarty->assign('RETURN_ACTION', $_REQUEST['return_action']);
+    }
+    if (isset($_REQUEST['return_id'])) {
+        $sugar_smarty->assign('RETURN_ID', $_REQUEST['return_id']);
+    }
 
-	$sugar_smarty->assign("JAVASCRIPT", get_set_focus_js());
-    $sugar_smarty->assign("THEME", SugarThemeRegistry::current()->__toString());
-	$sugar_smarty->assign("ID", $focus->id);
-	$sugar_smarty->assign('NAME', $focus->name);
-	$sugar_smarty->assign('STATUS', $focus->status);
-	$sugar_smarty->assign('ISO4217', $focus->iso4217);
-	$sugar_smarty->assign('CONVERSION_RATE', $focus->conversion_rate);
-	$sugar_smarty->assign('SYMBOL', $focus->symbol);
-	$sugar_smarty->assign('STATUS_OPTIONS', get_select_options_with_id($mod_strings['currency_status_dom'], $focus->status));
-	$sugar_smarty->assign('REFRESHMETADATA', $refreshMetadata);
-	$sugar_smarty->display("modules/Currencies/EditView.tpl");
-	$javascript = new javascript();
-	$javascript->setFormName('EditView');
-	$javascript->setSugarBean($focus);
-	$javascript->addAllFields('',array('iso4217'=>'iso4217'));
-	echo $javascript->getScript();
-    echo '<script type="text/javascript">addToValidateMoreThan("EditView","conversion_rate","float",true,'. json_encode($mod_strings['LBL_BELOW_MIN'], JSON_HEX_TAG) . ',0.000001);</script>';
-}
-else
-{
+    $sugar_smarty->assign('JAVASCRIPT', get_set_focus_js());
+    $sugar_smarty->assign('THEME', SugarThemeRegistry::current()->__toString());
+    $sugar_smarty->assign('ID', $focus->id);
+    $sugar_smarty->assign('NAME', $focus->name);
+    $sugar_smarty->assign('STATUS', $focus->status);
+    $sugar_smarty->assign('ISO4217', $focus->iso4217);
+    $sugar_smarty->assign('CONVERSION_RATE', $focus->conversion_rate);
+    $sugar_smarty->assign('SYMBOL', $focus->symbol);
+    $sugar_smarty->assign('STATUS_OPTIONS', get_select_options_with_id($mod_strings['currency_status_dom'], $focus->status));
+    $sugar_smarty->assign('REFRESHMETADATA', $refreshMetadata);
+    $sugar_smarty->display('modules/Currencies/EditView.tpl');
+    $javascript = new javascript();
+    $javascript->setFormName('EditView');
+    $javascript->setSugarBean($focus);
+    $javascript->addAllFields('', ['iso4217' => 'iso4217']);
+    echo $javascript->getScript();
+    echo '<script type="text/javascript">addToValidateMoreThan("EditView","conversion_rate","float",true,' . json_encode($mod_strings['LBL_BELOW_MIN'], JSON_HEX_TAG) . ',0.000001);</script>';
+} else {
     echo $mod_strings['LBL_ADMIN_ONLY'];
 }

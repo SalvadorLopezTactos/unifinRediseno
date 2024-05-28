@@ -11,57 +11,57 @@
  */
 
 
-$viewdefs['Tags']['base']['view']['create'] = array(
+$viewdefs['Tags']['base']['view']['create'] = [
     'template' => 'record',
-    'buttons' => array(
-        array(
-            'name'      => 'cancel_button',
-            'type'      => 'button',
-            'label'     => 'LBL_CANCEL_BUTTON_LABEL',
+    'buttons' => [
+        [
+            'name' => 'cancel_button',
+            'type' => 'button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
-            'events' => array(
+            'events' => [
                 'click' => 'button:cancel_button:click',
-            ),
-        ),
-        array(
-            'name'      => 'restore_button',
-            'type'      => 'button',
-            'label'     => 'LBL_RESTORE',
+            ],
+        ],
+        [
+            'name' => 'restore_button',
+            'type' => 'button',
+            'label' => 'LBL_RESTORE',
             'css_class' => 'btn-invisible btn-link',
-            'showOn'    => 'select',
-            'events' => array(
+            'showOn' => 'select',
+            'events' => [
                 'click' => 'button:restore_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'save_button',
             'type' => 'button',
             'label' => 'LBL_SAVE_BUTTON_LABEL',
             'primary' => true,
             'showOn' => 'create',
-            'events' => array(
+            'events' => [
                 'click' => 'button:save_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'type' => 'actiondropdown',
             'name' => 'select_dropdown',
             'primary' => true,
             'showOn' => 'select',
-            'buttons' => array(
-                array(
+            'buttons' => [
+                [
                     'type' => 'rowaction',
                     'name' => 'save_button',
                     'label' => 'LBL_SAVE_BUTTON_LABEL',
-                    'events' => array(
+                    'events' => [
                         'click' => 'button:save_button:click',
-                    ),
-                ),
-            ),
-        ),
-        array(
+                    ],
+                ],
+            ],
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

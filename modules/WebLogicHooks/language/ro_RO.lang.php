@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Controale logică web',
     'LBL_MODULE_NAME_SINGULAR' => 'Web Logic Hook',
     'LBL_MODULE_TITLE' => 'Controale logică web',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => 'Metoda generare solicitare',
     'LBL_TRIGGER_EVENT' => 'Eveniment declansator',
     'LBL_URL' => 'URL',
-);
+];

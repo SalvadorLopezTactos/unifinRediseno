@@ -33,12 +33,16 @@
     initDateDetails: function() {
         let fieldName;
         if (this.activity) {
-            if (this.meta.panels[0].dateTimeStamp) {
-                fieldName = this.meta.panels[0].dateTimeStamp.name;
-                this.detailDateTimeTooltip = this.meta.panels[0].dateTimeStamp.tooltip;
+            const meta = this.getModulesCardMeta(this.activity.module);
+
+            if (meta.record_date) {
+                fieldName = meta.record_date;
+                this.detailDateTimeTooltip = meta.date_tooltip;
                 if (!this.detailDateTimeTooltip) {
                     let field = app.metadata.getField({module: this.activity.module, name: fieldName});
-                    this.detailDateTimeTooltip = field.label || field.vname;
+                    if (field) {
+                        this.detailDateTimeTooltip = field.label || field.vname || 'LBL_LIST_DATE_ENTERED';
+                    }
                 }
             } else {
                 fieldName = 'date_entered';
@@ -46,6 +50,15 @@
             }
             this.setDateDetails(this.activity.get(fieldName));
         }
+    },
+
+    /**
+     * Get the activity-timeline dashlet metadata for the baseModule
+     *
+     * @param {string} baseModule module name
+     */
+    getModulesCardMeta: function(baseModule) {
+        return app.metadata.getView(baseModule, 'activity-card-definition');
     },
 
     /**
@@ -58,7 +71,16 @@
             var date = app.date(dateString);
 
             this.detailDay = date.format('dddd');
-            this.detailDateTime = date.formatUser();
+            this.detailDateTime = this.formatDate(date);
         }
-    }
+    },
+
+    /**
+     * Set date variables for use in the hbs template
+     *
+     * @param {Object} date the date string
+     */
+    formatDate: function(date) {
+        return date.formatUser();
+    },
 })

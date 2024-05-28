@@ -10,16 +10,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['pmse_Business_Rules']['base']['view']['businessrules-import'] = array(
-    'panels' => array(
-        array(
-            'fields' => array(
-                array(
+$viewdefs['pmse_Business_Rules']['base']['view']['businessrules-import'] = [
+    'panels' => [
+        [
+            'fields' => [
+                [
                     'name' => 'businessrules_import',
                     'type' => 'file',
                     'view' => 'edit',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

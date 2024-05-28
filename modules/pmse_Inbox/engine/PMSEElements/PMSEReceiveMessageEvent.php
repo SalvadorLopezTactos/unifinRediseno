@@ -36,12 +36,12 @@ class PMSEReceiveMessageEvent extends PMSEIntermediateEvent
      * @param type $externalAction
      * @return type
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         $result = $this->prepareResponse($flowData, 'WAIT', 'NONE');
         if (empty($externalAction)) {
             $flowData['cas_flow_status'] = 'WAITING';
-            $flowData['cas_due_date'] = date('Y-m-d H:i:s', strtotime("+1 seconds"));
+            $flowData['cas_due_date'] = date('Y-m-d H:i:s', strtotime('+1 seconds'));
             $result = $this->prepareResponse($flowData, 'WAIT', 'CREATE');
         } else {
             if ($externalAction === 'EVALUATE_RELATED_MODULE' || $externalAction === 'EVALUATE_MAIN_MODULE') {

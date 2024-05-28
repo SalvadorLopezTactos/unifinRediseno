@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper;
 
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\ActivityHandlerFactory;
@@ -19,11 +20,15 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\ActivityHandlerFactory;
  */
 class ChildActivityHelper
 {
+    /**
+     * @var mixed|null|mixed[]|\SugarBean|bool|\SugarBean[]
+     */
+    public static $children = [];
 
     /**
      * @var mixed|null|mixed[]|\SugarBean|bool|\SugarBean[]
      */
-    public $children;
+    private static $countTemplateChildren = [];
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\parentHelper
      */
@@ -61,7 +66,9 @@ class ChildActivityHelper
         $results = $query->execute();
 
         foreach ($results as $result) {
-            $activities[] = \BeanFactory::retrieveBean($module_name, $result['id']);
+            if (!isset(self::$children[$bean->id][$result['id']])) {
+                $activities[] = \BeanFactory::retrieveBean($module_name, $result['id']);
+            }
         }
 
         return $activities;
@@ -76,12 +83,13 @@ class ChildActivityHelper
     public function getChildren(\SugarBean $bean)
     {
         $this->loadChildren($bean);
-        return $this->children;
+        return self::$children[$bean->id];
     }
 
     public function resetChildren()
     {
-        $this->children = null;
+        self::$children = [];
+        self::$countTemplateChildren = [];
     }
 
     /**
@@ -91,12 +99,49 @@ class ChildActivityHelper
      */
     public function loadChildren(\SugarBean $bean)
     {
-        $this->children = [];
+        if (!isset(self::$children[$bean->id])) {
+            self::$children[$bean->id] = [];
+        }
+
+        $this->countTemplateChildren($bean);
+
+        if (!is_countable(self::$children[$bean->id]) && !is_array(self::$children[$bean->id])) {
+            self::$children[$bean->id] = self::$children[$bean->id];
+        }
+
+        // When guide is being created and all children have not been loaded yet then we need to keep updating children
+        $allChildrenLoaded = safeCount(self::$children[$bean->id]) >= self::$countTemplateChildren[$bean->id];
+
+        if (!empty(self::$children[$bean->id]) && $allChildrenLoaded) {
+            return;
+        }
 
         foreach (ActivityHandlerFactory::all() as $activityHandler) {
-            $this->children = array_merge($this->children, $activityHandler->retrieveChildren($bean, $activityHandler->getModuleName()));
+            foreach ($activityHandler->retrieveChildren($bean, $activityHandler->getModuleName()) as $child) {
+                self::$children[$bean->id][$child->id] = $child;
+            }
         }
-        $this->children = $this->sortChildren($this->children);
+        self::$children[$bean->id] = $this->sortChildren(self::$children[$bean->id]);
+    }
+
+    /**
+     * Count the number of children the template of activity has
+     * @param \SugarBean $activity
+     */
+    private function countTemplateChildren(\SugarBean $activity)
+    {
+        if (!isset(self::$countTemplateChildren[$activity->id])) {
+            $template = \BeanFactory::getBean('DRI_Workflow_Task_Templates');
+            $query = new \SugarQuery();
+            $query->from($template);
+            $query->select()->setCountQuery();
+            $query->where()
+                ->equals('parent_id', $activity->dri_workflow_task_template_id);
+            $result = $query->execute();
+            $row = array_shift($result);
+            $count = array_shift($row);
+            self::$countTemplateChildren[$activity->id] = $count;
+        }
     }
 
     /**
@@ -109,7 +154,7 @@ class ChildActivityHelper
     {
         foreach ($this->getChildren($activity) as $id => $bean) {
             if ($bean->id === $child->id) {
-                $this->children[$id] = $child;
+                self::$children[$id] = $child;
             }
         }
     }
@@ -122,7 +167,7 @@ class ChildActivityHelper
      */
     private function sortChildren($activities)
     {
-        if ((is_countable($activities) ? count($activities) : 0) < 2) {
+        if (safeCount($activities) < 2) {
             return $activities;
         }
 
@@ -157,7 +202,7 @@ class ChildActivityHelper
             [$_, $order] = explode('.', $order);
         }
 
-        return (int) $order;
+        return (int)$order;
     }
 
     /**

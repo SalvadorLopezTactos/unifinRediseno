@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'แดชบอร์ดรายการไอเท็มไลน์ภาษี',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกรายการไอเท็มไลน์ภาษี',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'ประเภทผลิตภัณฑ์',
     'LBL_ASSIGNED_TO_NAME' => 'ระบุให้:',
     'LBL_ASSIGNED_TO' => 'ระบุให้',
-    'LBL_ASSIGNED_TO_ID'=>'ID ผู้ใช้ที่ระบุ',
+    'LBL_ASSIGNED_TO_ID' => 'ID ผู้ใช้ที่ระบุ',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'ชื่อผู้ใช้ที่ระบุ',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'ID ผู้ใช้ที่ระบุ',
     'LBL_CAMPAIGN_ID' => 'ID แคมเปญ',
@@ -217,4 +217,5 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'แสดงรายการบรรทัดรายได้สิบอันดับแรกเป็นแผนภูมิฟอง',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'รายการบรรทัดรายได้ของฉัน',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "รายการบรรทัดรายได้ของทีม",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์รายได้รายการสินค้า',
+];

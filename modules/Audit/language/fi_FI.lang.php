@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Tarkistusloki',
     'LBL_FIELD_NAME' => 'Kenttä',
     'LBL_OLD_NAME' => 'Vanha arvo',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Päivitä',
     'LBL_BLANK' => '-tyhjä-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tarkastuksen aikajana',
+    'LBL_CREATED' => 'Luotu',
+];

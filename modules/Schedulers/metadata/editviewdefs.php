@@ -11,25 +11,25 @@
  */
 
 
-$viewdefs['Schedulers']['EditView'] = array(
-    'templateMeta' => array(
-                            'maxColumns' => '2',
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'),
-                                            array('label' => '10', 'field' => '30'),
-                                           ),
-                            'includes'=> array(
-                                            array('file'=>'modules/Schedulers/Schedulers.js'),
-                                         ),
-                            'panelClass' => 'edit view edit508 schedulers-editview-panel',
-                           ),
+$viewdefs['Schedulers']['EditView'] = [
+    'templateMeta' => [
+        'maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+        'includes' => [
+            ['file' => 'modules/Schedulers/Schedulers.js'],
+        ],
+        'panelClass' => 'edit view edit508 schedulers-editview-panel',
+    ],
 
-    'panels' => array(
-    		'default'=>array(
-                           array('name', 'status'),
-                           array('job_function', "job_url"),
-                           array('adv_interval'),
-                           array(array('name'=>'job_interval', 'label' => 'LBL_INTERVAL', 'customCode'=>'
+    'panels' => [
+        'default' => [
+            ['name', 'status'],
+            ['job_function', 'job_url'],
+            ['adv_interval'],
+            [['name' => 'job_interval', 'label' => 'LBL_INTERVAL', 'customCode' => '
 				<div id="job_interval_advanced">
 				<script>
 					var adv_interval = {$adv_interval};
@@ -54,8 +54,8 @@ $viewdefs['Schedulers']['EditView'] = array(
 					</tr>
 				</table>
 				</div>
-				')),
-				array(array('name'=>'job_interval', 'label' => 'LBL_INTERVAL','customCode'=>'
+				']],
+            [['name' => 'job_interval', 'label' => 'LBL_INTERVAL', 'customCode' => '
 				<div id="job_interval_basic">
 				<table cellpadding="0" cellspacing="0" border="0">
 					<tr>
@@ -100,13 +100,13 @@ $viewdefs['Schedulers']['EditView'] = array(
 					</tr>
 				</table>
 				</div>
-				'))
-                           ),
-            'lbl_adv_options'=>array(
-                            array(array('name' => 'catch_up', 'prefix' => '{sugar_help text=$MOD.LBL_CATCH_UP_WARNING}')),
-                           	array('date_time_start','time_from'),
-                           	array('date_time_end','time_to'),
-                           	),
-	),
+				']],
+        ],
+        'lbl_adv_options' => [
+            [['name' => 'catch_up', 'prefix' => '{sugar_help text=$MOD.LBL_CATCH_UP_WARNING}']],
+            ['date_time_start', 'time_from'],
+            ['date_time_end', 'time_to'],
+        ],
+    ],
 
-);
+];

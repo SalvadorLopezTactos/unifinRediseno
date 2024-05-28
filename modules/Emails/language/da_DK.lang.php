@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'VS:',
     'LBL_RE' => 'Re:',
     'LBL_BUTTON_CREATE' => 'Opret',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Vælg fra E-mail konto',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Vælg signatur',
     'LBL_SIGNATURE' => 'Signatur',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Standard signatur",
-    "LBL_SHOW_MORE_SIGNATURES" => "Flere signaturer ...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Standard signatur',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Flere signaturer ...',
     'LBL_SUBJECT' => 'Emne:',
     'LBL_TEMPLATE' => 'Skabelon',
     'LBL_TEXT_BODY' => 'Brødtekst',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Sendt klokkeslæt',
     'LBL_LIST_TO_ADDR' => 'Til',
     'LBL_LIST_TYPE' => 'Type',
-    "LBL_SELECTED_RECIPIENTS" => "Valgte modtagere",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Flere modtagere...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Adressekartotek",
+    'LBL_SELECTED_RECIPIENTS' => 'Valgte modtagere',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Flere modtagere...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Adressekartotek',
     'NTC_REMOVE_INVITEE' => 'Er du sikker på, at du vil fjerne denne modtager fra e-mailen?',
     'WARNING_SETTINGS_NOT_CONF' => 'Dine e-mail-indstillinger er ikke korrekt konfigureret til at sende e-mail. En SMTP-server ' .
         'skal konfigureres i <a href="#bwc/index.php?module=EmailMan&action=config"> e-mail-indstillinger</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Vedhæftede filer kan fejle: En forkert eller ubrugelig værdi for "upload_tmp_dir" ' .
         'blev fundet.  Ret venligst rette dette i din php.ini fil.',
     'LBL_MESSAGE_UID' => 'Besked UID',
-    'LBL_OPEN_DRAFT_ALERT' => 'E-mail er et udkast. Klik på '.
-        '<a href="javascript:void(0);" data-action="email-draft"> "{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'E-mail er et udkast. Klik på ' .
+        '<a href="javascript:void(0);" data-action="email-draft"> "{{subject}}"</a>' .
         '  for at redigere.',
     'LBL_EMAIL_BODY' => 'E-mail-meddelelse',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen E-mails',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Betjeningspanel til e-mailoptegnelser',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje for e-mail',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'ingen modtagere specificerede',
@@ -473,4 +474,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'Send e-mail',
     'LBL_MAILBOX' => 'Indgående konto',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Konfigurer en udgående e-mail-konto via <a href="#OutboundEmail"> E-mail-indstillinger </a> for at sende e-mails.',
-);
+    'LBL_TOO_SHORT' => 'Indtasts mindst {0} tegn...',
+];

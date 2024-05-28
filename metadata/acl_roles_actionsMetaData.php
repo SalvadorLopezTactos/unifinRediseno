@@ -10,73 +10,73 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['acl_roles_actions'] = array(
+$dictionary['acl_roles_actions'] = [
     'table' => 'acl_roles_actions',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'role_id' => array(
+        ],
+        'role_id' => [
             'name' => 'role_id',
             'type' => 'id',
-        ),
-        'action_id' => array(
+        ],
+        'action_id' => [
             'name' => 'action_id',
             'type' => 'id',
-        ),
-        'access_override' => array(
+        ],
+        'access_override' => [
             'name' => 'access_override',
             'type' => 'int',
             'len' => '3',
             'required' => false,
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'acl_roles_actionspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_acl_role_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'role_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_acl_action_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'action_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_del_override',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'role_id',
                 'deleted',
                 'action_id',
                 'access_override',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'acl_roles_actions' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'acl_roles_actions' => [
             'lhs_module' => 'ACLRoles',
             'lhs_table' => 'acl_roles',
             'lhs_key' => 'id',
@@ -87,6 +87,6 @@ $dictionary['acl_roles_actions'] = array(
             'join_table' => 'acl_roles_actions',
             'join_key_lhs' => 'role_id',
             'join_key_rhs' => 'action_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

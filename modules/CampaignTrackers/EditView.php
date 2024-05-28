@@ -19,7 +19,7 @@
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
-require_once('modules/CampaignTrackers/Forms.php');
+require_once 'modules/CampaignTrackers/Forms.php';
 global $app_strings;
 global $app_list_strings;
 global $mod_strings;

@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'en progreso',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Panel de Enfoque de Mensajes',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Cuadro de mando del registro de mensajes',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Línea de tiempo del mensaje',
 ];

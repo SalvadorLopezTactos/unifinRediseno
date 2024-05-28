@@ -37,7 +37,7 @@ class BulkHandler
      * List of documents being handled keyed by index name
      * @var array
      */
-    protected $documents = array();
+    protected $documents = [];
 
     /**
      * Maximum documents being sent in one bulk request as defined in
@@ -78,7 +78,6 @@ class BulkHandler
     {
         $documents = array_filter($this->documents);
         if (!empty($documents)) {
-
             /*
              * DBManager relies on $GLOBALS['log'] in certain cases instead of
              * making use of $this->log. Make sure we have it still available
@@ -91,8 +90,8 @@ class BulkHandler
             $this->finishBatch();
 
             $msg = sprintf(
-                "BulkHandler::__destruct used to flush out %s document(s)",
-                count($documents)
+                'BulkHandler::__destruct used to flush out %s document(s)',
+                safeCount($documents)
             );
             $this->container->logger->debug($msg);
         }
@@ -104,7 +103,7 @@ class BulkHandler
      */
     public function __wakeup()
     {
-        $this->documents = array();
+        $this->documents = [];
     }
 
     /**
@@ -138,15 +137,15 @@ class BulkHandler
 
         // Add document to queue
         if (empty($this->documents[$index])) {
-            $this->documents[$index] = array($document);
+            $this->documents[$index] = [$document];
         } else {
             $this->documents[$index][] = $document;
         }
 
         // When reaching the maximum, send out the request
-        if ((is_countable($this->documents[$index]) ? count($this->documents[$index]) : 0) >= $this->maxBulkThreshold) {
+        if (safeCount($this->documents[$index]) >= $this->maxBulkThreshold) {
             $this->sendBulk($index, $this->documents[$index]);
-            $this->documents[$index] = array();
+            $this->documents[$index] = [];
         }
     }
 
@@ -159,7 +158,7 @@ class BulkHandler
         foreach ($this->documents as $index => $documents) {
             if (!empty($documents)) {
                 $this->sendBulk($index, $documents);
-                $this->documents[$index] = array();
+                $this->documents[$index] = [];
             }
         }
     }
@@ -263,7 +262,7 @@ class BulkHandler
      */
     protected function formatExceptionError($error)
     {
-        return is_array($error) ? str_replace("\n", " ", var_export($error, true)) : $error;
+        return is_array($error) ? str_replace("\n", ' ', var_export($error, true)) : $error;
     }
 
     /**

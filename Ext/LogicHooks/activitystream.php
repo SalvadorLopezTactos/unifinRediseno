@@ -1,5 +1,8 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+
+if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,13 +15,13 @@
  */
 
 // Activity stream.
-$activitystream = array(
+$activitystream = [
     1,
     'activitystream',
     'modules/ActivityStream/Activities/ActivityQueueManager.php',
     'ActivityQueueManager',
     'eventDispatcher',
-);
+];
 $hook_array['after_save'][] = $activitystream;
 $hook_array['after_delete'][] = $activitystream;
 $hook_array['after_undelete'][] = $activitystream;

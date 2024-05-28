@@ -13,7 +13,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FEEDBACK_TEXT_PLACEHOLDER' => 'Atsauksmes apraksts',
     'LBL_FEEDBACK_BTN_SUBMIT' => 'Sūtīt',
     'LBL_FEEDBACK_SENT' => 'Atsauksme ir nosūtīta.',
@@ -23,4 +23,4 @@ $mod_strings = array(
     'TPL_FEEDBACK_ASIDE' => 'Iesniegšanas brīdī mēs ievācam atsevišķus lietojuma datus. {{learnMoreLink}}. Mēs neievācam kontaktinformāciju. Dodieties uz sadaļu {{contactSupportLink}}, lai ziņotu par kļūdām vai citām problēmām, kas būtu jāatrisina.',
     'LBL_FEEDBACK_ASIDE_CLICK_MORE' => 'Klikšķiniet šeit, lai uzzinātu vairāk',
     'LBL_FEEDBACK_ASIDE_CONTACT_SUPPORT' => 'sazinieties ar atbalsta dienestu',
-);
+];

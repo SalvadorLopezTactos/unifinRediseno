@@ -15,72 +15,72 @@ class ForecastsApi extends ModuleApi
 {
     public function registerApiRest()
     {
-        $parentApi = array(
-            'init' => array(
+        $parentApi = [
+            'init' => [
                 'reqType' => 'GET',
-                'path' => array('Forecasts','init'),
-                'pathVars' => array(),
+                'path' => ['Forecasts', 'init'],
+                'pathVars' => [],
                 'method' => 'forecastsInitialization',
                 'shortHelp' => 'Returns forecasts initialization data and additional user data',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastsApiInitGet.html',
-            ),
-            'selecteUserObject' => array(
+            ],
+            'selecteUserObject' => [
                 'reqType' => 'GET',
-                'path' => array('Forecasts', 'user', '?'),
-                'pathVars' => array('', '', 'user_id'),
+                'path' => ['Forecasts', 'user', '?'],
+                'pathVars' => ['', '', 'user_id'],
                 'method' => 'retrieveSelectedUser',
                 'shortHelp' => 'Returns selectedUser object for given user',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastsApiUserGet.html',
-            ),
-            'timeperiod' => array(
+            ],
+            'timeperiod' => [
                 'reqType' => 'GET',
-                'path' => array('Forecasts', 'enum', 'selectedTimePeriod'),
-                'pathVars' => array('', '', ''),
+                'path' => ['Forecasts', 'enum', 'selectedTimePeriod'],
+                'pathVars' => ['', '', ''],
                 'method' => 'timeperiod',
                 'shortHelp' => 'forecast timeperiod',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastApiTimePeriodGet.html',
-            ),
-            'reportees' => array(
+            ],
+            'reportees' => [
                 'reqType' => 'GET',
-                'path' => array('Forecasts', 'reportees', '?'),
-                'pathVars' => array('', '', 'user_id'),
+                'path' => ['Forecasts', 'reportees', '?'],
+                'pathVars' => ['', '', 'user_id'],
                 'method' => 'getReportees',
                 'shortHelp' => 'Gets reportees to a user by id',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastApiReporteesGet.html',
-            ),
-            'orgtree' => array(
+            ],
+            'orgtree' => [
                 'reqType' => 'GET',
-                'path' => array('Forecasts', 'orgtree', '?'),
-                'pathVars' => array('', '', 'user_id'),
+                'path' => ['Forecasts', 'orgtree', '?'],
+                'pathVars' => ['', '', 'user_id'],
                 'method' => 'getOrgTree',
                 'shortHelp' => 'Gets managers and reportees of user',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastApiOrgetreeGet.html',
-            ),
-            'list' => array(
+            ],
+            'list' => [
                 'reqType' => 'GET',
-                'path' => array('Forecasts',),
-                'pathVars' => array('module'),
+                'path' => ['Forecasts',],
+                'pathVars' => ['module'],
                 'method' => 'returnEmptySet',
                 'shortHelp' => 'Forecast list endpoint returns an empty set',
                 'longHelp' => 'include/api/help/module_record_favorite_put_help.html',
-            ),
-            'getQuotaRollup' => array(
+            ],
+            'getQuotaRollup' => [
                 'reqType' => 'GET',
-                'path'      => array('Forecasts', '?', 'quotas', 'rollup', '?'),
-                'pathVars'  => array('', 'timeperiod_id', '', 'quota_type', 'user_id'),
+                'path' => ['Forecasts', '?', 'quotas', 'rollup', '?'],
+                'pathVars' => ['', 'timeperiod_id', '', 'quota_type', 'user_id'],
                 'method' => 'getQuota',
                 'shortHelp' => 'Returns the rollup quota for the user by timeperiod',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastsQuotasApiGet.html',
-            ),
-            'getQuotaDirect' => array(
+            ],
+            'getQuotaDirect' => [
                 'reqType' => 'GET',
-                'path'      => array('Forecasts', '?', 'quotas', 'direct', '?'),
-                'pathVars'  => array('', 'timeperiod_id', '', 'quota_type', 'user_id'),
+                'path' => ['Forecasts', '?', 'quotas', 'direct', '?'],
+                'pathVars' => ['', 'timeperiod_id', '', 'quota_type', 'user_id'],
                 'method' => 'getQuota',
                 'shortHelp' => 'Returns the direct quota for the user by timeperiod',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastsQuotasApiGet.html',
-            ),
-        );
+            ],
+        ];
         return $parentApi;
     }
 
@@ -92,8 +92,9 @@ class ForecastsApi extends ModuleApi
      */
     public function returnEmptySet(ServiceBase $api, array $args)
     {
-        return array('next_offset' => -1, 'records' => array());
+        return ['next_offset' => -1, 'records' => []];
     }
+
     /**
      * Returns the initialization data for the module including currently logged-in user data,
      * timeperiods, and admin config settings
@@ -107,17 +108,17 @@ class ForecastsApi extends ModuleApi
     {
         global $current_user;
 
-        if(!SugarACL::checkAccess('Forecasts', 'access')) {
+        if (!SugarACL::checkAccess('Forecasts', 'access')) {
             throw new SugarApiExceptionNotAuthorized();
         }
 
-        $returnInitData = array();
-        $defaultSelections = array();
+        $returnInitData = [];
+        $defaultSelections = [];
 
         // Add Forecasts-specific items to returned data
-        $returnInitData["initData"]["userData"]['showOpps'] = false;
-        $returnInitData["initData"]["userData"]['first_name'] = $current_user->first_name;
-        $returnInitData["initData"]["userData"]['last_name'] = $current_user->last_name;
+        $returnInitData['initData']['userData']['showOpps'] = false;
+        $returnInitData['initData']['userData']['first_name'] = $current_user->first_name;
+        $returnInitData['initData']['userData']['last_name'] = $current_user->last_name;
 
         // INVESTIGATE: these need to be more dynamic and deal with potential customizations based on how filters are built in admin and/or studio
         /* @var $admin Administration */
@@ -131,27 +132,27 @@ class ForecastsApi extends ModuleApi
         // TODO: These should probably get moved in with the config/admin settings, or by themselves since this file will probably going away.
         $tp = TimePeriod::getCurrentTimePeriod($forecastsSettings['timeperiod_leaf_interval']);
         if (!empty($tp->id)) {
-            $defaultSelections["timeperiod_id"] = array(
+            $defaultSelections['timeperiod_id'] = [
                 'id' => $tp->id,
                 'label' => $tp->name,
                 'start' => $tp->start_date,
-                'end' => $tp->end_date
-            );
+                'end' => $tp->end_date,
+            ];
         } else {
-            $defaultSelections["timeperiod_id"]["id"] = '';
-            $defaultSelections["timeperiod_id"]["label"] = '';
-            $defaultSelections["timeperiod_id"]["start"] = '';
-            $defaultSelections["timeperiod_id"]["end"] = '';
+            $defaultSelections['timeperiod_id']['id'] = '';
+            $defaultSelections['timeperiod_id']['label'] = '';
+            $defaultSelections['timeperiod_id']['start'] = '';
+            $defaultSelections['timeperiod_id']['end'] = '';
         }
 
-        $returnInitData["initData"]['forecasts_setup'] = $forecastsSettings['is_setup'] ?? 0;
+        $returnInitData['initData']['forecasts_setup'] = $forecastsSettings['is_setup'] ?? 0;
 
-        $defaultSelections["ranges"] = $forecastsSettings['commit_stages_included'];
-        $defaultSelections["group_by"] = 'forecast';
-        $defaultSelections["dataset"] = 'likely';
+        $defaultSelections['ranges'] = $forecastsSettings['commit_stages_included'];
+        $defaultSelections['group_by'] = 'forecast';
+        $defaultSelections['dataset'] = 'likely';
 
         // push in defaultSelections
-        $returnInitData["defaultSelections"] = $defaultSelections;
+        $returnInitData['defaultSelections'] = $defaultSelections;
 
         return $returnInitData;
     }
@@ -169,7 +170,7 @@ class ForecastsApi extends ModuleApi
         $uid = $args['user_id'];
         /* @var $user User */
         $user = $this->getBean('Users', $uid);
-        $data = array();
+        $data = [];
         $data['id'] = $user->id;
         $data['user_name'] = $user->user_name;
         $data['full_name'] = $locale->formatName($user);
@@ -225,8 +226,8 @@ class ForecastsApi extends ModuleApi
      */
     public function getReportees(ServiceBase $api, array $args)
     {
-        $args['user_id'] = $args["user_id"] ?? $GLOBALS["current_user"]->id;
-        $args['level'] = isset($args['level']) ? (int) $args['level'] : 1;
+        $args['user_id'] = $args['user_id'] ?? $GLOBALS['current_user']->id;
+        $args['level'] = isset($args['level']) ? (int)$args['level'] : 1;
 
         // base file and class name
         $file = 'include/SugarForecasting/ReportingUsers.php';
@@ -270,8 +271,8 @@ class ForecastsApi extends ModuleApi
      */
     public function getOrgTree(ServiceBase $api, array $args)
     {
-        $args['user_id'] = $args["user_id"] ?? $GLOBALS["current_user"]->id;
-        $args['level'] = isset($args['level']) ? (int) $args['level'] : 1;
+        $args['user_id'] = $args['user_id'] ?? $GLOBALS['current_user']->id;
+        $args['level'] = isset($args['level']) ? (int)$args['level'] : 1;
 
         // base file and class name
         $file = 'include/SugarForecasting/ReportingUsers.php';
@@ -292,7 +293,7 @@ class ForecastsApi extends ModuleApi
         if (isset($reportees['metadata'])) {
             //associative array
             $isManager = true;
-        } else if (is_array($reportees) && count($reportees) === 2) {
+        } elseif (is_array($reportees) && safeCount($reportees) === 2) {
             //array of associative arrays
             $isSalesRep = true;
         }
@@ -302,7 +303,7 @@ class ForecastsApi extends ModuleApi
             if (isset($reportees['children'])) {
                 $children = $reportees['children'];
             }
-        } else if ($isSalesRep) {
+        } elseif ($isSalesRep) {
             $rootId = $reportees[1]['metadata']['id'];
             if (isset($reportees[1]['children'])) {
                 $children = $reportees[1]['children'];
@@ -310,16 +311,14 @@ class ForecastsApi extends ModuleApi
         }
 
         if (isset($children)) {
-
             foreach ($children as $childKey => &$child) {
-
                 if ($rootId === $args['user_id'] && $child['metadata']['reports_to_id'] !== $args['user_id']) {
                     //get rid of my_opportunity elemetns
                     unset($children[$childKey]);
-                } else if ($rootId !== $args['user_id'] && $child['metadata']['id'] !== $args['user_id']) {
+                } elseif ($rootId !== $args['user_id'] && $child['metadata']['id'] !== $args['user_id']) {
                     //get rid of sibling elements if a sales rep
                     unset($children[$childKey]);
-                } else if ($rootId === $args['user_id'] && $child['metadata']['is_manager'] === true && $args['level'] > 1) {
+                } elseif ($rootId === $args['user_id'] && $child['metadata']['is_manager'] === true && $args['level'] > 1) {
                     $childArgs = $args;
                     $childArgs['user_id'] = $child['metadata']['id'];
                     $childArgs['level'] = $args['level'] - 1;
@@ -332,7 +331,7 @@ class ForecastsApi extends ModuleApi
 
             if ($isManager) {
                 $reportees['children'] = $children;
-            } else if ($isSalesRep) {
+            } elseif ($isSalesRep) {
                 $reportees[1]['children'] = $children;
             }
         }
@@ -358,8 +357,8 @@ class ForecastsApi extends ModuleApi
                 }
                 $admin->saveSetting('Forecasts', $config, $val, $api->platform);
             }
-            MetaDataManager::refreshModulesCache(array("Forecasts"));
-            MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_CONFIG));
+            MetaDataManager::refreshModulesCache(['Forecasts']);
+            MetaDataManager::refreshSectionCache([MetaDataManager::MM_CONFIG]);
             throw new SugarApiExceptionInvalidHash();
         }
     }
@@ -374,7 +373,7 @@ class ForecastsApi extends ModuleApi
      */
     public function getQuota(ServiceBase $api, array $args)
     {
-        if(!SugarACL::checkAccess('Quotas', 'access')) {
+        if (!SugarACL::checkAccess('Quotas', 'access')) {
             throw new SugarApiExceptionNotAuthorized();
         }
 

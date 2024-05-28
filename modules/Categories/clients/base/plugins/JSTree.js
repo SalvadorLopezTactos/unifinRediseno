@@ -1116,18 +1116,13 @@
              * @private
              */
             _disableTooltip: function(input) {
-                if (!input.data('bs.tooltip')) {
+                const _$currentTip = $.fn.tooltip.Constructor.getInstance(input);
+
+                if (!_$currentTip) {
                     return;
                 }
 
-                /*
-                 [RS-1063]
-                 This is the known bug of an old version of the Bootstrap Tooltip.
-                 (see https://github.com/twbs/bootstrap/issues/10740)
-                 Next line (in combination with .find('..:visible') above) is a fix for current version
-                 */
-                input.data('bs.tooltip').$tip.remove();
-                input.tooltip('destroy');
+                _$currentTip.dispose();
             }
         });
     });

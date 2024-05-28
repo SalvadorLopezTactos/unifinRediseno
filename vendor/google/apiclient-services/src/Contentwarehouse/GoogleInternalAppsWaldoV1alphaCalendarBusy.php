@@ -22,6 +22,10 @@ class GoogleInternalAppsWaldoV1alphaCalendarBusy extends \Google\Model
   /**
    * @var string
    */
+  public $committedUntil;
+  /**
+   * @var string
+   */
   public $eventSummary;
   /**
    * @var string
@@ -32,6 +36,20 @@ class GoogleInternalAppsWaldoV1alphaCalendarBusy extends \Google\Model
    */
   public $occupiedUntil;
 
+  /**
+   * @param string
+   */
+  public function setCommittedUntil($committedUntil)
+  {
+    $this->committedUntil = $committedUntil;
+  }
+  /**
+   * @return string
+   */
+  public function getCommittedUntil()
+  {
+    return $this->committedUntil;
+  }
   /**
    * @param string
    */

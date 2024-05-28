@@ -10,13 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Currencies']['base']['filter']['default'] = array(
+$viewdefs['Currencies']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'symbol' => array(),
-        'iso4217' => array(),
-        'conversion_rate' => array(),
-        'status' => array(),
-    ),
-);
+    'fields' => [
+        'name' => [],
+        'symbol' => [],
+        'iso4217' => [],
+        'conversion_rate' => [],
+        'status' => [],
+    ],
+];

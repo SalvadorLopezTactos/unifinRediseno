@@ -12,46 +12,46 @@
  */
 
 
-use \Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
-use \Sugarcrm\Sugarcrm\Elasticsearch\Query\QueryBuilder;
-use \Sugarcrm\Sugarcrm\Elasticsearch\Query\KBFilterQuery;
+use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
+use Sugarcrm\Sugarcrm\Elasticsearch\Query\QueryBuilder;
+use Sugarcrm\Sugarcrm\Elasticsearch\Query\KBFilterQuery;
 
 class KBContentsFilterApi extends FilterApi
 {
     public function registerApiRest()
     {
-        return array(
-            'filterModuleGet' => array(
+        return [
+            'filterModuleGet' => [
                 'reqType' => 'GET',
-                'path' => array('KBContents', 'filter'),
-                'pathVars' => array('module', ''),
+                'path' => ['KBContents', 'filter'],
+                'pathVars' => ['module', ''],
                 'method' => 'filterList',
-                'jsonParams' => array('filter'),
+                'jsonParams' => ['filter'],
                 'shortHelp' => 'Lists filtered records.',
                 'longHelp' => 'include/api/help/module_filter_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
-                ),
-            ),
-            'filterModuleAll' => array(
+                ],
+            ],
+            'filterModuleAll' => [
                 'reqType' => 'GET',
-                'path' => array('KBContents'),
-                'pathVars' => array('module'),
+                'path' => ['KBContents'],
+                'pathVars' => ['module'],
                 'method' => 'filterList',
-                'jsonParams' => array('filter'),
+                'jsonParams' => ['filter'],
                 'shortHelp' => 'List of all records in this module',
                 'longHelp' => 'include/api/help/module_filter_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**
@@ -69,7 +69,7 @@ class KBContentsFilterApi extends FilterApi
             array_unshift($q->order_by, $orderBy);
         }
 
-        return array($args, $q, $options, $seed);
+        return [$args, $q, $options, $seed];
     }
 
     /**
@@ -80,8 +80,8 @@ class KBContentsFilterApi extends FilterApi
     {
         // If we have 'Body containing/excluding these words' filter, separate it from the rest filters, so that
         // it is searched via Elastic and the rest is searched via standard engine.
-        $bodySearchFilter = array();
-        $modifiedMainFilter = array();
+        $bodySearchFilter = [];
+        $modifiedMainFilter = [];
 
         if (isset($args['filter'])) {
             foreach ($args['filter'] as $filter) {
@@ -99,8 +99,8 @@ class KBContentsFilterApi extends FilterApi
         // 2. Filter without KBBody - just use standard Sugar filtering mechanism.
         if ($bodySearchFilter) {
             $ids = $this->filterByContainingExcludingWords($api, $args, $bodySearchFilter);
-            $ids = !empty($ids) ? $ids : array('');
-            $args['filter'][] = array('id' => array('$in' => $ids));
+            $ids = !empty($ids) ? $ids : [''];
+            $args['filter'][] = ['id' => ['$in' => $ids]];
         }
         $args['filter'][] = ['active_rev' => 1];
 
@@ -119,18 +119,18 @@ class KBContentsFilterApi extends FilterApi
         $options = $this->parseArguments($api, $args);
         $bean = BeanFactory::newBean($args['module']);
         //We don't use ordering because it will be done with database search.
-        $orderBy = array();
+        $orderBy = [];
 
-        $operators = array();
+        $operators = [];
         foreach ($filterArgs as $filterDef) {
             $key = key($filterDef);
             $values = preg_split('/[\s[:punct:]]+/', $filterDef[$key]);
-            $operators[$key] = !isset($operators[$key]) ? array() : $operators[$key];
+            $operators[$key] = !isset($operators[$key]) ? [] : $operators[$key];
             $operators[$key] = $operators[$key] + $values;
         }
 
         $builder = $this->getElasticQueryBuilder($args, $options);
-        $ftsFields = ApiHelper::getHelper($api, $bean)->getElasticSearchFields(array('kbdocument_body'));
+        $ftsFields = ApiHelper::getHelper($api, $bean)->getElasticSearchFields(['kbdocument_body']);
 
         $query = new KBFilterQuery();
         $query->setBean($bean);
@@ -138,8 +138,8 @@ class KBContentsFilterApi extends FilterApi
         $query->setTerm($operators);
 
         //set the filter
-        $filterField = ApiHelper::getHelper($api, $bean)->getElasticSearchFields(array('active_rev'));
-        $filter = $query->createFilter(array($filterField['active_rev'][0] => 1));
+        $filterField = ApiHelper::getHelper($api, $bean)->getElasticSearchFields(['active_rev']);
+        $filter = $query->createFilter([$filterField['active_rev'][0] => 1]);
         $builder
             ->addFilter($filter);
 
@@ -154,7 +154,7 @@ class KBContentsFilterApi extends FilterApi
         $resultSet = $builder->executeSearch();
 
         // Return all ids for further filtering.
-        $data = array();
+        $data = [];
         foreach ($resultSet as $result) {
             $data[] = $result->getId();
         }
@@ -175,7 +175,7 @@ class KBContentsFilterApi extends FilterApi
         $builder = new QueryBuilder($engineContainer);
         $builder
             ->setUser($current_user)
-            ->setModules(array($args['module']))
+            ->setModules([$args['module']])
             ->setOffset($options['offset'])
             ->setLimit($options['limit']);
 

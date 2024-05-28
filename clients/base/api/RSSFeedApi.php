@@ -13,48 +13,48 @@
 use Sugarcrm\Sugarcrm\Security\ValueObjects\ExternalResource;
 
 /**
- * API class for fetching the contents of an RSS feed and returning relevant, 
+ * API class for fetching the contents of an RSS feed and returning relevant,
  * expected information from it. This class allows the application to proxy RSS
- * Feed requests on the server to prevent cross site or domain origin issues on 
+ * Feed requests on the server to prevent cross site or domain origin issues on
  * the client.
- * 
+ *
  */
 class RSSFeedApi extends SugarApi
 {
     /**
      * Feed metadata should contain these at least
-     * 
+     *
      * @var array
      */
-    protected $feedMeta = array('title', 'link', 'description', 'pubDate');
+    protected $feedMeta = ['title', 'link', 'description', 'pubDate'];
 
     /**
      * An entry should contain at least these elements
-     * 
+     *
      * @var array
      */
-    protected $feedEntry = array(
+    protected $feedEntry = [
         'title', 'description', 'link', 'pubDate', 'source', 'author',
-    );
+    ];
 
     public function registerApiRest()
     {
-        return array(
-            'getFeed' => array(
+        return [
+            'getFeed' => [
                 'reqType' => 'GET',
-                'path' => array('rssfeed'),
-                'pathVars' => array(),
+                'path' => ['rssfeed'],
+                'pathVars' => [],
                 'method' => 'getFeed',
                 'shortHelp' => 'Consumes an RSS Feed and returns the content of the feed to the client',
                 'longHelp' => 'include/api/help/rssfeed_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     // Thrown in validateFeedUrl
                     'SugarApiExceptionInvalidParameter',
                     // Thrown in getFeedContent and getFeedXMLContent
                     'SugarApiExceptionConnectorResponse',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**
@@ -71,7 +71,7 @@ class RSSFeedApi extends SugarApi
         $privateIps = $sugar_config['security']['private_ips'] ?? [];
 
         // Simple sanity checking
-        $this->requireArgs($args, array('feed_url'));
+        $this->requireArgs($args, ['feed_url']);
         $url = $args['feed_url'];
 
         try {
@@ -95,7 +95,7 @@ class RSSFeedApi extends SugarApi
         // Get the parsed response as a simple array
         $result = $this->getParsedXMLData($rss, $limit);
 
-        return array('feed' => $result);
+        return ['feed' => $result];
     }
 
     /**
@@ -107,7 +107,7 @@ class RSSFeedApi extends SugarApi
         $context = stream_context_create(
             [
                 'http' => [
-                    'header'=> "Host: {$urlValueObject->getHost()}\r\n",
+                    'header' => "Host: {$urlValueObject->getHost()}\r\n",
                     'follow_location' => false,
                 ],
                 'ssl' => [
@@ -121,7 +121,7 @@ class RSSFeedApi extends SugarApi
 
     /**
      * Simple URL validation for an RSS feed
-     * 
+     *
      * @param string $url The RSS Feed URL
      */
     public function validateFeedUrl($url)
@@ -138,7 +138,7 @@ class RSSFeedApi extends SugarApi
 
     /**
      * Gets the feed entries limit, either from the request or from the config
-     * 
+     *
      * @param array $args Request arguments
      * @return int
      */
@@ -164,7 +164,7 @@ class RSSFeedApi extends SugarApi
 
     /**
      * Gets a SimpleXMLElement object created from a valid XML string
-     * 
+     *
      * @param string $data An XML file content
      * @return SimpleXMLElement
      */
@@ -185,7 +185,7 @@ class RSSFeedApi extends SugarApi
 
     /**
      * Gets the relevant data for an API response from a SimpleXMLElement object
-     * 
+     *
      * @param SimpleXMLElement $rss A SimpleXMLElement object
      * @param int $limit A limit to the number of entries returned
      * @return array
@@ -195,7 +195,7 @@ class RSSFeedApi extends SugarApi
         // The counter to make sure we are under our limit
         $counter = 0;
 
-        $result = array();
+        $result = [];
         if (isset($rss->channel)) {
             foreach ($rss->channel as $channel) {
                 // Set meta properties from the feed

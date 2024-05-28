@@ -24,16 +24,16 @@ class FilterApi extends SugarApi
      */
     public function registerApiRest()
     {
-        return array(
-            'filterModuleGet' => array(
+        return [
+            'filterModuleGet' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', 'filter'),
-                'pathVars' => array('module', ''),
+                'path' => ['<module>', 'filter'],
+                'pathVars' => ['module', ''],
                 'method' => 'filterList',
-                'jsonParams' => array('filter'),
+                'jsonParams' => ['filter'],
                 'shortHelp' => 'Lists filtered records.',
                 'longHelp' => 'include/api/help/module_filter_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     // Thrown in getPredefinedFilterById
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionError',
@@ -41,17 +41,17 @@ class FilterApi extends SugarApi
                     'SugarApiExceptionInvalidParameter',
                     // Thrown in filterListSetup, getPredefinedFilterById, and parseArguments
                     'SugarApiExceptionNotAuthorized',
-                ),
-            ),
-            'filterModuleAll' => array(
+                ],
+            ],
+            'filterModuleAll' => [
                 'reqType' => 'GET',
-                'path' => array('<module>'),
-                'pathVars' => array('module'),
+                'path' => ['<module>'],
+                'pathVars' => ['module'],
                 'method' => 'filterList',
-                'jsonParams' => array('filter'),
+                'jsonParams' => ['filter'],
                 'shortHelp' => 'List of all records in this module',
                 'longHelp' => 'include/api/help/module_filter_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     // Thrown in getPredefinedFilterById
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionError',
@@ -59,17 +59,17 @@ class FilterApi extends SugarApi
                     'SugarApiExceptionInvalidParameter',
                     // Thrown in filterListSetup, getPredefinedFilterById, and parseArguments
                     'SugarApiExceptionNotAuthorized',
-                ),
-            ),
-            'filterModuleAllCount' => array(
+                ],
+            ],
+            'filterModuleAllCount' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', 'count'),
-                'pathVars' => array('module', ''),
-                'jsonParams' => array('filter'),
+                'path' => ['<module>', 'count'],
+                'pathVars' => ['module', ''],
+                'jsonParams' => ['filter'],
                 'method' => 'getFilterListCount',
                 'shortHelp' => 'List of all records in this module',
                 'longHelp' => 'include/api/help/module_filter_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     // Thrown in getPredefinedFilterById
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionError',
@@ -77,16 +77,16 @@ class FilterApi extends SugarApi
                     'SugarApiExceptionNotAuthorized',
                     // Thrown in filterListSetup
                     'SugarApiExceptionInvalidParameter',
-                ),
-            ),
-            'filterModulePost' => array(
+                ],
+            ],
+            'filterModulePost' => [
                 'reqType' => 'POST',
-                'path' => array('<module>', 'filter'),
-                'pathVars' => array('module', ''),
+                'path' => ['<module>', 'filter'],
+                'pathVars' => ['module', ''],
                 'method' => 'filterList',
                 'shortHelp' => 'Lists filtered records.',
                 'longHelp' => 'include/api/help/module_filter_post_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     // Thrown in getPredefinedFilterById
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionError',
@@ -94,50 +94,67 @@ class FilterApi extends SugarApi
                     'SugarApiExceptionInvalidParameter',
                     // Thrown in filterListSetup, getPredefinedFilterById, and parseArguments
                     'SugarApiExceptionNotAuthorized',
-                ),
-            ),
-            'filterModulePostCount' => array(
+                ],
+            ],
+            'filterModulePostCount' => [
                 'reqType' => 'POST',
-                'path' => array('<module>', 'filter', 'count'),
-                'pathVars' => array('module', '', ''),
+                'path' => ['<module>', 'filter', 'count'],
+                'pathVars' => ['module', '', ''],
                 'method' => 'filterListCount',
                 'shortHelp' => 'Lists filtered records.',
                 'longHelp' => 'include/api/help/module_filter_post_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     // Thrown in getPredefinedFilterById
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionError',
                     // Thrown in filterListSetup and getPredefinedFilterById
                     'SugarApiExceptionNotAuthorized',
                     // Thrown in filterListSetup
-                    'SugarApiExceptionInvalidParameter'
-                ),
-            ),
-            'filterModuleCount' => array(
+                    'SugarApiExceptionInvalidParameter',
+                ],
+            ],
+            'filterModuleCount' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', 'filter', 'count'),
-                'pathVars' => array('module', '', ''),
+                'path' => ['<module>', 'filter', 'count'],
+                'pathVars' => ['module', '', ''],
                 'method' => 'getFilterListCount',
                 'shortHelp' => 'Lists filtered records.',
                 'longHelp' => 'include/api/help/module_filter_post_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     // Thrown in getPredefinedFilterById
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionError',
                     // Thrown in filterListSetup
                     'SugarApiExceptionNotAuthorized',
-                    'SugarApiExceptionInvalidParameter'
-                ),
-            ),
-        );
+                    'SugarApiExceptionInvalidParameter',
+                ],
+            ],
+            'filterModuleSum' => [
+                'reqType' => 'GET',
+                'path' => ['<module>', 'total'],
+                'pathVars' => ['module', '', ''],
+                'method' => 'getFilterListSum',
+                'shortHelp' => 'Lists field sum by filtered records.',
+                'longHelp' => 'include/api/help/module_sum_by_filter_get_help.html',
+                'exceptions' => [
+                    // Thrown in getPredefinedFilterById
+                    'SugarApiExceptionNotFound',
+                    'SugarApiExceptionError',
+                    // Thrown in filterListSetup
+                    'SugarApiExceptionNotAuthorized',
+                    'SugarApiExceptionInvalidParameter',
+                ],
+                'minVersion' => '11.21',
+            ],
+        ];
     }
 
     protected static $isFavorite = false;
 
     protected $defaultLimit = 20; // How many records should we show if they don't pass up a limit
-    protected $defaultOrderBy = array(
-        array('date_modified', 'DESC'),
-    );
+    protected $defaultOrderBy = [
+        ['date_modified', 'DESC'],
+    ];
 
     protected static $current_user;
 
@@ -145,7 +162,7 @@ class FilterApi extends SugarApi
      * List of fields that are mandatory for all filters
      * @var array
      */
-    protected static $mandatory_fields = array(
+    protected static $mandatory_fields = [
         // id and date_modified should always be in the response
         'id',
         'date_modified',
@@ -155,7 +172,7 @@ class FilterApi extends SugarApi
         // Locked fields are necessary to enforce data integrity for processes on
         // on the client
         'locked_fields',
-    );
+    ];
 
     public function __construct()
     {
@@ -165,7 +182,7 @@ class FilterApi extends SugarApi
 
     protected function parseArguments(ServiceBase $api, array $args, SugarBean $seed = null)
     {
-        $options = array();
+        $options = [];
 
         // Set up the defaults
         $options['limit'] = $this->defaultLimit;
@@ -176,9 +193,9 @@ class FilterApi extends SugarApi
             $options['limit'] = $seed->force_limit;
         } else {
             if (!empty($args['max_num'])) {
-                $options['limit'] = (int) $args['max_num'];
+                $options['limit'] = (int)$args['max_num'];
             }
-    
+
             $options['limit'] = $this->checkMaxListLimit($options['limit']);
         }
 
@@ -190,7 +207,7 @@ class FilterApi extends SugarApi
             if ($args['offset'] == 'end') {
                 $options['offset'] = 'end';
             } else {
-                $options['offset'] = (int) $args['offset'];
+                $options['offset'] = (int)$args['offset'];
             }
         }
 
@@ -217,9 +234,9 @@ class FilterApi extends SugarApi
         // so formatting can use them. This is necessary for file type fields.
         if (!empty($seed) && !empty($seed->field_defs)) {
             foreach ($seed->field_defs as $field => $def) {
-                if (isset($def['name']) && in_array($def['name'], $options['select']) && isset($def['fields'])) {
+                if (isset($def['name']) && safeInArray($def['name'], $options['select']) && isset($def['fields'])) {
                     foreach ($def['fields'] as $field) {
-                        if (!in_array($field, $options['select'])) {
+                        if (!safeInArray($field, $options['select'])) {
                             $options['select'][] = $field;
                         }
                     }
@@ -258,15 +275,15 @@ class FilterApi extends SugarApi
         $orderBy = parent::getOrderByFromArgs($args, $seed);
         // denormalized and synchronized relate fields to be used for ORDER BY queries
         $synchronizedFields = isset($args['module'])
-            ? (new FieldConfig)->getSynchronizedModuleFields($args['module'])
+            ? (new FieldConfig())->getSynchronizedModuleFields($args['module'])
             : null;
-        $converted = array();
+        $converted = [];
         foreach ($orderBy as $field => $direction) {
             // use denormalized fields for ORDER BY if this was configured
             if (isset($synchronizedFields[$field])) {
                 $field = $synchronizedFields[$field]['denorm_field_name'];
             }
-            $converted[] = array($field, $direction ? 'ASC' : 'DESC');
+            $converted[] = [$field, $direction ? 'ASC' : 'DESC'];
         }
 
         return $converted;
@@ -288,15 +305,15 @@ class FilterApi extends SugarApi
     {
         $predefinedFilter = $this->loadBean(
             $api,
-            array(
+            [
                 'module' => 'Filters',
                 'record' => $filterId,
-            )
+            ]
         );
 
         if (empty($predefinedFilter->filter_definition)) {
             LoggerManager::getLogger()->warn('Filter ' . $predefinedFilter->id . ' has no definition');
-            return array();
+            return [];
         }
 
         // Try to decode the filter. Note that the expectation is that
@@ -328,7 +345,7 @@ class FilterApi extends SugarApi
     {
         $seed = BeanFactory::newBean($args['module']);
 
-        if (!$seed->ACLAccess($acl, array('source' => 'filter_api'))) {
+        if (!$seed->ACLAccess($acl, ['source' => 'filter_api'])) {
             throw new SugarApiExceptionNotAuthorized('No access to view records for module: ' . $args['module']);
         }
 
@@ -349,7 +366,7 @@ class FilterApi extends SugarApi
         }
 
         if (empty($args['filter_id'])) {
-            $predefinedFilter = array();
+            $predefinedFilter = [];
         } else {
             $predefinedFilter = $this->getPredefinedFilterById($api, $args['filter_id']);
             unset($args['filter_id']);
@@ -377,7 +394,7 @@ class FilterApi extends SugarApi
 
         $q = $this->createQuery($seed, $args, $options);
 
-        if (count($q->join) > 0) {
+        if (safeCount($q->join) > 0) {
             $options['id_query'] = $this->createQuery($seed, $args, array_merge($options, [
                 'select' => ['id'],
                 'erased_fields' => false,
@@ -387,10 +404,10 @@ class FilterApi extends SugarApi
             $q = $this->createQuery($seed, $args, $options);
         }
 
-        return array($args, $q, $options, $seed);
+        return [$args, $q, $options, $seed];
     }
 
-    private function createQuery(SugarBean $seed, array $args, array $options) : SugarQuery
+    private function createQuery(SugarBean $seed, array $args, array $options): SugarQuery
     {
         $query = self::getQueryObject($seed, $options);
 
@@ -406,7 +423,7 @@ class FilterApi extends SugarApi
             static::addFavoriteFilter($query, $query->where(), '_this', 'INNER');
         }
 
-        if ((is_countable($query->order_by) ? count($query->order_by) : 0) < 1) {
+        if (safeCount($query->order_by) < 1) {
             self::addOrderBy($query, $this->defaultOrderBy, $options['nulls_last']);
         }
 
@@ -486,11 +503,47 @@ class FilterApi extends SugarApi
      * Returns the number of records for the module and filter provided:
      *
      * Example:
+     *     {"record_sum": 123.45}
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array The number of filtered/unfiltered records for the module provided.
+     * @throws SugarApiExceptionError If retrieving a predefined filter failed.
+     * @throws SugarApiExceptionInvalidParameter if any of the parameters are
+     *  invalid.
+     * @throws SugarApiExceptionNotAuthorized if we lack ACL access.
+     */
+    public function getFilterListSum(ServiceBase $api, array $args)
+    {
+        if (empty($args['sumField']) || !(is_scalar($args['sumField']))) {
+            return null;
+        }
+
+        $api->action = 'list';
+
+        /** @var SugarQuery $q */
+        [, $q, $options] = $this->filterListSetup($api, $args);
+
+        $q = $options['id_query'] ?? $q;
+
+        if (empty($q->select('*')->select[$args['sumField']])) {
+            return null;
+        }
+
+        return [
+            'sum_by_field' => $this->fetchSum($q, $args['sumField']),
+            'field_type' => $q->select('*')->select[$args['sumField']]->def['type'],
+        ];
+    }
+
+    /**
+     * Returns the number of records for the module and filter provided:
+     *
+     * Example:
      *     {'record_count': '50'}
      *
      * This method is now deprecated. Use getFilterListCount instead.
      *
-     * @deprecated Since 7.7.0. Will be removed in 7.9.0.
      * @param ServiceBase $api
      * @param array $args
      * @return Object The number of filtered/unfiltered records for the module
@@ -499,6 +552,7 @@ class FilterApi extends SugarApi
      * @throws SugarApiExceptionInvalidParameter if any of the parameters are
      *  invalid.
      * @throws SugarApiExceptionNotAuthorized if we lack ACL access.
+     * @deprecated Since 7.7.0. Will be removed in 7.9.0.
      */
     public function filterListCount(ServiceBase $api, array $args)
     {
@@ -514,9 +568,9 @@ class FilterApi extends SugarApi
             $options['select'] = self::$mandatory_fields;
         }
 
-        $queryOptions = array(
+        $queryOptions = [
             'add_deleted' => !isset($options['add_deleted']) || $options['add_deleted'],
-        );
+        ];
 
         if ($queryOptions['add_deleted'] == false) {
             $options['select'][] = 'deleted';
@@ -529,7 +583,7 @@ class FilterApi extends SugarApi
         $q = static::newSugarQuery(DBManagerFactory::getInstance('listviews'));
         $q->from($seed, $queryOptions);
         $q->distinct(false);
-        $fields = array();
+        $fields = [];
         foreach ($options['select'] as $field) {
             // Skip the related bean options since related collections
             // are expected to be handled later, e.g. FilterApi for Tags
@@ -545,8 +599,8 @@ class FilterApi extends SugarApi
                 } else {
                     $joinType = 'LEFT';
                 }
-                $fjoin = $q->join('favorites', array('joinType' => $joinType));
-                $fields[] = array($fjoin->joinName() . '.id', 'my_favorite');
+                $fjoin = $q->join('favorites', ['joinType' => $joinType]);
+                $fields[] = [$fjoin->joinName() . '.id', 'my_favorite'];
                 continue;
             }
 
@@ -603,7 +657,7 @@ class FilterApi extends SugarApi
      */
     protected function populateRelatedFields(SugarBean $bean, $data)
     {
-        $relates = array();
+        $relates = [];
         // fill in related rows data by field
         foreach ($data as $key => $value) {
             if (($split = strpos($key, '__')) > 0) {
@@ -612,7 +666,7 @@ class FilterApi extends SugarApi
         }
 
         foreach ($bean->field_defs as $field => $fieldDef) {
-            if (in_array($fieldDef['type'], $bean::$relateFieldTypes)
+            if (safeInArray($fieldDef['type'], $bean::$relateFieldTypes)
                 && (!empty($fieldDef['link']) || !empty($fieldDef['module']))) {
                 if (empty($data[$field]) && empty($relates[$field])) {
                     continue;
@@ -636,7 +690,7 @@ class FilterApi extends SugarApi
                     }
                     // we have direct data - populate it
                     $rbean->populateFromRow(
-                        array($fieldDef['rname'] => $data[$field]),
+                        [$fieldDef['rname'] => $data[$field]],
                         true
                     );
                 } else {
@@ -644,7 +698,7 @@ class FilterApi extends SugarApi
                         continue;
                     }
 
-                    $reldata = array();
+                    $reldata = [];
                     foreach ($relates[$field] as $relfield) {
                         $reldata[$relfield] = $data["{$field}__{$relfield}"];
                     }
@@ -678,18 +732,18 @@ class FilterApi extends SugarApi
 
     protected function runQuery(ServiceBase $api, array $args, SugarQuery $q, array $options, SugarBean $seed = null)
     {
-        $seed->call_custom_logic('before_filter', array($q, $options));
+        $seed->call_custom_logic('before_filter', [$q, $options]);
 
         if (empty($args['fields'])) {
-            $fields = array();
+            $fields = [];
         } else {
             $fields = $options['select'];
         }
 
-        $queryOptions = array(
+        $queryOptions = [
             'returnRawRows' => true,
             'compensateDistinct' => true,
-        );
+        ];
 
         if (isset($options['id_query'])) {
             $ids = $options['id_query']
@@ -697,7 +751,7 @@ class FilterApi extends SugarApi
                 ->execute()
                 ->fetchFirstColumn();
 
-            if ((is_countable($ids) ? count($ids) : 0) < 1) {
+            if (safeCount($ids) < 1) {
                 return [
                     'records' => [],
                     'next_offset' => -1,
@@ -719,7 +773,7 @@ class FilterApi extends SugarApi
 
         [$beans, $rows, $distinctCompensation] = $this->parseQueryResults($fetched);
 
-        $data = array();
+        $data = [];
         $data['next_offset'] = -1;
 
         // Get the related bean options to be able to handle related collections, like
@@ -730,16 +784,16 @@ class FilterApi extends SugarApi
         // 'Cause last_viewed_date is an alias (not a real field), we need to
         // temporarily store its values and append it later to each recently
         // viewed record
-        $lastViewedDates = array();
+        $lastViewedDates = [];
         $db = DBManagerFactory::getInstance();
 
         $i = $distinctCompensation;
         foreach ($beans as $bean_id => $bean) {
-            if ($i == $options['limit']) {
-                if ((is_countable($beans) ? count($beans) : 0) > $options['limit']) {
+            if ($i == $options['limit'] || ($i - $distinctCompensation) == $options['limit']) {
+                if (safeCount($beans) > $options['limit']) {
                     unset($beans[$bean_id]);
                 }
-                $data['next_offset'] = (int) ($options['limit'] + $options['offset']);
+                $data['next_offset'] = (int)($options['limit'] + $options['offset']);
                 continue;
             }
             $i++;
@@ -748,6 +802,13 @@ class FilterApi extends SugarApi
                 $lastViewedDates[$bean_id] = $db->fromConvert($rows[$bean_id]['last_viewed_date'], 'datetime');
             }
 
+            if ($bean instanceof User && empty($bean->is_group)) {
+                $bean->is_group = 0;
+            }
+
+            if (isset($rows[$bean_id]['is_external_link'])) {
+                $bean->_is_external_link = $rows[$bean_id]['is_external_link'];
+            }
             $this->populateRelatedFields($bean, $rows[$bean_id]);
         }
 
@@ -789,7 +850,7 @@ class FilterApi extends SugarApi
      */
     protected function runRelateCollectionQuery(array $beans, array $options)
     {
-        $rc_beans = array();
+        $rc_beans = [];
 
         // Sanity check, just to make sure things are kosher
         if (empty($beans) || empty($options['relate_collections'])) {
@@ -809,7 +870,7 @@ class FilterApi extends SugarApi
 
             // If the related bean has the necessary method to get related records
             // then call it
-            if (is_callable(array($relate_bean, 'getRelatedModuleRecords'))) {
+            if (is_callable([$relate_bean, 'getRelatedModuleRecords'])) {
                 $rc_beans[$name] = $relate_bean->getRelatedModuleRecords($bean, $bean_ids);
             } else {
                 LoggerManager::getLogger()->fatal('Field is a relate collection, ' .
@@ -830,7 +891,7 @@ class FilterApi extends SugarApi
      */
     protected function parseQueryResults(array $fetched)
     {
-        $rows = array();
+        $rows = [];
         $distinctCompensation = 0;
 
         if (isset($fetched['_rows'])) {
@@ -843,7 +904,7 @@ class FilterApi extends SugarApi
             unset($fetched['_distinctCompensation']);
         }
 
-        return array($fetched, $rows, $distinctCompensation);
+        return [$fetched, $rows, $distinctCompensation];
     }
 
     /**
@@ -856,7 +917,7 @@ class FilterApi extends SugarApi
      */
     protected static function verifyField(SugarQuery $q, $field)
     {
-        $ret = array();
+        $ret = [];
         if (strpos($field, '.')) {
             // It looks like it's a related field that it's searching by
             [$linkName, $field] = explode('.', $field);
@@ -873,7 +934,7 @@ class FilterApi extends SugarApi
                 // throw new SugarApiExceptionInvalidParameter("Cannot use condition against multi-link $linkName");
             }
 
-            $join = $q->join($linkName, array('joinType' => 'LEFT'));
+            $join = $q->join($linkName, ['joinType' => 'LEFT']);
             $table = $join->joinName();
             $ret['field'] = "$table.$field";
 
@@ -960,9 +1021,9 @@ class FilterApi extends SugarApi
     protected static function addFilter($field, $filter, SugarQuery_Builder_Where $where, SugarQuery $q)
     {
         // It's an email participant filter if the module is Emails and the field is an email participants operand.
-        if ($q->getFromBean()->getModuleName() === 'Emails' && in_array($field, ['$from', '$to', '$cc', '$bcc'])) {
+        if ($q->getFromBean()->getModuleName() === 'Emails' && safeInArray($field, ['$from', '$to', '$cc', '$bcc'])) {
             static::addEmailParticipantFilter($q, $where, $filter, $field);
-        } elseif (in_array($q->getFromBean()->getModuleName(), ['Calls', 'Meetings']) && $field === '$guest') {
+        } elseif (safeInArray($q->getFromBean()->getModuleName(), ['Calls', 'Meetings']) && $field === '$guest') {
             static::addGuestFilter($q, $where, $filter);
         } elseif ($field == '$or') {
             static::addFilters($filter, $where->queryOr(), $q);
@@ -991,7 +1052,7 @@ class FilterApi extends SugarApi
      * @param SugarQuery_Builder_Where $where
      * @param SugarQuery $q
      * @param array $filter
-     * @param string  $field
+     * @param string $field
      *
      * @throws SugarApiExceptionInvalidParameter
      * @throws SugarApiExceptionNotAuthorized
@@ -1015,7 +1076,7 @@ class FilterApi extends SugarApi
         // It's an email participant filter if the module is Emails and the field is an email participants field.
         $fromModule = $q->getFromBean()->getModuleName();
         $emailParticipantsFields = ['from_collection', 'to_collection', 'cc_collection', 'bcc_collection'];
-        if ($fromModule === 'Emails' && in_array($field, $emailParticipantsFields)) {
+        if ($fromModule === 'Emails' && safeInArray($field, $emailParticipantsFields)) {
             static::addEmailParticipantFieldFilter($q, $where, $filter, $field);
             return;
         }
@@ -1025,7 +1086,7 @@ class FilterApi extends SugarApi
         $sugarField = $sfh->getSugarField($fieldType);
         if (!is_array($filter)) {
             $value = $filter;
-            $filter = array();
+            $filter = [];
             $filter['$equals'] = $value;
         }
         foreach ($filter as $op => $value) {
@@ -1063,6 +1124,11 @@ class FilterApi extends SugarApi
             }
 
             switch ($op) {
+                case '$more_x_days_ago':
+                case '$last_x_days':
+                case '$next_x_days':
+                case '$more_x_days_ahead':
+                    break;
                 case '$equals':
                     $where->equals($field, $value);
                     break;
@@ -1095,7 +1161,7 @@ class FilterApi extends SugarApi
                     break;
                 case '$dateBetween':
                 case '$between':
-                    if (!is_array($value) || count($value) != 2) {
+                    if (!is_array($value) || safeCount($value) != 2) {
                         throw new SugarApiExceptionInvalidParameter(
                             '$between requires an array with two values.'
                         );
@@ -1145,11 +1211,12 @@ class FilterApi extends SugarApi
      * @throws SugarApiExceptionInvalidParameter
      */
     protected static function addEmailParticipantFieldFilter(
-        SugarQuery $q,
+        SugarQuery               $q,
         SugarQuery_Builder_Where $where,
         $filter,
         $field
     ) {
+
         static $operands = [
             'from_collection' => '$from',
             'to_collection' => '$to',
@@ -1192,7 +1259,7 @@ class FilterApi extends SugarApi
         if ($link == '' || $link == '_this') {
             $linkPart = '';
         } else {
-            $join = $q->join($link, array('joinType' => 'LEFT'));
+            $join = $q->join($link, ['joinType' => 'LEFT']);
             $linkPart = $join->joinName() . '.';
         }
 
@@ -1207,11 +1274,12 @@ class FilterApi extends SugarApi
      * @param $filter
      */
     protected static function addFollowFilter(
-        SugarQuery $q,
+        SugarQuery               $q,
         SugarQuery_Builder_Where $where,
         $filter,
         $joinType = 'LEFT'
     ) {
+
         $field = 'following';
         $q->select($field);
         if (isset($q->from->field_defs[$field]['link'])) {
@@ -1509,7 +1577,7 @@ class FilterApi extends SugarApi
         $fieldsMapping = [];
 
         $admin = BeanFactory::getBean('Administration');
-        $mapsConfig =  $admin->retrieveSettings('maps', true)->settings;
+        $mapsConfig = $admin->retrieveSettings('maps', true)->settings;
 
         if (!array_key_exists('maps_modulesData', $mapsConfig)) {
             return $fieldsMapping;
@@ -1526,9 +1594,9 @@ class FilterApi extends SugarApi
         $moduleMappings = $mapsConfig['maps_modulesData'][$module]['mappings'];
 
         foreach ($fields as $field) {
-            $realFieldName =  str_replace('maps_', '', $field);
+            $realFieldName = str_replace('maps_', '', $field);
 
-            if ($realFieldName !== $field) {
+            if ($realFieldName !== $field && array_key_exists($realFieldName, $moduleMappings)) {
                 $fieldsMapping[$field] = $moduleMappings[$realFieldName];
             }
         }
@@ -1548,7 +1616,7 @@ class FilterApi extends SugarApi
         if ($link == '' || $link == '_this') {
             $linkPart = '';
         } else {
-            $q->join($link, array('joinType' => 'LEFT'));
+            $q->join($link, ['joinType' => 'LEFT']);
             $linkPart = $link . '.';
         }
 
@@ -1591,16 +1659,17 @@ class FilterApi extends SugarApi
      * @param string $link Which module are you adding the favorite filter to.
      */
     protected static function addFavoriteFilter(
-        SugarQuery $q,
+        SugarQuery               $q,
         SugarQuery_Builder_Where $where,
         $link,
         $joinType = 'LEFT'
     ) {
-        $sfOptions = array('joinType' => $joinType, 'favorites' => true);
+
+        $sfOptions = ['joinType' => $joinType, 'favorites' => true];
         if ($link == '' || $link == '_this') {
             $link_name = 'favorites';
         } else {
-            $joinTo = $q->join($link, array('joinType' => 'LEFT'));
+            $joinTo = $q->join($link, ['joinType' => 'LEFT']);
             $sfOptions['joinTo'] = $joinTo;
             $sfOptions['joinModule'] = $q->getFromBean()->module_name;
             $link_name = 'sf_' . $link;
@@ -1629,13 +1698,13 @@ class FilterApi extends SugarApi
             ' AND t.date_modified >= ' . $db->convert("'$min_date'", 'datetime') . ' ' .
             ' AND t.deleted = 0 ' .
             ' GROUP BY t.item_id)',
-            array('alias' => 'tracker')
+            ['alias' => 'tracker']
         );
         $join->on()->equalsField('tracker.item_id', $q->from->getTableName() . '.id');
 
         if (empty($q->order_by)) {
             // Now, if they want tracker records without specific order, so let's order it by the tracker date_modified
-            $q->order_by = array();
+            $q->order_by = [];
             $q->orderByRaw('tracker.track_max', 'DESC');
         }
         $q->distinct(false);
@@ -1777,7 +1846,7 @@ class FilterApi extends SugarApi
      */
     protected function getRelatedCollectionOptions(array $beans, array $fields)
     {
-        $options = array();
+        $options = [];
         if (empty($beans) || !is_array($beans)) {
             return $options;
         }
@@ -1787,7 +1856,7 @@ class FilterApi extends SugarApi
         // simple array of values
         if ($bean instanceof SugarBean) {
             foreach ($bean->field_defs as $def) {
-                if ((count($fields) == 0 || in_array($def['name'], $fields)) && !empty($def['relate_collection'])) {
+                if ((safeCount($fields) == 0 || safeInArray($def['name'], $fields)) && !empty($def['relate_collection'])) {
                     $options['relate_collections'][$def['name']] = $def;
                     if (!isset($options['module'])) {
                         $options['module'] = $bean->getModuleName();
@@ -1830,7 +1899,23 @@ class FilterApi extends SugarApi
 
         $stmt = $q->compile()->execute();
 
-        return (int) $stmt->fetchOne();
+        return (int)$stmt->fetchOne();
+    }
+
+    /**
+     * Returns a result of a SUM query
+     */
+    protected function fetchSum(SugarQuery $q, string $field): ?float
+    {
+        $q->select->getSelectedFieldsByTable($q->from->table_name);
+
+        $q->select->selectReset()->setSumField($field);
+        $q->orderByReset();
+        $q->limit = null;
+
+        $stmt = $q->compile()->executeQuery();
+
+        return $stmt->fetchOne();
     }
 
     /**

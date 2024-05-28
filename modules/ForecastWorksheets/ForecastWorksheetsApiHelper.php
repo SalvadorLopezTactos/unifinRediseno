@@ -22,7 +22,7 @@ class ForecastWorksheetsApiHelper extends SugarBeanApiHelper
      * @param $options array Currently no options are supported
      * @return array The bean in array format, ready for passing out the API to clients.
      */
-    public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(SugarBean $bean, array $fieldList = [], array $options = [])
     {
         $data = parent::formatForApi($bean, $fieldList, $options);
         $data['parent_deleted'] = 0;
@@ -38,6 +38,5 @@ class ForecastWorksheetsApiHelper extends SugarBeanApiHelper
             }
         }
         return $data;
-
     }
 }

@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => '内容',
     'LBL_BASE_MODULE' => '目标模块',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => '无法从文件创建流程电子邮件模板',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => '此电子邮件模板正被某个流程定义使用。是否仍要编辑此电子邮件模板？',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "您无法删除此电子邮件模板，因为其正被某个流程定义使用。",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => '您无法删除此电子邮件模板，因为其正被某个流程定义使用。',
 
     'LBL_SUGAR_FIELD_SELECTOR' => '字段选择器',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => '选择',
     'LBL_FIELD_SELECTOR_DROPDOWN' => '字段值类型',
-);
+];

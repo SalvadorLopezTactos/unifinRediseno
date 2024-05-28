@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 // This will need to be pathed properly when packaged
 require_once 'SidecarAbstractMetaDataUpgrader.php';
 require_once 'modules/ModuleBuilder/Module/StudioModuleFactory.php';
@@ -37,7 +38,7 @@ class SidecarFilterMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
             return false;
         }
         $target = $this->getNewFileName($this->viewtype);
-        if(file_exists($target)) {
+        if (file_exists($target)) {
             // if we already have the target, skip the upgrade
             return false;
         }
@@ -53,6 +54,7 @@ class SidecarFilterMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
     public function convertLegacyViewDefsToSidecar()
     {
     }
+
     /**
      * Handling the file conversion.
      * @override SidecarAbstractMetaDataUpgrader::handleSave()
@@ -66,10 +68,10 @@ class SidecarFilterMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
         if ($viewName == MB_SEARCHVIEW) {
             $viewName = MB_BASICSEARCH;
         } elseif ($viewName != MB_BASICSEARCH) {
-            return array();
+            return [];
         }
         $impl = new DeployedSearchMetaDataImplementation($viewName, $module);
-        return $impl->createSidecarFilterDefsFromLegacy(array(), $this->loadFilterDef());
+        return $impl->createSidecarFilterDefsFromLegacy([], $this->loadFilterDef());
     }
 
     public function getNewFileName($viewname)
@@ -90,6 +92,6 @@ class SidecarFilterMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
         $parser = ParserFactory::getParser(MB_BASICSEARCH, $module);
         $defs = $parser->getOriginalViewDefs();
 
-        return isset($defs['fields']) ? $defs['fields'] : array();
+        return isset($defs['fields']) ? $defs['fields'] : [];
     }
 }

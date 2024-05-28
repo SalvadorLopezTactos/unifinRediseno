@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Jurnal de audit',
     'LBL_FIELD_NAME' => 'Camp',
     'LBL_OLD_NAME' => 'Valoare Veche',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Actualizare la',
     'LBL_BLANK' => '-necompletat-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia auditului',
+    'LBL_CREATED' => 'Creat',
+];

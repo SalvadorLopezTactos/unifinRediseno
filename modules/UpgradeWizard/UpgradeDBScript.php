@@ -25,7 +25,7 @@ abstract class UpgradeDBScript extends UpgradeScript
      * @param array $types Options. The parameter types. See the Doctrine DBAL documentation for more information.
      * @return integer The number of affected rows.
      */
-    protected function executeUpdate($sql, array $params = array(), array $types = array())
+    protected function executeUpdate($sql, array $params = [], array $types = [])
     {
         $rows = 0;
         try {

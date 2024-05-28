@@ -10,37 +10,35 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
- * Description:  
+ * Description:
  ********************************************************************************/
 
 
 global $mod_strings;
 
 
-
 $focus = BeanFactory::newBean('WorkFlowActionShells');
 
-if(!isset($_REQUEST['record']))
-	sugar_die($mod_strings['ERR_DELETE_RECORD']);
+if (!isset($_REQUEST['record'])) {
+    sugar_die($mod_strings['ERR_DELETE_RECORD']);
+}
 
-	$focus->retrieve($_REQUEST['record']);
-	
-	//check for bridged child (invites for meetings/calls
-	$focus->check_for_child_bridge(true);
-	
-	//mark delete alertshell components
-	mark_delete_components($focus->get_linked_beans('actions','WorkFlowAction'));
-	mark_delete_components($focus->get_linked_beans('rel1_action_fil','Expression'));
-	$focus->mark_deleted($_REQUEST['record']);
+$focus->retrieve($_REQUEST['record']);
 
-	$workflow_object = $focus->get_workflow_object();
-	$workflow_object->write_workflow();
-    $request = http_build_query(array(
-        'module' => $_REQUEST['return_module'],
-        'action' => $_REQUEST['return_action'],
-        'record' => $_REQUEST['return_id'],
-    ));
+//check for bridged child (invites for meetings/calls
+$focus->check_for_child_bridge(true);
 
-    header('Location: index.php?' . $request);
-?>
+//mark delete alertshell components
+mark_delete_components($focus->get_linked_beans('actions', 'WorkFlowAction'));
+mark_delete_components($focus->get_linked_beans('rel1_action_fil', 'Expression'));
+$focus->mark_deleted($_REQUEST['record']);
+
+$workflow_object = $focus->get_workflow_object();
+$workflow_object->write_workflow();
+$request = http_build_query([
+    'module' => $_REQUEST['return_module'],
+    'action' => $_REQUEST['return_action'],
+    'record' => $_REQUEST['return_id'],
+]);
+
+header('Location: index.php?' . $request);

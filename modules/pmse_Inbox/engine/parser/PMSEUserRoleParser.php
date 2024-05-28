@@ -148,7 +148,7 @@ class PMSEUserRoleParser extends PMSEAbstractDataParser implements PMSEDataParse
      * @param array $params
      * @return object
      */
-    public function parseCriteriaToken($criteriaToken, $params = array())
+    public function parseCriteriaToken($criteriaToken, $params = [])
     {
         //$tokenValueArray = explode($delimiter, $criteriaToken->expLabel);
         $tokenDelimiter = '::';
@@ -156,10 +156,10 @@ class PMSEUserRoleParser extends PMSEAbstractDataParser implements PMSEDataParse
             $criteriaToken->expValue = 'is_admin';
         }
         $tokenValue = $this->parseTokenValue($criteriaToken);
-        $newTokenArray = array('{', 'future', 'Users', 'id', '}');
+        $newTokenArray = ['{', 'future', 'Users', 'id', '}'];
         $assembledTokenString = implode($tokenDelimiter, $newTokenArray);
         $criteriaToken->expToken = $assembledTokenString;
-        $criteriaToken->currentValue = array($tokenValue);
+        $criteriaToken->currentValue = [$tokenValue];
         return $criteriaToken;
     }
 
@@ -171,10 +171,10 @@ class PMSEUserRoleParser extends PMSEAbstractDataParser implements PMSEDataParse
      */
     public function parseTokenValue($token)
     {
-        $variableUsers = array(
+        $variableUsers = [
             'owner' => isset($this->evaluatedBean) ? $this->evaluatedBean->assigned_user_id : '',
             'supervisor' => isset($this->currentUser) ? $this->currentUser->reports_to_id : '',
-        );
+        ];
 
         $output = '';
         switch ($token->expType) {
@@ -250,7 +250,7 @@ class PMSEUserRoleParser extends PMSEAbstractDataParser implements PMSEDataParse
      */
     public function decomposeToken($token)
     {
-        $response = array();
+        $response = [];
         $tokenArray = explode('::', $token);
         foreach ($tokenArray as $key => $value) {
             if ($value != '{' && $value != '}' && !empty($value)) {

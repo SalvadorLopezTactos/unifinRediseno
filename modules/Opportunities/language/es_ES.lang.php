@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Cuadro de mando de la lista de oportunidades',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Cuadro de mando de la lista de oportunidades',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Presupuestos',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Oportunidades por una cuenta dinámica',
+    'LBL_TOP_10_OPP' => 'Las 10 mejores oportunidades abiertas',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Dashlet: Mis oportunidades activas',
+    'LBL_MY_ACTIVE_OPP' => 'Mis oportunidades activas',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Total de Pipeline es',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Rol en Oportunidad',
+    'LBL_OPPORTUNITY_ROLE' => 'Rol en Oportunidad',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notas',
     'LBL_TAB_OPPORTUNITY' => 'Revisión de {{module}}',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'Si hace clic en Confirmar borrará TODOS los datos de Previsiones y cambiará la Vista de Oportunidades. Si esto no es lo que desea hacer, haga clic en cancelar para volver a la configuración anterior.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'Al hacer clic en Confirmar, borrará TODOS los datos de previsiones y cambiará la vista Oportunidades. '
-        .'Además, se deshabilitarán TODAS las definiciones de procesos con un módulo de público objetivo de las líneas de ingresos. '
-        .'Si no es lo que desea, haga clic en Cancelar para volver a la configuración anterior.',
+        . 'Además, se deshabilitarán TODAS las definiciones de procesos con un módulo de público objetivo de las líneas de ingresos. '
+        . 'Si no es lo que desea, haga clic en Cancelar para volver a la configuración anterior.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Si todos las líneas de ingresos están cerrados y al menos se ha ganado uno,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'la Fase de ventas de oportunidades se define como "Ganada".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Si todas las líneas de ingresos están en la Fase de ventas "Cerrado perdido",',
@@ -220,15 +223,15 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Tras iniciar este cambio, se crearán registros de las líneas de ingresos para cada {{module_name}} existente en segundo plano. Cuando los Elementos de las líneas de ingresos se completen y estén disponibles, se enviará una notificación a la dirección de correo electrónico de su perfil de usuario. Tenga en cuenta que su instancia se debe configurar para enviar correos electrónicos en Admin > Configuración de correo electrónico para que se envíen las notificaciones.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales de principio a fin. Cada registro de {{module_name}} representa una venta prospectiva e incluye datos de venta relevantes, así como relacionados con otros registros importantes, tales como {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} progresará normalmente a través de varias Etapas de Ventas hasta que se marque como "Ganado" o "Perdido". {{plural_module_name}} se puede aprovechar aún más utilizando el módulo de {{forecasts_singular_module}} de Sugar para comprender y predecir las tendencias de ventas, así como para enfocar el trabajo para lograr cuotas de ventas.',
+    'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales de principio a fin. Cada registro de {{module_name}} representa una posible venta e incluye datos relevantes de la venta, así como los relativos a otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} suele progresar a través de varias Etapas de Venta hasta que se marca como "Ganado" o "Perdido". {{plural_module_name}} se pueden aprovechar aún más mediante el uso del módulo de {{forecasts_singular_module}} de Sugar para comprender y predecir las tendencias de ventas, así como enfocar el trabajo para alcanzar las cuotas de ventas.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales y los artículos pertenecientes a esas ventas de principio a fin. Cada registro del {{module_name}} representa una venta potencial e incluye datos de venta relevantes, además de los relacionados con otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales y los artículos pertenecientes a esas ventas de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos de venta relevantes, además de los relacionados con otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc.
 
-- Edite los campos de este registro haciendo clic en un campo individual o en el botón Editar.
-- Vea o modifique enlaces a otros registros en los subpaneles cambiando el panel izquierdo inferior a "Vista de datos".
-- Comente o vea otros comentarios de usuarios y el historial del registro de cambios en el {{activitystream_singular_module}} cambiando el panel izquierdo inferior a "Flujo de Actividades".
-- Siga o marque este registro como favorito mediante los iconos a la derecha del nombre del registro.
+- Edite el registro haciendo clic en el campo individual o el botón Editar.
+- Vea o modifique enlaces a otros registros en los subpaneles cambiando el panel inferior izquierdo a "Vista de datos".
+- Comente o vea comentarios de otros usuarios y el historial de cambios del registro en {{activitystream_singular_module}} cambiando el panel inferior izquierdo a "Flujo de Actividades".
+- Siga o guarde como favorito el registro con los iconos a la derecha del nombre del registro.
 - Hay acciones adicionales disponibles en el menú desplegable Acciones a la derecha del botón Editar.',
 
     // Create View Help Text
@@ -260,4 +263,9 @@ Para crear un {{module_name}}:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Predicción de cierre de oportunidades',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Ver los detalles de la predicción para una oportunidad específica',
-);
+    'LBL_AI_WINRATE' => 'Tasa de ganados',
+    'LBL_AI_WONOPP' => 'Oportunidades ganadas',
+    'LBL_AI_CLOSINGTIME' => 'Horario de cierre',
+    'LBL_AI_CLOSEDOPP' => 'Oportunidades cerradas',
+    'LBL_AI_LEADTIMESPAN' => 'Tiempo transcurrido entre la creación de la oportunidad y la oportunidad ganada',
+];

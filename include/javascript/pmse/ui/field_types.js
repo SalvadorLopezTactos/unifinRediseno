@@ -2292,14 +2292,24 @@ SearchableCombobox.prototype.isValid = function() {
     return this.disabled || this._isValid;
 };
 
-SearchableCombobox.prototype.setValid = function(valid) {
+SearchableCombobox.prototype.setValid = function(valid, selectElement = '') {
     this._isValid = valid ? true : false;
+
+    if (selectElement) {
+        this.decorateRequiredField();
+    }
+
     this.decorateValid();
     return this;
 };
 
 SearchableCombobox.prototype.decorateValid = function() {
     $(this.controlObject).toggleClass(this._invalidFieldClass, !this.isValid());
+};
+
+SearchableCombobox.prototype.decorateRequiredField = function() {
+    const selectElement = $(this.html).find('.select2-container')[0];
+    $(selectElement).toggleClass(this._invalidFieldClass, !this.isValid());
 };
 
 SearchableCombobox.prototype._createSearchMoreOption = function () {

@@ -44,7 +44,7 @@ class Native implements BackendInterface
      * Hashing options
      * @var array
      */
-    protected $options = array();
+    protected $options = [];
 
     /**
      * Ctor
@@ -97,7 +97,7 @@ class Native implements BackendInterface
      */
     public function hash($password)
     {
-       return password_hash($password, $this->algo, $this->options);
+        return password_hash($password, $this->algo, $this->options);
     }
 
     /**

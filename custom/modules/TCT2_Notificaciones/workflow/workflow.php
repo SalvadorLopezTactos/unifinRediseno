@@ -1,20 +1,20 @@
 <?php
-
 use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
-include_once("include/workflow/alert_utils.php");
-include_once("include/workflow/action_utils.php");
-include_once("include/workflow/time_utils.php");
-include_once("include/workflow/trigger_utils.php");
+include_once 'include/workflow/alert_utils.php';
+include_once 'include/workflow/action_utils.php';
+include_once 'include/workflow/time_utils.php';
+include_once 'include/workflow/trigger_utils.php';
 //BEGIN WFLOW PLUGINS
-include_once("include/workflow/custom_utils.php");
+include_once 'include/workflow/custom_utils.php';
 //END WFLOW PLUGINS
-	class TCT2_Notificaciones_workflow {
-	function process_wflow_triggers(& $focus){
-		include("custom/modules/TCT2_Notificaciones/workflow/triggers_array.php");
-		include("custom/modules/TCT2_Notificaciones/workflow/alerts_array.php");
-		include("custom/modules/TCT2_Notificaciones/workflow/actions_array.php");
-		include("custom/modules/TCT2_Notificaciones/workflow/plugins_array.php");
-		if(isset($focus->fetched_row['id']) && $focus->fetched_row['id']!=""){ 
+class TCT2_Notificaciones_workflow {
+    function process_wflow_triggers($focus)
+    {
+        include 'custom/modules/TCT2_Notificaciones/workflow/triggers_array.php';
+        include 'custom/modules/TCT2_Notificaciones/workflow/alerts_array.php';
+        include 'custom/modules/TCT2_Notificaciones/workflow/actions_array.php';
+        include 'custom/modules/TCT2_Notificaciones/workflow/plugins_array.php';
+        if(isset($focus->fetched_row['id']) && $focus->fetched_row['id']!=""){ 
  
  if( ( !(
  	 ( 
@@ -46,8 +46,8 @@ include_once("include/workflow/custom_utils.php");
 
 
 	global $triggeredWorkflows;
-	if (!isset($triggeredWorkflows['d96fd8b0_16c6_11ef_a6f6_b6b41b25c921'])){
-		$triggeredWorkflows['d96fd8b0_16c6_11ef_a6f6_b6b41b25c921'] = true;
+	if (!isset($triggeredWorkflows['c2842150_17a3_11ef_903b_b6b41b25c921'])){
+		$triggeredWorkflows['c2842150_17a3_11ef_903b_b6b41b25c921'] = true;
 	    $alertshell_array = [];
     $alertshell_array['alert_msg'] = '88a3c80c-4278-11e8-9e62-00155d967307';
     $alertshell_array['source_type'] = 'Custom Template';
@@ -108,8 +108,8 @@ if(isset($focus->fetched_row['id']) && $focus->fetched_row['id']!=""){
 
 
 	global $triggeredWorkflows;
-	if (!isset($triggeredWorkflows['d96ff322_16c6_11ef_8d0b_b6b41b25c921'])){
-		$triggeredWorkflows['d96ff322_16c6_11ef_8d0b_b6b41b25c921'] = true;
+	if (!isset($triggeredWorkflows['c284704c_17a3_11ef_9e44_b6b41b25c921'])){
+		$triggeredWorkflows['c284704c_17a3_11ef_9e44_b6b41b25c921'] = true;
 	    $alertshell_array = [];
     $alertshell_array['alert_msg'] = '88a3c80c-4278-11e8-9e62-00155d967307';
     $alertshell_array['source_type'] = 'Custom Template';
@@ -121,7 +121,7 @@ if(isset($focus->fetched_row['id']) && $focus->fetched_row['id']!=""){
     $alertshell_array['alert_type'] = 'Email';
     process_workflow_alerts($focus, $alert_meta_array['TCT2_Notificaciones1_alert1'], $alertshell_array, false);
     unset($alertshell_array);
-		$action_meta_array['TCT2_Notificaciones1_action0']['trigger_id'] = 'd96ff322_16c6_11ef_8d0b_b6b41b25c921';
+		$action_meta_array['TCT2_Notificaciones1_action0']['trigger_id'] = 'c284704c_17a3_11ef_9e44_b6b41b25c921';
 	$action_meta_array['TCT2_Notificaciones1_action0']['action_id'] = '47203f02-9170-11ea-875a-00155da0710c';
 	 $action_meta_array['TCT2_Notificaciones1_action0']['workflow_id'] = '88187024-766f-11e8-b6d9-00155d967407';
 	 process_workflow_actions($focus, $action_meta_array['TCT2_Notificaciones1_action0']); 
@@ -143,10 +143,8 @@ if(isset($focus->fetched_row['id']) && $focus->fetched_row['id']!=""){
  		} 
 
 
-	//end function process_wflow_triggers
-	}
+    //end function process_wflow_triggers
+    }
 
-	//end class
-	}
-
-?>
+//end class
+}

@@ -15,13 +15,14 @@ use Doctrine\DBAL\Query\Expression\CompositeExpression;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 
-class Administration extends SugarBean {
-    var $settings;
-    var $table_name = "config";
-    var $object_name = "Administration";
-    var $new_schema = true;
-    var $module_dir = 'Administration';
-    var $config_categories = array(
+class Administration extends SugarBean
+{
+    public $settings;
+    public $table_name = 'config';
+    public $object_name = 'Administration';
+    public $new_schema = true;
+    public $module_dir = 'Administration';
+    public $config_categories = [
         // 'mail', // cn: moved to include/OutboundEmail
         'disclosure', // appended to all outbound emails
         'notify',
@@ -36,9 +37,9 @@ class Administration extends SugarBean {
         'base',
         'license',
         'csp',
-    );
-    var $disable_custom_fields = true;
-    public $checkbox_fields = array(
+    ];
+    public $disable_custom_fields = true;
+    public $checkbox_fields = [
         'notify_send_by_default',
         'mail_smtpauth_req',
         'notify_on',
@@ -50,15 +51,15 @@ class Administration extends SugarBean {
         'system_ldap_enabled',
         'captcha_on',
         'honeypot_on',
-        );
+    ];
     public $disable_row_level_security = true;
-    public static $passwordPlaceholder = "::PASSWORD::";
+    public static $passwordPlaceholder = '::PASSWORD::';
 
     /**
-    * List of default values needed for Pendo analytics
-    *
-    * @var array
-    */
+     * List of default values needed for Pendo analytics
+     *
+     * @var array
+     */
     protected $analyticsDefaults = [
         'si_id' => 'unknown_si_id',
         'si_name' => 'unknown_si_name',
@@ -251,26 +252,27 @@ class Administration extends SugarBean {
         ],
     ];
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         $this->setupCustomFields('Administration');
-        $this->disable_row_level_security =true;
+        $this->disable_row_level_security = true;
     }
 
-    function retrieveSettings($category = false, $clean=false) {
+    public function retrieveSettings($category = false, $clean = false)
+    {
         // declare a cache for all settings
         $settings_cache = sugar_cache_retrieve('admin_settings_cache');
 
         if ($clean) {
-            $settings_cache = array();
+            $settings_cache = [];
         }
 
         // Check for a cache hit
-        if(!empty($settings_cache)) {
+        if (!empty($settings_cache)) {
             $this->settings = $settings_cache;
-            if (!empty($this->settings[$category]))
-            {
+            if (!empty($this->settings[$category])) {
                 return $this;
             }
         }
@@ -325,19 +327,20 @@ class Administration extends SugarBean {
         }
 
         // At this point, we have built a new array that should be cached.
-        sugar_cache_put('admin_settings_cache',$this->settings);
+        sugar_cache_put('admin_settings_cache', $this->settings);
         return $this;
     }
 
-    function saveConfig() {
+    public function saveConfig()
+    {
         // outbound email settings
         $oe = new OutboundEmail();
         $oe = $oe->getSystemMailerSettings();
         $proxyVisible = Container::getInstance()->get(SugarConfig::class)->get('proxy_visible', true);
 
-        foreach($_POST as $key => $val) {
+        foreach ($_POST as $key => $val) {
             $prefix = $this->get_config_prefix($key);
-            if(in_array($prefix[0], $this->config_categories)) {
+            if (safeInArray($prefix[0], $this->config_categories)) {
                 if ($prefix[0] === 'proxy' && !$proxyVisible) {
                     continue;
                 }
@@ -350,8 +353,8 @@ class Administration extends SugarBean {
                         $val = '';
                     }
                 }
-                if(is_array($val)){
-                    $val=implode(",",$val);
+                if (is_array($val)) {
+                    $val = implode(',', $val);
                 }
                 $this->saveSetting($prefix[0], $prefix[1], $val);
             }
@@ -407,7 +410,7 @@ class Administration extends SugarBean {
         if (is_array($value)) {
             $value = json_encode($value);
         }
-        if ($category . "_" . $key == 'ldap_admin_password' || $category . "_" . $key == 'proxy_password') {
+        if ($category . '_' . $key == 'ldap_admin_password' || $category . '_' . $key == 'proxy_password') {
             $value = $this->encrpyt_before_save($value);
         }
         $builder = $conn->createQueryBuilder();
@@ -433,7 +436,7 @@ class Administration extends SugarBean {
             // we have an api call so lets clear out the cache for the module + platform
             global $moduleList;
             // FIXME TY-839 'portal' should be the platform, not category
-            if (in_array($category, $moduleList) || $category == 'portal') {
+            if (safeInArray($category, $moduleList) || $category == 'portal') {
                 $cache_key = 'ModuleConfig-' . $category;
                 if ($platform !== 'base') {
                     $cache_key .= $platform;
@@ -494,56 +497,58 @@ class Administration extends SugarBean {
     /**
      * Return the config for a specific module.
      *
-     * @param string $module        The module we are wanting to get the config for
-     * @param string $platform      The platform we want to get the data back for
-     * @param boolean $clean        Get clean copy of module config
+     * @param string $module The module we are wanting to get the config for
+     * @param string $platform The platform we want to get the data back for
+     * @param boolean $clean Get clean copy of module config
      * @return array
      */
-    public function getConfigForModule($module, $platform = 'base', $clean = false) {
+    public function getConfigForModule($module, $platform = 'base', $clean = false)
+    {
         // platform is always lower case
         $platform = strtolower($platform);
 
-        $cache_key = "ModuleConfig-" . $module;
-        if($platform != "base")  {
+        $cache_key = 'ModuleConfig-' . $module;
+        if ($platform != 'base') {
             $cache_key .= $platform;
         }
 
-        if($clean){
+        if ($clean) {
             sugar_cache_clear($cache_key);
         } else {
             // try and see if there is a cache for this
             $moduleConfig = sugar_cache_retrieve($cache_key);
 
-            if(!empty($moduleConfig)) {
+            if (!empty($moduleConfig)) {
                 return $moduleConfig;
             }
         }
 
-        $sql = "SELECT name, value FROM config WHERE category = ?";
-        if($platform != "base") {
+        $sql = 'SELECT name, value FROM config WHERE category = ?';
+        if ($platform != 'base') {
             // if the platform is not base, we need to order it so the platform we are looking for overrides any base values
             $sql .= " AND platform IN ('base', ?) ORDER BY CASE WHEN platform = 'base' THEN 0 ELSE 1 END";
         } else {
-            $sql .= " AND platform = ?";
+            $sql .= ' AND platform = ?';
         }
 
         $conn = $this->db->getConnection();
-        $result = $conn->executeQuery($sql, array($module, $platform));
+        $result = $conn->executeQuery($sql, [$module, $platform]);
 
-        $moduleConfig = array();
+        $moduleConfig = [];
         while ($row = $result->fetchAssociative()) {
             $moduleConfig[$row['name']] = $this->decodeConfigVar($row['value']);
         }
 
-        if(!empty($moduleConfig)) {
+        if (!empty($moduleConfig)) {
             sugar_cache_put($cache_key, $moduleConfig);
         }
 
         return $moduleConfig;
     }
 
-    function get_config_prefix($str) {
-        return Array(substr($str, 0, strpos($str, "_")), substr($str, strpos($str, "_")+1));
+    public function get_config_prefix($str)
+    {
+        return [substr($str, 0, strpos($str, '_')), substr($str, strpos($str, '_') + 1)];
     }
 
     /**
@@ -560,7 +565,7 @@ class Administration extends SugarBean {
             ->from($this->table_name);
         $stmt = $query->execute();
 
-        $return = array();
+        $return = [];
         while ($row = $stmt->fetchAssociative()) {
             $row['value'] = $this->decodeConfigVar($row['value']);
             $return[] = $row;
@@ -582,7 +587,7 @@ class Administration extends SugarBean {
             if ($var[0] == '{' || $var[0] == '[') {
                 $decoded = json_decode($var, true);
                 // if we didn't get a json error, then put the decoded value as the value we want to return
-                if(json_last_error() == JSON_ERROR_NONE) {
+                if (json_last_error() == JSON_ERROR_NONE) {
                     $var = $decoded;
                 }
             } elseif (is_numeric($var) && ctype_digit($var)) {
@@ -599,7 +604,7 @@ class Administration extends SugarBean {
      * @param bool $clean
      * @return Administration
      */
-    public static function getSettings($category = false, $clean=false)
+    public static function getSettings($category = false, $clean = false)
     {
         $admin = BeanFactory::newBean('Administration');
         $admin->retrieveSettings($category, $clean);
@@ -613,8 +618,9 @@ class Administration extends SugarBean {
      */
     public function bean_implements($interface)
     {
-        switch($interface){
-            case 'ACL':return true;
+        switch ($interface) {
+            case 'ACL':
+                return true;
         }
         return false;
     }
@@ -684,7 +690,7 @@ class Administration extends SugarBean {
                 }
 
                 if (!empty($products)) {
-                    $data['si_product_list'] = implode(", ", $products);
+                    $data['si_product_list'] = implode(', ', $products);
                 } else {
                     LoggerManager::getLogger()->error('Unable to get product list from license server.');
                     $data['si_product_list'] = 'unknown_product_list';
@@ -710,4 +716,3 @@ class Administration extends SugarBean {
         return $data;
     }
 }
-

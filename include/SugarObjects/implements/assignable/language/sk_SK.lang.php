@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-'LBL_ASSIGNED_TO_ID'=>'Priradené používateľské ID',
-'LBL_ASSIGNED_TO_NAME' => 'Priradené k',
-);
+$mod_strings = [
+    'LBL_ASSIGNED_TO_ID' => 'Priradené používateľské ID',
+    'LBL_ASSIGNED_TO_NAME' => 'Priradené k',
+];

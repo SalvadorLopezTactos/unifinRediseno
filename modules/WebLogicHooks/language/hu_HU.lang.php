@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Web Logic Hook állományok',
     'LBL_MODULE_NAME_SINGULAR' => 'Web Logic Hook állományok',
     'LBL_MODULE_TITLE' => 'Web Logic Hook állományok',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => 'Lekérés módja',
     'LBL_TRIGGER_EVENT' => 'Kiváltó esemény',
     'LBL_URL' => 'URL',
-);
+];

@@ -22,18 +22,18 @@ class QuotesStudioModule extends StudioModule
     {
         $views = parent::getViews();
 
-        $views = array_merge(array(
-            translate("LBL_QUOTE_DATA_GRAND_TOTALS_HEADER", "Quotes") => array(
-                'name' => translate("LBL_QUOTE_DATA_GRAND_TOTALS_HEADER", "Quotes"),
+        $views = array_merge([
+            translate('LBL_QUOTE_DATA_GRAND_TOTALS_HEADER', 'Quotes') => [
+                'name' => translate('LBL_QUOTE_DATA_GRAND_TOTALS_HEADER', 'Quotes'),
                 'type' => 'quote-data-grand-totals-header',
                 'image' => 'quote-data-grand-totals-header',
-            ),
-            translate("LBL_QUOTE_DATA_GRAND_TOTALS_FOOTER", "Quotes") => array(
-                'name' => translate("LBL_QUOTE_DATA_GRAND_TOTALS_FOOTER", "Quotes"),
+            ],
+            translate('LBL_QUOTE_DATA_GRAND_TOTALS_FOOTER', 'Quotes') => [
+                'name' => translate('LBL_QUOTE_DATA_GRAND_TOTALS_FOOTER', 'Quotes'),
                 'type' => 'quote-data-grand-totals-footer',
                 'image' => 'quote-data-grand-totals-footer',
-            ),
-        ), $views);
+            ],
+        ], $views);
 
         return $views;
     }
@@ -42,8 +42,8 @@ class QuotesStudioModule extends StudioModule
     {
         $layouts = parent::getLayouts();
 
-        unset($layouts[translate("LBL_QUOTE_DATA_GRAND_TOTALS_HEADER", "Quotes")]);
-        unset($layouts[translate("LBL_QUOTE_DATA_GRAND_TOTALS_FOOTER", "Quotes")]);
+        unset($layouts[translate('LBL_QUOTE_DATA_GRAND_TOTALS_HEADER', 'Quotes')]);
+        unset($layouts[translate('LBL_QUOTE_DATA_GRAND_TOTALS_FOOTER', 'Quotes')]);
 
         return $layouts;
     }

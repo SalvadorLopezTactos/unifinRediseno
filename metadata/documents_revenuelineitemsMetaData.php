@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['documents_revenuelineitems'] = array(
+$dictionary['documents_revenuelineitems'] = [
     'true_relationship_type' => 'many-to-many',
-    'relationships' => array(
-        'documents_revenuelineitems' => array(
+    'relationships' => [
+        'documents_revenuelineitems' => [
             'lhs_module' => 'Documents',
             'lhs_table' => 'documents',
             'lhs_key' => 'id',
@@ -24,57 +24,57 @@ $dictionary['documents_revenuelineitems'] = array(
             'join_table' => 'documents_revenuelineitems',
             'join_key_lhs' => 'document_id',
             'join_key_rhs' => 'rli_id',
-        ),
-    ),
+        ],
+    ],
     'table' => 'documents_revenuelineitems',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => true,
-        ),
-        'document_id' => array(
+        ],
+        'document_id' => [
             'name' => 'document_id',
             'type' => 'id',
-        ),
-        'rli_id' => array(
+        ],
+        'rli_id' => [
             'name' => 'rli_id',
             'type' => 'id',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'documents_revenuelineitemssspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'documents_revenuelineitems_revenuelineitem_id',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'rli_id',
                 'document_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'documents_revenuelineitems_document_id',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'document_id',
                 'rli_id',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

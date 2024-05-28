@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת פריטי שורה של רכישות',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות פריטי שורה של רכישות',
     'LBL_PARENT_PURCHASE' => 'רכישת אב',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן של פריטי שורה שנרכשו',
 ];

@@ -10,59 +10,59 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['projects_quotes'] = array(
+$dictionary['projects_quotes'] = [
     'table' => 'projects_quotes',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'quote_id' => array(
+        ],
+        'quote_id' => [
             'name' => 'quote_id',
             'type' => 'id',
-        ),
-        'project_id' => array(
+        ],
+        'project_id' => [
             'name' => 'project_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'projects_quotes_pk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_proj_quote_quote',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'quote_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'projects_quotes_alt',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'project_id',
                 'quote_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'projects_quotes' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'projects_quotes' => [
             'lhs_module' => 'Project',
             'lhs_table' => 'project',
             'lhs_key' => 'id',
@@ -73,6 +73,6 @@ $dictionary['projects_quotes'] = array(
             'join_table' => 'projects_quotes',
             'join_key_lhs' => 'project_id',
             'join_key_rhs' => 'quote_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

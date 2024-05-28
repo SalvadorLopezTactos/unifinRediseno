@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('sugarEntry') || !sugarEntry) {
     die('Not A Valid Entry Point');
 }
@@ -17,6 +18,6 @@ $hook_array['after_save'][] = [
     1,
     'geocode',
     null,
-    '\\Sugarcrm\\Sugarcrm\\Maps\\HookHandler',
+    '\\' . \Sugarcrm\Sugarcrm\Maps\HookHandler::class,
     'geocode',
 ];

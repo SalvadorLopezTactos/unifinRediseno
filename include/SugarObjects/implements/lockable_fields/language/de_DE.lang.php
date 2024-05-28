@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_LOCKED_FIELDS_LINK' => 'Für Bearbeitung gesperrte Felder',
     'LBL_LOCKED_FIELDS' => 'Für Bearbeitung gesperrte Felder',
-);
+];

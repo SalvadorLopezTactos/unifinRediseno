@@ -51,6 +51,7 @@
                     }
                 } else {
                     callback = callback || $.noop;
+                    this.prevState = this.stages;
                     form = _.first(this.getFormsOrStageAndJourneyForms(target.get('forms'), triggerEvent));
                     if (form) {
                         url = app.api.buildURL('CJ_Forms', 'target', {id: form.id}, {activity_id: target.id});
@@ -119,8 +120,6 @@
                     if (form.ignore_errors) {
                         callback();
                     }
-
-                    return;
                 }
 
                 let target = app.data.createBean(response.module,
@@ -132,14 +131,16 @@
                     target.set('dri_workflow_name', this.model.get('name'));
                 }
 
-                if (form.action_type === 'view_record') {
+                if (form.action_type === 'view_record' && response.target.id) {
                     this.reRoute(target.module, target.id);
-                    if (_.isFunction(callback)) {
-                        callback();
-                    }
-                } else if (_.isEmpty(form.action_trigger_type) || form.action_trigger_type === 'manual_create' ||
-                    form.action_trigger_type === 'manual_update') {
+                } else if ((_.isEmpty(form.action_trigger_type) && form.action_type !== 'view_record') ||
+                    form.action_trigger_type === 'manual_create' ||
+                    (form.action_trigger_type === 'manual_update' && response.target.id)) {
                     this.createUpdate(callback, form, response, target);
+                }
+
+                if (_.isFunction(callback)) {
+                    callback();
                 }
             },
 
@@ -222,9 +223,9 @@
                             }
                             if ((form.parent_type == 'DRI_SubWorkflow_Templates' ||
                                 form.parent_type == 'DRI_Workflow_Templates') &&
-                                (!_.isEmpty(model.get('dri_subworkflow_id')) ||
+                                (model && (!_.isEmpty(model.get('dri_subworkflow_id')) ||
                                     !_.isEmpty(model.get('dri_workflow_id')) ||
-                                    !_.isEmpty(model.get('parent_id')))) {
+                                    !_.isEmpty(model.get('parent_id'))))) {
                                 this.reloadAllJourneys();
                             }
                             if (model && _.isFunction(callback)) {
@@ -457,9 +458,8 @@
              *
              * @param {Object} activity
              * @param {string} stageId
-             * @param {boolean} isPrevStageCompleted
              */
-            handleFormsForStage: function(activity, stageId, isPrevStageCompleted = true) {
+            handleFormsForStage: function(activity, stageId) {
                 if (!_.isEmpty(activity) && !_.isEmpty(stageId)) {
                     let startNewJourney = !_.isEmpty(activity.get('start_next_journey_id'));
                     let stage = app.data.createBean(this.stageModule, {
@@ -467,7 +467,7 @@
                     });
                     let object = _.clone(this);
                     stage.fetch({
-                        success: _.bind(this.handleFormsForStageSuccess, object, isPrevStageCompleted, stage,
+                        success: _.bind(this.handleFormsForStageSuccess, object, stage,
                             startNewJourney, activity),
                     });
                 }
@@ -476,27 +476,19 @@
             /**
              * Success of Fetch stage for a given id
              *
-             * @param {boolean} isPrevStageCompleted
              * @param {Object} stage
              * @param {boolean} startNewJourney
              */
-            handleFormsForStageSuccess: function(isPrevStageCompleted, stage, startNewJourney, activity) {
+            handleFormsForStageSuccess: function(stage, startNewJourney, activity) {
                 if (_.isEqual(stage.get('state'), 'completed') || _.isEqual(stage.get('state'), 'in_progress')) {
-                    let triggerFlag = true;
-                    _.each(this.stages[stage.id].activities, function(stageActivity) {
-                        if ((stageActivity.model.get('status') !== 'Not Started' &&
-                            stageActivity.model.get('status') !== 'Planned') || !isPrevStageCompleted) {
-                            triggerFlag = false;
-                        }
-                    }, this);
-
                     let stageTarget = this.stages[stage.id];
 
-                    if (!_.isEmpty(stageTarget)) {
+                    if (!_.isEmpty(stageTarget) && !_.isUndefined(this.prevState) &&
+                        this.prevState[stage.id].model.get('state') !== stage.get('state')) {
                         let stageForm = _.first(this.getFormsOrStageAndJourneyForms(stageTarget.data.forms,
                             stage.get('state')));
                         if (!_.isEmpty(stageForm) && _.isEqual(stage.get('state'), stageForm.trigger_event)) {
-                            if (stageForm.trigger_event === 'in_progress' && triggerFlag) {
+                            if (stageForm.trigger_event === 'in_progress') {
                                 this.handleForms(stage, stageForm.trigger_event, null);
                             } else if (stageForm.trigger_event === 'completed') {
                                 this.handleForms(stage, stageForm.trigger_event, null);
@@ -563,7 +555,7 @@
                 if (!_.isUndefined(stageIds[currentStageIdIndex + 1])) {
                     let stage = this.stages[stageIds[currentStageIdIndex + 1]];
                     if (stage.model.get('state') !== 'completed') {
-                        this.handleFormsForStage(activity, stageIds[currentStageIdIndex + 1], true);
+                        this.handleFormsForStage(activity, stageIds[currentStageIdIndex + 1]);
                     }
                 }
             },
@@ -574,7 +566,7 @@
             reloadAllJourneys: function() {
                 this.layout.loadDataClicked = true;
                 this.layout.context.set('customer_journey_fetching_parent_model', false);
-                this.layout.context.trigger('reload_workflows', null);
+                this.layout.context.trigger('reload_workflows', true);
             },
         });
     });

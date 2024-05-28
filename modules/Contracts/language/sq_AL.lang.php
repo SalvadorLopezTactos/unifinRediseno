@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Kontratat',
-	'LBL_MODULE_NAME_SINGULAR' => 'Kontrata',
-	'LBL_MODULE_TITLE' => 'Kontratat: Ballina',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Kontratat',
+    'LBL_MODULE_NAME_SINGULAR' => 'Kontrata',
+    'LBL_MODULE_TITLE' => 'Kontratat: Ballina',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Krijo kontratë',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'ID e Monedhës',
     'LBL_CURRENCY' => 'monedha',
     'LBL_CURRENCY_RATE' => 'Kursi i valutës',
-    'LBL_ASSIGNED_TO_NAME'=>'Drejtuar:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Drejtuar:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Lista e kontratave',	
+    'LBL_LIST_FORM_TITLE' => 'Lista e kontratave',
     'LBL_LIST_CONTRACT_NAME' => 'Emri i kontratës',
     'LBL_LIST_ACCOUNT_NAME' => 'Emri i llogarisë:',
     'LBL_LIST_START_DATE' => 'Fillim',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Emri',
     'LBL_LIST_CONTRACT_VALUE' => 'Vlera',
 
-    'LBL_TYPE'=>'Lloji',
+    'LBL_TYPE' => 'Lloji',
     'LBL_TYPE_NAME' => 'Emri i llojit',
-    'LBL_CONTRACT_TYPE'=>'Lloji',
+    'LBL_CONTRACT_TYPE' => 'Lloji',
 
     'LBL_CREATED_USER' => 'Përdorues i krijuar',
     'LBL_MODIFIED_USER' => 'përdorues i modifikuar',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te kontratat',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të kontakteve',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e kontratës',
+];

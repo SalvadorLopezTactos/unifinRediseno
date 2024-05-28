@@ -9,47 +9,47 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['OutboundEmail']['base']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['OutboundEmail']['base']['view']['list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'enabled' => true,
                     'default' => true,
                     'link' => true,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'type',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'email_address',
                     'type' => 'email-address',
                     'enabled' => true,
                     'default' => true,
                     'link' => false,
-                ),
-                array(
+                ],
+                [
                     'name' => 'mail_smtpserver',
                     'enabled' => true,
                     'default' => true,
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'mail_smtpuser',
                     'enabled' => true,
                     'default' => true,
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'team_name',
                     'enabled' => true,
                     'default' => true,
                     'label' => 'LBL_PRIMARY_TEAM',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

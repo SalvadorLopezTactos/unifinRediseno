@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Веб-расширения логики модулей (Web Logic Hooks)',
     'LBL_MODULE_NAME_SINGULAR' => 'Веб-расширения логики модулей (Web Logic Hooks)',
     'LBL_MODULE_TITLE' => 'Веб-расширения логики модулей (Web Logic Hooks)',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => 'Запрашивать Метод',
     'LBL_TRIGGER_EVENT' => 'Инициировать Событие',
     'LBL_URL' => 'URL',
-);
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="headerpane">
+<div class="headerpane bg-[--primary-content-background] box-border fixed table">
     <h1>
     <span class="record-cell" data-type="dashboardtitle">
         <span sfuuid="493" class="detail">
@@ -33,7 +33,7 @@
                     <div class="span12 ">
                         {{#with previewModel}}
                             <div class="tile_header portlet-header">
-                                <div class="name ellipsis_inline pull-left" data-placement="bottom" title=""
+                                <div class="name ellipsis_inline pull-left" data-bs-placement="bottom" title=""
                                      data-original-title="{{str tile_header moduleName}}">
                                     <a href="javascript:void(0)">
                                         { {{str tile_header moduleName}} }
@@ -45,7 +45,7 @@
                                 <div class="info-container span12">
                                     {{#each tile_body_fields}}
                                         <span sfuuid="606" class="list">
-                                <div class="ellipsis_inline" data-placement="bottom" title=""
+                                <div class="ellipsis_inline" data-bs-placement="bottom" title=""
                                      data-original-title="{{str this ../moduleName}}">
                                     { {{str this ../moduleName}} }
                                 </div>

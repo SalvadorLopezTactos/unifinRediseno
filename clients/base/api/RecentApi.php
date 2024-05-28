@@ -9,22 +9,23 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Doctrine\DBAL;
 
 class RecentApi extends SugarApi
 {
     public function registerApiRest()
     {
-        return array(
-            'getRecentlyViewed' => array(
+        return [
+            'getRecentlyViewed' => [
                 'reqType' => 'GET',
-                'path' => array('recent'),
-                'pathVars' => array('',''),
+                'path' => ['recent'],
+                'pathVars' => ['', ''],
                 'method' => 'getRecentlyViewed',
                 'shortHelp' => 'This method retrieves recently viewed records for the user.',
                 'longHelp' => 'include/api/help/me_recently_viewed_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -39,6 +40,20 @@ class RecentApi extends SugarApi
     }
 
     /**
+     * List of fields that are mandatory for all filters
+     * @var array
+     */
+    protected static array $mandatoryFields = [
+        'id',
+        'name',
+        'date_modified',
+        'assigned_user_id',
+        'created_by',
+        'locked_fields',
+        'team_set_id',
+    ];
+
+    /**
      * Set up options from args and default values.
      *
      * @param arrat $args Arguments from request.
@@ -46,10 +61,10 @@ class RecentApi extends SugarApi
      */
     protected function parseArguments(array $args)
     {
-        $options = array();
-        $options['limit'] = !empty($args['limit']) ? (int) $args['limit'] : 20;
+        $options = [];
+        $options['limit'] = !empty($args['limit']) ? (int)$args['limit'] : 20;
         if (!empty($args['max_num'])) {
-            $options['limit'] = (int) $args['max_num'];
+            $options['limit'] = (int)$args['max_num'];
         }
 
         $options['limit'] = $this->checkMaxListLimit($options['limit']);
@@ -59,38 +74,19 @@ class RecentApi extends SugarApi
             if ($args['offset'] == 'end') {
                 $options['offset'] = 'end';
             } else {
-                $options['offset'] = (int) $args['offset'];
+                $options['offset'] = (int)$args['offset'];
             }
         }
 
-        $options['select'] = !empty($args['fields']) ? explode(",", $args['fields']) : null;
+        $options['select'] = !empty($args['fields']) ? explode(',', $args['fields']) : null;
         $options['module'] = !empty($args['module']) ? $args['module'] : null;
         $options['date'] = !empty($args['date']) ? $args['date'] : null;
         $options['erased_fields'] = !empty($args['erased_fields']);
 
-        $options['moduleList'] = array();
+        $options['moduleList'] = [];
         if (!empty($args['module_list'])) {
             $options['moduleList'] = array_filter(explode(',', $args['module_list']));
         }
-
-        if (isset($args['view'])) {
-            $platform = $this->getPlatform($args);
-
-            $mm = $this->getMetaDataManager($platform);
-
-            foreach ($options['moduleList'] as $module) {
-                $moduleViewFields = $mm->getModuleViewFields($module, $args['view']);
-                foreach ($moduleViewFields as $field) {
-                    if (!isset($options['select'])) {
-                        $options['select'] = [];
-                    }
-                    if (!in_array($field, $options['select'])) {
-                        $options['select'][] = $field;
-                    }
-                }
-            }
-        }
-
 
         return $options;
     }
@@ -101,7 +97,7 @@ class RecentApi extends SugarApi
      * @param array $args
      * @return string
      */
-    private function getPlatform(array $args) : string
+    private function getPlatform(array $args): string
     {
         $platform = 'base';
         if (isset($args['platform'])) {
@@ -112,6 +108,7 @@ class RecentApi extends SugarApi
 
         return $platform;
     }
+
     /**
      * Filters the list of modules to the ones that the user has access to and
      * that exist on the moduleList.
@@ -123,7 +120,7 @@ class RecentApi extends SugarApi
     private function filterModules(array $modules, $acl = 'list')
     {
         return array_filter($modules, function ($module) use ($acl) {
-            if (in_array($module, $GLOBALS['moduleList']) || $module === 'Employees') {
+            if (safeInArray($module, $GLOBALS['moduleList']) || $module === 'Employees') {
                 $seed = BeanFactory::newBean($module);
                 return $seed && $seed->ACLAccess($acl);
             }
@@ -141,7 +138,7 @@ class RecentApi extends SugarApi
      */
     public function getRecentlyViewed(ServiceBase $api, array $args, $acl = 'list')
     {
-        $this->requireArgs($args, array('module_list'));
+        $this->requireArgs($args, ['module_list']);
 
         $options = $this->parseArguments($args);
 
@@ -152,12 +149,12 @@ class RecentApi extends SugarApi
         $moduleList = $this->filterModules($options['moduleList'], $acl);
 
         if (empty($moduleList)) {
-            return array('next_offset' => -1 , 'records' => array());
+            return ['next_offset' => -1, 'records' => []];
         }
 
         $results = $this->getRecentIdsFromTracker($moduleList, $options);
         if (empty($results)) {
-            return array('next_offset' => -1 , 'records' => array());
+            return ['next_offset' => -1, 'records' => []];
         }
 
         $data = $beans = $orderedBeans = [];
@@ -174,9 +171,17 @@ class RecentApi extends SugarApi
         // 'Cause last_viewed_date is an alias (not a real field), we need to
         // temporarily store its values and append it later to each recently
         // viewed record
-        $lastViewedDates = array();
+        $lastViewedDates = [];
         foreach ($subGroups as $module => $ids) {
             $seed = BeanFactory::newBean($module);
+            $displayParams = [];
+
+            if (array_key_exists('view', $args) && $args['view']
+                && array_key_exists('detailedFetch', $args) && isTruthy($args['detailedFetch'])) {
+                $this->getFieldsFromArgs($api, $args, $seed, 'view', $displayParams);
+                $options['display_params'] = $displayParams;
+            }
+
             $beans = $this->getRecentlyViewedBeans($seed, $ids, $options);
             foreach ($results as $key => $row) {
                 if (!empty($beans[$row['item_id']])) {
@@ -184,15 +189,30 @@ class RecentApi extends SugarApi
                         $data['next_offset'] = ($options['limit'] + $options['offset']);
                         break;
                     }
-                    $orderedBeans[$key] = $beans[$row['item_id']];
+
+                    if (array_key_exists('view', $args) && $args['view']
+                        && array_key_exists('detailedFetch', $args) && isTruthy($args['detailedFetch'])) {
+                        $bean = BeanFactory::retrieveBean($module, $row['item_id']);
+
+                        $options['display_params'] = $displayParams;
+
+                        $formattedBean = $this->formatBean($api, $args, $bean, $options);
+
+                        $data['records'][] = $formattedBean;
+                    } else {
+                        $orderedBeans[$key] = $beans[$row['item_id']];
+                    }
+
                     $lastViewedDates[$row['item_id']] = $db->fromConvert($row['last_viewed_date'], 'datetime');
                 }
             }
         }
 
-        $data['records'] = $this->formatBeans($api, $args, $orderedBeans);
+        if (!array_key_exists('detailedFetch', $args)) {
+            $data['records'] = $this->formatBeans($api, $args, $orderedBeans);
+        }
 
-        foreach($data['records'] as &$record) {
+        foreach ($data['records'] as &$record) {
             $record['_last_viewed_date'] = $timedate->asIso($timedate->fromDb($lastViewedDates[$record['id']]));
         }
 
@@ -208,19 +228,13 @@ class RecentApi extends SugarApi
      * @param array $options API options
      * @return array of SugarBeans.
      */
-    private function getRecentlyViewedBeans(SugarBean $seed, array $ids, array $options) : array
+    private function getRecentlyViewedBeans(SugarBean $seed, array $ids, array $options): array
     {
         $query = new SugarQuery();
         $query->from($seed, $options);
         $query->where()->in('id', $ids);
 
         $fields = [];
-        $mandatoryFields = [
-            'id',
-            'name',
-            'date_modified',
-            'team_set_id',
-        ];
         if (isset($options['select'])) {
             foreach ($options['select'] as $fieldName) {
                 if (isset($seed->field_defs[$fieldName])) {
@@ -228,7 +242,7 @@ class RecentApi extends SugarApi
                 }
             }
         }
-        $fields = array_unique(array_merge($fields, $mandatoryFields));
+        $fields = array_unique(array_merge($fields, self::$mandatoryFields));
 
         return $seed->fetchFromQuery($query, $fields, $options);
     }

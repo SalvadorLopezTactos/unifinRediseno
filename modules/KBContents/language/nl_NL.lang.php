@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Dashboard Kennisbasislijst',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Dashboard kennisbasisrecord',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer kennisbasis',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn kennisdatabank',
 
     'LBL_MODULE_NAME' => 'Knowledge Base',
     'LBL_MODULE_NAME_SINGULAR' => 'Knowledge Base Artikel',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Waarde instellen als primair',
     'LBL_ITEM_REMOVE' => 'Item verwijderen',
     'LBL_ITEM_ADD' => 'Item toevoegen',
-    'LBL_MODULE_ID'=> 'KBInhoud',
+    'LBL_MODULE_ID' => 'KBInhoud',
     'LBL_DOCUMENT_REVISION_ID' => 'Herziening-ID',
     'LBL_DOCUMENT_REVISION' => 'Revisie',
     'LBL_NUMBER' => 'Offertenummer',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'Meer {{module}} artikelen...',
     'LBL_LIST_FORM_TITLE' => 'Knowledge Base lijst',
     'LBL_SEARCH_FORM_TITLE' => 'Knowledge Base zoeken',
-);
+];

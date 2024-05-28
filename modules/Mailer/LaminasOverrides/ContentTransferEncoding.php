@@ -10,6 +10,7 @@
  * SugarCRM Changelog
  * 04/22/2021 Changed validation for transfer encoding in setTransferEncoding
  */
+
 namespace Laminas\Mail\Header;
 
 class ContentTransferEncoding implements HeaderInterface
@@ -86,22 +87,22 @@ class ContentTransferEncoding implements HeaderInterface
     /**
      * Set the content transfer encoding
      *
-     * @param  string $transferEncoding
-     * @throws Exception\InvalidArgumentException
+     * @param string $transferEncoding
      * @return $this
+     * @throws Exception\InvalidArgumentException
      */
     public function setTransferEncoding($transferEncoding)
     {
         // Per RFC 1521, the value of the header is not case sensitive
         $transferEncoding = strtolower($transferEncoding);
 
-        if (! in_array($transferEncoding, static::$allowedTransferEncodings)) {
+        if (!in_array($transferEncoding, static::$allowedTransferEncodings)) {
             // Changed by SugarCRM to try to guess the encoding
             if (!$this->setSimilarEncoding($transferEncoding)) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                    '%s expects one of "'. implode(', ', static::$allowedTransferEncodings) . '"; received "%s"',
+                    '%s expects one of "' . implode(', ', static::$allowedTransferEncodings) . '"; received "%s"',
                     __METHOD__,
-                    (string) $transferEncoding
+                    (string)$transferEncoding
                 ));
             }
         } else {
@@ -120,7 +121,7 @@ class ContentTransferEncoding implements HeaderInterface
     {
         $transferEncoding = trim($transferEncoding);
         foreach (static::$allowedTransferEncodings as $validEncoding) {
-            if (strpos($transferEncoding, $validEncoding) !== false) {
+            if (strpos($transferEncoding, (string) $validEncoding) !== false) {
                 $this->transferEncoding = $validEncoding;
                 return true;
             }

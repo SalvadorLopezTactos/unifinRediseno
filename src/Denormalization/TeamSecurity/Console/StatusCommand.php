@@ -64,6 +64,7 @@ class StatusCommand extends Command implements InstanceModeInterface
         ]);
 
         $table->render();
+        return 0;
     }
 
     /**

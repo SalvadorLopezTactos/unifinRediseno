@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Contains a variety of utility functions used to display UI
  * components such as form headers and footers.  Intended to be modified on a per
  * theme basis.
@@ -22,8 +21,8 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  */
-function get_validate_record_js () {
-
+function get_validate_record_js()
+{
 }
 
 
@@ -33,8 +32,6 @@ function get_validate_record_js () {
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  */
-function get_new_record_form () {
-
+function get_new_record_form()
+{
 }
-
-?>

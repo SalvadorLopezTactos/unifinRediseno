@@ -15,14 +15,15 @@
  * leaves are split by the longest month occurring at the end of the quarter
  * @api
  */
-class Quarter445TimePeriod extends TimePeriod implements TimePeriodInterface {
-
+class Quarter445TimePeriod extends TimePeriod implements TimePeriodInterface
+{
     /**
      * constructor override
      *
      * @param null $start_date date string to set the start date of the quarter time period
      */
-    public function __construct($start_date = null) {
+    public function __construct($start_date = null)
+    {
         parent::__construct();
         //set defaults
         $this->type = 'Quarter445';
@@ -40,8 +41,8 @@ class Quarter445TimePeriod extends TimePeriod implements TimePeriodInterface {
      */
     public function buildLeaves($shownBackwardDifference, $shownForwardDifference, $quadrantCt)
     {
-        if($this->hasLeaves()) {
-            throw new Exception("This TimePeriod already has leaves");
+        if ($this->hasLeaves()) {
+            throw new Exception('This TimePeriod already has leaves');
         }
 
         $this->load_relationship('related_timeperiods');
@@ -65,6 +66,5 @@ class Quarter445TimePeriod extends TimePeriod implements TimePeriodInterface {
         $leafPeriod->save();
 
         $this->save();
-
     }
 }

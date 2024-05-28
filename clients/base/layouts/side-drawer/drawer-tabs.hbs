@@ -13,14 +13,13 @@
 <ul class="nav nav-tabs">
     {{#each _tabs}}
         {{#if hasTitle}}
-            <li class="tab{{#eq ../../activeTabIndex @index}} active{{/eq}}">
+            <li class="tab{{#eq ../../activeTabIndex @index}} active{{/eq}}" data-bs-toggle="tab">
                 <a
                     class="ellipsis_inline"
                     data-index="{{@index}}"
-                    data-toggle="tab"
                     data-html="true"
                     rel="tooltip"
-                    data-placement="bottom"
+                    data-bs-placement="bottom"
                     data-original-title="{{#if ../isFocusDashboard}}{{../../context.dataTitle.module}} | {{../../context.dataTitle.view}}
 {{../../context.dataTitle.name}}{{else}}{{../../recordName}}{{/if}}"
                 >

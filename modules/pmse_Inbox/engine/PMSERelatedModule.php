@@ -19,24 +19,24 @@ class PMSERelatedModule
      * overridden on save
      * @var array
      */
-    protected $automaticFields = array(
-        'created_by' => array(
+    protected $automaticFields = [
+        'created_by' => [
             'property' => 'set_created_by',
             'value' => false,
-        ),
-        'modified_user_id' => array(
+        ],
+        'modified_user_id' => [
             'property' => 'update_modified_by',
             'value' => false,
-        ),
-        'modified_by_name' => array(
+        ],
+        'modified_by_name' => [
             'property' => 'update_modified_by',
             'value' => false,
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'property' => 'update_date_modified',
             'value' => false,
-        ),
-    );
+        ],
+    ];
 
     /**
      * The PMSELogger object
@@ -90,10 +90,10 @@ class PMSERelatedModule
     /**
      * Gets a related record from the list of related beans.
      *
-     * @todo Rename this method as it is incorrectly named
      * @param SugarBean $moduleBean The left hand side bean
      * @param string $linkField The link name to get related records from
      * @return SugarBean
+     * @todo Rename this method as it is incorrectly named
      */
     public function getRelatedModule($moduleBean, $linkField)
     {
@@ -109,10 +109,10 @@ class PMSERelatedModule
         }
 
         // Get the latest created related record
-        $related = $moduleBean->$fieldName->getBeans(array(
+        $related = $moduleBean->$fieldName->getBeans([
             'limit' => 1,
             'orderby' => 'date_entered DESC',
-        ));
+        ]);
 
         // If there are related records, send back the first in the set
         if (!empty($related)) {
@@ -174,7 +174,7 @@ class PMSERelatedModule
         // NOTE: Since `$def` is a stdClass object, this needs to be converted to an array to check for properties to
         // ensure that the object is not empty
         if (!empty($def->filter) && !empty((array)$def->filter)) {
-            $filteredBeans = $this->filterBeans($beansForFilter, array($def->filter));
+            $filteredBeans = $this->filterBeans($beansForFilter, [$def->filter]);
         } else {
             // Otherwise, use the filter list as-is
             $filteredBeans = $beansForFilter;
@@ -225,16 +225,15 @@ class PMSERelatedModule
     {
         if (empty($moduleBean->field_defs[$linkField])) {
             $this->getLogger()->warning("Unable to find field {$linkField}");
-            return array();
+            return [];
         }
 
         if (!$moduleBean->load_relationship($linkField)) {
             $this->getLogger()->warning("Unable to load relationship $linkField");
-            return array();
+            return [];
         }
 
-        return $moduleBean->$linkField->getBeans(array('orderby' => 'date_entered DESC'));
-
+        return $moduleBean->$linkField->getBeans(['orderby' => 'date_entered DESC']);
     }
 
     public function getRelatedModuleName($moduleBeanName, $linkField)
@@ -262,34 +261,34 @@ class PMSERelatedModule
         } else {
             $newModuleFilter = array_search($filter, $beanList);
         }
-        $output_11 = array(); // Logic container for one-to-one and many-to-one
-        $output_1m = array(); // Logic container for one-to-many and many-to-many(not implemented yet)
-        $output = array();
+        $output_11 = []; // Logic container for one-to-one and many-to-one
+        $output_1m = []; // Logic container for one-to-many and many-to-many(not implemented yet)
+        $output = [];
         $moduleBean = $this->getBean($newModuleFilter);
 
-        foreach($moduleBean->get_linked_fields() as $link => $def) {
+        foreach ($moduleBean->get_linked_fields() as $link => $def) {
             if (!empty($def['type']) && $def['type'] == 'link' && $moduleBean->load_relationship($link)) {
                 $relatedModule = $moduleBean->$link->getRelatedModuleName();
-                if (!in_array($relatedModule, PMSEEngineUtils::getSupportedModules('related'))) {
+                if (!safeInArray($relatedModule, PMSEEngineUtils::getSupportedModules('related'))) {
                     continue;
                 }
                 if (in_array($link, PMSEEngineUtils::$relatedBlacklistedLinks)) {
                     continue;
                 }
-                if (!empty(PMSEEngineUtils::$relatedBlacklistedLinksByModule[$filter]) && in_array($link, PMSEEngineUtils::$relatedBlacklistedLinksByModule[$filter])) {
+                if (!empty(PMSEEngineUtils::$relatedBlacklistedLinksByModule[$filter]) && safeInArray($link, PMSEEngineUtils::$relatedBlacklistedLinksByModule[$filter])) {
                     continue;
                 }
                 $relType = $moduleBean->$link->getType(); //returns 'one' or 'many' for the cardinality of the link
                 $label = empty($def['vname']) ? $link : translate($def['vname'], $filter);
-                $moduleLabel = translate("LBL_MODULE_NAME", $relatedModule);
-                if ($moduleLabel == "LBL_MODULE_NAME") {
+                $moduleLabel = translate('LBL_MODULE_NAME', $relatedModule);
+                if ($moduleLabel == 'LBL_MODULE_NAME') {
                     $moduleLabel = translate($relatedModule);
                 }
 
                 $relMarker = $relType === 'one' ? '*:1' : '*:M';
                 // Parentheses value
                 $pval = "$moduleLabel [$relMarker] (" . trim($label, ':') . ": $link)";
-                $ret = array(
+                $ret = [
                     'value' => $link,
                     'text' => $pval,
                     'module' => $moduleLabel,
@@ -297,7 +296,7 @@ class PMSERelatedModule
                     'module_name' => $relatedModule, // Added so that we have access to the module name
                     'relationship' => $def['relationship'],
                     'type' => $relType,
-                );
+                ];
                 if ($relType == 'one') {
                     $output_11[] = $ret;
                 } else {
@@ -323,7 +322,7 @@ class PMSERelatedModule
 
 
         // Needed to multisort on the label
-        $labels = array();
+        $labels = [];
         foreach ($output as $k => $o) {
             $labels[$k] = $o['text'];
         }
@@ -334,14 +333,14 @@ class PMSERelatedModule
         if (!$removeTarget) {
             // Send text with pluralized module name
             $filterText = $app_list_strings['moduleList'][$filter] ?? $filter;
-            $filterArray = array(
+            $filterArray = [
                 'value' => $filter,
                 'text' => '<' . $filterText . '>',
                 'module' => $filter,
                 'module_label' => $filterText, // Display value for Module Name
                 'module_name' => $filter, // Actual Module Name Key
                 'relationship' => $filter,
-            );
+            ];
             array_unshift($output, $filterArray);
         }
 
@@ -366,9 +365,9 @@ class PMSERelatedModule
             return null;
         }
 
-        $value= !empty($newBean->fetched_row[$field]) ? $newBean->fetched_row[$field] : $newBean->$field;
+        $value = !empty($newBean->fetched_row[$field]) ? $newBean->fetched_row[$field] : $newBean->$field;
         $def = $newBean->field_defs[$field];
-        switch ($def['type']){
+        switch ($def['type']) {
             case 'datetime':
             case 'datetimecombo':
                 $theDate = $value;
@@ -379,7 +378,7 @@ class PMSERelatedModule
                 $value = isTruthy($value);
                 break;
             case 'multienum':
-                $value = !empty($value) ? unencodeMultienum($value) : array();
+                $value = !empty($value) ? unencodeMultienum($value) : [];
                 break;
             case 'relate':
                 // Handle team_name as a special case here, as we have to load multiple values for this field
@@ -395,8 +394,8 @@ class PMSERelatedModule
                     $value = $newBean->{$def['id_name']};
                 }
                 break;
-          }
-          return $value;
+        }
+        return $value;
     }
 
     /**
@@ -420,8 +419,8 @@ class PMSERelatedModule
             unset($params->chainedRelationship);
         }
 
-        $relatedRecords = array();
-        $parentBeans = array();
+        $relatedRecords = [];
+        $parentBeans = [];
         // It calls getChainedRelationshipBeans() only when Related To (module) is set, it adds new record to
         // the Related To (module). $parentBeans will be Related To (module) in this case.
         // If Related To (module) is not set (i.e. $chainModuleExists is false), it adds new record to target module.
@@ -429,7 +428,7 @@ class PMSERelatedModule
         if ($chainModuleExists === true) {
             $parentBeans = $this->getChainedRelationshipBeans([$moduleBean], $params);
         } else {
-            $parentBeans = array($moduleBean);
+            $parentBeans = [$moduleBean];
         }
         if (is_array($parentBeans) && !empty($parentBeans[0])) {
             if (empty($parentBeans[0]->field_defs[$fieldName])) {
@@ -479,7 +478,6 @@ class PMSERelatedModule
                 if ((isset($relatedModuleBean->field_defs[$key]['type'])) &&
                     ($relatedModuleBean->field_defs[$key]['type'] == 'link') &&
                     !(empty($relatedModuleBean->field_defs[$key]['name']))) {
-
                     // if its a link then go through cases on basis of "name" here.
                     // Currently only supporting teams
                     switch ($relatedModuleBean->field_defs[$key]['name']) {

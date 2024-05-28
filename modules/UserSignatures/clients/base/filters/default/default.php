@@ -9,10 +9,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['UserSignatures']['base']['filter']['default'] = array(
+$viewdefs['UserSignatures']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'date_modified' => array(),
-    ),
-);
+    'fields' => [
+        'name' => [],
+        'date_modified' => [],
+    ],
+];

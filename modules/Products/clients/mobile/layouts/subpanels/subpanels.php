@@ -9,15 +9,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Products']['mobile']['layout']['subpanels'] = array(
-    'components' => array(
-        array(
+$viewdefs['Products']['mobile']['layout']['subpanels'] = [
+    'components' => [
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_DOCUMENTS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'documents',
-            ),
-        ),
+            ],
+        ],
         [
             'layout' => 'subpanel',
             'label' => 'LBL_NOTES_SUBPANEL_TITLE',
@@ -32,12 +32,12 @@ $viewdefs['Products']['mobile']['layout']['subpanels'] = array(
                 'link' => 'contracts',
             ],
         ],
-        array(
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_RELATED_PRODUCTS',
-            'context' => array(
+            'context' => [
                 'link' => 'related_products',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

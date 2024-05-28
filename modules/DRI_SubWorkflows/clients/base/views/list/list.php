@@ -35,6 +35,7 @@ $viewdefs['DRI_SubWorkflows']['base']['view']['list'] = [
                     'label' => 'LBL_SORT_ORDER',
                     'enabled' => true,
                     'default' => true,
+                    'readonly' => true,
                 ],
                 [
                     'name' => 'state',
@@ -45,7 +46,7 @@ $viewdefs['DRI_SubWorkflows']['base']['view']['list'] = [
                 [
                     'name' => 'progress',
                     'label' => 'LBL_PROGRESS',
-                    'type' => 'cj_progress_bar',
+                    'type' => 'cj-progress-bar',
                     'enabled' => true,
                     'default' => true,
                     'related_fields' => [
@@ -56,7 +57,7 @@ $viewdefs['DRI_SubWorkflows']['base']['view']['list'] = [
                 [
                     'name' => 'momentum_ratio',
                     'label' => 'LBL_MOMENTUM_RATIO',
-                    'type' => 'cj_momentum_bar',
+                    'type' => 'cj-momentum-bar',
                     'enabled' => true,
                     'default' => true,
                     'related_fields' => [

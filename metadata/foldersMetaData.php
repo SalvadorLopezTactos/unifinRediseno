@@ -10,196 +10,196 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['folders'] = array(
+$dictionary['folders'] = [
     'table' => 'folders',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
             'required' => true,
-        ),
-        'name' => array(
+        ],
+        'name' => [
             'name' => 'name',
             'type' => 'varchar',
             'len' => 25,
             'required' => true,
-        ),
-        'folder_type' => array(
+        ],
+        'folder_type' => [
             'name' => 'folder_type',
             'type' => 'varchar',
             'len' => 25,
             'default' => null,
-        ),
-        'parent_folder' => array(
+        ],
+        'parent_folder' => [
             'name' => 'parent_folder',
             'type' => 'id',
             'required' => false,
-        ),
-        'has_child' => array(
+        ],
+        'has_child' => [
             'name' => 'has_child',
             'type' => 'bool',
             'default' => '0',
-        ),
-        'is_group' => array(
+        ],
+        'is_group' => [
             'name' => 'is_group',
             'type' => 'bool',
             'default' => '0',
-        ),
-        'is_dynamic' => array(
+        ],
+        'is_dynamic' => [
             'name' => 'is_dynamic',
             'type' => 'bool',
             'default' => '0',
-        ),
-        'dynamic_query' => array(
+        ],
+        'dynamic_query' => [
             'name' => 'dynamic_query',
             'type' => 'text',
-        ),
-        'assign_to_id' => array(
+        ],
+        'assign_to_id' => [
             'name' => 'assign_to_id',
             'type' => 'id',
             'required' => false,
-        ),
-        'team_id' => array(
+        ],
+        'team_id' => [
             'name' => 'team_id',
             'type' => 'id',
             'required' => false,
-        ),
-        'team_set_id' => array(
+        ],
+        'team_set_id' => [
             'name' => 'team_set_id',
             'type' => 'id',
             'required' => false,
-        ),
-        'acl_team_set_id' => array(
+        ],
+        'acl_team_set_id' => [
             'name' => 'acl_team_set_id',
             'type' => 'id',
             'required' => false,
-        ),
-        'created_by' => array(
+        ],
+        'created_by' => [
             'name' => 'created_by',
             'type' => 'id',
             'required' => true,
-        ),
-        'modified_by' => array(
+        ],
+        'modified_by' => [
             'name' => 'modified_by',
             'type' => 'id',
             'required' => true,
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'folderspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_parent_folder',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'parent_folder',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];
 
-$dictionary['folders_subscriptions'] = array(
+$dictionary['folders_subscriptions'] = [
     'table' => 'folders_subscriptions',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
             'required' => true,
-        ),
-        'folder_id' => array(
+        ],
+        'folder_id' => [
             'name' => 'folder_id',
             'type' => 'id',
             'required' => true,
-        ),
-        'assigned_user_id' => array(
+        ],
+        'assigned_user_id' => [
             'name' => 'assigned_user_id',
             'type' => 'id',
             'required' => true,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'folders_subscriptionspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_folder_id_assigned_user_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'folder_id',
                 'assigned_user_id',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];
 
-$dictionary['folders_rel'] = array(
+$dictionary['folders_rel'] = [
     'table' => 'folders_rel',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
             'required' => true,
-        ),
-        'folder_id' => array(
+        ],
+        'folder_id' => [
             'name' => 'folder_id',
             'type' => 'id',
             'required' => true,
-        ),
-        'polymorphic_module' => array(
+        ],
+        'polymorphic_module' => [
             'name' => 'polymorphic_module',
             'type' => 'varchar',
             'len' => 25,
             'required' => true,
-        ),
-        'polymorphic_id' => array(
+        ],
+        'polymorphic_id' => [
             'name' => 'polymorphic_id',
             'type' => 'id',
             'required' => true,
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'folders_relpk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_poly_module_poly_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'polymorphic_module',
                 'polymorphic_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_fr_id_deleted_poly',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'folder_id',
                 'deleted',
                 'polymorphic_id',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

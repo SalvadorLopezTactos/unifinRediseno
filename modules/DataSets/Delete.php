@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:
  ********************************************************************************/
 
@@ -18,23 +17,25 @@
 global $mod_strings;
 
 
-if(!isset($_REQUEST['record']))
-	sugar_die($mod_strings['ERR_DELETE_RECORD']);
+if (!isset($_REQUEST['record'])) {
+    sugar_die($mod_strings['ERR_DELETE_RECORD']);
+}
 
 $focus = BeanFactory::getBean('DataSets', $_REQUEST['record']);
 
-if(empty($focus))
-	sugar_die($mod_strings['ERR_DELETE_RECORD']);
+if (empty($focus)) {
+    sugar_die($mod_strings['ERR_DELETE_RECORD']);
+}
 
 //if report_id is present
-	if(!empty($focus->report_id) && $focus->report_id!=""){
-	//now we need to go in and reorder the reports
-		$controller = new Controller();
-		$controller->init($focus, "Delete");
-		$controller->delete_adjust_order($focus->report_id);
+if (!empty($focus->report_id) && $focus->report_id != '') {
+    //now we need to go in and reorder the reports
+    $controller = new Controller();
+    $controller->init($focus, 'Delete');
+    $controller->delete_adjust_order($focus->report_id);
 
-	//end if report id exists;
-	}
+    //end if report id exists;
+}
 
 $focus->mark_deleted($_REQUEST['record']);
 $focus->disable_custom_layout();

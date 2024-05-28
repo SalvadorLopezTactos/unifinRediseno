@@ -9,14 +9,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const BeforeEvent = require('core/before-event');
-const Logger = require('utils/logger');
-const Cache = require('core/cache');
-const Utils = require('utils/utils');
-const Controller = require('core/controller');
-const Language = require('core/language');
-const Routing = require('core/routing');
-const MetadataManager = require('core/metadata-manager');
+const BeforeEvent = require('./core/before-event');
+const Logger = require('./utils/logger');
+const Cache = require('./core/cache');
+const Utils = require('./utils/utils');
+const Controller = require('./core/controller');
+const Language = require('./core/language');
+const Routing = require('./core/routing');
+const MetadataManager = require('./core/metadata-manager');
 
 /**
  * SugarCRM namespace.
@@ -848,7 +848,7 @@ SUGAR.App = (function() {
 
 // The assignments below are temporary since components should just require the
 // mixins/components they need instead of relying on the global variable.
-const Context = require('core/context');
+const Context = require('./core/context');
 SUGAR.App.Context = Context;
 const ctxFactory = {
     /**
@@ -866,35 +866,35 @@ const ctxFactory = {
     }
 };
 
-SUGAR.App.augment('Bean', require('data/bean'));
-SUGAR.App.augment('BeanCollection', require('data/bean-collection'));
-SUGAR.App.augment('MixedBeanCollection', require('data/mixed-bean-collection'));
-SUGAR.App.augment('error', require('core/error'));
+SUGAR.App.augment('Bean', require('./data/bean'));
+SUGAR.App.augment('BeanCollection', require('./data/bean-collection'));
+SUGAR.App.augment('MixedBeanCollection', require('./data/mixed-bean-collection'));
+SUGAR.App.augment('error', require('./core/error'));
 SUGAR.App.augment('context', ctxFactory);
 SUGAR.App.augment('utils', Utils);
-SUGAR.App.augment('cookie', require('utils/cookie'));
+SUGAR.App.augment('cookie', require('./utils/cookie'));
 SUGAR.App.augment('Controller', Controller);
-SUGAR.App.augment('events', require('core/events'));
-SUGAR.App.augment('acl', require('core/acl'));
+SUGAR.App.augment('events', require('./core/events'));
+SUGAR.App.augment('acl', require('./core/acl'));
 SUGAR.App.augment('metadata', MetadataManager);
-SUGAR.App.augment('currency', require('utils/currency'));
-SUGAR.App.augment('date', require('utils/date'));
-SUGAR.App.augment('math', require('utils/math'));
-SUGAR.App.augment('plugins', require('core/plugin-manager'));
-_.mixin(require('utils/underscore-mixins'));
-SUGAR.App.augment('user', require('core/user'));
-Handlebars.registerHelper(require('view/hbs-helpers'));
-SUGAR.App.augment('validation', require('data/validation'));
-SUGAR.App.augment('data', require('data/data-manager'));
+SUGAR.App.augment('currency', require('./utils/currency'));
+SUGAR.App.augment('date', require('./utils/date'));
+SUGAR.App.augment('math', require('./utils/math'));
+SUGAR.App.augment('plugins', require('./core/plugin-manager'));
+_.mixin(require('./utils/underscore-mixins'));
+SUGAR.App.augment('user', require('./core/user'));
+Handlebars.registerHelper(require('./view/hbs-helpers'));
+SUGAR.App.augment('validation', require('./data/validation'));
+SUGAR.App.augment('data', require('./data/data-manager'));
 SUGAR.App.augment('lang', Language);
-SUGAR.App.augment('template', require('view/template'));
-SUGAR.App.Router = require('core/router');
+SUGAR.App.augment('template', require('./view/template'));
+SUGAR.App.Router = require('./core/router');
 SUGAR.App.augment('routing', Routing);
-const ViewManager = require('view/view-manager');
+const ViewManager = require('./view/view-manager');
 SUGAR.App.augment('view', ViewManager);
-ViewManager.Component = require('view/component');
-SUGAR.App.augment('alert', require('view/alert'));
-ViewManager.AlertView = require('view/alert-view');
-ViewManager.Field = require('view/field');
-ViewManager.Layout = require('view/layout');
-ViewManager.View = require('view/view');
+ViewManager.Component = require('./view/component');
+SUGAR.App.augment('alert', require('./view/alert'));
+ViewManager.AlertView = require('./view/alert-view');
+ViewManager.Field = require('./view/field');
+ViewManager.Layout = require('./view/layout');
+ViewManager.View = require('./view/view');

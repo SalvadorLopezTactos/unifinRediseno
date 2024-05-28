@@ -59,6 +59,7 @@ class ConditionalAccessConditionSet extends Entity
 
     /**
     * Gets the clientApplications
+    * Client applications (service principals and workload identities) included in and excluded from the policy. Either users or clientApplications is required.
     *
     * @return ConditionalAccessClientApplications|null The clientApplications
     */
@@ -77,6 +78,7 @@ class ConditionalAccessConditionSet extends Entity
 
     /**
     * Sets the clientApplications
+    * Client applications (service principals and workload identities) included in and excluded from the policy. Either users or clientApplications is required.
     *
     * @param ConditionalAccessClientApplications $val The value to assign to the clientApplications
     *
@@ -254,6 +256,39 @@ class ConditionalAccessConditionSet extends Entity
     }
 
     /**
+    * Gets the servicePrincipalRiskLevels
+    * Service principal risk levels included in the policy. Possible values are: low, medium, high, none, unknownFutureValue.
+    *
+    * @return RiskLevel|null The servicePrincipalRiskLevels
+    */
+    public function getServicePrincipalRiskLevels()
+    {
+        if (array_key_exists("servicePrincipalRiskLevels", $this->_propDict)) {
+            if (is_a($this->_propDict["servicePrincipalRiskLevels"], "\Beta\Microsoft\Graph\Model\RiskLevel") || is_null($this->_propDict["servicePrincipalRiskLevels"])) {
+                return $this->_propDict["servicePrincipalRiskLevels"];
+            } else {
+                $this->_propDict["servicePrincipalRiskLevels"] = new RiskLevel($this->_propDict["servicePrincipalRiskLevels"]);
+                return $this->_propDict["servicePrincipalRiskLevels"];
+            }
+        }
+        return null;
+    }
+
+    /**
+    * Sets the servicePrincipalRiskLevels
+    * Service principal risk levels included in the policy. Possible values are: low, medium, high, none, unknownFutureValue.
+    *
+    * @param RiskLevel $val The value to assign to the servicePrincipalRiskLevels
+    *
+    * @return ConditionalAccessConditionSet The ConditionalAccessConditionSet
+    */
+    public function setServicePrincipalRiskLevels($val)
+    {
+        $this->_propDict["servicePrincipalRiskLevels"] = $val;
+         return $this;
+    }
+
+    /**
     * Gets the signInRiskLevels
     * Sign-in risk levels included in the policy. Possible values are: low, medium, high, hidden, none, unknownFutureValue. Required.
     *
@@ -321,7 +356,7 @@ class ConditionalAccessConditionSet extends Entity
 
     /**
     * Gets the users
-    * Users, groups, and roles included in and excluded from the policy. Required.
+    * Users, groups, and roles included in and excluded from the policy. Either users or clientApplications is required.
     *
     * @return ConditionalAccessUsers|null The users
     */
@@ -340,7 +375,7 @@ class ConditionalAccessConditionSet extends Entity
 
     /**
     * Sets the users
-    * Users, groups, and roles included in and excluded from the policy. Required.
+    * Users, groups, and roles included in and excluded from the policy. Either users or clientApplications is required.
     *
     * @param ConditionalAccessUsers $val The value to assign to the users
     *

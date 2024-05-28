@@ -14,16 +14,16 @@ class DuplicateCheckApi extends SugarApi
 {
     public function registerApiRest()
     {
-        return array(
-            'duplicateCheck' => array(
+        return [
+            'duplicateCheck' => [
                 'reqType' => 'POST',
-                'path' => array('<module>','duplicateCheck'),
-                'pathVars' => array('module',''),
+                'path' => ['<module>', 'duplicateCheck'],
+                'pathVars' => ['module', ''],
                 'method' => 'checkForDuplicates',
                 'shortHelp' => 'Check for duplicate records within a module',
                 'longHelp' => 'include/api/help/module_duplicatecheck_post_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -33,7 +33,7 @@ class DuplicateCheckApi extends SugarApi
      * @param ServiceBase $api
      * @param array $args
      */
-    function checkForDuplicates(ServiceBase $api, array $args)
+    public function checkForDuplicates(ServiceBase $api, array $args)
     {
         //create a new bean & check ACLs
         $bean = BeanFactory::newBean($args['module']);
@@ -44,14 +44,14 @@ class DuplicateCheckApi extends SugarApi
             );
         }
 
-        $args=$this->trimArgs($args);
+        $args = $this->trimArgs($args);
 
         if (!$bean->ACLAccess('read')) {
-            throw new SugarApiExceptionNotAuthorized('No access to read records for module: '.$args['module']);
+            throw new SugarApiExceptionNotAuthorized('No access to read records for module: ' . $args['module']);
         }
 
         //populate bean
-        $options = array('acl' => 'read', 'find_duplicates' => true);
+        $options = ['acl' => 'read', 'find_duplicates' => true];
         $errors = $this->populateFromApi($api, $bean, $args, $options);
         if ($errors !== true) {
             $displayErrors = print_r($errors, true);
@@ -64,21 +64,20 @@ class DuplicateCheckApi extends SugarApi
         if ($results) {
             return $results;
         } else {
-            return array();
+            return [];
         }
-
     }
 
     protected function trimArgs(array $args)
     {
-        $args2 = array();
-        foreach($args as $key => $value) {
+        $args2 = [];
+        foreach ($args as $key => $value) {
             $args2[trim($key)] = (is_string($value)) ? trim($value) : $value;
         }
         return $args2;
     }
 
-    protected function populateFromApi(ServiceBase $api, SugarBean $bean, array $args, array $options = array())
+    protected function populateFromApi(ServiceBase $api, SugarBean $bean, array $args, array $options = [])
     {
         $errors = ApiHelper::getHelper($api, $bean)->populateFromApi($bean, $args, $options);
 

@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Notlar Listesi Panosu',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Notlar Kaydı Panosu',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Notlar Odak Bölmesi',
     'LBL_EXTERNAL_USER' => 'Harici Kullanıcı',
     'LBL_EXTERNAL_USER_NAME' => 'Harici Kullanıcı',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Not Zaman Çizelgesi',
 
     'LBL_RELATED_CONTACT' => 'İlişkili Kontak',
     'ERR_DELETE_RECORD' => 'Müşteriyi silmek için bir kayıt numarası girmelisiniz.',
@@ -126,4 +127,4 @@ $mod_strings = array(
 - "Zorunlu" olarak belirtilmiş alanların kaydetme öncesinde girilmesi gereklidir.
 - Gerek duyulursa ek alanları açmak için "Daha Fazlasına" tıklayın.
 2. "Kaydet" tuşuna basarak yeni kayıt oluşturma işlemini tamamlayın ve önceki sayfaya dönün.',
-);
+];

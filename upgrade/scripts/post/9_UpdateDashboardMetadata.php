@@ -40,7 +40,7 @@ class SugarUpgradeUpdateDashboardMetadata extends UpgradeScript
 
         $bean = BeanFactory::newBean('Dashboards');
         $query = new SugarQuery();
-        $query->select(array('id', 'name', 'metadata'));
+        $query->select(['id', 'name', 'metadata']);
         $query->from($bean);
         $query->where()->in('id', $consoleIDs);
         $rows = $query->execute();
@@ -54,27 +54,27 @@ class SugarUpgradeUpdateDashboardMetadata extends UpgradeScript
                 case 'c108bb4a-775a-11e9-b570-f218983a1c3e':
                     $updated = $this->updateServiceConsole($metadata);
                     break;
-                // Renewals console
+                    // Renewals console
                 case 'da438c86-df5e-11e9-9801-3c15c2c53980':
                     $updated = $this->updateRenewalsConsole($metadata);
                     break;
-                // Portal Home
+                    // Portal Home
                 case '0ca2d773-0bb3-4bf3-ae43-68569968af57':
                     $updated = $this->updatePortalHome($metadata);
                     break;
-                // omnichannel dashboard
+                    // omnichannel dashboard
                 case '32bc5cd0-b1a0-11ea-ad16-f45c898a3ce7':
                     $updated = $this->processOmnichannel($metadata);
                     break;
-                // case multi line dashboard
+                    // case multi line dashboard
                 case 'c290ef46-7606-11e9-9129-f218983a1c3e':
                     $updated = $this->processMultiline($metadata, 'Cases');
                     break;
-                // account multi line dashboard
+                    // account multi line dashboard
                 case 'd8f610a0-e950-11e9-81b4-2a2ae2dbcce4':
                     $updated = $this->processMultiline($metadata, 'Accounts');
                     break;
-                // opportunity multi line dashboard
+                    // opportunity multi line dashboard
                 case '069a1142-61bf-473f-8014-faca9aaf43cf':
                     $updated = $this->processMultiline($metadata, 'Opportunities');
                     break;
@@ -156,7 +156,7 @@ class SugarUpgradeUpdateDashboardMetadata extends UpgradeScript
      * @param $buttons
      * @return bool
      */
-    private function updateActionLabel(&$buttons) : bool
+    private function updateActionLabel(&$buttons): bool
     {
         $updated = false;
         if (!is_array($buttons)) {
@@ -191,7 +191,7 @@ class SugarUpgradeUpdateDashboardMetadata extends UpgradeScript
      * @param $metadata
      * @return bool
      */
-    private function updatePortalHome(&$metadata) : bool
+    private function updatePortalHome(&$metadata): bool
     {
         $updated = false;
         // to remove the search dashlet per CS-1594
@@ -217,7 +217,7 @@ class SugarUpgradeUpdateDashboardMetadata extends UpgradeScript
      * @param $metadata
      * @return bool
      */
-    private function updateServiceConsole(&$metadata) : bool
+    private function updateServiceConsole(&$metadata): bool
     {
         $filterMeta = $this->getConsoleFilterMeta('Cases');
 
@@ -234,7 +234,7 @@ class SugarUpgradeUpdateDashboardMetadata extends UpgradeScript
      * @param $metadata
      * @return bool
      */
-    private function updateRenewalsConsole(&$metadata) : bool
+    private function updateRenewalsConsole(&$metadata): bool
     {
         $updated = false;
         $filterMetaAcc = $this->getConsoleFilterMeta('Accounts');
@@ -260,7 +260,7 @@ class SugarUpgradeUpdateDashboardMetadata extends UpgradeScript
      * Get the new button metadata
      * @return string[][][][]
      */
-    private function getNewButtonsMeta() : array
+    private function getNewButtonsMeta(): array
     {
         return [
             [
@@ -287,7 +287,7 @@ class SugarUpgradeUpdateDashboardMetadata extends UpgradeScript
      * @param string $module
      * @return array
      */
-    private function getConsoleFilterMeta(string $module) : array
+    private function getConsoleFilterMeta(string $module): array
     {
         if ($module) {
             return [

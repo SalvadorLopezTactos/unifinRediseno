@@ -9,11 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['OutboundEmail']['base']['filter']['default'] = array(
+$viewdefs['OutboundEmail']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'mail_smtpserver' => array(),
-        'mail_smtpuser' => array(),
-    ),
-);
+    'fields' => [
+        'name' => [],
+        'mail_smtpserver' => [],
+        'mail_smtpuser' => [],
+    ],
+];

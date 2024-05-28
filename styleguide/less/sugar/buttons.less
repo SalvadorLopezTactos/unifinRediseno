@@ -56,6 +56,10 @@
     opacity: 0.65;
     box-shadow: none;
   }
+
+  &.hidden {
+    display: none;
+  }
 }
 
 // Button Sizes
@@ -68,23 +72,11 @@
   border-radius: @borderRadiusLarge;
 }
 
-.btn-large .fa {
-  margin-top: 4px;
-}
-
 // Small
 .btn-small {
   padding: @paddingSmall;
   font-size: @fontSizeSmall;
   border-radius: @borderRadiusSmall;
-}
-
-.btn-small .fa {
-  margin-top: 0;
-}
-
-.btn-mini .fa {
-  margin-top: -1px;
 }
 
 // Mini
@@ -203,7 +195,6 @@ input[type="button"] {
   line-height: @baseFontSize;
   padding: 7px;
   box-shadow: none;
-  margin-left: 8px;
   border: @borderWidget;
   text-shadow: none;
   display: inline-flex;
@@ -216,27 +207,10 @@ input[type="button"] {
     }
   }
 
-  /* keeps button widths with icons the same regardless of icon width */
-  > .fa {
-    width: 12px;
-    height: 12px;
-    display: inline-block;
-    line-height: 12px;
-    font-size: @baseFontSize;
-    position: relative;
-    top: 1px;
-
-    &.icon-create {
-      display: inline;
-      padding-right: 5px;
-      top: 0;
-    }
-  }
-
   /**
-   * Preventative measures similar to the above block with FontAwesome. The line height is miscalculated due to our
-   * SugarIcons icons being 12px instead of 14px. We needed to remove the line height on font load and manually set
-   * it here so we have the proper inner height of 12x12px which properly sizes our buttons at 28px tall.
+   * Preventative measures. The line height is miscalculated due to our SugarIcons icons being 12px instead of 14px.
+   * We needed to remove the line height on font load and manually set it here so we have the proper inner height of
+   * 12x12px which properly sizes our buttons at 28px tall.
    */
   & > .sicon {
     line-height: 12px;
@@ -278,14 +252,7 @@ input[type="button"] {
     text-shadow: none;
     box-shadow: none;
 
-    > .sicon,
-    > .fa {
-      color: @white;
-    }
-  }
-
-  &.active:hover {
-    > .fa {
+    > .sicon {
       color: @white;
     }
   }
@@ -295,12 +262,6 @@ input[type="button"] {
     padding: 7px;
 
     &.active {
-      &:focus {
-        outline: none;
-      }
-    }
-
-    .fa {
       &:focus {
         outline: none;
       }
@@ -324,8 +285,7 @@ input[type="button"] {
     background-color: transparent;
     text-decoration: none;
 
-    > .sicon,
-    > .fa {
+    > .sicon {
       color: @sicon-hover-color;
       text-shadow: none;
     }
@@ -348,11 +308,6 @@ input[type="button"] {
     text-decoration: none;
     color: @sicon-color;
     opacity: 0.65;
-
-    .fa {
-      opacity: 0.65;
-      color: @sicon-color;
-    }
   }
   //a darker version of btn-invisible
   &.btn-dark {
@@ -404,31 +359,9 @@ input[type="button"] {
   vertical-align: baseline;
 }
 
-// Reposition the caret
-.btn:hover .fa-caret-down,
-.open.btn-group .fa-caret-down {
-  opacity: 1;
-}
-
-// Small dropdowns caret
-.btn-small .fa-caret-down {
-  margin-top: 6px;
-}
-//
 .btn-fixed {
   width: 178px;
   margin-right: 10px;
-}
-
-// Account for other colors
-.btn-primary,
-.btn-danger,
-.btn-info,
-.btn-success,
-.btn-inverse {
-  .fa-caret-down {
-    opacity: 0.6;
-  }
 }
 
 // Set caret text color
@@ -440,8 +373,7 @@ input[type="button"] {
 .btn-inverse:hover {
   color: @white;
 
-  .sicon,
-  .fa {
+  .sicon {
     color: @white;
   }
 }
@@ -449,16 +381,6 @@ input[type="button"] {
 .btn-warning,
 .btn-warning:hover {
   color: darken(@darkYellow, 20%);
-
-  .fa {
-    color: darken(@darkYellow, 20%);
-  }
-
-  &:not(.disabled):hover {
-    .fa {
-      color: darken(@darkYellow, 20%);
-    }
-  }
 }
 
 .btn-danger {
@@ -505,15 +427,12 @@ input.required + .btn.btn-input-addon {
   }
 
   &.disabled {
-    > .sicon,
-    > .fa {
+    > .sicon {
       color: @btnDisabledIconColor;
     }
 
     &.btn-primary {
-      > .sicon,
-      > .fa {
-        /* override */
+      > .sicon {
         color: inherit;
       }
     }
@@ -540,12 +459,12 @@ input.required + .btn.btn-input-addon {
 
 .btn.btn-secondary {
   background-color: @btnSecondaryBackground;
-  border-color: @btnSecondaryBorder;
+  border-color: var(--btn-secondary-border);
   color: @btnSecondaryColor;
 
   &:hover {
     background-color: @btnSecondaryBackgroundHover;
-    border-color: @btnSecondaryBorderHover;
+    border-color: var(--btn-secondary-border-hover);
     color: @btnSecondaryColorHover;
     box-shadow: none;
     background-image: none;
@@ -572,9 +491,7 @@ input.required + .btn.btn-input-addon {
     .btn-primary.dropdown-toggle {
       background: @btnPrimaryBackground;
 
-      .sicon,
-      .fa {
-        /* override */
+      .sicon {
         color: @white;
       }
     }

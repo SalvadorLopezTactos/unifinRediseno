@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Produkttyper',
     'LBL_MODULE_NAME_SINGULAR' => 'Produkttyp',
     'LBL_MODULE_TITLE' => 'Produkttyper: Hem',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Är du säker på att du vill radera posten?',
     'ERR_DELETE_RECORD' => 'Ett objektnummer måste specificeras för att radera produkttypen.',
     'NTC_LIST_ORDER' => 'Sätt ordningen för hur typen ska visas i dropdown menyn över produkttyper',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Importera produkttyper',
-    'LBL_CREATED_BY'=>'Skapad av',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Importera produkttyper',
+    'LBL_CREATED_BY' => 'Skapad av',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Tilldelad till ID',
-    'LBL_EXPORT_CREATED_BY'=>'Skapad av ID',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Importera produktkategorier',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Tilldelad till ID',
+    'LBL_EXPORT_CREATED_BY' => 'Skapad av ID',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Importera produktkategorier',
+];

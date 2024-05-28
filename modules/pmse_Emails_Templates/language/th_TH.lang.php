@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'เนื้อหา',
     'LBL_BASE_MODULE' => 'โมดูลเป้าหมาย',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'ไม่สามารถสร้างเทมเพลทอีเมลของกระบวนการจากไฟล์',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'เทมเพลทอีเมลนี้มีการใช้งานอยู่ในการกำหนดกระบวนการ คุณยังต้องการแก้ไขเทมเพลทอีเมลนี้หรือไม่',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "คุณไม่สามารถลบเทมเพลทอีเมลนี้ เนื่องจากมีการใช้งานอยู่ในการกำหนดกระบวนการ",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'คุณไม่สามารถลบเทมเพลทอีเมลนี้ เนื่องจากมีการใช้งานอยู่ในการกำหนดกระบวนการ',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'เครื่องมือเลือกฟิลด์',
     'LBL_SUGAR_LINK_SELECTOR' => 'เครื่องมือเลือกลิงก์ของระเบียน',
     'LBL_RELATED_TO_TARGET_MODULE' => 'เกี่ยวข้องกับโมดูลเป้าหมาย',
     'LBL_SELECT_BUTTON_LABEL' => 'เลือก',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'ประเภทค่าของฟิลด์',
-);
+];

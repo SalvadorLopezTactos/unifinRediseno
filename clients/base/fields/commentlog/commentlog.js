@@ -201,8 +201,23 @@
      */
     toggleCollapsedEntry: function(event) {
         var id = $(event.currentTarget).data('commentId');
-        this.collapsedEntries[id] = !this.collapsedEntries[id];
-        this.render();
+        let msg = _.findWhere(this.msgs, {id: id});
+        if (msg) {
+            // Build a new comment element from the comment template
+            this.collapsedEntries[id] = !this.collapsedEntries[id];
+            msg.collapsed = !msg.collapsed;
+            let commentTpl = app.template.getField(this.type, 'comment');
+            let newCommentEl = commentTpl(msg);
+
+            // Replace the existing comment element with the new one. Adjust
+            // the scrollbar as needed so the change is less jarring for the user
+            let scrollContainer = this.$el.find('.scroll-container');
+            let scrollFromTop = scrollContainer.scrollTop();
+            this.$el.find(`.msg[data-id=${id}]`).replaceWith(newCommentEl);
+            if (!msg.collapsed) {
+                scrollContainer.scrollTop(scrollFromTop);
+            }
+        }
     },
 
     /**
@@ -234,9 +249,11 @@
         }
         var commentBean = app.data.createRelatedBean(this.model, null, 'commentlog_link', {entry: value});
         var success = _.bind(function() {
+            this.isSaving = false;
             this.setCurrentCommentText('');
             this.view.loadData({loadAll: !!this.showAllClicked});
         }, this);
+        this.isSaving = true;
         commentBean.sync('create', commentBean, {success: success, relate: true});
     },
 

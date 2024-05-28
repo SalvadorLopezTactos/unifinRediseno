@@ -1,5 +1,8 @@
 <?php
-if(!defined('sugarEntry'))define('sugarEntry', true);
+
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -22,7 +25,7 @@ if (!empty($_REQUEST['action']) && !empty($_REQUEST['token'])) {
 }
 // we inlcude either original or the copy preserved so that upgrading won't mess it up
 require_once $webUpgraderFile;
-$upg = new WebUpgrader(dirname(__FILE__));
+$upg = new WebUpgrader(__DIR__);
 $upg->init();
 
 // handle log export
@@ -52,18 +55,18 @@ if (empty($_REQUEST['action']) || empty($_REQUEST['token'])) {
         }
         die(htmlspecialchars($errmsg, ENT_QUOTES, 'UTF-8'));
     }
-	$upg->displayUpgradePage();
-	exit(0);
+    $upg->displayUpgradePage();
+    exit(0);
 }
 if (!$upg->startRequest($_REQUEST['token'])) {
-    die("Bad token");
+    die('Bad token');
 }
 
 ob_start();
 $res = $upg->process($_REQUEST['action']);
 if ($res !== false && $upg->success) {
     // OK
-    $reply = array("status" => "ok", "data" => $res);
+    $reply = ['status' => 'ok', 'data' => $res];
     if (!empty($upg->license)) {
         $reply['license'] = $upg->license;
     }
@@ -72,7 +75,7 @@ if ($res !== false && $upg->success) {
     }
 } else {
     // error
-    $reply = array("status" => "error", "message" => $upg->error ?: "Stage {$_REQUEST['action']} failed", 'data' => $res);
+    $reply = ['status' => 'error', 'message' => $upg->error ?: "Stage {$_REQUEST['action']} failed", 'data' => $res];
 }
 
 if ($_REQUEST['action'] == 'healthcheck') {
@@ -80,7 +83,7 @@ if ($_REQUEST['action'] == 'healthcheck') {
     if (!empty($upgState['healthcheck'])) {
         $reply['healthcheck'] = $upgState['healthcheck'];
     } else {
-        $reply['healthcheck'] = array();
+        $reply['healthcheck'] = [];
     }
 }
 
@@ -94,5 +97,5 @@ if (!empty($msg)) {
     }
 }
 
-header("Content-Type: text/plain");
+header('Content-Type: text/plain');
 echo json_encode($reply);

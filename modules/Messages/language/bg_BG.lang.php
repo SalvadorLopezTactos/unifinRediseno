@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'в процес на изпълнение',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на съобщения',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Електронно табло със запис на съобщенията',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Хронология на съобщенията',
 ];

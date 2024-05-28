@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['Contact'] = array(
+$dictionary['Contact'] = [
     'table' => 'contacts',
     'audited' => true,
     'activity_enabled' => true,
@@ -21,8 +21,8 @@ $dictionary['Contact'] = array(
     'full_text_search' => true,
     'unified_search_default_enabled' => true,
     'duplicate_merge' => true,
-    'fields' => array(
-        'email_and_name1' => array(
+    'fields' => [
+        'email_and_name1' => [
             'name' => 'email_and_name1',
             'vname' => 'LBL_NAME',
             'type' => 'varchar',
@@ -30,9 +30,9 @@ $dictionary['Contact'] = array(
             'len' => '510',
             'importable' => 'false',
             'massupdate' => false,
-            'studio' => array('formula' => false),
-        ),
-        'lead_source' => array(
+            'studio' => ['formula' => false],
+        ],
+        'lead_source' => [
             'name' => 'lead_source',
             'vname' => 'LBL_LEAD_SOURCE',
             'type' => 'enum',
@@ -40,8 +40,8 @@ $dictionary['Contact'] = array(
             'len' => '255',
             'comment' => 'How did the contact come about',
             'merge_filter' => 'enabled',
-        ),
-        'account_name' => array(
+        ],
+        'account_name' => [
             'name' => 'account_name',
             'rname' => 'name',
             'id_name' => 'account_id',
@@ -56,20 +56,20 @@ $dictionary['Contact'] = array(
             'len' => '255',
             'source' => 'non-db',
             'unified_search' => true,
-            'populate_list' => array(
+            'populate_list' => [
                 'billing_address_street' => 'primary_address_street',
                 'billing_address_city' => 'primary_address_city',
                 'billing_address_state' => 'primary_address_state',
                 'billing_address_postalcode' => 'primary_address_postalcode',
                 'billing_address_country' => 'primary_address_country',
                 'phone_office' => 'phone_work',
-            ),
+            ],
             'populate_confirm_label' => 'TPL_OVERWRITE_POPULATED_DATA_CONFIRM_WITH_MODULE_SINGULAR',
             'importable' => 'true',
-            'exportable'=>true,
+            'exportable' => true,
             'export_link_type' => 'one',//relationship type to be used during export
-        ),
-        'account_id' => array(
+        ],
+        'account_id' => [
             'name' => 'account_id',
             'rname' => 'id',
             'id_name' => 'account_id',
@@ -85,25 +85,24 @@ $dictionary['Contact'] = array(
             'duplicate_merge' => 'disabled',
             'hideacl' => true,
             'link' => 'accounts',
-        ),
+        ],
         //d&b principal id, a unique id assigned to a contact by D&B API
         //this contact is used for dupe check
-        'dnb_principal_id' =>
-          array (
+        'dnb_principal_id' => [
             'name' => 'dnb_principal_id',
             'vname' => 'LBL_DNB_PRINCIPAL_ID',
             'type' => 'varchar',
             'len' => 30,
             'comment' => 'Unique Id For D&B Contact',
-        ),
+        ],
         // Deprecated, use rname_link instead
-        'opportunity_role_fields' => array(
+        'opportunity_role_fields' => [
             'name' => 'opportunity_role_fields',
             'rname' => 'id',
-            'relationship_fields' => array(
+            'relationship_fields' => [
                 'id' => 'opportunity_role_id',
-                'contact_role' => 'opportunity_role'
-            ),
+                'contact_role' => 'opportunity_role',
+            ],
             'vname' => 'LBL_ACCOUNT_NAME',
             'type' => 'relate',
             'link' => 'opportunities',
@@ -113,16 +112,16 @@ $dictionary['Contact'] = array(
             'importable' => 'false',
             'duplicate_merge' => 'disabled',
             'studio' => false,
-        ),
+        ],
         // Deprecated, use rname_link instead
-        'opportunity_role_id' => array(
+        'opportunity_role_id' => [
             'name' => 'opportunity_role_id',
             'type' => 'varchar',
             'source' => 'non-db',
             'vname' => 'LBL_OPPORTUNITY_ROLE_ID',
-            'studio' => array('listview' => false),
-        ),
-        'opportunity_role' => array(
+            'studio' => ['listview' => false],
+        ],
+        'opportunity_role' => [
             'name' => 'opportunity_role',
             'type' => 'enum',
             'source' => 'non-db',
@@ -130,17 +129,17 @@ $dictionary['Contact'] = array(
             'options' => 'opportunity_relationship_type_dom',
             'link' => 'opportunities',
             'rname_link' => 'contact_role',
-            'massupdate' => false
-        ),
-        'reports_to_id' => array(
+            'massupdate' => false,
+        ],
+        'reports_to_id' => [
             'name' => 'reports_to_id',
             'vname' => 'LBL_REPORTS_TO_ID',
             'type' => 'id',
             'required' => false,
             'reportable' => false,
-            'comment' => 'The contact this contact reports to'
-        ),
-        'report_to_name' => array(
+            'comment' => 'The contact this contact reports to',
+        ],
+        'report_to_name' => [
             'name' => 'report_to_name',
             'rname' => 'name',
             'id_name' => 'reports_to_id',
@@ -154,12 +153,12 @@ $dictionary['Contact'] = array(
             'len' => 'id',
             'reportable' => false,
             'source' => 'non-db',
-            'populate_list' => array(
+            'populate_list' => [
                 'account_id' => 'account_id',
                 'account_name' => 'account_name',
-            ),
-        ),
-        'birthdate' => array(
+            ],
+        ],
+        'birthdate' => [
             'name' => 'birthdate',
             'vname' => 'LBL_BIRTHDATE',
             'massupdate' => false,
@@ -167,8 +166,8 @@ $dictionary['Contact'] = array(
             'comment' => 'The birthdate of the contact',
             'audited' => true,
             'pii' => true,
-        ),
-        'portal_name' => array(
+        ],
+        'portal_name' => [
             'name' => 'portal_name',
             'vname' => 'LBL_PORTAL_NAME',
             'type' => 'username',
@@ -177,19 +176,19 @@ $dictionary['Contact'] = array(
             'group' => 'portal',
             'group_label' => 'LBL_PORTAL',
             'comment' => 'Name as it appears in the portal',
-            'studio' => array(
+            'studio' => [
                 'portalrecordview' => false,
                 'portallistview' => false,
-            ),
+            ],
             'duplicate_on_record_copy' => 'no',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => true,
                 'boost' => 1.93,
                 'type' => 'exact',
-            ),
-        ),
-        'portal_active' => array(
+            ],
+        ],
+        'portal_active' => [
             'name' => 'portal_active',
             'vname' => 'LBL_PORTAL_ACTIVE',
             'type' => 'bool',
@@ -197,8 +196,8 @@ $dictionary['Contact'] = array(
             'group' => 'portal',
             'comment' => 'Indicator whether this contact is a portal user',
             'duplicate_on_record_copy' => 'no',
-        ),
-        'portal_password' => array(
+        ],
+        'portal_password' => [
             'name' => 'portal_password',
             'vname' => 'LBL_USER_PASSWORD',
             'type' => 'password',
@@ -206,14 +205,14 @@ $dictionary['Contact'] = array(
             'len' => '255',
             'group' => 'portal',
             'reportable' => false,
-            'studio' => array(
+            'studio' => [
                 'listview' => false,
                 'portalrecordview' => false,
                 'portallistview' => false,
-            ),
+            ],
             'duplicate_on_record_copy' => 'no',
-        ),
-        'portal_password1' => array(
+        ],
+        'portal_password1' => [
             'name' => 'portal_password1',
             'vname' => 'LBL_USER_PASSWORD',
             'type' => 'password',
@@ -222,13 +221,13 @@ $dictionary['Contact'] = array(
             'group' => 'portal',
             'reportable' => false,
             'importable' => 'false',
-            'studio' => array(
+            'studio' => [
                 'listview' => false,
                 'portalrecordview' => false,
                 'portallistview' => false,
-            ),
-        ),
-        'portal_app' => array(
+            ],
+        ],
+        'portal_app' => [
             'name' => 'portal_app',
             'vname' => 'LBL_PORTAL_APP',
             'type' => 'varchar',
@@ -236,7 +235,7 @@ $dictionary['Contact'] = array(
             'len' => '255',
             'comment' => 'Reference to the portal',
             'duplicate_on_record_copy' => 'no',
-        ),
+        ],
         'portal_user_company_name' => [
             'name' => 'portal_user_company_name',
             'vname' => 'LBL_PORTAL_USER_COMPANY_NAME',
@@ -250,13 +249,13 @@ $dictionary['Contact'] = array(
             ],
             'duplicate_on_record_copy' => 'no',
         ],
-        'preferred_language' => array(
+        'preferred_language' => [
             'name' => 'preferred_language',
             'type' => 'enum',
             'vname' => 'LBL_PREFERRED_LANGUAGE',
             'options' => 'available_language_dom',
             'popupHelp' => 'LBL_LANG_PREF_TOOLTIP',
-        ),
+        ],
         'cookie_consent' => [
             'name' => 'cookie_consent',
             'vname' => 'LBL_COOKIE_CONSENT',
@@ -265,6 +264,7 @@ $dictionary['Contact'] = array(
             'audited' => true,
             'comment' => 'Indicator whether this portal user accepts cookies',
             'duplicate_on_record_copy' => 'no',
+            'studio' => false,
         ],
         'cookie_consent_received_on' => [
             'name' => 'cookie_consent_received_on',
@@ -275,8 +275,9 @@ $dictionary['Contact'] = array(
             'options' => 'date_range_search_dom',
             'comment' => 'Date cookie consent received on',
             'duplicate_on_record_copy' => 'no',
+            'studio' => false,
         ],
-        'business_center_name' => array(
+        'business_center_name' => [
             'name' => 'business_center_name',
             'rname' => 'name',
             'id_name' => 'business_center_id',
@@ -293,8 +294,8 @@ $dictionary['Contact'] = array(
             'unified_search' => true,
             'comment' => 'The name of the business center represented by the business_center_id field',
             'required' => false,
-        ),
-        'business_center_id' => array(
+        ],
+        'business_center_id' => [
             'name' => 'business_center_id',
             'type' => 'relate',
             'dbType' => 'id',
@@ -306,8 +307,8 @@ $dictionary['Contact'] = array(
             'audited' => true,
             'massupdate' => false,
             'comment' => 'The business center to which the case is associated',
-        ),
-        'business_centers' => array(
+        ],
+        'business_centers' => [
             'name' => 'business_centers',
             'type' => 'link',
             'relationship' => 'business_center_contacts',
@@ -315,7 +316,7 @@ $dictionary['Contact'] = array(
             'side' => 'right',
             'source' => 'non-db',
             'vname' => 'LBL_BUSINESS_CENTER',
-        ),
+        ],
         'purchases' => [
             'name' => 'purchases',
             'type' => 'link',
@@ -330,7 +331,7 @@ $dictionary['Contact'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_ESCALATIONS',
         ],
-        'accounts' => array(
+        'accounts' => [
             'name' => 'accounts',
             'type' => 'link',
             'relationship' => 'accounts_contacts',
@@ -339,8 +340,8 @@ $dictionary['Contact'] = array(
             'vname' => 'LBL_ACCOUNT',
             'duplicate_merge' => 'disabled',
             'primary_only' => true,
-        ),
-        'reports_to_link' => array(
+        ],
+        'reports_to_link' => [
             'name' => 'reports_to_link',
             'type' => 'link',
             'relationship' => 'contact_direct_reports',
@@ -348,8 +349,8 @@ $dictionary['Contact'] = array(
             'side' => 'right',
             'source' => 'non-db',
             'vname' => 'LBL_REPORTS_TO',
-        ),
-        'opportunities' => array(
+        ],
+        'opportunities' => [
             'name' => 'opportunities',
             'type' => 'link',
             'relationship' => 'opportunities_contacts',
@@ -357,36 +358,36 @@ $dictionary['Contact'] = array(
             'module' => 'Opportunities',
             'bean_name' => 'Opportunity',
             'vname' => 'LBL_OPPORTUNITIES',
-            'populate_list' => array(
+            'populate_list' => [
                 'account_id' => 'account_id',
                 'account_name' => 'account_name',
-            )
-        ),
-        'bugs' => array(
+            ],
+        ],
+        'bugs' => [
             'name' => 'bugs',
             'type' => 'link',
             'relationship' => 'contacts_bugs',
             'source' => 'non-db',
             'vname' => 'LBL_BUGS',
-        ),
-        'calls' => array(
+        ],
+        'calls' => [
             'name' => 'calls',
             'type' => 'link',
             'relationship' => 'calls_contacts',
             'source' => 'non-db',
             'vname' => 'LBL_CALLS',
-        ),
-        'cases' => array(
+        ],
+        'cases' => [
             'name' => 'cases',
             'type' => 'link',
             'relationship' => 'contacts_cases',
             'source' => 'non-db',
             'vname' => 'LBL_CASES',
-            'populate_list' => array(
+            'populate_list' => [
                 'account_id',
-                'account_name'
-            )
-        ),
+                'account_name',
+            ],
+        ],
         'case_contact' => [
             'name' => 'case_contact',
             'type' => 'link',
@@ -403,14 +404,14 @@ $dictionary['Contact'] = array(
                 'account_name',
             ],
         ],
-        'dataprivacy' => array(
+        'dataprivacy' => [
             'name' => 'dataprivacy',
             'type' => 'link',
             'relationship' => 'contacts_dataprivacy',
             'source' => 'non-db',
             'vname' => 'LBL_DATAPRIVACY',
-        ),
-        'dp_business_purpose' => array (
+        ],
+        'dp_business_purpose' => [
             'name' => 'dp_business_purpose',
             'vname' => 'LBL_DATAPRIVACY_BUSINESS_PURPOSE',
             'type' => 'multienum',
@@ -420,8 +421,8 @@ $dictionary['Contact'] = array(
             'default' => '',
             'len' => 255,
             'comment' => 'Business purposes consented for',
-        ),
-        'dp_consent_last_updated' => array(
+        ],
+        'dp_consent_last_updated' => [
             'name' => 'dp_consent_last_updated',
             'vname' => 'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED',
             'type' => 'date',
@@ -430,22 +431,23 @@ $dictionary['Contact'] = array(
             'enable_range_search' => true,
             'options' => 'date_range_search_dom',
             'comment' => 'Date consent last updated',
-        ),
-        'direct_reports' => array(
+            'studio' => false,
+        ],
+        'direct_reports' => [
             'name' => 'direct_reports',
             'type' => 'link',
             'relationship' => 'contact_direct_reports',
             'source' => 'non-db',
             'vname' => 'LBL_DIRECT_REPORTS',
-        ),
-        'emails' => array(
+        ],
+        'emails' => [
             'name' => 'emails',
             'type' => 'link',
             'relationship' => 'emails_contacts_rel',
             'source' => 'non-db',
             'vname' => 'LBL_EMAILS',
-        ),
-        'archived_emails' => array(
+        ],
+        'archived_emails' => [
             'name' => 'archived_emails',
             'type' => 'link',
             'link_class' => 'ArchivedEmailsLink',
@@ -455,62 +457,62 @@ $dictionary['Contact'] = array(
             'link_type' => 'many',
             'relationship' => '',
             'readonly' => true,
-        ),
-        'documents' => array(
+        ],
+        'documents' => [
             'name' => 'documents',
             'type' => 'link',
             'relationship' => 'documents_contacts',
             'source' => 'non-db',
             'vname' => 'LBL_DOCUMENTS_SUBPANEL_TITLE',
-        ),
-        'leads' => array(
+        ],
+        'leads' => [
             'name' => 'leads',
             'type' => 'link',
             'relationship' => 'contact_leads',
             'source' => 'non-db',
             'vname' => 'LBL_LEADS',
-            'populate_list' => array(
+            'populate_list' => [
                 'first_name' => 'first_name',
                 'last_name' => 'last_name',
                 'account_name' => 'account_name',
                 'phone_work' => 'phone_work',
                 'id' => 'contact_id',
                 'account_id' => 'account_id',
-            ),
-        ),
-        'products' => array(
+            ],
+        ],
+        'products' => [
             'name' => 'products',
             'type' => 'link',
-            'rname' => array('first_name', 'last_name'),
+            'rname' => ['first_name', 'last_name'],
             'relationship' => 'contact_products',
             'source' => 'non-db',
             'vname' => 'LBL_PRODUCTS_TITLE',
-            'populate_list' => array(
+            'populate_list' => [
                 'account_id',
-                'account_name'
-            )
-        ),
-        'contracts' => array(
+                'account_name',
+            ],
+        ],
+        'contracts' => [
             'name' => 'contracts',
             'type' => 'link',
             'vname' => 'LBL_CONTRACTS',
             'relationship' => 'contracts_contacts',
             'source' => 'non-db',
-        ),
-        'meetings' => array(
+        ],
+        'meetings' => [
             'name' => 'meetings',
             'type' => 'link',
             'relationship' => 'meetings_contacts',
             'source' => 'non-db',
             'vname' => 'LBL_MEETINGS',
-        ),
-        'notes' => array(
+        ],
+        'notes' => [
             'name' => 'notes',
             'type' => 'link',
             'relationship' => 'contact_notes',
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
-        ),
+        ],
         'messages' => [
             'name' => 'messages',
             'type' => 'link',
@@ -525,21 +527,21 @@ $dictionary['Contact'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_MESSAGES',
         ],
-        'project' => array(
+        'project' => [
             'name' => 'project',
             'type' => 'link',
             'relationship' => 'projects_contacts',
             'source' => 'non-db',
             'vname' => 'LBL_PROJECTS',
-        ),
-        'project_resource' => array(
+        ],
+        'project_resource' => [
             'name' => 'project_resource',
             'type' => 'link',
             'relationship' => 'projects_contacts_resources',
             'source' => 'non-db',
             'vname' => 'LBL_PROJECTS_RESOURCES',
-        ),
-        'quotes' => array(
+        ],
+        'quotes' => [
             'name' => 'quotes',
             'type' => 'link',
             'relationship' => 'quotes_contacts_shipto',
@@ -548,8 +550,8 @@ $dictionary['Contact'] = array(
             'module' => 'Quotes',
             'bean_name' => 'Quote',
             'vname' => 'LBL_QUOTES_SHIP_TO',
-        ),
-        'billing_quotes' => array(
+        ],
+        'billing_quotes' => [
             'name' => 'billing_quotes',
             'type' => 'link',
             'relationship' => 'quotes_contacts_billto',
@@ -558,62 +560,62 @@ $dictionary['Contact'] = array(
             'module' => 'Quotes',
             'bean_name' => 'Quote',
             'vname' => 'LBL_QUOTES_BILL_TO',
-        ),
-        'tasks' => array(
+        ],
+        'tasks' => [
             'name' => 'tasks',
             'type' => 'link',
             'relationship' => 'contact_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_TASKS',
-        ),
-        'tasks_parent' => array(
+        ],
+        'tasks_parent' => [
             'name' => 'tasks_parent',
             'type' => 'link',
             'relationship' => 'contact_tasks_parent',
             'source' => 'non-db',
             'vname' => 'LBL_TASKS',
             'reportable' => false,
-        ),
-        'notes_parent' => array(
+        ],
+        'notes_parent' => [
             'name' => 'notes_parent',
             'type' => 'link',
             'relationship' => 'contact_notes_parent',
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
             'reportable' => false,
-        ),
-        'calls_parent' => array(
+        ],
+        'calls_parent' => [
             'name' => 'calls_parent',
             'type' => 'link',
             'relationship' => 'contact_calls_parent',
             'source' => 'non-db',
             'vname' => 'LBL_CALLS',
             'reportable' => false,
-        ),
-        'meetings_parent' => array(
+        ],
+        'meetings_parent' => [
             'name' => 'meetings_parent',
             'type' => 'link',
             'relationship' => 'contact_meetings_parent',
             'source' => 'non-db',
             'vname' => 'LBL_MEETINGS',
             'reportable' => false,
-        ),
-        'all_tasks' => array(
+        ],
+        'all_tasks' => [
             'name' => 'all_tasks',
             'type' => 'link',
             'link_class' => 'FlexRelateChildrenLink',
             'relationship' => 'contact_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_TASKS',
-        ),
-        'user_sync' => array(
+        ],
+        'user_sync' => [
             'name' => 'user_sync',
             'type' => 'link',
             'relationship' => 'contacts_users',
             'source' => 'non-db',
             'vname' => 'LBL_USER_SYNC',
-        ),
-        'created_by_link' => array(
+        ],
+        'created_by_link' => [
             'name' => 'created_by_link',
             'type' => 'link',
             'relationship' => 'contacts_created_by',
@@ -622,8 +624,8 @@ $dictionary['Contact'] = array(
             'module' => 'Users',
             'bean_name' => 'User',
             'source' => 'non-db',
-        ),
-        'modified_user_link' => array(
+        ],
+        'modified_user_link' => [
             'name' => 'modified_user_link',
             'type' => 'link',
             'relationship' => 'contacts_modified_user',
@@ -632,8 +634,8 @@ $dictionary['Contact'] = array(
             'module' => 'Users',
             'bean_name' => 'User',
             'source' => 'non-db',
-        ),
-        'assigned_user_link' => array(
+        ],
+        'assigned_user_link' => [
             'name' => 'assigned_user_link',
             'type' => 'link',
             'relationship' => 'contacts_assigned_user',
@@ -645,8 +647,8 @@ $dictionary['Contact'] = array(
             'id_name' => 'assigned_user_id',
             'table' => 'users',
             'duplicate_merge' => 'enabled',
-        ),
-        'campaign_id' => array(
+        ],
+        'campaign_id' => [
             'name' => 'campaign_id',
             'comment' => 'Campaign that generated lead',
             'vname' => 'LBL_CAMPAIGN_ID',
@@ -657,8 +659,8 @@ $dictionary['Contact'] = array(
             'module' => 'Campaigns',
             'massupdate' => false,
             'duplicate_merge' => 'disabled',
-        ),
-        'campaign_name' => array(
+        ],
+        'campaign_name' => [
             'name' => 'campaign_name',
             'rname' => 'name',
             'vname' => 'LBL_CAMPAIGN',
@@ -672,11 +674,11 @@ $dictionary['Contact'] = array(
             'module' => 'Campaigns',
             'duplicate_merge' => 'disabled',
             'comment' => 'The first campaign name for Contact (Meta-data only)',
-            'studio' => array(
+            'studio' => [
                 'mobile' => false,
-            ),
-        ),
-        'campaigns' => array(
+            ],
+        ],
+        'campaigns' => [
             'name' => 'campaigns',
             'type' => 'link',
             'relationship' => 'contact_campaign_log',
@@ -684,22 +686,22 @@ $dictionary['Contact'] = array(
             'bean_name' => 'CampaignLog',
             'source' => 'non-db',
             'vname' => 'LBL_CAMPAIGNLOG',
-        ),
-        'campaign_contacts' => array(
+        ],
+        'campaign_contacts' => [
             'name' => 'campaign_contacts',
             'type' => 'link',
             'vname' => 'LBL_CAMPAIGN_CONTACT',
             'relationship' => 'campaign_contacts',
             'source' => 'non-db',
-        ),
+        ],
         // Deprecated: Use rname_link instead
-        'c_accept_status_fields' => array(
+        'c_accept_status_fields' => [
             'name' => 'c_accept_status_fields',
             'rname' => 'id',
-            'relationship_fields' => array(
+            'relationship_fields' => [
                 'id' => 'accept_status_id',
-                'accept_status' => 'accept_status_name'
-            ),
+                'accept_status' => 'accept_status_name',
+            ],
             'vname' => 'LBL_LIST_ACCEPT_STATUS',
             'type' => 'relate',
             'link' => 'calls',
@@ -708,15 +710,15 @@ $dictionary['Contact'] = array(
             'importable' => 'false',
             'duplicate_merge' => 'disabled',
             'studio' => false,
-        ),
+        ],
         // Deprecated: Use rname_link instead
-        'm_accept_status_fields' => array(
+        'm_accept_status_fields' => [
             'name' => 'm_accept_status_fields',
             'rname' => 'id',
-            'relationship_fields' => array(
+            'relationship_fields' => [
                 'id' => 'accept_status_id',
                 'accept_status' => 'accept_status_name',
-            ),
+            ],
             'vname' => 'LBL_LIST_ACCEPT_STATUS',
             'type' => 'relate',
             'link' => 'meetings',
@@ -726,17 +728,17 @@ $dictionary['Contact'] = array(
             'hideacl' => true,
             'duplicate_merge' => 'disabled',
             'studio' => false,
-        ),
+        ],
         // Deprecated: Use rname_link instead
-        'accept_status_id' => array(
+        'accept_status_id' => [
             'name' => 'accept_status_id',
             'type' => 'varchar',
             'source' => 'non-db',
             'vname' => 'LBL_LIST_ACCEPT_STATUS',
-            'studio' => array('listview' => false),
-        ),
+            'studio' => ['listview' => false],
+        ],
         // Deprecated: Use rname_link instead
-        'accept_status_name' => array(
+        'accept_status_name' => [
             'massupdate' => false,
             'name' => 'accept_status_name',
             'type' => 'enum',
@@ -745,8 +747,8 @@ $dictionary['Contact'] = array(
             'vname' => 'LBL_LIST_ACCEPT_STATUS',
             'options' => 'dom_meeting_accept_status',
             'importable' => 'false',
-        ),
-        'accept_status_calls' => array(
+        ],
+        'accept_status_calls' => [
             'massupdate' => false,
             'name' => 'accept_status_calls',
             'type' => 'enum',
@@ -757,8 +759,8 @@ $dictionary['Contact'] = array(
             'importable' => 'false',
             'link' => 'calls',
             'rname_link' => 'accept_status',
-        ),
-        'accept_status_meetings' => array(
+        ],
+        'accept_status_meetings' => [
             'massupdate' => false,
             'name' => 'accept_status_meetings',
             'type' => 'enum',
@@ -769,7 +771,7 @@ $dictionary['Contact'] = array(
             'importable' => 'false',
             'link' => 'meetings',
             'rname_link' => 'accept_status',
-        ),
+        ],
         'accept_status_messages' => [
             'massupdate' => false,
             'name' => 'accept_status_messages',
@@ -1047,15 +1049,15 @@ $dictionary['Contact'] = array(
             'readonly' => true,
             'reportable' => false,
         ],
-        'prospect_lists' => array(
+        'prospect_lists' => [
             'name' => 'prospect_lists',
             'type' => 'link',
             'relationship' => 'prospect_list_contacts',
             'module' => 'ProspectLists',
             'source' => 'non-db',
             'vname' => 'LBL_PROSPECT_LIST',
-        ),
-        'sync_contact' => array(
+        ],
+        'sync_contact' => [
             'massupdate' => false,
             'name' => 'sync_contact',
             'vname' => 'LBL_SYNC_CONTACT',
@@ -1066,7 +1068,7 @@ $dictionary['Contact'] = array(
             'link' => 'user_sync',
             'rname' => 'id',
             'rname_exists' => true,
-        ),
+        ],
         'market_interest_prediction_score' => [
             'name' => 'market_interest_prediction_score',
             'vname' => 'LBL_MARKET_INTEREST_PREDICTION',
@@ -1097,45 +1099,42 @@ $dictionary['Contact'] = array(
             'enable_range_search' => true,
         ],
         // Marketo Fields
-        'mkto_sync' =>
-            array(
-                'name' => 'mkto_sync',
-                'vname' => 'LBL_MKTO_SYNC',
-                'type' => 'bool',
-                'default' => '0',
-                'comment' => 'Should the Lead be synced to Marketo',
-                'massupdate' => true,
-                'audited' => true,
-                'duplicate_merge' => true,
-                'reportable' => true,
-                'importable' => 'true',
-            ),
-        'mkto_id' =>
-            array(
-                'name' => 'mkto_id',
-                'vname' => 'LBL_MKTO_ID',
-                'comment' => 'Associated Marketo Lead ID',
-                'type' => 'int',
-                'default' => null,
-                'audited' => true,
-                'mass_update' => false,
-                'duplicate_merge' => true,
-                'reportable' => true,
-                'importable' => 'false',
-            ),
-        'mkto_lead_score' =>
-            array(
-                'name' => 'mkto_lead_score',
-                'vname' => 'LBL_MKTO_LEAD_SCORE',
-                'comment' => null,
-                'type' => 'int',
-                'default_value' => null,
-                'audited' => true,
-                'mass_update' => false,
-                'duplicate_merge' => true,
-                'reportable' => true,
-                'importable' => 'true',
-            ),
+        'mkto_sync' => [
+            'name' => 'mkto_sync',
+            'vname' => 'LBL_MKTO_SYNC',
+            'type' => 'bool',
+            'default' => '0',
+            'comment' => 'Should the Lead be synced to Marketo',
+            'massupdate' => true,
+            'audited' => true,
+            'duplicate_merge' => true,
+            'reportable' => true,
+            'importable' => 'true',
+        ],
+        'mkto_id' => [
+            'name' => 'mkto_id',
+            'vname' => 'LBL_MKTO_ID',
+            'comment' => 'Associated Marketo Lead ID',
+            'type' => 'int',
+            'default' => null,
+            'audited' => true,
+            'mass_update' => false,
+            'duplicate_merge' => true,
+            'reportable' => true,
+            'importable' => 'false',
+        ],
+        'mkto_lead_score' => [
+            'name' => 'mkto_lead_score',
+            'vname' => 'LBL_MKTO_LEAD_SCORE',
+            'comment' => null,
+            'type' => 'int',
+            'default_value' => null,
+            'audited' => true,
+            'mass_update' => false,
+            'duplicate_merge' => true,
+            'reportable' => true,
+            'importable' => 'true',
+        ],
         'entry_source' => [
             'name' => 'entry_source',
             'vname' => 'LBL_ENTRY_SOURCE',
@@ -1161,59 +1160,59 @@ $dictionary['Contact'] = array(
             'studio' => false,
             'readonly' => true,
         ],
-    ),
-    'indices' => array(
-        array(
+    ],
+    'indices' => [
+        [
             'name' => 'idx_contacts_del_last',
             'type' => 'index',
-            'fields' => array('deleted', 'last_name'),
-        ),
-        array(
+            'fields' => ['deleted', 'last_name'],
+        ],
+        [
             'name' => 'idx_cont_del_last_dm',
             'type' => 'index',
-            'fields' => array('deleted', 'last_name', 'date_modified'),
-        ),
-        array(
+            'fields' => ['deleted', 'last_name', 'date_modified'],
+        ],
+        [
             'name' => 'idx_cont_del_reports',
             'type' => 'index',
-            'fields' => array('deleted', 'reports_to_id', 'last_name'),
-        ),
-        array(
+            'fields' => ['deleted', 'reports_to_id', 'last_name'],
+        ],
+        [
             'name' => 'idx_reports_to_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'reports_to_id',
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_del_id_user',
             'type' => 'index',
-            'fields' => array('deleted', 'id', 'assigned_user_id'),
-        ),
-        array('name' => 'idx_contact_title', 'type' => 'index', 'fields' => array('title')),
-        array(
+            'fields' => ['deleted', 'id', 'assigned_user_id'],
+        ],
+        ['name' => 'idx_contact_title', 'type' => 'index', 'fields' => ['title']],
+        [
             'name' => 'idx_contact_mkto_id',
             'type' => 'index',
-            'fields' => array('mkto_id')
-        ),
-        array(
+            'fields' => ['mkto_id'],
+        ],
+        [
             'name' => 'idx_contacts_del_businesscenter',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'business_center_id',
-            ),
-        ),
+            ],
+        ],
         [
             'name' => 'idx_cont_portal_active',
             'type' => 'index',
             'fields' => ['portal_name', 'portal_active', 'deleted'],
         ],
-    ),
-    'relationships' => array(
-        'contact_direct_reports' => array(
+    ],
+    'relationships' => [
+        'contact_direct_reports' => [
             'lhs_module' => 'Contacts',
             'lhs_table' => 'contacts',
             'lhs_key' => 'id',
@@ -1221,8 +1220,8 @@ $dictionary['Contact'] = array(
             'rhs_table' => 'contacts',
             'rhs_key' => 'reports_to_id',
             'relationship_type' => 'one-to-many',
-        ),
-        'contact_leads' => array(
+        ],
+        'contact_leads' => [
             'lhs_module' => 'Contacts',
             'lhs_table' => 'contacts',
             'lhs_key' => 'id',
@@ -1230,8 +1229,8 @@ $dictionary['Contact'] = array(
             'rhs_table' => 'leads',
             'rhs_key' => 'contact_id',
             'relationship_type' => 'one-to-many',
-        ),
-        'contact_notes' => array(
+        ],
+        'contact_notes' => [
             'lhs_module' => 'Contacts',
             'lhs_table' => 'contacts',
             'lhs_key' => 'id',
@@ -1239,7 +1238,9 @@ $dictionary['Contact'] = array(
             'rhs_table' => 'notes',
             'rhs_key' => 'contact_id',
             'relationship_type' => 'one-to-many',
-        ),
+            'relationship_class' => 'ContactNotesRelationship',
+            'relationship_file' => 'data/Relationships/ContactNotesRelationship.php',
+        ],
         'contact_messages' => [
             'lhs_module' => 'Contacts',
             'lhs_table' => 'contacts',
@@ -1249,7 +1250,7 @@ $dictionary['Contact'] = array(
             'rhs_key' => 'contact_id',
             'relationship_type' => 'one-to-many',
         ],
-        'contact_notes_parent' => array(
+        'contact_notes_parent' => [
             'lhs_module' => 'Contacts',
             'lhs_table' => 'contacts',
             'lhs_key' => 'id',
@@ -1259,8 +1260,8 @@ $dictionary['Contact'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Contacts',
-        ),
-        'contact_calls_parent' => array(
+        ],
+        'contact_calls_parent' => [
             'lhs_module' => 'Contacts',
             'lhs_table' => 'contacts',
             'lhs_key' => 'id',
@@ -1270,8 +1271,8 @@ $dictionary['Contact'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Contacts',
-        ),
-        'contact_meetings_parent' => array(
+        ],
+        'contact_meetings_parent' => [
             'lhs_module' => 'Contacts',
             'lhs_table' => 'contacts',
             'lhs_key' => 'id',
@@ -1281,8 +1282,8 @@ $dictionary['Contact'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Contacts',
-        ),
-        'contact_tasks' => array(
+        ],
+        'contact_tasks' => [
             'lhs_module' => 'Contacts',
             'lhs_table' => 'contacts',
             'lhs_key' => 'id',
@@ -1290,8 +1291,8 @@ $dictionary['Contact'] = array(
             'rhs_table' => 'tasks',
             'rhs_key' => 'contact_id',
             'relationship_type' => 'one-to-many',
-        ),
-        'contact_tasks_parent' => array(
+        ],
+        'contact_tasks_parent' => [
             'lhs_module' => 'Contacts',
             'lhs_table' => 'contacts',
             'lhs_key' => 'id',
@@ -1301,8 +1302,8 @@ $dictionary['Contact'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Contacts',
-        ),
-        'contacts_assigned_user' => array(
+        ],
+        'contacts_assigned_user' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
@@ -1310,8 +1311,8 @@ $dictionary['Contact'] = array(
             'rhs_table' => 'contacts',
             'rhs_key' => 'assigned_user_id',
             'relationship_type' => 'one-to-many',
-        ),
-        'contacts_modified_user' => array(
+        ],
+        'contacts_modified_user' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
@@ -1319,8 +1320,8 @@ $dictionary['Contact'] = array(
             'rhs_table' => 'contacts',
             'rhs_key' => 'modified_user_id',
             'relationship_type' => 'one-to-many',
-        ),
-        'contacts_created_by' => array(
+        ],
+        'contacts_created_by' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
@@ -1328,8 +1329,8 @@ $dictionary['Contact'] = array(
             'rhs_table' => 'contacts',
             'rhs_key' => 'created_by',
             'relationship_type' => 'one-to-many',
-        ),
-        'contact_products' => array(
+        ],
+        'contact_products' => [
             'lhs_module' => 'Contacts',
             'lhs_table' => 'contacts',
             'lhs_key' => 'id',
@@ -1337,8 +1338,8 @@ $dictionary['Contact'] = array(
             'rhs_table' => 'products',
             'rhs_key' => 'contact_id',
             'relationship_type' => 'one-to-many',
-        ),
-        'contact_campaign_log' => array(
+        ],
+        'contact_campaign_log' => [
             'lhs_module' => 'Contacts',
             'lhs_table' => 'contacts',
             'lhs_key' => 'id',
@@ -1346,40 +1347,40 @@ $dictionary['Contact'] = array(
             'rhs_table' => 'campaign_log',
             'rhs_key' => 'target_id',
             'relationship_type' => 'one-to-many',
-        ),
-    ),
-    'duplicate_check' => array(
+        ],
+    ],
+    'duplicate_check' => [
         'enabled' => true,
-        'FilterDuplicateCheck' => array(
-            'filter_template' => array(
-                array(
-                    '$and' => array(
-                        array('first_name' => array('$starts' => '$first_name')),
-                        array('last_name' => array('$starts' => '$last_name')),
-                        array('accounts.id' => array('$equals' => '$account_id')),
-                        array('dnb_principal_id' => array('$equals' => '$dnb_principal_id')),
-                    )
-                ),
-            ),
-            'ranking_fields' => array(
-                array(
+        'FilterDuplicateCheck' => [
+            'filter_template' => [
+                [
+                    '$and' => [
+                        ['first_name' => ['$starts' => '$first_name']],
+                        ['last_name' => ['$starts' => '$last_name']],
+                        ['accounts.id' => ['$equals' => '$account_id']],
+                        ['dnb_principal_id' => ['$equals' => '$dnb_principal_id']],
+                    ],
+                ],
+            ],
+            'ranking_fields' => [
+                [
                     'in_field_name' => 'account_id',
                     'dupe_field_name' => 'account_id',
-                ),
-                array(
+                ],
+                [
                     'in_field_name' => 'last_name',
                     'dupe_field_name' => 'last_name',
-                ),
-                array(
+                ],
+                [
                     'in_field_name' => 'first_name',
                     'dupe_field_name' => 'first_name',
-                ),
-            ),
-        ),
-    ),
+                ],
+            ],
+        ],
+    ],
     // This enables optimistic locking for Saves From EditView
     'optimistic_locking' => true,
-    'uses' => array(
+    'uses' => [
         'default',
         'assignable',
         'team_security',
@@ -1387,14 +1388,14 @@ $dictionary['Contact'] = array(
         'audit',
         'external_source',
         'customer_journey_parent',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'Contacts',
         'links' => [
             'Accounts' => 'accounts',
         ],
     ],
-);
+];
 
 VardefManager::createVardef(
     'Contacts',

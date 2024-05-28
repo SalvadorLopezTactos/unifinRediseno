@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Gövde',
     'LBL_BASE_MODULE' => 'Hedef Modül',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Süreç E-postası Şablonu oluşturma işlemi başarısız oldu',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Bu E-posta Şablonu, şu anda bir Süreç Tanımında kullanılmaktadır. Yine de bu E-posta Şablonunu düzenlemek istiyor musunuz?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Şu anda bir Süreç Tanımında kullanıldığı için bu E-posta Şablonunu silemezsiniz.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Şu anda bir Süreç Tanımında kullanıldığı için bu E-posta Şablonunu silemezsiniz.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Alan Seçici',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Seç',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Alan değeri türü',
-);
+];

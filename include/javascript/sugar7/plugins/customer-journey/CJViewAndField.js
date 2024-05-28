@@ -85,13 +85,15 @@
                                 this.hideField(field);
                             }
                             break;
-                        case 'activity_preview_button':
+                        case 'activity_template_preview_button':
                             // When the user does not have access to edit the activity we should remove the label since
                             // The preview button will be displayed first instead of the complete button.
                             if (!app.acl.hasAccessToModel('edit', field.model, field)) {
                                 field.$('i').parent().html(field.$('i'));
                                 field.def.label = ' ';
                                 field.label = ' ';
+                                field.def.tooltip = 'LBL_PREVIEW';
+                                field.render();
                             }
                             break;
                     }
@@ -118,13 +120,15 @@
                 const options = 'dri_subworkflows_state_list';
                 const optionsCalls = 'cj_meetings_completed_status_list';
                 const optionsMeetings = 'cj_meetings_completed_status_list';
+                const callStatus = 'call_status_dom';
                 const statusNap = app.lang.getAppListStrings(option).activity_not_applicable_button;
                 const statusComplete = app.lang.getAppListStrings(options).completed;
                 const statusHeld = app.lang.getAppListStrings(optionsCalls).Held;
                 const statusNotHeld = app.lang.getAppListStrings(optionsMeetings)['Not Held'];
+                const statusInprogress = app.lang.getAppListStrings(callStatus)['In Progress'];
                 const activityID = $(`[data-id="${id}"]`);
                 const timeZone = '.dri-subworkflow-activity-actions > .activity-due-date';
-                const statuses = [statusNap, statusComplete, statusHeld, statusNotHeld];
+                const statuses = [statusNap, statusComplete, statusHeld, statusNotHeld, statusInprogress];
                 if (!_.isEmpty(field.model.get('forms')) &&
                 (statuses.includes(field.model.get('status')))) {
                     const rsaIcon = '.btn.activity-form';
@@ -149,8 +153,11 @@
             isStartable: function(activity) {
                 switch (activity.module) {
                     case 'Tasks':
+                    case 'Calls':
                         return (
                             activity.get('status') !== 'In Progress' &&
+                            activity.get('status') !== 'Held' &&
+                            activity.get('status') !== 'Not Held' &&
                             activity.get('status') !== 'Completed' &&
                             activity.get('status') !== 'Not Applicable' &&
                             !activity.get('is_cj_parent_activity') &&
@@ -353,7 +360,7 @@
                             id: activity.get('assigned_user').id,
                             field: 'picture',
                         },
-                        {cleanCache: false}
+                        {cleanCache: true}
                     )
                         : ''
                 );
@@ -372,6 +379,7 @@
                     iconTooltip: this.getIconTooltip(activity),
                     statusLabel: this.getStatusLabel(activity),
                     statusClass: this.getStatusClass(activity),
+                    startDate: this.getStartDateInfo(activity),
                     dueDate: this.getDueDateInfo(activity),
                     typeClass: this.getTypeClass(activity),
                     isParent: this.isParent(activity),
@@ -515,6 +523,63 @@
                 } else {
                     info.className = 'future';
                     info.status = app.lang.get('LBL_CUSTOMER_JOURNEY_ACTIVITY_DUE_DATE_FUTURE', activity.module);
+                }
+
+                info.title = app.lang.get('LBL_CUSTOMER_JOURNEY_ACTIVITY_DUE_DATE_TEXT', activity.module, info);
+
+                if (date.format('YYYY') === now.format('YYYY')) {
+                    info.text = date.format('MMM D');
+                } else {
+                    info.text = date.format('MMM D, YYYY');
+                }
+
+                return info;
+            },
+
+            /**
+             * Get the start date info
+             *
+             * @param {Object} activity
+             * @return {Object|boolean}
+             */
+            getStartDateInfo: function(activity) {
+                let startDateFields = {
+                    Calls: 'date_end',
+                };
+
+                let fieldName = startDateFields[activity.module];
+
+                if (_.isUndefined(fieldName) || _.isEmpty(activity.get(fieldName)) || this.isClosed(activity)) {
+                    return false;
+                }
+
+                let emptyDate = app.date('2100-01-01T12:00:00');
+                let date = app.date(activity.get(fieldName));
+                let now = app.date();
+                let tomorrow = app.date().add(1, 'day');
+
+                if (date.format('YYYY') === emptyDate.format('YYYY')) {
+                    return false;
+                }
+
+                let info = {
+                    fromNow: date.fromNow(),
+                    formatUser: date.formatUser(),
+                    fieldName: app.lang.get(activity.fields[fieldName].vname, activity.module)
+                };
+
+                if (date.isBefore(now)) {
+                    info.className = 'future';
+                    info.status = app.lang.get('LBL_CUSTOMER_JOURNEY_ACTIVITY_DUE_DATE_FUTURE', activity.module);
+                } else if (date.format('YYYY-MM-DD') === now.format('YYYY-MM-DD')) {
+                    info.className = 'today';
+                    info.status = app.lang.get('LBL_CUSTOMER_JOURNEY_ACTIVITY_DUE_DATE_TODAY', activity.module);
+                } else if (date.format('YYYY-MM-DD') === tomorrow.format('YYYY-MM-DD')) {
+                    info.className = 'tomorrow';
+                    info.status = app.lang.get('LBL_CUSTOMER_JOURNEY_ACTIVITY_DUE_DATE_TOMORROW', activity.module);
+                } else {
+                    info.className = 'overdue';
+                    info.status = app.lang.get('LBL_CUSTOMER_JOURNEY_ACTIVITY_DUE_DATE_OVERDUE', activity.module);
                 }
 
                 info.title = app.lang.get('LBL_CUSTOMER_JOURNEY_ACTIVITY_DUE_DATE_TEXT', activity.module, info);

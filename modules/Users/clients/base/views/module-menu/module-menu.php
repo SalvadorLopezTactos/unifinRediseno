@@ -15,6 +15,6 @@ use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 
 $idpConfig = new Authentication\Config(\SugarConfig::getInstance());
 
-$viewdefs['Users']['base']['view']['module-menu'] = array(
+$viewdefs['Users']['base']['view']['module-menu'] = [
     'cloudConsoleLink' => $idpConfig->isIDMModeEnabled() ? $idpConfig->buildCloudConsoleUrl('userCreate') : '',
-);
+];

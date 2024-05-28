@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Добави',
     'LBL_ADDRCITY' => 'Град',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Информация' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Затвори' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'Не беше намерена връзка за дадения идентификатор на източника.',
-);
-
+];

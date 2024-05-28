@@ -10,60 +10,63 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-if( !isset( $install_script ) || !$install_script ){
+if (!isset($install_script) || !$install_script) {
     die($mod_strings['ERR_NO_DIRECT_SCRIPT']);
 }
 
-if( is_file("config.php") ){
+if (is_file('config.php')) {
+    if (!empty($sugar_config['default_theme'])) {
+        $_SESSION['site_default_theme'] = $sugar_config['default_theme'];
+    }
 
+    if (!empty($sugar_config['default_language'])) {
+        $_SESSION['default_language'] = $sugar_config['default_language'];
+    }
+    if (!empty($sugar_config['translation_string_prefix'])) {
+        $_SESSION['translation_string_prefix'] = $sugar_config['translation_string_prefix'];
+    }
+    if (!empty($sugar_config['default_charset'])) {
+        $_SESSION['default_charset'] = $sugar_config['default_charset'];
+    }
 
+    if (!empty($sugar_config['default_currency_name'])) {
+        $_SESSION['default_currency_name'] = $sugar_config['default_currency_name'];
+    }
+    if (!empty($sugar_config['default_currency_symbol'])) {
+        $_SESSION['default_currency_symbol'] = $sugar_config['default_currency_symbol'];
+    }
+    if (!empty($sugar_config['default_currency_iso4217'])) {
+        $_SESSION['default_currency_iso4217'] = $sugar_config['default_currency_iso4217'];
+    }
 
-	if(!empty($sugar_config['default_theme']))
-      $_SESSION['site_default_theme'] = $sugar_config['default_theme'];
+    if (!empty($sugar_config['rss_cache_time'])) {
+        $_SESSION['rss_cache_time'] = $sugar_config['rss_cache_time'];
+    }
+    if (!empty($sugar_config['languages'])) {
+        // We need to encode the languages in a way that can be retrieved later.
+        $language_keys = [];
+        $language_values = [];
 
-	if(!empty($sugar_config['default_language']))
-		$_SESSION['default_language'] = $sugar_config['default_language'];
-	if(!empty($sugar_config['translation_string_prefix']))
-		$_SESSION['translation_string_prefix'] = $sugar_config['translation_string_prefix'];
-	if(!empty($sugar_config['default_charset']))
-		$_SESSION['default_charset'] = $sugar_config['default_charset'];
+        foreach ($sugar_config['languages'] as $key => $value) {
+            $language_keys[] = $key;
+            $language_values[] = $value;
+        }
 
-	if(!empty($sugar_config['default_currency_name']))
-		$_SESSION['default_currency_name'] = $sugar_config['default_currency_name'];
-	if(!empty($sugar_config['default_currency_symbol']))
-		$_SESSION['default_currency_symbol'] = $sugar_config['default_currency_symbol'];
-	if(!empty($sugar_config['default_currency_iso4217']))
-		$_SESSION['default_currency_iso4217'] = $sugar_config['default_currency_iso4217'];
-
-	if(!empty($sugar_config['rss_cache_time']))
-		$_SESSION['rss_cache_time'] = $sugar_config['rss_cache_time'];
-	if(!empty($sugar_config['languages']))
-	{
-		// We need to encode the languages in a way that can be retrieved later.
-		$language_keys = Array();
-		$language_values = Array();
-
-		foreach($sugar_config['languages'] as $key=>$value)
-		{
-			$language_keys[] = $key;
-			$language_values[] = $value;
-		}
-
-		$_SESSION['language_keys'] = urlencode(implode(",",$language_keys));
-		$_SESSION['language_values'] = urlencode(implode(",",$language_values));
-	}
+        $_SESSION['language_keys'] = urlencode(implode(',', $language_keys));
+        $_SESSION['language_values'] = urlencode(implode(',', $language_values));
+    }
 }
 
 ////	errors
 $errors = '';
-if( isset($validation_errors) ){
-    if ((is_countable($validation_errors) ? count($validation_errors) : 0) > 0) {
-        $errors  = '<div id="errorMsgs">';
-        $errors .= '<p>'.$mod_strings['LBL_SITECFG_FIX_ERRORS'].'</p><ul>';
-        foreach( $validation_errors as $error ){
-			$errors .= '<li>' . $error . '</li>';
+if (isset($validation_errors)) {
+    if (safeCount($validation_errors) > 0) {
+        $errors = '<div id="errorMsgs">';
+        $errors .= '<p>' . $mod_strings['LBL_SITECFG_FIX_ERRORS'] . '</p><ul>';
+        foreach ($validation_errors as $error) {
+            $errors .= '<li>' . $error . '</li>';
         }
-		$errors .= '</ul></div>';
+        $errors .= '</ul></div>';
     }
 }
 
@@ -78,7 +81,7 @@ $customId = (isset($_SESSION['setup_site_specify_guid']) && !empty($_SESSION['se
 ///////////////////////////////////////////////////////////////////////////////
 ////	START OUTPUT
 $langHeader = get_language_header();
-$out =<<<EOQ
+$out = <<<EOQ
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html {$langHeader}>
 <head>
@@ -119,7 +122,9 @@ EOQ;
 
 $out .= '<!--';
 $checked = '';
-if(!empty($_SESSION['setup_site_sugarbeet_anonymous_stats'])) $checked = 'checked="checked"';
+if (!empty($_SESSION['setup_site_sugarbeet_anonymous_stats'])) {
+    $checked = 'checked="checked"';
+}
 $out .= "
    <tr><td></td>
        <td><input type='checkbox' class='checkbox' name='setup_site_sugarbeet_anonymous_stats' value='yes' $checked /></td>
@@ -130,7 +135,9 @@ $out .= "
 $out .= '-->';
 $out .= "<tr><td><input type='checkbox' style='display:none' name='setup_site_sugarbeet_anonymous_stats' value='yes' checked='checked' /></td></tr>";
 $checked = '';
-if(!empty($_SESSION['setup_site_sugarbeet_automatic_checks'])) $checked = 'checked="checked"';
+if (!empty($_SESSION['setup_site_sugarbeet_automatic_checks'])) {
+    $checked = 'checked="checked"';
+}
 $out .= <<<EOQ
    <tr><td></td>
        <td><input type="checkbox" class="checkbox" name="setup_site_sugarbeet_automatic_checks" value="yes" checked="checked" /></td>

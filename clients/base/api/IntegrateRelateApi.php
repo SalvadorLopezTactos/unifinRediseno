@@ -134,7 +134,7 @@ class IntegrateRelateApi extends SugarApi
      * @param array $args
      * @return array
      */
-    public function relateByFields(ServiceBase $api, array $args) : array
+    public function relateByFields(ServiceBase $api, array $args): array
     {
         $updatedArgs = $this->handleRelationshipDiscoveryByFields($api, $args);
         $response = $this->relateRecords($api, $updatedArgs);
@@ -149,7 +149,7 @@ class IntegrateRelateApi extends SugarApi
      * @param array $args
      * @return array
      */
-    public function unrelateByFields(ServiceBase $api, array $args) : array
+    public function unrelateByFields(ServiceBase $api, array $args): array
     {
         $updatedArgs = $this->handleRelationshipDiscoveryByFields($api, $args);
         $response = $this->unrelateRecords($api, $updatedArgs);
@@ -157,7 +157,7 @@ class IntegrateRelateApi extends SugarApi
         return $response;
     }
 
-    protected function handleRelationshipDiscoveryByFields(ServiceBase $api, array $args) : array
+    protected function handleRelationshipDiscoveryByFields(ServiceBase $api, array $args): array
     {
         if (empty($args['lhs_sync_key_field_name'])) {
             $args['lhs_sync_key_field_name'] = $this->defaultField;
@@ -208,7 +208,7 @@ class IntegrateRelateApi extends SugarApi
      * @param array $args
      * @return array
      */
-    protected function relateRecords(ServiceBase $api, array $args) : array
+    protected function relateRecords(ServiceBase $api, array $args): array
     {
         $this->utils()->getUpsertLogger()->debug('Relating record ' . $args['record'] . ' of module ' . $args['module'] .
             ' to record ' . $args['remote_id'] . ' with link field ' . $args['link_name']);
@@ -225,7 +225,7 @@ class IntegrateRelateApi extends SugarApi
      * @param array $args
      * @return array
      */
-    protected function unrelateRecords(ServiceBase $api, array $args) : array
+    protected function unrelateRecords(ServiceBase $api, array $args): array
     {
         $this->utils()->getUpsertLogger()->debug('Unrelating record ' . $args['record'] . ' of module ' . $args['module'] .
             ' from record ' . $args['remote_id'] . ' with link field ' . $args['link_name']);
@@ -243,7 +243,7 @@ class IntegrateRelateApi extends SugarApi
      * @return string
      * @throws SugarApiExceptionNotFound
      */
-    public function getRelatedModuleName(ServiceBase $api, array $args) : string
+    public function getRelatedModuleName(ServiceBase $api, array $args): string
     {
         $primaryBean = $this->loadBean($api, $args);
         $linkName = $args['link_name'];

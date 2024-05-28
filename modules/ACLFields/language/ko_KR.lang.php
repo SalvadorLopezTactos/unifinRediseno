@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_DEFAULT' => '미정',
     'LBL_READ_WRITE' => '읽기/쓰기',
     'LBL_READ_OWNER_WRITE' => '읽기/소유자 쓰기',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_READ_SELECTED_TEAMS_WRITE' => '읽기/(소유자 및 담당부서) 쓰기',
     'LBL_SELECTED_TEAMS_READ_OWNER_WRITE' => '(소유자 및 담당부서) 읽기/소유자 쓰기',
     'LBL_SELECTED_TEAMS_READ_WRITE' => '(소유자 및 담당부서) 읽기/(소유자 및 담당부서) 쓰기',
-);
+];

@@ -70,7 +70,7 @@ abstract class SugarJobRemoveFiles implements RunnableSchedulerJob
      */
     protected function getFilesToRemove($dir, $max_lifetime)
     {
-        $files = array();
+        $files = [];
         $it = new FilesystemIterator($dir);
 
         /** @var SplFileInfo $file */

@@ -12,9 +12,9 @@
 
 //Custom plugins
 //Search through the plugins to include any custom_utils.php files
-$dir_path = "./custom/workflow/plugins";
-foreach(SugarAutoLoader::getDirFiles("custom/workflow/plugins", true) as $dir) {
-    if(SugarAutoLoader::existing("$dir/custom_utils.php")) {
-        include_once("$dir/custom_utils.php");
+$dir_path = './custom/workflow/plugins';
+foreach (SugarAutoLoader::getDirFiles('custom/workflow/plugins', true) as $dir) {
+    if (SugarAutoLoader::existing("$dir/custom_utils.php")) {
+        include_once "$dir/custom_utils.php";
     }
 }

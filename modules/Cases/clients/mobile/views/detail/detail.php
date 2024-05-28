@@ -16,30 +16,30 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$viewdefs['Cases']['mobile']['view']['detail'] = array(
-    'templateMeta' => array(
+$viewdefs['Cases']['mobile']['view']['detail'] = [
+    'templateMeta' => [
         'maxColumns' => '1',
-        'widths' => array(
-            array('label' => '10', 'field' => '30'),
-        ),
-    ),
-    'panels' => array(
-        array(
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'case_number',
-                    'displayParams' => array(
+                    'displayParams' => [
                         'required' => false,
                         'wireless_detail_only' => true,
-                    )
-                ),
-                array('name' => 'name',
-                    'displayParams' => array(
+                    ],
+                ],
+                ['name' => 'name',
+                    'displayParams' => [
                         'required' => true,
                         'wireless_edit_only' => true,
-                    )
-                ),
+                    ],
+                ],
                 'account_name',
                 'priority',
                 'status',
@@ -50,8 +50,7 @@ $viewdefs['Cases']['mobile']['view']['detail'] = array(
 
                 'team_name',
                 'commentlog',
-            ),
-        )
-    )
-);
-?>
+            ],
+        ],
+    ],
+];

@@ -41,7 +41,7 @@ class SugarJobDataArchiver implements RunnableSchedulerJob
 
         $results = $sq->execute();
 
-        if (count($results) > 0) {
+        if (safeCount($results) > 0) {
             // Create a mock api arg
             $api = new RestService();
             $api->user = (BeanFactory::newBean('Users'))->getSystemUser();

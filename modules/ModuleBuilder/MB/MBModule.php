@@ -40,8 +40,8 @@ class MBModule
      * @var mixed[]|array<string, string>|mixed
      */
     public $providedSubpanels;
-    public $name = '' ;
-    public $config = array(
+    public $name = '';
+    public $config = [
         'team_security' => 1,
         'assignable' => 1,
         'taggable' => 1,
@@ -50,26 +50,26 @@ class MBModule
         'studio' => 1,
         'audit' => 1,
         'activity_enabled' => 0, //activity stream disabled by default for new modules
-    );
-    public $mbpublicdefs ;
-    public $errors = array ( ) ;
-    public $path = '' ;
-    public $implementable = array (
-    'team_security' => 'Team Security' ,
-    'has_tab' => 'Navigation Tab' ) ;
-    public $always_implement = array ( 'assignable' => 'Assignable' , 'acl' => 'Access Controls' , 'studio' => 'Studio Support' , 'audit' => 'Audit Table' ) ;
-    public $iTemplate = array(
+    ];
+    public $mbpublicdefs;
+    public $errors = [];
+    public $path = '';
+    public $implementable = [
+        'team_security' => 'Team Security',
+        'has_tab' => 'Navigation Tab'];
+    public $always_implement = ['assignable' => 'Assignable', 'acl' => 'Access Controls', 'studio' => 'Studio Support', 'audit' => 'Audit Table'];
+    public $iTemplate = [
         'team_security',
         'assignable',
         'taggable',
-    );
+    ];
 
-    public $config_md5 = null ;
+    public $config_md5 = null;
 
     /**
      * The metadata converter object, used to keep the peace between BWC and Sidecar
      * formatted metadata
-     * 
+     *
      * @var MetaDataConverter
      */
     public $mdc;
@@ -81,39 +81,39 @@ class MBModule
 
     public $help = [];
 
-    function __construct ($name , $path , $package , $package_key)
+    public function __construct($name, $path, $package, $package_key)
     {
         global $mod_strings;
-    	$this->config [ 'templates' ] = array ( 'basic' => 1 ) ;
+        $this->config ['templates'] = ['basic' => 1];
 
         $this->name = self::getDBName($name);
-        $this->key_name = $package_key . '_' . $name ;
-        $this->package = $package ;
-        $this->package_key = $package_key ;
-        $this->package_path = $path ;
+        $this->key_name = $package_key . '_' . $name;
+        $this->package = $package;
+        $this->package_key = $package_key;
+        $this->package_path = $path;
 
-        $this->implementable = array (
-        'team_security' => !empty($mod_strings[ 'LBL_TEAM_SECURITY' ]) ? $mod_strings[ 'LBL_TEAM_SECURITY' ] : true,
-        'has_tab' => !empty($mod_strings[ 'LBL_NAV_TAB' ]) ? $mod_strings[ 'LBL_NAV_TAB' ] : false) ;
-        $this->path = $this->getModuleDir () ;
+        $this->implementable = [
+            'team_security' => !empty($mod_strings['LBL_TEAM_SECURITY']) ? $mod_strings['LBL_TEAM_SECURITY'] : true,
+            'has_tab' => !empty($mod_strings['LBL_NAV_TAB']) ? $mod_strings['LBL_NAV_TAB'] : false];
+        $this->path = $this->getModuleDir();
         //		$this->mbrelationship = new MBRelationship($this->name, $this->path, $this->key_name);
-        $this->relationships = new UndeployedRelationships ( $this->path ) ;
-        $this->mbvardefs = new MBVardefs ( $this->name, $this->path, $this->key_name ) ;
+        $this->relationships = new UndeployedRelationships($this->path);
+        $this->mbvardefs = new MBVardefs($this->name, $this->path, $this->key_name);
 
-        $this->load () ;
+        $this->load();
     }
 
     public static function getDBName($name)
     {
-        return preg_replace("/[^\w]+/", "_", $name);
+        return preg_replace("/[^\w]+/", '_', $name);
     }
 
-    function getModuleName()
+    public function getModuleName()
     {
         return $this->name;
     }
 
-    function getPackageName()
+    public function getPackageName()
     {
         return $this->package;
     }
@@ -121,7 +121,7 @@ class MBModule
     /**
      * @return UndeployedRelationships
      */
-    function getRelationships()
+    public function getRelationships()
     {
         return $this->relationships;
     }
@@ -130,15 +130,15 @@ class MBModule
      * Loads the module based on the module name
      *
      */
-    function load ()
+    public function load()
     {
-        if (file_exists ( $this->path . '/config.php' ))
-        {
+        $config = [];
+        if (file_exists($this->path . '/config.php')) {
             include FileLoader::validateFilePath($this->path . '/config.php');
-            $this->config = $config ;
+            $this->config = $config;
             $this->normalizeConfig();
         }
-        $label = (!empty ($this->config ['label'])) ? $this->config ['label'] : $this->name;
+        $label = (!empty($this->config ['label'])) ? $this->config ['label'] : $this->name;
         $label_singular = !empty($this->config['label_singular']) ? $this->config['label_singular'] : $label;
         $abbreviation = $this->config['label_abbreviation'] ?? self::getModuleAbbreviatedLabel($label);
         $this->mblanguage = new MBLanguage(
@@ -149,21 +149,18 @@ class MBModule
             $label_singular,
             $abbreviation
         );
-        foreach ( $this->iTemplate as $temp )
-        {
-            if (! empty ( $this->config [ $temp ] ))
-            {
-                $this->mbvardefs->iTemplates [ $temp ] = 1 ;
-                $this->mblanguage->iTemplates [ $temp ] = $temp ;
+        foreach ($this->iTemplate as $temp) {
+            if (!empty($this->config [$temp])) {
+                $this->mbvardefs->iTemplates [$temp] = 1;
+                $this->mblanguage->iTemplates [$temp] = $temp;
             }
         }
-        $this->mbvardefs->templates = $this->config [ 'templates' ] ;
-        $this->mblanguage->templates = $this->config [ 'templates' ] ;
-        $this->mbvardefs->load () ;
-        $this->mblanguage->load () ;
+        $this->mbvardefs->templates = $this->config ['templates'];
+        $this->mblanguage->templates = $this->config ['templates'];
+        $this->mbvardefs->load();
+        $this->mblanguage->load();
 
         $this->verifyMetadata();
-
     }
 
     /**
@@ -181,94 +178,95 @@ class MBModule
         }
     }
 
-    function addTemplate ($template)
+    public function addTemplate($template)
     {
-        $this->config [ 'templates' ] [ $template ] = 1 ;
+        $this->config ['templates'] [$template] = 1;
     }
 
-    function getModuleDir ()
+    public function getModuleDir()
     {
-        return $this->package_path . '/modules/' . $this->name ;
+        return $this->package_path . '/modules/' . $this->name;
     }
 
-    function removeTemplate ($template)
+    public function removeTemplate($template)
     {
-        unset ( $this->config [ 'templates' ] [ $template ] ) ;
+        unset($this->config ['templates'] [$template]);
     }
 
-    function getVardefs ($by_group = false)
+    public function getVardefs($by_group = false)
     {
-        $this->mbvardefs->updateVardefs ( $by_group ) ;
-        return $this->mbvardefs->getVardefs () ;
+        $this->mbvardefs->updateVardefs($by_group);
+        return $this->mbvardefs->getVardefs();
     }
 
-    function addField ($vardef)
+    public function addField($vardef)
     {
-        $this->mbvardefs->addFieldVardef ( $vardef ) ;
+        $this->mbvardefs->addFieldVardef($vardef);
     }
 
-    function addFieldObject ($field)
+    public function addFieldObject($field)
     {
-        $vardef = $field->get_field_def () ;
-		$this->mbvardefs->mergeVardefs();
-		$existingVardefs = $this->mbvardefs->getVardefs () ;
+        $vardef = $field->get_field_def();
+        $this->mbvardefs->mergeVardefs();
+        $existingVardefs = $this->mbvardefs->getVardefs();
 
-                // default unified_search is false, but if the fts is enabled, we need it to be true
-                if (!empty($field->supports_unified_search) && isset($vardef['full_text_search']) && !empty($vardef['full_text_search']['enabled'])) {
-                    $vardef['unified_search'] = true;
-                }
+        // default unified_search is false, but if the fts is enabled, we need it to be true
+        if (!empty($field->supports_unified_search) && isset($vardef['full_text_search']) && !empty($vardef['full_text_search']['enabled'])) {
+            $vardef['unified_search'] = true;
+        }
 
-		//Merge with the existing vardef if it already exists
-		if(!empty($existingVardefs['fields'][$vardef['name']])){
-		    // if we edited non-db field, do not override its source
-		    if(isset($existingVardefs['fields'][$vardef['name']]['source']) && $existingVardefs['fields'][$vardef['name']]['source'] == 'non-db') {
-		        unset($vardef['source']);
-		    }
-			$vardef = array_merge( $existingVardefs['fields'][$vardef['name']], $vardef);
-		}
-        if (! empty ( $vardef [ 'source' ] ) && $vardef [ 'source' ] == 'custom_fields')
-            unset ( $vardef [ 'source' ] ) ;
+        //Merge with the existing vardef if it already exists
+        if (!empty($existingVardefs['fields'][$vardef['name']])) {
+            // if we edited non-db field, do not override its source
+            if (isset($existingVardefs['fields'][$vardef['name']]['source']) && $existingVardefs['fields'][$vardef['name']]['source'] == 'non-db') {
+                unset($vardef['source']);
+            }
+            $vardef = array_merge($existingVardefs['fields'][$vardef['name']], $vardef);
+        }
+        if (!empty($vardef ['source']) && $vardef ['source'] == 'custom_fields') {
+            unset($vardef ['source']);
+        }
 
         if (!empty($vardef['default'])) {
             $vardef['default'] = htmlspecialchars_decode($vardef['default'], ENT_QUOTES);
         }
 
-	    $this->mbvardefs->load();
-        $this->addField ( $vardef ) ;
+        $this->mbvardefs->load();
+        $this->addField($vardef);
         $this->mbvardefs->save();
     }
 
-    function deleteField ($name)
+    public function deleteField($name)
     {
-        $this->mbvardefs->deleteField ( $name ) ;
+        $this->mbvardefs->deleteField($name);
     }
 
-    function fieldExists ($name = '' , $type = '')
+    public function fieldExists($name = '', $type = '')
     {
         $vardefs = $this->getVardefs();
-        if (! empty ( $vardefs ))
-        {
-            if (empty ( $type ) && empty ( $name ))
-                return false ; else if (empty ( $type ))
-                return ! empty ( $vardefs [ 'fields' ] [ $name ] ) ; else if (empty ( $name ))
-            {
-                foreach ( $vardefs [ 'fields' ] as $def )
-                {
-                    if ($def [ 'type' ] == $type)
-                        return true ;
+        if (!empty($vardefs)) {
+            if (empty($type) && empty($name)) {
+                return false;
+            } elseif (empty($type)) {
+                return !empty($vardefs ['fields'] [$name]);
+            } elseif (empty($name)) {
+                foreach ($vardefs ['fields'] as $def) {
+                    if ($def ['type'] == $type) {
+                        return true;
+                    }
                 }
-                return false ;
-            } else
-                return (! empty ( $vardefs [ 'fields' ] [ $name ] ) && ($vardefs [ 'fields' ] [ $name ] [ 'type' ] == $type)) ;
-        } else
-        {
-            return false ;
+                return false;
+            } else {
+                return (!empty($vardefs ['fields'] [$name]) && ($vardefs ['fields'] [$name] ['type'] == $type));
+            }
+        } else {
+            return false;
         }
     }
 
-    function getModStrings ($language = 'en_us')
+    public function getModStrings($language = 'en_us')
     {
-        return $this->mblanguage->getModStrings ( $language ) ;
+        return $this->mblanguage->getModStrings($language);
     }
 
     /**
@@ -277,8 +275,8 @@ class MBModule
      */
     public function setModStrings(string $language, array $mod_strings): void
     {
-        $language .= '.lang.php' ;
-        $this->mblanguage->strings [ $language ] = $mod_strings ;
+        $language .= '.lang.php';
+        $this->mblanguage->strings [$language] = $mod_strings;
     }
 
     /**
@@ -288,13 +286,13 @@ class MBModule
      */
     public function setLabel(string $language, string $key, string $value): void
     {
-    	$language .= '.lang.php' ;
-        $this->mblanguage->strings [ $language ] [ $key ] = $value ;
+        $language .= '.lang.php';
+        $this->mblanguage->strings [$language] [$key] = $value;
         //Ensure this key exists in all languages
         foreach ($this->mblanguage->strings as $lang => $values) {
-        	if (empty($values[$key])) {
-        		$this->mblanguage->strings[$lang][$key] = $value;
-        	}
+            if (empty($values[$key])) {
+                $this->mblanguage->strings[$lang][$key] = $value;
+            }
         }
     }
 
@@ -304,10 +302,10 @@ class MBModule
      */
     public function deleteLabel(string $language, string $key): void
     {
-   		foreach ($this->mblanguage->strings as $lang => $values) {
-        	if (!empty($values[$key])) {
-        		unset($this->mblanguage->strings[$lang][$key]);
-        	}
+        foreach ($this->mblanguage->strings as $lang => $values) {
+            if (!empty($values[$key])) {
+                unset($this->mblanguage->strings[$lang][$key]);
+            }
         }
     }
 
@@ -327,19 +325,16 @@ class MBModule
      */
     public function getLabel(string $language, string $key): string
     {
-        $language .= '.lang.php' ;
-        if (empty ( $this->mblanguage->strings [ $language ] [ $key ] ))
-        {
-
-            return '' ;
+        $language .= '.lang.php';
+        if (empty($this->mblanguage->strings [$language] [$key])) {
+            return '';
         }
-        return $this->mblanguage->strings [ $language ] [ $key ] ;
-
+        return $this->mblanguage->strings [$language] [$key];
     }
 
     public function getAppListStrings(string $language = 'en_us'): array
     {
-        return $this->mblanguage->getAppListStrings ( $language ) ;
+        return $this->mblanguage->getAppListStrings($language);
     }
 
     /**
@@ -348,8 +343,8 @@ class MBModule
      */
     public function setAppListStrings(string $language, array $app_list_strings): void
     {
-        $language .= '.lang.php' ;
-        $this->mblanguage->appListStrings [ $language ] = $app_list_strings ;
+        $language .= '.lang.php';
+        $this->mblanguage->appListStrings [$language] = $app_list_strings;
     }
 
     /**
@@ -359,8 +354,8 @@ class MBModule
      */
     public function setDropDown(string $language, string $key, string $value): void
     {
-        $language .= '.lang.php' ;
-        $this->mblanguage->appListStrings [ $language ] [ $key ] = $value ;
+        $language .= '.lang.php';
+        $this->mblanguage->appListStrings [$language] [$key] = $value;
     }
 
     /**
@@ -369,25 +364,23 @@ class MBModule
      */
     public function deleteDropDown(string $language, string $key): void
     {
-        $language .= '.lang.php' ;
-        unset ( $this->mblanguage->appListStrings [ $language ] [ $key ] ) ;
+        $language .= '.lang.php';
+        unset($this->mblanguage->appListStrings [$language] [$key]);
     }
 
-    function save ()
+    public function save()
     {
-        $this->path = $this->getModuleDir () ;
-        if (mkdir_recursive ( $this->path ))
-        {
-
-            $this->setConfigMD5 () ;
-            $old_config_md5 = $this->config_md5 ;
-            $this->saveConfig () ;
-            $this->getVardefs () ;
-            $this->mbvardefs->save ( $this->key_name ) ;
-            $this->relationships->save () ;
-            $this->copyMetaData () ;
-            $this->copyDashlet () ;
-            $this->copyViews() ;
+        $this->path = $this->getModuleDir();
+        if (mkdir_recursive($this->path)) {
+            $this->setConfigMD5();
+            $old_config_md5 = $this->config_md5;
+            $this->saveConfig();
+            $this->getVardefs();
+            $this->mbvardefs->save($this->key_name);
+            $this->relationships->save();
+            $this->copyMetaData();
+            $this->copyDashlet();
+            $this->copyViews();
 
             $this->copyDashboards();
 
@@ -397,68 +390,60 @@ class MBModule
             $this->copyClients();
             // End bug 56675
             if (0 !== strcmp((string)$old_config_md5, (string)$this->config_md5)) {
-                $this->mblanguage->reload () ;
+                $this->mblanguage->reload();
             }
-            $this->mblanguage->label = $this->config [ 'label' ] ;
+            $this->mblanguage->label = $this->config ['label'];
             $this->mblanguage->label_singular = !empty($this->config['label_singular']) ? $this->config['label_singular'] : $this->config['label'];
             $this->mblanguage->abbreviation = $this->config['label_abbreviation'] ?? self::getModuleAbbreviatedLabel($this->config['label']);
             //pass in the key_name incase it has changed mblanguage will check if it is different and handle it accordingly
-            $this->mblanguage->save ( $this->key_name ) ;
+            $this->mblanguage->save($this->key_name);
 
-            if (! file_exists ( $this->package_path . "/icons/icon_" . ucfirst ( $this->key_name ) . ".gif" ))
-            {
-                $this->createIcon () ;
+            if (!file_exists($this->package_path . '/icons/icon_' . ucfirst($this->key_name) . '.gif')) {
+                $this->createIcon();
             }
-            $this->errors = array_merge ( $this->errors, $this->mbvardefs->errors ) ;
-
+            $this->errors = array_merge($this->errors, $this->mbvardefs->errors);
         }
     }
 
-    function copyDashlet() {
-    	$templates = array_reverse ( $this->config [ 'templates' ], true ) ;
-        foreach ( $templates as $template => $a )
-        {
-            if (file_exists ( MB_TEMPLATES . '/' . $template . '/Dashlets/Dashlet' ))
-            {
-
-            	$this->copyMetaRecursive ( MB_TEMPLATES . '/' . $template . '/Dashlets/Dashlet', $this->path . '/Dashlets/' . $this->key_name . 'Dashlet/' ) ;
-
-            }
-        }
-    }
-
-    function copyViews() {
-        $templates = array_reverse ( $this->config [ 'templates' ], true ) ;
-        foreach ( $templates as $template => $a )
-        {
-            if (file_exists ( MB_TEMPLATES . '/' . $template . '/views' ))
-            {
-                $this->copyMetaRecursive ( MB_TEMPLATES . '/' . $template . '/views', $this->path . '/views/' ) ;
-            }
-        }
-    }
-
-    function copyCustomFiles ( $from , $to )
+    public function copyDashlet()
     {
-    	$d = dir ( $from ) ;
-        while ( $filename = $d->read () )
-        {
-        	if (substr ( $filename, 0, 1 ) == '.')
-            	continue ;
-           	if ( $filename != 'metadata' && $filename != 'Dashlets' && $filename != 'relationships' && $filename != 'language' && $filename != 'config.php' && $filename != 'relationships.php' && $filename != 'vardefs.php' )
-           		copy_recursive ( "$from/$filename" , "$to/$filename" ) ;
+        $templates = array_reverse($this->config ['templates'], true);
+        foreach ($templates as $template => $a) {
+            if (file_exists(MB_TEMPLATES . '/' . $template . '/Dashlets/Dashlet')) {
+                $this->copyMetaRecursive(MB_TEMPLATES . '/' . $template . '/Dashlets/Dashlet', $this->path . '/Dashlets/' . $this->key_name . 'Dashlet/');
+            }
         }
     }
 
-    function copyMetaData ()
+    public function copyViews()
     {
-        $templates = array_reverse ( $this->config [ 'templates' ], true ) ;
-        foreach ( $templates as $template => $a )
-        {
-            if (file_exists ( MB_TEMPLATES . '/' . $template . '/metadata' ))
-            {
-                $this->copyMetaRecursive ( MB_TEMPLATES . '/' . $template . '/metadata', $this->path . '/metadata/' ) ;
+        $templates = array_reverse($this->config ['templates'], true);
+        foreach ($templates as $template => $a) {
+            if (file_exists(MB_TEMPLATES . '/' . $template . '/views')) {
+                $this->copyMetaRecursive(MB_TEMPLATES . '/' . $template . '/views', $this->path . '/views/');
+            }
+        }
+    }
 
+    public function copyCustomFiles($from, $to)
+    {
+        $d = dir($from);
+        while ($filename = $d->read()) {
+            if (substr($filename, 0, 1) == '.') {
+                continue;
+            }
+            if ($filename != 'metadata' && $filename != 'Dashlets' && $filename != 'relationships' && $filename != 'language' && $filename != 'config.php' && $filename != 'relationships.php' && $filename != 'vardefs.php') {
+                copy_recursive("$from/$filename", "$to/$filename");
+            }
+        }
+    }
+
+    public function copyMetaData()
+    {
+        $templates = array_reverse($this->config ['templates'], true);
+        foreach ($templates as $template => $a) {
+            if (file_exists(MB_TEMPLATES . '/' . $template . '/metadata')) {
+                $this->copyMetaRecursive(MB_TEMPLATES . '/' . $template . '/metadata', $this->path . '/metadata/');
             }
         }
     }
@@ -475,42 +460,38 @@ class MBModule
     }
 
 
-    function copyMetaRecursive ($from , $to , $overwrite = false)
+    public function copyMetaRecursive($from, $to, $overwrite = false)
     {
-        if (! file_exists ( $from ))
-            return ;
-        if (is_dir ( $from ))
-        {
-            $findArray = array ( '<module_name>' , '<_module_name>' , '<MODULE_NAME>' , '<object_name>' , '<_object_name>' , '<OBJECT_NAME>' );
-            $replaceArray = array ( $this->key_name , strtolower ( $this->key_name ) , strtoupper ( $this->key_name ) ,
-            						$this->key_name , strtolower ( $this->key_name ) , strtoupper ( $this->key_name ) );
-        	mkdir_recursive ( $to ) ;
-            $d = dir ( $from ) ;
+        if (!file_exists($from)) {
+            return;
+        }
+        if (is_dir($from)) {
+            $findArray = ['<module_name>', '<_module_name>', '<MODULE_NAME>', '<object_name>', '<_object_name>', '<OBJECT_NAME>'];
+            $replaceArray = [$this->key_name, strtolower($this->key_name), strtoupper($this->key_name),
+                $this->key_name, strtolower($this->key_name), strtoupper($this->key_name)];
+            mkdir_recursive($to);
+            $d = dir($from);
 
             // Clean up to to make sure the path is clean
             $to = rtrim($to, '/') . '/';
-            while ( $e = $d->read () )
-            {
-                if (substr ( $e, 0, 1 ) == '.')
-                    continue ;
-                $nfrom = $from . '/' . $e ;
-                $nto = $to . str_replace ( 'm-n-', $this->key_name, $e ) ;
-                if (is_dir ( $nfrom ))
-                {
-                    $this->copyMetaRecursive ( $nfrom, $nto, $overwrite ) ;
-                } else
-                {
-                    if ($overwrite || ! file_exists ( $nto ))
-                    {
-                        $contents = file_get_contents ( $nfrom ) ;
-                        $contents = str_replace ( $findArray, $replaceArray, $contents ) ;
-                        $fw = sugar_fopen ( $nto, 'w' ) ;
-                        fwrite ( $fw, $contents ) ;
-                        fclose ( $fw ) ;
+            while ($e = $d->read()) {
+                if (substr($e, 0, 1) == '.') {
+                    continue;
+                }
+                $nfrom = $from . '/' . $e;
+                $nto = $to . str_replace('m-n-', $this->key_name, $e);
+                if (is_dir($nfrom)) {
+                    $this->copyMetaRecursive($nfrom, $nto, $overwrite);
+                } else {
+                    if ($overwrite || !file_exists($nto)) {
+                        $contents = file_get_contents($nfrom);
+                        $contents = str_replace($findArray, $replaceArray, $contents);
+                        $fw = sugar_fopen($nto, 'w');
+                        fwrite($fw, $contents);
+                        fclose($fw);
                     }
                 }
             }
-
         }
     }
 
@@ -527,10 +508,11 @@ class MBModule
      *
      * Adapted for Sugar7 to include base clients as well.
      */
-    public function copyClients() {
+    public function copyClients()
+    {
         $templates = array_reverse($this->config['templates'], true);
         foreach ($templates as $template => $a) {
-            foreach (array('base', 'mobile') as $client) {
+            foreach (['base', 'mobile'] as $client) {
                 if (file_exists(MB_TEMPLATES . '/' . $template . '/clients/' . $client)) {
                     $this->copyMetaRecursive(MB_TEMPLATES . '/' . $template . '/clients/' . $client, $this->path . '/clients/' . $client);
                 }
@@ -541,13 +523,15 @@ class MBModule
     /**
      * Ensures that all required metadata files exist or copies them from the templates if they don't exist.
      */
-    protected function verifyMetadata() {
+    protected function verifyMetadata()
+    {
         //Abort if we have never been saved
-        if (empty($this->name) || !file_exists($this->path))
+        if (empty($this->name) || !file_exists($this->path)) {
             return;
+        }
 
         $rebuildClients = false;
-        foreach (array('base', 'mobile') as $client) {
+        foreach (['base', 'mobile'] as $client) {
             if (!file_exists($this->path . '/clients/' . $client)) {
                 $rebuildClients = true;
                 break;
@@ -558,40 +542,42 @@ class MBModule
         }
     }
 
-    function saveConfig ()
+    public function saveConfig()
     {
-        $header = file_get_contents ( 'modules/ModuleBuilder/MB/header.php' ) ;
-        if (! write_array_to_file ( 'config', $this->config, $this->path . '/config.php', 'w', $header ))
-        {
-            $this->errors [] = 'Could not save config to ' . $this->path . '/config.php' ;
+        $header = file_get_contents('modules/ModuleBuilder/MB/header.php');
+        if (!write_array_to_file('config', $this->config, $this->path . '/config.php', 'w', $header)) {
+            $this->errors [] = 'Could not save config to ' . $this->path . '/config.php';
         }
-        $this->setConfigMD5 () ;
+        $this->setConfigMD5();
     }
 
-    function setConfigMD5 ()
+    public function setConfigMD5()
     {
-        if (file_exists ( $this->path . '/config.php' ))
-            $this->config_md5 = md5 ( base64_encode ( serialize ( $this->config ) ) ) ;
+        if (file_exists($this->path . '/config.php')) {
+            $this->config_md5 = md5(base64_encode(serialize($this->config)));
+        }
     }
 
-    function build ($basepath)
+    public function build($basepath)
     {
         global $app_list_strings;
-        $path = $basepath . '/modules/' . $this->key_name ;
-        if (mkdir_recursive ( $path ))
-        {
-            $this->createClasses ( $path ) ;
-            $this->createMenu ( $path ) ;
-            $this->copyCustomFiles ( $this->path , $path ) ;
-            $this->copyMetaRecursive ( $this->path . '/metadata/', $path . '/metadata/', true ) ;
-            $this->copyMetaRecursive ( $this->path . '/Dashlets/' . $this->key_name . 'Dashlet/',
-            						   $path . '/Dashlets/' . $this->key_name . 'Dashlet/', true ) ;
+        $path = $basepath . '/modules/' . $this->key_name;
+        if (mkdir_recursive($path)) {
+            $this->createClasses($path);
+            $this->createMenu($path);
+            $this->copyCustomFiles($this->path, $path);
+            $this->copyMetaRecursive($this->path . '/metadata/', $path . '/metadata/', true);
+            $this->copyMetaRecursive(
+                $this->path . '/Dashlets/' . $this->key_name . 'Dashlet/',
+                $path . '/Dashlets/' . $this->key_name . 'Dashlet/',
+                true
+            );
 
             // Add in clients directory building
             $this->copyMetaRecursive($this->path . '/clients/', $path . '/clients/', true);
             $app_list_strings['moduleList'][$this->key_name] = $this->mblanguage->label;
-            $this->relationships->build ( $basepath ) ;
-            $this->mblanguage->build ( $path ) ;
+            $this->relationships->build($basepath);
+            $this->mblanguage->build($path);
         }
     }
 
@@ -604,13 +590,13 @@ class MBModule
      *
      * @param string $path Path to the custom module.
      */
-    function createClasses($path)
+    public function createClasses($path)
     {
-        $class = array();
+        $class = [];
         $class['name'] = $this->key_name;
         $class['table_name'] = strtolower($class['name']);
         $class['extends'] = 'Basic';
-        $class['requires'] = array();
+        $class['requires'] = [];
 
         $class['team_security'] = !empty($this->config['team_security']);
 
@@ -638,9 +624,9 @@ class MBModule
         $this->mbvardefs->updateVardefs();
         $class['fields'] = $this->mbvardefs->vardefs['fields'];
         $class['fields_string'] = var_export_helper($this->mbvardefs->vardef['fields']);
-        $relationship = array();
+        $relationship = [];
         $class['relationships'] = var_export_helper($this->mbvardefs->vardef['relationships']);
-        $smarty = new Sugar_Smarty ();
+        $smarty = new Sugar_Smarty();
         $smarty->left_delimiter = '{{';
         $smarty->right_delimiter = '}}';
         $smarty->assign('class', $class);
@@ -668,12 +654,12 @@ class MBModule
             $fp = sugar_fopen($path . '/metadata/studio.php', 'w');
             fwrite($fp, $smarty->fetch('modules/ModuleBuilder/tpls/MBModule/Studio.tpl'));
             fclose($fp);
-        } else if (file_exists($path . '/metadata/studio.php')) {
+        } elseif (file_exists($path . '/metadata/studio.php')) {
             unlink($path . '/metadata/studio.php');
         }
     }
 
-    function createMenu($path)
+    public function createMenu($path)
     {
         $s = new Sugar_Smarty();
         $s->assign('moduleName', $this->key_name);
@@ -695,103 +681,97 @@ class MBModule
         fclose($fp);
     }
 
-    function addInstallDefs (&$installDefs)
+    public function addInstallDefs(&$installDefs)
     {
-        $name = $this->key_name ;
-        $installDefs [ 'copy' ] [] = array ( 'from' => '<basepath>/SugarModules/modules/' . $name , 'to' => 'modules/' . $name ) ;
-        $installDefs [ 'beans' ] [] = array ( 'module' => $name , 'class' => $name , 'path' => 'modules/' . $name . '/' . $name . '.php' , 'tab' => $this->config [ 'has_tab' ] ) ;
-        $this->relationships->addInstallDefs ( $installDefs ) ;
+        $name = $this->key_name;
+        $installDefs ['copy'] [] = ['from' => '<basepath>/SugarModules/modules/' . $name, 'to' => 'modules/' . $name];
+        $installDefs ['beans'] [] = ['module' => $name, 'class' => $name, 'path' => 'modules/' . $name . '/' . $name . '.php', 'tab' => $this->config ['has_tab']];
+        $this->relationships->addInstallDefs($installDefs);
     }
 
-    function getNodes ()
+    public function getNodes()
     {
 
-        $lSubs = array ( ) ;
-        $psubs = $this->getProvidedSubpanels () ;
-        foreach ( $psubs as $sub )
-        {
-            $subLabel = $sub ;
-            if ($subLabel == 'default')
-            {
-                $subLabel = $GLOBALS [ 'mod_strings' ] [ 'LBL_DEFAULT' ] ;
+        $lSubs = [];
+        $psubs = $this->getProvidedSubpanels();
+        foreach ($psubs as $sub) {
+            $subLabel = $sub;
+            if ($subLabel == 'default') {
+                $subLabel = $GLOBALS ['mod_strings'] ['LBL_DEFAULT'];
             }
-            $lSubs [] = array ( 'name' => $subLabel , 'type' => 'list' , 'action' => 'module=ModuleBuilder&MB=true&action=editLayout&view=ListView&view_module=' . $this->name . '&view_package=' . $this->package . '&subpanel=' . $sub . '&subpanelLabel=' . $subLabel . '&local=1' ) ;
+            $lSubs [] = ['name' => $subLabel, 'type' => 'list', 'action' => 'module=ModuleBuilder&MB=true&action=editLayout&view=ListView&view_module=' . $this->name . '&view_package=' . $this->package . '&subpanel=' . $sub . '&subpanelLabel=' . $subLabel . '&local=1'];
         }
 
-		$popups = array( );
-        $popups [] = array('name' => translate('LBL_POPUPLISTVIEW') , 'type' => 'popuplistview' , 'action' => 'module=ModuleBuilder&action=editLayout&view=popuplist&view_module=' . $this->name . '&view_package=' . $this->package );
-		$popups [] = array('name' => translate('LBL_POPUPSEARCH') , 'type' => 'popupsearch' , 'action' => 'module=ModuleBuilder&action=editLayout&view=popupsearch&view_module=' . $this->name . '&view_package=' . $this->package );
+        $popups = [];
+        $popups [] = ['name' => translate('LBL_POPUPLISTVIEW'), 'type' => 'popuplistview', 'action' => 'module=ModuleBuilder&action=editLayout&view=popuplist&view_module=' . $this->name . '&view_package=' . $this->package];
+        $popups [] = ['name' => translate('LBL_POPUPSEARCH'), 'type' => 'popupsearch', 'action' => 'module=ModuleBuilder&action=editLayout&view=popupsearch&view_module=' . $this->name . '&view_package=' . $this->package];
 
-        $layouts = array (
-            array ( 'name' => translate('LBL_RECORDVIEW') , 'type' => 'record' , 'action' => 'module=ModuleBuilder&MB=true&action=editLayout&view='.MB_RECORDVIEW.'&view_module=' . $this->name . '&view_package=' . $this->package ) ,
-            array ( 'name' => translate('LBL_LISTVIEW') , 'type' => 'list' , 'action' => 'module=ModuleBuilder&MB=true&action=editLayout&view='.MB_LISTVIEW.'&view_module=' . $this->name . '&view_package=' . $this->package ) ,
-            array ( 'name' => translate('LBL_POPUP') , 'type' => 'Folder', 'children' => $popups, 'action' => 'module=ModuleBuilder&MB=true&action=wizard&view=popup&view_module=' . $this->name . '&view_package=' . $this->package  ),
-            );
+        $layouts = [
+            ['name' => translate('LBL_RECORDVIEW'), 'type' => 'record', 'action' => 'module=ModuleBuilder&MB=true&action=editLayout&view=' . MB_RECORDVIEW . '&view_module=' . $this->name . '&view_package=' . $this->package],
+            ['name' => translate('LBL_LISTVIEW'), 'type' => 'list', 'action' => 'module=ModuleBuilder&MB=true&action=editLayout&view=' . MB_LISTVIEW . '&view_module=' . $this->name . '&view_package=' . $this->package],
+            ['name' => translate('LBL_POPUP'), 'type' => 'Folder', 'children' => $popups, 'action' => 'module=ModuleBuilder&MB=true&action=wizard&view=popup&view_module=' . $this->name . '&view_package=' . $this->package],
+        ];
 
-        $children = array (
-        	array ( 'name' => translate('LBL_FIELDS') , 'action' => 'module=ModuleBuilder&action=modulefields&view_module=' . $this->name . '&view_package=' . $this->package ) ,
-        	array ( 'name' => translate('LBL_LABELS') , 'action' => 'module=ModuleBuilder&action=modulelabels&view_module=' . $this->name . '&view_package=' . $this->package ) ,
-        	array ( 'name' => translate('LBL_RELATIONSHIPS') , 'action' => 'module=ModuleBuilder&action=relationships&view_module=' . $this->name . '&view_package=' . $this->package ) ,
-        	array ( 'name' => translate('LBL_LAYOUTS') , 'type' => 'Folder' , 'action' => "module=ModuleBuilder&action=wizard&view_module={$this->name}&view_package={$this->package}&MB=1" , 'children' => $layouts ) ,
-        	array ( 'name' => translate('LBL_WIRELESSLAYOUTS') , 'type' => 'Folder' , 'action' => "module=ModuleBuilder&action=wizard&view=wirelesslayouts&view_module={$this->name}&view_package={$this->package}&MB=1" , 'children' => $this->getWirelessLayouts() )
-        	) ;
+        $children = [
+            ['name' => translate('LBL_FIELDS'), 'action' => 'module=ModuleBuilder&action=modulefields&view_module=' . $this->name . '&view_package=' . $this->package],
+            ['name' => translate('LBL_LABELS'), 'action' => 'module=ModuleBuilder&action=modulelabels&view_module=' . $this->name . '&view_package=' . $this->package],
+            ['name' => translate('LBL_RELATIONSHIPS'), 'action' => 'module=ModuleBuilder&action=relationships&view_module=' . $this->name . '&view_package=' . $this->package],
+            ['name' => translate('LBL_LAYOUTS'), 'type' => 'Folder', 'action' => "module=ModuleBuilder&action=wizard&view_module={$this->name}&view_package={$this->package}&MB=1", 'children' => $layouts],
+            ['name' => translate('LBL_WIRELESSLAYOUTS'), 'type' => 'Folder', 'action' => "module=ModuleBuilder&action=wizard&view=wirelesslayouts&view_module={$this->name}&view_package={$this->package}&MB=1", 'children' => $this->getWirelessLayouts()],
+        ];
 
-        if (count ( $lSubs ) > 0)
-        {
-            $children [] = array ( 'name' => translate('LBL_AVAILABLE_SUBPANELS') , 'type' => 'folder' , 'children' => $lSubs ) ;
+        if (safeCount($lSubs) > 0) {
+            $children [] = ['name' => translate('LBL_AVAILABLE_SUBPANELS'), 'type' => 'folder', 'children' => $lSubs];
         }
 
-        $nodes = array ( 'name' => $this->name , 'children' => $children , 'action' => 'module=ModuleBuilder&action=module&view_module=' . $this->name . '&view_package=' . $this->package ) ;
+        $nodes = ['name' => $this->name, 'children' => $children, 'action' => 'module=ModuleBuilder&action=module&view_module=' . $this->name . '&view_package=' . $this->package];
 
-        return $nodes ;
+        return $nodes;
     }
 
-    function getWirelessLayouts ()
+    public function getWirelessLayouts()
     {
         $nodes = [];
-        $nodes [ translate ('LBL_WIRELESSEDITVIEW') ] = array (
-            'name' => translate('LBL_WIRELESSEDITVIEW') ,
+        $nodes [translate('LBL_WIRELESSEDITVIEW')] = [
+            'name' => translate('LBL_WIRELESSEDITVIEW'),
             'type' => MB_WIRELESSEDITVIEW,
-            'action' => 'module=ModuleBuilder&MB=true&action=editLayout&view='.MB_WIRELESSEDITVIEW."&view_module={$this->name}&view_package={$this->package}" ,
-            'imageTitle' => 'EditView' ,
-            'help' => "viewBtn".MB_WIRELESSEDITVIEW ,
-            'size' => '48'
-        ) ;
-        $nodes [ translate('LBL_WIRELESSDETAILVIEW') ] = array (
-            'name' => translate('LBL_WIRELESSDETAILVIEW') ,
+            'action' => 'module=ModuleBuilder&MB=true&action=editLayout&view=' . MB_WIRELESSEDITVIEW . "&view_module={$this->name}&view_package={$this->package}",
+            'imageTitle' => 'EditView',
+            'help' => 'viewBtn' . MB_WIRELESSEDITVIEW,
+            'size' => '48',
+        ];
+        $nodes [translate('LBL_WIRELESSDETAILVIEW')] = [
+            'name' => translate('LBL_WIRELESSDETAILVIEW'),
             'type' => MB_WIRELESSDETAILVIEW,
-            'action' => 'module=ModuleBuilder&MB=true&action=editLayout&view='.MB_WIRELESSDETAILVIEW."&view_module={$this->name}&view_package={$this->package}" ,
-            'imageTitle' => 'DetailView' ,
-            'help' => "viewBtn".MB_WIRELESSDETAILVIEW ,
-            'size' => '48'
-        ) ;
-        $nodes [ translate('LBL_WIRELESSLISTVIEW') ] = array (
-            'name' => translate('LBL_WIRELESSLISTVIEW') ,
+            'action' => 'module=ModuleBuilder&MB=true&action=editLayout&view=' . MB_WIRELESSDETAILVIEW . "&view_module={$this->name}&view_package={$this->package}",
+            'imageTitle' => 'DetailView',
+            'help' => 'viewBtn' . MB_WIRELESSDETAILVIEW,
+            'size' => '48',
+        ];
+        $nodes [translate('LBL_WIRELESSLISTVIEW')] = [
+            'name' => translate('LBL_WIRELESSLISTVIEW'),
             'type' => MB_WIRELESSLISTVIEW,
-            'action' => 'module=ModuleBuilder&MB=true&action=editLayout&view='.MB_WIRELESSLISTVIEW."&view_module={$this->name}&view_package={$this->package}" ,
-            'imageTitle' => 'ListView' ,
-            'help' => "viewBtn".MB_WIRELESSLISTVIEW ,
-            'size' => '48'
-        ) ;
-    	return $nodes ;
+            'action' => 'module=ModuleBuilder&MB=true&action=editLayout&view=' . MB_WIRELESSLISTVIEW . "&view_module={$this->name}&view_package={$this->package}",
+            'imageTitle' => 'ListView',
+            'help' => 'viewBtn' . MB_WIRELESSLISTVIEW,
+            'size' => '48',
+        ];
+        return $nodes;
     }
 
-    function getProvidedSubpanels ()
+    public function getProvidedSubpanels()
     {
-        $this->providedSubpanels = array () ;
+        $this->providedSubpanels = [];
 
-        $subpanelDir = $this->getModuleDir () . '/metadata/subpanels/' ;
-        if (file_exists ( $subpanelDir ))
-        {
-            $f = dir ( $subpanelDir ) ;
+        $subpanelDir = $this->getModuleDir() . '/metadata/subpanels/';
+        if (file_exists($subpanelDir)) {
+            $f = dir($subpanelDir);
 
-            while ( $g = $f->read () )
-            {
+            while ($g = $f->read()) {
                 // sanity check to confirm that this is a usable subpanel...
-                if (substr ( $g, 0, 1 ) != '.' && AbstractRelationships::validSubpanel ( $subpanelDir . $g ))
-                {
-                    $subname = str_replace ( '.php', '', $g ) ;
-                    $this->providedSubpanels [ $subname ] = $subname ;
+                if (substr($g, 0, 1) != '.' && AbstractRelationships::validSubpanel($subpanelDir . $g)) {
+                    $subname = str_replace('.php', '', $g);
+                    $this->providedSubpanels [$subname] = $subname;
                 }
             }
         }
@@ -801,43 +781,39 @@ class MBModule
 
     public static function getTypes()
     {
-        $types = array ( ) ;
-        $d = dir ( MB_TEMPLATES ) ;
-        while ( $e = $d->read () )
-        {
-            if (substr ( $e, 0, 1 ) != '.')
-            {
-                $types [ $e ] = $e ;
+        $types = [];
+        $d = dir(MB_TEMPLATES);
+        while ($e = $d->read()) {
+            if (substr($e, 0, 1) != '.') {
+                $types [$e] = $e;
             }
         }
 
-        return $types ;
+        return $types;
     }
 
-    function rename ($new_name)
+    public function rename($new_name)
     {
         $oldModDir = $this->getModuleDir();
         $old_name = $this->key_name;
-        $this->name = $new_name ;
-        $this->key_name = $this->package_key . '_' . $this->name ;
+        $this->name = $new_name;
+        $this->key_name = $this->package_key . '_' . $this->name;
         if ($old_name === $this->key_name) {
             return;
         }
         $newModDir = $this->getModuleDir();
         if (file_exists($newModDir)) {
-            return false ;
+            return false;
         }
         // clean data based on old relationship name before dir is renamed.
         $this->removeRelationships();
         $renamed = rename($oldModDir, $newModDir);
-        if ($renamed)
-        {
+        if ($renamed) {
             $this->renameRelationships($newModDir, $old_name, $this->key_name);
             $this->renameMetaData($newModDir, $old_name);
             $this->renameLanguageFiles($newModDir);
-
         }
-        return $renamed ;
+        return $renamed;
     }
 
     private function removeRelationships()
@@ -860,13 +836,13 @@ class MBModule
         $relationships->save();
     }
 
-	function renameLanguageFiles ($new_dir , $duplicate = false)
+    public function renameLanguageFiles($new_dir, $duplicate = false)
     {
 
-        $this->mblanguage->name = $this->name ;
-        $this->mblanguage->path = $new_dir ;
-        $this->mblanguage->generateAppStrings () ;
-        $this->mblanguage->save ( $this->key_name, $duplicate, true) ;
+        $this->mblanguage->name = $this->name;
+        $this->mblanguage->path = $new_dir;
+        $this->mblanguage->generateAppStrings();
+        $this->mblanguage->save($this->key_name, $duplicate, true);
     }
 
     /**
@@ -874,53 +850,49 @@ class MBModule
      * @param string $new_dir
      * @param string $old_name
      */
-    public function renameMetaData ($new_dir, $old_name)
+    public function renameMetaData($new_dir, $old_name)
     {
-        $GLOBALS [ 'log' ]->debug ( 'MBModule.php->renameMetaData: new_dir=' . $new_dir ) ;
-        if (! file_exists ( $new_dir ))
-            return ;
-        $dir = dir ( $new_dir ) ;
-        while ( $e = $dir->read () )
-        {
-            if (substr ( $e, 0, 1 ) != '.')
-            {
-                if (is_dir ( $new_dir . '/' . $e ))
-                {
-                    $this->renameMetaData ( $new_dir . '/' . $e,  $old_name) ;
+        $GLOBALS ['log']->debug('MBModule.php->renameMetaData: new_dir=' . $new_dir);
+        if (!file_exists($new_dir)) {
+            return;
+        }
+        $dir = dir($new_dir);
+        while ($e = $dir->read()) {
+            if (substr($e, 0, 1) != '.') {
+                if (is_dir($new_dir . '/' . $e)) {
+                    $this->renameMetaData($new_dir . '/' . $e, $old_name);
                 }
-                if (is_file ( $new_dir . '/' . $e ))
-                {
-                    $contents = file_get_contents ( $new_dir . '/' . $e ) ;
-                    $search_array = array(
+                if (is_file($new_dir . '/' . $e)) {
+                    $contents = file_get_contents($new_dir . '/' . $e);
+                    $search_array = [
                         '/(\$module_name[ ]*=[ ]*\').*(\'[ ]*;)/',
                         '/(\$_module_name[ ]*=[ ]*\').*(\'[ ]*;)/',
                         '/(\$MODULE_NAME[ ]*=[ ]*\').*(\'[ ]*;)/',
                         '/(\$object_name[ ]*=[ ]*\').*(\'[ ]*;)/',
                         '/(\$_object_name[ ]*=[ ]*\').*(\'[ ]*;)/',
-                        '/(\$OBJECT_NAME[ ]*=[ ]*\').*(\'[ ]*;)/'
-                    );
-                    $replace_array = array(
+                        '/(\$OBJECT_NAME[ ]*=[ ]*\').*(\'[ ]*;)/',
+                    ];
+                    $replace_array = [
                         '$1' . $this->key_name . '$2',
-                        '$1' . strtolower ( $this->key_name ) . '$2',
-                        '$1' . strtoupper ( $this->key_name ) . '$2',
+                        '$1' . strtolower($this->key_name) . '$2',
+                        '$1' . strtoupper($this->key_name) . '$2',
                         '$1' . $this->key_name . '$2',
-                        '$1' . strtolower ( $this->key_name ) . '$2',
-                        '$1' . strtoupper ( $this->key_name ) . '$2',
-                    );
+                        '$1' . strtolower($this->key_name) . '$2',
+                        '$1' . strtoupper($this->key_name) . '$2',
+                    ];
                     $contents = preg_replace($search_array, $replace_array, $contents);
-                    $search_array = array(
+                    $search_array = [
                         "{$old_name}_",
-                        "{$old_name}Dashlet"
-                    );
-                    $replace_array = array(
+                        "{$old_name}Dashlet",
+                    ];
+                    $replace_array = [
                         $this->key_name . '_',
-                        $this->key_name . 'Dashlet'
-                    );
-                    $contents = str_replace($search_array, $replace_array, $contents );
+                        $this->key_name . 'Dashlet',
+                    ];
+                    $contents = str_replace($search_array, $replace_array, $contents);
 
 
-                    if ("relationships.php" == $e)
-                    {
+                    if ('relationships.php' == $e) {
                         if (!empty($this->config['label'])) {
                             $oldLabel = translate($old_name);
                             $newLabel = $this->config['label'];
@@ -929,9 +901,9 @@ class MBModule
                         }
                     }
 
-                    $fp = sugar_fopen ( $new_dir . '/' . $e, 'w' ) ;
-                    fwrite ( $fp, $contents ) ;
-                    fclose ( $fp ) ;
+                    $fp = sugar_fopen($new_dir . '/' . $e, 'w');
+                    fwrite($fp, $contents);
+                    fclose($fp);
                 }
             }
         }
@@ -956,50 +928,47 @@ class MBModule
         return preg_replace('/(' . $param . '\s*=>\s*)' . $oldValue . '/', '$1' . $newValue, $contents);
     }
 
-    function copy ($new_name)
+    public function copy($new_name)
     {
-        $old = $this->getModuleDir () ;
+        $old = $this->getModuleDir();
 
-        $count = 0 ;
+        $count = 0;
         $old_name = $this->key_name;
-        $this->name = $new_name ;
-        $this->key_name = $this->package_key . '_' . $this->name ;
-        $new = $this->getModuleDir () ;
-        while ( file_exists ( $new ) )
-        {
-            $count ++ ;
-            $this->name = $new_name . $count ;
-            $this->key_name = $this->package_key . '_' . $this->name ;
-            $new = $this->getModuleDir () ;
+        $this->name = $new_name;
+        $this->key_name = $this->package_key . '_' . $this->name;
+        $new = $this->getModuleDir();
+        while (file_exists($new)) {
+            $count++;
+            $this->name = $new_name . $count;
+            $this->key_name = $this->package_key . '_' . $this->name;
+            $new = $this->getModuleDir();
         }
 
-        $new = $this->getModuleDir () ;
-        $copied = copy_recursive ( $old, $new ) ;
+        $new = $this->getModuleDir();
+        $copied = copy_recursive($old, $new);
 
-        if ($copied)
-        {
+        if ($copied) {
             $this->renameRelationships($new, $old_name, $this->key_name);
-            $this->renameMetaData ( $new , $old_name) ;
-            $this->renameLanguageFiles ( $new, true ) ;
+            $this->renameMetaData($new, $old_name);
+            $this->renameLanguageFiles($new, true);
         }
-        return $copied ;
-
+        return $copied;
     }
 
-    function delete ()
+    public function delete()
     {
         $this->load();
 
         // remove module language data from the package
-        $this->mblanguage->delete($this->key_name) ;
+        $this->mblanguage->delete($this->key_name);
 
         // remove module icons from the package
-        $icons = array(
+        $icons = [
             'icon_' . ucfirst($this->key_name) . '_32.png',
             $this->key_name . '.gif',
             'Create' . $this->key_name . '.gif',
             'icon_' . $this->key_name . '_bar_32.png',
-        );
+        ];
         foreach ($icons as $icon) {
             $file = $this->package_path . '/icons/' . $icon;
             if (file_exists($file)) {
@@ -1026,12 +995,11 @@ class MBModule
         }
 
         foreach ($this->implementable as $key => $_) {
-            $this->config[$key] = (bool) $request->getValidInputRequest($key);
+            $this->config[$key] = (bool)$request->getValidInputRequest($key);
         }
 
-        foreach ( $this->always_implement as $key => $value )
-        {
-            $this->config [ $key ] = true ;
+        foreach ($this->always_implement as $key => $value) {
+            $this->config [$key] = true;
         }
 
         $type = $request->getValidInputRequest('type');
@@ -1053,8 +1021,7 @@ class MBModule
             $this->config['label_singular'] = $label == '' ? $this->name : $label;
         }
 
-        $this->config['importable'] = (bool) $request->getValidInputRequest('importable');
-
+        $this->config['importable'] = (bool)$request->getValidInputRequest('importable');
     }
 
     /**
@@ -1078,7 +1045,7 @@ class MBModule
                 return ${$var};
             }
         }
-        return array();
+        return [];
     }
 
 
@@ -1100,7 +1067,7 @@ class MBModule
 
         $dir = dirname($filepath);
         if (!file_exists($dir) && !mkdir_recursive($dir)) {
-            throw new \RuntimeException(sprintf("Could not make directory %s for subpanel %s"), $dir, $subpanelName);
+            throw new \RuntimeException(sprintf('Could not make directory %s for subpanel %s'), $dir, $subpanelName);
         }
 
         $GLOBALS['log']->debug("About to save this file to $filepath");
@@ -1115,47 +1082,50 @@ class MBModule
         write_array_to_file($array, $viewdef, $filepath);
     }
 
-    function getLocalSubpanelDef ($panelName)
+    public function getLocalSubpanelDef($panelName)
     {
-
     }
 
-    function createIcon ()
+    public function createIcon()
     {
-        $icondir = $this->package_path . "/icons" ;
-        mkdir_recursive ( $icondir ) ;
-        $template = "" ;
-        foreach ( $this->config [ 'templates' ] as $temp => $val )
-            $template = $temp ;
-		copy ( "themes/RacerX/images/icon_{$template}_32.png", "$icondir/icon_" . ucfirst ( $this->key_name ) . "_32.png" ) ;
-        copy ( "include/SugarObjects/templates/$template/icons/$template.gif", "$icondir/" . $this->key_name . ".gif" ) ;
-        if (file_exists("include/SugarObjects/templates/$template/icons/Create$template.gif"))
-        	copy ( "include/SugarObjects/templates/$template/icons/Create$template.gif", "$icondir/Create" . $this->key_name . ".gif" ) ;
-        if (file_exists("include/SugarObjects/templates/$template/icons/{$template}_bar_32.png"))
-        	copy ( "include/SugarObjects/templates/$template/icons/{$template}_bar_32.png", "$icondir/icon_{$this->key_name}_bar_32.png" ) ;
+        $icondir = $this->package_path . '/icons';
+        mkdir_recursive($icondir);
+        $template = '';
+        foreach ($this->config ['templates'] as $temp => $val) {
+            $template = $temp;
+        }
+        copy("themes/RacerX/images/icon_{$template}_32.png", "$icondir/icon_" . ucfirst($this->key_name) . '_32.png');
+        copy("include/SugarObjects/templates/$template/icons/$template.gif", "$icondir/" . $this->key_name . '.gif');
+        if (file_exists("include/SugarObjects/templates/$template/icons/Create$template.gif")) {
+            copy("include/SugarObjects/templates/$template/icons/Create$template.gif", "$icondir/Create" . $this->key_name . '.gif');
+        }
+        if (file_exists("include/SugarObjects/templates/$template/icons/{$template}_bar_32.png")) {
+            copy("include/SugarObjects/templates/$template/icons/{$template}_bar_32.png", "$icondir/icon_{$this->key_name}_bar_32.png");
+        }
     }
 
-    function removeFieldFromLayouts ( $fieldName )
+    public function removeFieldFromLayouts($fieldName)
     {
         // hardcoded list of types for now, as also hardcoded in a different form in getNodes
         // TODO: replace by similar mechanism to StudioModule to determine the list of available views for this module
-        $views = array ('recordview' , 'editview' , 'detailview' , 'listview' , 'basic_search' , 'advanced_search', 'popuplist');
-    	foreach ($this->getWirelessLayouts() as $layout)
-    		$views[] = $layout['type'];
-
-    	foreach ($views as $type )
-        {
-            $parser = ParserFactory::getParser( $type , $this->name , $this->package ) ;
-            if ($parser->removeField ( $fieldName ) )
-                $parser->handleSave(false) ; // don't populate from $_REQUEST, just save as is...
+        $views = ['recordview', 'editview', 'detailview', 'listview', 'basic_search', 'advanced_search', 'popuplist'];
+        foreach ($this->getWirelessLayouts() as $layout) {
+            $views[] = $layout['type'];
         }
-		//Remove the fields in subpanel
-        $psubs = $this->getProvidedSubpanels() ;
-        foreach ( $psubs as $sub )
-        {
-			$parser = ParserFactory::getParser( MB_LISTVIEW , $this->name, $this->package ,  $sub) ;
-			if ($parser->removeField ( $fieldName ) )
-	            $parser->handleSave(false) ;
+
+        foreach ($views as $type) {
+            $parser = ParserFactory::getParser($type, $this->name, $this->package);
+            if ($parser->removeField($fieldName)) {
+                $parser->handleSave(false); // don't populate from $_REQUEST, just save as is...
+            }
+        }
+        //Remove the fields in subpanel
+        $psubs = $this->getProvidedSubpanels();
+        foreach ($psubs as $sub) {
+            $parser = ParserFactory::getParser(MB_LISTVIEW, $this->name, $this->package, $sub);
+            if ($parser->removeField($fieldName)) {
+                $parser->handleSave(false);
+            }
         }
     }
 
@@ -1163,19 +1133,19 @@ class MBModule
      * Returns an array of fields defs with all the link fields for this module.
      * @return array
      */
-    public function getLinkFields(){
+    public function getLinkFields()
+    {
         $list = $this->relationships->getRelationshipList();
-        $field_defs = array();
-        foreach($list as $name){
+        $field_defs = [];
+        foreach ($list as $name) {
             $rel = $this->relationships->get($name);
             $relFields = $rel->buildVardefs();
             $relDef = $rel->getDefinition();
             $relLabels = $rel->getLabels();
             $relatedModule = $this->key_name == $relDef['rhs_module'] ? $relDef['lhs_module'] : $relDef['rhs_module'];
-            if (!empty($relFields[$this->key_name]))
-            {
+            if (!empty($relFields[$this->key_name])) {
                 //Massage the result of getVardefs to look like field_defs
-                foreach($relFields[$this->key_name] as $def) {
+                foreach ($relFields[$this->key_name] as $def) {
                     $def['module'] = $relatedModule;
                     $def['translated_label'] = empty($relLabels[$this->key_name][$def['vname']]) ?
                         $name : $relLabels[$this->key_name][$def['vname']];
@@ -1199,13 +1169,13 @@ class MBModule
     {
         $field = null;
         $varDefs = $this->getVardefs();
-        if (isset($varDefs['fields'][$name])){
+        if (isset($varDefs['fields'][$name])) {
             $fieldVarDefs = $varDefs['fields'][$name];
-            if (!isset($fieldVarDefs['type'])){
+            if (!isset($fieldVarDefs['type'])) {
                 $fieldVarDefs['type'] = 'varchar';
             }
             $field = get_widget($fieldVarDefs['type']);
-            foreach($fieldVarDefs AS $key => $opt){
+            foreach ($fieldVarDefs as $key => $opt) {
                 $field->$key = $opt;
             }
         }
@@ -1222,7 +1192,7 @@ class MBModule
      * @param array $filter An array of values to filter the returned field definitions.
      * @return array Field definitions.
      */
-    public function getFieldDefinitions(?string $property = null, array $filter = array()) : array
+    public function getFieldDefinitions(?string $property = null, array $filter = []): array
     {
         $definitions = $this->getVardefs()['fields'] ?? [];
 
@@ -1230,7 +1200,7 @@ class MBModule
             return $definitions;
         }
 
-        return array_filter($definitions, function (array $def) use ($property, $filter) : bool {
+        return array_filter($definitions, function (array $def) use ($property, $filter): bool {
             return isset($def[$property]) && in_array($def[$property], $filter);
         });
     }
@@ -1240,8 +1210,8 @@ class MBModule
      */
     public function cleanupLayout()
     {
-        if(empty($this->config['team_security'])){
-            $this->removeFieldFromLayouts("team_name");
+        if (empty($this->config['team_security'])) {
+            $this->removeFieldFromLayouts('team_name');
         }
     }
 
@@ -1259,7 +1229,7 @@ class MBModule
 
     /**
      * Gets the MetadataConverter object
-     * 
+     *
      * @return MetaDataConverter
      */
     public function getMetadataConverter()
@@ -1273,7 +1243,7 @@ class MBModule
 
     /**
      * Gets a new subpanel path from the name of the subpanel and client
-     * 
+     *
      * @param string $name The subpanel name
      * @param string $client The client
      * @param boolean $bwc Is this a BWC request?

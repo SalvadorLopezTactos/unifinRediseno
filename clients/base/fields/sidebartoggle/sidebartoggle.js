@@ -135,6 +135,7 @@
         var defaultLayout = this.closestComponent('sidebar');
         if (defaultLayout) {
             defaultLayout.trigger('sidebar:toggle');
+            window.dispatchEvent(new Event('resize'));
         }
     }
 })

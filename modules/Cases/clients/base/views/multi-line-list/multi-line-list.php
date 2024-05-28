@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -75,7 +76,6 @@ $viewdefs['Cases']['base']['view']['multi-line-list'] = [
                             'label' => 'LBL_FOLLOW_UP_DATETIME',
                             'default' => true,
                             'enabled' => true,
-                            'readonly' => true,
                             'type' => 'datetimecombo',
                         ],
                     ],
@@ -91,7 +91,6 @@ $viewdefs['Cases']['base']['view']['multi-line-list'] = [
                             'link' => false,
                             'default' => true,
                             'enabled' => true,
-                            'readonly' => true,
                         ],
                         [
                             'name' => 'description',
@@ -113,7 +112,6 @@ $viewdefs['Cases']['base']['view']['multi-line-list'] = [
                             'link' => false,
                             'default' => true,
                             'enabled' => true,
-                            'readonly' => true,
                         ],
                     ],
                 ],
@@ -164,9 +162,7 @@ $viewdefs['Cases']['base']['view']['multi-line-list'] = [
         ],
     ],
     'collectionOptions' => [
-        'limit' => 100,
         'params' => [
-            'max_num' => 100,
             'order_by' => 'follow_up_datetime',
             'nulls_last' => true,
         ],
@@ -183,9 +179,5 @@ $viewdefs['Cases']['base']['view']['multi-line-list'] = [
         'order_by_primary' => 'follow_up_datetime:asc',
         'order_by_secondary' => '',
         'freeze_first_column' => true,
-    ],
-    'orderBy' => [
-        'field' => 'follow_up_datetime',
-        'direction' => 'asc',
     ],
 ];

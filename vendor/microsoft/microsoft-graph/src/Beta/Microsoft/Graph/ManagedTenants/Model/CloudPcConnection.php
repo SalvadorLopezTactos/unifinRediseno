@@ -26,6 +26,7 @@ class CloudPcConnection extends \Beta\Microsoft\Graph\Model\Entity
 {
     /**
     * Gets the displayName
+    * The display name of the cloud PC connection. Required. Read-only.
     *
     * @return string|null The displayName
     */
@@ -37,9 +38,10 @@ class CloudPcConnection extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the displayName
+    * The display name of the cloud PC connection. Required. Read-only.
     *
     * @param string $val The displayName
     *
@@ -50,9 +52,10 @@ class CloudPcConnection extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["displayName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the healthCheckStatus
+    * The health status of the cloud PC connection. Possible values are: pending, running, passed, failed, unknownFutureValue.  Required. Read-only.
     *
     * @return string|null The healthCheckStatus
     */
@@ -64,9 +67,10 @@ class CloudPcConnection extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the healthCheckStatus
+    * The health status of the cloud PC connection. Possible values are: pending, running, passed, failed, unknownFutureValue.  Required. Read-only.
     *
     * @param string $val The healthCheckStatus
     *
@@ -77,9 +81,10 @@ class CloudPcConnection extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["healthCheckStatus"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the lastRefreshedDateTime
+    * Date and time the entity was last updated in the multi-tenant management platform. Required. Read-only.
     *
     * @return \DateTime|null The lastRefreshedDateTime
     */
@@ -95,9 +100,10 @@ class CloudPcConnection extends \Beta\Microsoft\Graph\Model\Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the lastRefreshedDateTime
+    * Date and time the entity was last updated in the multi-tenant management platform. Required. Read-only.
     *
     * @param \DateTime $val The lastRefreshedDateTime
     *
@@ -108,9 +114,10 @@ class CloudPcConnection extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["lastRefreshedDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the tenantDisplayName
+    * The display name for the managed tenant. Required. Read-only.
     *
     * @return string|null The tenantDisplayName
     */
@@ -122,9 +129,10 @@ class CloudPcConnection extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the tenantDisplayName
+    * The display name for the managed tenant. Required. Read-only.
     *
     * @param string $val The tenantDisplayName
     *
@@ -135,9 +143,10 @@ class CloudPcConnection extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["tenantDisplayName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the tenantId
+    * The Azure Active Directory tenant identifier for the managed tenant. Required. Read-only.
     *
     * @return string|null The tenantId
     */
@@ -149,9 +158,10 @@ class CloudPcConnection extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the tenantId
+    * The Azure Active Directory tenant identifier for the managed tenant. Required. Read-only.
     *
     * @param string $val The tenantId
     *
@@ -162,5 +172,5 @@ class CloudPcConnection extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["tenantId"] = $val;
         return $this;
     }
-    
+
 }

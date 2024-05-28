@@ -10,9 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$modules_array = array('Accounts' => 'Accounts',
-					   'Cases' => 'Cases',
-					   'Contacts' => 'Contacts',
-					   'Leads' => 'Leads',
-					   'Opportunities' => 'Opportunities');
-?>
+$modules_array = ['Accounts' => 'Accounts',
+    'Cases' => 'Cases',
+    'Contacts' => 'Contacts',
+    'Leads' => 'Leads',
+    'Opportunities' => 'Opportunities'];

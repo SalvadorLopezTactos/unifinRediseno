@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
 
     //module strings.
     'LBL_MODULE_NAME' => 'Arkusze menedżera prognoz',
@@ -35,14 +35,14 @@ $mod_strings = array (
     'LBL_FORECAST_TYPE' => 'Typ prognozy',
     'LBL_FORECAST_OPP_COUNT' => 'Łączna liczba szans',
     'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Liczba szans sprzedażowych',
-    'LBL_FORECAST_OPP_WEIGH'=> 'Ważona kwota',
+    'LBL_FORECAST_OPP_WEIGH' => 'Ważona kwota',
     'LBL_FORECAST_USER' => 'Użytkownik',
-    'LBL_DATE_COMMITTED'=> 'Data wykonania',
+    'LBL_DATE_COMMITTED' => 'Data wykonania',
     'LBL_DATE_ENTERED' => 'Data wprowadzenia',
     'LBL_DATE_MODIFIED' => 'Data modyfikacji',
     'LBL_CREATED_BY' => 'Utworzono przez',
     'LBL_DELETED' => 'Usunięto',
-    'LBL_MODIFIED_USER_ID'=>'Zmodyfikowano przez',
+    'LBL_MODIFIED_USER_ID' => 'Zmodyfikowano przez',
     'LBL_WK_VERSION' => 'Wersja',
     'LBL_WK_REVISION' => 'Wersja',
 
@@ -59,68 +59,68 @@ $mod_strings = array (
     'LBL_QC_UPCOMING_FORECASTS' => 'Moje prognozy',
     'LBL_QC_LAST_DATE_COMMITTED' => 'Data ostatniego wykonania:',
     'LBL_QC_LAST_COMMIT_VALUE' => 'Ostatnia zadeklarowana kwota:',
-    'LBL_QC_HEADER_DELIM'=> 'Do',
+    'LBL_QC_HEADER_DELIM' => 'Do',
 
     //opportunity worksheet list view labels
-    'LBL_OW_OPPORTUNITIES' => "Szansa",
-    'LBL_OW_ACCOUNTNAME' => "Kontrahent",
-    'LBL_OW_REVENUE' => "Kwota",
-    'LBL_OW_WEIGHTED' => "Ważona kwota",
-    'LBL_OW_MODULE_TITLE'=> 'Arkusz szansy',
-    'LBL_OW_PROBABILITY'=>'Prawdopodobieństwo',
-    'LBL_OW_NEXT_STEP'=>'Następny krok',
-    'LBL_OW_DESCRIPTION'=>'Opis',
-    'LBL_OW_TYPE'=>'Typ',
+    'LBL_OW_OPPORTUNITIES' => 'Szansa',
+    'LBL_OW_ACCOUNTNAME' => 'Kontrahent',
+    'LBL_OW_REVENUE' => 'Kwota',
+    'LBL_OW_WEIGHTED' => 'Ważona kwota',
+    'LBL_OW_MODULE_TITLE' => 'Arkusz szansy',
+    'LBL_OW_PROBABILITY' => 'Prawdopodobieństwo',
+    'LBL_OW_NEXT_STEP' => 'Następny krok',
+    'LBL_OW_DESCRIPTION' => 'Opis',
+    'LBL_OW_TYPE' => 'Typ',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'Raport bezpośredni',
-    'LBL_FDR_OPPORTUNITIES'=>'Prognozowane szanse:',
-    'LBL_FDR_WEIGH'=>'Ważona kwota szans:',
-    'LBL_FDR_COMMIT'=>'Zadeklarowana kwota',
-    'LBL_FDR_DATE_COMMIT'=>'Data wykonania',
+    'LBL_FDR_USER_NAME' => 'Raport bezpośredni',
+    'LBL_FDR_OPPORTUNITIES' => 'Prognozowane szanse:',
+    'LBL_FDR_WEIGH' => 'Ważona kwota szans:',
+    'LBL_FDR_COMMIT' => 'Zadeklarowana kwota',
+    'LBL_FDR_DATE_COMMIT' => 'Data wykonania',
 
     //detail view.
     'LBL_DV_HEADER' => 'Prognozy: arkusz',
     'LBL_DV_MY_FORECASTS' => 'Moje prognozy',
-    'LBL_DV_MY_TEAM' => "Prognozy mojego zespołu" ,
+    'LBL_DV_MY_TEAM' => "Prognozy mojego zespołu",
     'LBL_DV_TIMEPERIODS' => 'Przedziały czasu:',
     'LBL_DV_FORECAST_PERIOD' => 'Przedział czasu prognozy',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Prognoza szans',
     'LBL_SEARCH' => 'Wybierz',
     'LBL_SEARCH_LABEL' => 'Wybierz',
     'LBL_COMMIT_HEADER' => 'Wykonaj prognozę',
-    'LBL_DV_LAST_COMMIT_DATE' =>'Data ostatniego wykonania:',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'Ostatnie zadeklarowane kwoty:',
+    'LBL_DV_LAST_COMMIT_DATE' => 'Data ostatniego wykonania:',
+    'LBL_DV_LAST_COMMIT_AMOUNT' => 'Ostatnie zadeklarowane kwoty:',
     'LBL_DV_FORECAST_ROLLUP' => 'Rozwinięcie prognozy',
     'LBL_DV_TIMEPERIOD' => 'Przedział czasu:',
     'LBL_DV_TIMPERIOD_DATES' => 'Zakres dat:',
     'LBL_LOADING_COMMIT_HISTORY' => 'Ładowanie historii wykonania...',
 
     //list view
-    'LBL_LV_TIMPERIOD'=> 'Przedział czasu',
-    'LBL_LV_TIMPERIOD_START_DATE'=> 'Data rozpoczęcia',
-    'LBL_LV_TIMPERIOD_END_DATE'=> 'Data zakończenia',
-    'LBL_LV_TYPE'=> 'Typ prognozy',
-    'LBL_LV_COMMIT_DATE'=> 'Data wykonania',
-    'LBL_LV_OPPORTUNITIES'=> 'Szanse',
-    'LBL_LV_WEIGH'=> 'Ważona kwota',
-    'LBL_LV_COMMIT'=> 'Zadeklarowana kwota',
+    'LBL_LV_TIMPERIOD' => 'Przedział czasu',
+    'LBL_LV_TIMPERIOD_START_DATE' => 'Data rozpoczęcia',
+    'LBL_LV_TIMPERIOD_END_DATE' => 'Data zakończenia',
+    'LBL_LV_TYPE' => 'Typ prognozy',
+    'LBL_LV_COMMIT_DATE' => 'Data wykonania',
+    'LBL_LV_OPPORTUNITIES' => 'Szanse',
+    'LBL_LV_WEIGH' => 'Ważona kwota',
+    'LBL_LV_COMMIT' => 'Zadeklarowana kwota',
 
-    'LBL_COMMIT_NOTE'=> 'Wprowadź kwoty, które chcesz zadeklarować dla wybranego przedziału czasu:',
+    'LBL_COMMIT_NOTE' => 'Wprowadź kwoty, które chcesz zadeklarować dla wybranego przedziału czasu:',
 
-    'LBL_COMMIT_MESSAGE'=> 'Czy chcesz zadeklarować te kwoty?',
+    'LBL_COMMIT_MESSAGE' => 'Czy chcesz zadeklarować te kwoty?',
     'ERR_FORECAST_AMOUNT' => 'Zadeklarowana kwota jest wymagana i powinna ona być liczbą.',
 
     // js error strings
     'LBL_FC_START_DATE' => 'Data rozpoczęcia',
     'LBL_FC_USER' => 'Harmonogram dla',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'Brak aktywnych przedziałów czasowych dla prognozowania.',
-    'LBL_FDR_ADJ_AMOUNT'=>'Skorygowana kwota',
-    'LBL_SAVE_WOKSHEET'=>'Zapisz arkusz',
-    'LBL_RESET_WOKSHEET'=>'Resetuj arkusz',
-    'LBL_SHOW_CHART'=>'Wyświetl wykres',
-    'LBL_RESET_CHECK'=>'Wszystkie dane arkuszy dla wybranych przedziałów czasowych i zalogowanych użytkowników zostaną usunięte. Kontynuować?',
+    'LBL_NO_ACTIVE_TIMEPERIOD' => 'Brak aktywnych przedziałów czasowych dla prognozowania.',
+    'LBL_FDR_ADJ_AMOUNT' => 'Skorygowana kwota',
+    'LBL_SAVE_WOKSHEET' => 'Zapisz arkusz',
+    'LBL_RESET_WOKSHEET' => 'Resetuj arkusz',
+    'LBL_SHOW_CHART' => 'Wyświetl wykres',
+    'LBL_RESET_CHECK' => 'Wszystkie dane arkuszy dla wybranych przedziałów czasowych i zalogowanych użytkowników zostaną usunięte. Kontynuować?',
 
     'LBL_CURRENCY' => 'Waluta',
     'LBL_CURRENCY_ID' => 'ID waluty',
@@ -149,6 +149,6 @@ $mod_strings = array (
     'LBL_HISTORY_LOG' => 'Ostatnie zaangażowanie',
     'LBL_NO_COMMIT' => 'Brak wcześniejszych dodań',
 
-    'LBL_MANGER_SAVED' => 'Zapisano menedżera'
+    'LBL_MANGER_SAVED' => 'Zapisano menedżera',
 
-);
+];

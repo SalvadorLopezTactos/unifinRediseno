@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Електронно табло със списък на закупените позиции',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Електронно табло със записи на закупените позиции',
     'LBL_PARENT_PURCHASE' => 'Родителска покупка',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Хронология на модул „Закупени продукти“',
 ];

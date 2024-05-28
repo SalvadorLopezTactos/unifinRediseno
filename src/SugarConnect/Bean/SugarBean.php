@@ -39,13 +39,13 @@ class SugarBean implements Publisher, ConfigurationAwareInterface
      * the specified bean.
      *
      * @param ConfigurationInterface $config The SugarConnect configuration.
-     * @param \SugarBean             $bean   The bean that was changed.
-     *
-     * @throws \Exception Throws if the instance does not implement Publisher.
+     * @param \SugarBean $bean The bean that was changed.
      *
      * @return Publisher
+     * @throws \Exception Throws if the instance does not implement Publisher.
+     *
      */
-    public static function getInstance(ConfigurationInterface $config, \SugarBean $bean) : Publisher
+    public static function getInstance(ConfigurationInterface $config, \SugarBean $bean): Publisher
     {
         $classname = \BeanFactory::getObjectName($bean->getModuleName());
 
@@ -68,13 +68,13 @@ class SugarBean implements Publisher, ConfigurationAwareInterface
     /**
      * Sends the bean event to the Sugar Connect webhook.
      *
-     * @param \SugarBean $bean  The bean that was changed.
-     * @param string     $event The type of event.
-     * @param array      $args  Additional arguments.
+     * @param \SugarBean $bean The bean that was changed.
+     * @param string $event The type of event.
+     * @param array $args Additional arguments.
      *
      * @return void
      */
-    public function publish(\SugarBean $bean, string $event, array $args) : void
+    public function publish(\SugarBean $bean, string $event, array $args): void
     {
         Event::getInstance($this->getConfiguration(), $event)->publish($bean, $event, $args);
     }

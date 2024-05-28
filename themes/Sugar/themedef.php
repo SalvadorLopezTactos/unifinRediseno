@@ -1,5 +1,8 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+
+if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,12 +13,12 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- 
-$themedef = array(
-    'name'  => "Pacific",
-    'description' => "Pacific",
+
+$themedef = [
+    'name' => 'Pacific',
+    'description' => 'Pacific',
     'parentTheme' => 'RacerX',
-    'version' => array(
-        'regex_matches' => array('\d{1,2}(\.\d+){2}(\.\d)?'),
-        ),
-    );
+    'version' => [
+        'regex_matches' => ['\d{1,2}(\.\d+){2}(\.\d)?'],
+    ],
+];

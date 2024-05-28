@@ -13,13 +13,12 @@
 /**
  * THIS CLASS IS FOR DEVELOPERS TO MAKE CUSTOMIZATIONS IN
  */
-
-
-class pmse_BpmnActivity extends pmse_BpmnActivity_sugar {
-
-	public function __construct(){
-		parent::__construct();
-	}
+class pmse_BpmnActivity extends pmse_BpmnActivity_sugar
+{
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * @inheritDoc
@@ -45,6 +44,4 @@ class pmse_BpmnActivity extends pmse_BpmnActivity_sugar {
         }
         return parent::ACLAccess($view, $context);
     }
-
 }
-?>

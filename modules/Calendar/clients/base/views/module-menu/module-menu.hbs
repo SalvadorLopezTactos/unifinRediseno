@@ -15,13 +15,13 @@
 {{else}}
      <a class="btn btn-invisible btn-link module-name" href="#{{buildRoute module=module action='center'}}" data-route="#{{buildRoute module=module action='center'}}" track="click:me:{{module}}" aria-label="{{getModuleName module plural=true}}">{{getModuleName module plural=true}}</a>
     {{#if actions}}
-        <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown"
+        <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-bs-toggle="dropdown"
                 class="btn btn-invisible dropdown-toggle" track="click:{{name}}-dropdown"
                 aria-label="{{getModuleName module plural=true}} - {{str 'LBL_LINK_MORE' module}}"
         >
             <i class="sicon sicon-chevron-down"></i>
         </button>
-    <div class="dropdown-menu rounded-t-none scroll">
+    <div class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl rounded-t-none scroll">
         <ul role="menu">
             <li data-container="calendars"></li>
             <li class="divider"></li>
@@ -34,7 +34,7 @@
                     {{/eq}}
                 {{else}}
                     <li class="megamenu-dropdown-item-container" role="menuitem">
-                        <a class="ellipsis_inline megamenu-dropdown-item" tabindex="-1"
+                        <a class="megamenu-dropdown-item" tabindex="-1"
                            data-navbar-menu-item="{{label}}"
                            rel="tooltip"
                         {{#if event}}
@@ -53,7 +53,7 @@
                             {{#if icon}}
                                 <i class="{{buildIcon icon}}"></i>
                             {{/if}}
-                            <span class="text-overflow">
+                            <span class="ellipsis_inline">
                                 {{str label ../../module}}
                             </span>
                         </a>

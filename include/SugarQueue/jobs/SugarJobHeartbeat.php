@@ -18,7 +18,6 @@
  */
 class SugarJobHeartbeat implements RunnableSchedulerJob
 {
-
     /**
      * @var SchedulersJob
      */
@@ -47,7 +46,7 @@ class SugarJobHeartbeat implements RunnableSchedulerJob
 
         if ($systemInfo->getActiveUsersXDaysCount(3) == 0) {
             if (!$this->sendHeartbeat($systemInfo->getInfo())) {
-                $this->job->failJob("Unable to send heartbeat");
+                $this->job->failJob('Unable to send heartbeat');
                 return false;
             }
         }

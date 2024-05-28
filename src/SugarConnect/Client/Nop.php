@@ -25,7 +25,7 @@ final class Nop implements Client
      *
      * @return void
      */
-    public function send(array $events) : void
+    public function send(array $events): void
     {
         $log = \LoggerManager::getLogger();
         $log->debug('sugar connect: client: post: ' . json_encode($events));

@@ -20,10 +20,10 @@ class MBHelper
      * We need a better way of identifing these roles in the future.
      * @var array
      */
-    protected static $hiddenRoles = array(
-        "Tracker",
-        "Customer Self-Service Portal Role"
-    );
+    protected static $hiddenRoles = [
+        'Tracker',
+        'Customer Self-Service Portal Role',
+    ];
 
     /**
      * Returns list of roles with marker indicating whether role specific metadata exists
@@ -56,7 +56,7 @@ class MBHelper
     {
         $roles = self::getRoles($callback);
 
-        $result = array();
+        $result = [];
         foreach ($roles as $role) {
             $hasMetadata = $roles->offsetGet($role);
             if ($hasMetadata && $role->id != $currentRole) {
@@ -85,10 +85,10 @@ class MBHelper
             if (in_array($role->name, static::$hiddenRoles)) {
                 continue;
             }
-            $roles[$role] = $callback ? $callback(array(
+            $roles[$role] = $callback ? $callback([
                 'role' => $role->id,
                 'layoutOption' => 'role',
-            )) : null;
+            ]) : null;
         }
 
         return $roles;
@@ -131,7 +131,7 @@ class MBHelper
         foreach ($options as $key => $option) {
             if ($key) {
                 $prefix = self::checkDropdownMetadata($params['dropdownField'], $key, $callback) ? '* ' : '';
-                $result[$key] = $prefix . $key . " [" . $option . "]";
+                $result[$key] = $prefix . $key . ' [' . $option . ']';
             }
         }
         return $result;
@@ -142,7 +142,7 @@ class MBHelper
      *
      * @param callable $callback Callback to checks if there is dropdown value specific metadata
      * @param array $params Selected parameters
-     * @param array $dropdownFields  Dropdown fields for respective module
+     * @param array $dropdownFields Dropdown fields for respective module
      * @return array
      */
     public static function getDropdownValueWithMetadata($callback, $params, $dropdownFields)
@@ -156,9 +156,9 @@ class MBHelper
                 $exists = self::checkDropdownMetadata($params['dropdownField'], $key, $callback);
                 if ($exists) {
                     if (isset($params['dropdownValue']) && $key === $params['dropdownValue']) {
-                        $result['resultForReset'][$key] = $key . " [" . $option . "]";
+                        $result['resultForReset'][$key] = $key . ' [' . $option . ']';
                     } else {
-                        $result['resultsForCopy'][$key] = $key . " [" . $option . "]";
+                        $result['resultsForCopy'][$key] = $key . ' [' . $option . ']';
                     }
                 }
             }

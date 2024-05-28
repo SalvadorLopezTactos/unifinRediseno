@@ -96,5 +96,8 @@
 <div id='upload_table'>
 <table width='100%'><tr><td><div id='patch_downloads' class='ygrid-mso' style='height:205px;'></div></td></tr></table>
 </div>
+<div id="download_package_install_log">
+    <a href="index.php?module=Administration&action=Diagnostic&select[]=mlplog">Download Package Install Log File in Diagnostic Tool</a>
+</div>
 {/if}
 {/if}

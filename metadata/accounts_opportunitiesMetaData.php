@@ -10,61 +10,61 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['accounts_opportunities'] = array(
+$dictionary['accounts_opportunities'] = [
     'table' => 'accounts_opportunities',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'opportunity_id' => array(
+        ],
+        'opportunity_id' => [
             'name' => 'opportunity_id',
             'type' => 'id',
-        ),
-        'account_id' => array(
+        ],
+        'account_id' => [
             'name' => 'account_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'accounts_opportunitiespk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_account_opportunity',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'account_id',
                 'opportunity_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_oppid_del_accid',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'opportunity_id',
                 'deleted',
                 'account_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'accounts_opportunities' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'accounts_opportunities' => [
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',
             'lhs_key' => 'id',
@@ -76,6 +76,6 @@ $dictionary['accounts_opportunities'] = array(
             'join_key_lhs' => 'account_id',
             'join_key_rhs' => 'opportunity_id',
             'true_relationship_type' => 'one-to-many',
-        ),
-    ),
-);
+        ],
+    ],
+];

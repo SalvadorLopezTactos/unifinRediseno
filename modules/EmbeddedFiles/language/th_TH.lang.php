@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'ไฟล์ที่รวม',
     'LBL_MODULE_NAME_SINGULAR' => 'ไฟล์ที่รวม',
     'LBL_MODULE_TITLE' => 'ไฟล์ที่รวม',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => 'ชื่อไฟล์',
     'LBL_FILENAME' => 'ชื่อไฟล์',
     'LBL_UPLOAD_ONLY_IMAGE' => 'ไฟล์ที่เลือกไว้ควรเป็นรูปภาพ',
-);
+];

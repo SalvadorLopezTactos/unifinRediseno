@@ -10,11 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-{{#if usersPanel}}
-    <div class="{{usersPanel.css_class}}">
-        {{partial this.usersTemplate this view=this}}
-    </div>
-{{/if}}
 {{#if headerPanel}}
     <div class="{{headerPanel.css_class}}">
         <span class="header-update-text">
@@ -24,5 +19,10 @@
         {{#each headerPanel.fields}}
             {{field ../this model=../activity.attributes}}
         {{/each}}
+    </div>
+{{/if}}
+{{#if usersPanel}}
+    <div class="{{usersPanel.css_class}}">
+        {{partial this.usersTemplate this view=this}}
     </div>
 {{/if}}

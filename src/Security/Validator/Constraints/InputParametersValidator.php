@@ -33,11 +33,11 @@ class InputParametersValidator extends ConstraintValidator
      * Supported types
      * @var array
      */
-    protected $inputTypes = array(
+    protected $inputTypes = [
         Superglobals::REQUEST,
         Superglobals::GET,
         Superglobals::POST,
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -45,7 +45,7 @@ class InputParametersValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof InputParameters) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\InputParameters');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\InputParameters');
         }
 
         if (!in_array($constraint->inputType, $this->inputTypes)) {

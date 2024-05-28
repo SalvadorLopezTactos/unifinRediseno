@@ -31,7 +31,7 @@ class ServiceFactory
 
             $log = \LoggerManager::getLogger();
 
-            $serviceClass = __NAMESPACE__. '\\Service';
+            $serviceClass = __NAMESPACE__ . '\\Service';
             if (class_exists($serviceClass)) {
                 try {
                     self::$service = new $serviceClass();

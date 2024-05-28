@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Folyamat üzleti szabályai',
-  'LBL_MODULE_TITLE' => 'Üzleti Szabályok feldolgozása',
-  'LBL_MODULE_NAME_SINGULAR' => 'Üzleti Szabályok feldolgozása',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Folyamat üzleti szabályai',
+    'LBL_MODULE_TITLE' => 'Üzleti Szabályok feldolgozása',
+    'LBL_MODULE_NAME_SINGULAR' => 'Üzleti Szabályok feldolgozása',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Üzleti szabályok feldolgozása figyelemfelhívás',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Üzleti szabályok feldolgozása figyelemfelhívás',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'A Folyamati Üzleti Szabály bejegyzések műszerfal',
-  'LBL_RST_UID' => 'Üzleti Szabályazonosító',
-  'LBL_RST_TYPE' => 'Üzleti szabály típusa',
-  'LBL_RST_DEFINITION' => 'Üzleti Szabálymeghatározás',
-  'LBL_RST_EDITABLE' => 'Üzleti Szabály Szerkeszthető',
-  'LBL_RST_SOURCE' => 'Üzleti Szabályforrás',
-  'LBL_RST_SOURCE_DEFINITION' => 'Üzleti Szabályforrás Definíció',
-  'LBL_RST_MODULE' => 'Cél Modul',
-  'LBL_RST_FILENAME' => 'Üzleti Szabály Fájlnév',
-  'LBL_RST_CREATE_DATE' => 'Üzleti Szabály Létrehozási Dátum',
-  'LBL_RST_UPDATE_DATE' => 'Üzleti Szabály Aktualizálási Dátum',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'A Folyamati Üzleti Szabály bejegyzések műszerfal',
+    'LBL_RST_UID' => 'Üzleti Szabályazonosító',
+    'LBL_RST_TYPE' => 'Üzleti szabály típusa',
+    'LBL_RST_DEFINITION' => 'Üzleti Szabálymeghatározás',
+    'LBL_RST_EDITABLE' => 'Üzleti Szabály Szerkeszthető',
+    'LBL_RST_SOURCE' => 'Üzleti Szabályforrás',
+    'LBL_RST_SOURCE_DEFINITION' => 'Üzleti Szabályforrás Definíció',
+    'LBL_RST_MODULE' => 'Cél Modul',
+    'LBL_RST_FILENAME' => 'Üzleti Szabály Fájlnév',
+    'LBL_RST_CREATE_DATE' => 'Üzleti Szabály Létrehozási Dátum',
+    'LBL_RST_UPDATE_DATE' => 'Üzleti Szabály Aktualizálási Dátum',
 
     'LNK_LIST' => 'Folyamati üzleti szabályok megtekintése',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Folyamati Üzelti Szabályok létrehozása',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Az Üzleti Szabály érvénytelen, mivel érvénytelen mezőket, illetve olyan mezőket tartalmaz, melyek nem találhatóak meg az ön SugarCRM példányában. Kérjük javítsa ki a hibákat, és mentse meg az Üzleti Szabályt.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Ez az Üzleti szabály jelenleg egy Folyamat-meghatározásban használatos. Ennek ellenére szerkeszti az Üzleti szabályt?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Nem törölheti ezt az Üzleti szabályt, mivel jelenleg egy Folyamat-meghatározásban használatos.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Nem törölheti ezt az Üzleti szabályt, mivel jelenleg egy Folyamat-meghatározásban használatos.',
+];

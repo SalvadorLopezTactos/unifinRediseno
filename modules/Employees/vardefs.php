@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 global $dictionary;
-if(empty($dictionary['User'])){
-	include('modules/Users/vardefs.php');
+if (empty($dictionary['User'])) {
+    include 'modules/Users/vardefs.php';
 }
-$dictionary['Employee']=$dictionary['User'];
+$dictionary['Employee'] = $dictionary['User'];
 
 $dictionary['Employee']['color'] = 'teal';
 $dictionary['Employee']['icon'] = 'sicon-user-group-lg';
@@ -22,19 +22,19 @@ $dictionary['Employee']['icon'] = 'sicon-user-group-lg';
 $dictionary['Employee']['full_text_search'] = true;
 
 // Enable the searchable fields for full text search
-$dictionary['Employee']['fields']['first_name']['full_text_search'] = array(
+$dictionary['Employee']['fields']['first_name']['full_text_search'] = [
     'enabled' => true,
     'searchable' => true,
     'boost' => 1.71,
-);
-$dictionary['Employee']['fields']['last_name']['full_text_search'] = array(
+];
+$dictionary['Employee']['fields']['last_name']['full_text_search'] = [
     'enabled' => true,
     'searchable' => true,
     'boost' => 1.69,
-);
+];
 $dictionary['Employee']['fields']['email']['full_text_search']['boost'] = 1.67;
 
-$dictionary['Employee']['fields']['date_entered']['full_text_search'] = array(
+$dictionary['Employee']['fields']['date_entered']['full_text_search'] = [
     'enabled' => true,
     'searchable' => false,
     // Disabled until UX component is available
@@ -43,9 +43,9 @@ $dictionary['Employee']['fields']['date_entered']['full_text_search'] = array(
     //        'type' => 'DateRange',
     //    ),
     //),
-);
+];
 
-$dictionary['Employee']['fields']['date_modified']['full_text_search'] = array(
+$dictionary['Employee']['fields']['date_modified']['full_text_search'] = [
     'enabled' => true,
     'searchable' => false,
     // Disabled until UX component is available
@@ -54,47 +54,47 @@ $dictionary['Employee']['fields']['date_modified']['full_text_search'] = array(
     //        'type' => 'DateRange',
     //    ),
     //),
-);
+];
 
-$dictionary['Employee']['fields']['modified_user_id']['full_text_search'] = array(
+$dictionary['Employee']['fields']['modified_user_id']['full_text_search'] = [
     'enabled' => true,
     'searchable' => false,
     'type' => 'id',
-    'aggregations' => array(
-        'modified_user_id' => array(
+    'aggregations' => [
+        'modified_user_id' => [
             'type' => 'MyItems',
             'label' => 'LBL_AGG_MODIFIED_BY_ME',
-        ),
-    ),
-);
+        ],
+    ],
+];
 
-$dictionary['Employee']['fields']['created_by']['full_text_search'] = array(
+$dictionary['Employee']['fields']['created_by']['full_text_search'] = [
     'enabled' => true,
     'searchable' => false,
     'type' => 'id',
-    'aggregations' => array(
-        'created_by' => array(
+    'aggregations' => [
+        'created_by' => [
             'type' => 'MyItems',
             'label' => 'LBL_AGG_CREATED_BY_ME',
-        ),
-    ),
-);
+        ],
+    ],
+];
 
 //users of employees modules are not allowed to change the employee/user status.
-$dictionary['Employee']['fields']['status']['massupdate']=false;
-$dictionary['Employee']['fields']['is_admin']['massupdate']=false;
+$dictionary['Employee']['fields']['status']['massupdate'] = false;
+$dictionary['Employee']['fields']['is_admin']['massupdate'] = false;
 //begin bug 48033
-$dictionary['Employee']['fields']['UserType']['massupdate']=false;
-$dictionary['Employee']['fields']['license_type']['massupdate']=false;
-$dictionary['Employee']['fields']['messenger_type']['massupdate']=false;
-$dictionary['Employee']['fields']['email_link_type']['massupdate']=false;
+$dictionary['Employee']['fields']['UserType']['massupdate'] = false;
+$dictionary['Employee']['fields']['license_type']['massupdate'] = false;
+$dictionary['Employee']['fields']['messenger_type']['massupdate'] = false;
+$dictionary['Employee']['fields']['email_link_type']['massupdate'] = false;
 //end bug 48033
-$dictionary['Employee']['fields']['email']['required']=true;
-$dictionary['Employee']['fields']['email_addresses']['required']=false;
-$dictionary['Employee']['fields']['email_addresses_primary']['required']=false;
+$dictionary['Employee']['fields']['email']['required'] = true;
+$dictionary['Employee']['fields']['email_addresses']['required'] = false;
+$dictionary['Employee']['fields']['email_addresses_primary']['required'] = false;
 // bugs 47553 & 49716
-$dictionary['Employee']['fields']['status']['studio']=false;
-$dictionary['Employee']['fields']['status']['required']=false;
+$dictionary['Employee']['fields']['status']['studio'] = false;
+$dictionary['Employee']['fields']['status']['required'] = false;
 
 $dictionary['Employee']['fields']['created_by_link']['relationship'] = 'employees_created_by';
 

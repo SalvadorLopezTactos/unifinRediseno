@@ -129,9 +129,9 @@ class ForecastsOpportunityApi extends FilterApi
      */
     private function addForecastFilter(ServiceBase $api, array $args, SugarQuery $query)
     {
-        $forecastUserId = $args["user_id"];
-        $forecastUserType = $args["type"];
-        $forecastTimePeriodId = $args["time_period"];
+        $forecastUserId = $args['user_id'];
+        $forecastUserType = $args['type'];
+        $forecastTimePeriodId = $args['time_period'];
 
         $admin = BeanFactory::getBean('Administration', null);
         $forecastsSettings = $admin->getConfigForModule('Forecasts', 'base', true);

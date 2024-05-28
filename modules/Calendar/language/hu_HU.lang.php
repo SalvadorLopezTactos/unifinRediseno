@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Naptár',
     'LBL_MODULE_NAME_SINGULAR' => 'Naptár',
     'LBL_MODULE_TITLE' => 'Naptár',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Beállítások',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Idősávok megjelenítése napi és heti bontásban:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Kezdés időpontja:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Befejezés időpontja:',
+    'LBL_SETTINGS_TIME_STARTS' => 'Kezdés időpontja:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Befejezés időpontja:',
     'LBL_SETTINGS_CALLS_SHOW' => 'Hívások megjelenítése:',
     'LBL_SETTINGS_TASKS_SHOW' => 'Feladatok megjelenítése:',
 
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Naptár létrehozása',
     'LNK_CALENDAR_LIST' => 'Naptárak megtekintése',
     'LNK_CALENDAR_LEGACY' => 'Örökölt naptár',
-    'LBL_IMPORT_CALENDAR'=> 'Naptár importálása',
+    'LBL_IMPORT_CALENDAR' => 'Naptár importálása',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Esemény időbélyege',
     'LBL_INSERTFIELD' => 'Mező beillesztése',
     'LBL_EVENT_START_ERROR' => 'Kérjük, válasszon egy kezdőpontot',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Kérem, válasszon ki egy naptárat',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Naptárak mentése sikertelen.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Vas',
             'Hét',
             'Ked',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Csü',
             'Pén',
             'Szo',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Vasárnap',
             'Hétfő',
             'Kedd',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Csütörtök',
             'Péntek',
             'Szombat',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Jan',
             'Feb',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Okt',
             'Nov',
             'Dec',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Január',
             'Február',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Október',
             'November',
             'December',
-        ),
-);
+        ],
+];

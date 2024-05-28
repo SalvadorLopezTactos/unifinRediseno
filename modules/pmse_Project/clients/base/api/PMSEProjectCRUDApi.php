@@ -15,53 +15,54 @@ use Sugarcrm\Sugarcrm\ProcessManager;
 
 class PMSEProjectCRUDApi extends ModuleApi
 {
-    public function registerApiRest() {
-        return array(
-            'create' => array(
+    public function registerApiRest()
+    {
+        return [
+            'create' => [
                 'reqType' => 'POST',
-                'path' => array('pmse_Project'),
-                'pathVars' => array('module'),
+                'path' => ['pmse_Project'],
+                'pathVars' => ['module'],
                 'method' => 'createRecord',
 //                'shortHelp' => 'This method create a new Process Definition record',
-            ),
-            'update' => array(
+            ],
+            'update' => [
                 'reqType' => 'PUT',
-                'path' => array('pmse_Project','?'),
-                'pathVars' => array('module','record'),
+                'path' => ['pmse_Project', '?'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'updateRecord',
 //                'shortHelp' => 'This method updates a Process Definition record',
-            ),
-            'delete' => array(
+            ],
+            'delete' => [
                 'reqType' => 'DELETE',
-                'path' => array('pmse_Project','?'),
-                'pathVars' => array('module','record'),
+                'path' => ['pmse_Project', '?'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'deleteRecord',
 //                'shortHelp' => 'This method deletes a Process Definition record',
-            ),
-        );
+            ],
+        ];
     }
 
     public function deleteRecord(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args,array('module','record'));
+        $this->requireArgs($args, ['module', 'record']);
         $projectBean = $this->loadBean($api, $args, 'delete');
 
         $projectBean->prj_status = 'INACTIVE';
         $projectBean->save();
 
-        $diagramBean =  BeanFactory::newBean('pmse_BpmnDiagram')->retrieve_by_string_fields(array('prj_id'=>$args['record']));
+        $diagramBean = BeanFactory::newBean('pmse_BpmnDiagram')->retrieve_by_string_fields(['prj_id' => $args['record']]);
         $diagramBean->deleted = 1;
         $diagramBean->save();
 
-        $processBean = BeanFactory::newBean('pmse_BpmnProcess')->retrieve_by_string_fields(array('prj_id'=>$args['record']));
+        $processBean = BeanFactory::newBean('pmse_BpmnProcess')->retrieve_by_string_fields(['prj_id' => $args['record']]);
         $processBean->deleted = 1;
         $processBean->save();
 
-        $processDefinitionBean = BeanFactory::newBean('pmse_BpmProcessDefinition')->retrieve_by_string_fields(array('prj_id'=>$args['record']));
+        $processDefinitionBean = BeanFactory::newBean('pmse_BpmProcessDefinition')->retrieve_by_string_fields(['prj_id' => $args['record']]);
         $processDefinitionBean->deleted = 1;
         $processDefinitionBean->save();
 
-        while($relatedDepBean = BeanFactory::newBean('pmse_BpmRelatedDependency')->retrieve_by_string_fields(array('prj_id'=>$args['record'], 'deleted'=>0))) {
+        while ($relatedDepBean = BeanFactory::newBean('pmse_BpmRelatedDependency')->retrieve_by_string_fields(['prj_id' => $args['record'], 'deleted' => 0])) {
             $relatedDepBean->deleted = 1;
             $relatedDepBean->save();
         }
@@ -69,7 +70,7 @@ class PMSEProjectCRUDApi extends ModuleApi
 
         $projectBean->mark_deleted($args['record']);
 
-        return array('id' => $projectBean->id);
+        return ['id' => $projectBean->id];
     }
 
     /**
@@ -91,11 +92,11 @@ class PMSEProjectCRUDApi extends ModuleApi
         $id = $args['picture_duplicateBeanId'];
 
         $exporter = ProcessManager\Factory::getPMSEObject('PMSEProjectExporter');
-        $project = $exporter->getProject(array('id' => $id));
+        $project = $exporter->getProject(['id' => $id]);
 
-        $project['project']['name'] =  $args['name'];
-        $project['project']['assigned_user_id'] =  $args['assigned_user_id'];
-        $project['project']['description'] =  $args['description'];
+        $project['project']['name'] = $args['name'];
+        $project['project']['assigned_user_id'] = $args['assigned_user_id'];
+        $project['project']['description'] = $args['description'];
         $project['project']['prj_status'] = $args['prj_status'];
 
         $importer = ProcessManager\Factory::getPMSEObject('PMSEProjectImporter');
@@ -105,7 +106,7 @@ class PMSEProjectCRUDApi extends ModuleApi
         $importer->setOption('isCopy', true);
         $savedProject = $importer->saveProjectData($project['project']);
         $project['project']['id'] = $savedProject['id'];
-        $project['project']['warnings'] = array($savedProject['br_warning'], $savedProject['et_warning']);
+        $project['project']['warnings'] = [$savedProject['br_warning'], $savedProject['et_warning']];
 
         return $project['project'];
     }

@@ -9,11 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-    'LBL_CURRENCY'=>'Valūta',
+$mod_strings = [
+    'LBL_CURRENCY' => 'Valūta',
     'LBL_CURRENCIES' => 'Valūtas',
-    'LBL_CURRENCY_NAME'=>'Valūtas nosaukums',
-    'LBL_CURRENCY_SYMBOL'=>'Valūtas simbols',
+    'LBL_CURRENCY_NAME' => 'Valūtas nosaukums',
+    'LBL_CURRENCY_SYMBOL' => 'Valūtas simbols',
     'LBL_CURRENCY_RATE' => 'Bāzes valūtas kurss',
     'LBL_CURRENCY_ID' => 'Valūtas ID',
-);
+];

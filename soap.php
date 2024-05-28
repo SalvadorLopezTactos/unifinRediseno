@@ -1,5 +1,8 @@
 <?php
- if(!defined('sugarEntry'))define('sugarEntry', true);
+
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,8 +14,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 define('ENTRY_POINT_TYPE', 'api');
-require_once('include/entryPoint.php');
-require_once('include/utils/file_utils.php');
+require_once 'include/entryPoint.php';
+require_once 'include/utils/file_utils.php';
 ob_start();
 
 require 'soap/SoapErrorDefinitions.php';
@@ -24,10 +27,10 @@ checkSystemState();
 
 $administrator = Administration::getSettings();
 $NAMESPACE = 'http://www.sugarcrm.com/sugarcrm';
-$options = array(
+$options = [
     'soap_version' => SOAP_1_1,
-    'uri' => $sugar_config['site_url'].'/soap.php',
-);
+    'uri' => $sugar_config['site_url'] . '/soap.php',
+];
 
 $xml = <<<EOT
 <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -1239,15 +1242,15 @@ $xml = <<<EOT
     </service>
 </definitions>
 EOT;
-$file = 'data://text/plain;base64,'.base64_encode($xml);
+$file = 'data://text/plain;base64,' . base64_encode($xml);
 $server = new \SoapServer($file, $options);
 global $soap_server_object;
 $soap_server_object = $server;
 
-require_once('soap/SoapSugarUsers.php');
+require_once 'soap/SoapSugarUsers.php';
 //require_once('soap/SoapSugarUsers_version2.php');
-require_once('soap/SoapData.php');
-require_once('soap/SoapDeprecated.php');
+require_once 'soap/SoapData.php';
+require_once 'soap/SoapDeprecated.php';
 
 $body = file_get_contents('php://input');
 
@@ -1255,10 +1258,10 @@ $resourceManager = ResourceManager::getInstance();
 $resourceManager->setup('Soap');
 $observers = $resourceManager->getObservers();
 //Call set_soap_server for SoapResourceObserver instance(s)
-foreach($observers as $observer) {
-   if(method_exists($observer, 'set_soap_server')) {
-   	  $observer->set_soap_server($server);
-   }
+foreach ($observers as $observer) {
+    if (method_exists($observer, 'set_soap_server')) {
+        $observer->set_soap_server($server);
+    }
 }
 
 $soapAction = '';

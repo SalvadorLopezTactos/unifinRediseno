@@ -45,6 +45,7 @@
  * @see SugarXHprof::$mongodb_collection    for $sugar_config['xhprof_config']['mongodb_collection']
  * @see SugarXHprof::$mongodb_options       for $sugar_config['xhprof_config']['mongodb_options']
  */
+
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Performance\Dbal\XhprofLogger;
 
@@ -79,7 +80,7 @@ class SugarXHprof
     /**
      * @var array array of function names to ignore from the profile (pass into xhprof_enable)
      */
-    protected static $ignored_functions = array();
+    protected static $ignored_functions = [];
 
     /**
      * @var int minimum value for 'wall time' in milliseconds
@@ -115,10 +116,10 @@ class SugarXHprof
      * @var array mongo options
      * @see http://php.net/manual/en/mongoclient.construct.php#mongo.mongoclient.construct.parameters
      */
-    protected static $mongodb_options = array(
-        "username" => '',
-        "password" => ''
-    );
+    protected static $mongodb_options = [
+        'username' => '',
+        'password' => '',
+    ];
 
     /**
      * @var int flags for xhprof
@@ -194,10 +195,10 @@ class SugarXHprof
                 if (empty(static::$log_to)) {
                     static::$log_to = sys_get_temp_dir();
 
-                    error_log("Warning: Must specify directory location for XHProf runs. " .
-                        "Trying " . static::$log_to . " as default. You can either set "
+                    error_log('Warning: Must specify directory location for XHProf runs. ' .
+                        'Trying ' . static::$log_to . ' as default. You can either set '
                         . "\$sugar_config['xhprof_config']['log_to'] sugar config " .
-                        "or set xhprof.output_dir ini param.");
+                        'or set xhprof.output_dir ini param.');
                 }
             }
 
@@ -245,7 +246,7 @@ class SugarXHprof
      *
      * @return string action
      */
-    static public function detectAction()
+    public static function detectAction()
     {
         $action = '';
 
@@ -259,7 +260,6 @@ class SugarXHprof
                     $action .= 'entryPoint.' . $entryPoint;
                 } else {
                     $action .= 'entryPoint.unknown';
-
                 }
             } else {
                 $action .= $GLOBALS['app']->controller->module . '.' . $GLOBALS['app']->controller->action;
@@ -342,16 +342,16 @@ class SugarXHprof
         $this->resetSqlTracker();
         $this->resetElasticTracker();
 
-        register_shutdown_function(array(
+        register_shutdown_function([
             $this,
-            'end'
-        ));
+            'end',
+        ]);
 
         $this->startTime = $_SERVER['REQUEST_TIME_FLOAT'] ?? microtime(true);
 
-        xhprof_enable(static::$flags, array(
-            'ignored_functions' => static::$ignored_functions
-        ));
+        xhprof_enable(static::$flags, [
+            'ignored_functions' => static::$ignored_functions,
+        ]);
     }
 
     /**
@@ -369,11 +369,11 @@ class SugarXHprof
      */
     public function resetSqlTracker()
     {
-        $this->sqlTracker = array(
+        $this->sqlTracker = [
             'summary_time' => 0,
-            'sql' => array(),
-            'backtrace_calls' => array(),
-        );
+            'sql' => [],
+            'backtrace_calls' => [],
+        ];
     }
 
     /**
@@ -381,11 +381,11 @@ class SugarXHprof
      */
     public function resetElasticTracker()
     {
-        $this->elasticTracker = array(
+        $this->elasticTracker = [
             'summary_time' => 0,
-            'queries' => array(),
-            'backtrace_calls' => array(),
-        );
+            'queries' => [],
+            'backtrace_calls' => [],
+        ];
     }
 
     /**
@@ -405,16 +405,16 @@ class SugarXHprof
         $wallTime = $xhprofData['main()']['wt'];
 
         if ($wallTime > static::$filter_wt * 1000) {
-            $sqlQueries = is_countable($this->sqlTracker['sql']) ? count($this->sqlTracker['sql']) : 0;
-            $elasticQueries = is_countable($this->elasticTracker['queries']) ? count($this->elasticTracker['queries']) : 0;
+            $sqlQueries = safeCount($this->sqlTracker['sql']);
+            $elasticQueries = safeCount($this->elasticTracker['queries']);
             $action = static::cleanActionString(static::detectAction());
 
-            $runName = implode('d', array(
+            $runName = implode('d', [
                     str_replace('.', 'd', $this->startTime),
                     $wallTime,
                     $sqlQueries,
-                    $elasticQueries
-                )) . '.' . $action;
+                    $elasticQueries,
+                ]) . '.' . $action;
 
             $this->saveRun($runName, $xhprofData);
         }
@@ -464,13 +464,13 @@ class SugarXHprof
         if ($this->isEnabled() && static::$track_sql) {
             $this->sqlTracker['summary_time'] += $time;
 
-            $this->sqlTracker['sql'][] = array(
+            $this->sqlTracker['sql'][] = [
                 $sql,
                 $time,
                 static::$track_sql_backtrace
                     ? $this->xhpTrace(debug_backtrace(), $this->sqlTracker['backtrace_calls'])
                     : null,
-            );
+            ];
         }
     }
 
@@ -485,13 +485,15 @@ class SugarXHprof
     {
         if ($this->isEnabled() && static::$track_elastic) {
             $this->elasticTracker['summary_time'] += $queryTime;
-            $this->elasticTracker['queries'][] = array(
-                vsprintf("%s %s", $query),
+            $this->elasticTracker['queries'][] = [
+                vsprintf('%s %s', $query),
                 $queryData,
                 $queryTime,
-                static::$track_elastic_backtrace ? $this->xhpTrace(debug_backtrace(),
-                    $this->elasticTracker['backtrace_calls']) : null
-            );
+                static::$track_elastic_backtrace ? $this->xhpTrace(
+                    debug_backtrace(),
+                    $this->elasticTracker['backtrace_calls']
+                ) : null,
+            ];
         }
     }
 
@@ -502,13 +504,13 @@ class SugarXHprof
      * @param array $callsHash
      * @return string
      */
-    protected function xhpTrace($trace, array &$callsHash = array())
+    protected function xhpTrace($trace, array &$callsHash = [])
     {
         array_splice($trace, 0, 2);
         $format = '#%s %s [Line: %s] %s(%s)';
         $strLimit = 64;
-        $traceShort = array();
-        $repeated = array();
+        $traceShort = [];
+        $repeated = [];
 
         foreach ($trace as $index => $t) {
             $args = '';
@@ -529,7 +531,7 @@ class SugarXHprof
                             $args .= "\"$a\"";
                             break;
                         case 'array':
-                            $args .= 'Array(' . count($a) . ')';
+                            $args .= 'Array(' . safeCount($a) . ')';
                             break;
                         case 'object':
                             $args .= 'Object(' . get_class($a) . ')';
@@ -556,7 +558,8 @@ class SugarXHprof
             $callsHash[$callName] = isset($callsHash[$callName]) ? $callsHash[$callName] + 1 : 1;
             $repeated[$callName] = isset($repeated[$callName]) ? $repeated[$callName] + 1 : 0;
 
-            $traceShort[] = sprintf($format,
+            $traceShort[] = sprintf(
+                $format,
                 $index + 1,
                 isset($t['file']) && $t['file'] ? $t['file'] : 'n/a',
                 isset($t['line']) && $t['line'] ? $t['line'] : 'n/a',
@@ -628,7 +631,7 @@ class SugarXHprof
         $requestTs = new MongoDate($time);
         $requestTsMicro = new MongoDate($requestTimeFloat[0], $requestTimeFloat[1]);
 
-        $mongoData['meta'] = array(
+        $mongoData['meta'] = [
             'url' => $uri,
             'SERVER' => $_SERVER,
             'get' => $_GET,
@@ -637,7 +640,7 @@ class SugarXHprof
             'request_ts' => $requestTs,
             'request_ts_micro' => $requestTsMicro,
             'request_date' => date('Y-m-d', $time),
-        );
+        ];
 
         $mongoData['profile'] = $data;
         if (static::$track_sql) {

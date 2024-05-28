@@ -88,7 +88,7 @@
                 name: 'line_num',
                 label: null,
                 widthClass: 'cell-xsmall',
-                css_class: 'line_num tcenter',
+                css_class: 'line_num text-center',
                 type: 'line-num',
                 readonly: true
             });

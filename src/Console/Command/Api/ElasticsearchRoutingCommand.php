@@ -18,7 +18,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\Table;
 
-
 /**
  *
  * Elasticsearch routing status
@@ -35,8 +34,7 @@ class ElasticsearchRoutingCommand extends Command implements InstanceModeInterfa
     {
         $this
             ->setName('elastic:routing')
-            ->setDescription('Show Elasticsearch index routing')
-        ;
+            ->setDescription('Show Elasticsearch index routing');
     }
 
     /**
@@ -46,19 +44,18 @@ class ElasticsearchRoutingCommand extends Command implements InstanceModeInterfa
     {
         $result = $this
             ->initApi($this->getApi())
-            ->callApi('elasticSearchRouting')
-        ;
+            ->callApi('elasticSearchRouting');
 
         $table = new Table($output);
-        $table->setHeaders(array('Module', 'Strategy', 'Write index', 'Read indices'));
+        $table->setHeaders(['Module', 'Strategy', 'Write index', 'Read indices']);
 
         foreach ($result as $module => $entry) {
-            $table->addRow(array(
+            $table->addRow([
                 $module,
                 $entry['strategy'],
                 $entry['routing']['write_index'],
                 implode(',', $entry['routing']['read_indices']),
-            ));
+            ]);
         }
 
         $table->render();

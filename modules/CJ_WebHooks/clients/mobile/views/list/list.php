@@ -17,9 +17,39 @@ $viewdefs['CJ_WebHooks']['mobile']['view']['list'] = [
                 [
                     'name' => 'name',
                     'label' => 'LBL_NAME',
-                    'default' => true,
                     'enabled' => true,
+                    'default' => true,
                     'link' => true,
+                ],
+                [
+                    'name' => 'parent_name',
+                    'label' => 'LBL_PARENT_NAME',
+                    'enabled' => true,
+                    'default' => true,
+                ],
+                [
+                    'name' => 'trigger_event',
+                    'label' => 'LBL_TRIGGER_EVENT',
+                    'enabled' => true,
+                    'default' => true,
+                ],
+                [
+                    'name' => 'request_method',
+                    'label' => 'LBL_REQUEST_METHOD',
+                    'enabled' => true,
+                    'default' => true,
+                ],
+                [
+                    'name' => 'url',
+                    'label' => 'LBL_URL',
+                    'enabled' => true,
+                    'default' => true,
+                ],
+                [
+                    'name' => 'date_modified',
+                    'label' => 'LBL_DATE_MODIFIED',
+                    'enabled' => true,
+                    'default' => true,
                 ],
                 [
                     'name' => 'team_name',

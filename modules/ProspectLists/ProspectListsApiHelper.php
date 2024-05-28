@@ -15,7 +15,7 @@ class ProspectListsApiHelper extends SugarBeanApiHelper
     /**
      * {@inheritDoc}
      */
-    public function formatForApi(\SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(\SugarBean $bean, array $fieldList = [], array $options = [])
     {
         /** @var ProspectList $bean */
         $bean->entry_count = $bean->get_entry_count();

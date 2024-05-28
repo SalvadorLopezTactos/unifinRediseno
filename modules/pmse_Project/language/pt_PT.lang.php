@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Definições do Processo',
-  'LBL_MODULE_TITLE' => 'Definições do Processo',
-  'LBL_MODULE_NAME_SINGULAR' => 'Definição do Processo',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Definições do Processo',
+    'LBL_MODULE_TITLE' => 'Definições do Processo',
+    'LBL_MODULE_NAME_SINGULAR' => 'Definição do Processo',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco de definições de processo',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco de definições de processo',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Dashboard de registo de definições de processo',
-  'LNK_LIST' => 'Ver Definições do Processo',
-  'LNK_NEW_PMSE_PROJECT' => 'Criar uma definição de Processo',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Importar Definições de Processos',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Dashboard de registo de definições de processo',
+    'LNK_LIST' => 'Ver Definições do Processo',
+    'LNK_NEW_PMSE_PROJECT' => 'Criar uma definição de Processo',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Importar Definições de Processos',
 
-  'LBL_PRJ_STATUS' => 'Estado',
-  'LBL_PRJ_MODULE' => 'Módulo Target',
-  'LBL_PRJ_RUN_ORDER' => 'Executar Ordem',
-  'LBL_PMSE_BUTTON_SAVE' => 'Gravar',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Cancelar',
-  'LBL_PMSE_BUTTON_YES' => 'Sim',
-  'LBL_PMSE_BUTTON_NO' => 'Não',
-  'LBL_PMSE_BUTTON_OK' => 'OK',
+    'LBL_PRJ_STATUS' => 'Estado',
+    'LBL_PRJ_MODULE' => 'Módulo Target',
+    'LBL_PRJ_RUN_ORDER' => 'Executar Ordem',
+    'LBL_PMSE_BUTTON_SAVE' => 'Gravar',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Cancelar',
+    'LBL_PMSE_BUTTON_YES' => 'Sim',
+    'LBL_PMSE_BUTTON_NO' => 'Não',
+    'LBL_PMSE_BUTTON_OK' => 'OK',
     'LBL_PMSE_FORM_ERROR' => 'Resolva os erros antes de prosseguir.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Desenhar',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Atividade',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Ação',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Evento de Inicio do Cliente Potencial',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Inicio de Evento da Oportunidade' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Inicio de Evento da Oportunidade',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Inicio de Evento do Documento',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Inicio de Evento de Outro Módulo',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Esperar pelo Evento',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Regra de negócio',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Acção da regra de negócio',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Modelo de E-mail',
-);
+];

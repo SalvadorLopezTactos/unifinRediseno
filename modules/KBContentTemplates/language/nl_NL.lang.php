@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Knowledge Base-sjablonen',
     'LBL_MODULE_NAME_SINGULAR' => 'Sjabloon kennisdatabank',
     'LBL_MODULE_TITLE' => 'Sjabloon kennisdatabank',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Sjablonen weergeven',
     'LBL_TEXT_BODY' => 'Hoofdtekst',
     'LBL_LIST_TEMPLATE_NAME' => 'Sjabloon naam',
-);
+];

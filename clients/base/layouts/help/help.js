@@ -61,7 +61,7 @@
         app.events.on('app:view:change', _.bind(function() {
             this._helpObjectCreated = false;
             if (this.button) {
-                this.button.popover('destroy');
+                this.button.popover('dispose');
             }
         }, this));
     },
@@ -165,7 +165,7 @@
             this._isOpen = show;
         }
 
-        this.button.popover('destroy');
+        this.button.popover('dispose');
 
         if (this._isOpen) {
             this._initHelpObject();
@@ -250,7 +250,7 @@
     _dispose: function() {
         this.unbindOutsideClick();
         if (this.button) {
-            this.button.popover('destroy');
+            this.button.popover('dispose');
         }
         this._super('_dispose');
     }

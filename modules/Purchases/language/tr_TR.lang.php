@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Satın Almalar Kaydı Panosu',
     'LBL_RELATED_ACCOUNT' => 'İlgili Hesap',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Satın Alımlar Odak Bölmesi',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Satın Alınan Zaman Çizelgesi',
 ];

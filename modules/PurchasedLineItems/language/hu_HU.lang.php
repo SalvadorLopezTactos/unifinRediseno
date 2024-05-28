@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Megvásárolt sortételek listája műszerfal',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Megvásárolt sortételek rekord műszerfal',
     'LBL_PARENT_PURCHASE' => 'Szülővásárlás',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Megvásárolt terméklista idővonala',
 ];

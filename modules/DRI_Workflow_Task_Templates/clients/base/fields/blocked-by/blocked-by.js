@@ -153,7 +153,7 @@
     _beanFetchSuccess: function(records, callback, currentActivity) {
         let _key = `request:${this.module}:${this.name}`;
         let stageId = currentActivity.attributes.dri_subworkflow_template_id;
-        if (!_.isUndefined(this.model)) {
+        if (this.model) {
             if (_.isEmpty(this.model.get('id')) && !_.isEmpty(this.model.get('dri_subworkflow_template_id'))) {
                 stageId = this.model.get('dri_subworkflow_template_id');
             }

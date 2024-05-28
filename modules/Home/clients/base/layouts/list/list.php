@@ -11,16 +11,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Home']['base']['layout']['list'] = array(
+$viewdefs['Home']['base']['layout']['list'] = [
     'type' => 'dashboard',
     'name' => 'dashboard',
-    'components' => array(
-        array(
+    'components' => [
+        [
             'view' => 'dashboard-headerpane',
-        ),
-    ),
-    'last_state' => array(
+        ],
+    ],
+    'last_state' => [
         'id' => 'last-visit',
-    )
-);
-
+    ],
+];

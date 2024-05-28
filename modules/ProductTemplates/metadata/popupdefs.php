@@ -10,87 +10,79 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$popupMeta = array (
+$popupMeta = [
     'moduleMain' => 'ProductTemplates',
     'varName' => 'ProductTemplate',
     'orderBy' => 'producttemplates.name',
-    'whereClauses' => array (
+    'whereClauses' => [
         'name' => 'producttemplates.name',
         'category_name' => 'producttemplates.category_name',
-    ),
-    'searchInputs' => array (
+    ],
+    'searchInputs' => [
         'name',
         'category_name',
-    ),
+    ],
     'searchdefs' => [
         'name',
         'category_name',
         'active_status',
     ],
-    'listviewdefs' => array (
-        'NAME' =>
-        array (
+    'listviewdefs' => [
+        'NAME' => [
             'width' => '30',
             'label' => 'LBL_LIST_NAME',
             'link' => true,
             'default' => true,
             'name' => 'name',
-        ),
-        'TYPE_NAME' =>
-        array (
+        ],
+        'TYPE_NAME' => [
             'width' => '10',
             'label' => 'LBL_LIST_TYPE',
             'sortable' => true,
             'default' => true,
             'name' => 'type_name',
-        ),
-        'CATEGORY_NAME' =>
-        array (
+        ],
+        'CATEGORY_NAME' => [
             'width' => '10',
             'label' => 'LBL_LIST_CATEGORY',
             'sortable' => true,
             'default' => true,
             'name' => 'category_name',
-        ),
-        'STATUS' =>
-        array (
+        ],
+        'STATUS' => [
             'width' => '10',
             'label' => 'LBL_LIST_STATUS',
             'default' => true,
             'name' => 'status',
-        ),
-        'QTY_IN_STOCK' =>
-        array (
+        ],
+        'QTY_IN_STOCK' => [
             'width' => '10',
             'label' => 'LBL_LIST_QTY_IN_STOCK',
             'default' => true,
             'name' => 'qty_in_stock',
-        ),
-        'COST_PRICE' =>
-        array (
+        ],
+        'COST_PRICE' => [
             'type' => 'currency',
             'label' => 'LBL_COST_PRICE',
             'currency_format' => true,
             'width' => '10',
             'default' => true,
             'name' => 'cost_price',
-        ),
-        'LIST_PRICE' =>
-        array (
+        ],
+        'LIST_PRICE' => [
             'type' => 'currency',
             'label' => 'LBL_LIST_PRICE',
             'currency_format' => true,
             'width' => '10',
             'default' => true,
             'name' => 'list_price',
-        ),
-        'DISCOUNT_PRICE' =>
-        array (
+        ],
+        'DISCOUNT_PRICE' => [
             'type' => 'currency',
             'label' => 'LBL_DISCOUNT_PRICE',
             'currency_format' => true,
             'width' => '10',
             'default' => true,
-        ),
-    ),
-);
+        ],
+    ],
+];

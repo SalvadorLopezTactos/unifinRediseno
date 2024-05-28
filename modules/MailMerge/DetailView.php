@@ -9,6 +9,4 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-include ('modules/MailMerge/index.php'); 
-
-?>
+include 'modules/MailMerge/index.php';

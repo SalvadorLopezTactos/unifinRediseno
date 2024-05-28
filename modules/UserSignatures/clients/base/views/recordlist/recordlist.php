@@ -9,46 +9,46 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['UserSignatures']['base']['view']['recordlist'] = array(
-    'selection' => array(
+$viewdefs['UserSignatures']['base']['view']['recordlist'] = [
+    'selection' => [
         'type' => 'multi',
-        'actions' => array(
-            array(
+        'actions' => [
+            [
                 'name' => 'massdelete_button',
                 'type' => 'button',
                 'label' => 'LBL_DELETE',
                 'acl_action' => 'delete',
                 'primary' => true,
-                'events' => array(
+                'events' => [
                     'click' => 'list:massdelete:fire',
-                ),
-            ),
-        ),
-    ),
-    'rowactions' => array(
-        'actions' => array(
-            array(
+                ],
+            ],
+        ],
+    ],
+    'rowactions' => [
+        'actions' => [
+            [
                 'type' => 'rowaction',
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
                 'icon' => 'sicon-preview',
                 'acl_action' => 'view',
-            ),
-            array(
+            ],
+            [
                 'type' => 'rowaction',
                 'name' => 'edit_button',
                 'label' => 'LBL_EDIT_BUTTON',
                 'event' => 'list:editrow:fire',
                 'acl_action' => 'edit',
-            ),
-            array(
+            ],
+            [
                 'type' => 'rowaction',
                 'name' => 'delete_button',
                 'event' => 'list:deleterow:fire',
                 'label' => 'LBL_DELETE_BUTTON',
                 'acl_action' => 'delete',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

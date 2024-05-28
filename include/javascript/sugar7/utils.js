@@ -1551,6 +1551,78 @@
             },
 
             /**
+             * Setting fields editability options for IDM and non-IDM
+             *
+             * @param {Array} fields list of fields objects
+             */
+            setUsersEditableFields: function(fields, tplName) {
+                let idmException = [
+                    'email1',
+                    'email',
+                    'email_addresses',
+                    'email_addresses_primary',
+                ];
+                let readonlyFields = ['is_admin'];
+                let vardefFields = app.metadata.getModule('Users', 'fields');
+                _.each(fields, function(field) {
+                    if (app.config.idmModeEnabled && 'record' === tplName &&
+                        _.contains(idmException, field.name)) {
+                        return;
+                    }
+
+                    if (!app.config.idmModeEnabled) {
+                        let adminDeveloperReadonlyFields = ['is_admin'];
+                        let regularUserReadonlyFields = [
+                            'user_name',
+                            'status',
+                            'is_admin',
+                            'license_type',
+                            'employee_status',
+                            'title',
+                            'department',
+                            'reports_to_link',
+                            'reportees',
+                        ];
+                        let adminTypeUser = 'admin';
+                        let acls = app.user.getAcls().Users;
+                        let isAdmin = !_.has(acls, adminTypeUser);
+                        let isDev = !_.has(acls, 'developer');
+                        let userType = app.user.get('type');
+
+                        //for Admin & Developer
+                        if (isAdmin && isDev && userType !== adminTypeUser &&
+                            _.contains(adminDeveloperReadonlyFields, field.name)) {
+                            field.readonly = true;
+                            return;
+                        }
+
+                        //for regular user
+                        if (!isAdmin && userType !== adminTypeUser &&
+                            _.contains(regularUserReadonlyFields, field.name)) {
+                            field.readonly = true;
+                            return;
+                        }
+
+                        return;
+                    }
+
+                    if (_.contains(readonlyFields, field.name) || field.idm_mode_disabled) {
+                        field.readonly = true;
+
+                        return;
+                    }
+
+                    _.each(vardefFields, function(vardef, index) {
+                        if (index === field.name && vardef.idm_mode_disabled) {
+                            field.readonly = true;
+
+                            return;
+                        }
+                    }, this);
+                }, this);
+            },
+
+            /**
              * Check if field is always readonly
              * @param {Object} fieldDef field definition
              * @param {Object} viewDef (optional) view defintion of the field
@@ -1590,8 +1662,9 @@
              * @param {Object} focusDrawer - the focus drawer object
              * @param {string} module - module name
              * @param {string} modelId - bean id
+             * @param {Object} $el
              */
-            openFocusDrawer: function(focusDrawer, module, modelId) {
+            openFocusDrawer: function(focusDrawer, module, modelId, $el) {
                 if (focusDrawer && module && modelId) {
                     var context = {
                         layout: 'row-model-data',
@@ -1605,7 +1678,7 @@
                     if (focusDrawer.isOpen() && _.isEqual(context, focusDrawer.currentContextDef)) {
                         return;
                     }
-                    focusDrawer.open(context, null, focusDrawer.isOpen());
+                    focusDrawer.open(context, null, focusDrawer.isOpen(), $el);
                 }
             },
 

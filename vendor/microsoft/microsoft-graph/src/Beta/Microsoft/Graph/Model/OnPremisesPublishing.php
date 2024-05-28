@@ -197,7 +197,34 @@ class OnPremisesPublishing extends Entity
         return $this;
     }
     /**
+    * Gets the isAccessibleViaZTNAClient
+    *
+    * @return bool|null The isAccessibleViaZTNAClient
+    */
+    public function getIsAccessibleViaZTNAClient()
+    {
+        if (array_key_exists("isAccessibleViaZTNAClient", $this->_propDict)) {
+            return $this->_propDict["isAccessibleViaZTNAClient"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the isAccessibleViaZTNAClient
+    *
+    * @param bool $val The value of the isAccessibleViaZTNAClient
+    *
+    * @return OnPremisesPublishing
+    */
+    public function setIsAccessibleViaZTNAClient($val)
+    {
+        $this->_propDict["isAccessibleViaZTNAClient"] = $val;
+        return $this;
+    }
+    /**
     * Gets the isBackendCertificateValidationEnabled
+    * Indicates whether backend SSL certificate validation is enabled for the application. For all new Application Proxy apps, the property will be set to true by default. For all existing apps, the property will be set to false.
     *
     * @return bool|null The isBackendCertificateValidationEnabled
     */
@@ -212,6 +239,7 @@ class OnPremisesPublishing extends Entity
 
     /**
     * Sets the isBackendCertificateValidationEnabled
+    * Indicates whether backend SSL certificate validation is enabled for the application. For all new Application Proxy apps, the property will be set to true by default. For all existing apps, the property will be set to false.
     *
     * @param bool $val The value of the isBackendCertificateValidationEnabled
     *
@@ -335,6 +363,34 @@ class OnPremisesPublishing extends Entity
         return $this;
     }
     /**
+    * Gets the isStateSessionEnabled
+    * Indicates whether validation of the state parameter when the client uses the OAuth 2.0 authorization code grant flow is enabled. This setting allows admins to specify whether they want to enable CSRF protection for their apps.
+    *
+    * @return bool|null The isStateSessionEnabled
+    */
+    public function getIsStateSessionEnabled()
+    {
+        if (array_key_exists("isStateSessionEnabled", $this->_propDict)) {
+            return $this->_propDict["isStateSessionEnabled"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the isStateSessionEnabled
+    * Indicates whether validation of the state parameter when the client uses the OAuth 2.0 authorization code grant flow is enabled. This setting allows admins to specify whether they want to enable CSRF protection for their apps.
+    *
+    * @param bool $val The value of the isStateSessionEnabled
+    *
+    * @return OnPremisesPublishing
+    */
+    public function setIsStateSessionEnabled($val)
+    {
+        $this->_propDict["isStateSessionEnabled"] = $val;
+        return $this;
+    }
+    /**
     * Gets the isTranslateHostHeaderEnabled
     * Indicates if the application should translate urls in the reponse headers. Keep this value as true unless your application required the original host header in the authentication request. Default value is true.
     *
@@ -389,6 +445,70 @@ class OnPremisesPublishing extends Entity
     {
         $this->_propDict["isTranslateLinksInBodyEnabled"] = $val;
         return $this;
+    }
+
+    /**
+    * Gets the onPremisesApplicationSegments
+    *
+    * @return OnPremisesApplicationSegment|null The onPremisesApplicationSegments
+    */
+    public function getOnPremisesApplicationSegments()
+    {
+        if (array_key_exists("onPremisesApplicationSegments", $this->_propDict)) {
+            if (is_a($this->_propDict["onPremisesApplicationSegments"], "\Beta\Microsoft\Graph\Model\OnPremisesApplicationSegment") || is_null($this->_propDict["onPremisesApplicationSegments"])) {
+                return $this->_propDict["onPremisesApplicationSegments"];
+            } else {
+                $this->_propDict["onPremisesApplicationSegments"] = new OnPremisesApplicationSegment($this->_propDict["onPremisesApplicationSegments"]);
+                return $this->_propDict["onPremisesApplicationSegments"];
+            }
+        }
+        return null;
+    }
+
+    /**
+    * Sets the onPremisesApplicationSegments
+    *
+    * @param OnPremisesApplicationSegment $val The value to assign to the onPremisesApplicationSegments
+    *
+    * @return OnPremisesPublishing The OnPremisesPublishing
+    */
+    public function setOnPremisesApplicationSegments($val)
+    {
+        $this->_propDict["onPremisesApplicationSegments"] = $val;
+         return $this;
+    }
+
+    /**
+    * Gets the segmentsConfiguration
+    * Represents the collection of application segments for an on-premises wildcard application that's published through Azure AD Application Proxy.
+    *
+    * @return SegmentConfiguration|null The segmentsConfiguration
+    */
+    public function getSegmentsConfiguration()
+    {
+        if (array_key_exists("segmentsConfiguration", $this->_propDict)) {
+            if (is_a($this->_propDict["segmentsConfiguration"], "\Beta\Microsoft\Graph\Model\SegmentConfiguration") || is_null($this->_propDict["segmentsConfiguration"])) {
+                return $this->_propDict["segmentsConfiguration"];
+            } else {
+                $this->_propDict["segmentsConfiguration"] = new SegmentConfiguration($this->_propDict["segmentsConfiguration"]);
+                return $this->_propDict["segmentsConfiguration"];
+            }
+        }
+        return null;
+    }
+
+    /**
+    * Sets the segmentsConfiguration
+    * Represents the collection of application segments for an on-premises wildcard application that's published through Azure AD Application Proxy.
+    *
+    * @param SegmentConfiguration $val The value to assign to the segmentsConfiguration
+    *
+    * @return OnPremisesPublishing The OnPremisesPublishing
+    */
+    public function setSegmentsConfiguration($val)
+    {
+        $this->_propDict["segmentsConfiguration"] = $val;
+         return $this;
     }
 
     /**

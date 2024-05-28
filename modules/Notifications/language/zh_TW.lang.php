@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_ASSIGNED_TO_ID' => '指派的使用者 ID',
     'LBL_ASSIGNED_TO_NAME' => '已指派至',
     'LBL_ID' => 'ID',
@@ -52,4 +52,4 @@ $mod_strings = array(
     'LBL_UNREAD' => '未讀取',
     'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => '有人提起過您',
     'LBL_YOU_HAVE_BEEN_MENTIONED' => '有人提及您',
-);
+];

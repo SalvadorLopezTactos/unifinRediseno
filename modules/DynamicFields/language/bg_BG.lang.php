@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Планиране на обаждане',
     'LNK_NEW_MEETING' => 'Насрочване на среща',
     'LNK_NEW_TASK' => 'Добавяне на задача',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Допълнително поле 2',
     'COLUMN_TITLE_EXT3' => 'Допълнително поле 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'Моят портал',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'URL',
     'COLUMN_TITLE_AUDIT' => 'История на промените',
     'COLUMN_TITLE_PII' => 'Лични данни',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Стойност по подразбиране:',
     'LBL_AUDITED' => 'История на промените',
     'LBL_REPORTABLE' => 'Импорт на стойности:',
-    'ERR_RESERVED_FIELD_NAME' => "Запази",
+    'ERR_RESERVED_FIELD_NAME' => 'Запази',
     'ERR_SELECT_FIELD_TYPE' => 'Моля, изберете типа на полето',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Вече съществува поле с такова име',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Името на полето трябва да съдържа само следните символи: а-яА-Я_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Край',
     'LBL_EXE_NON_SIM_MODE' => 'Изпълнение не в режим на симулация',
     'LBL_CALCULATION_VISIBLE' => 'Направете видими за изчисления',
-);
+];

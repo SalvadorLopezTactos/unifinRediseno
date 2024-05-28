@@ -13,7 +13,7 @@
 
 class ReportsSugarpdfSummary extends ReportsSugarpdfReports
 {
-    function display()
+    public function display()
     {
         global $locale;
 
@@ -36,7 +36,7 @@ class ReportsSugarpdfSummary extends ReportsSugarpdfReports
                 $shouldIncludeImage = false;
             }
             if ($sugarChart->supports_image_export && $shouldIncludeImage) {
-                $imageFile = $sugarChart->get_image_cache_file_name($xmlFile, ".".$sugarChart->image_export_type);
+                $imageFile = $sugarChart->get_image_cache_file_name($xmlFile, '.' . $sugarChart->image_export_type);
                 // check image size is not '0'
                 if (file_exists($imageFile) && getimagesize($imageFile) > 0) {
                     $this->AddPage();
@@ -64,11 +64,11 @@ class ReportsSugarpdfSummary extends ReportsSugarpdfReports
                     $leftOffset = $this->GetX() + ($pageWidth - $marginLeft - $marginRight - $imageWidth) / 2;
                     $topOffset = $this->GetY();
 
-                    $this->Image($imageFile, $leftOffset, $topOffset, $imageWidth, $imageHeight, "", "", "N", false, 300, "", false, false, 0, true);
+                    $this->Image($imageFile, $leftOffset, $topOffset, $imageWidth, $imageHeight, '', '', 'N', false, 300, '', false, false, 0, true);
 
                     if ($sugarChart->print_html_legend_pdf) {
                         $legend = $sugarChart->buildHTMLLegend($xmlFile);
-                        $this->writeHTML($legend, true, false, false, true, "");
+                        $this->writeHTML($legend, true, false, false, true, '');
                     }
                 }
             }
@@ -78,24 +78,23 @@ class ReportsSugarpdfSummary extends ReportsSugarpdfReports
         $this->AddPage();
 
         $this->bean->run_summary_query();
-        $item = array();
+        $item = [];
         $header_row = $this->bean->get_summary_header_row();
         $count = 0;
 
-        if ((is_countable($this->bean->report_def['summary_columns']) ? count($this->bean->report_def['summary_columns']) : 0) == 0) {
-            $item[$count]['']='';
+        if (safeCount($this->bean->report_def['summary_columns']) == 0) {
+            $item[$count][''] = '';
             $count++;
         }
-        if ((is_countable($this->bean->report_def['summary_columns']) ? count($this->bean->report_def['summary_columns']) : 0) > 0) {
+        if (safeCount($this->bean->report_def['summary_columns']) > 0) {
             while ($row = $this->bean->get_summary_next_row()) {
-                for ($i= 0; $i < sizeof($header_row); $i++) {
+                for ($i = 0; $i < sizeof($header_row); $i++) {
                     $label = $header_row[$i];
                     $value = '';
                     if (isset($row['cells'][$i])) {
                         $value = $row['cells'][$i];
                     }
                     $item[$count][$label] = $value;
-
                 }
                 $count++;
             }
@@ -112,15 +111,14 @@ class ReportsSugarpdfSummary extends ReportsSugarpdfReports
 
         $total_header_row = $this->bean->get_total_header_row();
         $total_row = $this->bean->get_summary_total_row();
-        $item = array();
+        $item = [];
         $count = 0;
 
-        for ($j=0; $j < sizeof($total_header_row); $j++) {
+        for ($j = 0; $j < sizeof($total_header_row); $j++) {
             $label = $total_header_row[$j];
             $item[$count][$label] = $total_row['cells'][$j];
         }
 
         $this->writeCellTable($item, $this->options);
-
     }
 }

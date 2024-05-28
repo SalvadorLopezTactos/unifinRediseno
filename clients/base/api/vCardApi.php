@@ -13,58 +13,58 @@
 /*
  * vCard API implementation
  */
+
 class vCardApi extends SugarApi
 {
-
     /**
      * This function registers the vCard api
      */
     public function registerApiRest()
     {
-        return array(
-            'vCardSave' => array(
+        return [
+            'vCardSave' => [
                 'reqType' => 'GET',
-                'path' => array('VCardDownload'),
-                'pathVars' => array(''),
+                'path' => ['VCardDownload'],
+                'pathVars' => [''],
                 'method' => 'vCardSave',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
                 'shortHelp' => 'An API to download a contact as a vCard.',
                 'longHelp' => 'include/api/help/vcarddownload_get_help.html',
-            ),
-            'vCardDownload' => array(
+            ],
+            'vCardDownload' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'vcard'),
-                'pathVars' => array('module', 'record', ''),
+                'path' => ['<module>', '?', 'vcard'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'vCardDownload',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
                 'shortHelp' => 'An API to download a contact as a vCard.',
                 'longHelp' => 'include/api/help/module_vcarddownload_get_help.html',
-            ),
-            'vCardImportPost' => array(
+            ],
+            'vCardImportPost' => [
                 'reqType' => 'POST',
-                'path' => array('<module>', 'file', 'vcard_import'),
-                'pathVars' => array('module', '', ''),
+                'path' => ['<module>', 'file', 'vcard_import'],
+                'pathVars' => ['module', '', ''],
                 'method' => 'vCardImport',
                 'rawPostContents' => true,
                 'shortHelp' => 'Imports a person record from a vcard',
                 'longHelp' => 'include/api/help/module_file_vcard_import_post_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
      * vCardSave
      *
-     * @param ServiceBase $api  ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
+     * @param ServiceBase $api ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
      * @param array $args The arguments array passed in from the API
      *
      * @return String
      */
     public function vCardSave(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('id', 'module'));
+        $this->requireArgs($args, ['id', 'module']);
         $args['record'] = $args['id'];
 
         return $this->getVcardForRecord($api, $args);
@@ -73,14 +73,14 @@ class vCardApi extends SugarApi
     /**
      * vCardDownload
      *
-     * @param ServiceBase $api  ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
+     * @param ServiceBase $api ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
      * @param array $args The arguments array passed in from the API
      *
      * @return String
      */
     public function vCardDownload(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('record', 'module'));
+        $this->requireArgs($args, ['record', 'module']);
 
         return $this->getVcardForRecord($api, $args);
     }
@@ -88,14 +88,14 @@ class vCardApi extends SugarApi
     /**
      * vCardImport
      *
-     * @param ServiceBase $api  ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
+     * @param ServiceBase $api ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
      * @param array $args The arguments array passed in from the API
      *
      * @return String
      */
     public function vCardImport(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module'));
+        $this->requireArgs($args, ['module']);
 
         $bean = BeanFactory::newBean($args['module']);
         if (!$bean->ACLAccess('save') || !$bean->ACLAccess('import')) {
@@ -104,7 +104,7 @@ class vCardApi extends SugarApi
 
         $this->checkPostRequestBody();
 
-        if (isset($_FILES) && count($_FILES) === 1) {
+        if (isset($_FILES) && safeCount($_FILES) === 1) {
             $first_key = array_key_first($_FILES);
             if (isset($_FILES[$first_key]['tmp_name'])
                 && $this->isUploadedFile($_FILES[$first_key]['tmp_name'])
@@ -118,7 +118,7 @@ class vCardApi extends SugarApi
                     throw new SugarApiExceptionRequestMethodFailure('ERR_VCARD_FILE_PARSE');
                 }
 
-                $results = array($first_key => $recordId);
+                $results = [$first_key => $recordId];
 
                 return $results;
             }
@@ -140,7 +140,7 @@ class vCardApi extends SugarApi
     /**
      * Retrieves the generated vcard for a record
      *
-     * @param ServiceBase $api  ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
+     * @param ServiceBase $api ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
      * @param array $args The arguments array passed in from the API
      *
      * @return String

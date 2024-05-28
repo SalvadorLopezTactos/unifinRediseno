@@ -11,7 +11,6 @@
  */
 
 
-
 /**
  * <b>isNumeric(String string)</b><br/>
  * Returns true if <i>string</i> contains only digits, <br/>
@@ -59,7 +58,7 @@ JS;
      */
     public static function getParameterTypes()
     {
-        return array("string");
+        return ['string'];
     }
 
     /**
@@ -76,7 +75,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return "isNumeric";
+        return 'isNumeric';
     }
 
     /**

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Karıştırılmış Dosyalar',
     'LBL_MODULE_NAME_SINGULAR' => 'Karıştırılmış Dosya',
     'LBL_MODULE_TITLE' => 'Karıştırılmış Dosya',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => 'Dosya İsmi',
     'LBL_FILENAME' => 'Dosya İsmi',
     'LBL_UPLOAD_ONLY_IMAGE' => 'Seçilen dosya bir resim olmalıdır.',
-);
+];

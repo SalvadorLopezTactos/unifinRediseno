@@ -13,36 +13,38 @@
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Symfony\Component\Validator\Constraints as AssertBasic;
 
-class TeamsController extends SugarController {
-
-	public function action_DisplayInlineTeams(){
-		$this->view = 'ajax';
-		$body = '';
+class TeamsController extends SugarController
+{
+    public function action_DisplayInlineTeams()
+    {
+        $this->view = 'ajax';
+        $body = '';
         $primary_team_id = $_REQUEST['team_id'] ?? '';
-		$caption = '';
-		if(!empty($_REQUEST['team_set_id'])){
-			require_once('modules/Teams/TeamSetManager.php');
-			$teams = TeamSetManager::getTeamsFromSet($_REQUEST['team_set_id']);
+        $caption = '';
+        if (!empty($_REQUEST['team_set_id'])) {
+            require_once 'modules/Teams/TeamSetManager.php';
+            $teams = TeamSetManager::getTeamsFromSet($_REQUEST['team_set_id']);
 
-			foreach($teams as $row){
-				if($row['id'] == $primary_team_id) {
-				   $body = $row['display_name'] . '*<br/>' . $body;
-				} else {
-				   $body .= $row['display_name'].'<br/>';
-				}
-			}
-		}
-		global $theme;
-		$json = getJSONobj();
-		$retArray = array();
+            foreach ($teams as $row) {
+                if ($row['id'] == $primary_team_id) {
+                    $body = $row['display_name'] . '*<br/>' . $body;
+                } else {
+                    $body .= $row['display_name'] . '<br/>';
+                }
+            }
+        }
+        global $theme;
+        $json = getJSONobj();
+        $retArray = [];
 
-		$retArray['body'] = $body;
-		$retArray['caption'] = $caption;
-	    $retArray['width'] = '100';
-	    $retArray['theme'] = $theme;
-	    header("Content-Type: application/json");
-	    echo $json->encode($retArray);
-	}
+        $retArray['body'] = $body;
+        $retArray['caption'] = $caption;
+        $retArray['width'] = '100';
+        $retArray['theme'] = $theme;
+        header('Content-Type: application/json');
+        echo $json->encode($retArray);
+    }
+
     /**
      * This method handles the saving team-based access configuration.
      */
@@ -50,11 +52,11 @@ class TeamsController extends SugarController {
     {
         if ($GLOBALS['current_user']->isAdminForModule('Users')) {
             $request = InputValidation::getService();
-            $validators = array(
-                'Assert\Choice' => array(
-                    'choices' => ['true', 'false']
-                )
-            );
+            $validators = [
+                'Assert\Choice' => [
+                    'choices' => ['true', 'false'],
+                ],
+            ];
 
             $tbaConfigurator = new TeamBasedACLConfigurator();
 
@@ -62,12 +64,12 @@ class TeamsController extends SugarController {
 
             // if enabled or become enabled do usual job
             if ($enabled) {
-                $validators = array(
-                    'Assert\Delimited' => array(
-                        new AssertBasic\Type(array('type' => 'string')),
-                    ),
-                );
-                $enabledModules = $request->getValidInputPost('enabled_modules', $validators, array());
+                $validators = [
+                    'Assert\Delimited' => [
+                        new AssertBasic\Type(['type' => 'string']),
+                    ],
+                ];
+                $enabledModules = $request->getValidInputPost('enabled_modules', $validators, []);
 
                 $tbaConfigurator->setGlobal($enabled);
 
@@ -92,15 +94,15 @@ class TeamsController extends SugarController {
                 $tbaConfigurator->setGlobal(false);
 
                 // clear ALL TBA data
-                $tbaConfigurator->removeTBAValuesFromAllTables(array());
+                $tbaConfigurator->removeTBAValuesFromAllTables([]);
             }
 
-            echo json_encode(array('status' => true));
+            echo json_encode(['status' => true]);
         } else {
-            echo json_encode(array(
+            echo json_encode([
                 'status' => false,
-                'message' => $GLOBALS['app_strings']['EXCEPTION_NOT_AUTHORIZED']
-            ));
+                'message' => $GLOBALS['app_strings']['EXCEPTION_NOT_AUTHORIZED'],
+            ]);
         }
     }
 }

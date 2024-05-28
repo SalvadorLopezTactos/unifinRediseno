@@ -23,21 +23,21 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
     //@codingStandardsIgnoreStart
     public $_history;
     //@codingStandardsIgnoreEnd
-    protected $pathMap = array(
+    protected $pathMap = [
         MB_BASEMETADATALOCATION => '',
         MB_CUSTOMMETADATALOCATION => 'custom/',
         MB_WORKINGMETADATALOCATION => 'custom/working/',
-        MB_HISTORYMETADATALOCATION => 'custom/history/'
-    );
-    protected $fileName = "modules/Leads/clients/base/layouts/convert-main/convert-main.php";
+        MB_HISTORYMETADATALOCATION => 'custom/history/',
+    ];
+    protected $fileName = 'modules/Leads/clients/base/layouts/convert-main/convert-main.php';
     protected $_convertdefs; //lead convert metadata pulled out for convenience
-    protected $defaultModuleDefSettings = array(
+    protected $defaultModuleDefSettings = [
         'required' => false,
         'copyData' => false,
         'duplicateCheckOnStart' => false,
-    );
+    ];
 
-    protected $excludedModules = array(
+    protected $excludedModules = [
         'Activities',
         'Products',
         'ProductTemplates',
@@ -49,24 +49,24 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
         'pmse_Inbox',
         'pmse_Project',
         'RevenueLineItems',
-    );
+    ];
 
     //fields that should be hidden in the create layout
-    protected $excludedFields = array(
-        'Calls' => array(
+    protected $excludedFields = [
+        'Calls' => [
             'repeat_type' => 'Calls',
-        ),
-        'Meetings' => array(
+        ],
+        'Meetings' => [
             'repeat_type' => 'Meetings',
-        ),
-    );
+        ],
+    ];
 
     public function __construct($module)
     {
-        $this->FILLER = array(
+        $this->FILLER = [
             'name' => MBConstants::$FILLER['name'],
-            'label' => translate(MBConstants::$FILLER['label'])
-        );
+            'label' => translate(MBConstants::$FILLER['label']),
+        ];
         $this->seed = BeanFactory::newBean($module);
         $this->_moduleName = $module;
         $this->_view = MB_EDITVIEW;
@@ -77,15 +77,15 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
 
     public function getOriginalViewDefs()
     {
-        $viewdefs = array();
+        $viewdefs = [];
         //load from the original file only
-        include($this->fileName);
+        include $this->fileName;
         return $viewdefs;
     }
 
     public function getLanguage()
     {
-        return "";
+        return '';
     }
 
     public function getHistory()
@@ -127,7 +127,7 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
      */
     public function mergeConvertDefs($data, $includeDefaults = false)
     {
-        $includedModules = array();
+        $includedModules = [];
         foreach ($data as $newDef) {
             if (!empty($newDef['module'])) {
                 $includedModules[] = $newDef['module'];
@@ -135,7 +135,7 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
         }
 
         //Create the new convertdefs, replacing any properties in the modules with the ones from the request
-        $final = array();
+        $final = [];
         foreach ($data as $newDef) {
             if (empty($newDef['module'])) {
                 continue;
@@ -176,9 +176,9 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
         $defaultDef = $this->getDefaultDefForModule($def['module']);
 
         if (isset($defaultDef['dependentModules'])) {
-            $dependentModules = array();
+            $dependentModules = [];
             foreach ($defaultDef['dependentModules'] as $module => $value) {
-                if (in_array($module, $includedModules)) {
+                if (safeInArray($module, $includedModules)) {
                     $dependentModules[$module] = $value;
                 }
             }
@@ -206,13 +206,13 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
      */
     public function removeLayout($module)
     {
-        $moduleDefs = array();
-        $newModuleDefs = array();
+        $moduleDefs = [];
+        $newModuleDefs = [];
         if (isset($this->_convertdefs['modules'])) {
             $moduleDefs = $this->_convertdefs['modules'];
         }
 
-        foreach($moduleDefs as $moduleDef) {
+        foreach ($moduleDefs as $moduleDef) {
             if ($moduleDef['module'] !== $module) {
                 $newModuleDefs[] = $moduleDef;
             }
@@ -235,7 +235,7 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
         }
 
         $filename = $this->pathMap[MB_CUSTOMMETADATALOCATION] . $this->fileName;
-        $GLOBALS['log']->debug(get_class($this) . "->deploy(): writing to " . $filename);
+        $GLOBALS['log']->debug(get_class($this) . '->deploy(): writing to ' . $filename);
         $this->setConvertDef($this->_convertdefs);
         $this->_saveToFile($filename, $this->_viewdefs);
     }
@@ -251,7 +251,7 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
         mkdir_recursive(dirname($filename));
         // create the new metadata file contents, and write it out
         if (!write_array_to_file('viewdefs', $defs, $filename)) {
-            $GLOBALS ['log']->fatal(get_class($this) . ": could not write new viewdef file " . $filename);
+            $GLOBALS ['log']->fatal(get_class($this) . ': could not write new viewdef file ' . $filename);
         }
     }
 
@@ -260,9 +260,9 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
      */
     protected function loadViewDefs()
     {
-        $viewdefs = array();
+        $viewdefs = [];
         $viewDefFile = SugarAutoLoader::existingCustomOne($this->fileName);
-        include($viewDefFile);
+        include $viewDefFile;
         $this->_viewdefs = $viewdefs;
         $this->_convertdefs = $this->getConvertDef($this->_viewdefs);
     }
@@ -285,7 +285,7 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
             $convertDefs = $this->_convertdefs;
         }
         $moduleDef = false;
-        foreach($convertDefs['modules'] as $def) {
+        foreach ($convertDefs['modules'] as $def) {
             if ($def['module'] === $module) {
                 $moduleDef = $def;
             }
@@ -349,7 +349,7 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
         }
 
         // use default def
-        $defaultModuleDef = array_merge(array('module' => $module), $this->defaultModuleDefSettings);
+        $defaultModuleDef = array_merge(['module' => $module], $this->defaultModuleDefSettings);
 
         // if duplicate check is enabled for a module that is not already in the original viewdef
         // set the module to run duplicate check on start
@@ -408,7 +408,7 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
         if (isset($viewdefs['Leads']['base']['layout']['convert-main'])) {
             return $viewdefs['Leads']['base']['layout']['convert-main'];
         } else {
-            return array();
+            return [];
         }
     }
 
@@ -443,14 +443,14 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
      */
     public function getHiddenFields($module, $defaultDef, $includedModules)
     {
-        $hiddenFields = array();
+        $hiddenFields = [];
 
         $excludeFields = $this->getExcludedFields($module);
-        $hiddenFieldsDef = $defaultDef['hiddenFields'] ?? array();
+        $hiddenFieldsDef = $defaultDef['hiddenFields'] ?? [];
         $hiddenFieldsDef = array_merge($hiddenFieldsDef, $excludeFields);
 
         foreach ($hiddenFieldsDef as $fieldName => $module) {
-            if (in_array($module, $includedModules)) {
+            if (safeInArray($module, $includedModules)) {
                 $hiddenFields[$fieldName] = $module;
             }
         }
@@ -464,7 +464,8 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
      *
      * @return array
      */
-    public function getExcludedFields($module) {
-        return $this->excludedFields[$module] ?? array();
+    public function getExcludedFields($module)
+    {
+        return $this->excludedFields[$module] ?? [];
     }
 }

@@ -31,7 +31,7 @@ trait ConfigurationAwareTrait
      *
      * @return void
      */
-    public function setConfiguration(ConfigurationInterface $config) : void
+    public function setConfiguration(ConfigurationInterface $config): void
     {
         $this->config = $config;
     }
@@ -41,7 +41,7 @@ trait ConfigurationAwareTrait
      *
      * @return ConfigurationInterface
      */
-    public function getConfiguration() : ConfigurationInterface
+    public function getConfiguration(): ConfigurationInterface
     {
         return $this->config;
     }

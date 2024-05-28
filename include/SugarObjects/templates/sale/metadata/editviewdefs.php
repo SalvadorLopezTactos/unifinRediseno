@@ -18,44 +18,44 @@
 
 $module_name = '<module_name>';
 $_object_name = '<_object_name>';
-$viewdefs[$module_name]['EditView'] = array(
-    'templateMeta' => array('maxColumns' => '2',
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'),
-                                            array('label' => '10', 'field' => '30')
-                                            ),
-    'javascript' => '{$PROBABILITY_SCRIPT}',
-),
- 'panels' =>array (
-  'lbl_sale_information' =>array (
-    array(
-		'name',
-		'currency_id',
-	),
-    array(
-        $_object_name.'_type', 
-        'amount',
-    ),
-    array ('lead_source', 'date_closed'),
-    array (
-    	array('name'=>'team_name','displayParams'=>array('required'=>true)),
-        'sales_stage',
-    ),
+$viewdefs[$module_name]['EditView'] = [
+    'templateMeta' => ['maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+        'javascript' => '{$PROBABILITY_SCRIPT}',
+    ],
+    'panels' => [
+        'lbl_sale_information' => [
+            [
+                'name',
+                'currency_id',
+            ],
+            [
+                $_object_name . '_type',
+                'amount',
+            ],
+            ['lead_source', 'date_closed'],
+            [
+                ['name' => 'team_name', 'displayParams' => ['required' => true]],
+                'sales_stage',
+            ],
 
-    array (
-      array('name'=>'assigned_user_name','displayParams'=>array('required'=>true)),
-      'next_step',
-    ),
-    array (
-      'probability',
-      ''
-    ),
+            [
+                ['name' => 'assigned_user_name', 'displayParams' => ['required' => true]],
+                'next_step',
+            ],
+            [
+                'probability',
+                '',
+            ],
 
-       array (
-      'description'
-    ),
-  ),
-)
+            [
+                'description',
+            ],
+        ],
+    ],
 
 
-);
+];

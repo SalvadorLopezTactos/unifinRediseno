@@ -129,13 +129,13 @@
             tmpLeftEllipsesObject = {
                 isIcon: true,
                 listClass: 'pagination-li',
-                subListClass: 'left-ellipsis-icon fa fa-ellipsis-h'
+                subListClass: 'left-ellipsis-icon sicon sicon-ellipsis'
             };
 
             tmpRightEllipsesObject = {
                 isIcon: true,
                 listClass: 'pagination-li',
-                subListClass: 'right-ellipsis-icon fa fa-ellipsis-h'
+                subListClass: 'right-ellipsis-icon sicon sicon-ellipsis'
             };
 
             // push details for each list item in the pagination

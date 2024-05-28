@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-    'LBL_SOURCE_ID'   => 'Ταυτότητα εξωτερικής πηγής',
+$mod_strings = [
+    'LBL_SOURCE_ID' => 'Ταυτότητα εξωτερικής πηγής',
     'LBL_SOURCE_TYPE' => 'Εξωτερική πηγή',
     'LBL_SOURCE_META' => 'Μεταδεδομένα εξωτερικής πηγής',
-);
+];

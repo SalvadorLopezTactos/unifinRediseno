@@ -10,120 +10,117 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['DataSets']['EditView'] = array(
-    'templateMeta' => array('maxColumns' => '2',
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'),
-                                            array('label' => '10', 'field' => '30')
-                                            ),
-    ),
- 'panels' =>array (
-  'default' =>
-  array (
+$viewdefs['DataSets']['EditView'] = [
+    'templateMeta' => ['maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        'default' => [
 
-    array (
-      'name',
+            [
+                'name',
 
-      array (
-        'name' => 'report_name',
-        'customCode' => '<a href="index.php?module=ReportMaker&action=detailview&record={$fields.report_id.value}">{$fields.report_name.value}</a>&nbsp;',
-      ),
-    ),
+                [
+                    'name' => 'report_name',
+                    'customCode' => '<a href="index.php?module=ReportMaker&action=detailview&record={$fields.report_id.value}">{$fields.report_name.value}</a>&nbsp;',
+                ],
+            ],
 
-    array (
-      'query_name',
+            [
+                'query_name',
 
-      array (
-        'name' => 'child_name',
-        'customCode' => '{if isset($bean->child_id) && !empty($bean->child_id)}
+                [
+                    'name' => 'child_name',
+                    'customCode' => '{if isset($bean->child_id) && !empty($bean->child_id)}
 						 <a href="index.php?module=DataSets&action=DetailView&record={$bean->child_id}">{$bean->child_name}</a>
 						 {else}
 						 {$bean->child_name}
-						 {/if}'
-      ),
-    ),
+						 {/if}',
+                ],
+            ],
 
-    array (
-      array('name'=>'parent_name',
-            'displayParams'=>array('initial_filter'=>'&form=EditView&self_id={$fields.id.value}'),
-            ),
-      'team_name',
-    ),
+            [
+                ['name' => 'parent_name',
+                    'displayParams' => ['initial_filter' => '&form=EditView&self_id={$fields.id.value}'],
+                ],
+                'team_name',
+            ],
 
-    array (
+            [
 
-      array (
-        'name' => 'description',
-      ),
-    ),
+                [
+                    'name' => 'description',
+                ],
+            ],
 
-    array (
+            [
 
-      array (
-        'name' => 'table_width',
-        'fields' =>
-        array (
-          array('name'=>'table_width', 'displayParams'=>array('size'=>3, 'maxlength'=>3)),
-          array('name'=>'table_width_type')
-        ),
-      ),
+                [
+                    'name' => 'table_width',
+                    'fields' => [
+                        ['name' => 'table_width', 'displayParams' => ['size' => 3, 'maxlength' => 3]],
+                        ['name' => 'table_width_type'],
+                    ],
+                ],
 
-      'font_size',
-    ),
+                'font_size',
+            ],
 
-    array (
-      array('name'=>'exportable',
-			'customCode'=>'{if $fields.exportable.value == "1" or $fields.header.value == "on"}
+            [
+                ['name' => 'exportable',
+                    'customCode' => '{if $fields.exportable.value == "1" or $fields.header.value == "on"}
 						 {assign var="checked" value="CHECKED"}
 						 {else}
 						 {assign var="checked" value=""}
 						 {/if}
 						 <input type="hidden" name="exportable" value="0">
-						 <input type="checkbox" id="exportable" name="exportable" value="1" tabindex="{$tabindex}" {$checked}>'),
-      'header_text_color',
-    ),
+						 <input type="checkbox" id="exportable" name="exportable" value="1" tabindex="{$tabindex}" {$checked}>',],
+                'header_text_color',
+            ],
 
-    array (
-      array('name'=>'header',
-			'customCode'=>'{if $fields.header.value == "1" or $fields.header.value == "on"}
+            [
+                ['name' => 'header',
+                    'customCode' => '{if $fields.header.value == "1" or $fields.header.value == "on"}
 						 {assign var="checked" value="CHECKED"}
 						 {else}
 						 {assign var="checked" value=""}
 						 {/if}
 						 <input type="hidden" name="header" value="0">
-						 <input type="checkbox" id="header" name="header" value="1" tabindex="{$tabindex}" {$checked}>'),
+						 <input type="checkbox" id="header" name="header" value="1" tabindex="{$tabindex}" {$checked}>',],
 
-      'body_text_color',
-    ),
+                'body_text_color',
+            ],
 
-    array (
-      array('name'=>'prespace_y',
-			'customCode'=>'{if $fields.prespace_y.value == "1" or $fields.header.value == "on"}
+            [
+                ['name' => 'prespace_y',
+                    'customCode' => '{if $fields.prespace_y.value == "1" or $fields.header.value == "on"}
 						 {assign var="checked" value="CHECKED"}
 						 {else}
 						 {assign var="checked" value=""}
 						 {/if}
 						 <input type="hidden" name="prespace_y" value="0">
-						 <input type="checkbox" id="prespace_y" name="prespace_y" value="1" tabindex="{$tabindex}" {$checked}>'),
+						 <input type="checkbox" id="prespace_y" name="prespace_y" value="1" tabindex="{$tabindex}" {$checked}>',],
 
-      'header_back_color',
-    ),
+                'header_back_color',
+            ],
 
-    array (
-      array('name'=>'use_prev_header',
-			'customCode'=>'{if $fields.use_prev_header.value == "1" or $fields.header.value == "on"}
+            [
+                ['name' => 'use_prev_header',
+                    'customCode' => '{if $fields.use_prev_header.value == "1" or $fields.header.value == "on"}
 						 {assign var="checked" value="CHECKED"}
 						 {else}
 						 {assign var="checked" value=""}
 						 {/if}
 						 <input type="hidden" name="use_prev_header" value="0">
-						 <input type="checkbox" id="use_prev_header" name="use_prev_header" value="1" tabindex="{$tabindex}" {$checked}>'),
+						 <input type="checkbox" id="use_prev_header" name="use_prev_header" value="1" tabindex="{$tabindex}" {$checked}>',],
 
-      'body_back_color',
-    ),
-  ),
-)
+                'body_back_color',
+            ],
+        ],
+    ],
 
 
-);
-?>
+];

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Záznam volania',
     'LNK_NEW_MEETING' => 'Harmonogram rokovaní',
     'LNK_NEW_TASK' => 'Vytvoriť úlohu',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Extra Meta  poľa 2',
     'COLUMN_TITLE_EXT3' => 'Extra Meta poľa3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'IFrame výška',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'Prednastavené URL',
     'COLUMN_TITLE_AUDIT' => 'Audit',
     'COLUMN_TITLE_PII' => 'Osobné údaje',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Prednastavená hodnota:',
     'LBL_AUDITED' => 'Overený',
     'LBL_REPORTABLE' => 'Podliehajúci oznámeniu',
-    'ERR_RESERVED_FIELD_NAME' => "Rezervované kľúčové slovo",
+    'ERR_RESERVED_FIELD_NAME' => 'Rezervované kľúčové slovo',
     'ERR_SELECT_FIELD_TYPE' => 'Prosím, vyberte typ poľa',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Názov poľa už existuje',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Field name should contain only the following characters: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Dokončené',
     'LBL_EXE_NON_SIM_MODE' => 'Vykonať nesimulačný režim',
     'LBL_CALCULATION_VISIBLE' => 'Zviditeľniť na výpočty',
-);
+];

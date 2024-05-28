@@ -21,6 +21,8 @@
  * @extends View.Fields.Base.DateField
  */
 ({
+    plugins: ['RecurringEvents'],
+
     extendsFrom: 'DateField',
 
     /**

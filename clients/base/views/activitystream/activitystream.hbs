@@ -11,7 +11,7 @@
  */
 --}}
 {{#eq model.attributes.activity_type "post"}}
-    <a href="#{{buildRoute module="Employees" id=model.attributes.created_by}}" id="avatar-post-{{model.attributes.id}}" class="pull-left avatar avatar-md" rel="tooltip" data-title="{{model.attributes.created_by_name}}" data-placement="right">
+    <a href="#{{buildRoute module="Employees" id=model.attributes.created_by}}" id="avatar-post-{{model.attributes.id}}" class="pull-left avatar avatar-md" rel="tooltip" data-title="{{model.attributes.created_by_name}}" data-bs-placement="right">
         {{#if model.attributes.picture_url}}
             <img src="{{model.attributes.picture_url}}" alt="{{model.attributes.created_by_name}}">
         {{else}}
@@ -20,7 +20,7 @@
     </a>
 {{else}}
     {{#with model.attributes}}
-        {{moduleLabel display_parent_type 'lg' class='pull-left' rel="tooltip" data-placement="right" title=(moduleIconToolTip display_parent_type)}}
+        {{moduleLabel display_parent_type 'lg' class='pull-left' rel="tooltip" data-bs-placement="right" title=(moduleIconToolTip display_parent_type)}}
     {{/with}}
 {{/eq}}
 <p>

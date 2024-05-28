@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Quadre de comandament del llistat d&#39;oportunitats',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Quadre de comandament del registre d&#39;oportunitats',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Pressupostos',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Oportunitats per compte dinàmic',
+    'LBL_TOP_10_OPP' => 'Les 10 millors oportunitats obertes',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Dashlet: Les meves oportunitats actives',
+    'LBL_MY_ACTIVE_OPP' => 'Les meves oportunitats actives',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Pipeline tota és',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Rol d&#39;oportunitat',
+    'LBL_OPPORTUNITY_ROLE' => 'Rol d&#39;oportunitat',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notes',
     'LBL_TAB_OPPORTUNITY' => 'Revisió de {{module}}',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'Si feu clic a Confirma, suprimireu TOTES les dates de previsió i canviareu la vista d&#39;oportunitats. Si açò no és el que volíeu, feu clic a cancel·la per tornar a la configuració anterior.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'En fer clic a Confirmar eliminareu TOTES les dades de les previsions i canviareu la visualització d&#39;oportunitats. '
-        .'També es desactivaran TOTES les definicions de procés amb un mòdul de destinació d&#39;elements de línia d&#39;ingressos. '
-        .'Si no ho voleu fer, feu clic a cancel·la per tornar a la configuració anterior.',
+        . 'També es desactivaran TOTES les definicions de procés amb un mòdul de destinació d&#39;elements de línia d&#39;ingressos. '
+        . 'Si no ho voleu fer, feu clic a cancel·la per tornar a la configuració anterior.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Si tots els elements de línies d&#39;ingressos estan tancats i al menys un s&#39;ha guanyat,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'la fase de vendes d&#39;oportunitats es configura com "Tancat guanyat".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Si tots els elements de la línia d&#39;ingressos estan a la fase de venda "Tancat perdut",',
@@ -220,25 +223,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Després d&#39;iniciar aquest canvi, es crearan els registres dels elements de línies d&#39;ingressos en segon terme per a cada {{module_name}} existent. Quan els elements de línia d&#39;ingressos estiguin complets  i disponibles, s&#39;enviarà una notificació a l&#39;adreça de correu electrònic del seu perfil. Si la instància s&#39;ha configurat per {{forecasts_module}}, Sugar també us enviarà una notificació quan els registres del {{module_name}} se sincronitzen amb el mòdul {{forecasts_module}} i estan disponibles per al nou {{forecasts_module}}. Teniu en compte que la instància s&#39;ha de configurar per enviar correus electrònics a Administració > Configuració de correu electrònic perquè s&#39;enviïn les notificacions.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'El mòdul {{plural_module_name}} vos permet fer un seguiment de les vendes individuals de principi a fi. Cada registre {{module_name}} representa una venda prospectiva i inclou dades rellevants de venda, així com relatives a altres registres importants com {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} normalment progressarà a través de diverses etapes de vendes fins que es marqui com a "Guanyat tancat" o "Tancat perdut". {{plural_module_name}} es pot aprofitar encara més mitjançant l&#39;ús del mòdul de {{forecasts_singular_module}}de Sugar per entendre i predir les tendències de vendes, així com centrar el treball per aconseguir quotes de vendes.',
+    'LBL_HELP_RECORDS' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de les vendes individuals de principi a fi. Cada {{module_name}} registre representa una venda prospectiva i inclou dades de venda rellevants, així com relatives a altres registres importants com {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} normalment progressarà a través de diverses etapes de vendes fins que es marqui com a "Tancat guanyat" o "Tancat perdut". {{plural_module_name}} es pot aprofitar encara més mitjançant l&#39;ús del mòdul {{forecasts_singular_module}}de Sugar per entendre i predir les tendències de vendes, així com enfocar el treball per aconseguir quotes de vendes.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de les vendes individuals i dels elements de línia que pertanyen a aquestes vendes de principi a fi. Cada registre de {{module_name}} representa una possible venda i inclou les dades de venda corresponents, així com les relacionades amb altres registres importants, com ara {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de les vendes individuals i dels articles de línia pertanyents a aquestes vendes de principi a fi. Cada registre {{module_name}} representa una venda prospectiva i inclou dades de venda rellevants, així com relatives a altres registres importants com {{quotes_module}}, {{contacts_module}}, etc.
 
-- Editeu els camps d&#39;aquest registre fent clic a un camp individual o amb el botó Edita.
-- Vegeu o modifiqueu enllaços a altres registres als subpanells mitjançant la commutació de la subfinestra inferior esquerra a la "Vista de dades".
-- Feu i vegeu comentaris d&#39;usuari i l&#39;historial de canvis del registre al {{activitystream_singular_module}} mitjançant la commutació de la subfinestra inferior esquerra a la "Seqüència d&#39;activitats".
-- Feu el seguiment d&#39;aquest registre o marqueu-lo com a favorit amb les icones que hi ha a la dreta del nom del registre.
-- Hi ha accions addicionals disponibles al menú desplegable d&#39;accions a la dreta del botó Edita.',
+- Editeu els camps d&#39;aquest registre fent clic a un camp individual o al botó Edita.
+- Vegeu o modifiqueu enllaços a altres registres en els subpanells arrossegant el panell inferior esquerre a "Vista de dades".
+- Feu i vegeu els comentaris dels usuaris i registreu l&#39;historial de canvis a la {{activitystream_singular_module}} alternant el panell inferior esquerre a "Seqüència d&#39;activitat".
+- Seguiu o marqueu com a favorit aquest registre mitjançant les icones a la dreta del nom del registre.
+- Les accions addicionals estan disponibles al menú desplegable Accions a la dreta del botó Editeu.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'El mòdul de {{plural_module_name}} vos permet fer un seguiment de les vendes individuals i dels articles de línia pertanyents a aquestes vendes de principi a fi. Cada registre {{module_name}} representa una venda prospectiva i inclou dades de venda rellevants, així com relatives a altres registres importants com {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de les vendes individuals i dels articles de línia pertanyents a aquestes vendes de principi a fi. Cada registre {{module_name}} representa una venda prospectiva i inclou dades de venda rellevants, així com relatives a altres registres importants com {{quotes_module}}, {{contacts_module}}, etc.
 
-Crear un {{module_name}}:
+Per crear un {{module_name}}:
 1. Proporcioneu valors per als camps com vulgueu.
- - Els camps marcats com a "Obligatoris" s&#39;han d&#39;emplenar abans de desar-los.
- - Feu clic a "Mostra més" per exposar camps addicionals si cal.
-2. Feu clic a "Desa" per finalitzar el nou registre i tornar a la pàgina anterior.',
+ - Els camps marcats amb "Obligatori" s&#39;han d&#39;emplenar abans de desar-los.
+ - Feu clic a "Mostra&#39;n més" per exposar camps addicionals si cal.
+2. Premeu "Guardar" per finalitzar el nou registre i tornar a la pàgina anterior.',
 
 // END ENT/ULT
 
@@ -260,4 +263,9 @@ Crear un {{module_name}}:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Predicció de tancament d&#39;oportunitats',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Visualitza els detalls de predicció per a una Oportunitat específica',
-);
+    'LBL_AI_WINRATE' => 'Percentatge de beneficis',
+    'LBL_AI_WONOPP' => 'Oportunitats guanyades',
+    'LBL_AI_CLOSINGTIME' => 'Hora de tancament',
+    'LBL_AI_CLOSEDOPP' => 'Oportunitats tancades',
+    'LBL_AI_LEADTIMESPAN' => 'Temps entre la creació d&#39;oportunitats i el guany tancat',
+];

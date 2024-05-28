@@ -52,10 +52,7 @@
         }
 
         // Check if the email1 field was made required, if-so copy that property to the dynamic field.
-        if (options.model &&
-            options.model.fields &&
-            options.model.fields.email1 &&
-            options.model.fields.email1.required) {
+        if (_.isUndefined(options.def.required) && _.get(options, ['model', 'fields', 'email1', 'required'])) {
             options.def.required = options.model.fields.email1.required;
         }
 
@@ -264,12 +261,12 @@
             $properties = this.$('[data-emailproperty='+property+']'),
             index = $properties.index($property);
 
-        if (property === 'primary_address') {
+        if (['primary_address', 'reply_to_address'].includes(property)) {
             $properties.removeClass('active').attr('aria-pressed', false);
         }
         $property.attr('aria-pressed', !$property.hasClass('active'));
 
-        this._toggleExistingAddressPropertyInModel(index, property);
+        this._toggleExistingAddressPropertyInModel(index, property, evt);
     },
 
     /**
@@ -319,14 +316,16 @@
      * Toggle email address properties: primary, opt-out, and invalid.
      * @param {Number} index
      * @param {String} property
+     * @param {Event} evt
      * @private
      */
-    _toggleExistingAddressPropertyInModel: function(index, property) {
+    _toggleExistingAddressPropertyInModel: function(index, property, evt) {
         var existingAddresses = app.utils.deepCopy(this.model.get(this.name));
 
-        //If property is primary_address, we want to make sure one and only one primary email is set
-        //As a consequence we reset all the primary_address properties to 0 then we toggle property for this index.
-        if (property === 'primary_address') {
+        // If property is primary_address or reply_to_address, we want to make
+        // sure one and only one is set. As a consequence we reset all the
+        // properties to 0 then we toggle property for this index.
+        if (['primary_address', 'reply_to_address'].includes(property)) {
             existingAddresses[index][property] = false;
             _.each(existingAddresses, function(email, i) {
                 if (email[property]) {
@@ -338,8 +337,10 @@
         // Toggle property for this email
         if (existingAddresses[index][property]) {
             existingAddresses[index][property] = false;
+            evt.currentTarget.classList.remove('active');
         } else {
             existingAddresses[index][property] = true;
+            evt.currentTarget.classList.add('active');
         }
 
         this.model.set(this.name, existingAddresses);

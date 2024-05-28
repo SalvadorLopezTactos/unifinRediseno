@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $vardefs = [
-    'fields'=> [
+    'fields' => [
         'first_response_target_datetime' => [
             'name' => 'first_response_target_datetime',
             'vname' => 'LBL_FIRST_RESPONSE_TARGET_DATETIME',
@@ -86,12 +86,12 @@ $vardefs = [
         ],
         'first_response_user_name' => [
             'name' => 'first_response_user_name',
-            'link'=>'first_response_user_link' ,
+            'link' => 'first_response_user_link',
             'vname' => 'LBL_FIRST_RESPONSE_USER_NAME',
             'rname' => 'full_name',
             'type' => 'relate',
             'reportable' => true,
-            'source'=>'non-db',
+            'source' => 'non-db',
             'table' => 'users',
             'id_name' => 'first_response_user_id',
             'module' => 'Users',
@@ -100,11 +100,11 @@ $vardefs = [
             'related_fields' => [
                 'first_response_user_id',
             ],
-         ],
+        ],
         'first_response_user_link' => [
             'name' => 'first_response_user_link',
             'type' => 'link',
-            'relationship' => strtolower($module).'_first_response_user',
+            'relationship' => strtolower($module) . '_first_response_user',
             'vname' => 'LBL_FIRST_RESPONSE_USER',
             'link_type' => 'one',
             'module' => 'Users',

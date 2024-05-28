@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'لوحة معلومات قائمة البنود المشتراة',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'لوحة معلومات سجل البنود المشتراة',
     'LBL_PARENT_PURCHASE' => 'عملية الشراء الأصلية',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني للبند المشترى',
 ];

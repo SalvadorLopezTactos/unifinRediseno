@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,20 +10,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class OpportunitiesApi extends ModuleApi
 {
     public function registerApiRest()
     {
-        return array(
-            'update' => array(
+        return [
+            'update' => [
                 'reqType' => 'PUT',
-                'path' => array('Opportunities', '?'),
-                'pathVars' => array('module', 'record'),
+                'path' => ['Opportunities', '?'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'updateRecord',
                 'shortHelp' => 'This method updates a record of the specified type',
                 'longHelp' => 'include/api/help/module_record_put_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -32,7 +34,7 @@ class OpportunitiesApi extends ModuleApi
      */
     public function updateRecord(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args,array('module','record'));
+        $this->requireArgs($args, ['module', 'record']);
 
         if (Opportunity::usingRevenueLineItems() && !$this->isValidServiceStartDate($api, $args)) {
             throw new SugarApiExceptionInvalidParameter(
@@ -45,7 +47,7 @@ class OpportunitiesApi extends ModuleApi
         // Check for any values that need to be cascaded down to related RLIs
         $settings = Opportunity::getSettings();
         if ($settings['opps_view_by'] === 'RevenueLineItems') {
-            $data = array();
+            $data = [];
             $bean = $this->loadBean($api, $args, 'save');
 
             if (!empty($args['commit_stage']) && $bean->commit_stage !== $args['commit_stage']) {
@@ -68,6 +70,7 @@ class OpportunitiesApi extends ModuleApi
         return $this->getLoadedAndFormattedBean($api, $args);
     }
 
+
     /**
      * Rolls up data to all RLIs that are not won/lost.
      *
@@ -82,7 +85,7 @@ class OpportunitiesApi extends ModuleApi
             $rlis = $bean->revenuelineitems->getBeans();
             foreach ($rlis as $rli) {
                 $hasChanged = false;
-                if (in_array($rli->sales_stage, $bean->getClosedStages())) {
+                if (safeInArray($rli->sales_stage, $bean->getClosedStages())) {
                     continue;
                 }
                 foreach ($data as $fieldName => $fieldValue) {

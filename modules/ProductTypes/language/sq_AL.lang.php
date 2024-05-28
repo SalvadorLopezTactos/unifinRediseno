@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Llojet e Produkteve',
     'LBL_MODULE_NAME_SINGULAR' => 'Lloji i produktit',
     'LBL_MODULE_TITLE' => 'Llojet e produktit: Ballina',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Jeni te sigurte qe doni te fshini kete rekord?',
     'ERR_DELETE_RECORD' => 'Duhet përcaktuar numrin e regjistrimit për të fshirë llojin e produktit',
     'NTC_LIST_ORDER' => 'Përcakto porosinë që ky lloj do të shfaq në listën e poshtme të llojit të produktit',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Importo llojet e produktit',
-    'LBL_CREATED_BY'=>'Krijuar Nga',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Importo llojet e produktit',
+    'LBL_CREATED_BY' => 'Krijuar Nga',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Caktuar për ID',
-    'LBL_EXPORT_CREATED_BY'=>'Krijuar Nga ID',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Importo Kategoritë e Produkteve',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Caktuar për ID',
+    'LBL_EXPORT_CREATED_BY' => 'Krijuar Nga ID',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Importo Kategoritë e Produkteve',
+];

@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => '進行中',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'メッセージのフォーカスドロワ',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'メッセージのレコードダッシュボード',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'メッセージのタイムライン',
 ];

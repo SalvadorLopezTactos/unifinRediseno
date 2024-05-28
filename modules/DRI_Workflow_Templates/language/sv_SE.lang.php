@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Aktiv',
     'LBL_ASSIGNEE_RULE' => 'Regel för tilldelning',
     'LBL_TARGET_ASSIGNEE' => 'Målmottagare',
+    'LBL_STAGE_NUMBERS' => 'Etappnumrering',
     'LBL_EXPORT_BUTTON_LABEL' => 'Export',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Import',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Skapa automatiskt en ny Smart Guide-mall genom att importera en *.pet-fil från ditt system.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Om ikryssad, om målmottagare = överordnad mottagare när användaren "Tilldelad till" ändras i en överordnad enhet ändras automatiskt även användarna "Tilldelad till" i Smart Guide, stegen och aktiviteterna. Observera att inställningarna för Målmottagare i aktivitetsmallar har företräde framför Smart Guide-mallen',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'När ska en användare tilldelas aktiviteterna',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Vem ska tilldelas aktiviteterna',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Med den här knappen kan du visa eller dölja automatisk etappnumrering.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Smart Guide/Etapp/Aktivitetsmall',
 ];

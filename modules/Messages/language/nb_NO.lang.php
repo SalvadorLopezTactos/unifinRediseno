@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'pågår',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Meldinger fokusskuff',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Registredashbord for meldinger',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje for melding',
 ];

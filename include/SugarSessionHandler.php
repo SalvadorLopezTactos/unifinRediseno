@@ -67,12 +67,12 @@ class SugarSessionHandler extends SessionHandler
         if ($this->isCurrentSessionExceeded() && basename($_SERVER['SCRIPT_NAME']) !== 'cron.php') {
             global $current_user;
 
-            $id = "unknown";
+            $id = 'unknown';
             if (!empty($current_user)) {
                 $id = $current_user->id;
             }
 
-            $vars = array(
+            $vars = [
                 'SERVER_NAME',
                 'SERVER_ADDR',
                 'SCRIPT_FILENAME',
@@ -80,9 +80,9 @@ class SugarSessionHandler extends SessionHandler
                 'SCRIPT_NAME',
                 'REQUEST_URI',
                 'QUERY_STRING',
-            );
+            ];
 
-            $details = array();
+            $details = [];
             foreach ($vars as $var) {
                 $value = $_SERVER[$var] ?? 'Not set';
                 $details[] = $var . ': ' . $value;

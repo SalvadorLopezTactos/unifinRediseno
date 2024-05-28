@@ -10,34 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = '<module_name>';
-$viewdefs[$module_name]['EditView'] = array(
-    'templateMeta' => array('maxColumns' => '2', 
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'), 
-                                            array('label' => '10', 'field' => '30')
-                                            ),                                                                                                                                    
-                                            ),
-                                            
-                                            
- 'panels' =>array (
-  'default' => 
-  array (
-    
-    array (
-      'name',
-      'assigned_user_name',
-    ),
-    array (
-      array('name'=>'team_name', 'displayParams'=>array('display'=>true)),
-      ''
-    ),
-    
-    array (
-      'description',
-    ),
-  ),
-                                                    
-),
-                        
-);
-?>
+$viewdefs[$module_name]['EditView'] = [
+    'templateMeta' => ['maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+
+
+    'panels' => [
+        'default' => [
+
+            [
+                'name',
+                'assigned_user_name',
+            ],
+            [
+                ['name' => 'team_name', 'displayParams' => ['display' => true]],
+                '',
+            ],
+
+            [
+                'description',
+            ],
+        ],
+
+    ],
+
+];

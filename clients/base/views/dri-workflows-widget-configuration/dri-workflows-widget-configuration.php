@@ -59,7 +59,7 @@ $viewdefs['base']['view']['dri-workflows-widget-configuration'] = [
                     ],
                     'keyName' => 'togglestate',
                     'defaultStateValue' => 'V',
-                    'css_class' => 'horizontalVertical',
+                    'css_class' => 'horizontal-vertical',
                 ],
             ],
         ],

@@ -10,73 +10,73 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['kbusefulness'] = array(
+$dictionary['kbusefulness'] = [
     'table' => 'kbusefulness',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
             'required' => true,
-        ),
-        'kbarticle_id' => array(
+        ],
+        'kbarticle_id' => [
             'name' => 'kbarticle_id',
             'type' => 'id',
             'required' => true,
-        ),
-        'user_id' => array(
+        ],
+        'user_id' => [
             'name' => 'user_id',
             'type' => 'id',
             'required' => true,
-        ),
-        'contact_id' => array(
+        ],
+        'contact_id' => [
             'name' => 'contact_id',
             'type' => 'id',
             'required' => false,
             'isnull' => true,
-        ),
-        'vote' => array(
+        ],
+        'vote' => [
             'name' => 'vote',
             'type' => 'smallint',
             'isnull' => 'true',
-        ),
-        'zeroflag' => array(
+        ],
+        'zeroflag' => [
             'name' => 'zeroflag',
             'type' => 'tinyint',
             'isnull' => 'true',
-        ),
-        'ssid' => array(
+        ],
+        'ssid' => [
             'name' => 'ssid',
             'type' => 'id',
             'isnull' => 'true',
-        ),
+        ],
 
-        'date_modified' => array(
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
+        ],
 
-        'deleted' => array (
+        'deleted' => [
             'name' => 'deleted',
             'vname' => 'LBL_DELETED',
             'type' => 'bool',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'kbusefulness_pk',
             'type' => 'primary',
-            'fields' => array('id'),
-        ),
-        array(
+            'fields' => ['id'],
+        ],
+        [
             'name' => 'kbusefulness_user',
             'type' => 'index',
-            'fields' => array('kbarticle_id', 'user_id'),
-        ),
-    ),
+            'fields' => ['kbarticle_id', 'user_id'],
+        ],
+    ],
 
-    'relationships' => array(
-        'kbusefulness' => array (
+    'relationships' => [
+        'kbusefulness' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
@@ -89,6 +89,6 @@ $dictionary['kbusefulness'] = array(
             'primary_flag_column' => 'zeroflag',
             'relationship_class' => 'KBUsefulnessRelationship',
             'relationship_file' => 'modules/KBContents/KBUsefulnessRelationship.php',
-        ),
-    )
-);
+        ],
+    ],
+];

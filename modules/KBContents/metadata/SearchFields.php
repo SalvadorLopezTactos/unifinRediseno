@@ -9,6 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$searchFields['KBContents'] = array(
-    'name' => array(),
-);
+$searchFields['KBContents'] = [
+    'name' => [],
+];

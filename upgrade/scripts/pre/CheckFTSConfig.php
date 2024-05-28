@@ -31,13 +31,17 @@ class SugarUpgradeCheckFTSConfig extends UpgradeScript
      * ES supported versions. Same as the version checking in src/Elasticsearch/Adapter/Client.php.
      * @var array
      */
-    protected $supportedVersions = array(
-        array('version' =>'5.4', 'operator' => '>='),
-        array('version' => '9.0', 'operator' => '<'),
-    );
+    protected $supportedVersions = [
+        ['version' => '5.4', 'operator' => '>='],
+        ['version' => '9.0', 'operator' => '<'],
+    ];
 
     public function run()
     {
+        if (isMts()) {
+            $this->log('ignore FTS check for MTS');
+            return;
+        }
         global $sugar_config;
 
         $ftsConfig = $sugar_config['full_text_engine'] ?? null;
@@ -87,14 +91,14 @@ class SugarUpgradeCheckFTSConfig extends UpgradeScript
                 $displayText = $app_strings['LBL_EMAIL_SUCCESS'];
             } else {
                 $displayText = $app_strings['ERR_ELASTIC_TEST_FAILED'];
-                $this->error("Elastic version is unknown or unsupported, version:" . $data['version']['number'] ?? 'unknown');
+                $this->error('Elastic version is unknown or unsupported, version:' . $data['version']['number'] ?? 'unknown');
             }
         } catch (Exception $e) {
             $displayText = $e->getMessage();
             $this->error("Unable to get server status: $displayText");
         }
 
-        return array('valid' => $isValid, 'status' => $displayText);
+        return ['valid' => $isValid, 'status' => $displayText];
     }
 
     /**
@@ -120,7 +124,7 @@ class SugarUpgradeCheckFTSConfig extends UpgradeScript
      */
     protected function setSugarVersion(array $config)
     {
-        $config = empty($config)? array(): $config;
+        $config = empty($config) ? [] : $config;
         $config['curl'][CURLOPT_USERAGENT] = self::USER_AGENT . '/' . $this->getSugarVersion();
         return $config;
     }

@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Envelop ophalen',
     'LBL_CLOUD_SERVICE_TYPE' => 'Type cloud service',
     'LBL_CLOUD_PATH' => 'Cloudpad',
+    'LBL_CLOUD_DRIVE_ID' => 'Drive-ID',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Dashboard lijst DocuSign Enveloppen',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'Dashboard record DocuSign Enveloppen',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Recente DocuSign Enveloppen',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Focus lade DocuSign Enveloppen',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn DocuSign Envelop',
 
     'LBL_NEW_ENVELOPE' => 'Nieuwe envelop',
     'LBL_DOCUMENT_IS_NOW' => ' is nu ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Verzenden',
     'LBL_BUTTON_CLEAR' => 'Wissen',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Gebruik sjabloon',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Verzenden met sjabloon',
     'LBL_PLEASE_LOG_IN' => 'Meld eerst aan bij DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'U kunt dit document niet downloaden. Het is aangemaakt door een andere gebruiker!',
     'LBL_SEND_NOT_ALLOWED' => 'U kunt deze envelop niet verzenden. Het is aangemaakt door een andere gebruiker!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Concept is gewijzigd. Status bijwerken naar huidige ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'DocuSign Envelop bijgewerkt!',
     'LBL_DRAFT_CHANGED_ERROR' => 'Status DocuSign Envelop is niet bijgewerkt. Controleer de logs voor informatie!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'DocuSign-sjabloon kan niet worden toegepast',
     'LBL_ENVELOPE_NOT_SENT' => 'Envelop niet verzonden!',
     'LBL_ENVELOPE_SENT' => 'Envelop opnieuw gestuurd!',
     'LBL_DOCUMENT_ADDED' => 'Document toegevoegd aan dossier!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Rol',
     'LBL_SELECT_BUTTON_LABEL' => 'Selecteren',
     'LBL_BACK_BUTTON_LABEL' => 'Terug',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Zoeken op sjabloonnaam',
+    'LBL_ENVELOPE_NAME' => 'Naam envelop',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Naam envelop mag niet leeg zijn',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Potentiële ontvangers ophalen mislukt!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Sjablonen ophalen mislukt!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Selecteer een rol voor elke ontvanger',
+    
+    'LBL_DOWNLOAD' => 'Downloaden',
+    'LBL_OPEN_DRAFT' => 'Concept openen',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Documenten zonder bestand kunnen niet naar DocuSign worden verzonden.',
+    'LBL_START_SIGN_PROMPT' => 'Klik op de plusknop om het ondertekeningsproces te starten',
+    'LBL_NO_DOC_SELECTED' => 'Selecteer eerst documenten',
+    'LBL_SELECT_RECIPIENTS' => 'Ondertekenaar ontvanger selecteren',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Uitsluiten',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Voor een betere ervaring kunt u de DocuSign-applicatie installeren.',
 ];

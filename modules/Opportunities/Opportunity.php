@@ -67,11 +67,11 @@ class Opportunity extends SugarBean
     public $email_id;
     public $assigned_user_name;
 
-    public $table_name = "opportunities";
-    public $rel_account_table = "accounts_opportunities";
-    public $rel_contact_table = "opportunities_contacts";
-    public $module_dir = "Opportunities";
-    public $rel_quote_table = "quotes_opportunities";
+    public $table_name = 'opportunities';
+    public $rel_account_table = 'accounts_opportunities';
+    public $rel_contact_table = 'opportunities_contacts';
+    public $module_dir = 'Opportunities';
+    public $rel_quote_table = 'quotes_opportunities';
     public $best_case;
     public $worst_case;
     public $timeperiod_id;
@@ -100,21 +100,21 @@ class Opportunity extends SugarBean
     private const OPERATION_CASCADE = 'cascading_opportunity_';
 
     //Marketo
-    var $mkto_sync;
-    var $mkto_id;
+    public $mkto_sync;
+    public $mkto_id;
 
     /**
      * holds the settings for the Forecast Module
      *
      * @var array
      */
-    public static $settings = array();
+    public static $settings = [];
 
     public $importable = true;
-    public $object_name = "Opportunity";
+    public $object_name = 'Opportunity';
 
     // This is used to retrieve related fields from form posts.
-    public $additional_column_fields = Array(
+    public $additional_column_fields = [
         'assigned_user_name',
         'assigned_user_id',
         'account_name',
@@ -125,11 +125,11 @@ class Opportunity extends SugarBean
         'meeting_id',
         'call_id',
         'email_id'
-    ,
-        'quote_id'
-    );
+        ,
+        'quote_id',
+    ];
 
-    public $relationship_fields = Array(
+    public $relationship_fields = [
         'task_id' => 'tasks',
         'note_id' => 'notes',
         'account_id' => 'accounts',
@@ -140,7 +140,7 @@ class Opportunity extends SugarBean
         // Bug 38529 & 40938
         'currency_id' => 'currencies',
         'quote_id' => 'quotes',
-    );
+    ];
 
     /**
      * Fields for which we will disable imports.
@@ -161,7 +161,6 @@ class Opportunity extends SugarBean
         if (!isset($GLOBALS['installing']) || !$GLOBALS['installing']) {
             $this->setDisabledImportFields();
         }
-
     }
 
 
@@ -188,29 +187,29 @@ class Opportunity extends SugarBean
     {
         $GLOBALS['log']->deprecated('Opportunity::create_list_query() has been deprecated in 7.8');
         $custom_join = $this->custom_fields->getJOIN();
-        $query = "SELECT ";
+        $query = 'SELECT ';
 
-        $query .= "
+        $query .= '
                             accounts.id as account_id,
                             accounts.name as account_name,
                             accounts.assigned_user_id account_id_owner,
-                            users.user_name as assigned_user_name ";
-        $query .= ",teams.name AS team_name ";
+                            users.user_name as assigned_user_name ';
+        $query .= ',teams.name AS team_name ';
         if ($custom_join) {
             $query .= $custom_join['select'];
         }
-        $query .= " ,opportunities.*
-                            FROM opportunities ";
+        $query .= ' ,opportunities.*
+                            FROM opportunities ';
 
         // We need to confirm that the user is a member of the team of the item.
         $this->add_team_security_where_clause($query);
-        $query .= "LEFT JOIN users
-                            ON opportunities.assigned_user_id=users.id ";
+        $query .= 'LEFT JOIN users
+                            ON opportunities.assigned_user_id=users.id ';
         $query .= getTeamSetNameJoin('opportunities');
 
-        $query .= " LEFT JOIN timeperiods
+        $query .= ' LEFT JOIN timeperiods
                         ON timeperiods.start_date_timestamp <= opportunities.date_closed_timestamp
-                        AND timeperiods.end_date_timestamp >= opportunities.date_closed_timestamp ";
+                        AND timeperiods.end_date_timestamp >= opportunities.date_closed_timestamp ';
 
         $query .= "LEFT JOIN $this->rel_account_table
                             ON opportunities.id=$this->rel_account_table.opportunity_id
@@ -227,20 +226,20 @@ class Opportunity extends SugarBean
 			AND opportunities.deleted=0";
         } else {
             if ($show_deleted == 1) {
-                $where_auto = " opportunities.deleted=1";
+                $where_auto = ' opportunities.deleted=1';
             }
         }
 
-        if ($where != "") {
+        if ($where != '') {
             $query .= "where ($where) AND " . $where_auto;
         } else {
-            $query .= "where " . $where_auto;
+            $query .= 'where ' . $where_auto;
         }
 
-        if ($order_by != "") {
+        if ($order_by != '') {
             $query .= " ORDER BY $order_by";
         } else {
-            $query .= " ORDER BY opportunities.name";
+            $query .= ' ORDER BY opportunities.name';
         }
 
         return $query;
@@ -291,13 +290,13 @@ class Opportunity extends SugarBean
         $query_array = $this->contacts->getQuery(true);
 
         //update the select clause in the retruned query.
-        $query_array['select'] = "SELECT contacts.id, contacts.first_name, contacts.last_name, contacts.title, contacts.email1, contacts.phone_work, opportunities_contacts.contact_role as opportunity_role, opportunities_contacts.id as opportunity_rel_id ";
+        $query_array['select'] = 'SELECT contacts.id, contacts.first_name, contacts.last_name, contacts.title, contacts.email1, contacts.phone_work, opportunities_contacts.contact_role as opportunity_role, opportunities_contacts.id as opportunity_rel_id ';
 
         $query = '';
         foreach ($query_array as $qstring) {
             $query .= ' ' . $qstring;
         }
-        $temp = Array(
+        $temp = [
             'id',
             'first_name',
             'last_name',
@@ -305,8 +304,8 @@ class Opportunity extends SugarBean
             'email1',
             'phone_work',
             'opportunity_role',
-            'opportunity_rel_id'
-        );
+            'opportunity_rel_id',
+        ];
         return $this->build_related_list2($query, BeanFactory::newBean('Contacts'), $temp);
     }
 
@@ -314,9 +313,9 @@ class Opportunity extends SugarBean
     /**
      * This is no longer used and is considered deprecated.  It will be removed in a future release.
      *
-     * @deprecated
      * @param string $fromid
      * @param string $toid
+     * @deprecated
      */
     public function update_currency_id($fromid, $toid)
     {
@@ -328,16 +327,16 @@ class Opportunity extends SugarBean
             if (!empty($idequals)) {
                 $idequals .= ' or ';
             }
-            $idequals .= "currency_id=" . $this->db->quoted($f);
+            $idequals .= 'currency_id=' . $this->db->quoted($f);
         }
 
-		if ( !empty($idequals) ) {
-			$query  = "select amount, id from opportunities where (" . $idequals . ") and deleted=0 and opportunities.sales_stage <> '".self::STAGE_CLOSED_WON."' AND opportunities.sales_stage <> '".self::STAGE_CLOSED_LOST."';";
+        if (!empty($idequals)) {
+            $query = 'select amount, id from opportunities where (' . $idequals . ") and deleted=0 and opportunities.sales_stage <> '" . self::STAGE_CLOSED_WON . "' AND opportunities.sales_stage <> '" . self::STAGE_CLOSED_LOST . "';";
             $result = $this->db->query($query);
 
             while ($row = $this->db->fetchByAssoc($result)) {
                 $query = sprintf(
-                    "UPDATE opportunities SET currency_id = %s, amount_usdollar = %s, base_rate = %s WHERE id = %s;",
+                    'UPDATE opportunities SET currency_id = %s, amount_usdollar = %s, base_rate = %s WHERE id = %s;',
                     $this->db->quoted($currency->id),
                     $this->db->quoted(SugarCurrency::convertAmountToBase($row['amount'], $currency->id)),
                     $this->db->quoted($currency->conversion_rate),
@@ -359,11 +358,11 @@ class Opportunity extends SugarBean
         $GLOBALS['log']->deprecated('Opportunity::get_list_view_data() has been deprecated in 7.8');
         global $locale, $current_language, $current_user, $mod_strings, $app_list_strings, $sugar_config;
         $app_strings = return_application_language($current_language);
-        $params = array();
+        $params = [];
 
         $temp_array = $this->get_list_view_array();
         $temp_array['SALES_STAGE'] = empty($temp_array['SALES_STAGE']) ? '' : $temp_array['SALES_STAGE'];
-        $temp_array["ENCODED_NAME"] = $this->name;
+        $temp_array['ENCODED_NAME'] = $this->name;
         return $temp_array;
     }
 
@@ -393,7 +392,8 @@ class Opportunity extends SugarBean
      * To check whether currency_id field is changed during save.
      * @return bool true if currency_id is changed, false otherwise
      */
-    protected function isCurrencyIdChanged() {
+    protected function isCurrencyIdChanged()
+    {
         // if both are defined, compare
         if (isset($this->currency_id) && isset($this->fetched_row['currency_id'])) {
             if ($this->currency_id != $this->fetched_row['currency_id']) {
@@ -417,15 +417,15 @@ class Opportunity extends SugarBean
      */
     public function build_generic_where_clause($the_query_string)
     {
-        $where_clauses = Array();
+        $where_clauses = [];
         $the_query_string = $GLOBALS['db']->quote($the_query_string);
         array_push($where_clauses, "opportunities.name like '$the_query_string%'");
         array_push($where_clauses, "accounts.name like '$the_query_string%'");
 
-        $the_where = "";
+        $the_where = '';
         foreach ($where_clauses as $clause) {
-            if ($the_where != "") {
-                $the_where .= " or ";
+            if ($the_where != '') {
+                $the_where .= ' or ';
             }
             $the_where .= $clause;
         }
@@ -471,7 +471,7 @@ class Opportunity extends SugarBean
         return parent::save($check_notify);
     }
 
-    public function save_relationship_changes($is_update, $exclude = array())
+    public function save_relationship_changes($is_update, $exclude = [])
     {
         //if account_id was replaced unlink the previous account_id.
         //this rel_fields_before_value is populated by sugarbean during the retrieve call.
@@ -482,7 +482,7 @@ class Opportunity extends SugarBean
             $this->load_relationship('accounts');
             $this->accounts->delete($this->id, $this->rel_fields_before_value['account_id']);
             //propagate change down to related beans
-            $relationshipsToBeTouched = array('products', 'revenuelineitems');
+            $relationshipsToBeTouched = ['products', 'revenuelineitems'];
             foreach ($relationshipsToBeTouched as $relationship) {
                 $this->load_relationship($relationship);
                 foreach ($this->$relationship->getBeans() as $bean) {
@@ -492,7 +492,7 @@ class Opportunity extends SugarBean
             }
         }
         // Bug 38529 & 40938 - exclude currency_id
-        parent::save_relationship_changes($is_update, array('currency_id'));
+        parent::save_relationship_changes($is_update, ['currency_id']);
 
         if (!empty($this->contact_id)) {
             $this->set_opportunity_contact_relationship($this->contact_id);
@@ -505,7 +505,7 @@ class Opportunity extends SugarBean
         global $app_list_strings;
         $default = $app_list_strings['opportunity_relationship_type_default_key'];
         $this->load_relationship('contacts');
-        $this->contacts->add($contact_id, array('contact_role' => $default));
+        $this->contacts->add($contact_id, ['contact_role' => $default]);
     }
 
 
@@ -513,17 +513,17 @@ class Opportunity extends SugarBean
     {
         global $app_list_strings;
 
-        $xtpl->assign("OPPORTUNITY_NAME", $oppty->name);
-        $xtpl->assign("OPPORTUNITY_AMOUNT", $oppty->amount);
-        $xtpl->assign("OPPORTUNITY_CLOSEDATE", $oppty->date_closed);
+        $xtpl->assign('OPPORTUNITY_NAME', $oppty->name);
+        $xtpl->assign('OPPORTUNITY_AMOUNT', $oppty->amount);
+        $xtpl->assign('OPPORTUNITY_CLOSEDATE', $oppty->date_closed);
 
         $oppStage = '';
-        if(isset($oppty->sales_stage) && !empty($oppty->sales_stage)) {
+        if (isset($oppty->sales_stage) && !empty($oppty->sales_stage)) {
             $oppStage = $app_list_strings['sales_stage_dom'][$oppty->sales_stage];
         }
-        $xtpl->assign("OPPORTUNITY_STAGE", $oppStage);
+        $xtpl->assign('OPPORTUNITY_STAGE', $oppStage);
 
-        $xtpl->assign("OPPORTUNITY_DESCRIPTION", $oppty->description);
+        $xtpl->assign('OPPORTUNITY_DESCRIPTION', $oppty->description);
 
         return $xtpl;
     }
@@ -542,9 +542,9 @@ class Opportunity extends SugarBean
     /**
      * This is no longer used since Opportunities is not in BWC.  This will be removed in a future version
      *
+     * @return array
      * @deprecated
      *
-     * @return array
      */
     public function listviewACLHelper()
     {
@@ -552,7 +552,6 @@ class Opportunity extends SugarBean
         $array_assign = parent::listviewACLHelper();
         $is_owner = false;
         if (!empty($this->account_id)) {
-
             if (!empty($this->account_id_owner)) {
                 global $current_user;
                 $is_owner = $current_user->id == $this->account_id_owner;
@@ -587,8 +586,8 @@ class Opportunity extends SugarBean
 
             // get all possible closed stages
             $stages = array_merge(
-                isset($settings['sales_stage_won']) ? (array)$settings['sales_stage_won'] : array(),
-                isset($settings['sales_stage_lost']) ? (array)$settings['sales_stage_lost'] : array()
+                isset($settings['sales_stage_won']) ? (array)$settings['sales_stage_won'] : [],
+                isset($settings['sales_stage_lost']) ? (array)$settings['sales_stage_lost'] : []
             );
         }
         return $stages;
@@ -616,6 +615,7 @@ class Opportunity extends SugarBean
 
         return static::$settings;
     }
+
 
     /**
      * Return an array of RLI closed won stage names.
@@ -681,6 +681,7 @@ class Opportunity extends SugarBean
             }
         }
     }
+
 
     /**
      * Get renewal parent.
@@ -840,11 +841,11 @@ class Opportunity extends SugarBean
 
                             // Update the quantity
                             if (!is_numeric($newRenewalRLIProperties[$matchingRenewalRLI->id]['quantity'])) {
-                                LoggerManager::getLogger()->fatal(sprintf('RLI quantity is expected to be numeric, "%s" given', gettype($newRenewalRLIProperties[$matchingRenewalRLI->id]['quantity'])) . PHP_EOL . (new Exception())->getTraceAsString());
+                                LoggerManager::getLogger()->warn(sprintf('RLI quantity is expected to be numeric, "%s" given', gettype($newRenewalRLIProperties[$matchingRenewalRLI->id]['quantity'])) . PHP_EOL . (new Exception())->getTraceAsString());
                                 $newRenewalRLIProperties[$matchingRenewalRLI->id]['quantity'] = 0;
                             }
                             if (!is_numeric($rliBean->quantity)) {
-                                LoggerManager::getLogger()->fatal(sprintf('RLI quantity is expected to be numeric, "%s" given', gettype($rliBean->quantity)) . PHP_EOL . (new Exception())->getTraceAsString());
+                                LoggerManager::getLogger()->warn(sprintf('RLI quantity is expected to be numeric, "%s" given', gettype($rliBean->quantity)) . PHP_EOL . (new Exception())->getTraceAsString());
                                 $rliBean->quantity = floatval($rliBean->quantity);
                             }
                             $newRenewalRLIProperties[$matchingRenewalRLI->id]['quantity'] += $rliBean->quantity;
@@ -1407,7 +1408,7 @@ class Opportunity extends SugarBean
         foreach ($quotedAllStages as $index => $stage) {
             $stageOrderCases .= 'WHEN sales_stage = ' . $stage . ' THEN ' . $index . ' ';
         }
-        $stageOrderCases .= 'ELSE ' . count($quotedAllStages) . ' END';
+        $stageOrderCases .= 'ELSE ' . safeCount($quotedAllStages) . ' END';
 
         // Execute the query. If any RLIs are open, we get the latest sales_stage
         // of the open RLIs. Otherwise, if any are closed-won, the sales_stage is

@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Umschlag abrufen',
     'LBL_CLOUD_SERVICE_TYPE' => 'Cloud-Servicetyp',
     'LBL_CLOUD_PATH' => 'Cloud-Pfad',
+    'LBL_CLOUD_DRIVE_ID' => 'Laufwerks-ID',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Dashbord mit den DocuSign Umschläge-Listen',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'DocuSign Envelopes Datensatz-Dashboard',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Neuliche DocuSign Umschläge',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Focus Drawer für DocuSign Umschläge',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Zeitleiste des DocuSign-Umschlags',
 
     'LBL_NEW_ENVELOPE' => 'Neuer Umschlag',
     'LBL_DOCUMENT_IS_NOW' => 'ist jetzt',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Senden',
     'LBL_BUTTON_CLEAR' => 'Leeren',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Vorlage verwenden',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Mit Vorlage senden',
     'LBL_PLEASE_LOG_IN' => 'Bitte melden Sie sich zuerst bei DocuSign an!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Sie können dieses Dokument nicht herunterladen. Es wurde von einem anderen Benutzer erstellt!',
     'LBL_SEND_NOT_ALLOWED' => 'Sie können diesen Envelope nicht versenden. Er wurde von einem anderen Benutzer erstellt!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Der Entwurf wurde geändert. Status auf den aktuellen ({{status}}) aktualisieren?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'DocuSign Envelope aktualisiert!',
     'LBL_DRAFT_CHANGED_ERROR' => 'DocuSign Envelope-Status wurde nicht aktualisiert. Prüfen Sie die Protokolle für Details!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'DocuSign-Vorlage kann nicht angewendet werden',
     'LBL_ENVELOPE_NOT_SENT' => 'Envelope nicht gesendet!',
     'LBL_ENVELOPE_SENT' => 'Envelope erneut gesendet!',
     'LBL_DOCUMENT_ADDED' => 'Dokument hinzugefügt!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Rolle',
     'LBL_SELECT_BUTTON_LABEL' => 'Auswählen',
     'LBL_BACK_BUTTON_LABEL' => 'Zurück',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Nach Vorlagennamen suchen',
+    'LBL_ENVELOPE_NAME' => 'Name des Umschlags',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Name des Umschlags darf nicht leer sein',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Potenzielle Empfänger konnten nicht abgerufen werden!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Vorlagen konnten nicht abgerufen werden!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Wählen Sie für jeden Empfänger eine Rolle aus',
+    
+    'LBL_DOWNLOAD' => 'Download',
+    'LBL_OPEN_DRAFT' => 'Entwurf öffnen',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Dokumente ohne Datei können nicht an DocuSign gesendet werden.',
+    'LBL_START_SIGN_PROMPT' => 'Klicken Sie auf die Schaltfläche "Plus", um den Signiervorgang zu starten',
+    'LBL_NO_DOC_SELECTED' => 'Bitte wählen Sie zuerst die Dokumente aus',
+    'LBL_SELECT_RECIPIENTS' => 'Unterzeichner-Empfänger auswählen',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Exkludieren',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Für eine bessere Anwendung müssen Sie die DocuSign-Anwendung installieren.',
 ];

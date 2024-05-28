@@ -20,14 +20,20 @@ namespace Google\Service\Container;
 class ClusterUpdate extends \Google\Collection
 {
   protected $collection_key = 'desiredLocations';
+  protected $additionalPodRangesConfigType = AdditionalPodRangesConfig::class;
+  protected $additionalPodRangesConfigDataType = '';
   protected $desiredAddonsConfigType = AddonsConfig::class;
   protected $desiredAddonsConfigDataType = '';
   protected $desiredAuthenticatorGroupsConfigType = AuthenticatorGroupsConfig::class;
   protected $desiredAuthenticatorGroupsConfigDataType = '';
+  protected $desiredAutopilotWorkloadPolicyConfigType = WorkloadPolicyConfig::class;
+  protected $desiredAutopilotWorkloadPolicyConfigDataType = '';
   protected $desiredBinaryAuthorizationType = BinaryAuthorization::class;
   protected $desiredBinaryAuthorizationDataType = '';
   protected $desiredClusterAutoscalingType = ClusterAutoscaling::class;
   protected $desiredClusterAutoscalingDataType = '';
+  protected $desiredCostManagementConfigType = CostManagementConfig::class;
+  protected $desiredCostManagementConfigDataType = '';
   protected $desiredDatabaseEncryptionType = DatabaseEncryption::class;
   protected $desiredDatabaseEncryptionDataType = '';
   /**
@@ -38,6 +44,18 @@ class ClusterUpdate extends \Google\Collection
   protected $desiredDefaultSnatStatusDataType = '';
   protected $desiredDnsConfigType = DNSConfig::class;
   protected $desiredDnsConfigDataType = '';
+  /**
+   * @var bool
+   */
+  public $desiredEnableFqdnNetworkPolicy;
+  /**
+   * @var bool
+   */
+  public $desiredEnablePrivateEndpoint;
+  protected $desiredFleetType = Fleet::class;
+  protected $desiredFleetDataType = '';
+  protected $desiredGatewayApiConfigType = GatewayAPIConfig::class;
+  protected $desiredGatewayApiConfigDataType = '';
   protected $desiredGcfsConfigType = GcfsConfig::class;
   protected $desiredGcfsConfigDataType = '';
   protected $desiredIdentityServiceConfigType = IdentityServiceConfig::class;
@@ -48,6 +66,8 @@ class ClusterUpdate extends \Google\Collection
   public $desiredImageType;
   protected $desiredIntraNodeVisibilityConfigType = IntraNodeVisibilityConfig::class;
   protected $desiredIntraNodeVisibilityConfigDataType = '';
+  protected $desiredK8sBetaApisType = K8sBetaAPIConfig::class;
+  protected $desiredK8sBetaApisDataType = '';
   protected $desiredL4ilbSubsettingConfigType = ILBSubsettingConfig::class;
   protected $desiredL4ilbSubsettingConfigDataType = '';
   /**
@@ -74,6 +94,8 @@ class ClusterUpdate extends \Google\Collection
    * @var string
    */
   public $desiredMonitoringService;
+  protected $desiredNetworkPerformanceConfigType = ClusterNetworkPerformanceConfig::class;
+  protected $desiredNetworkPerformanceConfigDataType = '';
   protected $desiredNodePoolAutoConfigNetworkTagsType = NetworkTags::class;
   protected $desiredNodePoolAutoConfigNetworkTagsDataType = '';
   protected $desiredNodePoolAutoscalingType = NodePoolAutoscaling::class;
@@ -100,15 +122,43 @@ class ClusterUpdate extends \Google\Collection
   protected $desiredReleaseChannelDataType = '';
   protected $desiredResourceUsageExportConfigType = ResourceUsageExportConfig::class;
   protected $desiredResourceUsageExportConfigDataType = '';
+  protected $desiredSecurityPostureConfigType = SecurityPostureConfig::class;
+  protected $desiredSecurityPostureConfigDataType = '';
   protected $desiredServiceExternalIpsConfigType = ServiceExternalIPsConfig::class;
   protected $desiredServiceExternalIpsConfigDataType = '';
   protected $desiredShieldedNodesType = ShieldedNodes::class;
   protected $desiredShieldedNodesDataType = '';
+  /**
+   * @var string
+   */
+  public $desiredStackType;
   protected $desiredVerticalPodAutoscalingType = VerticalPodAutoscaling::class;
   protected $desiredVerticalPodAutoscalingDataType = '';
   protected $desiredWorkloadIdentityConfigType = WorkloadIdentityConfig::class;
   protected $desiredWorkloadIdentityConfigDataType = '';
+  protected $enableK8sBetaApisType = K8sBetaAPIConfig::class;
+  protected $enableK8sBetaApisDataType = '';
+  /**
+   * @var string
+   */
+  public $etag;
+  protected $removedAdditionalPodRangesConfigType = AdditionalPodRangesConfig::class;
+  protected $removedAdditionalPodRangesConfigDataType = '';
 
+  /**
+   * @param AdditionalPodRangesConfig
+   */
+  public function setAdditionalPodRangesConfig(AdditionalPodRangesConfig $additionalPodRangesConfig)
+  {
+    $this->additionalPodRangesConfig = $additionalPodRangesConfig;
+  }
+  /**
+   * @return AdditionalPodRangesConfig
+   */
+  public function getAdditionalPodRangesConfig()
+  {
+    return $this->additionalPodRangesConfig;
+  }
   /**
    * @param AddonsConfig
    */
@@ -138,6 +188,20 @@ class ClusterUpdate extends \Google\Collection
     return $this->desiredAuthenticatorGroupsConfig;
   }
   /**
+   * @param WorkloadPolicyConfig
+   */
+  public function setDesiredAutopilotWorkloadPolicyConfig(WorkloadPolicyConfig $desiredAutopilotWorkloadPolicyConfig)
+  {
+    $this->desiredAutopilotWorkloadPolicyConfig = $desiredAutopilotWorkloadPolicyConfig;
+  }
+  /**
+   * @return WorkloadPolicyConfig
+   */
+  public function getDesiredAutopilotWorkloadPolicyConfig()
+  {
+    return $this->desiredAutopilotWorkloadPolicyConfig;
+  }
+  /**
    * @param BinaryAuthorization
    */
   public function setDesiredBinaryAuthorization(BinaryAuthorization $desiredBinaryAuthorization)
@@ -164,6 +228,20 @@ class ClusterUpdate extends \Google\Collection
   public function getDesiredClusterAutoscaling()
   {
     return $this->desiredClusterAutoscaling;
+  }
+  /**
+   * @param CostManagementConfig
+   */
+  public function setDesiredCostManagementConfig(CostManagementConfig $desiredCostManagementConfig)
+  {
+    $this->desiredCostManagementConfig = $desiredCostManagementConfig;
+  }
+  /**
+   * @return CostManagementConfig
+   */
+  public function getDesiredCostManagementConfig()
+  {
+    return $this->desiredCostManagementConfig;
   }
   /**
    * @param DatabaseEncryption
@@ -222,6 +300,62 @@ class ClusterUpdate extends \Google\Collection
     return $this->desiredDnsConfig;
   }
   /**
+   * @param bool
+   */
+  public function setDesiredEnableFqdnNetworkPolicy($desiredEnableFqdnNetworkPolicy)
+  {
+    $this->desiredEnableFqdnNetworkPolicy = $desiredEnableFqdnNetworkPolicy;
+  }
+  /**
+   * @return bool
+   */
+  public function getDesiredEnableFqdnNetworkPolicy()
+  {
+    return $this->desiredEnableFqdnNetworkPolicy;
+  }
+  /**
+   * @param bool
+   */
+  public function setDesiredEnablePrivateEndpoint($desiredEnablePrivateEndpoint)
+  {
+    $this->desiredEnablePrivateEndpoint = $desiredEnablePrivateEndpoint;
+  }
+  /**
+   * @return bool
+   */
+  public function getDesiredEnablePrivateEndpoint()
+  {
+    return $this->desiredEnablePrivateEndpoint;
+  }
+  /**
+   * @param Fleet
+   */
+  public function setDesiredFleet(Fleet $desiredFleet)
+  {
+    $this->desiredFleet = $desiredFleet;
+  }
+  /**
+   * @return Fleet
+   */
+  public function getDesiredFleet()
+  {
+    return $this->desiredFleet;
+  }
+  /**
+   * @param GatewayAPIConfig
+   */
+  public function setDesiredGatewayApiConfig(GatewayAPIConfig $desiredGatewayApiConfig)
+  {
+    $this->desiredGatewayApiConfig = $desiredGatewayApiConfig;
+  }
+  /**
+   * @return GatewayAPIConfig
+   */
+  public function getDesiredGatewayApiConfig()
+  {
+    return $this->desiredGatewayApiConfig;
+  }
+  /**
    * @param GcfsConfig
    */
   public function setDesiredGcfsConfig(GcfsConfig $desiredGcfsConfig)
@@ -276,6 +410,20 @@ class ClusterUpdate extends \Google\Collection
   public function getDesiredIntraNodeVisibilityConfig()
   {
     return $this->desiredIntraNodeVisibilityConfig;
+  }
+  /**
+   * @param K8sBetaAPIConfig
+   */
+  public function setDesiredK8sBetaApis(K8sBetaAPIConfig $desiredK8sBetaApis)
+  {
+    $this->desiredK8sBetaApis = $desiredK8sBetaApis;
+  }
+  /**
+   * @return K8sBetaAPIConfig
+   */
+  public function getDesiredK8sBetaApis()
+  {
+    return $this->desiredK8sBetaApis;
   }
   /**
    * @param ILBSubsettingConfig
@@ -402,6 +550,20 @@ class ClusterUpdate extends \Google\Collection
   public function getDesiredMonitoringService()
   {
     return $this->desiredMonitoringService;
+  }
+  /**
+   * @param ClusterNetworkPerformanceConfig
+   */
+  public function setDesiredNetworkPerformanceConfig(ClusterNetworkPerformanceConfig $desiredNetworkPerformanceConfig)
+  {
+    $this->desiredNetworkPerformanceConfig = $desiredNetworkPerformanceConfig;
+  }
+  /**
+   * @return ClusterNetworkPerformanceConfig
+   */
+  public function getDesiredNetworkPerformanceConfig()
+  {
+    return $this->desiredNetworkPerformanceConfig;
   }
   /**
    * @param NetworkTags
@@ -544,6 +706,20 @@ class ClusterUpdate extends \Google\Collection
     return $this->desiredResourceUsageExportConfig;
   }
   /**
+   * @param SecurityPostureConfig
+   */
+  public function setDesiredSecurityPostureConfig(SecurityPostureConfig $desiredSecurityPostureConfig)
+  {
+    $this->desiredSecurityPostureConfig = $desiredSecurityPostureConfig;
+  }
+  /**
+   * @return SecurityPostureConfig
+   */
+  public function getDesiredSecurityPostureConfig()
+  {
+    return $this->desiredSecurityPostureConfig;
+  }
+  /**
    * @param ServiceExternalIPsConfig
    */
   public function setDesiredServiceExternalIpsConfig(ServiceExternalIPsConfig $desiredServiceExternalIpsConfig)
@@ -572,6 +748,20 @@ class ClusterUpdate extends \Google\Collection
     return $this->desiredShieldedNodes;
   }
   /**
+   * @param string
+   */
+  public function setDesiredStackType($desiredStackType)
+  {
+    $this->desiredStackType = $desiredStackType;
+  }
+  /**
+   * @return string
+   */
+  public function getDesiredStackType()
+  {
+    return $this->desiredStackType;
+  }
+  /**
    * @param VerticalPodAutoscaling
    */
   public function setDesiredVerticalPodAutoscaling(VerticalPodAutoscaling $desiredVerticalPodAutoscaling)
@@ -598,6 +788,48 @@ class ClusterUpdate extends \Google\Collection
   public function getDesiredWorkloadIdentityConfig()
   {
     return $this->desiredWorkloadIdentityConfig;
+  }
+  /**
+   * @param K8sBetaAPIConfig
+   */
+  public function setEnableK8sBetaApis(K8sBetaAPIConfig $enableK8sBetaApis)
+  {
+    $this->enableK8sBetaApis = $enableK8sBetaApis;
+  }
+  /**
+   * @return K8sBetaAPIConfig
+   */
+  public function getEnableK8sBetaApis()
+  {
+    return $this->enableK8sBetaApis;
+  }
+  /**
+   * @param string
+   */
+  public function setEtag($etag)
+  {
+    $this->etag = $etag;
+  }
+  /**
+   * @return string
+   */
+  public function getEtag()
+  {
+    return $this->etag;
+  }
+  /**
+   * @param AdditionalPodRangesConfig
+   */
+  public function setRemovedAdditionalPodRangesConfig(AdditionalPodRangesConfig $removedAdditionalPodRangesConfig)
+  {
+    $this->removedAdditionalPodRangesConfig = $removedAdditionalPodRangesConfig;
+  }
+  /**
+   * @return AdditionalPodRangesConfig
+   */
+  public function getRemovedAdditionalPodRangesConfig()
+  {
+    return $this->removedAdditionalPodRangesConfig;
   }
 }
 

@@ -16,14 +16,16 @@ class SugarWidgetSubPanelTopScheduleCallButton extends SugarWidgetSubPanelTopBut
      * @var string|mixed
      */
     public $subpanelDiv;
-    function &_get_form($defines, $additionalFormFields = null)
+
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    public function &_get_form($defines, $additionalFormFields = null)
     {
         $button = null;
         global $app_strings;
         global $currentModule;
 
-        $this->module = "Calls";
-        $this->subpanelDiv = "activities";
+        $this->module = 'Calls';
+        $this->subpanelDiv = 'activities';
 
         if (!empty($this->module)) {
             $defines['child_module_name'] = $this->module;
@@ -69,7 +71,7 @@ class SugarWidgetSubPanelTopScheduleCallButton extends SugarWidgetSubPanelTopBut
         $button .= '<input type="hidden" name="to_pdf" value="true" />';
         $button .= '<input type="hidden" name="tpl" value="QuickCreate.tpl" />';
         $button .= '<input type="hidden" name="return_module" value="' . $currentModule . "\" />\n";
-        $button .= '<input type="hidden" name="return_action" value="' . htmlspecialchars($defines['action'], ENT_QUOTES, "UTF-8") . "\" />\n";
+        $button .= '<input type="hidden" name="return_action" value="' . htmlspecialchars($defines['action'], ENT_QUOTES, 'UTF-8') . "\" />\n";
         $button .= '<input type="hidden" name="return_id" value="' . $defines['focus']->id . "\" />\n";
         $button .= '<input type="hidden" name="record" value="" />';
 
@@ -113,7 +115,7 @@ class SugarWidgetSubPanelTopScheduleCallButton extends SugarWidgetSubPanelTopBut
         return $button;
     }
 
-    public function display(array $defines, $additionalFormFields = array())
+    public function display(array $defines, $additionalFormFields = [])
     {
         $focus = BeanFactory::newBean('Calls');
         if (!$focus->ACLAccess('EditView')) {

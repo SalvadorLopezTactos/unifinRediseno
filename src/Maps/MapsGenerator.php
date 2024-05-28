@@ -241,7 +241,7 @@ class MapsGenerator
             $directionsItinerary['itinerary'][$i]['travelDistance'] = $itineraryTravelDistance;
             $directionsItinerary['itinerary'][$i]['travelDuration'] = $itineraryTravelDuration;
 
-            $direction = chr($i + $charCodeA) .  ' to ' . chr($i + 1 + $charCodeA);
+            $direction = chr($i + $charCodeA) . ' to ' . chr($i + 1 + $charCodeA);
             $startPoint = chr($i + $charCodeA) . ' (' . $recordsMeta[$i]['parent_name'] . ')';
             $endPoint = chr($i + 1 + $charCodeA) . ' (' . $recordsMeta[$i + 1]['parent_name'] . ')';
 
@@ -297,7 +297,7 @@ class MapsGenerator
 
             $step['text'] = htmlspecialchars($itineraryItem['preIntersectionHints'][0], ENT_COMPAT);
             $step['maneuver'] = $itineraryItem['maneuver'];
-            $step['travelDistance'] =  $this->formatDirectionsTravelDistance($itineraryItem['distance']);
+            $step['travelDistance'] = $this->formatDirectionsTravelDistance($itineraryItem['distance']);
             $step['travelDuration'] = $this->formatSecondsToTime($itineraryItem['durationInSeconds']);
             $step['warnings'] = [];
             $step['hints'] = [];
@@ -343,12 +343,13 @@ class MapsGenerator
      * @return string
      */
     private function generateMapHtml(
-        bool $isMapExpanded,
+        bool   $isMapExpanded,
         string $mapUrl,
-        array $recordsMeta,
-        array $directionsItinerary,
+        array  $recordsMeta,
+        array  $directionsItinerary,
         string $type
     ): string {
+
         if ($type === 'directions') {
             return $this->generateDirectionsPdfMapHtml($isMapExpanded, $mapUrl, $recordsMeta, $directionsItinerary);
         }
@@ -396,11 +397,12 @@ class MapsGenerator
      * @return string
      */
     private function generateDirectionsPdfMapHtml(
-        bool $isMapExpanded,
+        bool   $isMapExpanded,
         string $mapUrl,
-        array $records,
-        array $directionsItinerary
+        array  $records,
+        array  $directionsItinerary
     ): string {
+
         $ss = new \Sugar_Smarty();
 
         $ss->assign('isMapExpanded', $isMapExpanded);
@@ -501,7 +503,7 @@ class MapsGenerator
                 $pushPin = "pp={$pushPin}&";
             }
 
-            $pushPins []= $pushPin;
+            $pushPins [] = $pushPin;
         }
 
         return $pushPins;
@@ -536,7 +538,7 @@ class MapsGenerator
      */
     private function formatSecondsToTime($seconds): string
     {
-        $hours   = floor($seconds / 3600);
+        $hours = floor($seconds / 3600);
         $minutes = floor(($seconds / 60) % 60);
 
         if ($minutes == 0) {
@@ -554,7 +556,7 @@ class MapsGenerator
      */
     private function kmToMiles($km): string
     {
-        $miles  = $km / 1.609344;
+        $miles = $km / 1.609344;
         $result = round($miles, 2);
 
         return $result . ' mi';

@@ -19,7 +19,17 @@
     initialize: function(options) {
         options.meta = options.meta || {};
         options.meta.template = options.meta.template || 'sidebar-nav-item';
+        this.plugins = _.union(this.plugins || [], ['DocumentMerge']);
         this._super('initialize', [options]);
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _render: function() {
+        this._super('_render');
+
+        this.hasAccess() ? this.$el.show() : this.$el.hide();
     },
 
     /**

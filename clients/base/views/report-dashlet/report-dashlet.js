@@ -18,7 +18,7 @@
 
     events: {
         'click [data-fieldname="intelligent"] input': '_setIntelligence',
-        'click [data-toggle="tab"]': '_changeTab',
+        'click [data-bs-toggle="tab"]': '_changeTab',
     },
 
     /**
@@ -60,6 +60,10 @@
         this.userLastState = this._getUserLastState(this.lastStateKey);
         this.defaultSelectView = this.userLastState.defaultView;
         this.autoRefresh = this.settings.get('autoRefresh');
+        this.RECORD_NOT_FOUND_ERROR_CODE = 404;
+
+        this.isDashletLoading = false;
+        this.saveDashboardOnSync = true;
     },
 
     /**
@@ -94,9 +98,18 @@
     },
 
     /**
+     * @inheritdoc
+     */
+    loadData: function() {
+        this.refreshResults();
+    },
+
+    /**
       * Sync with report data
       */
     _syncReport: function() {
+        this.isDashletLoading = true;
+
         const reportId = this.settings.get('reportId');
 
         if (!reportId) {
@@ -179,6 +192,8 @@
         if (_.isEmpty(reportId)) {
             this._toggleIntelligence(false);
             this._toggleTabs(false);
+            this.isDashletLoading = false;
+            this.saveDashboardOnSync = true;
 
             return;
         }
@@ -216,6 +231,8 @@
         }
 
         this.setupReportProperties(data);
+
+        this.saveDashboardOnSync = true;
     },
 
     /**
@@ -231,6 +248,29 @@
         }
 
         this._syncReport();
+    },
+
+    /**
+     * Retrieves report dashlet related properties
+     *
+     * @return {Object}
+     */
+    getDashletSpecificData: function() {
+        let currentUserRestrictedDashlet = false;
+
+        const dashModelMeta = this.dashModel.get('metadata');
+        const dashletMetaId = this.layout.options.dashletMetaId;
+
+        if (_.isArray(dashModelMeta.currentUserRestrictedDashlets)) {
+            if (_.contains(dashModelMeta.currentUserRestrictedDashlets, dashletMetaId)) {
+                currentUserRestrictedDashlet = true;
+            }
+        }
+
+        return {
+            reportId: this.settings.get('reportId'),
+            currentUserRestrictedDashlet,
+        };
     },
 
     /**
@@ -272,21 +312,85 @@
         let langKey = 'LBL_REPORTS_DASHLET_UNABLE_TO_DOWNLOAD_CHART_TAB';
         const encodeCanvas = true;
 
-        const chart = this._getChartElement(langKey, encodeCanvas);
 
-        if (chart === false) {
-            return;
+        let dashletBody = this._reportDashletWrapper ?
+                        this._reportDashletWrapper.getComponent('report-dashlet-body') :
+                        false;
+        let reportChart = dashletBody ? dashletBody._cachedViews.chart : false;
+        let chartField = reportChart ? reportChart._chartField : false;
+
+        if (!chartField) {
+            app.alert.show('failed_to_get_chart_canvas', {
+                level: 'warning',
+                messages: app.lang.get(langKey),
+            });
+
+            return false;
         }
 
-        const reportName = this.settings.get('reportName');
-        const userName = app.user.get('full_name');
-        const date = app.date.format(new Date(), 'Y-m-d H:m:s');
-        const fileName = `${reportName}_chart_${userName}_${date}.png`;
+        let chartDownloaded = false;
 
-        let link = document.createElement('a');
-        link.download = fileName;
-        link.href = chart;
-        link.click();
+        chartField.chart.chart.options.animation.onComplete = () => {
+            if (this.disposed) {
+                return;
+            }
+
+            if (chartDownloaded) {
+                delete chartField.chart.chart.options.animation.onComplete;
+                reportChart.context.trigger('report:data:chart:loaded', false, 'chart');
+                reportChart._showChart(true);
+
+                return;
+            }
+
+            const chart = this._getChartElement(langKey, encodeCanvas);
+
+            if (chart === false) {
+                return;
+            }
+
+            const reportName = this.settings.get('reportName');
+            const userName = app.user.get('full_name');
+            const date = app.date.format(new Date(), 'Y-m-d H:m:s');
+            const fileName = `${reportName}_chart_${userName}_${date}.png`;
+
+            let link = document.createElement('a');
+            link.download = fileName;
+            link.href = chart;
+            link.click();
+
+            _.debounce(() => {
+                chartField.chart.chart.legend.options.display = false;
+
+                if (chartField.chart.chart.options.title) {
+                    chartField.chart.chart.options.title.display = false;
+                }
+
+                if (chartField.chart.chart.options.plugins && chartField.chart.chart.options.plugins.title) {
+                    chartField.chart.chart.options.plugins.title.display = false;
+                }
+
+                chartField.chart.chart.update();
+            })();
+
+            chartDownloaded = true;
+        };
+
+        reportChart.context.trigger('report:data:chart:loaded', true, 'chart');
+        reportChart._showChart(false);
+
+        chartField.chart.chart.legend.options.display = !!this.settings.get('showLegend') &&
+                                                        this.settings.get('chartType') !== 'treemapF';
+
+        if (chartField.chart.chart.options.title) {
+            chartField.chart.chart.options.title.display = this.settings.get('showTitle');
+        }
+
+        if (chartField.chart.chart.options.plugins && chartField.chart.chart.options.plugins.title) {
+            chartField.chart.chart.options.plugins.title.display = this.settings.get('showTitle');
+        }
+
+        chartField.chart.chart.update();
     },
 
     /**
@@ -1071,6 +1175,14 @@
     },
 
     /**
+     * Sync the report without resaving the Dashboard
+     */
+    silentRefreshResults: function() {
+        this.saveDashboardOnSync = false;
+        this._syncReport();
+    },
+
+    /**
      * Get the default state for user
      *
      * @return {Object}
@@ -1235,6 +1347,26 @@
      * @param {Error} error
      */
     _failedLoadReportData: function(error) {
+        if (this.disposed) {
+            return;
+        }
+        this.saveDashboardOnSync = true;
+
+        let showErrorAlert = error && _.isString(error.message);
+
+        // don't show no access alert for dashlet
+        if (error && _.has(error, 'status') && error.status === this.RECORD_NOT_FOUND_ERROR_CODE) {
+            showErrorAlert = false;
+        }
+
+        if (showErrorAlert) {
+            app.alert.show('failed_to_load_report', {
+                level: 'error',
+                messages: error.message,
+                autoClose: true,
+            });
+        }
+
         if (this.meta.config) {
             this.settings.set({
                 reportId: '',
@@ -1271,7 +1403,10 @@
 
         const newReportDateModified = data.dateModified;
         const currentReportDateModified = this.settings.get('reportDateModified');
-        const reportDataChanged = !moment(newReportDateModified).isSame(currentReportDateModified);
+        // if currentReportDateModified is empty, it means that the report is being loaded for the first time
+        // and we should not reset the properties
+        const reportDataChanged =
+            !moment(newReportDateModified).isSame(currentReportDateModified) && !_.isEmpty(currentReportDateModified);
         const currentUserReportDateModified = this._getUserLastReportDateFromState(data.reportId);
 
         let userDataChanged = true;
@@ -1279,6 +1414,8 @@
         if (reportDataChanged || this._oldReportId !== data.reportId) {
             this._resetReportProperties();
             this._setupSettings(data);
+        } else {
+            this.saveDashboardOnSync = false;
         }
 
         if (currentUserReportDateModified) {
@@ -1311,7 +1448,9 @@
             this._setModalInfo('primaryChartColumn', 'primaryChartColumnInfo');
             this._setModalInfo('secondaryChartColumn', 'secondaryChartColumnInfo');
         } else {
-            this.saveDashletSettings();
+            if (this.saveDashboardOnSync) {
+                this.saveDashletSettings();
+            }
             this.reloadDashlet();
         }
     },

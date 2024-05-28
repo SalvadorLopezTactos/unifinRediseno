@@ -22,27 +22,27 @@ class TagsRelatedModulesUtilities
      */
     public static function getRelatedFields()
     {
-        $fields = array();
+        $fields = [];
         foreach ($GLOBALS['beanList'] as $module => $bean) {
             // Do not allow tags on the Tags module
-            if ($module === "Tags") {
+            if ($module === 'Tags') {
                 continue;
             }
 
             // Enforce the tag relationship to sidecar modules only
             if (!isModuleBWC($module)) {
                 $object = BeanFactory::getObjectName($module);
-                $relName = strtolower($module) . "_tags";
+                $relName = strtolower($module) . '_tags';
                 $linkField = VardefManager::getLinkFieldForRelationship($module, $object, $relName);
                 if ($linkField) {
                     $name = strtolower($module) . '_link';
-                    $fields[$name] = array(
+                    $fields[$name] = [
                         'name' => $name,
                         'vname' => $module,
                         'type' => 'link',
                         'relationship' => $relName,
                         'source' => 'non-db',
-                    );
+                    ];
                 }
             }
         }

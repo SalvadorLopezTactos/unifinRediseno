@@ -155,5 +155,60 @@
                 autoClose: true,
             });
         },
+
+        /**
+         * Fetch active smart guides, create cj-forms-batch view
+         * and call saveRecord callback
+         *
+         * @param {Object} context
+         * @param {Object} layout
+         * @param {string} module
+         * @param {string} record
+         * @param {Function} saveRecordCallback
+         */
+        fetchActiveSmartGuideCount: function(context, layout, module, record, saveRecordCallback) {
+            const cjEnabledModules = this.getCJEnabledModules();
+
+            if (_.isEmpty(cjEnabledModules) || !_.contains(cjEnabledModules, module)) {
+                saveRecordCallback();
+                return;
+            }
+
+            // for cj enable module first get active smart guides then save model
+            const url = app.api.buildURL(module, 'activeSmartGuidesCount', {
+                id: record,
+            });
+
+            app.api.call('read', url, null, {
+                success: _.bind(function(count) {
+                    let cjFormBatch;
+
+                    if (count > 0) {
+                        cjFormBatch = app.view.createView({
+                            context: context,
+                            type: 'cj-forms-batch',
+                            module: module,
+                            layout: layout
+                        });
+
+                        cjFormBatch.startRecordSaving();
+                    }
+
+                    saveRecordCallback(cjFormBatch);
+                }, this),
+                error: _.bind(function() {
+                    saveRecordCallback();
+                }, this),
+            });
+        },
+
+        /**
+         * Provide batch chunk count from config
+         *
+         * @return {number}
+         */
+        getBatchChunk: function() {
+            return +app.config.customer_journey.sugar_action_batch_chunk || 1;
+        },
     }, true);
 })(SUGAR.App);

@@ -156,7 +156,7 @@
          */
         this.select2Field.$el.on('select2-opening', _.bind(function(evt) {
             evt.preventDefault();
-            this.$('[data-toggle=dropdown]').dropdown('toggle');
+            this.$('[data-bs-toggle=dropdown]').dropdown('toggle');
         }, this));
     },
 

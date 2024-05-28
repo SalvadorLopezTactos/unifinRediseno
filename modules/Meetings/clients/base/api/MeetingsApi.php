@@ -17,54 +17,54 @@ class MeetingsApi extends CalendarEventsApi
      */
     public function registerApiRest()
     {
-        $register = array(
-            'getAgenda' => array(
+        $register = [
+            'getAgenda' => [
                 'reqType' => 'GET',
-                'path' => array('Meetings', 'Agenda'),
-                'pathVars' => array('', ''),
+                'path' => ['Meetings', 'Agenda'],
+                'pathVars' => ['', ''],
                 'method' => 'getAgenda',
                 'shortHelp' => 'Fetch an agenda for a user',
                 'longHelp' => 'include/api/html/meetings_agenda_get_help',
-            ),
-            'external' => array(
+            ],
+            'external' => [
                 'reqType' => 'GET',
-                'path' => array('Meetings', '?', 'external'),
-                'pathVars' => array('module', 'record', 'external'),
+                'path' => ['Meetings', '?', 'external'],
+                'pathVars' => ['module', 'record', 'external'],
                 'method' => 'getExternalInfo',
                 'shortHelp' => 'This method retrieves info about launching an external meeting',
                 'longHelp' => 'modules/Meetings/clients/base/api/help/MeetingsApiExternalGet.html',
-            ),
-        );
+            ],
+        ];
 
-        return parent::getRestApi("Meetings", $register);
+        return parent::getRestApi('Meetings', $register);
     }
 
     public function getAgenda(ServiceBase $api, array $args)
     {
         // Fetch the next 14 days worth of meetings (limited to 20)
-        $end_time = new SugarDateTime("+14 days");
-        $start_time = new SugarDateTime("-1 hour");
+        $end_time = new SugarDateTime('+14 days');
+        $start_time = new SugarDateTime('-1 hour');
 
 
         $meeting = BeanFactory::newBean('Meetings');
-        $meetingList = $meeting->get_list('date_start', "date_start > " . $GLOBALS['db']->convert($GLOBALS['db']->quoted($start_time->asDb()), 'datetime') . " AND date_start < " . $GLOBALS['db']->convert($GLOBALS['db']->quoted($end_time->asDb()), 'datetime'));
+        $meetingList = $meeting->get_list('date_start', 'date_start > ' . $GLOBALS['db']->convert($GLOBALS['db']->quoted($start_time->asDb()), 'datetime') . ' AND date_start < ' . $GLOBALS['db']->convert($GLOBALS['db']->quoted($end_time->asDb()), 'datetime'));
 
         // Setup the breaks for the various time periods
         $datetime = new SugarDateTime();
         $today_stamp = $datetime->get_day_end()->getTimestamp();
-        $tomorrow_stamp = $datetime->setDate($datetime->year,$datetime->month,$datetime->day+1)->get_day_end()->getTimestamp();
+        $tomorrow_stamp = $datetime->setDate($datetime->year, $datetime->month, $datetime->day + 1)->get_day_end()->getTimestamp();
 
 
         $timeDate = TimeDate::getInstance();
 
-        $returnedMeetings = array('today'=>array(),'tomorrow'=>array(),'upcoming'=>array());
-        foreach ( $meetingList['list'] as $meetingBean ) {
+        $returnedMeetings = ['today' => [], 'tomorrow' => [], 'upcoming' => []];
+        foreach ($meetingList['list'] as $meetingBean) {
             $meetingStamp = $timeDate->fromDb($meetingBean->date_start)->getTimestamp();
-            $meetingData = $this->formatBean($api,$args,$meetingBean);
+            $meetingData = $this->formatBean($api, $args, $meetingBean);
 
-            if ( $meetingStamp < $today_stamp ) {
+            if ($meetingStamp < $today_stamp) {
                 $returnedMeetings['today'][] = $meetingData;
-            } else if ( $meetingStamp < $tomorrow_stamp ) {
+            } elseif ($meetingStamp < $tomorrow_stamp) {
                 $returnedMeetings['tomorrow'][] = $meetingData;
             } else {
                 $returnedMeetings['upcoming'][] = $meetingData;
@@ -97,12 +97,12 @@ class MeetingsApi extends CalendarEventsApi
             $this->isUserInvitedToMeeting($api->user->id, $meetingBean)
         );
 
-        return array(
+        return [
             'is_host_option_allowed' => $isHostOptionAllowed,
             'host_url' => $isHostOptionAllowed ? $meetingBean->host_url : '',
             'is_join_option_allowed' => $isJoinOptionAllowed,
             'join_url' => $isJoinOptionAllowed ? $meetingBean->join_url : '',
-        );
+        ];
     }
 
     /**
@@ -115,12 +115,12 @@ class MeetingsApi extends CalendarEventsApi
     protected function isUserInvitedToMeeting($userId, $meetingBean)
     {
         $query = new SugarQuery();
-        $query->select(array('id'));
+        $query->select(['id']);
         $query->from($meetingBean);
-        $query->join('users', array('alias' => 'users'));
+        $query->join('users', ['alias' => 'users']);
         $query->where()->equals('meetings.id', $meetingBean->id)
             ->equals('users.id', $userId);
         $results = $query->execute();
-        return count($results) > 0;
+        return safeCount($results) > 0;
     }
 }

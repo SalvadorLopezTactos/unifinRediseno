@@ -41,7 +41,7 @@ class AttachmentRelationship extends One2MBeanRelationship
      * {@inheritDoc}
      * @see One2MBeanRelationship::add()
      */
-    public function add($lhs, $rhs, $additionalFields = array())
+    public function add($lhs, $rhs, $additionalFields = [])
     {
         $rhs->setAttachmentTeams($lhs, false);
         return parent::add($lhs, $rhs, $additionalFields);

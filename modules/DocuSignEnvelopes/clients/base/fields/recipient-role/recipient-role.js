@@ -12,6 +12,7 @@
  * @class View.Fields.Base.DocuSignEnvelopes.RecipientRoleField
  * @alias SUGAR.App.view.fields.BaseDocuSignEnvelopesRecipientRoleField
  * @extends View.Fields.Base.Field
+ * @deprecated Use {@link View.Fields.Base.DocusignRecipientRoleField} instead.
  */
 ({
     extendsFrom: 'EnumField',

@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Teabebaasi loendi töölaud',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Teabebaasi kirjete töölaud',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Teadmusbaasi fookuse sahtel',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Teabebaasi ajaskaala',
 
     'LBL_MODULE_NAME' => 'Teadmusbaas',
     'LBL_MODULE_NAME_SINGULAR' => 'Teadmusbaasi artikkel',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Sea väärtus primaarseks',
     'LBL_ITEM_REMOVE' => 'Eemalda üksus',
     'LBL_ITEM_ADD' => 'Lisa üksus',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => 'Redaktsiooni ID',
     'LBL_DOCUMENT_REVISION' => 'Redaktsioon',
     'LBL_NUMBER' => 'Number',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'Rohkem {{module}} artikleid ...',
     'LBL_LIST_FORM_TITLE' => 'Teadmusbaasi loend',
     'LBL_SEARCH_FORM_TITLE' => 'Teadmusbaasi otsing',
-);
+];

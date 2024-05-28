@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Csoport szintje:',
-    'LBL_DEAL_TOT'=>'teljes kedvezmény',
-    'LBL_DEAL_TOT_USDOLLAR'=>'teljes kedvezmény összege (USD)',
+    'LBL_DEAL_TOT' => 'teljes kedvezmény',
+    'LBL_DEAL_TOT_USDOLLAR' => 'teljes kedvezmény összege (USD)',
     'LBL_NEW_SUB' => 'Kedvezményes részösszeg:',
     'LBL_SHIPPING' => 'Szállítás:',
-    'LBL_SHIPPING_USDOLLAR'=>'Szállítás (USD)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Részösszeg (USD)',
+    'LBL_SHIPPING_USDOLLAR' => 'Szállítás (USD)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Részösszeg (USD)',
     'LBL_SUBTOTAL' => 'Részösszeg:',
     'LBL_TAXABLE_SUBTOTAL' => 'Adózható részösszeg',
-    'LBL_TAX_USDOLLAR'=>'Adó (USD)',
+    'LBL_TAX_USDOLLAR' => 'Adó (USD)',
     'LBL_TAX' => 'Adó:',
-    'LBL_TOTAL_USDOLLAR'=>'Összesen (USD)',
+    'LBL_TOTAL_USDOLLAR' => 'Összesen (USD)',
     'LBL_TOTAL' => 'Összesen:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Kapcsolódási Pozíció Megadása',
     'EXCEPTION_INVALID_QUOTE_ID' => 'Ajánlati Azonosító hiányzik a felhasználói adatból',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'Az Ön által kért ajánlat nem található',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'Az Ön által kért ajánlat nem található',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'További csoportos kedvezmény',
     'LBL_GROUP_TOTAL' => 'Csoport összege',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Csoportfejléc',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Az ajánlat alapértelmezett termékkötege',
     'LBL_ALERT_DELETING_ITEM' => 'Sorelem(ek) törlése',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Sorelem sikeresen törölve',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Termékcsomag idővonala',
+];

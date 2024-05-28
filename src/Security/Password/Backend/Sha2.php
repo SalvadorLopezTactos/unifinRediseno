@@ -56,16 +56,16 @@ class Sha2 implements BackendInterface, SaltConsumerInterface
      * Hashing options
      * @var array
      */
-    protected $options = array();
+    protected $options = [];
 
     /**
      * Allowed algorithms
      * @var array
      */
-    protected $algoList = array(
+    protected $algoList = [
         'CRYPT_SHA512',
         'CRYPT_SHA256',
-    );
+    ];
 
     /**
      * Ctor
@@ -147,7 +147,6 @@ class Sha2 implements BackendInterface, SaltConsumerInterface
     protected function isAlgoAvailable($algo)
     {
         if (in_array($algo, $this->algoList)) {
-
             // Because of https://bugs.php.net/bug.php?id=67827 checking for
             // the constants may cause issues on certain platforms. Lets
             // assume for now the administrator knows what he is doing.
@@ -166,7 +165,8 @@ class Sha2 implements BackendInterface, SaltConsumerInterface
      */
     protected function generateSalt()
     {
-        return sprintf('$%d$rounds=%d$%s',
+        return sprintf(
+            '$%d$rounds=%d$%s',
             $this->getAlgoNumber(),
             $this->getRounds(),
             $this->salt->generate(16)
@@ -188,6 +188,6 @@ class Sha2 implements BackendInterface, SaltConsumerInterface
      */
     protected function getRounds()
     {
-        return (int) isset($this->options['rounds']) ? $this->options['rounds'] : 5000;
+        return (int)isset($this->options['rounds']) ? $this->options['rounds'] : 5000;
     }
 }

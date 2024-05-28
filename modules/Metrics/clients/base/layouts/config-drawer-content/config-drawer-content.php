@@ -9,10 +9,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Metrics']['base']['layout']['config-drawer-content'] = array(
-    'components' => array(
-        array(
+$viewdefs['Metrics']['base']['layout']['config-drawer-content'] = [
+    'components' => [
+        [
             'view' => 'config-tab-settings',
-        ),
-    ),
-);
+        ],
+    ],
+];

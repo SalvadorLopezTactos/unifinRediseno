@@ -44,8 +44,16 @@ class AppsPeopleOzExternalMergedpeopleapiPerson extends \Google\Collection
   protected $clientDataDataType = 'array';
   protected $communicationEmailType = AppsPeopleOzExternalMergedpeopleapiCommunicationEmail::class;
   protected $communicationEmailDataType = 'array';
+  protected $connectionReminderType = AppsPeopleOzExternalMergedpeopleapiConnectionReminder::class;
+  protected $connectionReminderDataType = 'array';
+  protected $contactCreateContextInfoType = AppsPeopleOzExternalMergedpeopleapiContactCreateContextInfo::class;
+  protected $contactCreateContextInfoDataType = 'array';
+  protected $contactEditContextInfoType = AppsPeopleOzExternalMergedpeopleapiContactEditContextInfo::class;
+  protected $contactEditContextInfoDataType = 'array';
   protected $contactGroupMembershipType = AppsPeopleOzExternalMergedpeopleapiContactGroupMembership::class;
   protected $contactGroupMembershipDataType = 'array';
+  protected $contactPromptSettingsInfoType = AppsPeopleOzExternalMergedpeopleapiContactPromptSettingsInfo::class;
+  protected $contactPromptSettingsInfoDataType = 'array';
   protected $contactStateInfoType = AppsPeopleOzExternalMergedpeopleapiContactStateInfo::class;
   protected $contactStateInfoDataType = 'array';
   protected $coverPhotoType = AppsPeopleOzExternalMergedpeopleapiCoverPhoto::class;
@@ -102,6 +110,8 @@ class AppsPeopleOzExternalMergedpeopleapiPerson extends \Google\Collection
   protected $missionDataType = 'array';
   protected $nameType = AppsPeopleOzExternalMergedpeopleapiName::class;
   protected $nameDataType = 'array';
+  protected $namePronunciationAudioMetadataInfoType = AppsPeopleOzExternalMergedpeopleapiNamePronunciationAudioMetadataInfo::class;
+  protected $namePronunciationAudioMetadataInfoDataType = 'array';
   protected $nicknameType = AppsPeopleOzExternalMergedpeopleapiNickname::class;
   protected $nicknameDataType = 'array';
   protected $occupationType = AppsPeopleOzExternalMergedpeopleapiOccupation::class;
@@ -326,6 +336,48 @@ class AppsPeopleOzExternalMergedpeopleapiPerson extends \Google\Collection
     return $this->communicationEmail;
   }
   /**
+   * @param AppsPeopleOzExternalMergedpeopleapiConnectionReminder[]
+   */
+  public function setConnectionReminder($connectionReminder)
+  {
+    $this->connectionReminder = $connectionReminder;
+  }
+  /**
+   * @return AppsPeopleOzExternalMergedpeopleapiConnectionReminder[]
+   */
+  public function getConnectionReminder()
+  {
+    return $this->connectionReminder;
+  }
+  /**
+   * @param AppsPeopleOzExternalMergedpeopleapiContactCreateContextInfo[]
+   */
+  public function setContactCreateContextInfo($contactCreateContextInfo)
+  {
+    $this->contactCreateContextInfo = $contactCreateContextInfo;
+  }
+  /**
+   * @return AppsPeopleOzExternalMergedpeopleapiContactCreateContextInfo[]
+   */
+  public function getContactCreateContextInfo()
+  {
+    return $this->contactCreateContextInfo;
+  }
+  /**
+   * @param AppsPeopleOzExternalMergedpeopleapiContactEditContextInfo[]
+   */
+  public function setContactEditContextInfo($contactEditContextInfo)
+  {
+    $this->contactEditContextInfo = $contactEditContextInfo;
+  }
+  /**
+   * @return AppsPeopleOzExternalMergedpeopleapiContactEditContextInfo[]
+   */
+  public function getContactEditContextInfo()
+  {
+    return $this->contactEditContextInfo;
+  }
+  /**
    * @param AppsPeopleOzExternalMergedpeopleapiContactGroupMembership[]
    */
   public function setContactGroupMembership($contactGroupMembership)
@@ -338,6 +390,20 @@ class AppsPeopleOzExternalMergedpeopleapiPerson extends \Google\Collection
   public function getContactGroupMembership()
   {
     return $this->contactGroupMembership;
+  }
+  /**
+   * @param AppsPeopleOzExternalMergedpeopleapiContactPromptSettingsInfo[]
+   */
+  public function setContactPromptSettingsInfo($contactPromptSettingsInfo)
+  {
+    $this->contactPromptSettingsInfo = $contactPromptSettingsInfo;
+  }
+  /**
+   * @return AppsPeopleOzExternalMergedpeopleapiContactPromptSettingsInfo[]
+   */
+  public function getContactPromptSettingsInfo()
+  {
+    return $this->contactPromptSettingsInfo;
   }
   /**
    * @param AppsPeopleOzExternalMergedpeopleapiContactStateInfo[]
@@ -716,6 +782,20 @@ class AppsPeopleOzExternalMergedpeopleapiPerson extends \Google\Collection
   public function getName()
   {
     return $this->name;
+  }
+  /**
+   * @param AppsPeopleOzExternalMergedpeopleapiNamePronunciationAudioMetadataInfo[]
+   */
+  public function setNamePronunciationAudioMetadataInfo($namePronunciationAudioMetadataInfo)
+  {
+    $this->namePronunciationAudioMetadataInfo = $namePronunciationAudioMetadataInfo;
+  }
+  /**
+   * @return AppsPeopleOzExternalMergedpeopleapiNamePronunciationAudioMetadataInfo[]
+   */
+  public function getNamePronunciationAudioMetadataInfo()
+  {
+    return $this->namePronunciationAudioMetadataInfo;
   }
   /**
    * @param AppsPeopleOzExternalMergedpeopleapiNickname[]

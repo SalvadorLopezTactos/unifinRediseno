@@ -9,44 +9,43 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- 
-require_once("modules/Meetings/Meeting.php");
+
+require_once 'modules/Meetings/Meeting.php';
 
 /**
  * Class for sending email reminders of meetings and call to invitees
  */
 class EmailReminder
 {
-    
     /**
      * string db datetime of now
      */
     protected $now;
-    
+
     /**
      * string db datetime will be fetched till
      */
     protected $max;
-    
+
     /**
      * constructor
      */
     public function __construct()
     {
         $max_time = 0;
-        if(isset($GLOBALS['app_list_strings']['reminder_time_options'])){
-            foreach($GLOBALS['app_list_strings']['reminder_time_options'] as $seconds => $value ) {
-                if ( $seconds > $max_time ) {
+        if (isset($GLOBALS['app_list_strings']['reminder_time_options'])) {
+            foreach ($GLOBALS['app_list_strings']['reminder_time_options'] as $seconds => $value) {
+                if ($seconds > $max_time) {
                     $max_time = $seconds;
                 }
             }
-        }else{
+        } else {
             $max_time = 8400;
         }
         $this->now = $GLOBALS['timedate']->nowDb();
         $this->max = $GLOBALS['timedate']->getNow()->modify("+{$max_time} seconds")->asDb();
     }
-    
+
     /**
      * main method that runs reminding process
      * @return boolean
@@ -55,30 +54,30 @@ class EmailReminder
     {
 
         $admin = Administration::getSettings();
-        
+
         $meetings = $this->getMeetingsForRemind();
-        foreach($meetings as $id ) {
-            $recipients = $this->getRecipients($id,'Meetings');
+        foreach ($meetings as $id) {
+            $recipients = $this->getRecipients($id, 'Meetings');
             $bean = BeanFactory::getBean('Meetings', $id);
-            if ( $this->sendReminders($bean, $admin, $recipients) ) {
-                $bean->email_reminder_sent = 1;
-                $bean->save();
-            }            
-        }
-        
-        $calls = $this->getCallsForRemind();
-        foreach($calls as $id ) {
-            $recipients = $this->getRecipients($id,'Calls');
-            $bean = BeanFactory::getBean('Calls', $id);
-            if ( $this->sendReminders($bean, $admin, $recipients) ) {
+            if ($this->sendReminders($bean, $admin, $recipients)) {
                 $bean->email_reminder_sent = 1;
                 $bean->save();
             }
         }
-        
+
+        $calls = $this->getCallsForRemind();
+        foreach ($calls as $id) {
+            $recipients = $this->getRecipients($id, 'Calls');
+            $bean = BeanFactory::getBean('Calls', $id);
+            if ($this->sendReminders($bean, $admin, $recipients)) {
+                $bean->email_reminder_sent = 1;
+                $bean->save();
+            }
+        }
+
         return true;
     }
-    
+
     /**
      * send reminders
      * @param SugarBean $bean
@@ -86,26 +85,27 @@ class EmailReminder
      * @param array $recipients
      * @return boolean
      */
-    protected function sendReminders(SugarBean $bean, Administration $admin, $recipients) {
-        if (!empty($_SESSION["authenticated_user_language"])) {
-            $currentLanguage = $_SESSION["authenticated_user_language"];
+    protected function sendReminders(SugarBean $bean, Administration $admin, $recipients)
+    {
+        if (!empty($_SESSION['authenticated_user_language'])) {
+            $currentLanguage = $_SESSION['authenticated_user_language'];
         } else {
-            $currentLanguage = $GLOBALS["sugar_config"]["default_language"];
+            $currentLanguage = $GLOBALS['sugar_config']['default_language'];
         }
 
         $user = BeanFactory::getBean('Users', $bean->created_by);
-            
+
         $xtpl = new XTemplate(get_notify_template_file($currentLanguage));
         $xtpl = $this->setReminderBody($xtpl, $bean, $user);
 
-        $templateName = "{$GLOBALS["beanList"][$bean->module_dir]}Reminder";
+        $templateName = "{$GLOBALS['beanList'][$bean->module_dir]}Reminder";
         $xtpl->parse($templateName);
         $xtpl->parse("{$templateName}_Subject");
 
-        $mailTransmissionProtocol = "unknown";
+        $mailTransmissionProtocol = 'unknown';
 
         try {
-            $mailer                   = MailerFactory::getSystemDefaultMailer();
+            $mailer = MailerFactory::getSystemDefaultMailer();
             $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
 
             // set the subject of the email
@@ -126,7 +126,7 @@ class EmailReminder
             foreach ($recipients as $recipient) {
                 // reuse the mailer, but process one send per recipient
                 $mailer->clearRecipients();
-                $mailer->addRecipientsTo(new EmailIdentity($recipient["email"], $recipient["name"]));
+                $mailer->addRecipientsTo(new EmailIdentity($recipient['email'], $recipient['name']));
                 $mailer->send();
             }
         } catch (MailerException $me) {
@@ -134,10 +134,10 @@ class EmailReminder
 
             switch ($me->getCode()) {
                 case MailerException::FailedToConnectToRemoteServer:
-                    $GLOBALS["log"]->fatal("Email Reminder: error sending email, system smtp server is not set");
+                    $GLOBALS['log']->fatal('Email Reminder: error sending email, system smtp server is not set');
                     break;
                 default:
-                    $GLOBALS["log"]->fatal("Email Reminder: error sending e-mail (method: {$mailTransmissionProtocol}), (error: {$message})");
+                    $GLOBALS['log']->fatal("Email Reminder: error sending e-mail (method: {$mailTransmissionProtocol}), (error: {$message})");
                     break;
             }
 
@@ -146,23 +146,23 @@ class EmailReminder
 
         return true;
     }
-    
+
     /**
      * set reminder body
      * @param XTemplate $xtpl
      * @param SugarBean $bean
      * @param User $user
-     * @return XTemplate 
-    */
+     * @return XTemplate
+     */
     protected function setReminderBody(XTemplate $xtpl, SugarBean $bean, User $user)
     {
-    
+
         $object = strtoupper($bean->object_name);
 
         $xtpl->assign("{$object}_SUBJECT", $bean->name);
         $date = $GLOBALS['timedate']->fromDB($bean->date_start);
-        $xtpl->assign("{$object}_STARTDATE", $GLOBALS['timedate']->asUser($date, $user)." ".TimeDate::userTimezoneSuffix($date, $user));
-        if ( isset($bean->location) ) {
+        $xtpl->assign("{$object}_STARTDATE", $GLOBALS['timedate']->asUser($date, $user) . ' ' . TimeDate::userTimezoneSuffix($date, $user));
+        if (isset($bean->location)) {
             $xtpl->assign("{$object}_LOCATION", $bean->location);
         }
         $xtpl->assign("{$object}_CREATED_BY", $user->full_name);
@@ -170,7 +170,7 @@ class EmailReminder
 
         return $xtpl;
     }
-    
+
     /**
      * get meeting ids list for remind
      * @return array
@@ -189,17 +189,17 @@ class EmailReminder
         ";
         $result = $db->getConnection()
             ->executeQuery($query, [$this->now, $this->max]);
-        $meetings = array();
+        $meetings = [];
         foreach ($result->iterateAssociative() as $row) {
-            $remind_ts = $GLOBALS['timedate']->fromDb($db->fromConvert($row['date_start'],'datetime'))->modify("-{$row['email_reminder_time']} seconds")->ts;
+            $remind_ts = $GLOBALS['timedate']->fromDb($db->fromConvert($row['date_start'], 'datetime'))->modify("-{$row['email_reminder_time']} seconds")->ts;
             $now_ts = $GLOBALS['timedate']->getNow()->ts;
-            if ( $now_ts >= $remind_ts ) {
+            if ($now_ts >= $remind_ts) {
                 $meetings[] = $row['id'];
             }
         }
         return $meetings;
     }
-    
+
     /**
      * get calls ids list for remind
      * @return array
@@ -218,39 +218,39 @@ class EmailReminder
         ";
         $result = $db->getConnection()
             ->executeQuery($query, [$this->now, $this->max]);
-        $calls = array();
+        $calls = [];
         foreach ($result->iterateAssociative() as $row) {
-            $remind_ts = $GLOBALS['timedate']->fromDb($db->fromConvert($row['date_start'],'datetime'))->modify("-{$row['email_reminder_time']} seconds")->ts;
+            $remind_ts = $GLOBALS['timedate']->fromDb($db->fromConvert($row['date_start'], 'datetime'))->modify("-{$row['email_reminder_time']} seconds")->ts;
             $now_ts = $GLOBALS['timedate']->getNow()->ts;
-            if ( $now_ts >= $remind_ts ) {
+            if ($now_ts >= $remind_ts) {
                 $calls[] = $row['id'];
             }
         }
         return $calls;
     }
-    
+
     /**
      * get recipients of reminding email for specific activity
      * @param string $id
      * @param string $module
      * @return array
      */
-    protected function getRecipients($id, $module = "Meetings")
+    protected function getRecipients($id, $module = 'Meetings')
     {
         global $db;
-    
-        switch($module ) {
-            case "Meetings":
-                $field_part = "meeting";
+
+        switch ($module) {
+            case 'Meetings':
+                $field_part = 'meeting';
                 break;
-            case "Calls":
-                $field_part = "call";
+            case 'Calls':
+                $field_part = 'call';
                 break;
             default:
-                return array();
+                return [];
         }
 
-        $emails = array();
+        $emails = [];
         // fetch users
         $query = <<<SQL
 SELECT user_id
@@ -262,15 +262,15 @@ SQL;
             ->executeQuery($query, [$id]);
         foreach ($result->iterateAssociative() as $row) {
             $user = BeanFactory::getBean('Users', $row['user_id']);
-            if ( !empty($user->email1) ) {
-                $arr = array(
+            if (!empty($user->email1)) {
+                $arr = [
                     'type' => 'Users',
                     'name' => $user->full_name,
                     'email' => $user->email1,
-                );
+                ];
                 $emails[] = $arr;
             }
-        }        
+        }
         // fetch contacts
         $query = <<<SQL
 SELECT contact_id
@@ -282,15 +282,15 @@ SQL;
             ->executeQuery($query, [$id]);
         foreach ($result->iterateAssociative() as $row) {
             $contact = BeanFactory::getBean('Contacts', $row['contact_id']);
-            if ( !empty($contact->email1) ) {
-                $arr = array(
+            if (!empty($contact->email1)) {
+                $arr = [
                     'type' => 'Contacts',
                     'name' => $contact->full_name,
                     'email' => $contact->email1,
-                );
+                ];
                 $emails[] = $arr;
             }
-        }        
+        }
         // fetch leads
         $query = <<<SQL
 SELECT lead_id
@@ -302,16 +302,15 @@ SQL;
             ->executeQuery($query, [$id]);
         foreach ($result->iterateAssociative() as $row) {
             $lead = BeanFactory::getBean('Leads', $row['lead_id']);
-            if ( !empty($lead->email1) ) {
-                $arr = array(
+            if (!empty($lead->email1)) {
+                $arr = [
                     'type' => 'Leads',
                     'name' => $lead->full_name,
                     'email' => $lead->email1,
-                );
+                ];
                 $emails[] = $arr;
             }
         }
         return $emails;
     }
 }
-

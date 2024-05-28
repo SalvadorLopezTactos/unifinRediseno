@@ -12,30 +12,25 @@
  */
 
 $viewdefs['RevenueLineItems']['base']['layout']['convert-main-for-leads'] =
-[
-    'module' => 'RevenueLineItems',
-    'required' => false,
-    'copyData' => true,
-    'duplicateCheckOnStart' => false,
-    'duplicateCheckRequiredFields' =>
     [
-        'opportunity_id',
-    ],
-    'dependentModules' =>
-    [
-        'Opportunities' =>
-        [
-            'fieldMapping' =>
-            [
-                'opportunity_id' => 'id',
-                'account_id' => 'account_id',
-            ],
+        'module' => 'RevenueLineItems',
+        'required' => false,
+        'copyData' => true,
+        'duplicateCheckOnStart' => false,
+        'duplicateCheckRequiredFields' => [
+            'opportunity_id',
         ],
-        
-    ],
-    'hiddenFields' =>
-    [
-        'account_name' => 'Opportunities',
-        'opportunity_name' => 'Opportunities',
-    ],
-];
+        'dependentModules' => [
+            'Opportunities' => [
+                'fieldMapping' => [
+                    'opportunity_id' => 'id',
+                    'account_id' => 'account_id',
+                ],
+            ],
+
+        ],
+        'hiddenFields' => [
+            'account_name' => 'Opportunities',
+            'opportunity_name' => 'Opportunities',
+        ],
+    ];

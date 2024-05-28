@@ -51,7 +51,7 @@ abstract class PMSEAbstractRequestHandler
      * @param string $externalAction Additional action to take
      * @return void
      */
-    public function executeRequest($args = array(), $createThread = false, $bean = null, $externalAction = '')
+    public function executeRequest($args = [], $createThread = false, $bean = null, $externalAction = '')
     {
         // Get the request object setup
         $request = $this->getRequest();

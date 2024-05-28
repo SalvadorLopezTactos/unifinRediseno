@@ -11,10 +11,10 @@
  */
 --}}
 <div class="flex-list-view scroll-width left-actions quote-data-table-scrollable">
-    <div class="flex-list-view-content">
-        <table class="table dataTable quote-data-list-table reorderable-columns">
+    <div class="flex-list-view-content h-full overflow-auto relative">
+        <table class="table dataTable quote-data-list-table reorderable-columns overflow-auto">
             <thead>
-                <tr class="flex-list-row-header">
+                <tr class="flex-list-row-header sticky top-0 z-30">
                     {{#each leftColumns}}
                         <th{{#if name}} data-fieldname="{{name}}"{{/if}}>
                             {{field ../this model=../model template='list'}}

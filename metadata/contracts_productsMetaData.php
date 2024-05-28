@@ -10,52 +10,52 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['contracts_products'] = array(
+$dictionary['contracts_products'] = [
     'table' => 'contracts_products',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'product_id' => array(
+        ],
+        'product_id' => [
             'name' => 'product_id',
             'type' => 'id',
-        ),
-        'contract_id' => array(
+        ],
+        'contract_id' => [
             'name' => 'contract_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'contracts_prod_pk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'contracts_prod_alt',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'contract_id',
                 'product_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'contracts_products' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'contracts_products' => [
             'lhs_module' => 'Contracts',
             'lhs_table' => 'contracts',
             'lhs_key' => 'id',
@@ -66,6 +66,6 @@ $dictionary['contracts_products'] = array(
             'join_table' => 'contracts_products',
             'join_key_lhs' => 'contract_id',
             'join_key_rhs' => 'product_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

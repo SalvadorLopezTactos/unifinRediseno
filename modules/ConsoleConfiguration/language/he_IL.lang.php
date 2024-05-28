@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'תצורת מסוף',
     'LBL_MODULE_NAME_SINGULAR' => 'תצורת מסוף',
     'LBL_CONSOLE_CONFIG_TITLE' => 'מסוף',
@@ -55,4 +56,4 @@ $mod_strings = array(
     'LBL_CONSOLE_DIRECTIONS_CHANGE' => 'השינויים יבואו לידי ביטוי באופן מיידי, אך עליך לשמור על-מנת שהם ייכנסו לתוקף.',
     'LBL_CONSOLE_DIRECTIONS_FILTER_AND' => 'וגם ',
     'LBL_CONSOLE_DIRECTIONS_FILTER_OR' => 'או ',
-);
+];

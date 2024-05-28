@@ -16,40 +16,47 @@
  */
 class SugarRegistry
 {
-    private static $_instances = array();
-    private $_data = array();
+    // @codingStandardsIgnoreLine PSR2.Classes.PropertyDeclaration.Underscore
+    private static $_instances = [];
+    // @codingStandardsIgnoreLine PSR2.Classes.PropertyDeclaration.Underscore
+    private $_data = [];
 
-    public function __construct() {
-
+    public function __construct()
+    {
     }
 
-    public static function getInstance($name = 'default') {
+    public static function getInstance($name = 'default')
+    {
         if (!isset(self::$_instances[$name])) {
             self::$_instances[$name] = new self();
         }
         return self::$_instances[$name];
     }
 
-    public function __get($key) {
+    public function __get($key)
+    {
         return $this->_data[$key] ?? null;
     }
 
-    public function __set($key, $value) {
+    public function __set($key, $value)
+    {
         $this->_data[$key] = $value;
     }
 
-    public function __isset($key) {
+    public function __isset($key)
+    {
         return isset($this->_data[$key]);
     }
 
-    public function __unset($key) {
+    public function __unset($key)
+    {
         unset($this->_data[$key]);
     }
 
-    public function addToGlobals() {
+    public function addToGlobals()
+    {
         foreach ($this->_data as $k => $v) {
             $GLOBALS[$k] = $v;
         }
     }
 }
-

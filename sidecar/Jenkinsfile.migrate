@@ -10,14 +10,14 @@ pipeline {
         spec:
           containers:
           - name: karma
-            image: sugarcrm/ea-karma:latest
+            image: sugarcrm/ea-karma:node18_php82
             imagePullPolicy: IfNotPresent
             tty: true
             command:
             - cat
           imagePullSecrets:
             - name: sugarcrmci-dockerhub-v1-ro-secret
-      """.stripIndent().trim()
+      """.stripIndent()
     }
   }
 
@@ -57,7 +57,7 @@ pipeline {
             sh """
               node_modules/gulp/bin/gulp.js karma --ci --coverage --path="$WORKSPACE" --browsers dockerChromeHeadless
               rm -rf node_modules
-              cd karma/sidecar/coverage-html/ && mv HeadlessChrome* headless-chrome
+              cd karma/sidecar/coverage-html/ && mv Chrome* headless-chrome
             """
           }
         }

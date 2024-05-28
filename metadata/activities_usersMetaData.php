@@ -10,71 +10,71 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['activities_users'] = array(
+$dictionary['activities_users'] = [
     'table' => 'activities_users',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
             'required' => true,
-        ),
+        ],
 
-        'activity_id' => array(
+        'activity_id' => [
             'name' => 'activity_id',
             'type' => 'id',
             'required' => true,
-        ),
+        ],
 
-        'parent_type' => array(
+        'parent_type' => [
             'name' => 'parent_type',
             'type' => 'varchar',
-            'len'  => 100,
-        ),
+            'len' => 100,
+        ],
 
-        'parent_id' => array(
+        'parent_id' => [
             'name' => 'parent_id',
             'type' => 'id',
-        ),
+        ],
 
-        'fields' => array(
+        'fields' => [
             'name' => 'fields',
             'type' => 'json',
             'dbType' => 'longtext',
             'required' => true,
-        ),
+        ],
 
-        'date_modified' => array(
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
+        ],
 
-        'deleted' => array (
+        'deleted' => [
             'name' => 'deleted',
             'vname' => 'LBL_DELETED',
             'type' => 'bool',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'activities_users_pk',
             'type' => 'primary',
-            'fields' => array('id'),
-        ),
-        array(
+            'fields' => ['id'],
+        ],
+        [
             'name' => 'activities_records',
             'type' => 'index',
-            'fields' => array('parent_type', 'parent_id'),
-        ),
-        array(
+            'fields' => ['parent_type', 'parent_id'],
+        ],
+        [
             'name' => 'activities_users_parent',
             'type' => 'index',
-            'fields' => array('activity_id', 'parent_id', 'parent_type'),
-        ),
-    ),
+            'fields' => ['activity_id', 'parent_id', 'parent_type'],
+        ],
+    ],
 
-    'relationships' => array(
-        'activities_users' => array(
+    'relationships' => [
+        'activities_users' => [
             'lhs_module' => 'Activities',
             'lhs_table' => 'activities',
             'lhs_key' => 'id',
@@ -86,9 +86,9 @@ $dictionary['activities_users'] = array(
             'join_key_lhs' => 'activity_id',
             'join_key_rhs' => 'parent_id',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Users'
-        ),
-        'activities_teams' => array(
+            'relationship_role_column_value' => 'Users',
+        ],
+        'activities_teams' => [
             'lhs_module' => 'Activities',
             'lhs_table' => 'activities',
             'lhs_key' => 'id',
@@ -100,7 +100,7 @@ $dictionary['activities_users'] = array(
             'join_key_lhs' => 'activity_id',
             'join_key_rhs' => 'parent_id',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Teams'
-        ),
-    )
-);
+            'relationship_role_column_value' => 'Teams',
+        ],
+    ],
+];

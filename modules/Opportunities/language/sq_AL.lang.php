@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Paneli i listës së shanseve',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të shanseve',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Kuotat',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Mundësitë nga një llogari dinamike',
+    'LBL_TOP_10_OPP' => '10 mundësitë e para të hapura',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Nënvizimi: Mundësitë e mia aktive',
+    'LBL_MY_ACTIVE_OPP' => 'Mundësitë e mia aktive',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Totali i gazsjellësit është',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Roli i mundësisë',
+    'LBL_OPPORTUNITY_ROLE' => 'Roli i mundësisë',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Shënime',
     'LBL_TAB_OPPORTUNITY' => 'Rishiko {{module}}',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'Duke klikuar Konfirmo, ju do të fshini të gjitha të dhënat e parashikimeve dhe do të ndërroni shikimin e mundësive. Nëse nuk e keni këtë për qëllim, klikoni anulo për të kthyer konfigurimet e mëparshme.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'Duke klikuar "Konfirmo", do të fshish TË GJITHA të dhënat e parashikimeve dhe do të ndryshosh shikimin e mundësive. '
-        .'Do të çaktivizohen edhe TË GJITHA përcaktimet e procesit me një modul të synuar për rreshtin e të ardhurave. '
-        .'Nëse nuk ke këtë për qëllim, kliko anulo për t&#39;u kthyer në cilësimet e mëparshme.',
+        . 'Do të çaktivizohen edhe TË GJITHA përcaktimet e procesit me një modul të synuar për rreshtin e të ardhurave. '
+        . 'Nëse nuk ke këtë për qëllim, kliko anulo për t&#39;u kthyer në cilësimet e mëparshme.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Nëse të gjitha rrjeshtat e të të ardhurave janë të mbyllura dhe të paktën një ka fituar,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'faza e shitjeve të mundësisë është caktuar si "E mbyllur si e fituar".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Nëse të gjitha rreshtat e të të ardhurave janë fazën e shitjes "Të mbyllura si të humbura",',
@@ -220,25 +223,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Pas fillimit të ndryshimit, raportet e artikujve të linjës të së ardhurave do të krijohen për çdo modul {{module_name}} ekzistues në sfond. Kur artikujt e linjës të së ardhurave të plotësohen dhe të disponohen, në adresën e emailit në profilin e përdoruesit do të dërgohet një njoftim. Ki parasysh se shembulli yt duhet të konfigurohet për të dërguar email nëpërmjet "Admin > Cilësimet e emailit" në mënyrë që të dërgohet njoftimi.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale nga fillimi deri në fund. Secili regjistrim i {{module_name}} përfaqëson një shitje potenciale dhe përfshin të dhëna përkatëse për shitjen dhe në lidhje me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj.. Një {{module_name}} zakonisht do të kalojë nëpër disa faza të shitjes derisa të shënohet si "Fitim i mbyllur" ose "Humbje e mbyllur". {{plural_module_name}} mund të përdoret edhe më tej duke përdorur modulin {{forecasts_singular_module}} për të kuptuar dhe parashikuar tendencat e shitjeve, si dhe për t&#39;u përqendruar në arritjen e kuotave të shitjeve.',
+    'LBL_HELP_RECORDS' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale nga fillimi në fund. Çdo regjistër {{module_name}} përfaqëson një shitje të mundshme dhe përfshin të dhënat përkatëse të shitjes, si dhe të dhëna që kanë të bëjnë me regjistra të tjerë të rëndësishëm, të tillë si {{quotes_module}}, {{contacts_module}} etj. Zakonisht, një {{module_name}} kalon në disa faza të shitjes derisa të shënohet si "Mbyllje e suksesshme" ose "Mbyllje e pasuksesshme". {{plural_module_name}} mund të shfrytëzohet edhe më tej duke përdorur modulin {{forecasts_singular_module}} të Sugar për të kuptuar dhe parashikuar tendencat e shitjeve, si dhe për të përqendruar punën në arritjen e kuotave të shitjeve.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale dhe artikujt në rresht që u përkasin atyre shitjeve nga fillimi deri në fund. Secili regjistrim i {{module_name}} përfaqëson një shitje të mundshme dhe përfshin të dhëna përkatëse për shitjen dhe në lidhje me regjistrime të tjera të rëndësishme, si {{quotes_module}}, {{contacts_module}} etj..
+    'LBL_HELP_RECORD' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale dhe artikujt që u përkasin atyre shitjeve nga fillimi deri në fund. Çdo regjistër {{module_name}} përfaqëson një shitje të mundshme dhe përfshin të dhënat përkatëse të shitjes, si dhe të dhëna që kanë të bëjnë me regjistra të tjerë të rëndësishëm, të tillë si {{quotes_module}}, {{contacts_module}} etj.
 
-- Modifiko fushat e këtij regjistrimi duke klikuar një fushë individuale ose butonin "Modifiko".
-- Shiko ose modifiko lidhjet për te regjistrimet e tjera në nënpanelet duke lëvizur panelin e poshtëm majtas te "Pamja e të dhënave".
-- Bëj komente, shiko komentet e përdoruesve dhe regjistro historikun e ndryshimeve në {{activitystream_singular_module}} duke lëvizur panelin e poshtëm majtas te "Transmetimi i aktiviteteve".
-- Ndiq ose bëje të preferuar këtë regjistrim duke përdorur ikonat në të djathtë të emrit të regjistrimit.
-- Veprime shtesë disponohen në menynë me zbritje të veprimeve në të djathë të butonit "Modifiko".',
+- Modifiko fushat e këtij regjistri duke klikuar një fushë individuale ose butonin "Modifiko".
+- Shiko ose modifiko lidhjet për te regjistrat e tjerë te nënpanelet duke e ndryshuar panelin e poshtëm majtas në opsionin "Pamja e të dhënave".
+- Bëj komente dhe shiko komentet e përdoruesve, si dhe regjistro historikun e ndryshimeve te {{activitystream_singular_module}} duke e ndryshuar panelin e poshtëm majtas në opsionin "Transmetimi i aktivitetit".
+- Ndiq ose bëje të preferuar këtë regjistër duke përdorur ikonat në të djathtë të emrit të regjistrit.
+- Veprimet shtesë disponohen në menynë me zbritje "Veprimet" në të djathtë të butonit "Modifiko".',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale artikujt në rresht që u përkasin atyre shitjeve nga fillimi deri në fund. Secili regjistrim i {{module_name}} përfaqëson një shitje të mundshme dhe përfshin të dhëna përkatëse për shitjen dhe në lidhje me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj..
+    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale dhe artikujt që u përkasin atyre shitjeve nga fillimi deri në fund. Çdo regjistër {{module_name}} përfaqëson një shitje të mundshme dhe përfshin të dhënat përkatëse të shitjes, si dhe të dhëna që kanë të bëjnë me regjistra të tjerë të rëndësishëm, të tillë si {{quotes_module}}, {{contacts_module}}, etj.
 
 Për të krijuar një {{module_name}}:
-1. Jep vlerat për fushat sipas dëshirës. 
- - Fushat e shënuara me "E nevojshme" duhet të plotësohen para se të ruhen. 
- - Kliko "Shfaq më shumë" për të paraqitur fusha shtesë sipas nevojës.
-2. Kliko "Ruaj" për të finalizuar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
+1. Jep vlerat për fushat sipas dëshirës.
+ - Fushat e shënuara si "Të domosdoshme" duhet të plotësohen përpara ruajtjes.
+ - Kliko "Shfaq më shumë" për të shfaqur fusha shtesë nëse është e nevojshme.
+2. Kliko "Ruaj" për të finalizuar regjistrin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
 
 // END ENT/ULT
 
@@ -260,4 +263,9 @@ Për të krijuar një {{module_name}}:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Parashikimi i mbylljes së mundësisë',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Shfaq detajet e parashikimit për një mundësi specifike',
-);
+    'LBL_AI_WINRATE' => 'Norma e fitores',
+    'LBL_AI_WONOPP' => 'Mundësitë e fituara',
+    'LBL_AI_CLOSINGTIME' => 'Koha e mbylljes',
+    'LBL_AI_CLOSEDOPP' => 'Mundësitë e mbyllura',
+    'LBL_AI_LEADTIMESPAN' => 'Koha midis krijimit të mundësisë dhe mbylljes së suksesshme',
+];

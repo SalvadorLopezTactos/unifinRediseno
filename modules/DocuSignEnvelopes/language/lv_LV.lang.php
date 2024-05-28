@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Iegūt aploksni',
     'LBL_CLOUD_SERVICE_TYPE' => 'Mākoņa pakalpojuma veids',
     'LBL_CLOUD_PATH' => 'Mākoņa ceļš',
+    'LBL_CLOUD_DRIVE_ID' => 'Diska ID',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign aplokšņu saraksta informācijas panelis',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'DocuSign aplokšņu ieraksta informācijas panelis',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Nesenās DocuSign aploksnes',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign aplokšņu fokusa panelis',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'DocuSign aploksnes laika josla',
 
     'LBL_NEW_ENVELOPE' => 'Jauna aploksne',
     'LBL_DOCUMENT_IS_NOW' => ' tagad ir ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Sūtīt',
     'LBL_BUTTON_CLEAR' => 'Notīrīt',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Lietot veidni',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Sūtīt ar sagatavi',
     'LBL_PLEASE_LOG_IN' => 'No sākuma pierakstieties DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Jūs nevarat lejupielādēt šo dokumentu. To ir izveidojis cits lietotājs!',
     'LBL_SEND_NOT_ALLOWED' => 'Jūs nevarat nosūtīt šo aploksni. To ir izveidojis cits lietotājs!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Uzmetums ir mainīts. Atjaunināt statusu uz pašreizējo ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'DocuSign aploksne ir atjaunināta!',
     'LBL_DRAFT_CHANGED_ERROR' => 'DocuSign aploksnes statuss netika atjaunināta. Sīkāku informāciju skatiet žurnālos!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'DocuSign veidni nevar piemērot',
     'LBL_ENVELOPE_NOT_SENT' => 'Aploksne nav nosūtīta!',
     'LBL_ENVELOPE_SENT' => 'Aploksne tika nosūtīta vēlreiz!',
     'LBL_DOCUMENT_ADDED' => 'Dokuments pievienots ierakstam!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Loma',
     'LBL_SELECT_BUTTON_LABEL' => 'Atlasīt',
     'LBL_BACK_BUTTON_LABEL' => 'Atpakaļ',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Meklēt pēc veidnes nosaukuma',
+    'LBL_ENVELOPE_NAME' => 'Aploksnes nosaukums',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Aploksnes nosaukums var būt tukšs',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Neizdevās iegūt potenciālos saņēmējus!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Neizdevās iegūt veidnes!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Lūdzu, atlasiet lomu katram saņēmējam',
+    
+    'LBL_DOWNLOAD' => 'Lejupielādēt',
+    'LBL_OPEN_DRAFT' => 'Atvērt melnrakstu',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Dokumentus bez faila nevar nosūtīt uz DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Noklikšķiniet uz pogas Plus, lai sāktu parakstīšanas procesu',
+    'LBL_NO_DOC_SELECTED' => 'Vispirms atlasiet dokumentus',
+    'LBL_SELECT_RECIPIENTS' => 'Atlasīt parakstītāja saņēmēju',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Neiekļaut',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Lai gūtu labāku pieredzi, jums ir jāinstalē DocuSign lietotne.',
 ];

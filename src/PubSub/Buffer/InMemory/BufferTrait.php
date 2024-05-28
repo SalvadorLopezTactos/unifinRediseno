@@ -18,7 +18,9 @@ use Sugarcrm\Sugarcrm\PubSub\Buffer\TimeoutTrait;
 
 trait BufferTrait
 {
-    use CapacityTrait, TimeoutTrait, TimerAwareTrait;
+    use CapacityTrait;
+    use TimeoutTrait;
+    use TimerAwareTrait;
 
     /**
      * The in-memory buffer.

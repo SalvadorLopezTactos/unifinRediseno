@@ -10,26 +10,25 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
- * Description:  
+ * Description:
  ********************************************************************************/
 
 
 global $mod_strings;
 
 
-
 $focus = BeanFactory::newBean('WorkFlow');
 
-if(!isset($_REQUEST['record']))
-	sugar_die($mod_strings['ERR_DELETE_RECORD']);
+if (!isset($_REQUEST['record'])) {
+    sugar_die($mod_strings['ERR_DELETE_RECORD']);
+}
 
-	
-	$focus->retrieve($_REQUEST['record']);
-	
-    $focus->mark_deleted($_REQUEST['record']);
-	//Re-write workflow
-	$focus->write_workflow();
+
+$focus->retrieve($_REQUEST['record']);
+
+$focus->mark_deleted($_REQUEST['record']);
+//Re-write workflow
+$focus->write_workflow();
 header('Location: index.php?' . http_build_query([
         'module' => $_REQUEST['return_module'],
         'action' => $_REQUEST['return_action'],

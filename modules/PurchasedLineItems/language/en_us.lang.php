@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Purchased Line Items List Dashboard',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Purchased Line Items Record Dashboard',
     'LBL_PARENT_PURCHASE' => 'Parent Purchase',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Purchased Line Item Timeline',
 ];

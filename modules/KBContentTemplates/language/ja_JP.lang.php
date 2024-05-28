@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'ナレッジ ベース テンプレート',
     'LBL_MODULE_NAME_SINGULAR' => 'ナレッジ ベース テンプレート',
     'LBL_MODULE_TITLE' => 'ナレッジ ベース テンプレート',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'テンプレートの表示',
     'LBL_TEXT_BODY' => '本文',
     'LBL_LIST_TEMPLATE_NAME' => 'テンプレート名',
-);
+];

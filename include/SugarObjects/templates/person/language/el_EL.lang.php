@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_SALUTATION' => 'Προσφώνηση',
     'LBL_NAME' => 'Όνομα',
     'LBL_FIRST_NAME' => 'Όνομα',
@@ -68,4 +68,4 @@ $mod_strings = array(
     'LBL_GOOGLEPLUS' => 'Ταυτότητα Google Plus',
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Αντιγραφή της εναλλακτικής διεύθυνσης στη κύρια διεύθυνση',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Αντιγραφή της κύριας διεύθυνσης στην εναλλακτική διεύθυνση',
-);
+];

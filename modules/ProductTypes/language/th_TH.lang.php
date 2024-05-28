@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'ประเภทผลิตภัณฑ์',
     'LBL_MODULE_NAME_SINGULAR' => 'ประเภทผลิตภัณฑ์',
     'LBL_MODULE_TITLE' => 'ประเภทผลิตภัณฑ์: หน้าแรก',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการลบระเบียนนี้',
     'ERR_DELETE_RECORD' => 'ต้องระบุเลขที่ระเบียนเพื่อลบประเภทผลิตภัณฑ์',
     'NTC_LIST_ORDER' => 'กำหนดลำดับที่ประเภทนี้จะปรากฏในรายการแบบดรอปดาวน์ของประเภทผลิตภัณฑ์',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'นำเข้าประเภทผลิตภัณฑ์',
-    'LBL_CREATED_BY'=>'สร้างโดย',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'นำเข้าประเภทผลิตภัณฑ์',
+    'LBL_CREATED_BY' => 'สร้างโดย',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'ระบุให้ ID',
-    'LBL_EXPORT_CREATED_BY'=>'สร้างโดย ID',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'นำเข้าหมวดหมู่ผลิตภัณฑ์',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'ระบุให้ ID',
+    'LBL_EXPORT_CREATED_BY' => 'สร้างโดย ID',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'นำเข้าหมวดหมู่ผลิตภัณฑ์',
+];

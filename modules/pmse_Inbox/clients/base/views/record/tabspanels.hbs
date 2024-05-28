@@ -18,15 +18,15 @@
             {{#each meta.panels}}
                 {{#unless header}}
                     {{#if newTab}}
-                        <li class="tab {{name}}">
-                            <a href="#{{name}}{{../../../cid}}" data-toggle="tab">{{str label ../../../this.module}}</a>
+                        <li class="tab {{name}}" data-bs-target="#{{name}}{{../../../cid}}" data-bs-toggle="tab">
+                            <a>{{str label ../../../this.module}}</a>
                         </li>
                     {{/if}}
                 {{/unless}}
             {{/each}}
             <li class="tab dropdown more hidden">
-                <a class="dropdown-toggle" data-toggle="dropdown"><b class="sicon sicon-chevron-down"></b></a>
-                <ul class="dropdown-menu scroll pull-right" role="menu">
+                <a class="dropdown-toggle" data-bs-toggle="dropdown"><b class="sicon sicon-chevron-down"></b></a>
+                <ul class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl scroll pull-right" role="menu">
                     {{#each meta.panels}}
                         {{#unless header}}
                             {{#if newTab}}

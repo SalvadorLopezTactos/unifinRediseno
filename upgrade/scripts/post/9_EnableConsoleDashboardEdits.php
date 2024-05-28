@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -61,7 +62,7 @@ class SugarUpgradeEnableConsoleDashboardEdits extends UpgradeScript
      * @param string $id The ID of the dashboard bean to get
      * @return SugarBean if found, null otherwise
      */
-    protected function getDashboardBean(string $id) : ?SugarBean
+    protected function getDashboardBean(string $id): ?SugarBean
     {
         // Read the Dashoard we want to modify, wrapped inside a try catch because
         // some beans have before retrieve hooks in place that throw exceptions
@@ -134,7 +135,7 @@ class SugarUpgradeEnableConsoleDashboardEdits extends UpgradeScript
      * @param stdClass $buttons
      * @return boolean
      */
-    protected function needsButton($buttons) : bool
+    protected function needsButton($buttons): bool
     {
         foreach ($buttons as $button) {
             if ($button->action === 'removeClicked') {

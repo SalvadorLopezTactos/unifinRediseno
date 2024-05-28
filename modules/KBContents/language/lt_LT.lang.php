@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Žinių bazės sąrašo ataskaitų sritis',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Žinių bazės duomenų ataskaitų sritos',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ žinių bazė',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Žinių bazės glaiko juosta',
 
     'LBL_MODULE_NAME' => 'Žinių bazė',
     'LBL_MODULE_NAME_SINGULAR' => 'Žinių bazės straipsnis',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Set Value as Primary',
     'LBL_ITEM_REMOVE' => 'Remove Item',
     'LBL_ITEM_ADD' => 'Add Item',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => 'Revision ID',
     'LBL_DOCUMENT_REVISION' => 'Revision',
     'LBL_NUMBER' => 'Numeris:',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'More {{module}} articles...',
     'LBL_LIST_FORM_TITLE' => 'Žinių bazių sąrašas',
     'LBL_SEARCH_FORM_TITLE' => 'Žinių bazės paieška',
-);
+];

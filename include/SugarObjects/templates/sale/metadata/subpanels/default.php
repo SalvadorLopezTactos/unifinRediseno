@@ -17,58 +17,57 @@
  ********************************************************************************/
 
 $module_name = '<module_name>';
-$subpanel_layout = array(
-	'top_buttons' => array(
-		array('widget_class' => 'SubPanelTopCreateButton'),
-		array('widget_class' => 'SubPanelTopSelectButton', 'popup_module' => $module_name),
-	),
+$subpanel_layout = [
+    'top_buttons' => [
+        ['widget_class' => 'SubPanelTopCreateButton'],
+        ['widget_class' => 'SubPanelTopSelectButton', 'popup_module' => $module_name],
+    ],
 
-	'where' => '',
+    'where' => '',
 
 
-
-	'list_fields' => array(
-		'name'=>array(
-	 		'name' => 'name',
-	 		'vname' => 'LBL_LIST_SALE_NAME',
-			'widget_class' => 'SubPanelDetailViewLink',
-			'width' => '40%',
-		),
-		'sales_stage'=>array(
-			'name' => 'sales_stage',
-			'vname' => 'LBL_LIST_SALE_STAGE',
-			'width' => '15%',
-		),
-		'date_closed'=>array(
-			'name' => 'date_closed',
-			'vname' => 'LBL_LIST_DATE_CLOSED',
-			'width' => '15%',
-		),
-		'amount'=>array(
-			'vname' => 'LBL_LIST_AMOUNT',
-			'width' => '15%',
-		),
-	   	'assigned_user_name' => array (
-			'name' => 'assigned_user_name',
-		 	'vname' => 'LBL_LIST_ASSIGNED_TO_NAME',
-		 	'widget_class' => 'SubPanelDetailViewLink',
-		 	'target_record_key' => 'assigned_user_id',
-			'target_module' => 'Employees',
-	    ),
-		'edit_button'=>array(
+    'list_fields' => [
+        'name' => [
+            'name' => 'name',
+            'vname' => 'LBL_LIST_SALE_NAME',
+            'widget_class' => 'SubPanelDetailViewLink',
+            'width' => '40%',
+        ],
+        'sales_stage' => [
+            'name' => 'sales_stage',
+            'vname' => 'LBL_LIST_SALE_STAGE',
+            'width' => '15%',
+        ],
+        'date_closed' => [
+            'name' => 'date_closed',
+            'vname' => 'LBL_LIST_DATE_CLOSED',
+            'width' => '15%',
+        ],
+        'amount' => [
+            'vname' => 'LBL_LIST_AMOUNT',
+            'width' => '15%',
+        ],
+        'assigned_user_name' => [
+            'name' => 'assigned_user_name',
+            'vname' => 'LBL_LIST_ASSIGNED_TO_NAME',
+            'widget_class' => 'SubPanelDetailViewLink',
+            'target_record_key' => 'assigned_user_id',
+            'target_module' => 'Employees',
+        ],
+        'edit_button' => [
             'vname' => 'LBL_EDIT_BUTTON',
-			'widget_class' => 'SubPanelEditButton',
-		 	'module' => $module_name,
-			'width' => '4%',
-		),
-		'amount_usdollar'=>array(
-			'usage'=>'query_only',
-		),
-		'remove_button'=>array(
+            'widget_class' => 'SubPanelEditButton',
+            'module' => $module_name,
+            'width' => '4%',
+        ],
+        'amount_usdollar' => [
+            'usage' => 'query_only',
+        ],
+        'remove_button' => [
             'vname' => 'LBL_REMOVE',
-			'widget_class' => 'SubPanelRemoveButton',
-		 	'module' => $module_name,
-			'width' => '5%',
-		),
-	),
-);
+            'widget_class' => 'SubPanelRemoveButton',
+            'module' => $module_name,
+            'width' => '5%',
+        ],
+    ],
+];

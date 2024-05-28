@@ -9,5 +9,4 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- $ncc_config = array('value' => '1.2');
-?>
+$ncc_config = ['value' => '1.2'];

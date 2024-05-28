@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_ANY_EMAIL' => 'E-Posta:',
     'LBL_EMAIL' => 'E-Posta Adresi:',
     'LBL_PRIMARY_EMAIL' => 'Birincil E-posta',
@@ -18,7 +18,7 @@ $mod_strings = array (
     'LBL_OTHER_EMAIL_ADDRESS' => 'Diğer E-Posta:',
     'LBL_EMAIL_ADDRESS' => 'E-Posta Adresi',
     'LBL_EMAIL_ADDRESSES' => 'E-Posta Adresi',
-    'LBL_INVALID_EMAIL'=>'Geçersiz E-Posta:',
+    'LBL_INVALID_EMAIL' => 'Geçersiz E-Posta:',
     'LBL_EMAIL_OPT_OUT' => 'Liste Dışı E-Posta:',
     'LBL_EMAIL_NON_PRIMARY' => 'Birincil olmayan e-postalar',
-);
+];

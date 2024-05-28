@@ -26,7 +26,7 @@ class MappingCollection implements \IteratorAggregate
     public function __construct(array $modules)
     {
         foreach ($modules as $module) {
-             $this->$module = Mapping::getMapping($module);
+            $this->$module = Mapping::getMapping($module);
         }
     }
 

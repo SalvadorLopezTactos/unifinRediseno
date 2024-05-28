@@ -10,26 +10,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['find-duplicates-headerpane'] = array(
+$viewdefs['base']['view']['find-duplicates-headerpane'] = [
     'template' => 'headerpane',
     'title' => 'LBL_DUP_MERGE',
-    'buttons' => array(
-        array(
-            'name'    => 'cancel_button',
-            'type'    => 'button',
-            'label'   => 'LBL_CANCEL_BUTTON_LABEL',
+    'buttons' => [
+        [
+            'name' => 'cancel_button',
+            'type' => 'button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
-        ),
-        array(
-            'name'    => 'merge_duplicates_button',
-            'type'    => 'button',
-            'label'   => 'LBL_MERGE_DUPLICATES',
+        ],
+        [
+            'name' => 'merge_duplicates_button',
+            'type' => 'button',
+            'label' => 'LBL_MERGE_DUPLICATES',
             'css_class' => 'btn-primary disabled',
             'acl_action' => 'edit',
-        ),
-        array(
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

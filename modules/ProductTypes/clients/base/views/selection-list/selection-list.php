@@ -9,27 +9,27 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ProductTypes']['base']['view']['selection-list'] = array(
+$viewdefs['ProductTypes']['base']['view']['selection-list'] = [
     'favorites' => false,
-    'panels' => array(
-        array(
+    'panels' => [
+        [
             'name' => 'panel_header',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'link' => true,
                     'enabled' => true,
                     'default' => true,
-                ),
-                array (
-                        'label' => 'LBL_DATE_MODIFIED',
-                        'enabled' => true,
-                        'default' => true,
-                        'name' => 'date_modified',
-                        'readonly' => true,
-                ),
+                ],
+                [
+                    'label' => 'LBL_DATE_MODIFIED',
+                    'enabled' => true,
+                    'default' => true,
+                    'name' => 'date_modified',
+                    'readonly' => true,
+                ],
 
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

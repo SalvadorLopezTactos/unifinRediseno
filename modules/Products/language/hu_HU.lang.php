@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Árajánlati sorelemek listája műszerfal',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Megajánlott sortételek bejegyzés műszerfal',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Árajánlatra beküldött tételsorok figyelemfelhívás',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Terméklista idővonala',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Kampány termék',
     'LBL_MODULE_NAME' => 'Megajánlott Tételek',
@@ -177,4 +178,4 @@ $mod_strings = array(
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Új ajánlott sorelem)',
     'LBL_DISCOUNT_PERCENT' => '% százalék',
     'LBL_DISCOUNT_TYPE' => 'Kedvezmény típusa',
-);
+];

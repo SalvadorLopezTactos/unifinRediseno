@@ -226,7 +226,7 @@
                 }
 
                 if (!this.commitBtnDisabled) {
-                    this.commitBtnField.$('.commit-button').tooltip('destroy');
+                    this.commitBtnField.$('.commit-button').tooltip('dispose');
                 } else {
                     this.commitBtnField.$('.commit-button').tooltip();
                 }

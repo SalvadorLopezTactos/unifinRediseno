@@ -62,25 +62,25 @@ class EmailAddressHandler extends AbstractHandler implements
      * Weighted boost definition
      * @var array
      */
-    protected $weightedBoost = array(
+    protected $weightedBoost = [
         // we dont need to specify gs_email_primary
         'gs_email_wildcard_primary' => 0.45,
         'gs_email_secondary' => 0.75,
         'gs_email_wildcard_secondary' => 0.25,
-    );
+    ];
 
     /**
      * Highlighter field definitions
      * @var array
      */
-    protected $highlighterFields = array(
-        '*.gs_email' => array(
+    protected $highlighterFields = [
+        '*.gs_email' => [
             'number_of_fragments' => 0,
-        ),
-        '*.gs_email_wildcard' => array(
+        ],
+        '*.gs_email_wildcard' => [
             'number_of_fragments' => 0,
-        ),
-    );
+        ],
+    ];
 
     /**
      * Field name to use for email search
@@ -95,17 +95,17 @@ class EmailAddressHandler extends AbstractHandler implements
     {
         parent::setProvider($provider);
 
-        $provider->addSupportedTypes(array('email'));
+        $provider->addSupportedTypes(['email']);
         $provider->addHighlighterFields($this->highlighterFields);
         $provider->addWeightedBoosts($this->weightedBoost);
 
         // As we are searching against email_search field, we want to remap the
         // highlights from that field back to the original email field.
-        $provider->addFieldRemap(array($this->searchField => 'email'));
+        $provider->addFieldRemap([$this->searchField => 'email']);
 
         // We don't want to add the email field to the queuemanager query
         // because we will populate the emails seperately.
-        $provider->addSkipTypesFromQueue(array('email'));
+        $provider->addSkipTypesFromQueue(['email']);
     }
 
     /**
@@ -117,14 +117,13 @@ class EmailAddressHandler extends AbstractHandler implements
             ->addCustomAnalyzer(
                 'gs_analyzer_email',
                 'whitespace',
-                array('lowercase')
+                ['lowercase']
             )
             ->addCustomAnalyzer(
                 'gs_analyzer_email_ngram',
                 'whitespace',
-                array('lowercase', 'gs_filter_ngram_1_15')
-            )
-        ;
+                ['lowercase', 'gs_filter_ngram_1_15']
+            );
     }
 
     /**
@@ -168,8 +167,8 @@ class EmailAddressHandler extends AbstractHandler implements
             return;
         }
 
-        $emailFields = array('primary', 'secondary');
-        $multiFields = array('gs_email', 'gs_email_wildcard');
+        $emailFields = ['primary', 'secondary'];
+        $multiFields = ['gs_email', 'gs_email_wildcard'];
 
         foreach ($emailFields as $emailField) {
             foreach ($multiFields as $multiField) {
@@ -185,7 +184,7 @@ class EmailAddressHandler extends AbstractHandler implements
      */
     public function getSupportedTypes()
     {
-        return array('email');
+        return ['email'];
     }
 
     /**
@@ -208,10 +207,10 @@ class EmailAddressHandler extends AbstractHandler implements
         $document->removeDataField('email');
 
         // Format data for email search fields
-        $value = array(
+        $value = [
             'primary' => '',
-            'secondary' => array(),
-        );
+            'secondary' => [],
+        ];
 
         foreach ($emails as $emailAddress) {
             if (!empty($emailAddress['primary_address'])) {
@@ -239,7 +238,7 @@ class EmailAddressHandler extends AbstractHandler implements
          * from those templates are not supported.
          */
         if (!isset($bean->emailAddress) || !$bean->emailAddress instanceof \SugarEmailAddress) {
-            return array();
+            return [];
         }
 
         // Fetch email addresses from database if needed

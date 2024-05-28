@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('node-focusmanager', function (Y, NAME) {
 
 /**
@@ -1073,4 +1066,4 @@ Y.namespace("Plugin");
 Y.Plugin.NodeFocusManager = NodeFocusManager;
 
 
-}, '3.15.0', {"requires": ["attribute", "node", "plugin", "node-event-simulate", "event-key", "event-focus"]});
+}, '3.18.1', {"requires": ["attribute", "node", "plugin", "node-event-simulate", "event-key", "event-focus"]});

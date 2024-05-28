@@ -14,7 +14,7 @@ abstract class SugarForecasting_Progress_AbstractProgress extends SugarForecasti
 {
     /**
      * Class Constructor
-     * @param array $args       Service Arguments
+     * @param array $args Service Arguments
      */
     public function __construct($args)
     {
@@ -26,12 +26,13 @@ abstract class SugarForecasting_Progress_AbstractProgress extends SugarForecasti
     /**
      * Get Settings from the Config Table.
      */
-    public function loadConfigArgs() {
+    public function loadConfigArgs()
+    {
         /* @var $admin Administration */
         $admin = Administration::getSettings();
         $settings = $admin->getConfigForModule('Forecasts');
         // decode and json decode the settings from the administration to set the sales stages for closed won and closed lost
-        $this->setArg('sales_stage_won', $settings["sales_stage_won"]);
-        $this->setArg('sales_stage_lost', $settings["sales_stage_lost"]);
+        $this->setArg('sales_stage_won', $settings['sales_stage_won']);
+        $this->setArg('sales_stage_lost', $settings['sales_stage_lost']);
     }
 }

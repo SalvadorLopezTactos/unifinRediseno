@@ -10,26 +10,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'Quotes';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
         'route' => '#Quotes/create',
-        'label' =>'LNK_NEW_QUOTE',
-        'acl_action'=>'create',
-        'acl_module'=>$module_name,
+        'label' => 'LNK_NEW_QUOTE',
+        'acl_action' => 'create',
+        'acl_module' => $module_name,
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route'=>'#'.$module_name,
-        'label' =>'LNK_QUOTE_LIST',
-        'acl_action'=>'list',
-        'acl_module'=>$module_name,
+    ],
+    [
+        'route' => '#' . $module_name,
+        'label' => 'LNK_QUOTE_LIST',
+        'acl_action' => 'list',
+        'acl_module' => $module_name,
         'icon' => 'sicon-list-view',
-    ),
-    array(
+    ],
+    [
         'route' => '#Reports?filterModule=' . $module_name,
-        'label' =>'LNK_QUOTE_REPORTS',
-        'acl_action'=>'list',
+        'label' => 'LNK_QUOTE_REPORTS',
+        'acl_action' => 'list',
         'acl_module' => 'Reports',
         'icon' => 'sicon-reports',
-    ),
-);
+    ],
+];

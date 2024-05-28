@@ -32,8 +32,8 @@
          *
          */
         AssignRecord.prototype.fetchAndApplyChanges = function(model, updatedFields) {
-            let changes = model.changedAttributes();
-
+            let changes = model.changedAttributes(model.getSynced());
+            changes = !_.isEmpty(changes) ? _.pick(model.changedAttributes(), _.keys(changes)) : {};
             changes = _.omit(changes, _.keys(updatedFields));
             changes = _.omit(changes, ['date_modified']);
 
@@ -54,8 +54,10 @@
         AssignRecord.prototype.run = function(opts, currentExecution) {
             let actionDef = this.def;
 
-            let newUserId = actionDef.properties.id;
-            let useUserName = actionDef.properties.name;
+            const assignToCurrentUser = actionDef.properties.assignToCurrentUser;
+
+            let newUserId = assignToCurrentUser ? app.user.get('id') : actionDef.properties.id;
+            let useUserName = assignToCurrentUser ? app.user.get('full_name') : actionDef.properties.name;
 
             let recordModel = opts.recordModel;
 
@@ -74,8 +76,8 @@
             };
 
             let updatedFields = {
-                assigned_user_id: newUserId,
-                assigned_user_name: useUserName
+                assigned_user_id: newUserId || '',
+                assigned_user_name: useUserName || ''
             };
 
             let patchModel = app.data.createBean(recordModel.module, _.assign({

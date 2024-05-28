@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,6 +10,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class DocumentTemplate extends SugarBean
 {
     public $id;
@@ -42,7 +44,7 @@ class DocumentTemplate extends SugarBean
                 $filePath = $this->file->get_temp_file_location();
             }
         } else {
-            $filePath = 'upload://'.$file;
+            $filePath = 'upload://' . $file;
         }
 
         if (file_exists($filePath)) {
@@ -60,11 +62,11 @@ class DocumentTemplate extends SugarBean
      * @param string $isduplicate
      * @return bool
      */
-    public function deleteAttachment($isduplicate = "false")
+    public function deleteAttachment($isduplicate = 'false')
     {
         $removeFile = null;
         if ($this->ACLAccess('edit')) {
-            if ($isduplicate == "true") {
+            if ($isduplicate == 'true') {
                 return true;
             }
             $removeFile = "upload://{$this->id}";

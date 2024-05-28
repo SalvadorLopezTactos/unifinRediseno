@@ -11,21 +11,21 @@
  */
 
 
-$dependencies['PdfManager']['read_only_base_module_edition'] = array (
-    'hooks' => array("edit", "view"),
+$dependencies['PdfManager']['read_only_base_module_edition'] = [
+    'hooks' => ['edit', 'view'],
     'trigger' => 'true',
-    'triggerFields' => array(
-        'id'
-    ),
+    'triggerFields' => [
+        'id',
+    ],
     'onload' => true,
-    'actions' => array(
-        array(
+    'actions' => [
+        [
             'name' => 'ReadOnly',
-            'params' => array(
+            'params' => [
                 'target' => 'base_module',
-                'value' => 'not(equal($record, ""))'
-            )
-        ),
-    ),
-    'notActions' => array(),
-);
+                'value' => 'not(equal($record, ""))',
+            ],
+        ],
+    ],
+    'notActions' => [],
+];

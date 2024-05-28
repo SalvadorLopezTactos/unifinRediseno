@@ -37,7 +37,7 @@ class SugarUpgradeFixDashboardDisplayName extends UpgradeScript
 
         $bean = BeanFactory::newBean('Dashboards');
         $query = new SugarQuery();
-        $query->select(array('id', 'name', 'metadata'));
+        $query->select(['id', 'name', 'metadata']);
         $query->from($bean);
         $query->where()->in('name', $dashboardNames);
         $rows = $query->execute();

@@ -19,7 +19,6 @@
      */
     events: {
         'click .folder': 'intoFolder',
-        'click .toggleShared': 'toggleShared',
         'click .parentFolder': 'intoFolder',
         'click .file': 'previewFile',
         'click .loadmore': 'loadMore',
@@ -27,7 +26,6 @@
         'click .deleteFile': 'deleteFile',
         'click .createSugarDocument': 'createSugarDocument',
         'click .createFolder': 'createFolder',
-        'click .refreshPath': 'refreshPath',
         'click .sorting': 'sortColumn',
         'mouseenter [data-toggle=tooltip]': 'showTooltip',
         'mouseleave [data-toggle=tooltip]': 'hideTooltip',
@@ -45,31 +43,18 @@
      */
     _defaultDriveType: 'google',
 
+
+    /**
+     * Flag to indicate if the toolbar was updated
+     */
+    _dashletToolbarSet: false,
+
     /**
      * @inheritdoc
      */
     initialize: function(options) {
         this._super('initialize', arguments);
         this.parentIds = ['root'];
-        this.persistentSettings = {
-            shared: {
-                folderId: 'root',
-                path: [{name: 'Shared', folderId: 'root', sharedWithMe: true},],
-                parentId: null,
-                driveId: null,
-            },
-            regular: {
-                folderId: 'root',
-                path: [{name: 'My files', folderId: 'root'},],
-                parentId: null,
-                driveId: null,
-            }
-        };
-        this._defaultRootFolder = this.sharedWithMe ?  [
-            {name: 'Shared', folderId: 'root', sharedWithMe: true},
-        ] : [
-            {name: 'My files', folderId: 'root'},
-        ];
 
         const ctxModel = app.controller.context;
         this.showMergeButtonsOnThisView = ctxModel.get('layout') === 'record' && ctxModel.get('module') !== 'Home';
@@ -87,6 +72,37 @@
             driveType: this.options.driveType,
         });
 
+        let rootName = app.lang.getAppString('LBL_MY_FILES');
+        let sharedName = app.lang.getAppString('LBL_SHARED');
+        let rootId = 'root';
+
+        if (this.options.driveType === 'sharepoint') {
+            rootName = app.lang.getAppString('LBL_SITES');
+            rootId = null;
+        }
+
+        this.persistentSettings = {
+            shared: {
+                folderId: rootId,
+                path: [{name: sharedName, folderId: rootId, sharedWithMe: true},],
+                parentId: null,
+                driveId: null,
+            },
+            regular: {
+                folderId: rootId,
+                path: [{name: rootName, folderId: rootId},],
+                parentId: null,
+                driveId: null,
+                resourceType: 'site',
+            }
+        };
+
+        this._defaultRootFolder = this.sharedWithMe ?  [
+            {name: sharedName, folderId: rootId, sharedWithMe: true},
+        ] : [
+            {name: rootName, folderId: rootId, resourceType: 'site'},
+        ];
+
         this.getRootFolder();
 
         if (!app.acl.hasAccess('create', 'Documents')) {
@@ -101,8 +117,11 @@
      */
     addPopoverEvents: function(evt) {
         //The popover is not rendered on this.$el, have to use global selection
+        $('.createFolderBtn').off('click');
         $('.createFolderBtn').on('click', _.bind(this.createNewFolder, this));
+        $('.uploadFileBtn').off('click');
         $('.uploadFileBtn').on('click', _.bind(this.uploadNewFile, this));
+
         $('body').on(`click.${this.cid}`, _.bind(this.closeOnOutsideClick, this));
         this.popover = true;
     },
@@ -113,10 +132,14 @@
      * @param {Event} evt
      */
     closeOnOutsideClick: function(evt) {
+        const dashlet = this.$el.closest('.dashlet');
+
         //Using global jquery since the popover is not generated on this.$el
         if ($(evt.target).closest('.popover').length === 0) {
             this.hidePopover();
         }
+        dashlet.find('.newFolder').removeClass('active');
+        dashlet.find('.uploadFile').removeClass('active');
 
         return;
     },
@@ -148,8 +171,14 @@
             return;
         }
 
-        if (this.folderId === 'root') {
+        if ((this.folderId === 'root') &&
+            (this.options.driveType !== 'sharepoint' ||
+                (this.options.driveType === 'sharepoint' && _.isUndefined(isRefresh)))) {
             this.driveId = null;
+        }
+
+        if (this.folderId === this.driveId) {
+            this.folderId = 'root';
         }
 
         this._updateDashletCache({
@@ -172,6 +201,7 @@
             driveId: this.driveId,
             sortOptions: this.sortOptions,
             folderPath: this.pathFolders,
+            siteId: this.siteId,
         }, {
             success: _.bind(callback, this),
             error: _.bind(this._handleDriveError, this),
@@ -195,6 +225,8 @@
         this.showCreateMessage = false;
         this.files = data.files;
         this.nextPageToken = data.nextPageToken;
+        this.displayingSites = data.displayingSites;
+        this.displayingDocumentDrives = data.displayingDocumentDrives;
         this.render();
     },
 
@@ -230,10 +262,13 @@
                 } else {
                     this.noConnection = false;
                     this.folderId = result.root;
-                    this.sharedWithMe = result.isShared;
+                    this.sharedWithMe = result.isShared ? true : false;
 
                     if (_.isString(result.path)) {
                         result.path = JSON.parse(result.path);
+                    }
+                    if (this.options.driveType === 'sharepoint') {
+                        result.path = this.convertToSharepointPath(result.path);
                     }
 
                     this.pathFolders = result.path || this._defaultRootFolder;
@@ -242,6 +277,7 @@
                     this.nextPageToken = result.nextPageToken;
                     this.parentId = result.parentId;
                     this.driveId = result.driveId;
+                    this.siteId = result.siteId;
                     this.setPersistentSettings();
                     this.loadFiles();
                 }
@@ -261,6 +297,11 @@
      * @param {Event} evt
      */
     intoFolder: function(evt) {
+        if (this.options.driveType === 'sharepoint') {
+            this.intoSharePointFolder(evt);
+            return;
+        }
+
         if (evt.target.dataset.id) {
             this.folderId = evt.target.dataset.id;
             this.driveId = evt.target.dataset.driveid;
@@ -286,6 +327,82 @@
         this.nextPageToken = null;
 
         this.options.driveType === 'dropbox' ? this.loadFiles() : this.getParent(this.navigateTo);
+    },
+
+    /**
+     * Special handler for Sharepoint
+     *
+     * @param {Event} evt
+     */
+    intoSharePointFolder: function(evt) {
+        let event = evt.target.dataset;
+        let isSite = event.site;
+        let isDocumentDrive = event.documentlibrary;
+        let resourceId = event.id;
+        const resourceName = event.name;
+        const resourceType = this.getSharePointResourceType(isSite, isDocumentDrive);
+
+        this.folderId = resourceId;
+
+        if (evt.target.classList.contains('back')) {
+            const pathRemoveIndex = event.index;
+            this.pathFolders.splice(parseInt(pathRemoveIndex) + 1);
+            if (this.pathFolders.length === 0) {
+                resourceId = null;
+            }
+        } else {
+            this.pathFolders.push({
+                name: resourceName,
+                folderId: resourceId,
+                resourceType: resourceType,
+            });
+        }
+        this.setPersistentSettings();
+
+        if (isSite) {
+            this.siteId = resourceId;
+            this.folderId = 'root';
+            this.driveId = null;
+        }
+        if (isDocumentDrive) {
+            this.driveId = resourceId;
+        }
+
+        this.loadFiles(null, true);
+    },
+
+    /**
+     * Converts paths to sharepoint format
+     *
+     * @param {Array} paths
+     * @return null|array
+     */
+    convertToSharepointPath: function(paths) {
+        if (_.isEmpty(paths)) {
+            return paths;
+        }
+        return _.map(paths, (path) => {
+            return _.extend(path, {folderId: path.id});
+        });
+    },
+
+    /**
+     * Gets the resource type
+     *
+     * @param {bool} isSite
+     * @param {bool} isDocumentDrive
+     * @return string
+     */
+    getSharePointResourceType: function(isSite, isDocumentDrive) {
+        if (isSite) {
+            return 'site';
+        }
+
+        if (isDocumentDrive) {
+            return 'drive';
+        }
+
+        return 'folder';
     },
 
     /**
@@ -329,8 +446,8 @@
      */
     navigateTo: function(file) {
         this.parentId = this.parentId === 'root' ?
-                        'root' : file && file.parents && file.parents.length ?
-                                 file.parents[0] : this.parentId;
+            'root' : file && file.parents && file.parents.length ?
+                file.parents[0] : this.parentId;
         this.files = [];
 
         const lastOffset = 2;
@@ -426,7 +543,7 @@
      * @param {Event} evt
      */
     loadMore: function(evt) {
-        this.loadFiles(this.appendData);
+        this.loadFiles(this.appendData, false);
     },
 
     /**
@@ -435,6 +552,10 @@
      * @param {Array} data
      */
     appendData: function(data) {
+        if (!_.isArray(this.files)) {
+            this.files = _.values(this.files);
+        }
+
         this.files.push(...data.files);
         this.nextPageToken = data.nextPageToken;
         this.render();
@@ -527,17 +648,47 @@
      * Handles drive errors
      *
      * @param {Object} error
+     * @param {string} actionType
      */
-    _handleDriveError: function(error) {
+    _handleDriveError: function(error, actionType) {
         if (this.popover) {
             this.hidePopover();
         }
 
         const alertId = App.utils.generateUUID();
-        app.alert.show('drive-error' + alertId, {
-            level: 'error',
-            messages: error.message
-        });
+        let errorAlert = function(errorType, errorMessage) {
+            app.alert.show(errorType + alertId, {
+                level: 'error',
+                messages: errorMessage
+            });
+        };
+
+        if (_.isUndefined(actionType)) {
+            errorAlert('drive-error', error.message);
+        } else {
+            if (error.message.includes('Access denied')) {
+                switch (actionType) {
+                    case 'deleteFile':
+                        message = app.lang.get('LBL_NO_PERMISSION_FILE_ERROR');
+                        break;
+                    case 'deleteFolder':
+                        message = app.lang.get('LBL_NO_PERMISSION_FOLDER_ERROR');
+                        break;
+                    case 'createFolder':
+                        message = app.lang.get('LBL_NO_PERMISSION_FOLDER_CREATE_ERROR');
+                        break;
+                    case 'uploadFile':
+                        message = app.lang.get('LBL_NO_PERMISSION_FILE_UPLOAD_ERROR');
+                        break;
+                    default:
+                        message = app.lang.get('LBL_PERMISSION_ERROR');
+                }
+                errorAlert('drive-permission-error', message);
+            } else {
+                errorAlert('drive-error', error.message);
+            }
+        }
+
         this.render();
     },
 
@@ -569,9 +720,9 @@
             level: 'confirmation',
             messages: app.lang.get('LBL_DRIVE_DELETE_CONFIRM'),
             autoClose: false,
-            onConfirm: _.bind(function() {
+            onConfirm: () => {
                 this._deleteFile(evt);
-            }, this),
+            },
         });
     },
 
@@ -584,6 +735,7 @@
         const fileId = evt.target.dataset.id;
         const driveId = evt.target.dataset.driveid;
         const folderName = evt.target.dataset.name;
+        const fileType = evt.target.dataset.type;
         const folderPath = this.getFolderPath(folderName);
 
         app.alert.show('drive-syncing', {
@@ -597,11 +749,13 @@
             type: this.options.driveType,
             folderPath: folderPath,
         }, {
-            error: _.bind(this._handleNoPermissionError, this),
-            complete: _.bind(function() {
-                this.loadFiles();
+            error: (error) => {
+                this._handleDriveError(error, fileType === 'file' ? 'deleteFile' : 'deleteFolder');
+            },
+            complete: () => {
+                this.loadFiles(null, true);
                 app.alert.dismiss('drive-syncing');
-            }, this),
+            },
         });
     },
 
@@ -647,7 +801,9 @@
                     });
                 }
 
-                this.trigger('sugar-document:created', result.documentId);
+                this.trigger('sugar-document:created', {
+                    id: result.documentId
+                });
             }, this),
             error: _.bind(this._handleDriveError, this),
         });
@@ -716,6 +872,7 @@
      * @param {Event} evt
      */
     refreshPath: function(evt) {
+        this.sortOptions = null;
         this.loadFiles(null, true);
     },
 
@@ -748,12 +905,16 @@
             'type': this.options.driveType,
             'folderPath': folderPath,
         }, {
-            success: _.bind(this.loadFiles, this),
-            error: _.bind(this._handleDriveError, this),
-            complete: _.bind(function() {
+            success: () => {
+                this.loadFiles(null, true);
+            },
+            error: (error) => {
+                this._handleDriveError(error, 'createFolder');
+            },
+            complete: () => {
                 app.alert.dismiss('drive-create-folder');
                 this.hidePopover();
-            }, this)
+            },
         });
     },
 
@@ -793,14 +954,18 @@
                 app.alert.show('upload-success', {
                     level: 'info',
                     messages: app.lang.get(result.message),
+                    autoClose: true,
+                    autoCloseDelay: '15000',
                 });
-                this.loadFiles();
+                this.loadFiles(null, true);
             }, this),
-            error: _.bind(this._handleDriveError, this),
-            complete: _.bind(function() {
+            error: (error) => {
+                this._handleDriveError(error, 'uploadFile');
+            },
+            complete: () => {
                 app.alert.dismiss('drive-upload');
                 this.hidePopover();
-            }, this)
+            },
         }, {
             contentType: false,
             processData: false
@@ -811,7 +976,9 @@
      * Hides the popover
      */
     hidePopover: function() {
-        const $popover = this.$('[rel=popover]');
+        const dashlet = this.$el.closest('.dashlet');
+
+        const $popover = dashlet.find('[rel=popover]');
         if ($popover.length) {
             $popover.popover('hide');
         }
@@ -823,9 +990,52 @@
     _render: function() {
         this._super('_render', arguments);
 
+        if (!this._dashletToolbarSet) {
+            this._setupDashletToolbar();
+        }
+
+        this._addStyleOnTitle();
         this.addKebabButton();
         this.initPopovers();
         this.adjustDropdowns();
+    },
+
+    /**
+     * Setup Cloud Drive buttons on dashlet toolbar
+     */
+    _setupDashletToolbar: function() {
+        const dashlet = this.$el.closest('.dashlet');
+        const dashletTitle = dashlet.find('.dashlet-title');
+        const rightDashletButtons = dashlet.find('.btn-toolbar');
+
+        if (rightDashletButtons.length !== 1) {
+            return;
+        }
+
+        const toolbarTemplate = app.template.getView('cloud-drive', 'toolbar-buttons');
+        const cloudDriveButtons = $(toolbarTemplate(this));
+
+        cloudDriveButtons.insertAfter(dashletTitle);
+
+        dashlet.find('.refreshPath').off();
+        dashlet.find('.refreshPath').on('click', _.bind(this.refreshPath, this));
+
+        if (this.options.driveType !== 'sharepoint') {
+            dashlet.find('.toggleShared').off();
+            dashlet.find('.toggleShared').on('click', _.bind(this.toggleShared, this));
+        }
+
+        this._dashletToolbarSet = true;
+    },
+
+    /**
+     * Add style on title
+     */
+    _addStyleOnTitle: function() {
+        const dashlet = this.$el.closest('.dashlet');
+        const dashletTitle = dashlet.find('.dashlet-title');
+
+        dashletTitle.toggleClass('ellipsis_inline', true);
     },
 
     /**
@@ -835,29 +1045,76 @@
         const dashletToolbar = this.layout.getComponent('dashlet-toolbar');
         const kebabTemplate = app.template.getView('cloud-drive', 'kebab-actions');
         const kebabElement = kebabTemplate({showMergeButtonsOnThisView: this.showMergeButtonsOnThisView});
-        if (dashletToolbar instanceof app.view.View && dashletToolbar.$('.kebab-actions').length === 0) {
-            dashletToolbar.$('.btn-toolbar > .dashlet-toolbar').after(kebabElement);
-            dashletToolbar.$('.btn-toolbar').css('display', 'contents');
 
-            dashletToolbar.$('a[data-dashletaction="newSignedDocument"]').on(
-                'click',
-                _.bind(this.newSignedDocument, this)
-            );
-            if (this.showMergeButtonsOnThisView) {
-                dashletToolbar.$('a[data-dashletaction="mergeDocuSign"]').on(
+        if (dashletToolbar instanceof app.view.View) {
+            if (dashletToolbar.$('.kebab-actions').length === 0) {
+                dashletToolbar.$('.btn-toolbar > .dashlet-toolbar').after(kebabElement);
+                dashletToolbar.$('.btn-toolbar').css('display', 'contents');
+
+                dashletToolbar.$('a[data-dashletaction="newSignedDocument"]').on(
                     'click',
-                    _.bind(this.docMergeAndSendToDocuSign, this)
+                    _.bind(this.newSignedDocument, this)
                 );
-                dashletToolbar.$('a[data-dashletaction="mergeWEP"]').on(
-                    'click',
-                    _.bind(this.mergeFile, this)
-                );
-                dashletToolbar.$('a[data-dashletaction="mergePdf"]').on(
-                    'click',
-                    _.bind(this.mergeFile, this)
-                );
+                if (this.showMergeButtonsOnThisView) {
+                    dashletToolbar.$('a[data-dashletaction="mergeDocuSign"]').on(
+                        'click',
+                        _.bind(this.docMergeAndSendToDocuSign, this)
+                    );
+                    dashletToolbar.$('a[data-dashletaction="mergeWEP"]').on(
+                        'click',
+                        _.bind(this.mergeFile, this)
+                    );
+                    dashletToolbar.$('a[data-dashletaction="mergePdf"]').on(
+                        'click',
+                        _.bind(this.mergeFile, this)
+                    );
+                }
+            } else {
+                const itemsOptions = [
+                    {
+                        dashletAction: 'newSignedDocument',
+                        nonDocTooltip: app.lang.get('LBL_NO_SEND_TO_DOCUSIGN'),
+                        docTooltip: app.lang.get('LBL_SEND_TO_DOCUSIGN')
+                    },
+                    {
+                        dashletAction: 'mergeWEP',
+                        nonDocTooltip: app.lang.get('LBL_NO_SEND_TO_DOCMERGE_WEP'),
+                        docTooltip: ''
+                    },
+                    {
+                        dashletAction: 'mergeDocuSign',
+                        nonDocTooltip: app.lang.get('LBL_NO_SEND_TO_DOCMERGE_DS'),
+                        docTooltip: ''
+                    },
+                    {
+                        dashletAction: 'mergePdf',
+                        nonDocTooltip: app.lang.get('LBL_NO_SEND_TO_DOCMERGE_PDF'),
+                        docTooltip: ''
+                    },
+                ];
+                this._updateAttributesAndTooltips(dashletToolbar, itemsOptions);
             }
         }
+    },
+
+    /**
+     * Update attributes and tooltips of the list items
+     *
+     * @param {Object} dashletToolbar
+     * @param {Array} itemsOptions
+     */
+    _updateAttributesAndTooltips: function(dashletToolbar, itemsOptions) {
+        const isDisplayingNonDocumentPlace = (this.options.driveType === 'sharepoint') &&
+            (this.displayingSites || this.displayingDocumentDrives);
+
+        _.each(itemsOptions, function(itemOptions) {
+            const tooltipText = isDisplayingNonDocumentPlace ?
+                itemOptions.nonDocTooltip : itemOptions.docTooltip;
+            const buttonSelector = `a[data-dashletaction="${itemOptions.dashletAction}"]`;
+
+            dashletToolbar.$(buttonSelector).toggleClass('disabled', isDisplayingNonDocumentPlace);
+            dashletToolbar.$(buttonSelector).attr('data-original-title', tooltipText);
+        }, this);
     },
 
     /**
@@ -867,29 +1124,43 @@
         const fileForm = app.template.getView('cloud-drive', 'upload-form');
         const createFolderForm = app.template.getView('cloud-drive', 'create-folder');
 
-        this.$('.uploadFile[rel=popover]').popover({
-            container: 'body',
-            html: true,
-            title: app.lang.get('LBL_UPLOAD_FILE'),
-            content: fileForm,
-            placement: 'bottom',
-            sanitize: false,
-        });
+        const dashlet = this.$el.closest('.dashlet');
 
-        this.$('.newFolder[rel=popover]').popover({
-            container: 'body',
-            html: true,
-            title: app.lang.get('LBL_CREATE_FOLDER'),
-            content: createFolderForm,
-            placement: 'bottom',
-            sanitize: false,
-        });
+        if (!this.displayingSites && !this.displayingDocumentDrives) {
+            const uploadFileElement = dashlet.find('.uploadFile[rel=popover]');
 
-        this.$('[rel=popover]').on('show.bs.popover', _.bind(this.checkForPermission, this));
-        this.$('[rel=popover]').on('shown.bs.popover', _.bind(this.addPopoverEvents, this));
-        this.$('[rel=popover]').on('hidden.bs.popover', _.bind(this.removePopoverEvents, this));
-        this.$('.list-view').on('scroll', _.bind(this.adjustDropdowns, this));
-        this.$('[data-toggle=tooltip]').tooltip();
+            if (_.isFunction(uploadFileElement.dispose)) {
+                uploadFileElement.dispose();
+            }
+            uploadFileElement.popover({
+                container: dashlet,
+                html: true,
+                title: app.lang.get('LBL_UPLOAD_FILE'),
+                content: fileForm,
+                placement: 'bottom',
+                sanitize: false,
+            });
+
+            const newFolderElement = dashlet.find('.newFolder[rel=popover]');
+
+            if (_.isFunction(newFolderElement.dispose)) {
+                newFolderElement.dispose();
+            }
+            newFolderElement.popover({
+                container: dashlet,
+                html: true,
+                title: app.lang.get('LBL_CREATE_FOLDER'),
+                content: createFolderForm,
+                placement: 'bottom',
+                sanitize: false,
+            });
+        }
+
+        dashlet.find('[rel=popover]').on('show.bs.popover', _.bind(this.checkForPermission, this));
+        dashlet.find('[rel=popover]').on('shown.bs.popover', _.bind(this.addPopoverEvents, this));
+        dashlet.find('[rel=popover]').on('hidden.bs.popover', _.bind(this.removePopoverEvents, this));
+        dashlet.find('.list-view').on('scroll', _.bind(this.adjustDropdowns, this));
+        dashlet.find('[data-toggle=tooltip]').tooltip();
     },
 
     /**
@@ -926,8 +1197,8 @@
             if (this.isVisibleElement(dropdown)) {
                 const offset = 2;
                 const totalDropdownHeight = this.$(dropdown).innerHeight() +
-                                            this.$(dropdown).find('ul').height() +
-                                            offset;
+                    this.$(dropdown).find('ul').height() +
+                    offset;
                 const dropdownOffset = this.$(dropdown).offset().top;
                 const difference = dashletBottom - dropdownOffset;
 
@@ -972,7 +1243,7 @@
             fieldName: fieldName
         };
 
-        this.loadFiles();
+        this.loadFiles(null, true);
     },
 
     /**
@@ -1010,7 +1281,7 @@
     destroyTooltips: function() {
         const tooltips = this.$('[data-toggle=tooltip]');
         tooltips.each(_.bind(function(index, tooltip) {
-            $(tooltip).tooltip('destroy');
+            $(tooltip).tooltip('dispose');
         }, this));
     },
 
@@ -1089,6 +1360,11 @@
             return;
         }
 
+        if (this.options.driveType === 'dropbox' && this.sharedWithMe && this.pathFolders.length === 1) {
+            this.showClipboardConfirmation(evt.target.dataset.clipboardText);
+            return;
+        }
+
         const folderName = evt.target.dataset.name;
         const folderPath = this.getFolderPath(folderName);
 
@@ -1097,33 +1373,129 @@
             'type': this.options.driveType,
             'folderPath': folderPath,
         }, {
-            success: _.bind(this.setWebLink, this),
+            success: (result) => {
+                this.showClipboardConfirmation(result.url);
+            },
             error: _.bind(this._handleDriveError, this),
         });
     },
 
     /**
-     * Sets the web link on the clipboard
+     * Displays an confirmation alert and calls setWebLink function
      *
-     * @param {Array} result
+     * @param string url
      */
-    setWebLink: function(result) {
+    showClipboardConfirmation: function(url) {
         if (this.disposed) {
             return;
         }
 
-        navigator.clipboard.writeText(result.url).then(_.bind(function() {
-            app.alert.show('copy-success', {
-                level: 'success',
-                messages: app.lang.get('LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS'),
-            });
-        }, this));
+        app.alert.show('copy_link', {
+            level: 'confirmation',
+            confirm: {
+                label: app.lang.get('LBL_COPY_CLIPBOARD_CONFIRMATION')
+            },
+            title: app.lang.get('LBL_ALERT_TITLE_NOTICE'),
+            templateOptions: {
+                alertClass: 'alert-info',
+                alertIcon: 'sicon-info-lg',
+                indicatorClass: 'copy-clipboard-info'
+            },
+            messages: this.getMessages(url),
+            autoClose: false,
+            onConfirm: () => {
+                this.setWebLink(url);
+            },
+        });
+    },
+
+    /**
+     * Gets the messages for the copy to clipboard confirmation alert
+     *
+     * @param string url
+     * @return string
+     */
+    getMessages: function(url) {
+        return [
+            app.lang.get('LBL_COPY_LINK_CONFIRMATION'),
+            '<input readonly style="width: 90%; margin-top: 10px; background-color:transparent;" ' +
+            'type="text" value="' + _.escape(url) + '">'
+        ].join('<br>');
+    },
+
+    /**
+     * Sets the web link on the clipboard
+     *
+     * @param string url
+     */
+    setWebLink: function(url) {
+        if (navigator.clipboard && window.isSecureContext) {
+            this._copyToNavigatorClipboard(url);
+        } else {
+            this._copyToDocumentClipboard(url);
+        }
+    },
+
+    /**
+     * Create alert
+     *
+     * @param {string} id
+     * @param {string} level
+     * @param {string} message
+     */
+    _createAlert: function(id, level, message) {
+        app.alert.show(id, {
+            level: level,
+            messages: message,
+        });
+    },
+
+    /**
+     * Copy to navigator clipboard
+     *
+     * @param {string} url
+     */
+    _copyToNavigatorClipboard: function(url) {
+        navigator.clipboard.writeText(url).then(() => {
+            this._createAlert('copy-success', 'success', app.lang.get('LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS'));
+        });
+    },
+
+    /**
+     * Copy to document clipboard
+     *
+     * @param {string} url
+     */
+    _copyToDocumentClipboard: function(url) {
+        let textarea = document.createElement('textarea');
+        textarea.textContent = url;
+        textarea.style.position = 'fixed';
+
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            document.execCommand('copy');
+            this._createAlert('copy-success', 'success',app.lang.get('LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS'));
+        }
+        catch (ex) {
+            this._createAlert('copy-error', 'error',app.lang.get('LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR'));
+        }
+        finally {
+            document.body.removeChild(textarea);
+        }
     },
 
     /**
      * Click on the toolbar button to create a new envelope in the current directory
+     *
+     * @param evt {Object}
      */
-    newSignedDocument: function() {
+    newSignedDocument: function(evt) {
+        if ($(evt.currentTarget).hasClass('disabled')) {
+            return;
+        }
+
         var drawerOptions = {
             layout: 'selection-list',
             context: {
@@ -1150,19 +1522,21 @@
     /**
      * Send document to DocuSign
      *
-     * @param {mixed} documentId
+     * @param {Object} document
      */
-    sendDocumentToDocuSign: function(documentId) {
-        if (documentId.id) {
-            documentId = documentId.id;
+    sendDocumentToDocuSign: function(document) {
+        if (_.isUndefined(document)) {
+            return;
         }
+        if (_.isUndefined(document.id)) {
+            return;
+        }
+
+        const documentId = document.id;
         const ctxModel = app.controller.context.get('model');
         const module = ctxModel.get('_module');
         const modelId = ctxModel.get('id');
 
-        if (_.isUndefined(documentId)) {
-            return;
-        }
         const documents = [documentId];
         let pathParam = this.folderId;
         if (this.options.driveType === 'dropbox') {
@@ -1173,20 +1547,38 @@
             returnUrlParams: {
                 parentRecord: module,
                 parentId: modelId,
-                token: app.api.getOAuthToken()
+                token: app.api.getOAuthToken(),
+                driveId: this.driveId,
             },
             documents: documents,
             cloudServiceName: this.options.driveType,
             cloudPath: pathParam
+        });
+
+        this.listenToOnce(app.events, 'docusign:send:finished', function() {
+            if (this.disposed) {
+                return;
+            }
+
+            if (this.options.driveType === 'sharepoint') {
+                app.alert.show('send-docusign', {
+                    level: 'info',
+                    messages: app.lang.get('LBL_DOCUSIGN_PERMISSIONS'),
+                });
+            }
         });
     },
 
     /*
      * Merge document to Word/Excel/Powerpoint/Pdf
      *
-     * @param {Event} evt
+     * @param {Event} e
      */
     mergeFile: function(e) {
+        if ($(e.currentTarget).hasClass('disabled')) {
+            return;
+        }
+
         if (e.currentTarget.dataset.dashletaction === 'mergeWEP') {
             this.context.trigger('button:merge_template:click', app.controller.context.get('model'));
         } else {
@@ -1200,9 +1592,10 @@
     /**
      * Upload document to cloud
      *
-     * @param {string} documentId
+     * @param {Object} document
      */
-    uploadDocument: function(documentId) {
+    uploadDocument: function(document) {
+        const documentId = document.id;
         let formData = new FormData();
         formData.append('documentId', documentId);
         formData.append('cloud_service_type', this.options.driveType);
@@ -1211,6 +1604,7 @@
             path = JSON.stringify(this.pathFolders);
         }
         formData.append('path', path);
+        formData.append('driveId', this.driveId);
 
         const url = app.api.buildURL('CloudDrive', 'document');
 
@@ -1223,7 +1617,9 @@
                     messages: app.lang.get('LBL_UPLOAD_AND_LINK_COMPLETE', null, {documentName: result.documentName}),
                 });
             },
-            error: _.bind(this._handleDriveError, this)
+            error: (error) => {
+                this._handleDriveError(error, 'uploadFile');
+            }
         }, {
             contentType: false,
             processData: false
@@ -1232,8 +1628,14 @@
 
     /**
      * Document Merge then Send to DocuSign
+     *
+     * @param {Event} evt
      */
-    docMergeAndSendToDocuSign: function() {
+    docMergeAndSendToDocuSign: function(evt) {
+        if ($(evt.currentTarget).hasClass('disabled')) {
+            return;
+        }
+
         this.context.trigger('button:merge_template:click', app.controller.context.get('model'));
 
         this.stopListening(app.events, 'docmerge:document:generated');

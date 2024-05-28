@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Regole Flussi',
-  'LBL_MODULE_TITLE' => 'Regole Flussi',
-  'LBL_MODULE_NAME_SINGULAR' => 'Regole Flusso',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Regole Flussi',
+    'LBL_MODULE_TITLE' => 'Regole Flussi',
+    'LBL_MODULE_NAME_SINGULAR' => 'Regole Flusso',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Regole flussi Focus Drawer',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Regole flussi Focus Drawer',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Dashboard dei record delle regole flussi',
-  'LBL_RST_UID' => 'ID Business Rule',
-  'LBL_RST_TYPE' => 'Tipo Business Rule',
-  'LBL_RST_DEFINITION' => 'Definizione Business Rule',
-  'LBL_RST_EDITABLE' => 'Business Rule Modificabile',
-  'LBL_RST_SOURCE' => 'Fonte Business Rule',
-  'LBL_RST_SOURCE_DEFINITION' => 'Definizione Fonte Business Rule',
-  'LBL_RST_MODULE' => 'Modulo Obiettivo',
-  'LBL_RST_FILENAME' => 'Nome File Business Rule',
-  'LBL_RST_CREATE_DATE' => 'Crea Data Business Rule',
-  'LBL_RST_UPDATE_DATE' => 'Data Aggiornamento Business Rule',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Dashboard dei record delle regole flussi',
+    'LBL_RST_UID' => 'ID Business Rule',
+    'LBL_RST_TYPE' => 'Tipo Business Rule',
+    'LBL_RST_DEFINITION' => 'Definizione Business Rule',
+    'LBL_RST_EDITABLE' => 'Business Rule Modificabile',
+    'LBL_RST_SOURCE' => 'Fonte Business Rule',
+    'LBL_RST_SOURCE_DEFINITION' => 'Definizione Fonte Business Rule',
+    'LBL_RST_MODULE' => 'Modulo Obiettivo',
+    'LBL_RST_FILENAME' => 'Nome File Business Rule',
+    'LBL_RST_CREATE_DATE' => 'Crea Data Business Rule',
+    'LBL_RST_UPDATE_DATE' => 'Data Aggiornamento Business Rule',
 
     'LNK_LIST' => 'Visualizza Regole Flussi',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Crea Regola Flusso',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Questa regola di business non è valida in quanto utilizza campi non validi o campi che non si trovano nella propria istanza di SugarCRM. Correggere gli errori che seguono e salvare la regola di business.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'La regola commerciale è attualmente in uso in una Definizione di processo. So desidera comunque modificare questa regola commerciale?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Non è possibile eliminare questa regola commerciale perché è attualmente usata in una Definizione di processo.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Non è possibile eliminare questa regola commerciale perché è attualmente usata in una Definizione di processo.',
+];

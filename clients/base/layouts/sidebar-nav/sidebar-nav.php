@@ -17,7 +17,7 @@ $viewdefs['base']['layout']['sidebar-nav'] = [
             'layout' => [
                 'type' => 'sidebar-nav-item-group',
                 'name' => 'sidebar-nav-item-group-controls',
-                'css_class' => 'flex-grow-0 flex-shrink-0',
+                'css_class' => 'grow-0 shrink-0',
                 'components' => [
                     [
                         'view' => [
@@ -25,6 +25,7 @@ $viewdefs['base']['layout']['sidebar-nav'] = [
                             'type' => 'sidebar-nav-item-expand',
                             'icon' => 'sicon-hamburger-lg',
                             'event' => 'sidebar-nav:expand:toggle',
+                            'track' => 'click:sidebar-nav',
                         ],
                     ],
                 ],
@@ -34,7 +35,7 @@ $viewdefs['base']['layout']['sidebar-nav'] = [
             'layout' => [
                 'type' => 'sidebar-nav-item-group',
                 'name' => 'sidebar-nav-item-group-top',
-                'css_class' => 'flex-grow-0 flex-shrink-0',
+                'css_class' => 'grow-0 shrink-0',
                 'components' => [
                     [
                         'view' => 'sidebar-nav-item-module',
@@ -58,6 +59,7 @@ $viewdefs['base']['layout']['sidebar-nav'] = [
                                     'view' => 'sidebar-quickcreate',
                                 ],
                             ],
+                            'track' => 'click:quick-create',
                         ],
                     ],
                 ],
@@ -66,14 +68,14 @@ $viewdefs['base']['layout']['sidebar-nav'] = [
         [
             'layout' => [
                 'type' => 'sidebar-nav-item-group-modules',
-                'css_class' => 'flex-grow flex-shrink min-h-10',
+                'css_class' => 'flex-grow flex-shrink min-h-[2.5rem]',
             ],
         ],
         [
             'layout' => [
                 'type' => 'sidebar-nav-item-group',
                 'name' => 'sidebar-nav-item-group-bottom',
-                'css_class' => 'flex-grow-0 flex-shrink-0',
+                'css_class' => 'grow-0 shrink-0',
                 'components' => [
                     [
                         'view' => [
@@ -122,6 +124,7 @@ $viewdefs['base']['layout']['sidebar-nav'] = [
                                     'layout' => 'sidebar-help',
                                 ],
                             ],
+                            'track' => 'click:help',
                         ],
                     ],
                     [

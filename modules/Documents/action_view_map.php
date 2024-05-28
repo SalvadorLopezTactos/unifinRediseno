@@ -10,4 +10,4 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$action_view_map['extdoc']='extdoc';
+$action_view_map['extdoc'] = 'extdoc';

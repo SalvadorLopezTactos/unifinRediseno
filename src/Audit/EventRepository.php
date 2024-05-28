@@ -101,7 +101,7 @@ class EventRepository
     {
         /* @var User $current_user */
         global $current_user;
-        $id =  Uuid::uuid1();
+        $id = Uuid::uuid1();
 
         $impersonated_by = null;
         if (isset($current_user->id) && null !== $current_user->sudoer) {
@@ -148,7 +148,7 @@ class EventRepository
                 $emailsRaw = $bean->emailAddress->addresses;
             }
 
-            if (count($fields) == 1 && $fields[0] === 'email' && empty($emailsRaw)) {
+            if (safeCount($fields) == 1 && $fields[0] === 'email' && empty($emailsRaw)) {
                 return [];
             }
         }

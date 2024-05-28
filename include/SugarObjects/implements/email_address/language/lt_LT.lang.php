@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_ANY_EMAIL' => 'El. paštas:',
     'LBL_EMAIL' => 'El. pašto adresas:',
     'LBL_PRIMARY_EMAIL' => 'Pagrindinis el. pašto adresas',
@@ -18,7 +18,7 @@ $mod_strings = array (
     'LBL_OTHER_EMAIL_ADDRESS' => 'Kitas el. paštas:',
     'LBL_EMAIL_ADDRESS' => 'El. pašto adresas',
     'LBL_EMAIL_ADDRESSES' => 'El. pašto adresas (-ai)',
-    'LBL_INVALID_EMAIL'=>'Neteisingas el. paštas:',
+    'LBL_INVALID_EMAIL' => 'Neteisingas el. paštas:',
     'LBL_EMAIL_OPT_OUT' => 'Nesiųsti el. pašto adresu:',
     'LBL_EMAIL_NON_PRIMARY' => 'Ne pagrindiniai el. pašto adresai',
-);
+];

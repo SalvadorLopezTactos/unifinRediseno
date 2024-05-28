@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Ετικέτες',
     'LBL_GENERIC_LINK' => 'Σχετικά αντικείμενα',
     'LBL_NAME_LOWER' => 'Όνομα ετικέτας με χρήση πεζών χαρακτήρων',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'Οι ετικέτες μου',
     'LBL_MY_FAVORITE_TAGS' => 'Οι αγαπημένες μου ετικέτες',
     'LBL_MORE_TAGS' => '{{tagsNumber}} Ετικέτες',
-);
+];

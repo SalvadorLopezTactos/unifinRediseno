@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc. All Rights
  * Reserved. Contributor(s): ______________________________________..
@@ -22,5 +21,4 @@ global $mod_strings;
 $admin_mod_strings = return_module_language($current_language, 'Administration');
 $mod_strings = sugarArrayMerge($admin_mod_strings, $mod_strings);
 
-include("modules/Administration/Menu.php");
-?>
+include 'modules/Administration/Menu.php';

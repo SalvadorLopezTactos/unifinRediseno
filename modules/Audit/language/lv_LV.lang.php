@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Audita žurnāls',
     'LBL_FIELD_NAME' => 'Lauks',
     'LBL_OLD_NAME' => 'Vecā vērtība',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Atjaunināt uz',
     'LBL_BLANK' => '-tukšs-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Audita laika josla',
+    'LBL_CREATED' => 'Izveidots',
+];

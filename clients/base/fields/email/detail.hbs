@@ -14,7 +14,7 @@
     <div class="control-group email">
         {{#if hasAnchor}}
             <a rel="tooltip"{{#if ../../dir}} dir="{{../../../dir}}"{{/if}}
-               title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}" data-placement="bottom"
+               title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}" data-bs-placement="bottom"
                class="ellipsis_inline{{#if opt_out}} opt-out{{/if}}" href="javascript:void(0);" data-action="email"
                data-email-address-id="{{email_address_id}}" data-email-to="{{email_address}}"
                data-email-opt-out="{{opt_out}}" track="click:email_address"
@@ -24,9 +24,15 @@
             </a>
         {{else}}
             {{#if invalid_email}}
-                <del rel="tooltip"{{#if ../../../dir}} dir="{{../../../../dir}}"{{/if}} title="{{email_address}} ({{flagLabel}})" data-placement="bottom" class="ellipsis_inline{{#if opt_out}} opt-out{{/if}}">{{email_address}}</del>
+                <del rel="tooltip"{{#if ../../../dir}} dir="{{../../../../dir}}"{{/if}}
+                     title="{{email_address}} ({{flagLabel}})" data-bs-placement="bottom"
+                     class="ellipsis_inline{{#if opt_out}} opt-out{{/if}}">{{email_address}}</del>
             {{else}}
-                <span rel="tooltip"{{#if ../../../dir}} dir="{{../../../../dir}}"{{/if}} title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}" data-placement="bottom" class="ellipsis_inline{{#if opt_out}} opt-out{{/if}}">{{email_address}}</span>
+                <span rel="tooltip"{{#if ../../../dir}} dir="{{../../../../dir}}"{{/if}}
+                      title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}"
+                      data-bs-placement="bottom" class="ellipsis_inline{{#if opt_out}} opt-out{{/if}}">
+                    {{email_address}}
+                </span>
             {{/if}}
         {{/if}}
         {{#if opt_out}}

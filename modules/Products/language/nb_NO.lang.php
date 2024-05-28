@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Dashbord for tilbudslinjeelement',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Registerdashbord for oppgitte linjeelementer',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Angitte varelinjer fokusskuff',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Angitt varelinje tidslinje',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Kampanje produkt',
     'LBL_MODULE_NAME' => 'Produkter',
@@ -177,4 +178,4 @@ For å opprette {{module_name}}:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nytt tilbudt linjeelement)',
     'LBL_DISCOUNT_PERCENT' => '% prosent',
     'LBL_DISCOUNT_TYPE' => 'Rabattype',
-);
+];

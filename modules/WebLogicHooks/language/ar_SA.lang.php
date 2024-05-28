@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'أدوات الإضافة المنطقية على الويب',
     'LBL_MODULE_NAME_SINGULAR' => 'أداة الإضافة المنطقي على الويب',
     'LBL_MODULE_TITLE' => 'أدوات الإضافة المنطقية على الويب',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => 'الطريقة المطلوبة',
     'LBL_TRIGGER_EVENT' => 'بدء الحدث',
     'LBL_URL' => 'عنوان URL',
-);
+];

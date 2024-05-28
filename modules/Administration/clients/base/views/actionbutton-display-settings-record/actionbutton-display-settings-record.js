@@ -22,6 +22,7 @@
         'change [data-fieldname=showFieldLabel]': 'showFieldLabel',
         'change [data-fieldname=showInRecordHeader]': 'showInRecordHeader',
         'change [data-fieldname=hideOnEdit]': 'hideOnEdit',
+        'change input.default-action': 'onChangeDefaultHandler',
     },
     /**
      * @inheritdoc
@@ -50,7 +51,8 @@
                 size: 'default',
                 showFieldLabel: false,
                 showInRecordHeader: false,
-                hideOnEdit: false
+                hideOnEdit: false,
+                displayOnFocusDashboard: false,
             };
         }
     },
@@ -146,6 +148,16 @@
         this._settings.hideOnEdit = e.currentTarget.checked;
 
         this._updateDisplaySettings();
+    },
+
+    /**
+     * Update field value by
+     *
+     * @param {UIEvent} e
+     */
+    onChangeDefaultHandler: function(e) {
+        const fieldName = e.currentTarget.getAttribute('data-fieldname');
+        this._settings[fieldName] = e.currentTarget.checked;
     },
 
     /**

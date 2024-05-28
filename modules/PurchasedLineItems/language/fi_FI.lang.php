@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Ostojen tuoteriviluettelon koontinäyttö',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Ostojen tuoterivitietueiden koontinäyttö',
     'LBL_PARENT_PURCHASE' => 'Päätason osto',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ostetun rivinimikkeen aikajana',
 ];

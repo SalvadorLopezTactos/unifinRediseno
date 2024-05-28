@@ -10,11 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="thumbnail dashlet h-full flex flex-column relative p-0 mb-0 border-none" data-type="dashlet" data-action="droppable">
+<div class="dashlet h-full flex flex-col relative p-0 mb-0 border-none" data-type="dashlet" data-action="droppable">
     {{#if meta.preview}}
         <div data-dashlet="toolbar">
-            <div class="dashlet-header dashlet-preview-header flex flex-row items-center m-0.75">
-                <h4 data-toggle="dashlet" class="dashlet-title flex-grow m-0 ml-1.5">{{meta.label}}</h4>
+            <div class="dashlet-header dashlet-preview-header flex flex-row items-center h-7 m-0.75">
+                <h4 data-toggle="dashlet" rel="tooltip" title="{{meta.label}}" class="dashlet-title flex-grow m-0 ml-1.5 truncate">{{meta.label}}</h4>
             </div>
         </div>
     {{else}}

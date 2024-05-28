@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * <b>monthofyear(Date d)</b><br>
  * Returns the month of year that <i>d</i> is in.<br/>
@@ -49,7 +50,7 @@ EOQ;
      */
     public static function getOperationName()
     {
-        return "monthofyear";
+        return 'monthofyear';
     }
 
     /**
@@ -65,7 +66,7 @@ EOQ;
      */
     public static function getParameterTypes()
     {
-        return array(AbstractExpression::$DATE_TYPE);
+        return [AbstractExpression::$DATE_TYPE];
     }
 
     /**

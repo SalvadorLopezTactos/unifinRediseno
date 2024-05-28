@@ -68,78 +68,96 @@ class VisualPipelineDefaults
         }
 
         // default Tile View config setup
-        return array(
+        return [
             // this is used to indicate whether the admin wizard should be shown on first run (for admin only, otherwise a message telling a non-admin to tell their admin to set it up)
             'is_setup' => $isSetup,
             // which modules can use pipeline
-            'enabled_modules' => array(
+            'enabled_modules' => [
                 'Cases',
                 'Opportunities',
                 'Tasks',
                 'Leads',
-            ),
-            'table_header' => array(
+            ],
+            'table_header' => [
                 'Cases' => 'status',
                 'Opportunities' => 'sales_stage',
                 'Tasks' => 'status',
                 'Leads' => 'status',
-            ),
-            'hidden_values' => array(
-                'Cases' => array(),
-                'Opportunities' => array(
+            ],
+            'hidden_values' => [
+                'Cases' => [],
+                'Opportunities' => [
                     'Closed Won',
                     'Closed Lost',
-                ),
-                'Tasks' => array(),
-                'Leads' => array(),
-            ),
-            'tile_header' => array(
+                ],
+                'Tasks' => [],
+                'Leads' => [],
+            ],
+            'tile_header' => [
                 'Cases' => 'name',
                 'Opportunities' => 'name',
                 'Tasks' => 'name',
                 'Leads' => 'full_name',
-            ),
-            'tile_body_fields' => array(
-                'Cases' => array(
+            ],
+            'tile_body_fields' => [
+                'Cases' => [
                     'account_name',
                     'priority',
-                ),
-                'Opportunities' => array(
+                ],
+                'Opportunities' => [
                     'account_name',
                     'date_closed',
                     'amount',
-                ),
-                'Tasks' => array(
+                ],
+                'Tasks' => [
                     'contact_name',
                     'parent_name',
                     'date_due',
-                ),
-                'Leads' => array(
+                ],
+                'Leads' => [
                     'email',
                     'account_name',
                     'phone_work',
-                ),
-            ),
-            'records_per_column' => array(
+                ],
+            ],
+            'records_per_column' => [
                 'Cases' => '10',
                 'Opportunities' => '10',
                 'Tasks' => '10',
                 'Leads' => '10',
-            ),
-            'available_columns' => array(
-                'Cases' => array(
-                    'status' => array(
+            ],
+            'show_column_count' => [
+                'Cases' => true,
+                'Opportunities' => true,
+                'Tasks' => true,
+                'Leads' => true,
+            ],
+            'show_column_total' => [
+                'Cases' => false,
+                'Opportunities' => true,
+                'Tasks' => false,
+                'Leads' => false,
+            ],
+            'total_field' => [
+                'Cases' => '',
+                'Opportunities' => 'amount',
+                'Tasks' => '',
+                'Leads' => '',
+            ],
+            'available_columns' => [
+                'Cases' => [
+                    'status' => [
                         'New' => 'New',
                         'Assigned' => 'Assigned',
                         'Closed' => 'Closed',
                         'Pending Input' => 'Pending Input',
                         'Rejected' => 'Rejected',
                         'Duplicate' => 'Duplicate',
-                    ),
-                ),
-                'Opportunities' => array(
-                    'sales_stage' => array(
-                        'Prospecting' =>  'Prospecting',
+                    ],
+                ],
+                'Opportunities' => [
+                    'sales_stage' => [
+                        'Prospecting' => 'Prospecting',
                         'Qualification' => 'Qualification',
                         'Needs Analysis' => 'Needs Analysis',
                         'Value Proposition' => 'Value Proposition',
@@ -147,28 +165,28 @@ class VisualPipelineDefaults
                         'Perception Analysis' => 'Perception Analysis',
                         'Proposal/Price Quote' => 'Proposal/Price Quote',
                         'Negotiation/Review' => 'Negotiation/Review',
-                    ),
-                ),
-                'Tasks' => array(
-                    'status' => array(
+                    ],
+                ],
+                'Tasks' => [
+                    'status' => [
                         'Not Started' => 'Not Started',
                         'In Progress' => 'In Progress',
                         'Completed' => 'Completed',
                         'Pending Input' => 'Pending Input',
                         'Deferred' => 'Deferred',
-                    ),
-                ),
-                'Leads' => array(
-                    'status' => array(
+                    ],
+                ],
+                'Leads' => [
+                    'status' => [
                         'New' => 'New',
                         'Assigned' => 'Assigned',
                         'In Process' => 'In Process',
                         'Converted' => 'Converted',
                         'Recycled' => 'Recycled',
                         'Dead' => 'Dead',
-                    ),
-                ),
-            ),
-        );
+                    ],
+                ],
+            ],
+        ];
     }
 }

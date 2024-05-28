@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Meddelande:',
     'LBL_BASE_MODULE' => 'Målmodul',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Kunde inte skapa process-emailmall från fil',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'E-mailmallen används just nu i en processdefinition. Vill du ändå redigera den?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Du kan inte radera e-mailmallen eftersom den används i en processdefinition.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Du kan inte radera e-mailmallen eftersom den används i en processdefinition.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Fältväljare',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Välj',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Typ av fältvärde',
-);
+];

@@ -49,8 +49,7 @@ class PasswordResetCommand extends Command implements InstanceModeInterface
                 '',
                 InputOption::VALUE_NONE,
                 'Skip password rules'
-            )
-        ;
+            );
     }
 
     /**
@@ -70,12 +69,11 @@ class PasswordResetCommand extends Command implements InstanceModeInterface
 
         $table = new Table($output);
         $table
-            ->addRow(array('Username', $user->user_name))
-            ->addRow(array('First name', $user->first_name))
-            ->addRow(array('Last name', $user->last_name))
-            ->addRow(array('Status', $user->employee_status))
-            ->render()
-        ;
+            ->addRow(['Username', $user->user_name])
+            ->addRow(['First name', $user->first_name])
+            ->addRow(['Last name', $user->last_name])
+            ->addRow(['Status', $user->employee_status])
+            ->render();
 
         $password = $this->getPassword($input, $output);
 
@@ -119,7 +117,7 @@ class PasswordResetCommand extends Command implements InstanceModeInterface
         $pwd1 = $qh->ask($input, $output, $q1);
 
         if (empty($pwd1)) {
-            throw new Exception("Password cannot be empty");
+            throw new Exception('Password cannot be empty');
         }
 
         $q2 = new Question('Confirm new password:');
@@ -128,7 +126,7 @@ class PasswordResetCommand extends Command implements InstanceModeInterface
         $pwd2 = $qh->ask($input, $output, $q2);
 
         if (0 !== strcmp($pwd1, $pwd2)) {
-            throw new Exception("Passwords do not match");
+            throw new Exception('Passwords do not match');
         }
 
         return $pwd1;
@@ -145,15 +143,15 @@ class PasswordResetCommand extends Command implements InstanceModeInterface
         $user = $this->loadUserBean($id);
 
         if (empty($user->id)) {
-            throw new Exception("User not found");
+            throw new Exception('User not found');
         }
 
         if ($user->external_auth_only != 0) {
-            throw new Exception("Cannot set password for external authenticated users");
+            throw new Exception('Cannot set password for external authenticated users');
         }
 
         if ($user->is_group != 0) {
-            throw new Exception("Cannot set password for group users");
+            throw new Exception('Cannot set password for group users');
         }
 
         return $user;

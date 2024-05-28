@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<h1 class="ellipsis_inline" rel="tooltip" data-placement="bottom" data-original-title="{{str "LBL_PREVIEW"}}">{{str "LBL_PREVIEW"}}</h1>
+<h1 class="ellipsis_inline" rel="tooltip" data-bs-placement="bottom" data-original-title="{{str "LBL_PREVIEW"}}">{{str "LBL_PREVIEW"}}</h1>
 {{#unless isBase}}
 {{#if layout.previewEdit}}
     <a data-action="edit" class="btn btn-invisible preview-edit-btn" track="click:preview-edit">
@@ -43,7 +43,7 @@
         {{/unless}}
     </div>
     <div class="btn-group">
-        <button type="button" class="btn btn-invisible closeSubdetail" data-action="close" data-toggle="tab"
+        <button type="button" class="btn btn-invisible closeSubdetail" data-action="close" data-bs-toggle="tab"
                 aria-label="{{str 'LBL_PREVIEW_CLOSE'}}"
         >
             <i class="sicon sicon-close"></i>

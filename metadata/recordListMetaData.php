@@ -10,50 +10,50 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['RecordList'] = array(
+$dictionary['RecordList'] = [
     'table' => 'record_list',
-	'fields' => array(
-		'id' => array(
-			'name'	=> 'id',
-			'type'	=> 'id',
-			'required'	=> true,
-			'reportable' => false,
-		),
-		'assigned_user_id' => array(
-			'name' => 'assigned_user_id',
-			'vname' => 'LBL_USER_ID',
-			'type' => 'id',
-			'required' => true,
-			'reportable' => false,
-		),
-		'module_name' => array(
-			'name' => 'module_name',
-			'vname' => 'LBL_MODULE',
-			'type' => 'varchar',
-			'len' => '50',
-			'required' => true,
-			'reportable' => false,
-		),
-		'records' => array(
-			'name' => 'records',
-			'vname' => 'LBL_RECORD_LIST',
+    'fields' => [
+        'id' => [
+            'name' => 'id',
+            'type' => 'id',
+            'required' => true,
+            'reportable' => false,
+        ],
+        'assigned_user_id' => [
+            'name' => 'assigned_user_id',
+            'vname' => 'LBL_USER_ID',
+            'type' => 'id',
+            'required' => true,
+            'reportable' => false,
+        ],
+        'module_name' => [
+            'name' => 'module_name',
+            'vname' => 'LBL_MODULE',
+            'type' => 'varchar',
+            'len' => '50',
+            'required' => true,
+            'reportable' => false,
+        ],
+        'records' => [
+            'name' => 'records',
+            'vname' => 'LBL_RECORD_LIST',
             'type' => 'longtext',
-			'required' => true,
-			'reportable' => false,
-		),
-        'date_modified' => array(
+            'required' => true,
+            'reportable' => false,
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'vname' => 'LBL_DATE_MODIFIED',
             'type' => 'datetime',
-        ),
-	),
-	'indices' => array(
-		array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'record_list_id',
-			'type' => 'primary',
-			'fields' => array(
-				'id',
-            )
-        ),
-	), /* end indices */
-);
+            'type' => 'primary',
+            'fields' => [
+                'id',
+            ],
+        ],
+    ], /* end indices */
+];

@@ -27,14 +27,6 @@ $viewdefs['DRI_Workflows']['base']['layout']['configure-modules'] = [
                 'span' => 12,
             ],
         ],
-        [
-            'layout' => [
-                'components' => [],
-                'type' => 'simple',
-                'name' => 'dashboard-pane',
-                'span' => 0,
-            ],
-        ],
     ],
     'type' => 'simple',
     'name' => 'base',

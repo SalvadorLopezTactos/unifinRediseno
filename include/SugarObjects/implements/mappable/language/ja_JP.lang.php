@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = [
-    'LBL_GC_STATUS'=>'ジオコーディングステータス',
+    'LBL_GC_STATUS' => 'ジオコーディングステータス',
     'LBL_GC_LATITUDE' => 'ジオコーディングの緯度',
     'LBL_GC_LONGITUDE' => 'ジオコーディングの軽度',
     'LBL_GC_STATUS_DETAIL' => 'ジオコーディングステータスの詳細',

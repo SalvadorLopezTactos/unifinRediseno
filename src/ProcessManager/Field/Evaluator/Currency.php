@@ -44,7 +44,7 @@ class Currency extends Base implements EvaluatorInterface
     protected function isCheckable()
     {
         return parent::isCheckable()
-               && isset($this->data[$this->idField]) && isset($this->bean->{$this->idField});
+            && isset($this->data[$this->idField]) && isset($this->bean->{$this->idField});
     }
 
     /**

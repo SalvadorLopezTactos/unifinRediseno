@@ -12,7 +12,6 @@
 
 class ForecastWorksheet extends SugarBean
 {
-
     public $id;
     public $worksheet_id;
     public $currency_id;
@@ -61,7 +60,7 @@ class ForecastWorksheet extends SugarBean
      *
      * @var array
      */
-    public $productFieldMap = array(
+    public $productFieldMap = [
         'name',
         'account_id',
         'account_name',
@@ -98,19 +97,19 @@ class ForecastWorksheet extends SugarBean
         'discount_price',
         'discount_amount',
         'quantity',
-        'total_amount'
-    );
+        'total_amount',
+    ];
 
     /**
      * The field map for when coping from an Opportunity Bean
      *
      * @var array
      */
-    public $opportunityFieldMap = array(
+    public $opportunityFieldMap = [
         'name',
         'account_id',
         'account_name',
-        array('likely_case' => 'amount'),
+        ['likely_case' => 'amount'],
         'best_case',
         'base_rate',
         'worst_case',
@@ -130,15 +129,15 @@ class ForecastWorksheet extends SugarBean
         'description',
         'next_step',
         'lead_source',
-        array('product_type' => 'opportunity_type'),
+        ['product_type' => 'opportunity_type'],
         'campaign_id',
-        'campaign_name'
-    );
+        'campaign_name',
+    ];
 
     /**
      * Update the real table with the values when a save happens on the front end
      *
-     * @param bool $check_notify        Should we send the notifications
+     * @param bool $check_notify Should we send the notifications
      */
     public function saveWorksheet($check_notify = false)
     {
@@ -187,18 +186,18 @@ class ForecastWorksheet extends SugarBean
     /**
      * Save an Opportunity as a worksheet
      *
-     * @param Opportunity $opp      The Opportunity that we want to save a snapshot of
-     * @param bool $isCommit        Is the Opportunity being committed
+     * @param Opportunity $opp The Opportunity that we want to save a snapshot of
+     * @param bool $isCommit Is the Opportunity being committed
      */
     public function saveRelatedOpportunity(Opportunity $opp, $isCommit = false)
     {
         $this->retrieve_by_string_fields(
-            array(
+            [
                 'parent_type' => 'Opportunities',
                 'parent_id' => $opp->id,
                 'draft' => ($isCommit === false) ? 1 : 0,
-                'deleted' => 0
-            ),
+                'deleted' => 0,
+            ],
             true,
             false
         );
@@ -225,9 +224,9 @@ class ForecastWorksheet extends SugarBean
 
     /**
      * Commit All Related Products from an Opportunity
-     * @deprecated As of 7.8 this is no longer needed
      * @param Opportunity $opp
      * @param $isCommit
+     * @deprecated As of 7.8 this is no longer needed
      */
     public function saveOpportunityProducts(Opportunity $opp, $isCommit = false)
     {
@@ -259,16 +258,16 @@ class ForecastWorksheet extends SugarBean
     {
         $return = false;
         if (isset($this->fetched_row['date_closed']) && isset($bean->fetched_row['date_closed']) &&
-            $this->timeperiodHasMigrated($this->fetched_row["date_closed"], $bean->fetched_row["date_closed"])
+            $this->timeperiodHasMigrated($this->fetched_row['date_closed'], $bean->fetched_row['date_closed'])
         ) {
-            $worksheet = $this->getBean("ForecastWorksheets");
+            $worksheet = $this->getBean('ForecastWorksheets');
             $worksheet->retrieve_by_string_fields(
-                array(
-                    "parent_type" => $bean->module_name,
-                    "parent_id" => $bean->id,
-                    "draft" => 0,
-                    "deleted" => 0,
-                ),
+                [
+                    'parent_type' => $bean->module_name,
+                    'parent_id' => $bean->id,
+                    'draft' => 0,
+                    'deleted' => 0,
+                ],
                 true,
                 false
             );
@@ -282,19 +281,19 @@ class ForecastWorksheet extends SugarBean
     /**
      * Save a snapshot of a Revenue Line Item (Product) to the ForecastWorksheet Table
      *
-     * @param RevenueLineItem $rli          The RLI to commit
-     * @param bool $isCommit                    Are we committing a product for the forecast
+     * @param RevenueLineItem $rli The RLI to commit
+     * @param bool $isCommit Are we committing a product for the forecast
      */
     public function saveRelatedProduct(RevenueLineItem $rli, $isCommit = false)
     {
 
         $this->retrieve_by_string_fields(
-            array(
+            [
                 'parent_type' => 'RevenueLineItems',
                 'parent_id' => $rli->id,
                 'draft' => ($isCommit === false) ? 1 : 0,
-                'deleted' => 0
-            ),
+                'deleted' => 0,
+            ],
             true,
             false
         );
@@ -337,8 +336,8 @@ class ForecastWorksheet extends SugarBean
     /**
      * Look up an Item name
      *
-     * @param string $module            The module we need to look in.
-     * @param string $id                The Item Id that we need to find the name for
+     * @param string $module The module we need to look in.
+     * @param string $id The Item Id that we need to find the name for
      * @return string                   The name for the account, or empty if one is not found
      */
     protected function getRelatedName($module, $id)
@@ -414,7 +413,7 @@ class ForecastWorksheet extends SugarBean
      *
      * @param string $user_id
      * @param string $timeperiod
-     * @param int $chunk_size            How big to make the chunks of data
+     * @param int $chunk_size How big to make the chunks of data
      * @return bool
      */
     public function commitWorksheet($user_id, $timeperiod, $chunk_size = 50)
@@ -422,14 +421,14 @@ class ForecastWorksheet extends SugarBean
         $settings = Forecast::getSettings();
 
         if ($settings['is_setup'] == false) {
-            $GLOBALS['log']->fatal("Forecast Module is not setup. " . self::class . " should not be running");
+            $GLOBALS['log']->fatal('Forecast Module is not setup. ' . self::class . ' should not be running');
             return false;
         }
         /* @var $tp TimePeriod */
         $tp = $this->getBean('TimePeriods', $timeperiod);
 
         if (empty($tp->id)) {
-            $GLOBALS['log']->fatal("Unable to load TimePeriod for id: " . $timeperiod);
+            $GLOBALS['log']->fatal('Unable to load TimePeriod for id: ' . $timeperiod);
             return false;
         }
 
@@ -439,8 +438,8 @@ class ForecastWorksheet extends SugarBean
         // we want the deleted records
         /* @var $bean_obj SugarBean */
         $bean_obj = $this->getBean($type);
-        $sq->select(array($bean_obj->getTableName().'.*'));
-        $sq->from($bean_obj, array('add_deleted' => false))->where()
+        $sq->select([$bean_obj->getTableName() . '.*']);
+        $sq->from($bean_obj, ['add_deleted' => false])->where()
             ->equals('assigned_user_id', $user_id)
             ->queryAnd()
             ->gte('date_closed_timestamp', $tp->start_date_timestamp)
@@ -449,8 +448,8 @@ class ForecastWorksheet extends SugarBean
 
         $link_name = ($type == 'RevenueLineItems') ? 'account_link' : 'accounts';
         $bean_obj->load_relationship($link_name);
-        $bean_obj->$link_name->buildJoinSugarQuery($sq, array('joinTableAlias' => 'account'));
-        $sq->select(array(array('account.id', 'account_id')));
+        $bean_obj->$link_name->buildJoinSugarQuery($sq, ['joinTableAlias' => 'account']);
+        $sq->select([['account.id', 'account_id']]);
 
         $beans = $sq->execute();
 
@@ -466,7 +465,7 @@ class ForecastWorksheet extends SugarBean
         $this->processWorksheetDataChunk($type, $bean_chunks[0]);
 
         // process any remaining in the background
-        for ($x = 1; $x < count($bean_chunks); $x++) {
+        for ($x = 1; $x < safeCount($bean_chunks); $x++) {
             $this->createUpdateForecastWorksheetJob($type, $bean_chunks[$x], $user_id);
         }
 
@@ -508,9 +507,9 @@ class ForecastWorksheet extends SugarBean
     {
         /* @var $job SchedulersJob */
         $job = $this->getBean('SchedulersJobs');
-        $job->name = "Update ForecastWorksheets";
-        $job->target = "class::SugarJobUpdateForecastWorksheets";
-        $job->data = json_encode(array('forecast_by' => $forecast_by, 'data' => $data));
+        $job->name = 'Update ForecastWorksheets';
+        $job->target = 'class::SugarJobUpdateForecastWorksheets';
+        $job->data = json_encode(['forecast_by' => $forecast_by, 'data' => $data]);
         $job->retry_count = 0;
         $job->assigned_user_id = $user_id;
 
@@ -533,28 +532,28 @@ class ForecastWorksheet extends SugarBean
         $returnVal = true;
 
         if ($settings['is_setup'] == false) {
-            $GLOBALS['log']->fatal("Forecast Module is not setup. " . self::class . " should not be running");
+            $GLOBALS['log']->fatal('Forecast Module is not setup. ' . self::class . ' should not be running');
             $returnVal = false;
         }
 
         $tp = $this->getBean('TimePeriods', $timeperiod);
 
         if ($returnVal && empty($tp->id)) {
-            $GLOBALS['log']->fatal("Unable to load TimePeriod for id: " . $timeperiod);
+            $GLOBALS['log']->fatal('Unable to load TimePeriod for id: ' . $timeperiod);
             $returnVal = false;
         }
 
         if ($returnVal) {
             $sq = $this->getSugarQuery();
-            $sq->select(array('id'));
-            $sq->from($this, array('alias'=>'fw','team_security'=>false))
-                ->joinTable('forecast_worksheets', array('alias' => 'fw2'))
+            $sq->select(['id']);
+            $sq->from($this, ['alias' => 'fw', 'team_security' => false])
+                ->joinTable('forecast_worksheets', ['alias' => 'fw2'])
                 ->on()->equalsField('fw2.parent_id', 'fw.parent_id')
                 ->notEqualsField('fw2.assigned_user_id', 'fw.assigned_user_id');
             $sq->where()
-                ->equals("draft", 0)
+                ->equals('draft', 0)
                 ->queryAnd()
-                ->equals("assigned_user_id", $user_id);
+                ->equals('assigned_user_id', $user_id);
 
             $beans = $sq->execute();
 
@@ -567,10 +566,9 @@ class ForecastWorksheet extends SugarBean
                 $this->processRemoveChunk($bean_chunks[0]);
 
                 // process any remaining in the background
-                for ($x = 1; $x < count($bean_chunks); $x++) {
+                for ($x = 1; $x < safeCount($bean_chunks); $x++) {
                     $this->createRemoveReassignedJob($bean_chunks[$x], $user_id);
                 }
-
             }
         }
 
@@ -585,7 +583,7 @@ class ForecastWorksheet extends SugarBean
     public function processRemoveChunk($beans)
     {
         foreach ($beans as $bean) {
-            $this->mark_deleted($bean["id"]);
+            $this->mark_deleted($bean['id']);
         }
     }
 
@@ -698,7 +696,7 @@ class ForecastWorksheet extends SugarBean
         }
 
         // setup the return array
-        $return = array(
+        $return = [
             'amount' => '0',
             'best_case' => '0',
             'worst_case' => '0',
@@ -723,14 +721,14 @@ class ForecastWorksheet extends SugarBean
             'pipeline_amount' => '0',
             'pipeline_opp_count' => 0,
             'closed_amount' => '0',
-            'includedIdsInLikelyTotal' => array()
-        );
+            'includedIdsInLikelyTotal' => [],
+        ];
 
         global $current_user;
 
         $sq = $this->getSugarQuery();
         $bean_obj = $this->getBean($this->module_name);
-        $sq->select(array($bean_obj->getTableName().'.*'));
+        $sq->select([$bean_obj->getTableName() . '.*']);
         $sq->from($bean_obj)->where()
             ->equals('assigned_user_id', $user_id)
             ->equals('parent_type', $forecast_by)
@@ -753,13 +751,13 @@ class ForecastWorksheet extends SugarBean
             if (empty($row['worst_case'])) {
                 $row['worst_case'] = 0;
             }
-            
+
             $worst_base = SugarCurrency::convertWithRate($row['worst_case'], $row['base_rate']);
             $amount_base = SugarCurrency::convertWithRate($row['likely_case'], $row['base_rate']);
             $best_base = SugarCurrency::convertWithRate($row['best_case'], $row['base_rate']);
 
             $closed = false;
-            if (in_array($row['sales_stage'], $settings['sales_stage_won']) && in_array($row['commit_stage'], $settings['commit_stages_included'])) {
+            if (safeInArray($row['sales_stage'], $settings['sales_stage_won']) && safeInArray($row['commit_stage'], $settings['commit_stages_included'])) {
                 $return['won_amount'] = SugarMath::init($return['won_amount'], 6)->add($amount_base)->result();
                 $return['won_best'] = SugarMath::init($return['won_best'], 6)->add($best_base)->result();
                 $return['won_worst'] = SugarMath::init($return['won_worst'], 6)->add($worst_base)->result();
@@ -768,7 +766,7 @@ class ForecastWorksheet extends SugarBean
                 $return['includedClosedAmount'] = SugarMath::init($return['includedClosedAmount'], 6)
                     ->add($amount_base)->result();
                 $closed = true;
-            } elseif (in_array($row['sales_stage'], $settings['sales_stage_lost'])) {
+            } elseif (safeInArray($row['sales_stage'], $settings['sales_stage_lost'])) {
                 $return['lost_amount'] = SugarMath::init($return['lost_amount'], 6)->add($amount_base)->result();
                 $return['lost_best'] = SugarMath::init($return['lost_best'], 6)->add($best_base)->result();
                 $return['lost_worst'] = SugarMath::init($return['lost_worst'], 6)->add($worst_base)->result();
@@ -776,7 +774,7 @@ class ForecastWorksheet extends SugarBean
                 $closed = true;
             }
 
-            if (in_array($row['commit_stage'], $settings['commit_stages_included'])) {
+            if (safeInArray($row['commit_stage'], $settings['commit_stages_included'])) {
                 if (!$closed) {
                     $return['amount'] = SugarMath::init($return['amount'], 6)->add($amount_base)->result();
                     $return['best_case'] = SugarMath::init($return['best_case'], 6)->add($best_base)->result();
@@ -802,7 +800,6 @@ class ForecastWorksheet extends SugarBean
 
         // send back the totals
         return $return;
-
     }
 
     /**
@@ -844,7 +841,7 @@ class ForecastWorksheet extends SugarBean
         // clear reports_to for inactive users
         global $current_user;
         $db = DBManagerFactory::getInstance();
-        $objFromUser = BeanFactory::getBean('Users', $fromUserId, array('deleted' => false));
+        $objFromUser = BeanFactory::getBean('Users', $fromUserId, ['deleted' => false]);
         $fromUserReportsTo = !empty($objFromUser->reports_to_id) ? $objFromUser->reports_to_id : '';
         $objFromUser->reports_to_id = '';
         $objFromUser->save();
@@ -1068,5 +1065,4 @@ class ForecastWorksheet extends SugarBean
         $affected_rows += $db->getAffectedRowCount($res);
         return $affected_rows;
     }
-
 }

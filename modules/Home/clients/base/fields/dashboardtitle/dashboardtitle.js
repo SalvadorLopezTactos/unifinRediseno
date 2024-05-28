@@ -19,8 +19,6 @@
         'click a[data-id]': 'navigateClicked',
         'click a[data-action=manager]': 'managerClicked',
         'click a[data-type=dashboardtitle]': 'editClicked',
-        'keydown input[name=name]': 'fieldInput',
-        'blur input[name=name]': 'fieldBlur',
     },
     dashboards: null,
 
@@ -38,10 +36,29 @@
     },
 
     /**
+     * @inheritdoc
+     */
+    _render: function() {
+        this._super('_render');
+
+        this.$('input[name=name]').on('keydown', _.bind(function(evt) {
+            this.fieldInput(evt);
+        }, this));
+
+        this.$('input[name=name]').on('blur', _.bind(function() {
+            this.fieldBlur();
+        }, this));
+    },
+
+    /**
      * Handle the click by dashboard title
      * @param {Object} evt The jQuery Event Object
      */
     editClicked: function(evt) {
+        if (this.model.get('is_template')) {
+            return;
+        }
+
         // Reinitialize hasChanges function to provide opportunity
         // to collapse the field with changes
         this.hasChanged = function() {
@@ -72,15 +89,35 @@
 
     /**
      * Handle blur of title field
-     * @param {Object} evt The jQuery Event Object
      */
-    fieldBlur: function(evt) {
+    fieldBlur: function() {
         if (!this.model.dataFetched) {
             return;
         }
 
+        const reloadCollection = () => {
+            this.context.off('record:set:state', reloadCollection);
+            if (this.context.parent) {
+                const collection = this.getCollection();
+                collection.fetch();
+            }
+        };
+
+        this.context.on('record:set:state', reloadCollection);
+
         this.view.saveHandle();
         this.view.toggleField(this);
+    },
+
+    /**
+     * Return collection
+     * @return {Object} Sugar collection
+     */
+    getCollection: function() {
+        const contextBro = this.context.parent &&
+        _.contains(['multi-line', 'focus'], this.context.parent.get('layout')) ?
+            this.context.parent : this.context.parent.getChildContext({module: 'Home'});
+        return contextBro.get('collection');
     },
 
     toggleClicked: function(evt) {
@@ -92,9 +129,7 @@
             return;
         }
 
-        var contextBro = this.context.parent && _.contains(['multi-line', 'focus'], this.context.parent.get('layout')) ?
-            this.context.parent : this.context.parent.getChildContext({module: 'Home'});
-        var collection = contextBro.get('collection').clone();
+        let collection = this.getCollection().clone();
         var pattern = /^(LBL|TPL|NTC|MSG)_(_|[a-zA-Z0-9])*$/;
         collection.remove(self.model, {silent: true});
         _.each(collection.models, function(model) {

@@ -9,36 +9,36 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['layout']['audit'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['base']['layout']['audit'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'base',
                 'name' => 'main-pane',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span12',
-                            'components' => array(
-                                array(
+                            'css_class' => 'main-pane span12 overflow-y-auto',
+                            'components' => [
+                                [
                                     'view' => 'audit-headerpane',
-                                ),
-                                array(
+                                ],
+                                [
                                     'view' => 'filtered-search',
-                                ),
-                                array(
+                                ],
+                                [
                                     'view' => 'audit',
-                                ),
-                                array(
+                                ],
+                                [
                                     'view' => 'audit-footer',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

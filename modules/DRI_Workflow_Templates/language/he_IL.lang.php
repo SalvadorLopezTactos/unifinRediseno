@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'פעיל',
     'LBL_ASSIGNEE_RULE' => 'כלל מקבל הקצאה',
     'LBL_TARGET_ASSIGNEE' => 'מקבל הקצאת יעד',
+    'LBL_STAGE_NUMBERS' => 'מספור שלבים',
     'LBL_EXPORT_BUTTON_LABEL' => 'ייצוא',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'ייבוא',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'צור/עדכן באופן אוטומטי רשומה חדשה של תבנית מדריך חכם על-ידי ייבוא קובץ *.json ממערכת הקבצים שלך.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'אם האפשרות מסומנת, עם מקבל הקצאת היעד זהה למקבל הקצאת הורה, כשהמשתמש "הוקצה עבור" מוחלף בהורה מסוים, המשתמשים "הוקצה עבור" גם יוחלפו אוטומטית במדריכים החכמים, בשלבים ובפעילויות. לידיעתך, ההגדרות של מקבל הקצאת היעד בתבניות פעילות מקבלות עדיפות על פני תבנית מדריך חכם',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'מתי להקצות משתמש לפעילויות',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'למי להקצות את הפעילויות',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'מתג דו-מצבי זה מאפשר להציג או להסיר מספור שלבים אוטומטי.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'תבנית של מדריך חכם/שלב/פעילות',
 ];

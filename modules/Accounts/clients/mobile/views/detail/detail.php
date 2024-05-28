@@ -31,7 +31,7 @@ $viewdefs['Accounts']['mobile']['view']['detail'] = [
             'label' => 'LBL_PANEL_DEFAULT',
             'fields' => [
                 [
-                    'name'=>'name',
+                    'name' => 'name',
                     'displayParams' => [
                         'required' => true,
                         'wireless_edit_only' => true,
@@ -41,7 +41,7 @@ $viewdefs['Accounts']['mobile']['view']['detail'] = [
                 [
                     'name' => 'website',
                     'displayParams' => [
-                        'type'=>'link',
+                        'type' => 'link',
                     ],
                 ],
                 'email',

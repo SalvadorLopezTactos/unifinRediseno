@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'التقويم',
     'LBL_MODULE_NAME_SINGULAR' => 'التقويم',
     'LBL_MODULE_TITLE' => 'التقويم',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'الإعدادات',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'عرض فتحات الوقت في طريقة عرض اليوم والأسبوع:',
-    'LBL_SETTINGS_TIME_STARTS'=>'وقت البدء:',
-    'LBL_SETTINGS_TIME_ENDS'=>'وقت الانتهاء:',
+    'LBL_SETTINGS_TIME_STARTS' => 'وقت البدء:',
+    'LBL_SETTINGS_TIME_ENDS' => 'وقت الانتهاء:',
     'LBL_SETTINGS_CALLS_SHOW' => 'عرض المكالمات:',
     'LBL_SETTINGS_TASKS_SHOW' => 'عرض المهام:',
 
@@ -123,7 +123,7 @@ $mod_strings = array (
     'LBL_REPEAT_DOW' => 'على',
     'LBL_REPEAT_UNTIL' => 'التكرار حتى',
     'LBL_REPEAT_COUNT' => 'عدد التكرارات',
-    'LBL_RECURRING_LIMIT_ERROR' => 'لا يمكن جدولة عنوان الوحدة $ المكرر لأنه تعدى الحد الأقصى المسموح به لحد التكرار$.',
+    'LBL_RECURRING_LIMIT_ERROR' => 'لا يمكن جدولة هذه $moduleTitle المتكررة لأنها تتجاوز الحد الأقصى المسموح به للتكرار وهو $limit.',
 
     'LBL_EDIT_ALL_RECURRENCES' => 'تعديل جميع التكرارات',
     'LBL_REMOVE_ALL_RECURRENCES' => 'حذف جميع التكرارات',
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'إنشاء تقويم',
     'LNK_CALENDAR_LIST' => 'عرض التقويمات',
     'LNK_CALENDAR_LEGACY' => 'تقويم قديم',
-    'LBL_IMPORT_CALENDAR'=> 'استيراد تقويم',
+    'LBL_IMPORT_CALENDAR' => 'استيراد تقويم',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'الطابع الزمني للحدث',
     'LBL_INSERTFIELD' => 'إدراج حقل',
     'LBL_EVENT_START_ERROR' => 'الرجاء اختيار بداية',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'يُرجى تحديد تقويم',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'فشل حفظ التقويمات.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'أحد',
             'اثنين',
             'ثلاثاء',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'خميس',
             'جمعة',
             'سبت',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'الأحد',
             'الإثنين',
             'الثلاثاء',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'الخميس',
             'الجمعة',
             'السبت',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'ينا',
             'فبر',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'أكت',
             'نوف',
             'ديس',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'يناير',
             'فبراير',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'أكتوبر',
             'نوفمبر',
             'ديسمبر',
-        ),
-);
+        ],
+];

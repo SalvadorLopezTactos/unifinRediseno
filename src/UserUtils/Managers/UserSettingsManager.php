@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\UserUtils\Managers;
 
 use BeanFactory;
@@ -45,7 +46,7 @@ class UserSettingsManager extends Manager
         $this->destinationUsers = $payload->getDestinationUsers();
         $this->userSettings = $payload->getUserSettings();
 
-        if (count($this->destinationUsers) > self::MAX_USER) {
+        if (safeCount($this->destinationUsers) > self::MAX_USER) {
             $this->useScheduledJob = true;
         }
     }

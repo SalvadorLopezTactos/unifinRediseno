@@ -18,52 +18,52 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
 class MailApi extends ModuleApi
 {
     /*-- API Argument Constants --*/
-    public const EMAIL_CONFIG = "email_config";
-    public const FROM_ADDRESS = "from_address";
-    public const TO_ADDRESSES = "to_addresses";
-    public const CC_ADDRESSES = "cc_addresses";
-    public const BCC_ADDRESSES = "bcc_addresses";
-    public const ATTACHMENTS = "attachments";
-    public const TEAMS = "teams";
-    public const RELATED = "related";
-    public const SUBJECT = "subject";
-    public const HTML_BODY = "html_body";
-    public const TEXT_BODY = "text_body";
-    public const STATUS = "status";
-    public const DATE_SENT = "date_sent";
-    public const ASSIGNED_USER_ID = "assigned_user_id";
+    public const EMAIL_CONFIG = 'email_config';
+    public const FROM_ADDRESS = 'from_address';
+    public const TO_ADDRESSES = 'to_addresses';
+    public const CC_ADDRESSES = 'cc_addresses';
+    public const BCC_ADDRESSES = 'bcc_addresses';
+    public const ATTACHMENTS = 'attachments';
+    public const TEAMS = 'teams';
+    public const RELATED = 'related';
+    public const SUBJECT = 'subject';
+    public const HTML_BODY = 'html_body';
+    public const TEXT_BODY = 'text_body';
+    public const STATUS = 'status';
+    public const DATE_SENT = 'date_sent';
+    public const ASSIGNED_USER_ID = 'assigned_user_id';
 
     /*-- API Fields with default values --*/
-    public static $fields = array(
+    public static $fields = [
         self::EMAIL_CONFIG => '',
         self::FROM_ADDRESS => '',
-        self::TO_ADDRESSES => array(),
-        self::CC_ADDRESSES => array(),
-        self::BCC_ADDRESSES => array(),
-        self::ATTACHMENTS => array(),
-        self::TEAMS => array(),
-        self::RELATED => array(),
+        self::TO_ADDRESSES => [],
+        self::CC_ADDRESSES => [],
+        self::BCC_ADDRESSES => [],
+        self::ATTACHMENTS => [],
+        self::TEAMS => [],
+        self::RELATED => [],
         self::SUBJECT => '',
         self::HTML_BODY => '',
         self::TEXT_BODY => '',
         self::STATUS => '',
         self::DATE_SENT => '',
         self::ASSIGNED_USER_ID => '',
-    );
+    ];
 
     /*-- Supported API Status values --*/
-    static private $apiStatusValues = array(
-        "draft", // draft
-        "ready", // ready to be sent
-        "archive" // archived
-    );
+    private static $apiStatusValues = [
+        'draft', // draft
+        'ready', // ready to be sent
+        'archive', // archived
+    ];
 
     /*-- Supported API Attachment Type values --*/
-    static private $apiAttachmentTypes = array(
-        "document",
-        "template",
-        "upload",
-    );
+    private static $apiAttachmentTypes = [
+        'document',
+        'template',
+        'upload',
+    ];
 
     private $emailRecipientsService;
 
@@ -72,85 +72,85 @@ class MailApi extends ModuleApi
      */
     public function registerApiRest()
     {
-        $api = array(
-            'createMail' => array(
+        $api = [
+            'createMail' => [
                 'reqType' => 'POST',
-                'path' => array('Mail'),
-                'pathVars' => array(''),
+                'path' => ['Mail'],
+                'pathVars' => [''],
                 'method' => 'createMail',
                 'shortHelp' => 'Create Mail Item',
                 'longHelp' => 'modules/Emails/clients/base/api/help/mail_post_help.html',
-            ),
-            'archiveMail' => array(
+            ],
+            'archiveMail' => [
                 'reqType' => 'POST',
-                'path' => array('Mail', 'archive'),
-                'pathVars' => array(''),
+                'path' => ['Mail', 'archive'],
+                'pathVars' => [''],
                 'method' => 'archiveMail',
                 'shortHelp' => 'Archive Mail Item',
-                'longHelp'  => 'modules/Emails/clients/base/api/help/mail_archive_help.html',
-            ),
-            'recipientLookup' => array(
+                'longHelp' => 'modules/Emails/clients/base/api/help/mail_archive_help.html',
+            ],
+            'recipientLookup' => [
                 'reqType' => 'POST',
-                'path' => array('Mail', 'recipients', 'lookup'),
-                'pathVars' => array(''),
+                'path' => ['Mail', 'recipients', 'lookup'],
+                'pathVars' => [''],
                 'method' => 'recipientLookup',
                 'shortHelp' => 'Lookup Email Recipient Info',
                 'longHelp' => 'modules/Emails/clients/base/api/help/mail_recipients_lookup_post_help.html',
-            ),
-            'listRecipients' => array(
+            ],
+            'listRecipients' => [
                 'reqType' => 'GET',
-                'path' => array('Mail', 'recipients', 'find'),
-                'pathVars' => array(''),
+                'path' => ['Mail', 'recipients', 'find'],
+                'pathVars' => [''],
                 'method' => 'findRecipients',
                 'shortHelp' => 'Search For Email Recipients',
                 'longHelp' => 'modules/Emails/clients/base/api/help/mail_recipients_find_get_help.html',
-            ),
-            'validateEmailAddresses' => array(
+            ],
+            'validateEmailAddresses' => [
                 'reqType' => 'POST',
-                'path' => array('Mail', 'address', 'validate'),
-                'pathVars' => array(''),
+                'path' => ['Mail', 'address', 'validate'],
+                'pathVars' => [''],
                 'method' => 'validateEmailAddresses',
                 'shortHelp' => 'Validate One Or More Email Address',
                 'longHelp' => 'modules/Emails/clients/base/api/help/mail_address_validate_post_help.html',
-            ),
-            'saveAttachment' => array(
+            ],
+            'saveAttachment' => [
                 'reqType' => 'POST',
-                'path' => array('Mail', 'attachment'),
-                'pathVars' => array('', ''),
+                'path' => ['Mail', 'attachment'],
+                'pathVars' => ['', ''],
                 'method' => 'saveAttachment',
                 'rawPostContents' => true,
                 'shortHelp' => 'Saves a mail attachment.',
                 'longHelp' => 'modules/Emails/clients/base/api/help/mail_attachment_post_help.html',
-            ),
-            'removeAttachment' => array(
+            ],
+            'removeAttachment' => [
                 'reqType' => 'DELETE',
-                'path' => array('Mail', 'attachment', '?'),
-                'pathVars' => array('', '', 'file_guid'),
+                'path' => ['Mail', 'attachment', '?'],
+                'pathVars' => ['', '', 'file_guid'],
                 'method' => 'removeAttachment',
                 'rawPostContents' => true,
                 'shortHelp' => 'Removes a mail attachment',
                 'longHelp' => 'modules/Emails/clients/base/api/help/mail_attachment_record_delete_help.html',
-            ),
-            'clearUserCache' => array(
+            ],
+            'clearUserCache' => [
                 'reqType' => 'DELETE',
-                'path' => array('Mail', 'attachment', 'cache'),
-                'pathVars' => array('', '', ''),
+                'path' => ['Mail', 'attachment', 'cache'],
+                'pathVars' => ['', '', ''],
                 'method' => 'clearUserCache',
                 'rawPostContents' => true,
                 'shortHelp' => 'Clears the user\'s attachment cache directory',
                 'longHelp' => 'modules/Emails/clients/base/api/help/mail_attachment_cache_delete_help.html',
-            ),
-        );
+            ],
+        ];
 
         return $api;
     }
 
     /**
-     * @deprecated POST /Mail has been deprecated and will not be available after v11. Use POST /Emails instead.
-     * @see EmailsApi::createRecord()
      * @param ServiceBase $api
      * @param array $args
      * @return array
+     * @see EmailsApi::createRecord()
+     * @deprecated POST /Mail has been deprecated and will not be available after v11. Use POST /Emails instead.
      */
     public function createMail(ServiceBase $api, array $args)
     {
@@ -162,15 +162,15 @@ class MailApi extends ModuleApi
     }
 
     /**
-     * @deprecated PUT /Mail/:record has been deprecated and will not be available after v11. Use PUT /Emails/:record
-     * instead.
-     * @see EmailsApi::updateRecord()
      * @param ServiceBase $api
      * @param array $args
      * @return array
      * @throws SugarApiExceptionMissingParameter
      * @throws SugarApiExceptionRequestMethodFailure
      * @throws SugarApiExceptionInvalidParameter
+     * @deprecated PUT /Mail/:record has been deprecated and will not be available after v11. Use PUT /Emails/:record
+     * instead.
+     * @see EmailsApi::updateRecord()
      */
     public function updateMail(ServiceBase $api, array $args)
     {
@@ -199,12 +199,12 @@ class MailApi extends ModuleApi
     /**
      * Archive email.
      *
-     * @deprecated POST /Mail/archive has been deprecated and will not be available after v11. Use POST /Emails with
-     * `{"state": "Archived"}` instead.
-     * @see EmailsApi::createRecord()
      * @param ServiceBase $api
      * @param array $args
      * @return array
+     * @see EmailsApi::createRecord()
+     * @deprecated POST /Mail/archive has been deprecated and will not be available after v11. Use POST /Emails with
+     * `{"state": "Archived"}` instead.
      */
     public function archiveMail(ServiceBase $api, array $args)
     {
@@ -221,13 +221,13 @@ class MailApi extends ModuleApi
     }
 
     /**
-     * @deprecated This method is no longer used and is not recommended.
-     * @see MailApi::createMail()
-     * @see MailApi::updateMail()
      * @param ServiceBase $api
      * @param array $args
      * @return array
      * @throws SugarApiExceptionRequestMethodFailure
+     * @see MailApi::createMail()
+     * @see MailApi::updateMail()
+     * @deprecated This method is no longer used and is not recommended.
      */
     protected function handleMail(ServiceBase $api, array $args)
     {
@@ -240,15 +240,15 @@ class MailApi extends ModuleApi
         $mailRecord = $this->initMailRecord($args);
 
         try {
-            if ($args[self::STATUS] == "ready") {
+            if ($args[self::STATUS] == 'ready') {
                 $response = $mailRecord->send(); // send immediately
             } else {
                 $response = $mailRecord->saveAsDraft(); // save as draft
             }
         } catch (MailerException $e) {
             $eMessage = $e->getUserFriendlyMessage();
-            if (isset($GLOBALS["log"])) {
-                $GLOBALS["log"]->error("MailApi: Request Failed - Message: {$eMessage}");
+            if (isset($GLOBALS['log'])) {
+                $GLOBALS['log']->error("MailApi: Request Failed - Message: {$eMessage}");
             }
             throw new SugarApiExceptionRequestMethodFailure($eMessage, null, 'Emails');
         }
@@ -260,10 +260,10 @@ class MailApi extends ModuleApi
      * This endpoint accepts an array of one or more recipients and tries to resolve unsupplied arguments.
      * EmailRecipientsService::lookup contains the lookup and resolution rules.
      *
-     * @deprecated POST /Mail/recipients/lookup has been deprecated and will not be available after v11.
      * @param ServiceBase $api
      * @param array $args
      * @return array
+     * @deprecated POST /Mail/recipients/lookup has been deprecated and will not be available after v11.
      */
     public function recipientLookup(ServiceBase $api, array $args)
     {
@@ -276,7 +276,7 @@ class MailApi extends ModuleApi
 
         $emailRecipientsService = $this->getEmailRecipientsService();
 
-        $result = array();
+        $result = [];
         foreach ($recipients as $recipient) {
             $result[] = $emailRecipientsService->lookup($recipient);
         }
@@ -304,52 +304,52 @@ class MailApi extends ModuleApi
         if (ini_get('max_execution_time') > 0 && ini_get('max_execution_time') < 300) {
             ini_set('max_execution_time', 300);
         }
-        $term = (isset($args["q"])) ? trim($args["q"]) : "";
+        $term = (isset($args['q'])) ? trim($args['q']) : '';
         $offset = 0;
-        $limit = (!empty($args["max_num"])) ? (int)$args["max_num"] : 20;
-        $orderBy = array();
+        $limit = (!empty($args['max_num'])) ? (int)$args['max_num'] : 20;
+        $orderBy = [];
 
-        if (!empty($args["offset"])) {
-            if ($args["offset"] === "end") {
-                $offset = "end";
+        if (!empty($args['offset'])) {
+            if ($args['offset'] === 'end') {
+                $offset = 'end';
             } else {
-                $offset = (int)$args["offset"];
+                $offset = (int)$args['offset'];
             }
         }
 
-        $modules = array(
-            "users" => "users",
-            "accounts" => "accounts",
-            "contacts" => "contacts",
-            "leads" => "leads",
-            "prospects" => "prospects",
-            "all" => "LBL_DROPDOWN_LIST_ALL",
-        );
-        $module = $modules["all"];
+        $modules = [
+            'users' => 'users',
+            'accounts' => 'accounts',
+            'contacts' => 'contacts',
+            'leads' => 'leads',
+            'prospects' => 'prospects',
+            'all' => 'LBL_DROPDOWN_LIST_ALL',
+        ];
+        $module = $modules['all'];
 
-        if (!empty($args["module_list"])) {
-            $moduleList = strtolower($args["module_list"]);
+        if (!empty($args['module_list'])) {
+            $moduleList = strtolower($args['module_list']);
 
             if (array_key_exists($moduleList, $modules)) {
                 $module = $modules[$moduleList];
             }
         }
 
-        if (!empty($args["order_by"])) {
-            $orderBys = explode(",", $args["order_by"]);
+        if (!empty($args['order_by'])) {
+            $orderBys = explode(',', $args['order_by']);
 
             foreach ($orderBys as $sortBy) {
                 $column = $sortBy;
-                $direction = "ASC";
+                $direction = 'ASC';
 
-                if (strpos($sortBy, ":")) {
+                if (strpos($sortBy, ':')) {
                     // it has a :, it's specifying ASC / DESC
-                    [$column, $direction] = explode(":", $sortBy);
+                    [$column, $direction] = explode(':', $sortBy);
 
-                    if (strtolower($direction) == "desc") {
-                        $direction = "DESC";
+                    if (strtolower($direction) == 'desc') {
+                        $direction = 'DESC';
                     } else {
-                        $direction = "ASC";
+                        $direction = 'ASC';
                     }
                 }
 
@@ -360,21 +360,21 @@ class MailApi extends ModuleApi
             }
         }
 
-        $records = array();
+        $records = [];
         $nextOffset = -1;
 
-        if ($offset !== "end") {
+        if ($offset !== 'end') {
             $emailRecipientsService = $this->getEmailRecipientsService();
-            $records = $emailRecipientsService->find($term, $module, $orderBy, $limit+1, $offset);
-            $totalRecords = count($records);
+            $records = $emailRecipientsService->find($term, $module, $orderBy, $limit + 1, $offset);
+            $totalRecords = safeCount($records);
             if ($totalRecords > $limit) {
                 // means there are more records in DB than limit specified
                 $nextOffset = $offset + $limit;
                 array_pop($records);
             }
 
-            $apiHelpers = array();
-            $retrieveOptions = array();
+            $apiHelpers = [];
+            $retrieveOptions = [];
             if (!empty($args['erased_fields'])) {
                 $retrieveOptions = ['erased_fields' => true, 'encode' => false, 'use_cache' => false];
             }
@@ -390,10 +390,10 @@ class MailApi extends ModuleApi
             }
         }
 
-        return array(
-            "next_offset" => $nextOffset,
-            "records" => $records,
-        );
+        return [
+            'next_offset' => $nextOffset,
+            'records' => $records,
+        ];
     }
 
     /**
@@ -405,7 +405,7 @@ class MailApi extends ModuleApi
      *
      * @returns SugarBean
      */
-    protected function getBeanFromServiceRecord(array $record, array $retrieveOptions = array()): SugarBean
+    protected function getBeanFromServiceRecord(array $record, array $retrieveOptions = []): SugarBean
     {
         $seed = BeanFactory::newBean($record['_module']);
         if (!$seed->ACLAccess('list')) {
@@ -426,10 +426,10 @@ class MailApi extends ModuleApi
     /**
      * Perform Audit Validation on Input Arguments and normalize
      *
-     * @deprecated This method is no longer used and is not recommended.
+     * @param array $args
      * @see MailApi::archiveMail()
      * @see MailApi::handleMail()
-     * @param array $args
+     * @deprecated This method is no longer used and is not recommended.
      */
     public function validateArguments(array &$args)
     {
@@ -441,45 +441,45 @@ class MailApi extends ModuleApi
 
         /*--- Validate status value ---*/
         if (empty($args[self::STATUS]) || !in_array($args[self::STATUS], self::$apiStatusValues)) {
-            $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_VALUE', array(self::STATUS));
+            $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_VALUE', [self::STATUS]);
         }
 
         /*--- Validate Mail Configuration ---*/
-        if ($args[self::STATUS] === "ready" && empty($args[self::EMAIL_CONFIG])) {
-            $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_VALUE', array(self::EMAIL_CONFIG));
+        if ($args[self::STATUS] === 'ready' && empty($args[self::EMAIL_CONFIG])) {
+            $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_VALUE', [self::EMAIL_CONFIG]);
         }
 
         /*--- Validate FROM_ADDRESS if 'archive' ---*/
-        if ($args[self::STATUS] === "archive") {
+        if ($args[self::STATUS] === 'archive') {
             if (empty($args[self::FROM_ADDRESS]) || !is_string($args[self::FROM_ADDRESS])) {
-                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_VALUE', array(self::FROM_ADDRESS));
+                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_VALUE', [self::FROM_ADDRESS]);
             }
             $fromAddress = empty($args[self::FROM_ADDRESS]) ? '' : trim($args[self::FROM_ADDRESS]);
             if (empty($fromAddress)) {
-                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_VALUE', array(self::FROM_ADDRESS));
+                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_VALUE', [self::FROM_ADDRESS]);
             }
         }
 
         /*--- Validate DATE_SENT if 'archive' ---*/
-        if ($args[self::STATUS] === "archive") {
+        if ($args[self::STATUS] === 'archive') {
             if (empty($args[self::DATE_SENT]) || !is_string($args[self::DATE_SENT])) {
-                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_VALUE', array(self::DATE_SENT));
+                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_VALUE', [self::DATE_SENT]);
             }
             $dateSent = empty($args[self::DATE_SENT]) ? '' : trim($args[self::DATE_SENT]);
             if (empty($dateSent)) {
-                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_VALUE', array(self::DATE_SENT));
+                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_VALUE', [self::DATE_SENT]);
             }
         }
 
         /*--- Validate ASSIGNED_USER_ID if 'archive' - Argument is Optional - so can be empty string ---*/
-        if ($args[self::STATUS] === "archive") {
+        if ($args[self::STATUS] === 'archive') {
             if (isset($args[self::ASSIGNED_USER_ID]) && !is_string($args[self::ASSIGNED_USER_ID])) {
-                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', array(self::ASSIGNED_USER_ID));
+                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', [self::ASSIGNED_USER_ID]);
             }
         }
 
         /*--- Validate TO Recipients ---*/
-        $isRequired = $args[self::STATUS] === "archive" ? true : false;
+        $isRequired = $args[self::STATUS] === 'archive' ? true : false;
         $this->validateRecipients($args, self::TO_ADDRESSES, $isRequired);
 
         /*--- Validate CC Recipients ---*/
@@ -491,20 +491,20 @@ class MailApi extends ModuleApi
         /*--- Validate Attachments ---*/
         if (isset($args[self::ATTACHMENTS])) {
             if (!is_array($args[self::ATTACHMENTS])) {
-                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', array(self::ATTACHMENTS));
+                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', [self::ATTACHMENTS]);
             }
             foreach ($args[self::ATTACHMENTS] as $attachment) {
                 if (!is_array($attachment)) {
-                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', array(self::ATTACHMENTS));
+                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', [self::ATTACHMENTS]);
                 }
                 if (empty($attachment['type']) || !in_array($attachment['type'], self::$apiAttachmentTypes)) {
-                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', array(self::ATTACHMENTS, 'type'));
+                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', [self::ATTACHMENTS, 'type']);
                 }
                 if (empty($attachment['id']) || !is_string($attachment['id'])) {
-                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', array(self::ATTACHMENTS, 'id'));
+                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', [self::ATTACHMENTS, 'id']);
                 }
                 if ($attachment['type'] == 'upload' && empty($attachment['name'])) {
-                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', array(self::ATTACHMENTS, 'name'));
+                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', [self::ATTACHMENTS, 'name']);
                 }
             }
         }
@@ -512,22 +512,22 @@ class MailApi extends ModuleApi
         /*--- Validate Teams ---*/
         if (isset($args[self::TEAMS])) {
             if (!is_array($args[self::TEAMS])) {
-                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', array(self::TEAMS));
+                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', [self::TEAMS]);
             }
             /* Primary is REQUIRED if Teams supplied */
-            if (!isset($args[self::TEAMS]["primary"]) || !is_string(
-                $args[self::TEAMS]["primary"]
-            ) || empty($args[self::TEAMS]["primary"])
+            if (!isset($args[self::TEAMS]['primary']) || !is_string(
+                $args[self::TEAMS]['primary']
+            ) || empty($args[self::TEAMS]['primary'])
             ) {
-                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', array(self::TEAMS, 'primary'));
+                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', [self::TEAMS, 'primary']);
             }
-            if (isset($args[self::TEAMS]["others"])) {
-                if (!is_array($args[self::TEAMS]["others"])) {
-                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', array(self::TEAMS, 'others'));
+            if (isset($args[self::TEAMS]['others'])) {
+                if (!is_array($args[self::TEAMS]['others'])) {
+                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', [self::TEAMS, 'others']);
                 }
-                foreach ($args[self::TEAMS]["others"] as $otherTeam) {
+                foreach ($args[self::TEAMS]['others'] as $otherTeam) {
                     if (!is_string($otherTeam) || empty($otherTeam)) {
-                        $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', array(self::TEAMS, 'others'));
+                        $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', [self::TEAMS, 'others']);
                     }
                 }
             }
@@ -536,69 +536,68 @@ class MailApi extends ModuleApi
         /*--- Validate Related ---*/
         if (isset($args[self::RELATED])) {
             if (!is_array($args[self::RELATED])) {
-                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', array(self::RELATED));
+                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', [self::RELATED]);
             }
             if (!empty($args[self::RELATED])) {
-                if (empty($args[self::RELATED]["id"]) || !is_string($args[self::RELATED]["id"])) {
-                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', array(self::RELATED, 'id'));
+                if (empty($args[self::RELATED]['id']) || !is_string($args[self::RELATED]['id'])) {
+                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', [self::RELATED, 'id']);
                 }
-                if (empty($args[self::RELATED]["type"]) || !is_string($args[self::RELATED]["type"])) {
-                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', array(self::RELATED, 'type'));
+                if (empty($args[self::RELATED]['type']) || !is_string($args[self::RELATED]['type'])) {
+                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', [self::RELATED, 'type']);
                 }
-                if (!in_array($args[self::RELATED]["type"], $relatedToModules)) {
-                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', array(self::RELATED, 'type'));
+                if (!in_array($args[self::RELATED]['type'], $relatedToModules)) {
+                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', [self::RELATED, 'type']);
                 }
             }
         }
 
         /*--- Validate Subject ---*/
         if (isset($args[self::SUBJECT]) && !is_string($args[self::SUBJECT])) {
-            $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', array(self::SUBJECT));
+            $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', [self::SUBJECT]);
         }
 
-        if ($args[self::STATUS] === "archive") {
+        if ($args[self::STATUS] === 'archive') {
             $subject = empty($args[self::SUBJECT]) ? '' : trim($args[self::SUBJECT]);
             if (empty($subject)) {
-                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_VALUE', array(self::SUBJECT));
+                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_VALUE', [self::SUBJECT]);
             }
         }
 
         /*--- Validate html_body ---*/
         if (isset($args[self::HTML_BODY]) && !is_string($args[self::HTML_BODY])) {
-            $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', array(self::HTML_BODY));
+            $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', [self::HTML_BODY]);
         }
 
         /*--- Validate text_body ---*/
         if (isset($args[self::TEXT_BODY]) && !is_string($args[self::TEXT_BODY])) {
-            $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', array(self::TEXT_BODY));
+            $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', [self::TEXT_BODY]);
         }
 
         /*--- Initialize any Unprovided Arguments to their Defaults ---*/
-        foreach (self::$fields AS $k => $v) {
+        foreach (self::$fields as $k => $v) {
             if (!isset($args[$k])) {
                 $args[$k] = $v;
             }
         }
 
         /*--- If Sending Mail, make sure there is at least One Recipient specified --*/
-        if (($args[self::STATUS] !== "draft") &&
+        if (($args[self::STATUS] !== 'draft') &&
             empty($args[self::TO_ADDRESSES]) &&
             empty($args[self::CC_ADDRESSES]) &&
             empty($args[self::BCC_ADDRESSES])
         ) {
             $this->invalidParameter('LBL_MAILAPI_NO_RECIPIENTS');
         }
-
     }
 
     /**
      * Validate Recipient List
      *
-     * @deprecated This method is no longer used and is not recommended.
-     * @see MailApi::validateArguments()
      * @param array $args
      * @param string $argName
      * @param bool $isRequired
+     * @see MailApi::validateArguments()
+     * @deprecated This method is no longer used and is not recommended.
      */
     protected function validateRecipients(array $args, $argName, $isRequired = false)
     {
@@ -607,35 +606,35 @@ class MailApi extends ModuleApi
         $recipientCount = 0;
         if (isset($args[$argName])) {
             if (!is_array($args[$argName])) {
-                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', array($argName));
+                $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', [$argName]);
             }
             foreach ($args[$argName] as $recipient) {
                 if (!is_array($recipient)) {
-                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', array($argName));
+                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FORMAT', [$argName]);
                 }
                 if (empty($recipient['email'])) {
-                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', array($argName, "email"));
+                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', [$argName, 'email']);
                 }
                 if (!is_string($recipient['email'])) {
-                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', array($argName, "email"));
+                    $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_FIELD', [$argName, 'email']);
                 }
                 $recipientCount++;
             }
         }
         if ($isRequired && $recipientCount == 0) {
-            $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_VALUE', array($argName));
+            $this->invalidParameter('LBL_MAILAPI_INVALID_ARGUMENT_VALUE', [$argName]);
         }
     }
 
     /**
      * Log Audit Errors and Throw Appropriate Exception
      *
-     * @deprecated This method is no longer used and is not recommended.
-     * @see MailApi::validateArguments()
-     * @see MailApi::validateRecipients()
      * @param string $message
      * @param null|array $msgArgs
      * @throws SugarApiExceptionInvalidParameter
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailApi::validateArguments()
+     * @see MailApi::validateRecipients()
      */
     protected function invalidParameter($message, $msgArgs = null)
     {
@@ -647,11 +646,11 @@ class MailApi extends ModuleApi
     /**
      * Instantiate and initialize the MaiRecord from the incoming api arguments
      *
-     * @deprecated This method is no longer used and is not recommended.
-     * @see MailApi::archiveMail()
-     * @see MailApi::handleMail()
      * @param array $args
      * @return MailRecord
+     * @see MailApi::handleMail()
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailApi::archiveMail()
      */
     protected function initMailRecord(array $args)
     {
@@ -683,11 +682,11 @@ class MailApi extends ModuleApi
      * Validates email addresses. The return value is an array of key-value pairs where the keys are the email
      * addresses and the values are booleans indicating whether or not the email address is valid.
      *
-     * @deprecated POST /Mail/address/validate has been deprecated and will not be available after v11.
      * @param ServiceBase $api
      * @param array $args
      * @return array
      * @throws SugarApiException
+     * @deprecated POST /Mail/address/validate has been deprecated and will not be available after v11.
      */
     public function validateEmailAddresses(ServiceBase $api, array $args)
     {
@@ -695,8 +694,8 @@ class MailApi extends ModuleApi
             'POST /Mail/address/validate has been deprecated and will not be available after v11.'
         );
 
-        $validatedEmailAddresses = array();
-        unset($args["__sugar_url"]);
+        $validatedEmailAddresses = [];
+        unset($args['__sugar_url']);
         if (!is_array($args)) {
             throw new SugarApiExceptionInvalidParameter('Invalid argument: cannot validate');
         }
@@ -711,14 +710,14 @@ class MailApi extends ModuleApi
     }
 
     /**
-     * @see MailApi::recipientLookup()
-     * @see MailApi::findRecipients()
      * @return EmailRecipientsService
+     * @see MailApi::findRecipients()
+     * @see MailApi::recipientLookup()
      */
     protected function getEmailRecipientsService()
     {
         if (!($this->emailRecipientsService instanceof EmailRecipientsService)) {
-            $this->emailRecipientsService = new EmailRecipientsService;
+            $this->emailRecipientsService = new EmailRecipientsService();
         }
 
         return $this->emailRecipientsService;
@@ -727,12 +726,12 @@ class MailApi extends ModuleApi
     /**
      * Saves an email attachment using the POST method
      *
-     * @deprecated POST /Mail/attachment has been deprecated and will not be available after v11. Use POST
-     * /Notes/temp/file/filename to upload an attachment and POST /Emails/:record/link/attachments to link it to an
-     * email.
      * @param ServiceBase $api The service base
      * @param array $args Arguments array built by the service base
      * @return array metadata about the attachment including name, guid, and nameForDisplay
+     * @deprecated POST /Mail/attachment has been deprecated and will not be available after v11. Use POST
+     * /Notes/temp/file/filename to upload an attachment and POST /Emails/:record/link/attachments to link it to an
+     * email.
      */
     public function saveAttachment(ServiceBase $api, array $args)
     {
@@ -752,14 +751,14 @@ class MailApi extends ModuleApi
     /**
      * Removes an email attachment
      *
-     * @deprecated DELETE /Mail/attachment/:id has been deprecated and will not be available after v11. Use DELETE
-     * /Notes/:record/file/filename to delete an uploaded file from the filesystem. Use DELETE
-     * /Emails/:record/link/attachments/:remote_id to remove an attachment from an email. Note that removing an
-     * attachment from an email will also delete it from the filesystem.
      * @param ServiceBase $api The service base
      * @param array $args The request args
      * @return bool
      * @throws SugarApiExceptionRequestMethodFailure
+     * @deprecated DELETE /Mail/attachment/:id has been deprecated and will not be available after v11. Use DELETE
+     * /Notes/:record/file/filename to delete an uploaded file from the filesystem. Use DELETE
+     * /Emails/:record/link/attachments/:remote_id to remove an attachment from an email. Note that removing an
+     * attachment from an email will also delete it from the filesystem.
      */
     public function removeAttachment(ServiceBase $api, array $args)
     {
@@ -773,7 +772,7 @@ class MailApi extends ModuleApi
         $email = $this->getEmailBean();
         $email->email2init();
         $fileGUID = $args['file_guid'];
-        $fileName = $email->et->userCacheDir . "/" . $fileGUID;
+        $fileName = $email->et->userCacheDir . '/' . $fileGUID;
         $filePath = clean_path($fileName);
         $fileConstraint = new File([
             'baseDirs' => [realpath($email->et->userCacheDir)],
@@ -790,10 +789,10 @@ class MailApi extends ModuleApi
     /**
      * Returns a new Email bean, used for testing purposes
      *
-     * @deprecated This method is no longer used and is not recommended.
+     * @return Email
      * @see MailApi::saveAttachment()
      * @see MailApi::removeAttachment()
-     * @return Email
+     * @deprecated This method is no longer used and is not recommended.
      */
     protected function getEmailBean()
     {

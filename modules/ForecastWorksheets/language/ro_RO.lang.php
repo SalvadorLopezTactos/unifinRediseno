@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
 
     //module strings.
     'LBL_MODULE_NAME' => 'Tabele previziuni',
@@ -41,14 +41,14 @@ $mod_strings = array (
     'LBL_FORECAST_TYPE' => 'Tip previziune',
     'LBL_FORECAST_OPP_COUNT' => 'Numar total oportunitati',
     'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Numar oportunitati in pipeline',
-    'LBL_FORECAST_OPP_WEIGH'=> 'Suma ponderata',
+    'LBL_FORECAST_OPP_WEIGH' => 'Suma ponderata',
     'LBL_FORECAST_USER' => 'Utilizator',
-    'LBL_DATE_COMMITTED'=> 'Data asumarii',
+    'LBL_DATE_COMMITTED' => 'Data asumarii',
     'LBL_DATE_ENTERED' => 'Data intrării',
     'LBL_DATE_MODIFIED' => 'Data modificarii',
     'LBL_CREATED_BY' => 'Creat de',
     'LBL_DELETED' => 'Şters',
-    'LBL_MODIFIED_USER_ID'=>'Modificat de',
+    'LBL_MODIFIED_USER_ID' => 'Modificat de',
     'LBL_WK_VERSION' => 'Versiune',
     'LBL_WK_REVISION' => 'Revizie',
 
@@ -65,68 +65,68 @@ $mod_strings = array (
     'LBL_QC_UPCOMING_FORECASTS' => 'Previziunile mele',
     'LBL_QC_LAST_DATE_COMMITTED' => 'Ultima data de asumare:',
     'LBL_QC_LAST_COMMIT_VALUE' => 'Ultima suma asumata:',
-    'LBL_QC_HEADER_DELIM'=> 'Catre',
+    'LBL_QC_HEADER_DELIM' => 'Catre',
 
     //opportunity worksheet list view labels
-    'LBL_OW_OPPORTUNITIES' => "Oportunitate",
-    'LBL_OW_ACCOUNTNAME' => "Cont",
-    'LBL_OW_REVENUE' => "Suma",
-    'LBL_OW_WEIGHTED' => "Suma ponderata",
-    'LBL_OW_MODULE_TITLE'=> 'Tabel oportunitati',
-    'LBL_OW_PROBABILITY'=>'Probabilitate',
-    'LBL_OW_NEXT_STEP'=>'Urmatorul pas',
-    'LBL_OW_DESCRIPTION'=>'Descriere',
-    'LBL_OW_TYPE'=>'Tip',
+    'LBL_OW_OPPORTUNITIES' => 'Oportunitate',
+    'LBL_OW_ACCOUNTNAME' => 'Cont',
+    'LBL_OW_REVENUE' => 'Suma',
+    'LBL_OW_WEIGHTED' => 'Suma ponderata',
+    'LBL_OW_MODULE_TITLE' => 'Tabel oportunitati',
+    'LBL_OW_PROBABILITY' => 'Probabilitate',
+    'LBL_OW_NEXT_STEP' => 'Urmatorul pas',
+    'LBL_OW_DESCRIPTION' => 'Descriere',
+    'LBL_OW_TYPE' => 'Tip',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'Raport direct',
-    'LBL_FDR_OPPORTUNITIES'=>'Oportunitati in previziune:',
-    'LBL_FDR_WEIGH'=>'Suma ponderata a oportunitatilor:',
-    'LBL_FDR_COMMIT'=>'Suma asumata',
-    'LBL_FDR_DATE_COMMIT'=>'Data asumarii',
+    'LBL_FDR_USER_NAME' => 'Raport direct',
+    'LBL_FDR_OPPORTUNITIES' => 'Oportunitati in previziune:',
+    'LBL_FDR_WEIGH' => 'Suma ponderata a oportunitatilor:',
+    'LBL_FDR_COMMIT' => 'Suma asumata',
+    'LBL_FDR_DATE_COMMIT' => 'Data asumarii',
 
     //detail view.
     'LBL_DV_HEADER' => 'Previziuni:Tabel',
     'LBL_DV_MY_FORECASTS' => 'Previziunile mele',
-    'LBL_DV_MY_TEAM' => "Previziunile echipei mele" ,
+    'LBL_DV_MY_TEAM' => "Previziunile echipei mele",
     'LBL_DV_TIMEPERIODS' => 'Perioade de timp:',
     'LBL_DV_FORECAST_PERIOD' => 'Perioada de timp previziuni',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Oportunitati in previziune',
     'LBL_SEARCH' => 'Selecteaza',
     'LBL_SEARCH_LABEL' => 'Selecteaza',
     'LBL_COMMIT_HEADER' => 'Asumare previziune',
-    'LBL_DV_LAST_COMMIT_DATE' =>'Ultima data de asumare:',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'Ultimele sume asumate:',
+    'LBL_DV_LAST_COMMIT_DATE' => 'Ultima data de asumare:',
+    'LBL_DV_LAST_COMMIT_AMOUNT' => 'Ultimele sume asumate:',
     'LBL_DV_FORECAST_ROLLUP' => 'Adunare previziuni',
     'LBL_DV_TIMEPERIOD' => 'Perioada de timp:',
     'LBL_DV_TIMPERIOD_DATES' => 'Marja datei:',
     'LBL_LOADING_COMMIT_HISTORY' => 'Se incarca istoricul asumarilor...',
 
     //list view
-    'LBL_LV_TIMPERIOD'=> 'Perioada de timp',
-    'LBL_LV_TIMPERIOD_START_DATE'=> 'Data Începerii',
-    'LBL_LV_TIMPERIOD_END_DATE'=> 'Data de incheiere',
-    'LBL_LV_TYPE'=> 'Tip previziune',
-    'LBL_LV_COMMIT_DATE'=> 'Data asumarii',
-    'LBL_LV_OPPORTUNITIES'=> 'Oportunitati',
-    'LBL_LV_WEIGH'=> 'Suma ponderata',
-    'LBL_LV_COMMIT'=> 'Suma asumata',
+    'LBL_LV_TIMPERIOD' => 'Perioada de timp',
+    'LBL_LV_TIMPERIOD_START_DATE' => 'Data Începerii',
+    'LBL_LV_TIMPERIOD_END_DATE' => 'Data de incheiere',
+    'LBL_LV_TYPE' => 'Tip previziune',
+    'LBL_LV_COMMIT_DATE' => 'Data asumarii',
+    'LBL_LV_OPPORTUNITIES' => 'Oportunitati',
+    'LBL_LV_WEIGH' => 'Suma ponderata',
+    'LBL_LV_COMMIT' => 'Suma asumata',
 
-    'LBL_COMMIT_NOTE'=> 'Introdu sumele pe care ai vrea sa ti le asumi pentur perioada de timp selectata:',
+    'LBL_COMMIT_NOTE' => 'Introdu sumele pe care ai vrea sa ti le asumi pentur perioada de timp selectata:',
 
-    'LBL_COMMIT_MESSAGE'=> 'Vrei sa iti asumi aceste sume?',
+    'LBL_COMMIT_MESSAGE' => 'Vrei sa iti asumi aceste sume?',
     'ERR_FORECAST_AMOUNT' => 'Suma asumata este camp obligatoriu si trebuie sa fie formata doar din cifre.',
 
     // js error strings
     'LBL_FC_START_DATE' => 'Data Începerii',
     'LBL_FC_USER' => 'Programeaza pentru',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'Nu este activa nicio perioada de timp pentru modulul Previziuni.',
-    'LBL_FDR_ADJ_AMOUNT'=>'Suma ajustata',
-    'LBL_SAVE_WOKSHEET'=>'Salveaza tabel',
-    'LBL_RESET_WOKSHEET'=>'Reseteaza tabel',
-    'LBL_SHOW_CHART'=>'Vezi grafic',
-    'LBL_RESET_CHECK'=>'Toate datele din tabel pentru perioada de timp selectata si utilizatorul logat vor fi eliminate. Vrei sa continui?',
+    'LBL_NO_ACTIVE_TIMEPERIOD' => 'Nu este activa nicio perioada de timp pentru modulul Previziuni.',
+    'LBL_FDR_ADJ_AMOUNT' => 'Suma ajustata',
+    'LBL_SAVE_WOKSHEET' => 'Salveaza tabel',
+    'LBL_RESET_WOKSHEET' => 'Reseteaza tabel',
+    'LBL_SHOW_CHART' => 'Vezi grafic',
+    'LBL_RESET_CHECK' => 'Toate datele din tabel pentru perioada de timp selectata si utilizatorul logat vor fi eliminate. Vrei sa continui?',
 
     'LBL_CURRENCY' => 'Valuta',
     'LBL_CURRENCY_ID' => 'ID valuta',
@@ -159,5 +159,5 @@ $mod_strings = array (
     'LBL_EDITABLE_INVALID' => 'Valoare invalida pentru campul {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Valoarea trebuie sa fie intre {{min}} si {{max}}',
     'LBL_MANAGER_NOTIFY' => '{0} {1} nu au fost incluse in ultima asumare dupa ce a fost inclusa in asumarea anterioara',
-    'LBL_MANAGER_NOTIFY_NAME' => '{0} Modificare angajament'
-);
+    'LBL_MANAGER_NOTIFY_NAME' => '{0} Modificare angajament',
+];

@@ -1,0 +1,114 @@
+.dashlet .docusign {
+  ul.nav-tabs {
+    height: 30px;
+
+    li.dropdown {
+      float: right;
+    }
+  }
+
+  .docusignChart {
+    margin: 0 auto;
+  }
+
+  .envelopes_docusign_content {
+    display: none;
+  }
+
+  .documents_docusign_content {
+    display: none;
+    width: 100%;
+  }
+
+  .drafts_docusign_content {
+    display: none;
+  }
+
+  .stick-first {
+    left: 0;
+  }
+
+  .addDocument,
+  .sendEnvelope,
+  .selectTemplate {
+    line-height: 18px;
+  }
+
+  .nav > li {
+    width: 20%;
+    white-space: nowrap;
+
+    a {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .sticky-column.stick-right {
+    background-color: var(--primary-content-background);
+  }
+
+  .docusign-documents-header {
+    height: 35px;
+
+    .btn-toolbar {
+      button {
+        margin-left: 10px;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    }
+  }
+
+  > div:first-of-type {
+    height: calc(100% - 16px);
+
+    .main {
+      height: 100%;
+
+      .overview_docusign_content {
+        height: 100%;
+
+        div[class^="chart"] {
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  .flex-list-view {
+    border-top: 0;
+  }
+
+  .envelopes_docusign_content .table thead:first-child tr:first-child th,
+  .drafts_docusign_content .table thead:first-child tr:first-child th {
+    border-top: 0;
+  }
+
+  .envelopes_docusign_content .table tr td,
+  .documents_docusign_content .table tr td,
+  .drafts_docusign_content .table tr td {
+    height: 28px !important;
+  }
+}
+
+.templates-list .flex-list-view[class$="-actions"]:not(.scroll-width)
+  .flex-list-view-content .dataTable td:last-child:not(.alert) {
+  height: 28px;
+}
+
+body.safari-browser {
+  .docusign {
+    .dataTable {
+      th,
+      td {
+        &.sticky-column {
+          &.stick-first {
+            left: 0;
+          }
+        }
+      }
+    }
+  }
+}

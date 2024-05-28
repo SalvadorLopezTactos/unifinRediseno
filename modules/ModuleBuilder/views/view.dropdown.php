@@ -13,7 +13,7 @@ require_once 'modules/ModuleBuilder/MB/ModuleBuilder.php';
 
 class ViewDropdown extends SugarView
 {
-    protected $defaultParams = array(
+    protected $defaultParams = [
         'refreshTree' => false,
         'package_name' => 'studio',
         'view_package' => 'studio',
@@ -22,29 +22,29 @@ class ViewDropdown extends SugarView
         'dropdown_name' => '',
         'dropdown_role' => '',
         'field' => '',
-        'new' => false
-    );
+        'new' => false,
+    ];
 
     protected $template = 'modules/ModuleBuilder/tpls/MBModule/dropdown.tpl';
 
     /**
-     * @see SugarView::_getModuleTitleParams()
      * @param bool $browserTitle
      * @return array
+     * @see SugarView::_getModuleTitleParams()
      */
     protected function _getModuleTitleParams($browserTitle = false)
     {
-        return array(
+        return [
             translate('LBL_MODULE_NAME', 'Administration'),
             ModuleBuilderController::getModuleTitle(),
-        );
+        ];
     }
 
-    function display()
+    public function display()
     {
         $ajax = new AjaxCompose();
 
-        $args = array(
+        $args = [
             'view_package' => $this->request->getValidInputRequest('view_package', 'Assert\ComponentName'),
             'view_module' => $this->request->getValidInputRequest('view_module', 'Assert\ComponentName'),
             'dropdown_lang' => $this->request->getValidInputRequest('dropdown_lang', 'Assert\Language'),
@@ -53,7 +53,7 @@ class ViewDropdown extends SugarView
             'dropdown_role' => $this->request->getValidInputRequest('dropdown_role', 'Assert\Guid'),
             'field' => $this->request->getValidInputRequest('field'),
             'new' => $this->request->getValidInputRequest('new'),
-        );
+        ];
 
         $params = $this->parseArguments($args);
         $smarty = $this->generateSmarty($params);
@@ -86,12 +86,12 @@ class ViewDropdown extends SugarView
         echo $ajax->getJavascript();
     }
 
-    function generateSmarty($params)
+    public function generateSmarty($params)
     {
         $module = null;
         global $sugar_config;
 
-        $vardef = array();
+        $vardef = [];
         $package_name = 'studio';
         $my_list_strings = return_app_list_strings_language($params['dropdown_lang']);
 
@@ -130,7 +130,7 @@ class ViewDropdown extends SugarView
             $package_name = $mb->packages[$params['view_package']]->name;
             $module->getVardefs();
 
-            $vardef = (!empty($module->mbvardefs->fields[$params['dropdown_name']])) ? $module->mbvardefs->fields[$params['dropdown_name']] : array();
+            $vardef = (!empty($module->mbvardefs->fields[$params['dropdown_name']])) ? $module->mbvardefs->fields[$params['dropdown_name']] : [];
             $module->mblanguage->generateAppStrings(false);
             $my_list_strings = array_merge(
                 $my_list_strings,
@@ -157,7 +157,7 @@ class ViewDropdown extends SugarView
 
         $json = getJSONobj();
 
-        $required_items = array();
+        $required_items = [];
         if ($params['dropdown_name'] && empty($params['new'])) {
             $name = $params['dropdown_name'];
 
@@ -167,7 +167,7 @@ class ViewDropdown extends SugarView
             // if it was new. A better approach might be to use the first language
             // version as a template for future languages
             if (!isset($my_list_strings[$name])) {
-                $my_list_strings[$name] = array();
+                $my_list_strings[$name] = [];
             }
 
             // Handle required elements of a drop down
@@ -254,6 +254,7 @@ class ViewDropdown extends SugarView
 
         return $params;
     }
+
 
     /**
      * Returns list of roles with marker indicating whether role specific metadata for the given dropdown field exists

@@ -34,14 +34,14 @@ class DropboxDrive extends Drive
     {
         global $sugar_config;
 
-        $nextPageToken = $options['nextPageToken'];
-        $sharedWithMe = $options['sharedWithMe'];
-        $folderPath = $options['folderPath'];
-        $limit = $options['limit'];
+        $nextPageToken = isset($options['nextPageToken']) ? $options['nextPageToken'] : null;
+        $sharedWithMe = isset($options['sharedWithMe']) ? $options['sharedWithMe'] : null;
+        $folderPath = array_key_exists('folderPath', $options) ? $options['folderPath'] : null;
+        $limit = isset($options['limit']) ? $options['limit'] : null;
 
         $dropboxApi = $this->getExternalApiClient();
 
-        if ((is_countable($folderPath) ? count($folderPath) : 0) > 1) {
+        if (safeCount($folderPath) > 1) {
             $path = $this->parseFolderPath($folderPath);
         }
 
@@ -54,7 +54,30 @@ class DropboxDrive extends Drive
             $data['cursor'] = $nextPageToken;
         }
 
-        $response = $dropboxApi->listFolder($data);
+        if ($sharedWithMe) {
+            if ($data['path'] === '') {
+                $sharedFolderData = [
+                    'limit' => $data['limit'],
+                ];
+                $responseFolder = $dropboxApi->listSharedFolder($sharedFolderData);
+                $responseFiles = $dropboxApi->listSharedFiles($sharedFolderData);
+
+                if (isset($responseFolder['error']) || isset($responseFiles['error'])) {
+                    $response = [
+                        'error' => $responseFolder['error'] ?? $responseFiles['error'],
+                    ];
+                } else {
+                    $combinedEntries = array_merge($responseFolder['entries'], $responseFiles['entries']);
+                    $response = [
+                        'entries' => $combinedEntries,
+                    ];
+                }
+            } else {
+                $response = $response = $dropboxApi->listFolder($data);
+            }
+        } else {
+            $response = $dropboxApi->listFolder($data);
+        }
 
         if (isset($response['error'])) {
             return $this->handleErrors($response);
@@ -63,9 +86,15 @@ class DropboxDrive extends Drive
         $mapper = new DriveItemMapper($response['entries'], DriveType::DROPBOX);
         $mappedData = $mapper->mapToArray();
 
+        if (!$sharedWithMe) {
+            $mappedData = array_filter($mappedData, function ($item) {
+                return $item->shared === null;
+            });
+        }
+
         return [
             'files' => $mappedData,
-            'nextPageToken' => $response['has_more'] ? $response['cursor'] : null,
+            'nextPageToken' => (array_key_exists('has_more', $response) && $response['has_more']) ? $response['cursor'] : null,
         ];
     }
 
@@ -130,7 +159,7 @@ class DropboxDrive extends Drive
         $folderPath = $options['folderPath'];
         $dropboxApi = $this->getExternalApiClient();
 
-        if ((is_countable($folderPath) ? count($folderPath) : 0) > 1) {
+        if (safeCount($folderPath) > 1) {
             $path = $this->parseFolderPath($folderPath);
         }
 
@@ -185,7 +214,7 @@ class DropboxDrive extends Drive
         $folderPath = $options['folderPath'];
         $dropboxApi = $this->getExternalApiClient();
 
-        if ((is_countable($folderPath) ? count($folderPath) : 0) > 1) {
+        if (safeCount($folderPath) > 1) {
             $path = $this->parseFolderPath($folderPath);
         }
 
@@ -214,7 +243,7 @@ class DropboxDrive extends Drive
 
         foreach ($folderPath as $folderData) {
             $name = $folderData['name'];
-            if ($name !== 'My files') {
+            if ($name !== 'My files' && $name !== 'Shared') {
                 $path .= "/{$name}";
             }
         }
@@ -234,7 +263,7 @@ class DropboxDrive extends Drive
         $folderPath = $options['folderPath'];
         $dropboxApi = $this->getExternalApiClient();
 
-        if ((is_countable($folderPath) ? count($folderPath) : 0) > 1) {
+        if (safeCount($folderPath) > 1) {
             $path = $this->parseFolderPath($folderPath);
         }
 
@@ -243,7 +272,8 @@ class DropboxDrive extends Drive
         ];
 
         $response = $dropboxApi->getSharedLink($data);
-        $url = $response['url'];
+
+        $url = isset($response['url']) ? $response['url'] : null;
 
         if (isset($response['error'])) {
             $sharedLink = $response['error']['shared_link_already_exists'];
@@ -270,7 +300,7 @@ class DropboxDrive extends Drive
         $dropboxApi = $this->getExternalApiClient();
         $path = '/' . $options['fileName'];
 
-        if ((is_countable($folderPath) ? count($folderPath) : 0) > 1) {
+        if (safeCount($folderPath) > 1) {
             $path = $this->parseFolderPath($folderPath);
         }
 

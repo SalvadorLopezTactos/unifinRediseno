@@ -22,32 +22,32 @@ class SugarUpgradeFixSidecarDeprecatedAPI extends UpgradeScript
      * HealthCheck reports we are going to fix
      * @var array
      */
-    private $HCReports = array(
+    private $HCReports = [
         'removedSidecarAPI_app_date',
         'removedSidecarAPI_Bean_fixable',
-    );
+    ];
 
     /**
      * Replace patterns for deprecated API
      * @var array
      */
-    private $patterns = array(
+    private $patterns = [
         '/\.(s|g)etDefaultAttribute(\W)/',
         '/([Aa])pp\.date\.compareDates\s*\(/',
         '/([Aa])pp\.date\.isDate(After|Before|Between)\s*\((.+?),(.+?)\)/',
         '/([Aa])pp\.date\.isDateOn\s*\((.+?),(.+?)\)/',
-    );
+    ];
 
     /**
      * Corresponding replacements for deprecated API
      * @var array
      */
-    private $replacements = array(
+    private $replacements = [
         '.$1etDefault$2',
         '$1pp.date.compare(',
         '$1pp.date($3).is$2($4)',
         '$1pp.date($2).isSame($3)',
-    );
+    ];
 
     public function run()
     {

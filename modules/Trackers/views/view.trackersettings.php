@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc. All Rights
  * Reserved. Contributor(s): ______________________________________..
@@ -18,27 +17,29 @@
 
 require_once 'include/formbase.php';
 
-class TrackersViewTrackersettings extends SugarView 
-{	
+class TrackersViewTrackersettings extends SugarView
+{
     /**
-	 * @see SugarView::_getModuleTab()
-	 */
-	protected function _getModuleTab()
+     * @see SugarView::_getModuleTab()
+     */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _getModuleTab()
     {
         return 'Administration';
     }
- 	
- 	/**
-	 * @see SugarView::_getModuleTitleParams()
-	 */
-	protected function _getModuleTitleParams($browserTitle = false)
-	{
-	    global $mod_strings;
-	    
-    	return array(
-            "<a href='#Administration'>".translate('LBL_MODULE_NAME', 'Administration')."</a>",
+
+    /**
+     * @see SugarView::_getModuleTitleParams()
+     */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _getModuleTitleParams($browserTitle = false)
+    {
+        global $mod_strings;
+
+        return [
+            "<a href='#Administration'>" . translate('LBL_MODULE_NAME', 'Administration') . '</a>',
             translate('LBL_TRACKER_SETTINGS', 'Administration'),
-        );
+        ];
     }
 
     /**
@@ -55,64 +56,64 @@ class TrackersViewTrackersettings extends SugarView
         }
 
         $admin = Administration::getSettings();
-        
-        require('modules/Trackers/config.php');
-        
+
+        require 'modules/Trackers/config.php';
+
         ///////////////////////////////////////////////////////////////////////////////
         ////	HANDLE CHANGES
-        if(isset($_POST['process'])) {
-           if($_POST['process'] == 'true') {
-               foreach($tracker_config as $entry) {
-                  if(isset($entry['bean'])) {
-                      //If checkbox is unchecked, we add the entry into the config table; otherwise delete it
-                      if(empty($_POST[$entry['name']])) {
-                        $admin->saveSetting('tracker', $entry['name'], 1);
-                      }	else {
+        if (isset($_POST['process'])) {
+            if ($_POST['process'] == 'true') {
+                foreach ($tracker_config as $entry) {
+                    if (isset($entry['bean'])) {
+                        //If checkbox is unchecked, we add the entry into the config table; otherwise delete it
+                        if (empty($_POST[$entry['name']])) {
+                            $admin->saveSetting('tracker', $entry['name'], 1);
+                        } else {
                             DBManagerFactory::getInstance()
                                 ->getConnection()
                                 ->delete('config', ['category' => 'tracker', 'name' => $entry['name']]);
-                      }
-                  }
-               } //foreach
-               
-               //save the tracker prune interval
-               if(!empty($_POST['tracker_prune_interval'])) {
-                  $admin->saveSetting('tracker', 'prune_interval', $_POST['tracker_prune_interval']);
-               }
-               
-               //save log slow queries and slow query interval
-               $configurator = new Configurator();
-               $configurator->saveConfig();
-           } //if
+                        }
+                    }
+                } //foreach
+
+                //save the tracker prune interval
+                if (!empty($_POST['tracker_prune_interval'])) {
+                    $admin->saveSetting('tracker', 'prune_interval', $_POST['tracker_prune_interval']);
+                }
+
+                //save log slow queries and slow query interval
+                $configurator = new Configurator();
+                $configurator->saveConfig();
+            } //if
             SugarApplication::redirect(buildRedirectURL('', 'Administration'));
         }
-        
+
         echo getClassicModuleTitle(
-                "Administration", 
-                array(
-                    "<a href='#Administration'>".translate('LBL_MODULE_NAME', 'Administration')."</a>",
-                    translate('LBL_TRACKER_SETTINGS','Administration'),
-                ),
-                false
+            'Administration',
+            [
+                "<a href='#Administration'>" . translate('LBL_MODULE_NAME', 'Administration') . '</a>',
+                translate('LBL_TRACKER_SETTINGS', 'Administration'),
+            ],
+            false
         );
-        
+
         $trackerManager = TrackerManager::getInstance();
         $disabledMonitors = $trackerManager->getDisabledMonitors();
-        $trackerEntries = array();
-        foreach($tracker_config as $entry) {
-           if(isset($entry['bean'])) {
-              $disabled = !empty($disabledMonitors[$entry['name']]);
-              $trackerEntries[$entry['name']] = array('label'=> $mod_strings['LBL_' . strtoupper($entry['name']) . '_DESC'], 'helpLabel'=> $mod_strings['LBL_' . strtoupper($entry['name']) . '_HELP'], 'disabled'=>$disabled);
-           }
+        $trackerEntries = [];
+        foreach ($tracker_config as $entry) {
+            if (isset($entry['bean'])) {
+                $disabled = !empty($disabledMonitors[$entry['name']]);
+                $trackerEntries[$entry['name']] = ['label' => $mod_strings['LBL_' . strtoupper($entry['name']) . '_DESC'], 'helpLabel' => $mod_strings['LBL_' . strtoupper($entry['name']) . '_HELP'], 'disabled' => $disabled];
+            }
         }
-        
+
         $configurator = new Configurator();
         $this->ss->assign('config', $configurator->config);
-        
+
         $config_strings = return_module_language($GLOBALS['current_language'], 'Configurator');
         $mod_strings['LOG_SLOW_QUERIES'] = $config_strings['LOG_SLOW_QUERIES'];
         $mod_strings['SLOW_QUERY_TIME_MSEC'] = $config_strings['SLOW_QUERY_TIME_MSEC'];
-        
+
         $this->ss->assign('mod', $mod_strings);
         $this->ss->assign('app', $app_strings);
         $this->ss->assign('trackerEntries', $trackerEntries);

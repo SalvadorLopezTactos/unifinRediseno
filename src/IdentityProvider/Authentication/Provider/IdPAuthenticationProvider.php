@@ -69,12 +69,13 @@ class IdPAuthenticationProvider implements AuthenticationProviderInterface
      * @param string $providerKey
      */
     public function __construct(
-        AbstractProvider $oAuthProvider,
+        AbstractProvider      $oAuthProvider,
         UserProviderInterface $userProvider,
-        UserCheckerInterface $userChecker,
-        MappingInterface $userMapping,
+        UserCheckerInterface  $userChecker,
+        MappingInterface      $userMapping,
         $providerKey
     ) {
+
         $this->oAuthProvider = $oAuthProvider;
         $this->userProvider = $userProvider;
         $this->userChecker = $userChecker;

@@ -195,6 +195,12 @@
             return this.$el.closest('.tab-content');
         } else if (this.view && this.view.type === 'recordlist') {
             return this.$el.closest('.flex-list-view-content');
+        } else if (this.view && this.view.type === 'preview') {
+            const previewParent = this.$el.closest('.preview-pane').parent();
+
+            if (previewParent.length) {
+                return previewParent;
+            }
         }
 
         let component = this.closestComponent('side-drawer') ||
@@ -419,6 +425,9 @@
      */
     _render: function() {
         if (this._hasDatePicker) {
+            if (_.isEmpty(this.model.get(this.name))) {
+                this.$(this.fieldTag).val('');
+            }
             this.$(this.fieldTag).datepicker('hide');
         }
 

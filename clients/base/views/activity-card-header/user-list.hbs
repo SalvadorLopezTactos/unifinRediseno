@@ -11,6 +11,12 @@
  */
 --}}
 {{#with view}}
+    {{#if userList.length}}
+        {{#if usersPanel.label}}
+            <div class="activity-label">{{str usersPanel.label}}</div>
+        {{/if}}
+    {{/if}}
+
     <div class="header-user-list">
         {{#each userList}}
             {{partial 'user' ../this view=../this userField=userField userValue=userValue model=userModel}}

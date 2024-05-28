@@ -25,7 +25,7 @@ namespace Microsoft\Graph\Model;
 class Teamwork extends Entity
 {
 
-     /** 
+     /**
      * Gets the workforceIntegrations
      *
      * @return array|null The workforceIntegrations
@@ -38,11 +38,11 @@ class Teamwork extends Entity
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the workforceIntegrations
     *
-    * @param WorkforceIntegration $val The workforceIntegrations
+    * @param WorkforceIntegration[] $val The workforceIntegrations
     *
     * @return Teamwork
     */
@@ -51,5 +51,35 @@ class Teamwork extends Entity
         $this->_propDict["workforceIntegrations"] = $val;
         return $this;
     }
-    
+
+
+     /**
+     * Gets the deletedTeams
+    * The deleted team.
+     *
+     * @return array|null The deletedTeams
+     */
+    public function getDeletedTeams()
+    {
+        if (array_key_exists("deletedTeams", $this->_propDict)) {
+           return $this->_propDict["deletedTeams"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the deletedTeams
+    * The deleted team.
+    *
+    * @param DeletedTeam[] $val The deletedTeams
+    *
+    * @return Teamwork
+    */
+    public function setDeletedTeams($val)
+    {
+        $this->_propDict["deletedTeams"] = $val;
+        return $this;
+    }
+
 }

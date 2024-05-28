@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,41 +10,41 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['VisualPipeline']['base']['layout']['config-drawer'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['VisualPipeline']['base']['layout']['config-drawer'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'css_class' => 'main-pane span8 overflow-scroll',
+                            'components' => [
+                                [
                                     'view' => 'config-header-buttons',
-                                ),
-                                array(
+                                ],
+                                [
                                     'layout' => 'config-drawer-content',
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'side-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'view' => 'config-preview-content',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

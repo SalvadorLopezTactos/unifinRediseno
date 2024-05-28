@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'في تقدم',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم الرسائل',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'لوحة معلومات سجل الرسائل',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني للرسالة',
 ];

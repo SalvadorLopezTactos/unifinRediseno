@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
 
     //module strings.
     'LBL_MODULE_NAME' => 'Prognose Manager Worksheets',
@@ -35,14 +35,14 @@ $mod_strings = array (
     'LBL_FORECAST_TYPE' => 'Prognose Type',
     'LBL_FORECAST_OPP_COUNT' => 'Samlet Opportunity Antal',
     'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Pipeline Opportunity Antal',
-    'LBL_FORECAST_OPP_WEIGH'=> 'Vægtet beløb',
+    'LBL_FORECAST_OPP_WEIGH' => 'Vægtet beløb',
     'LBL_FORECAST_USER' => 'Bruger',
-    'LBL_DATE_COMMITTED'=> 'Forpligtet den',
+    'LBL_DATE_COMMITTED' => 'Forpligtet den',
     'LBL_DATE_ENTERED' => 'Oprettet den',
     'LBL_DATE_MODIFIED' => 'Ændret den',
     'LBL_CREATED_BY' => 'Oprettet af',
     'LBL_DELETED' => 'Slettet',
-    'LBL_MODIFIED_USER_ID'=>'Ændret af',
+    'LBL_MODIFIED_USER_ID' => 'Ændret af',
     'LBL_WK_VERSION' => 'Version',
     'LBL_WK_REVISION' => 'Revision',
 
@@ -59,68 +59,68 @@ $mod_strings = array (
     'LBL_QC_UPCOMING_FORECASTS' => 'Mine prognoser',
     'LBL_QC_LAST_DATE_COMMITTED' => 'Seneste Forpligt dato:',
     'LBL_QC_LAST_COMMIT_VALUE' => 'Seneste Forpligt beløb:',
-    'LBL_QC_HEADER_DELIM'=> 'Til',
+    'LBL_QC_HEADER_DELIM' => 'Til',
 
     //opportunity worksheet list view labels
-    'LBL_OW_OPPORTUNITIES' => "Salgsmulighed",
-    'LBL_OW_ACCOUNTNAME' => "Virksomhed",
-    'LBL_OW_REVENUE' => "Beløb",
-    'LBL_OW_WEIGHTED' => "Vægtet beløb",
-    'LBL_OW_MODULE_TITLE'=> 'Salgsmulighedsregneark',
-    'LBL_OW_PROBABILITY'=>'Sandsynlighed',
-    'LBL_OW_NEXT_STEP'=>'Næste trin',
-    'LBL_OW_DESCRIPTION'=>'Beskrivelse',
-    'LBL_OW_TYPE'=>'Type',
+    'LBL_OW_OPPORTUNITIES' => 'Salgsmulighed',
+    'LBL_OW_ACCOUNTNAME' => 'Virksomhed',
+    'LBL_OW_REVENUE' => 'Beløb',
+    'LBL_OW_WEIGHTED' => 'Vægtet beløb',
+    'LBL_OW_MODULE_TITLE' => 'Salgsmulighedsregneark',
+    'LBL_OW_PROBABILITY' => 'Sandsynlighed',
+    'LBL_OW_NEXT_STEP' => 'Næste trin',
+    'LBL_OW_DESCRIPTION' => 'Beskrivelse',
+    'LBL_OW_TYPE' => 'Type',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'Direkte rapport',
-    'LBL_FDR_OPPORTUNITIES'=>'Salgsmuligheder i prognose:',
-    'LBL_FDR_WEIGH'=>'Vægtet beløb af salgsmuligheder:',
-    'LBL_FDR_COMMIT'=>'Forpligtet beløb',
-    'LBL_FDR_DATE_COMMIT'=>'Forpligt dato',
+    'LBL_FDR_USER_NAME' => 'Direkte rapport',
+    'LBL_FDR_OPPORTUNITIES' => 'Salgsmuligheder i prognose:',
+    'LBL_FDR_WEIGH' => 'Vægtet beløb af salgsmuligheder:',
+    'LBL_FDR_COMMIT' => 'Forpligtet beløb',
+    'LBL_FDR_DATE_COMMIT' => 'Forpligt dato',
 
     //detail view.
     'LBL_DV_HEADER' => 'Prognoser:Regneark',
     'LBL_DV_MY_FORECASTS' => 'Mine prognoser',
-    'LBL_DV_MY_TEAM' => "Mit teams prognoser" ,
+    'LBL_DV_MY_TEAM' => "Mit teams prognoser",
     'LBL_DV_TIMEPERIODS' => 'Tidsperioder:',
     'LBL_DV_FORECAST_PERIOD' => 'Foreløbig tidsperiode',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Foreløbige salgsmuligheder',
     'LBL_SEARCH' => 'Vælg',
     'LBL_SEARCH_LABEL' => 'Vælg',
     'LBL_COMMIT_HEADER' => 'Foreløbig forpligt',
-    'LBL_DV_LAST_COMMIT_DATE' =>'Seneste Forpligt dato:',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'Seneste Forpligt beløb:',
+    'LBL_DV_LAST_COMMIT_DATE' => 'Seneste Forpligt dato:',
+    'LBL_DV_LAST_COMMIT_AMOUNT' => 'Seneste Forpligt beløb:',
     'LBL_DV_FORECAST_ROLLUP' => 'Foreløbig Opløft',
     'LBL_DV_TIMEPERIOD' => 'Tidsperiode:',
     'LBL_DV_TIMPERIOD_DATES' => 'Datointerval:',
     'LBL_LOADING_COMMIT_HISTORY' => 'Laster forpligt historikk',
 
     //list view
-    'LBL_LV_TIMPERIOD'=> 'Tidsperiode',
-    'LBL_LV_TIMPERIOD_START_DATE'=> 'Startdato',
-    'LBL_LV_TIMPERIOD_END_DATE'=> 'Slutdato',
-    'LBL_LV_TYPE'=> 'Prognose Type',
-    'LBL_LV_COMMIT_DATE'=> 'Forpligtet den',
-    'LBL_LV_OPPORTUNITIES'=> 'Salgsmuligheder',
-    'LBL_LV_WEIGH'=> 'Vægtet beløb',
-    'LBL_LV_COMMIT'=> 'Forpligte',
+    'LBL_LV_TIMPERIOD' => 'Tidsperiode',
+    'LBL_LV_TIMPERIOD_START_DATE' => 'Startdato',
+    'LBL_LV_TIMPERIOD_END_DATE' => 'Slutdato',
+    'LBL_LV_TYPE' => 'Prognose Type',
+    'LBL_LV_COMMIT_DATE' => 'Forpligtet den',
+    'LBL_LV_OPPORTUNITIES' => 'Salgsmuligheder',
+    'LBL_LV_WEIGH' => 'Vægtet beløb',
+    'LBL_LV_COMMIT' => 'Forpligte',
 
-    'LBL_COMMIT_NOTE'=> 'Forpligt note',
+    'LBL_COMMIT_NOTE' => 'Forpligt note',
 
-    'LBL_COMMIT_MESSAGE'=> 'Forpligt meddelelse',
+    'LBL_COMMIT_MESSAGE' => 'Forpligt meddelelse',
     'ERR_FORECAST_AMOUNT' => 'Forpligt beløb er obligatorisk og skal være et tal.',
 
     // js error strings
     'LBL_FC_START_DATE' => 'Start dato',
     'LBL_FC_USER' => 'Bruger',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'Aktive periode',
-    'LBL_FDR_ADJ_AMOUNT'=>'Beløb',
-    'LBL_SAVE_WOKSHEET'=>'Gem regneark',
-    'LBL_RESET_WOKSHEET'=>'Nulstil regneark',
-    'LBL_SHOW_CHART'=>'Vis diagram',
-    'LBL_RESET_CHECK'=>'Alle regnearksdata for den valgte periode og den bruger, der er logget på, fjernes. Vil du fortsætte?',
+    'LBL_NO_ACTIVE_TIMEPERIOD' => 'Aktive periode',
+    'LBL_FDR_ADJ_AMOUNT' => 'Beløb',
+    'LBL_SAVE_WOKSHEET' => 'Gem regneark',
+    'LBL_RESET_WOKSHEET' => 'Nulstil regneark',
+    'LBL_SHOW_CHART' => 'Vis diagram',
+    'LBL_RESET_CHECK' => 'Alle regnearksdata for den valgte periode og den bruger, der er logget på, fjernes. Vil du fortsætte?',
 
     'LBL_CURRENCY' => 'Valuta',
     'LBL_CURRENCY_ID' => 'Valuta ID',
@@ -149,6 +149,6 @@ $mod_strings = array (
     'LBL_HISTORY_LOG' => 'Seneste forpligtelse',
     'LBL_NO_COMMIT' => 'Ingen tidligere forpligtet',
 
-    'LBL_MANGER_SAVED' => 'Manager gemt'
+    'LBL_MANGER_SAVED' => 'Manager gemt',
 
-);
+];

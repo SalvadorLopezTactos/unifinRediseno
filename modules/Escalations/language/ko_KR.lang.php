@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => '에스컬레이션 보기',
     'LBL_LIST_RELATED_TO_ID' => '연관 ID',
     'LNK_IMPORT_ESCALATIONS' => '에스컬레이션 가져오기',
-    
+
     'LBL_LIST_SUBJECT' => '제목',
     'LBL_LIST_NUMBER' => '번호',
     'LBL_LIST_RELATED_TO_TYPE' => '관련된 자료 유형',

@@ -9,7 +9,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const Utils = require('utils/utils');
+const Utils = require('../utils/utils');
 
 /**
  * View manager is used to create views, layouts, and fields based on optional
@@ -34,7 +34,7 @@ const Utils = require('utils/utils');
  * Put declarations of your custom views, layouts, fields in the corresponding
  * hash (see note above; this is deprecated):
  * ```
- * const ViewManager = require('view/view-manager');
+ * const ViewManager = require('./view-manager');
  * ViewManager.views.MyappMyCustomView = ViewManager.View.extend({
  *  // Put your custom logic here
  * });

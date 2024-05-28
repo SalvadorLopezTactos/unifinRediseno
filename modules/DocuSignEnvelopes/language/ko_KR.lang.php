@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => '봉투 가져오기',
     'LBL_CLOUD_SERVICE_TYPE' => '클라우드 서비스 유형',
     'LBL_CLOUD_PATH' => '클라우드 경로',
+    'LBL_CLOUD_DRIVE_ID' => '드라이브 ID',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign 봉투 목록 대시보드',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'DocuSign 봉투 기록 대시보드',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => '최근 DocuSign 봉투',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign 봉투 포커스 서랍',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'DocuSign 봉투 타임라인',
 
     'LBL_NEW_ENVELOPE' => '새 봉투',
     'LBL_DOCUMENT_IS_NOW' => ' 은 지금 ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => '전송',
     'LBL_BUTTON_CLEAR' => '지우기',
     'LBL_BUTTON_SELECT_TEMPLATE' => '템플릿 사용',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => '템플릿과 보내기',
     'LBL_PLEASE_LOG_IN' => '먼저 DocuSign에 로그인하세요!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => '이 문서를 다운로드할 수 없습니다. 다른 사용자가 만들었습니다!',
     'LBL_SEND_NOT_ALLOWED' => '이 봉투를 보낼 수 없습니다. 다른 사용자가 만들었습니다!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => '초안이 변경되었습니다. 현재 상태({{status}})로 업데이트하시겠습니까?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'DocuSign 봉투가 업데이트 되었습니다!',
     'LBL_DRAFT_CHANGED_ERROR' => 'DocuSign 봉투 상태가 업데이트되지 않았습니다. 자세한 내용은 로그를 확인하세요!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'DocuSign 템플릿은 적용할 수 없습니다',
     'LBL_ENVELOPE_NOT_SENT' => '봉투가 전송되지 않았습니다!',
     'LBL_ENVELOPE_SENT' => '봉투를 재전송했습니다!',
     'LBL_DOCUMENT_ADDED' => '기록에 문서가 추가되었습니다!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => '역할',
     'LBL_SELECT_BUTTON_LABEL' => '선택',
     'LBL_BACK_BUTTON_LABEL' => '뒤로',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => '템플릿 이름으로 검색',
+    'LBL_ENVELOPE_NAME' => '봉투 이름',
+    'LBL_ENVELOPE_NAME_EMPTY' => '봉투 이름은 비워 둘 수 없습니다',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => '가능한 수신자를 가져오지 못했습니다!',
     'LBL_FAILED_FETCH_TEMPLATES' => '템플릿을 가져오지 못했습니다!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => '각 수신자 역할을 선택하십시오',
+    
+    'LBL_DOWNLOAD' => '다운로드',
+    'LBL_OPEN_DRAFT' => '임시 보관 열기',
+    'LBL_DOCUSING_NO_ATTACHMENT' => '파일이 없는 문서는 DocuSign으로 전송할 수 없습니다.',
+    'LBL_START_SIGN_PROMPT' => '플러스 버튼을 클릭하여 서명 프로세스를 시작합니다',
+    'LBL_NO_DOC_SELECTED' => '먼저 문서를 선택하십시오',
+    'LBL_SELECT_RECIPIENTS' => '서명자 수신인 선택',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => '불포함',
+    'LBL_DOCUSIGN_MISSING_APP' => '더 나은 경험을 위해서는 DocuSign 애플리케이션을 설치해야 합니다.',
 ];

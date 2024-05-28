@@ -14,24 +14,30 @@
  * <b>isValidDBName(String name)</b><br/>
  * Returns true if <i>name</i> is legal as a column name in the database.
  */
-class IsValidDBNameExpression extends BooleanExpression {
-	/**
-	 * Returns itself when evaluating.
-	 */
-	function evaluate() {
-		$nameStr = $this->getParameters()->evaluate();
+class IsValidDBNameExpression extends BooleanExpression
+{
+    /**
+     * Returns itself when evaluating.
+     */
+    public function evaluate()
+    {
+        $nameStr = $this->getParameters()->evaluate();
 
-		if( strlen($nameStr) == 0) return AbstractExpression::$TRUE;
-		if(! preg_match('/^[a-zA-Z][a-zA-Z\_0-9]+$/', $nameStr) )
-			return AbstractExpression::$FALSE;
-		return AbstractExpression::$TRUE;
-	}
+        if (strlen($nameStr) == 0) {
+            return AbstractExpression::$TRUE;
+        }
+        if (!preg_match('/^[a-zA-Z][a-zA-Z\_0-9]+$/', $nameStr)) {
+            return AbstractExpression::$FALSE;
+        }
+        return AbstractExpression::$TRUE;
+    }
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
 		var str = this.getParameters().evaluate();
 		if(str.length== 0) {
 			return true;
@@ -41,34 +47,37 @@ class IsValidDBNameExpression extends BooleanExpression {
 			return SUGAR.expressions.Expression.FALSE;
 		return SUGAR.expressions.Expression.TRUE;
 EOQ;
-	}
+    }
 
-	/**
-	 * Any generic type will suffice.
-	 */
-	static function getParameterTypes() {
-		return array("string");
-	}
+    /**
+     * Any generic type will suffice.
+     */
+    public static function getParameterTypes()
+    {
+        return ['string'];
+    }
 
-	/**
-	 * Returns the maximum number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 1;
-	}
+    /**
+     * Returns the maximum number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 1;
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return "isValidDBName";
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return 'isValidDBName';
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 }
-?>

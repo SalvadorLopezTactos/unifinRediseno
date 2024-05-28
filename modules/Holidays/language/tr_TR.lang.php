@@ -32,7 +32,7 @@ $mod_strings = [
 
     'LBL_RESOURCE' => 'Kaynak:',
     'LBL_PERSON_TYPE' => 'Kişi tipi',
-    'LBL_RELATED_MODULE'=> 'İlişkili Modüller:',
+    'LBL_RELATED_MODULE' => 'İlişkili Modüller:',
 
     // For HolidaysQuickCreate.php
     'LBL_SELECT_RESOURCE_TYPE' => 'Kaynak Tipini Seçin...',

@@ -23,8 +23,8 @@ class OwnerOrAdminVisibility extends OwnerVisibility
     public function addVisibilityWhere(&$query)
     {
         global $current_user;
-        $module =  $this->bean->module_name;
-        if($current_user->isAdminForModule($module)) {
+        $module = $this->bean->module_name;
+        if ($current_user->isAdminForModule($module)) {
             return $query;
         }
 

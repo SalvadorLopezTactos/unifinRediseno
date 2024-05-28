@@ -18,34 +18,36 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
  * API Class to handle temporary image (attachment) interactions with a field in
  * a bean that can be new, so no record id is associated yet.
  */
-class FileTempApi extends FileApi {
+class FileTempApi extends FileApi
+{
     /**
      * Dictionary registration method, called when the API definition is built
      *
      * @return array
      */
-    public function registerApiRest() {
-        return array(
-            'saveTempImagePost' => array(
+    public function registerApiRest()
+    {
+        return [
+            'saveTempImagePost' => [
                 'reqType' => 'POST',
-                'path' => array('<module>', 'temp', 'file', '?'),
-                'pathVars' => array('module', 'temp', '', 'field'),
+                'path' => ['<module>', 'temp', 'file', '?'],
+                'pathVars' => ['module', 'temp', '', 'field'],
                 'method' => 'saveTempImagePost',
                 'rawPostContents' => true,
                 'shortHelp' => 'Saves an image to a temporary folder.',
                 'longHelp' => 'include/api/help/module_temp_file_field_post_help.html',
-            ),
-            'getTempImage' => array(
+            ],
+            'getTempImage' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', 'temp', 'file', '?', '?'),
-                'pathVars' => array('module', 'record', '', 'field', 'temp_id'),
+                'path' => ['<module>', 'temp', 'file', '?', '?'],
+                'pathVars' => ['module', 'record', '', 'field', 'temp_id'],
                 'method' => 'getTempImage',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
                 'shortHelp' => 'Reads a temporary image and deletes it.',
                 'longHelp' => 'include/api/help/module_temp_file_field_temp_id_get_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -86,7 +88,7 @@ class FileTempApi extends FileApi {
         // Handle ACL
         $this->verifyFieldAccess($bean, $field);
 
-        $uploadDir = UploadStream::path("upload://tmp/");
+        $uploadDir = UploadStream::path('upload://tmp/');
         $filepath = $uploadDir . $args['temp_id'];
 
         $fileConstraint = new File(['baseDirs' => [realpath($uploadDir)]]);
@@ -95,10 +97,10 @@ class FileTempApi extends FileApi {
         if (!$violations->count()) {
             $filedata = getimagesize($filepath);
 
-            $info = array(
+            $info = [
                 'content-type' => $filedata['mime'],
                 'path' => $filepath,
-            );
+            ];
             $dl = new DownloadFileApi($api);
             $dl->outputFile(false, $info);
 
@@ -107,7 +109,7 @@ class FileTempApi extends FileApi {
             }
 
             register_shutdown_function(
-                function () use($filepath) {
+                function () use ($filepath) {
                     if (is_file($filepath)) {
                         unlink($filepath);
                     }

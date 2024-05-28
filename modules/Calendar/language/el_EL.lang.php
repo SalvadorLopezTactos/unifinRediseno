@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Ημερολόγιο',
     'LBL_MODULE_NAME_SINGULAR' => 'Ημερολόγιο',
     'LBL_MODULE_TITLE' => 'Ημερολόγιο',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Ρυθμίσεις',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Εμφάνιση διαθέσιμου χρόνου σε Ημερήσια και Εβδομαδιαία προβολή:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Ώρα Έναρξης:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Ώρα Λήξης:',
+    'LBL_SETTINGS_TIME_STARTS' => 'Ώρα Έναρξης:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Ώρα Λήξης:',
     'LBL_SETTINGS_CALLS_SHOW' => 'Eμφάνιση Κλήσεων:',
     'LBL_SETTINGS_TASKS_SHOW' => 'Eμφάνιση Εργασιών:',
 
@@ -123,7 +123,7 @@ $mod_strings = array (
     'LBL_REPEAT_DOW' => 'Πάνω',
     'LBL_REPEAT_UNTIL' => 'Επανάληψη μέχρι',
     'LBL_REPEAT_COUNT' => 'Αριθμός Επαναλαμβανόμενων',
-    'LBL_RECURRING_LIMIT_ERROR' => 'Αυτός ο επαναλαμβανόμενος Τίτλος ενότητας δεν μπορεί να προγραμματιστεί, διότι υπερβαίνει το μέγιστο επιτρεπόμενο όριο επανάληψης.',
+    'LBL_RECURRING_LIMIT_ERROR' => 'Δεν είναι δυνατός ο προγραμματισμός αυτού του επαναλαμβανόμενου $moduleTitle, καθώς υπερβαίνει τη μέγιστη επιτρεπόμενη επανάληψη $limit.',
 
     'LBL_EDIT_ALL_RECURRENCES' => 'Επεξεργασία όλων των Επαναλαμβανόμενων',
     'LBL_REMOVE_ALL_RECURRENCES' => 'Διαγραφή όλων των Επαναλαμβανόμενων',
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Δημιουργία Ημερολογίου',
     'LNK_CALENDAR_LIST' => 'Προβολή Ημερολογίων',
     'LNK_CALENDAR_LEGACY' => 'Παλαιό Ημερολόγιο',
-    'LBL_IMPORT_CALENDAR'=> 'Εισαγωγή Ημερολογίου',
+    'LBL_IMPORT_CALENDAR' => 'Εισαγωγή Ημερολογίου',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Σφραγίδα χρόνου Εκδήλωσης',
     'LBL_INSERTFIELD' => 'Εισαγωγή πεδίου',
     'LBL_EVENT_START_ERROR' => 'Επιλέξτε μια αρχή',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Επιλέξτε ένα ημερολόγιο',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Απέτυχε η αποθήκευση των Ημερολογίων.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Κυρ',
             'Δευτ',
             'Τρ',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Πέμ',
             'Παρ',
             'Σάβ',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Κυριακή',
             'Δευτέρα',
             'Τρίτη',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Πέμπτη',
             'Παρασκευή',
             'Σάββατο',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Ιαν',
             'Φεβ',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Οκτ',
             'Νοέ',
             'Δεκ',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Ιανουάριος',
             'Φεβρουάριος',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Οκτώβριος',
             'Νοέμβριος',
             'Δεκέμβριος',
-        ),
-);
+        ],
+];

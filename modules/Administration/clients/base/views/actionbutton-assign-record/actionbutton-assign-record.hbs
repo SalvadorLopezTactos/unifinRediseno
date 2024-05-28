@@ -19,6 +19,19 @@
         </div>
         <div class="record-link-wrapper span4">
             <span class="normal index">
+                <span class="edit">
+                    <input type="checkbox" {{#if _properties.assignToCurrentUser}}checked{{/if}} /> {{str 'LBL_ACTIONBUTTON_ASSIGN_CURRENT_USER'}}
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="labels-on-side" data-container="assign-user-field-container">
+        <div class="record-label-wrapper span2">
+            <div class="record-label">
+            </div>
+        </div>
+        <div class="record-link-wrapper span4">
+            <span class="normal index">
                 <span class="edit inherit-width" data-container="field">
                 </span>
             </span>

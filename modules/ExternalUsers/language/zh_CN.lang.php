@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => '客户反馈',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => '商业机会',
     'LBL_QUOTES_SUBPANEL_TITLE' => '报价',
-    'LBL_NOTES'=>'备注',
+    'LBL_NOTES' => '备注',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => '外部用户记录控制面板',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '外部用户时间轴',
 ];

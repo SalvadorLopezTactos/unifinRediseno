@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['documents_bugs'] = array(
+$dictionary['documents_bugs'] = [
     'true_relationship_type' => 'many-to-many',
-    'relationships' => array(
-        'documents_bugs' => array(
+    'relationships' => [
+        'documents_bugs' => [
             'lhs_module' => 'Documents',
             'lhs_table' => 'documents',
             'lhs_key' => 'id',
@@ -24,57 +24,57 @@ $dictionary['documents_bugs'] = array(
             'join_table' => 'documents_bugs',
             'join_key_lhs' => 'document_id',
             'join_key_rhs' => 'bug_id',
-        ),
-    ),
+        ],
+    ],
     'table' => 'documents_bugs',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => true,
-        ),
-        'document_id' => array(
+        ],
+        'document_id' => [
             'name' => 'document_id',
             'type' => 'id',
-        ),
-        'bug_id' => array(
+        ],
+        'bug_id' => [
             'name' => 'bug_id',
             'type' => 'id',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'documents_bugsspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'documents_bugs_bug_id',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'bug_id',
                 'document_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'documents_bugs_document_id',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'document_id',
                 'bug_id',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

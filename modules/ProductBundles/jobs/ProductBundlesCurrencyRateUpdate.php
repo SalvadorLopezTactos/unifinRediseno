@@ -47,16 +47,16 @@ class ProductBundlesCurrencyRateUpdate extends CurrencyRateUpdateAbstract
      * To custom processing, do here and return true.
      *
      * @access public
-     * @param  string $table
-     * @param  string $column
-     * @param  string $currencyId
+     * @param string $table
+     * @param string $column
+     * @param string $currencyId
      * @return boolean true if custom processing was done
      */
     public function doCustomUpdateRate($table, $column, $currencyId)
     {
         // get the conversion rate
         $sq = new SugarQuery();
-        $sq->select(array('conversion_rate'));
+        $sq->select(['conversion_rate']);
         $sq->from(BeanFactory::newBean('Currencies'));
         $sq->where()
             ->equals('id', $currencyId);
@@ -71,13 +71,14 @@ class ProductBundlesCurrencyRateUpdate extends CurrencyRateUpdateAbstract
         }
 
         // setup SQL statement
-        $query = sprintf("UPDATE %s SET %s = %s
+        $query = sprintf(
+            'UPDATE %s SET %s = %s
         WHERE id IN (%s)
-        AND currency_id = %s",
+        AND currency_id = %s',
             $table,
             $column,
             $this->db->quote($rate),
-            implode(",", $ids),
+            implode(',', $ids),
             $this->db->quoted($currencyId)
         );
         // execute
@@ -86,7 +87,7 @@ class ProductBundlesCurrencyRateUpdate extends CurrencyRateUpdateAbstract
             true,
             string_format(
                 $GLOBALS['app_strings']['ERR_DB_QUERY'],
-                array(self::class, $query)
+                [self::class, $query]
             )
         );
         return !empty($result);
@@ -100,10 +101,10 @@ class ProductBundlesCurrencyRateUpdate extends CurrencyRateUpdateAbstract
      * To custom processing, do here and return true.
      *
      * @access public
-     * @param  string    $tableName
-     * @param  string    $usDollarColumn
-     * @param  string    $amountColumn
-     * @param  string    $currencyId
+     * @param string $tableName
+     * @param string $usDollarColumn
+     * @param string $amountColumn
+     * @param string $currencyId
      * @return boolean true if custom processing was done
      */
     public function doCustomUpdateUsDollarRate($tableName, $usDollarColumn, $amountColumn, $currencyId)
@@ -116,13 +117,14 @@ class ProductBundlesCurrencyRateUpdate extends CurrencyRateUpdateAbstract
         }
 
         // setup SQL statement
-        $query = sprintf("UPDATE %s SET %s = %s / base_rate
+        $query = sprintf(
+            'UPDATE %s SET %s = %s / base_rate
             WHERE id IN (%s)
-            AND currency_id = %s",
+            AND currency_id = %s',
             $tableName,
             $usDollarColumn,
             $amountColumn,
-            implode(",", $ids),
+            implode(',', $ids),
             $this->db->quoted($currencyId)
         );
         // execute
@@ -131,7 +133,7 @@ class ProductBundlesCurrencyRateUpdate extends CurrencyRateUpdateAbstract
             true,
             string_format(
                 $GLOBALS['app_strings']['ERR_DB_QUERY'],
-                array(self::class, $query)
+                [self::class, $query]
             )
         );
         return !empty($result);
@@ -142,11 +144,11 @@ class ProductBundlesCurrencyRateUpdate extends CurrencyRateUpdateAbstract
         $product_bundles = BeanFactory::newBean('ProductBundles');
 
         $sq = new SugarQuery();
-        $sq->select(array('id'));
+        $sq->select(['id']);
         $sq->from($product_bundles);
 
         $product_bundles->load_relationship('quotes');
-        $product_bundles->quotes->buildJoinSugarQuery($sq, array('joinType' => 'LEFT'));
+        $product_bundles->quotes->buildJoinSugarQuery($sq, ['joinType' => 'LEFT']);
 
         $quote = BeanFactory::newBean('Quotes');
 
@@ -159,9 +161,8 @@ class ProductBundlesCurrencyRateUpdate extends CurrencyRateUpdateAbstract
 
         $db = $this->db;
         // we just need the array, so use array_map to pull it out of the results
-        return array_map(function($a) use($db) {
-                return $db->quoted($a['id']);
-            }, $results);
+        return array_map(function ($a) use ($db) {
+            return $db->quoted($a['id']);
+        }, $results);
     }
-
 }

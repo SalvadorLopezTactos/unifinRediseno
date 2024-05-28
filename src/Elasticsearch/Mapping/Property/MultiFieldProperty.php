@@ -55,7 +55,7 @@ class MultiFieldProperty extends RawProperty implements PropertyInterface
     {
         return array_merge(
             $this->mapping,
-            array('type' => $this->type)
+            ['type' => $this->type]
         );
     }
 

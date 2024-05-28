@@ -11,9 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['WorkFlowActionShell']['base']['view']['module-menu'] = array(
-    'settings' => array(
+$viewdefs['WorkFlowActionShell']['base']['view']['module-menu'] = [
+    'settings' => [
         'favorites' => 0,
         'recently_viewed' => 0,
-    ),
-);
+    ],
+];

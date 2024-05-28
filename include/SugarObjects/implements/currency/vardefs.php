@@ -9,9 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$vardefs = array(
-    'fields' => array(
-        'currency_id' => array(
+$vardefs = [
+    'fields' => [
+        'currency_id' => [
             'name' => 'currency_id',
             'dbType' => 'id',
             'vname' => 'LBL_CURRENCY_ID',
@@ -20,16 +20,16 @@ $vardefs = array(
             'function_bean' => 'Currencies', // This is needed for BWC modules
             'required' => false,
             'reportable' => false,
-            'default' => '-99'
-        ),
-        'base_rate' => array(
+            'default' => '-99',
+        ],
+        'base_rate' => [
             'name' => 'base_rate',
             'vname' => 'LBL_CURRENCY_RATE',
             'type' => 'text',
             'dbType' => 'decimal',
-            'len' => '26,6'
-        ),
-        'currency_name' => array(
+            'len' => '26,6',
+        ],
+        'currency_name' => [
             'name' => 'currency_name',
             'rname' => 'name',
             'id_name' => 'currency_id',
@@ -44,9 +44,9 @@ $vardefs = array(
             'duplicate_merge' => 'disabled',
             'function' => 'getCurrencies',
             'function_bean' => 'Currencies',
-            'massupdate' => false
-        ),
-        'currency_symbol' => array(
+            'massupdate' => false,
+        ],
+        'currency_symbol' => [
             'name' => 'currency_symbol',
             'rname' => 'symbol',
             'id_name' => 'currency_id',
@@ -61,25 +61,25 @@ $vardefs = array(
             'duplicate_merge' => 'disabled',
             'function' => 'getCurrencySymbols',
             'function_bean' => 'Currencies',
-            'massupdate' => false
-        ),
-        'currencies' => array(
+            'massupdate' => false,
+        ],
+        'currencies' => [
             'name' => 'currencies',
             'type' => 'link',
             'relationship' => strtolower($module) . '_currencies',
             'source' => 'non-db',
-            'vname' => 'LBL_CURRENCIES'
-        )
-    ),
-    'relationships' => array(
-        strtolower($module) . '_currencies' => array(
+            'vname' => 'LBL_CURRENCIES',
+        ],
+    ],
+    'relationships' => [
+        strtolower($module) . '_currencies' => [
             'lhs_module' => 'Currencies',
             'lhs_table' => 'currencies',
             'lhs_key' => 'id',
             'rhs_module' => $module,
             'rhs_table' => strtolower($table_name),
             'rhs_key' => 'currency_id',
-            'relationship_type' => 'one-to-many'
-        )
-    )
-);
+            'relationship_type' => 'one-to-many',
+        ],
+    ],
+];

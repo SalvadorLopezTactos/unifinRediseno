@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => '已報價單項清單儀表板',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => '已報價單項儀表板',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => '已報價單項焦點抽屜',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '報價項目時間軸',
 
     'LBL_CAMPAIGN_PRODUCT' => '推廣活動報價項目',
     'LBL_MODULE_NAME' => '已報價項目',
@@ -183,4 +184,4 @@ $mod_strings = array(
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' （新報價項目）',
     'LBL_DISCOUNT_PERCENT' => '百分比',
     'LBL_DISCOUNT_TYPE' => '折扣類型',
-);
+];

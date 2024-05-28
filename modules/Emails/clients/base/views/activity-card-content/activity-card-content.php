@@ -29,20 +29,11 @@ $viewdefs['Emails']['base']['view']['activity-card-content'] = [
         [
             'name' => 'panel_attachments',
             'label' => 'LBL_PANEL_3',
-            'css_class' => 'panel-attachments',
+            'css_class' => 'panel-attachments mt-2',
             'fields' => [
                 [
                     'name' => 'attachments_collection',
                     'type' => 'email-attachments',
-                    'fields' => [
-                        'name',
-                        'filename',
-                        'file_size',
-                        'file_source',
-                        'file_mime_type',
-                        'file_ext',
-                        'upload_id',
-                    ],
                 ],
             ],
         ],

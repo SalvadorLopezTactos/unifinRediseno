@@ -20,6 +20,10 @@ namespace Google\Service\HangoutsChat;
 class Space extends \Google\Model
 {
   /**
+   * @var bool
+   */
+  public $adminInstalled;
+  /**
    * @var string
    */
   public $displayName;
@@ -34,6 +38,18 @@ class Space extends \Google\Model
   protected $spaceDetailsType = SpaceDetails::class;
   protected $spaceDetailsDataType = '';
   /**
+   * @var string
+   */
+  public $spaceHistoryState;
+  /**
+   * @var string
+   */
+  public $spaceThreadingState;
+  /**
+   * @var string
+   */
+  public $spaceType;
+  /**
    * @var bool
    */
   public $threaded;
@@ -42,6 +58,20 @@ class Space extends \Google\Model
    */
   public $type;
 
+  /**
+   * @param bool
+   */
+  public function setAdminInstalled($adminInstalled)
+  {
+    $this->adminInstalled = $adminInstalled;
+  }
+  /**
+   * @return bool
+   */
+  public function getAdminInstalled()
+  {
+    return $this->adminInstalled;
+  }
   /**
    * @param string
    */
@@ -97,6 +127,48 @@ class Space extends \Google\Model
   public function getSpaceDetails()
   {
     return $this->spaceDetails;
+  }
+  /**
+   * @param string
+   */
+  public function setSpaceHistoryState($spaceHistoryState)
+  {
+    $this->spaceHistoryState = $spaceHistoryState;
+  }
+  /**
+   * @return string
+   */
+  public function getSpaceHistoryState()
+  {
+    return $this->spaceHistoryState;
+  }
+  /**
+   * @param string
+   */
+  public function setSpaceThreadingState($spaceThreadingState)
+  {
+    $this->spaceThreadingState = $spaceThreadingState;
+  }
+  /**
+   * @return string
+   */
+  public function getSpaceThreadingState()
+  {
+    return $this->spaceThreadingState;
+  }
+  /**
+   * @param string
+   */
+  public function setSpaceType($spaceType)
+  {
+    $this->spaceType = $spaceType;
+  }
+  /**
+   * @return string
+   */
+  public function getSpaceType()
+  {
+    return $this->spaceType;
   }
   /**
    * @param bool

@@ -10,26 +10,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['preview-header'] = array(
-    'buttons' => array(
-        array(
+$viewdefs['base']['view']['preview-header'] = [
+    'buttons' => [
+        [
             'name' => 'cancel_button',
             'type' => 'button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-link cancel-btn btn-invisible',
-            'events' => array(
+            'events' => [
                 'click' => 'button:cancel_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'save_button',
             'type' => 'button',
             'label' => 'LBL_SAVE_BUTTON_LABEL',
             'primary' => true,
             'css_class' => 'save-btn',
-            'events' => array(
+            'events' => [
                 'click' => 'button:save_button:click',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

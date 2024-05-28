@@ -23,9 +23,9 @@ class FunctionName extends Constraint
 {
     public const ERROR_INVALID_FUNCTION_NAME = 1;
 
-    protected static $errorNames = array(
+    protected static $errorNames = [
         self::ERROR_INVALID_FUNCTION_NAME => 'ERROR_INVALID_FUNCTION_NAME',
-    );
+    ];
 
     public $message = 'Function name violation: %msg%';
 }

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint\Queue\Event;
 
 use Sugarcrm\Sugarcrm\Hint\Queue\EventTypes;
@@ -27,7 +28,7 @@ class TargetAddEvent extends QueueEvent
 
         parent::__construct(array_intersect_key($data, array_flip($fields)));
 
-        if (count(array_keys($this->data)) !== count($fields)) {
+        if (safeCount(array_keys($this->data)) !== safeCount($fields)) {
             $this->logger->alert(sprintf('Invalid event data: %s', $this));
         }
     }

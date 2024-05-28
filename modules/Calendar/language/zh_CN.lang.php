@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => '日程',
     'LBL_MODULE_NAME_SINGULAR' => '日程',
     'LBL_MODULE_TITLE' => '日程',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => '设置',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => '在天和周视图中显示时隙：',
-    'LBL_SETTINGS_TIME_STARTS'=>'开始时间：',
-    'LBL_SETTINGS_TIME_ENDS'=>'结束时间：',
+    'LBL_SETTINGS_TIME_STARTS' => '开始时间：',
+    'LBL_SETTINGS_TIME_ENDS' => '结束时间：',
     'LBL_SETTINGS_CALLS_SHOW' => '显示电话：',
     'LBL_SETTINGS_TASKS_SHOW' => '显示任务：',
 
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => '创建日程',
     'LNK_CALENDAR_LIST' => '查看日程',
     'LNK_CALENDAR_LEGACY' => '遗留日程',
-    'LBL_IMPORT_CALENDAR'=> '导入日程',
+    'LBL_IMPORT_CALENDAR' => '导入日程',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => '事件时间戳',
     'LBL_INSERTFIELD' => '插入字段',
     'LBL_EVENT_START_ERROR' => '请选择开始',
@@ -210,8 +210,8 @@ $mod_strings = array (
     'LBL_CALENDAR_CALENDAR_EXPORT' => '日程导出',
     'LBL_CALENDAR_MODAL_PUBLISH_URL' => '发布 URL',
     'LBL_CALENDAR_MODAL_BUSINESS_HOURS' => '定义日历日',
-    'LBL_CALENDAR_MODAL_START_BUSINESS_HOUR' => '日开始',
-    'LBL_CALENDAR_MODAL_END_BUSINESS_HOUR' => '日结束',
+    'LBL_CALENDAR_MODAL_START_BUSINESS_HOUR' => '开始时间',
+    'LBL_CALENDAR_MODAL_END_BUSINESS_HOUR' => '结束时间',
     'LBL_CALENDAR_SHOW_FULL_DAY' => '显示日历日',
 
     'LBL_CALENDAR_EXPORT_PDF' => '导出 PDF',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => '请选择日程',
     'LBL_SAVE_USER_CALENDARS_ERROR' => '无法保存日程。',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             '星期日',
             '星期一',
             '星期二',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             '星期四',
             '星期五',
             '星期六',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             '星期日',
             '星期一',
             '星期二',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             '星期四',
             '星期五',
             '星期六',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             '1 月',
             '2 月',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             '10 月',
             '11 月',
             '12 月',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             '1 月',
             '2 月',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             '10 月',
             '11 月',
             '12 月',
-        ),
-);
+        ],
+];

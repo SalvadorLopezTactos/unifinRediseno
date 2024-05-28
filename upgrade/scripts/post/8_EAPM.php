@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Update connectors & refresh connector metadata files
  */
@@ -20,13 +21,13 @@ class SugarUpgradeEAPM extends UpgradeScript
     public function run()
     {
         // mark any eapm deleted for connectors we have removed
-        $removedEAPMs =array(
+        $removedEAPMs = [
             'Facebook',
-        );
+        ];
         $inStr = implode(',', $removedEAPMs);
-        $query = "UPDATE eapm " .
-            "SET deleted = 1 " .
-            "WHERE application IN ('" .$inStr. "')";
+        $query = 'UPDATE eapm ' .
+            'SET deleted = 1 ' .
+            "WHERE application IN ('" . $inStr . "')";
         $this->db->query($query);
     }
 }

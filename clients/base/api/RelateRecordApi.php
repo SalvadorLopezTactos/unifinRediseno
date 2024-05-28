@@ -13,65 +13,66 @@
 
 class RelateRecordApi extends SugarApi
 {
-    public function registerApiRest() {
-        return array(
-            'fetchRelatedRecord' => array(
-                'reqType'   => 'GET',
-                'path'      => array('<module>','?',     'link','?',        '?'),
-                'pathVars'  => array('module',  'record','',    'link_name','remote_id'),
-                'method'    => 'getRelatedRecord',
+    public function registerApiRest()
+    {
+        return [
+            'fetchRelatedRecord' => [
+                'reqType' => 'GET',
+                'path' => ['<module>', '?', 'link', '?', '?'],
+                'pathVars' => ['module', 'record', '', 'link_name', 'remote_id'],
+                'method' => 'getRelatedRecord',
                 'shortHelp' => 'Fetch a single record related to this module',
-                'longHelp'  => 'include/api/help/module_record_link_link_name_remote_id_get_help.html',
-            ),
-            'createRelatedRecord' => array(
-                'reqType'   => 'POST',
-                'path'      => array('<module>','?',     'link','?'),
-                'pathVars'  => array('module',  'record','',    'link_name'),
-                'method'    => 'createRelatedRecord',
-                'shortHelp' => 'Create a single record and relate it to this module',
-                'longHelp'  => 'include/api/help/module_record_link_link_name_post_help.html',
-            ),
-            'createRelatedLink' => array(
-                'reqType'   => 'POST',
-                'path'      => array('<module>','?',     'link','?'        ,'?'),
-                'pathVars'  => array('module',  'record','',    'link_name','remote_id'),
-                'method'    => 'createRelatedLink',
-                'shortHelp' => 'Relates an existing record to this module',
-                'longHelp'  => 'include/api/help/module_record_link_link_name_remote_id_post_help.html',
-            ),
-            'createRelatedLinks' => array(
+                'longHelp' => 'include/api/help/module_record_link_link_name_remote_id_get_help.html',
+            ],
+            'createRelatedRecord' => [
                 'reqType' => 'POST',
-                'path' => array('<module>', '?', 'link'),
-                'pathVars' => array('module', 'record', ''),
+                'path' => ['<module>', '?', 'link', '?'],
+                'pathVars' => ['module', 'record', '', 'link_name'],
+                'method' => 'createRelatedRecord',
+                'shortHelp' => 'Create a single record and relate it to this module',
+                'longHelp' => 'include/api/help/module_record_link_link_name_post_help.html',
+            ],
+            'createRelatedLink' => [
+                'reqType' => 'POST',
+                'path' => ['<module>', '?', 'link', '?', '?'],
+                'pathVars' => ['module', 'record', '', 'link_name', 'remote_id'],
+                'method' => 'createRelatedLink',
+                'shortHelp' => 'Relates an existing record to this module',
+                'longHelp' => 'include/api/help/module_record_link_link_name_remote_id_post_help.html',
+            ],
+            'createRelatedLinks' => [
+                'reqType' => 'POST',
+                'path' => ['<module>', '?', 'link'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'createRelatedLinks',
                 'shortHelp' => 'Relates existing records to this module.',
                 'longHelp' => 'include/api/help/module_record_link_post_help.html',
-            ),
-            'updateRelatedLink' => array(
-                'reqType'   => 'PUT',
-                'path'      => array('<module>','?',     'link','?'        ,'?'),
-                'pathVars'  => array('module',  'record','',    'link_name','remote_id'),
-                'method'    => 'updateRelatedLink',
+            ],
+            'updateRelatedLink' => [
+                'reqType' => 'PUT',
+                'path' => ['<module>', '?', 'link', '?', '?'],
+                'pathVars' => ['module', 'record', '', 'link_name', 'remote_id'],
+                'method' => 'updateRelatedLink',
                 'shortHelp' => 'Updates relationship specific information ',
-                'longHelp'  => 'include/api/help/module_record_link_link_name_remote_id_put_help.html',
-            ),
-            'deleteRelatedLink' => array(
-                'reqType'   => 'DELETE',
-                'path'      => array('<module>','?'     ,'link','?'        ,'?'),
-                'pathVars'  => array('module'  ,'record',''    ,'link_name','remote_id'),
-                'method'    => 'deleteRelatedLink',
+                'longHelp' => 'include/api/help/module_record_link_link_name_remote_id_put_help.html',
+            ],
+            'deleteRelatedLink' => [
+                'reqType' => 'DELETE',
+                'path' => ['<module>', '?', 'link', '?', '?'],
+                'pathVars' => ['module', 'record', '', 'link_name', 'remote_id'],
+                'method' => 'deleteRelatedLink',
                 'shortHelp' => 'Deletes a relationship between two records',
-                'longHelp'  => 'include/api/help/module_record_link_link_name_remote_id_delete_help.html',
-            ),
-            'createRelatedLinksFromRecordList' => array(
+                'longHelp' => 'include/api/help/module_record_link_link_name_remote_id_delete_help.html',
+            ],
+            'createRelatedLinksFromRecordList' => [
                 'reqType' => 'POST',
-                'path' => array('<module>', '?', 'link', '?', 'add_record_list', '?'),
-                'pathVars' => array('module', 'record', '', 'link_name', '', 'remote_id'),
+                'path' => ['<module>', '?', 'link', '?', 'add_record_list', '?'],
+                'pathVars' => ['module', 'record', '', 'link_name', '', 'remote_id'],
                 'method' => 'createRelatedLinksFromRecordList',
                 'shortHelp' => 'Relates existing records from a record list to this record.',
                 'longHelp' => 'include/api/help/module_record_links_from_recordlist_post_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
 
@@ -88,35 +89,37 @@ class RelateRecordApi extends SugarApi
      */
     protected function checkRelatedSecurity(
         ServiceBase $api,
-        array $args,
-        SugarBean $primaryBean,
+        array       $args,
+        SugarBean   $primaryBean,
         $securityTypeLocal = 'view',
         $securityTypeRemote = 'view'
     ) {
-        $this->requireArgs($args, array('link_name'));
-        if ( ! $primaryBean->ACLAccess($securityTypeLocal) ) {
-            throw new SugarApiExceptionNotAuthorized('No access to '.$securityTypeLocal.' records for module: '.$args['module']);
+
+        $this->requireArgs($args, ['link_name']);
+        if (!$primaryBean->ACLAccess($securityTypeLocal)) {
+            throw new SugarApiExceptionNotAuthorized('No access to ' . $securityTypeLocal . ' records for module: ' . $args['module']);
         }
         // Load up the relationship
         $linkName = $args['link_name'];
-        if ( ! $primaryBean->load_relationship($linkName) ) {
+        if (!$primaryBean->load_relationship($linkName)) {
             // The relationship did not load, I'm guessing it doesn't exist
-            throw new SugarApiExceptionNotFound('Could not find a relationship named: '.$args['link_name']);
+            throw new SugarApiExceptionNotFound('Could not find a relationship named: ' . $args['link_name']);
         }
         // Figure out what is on the other side of this relationship, check permissions
         $linkModuleName = $primaryBean->$linkName->getRelatedModuleName();
         $linkSeed = BeanFactory::newBean($linkModuleName);
 
         // FIXME: No create ACL yet
-        if ( $securityTypeRemote == 'create' ) { $securityTypeRemote = 'edit'; }
-
-        // only check here for edit...view and list are checked on formatBean
-        if ( $securityTypeRemote == 'edit' && ! $linkSeed->ACLAccess($securityTypeRemote) ) {
-            throw new SugarApiExceptionNotAuthorized('No access to '.$securityTypeRemote.' records for module: '.$linkModuleName);
+        if ($securityTypeRemote == 'create') {
+            $securityTypeRemote = 'edit';
         }
 
-        return array($linkName, $linkSeed);
+        // only check here for edit...view and list are checked on formatBean
+        if ($securityTypeRemote == 'edit' && !$linkSeed->ACLAccess($securityTypeRemote)) {
+            throw new SugarApiExceptionNotAuthorized('No access to ' . $securityTypeRemote . ' records for module: ' . $linkModuleName);
+        }
 
+        return [$linkName, $linkSeed];
     }
 
     /**
@@ -132,12 +135,13 @@ class RelateRecordApi extends SugarApi
      */
     protected function getRelatedFields(
         ServiceBase $api,
-        array $args,
-        SugarBean $primaryBean,
+        array       $args,
+        SugarBean   $primaryBean,
         $linkName,
-        SugarBean $seed = null
+        SugarBean   $seed = null
     ) {
-        $relatedData = array();
+
+        $relatedData = [];
         if (!empty($primaryBean->$linkName) || $primaryBean->load_relationship($linkName)) {
             $otherLink = $primaryBean->$linkName->getLinkForOtherSide();
             if ($seed instanceof SugarBean) {
@@ -166,17 +170,18 @@ class RelateRecordApi extends SugarApi
      */
     protected function formatNearAndFarRecords(
         ServiceBase $api,
-        array $args,
-        SugarBean $primaryBean,
-        array $relatedArray
+        array       $args,
+        SugarBean   $primaryBean,
+        array       $relatedArray
     ) {
+
         $api->action = 'view';
         $recordArray = $this->formatBean($api, $args, $primaryBean);
 
-        return array(
-            'record'=>$recordArray,
-            'related_record'=>$relatedArray
-        );
+        return [
+            'record' => $recordArray,
+            'related_record' => $relatedArray,
+        ];
     }
 
     public function getRelatedRecord(ServiceBase $api, array $args)
@@ -236,12 +241,12 @@ class RelateRecordApi extends SugarApi
     public function createRelatedLink(ServiceBase $api, array $args)
     {
         $api->action = 'save';
-        $args['ids'] = array($args['remote_id']);
+        $args['ids'] = [$args['remote_id']];
         $return = $this->createRelatedLinks($api, $args);
-        return array(
+        return [
             'record' => $return['record'],
             'related_record' => $return['related_records'][0],
-        );
+        ];
     }
 
     /**
@@ -257,16 +262,17 @@ class RelateRecordApi extends SugarApi
      */
     public function createRelatedLinks(
         ServiceBase $api,
-        array $args,
+        array       $args,
         $securityTypeLocal = 'view',
         $securityTypeRemote = 'view'
     ) {
-        $this->requireArgs($args, array('ids'));
+
+        $this->requireArgs($args, ['ids']);
         $ids = $this->normalizeLinkIds($args['ids']);
 
-        $result = array(
-            'related_records' => array(),
-        );
+        $result = [
+            'related_records' => [],
+        ];
 
         $primaryBean = $this->loadBean($api, $args);
 
@@ -287,7 +293,7 @@ class RelateRecordApi extends SugarApi
             }
 
             $relatedData = $this->getRelatedFields($api, $args, $primaryBean, $linkName, $relatedBean);
-            $primaryBean->$linkName->add(array($relatedBean), array_merge($relatedData, $additionalValues));
+            $primaryBean->$linkName->add([$relatedBean], array_merge($relatedData, $additionalValues));
 
             if (!empty($args['avoid_response'])) {
                 continue;
@@ -325,7 +331,7 @@ class RelateRecordApi extends SugarApi
             );
         }
 
-        $normalized = array();
+        $normalized = [];
         foreach ($ids as $record) {
             if (is_array($record)) {
                 if (!isset($record['id'])) {
@@ -336,7 +342,7 @@ class RelateRecordApi extends SugarApi
                 unset($additionalValues['id']);
             } else {
                 $id = $record;
-                $additionalValues = array();
+                $additionalValues = [];
             }
             $normalized[$id] = $additionalValues;
         }
@@ -355,12 +361,12 @@ class RelateRecordApi extends SugarApi
         if (isset($primaryBean->field_defs[$linkName])) {
             $def = $primaryBean->field_defs[$linkName];
             if (isset($def['type']) && $def['type'] == 'link' && !empty($def['readonly'])) {
-                throw new SugarApiExceptionNotAuthorized("Cannot update related records on readonly relationships");
+                throw new SugarApiExceptionNotAuthorized('Cannot update related records on readonly relationships');
             }
         }
 
         $relatedBean->retrieve($args['remote_id']);
-        if ( empty($relatedBean->id) ) {
+        if (empty($relatedBean->id)) {
             // Retrieve failed, probably doesn't have permissions
             throw new SugarApiExceptionNotFound('Could not find the related bean');
         }
@@ -381,7 +387,7 @@ class RelateRecordApi extends SugarApi
             $moduleApi->updateRecord($api, $relArgs);
         }
 
-        $relatedArray = array();
+        $relatedArray = [];
 
         // Make sure there is a related object
         if (!empty($primaryBean->$linkName)) {
@@ -389,7 +395,7 @@ class RelateRecordApi extends SugarApi
         }
 
         if (!empty($relObj)) {
-            if ($primaryBean->module_name === $relObj->getLHSModule()){
+            if ($primaryBean->module_name === $relObj->getLHSModule()) {
                 $lhsBean = $primaryBean;
                 $rhsBean = $relatedBean;
             } else {
@@ -400,7 +406,7 @@ class RelateRecordApi extends SugarApi
             if ($relObj->relationship_exists($lhsBean, $rhsBean)) {
                 $relatedData = $this->getRelatedFields($api, $args, $primaryBean, $linkName, $relatedBean);
                 // This function add() is actually 'addOrUpdate'. Here we use it for update only.
-                $primaryBean->$linkName->add(array($relatedBean),$relatedData);
+                $primaryBean->$linkName->add([$relatedBean], $relatedData);
 
                 $relatedBean = $this->reloadBean($relatedBean);
 
@@ -410,8 +416,7 @@ class RelateRecordApi extends SugarApi
                 // BR-2937 The edit view cache issue for relate documents of a module
                 // nomad still needs this related array
                 $relatedArray = $this->formatBean($api, $args, $relatedBean);
-            }
-            // If the relationship has been removed, we don't need to update the relationship fields
+            } // If the relationship has been removed, we don't need to update the relationship fields
             else {
                 // Prepare the ralated bean data for formatNearAndFarRecords() below
                 $relatedArray = $this->formatBean($api, $args, $relatedBean);
@@ -427,11 +432,15 @@ class RelateRecordApi extends SugarApi
         BeanFactory::unregisterBean($relatedBean);
 
         $primaryBean = $this->reloadBean($primaryBean);
-        return $this->formatNearAndFarRecords($api,$args,$primaryBean,$relatedArray);
+        return $this->formatNearAndFarRecords($api, $args, $primaryBean, $relatedArray);
     }
 
     public function deleteRelatedLink(ServiceBase $api, array $args)
     {
+        global $current_user;
+        if ($current_user->portal_only) {
+            throw new SugarApiExceptionNotAuthorized('Action is not available for Portal users');
+        }
         $primaryBean = $this->loadBean($api, $args);
 
         [$linkName] = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view', 'view');
@@ -470,7 +479,7 @@ class RelateRecordApi extends SugarApi
         $relatedBean = $this->reloadBean($relatedBean);
 
         //Because the relationship is now deleted, we need to pass the $relatedBean data into formatNearAndFarRecords
-        return $this->formatNearAndFarRecords($api,$args,$primaryBean, $this->formatBean($api, $args, $relatedBean));
+        return $this->formatNearAndFarRecords($api, $args, $primaryBean, $this->formatBean($api, $args, $relatedBean));
     }
 
     /**
@@ -485,14 +494,14 @@ class RelateRecordApi extends SugarApi
     {
         Activity::disable();
 
-        $result = array(
-            'related_records' => array(
-                'success' => array(),
-                'error' => array(),
-            ),
-        );
+        $result = [
+            'related_records' => [
+                'success' => [],
+                'error' => [],
+            ],
+        ];
 
-        $this->requireArgs($args, array('module', 'record', 'remote_id', 'link_name'));
+        $this->requireArgs($args, ['module', 'record', 'remote_id', 'link_name']);
 
         $primaryBean = $this->loadBean($api, $args);
 
@@ -505,7 +514,7 @@ class RelateRecordApi extends SugarApi
             $result['related_records']['success'] = $recordList['records'];
         } elseif (is_array($relatedBeans)) {
             $result['related_records']['success'] = array_diff($recordList['records'], $relatedBeans);
-            $result['related_records']['error']   = $relatedBeans;
+            $result['related_records']['error'] = $relatedBeans;
         }
 
         SugarRelationship::resaveRelatedBeans();
@@ -546,10 +555,10 @@ class RelateRecordApi extends SugarApi
      */
     protected function loadModuleApi(ServiceBase $api, $module)
     {
-        $templates = array(
-            array('custom/modules/%s/clients/%s/api/', 'Custom%sApi'),
-            array('modules/%s/clients/%s/api/', '%sApi'),
-        );
+        $templates = [
+            ['custom/modules/%s/clients/%s/api/', 'Custom%sApi'],
+            ['modules/%s/clients/%s/api/', '%sApi'],
+        ];
 
         foreach ($templates as $template) {
             [$directoryTemplate, $classTemplate] = $template;
@@ -557,7 +566,7 @@ class RelateRecordApi extends SugarApi
             $file = sprintf($directoryTemplate, $module, $api->platform) . $class . '.php';
             if (file_exists($file)) {
                 require_once $file;
-                return new $class;
+                return new $class();
             }
         }
 
@@ -599,15 +608,15 @@ class RelateRecordApi extends SugarApi
         /** @var Link2 $link */
         $link = $primaryBean->$linkName;
 
-        $related = array_values($link->getBeans(array(
-            'where' => array(
+        $related = array_values($link->getBeans([
+            'where' => [
                 'lhs_field' => 'id',
                 'operator' => '=',
                 'rhs_value' => $args['remote_id'],
-            ),
-        ), array(
+            ],
+        ], [
             'erased_fields' => !empty($args['erased_fields']),
-        )));
+        ]));
 
         if (!empty($related[0]->id)) {
             $relatedBean = $related[0];

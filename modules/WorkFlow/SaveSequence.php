@@ -10,11 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
- * Description:  
+ * Description:
  ********************************************************************************/
-
-
 
 
 $local_log = LoggerManager::getLogger();
@@ -22,25 +19,31 @@ $local_log = LoggerManager::getLogger();
 $focus = BeanFactory::newBean('WorkFlow');
 $controller = new Controller();
 
-	
-	//if we are saving from the adddatasetform
-	$focus->retrieve($_REQUEST['workflow_id']);
 
-		
-		$magnitude = 1;
-		$direction = $_REQUEST['direction'];
+//if we are saving from the adddatasetform
+$focus->retrieve($_REQUEST['workflow_id']);
 
-		$controller->init($focus, "Save");
-		$controller->change_component_order($magnitude, $direction, $focus->base_module);
+
+$magnitude = 1;
+$direction = $_REQUEST['direction'];
+
+$controller->init($focus, 'Save');
+$controller->change_component_order($magnitude, $direction, $focus->base_module);
 
 $focus->save();
 
 $focus->write_workflow();
-	
-if(isset($_REQUEST['return_module']) && $_REQUEST['return_module'] != "") $return_module = $_REQUEST['return_module'];
-else $return_module = "Workflow";
-if(isset($_REQUEST['return_action']) && $_REQUEST['return_action'] != "") $return_action = $_REQUEST['return_action'];
-else $return_action = "ProcessListView";
+
+if (isset($_REQUEST['return_module']) && $_REQUEST['return_module'] != '') {
+    $return_module = $_REQUEST['return_module'];
+} else {
+    $return_module = 'Workflow';
+}
+if (isset($_REQUEST['return_action']) && $_REQUEST['return_action'] != '') {
+    $return_action = $_REQUEST['return_action'];
+} else {
+    $return_action = 'ProcessListView';
+}
 
 header('Location: index.php?' . http_build_query([
         'action' => $return_action,

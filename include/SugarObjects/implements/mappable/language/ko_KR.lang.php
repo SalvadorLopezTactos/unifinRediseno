@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = [
-    'LBL_GC_STATUS'=>'지오코드 상태',
+    'LBL_GC_STATUS' => '지오코드 상태',
     'LBL_GC_LATITUDE' => '지오코드 위도',
     'LBL_GC_LONGITUDE' => '지오코드 경도',
     'LBL_GC_STATUS_DETAIL' => '지오코드 상태 세부정보',

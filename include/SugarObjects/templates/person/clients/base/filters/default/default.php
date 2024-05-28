@@ -11,30 +11,30 @@
  */
 
 $module_name = '<module_name>';
-$viewdefs[$module_name]['base']['filter']['default'] = array(
+$viewdefs[$module_name]['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'first_name' => array(),
-        'last_name' => array(),
-        'address_city' => array(
-            'dbFields' => array(
+    'fields' => [
+        'first_name' => [],
+        'last_name' => [],
+        'address_city' => [
+            'dbFields' => [
                 'primary_address_city',
                 'alt_address_city',
-            ),
+            ],
             'vname' => 'LBL_CITY',
             'type' => 'text',
-        ),
-        'created_by_name' => array(),
-        'do_not_call' => array(),
-        'email' => array(),
-        'tag' => array(),
-        '$owner' => array(
+        ],
+        'created_by_name' => [],
+        'do_not_call' => [],
+        'email' => [],
+        'tag' => [],
+        '$owner' => [
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',
-        ),
-        '$favorite' => array(
+        ],
+        '$favorite' => [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        ),
-    ),
-);
+        ],
+    ],
+];

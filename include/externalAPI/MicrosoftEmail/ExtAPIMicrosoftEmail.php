@@ -19,7 +19,7 @@ use Microsoft\Graph\Model;
  */
 class ExtAPIMicrosoftEmail extends ExternalAPIBase
 {
-    public $supportedModules = array('OutboundEmail', 'InboundEmail');
+    public $supportedModules = ['OutboundEmail', 'InboundEmail'];
     public $authMethod = 'oauth2';
     public $connector = 'ext_eapm_microsoft';
 
@@ -33,32 +33,32 @@ class ExtAPIMicrosoftEmail extends ExternalAPIBase
     protected $provider = null;
 
     public const APP_STRING_ERROR_PREFIX = 'ERR_MICROSOFT_API_';
-    public const URL_AUTHORIZE = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize';
-    public const URL_ACCESS_TOKEN = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
+    public const URL_AUTHORIZE = 'https://login.microsoftonline.com/%s/oauth2/v2.0/authorize';
+    public const URL_ACCESS_TOKEN = 'https://login.microsoftonline.com/%s/oauth2/v2.0/token';
     public const OUTLOOK_API_BASE_URL = 'https://outlook.office.com/api/';
     public const OUTLOOK_API_DEFAULT_VERSION = 'v2.0';
-    public const SCOPES_AUTHORIZE = array(
+    public const SCOPES_AUTHORIZE = [
         'offline_access',
         'https://graph.microsoft.com/User.Read',
         'https://outlook.office365.com/IMAP.AccessAsUser.All',
         'https://outlook.office365.com/SMTP.Send',
-    );
-    public const SCOPES_GRAPH_API = array(
+    ];
+    public const SCOPES_GRAPH_API = [
         'offline_access',
         'https://graph.microsoft.com/User.Read',
-    );
-    public const SCOPES_OUTLOOK_API = array(
+    ];
+    public const SCOPES_OUTLOOK_API = [
         'offline_access',
         'https://outlook.office365.com/IMAP.AccessAsUser.All',
         'https://outlook.office365.com/SMTP.Send',
-    );
+    ];
 
     /**
      * Returns the Microsoft client used to query the Microsoft Graph API
      *
      * @return GraphProxy
      */
-    public function getClient() : GraphProxy
+    public function getClient(): GraphProxy
     {
         $graph = new GraphProxy();
         $graph->setAuthURL($this->getAuthURL());
@@ -71,19 +71,23 @@ class ExtAPIMicrosoftEmail extends ExternalAPIBase
      *
      * @return string
      */
-    public function getAuthURL() : string
+    public function getAuthURL(): string
     {
         $config = $this->getMicrosoftOauth2Config();
-        $params = array(
+        $params = [
             'client_id' => $config['properties']['oauth2_client_id'],
             'redirect_uri' => $config['redirect_uri'],
             'response_type' => 'code',
             'prompt' => 'select_account',
             'scope' => implode(' ', self::SCOPES_AUTHORIZE),
             'state' => 'email',
-        );
+        ];
 
-        return self::URL_AUTHORIZE . '?' . http_build_query($params);
+        $singleTenantEnabled = !empty($config['properties']['oauth2_single_tenant_enabled']);
+        $tenant = $singleTenantEnabled ? trim($config['properties']['oauth2_single_tenant_id'] ?? '') : null;
+        $urlAuthorize = sprintf(self::URL_AUTHORIZE, $tenant ?: 'common');
+
+        return $urlAuthorize . '?' . http_build_query($params);
     }
 
     /**
@@ -109,12 +113,12 @@ class ExtAPIMicrosoftEmail extends ExternalAPIBase
         }
 
         // Return the token and account information
-        return array(
+        return [
             'token' => $token,
             'eapmId' => $eapmId,
             'emailAddress' => $this->getEmailAddress($eapmId),
             'userName' => $this->getUserName($eapmId),
-        );
+        ];
     }
 
     /**
@@ -198,7 +202,7 @@ class ExtAPIMicrosoftEmail extends ExternalAPIBase
                 ->execute();
 
             // Return the user's email address
-            $properties =  $user->getProperties();
+            $properties = $user->getProperties();
             return $properties['EmailAddress'] ?? false;
         } catch (Exception $e) {
             $GLOBALS['log']->error($e->getMessage());
@@ -275,12 +279,17 @@ class ExtAPIMicrosoftEmail extends ExternalAPIBase
 
         try {
             if (empty($this->provider)) {
+                $singleTenantEnabled = !empty($config['properties']['oauth2_single_tenant_enabled']);
+                $tenant = $singleTenantEnabled ? trim($config['properties']['oauth2_single_tenant_id'] ?? '') : null;
+                $urlAccessToken = sprintf(self::URL_ACCESS_TOKEN, $tenant ?: 'common');
+                $urlAuthorize = sprintf(self::URL_AUTHORIZE, $tenant ?: 'common');
+
                 $this->provider = new GenericProvider([
                     'clientId' => $config['properties']['oauth2_client_id'],
                     'clientSecret' => $config['properties']['oauth2_client_secret'],
                     'redirectUri' => $config['redirect_uri'],
-                    'urlAuthorize' => self::URL_AUTHORIZE,
-                    'urlAccessToken' => self::URL_ACCESS_TOKEN,
+                    'urlAuthorize' => $urlAuthorize,
+                    'urlAccessToken' => $urlAccessToken,
                     'urlResourceOwnerDetails' => '',
                 ]);
             }
@@ -303,6 +312,8 @@ class ExtAPIMicrosoftEmail extends ExternalAPIBase
     {
         $bean = $this->getEAPMBean($eapmId);
         if (empty($bean->id)) {
+            // EAPMs associated with an email account are not tied to a specific user
+            // one email account might be shared by several users.
             $bean->assigned_user_id = null;
             $bean->application = 'Microsoft';
             $bean->validated = true;
@@ -331,7 +342,7 @@ class ExtAPIMicrosoftEmail extends ExternalAPIBase
      */
     protected function getMicrosoftOauth2Config()
     {
-        $config = array();
+        $config = [];
         require SugarAutoLoader::existingCustomOne('modules/Connectors/connectors/sources/ext/eapm/microsoft/config.php');
         $config['redirect_uri'] = rtrim(SugarConfig::getInstance()->get('site_url'), '/')
             . '/oauth-handler/MicrosoftOauth2Redirect';

@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'การกำหนดกระบวนการ',
-  'LBL_MODULE_TITLE' => 'การกำหนดกระบวนการ',
-  'LBL_MODULE_NAME_SINGULAR' => 'การกำหนดกระบวนการ',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'การกำหนดกระบวนการ',
+    'LBL_MODULE_TITLE' => 'การกำหนดกระบวนการ',
+    'LBL_MODULE_NAME_SINGULAR' => 'การกำหนดกระบวนการ',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'การกำหนดกระบวนการระบบลิ้นชัก',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'การกำหนดกระบวนการระบบลิ้นชัก',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนการกำหนดกระบวนการ',
-  'LNK_LIST' => 'ดูการกำหนดกระบวนการ',
-  'LNK_NEW_PMSE_PROJECT' => 'สร้างการกำหนดกระบวนการ',
-  'LNK_IMPORT_PMSE_PROJECT' => 'นำเข้าการกำหนดกระบวนการ',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนการกำหนดกระบวนการ',
+    'LNK_LIST' => 'ดูการกำหนดกระบวนการ',
+    'LNK_NEW_PMSE_PROJECT' => 'สร้างการกำหนดกระบวนการ',
+    'LNK_IMPORT_PMSE_PROJECT' => 'นำเข้าการกำหนดกระบวนการ',
 
-  'LBL_PRJ_STATUS' => 'สถานะ',
-  'LBL_PRJ_MODULE' => 'โมดูลเป้าหมาย',
-  'LBL_PRJ_RUN_ORDER' => 'เรียกใช้คำสั่ง',
-  'LBL_PMSE_BUTTON_SAVE' => 'บันทึก',
-  'LBL_PMSE_BUTTON_CANCEL' => 'ยกเลิก',
-  'LBL_PMSE_BUTTON_YES' => 'ใช่',
-  'LBL_PMSE_BUTTON_NO' => 'ไม่',
-  'LBL_PMSE_BUTTON_OK' => 'ตกลง',
+    'LBL_PRJ_STATUS' => 'สถานะ',
+    'LBL_PRJ_MODULE' => 'โมดูลเป้าหมาย',
+    'LBL_PRJ_RUN_ORDER' => 'เรียกใช้คำสั่ง',
+    'LBL_PMSE_BUTTON_SAVE' => 'บันทึก',
+    'LBL_PMSE_BUTTON_CANCEL' => 'ยกเลิก',
+    'LBL_PMSE_BUTTON_YES' => 'ใช่',
+    'LBL_PMSE_BUTTON_NO' => 'ไม่',
+    'LBL_PMSE_BUTTON_OK' => 'ตกลง',
     'LBL_PMSE_FORM_ERROR' => 'โปรดแก้ไขข้อผิดพลาดก่อนที่จะดำเนินการต่อ',
 
     'LBL_PMSE_LABEL_DESIGN' => 'ออกแบบ',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'กิจกรรม',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'การดำเนินการ',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'เหตุการณ์เริ่มต้นของผู้สนใจ',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'เหตุการณ์เริ่มต้นของโอกาสทางการขาย' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'เหตุการณ์เริ่มต้นของโอกาสทางการขาย',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'เหตุการณ์เริ่มต้นของเอกสาร',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'เหตุการณ์เริ่มต้น',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'เหตุการณ์การรอ',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'กฎทางธุรกิจ',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'การดำเนินการด้านกฎธุรกิจ',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'เทมเพลตอีเมล',
-);
+];

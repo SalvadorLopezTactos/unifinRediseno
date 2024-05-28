@@ -10,40 +10,35 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Sürümler',
-  'LBL_MODULE_NAME_SINGULAR' => 'Sürüm',
-  'LBL_MODULE_TITLE' => 'Sürümler: Ana Sayfa',
-  'LBL_SEARCH_FORM_TITLE' => 'Sürüm Arama',
-  'LBL_LIST_FORM_TITLE' => 'Sürüm Listesi',
-  'LBL_NEW_FORM_TITLE' => 'Yeni Sürüm',
-  'LBL_RELEASE' => 'Sürüm:',
-  'LBL_LIST_NAME' => 'Sürüm',
-  'LBL_NAME' => 'Sürüm:',
-  'LBL_LIST_LIST_ORDER' => 'Sıra',
-  'LBL_LIST_ORDER' => 'Sıra:',
-  'LBL_LIST_STATUS' => 'Durum',
-  'LBL_STATUS' => 'Durum:',
-  'LNK_NEW_RELEASE' => 'Sürüm Listesi',
-  'NTC_DELETE_CONFIRMATION' => 'Bu kaydı silmek istediğinizden emin misiniz?',
-  'ERR_DELETE_RECORD' => 'Sürümü silmek için kayıt numarasını belirtmeniz gerekmektedir.',
-  'NTC_STATUS' => 'Bu sürümün durumunu, İnaktif olarak belirleyerek Sürüm açılır-listesinden kaldırın',
-  'NTC_LIST_ORDER' => 'Bu sürümün, Sürüm açılır-listesinde görünmesini istediğiniz sırayı belirleyin',
-  'LBL_ACTIVE_RELEASES' => 'Aktif sürümler',
-  'release_status_dom' =>
-  array (
-    'Active' => 'Aktif',
-    'Inactive' => 'İnaktif',
-),
-	'LBL_EDITLAYOUT' => 'Yerleşimi Değiştir' /*for 508 compliance fix*/,
-);
-
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Sürümler',
+    'LBL_MODULE_NAME_SINGULAR' => 'Sürüm',
+    'LBL_MODULE_TITLE' => 'Sürümler: Ana Sayfa',
+    'LBL_SEARCH_FORM_TITLE' => 'Sürüm Arama',
+    'LBL_LIST_FORM_TITLE' => 'Sürüm Listesi',
+    'LBL_NEW_FORM_TITLE' => 'Yeni Sürüm',
+    'LBL_RELEASE' => 'Sürüm:',
+    'LBL_LIST_NAME' => 'Sürüm',
+    'LBL_NAME' => 'Sürüm:',
+    'LBL_LIST_LIST_ORDER' => 'Sıra',
+    'LBL_LIST_ORDER' => 'Sıra:',
+    'LBL_LIST_STATUS' => 'Durum',
+    'LBL_STATUS' => 'Durum:',
+    'LNK_NEW_RELEASE' => 'Sürüm Listesi',
+    'NTC_DELETE_CONFIRMATION' => 'Bu kaydı silmek istediğinizden emin misiniz?',
+    'ERR_DELETE_RECORD' => 'Sürümü silmek için kayıt numarasını belirtmeniz gerekmektedir.',
+    'NTC_STATUS' => 'Bu sürümün durumunu, İnaktif olarak belirleyerek Sürüm açılır-listesinden kaldırın',
+    'NTC_LIST_ORDER' => 'Bu sürümün, Sürüm açılır-listesinde görünmesini istediğiniz sırayı belirleyin',
+    'LBL_ACTIVE_RELEASES' => 'Aktif sürümler',
+    'release_status_dom' => [
+        'Active' => 'Aktif',
+        'Inactive' => 'İnaktif',
+    ],
+    'LBL_EDITLAYOUT' => 'Yerleşimi Değiştir' /*for 508 compliance fix*/,
+];

@@ -11,37 +11,35 @@
  */
 
 
-
 use Sugarcrm\Sugarcrm\ProcessManager;
-
 
 class PMSEBusinessRules extends vCardApi
 {
     public function registerApiRest()
     {
-        return array(
-            'businessRuleDownload' => array(
+        return [
+            'businessRuleDownload' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Business_Rules', '?', 'brules'),
-                'pathVars' => array('module', 'record', ''),
+                'path' => ['pmse_Business_Rules', '?', 'brules'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'businessRuleDownload',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
                 'acl' => 'view',
                 'shortHelp' => 'Exports a .pbr file with a Process Business Rules definition',
-                'longHelp'  => 'modules/pmse_Business_Rules/clients/base/api/help/business_rules_export_help.html',
-            ),
-            'businessRulesImportPost' => array(
+                'longHelp' => 'modules/pmse_Business_Rules/clients/base/api/help/business_rules_export_help.html',
+            ],
+            'businessRulesImportPost' => [
                 'reqType' => 'POST',
-                'path' => array('pmse_Business_Rules', 'file', 'businessrules_import'),
-                'pathVars' => array('module', '', ''),
+                'path' => ['pmse_Business_Rules', 'file', 'businessrules_import'],
+                'pathVars' => ['module', '', ''],
                 'method' => 'businessRulesImport',
                 'rawPostContents' => true,
                 'acl' => 'create',
                 'shortHelp' => 'Imports a Process Business Rules definition from a .pbr file',
-                'longHelp'  => 'modules/pmse_Business_Rules/clients/base/api/help/business_rules_import_help.html',
-            ),
-        );
+                'longHelp' => 'modules/pmse_Business_Rules/clients/base/api/help/business_rules_import_help.html',
+            ],
+        ];
     }
 
     /**
@@ -55,7 +53,7 @@ class PMSEBusinessRules extends vCardApi
     public function businessRulesImport($api, $args)
     {
         ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
-        $this->requireArgs($args, array('module'));
+        $this->requireArgs($args, ['module']);
 
         $bean = BeanFactory::newBean($args['module']);
         if (!$bean->ACLAccess('save') || !$bean->ACLAccess('import')) {
@@ -63,7 +61,7 @@ class PMSEBusinessRules extends vCardApi
             PMSELogger::getInstance()->alert($sugarApiExceptionNotAuthorized->getMessage());
             throw $sugarApiExceptionNotAuthorized;
         }
-        if (isset($_FILES) && count($_FILES) === 1) {
+        if (isset($_FILES) && safeCount($_FILES) === 1) {
             $first_key = array_key_first($_FILES);
             if (isset($_FILES[$first_key]['tmp_name'])
                 && $this->isUploadedFile($_FILES[$first_key]['tmp_name'])
@@ -71,7 +69,7 @@ class PMSEBusinessRules extends vCardApi
             ) {
                 $importerObject = PMSEImporterFactory::getImporter('business_rule');
                 $name = $_FILES[$first_key]['name'];
-                $extension = pathinfo($name,  PATHINFO_EXTENSION);
+                $extension = pathinfo($name, PATHINFO_EXTENSION);
                 if ($extension == $importerObject->getExtension()) {
                     try {
                         $data = $importerObject->importProject($_FILES[$first_key]['tmp_name']);
@@ -80,8 +78,8 @@ class PMSEBusinessRules extends vCardApi
                         PMSELogger::getInstance()->alert($e->getMessage());
                         throw $e;
                     }
-                    $results = array('businessrules_import' => $data);
-                } else  {
+                    $results = ['businessrules_import' => $data];
+                } else {
                     $sugarApiExceptionRequestMethodFailure = new SugarApiExceptionRequestMethodFailure(
                         'ERROR_UPLOAD_FAILED'
                     );

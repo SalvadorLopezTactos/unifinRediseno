@@ -9,45 +9,45 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Emails']['base']['view']['preview'] = array(
-    'templateMeta' => array(
+$viewdefs['Emails']['base']['view']['preview'] = [
+    'templateMeta' => [
         'maxColumns' => 1,
-    ),
-    'panels' => array(
-        array(
+    ],
+    'panels' => [
+        [
             'name' => 'panel_header',
             'header' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'picture',
                     'type' => 'avatar',
                     'size' => 'large',
                     'label' => '',
                     'readonly' => true,
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'readonly' => true,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'state',
-                    ),
-                ),
+                    ],
+                ],
                 'state',
-                array(
+                [
                     'name' => 'from_collection',
                     'type' => 'from',
                     'label' => 'LBL_FROM',
                     'readonly' => true,
-                    'fields' => array(
+                    'fields' => [
                         'email_address_id',
                         'email_address',
                         'parent_type',
@@ -55,20 +55,20 @@ $viewdefs['Emails']['base']['view']['preview'] = array(
                         'parent_name',
                         'invalid_email',
                         'opt_out',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'date_sent',
                     'label' => 'LBL_DATE',
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'to_collection',
                     'type' => 'email-recipients',
                     'label' => 'LBL_TO_ADDRS',
                     'readonly' => true,
                     'max_num' => -1,
-                    'fields' => array(
+                    'fields' => [
                         'email_address_id',
                         'email_address',
                         'parent_type',
@@ -76,26 +76,26 @@ $viewdefs['Emails']['base']['view']['preview'] = array(
                         'parent_name',
                         'invalid_email',
                         'opt_out',
-                    ),
+                    ],
                     'span' => 12,
-                ),
-                array(
+                ],
+                [
                     'name' => 'description_html',
                     'dismiss_label' => true,
                     'readonly' => true,
                     'span' => 12,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'description',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'attachments_collection',
                     'type' => 'email-attachments',
                     'label' => 'LBL_ATTACHMENTS',
                     'readonly' => true,
                     'span' => 12,
                     'max_num' => -1,
-                    'fields' => array(
+                    'fields' => [
                         'name',
                         'filename',
                         'file_size',
@@ -103,26 +103,26 @@ $viewdefs['Emails']['base']['view']['preview'] = array(
                         'file_mime_type',
                         'file_ext',
                         'upload_id',
-                    ),
-                ),
+                    ],
+                ],
                 'team_name',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'panel_hidden',
             'label' => 'LBL_RECORD_SHOWMORE',
             'hide' => true,
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'cc_collection',
                     'type' => 'email-recipients',
                     'label' => 'LBL_CC',
                     'readonly' => true,
                     'max_num' => -1,
-                    'fields' => array(
+                    'fields' => [
                         'email_address_id',
                         'email_address',
                         'parent_type',
@@ -130,15 +130,15 @@ $viewdefs['Emails']['base']['view']['preview'] = array(
                         'parent_name',
                         'invalid_email',
                         'opt_out',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'bcc_collection',
                     'type' => 'email-recipients',
                     'label' => 'LBL_BCC',
                     'readonly' => true,
                     'max_num' => -1,
-                    'fields' => array(
+                    'fields' => [
                         'email_address_id',
                         'email_address',
                         'parent_type',
@@ -146,14 +146,14 @@ $viewdefs['Emails']['base']['view']['preview'] = array(
                         'parent_name',
                         'invalid_email',
                         'opt_out',
-                    ),
-                ),
+                    ],
+                ],
                 'assigned_user_name',
                 'parent_name',
-                array(
+                [
                     'name' => 'tag',
                     'span' => 12,
-                ),
+                ],
                 [
                     'name' => 'date_entered_by',
                     'readonly' => true,
@@ -173,7 +173,7 @@ $viewdefs['Emails']['base']['view']['preview'] = array(
                         ],
                     ],
                 ],
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

@@ -7,15 +7,9 @@
 // ----------
 
 .nav {
-  .ml-0();
-
+  margin-left: 0;
   margin-bottom: @baseLineHeight;
   list-style: none;
-
-  // Make links block level
-  & > li > a {
-    .block();
-  }
 }
 
 // Nav headers (for dropdowns and lists)
@@ -66,8 +60,7 @@
 }
 
 .nav-list {
-  &.sicon,
-  &.fa {
+  &.sicon {
     margin-right: 2px;
   }
 }
@@ -278,10 +271,6 @@
   .clearfix();
 }
 
-.tab-content {
-  overflow: hidden; // prevent content from running below tabs
-}
-
 // Remove border on bottom, left, right
 .tabs-below > .nav-tabs,
 .tabs-right > .nav-tabs,
@@ -418,7 +407,7 @@
         border-radius: 0;
 
         &:hover {
-          .bg-tab-background-hover-color();
+          background-color: var(--tab-background-hover-color);
         }
       }
 
@@ -488,13 +477,6 @@
 
 .nav-tabs.nav-stacked > li > a:hover {
   border-color: @gray70;
-}
-
-// Make carets use linkColor to start
-.nav-tabs .dropdown-toggle .fa-caret-down,
-.nav-pills .dropdown-toggle .fa-caret-down {
-  border-top-color: @gray80;
-  border-bottom-color: @gray80;
 }
 
 .tabs-below > .nav-tabs {
@@ -573,23 +555,10 @@
       border-bottom: @borderWidget;
 
       &.active {
-        .tbold();
         .active-tab();
       }
 
-      &:first-child {
-        .border-l-0();
-      }
-
-      &:last-child {
-        .border-r-0();
-      }
-
       a {
-        .flex();
-        .flex-column();
-        .items-center();
-
         color: @dropdownLinkColor;
         width: 100%;
         height: 100%;
@@ -602,7 +571,7 @@
 
 .dashlet-tabs .dashlet-tab:not(.active):hover {
   text-decoration: none;
-  .bg-tab-background-hover-color();
+  background-color: var(--tab-background-hover-color);
 }
 
 .dashlet-tabs.tab2 .dashlet-tab {
@@ -691,15 +660,18 @@ li.tab.tab-badgeable {
     border: none;
   }
 
-  &.active {
+  &.active,
+  &:has(a.active) {
     .active-tab();
+
+    a {
+      box-sizing: border-box;
+    }
   }
 
-  &:not(.active) {
-    &:hover {
-      a {
-        .bg-tab-background-hover-color();
-      }
+  &:hover {
+    a:not(.active) {
+      background-color: var(--tab-background-hover-color);
     }
   }
 
@@ -727,17 +699,10 @@ li.tab.tab-badgeable {
       margin: 0;
       text-align: center;
       max-width: 165px;
-
-      > a {
-        color: @labelColor;
-        outline: none;
-        padding: 6px 12px 3px;
-        .font-semibold();
-        .text-center();
-      }
+      line-height: 27px;
 
       &:hover {
-        .bg-tab-background-hover-color();
+        background-color: var(--tab-background-hover-color);
       }
 
       &.active {

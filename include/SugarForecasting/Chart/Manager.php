@@ -28,7 +28,7 @@ class SugarForecasting_Chart_Manager extends SugarForecasting_Chart_AbstractChar
         parent::__construct($args);
 
         if (!is_array($this->dataset)) {
-            $this->dataset = array($this->dataset);
+            $this->dataset = [$this->dataset];
         }
     }
 
@@ -46,13 +46,13 @@ class SugarForecasting_Chart_Manager extends SugarForecasting_Chart_AbstractChar
     {
         $config = $this->getForecastConfig();
         // sort the data so it's in the correct order
-        usort($this->dataArray, array($this, 'sortChartColumns'));
+        usort($this->dataArray, [$this, 'sortChartColumns']);
 
         // loop variables
-        $values = array();
+        $values = [];
 
         foreach ($this->dataArray as $data) {
-            $value = array(
+            $value = [
                 'id' => $data['id'],
                 'user_id' => $data['user_id'],
                 'name' => html_entity_decode($data['name'], ENT_QUOTES),
@@ -60,8 +60,8 @@ class SugarForecasting_Chart_Manager extends SugarForecasting_Chart_AbstractChar
                 'likely_adjusted' => SugarCurrency::convertWithRate(
                     $data['likely_case_adjusted'],
                     $data['base_rate']
-                )
-            );
+                ),
+            ];
 
             if ($config['show_worksheet_best']) {
                 $value['best'] = SugarCurrency::convertWithRate($data['best_case'], $data['base_rate']);
@@ -85,24 +85,24 @@ class SugarForecasting_Chart_Manager extends SugarForecasting_Chart_AbstractChar
 
         $tp = $this->getTimeperiod();
 
-        return array(
-                'title' => string_format(
-                    $forecast_strings['LBL_CHART_FORECAST_FOR'],
-                    array($tp->name)
-                ),
-                'quota' => $this->getRollupQuota(),
-                'labels' => array(
-                    'dataset' => array(
-                        'likely' => $app_strings['LBL_LIKELY'],
-                        'best' => $app_strings['LBL_BEST'],
-                        'worst' => $app_strings['LBL_WORST'],
-                        'likely_adjusted' => $app_strings['LBL_LIKELY_ADJUSTED'],
-                        'best_adjusted' => $app_strings['LBL_BEST_ADJUSTED'],
-                        'worst_adjusted' => $app_strings['LBL_WORST_ADJUSTED']
-                    )
-                ),
-            'data' => $values
-        );
+        return [
+            'title' => string_format(
+                $forecast_strings['LBL_CHART_FORECAST_FOR'],
+                [$tp->name]
+            ),
+            'quota' => $this->getRollupQuota(),
+            'labels' => [
+                'dataset' => [
+                    'likely' => $app_strings['LBL_LIKELY'],
+                    'best' => $app_strings['LBL_BEST'],
+                    'worst' => $app_strings['LBL_WORST'],
+                    'likely_adjusted' => $app_strings['LBL_LIKELY_ADJUSTED'],
+                    'best_adjusted' => $app_strings['LBL_BEST_ADJUSTED'],
+                    'worst_adjusted' => $app_strings['LBL_WORST_ADJUSTED'],
+                ],
+            ],
+            'data' => $values,
+        ];
     }
 
     /**
@@ -123,14 +123,14 @@ class SugarForecasting_Chart_Manager extends SugarForecasting_Chart_AbstractChar
 
     /**
      * Get the roll up quota for a manager from the quota table.  If one doesn't exist it
-     * will call @see getQuotaTotalFromData to return the quota total from the worksheet dataset
+     * will call @return float
+     * @see getQuotaTotalFromData to return the quota total from the worksheet dataset
      *
-     * @return float
      */
     protected function getRollupQuota()
     {
         //grab user that is the target of this call to check if it is the top level manager
-        $targetedUser = BeanFactory::getBean("Users", $this->getArg('user_id'));
+        $targetedUser = BeanFactory::getBean('Users', $this->getArg('user_id'));
 
         if (!empty($targetedUser->reports_to_id)) {
             // pull the worksheet data since we need the draft records if they exist to show what could be in draft
@@ -149,8 +149,8 @@ class SugarForecasting_Chart_Manager extends SugarForecasting_Chart_AbstractChar
      * Method for sorting the dataArray before we return it so that the tallest bar is always first and the
      * lowest bar is always last.
      *
-     * @param array $a          The left side of the compare
-     * @param array $b          The right side of the compare
+     * @param array $a The left side of the compare
+     * @param array $b The right side of the compare
      * @return int
      */
     protected function sortChartColumns($a, $b)

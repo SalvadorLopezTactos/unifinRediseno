@@ -9,49 +9,49 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$subpanel_layout = array(
-    'top_buttons' => array(
-        array('widget_class' => 'SubPanelTopCreateButton'),
-        array('widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'KBContents'),
-    ),
+$subpanel_layout = [
+    'top_buttons' => [
+        ['widget_class' => 'SubPanelTopCreateButton'],
+        ['widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'KBContents'],
+    ],
     'where' => '',
-    'list_fields' => array(
-        'name' => array(
+    'list_fields' => [
+        'name' => [
             'vname' => 'LBL_NAME',
             'widget_class' => 'SubPanelDetailViewLink',
             'width' => '35%',
             'default' => true,
-        ),
-        'language' => array(
+        ],
+        'language' => [
             'vname' => 'LBL_LANG',
             'width' => '5%',
             'default' => true,
-        ),
-        'revision' => array(
+        ],
+        'revision' => [
             'vname' => 'LBL_DOCUMENT_REVISION',
             'width' => '5%',
             'default' => true,
-        ),
-        'active_rev' => array(
+        ],
+        'active_rev' => [
             'vname' => 'LBL_ACTIVE_REV',
             'width' => '5%',
             'default' => true,
-        ),
-        'date_entered' => array(
+        ],
+        'date_entered' => [
             'name' => 'date_entered',
             'vname' => 'LBL_DATE_ENTERED',
             'width' => '23%',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'vname' => 'LBL_DATE_MODIFIED',
             'width' => '23%',
-        ),
-        'remove_button' => array (
+        ],
+        'remove_button' => [
             'vname' => 'LBL_REMOVE',
             'widget_class' => 'SubPanelRemoveButton',
             'width' => '4%',
             'default' => true,
-        ),
-    )
-);
+        ],
+    ],
+];

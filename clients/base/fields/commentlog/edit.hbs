@@ -12,24 +12,25 @@
 --}}
 
 <div class="commentLog edit" data-name="{{name}}" name="{{name}}">
-    {{#each msgs}}
-        {{#unless isNew}}
-        <div class="msg-div toggle-text">
-            <span class="ellipsis_inline" title data-placement="bottom" data-fieldname="author_name">
-                {{#if href}}
-                    <a title="{{created_by_name}}" href="{{href}}">{{created_by_name}}</a>
-                {{else}}
-                    {{created_by_name}}
-                {{/if}}
-                {{entered_date}}
-            </span>
-            <div class="msg-content">{{entry}}</div>
-
-            <hr />
-        </div>
-        {{/unless}}
-    {{/each}}
-    <div class="new-msg-div edit">
+    <div class="scroll-container max-h-[33vh] overflow-y-auto">
+        {{#each msgs}}
+            {{#unless isNew}}
+            <div class="msg-div toggle-text">
+                <span class="ellipsis_inline" title data-bs-placement="bottom" data-fieldname="author_name">
+                    {{#if href}}
+                        <a title="{{created_by_name}}" href="{{href}}">{{created_by_name}}</a>
+                    {{else}}
+                        {{created_by_name}}
+                    {{/if}}
+                    {{entered_date}}
+                </span>
+                {{partial 'comment' ../../this this}}
+                <hr />
+            </div>
+            {{/unless}}
+        {{/each}}
+    </div>
+    <div class="new-msg-div edit mt-2">
         <textarea class="taggable" rows="5" name="{{name}}">{{newValue}}</textarea>
     </div>
 </div>

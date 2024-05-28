@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Plytelių rodinys',
     'LBL_MODULE_NAME_SINGULAR' => 'Plytelių rodinys',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'Plytelių rodinys',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => 'Įjungti moduliai',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'Plytelių rodinio moduliai',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'Modulio nustatymai',
-    'LBL_PIPELINE_TABLE_HEADER' => "Pasirinkite lauką, kurio reikšmės bus naudojamos kaip stulpeliai",
+    'LBL_PIPELINE_TABLE_HEADER' => 'Pasirinkite lauką, kurio reikšmės bus naudojamos kaip stulpeliai',
     'LBL_PIPELINE_TILE_HEADER' => 'Plytelės antraštės laukas',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => 'Galimi stulpeliai',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => 'Plytelės teksto laukai',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'Plytelės peržiūra',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'Plytelėje per daug laukų.',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => 'Prieš tęsdami turite pašalinti šiuose modulio parametrų skirtukuose esančias klaidas:<br><br>',
-);
+    'LBL_MODULE_SELECTION' => 'Toliau pasirinkite modulį, kurį norite peržiūrėti ir konfigūruoti',
+    'LBL_SHOW_COLUMN_COUNT' => 'Rodyti stulpelių skaičių',
+    'LBL_SHOW_COLUMN_TOTAL' => 'Rodyti stulpelių sumą',
+    'LBL_TOTAL_FIELD' => 'Sumos laukas',
+];

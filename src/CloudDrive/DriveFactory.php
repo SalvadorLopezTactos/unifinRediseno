@@ -16,6 +16,7 @@ use Sugarcrm\Sugarcrm\CloudDrive\Constants\DriveType;
 use Sugarcrm\Sugarcrm\CloudDrive\Drives\GoogleDrive;
 use Sugarcrm\Sugarcrm\CloudDrive\Drives\OneDrive;
 use Sugarcrm\Sugarcrm\CloudDrive\Drives\DropboxDrive;
+use Sugarcrm\Sugarcrm\CloudDrive\Drives\SharepointDrive;
 
 class DriveFactory
 {
@@ -34,6 +35,8 @@ class DriveFactory
                 return new OneDrive();
             case DriveType::DROPBOX:
                 return new DropboxDrive();
+            case DriveType::SHAREPOINT:
+                return new SharepointDrive();
         }
     }
 }

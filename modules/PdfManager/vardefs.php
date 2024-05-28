@@ -11,14 +11,13 @@
  */
 
 
-$dictionary['PdfManager'] = array(
-    'table'=>'pdfmanager',
+$dictionary['PdfManager'] = [
+    'table' => 'pdfmanager',
     'favorites' => false,
-    'audited'=>false,
-    'duplicate_merge'=>true,
-    'fields'=>array (
-        'base_module' =>
-        array (
+    'audited' => false,
+    'duplicate_merge' => true,
+    'fields' => [
+        'base_module' => [
             'required' => true,
             'name' => 'base_module',
             'vname' => 'LBL_BASE_MODULE',
@@ -41,9 +40,8 @@ $dictionary['PdfManager'] = array(
             'options' => 'moduleList',
             'studio' => false,
             'dependency' => false,
-        ),
-        'published' =>
-        array (
+        ],
+        'published' => [
             'required' => false,
             'name' => 'published',
             'vname' => 'LBL_PUBLISHED',
@@ -65,9 +63,8 @@ $dictionary['PdfManager'] = array(
             'options' => 'pdfmanager_yes_no_list',
             'studio' => false,
             'dependency' => false,
-        ),
-        'field' =>
-        array (
+        ],
+        'field' => [
             'required' => false,
             'name' => 'field',
             'vname' => 'LBL_FIELD',
@@ -89,9 +86,8 @@ $dictionary['PdfManager'] = array(
             'options' => 'moduleList',
             'studio' => false,
             'dependency' => false,
-        ),
-        'body_html' =>
-        array (
+        ],
+        'body_html' => [
             'required' => false,
             'name' => 'body_html',
             'vname' => 'LBL_BODY_HTML',
@@ -112,9 +108,8 @@ $dictionary['PdfManager'] = array(
             'rows' => '4',
             'cols' => '20',
             'dependency' => false,
-        ),
-        'template_name' =>
-        array (
+        ],
+        'template_name' => [
             'required' => false,
             'name' => 'template_name',
             'vname' => 'LBL_TEMPLATE_NAME',
@@ -132,9 +127,8 @@ $dictionary['PdfManager'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),        
-        'author' =>
-        array (
+        ],
+        'author' => [
             'required' => true,
             'name' => 'author',
             'vname' => 'LBL_AUTHOR',
@@ -153,9 +147,8 @@ $dictionary['PdfManager'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'title' =>
-        array (
+        ],
+        'title' => [
             'required' => false,
             'name' => 'title',
             'vname' => 'LBL_TITLE',
@@ -173,9 +166,8 @@ $dictionary['PdfManager'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'subject' =>
-        array (
+        ],
+        'subject' => [
             'required' => false,
             'name' => 'subject',
             'vname' => 'LBL_SUBJECT',
@@ -193,9 +185,8 @@ $dictionary['PdfManager'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'keywords' =>
-        array (
+        ],
+        'keywords' => [
             'required' => false,
             'name' => 'keywords',
             'vname' => 'LBL_KEYWORDS',
@@ -213,9 +204,8 @@ $dictionary['PdfManager'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'header_title' =>
-        array (
+        ],
+        'header_title' => [
             'required' => false,
             'name' => 'header_title',
             'vname' => 'LBL_HEADER_TITLE',
@@ -232,9 +222,8 @@ $dictionary['PdfManager'] = array(
             'merge_filter' => 'disabled',
             'len' => '255',
             'size' => '20',
-        ),
-        'header_text' =>
-        array (
+        ],
+        'header_text' => [
             'required' => false,
             'name' => 'header_text',
             'vname' => 'LBL_HEADER_TEXT',
@@ -251,9 +240,8 @@ $dictionary['PdfManager'] = array(
             'merge_filter' => 'disabled',
             'len' => '255',
             'size' => '20',
-        ),
-        'header_logo' =>
-        array(
+        ],
+        'header_logo' => [
             'name' => 'header_logo',
             'vname' => 'LBL_HEADER_LOGO_FILE',
             'type' => 'file',
@@ -268,9 +256,8 @@ $dictionary['PdfManager'] = array(
             'unified_search' => false,
             'merge_filter' => 'disabled',
             'importable' => false,
-        ),
-        'footer_text' =>
-        array (
+        ],
+        'footer_text' => [
             'required' => false,
             'name' => 'footer_text',
             'vname' => 'LBL_FOOTER_TEXT',
@@ -287,21 +274,20 @@ $dictionary['PdfManager'] = array(
             'merge_filter' => 'disabled',
             'len' => '255',
             'size' => '20',
-        ),
-    ),
-    'acls' => array(
-        'SugarACLAdminOnly' => array(
+        ],
+    ],
+    'acls' => [
+        'SugarACLAdminOnly' => [
             'allowUserRead' => true,
-        ),
-    ),
-    'indices' => array (
-        array('name' => 'idx_pdfmanager_base_module', 'type' => 'index', 'fields' => array('base_module')),
-        array('name' => 'idx_pdfmanager_published', 'type' => 'index', 'fields' => array('published')),
-    ),
-    'relationships'=>array (),
-    'optimistic_locking'=>true,
+        ],
+    ],
+    'indices' => [
+        ['name' => 'idx_pdfmanager_base_module', 'type' => 'index', 'fields' => ['base_module']],
+        ['name' => 'idx_pdfmanager_published', 'type' => 'index', 'fields' => ['published']],
+    ],
+    'relationships' => [],
+    'optimistic_locking' => true,
 
-);
+];
 
-VardefManager::createVardef('PdfManager','PdfManager', array('basic','team_security','assignable'));
-
+VardefManager::createVardef('PdfManager', 'PdfManager', ['basic', 'team_security', 'assignable']);

@@ -34,7 +34,7 @@ class SugarJobAddActivitySubscriptions implements RunnableSchedulerJob
     public function run($data)
     {
         try {
-            $data                  = unserialize($data, ['allowed_classes' => false]);
+            $data = unserialize($data, ['allowed_classes' => false]);
             $subscriptionsBeanName = BeanFactory::getBeanClass('Subscriptions');
             $subscriptionsBeanName::addActivitySubscriptions($data);
             $this->job->succeedJob();

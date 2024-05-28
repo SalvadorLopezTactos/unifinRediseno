@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,23 +10,27 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class ExtAPIMicrosoft extends ExtAPIMicrosoftEmail
 {
-    public const SCOPES_AUTHORIZE = array(
+    public const SCOPES_AUTHORIZE = [
         'offline_access',
         'https://graph.microsoft.com/User.Read',
         'https://graph.microsoft.com/Files.ReadWrite.All',
-    );
-    public const SCOPES_GRAPH_API = array(
+        'https://graph.microsoft.com/Sites.Read.All',
+    ];
+    public const SCOPES_GRAPH_API = [
         'offline_access',
         'https://graph.microsoft.com/User.Read',
         'https://graph.microsoft.com/Files.ReadWrite.All',
-    );
+        'https://graph.microsoft.com/Sites.Read.All',
+    ];
 
-    public const SCOPES_DRIVE_API = array(
+    public const SCOPES_DRIVE_API = [
         'offline_access',
         'https://graph.microsoft.com/Files.ReadWrite.All',
-    );
+        'https://graph.microsoft.com/Sites.Read.All',
+    ];
 
     /**
      * Returns the authorization URL used by the frontend to initialize the user
@@ -33,19 +38,46 @@ class ExtAPIMicrosoft extends ExtAPIMicrosoftEmail
      *
      * @return string
      */
-    public function getAuthURL() : string
+    public function getAuthURL(): string
     {
         $config = $this->getMicrosoftOauth2Config();
-        $params = array(
+        $params = [
             'client_id' => $config['properties']['oauth2_client_id'],
             'redirect_uri' => $config['redirect_uri'],
             'response_type' => 'code',
             'prompt' => 'select_account',
             'scope' => implode(' ', self::SCOPES_AUTHORIZE),
             'state' => 'drive',
-        );
+        ];
 
-        return self::URL_AUTHORIZE . '?' . http_build_query($params);
+        $singleTenantEnabled = !empty($config['properties']['oauth2_single_tenant_enabled']);
+        $tenant = $singleTenantEnabled ? trim($config['properties']['oauth2_single_tenant_id'] ?? '') : null;
+
+        $urlAuthorize = sprintf(self::URL_AUTHORIZE, $tenant ?: 'common');
+
+        return $urlAuthorize . '?' . http_build_query($params);
+    }
+
+    /**
+     * Saves a token in the EAPM table. If an EAPM bean ID is provided (and it
+     * exists), that row will be updated. Otherwise, will create a new row
+     *
+     * @param string $tokenJSON the token information to store
+     * @param string|null $eapmId optional: ID of the EAPM record to resave
+     * @return string
+     */
+    protected function saveToken($tokenJSON, $eapmId = null)
+    {
+        global $current_user;
+
+        $bean = $this->getEAPMBean($eapmId);
+        if (empty($bean->id)) {
+            $bean->assigned_user_id = $current_user->id;
+            $bean->application = 'Microsoft';
+            $bean->validated = true;
+        }
+        $bean->api_data = $tokenJSON;
+        return $bean->save();
     }
 
     /**
@@ -75,11 +107,11 @@ class ExtAPIMicrosoft extends ExtAPIMicrosoftEmail
         }
 
         // Return the token and account information
-        return array(
+        return [
             'token' => $token,
             'eapmId' => $eapmId,
             'emailAddress' => $this->getEmailAddress($eapmId),
             'userName' => $this->getUserName($eapmId),
-        );
+        ];
     }
 }

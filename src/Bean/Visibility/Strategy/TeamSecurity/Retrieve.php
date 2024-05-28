@@ -73,14 +73,14 @@ final class Retrieve implements Strategy
                         $team_table_alias . '.deleted = 0'
                     )
                 )
-            ->groupBy('tst.team_set_id');
+                ->groupBy('tst.team_set_id');
             $subQuery->where('tst.team_set_id = ?');
             $subQuery->createPositionalParameter($teamSetId);
             $query->joinTable(
                 $subQuery,
-                array(
+                [
                     'alias' => $tf_alias,
-                )
+                ]
             )->on()->equalsField($tf_alias . '.team_set_id', $table_alias . '.team_set_id');
         } else {
             $query->where()->addRaw('1 != 1');

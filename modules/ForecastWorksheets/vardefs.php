@@ -9,25 +9,23 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['ForecastWorksheet'] = array(
+$dictionary['ForecastWorksheet'] = [
     'table' => 'forecast_worksheets',
     'studio' => false,
-    'acls' => array('SugarACLForecastWorksheets' => true),
-    'fields' => array(
-        'parent_id' =>
-        array(
+    'acls' => ['SugarACLForecastWorksheets' => true],
+    'fields' => [
+        'parent_id' => [
             'name' => 'parent_id',
             'vname' => 'LBL_PARENT_ACCOUNT_ID',
             'type' => 'id',
-            'group'=>'parent_name',
+            'group' => 'parent_name',
             'required' => false,
             'reportable' => false,
             'audited' => false,
             'comment' => 'Account ID of the parent of this account',
-            'studio' => false
-        ),
-        'parent_type' =>
-        array(
+            'studio' => false,
+        ],
+        'parent_type' => [
             'name' => 'parent_type',
             'vname' => 'LBL_PARENT_TYPE',
             'type' => 'parent_type',
@@ -36,10 +34,9 @@ $dictionary['ForecastWorksheet'] = array(
             'options' => 'parent_type_display',
             'len' => '255',
             'comment' => 'Sugar module the Worksheet is associated with',
-            'studio' => false
-        ),
-        'parent_name' =>
-        array(
+            'studio' => false,
+        ],
+        'parent_name' => [
             'name' => 'parent_name',
             'parent_type' => 'record_type_display',
             'type_name' => 'parent_type',
@@ -51,24 +48,22 @@ $dictionary['ForecastWorksheet'] = array(
             'options' => 'parent_type_display',
             'studio' => true,
             'sortable' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'parent_id',
                 'parent_type',
                 'parent_deleted',
                 'name',
-            )
-        ),
-        'opportunity_id' =>
-        array(
+            ],
+        ],
+        'opportunity_id' => [
             'name' => 'opportunity_id',
             'vname' => 'LBL_OPPORTUNITY_ID',
             'type' => 'id',
             'audited' => false,
             'studio' => false,
             'link' => 'opportunity',
-        ),
-        'opportunity_name' =>
-        array(
+        ],
+        'opportunity_name' => [
             'name' => 'opportunity_name',
             'id_name' => 'opportunity_id',
             'module' => 'Opportunities',
@@ -78,17 +73,16 @@ $dictionary['ForecastWorksheet'] = array(
             'len' => '255',
             'studio' => false,
             'sortable' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'opportunity_id',
-            ),
+            ],
             'rname' => 'name',
             'link' => 'opportunity',
             'formula' => 'related($opportunity, "name")',
             'enforced' => true,
             'calculated' => true,
-        ),
-        'account_name' =>
-        array(
+        ],
+        'account_name' => [
             'name' => 'account_name',
             'id_name' => 'account_id',
             'module' => 'Accounts',
@@ -98,31 +92,30 @@ $dictionary['ForecastWorksheet'] = array(
             'len' => '255',
             'studio' => false,
             'sortable' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'account_id',
-            ),
+            ],
             'rname' => 'name',
             'link' => 'account',
             'formula' => 'related($account, "name")',
             'enforced' => true,
             'calculated' => true,
-        ),
-        'account_id' =>
-        array(
+        ],
+        'account_id' => [
             'name' => 'account_id',
             'vname' => 'LBL_ACCOUNT_ID',
             'type' => 'id',
             'audited' => false,
-            'studio' => false
-        ),
-        'campaign_id' => array(
+            'studio' => false,
+        ],
+        'campaign_id' => [
             'name' => 'campaign_id',
             'vname' => 'LBL_CAMPAIGN_ID',
             'type' => 'id',
             'audited' => false,
-            'studio' => false
-        ),
-        'campaign_name' => array(
+            'studio' => false,
+        ],
+        'campaign_name' => [
             'name' => 'campaign_name',
             'id_name' => 'campaign_id',
             'rname' => 'name',
@@ -132,22 +125,22 @@ $dictionary['ForecastWorksheet'] = array(
             'len' => '255',
             'module' => 'Campaigns',
             'sortable' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'campaign_id',
-            ),
+            ],
             'link' => 'campaign',
             'formula' => 'related($campaign, "name")',
             'enforced' => true,
             'calculated' => true,
-        ),
-        'product_template_id' => array(
+        ],
+        'product_template_id' => [
             'name' => 'product_template_id',
             'vname' => 'LBL_PRODUCT_TEMPLATE_ID',
             'type' => 'id',
             'audited' => false,
-            'studio' => false
-        ),
-        'product_template_name' => array(
+            'studio' => false,
+        ],
+        'product_template_name' => [
             'name' => 'product_template_name',
             'id_name' => 'product_template_id',
             'rname' => 'name',
@@ -157,22 +150,22 @@ $dictionary['ForecastWorksheet'] = array(
             'len' => '255',
             'module' => 'ProductTemplates',
             'sortable' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'product_template_id',
-            ),
+            ],
             'link' => 'template',
             'formula' => 'related($template, "name")',
             'enforced' => true,
             'calculated' => true,
-        ),
-        'category_id' =>  array(
+        ],
+        'category_id' => [
             'name' => 'category_id',
             'vname' => 'LBL_CATEGORY',
             'type' => 'id',
             'required' => false,
             'reportable' => true,
-        ),
-        'category_name' =>  array(
+        ],
+        'category_name' => [
             'name' => 'category_name',
             'id_name' => 'category_id',
             'rname' => 'name',
@@ -182,15 +175,15 @@ $dictionary['ForecastWorksheet'] = array(
             'dbType' => 'varchar',
             'len' => '255',
             'sortable' => true,
-            'related_fields' => array(
-                'category_id'
-            ),
+            'related_fields' => [
+                'category_id',
+            ],
             'link' => 'category',
             'formula' => 'related($category, "name")',
             'enforced' => true,
             'calculated' => true,
-        ),
-        'sales_status' => array(
+        ],
+        'sales_status' => [
             'name' => 'sales_status',
             'vname' => 'LBL_SALES_STATUS',
             'type' => 'enum',
@@ -198,68 +191,64 @@ $dictionary['ForecastWorksheet'] = array(
             'len' => '255',
             'sortable' => true,
             'audited' => true,
-        ),
-        'likely_case' =>
-        array(
+        ],
+        'likely_case' => [
             'name' => 'likely_case',
             'vname' => 'LBL_LIKELY',
             'dbType' => 'currency',
             'type' => 'currency',
             'len' => '26,6',
-            'validation' => array('type' => 'range', 'min' => 0),
+            'validation' => ['type' => 'range', 'min' => 0],
             'audited' => false,
             'studio' => false,
             'align' => 'right',
             'sortable' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'base_rate',
                 'currency_id',
                 'best_case',
-                'worst_case'
-            ),
+                'worst_case',
+            ],
             'convertToBase' => true,
-            'skip_preferred_conversion' => true
-        ),
-        'best_case' =>
-        array(
+            'skip_preferred_conversion' => true,
+        ],
+        'best_case' => [
             'name' => 'best_case',
             'vname' => 'LBL_BEST',
             'dbType' => 'currency',
             'type' => 'currency',
             'len' => '26,6',
-            'validation' => array('type' => 'range', 'min' => 0),
+            'validation' => ['type' => 'range', 'min' => 0],
             'audited' => false,
             'studio' => false,
             'align' => 'right',
             'sortable' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'base_rate',
-                'currency_id'
-            ),
+                'currency_id',
+            ],
             'convertToBase' => true,
-            'skip_preferred_conversion' => true
-        ),
-        'worst_case' =>
-        array(
+            'skip_preferred_conversion' => true,
+        ],
+        'worst_case' => [
             'name' => 'worst_case',
             'vname' => 'LBL_WORST',
             'dbType' => 'currency',
             'type' => 'currency',
             'len' => '26,6',
-            'validation' => array('type' => 'range', 'min' => 0),
+            'validation' => ['type' => 'range', 'min' => 0],
             'audited' => false,
             'studio' => false,
             'align' => 'right',
             'sortable' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'base_rate',
-                'currency_id'
-            ),
+                'currency_id',
+            ],
             'convertToBase' => true,
-            'skip_preferred_conversion' => true
-        ),
-        'date_closed' =>
-        array(
+            'skip_preferred_conversion' => true,
+        ],
+        'date_closed' => [
             'name' => 'date_closed',
             'vname' => 'LBL_DATE_CLOSED',
             'type' => 'date',
@@ -271,19 +260,17 @@ $dictionary['ForecastWorksheet'] = array(
             'sortable' => true,
             'options' => 'date_range_search_dom',
             'studio' => false,
-            'related_fields' => array(
-                'date_closed_timestamp'
-            )
-        ),
-        'date_closed_timestamp' =>
-        array(
+            'related_fields' => [
+                'date_closed_timestamp',
+            ],
+        ],
+        'date_closed_timestamp' => [
             'name' => 'date_closed_timestamp',
             'vname' => 'LBL_DATE_CLOSED_TIMESTAMP',
             'type' => 'ulong',
-            'studio' => false
-        ),
-        'sales_stage' =>
-        array(
+            'studio' => false,
+        ],
+        'sales_stage' => [
             'name' => 'sales_stage',
             'vname' => 'LBL_SALES_STAGE',
             'type' => 'enum',
@@ -296,31 +283,29 @@ $dictionary['ForecastWorksheet'] = array(
             'sortable' => true,
             'required' => true,
             'studio' => false,
-            'related_fields' => array(
-                'probability'
-            )
-        ),
-        'probability' =>
-        array(
+            'related_fields' => [
+                'probability',
+            ],
+        ],
+        'probability' => [
             'name' => 'probability',
             'vname' => 'LBL_OW_PROBABILITY',
             'type' => 'int',
             'dbType' => 'double',
             'audited' => false,
             'comment' => 'The probability of closure',
-            'validation' => array('type' => 'range', 'min' => 0, 'max' => 100),
+            'validation' => ['type' => 'range', 'min' => 0, 'max' => 100],
             'merge_filter' => 'enabled',
             'sortable' => true,
             'studio' => false,
             'formula' => 'getDropdownValue("sales_probability_dom",$sales_stage)',
             'calculated' => true,
             'enforced' => true,
-            'related_fields' => array(
-                'sales_stage'
-            )
-        ),
-        'commit_stage' =>
-        array(
+            'related_fields' => [
+                'sales_stage',
+            ],
+        ],
+        'commit_stage' => [
             'name' => 'commit_stage',
             'vname' => 'LBL_FORECAST',
             'type' => 'enum',
@@ -332,28 +317,27 @@ $dictionary['ForecastWorksheet'] = array(
             'function_bean' => 'Forecasts',
             'formula' => 'forecastCommitStage($probability)',
             'calculated' => true,
-            'related_fields' => array(
-                'probability'
-            )
-        ),
-        'draft' =>
-        array(
+            'related_fields' => [
+                'probability',
+            ],
+        ],
+        'draft' => [
             'name' => 'draft',
             'vname' => 'LBL_DRAFT',
             'default' => 0,
             'type' => 'int',
             'comment' => 'Is A Draft Version',
-            'studio' => false
-        ),
-        'next_step' => array(
+            'studio' => false,
+        ],
+        'next_step' => [
             'name' => 'next_step',
             'vname' => 'LBL_NEXT_STEP',
             'type' => 'varchar',
             'len' => '100',
             'comment' => 'The next step in the sales process',
             'merge_filter' => 'enabled',
-        ),
-        'lead_source' => array(
+        ],
+        'lead_source' => [
             'name' => 'lead_source',
             'vname' => 'LBL_LEAD_SOURCE',
             'type' => 'enum',
@@ -362,8 +346,8 @@ $dictionary['ForecastWorksheet'] = array(
             'comment' => 'Source of the product',
             'sortable' => true,
             'merge_filter' => 'enabled',
-        ),
-        'product_type' => array(
+        ],
+        'product_type' => [
             'name' => 'product_type',
             'vname' => 'LBL_TYPE',
             'type' => 'enum',
@@ -372,8 +356,8 @@ $dictionary['ForecastWorksheet'] = array(
             'audited' => true,
             'comment' => 'Type of product ( from opportunities opportunity_type ex: Existing, New)',
             'merge_filter' => 'enabled',
-        ),
-        'list_price' =>  array(
+        ],
+        'list_price' => [
             'name' => 'list_price',
             'vname' => 'LBL_LIST_PRICE',
             'type' => 'currency',
@@ -381,9 +365,9 @@ $dictionary['ForecastWorksheet'] = array(
             'audited' => true,
             'sortable' => true,
             'align' => 'right',
-            'comment' => 'List price of product ("List" in Quote)'
-        ),
-        'cost_price' =>  array(
+            'comment' => 'List price of product ("List" in Quote)',
+        ],
+        'cost_price' => [
             'name' => 'cost_price',
             'vname' => 'LBL_COST_PRICE',
             'type' => 'currency',
@@ -391,9 +375,9 @@ $dictionary['ForecastWorksheet'] = array(
             'audited' => true,
             'sortable' => true,
             'align' => 'right',
-            'comment' => 'Product cost ("Cost" in Quote)'
-        ),
-        'discount_price' =>  array(
+            'comment' => 'Product cost ("Cost" in Quote)',
+        ],
+        'discount_price' => [
             'name' => 'discount_price',
             'vname' => 'LBL_DISCOUNT_PRICE',
             'type' => 'currency',
@@ -401,9 +385,9 @@ $dictionary['ForecastWorksheet'] = array(
             'audited' => true,
             'sortable' => true,
             'align' => 'right',
-            'comment' => 'Discounted price ("Unit Price" in Quote)'
-        ),
-        'discount_amount' =>  array(
+            'comment' => 'Discounted price ("Unit Price" in Quote)',
+        ],
+        'discount_amount' => [
             'name' => 'discount_amount',
             'vname' => 'LBL_TOTAL_DISCOUNT_AMOUNT',
             'type' => 'currency',
@@ -412,9 +396,9 @@ $dictionary['ForecastWorksheet'] = array(
             'precision' => 6,
             'sortable' => true,
             'align' => 'right',
-            'comment' => 'Discounted amount'
-        ),
-        'quantity' =>  array(
+            'comment' => 'Discounted amount',
+        ],
+        'quantity' => [
             'name' => 'quantity',
             'vname' => 'LBL_QUANTITY',
             'type' => 'int',
@@ -422,141 +406,135 @@ $dictionary['ForecastWorksheet'] = array(
             'comment' => 'Quantity in use',
             'sortable' => true,
             'align' => 'right',
-            'default' => 1
-        ),
-        'total_amount' => array(
+            'default' => 1,
+        ],
+        'total_amount' => [
             'name' => 'total_amount',
             'vname' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
             'reportable' => false,
             'sortable' => true,
             'align' => 'right',
-            'type' => 'currency'
-        ),
-        'parent_deleted' =>
-        array(
+            'type' => 'currency',
+        ],
+        'parent_deleted' => [
             'name' => 'parent_deleted',
             'default' => 0,
             'type' => 'int',
             'comment' => 'Is Parent Deleted',
             'studio' => false,
-            'source' => 'non-db'
-        ),
-        'opportunity' =>
-        array(
+            'source' => 'non-db',
+        ],
+        'opportunity' => [
             'name' => 'opportunity',
             'type' => 'link',
             'relationship' => 'forecastworksheets_opportunities',
             'source' => 'non-db',
             'vname' => 'LBL_OPPORTUNITY',
-        ),
-        'account' =>
-        array(
+        ],
+        'account' => [
             'name' => 'account',
             'type' => 'link',
             'relationship' => 'forecastworksheets_accounts',
             'source' => 'non-db',
             'vname' => 'LBL_ACCOUNTS',
-        ),
-        'campaign' =>
-        array(
+        ],
+        'campaign' => [
             'name' => 'campaign',
             'type' => 'link',
             'relationship' => 'forecastworksheets_campaigns',
             'source' => 'non-db',
             'vname' => 'LBL_CAMPAIGN',
-        ),
-        'template' =>
-        array(
+        ],
+        'template' => [
             'name' => 'template',
             'type' => 'link',
             'relationship' => 'forecastworksheets_templates',
             'source' => 'non-db',
             'vname' => 'LBL_PRODUCT',
-        ),
-        'category' =>
-        array(
+        ],
+        'category' => [
             'name' => 'category',
             'type' => 'link',
             'relationship' => 'forecastworksheets_categories',
             'source' => 'non-db',
             'vname' => 'LBL_CATEGORY',
-        ),
-    ),
-    'indices' => array(
-        array('name' => 'idx_worksheets_parent', 'type' => 'index', 'fields' => array('parent_id', 'parent_type')),
-        array(
+        ],
+    ],
+    'indices' => [
+        ['name' => 'idx_worksheets_parent', 'type' => 'index', 'fields' => ['parent_id', 'parent_type']],
+        [
             'name' => 'idx_worksheets_assigned_del_time_draft_parent_type',
             'type' => 'index',
-            'fields' => array('deleted','assigned_user_id', 'draft', 'date_closed_timestamp', 'parent_type')
-        ),
-        array('name' => 'idx_forecastworksheet_commit_stage', 'type' => 'index', 'fields' => array('commit_stage')),
-        array('name' => 'idx_forecastworksheet_sales_stage', 'type' => 'index', 'fields' => array('sales_stage')),
-        array(
+            'fields' => ['deleted', 'assigned_user_id', 'draft', 'date_closed_timestamp', 'parent_type'],
+        ],
+        ['name' => 'idx_forecastworksheet_commit_stage', 'type' => 'index', 'fields' => ['commit_stage']],
+        ['name' => 'idx_forecastworksheet_sales_stage', 'type' => 'index', 'fields' => ['sales_stage']],
+        [
             'name' => 'idx_forecastworksheet_aid_del_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'account_id',
                 'deleted',
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_forecastworksheet_oppid_del_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'opportunity_id',
                 'deleted',
                 'id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'forecastworksheets_accounts' =>  array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'forecastworksheets_accounts' => [
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',
             'lhs_key' => 'id',
             'rhs_module' => 'ForecastWorksheets',
             'rhs_table' => 'forecast_worksheets',
             'rhs_key' => 'account_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'forecastworksheets_opportunities' =>  array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'forecastworksheets_opportunities' => [
             'lhs_module' => 'Opportunities',
             'lhs_table' => 'opportunities',
             'lhs_key' => 'id',
             'rhs_module' => 'ForecastWorksheets',
             'rhs_table' => 'forecast_worksheets',
             'rhs_key' => 'opportunity_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'forecastworksheets_campaigns' =>  array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'forecastworksheets_campaigns' => [
             'lhs_module' => 'Campaigns',
             'lhs_table' => 'campaigns',
             'lhs_key' => 'id',
             'rhs_module' => 'ForecastWorksheets',
             'rhs_table' => 'forecast_worksheets',
             'rhs_key' => 'campaign_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'forecastworksheets_templates' =>  array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'forecastworksheets_templates' => [
             'lhs_module' => 'ProductTemplates',
             'lhs_table' => 'product_templates',
             'lhs_key' => 'id',
             'rhs_module' => 'ForecastWorksheets',
             'rhs_table' => 'forecast_worksheets',
             'rhs_key' => 'product_template_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'forecastworksheets_categories' =>  array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'forecastworksheets_categories' => [
             'lhs_module' => 'ProductCategories',
             'lhs_table' => 'product_categories',
             'lhs_key' => 'id',
             'rhs_module' => 'ForecastWorksheets',
             'rhs_table' => 'forecast_worksheets',
             'rhs_key' => 'category_id',
-            'relationship_type' => 'one-to-many'
-        )
-    ),
+            'relationship_type' => 'one-to-many',
+        ],
+    ],
     // @TODO Fix the Default and Basic SugarObject templates so that Basic
     // implements Default. This would allow the application of various
     // implementations on Basic without forcing Default to have those so that
@@ -566,19 +544,19 @@ $dictionary['ForecastWorksheet'] = array(
     // implementation fields. Once there is a separation of default and basic
     // templates we can safely remove these as this module will implement
     // default instead of basic.
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'commentlog',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef(
     'ForecastWorksheets',
     'ForecastWorksheet',
-    array(
+    [
         'default',
         'assignable',
         'team_security',
-        'currency'
-    )
+        'currency',
+    ]
 );

@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Süreç Tanımı',
-  'LBL_MODULE_TITLE' => 'Süreç Tanımı',
-  'LBL_MODULE_NAME_SINGULAR' => 'Süreç Tanımı',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Süreç Tanımı',
+    'LBL_MODULE_TITLE' => 'Süreç Tanımı',
+    'LBL_MODULE_NAME_SINGULAR' => 'Süreç Tanımı',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Süreç Tanımları Odak Bölmesi',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Süreç Tanımları Odak Bölmesi',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Süreç Tanımları Kayıt Panosu',
-  'LNK_LIST' => 'Süreç Tanımlarını Gör',
-  'LNK_NEW_PMSE_PROJECT' => 'Süreç Tanımı Oluştur',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Süreç Tanımı İçeri Al',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Süreç Tanımları Kayıt Panosu',
+    'LNK_LIST' => 'Süreç Tanımlarını Gör',
+    'LNK_NEW_PMSE_PROJECT' => 'Süreç Tanımı Oluştur',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Süreç Tanımı İçeri Al',
 
-  'LBL_PRJ_STATUS' => 'Durum',
-  'LBL_PRJ_MODULE' => 'Hedef Modül',
-  'LBL_PRJ_RUN_ORDER' => 'Düzeni Çalıştır',
-  'LBL_PMSE_BUTTON_SAVE' => 'Kaydet',
-  'LBL_PMSE_BUTTON_CANCEL' => 'İptal',
-  'LBL_PMSE_BUTTON_YES' => 'Evet',
-  'LBL_PMSE_BUTTON_NO' => 'Hayır',
-  'LBL_PMSE_BUTTON_OK' => 'Tamam',
+    'LBL_PRJ_STATUS' => 'Durum',
+    'LBL_PRJ_MODULE' => 'Hedef Modül',
+    'LBL_PRJ_RUN_ORDER' => 'Düzeni Çalıştır',
+    'LBL_PMSE_BUTTON_SAVE' => 'Kaydet',
+    'LBL_PMSE_BUTTON_CANCEL' => 'İptal',
+    'LBL_PMSE_BUTTON_YES' => 'Evet',
+    'LBL_PMSE_BUTTON_NO' => 'Hayır',
+    'LBL_PMSE_BUTTON_OK' => 'Tamam',
     'LBL_PMSE_FORM_ERROR' => 'Lütfen devam etmeden önce tüm hataları giderin.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Tasarım',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktivite',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Aksiyon',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Potansiyel Başlangıç Etkinliği',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Fırsat Başlangıç Etkinliği' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Fırsat Başlangıç Etkinliği',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Doküman Başlangıç Etkinliği',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Etkinliği Başlat',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Etkinliği Beklet',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'İş kuralı',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'İş kuralı aksiyonu',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'E-Posta şablonu',
-);
+];

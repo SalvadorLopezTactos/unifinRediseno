@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Databeskyttelse',
     'LBL_MODULE_NAME_SINGULAR' => 'Databeskyttelse',
     'LBL_NUMBER' => 'Antal',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Ingen felter eller poster er markeret til sletning.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Data beskyttelsespost, dashboard',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Databeskyttelse',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje for databeskyttelse',
 
     // list view
     'LBL_HELP_RECORDS' => 'Modulet Databeskyttelse sporer privatlivsbeskyttelsesaktiviteter, herunder samtykke og emneanmodninger, for at understøtte din organisationens privatlivsbeskyttelsesprocedurer. Oprettelse af en databeskyttelsespost relateret til en enkeltpersons post (f.eks. en kontakt) for at spore samtykke eller handle på en anmodning om beskyttelse af personlige oplysninger.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Modulet Databeskyttelse sporer privatlivsbeskyttelsesaktiviteter, herunder samtykke og emneanmodninger, for at understøtte din organisationens privatlivsbeskyttelsesprocedurer. Oprettelse af en databeskyttelsespost relateret til en enkeltpersons post (f.eks. en kontakt) for at spore samtykke eller handle på en anmodning om beskyttelse af personlige oplysninger. Når den fornødne handling er fuldført, kan bruger der har manager-rettigheder i forhold til persondatabeskyttelse klikke på "Afsluttet" eller "Afvis" for at opdatere statussen. 
 
 For sletningsanmodninger, vælg "Marker til sletning" for hver af de enkelte poster angivet i underpanelet nedenfor. Når alle ønskede felter er markeret, vil et klik på "Slet og afslut" fjerne felternes værdier permanent og markere privatlivbeskyttelsesdataposten som afsluttet.',
-);
+];

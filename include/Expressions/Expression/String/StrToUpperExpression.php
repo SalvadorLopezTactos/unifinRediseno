@@ -9,46 +9,52 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
- * <b>strToUpper(String s)</b><br/> 
+ * <b>strToUpper(String s)</b><br/>
  * Returns <i>s</i> converted to upper case.<br/>
  * ex: <em>strToLower("Hello World")</em> = "HELLO WORLD"
  */
-class StrToUpperExpression extends StringExpression {
-	/**
-	 * Returns itself when evaluating.
-	 */
-	function evaluate() {
-		$param =$this->getParameters();
+class StrToUpperExpression extends StringExpression
+{
+    /**
+     * Returns itself when evaluating.
+     */
+    public function evaluate()
+    {
+        $param = $this->getParameters();
         if (is_array($param)) {
             $param = $param[0];
         }
         return sugarStrToUpper($param->evaluate());
-	}
+    }
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
 			var string = this.getParameters().evaluate() + "" ;
 			return string.toUpperCase();
 EOQ;
-	}
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return "strToUpper";
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return 'strToUpper';
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 
     /**
      * Return param count to prevent errors.
@@ -58,4 +64,3 @@ EOQ;
         return 1;
     }
 }
-?>

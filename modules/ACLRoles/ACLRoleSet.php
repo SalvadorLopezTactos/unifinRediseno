@@ -93,12 +93,12 @@ class ACLRoleSet extends Basic
     {
         $query = new SugarQuery();
         $query->select('id');
-        $query->from(new self, array('add_deleted' => $deleted))
+        $query->from(new self(), ['add_deleted' => $deleted])
             ->where()->equals('hash', $hash);
         $data = $query->execute();
         if ($data) {
             $row = array_shift($data);
-            return BeanFactory::retrieveBean('ACLRoleSets', $row['id'], array(), $deleted);
+            return BeanFactory::retrieveBean('ACLRoleSets', $row['id'], [], $deleted);
         }
 
         return null;
@@ -123,7 +123,7 @@ class ACLRoleSet extends Basic
     {
         $query = new SugarQuery();
         $query->select()->setCountQuery();
-        $query->from(new User)
+        $query->from(new User())
             ->where()->equals('acl_role_set_id', $this->id);
         $data = $query->execute();
         $row = array_shift($data);

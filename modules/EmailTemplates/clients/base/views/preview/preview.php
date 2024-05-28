@@ -47,22 +47,21 @@ $viewdefs['EmailTemplates']['base']['view']['preview'] = [
                     'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_MODIFIED',
-                    'fields' =>
+                    'fields' => [
                         [
-                            [
-                                'name' => 'date_modified',
-                                'required' => false,
-                            ],
-
-                            [
-                                'type' => 'label',
-                                'default_value' => 'LBL_BY',
-                            ],
-
-                            [
-                                'name' => 'modified_by_name',
-                            ],
+                            'name' => 'date_modified',
+                            'required' => false,
                         ],
+
+                        [
+                            'type' => 'label',
+                            'default_value' => 'LBL_BY',
+                        ],
+
+                        [
+                            'name' => 'modified_by_name',
+                        ],
+                    ],
                 ],
                 'description',
                 [
@@ -71,20 +70,19 @@ $viewdefs['EmailTemplates']['base']['view']['preview'] = [
                     'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_ENTERED',
-                    'fields' =>
+                    'fields' => [
                         [
-                            [
-                                'name' => 'date_entered',
-                                'required' => false,
-                            ],
-                            [
-                                'type' => 'label',
-                                'default_value' => 'LBL_BY',
-                            ],
-                            [
-                                'name' => 'created_by_name',
-                            ],
+                            'name' => 'date_entered',
+                            'required' => false,
                         ],
+                        [
+                            'type' => 'label',
+                            'default_value' => 'LBL_BY',
+                        ],
+                        [
+                            'name' => 'created_by_name',
+                        ],
+                    ],
                 ],
                 'subject',
                 'team_name',
@@ -97,21 +95,20 @@ $viewdefs['EmailTemplates']['base']['view']['preview'] = [
                     'type' => 'fieldset',
                     'label' => 'LBL_BODY',
                     'readonly' => true,
-                    'fields' =>
+                    'fields' => [
                         [
-                            [
-                                'name' => 'body_html',
-                                'type' => 'htmleditable_tinymce',
-                                'label' => 'LBL_BODY',
-                                'readonly' => true,
-                            ],
-                            [
-                                'name' => 'plaintext',
-                                'type' => 'show-plain-text',
-                                'label' => 'LBL_SHOW_ALT_TEXT',
-                                'label2' => 'LBL_HIDE_ALT_TEXT',
-                            ],
+                            'name' => 'body_html',
+                            'type' => 'htmleditable_tinymce',
+                            'label' => 'LBL_BODY',
+                            'readonly' => true,
                         ],
+                        [
+                            'name' => 'plaintext',
+                            'type' => 'show-plain-text',
+                            'label' => 'LBL_SHOW_ALT_TEXT',
+                            'label2' => 'LBL_HIDE_ALT_TEXT',
+                        ],
+                    ],
                 ],
                 [
                     'name' => 'body',
@@ -126,16 +123,15 @@ $viewdefs['EmailTemplates']['base']['view']['preview'] = [
                     'type' => 'email-attachments',
                     'label' => 'LBL_ATTACHMENTS',
                     'max_num' => -1,
-                    'fields' =>
-                        [
-                            'name',
-                            'filename',
-                            'file_size',
-                            'file_source',
-                            'file_mime_type',
-                            'file_ext',
-                            'upload_id',
-                        ],
+                    'fields' => [
+                        'name',
+                        'filename',
+                        'file_size',
+                        'file_source',
+                        'file_mime_type',
+                        'file_ext',
+                        'upload_id',
+                    ],
                 ],
                 [
                     'name' => 'tag',

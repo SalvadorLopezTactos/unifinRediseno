@@ -11,9 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' =>
-'<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
+        '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
 通過註冊GoToMeeting應用程式從 LogMeIn 取得用戶密鑰。<br>
 &nbsp;<br>
 註冊的實際步骤：<br>
@@ -36,4 +36,4 @@ $connector_strings = array(
 </ol>
 </td></tr></table>',
     'oauth_consumer_key' => '消費者密鑰',
-);
+];

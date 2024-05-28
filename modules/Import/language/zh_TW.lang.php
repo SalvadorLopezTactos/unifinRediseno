@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => '成功匯入檔案讀取',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => '匯入的記錄正在某個流程中使用並且無法編輯，因為部分欄位已被流程鎖定編輯。',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => '發現的錯誤數量。檢視錯誤標籤中由於錯誤而未匯入的列。',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => '如果使用者不存在，則使用目前使用者',
     'LBL_SHOW_HIDDEN' => '顯示非正常匯入的欄位',
     'LBL_UPDATE_RECORDS' => '升級現有記錄而不匯入（不能復原操作）',
-    'LBL_TEST'=> '測試匯入（不保存或變更資料）',
+    'LBL_TEST' => '測試匯入（不保存或變更資料）',
     'LBL_TRUNCATE_TABLE' => '匯入前清空表格（刪除所有記錄）',
     'LBL_RELATED_ACCOUNTS' => '不建立相關帳戶',
     'LBL_NO_DATECHECK' => '跳過日期檢查（更快，但任何日期錯誤都將導致失敗）',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => '無效整數值',
     'LBL_ERROR_INVALID_NUM' => '無效數字值',
     'LBL_ERROR_INVALID_TIME' => '無效時間',
-    'LBL_ERROR_INVALID_EMAIL'=>'無效電子郵件地址',
-    'LBL_ERROR_INVALID_BOOL'=>'無效值（應為 1 或 0）',
-    'LBL_ERROR_INVALID_DATE'=>'無效日期字串',
-    'LBL_ERROR_INVALID_USER'=>'無效使用者名稱或 ID',
+    'LBL_ERROR_INVALID_EMAIL' => '無效電子郵件地址',
+    'LBL_ERROR_INVALID_BOOL' => '無效值（應為 1 或 0）',
+    'LBL_ERROR_INVALID_DATE' => '無效日期字串',
+    'LBL_ERROR_INVALID_USER' => '無效使用者名稱或 ID',
     'LBL_ERROR_INVALID_TEAM' => '無效小組名稱或 ID',
     'LBL_ERROR_INVALID_ACCOUNT' => '無效帳戶名稱或 ID',
     'LBL_ERROR_INVALID_RELATE' => '無效關聯式欄位',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => '不存在或不可寫入',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => '檔案上載失敗。很可能是 php.ini 檔案中的 upload_max_filesize 設定的值太小。',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => '檔案太大。最大：',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => '位元。在 config.php 中更改 $sugar_config[&#39;upload_maxsize&#39;]',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => '位元組。在 config.php 中變更 $sugar_config[&#39;upload_maxsize&#39;]',
     'LBL_MODULE_NAME' => '匯入',
     'LBL_MODULE_NAME_SINGULAR' => '匯入',
     'LBL_TRY_AGAIN' => '再試一次',
     'LBL_START_OVER' => '重新開始',
     'LBL_ERROR' => '錯誤：',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => '匯入檔案包含 {0} 列。最佳列數為 {1}。更多列可能降低匯入處理速度。按一下「確定」繼續匯入。按一下「取消」修訂​​並重新載入匯入檔案。',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => '無法匯入系統管理員使用者',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => '無法匯入系統管理員使用者',
     'ERR_REPORT_LOOP' => '系統偵測到報告重複。使用者無法向其自身報告，其管理人員亦無法向其報告。',
     'ERR_MULTIPLE' => '多個欄被定義相同的欄位名稱。',
     'ERR_MISSING_REQUIRED_FIELDS' => '缺少必填字段：',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => '沒有在您的匯入檔案中偵測到行。請確保檔案中沒有空行並再試一次。',
     'LBL_FILE_ALREADY_BEEN_OR' => '匯入檔案已處理或不存在',
     'LBL_SUCCESS' => '成功：',
-	'LBL_FAILURE' => '匯入失敗：',
+    'LBL_FAILURE' => '匯入失敗：',
     'LBL_SUCCESSFULLY' => '匯入成功',
     'LBL_LAST_IMPORT_UNDONE' => '匯入沒有完成。',
     'LBL_NO_IMPORT_TO_UNDO' => '沒有匯入的檔案需要復原。',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => '重新匯入',
     'LBL_FINISHED' => '已完成',
     'LBL_UNDO_LAST_IMPORT' => '撤銷匯入',
-    'LBL_LAST_IMPORTED'=>'已建立',
+    'LBL_LAST_IMPORTED' => '已建立',
     'ERR_MULTIPLE_PARENTS' => '您只能定義一個父代 ID',
     'LBL_DUPLICATES' => '找到重複項',
     'LNK_DUPLICATE_LIST' => '下載重複項清單',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => '隱藏附註',
     'LBL_SHOW_PREVIEW_COLUMNS' => '顯示預覽欄',
     'LBL_HIDE_PREVIEW_COLUMNS' => '隱藏預覽欄',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => '使用運算子檢查重複項目：',
     'LBL_SAVE_MAPPING_AS' => '如需儲存匯入設定，請為已儲存設定提供名稱：',
     'LBL_OPTION_ENCLOSURE_QUOTE' => '單引號 (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => '雙引號 (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => '要向您的預設小組以外的小組指派新記錄，請使用預設值欄選取不同小組。',
     'LBL_SIGN_IN_HELP' => '如需啟用此服務，請在使用者設定頁面的外部帳戶標籤下登入。',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "嘗試在不支持此功能的 Bean 中處理電子郵件地址。",
-);
+];

@@ -10,31 +10,31 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Cases']['base']['filter']['default'] = array(
+$viewdefs['Cases']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
     'quicksearch_field' => ['name', 'case_number',],
     'quicksearch_priority' => 2,
-    'fields' => array(
-        'name' => array(),
-        'account_name' => array(),
-        'status' => array(),
-        'priority' => array(),
-        'case_number' => array(),
-        'date_entered' => array(),
-        'date_modified' => array(),
-        'tag' => array(),
-        'request_close' => array(),
-        'request_close_date' => array(),
+    'fields' => [
+        'name' => [],
+        'account_name' => [],
+        'status' => [],
+        'priority' => [],
+        'case_number' => [],
+        'date_entered' => [],
+        'date_modified' => [],
+        'tag' => [],
+        'request_close' => [],
+        'request_close_date' => [],
         'follow_up_datetime' => [],
-        'assigned_user_name' => array(),
-        '$owner' => array(
+        'assigned_user_name' => [],
+        '$owner' => [
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',
-        ),
-        '$favorite' => array(
+        ],
+        '$favorite' => [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        ),
+        ],
         'is_escalated' => [],
         'type' => [],
         'source' => [],
@@ -45,5 +45,5 @@ $viewdefs['Cases']['base']['filter']['default'] = array(
         'team_name' => [],
         'modified_by_name' => [],
         'created_by_name' => [],
-    ),
-);
+    ],
+];

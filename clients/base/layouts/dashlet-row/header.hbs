@@ -10,18 +10,17 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<a data-toggle="dropdown" class="btn btn-invisible btn-link hide" rel="tooltip" title="{{str "LBL_DASHLET_CONFIGURE"}}"
-    data-placement="bottom"
->
+<a data-bs-toggle="dropdown" class="btn btn-invisible btn-link hide">
     <i class="sicon sicon-settings"></i>
+    {{tooltip (str 'LBL_DASHLET_CONFIGURE') 'bottom'}}
 </a>
-<ul class="dropdown-menu left">
+<ul class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl left">
     <div>
         <li><a class="remove-row">{{str "LBL_DASHLET_REMOVE_LABEL"}}</a></li>
     </div>
 </ul>
 <a class="move btn btn-invisible btn-link hide" rel="tooltip" title="{{str "LBL_DASHLET_MOVE"}}" data-container="body"
-    data-placement="bottom"
+    data-bs-placement="bottom"
 >
     <i class="sicon sicon-full-screen"></i>
 </a>

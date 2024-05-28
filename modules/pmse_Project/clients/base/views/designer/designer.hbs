@@ -22,35 +22,8 @@
 <link type="text/css" href="modules/pmse_Project/css/pmse.css?v={{cacheKiller}}" rel="stylesheet" />
 <style>
     /* TODO remove this section and put in the sass file */
-    #ProjectTitle {
-        font-family: Arial,Verdana,Helvetica,sans-serif;
-        color: var(--text-color);
-        font-weight: bold;
-        font-size: 15px;
-        margin: 2px 0 0 0;
-    }
-
-    .pmse-toolbar-buttons {
-        width: 83%;
-        padding: 3px 0 0 10px;
-        position: absolute;
-        left: 0;
-    }
-
-    .pmse-toolbar-title {
-        width: 17%;
-        position: absolute;
-        right: 0;
-    }
-    .pmse-toolbar-title .icon-remove {
-        margin: 5px 6px 0 0;
-    }
-    .pmse-toolbar-title .icon-edit-title {
-        margin-top: 5px;
-    }
     .navbtn {
-        width: 28px;
-        height: 28px;
+        line-height: 12px;
         margin: 0 5px 0 0;
         border: 1px solid var(--border-color);
         border-radius: 3px;
@@ -69,35 +42,11 @@
         text-indent: 2px;
         text-align: left;
     }
-    .navbtn > [class*="fa-"] {
-        color: var(--sicon-color);
-        font-size: 1.35em;
-        line-height: 1.75em;
-    }
 
-    .navbtn:hover > [class*="fa-"] {
+    .navbtn:hover > .sicon {
         color: var(--sicon-hover-color);
     }
 
-    .navbtn .fa-rotate-45 {
-        -webkit-transform: rotate(45deg);
-        -moz-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        -o-transform: rotate(45deg);
-        transform: rotate(45deg);
-        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=.5);
-    }
-    /*
-    .navbtn .fa-stack {
-        margin-left: -2px;
-    }
-    .navbtn .fa-small {
-        font-size: 1.05em;
-    }
-    .navbtn .fa-xsmall {
-        font-size: .70em;
-    }
-    */
     .navbtn .overlay {
         position: absolute;
         top: 5px;
@@ -188,64 +137,64 @@
             <div class="pmse-toolbar-buttons">
 
                 <!-- Other Modules -->
-                <span id="AdamEventOtherModule" type="draggable" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT" this.module}}" class="navbtn othermods"><i class="fa fa-play-circle"></i></span>
+                <span id="AdamEventOtherModule" type="draggable" rel="tooltip" title="" data-bs-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT" this.module}}" class="navbtn othermods p-1.5"><i class="sicon sicon-play"></i></span>
 
                 <span class="navdiv"></span>
 
                 <!-- Wait -->
-                <span id="AdamEventTimer" type="draggable" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_WAIT" this.module}}" class="navbtn"><i class="fa fa-clock-o"></i></span>
+                <span id="AdamEventTimer" type="draggable" rel="tooltip" title="" data-bs-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_WAIT" this.module}}" class="navbtn p-1.5"><i class="sicon sicon-clock"></i></span>
 
                 <!-- Receive Message -->
-                <span id="AdamEventReceiveMessage" type="draggable" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_RECEIVE_MESSAGE" this.module}}" class="navbtn"><i class="fa fa-inbox"></i></span>
+                <span id="AdamEventReceiveMessage" type="draggable" rel="tooltip" title="" data-bs-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_RECEIVE_MESSAGE" this.module}}" class="navbtn p-1.5"><i class="sicon sicon-inbox"></i></span>
 
                 <!-- Send Message -->
-                <span id="AdamEventMessage" type="draggable" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_SEND_MESSAGE" this.module}}" class="navbtn"><i class="fa fa-envelope"></i></span>
+                <span id="AdamEventMessage" type="draggable" rel="tooltip" title="" data-bs-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_SEND_MESSAGE" this.module}}" class="navbtn p-1.5"><i class="sicon sicon-email"></i></span>
 
                 <span class="navdiv"></span>
 
                 <!-- User Task -->
-                <span id="AdamUserTask" type="draggable" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_USER_TASK" this.module}}" class="navbtn"><i class="fa fa-stop"></i></span>
+                <span id="AdamUserTask" type="draggable" rel="tooltip" title="" data-bs-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_USER_TASK" this.module}}" class="navbtn p-1.5"><i class="sicon sicon-user"></i></span>
 
                 <!-- Action -->
-                <span id="AdamScriptTask" type="draggable" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_ACTION" this.module}}" class="navbtn"><i class="fa fa-cogs"></i></span>
+                <span id="AdamScriptTask" type="draggable" rel="tooltip" title="" data-bs-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_ACTION" this.module}}" class="navbtn p-1.5"><i class="sicon sicon-settings"></i></span>
 
                 <span class="navdiv"></span>
 
                 <!-- Exclusive -->
-                <span id="AdamGatewayExclusive" type="draggable" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_EXCLUSIVE" this.module}}" class="navbtn"><i class="fa fa-stop fa-rotate-45"></i></span>
+                <span id="AdamGatewayExclusive" type="draggable" rel="tooltip" title="" data-bs-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_EXCLUSIVE" this.module}}" class="navbtn p-1.5"><i class="sicon sicon-exclusive"></i></span>
 
                 <!-- Parallel -->
-                <span id="AdamGatewayParallel" type="draggable" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_PARALLEL" this.module}}" class="navbtn"><i class="fa fa-plus overlay"></i><i class="fa fa-stop fa-rotate-45"></i></span>
+                <span id="AdamGatewayParallel" type="draggable" rel="tooltip" title="" data-bs-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_PARALLEL" this.module}}" class="navbtn p-1.5"><i class="sicon sicon-parallel"></i></span>
 
                 <span class="navdiv"></span>
 
                 <!-- End Event -->
-                <span id="AdamEventEnd" type="draggable" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_END_EVENT" this.module}}" class="navbtn"><i class="fa fa-circle"></i></span>
+                <span id="AdamEventEnd" type="draggable" rel="tooltip" title="" data-bs-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_END_EVENT" this.module}}" class="navbtn p-1.5"><i class="sicon sicon-end-event"></i></span>
 
                 <span class="navdiv"></span>
 
                 <!-- Comment -->
-                <span id="AdamTextAnnotation" type="draggable" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_COMMENT" this.module}}" class="navbtn"><i class="fa fa-comment"></i></span>
+                <span id="AdamTextAnnotation" type="draggable" rel="tooltip" title="" data-bs-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_COMMENT" this.module}}" class="navbtn p-1.5"><i class="sicon sicon-comment-lg"></i></span>
 
                 <span class="navdiv lg"></span>
 
                 <!-- Undo -->
-                <span id="ButtonUndo" type="" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_UNDO" this.module}}" class="navbtn"><i class="fa fa-undo"></i></span>
+                <span id="ButtonUndo" type="" rel="tooltip" title="" data-bs-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_UNDO" this.module}}" class="navbtn p-1.5"><i class="sicon sicon-reset"></i></span>
 
                 <!-- Redo -->
-                <span id="ButtonRedo" type="" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_REDO" this.module}}" class="navbtn"><i class="fa fa-undo fa-flip-horizontal"></i></span>
+                <span id="ButtonRedo" type="" rel="tooltip" title="" data-bs-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_REDO" this.module}}" class="navbtn p-1.5"><i class="sicon sicon-redo"></i></span>
 
                 <!-- Save -->
-                <span id="ButtonSave" type="" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_SAVE" this.module}}" class="navbtn"><i class="fa fa-save"></i></span>
+                <span id="ButtonSave" type="" rel="tooltip" title="" data-bs-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_SAVE" this.module}}" class="navbtn p-1.5"><i class="sicon sicon-save"></i></span>
 
                 <!-- Validate -->
-                <span id="ButtonValidate" type="" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_VALIDATE" this.module}}" class="navbtn"><i class="fa fa-check-square"></i></span>
+                <span id="ButtonValidate" type="" rel="tooltip" title="" data-bs-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_VALIDATE" this.module}}" class="navbtn p-1.5"><i class="sicon sicon-validate"></i></span>
 
                 <!-- Save and Validate -->
-                <span id="ButtonSaveValidate" type="" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE" this.module}}" class="navbtn"><i class="fa fa-save fa-sm"></i><i class="fa fa-check-square fa-sm"></i></span>
+                <span id="ButtonSaveValidate" type="" rel="tooltip" title="" data-bs-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE" this.module}}" class="navbtn p-1.5"><i class="sicon sicon-sm sicon-save-lg"></i><i class="sicon sicon-sm sicon-validate"></i></span>
 
                 <!-- View Errors -->
-                <span id="ButtonToggleErrorPane" type="" rel="tooltip" title="" data-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS" this.module}}" class="navbtn"><i class="fa fa-exclamation-triangle exclamation-triangle-off"></i></span>
+                <span id="ButtonToggleErrorPane" type="" rel="tooltip" title="" data-bs-placement="bottom" data-original-title="{{str "LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS" this.module}}" class="navbtn p-1.5"><i class="sicon sicon-warning-triangle"></i></span>
 
                 <!-- Zoom -->
                 <select id="zoom" class="friendly-select">
@@ -257,17 +206,21 @@
                 </select>
 
             </div>
-            <div class="pmse-toolbar-title">
-                <div style="display:block; float:right;"><button class="btn btn-invisible btn-close-designer" rel="tooltip" title="" data-placement="bottom" data-original-title="Close Designer">
-                    <i class="fa fa-times"></i>
-                </button>
+            <div class="pmse-toolbar-title ml-8">
+                <div>
+                    <button class="btn btn-invisible btn-close-designer" rel="tooltip" title=""
+                    data-bs-placement="bottom" data-original-title="Close Designer">
+                        <i class="sicon sicon-lg sicon-close"></i>
+                    </button>
                 </div>
-                <div style="display:block; float:right;">
+                <div style="width:100%;">
                     <div id="ProjectTitle"></div>
-                    <input id="txt-title" class="input-small" style="margin: 7px 0 0 0; display: none;">
+                    <input id="txt-title" class="p-0 w-full" style="display: none;">
                 </div>
-                <div class="icon-edit-title" style="display:none; float:right;">
-                    <a class="record-edit-link btn btn-invisible" data-type="url" data-name="website"><i class="fa fa-pencil"></i></a>
+                <div class="icon-edit-title" style="display:none;">
+                    <a class="record-edit-link btn btn-invisible" data-type="url" data-name="website">
+                        <i class="sicon sicon-edit"></i>
+                    </a>
                 </div>
             </div>
         </div>

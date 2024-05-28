@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => '查看升級',
     'LBL_LIST_RELATED_TO_ID' => '關聯到 ID',
     'LNK_IMPORT_ESCALATIONS' => '導入升級',
-    
+
     'LBL_LIST_SUBJECT' => '主旨',
     'LBL_LIST_NUMBER' => '編號',
     'LBL_LIST_RELATED_TO_TYPE' => '相關類型',

@@ -14,112 +14,112 @@
  * This dependency set the commit_stage to the correct value and to read only when the sales stage
  * is Closed Won (include) or Closed Lost (exclude)
  */
-$dependencies['ForecastWorksheets']['commit_stage_readonly_set_value'] = array(
-    'hooks' => array("edit"),
+$dependencies['ForecastWorksheets']['commit_stage_readonly_set_value'] = [
+    'hooks' => ['edit'],
     //Trigger formula for the dependency. Defaults to 'true'.
     'trigger' => 'true',
-    'triggerFields' => array('sales_stage'),
+    'triggerFields' => ['sales_stage'],
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
-    'actions' => array(
-        array(
+    'actions' => [
+        [
             'name' => 'ReadOnly', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'commit_stage',
                 'label' => 'commit_stage_label', //normally <field>_label
                 'value' => 'isForecastClosed($sales_stage)', //Formula
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'SetValue', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'commit_stage',
                 'label' => 'commit_stage_label', //normally <field>_label
                 'value' => 'ifElse(isForecastClosedWon($sales_stage), "include",
                     ifElse(isForecastClosedLost($sales_stage), "exclude", $commit_stage))', //Formula
-            ),
-        )
-    ),
-);
+            ],
+        ],
+    ],
+];
 
 /**
  * This dependency set the best and worst values to equal likely when the sales stage is
  * set to closed won.
  */
-$dependencies['ForecastWorksheets']['best_worst_sales_stage_read_only'] = array(
-    'hooks' => array("edit"),
+$dependencies['ForecastWorksheets']['best_worst_sales_stage_read_only'] = [
+    'hooks' => ['edit'],
     //Trigger formula for the dependency. Defaults to 'true'.
     'trigger' => 'true',
-    'triggerFields' => array('sales_stage'),
+    'triggerFields' => ['sales_stage'],
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
-    'actions' => array(
-        array(
+    'actions' => [
+        [
             'name' => 'ReadOnly', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'best_case',
                 'label' => 'best_case_label', //normally <field>_label
                 'value' => 'isForecastClosed($sales_stage)', //Formula
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'ReadOnly', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'worst_case',
                 'label' => 'worst_case_label', //normally <field>_label
                 'value' => 'isForecastClosed($sales_stage)', //Formula
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'SetValue', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'best_case',
                 'label' => 'best_case_label',
                 'value' => 'ifElse(isForecastClosed($sales_stage), $likely_case, $best_case)',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'SetValue', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'worst_case',
                 'label' => 'worst_case_label',
                 'value' => 'ifElse(isForecastClosed($sales_stage), $likely_case, $worst_case)',
-            ),
-        ),
-    )
-);
+            ],
+        ],
+    ],
+];
 
-$dependencies['ForecastWorksheets']['likely_case_copy_when_closed'] = array(
-    'hooks' => array("edit"),
+$dependencies['ForecastWorksheets']['likely_case_copy_when_closed'] = [
+    'hooks' => ['edit'],
     //Trigger formula for the dependency. Defaults to 'true'.
     'trigger' => 'true',
-    'triggerFields' => array('likely_case'),
+    'triggerFields' => ['likely_case'],
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
-    'actions' => array(
-        array(
+    'actions' => [
+        [
             'name' => 'SetValue', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'best_case',
                 'label' => 'best_case_label',
                 'value' => 'ifElse(isForecastClosed($sales_stage), $likely_case, $best_case)',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'SetValue', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'worst_case',
                 'label' => 'worst_case_label',
                 'value' => 'ifElse(isForecastClosed($sales_stage), $likely_case, $worst_case)',
-            ),
-        ),
-    )
-);
+            ],
+        ],
+    ],
+];

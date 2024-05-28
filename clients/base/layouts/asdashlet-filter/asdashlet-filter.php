@@ -11,13 +11,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['asdashlet-filter'] = array(
-    'components' => array(
-        array(
+$viewdefs['base']['layout']['asdashlet-filter'] = [
+    'components' => [
+        [
             'layout' => 'filterpanel',
-            'context' => array(
+            'context' => [
                 'module' => 'Activities',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

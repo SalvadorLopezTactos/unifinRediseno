@@ -13,21 +13,20 @@
 
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 use Sugarcrm\Sugarcrm\ProcessManager;
-use  Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
+use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 
 class PMSEUserTask extends PMSEEvent
 {
-
     protected $engineFields;
 
     /**
      * @var array List of calendar type modules
      */
-    protected $calendarModules = array('Calls', 'Meetings');
+    protected $calendarModules = ['Calls', 'Meetings'];
 
     public function __construct()
     {
-        $this->engineFields = array(
+        $this->engineFields = [
             'idInbox',
             'idFlow',
             'date_entered',
@@ -35,7 +34,7 @@ class PMSEUserTask extends PMSEEvent
             'created_by_name',
             'team_name',
             '__sugar_url',
-        );
+        ];
 
         parent::__construct();
     }
@@ -63,8 +62,9 @@ class PMSEUserTask extends PMSEEvent
      * @param type $externalAction
      * @return type
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
+        $userId = null;
         $routeAction = null;
         $flowAction = null;
         if ($externalAction != '') {
@@ -140,7 +140,7 @@ class PMSEUserTask extends PMSEEvent
         return $result;
     }
 
-    public function processAction($flowData, $externalAction, $arguments= array())
+    public function processAction($flowData, $externalAction, $arguments = [])
     {
         switch ($externalAction) {
             case '':
@@ -198,7 +198,7 @@ class PMSEUserTask extends PMSEEvent
         $moduleId = $fields['beanId'];
 
         foreach ($beanData as $key => $value) {
-            if (in_array($key, $this->engineFields)) {
+            if (safeInArray($key, $this->engineFields)) {
                 unset($fields[$key]);
             }
         }
@@ -227,8 +227,7 @@ class PMSEUserTask extends PMSEEvent
             $isCalendarModule = false;
         }
         if ($isCalendarModule) {
-            $calendarEvents = new CalendarEvents();
-            $wasRecurring = $calendarEvents->isEventRecurring($beanObject);
+            $wasRecurring = $beanObject->isEventRecurring();
         }
 
         $historyData = ProcessManager\Factory::getPMSEObject('PMSEHistoryData');
@@ -262,19 +261,19 @@ class PMSEUserTask extends PMSEEvent
                 $helper = ApiHelper::getHelper($api, $beanObject);
                 $beanPopulate = $helper->populateFromApi($beanObject, $beanData);
             } catch (SugarApiExceptionRequestMethodFailure $conflict) {
-                $conflict->setExtraData("record", $beanObject);
+                $conflict->setExtraData('record', $beanObject);
                 throw $conflict;
             }
-            if ($beanPopulate !== true){
+            if ($beanPopulate !== true) {
                 foreach ($beanObject->field_defs as $fieldName => $properties) {
-                    if ( !isset($fields[$fieldName])) {
+                    if (!isset($fields[$fieldName])) {
                         // They aren't trying to modify this field
                         continue;
                     }
 
                     $type = !empty($properties['custom_type']) ? $properties['custom_type'] : $properties['type'];
                     $field = $sfh->getSugarField($type);
-                    $field->setOptions("");
+                    $field->setOptions('');
 
                     if ($field != null) {
                         // validate submitted data
@@ -300,8 +299,8 @@ class PMSEUserTask extends PMSEEvent
             $moduleApi->updateRelatedRecords($api, $beanObject, $beanData);
 
             // if switching from non recurring to recurring, need to save recurring events
-            if ($isCalendarModule && !$wasRecurring && $calendarEvents->isEventRecurring($beanObject)) {
-                $calendarEvents->saveRecurringEvents($beanObject);
+            if ($isCalendarModule && !$wasRecurring && $beanObject->isEventRecurring()) {
+                $beanObject->saveRecurringEvents();
             }
         }
 
@@ -319,7 +318,7 @@ class PMSEUserTask extends PMSEEvent
         $registry = $this->getRegistry();
 
         // Simplified logic here... get all locked flows or a default array...
-        $flows = $registry->get('locked_flows', array());
+        $flows = $registry->get('locked_flows', []);
 
         // If the flow id is not currently in the locked flow arrray, set it...
         if (!isset($flows[$id])) {
@@ -338,9 +337,9 @@ class PMSEUserTask extends PMSEEvent
     public function getActionButtons(pmse_BpmActivityDefinition $bean)
     {
         if ($bean->act_response_buttons == 'ROUTE') {
-            $buttons = json_encode(array('link_cancel', 'route', 'edit', 'continue'));
+            $buttons = json_encode(['link_cancel', 'route', 'edit', 'continue']);
         } else {
-            $buttons = json_encode(array('link_cancel', 'approve', 'reject', 'edit'));
+            $buttons = json_encode(['link_cancel', 'approve', 'reject', 'edit']);
         }
         return $buttons;
     }

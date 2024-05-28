@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HttpSource implements SourceInterface
 {
-
     /**
      * Http client client timeout
      */
@@ -35,7 +34,7 @@ class HttpSource implements SourceInterface
      * This should be 1 minor version below the current version (or the current minor version for the fixpack)
      * e.g. 12.2.0 for Sugar 12.3.0; 12.0.0 for Sugar 12.0.4
      */
-    public const DEFAULT_FALLBACK_VERSION = '13.0.0';
+    public const DEFAULT_FALLBACK_VERSION = '13.3.0';
 
     /**
      * Http client
@@ -51,8 +50,8 @@ class HttpSource implements SourceInterface
 
     /**
      * constructor.
-     * @throws \InvalidArgumentException
      * @param array $options
+     * @throws \InvalidArgumentException
      */
     public function __construct(array $options)
     {
@@ -113,7 +112,7 @@ class HttpSource implements SourceInterface
      * make request and return product definition array
      * @return string|null
      */
-    public function getDefinition():? string
+    public function getDefinition(): ?string
     {
         $raw = $this->makeRequest($this->getSugarVersion());
         if (is_null($raw)) {
@@ -137,7 +136,7 @@ class HttpSource implements SourceInterface
      * @param null|string $data
      * @return bool
      */
-    protected function validateResponse(?string $response) : bool
+    protected function validateResponse(?string $response): bool
     {
         if (empty($response)) {
             return false;
@@ -169,7 +168,7 @@ class HttpSource implements SourceInterface
      * @param string $version
      * @return string|null
      */
-    protected function makeRequest(string $version):? string
+    protected function makeRequest(string $version): ?string
     {
         try {
             $response = $this->client->request('GET', $version);
@@ -187,7 +186,7 @@ class HttpSource implements SourceInterface
             return null;
         }
 
-        return (string) $response->getBody();
+        return (string)$response->getBody();
     }
 
     /**

@@ -13,39 +13,37 @@
 
 global $current_user, $sugar_config;
 if (!is_admin($current_user)) {
-    sugar_die("Unauthorized access to administration.");
+    sugar_die('Unauthorized access to administration.');
 }
 
 
-
 echo getClassicModuleTitle(
-    "Administration",
-    array(
+    'Administration',
+    [
         "<a href='#Administration'>" . translate(
             'LBL_MODULE_NAME',
             'Administration'
-        ) . "</a>",
+        ) . '</a>',
         $mod_strings['LBL_MANAGE_LOCALE'],
-    ),
+    ],
     false
 );
 
 $cfg = new Configurator();
 $sugar_smarty = new Sugar_Smarty();
-$errors = array();
+$errors = [];
 
 ///////////////////////////////////////////////////////////////////////////////
 ////	HANDLE CHANGES
 if (isset($_REQUEST['process']) && $_REQUEST['process'] == 'true') {
-
     $previousDefaultLanguage = $sugar_config['default_language'];
 
     if (isset($_REQUEST['collation']) && !empty($_REQUEST['collation'])) {
         //kbrill Bug #14922
         if (array_key_exists(
-                'collation',
-                $sugar_config['dbconfigoption']
-            ) && $_REQUEST['collation'] != $sugar_config['dbconfigoption']['collation']
+            'collation',
+            $sugar_config['dbconfigoption']
+        ) && $_REQUEST['collation'] != $sugar_config['dbconfigoption']['collation']
         ) {
             $GLOBALS['db']->disconnect();
             $GLOBALS['db']->connect();
@@ -61,11 +59,11 @@ if (isset($_REQUEST['process']) && $_REQUEST['process'] == 'true') {
     }
 
     // Metadata sections that have to be refreshed on `Save`.
-    $refreshSections = array(
+    $refreshSections = [
         MetaDataManager::MM_CURRENCIES,
         MetaDataManager::MM_LABELS,
         MetaDataManager::MM_ORDEREDLABELS,
-    );
+    ];
     $mm = MetaDataManager::getManager();
     $mm->refreshSectionCache($refreshSections);
 
@@ -78,9 +76,8 @@ if (isset($_REQUEST['process']) && $_REQUEST['process'] == 'true') {
         </script>
     ";
 } else {
-
-///////////////////////////////////////////////////////////////////////////////
-////	DB COLLATION
+    ///////////////////////////////////////////////////////////////////////////////
+    ////	DB COLLATION
     $collationOptions = $GLOBALS['db']->getCollationList();
     if (!empty($collationOptions)) {
         if (!isset($sugar_config['dbconfigoption']['collation'])) {
@@ -94,20 +91,20 @@ if (isset($_REQUEST['process']) && $_REQUEST['process'] == 'true') {
             )
         );
     }
-////	END DB COLLATION
-///////////////////////////////////////////////////////////////////////////////
+    ////	END DB COLLATION
+    ///////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////////////
-////	PAGE OUTPUT
+    ///////////////////////////////////////////////////////////////////////////////
+    ////	PAGE OUTPUT
     $sugar_smarty->assign('MOD', $mod_strings);
     $sugar_smarty->assign('APP', $app_strings);
     $sugar_smarty->assign('APP_LIST', $app_list_strings);
     $sugar_smarty->assign('LANGUAGES', get_languages());
-    $sugar_smarty->assign("JAVASCRIPT", get_set_focus_js());
+    $sugar_smarty->assign('JAVASCRIPT', get_set_focus_js());
     $sugar_smarty->assign('config', $sugar_config);
     $sugar_smarty->assign('error', $errors);
     $sugar_smarty->assign(
-        "exportCharsets",
+        'exportCharsets',
         get_select_options_with_id($locale->getCharsetSelect(), $sugar_config['default_export_charset'])
     );
 
@@ -122,5 +119,4 @@ if (isset($_REQUEST['process']) && $_REQUEST['process'] == 'true') {
     $sugar_smarty->assign('getNameJs', $locale->getNameJs());
 
     $sugar_smarty->display('modules/Administration/Locale.tpl');
-
 }

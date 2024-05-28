@@ -14,11 +14,10 @@
 <div class="tabbable">
     <ul class="nav nav-tabs nav-tabs-indented">
         {{#each tabs}}
-            <li class="tab tab-badgeable {{#eq ../activeTab @index}}active{{/eq}}">
+            <li class="tab tab-badgeable {{#eq ../activeTab @index}}active{{/eq}}"
+                data-bs-toggle="tab" data-index="{{@index}}">
                 <a
                     class="ellipsis_inline"
-                    data-index="{{@index}}"
-                    data-toggle="tab"
                     data-original-title="{{str name module params}}"
                 >
                     {{#if icon}}

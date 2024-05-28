@@ -50,16 +50,6 @@ dl.list {
     color: @linkColor;
     text-decoration: none;
   }
-
-  .fa {
-    display: inline-block;
-    width: 1.25em;
-    text-align: center;
-  }
-
-  &:hover .fa {
-    text-decoration: none;
-  }
 }
 
 .main-content {
@@ -150,7 +140,7 @@ h2 + .row {
 
 /* For input sizes, make them display block */
 .docs-input-sizes select,
-  .docs-input-sizes input[type=text] {
+.docs-input-sizes input[type=text] {
   display: block;
   margin-bottom: 9px;
 }
@@ -339,10 +329,6 @@ hr.soften {
       opacity: 1;
       background-color: @navbarBackgroundAccent;
       color: @navbarBackground;
-
-      .fa {
-        opacity: 0.2;
-      }
     }
   }
 }
@@ -353,62 +339,13 @@ hr.soften {
   position: relative;
 }
 
-.fa-spin {
-  display: inline-block;
-  -moz-animation: spin 2s infinite linear;
-  -o-animation: spin 2s infinite linear;
-  -webkit-animation: spin 2s infinite linear;
-  animation: spin 2s infinite linear;
-}
-
-@-moz-keyframes spin {
-  0% { -moz-transform: rotate(0deg); }
-  100% { -moz-transform: rotate(359deg); }
-}
-
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(359deg); }
-}
-
-@-o-keyframes spin {
-  0% { -o-transform: rotate(0deg); }
-  100% { -o-transform: rotate(359deg); }
-}
-
-@-ms-keyframes spin {
-  0% { -ms-transform: rotate(0deg); }
-  100% { -ms-transform: rotate(359deg); }
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(359deg); }
-}
-
-@-moz-document url-prefix() {
-  .fa-spin { height: 0.9em; }
-}
-
 .noaccess,
 .erased {
   .label {
     a {
-      &,
-      &:hover {
-        .fa {
-          color: @white;
-          text-decoration: inherit;
-        }
-      }
-
       &:hover {
         text-decoration: underline;
       }
-    }
-
-    .fa {
-      width: auto;
     }
   }
 }
@@ -433,10 +370,9 @@ hr.soften {
   .dropdown-menu {
     overflow-x: hidden;
     overflow-y: auto;
-    top: auto;
-    right: 0;
     bottom: 34px;
-    left: inherit;
+    left: 7px;
+    top: auto;
   }
 }
 
@@ -480,7 +416,7 @@ hr.soften {
 .controls.has-refresh {
   &.btn-group-fit {
     &.controls-two {
-      padding-right: 93px;
+      padding-right: 6.125rem;
     }
 
     .btn-group {
@@ -489,8 +425,12 @@ hr.soften {
         padding: 7px;
       }
 
-      &.refresh {
-        right: 60px;
+      &.refresh-for-zero {
+        right: 0;
+      }
+
+      &.refresh-for-three {
+        right: 5.665rem;
       }
     }
   }
@@ -503,20 +443,6 @@ hr.soften {
 
   .popover-content {
     padding: 12px 12px 6px;
-  }
-
-  .fa.fa-times.feedback-close {
-    color: @gray80;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-
-  .fa.fa-times.feedback-close {
-    color: @gray80;
-    position: absolute;
-    top: 10px;
-    right: 10px;
   }
 
   .controls.span12 {
@@ -622,13 +548,6 @@ hr.soften {
       /* override */
       background-color: @gray60;
     }
-
-    /* additive */
-    :not(.disabled) {
-      .fa {
-        color: initial;
-      }
-    }
   }
 }
 
@@ -652,14 +571,14 @@ hr.soften {
 .about-page {
   &::before {
     content: "";
-    position: absolute;
+    background-color: var(--primary-content-background);
     background-image: @stackBackgroundAbout;
     background-repeat: no-repeat;
     background-size: 1000px;
     background-position: right top;
-    .w-full();
-    .h-full();
-    .bg-primary-content-background();
+    height: 100%;
+    position: absolute;
+    width: 100%;
   }
 }
 

@@ -48,7 +48,7 @@ class Repository
      */
     public function addBeanFields($table, $id, FieldList $fields)
     {
-        if (count($fields) === 0) {
+        if (safeCount($fields) === 0) {
             return;
         }
 
@@ -63,7 +63,7 @@ class Repository
         //Case II: update with the additional fields (i.e., $fields contains any field that are not in $old)
         $old = FieldList::fromArray($old);
         $diff = $fields->without($old);
-        if (count($diff) === 0) {
+        if (safeCount($diff) === 0) {
             return;
         }
 
@@ -80,10 +80,10 @@ class Repository
      */
     public function removeBeanFields($table, $id, FieldList $fields)
     {
-        if (count($fields) === 0) {
+        if (safeCount($fields) === 0) {
             return;
         }
-        
+
         $old = $this->getBeanFields($table, $id);
         if ($old === null) {
             return;
@@ -107,14 +107,14 @@ class Repository
      * @param string $id the id of the bean
      * @return array|null a list of erased fields, or null if no row is found.
      */
-    public function getBeanFields($table, $id) : ?array
+    public function getBeanFields($table, $id): ?array
     {
         $query = sprintf(
             'SELECT data FROM %s WHERE bean_id = ? AND table_name = ?',
             self::DB_TABLE
         );
 
-        $stmt = $this->conn->executeQuery($query, array($id, $table));
+        $stmt = $this->conn->executeQuery($query, [$id, $table]);
         $data = $stmt->fetchOne();
         if ($data === false) {
             return null;
@@ -135,7 +135,7 @@ class Repository
 
         $this->conn->insert(
             self::DB_TABLE,
-            array('bean_id' => $id, 'table_name' => $table, 'data' => $data)
+            ['bean_id' => $id, 'table_name' => $table, 'data' => $data]
         );
     }
 
@@ -152,8 +152,8 @@ class Repository
 
         $this->conn->update(
             self::DB_TABLE,
-            array('data' => $data),
-            array('bean_id' => $id, 'table_name' => $table)
+            ['data' => $data],
+            ['bean_id' => $id, 'table_name' => $table]
         );
     }
 
@@ -168,7 +168,7 @@ class Repository
     {
         $this->conn->delete(
             self::DB_TABLE,
-            array('bean_id' => $id, 'table_name' => $table)
+            ['bean_id' => $id, 'table_name' => $table]
         );
     }
 }

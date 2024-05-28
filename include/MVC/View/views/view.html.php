@@ -11,5 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class ViewHtml extends SugarView{
+class ViewHtml extends SugarView
+{
 }

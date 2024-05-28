@@ -10,26 +10,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$popupMeta = array(
+$popupMeta = [
     'moduleMain' => 'Manufacturer',
     'varName' => 'MANUFACTURER',
     'className' => 'Manufacturer',
     'orderBy' => 'manufacturers.name',
-    'whereClauses' =>
-        array('name' => 'manufacturers.name'),
-    'listviewdefs' => array(
-        'NAME' => array(
+    'whereClauses' => ['name' => 'manufacturers.name'],
+    'listviewdefs' => [
+        'NAME' => [
             'width' => '50',
             'label' => 'LBL_NAME',
             'link' => true,
-            'default' => true),
-        'STATUS' => array(
+            'default' => true],
+        'STATUS' => [
             'width' => '50',
             'label' => 'LBL_STATUS',
-            'default' => true),
-    ),
-    'searchdefs'   => array(
-        'name'
-    )
-);
-?>
+            'default' => true],
+    ],
+    'searchdefs' => [
+        'name',
+    ],
+];

@@ -9,15 +9,14 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-function getDocumentsExternalApiDropDown($focus = null, $name = null, $value = null, $view = null) {
+function getDocumentsExternalApiDropDown($focus = null, $name = null, $value = null, $view = null)
+{
 
     $apiList = ExternalAPIFactory::getModuleDropDown('Documents');
 
-    $apiList = array_merge(array('Sugar'=>$GLOBALS['app_list_strings']['eapm_list']['Sugar']),$apiList);
-    if(!empty($value) && empty($apiList[$value])){
+    $apiList = array_merge(['Sugar' => $GLOBALS['app_list_strings']['eapm_list']['Sugar']], $apiList);
+    if (!empty($value) && empty($apiList[$value])) {
         $apiList[$value] = $value;
     }
     return $apiList;
-
 }
- 

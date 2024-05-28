@@ -8,15 +8,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-const Component = require('view/component');
+const Component = require('./component');
 
 /**
  * Base class for alerts.
  *
  * Extend this class to provide custom alert behavior:
  * ```
- * const AlertView = require('view/alert-view');
- * const TemplateManager = require('view/template');
+ * const AlertView = require('./alert-view');
+ * const TemplateManager = require('./template');
  * let PortalAlertView = AlertView.extend({
  *    initialize: function(options) {
  *       AlertView.prototype.initialize.call(this, options);

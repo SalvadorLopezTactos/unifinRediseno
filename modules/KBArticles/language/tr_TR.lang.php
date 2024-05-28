@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Bilgi Tabanı',
     'LBL_MODULE_NAME_SINGULAR' => 'Bilgi Tabanı Makalesi',
     'LBL_MODULE_TITLE' => 'Bilgi Tabanı Makalesi',
     'LBL_REVISIONS_SUBPANEL_TITLE' => 'Revizyonlar',
-);
+];

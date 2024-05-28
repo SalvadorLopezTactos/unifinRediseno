@@ -11,7 +11,7 @@
 /**
  * @class View.Views.Base.PipelineRecordlistContentView
  * @alias SUGAR.App.view.views.BasePipelineRecordlistContentView
- * @extends View.Views.Base.PipelineRecordlistContentView
+ * @extends View.View
  */
 ({
     className: 'my-pipeline-content',
@@ -45,11 +45,51 @@
 
     totalRecords: 0,
 
+    sideDrawerGap: 0,
+
+    /**
+     * Sorting state of content data
+     * If field property is empty sorting will be by default
+     */
+    orderBy: {
+        field: '',
+        direction: 'desc'
+    },
+
     /**
      * Cached fieldnames to retrieve for tile view
      * This does not include fields from record view
      */
     _fieldsToFetch: [],
+
+    /**
+     * Coefficient for determinate the scroll position to start to load the next batch of Records
+     */
+    nextRequestReady: 0.8,
+
+    /**
+     * If this property is true, any other request for getting additional column data will be blocked
+     */
+    _isFetchingColumn: false,
+
+    /**
+     * Scroll position for columns after data fetch
+     */
+    _columnScrollTop: [],
+
+    /**
+     * if enabled on the admin page, displays Count in column header next to Tile Header Field
+     */
+    isShowCount: false,
+    /**
+     * if enabled on the admin page, displays Total sum in column header next to Tile Header Field
+     */
+    isShowTotal: false,
+
+    /**
+     * Fetching column data
+     */
+    _columnDataFetching: [],
 
     /**
      * Initialize various pipelineConfig variables and set action listeners
@@ -69,6 +109,25 @@
         this.pipelineFilters = [];
         this.hiddenHeaderValues = [];
         this.action = 'list';
+
+        this.orderByLastStateKey = app.user.lastState.buildKey('order-by', 'record-list', this.module);
+        this.orderBy = this._initOrderBy();
+    },
+
+    /**
+     * @private
+     * @return {Object}
+     */
+    _initOrderBy: function() {
+        let lastStateOrderBy = app.user.lastState.get(this.orderByLastStateKey) || this.orderBy;
+
+        if (!_.isEmpty(lastStateOrderBy.field) &&
+            !app.acl.hasAccess('read', this.module, app.user.get('id'), lastStateOrderBy.field)
+        ) {
+            lastStateOrderBy = this.orderBy;
+        }
+
+        return lastStateOrderBy;
     },
 
     /**
@@ -77,10 +136,12 @@
     bindDataChange: function() {
         this._super('bindDataChange');
 
-        this.context.on('pipeline:recordlist:model:created', this.handleTileViewCreate, this);
-        this.context.on('pipeline:recordlist:filter:changed', this.buildFilters, this);
-        this.context.on('button:delete_button:click', this.deleteRecord, this);
-        this.context.on('pipeline:recordlist:resizeContent', this.resizeContainer, this);
+        this.listenTo(this.context, 'pipeline:recordlist:model:created', this.handleTileViewCreate);
+        this.listenTo(this.context, 'pipeline:recordlist:filter:changed', this.buildFilters);
+        this.listenTo(this.context, 'button:delete_button:click', this.deleteRecord);
+        this.listenTo(this.context, 'side-drawer:before:open', this.handleBeforeSideDrawerOpens);
+        this.listenTo(this.context, 'side-drawer:start:close', this.handleSideDrawerCloses);
+
         this.resizeContainerHandler = _.bind(this.resizeContainer, this);
         window.addEventListener('resize', this.resizeContainerHandler);
     },
@@ -94,6 +155,64 @@
     },
 
     /**
+     * Handle before open side drawer
+     * @param {Object} $el Focus Drawer icon been clicked
+     */
+    handleBeforeSideDrawerOpens: function($el) {
+        let sideDrawer = app.sideDrawer;
+        let pipelineContent = $el.closest('.my-pipeline-content');
+
+        if (pipelineContent.length) {
+            let $table = $el.closest('table');
+            let tableResponsive = $table.closest('.table-responsive');
+            if (tableResponsive.length) {
+                tableResponsive
+                    .removeClass('no-scroll')
+                    .css('width', tableResponsive.width());
+            }
+
+            this._toggleSideDrawerColumnFocusStyling(true);
+
+            let $td = $el.closest('td');
+            let currentColumnIndex = $td.index();
+            let currentRow = $el.closest('.tile');
+            let currentRowIndex = currentRow.closest('li').index();
+            this.setCurrentColumn(currentColumnIndex, currentRowIndex, sideDrawer.openingDuration);
+        }
+    },
+
+    /**
+     * Close side drawer with animation
+     */
+    handleSideDrawerCloses: function() {
+        let sideDrawer = app.sideDrawer;
+        let $pipelineContent = this.$('#my-pipeline-content');
+        let $tableResponsiveDiv = $pipelineContent.find('.table-responsive');
+        let $tr = $pipelineContent.find('table tr');
+        let $arrowHolder = $tr.find('.arrowholder');
+
+        // Unset the focused column and tile
+        $tr.find('.blue-border').removeClass('blue-border');
+        $tr.find('td.current-column').removeClass('current-column');
+
+        // Animate the columns by translating them back to their original positions
+        let originalTransition = $tr.css('transition');
+        $tr.css('transition', `transform ${sideDrawer.closingDuration}ms ease-in-out`);
+        $tr.css('transform', ``);
+        $tableResponsiveDiv.css('width', 'auto');
+
+        // After the animation is complete, resize and restore horizontal scrolling
+        setTimeout(() => {
+            $pipelineContent.css('overflow-x', 'auto');
+            $arrowHolder.css('visibility', 'visible');
+            $tr.css('transition', originalTransition);
+
+            this.resizeContainer();
+            this._toggleSideDrawerColumnFocusStyling(false);
+        }, sideDrawer.closingDuration);
+    },
+
+    /**
      * Builds metadata for each tile in the recordlist view
      */
     buildTileMeta: function() {
@@ -103,7 +222,11 @@
 
         _.each(tileDef.panels, function(panel) {
             if (panel.is_header) {
-                panel.fields = [fieldMetadata[this.pipelineConfig.tile_header[this.module]]];
+                let headerField =  this.pipelineConfig.tile_header[this.module];
+                if (fieldMetadata[headerField]) {
+                    fieldMetadata[headerField].link = true;
+                }
+                panel.fields = [fieldMetadata[headerField]];
             } else {
                 var tileBodyField = this.pipelineConfig.tile_body_fields[this.module];
                 _.each(tileBodyField, function(tileBody) {
@@ -183,17 +306,24 @@
     _setRecordsToDisplay: function(headerField, options) {
         // Get all the whitelisted column names for current module
         if (!_.isUndefined(this.pipelineConfig.available_columns) &&
-            !_.isUndefined(this.pipelineConfig.available_columns[this.module])) {
-            var items = this.pipelineConfig.available_columns[this.module][headerField];
+            this.pipelineConfig.available_columns[this.module]) {
+            let items = this.pipelineConfig.available_columns[this.module][headerField] || [];
             var index = 0;
             _.each(items, function(item, key) {
                 index = index <= 11 ? index : index % 12;
-                if (!_.isEmpty(options[key]) && (_.indexOf(this.hiddenHeaderValues, item) === -1)) {
+                if ((!_.isEmpty(options[key]) || _.includes(_.values(options), key)) &&
+                    (_.indexOf(this.hiddenHeaderValues, item) === -1)) {
                     this.recordsToDisplay.push({
-                        'headerName': options[key],
+                        'headerName': !_.isEmpty(options[key]) ? options[key] : item,
                         'headerKey': key,
                         'records': [],
                         'colorIndex': index,
+                        'offset': 0,
+                        'headerCount': 0,
+                        'headerTotal': 0,
+                        'headerTotalPreferred': 0,
+                        'oneDigitBadge': true,
+                        'headerID': this.formatStringID(key),
                     });
                     index++;
                 }
@@ -209,6 +339,12 @@
                         'headerKey': key,
                         'records': [],
                         'colorIndex': index,
+                        'offset': 0,
+                        'headerCount': 0,
+                        'headerTotal': 0,
+                        'headerTotalPreferred': 0,
+                        'oneDigitBadge': true,
+                        'headerID': this.formatStringID(key),
                     });
                 }
             }, this);
@@ -263,6 +399,11 @@
                 'headerKey': currDate.format('MMMM YYYY'),
                 'records': [],
                 'colorIndex': 0,
+                'headerTotal': 0,
+                'headerTotalPreferred': 0,
+                'headerCount': 0,
+                'oneDigitBadge': true,
+                'headerID': this.formatStringID(currDate.format('MMMM YYYY')),
             });
 
             for (var i = 1; i < this.monthsToDisplay; i++) {
@@ -272,6 +413,11 @@
                     'headerKey': currDate.format('MMMM YYYY'),
                     'records': [],
                     'colorIndex': i,
+                    'headerTotal': 0,
+                    'headerTotalPreferred': 0,
+                    'headerCount': 0,
+                    'oneDigitBadge': true,
+                    'headerID': this.formatStringID(currDate.format('MMMM YYYY')),
                 });
             }
             this.headerField = 'date_closed';
@@ -322,7 +468,10 @@
     postRender: function() {
         this.resizeContainer();
         this.buildDraggable();
-        this.bindScroll();
+        this.bindColumnScroll();
+        this.blockCurrentColumnSort();
+        //checks and displays if down arrow icons should be in columns
+        this.displayDownArrows();
     },
 
     /**
@@ -413,7 +562,17 @@
                     if (field === undefined) {
                         return;
                     }
-                    return _.union(_.pluck(field.fields, 'name'), _.flatten(field.related_fields), [field.name]);
+
+                    return _.union(
+                        // The name of this field itself
+                        [field.name],
+                        // The name of any relate ID field
+                        [field.id_name],
+                        // The names of any sub-fields
+                        _.pluck(field.fields, 'name'),
+                        // The names of any related fields
+                        _.flatten(field.related_fields)
+                    );
                 })
             );
 
@@ -458,9 +617,12 @@
                 filter: filter,
                 fields: fields,
                 'max_num': this.resultsPerPageColumn,
-                'offset': this.offset,
-                'order_by': {date_modified: 'DESC'}
+                'offset': this.offset
             };
+
+            if (!_.isEmpty(this.orderBy.field)) {
+                getArgs.order_by = `${this.orderBy.field}:${this.orderBy.direction}`;
+            }
 
             var req = {
                 'url': app.api.buildURL(this.module, null, null, getArgs).replace('rest/', ''),
@@ -501,6 +663,15 @@
                     records.add(augmentedContents);
                     column.records = records;
                     self.totalRecords = self.totalRecords + records.length;
+                    column.offset = contents.next_offset;
+                    self.isShowCount = this.pipelineConfig.show_column_count[this.module];
+                    if (self.isShowCount) {
+                        self.displayColumnCount(self, column);
+                    }
+                    self.isShowTotal = this.pipelineConfig.show_column_total[this.module];
+                    if (self.isShowTotal) {
+                        self.displayColumnTotal(self, column);
+                    }
 
                     if (contents.next_offset > -1 && !self.moreData) {
                         self.moreData = true;
@@ -517,13 +688,77 @@
         });
     },
 
+    /**
+     * Stabilizes the height and width of critical page elements
+     */
     resizeContainer: function() {
-        var $parent = this.$el.parents('.main-pane');
-        var $searchFilter = $parent.find('.search-filter');
-        var height = $parent.height() - $searchFilter.height();
+        if (this.disposed) {
+            return;
+        }
 
-        this.$el.height(height + 'px');
-        this.$('.pipeline-column').height((height - 150) + 'px');
+        let $kanbanCol = $('.kanban-col');
+        if ($kanbanCol.length) {
+            let $tResponsive = $kanbanCol.closest('.table-responsive');
+            let $pipelineContent = $('.my-pipeline-content');
+            let arrow = $('.arrowholder');
+            let kanbanColMargin =
+                parseInt($kanbanCol.css('marginLeft')) + parseInt($kanbanCol.css('marginRight'));
+            let kanbanColPadding = $kanbanCol.innerWidth() - $kanbanCol.width();
+            let tableResponsivePadding = $tResponsive.innerWidth() - $tResponsive.width();
+            let isHorizontalScrollLimit =
+                $pipelineContent.width() + $pipelineContent.scrollLeft() >= _.first($pipelineContent).scrollWidth;
+            $tResponsive.toggleClass('no-scroll', $tResponsive.get(0).scrollWidth == $tResponsive.get(0).offsetWidth);
+
+            let arrowWidth = 0;
+
+            if (arrow.length) {
+                arrowWidth = arrow.width() * arrow.length;
+            }
+
+            //track the horizontal scroll position
+            let currentHorizScroll = $pipelineContent.scrollLeft();
+            $pipelineContent.children().hide();
+            let pipelineContentWidth = $pipelineContent.width();
+            $pipelineContent.children().show();
+            //restore the saved scroll position
+            $pipelineContent.scrollLeft(currentHorizScroll);
+
+            let $originalTitle = $kanbanCol.find('.original-title');
+            $originalTitle.hide();
+
+            let contentWidthForColumns = pipelineContentWidth - arrowWidth - tableResponsivePadding;
+            let kanbanColCalculatedWidth =
+                (contentWidthForColumns / $kanbanCol.length) - kanbanColMargin - kanbanColPadding;
+            $kanbanCol.css('width', kanbanColCalculatedWidth);
+
+            if (isHorizontalScrollLimit && this._isFetchingColumn) {
+                $pipelineContent.scrollLeft($pipelineContent.width());
+            }
+            $originalTitle.show();
+
+            let $ul = $kanbanCol.find('ul');
+            $ul.hide();
+
+            let $mainPane = this.$el.closest('.main-pane');
+            let $pipelineBlock = this.$el.closest('.pipeline-refresh-btn');
+            let height = $mainPane.height() - $pipelineBlock.height();
+            let tbl = $kanbanCol.closest('.table');
+            tbl.height(tbl.height() + height);
+            $kanbanCol.height(tbl.height() - 30);
+
+            let $kanbanColHeader = $kanbanCol.find('.kanban-col-header');
+            $ul.height($kanbanCol.height() - $kanbanColHeader.height() - 50).show();
+            $('.column-fade-top, .column-fade-bottom').width($ul.width());
+        }
+        this.displayDownArrows();
+
+        // When the container is resized, re-scroll to the focused column if needed
+        let currentColumn = $kanbanCol.closest('.current-column');
+        if (currentColumn.length) {
+            let columnIndex = currentColumn.index();
+            let columnRow = currentColumn.find('div.blue-border').closest('li').index();
+            this.setCurrentColumn(columnIndex, columnRow);
+        }
     },
 
     /**
@@ -537,16 +772,64 @@
 
         this.$('.column').sortable({
             connectWith: '.column',
+            classes: {
+                'ui-sortable-helper': 'pipeline rounded-lg'
+            },
             handle: '.pipeline-tile',
             cancel: '.portlet-toggle',
-            placeholder: 'portlet-placeholder ui-corner-all',
+            placeholder: 'portlet-placeholder ui-corner-all mb-4 rounded-lg',
+            appendTo: 'body',
+            helper: 'clone',
+            start: _.bind(function(event, ui) {
+                ui.item.closest('.kanban-col').addClass('start-column');
+                ui.item.show();
+                ui.placeholder.height(ui.item.height());
+
+                // Create a placeholder clone. This is so that we can still
+                // show a placeholder in the original column while dragging
+                // over other columns
+                ui.placeholder.clone()
+                    .addClass('placeholder-clone')
+                    .height(ui.item.height())
+                    .hide()
+                    .insertAfter(ui.item);
+                ui.item.hide();
+            }, this),
+            update: _.bind(function() {
+                $('.kanban-col').removeClass('start-column');
+            }, this),
+            over: _.bind(function(event, ui) {
+                var eventTarget = $(event.target);
+                let kanbanCol = eventTarget.closest('.kanban-col');
+                if (!kanbanCol.hasClass('start-column')) {
+                    kanbanCol.addClass('target-column');
+                }
+            }, this),
+            out: _.bind(function(event, ui) {
+                var eventTarget = $(event.target);
+                eventTarget.closest('.kanban-col').removeClass('target-column');
+            }, this),
+            change: (event, ui) => {
+                // If hovering over the original column, move the actual
+                // placeholder there so that on drop the ordering remains
+                if (ui.item.parent().is(ui.placeholder.parent())) {
+                    ui.item.parent().find('.placeholder-clone').hide();
+                    ui.placeholder.insertAfter(ui.item);
+                } else {
+                    ui.item.parent().find('.placeholder-clone').show();
+                }
+            },
+            stop: (event, ui) => {
+                // After dropping, remove the cloned placeholder item
+                ui.item.parent().find('.placeholder-clone').remove();
+            },
             receive: _.bind(function(event, ui) {
                 var modelId = this.$(ui.item).data('modelid');
                 var oldCollection = _.findWhere(this.recordsToDisplay, {
-                    headerKey: this.$(ui.sender).attr('data-column-name')
+                    headerKey: this.$(ui.sender).attr('data-column-key')
                 });
                 var newCollection = _.findWhere(this.recordsToDisplay, {
-                    headerKey: this.$(ui.item).parent('ul').attr('data-column-name')
+                    headerKey: this.$(ui.item).parent('ul').attr('data-column-key')
                 });
                 var model = oldCollection.records.get(modelId);
                 if (!app.acl.hasAccessToModel('edit', model)) {
@@ -662,7 +945,7 @@
      * @private
      */
     _setNewModelValues: function(model, ui) {
-        model.set(this.headerField, this.$(ui.item).parent('ul').attr('data-column-name'));
+        model.set(this.headerField, this.$(ui.item).parent('ul').attr('data-column-key'));
     },
 
     /**
@@ -793,52 +1076,29 @@
     },
 
     /**
-     * Action listener when the delete button is clicked on the tile
-     * Asks for user confirmation and delete the tile record from the view
-     * @param {Object} model model object of the tile to be deleted
-     */
-    deleteRecord: function(model) {
-        var collection = model.collection;
-        var self = this;
-
-        app.alert.show('delete_confirmation', {
-            level: 'confirmation',
-            messages: self.getDeleteMessages(model).confirmation,
-            onConfirm: function() {
-                model.destroy({
-                    showAlerts: {'process': true, 'success': {messages: self.getDeleteMessages(model).success}},
-                    success: function(data) {
-                        self.totalRecords = self.totalRecords - 1;
-                        self._super('render');
-                        self.postRender();
-                    }
-                });
-            },
-            onCancel: function() {
-                return;
-            }
-        });
-    },
-
-    /**
-     * Gets called when a tile record is successfully deleted
-     * Displays the delete confirmation and success message
-     * @param {Object} model model object of the deleted tile
-     */
-    getDeleteMessages: function(model) {
-        var messages = {};
-        var name = Handlebars.Utils.escapeExpression(app.utils.getRecordName(model)).trim();
-        var context = app.lang.getModuleName(model.module).toLowerCase() + ' ' + name;
-        messages.confirmation = app.utils.formatString(app.lang.get('NTC_DELETE_CONFIRMATION_FORMATTED'), [context]);
-        messages.success = app.utils.formatString(app.lang.get('NTC_DELETE_SUCCESS'), [context]);
-        return messages;
-    },
-
-    /**
      * Binds scroll to the recordlist pane
      */
     bindScroll: function() {
         this.$el.on('scroll', _.bind(this.listScrolled, this));
+    },
+
+    /**
+     * Binds scroll to the record list panes for the all columns
+     */
+    bindColumnScroll: function() {
+        this.$('ul').on('scroll', _.bind(this.listColumnScrolled, this));
+    },
+
+    /**
+     * Block sorting inside the current column
+     */
+    blockCurrentColumnSort: function() {
+        $('ul.column').mouseenter(function() {
+            $(this).sortable('option', 'items', '');
+        });
+        $('ul.column').mouseleave(function() {
+            $(this).sortable('option', 'items', '> *');
+        });
     },
 
     /**
@@ -853,6 +1113,250 @@
         if (isAtBottom && this.moreData) {
             this.buildRecordsList();
         }
+    },
+
+    /**
+     * Listens to the scroll event on the list
+     * Checks and displays if down or/and up arrow icons should be in column
+     * Checks and displays if more data is present in the column
+     * @param event
+     */
+    listColumnScrolled: function(event) {
+        let $elem = $(event.currentTarget);
+        let $tdParent = $elem.closest('td');
+
+        let hideCaretUp = $elem.scrollTop() <= 0;
+        $tdParent.find('.sicon-caret-up').toggleClass('invisible', hideCaretUp);
+
+        let columnFadeTop = $tdParent.find('.column-fade-top');
+        if (columnFadeTop) {
+            columnFadeTop.toggleClass('invisible', hideCaretUp);
+        }
+
+        let hideCaretDown = (_.first($elem).scrollHeight - $elem.scrollTop()) <= Math.ceil($elem.outerHeight());
+        $tdParent.find('.sicon-caret-down').toggleClass('invisible', hideCaretDown);
+
+        let columnFadeBottom = $tdParent.find('.column-fade-bottom');
+        if (columnFadeBottom) {
+            columnFadeBottom.toggleClass('invisible', hideCaretDown);
+        }
+
+        let isNextRecords = ((_.first($elem).scrollHeight - $elem.scrollTop()) * this.nextRequestReady) <=
+            $elem.outerHeight();
+
+        if (isNextRecords && !this._isFetchingColumn) {
+            //blocks any other request for getting additional column data
+            this._isFetchingColumn = true;
+            this.getColumnRecords($elem.attr('data-column-key'));
+        }
+
+        this.saveColumnScrollTop();
+    },
+
+    /**
+     * Uses fields to get the requests for the column data to be fetched
+     * Displays the loading message as we’re waiting for the next batch of Records to load
+     * @param {string} headerKey
+     */
+    getColumnRecords: function(headerKey) {
+        this._columnDataFetching.push(headerKey);
+        let fields = this.getFieldsForFetch();
+        let requests = this.buildColumnRequests(fields, headerKey);
+
+        if (requests.length) {
+            app.alert.show('pipeline-records-loading', {
+                level: 'process'
+            });
+            this.saveColumnScrollTop();
+            this.fetchColumnData(requests, headerKey);
+        } else {
+            //allows other requests for getting additional column data
+            this._isFetchingColumn = false;
+        }
+    },
+
+    /**
+     * Saves current positions for every column scrollbar
+     */
+    saveColumnScrollTop: function() {
+        let columns = this.$('ul');
+        this._columnScrollTop = [];
+
+        _.each(columns, function(column) {
+            let headerKey = $(column).attr('data-column-key');
+            this._columnScrollTop[headerKey] = {
+                scrollTop: $(column).scrollTop(),
+            };
+        }, this);
+    },
+
+    /**
+     * Uses fields, filters and other properties to build requests for the data to be fetched
+     * @param {Array} fields to be displayed on each tile
+     * @param {string} headerKey
+     * @return {Array} an array of request objects with dataType, method and url
+     */
+    buildColumnRequests: function(fields, headerKey) {
+        let requests = [];
+
+        _.each(this.recordsToDisplay, function(column) {
+            if (column.offset > -1 && column.headerKey === headerKey) {
+                let filter = this.getFilters(column);
+
+                let getArgs = {
+                    filter: filter,
+                    fields: fields,
+                    max_num: column.offset >= this.resultsPerPageColumn ? this.resultsPerPageColumn :
+                        (this.resultsPerPageColumn * 2),
+                    offset: column.offset
+                };
+
+                if (!_.isEmpty(this.orderBy.field)) {
+                    getArgs.order_by = `${this.orderBy.field}:${this.orderBy.direction}`;
+                }
+
+                let req = {
+                    'url': app.api.buildURL(this.module, null, null, getArgs).replace('rest/', ''),
+                    'method': 'GET',
+                    'dataType': 'json'
+                };
+
+                requests.push(req);
+                return requests;
+            }
+        }, this);
+
+        return requests;
+    },
+
+    /**
+     * Makes the api call to get the data for the tiles
+     * @param {Array} requests an array of request objects
+     * @param {string} headerKey
+     */
+    fetchColumnData: function(requests, headerKey) {
+        let self = this;
+        app.api.call('create', app.api.buildURL(null, 'bulk'), {requests}, {
+            success: function(dataColumns) {
+                _.each(self.recordsToDisplay, function(column) {
+                    if (column.headerKey === headerKey) {
+                        let records = app.data.createBeanCollection(self.module);
+
+                        if (!_.isEmpty(column.records.models)) {
+                            records = column.records;
+                        }
+
+                        let contents = _.first(dataColumns).contents;
+                        let augmentedContents = self.addTileVisualIndicator(contents.records);
+                        records.add(augmentedContents);
+                        column.records = records;
+                        column.offset = contents.next_offset;
+                        let index = self._columnDataFetching.indexOf(headerKey);
+                        self._columnDataFetching.splice(index, 1);
+                    }
+                }, self);
+
+                let currentColumn = $('.table .current-column');
+                let currentColumnIndex = currentColumn.index();
+                let currentRowIndex = currentColumn.find('.blue-border').closest('li').index();
+
+                self._super('render');
+                self.postRender();
+
+                if (currentColumn.length !== 0) {
+                    self.setCurrentColumn(currentColumnIndex, currentRowIndex);
+                }
+
+                if (app.sideDrawer && app.sideDrawer.isOpen()) {
+                    app.sideDrawer.showPreviousNextBtnGroup();
+                }
+            },
+            complete: function() {
+                app.alert.dismiss('pipeline-records-loading');
+                //allows other requests for getting additional column data
+                self._isFetchingColumn = false;
+            }
+        });
+    },
+
+    /**
+     * Sets current column and tile for side drawer
+     * @param {integer} column
+     * @param {integer} row
+     * @param {integer} animationDuration
+     */
+    setCurrentColumn: function(column, row, animationDuration = 0) {
+        let $pipelineContent = this.$('#my-pipeline-content');
+        let $tr = $pipelineContent.find('table tr');
+        let $arrowHolder = $pipelineContent.find('.arrowholder');
+        let $td = $tr.find('td').eq(column);
+        let $tile = $td.find('li').eq(row).find('.tile');
+
+        // Prevent the user from horizontally scrolling while a column is focused
+        $pipelineContent.css('overflow-x', 'hidden');
+        $arrowHolder.css('visibility', 'hidden');
+
+        // Set the new focused column
+        $tr.find('td.current-column').removeClass('current-column');
+        $td.addClass('current-column');
+
+        // Set the new focused tile and scroll it into view in the column if necessary
+        $tr.find('.blue-border').removeClass('blue-border');
+        $tile.addClass('blue-border');
+        let bounding = _.first($tile).getBoundingClientRect();
+        if (bounding.top < $td.find('ul').offset().top) {
+            _.first($tile).scrollIntoView(true);
+        }
+        if (bounding.bottom > (window.innerHeight || document.documentElement.clientHeight)) {
+            _.first($tile).scrollIntoView(false);
+        }
+
+        // Animate the columns by translating them to the left based on column and scroll positions
+        let scrollOffset = $pipelineContent.scrollLeft();
+        let scrollPx = (($td.position().left + 6) - scrollOffset);
+        let originalTransition = $tr.css('transition');
+        $tr.css('transition', `transform ${animationDuration}ms ease-in-out`);
+        $tr.css('transform', `translate(${(-scrollPx * 0.0625)}rem)`);
+        setTimeout(() => {
+            $tr.css('transition', originalTransition);
+        }, animationDuration);
+    },
+
+    /**
+     * Checks and displays if down arrow icons should be in columns and
+     * positioning the scrollbar for every column after fetching the data
+     */
+    displayDownArrows: function() {
+        let columns = this.$('ul');
+
+        _.each(columns, function(column) {
+            let headerKey = $(column).attr('data-column-key');
+
+            let record = _.first(_.filter(this.recordsToDisplay, function(record) {
+                return record.headerKey === headerKey;
+            }));
+
+            if (!_.isUndefined(this._columnScrollTop[headerKey])) {
+                if (!_.isUndefined(this._columnScrollTop[headerKey].offset)) {
+                    _.first($(column)).children[this._columnScrollTop[headerKey].offset - 3].scrollIntoView(true);
+                } else {
+                    $(column).scrollTop(this._columnScrollTop[headerKey].scrollTop);
+                }
+            }
+
+            if ((_.first($(column)).scrollHeight - $(column).scrollTop()) > Math.ceil($(column).outerHeight())) {
+                let $tdParent = $(column).closest('td');
+                $tdParent.find('.sicon-caret-down').removeClass('invisible');
+
+                let columnFadeBottom = $tdParent.find('.column-fade-bottom');
+                if (columnFadeBottom) {
+                    columnFadeBottom.removeClass('invisible');
+                }
+            } else if (record.offset && !_.includes(this._columnDataFetching, headerKey)) {
+                this._isFetchingColumn = true;
+                this.getColumnRecords(headerKey);
+            }
+        }, this);
     },
 
     /**
@@ -965,16 +1469,175 @@
     /**
      * @inheritdoc
      */
+    sortData: function() {
+        app.user.lastState.set(this.orderByLastStateKey, this.orderBy);
+
+        this.offset = 0;
+        this.loadData();
+    },
+
+    /**
+     * @param {string} module
+     * @return {Array}
+     */
+    getSortableFields: function() {
+        let sortableFields = [];
+        let listViewDefs = app.metadata.getView(this.module, 'list');
+
+        _.each(listViewDefs.panels, function(panel) {
+            _.each(panel.fields, function(field) {
+                if (app.utils.isSortable(this.module, field.name)) {
+                    sortableFields.push(field);
+                }
+            }, this);
+        }, this);
+
+        return sortableFields;
+    },
+
+    /**
+     * Adds the count in the column header for spesific column only
+     * @param {Object} self js context the function that calls
+     * @param {Object} column object with column data
+     */
+    displayColumnCount: function(self, column) {
+        let filter = self.getFilters(column);
+        let url = app.api.buildURL(self.module, 'count', {}, {filter});
+        app.api.call('read', url, null, {
+            success: function(data) {
+                column.oneDigitBadge = data.record_count < 10;
+                column.headerCount = self.formatBadgeData(data.record_count);
+                let tpl = app.template.getView('pipeline-recordlist-content.count');
+                self.$el.find('#original-badge-' + column.headerID).remove();
+                self.$el.find('#original-title-' + column.headerID).append(
+                    tpl({
+                        isShowCount: self.isShowCount,
+                        colorIndex: column.colorIndex,
+                        headerID: column.headerID,
+                        headerCount: column.headerCount,
+                        oneDigitBadge: column.oneDigitBadge,
+                    })
+                );
+            }
+        });
+    },
+
+    /**
+     * Display column sum
+     * @param {Object} self is the 'this' object for the model.
+     * @param {Object} column object with column data
+     */
+    displayColumnTotal: function(self, column) {
+        const params = {
+            filter: self.getFilters(column),
+            sumField: self.pipelineConfig.total_field[self.module],
+        };
+        const url = app.api.buildURL(self.module, 'total', {}, params);
+        const userPreferredCurrencyId = app.user.getPreference('currency_id');
+        const BaseCurrencyId = app.currency.getBaseCurrencyId();
+        app.api.call('read', url, null, {
+            success: function(data) {
+                if (_.isEmpty(data)) {
+                    return;
+                }
+                if (userPreferredCurrencyId !== BaseCurrencyId &&
+                    app.user.getPreference('currency_show_preferred') &&
+                    data.field_type === 'currency'
+                ) {
+                    column.userPreferredCurrencyId = userPreferredCurrencyId;
+                }
+                column.isCurrency = (data.field_type === 'currency');
+
+                if (column.isCurrency) {
+                    let dataSum = data.sum_by_field || 0;
+                    let decimal = (dataSum) ? 2 : 0;
+                    column.headerTotal = app.currency.formatAmountLocale(dataSum, BaseCurrencyId, decimal);
+
+                    if (column.userPreferredCurrencyId) {
+                        let headerTotalPreferred = app.currency.convertAmount(
+                            dataSum, BaseCurrencyId, userPreferredCurrencyId
+                        );
+                        column.headerTotalPreferred = app.currency.formatAmountLocale(
+                            headerTotalPreferred, userPreferredCurrencyId, decimal
+                        );
+                    }
+                } else {
+                    column.headerTotal = data.sum_by_field;
+                }
+                let tpl = app.template.getView('pipeline-recordlist-content.total');
+                self.$el.find('#total-kanban-' + column.headerID).remove();
+                self.$el.find('#original-sum-title-' + column.headerID).append(
+                    tpl({
+                        colorIndex: column.colorIndex,
+                        headerTotal: column.headerTotal,
+                        isCurrency: column.isCurrency,
+                        isSum: column.isSum,
+                        headerID: column.headerID,
+                        isShowTotal: self.isShowTotal,
+                        userPreferredCurrencyId: column.userPreferredCurrencyId,
+                        headerTotalPreferred: column.headerTotalPreferred,
+                    })
+                );
+
+            }
+        });
+    },
+
+    /**
+     * Rounding and cutting badges data for output
+     *
+     * @param {number} value
+     * @return {mixed}
+     */
+    formatBadgeData: function(value) {
+        if (!_.isNumber(value)) {
+            value = 0;
+        }
+
+        if (value <= 999) {
+            return value;
+        }
+
+        return '999+';
+    },
+
+    /**
+     * Replace special characters in a string with underscore
+     *
+     * @param {string} value
+     * @return {string}
+     */
+    formatStringID: function(value) {
+        return value.replace(/[&\/\\#, +()$~%.'":*?<>{}]/g, '_');
+    },
+
+    /**
+     * Alters the styling of the side drawer to work on Tile View correctly
+     *
+     * @param {bool} toggle true to enable TV side drawer styling; false to return it to default
+     * @private
+     */
+    _toggleSideDrawerColumnFocusStyling: function(toggle) {
+        if (app.sideDrawer) {
+            app.sideDrawer.$el.toggleClass('pipeline', toggle);
+            if (toggle) {
+                app.sideDrawer.drawerConfigs.left = '21rem';
+            } else {
+                app.sideDrawer.drawerConfigs = app.utils.deepCopy(app.sideDrawer.defaultDrawerConfigs);
+            }
+        }
+    },
+
+    /**
+     * @inheritdoc
+     */
     _dispose: function() {
+        this._toggleSideDrawerColumnFocusStyling(false);
+        this.stopListening();
         window.removeEventListener('resize', this.resizeContainerHandler);
-
-        this.context.off('pipeline:recordlist:model:created', null, this);
-        this.context.off('pipeline:recordlist:filter:changed', null, this);
-        this.context.off('button:delete_button:click', null, this);
-        this.context.off('pipeline:recordlist:resizeContent', null, this);
-
         this.$el.off('scroll');
+        this.$('ul').off('scroll');
 
         this._super('_dispose');
-    }
+    },
 })

@@ -22,7 +22,7 @@ class RefreshQueue
     /**
      * @var Task[][]
      */
-    protected $tasks = array();
+    protected $tasks = [];
 
     /**
      * Enqueues new task
@@ -31,7 +31,7 @@ class RefreshQueue
      * @param array $items Items
      * @param array $scope Task scope
      */
-    public function enqueue($category, array $items, array $scope = array())
+    public function enqueue($category, array $items, array $scope = [])
     {
         $task = new Task($items, $scope);
         if (!$this->isEnqueued($category, $task)) {
@@ -46,17 +46,17 @@ class RefreshQueue
      */
     public function dequeue()
     {
-        if (count($this->tasks) == 0) {
+        if (safeCount($this->tasks) == 0) {
             return null;
         }
         $category = array_key_first($this->tasks);
 
         $task = array_shift($this->tasks[$category]);
-        if (count($this->tasks[$category]) == 0) {
+        if (safeCount($this->tasks[$category]) == 0) {
             unset($this->tasks[$category]);
         }
 
-        return array($category, $task->getItems(), $task->getParams());
+        return [$category, $task->getItems(), $task->getParams()];
     }
 
     /**
@@ -66,10 +66,10 @@ class RefreshQueue
      * @param array $platforms list of platforms to clear all tasks for.
      * Clears for all if empty or ommited.
      */
-    public function clear(array $platforms = array())
+    public function clear(array $platforms = [])
     {
         if (empty($platforms)) {
-            $this->tasks = array();
+            $this->tasks = [];
         } else {
             foreach ($this->tasks as $category => $tasks) {
                 $this->tasks[$category] = array_filter($tasks, function (Task $task) use ($platforms) {
@@ -131,7 +131,7 @@ class RefreshQueue
     protected function add($category, Task $task)
     {
         if (!isset($this->tasks[$category])) {
-            $this->tasks[$category] = array();
+            $this->tasks[$category] = [];
         }
 
         $isAdded = false;

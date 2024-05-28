@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint\Logger;
 
 use Psr\Log\LogLevel;
@@ -18,7 +19,7 @@ final class LevelMapper
     // SugarLogger level to PSR LogLevel
     public const SUGAR_TO_PSR_MAP = [
         'debug' => LogLevel::DEBUG,
-        'info'  => LogLevel::INFO,
+        'info' => LogLevel::INFO,
         'warn' => LogLevel::WARNING,
         'deprecated' => LogLevel::NOTICE,
         'error' => LogLevel::ERROR,

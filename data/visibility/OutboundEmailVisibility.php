@@ -46,11 +46,11 @@ class OutboundEmailVisibility extends SugarVisibility
             $where = $this->bean->getOwnerWhere($current_user->id, $alias);
             if ($current_user->isAdmin()) {
                 // for admins, we want to show system account as well
-                $where = "({$where} AND {$alias}.type="  .  $db->quoted(OutboundEmail::TYPE_SYSTEM_OVERRIDE) .
+                $where = "({$where} AND {$alias}.type=" . $db->quoted(OutboundEmail::TYPE_SYSTEM_OVERRIDE) .
                     ") OR {$alias}.type=" . $db->quoted(OutboundEmail::TYPE_USER) .
                     " OR {$alias}.type=" . $db->quoted(OutboundEmail::TYPE_SYSTEM);
             } else {
-                $where = "({$where} AND {$alias}.type="  .  $db->quoted(OutboundEmail::TYPE_SYSTEM_OVERRIDE) .
+                $where = "({$where} AND {$alias}.type=" . $db->quoted(OutboundEmail::TYPE_SYSTEM_OVERRIDE) .
                     ") OR {$alias}.type=" . $db->quoted(OutboundEmail::TYPE_USER);
             }
         }

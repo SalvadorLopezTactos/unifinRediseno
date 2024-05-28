@@ -22,8 +22,8 @@ class TemplateAutoIncrement extends TemplateRange
     public $supports_unified_search = true;
 
     /**
-    * @var int|null
-    */
+     * @var int|null
+     */
     public $len = null;
     /** @var array */
     public $validation;
@@ -47,7 +47,7 @@ class TemplateAutoIncrement extends TemplateRange
     public function get_html_edit()
     {
         $this->prepare();
-        return "<input type='text' name='". $this->name. "' id='".$this->name."' title='{" . strtoupper($this->name) ."_HELP}' size='".$this->size."' maxlength='".$this->len."' value='{". strtoupper($this->name). "}'>";
+        return "<input type='text' name='" . $this->name . "' id='" . $this->name . "' title='{" . strtoupper($this->name) . "_HELP}' size='" . $this->size . "' maxlength='" . $this->len . "' value='{" . strtoupper($this->name) . "}'>";
     }
 
     /**
@@ -68,11 +68,11 @@ class TemplateAutoIncrement extends TemplateRange
         $vardef['min'] = 1;
         $vardef['max'] = $this->max ?? $this->ext2;
         if ($vardef['min'] !== false || $vardef['max'] !== false) {
-            $vardef['validation'] = array(
+            $vardef['validation'] = [
                 'type' => 'range',
                 'min' => $vardef['min'],
                 'max' => $vardef['max'],
-            );
+            ];
         }
 
         $tablename = parent::getTableName();

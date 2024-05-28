@@ -10,52 +10,52 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$vardefs = array(
-    'fields' => array(
-        'tag' => array(
+$vardefs = [
+    'fields' => [
+        'tag' => [
             'name' => 'tag',
-            'vname' =>'LBL_TAGS',
+            'vname' => 'LBL_TAGS',
             'type' => 'tag',
             'link' => 'tag_link',
             'source' => 'non-db',
             'module' => 'Tags',
             'relate_collection' => true,
-            'studio' => array(
+            'studio' => [
                 // Tags are not supported on portal yet
                 'portal' => false,
                 // Tags should not be allowed on popuplist or popupsearch since it is BWC
-                'base' => array(
+                'base' => [
                     'popuplist' => false,
                     'popupsearch' => false,
-                ),
+                ],
                 // Force the tag field to be exposed to mobile edit and detail view
                 // Mobile list, OOTB, will allow tags
-                'mobile' => array(
+                'mobile' => [
                     'wirelesseditview' => true,
                     'wirelessdetailview' => true,
-                ),
-            ),
+                ],
+            ],
             'massupdate' => true,
             'exportable' => true,
             'sortable' => false,
             'rname' => 'name',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => false,
-            ),
-        ),
-        'tag_link' => array(
+            ],
+        ],
+        'tag_link' => [
             'name' => 'tag_link',
             'type' => 'link',
             'vname' => 'LBL_TAGS_LINK',
-            'relationship' => strtolower($module).'_tags',
+            'relationship' => strtolower($module) . '_tags',
             'source' => 'non-db',
             'exportable' => false,
             'duplicate_merge' => 'disabled',
-        ),
-    ),
-    'relationships' => array(
-        strtolower($module).'_tags' => array(
+        ],
+    ],
+    'relationships' => [
+        strtolower($module) . '_tags' => [
             'lhs_module' => $module,
             'lhs_table' => $table_name,
             'lhs_key' => 'id',
@@ -69,6 +69,6 @@ $vardefs = array(
             'relationship_role_column' => 'bean_module',
             'relationship_role_column_value' => $module,
             'dynamic_subpanel' => true,
-        ),
-    ),
-);
+        ],
+    ],
+];

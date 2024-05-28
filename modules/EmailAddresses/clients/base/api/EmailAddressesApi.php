@@ -34,36 +34,36 @@ class EmailAddressesApi extends ModuleApi
      */
     public function registerApiRest()
     {
-        return array(
-            'create' => array(
+        return [
+            'create' => [
                 'reqType' => 'POST',
-                'path' => array('EmailAddresses'),
-                'pathVars' => array('module'),
+                'path' => ['EmailAddresses'],
+                'pathVars' => ['module'],
                 'method' => 'createRecord',
                 'shortHelp' => 'This method creates a new EmailAddresses record',
                 'longHelp' => 'modules/EmailAddresses/clients/base/api/help/email_addresses_record_post_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionMissingParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-            'update' => array(
+                ],
+            ],
+            'update' => [
                 'reqType' => 'PUT',
-                'path' => array('EmailAddresses', '?'),
-                'pathVars' => array('module', 'record'),
+                'path' => ['EmailAddresses', '?'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'updateRecord',
                 'shortHelp' => 'This method updates an EmailAddresses record',
                 'longHelp' => 'modules/EmailAddresses/clients/base/api/help/email_addresses_record_put_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionMissingParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**
@@ -71,9 +71,9 @@ class EmailAddressesApi extends ModuleApi
      *
      * {@inheritdoc}
      */
-    public function createBean(ServiceBase $api, array $args, array $additionalProperties = array())
+    public function createBean(ServiceBase $api, array $args, array $additionalProperties = [])
     {
-        $this->requireArgs($args, array('email_address'));
+        $this->requireArgs($args, ['email_address']);
 
         if (!SugarEmailAddress::isValidEmail($args['email_address'])) {
             throw new SugarApiExceptionInvalidParameter("Invalid email address: {$args['email_address']}");

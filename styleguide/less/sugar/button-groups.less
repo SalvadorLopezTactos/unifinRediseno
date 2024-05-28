@@ -205,10 +205,6 @@
   & > .dropdown-toggle {
     border-top-right-radius: @baseBorderRadius;
     border-bottom-right-radius: @baseBorderRadius;
-
-    .fa-caret-down {
-      opacity: 1;
-    }
   }
 
   // Reset corners for large buttons
@@ -231,17 +227,17 @@
 
   // On active and open, don't show outline
   .dropdown-toggle:active,
-  &.open {
+  .dropdown-toggle.show {
     outline: 0;
+  }
 
-    .btn.btn-primary.dropdown-toggle {
-      background-color: @darkBlue;
-    }
-    // Reposition menu on open and round all corners
-    .dropdown-menu {
-      display: block;
-      margin-top: 0;
-    }
+  .btn.btn-primary.dropdown-toggle.show {
+    background-color: @color-blue-600;
+  }
+  // Reposition menu on open and round all corners
+  .dropdown-menu.show {
+    display: block;
+    margin-top: 0;
   }
 }
 
@@ -312,7 +308,7 @@
 
   &.open {
     .btn.btn-invisible:not(.disabled):not(.module-name):not(.dropdown-toggle):hover {
-      .bg-btn-active-background();
+      background-color: var(--btn-active-background);
     }
   }
 }

@@ -61,6 +61,21 @@
         if (hasError && field.tplName === 'detail') {
             field.setMode('edit');
         }
-    }
+    },
 
+    /**
+     * @inheritdoc
+     */
+    hasUnsavedChanges: function() {
+        // since TinyMCE deletes double spaces on text load, check for actual changes
+        const delta = this.model.changedAttributes(this.model.getSynced());
+        const key = 'kbdocument_body';
+        if (delta && _.isEqual(Object.keys(delta), [key])) {
+            const modelValue = this.model.get(key);
+            if (modelValue === delta[key].replace(/\s+/g, ' ')) {
+                return false;
+            }
+        }
+        return this._super('hasUnsavedChanges');
+    }
 })

@@ -17,7 +17,10 @@ use Configurator;
 use LoggerManager;
 use GuzzleHttp;
 use GuzzleHttp\Client as GuzzleClient;
+use Sugarcrm\Sugarcrm\Maps\Client\TokenGenerator;
 use SugarQuery;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
+use Sugarcrm\IdentityProvider\Srn\Converter as SrnConverter;
 
 class GCSClient
 {
@@ -25,6 +28,16 @@ class GCSClient
      * @var Logger
      */
     protected $logger;
+
+    /**
+     * @var Token
+     */
+    protected $token;
+
+    /**
+     * @var Sugar URL
+     */
+    protected $systemUrl;
 
     /**
      * @var GuzzleClient
@@ -35,6 +48,11 @@ class GCSClient
     {
         $this->guzzle = new GuzzleClient();
         $this->logger = new Logger(LoggerManager::getLogger());
+
+        $tokenGenerator = new TokenGenerator();
+
+        $this->token = $tokenGenerator->createToken();
+        $this->systemUrl = $this->getSystemUrl();
     }
 
     /**
@@ -45,6 +63,10 @@ class GCSClient
     public function createBatch(array $data)
     {
         $url = $this->getGCSConfig()['createBatch'];
+
+        // inject sugar token
+        $data['token'] = $this->token;
+        $data['url'] = $this->systemUrl;
 
         $this->guzzle->post(
             $url,
@@ -68,6 +90,8 @@ class GCSClient
         $data = [
             'zipCode' => $zipCode,
             'country' => $country,
+            'token' => $this->token,
+            'url' => $this->systemUrl,
         ];
 
         $response = $this->guzzle->post(
@@ -104,6 +128,7 @@ class GCSClient
         $options = [
             'query' => [
                 'sugar_batch_id' => $batchId,
+                'url' => $this->systemUrl,
             ],
         ];
 
@@ -117,6 +142,57 @@ class GCSClient
         ];
 
         return $response;
+    }
+
+    /**
+     * Requeue a batch that is not anymore on the server
+     *
+     * @param string $batchId
+     * @return void
+     * @throws \SugarQueryException
+    */
+    public function requeueBatch(string $batchId): void
+    {
+        $externalSchedulerJob = BeanFactory::newBean(Constants::GEOCODE_SCHEDULER_MODULE);
+
+        $sq = new SugarQuery();
+        $sq->select(['id', 'addresses_data']);
+        $sq->from($externalSchedulerJob)
+            ->where()
+            ->equals('id', $batchId);
+        $sq->limit(1);
+
+        $result = $externalSchedulerJob->fetchFromQuery($sq, ['id', 'addresses_data']);
+
+        if (empty($result)) {
+            $this->logger->warning("No external batch found for requeue, batch id: {$batchId}");
+            return;
+        }
+
+        $geocodeBeanResult = $result[$batchId];
+
+        $geocodeDataEncoded = $geocodeBeanResult->addresses_data;
+
+        if (!$geocodeBeanResult) {
+            $this->logger->warning("Unable to requeue the batch, batch id: {$batchId}");
+            return;
+        }
+
+        $geocodeDataDecoded = json_decode($geocodeDataEncoded, true);
+
+        if ($geocodeDataDecoded === null || !array_key_exists('addresses_data', $geocodeDataDecoded)) {
+            $this->logger->warning("Unable to requeue the batch, batch id: {$batchId}");
+            return;
+        }
+
+        $addressesData = $geocodeDataDecoded['addresses_data'];
+
+        $batchData = [
+            'batch_id' => $batchId,
+            'addresses_data' => $addressesData,
+        ];
+
+        $this->createBatch($batchData);
     }
 
     /**
@@ -148,22 +224,30 @@ class GCSClient
     }
 
     /**
+     * Returns the url of the sugar system
+     *
+     * @return string
+     */
+    public function getSystemUrl(): string
+    {
+        $config = \SugarConfig::getInstance();
+        return $config->get('site_url');
+    }
+
+    /**
      * Get gcs service config
      *
      * @return array
      */
     protected function getGCSConfig(): array
     {
-        $configurator = new Configurator();
-        $configurator->loadConfig();
+        $serviceUrl = $this->getGCSClientUrl();
 
-        $ip = $configurator->config['gcs_client']['service_url'];
-
-        if (strlen($ip) > 0) {
-            $lastChar = substr($ip, -1);
+        if (strlen($serviceUrl) > 0) {
+            $lastChar = substr($serviceUrl, -1);
 
             if ($lastChar !== '/') {
-                $ip .= '/';
+                $serviceUrl .= '/';
             }
         }
 
@@ -173,11 +257,52 @@ class GCSClient
         $statusEndpoint = 'checkStatus';
 
         $urls = [
-            'createBatch' => "{$ip}{$version}{$geocodeEndpoint}",
-            'getGeocodeByZipcode' => "{$ip}{$version}{$geocodeByZipcodeEndpoint}",
-            'checkStatus' => "{$ip}{$version}{$statusEndpoint}",
+            'createBatch' => "{$serviceUrl}{$version}{$geocodeEndpoint}",
+            'getGeocodeByZipcode' => "{$serviceUrl}{$version}{$geocodeByZipcodeEndpoint}",
+            'checkStatus' => "{$serviceUrl}{$version}{$statusEndpoint}",
         ];
 
         return $urls;
+    }
+
+    /**
+     * Returns the URL to Maps service for the given region.
+     *
+     * @return string
+     */
+    protected function getGCSClientUrl(): string
+    {
+        $config = \SugarConfig::getInstance();
+        $mapsServiceConfig = $config->get('gcs_client');
+        $region = $this->getRegion();
+
+        if ($region && !empty($mapsServiceConfig['service_urls'][$region])) {
+            return $mapsServiceConfig['service_urls'][$region];
+        } else {
+            return $mapsServiceConfig['service_urls']['default'] ?? '';
+        }
+    }
+
+    /**
+     * Gets aws region from idm config.
+     *
+     * @return string
+     */
+    private function getRegion(): string
+    {
+        $sugarConfig = \SugarConfig::getInstance();
+        $region = 'default';
+        $idmConfig = new IdmConfig($sugarConfig);
+        $modeConfig = $idmConfig->getIDMModeConfig();
+
+        if (!empty($modeConfig['tid'])) {
+            $tenantSrn = SrnConverter::fromString($modeConfig['tid']);
+
+            if ($tenantSrn) {
+                $region = $tenantSrn->getRegion();
+            }
+        }
+
+        return $region;
     }
 }

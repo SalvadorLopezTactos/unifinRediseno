@@ -12,19 +12,21 @@
 
 class TrackerSession extends SugarBean
 {
-    var $module_dir = 'Trackers';
-    var $module_name = 'TrackerSessions';
-    var $object_name = 'tracker_sessions';
-    var $table_name = 'tracker_sessions';
-    var $acltype = 'TrackerSession';
-    var $acl_category = 'TrackerSessions';
-    var $disable_custom_fields = true;
+    public $module_dir = 'Trackers';
+    public $module_name = 'TrackerSessions';
+    public $object_name = 'tracker_sessions';
+    public $table_name = 'tracker_sessions';
+    public $acltype = 'TrackerSession';
+    public $acl_category = 'TrackerSessions';
+    public $disable_custom_fields = true;
 
-    var $disable_row_level_security = true;
+    public $disable_row_level_security = true;
 
-    function bean_implements($interface){
-        switch($interface){
-            case 'ACL': return true;
+    public function bean_implements($interface)
+    {
+        switch ($interface) {
+            case 'ACL':
+                return true;
         }
         return false;
     }

@@ -20,7 +20,7 @@ abstract class SugarQuery_Builder_Where
     /**
      * @var SugarQuery_Builder_Condition[]
      */
-    public $conditions = array();
+    public $conditions = [];
 
     /**
      * @var SugarQuery
@@ -91,9 +91,9 @@ abstract class SugarQuery_Builder_Where
      */
     public function equalsField($field1, $field2, SugarBean $bean = null)
     {
-        return $this->equals($field1, array(
+        return $this->equals($field1, [
             '$field' => $field2,
-        ), $bean);
+        ], $bean);
     }
 
     /**
@@ -121,9 +121,9 @@ abstract class SugarQuery_Builder_Where
      */
     public function notEqualsField($field1, $field2, SugarBean $bean = null)
     {
-        return $this->notEquals($field1, array(
+        return $this->notEquals($field1, [
             '$field' => $field2,
-        ), $bean);
+        ], $bean);
     }
 
     /**
@@ -249,7 +249,7 @@ abstract class SugarQuery_Builder_Where
      */
     public function in($field, $set, SugarBean $bean = null)
     {
-        if (is_array($set) && in_array('', $set, true)) {
+        if (is_array($set) && safeInArray('', $set, true)) {
             $where = $this->queryOr();
             $where->isNull($field, $bean);
             $where->condition($field, 'IN', $set, $bean);
@@ -269,10 +269,10 @@ abstract class SugarQuery_Builder_Where
      */
     public function notIn($field, $vals, SugarBean $bean = null)
     {
-        $isNull = in_array('', $vals, true);
+        $isNull = safeInArray('', $vals, true);
         if ($isNull) {
             $vals = array_filter($vals, 'strlen');
-            if (count($vals) > 0) {
+            if (safeCount($vals) > 0) {
                 $where = $this->queryAnd();
                 $where->notNull($field, $bean);
                 $where->notIn($field, $vals, $bean);
@@ -294,7 +294,7 @@ abstract class SugarQuery_Builder_Where
      */
     public function between($field, $min, $max, SugarBean $bean = null)
     {
-        return $this->condition($field, 'BETWEEN', array('min' => $min, 'max' => $max), $bean);
+        return $this->condition($field, 'BETWEEN', ['min' => $min, 'max' => $max], $bean);
     }
 
     /**
@@ -448,15 +448,15 @@ abstract class SugarQuery_Builder_Where
         }
         //The right date must cover the full day
         $rightDate = date(
-            "Y-m-d H:i:s",
+            'Y-m-d H:i:s',
             mktime(23, 59, 59, $rightDate['month'], $rightDate['day'], $rightDate['year'])
         );
         $leftDate = date(
-            "Y-m-d H:i:s",
+            'Y-m-d H:i:s',
             mktime(0, 0, 0, $leftDate['month'], $leftDate['day'], $leftDate['year'])
         );
         return $this->gte($field, $leftDate, $bean)
-                    ->lte($field, $rightDate, $bean);
+            ->lte($field, $rightDate, $bean);
     }
 
     /**
@@ -514,5 +514,4 @@ abstract class SugarQuery_Builder_Where
     {
         return $this->$name;
     }
-
 }

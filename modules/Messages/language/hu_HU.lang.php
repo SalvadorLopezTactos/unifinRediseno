@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'folyamatban',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Üzenetek figyelemfelhívás',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Üzenetbejegyzések vezérlőpultja',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Üzenet idővonala',
 ];

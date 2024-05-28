@@ -11,7 +11,8 @@
  */
 
 
-class SugarWidgetFieldMultiEnum extends SugarWidgetFieldEnum {
+class SugarWidgetFieldMultiEnum extends SugarWidgetFieldEnum
+{
     /**
      * Handler for multiselect "equals" filter
      *
@@ -27,123 +28,128 @@ class SugarWidgetFieldMultiEnum extends SugarWidgetFieldEnum {
 
         $values = [];
         foreach ($fieldValue as $value) {
-            array_push($values, "'".trim($GLOBALS['db']->quote($value))."'");
+            array_push($values, "'" . trim($GLOBALS['db']->quote($value)) . "'");
         }
 
-        $colName = $this->_get_column_select($layoutDef) . " LIKE " ;
+        $colName = $this->_get_column_select($layoutDef) . ' LIKE ';
 
-        $query = "";
+        $query = '';
         foreach ($values as $key => $item) {
             $query .= $colName;
             $value = preg_replace("/^'/", "'%^", $item, 1);
             $value = preg_replace("/'$/", "^%'", $value, 1);
             $query .= $value;
-            if ($key != (count($values) - 1)) {
-                $query.= " AND " ;
+            if ($key != (safeCount($values) - 1)) {
+                $query .= ' AND ';
             }
         }
 
-        return '('.$query.')';
+        return '(' . $query . ')';
     }
 
     public function queryFilternot_one_of($layout_def)
     {
-		$arr = array ();
-		foreach ($layout_def['input_name0'] as $value) {
-			array_push($arr, "'".$GLOBALS['db']->quote($value)."'");
-		}
-	    $reporter = $this->layout_manager->getAttribute("reporter");
+        $arr = [];
+        foreach ($layout_def['input_name0'] as $value) {
+            array_push($arr, "'" . $GLOBALS['db']->quote($value) . "'");
+        }
+        $reporter = $this->layout_manager->getAttribute('reporter');
 
-    	$col_name = $this->_get_column_select($layout_def) . " NOT LIKE " ;
-    	$arr_count = count($arr);
-    	$query = "";
-    	foreach($arr as $key=>$val) {
-    		$query .= $col_name;
+        $col_name = $this->_get_column_select($layout_def) . ' NOT LIKE ';
+        $arr_count = safeCount($arr);
+        $query = '';
+        foreach ($arr as $key => $val) {
+            $query .= $col_name;
             $value = preg_replace("/^'/", "'%^", $val, 1);
             $value = preg_replace("/'$/", "^%'", $value, 1);
-			$query .= $value;
-			if ($key != ($arr_count - 1))
-    			$query.= " AND " ;
-    	}
-		return '('.$query.')';        
-	}
-        
+            $query .= $value;
+            if ($key != ($arr_count - 1)) {
+                $query .= ' AND ';
+            }
+        }
+        return '(' . $query . ')';
+    }
+
     public function queryFilterone_of($layout_def)
     {
-		$arr = array ();
-		foreach ($layout_def['input_name0'] as $value) {
-			array_push($arr, "'".$GLOBALS['db']->quote($value)."'");
-		}
-	    $reporter = $this->layout_manager->getAttribute("reporter");
+        $arr = [];
+        foreach ($layout_def['input_name0'] as $value) {
+            array_push($arr, "'" . $GLOBALS['db']->quote($value) . "'");
+        }
+        $reporter = $this->layout_manager->getAttribute('reporter');
 
-    	$col_name = $this->_get_column_select($layout_def) . " LIKE " ;
-    	$arr_count = count($arr);
-    	$query = "";
-    	foreach($arr as $key=>$val) {
-    		$query .= $col_name;
+        $col_name = $this->_get_column_select($layout_def) . ' LIKE ';
+        $arr_count = safeCount($arr);
+        $query = '';
+        foreach ($arr as $key => $val) {
+            $query .= $col_name;
             $value = preg_replace("/^'/", "'%^", $val, 1);
             $value = preg_replace("/'$/", "^%'", $value, 1);
-			$query .= $value;
-			if ($key != ($arr_count - 1))
-    			$query.= " OR " ;	
-    	}
-		return '('.$query.')';        
-	}
+            $query .= $value;
+            if ($key != ($arr_count - 1)) {
+                $query .= ' OR ';
+            }
+        }
+        return '(' . $query . ')';
+    }
 
-	public function queryFilteris($layout_def) {
-		$input_name0 = $layout_def['input_name0'];
-		if (is_array($layout_def['input_name0'])) {
-			$input_name0 = $layout_def['input_name0'][0];
-		}
+    public function queryFilteris($layout_def)
+    {
+        $input_name0 = $layout_def['input_name0'];
+        if (is_array($layout_def['input_name0'])) {
+            $input_name0 = $layout_def['input_name0'][0];
+        }
 
-		// Bug 40022
-		// IS filter doesn't add the carets (^) to multienum custom field values  
-		$input_name0 = $this->encodeMultienumCustom($layout_def, $input_name0);
-		
-		return $this->_get_column_select($layout_def)." = ".$this->reporter->db->quoted($input_name0)."\n";
-	}
+        // Bug 40022
+        // IS filter doesn't add the carets (^) to multienum custom field values
+        $input_name0 = $this->encodeMultienumCustom($layout_def, $input_name0);
 
-	public function queryFilteris_not($layout_def) {
-		$input_name0 = $layout_def['input_name0'];
-		if (is_array($layout_def['input_name0'])) {
-			$input_name0 = $layout_def['input_name0'][0];
-		}
+        return $this->_get_column_select($layout_def) . ' = ' . $this->reporter->db->quoted($input_name0) . "\n";
+    }
 
-		// Bug 50549
-		// IS NOT filter doesn't add the carets (^) to multienum custom field values  
-		$input_name0 = $this->encodeMultienumCustom($layout_def, $input_name0);
+    public function queryFilteris_not($layout_def)
+    {
+        $input_name0 = $layout_def['input_name0'];
+        if (is_array($layout_def['input_name0'])) {
+            $input_name0 = $layout_def['input_name0'][0];
+        }
+
+        // Bug 50549
+        // IS NOT filter doesn't add the carets (^) to multienum custom field values
+        $input_name0 = $this->encodeMultienumCustom($layout_def, $input_name0);
 
         $field_name = $this->_get_column_select($layout_def);
         $input_name0 = $this->reporter->db->quoted($input_name0);
         return "{$field_name} <> {$input_name0} OR ({$field_name} IS NULL)\n";
-	}
-	
+    }
+
     /**
      * Returns an OrderBy query for multi-select. We treat multi-select the same as a normal field because
      * the values stored in the database are in the format ^A^,^B^,^C^ though not necessarily in that order.
      * @param  $layout_def
      * @return string
      */
-    public function queryOrderBy($layout_def) {
+    public function queryOrderBy($layout_def)
+    {
         return SugarWidgetReportField::queryOrderBy($layout_def);
     }
-    
+
     /**
      * Function checks if the multienum field is custom, and escapes it with carets (^) if it is
      * @param array $layout_def field layout definition
      * @param string $value value to be escaped
      * @return string
      */
-    private function encodeMultienumCustom($layout_def, $value) {
-    	$field_def = $this->reporter->getFieldDefFromLayoutDef($layout_def);
-    	// Check if it is a custom field
-		if (!empty($field_def['source']) && ($field_def['source'] == 'custom_fields' || ($field_def['source'] == 'non-db' && !empty($field_def['ext2']) && !empty($field_def['id']))) && !empty($field_def['real_table']))
-		{
-			$value = encodeMultienumValue(array($value)); 
+    private function encodeMultienumCustom($layout_def, $value)
+    {
+        $field_def = $this->reporter->getFieldDefFromLayoutDef($layout_def);
+        // Check if it is a custom field
+        if (!empty($field_def['source']) && ($field_def['source'] == 'custom_fields' || ($field_def['source'] == 'non-db' && !empty($field_def['ext2']) && !empty($field_def['id']))) && !empty($field_def['real_table'])) {
+            $value = encodeMultienumValue([$value]);
         } elseif ($this->isCustomModule($this->reporter->module)) {
-            $value = encodeMultienumValue(array($value));
-		}
-		return $value;
+            $value = encodeMultienumValue([$value]);
+        }
+        return $value;
     }
 
     /**
@@ -152,7 +158,7 @@ class SugarWidgetFieldMultiEnum extends SugarWidgetFieldEnum {
      */
     public function isCustomModule($module)
     {
-        $customModules = array();
+        $customModules = [];
         $customFiles = glob('modules/*/*_sugar.php', GLOB_NOSORT);
         foreach ($customFiles as $customFile) {
             $moduleName = str_replace('_sugar', '', pathinfo($customFile, PATHINFO_FILENAME));
@@ -171,7 +177,7 @@ class SugarWidgetFieldMultiEnum extends SugarWidgetFieldEnum {
     // @codingStandardsIgnoreStart
     public function _get_column_select($layout_def, bool $shouldIfNull = false)
     {
-    // @codingStandardsIgnoreEnd
+        // @codingStandardsIgnoreEnd
         $column = parent::_get_column_select($layout_def, $shouldIfNull);
         return $this->reporter->db->convert($column, 'text2char');
     }

@@ -148,6 +148,7 @@
 
             if (self.view.layout) {
                 self.view.layout.trigger('editablelist:' + self.view.name + ':save', self.model, oldModelId);
+                self._fetchParentModel();
             }
         };
         var options = {

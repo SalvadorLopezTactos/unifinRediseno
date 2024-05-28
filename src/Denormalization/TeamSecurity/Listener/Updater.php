@@ -241,7 +241,7 @@ SQL
     /**
      * Builds a query from template by replacing placeholder with the actual table name
      *
-     * @param string$template
+     * @param string $template
      * @return string
      */
     private function query($template)
@@ -252,7 +252,7 @@ SQL
     /**
      * {@inheritDoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf('Updater("%s")', $this->table);
     }

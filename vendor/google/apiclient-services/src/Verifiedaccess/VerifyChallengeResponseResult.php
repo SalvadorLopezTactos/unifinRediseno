@@ -22,11 +22,17 @@ class VerifyChallengeResponseResult extends \Google\Model
   /**
    * @var string
    */
+  public $customerId;
+  /**
+   * @var string
+   */
   public $devicePermanentId;
   /**
    * @var string
    */
   public $deviceSignal;
+  protected $deviceSignalsType = DeviceSignals::class;
+  protected $deviceSignalsDataType = '';
   /**
    * @var string
    */
@@ -34,8 +40,38 @@ class VerifyChallengeResponseResult extends \Google\Model
   /**
    * @var string
    */
+  public $profileCustomerId;
+  /**
+   * @var string
+   */
+  public $profileKeyTrustLevel;
+  /**
+   * @var string
+   */
   public $signedPublicKeyAndChallenge;
+  /**
+   * @var string
+   */
+  public $virtualDeviceId;
+  /**
+   * @var string
+   */
+  public $virtualProfileId;
 
+  /**
+   * @param string
+   */
+  public function setCustomerId($customerId)
+  {
+    $this->customerId = $customerId;
+  }
+  /**
+   * @return string
+   */
+  public function getCustomerId()
+  {
+    return $this->customerId;
+  }
   /**
    * @param string
    */
@@ -65,6 +101,20 @@ class VerifyChallengeResponseResult extends \Google\Model
     return $this->deviceSignal;
   }
   /**
+   * @param DeviceSignals
+   */
+  public function setDeviceSignals(DeviceSignals $deviceSignals)
+  {
+    $this->deviceSignals = $deviceSignals;
+  }
+  /**
+   * @return DeviceSignals
+   */
+  public function getDeviceSignals()
+  {
+    return $this->deviceSignals;
+  }
+  /**
    * @param string
    */
   public function setKeyTrustLevel($keyTrustLevel)
@@ -81,6 +131,34 @@ class VerifyChallengeResponseResult extends \Google\Model
   /**
    * @param string
    */
+  public function setProfileCustomerId($profileCustomerId)
+  {
+    $this->profileCustomerId = $profileCustomerId;
+  }
+  /**
+   * @return string
+   */
+  public function getProfileCustomerId()
+  {
+    return $this->profileCustomerId;
+  }
+  /**
+   * @param string
+   */
+  public function setProfileKeyTrustLevel($profileKeyTrustLevel)
+  {
+    $this->profileKeyTrustLevel = $profileKeyTrustLevel;
+  }
+  /**
+   * @return string
+   */
+  public function getProfileKeyTrustLevel()
+  {
+    return $this->profileKeyTrustLevel;
+  }
+  /**
+   * @param string
+   */
   public function setSignedPublicKeyAndChallenge($signedPublicKeyAndChallenge)
   {
     $this->signedPublicKeyAndChallenge = $signedPublicKeyAndChallenge;
@@ -91,6 +169,34 @@ class VerifyChallengeResponseResult extends \Google\Model
   public function getSignedPublicKeyAndChallenge()
   {
     return $this->signedPublicKeyAndChallenge;
+  }
+  /**
+   * @param string
+   */
+  public function setVirtualDeviceId($virtualDeviceId)
+  {
+    $this->virtualDeviceId = $virtualDeviceId;
+  }
+  /**
+   * @return string
+   */
+  public function getVirtualDeviceId()
+  {
+    return $this->virtualDeviceId;
+  }
+  /**
+   * @param string
+   */
+  public function setVirtualProfileId($virtualProfileId)
+  {
+    $this->virtualProfileId = $virtualProfileId;
+  }
+  /**
+   * @return string
+   */
+  public function getVirtualProfileId()
+  {
+    return $this->virtualProfileId;
   }
 }
 

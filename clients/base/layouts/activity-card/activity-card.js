@@ -27,7 +27,7 @@
 
         if (options.module == 'Audit') {
             // this is a change card, use parent module to add class so correct module icon will be displayed
-            this.$el.addClass('activity-card-' + options.context.parent.get('module').toLowerCase());
+            this.$el.addClass('activity-card-' + options.context.get('module').toLowerCase());
         }
         this.$el.addClass('activity-card-' + options.module.toLowerCase());
     },

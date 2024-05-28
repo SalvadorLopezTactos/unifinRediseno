@@ -10,13 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class TemplateEmail extends TemplateText{
-	var $massupdate = 1;
-	function get_html_detail(){
-		return '<a href="mailto:{'. strtoupper($this->name).'}">{'. strtoupper($this->name).'}</a>';	
-	}
-	
+class TemplateEmail extends TemplateText
+{
+    public $massupdate = 1;
+
+    public function get_html_detail()
+    {
+        return '<a href="mailto:{' . strtoupper($this->name) . '}">{' . strtoupper($this->name) . '}</a>';
+    }
 }
-
-
-?>

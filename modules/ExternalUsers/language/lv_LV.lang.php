@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => 'Pieteikumi',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Darījumi',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Piedāvājumi',
-    'LBL_NOTES'=>'Piezīmes',
+    'LBL_NOTES' => 'Piezīmes',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => 'Ārējo lietotāju ierakstu informācijas panelis',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ārējā lietotāja laika josla',
 ];

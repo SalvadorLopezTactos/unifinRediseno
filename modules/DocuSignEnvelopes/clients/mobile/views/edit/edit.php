@@ -27,6 +27,6 @@ $viewdefs[$module_name]['mobile']['view']['edit'] = [
                 'assigned_user_name',
                 'team_name',
             ],
-          ],
+        ],
     ],
 ];

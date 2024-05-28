@@ -12,7 +12,7 @@
 --}}
 {{#if this.def.isMultiSelect}}
     {{#if value}}
-        <div class="ellipsis_inline" data-placement="bottom" title="
+        <div class="ellipsis_inline" data-bs-placement="bottom" title="
         {{#each value}}
             {{#eachOptions ../items}}
                 {{#eq key ../this}}
@@ -35,7 +35,7 @@
     {{#if value}}
         {{#eachOptions items}}
             {{#eq this.key ../value}}
-                <div class="ellipsis_inline" data-placement="bottom" title="{{value}}">
+                <div class="ellipsis_inline" data-bs-placement="bottom" title="{{value}}">
                     {{value}}
                 </div>
             {{/eq}}

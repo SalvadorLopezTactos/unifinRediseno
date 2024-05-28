@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -40,9 +41,9 @@ class ParserRoleDropDownFilter extends ModuleBuilderParser
         );
         if ($result) {
             $this->rebuildExtension($role);
-            MetaDataManager::refreshSectionCache(MetaDataManager::MM_EDITDDFILTERS, array(), array(
+            MetaDataManager::refreshSectionCache(MetaDataManager::MM_EDITDDFILTERS, [], [
                 'role' => $role,
-            ));
+            ]);
         }
         return $result;
     }
@@ -67,14 +68,14 @@ class ParserRoleDropDownFilter extends ModuleBuilderParser
      */
     protected function convertFormData($data)
     {
-        $converted = array();
+        $converted = [];
         $blank = translate('LBL_BLANK', 'ModuleBuilder');
         foreach ($data as $key => $item) {
             if ($key === $blank) {
                 $key = '';
             }
 
-            $converted[$key] = (bool) $item;
+            $converted[$key] = (bool)$item;
         }
 
         return $converted;

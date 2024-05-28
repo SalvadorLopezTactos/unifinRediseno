@@ -29,7 +29,7 @@ class ModuleNameValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof ModuleName) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\ModuleName');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\ModuleName');
         }
 
         if (null === $value || '' === $value) {
@@ -40,7 +40,7 @@ class ModuleNameValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, 'string');
         }
 
-        $value = (string) $value;
+        $value = (string)$value;
 
         if (!$this->isValidModule($value)) {
             $this->context->buildViolation($constraint->message)

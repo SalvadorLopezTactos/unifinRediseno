@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Kirjaa puhelu',
     'LNK_NEW_MEETING' => 'Varaa kokous',
     'LNK_NEW_TASK' => 'Luo tehtävä',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Lisämetadatakenttä 2',
     'COLUMN_TITLE_EXT3' => 'Lisämetadatakenttä 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'IFrame -korkeus',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'Oletus-URL',
     'COLUMN_TITLE_AUDIT' => 'Tarkistus',
     'COLUMN_TITLE_PII' => 'Henkilötiedot',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Oletusarvo',
     'LBL_AUDITED' => 'Tarkastettu',
     'LBL_REPORTABLE' => 'Raportoitava',
-    'ERR_RESERVED_FIELD_NAME' => "Varattu avainsana",
+    'ERR_RESERVED_FIELD_NAME' => 'Varattu avainsana',
     'ERR_SELECT_FIELD_TYPE' => 'Valitse kenttätyyppi',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Kentän nimi on jo käytössä',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Kentän nimessä saa olla vain perusaakkosia ja alaviivoja: <code>a-zA-Z_</code>',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Valmis',
     'LBL_EXE_NON_SIM_MODE' => 'Suorita ei-simulaatiotilassa',
     'LBL_CALCULATION_VISIBLE' => 'Näytä laskelmissa',
-);
+];

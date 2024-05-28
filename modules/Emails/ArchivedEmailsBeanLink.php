@@ -34,13 +34,13 @@ class ArchivedEmailsBeanLink extends ArchivedEmailsLink
             );
             // produce join that is always empty
             $dummy = $this->focus->db->getFromDummyTable();
-            $join = $query->joinTable("(select null id $dummy)", array('alias' => 'nothing'));
+            $join = $query->joinTable("(select null id $dummy)", ['alias' => 'nothing']);
             $join->on()->addRaw('1 != 1');
             return $join;
         }
 
         $subQuery = $this->getEmailsSubquery($relation);
-        $join = $query->joinTable("($subQuery)", array('alias' => $alias));
+        $join = $query->joinTable("($subQuery)", ['alias' => $alias]);
         $join->on()->equalsField($fromAlias . '.id', $alias . '.email_id');
 
         return $join;
@@ -49,7 +49,7 @@ class ArchivedEmailsBeanLink extends ArchivedEmailsLink
     /**
      * Subquery for emails
      *
-     * @param string $relation  Relation name
+     * @param string $relation Relation name
      *
      * @return string
      */
@@ -57,7 +57,7 @@ class ArchivedEmailsBeanLink extends ArchivedEmailsLink
     {
         $rel_module = $this->focus->$relation->getRelatedModuleName();
         $rel_join = $this->focus->$relation->getJoin(
-            array('join_table_alias' => 'link_bean', 'join_table_link_alias' => 'linkt')
+            ['join_table_alias' => 'link_bean', 'join_table_link_alias' => 'linkt']
         );
 
         $bean_id = $this->db->quoted($this->focus->id);
@@ -66,14 +66,14 @@ class ArchivedEmailsBeanLink extends ArchivedEmailsLink
         $hideHistoryContactsEmails
             = !empty($GLOBALS['sugar_config']['hide_history_contacts_emails'][$this->focus->module_name]);
 
-        $source = $this->addSource ? ", 1 /* direct */ source" : "";
+        $source = $this->addSource ? ', 1 /* direct */ source' : '';
         // directly assigned emails
         $subQuery = "SELECT eb.bean_id AS id, eb.email_id $source FROM emails_beans eb
             WHERE eb.bean_module = '{$this->focus->module_dir}' AND eb.bean_id = $bean_id AND eb.deleted=0\n";
 
-        $source = $this->addSource ? ", 2 /* related */ source" : "";
-        $subQuery .= " UNION ".
-        // Related by directly by email
+        $source = $this->addSource ? ', 2 /* related */ source' : '';
+        $subQuery .= ' UNION ' .
+            // Related by directly by email
             "SELECT DISTINCT eabr.bean_id AS id, eear.email_id $source from emails_email_addr_rel eear
             INNER JOIN email_addr_bean_rel eabr
                 ON eabr.bean_id = $bean_id AND eabr.bean_module = '{$this->focus->module_dir}' AND
@@ -81,13 +81,13 @@ class ArchivedEmailsBeanLink extends ArchivedEmailsLink
 
         if (!$hideHistoryContactsEmails) {
             // Assigned to contacts
-            $source = $this->addSource ? ", 4 /* contact */ source" : "";
-            $subQuery .= " UNION ".
+            $source = $this->addSource ? ', 4 /* contact */ source' : '';
+            $subQuery .= ' UNION ' .
                 "SELECT DISTINCT $bean_id AS id, eb.email_id $source FROM emails_beans eb
                 $rel_join AND link_bean.id = eb.bean_id
                 where eb.bean_module = '$rel_module' AND eb.deleted=0\n";
             // Related by email to linked contact
-            $source = $this->addSource ? ", 8 /* related_contact */  source" : "";
+            $source = $this->addSource ? ', 8 /* related_contact */  source' : '';
             $subQuery .= " UNION SELECT DISTINCT $bean_id AS id, eear.email_id $source
                 FROM emails_email_addr_rel eear
                 INNER JOIN email_addr_bean_rel eabr
@@ -103,7 +103,7 @@ class ArchivedEmailsBeanLink extends ArchivedEmailsLink
      * Override to go to both direct emails and linked bean
      * @see ArchivedEmailsLink::getEmailsJoin()
      */
-    protected function getEmailsJoin($params = array())
+    protected function getEmailsJoin($params = [])
     {
         $relation = $this->def['link'];
         $this->focus->load_relationship($relation);

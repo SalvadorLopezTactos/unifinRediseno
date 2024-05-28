@@ -11,33 +11,34 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SugarSmarty/plugins/function.sugar_replace_vars.php');
+require_once 'include/SugarSmarty/plugins/function.sugar_replace_vars.php';
 
-class SugarFieldLink extends SugarFieldBase {
-
+class SugarFieldLink extends SugarFieldBase
+{
     /**
      * {@inheritDoc}
      */
     public function apiFormatField(
-        array &$data,
-        SugarBean $bean,
-        array $args,
+        array       &$data,
+        SugarBean   $bean,
+        array       $args,
         $fieldName,
         $properties,
-        array $fieldList = null,
+        array       $fieldList = null,
         ServiceBase $service = null
     ) {
+
         $this->ensureApiFormatFieldArguments($fieldList, $service);
 
         // this is only for generated links
-    	if(isset($bean->field_defs[$fieldName]['gen']) && isTruthy($bean->field_defs[$fieldName]['gen'])) {
+        if (isset($bean->field_defs[$fieldName]['gen']) && isTruthy($bean->field_defs[$fieldName]['gen'])) {
             $subject = $bean->field_defs[$fieldName]['default'];
             if (!empty($subject)) {
                 $data[$fieldName] = replace_sugar_vars($subject, $bean->toArray(), true);
             } else {
-                $data[$fieldName] = "";
+                $data[$fieldName] = '';
             }
-	    } else {
+        } else {
             parent::apiFormatField($data, $bean, $args, $fieldName, $properties, $fieldList, $service);
         }
     }

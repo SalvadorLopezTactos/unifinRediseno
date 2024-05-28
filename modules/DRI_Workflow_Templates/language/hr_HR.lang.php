@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Aktivno',
     'LBL_ASSIGNEE_RULE' => 'Pravilo primatelja',
     'LBL_TARGET_ASSIGNEE' => 'Ciljni primatelj',
+    'LBL_STAGE_NUMBERS' => 'Numeriranje faza',
     'LBL_EXPORT_BUTTON_LABEL' => 'Izvezi',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Uvezi',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Automatski stvorite/ažurirajte novi zapis s predloškom pametnog vodiča uvozom datoteke *.json iz datotečnog sustava.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Ako je označeno, Ako je ciljni primatelj = nadređeni primatelj, kada je "Dodijeljeno" korisiku promijenjeno u nadređenom elementu, "Dodijeljeni" korisnici također će se automatski promijeniti u pametnim vodičima, fazama i aktivnostima. Imajte na umu da postavke ciljnog primatelja u predlošcima aktivnosti imaju prednost nad predloškom pametnog vodiča',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Kada korisnika treba dodijeliti u aktivnosti',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Koga treba dodijeliti u aktivnosti',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Ovaj prekidač omogućuje vam prikaz ili skrivanje automatskog numeriranja faza.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Predložak aktivnosti / faze / pametnog vodiča',
 ];

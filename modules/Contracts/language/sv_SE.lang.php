@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Kontrakt',
-	'LBL_MODULE_NAME_SINGULAR' => 'Kontrakt',
-	'LBL_MODULE_TITLE' => 'Kontrakt: Hem',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Kontrakt',
+    'LBL_MODULE_NAME_SINGULAR' => 'Kontrakt',
+    'LBL_MODULE_TITLE' => 'Kontrakt: Hem',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Skapa kontrakt',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'Aktuellt ID:',
     'LBL_CURRENCY' => 'Valuta:',
     'LBL_CURRENCY_RATE' => 'Valutakursen',
-    'LBL_ASSIGNED_TO_NAME'=>'Tilldelad till:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Tilldelad till:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Lista kontrakt',	
+    'LBL_LIST_FORM_TITLE' => 'Lista kontrakt',
     'LBL_LIST_CONTRACT_NAME' => 'Kontraktsnamn',
     'LBL_LIST_ACCOUNT_NAME' => 'Organisationsnamn',
     'LBL_LIST_START_DATE' => 'Start',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Namn',
     'LBL_LIST_CONTRACT_VALUE' => 'Värde',
 
-    'LBL_TYPE'=>'Typ',
+    'LBL_TYPE' => 'Typ',
     'LBL_TYPE_NAME' => 'Typ namn',
-    'LBL_CONTRACT_TYPE'=>'Typ:',
+    'LBL_CONTRACT_TYPE' => 'Typ:',
 
     'LBL_CREATED_USER' => 'Skapad användare',
     'LBL_MODIFIED_USER' => 'Ändrad användare',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för kontrakt',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Instrumentpanel för kontraktposter',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Kontraktstidslinje',
+];

@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Trebuie să specificaţi un număr de inregistrare pentru a adăuga un utilizator in această echipă.',
     'ERR_DUP_NAME' => 'Numele echipei exista deja, vă rugăm să alegeţi altul.',
     'ERR_DELETE_RECORD' => 'Trebuie să specifici un număr de înregistrare pentru a șterge echipa.',
@@ -70,7 +70,7 @@ Dezactivarea permisiunilor bazate pe echipă pentru un modul va returna datele a
  De asemenea, vă recomandăm să utilizaţi instrumentul Reparare şi reconstruire rapidă pentru a goli memoria cache a sistemului după ce dezactivaţi
  permisiunile bazate pe echipă pentru orice modul.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Avertizare:</strong> Dezactivarea permisiunilor bazate pe echipă pentru un modul va returna datele asociate
  permisiunilor bazate pe echipă pentru respectivul modul, inclusiv Definiţiile de proces sau Procesele ce folosesc funcţia. Acestea
@@ -78,7 +78,7 @@ STR
  pentru înregistrările din modulul respectiv. De asemenea, vă recomandăm să utilizaţi instrumentul Reparare şi reconstruire rapidă pentru a goli memoria cache a sistemului după
  ce dezactivaţi permisiunile bazate pe echipă pentru orice modul.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Dezactivarea permisiunilor bazate pe echipă pentru un modul va returna datele asociate permisiunilor bazate pe echipă pentru respectivul
  modul, inclusiv Definiţiile de proces sau Procesele ce folosesc funcţia. Acestea includ Rolurile care folosesc
@@ -87,7 +87,7 @@ Dezactivarea permisiunilor bazate pe echipă pentru un modul va returna datele a
  permisiunile bazate pe echipă pentru orice modul. Dacă nu aveţi acces la instrumentul Reparare şi reconstruire rapidă, contactaţi un administrator care are
  acces la meniul Reparare.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Avertizare:</strong> Dezactivarea permisiunilor bazate pe echipă pentru un modul va returna datele asociate
  permisiunilor bazate pe echipă pentru respectivul modul, inclusiv Definiţiile de proces sau Procesele ce folosesc funcţia. Acestea
@@ -96,5 +96,5 @@ STR
 ce dezactivaţi permisiunile bazate pe echipă pentru orice modul. Dacă nu aveţi acces la instrumentul Reparare şi reconstruire rapidă, contactaţi
  un administrator care are acces la meniul Reparare.
 STR
-,
-);
+    ,
+];

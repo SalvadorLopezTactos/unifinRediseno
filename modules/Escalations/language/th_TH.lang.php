@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'ดูการเพิ่มขึ้น',
     'LBL_LIST_RELATED_TO_ID' => 'ที่เกี่ยวข้องกับ ID',
     'LNK_IMPORT_ESCALATIONS' => 'นำเข้าการเพิ่มขึ้น',
-    
+
     'LBL_LIST_SUBJECT' => 'เรื่อง',
     'LBL_LIST_NUMBER' => 'จำนวน',
     'LBL_LIST_RELATED_TO_TYPE' => 'ประเภทที่เกี่ยวข้อง',

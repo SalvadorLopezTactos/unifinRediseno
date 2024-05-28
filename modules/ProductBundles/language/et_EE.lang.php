@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Grupi etapp:',
-    'LBL_DEAL_TOT'=>'allahindlus kokku',
-    'LBL_DEAL_TOT_USDOLLAR'=>'allahindlus kokku (USA dollar)',
+    'LBL_DEAL_TOT' => 'allahindlus kokku',
+    'LBL_DEAL_TOT_USDOLLAR' => 'allahindlus kokku (USA dollar)',
     'LBL_NEW_SUB' => 'Vahesumma allahindlusega:',
     'LBL_SHIPPING' => 'Tarnimine:',
-    'LBL_SHIPPING_USDOLLAR'=>'Tarne (USA dollar)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Vahesumma (USA dollar)',
+    'LBL_SHIPPING_USDOLLAR' => 'Tarne (USA dollar)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Vahesumma (USA dollar)',
     'LBL_SUBTOTAL' => 'Vahesumma:',
     'LBL_TAXABLE_SUBTOTAL' => 'Maksustatav vahesumma',
-    'LBL_TAX_USDOLLAR'=>'Maks (USA dollar)',
+    'LBL_TAX_USDOLLAR' => 'Maks (USA dollar)',
     'LBL_TAX' => 'Maks:',
-    'LBL_TOTAL_USDOLLAR'=>'Kokku (USA dollar)',
+    'LBL_TOTAL_USDOLLAR' => 'Kokku (USA dollar)',
     'LBL_TOTAL' => 'Kokku:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Pakkumuse komplekti asukoht',
     'EXCEPTION_INVALID_QUOTE_ID' => 'Pakkumuse ID puudub kasulikust koormusest',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'Teie nõutud pakkumust ei leitud',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'Teie nõutud pakkumust ei leitud',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Täiendav rühmasoodustus',
     'LBL_GROUP_TOTAL' => 'Rühm kokku',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Rühma päis',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Pakkumuse vaiketootekogumi rühm',
     'LBL_ALERT_DELETING_ITEM' => 'Reaüksus(t)e kustutamine',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Reaüksus on kustutatud',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tootekogumi ajaskaala',
+];

@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Dashboard elenco note',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Dashboard record note',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Note Focus Drawer',
     'LBL_EXTERNAL_USER' => 'Utente esterno',
     'LBL_EXTERNAL_USER_NAME' => 'Utente esterno',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Nota sequenza temporale',
 
     'LBL_RELATED_CONTACT' => 'Contatto correlato',
     'ERR_DELETE_RECORD' => 'Per eliminare l´azienda deve essere specificato il numero del record.',
@@ -125,4 +126,4 @@ $mod_strings = array(
  - I campi contrassegnati come "Obbligatorio" devono essere compilati prima del salvataggio. 
  - Clicca "Altri dettagli" per visualizzare ulteriori campi se necessario. 
  2. Cliccare "Salva" per salvare il nuovo record e tornare alla pagina precedente.',
-);
+];

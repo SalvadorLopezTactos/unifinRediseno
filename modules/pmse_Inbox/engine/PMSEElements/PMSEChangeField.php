@@ -100,14 +100,14 @@ class PMSEChangeField extends PMSEScriptTask
      * @param type $externalAction
      * @return type
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         global $beanList;
         switch ($externalAction) {
             case 'RESUME_EXECUTION':
                 $flowAction = 'UPDATE';
                 break;
-            default :
+            default:
                 $flowAction = 'CREATE';
                 break;
         }
@@ -138,7 +138,13 @@ class PMSEChangeField extends PMSEScriptTask
             $beans[] = $bean;
         }
 
+        $isStartCas = $flowData['cas_id'] === Registry\Registry::getInstance()->get('start_cas_id');
+        $projectId = $isStartCas ? BeanFactory::getBean('pmse_BpmnProcess', $flowData['pro_id'])->prj_id : null;
+
         foreach ($beans as $bean) {
+            if ($isStartCas) {
+                Registry\Registry::getInstance()->set('process_attributes', ['project_id' => $projectId], true);
+            }
             PMSEEngineUtils::setRegistry($beanModule);
             PMSEEngineUtils::setRegistry($bean, false);
             if (isset($bean) && is_object($bean)) {
@@ -237,12 +243,12 @@ class PMSEChangeField extends PMSEScriptTask
             } else {
                 $this->logger->info(
                     "[{$flowData['cas_id']}][{$flowData['cas_index']}] "
-                    . "Fields cannot be changed, none Module was set."
+                    . 'Fields cannot be changed, none Module was set.'
                 );
             }
         }
 
-        $params = array();
+        $params = [];
         $params['cas_id'] = $flowData['cas_id'];
         $params['cas_index'] = $flowData['cas_index'];
         $params['act_id'] = $bpmnElement['id'];
@@ -256,10 +262,10 @@ class PMSEChangeField extends PMSEScriptTask
     }
 
     /**
-     * @deprecated
      * @param $value
      * @param $fieldType
      * @return bool|float|string
+     * @deprecated
      */
     public function postProcessValue($value, $fieldType)
     {
@@ -277,13 +283,13 @@ class PMSEChangeField extends PMSEScriptTask
             case 'float':
             case 'double':
             case 'integer':
-                $value = (double)$value;
+                $value = (float)$value;
                 break;
             case 'string':
                 $value = (string)$value;
                 break;
             case 'boolean':
-                $value = (boolean)$value;
+                $value = (bool)$value;
                 break;
         }
         return $value;

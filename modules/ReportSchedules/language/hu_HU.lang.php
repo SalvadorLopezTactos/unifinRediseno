@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Jelentési ütemezések',
     'LBL_MODULE_NAME_SINGULAR' => 'Jelentési ütemezés',
     'LBL_REPORT_NAME' => 'Jelentés',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Fájltípus(ok)',
     'LBL_EMBED_REPORT' => 'Jelentés beágyazása egy e-mailbe',
     'LBL_EMBED_REPORT_INFO' => 'Megjegyzés: ha a jelentés több, mint 200 soros, akkor CSV-fájlként csatoljuk a jelentést.',
-);
+];

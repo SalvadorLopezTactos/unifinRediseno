@@ -9,63 +9,63 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Contracts']['base']['view']['subpanel-list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Contracts']['base']['view']['subpanel-list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'label' => 'LBL_LIST_NAME',
                     'enabled' => true,
                     'default' => true,
                     'link' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'account_name',
                     'target_record_key' => 'account_id',
                     'target_module' => 'Accounts',
                     'label' => 'LBL_LIST_ACCOUNT_NAME',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'start_date',
                     'label' => 'LBL_LIST_START_DATE',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'end_date',
                     'label' => 'LBL_LIST_END_DATE',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'status',
                     'label' => 'LBL_LIST_STATUS',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'total_contract_value',
                     'label' => 'LBL_LIST_CONTRACT_VALUE',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'total_contract_value',
                         'currency_id',
                         'base_rate',
-                    ),
+                    ],
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => true,
-                ),
-            ),
-        ),
-    ),
-    'rowactions' => array(
-        'actions' => array(
+                ],
+            ],
+        ],
+    ],
+    'rowactions' => [
+        'actions' => [
             [
                 'type' => 'rowaction',
                 'css_class' => 'btn',
@@ -74,20 +74,20 @@ $viewdefs['Contracts']['base']['view']['subpanel-list'] = array(
                 'icon' => 'sicon-preview',
                 'acl_action' => 'view',
             ],
-            array(
+            [
                 'type' => 'rowaction',
                 'name' => 'edit_button',
                 'icon' => 'sicon-edit',
                 'label' => 'LBL_EDIT_BUTTON',
                 'event' => 'list:editrow:fire',
                 'acl_action' => 'edit',
-            ),
-            array(
+            ],
+            [
                 'type' => 'unlink-action',
                 'name' => 'unlink_button',
                 'icon' => 'sicon-unlink',
                 'label' => 'LBL_UNLINK_BUTTON',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Această semnătură necesită un nume.',
     'LBL_DEFAULT_SIGNATURE' => 'Implicit',
     'LBL_MODULE_NAME' => 'Semnături e-mail',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'Utilizare semnătură?',
     'LBL_SIGNATURE_PREPEND' => 'Semnatura deasupra raspunsului',
     'LBL_SIGNATURES' => 'Semnaturi',
-);
+];

@@ -11,16 +11,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['sweetspot-config-list-row'] = array(
+$viewdefs['base']['view']['sweetspot-config-list-row'] = [
     'action' => 'edit',
-    'fields' => array(
-        array(
+    'fields' => [
+        [
             'name' => 'action',
             'type' => 'enum',
-        ),
-        array(
+        ],
+        [
             'name' => 'keyword',
             'type' => 'base',
-        ),
-    ),
-);
+        ],
+    ],
+];

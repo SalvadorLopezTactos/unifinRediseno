@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -32,7 +33,7 @@ class SidecarQuickcreateMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
 
     public function upgradeCheck()
     {
-        $viewdefs = array();
+        $viewdefs = [];
 
         if ($this->filename === 'quickcreatedefs.php') {
             // old quickcreate defs file, rejecting it.
@@ -66,14 +67,13 @@ class SidecarQuickcreateMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
 
     public function setLegacyViewdefs()
     {
-        $viewdefs = array();
+        $viewdefs = [];
         // require the file
         if (file_exists("custom/{$this->fullpath}")) {
             include "custom/{$this->fullpath}";
         } elseif (file_exists($this->fullpath)) {
             include $this->fullpath;
         } else {
-
             // Labels for Quickcreate Menu are of type
             // `LBL_NEW_{MODULE_NAME_SINGULAR}`
 
@@ -100,11 +100,11 @@ class SidecarQuickcreateMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
                     $quickcreateLabel = 'LBL_MODULE_NAME_SINGULAR';
                 }
             }
-            $viewdefs[$this->module]['base']['menu']['quickcreate'] = array(
+            $viewdefs[$this->module]['base']['menu']['quickcreate'] = [
                 'layout' => 'create',
                 'label' => $quickcreateLabel,
                 'icon' => 'fa-plus',
-            );
+            ];
         }
 
         $viewdefs[$this->module]['base']['menu']['quickcreate']['visible'] = $this->isDCEnabled;
@@ -121,7 +121,7 @@ class SidecarQuickcreateMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
      */
     public function convertLegacyViewDefsToSidecar()
     {
-        if(empty($this->legacyViewdefs)) {
+        if (empty($this->legacyViewdefs)) {
             return true;
         }
         $this->sidecarViewdefs = $this->legacyViewdefs[$this->getNormalizedModuleName()]['base']['menu']['quickcreate'];
@@ -132,8 +132,9 @@ class SidecarQuickcreateMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
      */
     public function handleSave()
     {
-        return $this->handleSaveArray("viewdefs['{$this->getNormalizedModuleName()}']['base']['menu']['quickcreate']",
-            "custom/{$this->fullpath}");
+        return $this->handleSaveArray(
+            "viewdefs['{$this->getNormalizedModuleName()}']['base']['menu']['quickcreate']",
+            "custom/{$this->fullpath}"
+        );
     }
 }
-

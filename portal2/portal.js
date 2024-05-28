@@ -216,23 +216,6 @@
             return false;
         }
 
-        if (app.api.isAuthenticated() && !app.user.get('cookie_consent')) {
-            var reloadCb = {
-                complete: function() {
-                    window.location.reload();
-                }
-            };
-
-            app.controller.loadView({
-                layout: 'consent-wizard',
-                modelId: app.user.get('id'),
-                module: 'Contacts',
-                callbacks: reloadCb,
-            });
-            app.additionalComponents.header.hide();
-            return false;
-        }
-
         function alertUser(msg) {
             // TODO: Error messages should later be put in lang agnostic app strings. e.g. also in layout.js alert.
             msg = msg || 'LBL_PORTAL_MIN_MODULES';

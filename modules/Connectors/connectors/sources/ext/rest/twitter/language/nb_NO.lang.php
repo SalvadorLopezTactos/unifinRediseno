@@ -12,13 +12,13 @@
  */
 
 /*********************************************************************************
-* Description:
-* Portions created by SugarCRM are Copyright (C) SugarCRM, Inc. All Rights
-* Reserved. Contributor(s): contact@synolia.com - www.synolia.com
-* *******************************************************************************/
+ * Description:
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc. All Rights
+ * Reserved. Contributor(s): contact@synolia.com - www.synolia.com
+ * *******************************************************************************/
 
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1">
 								<tr>
 									<td valign="top" width="35%" class="dataLabel">
@@ -42,9 +42,7 @@ Kontekst | Be om kontekst
 $connector_strings[\'LBL_LICENSING_INFO\']',
     'LBL_NAME' => 'Twitter-brukernavn',
     'LBL_ID' => 'Twitter-brukernavn',
-	'company_url' => 'Link',
+    'company_url' => 'Link',
     'oauth_consumer_key' => 'API-nøkkel',
     'oauth_consumer_secret' => 'API-hemmelighet',
-);
-
-?>
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
 
     //module strings.
     'LBL_MODULE_NAME' => '売上予測マネージャワークシート',
@@ -35,14 +35,14 @@ $mod_strings = array (
     'LBL_FORECAST_TYPE' => '売上予測タイプ',
     'LBL_FORECAST_OPP_COUNT' => 'トータル商談数',
     'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'パイプライン商談数',
-    'LBL_FORECAST_OPP_WEIGH'=> '加重金額',
+    'LBL_FORECAST_OPP_WEIGH' => '加重金額',
     'LBL_FORECAST_USER' => 'ユーザ',
-    'LBL_DATE_COMMITTED'=> '確定日',
+    'LBL_DATE_COMMITTED' => '確定日',
     'LBL_DATE_ENTERED' => '作成日',
     'LBL_DATE_MODIFIED' => '更新日',
     'LBL_CREATED_BY' => '作成者',
     'LBL_DELETED' => '削除済み',
-    'LBL_MODIFIED_USER_ID'=>'更新者',
+    'LBL_MODIFIED_USER_ID' => '更新者',
     'LBL_WK_VERSION' => 'バージョン',
     'LBL_WK_REVISION' => '版',
 
@@ -59,68 +59,68 @@ $mod_strings = array (
     'LBL_QC_UPCOMING_FORECASTS' => '私の売上予測',
     'LBL_QC_LAST_DATE_COMMITTED' => '前回の確定日:',
     'LBL_QC_LAST_COMMIT_VALUE' => '前回の確定金額:',
-    'LBL_QC_HEADER_DELIM'=> 'To',
+    'LBL_QC_HEADER_DELIM' => 'To',
 
     //opportunity worksheet list view labels
-    'LBL_OW_OPPORTUNITIES' => "商談",
-    'LBL_OW_ACCOUNTNAME' => "取引先",
-    'LBL_OW_REVENUE' => "金額",
-    'LBL_OW_WEIGHTED' => "加重金額",
-    'LBL_OW_MODULE_TITLE'=> '商談ワークシート',
-    'LBL_OW_PROBABILITY'=>'確度',
-    'LBL_OW_NEXT_STEP'=>'次のステップ:',
-    'LBL_OW_DESCRIPTION'=>'詳細',
-    'LBL_OW_TYPE'=>'タイプ',
+    'LBL_OW_OPPORTUNITIES' => '商談',
+    'LBL_OW_ACCOUNTNAME' => '取引先',
+    'LBL_OW_REVENUE' => '金額',
+    'LBL_OW_WEIGHTED' => '加重金額',
+    'LBL_OW_MODULE_TITLE' => '商談ワークシート',
+    'LBL_OW_PROBABILITY' => '確度',
+    'LBL_OW_NEXT_STEP' => '次のステップ:',
+    'LBL_OW_DESCRIPTION' => '詳細',
+    'LBL_OW_TYPE' => 'タイプ',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'個人レポート',
-    'LBL_FDR_OPPORTUNITIES'=>'売上予測中の商談:',
-    'LBL_FDR_WEIGH'=>'商談の加重金額:',
-    'LBL_FDR_COMMIT'=>'確定金額',
-    'LBL_FDR_DATE_COMMIT'=>'確定日',
+    'LBL_FDR_USER_NAME' => '個人レポート',
+    'LBL_FDR_OPPORTUNITIES' => '売上予測中の商談:',
+    'LBL_FDR_WEIGH' => '商談の加重金額:',
+    'LBL_FDR_COMMIT' => '確定金額',
+    'LBL_FDR_DATE_COMMIT' => '確定日',
 
     //detail view.
     'LBL_DV_HEADER' => '売上予測: ワークシート',
     'LBL_DV_MY_FORECASTS' => '私の売上予測',
-    'LBL_DV_MY_TEAM' => "私のチームの予算" ,
+    'LBL_DV_MY_TEAM' => "私のチームの予算",
     'LBL_DV_TIMEPERIODS' => '期間:',
     'LBL_DV_FORECAST_PERIOD' => '売上予測期間',
     'LBL_DV_FORECAST_OPPORTUNITY' => '商談予測',
     'LBL_SEARCH' => '選択',
     'LBL_SEARCH_LABEL' => '選択',
     'LBL_COMMIT_HEADER' => '売上予測の確定',
-    'LBL_DV_LAST_COMMIT_DATE' =>'前回の確定日:',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'最終確定値:',
+    'LBL_DV_LAST_COMMIT_DATE' => '前回の確定日:',
+    'LBL_DV_LAST_COMMIT_AMOUNT' => '最終確定値:',
     'LBL_DV_FORECAST_ROLLUP' => '総売上予測',
     'LBL_DV_TIMEPERIOD' => '期間:',
     'LBL_DV_TIMPERIOD_DATES' => '期間:',
     'LBL_LOADING_COMMIT_HISTORY' => 'コミット履歴をロードしています...',
 
     //list view
-    'LBL_LV_TIMPERIOD'=> '期間',
-    'LBL_LV_TIMPERIOD_START_DATE'=> '開始日',
-    'LBL_LV_TIMPERIOD_END_DATE'=> '終了日',
-    'LBL_LV_TYPE'=> '売上予測タイプ',
-    'LBL_LV_COMMIT_DATE'=> '確定日',
-    'LBL_LV_OPPORTUNITIES'=> '商談',
-    'LBL_LV_WEIGH'=> '加重金額',
-    'LBL_LV_COMMIT'=> '確定金額',
+    'LBL_LV_TIMPERIOD' => '期間',
+    'LBL_LV_TIMPERIOD_START_DATE' => '開始日',
+    'LBL_LV_TIMPERIOD_END_DATE' => '終了日',
+    'LBL_LV_TYPE' => '売上予測タイプ',
+    'LBL_LV_COMMIT_DATE' => '確定日',
+    'LBL_LV_OPPORTUNITIES' => '商談',
+    'LBL_LV_WEIGH' => '加重金額',
+    'LBL_LV_COMMIT' => '確定金額',
 
-    'LBL_COMMIT_NOTE'=> '選択した期間に確定する金額を入力してください:',
+    'LBL_COMMIT_NOTE' => '選択した期間に確定する金額を入力してください:',
 
-    'LBL_COMMIT_MESSAGE'=> 'この金額を確定しますか？',
+    'LBL_COMMIT_MESSAGE' => 'この金額を確定しますか？',
     'ERR_FORECAST_AMOUNT' => '確定金額は必須であり、数値である必要があります。',
 
     // js error strings
     'LBL_FC_START_DATE' => '開始日',
     'LBL_FC_USER' => 'スケジュール',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'売上予測のためのアクティブな期間がありません。',
-    'LBL_FDR_ADJ_AMOUNT'=>'調整済み値',
-    'LBL_SAVE_WOKSHEET'=>'ワークシート保存',
-    'LBL_RESET_WOKSHEET'=>'ワークシートリセット',
-    'LBL_SHOW_CHART'=>'チャートの表示',
-    'LBL_RESET_CHECK'=>'ログインユーザの指定された期間のワークシートが削除されます。継続しますか？',
+    'LBL_NO_ACTIVE_TIMEPERIOD' => '売上予測のためのアクティブな期間がありません。',
+    'LBL_FDR_ADJ_AMOUNT' => '調整済み値',
+    'LBL_SAVE_WOKSHEET' => 'ワークシート保存',
+    'LBL_RESET_WOKSHEET' => 'ワークシートリセット',
+    'LBL_SHOW_CHART' => 'チャートの表示',
+    'LBL_RESET_CHECK' => 'ログインユーザの指定された期間のワークシートが削除されます。継続しますか？',
 
     'LBL_CURRENCY' => '通貨',
     'LBL_CURRENCY_ID' => '通貨ID',
@@ -149,6 +149,6 @@ $mod_strings = array (
     'LBL_HISTORY_LOG' => '最終コミットメント',
     'LBL_NO_COMMIT' => '以前のコミットはありません',
 
-    'LBL_MANGER_SAVED' => '保存されたマネージャー'
+    'LBL_MANGER_SAVED' => '保存されたマネージャー',
 
-);
+];

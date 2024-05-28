@@ -121,8 +121,8 @@ final class StateAwareListener implements Listener, SplObserver
     /**
      * {@inheritDoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return (string) $this->getListener();
+        return (string)$this->getListener();
     }
 }

@@ -28,9 +28,9 @@ class ViewMapRoles extends SugarView
     {
         global $mod_strings;
 
-        return array(
+        return [
             $mod_strings['LBL_UW_MAP_ACL_ROLES'],
-        );
+        ];
     }
 
     /** {@inheritDoc} */
@@ -41,11 +41,11 @@ class ViewMapRoles extends SugarView
         $packageRoles = $this->getPackageRoles();
         $instanceRoles = $this->getInstanceRoles();
         $map = $this->getDefaultMap($packageRoles, $instanceRoles);
-        $this->ss->assign(array(
+        $this->ss->assign([
             'package_roles' => $packageRoles,
             'instance_roles' => $instanceRoles,
             'map' => $map,
-        ));
+        ]);
 
         echo $this->ss->fetch('modules/Administration/templates/MapRoles.tpl');
     }
@@ -55,7 +55,7 @@ class ViewMapRoles extends SugarView
      */
     protected function getInstanceRoles()
     {
-        $result = array('' => translate('LBL_UW_DO_NOT_MAP_ROLE'));
+        $result = ['' => translate('LBL_UW_DO_NOT_MAP_ROLE')];
         $roles = MBHelper::getRoles();
         foreach ($roles as $role) {
             $result[$role->id] = $role->name;
@@ -74,7 +74,7 @@ class ViewMapRoles extends SugarView
             return $manifest['installdefs']['roles'];
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -98,7 +98,7 @@ class ViewMapRoles extends SugarView
      */
     protected function getDefaultMap(array $packageRoles, array $instanceRoles)
     {
-        $map = array();
+        $map = [];
         $unmapped = $packageRoles;
 
         // first, map by ID

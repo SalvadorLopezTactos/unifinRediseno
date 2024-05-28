@@ -10,16 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$popupMeta = array('moduleMain' => 'Project',
-						'varName' => 'PROJECT',
-						'orderBy' => 'name',
-						'whereClauses' => 
-							array('name' => 'project.name'),
-						'whereStatement' => " project.is_template = 0 ",
-						'searchInputs' =>
-							array('name')
-						);
-
-
-?>
- 
+$popupMeta = ['moduleMain' => 'Project',
+    'varName' => 'PROJECT',
+    'orderBy' => 'name',
+    'whereClauses' => ['name' => 'project.name'],
+    'whereStatement' => ' project.is_template = 0 ',
+    'searchInputs' => ['name'],
+];

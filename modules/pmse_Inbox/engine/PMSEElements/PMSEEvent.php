@@ -19,7 +19,6 @@ use Sugarcrm\Sugarcrm\ProcessManager;
  */
 class PMSEEvent extends PMSEShape
 {
-
     protected $evaluator;
     protected $definitionBean;
 
@@ -76,17 +75,19 @@ class PMSEEvent extends PMSEShape
     {
         $bean = $this->caseFlowHandler->retrieveBean('pmse_BpmFlow'); //$this->beanFactory->getBean('BpmFlow');
         $where = "cas_id='" . $casId . "' AND cas_index='" . $casPrevious . "'";
-        $result = $bean->get_list("", $where);
+        $result = $bean->get_list('', $where);
         $element = array_pop($result['list']);
 
         $flowBean = $this->caseFlowHandler->retrieveBean('pmse_BpmnFlow');
         $where = "flo_element_dest='" . $element->bpmn_id . "' AND flo_element_dest_type='" . $element->bpmn_type . "'";
-        $result = $flowBean->get_list("", $where);
+        $result = $flowBean->get_list('', $where);
         $flowElement = array_pop($result['list']);
 
         if ($flowElement->flo_element_origin_type == 'bpmnGateway') {
-            $gateway = $this->caseFlowHandler->retrieveBean('pmse_BpmnGateway',
-                $flowElement->flo_element_origin); //$this->beanFactory->getBean('BpmnGateway');
+            $gateway = $this->caseFlowHandler->retrieveBean(
+                'pmse_BpmnGateway',
+                $flowElement->flo_element_origin
+            ); //$this->beanFactory->getBean('BpmnGateway');
             if ($gateway->gat_type === 'EVENTBASED') {
                 return true;
             }
@@ -110,7 +111,7 @@ class PMSEEvent extends PMSEShape
             $this->dbHandler->quoted($cas_id),
             $this->dbHandler->quoted($cas_previous)
         );
-        $result = $bean->get_list("", $where);
+        $result = $bean->get_list('', $where);
         $flow = array_pop($result['list']);
 
         $rowThread = $this->dbHandler
@@ -134,10 +135,10 @@ class PMSEEvent extends PMSEShape
                 foreach ($rows->iterateAssociative() as $row) {
                     $this->caseFlowHandler->closeThreadByThreadIndex($cas_id, $row['cas_thread_index']);
                     $flowBean = $this->caseFlowHandler->retrieveBean('pmse_BpmFlow');
-                    $flowBean->retrieve_by_string_fields(array(
+                    $flowBean->retrieve_by_string_fields([
                         'cas_id' => $cas_id,
                         'cas_previous' => $row['cas_flow_index'],
-                    ));
+                    ]);
                     $this->caseFlowHandler->closeFlow($cas_id, $flowBean->cas_index);
                 }
             }
@@ -165,5 +166,4 @@ class PMSEEvent extends PMSEShape
 
         return $resultEvaluation;
     }
-
 }

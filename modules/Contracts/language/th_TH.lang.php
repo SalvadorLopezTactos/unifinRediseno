@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'สัญญา',
-	'LBL_MODULE_NAME_SINGULAR' => 'สัญญา',
-	'LBL_MODULE_TITLE' => 'สัญญา: หน้าแรก',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'สัญญา',
+    'LBL_MODULE_NAME_SINGULAR' => 'สัญญา',
+    'LBL_MODULE_TITLE' => 'สัญญา: หน้าแรก',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'สร้างสัญญา',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'ID สกุลเงิน:',
     'LBL_CURRENCY' => 'สกุลเงิน:',
     'LBL_CURRENCY_RATE' => 'อัตราสกุลเงิน',
-    'LBL_ASSIGNED_TO_NAME'=>'ระบุให้:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'ระบุให้:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'รายการสัญญา',	
+    'LBL_LIST_FORM_TITLE' => 'รายการสัญญา',
     'LBL_LIST_CONTRACT_NAME' => 'ชื่อสัญญา:',
     'LBL_LIST_ACCOUNT_NAME' => 'ชื่อบัญชี',
     'LBL_LIST_START_DATE' => 'เริ่มต้น',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'ชื่อ',
     'LBL_LIST_CONTRACT_VALUE' => 'ค่า',
 
-    'LBL_TYPE'=>'ประเภท',
+    'LBL_TYPE' => 'ประเภท',
     'LBL_TYPE_NAME' => 'ชื่อประเภท',
-    'LBL_CONTRACT_TYPE'=>'ประเภท:',
+    'LBL_CONTRACT_TYPE' => 'ประเภท:',
 
     'LBL_CREATED_USER' => 'ผู้ใช้ที่สร้าง',
     'LBL_MODIFIED_USER' => 'ผู้ใช้ที่แก้ไข',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'สัญญาระบบลิ้นชัก',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนสัญญา',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์ของสัญญา',
+];

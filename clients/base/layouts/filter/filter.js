@@ -18,10 +18,9 @@
  * @extends View.Layout
  */
 ({
-    className: 'filter-view search',
+    className: 'filter-view search flex-grow flex',
 
     events: {
-        'click .add-on.fa-times': function() { this.trigger('filter:clear:quicksearch'); },
         'click .add-on.sicon-close': function() { this.trigger('filter:clear:quicksearch'); }
     },
 
@@ -108,6 +107,10 @@
             this.trigger('filter:apply', query, def);
         }, this);
 
+        this.context.on('filter:apply', function(query, def) {
+            this.trigger('filter:apply', query, def);
+        }, this);
+
         this.layout.on('filterpanel:change', this.handleFilterPanelChange, this);
         this.layout.on('filterpanel:toggle:button', this.toggleFilterButton, this);
 
@@ -129,6 +132,41 @@
 
         this.listenTo(app.events, 'dashlet:filter:save', this.refreshDropdown);
         this.context.on('filter:clear', this.clearFilters, this);
+        app.events.on('focusdrawer:close', this.handleFocusDrawerClose, this);
+    },
+
+    /**
+     * Refresh filtered list if any records have been updated
+     * after the focus drawer is closed.
+     * @param {Array} updatedModels
+     */
+    handleFocusDrawerClose: function(updatedModels) {
+        const isChangedModel = (model) => {
+            return JSON.stringify(model.attributes) !== JSON.stringify(model._syncedAttributes);
+        };
+
+        const isCollectionChanged = this.collection ?
+            !!_.find(this.collection.models, isChangedModel) :
+            false;
+
+        if (!_.isEmpty(updatedModels)) {
+            // Show confirmation message if a model in the list view was changed
+            if (isCollectionChanged) {
+                app.alert.show('send_confirmation', {
+                    level: 'confirmation',
+                    messages: 'LBL_WARN_UNSAVED_CHANGES',
+                    onConfirm: () => {
+                        _.each(this.collection.models, (model) => {
+                            model.revertAttributes();
+                        });
+
+                        this.applyFilter();
+                    },
+                });
+            } else {
+                this.applyFilter();
+            }
+        }
     },
 
     /**
@@ -476,6 +514,9 @@
         // TODO: getRelevantContextList needs to be refactored to handle filterpanels in drawer layouts,
         // as it will return the global context instead of filtering a list view within the drawer context.
         // As a result, this flag is needed to prevent filtering on the global context.
+        if (!this.context) {
+            return;
+        }
         var filterOptions = this.context.get('filterOptions') || {};
         if (filterOptions.auto_apply === false) {
             return;
@@ -555,7 +596,10 @@
 
             var filterDef = self.buildFilterDef(updatedFilterDef, query, ctx);
             let optionParams = this._getCollectionParams();
-            ctxCollection.setOption('params', optionParams);
+            if (!_.isEmpty(optionParams)) {
+                const extendedOpts = _.extend(ctxCollection.getOption('params') || {}, optionParams);
+                ctxCollection.setOption('params', extendedOpts);
+            }
             var options = {
                 //Show alerts for this request
                 showAlerts: opts.showAlerts,
@@ -848,6 +892,13 @@
         }
         this.filters = null;
         app.view.Layout.prototype.unbind.call(this);
-    }
+    },
 
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        app.events.off('focusdrawer:close', this.handleFocusDrawerClose, this);
+        this._super('_dispose');
+    },
 })

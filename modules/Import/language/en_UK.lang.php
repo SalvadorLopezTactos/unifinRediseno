@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Import File Read Successfully',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'The imported record is participating in a process and cannot be edited because some fields are locked for editing by the process.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'rows were not imported due to error',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'If the user does not exist use the current user',
     'LBL_SHOW_HIDDEN' => 'Show fields that are not normally importable',
     'LBL_UPDATE_RECORDS' => 'Update existing records instead of importing them (No Undo)',
-    'LBL_TEST'=> 'Test Import (do not save or change data)',
+    'LBL_TEST' => 'Test Import (do not save or change data)',
     'LBL_TRUNCATE_TABLE' => 'Empty table before import (delete all records)',
     'LBL_RELATED_ACCOUNTS' => 'Do not create related accounts',
     'LBL_NO_DATECHECK' => 'Skip date check (faster but will fail if any date is wrong)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Invalid integer value',
     'LBL_ERROR_INVALID_NUM' => 'Invalid numeric value',
     'LBL_ERROR_INVALID_TIME' => 'Invalid time',
-    'LBL_ERROR_INVALID_EMAIL'=>'Invalid Email address',
-    'LBL_ERROR_INVALID_BOOL'=>'Invalid value (should be a 1 or 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Invalid date string',
-    'LBL_ERROR_INVALID_USER'=>'Invalid user name or ID',
+    'LBL_ERROR_INVALID_EMAIL' => 'Invalid Email address',
+    'LBL_ERROR_INVALID_BOOL' => 'Invalid value (should be a 1 or 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Invalid date string',
+    'LBL_ERROR_INVALID_USER' => 'Invalid user name or ID',
     'LBL_ERROR_INVALID_TEAM' => 'Invalid team name or ID',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Invalid account name or ID',
     'LBL_ERROR_INVALID_RELATE' => 'Invalid relational field',
@@ -101,7 +100,7 @@ $mod_strings = array (
     'LBL_START_OVER' => 'Start Over',
     'LBL_ERROR' => 'Error:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'The import file contains {0} rows. The optimal number of rows is {1}. More rows may slow the import process. Click OK to continue importing. Click Cancel to revise and re-upload the import file.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'You cannot import a system administrator user',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'You cannot import a system administrator user',
     'ERR_REPORT_LOOP' => 'The system detected a reporting loop. A user cannot report to themselves, nor can any of their managers report to them.',
     'ERR_MULTIPLE' => 'Multiple columns have been defined with the same field name.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Missing required fields:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'There were no lines detected in your import file.  Please make sure there are no empty lines in your file and try again.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'The import file has already been processed or does not exist',
     'LBL_SUCCESS' => 'Success:',
-	'LBL_FAILURE' => 'Import Failed:',
+    'LBL_FAILURE' => 'Import Failed:',
     'LBL_SUCCESSFULLY' => 'Successfully imported',
     'LBL_LAST_IMPORT_UNDONE' => 'The import was undone.',
     'LBL_NO_IMPORT_TO_UNDO' => 'There was no import to undo.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Import Again',
     'LBL_FINISHED' => 'Finished',
     'LBL_UNDO_LAST_IMPORT' => 'Undo Import',
-    'LBL_LAST_IMPORTED'=>'Created',
+    'LBL_LAST_IMPORTED' => 'Created',
     'ERR_MULTIPLE_PARENTS' => 'You can only have one Parent ID defined',
     'LBL_DUPLICATES' => 'Duplicates Found',
     'LNK_DUPLICATE_LIST' => 'Download list of duplicates',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Hide Notes',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Show Preview Columns',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Hide Preview Columns',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Check for duplicates using operator:',
     'LBL_SAVE_MAPPING_AS' => 'To save the import settings, provide a name for the saved settings:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Single Quote (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Double Quote (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'To assign the new records to teams other than your default team(s), use the Default Value column to select different teams.',
     'LBL_SIGN_IN_HELP' => 'To enable this service, please sign in under the External Accounts tab within your user settings page.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Trying to handle email addresses in a Bean that doesn't support it.",
-);
+];

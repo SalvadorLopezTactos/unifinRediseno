@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmGatewayDefinition'] = array(
+$dictionary['pmse_BpmGatewayDefinition'] = [
     'table' => 'pmse_bpm_gateway_definition',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'reassignable' => false,
-    'fields' => array(
-        'prj_id' => array(
+    'fields' => [
+        'prj_id' => [
             'required' => true,
             'name' => 'prj_id',
             'vname' => 'Project id',
@@ -38,8 +38,8 @@ $dictionary['pmse_BpmGatewayDefinition'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'pro_id' => array(
+        ],
+        'pro_id' => [
             'required' => true,
             'name' => 'pro_id',
             'vname' => 'Process id',
@@ -59,8 +59,8 @@ $dictionary['pmse_BpmGatewayDefinition'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'execution_mode' => array(
+        ],
+        'execution_mode' => [
             'required' => true,
             'name' => 'execution_mode',
             'vname' => 'script to be executed',
@@ -80,23 +80,23 @@ $dictionary['pmse_BpmGatewayDefinition'] = array(
             'calculated' => false,
             'len' => '10',
             'size' => '10',
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmGatewayDefinition', 'pmse_BpmGatewayDefinition');

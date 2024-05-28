@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'FW:',
     'LBL_RE' => 'Re:',
     'LBL_BUTTON_CREATE' => 'Luo',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Valitse lähettäjän tili',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Valitse allekirjoitus',
     'LBL_SIGNATURE' => 'Allekirjoitus',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Oletusallekirjoitus",
-    "LBL_SHOW_MORE_SIGNATURES" => "Lisää allekirjoituksia...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Oletusallekirjoitus',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Lisää allekirjoituksia...',
     'LBL_SUBJECT' => 'Aihe',
     'LBL_TEMPLATE' => 'Mallipohja',
     'LBL_TEXT_BODY' => 'Tekstin runko',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Lähetysaika',
     'LBL_LIST_TO_ADDR' => 'Vastaanottaja',
     'LBL_LIST_TYPE' => 'Tyyppi',
-    "LBL_SELECTED_RECIPIENTS" => "Valitut vastaanottajat",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Lisää vastaanottajia...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Osoitekirja",
+    'LBL_SELECTED_RECIPIENTS' => 'Valitut vastaanottajat',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Lisää vastaanottajia...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Osoitekirja',
     'NTC_REMOVE_INVITEE' => 'Oletko varma, että haluat poistaa tämän vastaanottajan sähköpostin?',
     'WARNING_SETTINGS_NOT_CONF' => 'Sähköpostiasetuksesi ei ole oikein määritetty oikein sähköpostin lähettämiseen. SMTP-palvelin ' .
         'pitää määrittää <a href="#bwc/index.php?module=EmailMan&action=config"> Sähköpostiasetuksissa</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Liitteiden lähetys voi epäonnistua: virheellinen tai kelpaamaton "upload_tmp_dir" -arvo ' .
         'havaittiin. Korjaa tämä php.ini-tiedostossasi.',
     'LBL_MESSAGE_UID' => 'Viestin UID',
-    'LBL_OPEN_DRAFT_ALERT' => 'Sähköposti on luonnos. Napsauta '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'Sähköposti on luonnos. Napsauta ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  ja muokkaa se.',
     'LBL_EMAIL_BODY' => 'Sähköpostiviesti',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Sähköpostit-tietolaatikko',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Sähköpostitietueiden työpöytä',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Sähköpostin aikajana',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'vastaanottajia ei ole määritelty',
@@ -473,4 +474,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'Lähetä sähköpostia',
     'LBL_MAILBOX' => 'Saapuva tili',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Määritä sähköpostitili lähteville viesteille <a href="#OutboundEmail">Sähköposti-asetuksista</a>, jotta voit lähettää sähköposteja.',
-);
+    'LBL_TOO_SHORT' => 'Kirjoita vähintään {0} Merkkiä...',
+];

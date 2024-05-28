@@ -13,7 +13,7 @@
 {{#each actualFieldsMeta}}
     {{#if this.labelsOnTop}}
         {{#unless dismiss_label}}
-            <div class="ellipsis_inline record-label" data-name="{{name}}">
+            <div class="ellipsis_inline record-label" data-bs-placement="top" data-original-title="{{str label ../../../module}}" title="{{str label ../../../module}}" data-name="{{name}}">
                 {{#if label}}
                     <i class="sicon sicon-plus-sm label-plus"></i>
                     <span class="text-overflow">{{str label ../../../../module}}</span>
@@ -32,15 +32,15 @@
 
             <span class="record-lock-link-wrapper hide" data-name="{{name}}">
                 <a class="record-lock-link btn btn-invisible" data-type="{{type}}" data-name="{{name}}">
-                    <i class="sicon sicon-lock" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-placement="right"></i>
+                    <i class="sicon sicon-lock" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-bs-placement="right"></i>
                 </a>
             </span>
         {{/unless}}
     {{else}}
         <div class="labels-on-side{{#if show_child_labels}} empty-label{{/if}}">
             {{#unless dismiss_label}}
-                <div class="record-label-wrapper span{{labelSpan}}">
-                    <div class="ellipsis_inline record-label" data-placement="bottom" data-original-title="{{str label ../../../module}}" title="{{str label ../../../module}}" data-name="{{name}}">
+                <div class="record-label-wrapper span{{labelSpan}} relative z-[1]">
+                    <div class="ellipsis_inline record-label" data-bs-placement="bottom" data-original-title="{{str label ../../../module}}" title="{{str label ../../../module}}" data-name="{{name}}">
                         {{#if label}}
                             <i class="sicon sicon-plus-sm label-plus"></i>
                             {{#if icon}}
@@ -64,7 +64,7 @@
                 </span>
                 <span class="record-lock-link-wrapper hide" data-name="{{name}}">
                     <a class="record-lock-link btn btn-invisible" data-type="{{type}}" data-name="{{name}}">
-                        <i class="sicon sicon-lock" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-placement="right"></i>
+                        <i class="sicon sicon-lock" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-bs-placement="right"></i>
                     </a>
                 </span>
             {{/unless}}

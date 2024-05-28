@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Widok kafelków',
     'LBL_MODULE_NAME_SINGULAR' => 'Widok kafelków',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'Widok kafelków',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => 'Włączone moduły',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'Moduły widoku kafelków',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'Ustawienia modułu',
-    'LBL_PIPELINE_TABLE_HEADER' => "Wybierz pole, którego wartości będą używane jako kolumny",
+    'LBL_PIPELINE_TABLE_HEADER' => 'Wybierz pole, którego wartości będą używane jako kolumny',
     'LBL_PIPELINE_TILE_HEADER' => 'Pole nagłówków kafelków',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => 'Dostępne kolumny',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => 'Pola treści kafelków',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'Podgląd kafelka',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'Za dużo pól na kafelku.',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => 'Przed kontynuowaniem rozwiąż błędy na następujących kartach ustawień modułu:<br><br>',
-);
+    'LBL_MODULE_SELECTION' => 'Wybierz moduł, który chcesz wyświetlić i skonfigurować poniżej',
+    'LBL_SHOW_COLUMN_COUNT' => 'Pokaż liczbę kolumn',
+    'LBL_SHOW_COLUMN_TOTAL' => 'Pokaż łączną liczbę kolumn',
+    'LBL_TOTAL_FIELD' => 'Pole sumy',
+];

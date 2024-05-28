@@ -23,7 +23,19 @@ class FilePhpEntriesConverter
         $convertedFilePath = tempnam(sys_get_temp_dir(), 'enc_');
 
         $fp = fopen($path, 'r');
+
+        if (!is_resource($fp)) {
+            throw new \SugarException("File $path cannot be opened.");
+        }
+
         $convertedFp = fopen($convertedFilePath, 'w');
+
+        if (!is_resource($convertedFp)) {
+            fclose($fp);
+            unlink($convertedFilePath);
+
+            throw new \SugarException("File $convertedFilePath cannot be opened.");
+        }
 
         stream_filter_append($convertedFp, 'encodeFilter');
         stream_copy_to_stream($fp, $convertedFp);
@@ -43,7 +55,19 @@ class FilePhpEntriesConverter
         $revertedFilePath = tempnam(sys_get_temp_dir(), 'dec_');
 
         $fp = fopen($path, 'r');
+
+        if (!is_resource($fp)) {
+            throw new \SugarException("File $path cannot be opened.");
+        }
+
         $revertedFp = fopen($revertedFilePath, 'w');
+
+        if (!is_resource($revertedFp)) {
+            fclose($fp);
+            unlink($revertedFilePath);
+
+            throw new \SugarException("File $revertedFilePath cannot be opened.");
+        }
 
         stream_filter_append($revertedFp, 'decodeFilter');
         stream_copy_to_stream($fp, $revertedFp);

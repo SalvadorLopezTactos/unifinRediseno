@@ -14,16 +14,16 @@ class VisualPipelineApi extends ConfigModuleApi
 {
     public function registerApiRest()
     {
-        return array(
-            'configCreate' => array(
+        return [
+            'configCreate' => [
                 'reqType' => 'POST',
-                'path' => array('VisualPipeline', 'config'),
-                'pathVars' => array('module', ''),
+                'path' => ['VisualPipeline', 'config'],
+                'pathVars' => ['module', ''],
                 'method' => 'configSave',
                 'shortHelp' => 'Creates the config entries for the given module',
                 'longHelp' => 'include/api/help/module_config_post_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -31,10 +31,10 @@ class VisualPipelineApi extends ConfigModuleApi
      * the user has access to. Any settings related to modules the user
      * does not have access to should be kept safe.
      *
-     * @throws SugarApiExceptionNotAuthorized
      * @param ServiceBase $api
      * @param array $args
      * @return array
+     * @throws SugarApiExceptionNotAuthorized
      */
     public function configSave(ServiceBase $api, array $args)
     {
@@ -48,6 +48,9 @@ class VisualPipelineApi extends ConfigModuleApi
             'tile_body_fields',
             'records_per_column',
             'available_columns',
+            'show_column_count',
+            'show_column_total',
+            'total_field',
         ];
 
         foreach ($args['notAvailableModules'] as $naModule) {

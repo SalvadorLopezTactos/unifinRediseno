@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,25 +10,26 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class ViewCfTest extends SugarView
 {
     public function __construct()
     {
-		$this->options['show_header'] = true;
+        $this->options['show_header'] = true;
         parent::__construct();
- 	}
- 	
- 	function display() {
- 		$th = new TemplateHandler();
- 		$depScript = $th->createDependencyJavascript(array(
- 			'phone_office' => array(
- 				'calculated' => true, 
- 				"formula" => 'add(strlen($name), $employees)',
- 				"enforced" => true,
- 		)),array(), "EditView");
- 		$smarty = new Sugar_Smarty();
- 		$smarty->assign("dependencies", $depScript);
- 		$smarty->display('modules/ExpressionEngine/tpls/cfTest.tpl');
- 	}
-}
+    }
 
+    public function display()
+    {
+        $th = new TemplateHandler();
+        $depScript = $th->createDependencyJavascript([
+            'phone_office' => [
+                'calculated' => true,
+                'formula' => 'add(strlen($name), $employees)',
+                'enforced' => true,
+            ]], [], 'EditView');
+        $smarty = new Sugar_Smarty();
+        $smarty->assign('dependencies', $depScript);
+        $smarty->display('modules/ExpressionEngine/tpls/cfTest.tpl');
+    }
+}

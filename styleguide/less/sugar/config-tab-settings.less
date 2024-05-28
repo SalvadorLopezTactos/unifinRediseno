@@ -123,12 +123,6 @@
   margin-right: 11px;
 }
 
-.config-tab-settings .multi-field-label {
-  > .fa {
-    color: @black;
-  }
-}
-
 .config-tab-settings .columns {
   .console-field-remove {
     right: 3px;
@@ -165,38 +159,11 @@
     height: 75px;
     padding-left: 0;
     margin-bottom: 5px;
-
-    &:hover {
-      .list-header .fa-times-circle {
-        visibility: visible;
-        margin-top: 4px;
-      }
-    }
-
-    &:not(:hover) {
-      .list-header .fa-times-circle {
-        visibility: hidden;
-      }
-    }
   }
 
   .pill {
     &:not(.multi-field-block) {
       padding-right: 20px;
-    }
-
-    &:hover {
-      .fa-times-circle {
-        color: @darkBlue;
-        visibility: visible;
-        line-height: 14px;
-      }
-    }
-
-    &:not(:hover) {
-      .fa-times-circle {
-        visibility: hidden;
-      }
     }
   }
 }

@@ -10,22 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     //module
     'LBL_MODULE_NAME' => 'Dokumenty',
     'LBL_MODULE_NAME_SINGULAR' => 'Dokument',
     'LBL_MODULE_TITLE' => 'Dokumenty: Strona główna',
     'LNK_NEW_DOCUMENT' => 'Utwórz dokument',
-    'LNK_DOCUMENT_LIST'=> 'Wyświetl dokumenty',
+    'LNK_DOCUMENT_LIST' => 'Wyświetl dokumenty',
     'LBL_DOC_REV_HEADER' => 'Wersje dokumentów',
-    'LBL_SEARCH_FORM_TITLE'=> 'Wyszukiwanie dokumentu',
+    'LBL_SEARCH_FORM_TITLE' => 'Wyszukiwanie dokumentu',
     //vardef labels
     'LBL_DOCUMENT_ID' => 'ID dokumentu',
     'LBL_NAME' => 'Nazwa',
@@ -34,31 +33,31 @@ $mod_strings = array (
     'LBL_CATEGORY' => 'Kategoria',
     'LBL_SUBCATEGORY' => 'Podkategoria',
     'LBL_STATUS' => 'Status',
-    'LBL_CREATED_BY'=> 'Utworzono przez',
-    'LBL_DATE_ENTERED'=> 'Data utworzenia',
-    'LBL_DATE_MODIFIED'=> 'Data modyfikacji',
+    'LBL_CREATED_BY' => 'Utworzono przez',
+    'LBL_DATE_ENTERED' => 'Data utworzenia',
+    'LBL_DATE_MODIFIED' => 'Data modyfikacji',
     'LBL_DELETED' => 'Usunięto',
-    'LBL_MODIFIED'=> 'Zmodyfikowano przez (ID)',
+    'LBL_MODIFIED' => 'Zmodyfikowano przez (ID)',
     'LBL_MODIFIED_USER' => 'Zmodyfikowano przez',
-    'LBL_CREATED'=> 'Utworzono przez',
-    'LBL_REVISIONS'=>'Wersje',
-    'LBL_RELATED_DOCUMENT_ID'=>'ID powiązanych dokumentów',
-    'LBL_RELATED_DOCUMENT_REVISION_ID'=>'ID wersji powiązanych dokumentów',
-    'LBL_IS_TEMPLATE'=>'Jest szablonem',
-    'LBL_TEMPLATE_TYPE'=>'Typ dokumentu',
-    'LBL_ASSIGNED_TO_NAME'=>'Przydzielono do:',
+    'LBL_CREATED' => 'Utworzono przez',
+    'LBL_REVISIONS' => 'Wersje',
+    'LBL_RELATED_DOCUMENT_ID' => 'ID powiązanych dokumentów',
+    'LBL_RELATED_DOCUMENT_REVISION_ID' => 'ID wersji powiązanych dokumentów',
+    'LBL_IS_TEMPLATE' => 'Jest szablonem',
+    'LBL_TEMPLATE_TYPE' => 'Typ dokumentu',
+    'LBL_ASSIGNED_TO_NAME' => 'Przydzielono do:',
     'LBL_REVISION_NAME' => 'Numer wersji',
     'LBL_MIME' => 'Typ Mime',
     'LBL_REVISION' => 'Wersja',
     'LBL_DOCUMENT' => 'Powiązany dokument',
     'LBL_LATEST_REVISION' => 'Najnowsza wersja',
     'LBL_DOCUMENT_REVISION_ID' => 'ID wersji dokumentu',
-    'LBL_CHANGE_LOG'=> 'Historia zmian',
-    'LBL_ACTIVE_DATE'=> 'Data publikacji',
+    'LBL_CHANGE_LOG' => 'Historia zmian',
+    'LBL_ACTIVE_DATE' => 'Data publikacji',
     'LBL_EXPIRATION_DATE' => 'Data wygaśnięcia',
-    'LBL_FILE_EXTENSION'  => 'Rozszerzenie pliku',
+    'LBL_FILE_EXTENSION' => 'Rozszerzenie pliku',
     'LBL_LAST_REV_MIME_TYPE' => 'Ostatnia wersja typu MIME',
-    'LBL_CAT_OR_SUBCAT_UNSPEC'=>'Nieokreślony',
+    'LBL_CAT_OR_SUBCAT_UNSPEC' => 'Nieokreślony',
     'LBL_HOMEPAGE_TITLE' => 'Moje dokumenty',
     //quick search
     'LBL_NEW_FORM_TITLE' => 'Nowy dokument',
@@ -70,25 +69,25 @@ $mod_strings = array (
     'LBL_FILE_UPLOAD' => 'Plik:',
 
     'LBL_CATEGORY_VALUE' => 'Kategoria:',
-    'LBL_SUBCATEGORY_VALUE'=> 'Podkategoria:',
-    'LBL_DOC_STATUS'=> 'Status:',
-    'LBL_DOC_STATUS_ID'=> 'ID statusu:',
+    'LBL_SUBCATEGORY_VALUE' => 'Podkategoria:',
+    'LBL_DOC_STATUS' => 'Status:',
+    'LBL_DOC_STATUS_ID' => 'ID statusu:',
     'LBL_LAST_REV_CREATOR' => 'Wersja utworzona przez:',
     'LBL_LASTEST_REVISION_NAME' => 'Nazwa ostatniej wersji:',
     'LBL_SELECTED_REVISION_NAME' => 'Nazwa zaznaczonej wersji:',
     'LBL_CONTRACT_STATUS' => 'Status umowy:',
     'LBL_CONTRACT_NAME' => 'Nazwa umowy:',
     'LBL_LAST_REV_DATE' => 'Data wersji:',
-    'LBL_DOWNNLOAD_FILE'=> 'Pobierz plik:',
-    'LBL_DET_RELATED_DOCUMENT'=>'Powiązany dokument:',
-    'LBL_DET_RELATED_DOCUMENT_VERSION'=>"Wersja powiązanego dokumentu:",
-    'LBL_DET_IS_TEMPLATE'=>'Szablon? :',
-    'LBL_DET_TEMPLATE_TYPE'=>'Typ dokumentu:',
-    'LBL_TEAM'=> 'Zespół:',
+    'LBL_DOWNNLOAD_FILE' => 'Pobierz plik:',
+    'LBL_DET_RELATED_DOCUMENT' => 'Powiązany dokument:',
+    'LBL_DET_RELATED_DOCUMENT_VERSION' => 'Wersja powiązanego dokumentu:',
+    'LBL_DET_IS_TEMPLATE' => 'Szablon? :',
+    'LBL_DET_TEMPLATE_TYPE' => 'Typ dokumentu:',
+    'LBL_TEAM' => 'Zespół:',
     'LBL_IS_SHARED' => 'Dostępne zewnętrznie:',
-    'LBL_DOC_DESCRIPTION'=>'Opis:',
-    'LBL_DOC_ACTIVE_DATE'=> 'Data publikacji:',
-    'LBL_DOC_EXP_DATE'=> 'Data wygaśnięcia:',
+    'LBL_DOC_DESCRIPTION' => 'Opis:',
+    'LBL_DOC_ACTIVE_DATE' => 'Data publikacji:',
+    'LBL_DOC_EXP_DATE' => 'Data wygaśnięcia:',
 
     //document list view.
     'LBL_LIST_FORM_TITLE' => 'Lista dokumentów',
@@ -98,11 +97,11 @@ $mod_strings = array (
     'LBL_LIST_REVISION' => 'Wersja',
     'LBL_LIST_LAST_REV_CREATOR' => 'Opublikowano przez',
     'LBL_LIST_LAST_REV_DATE' => 'Data wersji',
-    'LBL_LIST_VIEW_DOCUMENT'=>'Wyświetl',
-    'LBL_LIST_DOWNLOAD'=> 'Pobierz',
+    'LBL_LIST_VIEW_DOCUMENT' => 'Wyświetl',
+    'LBL_LIST_DOWNLOAD' => 'Pobierz',
     'LBL_LIST_ACTIVE_DATE' => 'Data publikacji',
     'LBL_LIST_EXP_DATE' => 'Data wygaśnięcia',
-    'LBL_LIST_STATUS'=>'Status',
+    'LBL_LIST_STATUS' => 'Status',
     'LBL_LINKED_ID' => 'Powiązane ID',
     'LBL_SELECTED_REVISION_ID' => 'ID zaznaczonej wersji',
     'LBL_LATEST_REVISION_ID' => 'ID najnowszej wersji',
@@ -114,33 +113,33 @@ $mod_strings = array (
     //document search form.
     'LBL_SF_DOCUMENT' => 'Nazwa dokumentu:',
     'LBL_SF_CATEGORY' => 'Kategoria:',
-    'LBL_SF_SUBCATEGORY'=> 'Podkategoria:',
+    'LBL_SF_SUBCATEGORY' => 'Podkategoria:',
     'LBL_SF_ACTIVE_DATE' => 'Data publikacji:',
-    'LBL_SF_EXP_DATE'=> 'Data wygaśnięcia:',
+    'LBL_SF_EXP_DATE' => 'Data wygaśnięcia:',
 
     'DEF_CREATE_LOG' => 'Dokument utworzono',
 
     //error messages
-    'ERR_DOC_NAME'=>'Nazwa dokumentu',
-    'ERR_DOC_ACTIVE_DATE'=>'Data publikacji',
-    'ERR_DOC_EXP_DATE'=> 'Data wygaśnięcia',
-    'ERR_FILENAME'=> 'Nazwa pliku',
-    'ERR_DOC_VERSION'=> 'Wersja dokumentu',
-    'ERR_DELETE_CONFIRM'=> 'Czy chcesz usunąć tę wersję dokumentu?',
-    'ERR_DELETE_LATEST_VERSION'=> 'Brak uprawnień do usunięcia najnowszej wersji dokumentu.',
+    'ERR_DOC_NAME' => 'Nazwa dokumentu',
+    'ERR_DOC_ACTIVE_DATE' => 'Data publikacji',
+    'ERR_DOC_EXP_DATE' => 'Data wygaśnięcia',
+    'ERR_FILENAME' => 'Nazwa pliku',
+    'ERR_DOC_VERSION' => 'Wersja dokumentu',
+    'ERR_DELETE_CONFIRM' => 'Czy chcesz usunąć tę wersję dokumentu?',
+    'ERR_DELETE_LATEST_VERSION' => 'Brak uprawnień do usunięcia najnowszej wersji dokumentu.',
     'LNK_NEW_MAIL_MERGE' => 'Scalanie poczty',
     'LBL_MAIL_MERGE_DOCUMENT' => 'Szablon scalania poczty:',
     'ERR_MISSING_FILE' => 'W tym dokumencie brakuje pliku, prawdopodobnie z powodu błędu podczas dodawania. Spróbuj ponownie dodać plik lub skontaktuj się z administratorem.',
 
     'LBL_TREE_TITLE' => 'Dokumenty',
     //sub-panel vardefs.
-    'LBL_LIST_DOCUMENT_NAME'=>'Nazwa',
-    'LBL_LIST_IS_TEMPLATE'=>'Szablon?',
-    'LBL_LIST_TEMPLATE_TYPE'=>'Typ dokumentu',
-    'LBL_LIST_SELECTED_REVISION'=>'Wybrane wersje',
-    'LBL_LIST_LATEST_REVISION'=>'Najnowsza wersja',
-    'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Powiązane umowy',
-    'LBL_LAST_REV_CREATE_DATE'=>'Data utworzenia ostatniego wydania',
+    'LBL_LIST_DOCUMENT_NAME' => 'Nazwa',
+    'LBL_LIST_IS_TEMPLATE' => 'Szablon?',
+    'LBL_LIST_TEMPLATE_TYPE' => 'Typ dokumentu',
+    'LBL_LIST_SELECTED_REVISION' => 'Wybrane wersje',
+    'LBL_LIST_LATEST_REVISION' => 'Najnowsza wersja',
+    'LBL_CONTRACTS_SUBPANEL_TITLE' => 'Powiązane umowy',
+    'LBL_LAST_REV_CREATE_DATE' => 'Data utworzenia ostatniego wydania',
     //'LNK_DOCUMENT_CAT'=>'Document Categories',
     'LBL_CONTRACTS' => 'Umowy',
     'LBL_CREATED_USER' => 'Utworzono przez',
@@ -171,9 +170,11 @@ $mod_strings = array (
     // Dashboards
     'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Pulpit rekordów dokumentów',
     'LBL_MY_DOCUMENTS' => 'Moje dokumenty',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Oś czasu dokumentów',
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Wyślij do DocuSign',
+    'LBL_SEND_TO_DOCUSIGN_TEMPLATE_BUTTON' => 'Wyślij do DocuSign z szablonem',
 
     // Cloud Drive
 
@@ -183,4 +184,4 @@ $mod_strings = array (
     'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Synchronizuj z OneDrive',
     'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Synchronizuj wszystko z Dropbox',
     'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Synchronizuj z Dropbox',
-);
+];

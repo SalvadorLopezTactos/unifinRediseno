@@ -11,22 +11,22 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Cases']['base']['view']['request-closed-cases-dashlet'] = array(
+$viewdefs['Cases']['base']['view']['request-closed-cases-dashlet'] = [
     'template' => 'list',
-    'dashlets' => array(
-        array(
+    'dashlets' => [
+        [
             'label' => 'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME',
             'description' => 'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION',
-            'config' => array(
+            'config' => [
                 'module' => 'Cases',
-            ),
-            'preview' => array(
+            ],
+            'preview' => [
                 'module' => 'Cases',
-            ),
-            'filter' => array(
-                'module' => array('Cases'),
-                'view' => array('records'),
-            ),
-        ),
-    ),
-);
+            ],
+            'filter' => [
+                'module' => ['Cases'],
+                'view' => ['records'],
+            ],
+        ],
+    ],
+];

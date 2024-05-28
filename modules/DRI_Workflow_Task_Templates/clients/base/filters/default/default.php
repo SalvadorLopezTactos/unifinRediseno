@@ -10,42 +10,31 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['DRI_Workflow_Task_Templates']['base']['filter']['default'] = [
-  'default_filter' => 'all_records',
-  'fields' =>
-  [
-    'name' =>
-    [
+    'default_filter' => 'all_records',
+    'fields' => [
+        'name' => [
+        ],
+        'dri_subworkflow_template_name' => [
+        ],
+        'dri_workflow_template_name' => [
+        ],
+        'sort_order' => [
+        ],
+        'task_due_date_type' => [
+        ],
+        'task_due_days' => [
+        ],
+        'priority' => [
+        ],
+        'type' => [
+        ],
+        '$owner' => [
+            'predefined_filter' => true,
+            'vname' => 'LBL_CURRENT_USER_FILTER',
+        ],
+        '$favorite' => [
+            'predefined_filter' => true,
+            'vname' => 'LBL_FAVORITES_FILTER',
+        ],
     ],
-    'dri_subworkflow_template_name' =>
-    [
-    ],
-    'dri_workflow_template_name' =>
-    [
-    ],
-    'sort_order' =>
-    [
-    ],
-    'task_due_date_type' =>
-    [
-    ],
-    'task_due_days' =>
-    [
-    ],
-    'priority' =>
-    [
-    ],
-    'type' =>
-    [
-    ],
-    '$owner' =>
-    [
-      'predefined_filter' => true,
-      'vname' => 'LBL_CURRENT_USER_FILTER',
-    ],
-    '$favorite' =>
-    [
-      'predefined_filter' => true,
-      'vname' => 'LBL_FAVORITES_FILTER',
-    ],
-  ],
 ];

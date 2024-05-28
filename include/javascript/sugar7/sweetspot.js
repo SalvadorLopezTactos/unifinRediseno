@@ -26,7 +26,7 @@
                     callback: 'openConfig',
                     action: 'config',
                     name: app.lang.get('LBL_SWEETSPOT_CONFIG'),
-                    icon: 'fa-cog'
+                    icon: 'sicon-settings'
                 }
             ];
             return actions;

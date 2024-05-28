@@ -33,7 +33,7 @@ class RestRequest
      * The request headers
      * @var array
      */
-    protected $request_headers = array();
+    protected $request_headers = [];
 
     /**
      * REST platform
@@ -116,7 +116,7 @@ class RestRequest
      */
     public function getRoute()
     {
-    	return $this->route;
+        return $this->route;
     }
 
     /**
@@ -125,7 +125,7 @@ class RestRequest
      */
     public function getArgs()
     {
-    	return $this->args;
+        return $this->args;
     }
 
     /**
@@ -134,7 +134,7 @@ class RestRequest
      */
     public function getPlatform()
     {
-    	return $this->platform;
+        return $this->platform;
     }
 
     /**
@@ -151,14 +151,14 @@ class RestRequest
         if (empty($this->headerVersion) && empty($this->urlVersion)) {
             // invalid if version is neither in Accept Header nor URL
             throw new SugarApiExceptionIncorrectVersion(
-                "No version provided in either Accept Header or URL!"
+                'No version provided in either Accept Header or URL!'
             );
         }
 
         // invalid if both header and url have version
         if (!empty($this->headerVersion) && !empty($this->urlVersion)) {
             throw new SugarApiExceptionIncorrectVersion(
-                "Version must be specified in either Accept Header or URL, not both."
+                'Version must be specified in either Accept Header or URL, not both.'
             );
         }
 
@@ -232,7 +232,7 @@ class RestRequest
      */
     public function getPath()
     {
-    	return $this->path;
+        return $this->path;
     }
 
     /**
@@ -241,7 +241,7 @@ class RestRequest
      */
     public function getMethod()
     {
-    	return $this->method;
+        return $this->method;
     }
 
     /**
@@ -250,7 +250,7 @@ class RestRequest
      */
     public function getPostContents()
     {
-        if(is_null($this->postContents)) {
+        if (is_null($this->postContents)) {
             $this->postContents = file_get_contents('php://input');
         }
         return $this->postContents;
@@ -263,8 +263,8 @@ class RestRequest
      */
     public function setRoute($route)
     {
-    	$this->route = $route;
-    	return $this;
+        $this->route = $route;
+        return $this;
     }
 
     /**
@@ -274,8 +274,8 @@ class RestRequest
      */
     public function setArgs($args)
     {
-    	$this->args = $args;
-    	return $this;
+        $this->args = $args;
+        return $this;
     }
 
     /**
@@ -285,8 +285,8 @@ class RestRequest
      */
     public function setMethod($method)
     {
-    	$this->method = $method;
-    	return $this;
+        $this->method = $method;
+        return $this;
     }
 
     /**
@@ -309,10 +309,11 @@ class RestRequest
      *
      * @return string
      */
-    public function getRawPath() {
-        if ( !empty($this->request['__sugar_url']) ) {
+    public function getRawPath()
+    {
+        if (!empty($this->request['__sugar_url'])) {
             $rawPath = $this->request['__sugar_url'];
-        } else if ( !empty($this->server['PATH_INFO']) ) {
+        } elseif (!empty($this->server['PATH_INFO'])) {
             $rawPath = $this->server['PATH_INFO'];
         } else {
             $rawPath = '/';
@@ -325,7 +326,8 @@ class RestRequest
      * Set the Request headers in an array
      * @return array
      */
-    public function getRequestHeaders() {
+    public function getRequestHeaders()
+    {
         return $this->request_headers;
     }
 
@@ -335,7 +337,7 @@ class RestRequest
      */
     protected function parseRequestHeaders()
     {
-        $headers = array();
+        $headers = [];
         foreach ($this->server as $key => $value) {
             if (substr($key, 0, 5) <> 'HTTP_') {
                 continue;
@@ -347,7 +349,6 @@ class RestRequest
         if (!empty($this->request_headers['ACCEPT'])) {
             $this->parseAcceptHeader($this->request_headers['ACCEPT']);
         }
-
     }
 
     /**
@@ -359,7 +360,7 @@ class RestRequest
      */
     public function parsePath($rawPath)
     {
-        $pathBits = explode('/',trim($rawPath,'/'));
+        $pathBits = explode('/', trim($rawPath, '/'));
         $versionBit = $pathBits[0];
 
         // API version supports format: v{xx_yy}, MAJOR_MINOR
@@ -386,7 +387,7 @@ class RestRequest
      * application/vnd.sugarcrm.mobile+json; version=11.123   // minor version is 3 digits
      * application/vnd.sugarcrm.base; version=111           // major version is not 2-digit
      *
-     * @param string $acceptData, value of accept data
+     * @param string $acceptData , value of accept data
      * @return string/null, the version string
      */
 
@@ -394,7 +395,7 @@ class RestRequest
     {
         $acceptItems = explode(',', $acceptData);
         foreach ($acceptItems as $item) {
-            $matches = array();
+            $matches = [];
             if (preg_match(self::ACCEPT_HEADER_VERSION_PATTERN, trim($item), $matches)) {
                 // requested response type
                 $this->requestedResponseType = $matches[2];
@@ -427,7 +428,7 @@ class RestRequest
      */
     public function getPathVars($route)
     {
-        $outputVars = array();
+        $outputVars = [];
         if (empty($route['pathVars'])) {
             return $outputVars;
         }
@@ -445,8 +446,8 @@ class RestRequest
      */
     public function getQueryVars()
     {
-        $vars = array();
-        if(!empty($this->server['QUERY_STRING'])) {
+        $vars = [];
+        if (!empty($this->server['QUERY_STRING'])) {
             parse_str($this->server['QUERY_STRING'], $vars);
         }
         return $vars;
@@ -463,7 +464,7 @@ class RestRequest
     public function getResourceURIBase($version)
     {
         if (empty($version)) {
-            throw new SugarApiExceptionIncorrectVersion("missing version!");
+            throw new SugarApiExceptionIncorrectVersion('missing version!');
         }
 
         // Default the base part of the request URI
@@ -473,7 +474,7 @@ class RestRequest
         if (isset($this->request['__sugar_url'])
             && (empty($this->server['REQUEST_URI'])
                 || empty($this->server['SCRIPT_NAME'])
-                || strpos($this->server['REQUEST_URI'], $this->server['SCRIPT_NAME']) === false)) {
+                || strpos($this->server['REQUEST_URI'], (string) $this->server['SCRIPT_NAME']) === false)) {
             // This is a forwarded rewritten URL
             $apiBase = '/rest/';
         }
@@ -494,7 +495,9 @@ class RestRequest
      */
     public function getRequestURI()
     {
-        if(empty($this->server['REQUEST_URI'])) return '';
+        if (empty($this->server['REQUEST_URI'])) {
+            return '';
+        }
         return $this->server['REQUEST_URI'];
     }
 

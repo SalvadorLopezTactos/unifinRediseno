@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kunnskapsbasemaler',
     'LBL_MODULE_NAME_SINGULAR' => 'Kunnskapsbasemal',
     'LBL_MODULE_TITLE' => 'Kunnskapsbasemal',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Se maler',
     'LBL_TEXT_BODY' => 'Brødtekst:',
     'LBL_LIST_TEMPLATE_NAME' => 'Malnavn',
-);
+];

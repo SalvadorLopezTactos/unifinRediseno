@@ -13,61 +13,58 @@
  * @deprecated as of 11.2.0 and will be removed in a future release
  * Please use View.Views.Portal.ActivityTimelineView instead
  */
-$viewdefs['Notes']['portal']['view']['activity'] = array(
-    'buttons' =>
-    array(
+$viewdefs['Notes']['portal']['view']['activity'] = [
+    'buttons' => [
         0 =>
-        array(
-            'name' => 'show_more_button',
-            'type' => 'button',
-            'label' => 'Show More',
-            'class' => 'loading wide'
-        ),
-    ),
-    'panels' =>
-    array(
+            [
+                'name' => 'show_more_button',
+                'type' => 'button',
+                'label' => 'Show More',
+                'class' => 'loading wide',
+            ],
+    ],
+    'panels' => [
         0 =>
-        array(
-            'label' => 'LBL_PANEL_DEFAULT',
-            'fields' =>
-            array(
-                0 =>
-                array(
-                    'name' => 'name',
-                    'default' => true,
-                    'enabled' => true,
-                    'width' =>  8
-                ),
-                1 =>
-                array(
-                    'name' => 'description',
-                    'default' => true,
-                    'enabled' => true,
-                    'width' => 13
-                ),
-                2 =>
-                array(
-                    'name' => 'date_entered',
-                    'default' => true,
-                    'enabled' => true,
-                    'width' => 13
-                ),
-                3 =>
-                array(
-                    'name' => 'created_by_name',
-                    'default' => true,
-                    'enabled' => true,
-                    'width' => 13
-                ),
-                4 =>
-                array(
-                    'name' => 'filename',
-                    'default' => true,
-                    'enabled' => true,
-                    'sorting' => true,
-                    'width' => 35
-                ),
-            ),
-        ),
-    ),
-);
+            [
+                'label' => 'LBL_PANEL_DEFAULT',
+                'fields' => [
+                    0 =>
+                        [
+                            'name' => 'name',
+                            'default' => true,
+                            'enabled' => true,
+                            'width' => 8,
+                        ],
+                    1 =>
+                        [
+                            'name' => 'description',
+                            'default' => true,
+                            'enabled' => true,
+                            'width' => 13,
+                        ],
+                    2 =>
+                        [
+                            'name' => 'date_entered',
+                            'default' => true,
+                            'enabled' => true,
+                            'width' => 13,
+                        ],
+                    3 =>
+                        [
+                            'name' => 'created_by_name',
+                            'default' => true,
+                            'enabled' => true,
+                            'width' => 13,
+                        ],
+                    4 =>
+                        [
+                            'name' => 'filename',
+                            'default' => true,
+                            'enabled' => true,
+                            'sorting' => true,
+                            'width' => 35,
+                        ],
+                ],
+            ],
+    ],
+];

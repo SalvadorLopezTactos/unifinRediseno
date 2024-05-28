@@ -19,7 +19,6 @@
  */
 class PMSEImporter
 {
-
     /**
      * @var $beanFactory
      * @access private
@@ -110,7 +109,7 @@ class PMSEImporter
     public function __construct()
     {
         $msg = 'Constructors for PMSE Importers will be deprecated in a future release. ' .
-               'Please use $this->getBean() when a process bean is needed.';
+            'Please use $this->getBean() when a process bean is needed.';
         LoggerManager::getLogger()->deprecated($msg);
         $this->setBean();
         $this->initialize();
@@ -363,7 +362,7 @@ class PMSEImporter
         foreach ($dependencies as $type => $definitions) {
             foreach ($definitions as $def) {
                 $oldId = $def['id'];
-                if (!in_array($oldId, $selectedIds)) {
+                if (!safeInArray($oldId, $selectedIds)) {
                     continue;
                 }
                 $importer = PMSEImporterFactory::getImporter($type);
@@ -450,7 +449,7 @@ class PMSEImporter
      */
     public function mapDefinitionsToIDs($dependencies, $type)
     {
-        $mapping = array();
+        $mapping = [];
         switch ($type) {
             case 'business_rule':
                 foreach ($dependencies['business_rule'] as $businessRuleDependency) {
@@ -487,7 +486,7 @@ class PMSEImporter
         $q = new SugarQuery();
         switch ($dependencyType) {
             case 'business_rule':
-                $q->select(array('id', 'rst_source_definition'));
+                $q->select(['id', 'rst_source_definition']);
                 $q->from(BeanFactory::getBean('pmse_Business_Rules'));
                 if (!empty($project['project']['prj_module'])) {
                     $q->where()->equals('rst_module', $project['project']['prj_module']);
@@ -505,7 +504,7 @@ class PMSEImporter
                 }
                 break;
             case 'email_template':
-                $q->select(array('id', 'base_module', 'name', 'description', 'subject', 'body_html'));
+                $q->select(['id', 'base_module', 'name', 'description', 'subject', 'body_html']);
                 $q->from(BeanFactory::getBean('pmse_Emails_Templates'));
                 if (!empty($project['project']['prj_module'])) {
                     $q->where()->equals('base_module', $project['project']['prj_module']);
@@ -575,7 +574,7 @@ class PMSEImporter
                 if (isset($locked[$group])) {
                     $locked[$group][] = $lockedField;
                 } else {
-                    $locked[$group] = array($lockedField);
+                    $locked[$group] = [$lockedField];
                 }
             }
             // tally the number of fields in each group
@@ -589,9 +588,9 @@ class PMSEImporter
                 }
             }
             foreach ($locked as $group => $fields) {
-                if ($total[$group] > count($fields)) {
+                if ($total[$group] > safeCount($fields)) {
                     // found a failure
-                    $msg =  "SugarBPM\u{2122}" . ' Partially Locked Field Group - Field '
+                    $msg = "SugarBPM\u{2122}" . ' Partially Locked Field Group - Field '
                         . implode(', ', $fields) . ' locked in group ' . $group . '.';
                     LoggerManager::getLogger()->fatal($msg);
                     $sugarApiExceptionError = new SugarApiExceptionError(
@@ -611,7 +610,8 @@ class PMSEImporter
      * @param $data
      * @return bool
      */
-    protected function isPAOldVersionFile($data) {
+    protected function isPAOldVersionFile($data)
+    {
         return (substr($data, 0, 4) == 'a:2:');
     }
 
@@ -668,7 +668,7 @@ class PMSEImporter
         // is a new bean and not an existing bean
         $ret = false;
         if ($bean->id) {
-            $q = new \SugarQuery;
+            $q = new \SugarQuery();
             $q->select(['id']);
             $q->from($bean, [
                 'team_security' => false,
@@ -784,8 +784,8 @@ class PMSEImporter
     public function getNameWithSuffix($name)
     {
         $names = [];
-        $nums = array();
-        $where = $this->getBean()->table_name . '.' . $this->name . " LIKE " . $this->getBean()->db->quoted($name . "%");
+        $nums = [];
+        $where = $this->getBean()->table_name . '.' . $this->name . ' LIKE ' . $this->getBean()->db->quoted($name . '%');
         $rows = $this->getBean()->get_full_list($this->name, $where);
         if (!is_null($rows)) {
             foreach ($rows as $row) {
@@ -798,10 +798,9 @@ class PMSEImporter
             if (!in_array($name, $names)) {
                 $newName = $name;
             } else {
-                $num = (count($nums) > 0) ? max($nums) + 1 : 1;
+                $num = (safeCount($nums) > 0) ? max($nums) + 1 : 1;
                 $newName = $name . ' (' . $num . ')';
             }
-
         } else {
             $newName = $name;
         }
@@ -837,11 +836,11 @@ class PMSEImporter
      * @param array $except Fields to be excepted from unsetting
      * @return array
      */
-    public function unsetCommonFields($projectData, $except = array())
+    public function unsetCommonFields($projectData, $except = [])
     {
         $except = $this->getAllFieldExceptions($except);
 
-        $special_fields = array(
+        $special_fields = [
             'id',
             'date_entered',
             'date_modified',
@@ -859,12 +858,12 @@ class PMSEImporter
             'my_favorite',
             'dia_id',
             'prj_id',
-            'pro_id'
-        );
+            'pro_id',
+        ];
 
         // Loop and unset unless fields are excepted
         foreach ($projectData as $key => $value) {
-            if (in_array($key, $special_fields) && !in_array($key, $except)) {
+            if (in_array($key, $special_fields) && !safeInArray($key, $except)) {
                 unset($projectData[$key]);
             }
         }

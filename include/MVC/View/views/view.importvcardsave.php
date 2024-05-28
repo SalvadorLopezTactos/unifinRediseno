@@ -9,14 +9,13 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-
 class ViewImportvcardsave extends SugarView
 {
     public $type = 'save';
@@ -36,7 +35,7 @@ class ViewImportvcardsave extends SugarView
             $vcard = new vCard();
             try {
                 $record = $vcard->importVCard($_FILES['vcard']['tmp_name'], $_REQUEST['module']);
-            } catch (Exception $e) {
+            } catch (Exception $exception) {
                 SugarApplication::redirect($redirect . '&error=vcardErrorRequired');
             }
 
@@ -44,10 +43,10 @@ class ViewImportvcardsave extends SugarView
         } else {
             switch ($_FILES['vcard']['error']) {
                 case UPLOAD_ERR_FORM_SIZE:
-                    $redirect .= "&error=vcardErrorFilesize";
+                    $redirect .= '&error=vcardErrorFilesize';
                     break;
                 default:
-                    $redirect .= "&error=vcardErrorDefault";
+                    $redirect .= '&error=vcardErrorDefault';
                     $GLOBALS['log']->info('Upload error code: ' . $_FILES['vcard']['error'] . '.');
                     break;
             }

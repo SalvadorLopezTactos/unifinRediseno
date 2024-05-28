@@ -17,7 +17,7 @@ class ViewHistory extends SugarView
      * @var string|mixed
      */
     public $layout;
-    var $pageSize = 10 ;
+    public $pageSize = 10;
 
     /**
      * @var History
@@ -30,33 +30,32 @@ class ViewHistory extends SugarView
     protected $parser;
 
     /**
-	 * @see SugarView::_getModuleTitleParams()
-	 */
-	protected function _getModuleTitleParams($browserTitle = false)
-	{
-	    global $mod_strings;
-	    
-    	return array(
-    	   translate('LBL_MODULE_NAME','Administration'),
-    	   ModuleBuilderController::getModuleTitle(),
-    	   );
+     * @see SugarView::_getModuleTitleParams()
+     */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _getModuleTitleParams($browserTitle = false)
+    {
+        global $mod_strings;
+
+        return [
+            translate('LBL_MODULE_NAME', 'Administration'),
+            ModuleBuilderController::getModuleTitle(),
+        ];
     }
 
-	function display ()
+    public function display()
     {
-        $this->layout = strtolower ( $_REQUEST [ 'view' ] ) ;
-        
-        $subpanelName = null ;
-        if ((strtolower ( $this->layout ) == 'listview') && (!empty ( $_REQUEST [ 'subpanel' ] )))
-        {
-            $subpanelName = $_REQUEST [ 'subpanel' ] ;
-            
+        $this->layout = strtolower($_REQUEST ['view']);
+
+        $subpanelName = null;
+        if ((strtolower($this->layout) == 'listview') && (!empty($_REQUEST ['subpanel']))) {
+            $subpanelName = $_REQUEST ['subpanel'];
         }
-        
-        $packageName = (isset ( $_REQUEST [ 'view_package' ] ) && (strtolower ( $_REQUEST [ 'view_package' ] ) != 'studio')) ? $_REQUEST [ 'view_package' ] : null ;
+
+        $packageName = (isset($_REQUEST ['view_package']) && (strtolower($_REQUEST ['view_package']) != 'studio')) ? $_REQUEST ['view_package'] : null;
         $this->module = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
 
-        $params = array();
+        $params = [];
         if (!empty($_REQUEST['role'])) {
             $params['role'] = $_REQUEST['role'];
         }
@@ -77,35 +76,34 @@ class ViewHistory extends SugarView
             null,
             $params
         );
-        $this->history = $this->parser->getHistory () ;
-        $action = ! empty ( $_REQUEST [ 'histAction' ] ) ? $_REQUEST [ 'histAction' ] : 'browse' ;
-        $GLOBALS['log']->debug( get_class($this)."->display(): performing History action {$action}" ) ;
-        $this->$action () ;
+        $this->history = $this->parser->getHistory();
+        $action = !empty($_REQUEST ['histAction']) ? $_REQUEST ['histAction'] : 'browse';
+        $GLOBALS['log']->debug(get_class($this) . "->display(): performing History action {$action}");
+        $this->$action();
     }
 
-    function browse ()
+    public function browse()
     {
-        global $timedate ;
+        global $timedate;
 
-        $smarty = new Sugar_Smarty ( ) ;
-        global $mod_strings ;
-        $smarty->assign ( 'mod_strings', $mod_strings ) ;
-        $smarty->assign ( 'view_module', $this->module ) ;
-        $smarty->assign ( 'view', $this->layout ) ;
+        $smarty = new Sugar_Smarty();
+        global $mod_strings;
+        $smarty->assign('mod_strings', $mod_strings);
+        $smarty->assign('view_module', $this->module);
+        $smarty->assign('view', $this->layout);
 
         $subpanel = $this->request->getValidInputRequest('subpanel');
         $smarty->assign('subpanel', $subpanel);
 
-        $page = $this->request->getValidInputRequest('page', array(
-            'Assert\Type' => array('type' => 'numeric'),
-            'Assert\Range' => array('min' => 0),
-        ), 0);
+        $page = $this->request->getValidInputRequest('page', [
+            'Assert\Type' => ['type' => 'numeric'],
+            'Assert\Range' => ['min' => 0],
+        ], 0);
 
         $count = $this->history->getCount();
-        $ts = $this->history->getNth ( $page * $this->pageSize ) ;
-        $snapshots = array ( ) ;
-        for ( $i = 0 ; $i <= $this->pageSize && $ts > 0 ; $i ++ )
-        {
+        $ts = $this->history->getNth($page * $this->pageSize);
+        $snapshots = [];
+        for ($i = 0; $i <= $this->pageSize && $ts > 0; $i++) {
             if ($page * $this->pageSize + $i + 1 == $count) {
                 $label = translate('LBL_MB_DEFAULT_LAYOUT');
                 $isDefault = true;
@@ -114,11 +112,11 @@ class ViewHistory extends SugarView
                 $label = $timedate->to_display_date_time($dbDate);
                 $isDefault = false;
             }
-            $snapshots[$ts] = array(
+            $snapshots[$ts] = [
                 'label' => $label,
                 'isDefault' => $isDefault,
-            );
-            $ts = $this->history->getNext () ;
+            ];
+            $ts = $this->history->getNext();
         }
 
         // If we're viewing history for the Opportunities module, we remove the
@@ -127,29 +125,26 @@ class ViewHistory extends SugarView
             array_pop($snapshots);
         }
 
-        if (count ( $snapshots ) > $this->pageSize)
-        {
-            $smarty->assign ( 'nextPage', true ) ;
+        if (safeCount($snapshots) > $this->pageSize) {
+            $smarty->assign('nextPage', true);
         }
-        $snapshots = array_slice ( $snapshots, 0, $this->pageSize, true ) ;
-        $smarty->assign ( 'currentPage', $page ) ;
-        $smarty->assign ( 'snapshots', $snapshots ) ;
-        
-        $html = $smarty->fetch ( 'modules/ModuleBuilder/tpls/history.tpl' ) ;
-        echo $html ;
+        $snapshots = array_slice($snapshots, 0, $this->pageSize, true);
+        $smarty->assign('currentPage', $page);
+        $smarty->assign('snapshots', $snapshots);
+
+        $html = $smarty->fetch('modules/ModuleBuilder/tpls/history.tpl');
+        echo $html;
     }
 
-    function preview ()
+    public function preview()
     {
-        global $mod_strings ;
-        if (! isset ( $_REQUEST [ 'sid' ] ))
-        {
-            die ( 'SID Required' ) ;
+        global $mod_strings;
+        if (!isset($_REQUEST ['sid'])) {
+            die('SID Required');
         }
-        $sid = $_REQUEST [ 'sid' ] ;
+        $sid = $_REQUEST ['sid'];
         $subpanel = '';
-        if (! empty ( $_REQUEST [ 'subpanel' ] ))
-        {
+        if (!empty($_REQUEST ['subpanel'])) {
             $subpanel = $_REQUEST['subpanel'];
         }
 
@@ -164,33 +159,29 @@ class ViewHistory extends SugarView
             . ', ' . htmlspecialchars(json_encode($subpanel), ENT_COMPAT)
             . ', ' . htmlspecialchars(json_encode($isDefault), ENT_COMPAT)
             . ");' style='margin:5px;'>";
-        $this->history->restoreByTimestamp ( $sid ) ;
+        $this->history->restoreByTimestamp($sid);
 
         if (($this->layout == 'listview') || ($this->layout == 'wirelesslistview')) {
-            $view = new ViewListView ( ) ;
-        } else if ($this->layout == 'basic_search' || $this->layout == 'advanced_search')
-        {
-            $view = new ViewSearchView ( ) ;
-        }  else if ($this->layout == 'popuplist' || $this->layout == 'popupsearch' || $this->layout == 'selection-list')
-        {
-        	$view = new ViewPopupview ( ) ;
-        } else
-        {
-            $view = new ViewLayoutView ( ) ;
+            $view = new ViewListView();
+        } elseif ($this->layout == 'basic_search' || $this->layout == 'advanced_search') {
+            $view = new ViewSearchView();
+        } elseif ($this->layout == 'popuplist' || $this->layout == 'popupsearch' || $this->layout == 'selection-list') {
+            $view = new ViewPopupview();
+        } else {
+            $view = new ViewLayoutView();
         }
-        
-        $view->display ( true ) ;
-        $this->history->undoRestore () ;
+
+        $view->display(true);
+        $this->history->undoRestore();
     }
 
-    function restore ()
+    public function restore()
     {
-        if (! isset ( $_REQUEST [ 'sid' ] ))
-        {
-            die ( 'SID Required' ) ;
+        if (!isset($_REQUEST ['sid'])) {
+            die('SID Required');
         }
-        $sid = $_REQUEST [ 'sid' ] ;
-        $this->history->restoreByTimestamp ( $sid ) ;
+        $sid = $_REQUEST ['sid'];
+        $this->history->restoreByTimestamp($sid);
     }
 
     protected function resetToDefault()
@@ -200,12 +191,12 @@ class ViewHistory extends SugarView
         $this->history->savePreview($fileName);
     }
 
-	/**
- 	 * Restores a layout to its current customized state. 
- 	 * Called when leaving a restored layout without saving.
- 	 */
-    function unrestore() 
+    /**
+     * Restores a layout to its current customized state.
+     * Called when leaving a restored layout without saving.
+     */
+    public function unrestore()
     {
-    	$this->history->undoRestore () ;
+        $this->history->undoRestore();
     }
 }

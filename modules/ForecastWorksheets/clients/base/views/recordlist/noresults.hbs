@@ -13,11 +13,11 @@
 <tr>
     {{#if collection.dataFetched}}
         {{#eq filteredCollection.length 0}}
-            <td class="tcenter" colspan="{{this._fields.visible.length}}">{{str "LBL_LISTVIEW_NO_RECORDS"}}</td>
+            <td class="text-center" colspan="{{this._fields.visible.length}}">{{str "LBL_LISTVIEW_NO_RECORDS"}}</td>
             <td>&nbsp;</td>
         {{/eq}}
     {{else}}
-        <td class="tcenter" colspan="{{this._fields.visible.length}}">
+        <td class="text-center" colspan="{{this._fields.visible.length}}">
             {{loading 'LBL_ALERT_TITLE_LOADING'}}
         </td>
         <td>&nbsp;</td>

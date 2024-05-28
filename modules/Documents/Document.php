@@ -12,66 +12,67 @@
 
 
 // User is used to store Forecast information.
-class Document extends SugarBean {
+class Document extends SugarBean
+{
+    public $id;
+    public $document_name;
+    public $description;
+    public $category_id;
+    public $subcategory_id;
+    public $status_id;
+    public $status;
+    public $created_by;
+    public $date_entered;
+    public $date_modified;
+    public $modified_user_id;
+    public $assigned_user_id;
+    public $team_id;
+    public $active_date;
+    public $exp_date;
+    public $document_revision_id;
+    public $filename;
+    public $doc_type;
 
-	var $id;
-	var $document_name;
-	var $description;
-	var $category_id;
-	var $subcategory_id;
-	var $status_id;
-	var $status;
-	var $created_by;
-	var $date_entered;
-	var $date_modified;
-	var $modified_user_id;
-    var $assigned_user_id;
-	var $team_id;
-	var $active_date;
-	var $exp_date;
-	var $document_revision_id;
-	var $filename;
-	var $doc_type;
+    public $img_name;
+    public $img_name_bare;
+    public $related_doc_id;
+    public $related_doc_name;
+    public $related_doc_rev_id;
+    public $related_doc_rev_number;
+    public $is_template;
+    public $template_type;
 
-	var $img_name;
-	var $img_name_bare;
-	var $related_doc_id;
-	var $related_doc_name;
-	var $related_doc_rev_id;
-	var $related_doc_rev_number;
-	var $is_template;
-	var $template_type;
+    //additional fields.
+    public $revision;
+    public $last_rev_create_date;
+    public $last_rev_created_by;
+    public $last_rev_created_name;
+    public $file_url;
+    public $file_url_noimage;
 
-	//additional fields.
-	var $revision;
-	var $last_rev_create_date;
-	var $last_rev_created_by;
-	var $last_rev_created_name;
-	var $file_url;
-	var $file_url_noimage;
+    public $table_name = 'documents';
+    public $object_name = 'Document';
+    public $user_preferences;
 
-	var $table_name = "documents";
-	var $object_name = "Document";
-	var $user_preferences;
+    public $encodeFields = [];
 
-	var $encodeFields = Array ();
+    // This is used to retrieve related fields from form posts.
+    public $additional_column_fields = ['revision'];
 
-	// This is used to retrieve related fields from form posts.
-	var $additional_column_fields = Array ('revision');
+    public $new_schema = true;
+    public $module_dir = 'Documents';
 
-	var $new_schema = true;
-	var $module_dir = 'Documents';
-
-	var $relationship_fields = Array(
-		'contract_id'=>'contracts',
-	 );
+    public $relationship_fields = [
+        'contract_id' => 'contracts',
+    ];
 
 
-	public function __construct() {
-		parent::__construct();
-		$this->setupCustomFields('Documents'); //parameter is module name
-		$this->disable_row_level_security = false;
-	}
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setupCustomFields('Documents'); //parameter is module name
+        $this->disable_row_level_security = false;
+    }
 
     /**
      * {@inheritDoc}
@@ -99,26 +100,24 @@ class Document extends SugarBean {
         $Revision->not_use_rel_in_req = true;
         $Revision->new_rel_id = $this->id;
         $Revision->new_rel_relname = 'Documents';
-        $Revision->change_log = translate('DEF_CREATE_LOG','Documents');
+        $Revision->change_log = translate('DEF_CREATE_LOG', 'Documents');
         $Revision->revision = $this->revision;
         $Revision->document_id = $this->id;
         $Revision->filename = $this->filename;
 
-        if(isset($this->file_ext))
-        {
+        if (isset($this->file_ext)) {
             $Revision->file_ext = $this->file_ext;
         }
 
-        if(isset($this->file_mime_type))
-        {
+        if (isset($this->file_mime_type)) {
             $Revision->file_mime_type = $this->file_mime_type;
         }
 
         $Revision->doc_type = $this->doc_type;
-        if ( isset($this->doc_id) ) {
+        if (isset($this->doc_id)) {
             $Revision->doc_id = $this->doc_id;
         }
-        if ( isset($this->doc_url) ) {
+        if (isset($this->doc_url)) {
             $Revision->doc_url = $this->doc_url;
         }
 
@@ -127,17 +126,17 @@ class Document extends SugarBean {
         return $Revision;
     }
 
-	function save($check_notify = false) {
+    public function save($check_notify = false)
+    {
         $save_revision = [];
         if (empty($this->document_name) && !empty($this->name)) {
             $this->document_name = $this->name;
         }
 
         if (empty($this->doc_type)) {
-			$this->doc_type = 'Sugar';
-		}
-        if (empty($this->id) || $this->new_with_id)
-		{
+            $this->doc_type = 'Sugar';
+        }
+        if (empty($this->id) || $this->new_with_id) {
             if (empty($this->id)) {
                 $this->id = create_guid();
                 $this->new_with_id = true;
@@ -156,7 +155,7 @@ class Document extends SugarBean {
             if (isset($this->filename) && file_exists("upload://{$this->id}")) {
                 rename("upload://{$this->id}", "upload://{$Revision->id}");
                 $createRevision = true;
-            } else if ( $isDuplicate && ( empty($this->doc_type) || $this->doc_type == 'Sugar' ) ) {
+            } elseif ($isDuplicate && (empty($this->doc_type) || $this->doc_type == 'Sugar')) {
                 // Looks like we need to duplicate a file, this is tricky
                 $oldDocument = BeanFactory::getBean('Documents', $_REQUEST['duplicateId']);
                 $old_name = "upload://{$oldDocument->document_revision_id}";
@@ -167,44 +166,48 @@ class Document extends SugarBean {
             }
 
             // For external documents, we just need to make sure we have a doc_id
-            if ( !empty($this->doc_id) && $this->doc_type != 'Sugar' ) {
+            if (!empty($this->doc_id) && $this->doc_type != 'Sugar') {
                 $createRevision = true;
             }
 
-            if ( $createRevision ) {
+            if ($createRevision) {
                 $Revision->save();
                 //update document with latest revision id
-                $this->process_save_dates=false; //make sure that conversion does not happen again.
+                $this->process_save_dates = false; //make sure that conversion does not happen again.
                 $this->document_revision_id = $Revision->id;
             }
 
 
             //set relationship field values if contract_id is passed (via subpanel create)
             if (!empty($_POST['contract_id'])) {
-                $save_revision['document_revision_id']=$this->document_revision_id;
+                $save_revision['document_revision_id'] = $this->document_revision_id;
                 $this->load_relationship('contracts');
-                $this->contracts->add($_POST['contract_id'],$save_revision);
+                $this->contracts->add($_POST['contract_id'], $save_revision);
             }
 
             if ((isset($_POST['load_signed_id']) and !empty($_POST['load_signed_id']))) {
-                $query="update linked_documents set deleted=1 where id=".$this->db->quoted($_POST['load_signed_id']);
+                $query = 'update linked_documents set deleted=1 where id=' . $this->db->quoted($_POST['load_signed_id']);
                 $this->db->query($query);
             }
         }
 
-		return parent::save($check_notify);
-	}
-	function get_summary_text() {
-		return "$this->document_name";
-	}
+        return parent::save($check_notify);
+    }
 
-	function is_authenticated() {
-		return $this->authenticated;
-	}
+    public function get_summary_text()
+    {
+        return "$this->document_name";
+    }
 
-	function fill_in_additional_list_fields() {
-		$this->fill_in_additional_detail_fields();
-	}
+    public function is_authenticated()
+    {
+        return $this->authenticated;
+    }
+
+    public function fill_in_additional_list_fields()
+    {
+        $this->fill_in_additional_detail_fields();
+    }
 
     public function fill_in_additional_detail_fields()
     {
@@ -248,7 +251,7 @@ class Document extends SugarBean {
         if (!empty($img_name) && file_exists($img_name)) {
             $img_name = $img_name_bare;
         } else {
-            $img_name = "def_image_inline"; //todo change the default image.
+            $img_name = 'def_image_inline'; //todo change the default image.
         }
         if ($this->ACLAccess('DetailView')) {
             $params = [
@@ -291,8 +294,8 @@ class Document extends SugarBean {
             $this->file_url = $file_url;
             $this->file_url_noimage = 'index.php?' . http_build_query($params);
         } else {
-            $this->file_url = "";
-            $this->file_url_noimage = "";
+            $this->file_url = '';
+            $this->file_url_noimage = '';
         }
 
         if (!empty($this->status_id)) {
@@ -302,38 +305,38 @@ class Document extends SugarBean {
 
     public function list_view_parse_additional_sections(&$list_form)
     {
-		return $list_form;
-	}
+        return $list_form;
+    }
 
     public function get_list_view_data($filter_fields = [])
     {
-		global $current_language;
-		$app_list_strings = return_app_list_strings_language($current_language);
+        global $current_language;
+        $app_list_strings = return_app_list_strings_language($current_language);
 
-		$document_fields = $this->get_list_view_array();
+        $document_fields = $this->get_list_view_array();
 
         $this->fill_in_additional_list_fields();
 
 
-		$document_fields['FILENAME'] = $this->filename;
-		$document_fields['FILE_URL'] = $this->file_url;
-		$document_fields['FILE_URL_NOIMAGE'] = $this->file_url_noimage;
-		$document_fields['LAST_REV_CREATED_BY'] = $this->last_rev_created_name;
+        $document_fields['FILENAME'] = $this->filename;
+        $document_fields['FILE_URL'] = $this->file_url;
+        $document_fields['FILE_URL_NOIMAGE'] = $this->file_url_noimage;
+        $document_fields['LAST_REV_CREATED_BY'] = $this->last_rev_created_name;
 
         $category_id_key = $this->field_defs['category_id']['options'] ?? 'document_category_dom';
 
-        $document_fields['CATEGORY_ID'] = empty ($this->category_id) ? "" :
+        $document_fields['CATEGORY_ID'] = empty($this->category_id) ? '' :
             $app_list_strings[$category_id_key][$this->category_id];
 
         $subcategory_id_key = $this->field_defs['subcategory_id']['options'] ?? 'document_subcategory_dom';
 
-        $document_fields['SUBCATEGORY_ID'] = empty ($this->subcategory_id) ? "" :
+        $document_fields['SUBCATEGORY_ID'] = empty($this->subcategory_id) ? '' :
             $app_list_strings[$subcategory_id_key][$this->subcategory_id];
 
         $document_fields['NAME'] = $this->document_name;
-		$document_fields['DOCUMENT_NAME_JAVASCRIPT'] = $GLOBALS['db']->quote($document_fields['DOCUMENT_NAME']);
-		return $document_fields;
-	}
+        $document_fields['DOCUMENT_NAME_JAVASCRIPT'] = $GLOBALS['db']->quote($document_fields['DOCUMENT_NAME']);
+        return $document_fields;
+    }
 
 
     /**
@@ -344,42 +347,43 @@ class Document extends SugarBean {
      *
      * @param $id String The record id of the Document instance
      */
-	function mark_relationships_deleted($id)
+    public function mark_relationships_deleted($id)
     {
         $this->load_relationships();
-       	$revisions= $this->get_linked_beans('revisions','DocumentRevision');
+        $revisions = $this->get_linked_beans('revisions', 'DocumentRevision');
 
-       	if (!empty($revisions) && is_array($revisions)) {
-       		foreach($revisions as $key=>$version) {
-       			UploadFile::unlink_file($version->id,$version->filename);
-       			//mark the version deleted.
-       			$version->mark_deleted($version->id);
-       		}
-       	}
+        if (!empty($revisions) && is_array($revisions)) {
+            foreach ($revisions as $key => $version) {
+                UploadFile::unlink_file($version->id, $version->filename);
+                //mark the version deleted.
+                $version->mark_deleted($version->id);
+            }
+        }
 
         //Remove the contracts relationships
         $this->load_relationship('contracts');
-        if(!empty($this->contracts))
-        {
+        if (!empty($this->contracts)) {
             $this->contracts->delete($id);
         }
-	}
+    }
 
 
-	function bean_implements($interface) {
-		switch ($interface) {
-			case 'ACL' :
-				return true;
-		}
-		return false;
-	}
+    public function bean_implements($interface)
+    {
+        switch ($interface) {
+            case 'ACL':
+                return true;
+        }
+        return false;
+    }
 
     /**
      * Document specific file name getter
      *
      * @return string
      */
-    public function getFileName() {
+    public function getFileName()
+    {
         if (empty($this->id)) {
             return '';
         }
@@ -411,5 +415,4 @@ class Document extends SugarBean {
     }
 }
 
-require_once('modules/Documents/DocumentExternalApiDropDown.php');
-
+require_once 'modules/Documents/DocumentExternalApiDropDown.php';

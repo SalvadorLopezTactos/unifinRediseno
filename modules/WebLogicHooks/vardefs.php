@@ -9,18 +9,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['WebLogicHook'] = array(
+$dictionary['WebLogicHook'] = [
     'table' => 'weblogichooks',
-    'favorites'=>false,
+    'favorites' => false,
     'comment' => 'Web Logic Hooks',
     'audited' => false,
-    'activity_enabled'=>false,
+    'activity_enabled' => false,
     'unified_search' => false,
     'unified_search_default_enabled' => false,
     'full_text_search' => false,
     'optimistic_locking' => true,
-    'fields' => array(
-        'name' => array(
+    'fields' => [
+        'name' => [
             'name' => 'name',
             'vname' => 'LBL_NAME',
             'type' => 'name',
@@ -28,44 +28,44 @@ $dictionary['WebLogicHook'] = array(
             'len' => '255',
             'comment' => 'Hook name',
             'required' => true,
-        ),
-        'webhook_target_module' => array(
+        ],
+        'webhook_target_module' => [
             'name' => 'webhook_target_module',
             'vname' => 'LBL_TARGET_NAME',
             'type' => 'enum',
             'options' => 'moduleList',
             'required' => true,
-        ),
-        'request_method' => array(
+        ],
+        'request_method' => [
             'name' => 'request_method',
             'vname' => 'LBL_REQUEST_METHOD',
             'type' => 'enum',
             'options' => 'web_hook_request_method_list',
             'default' => 'POST',
             'required' => true,
-        ),
-        'url' => array(
+        ],
+        'url' => [
             'name' => 'url',
             'vname' => 'LBL_URL',
             'type' => 'varchar',
             'len' => '255',
             'comment' => 'URL of website for the company',
             'required' => true,
-        ),
-        'trigger_event' => array(
+        ],
+        'trigger_event' => [
             'name' => 'trigger_event',
             'vname' => 'LBL_TRIGGER_EVENT',
             'type' => 'enum',
             'options' => 'webLogicHookList',
             'required' => true,
-        ),
-    ),
-    'acls' => array(
-        'SugarACLAdminOnly' => array(
+        ],
+    ],
+    'acls' => [
+        'SugarACLAdminOnly' => [
             'adminFor' => 'Users',
             'allowUserRead' => true,
-        ),
-    ),
+        ],
+    ],
     // @TODO Fix the Default and Basic SugarObject templates so that Basic
     // implements Default. This would allow the application of various
     // implementations on Basic without forcing Default to have those so that
@@ -75,17 +75,17 @@ $dictionary['WebLogicHook'] = array(
     // implementation fields. Once there is a separation of default and basic
     // templates we can safely remove these as this module will implement
     // default instead of basic.
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'commentlog',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef(
     'WebLogicHooks',
     'WebLogicHook',
-    array(
+    [
         'default',
         'basic',
-    )
+    ]
 );

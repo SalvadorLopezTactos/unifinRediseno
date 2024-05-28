@@ -10,24 +10,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$subpanel_layout = array(
-	'top_buttons' => array(
-			/*array('widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'Queues'),*/
-	),
-	'where' => "",
+$subpanel_layout = [
+    'top_buttons' => [
+        /*array('widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'Queues'),*/
+    ],
+    'where' => '',
 
-	'fill_in_additional_fields'=>true,
-	'list_fields' => array(
-		'name'			=> array (
-			'vname'		=> 'LBL_NAME',
+    'fill_in_additional_fields' => true,
+    'list_fields' => [
+        'name' => [
+            'vname' => 'LBL_NAME',
             'width' => '20%',
-			'sortable'	=> false,
-		),
-		'status'		=> array (
-			 'vname'	=> 'LBL_STATUS',
-			 'width'	=> '10%',
-			 'sortable'	=> true,
-		),
+            'sortable' => false,
+        ],
+        'status' => [
+            'vname' => 'LBL_STATUS',
+            'width' => '10%',
+            'sortable' => true,
+        ],
         'resolution' => [
             'vname' => 'LBL_RESOLUTION',
             'width' => '10%',
@@ -38,16 +38,15 @@ $subpanel_layout = array(
             'width' => '30%',
             'sortable' => false,
         ],
-		'execute_time'	=> array (
-			 'vname'	=> 'LBL_EXECUTE_TIME',
-			 'width'	=> '10%',
-			 'sortable'	=> true,
-		),
-		'date_modified'	=> array (
-			 'vname'	=> 'LBL_DATE_MODIFIED',
-			 'width'	=> '10%',
-			 'sortable'	=> true,
-		),
-		),
-);
-
+        'execute_time' => [
+            'vname' => 'LBL_EXECUTE_TIME',
+            'width' => '10%',
+            'sortable' => true,
+        ],
+        'date_modified' => [
+            'vname' => 'LBL_DATE_MODIFIED',
+            'width' => '10%',
+            'sortable' => true,
+        ],
+    ],
+];

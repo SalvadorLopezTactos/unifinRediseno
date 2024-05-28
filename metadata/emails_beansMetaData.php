@@ -10,72 +10,72 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['emails_beans'] = array(
+$dictionary['emails_beans'] = [
     'table' => 'emails_beans',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'email_id' => array(
+        ],
+        'email_id' => [
             'name' => 'email_id',
             'type' => 'id',
             'comment' => 'FK to emails table',
-        ),
-        'bean_id' => array(
+        ],
+        'bean_id' => [
             'name' => 'bean_id',
             'type' => 'id',
             'comment' => 'FK to various beans\'s tables',
-        ),
-        'bean_module' => array(
+        ],
+        'bean_module' => [
             'name' => 'bean_module',
             'type' => 'varchar',
             'len' => '100',
             'comment' => 'bean\'s Module',
-        ),
-        'campaign_data' => array(
+        ],
+        'campaign_data' => [
             'name' => 'campaign_data',
             'type' => 'text',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'emails_beanspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_emails_beans_bean_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'bean_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_emails_beans_email_bean',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'email_id',
                 'bean_id',
                 'deleted',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'emails_accounts_rel' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'emails_accounts_rel' => [
             'lhs_module' => 'Emails',
             'lhs_table' => 'emails',
             'lhs_key' => 'id',
@@ -88,8 +88,8 @@ $dictionary['emails_beans'] = array(
             'join_key_rhs' => 'bean_id',
             'relationship_role_column' => 'bean_module',
             'relationship_role_column_value' => 'Accounts',
-        ),
-        'emails_bugs_rel' => array(
+        ],
+        'emails_bugs_rel' => [
             'lhs_module' => 'Emails',
             'lhs_table' => 'emails',
             'lhs_key' => 'id',
@@ -102,8 +102,8 @@ $dictionary['emails_beans'] = array(
             'join_key_rhs' => 'bean_id',
             'relationship_role_column' => 'bean_module',
             'relationship_role_column_value' => 'Bugs',
-        ),
-        'emails_cases_rel' => array(
+        ],
+        'emails_cases_rel' => [
             'lhs_module' => 'Emails',
             'lhs_table' => 'emails',
             'lhs_key' => 'id',
@@ -116,8 +116,8 @@ $dictionary['emails_beans'] = array(
             'join_key_rhs' => 'bean_id',
             'relationship_role_column' => 'bean_module',
             'relationship_role_column_value' => 'Cases',
-        ),
-        'emails_contacts_rel' => array(
+        ],
+        'emails_contacts_rel' => [
             'lhs_module' => 'Emails',
             'lhs_table' => 'emails',
             'lhs_key' => 'id',
@@ -130,8 +130,8 @@ $dictionary['emails_beans'] = array(
             'join_table' => 'emails_beans',
             'join_key_lhs' => 'email_id',
             'join_key_rhs' => 'bean_id',
-        ),
-        'emails_leads_rel' => array(
+        ],
+        'emails_leads_rel' => [
             'lhs_module' => 'Emails',
             'lhs_table' => 'emails',
             'lhs_key' => 'id',
@@ -144,8 +144,8 @@ $dictionary['emails_beans'] = array(
             'join_key_rhs' => 'bean_id',
             'relationship_role_column' => 'bean_module',
             'relationship_role_column_value' => 'Leads',
-        ),
-        'emails_opportunities_rel' => array(
+        ],
+        'emails_opportunities_rel' => [
             'lhs_module' => 'Emails',
             'lhs_table' => 'emails',
             'lhs_key' => 'id',
@@ -158,7 +158,7 @@ $dictionary['emails_beans'] = array(
             'join_key_rhs' => 'bean_id',
             'relationship_role_column' => 'bean_module',
             'relationship_role_column_value' => 'Opportunities',
-        ),
+        ],
         'emails_purchases_rel' => [
             'lhs_module' => 'Emails',
             'lhs_table' => 'emails',
@@ -201,7 +201,7 @@ $dictionary['emails_beans'] = array(
             'relationship_role_column' => 'bean_module',
             'relationship_role_column_value' => 'Escalations',
         ],
-        'emails_tasks_rel' => array(
+        'emails_tasks_rel' => [
             'lhs_module' => 'Emails',
             'lhs_table' => 'emails',
             'lhs_key' => 'id',
@@ -214,8 +214,8 @@ $dictionary['emails_beans'] = array(
             'join_key_rhs' => 'bean_id',
             'relationship_role_column' => 'bean_module',
             'relationship_role_column_value' => 'Tasks',
-        ),
-        'emails_users_rel' => array(
+        ],
+        'emails_users_rel' => [
             'lhs_module' => 'Emails',
             'lhs_table' => 'emails',
             'lhs_key' => 'id',
@@ -228,8 +228,8 @@ $dictionary['emails_beans'] = array(
             'join_key_rhs' => 'bean_id',
             'relationship_role_column' => 'bean_module',
             'relationship_role_column_value' => 'Users',
-        ),
-        'emails_project_task_rel' => array(
+        ],
+        'emails_project_task_rel' => [
             'lhs_module' => 'Emails',
             'lhs_table' => 'emails',
             'lhs_key' => 'id',
@@ -242,8 +242,8 @@ $dictionary['emails_beans'] = array(
             'join_key_rhs' => 'bean_id',
             'relationship_role_column' => 'bean_module',
             'relationship_role_column_value' => 'ProjectTask',
-        ),
-        'emails_projects_rel' => array(
+        ],
+        'emails_projects_rel' => [
             'lhs_module' => 'Emails',
             'lhs_table' => 'emails',
             'lhs_key' => 'id',
@@ -256,8 +256,8 @@ $dictionary['emails_beans'] = array(
             'join_key_rhs' => 'bean_id',
             'relationship_role_column' => 'bean_module',
             'relationship_role_column_value' => 'Project',
-        ),
-        'emails_prospects_rel' => array(
+        ],
+        'emails_prospects_rel' => [
             'lhs_module' => 'Emails',
             'lhs_table' => 'emails',
             'lhs_key' => 'id',
@@ -270,8 +270,8 @@ $dictionary['emails_beans'] = array(
             'join_key_rhs' => 'bean_id',
             'relationship_role_column' => 'bean_module',
             'relationship_role_column_value' => 'Prospects',
-        ),
-        'emails_quotes' => array(
+        ],
+        'emails_quotes' => [
             'lhs_module' => 'Emails',
             'lhs_table' => 'emails',
             'lhs_key' => 'id',
@@ -284,95 +284,95 @@ $dictionary['emails_beans'] = array(
             'join_key_rhs' => 'bean_id',
             'relationship_role_column' => 'bean_module',
             'relationship_role_column_value' => 'Quotes',
-        ),
-    ),
-);
+        ],
+    ],
+];
 
-$dictionary['emails_text'] = array(
+$dictionary['emails_text'] = [
     'table' => 'emails_text',
     'comment' => 'Large email text fields',
-    'fields' => array(
-        'email_id' => array(
+    'fields' => [
+        'email_id' => [
             'name' => 'email_id',
             'vname' => 'LBL_ID',
             'type' => 'id',
             'required' => true,
             'reportable' => true,
             'comment' => 'Foriegn key to emails table',
-        ),
-        'from_addr' => array(
+        ],
+        'from_addr' => [
             'name' => 'from_addr',
             'vname' => 'LBL_FROM',
             'type' => 'varchar',
             'len' => 255,
             'comment' => 'Email address of person who send the email',
-        ),
-        'reply_to_addr' => array(
+        ],
+        'reply_to_addr' => [
             'name' => 'reply_to_addr',
             'vname' => 'LBL_REPLY_TO',
             'type' => 'varchar',
             'len' => 255,
             'comment' => 'reply to email address',
-        ),
-        'to_addrs' => array(
+        ],
+        'to_addrs' => [
             'name' => 'to_addrs',
             'vname' => 'LBL_TO',
             'type' => 'text',
             'comment' => 'Email address(es) of person(s) to receive the email',
-        ),
-        'cc_addrs' => array(
+        ],
+        'cc_addrs' => [
             'name' => 'cc_addrs',
             'vname' => 'LBL_CC',
             'type' => 'text',
             'comment' => 'Email address(es) of person(s) to receive a carbon copy of the email',
-        ),
-        'bcc_addrs' => array(
+        ],
+        'bcc_addrs' => [
             'name' => 'bcc_addrs',
             'vname' => 'LBL_BCC',
             'type' => 'text',
             'comment' => 'Email address(es) of person(s) to receive a blind carbon copy of the email',
-        ),
-        'description' => array(
+        ],
+        'description' => [
             'name' => 'description',
             'vname' => 'LBL_TEXT_BODY',
             'type' => 'longtext',
             'reportable' => false,
             'comment' => 'Email body in plain text',
-        ),
-        'description_html' => array(
+        ],
+        'description_html' => [
             'name' => 'description_html',
             'vname' => 'LBL_HTML_BODY',
             'type' => 'longhtml',
             'reportable' => false,
             'comment' => 'Email body in HTML format',
-        ),
-        'raw_source' => array(
+        ],
+        'raw_source' => [
             'name' => 'raw_source',
             'vname' => 'LBL_RAW',
             'type' => 'longtext',
             'reportable' => false,
             'comment' => 'Full raw source of email',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'default' => 0,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'emails_textpk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'email_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'emails_textfromaddr',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'from_addr',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

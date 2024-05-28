@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('node-load', function (Y, NAME) {
 
 /**
@@ -69,4 +62,4 @@ Y.Node.prototype.load = function(url, selector, callback) {
 };
 
 
-}, '3.15.0', {"requires": ["node-base", "io-base"]});
+}, '3.18.1', {"requires": ["node-base", "io-base"]});

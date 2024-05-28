@@ -80,7 +80,7 @@ class SubjectAttributes implements JsonSerializable
     {
         $data = ['subject' => $this->subject->jsonSerialize()];
 
-        if (count($this->attributes)) {
+        if (safeCount($this->attributes)) {
             $data['attributes'] = $this->attributes;
         }
 

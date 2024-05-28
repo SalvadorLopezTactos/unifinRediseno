@@ -9,11 +9,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const Acl = require('core/acl');
-const Component = require('view/component');
-const PluginManager = require('core/plugin-manager');
-const Language = require('core/language');
-const Template = require('view/template');
+const Acl = require('../core/acl');
+const Component = require('./component');
+const PluginManager = require('../core/plugin-manager');
+const Language = require('../core/language');
+const Template = require('./template');
 
 /**
  * SugarField widget. A field widget is a low level field widget. Some examples
@@ -51,7 +51,7 @@ const Template = require('view/template');
  * controller logic to **`[sugarFieldType].js`** javascript file where sugarFieldType is the type of the SugarField.
  * Example for `bool.js` controller:
  * ```
- * const ViewManager = require('view/view-manager');
+ * const ViewManager = require('./view-manager');
  * ({
  *    events: {
  *         handler: function() {

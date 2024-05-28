@@ -10,67 +10,75 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Users']['base']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Users']['base']['view']['list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
-                    'label' => 'LBL_NAME',
+                    'label' => 'LBL_LIST_NAME',
+                    'type' => 'fullname',
+                    'fields' => [
+                        'first_name',
+                        'last_name',
+                    ],
                     'enabled' => true,
                     'default' => true,
                     'sortable' => true,
-                ),
-                array(
+                    'link' => true,
+                ],
+                [
                     'name' => 'user_name',
-                    'label' => 'LBL_USER_NAME',
                     'sortable' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'title',
-                    'label' => 'LBL_TITLE',
                     'enabled' => true,
                     'default' => true,
                     'sortable' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'department',
-                    'label' => 'LBL_DEPARTMENT',
                     'enabled' => true,
                     'default' => true,
                     'sortable' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'email',
                     'label' => 'LBL_EMAIL',
                     'enabled' => true,
                     'default' => true,
                     'sortable' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'phone_work',
-                    'label' => 'LBL_OFFICE_PHONE',
                     'default' => true,
                     'enabled' => true,
                     'sortable' => true,
-                ),
-                array (
+                ],
+                [
                     'name' => 'status',
-                    'label' => 'LBL_STATUS',
                     'enabled' => true,
                     'default' => true,
                     'sortable' => true,
-                ),
-                array (
+                ],
+                [
+                    'name' => 'license_type',
+                    'type' => 'enum',
+                    'readonly' => true,
+                    'enabled' => true,
+                    'default' => true,
+                    'sortable' => true,
+                ],
+                [
                     'name' => 'is_admin',
-                    'label' => 'LBL_IS_ADMIN',
                     'enabled' => true,
                     'default' => true,
                     'sortable' => true,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

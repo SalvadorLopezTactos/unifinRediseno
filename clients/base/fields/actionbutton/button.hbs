@@ -12,7 +12,7 @@
 --}}
 {{#if properties.hasBeenCalculated}}
     <a id="{{buttonId}}"
-        class="actionbuttons actionbuttons-{{templateComponent.activeButtonMeta.settings.type}}{{#unless templateComponent.activeButtonMeta.settings.isRowAction}} btn {{#eq templateComponent.actionMeta.settings.type "button"}}{{#eq templateComponent.actionMeta.settings.size "large"}} btn-large {{/eq}}{{#eq templateComponent.actionMeta.settings.size "small"}} btn-mini {{/eq}}{{/eq}} btn-{{properties.colorScheme}}{{/unless}}"
+        class="actionbuttons actionbuttons-{{templateComponent.activeButtonMeta.settings.type}}{{#unless templateComponent.activeButtonMeta.settings.isRowAction}} btn {{#eq templateComponent.actionMeta.settings.type "button"}}{{#eq templateComponent.actionMeta.settings.size "large"}} btn-large {{/eq}}{{#eq templateComponent.actionMeta.settings.size "small"}} btn-mini {{/eq}}{{/eq}} btn-{{properties.colorScheme}}{{/unless}} ml-2"
         href="javascript:void(0);"
         title="{{properties.description}}"
         role="button"

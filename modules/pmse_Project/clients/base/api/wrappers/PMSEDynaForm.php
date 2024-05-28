@@ -90,13 +90,13 @@ class PMSEDynaForm
     public function generateDefaultDynaform($baseModule, $keys, $update = false)
     {
         $this->baseModule = $baseModule;
-        $params = array();
+        $params = [];
         if ($update) {
-            $this->dynaform->retrieve_by_string_fields(array(
-                    'prj_id' => $keys['prj_id'],
-                    'pro_id' => $keys['pro_id'],
-                    'name' => 'Default'
-                ));
+            $this->dynaform->retrieve_by_string_fields([
+                'prj_id' => $keys['prj_id'],
+                'pro_id' => $keys['pro_id'],
+                'name' => 'Default',
+            ]);
         } else {
             $params['dyn_uid'] = PMSEEngineUtils::generateUniqueID();
         }
@@ -105,17 +105,16 @@ class PMSEDynaForm
         $params['prj_id'] = $keys['prj_id'] ?? null;
         $params['pro_id'] = isset($keys['pro_id']) ? $keys['prj_id'] : null;
         $params['dyn_module'] = $this->baseModule;
-        $params['dyn_name'] = "Default";
-        $params['dyn_description'] = "Default";
+        $params['dyn_name'] = 'Default';
+        $params['dyn_description'] = 'Default';
         $moduleViewDefs = get_custom_file_if_exists('modules/' . $baseModule . '/metadata/editviewdefs.php');
-        $viewdefs = array();
+        $viewdefs = [];
         if (!@include_once $moduleViewDefs) {
             return false;
         } else {
-            $params['dyn_view_defs'] = array('BpmView' => $viewdefs[$baseModule]['EditView']);
+            $params['dyn_view_defs'] = ['BpmView' => $viewdefs[$baseModule]['EditView']];
             return $this->saveDynaform($baseModule, $params);
         }
-
     }
 
     /**

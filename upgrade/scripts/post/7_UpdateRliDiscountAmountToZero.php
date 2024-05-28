@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Update discount_amount from NULL to 0.000000 for all RLIs where discount_amount is NULL.
  */
@@ -23,7 +24,7 @@ class SugarUpgradeUpdateRliDiscountAmountToZero extends UpgradeScript
             Opportunity::usingRevenueLineItems() &&
             version_compare($this->from_version, '10.1.0', '<')
         ) {
-            $this->log("Updating discount_amount from NULL to 0.000000 for all RLIs where discount_amount is NULL.");
+            $this->log('Updating discount_amount from NULL to 0.000000 for all RLIs where discount_amount is NULL.');
             $this->db->query('UPDATE revenue_line_items SET discount_amount = 0.000000 WHERE discount_amount IS NULL');
         }
     }

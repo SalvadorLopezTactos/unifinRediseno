@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'État du Groupe :',
-    'LBL_DEAL_TOT'=>'Remise totale',
-    'LBL_DEAL_TOT_USDOLLAR'=>'Remise totale (devise par défaut)',
+    'LBL_DEAL_TOT' => 'Remise totale',
+    'LBL_DEAL_TOT_USDOLLAR' => 'Remise totale (devise par défaut)',
     'LBL_NEW_SUB' => 'Sous-Total remisé :',
     'LBL_SHIPPING' => 'Frais Livraison :',
-    'LBL_SHIPPING_USDOLLAR'=>'Livraison (devise par défaut)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Sous-total (devise par défaut)',
+    'LBL_SHIPPING_USDOLLAR' => 'Livraison (devise par défaut)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Sous-total (devise par défaut)',
     'LBL_SUBTOTAL' => 'Sous-Total :',
     'LBL_TAXABLE_SUBTOTAL' => 'Sous-total taxable',
-    'LBL_TAX_USDOLLAR'=>'TVA (devise par défaut)',
+    'LBL_TAX_USDOLLAR' => 'TVA (devise par défaut)',
     'LBL_TAX' => 'Total Taxes :',
-    'LBL_TOTAL_USDOLLAR'=>'Total (devise par défaut)',
+    'LBL_TOTAL_USDOLLAR' => 'Total (devise par défaut)',
     'LBL_TOTAL' => 'Total :',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Position du groupe de Devis',
     'EXCEPTION_INVALID_QUOTE_ID' => 'ID Devis manquant dans la charge',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'Le Devis demandé n&#39;a pas été trouvé',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'Le Devis demandé n&#39;a pas été trouvé',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Remise de groupe additionnelle',
     'LBL_GROUP_TOTAL' => 'Total de groupe',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'En-tête de groupe',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Le groupe de groupe de produits par défaut pour le devis',
     'LBL_ALERT_DELETING_ITEM' => 'Effacer ligne(s) de devis',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Ligne de devis effacée avec succès',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie de groupe de produits',
+];

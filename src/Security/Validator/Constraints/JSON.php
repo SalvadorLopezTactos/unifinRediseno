@@ -27,9 +27,9 @@ class JSON extends Constraint implements ConstraintReturnValueInterface
 
     public const ERROR_JSON_DECODE = 1;
 
-    protected static $errorNames = array(
+    protected static $errorNames = [
         self::ERROR_JSON_DECODE => 'ERROR_JSON_DECODE',
-    );
+    ];
 
     public $message = 'JSON decode data violation: %msg%';
     public $htmlDecode = false;

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,12 +10,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['VisualPipeline']['base']['view']['pipeline-modules'] = array(
+$viewdefs['VisualPipeline']['base']['view']['pipeline-modules'] = [
     'label' => 'LBL_VISUAL_PIPELINE_CONFIG_TITLE',
-    'panels' => array(
-        array(
-            'fields' => array(
-                array(
+    'panels' => [
+        [
+            'fields' => [
+                [
                     'name' => 'enabled_modules',
                     'type' => 'modules-list',
                     'label' => 'LBL_PIPELINE_MODULES_LIST',
@@ -22,8 +23,8 @@ $viewdefs['VisualPipeline']['base']['view']['pipeline-modules'] = array(
                     'view' => 'edit',
                     'isMultiSelect' => true,
                     'ordered' => true,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

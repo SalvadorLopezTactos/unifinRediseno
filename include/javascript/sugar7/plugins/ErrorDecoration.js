@@ -48,7 +48,7 @@
                     }
                     this.$('.error').removeClass('error');
                     this.$('.error-tooltip').remove();
-                    this.$('[data-toggle="tab"] .sicon-warning-circle').remove();
+                    this.$('[data-bs-toggle="tab"] .sicon-warning-circle').remove();
                 });
             }
         });

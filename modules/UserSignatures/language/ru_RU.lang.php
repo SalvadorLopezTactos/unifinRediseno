@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Эта подпись требует названия',
     'LBL_DEFAULT_SIGNATURE' => 'По умолчанию',
     'LBL_MODULE_NAME' => 'Подписи электронной почты',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'Использовать подпись?',
     'LBL_SIGNATURE_PREPEND' => 'Подпись над ответом',
     'LBL_SIGNATURES' => 'Подписи',
-);
+];

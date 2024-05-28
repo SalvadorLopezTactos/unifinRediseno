@@ -9,33 +9,33 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['RevenueLineItems']['base']['filter']['default'] = array(
+$viewdefs['RevenueLineItems']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'opportunity_name' => array(),
-        'account_name' => array(),
-        'sales_stage' => array(),
-        'probability' => array(),
-        'date_closed' => array(),
-        'commit_stage' => array(),
-        'product_template_name' => array(),
-        'category_name' => array(),
-        'worst_case' => array(),
-        'likely_case' => array(),
-        'best_case' => array(),
-        'date_entered' => array(),
-        'date_modified' => array(),
-        'tag' => array(),
-        '$owner' => array(
+    'fields' => [
+        'name' => [],
+        'opportunity_name' => [],
+        'account_name' => [],
+        'sales_stage' => [],
+        'probability' => [],
+        'date_closed' => [],
+        'commit_stage' => [],
+        'product_template_name' => [],
+        'category_name' => [],
+        'worst_case' => [],
+        'likely_case' => [],
+        'best_case' => [],
+        'date_entered' => [],
+        'date_modified' => [],
+        'tag' => [],
+        '$owner' => [
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',
-        ),
-        'assigned_user_name' => array(),
-        '$favorite' => array(
+        ],
+        'assigned_user_name' => [],
+        '$favorite' => [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        ),
+        ],
 
-    ),
-);
+    ],
+];

@@ -25,7 +25,7 @@ class SugarUpgradeFixRelationshipLabels extends UpgradeScript
     /**
      * @var string empty string for default directory, path to Sugar root with trailing slash if processing e.g. another Sugar copy
      */
-    private $pathPrefix = "";
+    private $pathPrefix = '';
 
     public function run()
     {
@@ -38,7 +38,7 @@ class SugarUpgradeFixRelationshipLabels extends UpgradeScript
         }
         $this->fixIntermediateFiles();
         $this->rebuildCaches();
-        $this->log("Completed fixing of relationship labels");
+        $this->log('Completed fixing of relationship labels');
     }
 
     /**
@@ -179,7 +179,7 @@ class SugarUpgradeFixRelationshipLabels extends UpgradeScript
             touch($file);
         }
 
-        $this->log("Rebuilding language cache");
+        $this->log('Rebuilding language cache');
         $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
         $moduleInstaller = new $moduleInstallerClass();
         $moduleInstaller->silent = true;

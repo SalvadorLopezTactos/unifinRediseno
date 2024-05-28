@@ -13,10 +13,10 @@
 
 class ReportMakerViewList extends ViewList
 {
- 	public function preDisplay()
- 	{
- 		$this->lv = new ListViewSmarty();
- 		$this->lv->showMassupdateFields = false;
- 		$this->lv->export = false;
- 	}
+    public function preDisplay()
+    {
+        $this->lv = new ListViewSmarty();
+        $this->lv->showMassupdateFields = false;
+        $this->lv->export = false;
+    }
 }

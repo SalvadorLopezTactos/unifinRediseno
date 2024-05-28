@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint\Job;
 
 use Sugarcrm\Sugarcrm\Hint\Config\ConfigTrait;
@@ -38,15 +39,8 @@ class registerConfigJob implements \RunnableSchedulerJob
      */
     public function run($data)
     {
-        try {
-            $hintLicenseCheck = ConfigurationManager::isHintUser();
-            if (!$hintLicenseCheck) {
-                $this->job->succeedJob('Hint register config: license was not found');
-                return;
-            }
-        } catch (\Throwable $e) {
-            $this->job->succeedJob('Hint register config: Problem with Hint license');
-            return;
+        if (!hasSystemHintLicense()) {
+            return $this->job->succeedJob(translate('LBL_HINT_NO_LICENSE_ACCESS'));
         }
 
         // no scheduler means this job finished successfully some time ago
@@ -77,18 +71,15 @@ class registerConfigJob implements \RunnableSchedulerJob
         } else {
             // configMetaData to be sent to v2 endpoint
             $configDataBeanData = [
-                'Leads' =>
-                    [
-                        'fields' => ConfigurationManager::createInitialModuleConfig(HintConstants::DEFAULT_LEADS_FIELDS),
-                    ],
-                'Accounts' =>
-                    [
-                        'fields' => ConfigurationManager::createInitialModuleConfig(HintConstants::DEFAULT_ACCOUNTS_FIELDS),
-                    ],
-                'Contacts' =>
-                    [
-                        'fields' => ConfigurationManager::createInitialModuleConfig(HintConstants::DEFAULT_CONTACTS_FIELDS),
-                    ],
+                'Leads' => [
+                    'fields' => ConfigurationManager::createInitialModuleConfig(HintConstants::DEFAULT_LEADS_FIELDS),
+                ],
+                'Accounts' => [
+                    'fields' => ConfigurationManager::createInitialModuleConfig(HintConstants::DEFAULT_ACCOUNTS_FIELDS),
+                ],
+                'Contacts' => [
+                    'fields' => ConfigurationManager::createInitialModuleConfig(HintConstants::DEFAULT_CONTACTS_FIELDS),
+                ],
             ];
 
             $configDataBean = \BeanFactory::retrieveBean('HintEnrichFieldConfigs');
@@ -105,7 +96,7 @@ class registerConfigJob implements \RunnableSchedulerJob
 
             // prevents multiple run and runs only if configMetadata is not found in DB.
             if ($configDataBean && empty($alreadyPostedBean)) {
-                \HintEnrichFieldConfig:: createHintEnrichFieldConfig($configDataBeanDataConverted);
+                \HintEnrichFieldConfig::createHintEnrichFieldConfig($configDataBeanDataConverted);
             }
 
             $configSuccessResponse = $hintApiCalls->registerConfigToEnrichBeanEndpoint($hintApiCalls->privilegeToken, $configDataBeanData);

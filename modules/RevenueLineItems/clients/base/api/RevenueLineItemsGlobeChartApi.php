@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,6 +10,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class RevenueLineItemsGlobeChartApi extends SugarApi
 {
     /**
@@ -16,16 +18,16 @@ class RevenueLineItemsGlobeChartApi extends SugarApi
      */
     public function registerApiRest()
     {
-        return array(
-            'sales_by_country' => array(
+        return [
+            'sales_by_country' => [
                 'reqType' => 'GET',
-                'path' => array('RevenueLineItems','by_country'),
-                'pathVars' => array('module', '', ''),
+                'path' => ['RevenueLineItems', 'by_country'],
+                'pathVars' => ['module', '', ''],
                 'method' => 'salesByCountry',
                 'shortHelp' => 'Get opportunities won by country',
                 'longHelp' => '',
-            ),
-        );
+            ],
+        ];
     }
 
 
@@ -57,33 +59,33 @@ class RevenueLineItemsGlobeChartApi extends SugarApi
         $query = new SugarQuery();
         $query->from($seed);
         $account_link = $query->join('account_link');
-        $query->select(array(
+        $query->select([
             $account_link->joinName() . '.billing_address_country',
             $account_link->joinName() . '.billing_address_state',
-            'likely_case', 
-            'base_rate'
-        ));
+            'likely_case',
+            'base_rate',
+        ]);
         $query->where()->equals('sales_stage', 'Closed Won');
 
         // TODO: When we can sum on the database side through SugarQuery, we can
         // use the group by statement.
 
-        $data = array();
+        $data = [];
 
         $results = $query->execute();
         foreach ($results as $row) {
             if (empty($data[$row['billing_address_country']])) {
-                $data[$row['billing_address_country']] = array(
-                    '_total' => 0
-                );
+                $data[$row['billing_address_country']] = [
+                    '_total' => 0,
+                ];
             }
             if (empty($data[$row['billing_address_country']][$row['billing_address_state']])) {
-                $data[$row['billing_address_country']][$row['billing_address_state']] = array(
-                    '_total' => 0
-                );
+                $data[$row['billing_address_country']][$row['billing_address_state']] = [
+                    '_total' => 0,
+                ];
             }
-            $data[$row['billing_address_country']]['_total'] += $row['likely_case']/$row['base_rate'];
-            $data[$row['billing_address_country']][$row['billing_address_state']]['_total'] += $row['likely_case']/$row['base_rate'];
+            $data[$row['billing_address_country']]['_total'] += $row['likely_case'] / $row['base_rate'];
+            $data[$row['billing_address_country']][$row['billing_address_state']]['_total'] += $row['likely_case'] / $row['base_rate'];
         }
 
         return $data;

@@ -14,15 +14,15 @@ $viewdefs['DRI_Workflow_Templates']['base']['view']['template-import-headerpane'
     'title' => 'LBL_IMPORT',
     'buttons' => [
         [
-            'name'    => 'project_cancel_button',
-            'type'    => 'button',
-            'label'   => 'LBL_CANCEL_BUTTON_LABEL',
+            'name' => 'project_cancel_button',
+            'type' => 'button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
         ],
         [
-            'name'    => 'project_finish_button',
-            'type'    => 'button',
-            'label'   => 'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL',
+            'name' => 'project_finish_button',
+            'type' => 'button',
+            'label' => 'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL',
             'acl_action' => 'create',
             'css_class' => 'btn-primary',
         ],

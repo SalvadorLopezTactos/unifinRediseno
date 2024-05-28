@@ -27,7 +27,7 @@ use Google\Service\AuthorizedBuyersMarketplace\ListClientsResponse;
  * Typical usage is:
  *  <code>
  *   $authorizedbuyersmarketplaceService = new Google\Service\AuthorizedBuyersMarketplace(...);
- *   $clients = $authorizedbuyersmarketplaceService->clients;
+ *   $clients = $authorizedbuyersmarketplaceService->buyers_clients;
  *  </code>
  */
 class BuyersClients extends \Google\Service\Resource
@@ -103,7 +103,7 @@ class BuyersClients extends \Google\Service\Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string filter Query string using the [Filtering
-   * Syntax](https://developers.google.com/authorized-buyers/apis/guides/v2/list-
+   * Syntax](https://developers.google.com/authorized-buyers/apis/guides/list-
    * filters) Supported fields for filtering are: * partnerClientId Use this field
    * to filter the clients by the partnerClientId. For example, if the
    * partnerClientId of the client is "1234", the value of this field should be

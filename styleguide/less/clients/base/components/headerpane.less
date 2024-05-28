@@ -2,6 +2,14 @@
   width: calc(66vw ~"-" @sidebarNavWidth);
 }
 
+.span12 .headerpane {
+  width: calc(100vw ~"-" @sidebarNavWidth);
+}
+
+.span4 .headerpane {
+  width: calc(34vw);
+}
+
 .drawer-content {
   .main-pane.span8 {
     width: 41vw;
@@ -17,7 +25,7 @@
     top: 41px;
 
     .grid-stack-item {
-      margin-top: 50px;
+      margin-top: 0.75rem;
     }
   }
 }
@@ -46,7 +54,8 @@
     .headerpane.listheaderpane {
       .box.datapoints {
         .pull-left();
-        .mr-4();
+
+        margin-right: 1rem;
       }
     }
   }
@@ -57,7 +66,8 @@
     .headerpane.listheaderpane {
       .box.datapoints {
         .pull-left();
-        .mr-4();
+
+        margin-right: 1rem;
       }
     }
   }
@@ -72,7 +82,8 @@
           &.quarter-picker,
           &.datapoints {
             .pull-left();
-            .mr-0();
+
+            margin-right: 0;
           }
         }
       }
@@ -81,19 +92,10 @@
 }
 
 .headerpane {
-  width: calc(100% ~"-" @sidebarNavWidth);
   z-index: @zindexHeaderpane;
-  box-sizing: border-box;
-  display: table;
-  position: fixed;
-  .bg-primary-content-background();
 
   .preview-headerbar & {
     background-color: @secondaryContentBackground;
-  }
-
-  .about-headerpane & {
-    .bg-transparent();
   }
 
   &.console-headerpane {
@@ -102,26 +104,11 @@
 
   &.listheaderpane {
     height: 51px;
-    .block();
-    .pl-3();
 
     .box {
-      .inline-block();
-      .text-base();
-      .font-normal();
-      .mt-4();
-
       &.user {
-        .mr-5();
+        margin-right: 1.25rem;
         .pull-left();
-
-        .module-title {
-          max-width: 300px;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-
-          .overflow-hidden();
-        }
 
         .sicon-chevron-down {
           line-height: inherit;
@@ -132,39 +119,39 @@
 
         .btn-toolbar,
         .btn {
-          .p-0();
+          padding: 0;
 
           .btn-group {
-            .pl-1();
+            padding-left: 0.25rem;
           }
         }
       }
 
       &.quarter-picker {
-        .mr-5();
+        margin-right: 1.25rem;
         .pull-left();
 
         .select2-choice {
           line-height: inherit;
           background: none;
           border: none;
-          .pl-0();
+          padding-left: 0;
 
           .select2-chosen {
-            .mr-1\.5();
+            margin-right: 0.375rem;
             .pull-left();
           }
 
           .select2-arrow {
             position: relative;
             top: -2px;
-            .h-auto();
+            height: auto;
 
             b {
               line-height: inherit;
               font-size: 9px;
               color: @sicon-color;
-              .h-auto();
+              height: auto;
             }
           }
         }
@@ -172,13 +159,14 @@
 
       &.datapoints {
         .pull-right();
-        .mr-7\.5();
+
+        margin-right: 1.875rem;
 
         span.list-headerpane {
           display: inline-block;
 
           &:nth-child(2) {
-            .ml-7\.5();
+            margin-left: 1.875rem;
           }
 
           .text-label {
@@ -311,9 +299,7 @@
       margin-left: 0;
 
       .sicon-edit,
-      .sicon-lock,
-      .fa-pencil,
-      .fa-lock {
+      .sicon-lock {
         left: -16px !important;
         top: 8px !important;
       }
@@ -375,11 +361,6 @@
     .help-block {
       display: none;
     }
-
-    .image_rounded img {
-      border: 2px solid fade(@black, 40%);
-      border-radius: 23px;
-    }
   }
 
   span[data-type="name"],
@@ -393,10 +374,6 @@
   span[data-type="dashboardtitle"] {
     .detail {
       position: relative;
-    }
-
-    .record-edit-link-wrapper .record-edit-link i.fa-pencil {
-      top: 8px !important;
     }
   }
 
@@ -565,12 +542,6 @@
 
     .btn-group-previous-next {
       padding-left: 0;
-
-      .btn {
-        .fa {
-          font-size: @baseFontSize;
-        }
-      }
     }
   }
 
@@ -591,18 +562,6 @@
       position: absolute;
       left: 0;
       top: 0;
-    }
-
-    .fa {
-      font-weight: 500;
-    }
-
-    .fa-angle-double-right {
-      margin: 0 -1px 0 1px;
-    }
-
-    .fa-angle-double-left {
-      margin: 0 1px 0 -1px;
     }
   }
 }
@@ -698,8 +657,7 @@
       margin-left: 0;
 
       &.active {
-        > .sicon,
-        > .fa {
+        > .sicon {
           color: @gray70;
         }
       }
@@ -713,8 +671,7 @@
 
     /* additive */
     .btn-group {
-      .btn:not(.btn-primary),
-      .btn:not(.btn-primary).dropdown-toggle .fa {
+      .btn:not(.btn-primary) {
         color: @linkColor;
       }
     }
@@ -756,4 +713,8 @@
   .headerpane {
     top: calc(@headerNavHeight ~"+" @bannerHeightREM ~"+" 0.0625rem);
   }
+}
+
+.headerpane.copy-headerpane {
+  top: 0;
 }

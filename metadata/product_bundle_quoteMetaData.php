@@ -10,73 +10,73 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['product_bundle_quote'] = array(
+$dictionary['product_bundle_quote'] = [
     'table' => 'product_bundle_quote',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-        'bundle_id' => array(
+        ],
+        'bundle_id' => [
             'name' => 'bundle_id',
             'type' => 'id',
-        ),
-        'quote_id' => array(
+        ],
+        'quote_id' => [
             'name' => 'quote_id',
             'type' => 'id',
-        ),
-        'bundle_index' => array(
+        ],
+        'bundle_index' => [
             'name' => 'bundle_index',
             'type' => 'int',
             'len' => '11',
             'default' => 0,
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'prod_bundl_quotepk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_pbq_bundle',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'bundle_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_pbq_bq',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'quote_id',
                 'bundle_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'bundle_index_idx',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'bundle_index',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'product_bundle_quote' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'product_bundle_quote' => [
             'lhs_module' => 'Quotes',
             'lhs_table' => 'quotes',
             'lhs_key' => 'id',
@@ -88,6 +88,6 @@ $dictionary['product_bundle_quote'] = array(
             'join_key_lhs' => 'quote_id',
             'join_key_rhs' => 'bundle_id',
             'true_relationship_type' => 'one-to-many',
-        ),
-    ),
-);
+        ],
+    ],
+];

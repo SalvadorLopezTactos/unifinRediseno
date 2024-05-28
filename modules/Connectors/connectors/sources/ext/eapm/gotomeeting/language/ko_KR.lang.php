@@ -11,9 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' =>
-'<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
+        '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
 새로운 GoToMeeting 어플리케이션에 등록하여 LogMeIn에서 Consumer Key를 얻습니다.<br>
 &nbsp;<br>
 인스턴스를 등록하는 단계:<br>
@@ -36,4 +36,4 @@ $connector_strings = array(
 </ol>
 </td></tr></table>',
     'oauth_consumer_key' => '소비자키',
-);
+];

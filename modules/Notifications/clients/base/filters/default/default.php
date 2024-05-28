@@ -10,29 +10,29 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Notifications']['base']['filter']['default'] = array(
+$viewdefs['Notifications']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
 
-    'filters' => array(
-        array(
+    'filters' => [
+        [
             'id' => 'read',
             'name' => 'LBL_READ',
-            'filter_definition' => array(
-                array(
-                    'is_read' => array('$equals' => 1),
-                ),
-            ),
+            'filter_definition' => [
+                [
+                    'is_read' => ['$equals' => 1],
+                ],
+            ],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'unread',
             'name' => 'LBL_UNREAD',
-            'filter_definition' => array(
-                array(
-                    'is_read' => array('$equals' => 0),
-                ),
-            ),
+            'filter_definition' => [
+                [
+                    'is_read' => ['$equals' => 0],
+                ],
+            ],
             'editable' => false,
-        ),
-    ),
-);
+        ],
+    ],
+];

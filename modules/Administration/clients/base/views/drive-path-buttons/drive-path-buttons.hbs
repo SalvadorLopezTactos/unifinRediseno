@@ -10,13 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="headerpane">
+<div class="headerpane bg-[--primary-content-background] box-border fixed table">
     <h1>
         <div class="record-cell">
             <span class="module-title">{{str 'LBL_DRIVE_PATH_CONFIG' module}} - {{driveTypeLabel}}</span>
         </div>
         <div class="btn-toolbar pull-right dropdown">
-            <input type="checkbox" class="sharedWithMe"/>
+            <input type="checkbox" class="sharedWithMe" {{#eq context.attributes.driveType 'sharepoint'}} checked disabled {{/eq}}/>
             {{#each meta.buttons}}
                 {{field ../this}}
             {{/each}}

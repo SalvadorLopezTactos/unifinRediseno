@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Aktiv',
     'LBL_ASSIGNEE_RULE' => 'Tildelingsregel',
     'LBL_TARGET_ASSIGNEE' => 'Målmottaker',
+    'LBL_STAGE_NUMBERS' => 'Fasenummerering',
     'LBL_EXPORT_BUTTON_LABEL' => 'Eksport',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Importer',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Opprett/oppdater automatisk en ny oppføring for Smart Guide-mal ved å importere en *.json-fil fra filsystemet.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Hvis det er merket av for Målmottaker = Overordnet mottaker, endres også "Tilordnet til"-brukerne automatisk på de smarte veiledningene, fasene og aktivitetene når "Tilordnet til"-brukeren endres på de smarte veiledningene, stadiene og aktivitetene. Vær oppmerksom på at innstillingene for målmottaker i aktivitetsmaler har forrang over Smart Guide-mal',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Når skal en bruker tilordnes til aktivitetene',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Hvem skal tildeles aktivitetene',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Denne bryteren lar deg vise eller skjule automatisk fasenummerering.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Smart Guide/fase/aktivitetsmal',
 ];

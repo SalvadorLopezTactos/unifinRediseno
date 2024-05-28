@@ -38,18 +38,18 @@ class SugarForecasting_Export_Manager extends SugarForecasting_Export_AbstractEx
         $api->user = $GLOBALS['current_user'];
         $data = $obj->ForecastManagerWorksheetsGet(
             $api,
-            array(
+            [
                 'module' => 'ForecastManagerWorksheets',
                 'timeperiod_id' => $this->getArg('timeperiod_id'),
-                'user_id' => $this->getArg('user_id')
-            )
+                'user_id' => $this->getArg('user_id'),
+            ]
         );
         $data = $data['records'];
 
-        $fields_array = array(
-            'quota'=>'quota',
-            'name'=>'name'
-        );
+        $fields_array = [
+            'quota' => 'quota',
+            'name' => 'name',
+        ];
 
         $admin = BeanFactory::newBean('Administration');
         $settings = $admin->getConfigForModule('Forecasts');
@@ -82,7 +82,6 @@ class SugarForecasting_Export_Manager extends SugarForecasting_Export_AbstractEx
      */
     public function getFilename()
     {
-        return sprintf("%s_manager_forecast", parent::getFilename());
+        return sprintf('%s_manager_forecast', parent::getFilename());
     }
-
 }

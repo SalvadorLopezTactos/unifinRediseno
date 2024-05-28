@@ -10,6 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['masslink-progress'] = array(
+$viewdefs['base']['view']['masslink-progress'] = [
     'template' => 'massupdate-progress',
-);
+];

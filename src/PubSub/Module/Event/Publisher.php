@@ -107,7 +107,7 @@ final class Publisher implements EventHandlerInterface
                 // Mute relationship events for a record while it is being
                 // deleted.
                 if (SugarBean::inOperation('delete') && $bean->deleted) {
-                    $logger->warning("pubsub: skipped module event ({$event}) for {$recordIdentifier} [reason=deleting record]");
+                    $logger->info("pubsub: skipped module event ({$event}) for {$recordIdentifier} [reason=deleting record]");
                     return;
                 }
             }
@@ -129,7 +129,7 @@ final class Publisher implements EventHandlerInterface
             $pushPublisher = $container->get(PushSubscriptionPublisher::class);
             $pushPublisher->publishEvent($payload);
         } catch (Exception $e) {
-            $logger->critical("pubsub: publish module event ({$event}) for {$recordIdentifier}: {$e->getMessage()}: {$e->getTraceAsString()}");
+            $logger->alert("pubsub: publish module event ({$event}) for {$recordIdentifier}: {$e->getMessage()}: {$e->getTraceAsString()}");
         }
     }
 }

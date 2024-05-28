@@ -26,12 +26,12 @@ interface ConfigurationAwareInterface
      *
      * @return void
      */
-    public function setConfiguration(ConfigurationInterface $config) : void;
+    public function setConfiguration(ConfigurationInterface $config): void;
 
     /**
      * Returns the publisher's configuration.
      *
      * @return ConfigurationInterface
      */
-    public function getConfiguration() : ConfigurationInterface;
+    public function getConfiguration(): ConfigurationInterface;
 }

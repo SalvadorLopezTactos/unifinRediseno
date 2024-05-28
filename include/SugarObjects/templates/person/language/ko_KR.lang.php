@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_SALUTATION' => '인사:',
     'LBL_NAME' => '성명',
     'LBL_FIRST_NAME' => '이름:',
@@ -68,4 +68,4 @@ $mod_strings = array(
     'LBL_GOOGLEPLUS' => '구글 플러스 아이디',
     'NTC_COPY_ALTERNATE_ADDRESS' => '보조 주소를 기본 주소로 복사하기',
     'NTC_COPY_PRIMARY_ADDRESS' => '기본 주소를 보조 주소로 복사히기',
-);
+];

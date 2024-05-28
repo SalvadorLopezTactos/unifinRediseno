@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Verkaufschancenlisten-Dashboard',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Verkaufschancenbericht-Dashboard',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Angebote',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Verkaufschancen durch ein dynamisches Konto',
+    'LBL_TOP_10_OPP' => 'Top 10 der offenen Verkaufschancen',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Dashlet: Meine aktiven Verkaufschancen',
+    'LBL_MY_ACTIVE_OPP' => 'Meine aktiven Verkaufschancen',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Pipeline-Summe beträgt ',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Verkaufschancen-Rolle',
+    'LBL_OPPORTUNITY_ROLE' => 'Verkaufschancen-Rolle',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notizen',
     'LBL_TAB_OPPORTUNITY' => '{{module}} Überprüfung',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'Durch Klicken von "Bestätigen" löschen Sie ALLE Prognosedaten und ändern Ihre Verkaufschancen-Ansicht. Falls Sie dies nicht wünschen, klicken Sie auf Abbrechen, um zu den vorherigen Einstellungen zurückzukehren.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'Durch Klicken von "Bestätigen" löschen Sie ALLE Prognosedaten und ändern Ihre Verkaufschancen-Ansicht. '
-        .'Auch ALLE Prozessdefinitionen mit einem Zielmodul von Umsatzposten werden deaktiviert. '
-        .'Wenn Sie dies nicht wünschen, klicken Sie auf "Abbrechen", um zu den vorherigen Einstellungen zurúckzukehren.',
+        . 'Auch ALLE Prozessdefinitionen mit einem Zielmodul von Umsatzposten werden deaktiviert. '
+        . 'Wenn Sie dies nicht wünschen, klicken Sie auf "Abbrechen", um zu den vorherigen Einstellungen zurúckzukehren.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Falls alle Umsatzposten geschlossen sind und mindestens einer gewonnen wurde,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'wird die Verkaufsphase "Verkaufschancen" auf "Gewonnen" gesetzt.',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Falls alle Umsatzposten sich in der Verkaufsphase "Verloren" befinden,',
@@ -220,25 +223,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Nachdem Sie diese Änderung initialisiert haben, werden für jedes bestehende {{module_name}} im Hintergrund Umsatzposten-Berichte erstellt. Wenn die Umsatzposten vollständig und verfügbar sind, wird eine Benachrichtigung an die E-Mail-Adresse in Ihrem Benutzerprofil gesendet. Bitte beachten Sie, dass Ihre Instanz so konfiguriert sein muss, dass E-Mails über Admin > E-Mail-Einstellungen gesendet werden, damit die Benachrichtigung versendet werden kann.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Mit dem Modul {{plural_module_name}} können Sie einzelne Verkäufe von Anfang bis Ende verfolgen. Jeder {{module_name}} Datensatz stellt einen potenziellen Verkauf dar und enthält relevante Verkaufsdaten sowie andere wichtige Datensätze wie {{quotes_module}}, {{contacts_module}} usw. Ein {{module_name}} durchläuft in der Regel mehrere Verkaufsphasen, bis es entweder als "Geschlossen gewonnen" oder "Geschlossen verloren" markiert wird. {{plural_module_name}} kann noch weiter genutzt werden, indem das {{forecasts_singular_module}}-Modul von Sugar verwendet wird, um Verkaufstrends zu verstehen und vorherzusagen sowie die Arbeit auf das Erreichen von Verkaufsquoten zu konzentrieren.',
+    'LBL_HELP_RECORDS' => 'Das Modul {{plural_module_name}} ermöglicht es Ihnen, einzelne Verkäufe von Anfang bis Ende zu verfolgen. Jeder Datensatz in {{module_name}} stellt einen potenziellen Verkauf dar und enthält relevante Verkaufsdaten sowie andere wichtige Aufzeichnungen wie {{quotes_module}}, {{contacts_module}}etc. Ein {{module_name}} durchläuft in der Regel mehrere Verkaufsphasen, bis es entweder als "Geschlossen, Gewonnen" oder "Abgeschlossen, Verloren" markiert wird. {{plural_module_name}} kann durch den Einsatz von des {{forecasts_singular_module}} von Sugar zum Verstehen und Vorhersagen von Verkaufstrends sowie zur Fokussierung auf das Erreichen von Verkaufsquoten eingesetzt werden.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Mit dem {{plural_module_name}}-Modul können Sie einzelne Verkäufe und die zu diesen Verkäufen gehörenden Posten von Anfang bis Ende nachverfolgen. Jeder {{module_name}}-Datensatz steht für einen potenziellen Verkauf und enthält relevante Verkaufsdaten sowie Bezüge zu anderen wichtigen Datensätzen wie {{quotes_module}}, {{contacts_module}} usw.
+    'LBL_HELP_RECORD' => 'Mit dem {{plural_module_name}}-Modul können Sie einzelne Verkäufe und die zu diesen Verkäufen gehörenden Einzelposten von Anfang bis Ende nachverfolgen. Jeder {{module_name}}-Datensatz steht für einen potenziellen Verkauf und enthält relevante Verkaufsdaten sowie Bezüge zu anderen wichtigen Datensätzen wie {{quotes_module}}, {{contacts_module}} usw.
 
-- Bearbeiten Sie die Felder dieses Datensatzes, indem Sie auf ein einzelnes Feld oder auf die Schaltfläche Bearbeiten klicken.
-- Lassen Sie sich Verknüpfungen zu anderen Datensätzen in den Sub-Panels anzeigen oder ändern Sie sie, indem Sie den unteren linken Bereich auf "Datenansicht" umschalten.
-- Erstellen Sie Benutzerkommentare und Änderungsverlauf des Datensatzes im {{activitystream_singular_module}} und sehen Sie diese ein, indem Sie den unteren linken Bereich auf "Aktivitäten-Stream" umschalten.
+- Bearbeiten Sie die Felder dieses Datensatzes, indem Sie auf ein einzelnes Feld oder auf die Schaltfläche „Bearbeiten“ klicken.
+- Lassen Sie sich Verknüpfungen zu anderen Datensätzen in den Unterbereichen anzeigen oder ändern Sie sie, indem Sie den unteren linken Bereich auf „Datenansicht“ umschalten.
+- Erstellen Sie Benutzerkommentare und zeigen Sie sie an, und erfassen Sie den Änderungsverlauf eines Datensatzes im {{activitystream_singular_module}}, indem Sie den unteren linken Bereich auf „Aktivitäten-Stream“ umschalten.
 - Verfolgen oder favorisieren Sie diesen Datensatz mit den Symbolen rechts neben dem Datensatznamen.
-- Weitere Aktionen finden Sie im Dropdown-Aktionsmenü rechts neben der Schaltfläche Bearbeiten.',
+- Weitere Aktionen finden Sie im Dropdown-Menü „Aktionen“ rechts neben der Schaltfläche „Bearbeiten“.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Mit dem Modul {{plural_module_name}} können Sie einzelne Verkäufe und die zu diesen Verkäufen gehörenden Einzelposten von Anfang bis Ende verfolgen. Jeder {{module_name}} Datensatz stellt einen potenziellen Verkauf dar und enthält relevante Verkaufsdaten sowie andere wichtige Datensätze wie {{quotes_module}}, {{contacts_module}} usw.
+    'LBL_HELP_CREATE' => 'Mit dem {{plural_module_name}}-Modul können Sie einzelne Verkäufe von Anfang bis Ende verfolgen. Jeder {{module_name}}-Datensatz stellt einen potenziellen Verkauf dar und enthält relevante Verkaufsdaten sowie Bezüge zu anderen wichtigen Datensätzen, wie z. B. {{quotes_module}}, {{contacts_module}} usw.
 
-So erstellen Sie eine {{module_name}}:
+So erstellen Sie ein(e/en) {{module_name}}:
 1. Geben Sie die gewünschten Werte für die Felder an.
- - Die mit "Erforderlich" gekennzeichneten Felder müssen vor dem Speichern ausgefüllt werden.
- - Klicken Sie auf "Mehr anzeigen", um bei Bedarf zusätzliche Felder anzuzeigen.
-2. Klicken Sie auf "Speichern", um den neuen Datensatz abzuschließen und zur vorherigen Seite zurückzukehren.',
+ - Die mit „Erforderlich“ gekennzeichneten Felder müssen vor dem Speichern ausgefüllt werden.
+ - Klicken Sie auf „Mehr anzeigen“, um bei Bedarf zusätzliche Felder anzuzeigen.
+2. Klicken Sie auf „Speichern“, um den neuen Datensatz abzuschließen und zur vorherigen Seite zurückzukehren.',
 
 // END ENT/ULT
 
@@ -260,4 +263,9 @@ So erstellen Sie eine {{module_name}}:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Vorhersage des Verkaufschancenabschlusses',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Vorhersagedetails für eine bestimmte Verkaufschance anzeigen',
-);
+    'LBL_AI_WINRATE' => 'Gewinnrate',
+    'LBL_AI_WONOPP' => 'Gewonnene Verkaufschancen',
+    'LBL_AI_CLOSINGTIME' => 'Abschlusszeit',
+    'LBL_AI_CLOSEDOPP' => 'Abgeschlossene Verkaufschancen',
+    'LBL_AI_LEADTIMESPAN' => 'Zeit zwischen der Erstellung einer Verkaufschance und dem gewonnenen Abschluss',
+];

@@ -11,23 +11,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['planned-activities'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['base']['view']['planned-activities'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_PLANNED_ACTIVITIES_DASHLET',
             'description' => 'LBL_PLANNED_ACTIVITIES_DASHLET_DESCRIPTION',
-            'config' => array(
+            'config' => [
                 'limit' => '10',
                 'date' => 'today',
                 'visibility' => 'user',
-            ),
-            'preview' => array(
+            ],
+            'preview' => [
                 'limit' => '10',
                 'date' => 'today',
                 'visibility' => 'user',
-            ),
-            'filter' => array(
-                'module' => array(
+            ],
+            'filter' => [
+                'module' => [
                     'Accounts',
                     'Bugs',
                     'Cases',
@@ -37,112 +37,112 @@ $viewdefs['base']['view']['planned-activities'] = array(
                     'Opportunities',
                     'Prospects',
                     'RevenueLineItems',
-                ),
+                ],
                 'view' => 'record',
-            ),
-        ),
-    ),
-    'custom_toolbar' => array(
-        'buttons' => array(
-            array(
+            ],
+        ],
+    ],
+    'custom_toolbar' => [
+        'buttons' => [
+            [
                 'type' => 'actiondropdown',
                 'no_default_action' => true,
                 'icon' => 'sicon-plus',
-                'buttons' => array(
-                    array(
+                'buttons' => [
+                    [
                         'type' => 'dashletaction',
                         'action' => 'createRecord',
-                        'params' => array(
+                        'params' => [
                             'link' => 'meetings',
                             'module' => 'Meetings',
-                        ),
+                        ],
                         'label' => 'LBL_SCHEDULE_MEETING',
                         'acl_action' => 'create',
                         'acl_module' => 'Meetings',
                         'name' => 'schedule_meeting',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'action' => 'createRecord',
-                        'params' => array(
+                        'params' => [
                             'link' => 'calls',
                             'module' => 'Calls',
-                        ),
+                        ],
                         'label' => 'LBL_SCHEDULE_CALL',
                         'acl_action' => 'create',
                         'acl_module' => 'Calls',
                         'name' => 'log_call',
-                    ),
-                ),
-            ),
-            array(
-                'dropdown_buttons' => array(
-                    array(
+                    ],
+                ],
+            ],
+            [
+                'dropdown_buttons' => [
+                    [
                         'type' => 'dashletaction',
                         'action' => 'editClicked',
                         'label' => 'LBL_DASHLET_CONFIG_EDIT_LABEL',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'action' => 'refreshClicked',
                         'label' => 'LBL_DASHLET_REFRESH_LABEL',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'action' => 'toggleClicked',
                         'label' => 'LBL_DASHLET_MINIMIZE',
                         'event' => 'minimize',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'action' => 'removeClicked',
                         'label' => 'LBL_DASHLET_REMOVE_LABEL',
-                    ),
-                ),
-            ),
-        ),
-    ),
-    'panels' => array(
-        array(
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_body',
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'date',
                     'label' => 'LBL_DASHLET_CONFIGURE_FILTERS',
                     'type' => 'enum',
                     'options' => 'planned_activities_filter_options',
-                ),
-                array(
+                ],
+                [
                     'name' => 'visibility',
                     'label' => 'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY',
                     'type' => 'enum',
                     'options' => 'planned_activities_visibility_options',
-                ),
-                array(
+                ],
+                [
                     'name' => 'limit',
                     'label' => 'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS',
                     'type' => 'enum',
                     'options' => 'planned_activities_limit_options',
-                )
-            ),
-        ),
-    ),
-    'tabs' => array(
-        array(
+                ],
+            ],
+        ],
+    ],
+    'tabs' => [
+        [
             'active' => true,
             'filter_applied_to' => 'date_start',
-            'filters' => array(
-                'status' => array('$not_in' => array('Held', 'Not Held')),
-            ),
+            'filters' => [
+                'status' => ['$not_in' => ['Held', 'Not Held']],
+            ],
             'link' => 'meetings',
             'module' => 'Meetings',
             'order_by' => 'date_start:asc',
             'record_date' => 'date_start',
-            'row_actions' => array(
-                array(
+            'row_actions' => [
+                [
                     'type' => 'rowaction',
                     'icon' => 'sicon-remove',
                     'css_class' => 'btn btn-mini',
@@ -150,8 +150,8 @@ $viewdefs['base']['view']['planned-activities'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_PLANNED_ACTIVITIES_DASHLET_HELD_ACTIVITY',
                     'acl_action' => 'edit',
-                ),
-                array(
+                ],
+                [
                     'type' => 'unlink-action',
                     'icon' => 'sicon-unlink',
                     'css_class' => 'btn btn-mini',
@@ -159,36 +159,35 @@ $viewdefs['base']['view']['planned-activities'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_UNLINK_BUTTON',
                     'acl_action' => 'edit',
-                ),
-            ),
+                ],
+            ],
             'include_child_items' => true,
-            'invitation_actions' => array(
+            'invitation_actions' => [
                 'name' => 'accept_status_users',
                 'type' => 'invitation-actions',
-            ),
-            'overdue_badge' => array(
+            ],
+            'overdue_badge' => [
                 'name' => 'date_start',
                 'type' => 'overdue-badge',
-                'css_class' => 'pull-right',
-            ),
-            'fields' => array(
+            ],
+            'fields' => [
                 'name',
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_start',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'filter_applied_to' => 'date_start',
-            'filters' => array(
-                'status' => array('$not_in' => array('Held', 'Not Held')),
-            ),
+            'filters' => [
+                'status' => ['$not_in' => ['Held', 'Not Held']],
+            ],
             'link' => 'calls',
             'module' => 'Calls',
             'order_by' => 'date_start:asc',
             'record_date' => 'date_start',
-            'row_actions' => array(
-                array(
+            'row_actions' => [
+                [
                     'type' => 'rowaction',
                     'icon' => 'sicon-remove',
                     'css_class' => 'btn btn-mini',
@@ -196,8 +195,8 @@ $viewdefs['base']['view']['planned-activities'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_PLANNED_ACTIVITIES_DASHLET_HELD_ACTIVITY',
                     'acl_action' => 'edit',
-                ),
-                array(
+                ],
+                [
                     'type' => 'unlink-action',
                     'icon' => 'sicon-unlink',
                     'css_class' => 'btn btn-mini',
@@ -205,23 +204,23 @@ $viewdefs['base']['view']['planned-activities'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_UNLINK_BUTTON',
                     'acl_action' => 'edit',
-                ),
-            ),
+                ],
+            ],
             'include_child_items' => true,
-            'invitation_actions' => array(
+            'invitation_actions' => [
                 'name' => 'accept_status_users',
                 'type' => 'invitation-actions',
-            ),
-            'overdue_badge' => array(
+            ],
+            'overdue_badge' => [
                 'name' => 'date_start',
                 'type' => 'overdue-badge',
-            ),
-            'fields' => array(
+            ],
+            'fields' => [
                 'name',
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_start',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

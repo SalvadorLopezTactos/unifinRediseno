@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper;
 
 /**
@@ -17,22 +18,26 @@ namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper;
  */
 class StatusHelper
 {
-
     /**
      * @var CONST
      */
     public const APPOINMENT_STATUS_PLANNED = 'Planned';
-    
+
+    /**
+     * @var CONST
+     */
+    public const APPOINMENT_STATUS_STARTED = 'In Progress';
+
     /**
      * @var CONST
      */
     public const APPOINMENT_STATUS_HELD = 'Held';
-    
+
     /**
      * @var CONST
      */
     public const APPOINMENT_STATUS_NOT_HELD = 'Not Held';
-    
+
     /**
      * @var CONST
      */
@@ -42,17 +47,17 @@ class StatusHelper
      * @var CONST
      */
     public const TASK_STATUS_NOT_STARTED = 'Not Started';
-    
+
     /**
      * @var CONST
      */
     public const TASK_STATUS_IN_PROGRESS = 'In Progress';
-    
+
     /**
      * @var CONST
      */
     public const TASK_STATUS_COMPLETED = 'Completed';
-    
+
     /**
      * @var CONST
      */
@@ -71,12 +76,13 @@ class StatusHelper
         'Calls' => [
             'statusMapping' => [
                 'notStart' => self::APPOINMENT_STATUS_PLANNED,
-                'inProgress' => self::APPOINMENT_STATUS_PLANNED,
+                'inProgress' => self::APPOINMENT_STATUS_STARTED,
                 'complete' => self::APPOINMENT_STATUS_HELD,
                 'notApplicable' => self::APPOINMENT_STATUS_NOT_HELD,
                 'cancelled' => self::APPOINMENT_STATUS_DEFERRED,
             ],
             'statusArray' => [
+                self::APPOINMENT_STATUS_STARTED,
                 self::APPOINMENT_STATUS_PLANNED,
                 self::APPOINMENT_STATUS_HELD,
                 self::APPOINMENT_STATUS_NOT_HELD,
@@ -123,7 +129,7 @@ class StatusHelper
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\activityHelper
      */
     private $activityHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\childActivityHelper
      */
@@ -226,7 +232,7 @@ class StatusHelper
      */
     public function isInProgress(\SugarBean $activity)
     {
-        if (in_array($activity->getModuleName(), ['Calls', 'Meetings'])) {
+        if (in_array($activity->getModuleName(), ['Meetings'])) {
             return false;
         }
 
@@ -286,7 +292,7 @@ class StatusHelper
     public function calculateStatus(\SugarBean $activity)
     {
         $children = $this->childActivityHelper->getChildren($activity);
-        $count = is_countable($children) ? count($children) : 0;
+        $count = safeCount($children);
         $notStarted = 0;
         $completed = 0;
         $notApplicable = 0;
@@ -361,7 +367,7 @@ class StatusHelper
     public function haveChangedStatus(\SugarBean $activity)
     {
         $fetched_row_value = false;
-        if (is_array($activity->fetched_row_before)) {
+        if (is_array($activity->fetched_row_before) && !empty($activity->fetched_row_before['status'])) {
             $fetched_row_value = $activity->fetched_row_before['status'];
         }
 

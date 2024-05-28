@@ -10,28 +10,28 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-'LBL_ID'=>'ID',
-'LBL_DATE_ENTERED'=>'Data de creació',
-'LBL_DATE_MODIFIED'=>'Última Modificació', 
-'LBL_MODIFIED'=>'Modificat per',
-'LBL_MODIFIED_ID'=>'Modificat per ID',
-'LBL_MODIFIED_NAME'=>'Modificat Per Nom',
-'LBL_CREATED'=>'Creat Per',
-'LBL_CREATED_ID'=>'Creat per ID',
-'LBL_DOC_OWNER'=>'Propietari del document',
-'LBL_USER_FAVORITES'=>'Usuaris que son favorits',
-'LBL_DESCRIPTION'=>'Descripció',
-'LBL_DELETED'=>'Suprimit',
-'LBL_NAME'=>'Nom',
-'LBL_CREATED_USER'=>'Creat Per Usuari',
-'LBL_MODIFIED_USER'=>'Modificat Per Usuari',
-'LBL_LIST_NAME'=>'Nom',
-'LBL_EDIT_BUTTON' => 'Edita',
- 'LBL_REMOVE' => 'Suprimir',
+$mod_strings = [
+    'LBL_ID' => 'ID',
+    'LBL_DATE_ENTERED' => 'Data de creació',
+    'LBL_DATE_MODIFIED' => 'Última Modificació',
+    'LBL_MODIFIED' => 'Modificat per',
+    'LBL_MODIFIED_ID' => 'Modificat per ID',
+    'LBL_MODIFIED_NAME' => 'Modificat Per Nom',
+    'LBL_CREATED' => 'Creat Per',
+    'LBL_CREATED_ID' => 'Creat per ID',
+    'LBL_DOC_OWNER' => 'Propietari del document',
+    'LBL_USER_FAVORITES' => 'Usuaris que son favorits',
+    'LBL_DESCRIPTION' => 'Descripció',
+    'LBL_DELETED' => 'Suprimit',
+    'LBL_NAME' => 'Nom',
+    'LBL_CREATED_USER' => 'Creat Per Usuari',
+    'LBL_MODIFIED_USER' => 'Modificat Per Usuari',
+    'LBL_LIST_NAME' => 'Nom',
+    'LBL_EDIT_BUTTON' => 'Edita',
+    'LBL_REMOVE' => 'Suprimir',
     //define label(s) to be used for overriding local values during import/export
     'LBL_EXPORT_MODIFIED_BY_NAME' => 'Modificat per nom',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Creat pel nom',
 
     'LBL_COMMENTLOG' => 'Comment Log',
-);
+];

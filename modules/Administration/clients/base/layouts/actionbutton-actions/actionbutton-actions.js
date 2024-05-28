@@ -94,6 +94,10 @@
      */
     _applyCustomStyle: function() {
         this.layout.$el.addClass('ab-admin-main-left-pane');
+        const mainPane = this.closestComponent('main-pane');
+        if (mainPane) {
+            mainPane.$el.addClass('overflow-y-auto');
+        }
     },
 
     /**

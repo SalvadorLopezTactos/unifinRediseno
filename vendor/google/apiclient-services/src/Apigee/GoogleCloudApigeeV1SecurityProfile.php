@@ -23,6 +23,10 @@ class GoogleCloudApigeeV1SecurityProfile extends \Google\Collection
   /**
    * @var string
    */
+  public $description;
+  /**
+   * @var string
+   */
   public $displayName;
   protected $environmentsType = GoogleCloudApigeeV1SecurityProfileEnvironment::class;
   protected $environmentsDataType = 'array';
@@ -57,6 +61,20 @@ class GoogleCloudApigeeV1SecurityProfile extends \Google\Collection
   protected $scoringConfigsType = GoogleCloudApigeeV1SecurityProfileScoringConfig::class;
   protected $scoringConfigsDataType = 'array';
 
+  /**
+   * @param string
+   */
+  public function setDescription($description)
+  {
+    $this->description = $description;
+  }
+  /**
+   * @return string
+   */
+  public function getDescription()
+  {
+    return $this->description;
+  }
   /**
    * @param string
    */

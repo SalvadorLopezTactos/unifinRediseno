@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_LISTVIEW_FILTER_ALL' => 'Wszystkie {0}',
     'LBL_TEAM' => 'Zespoły',
     'LBL_TEAMS' => 'Zespoły',
@@ -77,4 +77,4 @@ $mod_strings = array(
     'LBL_OPEN_ISSUES' => 'Otwórz {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Ostatnio rozwiązane',
     'LBL_FILTER_UTILS_CREATED' => 'Utworzone przez',
-);
+];

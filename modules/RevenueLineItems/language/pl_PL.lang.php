@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Pulpit listy pozycji wiersza przychodów',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Pulpit rekordów pozycji wiersza przychodów',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Typy produktów',
     'LBL_ASSIGNED_TO_NAME' => 'Przydzielono do:',
     'LBL_ASSIGNED_TO' => 'Przydzielono do',
-    'LBL_ASSIGNED_TO_ID'=>'Przypisano do (ID użytkownika)',
+    'LBL_ASSIGNED_TO_ID' => 'Przypisano do (ID użytkownika)',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Przypisano do (nazwa użytkownika)',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Przypisano do (ID użytkownika)',
     'LBL_CAMPAIGN_ID' => 'ID kampanii',
@@ -217,4 +217,5 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Wyświetla najlepsze 10 pozycji szans w wykresie bąbelkowym.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Moje pozycje szans',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Pozycje szans mojego zespołu",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Oś czasu pozycji przychodów',
+];

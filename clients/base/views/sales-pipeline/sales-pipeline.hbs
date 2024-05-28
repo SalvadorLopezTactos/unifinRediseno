@@ -20,13 +20,13 @@
         {{#if isManager}}
         <div class="btn-group dashlet-group" data-toggle="buttons-radio">
             <button class="btn{{#eq settings.attributes.visibility "user"}} active{{/eq}}"
-                    data-action="visibility-switcher" rel="tooltip" data-placement="bottom" value="user"
+                    data-action="visibility-switcher" rel="tooltip" data-bs-placement="bottom" value="user"
                     title="{{{str "LBL_DASHLET_MY_PIPELINE" 'Forecasts' this.context}}}"
                     track="click:viewMyUserPipeline" aria-label="{{{str "LBL_DASHLET_MY_PIPELINE" 'Forecasts' this.context}}}" aria-pressed="{{#eq settings.attributes.visibility "user"}}true{{else}}false{{/eq}}">
                 <i class="sicon sicon-user"></i>
             </button>
             <button class="btn{{#eq settings.attributes.visibility "group"}} active{{/eq}}"
-                    data-action="visibility-switcher" rel="tooltip" data-placement="bottom"
+                    data-action="visibility-switcher" rel="tooltip" data-bs-placement="bottom"
                     value="group" title="{{{str "LBL_DASHLET_MY_TEAMS_PIPELINE" 'Forecasts' this.context}}}"
                     track="click:viewMyTeamsPipeline" aria-label="{{{str "LBL_DASHLET_MY_TEAMS_PIPELINE" 'Forecasts' this.context}}}" aria-pressed="{{#eq settings.attributes.visibility "group"}}true{{else}}false{{/eq}}">
                 <i class="sicon sicon-user-group"></i>

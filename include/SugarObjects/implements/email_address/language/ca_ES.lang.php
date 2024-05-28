@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_ANY_EMAIL' => 'Adreça electrònica:',
     'LBL_EMAIL' => 'Adreça electrònica:',
     'LBL_PRIMARY_EMAIL' => 'Adreça electrònica principal',
@@ -18,7 +18,7 @@ $mod_strings = array (
     'LBL_OTHER_EMAIL_ADDRESS' => 'Adreça electrònica alternativa:',
     'LBL_EMAIL_ADDRESS' => 'Adreça electrònica',
     'LBL_EMAIL_ADDRESSES' => 'Adreça(ces) electrònica(ques)',
-    'LBL_INVALID_EMAIL'=>'L\'adreça electrònica no és vàlida:',
+    'LBL_INVALID_EMAIL' => 'L\'adreça electrònica no és vàlida:',
     'LBL_EMAIL_OPT_OUT' => 'Refusar Correu:',
     'LBL_EMAIL_NON_PRIMARY' => 'No hi ha direccions primàries d\'email',
-);
+];

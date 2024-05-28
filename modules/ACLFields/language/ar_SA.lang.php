@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_DEFAULT' => 'غير معين',
     'LBL_READ_WRITE' => 'قراءة/كتابة',
     'LBL_READ_OWNER_WRITE' => 'قراءة/كتابة المالك',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_READ_SELECTED_TEAMS_WRITE' => 'القراءة/(المالك والفرق المختارة) الكتابة',
     'LBL_SELECTED_TEAMS_READ_OWNER_WRITE' => '(المالك والفرق المختارة) قراءة/كتابة المالك',
     'LBL_SELECTED_TEAMS_READ_WRITE' => '(المالك والفرق المختارة) القراءة/الكتابة (المالك & الفرق المختارة)',
-);
+];

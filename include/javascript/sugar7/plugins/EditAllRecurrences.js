@@ -29,7 +29,7 @@
             onAttach: function() {
                 this.on('init', function() {
                     // listen for edit all recurrences event on the context
-                    this.context.on('all_recurrences:edit', this.editAllRecurrences, this);
+                    this.context.on('all_recurrences:edit', this.checkSugarSupportedEvent, this);
 
                     // coming from a /edit/all_recurrences route
                     if (this.context.get('all_recurrences') === true) {
@@ -112,6 +112,33 @@
                         );
                     }, this)
                 );
+            },
+
+            /**
+             * Check if the event has a supported Rrule before editing it
+             */
+            checkSugarSupportedEvent: function() {
+                const rset = this.model.get('rset');
+
+                if (!rset) {
+                    this.editAllRecurrences();
+                    return;
+                }
+
+                const rsetJSON = JSON.parse(rset);
+
+                if (_.has(rsetJSON, 'sugarSupportedRrule') && !rsetJSON.sugarSupportedRrule) {
+                    app.alert.show('message', {
+                        level: 'confirmation',
+                        messages: app.lang.get('LBL_UNSUPPORTED_RRULE'),
+                        autoClose: false,
+                        onConfirm: _.bind(function() {
+                            this.editAllRecurrences();
+                        }, this)
+                    });
+                } else {
+                    this.editAllRecurrences();
+                }
             },
 
             /**
@@ -207,14 +234,26 @@
 
             /**
              * Check to see if event is recurring
-             * Event is recurring when the repeat type is not blank
+             * Event is recurring when the repeat type is not blank. In case of an unsupported recurring event, the
+             * repeat type can be blank, so we should check the sugarSupportedRrule flag
              *
              * @param {Data.Bean} model
              * @return {Boolean}
              * @private
              */
             _isRecurringEvent: function(model) {
-                return (model.get('repeat_type') !== '');
+                const rset = model.get('rset');
+                const repeatType = model.get('repeat_type');
+
+                if (rset && !repeatType) {
+                    const rsetJSON = JSON.parse(rset);
+
+                    if (_.has(rsetJSON, 'sugarSupportedRrule') && !rsetJSON.sugarSupportedRrule) {
+                        return true;
+                    }
+                }
+
+                return repeatType !== '';
             },
 
             /**

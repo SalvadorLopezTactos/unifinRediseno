@@ -1,5 +1,9 @@
 <?php
- if(!defined('sugarEntry'))define('sugarEntry', true);
+
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +17,6 @@
 
 class SugarSoapService2 extends SugarSoapService
 {
-
     /**
      * This function registers implementation class name with SOAP so when SOAP makes a call to a funciton,
      * it will be made on this class object
@@ -37,7 +40,7 @@ class SugarSoapService2 extends SugarSoapService
         $this->getLogger()->info('Begin: SugarSoapService2->serve');
         ob_clean();
         $this->in_service = true;
-        register_shutdown_function(array($this, "shutdown"));
+        register_shutdown_function([$this, 'shutdown']);
         ob_start();
         $this->server->handle();
         $this->in_service = false;
@@ -47,19 +50,18 @@ class SugarSoapService2 extends SugarSoapService
     }
 
 
-
     /**
      * This method registers all the functions which you want to be available for SOAP.
      *
      * @param array $excludeFunctions - All the functions you don't want to register
      */
-    public function register($excludeFunctions = array())
+    public function register($excludeFunctions = [])
     {
         $this->getLogger()->info('Begin: SugarSoapService2->register');
         $this->excludeFunctions = $excludeFunctions;
         $registryObject = new $this->registryClass($this);
         $registryObject->register();
-        $this->excludeFunctions = array();
+        $this->excludeFunctions = [];
         $this->getLogger()->info('End: SugarSoapService2->register');
     }
 }

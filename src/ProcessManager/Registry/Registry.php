@@ -27,21 +27,20 @@ class Registry implements RegistryInterface
      * Registry data store
      * @var array
      */
-    private $data = array();
+    private $data = [];
 
     /**
      * List of changes for a key. This will be an array of change values containing
      * from and to values.
      * @var array
      */
-    private $changes = array();
+    private $changes = [];
 
     /**
      * Private constructor to enforce singleton instantiation
      */
     final private function __construct()
     {
-
     }
 
     /**
@@ -51,7 +50,7 @@ class Registry implements RegistryInterface
     public static function getInstance()
     {
         if (null === self::$instance) {
-            self::$instance = new self;
+            self::$instance = new self();
         }
 
         return self::$instance;
@@ -147,7 +146,7 @@ class Registry implements RegistryInterface
      */
     public function getChanges($key)
     {
-        return $this->changes[$key] ?? array();
+        return $this->changes[$key] ?? [];
     }
 
     /**
@@ -156,6 +155,6 @@ class Registry implements RegistryInterface
     public function reset()
     {
         // This is a very destructive method so please use with caution
-        $this->data = $this->changes = array();
+        $this->data = $this->changes = [];
     }
 }

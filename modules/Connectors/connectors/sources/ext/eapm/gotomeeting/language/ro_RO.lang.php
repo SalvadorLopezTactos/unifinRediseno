@@ -11,9 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' =>
-'<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
+        '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
 Obțineți o cheie de consumator din LogMeIn înregistrând o nouă aplicație GoToMeeting.<br>
 &nbsp;<br>
 Pași pentru înregistrarea instanței:<br>
@@ -36,4 +36,4 @@ Pași pentru înregistrarea instanței:<br>
 </ol>
 </td></tr></table>',
     'oauth_consumer_key' => 'Cheie consumator',
-);
+];

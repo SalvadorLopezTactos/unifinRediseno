@@ -11,9 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' =>
-'<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
+        '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
 Rufen Sie einen Kunden-Schlüssel von LogMeIn ab, indem Sie eine neue GoToMeeting-Anwendung registrieren.<br>
 &nbsp;<br>
 Vorgehensweise zur Registrierung Ihrer Instanz:<br>
@@ -35,4 +35,4 @@ Vorgehensweise zur Registrierung Ihrer Instanz:<br>
      <li>Kopieren Sie den Kunden-Schlüsselwert und geben Sie ihn unten ein</li>
  </ol> </td></tr></table>',
     'oauth_consumer_key' => 'Kunden-Schlüssel',
-);
+];

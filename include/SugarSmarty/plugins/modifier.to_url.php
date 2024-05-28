@@ -36,17 +36,15 @@ r36643 - 2008-06-11 14:28:43 -0700 (Wed, 11 Jun 2008) - dwheeler - bug 20270: Ad
  * Type:     modifier<br>
  * Name:     to_url<br>
  * Purpose:  adds http:// to the begining of a string if it contains no protocol
- * @author   SugarCRM
  * @param string The link to modify
  * @return string The converted link
+ * @author   SugarCRM
  */
 function smarty_modifier_to_url($string)
 {
     if (preg_match('/^[^:\/]*:\/\/.*/', $string)) {
-    	return $string;
+        return $string;
     } else {
-    	return 'http://' . $string;
+        return 'http://' . $string;
     }
 }
-
-?>

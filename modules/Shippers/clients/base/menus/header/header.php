@@ -10,19 +10,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'Shippers';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
-        'route'=>'#Shippers/create',
-        'label' =>'LNK_NEW_SHIPPER',
-        'acl_action'=>'',
-        'acl_module'=>'',
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
+        'route' => '#Shippers/create',
+        'label' => 'LNK_NEW_SHIPPER',
+        'acl_action' => '',
+        'acl_module' => '',
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route'=>'#TaxRates/create',
-        'label' =>'LNK_NEW_TAXRATE',
-        'acl_action'=>'',
-        'acl_module'=>'',
+    ],
+    [
+        'route' => '#TaxRates/create',
+        'label' => 'LNK_NEW_TAXRATE',
+        'acl_action' => '',
+        'acl_module' => '',
         'icon' => 'sicon-plus',
-    ),
-);
+    ],
+];

@@ -11,63 +11,63 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['WebLogicHooks']['base']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['WebLogicHooks']['base']['view']['list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'enabled' => true,
                     'sortable' => true,
                     'link' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'url',
                     'enabled' => true,
                     'sortable' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'webhook_target_module',
                     'enabled' => true,
                     'sortable' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'trigger_event',
                     'enabled' => true,
                     'sortable' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'request_method',
                     'enabled' => true,
                     'sortable' => true,
-                ),
-            )
-        ),
-    ),
-    'dependencies' => array(
-        array(
-            'hooks' => array('all'),
+                ],
+            ],
+        ],
+    ],
+    'dependencies' => [
+        [
+            'hooks' => ['all'],
             'trigger' => 'true',
-            'triggerFields' => array('trigger_event'),
+            'triggerFields' => ['trigger_event'],
             'onload' => true,
-            'actions' => array(
-                array(
+            'actions' => [
+                [
                     'action' => 'SetVisibility',
-                    'params' => array(
+                    'params' => [
                         'target' => 'webhook_target_module',
-                        'value' => 'not(isInList($trigger_event, createList("after_login", "after_logout", "login_failed")))'
-                    )
-                ),
-                array(
+                        'value' => 'not(isInList($trigger_event, createList("after_login", "after_logout", "login_failed")))',
+                    ],
+                ],
+                [
                     'action' => 'SetValue',
-                    'params' => array(
+                    'params' => [
                         'target' => 'webhook_target_module',
-                        'value' => 'ifElse(isInList($trigger_event, createList("after_login", "after_logout", "login_failed")), "Users", $webhook_target_module)'
-                    )
-                )
-            )
-        )
-    )
-);
+                        'value' => 'ifElse(isInList($trigger_event, createList("after_login", "after_logout", "login_failed")), "Users", $webhook_target_module)',
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

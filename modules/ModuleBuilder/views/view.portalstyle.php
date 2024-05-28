@@ -11,28 +11,29 @@
  */
 
 
-class ViewPortalStyle extends SugarView 
+class ViewPortalStyle extends SugarView
 {
-	/**
-	 * @see SugarView::_getModuleTitleParams()
-	 */
-	protected function _getModuleTitleParams($browserTitle = false)
-	{
-	    global $mod_strings;
-	    
-    	return array(
-    	   translate('LBL_MODULE_NAME','Administration'),
-    	   ModuleBuilderController::getModuleTitle(),
-    	   );
+    /**
+     * @see SugarView::_getModuleTitleParams()
+     */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _getModuleTitleParams($browserTitle = false)
+    {
+        global $mod_strings;
+
+        return [
+            translate('LBL_MODULE_NAME', 'Administration'),
+            ModuleBuilderController::getModuleTitle(),
+        ];
     }
 
-	// DO NOT REMOVE - overrides parent ViewEdit preDisplay() which attempts to load a bean for a non-existent module
-	function preDisplay() 
-	{
-	}
+    // DO NOT REMOVE - overrides parent ViewEdit preDisplay() which attempts to load a bean for a non-existent module
+    public function preDisplay()
+    {
+    }
 
-	function display($params = array())
-	{
+    public function display($params = [])
+    {
         $smarty = new Sugar_Smarty();
         //$smarty->assign('welcome', $GLOBALS['mod_strings']['LBL_SP_UPLOADSTYLE']);
         $smarty->assign('mod', $GLOBALS['mod_strings']);
@@ -45,7 +46,7 @@ class ViewPortalStyle extends SugarView
         $ajax->addCrumb(translate('LBL_SUGARPORTAL', 'ModuleBuilder'), 'ModuleBuilder.main("sugarportal")');
         $ajax->addCrumb(translate('LBL_UP_STYLE_SHEET', 'ModuleBuilder'), 'ModuleBuilder.getContent("module=ModuleBuilder&action=portalstyle")');
         $ajax->addSection('center', translate('LBL_UP_STYLE_SHEET', 'ModuleBuilder'), $smarty->fetch('modules/ModuleBuilder/tpls/portalstyle.tpl'));
-		$GLOBALS['log']->debug('ViewPortalStyle->display(): '.$ajax->getJavascript());
-		echo $ajax->getJavascript();
-	}
+        $GLOBALS['log']->debug('ViewPortalStyle->display(): ' . $ajax->getJavascript());
+        echo $ajax->getJavascript();
+    }
 }

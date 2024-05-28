@@ -10,22 +10,22 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class EmployeesStudioModule extends StudioModule {
-    function getProvidedSubpanels ()
+class EmployeesStudioModule extends StudioModule
+{
+    public function getProvidedSubpanels()
     {
         // Much like pointy haired bosses, other modules should not be able to relate to Employees.
         return false;
     }
 
-    function getModule ()
+    public function getModule()
     {
         $normalModules = parent::getModule();
-        
-        if(isset($normalModules[translate('LBL_RELATIONSHIPS')])) {
+
+        if (isset($normalModules[translate('LBL_RELATIONSHIPS')])) {
             unset($normalModules[translate('LBL_RELATIONSHIPS')]);
         }
 
         return $normalModules;
     }
-
 }

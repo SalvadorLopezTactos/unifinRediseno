@@ -30,7 +30,7 @@
 <div id="{$source_id}:enabled_div" class="enabled_module_workarea">
 <ul id="{$source_id}:enabled_ul" class="module_draglist">
 {foreach from=$enabled_modules item=module}
-<li id="{$source_id}:{$module}" class="noBullet2">{sugar_translate label=$module}</li>
+<li id="{$source_id}:{$module|escape:'html':'UTF-8'}" class="noBullet2">{sugar_translate label=$module}</li>
 {/foreach}
 </ul>
 </div>
@@ -39,7 +39,7 @@
 <div id="{$source_id}:disabled_div" class="disabled_module_workarea">
 <ul id="{$source_id}:disabled_ul" class="module_draglist">
 {foreach from=$disabled_modules item=module}
-<li id="{$source_id}:{$module}" class="noBullet2">{sugar_translate label=$module}</li>
+<li id="{$source_id}:{$module|escape:'html':'UTF-8'}" class="noBullet2">{sugar_translate label=$module}</li>
 {/foreach}
 </ul>
 </div>
@@ -62,11 +62,11 @@ init: function() {
 	new YAHOO.util.DDTarget("{$source_id}:disabled_ul");
 
 	{foreach from=$enabled_modules item=module}
-	     new YAHOO.example.DDList("{$source_id}:{$module}");
+	     new YAHOO.example.DDList("{$source_id}:{$module|escape:'javascript':'UTF-8'}");
 	{/foreach}
 
 	{foreach from=$disabled_modules item=module}
-	     new YAHOO.example.DDList("{$source_id}:{$module}");
+	     new YAHOO.example.DDList("{$source_id}:{$module|escape:'javascript':'UTF-8'}");
 	{/foreach}
 }
 };

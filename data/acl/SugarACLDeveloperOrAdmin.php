@@ -54,14 +54,12 @@ class SugarACLDeveloperOrAdmin extends SugarACLStrategy
             return false;
         }
 
-        if($currentUser->isAdminForModule($module) || $currentUser->isDeveloperForModule($module)) {
+        if ($currentUser->isAdminForModule($module) || $currentUser->isDeveloperForModule($module)) {
             return true;
-        } 
-        else {
+        } else {
             if ($this->allowUserRead && !$this->isWriteOperation($view, $context)) {
                 return true;
-            } 
-            else {
+            } else {
                 return false;
             }
         }

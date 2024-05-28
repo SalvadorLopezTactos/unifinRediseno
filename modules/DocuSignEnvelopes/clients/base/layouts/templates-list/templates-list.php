@@ -11,7 +11,7 @@
  */
 
 $viewdefs['DocuSignEnvelopes']['base']['layout']['templates-list'] = [
-    'css_class'=> 'flex-list-layout flex templates-list flex-column h-full',
+    'css_class' => 'flex-list-layout flex templates-list flex-col h-full',
     'components' => [
         [
             'layout' => [
@@ -23,14 +23,14 @@ $viewdefs['DocuSignEnvelopes']['base']['layout']['templates-list'] = [
                         'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8 flex flex-column',
+                            'css_class' => 'main-pane span8 flex flex-col overflow-hidden h-[calc(100%-55px)]',
                             'components' => [
                                 [
                                     'view' => 'template-selection-headerpane',
                                 ],
                                 [
                                     'layout' => [
-                                        'css_class' => 'flex flex-column h-full',
+                                        'css_class' => 'flex flex-col h-full',
                                         'type' => 'filterpanel',
                                         'availableToggles' => [],
                                         'filter_options' => [

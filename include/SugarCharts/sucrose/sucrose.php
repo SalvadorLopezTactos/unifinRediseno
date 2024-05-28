@@ -23,7 +23,7 @@ class sucrose extends JsChart
     /**
      * Call the parent object contructor
      */
-    function __construct()
+    public function __construct()
     {
         $GLOBALS['log']->deprecated('Sucrose has been deprecated since 11.3.0 - use chart.js instead');
         parent::__construct();
@@ -34,29 +34,29 @@ class sucrose extends JsChart
      *
      * @return  string A concatenated list of script tags with compiled resource paths
      */
-    function getChartResources()
+    public function getChartResources()
     {
         return '
-        <script language="javascript" type="text/javascript" src="'.getJSPath('include/javascript/d3-sugar/d3-sugar.min.js').'"></script>
-        <script language="javascript" type="text/javascript" src="'.getJSPath('include/javascript/sucrose/sucrose.min.js').'"></script>
-        <script language="javascript" type="text/javascript" src="'.getJSPath('include/javascript/rgbcolor.js').'"></script>
-        <script language="javascript" type="text/javascript" src="'.getJSPath('include/javascript/StackBlur.js').'"></script>
-        <script language="javascript" type="text/javascript" src="'.getJSPath('include/javascript/canvg.js').'"></script>
-        <script language="javascript" type="text/javascript" src="'.getJSPath('include/SugarCharts/sucrose/js/sugarCharts.js').'"></script>
+        <script language="javascript" type="text/javascript" src="' . getJSPath('include/javascript/d3-sugar/d3-sugar.min.js') . '"></script>
+        <script language="javascript" type="text/javascript" src="' . getJSPath('include/javascript/sucrose/sucrose.min.js') . '"></script>
+        <script language="javascript" type="text/javascript" src="' . getJSPath('include/javascript/rgbcolor.js') . '"></script>
+        <script language="javascript" type="text/javascript" src="' . getJSPath('include/javascript/StackBlur.js') . '"></script>
+        <script language="javascript" type="text/javascript" src="' . getJSPath('include/javascript/canvg.js') . '"></script>
+        <script language="javascript" type="text/javascript" src="' . getJSPath('include/SugarCharts/sucrose/js/sugarCharts.js') . '"></script>
         ';
     }
 
     /**
      * Display method to invoke Smarty instance with template variables
      *
-     * @param   string $name chart id assigned for template
-     * @param   string $xmlFile chart data in xml format to be processed
-     * @param   string $width default width of chart container
-     * @param   string $height default height of chart container
-     * @param   string $resize allow resizing of chart container (deprecated)
+     * @param string $name chart id assigned for template
+     * @param string $xmlFile chart data in xml format to be processed
+     * @param string $width default width of chart container
+     * @param string $height default height of chart container
+     * @param string $resize allow resizing of chart container (deprecated)
      * @return  string Smarty template instance with chart containers and source files
      */
-    function display($name, $xmlFile, $width = '320', $height = '480', $resize = false)
+    public function display($name, $xmlFile, $width = '320', $height = '480', $resize = false)
     {
         parent::display($name, $xmlFile, $width, $height, $resize);
 

@@ -1,4 +1,5 @@
 <?php
+
 //FILE SUGARCRM flav=ent
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -12,10 +13,10 @@
  */
 
 $module_name = 'Bugs';
-$viewdefs[$module_name]['portal']['menu']['quickcreate'] = array(
+$viewdefs[$module_name]['portal']['menu']['quickcreate'] = [
     'layout' => 'create',
     'label' => 'LNK_NEW_BUG',
     'visible' => true,
     'icon' => 'sicon-plus',
     'order' => 1,
-);
+];

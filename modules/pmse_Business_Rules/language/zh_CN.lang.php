@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => '流程商务规则',
-  'LBL_MODULE_TITLE' => '流程商务规则',
-  'LBL_MODULE_NAME_SINGULAR' => '流程商务规则',
+$mod_strings = [
+    'LBL_MODULE_NAME' => '流程商务规则',
+    'LBL_MODULE_TITLE' => '流程商务规则',
+    'LBL_MODULE_NAME_SINGULAR' => '流程商务规则',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => '流程商务规则焦点抽屉',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => '流程商务规则焦点抽屉',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => '流程商务规则记录仪表板',
-  'LBL_RST_UID' => '商务规则编号',
-  'LBL_RST_TYPE' => '商务规则类型',
-  'LBL_RST_DEFINITION' => '商务规则定义',
-  'LBL_RST_EDITABLE' => '可编辑商务规则',
-  'LBL_RST_SOURCE' => '商务规则来源',
-  'LBL_RST_SOURCE_DEFINITION' => '商务规则来源定义',
-  'LBL_RST_MODULE' => '目标模块',
-  'LBL_RST_FILENAME' => '商务规则文件名',
-  'LBL_RST_CREATE_DATE' => '商务规则创建日期',
-  'LBL_RST_UPDATE_DATE' => '商务规则更新日期',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => '流程商务规则记录仪表板',
+    'LBL_RST_UID' => '商务规则编号',
+    'LBL_RST_TYPE' => '商务规则类型',
+    'LBL_RST_DEFINITION' => '商务规则定义',
+    'LBL_RST_EDITABLE' => '可编辑商务规则',
+    'LBL_RST_SOURCE' => '商务规则来源',
+    'LBL_RST_SOURCE_DEFINITION' => '商务规则来源定义',
+    'LBL_RST_MODULE' => '目标模块',
+    'LBL_RST_FILENAME' => '商务规则文件名',
+    'LBL_RST_CREATE_DATE' => '商务规则创建日期',
+    'LBL_RST_UPDATE_DATE' => '商务规则更新日期',
 
     'LNK_LIST' => '查看流程商务规则',
     'LNK_NEW_PMSE_BUSINESS_RULES' => '新增流程商务规则',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => '此业务规则无效，因为它使用了无效的字段或在您的 SugarCRM 实例无法找到的字段。请修复以下错误并保存业务规则。',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => '此商务规则正被某个流程定义使用。是否仍要编辑此商务规则？',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "您无法删除此商务规则，因为其正被某个流程定义使用。",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => '您无法删除此商务规则，因为其正被某个流程定义使用。',
+];

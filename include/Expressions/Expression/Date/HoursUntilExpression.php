@@ -30,7 +30,7 @@ class HoursUntilExpression extends NumericExpression
         $now = TimeDate::getInstance()->getNow(true);
         $tsdiff = $params->ts - $now->ts;
 
-        return (int) ($tsdiff / 3600);
+        return (int)($tsdiff / 3600);
     }
 
     /**
@@ -70,7 +70,7 @@ EOQ;
      */
     public static function getParameterTypes()
     {
-        return array(AbstractExpression::$DATE_TYPE);
+        return [AbstractExpression::$DATE_TYPE];
     }
 
     /**

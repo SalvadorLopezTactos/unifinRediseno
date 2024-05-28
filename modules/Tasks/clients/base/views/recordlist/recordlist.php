@@ -9,42 +9,42 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Tasks']['base']['view']['recordlist']['rowactions']['actions'] = array(
-    array(
+$viewdefs['Tasks']['base']['view']['recordlist']['rowactions']['actions'] = [
+    [
         'type' => 'rowaction',
         'css_class' => 'btn',
         'tooltip' => 'LBL_PREVIEW',
         'event' => 'list:preview:fire',
         'icon' => 'sicon-preview',
         'acl_action' => 'view',
-    ),
-    array(
+    ],
+    [
         'type' => 'rowaction',
         'name' => 'edit_button',
         'icon' => 'sicon-edit',
         'label' => 'LBL_EDIT_BUTTON',
         'event' => 'list:editrow:fire',
         'acl_action' => 'edit',
-    ),
-    array(
+    ],
+    [
         'type' => 'follow',
         'name' => 'follow_button',
         'event' => 'list:follow:fire',
         'acl_action' => 'view',
-    ),
-    array(
+    ],
+    [
         'type' => 'closebutton',
         'name' => 'record-close',
         'label' => 'LBL_CLOSE_BUTTON_TITLE',
         'closed_status' => 'Completed',
         'acl_action' => 'edit',
-    ),
-    array(
+    ],
+    [
         'type' => 'rowaction',
         'name' => 'delete_button',
         'icon' => 'sicon-trash',
         'event' => 'list:deleterow:fire',
         'label' => 'LBL_DELETE_BUTTON',
         'acl_action' => 'delete',
-    ),
-);
+    ],
+];

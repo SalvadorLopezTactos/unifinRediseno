@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Договори',
-	'LBL_MODULE_NAME_SINGULAR' => 'Договор',
-	'LBL_MODULE_TITLE' => 'Договори',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Договори',
+    'LBL_MODULE_NAME_SINGULAR' => 'Договор',
+    'LBL_MODULE_TITLE' => 'Договори',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Въвеждане на договор',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'Валута:',
     'LBL_CURRENCY' => 'Валута:',
     'LBL_CURRENCY_RATE' => 'Валутен курс',
-    'LBL_ASSIGNED_TO_NAME'=>'Отговорник:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Отговорник:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Списък с договори:',	
+    'LBL_LIST_FORM_TITLE' => 'Списък с договори:',
     'LBL_LIST_CONTRACT_NAME' => 'Име на договора',
     'LBL_LIST_ACCOUNT_NAME' => 'Oрганизация',
     'LBL_LIST_START_DATE' => 'Начало',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Име',
     'LBL_LIST_CONTRACT_VALUE' => 'Стойност',
 
-    'LBL_TYPE'=>'Тип',
+    'LBL_TYPE' => 'Тип',
     'LBL_TYPE_NAME' => 'Име',
-    'LBL_CONTRACT_TYPE'=>'Тип:',
+    'LBL_CONTRACT_TYPE' => 'Тип:',
 
     'LBL_CREATED_USER' => 'Създаден потребител',
     'LBL_MODIFIED_USER' => 'Модифициран потребител',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на договори',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Електронно табло със записи на договорите',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Хронология на договори',
+];

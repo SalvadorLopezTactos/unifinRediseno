@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'คิวงาน',
     'LBL_MODULE_NAME_SINGULAR' => 'คิวงาน',
     'LBL_MODULE_TITLE' => 'คิวงาน: หน้าแรก',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'การแก้ไขถูกยกเลิก',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'การแก้ไขดำเนินการอยู่',
     // Errors
-    'ERR_CALL' => "ไม่สามารถเรียกฟังก์ชัน: %s",
-    'ERR_CURL' => "ไม่มี CURL - ไม่สามารถเรียกใช้งานของ URL",
-    'ERR_FAILED' => "การทำงานล้มเหลวโดยไม่คาดหมาย โปรดตรวจสอบล็อก PHP และ sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s ใน %s ที่บรรทัด %d",
-    'ERR_NOUSER' => "ไม่ได้ระบุ ID ผู้ใช้สำหรับงาน",
-    'ERR_NOSUCHUSER' => "ไม่พบ ID ผู้ใช้ %s",
-    'ERR_JOBTYPE' => "ไม่รู้จักประเภทงาน: %s",
-    'ERR_TIMEOUT' => "บังคับให้เป็นการทำงานล้มเหลวเมื่อหมดเวลา",
+    'ERR_CALL' => 'ไม่สามารถเรียกฟังก์ชัน: %s',
+    'ERR_CURL' => 'ไม่มี CURL - ไม่สามารถเรียกใช้งานของ URL',
+    'ERR_FAILED' => 'การทำงานล้มเหลวโดยไม่คาดหมาย โปรดตรวจสอบล็อก PHP และ sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s ใน %s ที่บรรทัด %d',
+    'ERR_NOUSER' => 'ไม่ได้ระบุ ID ผู้ใช้สำหรับงาน',
+    'ERR_NOSUCHUSER' => 'ไม่พบ ID ผู้ใช้ %s',
+    'ERR_JOBTYPE' => 'ไม่รู้จักประเภทงาน: %s',
+    'ERR_TIMEOUT' => 'บังคับให้เป็นการทำงานล้มเหลวเมื่อหมดเวลา',
     'ERR_JOB_FAILED_VERBOSE' => 'งาน %1$s (%2$s) ล้มเหลวในการเรียกใช้ CRON',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'ไม่สามารถโหลดบีนที่มี ID: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'ไม่พบแฮนด์เลอร์สำหรับเส้นทาง %s',
@@ -93,13 +93,13 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'ความช่วยเหลือสำหรับการกำหนดค่า Amazon SQS',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>ส่วนการกำหนดค่า Amazon SQS</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>ส่วนการกำหนดค่า Amazon SQS</b></p>
 <ul>
     <li>ID คีย์การเข้าถึง: <i>ป้อนเลขที่ของ ID คีย์การเข้าถึงสำหรับ Amazon SQS</i></li>
     <li>คีย์การเข้าถึงข้อมูลลับ: <i>ป้อนคีย์การเข้าถึงข้อมูลลับสำหรับ Amazon SQS</i></li>
     <li>พื้นที่: <i>ป้อนพื้นที่ของเซิร์ฟเวอร์ Amazon SQS</i></li>
     <li>ชื่อคิว: <i>ป้อนชื่อคิวของเซิร์ฟเวอร์ Amazon SQS</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'ความช่วยเหลือสำหรับการกำหนดค่า AMQP',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>ส่วนการกำหนดค่า AMQP</b></p>
 <ul>
@@ -120,4 +120,4 @@ $mod_strings = array(
     'LBL_REGION' => 'พื้นที่',
     'LBL_ACCESS_KEY_SECRET' => 'คีย์การเข้าถึงข้อมูลลับ',
     'LBL_QUEUE_NAME' => 'ชื่ออะแดปเตอร์',
-);
+];

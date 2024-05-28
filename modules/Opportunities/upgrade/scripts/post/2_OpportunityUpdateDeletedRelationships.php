@@ -18,11 +18,11 @@ class SugarUpgradeOpportunityUpdateDeletedRelationships extends UpgradeScript
     public function run()
     {
         $this->log('Updating accounts_opportunities Deleted Status on Deleted Opportunities');
-        $sql = "UPDATE accounts_opportunities
+        $sql = 'UPDATE accounts_opportunities
                 SET    deleted = 1
                 WHERE
                        deleted = 0 AND
-                       opportunity_id IN ( SELECT id FROM opportunities WHERE deleted = 1 )";
+                       opportunity_id IN ( SELECT id FROM opportunities WHERE deleted = 1 )';
         $this->db->query($sql);
 
         $this->log('Done Updating accounts_opportunities Deleted Status on Deleted Opportunities');

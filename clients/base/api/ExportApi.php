@@ -10,31 +10,31 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/export_utils.php');
+require_once 'include/export_utils.php';
 
 /*
  * Export API implementation
  */
+
 class ExportApi extends SugarApi
 {
-
     /**
      * This function registers the Rest api
      */
     public function registerApiRest()
     {
-        return array(
-            'exportGet' => array(
+        return [
+            'exportGet' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', 'export', '?'),
-                'pathVars' => array('module', '', 'record_list_id'),
+                'path' => ['<module>', 'export', '?'],
+                'pathVars' => ['module', '', 'record_list_id'],
                 'method' => 'export',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
                 'shortHelp' => 'Returns a record set in CSV format along with HTTP headers to indicate content type.',
                 'longHelp' => 'include/api/help/module_export_get_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -44,7 +44,7 @@ class ExportApi extends SugarApi
      * @param array $args The arguments array passed in from the API
      * @return String
      */
-    public function export(ServiceBase $api, array $args = array())
+    public function export(ServiceBase $api, array $args = [])
     {
         $seed = BeanFactory::newBean($args['module']);
 
@@ -60,12 +60,12 @@ class ExportApi extends SugarApi
         $theModule = clean_string($args['module']);
 
         if ($sugar_config['disable_export'] || (!empty($sugar_config['admin_export_only']) && !(is_admin(
-                        $current_user
-                    ) || (ACLController::moduleSupportsACL($theModule) && ACLAction::getUserAccessLevel(
-                            $current_user->id,
-                            $theModule,
-                            'access'
-                        ) == ACL_ALLOW_ENABLED &&
+            $current_user
+        ) || (ACLController::moduleSupportsACL($theModule) && ACLAction::getUserAccessLevel(
+            $current_user->id,
+            $theModule,
+            'access'
+        ) == ACL_ALLOW_ENABLED &&
                         (ACLAction::getUserAccessLevel($current_user->id, $theModule, 'admin') == ACL_ALLOW_ADMIN ||
                             ACLAction::getUserAccessLevel(
                                 $current_user->id,
@@ -80,7 +80,6 @@ class ExportApi extends SugarApi
         if (!empty($args['sample'])) {
             //call special method that will create dummy data for bean as well as insert standard help message.
             $content = exportSampleFromApi($args);
-
         } else {
             $content = exportFromApi($args);
         }
@@ -115,13 +114,13 @@ class ExportApi extends SugarApi
      */
     protected function doExport(ServiceBase $api, $filename, $content)
     {
-        $api->setHeader("Pragma", "cache");
-        $api->setHeader("Content-Type", "application/octet-stream; charset=" . $GLOBALS['locale']->getExportCharset());
-        $api->setHeader("Content-Disposition", "attachment; filename={$filename}.csv");
-        $api->setHeader("Content-transfer-encoding", "binary");
-        $api->setHeader("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
-        $api->setHeader("Last-Modified", TimeDate::httpTime());
-        $api->setHeader("Cache-Control", "post-check=0, pre-check=0");
+        $api->setHeader('Pragma', 'cache');
+        $api->setHeader('Content-Type', 'application/octet-stream; charset=' . $GLOBALS['locale']->getExportCharset());
+        $api->setHeader('Content-Disposition', "attachment; filename={$filename}.csv");
+        $api->setHeader('Content-transfer-encoding', 'binary');
+        $api->setHeader('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT');
+        $api->setHeader('Last-Modified', TimeDate::httpTime());
+        $api->setHeader('Cache-Control', 'post-check=0, pre-check=0');
         return $GLOBALS['locale']->translateCharset(
             $content,
             'UTF-8',

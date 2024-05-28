@@ -10,11 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<a href="{{#if fullRoute}}#{{fullRoute}}{{else}}{{#if def.route}}#{{buildRoute context=context model=model action=def.route.action}}{{else}}javascript:void(0);{{/if}}{{/if}}"
+<a href="{{#if fullRoute}}{{#unless externalRoute}}#{{/unless}}{{fullRoute}}{{else}}{{#if def.route}}#{{buildRoute context=context model=model action=def.route.action}}{{else}}javascript:void(0);{{/if}}{{/if}}"
+{{#if openWindow}}
+    target="_blank"
+{{/if}}
     class="btn{{#if def.primary}} btn-primary{{/if}}"
 {{#if def.tooltip}}
     rel="tooltip"
-    data-placement="bottom"
+    data-bs-placement="bottom"
     title="{{str def.tooltip module}}"
 {{/if}}
     {{#if ariaLabel}}aria-label="{{ariaLabel}}"{{/if}}

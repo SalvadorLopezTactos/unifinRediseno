@@ -18,13 +18,13 @@
 class EmailHeaders
 {
     // the non-custom header field names we support
-    public const MessageId                 = "Message-ID";
-    public const Priority                  = "Priority";
-    public const DispositionNotificationTo = "Disposition-Notification-To";
-    public const From                      = "From";
-    public const ReplyTo                   = "Reply-To";
-    public const Sender                    = "Sender";
-    public const Subject                   = "Subject";
+    public const MessageId = 'Message-ID';
+    public const Priority = 'Priority';
+    public const DispositionNotificationTo = 'Disposition-Notification-To';
+    public const From = 'From';
+    public const ReplyTo = 'Reply-To';
+    public const Sender = 'Sender';
+    public const Subject = 'Subject';
 
     // protected members
     protected $messageId;           // The value to be mapped to the Message-ID header.
@@ -39,7 +39,8 @@ class EmailHeaders
     /**
      * @access public
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->setPriority(); // set the Priority header to its default
         $this->setRequestConfirmation(); // set the Disposition-Notification-To header to its default
         $this->setSubject(); // set the Subject header to its default
@@ -53,7 +54,8 @@ class EmailHeaders
      * @access public
      * @param array $headers
      */
-    public function buildFromArray($headers = array()) {
+    public function buildFromArray($headers = [])
+    {
         if (is_array($headers)) {
             foreach ($headers as $key => $value) {
                 $this->setHeader($key, $value);
@@ -68,7 +70,8 @@ class EmailHeaders
      * @param string $key required Should look like the real header it represents.
      * @return bool|EmailIdentity|int|null|string The value of the header.
      */
-    public function getHeader($key) {
+    public function getHeader($key)
+    {
         $value = null;
 
         switch ($key) {
@@ -107,11 +110,12 @@ class EmailHeaders
      * reserved headers; will simply replace the values.
      *
      * @access public
-     * @param string $key   required Should look like the real header it represents.
-     * @param mixed  $value          The value of the header.
+     * @param string $key required Should look like the real header it represents.
+     * @param mixed $value The value of the header.
      * @throws MailerException
      */
-    public function setHeader($key, $value = null) {
+    public function setHeader($key, $value = null)
+    {
         switch ($key) {
             case self::MessageId:
                 $this->messageId = $value;
@@ -146,7 +150,8 @@ class EmailHeaders
      * @access public
      * @return string
      */
-    public function getMessageId() {
+    public function getMessageId()
+    {
         return $this->messageId;
     }
 
@@ -154,7 +159,8 @@ class EmailHeaders
      * @access public
      * @return int
      */
-    public function getPriority() {
+    public function getPriority()
+    {
         return $this->priority;
     }
 
@@ -162,7 +168,8 @@ class EmailHeaders
      * @access public
      * @return bool
      */
-    public function getRequestConfirmation() {
+    public function getRequestConfirmation()
+    {
         return $this->requestConfirmation;
     }
 
@@ -170,7 +177,8 @@ class EmailHeaders
      * @access public
      * @return EmailIdentity
      */
-    public function getFrom() {
+    public function getFrom()
+    {
         return $this->from;
     }
 
@@ -178,7 +186,8 @@ class EmailHeaders
      * @access public
      * @return EmailIdentity
      */
-    public function getReplyTo() {
+    public function getReplyTo()
+    {
         return $this->replyTo;
     }
 
@@ -186,7 +195,8 @@ class EmailHeaders
      * @access public
      * @return EmailIdentity
      */
-    public function getSender() {
+    public function getSender()
+    {
         return $this->sender;
     }
 
@@ -194,7 +204,8 @@ class EmailHeaders
      * @access public
      * @return string
      */
-    public function getSubject() {
+    public function getSubject()
+    {
         return $this->subject;
     }
 
@@ -203,8 +214,9 @@ class EmailHeaders
      *
      * @access public
      */
-    public function clearCustomHeaders() {
-        $this->custom = array();
+    public function clearCustomHeaders()
+    {
+        $this->custom = [];
     }
 
     /**
@@ -212,7 +224,8 @@ class EmailHeaders
      * @param string $key required
      * @return null|string The value of the header or null if the header has not been defined.
      */
-    public function getCustomHeader($key) {
+    public function getCustomHeader($key)
+    {
         if (array_key_exists($key, $this->custom)) {
             return $this->custom[$key];
         }
@@ -224,7 +237,8 @@ class EmailHeaders
      * @access public
      * @return array Array of key value pairs representing the custom headers and their values.
      */
-    public function getCustomHeaders() {
+    public function getCustomHeaders()
+    {
         return $this->custom;
     }
 
@@ -235,8 +249,9 @@ class EmailHeaders
      * @return array Array of key value pairs representing the headers and their values.
      * @throws MailerException
      */
-    public function packageHeaders() {
-        $headers = array();
+    public function packageHeaders()
+    {
+        $headers = [];
 
         $this->packageFrom($headers);
         $this->packageReplyTo($headers);
@@ -260,20 +275,21 @@ class EmailHeaders
      * @param array $headers required The headers array to fill that packaging will return.
      * @throws MailerException
      */
-    private function packageFrom(&$headers) {
+    private function packageFrom(&$headers)
+    {
         $from = $this->getFrom();
 
         // validate that the From header is present, but its setter took care of validating the actual value so that
         // is not necessary
         if (is_null($from)) {
             throw new MailerException(
-                "Invalid header: " . self::From . " cannot be null",
+                'Invalid header: ' . self::From . ' cannot be null',
                 MailerException::InvalidHeader
             );
         }
 
         // add the From header to the package as an array with an email address and a name
-        $headers[self::From] = array($from->getEmail(), $from->getName());
+        $headers[self::From] = [$from->getEmail(), $from->getName()];
     }
 
     /**
@@ -285,7 +301,8 @@ class EmailHeaders
      * @access private
      * @param array $headers required The headers array to fill that packaging will return.
      */
-    private function packageReplyTo(&$headers) {
+    private function packageReplyTo(&$headers)
+    {
         global $current_user;
 
         $replyTo = $this->getReplyTo();
@@ -294,10 +311,10 @@ class EmailHeaders
             // validate the header value
             if (!($replyTo instanceof EmailIdentity)) {
                 //@todo stringify $replyTo and add it to the log
-               $GLOBALS["log"]->warn("Invalid header: " . self::ReplyTo);
+                $GLOBALS['log']->warn('Invalid header: ' . self::ReplyTo);
             } else {
                 // add the Reply-To header to the package as an array with an email address and a name
-                $headers[self::ReplyTo] = array($replyTo->getEmail(), $replyTo->getName());
+                $headers[self::ReplyTo] = [$replyTo->getEmail(), $replyTo->getName()];
             }
         } else {
             $primary = $current_user->emailAddress->getPrimaryAddress($current_user);
@@ -324,14 +341,15 @@ class EmailHeaders
      * @access private
      * @param array $headers required The headers array to fill that packaging will return.
      */
-    private function packageSender(&$headers) {
+    private function packageSender(&$headers)
+    {
         $sender = $this->getSender();
 
         if (!is_null($sender)) {
             // validate the header value
             if (!($sender instanceof EmailIdentity)) {
                 //@todo stringify $sender and add it to the log
-                $GLOBALS["log"]->warn("Invalid header: " . self::Sender);
+                $GLOBALS['log']->warn('Invalid header: ' . self::Sender);
             } else {
                 // add the Sender header to the package; only the email address is accepted
                 $headers[self::Sender] = $sender->getEmail();
@@ -352,7 +370,8 @@ class EmailHeaders
      * @access private
      * @param array $headers required The headers array to fill that packaging will return.
      */
-    private function packageMessageId(&$headers) {
+    private function packageMessageId(&$headers)
+    {
         $messageId = $this->getMessageId();
 
         // only bother with packaging this header if there is a value
@@ -369,7 +388,8 @@ class EmailHeaders
      * @access private
      * @param array $headers required The headers array to fill that packaging will return.
      */
-    private function packagePriority(&$headers) {
+    private function packagePriority(&$headers)
+    {
         // add the Priority header to the package
         $headers[self::Priority] = $this->getPriority();
     }
@@ -382,7 +402,8 @@ class EmailHeaders
      * @access private
      * @param array $headers required The headers array to fill that packaging will return.
      */
-    private function packageRequestConfirmation(&$headers) {
+    private function packageRequestConfirmation(&$headers)
+    {
         // only bother with packaging this header if the request is true
         if ($this->getRequestConfirmation()) {
             $sender = $this->getSender();
@@ -396,7 +417,7 @@ class EmailHeaders
                 // otherwise use the From email address
                 // no validation on $from because this method would not have been reached if the requisite validation
                 // in packageFrom had failed
-                $from                                     = $this->getFrom();
+                $from = $this->getFrom();
                 $headers[self::DispositionNotificationTo] = $from->getEmail();
             }
         }
@@ -412,7 +433,8 @@ class EmailHeaders
      * @param array $headers required The headers array to fill that packaging will return.
      * @throws MailerException
      */
-    private function packageSubject(&$headers) {
+    private function packageSubject(&$headers)
+    {
         // add the Subject header to the package
         $headers[self::Subject] = $this->getSubject();
     }
@@ -424,7 +446,8 @@ class EmailHeaders
      * @access private
      * @param array $headers required The headers array to fill that packaging will return.
      */
-    private function packageCustomHeaders(&$headers) {
+    private function packageCustomHeaders(&$headers)
+    {
         foreach ($this->custom as $key => $value) {
             // add a custom header to the package
             $headers[$key] = $value;
@@ -435,7 +458,8 @@ class EmailHeaders
      * @access private
      * @param EmailIdentity $from required
      */
-    private function setFrom(EmailIdentity $from = null) {
+    private function setFrom(EmailIdentity $from = null)
+    {
         $this->from = $from;
     }
 
@@ -443,7 +467,8 @@ class EmailHeaders
      * @access private
      * @param EmailIdentity $replyTo required
      */
-    private function setReplyTo(EmailIdentity $replyTo = null) {
+    private function setReplyTo(EmailIdentity $replyTo = null)
+    {
         $this->replyTo = $replyTo;
     }
 
@@ -451,7 +476,8 @@ class EmailHeaders
      * @access public
      * @param EmailIdentity $sender required
      */
-    private function setSender(EmailIdentity $sender = null) {
+    private function setSender(EmailIdentity $sender = null)
+    {
         $this->sender = $sender;
     }
 
@@ -460,10 +486,11 @@ class EmailHeaders
      * @param string $subject
      * @throws MailerException
      */
-    private function setSubject($subject = "") {
+    private function setSubject($subject = '')
+    {
         if (!is_string($subject)) {
             throw new MailerException(
-                "Invalid header: " . self::Subject . " must be a string",
+                'Invalid header: ' . self::Subject . ' must be a string',
                 MailerException::InvalidHeader
             );
         }
@@ -476,7 +503,8 @@ class EmailHeaders
      * @param int $priority
      * @todo report if not changing the header?
      */
-    private function setPriority($priority = 3) {
+    private function setPriority($priority = 3)
+    {
         if (is_integer($priority)) {
             // don't change the Priority header if it's not a valid parameter
             $this->priority = $priority;
@@ -488,7 +516,8 @@ class EmailHeaders
      * @param bool $request
      * @todo report if not changing the header?
      */
-    private function setRequestConfirmation($request = false) {
+    private function setRequestConfirmation($request = false)
+    {
         if (is_bool($request)) {
             // don't change the Disposition-Notification-To header if it's not a valid parameter
             $this->requestConfirmation = $request;
@@ -497,11 +526,12 @@ class EmailHeaders
 
     /**
      * @access private
-     * @param string $key   required Should look like the real header it represents.
+     * @param string $key required Should look like the real header it represents.
      * @param string $value required The value of the header.
      * @throws MailerException
      */
-    private function addCustomHeader($key, $value = null) {
+    private function addCustomHeader($key, $value = null)
+    {
         if (is_string($key) && (is_null($value) || is_string($value))) {
             $this->custom[$key] = $value;
 

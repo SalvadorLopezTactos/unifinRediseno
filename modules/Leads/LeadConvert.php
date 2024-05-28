@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/Campaigns/utils.php');
+require_once 'modules/Campaigns/utils.php';
 
 class LeadConvert
 {
@@ -19,7 +19,7 @@ class LeadConvert
     public const TRANSFERACTION_MOVE = 'move';
 
     public const STATUS_CONVERTED = 'Converted';
-    protected $fileName = "modules/Leads/clients/base/layouts/convert-main/convert-main.php";
+    protected $fileName = 'modules/Leads/clients/base/layouts/convert-main/convert-main.php';
     protected $modules;
     protected $lead;
     protected $contact;
@@ -38,7 +38,7 @@ class LeadConvert
             throw new Exception('Could not retrieve lead convert metadata.');
         }
 
-        $this->lead = BeanFactory::getBean('Leads', $leadId, array('strict_retrieve' => true));
+        $this->lead = BeanFactory::getBean('Leads', $leadId, ['strict_retrieve' => true]);
 
         if (empty($this->lead)) {
             $errorMessage = string_format('Could not find record: {0} in module: Leads', $leadId);
@@ -52,7 +52,7 @@ class LeadConvert
      */
     public function getAvailableModules()
     {
-        $modules = array();
+        $modules = [];
         foreach ($this->defs as $moduleDef) {
             $modules[] = $moduleDef['module'];
         }
@@ -66,9 +66,9 @@ class LeadConvert
      * @param $transferActivitiesModules Array of modules to transfer lead activities to
      * @return array modules
      */
-    public function convertLead($modules, $transferActivitiesAction = '', $transferActivitiesModules = array())
+    public function convertLead($modules, $transferActivitiesAction = '', $transferActivitiesModules = [])
     {
-        $calcFieldBeans = array();
+        $calcFieldBeans = [];
         $this->modules = $modules;
         if (isset($this->modules['Contacts'])) {
             $this->contact = $this->modules['Contacts'];
@@ -80,7 +80,7 @@ class LeadConvert
                 continue;
             }
 
-            if ($moduleName != "Contacts" && $this->contact !=null && $this->contact instanceof Contact) {
+            if ($moduleName != 'Contacts' && $this->contact != null && $this->contact instanceof Contact) {
                 $this->setRelationshipsForModulesToContacts($moduleDef);
             }
 
@@ -88,7 +88,7 @@ class LeadConvert
                 $this->updateOpportunityWithAccountInformation($moduleDef);
             }
 
-            if ($moduleName == "Accounts" && $this->lead->account_name != $modules['Accounts']->name) {
+            if ($moduleName == 'Accounts' && $this->lead->account_name != $modules['Accounts']->name) {
                 $this->lead->account_name = $modules['Accounts']->name;
             }
 
@@ -112,14 +112,14 @@ class LeadConvert
             }
         }
 
-        if($this->contact != null && $this->contact instanceof Contact) {
+        if ($this->contact != null && $this->contact instanceof Contact) {
             $this->contact->save();
             $this->addLogForContactInCampaign();
         }
 
         $this->performLeadActivitiesTransfer($transferActivitiesAction, $transferActivitiesModules);
         $this->performDataPrivacyTransfer();
-
+        $this->performExternalUserTransfer();
         $this->lead->status = LeadConvert::STATUS_CONVERTED;
         $this->lead->converted = 1;
         $this->lead->in_workflow = true;
@@ -175,6 +175,25 @@ class LeadConvert
     }
 
     /**
+     * Link external user to contact if exists.
+     */
+    public function performExternalUserTransfer()
+    {
+        if (!empty($this->lead->external_user_id)) {
+            $bean = BeanFactory::getBean('ExternalUsers', $this->lead->external_user_id);
+            if ($bean && $bean->parent_type === 'Leads' &&
+                $bean->parent_id === $this->lead->id) {
+                $bean->parent_type = 'Contacts';
+                $bean->parent_id = $this->contact->id;
+                $bean->save();
+                $this->contact->external_user_id = $this->lead->external_user_id;
+                $this->contact->save();
+                $this->lead->external_user_id = null;
+            }
+        }
+    }
+
+    /**
      * If a Transfer Action is provided that agrees with the allowed actions define in the System Settings, then
      * perform the appropriate transfer of any Activities found for the Lead to the target transfer modules specified.
      * @param $transferActivitiesAction The type of transfer to perform on lead activities (e.g. copy, move ...)
@@ -185,7 +204,7 @@ class LeadConvert
         // Check to see if there is an action to take on the Transfer of Lead Activities
         $activitySetting = $this->getActivitySetting(); // From Configuration Setting
 
-         if (!empty($activitySetting) &&
+        if (!empty($activitySetting) &&
             !empty($transferActivitiesAction)
         ) {
             if ($activitySetting === static::TRANSFERACTION_COPY &&
@@ -258,8 +277,8 @@ class LeadConvert
     public function setRelationshipsForModulesToContacts($moduleDef)
     {
         $moduleName = $moduleDef['module'];
-        $contactRel = "";
-        $relate = "";
+        $contactRel = '';
+        $relate = '';
 
         if (isset($moduleDef['contactRelateField']) && !empty($moduleDef['contactRelateField'])) {
             $relate = $moduleDef['contactRelateField'];
@@ -267,20 +286,20 @@ class LeadConvert
             if (!empty($fieldDef['id_name'])) {
                 $this->contact->{$fieldDef['id_name']} = $this->modules[$moduleName]->id;
                 if ($fieldDef['id_name'] != $relate) {
-                    $rname = $fieldDef['rname'] ?? "";
-                    if (!empty($rname) && isset($this->modules[$moduleName]->$rname))
+                    $rname = $fieldDef['rname'] ?? '';
+                    if (!empty($rname) && isset($this->modules[$moduleName]->$rname)) {
                         $this->contact->$relate = $this->modules[$moduleName]->$rname;
-                    else
+                    } else {
                         $this->contact->$relate = $this->modules[$moduleName]->name;
+                    }
                 }
             }
-        }
-        else {
+        } else {
             $contactRel = $this->findRelationship($this->contact, $this->modules[$moduleName]);
             if (!empty($contactRel)) {
                 $this->contact->load_relationship($contactRel);
                 $relObject = $this->contact->$contactRel->getRelationshipObject();
-                if ($relObject->relationship_type == "one-to-many" && $this->contact->$contactRel->_get_bean_position()) {
+                if ($relObject->relationship_type == 'one-to-many' && $this->contact->$contactRel->_get_bean_position()) {
                     $id_field = $relObject->rhs_key;
                     $this->modules[$moduleName]->$id_field = $this->contact->id;
                 } else {
@@ -321,11 +340,10 @@ class LeadConvert
                 $this->modules[$moduleName]->load_relationship($leadsRel);
                 $relObject = $this->modules[$moduleName]->$leadsRel->getRelationshipObject();
 
-                if ($relObject->relationship_type == "one-to-many" && $this->modules[$moduleName]->$leadsRel->_get_bean_position()) {
+                if ($relObject->relationship_type == 'one-to-many' && $this->modules[$moduleName]->$leadsRel->_get_bean_position()) {
                     $id_field = $relObject->rhs_key;
                     $this->lead->$id_field = $this->modules[$moduleName]->id;
-                }
-                else {
+                } else {
                     $this->modules[$moduleName]->$leadsRel->add($this->lead->id);
                 }
             }
@@ -354,9 +372,9 @@ class LeadConvert
      */
     protected function getVarDefs()
     {
-        $viewdefs = array();
+        $viewdefs = [];
         $metaDataFile = SugarAutoLoader::existingCustomOne($this->fileName);
-        require_once($metaDataFile);
+        require_once $metaDataFile;
         return $viewdefs['Leads']['base']['layout']['convert-main']['modules'];
     }
 
@@ -383,15 +401,15 @@ class LeadConvert
         foreach ($beans as $module => $bean) {
             if (isset($parent_types[$module])) {
                 foreach ($activities as $activity) {
-                    if (in_array($module, $transferModules)) {
-                        $this->copyActivityAndRelateToBean($activity, $bean, array());
+                    if (safeInArray($module, $transferModules)) {
+                        $this->copyActivityAndRelateToBean($activity, $bean, []);
                     }
                 }
             }
         }
 
-        if (!empty($accountTarget) && isset($parent_types['Accounts']) && in_array('Accounts', $transferModules)) {
-            $accountParentInfo = array('id' => $accountTarget->id, 'type' => 'Accounts');
+        if (!empty($accountTarget) && isset($parent_types['Accounts']) && safeInArray('Accounts', $transferModules)) {
+            $accountParentInfo = ['id' => $accountTarget->id, 'type' => 'Accounts'];
             foreach ($activities as $activity) {
                 $this->copyActivityAndRelateToBean($activity, $accountTarget, $accountParentInfo);
             }
@@ -498,7 +516,7 @@ class LeadConvert
             'Notes',
             'Messages',
         ];
-        $activities = array();
+        $activities = [];
 
         if (!empty($lead)) {
             foreach ($activitiesList as $module) {
@@ -528,7 +546,7 @@ class LeadConvert
      * @param $bean The target Bean that you wish to copy the new Cloned Activity to.
      * @param array $parentArr The parent_id and parent_type values to set on the cloned Activity (optional)
      */
-    protected function copyActivityAndRelateToBean($activity, $bean, $parentArr = array())
+    protected function copyActivityAndRelateToBean($activity, $bean, $parentArr = [])
     {
         $newActivity = clone $activity;
         $newActivity->id = create_guid();
@@ -545,12 +563,11 @@ class LeadConvert
             if (!empty($parentArr['type'])) {
                 $parentType = $parentArr['type'];
             }
-
         }
 
         //Special case to prevent duplicated tasks from appearing under Contacts multiple times
-        if ($newActivity->module_dir == "Tasks" && $bean->module_dir != "Contacts") {
-            $newActivity->contact_id = $newActivity->contact_name = "";
+        if ($newActivity->module_dir == 'Tasks' && $bean->module_dir != 'Contacts') {
+            $newActivity->contact_id = $newActivity->contact_name = '';
         }
 
         if ($rel = $this->findRelationship($newActivity, $bean)) {
@@ -573,7 +590,7 @@ class LeadConvert
             $newActivity->update_date_modified = false; //bug 41747
             $newActivity->save();
             $newActivity->$rel->add($bean);
-            if ($newActivity->module_dir == "Notes" && $newActivity->filename) {
+            if ($newActivity->module_dir == 'Notes' && $newActivity->filename) {
                 UploadFile::duplicate_file($activity->id, $newActivity->id, $newActivity->filename);
             }
         }
@@ -588,16 +605,14 @@ class LeadConvert
         $dictionary = $this->getMetaTableDictionary();
 
         foreach ($from->field_defs as $field => $def) {
-            if (isset($def['type']) && $def['type'] == "link" && isset($def['relationship'])) {
+            if (isset($def['type']) && $def['type'] == 'link' && isset($def['relationship'])) {
                 $rel_name = $def['relationship'];
-                $rel_def = "";
+                $rel_def = '';
                 if (isset($dictionary[$from->object_name]['relationships']) && isset($dictionary[$from->object_name]['relationships'][$rel_name])) {
                     $rel_def = $dictionary[$from->object_name]['relationships'][$rel_name];
-                }
-                else if (isset($dictionary[$to->object_name]['relationships']) && isset($dictionary[$to->object_name]['relationships'][$rel_name])) {
+                } elseif (isset($dictionary[$to->object_name]['relationships']) && isset($dictionary[$to->object_name]['relationships'][$rel_name])) {
                     $rel_def = $dictionary[$to->object_name]['relationships'][$rel_name];
-                }
-                else if (isset($dictionary[$rel_name]) && isset($dictionary[$rel_name]['relationships'])
+                } elseif (isset($dictionary[$rel_name]) && isset($dictionary[$rel_name]['relationships'])
                     && isset($dictionary[$rel_name]['relationships'][$rel_name])
                 ) {
                     $rel_def = $dictionary[$rel_name]['relationships'][$rel_name];
@@ -605,8 +620,7 @@ class LeadConvert
                 if (!empty($rel_def)) {
                     if ($rel_def['lhs_module'] == $from->module_dir && $rel_def['rhs_module'] == $to->module_dir) {
                         return $field;
-                    }
-                    else if ($rel_def['rhs_module'] == $from->module_dir && $rel_def['lhs_module'] == $to->module_dir) {
+                    } elseif ($rel_def['rhs_module'] == $from->module_dir && $rel_def['lhs_module'] == $to->module_dir) {
                         return $field;
                     }
                 }
@@ -628,7 +642,7 @@ class LeadConvert
     public function getMetaTableDictionary()
     {
         global $dictionary;
-        require_once("modules/TableDictionary.php");
+        require_once 'modules/TableDictionary.php';
         return $dictionary;
     }
 

@@ -23,16 +23,16 @@ class SugarUpgradeUpdateDashboardMetadataKpiMetrics extends UpgradeScript
      */
     public function run()
     {
-        if (version_compare($this->from_version, '12.2.0', '>=')) {
+        if (version_compare($this->from_version, '13.3.0', '>=')) {
             return;
         }
-    
+
         $this->log('Updating KPI Metrics metadata for Service console dashboard ...');
         $consoleIDs = [
             'c108bb4a-775a-11e9-b570-f218983a1c3e', // Service Console
             'da438c86-df5e-11e9-9801-3c15c2c53980', // Renewals Console
         ];
-        
+
         $bean = BeanFactory::newBean('Dashboards');
         $query = new SugarQuery();
         $query->select(['id', 'name', 'metadata']);
@@ -46,37 +46,46 @@ class SugarUpgradeUpdateDashboardMetadataKpiMetrics extends UpgradeScript
             switch ($row['id']) {
                 // Service console
                 case 'c108bb4a-775a-11e9-b570-f218983a1c3e':
-                    $updated = $this->updateConsole(
-                        $metadata,
-                        'Cases',
-                        'service_console',
-                        'follow_up_datetime',
-                        1
-                    );
-                    $serviceConsoleUpdate = $this->updateServiceConsole($metadata);
+                    if (version_compare($this->from_version, '12.2.0', '>=')) {
+                        $updated = $this->updateKpiMetricsMeta($metadata, 1);
+                    } else {
+                        $updated = $this->updateConsole(
+                            $metadata,
+                            'Cases',
+                            'service_console',
+                            'follow_up_datetime',
+                            1
+                        );
+                        $serviceConsoleUpdate = $this->updateServiceConsole($metadata);
+                    }
                     if ($updated || $serviceConsoleUpdate) {
                         $this->doUpdate($metadata, $row);
                     }
                     break;
-                // Renewals console
+                    // Renewals console
                 case 'da438c86-df5e-11e9-9801-3c15c2c53980':
-                    $updated = $this->updateConsole(
-                        $metadata,
-                        'Accounts',
-                        'renewals_console',
-                        'next_renewal_date',
-                        1
-                    );
-                    if ($updated) {
-                        $this->doUpdate($metadata, $row);
+                    if (version_compare($this->from_version, '12.2.0', '>=')) {
+                        $updated = $this->updateKpiMetricsMeta($metadata, 1);
+                        $updated = $this->updateKpiMetricsMeta($metadata, 2) || $updated;
+                    } else {
+                        $updated = $this->updateConsole(
+                            $metadata,
+                            'Accounts',
+                            'renewals_console',
+                            'next_renewal_date',
+                            1
+                        );
+                        if ($updated) {
+                            $this->doUpdate($metadata, $row);
+                        }
+                        $updated = $this->updateConsole(
+                            $metadata,
+                            'Opportunities',
+                            'renewals_console',
+                            'date_closed',
+                            2
+                        );
                     }
-                    $updated = $this->updateConsole(
-                        $metadata,
-                        'Opportunities',
-                        'renewals_console',
-                        'date_closed',
-                        2
-                    );
                     if ($updated) {
                         $this->doUpdate($metadata, $row);
                     }
@@ -108,7 +117,7 @@ class SugarUpgradeUpdateDashboardMetadataKpiMetrics extends UpgradeScript
                     'label' => 'LBL_REPORT_DASHLET_TITLE_139',
                     'type' => 'saved-reports-chart',
                     'module' => 'Tasks',
-                    'saved_report_id' => 'c290b0da-7606-11e9-81f9-f218983a1c3e',
+                    'saved_report_id' => '0da8f498-beae-11ee-9d94-095590d26ca4',
                 ],
             ];
             $updated = true;
@@ -190,7 +199,7 @@ class SugarUpgradeUpdateDashboardMetadataKpiMetrics extends UpgradeScript
      * @param $metadata
      * @return bool
      */
-    private function updateConsole(&$metadata, $module, $context, $primaryOrderField, $tabNumber) : bool
+    private function updateConsole(&$metadata, $module, $context, $primaryOrderField, $tabNumber): bool
     {
         $kpiMetricsMeta = $this->getConsoleKpiMetricsMeta($module, $context, $primaryOrderField);
 
@@ -203,20 +212,20 @@ class SugarUpgradeUpdateDashboardMetadataKpiMetrics extends UpgradeScript
 
         return false;
     }
-    
+
     /**
      * Get the console KPI Metrics metadata
      * @param string $module
      * @return array
      */
-    private function getConsoleKpiMetricsMeta(string $module, string $context, string $primaryOrderField) : array
+    private function getConsoleKpiMetricsMeta(string $module, string $context, string $primaryOrderField): array
     {
         if ($module) {
             return [
                 'layout' => [
                     'name' => 'kpi-metrics',
                     'type' => 'base',
-                    'css_class' => 'kpi-metrics',
+                    'css_class' => 'kpi-metrics flex border-b border-[--border-color]',
                     'metric_module' => $module,
                     'metric_context' => $context,
                     'order_by_primary' => $primaryOrderField,
@@ -237,5 +246,22 @@ class SugarUpgradeUpdateDashboardMetadataKpiMetrics extends UpgradeScript
                 ],
             ];
         }
+    }
+
+    /**
+     * Update KpiMetricsMeta
+     * @param array $metadata
+     * @param integer $tabNumber
+     * @return bool
+     */
+    private function updateKpiMetricsMeta(array &$metadata, int $tabNumber): bool
+    {
+        if (isset($metadata['tabs'][$tabNumber]['components'][0]['layout']['name']) &&
+            $metadata['tabs'][$tabNumber]['components'][0]['layout']['name'] === 'kpi-metrics') {
+            $metadata['tabs'][$tabNumber]['components'][0]['layout']['css_class'] =
+                'kpi-metrics flex border-b border-[--border-color]';
+            return true;
+        }
+        return false;
     }
 }

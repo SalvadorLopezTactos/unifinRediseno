@@ -28,18 +28,20 @@ function get_form_header(
     $form_title,
     $other_text,
     $show_help
-    )
-{
+) {
+
+
     global $sugar_version, $sugar_flavor, $server_unique_key, $current_language, $current_module, $current_action;
     global $app_strings;
 
     $blankImageURL = SugarThemeRegistry::current()->getImageURL('blank.gif');
-    $printImageURL = SugarThemeRegistry::current()->getImageURL("print.gif");
-    $helpImageURL  = SugarThemeRegistry::current()->getImageURL("help.gif");
+    $printImageURL = SugarThemeRegistry::current()->getImageURL('print.gif');
+    $helpImageURL = SugarThemeRegistry::current()->getImageURL('help.gif');
 
-    $is_min_max = strpos($other_text,"_search.gif");
-    if($is_min_max !== false)
+    $is_min_max = strpos($other_text, '_search.gif');
+    if ($is_min_max !== false) {
         $form_title = "{$other_text}&nbsp;{$form_title}";
+    }
 
     $the_form = <<<EOHTML
 <table width="100%" cellpadding="0" cellspacing="0" border="0" class="formHeader h3Row">
@@ -47,11 +49,13 @@ function get_form_header(
 <td nowrap><h3><span>{$form_title}</span></h3></td>
 EOHTML;
 
-    $keywords = array("/class=\"button\"/","/class='button'/","/class=button/","/<\/form>/");
-    $match="";
-    foreach ($keywords as $left)
-        if (preg_match($left,$other_text))
+    $keywords = ['/class="button"/', "/class='button'/", '/class=button/', "/<\/form>/"];
+    $match = '';
+    foreach ($keywords as $left) {
+        if (preg_match($left, $other_text)) {
             $match = true;
+        }
+    }
 
     if ($other_text && $match) {
         $the_form .= <<<EOHTML
@@ -75,15 +79,13 @@ EOHTML;
 </td>
 EOHTML;
         }
-    } 
-    else {
+    } else {
         if ($other_text && $is_min_max === false) {
             $the_form .= <<<EOHTML
 <td width='20'><img height='1' width='20' src='$blankImageURL' alt=''></td>
 <td valign='middle' nowrap width='100%'>$other_text</td>
 EOHTML;
-        }
-        else {
+        } else {
             $the_form .= <<<EOHTML
 <td width='100%'><IMG height='1' width='1' src='$blankImageURL' alt=''></td>
 EOHTML;
@@ -115,51 +117,50 @@ EOHTML;
 /**
  * Wrapper function for the get_module_title function, which is mostly used for pre-MVC modules.
  *
- * @deprecated use SugarView::getModuleTitle() for MVC modules, or getClassicModuleTitle() for non-MVC modules
- *
  * @param  $module       string  to next to the title.  Typically used for form buttons.
  * @param  $module_title string  to display as the module title
  * @param  $show_help    boolean which determines if the print and help links are shown.
  * @return string HTML
+ * @deprecated use SugarView::getModuleTitle() for MVC modules, or getClassicModuleTitle() for non-MVC modules
+ *
  */
 function get_module_title(
     $module,
     $module_title,
     $show_create,
-    $count=0
-    )
-{
+    $count = 0
+) {
+
+
     global $sugar_version, $sugar_flavor, $server_unique_key, $current_language, $action;
     global $app_strings;
 
     $the_title = "<div class='moduleTitle'>\n";
-    $module = preg_replace("/ /","",$module);
-    $iconPath = "";
-    if(is_file(SugarThemeRegistry::current()->getImageURL('icon_'.$module.'_32.png',false)))
-    {
-    	$iconPath = SugarThemeRegistry::current()->getImageURL('icon_'.$module.'_32.png');
-    } else if (is_file(SugarThemeRegistry::current()->getImageURL('icon_'.ucfirst($module).'_32.png',false)))
-    {
-        $iconPath = SugarThemeRegistry::current()->getImageURL('icon_'.ucfirst($module).'_32.png');
+    $module = preg_replace('/ /', '', $module);
+    $iconPath = '';
+    if (is_file(SugarThemeRegistry::current()->getImageURL('icon_' . $module . '_32.png', false))) {
+        $iconPath = SugarThemeRegistry::current()->getImageURL('icon_' . $module . '_32.png');
+    } elseif (is_file(SugarThemeRegistry::current()->getImageURL('icon_' . ucfirst($module) . '_32.png', false))) {
+        $iconPath = SugarThemeRegistry::current()->getImageURL('icon_' . ucfirst($module) . '_32.png');
     }
     if (!empty($iconPath)) {
         $the_title .= '<h2>';
         $breadCrumbSymbol = SugarView::staticGetBreadCrumbSymbol();
-    	if (SugarThemeRegistry::current()->directionality == "ltr") {
-	        $the_title .= "<a href='index.php?module={$module}&action=index'><img src='{$iconPath}' " . "alt='".$module."' title='".$module."' align='absmiddle'></a>";
-            $the_title .= ($count >= 1) ? $breadCrumbSymbol : "";
-	        $the_title .=  $module_title.'';
-    	} else {
-    		$the_title .= $module_title;
-            $the_title .= ($count > 1) ? $breadCrumbSymbol : "";
-    		$the_title .= "<a href='index.php?module={$module}&action=index'><img src='{$iconPath}' "  . "alt='".$module."' title='".$module."' align='absmiddle'></a>";
-    	}
+        if (SugarThemeRegistry::current()->directionality == 'ltr') {
+            $the_title .= "<a href='index.php?module={$module}&action=index'><img src='{$iconPath}' " . "alt='" . $module . "' title='" . $module . "' align='absmiddle'></a>";
+            $the_title .= ($count >= 1) ? $breadCrumbSymbol : '';
+            $the_title .= $module_title . '';
+        } else {
+            $the_title .= $module_title;
+            $the_title .= ($count > 1) ? $breadCrumbSymbol : '';
+            $the_title .= "<a href='index.php?module={$module}&action=index'><img src='{$iconPath}' " . "alt='" . $module . "' title='" . $module . "' align='absmiddle'></a>";
+        }
         $the_title .= '</h2>';
     } else {
-		$the_title .="<h2> $module_title </h2>";
-	}
+        $the_title .= "<h2> $module_title </h2>";
+    }
     $the_title .= "\n";
-    
+
     if ($show_create) {
         $the_title .= "<span class='utils'>";
         $createRecordURL = SugarThemeRegistry::current()->getImageURL('create-record.gif');
@@ -201,42 +202,41 @@ EOHTML;
  *
  * @return String HTML content for a classic module title section
  */
-function getClassicModuleTitle($module, $params, $show_create=false, $index_url_override='', $create_url_override='')
+function getClassicModuleTitle($module, $params, $show_create = false, $index_url_override = '', $create_url_override = '')
 {
-	global $sugar_version, $sugar_flavor, $server_unique_key, $current_language, $action;
+    global $sugar_version, $sugar_flavor, $server_unique_key, $current_language, $action;
     global $app_strings;
 
-	$module_title = '';
-	$index = 0;
+    $module_title = '';
+    $index = 0;
 
-    $module = preg_replace("/ /","",$module);
-    $iconPath = "";
+    $module = preg_replace('/ /', '', $module);
+    $iconPath = '';
     $the_title = "<div class='moduleTitle'>\n";
 
-    if(is_file(SugarThemeRegistry::current()->getImageURL('icon_'.$module.'_32.png',false)))
-    {
-    	$iconPath = SugarThemeRegistry::current()->getImageURL('icon_'.$module.'_32.png');
-    } else if (is_file(SugarThemeRegistry::current()->getImageURL('icon_'.ucfirst($module).'_32.png',false)))
-    {
-        $iconPath = SugarThemeRegistry::current()->getImageURL('icon_'.ucfirst($module).'_32.png');
+    if (is_file(SugarThemeRegistry::current()->getImageURL('icon_' . $module . '_32.png', false))) {
+        $iconPath = SugarThemeRegistry::current()->getImageURL('icon_' . $module . '_32.png');
+    } elseif (is_file(SugarThemeRegistry::current()->getImageURL('icon_' . ucfirst($module) . '_32.png', false))) {
+        $iconPath = SugarThemeRegistry::current()->getImageURL('icon_' . ucfirst($module) . '_32.png');
     }
     if (!empty($iconPath)) {
-    	$url = (!empty($index_url_override)) ? $index_url_override : "index.php?module={$module}&action=index";
-    	array_unshift ($params,"<a href='{$url}'><img src='{$iconPath}' ". "alt='".$module."' title='".$module."' align='absmiddle'></a>");
-	}
+        $url = (!empty($index_url_override)) ? $index_url_override : "index.php?module={$module}&action=index";
+        array_unshift($params, "<a href='{$url}'><img src='{$iconPath}' " . "alt='" . $module . "' title='" . $module . "' align='absmiddle'></a>");
+    }
 
-	$new_params = array_pop($params);
-    if(!is_null($new_params) && ($new_params !== "")) $module_title = $new_params;
-    if(!empty($module_title)){
-        $the_title .= "<h2>".$module_title."</h2>\n";//removing empty H2 tag for 508 compliance
+    $new_params = array_pop($params);
+    if (!is_null($new_params) && ($new_params !== '')) {
+        $module_title = $new_params;
+    }
+    if (!empty($module_title)) {
+        $the_title .= '<h2>' . $module_title . "</h2>\n";//removing empty H2 tag for 508 compliance
     }
 
 
     if ($show_create) {
         $the_title .= "<span class='utils'>";
         $createRecordImage = SugarThemeRegistry::current()->getImageURL('create-record.gif');
-        if(empty($create_url_override))
-        {
+        if (empty($create_url_override)) {
             $create_url_override = "index.php?module={$module}&action=EditView&return_module={$module}&return_action=DetailView";
         }
 
@@ -254,22 +254,22 @@ EOHTML;
 
     $the_title .= "<div class='clear'></div></div>\n";
     return $the_title;
-
 }
 
 /**
  * Create a header for a popup.
  *
- * @todo refactor this into the base Popup_Picker class
- *
  * @param  $theme string the name of the current theme, ignorred to use SugarThemeRegistry::current() instead.
  * @return string HTML
+ * @todo refactor this into the base Popup_Picker class
+ *
  */
 function insert_popup_header(
     $theme = null,
     $includeJS = true
-    )
-{
+) {
+
+
     global $app_strings, $sugar_config;
 
     $themeCSS = SugarThemeRegistry::current()->getCSS();
@@ -277,8 +277,7 @@ function insert_popup_header(
     $langHeader = get_language_header();
 
     //The SugarView will insert the header now, this function should no longer do the actual head element.
-    if ($includeJS)
-    {
+    if ($includeJS) {
         echo <<<EOHTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html {$langHeader}>
@@ -286,18 +285,16 @@ function insert_popup_header(
 EOHTML;
     }
 
-    if (isset($sugar_config['meta_tags']) && isset($sugar_config['meta_tags']['IE_COMPAT_MODE']))
-    {
+    if (isset($sugar_config['meta_tags']) && isset($sugar_config['meta_tags']['IE_COMPAT_MODE'])) {
         echo $sugar_config['meta_tags']['IE_COMPAT_MODE'];
     }
 
-    echo '<title>'.htmlspecialchars($app_strings['LBL_BROWSER_TITLE'], ENT_QUOTES, 'UTF-8').'</title>' . $themeCSS;
+    echo '<title>' . htmlspecialchars($app_strings['LBL_BROWSER_TITLE'], ENT_QUOTES, 'UTF-8') . '</title>' . $themeCSS;
 
     // Add our theme variables to enable proper theme styling
     echo '<link rel="stylesheet" href="styleguide/assets/css/sugar-theme-variables.css">';
 
-    if ($includeJS)
-    {
+    if ($includeJS) {
         $charset = $app_strings['LBL_CHARSET'] ?? $sugar_config['default_charset'];
         echo '<meta http-equiv="Content-Type" content="text/html; charset="{' . $charset . '}">';
         echo '<script type="text/javascript" src="' . getJSPath('include/javascript/jquery/jquery-min.js') . '"></script>';
@@ -311,15 +308,15 @@ EOHTML;
     if (isset($_COOKIE['appearance'])) {
         $appearanceClass = htmlspecialchars('sugar-' . $_COOKIE['appearance'] . '-theme', ENT_QUOTES, 'UTF-8');
     }
-    echo  '<body class="popupBody ' . $appearanceClass . '">';
+    echo '<body class="popupBody ' . $appearanceClass . '">';
 }
 
 /**
  * Create a footer for a popup.
  *
+ * @return string HTML
  * @todo refactor this into the base Popup_Picker class
  *
- * @return string HTML
  */
 function insert_popup_footer()
 {
@@ -328,4 +325,3 @@ function insert_popup_footer()
 </html>
 EOQ;
 }
-?>

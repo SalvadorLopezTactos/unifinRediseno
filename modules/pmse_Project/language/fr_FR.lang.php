@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Définitions des processus',
-  'LBL_MODULE_TITLE' => 'Définitions des processus',
-  'LBL_MODULE_NAME_SINGULAR' => 'Définition de processus',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Définitions des processus',
+    'LBL_MODULE_TITLE' => 'Définitions des processus',
+    'LBL_MODULE_NAME_SINGULAR' => 'Définition de processus',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Définition de processus',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Définition de processus',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de définitions de processus',
-  'LNK_LIST' => 'Afficher les définitions des processus',
-  'LNK_NEW_PMSE_PROJECT' => 'Créer une définition de processus',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Importer une définition de processus',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de définitions de processus',
+    'LNK_LIST' => 'Afficher les définitions des processus',
+    'LNK_NEW_PMSE_PROJECT' => 'Créer une définition de processus',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Importer une définition de processus',
 
-  'LBL_PRJ_STATUS' => 'Statut',
-  'LBL_PRJ_MODULE' => 'Module cible',
-  'LBL_PRJ_RUN_ORDER' => 'Ordre d&#39;exécution',
-  'LBL_PMSE_BUTTON_SAVE' => 'Sauvegarder',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Annuler',
-  'LBL_PMSE_BUTTON_YES' => 'Oui',
-  'LBL_PMSE_BUTTON_NO' => 'Non',
-  'LBL_PMSE_BUTTON_OK' => 'OK',
+    'LBL_PRJ_STATUS' => 'Statut',
+    'LBL_PRJ_MODULE' => 'Module cible',
+    'LBL_PRJ_RUN_ORDER' => 'Ordre d&#39;exécution',
+    'LBL_PMSE_BUTTON_SAVE' => 'Sauvegarder',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Annuler',
+    'LBL_PMSE_BUTTON_YES' => 'Oui',
+    'LBL_PMSE_BUTTON_NO' => 'Non',
+    'LBL_PMSE_BUTTON_OK' => 'OK',
     'LBL_PMSE_FORM_ERROR' => 'Veuillez résoudre les erreurs avant de poursuivre.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Modélisation',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Activité',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Action',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Evènement sur un lead',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Evènement sur une affaire' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Evènement sur une affaire',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Evènement sur un document',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Evènement sur un autre module',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Evènement sur une attente',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Règle de gestion',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Action de la règle de gestion',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Modèle d&#39;email',
-);
+];

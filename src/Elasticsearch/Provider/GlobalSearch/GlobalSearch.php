@@ -70,7 +70,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
      * List of supported sugar types
      * @var array
      */
-    protected $supportedTypes = array();
+    protected $supportedTypes = [];
 
     /**
      * default space operator for globalsearch
@@ -83,7 +83,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
      * List of supported sugar types for Studio
      * @var array
      */
-    protected $studioSupportedTypes = array(
+    protected $studioSupportedTypes = [
         'varchar',
         'name',
         'text',
@@ -95,7 +95,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
         'email',
         'commentlog',
         'autoincrement',
-    );
+    ];
 
     /**
      * List of types which should be skipped by getBeanIndexFields
@@ -103,7 +103,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
      * TODO: cleanup
      * @var array
      */
-    protected $skipTypesFromQueue = array();
+    protected $skipTypesFromQueue = [];
 
     /**
      * Ctor
@@ -138,7 +138,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
      * get config flag for shortcut operator
      * @return bool
      */
-    public function getUseShortcutOperator() : bool
+    public function getUseShortcutOperator(): bool
     {
         $ret = false;
         // using config to override the default shortcut operator
@@ -445,7 +445,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
      */
     public function getBeanIndexFields($module, $fromQueue = false)
     {
-        $indexFields = array();
+        $indexFields = [];
 
         foreach ($this->getFtsFields($module) as $field => $defs) {
             $type = $defs['type'];
@@ -470,11 +470,11 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
     /**
      * @var array Module list
      */
-    protected $modules = array();
+    protected $modules = [];
 
     /**
      * @var integer
-    */
+     */
     protected $limit = 20;
 
     /**
@@ -485,7 +485,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
     /**
      * @var boolean the flag of getting tags.
      */
-    protected $getTags = array();
+    protected $getTags = [];
 
     /**
      * @var string the name of the "Tags" Module
@@ -500,11 +500,11 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
     /**
      * @var array the list of filters
      */
-    protected $filters = array();
+    protected $filters = [];
 
     /**
      * @var boolean Apply field level boosts
-    */
+     */
     protected $fieldBoost = false;
 
     /**
@@ -515,7 +515,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
     /**
      * @var array Sort fields
      */
-    protected $sort = array('_score');
+    protected $sort = ['_score'];
 
     /**
      * @var boolean Execute explain on query
@@ -551,7 +551,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
      */
     public function limit($limit)
     {
-        $this->limit = (int) $limit;
+        $this->limit = (int)$limit;
         return $this;
     }
 
@@ -562,7 +562,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
      */
     public function offset($offset)
     {
-        $this->offset = (int) $offset;
+        $this->offset = (int)$offset;
         return $this;
     }
 
@@ -586,7 +586,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
      */
     public function setTagLimit($tagLimit)
     {
-        $this->tagLimit = (int) $tagLimit;
+        $this->tagLimit = (int)$tagLimit;
         return $this;
     }
 
@@ -610,7 +610,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
      */
     public function fieldBoost($toggle)
     {
-        $this->fieldBoost = (bool) $toggle;
+        $this->fieldBoost = (bool)$toggle;
         return $this;
     }
 
@@ -621,7 +621,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
      */
     public function useHighlighter($toggle)
     {
-        $this->useHighlighter = (bool) $toggle;
+        $this->useHighlighter = (bool)$toggle;
         return $this;
     }
 
@@ -632,17 +632,17 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
      */
     public function sort(array $fields)
     {
-        if ($fields === array() || $fields === array('_score')) {
-            $this->sort = array('_score');
+        if ($fields === [] || $fields === ['_score']) {
+            $this->sort = ['_score'];
             return $this;
         }
 
-        $sortFields = array();
+        $sortFields = [];
         foreach ($fields as $field => $order) {
-            $sortFields[$field] = array(
+            $sortFields[$field] = [
                 'order' => $order,
                 'missing' => '_last',
-            );
+            ];
         }
         $this->sort = $sortFields;
 
@@ -658,7 +658,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
      */
     public function setExplain($flag)
     {
-        $this->explain = (bool) $flag;
+        $this->explain = (bool)$flag;
         return $this;
     }
 
@@ -699,8 +699,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
             ->setOffset($this->offset)
             ->setQuery($query)
             ->setExplain($this->explain)
-            ->setResultParser($this->resultParser)
-        ;
+            ->setResultParser($this->resultParser);
 
         // Set highlighter
         if ($this->useHighlighter) {
@@ -733,7 +732,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
         }
 
         //create a module list including the tag module only
-        $this->modules = array($this->tagModule);
+        $this->modules = [$this->tagModule];
 
         $multiMatch = $this->createMultiMatchQuery();
 
@@ -742,8 +741,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
             ->setUser($this->user)
             ->setModules($this->modules)
             ->setLimit($this->tagLimit)
-            ->setQuery($multiMatch)
-        ;
+            ->setQuery($multiMatch);
 
         // Set sorting
         if ($this->sort) {
@@ -780,13 +778,13 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
      * List of aggregation filters
      * @var array
      */
-    protected $aggFilters = array();
+    protected $aggFilters = [];
 
     /**
      * List of modules for which to get the aggregations
      * @var array
      */
-    protected $queryModuleAggs = array();
+    protected $queryModuleAggs = [];
 
     /**
      * Enable/disable cross module aggregations
@@ -794,7 +792,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
      */
     public function queryCrossModuleAggs($toggle)
     {
-        $this->queryCrossModuleAggs = (bool) $toggle;
+        $this->queryCrossModuleAggs = (bool)$toggle;
     }
 
     /**

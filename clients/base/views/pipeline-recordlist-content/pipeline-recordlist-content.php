@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,35 +11,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['pipeline-recordlist-content'] = array(
-    'tileDef' => array(
-        'panels' => array(
-            array(
+$viewdefs['base']['view']['pipeline-recordlist-content'] = [
+    'tileDef' => [
+        'panels' => [
+            [
                 'name' => 'header',
                 'is_header' => true,
-                'buttons' => array(
-                    array(
-                        'type' => 'actiondropdown',
-                        'name' => 'main_dropdown',
-                        'buttons' =>
-                            array(
-                                array(
-                                    'type' => 'rowaction',
-                                    'event' => 'button:delete_button:click',
-                                    'acl_action' => 'delete',
-                                    'tooltip' => 'LBL_DELETE',
-                                    'css_class' => 'delete',
-                                    'icon'=>'sicon-remove',
-                                ),
-                            ),
-                    ),
-                ),
-                'fields' => array(),
-            ),
-            array(
+                'buttons' => [],
+                'fields' => [],
+            ],
+            [
                 'name' => 'body',
-                'fields' => array(),
-            ),
-        ),
-    ),
-);
+                'fields' => [],
+            ],
+        ],
+    ],
+];

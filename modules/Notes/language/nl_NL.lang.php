@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Dashboard notitielijst',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Dashboard Notitiesrecord',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer aantekeningen',
     'LBL_EXTERNAL_USER' => 'Externe gebruiker',
     'LBL_EXTERNAL_USER_NAME' => 'Externe gebruiker',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Opmerking tijdlijn',
 
     'LBL_RELATED_CONTACT' => 'Gekoppeld contact',
     'ERR_DELETE_RECORD' => 'U dient een recordnummer op te geven om de organisatie te verwijderen.',
@@ -128,4 +129,4 @@ $mod_strings = array(
 2. Klik op "Opslaan" om het record op te slaan en terug te keren naar de voorgaande pagina.
  - Kies "Sla op en bekijk" om de nieuwe {{module_name}} in record view te bekijken.
  - Kies "Sla op en maak nieuwe aan" om direct een nieuwe {{module_name}} aan te maken.',
-);
+];

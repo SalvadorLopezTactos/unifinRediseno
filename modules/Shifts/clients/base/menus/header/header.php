@@ -13,28 +13,28 @@
 
 $viewdefs['Shifts']['base']['menu']['header'] = [
     [
-        'route' => "#Shifts/create",
+        'route' => '#Shifts/create',
         'label' => 'LNK_NEW_SHIFT',
         'acl_action' => 'create',
         'acl_module' => 'Shifts',
         'icon' => 'sicon-plus',
     ],
     [
-        'route' => "#Shifts",
+        'route' => '#Shifts',
         'label' => 'LNK_VIEW_SHIFTS',
         'acl_action' => 'list',
         'acl_module' => 'Shifts',
         'icon' => 'sicon-list-view',
     ],
     [
-        'route' => "#ShiftExceptions/create",
+        'route' => '#ShiftExceptions/create',
         'label' => 'LNK_NEW_SHIFT_EXCEPTION',
         'acl_action' => 'create',
         'acl_module' => 'ShiftExceptions',
         'icon' => 'sicon-plus',
     ],
     [
-        'route' => "#ShiftExceptions",
+        'route' => '#ShiftExceptions',
         'label' => 'LNK_VIEW_SHIFT_EXCEPTIONS',
         'acl_action' => 'list',
         'acl_module' => 'ShiftExceptions',

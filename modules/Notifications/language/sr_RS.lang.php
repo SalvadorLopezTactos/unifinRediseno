@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_ASSIGNED_TO_ID' => 'ID broj dodeljenog korisnika',
     'LBL_ASSIGNED_TO_NAME' => 'Dodeljeno',
     'LBL_ID' => 'ID',
@@ -52,4 +52,4 @@ $mod_strings = array(
     'LBL_UNREAD' => 'Nepročitano',
     'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Pomenuo vas je korisnik',
     'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Neko vas je pomenuo',
-);
+];

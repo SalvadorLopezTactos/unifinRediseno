@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as PHPMailerException;
 
@@ -42,7 +43,7 @@ class SmtpMailer extends BaseMailer
     /**
      * Only use SMTP to send email with PHPMailer.
      */
-    public const MailTransmissionProtocol = "smtp";
+    public const MailTransmissionProtocol = 'smtp';
 
     /**
      * Maps EAPM application names to their appropriate API names for use in
@@ -110,9 +111,9 @@ class SmtpMailer extends BaseMailer
             // transfer the attachments to PHPMailer
             $this->transferAttachments($this->mailer);
         } catch (MailerException $me) {
-            $GLOBALS["log"]->fatal($me->getLogMessage());
-            $GLOBALS["log"]->info($me->getTraceMessage());
-            $GLOBALS["log"]->info(print_r($this->config->toArray(),true));
+            $GLOBALS['log']->fatal($me->getLogMessage());
+            $GLOBALS['log']->info($me->getTraceMessage());
+            $GLOBALS['log']->info(print_r($this->config->toArray(), true));
             throw($me);
         }
 
@@ -131,22 +132,22 @@ class SmtpMailer extends BaseMailer
             /*--- Debug Only ----------------------------------------------------*/
             $message = "MAIL SENT:\n";
             $message .= "--- Mail Config ---\n" . print_r($this->config->toArray(), true);
-            $headers = array(
+            $headers = [
                 EmailHeaders::Subject => $this->headers->getSubject(),
                 EmailHeaders::From => $this->headers->getFrom(),
                 EmailHeaders::MessageId => $messageId,
-            );
+            ];
             $message .= "--- Mail Headers ---\n" . print_r($headers, true);
-            $GLOBALS["log"]->debug($message);
+            $GLOBALS['log']->debug($message);
             /*--- Debug Only ----------------------------------------------------*/
 
             return $this->mailer->getSentMIMEMessage();
         } catch (Exception $e) {
             // eat the phpmailerException but use it's message to provide context for the failure
             $me = new MailerException($e->getMessage(), MailerException::FailedToSend);
-            $GLOBALS["log"]->error($me->getLogMessage());
-            $GLOBALS["log"]->info($me->getTraceMessage());
-            $GLOBALS["log"]->info(print_r($this->config->toArray(),true));
+            $GLOBALS['log']->error($me->getLogMessage());
+            $GLOBALS['log']->info($me->getTraceMessage());
+            $GLOBALS['log']->info(print_r($this->config->toArray(), true));
             throw($me);
         }
     }
@@ -159,7 +160,7 @@ class SmtpMailer extends BaseMailer
      */
     protected function generateMailer()
     {
-        return new PHPMailerProxy;
+        return new PHPMailerProxy();
     }
 
     /**
@@ -175,19 +176,19 @@ class SmtpMailer extends BaseMailer
         $mailer->setLanguage();
 
         // transfer the basic configurations to PHPMailer
-        $mailer->Mailer   = $this->getMailTransmissionProtocol();
+        $mailer->Mailer = $this->getMailTransmissionProtocol();
         $mailer->Hostname = $this->config->getHostname();
-        $mailer->CharSet  = $this->config->getCharset();
+        $mailer->CharSet = $this->config->getCharset();
         $mailer->Encoding = $this->config->getEncoding();
         $mailer->WordWrap = $this->config->getWordwrap();
 
         // transfer the SMTP configurations to PHPMailer
-        $mailer->Host       = $this->config->getHost();
-        $mailer->Port       = $this->config->getPort();
+        $mailer->Host = $this->config->getHost();
+        $mailer->Port = $this->config->getPort();
         $mailer->SMTPSecure = $this->config->getSecurityProtocol();
-        $mailer->SMTPAuth   = $this->config->isAuthenticationRequired();
-        $mailer->Username   = $this->config->getUsername();
-        $mailer->Password   = from_html($this->config->getPassword()); // perform HTML character translations
+        $mailer->SMTPAuth = $this->config->isAuthenticationRequired();
+        $mailer->Username = $this->config->getUsername();
+        $mailer->Password = from_html($this->config->getPassword()); // perform HTML character translations
 
         // Transfer any Oauth2 credentials if applicable
         if ($this->config->getAuthType() === 'oauth2') {
@@ -320,7 +321,7 @@ class SmtpMailer extends BaseMailer
                         $mailer->setFrom($value[0], $value[1]);
                     } catch (Exception $e) {
                         throw new MailerException(
-                            "Failed to add the " . EmailHeaders::From . " header: " . $e->getMessage(),
+                            'Failed to add the ' . EmailHeaders::From . ' header: ' . $e->getMessage(),
                             MailerException::FailedToTransferHeaders
                         );
                     }
@@ -352,7 +353,7 @@ class SmtpMailer extends BaseMailer
                         }
                     } catch (Exception $e) {
                         throw new MailerException(
-                            "Failed to add the " . EmailHeaders::ReplyTo . " header: " . $e->getMessage(),
+                            'Failed to add the ' . EmailHeaders::ReplyTo . ' header: ' . $e->getMessage(),
                             MailerException::FailedToTransferHeaders
                         );
                     }
@@ -410,8 +411,8 @@ class SmtpMailer extends BaseMailer
         $mailer->clearAllRecipients();
 
         // get the recipients
-        $to  = $this->recipients->getTo();
-        $cc  = $this->recipients->getCc();
+        $to = $this->recipients->getTo();
+        $cc = $this->recipients->getCc();
         $bcc = $this->recipients->getBcc();
 
         //TODO: should you be able to initiate a send without any To recipients?
@@ -422,7 +423,7 @@ class SmtpMailer extends BaseMailer
             //TODO: why translateCharsetMIME here but translateCharset on other headers?
             $name = $this->config->getLocale()->translateCharsetMIME(
                 $recipient->getName(),
-                "UTF-8",
+                'UTF-8',
                 $this->config->getCharset()
             );
 
@@ -441,7 +442,7 @@ class SmtpMailer extends BaseMailer
             //TODO: why translateCharsetMIME here but translateCharset on other headers?
             $name = $this->config->getLocale()->translateCharsetMIME(
                 $recipient->getName(),
-                "UTF-8",
+                'UTF-8',
                 $this->config->getCharset()
             );
 
@@ -460,7 +461,7 @@ class SmtpMailer extends BaseMailer
             //TODO: why translateCharsetMIME here but translateCharset on other headers?
             $name = $this->config->getLocale()->translateCharsetMIME(
                 $recipient->getName(),
-                "UTF-8",
+                'UTF-8',
                 $this->config->getCharset()
             );
 
@@ -482,8 +483,8 @@ class SmtpMailer extends BaseMailer
     protected function transferBody(PHPMailer &$mailer)
     {
         // just to be safe, let's clear the bodies from PHPMailer
-        $mailer->Body    = "";
-        $mailer->AltBody = "";
+        $mailer->Body = '';
+        $mailer->AltBody = '';
 
         // this is a hack to make sure that from_html is called on each message part prior to any future code that
         // needs HTML entities converted to real HTML characters
@@ -502,9 +503,9 @@ class SmtpMailer extends BaseMailer
             // use the config's wordwrap limit instead of 998 to increase flexibility
             // all newlines must be LF in order for this work; CRLF works too
             $useBase64Encoding = false;
-            $wordWrap          = $this->config->getWordwrap();
-            $textBodyLines     = explode("\n", $textBody);
-            $numberOfLines     = count($textBodyLines);
+            $wordWrap = $this->config->getWordwrap();
+            $textBodyLines = explode("\n", $textBody);
+            $numberOfLines = safeCount($textBodyLines);
 
             for ($i = 0; !$useBase64Encoding && $i < $numberOfLines; $i++) {
                 if (strlen($textBodyLines[$i]) > $wordWrap) {
@@ -525,7 +526,7 @@ class SmtpMailer extends BaseMailer
             // there is an HTML part so set up PHPMailer appropriately for sending a multi-part email
             $mailer->isHTML(true);
             $mailer->Encoding = Encoding::Base64; // so that embedded images are encoded properly
-            $mailer->Body     = $htmlBody;        // the HTML part is the primary message body
+            $mailer->Body = $htmlBody;        // the HTML part is the primary message body
         }
 
         // add the plain-text part to the appropriate PHPMailer body
@@ -570,10 +571,11 @@ class SmtpMailer extends BaseMailer
                     $attachment->getCid(),
                     $name,
                     $attachment->getEncoding(),
-                    $attachment->getMimeType())
+                    $attachment->getMimeType()
+                )
                 ) {
                     throw new MailerException(
-                        "Failed to embed the image at " . $attachment->getPath(),
+                        'Failed to embed the image at ' . $attachment->getPath(),
                         MailerException::InvalidAttachment
                     );
                 }
@@ -592,10 +594,11 @@ class SmtpMailer extends BaseMailer
                         $attachment->getPath(),
                         $name,
                         $attachment->getEncoding(),
-                        $attachment->getMimeType());
+                        $attachment->getMimeType()
+                    );
                 } catch (Exception $e) {
                     throw new MailerException(
-                        "Failed to add the attachment at " . $attachment->getPath() . ": " . $e->getMessage(),
+                        'Failed to add the attachment at ' . $attachment->getPath() . ': ' . $e->getMessage(),
                         MailerException::InvalidAttachment
                     );
                 }
@@ -603,7 +606,7 @@ class SmtpMailer extends BaseMailer
                 // oops!
                 // there really shouldn't be a way to get an attachment into the Mailer that isn't an Attachment
                 // or an EmbeddedImage, but it's probably best to verify it anyway
-                throw new MailerException("Invalid attachment type", MailerException::InvalidAttachment);
+                throw new MailerException('Invalid attachment type', MailerException::InvalidAttachment);
             }
         }
     }
@@ -636,8 +639,8 @@ class SmtpMailer extends BaseMailer
     protected function prepareHtmlBody($body)
     {
         $formatted = $this->formatter->formatHtmlBody($body);
-        $body      = $formatted["body"];
-        $images    = $formatted["images"];
+        $body = $formatted['body'];
+        $images = $formatted['images'];
 
         foreach ($images as $embeddedImage) {
             $this->addAttachment($embeddedImage);
@@ -665,13 +668,13 @@ class SmtpMailer extends BaseMailer
      */
     protected function forceRfcComplianceOnHtmlBody($body)
     {
-        if (strpos($body, "<html") === false) {
-            $subject   = $this->headers->getSubject(); // used for the document title
-            $charset   = $this->config->getCharset();  // used for the document charset
-            $language  = get_language_header();
+        if (strpos($body, '<html') === false) {
+            $subject = $this->headers->getSubject(); // used for the document title
+            $charset = $this->config->getCharset();  // used for the document charset
+            $language = get_language_header();
 
             // prepend the document head and append the footer elements to the body
-            $body      = <<<eoq
+            $body = <<<eoq
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" {$language}>
 <head>

@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Paneli i listës së shënimeve',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të shënimeve',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te shënimet',
     'LBL_EXTERNAL_USER' => 'Përdorues i jashtëm',
     'LBL_EXTERNAL_USER_NAME' => 'Përdorues i jashtëm',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e shënimeve',
 
     'LBL_RELATED_CONTACT' => 'Kontakt i lidhur',
     'ERR_DELETE_RECORD' => 'Duhet përcaktuar numrin e regjistrimit për të fshirë llogarinë',
@@ -120,4 +121,4 @@ $mod_strings = array(
 - Fushat e shënuara me "Patjetër" duhet të plotësohen para se të ruhen. 
 - Kliko "Trego më shumë" për të paraqitur fushat shtesë nëse është e nevojshme. 
 2. Kliko "Ruaj" për të finalizuar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
-);
+];

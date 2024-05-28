@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Revisjonslogg',
     'LBL_FIELD_NAME' => 'Felt',
     'LBL_OLD_NAME' => 'Gammel verdi',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Oppdater til',
     'LBL_BLANK' => '-tom-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Revisjonstidslinje',
+    'LBL_CREATED' => 'Opprettet',
+];

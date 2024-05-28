@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_DEFAULT' => 'Не определено',
     'LBL_READ_WRITE' => 'Просмотр/Редактирование',
     'LBL_READ_OWNER_WRITE' => 'Просмотр/Редактирование (автор)',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_READ_SELECTED_TEAMS_WRITE' => 'Просмотр/Редактирование (владелец и выбранные команды)',
     'LBL_SELECTED_TEAMS_READ_OWNER_WRITE' => 'Просмотр (владелец и выбранные команды)/Редактирование (владелец)',
     'LBL_SELECTED_TEAMS_READ_WRITE' => 'Просмотр (владелец и выбранные команды)/Редактирование (владелец и выбранные команды)',
-);
+];

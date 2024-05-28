@@ -107,7 +107,7 @@ final class Composite implements Listener
     /**
      * {@inheritDoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf('Composite(%s)', implode(', ', $this->listeners));
     }

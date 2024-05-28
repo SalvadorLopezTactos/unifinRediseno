@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => '活动的',
     'LBL_ASSIGNEE_RULE' => '任务分配对象规则',
     'LBL_TARGET_ASSIGNEE' => '目标任务分配对象',
+    'LBL_STAGE_NUMBERS' => '阶段编号',
     'LBL_EXPORT_BUTTON_LABEL' => '导出',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => '导入',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => '通过从您的文件系统导入一个 *.json 文件来自动创建/更新新的智能指南模板记录 。',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => '如果选中，如果目标任务分配对象 = 父任务分配对象，当父级上的“分配给”用户更改时，智能指南、阶段和活动中的“分配给”用户也将自动更改。请注意，活动模板上“目标任务分配对象”的设置优先于智能指南模板',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => '何时应向用户分配活动',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => '应为谁分配活动',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => '此开关允许您显示或隐藏自动阶段编号。',
     'CJ_FORMS_LBL_PARENT_NAME' => '智能指南/阶段/活动模板',
 ];

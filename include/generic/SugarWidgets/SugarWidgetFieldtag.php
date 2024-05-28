@@ -13,10 +13,11 @@
 /**
  * Report widget field that handles specifics of Tag field types
  */
-class SugarWidgetFieldTag extends SugarWidgetFieldVarchar {
+class SugarWidgetFieldTag extends SugarWidgetFieldVarchar
+{
     /**
      * Handles formatting of a Tag field for rendering on report list views
-     * 
+     *
      * @param array $layout_def The defs of the field from the report
      * @return string
      */
@@ -24,10 +25,10 @@ class SugarWidgetFieldTag extends SugarWidgetFieldVarchar {
     {
         // Get the value of the field
         $value = $this->displayListPlain($layout_def);
-        
+
         // $value should be something like ^..^,^..^
         // No, that isn't an emotibatman parade
-        // 
+        //
         // This logic removes outer ^ characters, explodes on ^,^ and then glues
         // back together on ', '
         $data = implode(', ', explode('^,^', trim($value, '^')));
@@ -36,47 +37,47 @@ class SugarWidgetFieldTag extends SugarWidgetFieldVarchar {
 
     /**
      * Handles WHERE query building for CONTAINS requests
-     * 
+     *
      * @param array $layout_def The defs of the field from the report
      * @return string
      */
-    function queryFilterContains(&$layout_def)
+    public function queryFilterContains(&$layout_def)
     {
         $matches = explode(',', $layout_def['input_name0']);
-        $q = "";
+        $q = '';
         foreach ($matches as $match) {
             // Make the match field the lowercase version of the field. This feels
             // a little dirty but I bet Mike Rowe would approve
             $match = strtolower(trim($match));
-            $q .= " " . $this->getLowercaseColumnSelect($layout_def) . " LIKE '%" .$GLOBALS['db']->quote($match)."%' OR";
+            $q .= ' ' . $this->getLowercaseColumnSelect($layout_def) . " LIKE '%" . $GLOBALS['db']->quote($match) . "%' OR";
         }
 
-        return rtrim($q, " OR");
+        return rtrim($q, ' OR');
     }
 
     /**
      * Handles WHERE query building for NOT CONTAINS requests
-     * 
+     *
      * @param array $layout_def The defs of the field from the report
      * @return string
      */
-    function queryFilterNot_Contains(&$layout_def)
+    public function queryFilterNot_Contains(&$layout_def)
     {
         $matches = explode(',', $layout_def['input_name0']);
-        $q = "";
+        $q = '';
         foreach ($matches as $match) {
             // Make the match field the lowercase version of the field. This feels
             // a little dirty but I bet Mike Rowe would approve
             $match = strtolower(trim($match));
-            $q .= " " . $this->getLowercaseColumnSelect($layout_def) . " NOT LIKE '%" .$GLOBALS['db']->quote($match)."%' AND";
+            $q .= ' ' . $this->getLowercaseColumnSelect($layout_def) . " NOT LIKE '%" . $GLOBALS['db']->quote($match) . "%' AND";
         }
 
-        return rtrim($q, " AND");
+        return rtrim($q, ' AND');
     }
 
     /**
      * Gets the lowercase version of the name of the field for use in queries
-     * 
+     *
      * @param array $def
      * @return string
      */

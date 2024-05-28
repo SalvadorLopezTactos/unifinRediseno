@@ -48,7 +48,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return array("currencyRate");
+        return ['currencyRate'];
     }
 
     /**
@@ -56,7 +56,7 @@ JS;
      */
     public static function getParameterTypes()
     {
-        return array(AbstractExpression::$STRING_TYPE);
+        return [AbstractExpression::$STRING_TYPE];
     }
 
     /**

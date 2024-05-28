@@ -40,8 +40,9 @@
                 // Replace the image field with the module icon when there is
                 // no avatar to display
                 let template = app.template.getField(this.type, 'module-icon', this.module);
-                if (template) {
-                    this.$('.image_field').replaceWith(template(this._getModuleIconMeta()));
+                const iconMeta = this._getModuleIconMeta();
+                if (template && iconMeta) {
+                    this.$('.image_field').replaceWith(template(iconMeta));
                 }
             } else {
                 // add the image_rounded class to the image_field div when there is an avatar to display
@@ -60,6 +61,10 @@
      */
     _getModuleIconMeta: function() {
         let moduleMeta = app.metadata.getModule(this.module);
+        if (!moduleMeta) {
+            return;
+        }
+
         let classes = `label-module-color-${moduleMeta.color}`;
         let content = '';
 

@@ -63,10 +63,10 @@ class ElasticsearchReplicasStatusCommand extends Command implements InstanceMode
      * @param array $args Arguments to be passed to the public API
      * @codeCoverageIgnore
      */
-    protected function callApi($method, array $args = array())
+    protected function callApi($method, array $args = [])
     {
-        $args = array($this->service, $args);
-        return call_user_func_array(array($this->api, $method), $args);
+        $args = [$this->service, $args];
+        return call_user_func_array([$this->api, $method], $args);
     }
 
     /**
@@ -87,8 +87,7 @@ class ElasticsearchReplicasStatusCommand extends Command implements InstanceMode
     {
         $this
             ->setName('elastic:replicas_status')
-            ->setDescription('Show Elasticsearch index refresh status')
-        ;
+            ->setDescription('Show Elasticsearch index refresh status');
     }
 
     /**
@@ -98,15 +97,14 @@ class ElasticsearchReplicasStatusCommand extends Command implements InstanceMode
     {
         $result = $this
             ->initApi($this->getApi())
-            ->callApi('elasticSearchReplicasStatus', array())
-        ;
+            ->callApi('elasticSearchReplicasStatus', []);
 
         $table = new Table($output);
-        $table->setHeaders(array('Index', 'Status'));
+        $table->setHeaders(['Index', 'Status']);
 
         if ($result) {
             foreach ($result as $index => $status) {
-                $table->addRow(array($index, $status));
+                $table->addRow([$index, $status]);
             }
         }
 

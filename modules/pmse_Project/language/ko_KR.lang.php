@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => '프로세스 정의',
-  'LBL_MODULE_TITLE' => '프로세스 정의',
-  'LBL_MODULE_NAME_SINGULAR' => '프로세스 정의',
+$mod_strings = [
+    'LBL_MODULE_NAME' => '프로세스 정의',
+    'LBL_MODULE_TITLE' => '프로세스 정의',
+    'LBL_MODULE_NAME_SINGULAR' => '프로세스 정의',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => '프로세스 정의 포커스 서랍',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => '프로세스 정의 포커스 서랍',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => '프로세스 정의 기록 대시보드',
-  'LNK_LIST' => '프로세스 정의 보기',
-  'LNK_NEW_PMSE_PROJECT' => '프로세스 정의 만들기',
-  'LNK_IMPORT_PMSE_PROJECT' => '프로세스 정의 가져 오기',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => '프로세스 정의 기록 대시보드',
+    'LNK_LIST' => '프로세스 정의 보기',
+    'LNK_NEW_PMSE_PROJECT' => '프로세스 정의 만들기',
+    'LNK_IMPORT_PMSE_PROJECT' => '프로세스 정의 가져 오기',
 
-  'LBL_PRJ_STATUS' => '상태',
-  'LBL_PRJ_MODULE' => '대상 모듈',
-  'LBL_PRJ_RUN_ORDER' => '주문 실행',
-  'LBL_PMSE_BUTTON_SAVE' => '저장하기',
-  'LBL_PMSE_BUTTON_CANCEL' => '취소',
-  'LBL_PMSE_BUTTON_YES' => '예',
-  'LBL_PMSE_BUTTON_NO' => '아니요',
-  'LBL_PMSE_BUTTON_OK' => '확인',
+    'LBL_PRJ_STATUS' => '상태',
+    'LBL_PRJ_MODULE' => '대상 모듈',
+    'LBL_PRJ_RUN_ORDER' => '주문 실행',
+    'LBL_PMSE_BUTTON_SAVE' => '저장하기',
+    'LBL_PMSE_BUTTON_CANCEL' => '취소',
+    'LBL_PMSE_BUTTON_YES' => '예',
+    'LBL_PMSE_BUTTON_NO' => '아니요',
+    'LBL_PMSE_BUTTON_OK' => '확인',
     'LBL_PMSE_FORM_ERROR' => '진행전 오류를 수정하십시오.',
 
     'LBL_PMSE_LABEL_DESIGN' => '디자인',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => '예정된 활동',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => '액션',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => '시작 이벤트를 리드',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => '기회 시작 이벤트' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => '기회 시작 이벤트',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => '문서 시작 이벤트',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => '다른 모듈 이벤트',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => '이벤트를 기다립니다',
@@ -227,7 +227,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_ASSIGN_TEAM' => '라운드 로빈',
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => '활동의 이름은 비어 있습니다.',
-    'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => '이름 "% s 님이"이미 모양 가족에 존재합니다.',
+    'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => '"%s" 이름이 이미 쉐이프 패밀리에 있습니다.',
 
     'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => '시프트 가용성 필요',
     'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => '사용 가능한 사용자가 없는 경우',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => '비즈니스 규칙',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => '비즈니스 규칙 액션',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => '이메일 템플릿',
-);
+];

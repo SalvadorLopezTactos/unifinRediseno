@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Security\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
@@ -21,8 +22,8 @@ use Symfony\Component\Validator\Constraint;
 class DropdownList extends Constraint
 {
     public const ERROR_INVALID_DROPDOWN_KEY = 1;
-    protected static $errorNames = array(
+    protected static $errorNames = [
         self::ERROR_INVALID_DROPDOWN_KEY => 'ML_LANGUAGE_FILE_KEYS_INVALID',
-    );
+    ];
     public $message = 'Dropdown list violation: %msg%';
 }

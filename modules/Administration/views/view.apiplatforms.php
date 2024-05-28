@@ -31,7 +31,7 @@ class AdministrationViewApiplatforms extends SugarView
     {
         $configurator = new Configurator();
         $platforms = [];
-        $file_loc = "custom/Extension/application/Ext/Platforms/custom_api_platforms.php";
+        $file_loc = 'custom/Extension/application/Ext/Platforms/custom_api_platforms.php';
         if (SugarAutoLoader::fileExists($file_loc)) {
             require $file_loc;
         }
@@ -44,17 +44,19 @@ class AdministrationViewApiplatforms extends SugarView
                 isTruthy($platformOptions[$platform]['enable_notifications']) : true;
             return [
                 'name' => $platform,
-                'custom' => in_array($platform, $platforms),
+                'custom' => safeInArray($platform, $platforms),
                 'enable_notifications' => $enableNotifications,
             ];
         }, $allPlatforms);
         $this->ss->assign('api_platforms', json_encode($api_platforms));
         $this->ss->assign('mod', $GLOBALS['mod_strings']);
         $this->ss->assign('APP', $GLOBALS['app_strings']);
-        $this->ss->assign('deleteImage',
+        $this->ss->assign(
+            'deleteImage',
             SugarThemeRegistry::current()->getImage('delete_inline', 'style="border:1px sold red"', null, null, '.gif', translate('LBL_MB_DELETE'))
         );
-        $this->ss->assign('helpImage',
+        $this->ss->assign(
+            'helpImage',
             SugarThemeRegistry::current()->getImage(
                 'helpInline',
                 'onclick="showApiPlatformHelp(this)"',
@@ -66,9 +68,9 @@ class AdministrationViewApiplatforms extends SugarView
         );
 
         echo getClassicModuleTitle(
-            "Administration",
+            'Administration',
             [
-                "<a href='#Administration'>" . translate('LBL_MODULE_NAME') . "</a>",
+                "<a href='#Administration'>" . translate('LBL_MODULE_NAME') . '</a>',
                 translate('LBL_CONFIGURE_CUSTOM_API_PLATFORMS'),
             ],
             false

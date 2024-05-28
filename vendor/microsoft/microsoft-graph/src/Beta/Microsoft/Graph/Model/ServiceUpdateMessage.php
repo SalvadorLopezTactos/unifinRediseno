@@ -26,6 +26,7 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
 {
     /**
     * Gets the actionRequiredByDateTime
+    * The expected deadline of the action for the message.
     *
     * @return \DateTime|null The actionRequiredByDateTime
     */
@@ -41,9 +42,10 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
         }
         return null;
     }
-    
+
     /**
     * Sets the actionRequiredByDateTime
+    * The expected deadline of the action for the message.
     *
     * @param \DateTime $val The actionRequiredByDateTime
     *
@@ -54,9 +56,43 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
         $this->_propDict["actionRequiredByDateTime"] = $val;
         return $this;
     }
-    
+
+    /**
+    * Gets the attachmentsArchive
+    * The zip file of all attachments for a message.
+    *
+    * @return \GuzzleHttp\Psr7\Stream|null The attachmentsArchive
+    */
+    public function getAttachmentsArchive()
+    {
+        if (array_key_exists("attachmentsArchive", $this->_propDict)) {
+            if (is_a($this->_propDict["attachmentsArchive"], "\GuzzleHttp\Psr7\Stream") || is_null($this->_propDict["attachmentsArchive"])) {
+                return $this->_propDict["attachmentsArchive"];
+            } else {
+                $this->_propDict["attachmentsArchive"] = \GuzzleHttp\Psr7\Utils::streamFor($this->_propDict["attachmentsArchive"]);
+                return $this->_propDict["attachmentsArchive"];
+            }
+        }
+        return null;
+    }
+
+    /**
+    * Sets the attachmentsArchive
+    * The zip file of all attachments for a message.
+    *
+    * @param \GuzzleHttp\Psr7\Stream $val The attachmentsArchive
+    *
+    * @return ServiceUpdateMessage
+    */
+    public function setAttachmentsArchive($val)
+    {
+        $this->_propDict["attachmentsArchive"] = $val;
+        return $this;
+    }
+
     /**
     * Gets the body
+    * The content type and content of the service message body. The supported value for the contentType property is html.
     *
     * @return ItemBody|null The body
     */
@@ -72,9 +108,10 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
         }
         return null;
     }
-    
+
     /**
     * Sets the body
+    * The content type and content of the service message body. The supported value for the contentType property is html.
     *
     * @param ItemBody $val The body
     *
@@ -85,9 +122,10 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
         $this->_propDict["body"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the category
+    * The service message category. Possible values are: preventOrFixIssue, planForChange, stayInformed, unknownFutureValue.
     *
     * @return ServiceUpdateCategory|null The category
     */
@@ -103,9 +141,10 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
         }
         return null;
     }
-    
+
     /**
     * Sets the category
+    * The service message category. Possible values are: preventOrFixIssue, planForChange, stayInformed, unknownFutureValue.
     *
     * @param ServiceUpdateCategory $val The category
     *
@@ -116,9 +155,39 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
         $this->_propDict["category"] = $val;
         return $this;
     }
-    
+
+    /**
+    * Gets the hasAttachments
+    * Indicates whether the message has any attachment.
+    *
+    * @return bool|null The hasAttachments
+    */
+    public function getHasAttachments()
+    {
+        if (array_key_exists("hasAttachments", $this->_propDict)) {
+            return $this->_propDict["hasAttachments"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the hasAttachments
+    * Indicates whether the message has any attachment.
+    *
+    * @param bool $val The hasAttachments
+    *
+    * @return ServiceUpdateMessage
+    */
+    public function setHasAttachments($val)
+    {
+        $this->_propDict["hasAttachments"] = boolval($val);
+        return $this;
+    }
+
     /**
     * Gets the isMajorChange
+    * Indicates whether the message describes a major update for the service.
     *
     * @return bool|null The isMajorChange
     */
@@ -130,9 +199,10 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
             return null;
         }
     }
-    
+
     /**
     * Sets the isMajorChange
+    * Indicates whether the message describes a major update for the service.
     *
     * @param bool $val The isMajorChange
     *
@@ -143,11 +213,12 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
         $this->_propDict["isMajorChange"] = boolval($val);
         return $this;
     }
-    
+
     /**
     * Gets the services
+    * The affected services by the service message.
     *
-    * @return string|null The services
+    * @return array|null The services
     */
     public function getServices()
     {
@@ -157,11 +228,12 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
             return null;
         }
     }
-    
+
     /**
     * Sets the services
+    * The affected services by the service message.
     *
-    * @param string $val The services
+    * @param string[] $val The services
     *
     * @return ServiceUpdateMessage
     */
@@ -170,9 +242,10 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
         $this->_propDict["services"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the severity
+    * The severity of the service message. Possible values are: normal, high, critical, unknownFutureValue.
     *
     * @return ServiceUpdateSeverity|null The severity
     */
@@ -188,9 +261,10 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
         }
         return null;
     }
-    
+
     /**
     * Sets the severity
+    * The severity of the service message. Possible values are: normal, high, critical, unknownFutureValue.
     *
     * @param ServiceUpdateSeverity $val The severity
     *
@@ -201,11 +275,12 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
         $this->_propDict["severity"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the tags
+    * A collection of tags for the service message. Tags are provided by the service team/support team who post the message to tell whether this message contains privacy data, or whether this message is for a service new feature update, and so on.
     *
-    * @return string|null The tags
+    * @return array|null The tags
     */
     public function getTags()
     {
@@ -215,11 +290,12 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
             return null;
         }
     }
-    
+
     /**
     * Sets the tags
+    * A collection of tags for the service message. Tags are provided by the service team/support team who post the message to tell whether this message contains privacy data, or whether this message is for a service new feature update, and so on.
     *
-    * @param string $val The tags
+    * @param string[] $val The tags
     *
     * @return ServiceUpdateMessage
     */
@@ -228,9 +304,10 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
         $this->_propDict["tags"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the viewPoint
+    * Represents user viewpoints data of the service message. This data includes message status such as whether the user has archived, read, or marked the message as favorite. This property is null when accessed with application permissions.
     *
     * @return ServiceUpdateMessageViewpoint|null The viewPoint
     */
@@ -246,9 +323,10 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
         }
         return null;
     }
-    
+
     /**
     * Sets the viewPoint
+    * Represents user viewpoints data of the service message. This data includes message status such as whether the user has archived, read, or marked the message as favorite. This property is null when accessed with application permissions.
     *
     * @param ServiceUpdateMessageViewpoint $val The viewPoint
     *
@@ -259,5 +337,35 @@ class ServiceUpdateMessage extends ServiceAnnouncementBase
         $this->_propDict["viewPoint"] = $val;
         return $this;
     }
-    
+
+
+     /**
+     * Gets the attachments
+    * A collection of serviceAnnouncementAttachments.
+     *
+     * @return array|null The attachments
+     */
+    public function getAttachments()
+    {
+        if (array_key_exists("attachments", $this->_propDict)) {
+           return $this->_propDict["attachments"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the attachments
+    * A collection of serviceAnnouncementAttachments.
+    *
+    * @param ServiceAnnouncementAttachment[] $val The attachments
+    *
+    * @return ServiceUpdateMessage
+    */
+    public function setAttachments($val)
+    {
+        $this->_propDict["attachments"] = $val;
+        return $this;
+    }
+
 }

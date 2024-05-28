@@ -168,7 +168,7 @@ final class SugarJobFieldDenormalization implements RunnableSchedulerJob, JsonSe
             $this->setData();
             $this->succeedJob();
         } else {
-            $this->job->message = "waiting " . self::JOB_ITERATION_DELAY
+            $this->job->message = 'waiting ' . self::JOB_ITERATION_DELAY
                 . " seconds for next iteration ({$this->chunk_offset}/{$this->count}) ";
             $this->setData();
             $this->job->postponeJob(null, self::JOB_ITERATION_DELAY);
@@ -178,7 +178,7 @@ final class SugarJobFieldDenormalization implements RunnableSchedulerJob, JsonSe
     private function succeedJob()
     {
         $this->process->onDataSetCopied($this->processEntity);
-        $this->job->message = "Sync is done";
+        $this->job->message = 'Sync is done';
         $this->job->succeedJob();
     }
 

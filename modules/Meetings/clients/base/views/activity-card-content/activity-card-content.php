@@ -20,6 +20,14 @@ $viewdefs['Meetings']['base']['view']['activity-card-content'] = [
                 [
                     'name' => 'duration',
                     'type' => 'duration',
+                    'fields' => [
+                        'date_start',
+                        'date_end',
+                    ],
+                    'related_fields' => [
+                        'duration_hours',
+                        'duration_minutes',
+                    ],
                 ],
                 [
                     'name' => 'status',

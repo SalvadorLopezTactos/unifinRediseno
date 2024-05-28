@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Reports\Types;
 
 use SugarApiExceptionNotFound;
@@ -17,9 +18,9 @@ use Sugarcrm\Sugarcrm\Reports\Traits\ReportHelper;
 
 class Reporter
 {
+    use ReportHelper;
     /** @var bool */
     public $detaliedHeader;
-    use ReportHelper;
 
     /**
      * @var string
@@ -59,7 +60,7 @@ class Reporter
         }
 
         if (array_key_exists('detaliedHeader', $data)) {
-            $this->detaliedHeader = (bool) $data['detaliedHeader'];
+            $this->detaliedHeader = (bool)$data['detaliedHeader'];
         }
 
         if ($ignoreBuildReportDef) {
@@ -78,7 +79,7 @@ class Reporter
      */
     public function buildReportDef(string $previewReportDef = null): array
     {
-        $savedReport =  \BeanFactory::retrieveBean('Reports', $this->reportId);
+        $savedReport = \BeanFactory::retrieveBean('Reports', $this->reportId);
 
         if (!$savedReport) {
             throw new SugarApiExceptionNotFound(translate('LBL_NO_ACCESS'));
@@ -193,7 +194,7 @@ class Reporter
         $reportCache->retrieve($this->reportId);
 
         if (empty($reportCache->id)) {
-            $savedReport =  \BeanFactory::getBean('Reports', $this->reportId);
+            $savedReport = \BeanFactory::getBean('Reports', $this->reportId);
             $reportDef = json_decode($savedReport->content, true) ?? [];
 
             if (empty($reportDef)) {
@@ -308,7 +309,7 @@ class Reporter
                 'responseText' => $chart,
             ];
         }
-    
+
         $chart->setReporter($reporter);
 
         $chartXML = $chart->generateXML();
@@ -321,7 +322,7 @@ class Reporter
         }
 
         return [
-            'reportData' =>$reportData,
+            'reportData' => $reportData,
             'chartData' => json_decode($chartJSON, true),
         ];
     }
@@ -425,7 +426,7 @@ class Reporter
             'link_def' => [
                 'name' => $targetLinkFieldName,
                 'relationship_name' => $relName,
-                'bean_is_lhs' => (bool) ($tmpLink->_get_bean_position()),
+                'bean_is_lhs' => (bool)($tmpLink->_get_bean_position()),
                 'link_type' => $tmpLink->getType(),
                 'label' => $beanName,
                 'module' => $module,
@@ -573,7 +574,7 @@ class Reporter
                     $groupDefArray = $this->reportDef['group_defs'];
 
                     if (isset($this->reportDef['layout_options']) &&
-                        ((is_countable($groupDefArray) ? count($groupDefArray) : 0) === 2 || (is_countable($groupDefArray) ? count($groupDefArray) : 0) === 3)) {
+                        (safeCount($groupDefArray) === 2 || safeCount($groupDefArray) === 3)) {
                         $reportType = 'Matrix';
                     }
                 }
@@ -725,7 +726,7 @@ class Reporter
                         case 'date':
                         case 'datetime':
                         case 'datetimecombo':
-                            if ((is_countable($value) ? count($value) : 0) === 1) {
+                            if (safeCount($value) === 1) {
                                 $filterRow['qualifier_name'] = 'on';
                                 $filterRow['input_name0'] = reset($value);
                             } else {
@@ -746,8 +747,9 @@ class Reporter
                     }
 
                     // special case when the input value is empty string
-                    // create a filter simiar to the 'Is Empty' filter
-                    if (strlen(reset($value)) === 0) {
+                    // create a filter similar to the 'Is Empty' filter
+                    $firstItem = reset($value);
+                    if (!is_string($firstItem) || strlen(reset($value)) === 0) {
                         $filterRow['qualifier_name'] = 'empty';
                         $filterRow['input_name0'] = 'empty';
                         $filterRow['input_name1'] = 'on';

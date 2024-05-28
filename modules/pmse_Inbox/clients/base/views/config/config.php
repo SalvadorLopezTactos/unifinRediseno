@@ -12,11 +12,11 @@
 
 
 $module_name = 'pmse_Inbox';
-$viewdefs[$module_name]['base']['view']['config'] = array(
-    'panels' => array(
-        array(
+$viewdefs[$module_name]['base']['view']['config'] = [
+    'panels' => [
+        [
 //            'columns' => 2,
-            'fields' => array(
+            'fields' => [
 //                array(
 //                    'name' => 'logger_level',
 //                    'label'=>'LBL_PMSE_SETTING_LOG_LEVEL',
@@ -47,7 +47,7 @@ $viewdefs[$module_name]['base']['view']['config'] = array(
 //                    'view' => 'edit',
 //                    'required'=>true,
 //                )
-            ),
-        ),
-    )
-);
+            ],
+        ],
+    ],
+];

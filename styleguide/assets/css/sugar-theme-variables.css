@@ -30,11 +30,13 @@ body.sugar-light-theme,
   --config-pill-text: #005d9c;
   --config-multifield-background: #f8fafc;
   --content-background: #f8fafc;
+  --content-timeline-background: #f8fafc;
   --content-container-background-hover: #ffffff;
   --content-loading-background: #f1f3f4;
   --dashlet-background: #ffffff;
   --dashlet-background-hover: #ffffff;
   --data-skeleton-loader: url('../../../assets/img/skeleton-loaders/data-skeleton-loader.svg');
+  --timeline-skeleton-loader: url('../../../assets/img/skeleton-loaders/timeline-skeleton-loader.svg');
   --dropdown-background: #ffffff;
   --dropdown-submenu-background: #f1f3f4;
   --dropdown-disabled-background: #e5eaed;
@@ -96,7 +98,8 @@ body.sugar-light-theme,
   --activity-background-color: #f1f3f4;
   --activity-border-top-color: #9ba1a6;
   --activity-color: #2b2d2e;
-  --activity-base-cancellation-color: #fa374f;
+  --activity-inprogress-color: #0679c8;
+  --activity-base-cancellation-color: #e61718;
   --activity-base-not-color: #fbc02d;
   --tempalte-card-color: #e5eaed;
   --activity-base-icon-color: #6f777b;
@@ -138,11 +141,13 @@ body.sugar-dark-theme,
   --config-pill-text: #e5eaed;
   --config-multifield-background: #16191d;
   --content-background: #16191d;
+  --content-timeline-background: #2b2d2e;
   --content-container-background-hover: #0f0f0f;
   --content-loading-background: #16191d;
   --dashlet-background: #000000;
   --dashlet-background-hover: #16191d;
   --data-skeleton-loader: url('../../../assets/img/skeleton-loaders/data-skeleton-loader-dark.svg');
+  --timeline-skeleton-loader: url('../../../assets/img/skeleton-loaders/timeline-skeleton-loader-dark.svg');
   --dropdown-background: #000000;
   --dropdown-submenu-background: #0f1215;
   --dropdown-disabled-background: #16191d;
@@ -200,11 +205,11 @@ body.sugar-dark-theme,
   --text-color-light: #d9dddf;
   --text-disabled-color: #9ba1a6;
   --metric-badge-background: #6f777b;
-  --subheader-content-background: #000000;
   --activity-base-color: #00ba83;
   --activity-background-color: #2b2d2e;
   --activity-border-top-color: #6f777b;
   --activity-color: #9ba1a6;
+  --activity-inprogress-color: #0679c8;
   --activity-base-cancellation-color: #e61718;
   --activity-base-not-color: #fbc02d;
   --tempalte-card-color: #4d5154;
@@ -213,4 +218,5 @@ body.sugar-dark-theme,
   --activity-row-fluid-border-color: transparent;
   --activity-progress-color: #6f777b;
   --activity-info-color: #9ba1a6;
+  --activity-base-type-icon-color: #9ba1a6;
 }

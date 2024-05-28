@@ -76,11 +76,8 @@
             this.limit = 50;
         }
 
-        if (!this.showFooterTotalRecordCount) {
-            this.showFooterTotalRecordCount = false;
-        }
-
         this.RECORD_NOT_FOUND_ERROR_CODE = 404;
+        this.SERVER_ERROR_CODES = [500, 502, 503, 504];
 
         this.context.set('rebuildData', true);
 
@@ -110,8 +107,7 @@
         }
 
         if (pageListOptions) {
-            this.showFooterTotalRecordCount = pageListOptions.showCount;
-            this.showFooterDetails = this.showFooterTotalRecordCount;
+            this.showFooterDetails = pageListOptions.showCount;
         }
 
         if (_.has(pageListOptions, 'orderBy') && pageListOptions.orderBy) {
@@ -174,22 +170,8 @@
         if (!_.isUndefined(this.data) && this.pagination) {
             const pagination = this.layout.getComponent('report-table-pagination');
             pagination.collection = this.collection;
+            pagination.totalCount = pagination.collection.total;
             pagination.pagesCount = this.data.totalPages;
-
-            if (this.showFooterTotalRecordCount) {
-                pagination.showFooterTotalRecordCount = true;
-                pagination.totalCount = this.data.totalCount;
-            }
-
-            if (this.showFooterTotalRecordCount === false) {
-                pagination.showFooter = false;
-            } else {
-                pagination.showFooter = true;
-
-                if (pagination.pagesCount === 1) {
-                    this.$el.addClass('h-full');
-                }
-            }
         }
 
         this._setFooter();
@@ -772,6 +754,10 @@
      * @param {Error} error
      */
     _failedLoadReportData: function(error) {
+        if (this.disposed) {
+            return;
+        }
+
         this._toggleEmptyPanel(true);
 
         this.showFooterDetails = false;
@@ -797,6 +783,22 @@
             reportModel = this.layout.model;
         }
 
+        let showErrorAlert = error && _.isString(error.message);
+
+        // don't show no access alert for dashlet
+        if (error && reportModel.get('filter') && _.has(error, 'status') &&
+            error.status === this.RECORD_NOT_FOUND_ERROR_CODE) {
+            showErrorAlert = false;
+        }
+
+        if (showErrorAlert) {
+            app.alert.show('failed_to_load_report', {
+                level: 'error',
+                messages: error.message,
+                autoClose: true,
+            });
+        }
+
         // don't show alert for dashlets
         if (!reportModel.get('list')) {
             const message = app.utils.tryParseJSONObject(error.responseText);
@@ -806,6 +808,10 @@
 
             if (_.isEmpty(errorMessage) || error.status === this.RECORD_NOT_FOUND_ERROR_CODE) {
                 errorMessage = app.lang.get('LBL_NO_ACCESS', 'Reports');
+            }
+
+            if (this.SERVER_ERROR_CODES.includes(error.status)) {
+                errorMessage = app.lang.get('LBL_SERVER_ERROR', 'Reports');
             }
 
             app.alert.show('report-data-error', {

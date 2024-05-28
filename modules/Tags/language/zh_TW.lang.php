@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '標籤',
     'LBL_GENERIC_LINK' => '關聯物件',
     'LBL_NAME_LOWER' => '小寫標籤名稱',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => '我的標籤',
     'LBL_MY_FAVORITE_TAGS' => '我的收藏夾標籤',
     'LBL_MORE_TAGS' => '{{tagsNumber}} 標籤',
-);
+];

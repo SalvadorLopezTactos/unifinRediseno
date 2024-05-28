@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Calendar',
     'LBL_MODULE_NAME_SINGULAR' => 'Calendar',
     'LBL_MODULE_TITLE' => 'Calendar',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Setari',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Afisare sloturi de timp i zile si saptamanai',
-    'LBL_SETTINGS_TIME_STARTS'=>'Ora de incepere:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Ora de terminare',
+    'LBL_SETTINGS_TIME_STARTS' => 'Ora de incepere:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Ora de terminare',
     'LBL_SETTINGS_CALLS_SHOW' => 'Arata apeluri',
     'LBL_SETTINGS_TASKS_SHOW' => 'Arata Sarcini',
 
@@ -123,7 +123,7 @@ $mod_strings = array (
     'LBL_REPEAT_DOW' => 'Pe',
     'LBL_REPEAT_UNTIL' => 'Repeta inainte',
     'LBL_REPEAT_COUNT' => 'numarul de repetari',
-    'LBL_RECURRING_LIMIT_ERROR' => 'Această recurentă $ titlu modul nu poate fi programat, deoarece depășește reapariția maximă permisă de $ limită.',
+    'LBL_RECURRING_LIMIT_ERROR' => 'Acest lucru recurent $moduleTitle nu poate fi programat deoarece depășește recurența maximă permisă de $limit.',
 
     'LBL_EDIT_ALL_RECURRENCES' => 'Editare toate repetarile',
     'LBL_REMOVE_ALL_RECURRENCES' => 'Eliminare toate repetările',
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Creare calendar',
     'LNK_CALENDAR_LIST' => 'Vizualizare calendare',
     'LNK_CALENDAR_LEGACY' => 'Calendar Legacy',
-    'LBL_IMPORT_CALENDAR'=> 'Importare calendar',
+    'LBL_IMPORT_CALENDAR' => 'Importare calendar',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Marcaj de timp pentru eveniment',
     'LBL_INSERTFIELD' => 'Inserare câmp',
     'LBL_EVENT_START_ERROR' => 'Vă rugăm să alegeți un început',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Vă rugăm să selectați un calendar',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Nu s-a reușit salvarea Calendarelor.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Dum',
             'Lun',
             'Mar',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Joi',
             'Vin',
             'Sâm',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Duminică',
             'Luni',
             'Marţi',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Joi',
             'Vineri',
             'Sâmbătă',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Ian',
             'Feb',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Oct',
             'Nov',
             'Dec',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Ianuarie',
             'Februarie',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Octombrie',
             'Noiembrie',
             'Decembrie',
-        ),
-);
+        ],
+];

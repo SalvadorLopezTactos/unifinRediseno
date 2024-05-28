@@ -36,6 +36,7 @@
         _.each(links, function(link) {
             context.trigger('panel-top:refresh', link.name);
         });
+        app.events.trigger('link:added', this.context.get('parentModel'));
     },
 
     /**

@@ -17,7 +17,7 @@ final class GoogleResolver implements Resolver
 {
     public const DEFAULT_OPTIONS = [
         'http' => [
-            'header' => ["Host: dns.google"],
+            'header' => ['Host: dns.google'],
             'follow_location' => 1,
             'timeout' => 2,
             'ignore_errors' => true,
@@ -38,11 +38,11 @@ final class GoogleResolver implements Resolver
     {
         $context = stream_context_create($this->options);
         $response = file_get_contents('https://8.8.4.4/resolve?' . http_build_query([
-            'name' => $hostname,
+                'name' => $hostname,
                 'type' => 1,
             ]), false, $context);
-        $result = (array) json_decode((string)$response, true);
-        $answer = $result['Answer'][0]['data']?? null;
+        $result = (array)json_decode((string)$response, true);
+        $answer = $result['Answer'][0]['data'] ?? null;
         if (null === $answer) {
             throw new QueryFailedException("Can't resolve $hostname to IP");
         }

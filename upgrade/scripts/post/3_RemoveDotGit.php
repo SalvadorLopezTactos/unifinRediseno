@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Schedule .git directories for removal
  */
@@ -29,10 +30,10 @@ class SugarUpgradeRemoveDotGit extends UpgradeScript
      */
     public function run()
     {
-        $git_dirs = array(
+        $git_dirs = [
             'vendor/ruflin/elastica/.git',
             'vendor/onelogin/php-saml/.git',
-        );
+        ];
 
         foreach ($git_dirs as $git_dir) {
             if (file_exists($git_dir)) {

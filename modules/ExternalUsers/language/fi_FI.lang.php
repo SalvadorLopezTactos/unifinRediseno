@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => 'Palvelupyynnöt',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Myyntimahdollisuudet',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Tarjoukset',
-    'LBL_NOTES'=>'Muistiinpanot',
+    'LBL_NOTES' => 'Muistiinpanot',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => 'Ulkoisten käyttäjien tietueen koontinäyttö',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ulkoisen käyttäjän aikajana',
 ];

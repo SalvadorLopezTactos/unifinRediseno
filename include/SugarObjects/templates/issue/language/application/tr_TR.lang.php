@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'Administration',
-    'Product' => 'Ürün',
-    'User' => 'Kullanıcı',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => 'Yeni',
-    'Assigned' => 'Atanmış',
-    'Closed' => 'Kapalı',
-    'Pending Input' => 'Cevap Bekleniyor',
-    'Rejected' => 'Reddedildi',
-    'Duplicate' => 'Aynı Kayıttan Oluştur',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => 'Yüksek',
-    'P2' => 'Orta',
-    'P3' => 'Düşük',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => 'Kabul edildi',
-    'Duplicate' => 'Aynı Kayıttan Oluştur',
-    'Closed' => 'Kapalı',
-    'Out of Date' => 'Geçerliliğini Yitirmiş',
-    'Invalid' => 'Geçersiz',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => 'Yönetim',
+        'Product' => 'Ürün',
+        'User' => 'Kullanıcı',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => 'Yeni',
+        'Assigned' => 'Atandı',
+        'Closed' => 'Kapatıldı',
+        'Pending Input' => 'Bekleyen Giriş',
+        'Rejected' => 'Reddedildi',
+        'Duplicate' => 'Aynı Kayıttan Oluştur',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => 'Yüksek',
+        'P2' => 'Orta',
+        'P3' => 'Düşük',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => 'Kabul edildi',
+        'Duplicate' => 'Aynı Kayıttan Oluştur',
+        'Closed' => 'Kapatıldı',
+        'Out of Date' => 'Geçerliliğini Yitirmiş',
+        'Invalid' => 'Geçersiz',
+    ],
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_LISTVIEW_FILTER_ALL' => 'Visi {0}',
     'LBL_TEAM' => 'Darba grupas',
     'LBL_TEAMS' => 'Darba grupas',
@@ -77,4 +77,4 @@ $mod_strings = array(
     'LBL_OPEN_ISSUES' => 'Atvērt {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Nesen atrisinātie',
     'LBL_FILTER_UTILS_CREATED' => 'Izveidoja',
-);
+];

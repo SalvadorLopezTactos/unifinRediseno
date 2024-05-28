@@ -244,4 +244,20 @@ class RememberMeTokenTest extends \PHPUnit_Framework_TestCase
         $this->rememberMeToken->setAttribute('srn', $srn);
         $this->assertEquals($srn, $this->rememberMeToken->getSRN());
     }
+
+    /**
+     *  @covers ::serialize
+     *  @covers ::unserialize
+     * */
+    public function testSerializeUnserialize(): void
+    {
+        $serialized = $this->rememberMeToken->serialize();
+        
+        $unserializedToken = unserialize($serialized);
+
+        $this->assertEquals(
+            $this->rememberMeToken->getUserIdentifier(),
+            $unserializedToken->getUserIdentifier()
+        );
+    }
 }

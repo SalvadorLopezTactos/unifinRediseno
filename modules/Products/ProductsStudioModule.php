@@ -22,13 +22,13 @@ class ProductsStudioModule extends StudioModule
     {
         $views = parent::getViews();
 
-        $views = array_merge(array(
-            translate("LBL_PRODUCTS_QUOTE_DATA_LIST", "Products") => array(
-                'name' => translate("LBL_PRODUCTS_QUOTE_DATA_LIST", "Products"),
+        $views = array_merge([
+            translate('LBL_PRODUCTS_QUOTE_DATA_LIST', 'Products') => [
+                'name' => translate('LBL_PRODUCTS_QUOTE_DATA_LIST', 'Products'),
                 'type' => 'quote-data-group-list',
                 'image' => 'quote-data-group-list',
-            ),
-        ), $views);
+            ],
+        ], $views);
 
         return $views;
     }
@@ -36,7 +36,7 @@ class ProductsStudioModule extends StudioModule
     public function getLayouts()
     {
         $layouts = parent::getLayouts();
-        unset($layouts[translate("LBL_PRODUCTS_QUOTE_DATA_LIST", "Products")]);
+        unset($layouts[translate('LBL_PRODUCTS_QUOTE_DATA_LIST', 'Products')]);
 
         return $layouts;
     }

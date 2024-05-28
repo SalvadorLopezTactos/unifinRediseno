@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Paneli i regjistrit të blerjeve',
     'LBL_RELATED_ACCOUNT' => 'Llogari e lidhur',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te blerjet',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e blerjes',
 ];

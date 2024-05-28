@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -29,5 +30,16 @@ abstract class ForbiddenStatementVisitor extends NodeVisitorAbstract
     public function getIssues(): array
     {
         return $this->issues;
+    }
+
+    /**
+     * Reset issues list before traversing to prevent issues sharing between different calls
+     * @param array $nodes
+     * @return null
+     */
+    public function beforeTraverse(array $nodes)
+    {
+        $this->issues = [];
+        return null;
     }
 }

@@ -38,10 +38,10 @@ class TeamSetPrunePruneCommand extends TeamSetPruneCommand implements InstanceMo
     }
 
 
-
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->preflightCheck($output);
         $this->getPruner()->prune();
+        return 0;
     }
 }

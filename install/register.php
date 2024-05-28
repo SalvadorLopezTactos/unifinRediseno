@@ -11,55 +11,54 @@
  */
 
 $suicide = true;
-if(isset($install_script)) {
-	if($install_script) {
-		$suicide = false;
-	}
+if (isset($install_script)) {
+    if ($install_script) {
+        $suicide = false;
+    }
 }
 
-if($suicide) {
-   // mysterious suicide note
-   die($mod_strings['ERR_NO_DIRECT_SCRIPT']);
+if ($suicide) {
+    // mysterious suicide note
+    die($mod_strings['ERR_NO_DIRECT_SCRIPT']);
 }
 
 
 if (!isset($_POST['confirm']) || !$_POST['confirm']) {
-	include("sugar_version.php"); // provide $sugar_flavor
-       global $sugar_config;
-        $ik = '';
-       if(isset($sugar_config['unique_key']) && !empty($sugar_config['unique_key']) ){
+    include 'sugar_version.php'; // provide $sugar_flavor
+    global $sugar_config;
+    $ik = '';
+    if (isset($sugar_config['unique_key']) && !empty($sugar_config['unique_key'])) {
         $ik = $sugar_config['unique_key'];
-       }
+    }
 
-	//$regPhp = file_get_contents("http://www.sugarcrm.com/product-registration/registration_php.php?edition={$sugar_flavor}&instance_key=".$ik);
-	//changing the reg form. placing in an iframe
-	/*
-	$regPhp="<iframe src='https://www.sugarcrm.com/product-registration/
-	registration_php_080428.php?edition={$sugar_flavor}&instance_key=
-	{$ik}' height='400px' width='700px' frameborder='0' scrolling='no'
-	allowtransparency='true'</iframe>";
-	*/
-    $regPhp="<iframe src='https://www.sugarcrm.com/product-registration/registration_php_080428.php?edition={$sugar_flavor}&instance_key=
+    //$regPhp = file_get_contents("http://www.sugarcrm.com/product-registration/registration_php.php?edition={$sugar_flavor}&instance_key=".$ik);
+    //changing the reg form. placing in an iframe
+    /*
+    $regPhp="<iframe src='https://www.sugarcrm.com/product-registration/
+    registration_php_080428.php?edition={$sugar_flavor}&instance_key=
+    {$ik}' height='400px' width='700px' frameborder='0' scrolling='no'
+    allowtransparency='true'</iframe>";
+    */
+    $regPhp = "<iframe src='https://www.sugarcrm.com/product-registration/registration_php_080428.php?edition={$sugar_flavor}&instance_key=
     {$ik}' height='595px' width='700px' frameborder='0' style='overflow-x:hidden; overflow-y: scroll;'
     allowtransparency='true'></iframe>";
 
 
-	$notConfirmed =<<<CONF
+    $notConfirmed = <<<CONF
 		<!-- <p>{$mod_strings['LBL_REG_CONF_1']}</p> -->
 		<!-- begin registration -->
 		{$regPhp}
 		<!-- end registration -->
 CONF;
-
 } else {
-	$notConfirmed = $mod_strings['LBL_REG_CONF_3'];
+    $notConfirmed = $mod_strings['LBL_REG_CONF_3'];
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
 ////	START OUTPUT
 $langHeader = get_language_header();
-$out =<<<EOQ
+$out = <<<EOQ
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html {$langHeader}>
 <head>

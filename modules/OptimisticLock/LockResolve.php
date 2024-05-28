@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-function display_conflict_between_objects($object_1, $object_2, $field_defs,$module_dir, $display_name){
+function display_conflict_between_objects($object_1, $object_2, $field_defs, $module_dir, $display_name)
+{
     $mod_strings = return_module_language($GLOBALS['current_language'], 'OptimisticLock');
     $title = '<tr><td >&nbsp;</td>';
-    $object1_row= '<tr class="oddListRowS1"><td><b>' . htmlspecialchars($mod_strings['LBL_YOURS'], ENT_COMPAT) . '</b></td>';
-    $object2_row= '<tr class="evenListRowS1"><td><b>' . htmlspecialchars($mod_strings['LBL_IN_DATABASE'], ENT_COMPAT) . '</b></td>';
+    $object1_row = '<tr class="oddListRowS1"><td><b>' . htmlspecialchars($mod_strings['LBL_YOURS'], ENT_COMPAT) . '</b></td>';
+    $object2_row = '<tr class="evenListRowS1"><td><b>' . htmlspecialchars($mod_strings['LBL_IN_DATABASE'], ENT_COMPAT) . '</b></td>';
     $exists = false;
 
     foreach ($field_defs as $name => $ignore) {
@@ -26,7 +27,7 @@ function display_conflict_between_objects($object_1, $object_2, $field_defs,$mod
             $title .= '<td ><b>&nbsp;' .
                 htmlspecialchars(translate($field_defs[$name]['vname'], $module_dir), ENT_COMPAT) .
                 '</b></td>';
-            $object1_row .= '<td>&nbsp;' . htmlspecialchars($value, ENT_COMPAT). '</td>';
+            $object1_row .= '<td>&nbsp;' . htmlspecialchars($value, ENT_COMPAT) . '</td>';
             $object2_row .= '<td>&nbsp;' . htmlspecialchars($object_2->$name, ENT_COMPAT) . '</td>';
             $exists = true;
         }
@@ -82,19 +83,18 @@ function display_conflict_between_objects($object_1, $object_2, $field_defs,$mod
     }
 }
 
-if(isset($_SESSION['o_lock_object'])){
-	global $beanFiles, $moduleList;
-	$object = 	$_SESSION['o_lock_object'];
-	$current_state = BeanFactory::getBean($_SESSION['o_lock_module'], $object['id']);
+if (isset($_SESSION['o_lock_object'])) {
+    global $beanFiles, $moduleList;
+    $object = $_SESSION['o_lock_object'];
+    $current_state = BeanFactory::getBean($_SESSION['o_lock_module'], $object['id']);
 
-	if(isset($_REQUEST['save'])){
-		$_SESSION['o_lock_fs'] = true;
-		echo  $_SESSION['o_lock_save'];
-		die();
-	}else{
-		display_conflict_between_objects($object, $current_state, $current_state->field_defs, $current_state->module_dir, $_SESSION['o_lock_class']);
-}}else{
-	echo $mod_strings['LBL_NO_LOCKED_OBJECTS'];
+    if (isset($_REQUEST['save'])) {
+        $_SESSION['o_lock_fs'] = true;
+        echo $_SESSION['o_lock_save'];
+        die();
+    } else {
+        display_conflict_between_objects($object, $current_state, $current_state->field_defs, $current_state->module_dir, $_SESSION['o_lock_class']);
+    }
+} else {
+    echo $mod_strings['LBL_NO_LOCKED_OBJECTS'];
 }
-
-?>

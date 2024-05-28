@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Kontratlar',
-	'LBL_MODULE_NAME_SINGULAR' => 'Kontrat',
-	'LBL_MODULE_TITLE' => 'Kontratlar : Ana Sayfa',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Kontratlar',
+    'LBL_MODULE_NAME_SINGULAR' => 'Kontrat',
+    'LBL_MODULE_TITLE' => 'Kontratlar : Ana Sayfa',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Kontrat Oluştur',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'Para Birimi ID:',
     'LBL_CURRENCY' => 'Para Birimi:',
     'LBL_CURRENCY_RATE' => 'Döviz Kuru',
-    'LBL_ASSIGNED_TO_NAME'=>'Atanan Kişi:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Atanan Kişi:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Kontrat Listesi',	
+    'LBL_LIST_FORM_TITLE' => 'Kontrat Listesi',
     'LBL_LIST_CONTRACT_NAME' => 'Kontrat İsmi',
     'LBL_LIST_ACCOUNT_NAME' => 'Müşteri İsmi',
     'LBL_LIST_START_DATE' => 'İlk',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'İsim',
     'LBL_LIST_CONTRACT_VALUE' => 'Değer',
 
-    'LBL_TYPE'=>'Tipi',
+    'LBL_TYPE' => 'Tipi',
     'LBL_TYPE_NAME' => 'Tip İsmi',
-    'LBL_CONTRACT_TYPE'=>'Tipi:',
+    'LBL_CONTRACT_TYPE' => 'Tipi:',
 
     'LBL_CREATED_USER' => 'Oluşturan Kullanıcı',
     'LBL_MODIFIED_USER' => 'Değiştiren Kullanıcı',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Sözleşmeler Odak Bölmesi',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Kontratlar Kaydı Panosu',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Sözleşme Zaman Çizelgesi',
+];

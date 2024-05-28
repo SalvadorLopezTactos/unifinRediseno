@@ -15,7 +15,7 @@
         <thead>
         <tr>
             {{#each collection.displayedFields}}
-                <th class="{{#isSortable ../../module this}}sorting sorting_{{#eq ../../../collection.orderBy.field ../name}}{{../../../collection.orderBy.direction}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if widthClass}} {{widthClass}}{{/if}}"
+                <th class="relative {{#isSortable ../../module this}}sorting sorting_{{#eq ../../../collection.orderBy.field ../name}}{{../../../collection.orderBy.direction}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if widthClass}} {{widthClass}}{{/if}}"
                     data-fieldname="{{name}}" data-orderby="{{orderBy}}">
                     <span>{{str vname ../module}}</span>
                 </th>

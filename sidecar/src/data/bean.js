@@ -32,9 +32,9 @@
  * @class
  */
 
-const PluginManager = require('core/plugin-manager');
-const Utils = require('utils/utils');
-const Validation = require('data/validation');
+const PluginManager = require('../core/plugin-manager');
+const Utils = require('../utils/utils');
+const Validation = require('./validation');
 
 /**
  * Calls a given callback function with the result of validating this model.
@@ -123,6 +123,9 @@ const Bean = Backbone.Model.extend({
         if (this.isNew() && this._defaults) {
             _.each(this._defaults, function(value, key) {
                 if (!this.has(key)) {
+                    if (_.isObject(value)) {
+                        value = SUGAR.App.utils.deepCopy(value);
+                    }
                     this.set(key, value, { silent: true });
                 }
             }, this);

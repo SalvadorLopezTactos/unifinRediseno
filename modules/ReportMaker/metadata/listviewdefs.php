@@ -11,15 +11,15 @@
  */
 
 
-$listViewDefs['ReportMaker'] = array(
-    'NAME' => array(
-        'width' => '20', 
-        'label' => 'LBL_NAME', 
+$listViewDefs['ReportMaker'] = [
+    'NAME' => [
+        'width' => '20',
+        'label' => 'LBL_NAME',
         'link' => true,
-        'default' => true),
-    'IS_SCHEDULED' => array(
-        'width' => '10', 
-        'label' => 'LBL_LIST_SCHEDULED', 
+        'default' => true],
+    'IS_SCHEDULED' => [
+        'width' => '10',
+        'label' => 'LBL_LIST_SCHEDULED',
         'default' => true,
-        'customCode' => '<a  href="#" onclick=\'window.open("index.php?module=Reports&action=add_schedule&to_pdf=true&id={$ID}&schedule_type=ent","test","width=500,height=200,resizable=1,scrollbars=1");\' class="listViewTdToolsS1">{$IS_SCHEDULED_IMG} {$IS_SCHEDULED}</a>'),
-);
+        'customCode' => '<a  href="#" onclick=\'window.open("index.php?module=Reports&action=add_schedule&to_pdf=true&id={$ID}&schedule_type=ent","test","width=500,height=200,resizable=1,scrollbars=1");\' class="listViewTdToolsS1">{$IS_SCHEDULED_IMG} {$IS_SCHEDULED}</a>'],
+];

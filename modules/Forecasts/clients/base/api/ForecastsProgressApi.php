@@ -11,40 +11,38 @@
  */
 
 
-
 class ForecastsProgressApi extends ModuleApi
 {
-
     /**
      * uuid for the selected user
      *
      * @var string
      */
-	protected $user_id;
+    protected $user_id;
     /**
      * uuid for the current/selected timeperiod
      *
      * @var string
      */
-	protected $timeperiod_id;
+    protected $timeperiod_id;
     /**
      * Opportunity Bean used to create the opportunity queries
      *
      * @var Opportunity
      */
-	protected $opportunity;
+    protected $opportunity;
     /**
      * array of sales stages to denote as closed('lost')
      *
      * @var array
      */
-    protected $sales_stage_lost = Array();
+    protected $sales_stage_lost = [];
     /**
      * array of sales stages to denote as closed('won')
      *
      * @var array
      */
-    protected $sales_stage_won = Array();
+    protected $sales_stage_won = [];
 
     /**
      * Rest Api Registration Method
@@ -53,24 +51,24 @@ class ForecastsProgressApi extends ModuleApi
      */
     public function registerApiRest()
     {
-        return array(
-            'progressRep' => array(
-                'reqType'   => 'GET',
-                'path'      => array('Forecasts', '?', 'progressRep', '?'),
-                'pathVars'  => array('', 'timeperiod_id', '', 'user_id'),
-                'method'    => 'progressRep',
+        return [
+            'progressRep' => [
+                'reqType' => 'GET',
+                'path' => ['Forecasts', '?', 'progressRep', '?'],
+                'pathVars' => ['', 'timeperiod_id', '', 'user_id'],
+                'method' => 'progressRep',
                 'shortHelp' => 'Projected Rep data',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastProgressRepApi.html',
-            ),
-            'progressManager' => array(
-                'reqType'   => 'GET',
-                'path'      => array('Forecasts', '?', 'progressManager', '?'),
-                'pathVars'  => array('', 'timeperiod_id', '', 'user_id'),
-                'method'    => 'progressManager',
+            ],
+            'progressManager' => [
+                'reqType' => 'GET',
+                'path' => ['Forecasts', '?', 'progressManager', '?'],
+                'pathVars' => ['', 'timeperiod_id', '', 'user_id'],
+                'method' => 'progressManager',
                 'shortHelp' => 'Progress Manager data',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastProgressManagerApi.html',
-            )
-        );
+            ],
+        ];
     }
 
     /**
@@ -82,8 +80,8 @@ class ForecastsProgressApi extends ModuleApi
      */
     public function progressRep(ServiceBase $api, array $args)
     {
-        $args['user_id'] = clean_string($args["user_id"]);
-        $args['timeperiod_id'] = clean_string($args["timeperiod_id"]);
+        $args['user_id'] = clean_string($args['user_id']);
+        $args['timeperiod_id'] = clean_string($args['timeperiod_id']);
 
         // base file and class name
         $file = 'include/SugarForecasting/Progress/Individual.php';
@@ -97,7 +95,7 @@ class ForecastsProgressApi extends ModuleApi
         /* @var $obj SugarForecasting_AbstractForecast */
         $obj = new $klass($args);
         return $obj->process();
-	}
+    }
 
     /**
      * loads data and passes back an array to communicate data that may be missing.  The array is the same
@@ -108,8 +106,8 @@ class ForecastsProgressApi extends ModuleApi
      */
     public function progressManager(ServiceBase $api, array $args)
     {
-        $args['user_id'] = clean_string($args["user_id"]);
-        $args['timeperiod_id'] = clean_string($args["timeperiod_id"]);
+        $args['user_id'] = clean_string($args['user_id']);
+        $args['timeperiod_id'] = clean_string($args['timeperiod_id']);
 
         // base file and class name
         $file = 'include/SugarForecasting/Progress/Manager.php';
@@ -123,5 +121,5 @@ class ForecastsProgressApi extends ModuleApi
         /* @var $obj SugarForecasting_AbstractForecast */
         $obj = new $klass($args);
         return $obj->process();
-	}
+    }
 }

@@ -10,122 +10,121 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['tracker_sessions'] = array(
+$dictionary['tracker_sessions'] = [
     'table' => 'tracker_sessions',
-    'fields' => array(
-        'id'=>array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'vname' => 'LBL_ID',
             'type' => 'int',
             'len' => '11',
-            'reportable' => true,            
+            'reportable' => true,
             'isnull' => 'false',
             'auto_increment' => true,
-        ),       
-        'session_id'=>array(
+        ],
+        'session_id' => [
             'name' => 'session_id',
             'vname' => 'LBL_SESSION_ID',
             'type' => 'id',
             'isnull' => 'false',
-        ),   
-        'date_start'=>array(
+        ],
+        'date_start' => [
             'name' => 'date_start',
             'vname' => 'LBL_DATE_START',
             'type' => 'datetime',
             'isnull' => 'false',
-        ),
-        'date_end'=>array(
+        ],
+        'date_end' => [
             'name' => 'date_end',
             'vname' => 'LBL_DATE_LAST_ACTION',
             'type' => 'datetime',
             'isnull' => 'false',
-        ),
-        'seconds'=>array (
+        ],
+        'seconds' => [
             'name' => 'seconds',
             'vname' => 'LBL_SECONDS',
             'type' => 'int',
             'len' => '9',
             'isnull' => 'false',
             'default' => '0',
-        ) ,        
-        'client_ip'=>array(
+        ],
+        'client_ip' => [
             'name' => 'client_ip',
             'vname' => 'LBL_CLIENT_IP',
             'type' => 'varchar',
             'len' => '45',
             'isnull' => 'false',
-        ),
-        'user_id'=>array(
+        ],
+        'user_id' => [
             'name' => 'user_id',
             'vname' => 'LBL_USER_ID',
             'type' => 'id',
             'isnull' => 'false',
-        ),             
-        'active'=>array (
+        ],
+        'active' => [
             'name' => 'active',
             'vname' => 'LBL_ACTIVE',
             'type' => 'bool',
             'default' => '1',
-        ),
-	    'deleted' =>array (
-		    'name' => 'deleted',
-		    'vname' => 'LBL_DELETED',
-		    'type' => 'bool',
-		    'default' => '0',
-		    'reportable'=>false,
-		    'comment' => 'Record deletion indicator'
-		),
-		'assigned_user_link'=>array (
-		    'name' => 'assigned_user_link',
-		    'type' => 'link',
-		    'relationship' => 'tracker_user_id',
-		    'vname' => 'LBL_ASSIGNED_TO_USER',
-		    'link_type' => 'one',
-		    'module'=>'Users',
-		    'bean_name'=>'User',
-		    'source'=>'non-db',
-		),		        
-    ),
+        ],
+        'deleted' => [
+            'name' => 'deleted',
+            'vname' => 'LBL_DELETED',
+            'type' => 'bool',
+            'default' => '0',
+            'reportable' => false,
+            'comment' => 'Record deletion indicator',
+        ],
+        'assigned_user_link' => [
+            'name' => 'assigned_user_link',
+            'type' => 'link',
+            'relationship' => 'tracker_user_id',
+            'vname' => 'LBL_ASSIGNED_TO_USER',
+            'link_type' => 'one',
+            'module' => 'Users',
+            'bean_name' => 'User',
+            'source' => 'non-db',
+        ],
+    ],
     //indices
-    'indices' => array(
-        array(
+    'indices' => [
+        [
             'name' => 'tracker_sessions_pk',
             'type' => 'primary',
-            'fields' => array(
-                'id'
-            )
-        ),
-        array(
+            'fields' => [
+                'id',
+            ],
+        ],
+        [
             'name' => 'idx_tracker_sessions_s_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'session_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_tracker_sessions_uas_id',
             'type' => 'index',
-            'fields' => array(
-                'user_id', 'active', 'session_id'
-            ), 
-        ),
-        array(
+            'fields' => [
+                'user_id', 'active', 'session_id',
+            ],
+        ],
+        [
             'name' => 'idx_tracker_sessions_active_date',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'active',
                 'date_end',
-            ),
-        ),
-    ),    
+            ],
+        ],
+    ],
     //relationships
- 	'relationships' => array (
-	  'tracker_user_id' =>
-		   array(
-				'lhs_module'=> 'Users', 'lhs_table'=> 'users', 'lhs_key' => 'id',
-		   		'rhs_module'=> 'TrackerSessions', 'rhs_table'=> 'tracker', 'rhs_key' => 'user_id',
-		   		'relationship_type'=>'one-to-many'
-		   )
-    ),
-    'acls' => array('SugarACLStatic' => true),
-);
+    'relationships' => [
+        'tracker_user_id' => [
+            'lhs_module' => 'Users', 'lhs_table' => 'users', 'lhs_key' => 'id',
+            'rhs_module' => 'TrackerSessions', 'rhs_table' => 'tracker', 'rhs_key' => 'user_id',
+            'relationship_type' => 'one-to-many',
+        ],
+    ],
+    'acls' => ['SugarACLStatic' => true],
+];

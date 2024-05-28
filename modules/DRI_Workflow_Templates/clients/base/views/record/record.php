@@ -139,8 +139,14 @@ $viewdefs['DRI_Workflow_Templates']['base']['view']['record'] = [
             'panelDefault' => 'expanded',
             'fields' => [
                 'copied_template_name',
-                'available_modules',
+                '',
                 'active',
+                'available_modules',
+                [
+                    'name' => 'stage_numbering',
+                    'type' => 'toggle',
+                    'css_class' => 'horizontal-vertical',
+                ],
                 'update_assignees',
                 [
                     'name' => 'active_limit',

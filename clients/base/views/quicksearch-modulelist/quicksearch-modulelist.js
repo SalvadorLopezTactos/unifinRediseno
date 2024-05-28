@@ -23,7 +23,7 @@
         'click [data-action=select-module]': 'selectModule',
         'keydown [data-action=select-all]': 'allModulesKeydownHandler',
         'keydown [data-action=select-module]': 'moduleKeydownHandler',
-        'click [data-toggle=dropdown]': 'moduleDropdownClick'
+        'click [data-bs-toggle=dropdown]': 'moduleDropdownClick'
     },
 
     // List of modules that should not be included in the module list

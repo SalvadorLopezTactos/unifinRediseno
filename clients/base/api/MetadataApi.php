@@ -19,43 +19,43 @@ class MetadataApi extends SugarApi
      */
     public function registerApiRest()
     {
-        return array(
-            'getAllMetadata' => array(
+        return [
+            'getAllMetadata' => [
                 'reqType' => 'GET',
-                'path' => array('metadata'),
-                'pathVars' => array(''),
+                'path' => ['metadata'],
+                'pathVars' => [''],
                 'method' => 'getAllMetadata',
                 'shortHelp' => 'This method will return all metadata for the system',
                 'longHelp' => 'include/api/html/metadata_all_help.html',
                 'noEtag' => true,
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
-            ),
-            'getAllMetadataPost' => array(
+            ],
+            'getAllMetadataPost' => [
                 'reqType' => 'POST',
-                'path' => array('metadata'),
-                'pathVars' => array(''),
+                'path' => ['metadata'],
+                'pathVars' => [''],
                 'method' => 'getAllMetadata',
                 'shortHelp' => 'This method will return all metadata for the system, filtered by the array of hashes sent to the server',
                 'longHelp' => 'include/api/html/metadata_all_help.html',
                 'noEtag' => true,
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
-            ),
-            'getAllMetadataHashes' => array(
+            ],
+            'getAllMetadataHashes' => [
                 'reqType' => 'GET',
-                'path' => array('metadata','_hash'),
-                'pathVars' => array(''),
+                'path' => ['metadata', '_hash'],
+                'pathVars' => [''],
                 'method' => 'getAllMetadataHash',
                 'shortHelp' => 'This method will return the hash of all metadata for the system',
                 'longHelp' => 'include/api/html/metadata_all_help.html',
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
-            ),
-            'getPublicMetadata' =>  array(
+            ],
+            'getPublicMetadata' => [
                 'reqType' => 'GET',
-                'path' => array('metadata','public'),
-                'pathVars'=> array(''),
+                'path' => ['metadata', 'public'],
+                'pathVars' => [''],
                 'method' => 'getPublicMetadata',
                 'shortHelp' => 'This method will return the metadata needed when not logged in',
                 'longHelp' => 'include/api/html/metadata_all_help.html',
@@ -63,11 +63,11 @@ class MetadataApi extends SugarApi
                 'noEtag' => true,
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
-            ),
-            'getLanguage' => array(
+            ],
+            'getLanguage' => [
                 'reqType' => 'GET',
-                'path' => array('lang', '?'),
-                'pathVars' => array('', 'lang'),
+                'path' => ['lang', '?'],
+                'pathVars' => ['', 'lang'],
                 'method' => 'getLanguage',
                 'shortHelp' => 'Returns the labels for the application',
                 'longHelp' => 'include/api/html/metadata_all_help.html',
@@ -75,11 +75,11 @@ class MetadataApi extends SugarApi
                 'noEtag' => true,
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
-            ),
-            'getPublicLanguage' => array(
+            ],
+            'getPublicLanguage' => [
                 'reqType' => 'GET',
-                'path' => array('lang', 'public', '?'),
-                'pathVars' => array('', '', 'lang'),
+                'path' => ['lang', 'public', '?'],
+                'pathVars' => ['', '', 'lang'],
                 'method' => 'getPublicLanguage',
                 'shortHelp' => 'Returns the public labels for the application',
                 'longHelp' => 'include/api/html/metadata_all_help.html',
@@ -88,17 +88,17 @@ class MetadataApi extends SugarApi
                 'noEtag' => true,
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
-            ),
-            'getSegment' => array(
+            ],
+            'getSegment' => [
                 'reqType' => 'GET',
-                'path' => array('metadata', '?', '?'),
-                'pathVars' => array('', 'module', 'segment'),
+                'path' => ['metadata', '?', '?'],
+                'pathVars' => ['', 'module', 'segment'],
                 'method' => 'getModuleDataSegment',
                 'minVersion' => '11.11',
                 'shortHelp' => 'Gets the desired segment for the given module',
                 'longHelp' => 'include/api/help/metadata_getModuleDataSegment.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -114,7 +114,7 @@ class MetadataApi extends SugarApi
 
     /**
      * Gets the type filter for this request
-     * 
+     *
      * @param array $args
      * @param array $default
      * @return array
@@ -124,7 +124,7 @@ class MetadataApi extends SugarApi
         $typeFilter = $default;
         if (!empty($args['type_filter'])) {
             // Explode is fine here, we control the list of types
-            $types = explode(",", $args['type_filter']);
+            $types = explode(',', $args['type_filter']);
             if ($types != false) {
                 $typeFilter = $types;
             }
@@ -135,7 +135,7 @@ class MetadataApi extends SugarApi
 
     /**
      * Gets the module filter for this request
-     * 
+     *
      * @param array $args
      * @param array $default
      * @return array
@@ -146,12 +146,12 @@ class MetadataApi extends SugarApi
         if (!empty($args['module_filter'])) {
             if (function_exists('str_getcsv')) {
                 // Use str_getcsv here so that commas can be escaped, I pity the fool that has commas in his module names.
-                $modules = str_getcsv($args['module_filter'],',','');
+                $modules = str_getcsv($args['module_filter'], ',', '');
             } else {
-                $modules = explode(",", $args['module_filter']);
+                $modules = explode(',', $args['module_filter']);
             }
-            
-            if ( $modules != false ) {
+
+            if ($modules != false) {
                 $moduleFilter = $modules;
             }
         }
@@ -161,7 +161,7 @@ class MetadataApi extends SugarApi
 
     /**
      * Determines whether the request is a hash only metadata request
-     * 
+     *
      * @param array $args
      * @return bool
      */
@@ -189,7 +189,7 @@ class MetadataApi extends SugarApi
                         if (is_array($viewMeta) && !empty($viewMeta['meta'])) {
                             if (!isset($viewMeta['meta']['dependencies']) ||
                                 !is_array($viewMeta['meta']['dependencies'])) {
-                                $viewMeta['meta']['dependencies'] = array();
+                                $viewMeta['meta']['dependencies'] = [];
                             }
                             foreach ($modMeta['dependencies'] as $dep) {
                                 $viewMeta['meta']['dependencies'][] = $dep;
@@ -205,7 +205,7 @@ class MetadataApi extends SugarApi
 
     /**
      * Authenticated metadata request endpoint
-     * 
+     *
      * @param ServiceBase $api
      * @param array $args
      * @return array
@@ -236,7 +236,7 @@ class MetadataApi extends SugarApi
         $typeFilter = $this->getTypeFilter($args, $sections);
 
         // Same with module filtering
-        $moduleFilter = $this->getModuleFilter($args, array());
+        $moduleFilter = $this->getModuleFilter($args, []);
 
         // Is this a hash only request?
         $onlyHash = $this->isOnlyHash($args);
@@ -247,14 +247,14 @@ class MetadataApi extends SugarApi
             unset($sections[$key]);
         }
         $baseChunks = $sections;
-        $perModuleChunks = array('modules');
+        $perModuleChunks = ['modules'];
 
         return $this->filterResults($args, $data, $typeFilter, $onlyHash, $baseChunks, $perModuleChunks, $moduleFilter);
     }
 
     /**
      * Public metadata request endpoint
-     * 
+     *
      * @param ServiceBase $api
      * @param array $args
      * @return array
@@ -277,10 +277,10 @@ class MetadataApi extends SugarApi
 
         // Public metadata sections, no module info at this time
         $baseChunks = $mm->getSections();
-        
+
         // Set the type filter from the sections
         $typeFilter = $this->getTypeFilter($args, $baseChunks);
-        
+
         // See if this is a hash only request
         $onlyHash = $this->isOnlyHash($args);
 
@@ -297,23 +297,23 @@ class MetadataApi extends SugarApi
      * @param array $perModuleChunks the module chunks we want filtered
      * @param array $moduleFilter the specific modules we want
      */
-    protected function filterResults(array $args, $data, $typeFilter, $onlyHash = false, $baseChunks = array(), $perModuleChunks = array(), $moduleFilter = array())
+    protected function filterResults(array $args, $data, $typeFilter, $onlyHash = false, $baseChunks = [], $perModuleChunks = [], $moduleFilter = [])
     {
         if ($onlyHash) {
             // The client only wants hashes
-            $hashesOnly = array();
+            $hashesOnly = [];
             $hashesOnly['_hash'] = $data['_hash'];
             foreach ($baseChunks as $chunk) {
-                if (in_array($chunk, $typeFilter) ) {
+                if (safeInArray($chunk, $typeFilter)) {
                     $hashesOnly[$chunk]['_hash'] = $data['_hash'];
                 }
             }
 
             foreach ($perModuleChunks as $chunk) {
-                if (in_array($chunk, $typeFilter)) {
+                if (safeInArray($chunk, $typeFilter)) {
                     // We want modules, let's filter by the requested modules and by which hashes match.
                     foreach ($data[$chunk] as $modName => &$modData) {
-                        if (empty($moduleFilter) || in_array($modName,$moduleFilter)) {
+                        if (empty($moduleFilter) || safeInArray($modName, $moduleFilter)) {
                             $hashesOnly[$chunk][$modName]['_hash'] = $data[$chunk][$modName]['_hash'];
                         }
                     }
@@ -321,45 +321,49 @@ class MetadataApi extends SugarApi
             }
 
             $data = $hashesOnly;
-
         } else {
             // The client is being bossy and wants some data as well.
             foreach ($baseChunks as $chunk) {
-                if (!in_array($chunk,$typeFilter)
+                if (!safeInArray($chunk, $typeFilter)
                     || (isset($args[$chunk]) && $args[$chunk] == $data[$chunk]['_hash'])) {
                     unset($data[$chunk]);
                 }
             }
 
             // Relationships are special, they are a baseChunk but also need to pay attention to modules
-            if (!empty($moduleFilter) && isset($data['relationships']) ) {
+            if (!empty($moduleFilter) && isset($data['relationships'])) {
                 // We only want some modules, but we want the relationships
                 foreach ($data['relationships'] as $relName => $relData) {
                     if ($relName == '_hash') {
                         continue;
                     }
-                    if (!in_array($relData['rhs_module'],$moduleFilter)
-                        && !in_array($relData['lhs_module'],$moduleFilter)) {
+                    if (!safeInArray($relData['rhs_module'], $moduleFilter)
+                        && !safeInArray($relData['lhs_module'], $moduleFilter)) {
                         unset($data['relationships'][$relName]);
-                    } else { 
+                    } else {
                         $data['relationships'][$relName]['checked'] = 1;
                     }
                 }
             }
 
             foreach ($perModuleChunks as $chunk) {
-                if (!in_array($chunk, $typeFilter)) {
+                if (!safeInArray($chunk, $typeFilter)) {
                     unset($data[$chunk]);
                 } else {
                     // We want modules, let's filter by the requested modules and by which hashes match.
                     foreach ($data[$chunk] as $modName => &$modData) {
-                        if ((!empty($moduleFilter) && !in_array($modName,$moduleFilter))
+                        if ((!empty($moduleFilter) && !safeInArray($modName, $moduleFilter))
                             || (isset($args[$chunk][$modName]) && $args[$chunk][$modName] == $modData['_hash'])) {
                             unset($data[$chunk][$modName]);
                             continue;
                         }
                     }
                 }
+            }
+
+            // reindex if there are mis-indexed arrays
+            if (is_array($data) && is_array($data['modules'] ?? false)) {
+                $data['modules'] = reindexArray($data['modules']);
             }
         }
 
@@ -377,7 +381,7 @@ class MetadataApi extends SugarApi
         $return = '';
 
         //Since this is a raw response we need to set the content type ourselves.
-        $api->getResponse()->setHeader("Content-Type", "application/json");
+        $api->getResponse()->setHeader('Content-Type', 'application/json');
 
         // Get the metadata manager we need first
         $mm = $this->getMetaDataManager($api->platform, $public);
@@ -395,7 +399,7 @@ class MetadataApi extends SugarApi
 
     /**
      * Given a platform and language, returns the public language JSON contents
-     * 
+     *
      * @param ServiceBase $api
      * @param array $args
      */
@@ -419,7 +423,7 @@ class MetadataApi extends SugarApi
         if (!$api->user->isAdmin()) {
             throw new SugarApiExceptionNotAuthorized();
         }
-        
+
         return $this->getModuleAttribute($args['module'], $args['segment'], $api->platform);
     }
 
@@ -430,7 +434,7 @@ class MetadataApi extends SugarApi
      * @param string $platform
      * @return array
      */
-    private function getModuleAttribute(string $module, string $attr, string $platform = '') : array
+    private function getModuleAttribute(string $module, string $attr, string $platform = ''): array
     {
         $data = $this->getMetaDataManager($platform)->getModuleData($module);
         return $data[$attr] ?? [];

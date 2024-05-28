@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'קובץ ייבוא נקרא בהצלחה',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'הרשומה שיובאה משתתפת בתהליך ולא ניתן לערוך אותה מאחר שחלק מהשדות נעולים לעריכה על-ידי התהליך.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'records were not imported due to error.',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'במידה והמשתמש לא קיים השתמש במשתמש הנוכחי',
     'LBL_SHOW_HIDDEN' => 'הצג שדות שבדרך כלל לא ניתן לייבא אותם',
     'LBL_UPDATE_RECORDS' => 'עדכן רישומים קיימים במקום ייבוא (אל תבטל)',
-    'LBL_TEST'=> 'ייבוא בדיקה (אל תשמור או תשנה נתונים)',
+    'LBL_TEST' => 'ייבוא בדיקה (אל תשמור או תשנה נתונים)',
     'LBL_TRUNCATE_TABLE' => 'רוקן טבלה לפני הייבוא (מחק את כל הרישומים)',
     'LBL_RELATED_ACCOUNTS' => 'אל תיצור חשבונות קשורים',
     'LBL_NO_DATECHECK' => 'דלג על בדיקת תאריך (מהיר יותר אך ייכשל במידה וכל תאריך שגוי)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'ערך מספר שלם וחיובי לא חוקי',
     'LBL_ERROR_INVALID_NUM' => 'ערך מספרי לא חוקי',
     'LBL_ERROR_INVALID_TIME' => 'זמן לא חוקי',
-    'LBL_ERROR_INVALID_EMAIL'=>'כתובת דוא"ל לא חוקית',
-    'LBL_ERROR_INVALID_BOOL'=>'ערך לא חוקי (צריך להיות 1 או 0)',
-    'LBL_ERROR_INVALID_DATE'=>'מחרוזת תאריך לא חוקית',
-    'LBL_ERROR_INVALID_USER'=>'שם משתמש או מזהה לא חוקי',
+    'LBL_ERROR_INVALID_EMAIL' => 'כתובת דוא"ל לא חוקית',
+    'LBL_ERROR_INVALID_BOOL' => 'ערך לא חוקי (צריך להיות 1 או 0)',
+    'LBL_ERROR_INVALID_DATE' => 'מחרוזת תאריך לא חוקית',
+    'LBL_ERROR_INVALID_USER' => 'שם משתמש או מזהה לא חוקי',
     'LBL_ERROR_INVALID_TEAM' => 'שם או מזהה צוות לא חוקי',
     'LBL_ERROR_INVALID_ACCOUNT' => 'שם או מזהה חשבון לא חוקי',
     'LBL_ERROR_INVALID_RELATE' => 'שדה קשר לא חוקי',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'does not exist or is not writable',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'File was not uploaded successfully. It may be that the &#39;upload_max_filesize&#39; setting in your php.ini file is set to a small number',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'הקובץ גדול מדי. מרבי:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bytes. Change $sugar_config[&#39;upload_maxsize&#39;] in config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'בתים. יש לשנות את $sugar_config[&#39;upload_maxsize&#39;] ב-config.php',
     'LBL_MODULE_NAME' => 'ייבוא',
     'LBL_MODULE_NAME_SINGULAR' => 'ייבוא',
     'LBL_TRY_AGAIN' => 'נסה שוב',
     'LBL_START_OVER' => 'התחל מחדש',
     'LBL_ERROR' => 'Error:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'קובץ הייבוא מכיל {0} שורות. מספר השורות המיטבי הוא {1}. עוד שורות עלולות להאט את תהליך הייבוא. לחץ על אישור כדי להמשיך בייבוא. לחץ על ביטול כדי לשנות ולהעלות מחדש את קובץ הייבוא.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'אתה לא יכול לייבא משתמש מנהל מערכת',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'אתה לא יכול לייבא משתמש מנהל מערכת',
     'ERR_REPORT_LOOP' => 'המערכת זיהתה לולאת דיווח. משתמש לא יכול לדווח לעצמו, וגם המנהל שלו לא יכול לדווח לו.',
     'ERR_MULTIPLE' => 'עמודות רבות הוגדרו עם אותו שם שדה.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'שדות חובה חסרים:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'There were no lines in your import file',
     'LBL_FILE_ALREADY_BEEN_OR' => 'שורת הקובץ עובדה כבר או לא קיימת',
     'LBL_SUCCESS' => 'הצלחה:',
-	'LBL_FAILURE' => 'ייבוא נכשל:',
+    'LBL_FAILURE' => 'ייבוא נכשל:',
     'LBL_SUCCESSFULLY' => 'ייבוא הסתיים בהצלחה',
     'LBL_LAST_IMPORT_UNDONE' => 'Your last import was undone',
     'LBL_NO_IMPORT_TO_UNDO' => 'לא היה ייבוא לבטל.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Import More',
     'LBL_FINISHED' => 'Return to',
     'LBL_UNDO_LAST_IMPORT' => 'Undo Last Import',
-    'LBL_LAST_IMPORTED'=>'Last Created',
+    'LBL_LAST_IMPORTED' => 'Last Created',
     'ERR_MULTIPLE_PARENTS' => 'יכול להיות מוגדר לך מזהה אב אחד בלבד',
     'LBL_DUPLICATES' => 'נמצאו כפילויות',
     'LNK_DUPLICATE_LIST' => 'הורד רשימה של כפילויות',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'הסתר הערות',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'הצג עמודות של תצוגה מקדימה',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'הסתר עמודות של תצוגה מקדימה',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'בדוק כפילויות באמצעות האופרטור:',
     'LBL_SAVE_MAPPING_AS' => 'Save Mapping As',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Single Quote (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'ציטוט כפול (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'כדי להקצות את הרישומים החדשים לצוותים שאינם הצוותים ברירת המחדל שלך, השתמש בעמוד ערך ברירת מחדל כדי לבחור צוותים אחרים.',
     'LBL_SIGN_IN_HELP' => 'כדי להפעיל שירות זה, אנא התחבר תחת לשונית החשבונות החיצוניים בתוך דף הגדרות המשתמש שלך.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Trying to handle email addresses in a Bean that doesn&#39;t support it.",
-);
+];

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Disallow users to change the service duration for products that were marked
  * as services before the lock_duration field was added.
@@ -42,7 +43,7 @@ class SugarUpgradeSetProductCatalogLockDuration extends UpgradeScript
 
                 $lineItemQuery = $this->db->getConnection()->createQueryBuilder()
                     ->update($lineItemTable)
-                    ->set('lock_duration', '(' . $ptSubquery->getSQL() .')');
+                    ->set('lock_duration', '(' . $ptSubquery->getSQL() . ')');
                 $lineItemQuery->execute();
             }
         }

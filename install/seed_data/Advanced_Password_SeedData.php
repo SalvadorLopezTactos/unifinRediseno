@@ -10,7 +10,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require('config.php');
+require 'config.php';
 global $sugar_config;
 global $timedate;
 global $mod_strings;
@@ -34,7 +34,7 @@ $EmailTemp->team_id = $Team_id;
 $EmailTemp->published = 'off';
 $EmailTemp->type = 'system';
 $EmailTemp->text_only = 0;
-$id =$EmailTemp->save();
+$id = $EmailTemp->save();
 $sugar_config['passwordsetting']['lostpasswordtmpl'] = $id;
 
 // set all other default settings
@@ -57,4 +57,4 @@ $sugar_config['portalpasswordsetting']['lostpasswordtmpl'] = $id;
 $id = Utilities::addPortalPasswordSeedData($Team_id, $mod_strings, 'resetpasswordtmpl');
 $sugar_config['portalpasswordsetting']['resetpasswordtmpl'] = $id;
 
-write_array_to_file("sugar_config", $sugar_config, "config.php");
+write_array_to_file('sugar_config', $sugar_config, 'config.php');

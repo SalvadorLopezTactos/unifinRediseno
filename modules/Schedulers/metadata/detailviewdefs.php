@@ -10,46 +10,46 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Schedulers']['DetailView'] = array(
-    'templateMeta' => array(
-                            'maxColumns' => '2',
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'),
-                                            array('label' => '10', 'field' => '30'),
-                                           ),
-                            'includes'=> array(
-                                            array('file'=>'modules/Schedulers/Schedulers.js'),
-                                         ),
-                           ),
+$viewdefs['Schedulers']['DetailView'] = [
+    'templateMeta' => [
+        'maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+        'includes' => [
+            ['file' => 'modules/Schedulers/Schedulers.js'],
+        ],
+    ],
 
-    'panels' => array(
-        'default' => array(
-            array('name', 'status'),
-            array('date_time_start',
-                array(
+    'panels' => [
+        'default' => [
+            ['name', 'status'],
+            ['date_time_start',
+                [
                     'name' => 'time_from',
-                    'customCode' => '{$fields.time_from.value|default:$MOD.LBL_ALWAYS}')),
-            array('date_time_end',
-                array(
+                    'customCode' => '{$fields.time_from.value|default:$MOD.LBL_ALWAYS}']],
+            ['date_time_end',
+                [
                     'name' => 'time_to',
-                    'customCode' => '{$fields.time_to.value|default:$MOD.LBL_ALWAYS}')),
-            array(
-                array(
+                    'customCode' => '{$fields.time_to.value|default:$MOD.LBL_ALWAYS}']],
+            [
+                [
                     'name' => 'last_run',
-                    'customCode' => '{$fields.last_run.value|default:$MOD.LBL_NEVER}'),
-                array(
-                	'name' => 'job_interval',
-                	'customCode' => '{$JOB_INTERVAL}'),
-                ),
-            array('catch_up', 'job'),
-            array(
-                array(
+                    'customCode' => '{$fields.last_run.value|default:$MOD.LBL_NEVER}'],
+                [
+                    'name' => 'job_interval',
+                    'customCode' => '{$JOB_INTERVAL}'],
+            ],
+            ['catch_up', 'job'],
+            [
+                [
                     'name' => 'date_entered',
-                    'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value|escape:"html":"UTF-8"}&nbsp;'),
-                array(
+                    'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value|escape:"html":"UTF-8"}&nbsp;'],
+                [
                     'name' => 'date_modified',
-                    'customCode' => '{$fields.date_modified.value} {$APP.LBL_BY} {$fields.modified_by_name.value|escape:"html":"UTF-8"}&nbsp;'),
-           ))
-    )
+                    'customCode' => '{$fields.date_modified.value} {$APP.LBL_BY} {$fields.modified_by_name.value|escape:"html":"UTF-8"}&nbsp;'],
+            ]],
+    ],
 
-);
+];

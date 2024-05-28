@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_ANY_EMAIL' => 'Jebkāds e-pasts:',
     'LBL_EMAIL' => 'E-pasta adrese:',
     'LBL_PRIMARY_EMAIL' => 'Primārais e-pasts',
@@ -18,7 +18,7 @@ $mod_strings = array (
     'LBL_OTHER_EMAIL_ADDRESS' => 'Cits e-pasts:',
     'LBL_EMAIL_ADDRESS' => 'E-pasta adrese',
     'LBL_EMAIL_ADDRESSES' => 'E-pasta adrese(s)',
-    'LBL_INVALID_EMAIL'=>'Nederīgs e-pasts:',
+    'LBL_INVALID_EMAIL' => 'Nederīgs e-pasts:',
     'LBL_EMAIL_OPT_OUT' => 'Atteikties no e-pastiem:',
     'LBL_EMAIL_NON_PRIMARY' => 'Nav primārais e-pasts',
-);
+];

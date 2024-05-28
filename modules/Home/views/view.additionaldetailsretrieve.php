@@ -12,8 +12,8 @@
 
 class HomeViewAdditionaldetailsretrieve extends SugarView
 {
- 	public function display()
- 	{
+    public function display()
+    {
         $retArray = [];
         global $beanList, $beanFiles, $current_user, $app_strings, $app_list_strings;
 
@@ -24,15 +24,15 @@ class HomeViewAdditionaldetailsretrieve extends SugarView
         // Bug 40216 - Add support for a custom additionalDetails.php file
         $additionalDetailsFile = $this->getAdditionalDetailsMetadataFile($moduleDir);
 
-        if(empty($id) || empty($additionalDetailsFile) ) {
-                echo 'bad data';
-                die();
+        if (empty($id) || empty($additionalDetailsFile)) {
+            echo 'bad data';
+            die();
         }
 
-        require_once($additionalDetailsFile);
+        require_once $additionalDetailsFile;
         $adFunction = 'additionalDetails' . $beanName;
 
-        if(function_exists($adFunction)) { // does the additional details function exist
+        if (function_exists($adFunction)) { // does the additional details function exist
             $json = getJSONobj();
             $bean = BeanFactory::getBean($moduleDir, $id);
 
@@ -51,7 +51,7 @@ class HomeViewAdditionaldetailsretrieve extends SugarView
             $arr = array_change_key_case($bean->toArray(), CASE_UPPER);
             $results = $adFunction($arr);
 
-            $retArray['body'] = str_replace(array("\rn", "\r", "\n"), array('','','<br />'), $results['string']);
+            $retArray['body'] = str_replace(["\rn", "\r", "\n"], ['', '', '<br />'], $results['string']);
             $retArray['caption'] = "<div style='float:left'>{$app_strings['LBL_ADDITIONAL_DETAILS']}</div><div style='float: right'>";
 
             if (!empty($_REQUEST['show_buttons'])) {
@@ -80,9 +80,9 @@ EOC;
 </a>
 EOC;
             }
-            $retArray['caption'] .= "";
+            $retArray['caption'] .= '';
             $retArray['width'] = (empty($results['width']) ? '300' : $results['width']);
-            header("Content-Type: application/json");
+            header('Content-Type: application/json');
             echo $json->encode($retArray);
         }
     }

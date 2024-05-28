@@ -11,13 +11,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['sweetspot'] = array(
-    'components' => array(
-        array(
+$viewdefs['base']['layout']['sweetspot'] = [
+    'components' => [
+        [
             'view' => 'sweetspot-searchbar',
-        ),
-        array(
+        ],
+        [
             'view' => 'sweetspot-results',
-        ),
-    ),
-);
+        ],
+    ],
+];

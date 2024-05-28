@@ -20,7 +20,7 @@ class ViewEditConvert extends SugarView
     public $parser;
     public $defs;
     // @codingStandardsIgnoreStart
-    protected $_viewdefs = array();
+    protected $_viewdefs = [];
     // @codingStandardsIgnoreEnd
 
     protected $jsonHelper;
@@ -29,19 +29,19 @@ class ViewEditConvert extends SugarView
     {
         parent::__construct();
         global $current_user;
-        if (!$current_user->isDeveloperForModule("Leads")) {
-            die("Unauthorized Access to Administration");
+        if (!$current_user->isDeveloperForModule('Leads')) {
+            die('Unauthorized Access to Administration');
         }
 
         $this->jsonHelper = getJSONobj();
-        $this->parser = new ConvertLayoutMetadataParser("Contacts");
+        $this->parser = new ConvertLayoutMetadataParser('Contacts');
 
         if (isset($_REQUEST['updateConvertDef']) && $_REQUEST['updateConvertDef'] && !empty($_REQUEST['data'])) {
             $this->parser->updateConvertDef(
                 object_to_array_recursive($this->jsonHelper->decode(html_entity_decode_utf8($_REQUEST['data'])))
             );
             // clear the cache for this module only
-            MetaDataManager::refreshModulesCache(array('Leads'));
+            MetaDataManager::refreshModulesCache(['Leads']);
         }
     }
 
@@ -62,8 +62,8 @@ class ViewEditConvert extends SugarView
             translate('LBL_LAYOUTS', 'ModuleBuilder'),
             'ModuleBuilder.getContent("module=ModuleBuilder&action=wizard&view=layouts&view_module=Leads")'
         );
-        $ajax->addCrumb(translate('LBL_CONVERTLEAD'), "");
-        $ajax->addSection('center', 'Convert Layout', $smarty->fetch("modules/Leads/tpls/EditConvertLead.tpl"));
+        $ajax->addCrumb(translate('LBL_CONVERTLEAD'), '');
+        $ajax->addSection('center', 'Convert Layout', $smarty->fetch('modules/Leads/tpls/EditConvertLead.tpl'));
 
         echo $ajax->getJavascript();
     }
@@ -72,9 +72,9 @@ class ViewEditConvert extends SugarView
     {
         $smarty = new Sugar_Smarty();
         $smarty->assign('translate', true);
-        $smarty->assign('language', "Leads");
-        $smarty->assign('view_module', "Leads");
-        $smarty->assign('module', "Leads");
+        $smarty->assign('language', 'Leads');
+        $smarty->assign('view_module', 'Leads');
+        $smarty->assign('module', 'Leads');
         $smarty->assign('helpName', 'listViewEditor');
         $smarty->assign('helpDefault', 'modify');
         $smarty->assign('title', 'Convert Layout');
@@ -91,8 +91,8 @@ class ViewEditConvert extends SugarView
             }
         }
 
-        $displayModules = array();
-        $moduleDefaults = array();
+        $displayModules = [];
+        $moduleDefaults = [];
         foreach ($relatableModules as $mod => $def) {
             if ($this->parser->isModuleAllowedInConvert($mod)) {
                 $displayModules[$mod] = translate($mod);
@@ -115,17 +115,17 @@ class ViewEditConvert extends SugarView
     {
         global $app_list_strings;
 
-        $modules = array();
+        $modules = [];
         if (!isset($this->defs)) {
             $this->defs = $this->parser->getDefForModules();
         }
         foreach ($this->defs as $def) {
             $moduleDefs = [
-                "module" => $def['module'],
-                "moduleName" => $app_list_strings['moduleList'][$def['module']],
-                "required" => $def['required'] ?? false,
-                "copyData" => $def['copyData'] ?? false,
-                "duplicateCheckOnStart" => $def['duplicateCheckOnStart'] ?? false,
+                'module' => $def['module'],
+                'moduleName' => $app_list_strings['moduleList'][$def['module']],
+                'required' => $def['required'] ?? false,
+                'copyData' => $def['copyData'] ?? false,
+                'duplicateCheckOnStart' => $def['duplicateCheckOnStart'] ?? false,
             ];
 
             if ($def['module'] === 'Opportunities') {

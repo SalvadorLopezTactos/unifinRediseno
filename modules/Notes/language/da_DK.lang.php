@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Noteliste-dashboard',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Betjeningspanel for noteoptegnelser',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Noter',
     'LBL_EXTERNAL_USER' => 'Ekstern bruger',
     'LBL_EXTERNAL_USER_NAME' => 'Ekstern bruger',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje for note',
 
     'LBL_RELATED_CONTACT' => 'Relaterede kontakt',
     'ERR_DELETE_RECORD' => 'Du skal angive et postnummer for at slette virksomheden.',
@@ -126,4 +127,4 @@ $mod_strings = array(
 - Felter mærket "Påkrævet" skal være afsluttet, før du gemmer. 
 - Klik på "Vis mere" for at eksponere yderligere felter, hvis det er nødvendigt. 
 2. Klik på "Gem" for at færdiggøre den nye post og vend tilbage til den forrige side.',
-);
+];

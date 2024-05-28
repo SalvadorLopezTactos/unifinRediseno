@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_ASSIGNED_TO_ID' => '담당자 ID',
     'LBL_ASSIGNED_TO_NAME' => '담당자:',
     'LBL_ID' => 'ID:',
@@ -52,4 +52,4 @@ $mod_strings = array(
     'LBL_UNREAD' => '읽지않음',
     'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => '당신에게 멘션한 사람:',
     'LBL_YOU_HAVE_BEEN_MENTIONED' => '멘션을 받았습니다',
-);
+];

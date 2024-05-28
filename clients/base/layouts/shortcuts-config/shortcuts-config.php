@@ -11,13 +11,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['shortcuts-config'] = array(
-    'components' => array(
-        array(
+$viewdefs['base']['layout']['shortcuts-config'] = [
+    'components' => [
+        [
             'view' => 'shortcuts-config-headerpane',
-        ),
-        array(
+        ],
+        [
             'view' => 'shortcuts-config',
-        ),
-    ),
-);
+        ],
+    ],
+];

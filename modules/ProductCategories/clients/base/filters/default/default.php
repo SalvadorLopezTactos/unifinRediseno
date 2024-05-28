@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ProductCategories']['base']['filter']['default'] = array(
+$viewdefs['ProductCategories']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'parent_name' => array(),
-        'description' => array(),
-        'tag' => array(),
-    ),
-);
+    'fields' => [
+        'name' => [],
+        'parent_name' => [],
+        'description' => [],
+        'tag' => [],
+    ],
+];

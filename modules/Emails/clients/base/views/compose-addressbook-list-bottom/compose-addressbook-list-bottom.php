@@ -9,6 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs["Emails"]["base"]["view"]["compose-addressbook-list-bottom"] = array(
+$viewdefs['Emails']['base']['view']['compose-addressbook-list-bottom'] = [
     'template' => 'list-bottom',
-);
+];

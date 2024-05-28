@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -27,7 +28,7 @@ class MethodSignatureVisitor extends ForbiddenStatementVisitor
 
     public function enterNode(Node $node)
     {
-        if (count($this->rules) === 0) {
+        if (safeCount($this->rules) === 0) {
             return;
         }
         if (!$node instanceof Node\Stmt\ClassMethod) {

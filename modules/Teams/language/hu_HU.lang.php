@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Adjon meg egy azonosítót a felhasználó felvételéhez.',
     'ERR_DUP_NAME' => 'Létező csoportnév, válasszon másikat.',
     'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót a csoport törléséhez.',
@@ -70,7 +70,7 @@ Egy modul csoport-alapú engedélyeinek tiltása visszatéríti majd minden csop
  Ugyanakkor ajánljuk a Gyors Javítás és Helyreállítás eszközöket is a rendszer gyórsítótárának tisztításához csoport-alapú tiltás után 
  az adott modulra vonatkozó engedélyek kapcsán.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Figyelmeztetés:</strong>Egy modul csoport - alapú engedélyeinek tiltása visszatéríti majd minden 
  csoport-alapú engedélyekkel társult adatát a modulnak, beleértve a folyamat mehatározásokat és az adott funkciót használó folyamatokat is. Ez 
@@ -79,7 +79,7 @@ STR
  csoport-alapú tiltás után 
  az adott modulra vonatkozó engedélyek kapcsán.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Egy modul csoport-alapú engedélyeinek tiltása visszatéríti majd minden csoport-alapú engedélyekkel társult adatát a 
  modulnak, beleértve a folyamat mehatározásokat és az adott funkciót használó folyamatokat is. Ez magába foglalja a Szerepeket is, melyek a
@@ -88,7 +88,7 @@ Egy modul csoport-alapú engedélyeinek tiltása visszatéríti majd minden csop
  az adott modulra vonatkozó engedélyek kapcsán. Hogyha nem tud hozzáférni a Gyors Javításhoz és Helyreállításhoz, lépjen kapcsolatba a rendszergazdával
  melyhez a Javítás menüben férhez hozzá.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Figyelmeztetés:</strong>Egy modul csoport - alapú engedélyeinek tiltása visszatéríti majd minden 
  csoport-alapú engedélyekkel társult adatát a modulnak, beleértve a folyamat mehatározásokat és az adott funkciót használó folyamatokat is. Ez 
@@ -97,5 +97,5 @@ STR
  csoport-alapú tiltás után az adott modulra vonatkozó engedélyek kapcsán. Hogyha nem tud hozzáférni a Gyors Javításhoz és Helyreállításhoz, lépjen kapcsolatba a rendszergazdával
  melyhez a Javítás menüben férhez hozzá.
 STR
-,
-);
+    ,
+];

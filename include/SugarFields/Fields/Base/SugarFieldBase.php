@@ -19,7 +19,8 @@
  * @property Sugar_Smarty $ss
  */
 #[AllowDynamicProperties]
-class SugarFieldBase {
+class SugarFieldBase
+{
     /**
      * A simple error property to be accessed by calling code for child object
      * methods that process data rather than just manipulate it (like SugarFieldFile
@@ -30,7 +31,7 @@ class SugarFieldBase {
     public $error;
     public $hasButton = false;
 
-    protected static $base = array();
+    protected static $base = [];
 
     protected $needsSecondaryQuery = false;
 
@@ -46,13 +47,13 @@ class SugarFieldBase {
      *
      * @var array
      */
-    protected $options = array();
+    protected $options = [];
 
     protected $type;
 
     public function __construct($type)
     {
-    	$this->type = $type;
+        $this->type = $type;
     }
 
     public function __get($name)
@@ -70,7 +71,8 @@ class SugarFieldBase {
      *
      * @param $options
      */
-    public function setOptions($options) {
+    public function setOptions($options)
+    {
         $this->options = $options;
     }
 
@@ -84,22 +86,21 @@ class SugarFieldBase {
         $this->module = $module;
     }
 
-    function fetch($path)
+    public function fetch($path)
     {
-    	$additional = '';
-    	if(!$this->hasButton && !empty($this->button)){
-    		$additional .= '<input type="button" class="button" ' . $this->button . '>';
-    	}
-        if(!empty($this->buttons)){
-            foreach($this->buttons as $v){
+        $additional = '';
+        if (!$this->hasButton && !empty($this->button)) {
+            $additional .= '<input type="button" class="button" ' . $this->button . '>';
+        }
+        if (!empty($this->buttons)) {
+            foreach ($this->buttons as $v) {
                 $additional .= ' <input type="button" class="button" ' . $v . '>';
             }
-
         }
-        if(!empty($this->image)){
+        if (!empty($this->image)) {
             $additional .= ' <img ' . $this->image . '>';
         }
-    	return $this->ss->fetch($path) . $additional;
+        return $this->ss->fetch($path) . $additional;
     }
 
     /**
@@ -109,12 +110,12 @@ class SugarFieldBase {
      */
     protected function getBase($view)
     {
-        if(!isset(self::$base[$view])) {
-            if(!empty($GLOBALS['current_language'])) {
-            	self::$base[$view] = SugarAutoLoader::existingCustomOne("include/SugarFields/Fields/Base/{$GLOBALS['current_language']}.$view.tpl");
+        if (!isset(self::$base[$view])) {
+            if (!empty($GLOBALS['current_language'])) {
+                self::$base[$view] = SugarAutoLoader::existingCustomOne("include/SugarFields/Fields/Base/{$GLOBALS['current_language']}.$view.tpl");
             }
-            if(empty(self::$base[$view])) {
-            	self::$base[$view] = SugarAutoLoader::existingCustomOne("include/SugarFields/Fields/Base/$view.tpl");
+            if (empty(self::$base[$view])) {
+                self::$base[$view] = SugarAutoLoader::existingCustomOne("include/SugarFields/Fields/Base/$view.tpl");
             }
         }
         return self::$base[$view];
@@ -122,17 +123,17 @@ class SugarFieldBase {
 
     protected function findTemplate($view, $formName = '')
     {
-        static $tplCache = array();
+        static $tplCache = [];
 
-        if ( isset($tplCache[$this->type][$view]) ) {
+        if (isset($tplCache[$this->type][$view])) {
             return $tplCache[$this->type][$view];
         }
 
         if (isset($this->formTemplateMap[$formName])) {
-            $classList = array($this->formTemplateMap[$formName]);
+            $classList = [$this->formTemplateMap[$formName]];
         } else {
             $lastClass = get_class($this);
-            $classList = array($this->type, str_replace('SugarField', '', $lastClass));
+            $classList = [$this->type, str_replace('SugarField', '', $lastClass)];
             while ($lastClass = get_parent_class($lastClass)) {
                 $classList[] = str_replace('SugarField', '', $lastClass);
             }
@@ -141,19 +142,19 @@ class SugarFieldBase {
 
         $tplName = '';
         global $current_language;
-        foreach ( $classList as $className ) {
-            if(isset($current_language)) {
-                $tplName = SugarAutoLoader::existingCustomOne('include/SugarFields/Fields/'. $className .'/'. $current_language . '.' . $view .'.tpl');
+        foreach ($classList as $className) {
+            if (isset($current_language)) {
+                $tplName = SugarAutoLoader::existingCustomOne('include/SugarFields/Fields/' . $className . '/' . $current_language . '.' . $view . '.tpl');
                 if ($tplName) {
                     break;
                 }
             }
-            $tplName = SugarAutoLoader::existingCustomOne('include/SugarFields/Fields/'. $className .'/'. $view .'.tpl');
+            $tplName = SugarAutoLoader::existingCustomOne('include/SugarFields/Fields/' . $className . '/' . $view . '.tpl');
             if ($tplName) {
                 break;
             }
         }
-        if(empty($tplName)) {
+        if (empty($tplName)) {
             $tplName = $this->getBase($view);
         }
 
@@ -162,7 +163,8 @@ class SugarFieldBase {
         return $tplName;
     }
 
-    public function formatField($rawField, $vardef){
+    public function formatField($rawField, $vardef)
+    {
         // The base field doesn't do any formatting, so override it in subclasses for more specific actions
         return $rawField;
     }
@@ -170,23 +172,24 @@ class SugarFieldBase {
     /**
      * Formats a field for the Sugar API
      *
-     * @param array     $data
+     * @param array $data
      * @param SugarBean $bean
-     * @param array     $args
-     * @param string    $fieldName
-     * @param array     $properties
-     * @param array     $fieldList
+     * @param array $args
+     * @param string $fieldName
+     * @param array $properties
+     * @param array $fieldList
      * @param ServiceBase $service
      */
     public function apiFormatField(
-        array &$data,
-        SugarBean $bean,
-        array $args,
+        array       &$data,
+        SugarBean   $bean,
+        array       $args,
         $fieldName,
         $properties,
-        array $fieldList = null,
+        array       $fieldList = null,
         ServiceBase $service = null
     ) {
+
         $this->ensureApiFormatFieldArguments($fieldList, $service);
 
         if (isset($bean->$fieldName)) {
@@ -207,13 +210,14 @@ class SugarFieldBase {
      * @param ServiceBase $service REST API service.
      */
     public function processAdditionalAcls(
-        array &$data,
-        SugarBean $bean,
-        string $fieldName,
-        string $action,
-        array $fieldDef,
+        array       &$data,
+        SugarBean   $bean,
+        string      $fieldName,
+        string      $action,
+        array       $fieldDef,
         ServiceBase $service = null
     ) {
+
         // nothing to do for most fields
     }
 
@@ -236,41 +240,40 @@ class SugarFieldBase {
 
     public function getWirelessSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex, $view)
     {
-    	$this->setup($parentFieldArray, $vardef, $displayParams, $tabindex, false);
+        $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex, false);
         return $this->fetch($this->findTemplate($view));
     }
 
-    public function unformatField($formattedField, $vardef){
+    public function unformatField($formattedField, $vardef)
+    {
         // The base field doesn't do any formatting, so override it in subclasses for more specific actions
         return $formattedField;
     }
 
     public function getSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex, $view)
     {
-    	$this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
+        $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
 
         $formName = $displayParams['formName'] ?? '';
         return $this->fetch($this->findTemplate($view, $formName));
     }
 
-    function getListViewSmarty($parentFieldArray, $vardef, $displayParams, $col) {
+    public function getListViewSmarty($parentFieldArray, $vardef, $displayParams, $col)
+    {
         $tabindex = 1;
         //fixing bug #46666: don't need to format enum and radioenum fields
         //because they are already formated in SugarBean.php in the function get_list_view_array() as fix of bug #21672
-        if ($this->type != 'Enum' && $this->type != 'Radioenum')
-        {
+        if ($this->type != 'Enum' && $this->type != 'Radioenum') {
             $parentFieldArray = $this->setupFieldArray($parentFieldArray, $vardef);
-        }
-		else
-        {
-        	$vardef['name'] = strtoupper($vardef['name']);
+        } else {
+            $vardef['name'] = strtoupper($vardef['name']);
         }
 
-    	$this->setup($parentFieldArray, $vardef, $displayParams, $tabindex, false);
+        $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex, false);
 
         $this->ss->left_delimiter = '{';
         $this->ss->right_delimiter = '}';
-        $this->ss->assign('col',$vardef['name']);
+        $this->ss->assign('col', $vardef['name']);
 
         return $this->fetch($this->findTemplate('ListView'));
     }
@@ -285,16 +288,19 @@ class SugarFieldBase {
      *      * labelSpan - column span for the label
      *      * fieldSpan - column span for the field
      */
-    function getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
+    public function getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
         return $this->getSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex, 'DetailView');
     }
 
- 	// 99% of all fields will just format like a listview, but just in case, it's here to override
-    function getChangeLogSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
-        return $this->formatField($parentFieldArray[$vardef['name']],$vardef);
+    // 99% of all fields will just format like a listview, but just in case, it's here to override
+    public function getChangeLogSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
+        return $this->formatField($parentFieldArray[$vardef['name']], $vardef);
     }
 
-    function getWirelessDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
+    public function getWirelessDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
         return $this->getWirelessSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex, 'WirelessDetailView');
     }
 
@@ -305,62 +311,71 @@ class SugarFieldBase {
      * @param $tabindex
      * @return string
      */
-    function getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
-    	if(!empty($vardef['function']['returns']) && $vardef['function']['returns'] == 'html'){
-    		$type = $this->type;
-    		$this->type = 'Base';
-    		$result= $this->getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
-    		$this->type = $type;
-    		return $result;
-    	}
-    	// jpereira@dri - #Bug49513 - Readonly type not working as expected
-	// If readonly is set in displayParams, the vardef will be displayed as in DetailView.
-	if (isset($displayParams['readonly']) && $displayParams['readonly']) {
-		return $this->getSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex, 'DetailView');
-	}
-	// ~ jpereira@dri - #Bug49513 - Readonly type not working as expected
-       return $this->getSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex, 'EditView');
+    public function getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
+        if (!empty($vardef['function']['returns']) && $vardef['function']['returns'] == 'html') {
+            $type = $this->type;
+            $this->type = 'Base';
+            $result = $this->getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
+            $this->type = $type;
+            return $result;
+        }
+        // jpereira@dri - #Bug49513 - Readonly type not working as expected
+        // If readonly is set in displayParams, the vardef will be displayed as in DetailView.
+        if (isset($displayParams['readonly']) && $displayParams['readonly']) {
+            return $this->getSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex, 'DetailView');
+        }
+        // ~ jpereira@dri - #Bug49513 - Readonly type not working as expected
+        return $this->getSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex, 'EditView');
     }
 
-    function getImportViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    public function getImportViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
     {
         return $this->getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
     }
 
-    function getWirelessEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
-    	if(!empty($vardef['function']['returns']) && $vardef['function']['returns'] == 'html'){
-    		$type = $this->type;
-    		$this->type = 'Base';
-    		$result= $this->getWirelessDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
-    		$this->type = $type;
-    		return $result;
-    	}
+    public function getWirelessEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
+        if (!empty($vardef['function']['returns']) && $vardef['function']['returns'] == 'html') {
+            $type = $this->type;
+            $this->type = 'Base';
+            $result = $this->getWirelessDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
+            $this->type = $type;
+            return $result;
+        }
 
-       	return $this->getWirelessSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex, 'WirelessEditView');
+        return $this->getWirelessSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex, 'WirelessEditView');
     }
 
-    function getWirelessListViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
-        $vardef['name'] = $vardef['name'].'_advanced';
+    public function getWirelessListViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
+        $vardef['name'] = $vardef['name'] . '_advanced';
         return $this->getWirelessEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
     }
 
 
-    function getSearchViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
-		if(!empty($vardef['auto_increment']))$vardef['len']=255;
-    	return $this->getSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex, 'EditView');
+    public function getSearchViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
+        if (!empty($vardef['auto_increment'])) {
+            $vardef['len'] = 255;
+        }
+        return $this->getSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex, 'EditView');
     }
 
-    function getPopupViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex){
-    	 if (is_array($displayParams) && !isset($displayParams['formName']))
-		     $displayParams['formName'] = 'popup_query_form';
-	     else if (empty($displayParams))
-		     $displayParams = array('formName' => 'popup_query_form');
-		 return $this->getSearchViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
+    public function getPopupViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
+        if (is_array($displayParams) && !isset($displayParams['formName'])) {
+            $displayParams['formName'] = 'popup_query_form';
+        } elseif (empty($displayParams)) {
+            $displayParams = ['formName' => 'popup_query_form'];
+        }
+        return $this->getSearchViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
     }
 
-    public function getEmailTemplateValue($inputField, $vardef, $context = null){
+    public function getEmailTemplateValue($inputField, $vardef, $context = null)
+    {
         // This does not return a smarty section, instead it returns a direct value
-        return $this->formatField($inputField,$vardef);
+        return $this->formatField($inputField, $vardef);
     }
 
     /**
@@ -376,7 +391,7 @@ class SugarFieldBase {
     public function displayFromFunc($displayType, $parentFieldArray, $vardef, $displayParams, $tabindex = 0)
     {
 
-        if ( ! is_array($vardef['function']) ) {
+        if (!is_array($vardef['function'])) {
             $funcName = $vardef['function'];
             $includeFile = '';
             $onListView = false;
@@ -389,64 +404,65 @@ class SugarFieldBase {
         } else {
             $funcName = $vardef['function']['name'];
             $includeFile = '';
-            if ( isset($vardef['function']['include']) ) {
+            if (isset($vardef['function']['include'])) {
                 $includeFile = $vardef['function']['include'];
             }
-            if ( isset($vardef['function']['onListView']) && $vardef['function']['onListView'] == true ) {
+            if (isset($vardef['function']['onListView']) && $vardef['function']['onListView'] == true) {
                 $onListView = true;
             } else {
                 $onListView = false;
             }
-            if ( isset($vardef['function']['returns']) && $vardef['function']['returns'] == 'html' ) {
+            if (isset($vardef['function']['returns']) && $vardef['function']['returns'] == 'html') {
                 $returnsHtml = true;
             } else {
                 $returnsHtml = false;
             }
         }
 
-        if ( $displayType == 'ListView'
-                || $displayType == 'popupView'
-                || $displayType == 'searchView'
-                || $displayType == 'wirelessEditView'
-                || $displayType == 'wirelessDetailView'
-                || $displayType == 'wirelessListView'
-                ) {
+        if ($displayType == 'ListView'
+            || $displayType == 'popupView'
+            || $displayType == 'searchView'
+            || $displayType == 'wirelessEditView'
+            || $displayType == 'wirelessDetailView'
+            || $displayType == 'wirelessListView'
+        ) {
             // Traditionally, before 6.0, additional functions were never called, so this code doesn't get called unless the vardef forces it
-            if ( $onListView ) {
-                if ( !empty($includeFile) ) {
-                    require_once($includeFile);
+            if ($onListView) {
+                if (!empty($includeFile)) {
+                    require_once $includeFile;
                 }
 
                 return $funcName($parentFieldArray, $vardef['name'], $parentFieldArray[strtoupper($vardef['name'])], $displayType);
             } else {
-                $displayTypeFunc = 'get'.$displayType.'Smarty';
+                $displayTypeFunc = 'get' . $displayType . 'Smarty';
                 return $this->$displayTypeFunc($parentFieldArray, $vardef, $displayParams, $tabindex);
             }
         } else {
-            if ( !empty($displayParams['idName']) ) {
+            if (!empty($displayParams['idName'])) {
                 $fieldName = $displayParams['idName'];
             } else {
                 $fieldName = $vardef['name'];
             }
-            if ( $returnsHtml ) {
+            if ($returnsHtml) {
                 $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
-                $tpl = $this->findTemplate($displayType.'Function');
-                if ( $tpl == '' ) {
+                $tpl = $this->findTemplate($displayType . 'Function');
+                if ($tpl == '') {
                     // Didn't find the wireless version, try the non-wireless version.
-                    $tpl = $this->findTemplate(str_replace('wireless','',$displayType));
+                    $tpl = $this->findTemplate(str_replace('wireless', '', $displayType));
                 }
-                if ( $tpl == '' ) {
+                if ($tpl == '') {
                     // Can't find a function template, just use the base
                     $tpl = $this->findTemplate('DetailViewFunction');
                 }
                 return "<span id='{$vardef['name']}_span'>" . $this->fetch($tpl) . '</span>';
             } else {
-                return '{sugar_run_helper include="'.$includeFile.'" func="'.$funcName.'" bean=$bean field="'.$fieldName.'" value=$fields.'.$fieldName.'.value displayType="'.$displayType.'"}';
+                return '{sugar_run_helper include="' . $includeFile . '" func="' . $funcName . '" bean=$bean field="' . $fieldName . '" value=$fields.' . $fieldName . '.value displayType="' . $displayType . '"}';
             }
         }
     }
 
-    function getEditView() {
+    public function getEditView()
+    {
     }
 
     /**
@@ -458,7 +474,8 @@ class SugarFieldBase {
      * @param $value Mixed value being searched on
      * @return Mixed the value for the where clause used in search
      */
-    function getSearchWhereValue($value) {
+    public function getSearchWhereValue($value)
+    {
         return $value;
     }
 
@@ -472,38 +489,36 @@ class SugarFieldBase {
      * @param $args Mixed value containing haystack to search for value in
      * @return $value Mixed value that the SugarField should return
      */
-    function getSearchInput($key='', $args=array())
+    public function getSearchInput($key = '', $args = [])
     {
-    	//Nothing specified return empty string
-    	if(empty($key) || empty($args))
-    	{
-    		return '';
-    	}
+        //Nothing specified return empty string
+        if (empty($key) || empty($args)) {
+            return '';
+        }
 
         return $args[$key] ?? '';
     }
 
-    function getQueryLike() {
-
+    public function getQueryLike()
+    {
     }
 
-    function getQueryIn() {
+    public function getQueryIn()
+    {
     }
 
     /**
      * Setup function to assign values to the smarty template, should be called before every display function
      */
-    function setup($parentFieldArray, $vardef, $displayParams, $tabindex, $twopass=true) {
-    	$this->button = '';
-    	$this->buttons = '';
-    	$this->image = '';
-        if ($twopass)
-        {
+    public function setup($parentFieldArray, $vardef, $displayParams, $tabindex, $twopass = true)
+    {
+        $this->button = '';
+        $this->buttons = '';
+        $this->image = '';
+        if ($twopass) {
             $this->ss->left_delimiter = '{{';
             $this->ss->right_delimiter = '}}';
-        }
-        else
-        {
+        } else {
             $this->ss->left_delimiter = '{';
             $this->ss->right_delimiter = '}';
         }
@@ -513,90 +528,89 @@ class SugarFieldBase {
 
         //for adding attributes to the field
 
-        if(!empty($displayParams['field'])){
-        	$plusField = '';
-        	foreach($displayParams['field'] as $key=>$value){
-        		$plusField .= ' ' . $key . '="' . $value . '"';//bug 27381
-        	}
-        	$displayParams['field'] = $plusField;
+        if (!empty($displayParams['field'])) {
+            $plusField = '';
+            foreach ($displayParams['field'] as $key => $value) {
+                $plusField .= ' ' . $key . '="' . $value . '"';//bug 27381
+            }
+            $displayParams['field'] = $plusField;
         }
         //for adding attributes to the button
-    	if(!empty($displayParams['button'])){
-        	$plusField = '';
-        	foreach($displayParams['button'] as $key=>$value){
-        		$plusField .= ' ' . $key . '="' . $value . '"';
-        	}
-        	$displayParams['button'] = $plusField;
-        	$this->button = $displayParams['button'];
-        }
-        if(!empty($displayParams['buttons'])){
+        if (!empty($displayParams['button'])) {
             $plusField = '';
-            foreach($displayParams['buttons'] as $keys=>$values){
-                foreach($values as $key=>$value){
+            foreach ($displayParams['button'] as $key => $value) {
+                $plusField .= ' ' . $key . '="' . $value . '"';
+            }
+            $displayParams['button'] = $plusField;
+            $this->button = $displayParams['button'];
+        }
+        if (!empty($displayParams['buttons'])) {
+            $plusField = '';
+            foreach ($displayParams['buttons'] as $keys => $values) {
+                foreach ($values as $key => $value) {
                     $plusField[$keys] .= ' ' . $key . '="' . $value . '"';
                 }
             }
             $displayParams['buttons'] = $plusField;
             $this->buttons = $displayParams['buttons'];
         }
-        if(!empty($displayParams['image'])){
+        if (!empty($displayParams['image'])) {
             $plusField = '';
-            foreach($displayParams['image'] as $key=>$value){
+            foreach ($displayParams['image'] as $key => $value) {
                 $plusField .= ' ' . $key . '="' . $value . '"';
             }
             $displayParams['image'] = $plusField;
             $this->image = $displayParams['image'];
         }
         $this->ss->assign('displayParams', $displayParams);
-
-
     }
 
-    protected function getAccessKey($vardef, $fieldType = null, $module = null) {
+    protected function getAccessKey($vardef, $fieldType = null, $module = null)
+    {
         global $app_strings;
 
-        $labelList = array(
-            'accessKey' => array(),
-            'accessKeySelect' => array(),
-            'accessKeyClear' => array(),
-        );
+        $labelList = [
+            'accessKey' => [],
+            'accessKeySelect' => [],
+            'accessKeyClear' => [],
+        ];
 
         // Labels are always in uppercase
-        if ( isset($fieldType) ) {
+        if (isset($fieldType)) {
             $fieldType = strtoupper($fieldType);
         }
 
-        if ( isset($module) ) {
+        if (isset($module)) {
             $module = strtoupper($module);
         }
 
         // The vardef is the most specific, then the module + fieldType, then the module, then the fieldType
-        if ( isset($vardef['accessKey']) ) {
+        if (isset($vardef['accessKey'])) {
             $labelList['accessKey'][] = $vardef['accessKey'];
         }
-        if ( isset($vardef['accessKeySelect']) ) {
+        if (isset($vardef['accessKeySelect'])) {
             $labelList['accessKeySelect'][] = $vardef['accessKeySelect'];
         }
-        if ( isset($vardef['accessKeyClear']) ) {
+        if (isset($vardef['accessKeyClear'])) {
             $labelList['accessKeyClear'][] = $vardef['accessKeyClear'];
         }
 
-        if ( isset($fieldType) && isset($module) ) {
-            $labelList['accessKey'][] = 'LBL_ACCESSKEY_'.$fieldType.'_'.$module;
-            $labelList['accessKeySelect'][] = 'LBL_ACCESSKEY_SELECT_'.$fieldType.'_'.$module;
-            $labelList['accessKeyClear'][] = 'LBL_ACCESSKEY_CLEAR_'.$fieldType.'_'.$module;
+        if (isset($fieldType) && isset($module)) {
+            $labelList['accessKey'][] = 'LBL_ACCESSKEY_' . $fieldType . '_' . $module;
+            $labelList['accessKeySelect'][] = 'LBL_ACCESSKEY_SELECT_' . $fieldType . '_' . $module;
+            $labelList['accessKeyClear'][] = 'LBL_ACCESSKEY_CLEAR_' . $fieldType . '_' . $module;
         }
 
-        if ( isset($module) ) {
-            $labelList['accessKey'][] = 'LBL_ACCESSKEY_'.$module;
-            $labelList['accessKeySelect'][] = 'LBL_ACCESSKEY_SELECT_'.$module;
-            $labelList['accessKeyClear'][] = 'LBL_ACCESSKEY_CLEAR_'.$module;
+        if (isset($module)) {
+            $labelList['accessKey'][] = 'LBL_ACCESSKEY_' . $module;
+            $labelList['accessKeySelect'][] = 'LBL_ACCESSKEY_SELECT_' . $module;
+            $labelList['accessKeyClear'][] = 'LBL_ACCESSKEY_CLEAR_' . $module;
         }
 
-        if ( isset($fieldType) ) {
-            $labelList['accessKey'][] = 'LBL_ACCESSKEY_'.$fieldType;
-            $labelList['accessKeySelect'][] = 'LBL_ACCESSKEY_SELECT_'.$fieldType;
-            $labelList['accessKeyClear'][] = 'LBL_ACCESSKEY_CLEAR_'.$fieldType;
+        if (isset($fieldType)) {
+            $labelList['accessKey'][] = 'LBL_ACCESSKEY_' . $fieldType;
+            $labelList['accessKeySelect'][] = 'LBL_ACCESSKEY_SELECT_' . $fieldType;
+            $labelList['accessKeyClear'][] = 'LBL_ACCESSKEY_CLEAR_' . $fieldType;
         }
 
         // Attach the defaults to the ends
@@ -606,8 +620,8 @@ class SugarFieldBase {
 
         // Figure out the label and the key for the button.
         // Later on we may attempt to make sure there are no two buttons with the same keys, but for now we will just use whatever is specified.
-        $keyTypes = array('accessKey','accessKeySelect','accessKeyClear');
-        $accessKeyList = array(
+        $keyTypes = ['accessKey', 'accessKeySelect', 'accessKeyClear'];
+        $accessKeyList = [
             'accessKey' => '',
             'accessKeyLabel' => '',
             'accessKeyTitle' => '',
@@ -617,13 +631,13 @@ class SugarFieldBase {
             'accessKeyClear' => '',
             'accessKeyClearLabel' => '',
             'accessKeyClearTitle' => '',
-        );
-        foreach( $keyTypes as $type ) {
-            foreach ( $labelList[$type] as $tryThis ) {
-                if ( isset($app_strings[$tryThis.'_KEY']) && isset($app_strings[$tryThis.'_TITLE']) && isset($app_strings[$tryThis.'_LABEL']) ) {
-                    $accessKeyList[$type] = $tryThis.'_KEY';
-                    $accessKeyList[$type.'Title'] = $tryThis.'_TITLE';
-                    $accessKeyList[$type.'Label'] = $tryThis.'_LABEL';
+        ];
+        foreach ($keyTypes as $type) {
+            foreach ($labelList[$type] as $tryThis) {
+                if (isset($app_strings[$tryThis . '_KEY']) && isset($app_strings[$tryThis . '_TITLE']) && isset($app_strings[$tryThis . '_LABEL'])) {
+                    $accessKeyList[$type] = $tryThis . '_KEY';
+                    $accessKeyList[$type . 'Title'] = $tryThis . '_TITLE';
+                    $accessKeyList[$type . 'Label'] = $tryThis . '_LABEL';
                     break;
                 }
             }
@@ -632,19 +646,20 @@ class SugarFieldBase {
         return $accessKeyList;
     }
 
-	/**
+    /**
      * This should be called when the bean is saved. The bean itself will be passed by reference
      * @param SugarBean bean - the bean performing the save
      * @param array params - an array of paramester relevant to the save, most likely will be $_REQUEST
      * @param string $field - The name of the field to save (the vardef name, not the form element name)
      * @param array $properties - Any properties for this field
      */
-    public function save($bean, $params, $field, $properties, $prefix = '') {
-        if (isset($params[$prefix.$field])) {
+    public function save($bean, $params, $field, $properties, $prefix = '')
+    {
+        if (isset($params[$prefix . $field])) {
             if (isset($properties['len']) && isset($properties['type']) && $this->isTrimmable($properties['type'])) {
-                $bean->$field = trim($this->unformatField($params[$prefix.$field], $properties));
+                $bean->$field = trim($this->unformatField($params[$prefix . $field], $properties));
             } else {
-                $bean->$field = $this->unformatField($params[$prefix.$field], $properties);
+                $bean->$field = $this->unformatField($params[$prefix . $field], $properties);
             }
         }
     }
@@ -682,7 +697,7 @@ class SugarFieldBase {
      * @param array $properties
      * @return boolean
      */
-    public function apiValidate(SugarBean $bean, array $params, $field, $properties) 
+    public function apiValidate(SugarBean $bean, array $params, $field, $properties)
     {
         return true;
     }
@@ -695,19 +710,21 @@ class SugarFieldBase {
      * @param string $field - The name of the field to save (the vardef name, not the form element name)
      * @param array $properties - Any properties for this field
      */
-    public function apiMassUpdate(SugarBean $bean, array $params, $field, $properties) {
+    public function apiMassUpdate(SugarBean $bean, array $params, $field, $properties)
+    {
         return $this->apiSave($bean, $params, $field, $properties);
     }
 
-     /**
-      * Check if the field is allowed to be trimmed
-      *
-      * @param string $type
-      * @return boolean
-      */
-     protected function isTrimmable($type) {
-         return in_array($type, array('varchar', 'name'));
-     }
+    /**
+     * Check if the field is allowed to be trimmed
+     *
+     * @param string $type
+     * @return boolean
+     */
+    protected function isTrimmable($type)
+    {
+        return in_array($type, ['varchar', 'name']);
+    }
 
     /**
      * Handles import field sanitizing for an field type
@@ -723,9 +740,10 @@ class SugarFieldBase {
         $vardef,
         $focus,
         ImportFieldSanitize $settings
-        )
-    {
-        if( isset($vardef['len']) ) {
+    ) {
+
+
+        if (isset($vardef['len'])) {
             // check for field length
             $value = sugar_substr($value, $vardef['len']);
         }
@@ -743,7 +761,7 @@ class SugarFieldBase {
      *
      * @return string sanitized value
      */
-    public function exportSanitize($value, $vardef, $focus, $row=array())
+    public function exportSanitize($value, $vardef, $focus, $row = [])
     {
         return $value;
     }
@@ -756,7 +774,7 @@ class SugarFieldBase {
      */
     protected function isRangeSearchView($vardef)
     {
-     	return !empty($vardef['enable_range_search']) && !empty($_REQUEST['action']) && $_REQUEST['action']!='Popup';
+        return !empty($vardef['enable_range_search']) && !empty($_REQUEST['action']) && $_REQUEST['action'] != 'Popup';
     }
 
     /**
@@ -764,27 +782,24 @@ class SugarFieldBase {
      * This method takes the $parentFieldArray mixed variable which may be an Array or object and attempts
      * to call any custom fieldSpecific formatting to the value depending on the field type.
      *
+     * @param mixed $parentFieldArray Array or Object of data where the field's value comes from
+     * @param array $vardef The vardef entry linked to the SugarField instance
+     * @return  array   $parentFieldArray The formatted $parentFieldArray with the formatField method possibly applied
      * @see SugarFieldEnum.php, SugarFieldInt.php, SugarFieldFloat.php, SugarFieldRelate.php
-     * @param	mixed	$parentFieldArray Array or Object of data where the field's value comes from
-     * @param	array	$vardef The vardef entry linked to the SugarField instance
-     * @return	array   $parentFieldArray The formatted $parentFieldArray with the formatField method possibly applied
      */
     protected function setupFieldArray($parentFieldArray, $vardef)
     {
         $fieldName = $vardef['name'];
-        if ( is_array($parentFieldArray) )
-        {
+        if (is_array($parentFieldArray)) {
             $fieldNameUpper = strtoupper($fieldName);
-            if ( isset($parentFieldArray[$fieldNameUpper]))
-            {
-                $parentFieldArray[$fieldName] = $this->formatField($parentFieldArray[$fieldNameUpper],$vardef);
+            if (isset($parentFieldArray[$fieldNameUpper])) {
+                $parentFieldArray[$fieldName] = $this->formatField($parentFieldArray[$fieldNameUpper], $vardef);
             } else {
                 $parentFieldArray[$fieldName] = '';
             }
         } elseif (is_object($parentFieldArray)) {
-            if ( isset($parentFieldArray->$fieldName) )
-            {
-                $parentFieldArray->$fieldName = $this->formatField($parentFieldArray->$fieldName,$vardef);
+            if (isset($parentFieldArray->$fieldName)) {
+                $parentFieldArray->$fieldName = $this->formatField($parentFieldArray->$fieldName, $vardef);
             } else {
                 $parentFieldArray->$fieldName = '';
             }
@@ -800,7 +815,8 @@ class SugarFieldBase {
      * @param array $defs Full vardefs for the same module
      * @return array A transformed vardef with normalizations applied
      */
-    public function getNormalizedDefs($vardef, $defs) {
+    public function getNormalizedDefs($vardef, $defs)
+    {
         // Bug 57802 - REST API Metadata: vardef len property must be number, not string
         // Some vardefs set len and size as strings. Custom fields do the same
         // so clean that up here before the metadata is returned.
@@ -848,7 +864,8 @@ class SugarFieldBase {
      * @param mixed $value The value to normalize
      * @return string
      */
-    public function normalizeDefaultValue($value) {
+    public function normalizeDefaultValue($value)
+    {
         return $value;
     }
 
@@ -858,7 +875,8 @@ class SugarFieldBase {
      * @param mixed $value
      * @return int|null
      */
-    public function normalizeNumeric($value) {
+    public function normalizeNumeric($value)
+    {
         if (is_numeric($value)) {
             return intval($value);
         }
@@ -866,14 +884,15 @@ class SugarFieldBase {
         return null;
     }
 
-    public function normalizeBoolean($value) {
+    public function normalizeBoolean($value)
+    {
         // If the value is already boolean, send it back
         if ($value === true || $value === false) {
             return $value;
         }
 
         // Check against known values of booleans
-        $bools = array(
+        $bools = [
             0 => false,
             '0' => false,
             'no' => false,
@@ -884,7 +903,7 @@ class SugarFieldBase {
             'yes' => true,
             'on' => true,
             'true' => true,
-        );
+        ];
 
         if (isset($bools[$value])) {
             return $bools[$value];
@@ -911,10 +930,10 @@ class SugarFieldBase {
      * method to use. apiUnformat() is being deprecated and continued to be used by the endpoints
      * to avoid breaking any code that extends it.
      *
-     * @deprecated
-     * @see apiUnformatField()
      * @param $value - the value that needs unformatted
      * @return string - the unformatted value
+     * @deprecated
+     * @see apiUnformatField()
      */
     public function apiUnformat($value)
     {
@@ -988,12 +1007,14 @@ class SugarFieldBase {
      * @param callable $callback Iterator callback
      */
     public function iterateViewField(
-        ViewIterator $iterator,
-        array $field,
-        /* callable */ $callback
+        ViewIterator   $iterator,
+        array          $field,
+        /* callable */
+        $callback
     ) {
-        $fieldSetAttributes = array('fields', 'related_fields');
-        $fieldSets = array();
+
+        $fieldSetAttributes = ['fields', 'related_fields'];
+        $fieldSets = [];
         foreach ($fieldSetAttributes as $attribute) {
             if (isset($field[$attribute]) && is_array($field[$attribute])) {
                 $fieldSets[] = $field[$attribute];
@@ -1023,7 +1044,7 @@ class SugarFieldBase {
             return false;
         }
 
-        return in_array($fieldName, $bean->erased_fields);
+        return safeInArray($fieldName, $bean->erased_fields);
     }
 
     /**
@@ -1041,7 +1062,7 @@ class SugarFieldBase {
 
             if ($maxSize > 0) {
                 if (!is_string($params[$field])) {
-                    LoggerManager::getLogger()->fatal('Field size validation failed. $params[$field] is not a string.'
+                    LoggerManager::getLogger()->warn('Field size validation failed. $params[$field] is not a string.'
                         . ' Field: ' . $field . ' Max size: ' . $maxSize . 'Backtrace: ' . (new Exception())->getTraceAsString());
                     return true; // skip validation and let the code work as it was working in PHP 7.4
                 }

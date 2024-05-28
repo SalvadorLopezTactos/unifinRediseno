@@ -38,7 +38,7 @@ class DbCache implements CacheInterface
     /**
      * @inheritDoc
      */
-    public function get():? string
+    public function get(): ?string
     {
         $data = $this->db->getConnection()
             ->createQueryBuilder()

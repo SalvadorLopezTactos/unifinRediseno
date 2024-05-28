@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = [
-    'LBL_GC_STATUS'=>'地理編碼狀態',
+    'LBL_GC_STATUS' => '地理編碼狀態',
     'LBL_GC_LATITUDE' => '地理編碼緯度',
     'LBL_GC_LONGITUDE' => '地理編碼經度',
     'LBL_GC_STATUS_DETAIL' => '地理編碼狀態詳細訊息',

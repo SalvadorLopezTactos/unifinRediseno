@@ -19,12 +19,12 @@ class DashboardsApiHelper extends SugarBeanApiHelper
      * Because of that API will use 'view' as 'view_name' if 'view_name' isn't present.
      *
      * @param SugarBean $bean
-     * @param array     $submittedData
-     * @param array     $options
+     * @param array $submittedData
+     * @param array $options
      *
      * @return array
      */
-    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = array())
+    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = [])
     {
         if (isset($submittedData['view']) && !isset($submittedData['view_name'])) {
             $submittedData['view_name'] = $submittedData['view'];
@@ -38,12 +38,12 @@ class DashboardsApiHelper extends SugarBeanApiHelper
      * Because of that API will return 'view' with the same value as 'view_name'.
      *
      * @param SugarBean $bean
-     * @param array     $fieldList
-     * @param array     $options
+     * @param array $fieldList
+     * @param array $options
      *
      * @return array
      */
-    public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(SugarBean $bean, array $fieldList = [], array $options = [])
     {
         $data = parent::formatForApi($bean, $fieldList, $options);
         if (isset($data['view_name'])) {

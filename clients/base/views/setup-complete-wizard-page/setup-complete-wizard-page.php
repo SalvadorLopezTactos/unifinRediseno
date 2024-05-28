@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['setup-complete-wizard-page'] = array(
+$viewdefs['base']['view']['setup-complete-wizard-page'] = [
     'title' => 'LBL_WIZ_COMPLETE_TITLE',
     'message' => 'LBL_SETUP_COMPLETE_INFO',
-);
+];

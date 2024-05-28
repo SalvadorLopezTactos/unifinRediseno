@@ -17,7 +17,7 @@ class FiltersApiHelper extends SugarBeanApiHelper
     /**
      * {@inheritDoc}
      */
-    public function formatForApi(\SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(\SugarBean $bean, array $fieldList = [], array $options = [])
     {
         $data = parent::formatForApi($bean, $fieldList, $options);
 
@@ -40,7 +40,7 @@ class FiltersApiHelper extends SugarBeanApiHelper
     /**
      * {@inheritDoc}
      */
-    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = array())
+    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = [])
     {
         // The value of the module_name column. Not the Filters class property.
         $moduleName = $submittedData['module_name'] ?? $bean->module_name;

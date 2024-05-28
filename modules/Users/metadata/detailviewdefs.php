@@ -9,46 +9,46 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Users']['DetailView'] = array(
-    'templateMeta' => array('maxColumns' => '2', 
-                            'widths' => array(
-                                array('label' => '10', 'field' => '30'), 
-                                array('label' => '10', 'field' => '30')
-                            ),
-                            'form' => array(
-                                'headerTpl'=>'modules/Users/tpls/DetailViewHeader.tpl',
-                                'footerTpl'=>'modules/Users/tpls/DetailViewFooter.tpl',
-                            ),
-                      ),
-    'panels' => array (
-        'LBL_USER_INFORMATION' => array (
-            array('full_name','user_name'),
-            array('status',
-                  array(
-                      'name'=>'UserType',
-                      'customCode'=>'{$USER_TYPE_READONLY}',
-                  ),
-            ),
-            array('picture',
-                array(
-                    'name'=>'license_type',
-                    'customCode'=>'{$LICENSE_TYPE_READONLY}',
-                ),
-            ),
-        ),
-        'LBL_EMPLOYEE_INFORMATION' => array(
-            array('employee_status','show_on_employees'),
-            array('title','phone_work'),
-            array('department','phone_mobile'),
-            array('reports_to_name','phone_other'),
-            array('','phone_fax'),
-            array('','phone_home'),
-            array('business_center_name',''),
-            array('messenger_type','messenger_id'),
-            array('address_street','address_city'),
-            array('address_state','address_postalcode'),
-            array('address_country'),
-            array('description'),
-        ),
-    ),
-);
+$viewdefs['Users']['DetailView'] = [
+    'templateMeta' => ['maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+        'form' => [
+            'headerTpl' => 'modules/Users/tpls/DetailViewHeader.tpl',
+            'footerTpl' => 'modules/Users/tpls/DetailViewFooter.tpl',
+        ],
+    ],
+    'panels' => [
+        'LBL_USER_INFORMATION' => [
+            ['full_name', 'user_name'],
+            ['status',
+                [
+                    'name' => 'UserType',
+                    'customCode' => '{$USER_TYPE_READONLY}',
+                ],
+            ],
+            ['picture',
+                [
+                    'name' => 'license_type',
+                    'customCode' => '{$LICENSE_TYPE_READONLY}',
+                ],
+            ],
+        ],
+        'LBL_EMPLOYEE_INFORMATION' => [
+            ['employee_status', 'show_on_employees'],
+            ['title', 'phone_work'],
+            ['department', 'phone_mobile'],
+            ['reports_to_name', 'phone_other'],
+            ['', 'phone_fax'],
+            ['', 'phone_home'],
+            ['business_center_name', ''],
+            ['messenger_type', 'messenger_id'],
+            ['address_street', 'address_city'],
+            ['address_state', 'address_postalcode'],
+            ['address_country'],
+            ['description'],
+        ],
+    ],
+];

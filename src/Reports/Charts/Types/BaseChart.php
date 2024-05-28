@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Reports\Charts\Types;
 
 use Sugarcrm\Sugarcrm\Reports\Charts\ChartConfigInterface;
@@ -152,9 +153,9 @@ class BaseChart implements ChartConfigInterface
      */
     protected function getColor(int $index): ?string
     {
-        $dataLength = is_countable($this->data['values']) ? count($this->data['values']) : 0;
-        if ($index > count($this->baseColorList)) {
-            $index = $dataLength - count($this->baseColorList) - 1;
+        $dataLength = safeCount($this->data['values']);
+        if ($index > safeCount($this->baseColorList)) {
+            $index = $dataLength - safeCount($this->baseColorList) - 1;
         }
 
         return $this->baseColorList[$index];
@@ -330,7 +331,7 @@ class BaseChart implements ChartConfigInterface
     {
         $sum = 0;
         foreach ($values as $value) {
-            $sum += (float) $value;
+            $sum += (float)$value;
         }
 
         return $sum;

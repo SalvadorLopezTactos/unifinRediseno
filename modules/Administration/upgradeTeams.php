@@ -13,13 +13,13 @@
 
 //Create User Teams
 $globalteam = BeanFactory::getBean('Teams', '1');
-if(isset($globalteam->name)){
-    echo 'Global '.$mod_strings['LBL_UPGRADE_TEAM_EXISTS'].'<br>';
-    if($globalteam->deleted) {
+if (isset($globalteam->name)) {
+    echo 'Global ' . $mod_strings['LBL_UPGRADE_TEAM_EXISTS'] . '<br>';
+    if ($globalteam->deleted) {
         $globalteam->mark_undeleted($globalteam->id);
     }
 } else {
-    $globalteam->create_team("Global", $mod_strings['LBL_GLOBAL_TEAM_DESC'], $globalteam->global_team);
+    $globalteam->create_team('Global', $mod_strings['LBL_GLOBAL_TEAM_DESC'], $globalteam->global_team);
 }
 
 /** @var \Sugarcrm\Sugarcrm\Dbal\Connection $connection */
@@ -32,17 +32,17 @@ $user = BeanFactory::newBean('Users');
 foreach ($result->iterateAssociative() as $row) {
     $row2 = $connection->fetchAssociative('SELECT id, name FROM teams WHERE associated_user_id = ?', [$row['id']]);
     if (false === $row2) {
-		$user->retrieve($row['id']);
-		$team->new_user_created($user);
-		// BUG 10339: do not display messages for upgrade wizard
-		if(!isset($_REQUEST['upgradeWizard'])){
+        $user->retrieve($row['id']);
+        $team->new_user_created($user);
+        // BUG 10339: do not display messages for upgrade wizard
+        if (!isset($_REQUEST['upgradeWizard'])) {
             printf('%s %s<br>', htmlspecialchars($mod_strings['LBL_UPGRADE_TEAM_CREATE'], ENT_COMPAT), htmlspecialchars($row['user_name'], ENT_COMPAT));
-		}
-	}else{
+        }
+    } else {
         printf('%s %s<br>', htmlspecialchars($row2['name'], ENT_COMPAT), htmlspecialchars($mod_strings['LBL_UPGRADE_TEAM_EXISTS'], ENT_COMPAT));
-	}
+    }
 
-	$globalteam->add_user_to_team($row['id']);
+    $globalteam->add_user_to_team($row['id']);
 }
 
 echo '<br>' . htmlspecialchars($mod_strings['LBL_DONE'], ENT_COMPAT);

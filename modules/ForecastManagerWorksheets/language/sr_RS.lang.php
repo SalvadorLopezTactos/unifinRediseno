@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
 
     //module strings.
     'LBL_MODULE_NAME' => 'Upravljanje tabelama sa prognozama',
@@ -35,14 +35,14 @@ $mod_strings = array (
     'LBL_FORECAST_TYPE' => 'Tip prognoze',
     'LBL_FORECAST_OPP_COUNT' => 'Ukupan broj prodajnih prilika',
     'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Broj prilika levka prodaje',
-    'LBL_FORECAST_OPP_WEIGH'=> 'Ponderisan iznos',
+    'LBL_FORECAST_OPP_WEIGH' => 'Ponderisan iznos',
     'LBL_FORECAST_USER' => 'Korisnik',
-    'LBL_DATE_COMMITTED'=> 'Datum prihvatanja',
+    'LBL_DATE_COMMITTED' => 'Datum prihvatanja',
     'LBL_DATE_ENTERED' => 'Datum unosa',
     'LBL_DATE_MODIFIED' => 'Datum izmene',
     'LBL_CREATED_BY' => 'Autor',
     'LBL_DELETED' => 'Obrisan',
-    'LBL_MODIFIED_USER_ID'=>'Promenio',
+    'LBL_MODIFIED_USER_ID' => 'Promenio',
     'LBL_WK_VERSION' => 'Verzija',
     'LBL_WK_REVISION' => 'Revizija',
 
@@ -59,68 +59,68 @@ $mod_strings = array (
     'LBL_QC_UPCOMING_FORECASTS' => 'Moje Prognoze',
     'LBL_QC_LAST_DATE_COMMITTED' => 'Datum poslednjeg prihvatanja:',
     'LBL_QC_LAST_COMMIT_VALUE' => 'Poslednji prihvaćen iznos:',
-    'LBL_QC_HEADER_DELIM'=> 'Za',
+    'LBL_QC_HEADER_DELIM' => 'Za',
 
     //opportunity worksheet list view labels
-    'LBL_OW_OPPORTUNITIES' => "Prodajna prilika",
-    'LBL_OW_ACCOUNTNAME' => "Kompanija",
-    'LBL_OW_REVENUE' => "Iznos",
-    'LBL_OW_WEIGHTED' => "Ponderisan iznos",
-    'LBL_OW_MODULE_TITLE'=> 'Tabela prodajnih prilika',
-    'LBL_OW_PROBABILITY'=>'Verovatnoća',
-    'LBL_OW_NEXT_STEP'=>'Sledeći korak',
-    'LBL_OW_DESCRIPTION'=>'Opis',
-    'LBL_OW_TYPE'=>'Tip',
+    'LBL_OW_OPPORTUNITIES' => 'Prodajna prilika',
+    'LBL_OW_ACCOUNTNAME' => 'Kompanija',
+    'LBL_OW_REVENUE' => 'Iznos',
+    'LBL_OW_WEIGHTED' => 'Ponderisan iznos',
+    'LBL_OW_MODULE_TITLE' => 'Tabela prodajnih prilika',
+    'LBL_OW_PROBABILITY' => 'Verovatnoća',
+    'LBL_OW_NEXT_STEP' => 'Sledeći korak',
+    'LBL_OW_DESCRIPTION' => 'Opis',
+    'LBL_OW_TYPE' => 'Tip',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'Direktni izveštaj',
-    'LBL_FDR_OPPORTUNITIES'=>'Prodajne prilike u prognozi:',
-    'LBL_FDR_WEIGH'=>'Ponderisan iznos prodajnih prilika:',
-    'LBL_FDR_COMMIT'=>'Prihvaćen iznos',
-    'LBL_FDR_DATE_COMMIT'=>'Datum prihvatanja',
+    'LBL_FDR_USER_NAME' => 'Direktni izveštaj',
+    'LBL_FDR_OPPORTUNITIES' => 'Prodajne prilike u prognozi:',
+    'LBL_FDR_WEIGH' => 'Ponderisan iznos prodajnih prilika:',
+    'LBL_FDR_COMMIT' => 'Prihvaćen iznos',
+    'LBL_FDR_DATE_COMMIT' => 'Datum prihvatanja',
 
     //detail view.
     'LBL_DV_HEADER' => 'Prognoze: Tabela',
     'LBL_DV_MY_FORECASTS' => 'Moje Prognoze',
-    'LBL_DV_MY_TEAM' => "Prognoze mog tima" ,
+    'LBL_DV_MY_TEAM' => "Prognoze mog tima",
     'LBL_DV_TIMEPERIODS' => 'Vremenski periodi:',
     'LBL_DV_FORECAST_PERIOD' => 'Vremenski period prognoze',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Prognoza prodajnih prilika',
     'LBL_SEARCH' => 'Izaberi',
     'LBL_SEARCH_LABEL' => 'Izaberi',
     'LBL_COMMIT_HEADER' => 'Prihvati prognozu',
-    'LBL_DV_LAST_COMMIT_DATE' =>'Datum poslednjeg prihvatanja:',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'Poslednji prihvaćen iznosi:',
+    'LBL_DV_LAST_COMMIT_DATE' => 'Datum poslednjeg prihvatanja:',
+    'LBL_DV_LAST_COMMIT_AMOUNT' => 'Poslednji prihvaćen iznosi:',
     'LBL_DV_FORECAST_ROLLUP' => 'Proširi prognozu',
     'LBL_DV_TIMEPERIOD' => 'Vremenski period:',
     'LBL_DV_TIMPERIOD_DATES' => 'Period:',
     'LBL_LOADING_COMMIT_HISTORY' => 'Učitavanje istorije izvršenja...',
 
     //list view
-    'LBL_LV_TIMPERIOD'=> 'Vremenski period',
-    'LBL_LV_TIMPERIOD_START_DATE'=> 'Datum početka',
-    'LBL_LV_TIMPERIOD_END_DATE'=> 'Datum završetka',
-    'LBL_LV_TYPE'=> 'Tip prognoze',
-    'LBL_LV_COMMIT_DATE'=> 'Datum prihvatanja',
-    'LBL_LV_OPPORTUNITIES'=> 'Prodajne prilike',
-    'LBL_LV_WEIGH'=> 'Ponderisan iznos',
-    'LBL_LV_COMMIT'=> 'Prihvaćen iznos',
+    'LBL_LV_TIMPERIOD' => 'Vremenski period',
+    'LBL_LV_TIMPERIOD_START_DATE' => 'Datum početka',
+    'LBL_LV_TIMPERIOD_END_DATE' => 'Datum završetka',
+    'LBL_LV_TYPE' => 'Tip prognoze',
+    'LBL_LV_COMMIT_DATE' => 'Datum prihvatanja',
+    'LBL_LV_OPPORTUNITIES' => 'Prodajne prilike',
+    'LBL_LV_WEIGH' => 'Ponderisan iznos',
+    'LBL_LV_COMMIT' => 'Prihvaćen iznos',
 
-    'LBL_COMMIT_NOTE'=> 'Unesite iznos koji želite da prihvatite za odabrani vremenski period:',
+    'LBL_COMMIT_NOTE' => 'Unesite iznos koji želite da prihvatite za odabrani vremenski period:',
 
-    'LBL_COMMIT_MESSAGE'=> 'Da li želite da prihvatite ove iznose?',
+    'LBL_COMMIT_MESSAGE' => 'Da li želite da prihvatite ove iznose?',
     'ERR_FORECAST_AMOUNT' => 'Prihvaćen iznos je obavezan i mora biti broj.',
 
     // js error strings
     'LBL_FC_START_DATE' => 'Datum početka',
     'LBL_FC_USER' => 'Zakaži za',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'Nema aktivnih vremenskih perioda za Prognoziranje.',
-    'LBL_FDR_ADJ_AMOUNT'=>'Prilagođeni iznos',
-    'LBL_SAVE_WOKSHEET'=>'Sačuvaj tabelu',
-    'LBL_RESET_WOKSHEET'=>'Obriši tabelu',
-    'LBL_SHOW_CHART'=>'Pogledaj grafik',
-    'LBL_RESET_CHECK'=>'Svi podaci tabele za odabrani vremenski period i prijavljenog korisnika će biti uklonjeni. Nastaviti?',
+    'LBL_NO_ACTIVE_TIMEPERIOD' => 'Nema aktivnih vremenskih perioda za Prognoziranje.',
+    'LBL_FDR_ADJ_AMOUNT' => 'Prilagođeni iznos',
+    'LBL_SAVE_WOKSHEET' => 'Sačuvaj tabelu',
+    'LBL_RESET_WOKSHEET' => 'Obriši tabelu',
+    'LBL_SHOW_CHART' => 'Pogledaj grafik',
+    'LBL_RESET_CHECK' => 'Svi podaci tabele za odabrani vremenski period i prijavljenog korisnika će biti uklonjeni. Nastaviti?',
 
     'LBL_CURRENCY' => 'Valuta',
     'LBL_CURRENCY_ID' => 'ID broj valute',
@@ -149,6 +149,6 @@ $mod_strings = array (
     'LBL_HISTORY_LOG' => 'Poslednja obaveza',
     'LBL_NO_COMMIT' => 'Nema prethodnih prihvaćanja',
 
-    'LBL_MANGER_SAVED' => 'Menadžer sačuvan'
+    'LBL_MANGER_SAVED' => 'Menadžer sačuvan',
 
-);
+];

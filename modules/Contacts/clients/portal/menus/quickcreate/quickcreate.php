@@ -1,4 +1,5 @@
 <?php
+
 //FILE SUGARCRM flav=ent
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -12,7 +13,7 @@
  */
 
 $module_name = 'Contacts';
-$viewdefs[$module_name]['portal']['menu']['quickcreate'] = array(
+$viewdefs[$module_name]['portal']['menu']['quickcreate'] = [
     //Disabled in Portal by default
     'visible' => false,
     //Included in case quick create for Contacts becomes enabled later
@@ -20,4 +21,4 @@ $viewdefs[$module_name]['portal']['menu']['quickcreate'] = array(
     'label' => 'LNK_NEW_CONTACT',
     'order' => 1,
     'icon' => 'sicon-plus',
-);
+];

@@ -16,23 +16,23 @@ global $current_language;
 
 $moduleName = 'PortalUser';
 
-$viewdefs['portal']['view']['profileactions'] = array(
-    array(
+$viewdefs['portal']['view']['profileactions'] = [
+    [
         'route' => '#profile',
         'label' => 'LBL_PROFILE',
         'css_class' => 'profileactions-profile',
         'acl_action' => 'view',
         'icon' => 'sicon-user',
-    ),
+    ],
     [
         'route' => get_help_url($sugar_flavor, $sugar_version, $current_language, $moduleName),
         'label' => 'LBL_HELP',
         'icon' => 'sicon-help',
         'openwindow' => true,
     ],
-    array(
+    [
         'route' => '#logout/?clear=1',
         'label' => 'LBL_LOGOUT',
         'icon' => 'sicon-logout',
-    ),
-);
+    ],
+];

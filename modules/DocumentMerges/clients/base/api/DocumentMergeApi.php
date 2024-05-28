@@ -124,7 +124,7 @@ class DocumentMergeApi extends SugarApi
         }
 
         // not going through normal request, because it only comes from pmse.
-        $flowData = $args['flowData'];
+        $flowData = array_key_exists('flowData', $args) ? $args['flowData'] : null;
         $mergeRequestId = $this->createMergeRequest($data, $flowData);
         $data['mergeRequestId'] = $mergeRequestId;
 
@@ -276,7 +276,7 @@ class DocumentMergeApi extends SugarApi
         $documentMergeBean->file_type = $fileType;
         $documentMergeBean->name = $data['templateName'];
         $documentMergeBean->assigned_user_id = $current_user->id;
-        $documentMergeBean->record_ids = $data['selectedRecords'] ? json_encode($data['selectedRecords']) : '';
+        $documentMergeBean->record_ids = array_key_exists('selectedRecords', $data) ? json_encode($data['selectedRecords']) : '';
 
         // do this only if there is flow data coming from pmse
         if (is_string($flowData)) {
@@ -539,7 +539,7 @@ class DocumentMergeApi extends SugarApi
         $sugarQuery->select(['id', 'document_revision_id', 'document_name']);
         $sugarQuery->where()->equals('document_name', $name);
         $result = $sugarQuery->execute();
-        if (count($result) > 0) {
+        if (safeCount($result) > 0) {
             return $result[0];
         }
 
@@ -556,14 +556,14 @@ class DocumentMergeApi extends SugarApi
     {
         global $current_user;
 
-        $document = BeanFactory::retrieveBean("Documents", $documentId);
+        $document = BeanFactory::retrieveBean('Documents', $documentId);
         if (!$document) {
             throw new \SugarException('DOCUMENT_MERGE_ERROR', null, 'DocumentMerges');
         }
 
         $revisions = $document->get_linked_beans('revisions', 'DocumentRevision');
         if (!empty($revisions)) {
-            $latestRevision = is_countable($revisions) ? count($revisions) : 0;
+            $latestRevision = safeCount($revisions);
             $currentRevisionNumber = $latestRevision + 1;
         } else {
             $currentRevisionNumber = 1;
@@ -627,12 +627,12 @@ class DocumentMergeApi extends SugarApi
         $uploadFolder = 'upload://';
 
         $id = $options['documentId'];
-        $document       = new \Document();
+        $document = new \Document();
         $document->name = $fileName;
 
         $document->is_merged_c = 1;
         $document->filename = $fileName;
-        $document->filename_file =$uploadFolder.$id;
+        $document->filename_file = $uploadFolder . $id;
         $document->document_name = $fileName;
         $document->id = $id;
         $document->document_revision_id = $options['revisionId'];
@@ -687,7 +687,7 @@ class DocumentMergeApi extends SugarApi
             if ($lhsModule === $relationshipModule || $rhsModule === $relationshipModule) {
                 $bean->load_relationship($linkDef['relationship'])
                     ? $relationshipName = $linkDef['relationship'] :
-                        ($bean->load_relationship($linkDef['name']) ? $relationshipName = $linkDef['name'] : $relationshipName = null);
+                    ($bean->load_relationship($linkDef['name']) ? $relationshipName = $linkDef['name'] : $relationshipName = null);
             }
         }
 

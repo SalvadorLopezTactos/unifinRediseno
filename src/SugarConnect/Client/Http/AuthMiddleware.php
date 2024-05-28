@@ -43,7 +43,7 @@ class AuthMiddleware
      *
      * @param AbstractProvider $provider OAuth 2.0 service provider client using
      *                                   Bearer token authentication.
-     * @param CacheInterface   $cache    Access tokens are cached for reuse.
+     * @param CacheInterface $cache Access tokens are cached for reuse.
      */
     public function __construct(AbstractProvider $provider, CacheInterface $cache)
     {
@@ -60,7 +60,7 @@ class AuthMiddleware
      *
      * @return \Closure
      */
-    public function __invoke(callable $handler) : \Closure
+    public function __invoke(callable $handler): \Closure
     {
         return function (RequestInterface $request, array $options) use ($handler) {
             return $handler(
@@ -91,7 +91,7 @@ class AuthMiddleware
      *
      * @return RequestInterface
      */
-    private function addAuthorizationHeader(RequestInterface $request) : RequestInterface
+    private function addAuthorizationHeader(RequestInterface $request): RequestInterface
     {
         return $request->withAddedHeader(
             'Authorization',
@@ -104,7 +104,7 @@ class AuthMiddleware
      *
      * @return AccessToken
      */
-    private function getAccessToken() : AccessToken
+    private function getAccessToken(): AccessToken
     {
         $token = $this->cache->get('sugar_connect_access_token');
 

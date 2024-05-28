@@ -9,63 +9,63 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Audit'] = array(
+$dictionary['Audit'] = [
     'archive' => false,
-    'fields' =>
-array(
-    'parent_id' => array(
-        'name' => 'parent_id',
-        'type' => 'id',
-        'source' => 'non-db',
-    ),
-    'date_created' => array(
-        'name' => 'date_created',
-        'type' => 'datetime',
-        'source' => 'non-db',
-    ),
-    'created_by' => array(
-        'name' => 'created_by',
-        'type' => 'varchar',
-        'source' => 'non-db',
-    ),
-    'created_by_username' => array(
-        'name' => 'created_by_username',
-        'type' => 'varchar',
-        'source' => 'non-db',
-    ),
-    'field_name' => array(
-        'name' => 'field_name',
-        'type' => 'varchar',
-        'source' => 'non-db',
-    ),
-    'data_type' => array(
-        'name' => 'data_type',
-        'type' => 'varchar',
-        'source' => 'non-db',
-    ),
-    'before_value_string' => array(
-        'name' => 'before_value_string',
-        'type' => 'varchar',
-        'source' => 'non-db',
-    ),
-    'after_value_string' => array(
-        'name' => 'after_value_string',
-        'type' => 'varchar',
-        'source' => 'non-db',
-    ),
-    'before' => array(
-        'name' => 'before',
-        'type' => 'varchar',
-        'source' => 'non-db',
-    ),
-    'after' => array(
-        'name' => 'after',
-        'type' => 'varchar',
-        'source' => 'non-db',
-    ),
-    'data_type' => array(
-        'name' => 'data_type',
-        'type' => 'varchar',
-        'source' => 'non-db',
-    ),
-));
+    'fields' => [
+        'parent_id' => [
+            'name' => 'parent_id',
+            'type' => 'id',
+            'source' => 'non-db',
+        ],
+        'date_created' => [
+            'name' => 'date_created',
+            'type' => 'datetime',
+            'source' => 'non-db',
+        ],
+        'created_by' => [
+            'name' => 'created_by',
+            'type' => 'varchar',
+            'source' => 'non-db',
+        ],
+        'created_by_username' => [
+            'name' => 'created_by_username',
+            'type' => 'varchar',
+            'source' => 'non-db',
+        ],
+        'field_name' => [
+            'name' => 'field_name',
+            'type' => 'varchar',
+            'source' => 'non-db',
+        ],
+        'data_type' => [
+            'name' => 'data_type',
+            'type' => 'varchar',
+            'source' => 'non-db',
+        ],
+        'before_value_string' => [
+            'name' => 'before_value_string',
+            'type' => 'varchar',
+            'source' => 'non-db',
+        ],
+        'after_value_string' => [
+            'name' => 'after_value_string',
+            'type' => 'varchar',
+            'source' => 'non-db',
+        ],
+        'before' => [
+            'name' => 'before',
+            'type' => 'varchar',
+            'source' => 'non-db',
+        ],
+        'after' => [
+            'name' => 'after',
+            'type' => 'varchar',
+            'source' => 'non-db',
+        ],
+        'data_type' => [
+            'name' => 'data_type',
+            'type' => 'varchar',
+            'source' => 'non-db',
+        ],
+    ],
+];

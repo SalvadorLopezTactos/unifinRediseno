@@ -9,27 +9,27 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['KBContents']['portal']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['KBContents']['portal']['view']['list'] = [
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'label' => 'LBL_NAME',
                     'default' => true,
                     'enabled' => true,
                     'link' => true,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'kbdocument_id',
                         'kbarticle_id',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'category_name',
                     'label' => 'LBL_CATEGORY_NAME',
-                ),
-                array(
+                ],
+                [
                     'name' => 'language',
                     'label' => 'LBL_LANG',
                     'default' => true,
@@ -37,18 +37,18 @@ $viewdefs['KBContents']['portal']['view']['list'] = array(
                     'link' => true,
                     'type' => 'enum-config',
                     'key' => 'languages',
-                ),
-                array(
+                ],
+                [
                     'label' => 'LBL_DATE_ENTERED',
                     'enabled' => true,
                     'default' => true,
                     'name' => 'date_entered',
-                ),
-            ),
-        ),
-    ),
-    'orderBy' => array(
+                ],
+            ],
+        ],
+    ],
+    'orderBy' => [
         'field' => 'date_entered',
         'direction' => 'desc',
-    ),
-);
+    ],
+];

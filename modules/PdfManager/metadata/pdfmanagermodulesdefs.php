@@ -25,18 +25,18 @@
         );
 */
 
-$bannedPdfManagerFieldsAndLinks['Accounts'] = array (
-    'fields' => array(
+$bannedPdfManagerFieldsAndLinks['Accounts'] = [
+    'fields' => [
         'billing_address_street_2',
         'billing_address_street_3',
         'billing_address_street_4',
         'shipping_address_street_2',
         'shipping_address_street_3',
         'shipping_address_street_4',
-    ),
-);
-$bannedPdfManagerFieldsAndLinks['Contacts'] = array (
-    'fields' => array(
+    ],
+];
+$bannedPdfManagerFieldsAndLinks['Contacts'] = [
+    'fields' => [
         'accept_status_id',
         'accept_status_name',
         'alt_address_street_2',
@@ -44,41 +44,41 @@ $bannedPdfManagerFieldsAndLinks['Contacts'] = array (
         'email_and_name1',
         'primary_address_street_2',
         'primary_address_street_3',
-    ),
-);
-$bannedPdfManagerFieldsAndLinks['Employees'] = array (
-    'relationships' => array(
+    ],
+];
+$bannedPdfManagerFieldsAndLinks['Employees'] = [
+    'relationships' => [
         'holidays',
         'oauth_tokens',
-    ),
-);
-$bannedPdfManagerFieldsAndLinks['Leads'] = array (
-    'fields' => array(
+    ],
+];
+$bannedPdfManagerFieldsAndLinks['Leads'] = [
+    'fields' => [
         'accept_status_id',
         'accept_status_name',
         'alt_address_street_2',
         'alt_address_street_3',
         'primary_address_street_2',
         'primary_address_street_3',
-    ),
-);
-$bannedPdfManagerFieldsAndLinks['Opportunities'] = array (
-    'relationships' => array(
+    ],
+];
+$bannedPdfManagerFieldsAndLinks['Opportunities'] = [
+    'relationships' => [
         'campaigns',
-    ),
-);
-$bannedPdfManagerFieldsAndLinks['Prospects'] = array (
-    'fields' => array(
+    ],
+];
+$bannedPdfManagerFieldsAndLinks['Prospects'] = [
+    'fields' => [
         'accept_status_id',
         'accept_status_name',
         'alt_address_street_2',
         'alt_address_street_3',
         'primary_address_street_2',
         'primary_address_street_3',
-    ),
-);
-$bannedPdfManagerFieldsAndLinks['Users'] = array (
-    'fields' => array(
+    ],
+];
+$bannedPdfManagerFieldsAndLinks['Users'] = [
+    'fields' => [
         'address_city',
         'address_country',
         'address_postalcode',
@@ -99,8 +99,8 @@ $bannedPdfManagerFieldsAndLinks['Users'] = array (
         'status',
         'title',
         'phone_work',
-    ),
-);
+    ],
+];
 
 // For $bannedPdfManagerModules, list of banned modules for PdfManager
 $bannedPdfManagerModules[] = 'Users';

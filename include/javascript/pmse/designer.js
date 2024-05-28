@@ -120,7 +120,7 @@ function renderProject (prjCode) {
     //LAYOUT
     myLayout = $('#container').layout({
         north: {
-            size: 44,
+            size: $(window).width() < 1097 ? 76 : 44,
             spacing_open: 0,
             closable: false,
             slidable: false,
@@ -1247,15 +1247,25 @@ function renderProject (prjCode) {
         }
     );
 
-    $('#ProjectTitle').hover(function (e) {
+    $('#ProjectTitle, .icon-edit-title').hover(function(e) {
         $('.icon-edit-title').css('display', 'block');
-    }, function (e) {
+    }, function(e) {
         $('.icon-edit-title').css('display', 'none');
-    }).click(function (e) {
+    }).click(function(e) {
         e.preventDefault();
-        $('#ProjectTitle').css('display', 'none');
-        $('.icon-edit-title').css('display', 'block');
-        $('#txt-title').css('display', 'block').focus().val($('#ProjectTitle').html());
+        let width = $('#ProjectTitle').width();
+        $('#ProjectTitle, .icon-edit-title').hide();
+        $('#txt-title').show().width(width).focus().val($('#ProjectTitle').html());
+    });
+
+    $('#ProjectTitle').on('mouseenter', function() {
+        if (this.offsetWidth < this.scrollWidth) {
+            if ($(this).attr('title') !== $(this).text()) {
+                $(this).attr('title', $(this).text());
+            }
+        } else {
+            $(this).removeAttr('title');
+        }
     });
 
     var save_name = function() {
@@ -1772,11 +1782,11 @@ var ValidationProgressTracker = function(silent) {
                 traverseProcess();
                 jCore.getActiveCanvas().RemoveCurrentMenu();
             });
-            $('#ButtonValidate > i').addClass('fa fa-check-square check-square-on');
+            $('#ButtonValidate > i').addClass('sicon sicon-md sicon-check-circle-lg check-square-on');
         } else {
 
             // Validate button should be greyed out and have no action
-            $('#ButtonValidate > i').addClass('fa fa-check-square check-square-off');
+            $('#ButtonValidate > i').addClass('sicon sicon-md sicon-check-circle-lg check-square-off');
         }
     },
 
@@ -1793,13 +1803,17 @@ var ValidationProgressTracker = function(silent) {
                 traverseProcess();
                 jCore.getActiveCanvas().RemoveCurrentMenu();
             });
-            $('#ButtonSaveValidate > i').filter(':first').addClass('fa fa-save fa-sm save-on');
-            $('#ButtonSaveValidate > i').filter(':last').addClass('fa fa-check-square fa-sm check-square-on');
+            $('#ButtonSaveValidate > i').filter(':first').addClass('sicon sicon-sm sicon-save-lg save-on');
+            $('#ButtonSaveValidate > i')
+                .filter(':last')
+                .addClass('sicon sicon-sm sicon-check-circle-lg check-square-on');
         } else {
 
             // Save+validate button should be greyed out and have no action
-            $('#ButtonSaveValidate > i').filter(':first').addClass('fa fa-save fa-sm save-off');
-            $('#ButtonSaveValidate > i').filter(':last').addClass('fa fa-check-square fa-sm check-square-off');
+            $('#ButtonSaveValidate > i').filter(':first').addClass('sicon sicon-sm sicon-save-lg save-off');
+            $('#ButtonSaveValidate > i')
+                .filter(':last')
+                .addClass('sicon sicon-sm sicon-check-circle-lg check-square-off');
         }
     },
 
@@ -1815,11 +1829,11 @@ var ValidationProgressTracker = function(silent) {
             $('#ButtonToggleErrorPane').click(function() {
                 myLayout.toggle('south');
             });
-            $('#ButtonToggleErrorPane > i').addClass('fa fa-exclamation-triangle exclamation-triangle-on');
+            $('#ButtonToggleErrorPane > i').addClass('sicon sicon-md sicon-warning-lg exclamation-triangle-on');
         } else {
 
             // Error pane toggle button should be greyed out and have no action
-            $('#ButtonToggleErrorPane > i').addClass('fa fa-exclamation-triangle exclamation-triangle-off');
+            $('#ButtonToggleErrorPane > i').addClass('sicon sicon-md sicon-warning-lg exclamation-triangle-off');
         }
 
         // Set the correct tooltip for the error pane toggle button
@@ -2104,13 +2118,13 @@ var createErrorIcon = function(warning) {
 
     // Set the icon type for the error
     errorIcon.setAttribute('rel', 'tooltip');
-    errorIcon.setAttribute('data-placement', 'top');
+    errorIcon.setAttribute('data-bs-placement', 'top');
     if (warning) {
-        errorIcon.setAttribute('class', 'fa fa-exclamation-triangle fa');
+        errorIcon.setAttribute('class', 'sicon sicon-lg sicon-warning-lg');
         errorIcon.setAttribute('style', 'color: #FFCC00');
         errorIcon.setAttribute('data-original-title', translate('LBL_PMSE_VALIDATOR_WARNING_INFO'));
     } else {
-        errorIcon.setAttribute('class', 'fa fa-exclamation-circle fa');
+        errorIcon.setAttribute('class', 'sicon sicon-lg sicon-warning-circle-lg');
         errorIcon.setAttribute('style', 'color: red');
         errorIcon.setAttribute('data-original-title', translate('LBL_PMSE_VALIDATOR_ERROR_INFO'));
     }
@@ -2124,7 +2138,7 @@ var createErrorText = function(errorName, errorInfo) {
     // Set the text content and tooltip of the error cell element
     errorText.textContent = '  ' + errorName;
     errorText.setAttribute('rel', 'tooltip');
-    errorText.setAttribute('data-placement', 'top');
+    errorText.setAttribute('data-bs-placement', 'top');
     errorText.setAttribute('data-original-title', errorInfo);
 
     return errorText;

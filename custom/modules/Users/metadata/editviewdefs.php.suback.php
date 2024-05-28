@@ -508,7 +508,57 @@ array (
             'name' => 'habilita_envio_tc_c',
             'label' => 'LBL_HABILITA_ENVIO_TC',
           ),
-          1 => '',
+          1 => 
+          array (
+            'readonly' => false,
+            'name' => 'mfa_enable_c',
+            'label' => 'LBL_MFA_ENABLE',
+          ),
+        ),
+        18 => 
+        array (
+          0 => 
+          array (
+            'readonly' => false,
+            'name' => 'admin_seguros_c',
+            'label' => 'LBL_ADMIN_SEGUROS',
+          ),
+          1 => 
+          array (
+            'readonly' => false,
+            'name' => 'seguimiento_seguros_c',
+            'label' => 'LBL_SEGUIMIENTO_SEGUROS',
+          ),
+        ),
+        19 => 
+        array (
+          0 => 
+          array (
+            'readonly' => false,
+            'name' => 'reasignacion_po_c',
+            'label' => 'LBL_REASIGNACION_PO',
+          ),
+          1 => 
+          array (
+            'readonly' => false,
+            'name' => 'asignacion_po_c',
+            'label' => 'LBL_ASIGNACION_PO',
+          ),
+        ),
+        20 => 
+        array (
+          0 => 
+          array (
+            'readonly' => false,
+            'name' => 'cancelar_casos_c',
+            'label' => 'LBL_CANCELAR_CASOS',
+          ),
+          1 => 
+          array (
+            'readonly' => false,
+            'name' => 'seguimiento_bc_c',
+            'label' => 'LBL_SEGUIMIENTO_BC',
+          ),
         ),
       ),
       'lbl_editview_panel5' => 

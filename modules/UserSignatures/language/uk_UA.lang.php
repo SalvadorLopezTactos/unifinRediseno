@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Цьому підпису потрібна назва.',
     'LBL_DEFAULT_SIGNATURE' => 'За замовчуванням',
     'LBL_MODULE_NAME' => 'Підписи електронної пошти',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'Використати підпис?',
     'LBL_SIGNATURE_PREPEND' => 'Підпис над відповіддю?',
     'LBL_SIGNATURES' => 'Підписи',
-);
+];

@@ -9,15 +9,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ProductBundles']['base']['view']['quote-data-group-header'] = array(
-    'buttons' => array(
-        array(
+$viewdefs['ProductBundles']['base']['view']['quote-data-group-header'] = [
+    'buttons' => [
+        [
             'type' => 'quote-data-actiondropdown',
             'name' => 'create-dropdown',
             'icon' => 'sicon-plus',
             'no_default_action' => true,
-            'buttons' => array(
-                array(
+            'buttons' => [
+                [
                     'type' => 'rowaction',
                     'css_class' => 'btn-invisible',
                     'icon' => 'sicon-plus',
@@ -25,8 +25,8 @@ $viewdefs['ProductBundles']['base']['view']['quote-data-group-header'] = array(
                     'label' => 'LBL_CREATE_QLI_BUTTON_LABEL',
                     'tooltip' => 'LBL_CREATE_QLI_BUTTON_TOOLTIP',
                     'acl_action' => 'create',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'css_class' => 'btn-invisible',
                     'icon' => 'sicon-plus',
@@ -34,43 +34,43 @@ $viewdefs['ProductBundles']['base']['view']['quote-data-group-header'] = array(
                     'label' => 'LBL_CREATE_COMMENT_BUTTON_LABEL',
                     'tooltip' => 'LBL_CREATE_COMMENT_BUTTON_TOOLTIP',
                     'acl_action' => 'create',
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'type' => 'quote-data-actiondropdown',
             'name' => 'edit-dropdown',
             'icon' => 'sicon-kebab',
             'no_default_action' => true,
-            'buttons' => array(
-                array(
+            'buttons' => [
+                [
                     'type' => 'rowaction',
                     'name' => 'edit_bundle_button',
                     'label' => 'LBL_EDIT_BUTTON',
                     'tooltip' => 'LBL_EDIT_BUNDLE_BUTTON_TOOLTIP',
                     'acl_action' => 'edit',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'name' => 'delete_bundle_button',
                     'label' => 'LBL_DELETE_GROUP_BUTTON',
                     'tooltip' => 'LBL_DELETE_BUNDLE_BUTTON_TOOLTIP',
                     'acl_action' => 'delete',
-                ),
-            ),
-        ),
-    ),
-    'panels' => array(
-        array(
+                ],
+            ],
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_quote_data_group_header',
             'label' => 'LBL_QUOTE_DATA_GROUP_HEADER',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'type' => 'quote-group-title',
                     'css_class' => 'group-name',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

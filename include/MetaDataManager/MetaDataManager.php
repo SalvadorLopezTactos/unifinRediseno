@@ -22,12 +22,15 @@ use Sugarcrm\Sugarcrm\MetaData\RefreshQueue;
 use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 use Sugarcrm\Sugarcrm\SystemProcessLock\SystemProcessLock;
+use Sugarcrm\Sugarcrm\DocuSign\DocuSignUtils;
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 require_once 'soap/SoapHelperFunctions.php';
 require_once 'include/SugarObjects/LanguageManager.php';
 
 SugarAutoLoader::requireWithCustom('include/MetaDataManager/MetaDataHacks.php');
 SugarAutoLoader::requireWithCustom('include/MetaDataManager/MetaDataCache.php');
+
 /**
  * This class is for access to metadata for all sugarcrm modules in a read only
  * state.  This means that you can not modify any of the metadata using this
@@ -40,9 +43,10 @@ SugarAutoLoader::requireWithCustom('include/MetaDataManager/MetaDataCache.php');
  *    and are the methods that do the actual work of recollecting the metadata
  *    for a given section or module and rewriting that data to the cache. In some
  *    cases there are rebuild* methods that are consumed by other rebuild* methods.
-*/
+ */
 class MetaDataManager implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
     /**
      * @var \DBManager|mixed
      */
@@ -51,32 +55,32 @@ class MetaDataManager implements LoggerAwareInterface
      * @var mixed|mixed[]
      */
     public $args;
-    use LoggerAwareTrait;
+
     /**
      * Constants that define the sections of the metadata
      */
-    public const MM_MODULES        = 'modules';
+    public const MM_MODULES = 'modules';
     public const MM_FULLMODULELIST = 'full_module_list';
-    public const MM_MODULESINFO    = 'modules_info';
-    public const MM_FIELDS         = 'fields';
-    public const MM_LABELS         = 'labels';
-    public const MM_ORDEREDLABELS  = 'ordered_labels';
-    public const MM_VIEWS          = 'views';
-    public const MM_LAYOUTS        = 'layouts';
-    public const MM_RELATIONSHIPS  = 'relationships';
-    public const MM_DATA           = 'datas';
-    public const MM_CURRENCIES     = 'currencies';
-    public const MM_JSSOURCE       = 'jssource';
-    public const MM_SERVERINFO     = 'server_info';
-    public const MM_CONFIG         = 'config';
-    public const MM_LANGUAGES      = 'languages';
+    public const MM_MODULESINFO = 'modules_info';
+    public const MM_FIELDS = 'fields';
+    public const MM_LABELS = 'labels';
+    public const MM_ORDEREDLABELS = 'ordered_labels';
+    public const MM_VIEWS = 'views';
+    public const MM_LAYOUTS = 'layouts';
+    public const MM_RELATIONSHIPS = 'relationships';
+    public const MM_DATA = 'datas';
+    public const MM_CURRENCIES = 'currencies';
+    public const MM_JSSOURCE = 'jssource';
+    public const MM_SERVERINFO = 'server_info';
+    public const MM_CONFIG = 'config';
+    public const MM_LANGUAGES = 'languages';
     public const MM_HIDDENSUBPANELS = 'hidden_subpanels';
-    public const MM_MODULETABMAP   = 'module_tab_map';
-    public const MM_LOGOURL        = 'logo_url';
-    public const MM_LOGOURLDARK    = 'logo_url_dark';
+    public const MM_MODULETABMAP = 'module_tab_map';
+    public const MM_LOGOURL = 'logo_url';
+    public const MM_LOGOURLDARK = 'logo_url_dark';
     public const MM_OVERRIDEVALUES = '_override_values';
-    public const MM_FILTERS        = 'filters';
-    public const MM_EDITDDFILTERS  = 'editable_dropdown_filters';
+    public const MM_FILTERS = 'filters';
+    public const MM_EDITDDFILTERS = 'editable_dropdown_filters';
 
     /**
      * Collection of fields in the user metadata that can trigger a reauth when
@@ -85,11 +89,11 @@ class MetaDataManager implements LoggerAwareInterface
      * Mapping is 'prefname' => 'metadataname'
      * @var array
      */
-    protected $userPrefsToCache = array(
+    protected $userPrefsToCache = [
         'datef' => 'datepref',
         'timef' => 'timepref',
         'timezone' => 'timezone',
-    );
+    ];
 
     /**
      * The metadata hacks class
@@ -106,20 +110,20 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @var array
      */
-    protected static $clearCacheOnShutdown = array();
+    protected static $clearCacheOnShutdown = [];
 
     /**
      * A collection of metadata managers for use as a simple cache in the factory.
      *
      * @var array
      */
-    protected static $managers = array();
+    protected static $managers = [];
 
     /**
      * In memory cache of module ACLs that are record independent
      * @var array
      */
-    protected static $aclForModules = array();
+    protected static $aclForModules = [];
 
     /**
      * The requested platform, or collection of platforms
@@ -148,7 +152,7 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @var array
      */
-    protected $sections = array();
+    protected $sections = [];
 
     /**
      * Mapping of metadata sections to the methods that get the data for that
@@ -157,29 +161,29 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @var array
      */
-    protected $sectionMap = array(
-        self::MM_MODULES        => false,
+    protected $sectionMap = [
+        self::MM_MODULES => false,
         self::MM_FULLMODULELIST => 'getModuleList',
-        self::MM_MODULESINFO    => 'getModulesInfo',
-        self::MM_FIELDS         => 'getSugarFields',
-        self::MM_LABELS         => 'getStringUrls',
-        self::MM_ORDEREDLABELS  => 'getOrderedStringUrls',
-        self::MM_VIEWS          => 'getSugarViews',
-        self::MM_LAYOUTS        => 'getSugarLayouts',
-        self::MM_DATA           => 'getSugarData',
-        self::MM_RELATIONSHIPS  => 'getRelationshipData',
-        self::MM_CURRENCIES     => 'getSystemCurrencies',
-        self::MM_JSSOURCE       => false,
-        self::MM_SERVERINFO     => 'getServerInfo',
-        self::MM_CONFIG         => 'getConfigs',
-        self::MM_LANGUAGES      => 'getAllLanguages',
+        self::MM_MODULESINFO => 'getModulesInfo',
+        self::MM_FIELDS => 'getSugarFields',
+        self::MM_LABELS => 'getStringUrls',
+        self::MM_ORDEREDLABELS => 'getOrderedStringUrls',
+        self::MM_VIEWS => 'getSugarViews',
+        self::MM_LAYOUTS => 'getSugarLayouts',
+        self::MM_DATA => 'getSugarData',
+        self::MM_RELATIONSHIPS => 'getRelationshipData',
+        self::MM_CURRENCIES => 'getSystemCurrencies',
+        self::MM_JSSOURCE => false,
+        self::MM_SERVERINFO => 'getServerInfo',
+        self::MM_CONFIG => 'getConfigs',
+        self::MM_LANGUAGES => 'getAllLanguages',
         self::MM_HIDDENSUBPANELS => 'getHiddenSubpanels',
-        self::MM_MODULETABMAP   => 'getModuleTabMap',
-        self::MM_LOGOURL        => 'getLogoUrl',
-        self::MM_LOGOURLDARK    => 'getLogoUrlDark',
-        self::MM_FILTERS        => 'getSugarFilters',
-        self::MM_EDITDDFILTERS  => 'getEditableDropdownFilters'
-    );
+        self::MM_MODULETABMAP => 'getModuleTabMap',
+        self::MM_LOGOURL => 'getLogoUrl',
+        self::MM_LOGOURLDARK => 'getLogoUrlDark',
+        self::MM_FILTERS => 'getSugarFilters',
+        self::MM_EDITDDFILTERS => 'getEditableDropdownFilters',
+    ];
 
     /**
      * Flag that tells the manager whether the cache refresher is queued. This
@@ -195,9 +199,9 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @var RefreshQueue
      */
-    protected static $queue  = array();
+    protected static $queue = [];
 
-    protected static $fullRefresh = array();
+    protected static $fullRefresh = [];
 
     /**
      * Set by the cache refresh queue runner, if true, the refresh*Cache functions
@@ -207,7 +211,7 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @var bool
      */
-    protected static $inProcess  = false;
+    protected static $inProcess = false;
 
     /**
      * Current process stack. Used internally by the refresh* methods to prevent
@@ -215,13 +219,13 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @var array
      */
-    protected static $currentProcess = array();
+    protected static $currentProcess = [];
 
     /**
      * @var array List of metadata keys for values that should be overriden rather than
      * merged client side with existing metadata .
      */
-    protected static $defaultOverrides = array(
+    protected static $defaultOverrides = [
         'fields',
         'module_list',
         'relationships',
@@ -231,7 +235,7 @@ class MetaDataManager implements LoggerAwareInterface
         'hidden_subpanels',
         'config',
         'editable_dropdown_filters',
-    );
+    ];
 
     /**
      * List of the various parts of metadata that are cached mapped to the method
@@ -242,11 +246,11 @@ class MetaDataManager implements LoggerAwareInterface
      * this without good reason.
      * @var array
      */
-    protected static $cacheParts = array(
+    protected static $cacheParts = [
         self::MM_MODULES => 'refreshModulesCache',
         self::MM_LANGUAGES => 'refreshLanguagesCache',
         'section' => 'refreshSectionCache',
-    );
+    ];
 
     /**
      * List of deleted languages when clearing the cache. Used in {@see rebuildCache}
@@ -254,7 +258,7 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @var array
      */
-    protected $deletedLanguageCaches = array();
+    protected $deletedLanguageCaches = [];
 
     /**
      * Indicates the state of the cleared metadata so that subsequent calls to
@@ -272,55 +276,55 @@ class MetaDataManager implements LoggerAwareInterface
      * @see getConfigProperties
      * @see parseConfigProperties
      */
-    protected static $configProperties = array(
+    protected static $configProperties = [
         'list_max_entries_per_page' => true,
         'list_max_entries_per_subpanel' => true,
         'collapse_subpanels' => true,
         'max_record_fetch_size' => true,
         'max_record_link_fetch_size' => true,
         'upload_maxsize' => true,
-        'mass_actions' => array(
+        'mass_actions' => [
             'mass_update_chunk_size' => true,
             'mass_delete_chunk_size' => true,
             'mass_link_chunk_size' => true,
-        ),
-        'merge_duplicates' => array(
+        ],
+        'merge_duplicates' => [
             'merge_relate_fetch_concurrency' => true,
             'merge_relate_fetch_timeout' => true,
             'merge_relate_fetch_limit' => true,
             'merge_relate_update_concurrency' => true,
             'merge_relate_update_timeout' => true,
             'merge_relate_max_attempt' => true,
-        ),
+        ],
         'catalog_enabled' => true,
         'catalog_url' => true,
         'default_decimal_seperator' => true,
         'default_number_grouping_seperator' => true,
         'default_currency_significant_digits' => true,
-        'logger' => array(
+        'logger' => [
             'level' => true,
             'write_to_server' => true,
-        ),
-        'calendar' => array(
+        ],
+        'calendar' => [
             'max_repeat_count' => true,
-        ),
+        ],
         'lead_conv_activity_opt' => true,
-        'team_based_acl' => array(
+        'team_based_acl' => [
             'enabled' => true,
             'enabled_modules' => true,
-        ),
+        ],
         'preview_edit' => true,
         'allow_freeze_first_column' => true,
         'freeze_list_headers' => true,
-        'commentlog' => array(
+        'commentlog' => [
             'maxchars' => true,
-        ),
+        ],
         'max_aggregate_email_attachments_bytes' => true,
         'new_email_addresses_opted_out' => true,
         'activity_streams_enabled' => true,
         'enable_link_to_drawer' => true,
         'push_notification' => true,
-    );
+    ];
 
     /**
      * Map of configuration properties that should assume a different name than
@@ -339,19 +343,19 @@ class MetaDataManager implements LoggerAwareInterface
      * @var array
      * @see handleConfigPropertiesExceptions
      */
-    protected static $configPropertiesExceptions = array(
+    protected static $configPropertiesExceptions = [
         'listMaxEntriesPerPage' => 'maxQueryResult',
         'listMaxEntriesPerSubpanel' => 'maxSubpanelResult',
         'defaultDecimalSeperator' => 'defaultDecimalSeparator',
-        'defaultNumberGroupingSeperator' => 'defaultNumberGroupingSeparator'
-    );
+        'defaultNumberGroupingSeperator' => 'defaultNumberGroupingSeparator',
+    ];
 
     /**
      * Stores the loaded metadata
      *
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * These sections are skipped as part of a full metadata fetch either because
@@ -360,11 +364,11 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @var array
      */
-    protected $sectionsToSkip = array(
+    protected $sectionsToSkip = [
         self::MM_OVERRIDEVALUES => true,
         self::MM_FULLMODULELIST => true,
         self::MM_MODULESINFO => true,
-    );
+    ];
 
     /**
      * Explicit flag that tells the queue to run when the run method is called.
@@ -387,7 +391,7 @@ class MetaDataManager implements LoggerAwareInterface
      * Name of the cache table used to store metadata cache data
      * @var string
      */
-    protected static $cacheTable = "metadata_cache";
+    protected static $cacheTable = 'metadata_cache';
 
     /**
      * @var MetaDataCache
@@ -399,21 +403,21 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @var array
      */
-    protected $connectorProperties = array(
+    protected $connectorProperties = [
         'id',
         'name',
         'enabled',
         'configured',
         'modules',
-    );
+    ];
 
     /**
      * Additional vardefs that the front end may need to know about
      * @var array
      */
-    protected $additionalVardefProps = array(
+    protected $additionalVardefProps = [
         'dynamic_subpanel_name',
-    );
+    ];
 
     /**
      * acl values for blocked access
@@ -427,7 +431,7 @@ class MetaDataManager implements LoggerAwareInterface
         'delete' => 'no',
         'import' => 'no',
         'export' => 'no',
-        'massupdate'  => 'no',
+        'massupdate' => 'no',
     ];
 
     /**
@@ -442,7 +446,7 @@ class MetaDataManager implements LoggerAwareInterface
         'delete' => 'yes',
         'import' => 'yes',
         'export' => 'yes',
-        'massupdate'  => 'yes',
+        'massupdate' => 'yes',
     ];
 
     /**
@@ -458,7 +462,7 @@ class MetaDataManager implements LoggerAwareInterface
      * @param array $platforms A list of clients
      * @param bool $public is this a public metadata grab
      */
-    public function __construct ($platforms = null, $public = false)
+    public function __construct($platforms = null, $public = false)
     {
         // To support previous iterations of MetaDataManager prior to 7.1, in
         // which the first required argument was a CurrentUser
@@ -475,16 +479,16 @@ class MetaDataManager implements LoggerAwareInterface
             }
 
             // Let consumers know this isn't the correct use of this constuctor
-            $this->logger->warning("MetaDataManager no longer accepts a User object as an arguments");
+            $this->logger->warning('MetaDataManager no longer accepts a User object as an arguments');
         }
 
         if ($platforms == null) {
-            $platforms = array('base');
+            $platforms = ['base'];
         }
 
         // We should have an array of platforms
         if (!is_array($platforms)) {
-            $platforms = (array) $platforms;
+            $platforms = (array)$platforms;
         }
 
         // Base needs to be in place if it isn't
@@ -513,9 +517,10 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @return MetaDataCache
      */
-    protected function getCache() {
+    protected function getCache()
+    {
 
-        if (self::$isCacheEnabled && !isset($this->cache)){
+        if (self::$isCacheEnabled && !isset($this->cache)) {
             if ($this->db === false) {
                 $this->db = DBManagerFactory::getInstance();
             }
@@ -563,10 +568,11 @@ class MetaDataManager implements LoggerAwareInterface
     /**
      * Gets a class name for a metadata manager
      *
-     * @param  string $platform The platform of the metadata manager class
+     * @param string $platform The platform of the metadata manager class
      * @return string
      */
-    public static function getManagerClassName($platform) {
+    public static function getManagerClassName($platform)
+    {
         return 'MetaDataManager' . ucfirst(strtolower($platform));
     }
 
@@ -578,11 +584,12 @@ class MetaDataManager implements LoggerAwareInterface
      * @param bool $fresh Whether to skip the cache and get a new manager
      * @return MetaDataManager
      */
-    public static function getManager($platform = null, $public = false, $fresh = false) {
-        if ( $platform == null ) {
-            $platform = array('base');
+    public static function getManager($platform = null, $public = false, $fresh = false)
+    {
+        if ($platform == null) {
+            $platform = ['base'];
         }
-        $platform = (array) $platform;
+        $platform = (array)$platform;
 
         // Build a simple key
         $key = implode(':', $platform) . ':' . intval($public);
@@ -590,7 +597,7 @@ class MetaDataManager implements LoggerAwareInterface
         if ($fresh || empty(self::$managers[$key])) {
             // Get the platform metadata class name
             $class = self::getManagerClassName(''); // MetaDataManager
-            $path  = 'include/MetaDataManager/';
+            $path = 'include/MetaDataManager/';
             $found = false;
             foreach ($platform as $type) {
                 $mmClass = self::getManagerClassName($type);
@@ -622,7 +629,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     public static function resetManagers()
     {
-        self::$managers = array();
+        self::$managers = [];
     }
 
     /**
@@ -630,7 +637,8 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @return array
      */
-    public function getSections() {
+    public function getSections()
+    {
         return $this->sections;
     }
 
@@ -644,14 +652,14 @@ class MetaDataManager implements LoggerAwareInterface
         $parent_bean = BeanFactory::newBean($moduleName);
         //Hack to allow the SubPanelDefinitions class to check the correct module dir
         if (!$parent_bean) {
-            $parent_bean = (object) array('module_dir' => $moduleName);
+            $parent_bean = (object)['module_dir' => $moduleName];
         }
 
         $spd = new SubPanelDefinitions($parent_bean, '', '', $this->platforms[0]);
         $layout_defs = $spd->layout_defs;
 
         if (is_array($layout_defs) && isset($layout_defs['subpanel_setup'])) {
-            foreach ($layout_defs['subpanel_setup'] AS $name => $subpanel_info) {
+            foreach ($layout_defs['subpanel_setup'] as $name => $subpanel_info) {
                 $aSubPanel = $spd->load_subpanel($name, false, false, true);
 
                 if (!$aSubPanel) {
@@ -659,15 +667,14 @@ class MetaDataManager implements LoggerAwareInterface
                 }
 
                 if ($aSubPanel->isCollection()) {
-                    $collection = array();
-                    foreach ($aSubPanel->sub_subpanels AS $key => $subpanel) {
+                    $collection = [];
+                    foreach ($aSubPanel->sub_subpanels as $key => $subpanel) {
                         $collection[$key] = $subpanel->panel_definition;
                     }
                     $layout_defs['subpanel_setup'][$name]['panel_definition'] = $collection;
                 } else {
                     $layout_defs['subpanel_setup'][$name]['panel_definition'] = $aSubPanel->panel_definition;
                 }
-
             }
         }
 
@@ -765,7 +772,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     public function getModuleMenu($moduleName)
     {
-        return $this->getModuleClientData('menu',$moduleName);
+        return $this->getModuleClientData('menu', $moduleName);
     }
 
     /**
@@ -843,7 +850,7 @@ class MetaDataManager implements LoggerAwareInterface
             $this->data['full_module_list'] = $this->getModuleList($filterModules);
         }
         $moduleList = $this->data['full_module_list'];
-        $modules = array();
+        $modules = [];
         foreach ($moduleList as $key => $module) {
             if ($key == '_hash') {
                 continue;
@@ -872,7 +879,10 @@ class MetaDataManager implements LoggerAwareInterface
             $vardefs['fields'] = MassUpdate::setMassUpdateFielddefs($vardefs['fields'], $moduleName);
         }
 
-        $data['fields'] = $vardefs['fields'] ?? array();
+        $data['fields'] = $vardefs['fields'] ?? [];
+        $data['templateEditableFields'] = $vardefs['template_editable_fields'] ?? [];
+        $data['templateRestrictedActions'] = $vardefs['template_restricted_actions'] ?? [];
+        $data['templateSpecificActions'] = $vardefs['template_specific_actions'] ?? [];
         // Add the _hash for the fields array
         $data['fields']['_hash'] = md5(serialize($data['fields']));
         $data['nameFormat'] = $vardefs['name_format_map'] ?? null;
@@ -905,12 +915,18 @@ class MetaDataManager implements LoggerAwareInterface
         // Archiving is always on unless we explicitly say it isn't
         $data['archiveEnabled'] = !(isset($vardefs['archive']) && $vardefs['archive'] === false);
 
+        $data['isAudited'] = isset($vardefs['audited']) && $vardefs['audited'] === true;
+
         // Indicates whether a module is Escalatable
         $data['isEscalatable'] = isset($vardefs['escalatable']) && $vardefs['escalatable'] === true;
 
         // Indicate whether Module Has duplicate checking enabled --- Rules must exist and Enabled flag must be set
-        $data['dupCheckEnabled'] = isset($vardefs['duplicate_check']) && isset($vardefs['duplicate_check']['enabled']) && ($vardefs['duplicate_check']['enabled']===true);
+        $data['dupCheckEnabled'] = isset($vardefs['duplicate_check']) && isset($vardefs['duplicate_check']['enabled']) && ($vardefs['duplicate_check']['enabled'] === true);
 
+        $visual_pipeline = new VisualPipeline();
+        $data['isPipelineEnabled'] = $visual_pipeline->isEnabledForModule($moduleName);
+
+        $data['isPipelineExcluded'] = $visual_pipeline->isModulePipelineExcluded($moduleName);
         // Indicate whether a Module has activity stream enabled
         $data['activityStreamEnabled'] = SugarConfig::getInstance()->get('activity_streams_enabled', false) ?
             ActivityQueueManager::isEnabledForModule($moduleName) : false;
@@ -918,7 +934,7 @@ class MetaDataManager implements LoggerAwareInterface
         $data['ftsEnabled'] = SugarSearchEngineMetadataHelper::isModuleFtsEnabled($moduleName);
 
         // TODO we need to have this kind of information on the module itself not hacked around on globals
-        $data['isBwcEnabled'] = in_array($moduleName, $GLOBALS['bwcModules']);
+        $data['isBwcEnabled'] = safeInArray($moduleName, $GLOBALS['bwcModules']);
 
         $seed = BeanFactory::newBean($moduleName);
         $data['globalSearchEnabled'] = $this->getGlobalSearchEnabled($seed, $vardefs, $this->platforms[0]);
@@ -932,7 +948,7 @@ class MetaDataManager implements LoggerAwareInterface
         $data['followingEnabled'] = true;
 
         // Check if module's vardefs contains any of the properties found in the additional vardef properties array
-        foreach($this->additionalVardefProps as $prop) {
+        foreach ($this->additionalVardefProps as $prop) {
             if (isset($vardefs[$prop])) {
                 $data['additionalProperties'][$prop] = $vardefs[$prop];
             }
@@ -942,20 +958,19 @@ class MetaDataManager implements LoggerAwareInterface
         if (!empty($vardefs['default_relate_filter'])) {
             $data['defaultRelateFilter'] = $vardefs['default_relate_filter'];
         }
-    
+
         // Indicate whether show KPI metric badges on console pages Module tab
         $data['consoleTabBadges'] = $vardefs['console_tab_badges'] ?? false;
-        
-        $data["_hash"] = $this->hashChunk($data);
 
+        $data['_hash'] = $this->hashChunk($data);
         return $data;
     }
 
     /**
      * Helper to determine if vardef for module has global search enabled or not.
-     * @param  array   $seed     the new bean created from module name passed to BeanFactory::newBean
-     * @param  array   $vardefs  The vardefs
-     * @param  string  $platform The platform
+     * @param array $seed the new bean created from module name passed to BeanFactory::newBean
+     * @param array $vardefs The vardefs
+     * @param string $platform The platform
      * @return boolean indicating whether or not global search is enabled
      */
     public function getGlobalSearchEnabled($seed, $vardefs, $platform = null)
@@ -966,7 +981,7 @@ class MetaDataManager implements LoggerAwareInterface
     /**
      * Get the config for a specific module from the Administration Layer
      *
-     * @param  string $moduleName The Module we want the data back for.
+     * @param string $moduleName The Module we want the data back for.
      * @return array
      */
     public function getModuleConfig($moduleName)
@@ -992,7 +1007,7 @@ class MetaDataManager implements LoggerAwareInterface
         // Sanity check the rel defs, just in case they came back empty
         if (is_array($data)) {
             // Certain elements of the relationship defs need to be pruned
-            $unsets = array('table', 'fields', 'indices', 'relationships');
+            $unsets = ['table', 'fields', 'indices', 'relationships'];
             foreach ($data as $relKey => $relData) {
                 // Prune the relationship defs as needed
                 foreach ($unsets as $unset) {
@@ -1013,7 +1028,7 @@ class MetaDataManager implements LoggerAwareInterface
         // potentially be different from one request to another.
         ksort($data);
 
-        $data["_hash"] = $this->hashChunk($data);
+        $data['_hash'] = $this->hashChunk($data);
 
         return $data;
     }
@@ -1038,10 +1053,17 @@ class MetaDataManager implements LoggerAwareInterface
 
             // vardefs are missing something, for consistency let's populate some arrays
             if (!isset($data['fields'])) {
-                $data['fields'] = array();
+                $data['fields'] = [];
             }
             if (!isset($data['relationships'])) {
-                $data['relationships'] = array();
+                $data['relationships'] = [];
+            }
+        }
+
+        if ($moduleName === 'Users') {
+            $bean = BeanFactory::newBean($moduleName);
+            if ($bean) {
+                $data = $bean->patchVardefs($data);
             }
         }
 
@@ -1051,7 +1073,7 @@ class MetaDataManager implements LoggerAwareInterface
         }
 
         if (!isset($data['relationships'])) {
-            $data['relationships'] = array();
+            $data['relationships'] = [];
         }
 
         return $data;
@@ -1060,9 +1082,9 @@ class MetaDataManager implements LoggerAwareInterface
     /**
      * Gets the ACL's for the module, will also expand them so the client side of the ACL's don't have to do as many checks.
      *
-     * @param  string $module     The module we want to fetch the ACL for
-     * @param  object $userObject The user object for the ACL's we are retrieving.
-     * @param  object|bool $bean       The SugarBean for getting specific ACL's for a module
+     * @param string $module The module we want to fetch the ACL for
+     * @param object $userObject The user object for the ACL's we are retrieving.
+     * @param object|bool $bean The SugarBean for getting specific ACL's for a module
      * @param bool $showYes Do not unset Yes Results
      * @return array       Array of ACL's, first the action ACL's (access, create, edit, delete) then an array of the field level acl's
      */
@@ -1071,13 +1093,14 @@ class MetaDataManager implements LoggerAwareInterface
         //Cache ACL per user/module
         if (empty($bean->id)) {
             $cacheKey = "$module-{$userObject->id}";
-            if ($showYes)
-                $cacheKey .= "-yes";
+            if ($showYes) {
+                $cacheKey .= '-yes';
+            }
             if (isset(static::$aclForModules[$cacheKey])) {
                 return static::$aclForModules[$cacheKey];
             }
         }
-        $outputAcl = array('fields' => array());
+        $outputAcl = ['fields' => []];
         $outputAcl['admin'] = ($userObject->isAdminForModule($module)) ? 'yes' : 'no';
         $outputAcl['developer'] = ($userObject->isDeveloperForModule($module)) ? 'yes' : 'no';
 
@@ -1091,9 +1114,9 @@ class MetaDataManager implements LoggerAwareInterface
         } elseif (!SugarACL::moduleSupportsACL($module)) {
             $outputAcl = array_merge($outputAcl, $this->aclWithFullAccess);
         } else {
-            $context = array(
+            $context = [
                 'user' => $userObject,
-            );
+            ];
             if ($bean instanceof SugarBean) {
                 $context['bean'] = $bean;
             }
@@ -1104,7 +1127,7 @@ class MetaDataManager implements LoggerAwareInterface
                 $context['owner_override'] = true;
             }
 
-            $moduleAcls = SugarACL::getUserAccess($module, array(), $context);
+            $moduleAcls = SugarACL::getUserAccess($module, [], $context);
 
             // Bug56391 - Use the SugarACL class to determine access to different actions within the module
             foreach (SugarACL::$all_access as $action => $bool) {
@@ -1136,19 +1159,19 @@ class MetaDataManager implements LoggerAwareInterface
                 // only assigned_user_name is returned which is a derived ["fake"] field.  We really need assigned_user_id to return as well.
                 if (empty($GLOBALS['dictionary'][$bean->object_name]['fields'])) {
                     if (empty($bean->acl_fields)) {
-                        $fieldsAcl = array();
+                        $fieldsAcl = [];
                     } else {
                         $fieldsAcl = $bean->field_defs;
                     }
                 } else {
                     $fieldsAcl = $GLOBALS['dictionary'][$bean->object_name]['fields'];
                     if (isset($GLOBALS['dictionary'][$bean->object_name]['acl_fields']) && $GLOBALS['dictionary'][$bean->object_name] === false) {
-                        $fieldsAcl = array();
+                        $fieldsAcl = [];
                     }
                 }
                 // get the field names
 
-                SugarACL::listFilter($module, $fieldsAcl, $context, array('add_acl' => true));
+                SugarACL::listFilter($module, $fieldsAcl, $context, ['add_acl' => true]);
                 $fieldsAcl = $this->getMetaDataHacks()->fixAcls($fieldsAcl);
                 foreach ($fieldsAcl as $field => $fieldAcl) {
                     switch ($fieldAcl['acl']) {
@@ -1189,7 +1212,7 @@ class MetaDataManager implements LoggerAwareInterface
         }
         $outputAcl['_hash'] = $this->hashChunk($outputAcl);
 
-        if (!empty($cacheKey)){
+        if (!empty($cacheKey)) {
             static::$aclForModules[$cacheKey] = $outputAcl;
         }
 
@@ -1251,8 +1274,8 @@ class MetaDataManager implements LoggerAwareInterface
     /**
      * Gets client files of type $type (view, layout, field) for a module or for the system
      *
-     * @param  string $type   The type of files to get
-     * @param  string $module Module name (leave blank to get the system wide files)
+     * @param string $type The type of files to get
+     * @param string $module Module name (leave blank to get the system wide files)
      * @return array
      */
     public function getSystemClientData($type)
@@ -1283,15 +1306,15 @@ class MetaDataManager implements LoggerAwareInterface
     /**
      * The collector method for the module strings
      *
-     * @param  string $moduleName The name of the module
-     * @param  string $language   The language for the translations
+     * @param string $moduleName The name of the module
+     * @param string $language The language for the translations
      * @return array  The module strings for the requested language
      */
-    public function getModuleStrings( $moduleName, $language = 'en_us' )
+    public function getModuleStrings($moduleName, $language = 'en_us')
     {
         // Bug 58174 - Escaped labels are sent to the client escaped
         // TODO: SC-751, fix the way languages merge
-        $strings = return_module_language($language,$moduleName);
+        $strings = return_module_language($language, $moduleName);
         if (is_array($strings)) {
             foreach ($strings as $k => $v) {
                 $strings[$k] = $this->decodeStrings($v);
@@ -1304,7 +1327,7 @@ class MetaDataManager implements LoggerAwareInterface
     /**
      * The collector method for the app strings
      *
-     * @param  string $lang The language you wish to fetch the app strings for
+     * @param string $lang The language you wish to fetch the app strings for
      * @return array  The app strings for the requested language
      */
     public function getAppStrings($lang = 'en_us')
@@ -1322,7 +1345,7 @@ class MetaDataManager implements LoggerAwareInterface
     /**
      * The collector method for the app strings
      *
-     * @param  string $lang The language you wish to fetch the app list strings for
+     * @param string $lang The language you wish to fetch the app list strings for
      * @return array  The app list strings for the requested language
      */
     public function getAppListStrings($lang = 'en_us', $useTuples = false)
@@ -1378,7 +1401,7 @@ class MetaDataManager implements LoggerAwareInterface
      * @param String $metaType Type of metadata to load (e.g. platforms)
      * @return array Metadata loaded from files
      */
-    protected static function getPlatformMetadata(String $metaType): array
+    protected static function getPlatformMetadata(string $metaType): array
     {
         ${$metaType} = [];
         $metaDefs = SugarAutoLoader::existingCustom("clients/$metaType.php");
@@ -1401,7 +1424,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     public static function getPlatformsWithCaches($addBase = true)
     {
-        $platforms = array();
+        $platforms = [];
 
         // Add base to the list by default
         if ($addBase) {
@@ -1426,7 +1449,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     protected static function getPlatformsWithCachesInFilesystem()
     {
-        $platforms = array();
+        $platforms = [];
 
         // Get the listing of files in the cache directory
         $caches = glob(sugar_cached('api/metadata/') . '*.*');
@@ -1452,7 +1475,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     protected static function getPlatformsWithCachesInDatabase(MetaDataCache $cache = null)
     {
-        $platforms = array();
+        $platforms = [];
 
         if (!static::$isCacheEnabled) {
             return $platforms;
@@ -1483,7 +1506,7 @@ class MetaDataManager implements LoggerAwareInterface
      * Recursive decoder that handles decoding of HTML entities in metadata strings
      * before returning them to a client
      *
-     * @param  mixed        $source
+     * @param mixed $source
      * @return array|string
      */
     protected function decodeStrings($source)
@@ -1506,13 +1529,14 @@ class MetaDataManager implements LoggerAwareInterface
      * @param Array $list
      *
      */
-    protected function convertToTuples($list) {
+    protected function convertToTuples($list)
+    {
         if (!is_array($list)) {
             return $list;
         }
-        $ret = array();
-        foreach($list as $key => $val) {
-            $ret[] = array($key, $val);
+        $ret = [];
+        foreach ($list as $key => $val) {
+            $ret[] = [$key, $val];
         }
         return $ret;
     }
@@ -1541,7 +1565,7 @@ class MetaDataManager implements LoggerAwareInterface
             //
             // This prevents calling this once each for true and false when a true
             // would handle what a false would anyway
-            register_shutdown_function(array('MetaDataManager', 'clearAPICacheOnShutdown'), $deleteModuleClientCache, getcwd());
+            register_shutdown_function(['MetaDataManager', 'clearAPICacheOnShutdown'], $deleteModuleClientCache, getcwd());
             self::$clearCacheOnShutdown[$key] = true;
         }
     }
@@ -1553,7 +1577,7 @@ class MetaDataManager implements LoggerAwareInterface
      * @param string $workingDirectory directory to chdir into before starting the clears
      * @static
      */
-    public static function clearAPICacheOnShutdown($deleteModuleClientCache = true, $workingDirectory = "")
+    public static function clearAPICacheOnShutdown($deleteModuleClientCache = true, $workingDirectory = '')
     {
         if (!self::getCacheHasBeenCleared()) {
             //shutdown functions are not always called from the same working directory as the script that registered it
@@ -1570,8 +1594,8 @@ class MetaDataManager implements LoggerAwareInterface
             }
 
             // Wipe out any files from the metadata cache directory
-            $metadataFiles = glob(sugar_cached('api/metadata/').'*');
-            if ( is_array($metadataFiles) ) {
+            $metadataFiles = glob(sugar_cached('api/metadata/') . '*');
+            if (is_array($metadataFiles)) {
                 foreach ($metadataFiles as $metadataFile) {
                     // This removes the file and the reference from the map. This does
                     // NOT save the file map since that would be expensive in a loop
@@ -1585,8 +1609,8 @@ class MetaDataManager implements LoggerAwareInterface
             // clear the platform cache from sugar_cache to avoid out of date data as well as platform component files
             $platforms = self::getPlatformList();
             foreach ($platforms as $platform) {
-                $jsFiles = glob(sugar_cached("javascript/{$platform}/").'*');
-                if (is_array($jsFiles) ) {
+                $jsFiles = glob(sugar_cached("javascript/{$platform}/") . '*');
+                if (is_array($jsFiles)) {
                     foreach ($jsFiles as $jsFile) {
                         unlink($jsFile);
                     }
@@ -1634,7 +1658,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     protected function rebuildJssourceSection($data, MetaDataContextInterface $context)
     {
-        static::logDetails($this->logger, "rebuildJssourceSection", $context);
+        static::logDetails($this->logger, 'rebuildJssourceSection', $context);
         $data['jssource'] = $this->buildJavascriptComponentFile($data, !$this->public);
         //If this is private meta, we will still need to build the public javascript to verify that it hasn't changed.
         //If it has changed, the client will need to refresh to load it.
@@ -1662,7 +1686,7 @@ class MetaDataManager implements LoggerAwareInterface
             $cache = $this->getMetadataCache(true, $context);
             if (empty($cache['jssource'])) {
                 $publicMM = MetaDataManager::getManager($this->platforms, true);
-                $args = $this->args ?? array();
+                $args = $this->args ?? [];
                 $cache = $publicMM->getMetadata($args);
             }
             if ($cache && !empty($cache['jssource'])) {
@@ -1690,7 +1714,7 @@ class MetaDataManager implements LoggerAwareInterface
         // NOTE: Do not try to rebuild language cache files as this could be
         // problematic on installations with many installed languages, like OD
         if (!empty($data)) {
-            static::logDetails($this->logger, "rebuildLanguagesCache.", $context);
+            static::logDetails($this->logger, 'rebuildLanguagesCache.', $context);
             $this->clearLanguagesCache();
             $data = $this->loadSectionMetadata(self::MM_LABELS, $data, $context);
             $data = $this->loadSectionMetadata(self::MM_ORDEREDLABELS, $data, $context);
@@ -1723,7 +1747,7 @@ class MetaDataManager implements LoggerAwareInterface
 
             if (!empty($data)) {
                 // Handle the module(s)
-                foreach ((array) $modules as $module) {
+                foreach ((array)$modules as $module) {
                     // Only work on modules that was have already grabbed
                     if (isset($data['modules'][$module])) {
                         $index = 'module:' . $module;
@@ -1778,7 +1802,7 @@ class MetaDataManager implements LoggerAwareInterface
 
             if (!empty($data)) {
                 // Handle the section(s)
-                foreach ((array) $section as $index) {
+                foreach ((array)$section as $index) {
                     if (isset($this->sectionMap[$index]) && $this->isValidSection($index)) {
                         if (isset(self::$currentProcess[$index])) {
                             continue;
@@ -1816,15 +1840,15 @@ class MetaDataManager implements LoggerAwareInterface
             $context = $this->getDefaultContext();
         }
 
-        static::logDetails($this->logger, "rebuildCache ", $context);
+        static::logDetails($this->logger, 'rebuildCache ', $context);
         // Delete our current supply of caches if there are any
         $deleted = $this->deletePlatformVisibilityCaches($context);
 
         // Rebuild the cache if there was a deleted cache or if we are forced to
         if (($force || $deleted) && static::$isCacheEnabled) {
             // Clear the module client cache first
-            MetaDataFiles::clearModuleClientCache(array(), '', array($this->platforms[0]));
-            $this->getMetadataInternal(array(), $context, true);
+            MetaDataFiles::clearModuleClientCache([], '', [$this->platforms[0]]);
+            $this->getMetadataInternal([], $context, true);
         }
     }
 
@@ -1834,10 +1858,10 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * TODO: Its usage should be replaced by a queue mechanism to rebuild the caches outside of the request scope.
      *
-     * @param array                          $platforms
-     * @param MetaDataContextInterface       $contexts
+     * @param array $platforms
+     * @param MetaDataContextInterface $contexts
      */
-    public function invalidateCache($platforms = array(), MetaDataContextInterface $context = null)
+    public function invalidateCache($platforms = [], MetaDataContextInterface $context = null)
     {
         if (!$context) {
             $context = $this->getDefaultContext();
@@ -1846,15 +1870,14 @@ class MetaDataManager implements LoggerAwareInterface
             $platforms = static::getPlatformsWithCaches();
         }
 
-        static::logDetails($this->logger, "Invalidating cache. Platforms with caches " . print_r($platforms, true), $context);
+        static::logDetails($this->logger, 'Invalidating cache. Platforms with caches ' . print_r($platforms, true), $context);
 
         $deleted = $this->deletePlatformVisibilityCaches($context);
         if ($deleted) {
             foreach ($platforms as $platform) {
-                MetaDataFiles::clearModuleClientCache(array(), '', array($platform));
+                MetaDataFiles::clearModuleClientCache([], '', [$platform]);
             }
         }
-
     }
 
     /**
@@ -1877,19 +1900,19 @@ class MetaDataManager implements LoggerAwareInterface
      * @param array $platforms
      * @param bool $force Indicator that tells this method whether to force a build
      */
-    public static function refreshCache($platforms = array(), $force = false)
+    public static function refreshCache($platforms = [], $force = false)
     {
         // If we are in queue state (like in RepairAndRebuild), hold on to this
         // request until we are told to run it
         if (static::$isQueued) {
-            static::$fullRefresh = array('platforms' => $platforms);
+            static::$fullRefresh = ['platforms' => $platforms];
             return;
         }
 
         // Set our inProcess flag;
         static::$inProcess = true;
 
-        static::logDetails(LoggerFactory::getLogger('metadata'), "refreshCache ");
+        static::logDetails(LoggerFactory::getLogger('metadata'), 'refreshCache ');
 
         // The basics are, for each platform, rewrite the cache for public and private
         if (empty($platforms)) {
@@ -1901,8 +1924,8 @@ class MetaDataManager implements LoggerAwareInterface
 
         //No need to actually build the cache if we can't store it.
         if (static::$isCacheEnabled) {
-            foreach ((array) $platforms as $platform) {
-                foreach (array(true, false) as $public) {
+            foreach ((array)$platforms as $platform) {
+                foreach ([true, false] as $public) {
                     $mm = static::getManager($platform, $public, true);
                     $contexts = static::getAllMetadataContexts($public);
                     foreach ($contexts as $context) {
@@ -1927,7 +1950,7 @@ class MetaDataManager implements LoggerAwareInterface
      * @param array $platforms
      * @param array $params Additional metadata parameters
      */
-    public static function refreshSectionCache($section, $platforms = array(), $params = array())
+    public static function refreshSectionCache($section, $platforms = [], $params = [])
     {
         self::refreshCachePart('section', $section, $platforms, $params);
     }
@@ -1939,7 +1962,7 @@ class MetaDataManager implements LoggerAwareInterface
      * @param array $platforms
      * @param array $params Additional metadata parameters
      */
-    public static function refreshModulesCache($modules, $platforms = array(), $params = array())
+    public static function refreshModulesCache($modules, $platforms = [], $params = [])
     {
         self::refreshCachePart('modules', $modules, $platforms, $params);
     }
@@ -1952,7 +1975,7 @@ class MetaDataManager implements LoggerAwareInterface
      * @param array $platforms List of platforms for this request
      * @param array $params Additional metadata parameters
      */
-    public static function refreshLanguagesCache($languages, $platforms = array(), $params = array())
+    public static function refreshLanguagesCache($languages, $platforms = [], $params = [])
     {
         self::refreshCachePart('languages', $languages, $platforms, $params);
     }
@@ -1968,7 +1991,7 @@ class MetaDataManager implements LoggerAwareInterface
      * @param array $params Additional metadata parameters
      * @return null
      */
-    protected static function refreshCachePart($part, $items = array(), $platforms = array(), $params = array())
+    protected static function refreshCachePart($part, $items = [], $platforms = [], $params = [])
     {
         // No args, no worries
         if (empty($items)) {
@@ -1983,9 +2006,9 @@ class MetaDataManager implements LoggerAwareInterface
         // If we are in queue state (like in RepairAndRebuild), hold on to this
         // request until we are told to run it
         if (self::$isQueued) {
-            self::buildCacheRefreshQueueSection($part, $items, array_merge($params, array(
+            self::buildCacheRefreshQueueSection($part, $items, array_merge($params, [
                 'platforms' => $platforms,
-            )));
+            ]));
             return;
         }
 
@@ -2002,16 +2025,16 @@ class MetaDataManager implements LoggerAwareInterface
         if (static::$isCacheEnabled) {
             // Handle refreshing based on the cache part
             $method = 'rebuild' . ucfirst(strtolower($part)) . 'Cache';
-            foreach ((array) $platforms as $platform) {
-                foreach (array(true, false) as $public) {
+            foreach ((array)$platforms as $platform) {
+                foreach ([true, false] as $public) {
                     $mm = MetaDataManager::getManager($platform, $public, true);
                     if (method_exists($mm, $method)) {
-                        $sections = ($part == 'section') ? (is_array($items) ? $items : [$items]) : [$part]  ;
+                        $sections = ($part == 'section') ? (is_array($items) ? $items : [$items]) : [$part];
                         $contextSections = array_intersect($sections, $mm->getContextAwareSections());
                         $baseOnly = empty($contextSections);
 
                         if ($baseOnly) {
-                            $contexts = array($mm->getDefaultContext());
+                            $contexts = [$mm->getDefaultContext()];
                         } else {
                             $contexts = static::getMetadataContexts($public, $params);
                         }
@@ -2035,7 +2058,7 @@ class MetaDataManager implements LoggerAwareInterface
                                     return true;
                                 }
                             );
-                            foreach($allContexts as $context) {
+                            foreach ($allContexts as $context) {
                                 $mm->deletePlatformVisibilityCaches($context);
                             }
                         }
@@ -2053,8 +2076,8 @@ class MetaDataManager implements LoggerAwareInterface
      * Builds up a section of the refreshCacheQueue based on name.
      *
      * @param string $name Name of the queue section
-     * @param array  $items The list of modules or sections
-     * @param array  $params Additional metadata parameters
+     * @param array $items The list of modules or sections
+     * @param array $params Additional metadata parameters
      */
     protected static function buildCacheRefreshQueueSection($name, $items, $params)
     {
@@ -2063,7 +2086,7 @@ class MetaDataManager implements LoggerAwareInterface
         }
 
         if (!is_array($items)) {
-            $items = array($items);
+            $items = [$items];
         }
 
         self::$queue->enqueue($name, $items, $params);
@@ -2104,7 +2127,7 @@ class MetaDataManager implements LoggerAwareInterface
                             $platforms = $params['platforms'];
                             unset($params['platforms']);
                         } else {
-                            $platforms = array();
+                            $platforms = [];
                         }
                         self::$method($items, $platforms, $params);
                     }
@@ -2144,7 +2167,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     public static function setRunQueueOnCall($value)
     {
-        self::$runQueueOnCall = (bool) $value;
+        self::$runQueueOnCall = (bool)$value;
     }
 
     /**
@@ -2200,6 +2223,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     public function getServerInfo()
     {
+        $custom_version = null;
         $data = [];
         $system_config = Administration::getSettings(false, true);
         $data['flavor'] = $this->getInstanceVersionValue('sugar_flavor');
@@ -2207,7 +2231,7 @@ class MetaDataManager implements LoggerAwareInterface
         $data['build'] = $this->getInstanceVersionValue('sugar_build');
         $data['marketing_version'] = $this->getInstanceVersionValue('sugar_mar_version');
 
-        $data['product_name'] = "SugarCRM";
+        $data['product_name'] = 'SugarCRM';
 
         // Include all available licenses for the instance
         $sm = SubscriptionManager::instance();
@@ -2218,29 +2242,34 @@ class MetaDataManager implements LoggerAwareInterface
             $data['custom_version'] = $custom_version;
         }
 
-        if(isset($system_config->settings['system_skypeout_on']) && $system_config->settings['system_skypeout_on'] == 1){
+        if (isset($system_config->settings['system_skypeout_on']) && $system_config->settings['system_skypeout_on'] == 1) {
             $data['system_skypeout_on'] = true;
         }
 
-        if(isset($system_config->settings['system_tweettocase_on']) && $system_config->settings['system_tweettocase_on'] == 1){
+        if (isset($system_config->settings['system_tweettocase_on']) && $system_config->settings['system_tweettocase_on'] == 1) {
             $data['system_tweettocase_on'] = true;
         }
 
         $fts_enabled = SugarSearchEngineFactory::getFTSEngineNameFromConfig();
         if (!empty($fts_enabled) && $fts_enabled != 'SugarSearchEngine') {
-            $data['fts'] = array(
+            $data['fts'] = [
                 'enabled' => true,
                 'type' => $fts_enabled,
-            );
+            ];
         } else {
-            $data['fts'] = array(
+            $data['fts'] = [
                 'enabled' => false,
-            );
+            ];
         }
 
         //Adds the portal status to the server info collection.
         //Property 'on' of category 'portal' must be a boolean.
         $data['portal_active'] = !empty($system_config->settings['portal_on']);
+
+        // For use in analytics, we want to make sure these parameters actually have a value so use a full ternary here
+        $sugarConfig = $this->getSugarConfig();
+        $data['host_environment'] = empty($sugarConfig['host_environment']) ? 'on-premise' : $sugarConfig['host_environment'];
+        $data['host_designation'] = empty($sugarConfig['host_designation']) ? 'production' : $sugarConfig['host_designation'];
 
         // Add in analytic data
         return $system_config->getUpdatedAnalyticServerInfo($data, $system_config->settings);
@@ -2259,6 +2288,7 @@ class MetaDataManager implements LoggerAwareInterface
 
         return $this->idpConfig;
     }
+
     /**
      * Gets configs
      *
@@ -2298,7 +2328,7 @@ class MetaDataManager implements LoggerAwareInterface
         if (isset($sugarConfig['analytics'])) {
             $configs['analytics'] = $sugarConfig['analytics'];
         } else {
-            $configs['analytics'] = array('enabled' => false);
+            $configs['analytics'] = ['enabled' => false];
         }
 
         if (isset($sugarConfig['passwordsetting'])) {
@@ -2306,7 +2336,7 @@ class MetaDataManager implements LoggerAwareInterface
         }
 
         $caseBean = BeanFactory::newBean('Cases');
-        if(!empty($caseBean)) {
+        if (!empty($caseBean)) {
             $configs['inboundEmailCaseSubjectMacro'] = $caseBean->getEmailSubjectMacro();
         }
 
@@ -2342,6 +2372,9 @@ class MetaDataManager implements LoggerAwareInterface
 
         // configs for reports thresholds
         $configs['reports_complexity_display'] = $sugarConfig['reports_complexity_display'] ?? [];
+
+        //DocuSign global settings
+        $configs['docusign'] = DocuSignUtils::getDocusignGlobalConfigs();
 
         // Handle connectors
         $connectors = ConnectorUtils::getConnectors();
@@ -2406,7 +2439,84 @@ class MetaDataManager implements LoggerAwareInterface
         $configs['versionMark'] = getVersionedPath('');
         $configs['customer_journey'] = $this->getCustomerJourneyConfig($sugarConfig);
 
+        foreach ($administration->settings as $key => $value) {
+            if (substr($key, 0, 9) === 'timeline_') {
+                $configs['timeline'][substr($key, 9)] = $value;
+            }
+        }
+        $modules = $this->getTabList();
+        foreach ($modules as $module) {
+            if (!isset($configs['timeline'][$module])) {
+                $bean = BeanFactory::getBean($module);
+                if ($bean) {
+                    $configs['timeline'][$module]['enabledModules'] =
+                        array_keys($this->getDefaultTimelineModules($bean));
+                }
+            }
+        }
         return $configs;
+    }
+
+    /**
+     * Get default timeline modules enabled for a module
+     * @param SugarBean $bean
+     * @return array
+     */
+    public function getDefaultTimelineModules(SugarBean $bean): array
+    {
+        $modules = [];
+        $defaultModuleList = [
+            'Meetings',
+            'Calls',
+            'Notes',
+            'Emails',
+            'Messages',
+            'Tasks',
+            // Market Modules
+            'sf_webActivity',
+            'sf_Dialogs',
+            'sf_EventManagement',
+        ];
+        $module = $bean->getModuleName();
+        $subpanelDefs = $this->getSubpanelMetadata($module);
+        if (!empty($subpanelDefs[$module]['base']['layout']['subpanels'])) {
+            foreach ($subpanelDefs[$module]['base']['layout']['subpanels']['components'] as $subpanel) {
+                if (!empty($subpanel['context']['link'])) {
+                    $link = $subpanel['context']['link'];
+                    if ($bean->load_relationship($link)) {
+                        $relatedModule = $bean->$link->getRelatedModuleName();
+                        if ($relatedModule && in_array($relatedModule, $defaultModuleList)) {
+                            $modules[$link] = $relatedModule;
+                        }
+                    }
+                }
+            }
+        }
+        return $modules;
+    }
+
+    /**
+     * Retrieve the subpanel metadata for a given module.
+     * @param string $module
+     * @return array The subpanel metadata
+     */
+    public function getSubpanelMetadata(string $module): array
+    {
+        $viewdefs = [];
+        $moduleDir = BeanFactory::getModuleDir($module);
+        if ($moduleDir) {
+            $viewdefs = [];
+            // ootb
+            foreach (SugarAutoLoader::existingCustom('modules/' . $moduleDir . '/clients/base/layouts/subpanels/subpanels.php') as $file) {
+                require FileLoader::validateFilePath($file);
+            }
+            // customizations
+            $ext = 'custom/modules/' . $moduleDir . '/Ext/clients/base/layouts/subpanels/subpanels.ext.php';
+            if (file_exists($ext)) {
+                require FileLoader::validateFilePath($ext);
+            }
+        }
+        return $viewdefs;
     }
 
     /**
@@ -2419,7 +2529,7 @@ class MetaDataManager implements LoggerAwareInterface
     protected function getFilteredConnectorList($connectors)
     {
         // Declare the return
-        $return = array();
+        $return = [];
 
         // Loop over the connectors, cleaning up the name and parsing the known
         // properties that the client needs
@@ -2468,9 +2578,9 @@ class MetaDataManager implements LoggerAwareInterface
      * Retrieve map of configuration properties that should assume a different
      * name than the one provided by parse mechanism.
      *
+     * @return array Configuration properties.
      * @deprecated
      *
-     * @return array Configuration properties.
      */
     protected function getConfigPropertiesExceptions()
     {
@@ -2491,8 +2601,8 @@ class MetaDataManager implements LoggerAwareInterface
      */
     protected function parseConfigProperties(array $config, array $configProperties)
     {
-        $configs = array();
-        foreach($configProperties as $key => $value) {
+        $configs = [];
+        foreach ($configProperties as $key => $value) {
             if (!isset($config[$key])) {
                 continue;
             }
@@ -2504,7 +2614,7 @@ class MetaDataManager implements LoggerAwareInterface
                     $config[$key],
                     $value
                 );
-            } else if ($value === true) {
+            } elseif ($value === true) {
                 $configs[$translatedKey] = $config[$key];
             }
         }
@@ -2523,9 +2633,10 @@ class MetaDataManager implements LoggerAwareInterface
     {
         return lcfirst(
             preg_replace_callback(
-                '/(^|_)([a-z])/', function($match) {
-                return strtoupper($match[2]);
-            },
+                '/(^|_)([a-z])/',
+                function ($match) {
+                    return strtoupper($match[2]);
+                },
                 $property
             )
         );
@@ -2535,17 +2646,17 @@ class MetaDataManager implements LoggerAwareInterface
      * Handle configuration properties that should assume a different name than
      * the one provided by parse mechanism.
      *
-     * @deprecated This should only be used to handle legacy code, thus should
-     * removed when that code gets cleaned up.
-     *
      * @param array $configs Client side configuration properties.
      *
      * @return array Array of client side configuration properties
+     * @deprecated This should only be used to handle legacy code, thus should
+     * removed when that code gets cleaned up.
+     *
      */
     protected function handleConfigPropertiesExceptions(array $configs)
     {
         $exceptions = $this->getConfigPropertiesExceptions();
-        foreach($exceptions as $key => $value) {
+        foreach ($exceptions as $key => $value) {
             if (!isset($configs[$key])) {
                 continue;
             }
@@ -2564,7 +2675,7 @@ class MetaDataManager implements LoggerAwareInterface
      * or the session value has to be false (meaning the session value was set
      * before the metadata cache was built) in order to pass the validity check.
      *
-     * @param string   $hash Metadata hash to validate against the cache.
+     * @param string $hash Metadata hash to validate against the cache.
      *
      * @return boolean
      */
@@ -2618,7 +2729,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     public function hasUserMetadataChanged($user, $hash)
     {
-       return $user->getUserMDHash() != $hash;
+        return $user->getUserMDHash() != $hash;
     }
 
     /**
@@ -2633,12 +2744,12 @@ class MetaDataManager implements LoggerAwareInterface
      * @param MetaDataContextInterface|null $context Metadata context
      * @return mixed
      */
-    public function getMetadata($args = array(), MetaDataContextInterface $context = null)
+    public function getMetadata($args = [], MetaDataContextInterface $context = null)
     {
         // disable admin work, metadata is always access controlled
         $adminWork = new AdminWork();
         $adminWork->reset(false);
-        $data =  $this->getMetadataInternal($args, $context);
+        $data = $this->getMetadataInternal($args, $context);
         //update the hash before returning to ensure the base and context hashes are incorperated.
         //Internally this hash is not stored with a context cache.
         $data['_hash'] = $this->getMetadataHash(false, $context);
@@ -2763,7 +2874,7 @@ class MetaDataManager implements LoggerAwareInterface
             if (!$this->public) {
                 ini_set('max_execution_time', 0);
             }
-            $hash = (string) $context->getHash();
+            $hash = (string)$context->getHash();
             $systemProcessLock = new SystemProcessLock(__METHOD__, $hash);
 
             // returned true here will start the rebuild process
@@ -2796,8 +2907,7 @@ class MetaDataManager implements LoggerAwareInterface
         // hash
         if ($data['_hash'] != $oldHash) {
             $this->putMetadataCache($data, $context);
-        }
-        //Ensure that the metadata hashes is up to date
+        } //Ensure that the metadata hashes is up to date
         elseif ($this->getCachedMetadataHash($context, false) != $data['_hash']) {
             $this->cacheMetadataHash($data['_hash'], $context);
         }
@@ -2830,7 +2940,8 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @return bool true if the js-component file for this metadata call exists, false otherwise
      */
-    protected function verifyJSSource($data, MetaDataContextInterface $context = null) {
+    protected function verifyJSSource($data, MetaDataContextInterface $context = null)
+    {
         if (!empty($data['jssource']) && !file_exists($data['jssource'])) {
             //The jssource file is invalid, we need to invalidate the hash as well.
             return false;
@@ -2861,7 +2972,7 @@ class MetaDataManager implements LoggerAwareInterface
     {
         $this->args = $args;
         // Start collecting data
-        $this->data = array();
+        $this->data = [];
 
         $defaultContext = $this->getDefaultContext();
         $sections = $this->sections;
@@ -2890,7 +3001,7 @@ class MetaDataManager implements LoggerAwareInterface
         $this->data = $this->normalizeMetadata($this->data);
 
         // Handle hashing
-        $this->data["_hash"] = $this->hashChunk($this->data);
+        $this->data['_hash'] = $this->hashChunk($this->data);
 
         // Send it back
         return $this->data;
@@ -2975,8 +3086,9 @@ class MetaDataManager implements LoggerAwareInterface
         }
 
         if (!empty($data['modules'])) {
-            if (!empty($compJS) && !$onlyReturnModuleComponents)
-                $js .= ",";
+            if (!empty($compJS) && !$onlyReturnModuleComponents) {
+                $js .= ',';
+            }
 
             $js .= "\n\t\"modules\":{";
 
@@ -3020,43 +3132,41 @@ class MetaDataManager implements LoggerAwareInterface
      */
     protected function buildJavascriptComponentSection(&$data, $isModule = false)
     {
-        $js = "";
+        $js = '';
         $platforms = array_reverse($this->platforms);
 
-        $typeData = array();
+        $typeData = [];
 
         if ($isModule) {
-            $types = array('fieldTemplates', 'views', 'layouts', 'datas');
+            $types = ['fieldTemplates', 'views', 'layouts', 'datas'];
         } else {
-            $types = array('fields', 'views', 'layouts', 'datas');
+            $types = ['fields', 'views', 'layouts', 'datas'];
         }
 
         foreach ($types as $mdType) {
-
             if (!empty($data[$mdType])) {
-                $platControllers = array();
+                $platControllers = [];
 
                 foreach ($data[$mdType] as $name => $component) {
-                    if ( !is_array($component) || !isset($component['controller']) ) {
+                    if (!is_array($component) || !isset($component['controller'])) {
                         continue;
                     }
                     $controllers = $component['controller'];
 
-                    if (is_array($controllers) ) {
+                    if (is_array($controllers)) {
                         foreach ($platforms as $platform) {
                             if (!isset($controllers[$platform])) {
                                 continue;
                             }
                             $controller = $controllers[$platform];
                             // remove additional symbols in end of js content - it will be included in content
-                            $controller = trim(trim($controller), ",;");
+                            $controller = trim(trim($controller), ',;');
                             $controller = $this->insertHeaderComment($controller, $mdType, $name, $platform);
 
-                            if ( !isset($platControllers[$platform]) ) {
-                                $platControllers[$platform] = array();
+                            if (!isset($platControllers[$platform])) {
+                                $platControllers[$platform] = [];
                             }
-                            $platControllers[$platform][] = "\"$name\": {\"controller\": ".$controller." }";
-
+                            $platControllers[$platform][] = "\"$name\": {\"controller\": " . $controller . ' }';
                         }
                     }
                     unset($data[$mdType][$name]['controller']);
@@ -3070,20 +3180,19 @@ class MetaDataManager implements LoggerAwareInterface
                 $thisTypeStr = "\"$mdType\": {\n";
 
                 foreach ($platforms as $platform) {
-                    if ( isset($platControllers[$platform]) ) {
-                        $thisTypeStr .= "\"$platform\": {\n".implode(",\n",$platControllers[$platform])."\n},\n";
+                    if (isset($platControllers[$platform])) {
+                        $thisTypeStr .= "\"$platform\": {\n" . implode(",\n", $platControllers[$platform]) . "\n},\n";
                     }
                 }
 
-                $thisTypeStr = trim($thisTypeStr,"\n,")."}\n";
+                $thisTypeStr = trim($thisTypeStr, "\n,") . "}\n";
                 $typeData[] = $thisTypeStr;
             }
         }
 
-        $js = implode(",\n",$typeData)."\n";
+        $js = implode(",\n", $typeData) . "\n";
 
         return $js;
-
     }
 
     /**
@@ -3099,7 +3208,7 @@ class MetaDataManager implements LoggerAwareInterface
     {
         $singularType = substr($mdType, 0, -1);
         $needle = '({';
-        $headerComment = "\n\t// " . ucfirst($name) ." ". ucfirst($singularType) . " ($platform) \n";
+        $headerComment = "\n\t// " . ucfirst($name) . ' ' . ucfirst($singularType) . " ($platform) \n";
 
         // Find position "after" needle
         $pos = (strpos($controller, $needle) + strlen($needle));
@@ -3118,10 +3227,10 @@ class MetaDataManager implements LoggerAwareInterface
     {
         $languages = LanguageManager::getEnabledAndDisabledLanguages();
 
-        return array(
+        return [
             'enabled' => $this->getLanguageKeys($languages['enabled']),
             'disabled' => $this->getLanguageKeys($languages['disabled']),
-        );
+        ];
     }
 
     /**
@@ -3133,7 +3242,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     protected function getLanguageKeys($language)
     {
-        $return = array();
+        $return = [];
         foreach ($language as $lang) {
             $return[] = $lang['module'];
         }
@@ -3174,7 +3283,7 @@ class MetaDataManager implements LoggerAwareInterface
             $ordered = false;
         } else {
             $lang = $args['lang'];
-            $ordered = empty($args['ordered']) ? false : (bool) $args['ordered'];
+            $ordered = empty($args['ordered']) ? false : (bool)$args['ordered'];
         }
         return $this->getLanguageFileData($lang, $ordered);
     }
@@ -3182,7 +3291,7 @@ class MetaDataManager implements LoggerAwareInterface
     /**
      * Get the data element of the language file properties for a language
      *
-     * @param  string  $lang   The language to get data for
+     * @param string $lang The language to get data for
      * @param boolean $ordered is a flag that determines $app_list_strings should be key => value pairs or tuples
      * @return string  A JSON string of langauge data
      */
@@ -3221,7 +3330,7 @@ class MetaDataManager implements LoggerAwareInterface
 
         $this->data['full_module_list'] = $data['full_module_list'] = $this->getModuleList($filterModules);
         $this->data['modules'] = $data['modules'] = $this->getModulesData($context);
-        $data['modules_info'] = $this->getModulesInfo(array(), $context);
+        $data['modules_info'] = $this->getModulesInfo([], $context);
         return $data;
     }
 
@@ -3236,8 +3345,8 @@ class MetaDataManager implements LoggerAwareInterface
     {
         $moduleList = $this->getModules($filtered);
         $oldModuleList = $moduleList;
-        $moduleList = array();
-        foreach ( $oldModuleList as $module ) {
+        $moduleList = [];
+        foreach ($oldModuleList as $module) {
             $moduleList[$module] = $module;
         }
 
@@ -3251,7 +3360,7 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @return array An array with all the modules and their properties
      */
-    public function getModulesInfo($data = array(), MetaDataContextInterface $context = null)
+    public function getModulesInfo($data = [], MetaDataContextInterface $context = null)
     {
         global $moduleList;
 
@@ -3259,7 +3368,7 @@ class MetaDataManager implements LoggerAwareInterface
 
         $fullModuleList = $this->getFullModuleList($filterModules);
 
-        $modulesInfo = array();
+        $modulesInfo = [];
 
         $visibleList = array_flip($moduleList);
         $tabs = array_flip($this->getTabList($filterModules));
@@ -3267,7 +3376,7 @@ class MetaDataManager implements LoggerAwareInterface
         $quickcreate = array_flip($this->getQuickCreateList($filterModules));
 
         foreach ($fullModuleList as $module) {
-            $modulesInfo[$module] = array();
+            $modulesInfo[$module] = [];
             $modulesInfo[$module]['enabled'] = true;
             $modulesInfo[$module]['visible'] = isset($visibleList[$module]);
             $modulesInfo[$module]['display_tab'] = isset($tabs[$module]);
@@ -3335,7 +3444,7 @@ class MetaDataManager implements LoggerAwareInterface
         }
         $modulesData = $this->data['modules'];
 
-        $quickcreateModules = array();
+        $quickcreateModules = [];
 
         foreach ($modulesData as $key => $module) {
             if ($key == '_hash') {
@@ -3402,11 +3511,10 @@ class MetaDataManager implements LoggerAwareInterface
         if (isset($data['modules'][$module]['fields'])) {
             $fields = $data['modules'][$module]['fields'];
 
-            foreach($fields as $fieldName => $fieldDef) {
-
+            foreach ($fields as $fieldName => $fieldDef) {
                 // Load and assign any relate or link type fields
                 if (isset($fieldDef['type']) && ($fieldDef['type'] == 'relate')) {
-                    if (isset($fieldDef['module']) && !in_array($fieldDef['module'], $data['full_module_list'])) {
+                    if (isset($fieldDef['module']) && !safeInArray($fieldDef['module'], $data['full_module_list'])) {
                         $data['full_module_list'][$fieldDef['module']] = $fieldDef['module'];
                     }
                 } elseif (isset($fieldDef['type']) && ($fieldDef['type'] == 'link')) {
@@ -3426,12 +3534,12 @@ class MetaDataManager implements LoggerAwareInterface
      */
     public function getSystemCurrencies()
     {
-        $currencies = array();
+        $currencies = [];
         $lcurrency = new ListCurrency();
         $lcurrency->lookupCurrencies(true);
         if (!empty($lcurrency->list)) {
             foreach ($lcurrency->list as $current) {
-                $currency = array();
+                $currency = [];
                 $currency['name'] = $current->name;
                 $currency['iso4217'] = $current->iso4217;
                 $currency['status'] = $current->status;
@@ -3470,11 +3578,11 @@ class MetaDataManager implements LoggerAwareInterface
         $languageList = array_keys(get_languages());
         sugar_mkdir(sugar_cached('api/metadata'), null, true);
 
-        $fileList = array();
+        $fileList = [];
         foreach ($languageList as $language) {
             $fileList[$language] = $this->getLangUrl($language, $ordered);
         }
-        $urlList = array();
+        $urlList = [];
         foreach ($fileList as $lang => $file) {
             // Get the hash for this lang file so we can append it to the URL.
             // This fixes issues where lang strings or list strings change but
@@ -3497,12 +3605,13 @@ class MetaDataManager implements LoggerAwareInterface
      */
     protected function getLanguageCacheAttributes()
     {
-        return array(
+        return [
             'version' => $GLOBALS['sugar_config']['js_lang_version'],
-        );
+        ];
     }
 
-    public function getOrderedStringUrls() {
+    public function getOrderedStringUrls()
+    {
         return $this->getStringUrls(true);
     }
 
@@ -3527,16 +3636,16 @@ class MetaDataManager implements LoggerAwareInterface
      */
     protected function getLangUrl($language, $ordered = false)
     {
-        $order_key = $ordered ? "_ordered" : "";
-        $public_key = $this->public ? "_public" : "";
+        $order_key = $ordered ? '_ordered' : '';
+        $public_key = $this->public ? '_public' : '';
         $platform = $this->platforms[0];
-        return  sugar_cached("api/metadata/lang_{$language}_{$platform}{$public_key}{$order_key}.json");
+        return sugar_cached("api/metadata/lang_{$language}_{$platform}{$public_key}{$order_key}.json");
     }
 
     /**
      * Get the hash element of the language file properties for a language
      *
-     * @param  string  $lang   The language to get data for
+     * @param string $lang The language to get data for
      * @param boolean $ordered is a flag that determines $app_list_strings should be key => value pairs or tuples
      * @return string  The hash of the contents of the language file
      */
@@ -3549,7 +3658,7 @@ class MetaDataManager implements LoggerAwareInterface
     /**
      * Gets the file properties for a language
      *
-     * @param  string  $lang   The language to get data for
+     * @param string $lang The language to get data for
      * @param boolean $ordered is a flag that determines $app_list_strings should be key => value pairs or tuples
      * @return array   Array containing the hash and data for a language file
      */
@@ -3608,23 +3717,22 @@ class MetaDataManager implements LoggerAwareInterface
 
             // Return the same thing as would be returned if we had to build the
             // file for the first time
-            return array('hash' => $hash, 'data' => $data);
+            return ['hash' => $hash, 'data' => $data];
         }
 
-        $stringData = array();
+        $stringData = [];
         $stringData['app_list_strings'] = $this->getAppListStrings($language, $ordered);
         $stringData['app_strings'] = $this->getAppStrings($language);
         if ($this->public) {
             // Exception for the AppListStrings.
-            $app_list_strings_public = array();
+            $app_list_strings_public = [];
             $app_list_strings_public['available_language_dom'] = $stringData['app_list_strings']['available_language_dom'];
 
             // Let clients fill in any gaps that may need to be filled in
             $app_list_strings_public = $this->fillInAppListStrings($app_list_strings_public, $stringData['app_list_strings']);
             $stringData['app_list_strings'] = $app_list_strings_public;
-
         } else {
-            $modStrings = array();
+            $modStrings = [];
             foreach ($modules as $modName => $moduleDef) {
                 $modData = $this->getModuleStrings($modName, $language);
                 $modStrings[$modName] = $modData;
@@ -3635,17 +3743,17 @@ class MetaDataManager implements LoggerAwareInterface
         $data = json_encode($stringData);
         sugar_file_put_contents_atomic($filePath, $data);
 
-        return array("hash" => $stringData['_hash'], "data" => $data);
+        return ['hash' => $stringData['_hash'], 'data' => $data];
     }
 
     /**
      * Fills in additional app list strings data as needed by the client
      *
-     * @param  array $public Public app list strings
-     * @param  array $main Core app list strings
+     * @param array $public Public app list strings
+     * @param array $main Core app list strings
      * @return array
      */
-    protected function fillInAppListStrings(Array $public, Array $main)
+    protected function fillInAppListStrings(array $public, array $main)
     {
         return $public;
     }
@@ -3661,7 +3769,7 @@ class MetaDataManager implements LoggerAwareInterface
         if ($this->getCache() === false) {
             return false;
         }
-        $hashes = self::$isCacheEnabled ? $this->getCache()->get('hashes') : array();
+        $hashes = self::$isCacheEnabled ? $this->getCache()->get('hashes') : [];
         return !empty($hashes[$key]) ? $hashes[$key] : false;
     }
 
@@ -3705,7 +3813,7 @@ class MetaDataManager implements LoggerAwareInterface
         }
         $hashes = $this->getCache()->get('hashes');
         if (empty($hashes)) {
-            $hashes = array();
+            $hashes = [];
         }
         $hashes[$key] = $hash;
         $this->getCache()->set('hashes', $hashes);
@@ -3717,7 +3825,8 @@ class MetaDataManager implements LoggerAwareInterface
      * @param Array $data data to be returned to the client
      * @param Array $args args passed to the API
      */
-    protected function getOverrides($data, $args = array()) {
+    protected function getOverrides($data, $args = [])
+    {
         if (isset($args['override_values']) && is_array($args['override_values'])) {
             return $args['override_values'];
         }
@@ -3796,11 +3905,11 @@ class MetaDataManager implements LoggerAwareInterface
         // Get the hashes array
         $hashes = $this->getCache()->get('hashes');
         if (empty($hashes)) {
-            $hashes = array();
+            $hashes = [];
         }
 
         // Delete language caches and remove from the hash cache
-        foreach (array(true, false) as $ordered) {
+        foreach ([true, false] as $ordered) {
             $pattern = $this->getLangUrl('(.*)', $ordered);
             foreach ($hashes as $k => $v) {
                 if (preg_match("#^{$pattern}$#", $k, $m)) {
@@ -3816,7 +3925,7 @@ class MetaDataManager implements LoggerAwareInterface
                     }
 
                     $deleted = true;
-                    $this->logger->debug("deleted language cache for " . $m[1]);
+                    $this->logger->debug('deleted language cache for ' . $m[1]);
                 }
             }
         }
@@ -3889,7 +3998,8 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @param bool $public
      */
-    protected function loadSections($public = false) {
+    protected function loadSections($public = false)
+    {
         $method = 'get' . ($public ? 'Public' : 'Private') . 'Sections';
         $this->sections = $this->$method();
     }
@@ -3897,8 +4007,9 @@ class MetaDataManager implements LoggerAwareInterface
     /**
      * Loads the standard public metadata sections. This can be overridden.
      */
-    protected function getPublicSections() {
-        return array(
+    protected function getPublicSections()
+    {
+        return [
             self::MM_MODULES,
             self::MM_FIELDS,
             self::MM_VIEWS,
@@ -3910,14 +4021,15 @@ class MetaDataManager implements LoggerAwareInterface
             self::MM_LOGOURL,
             self::MM_LOGOURLDARK,
             self::MM_OVERRIDEVALUES,
-        );
+        ];
     }
 
     /**
      * Loads the standard private metadata sections. This can be overridden.
      */
-    protected function getPrivateSections() {
-        return array(
+    protected function getPrivateSections()
+    {
+        return [
             self::MM_MODULES,
             self::MM_FULLMODULELIST,
             self::MM_MODULESINFO,
@@ -3940,12 +4052,12 @@ class MetaDataManager implements LoggerAwareInterface
             self::MM_LANGUAGES,
             self::MM_OVERRIDEVALUES,
             self::MM_EDITDDFILTERS,
-        );
+        ];
     }
 
     protected function getContextAwareSections()
     {
-        return array(
+        return [
             self::MM_MODULES,
             self::MM_FULLMODULELIST,
             self::MM_MODULESINFO,
@@ -3956,7 +4068,7 @@ class MetaDataManager implements LoggerAwareInterface
             self::MM_DATA,
             self::MM_JSSOURCE,
             self::MM_EDITDDFILTERS,
-        );
+        ];
     }
 
     /**
@@ -3964,7 +4076,8 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @return User
      */
-    protected function getCurrentUser() {
+    protected function getCurrentUser()
+    {
         global $current_user;
         return $current_user;
     }
@@ -3974,7 +4087,8 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @return array The list of module names
      */
-    public function getUserModuleList() {
+    public function getUserModuleList()
+    {
         // Loading a standard module list
         $controller = new TabController();
         $tabs = $controller->get_tabs($this->getCurrentUser());
@@ -3988,14 +4102,15 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @return bool True if the file no longer exists or never existed
      */
-    protected function clearLanguagesCache() {
+    protected function clearLanguagesCache()
+    {
         // Get the hashes array handled first
-        $hashes = array();
-        $path = sugar_cached("api/metadata/hashes.php");
-        @include($path);
+        $hashes = [];
+        $path = sugar_cached('api/metadata/hashes.php');
+        @include $path;
 
         // Track which indexes were deleted
-        $deleted = array();
+        $deleted = [];
         foreach ($hashes as $key => $hash) {
             // If the index is a .json file path, unset it and delete it
             if (strpos($key, '.json')) {
@@ -4007,14 +4122,14 @@ class MetaDataManager implements LoggerAwareInterface
 
         // Now handle files on the file system. This should yield an empty array
         // but its better to be safe than sorry
-        $files = glob(sugar_cached("api/metadata/*.json"));
+        $files = glob(sugar_cached('api/metadata/*.json'));
         foreach ($files as $file) {
             @unlink($file);
             $deleted[$file] = $file;
         }
 
         if ($deleted) {
-            write_array_to_file("hashes", $hashes, $path);
+            write_array_to_file('hashes', $hashes, $path);
         }
 
         return true;
@@ -4039,7 +4154,7 @@ class MetaDataManager implements LoggerAwareInterface
             }
         }
 
-        $key = "meta:hash:$prefix" . implode(",", $this->platforms);
+        $key = "meta:hash:$prefix" . implode(',', $this->platforms);
         return $key;
     }
 
@@ -4055,6 +4170,7 @@ class MetaDataManager implements LoggerAwareInterface
 
         return $this->getCachedMetadataHashKey(new MetaDataContextUser($current_user));
     }
+
     /**
      * Public accessor that gets the hash for a metadata file cache. This is a
      * wrapper to {@see getCachedMetadataHash}
@@ -4126,7 +4242,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     protected function setupPublicModuleLists($data)
     {
-        $data['modules'] = array("Login" => array("fields" => array()));
+        $data['modules'] = ['Login' => ['fields' => []]];
         return $data;
     }
 
@@ -4139,31 +4255,31 @@ class MetaDataManager implements LoggerAwareInterface
      * @param array $languages Array of language metadata caches to build
      * @return void
      */
-    public static function setupMetadata($platforms = array(), $languages = array())
+    public static function setupMetadata($platforms = [], $languages = [])
     {
         // Set up the platforms array
         if (empty($platforms)) {
-            $platforms = array('base');
+            $platforms = ['base'];
         }
 
         if (!is_array($platforms)) {
-            $platforms = (array) $platforms;
+            $platforms = (array)$platforms;
         }
 
         if (empty($languages)) {
-            $languages = array('en_us');
+            $languages = ['en_us'];
         }
 
         if (!is_array($languages)) {
-            $languages = (array) $languages;
+            $languages = (array)$languages;
         }
 
         // Loop over the metadata managers for each platform and visibility, then
         // over each of the languages for each manager
         foreach ($platforms as $platform) {
-            foreach (array(true, false) as $public) {
+            foreach ([true, false] as $public) {
                 $mm = MetaDataManager::getManager($platform, $public);
-                $mm->getMetadata(array('platform' => $platform));
+                $mm->getMetadata(['platform' => $platform]);
                 foreach ($languages as $language) {
                     $mm->getLanguage($language);
                 }
@@ -4224,7 +4340,7 @@ class MetaDataManager implements LoggerAwareInterface
      * This method collects view data for given module and view
      *
      * @param string $moduleName The name of the module
-     * @param string $view       The view name
+     * @param string $view The view name
      * @param MetaDataContextInterface|null $context Metadata context
      * @return array
      */
@@ -4234,7 +4350,7 @@ class MetaDataManager implements LoggerAwareInterface
         if (isset($views[$view])) {
             return $views[$view];
         }
-        return array();
+        return [];
     }
 
     /**
@@ -4259,7 +4375,7 @@ class MetaDataManager implements LoggerAwareInterface
      * Return flat list of fields defined for a given module and view
      *
      * @param string $moduleName The name of the module
-     * @param string $view       The view name
+     * @param string $view The view name
      * @param array $displayParams Associative array of field names and their display params on the given view
      * @return array
      */
@@ -4309,7 +4425,7 @@ class MetaDataManager implements LoggerAwareInterface
     public function hasEditableDropdownFilter($fieldName, $role)
     {
         $filter = $this->getRawFilter($fieldName, $role);
-        return count($filter) > 0;
+        return safeCount($filter) > 0;
     }
 
     public function getEditableDropdownFilter($fieldName, $role)
@@ -4334,7 +4450,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     public function getFieldNames($module, array $fieldSet, array $fieldDefs, &$displayParams)
     {
-        $fields = array();
+        $fields = [];
         $it = $this->getViewIterator($module, $fieldDefs);
         $it->apply($fieldSet, function (array $field) use (&$fields, &$displayParams) {
             $name = $field['name'];
@@ -4361,6 +4477,7 @@ class MetaDataManager implements LoggerAwareInterface
         return new ViewIterator($module, $fieldDefs);
     }
 
+
     /**
      * Returns editable dropdown filters
      *
@@ -4369,10 +4486,10 @@ class MetaDataManager implements LoggerAwareInterface
      *
      * @return array
      */
-    public function getEditableDropdownFilters($data = array(), MetaDataContextInterface $context = null)
+    public function getEditableDropdownFilters($data = [], MetaDataContextInterface $context = null)
     {
         if ($this->public) {
-            return array();
+            return [];
         }
         if (is_null($context)) {
             $context = $this->getCurrentUserContext();
@@ -4382,13 +4499,13 @@ class MetaDataManager implements LoggerAwareInterface
         $files = array_map(
             function ($file) use ($platform) {
                 $info = pathinfo($file);
-                return array(
-                   'path'=>$file,
-                   'file'=>$info['basename'],
-                   'subPath'=>$info['dirname'],
-                   'platform'=>$platform,
+                return [
+                    'path' => $file,
+                    'file' => $info['basename'],
+                    'subPath' => $info['dirname'],
+                    'platform' => $platform,
                     'params' => MetaDataFiles::getClientFileParams($file),
-               );
+                ];
             },
             glob('custom/application/Ext/DropdownFilters/roles/*/dropdownfilters.ext.php')
         );
@@ -4401,11 +4518,11 @@ class MetaDataManager implements LoggerAwareInterface
             return $context->compare($a, $b);
         });
 
-        if (!count($files)) {
-            return array();
+        if (!safeCount($files)) {
+            return [];
         }
 
-        $filters = array();
+        $filters = [];
         foreach ($files as $file) {
             $fileFilters = $this->readDropdownFilterFile($file['path']);
             foreach ($fileFilters as $fieldName => $filter) {
@@ -4429,7 +4546,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     protected function readDropdownFilterFile($path)
     {
-        $role_dropdown_filters = array();
+        $role_dropdown_filters = [];
         require $path;
 
         return $role_dropdown_filters;
@@ -4453,7 +4570,7 @@ class MetaDataManager implements LoggerAwareInterface
             }
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -4542,9 +4659,9 @@ class MetaDataManager implements LoggerAwareInterface
      */
     protected static function getMetadataContexts($public, array $params)
     {
-        $contexts = array();
+        $contexts = [];
         if (!$public && isset($params['role'])) {
-            $roleSets = self::getRoleSetsByRoles(array($params['role']));
+            $roleSets = self::getRoleSetsByRoles([$params['role']]);
             foreach ($roleSets as $roleSet) {
                 $contexts[] = new MetaDataContextRoleSet($roleSet);
             }
@@ -4563,7 +4680,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     protected static function getAllMetadataContexts($public)
     {
-        $contexts = array();
+        $contexts = [];
         $allSubsetsOfSystemSubscriptions = SubscriptionManager::instance()->getAllSubsetsOfSystemSubscriptions();
         $users = [];
         foreach ($allSubsetsOfSystemSubscriptions as $subscriptions) {
@@ -4592,6 +4709,7 @@ class MetaDataManager implements LoggerAwareInterface
         return $contexts;
     }
 
+
     /**
      * Returns set of role sets which include any of the given roles
      *
@@ -4602,7 +4720,7 @@ class MetaDataManager implements LoggerAwareInterface
     protected static function getRoleSetsByRoles(array $roles)
     {
         if (!$roles) {
-            return array();
+            return [];
         }
 
         $roleSet = BeanFactory::newBean('ACLRoleSets');
@@ -4610,7 +4728,7 @@ class MetaDataManager implements LoggerAwareInterface
         $query->distinct(true);
         $query->from($roleSet);
         $query->select('id', 'hash');
-        $query->join('acl_roles', array('alias' => 'roles'));
+        $query->join('acl_roles', ['alias' => 'roles']);
         $query->where()->in('roles.id', $roles);
         $data = $query->execute();
 
@@ -4628,7 +4746,7 @@ class MetaDataManager implements LoggerAwareInterface
         $roleSet = BeanFactory::newBean('ACLRoleSets');
         //Verify that rolesets are operable before attempting to use them.
         if (empty($roleSet)) {
-            return array();
+            return [];
         }
         $query = new SugarQuery();
         $query->from($roleSet);
@@ -4649,7 +4767,7 @@ class MetaDataManager implements LoggerAwareInterface
      */
     protected static function createCollectionFromDataSet(SugarBean $seed, array $data)
     {
-        $result = array();
+        $result = [];
 
         // clone the seed for each row and populate it with the row data.
         // do not construct every instance individually since it's relatively expensive

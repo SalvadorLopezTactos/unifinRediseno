@@ -15,7 +15,6 @@
  */
 class ForecastsSeedData
 {
-
     /**
      * @static
      *
@@ -38,11 +37,10 @@ class ForecastsSeedData
         $forecast_by = $settings['forecast_by'];
 
         foreach ($timeperiods as $timeperiod_id => $timeperiod) {
-
             foreach ($commit_order as $commit_type_array) {
                 //direct entry per user, and some user will have a Rollup entry too.
 
-                $ratio = array('.8', '1', '1.2', '1.4');
+                $ratio = ['.8', '1', '1.2', '1.4'];
                 $key = array_rand($ratio);
 
                 if ($commit_type_array[1] === 'Direct') {
@@ -66,7 +64,7 @@ class ForecastsSeedData
                     $quota->quota_type = 'Direct';
                     $quota->currency_id = -99;
 
-                    $quota->amount = SugarMath::init()->exp('?*?', array($totals['amount'], $ratio[$key]))->result();
+                    $quota->amount = SugarMath::init()->exp('?*?', [$totals['amount'], $ratio[$key]])->result();
                     $quota->amount_base_currency = $quota->amount;
                     $quota->committed = 1;
                     $quota->set_created_by = false;
@@ -129,20 +127,20 @@ class ForecastsSeedData
                     if ($totals['included_opp_count'] > 0) {
                         $forecast->opp_weigh_value = SugarMath::init()->setScale(0)->exp(
                             '(?/?)/?',
-                            array($totals['amount'], $ratio[$key], $totals['included_opp_count'])
+                            [$totals['amount'], $ratio[$key], $totals['included_opp_count']]
                         )->result();
                     } else {
                         $forecast->opp_weigh_value = '0';
                     }
-                    $forecast->best_case = SugarMath::init()->exp('(?+?)/?', array($totals['best_case'], $totals['won_best'], $ratio[$key]))->result();
-                    $forecast->worst_case = SugarMath::init()->exp('(?+?)/?', array($totals['worst_case'], $totals['won_worst'], $ratio[$key]))->result();
-                    $forecast->likely_case = SugarMath::init()->exp('(?+?)/?', array($totals['amount'], $totals['won_amount'], $ratio[$key]))->result();
+                    $forecast->best_case = SugarMath::init()->exp('(?+?)/?', [$totals['best_case'], $totals['won_best'], $ratio[$key]])->result();
+                    $forecast->worst_case = SugarMath::init()->exp('(?+?)/?', [$totals['worst_case'], $totals['won_worst'], $ratio[$key]])->result();
+                    $forecast->likely_case = SugarMath::init()->exp('(?+?)/?', [$totals['amount'], $totals['won_amount'], $ratio[$key]])->result();
                     $forecast->forecast_type = 'Direct';
-                    $forecast->date_committed = $timedate->asDb($timedate->getNow()->modify("-1 day"));
-                    $forecast->date_entered = $timedate->asDb($timedate->getNow()->modify("-1 day"));
-                    $forecast->date_modified = $timedate->asDb($timedate->getNow()->modify("-1 day"));
+                    $forecast->date_committed = $timedate->asDb($timedate->getNow()->modify('-1 day'));
+                    $forecast->date_entered = $timedate->asDb($timedate->getNow()->modify('-1 day'));
+                    $forecast->date_modified = $timedate->asDb($timedate->getNow()->modify('-1 day'));
                     $forecast->calculatePipelineData(
-                        SugarMath::init()->exp('?/?', array($totals['includedClosedAmount'], $ratio[$key]))->result(),
+                        SugarMath::init()->exp('?/?', [$totals['includedClosedAmount'], $ratio[$key]])->result(),
                         $totals['includedClosedCount']
                     );
                     $forecast->save();
@@ -158,7 +156,7 @@ class ForecastsSeedData
                     if ($totals['included_opp_count'] > 0) {
                         $forecast2->opp_weigh_value = SugarMath::init()->setScale(0)->exp(
                             '?/?',
-                            array($totals['amount'], $totals['included_opp_count'])
+                            [$totals['amount'], $totals['included_opp_count']]
                         )->result();
                     } else {
                         $forecast2->opp_weigh_value = '0';
@@ -175,9 +173,7 @@ class ForecastsSeedData
                     $forecast2->save();
 
                     self::createManagerWorksheet($commitUserId, $forecast2->toArray());
-
                 } else {
-
                     /* @var $mgr_worksheet ForecastManagerWorksheet */
                     $mgr_worksheet = BeanFactory::newBean('ForecastManagerWorksheets');
                     $totals = $mgr_worksheet->worksheetTotals($commit_type_array[0], $timeperiod_id, true);
@@ -207,7 +203,7 @@ class ForecastsSeedData
                     $forecast->opp_count = $totals['included_opp_count'];
                     $forecast->opp_weigh_value = SugarMath::init()->setScale(0)->exp(
                         '?/?',
-                        array($totals['likely_adjusted'], $totals['included_opp_count'])
+                        [$totals['likely_adjusted'], $totals['included_opp_count']]
                     )->result();
                     $forecast->likely_case = $totals['likely_adjusted'];
                     $forecast->best_case = $totals['best_adjusted'];
@@ -217,21 +213,20 @@ class ForecastsSeedData
                     $forecast->pipeline_amount = $totals['pipeline_amount'];
                     $forecast->closed_amount = $totals['closed_amount'];
                     $forecast->date_entered = $timedate->asDb($timedate->getNow());
-                    
+
                     $forecast->save();
                     self::createManagerWorksheet($commit_type_array[0], $forecast->toArray());
-
                 }
 
                 self::commitRepItems($commit_type_array[0], $timeperiod_id, $forecast_by);
             }
 
             // loop though all the managers and commit their forecast
-            $managers = array(
+            $managers = [
                 'seed_sarah_id',
                 'seed_will_id',
-                'seed_jim_id' // we do jim last since sarah and will will feed up into jim
-            );
+                'seed_jim_id', // we do jim last since sarah and will will feed up into jim
+            ];
 
             $cid = $current_user->id;
             foreach ($managers as $manager) {
@@ -261,10 +256,10 @@ class ForecastsSeedData
         $user = BeanFactory::getBean('Users', $user_id);
         /* @var $worksheet ForecastManagerWorksheet */
         $worksheet = BeanFactory::newBean('ForecastManagerWorksheets');
-        if ($data["forecast_type"] == "Rollup") {
-            $data["likely_adjusted"] = $data["likely_case"];
-            $data["best_adjusted"] = $data["best_case"];
-            $data["worst_adjusted"] = $data["worst_case"];
+        if ($data['forecast_type'] == 'Rollup') {
+            $data['likely_adjusted'] = $data['likely_case'];
+            $data['best_adjusted'] = $data['best_case'];
+            $data['worst_adjusted'] = $data['worst_case'];
         }
         $worksheet->manager_saved = true;
         $worksheet->reporteeForecastRollUp($user, $data);
@@ -277,8 +272,8 @@ class ForecastsSeedData
 
         $bean = BeanFactory::newBean($forecast_by);
         $sq = new SugarQuery();
-        $sq->select(array('forecast_by.*'));
-        $sq->from($bean, array('alias' => 'forecast_by'))->where()
+        $sq->select(['forecast_by.*']);
+        $sq->from($bean, ['alias' => 'forecast_by'])->where()
             ->equals('forecast_by.assigned_user_id', $user_id)
             ->queryAnd()
             ->gte('forecast_by.date_closed_timestamp', $tp->start_date_timestamp)
@@ -286,8 +281,8 @@ class ForecastsSeedData
 
         $link_name = ($forecast_by == 'RevenueLineItems') ? 'account_link' : 'accounts';
         $bean->load_relationship($link_name);
-        $bean->$link_name->buildJoinSugarQuery($sq, array('joinTableAlias' => 'account'));
-        $sq->select(array('account.id', 'account_id'));
+        $bean->$link_name->buildJoinSugarQuery($sq, ['joinTableAlias' => 'account']);
+        $sq->select(['account.id', 'account_id']);
 
         $beans = $sq->execute();
 

@@ -22,19 +22,19 @@ abstract class FilterAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    protected $acceptedOptions = array(
+    protected $acceptedOptions = [
         'field',
-    );
+    ];
 
     /**
      * {@inheritdoc}
      */
-    protected $options = array(
-    );
+    protected $options = [
+    ];
 
     /**
      * {@inheritdoc}
-    */
+     */
     public function build($id, array $filters)
     {
         // Add our own filter to the stack
@@ -62,9 +62,9 @@ abstract class FilterAggregation extends AbstractAggregation
      */
     public function parseResults($id, array $results)
     {
-        return array(
+        return [
             'count' => empty($results['doc_count']) ? 0 : $results['doc_count'],
-        );
+        ];
     }
 
     /**

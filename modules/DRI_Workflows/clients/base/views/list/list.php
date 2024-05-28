@@ -137,10 +137,14 @@ $viewdefs['DRI_Workflows']['base']['view']['list'] = [
                 ],
                 [
                     'name' => 'state',
+                    'type' => 'state-archived',
                     'label' => 'LBL_STATE',
                     'enabled' => true,
                     'readonly' => true,
                     'default' => false,
+                    'related_fields' => [
+                        'archived',
+                    ],
                 ],
                 [
                     'name' => 'dri_workflow_template_name',

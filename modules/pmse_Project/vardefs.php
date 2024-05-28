@@ -11,7 +11,7 @@
  */
 
 
-$dictionary['pmse_Project'] = array(
+$dictionary['pmse_Project'] = [
     'table' => 'pmse_project',
     'color' => 'orange',
     'icon' => 'sicon-process-definitions-lg',
@@ -23,8 +23,8 @@ $dictionary['pmse_Project'] = array(
     //'unified_search' => true,
     //'full_text_search' => true,
     //'unified_search_default_enabled' => true,
-    'fields' => array(
-        'prj_uid' => array(
+    'fields' => [
+        'prj_uid' => [
             'name' => 'prj_uid',
             'vname' => 'LBL_PRJ_UID',
             'type' => 'varchar',
@@ -42,8 +42,8 @@ $dictionary['pmse_Project'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '20',
-        ),
-        'prj_target_namespace' => array(
+        ],
+        'prj_target_namespace' => [
             'required' => false,
             'name' => 'prj_target_namespace',
             'vname' => 'LBL_PRJ_TARGET_NAMESPACE',
@@ -62,8 +62,8 @@ $dictionary['pmse_Project'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'prj_expression_language' => array(
+        ],
+        'prj_expression_language' => [
             'required' => false,
             'name' => 'prj_expression_language',
             'vname' => 'LBL_PRJ_EXPRESSION_LANGUAGE',
@@ -82,8 +82,8 @@ $dictionary['pmse_Project'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'prj_type_language' => array(
+        ],
+        'prj_type_language' => [
             'required' => false,
             'name' => 'prj_type_language',
             'vname' => 'LBL_PRJ_TYPE_LANGUAGE',
@@ -102,8 +102,8 @@ $dictionary['pmse_Project'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'prj_exporter' => array(
+        ],
+        'prj_exporter' => [
             'required' => false,
             'name' => 'prj_exporter',
             'vname' => 'LBL_PRJ_EXPORTER',
@@ -122,8 +122,8 @@ $dictionary['pmse_Project'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'prj_exporter_version' => array(
+        ],
+        'prj_exporter_version' => [
             'required' => false,
             'name' => 'prj_exporter_version',
             'vname' => 'LBL_PRJ_EXPORTER_VERSION',
@@ -142,8 +142,8 @@ $dictionary['pmse_Project'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'prj_author' => array(
+        ],
+        'prj_author' => [
             'required' => false,
             'name' => 'prj_author',
             'vname' => 'LBL_PRJ_AUTHOR',
@@ -162,8 +162,8 @@ $dictionary['pmse_Project'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'prj_author_version' => array(
+        ],
+        'prj_author_version' => [
             'required' => false,
             'name' => 'prj_author_version',
             'vname' => 'LBL_PRJ_AUTHOR_VERSION',
@@ -182,8 +182,8 @@ $dictionary['pmse_Project'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'prj_original_source' => array(
+        ],
+        'prj_original_source' => [
             'required' => false,
             'name' => 'prj_original_source',
             'vname' => 'LBL_PRJ_ORIGINAL_SOURCE',
@@ -202,15 +202,15 @@ $dictionary['pmse_Project'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'name' => array(
+        ],
+        'name' => [
             'name' => 'name',
             'vname' => 'LBL_NAME',
             'type' => 'name',
             'dbType' => 'varchar',
             'len' => '255',
             'unified_search' => true,
-            'full_text_search' => array('enabled' => true, 'searchable' => true, 'boost' => 1.55),
+            'full_text_search' => ['enabled' => true, 'searchable' => true, 'boost' => 1.55],
             'required' => true,
             'importable' => 'required',
             'duplicate_merge' => 'enabled',
@@ -225,8 +225,8 @@ $dictionary['pmse_Project'] = array(
             'reportable' => true,
             'calculated' => false,
             'size' => '20',
-        ),
-        'prj_status' => array(
+        ],
+        'prj_status' => [
             'name' => 'prj_status',
             'vname' => 'LBL_PRJ_STATUS',
             'type' => 'enum',
@@ -235,8 +235,8 @@ $dictionary['pmse_Project'] = array(
             'comment' => 'Process Definition status (ex: Enabled, Disabled)',
             'default' => 'INACTIVE',
             'duplicate_on_record_copy' => 'no',
-        ),
-        'prj_module' => array(
+        ],
+        'prj_module' => [
             'required' => true,
             'name' => 'prj_module',
             'vname' => 'LBL_PRJ_MODULE',
@@ -258,12 +258,12 @@ $dictionary['pmse_Project'] = array(
             'options' => '',
             'studio' => 'visible',
             'dependency' => false,
-            'function' => array(
+            'function' => [
                 'name' => 'getTargetsModules',
                 'include' => 'modules/pmse_Project/pmse_ProjectHelper.php',
-            ),
-        ),
-        'prj_run_order' => array(
+            ],
+        ],
+        'prj_run_order' => [
             'required' => false,
             'default' => 1,
             'name' => 'prj_run_order',
@@ -273,41 +273,41 @@ $dictionary['pmse_Project'] = array(
             'calculated' => false,
             'studio' => 'visible',
             'min' => '1',
-        ),
-    ),
-    'duplicate_check' => array(
+        ],
+    ],
+    'duplicate_check' => [
         'enabled' => true,
-        'FilterDuplicateCheck' => array(
-            'filter_template' => array(
-                array(
-                    '$or' => array(
-                        array('name' => array('$equals' => '$name')),
-                    ),
-                ),
-            ),
-            'ranking_fields' => array(
-                array('in_field_name' => 'name', 'dupe_field_name' => 'name'),
-            ),
-        ),
-    ),
-    'relationships' => array(),
+        'FilterDuplicateCheck' => [
+            'filter_template' => [
+                [
+                    '$or' => [
+                        ['name' => ['$equals' => '$name']],
+                    ],
+                ],
+            ],
+            'ranking_fields' => [
+                ['in_field_name' => 'name', 'dupe_field_name' => 'name'],
+            ],
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'acls' => array(
-        'SugarACLDeveloperOrAdmin' => array(
+    'acls' => [
+        'SugarACLDeveloperOrAdmin' => [
             'allowUserRead' => false,
             'aclModule' => 'pmse_Project',
-        ),
-        'SugarACLDeveloperForTarget' => array(
+        ],
+        'SugarACLDeveloperForTarget' => [
             'targetModuleField' => 'prj_module',
             'allowUserRead' => false,
-        ),
-    ),
-    'visibility' => array(
-        'TargetModuleDeveloperVisibility' => array(
+        ],
+    ],
+    'visibility' => [
+        'TargetModuleDeveloperVisibility' => [
             'targetModuleField' => 'prj_module',
-        ),
-    ),
+        ],
+    ],
     'hidden_to_role_assignment' => true,
     // @TODO Fix the Default and Basic SugarObject templates so that Basic
     // implements Default. This would allow the application of various
@@ -318,18 +318,18 @@ $dictionary['pmse_Project'] = array(
     // implementation fields. Once there is a separation of default and basic
     // templates we can safely remove these as this module will implement
     // default instead of basic.
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'lockable_fields',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'team_security',
         'assignable',
         'taggable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_Project', 'pmse_Project');

@@ -53,10 +53,10 @@
             array
         </td>
         <td>
-            A module filter definition
+            A base module filter definition that will apply to all metrics passed in
         </td>
         <td>
-            True
+            False
         </td>
     </tr>
     <tr>
@@ -95,10 +95,10 @@
             string
         </td>
         <td>
-            The ID of the time period to gather metrics for
+            The ID of the time period to gather metrics for. If not provided, will default to the current time period
         </td>
         <td>
-            True
+            False
         </td>
     </tr>
     <tr>
@@ -119,7 +119,8 @@
                     will be summed together. Must consist only of valid numeric DB fields
                 </li>
                 <li>
-                    filter (array): Any additional filtering specific to the metric
+                    filter (array): Any additional module filtering specific to the metric. This filter will be applied
+                    in addition to the one passed in through the base filter argument
                 </li>
             </ul>
         </td>

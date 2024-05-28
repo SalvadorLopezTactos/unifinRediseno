@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Tableau de bord de la liste de bases de connaissances',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrements de bases de connaissances',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Knowledge Base',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie de la base de connaissances',
 
     'LBL_MODULE_NAME' => 'Base de connaissances',
     'LBL_MODULE_NAME_SINGULAR' => 'Base de Connaissances - Article',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Définir valeur comme valeur principale',
     'LBL_ITEM_REMOVE' => 'Supprimer l&#39;élément',
     'LBL_ITEM_ADD' => 'Ajouter l&#39;élément',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => 'ID de révision',
     'LBL_DOCUMENT_REVISION' => 'Révision',
     'LBL_NUMBER' => 'Identifiant',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'Plus d&#39;articles {{module}}...',
     'LBL_LIST_FORM_TITLE' => 'Liste de la base de connaissances',
     'LBL_SEARCH_FORM_TITLE' => 'Recherche dans la base de connaissances',
-);
+];

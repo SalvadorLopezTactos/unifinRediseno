@@ -9,40 +9,40 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Documents']['base']['filter']['default'] = array(
+$viewdefs['Documents']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'quicksearch_field' => array('document_name'),
+    'quicksearch_field' => ['document_name'],
     'quicksearch_priority' => 2,
-    'filters' => array(
-        array(
+    'filters' => [
+        [
             'id' => 'created_by_me',
             'name' => 'LBL_CREATED_BY_ME',
-            'filter_definition' => array(
+            'filter_definition' => [
                 '$creator' => '',
-            ),
-            'editable' => false
-        ),
-    ),
-    'fields' => array(
-        'document_name' => array(),
-        'category_id' => array(),
-        'subcategory_id' => array(),
-        'status_id' => array(),
-        'doc_type' => array(),
-        'active_date' => array(),
-        'exp_date' => array(),
-        'date_entered' => array(),
-        'date_modified' => array(),
-        'assigned_user_name' => array(),
-        'team_name' => array(),
-        'is_shared' => array(),
-        '$owner' => array(
+            ],
+            'editable' => false,
+        ],
+    ],
+    'fields' => [
+        'document_name' => [],
+        'category_id' => [],
+        'subcategory_id' => [],
+        'status_id' => [],
+        'doc_type' => [],
+        'active_date' => [],
+        'exp_date' => [],
+        'date_entered' => [],
+        'date_modified' => [],
+        'assigned_user_name' => [],
+        'team_name' => [],
+        'is_shared' => [],
+        '$owner' => [
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',
-        ),
-        '$favorite' => array(
+        ],
+        '$favorite' => [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        ),
-    ),
-);
+        ],
+    ],
+];

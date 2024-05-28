@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmnProcess'] = array(
+$dictionary['pmse_BpmnProcess'] = [
     'table' => 'pmse_bpmn_process',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'reassignable' => false,
-    'fields' => array(
-        'pro_uid' => array(
+    'fields' => [
+        'pro_uid' => [
             'required' => true,
             'name' => 'pro_uid',
             'vname' => '',
@@ -38,8 +38,8 @@ $dictionary['pmse_BpmnProcess'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'prj_id' => array(
+        ],
+        'prj_id' => [
             'required' => true,
             'name' => 'prj_id',
             'vname' => '',
@@ -59,8 +59,8 @@ $dictionary['pmse_BpmnProcess'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'dia_id' => array(
+        ],
+        'dia_id' => [
             'required' => true,
             'name' => 'dia_id',
             'vname' => '',
@@ -80,8 +80,8 @@ $dictionary['pmse_BpmnProcess'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'pro_type' => array(
+        ],
+        'pro_type' => [
             'required' => true,
             'name' => 'pro_type',
             'vname' => '',
@@ -101,8 +101,8 @@ $dictionary['pmse_BpmnProcess'] = array(
             'calculated' => false,
             'len' => '10',
             'size' => '10',
-        ),
-        'pro_is_executable' => array(
+        ],
+        'pro_is_executable' => [
             'required' => true,
             'name' => 'pro_is_executable',
             'vname' => '',
@@ -126,8 +126,8 @@ $dictionary['pmse_BpmnProcess'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'pro_is_closed' => array(
+        ],
+        'pro_is_closed' => [
             'required' => true,
             'name' => 'pro_is_closed',
             'vname' => '',
@@ -151,8 +151,8 @@ $dictionary['pmse_BpmnProcess'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'pro_is_subprocess' => array(
+        ],
+        'pro_is_subprocess' => [
             'required' => true,
             'name' => 'pro_is_subprocess',
             'vname' => '',
@@ -176,23 +176,23 @@ $dictionary['pmse_BpmnProcess'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmnProcess', 'pmse_BpmnProcess');

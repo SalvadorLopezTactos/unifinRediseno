@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Récupérer l&#39;enveloppe',
     'LBL_CLOUD_SERVICE_TYPE' => 'Type de service cloud',
     'LBL_CLOUD_PATH' => 'Chemin Cloud',
+    'LBL_CLOUD_DRIVE_ID' => 'ID de lecteur',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Tableau de bord de la liste des enveloppes DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'Tableau de bord des enregistrements des enveloppes DocuSign',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Enveloppes DocuSign récentes',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement des enveloppes DocuSign',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie d&#39;enveloppe DocuSign',
 
     'LBL_NEW_ENVELOPE' => 'Nouvelle enveloppe',
     'LBL_DOCUMENT_IS_NOW' => ' est désormais ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Envoyer',
     'LBL_BUTTON_CLEAR' => 'Effacer',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Utiliser le modèle',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Envoyer avec modèle',
     'LBL_PLEASE_LOG_IN' => 'Veuillez d&#39;abord vous connecter à DocuSign !',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Vous ne pouvez pas télécharger ce document. Il a été créé par un autre utilisateur !',
     'LBL_SEND_NOT_ALLOWED' => 'Vous ne pouvez pas envoyer cette enveloppe. Elle a été créée par un autre utilisateur !',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Le brouillon a été modifié. Mettre à jour le statut avec le statut actuel ({{status}}) ?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'Enveloppe DocuSign mise à jour !',
     'LBL_DRAFT_CHANGED_ERROR' => 'Le statut de l&#39;enveloppe DocuSign n&#39;a pas été mise à jour. Vérifiez les journaux pour obtenir des détails !',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'Le modèle DocuSign ne peut pas être appliqué',
     'LBL_ENVELOPE_NOT_SENT' => 'L&#39;enveloppe n&#39;a pas été envoyée !',
     'LBL_ENVELOPE_SENT' => 'L&#39;enveloppe a été envoyée à nouveau !',
     'LBL_DOCUMENT_ADDED' => 'Document ajouté sur l&#39;enregistrement !',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Rôle',
     'LBL_SELECT_BUTTON_LABEL' => 'Selectionner',
     'LBL_BACK_BUTTON_LABEL' => 'Retour',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Recherche par nom de modèle',
+    'LBL_ENVELOPE_NAME' => 'Nom d&#39;enveloppe',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Le nom d&#39;enveloppe ne peut pas être vide',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Échec de la récupération des destinataires potentiels!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Échec de la récupération des modèles!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Veuillez sélectionner un rôle pour chaque destinataire',
+    
+    'LBL_DOWNLOAD' => 'Télécharger',
+    'LBL_OPEN_DRAFT' => 'Ouvrir le brouillon',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Les documents sans fichier ne peuvent pas être envoyés à DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Cliquez sur le bouton Plus pour lancer le processus de signature',
+    'LBL_NO_DOC_SELECTED' => 'Veuillez d’abord sélectionner les documents',
+    'LBL_SELECT_RECIPIENTS' => 'Sélectionner le destinataire du signataire',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Exclure',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Vous devez installer l’application DocuSign pour une meilleure expérience.',
 ];

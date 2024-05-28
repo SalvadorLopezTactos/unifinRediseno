@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-'LBL_ASSIGNED_TO_ID'=>'Atribuit ID Utilizator',
-'LBL_ASSIGNED_TO_NAME' => 'Atribuit lui',
-);
+$mod_strings = [
+    'LBL_ASSIGNED_TO_ID' => 'Atribuit ID Utilizator',
+    'LBL_ASSIGNED_TO_NAME' => 'Atribuit lui',
+];

@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'Administration',
-    'Product' => 'Продукт',
-    'User' => 'Пользователь',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => 'Новый',
-    'Assigned' => 'Назначен',
-    'Closed' => 'Закрыто',
-    'Pending Input' => 'Ожидание решения',
-    'Rejected' => 'Отклонено',
-    'Duplicate' => 'Дублировать',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => 'Высокий',
-    'P2' => 'Средний',
-    'P3' => 'Низкий',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => 'Принято',
-    'Duplicate' => 'Дублировать',
-    'Closed' => 'Закрыто',
-    'Out of Date' => 'Устарело',
-    'Invalid' => 'Недействительно',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => 'Администрирование',
+        'Product' => 'Продукт',
+        'User' => 'Пользователь',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => 'Новый',
+        'Assigned' => 'Назначенный',
+        'Closed' => 'Закрытый',
+        'Pending Input' => 'Ожидание ввода',
+        'Rejected' => 'Отклоненный',
+        'Duplicate' => 'Дубликат',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => 'Высокий',
+        'P2' => 'Средний',
+        'P3' => 'Низкий',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => 'Принят',
+        'Duplicate' => 'Дубликат',
+        'Closed' => 'Закрыт',
+        'Out of Date' => 'Устарел',
+        'Invalid' => 'Недействительный',
+    ],
+];

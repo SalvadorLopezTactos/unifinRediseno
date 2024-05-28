@@ -10,17 +10,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$searchdefs['DataSets'] = array(
-			'templateMeta' => array('maxColumns' => '3', 'maxColumnsBasic' => '4', 
-                    'widths' => array('label' => '10', 'field' => '30'), 
-                   ),
-            'layout' => array(
-				'basic_search' => array(
-					'name',
-				),
-				'advanced_search' => array(
-				    'name',
-				),
-			),
-	   );
-?>
+$searchdefs['DataSets'] = [
+    'templateMeta' => ['maxColumns' => '3', 'maxColumnsBasic' => '4',
+        'widths' => ['label' => '10', 'field' => '30'],
+    ],
+    'layout' => [
+        'basic_search' => [
+            'name',
+        ],
+        'advanced_search' => [
+            'name',
+        ],
+    ],
+];

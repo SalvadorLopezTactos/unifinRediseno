@@ -35,7 +35,7 @@ class CountConditionalRelatedExpression extends NumericExpression
         }
 
         if (!is_array($values)) {
-            $values = array($values);
+            $values = [$values];
         }
 
         $count = 0;
@@ -114,7 +114,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return array("countConditional");
+        return ['countConditional'];
     }
 
     /**
@@ -122,11 +122,11 @@ JS;
      */
     public static function getParameterTypes()
     {
-        return array(
+        return [
             AbstractExpression::$RELATE_TYPE,
             AbstractExpression::$STRING_TYPE,
-            AbstractExpression::$GENERIC_TYPE
-        );
+            AbstractExpression::$GENERIC_TYPE,
+        ];
     }
 
     /**

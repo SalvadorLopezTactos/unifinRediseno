@@ -10,28 +10,28 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Quotes']['mobile']['view']['detail'] = array(
-    'templateMeta' => array(
+$viewdefs['Quotes']['mobile']['view']['detail'] = [
+    'templateMeta' => [
         'maxColumns' => '1',
-        'widths' => array(
-            array('label' => '10', 'field' => '30'),
-            array('label' => '10', 'field' => '30')
-        ),
-    ),
-    'panels' => array (
-        array (
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
+            'fields' => [
                 'quote_num',
-                array (
+                [
                     'name' => 'name',
                     'label' => 'LBL_QUOTE_NAME',
-                    'related_fields' => array(
-                        array(
+                    'related_fields' => [
+                        [
                             'name' => 'bundles',
                             //Probably don't need ALL these...
                             //Copypasted from clients/mobile/views/edit
-                            'fields' => array(
+                            'fields' => [
                                 'id',
                                 'bundle_stage',
                                 'currency_id',
@@ -59,9 +59,9 @@ $viewdefs['Quotes']['mobile']['view']['detail'] = array(
                                 'total',
                                 'total_usdollar',
                                 'default_group',
-                                array(
+                                [
                                     'name' => 'product_bundle_items',
-                                    'fields' => array(
+                                    'fields' => [
                                         'name',
                                         'quote_id',
                                         'description',
@@ -80,19 +80,19 @@ $viewdefs['Quotes']['mobile']['view']['detail'] = array(
                                         'base_rate',
                                         'discount_select',
                                         'total_amount',
-                                    ),
+                                    ],
                                     'max_num' => -1,
-                                ),
-                            ),
+                                ],
+                            ],
                             'max_num' => -1,
                             'order_by' => 'position:asc',
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
                 'billing_account_name',
                 'quote_stage',
                 'tag',
-            ),
-    	),
-	),
-);
+            ],
+        ],
+    ],
+];

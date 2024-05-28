@@ -11,44 +11,44 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['dashlet-console-list'] = array(
+$viewdefs['base']['view']['dashlet-console-list'] = [
     'template' => 'list',
-    'dashlets' => array(
-        array(
+    'dashlets' => [
+        [
             'label' => 'LBL_DASHLET_CONSOLE_LISTVIEW_NAME',
             'description' => 'LBL_DASHLET_CONSOLE_LISTVIEW_DESCRIPTION',
-            'config' => array(),
-            'preview' => array(
+            'config' => [],
+            'preview' => [
                 'module' => 'Cases',
                 'label' => 'LBL_MODULE_NAME',
-                'display_columns' => array(
+                'display_columns' => [
                     'case_number',
                     'name',
                     'account_name',
-                ),
-            ),
-            'filter' => array(
-                'module' => array(
+                ],
+            ],
+            'filter' => [
+                'module' => [
                     'Dashboards',
-                ),
-            ),
-        ),
-    ),
-    'panels' => array(
-        array(
+                ],
+            ],
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'dashlet_settings',
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'module',
                     'label' => 'LBL_MODULE',
                     'type' => 'enum',
                     'span' => 12,
                     'sort_alpha' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'display_columns',
                     'label' => 'LBL_COLUMNS',
                     'type' => 'enum',
@@ -56,8 +56,8 @@ $viewdefs['base']['view']['dashlet-console-list'] = array(
                     'ordered' => true,
                     'span' => 12,
                     'hasBlank' => true,
-                    'options' => array('' => ''),
-                ),
+                    'options' => ['' => ''],
+                ],
                 [
                     'name' => 'freeze_first_column',
                     'label' => 'LBL_DASHLET_FREEZE_FIRST_COLUMN',
@@ -66,19 +66,19 @@ $viewdefs['base']['view']['dashlet-console-list'] = array(
                     'default' => true,
                     'showOnConfig' => 'allowFreezeFirstColumn',
                 ],
-                array(
+                [
                     'name' => 'limit',
                     'label' => 'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS',
                     'type' => 'enum',
                     'options' => 'dashlet_limit_options',
-                ),
-                array(
+                ],
+                [
                     'name' => 'auto_refresh',
                     'label' => 'Auto Refresh',
                     'type' => 'enum',
                     'options' => 'sugar7_dashlet_auto_refresh_options',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

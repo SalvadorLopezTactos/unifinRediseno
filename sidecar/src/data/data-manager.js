@@ -9,11 +9,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const Acl = require('core/acl');
-const Utils = require('utils/utils');
-const Bean = require('data/bean');
-const BeanCollection = require('data/bean-collection');
-const MixedBeanCollection = require('data/mixed-bean-collection');
+const Acl = require('../core/acl');
+const Utils = require('../utils/utils');
+const Bean = require('./bean');
+const BeanCollection = require('./bean-collection');
+const MixedBeanCollection = require('./mixed-bean-collection');
 
 /**
  * The data manager handles the beans and collections life cycle. It provides
@@ -59,7 +59,7 @@ const MixedBeanCollection = require('data/mixed-bean-collection');
  * `declareModels` should be called at application start-up and whenever the
  * metadata changes:
  * ```
- * const DataManager = require('data/data-manager');
+ * const DataManager = require('./data-manager');
  * DataManager.declareModels(metadata);
  * ```
  * You may now create bean instances using factory methods.
@@ -176,7 +176,7 @@ const DataManager = _.extend({
              *  * options
              *
              * ```
-             * const Events = require('core/events');
+             * const Events = require('../core/events');
              * Events.on('data:sync:start', function(method, model, options) {
              *     SUGAR.App.logger.debug('Started operation ' + method + ' on ' + model);
              * });
@@ -199,7 +199,7 @@ const DataManager = _.extend({
              *  * request (SUGAR.Api.HttpRequest)
              *
              * ```
-             * const Events = require('core/events');
+             * const Events = require('../core/events');
              * Events.on('data:sync:complete', function(method, model, options, request) {
              *     SUGAR.App.logger.debug("Finished operation " + method + " on " + model);
              * });
@@ -222,7 +222,7 @@ const DataManager = _.extend({
              *  - request (SUGAR.Api.HttpRequest)
              *
              * ```
-             * const Events = require('core/events');
+             * const Events = require('../core/events');
              * Events.on('data:sync:success', function(method, model, options, request) {
              *     SUGAR.App.logger.debug('Finished operation ' + method + ' on ' + model);
              * });
@@ -245,7 +245,7 @@ const DataManager = _.extend({
              *  * error (SUGAR.Api.HttpError)
              *
              * ```
-             * const Events = require('core/events');
+             * const Events = require('../core/events');
              * Events.on('data:sync:error', function(method, model, options, error) {
              *     SUGAR.App.logger.debug('Operation failed ' + method + ' on ' + model);
              * });
@@ -268,7 +268,7 @@ const DataManager = _.extend({
              *  * request {@link SUGAR.Api.HttpRequest}
              *
              * ```
-             * const Events = require('core/events');
+             * const Events = require('../core/events');
              * SUGAR.App.events.on('data:sync:abort', function(method, model, options, request) {
              *     SUGAR.App.logger.debug('Operation aborted ' + method + ' on ' + model);
              * });
@@ -567,7 +567,7 @@ const DataManager = _.extend({
      * ```
      * // Create an account bean. The account's name property will be set to
      * // "Acme".
-     * const DataManager = require('data/data-manager');
+     * const DataManager = require('./data-manager');
      * var account = DataManager.createBean('Accounts', { name: 'Acme' });
      *
      * // Create a team set bean with a given ID
@@ -589,7 +589,7 @@ const DataManager = _.extend({
      * Creates instance of a bean collection. Example of usage:
      *
      * ```
-     * const DataManager = require('data/data-manager');
+     * const DataManager = require('./data-manager');
      * // Creates an empty collection of account beans.
      * var accounts = DataManager.createBeanCollection('Accounts');
      * ```
@@ -611,7 +611,7 @@ const DataManager = _.extend({
      *
      * ```
      * // Create a new contact related to the given opportunity.
-     * const DataManager = require('data/data-manager');
+     * const DataManager = require('./data-manager');
      * var contact = DataManager.createRelatedBean(opportunity, '1', 'contacts', {
      *    'first_name': 'John',
      *    'last_name': 'Smith',
@@ -684,7 +684,7 @@ const DataManager = _.extend({
      *
      * ```
      * // Create contacts collection for an existing opportunity.
-     * const DataManager = require('data/data-manager');
+     * const DataManager = require('./data-manager');
      * var contacts = DataManager.createRelatedCollection(opportunity, 'contacts');
      * contacts.fetch({ relate: true });
      *

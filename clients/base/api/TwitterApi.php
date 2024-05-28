@@ -9,29 +9,30 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 // A simple example class
 class TwitterApi extends ConnectorApi
 {
     public function registerApiRest()
     {
-        return array(
-            'getCurrentUser' => array(
+        return [
+            'getCurrentUser' => [
                 'reqType' => 'GET',
-                'path' => array('connector','twitter', 'currentUser'),
-                'pathVars' => array('connector','module', 'twitterId'),
+                'path' => ['connector', 'twitter', 'currentUser'],
+                'pathVars' => ['connector', 'module', 'twitterId'],
                 'method' => 'getCurrentUser',
                 'shortHelp' => 'Gets current tweets for a user',
                 'longHelp' => 'include/api/help/twitter_get_help.html',
-            ),
-            'getTweets' => array(
+            ],
+            'getTweets' => [
                 'reqType' => 'GET',
-                'path' => array('connector','twitter', '?'),
-                'pathVars' => array('connector','module', 'twitterId'),
+                'path' => ['connector', 'twitter', '?'],
+                'pathVars' => ['connector', 'module', 'twitterId'],
                 'method' => 'getTweets',
                 'shortHelp' => 'Gets current tweets for a user',
                 'longHelp' => 'include/api/help/twitter_get_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -48,13 +49,13 @@ class TwitterApi extends ConnectorApi
             if ($source && $source->hasTestingEnabled()) {
                 try {
                     if (!$source->test()) {
-                        return array('error' =>'ERROR_NEED_OAUTH');
+                        return ['error' => 'ERROR_NEED_OAUTH'];
                     }
                 } catch (Exception $e) {
-                    return array('error' =>'ERROR_NEED_OAUTH');
+                    return ['error' => 'ERROR_NEED_OAUTH'];
                 }
             }
-            return array('error' =>'ERROR_NEED_OAUTH');
+            return ['error' => 'ERROR_NEED_OAUTH'];
         }
 
         $twitterEAPM->getConnector();
@@ -62,7 +63,7 @@ class TwitterApi extends ConnectorApi
         $eapmBean = EAPM::getLoginInfo('Twitter');
 
         if (empty($eapmBean->id)) {
-            return array('error' =>'ERROR_NEED_AUTHORIZE');
+            return ['error' => 'ERROR_NEED_AUTHORIZE'];
         }
 
         //return a fully authed EAPM
@@ -81,18 +82,18 @@ class TwitterApi extends ConnectorApi
     public function getTweets(ServiceBase $api, array $args)
     {
         $this->validateHash($args);
-        $args2params = array(
+        $args2params = [
             'twitterId' => 'screen_name',
-            'count' => 'count'
-        );
-        $params = array();
+            'count' => 'count',
+        ];
+        $params = [];
         foreach ($args2params as $argKey => $paramKey) {
             if (isset($args[$argKey])) {
                 $params[] = $args[$argKey];
             }
         }
 
-        if (count($params) === 0) {
+        if (safeCount($params) === 0) {
             throw new SugarApiExceptionMissingParameter('Error: Missing argument.', $args);
         }
 
@@ -103,19 +104,19 @@ class TwitterApi extends ConnectorApi
         }
 
         if ($extApi === false) {
-           throw new SugarApiExceptionRequestMethodFailure($GLOBALS['app_strings']['ERROR_UNABLE_TO_RETRIEVE_DATA'], $args);
+            throw new SugarApiExceptionRequestMethodFailure($GLOBALS['app_strings']['ERROR_UNABLE_TO_RETRIEVE_DATA'], $args);
         }
 
         $result = $extApi->getUserTweets($args['twitterId'], 0, $args['count']);
         if (isset($result['errors'])) {
             $errorString = '';
-            foreach($result['errors'] as $errorKey => $error) {
+            foreach ($result['errors'] as $errorKey => $error) {
                 if ($error['code'] === 34) {
-                    throw new SugarApiExceptionNotFound('errors_from_twitter: '.$errorString, $args);
+                    throw new SugarApiExceptionNotFound('errors_from_twitter: ' . $errorString, $args);
                 }
-                $errorString .= $error['code'].str_replace(' ', '_', $error['message']);
+                $errorString .= $error['code'] . str_replace(' ', '_', $error['message']);
             }
-            throw new SugarApiExceptionRequestMethodFailure('errors_from_twitter: '.$errorString, $args);
+            throw new SugarApiExceptionRequestMethodFailure('errors_from_twitter: ' . $errorString, $args);
         }
         return $result;
     }
@@ -143,10 +144,10 @@ class TwitterApi extends ConnectorApi
         $result = $extApi->getCurrentUserInfo();
         if (isset($result['errors'])) {
             $errorString = '';
-            foreach($result['errors'] as $errorKey => $error) {
-                $errorString .= $error['code'].str_replace(' ', '_', $error['message']);
+            foreach ($result['errors'] as $errorKey => $error) {
+                $errorString .= $error['code'] . str_replace(' ', '_', $error['message']);
             }
-            throw new SugarApiExceptionRequestMethodFailure(null, $args, null, 0, json_encode(array('status'=>$errorString)));
+            throw new SugarApiExceptionRequestMethodFailure(null, $args, null, 0, json_encode(['status' => $errorString]));
         }
         return $result;
     }

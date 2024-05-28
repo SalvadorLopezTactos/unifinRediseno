@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Udgående E-mail-konti',
     'LBL_MODULE_NAME_SINGULAR' => 'Udgående E-mail-konto',
     'LBL_STATUS' => 'Status',
@@ -60,4 +60,4 @@ Copyright (C) SugarCRM Inc. Alle rettigheder forbeholdt.',
     'LBL_PREFERRED_SENDING_ACCOUNT' => 'Foretrukken afsendelseskonto',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Indstillinger for e-mail',
-);
+];

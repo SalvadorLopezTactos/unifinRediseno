@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'in Bearbeitung',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Nachrichten',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Dashboard für Nachrichtendatensätze',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Nachrichtenzeitleiste',
 ];

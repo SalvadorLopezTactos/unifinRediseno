@@ -51,15 +51,15 @@ class SugarUpgradeUpdateIconDashboardMetadata extends UpgradeScript
                 case '32bc5cd0-b1a0-11ea-ad16-f45c898a3ce7':
                     $updated = $this->processOmnichannel($metadata);
                     break;
-                // case multi line dashboard
+                    // case multi line dashboard
                 case 'c290ef46-7606-11e9-9129-f218983a1c3e':
                     $updated = $this->processMultiline($metadata, 'Cases');
                     break;
-                // account multi line dashboard
+                    // account multi line dashboard
                 case 'd8f610a0-e950-11e9-81b4-2a2ae2dbcce4':
                     $updated = $this->processMultiline($metadata, 'Accounts');
                     break;
-                // opportunity multi line dashboard
+                    // opportunity multi line dashboard
                 case '069a1142-61bf-473f-8014-faca9aaf43cf':
                     $updated = $this->processMultiline($metadata, 'Opportunities');
                     break;
@@ -133,7 +133,7 @@ class SugarUpgradeUpdateIconDashboardMetadata extends UpgradeScript
      * @param $buttons
      * @return bool
      */
-    private function updateIcon(&$buttons) : bool
+    private function updateIcon(&$buttons): bool
     {
         $updated = false;
         if (!is_array($buttons)) {

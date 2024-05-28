@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Електронно табло със списък на приходните позиции',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Електронно табло със запис на приходните позиции',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Типове продукти',
     'LBL_ASSIGNED_TO_NAME' => 'Отговорник:',
     'LBL_ASSIGNED_TO' => 'Отговорник:',
-    'LBL_ASSIGNED_TO_ID'=>'Отговорник',
+    'LBL_ASSIGNED_TO_ID' => 'Отговорник',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Име на отговорника',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Отговорник',
     'LBL_CAMPAIGN_ID' => 'Идентификатор на кампанията',
@@ -217,4 +217,5 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Представя топ десет приходни позиции в графика.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Моите приходни позиции',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Приходни позиции на моите екипи",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Хронология на модул „Приходна позиция“',
+];

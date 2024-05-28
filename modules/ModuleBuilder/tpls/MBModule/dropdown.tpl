@@ -159,12 +159,12 @@
                                                 {if $is_blank}
                                                     <span class="fieldValue" id="span_sales_stage_classification_{$name|escape:'html':'UTF-8'}">[{$sales_stage_open|escape:'html':'UTF-8'}]</span>
                                                 {else}
-                                                    {if (in_array($name, $sales_stage_won_options))}
+                                                    {if (safeInArray($name, $sales_stage_won_options))}
                                                         <span class="fieldValue" id="span_sales_stage_classification_{$name|escape:'html':'UTF-8'}">[{$sales_stage_classification_options[$sales_stage_closed_won]|escape:'html':'UTF-8'}]</span>
                                                         <span class="fieldValue" id="span_edit_sales_stage_classification_{$name|escape:'html':'UTF-8'}" style="display:none">
                                                             {html_options name='sales_stage_classification_dropdown' options=$sales_stage_classification_options selected=$sales_stage_classification_options[$sales_stage_closed_won] onchange='SimpleList.setSalesStageDropDownValue(this, this.value, true);' onblur='SimpleList.setSalesStageDropDownValue(this, this.value, true);'}
                                                         </span>
-                                                    {elseif (in_array($name, $sales_stage_lost_options))}
+                                                    {elseif (safeInArray($name, $sales_stage_lost_options))}
                                                         <span class="fieldValue" id="span_sales_stage_classification_{$name|escape:'html':'UTF-8'}">[{$sales_stage_classification_options[$sales_stage_closed_lost]|escape:'html':'UTF-8'}]</span>
                                                         <span class="fieldValue" id="span_edit_sales_stage_classification_{$name|escape:'html':'UTF-8'}" style="display:none">
                                                             {html_options name='sales_stage_classification_dropdown' options=$sales_stage_classification_options selected=$sales_stage_classification_options[$sales_stage_closed_lost] onchange='SimpleList.setSalesStageDropDownValue(this, this.value, true);' onblur='SimpleList.setSalesStageDropDownValue(this, this.value, true);'}

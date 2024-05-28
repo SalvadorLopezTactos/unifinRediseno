@@ -10,50 +10,50 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['pmse_Emails_Templates']['base']['filter']['basic'] = array(
-    'create'               => true,
-    'quicksearch_field'    => array('name'),
+$viewdefs['pmse_Emails_Templates']['base']['filter']['basic'] = [
+    'create' => true,
+    'quicksearch_field' => ['name'],
     'quicksearch_priority' => 1,
-    'filters'              => array(
-        array(
-            'id'                => 'all_records',
-            'name'              => 'LBL_LISTVIEW_FILTER_ALL',
-            'filter_definition' => array(),
-            'editable'          => false
-        ),
-        array(
-            'id'                => 'assigned_to_me',
-            'name'              => 'LBL_ASSIGNED_TO_ME',
-            'filter_definition' => array(
+    'filters' => [
+        [
+            'id' => 'all_records',
+            'name' => 'LBL_LISTVIEW_FILTER_ALL',
+            'filter_definition' => [],
+            'editable' => false,
+        ],
+        [
+            'id' => 'assigned_to_me',
+            'name' => 'LBL_ASSIGNED_TO_ME',
+            'filter_definition' => [
                 '$owner' => '',
-            ),
-            'editable'          => false
-        ),
-        array(
-            'id'                => 'favorites',
-            'name'              => 'LBL_FAVORITES',
-            'filter_definition' => array(
+            ],
+            'editable' => false,
+        ],
+        [
+            'id' => 'favorites',
+            'name' => 'LBL_FAVORITES',
+            'filter_definition' => [
                 '$favorite' => '',
-            ),
-            'editable'          => false
-        ),
-        array(
-            'id'                => 'recently_viewed',
-            'name'              => 'LBL_RECENTLY_VIEWED',
-            'filter_definition' => array(
+            ],
+            'editable' => false,
+        ],
+        [
+            'id' => 'recently_viewed',
+            'name' => 'LBL_RECENTLY_VIEWED',
+            'filter_definition' => [
                 '$tracker' => '-7 DAY',
-            ),
-            'editable'          => false
-        ),
-        array(
-            'id'                => 'recently_created',
-            'name'              => 'LBL_NEW_RECORDS',
-            'filter_definition' => array(
-                'date_entered' => array(
+            ],
+            'editable' => false,
+        ],
+        [
+            'id' => 'recently_created',
+            'name' => 'LBL_NEW_RECORDS',
+            'filter_definition' => [
+                'date_entered' => [
                     '$dateRange' => 'last_7_days',
-                ),
-            ),
-            'editable'          => false
-        ),
-    ),
-);
+                ],
+            ],
+            'editable' => false,
+        ],
+    ],
+];

@@ -13,36 +13,44 @@
 $viewdefs['Emails']['base']['view']['activity-card-header'] = [
     'panels' => [
         [
-            'name' => 'panel_users',
-            'label' => 'LBL_PANEL_USERS',
-            'css_class' => 'panel-users',
-            'template' => 'user-to-user',
-            'fields' => [
-                [
-                    'name' => 'from_collection',
-                    'type' => 'from',
-                ],
-                [
-                    'name' => 'to_collection',
-                    'type' => 'email-recipients',
-                ],
-            ],
-        ],
-        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_HEADER',
             'css_class' => 'panel-header',
             'fields' => [
                 [
                     'name' => 'name',
-                    'type' => 'name',
+                    'type' => 'relate',
                     'link' => true,
+                    'id_name' => 'id',
                 ],
                 [
                     'name' => 'state',
-                    'css_class' => 'email-state',
+                    'css_class' => 'label-state',
                 ],
-
+            ],
+        ],
+        [
+            'name' => 'panel_users',
+            'label' => 'LBL_PANEL_USERS',
+            'css_class' => 'panel-users mt-2 flex flex-wrap gap-x-4 gap-y-2',
+            'template' => 'user-group',
+            'fields' => [
+                [
+                    'name' => 'to_collection',
+                    'type' => 'email-recipients',
+                ],
+                [
+                    'name' => 'from_collection',
+                    'type' => 'from',
+                ],
+                [
+                    'name' => 'cc_collection',
+                    'type' => 'email-recipients',
+                ],
+                [
+                    'name' => 'bcc_collection',
+                    'type' => 'email-recipients',
+                ],
             ],
         ],
     ],

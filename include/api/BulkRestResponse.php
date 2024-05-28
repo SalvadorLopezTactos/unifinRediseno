@@ -28,7 +28,7 @@ class BulkRestResponse extends RestResponse
      * Request results
      * @var array
      */
-    protected $results = array();
+    protected $results = [];
 
     /**
      * Set request name
@@ -53,12 +53,12 @@ class BulkRestResponse extends RestResponse
      * Map of fields to record: RestResponse => JSON
      * @var array
      */
-    protected $fieldMap = array(
+    protected $fieldMap = [
         'body' => 'contents',
         'headers' => 'headers',
         'code' => 'status',
         'statusText' => 'status_text',
-    );
+    ];
 
     /**
      * Instead of sending, record the request data
@@ -66,14 +66,14 @@ class BulkRestResponse extends RestResponse
      */
     public function send()
     {
-        switch($this->type) {
+        switch ($this->type) {
             case self::FILE:
-                if(!file_exists($this->filename)) {
+                if (!file_exists($this->filename)) {
                     $this->body = '';
-                    $this->headers = array();
+                    $this->headers = [];
                     $this->code = 404;
                 } else {
-                    $this->setHeader("Content-Length", filesize($this->filename));
+                    $this->setHeader('Content-Length', filesize($this->filename));
                     $this->body = file_get_contents($this->filename);
                 }
                 break;
@@ -82,19 +82,19 @@ class BulkRestResponse extends RestResponse
                 // keep as-is
                 break;
             default:
-                 $this->body = $this->processContent();
+                $this->body = $this->processContent();
         }
-        if(empty($this->code)) {
+        if (empty($this->code)) {
             $this->code = 200;
         }
 
         $this->statusText = static::responseCodeAsText($this->code);
 
-        foreach($this->fieldMap as $prop => $data) {
+        foreach ($this->fieldMap as $prop => $data) {
             if (isset($this->$prop)) {
                 $this->results[$this->reqName][$data] = $this->$prop;
-                if(is_array($this->$prop)) {
-                    $this->$prop = array();
+                if (is_array($this->$prop)) {
+                    $this->$prop = [];
                 } else {
                     $this->$prop = null;
                 }

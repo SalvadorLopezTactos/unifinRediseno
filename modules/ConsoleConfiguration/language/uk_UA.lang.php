@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Налаштування консолі',
     'LBL_MODULE_NAME_SINGULAR' => 'Налаштування консолі',
     'LBL_CONSOLE_CONFIG_TITLE' => 'Консоль',
@@ -55,4 +56,4 @@ $mod_strings = array(
     'LBL_CONSOLE_DIRECTIONS_CHANGE' => 'Зміни буде відображено негайно, але їх потрібно зберегти, щоб вони набули сили.',
     'LBL_CONSOLE_DIRECTIONS_FILTER_AND' => 'і ',
     'LBL_CONSOLE_DIRECTIONS_FILTER_OR' => 'або ',
-);
+];

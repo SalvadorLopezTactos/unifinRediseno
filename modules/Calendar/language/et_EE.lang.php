@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kalender',
     'LBL_MODULE_NAME_SINGULAR' => 'Kalender',
     'LBL_MODULE_TITLE' => 'Kalender',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Sätted',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Kuva ajapilud vaadetes Päev ja Nädal:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Algusaeg:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Lõpuaeg:',
+    'LBL_SETTINGS_TIME_STARTS' => 'Algusaeg:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Lõpuaeg:',
     'LBL_SETTINGS_CALLS_SHOW' => 'Kuva kõned:',
     'LBL_SETTINGS_TASKS_SHOW' => 'Kuva ülesanded:',
 
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Loo kalender',
     'LNK_CALENDAR_LIST' => 'Vaata kalendreid',
     'LNK_CALENDAR_LEGACY' => 'Pärandkalender',
-    'LBL_IMPORT_CALENDAR'=> 'Impordi kalender',
+    'LBL_IMPORT_CALENDAR' => 'Impordi kalender',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Sündmuse ajatempel',
     'LBL_INSERTFIELD' => 'Sisesta väli',
     'LBL_EVENT_START_ERROR' => 'Valige algus',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Valige kalender',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Kalendrite salvestamine ebaõnnestus.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Pühap',
             'Esmasp',
             'Teisip',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Neljap',
             'Reede',
             'Laup',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Pühapäev',
             'Esmaspäev',
             'Teisipäev',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Neljapäev',
             'Reede',
             'Laupäev',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Jaan',
             'Veebr',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Okt',
             'Nov',
             'Dets',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Jaanuar',
             'Veebruar',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Oktoober',
             'November',
             'Detsember',
-        ),
-);
+        ],
+];

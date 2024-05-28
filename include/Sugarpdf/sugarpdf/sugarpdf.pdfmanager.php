@@ -28,11 +28,9 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
         $this->setPrintFooter(true); // always print page number at least
 
         if (!empty($_REQUEST['pdf_template_id'])) {
-
             $pdfTemplate = BeanFactory::newBean('PdfManager');
             if ($pdfTemplate->retrieve($_REQUEST['pdf_template_id'], false) !== null) {
-
-                $previewMode = FALSE;
+                $previewMode = false;
                 if (!empty($_REQUEST['pdf_preview']) && $_REQUEST['pdf_preview'] == 1) {
                     $previewMode = true;
                     $this->bean = BeanFactory::newBean($pdfTemplate->base_module);
@@ -79,7 +77,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
                 }
 
 
-                $filenameParts = array();
+                $filenameParts = [];
                 if (!empty($this->bean) && !empty($this->bean->name)) {
                     $filenameParts[] = $this->bean->name;
                 }
@@ -87,30 +85,30 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
                     $filenameParts[] = $pdfTemplate->name;
                 }
 
-                $cr = array(' ',"\r", "\n","/");
-                $this->pdfFilename = str_replace($cr, '_', implode("_", $filenameParts ).".pdf");
+                $cr = [' ', "\r", "\n", '/'];
+                $this->pdfFilename = str_replace($cr, '_', implode('_', $filenameParts) . '.pdf');
             }
         }
 
 
-        if ($previewMode === FALSE) {
+        if ($previewMode === false) {
             require_once 'modules/PdfManager/PdfManagerHelper.php';
             $fields = PdfManagerHelper::parseBeanFields($this->bean, true);
         } else {
-            $fields = array();
+            $fields = [];
         }
 
-        if ($this->module == 'Quotes' && $previewMode === FALSE) {
+        if ($this->module == 'Quotes' && $previewMode === false) {
             global $locale;
             require_once 'modules/Quotes/config.php';
             require_once 'modules/Currencies/Currency.php';
             $currency = BeanFactory::newBean('Currencies');
-            $format_number_array = array(
+            $format_number_array = [
                 'currency_symbol' => true,
                 'type' => 'sugarpdf',
                 'currency_id' => $this->bean->currency_id,
                 'charset_convert' => true, /* UTF-8 uses different bytes for Euro and Pounds */
-            );
+            ];
 
             if (!empty($this->bean->date_quote_expected_closed)) {
                 $dt = new SugarDateTime($this->bean->date_quote_expected_closed);
@@ -133,21 +131,20 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
             $fields['currency_iso'] = $currency->iso4217;
 
             // Adding Tax Rate Field
-            $fields['taxrate_value'] = format_number_sugarpdf($this->bean->taxrate_value, $locale->getPrecision(), $locale->getPrecision(), array('percentage' => true));;
+            $fields['taxrate_value'] = format_number_sugarpdf($this->bean->taxrate_value, $locale->getPrecision(), $locale->getPrecision(), ['percentage' => true]);
+            ;
 
             $this->bean->load_relationship('product_bundles');
             $product_bundle_list = $this->bean->product_bundles->getBeans();
-            usort($product_bundle_list, array('ProductBundle', 'compareProductBundlesByIndex'));
+            usort($product_bundle_list, ['ProductBundle', 'compareProductBundlesByIndex']);
 
-            $bundles = array();
+            $bundles = [];
             $count = 0;
             foreach ($product_bundle_list as $ordered_bundle) {
-
                 $bundleFields = PdfManagerHelper::parseBeanFields($ordered_bundle, true);
-                $bundleFields['products'] = array();
+                $bundleFields['products'] = [];
                 $product_bundle_line_items = $ordered_bundle->get_product_bundle_line_items();
                 foreach ($product_bundle_line_items as $product_bundle_line_item) {
-
                     $bundleFields['products'][$count] = PdfManagerHelper::parseBeanFields($product_bundle_line_item, true);
 
                     // Format the service start and end dates into the user preferred format
@@ -160,7 +157,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
                         $bundleFields['products'][$count]['service_end_date'] = $GLOBALS['timedate']->asUserDate($dt);
                     }
 
-                    if ($product_bundle_line_item->object_name == "ProductBundleNote") {
+                    if ($product_bundle_line_item->object_name == 'ProductBundleNote') {
                         $bundleFields['products'][$count]['name'] = $bundleFields['products'][$count]['description'];
                     } else {
                         // Special case about discount amount
@@ -183,7 +180,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
             $this->ss->assign('product_bundles', $bundles);
         }
 
-         $this->ss->assign('fields', $fields);
+        $this->ss->assign('fields', $fields);
     }
 
     public function display()
@@ -192,7 +189,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
 
         $headerdata = $this->getHeaderData();
         // Remove the temporary logo copy (starts with "upload://") if exists
-        if (!empty($headerdata['logo']) && file_exists($headerdata['logo']) && strpos($headerdata['logo'], "upload://") === 0) {
+        if (!empty($headerdata['logo']) && file_exists($headerdata['logo']) && strpos($headerdata['logo'], 'upload://') === 0) {
             unlink($headerdata['logo']);
         }
     }
@@ -204,13 +201,14 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
      * @param $focus
      * @return $email_id
      */
-    private function buildEmail ($file_name, $focus) {
+    private function buildEmail($file_name, $focus)
+    {
 
         global $mod_strings;
         global $current_user;
 
         //First Create e-mail draft
-        $email_object = BeanFactory::newBean("Emails");
+        $email_object = BeanFactory::newBean('Emails');
         // set the id for relationships
         $email_object->id = create_guid();
         $email_object->new_with_id = true;
@@ -218,38 +216,37 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
         //subject
         $email_object->name = $focus->name;
         //body
-        $email_object->description_html = sprintf(translate('LBL_EMAIL_PDF_DEFAULT_DESCRIPTION', "PdfManager"), $file_name);
-        $email_object->description = html_entity_decode($email_object->description_html,ENT_COMPAT,'UTF-8');
+        $email_object->description_html = sprintf(translate('LBL_EMAIL_PDF_DEFAULT_DESCRIPTION', 'PdfManager'), $file_name);
+        $email_object->description = html_entity_decode($email_object->description_html, ENT_COMPAT, 'UTF-8');
 
         //parent type, id
         $email_object->parent_type = $focus->module_name;
         $email_object->parent_id = $focus->id;
         //type is draft
-        $email_object->type = "draft";
-        $email_object->status = "draft";
+        $email_object->type = 'draft';
+        $email_object->status = 'draft';
         $email_object->state = Email::STATE_DRAFT;
 
         $email_object->to_addrs_ids = $focus->id;
-        $email_object->to_addrs_names = $focus->name.";";
+        $email_object->to_addrs_names = $focus->name . ';';
 
         if (isset($focus->emailAddress)) {
             $to_addrs = $focus->emailAddress->getPrimaryAddress($focus);
-            $email_object->to_addrs_emails = $to_addrs.";";
-            $email_object->to_addrs = $focus->name." <".$to_addrs.">";
-        }
-        elseif( $focus->module_name == "Quotes" ) {
+            $email_object->to_addrs_emails = $to_addrs . ';';
+            $email_object->to_addrs = $focus->name . ' <' . $to_addrs . '>';
+        } elseif ($focus->module_name == 'Quotes') {
             // link the sent pdf to the relevant account
-            if(isset($focus->billing_account_id) && !empty($focus->billing_account_id)) {
+            if (isset($focus->billing_account_id) && !empty($focus->billing_account_id)) {
                 $email_object->load_relationship('accounts');
                 $email_object->accounts->add($focus->billing_account_id);
             }
 
             //check to see if there is a billing contact associated with this quote
-            if(!empty($focus->billing_contact_id) && $focus->billing_contact_id!="") {
-                $contact = BeanFactory::newBean("Contacts");
+            if (!empty($focus->billing_contact_id) && $focus->billing_contact_id != '') {
+                $contact = BeanFactory::newBean('Contacts');
                 $contact->retrieve($focus->billing_contact_id);
 
-                if(!empty($contact->email1) || !empty($contact->email2)) {
+                if (!empty($contact->email1) || !empty($contact->email2)) {
                     if ($email_object->load_relationship('to')) {
                         $ep = BeanFactory::newBean('EmailParticipants');
                         $ep->new_with_id = true;
@@ -268,25 +265,25 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
 
                     //contact email is set
                     $email_object->to_addrs_ids = $focus->billing_contact_id;
-                    $email_object->to_addrs_names = $focus->billing_contact_name.";";
+                    $email_object->to_addrs_names = $focus->billing_contact_name . ';';
 
-                    if(!empty($contact->email1)){
-                        $email_object->to_addrs_emails = $contact->email1.";";
-                        $email_object->to_addrs = $focus->billing_contact_name." <".$contact->email1.">";
-                    } elseif(!empty($contact->email2)){
-                        $email_object->to_addrs_emails = $contact->email2.";";
-                        $email_object->to_addrs = $focus->billing_contact_name." <".$contact->email2.">";
+                    if (!empty($contact->email1)) {
+                        $email_object->to_addrs_emails = $contact->email1 . ';';
+                        $email_object->to_addrs = $focus->billing_contact_name . ' <' . $contact->email1 . '>';
+                    } elseif (!empty($contact->email2)) {
+                        $email_object->to_addrs_emails = $contact->email2 . ';';
+                        $email_object->to_addrs = $focus->billing_contact_name . ' <' . $contact->email2 . '>';
                     }
 
                     // create relationship b/t the email(w/pdf) and the contact
                     $contact->load_relationship('emails');
                     $contact->emails->add($email_object->id);
                 }//end if contact name is set
-            } elseif(isset($focus->billing_account_id) && !empty($focus->billing_account_id)) {
-                $acct = BeanFactory::newBean("Accounts");
+            } elseif (isset($focus->billing_account_id) && !empty($focus->billing_account_id)) {
+                $acct = BeanFactory::newBean('Accounts');
                 $acct->retrieve($focus->billing_account_id);
 
-                if(!empty($acct->email1) || !empty($acct->email2)) {
+                if (!empty($acct->email1) || !empty($acct->email2)) {
                     if ($email_object->load_relationship('to')) {
                         $ep = BeanFactory::newBean('EmailParticipants');
                         $ep->new_with_id = true;
@@ -305,14 +302,14 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
 
                     //acct email is set
                     $email_object->to_addrs_ids = $focus->billing_account_id;
-                    $email_object->to_addrs_names = $focus->billing_account_name.";";
+                    $email_object->to_addrs_names = $focus->billing_account_name . ';';
 
-                    if(!empty($acct->email1)){
-                        $email_object->to_addrs_emails = $acct->email1.";";
-                        $email_object->to_addrs = $focus->billing_account_name." <".$acct->email1.">";
-                    } elseif(!empty($acct->email2)){
-                        $email_object->to_addrs_emails = $acct->email2.";";
-                        $email_object->to_addrs = $focus->billing_account_name." <".$acct->email2.">";
+                    if (!empty($acct->email1)) {
+                        $email_object->to_addrs_emails = $acct->email1 . ';';
+                        $email_object->to_addrs = $focus->billing_account_name . ' <' . $acct->email1 . '>';
+                    } elseif (!empty($acct->email2)) {
+                        $email_object->to_addrs_emails = $acct->email2 . ';';
+                        $email_object->to_addrs = $focus->billing_account_name . ' <' . $acct->email2 . '>';
                     }
 
                     // create relationship b/t the email(w/pdf) and the acct
@@ -323,11 +320,11 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
         }
 
         if (isset($email_object->team_id)) {
-            $email_object->team_id  = $current_user->getPrivateTeamID();
+            $email_object->team_id = $current_user->getPrivateTeamID();
         }
         if (isset($email_object->team_set_id)) {
             $teamSet = BeanFactory::newBean('TeamSets');
-            $teamIdsArray = array($current_user->getPrivateTeamID());
+            $teamIdsArray = [$current_user->getPrivateTeamID()];
             $email_object->team_set_id = $teamSet->addTeams($teamIdsArray);
         }
 
@@ -337,16 +334,16 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
         global $timedate;
         $email_object->date_start = $timedate->now();
 
-        $email_object->save(FALSE);
+        $email_object->save(false);
         $email_id = $email_object->id;
 
         //Handle PDF Attachment
-        $note = BeanFactory::newBean("Notes");
+        $note = BeanFactory::newBean('Notes');
         $note->id = Uuid::uuid1();
         $note->new_with_id = true;
         $note->filename = $file_name;
         $note->file_mime_type = get_file_mime_type("upload://{$file_name}", 'application/octet-stream');
-        $note->name = translate('LBL_EMAIL_ATTACHMENT', "Quotes").$file_name;
+        $note->name = translate('LBL_EMAIL_ATTACHMENT', 'Quotes') . $file_name;
 
         $note->email_id = $email_object->id;
         $note->email_type = $email_object->module_name;
@@ -354,16 +351,16 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
         //teams
         $note->team_id = $current_user->getPrivateTeamID();
         $noteTeamSet = BeanFactory::newBean('TeamSets');
-        $noteteamIdsArray = array($current_user->getPrivateTeamID());
+        $noteteamIdsArray = [$current_user->getPrivateTeamID()];
         $note->team_set_id = $noteTeamSet->addTeams($noteteamIdsArray);
 
         // Copy the file before saving so that the file size is captured during save.
-	    $source = 'upload://'.$file_name;
+        $source = 'upload://' . $file_name;
         $destination = "upload://{$note->id}";
 
         if (!@copy($source, $destination)) {
-            $msg = str_replace('$destination', $destination, translate('LBL_RENAME_ERROR', "Quotes"));
-            $GLOBALS["log"]->fatal($msg);
+            $msg = str_replace('$destination', $destination, translate('LBL_RENAME_ERROR', 'Quotes'));
+            $GLOBALS['log']->fatal($msg);
             die('ERROR: can\'t copy pdf file to destination. You should try making the directory writable by the webserver');
         }
 
@@ -383,22 +380,20 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
      * @param $previewMode
      * @return $tpl_filename
      */
-    private function buildTemplateFile($pdfTemplate, $previewMode = FALSE)
+    private function buildTemplateFile($pdfTemplate, $previewMode = false)
     {
         if (!empty($pdfTemplate)) {
-
-            if ( ! file_exists(sugar_cached('modules/PdfManager/tpls')) ) {
+            if (!file_exists(sugar_cached('modules/PdfManager/tpls'))) {
                 mkdir_recursive(sugar_cached('modules/PdfManager/tpls'));
             }
             $tpl_filename = sugar_cached('modules/PdfManager/tpls/' . $pdfTemplate->id . '.tpl');
 
-            if ($previewMode !== FALSE) {
+            if ($previewMode !== false) {
                 $tpl_filename = sugar_cached('modules/PdfManager/tpls/' . $pdfTemplate->id . '_preview.tpl');
-                $pdfTemplate->body_html = str_replace(array('{', '}'), array('&#123;', '&#125;'), $pdfTemplate->body_html);
+                $pdfTemplate->body_html = str_replace(['{', '}'], ['&#123;', '&#125;'], $pdfTemplate->body_html);
             }
 
             if ($pdfTemplate->base_module == 'Quotes') {
-
                 $pdfTemplate->body_html = str_replace(
                     '$fields.product_bundles',
                     '$bundle',
@@ -424,7 +419,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
                 );
 
                 $pdfTemplate->body_html = str_replace(
-                    array("<!--END_PRODUCT_LOOP-->", "<!--END_BUNDLE_LOOP-->"),
+                    ['<!--END_PRODUCT_LOOP-->', '<!--END_BUNDLE_LOOP-->'],
                     '{/foreach}',
                     $pdfTemplate->body_html
                 );
@@ -443,34 +438,34 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
      *
      * @see TCPDF::Output()
      */
-    public function Output($name="doc.pdf", $dest='I')
+    public function Output($name = 'doc.pdf', $dest = 'I')
     {
         if (!empty($this->pdfFilename)) {
             $name = $this->pdfFilename;
         }
 
         // This case is for "email as PDF"
-        if (isset($_REQUEST['to_email']) && $_REQUEST['to_email']=="1") {
+        if (isset($_REQUEST['to_email']) && $_REQUEST['to_email'] == '1') {
             // After the output the object is destroy
 
             $bean = $this->bean;
 
-            $tmp = parent::Output('','S');
+            $tmp = parent::Output('', 'S');
             $badoutput = ob_get_contents();
-            if(strlen($badoutput) > 0) {
+            if (strlen($badoutput) > 0) {
                 ob_end_clean();
             }
-            file_put_contents('upload://'.$name, ltrim($tmp));
+            file_put_contents('upload://' . $name, ltrim($tmp));
 
             $email_id = $this->buildEmail($name, $bean);
 
             //redirect
-            if($email_id=="") {
+            if ($email_id == '') {
                 //Redirect to quote, since something went wrong
-                echo "There was an error with your request";
+                echo 'There was an error with your request';
                 exit; //end if email id is blank
             } else {
-                SugarApplication::redirect("index.php?module=Emails&action=Compose&record=".$email_id."&replyForward=true&reply=");
+                SugarApplication::redirect('index.php?module=Emails&action=Compose&record=' . $email_id . '&replyForward=true&reply=');
             }
         }
 
@@ -480,58 +475,60 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
     /**
      * PDF manager specific Header function
      */
-    public function Header() {
-  			$ormargins = $this->getOriginalMargins();
-  			$headerfont = $this->getHeaderFont();
-  			$headerdata = $this->getHeaderData();
-  			if ($headerdata['logo'] && $headerdata['logo'] != K_BLANK_IMAGE) {
-                $this->Image($headerdata['logo'], $this->GetX(), $this->getHeaderMargin(), $headerdata['logo_width'], 12);
-  				$imgy = $this->getImageRBY();
-  			} else {
-  				$imgy = $this->GetY();
-  			}
-  			$cell_height = round(($this->getCellHeightRatio() * $headerfont[2]) / $this->getScaleFactor(), 2);
-  			// set starting margin for text data cell
-  			if ($this->getRTL()) {
-  				$header_x = $ormargins['right'] + ($headerdata['logo_width'] * 1.1);
-  			} else {
-  				$header_x = $ormargins['left'] + ($headerdata['logo_width'] * 1.1);
-  			}
-  			$this->SetTextColor(0, 0, 0);
-  			// header title
-  			$this->SetFont($headerfont[0], 'B', $headerfont[2] + 1);
-  			$this->SetX($header_x);
-  			$this->Cell(0, $cell_height, $headerdata['title'], 0, 1, '', 0, '', 0);
-  			// header string
-  			$this->SetFont($headerfont[0], $headerfont[1], $headerfont[2]);
-  			$this->SetX($header_x);
-  			$this->MultiCell(0, $cell_height, $headerdata['string'], 0, '', 0, 1, '', '', true, 0, false);
-  			// print an ending header line
-  			$this->SetLineStyle(array('width' => 0.85 / $this->getScaleFactor(), 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
-  			$this->SetY((2.835 / $this->getScaleFactor()) + max($imgy, $this->GetY()));
-  			if ($this->getRTL()) {
-  				$this->SetX($ormargins['right']);
-  			} else {
-  				$this->SetX($ormargins['left']);
-  			}
-  			$this->Cell(0, 0, '', 'T', 0, 'C');
-  		}
+    public function Header()
+    {
+        $ormargins = $this->getOriginalMargins();
+        $headerfont = $this->getHeaderFont();
+        $headerdata = $this->getHeaderData();
+        if ($headerdata['logo'] && $headerdata['logo'] != K_BLANK_IMAGE) {
+            $this->Image($headerdata['logo'], $this->GetX(), $this->getHeaderMargin(), $headerdata['logo_width'], 12);
+            $imgy = $this->getImageRBY();
+        } else {
+            $imgy = $this->GetY();
+        }
+        $cell_height = round(($this->getCellHeightRatio() * $headerfont[2]) / $this->getScaleFactor(), 2);
+        // set starting margin for text data cell
+        if ($this->getRTL()) {
+            $header_x = $ormargins['right'] + ($headerdata['logo_width'] * 1.1);
+        } else {
+            $header_x = $ormargins['left'] + ($headerdata['logo_width'] * 1.1);
+        }
+        $this->SetTextColor(0, 0, 0);
+        // header title
+        $this->SetFont($headerfont[0], 'B', $headerfont[2] + 1);
+        $this->SetX($header_x);
+        $this->Cell(0, $cell_height, $headerdata['title'], 0, 1, '', 0, '', 0);
+        // header string
+        $this->SetFont($headerfont[0], $headerfont[1], $headerfont[2]);
+        $this->SetX($header_x);
+        $this->MultiCell(0, $cell_height, $headerdata['string'], 0, '', 0, 1, '', '', true, 0, false);
+        // print an ending header line
+        $this->SetLineStyle(['width' => 0.85 / $this->getScaleFactor(), 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => [0, 0, 0]]);
+        $this->SetY((2.835 / $this->getScaleFactor()) + max($imgy, $this->GetY()));
+        if ($this->getRTL()) {
+            $this->SetX($ormargins['right']);
+        } else {
+            $this->SetX($ormargins['left']);
+        }
+        $this->Cell(0, 0, '', 'T', 0, 'C');
+    }
 
     /**
      * PDF manager specific Footer function
      */
-    public function Footer() {
+    public function Footer()
+    {
         $cur_y = $this->GetY();
         $ormargins = $this->getOriginalMargins();
         $this->SetTextColor(0, 0, 0);
         //set style for cell border
         $line_width = 0.85 / $this->getScaleFactor();
-        $this->SetLineStyle(array('width' => $line_width, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
+        $this->SetLineStyle(['width' => $line_width, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => [0, 0, 0]]);
         //print document barcode
         $barcode = $this->getBarcode();
         if (!empty($barcode)) {
             $this->Ln($line_width);
-            $barcode_width = round(($this->getPageWidth() - $ormargins['left'] - $ormargins['right'])/3);
+            $barcode_width = round(($this->getPageWidth() - $ormargins['left'] - $ormargins['right']) / 3);
             $this->write1DBarcode($barcode, 'C128B', $this->GetX(), $cur_y + $line_width, $barcode_width, (($this->getFooterMargin() / 3) - $line_width), 0.3, '', '');
         }
         if (empty($this->pagegroups)) {
@@ -606,15 +603,15 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
         header('Cache-Control: public, must-revalidate, max-age=0'); // HTTP/1.1
         header('Pragma: public');
         header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-        header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
         // force download dialog
         header('Content-Type: application/force-download');
         header('Content-Type: application/octet-stream', false);
         header('Content-Type: application/download', false);
         header('Content-Type: application/pdf', false);
         // use the Content-Disposition header to supply a recommended filename
-        header('Content-Disposition: attachment; filename="'.basename($filename).'"');
+        header('Content-Disposition: attachment; filename="' . basename($filename) . '"');
         header('Content-Transfer-Encoding: binary');
-        header('Content-Length: '.$this->bufferlen);
+        header('Content-Length: ' . $this->bufferlen);
     }
 }

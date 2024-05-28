@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Шаблони на Базата от знания',
     'LBL_MODULE_NAME_SINGULAR' => 'Шаблони на Базата от знания',
     'LBL_MODULE_TITLE' => 'Шаблони на Базата от знания',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Разгледай Шаблоните',
     'LBL_TEXT_BODY' => 'Съдържание',
     'LBL_LIST_TEMPLATE_NAME' => 'Шаблон',
-);
+];

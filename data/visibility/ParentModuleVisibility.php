@@ -18,7 +18,8 @@ class ParentModuleVisibility extends ACLVisibility
 {
     /** @var SugarQuery_Builder_Join */
     public $join;
-    protected $parentLink = "";
+    protected $parentLink = '';
+
     /**
      * @param SugarBean $bean
      */
@@ -40,17 +41,16 @@ class ParentModuleVisibility extends ACLVisibility
      */
     public function addVisibilityFromQuery(SugarQuery $query)
     {
-        if (!empty($this->parentLink))
-        {
+        if (!empty($this->parentLink)) {
             $linkName = $this->parentLink;
             $query->from->load_relationship($linkName);
-            if(empty($query->from->$linkName)) {
+            if (empty($query->from->$linkName)) {
                 throw new SugarApiExceptionInvalidParameter("Invalid link $linkName for owner clause");
             }
-            if($query->from->$linkName->getType() == "many") {
+            if ($query->from->$linkName->getType() == 'many') {
                 throw new SugarApiExceptionInvalidParameter("Cannot serch for owners through multi-link $linkName");
             }
-            $this->join = $query->join($linkName, array('joinType' => 'LEFT'));
+            $this->join = $query->join($linkName, ['joinType' => 'LEFT']);
         }
 
         return $query;

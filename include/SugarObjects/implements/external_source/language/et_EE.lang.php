@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-    'LBL_SOURCE_ID'   => 'Välise allika ID',
+$mod_strings = [
+    'LBL_SOURCE_ID' => 'Välise allika ID',
     'LBL_SOURCE_TYPE' => 'Väline allikas',
     'LBL_SOURCE_META' => 'Väline allikas meta',
-);
+];

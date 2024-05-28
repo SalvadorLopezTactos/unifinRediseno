@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Fix users with no primary emails
  */
@@ -20,7 +21,7 @@ class SugarUpgradePrimaryEmailFix extends UpgradeScript
     public function run()
     {
         //Fetch all users without primary email
-        $result = $this->db->query("SELECT u.id AS user_id FROM users u WHERE u.id NOT IN (SELECT e.bean_id FROM email_addr_bean_rel e WHERE e.primary_address=1 AND e.deleted=0) AND u.deleted=0");
+        $result = $this->db->query('SELECT u.id AS user_id FROM users u WHERE u.id NOT IN (SELECT e.bean_id FROM email_addr_bean_rel e WHERE e.primary_address=1 AND e.deleted=0) AND u.deleted=0');
 
         while ($row = $this->db->fetchByAssoc($result)) {
             $user = BeanFactory::newBean('Users');
@@ -31,7 +32,7 @@ class SugarUpgradePrimaryEmailFix extends UpgradeScript
             }
 
             $skip = false;
-            foreach($user->email as $emailAddress) {
+            foreach ($user->email as $emailAddress) {
                 if ($emailAddress['primary_address']) {
                     $skip = true;
                     break;
@@ -47,9 +48,9 @@ class SugarUpgradePrimaryEmailFix extends UpgradeScript
 
             $user->emailAddress->addAddress(
                 $emailAddress['email_address'],
-                true, 
-                $emailAddress['reply_to_address'], 
-                $emailAddress['invalid_email'], 
+                true,
+                $emailAddress['reply_to_address'],
+                $emailAddress['invalid_email'],
                 $emailAddress['opt_out']
             );
 

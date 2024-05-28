@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Etapa de Grupo:',
-    'LBL_DEAL_TOT'=>'descuento total',
-    'LBL_DEAL_TOT_USDOLLAR'=>'descuento total (Dólares EEUU)',
+    'LBL_DEAL_TOT' => 'descuento total',
+    'LBL_DEAL_TOT_USDOLLAR' => 'descuento total (Dólares EEUU)',
     'LBL_NEW_SUB' => 'Subtotal con Descuento:',
     'LBL_SHIPPING' => 'Envío:',
-    'LBL_SHIPPING_USDOLLAR'=>'Envío (Dólares EEUU)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Subtotal (Dólares EEUU)',
+    'LBL_SHIPPING_USDOLLAR' => 'Envío (Dólares EEUU)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Subtotal (Dólares EEUU)',
     'LBL_SUBTOTAL' => 'Subtotal:',
     'LBL_TAXABLE_SUBTOTAL' => 'Subtotal Imponible',
-    'LBL_TAX_USDOLLAR'=>'Impuestos (Dólares EEUU)',
+    'LBL_TAX_USDOLLAR' => 'Impuestos (Dólares EEUU)',
     'LBL_TAX' => 'Impuestos:',
-    'LBL_TOTAL_USDOLLAR'=>'Total (Dólares EEUU)',
+    'LBL_TOTAL_USDOLLAR' => 'Total (Dólares EEUU)',
     'LBL_TOTAL' => 'Total',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Posición del Paquete de Cotizaciones',
     'EXCEPTION_INVALID_QUOTE_ID' => 'Falta el ID de la cotización desde la carga útil',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'La Cotización solicitada no fue encontrada',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'La Cotización solicitada no fue encontrada',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Descuento Adicional del Grupo',
     'LBL_GROUP_TOTAL' => 'Total del Grupo',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Encabezado del Grupo',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'El grupo de Paquete de Productos determinado para la Cotización',
     'LBL_ALERT_DELETING_ITEM' => 'Eliminando el/los artículo/s',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Artículo eliminado satisfactoriamente',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Línea de tiempo del paquete de productos',
+];

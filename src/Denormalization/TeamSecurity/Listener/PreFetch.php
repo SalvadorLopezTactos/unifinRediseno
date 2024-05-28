@@ -59,8 +59,7 @@ SELECT DISTINCT user_id
   FROM team_memberships
  WHERE team_id IN(?)
    AND deleted = 0
-SQL
-        ;
+SQL;
 
         $stmt = $this->conn->executeQuery($query, [$teamIds], [Connection::PARAM_STR_ARRAY]);
 
@@ -99,7 +98,7 @@ SQL
      *
      * @see TeamSet::getTeamSetIdsForUser()
      */
-    private function clearCache(string $userId) : void
+    private function clearCache(string $userId): void
     {
         sugar_cache_clear('teamSetIdByUser' . $userId);
     }
@@ -107,7 +106,7 @@ SQL
     /**
      * {@inheritDoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf('PreFetch()');
     }

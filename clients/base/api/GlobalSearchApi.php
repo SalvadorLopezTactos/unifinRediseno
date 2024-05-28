@@ -60,12 +60,12 @@ class GlobalSearchApi extends SugarApi
     /**
      * @var array List of modules to query
      */
-    protected $moduleList = array();
+    protected $moduleList = [];
 
     /**
      * @var array List of aggregation filters to query
      */
-    protected $aggFilters = array();
+    protected $aggFilters = [];
 
     /**
      * @var boolean a flag to get tags in the response;
@@ -75,12 +75,12 @@ class GlobalSearchApi extends SugarApi
     /**
      * @var array List of tag ids for filtering;
      */
-    protected $tagFilters = array();
+    protected $tagFilters = [];
 
     /**
      * @var array the list of filters to be added to globalsearch;
      */
-    protected $filters = array();
+    protected $filters = [];
 
     /**
      * @var integer the maximum number of tags returned in the response
@@ -95,7 +95,7 @@ class GlobalSearchApi extends SugarApi
     /**
      * @var array Sort fields
      */
-    protected $sort = array();
+    protected $sort = [];
 
     /**
      * Get cross module aggregation results
@@ -107,7 +107,7 @@ class GlobalSearchApi extends SugarApi
      * List of modules for which to collect aggregations results
      * @var array
      */
-    protected $moduleAggs = array();
+    protected $moduleAggs = [];
 
     /**
      * Register endpoints
@@ -115,38 +115,38 @@ class GlobalSearchApi extends SugarApi
      */
     public function registerApiRest()
     {
-        return array(
+        return [
 
             // /globalsearch
-            'globalSearch' => array(
-                'reqType' => array('GET', 'POST'),
-                'path' => array('globalsearch'),
-                'pathVars' => array(''),
+            'globalSearch' => [
+                'reqType' => ['GET', 'POST'],
+                'path' => ['globalsearch'],
+                'pathVars' => [''],
                 'method' => 'globalSearch',
                 'shortHelp' => 'Global search',
                 'longHelp' => 'include/api/help/globalsearch_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionSearchUnavailable',
                     'SugarApiExceptionSearchRuntime',
-                ),
-            ),
+                ],
+            ],
 
             // /<module>/globalsearch
-            'modulesGlobalSearch' => array(
-                'reqType' => array('GET', 'POST'),
-                'path' => array('<module>', 'globalsearch'),
-                'pathVars' => array('module', ''),
+            'modulesGlobalSearch' => [
+                'reqType' => ['GET', 'POST'],
+                'path' => ['<module>', 'globalsearch'],
+                'pathVars' => ['module', ''],
                 'method' => 'globalSearch',
                 'shortHelp' => 'Global search',
                 'longHelp' => 'include/api/help/globalsearch_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionSearchUnavailable',
                     'SugarApiExceptionSearchRuntime',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**
@@ -174,12 +174,12 @@ class GlobalSearchApi extends SugarApi
         }
 
         // Handle the regular result set
-        $response = array(
+        $response = [
             'next_offset' => $this->getNextOffset($resultSet->getTotalHits(), $this->limit, $this->offset),
             'total' => $resultSet->getTotalHits(),
             'query_time' => $resultSet->getQueryTime(),
             'records' => $this->formatResults($api, $args, $resultSet),
-        );
+        ];
 
         // cross module aggregation results
         if ($this->crossModuleAggs) {
@@ -188,7 +188,7 @@ class GlobalSearchApi extends SugarApi
 
         // per module aggregation results
         if ($this->moduleAggs) {
-            $response['mod_aggs'] = array();
+            $response['mod_aggs'] = [];
         }
 
         // Search the tag module
@@ -214,7 +214,7 @@ class GlobalSearchApi extends SugarApi
 
         // If specific module is selected, this overrules the list
         if (!empty($args['module'])) {
-            $this->moduleList = array($args['module']);
+            $this->moduleList = [$args['module']];
         }
 
         // Set search term
@@ -224,17 +224,17 @@ class GlobalSearchApi extends SugarApi
 
         // Set limit
         if (isset($args['max_num'])) {
-            $this->limit = (int) $args['max_num'];
+            $this->limit = (int)$args['max_num'];
         }
 
         // Set offset
         if (isset($args['offset'])) {
-            $this->offset = (int) $args['offset'];
+            $this->offset = (int)$args['offset'];
         }
 
         // Enable/disable highlights
         if (isset($args['highlights'])) {
-            $this->highlights = (bool) $args['highlights'];
+            $this->highlights = (bool)$args['highlights'];
         }
 
         // Set sorting
@@ -259,7 +259,7 @@ class GlobalSearchApi extends SugarApi
 
         // Get tags related parameters
         if (!empty($args['tags'])) {
-            $this->getTags = (bool) $args['tags'];
+            $this->getTags = (bool)$args['tags'];
         }
 
         // Tag filters
@@ -276,10 +276,10 @@ class GlobalSearchApi extends SugarApi
     protected function parseAggFilters($aggFilterArgs)
     {
         if (!is_array($aggFilterArgs)) {
-            return array();
+            return [];
         }
 
-        $parsed = array();
+        $parsed = [];
         foreach ($aggFilterArgs as $id => $filter) {
             /*
              * We accept either an array of selected items or just a boolean.
@@ -289,7 +289,6 @@ class GlobalSearchApi extends SugarApi
             if (is_array($filter) || is_bool($filter)) {
                 $parsed[$id] = $filter;
             }
-
         }
         return $parsed;
     }
@@ -302,10 +301,9 @@ class GlobalSearchApi extends SugarApi
     protected function parseTagFilters($tagFilterArgs)
     {
         if (!is_array($tagFilterArgs)) {
-            return array();
+            return [];
         }
         return $tagFilterArgs;
-
     }
 
     /**
@@ -316,7 +314,7 @@ class GlobalSearchApi extends SugarApi
         // Compose the term filter for the tags
         if (!empty($this->tagFilters)) {
             $this->filters[] = new \Elastica\Query\Terms(
-                Mapping::PREFIX_COMMON .TagsHandler::TAGS_FIELD .'.tags',
+                Mapping::PREFIX_COMMON . TagsHandler::TAGS_FIELD . '.tags',
                 $this->tagFilters
             );
         }
@@ -347,16 +345,14 @@ class GlobalSearchApi extends SugarApi
             ->offset($this->offset)
             ->fieldBoost($this->fieldBoost)
             ->highlighter($this->highlights)
-            ->sort($this->sort)
-        ;
+            ->sort($this->sort);
 
         // pass aggregation query settings
         if ($engine instanceof AggregationCapable) {
             $engine
                 ->queryCrossModuleAggs($this->crossModuleAggs)
                 ->queryModuleAggs($this->moduleAggs)
-                ->aggFilters($this->aggFilters)
-            ;
+                ->aggFilters($this->aggFilters);
         }
 
         return $engine->search();
@@ -364,9 +360,9 @@ class GlobalSearchApi extends SugarApi
 
     /**
      * Get global search provider
-     * @throws \SugarApiExceptionSearchRuntime
-     * @throws \SugarApiExceptionSearchUnavailable
      * @return \Sugarcrm\Sugarcrm\SearchEngine\SearchEngine
+     * @throws \SugarApiExceptionSearchUnavailable
+     * @throws \SugarApiExceptionSearchRuntime
      */
     protected function getSearchEngine()
     {
@@ -413,11 +409,10 @@ class GlobalSearchApi extends SugarApi
      */
     protected function formatResults(ServiceBase $api, array $args, ResultSetInterface $results)
     {
-        $formatted = array();
+        $formatted = [];
 
         /* @var $result ResultInterface */
         foreach ($results as $result) {
-
             // get bean data based on available fields in the result
             $data = $this->formatBeanFromResult($api, $args, $result);
 
@@ -428,7 +423,6 @@ class GlobalSearchApi extends SugarApi
 
             // add highlights if available
             if ($highlights = $result->getHighlights()) {
-
                 // Filter out fields from highlights which are not present
                 // on our bean. This is to ensure we never return any fields
                 // which are not avialable due to ACL's.
@@ -439,6 +433,10 @@ class GlobalSearchApi extends SugarApi
                 }
 
                 $data['_highlights'] = $highlights;
+            }
+
+            if (($data['_module'] ?? '') === 'Employees') {
+                $data['_module'] = 'Users';
             }
 
             $formatted[] = $data;
@@ -454,16 +452,16 @@ class GlobalSearchApi extends SugarApi
      */
     protected function formatTagResults(ResultSetInterface $results)
     {
-        $formatted = array();
+        $formatted = [];
 
         /* @var $result ResultInterface */
         foreach ($results as $result) {
-            $data = array();
+            $data = [];
 
             // Retrieve tags' id & name
             $fields = $result->getData();
             $data['id'] = $result->getId();
-            $data['name'] = $fields['name'] ?? $fields[$result->getModule() . Mapping::PREFIX_SEP .'name'];
+            $data['name'] = $fields['name'] ?? $fields[$result->getModule() . Mapping::PREFIX_SEP . 'name'];
 
             $formatted[] = $data;
         }
@@ -480,10 +478,10 @@ class GlobalSearchApi extends SugarApi
     protected function formatBeanFromResult(ServiceBase $api, array $args, Result $result)
     {
         // pass in field list from available data fields on result
-        $args = array(
+        $args = [
             'fields' => $result->getDataFields(),
-            'erased_fields' => $args['erased_fields']?? null,
-        );
+            'erased_fields' => $args['erased_fields'] ?? null,
+        ];
         $bean = $result->getBean();
 
         // Load email information directly from search backend if available

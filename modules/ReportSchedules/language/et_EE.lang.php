@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Aruande ajakavad',
     'LBL_MODULE_NAME_SINGULAR' => 'Aruande ajakava',
     'LBL_REPORT_NAME' => 'Aruanne',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Faili tüüp (tüübid)',
     'LBL_EMBED_REPORT' => 'Manusta aruanne e-kirja',
     'LBL_EMBED_REPORT_INFO' => 'Märkus: kui aruanne ületab 200 rida, manustame aruande CSV-failina.',
-);
+];

@@ -19,7 +19,6 @@ use Sugarcrm\Sugarcrm\ProcessManager;
  */
 class PMSEProcessObserver implements PMSEObserver
 {
-
     /**
      *
      * @var type
@@ -100,15 +99,15 @@ class PMSEProcessObserver implements PMSEObserver
     public function update($subject)
     {
         if (method_exists($subject, 'getProcessDefinition')) {
-            $this->logger->debug("Trigger update of a Related Relationship for a Process Definitions update");
+            $this->logger->debug('Trigger update of a Related Relationship for a Process Definitions update');
 
             $processDefinition = $subject->getProcessDefinition();
             $processDefinitionData = $processDefinition->fetched_row;
 
-            $fields = array(
+            $fields = [
                 'id',
                 'rel_element_type',
-            );
+            ];
 
             $relatedDependency = $this->getRelatedDependencyBean();
 
@@ -130,24 +129,24 @@ class PMSEProcessObserver implements PMSEObserver
             }
 
             $this->processRelatedDependencies($processDefinitionData);
-            $depNumber = is_countable($rows) ? count($rows) : 0;
+            $depNumber = safeCount($rows);
             $this->logger->debug("Updating {$depNumber} dependencies");
         }
     }
-    
+
     /**
-     * 
+     *
      * @param type $processDefinitionData
      */
     public function processRelatedDependencies($processDefinitionData)
     {
-        $fakeEventData = array(
+        $fakeEventData = [
             'id' => 'TERMINATE',
             'evn_type' => 'GLOBAL_TERMINATE',
             'evn_criteria' => $processDefinitionData['pro_terminate_variables'],
             'evn_behavior' => 'CATCH',
-            'pro_id' => $processDefinitionData['id']
-        );
+            'pro_id' => $processDefinitionData['id'],
+        ];
         $depWrapper = ProcessManager\Factory::getPMSEObject('PMSERelatedDependencyWrapper');
         $depWrapper->processRelatedDependencies($fakeEventData);
     }

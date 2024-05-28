@@ -51,7 +51,6 @@
 // http://servername/sugarcrm/index.php?entryPoint=vcal_server/type=vfb&source=outlook&user_name=user_name
 // or:
 // http://servername/sugarcrm/index.php?entryPoint=vcal_server/type=vfb&source=outlook&user_id=user_id
-	$server = new HTTP_WebDAV_Server_vCal();
-	$server->ServeRequest();
-	sugar_cleanup();
-?>
+$server = new HTTP_WebDAV_Server_vCal();
+$server->ServeRequest();
+sugar_cleanup();

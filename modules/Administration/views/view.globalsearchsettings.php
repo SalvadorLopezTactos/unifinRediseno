@@ -14,7 +14,6 @@ use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\SearchEngine\AdminSettings;
 
-
 /**
  *
  * Globalsearch settings page
@@ -28,21 +27,21 @@ class AdministrationViewGlobalsearchsettings extends SugarView
      * thus should never be allowed on the admin screen.
      * @var array
      */
-    protected $blackListedModules= array(
+    protected $blackListedModules = [
         'Tags' => 1,
-    );
+    ];
 
-     /**
+    /**
      * @see SugarView::_getModuleTitleParams()
      */
     protected function _getModuleTitleParams($browserTitle = false)
     {
         global $mod_strings;
 
-        return array(
-           "<a href='#Administration'>".translate('LBL_MODULE_NAME', 'Administration')."</a>",
-           $mod_strings['LBL_GLOBAL_SEARCH_SETTINGS'],
-           );
+        return [
+            "<a href='#Administration'>" . translate('LBL_MODULE_NAME', 'Administration') . '</a>',
+            $mod_strings['LBL_GLOBAL_SEARCH_SETTINGS'],
+        ];
     }
 
     /**
@@ -61,12 +60,12 @@ class AdministrationViewGlobalsearchsettings extends SugarView
      */
     protected function cleanseModuleLists($modules)
     {
-        $return = array();
+        $return = [];
 
         // In this case, $type will be enabled|disabled_modules
         foreach ($modules as $type => $data) {
             // Setup the variable that will return $type data
-            $typeData = array();
+            $typeData = [];
 
             // $data is the collection of modules for each type
             foreach ($data as $k => $v) {
@@ -115,27 +114,35 @@ class AdministrationViewGlobalsearchsettings extends SugarView
         // List of available engines
         // TODO: make engines dynamic again
         $defaultEngine = 'Elastic';
-        $sugar_smarty->assign("fts_type", get_select_options_with_id($app_list_strings['fts_type'], $defaultEngine));
+        $sugar_smarty->assign('fts_type', get_select_options_with_id($app_list_strings['fts_type'], $defaultEngine));
 
         // Engine configuration, use defaults in case we cannot find one
         $engineConfig = $sugarConfig->get('full_text_engine.' . $defaultEngine, false);
         if (!$engineConfig) {
-            $engineConfig = array('host' => '127.0.0.1', 'port' => '9200');
+            $engineConfig = ['host' => '127.0.0.1', 'port' => '9200'];
         }
-        $sugar_smarty->assign("fts_host", encodeLocalhost($engineConfig['host']));
-        $sugar_smarty->assign("fts_port", $engineConfig['port']);
+        $sugar_smarty->assign('fts_host', $engineConfig['host']);
+        $sugar_smarty->assign('fts_port', $engineConfig['port']);
+
+        // username, password and transport
+        $ftsSettings = AdminSettings::getFtsVariables();
+        $sugar_smarty->assign('fts_username', $ftsSettings['username'] ?? '');
+        $sugar_smarty->assign('fts_password', $ftsSettings['password'] ?? '');
+        $defaultTransport = $ftsSettings['transport'] ?? 'http';
+        $sugar_smarty->assign('fts_transport', $defaultTransport);
+        $sugar_smarty->assign('fts_transport_list', get_select_options_with_id($app_list_strings['fts_transport_list'], $defaultTransport));
 
         // Hide schedule button if no valid connection
         $showSchedButton = $this->isAvailable();
-        $sugar_smarty->assign("showSchedButton", $showSchedButton);
+        $sugar_smarty->assign('showSchedButton', $showSchedButton);
 
         // Reindex scheduled button
         $justRequestedAScheduledIndex = !empty($_REQUEST['sched']) ? true : false;
         $sugar_smarty->assign('justRequestedAScheduledIndex', $justRequestedAScheduledIndex);
 
         // Hide FTS configuration
-        $hide_fts_config = (bool) $sugarConfig->get('hide_full_text_engine_config', false);
-        $sugar_smarty->assign("hide_fts_config", $hide_fts_config);
+        $hide_fts_config = (bool)$sugarConfig->get('hide_full_text_engine_config', false);
+        $sugar_smarty->assign('hide_fts_config', $hide_fts_config);
 
         echo $sugar_smarty->fetch(SugarAutoLoader::existingCustomOne('modules/Administration/templates/GlobalSearchSettings.tpl'));
     }

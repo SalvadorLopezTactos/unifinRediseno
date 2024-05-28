@@ -14,12 +14,8 @@ namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Journey;
 
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Stage\MomentumCalculator as StagesMomentumCalculator;
 
-/**
- * @author Emil Kilhage <emil.kilhage@addoptify.com>
- */
 class MomentumCalculator
 {
-
     /**
      * @var \DRI_Workflow
      */

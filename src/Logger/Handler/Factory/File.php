@@ -26,12 +26,12 @@ class File implements Factory
      *
      * @var array
      */
-    protected static $defaults = array(
+    protected static $defaults = [
         'dir' => '.',
         'name' => 'sugarcrm',
         'suffix' => '',
         'dateFormat' => '%c',
-    );
+    ];
 
     /**
      * {@inheritDoc}

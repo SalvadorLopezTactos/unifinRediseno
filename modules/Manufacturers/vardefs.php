@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Manufacturer'] = array(
+$dictionary['Manufacturer'] = [
     'table' => 'manufacturers',
     'archive' => false,
     'favorites' => false,
@@ -17,42 +17,42 @@ $dictionary['Manufacturer'] = array(
     'unified_search' => true,
     'full_text_search' => true,
     'unified_search_default_enabled' => true,
-    'fields' => array (
-        'list_order' => array (
+    'fields' => [
+        'list_order' => [
             'name' => 'list_order',
             'vname' => 'LBL_LIST_ORDER',
             'type' => 'int',
             'len' => '4',
             'comment' => 'Order within list',
             'importable' => 'required',
-        ),
-        'status' => array (
+        ],
+        'status' => [
             'name' => 'status',
             'vname' => 'LBL_STATUS',
             'type' => 'enum',
             'options' => 'manufacturer_status_dom',
             'len' => 100,
-            'dbType'=>'varchar',
+            'dbType' => 'varchar',
             'comment' => 'Manufacturer status',
             'importable' => 'required',
-        ),
-        'revenue_line_items' => array(
+        ],
+        'revenue_line_items' => [
             'name' => 'revenue_line_items',
             'type' => 'link',
             'relationship' => 'revenuelineitems_manufacturers',
             'source' => 'non-db',
             'vname' => 'LBL_REVENUELINEITEMS',
             'workflow' => false,
-        ),
-    ),
-    'acls' => array(
+        ],
+    ],
+    'acls' => [
         'SugarACLProduct' => true,
         'SugarACLStatic' => false,
-    ),
-    'uses' => array(
+    ],
+    'uses' => [
         'basic',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef(
     'Manufacturers',

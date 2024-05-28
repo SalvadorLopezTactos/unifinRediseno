@@ -10,11 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['portal']['layout']['login'] = array(
+$viewdefs['portal']['layout']['login'] = [
     'type' => 'simple',
-    'components' => array(
-        0 => array(
-            'view' => "login"
-        ),
-    ),
-);
+    'components' => [
+        0 => [
+            'view' => 'login',
+        ],
+    ],
+];

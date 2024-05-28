@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'ปฏิทิน',
     'LBL_MODULE_NAME_SINGULAR' => 'ปฏิทิน',
     'LBL_MODULE_TITLE' => 'ปฏิทิน',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'การตั้งค่า',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'แสดงช่วงเวลาเป็นมุมมองแบบวันและสัปดาห์:',
-    'LBL_SETTINGS_TIME_STARTS'=>'เวลาเริ่มต้น:',
-    'LBL_SETTINGS_TIME_ENDS'=>'เวลาสิ้นสุด:',
+    'LBL_SETTINGS_TIME_STARTS' => 'เวลาเริ่มต้น:',
+    'LBL_SETTINGS_TIME_ENDS' => 'เวลาสิ้นสุด:',
     'LBL_SETTINGS_CALLS_SHOW' => 'แสดงการโทร:',
     'LBL_SETTINGS_TASKS_SHOW' => 'แสดงงาน:',
 
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'สร้างปฏิทิน',
     'LNK_CALENDAR_LIST' => 'ดูปฏิทิน',
     'LNK_CALENDAR_LEGACY' => 'ปฏิทินระบบเดิม',
-    'LBL_IMPORT_CALENDAR'=> 'ปฏิทินนำเข้า',
+    'LBL_IMPORT_CALENDAR' => 'ปฏิทินนำเข้า',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'เวลาาระบบของเหตุการณ์',
     'LBL_INSERTFIELD' => 'แทรกฟิลด์',
     'LBL_EVENT_START_ERROR' => 'โปรดเลือกวันเริ่มต้น',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'โปรดเลือกปฏิทิน',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'บันทึกปฏิทินไม่สำเร็จ',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'อาทิตย์',
             'จันทร์',
             'อังคาร',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'พฤหัส',
             'ศุกร์',
             'เสาร์',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'วันอาทิตย์',
             'วันจันทร์',
             'วันอังคาร',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'วันพฤหัสบดี',
             'วันศุกร์',
             'วันเสาร์',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'ม.ค.',
             'ก.พ.',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'ต.ค.',
             'พ.ย.',
             'ธ.ค.',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'มกราคม',
             'กุมภาพันธ์',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'ตุลาคม',
             'พฤศจิกายน',
             'ธันวาคม',
-        ),
-);
+        ],
+];

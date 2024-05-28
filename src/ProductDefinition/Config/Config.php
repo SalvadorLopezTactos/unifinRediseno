@@ -48,9 +48,9 @@ class Config
 
     /**
      * constructor.
-     * @throws \InvalidArgumentException
-     * @throws \RuntimeException
      * @param \SugarConfig $sugarConfig
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function __construct(\SugarConfig $sugarConfig)
     {
@@ -79,7 +79,7 @@ class Config
         if (is_null($definition)) {
             return [];
         }
-        return (array) json_decode($definition, true);
+        return (array)json_decode($definition, true);
     }
 
     /**
@@ -101,8 +101,8 @@ class Config
 
     /**
      * Create config source by type
-     * @throws \RuntimeException
      * @return Source\SourceInterface
+     * @throws \RuntimeException
      */
     protected function getSource(): Source\SourceInterface
     {
@@ -120,7 +120,7 @@ class Config
      * Create config cache by type
      * @return Cache\CacheInterface|null
      */
-    protected function getCache():? Cache\CacheInterface
+    protected function getCache(): ?Cache\CacheInterface
     {
         if (!$this->cache) {
             $this->cache = new DbCache();

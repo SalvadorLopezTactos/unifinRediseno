@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => '상품 유형',
     'LBL_MODULE_NAME_SINGULAR' => '제품 유형',
     'LBL_MODULE_TITLE' => '상품 유형:홈',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => '이 기록을 삭제하시겠습니까?',
     'ERR_DELETE_RECORD' => '상품유형을 삭제하려면 정확한 자료 고유번호를 입력하셔야 합니다.',
     'NTC_LIST_ORDER' => '제조자 내려보기 목록에 나타나도록 이 제조자의 순서를 설정하니다.',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'상품 유형 가져오기',
-    'LBL_CREATED_BY'=>'생성자',
+    'LNK_IMPORT_PRODUCT_TYPES' => '상품 유형 가져오기',
+    'LBL_CREATED_BY' => '생성자',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> '담당자 ID',
-    'LBL_EXPORT_CREATED_BY'=>'생성자 ID',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'상품 책자 목록 가져오기',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => '담당자 ID',
+    'LBL_EXPORT_CREATED_BY' => '생성자 ID',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => '상품 책자 목록 가져오기',
+];

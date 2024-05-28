@@ -22,10 +22,10 @@ class PMSEBusinessRuleConversor
 {
     /**
      *
-     * @var type 
+     * @var type
      */
     protected $evaluatedBean;
-    
+
     /**
      * Case modulo
      * @var type string
@@ -98,21 +98,21 @@ class PMSEBusinessRuleConversor
      * @param array $conditionList token contains all the conditions
      * @return array
      */
-    public function transformCondition($conditionList = array())
+    public function transformCondition($conditionList = [])
     {
-        $criteriaArray = array();
+        $criteriaArray = [];
         $counter = 0;
-        
+
         if (is_array($conditionList) && empty($conditionList)) {
             $criteriaArray = $this->retrieveDefaultCondition();
         }
-        
+
         foreach ($conditionList as $condition) {
             if ($counter > 0) {
                 $andObject = new stdClass();
-                $andObject->expValue = "AND";
-                $andObject->expType = "LOGIC";
-                $andObject->expLabel = "AND";
+                $andObject->expValue = 'AND';
+                $andObject->expType = 'LOGIC';
+                $andObject->expLabel = 'AND';
                 $criteriaArray[] = $andObject;
             }
             $criteriaArray[] = $this->transformToken($condition);
@@ -132,12 +132,12 @@ class PMSEBusinessRuleConversor
         if (is_object($businessRuleToken)) {
             $criteriaToken->expField = $businessRuleToken->variable_name;
             $criteriaToken->expOperator = $this->transformConditionOperator($businessRuleToken->condition);
-            $criteriaToken->expDirection = "after";
-            $criteriaToken->expType = "MODULE";
+            $criteriaToken->expDirection = 'after';
+            $criteriaToken->expType = 'MODULE';
             // Add the value, subtype, and any other properties needed based on those.
             $this->addValueToTransformedToken($criteriaToken, $businessRuleToken);
-            $separator = $criteriaToken->expSubtype == "STRING" ? "&" : "";
-            $criteriaToken->expLabel = $criteriaToken->expField . " " . $businessRuleToken->condition . " " . $separator . $criteriaToken->expValue . $separator;
+            $separator = $criteriaToken->expSubtype == 'STRING' ? '&' : '';
+            $criteriaToken->expLabel = $criteriaToken->expField . ' ' . $businessRuleToken->condition . ' ' . $separator . $criteriaToken->expValue . $separator;
             $criteriaToken->expModule = $businessRuleToken->variable_module;
         }
         return $criteriaToken;
@@ -243,7 +243,7 @@ class PMSEBusinessRuleConversor
     public function getReturnValue($conclusions)
     {
         foreach ($conclusions as $conclusion) {
-            if ($conclusion->conclusion_type == "return") {
+            if ($conclusion->conclusion_type == 'return') {
                 $valueToken = $this->processValueExpression($conclusion->value);
                 return json_encode($valueToken);
             }
@@ -256,7 +256,7 @@ class PMSEBusinessRuleConversor
      * @param array $appData
      * @return array
      */
-    public function processAppData($conclusions, $appData = array())
+    public function processAppData($conclusions, $appData = [])
     {
         if (isset($conclusions)) {
             foreach ($conclusions as $conclusion) {
@@ -320,16 +320,16 @@ class PMSEBusinessRuleConversor
      * @param array $appData
      * @return string
      */
-    public function processConditionResult($conclusions = array(), $appData = array())
+    public function processConditionResult($conclusions = [], $appData = [])
     {
         $result = '';
         foreach ($appData as $key => $value) {
             $value = is_string($value) ? "'" . $value . "'" : $value;
-            $result .= "{::" . $this->baseModule . "::" . $key . "::} = " . $value . ";";
+            $result .= '{::' . $this->baseModule . '::' . $key . '::} = ' . $value . ';';
         }
         return $result;
     }
-    
+
     public function retrieveDefaultCondition()
     {
         $condition = new stdClass();
@@ -337,9 +337,6 @@ class PMSEBusinessRuleConversor
         $condition->expLabel = 'true';
         $condition->expType = 'CONSTANT';
         $condition->expSubtype = 'BOOLEAN';
-        return array($condition);
+        return [$condition];
     }
-    
 }
-
-?>

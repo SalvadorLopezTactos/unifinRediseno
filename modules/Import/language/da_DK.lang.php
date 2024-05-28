@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Importfilen blev læst',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Den importerede post medvirker i en proces og kan ikke redigeres, fordi nogle af felterne er låst til redigering af processen.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Poster springes over på grund af fejl',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Hvis brugeren ikke findes, skal du bruge den aktuelle bruger',
     'LBL_SHOW_HIDDEN' => 'Vis felter, der normalt ikke kan importeres',
     'LBL_UPDATE_RECORDS' => 'Opdater eksisterende poster i stedet for at importere dem "ikke Fortryd"',
-    'LBL_TEST'=> 'Test import (gem eller rediger ikke data)',
+    'LBL_TEST' => 'Test import (gem eller rediger ikke data)',
     'LBL_TRUNCATE_TABLE' => 'Tøm tabel før import (slet alle poster)',
     'LBL_RELATED_ACCOUNTS' => 'Opret ikke relaterede konti',
     'LBL_NO_DATECHECK' => 'Spring over datokontrol (hurtigere, men virker ikke, hvis en dato er forkert)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Ugyldig heltalsværdi',
     'LBL_ERROR_INVALID_NUM' => 'Ugyldig numerisk værdi',
     'LBL_ERROR_INVALID_TIME' => 'Ugyldigt klokkeslæt',
-    'LBL_ERROR_INVALID_EMAIL'=>'Ugyldig e-mail adresse',
-    'LBL_ERROR_INVALID_BOOL'=>'Ugyldig værdi (skal være et 1 eller 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Ugyldig datostreng',
-    'LBL_ERROR_INVALID_USER'=>'Ugyldigt brugernavn eller id',
+    'LBL_ERROR_INVALID_EMAIL' => 'Ugyldig e-mail adresse',
+    'LBL_ERROR_INVALID_BOOL' => 'Ugyldig værdi (skal være et 1 eller 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Ugyldig datostreng',
+    'LBL_ERROR_INVALID_USER' => 'Ugyldigt brugernavn eller id',
     'LBL_ERROR_INVALID_TEAM' => 'Ugyldigt teamnavn eller id',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Ugyldigt kontonavn eller id',
     'LBL_ERROR_INVALID_RELATE' => 'Ugyldigt relationelt felt',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'findes ikke eller kan ikke skrives',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Filen blev ikke uploadet. Det kan være, at indstillingen &#39;upload_max_filesize&#39; i filen php.ini er angivet til et lille antal',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Filen er for stor. Maks.:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Byte. Skift $sugar_config [ &#39;upload_maxsize&#39;] i config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Byte. Skift $sugar_config[&#39;upload_maxsize&#39;] i config.php',
     'LBL_MODULE_NAME' => 'Importér',
     'LBL_MODULE_NAME_SINGULAR' => 'Importér',
     'LBL_TRY_AGAIN' => 'Prøv igen',
     'LBL_START_OVER' => 'Start forfra',
     'LBL_ERROR' => 'Fejl:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Import-filen indeholder {0} rækker. Det optimale antal af rækker er {1}. Flere rækker kan sløve import processen. Klik på OK for at fortsætte med at importere. Klik på Annuller for at revidere og re-uploade import fil.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Du kan ikke importere en systemadministratorbruger',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Du kan ikke importere en systemadministratorbruger',
     'ERR_REPORT_LOOP' => 'Systemet har registreret en rapporteringsløkke. Brugere kan ikke referere til sig selv, og heller ingen af deres ledere kan referere til dem.',
     'ERR_MULTIPLE' => 'Flere kolonner er defineret med samme feltnavn.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Obligatoriske felter mangler:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Der var ingen linjer i din importfil',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Importfilen er allerede blevet behandlet eller findes ikke',
     'LBL_SUCCESS' => 'Handlingen lykkedes:',
-	'LBL_FAILURE' => 'Import fejl:',
+    'LBL_FAILURE' => 'Import fejl:',
     'LBL_SUCCESSFULLY' => 'Blev importeret',
     'LBL_LAST_IMPORT_UNDONE' => 'Den sidste import blev ikke fuldført',
     'LBL_NO_IMPORT_TO_UNDO' => 'Der var ingen import at fortryde.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Importér mere',
     'LBL_FINISHED' => 'Retur til',
     'LBL_UNDO_LAST_IMPORT' => 'Fortryd sidste import',
-    'LBL_LAST_IMPORTED'=>'Senest oprettet',
+    'LBL_LAST_IMPORTED' => 'Senest oprettet',
     'ERR_MULTIPLE_PARENTS' => 'Du kan kun have et overordnet id defineret',
     'LBL_DUPLICATES' => 'Dubletter blev fundet',
     'LNK_DUPLICATE_LIST' => 'Download liste over dubletter',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Skjul noter',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Vis forhåndsvisning af kolonner',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Skjul forhåndsvisning af kolonner',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Tjek for dubletter ved hjælp af operatøren:',
     'LBL_SAVE_MAPPING_AS' => 'Hvis du vil gemme importindstillingerne, giv et navn til de gemte indstillinger:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Enkelt anførselstegn (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Dobbelt anførselstegn (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'For at tildele de nye poster til andre teams end dit/dine standard-team(s), skal du bruge standardværdi kolonnen for at vælge et andet team.',
     'LBL_SIGN_IN_HELP' => 'At aktivere denne service, skal du logge ind på eksterne konti fanebladet på din brugers brugerindstillinger side.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Forsøger at håndtere e-mail-adresser i en Bean, der ikke understøtter det.",
-);
+];

@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Grupas posms:',
-    'LBL_DEAL_TOT'=>'atlaides kopā',
-    'LBL_DEAL_TOT_USDOLLAR'=>'atlaides kopā (pamatvalūtā)',
+    'LBL_DEAL_TOT' => 'atlaides kopā',
+    'LBL_DEAL_TOT_USDOLLAR' => 'atlaides kopā (pamatvalūtā)',
     'LBL_NEW_SUB' => 'Summa ar atlaidi:',
     'LBL_SHIPPING' => 'Piegāde:',
-    'LBL_SHIPPING_USDOLLAR'=>'Piegādes cena (ASV dolāros)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Starpsumma (pamatvalūtā)',
+    'LBL_SHIPPING_USDOLLAR' => 'Piegādes cena (ASV dolāros)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Starpsumma (pamatvalūtā)',
     'LBL_SUBTOTAL' => 'Starpsumma:',
     'LBL_TAXABLE_SUBTOTAL' => 'Ar nodokļiem apliekama starpsumma',
-    'LBL_TAX_USDOLLAR'=>'Nodoklis (pamatvalūtā)',
+    'LBL_TAX_USDOLLAR' => 'Nodoklis (pamatvalūtā)',
     'LBL_TAX' => 'Nodoklis:',
-    'LBL_TOTAL_USDOLLAR'=>'Kopsumma (pamatvalūtā)',
+    'LBL_TOTAL_USDOLLAR' => 'Kopsumma (pamatvalūtā)',
     'LBL_TOTAL' => 'Kopsumma:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Piedāvājuma pozīcija paketē',
     'EXCEPTION_INVALID_QUOTE_ID' => 'Piedāvājuma ID pazudis no pieprasījuma',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'Pieprasītais piedāvājums nav atrasts',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'Pieprasītais piedāvājums nav atrasts',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Papildu grupas atlaide',
     'LBL_GROUP_TOTAL' => 'Grupas kopsumma',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Grupas galvene',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Noklusējuma produktu pakas grupa piedāvājumam',
     'LBL_ALERT_DELETING_ITEM' => 'Dzēš rindas produktu(s)',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Rindas produkts veiksmīgi izdzēsts',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Produktu pakas laika josla',
+];

@@ -192,7 +192,7 @@
         // For new tags, look for New Tag indicator and remove it if it's there
         if (e.object.newTag) {
             var newTagIdx = e.object.text.lastIndexOf(' ' + app.lang.get('LBL_TAG_NEW_TAG'));
-            e.object.text = e.object.text.substr(0, newTagIdx);
+            e.object.text = e.object.text.substring(0, newTagIdx);
         }
     },
 

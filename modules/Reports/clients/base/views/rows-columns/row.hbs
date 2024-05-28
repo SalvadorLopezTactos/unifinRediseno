@@ -12,11 +12,11 @@
 --}}
 <tr name="{{module}}_{{model.id}}" class="single">
     {{#each view._fields.visible}}
-        <td class="wrap-report-text overflow-hidden {{#if align}}{{align}}{{/if}}{{#if ../view.isFirstColumnFreezed}}{{#if @first}} sticky-column stick-first no-border{{#eq ../../../view.leftColumns.length 0}} no-left-column{{/eq}}{{/if}}{{/if}}" data-type="{{type}}">
+        <td class="wrap-report-text bg-[--primary-content-background] overflow-hidden {{#if align}}{{align}}{{/if}}{{#if ../view.isFirstColumnFreezed}}{{#if @first}} sticky{{#eq ../../../view.leftColumns.length 0}} left-0{{/eq}}{{/if}}{{/if}} sticky-border-r" data-type="{{type}}">
             {{reportField ../view model=../model index=this.name template=../../view.viewName}}
         </td>
     {{/each}}
     {{#each view.rightColumns}}
-        <td class="sticky-column stick-right"></td>
+        <td class="right-0 sticky z-10 stick-right"></td>
     {{/each}}
 </tr>

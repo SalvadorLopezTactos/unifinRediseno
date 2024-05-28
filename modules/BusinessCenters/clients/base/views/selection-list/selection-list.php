@@ -10,63 +10,63 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['BusinessCenters']['base']['view']['selection-list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['BusinessCenters']['base']['view']['selection-list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'link' => true,
                     'label' => 'LBL_NAME',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'address_city',
                     'label' => 'LBL_ADDRESS_CITY',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'address_country',
                     'label' => 'LBL_ADDRESS_COUNTRY',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'timezone',
                     'label' => 'LBL_TIMEZONE',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'address_state',
                     'label' => 'LBL_ADDRESS_STATE',
                     'enabled' => true,
                     'default' => false,
-                ),
-                array(
+                ],
+                [
                     'name' => 'address_postalcode',
                     'label' => 'LBL_ADDRESS_POSTALCODE',
                     'enabled' => true,
                     'default' => false,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_entered',
                     'type' => 'datetime',
                     'label' => 'LBL_DATE_ENTERED',
                     'enabled' => true,
                     'default' => false,
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_modified',
                     'enabled' => true,
                     'default' => false,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

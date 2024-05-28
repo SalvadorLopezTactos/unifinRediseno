@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Aby dodać użytkownika do tego zespołu, należy określić numer rekordu.',
     'ERR_DUP_NAME' => 'Nazwa zespołu już istnieje, wybierz inną.',
     'ERR_DELETE_RECORD' => 'Aby usunąć ten zespół, należy podać numer rekordu.',
@@ -66,17 +66,17 @@ $mod_strings = array(
     'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
 Wyłączenie uprawnień opartych na zespole dla modułu odwróci wszelkie dane skojarzone z uprawnieniami opartymi na zespole dla tego modułu, w tym definicje procesów lub procesów wykorzystujących funkcje. Obejmuje to wszystkie role wykorzystujące opcję "Właściciel i wybrany zespół" dla tego modułu i dane uprawnień opartych na zespole dla rekordów w tym module. Zalecamy również wykorzystanie narzędzi szybkiej naprawy i przebudowy do wyczyszczenia pamięci podręcznej systemu po wyłączeniu uprawnień opartych na zespole dla danego modułu.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Ostrzeżenie!</strong> Wyłączenie uprawnień opartych na zespole dla modułu odwróci wszelkie dane skojarzone z uprawnieniami opartymi na zespole dla tego modułu, w tym definicje procesów lub procesów wykorzystujących funkcje. Obejmuje to wszystkie role wykorzystujące opcję "Właściciel i wybrany zespół" dla tego modułu i dane uprawnień opartych na zespole dla rekordów w tym module. Zalecamy również wykorzystanie narzędzi szybkiej naprawy i przebudowy do wyczyszczenia pamięci podręcznej systemu po wyłączeniu uprawnień opartych na zespole dla danego modułu.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Wyłączenie uprawnień opartych na zespole dla modułu odwróci wszelkie dane skojarzone z uprawnieniami opartymi na zespole dla tego modułu, w tym definicje procesów lub procesów wykorzystujących funkcje. Obejmuje to wszystkie role wykorzystujące opcję "Właściciel i wybrany zespół" dla tego modułu i dane uprawnień opartych na zespole dla rekordów w tym module. Zalecamy również wykorzystanie narzędzi szybkiej naprawy i przebudowy do skasowania pamięci podręcznej systemu po wyłączeniu uprawnień opartych na zespole dla danego modułu. Jeśli nie masz dostępu do usługi szybkiej naprawy i przebudowy, skontaktuj się z administratorem z dostępem do menu naprawy.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Ostrzeżenie!</strong> Wyłączenie uprawnień opartych na zespole dla modułu odwróci wszelkie dane skojarzone z uprawnieniami opartymi na zespole dla tego modułu, w tym definicje procesów lub procesów wykorzystujących funkcje. Obejmuje to wszystkie role wykorzystujące opcję "Właściciel i wybrany zespół" dla tego modułu i dane uprawnień opartych na zespole dla rekordów w tym module. Zalecamy również wykorzystanie narzędzi szybkiej naprawy i przebudowy do skasowania pamięci podręcznej systemu po wyłączeniu uprawnień opartych na zespole dla danego modułu. Jeśli nie masz dostępu do usługi szybkiej naprawy i przebudowy, skontaktuj się z administratorem z dostępem do menu naprawy.
 STR
-,
-);
+    ,
+];

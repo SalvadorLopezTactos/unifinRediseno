@@ -14,12 +14,8 @@ namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Journey;
 
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Stage\StateCalculator as StageStateCalculator;
 
-/**
- * @author Emil Kilhage <emil.kilhage@addoptify.com>
- */
 class StateCalculator
 {
-
     /**
      * @var \DRI_Workflow
      */
@@ -113,7 +109,7 @@ class StateCalculator
     {
         $this->load();
 
-        $count = count((array) $this->stages);
+        $count = safeCount((array)$this->stages);
         $notStarted = 0;
         $completed = 0;
         $deferred = 0;

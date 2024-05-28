@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Registro di controllo',
     'LBL_FIELD_NAME' => 'Campo',
     'LBL_OLD_NAME' => 'Vecchio Valore',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Aggiorna a',
     'LBL_BLANK' => '-vuoto-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Sequenza temporale audit',
+    'LBL_CREATED' => 'Creato',
+];

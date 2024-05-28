@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 declare(strict_types=1);
+
 namespace Sugarcrm\Sugarcrm\modules\Reports\Exporters;
 
 /**
@@ -25,37 +26,41 @@ class ReportCSVExporterMatrix1x1 extends ReportCSVExporterMatrix
     {
         $this->prepareExport();
 
+        if (empty($this->columnHeaders)) {
+            return $this->getTranslationOf('LBL_NO_DATA_AVAILABLE');
+        }
+
         $groupings = $this->reporter->report_def['group_defs'];
-        $content = "\"\"" . $this->getDelimiter(false) . "\"{$groupings[1]['label']}\""
-            . $this->spacePadder(count($this->columnHeaders)) . $this->getLineEnd();
-        $content .= "\"" . $groupings[0]['label'] . "\"";
+        $content = '""' . $this->getDelimiter(false) . "\"{$groupings[1]['label']}\""
+            . $this->spacePadder(safeCount($this->columnHeaders)) . $this->getLineEnd();
+        $content .= '"' . $groupings[0]['label'] . '"';
         foreach ($this->columnHeaders as $columnHeader) {
             $content .= $this->getDelimiter(false) . "\"$columnHeader\"";
         }
         $content .= $this->getDelimiter(false) . $this->getTranslationOf('LBL_GRAND_TOTAL') . $this->getLineEnd();
         $rowGrandTotal = array_pad(
-            array(),
-            count($this->columnHeaders),
-            array_pad(array(), count($this->displayHeaders), 0)
+            [],
+            safeCount($this->columnHeaders),
+            array_pad([], safeCount($this->displayHeaders), 0)
         );
-        $rowCounts = array_pad(array(), count($this->columnHeaders), 0);
+        $rowCounts = array_pad([], safeCount($this->columnHeaders), 0);
         $passedFirstRow = false;
         foreach ($this->rowHeaders as $rowHeader) {
-            $data = array();
+            $data = [];
             foreach ($this->columnHeaders as $columnHeader) {
                 // queuing data for this row
                 $data[] = $this->matrixDataFinder($rowHeader, $columnHeader);
             }
             $content .= "\"$rowHeader\"";
-            for ($i = 0; $i < count($this->displayHeaders); $i++) {
+            for ($i = 0; $i < safeCount($this->displayHeaders); $i++) {
                 $columnGrandTotal = 0;
                 $columnCount = 0;
                 if ($this->detailHeaders[$this->displayHeaders[$i]]['group_function'] == 'min') {
                     $columnGrandTotal = PHP_INT_MAX;
                 }
-                for ($j = 0; $j < count($data); $j++) {
+                for ($j = 0; $j < safeCount($data); $j++) {
                     if ($i != 0 && $j == 0) {
-                        $content .= "\"\"";
+                        $content .= '""';
                     }
                     if ($this->detailHeaders[$this->displayHeaders[$i]]['group_function'] == 'min') {
                         $rowGrandTotal[$j][$i] = $passedFirstRow ? $rowGrandTotal[$j][$i] : PHP_INT_MAX;
@@ -90,23 +95,23 @@ class ReportCSVExporterMatrix1x1 extends ReportCSVExporterMatrix
                     $columnGrandTotal = $columnGrandTotal / $columnCount;
                 }
                 $content .= $this->getDelimiter(false)
-                    . "\""
+                    . '"'
                     . $this->currencyFormatter($this->displayHeaders[$i], $columnGrandTotal)
-                    . "\"" . $this->getLineEnd();
+                    . '"' . $this->getLineEnd();
             }
             $passedFirstRow = true;
         }
         // build last row grand total
         $content .= $this->getTranslationOf('LBL_GRAND_TOTAL');
-        for ($i = 0; $i < count($this->displayHeaders); $i++) {
+        for ($i = 0; $i < safeCount($this->displayHeaders); $i++) {
             $columnGrandTotal = 0;
             $columnCount = 0;
             if ($this->detailHeaders[$this->displayHeaders[$i]]['group_function'] == 'min') {
                 $columnGrandTotal = PHP_INT_MAX;
             }
-            for ($j = 0; $j < count($this->columnHeaders); $j++) {
+            for ($j = 0; $j < safeCount($this->columnHeaders); $j++) {
                 if ($i != 0 && $j == 0) {
-                    $content .= "\"\"";
+                    $content .= '""';
                 }
                 if ($this->detailHeaders[$this->displayHeaders[$i]]['group_function'] == 'avg') {
                     $rowGrandTotal[$j][$i] = $rowGrandTotal[$j][$i] / $rowCounts[$j];
@@ -118,18 +123,18 @@ class ReportCSVExporterMatrix1x1 extends ReportCSVExporterMatrix
                     $columnGrandTotal
                 );
                 $content .= $this->getDelimiter(false)
-                    . "\""
+                    . '"'
                     . $this->currencyFormatter($this->displayHeaders[$i], $rowGrandTotal[$j][$i])
-                    . "\"";
+                    . '"';
                 $columnCount += $rowCounts[$j];
             }
             if ($this->detailHeaders[$this->displayHeaders[$i]]['group_function'] == 'avg') {
                 $columnGrandTotal = $columnGrandTotal / $columnCount;
             }
             $content .= $this->getDelimiter(false)
-                . "\""
+                . '"'
                 . $this->currencyFormatter($this->displayHeaders[$i], $columnGrandTotal)
-                . "\"". $this->getLineEnd();
+                . '"' . $this->getLineEnd();
         }
         return $content;
     }
@@ -140,7 +145,7 @@ class ReportCSVExporterMatrix1x1 extends ReportCSVExporterMatrix
      * @param string|array $columnHeader The column header of the data
      * @return array The content of the data, if no data existed, returns empty array
      */
-    private function matrixDataFinder($rowHeader, $columnHeader) : array
+    private function matrixDataFinder($rowHeader, $columnHeader): array
     {
         $groupings = $this->reporter->report_def['group_defs'];
         if (!is_array($rowHeader)) {

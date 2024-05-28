@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Bilgi Bankası Listesi Panosu',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Bilgi Bankası Kaydı Panosu',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Bilgi Tabanı Odak Bölmesi',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Bilgi Bankası Zaman Çizelgesi',
 
     'LBL_MODULE_NAME' => 'Bilgi Tabanı',
     'LBL_MODULE_NAME_SINGULAR' => 'Bilgi Tabanı Makalesi',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Değeri Birincil olarak ayarla',
     'LBL_ITEM_REMOVE' => 'Öğeyi kaldır',
     'LBL_ITEM_ADD' => 'Öğe Kaldır',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => 'Revizyon Kimliği',
     'LBL_DOCUMENT_REVISION' => 'Revizyon',
     'LBL_NUMBER' => 'Numara',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'Daha fazla {{module}} makaleleri...',
     'LBL_LIST_FORM_TITLE' => 'Bilgi Bankası Listesi',
     'LBL_SEARCH_FORM_TITLE' => 'Bilgi Bankası Araştırması',
-);
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'إعادة توجيه:',
     'LBL_RE' => 'رد:',
     'LBL_BUTTON_CREATE' => 'إنشاء',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'اختيار من حساب البريد الإلكتروني',
     'LBL_SELECT_SIGNATURE_TITLE' => 'اختيار توقيع',
     'LBL_SIGNATURE' => 'التوقيع',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "توقيع افتراضي",
-    "LBL_SHOW_MORE_SIGNATURES" => "المزيد من التوقيعات...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'توقيع افتراضي',
+    'LBL_SHOW_MORE_SIGNATURES' => 'المزيد من التوقيعات...',
     'LBL_SUBJECT' => 'الموضوع:',
     'LBL_TEMPLATE' => 'القالب',
     'LBL_TEXT_BODY' => 'النص الأساسي',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'وقت الإرسال',
     'LBL_LIST_TO_ADDR' => 'إلى',
     'LBL_LIST_TYPE' => 'النوع',
-    "LBL_SELECTED_RECIPIENTS" => "المستلمون المختارون",
-    "LBL_SHOW_MORE_RECIPIENTS" => "المزيد من المستلمين...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "دفتر العناوين",
+    'LBL_SELECTED_RECIPIENTS' => 'المستلمون المختارون',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'المزيد من المستلمين...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'دفتر العناوين',
     'NTC_REMOVE_INVITEE' => 'هل تريد بالتأكيد إزالة هذا المستلم من رسالة البريد الإلكتروني؟',
     'WARNING_SETTINGS_NOT_CONF' => 'لم يتم تكوين إعدادات البريد الإلكتروني بشكل صحيح لإرسال بريد إلكتروني. يجب تكوين خادم SMTP ' .
         'في إعدادات البريد الإلكتروني <a href="#bwc/index.php?module=EmailMan&action=config"></a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'قد يحدث إخفاق للمرفقات: تم اكتشاف قيمة غير صحيحة أو غير مستخدمة لـ "upload_tmp_dir" ' .
         'الرجاء تصحيح ذلك في ملف php.ini.',
     'LBL_MESSAGE_UID' => 'رسالة UID',
-    'LBL_OPEN_DRAFT_ALERT' => 'البريد الإلكتروني مسودة. انقر على '.
-        '<a href="javascript:void(0);" data-action="email-draft">{{subject}}</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'البريد الإلكتروني مسودة. انقر على ' .
+        '<a href="javascript:void(0);" data-action="email-draft">{{subject}}</a>' .
         '  للتحرير.',
     'LBL_EMAIL_BODY' => 'رسالة بريد إلكتروني',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم رسائل البريد الإلكتروني',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'لوحة معلومات سجل البريد الإلكتروني',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني للبريد الإلكتروني',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'لم يتم تحديد مستلمين',
@@ -475,4 +476,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'إرسال البريد الإلكتروني',
     'LBL_MAILBOX' => 'حساب وارد',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'الرجاء تكوين حساب بريد إلكتروني صادر عبر <a href="#OutboundEmail">إعدادات البريد الإلكتروني</a> من أجل إرسال رسائل البريد الإلكتروني.',
-);
+    'LBL_TOO_SHORT' => 'اكتب على الأقل {0} أحرف...',
+];

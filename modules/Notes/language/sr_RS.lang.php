@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Kontrolna tabla liste napomena',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Kontrolna tabla za zapise o napomenama',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za beleške',
     'LBL_EXTERNAL_USER' => 'Eksterni korisnik',
     'LBL_EXTERNAL_USER_NAME' => 'Eksterni korisnik',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija beleške',
 
     'LBL_RELATED_CONTACT' => 'Povezani kontakt',
     'ERR_DELETE_RECORD' => 'Morate navesti broj zapisa da bi obrisali kompaniju.',
@@ -126,4 +127,4 @@ $mod_strings = array(
 - Polja označena kao "Obavezna" moraju biti uneta pre čuvanja podataka. 
 - Kliknite na "Pokaži više" za prikaz dodatnih polja ako je potrebno. 
 2. Kliknite na "Sačuvaj" da dovršimo novi zapis i povratak na predhodnu stranu.',
-);
+];

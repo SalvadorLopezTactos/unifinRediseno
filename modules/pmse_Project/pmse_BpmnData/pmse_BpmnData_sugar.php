@@ -15,44 +15,46 @@
  * PLEASE DO NOT CHANGE THIS CLASS
  * PLACE ANY CUSTOMIZATIONS IN pmse_BpmnData
  */
-class pmse_BpmnData_sugar extends Basic {
-	var $new_schema = true;
-	var $module_dir = 'pmse_Project/pmse_BpmnData';
+class pmse_BpmnData_sugar extends Basic
+{
+    public $new_schema = true;
+    public $module_dir = 'pmse_Project/pmse_BpmnData';
     public $module_name = 'pmse_BpmnData';
-	var $object_name = 'pmse_BpmnData';
-	var $table_name = 'pmse_bpmn_data';
-	var $importable = false;
-    var $disable_custom_fields = true;
-    var $id;
-    var $name;
-    var $date_entered;
-    var $date_modified;
-    var $modified_user_id;
-    var $modified_by_name;
-    var $created_by;
-    var $created_by_name;
-    var $description;
-    var $deleted;
-    var $created_by_link;
-    var $modified_user_link;
-    var $activities;
-    var $assigned_user_id;
-    var $assigned_user_name;
-    var $assigned_user_link;
-    var $dat_uid;
-    var $prj_id;
-    var $pro_id;
-    var $dat_type;
-    var $dat_is_collection;
-    var $dat_item_kind;
-    var $dat_capacity;
-    var $dat_is_unlimited;
-    var $dat_state;
-    var $dat_is_global;
-    var $dat_object_ref;
+    public $object_name = 'pmse_BpmnData';
+    public $table_name = 'pmse_bpmn_data';
+    public $importable = false;
+    public $disable_custom_fields = true;
+    public $id;
+    public $name;
+    public $date_entered;
+    public $date_modified;
+    public $modified_user_id;
+    public $modified_by_name;
+    public $created_by;
+    public $created_by_name;
+    public $description;
+    public $deleted;
+    public $created_by_link;
+    public $modified_user_link;
+    public $activities;
+    public $assigned_user_id;
+    public $assigned_user_name;
+    public $assigned_user_link;
+    public $dat_uid;
+    public $prj_id;
+    public $pro_id;
+    public $dat_type;
+    public $dat_is_collection;
+    public $dat_item_kind;
+    public $dat_capacity;
+    public $dat_is_unlimited;
+    public $dat_state;
+    public $dat_is_global;
+    public $dat_object_ref;
 
 
-	public function __construct(){
-		parent::__construct();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 }

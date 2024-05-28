@@ -36,6 +36,7 @@ class AccessControlManager
     public const FIELDS_KEY = 'FIELDS';
     public const WIDGETS_KEY = 'WIDGETS';
     public const FEATURES_KEY = 'FEATURES';
+    public const JOBS_KEY = 'JOBS';
 
     /**
      * flag to allow admin user to override access control
@@ -116,6 +117,7 @@ class AccessControlManager
         $this->registerVoter(self::RECORDS_KEY, SugarRecordVoter::class);
         $this->registerVoter(self::FIELDS_KEY, SugarFieldVoter::class);
         $this->registerVoter(self::FEATURES_KEY, SugarFeatureVoter::class);
+        $this->registerVoter(self::JOBS_KEY, SugarJobVoter::class);
     }
 
     /**
@@ -134,8 +136,8 @@ class AccessControlManager
      */
     protected function getRegisteredVoter(string $key)
     {
-        if ($key != self::DASHLETS_KEY && $key != self::WIDGETS_KEY  && !isset($this->voters[$key])) {
-            throw new \Exception("wrong section key is provided" . $key);
+        if ($key != self::DASHLETS_KEY && $key != self::WIDGETS_KEY && !isset($this->voters[$key])) {
+            throw new \Exception('wrong section key is provided' . $key);
         }
         switch ($key) {
             case self::MODULES_KEY:
@@ -151,11 +153,11 @@ class AccessControlManager
      *
      * check if allowed to access protected resource
      *
-     * @param mixed  $subject The subject to secure, could be subject identifier, such modules, fields
+     * @param mixed $subject The subject to secure, could be subject identifier, such modules, fields
      * @param array $attributes list of attributes, such as edit, view, etc
      *
      */
-    protected function allowAccess(string $key, string $subject, ?string $value = null) : bool
+    protected function allowAccess(string $key, string $subject, ?string $value = null): bool
     {
         if ($this->isAdminWork || $this->allowAdminAccess()) {
             return true;
@@ -170,7 +172,7 @@ class AccessControlManager
      *
      * @return bool
      */
-    public function allowModuleAccess(?string $module) : bool
+    public function allowModuleAccess(?string $module): bool
     {
         if (empty($module)) {
             return true;
@@ -203,7 +205,7 @@ class AccessControlManager
      * @param string $baseModule
      * @return bool
      */
-    public function allowRelationshipAccess(string $linkName, string $baseModule) : bool
+    public function allowRelationshipAccess(string $linkName, string $baseModule): bool
     {
         $bean = \BeanFactory::newBean($baseModule);
         if ($bean->load_relationship($linkName)) {
@@ -218,7 +220,7 @@ class AccessControlManager
      * @param string $label dashlet name
      * @return bool
      */
-    public function allowDashletAccess(?string $label) : bool
+    public function allowDashletAccess(?string $label): bool
     {
         if (empty($label) || $this->isAdminWork) {
             return true;
@@ -227,12 +229,26 @@ class AccessControlManager
     }
 
     /**
+     * check allow Job access
+     * Job running is "kind of" user independent, it only checks if the system has this feature or not.
+     * @param string $name job name
+     * @return bool
+     */
+    public function allowJobAccess(?string $name): bool
+    {
+        if (empty($name)) {
+            return true;
+        }
+        return $this->getRegisteredVoter(self::JOBS_KEY)->vote(self::JOBS_KEY, $name);
+    }
+
+    /**
      * check allow record access
      * @param null|string $module module name
      * @param null|string $id id for the object
      * @return bool
      */
-    public function allowRecordAccess(?string $module, ?string $id) : bool
+    public function allowRecordAccess(?string $module, ?string $id): bool
     {
         if (empty($module) || empty($id)) {
             return true;
@@ -323,7 +339,7 @@ class AccessControlManager
      * allow admin access
      * @return bool
      */
-    protected function allowAdminAccess() : bool
+    protected function allowAdminAccess(): bool
     {
         global $current_user;
         // admin override
@@ -356,7 +372,7 @@ class AccessControlManager
      * Gets the current state of the `isAdminWork` flag.
      * @return bool
      */
-    public function getAdminWork() : bool
+    public function getAdminWork(): bool
     {
         return $this->isAdminWork;
     }
@@ -381,7 +397,7 @@ class AccessControlManager
      * @param string $module
      * @return bool
      */
-    protected function isAccessControlled(string $key, string $module) : bool
+    protected function isAccessControlled(string $key, string $module): bool
     {
         if (!isset($this->accessControlledList[$key])) {
             $this->accessControlledList[$key] = $this->getAccessControlledList($key);
@@ -394,7 +410,7 @@ class AccessControlManager
      * @param $key
      * @return array
      */
-    protected function getAccessControlledList(string $key) : array
+    protected function getAccessControlledList(string $key): array
     {
         return AccessConfigurator::instance()->getAccessControlledList($key);
     }

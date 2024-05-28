@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'Peržiūrėti išplėtimus',
     'LBL_LIST_RELATED_TO_ID' => 'Susiję su ID',
     'LNK_IMPORT_ESCALATIONS' => 'Importuoti išplėtimus',
-    
+
     'LBL_LIST_SUBJECT' => 'Tema',
     'LBL_LIST_NUMBER' => 'Nr.',
     'LBL_LIST_RELATED_TO_TYPE' => 'Susijęs tipas',

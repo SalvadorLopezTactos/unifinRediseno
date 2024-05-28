@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Вбудовані файли',
     'LBL_MODULE_NAME_SINGULAR' => 'Вбудований файл',
     'LBL_MODULE_TITLE' => 'Вбудований файл',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => 'Назва файлу',
     'LBL_FILENAME' => 'Назва файлу',
     'LBL_UPLOAD_ONLY_IMAGE' => 'Вибраний файл має бути малюнком.',
-);
+];

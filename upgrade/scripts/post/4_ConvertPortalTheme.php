@@ -18,18 +18,18 @@ class SugarUpgradeConvertPortalTheme extends UpgradeScript
 {
     public $order = 4000;
     public $type = self::UPGRADE_CUSTOM;
-    public $version = "7.1.5";
+    public $version = '7.1.5';
 
     public function run()
     {
-        foreach(glob('custom/themes/clients/*/*/variables.less') as $customTheme) {
+        foreach (glob('custom/themes/clients/*/*/variables.less') as $customTheme) {
             $path = pathinfo($customTheme, PATHINFO_DIRNAME);
             $variables = $this->parseFile($path . '/variables.less');
 
             // Convert to new defs
-            $lessdefs = array(
-                'colors' => $variables['hex']
-            );
+            $lessdefs = [
+                'colors' => $variables['hex'],
+            ];
 
             // Write new defs
             $write = "<?php\n" .
@@ -42,7 +42,7 @@ class SugarUpgradeConvertPortalTheme extends UpgradeScript
             $this->upgrader->fileToDelete($path . '/variables.less', $this);
         }
     }
-    
+
     /**
      * Does a preg_match_all on a less file to retrieve a type of less variables
      *
@@ -53,7 +53,7 @@ class SugarUpgradeConvertPortalTheme extends UpgradeScript
      */
     private function parseLessVars($pattern, $input)
     {
-        $output = array();
+        $output = [];
         preg_match_all($pattern, $input, $match, PREG_PATTERN_ORDER);
         foreach ($match[1] as $key => $lessVar) {
             $output[$lessVar] = $match[3][$key];
@@ -76,7 +76,7 @@ class SugarUpgradeConvertPortalTheme extends UpgradeScript
     private function parseFile($file)
     {
         $contents = file_get_contents($file);
-        $output = array();
+        $output = [];
         $output['mixins'] = $this->parseLessVars("/@([^:|@]+):(\s+)([^\#|@|\(|\"]*?);/", $contents);
         $output['hex'] = $this->parseLessVars("/@([^:|@]+):(\s+)(\#.*?);/", $contents);
         $output['rgba'] = $this->parseLessVars("/@([^:|@]+):(\s+)(rgba\(.*?\));/", $contents);

@@ -31,7 +31,7 @@ class PlatformValidator extends ConstraintValidator
      * Allowed platforms (keyed)
      * @var array
      */
-    protected $platforms = array();
+    protected $platforms = [];
 
     /**
      * Ctor
@@ -48,7 +48,7 @@ class PlatformValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof Platform) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Platform');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\Platform');
         }
 
         if (null === $value || '' === $value) {
@@ -59,17 +59,17 @@ class PlatformValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, 'string');
         }
 
-        $value = (string) $value;
+        $value = (string)$value;
 
         // base validation - length
         if (strlen($value) > 127) {
             $this->context->buildViolation($constraint->message)
                 ->setInvalidValue($value)
                 ->setCode(Platform::ERROR_INVALID_PLATFORM_FORMAT)
-                ->setParameters(array(
+                ->setParameters([
                     '%platform%' => $value,
                     '%reason%' => 'maximum length of 127 characters exceeded',
-                ))
+                ])
                 ->addViolation();
         }
 
@@ -78,10 +78,10 @@ class PlatformValidator extends ConstraintValidator
             $this->context->buildViolation($constraint->message)
                 ->setInvalidValue($value)
                 ->setCode(Platform::ERROR_INVALID_PLATFORM_FORMAT)
-                ->setParameters(array(
+                ->setParameters([
                     '%platform%' => $value,
                     '%reason%' => 'invalid characters (a-z, 0-9, dash and underscore allowed)',
-                ))
+                ])
                 ->addViolation();
         }
 
@@ -90,10 +90,10 @@ class PlatformValidator extends ConstraintValidator
             $this->context->buildViolation($constraint->message)
                 ->setInvalidValue($value)
                 ->setCode(Platform::ERROR_INVALID_PLATFORM)
-                ->setParameters(array(
+                ->setParameters([
                     '%platform%' => $value,
                     '%reason%' => 'unknown platform',
-                ))
+                ])
                 ->addViolation();
         }
     }

@@ -30,14 +30,14 @@ require_once 'vendor/Zend/Http/Client.php';
  */
 class Zend_Oauth
 {
-    public const REQUEST_SCHEME_HEADER      = 'header';
-    public const REQUEST_SCHEME_POSTBODY    = 'postbody';
+    public const REQUEST_SCHEME_HEADER = 'header';
+    public const REQUEST_SCHEME_POSTBODY = 'postbody';
     public const REQUEST_SCHEME_QUERYSTRING = 'querystring';
-    public const GET                        = 'GET';
-    public const POST                       = 'POST';
-    public const PUT                        = 'PUT';
-    public const DELETE                     = 'DELETE';
-    public const HEAD                       = 'HEAD';
+    public const GET = 'GET';
+    public const POST = 'POST';
+    public const PUT = 'PUT';
+    public const DELETE = 'DELETE';
+    public const HEAD = 'HEAD';
 
     /**
      * Singleton instance if required of the HTTP client

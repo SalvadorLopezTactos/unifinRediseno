@@ -11,14 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['ForecastWorksheets']['base']['layout']['list'] = array(
-    'components' => array(
-        array(
+$viewdefs['ForecastWorksheets']['base']['layout']['list'] = [
+    'components' => [
+        [
             'view' => 'filter',
-        ),
-        array(
+        ],
+        [
             'view' => 'recordlist',
             'primary' => true,
-        ),
-    ),
-);
+        ],
+    ],
+];

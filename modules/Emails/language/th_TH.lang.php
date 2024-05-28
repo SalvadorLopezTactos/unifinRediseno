@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'ส่งต่อ:',
     'LBL_RE' => 'ตอบกลับ:',
     'LBL_BUTTON_CREATE' => 'สร้าง',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'เลือกจากบัญชีอีเมล',
     'LBL_SELECT_SIGNATURE_TITLE' => 'เลือกลายเซ็น',
     'LBL_SIGNATURE' => 'ลายเซ็น',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "ลายเซ็นเริ่มต้น",
-    "LBL_SHOW_MORE_SIGNATURES" => "ลายเซ็นเพิ่มเติม...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'ลายเซ็นเริ่มต้น',
+    'LBL_SHOW_MORE_SIGNATURES' => 'ลายเซ็นเพิ่มเติม...',
     'LBL_SUBJECT' => 'เรื่อง:',
     'LBL_TEMPLATE' => 'เทมเพลท',
     'LBL_TEXT_BODY' => 'เนื้อหาข้อความ',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'เวลาที่ส่ง',
     'LBL_LIST_TO_ADDR' => 'ถึง',
     'LBL_LIST_TYPE' => 'ประเภท',
-    "LBL_SELECTED_RECIPIENTS" => "ผู้รับที่เลือก",
-    "LBL_SHOW_MORE_RECIPIENTS" => "ผู้รับเพิ่มเติม...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "สมุดที่อยู่",
+    'LBL_SELECTED_RECIPIENTS' => 'ผู้รับที่เลือก',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'ผู้รับเพิ่มเติม...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'สมุดที่อยู่',
     'NTC_REMOVE_INVITEE' => 'คุณแน่ใจหรือไม่ว่าต้องการย้ายผู้รับนี้ออกจากอีเมล',
     'WARNING_SETTINGS_NOT_CONF' => 'การตั้งค่าอีเมลของคุณไม่ได้ถูกกำหนดค่าอย่างถูกต้องเพื่อส่งอีเมล เซิร์ฟเวอร์ SMTP ' .
         'ต้องถูกกำหนดใน <a href="#bwc/index.php?module=EmailMan&action=config">การตั้งค่าอีเมล</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'ไฟล์แนบอาจทำงานล้มเหลว: พบค่าที่ไม่ถูกต้องหรือใช้งานไม่ได้สำหรับ "upload_tmp_dir" ' .
         'โปรดแก้ไขข้อมูลนี้ในไฟล์ php.ini ของคุณ',
     'LBL_MESSAGE_UID' => 'UID ข้อความ',
-    'LBL_OPEN_DRAFT_ALERT' => 'อีเมลยังเป็นแบบร่าง คลิก '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'อีเมลยังเป็นแบบร่าง คลิก ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  เพื่อแก้ไข',
     'LBL_EMAIL_BODY' => 'ข้อความอีเมล',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'อีเมลระบบลิ้นชัก',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนอีเมล',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'อีเมลไทม์ไลน์',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'ไม่ได้ระบุผู้รับ',
@@ -475,4 +476,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'สีงอีเมล',
     'LBL_MAILBOX' => 'บัญชีขาเข้า',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'โปรดกำหนดค่าบัญชีอีเมลขาออกผ่าน <a href="#OutboundEmail">การตั้งค่าอีเมล</a> เพื่อให้ส่งอีเมลได้',
-);
+    'LBL_TOO_SHORT' => 'พิมพ์อย่างน้อย {0} อักขระ...',
+];

@@ -145,13 +145,13 @@ class SugarQuery_Compiler_Doctrine
     protected function compileSelect(QueryBuilder $builder, SugarQuery $query)
     {
         // if there aren't any selected fields, add them all
-        if (empty($query->select->select) && $query->select->getCountQuery() === false) {
+        if (empty($query->select->select) && !$query->select->getCountQuery() && !$query->select->getSumField()) {
             $query->select('*');
         }
 
         $select = $query->select;
 
-        $columns = array();
+        $columns = [];
 
         foreach ($select->select as $field) {
             if ($field->isNonDb()) {
@@ -159,17 +159,21 @@ class SugarQuery_Compiler_Doctrine
             }
 
             $columns[] = $this->compileField($field);
-            if ($select->getCountQuery()) {
+            if ($select->getCountQuery() || $select->getSumField()) {
                 $query->groupBy("{$field->table}.{$field->field}");
             }
         }
 
-        if ($query->distinct && count($columns) > 0) {
+        if ($query->distinct && safeCount($columns) > 0) {
             $columns[0] = 'DISTINCT ' . $columns[0];
         }
 
         if ($select->getCountQuery()) {
             $columns[] = 'COUNT(0) AS record_count';
+        }
+
+        if ($select->getSumField()) {
+            $columns[] = 'SUM(' . $select->getSumField() . ') AS sum_by_field';
         }
 
         $builder->select(...$columns);
@@ -275,11 +279,12 @@ class SugarQuery_Compiler_Doctrine
      */
     protected function joinErasedFields(
         QueryBuilder $builder,
-        SugarQuery $query,
-        SugarBean $bean,
-        string $tableAlias,
-        string $columnAlias
+        SugarQuery   $query,
+        SugarBean    $bean,
+        string       $tableAlias,
+        string       $columnAlias
     ) {
+
         if (!$this->isPiiFieldsSelected($bean, $query, $tableAlias)) {
             return false;
         }
@@ -307,7 +312,7 @@ class SugarQuery_Compiler_Doctrine
      * @param string $tableAlias
      * @return bool
      */
-    protected function isPiiFieldsSelected(SugarBean $bean, SugarQuery $query, string $tableAlias) : bool
+    protected function isPiiFieldsSelected(SugarBean $bean, SugarQuery $query, string $tableAlias): bool
     {
         if (!$bean->hasPiiFields()) {
             return false;
@@ -315,7 +320,7 @@ class SugarQuery_Compiler_Doctrine
 
         $selectedFields = $this->getSelectFieldsByTable($bean, $query, $tableAlias);
 
-        if (!count($selectedFields)) {
+        if (!safeCount($selectedFields)) {
             return false;
         }
 
@@ -335,7 +340,7 @@ class SugarQuery_Compiler_Doctrine
      * @param string $tableAlias
      * @return array
      */
-    protected function getSelectFieldsByTable(SugarBean $bean, SugarQuery $query, string $tableAlias) : array
+    protected function getSelectFieldsByTable(SugarBean $bean, SugarQuery $query, string $tableAlias): array
     {
         return array_merge(
             $query->select->getSelectedFieldsByTable($tableAlias),
@@ -442,7 +447,7 @@ class SugarQuery_Compiler_Doctrine
      */
     protected function applyOrderByStability(SugarQuery $query, array $orderBy)
     {
-        if (count($orderBy) == 0) {
+        if (safeCount($orderBy) == 0) {
             return $orderBy;
         }
 
@@ -477,7 +482,7 @@ class SugarQuery_Compiler_Doctrine
      */
     protected function compileLimit(QueryBuilder $builder, SugarQuery $query)
     {
-        if ($query->select->getCountQuery()) {
+        if ($query->select->getCountQuery() || $query->select->getSumField()) {
             return;
         }
 
@@ -511,7 +516,7 @@ class SugarQuery_Compiler_Doctrine
             $sql .= ' ' . $field->alias;
         }
 
-        return  $sql;
+        return $sql;
     }
 
     /**
@@ -523,7 +528,7 @@ class SugarQuery_Compiler_Doctrine
      */
     protected function compileExpression(QueryBuilder $builder, SugarQuery_Builder_Where $expression)
     {
-        $expressions = array();
+        $expressions = [];
 
         if (!empty($expression->raw)) {
             $compiledField = $this->compileField($expression->raw);
@@ -546,16 +551,16 @@ class SugarQuery_Compiler_Doctrine
             }
         }
 
-        if (count($expressions) == 0) {
+        if (safeCount($expressions) == 0) {
             return null;
         }
 
-        if (count($expressions) == 1) {
+        if (safeCount($expressions) == 1) {
             return current($expressions);
         }
 
         $method = strtolower($expression->operator());
-        return call_user_func_array(array($builder->expr(), $method), $expressions);
+        return call_user_func_array([$builder->expr(), $method], $expressions);
     }
 
     /**
@@ -594,7 +599,7 @@ class SugarQuery_Compiler_Doctrine
             switch ($condition->operator) {
                 case 'IN':
                 case 'NOT IN':
-                    $sql =  $this->compileIn($builder, $castField, $condition->operator, $condition->values, $fieldDef);
+                    $sql = $this->compileIn($builder, $castField, $condition->operator, $condition->values, $fieldDef);
                     break;
                 case 'BETWEEN':
                     $min = $this->bindValue($builder, $condition->values['min'], $fieldDef);
@@ -660,7 +665,7 @@ class SugarQuery_Compiler_Doctrine
         if ($set instanceof \Traversable) {
             $set = iterator_to_array($set);
         }
-        if ($isOracle && is_array($set) && count($set) > OracleManager::MAX_EXPRESSION_LIST_SIZE) {
+        if ($isOracle && is_array($set) && safeCount($set) > OracleManager::MAX_EXPRESSION_LIST_SIZE) {
             // split 1000+ long list of values to workaround Oracle limitations, see ORA-01795
             $chunks = array_chunk($set, OracleManager::MAX_EXPRESSION_LIST_SIZE);
             $sqlParts = [];
@@ -698,7 +703,7 @@ class SugarQuery_Compiler_Doctrine
             return 'NULL';
         }
 
-        $values = array();
+        $values = [];
         foreach ($set as $value) {
             $values[] = $this->bindValue($builder, $value, $fieldDef);
         }
@@ -764,7 +769,7 @@ class SugarQuery_Compiler_Doctrine
         }
 
         if (!is_array($values)) {
-            $values = array($values);
+            $values = [$values];
         }
 
         if (!$this->isCollationCaseSensitive()) {
@@ -774,7 +779,7 @@ class SugarQuery_Compiler_Doctrine
             $values = array_map('strtoupper', $values);
         }
 
-        $conditions = array();
+        $conditions = [];
         foreach ($values as $value) {
             $condition = $expr . ($isNegation ? ' NOT' : '') . ' LIKE ';
 
@@ -790,7 +795,7 @@ class SugarQuery_Compiler_Doctrine
         $sql = implode(' ' . $chainWith . ' ', $conditions);
 
         if ($isNegation) {
-            if (count($conditions) > 0) {
+            if (safeCount($conditions) > 0) {
                 $sql = '(' . $sql . ')';
             }
             $sql = $this->isNullOr($field, $sql);
@@ -812,16 +817,18 @@ class SugarQuery_Compiler_Doctrine
         QueryBuilder $builder,
         $format,
         $substring,
-        array $fieldDef
+        array        $fieldDef
     ) {
+
         $esc = '!';
         // temporarily disable escaping of wildcards in order to support their usage in starts(), ends() and contains()
         // and avoid backward compatibility breakage
-        $shouldEscape = /*strpbrk($substring, '%_') !==*/ false;
+        $shouldEscape = /*strpbrk($substring, '%_') !==*/
+            false;
         if ($shouldEscape) {
             $pattern = str_replace(
-                array($esc,        '_',        '%'),
-                array($esc . $esc, $esc . '_', $esc . '%'),
+                [$esc, '_', '%'],
+                [$esc . $esc, $esc . '_', $esc . '%'],
                 $substring
             );
         } else {

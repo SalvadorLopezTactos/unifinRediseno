@@ -38,6 +38,8 @@ class Cluster extends \Google\Collection
   protected $conditionsDataType = 'array';
   protected $confidentialNodesType = ConfidentialNodes::class;
   protected $confidentialNodesDataType = '';
+  protected $costManagementConfigType = CostManagementConfig::class;
+  protected $costManagementConfigDataType = '';
   /**
    * @var string
    */
@@ -62,6 +64,8 @@ class Cluster extends \Google\Collection
    * @var string
    */
   public $description;
+  protected $enableK8sBetaApisType = K8sBetaAPIConfig::class;
+  protected $enableK8sBetaApisDataType = '';
   /**
    * @var bool
    */
@@ -77,7 +81,13 @@ class Cluster extends \Google\Collection
   /**
    * @var string
    */
+  public $etag;
+  /**
+   * @var string
+   */
   public $expireTime;
+  protected $fleetType = Fleet::class;
+  protected $fleetDataType = '';
   /**
    * @var string
    */
@@ -168,6 +178,8 @@ class Cluster extends \Google\Collection
   public $resourceLabels;
   protected $resourceUsageExportConfigType = ResourceUsageExportConfig::class;
   protected $resourceUsageExportConfigDataType = '';
+  protected $securityPostureConfigType = SecurityPostureConfig::class;
+  protected $securityPostureConfigDataType = '';
   /**
    * @var string
    */
@@ -316,6 +328,20 @@ class Cluster extends \Google\Collection
     return $this->confidentialNodes;
   }
   /**
+   * @param CostManagementConfig
+   */
+  public function setCostManagementConfig(CostManagementConfig $costManagementConfig)
+  {
+    $this->costManagementConfig = $costManagementConfig;
+  }
+  /**
+   * @return CostManagementConfig
+   */
+  public function getCostManagementConfig()
+  {
+    return $this->costManagementConfig;
+  }
+  /**
    * @param string
    */
   public function setCreateTime($createTime)
@@ -414,6 +440,20 @@ class Cluster extends \Google\Collection
     return $this->description;
   }
   /**
+   * @param K8sBetaAPIConfig
+   */
+  public function setEnableK8sBetaApis(K8sBetaAPIConfig $enableK8sBetaApis)
+  {
+    $this->enableK8sBetaApis = $enableK8sBetaApis;
+  }
+  /**
+   * @return K8sBetaAPIConfig
+   */
+  public function getEnableK8sBetaApis()
+  {
+    return $this->enableK8sBetaApis;
+  }
+  /**
    * @param bool
    */
   public function setEnableKubernetesAlpha($enableKubernetesAlpha)
@@ -458,6 +498,20 @@ class Cluster extends \Google\Collection
   /**
    * @param string
    */
+  public function setEtag($etag)
+  {
+    $this->etag = $etag;
+  }
+  /**
+   * @return string
+   */
+  public function getEtag()
+  {
+    return $this->etag;
+  }
+  /**
+   * @param string
+   */
   public function setExpireTime($expireTime)
   {
     $this->expireTime = $expireTime;
@@ -468,6 +522,20 @@ class Cluster extends \Google\Collection
   public function getExpireTime()
   {
     return $this->expireTime;
+  }
+  /**
+   * @param Fleet
+   */
+  public function setFleet(Fleet $fleet)
+  {
+    $this->fleet = $fleet;
+  }
+  /**
+   * @return Fleet
+   */
+  public function getFleet()
+  {
+    return $this->fleet;
   }
   /**
    * @param string
@@ -916,6 +984,20 @@ class Cluster extends \Google\Collection
   public function getResourceUsageExportConfig()
   {
     return $this->resourceUsageExportConfig;
+  }
+  /**
+   * @param SecurityPostureConfig
+   */
+  public function setSecurityPostureConfig(SecurityPostureConfig $securityPostureConfig)
+  {
+    $this->securityPostureConfig = $securityPostureConfig;
+  }
+  /**
+   * @return SecurityPostureConfig
+   */
+  public function getSecurityPostureConfig()
+  {
+    return $this->securityPostureConfig;
   }
   /**
    * @param string

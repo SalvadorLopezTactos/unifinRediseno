@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => '商品タイプ',
     'LBL_MODULE_NAME_SINGULAR' => '商品タイプ',
     'LBL_MODULE_TITLE' => '商品タイプ: ホーム',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => '本当にこのレコードを削除してよいですか？',
     'ERR_DELETE_RECORD' => '商品タイプを削除するにはレコード番号を指定する必要があります。',
     'NTC_LIST_ORDER' => '商品タイプのドロップダウンに表示される順番を入力してください。',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'商品タイプのインポート',
-    'LBL_CREATED_BY'=>'作成者',
+    'LNK_IMPORT_PRODUCT_TYPES' => '商品タイプのインポート',
+    'LBL_CREATED_BY' => '作成者',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'アサイン先ID',
-    'LBL_EXPORT_CREATED_BY'=>'作成者ID',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'商品カテゴリのインポート',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'アサイン先ID',
+    'LBL_EXPORT_CREATED_BY' => '作成者ID',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => '商品カテゴリのインポート',
+];

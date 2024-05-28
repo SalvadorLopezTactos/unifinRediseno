@@ -9,27 +9,24 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-
-
 class ViewVcard extends SugarView
 {
-	public $type = 'detail';
-	
-	/**
+    public $type = 'detail';
+
+    /**
      * @see SugarView::display()
      */
-	public function display()
+    public function display()
     {
-		$vcard = new vCard();		
-		$vcard->loadContact($this->bean->id, $this->module);
-		$vcard->saveVCard();
- 	}
+        $vcard = new vCard();
+        $vcard->loadContact($this->bean->id, $this->module);
+        $vcard->saveVCard();
+    }
 }
-?>

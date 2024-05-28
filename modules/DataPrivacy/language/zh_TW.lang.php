@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '數據隱私',
     'LBL_MODULE_NAME_SINGULAR' => '數據隱私',
     'LBL_NUMBER' => '編號',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => '沒有標記要擦除的欄位或記錄。',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => '資料隱私記錄儀表板',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => '數據隱私焦點抽屜',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '資料隱私時間軸',
 
     // list view
     'LBL_HELP_RECORDS' => '資料隱私模組可追蹤隱私活動，包括同意和主題請求，以支援組織的隱私程式。創建與個人記錄 (如連絡人) 相關的資料隱私記錄，以追蹤同意或對隱私請求採取行動。',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => '資料隱私模組可追蹤隱私活動，包括同意和主題請求，以支援組織的隱私程式。創建與個人記錄 (如連絡人) 相關的資料隱私記錄，以追蹤同意或對隱私請求採取行動。完成所需的操作後，角色為資訊隱私管理員的用戶便可點擊“完成”或“拒絕”來更新狀態。
 
 對於刪除請求，可對下方子面板中所列個人紀錄中的的每一個選擇“標記為刪除”。選擇好全部所需欄位後，點擊“刪除並完成”會永久地删除這些欄位的值，並將資料隱私紀錄標記為已完成。',
-);
+];

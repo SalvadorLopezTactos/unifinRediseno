@@ -42,7 +42,7 @@ EOQ;
      */
     public static function getOperationName()
     {
-        return "strlen";
+        return 'strlen';
     }
 
     /**

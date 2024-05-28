@@ -25,7 +25,7 @@ class IntegrateUtils
      * Ensure current user has admin permissions
      * @throws SugarApiExceptionNotAuthorized
      */
-    public function ensureAdminUser() : void
+    public function ensureAdminUser(): void
     {
         if (empty($GLOBALS['current_user']) || !$GLOBALS['current_user']->isAdmin()) {
             self::getUpsertLogger()->error('Attempt to call the integrate api as a non-admin user for user ' .
@@ -37,7 +37,7 @@ class IntegrateUtils
     /**
      * Perform integration checks
      */
-    public function integrationChecks(\ServiceBase $api) : void
+    public function integrationChecks(\ServiceBase $api): void
     {
         $this->ensureAdminUser();
 
@@ -55,7 +55,7 @@ class IntegrateUtils
     /**
      * Reverts integration checks
      */
-    public function revertIntegrationChecks() : void
+    public function revertIntegrationChecks(): void
     {
         // set it back to the default value from the config.
         $fts = SearchEngine::getInstance();
@@ -178,7 +178,7 @@ class IntegrateUtils
      * Returns record id based on the provided field
      * It does not throw exceptions in case of record not found
      */
-    public function getRecordIdByField(string $moduleName, string $fieldName, string $fieldValue, bool $getDeleted = true) : array
+    public function getRecordIdByField(string $moduleName, string $fieldName, string $fieldValue, bool $getDeleted = true): array
     {
         $this->getUpsertLogger()->debug('Retrieving record id for field ' . $fieldName . ' with value ' .
             $fieldValue . ' and module ' . $moduleName);
@@ -222,7 +222,7 @@ class IntegrateUtils
             $fieldValue . ' and module ' . $moduleName);
 
         // this is for database implementations that in Sugar do not support unique database constraints with multiple null values
-        if (count($results) > 1) {
+        if (safeCount($results) > 1) {
             $outputDuplicate = '';
             foreach ($results as $result) {
                 if (!empty($outputDuplicate)) {
@@ -248,7 +248,7 @@ class IntegrateUtils
      * Returns record id based on the provided field
      * @throws SugarApiExceptionInvalidParameter
      */
-    public function getRecordId(string $moduleName, string $fieldName, string $fieldValue, bool $getDeleted = true) : array
+    public function getRecordId(string $moduleName, string $fieldName, string $fieldValue, bool $getDeleted = true): array
     {
         $result = $this->getRecordIdByField($moduleName, $fieldName, $fieldValue, $getDeleted);
         if (empty($result)) {
@@ -262,7 +262,7 @@ class IntegrateUtils
     /**
      * Set the field to null
      */
-    public function removeField(string $moduleName, string $id, string $fieldName) : void
+    public function removeField(string $moduleName, string $id, string $fieldName): void
     {
         $bean = \BeanFactory::newBean($moduleName);
         $qb = \DBManagerFactory::getConnection()->createQueryBuilder();

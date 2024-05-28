@@ -208,9 +208,9 @@ class PMSEPreProcessor
                 $project = $this->flowProjectMap[$flowData['pro_id']];
             } else {
                 $q = $this->retrieveSugarQuery();
-                $q->from(BeanFactory::newBean('pmse_Project'), array('alias' => 'p'));
-                $q->select(array(array('id', 'p')));
-                $q->joinTable('pmse_bpm_process_definition', array('alias' => 'd'))
+                $q->from(BeanFactory::newBean('pmse_Project'), ['alias' => 'p']);
+                $q->select([['id', 'p']]);
+                $q->joinTable('pmse_bpm_process_definition', ['alias' => 'd'])
                     ->on()->equalsField('d.prj_id', 'p.id');
                 $q->where()->equals('d.id', $flowData['pro_id']);
                 $projectId = $q->getOne();
@@ -275,7 +275,6 @@ class PMSEPreProcessor
                 $flowData = $this->processFlowData($flowData);
 
 
-
                 // Make sure we start fresh each time with validation and such
                 $request->reset();
 
@@ -313,10 +312,10 @@ class PMSEPreProcessor
                 if ($hasRunOrder && isset($this->executedFlowIds[$bean->id])) {
                     if ($flowData['evn_type'] === 'START') {
                         $executedEvents = $this->executedFlowIds[$bean->id];
-                        $lastRanEvent = $executedEvents[(is_countable($executedEvents) ? count($executedEvents) : 0) - 1];
+                        $lastRanEvent = $executedEvents[safeCount($executedEvents) - 1];
 
                         // continue if the current event is out of order or has already been ran
-                        if ($flowData['prj_run_order'] < $lastRanEvent['run_order'] || in_array($eventData, $executedEvents)) {
+                        if ($flowData['prj_run_order'] < $lastRanEvent['run_order'] || safeInArray($eventData, $executedEvents)) {
                             $this->logger->info('Event ' . $eventId . ' is out of run order or has already been ran');
                             continue;
                         }
@@ -425,12 +424,12 @@ class PMSEPreProcessor
     {
         $sugarQuery = $this->retrieveSugarQuery();
         $flowBean = $this->retrieveBean('pmse_BpmFlow');
-        $fields = array('cas_id', 'cas_index', 'pro_id');
+        $fields = ['cas_id', 'cas_index', 'pro_id'];
         $sugarQuery->select($fields);
-        $sugarQuery->from($flowBean, array('alias' => 'flow'));
-        $sugarQuery->joinTable('pmse_bpm_process_definition', array(
+        $sugarQuery->from($flowBean, ['alias' => 'flow']);
+        $sugarQuery->joinTable('pmse_bpm_process_definition', [
             'alias' => 'definition',
-        ))->on()->equalsField('definition.id', 'flow.pro_id');
+        ])->on()->equalsField('definition.id', 'flow.pro_id');
         $sugarQuery->where()->queryAnd()
             ->addRaw("cas_sugar_object_id = '{$bean->id}' AND cas_sugar_module = '{$bean->module_name}' AND cas_flow_status <> 'CLOSED'");
         $sugarQuery->select->fieldRaw('definition.pro_terminate_variables');
@@ -438,12 +437,12 @@ class PMSEPreProcessor
         return $flows;
     }
 
-    public function retrieveProcessBean($bean, $flowData = array())
+    public function retrieveProcessBean($bean, $flowData = [])
     {
         if (!PMSEEngineUtils::isTargetModule($flowData, $bean)) {
             $parentBean = PMSEEngineUtils::getParentBean($flowData, $bean);
         }
-        return (!empty($parentBean) && is_object($parentBean)) ? $parentBean: $bean;
+        return (!empty($parentBean) && is_object($parentBean)) ? $parentBean : $bean;
     }
 
     /**
@@ -452,7 +451,7 @@ class PMSEPreProcessor
      * @param array $data Flow data
      * @return boolean
      */
-    public function terminateCaseByBeanAndProcess(SugarBean $bean, array $data = array())
+    public function terminateCaseByBeanAndProcess(SugarBean $bean, array $data = [])
     {
         // Gets the target module bean or the its parent
         $processBean = $this->retrieveProcessBean($bean, $data);
@@ -465,7 +464,7 @@ class PMSEPreProcessor
         $isEmpty = empty($data);
 
         // Stack holder for what has been terminated already
-        $needsTerm = array();
+        $needsTerm = [];
 
         // Loop and check
         foreach ($flows as $flow) {
@@ -513,13 +512,13 @@ class PMSEPreProcessor
                 (flow.cas_flow_status IS NULL OR flow.cas_flow_status='WAITING')
             WHERE
                 rd.deleted = 0 AND rd.pro_status != 'INACTIVE' AND " .
-                $db->getNotEmptyFieldSQL('rd.rel_element_relationship') . " AND
+            $db->getNotEmptyFieldSQL('rd.rel_element_relationship') . ' AND
                 (rd.pro_module = :module OR rd.rel_element_module = :module)
-        ";
+        ';
 
         // Execute
         $stmt = $db->getConnection()
-                ->executeQuery($sql, ['module' => $module]);
+            ->executeQuery($sql, ['module' => $module]);
 
         // Loop and compare
         while ($row = $stmt->fetchAssociative()) {
@@ -544,7 +543,7 @@ class PMSEPreProcessor
      * @param array $links Array of link names to load for the bean
      * @return string
      */
-    protected function buildLinkedObjectIdQuery(SugarBean $bean, string $idField, array $links = array())
+    protected function buildLinkedObjectIdQuery(SugarBean $bean, string $idField, array $links = [])
     {
         // The bean will always be in the list of linked objects
         $beanId = $bean->db->quoted($bean->id);
@@ -564,7 +563,7 @@ class PMSEPreProcessor
 
         if (!empty($queryList)) {
             // Add the bean id to query
-            $queryList[] = "SELECT $beanId id ". $bean->db->getFromDummyTable();
+            $queryList[] = "SELECT $beanId id " . $bean->db->getFromDummyTable();
             $query = $idField . ' IN (' . implode(' UNION ALL ', $queryList) . ')';
         }
 
@@ -575,13 +574,13 @@ class PMSEPreProcessor
      * Gets a list of related object ids based on a bean and a list of link names.
      * Optionally, will wrap the ids in DB quotes when needed
      *
-     * @deprecated
      * @param SugarBean $bean The primary bean
      * @param array $links Array of link names to load for the bean
      * @param boolean $quoted Whether to DB escape the results
      * @return array
+     * @deprecated
      */
-    protected function buildLinkedObjectIdList(SugarBean $bean, array $links = array(), $quoted = true)
+    protected function buildLinkedObjectIdList(SugarBean $bean, array $links = [], $quoted = true)
     {
         // The bean will always be in the list of linked objects
         $list = [$bean->id];
@@ -597,7 +596,7 @@ class PMSEPreProcessor
         // For DB comparisons, we need to quote our values
         if ($quoted) {
             $db = DBManagerFactory::getInstance();
-            $list = implode(",", array_map(
+            $list = implode(',', array_map(
                 function ($val) use ($db) {
                     return $db->quoted($val);
                 },
@@ -636,7 +635,7 @@ class PMSEPreProcessor
     {
         // If the bean is not a bean at this point, just return an array
         if (empty($bean)) {
-            return array();
+            return [];
         }
 
         // We'll need this for a few things here
@@ -654,16 +653,16 @@ class PMSEPreProcessor
         $db = DBManagerFactory::getInstance();
 
         if ($event === 'after_relationship_add' || $event === 'after_relationship_delete') {
-            $appliedTo =  $evnParamsChar. ' = '.$db->quoted('relationshipchange');
+            $appliedTo = $evnParamsChar . ' = ' . $db->quoted('relationshipchange');
         } elseif ($this->isNewBean($bean)) {
-            $appliedTo = $evnParamsChar . ' = '.$db->quoted('new').
-                ' OR ' . $evnParamsChar . ' = '.$db->quoted('newfirstupdated').
-                ' OR ' . $evnParamsChar . ' = '.$db->quoted('newallupdates');
+            $appliedTo = $evnParamsChar . ' = ' . $db->quoted('new') .
+                ' OR ' . $evnParamsChar . ' = ' . $db->quoted('newfirstupdated') .
+                ' OR ' . $evnParamsChar . ' = ' . $db->quoted('newallupdates');
         } else {
-            $appliedTo = $evnParamsChar . ' = '.$db->quoted('allupdates').
-                ' OR ' . $evnParamsChar . ' = '.$db->quoted('updated').
-                ' OR ' . $evnParamsChar . ' = '.$db->quoted('newfirstupdated').
-                ' OR ' . $evnParamsChar . ' = '.$db->quoted('newallupdates');
+            $appliedTo = $evnParamsChar . ' = ' . $db->quoted('allupdates') .
+                ' OR ' . $evnParamsChar . ' = ' . $db->quoted('updated') .
+                ' OR ' . $evnParamsChar . ' = ' . $db->quoted('newfirstupdated') .
+                ' OR ' . $evnParamsChar . ' = ' . $db->quoted('newallupdates');
         }
 
         $sql = "
@@ -750,7 +749,7 @@ class PMSEPreProcessor
     public function getFlowById($id)
     {
         $flow = $this->retrieveBean('pmse_BpmFlow', $id);
-        return array($flow->toArray());
+        return [$flow->toArray()];
     }
 
     /**
@@ -781,9 +780,9 @@ class PMSEPreProcessor
 
         // Handle the filtering
         $q->where()
-          ->queryAnd()
-          ->equals('cas_id', $casId)
-          ->equals('cas_flow_status', 'ERROR');
+            ->queryAnd()
+            ->equals('cas_id', $casId)
+            ->equals('cas_flow_status', 'ERROR');
 
         // Return the result
         return $q->execute();
@@ -797,7 +796,7 @@ class PMSEPreProcessor
     public function getFlowDataList(PMSERequest $request)
     {
         $args = $request->getArguments();
-        $flows = array();
+        $flows = [];
         switch ($request->getType()) {
             case 'direct':
                 switch (true) {
@@ -807,7 +806,7 @@ class PMSEPreProcessor
                     case isset($args['flow_id']):
                         $flows = $this->getFlowById($args['flow_id']);
                         break;
-                    case (isset($args['cas_id'])&&isset($args['cas_index'])):
+                    case (isset($args['cas_id']) && isset($args['cas_index'])):
                         $flows = $this->getFlowByCasIdCasIndex($args);
                         $args['idFlow'] = $flows[0]['id'];
                         $request->setArguments($args);
@@ -834,14 +833,14 @@ class PMSEPreProcessor
     {
         $tmpBean = BeanFactory::newBean('pmse_BpmFlow');
         $q = new SugarQuery();
-        $q->select(array('cas_sugar_module', 'cas_sugar_object_id', 'id'));
+        $q->select(['cas_sugar_module', 'cas_sugar_object_id', 'id']);
         $q->from($tmpBean);
         $q->where()->equals('cas_id', $arguments['cas_id']);
         $q->where()->equals('cas_index', $arguments['cas_index']);
         $result = $q->execute();
         $element = array_pop($result);
         $bean = BeanFactory::retrieveBean('pmse_BpmFlow', $element['id']);
-        return array($bean->toArray());
+        return [$bean->toArray()];
     }
 
     /**

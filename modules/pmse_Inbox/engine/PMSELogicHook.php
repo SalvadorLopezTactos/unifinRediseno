@@ -12,10 +12,9 @@
 
 use Sugarcrm\Sugarcrm\ProcessManager;
 
-
 class PMSELogicHook
 {
-    function after_save($bean, $event, $arguments)
+    public function after_save($bean, $event, $arguments)
     {
         if (!$this->isSugarInstalled()) {
             return true;
@@ -29,7 +28,7 @@ class PMSELogicHook
         return $handler->runStartEventAfterSave($bean, $event, $arguments);
     }
 
-    function after_delete($bean, $event, $arguments)
+    public function after_delete($bean, $event, $arguments)
     {
         if (!$this->isSugarInstalled()) {
             return true;
@@ -61,7 +60,7 @@ class PMSELogicHook
         }
 
         $relatedModule = $arguments['related_module'] ?? '';
-        if (!in_array($relatedModule, PMSEEngineUtils::getSupportedModules())) {
+        if (PMSEEngineUtils::isPMSEModule($relatedModule)) {
             return true;
         }
 

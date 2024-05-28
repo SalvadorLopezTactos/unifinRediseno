@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Generic logger
  * @api
@@ -24,5 +25,5 @@ interface LoggerTemplate
     public function log(
         $method,
         $message
-        );
+    );
 }

@@ -82,16 +82,15 @@ Pushed code for help popups into smarty function sugar_help.
 function smarty_function_sugar_help($params, &$smarty)
 {
     $text = str_replace("'", "\'", htmlspecialchars($params['text'], ENT_COMPAT));
-	//append any additional parameters.
-	$click  = "return SUGAR.util.showHelpTips(this,'$text'";
+    //append any additional parameters.
+    $click = "return SUGAR.util.showHelpTips(this,'$text'";
 
     // Old check was for count, not existence of array indexes
-	if (isset($params['myPos']) && isset($params['atPos'])){
-
-			$click .=",'".$params['myPos']."','".$params['atPos']."'";
-	}
+    if (isset($params['myPos']) && isset($params['atPos'])) {
+        $click .= ",'" . $params['myPos'] . "','" . $params['atPos'] . "'";
+    }
     $helpImage = SugarThemeRegistry::current()->getImageURL('helpInline.png');
-	$click .= " );" ;
+    $click .= ' );';
     $alt_tag = $GLOBALS['app_strings']['LBL_ALT_INFO'];
     return <<<EOHTML
 <img border="0"
@@ -102,5 +101,3 @@ function smarty_function_sugar_help($params, &$smarty)
     />
 EOHTML;
 }
-
-?>

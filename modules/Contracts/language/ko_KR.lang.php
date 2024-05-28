@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => '계약',
-	'LBL_MODULE_NAME_SINGULAR' => '계약',
-	'LBL_MODULE_TITLE' => '계약:홈',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => '계약',
+    'LBL_MODULE_NAME_SINGULAR' => '계약',
+    'LBL_MODULE_TITLE' => '계약:홈',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => '신규 계약 만들기',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => '통화 ID',
     'LBL_CURRENCY' => '통화',
     'LBL_CURRENCY_RATE' => '환율',
-    'LBL_ASSIGNED_TO_NAME'=>'담당자',                   
+    'LBL_ASSIGNED_TO_NAME' => '담당자',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => '계약 목록',	
+    'LBL_LIST_FORM_TITLE' => '계약 목록',
     'LBL_LIST_CONTRACT_NAME' => '계약명',
     'LBL_LIST_ACCOUNT_NAME' => '거래처명',
     'LBL_LIST_START_DATE' => '시작',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => '이름',
     'LBL_LIST_CONTRACT_VALUE' => '금액',
 
-    'LBL_TYPE'=>'유형',
+    'LBL_TYPE' => '유형',
     'LBL_TYPE_NAME' => '유형 이름',
-    'LBL_CONTRACT_TYPE'=>'유형',
+    'LBL_CONTRACT_TYPE' => '유형',
 
     'LBL_CREATED_USER' => '생성자',
     'LBL_MODIFIED_USER' => '수정자',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => '계약서 포커스 서랍',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => '연락처 기록 대시보드',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '연락처 타임라인',
+];

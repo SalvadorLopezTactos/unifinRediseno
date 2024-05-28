@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Turite nurodyti įrašo numerį, jei norite įtraukti vartotoją į šią komandą.',
     'ERR_DUP_NAME' => 'Komanda su tokiu pavadinimu jau yra, prašome pasirinkti kitą pavadinimą.',
     'ERR_DELETE_RECORD' => 'Prašome nurodyti įrašą, jei norite ištrinti šią komandą.',
@@ -70,12 +70,12 @@ to modulio parinktį „Savininkas ir pasirinkta komanda“ ir visus to modulio 
 Taip pat rekomenduojame panaikinus bet kokio modulio komandines teises naudoti greito taisymo ir atstatymo įrankį bei
 išvalyti savo sistemos podėlį.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Įspėjimas.</strong> Išjungus komandines modulio teises, bus atkurti visi duomenys, susiję su to modulio komandinėmis teisėmis, įskaitant šią funkciją naudojančius procesų apibrėžimus ir procesus. Tai apima visus vaidmenis, naudojančius
 to modulio parinktį „Savininkas ir pasirinkta komanda“ ir visus to modulio įrašų komandinių teisių duomenis. Taip pat rekomenduojame panaikinus bet kokio modulio komandines teises naudoti greito taisymo ir atstatymo įrankį bei išvalyti savo sistemos podėlį.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Išjungus komandines modulio teises, bus atkurti visi duomenys, susiję su to
 modulio komandinėmis teisėmis, įskaitant šią funkciją naudojančius procesų apibrėžimus ir procesus. Tai apima visus vaidmenis, naudojančius
@@ -84,9 +84,9 @@ Taip pat rekomenduojame panaikinus bet kokio modulio komandines teises naudoti g
 išvalyti savo sistemos podėlį. Jei neturite prieigos prie greito taisymo ir atstatymo įrankio, kreipkitės į administratorių, turintį
 prieigą prie meniu Taisymas.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Įspėjimas.</strong> Išjungus komandines modulio teises, bus atkurti visi duomenys, susiję su to modulio komandinėmis teisėmis, įskaitant šią funkciją naudojančius procesų apibrėžimus ir procesus. Tai apima visus vaidmenis, naudojančius to modulio parinktį „Savininkas ir pasirinkta komanda“ ir visus to modulio įrašų komandinių teisių duomenis. Taip pat rekomenduojame panaikinus bet kokio modulio komandines teises naudoti greito taisymo ir atstatymo įrankį bei išvalyti savo sistemos podėlį. Jei neturite prieigos prie greito taisymo ir atstatymo įrankio, kreipkitės į administratorių, turintį prieigą prie meniu Taisymas.
 STR
-,
-);
+    ,
+];

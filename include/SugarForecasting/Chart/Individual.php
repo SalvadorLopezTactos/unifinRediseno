@@ -39,8 +39,8 @@ class SugarForecasting_Chart_Individual extends SugarForecasting_Chart_AbstractC
     {
         global $app_list_strings, $app_strings;
 
-        $arrData = array();
-        $arrProbabilities = array();
+        $arrData = [];
+        $arrProbabilities = [];
         $forecast_strings = $this->getModuleLanguage('Forecasts');
         $config = $this->getForecastConfig();
 
@@ -49,32 +49,31 @@ class SugarForecasting_Chart_Individual extends SugarForecasting_Chart_AbstractC
         $bestAccess = $acl->checkAccess(
             'ForecastWorksheets',
             'field',
-            array('field' => 'best_case', 'action' => 'view')
+            ['field' => 'best_case', 'action' => 'view']
         );
         $worstAccess = $acl->checkAccess(
             'ForecastWorksheets',
             'field',
-            array('field' => 'worst_case', 'action' => 'view')
+            ['field' => 'worst_case', 'action' => 'view']
         );
 
         if (!empty($this->dataArray)) {
             foreach ($this->dataArray as $data) {
-
                 // If users have made likely/best/worst not required,
                 // set the value to 0 for upcoming currency math
                 if (empty($data['likely_case'])) {
                     $data['likely_case'] = 0;
                 }
 
-                $v = array(
+                $v = [
                     'id' => $data['id'],
                     'record_id' => $data['parent_id'],
                     'forecast' => $data['commit_stage'],
                     'probability' => $data['probability'],
                     'sales_stage' => $data['sales_stage'],
                     'likely' => SugarCurrency::convertWithRate($data['likely_case'], $data['base_rate']),
-                    'date_closed_timestamp' => intval($data['date_closed_timestamp'])
-                );
+                    'date_closed_timestamp' => intval($data['date_closed_timestamp']),
+                ];
 
                 if ($config['show_worksheet_best'] && $bestAccess) {
                     if (empty($data['best_case'])) {
@@ -105,35 +104,35 @@ class SugarForecasting_Chart_Individual extends SugarForecasting_Chart_AbstractC
             // Forecast Time Period was out of range
             $title = '';
             $quota = null;
-            $xaxis = array();
+            $xaxis = [];
             $error = 'ERR_NO_ACTIVE_TIMEPERIOD';
         } else {
             $title = string_format(
                 $forecast_strings['LBL_CHART_FORECAST_FOR'],
-                array($tp->name)
+                [$tp->name]
             );
             $quota = $this->getUserQuota();
-            $xaxis = $tp->getChartLabels(array());
+            $xaxis = $tp->getChartLabels([]);
             $error = false;
         }
 
-        return array(
+        return [
             'title' => $title,
             'quota' => $quota,
             'x-axis' => $xaxis,
-            'labels' => array(
+            'labels' => [
                 'forecast' => $app_list_strings[$config['buckets_dom']],
                 'sales_stage' => $app_list_strings['sales_stage_dom'],
                 'probability' => $arrProbabilities,
-                'dataset' => array(
+                'dataset' => [
                     'likely' => $app_strings['LBL_LIKELY'],
                     'best' => $app_strings['LBL_BEST'],
-                    'worst' => $app_strings['LBL_WORST']
-                )
-            ),
+                    'worst' => $app_strings['LBL_WORST'],
+                ],
+            ],
             'data' => $arrData,
             'error' => $error,
-        );
+        ];
     }
 
     /**

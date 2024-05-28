@@ -29,7 +29,7 @@ class OrderDirectionValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof OrderDirection) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\OrderDirection');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\OrderDirection');
         }
 
         if (null === $value || '' === $value) {
@@ -40,7 +40,7 @@ class OrderDirectionValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, 'string');
         }
 
-        $value = (string) $value;
+        $value = (string)$value;
 
         if (strtolower($value) !== 'asc' && strtolower($value) !== 'desc') {
             $this->context->buildViolation($constraint->message)

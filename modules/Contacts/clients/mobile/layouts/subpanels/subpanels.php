@@ -9,24 +9,24 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Contacts']['mobile']['layout']['subpanels'] = array(
-    'components' => array(
-        array(
+$viewdefs['Contacts']['mobile']['layout']['subpanels'] = [
+    'components' => [
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_CALLS_SUBPANEL_TITLE',
             'linkable' => false,
-            'context' => array(
+            'context' => [
                 'link' => 'calls',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_MEETINGS_SUBPANEL_TITLE',
             'linkable' => false,
-            'context' => array(
+            'context' => [
                 'link' => 'meetings',
-            ),
-        ),
+            ],
+        ],
         [
             'layout' => 'subpanel',
             'label' => 'LBL_MESSAGES_SUBPANEL_TITLE',
@@ -34,71 +34,71 @@ $viewdefs['Contacts']['mobile']['layout']['subpanels'] = array(
                 'link' => 'message_invites',
             ],
         ],
-        array(
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_TASKS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'all_tasks',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_NOTES_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'notes',
-            ),
-        ),
-        array(
-            'layout' => "subpanel",
+            ],
+        ],
+        [
+            'layout' => 'subpanel',
             'label' => 'LBL_LEADS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'leads',
-            ),
-        ),
-        array(
-            'layout' => "subpanel",
+            ],
+        ],
+        [
+            'layout' => 'subpanel',
             'label' => 'LBL_OPPORTUNITIES_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'opportunities',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_EMAILS_SUBPANEL_TITLE',
             'linkable' => false,
             'unlinkable' => false,
-            'context' => array(
+            'context' => [
                 'link' => 'archived_emails',
-            ),
-        ),
-        array(
-            'layout' => "subpanel",
+            ],
+        ],
+        [
+            'layout' => 'subpanel',
             'label' => 'LBL_CASES_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'cases',
-            ),
-        ),
-        array(
-            'layout' => "subpanel",
+            ],
+        ],
+        [
+            'layout' => 'subpanel',
             'label' => 'LBL_DIRECT_REPORTS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'direct_reports',
-            ),
-        ),
-        array(
-            'layout' => "subpanel",
+            ],
+        ],
+        [
+            'layout' => 'subpanel',
             'label' => 'LBL_NOTES_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'notes',
-            ),
-        ),
-        array(
-            'layout' => "subpanel",
+            ],
+        ],
+        [
+            'layout' => 'subpanel',
             'label' => 'LBL_DOCUMENTS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'documents',
-            ),
-        ),
+            ],
+        ],
         [
             'layout' => 'subpanel',
             'label' => 'LBL_QUOTES_SHIP_TO',
@@ -120,13 +120,13 @@ $viewdefs['Contacts']['mobile']['layout']['subpanels'] = array(
                 'link' => 'contracts',
             ],
         ],
-        array (
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_PRODUCTS_SUBPANEL_TITLE',
-            'context' => array (
+            'context' => [
                 'link' => 'products',
-            ),
-        ),
+            ],
+        ],
         [
             'layout' => 'subpanel',
             'label' => 'LBL_PURCHASES_SUBPANEL_TITLE',
@@ -134,5 +134,5 @@ $viewdefs['Contacts']['mobile']['layout']['subpanels'] = array(
                 'link' => 'purchases',
             ],
         ],
-    ),
-);
+    ],
+];

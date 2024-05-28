@@ -18,7 +18,7 @@
 class One2MBeanRelationship extends One2MRelationship
 {
     //Type is read in sugarbean to determine query construction
-    var $type = "one-to-many";
+    public $type = 'one-to-many';
 
     /**
      * @param  $lhs SugarBean left side bean to add to the relationship.
@@ -27,12 +27,12 @@ class One2MBeanRelationship extends One2MRelationship
      *
      * @return boolean true if successful
      */
-    public function add($lhs, $rhs, $additionalFields = array())
+    public function add($lhs, $rhs, $additionalFields = [])
     {
         // test to see if the relationship exist if the relationship between the two beans
         // exist then we just fail out with false as we don't want to re-trigger this
         // the save and such as it causes problems with the related() in sugarlogic
-        if ($this->relationship_exists($lhs,$rhs) && $lhs->inOperation('saving_related')) {
+        if ($this->relationship_exists($lhs, $rhs) && $lhs->inOperation('saving_related')) {
             return false;
         }
 
@@ -44,7 +44,7 @@ class One2MBeanRelationship extends One2MRelationship
         if ($rhs->load_relationship($rhsLinkName)) {
             $oldLink = $rhs->$rhsLinkName;
             $prevRelated = $oldLink->getBeans(null);
-            foreach($prevRelated as $oldLHS) {
+            foreach ($prevRelated as $oldLHS) {
                 if ($oldLHS->id != $lhs->id) {
                     $this->remove($oldLHS, $rhs, false);
                 }
@@ -52,21 +52,21 @@ class One2MBeanRelationship extends One2MRelationship
         }
         //Make sure we load the current relationship state to the LHS link
         if ((isset($lhs->$lhsLinkName) && is_a(
-                    $lhs->$lhsLinkName,
-                    "Link2"
-                )) || $lhs->load_relationship($lhsLinkName)
+            $lhs->$lhsLinkName,
+            'Link2'
+        )) || $lhs->load_relationship($lhsLinkName)
         ) {
             $lhs->$lhsLinkName->load();
         }
 
-        if (empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != "Yes") {
+        if (empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != 'Yes') {
             $this->callBeforeAdd($lhs, $rhs, $lhsLinkName);
             $this->callBeforeAdd($rhs, $lhs, $rhsLinkName);
         }
 
         $this->updateFields($lhs, $rhs, $additionalFields);
 
-        if (empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != "Yes") {
+        if (empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != 'Yes') {
             //Need to call save to update the bean as the relationship is saved on the main table
             //We don't want to create a save loop though, so make sure we aren't already in the middle of saving this bean
             SugarRelationship::addToResaveList($rhs);
@@ -128,7 +128,7 @@ class One2MBeanRelationship extends One2MRelationship
 
         $rhs->$rhsID = null;
 
-        if (empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != "Yes") {
+        if (empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != 'Yes') {
             $this->callBeforeDelete($lhs, $rhs, $this->getLHSLink());
             $this->callBeforeDelete($rhs, $lhs, $this->getRHSLink());
         }
@@ -143,8 +143,8 @@ class One2MBeanRelationship extends One2MRelationship
             $rhs->db->updateParams(
                 $rhs->getTableName(),
                 $rhs->getFieldDefinitions(),
-                array($rhsID => $nullValue),
-                array('id' => $rhs->id)
+                [$rhsID => $nullValue],
+                ['id' => $rhs->id]
             );
         }
 
@@ -152,7 +152,7 @@ class One2MBeanRelationship extends One2MRelationship
         if ($lhs->load_relationship($link)) {
             $lhs->$link->resetLoaded();
         }
-        if (empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != "Yes") {
+        if (empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != 'Yes') {
             $this->callAfterDelete($lhs, $rhs, $this->getLHSLink());
             $this->callAfterDelete($rhs, $lhs, $this->getRHSLink());
         }
@@ -165,9 +165,9 @@ class One2MBeanRelationship extends One2MRelationship
      *
      * @return void
      */
-    public function load($link, $params = array())
+    public function load($link, $params = [])
     {
-        $rows = array();
+        $rows = [];
         //The related bean ID is stored on the RHS table.
         //If the link is RHS, just grab it from the focus.
         if ($link->getSide() == REL_RHS) {
@@ -175,30 +175,30 @@ class One2MBeanRelationship extends One2MRelationship
             if (isset($link->getFocus()->$rhsID)) {
                 $id = $link->getFocus()->$rhsID;
                 if (!empty($id)) {
-                    $rows[$id] = array('id' => $id);
+                    $rows[$id] = ['id' => $id];
                 }
             }
         } elseif ($link->getSide() == REL_LHS) {
             //If the link is LHS, we need to query to get the full list and load all the beans.
             $result = $this->getSugarQuery($link, $params)->execute();
-            $rows = array();
+            $rows = [];
             foreach ($result as $row) {
                 $id = $row['id'];
                 $rows[$id] = $row;
             }
         }
 
-        return array("rows" => $rows);
+        return ['rows' => $rows];
     }
 
     /**
      * @inheritdoc
      */
-    public function getQuery($link, $params = array())
+    public function getQuery($link, $params = [])
     {
         //There was an old signature with $return_as_array as the second parameter. We should respect this if $params is true
         if ($params === true) {
-            $params = array("return_as_array" => true);
+            $params = ['return_as_array' => true];
         }
 
         if ($link->getSide() != REL_LHS) {
@@ -208,7 +208,7 @@ class One2MBeanRelationship extends One2MRelationship
                 if (!empty($link->getFocus()->$rhsIDName)) {
                     $db = DBManagerFactory::getInstance();
                     $id = $db->quoted($link->getFocus()->$rhsIDName);
-                    return "SELECT $id id ". $db->getFromDummyTable();
+                    return "SELECT $id id " . $db->getFromDummyTable();
                 }
             }
             return false;
@@ -216,18 +216,28 @@ class One2MBeanRelationship extends One2MRelationship
             $lhsKey = $this->def['lhs_key'];
             $rhsTable = $this->def['rhs_table'];
             $rhsTableKey = "{$rhsTable}.{$this->def['rhs_key']}";
+            $additionalKey = $this->getAdditionalKey($link);
             $deleted = !empty($params['deleted']) ? 1 : 0;
             $db = DBManagerFactory::getInstance();
-            $where = sprintf(
-                "WHERE $rhsTableKey = %s AND {$rhsTable}.deleted=%s",
-                $db->quoted($link->getFocus()->$lhsKey),
-                $deleted
-            );
-
+            if (!empty($additionalKey)) {
+                $additionalLHSKey = $additionalKey['lhs_key'];
+                $where = sprintf(
+                    "WHERE ($rhsTableKey = %s OR $rhsTable.{$additionalKey['rhs_key']} = %s) AND {$rhsTable}.deleted=%s",
+                    $db->quoted($link->getFocus()->$lhsKey),
+                    $db->quoted($link->getFocus()->$additionalLHSKey),
+                    $deleted
+                );
+            } else {
+                $where = sprintf(
+                    "WHERE $rhsTableKey = %s AND {$rhsTable}.deleted=%s",
+                    $db->quoted($link->getFocus()->$lhsKey),
+                    $deleted
+                );
+            }
             //Check for role column
             foreach ($this->getRelationshipRoleColumns() as $column => $value) {
                 if (!empty($value)) {
-                    $where .= " AND $rhsTable.$column = ".$db->quoted($value);
+                    $where .= " AND $rhsTable.$column = " . $db->quoted($value);
                 }
             }
 
@@ -235,8 +245,8 @@ class One2MBeanRelationship extends One2MRelationship
             if (!empty($params['where'])) {
                 $relatedSeed = BeanFactory::getDefinition($this->getRHSModule());
                 $add_where = is_string($params['where']) ?
-                             $params['where'] :
-                             $this->getOptionalWhereClause($params['where'], $rhsTable, $relatedSeed);
+                    $params['where'] :
+                    $this->getOptionalWhereClause($params['where'], $rhsTable, $relatedSeed);
 
                 if (!empty($add_where)) {
                     $where .= " AND $add_where";
@@ -257,7 +267,7 @@ class One2MBeanRelationship extends One2MRelationship
 
             if (empty($params['return_as_array'])) {
                 //Limit is not compatible with return_as_array
-                $orderby = !empty($params['orderby']) ? "ORDER BY $rhsTable.{$params['orderby']}" : "";
+                $orderby = !empty($params['orderby']) ? "ORDER BY $rhsTable.{$params['orderby']}" : '';
                 $query = "SELECT {$this->def['rhs_table']}.id FROM $from $where $orderby";
                 if (!empty($params['limit']) && $params['limit'] > 0) {
                     $offset = $params['offset'] ?? 0;
@@ -266,25 +276,35 @@ class One2MBeanRelationship extends One2MRelationship
                         $offset,
                         $params['limit'],
                         false,
-                        "",
+                        '',
                         false
                     );
                 }
                 return $query;
             } else {
-                return array(
+                return [
                     'select' => "SELECT {$this->def['rhs_table']}.id",
                     'from' => "FROM {$this->def['rhs_table']}",
                     'where' => $where,
-                );
+                ];
             }
         }
     }
 
     /**
+     * This function is used by ContactNotesRelationship to customize join condition.
+     * @param Link2 $link
+     * @return array
+     */
+    protected function getAdditionalKey($link)
+    {
+        return [];
+    }
+
+    /**
      * {@inheritDoc}
      */
-    protected function getSugarQuery(Link2 $link, array $params = array())
+    protected function getSugarQuery(Link2 $link, array $params = [])
     {
         if ($link->getSide() != REL_LHS) {
             throw new \Exception('Wrong side of the link, we shouldn\'t query DB for this case');
@@ -292,6 +312,7 @@ class One2MBeanRelationship extends One2MRelationship
         $lhsKey = $this->def['lhs_key'];
         $rhsTable = $this->def['rhs_table'];
         $rhsTableKey = "{$rhsTable}.{$this->def['rhs_key']}";
+        $additionalKey = $this->getAdditionalKey($link);
         $deleted = !empty($params['deleted']) ? 1 : 0;
         $relatedSeed = BeanFactory::getDefinition($this->getRHSModule());
 
@@ -302,12 +323,19 @@ class One2MBeanRelationship extends One2MRelationship
         $query = new SugarQuery();
         $query->from(
             $relatedSeed,
-            array('team_security' => !empty($params['enforce_teams']), 'add_deleted' => false)
+            ['team_security' => !empty($params['enforce_teams']), 'add_deleted' => false]
         );
         $query->select('id');
-        $query->where()->equals($rhsTableKey, $link->getFocus()->$lhsKey)
-            ->equals("$rhsTable.deleted", $deleted);
-
+        if (!empty($additionalKey)) {
+            $additionalLHSKey = $additionalKey['lhs_key'];
+            $query->where()->queryOr()
+                ->equals($rhsTableKey, $link->getFocus()->$lhsKey)
+                ->equals("{$rhsTable}.{$additionalKey['rhs_key']}", $link->getFocus()->$additionalLHSKey);
+            $query->where()->equals("$rhsTable.deleted", $deleted);
+        } else {
+            $query->where()->equals($rhsTableKey, $link->getFocus()->$lhsKey)
+                ->equals("$rhsTable.deleted", $deleted);
+        }
         //Check for role column
         foreach ($this->getRelationshipRoleColumns() as $column => $value) {
             if (!empty($value)) {
@@ -339,7 +367,7 @@ class One2MBeanRelationship extends One2MRelationship
         return $query;
     }
 
-    public function getJoin($link, $params = array(), $return_array = false)
+    public function getJoin($link, $params = [], $return_array = false)
     {
         $linkIsLHS = $link->getSide() == REL_LHS;
         $startingTable = (empty($params['left_join_table_alias']) ? $this->def['lhs_table'] : $params['left_join_table_alias']);
@@ -350,31 +378,39 @@ class One2MBeanRelationship extends One2MRelationship
         $targetTable = $linkIsLHS ? $this->def['rhs_table'] : $this->def['lhs_table'];
         $targetTableWithAlias = $targetTable;
         $targetKey = $linkIsLHS ? $this->def['rhs_key'] : $this->def['lhs_key'];
+        $additionalKey = $this->getAdditionalKey($link);
         $join_type = $params['join_type'] ?? ' INNER JOIN ';
         $join = '';
 
         //Set up any table aliases required
         if (!empty($params['join_table_alias'])) {
-            $targetTableWithAlias = $targetTable . " " . $params['join_table_alias'];
+            $targetTableWithAlias = $targetTable . ' ' . $params['join_table_alias'];
             $targetTable = $params['join_table_alias'];
         }
 
+        $on = "$startingTable.$startingKey=$targetTable.$targetKey";
+        if (!empty($additionalKey)) {
+            $additionalStartingKey = $linkIsLHS ? $additionalKey['lhs_key'] : $additionalKey['rhs_key'];
+            $additionalTargetKey = $linkIsLHS ? $additionalKey['rhs_key'] : $additionalKey['lhs_key'];
+            $on = "($on OR $startingTable.$additionalStartingKey=$targetTable.$additionalTargetKey)";
+        }
+
         //First join the relationship table
-        $join .= "$join_type $targetTableWithAlias ON $startingTable.$startingKey=$targetTable.$targetKey AND $targetTable.deleted=0\n"
+        $join .= "$join_type $targetTableWithAlias ON {$on} AND $targetTable.deleted=0\n"
             //Next add any role filters
             . $this->getRoleWhere(
                 ($linkIsLHS) ? $targetTable : $startingTable
             ) . "\n";
 
         if ($return_array) {
-            return array(
+            return [
                 'join' => $join,
                 'type' => $this->type,
                 'rel_key' => $targetKey,
-                'join_tables' => array($targetTable),
-                'where' => "",
+                'join_tables' => [$targetTable],
+                'where' => '',
                 'select' => "$targetTable.id",
-            );
+            ];
         }
         return $join;
     }
@@ -406,24 +442,40 @@ class One2MBeanRelationship extends One2MRelationship
         $targetModule = $linkIsLHS ? $this->def['rhs_module'] : $this->def['lhs_module'];
 
         $targetKey = $linkIsLHS ? $this->def['rhs_key'] : $this->def['lhs_key'];
+        $additionalKey = $this->getAdditionalKey($link);
         $join_type = $options['joinType'] ?? 'INNER';
 
-        $joinParams = array(
+        $joinParams = [
             'joinType' => $join_type,
             'bean' => BeanFactory::getDefinition($targetModule),
-        );
+        ];
         $jta = $targetTable;
         if (!empty($options['joinTableAlias'])) {
             $jta = $joinParams['alias'] = $options['joinTableAlias'];
         }
 
         $joinTable = $sugar_query->joinTable($targetTable, $joinParams);
-        $joinTable->on()->equalsField(
-            "{$startingTable}.{$startingKey}",
-            "{$jta}.{$targetKey}")
-            ->equals("{$jta}.deleted", "0");
-
-        $relTable =  $linkIsLHS ? $jta : $startingTable;
+        if (!empty($additionalKey)) {
+            $additionalStartingKey = $linkIsLHS ? $additionalKey['lhs_key'] : $additionalKey['rhs_key'];
+            $additionalTargetKey = $linkIsLHS ? $additionalKey['rhs_key'] : $additionalKey['lhs_key'];
+            $joinTable->on()->queryOr()
+                ->equalsField(
+                    "{$startingTable}.{$startingKey}",
+                    "{$jta}.{$targetKey}"
+                )
+                ->equalsField(
+                    "{$startingTable}.{$additionalStartingKey}",
+                    "{$jta}.{$additionalTargetKey}"
+                );
+            $joinTable->on()->equals("{$jta}.deleted", '0');
+        } else {
+            $joinTable->on()->equalsField(
+                "{$startingTable}.{$startingKey}",
+                "{$jta}.{$targetKey}"
+            )
+                ->equals("{$jta}.deleted", '0');
+        }
+        $relTable = $linkIsLHS ? $jta : $startingTable;
 
         if (empty($options['ignoreRole'])) {
             foreach ($this->getRelationshipRoleColumns() as $column => $value) {
@@ -439,9 +491,10 @@ class One2MBeanRelationship extends One2MRelationship
 
     public function getSubpanelQuery(
         $link,
-        $params = array(),
+        $params = [],
         $return_array = false
     ) {
+
 
         $linkIsLHS = $link->getSide() == REL_RHS;
         $startingTable = (empty($params['left_join_table_alias']) ? $this->def['lhs_table'] : $params['left_join_table_alias']);
@@ -451,33 +504,33 @@ class One2MBeanRelationship extends One2MRelationship
         $startingKey = $linkIsLHS ? $this->def['lhs_key'] : $this->def['rhs_key'];
         $targetTable = $linkIsLHS ? $this->def['rhs_table'] : $this->def['lhs_table'];
         $targetKey = $linkIsLHS ? $this->def['rhs_key'] : $this->def['lhs_key'];
+        $additionalKey = $this->getAdditionalKey($link);
         $join_type = $params['join_type'] ?? ' INNER JOIN ';
         $query = '';
 
         $alias = empty($params['join_table_alias']) ? "{$link->name}_rel" : $params['join_table_alias'];
         $alias = $GLOBALS['db']->getValidDBName($alias, false, 'alias');
 
-        $tableInRoleFilter = "";
-        if (
-            (
-                $startingTable == "meetings"
-                || $startingTable == "notes"
-                || $startingTable == "tasks"
-                || $startingTable == "calls"
-                || $startingTable == "emails"
-            )
+        $tableInRoleFilter = '';
+        if ((
+            $startingTable == 'meetings'
+                || $startingTable == 'notes'
+                || $startingTable == 'tasks'
+                || $startingTable == 'calls'
+                || $startingTable == 'emails'
+        )
             &&
             (
-                $targetTable == "meetings"
-                || $targetTable == "notes"
-                || $targetTable == "tasks"
-                || $targetTable == "calls"
+                $targetTable == 'meetings'
+                || $targetTable == 'notes'
+                || $targetTable == 'tasks'
+                || $targetTable == 'calls'
             )
             && substr(
                 $alias,
                 0,
                 12 + strlen($targetTable)
-            ) == $targetTable . "_activities_"
+            ) == $targetTable . '_activities_'
         ) {
             $tableInRoleFilter = $linkIsLHS ? $alias : $startingTable;
         }
@@ -485,8 +538,13 @@ class One2MBeanRelationship extends One2MRelationship
         //Set up any table aliases required
         $targetTableWithAlias = "$targetTable $alias";
         $targetTable = $alias;
-
-        $query .= "$join_type $targetTableWithAlias ON ($startingTable.$startingKey=$targetTable.$targetKey AND $targetTable.deleted=0)\n"
+        $on = "$startingTable.$startingKey=$targetTable.$targetKey";
+        if (!empty($additionalKey)) {
+            $additionalStartingKey = $linkIsLHS ? $additionalKey['lhs_key'] : $additionalKey['rhs_key'];
+            $additionalTargetKey = $linkIsLHS ? $additionalKey['rhs_key'] : $additionalKey['lhs_key'];
+            $on = "($on OR $startingTable.$additionalStartingKey=$targetTable.$additionalTargetKey)";
+        }
+        $query .= "$join_type $targetTableWithAlias ON ($on AND $targetTable.deleted=0)\n"
             //Next add any role filters
             . $this->getRoleWhere($tableInRoleFilter) . "\n";
 
@@ -499,17 +557,16 @@ class One2MBeanRelationship extends One2MRelationship
         }
 
         if ($return_array) {
-            return array(
+            return [
                 'join' => $query,
                 'type' => $this->type,
                 'rel_key' => $targetKey,
-                'join_tables' => array($targetTable),
+                'join_tables' => [$targetTable],
                 'where' => "WHERE $startingTable.$startingKey='{$link->focus->id}'",
-                'select' => " ",
-            );
+                'select' => ' ',
+            ];
         }
         return $query;
-
     }
 
     /**
@@ -517,9 +574,9 @@ class One2MBeanRelationship extends One2MRelationship
      *
      * If it does return true otherwise return false
      *
-     * @param SugarBean $lhs        Left hand side of the relationship
-     * @param SugarBean $rhs        Right hand side of the relationship
-     * @param bool      $return_row Ignored
+     * @param SugarBean $lhs Left hand side of the relationship
+     * @param SugarBean $rhs Right hand side of the relationship
+     * @param bool $return_row Ignored
      *
      * @return boolean
      */

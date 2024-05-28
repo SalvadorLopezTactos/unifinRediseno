@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Aktive',
     'LBL_ASSIGNEE_RULE' => 'Rregulli i caktimit',
     'LBL_TARGET_ASSIGNEE' => 'I caktuari i synuar',
+    'LBL_STAGE_NUMBERS' => 'Numërimi i fazave',
     'LBL_EXPORT_BUTTON_LABEL' => 'Eksporto',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Importo',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Krijo/përditëso automatikisht një regjistrim të ri të shabllonit të udhëzuesit inteligjent duke importuar një skedar *.json nga sistemi yt i skedarëve.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Nëse zgjidhet "Nëse i caktuari i synuar = i caktuari prind", kur ndryshohet përdoruesi i "Caktuar te" te një prind, përdoruesit e "Caktuar te" do të ndryshojnë automatikisht tek udhëzuesti inteligjentë, fazat dhe aktivitetet. Ki parasysh se parametrat e të caktuarit të synuar te shabllonet e aktivitetit kanë përparësi mbi shabllonin e udhëzuesit inteligjent',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Kur duhet të caktohet një përdorues tek "Aktivitetet"',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Kujt duhet t&#39;i caktohen aktivitetet',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Ky çelës të lejon të shfaqësh ose të fshehësh numërimin automatik të fazave.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Shablloni i aktivitetit/fazës së udhëzuesi inteligjent',
 ];

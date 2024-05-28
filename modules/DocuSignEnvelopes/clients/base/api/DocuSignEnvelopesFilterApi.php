@@ -41,9 +41,9 @@ class DocuSignEnvelopesFilterApi extends FilterApi
     {
         if (isset($args['layout'])) {
             $recordModule = $args['recordModule'] ?? '';
-            
+
             [$args, $q, $options, $seed] = parent::filterListSetup($api, $args, $acl);
-            
+
             if (isset($options['id_query'])) {
                 $query = $options['id_query'];
             } else {

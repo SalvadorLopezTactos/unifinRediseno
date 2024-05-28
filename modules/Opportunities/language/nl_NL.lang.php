@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Dashboard opportunitylijst',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Dashboard opportunityrecord',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Offertes',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Opportunity&#39;s op een dynamisch account',
+    'LBL_TOP_10_OPP' => 'Top 10 open opps',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Dashlet: Mijn actieve mogelijkheden',
+    'LBL_MY_ACTIVE_OPP' => 'Mijn actieve opps',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Totaal in de pijplijn is',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Opportunity Rol',
+    'LBL_OPPORTUNITY_ROLE' => 'Opportunity Rol',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notities',
     'LBL_TAB_OPPORTUNITY' => 'Beoordeling {{module}}',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'Door op Bevestigen te klikken wist u ALLE Voorspellingen en wijzigt u uw Mogelijkhedenweergave. Als dit niet is wat u wilde klikt u op Annuleren om terug te keren naar de eerdere instellingen.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'Door op Bevestigen te klikken, wist u ALLE voorspellingen en wijzigt u uw Opportunities weergave.'
-        .'Ook ALLE procesdefinities met een doelmodule of omzetregels worden uitgeschakeld.'
-        .'Als dit niet uw bedoeling is, klikt u op annuleren om terug te keren naar de vorige instellingen.',
+        . 'Ook ALLE procesdefinities met een doelmodule of omzetregels worden uitgeschakeld.'
+        . 'Als dit niet uw bedoeling is, klikt u op annuleren om terug te keren naar de vorige instellingen.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Wanneer alle Revenue Line Items gesloten zijn en tenminste één is Gewonnen,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'dan zal de Opportunity Verkoopstadium op "Gewonnen" worden gezet.',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Wanneer alle Revenue Line Items het Verkoopstadium &#39;Verloren&#39; hebben,',
@@ -220,25 +223,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Nadat u deze wijziging heeft doorgevoerd zullen de records van het onderdeel Omzetregel op de achtergrond worden aangemaakt voor elke huidige {{module_name}}. Zodra de onderdelen van de Omzetregel voltooid en beschikbaar zijn zal een bericht naar het e-mailadres van uw gebruikersprofiel worden gestuurd. Houd er rekening mee dat uw exemplaar zo moet zijn geconfigureerd dat er een e-mail wordt gestuurd. Dit kunt u doen via Beheer > E-mailinstellingen om het bericht te verzenden.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Met de {{plural_module_name}}-module kunt u de individuele verkoop van begin tot eind volgen. Elke {{module_name}}-record vertegenwoordigt een potentiële verkoop en bevat zowel relevante verkoopgegevens als gegevens die betrekking hebben op andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc. Een {{module_name}} doorloopt meestal verschillende verkoopfasen totdat deze gemarkeerd wordt als &#39;Afgesloten, gewonnen&#39; of &#39;Afgesloten, verloren&#39;. {{plural_module_name}} kan verder benut worden door de {{forecasts_singular_module}}-module van Sugar te gebruiken om verkooptrends te begrijpen en te voorspellen en om het werk zo in te richten dat verkoopquota&#39;s gehaald worden.',
+    'LBL_HELP_RECORDS' => 'De {{plural_module_name}} Met de module kunt u individuele verkopen van begin tot eind volgen. Elk {{module_name}}-record vertegenwoordigt een potentiële verkoop en bevat relevante verkoopgegevens en met betrekking tot andere belangrijke records, zoals {{quotes_module}}, {{contacts_module}}etc. Een {{module_name}} doorloopt doorgaans verschillende verkoopfasen totdat het is gemarkeerd als "Gesloten gewonnen" of "Gesloten verloren". {{plural_module_name}} kan nog verder worden benut door gebruik te maken van de {{forecasts_singular_module}}-module van Sugar om verkooptrends te begrijpen en te voorspellen en om het werk te richten op het bereiken van verkoopquota.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Met de {{plural_module_name}}-module kunt u van begin tot eind de individuele verkoop volgen en de regelitems die bij elke verkoop horen. Elk {{module_name}}-record vertegenwoordigt een mogelijke verkoop en bevat zowel relevante verkoopgegevens als gegevens die betrekking hebben op andere belangrijke records, zoals {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'Met de {{plural_module_name}}-module kunt u van begin tot eind de individuele verkoop volgen en de regelitems die bij elke verkoop horen. Elke {{module_name}}-record vertegenwoordigt een mogelijke verkoop en bevat zowel relevante verkoopgegevens als gegevens die betrekking hebben op andere belangrijke records, zoals {{quotes_module}}, {{contacts_module}}, etc.
 
 - Bewerk de velden van deze record door op een individueel veld te klikken of op de knop Bewerken.
-- Bekijk of wijzig links naar andere records in de subpanelen door het paneel linksonder op &#39;Gegevensoverzicht&#39; te zetten.
-- Maak en bekijk opmerkingen van gebruikers en de veranderingsgeschiedenis van records in de {{activitystream_singular_module}} door het paneel linksonder op &#39;Activity Stream&#39; te zetten.
-- Volg deze record of maak er een favoriet van via de iconen aan de rechterkant van de recordnaam.
-- Meer handelingen zijn beschikbaar via het dropdown actiemenu aan de rechterkant van de knop Bewerken.',
+- Bekijk of wijzig links naar andere records in de subpanelen door het paneel linksonder op Gegevensoverzicht te zetten.
+- Maak en bekijk gebruikersreacties en de wijzigingsgeschiedenis van records in de {{activitystream_singular_module}} door het paneel linksonder op Activity Stream te zetten.
+- Volg deze record of markeer dit als favoriet via de iconen aan de rechterkant van de recordnaam.
+- Meer acties zijn beschikbaar via het dropdown-actiemenu aan de rechterkant van de knop Bewerken.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'De {{plural_module_name}}-module wordt gebruikt om individuele verkoop en de regelitems die daartoe behoren van begin tot eind te volgen. Elke {{module_name}}-record vertegenwoordigt een potentiële verkoop en bevat zowel relevante verkoopgegevens als gegevens die betrekking hebben op andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'Met de {{plural_module_name}}-module kunt u van begin tot eind de individuele verkoop volgen en de regelitems die bij elke verkoop horen. Elke {{module_name}}-record vertegenwoordigt een potentiële verkoop en bevat zowel relevante verkoopgegevens als gegevens die betrekking hebben op andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc.
 
-Een {{module_name}} aanmaken:
+Een {{module_name}} maken:
 1. Voer de gewenste gegevens in.
- - Velden die &#39;verplicht&#39; zijn, moeten ingevuld zijn voordat de record opgeslagen wordt.
- - Klik op &#39;Meer tonen&#39; om zonodig extra velden te tonen.
-2. Klik op &#39;Opslaan&#39; om de nieuwe record op te slaan en terug te keren naar de vorige pagina.',
+ - Velden die verplicht zijn, moeten ingevuld zijn voordat de record opgeslagen wordt.
+ - Klik op Meer tonen om zo nodig extra velden te tonen.
+2. Klik op Opslaan om de nieuwe record op te slaan en terug te keren naar de vorige pagina.',
 
 // END ENT/ULT
 
@@ -260,4 +263,9 @@ Een {{module_name}} aanmaken:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Voorspelling sluiting opportunity',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Voorspellingsgegevens bekijken voor een specifieke opportunity',
-);
+    'LBL_AI_WINRATE' => 'Winstpercentage',
+    'LBL_AI_WONOPP' => 'Gewonnen opportunity&#39;s',
+    'LBL_AI_CLOSINGTIME' => 'Sluitingstijd',
+    'LBL_AI_CLOSEDOPP' => 'Gesloten opportunities',
+    'LBL_AI_LEADTIMESPAN' => 'Tijd tussen het maken van de opportunity en gesloten gewonnen',
+];

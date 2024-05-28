@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_SALUTATION' => 'Hilsen',
     'LBL_NAME' => 'Navn',
     'LBL_FIRST_NAME' => 'Fornavn',
@@ -68,4 +68,4 @@ $mod_strings = array(
     'LBL_GOOGLEPLUS' => 'Google Plus-ID',
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiér den alternative adressen til hovedadressen',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiér hovedadressen til den alternative adressen',
-);
+];

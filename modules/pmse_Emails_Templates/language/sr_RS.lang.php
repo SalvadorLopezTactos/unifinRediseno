@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Tekst',
     'LBL_BASE_MODULE' => 'Ciljani modul',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Neuspešno kreiranje Procesnog Email Šablona iz fajla',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Ovaj e-mail šablon se trenutno koristi u Procesnoj definiciji. Da li ipak želite da izmenite ovaj e-mail šablon?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Ne možete da obrišete ovaj e-mail šablon jer se trenutno koristi u Procesnoj definiciji.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Ne možete da obrišete ovaj e-mail šablon jer se trenutno koristi u Procesnoj definiciji.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Birač za polja',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Izaberi',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Tip vrednosti polja',
-);
+];

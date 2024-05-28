@@ -19,7 +19,7 @@ class Quote extends SugarBean
      *
      * @var array
      */
-    public $closed_statuses = array('Closed Accepted', 'Closed Dead', 'Closed Lost');
+    public $closed_statuses = ['Closed Accepted', 'Closed Dead', 'Closed Lost'];
 
     // Stored fields
     public $id;
@@ -95,22 +95,22 @@ class Quote extends SugarBean
 
     public $order_stage;
 
-    public $table_name = "quotes";
-    public $rel_account_table = "quotes_accounts";
-    public $rel_contact_table = "quotes_contacts";
-    public $rel_opportunity_table = "quotes_opportunities";
-    public $contact_table = "contacts";
-    public $account_table = "accounts";
-    public $user_table = "users";
-    public $opportunity_table = "opportunities";
-    public $taxrate_table = "taxrates";
+    public $table_name = 'quotes';
+    public $rel_account_table = 'quotes_accounts';
+    public $rel_contact_table = 'quotes_contacts';
+    public $rel_opportunity_table = 'quotes_opportunities';
+    public $contact_table = 'contacts';
+    public $account_table = 'accounts';
+    public $user_table = 'users';
+    public $opportunity_table = 'opportunities';
+    public $taxrate_table = 'taxrates';
     public $module_dir = 'Quotes';
     public $rel_product_bundles = 'product_bundle_quote';
 
-    public $object_name = "Quote";
+    public $object_name = 'Quote';
 
     // This is used to retrieve related fields from form posts.
-    public $additional_column_fields = array(
+    public $additional_column_fields = [
         'taxrate_name',
         'taxrate_value',
         'taxrate_id',
@@ -128,10 +128,10 @@ class Quote extends SugarBean
         'billing_contact_id',
         'billing_account_id',
         'shipper_id',
-        'shipper_name'
-    );
+        'shipper_name',
+    ];
 
-    public $relationship_fields = array(
+    public $relationship_fields = [
         'shipping_account_id' => 'shipping_accounts',
         'billing_account_id' => 'billing_accounts',
         'shipping_contact_id' => 'shipping_contacts',
@@ -147,7 +147,7 @@ class Quote extends SugarBean
         'contact_id' => 'contacts',
         'member_id' => 'members',
         'quote_id' => 'quotes',
-    );
+    ];
     public $new_schema = true;
 
 
@@ -209,11 +209,11 @@ class Quote extends SugarBean
     {
         global $locale;
 
-        $query = "SELECT con.salutation, con.first_name, con.last_name, con.assigned_user_id contact_name_owner, ";
+        $query = 'SELECT con.salutation, con.first_name, con.last_name, con.assigned_user_id contact_name_owner, ';
         $query .= "con.id, c_q.contact_role from $this->contact_table  con, $this->rel_contact_table  c_q ";
-        $query .= "where con.id = c_q.contact_id and c_q.quote_id = ? and c_q.deleted=0 and con.deleted=0";
+        $query .= 'where con.id = c_q.contact_id and c_q.quote_id = ? and c_q.deleted=0 and con.deleted=0';
         $conn = $this->db->getConnection();
-        $stmt = $conn->executeQuery($query, array($this->id));
+        $stmt = $conn->executeQuery($query, [$this->id]);
 
         // Get the id and the name.
         $this->shipping_contact_name = '';
@@ -245,11 +245,11 @@ class Quote extends SugarBean
 
     public function set_account()
     {
-        $query = "SELECT acc.name, acc.id,acc.assigned_user_id account_name_owner, a_o.account_role ";
+        $query = 'SELECT acc.name, acc.id,acc.assigned_user_id account_name_owner, a_o.account_role ';
         $query .= "from $this->account_table  acc, $this->rel_account_table  a_o ";
-        $query .= "where acc.id = a_o.account_id and a_o.quote_id = ? and a_o.deleted=0 and acc.deleted=0";
+        $query .= 'where acc.id = a_o.account_id and a_o.quote_id = ? and a_o.deleted=0 and acc.deleted=0';
         $conn = $this->db->getConnection();
-        $stmt = $conn->executeQuery($query, array($this->id));
+        $stmt = $conn->executeQuery($query, [$this->id]);
 
         // Get the id and the name.
         $this->shipping_account_name = '';
@@ -286,11 +286,11 @@ class Quote extends SugarBean
 
     public function set_taxrate_info()
     {
-        $query = "SELECT tr.id, tr.name, tr.value ";
+        $query = 'SELECT tr.id, tr.name, tr.value ';
         $query .= "from $this->taxrate_table  tr, $this->table_name  q ";
         $query .= "where tr.id = q.taxrate_id and q.id = ? and tr.deleted=0 and q.deleted=0 and tr.status = 'Active'";
         $conn = $this->db->getConnection();
-        $stmt = $conn->executeQuery($query, array($this->id));
+        $stmt = $conn->executeQuery($query, [$this->id]);
 
         // Get the id and the name.
         $row = $stmt->fetchAssociative();
@@ -314,9 +314,9 @@ class Quote extends SugarBean
     public function set_shipper()
     {
         $query = "SELECT s1.name from shippers s1, $this->table_name q1 ";
-        $query .= "where s1.id = q1.shipper_id and q1.id = ? and q1.deleted=0 and s1.deleted=0";
+        $query .= 'where s1.id = q1.shipper_id and q1.id = ? and q1.deleted=0 and s1.deleted=0';
         $conn = $this->db->getConnection();
-        $stmt = $conn->executeQuery($query, array($this->id));
+        $stmt = $conn->executeQuery($query, [$this->id]);
 
         // Get the id and the name.
         $row = $stmt->fetchAssociative();
@@ -336,11 +336,11 @@ class Quote extends SugarBean
     public function set_opportunity()
     {
         // First, get the list of IDs.
-        $query = "SELECT opp.id, opp.name, opp.assigned_user_id opportunity_name_owner ";
+        $query = 'SELECT opp.id, opp.name, opp.assigned_user_id opportunity_name_owner ';
         $query .= "from $this->opportunity_table  opp, $this->rel_opportunity_table  a_o ";
-        $query .= "where opp.id = a_o.opportunity_id and a_o.quote_id = ? and a_o.deleted=0 and opp.deleted=0";
+        $query .= 'where opp.id = a_o.opportunity_id and a_o.quote_id = ? and a_o.deleted=0 and opp.deleted=0';
         $conn = $this->db->getConnection();
-        $stmt = $conn->executeQuery($query, array($this->id));
+        $stmt = $conn->executeQuery($query, [$this->id]);
 
         // Get the id and the name.
         $row = $stmt->fetchAssociative();
@@ -364,14 +364,14 @@ class Quote extends SugarBean
      */
     public function build_generic_where_clause($the_query_string)
     {
-        $where_clauses = array();
+        $where_clauses = [];
         $the_query_string = $GLOBALS['db']->quoted($the_query_string);
-        array_push($where_clauses, "quotes.name like " . $this->db->quoted($the_query_string. "%"));
+        array_push($where_clauses, 'quotes.name like ' . $this->db->quoted($the_query_string . '%'));
 
-        $the_where = "";
+        $the_where = '';
         foreach ($where_clauses as $clause) {
-            if ($the_where != "") {
-                $the_where .= " or ";
+            if ($the_where != '') {
+                $the_where .= ' or ';
             }
             $the_where .= $clause;
         }
@@ -393,8 +393,8 @@ class Quote extends SugarBean
             $temp_array['TEAM_NAME'] = $this->team_name;
         }
 
-        $temp_array["ENCODED_NAME"] = $this->name;
-        $temp_array["QUOTE_NUM"] = format_number_display($this->quote_num);
+        $temp_array['ENCODED_NAME'] = $this->name;
+        $temp_array['QUOTE_NUM'] = format_number_display($this->quote_num);
         return $temp_array;
     }
 
@@ -409,15 +409,15 @@ class Quote extends SugarBean
             if (!empty($idequals)) {
                 $idequals .= ' OR ';
             }
-            $idequals .= " currency_id = " . $this->db->quoted($f);
+            $idequals .= ' currency_id = ' . $this->db->quoted($f);
         }
 
         if (!empty($idequals)) {
-            $query = "SELECT tax, total, subtotal,shipping, id FROM " . $this->table_name . "  WHERE (" . $idequals . ") AND deleted=0 ;";
+            $query = 'SELECT tax, total, subtotal,shipping, id FROM ' . $this->table_name . '  WHERE (' . $idequals . ') AND deleted=0 ;';
             $result = $this->db->query($query);
 
             while ($row = $this->db->fetchByAssoc($result)) {
-                $query = "update " . $this->table_name . " set currency_id = " . $this->db->quoted($currency->id) .
+                $query = 'update ' . $this->table_name . ' set currency_id = ' . $this->db->quoted($currency->id) .
                     ", tax_usdollar='" . $currency->convertToDollar(
                         $row['tax']
                     ) . "', subtotal_usdollar='" . $currency->convertToDollar(
@@ -426,7 +426,7 @@ class Quote extends SugarBean
                         $row['total']
                     ) . "', shipping_usdollar='" . $currency->convertToDollar(
                         $row['shipping']
-                    ) . "' where id=" . $this->db->quoted($row['id']) . ";";
+                    ) . "' where id=" . $this->db->quoted($row['id']) . ';';
                 $this->db->query($query);
             }
         }
@@ -484,10 +484,10 @@ class Quote extends SugarBean
 
     public function set_notification_body($xtpl, $quote)
     {
-        $xtpl->assign("QUOTE_SUBJECT", $quote->name);
-        $xtpl->assign("QUOTE_STATUS", $quote->quote_stage);
-        $xtpl->assign("QUOTE_CLOSEDATE", $quote->date_quote_expected_closed);
-        $xtpl->assign("QUOTE_DESCRIPTION", $quote->description);
+        $xtpl->assign('QUOTE_SUBJECT', $quote->name);
+        $xtpl->assign('QUOTE_STATUS', $quote->quote_stage);
+        $xtpl->assign('QUOTE_CLOSEDATE', $quote->date_quote_expected_closed);
+        $xtpl->assign('QUOTE_DESCRIPTION', $quote->description);
 
         return $xtpl;
     }
@@ -498,7 +498,7 @@ class Quote extends SugarBean
         $prodBundlesBean = BeanFactory::newBean('ProductBundles');
         $query->select('*');
         $query->from($prodBundlesBean);
-        $join = $query->joinSubpanel($this, 'product_bundles', array('joinType' => 'INNER'));
+        $join = $query->joinSubpanel($this, 'product_bundles', ['joinType' => 'INNER']);
         $query->orderBy($join->relationshipTableAlias . '.bundle_index', 'ASC');
 
         $prodBundles = $prodBundlesBean->fetchFromQuery($query);
@@ -601,7 +601,7 @@ class Quote extends SugarBean
         global $mod_strings;
         global $locale;
 
-        $filename = preg_replace("#[^A-Z0-9\-_\.]#i", "_", $this->shipping_account_name);
+        $filename = preg_replace("#[^A-Z0-9\-_\.]#i", '_', $this->shipping_account_name);
 
         if (!empty($this->quote_num)) {
             $filename .= "_{$this->quote_num}";
@@ -617,9 +617,9 @@ class Quote extends SugarBean
      */
     public function getRelatedOpportunities()
     {
-        $results = array();
-        $query = "select * from quotes_opportunities where quote_id = ? and deleted = 0";
-        $stmt = $this->db->getConnection()->executeQuery($query, array($this->id));
+        $results = [];
+        $query = 'select * from quotes_opportunities where quote_id = ? and deleted = 0';
+        $stmt = $this->db->getConnection()->executeQuery($query, [$this->id]);
         while ($row = $stmt->fetchAssociative()) {
             $results[] = $row;
         }
@@ -633,9 +633,9 @@ class Quote extends SugarBean
      */
     public function getRelatedOpportunityCount()
     {
-        $query = "select count(id) from quotes_opportunities where quote_id = ? and deleted = 0";
+        $query = 'select count(id) from quotes_opportunities where quote_id = ? and deleted = 0';
         $conn = $this->db->getConnection();
-        $count = $conn->executeQuery($query, array($this->id))->fetchOne();
+        $count = $conn->executeQuery($query, [$this->id])->fetchOne();
 
         return $count;
     }
@@ -647,7 +647,7 @@ class Quote extends SugarBean
      */
     public function isClosed()
     {
-        return in_array($this->quote_stage, $this->closed_statuses, true);
+        return safeInArray($this->quote_stage, $this->closed_statuses, true);
     }
 
     /**
@@ -658,8 +658,8 @@ class Quote extends SugarBean
     public function updateCurrencyBaseRate()
     {
         // if the quote_stage changed, we should still update it, unless it's a change from closed to closed
-        if(isset($this->fetched_row['quote_stage']) && $this->fetched_row['quote_stage'] != $this->quote_stage) {
-            return !(in_array($this->fetched_row['quote_stage'], $this->closed_statuses, true) && $this->isClosed());
+        if (isset($this->fetched_row['quote_stage']) && $this->fetched_row['quote_stage'] != $this->quote_stage) {
+            return !(safeInArray($this->fetched_row['quote_stage'], $this->closed_statuses, true) && $this->isClosed());
         }
 
         return !$this->isClosed();
@@ -674,7 +674,7 @@ class Quote extends SugarBean
     public static function getMobileSupportingModules()
     {
         $modules = parent::getMobileSupportingModules();
-        return array_merge($modules, array(
+        return array_merge($modules, [
             'Products',
             'Manufacturers',
             'ProductTypes',
@@ -685,6 +685,6 @@ class Quote extends SugarBean
             'Manufacturers',
             'TaxRates',
             'Shippers',
-        ));
+        ]);
     }
 }

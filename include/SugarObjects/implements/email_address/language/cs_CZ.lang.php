@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_ANY_EMAIL' => 'E-mail:',
     'LBL_EMAIL' => 'Emailová adresa:',
     'LBL_PRIMARY_EMAIL' => 'Primární e-mail',
@@ -18,7 +18,7 @@ $mod_strings = array (
     'LBL_OTHER_EMAIL_ADDRESS' => 'Další email:',
     'LBL_EMAIL_ADDRESS' => 'E-mailová adresa',
     'LBL_EMAIL_ADDRESSES' => 'E-mailová adresa(y)',
-    'LBL_INVALID_EMAIL'=>'Neplatný email:',
+    'LBL_INVALID_EMAIL' => 'Neplatný email:',
     'LBL_EMAIL_OPT_OUT' => 'Možno poslat email:',
     'LBL_EMAIL_NON_PRIMARY' => 'Ne-primární e-maily',
-);
+];

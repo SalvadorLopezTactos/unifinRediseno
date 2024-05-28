@@ -19,25 +19,24 @@ global $currentModule;
 global $gridline;
 
 
-echo getClassicModuleTitle('Customize Fields', array('Customize Fields'), false);
+echo getClassicModuleTitle('Customize Fields', ['Customize Fields'], false);
 
 ?>
 <table cellspacing="<?php echo $gridline; ?>" class="other view">
-<tr>
-<td>
-<form>
-Module Name:
-<select>
-<?php
-foreach($moduleList as $module)
-{
-   echo "<option>$module</option>";
-}
+    <tr>
+        <td>
+            <form>
+                Module Name:
+                <select>
+                    <?php
+                    foreach ($moduleList as $module) {
+                        echo "<option>$module</option>";
+                    }
 ?>
-</select>
-<input type="button" value="Edit" />
-</form>
-</td>
-</tr>
+                </select>
+                <input type="button" value="Edit"/>
+            </form>
+        </td>
+    </tr>
 </table>
 

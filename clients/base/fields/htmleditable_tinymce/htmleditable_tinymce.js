@@ -39,7 +39,7 @@
      * by tinyMCE and the tinyMCE jquery plugin to ensure we don't load from the
      * browser cache after a library upgrade.
      */
-    tinyMCEVersion: '6.2.0',
+    tinyMCEVersion: '6.4.2',
 
     /**
      * Render an editor for edit view or an iframe for others
@@ -122,6 +122,11 @@
         // Prepare content to show
         var sanitizedValue = this.sanitizeContent(value);
 
+        if (this.view.module === 'Reports') {
+            editable.html(sanitizedValue);
+            this.$el.html(editable);
+        }
+
         if (this._iframeHasBody(editable)) {
             // Only add the stylesheet that is sugar-specific while making sure not to add any duplicates
             editable.contents().find('link[rel="stylesheet"]').each(function() {
@@ -145,6 +150,13 @@
                     }));
                 });
             }
+
+            const body = editable.contents().find('body');
+            if (body && _.isFunction(body.addClass)) {
+                body.addClass(app.utils.isDarkMode() ? 'sugar-dark-theme' : 'sugar-light-theme')
+                    .addClass('iframe-content');
+            }
+
             var frame = _.find(editable, function(item) {
                 return item.tagName === 'IFRAME';
             });
@@ -238,7 +250,12 @@
             // General options
             theme: 'silver',
             skin: app.utils.isDarkMode() ? 'oxide-dark' : 'oxide',
-            content_css: app.utils.isDarkMode() ? 'dark' : 'default',
+            content_css: [
+                app.utils.isDarkMode() ? 'dark' : 'default',
+                'styleguide/assets/css/sugar-theme-variables.css',
+                'styleguide/assets/css/iframe-sugar.css',
+            ],
+            body_class: app.utils.isDarkMode() ? 'sugar-dark-theme' : 'sugar-light-theme',
             plugins: 'code,help,insertdatetime,table,charmap,' +
                 'image,link,anchor,directionality,searchreplace,lists',
             browser_spellcheck: true,
@@ -341,9 +358,13 @@
     destroyTinyMCEEditor: function() {
         // Clean up existing TinyMCE editor
         if(!_.isNull(this._htmleditor)){
+            // A known issue with Firefox and TinyMCE produces a NS_ERROR_UNEXPECTED Exception
             try {
-                // A known issue with Firefox and TinyMCE produces a NS_ERROR_UNEXPECTED Exception
-                this._saveEditor(true);
+                // Save Editor data only in case if Editor exists.
+                if (this._htmleditor.getBody()) {
+                    this._saveEditor(true);
+                }
+
                 this._htmleditor.remove();
                 this._htmleditor.destroy();
             } catch (e) {

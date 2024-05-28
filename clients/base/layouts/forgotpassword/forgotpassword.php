@@ -11,17 +11,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['forgotpassword'] = array(
-    'components' => array(
-        array(
-            'view' => "forgotpassword"
-        ),
-        array(
-            'view' => array(
+$viewdefs['base']['layout']['forgotpassword'] = [
+    'components' => [
+        [
+            'view' => 'forgotpassword',
+        ],
+        [
+            'view' => [
                 'name' => 'marketing-extras',
                 'css_class' => 'marketing-extras',
-            ),
-        ),
-    ),
-);
-
+            ],
+        ],
+    ],
+];

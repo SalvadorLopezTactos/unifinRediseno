@@ -12,10 +12,11 @@
 
 namespace Sugarcrm\Sugarcrm\Security\Teams;
 
-use function array_merge;
-use function array_values;
 use Team;
 use TeamSet as PersistentTeamSet;
+
+use function array_merge;
+use function array_values;
 
 final class TeamSet
 {
@@ -61,7 +62,7 @@ final class TeamSet
 
     public function persist()
     {
-        if (!count($this->teams)) {
+        if (!safeCount($this->teams)) {
             throw new \DomainException('Empty team set cannot be persisted');
         }
 

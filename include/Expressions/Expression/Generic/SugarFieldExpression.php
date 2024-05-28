@@ -22,7 +22,7 @@ class SugarFieldExpression extends GenericExpression
      */
     public $context;
 
-    function __construct($varName)
+    public function __construct($varName)
     {
         $this->varName = $varName;
     }
@@ -30,10 +30,10 @@ class SugarFieldExpression extends GenericExpression
     /**
      * Returns the entire enumeration bare.
      */
-    function evaluate()
+    public function evaluate()
     {
         if (empty($this->varName)) {
-            return "";
+            return '';
         }
         $fieldName = $this->varName;
 
@@ -122,7 +122,7 @@ class SugarFieldExpression extends GenericExpression
      */
     protected function getLinkField($linkName)
     {
-        if ((empty($this->context->$linkName) || !is_a($this->context->$linkName, "Link2"))
+        if ((empty($this->context->$linkName) || !is_a($this->context->$linkName, 'Link2'))
             && !$this->context->load_relationship($linkName)
         ) {
             throw new Exception("Unable to load relationship $linkName");
@@ -135,7 +135,7 @@ class SugarFieldExpression extends GenericExpression
     /**
      * Returns the JS Equivalent of the evaluate function.
      */
-    static function getJSEvaluate()
+    public static function getJSEvaluate()
     {
         return <<<EOQ
 		    var varName = this.getParameters().evaluate();
@@ -147,23 +147,23 @@ EOQ;
      * Returns the opreation name that this Expression should be
      * called by.
      */
-    static function getOperationName()
+    public static function getOperationName()
     {
-        return array("sugarField");
+        return ['sugarField'];
     }
 
     /**
      * The first parameter is a number and the second is the list.
      */
-    static function getParameterTypes()
+    public static function getParameterTypes()
     {
-        return array(AbstractExpression::$STRING_TYPE);
+        return [AbstractExpression::$STRING_TYPE];
     }
 
     /**
      * Returns the maximum number of parameters needed.
      */
-    static function getParamCount()
+    public static function getParamCount()
     {
         return 1;
     }
@@ -171,9 +171,7 @@ EOQ;
     /**
      * Returns the String representation of this Expression.
      */
-    function toString()
+    public function toString()
     {
     }
 }
-
-?>

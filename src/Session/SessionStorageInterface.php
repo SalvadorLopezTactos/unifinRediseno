@@ -12,8 +12,8 @@
 
 namespace Sugarcrm\Sugarcrm\Session;
 
-Interface SessionStorageInterface extends \ArrayAccess, \Serializable {
-
+interface SessionStorageInterface extends \ArrayAccess, \Serializable
+{
     /**
      * Get the current SessionStorage object.
      * @return static
@@ -59,5 +59,4 @@ Interface SessionStorageInterface extends \ArrayAccess, \Serializable {
      * @return null
      */
     public function unlock();
-
 }

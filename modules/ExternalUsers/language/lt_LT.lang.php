@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => 'Atvejai',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Galimybės',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Pasiūlymai',
-    'LBL_NOTES'=>'Pastabos',
+    'LBL_NOTES' => 'Pastabos',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => 'Išorinių vartotojų įrašų ataskaitų sritis',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Išorinio vartotojo laiko juosta',
 ];

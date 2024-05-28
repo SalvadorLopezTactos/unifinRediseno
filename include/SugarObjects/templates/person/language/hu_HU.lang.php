@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_SALUTATION' => 'Megszólítás',
     'LBL_NAME' => 'Név',
     'LBL_FIRST_NAME' => 'Keresztnév',
@@ -68,4 +68,4 @@ $mod_strings = array(
     'LBL_GOOGLEPLUS' => 'Google+ azonosító',
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Másodlagos cím másolása az elsődleges cím helyére',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Elsődleges cím másolása a másodlagos cím helyére',
-);
+];

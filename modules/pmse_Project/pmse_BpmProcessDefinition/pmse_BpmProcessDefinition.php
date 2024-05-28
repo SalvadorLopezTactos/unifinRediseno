@@ -15,13 +15,11 @@ use Doctrine\DBAL\Connection;
 /**
  * THIS CLASS IS FOR DEVELOPERS TO MAKE CUSTOMIZATIONS IN
  */
-
-
 class pmse_BpmProcessDefinition extends pmse_BpmProcessDefinition_sugar
 {
     /**
-    * @inheritDoc
-    */
+     * @inheritDoc
+     */
     public function ACLAccess($view, $context = null)
     {
         switch ($view) {

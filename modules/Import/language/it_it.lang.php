@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Lettura di importazione del file avvenuta con successo.',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Il record importato sta partecipando a un flusso e non può essere modificato perché alcuni campi sono bloccati per la modifica dal flusso.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Records saltato a causa di un errore',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Se l´utente non esiste utilizzare l´utente corrente',
     'LBL_SHOW_HIDDEN' => 'Mostra i campi che non sono normalmente importabili',
     'LBL_UPDATE_RECORDS' => 'Aggiornare record esistenti invece di importarli (No annullare)',
-    'LBL_TEST'=> 'Test d´Importazione (non salvare o modificare dati)',
+    'LBL_TEST' => 'Test d´Importazione (non salvare o modificare dati)',
     'LBL_TRUNCATE_TABLE' => 'Tabella vuoti prima di dell´importazione (cancellare tutti i records)',
     'LBL_RELATED_ACCOUNTS' => 'Non creare le aziende relative',
     'LBL_NO_DATECHECK' => 'Salva il controllo della data (più veloce ma non andrà a buon fine se la data è sbagliata)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Numero intero non valido',
     'LBL_ERROR_INVALID_NUM' => 'Valore numerico non valido',
     'LBL_ERROR_INVALID_TIME' => 'Ora non valida',
-    'LBL_ERROR_INVALID_EMAIL'=>'Indirizzo email non valido',
-    'LBL_ERROR_INVALID_BOOL'=>'Valore non valido (dovrebbe essere 1 o 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Invalid date dtring',
-    'LBL_ERROR_INVALID_USER'=>'Nome utente o Id non validi',
+    'LBL_ERROR_INVALID_EMAIL' => 'Indirizzo email non valido',
+    'LBL_ERROR_INVALID_BOOL' => 'Valore non valido (dovrebbe essere 1 o 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Invalid date dtring',
+    'LBL_ERROR_INVALID_USER' => 'Nome utente o Id non validi',
     'LBL_ERROR_INVALID_TEAM' => 'Nome gruppo o Id non validi',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Nome azienda o Id non validi',
     'LBL_ERROR_INVALID_RELATE' => 'Campo invalido',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'non esiste o non è scrivibile',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Il file non è stato caricato con successo.  E´ possibile che la dimensione dell´upload_max_ file d´impostazione nel tuo php.ini file è impostato su un numero piccolo',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Il file è troppo grande. Massimo:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bytes. Devi modificare la configurazione',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Byte. Cambiare $sugar_config[&#39;upload_maxsize&#39;] in config.php',
     'LBL_MODULE_NAME' => 'Importa',
     'LBL_MODULE_NAME_SINGULAR' => 'Importazione',
     'LBL_TRY_AGAIN' => 'Riprova',
     'LBL_START_OVER' => 'Ricominciare',
     'LBL_ERROR' => 'Errore:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Il file di importazione contiene {0} righe. Il numero ottimale di righe è {1}. Più righe potrebbero rallentare il processo di importazione. Clicca OK per continuare con l´importazione. Clicca Annulla per modificare il file e ricaricarlo.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Non è possibile importare un utente amministratore del sistema.',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Non è possibile importare un utente amministratore del sistema.',
     'ERR_REPORT_LOOP' => 'Il sistema ha rilevato un ciclo senza uscita. Un utente non può dipendere da sè stesso, nè un superiore dipendere da un subordinato.',
     'ERR_MULTIPLE' => 'Sono state definite colonne multiple con lo stesso nome campo.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Mancano campi richiesti:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Non sono state rilevate righe nel tuo file di importazione. Assicurarsi che non ci siano righe vuote nel tuo file e riprovare.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Il file di import è gia stato processato o non esiste',
     'LBL_SUCCESS' => 'Riuscito:',
-	'LBL_FAILURE' => 'Importazione fallita:',
+    'LBL_FAILURE' => 'Importazione fallita:',
     'LBL_SUCCESSFULLY' => 'Importazione riuscita',
     'LBL_LAST_IMPORT_UNDONE' => 'La tua ultima importazione è stato annullata',
     'LBL_NO_IMPORT_TO_UNDO' => 'Non ci sono importazioni da annullare.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Importa ancora',
     'LBL_FINISHED' => 'Ritorna a',
     'LBL_UNDO_LAST_IMPORT' => 'Annulla ultima Importazione',
-    'LBL_LAST_IMPORTED'=>'Ultimo Importato',
+    'LBL_LAST_IMPORTED' => 'Ultimo Importato',
     'ERR_MULTIPLE_PARENTS' => 'Si può definire un unico Parent ID',
     'LBL_DUPLICATES' => 'Duplicati Trovati',
     'LNK_DUPLICATE_LIST' => 'Scarica l´elenco dei duplicati',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Nascondi Note',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Mostra l´anteprima delle colonne',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Nascondi l´anteprima delle colonne',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Verificare la presenza di duplicati utilizzando l&#39;operatore:',
     'LBL_SAVE_MAPPING_AS' => 'Salva la Mapping Come',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Singola Virgoletta(´)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Doppie Virgolette(")',
@@ -291,7 +291,7 @@ $mod_strings = array (
     'LBL_MY_SAVED_HELP' => 'A saved mapping specifies a previously used combination of a specific data source and a set of database fields to map to the fields in the import file.<br>Click <b>Publish</b> to make the mapping available to other users.<br>Click <b>Un-Publish</b> to make the mapping unavailable to other users.',
     'LBL_MY_SAVED_ADMIN_HELP' => 'Utilizza questa opzione per applicare a questa importazione le impostazioni predefinite di importazione, comprese le proprietà di importazione, mappatura e controllo dei duplicati.<br /><br />Clicca Pubblica per rendere la mappatura disponibile ad altri utenti.<br />Clicca Non pubblicare per non rendere la mappatura disponibile ad altri utenti.<br />Clicca Elimina per eliminare la mappatura per tutti gli utenti.',
     'LBL_MY_PUBLISHED_HELP' => 'A published mapping specifies a previously used combination of a specific data source and a set of database fields to map to the fields in the import file.',
-    'LBL_ENCLOSURE_HELP' => '<p>Il<b> separatore di testo</b> è utilizzato per racchiudere il contenuto del campo, incluso ogni carattere utilizzato come separatore.<br><br>Esempio: Se il separatore è la virgola (,) e il separatore di testo sono le virgolette("),<br><b>"Cupertino, California"</b> è importato all´interno dell\applicativo in un solo campo e appare come <b>Cupertino, California</b>.<br>Se il separatore di testo non c´è, o il separatore di testo è un carattere diverso,<br><b>"Cupertino, California"</b> è importato all´interno di due campi adiacenti come <b>"Cupertino</b> e <b>Texas"</b>.<br><br>Nota: L´importazione del file potrebbe non contenere alcun separatore di testo.<br>Il separatore di testo di default che delimita i file creati in Excel sono le virgolette.</p>',
+    'LBL_ENCLOSURE_HELP' => '<p>Il<b> separatore di testo</b> è utilizzato per racchiudere il contenuto del campo, incluso ogni carattere utilizzato come separatore.<br><br>Esempio: Se il separatore è la virgola (,) e il separatore di testo sono le virgolette("),<br><b>"Cupertino, California"</b> è importato all´interno dell\\applicativo in un solo campo e appare come <b>Cupertino, California</b>.<br>Se il separatore di testo non c´è, o il separatore di testo è un carattere diverso,<br><b>"Cupertino, California"</b> è importato all´interno di due campi adiacenti come <b>"Cupertino</b> e <b>Texas"</b>.<br><br>Nota: L´importazione del file potrebbe non contenere alcun separatore di testo.<br>Il separatore di testo di default che delimita i file creati in Excel sono le virgolette.</p>',
     'LBL_DELIMITER_COMMA_HELP' => 'Selezionare questa opzione se il carattere che separa i campi nel file di importazione è la <b>virgola</b>, o l´estenzione del file è .csv.',
     'LBL_DELIMITER_TAB_HELP' => 'Selezionare questa opzione se il carattere che separa i campi nel file di importazione è il <b>TAB</b>, e l´estenzione del file è .txt.',
     'LBL_DELIMITER_CUSTOM_HELP' => 'Selezionare questa opzione se il carattere che separa i campi nel file di importazione non è nè la virgola nè un TAB, e digitare il tipo di carattere nel campo adiacente.',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Per assegnare i nuovi record ad un gruppo diverso dal tuo, utilizza la colonna Valore di Default e seleziona il nuovo gruppo.',
     'LBL_SIGN_IN_HELP' => 'Per abilitare il servizio si prega di entrare in Account Esterni all´interno della pagina di impostazioni utente.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Gestione indirizzi email all´interno di un modulo che non supporta la funzionalità.",
-);
+];

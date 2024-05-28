@@ -11,34 +11,33 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-return array(
-    'metadata' => array(
-        'components' => array(
-            array(
-                'rows' => array(
-                    array(
-                        array(
-                            'view' => array(
+return [
+    'metadata' => [
+        'components' => [
+            [
+                'rows' => [
+                    [
+                        [
+                            'view' => [
                                 'type' => 'dashablelist',
                                 'label' => 'LBL_MY_SCHEDULED_MEETINGS',
-                                'display_columns' => array(
+                                'display_columns' => [
                                     'date_start',
                                     'name',
                                     'parent_name',
-                                ),
+                                ],
                                 'filter_id' => 'my_scheduled_meetings',
-                            ),
-                            'context' => array(
+                            ],
+                            'context' => [
                                 'module' => 'Meetings',
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
                 'width' => 12,
-            ),
-        ),
-    ),
+            ],
+        ],
+    ],
     'name' => 'LBL_MEETINGS_LIST_DASHBOARD',
-);
-
+];

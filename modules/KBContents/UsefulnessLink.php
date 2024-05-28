@@ -22,7 +22,7 @@ class UsefulnessLink extends Link2
      */
     public function vote($vote)
     {
-        $params = array();
+        $params = [];
         $user = $GLOBALS['current_user'];
         $contact_id = null;
 
@@ -40,7 +40,7 @@ class UsefulnessLink extends Link2
          */
         if ($contact_id !== null) {
             if (!empty($this->rows)) {
-                $q = $this->relationship->getQuery($this, array('return_as_array' => true));
+                $q = $this->relationship->getQuery($this, ['return_as_array' => true]);
                 if (!empty($params['where'])) {
                     $q['where'] .= ' AND ' . $params['where'];
                 }
@@ -51,12 +51,12 @@ class UsefulnessLink extends Link2
         }
         $result = $this->add(
             $user,
-            array(
+            [
                 'vote' => $vote ? 1 : -1,
                 'ssid' => session_id(),
                 'contact_id' => $contact_id,
-                'zeroflag' => 0
-            )
+                'zeroflag' => 0,
+            ]
         );
         $this->relationship->primaryOnly = false;
         return $result;
@@ -75,8 +75,8 @@ class UsefulnessLink extends Link2
 
     /**
      * Return contact associated with portal user.
-     * @see CurrentUserPortalApi::getPortalContact
      * @return null|SugarBean
+     * @see CurrentUserPortalApi::getPortalContact
      */
     public function getPortalContact()
     {

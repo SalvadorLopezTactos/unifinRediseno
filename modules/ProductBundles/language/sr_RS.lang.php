@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Grupne faze:',
-    'LBL_DEAL_TOT'=>'Popust:',
-    'LBL_DEAL_TOT_USDOLLAR'=>'ukupan popust (Američki dolar)',
+    'LBL_DEAL_TOT' => 'Popust:',
+    'LBL_DEAL_TOT_USDOLLAR' => 'ukupan popust (Američki dolar)',
     'LBL_NEW_SUB' => 'Međuzbir sa popustom:',
     'LBL_SHIPPING' => 'Dostava:',
-    'LBL_SHIPPING_USDOLLAR'=>'Dostava (Američki dolar)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Međuzbir (Američki dolar)',
+    'LBL_SHIPPING_USDOLLAR' => 'Dostava (Američki dolar)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Međuzbir (Američki dolar)',
     'LBL_SUBTOTAL' => 'Međuzbir:',
     'LBL_TAXABLE_SUBTOTAL' => 'Međuzbir oporezivog iznosa',
-    'LBL_TAX_USDOLLAR'=>'Porez (Američki dolar)',
+    'LBL_TAX_USDOLLAR' => 'Porez (Američki dolar)',
     'LBL_TAX' => 'Porez:',
-    'LBL_TOTAL_USDOLLAR'=>'Ukupno (Američki  dolar)',
+    'LBL_TOTAL_USDOLLAR' => 'Ukupno (Američki  dolar)',
     'LBL_TOTAL' => 'Ukupno',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Pozicija ukupne kvote',
     'EXCEPTION_INVALID_QUOTE_ID' => 'ID kvote nedostaje iz tereta',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'Zahtevana kovta nije pronađena',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'Zahtevana kovta nije pronađena',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Dodatni grupni popust',
     'LBL_GROUP_TOTAL' => 'Grupni zbir',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Zaglavlje grupe',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Podrazumevana grupa kompleta proizvoda za ponudu',
     'LBL_ALERT_DELETING_ITEM' => 'Brisanje stavke(i)',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Stavka je uspešno izbrisana',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija kompleta proizvoda',
+];

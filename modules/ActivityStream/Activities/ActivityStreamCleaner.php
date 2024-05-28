@@ -52,9 +52,9 @@ class ActivityStreamCleaner
     {
         // retrieve months to keep from config, or set default
         if (isset($GLOBALS['sugar_config']['activitystreamcleaner']['months_to_keep'])) {
-            $months_to_keep = (int) $GLOBALS['sugar_config']['activitystreamcleaner']['months_to_keep'];
+            $months_to_keep = (int)$GLOBALS['sugar_config']['activitystreamcleaner']['months_to_keep'];
         } else {
-            $months_to_keep = (int) $this->default_months_to_keep;
+            $months_to_keep = (int)$this->default_months_to_keep;
         }
 
         if ($months_to_keep < 0) {
@@ -63,7 +63,7 @@ class ActivityStreamCleaner
         }
 
         $dtm = new DateTime('now', new DateTimeZone('UTC'));
-        $month_interval = sprintf("P%dM", $months_to_keep);
+        $month_interval = sprintf('P%dM', $months_to_keep);
         $dtm->sub(new DateInterval($month_interval));
 
         // set the prune after date for this execution
@@ -87,19 +87,19 @@ class ActivityStreamCleaner
         $qb = $this->db()->getConnection()->createQueryBuilder();
         $qb->delete('activities');
         $qb->where('deleted = ' . $qb->createPositionalParameter(1));
-        $GLOBALS['log']->info(__METHOD__ . ' ' . $qb->getSQL().' '.print_r($qb->getParameters(), true));
+        $GLOBALS['log']->info(__METHOD__ . ' ' . $qb->getSQL() . ' ' . print_r($qb->getParameters(), true));
         $qb->execute();
 
         $qb = $this->db()->getConnection()->createQueryBuilder();
         $qb->delete('activities_users');
         $qb->where('deleted = ' . $qb->createPositionalParameter(1));
-        $GLOBALS['log']->info(__METHOD__ . ' ' . $qb->getSQL().' '.print_r($qb->getParameters(), true));
+        $GLOBALS['log']->info(__METHOD__ . ' ' . $qb->getSQL() . ' ' . print_r($qb->getParameters(), true));
         $qb->execute();
 
         $qb = $this->db()->getConnection()->createQueryBuilder();
         $qb->delete('comments');
         $qb->where('deleted = ' . $qb->createPositionalParameter(1));
-        $GLOBALS['log']->info(__METHOD__ . ' ' . $qb->getSQL().' '.print_r($qb->getParameters(), true));
+        $GLOBALS['log']->info(__METHOD__ . ' ' . $qb->getSQL() . ' ' . print_r($qb->getParameters(), true));
         $qb->execute();
     }
 
@@ -115,10 +115,10 @@ class ActivityStreamCleaner
             $qb->where(
                 $qb->expr()->in(
                     'id',
-                    $qb->createPositionalParameter((array) $ids, Connection::PARAM_STR_ARRAY)
+                    $qb->createPositionalParameter((array)$ids, Connection::PARAM_STR_ARRAY)
                 )
             );
-            $GLOBALS['log']->info(__METHOD__ . ' ' . $qb->getSQL().' '.print_r($qb->getParameters(), true));
+            $GLOBALS['log']->info(__METHOD__ . ' ' . $qb->getSQL() . ' ' . print_r($qb->getParameters(), true));
             $qb->execute();
         }
     }
@@ -130,9 +130,9 @@ class ActivityStreamCleaner
     private function getActivityTypesToKeep()
     {
         if (isset($GLOBALS['sugar_config']['activitystreamcleaner']['keep_all_relationships_activities'])) {
-            $keep_relationships_activities = (bool) $GLOBALS['sugar_config']['activitystreamcleaner']['keep_all_relationships_activities'];
+            $keep_relationships_activities = (bool)$GLOBALS['sugar_config']['activitystreamcleaner']['keep_all_relationships_activities'];
         } else {
-            $keep_relationships_activities = (bool) $this->default_keep_all_relationships_activities;
+            $keep_relationships_activities = (bool)$this->default_keep_all_relationships_activities;
         }
 
         if ($keep_relationships_activities) {
@@ -154,9 +154,9 @@ class ActivityStreamCleaner
         if ($limited) {
             // retrieve limit from config
             if (isset($GLOBALS['sugar_config']['activitystreamcleaner']['limit_scheduler_run'])) {
-                $limit = (int) $GLOBALS['sugar_config']['activitystreamcleaner']['limit_scheduler_run'];
+                $limit = (int)$GLOBALS['sugar_config']['activitystreamcleaner']['limit_scheduler_run'];
             } else {
-                $limit = (int) $this->default_limit;
+                $limit = (int)$this->default_limit;
             }
 
             if ($limit <= 0) {
@@ -193,7 +193,7 @@ class ActivityStreamCleaner
         $qb->where(
             $qb->expr()->notIn(
                 'activity_type',
-                $qb->createPositionalParameter((array) $this->getActivityTypesToKeep(), Connection::PARAM_STR_ARRAY)
+                $qb->createPositionalParameter((array)$this->getActivityTypesToKeep(), Connection::PARAM_STR_ARRAY)
             )
         );
 
@@ -204,7 +204,7 @@ class ActivityStreamCleaner
             $qb->setMaxResults($limit);
         }
 
-        $GLOBALS['log']->info(__METHOD__ . ' ' . $qb->getSQL().' '.print_r($qb->getParameters(), true));
+        $GLOBALS['log']->info(__METHOD__ . ' ' . $qb->getSQL() . ' ' . print_r($qb->getParameters(), true));
         $res = $qb->execute();
 
         if ($limit > 0) {
@@ -214,7 +214,7 @@ class ActivityStreamCleaner
             while ($row = $res->fetchAssociative()) {
                 $ids[] = $row['id'];
 
-                if (count($ids) == $in_condition_limit) {
+                if (safeCount($ids) == $in_condition_limit) {
                     // complete one chunk
                     $this->purgeActivitiesTableInIds($ids);
                     $ids = [];
@@ -233,7 +233,7 @@ class ActivityStreamCleaner
         $qb = $this->db()->getConnection()->createQueryBuilder();
         $qb->delete('activities_users');
         $qb->where($qb->expr()->notIn('activity_id', $qbSub->getSQL()));
-        $GLOBALS['log']->info(__METHOD__ . ' ' . $qb->getSQL().' '.print_r($qb->getParameters(), true));
+        $GLOBALS['log']->info(__METHOD__ . ' ' . $qb->getSQL() . ' ' . print_r($qb->getParameters(), true));
         $qb->execute();
     }
 }

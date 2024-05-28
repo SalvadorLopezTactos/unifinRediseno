@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Reports\Traits;
 
 trait ReportHelper
@@ -32,7 +33,7 @@ trait ReportHelper
             $offset = 0;
         }
 
-        $nextOffset = $offset + (int) $limit;
+        $nextOffset = $offset + (int)$limit;
 
         if ($nextOffset >= $totalCount) {
             $nextOffset = -1;
@@ -55,23 +56,23 @@ trait ReportHelper
         $defaultLimit = self::$DEFAULT_LIST_VIEW_NO_PER_PAGE;
 
         if (isset($args['offset'])) {
-            $offset = (int) $args['offset'];
+            $offset = (int)$args['offset'];
         }
         if ($offset < 0) {
             $offset = 0;
         }
         if (isset($args['maxNum']) && $args['maxNum'] !== '') {
-            $limit = (int) $args['maxNum'];
+            $limit = (int)$args['maxNum'];
         }
 
         if (!$limit || $limit < 1 || $limit > $defaultLimit) {
             $limit = $defaultLimit;
         }
 
-        return array(
+        return [
             $offset,
             $limit,
-        );
+        ];
     }
 
     /**
@@ -83,7 +84,7 @@ trait ReportHelper
      */
     public function getTotalPagesNumber($totalRecords, $itemsPerPage): int
     {
-        return (int) ceil($totalRecords / $itemsPerPage);
+        return (int)ceil($totalRecords / $itemsPerPage);
     }
 
     /**
@@ -101,7 +102,7 @@ trait ReportHelper
         $fieldDefSource = $fieldDef['source'];
 
         if (!empty($fieldDefSource) && ($fieldDefSource === 'custom_fields' || ($fieldDefSource === 'non-db'
-            && !empty($fieldDef['ext2']) && !empty($fieldDef['id']))) && !empty($fieldDef['real_table'])
+                    && !empty($fieldDef['ext2']) && !empty($fieldDef['id']))) && !empty($fieldDef['real_table'])
         ) {
             $layoutDef['table_alias'] .= '_cstm';
         }

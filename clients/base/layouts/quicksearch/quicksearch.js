@@ -14,7 +14,7 @@
  * @extends View.Layout
  */
 ({
-    className: 'search w-full absolute px-30 box-border',
+    className: 'search w-full absolute px-28 box-border',
 
     /**
      * @inheritdoc

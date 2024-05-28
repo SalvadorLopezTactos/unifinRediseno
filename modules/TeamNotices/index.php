@@ -10,8 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  ********************************************************************************/
-if (!$GLOBALS['current_user']->isAdminForModule('Users')) sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
+if (!$GLOBALS['current_user']->isAdminForModule('Users')) {
+    sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
+}
 
-include ('modules/TeamNotices/ListView.php');
+include 'modules/TeamNotices/ListView.php';

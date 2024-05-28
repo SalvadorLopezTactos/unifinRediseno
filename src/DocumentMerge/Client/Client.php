@@ -24,5 +24,5 @@ interface Client
      *
      * @return void
      */
-    public function call(string $method, array $options) : ResponseInterface;
+    public function call(string $method, array $options): ResponseInterface;
 }

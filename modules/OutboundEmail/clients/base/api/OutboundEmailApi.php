@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+
 class OutboundEmailApi extends ModuleApi
 {
     /**
@@ -47,6 +49,15 @@ class OutboundEmailApi extends ModuleApi
                     'SugarApiExceptionNotFound',
                     'SugarApiException',
                 ],
+            ],
+            'testUserSystemOverride' => [
+                'reqType' => 'POST',
+                'path' => ['OutboundEmail', 'testUserOverride'],
+                'pathVars' => ['module', ''],
+                'method' => 'testUserSystemOverrideEmail',
+                'shortHelp' => 'This method tests the system override email account for a user',
+                'longHelp' => 'modules/OutboundEmail/clients/base/api/help/outbound_email_test_user_override_post_help.html',
+                'minVersion' => '11.23',
             ],
         ];
     }
@@ -115,7 +126,7 @@ class OutboundEmailApi extends ModuleApi
     private function validateSmtpConfiguration(SugarBean $oe)
     {
         try {
-            $configurations = array('from_email' => 'a@a');
+            $configurations = ['from_email' => 'a@a'];
             $outboundEmailConfiguration = OutboundEmailConfigurationPeer::buildOutboundEmailConfiguration(
                 $GLOBALS['current_user'],
                 $configurations,
@@ -136,5 +147,114 @@ class OutboundEmailApi extends ModuleApi
                 'smtp_server_error'
             );
         }
+    }
+
+    /**
+     * Apply a User's credentials to the system email configuration and send
+     * a test email
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array containing the email test results:
+     *                  'status' => True if the email was successful
+     *                  'errorMessage' => If the email was not successful, the
+     *                                    error message that was generated
+     */
+    public function testUserSystemOverrideEmail(ServiceBase $api, array $args)
+    {
+        $this->requireArgs($args, ['user_id', 'to_address']);
+
+        if (!AccessControlManager::instance()->allowRecordAccess('Users', $args['user_id'])) {
+            $errorMsg = 'Not authorized to access record ' . $args['module'] . ':' . $args['user_id'];
+            $GLOBALS['log']->fatal($errorMsg);
+            return [
+                'status' => false,
+                'errorMessage' => $errorMsg,
+            ];
+        }
+
+        try {
+            // Get the user's saved override email credentials
+            $userOverrideSettings = $this->getUserDefaultCredentials($args['user_id']);
+
+            // Get the system email configuration
+            $systemEmailSettings = $this->getSystemEmailSettings();
+
+            // Apply the User's credentials/testing data, and send a test email
+            return $this->sendTestEmail([
+                $systemEmailSettings['mail_smtpserver'],
+                $systemEmailSettings['mail_smtpport'],
+                $systemEmailSettings['mail_smtpssl'],
+                $systemEmailSettings['mail_smtpauth_req'],
+                $args['mail_smtpuser'] ?? $userOverrideSettings['mail_smtpuser'],
+                $args['mail_smtppass'] ?? $userOverrideSettings['mail_smtppass'],
+                $args['from_address'] ?? $userOverrideSettings['email_address'],
+                $args['to_address'],
+                'SMTP',
+                $args['name'] ?? $userOverrideSettings['name'],
+                $systemEmailSettings['mail_smtptype'],
+                $systemEmailSettings['mail_authtype'],
+                $args['eapm_id'] ?? $userOverrideSettings['eapm_id'],
+            ]);
+        } catch (Exception $e) {
+            $result = [
+                'status' => false,
+                'errorMessage' => translate('LBL_EMAIL_INVALID_SYSTEM_CONFIGURATION', 'Emails'),
+            ];
+        }
+
+        return [
+            'status' => $result['status'],
+            'errorMessage' => $result['errorMessage'] ?? '',
+        ];
+    }
+
+    /**
+     * Returns the default email credentials for a user's system override email account
+     *
+     * @param string $userId the ID of the user
+     * @return array the default email credentials for the user's system override email account
+     */
+    protected function getUserDefaultCredentials($userId)
+    {
+        $ob = BeanFactory::newBean('OutboundEmail');
+        $userOverride = $ob->getUsersMailerForSystemOverride($userId);
+        return [
+            'name' => $userOverride->name ?? '',
+            'mail_smtpuser' => $userOverride->mail_smtpuser ?? '',
+            'mail_smtppass' => $userOverride->mail_smtppass ?? '',
+            'eapm_id' => $userOverride->eapm_id ?? '',
+            'email_address' => $userOverride->email_address ?? '',
+        ];
+    }
+
+    /**
+     * Returns the system mailer configuration
+     *
+     * @return Array The system mailer configuration
+     */
+    protected function getSystemEmailSettings()
+    {
+        $ob = BeanFactory::newBean('OutboundEmail');
+        $systemEmailSettings = $ob->getSystemMailerSettings(false);
+        return [
+            'mail_smtpserver' => $systemEmailSettings->mail_smtpserver ?? '',
+            'mail_smtpport' => $systemEmailSettings->mail_smtpport ?? '',
+            'mail_smtpssl' => $systemEmailSettings->mail_smtpssl ?? '',
+            'mail_smtpauth_req' => $systemEmailSettings->mail_smtpauth_req ?? '',
+            'mail_smtptype' => $systemEmailSettings->mail_smtptype ?? '',
+            'mail_authtype' => $systemEmailSettings->mail_authtype,
+        ];
+    }
+
+    /**
+     * Sends a test email using the given email configuration arguments
+     *
+     * @param array $args The email ocnfiguration settings to pass into sendEmailTest
+     * @return array The results of the test email
+     */
+    protected function sendTestEmail($args)
+    {
+        return Email::sendEmailTest(...$args);
     }
 }

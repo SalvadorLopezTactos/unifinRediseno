@@ -13,19 +13,18 @@
 
 class LoggerApi extends SugarApi
 {
-
     public function registerApiRest()
     {
-        return array(
-            'logPost' => array(
+        return [
+            'logPost' => [
                 'reqType' => 'POST',
-                'path' => array('logger'),
-                'pathVars' => array(),
+                'path' => ['logger'],
+                'pathVars' => [],
                 'method' => 'logMessage',
                 'shortHelp' => 'Writes a message out to the log prefaced by a channel name',
                 'longHelp' => 'include/api/help/logger_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -38,7 +37,7 @@ class LoggerApi extends SugarApi
     public function logMessage(ServiceBase $api, array $args)
     {
         if (empty($args['message'])) {
-            return array('status' => false);
+            return ['status' => false];
         }
 
         $log = LoggerManager::getLogger();
@@ -49,6 +48,6 @@ class LoggerApi extends SugarApi
 
         $log->$level("{$channel} - {$message}");
 
-        return array('status' => true);
+        return ['status' => true];
     }
 }

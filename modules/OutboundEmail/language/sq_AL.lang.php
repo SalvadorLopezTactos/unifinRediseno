@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Llogaritë e emaileve dalëse',
     'LBL_MODULE_NAME_SINGULAR' => 'Llogaria e emaileve dalëse',
     'LBL_STATUS' => 'Statusi',
@@ -40,4 +40,4 @@ $mod_strings = array(
     'LBL_PREFERRED_SENDING_ACCOUNT' => 'Llogaria e dërgimit të preferuar',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te cilësimet e emailit',
-);
+];

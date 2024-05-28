@@ -11,23 +11,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['history'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['base']['view']['history'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_HISTORY_DASHLET',
             'description' => 'LBL_HISTORY_DASHLET_DESCRIPTION',
-            'config' => array(
+            'config' => [
                 'limit' => '10',
                 'filter' => '7',
                 'visibility' => 'user',
-            ),
-            'preview' => array(
+            ],
+            'preview' => [
                 'limit' => '10',
                 'filter' => '7',
                 'visibility' => 'user',
-            ),
-            'filter' => array(
-                'module' => array(
+            ],
+            'filter' => [
+                'module' => [
                     'Accounts',
                     'Bugs',
                     'Cases',
@@ -37,112 +37,112 @@ $viewdefs['base']['view']['history'] = array(
                     'Opportunities',
                     'Prospects',
                     'RevenueLineItems',
-                ),
+                ],
                 'view' => 'record',
-            ),
-        ),
-    ),
-    'custom_toolbar' => array(
-        'buttons' => array(
-            array(
+            ],
+        ],
+    ],
+    'custom_toolbar' => [
+        'buttons' => [
+            [
                 'type' => 'actiondropdown',
                 'no_default_action' => true,
                 'icon' => 'sicon-plus',
-                'buttons' => array(
-                    array(
+                'buttons' => [
+                    [
                         'type' => 'dashletaction',
                         'action' => 'archiveEmail',
-                        'params' => array(
+                        'params' => [
                             'link' => 'emails',
                             'module' => 'Emails',
-                        ),
+                        ],
                         'label' => 'LBL_CREATE_ARCHIVED_EMAIL',
                         'acl_action' => 'create',
                         'acl_module' => 'Emails',
                         'name' => 'create_archived_email',
-                    ),
-                ),
-            ),
-            array(
-                'dropdown_buttons' => array(
-                    array(
+                    ],
+                ],
+            ],
+            [
+                'dropdown_buttons' => [
+                    [
                         'type' => 'dashletaction',
                         'action' => 'editClicked',
                         'label' => 'LBL_DASHLET_CONFIG_EDIT_LABEL',
                         'name' => 'edit_button',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'action' => 'refreshClicked',
                         'label' => 'LBL_DASHLET_REFRESH_LABEL',
                         'name' => 'refresh_button',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'action' => 'toggleClicked',
                         'label' => 'LBL_DASHLET_MINIMIZE',
                         'event' => 'minimize',
                         'name' => 'close_button',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'action' => 'removeClicked',
                         'label' => 'LBL_DASHLET_REMOVE_LABEL',
                         'name' => 'remove_button',
-                    ),
-                ),
-            ),
-        ),
-    ),
-    'panels' => array(
-        array(
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_body',
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'filter',
                     'label' => 'LBL_DASHLET_CONFIGURE_FILTERS',
                     'type' => 'enum',
                     'options' => 'history_filter_options',
-                ),
-                array(
+                ],
+                [
                     'name' => 'visibility',
                     'label' => 'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY',
                     'type' => 'enum',
                     'options' => 'history_visibility_options',
-                ),
-                array(
+                ],
+                [
                     'name' => 'limit',
                     'label' => 'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS',
                     'type' => 'enum',
                     'options' => 'history_limit_options',
-                )
-            ),
-        ),
-    ),
-    'filter' => array(
-        array(
+                ],
+            ],
+        ],
+    ],
+    'filter' => [
+        [
             'name' => 'filter',
             'label' => 'LBL_FILTER',
             'type' => 'enum',
-            'options' => 'history_filter_options'
-        ),
-    ),
-    'tabs' => array(
-        array(
+            'options' => 'history_filter_options',
+        ],
+    ],
+    'tabs' => [
+        [
             'active' => true,
             'filter_applied_to' => 'date_start',
-            'filters' => array(
-                'status' => array('$in' => array('Held', 'Not Held')),
-            ),
+            'filters' => [
+                'status' => ['$in' => ['Held', 'Not Held']],
+            ],
             'link' => 'meetings',
             'module' => 'Meetings',
             'order_by' => 'date_start:desc',
             'record_date' => 'date_start',
-            'row_actions' => array(
-                array(
+            'row_actions' => [
+                [
                     'type' => 'unlink-action',
                     'icon' => 'sicon-unlink',
                     'css_class' => 'btn btn-mini',
@@ -150,32 +150,32 @@ $viewdefs['base']['view']['history'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_UNLINK_BUTTON',
                     'acl_action' => 'edit',
-                ),
-            ),
+                ],
+            ],
             'include_child_items' => true,
-            'fields' => array(
+            'fields' => [
                 'name',
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_start',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'filter_applied_to' => 'date_entered',
-            'filters' => array(
-                'state' => array(
-                    '$in' => array('Archived'),
-                ),
-            ),
-            'labels' => array(
+            'filters' => [
+                'state' => [
+                    '$in' => ['Archived'],
+                ],
+            ],
+            'labels' => [
                 'singular' => 'LBL_HISTORY_DASHLET_EMAIL_SINGULAR',
                 'plural' => 'LBL_HISTORY_DASHLET_EMAIL_PLURAL',
-            ),
+            ],
             'link' => 'archived_emails',
             'module' => 'Emails',
             'order_by' => 'date_entered:desc',
-            'row_actions' => array(
-                array(
+            'row_actions' => [
+                [
                     'type' => 'unlink-action',
                     'icon' => 'sicon-unlink',
                     'css_class' => 'btn btn-mini',
@@ -183,26 +183,26 @@ $viewdefs['base']['view']['history'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_UNLINK_BUTTON',
                     'acl_action' => 'edit',
-                ),
-            ),
-            'fields' => array(
+                ],
+            ],
+            'fields' => [
                 'name',
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_entered',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'filter_applied_to' => 'date_start',
-            'filters' => array(
-                'status' => array('$in' => array('Held', 'Not Held')),
-            ),
+            'filters' => [
+                'status' => ['$in' => ['Held', 'Not Held']],
+            ],
             'link' => 'calls',
             'module' => 'Calls',
             'order_by' => 'date_start:desc',
             'record_date' => 'date_start',
-            'row_actions' => array(
-                array(
+            'row_actions' => [
+                [
                     'type' => 'unlink-action',
                     'icon' => 'sicon-unlink',
                     'css_class' => 'btn btn-mini',
@@ -210,19 +210,19 @@ $viewdefs['base']['view']['history'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_UNLINK_BUTTON',
                     'acl_action' => 'edit',
-                ),
-            ),
+                ],
+            ],
             'include_child_items' => true,
-            'fields' => array(
+            'fields' => [
                 'name',
                 'assigned_user_id',
                 'assigned_user_name',
                 'date_start',
-            ),
-        ),
-    ),
-    'visibility_labels' => array(
+            ],
+        ],
+    ],
+    'visibility_labels' => [
         'user' => 'LBL_HISTORY_DASHLET_USER_BUTTON_LABEL',
         'group' => 'LBL_HISTORY_DASHLET_GROUP_BUTTON_LABEL',
-    ),
-);
+    ],
+];

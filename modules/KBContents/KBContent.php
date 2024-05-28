@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class KBContent extends SugarBean {
-
+class KBContent extends SugarBean
+{
     public const DEFAULT_STATUS = 'draft';
     public const ST_DRAFT = 'draft';
     public const ST_IN_REVIEW = 'in-review';
@@ -19,8 +19,8 @@ class KBContent extends SugarBean {
     public const ST_PUBLISHED = 'published';
     public const ST_EXPIRED = 'expired';
 
-    public $table_name = "kbcontents";
-    public $object_name = "KBContent";
+    public $table_name = 'kbcontents';
+    public $object_name = 'KBContent';
     public $new_schema = true;
     public $module_dir = 'KBContents';
 
@@ -38,10 +38,10 @@ class KBContent extends SugarBean {
      * {@inheritDoc}
      * Add new type 'nestedset' that works like relate field.
      */
-    public static $relateFieldTypes = array(
+    public static $relateFieldTypes = [
         'relate',
         'nestedset',
-    );
+    ];
 
     /**
      * Return root id for KB categories.
@@ -78,10 +78,10 @@ class KBContent extends SugarBean {
         $client = new ConfigModuleApi();
         $client->configSave(
             $api,
-            array(
+            [
                 'category_root' => $categoryRoot->saveAsRoot(),
                 'module' => 'KBContents',
-            )
+            ]
         );
     }
 
@@ -97,10 +97,10 @@ class KBContent extends SugarBean {
             if ($lang['primary'] === true) {
                 $default = $lang;
                 unset($default['primary']);
-                $default = array(
+                $default = [
                     'label' => reset($default),
-                    'key' => key($default)
-                );
+                    'key' => key($default),
+                ];
                 break;
             }
         }
@@ -119,7 +119,7 @@ class KBContent extends SugarBean {
     {
         $admin = BeanFactory::newBean('Administration');
         $config = $admin->getConfigForModule('KBContents');
-        return $config['languages'] ?? array();
+        return $config['languages'] ?? [];
     }
 
     /**
@@ -129,7 +129,7 @@ class KBContent extends SugarBean {
     public function getLanguageOptions()
     {
         $data = $this->getLanguages();
-        $result = array();
+        $result = [];
         foreach ($data as $value) {
             $result[array_key_first($value)] = current($value);
         }
@@ -150,15 +150,15 @@ class KBContent extends SugarBean {
         $client = new ConfigModuleApi();
         $client->configSave(
             $api,
-            array(
-                'languages' => array(
-                    array(
+            [
+                'languages' => [
+                    [
                         'en' => 'English',
                         'primary' => true,
-                    ),
-                ),
+                    ],
+                ],
                 'module' => 'KBContents',
-            )
+            ]
         );
     }
 
@@ -170,7 +170,7 @@ class KBContent extends SugarBean {
     public function check_date_relationships_load()
     {
         global $disable_date_format;
-        $old_disable_date_format  = $disable_date_format;
+        $old_disable_date_format = $disable_date_format;
         $disable_date_format = true;
         parent::check_date_relationships_load();
         $disable_date_format = $old_disable_date_format;
@@ -179,7 +179,7 @@ class KBContent extends SugarBean {
     /**
      * {@inheritDoc}
      */
-    public function save_relationship_changes($is_update, $exclude = array())
+    public function save_relationship_changes($is_update, $exclude = [])
     {
         parent::save_relationship_changes($is_update, $exclude);
 
@@ -228,8 +228,8 @@ class KBContent extends SugarBean {
      */
     public function save($check_notify = false)
     {
-        $dataChanges = empty($this->fetched_row) ? array() : $this->db->getDataChanges($this);
-        if(empty($this->id) || !empty($this->new_with_id)) {
+        $dataChanges = empty($this->fetched_row) ? [] : $this->db->getDataChanges($this);
+        if (empty($this->id) || !empty($this->new_with_id)) {
             if (empty($this->language)) {
                 $lang = $this->getNextAvailableLanguage();
                 if ($lang === null) {
@@ -256,7 +256,7 @@ class KBContent extends SugarBean {
             if (empty($this->status)) {
                 $this->status = self::DEFAULT_STATUS;
             }
-            $this->active_rev = (int) empty($this->kbarticle_id);
+            $this->active_rev = (int)empty($this->kbarticle_id);
         }
 
         $this->skipUsefulnessChanges($dataChanges);
@@ -271,7 +271,7 @@ class KBContent extends SugarBean {
             }
             switch ($dataChanges['status']['before']) {
                 case self::ST_PUBLISHED:
-                    if (!in_array($dataChanges['status']['after'], array(self::ST_APPROVED, self::ST_EXPIRED))) {
+                    if (!in_array($dataChanges['status']['after'], [self::ST_APPROVED, self::ST_EXPIRED])) {
                         $this->active_date = '';
                     }
                     break;
@@ -293,7 +293,7 @@ class KBContent extends SugarBean {
         }
         if (isset($dataChanges['category_id'])) {
             if ($dataChanges['category_id']['before']
-                    && ($dataChanges['category_id']['before'] != $dataChanges['category_id']['after'])) {
+                && ($dataChanges['category_id']['before'] != $dataChanges['category_id']['after'])) {
                 $this->updateCategoryExternalVisibility($dataChanges['category_id']['before']);
             }
         }
@@ -319,7 +319,7 @@ class KBContent extends SugarBean {
         $languages = $this->getLanguages();
         $localizationLanguages = $this->getLocalizationLanguages();
 
-        $availableLanguages = array();
+        $availableLanguages = [];
         foreach ($languages as $language) {
             $alreadyUsed = false;
             foreach ($localizationLanguages as $localizationLanguage) {
@@ -341,13 +341,13 @@ class KBContent extends SugarBean {
             }
         }
 
-        if (count($availableLanguages) === 0) {
+        if (safeCount($availableLanguages) === 0) {
             return null;
         }
 
         $nextAvailable = reset($availableLanguages);
         unset($nextAvailable['primary']);
-    
+
         $keys = array_keys($nextAvailable);
         return reset($keys);
     }
@@ -361,7 +361,7 @@ class KBContent extends SugarBean {
     private function getLocalizationLanguages()
     {
         $query = new SugarQuery();
-        $query->select(array('language'));
+        $query->select(['language']);
         $query->distinct(true);
         $query->from(BeanFactory::newBean('KBContents'));
         $query->where()->equals('kbdocument_id', $this->kbdocument_id);
@@ -371,7 +371,7 @@ class KBContent extends SugarBean {
             return $lang['language'];
         }, $languages);
     }
-    
+
     /**
      * Mute changes in kb voting (need when
      * save kb article).
@@ -399,7 +399,7 @@ class KBContent extends SugarBean {
      */
     public function saveUsefulness()
     {
-        if(empty($this->id) || $this->new_with_id) {
+        if (empty($this->id) || $this->new_with_id) {
             throw new SugarApiException('Bean must be saved before vote');
         }
 
@@ -417,7 +417,7 @@ class KBContent extends SugarBean {
         if ($this->active_rev == 1) {
             $query = new SugarQuery();
             $query->from(BeanFactory::newBean('KBContents'));
-            $query->select(array('id'));
+            $query->select(['id']);
             $whereAnd = $query->where();
             if ($this->id) {
                 $whereAnd->notEquals('id', $this->id);
@@ -453,21 +453,21 @@ class KBContent extends SugarBean {
     protected function isPublished()
     {
         $published = static::getPublishedStatuses();
-        if(empty($this->id) || !empty($this->new_with_id)) {
+        if (empty($this->id) || !empty($this->new_with_id)) {
             return in_array($this->status, $published);
         } else {
-            $dataChanges = empty($this->fetched_row) ? array() : $this->db->getDataChanges($this);
+            $dataChanges = empty($this->fetched_row) ? [] : $this->db->getDataChanges($this);
             if (!isset($dataChanges['status'])) {
                 return false;
             }
             return in_array($dataChanges['status']['after'], $published) &&
-            !in_array($dataChanges['status']['before'], $published);
+                !in_array($dataChanges['status']['before'], $published);
         }
     }
 
     public static function getPublishedStatuses()
     {
-        return array(static::ST_PUBLISHED);
+        return [static::ST_PUBLISHED];
     }
 
     /**
@@ -511,7 +511,7 @@ class KBContent extends SugarBean {
         if ($this->kbdocument_id && $this->kbarticle_id) {
             $query = new SugarQuery();
             $query->from(BeanFactory::newBean('KBContents'));
-            $query->select(array('id', 'status'));
+            $query->select(['id', 'status']);
             $whereAnd = $query->where();
             if ($this->id) {
                 $whereAnd->notEquals('id', $this->id);
@@ -539,7 +539,7 @@ class KBContent extends SugarBean {
     {
         $query = new SugarQuery();
         $query->from($this);
-        $query->select(array('id'));
+        $query->select(['id']);
         $whereAnd = $query->where();
         if ($this->id) {
             $whereAnd->notEquals('id', $this->id);
@@ -567,7 +567,7 @@ class KBContent extends SugarBean {
 
         $query = new SugarQuery();
         $query->from($this);
-        $query->select(array('id'));
+        $query->select(['id']);
         $whereAnd = $query->where();
         if ($this->id) {
             $whereAnd->notEquals('id', $this->id);
@@ -615,7 +615,7 @@ class KBContent extends SugarBean {
         $this->load_relationship('usefulness');
         $validUser = $this->usefulness->isValidSugarUser($user);
         $contact_id = null;
-        $params = array();
+        $params = [];
         if (!$validUser && $contact = $this->usefulness->getPortalContact()) {
             $contact_id = $contact->id;
             $params['where'] = 'contact_id = ' . DBManagerFactory::getInstance()->quoted($contact_id);
@@ -633,7 +633,7 @@ class KBContent extends SugarBean {
     /**
      * {@inheritdoc}
      */
-    function get_notification_recipients()
+    public function get_notification_recipients()
     {
         $notify_user = BeanFactory::newBean('Users');
         if ($this->status == self::ST_IN_REVIEW) {
@@ -645,7 +645,7 @@ class KBContent extends SugarBean {
 
         LoggerManager::getLogger()->info("Notifications: recipient is {$this->new_assigned_user_name}");
 
-        return array($notify_user);
+        return [$notify_user];
     }
 
     /**
@@ -666,10 +666,8 @@ class KBContent extends SugarBean {
         if ($bean->status == self::ST_IN_REVIEW) {
             $preMessage = "$current_user->name ";
             $messageLbl = 'LBL_KB_PUBLISHED_REQUEST';
-
         } elseif (in_array($bean->status, KBContent::getPublishedStatuses())) {
             $messageLbl = 'LBL_KB_NOTIFICATION';
-
         } elseif ($bean->status == self::ST_DRAFT) {
             $messageLbl = 'LBL_KB_STATUS_BACK_TO_DRAFT';
         }
@@ -738,7 +736,7 @@ class KBContent extends SugarBean {
     {
         $query = new SugarQuery();
         $query->select()->setCountQuery();
-        $query->from(new KBContent)
+        $query->from(new KBContent())
             ->where()
             ->equals('category_id', $bean->id)
             ->equals('is_external', 1)
@@ -748,7 +746,7 @@ class KBContent extends SugarBean {
         $data = $query->execute();
         $row = array_shift($data);
         $count = array_shift($row);
-        return (boolean) $count > 0;
+        return (bool)$count > 0;
     }
 
     /**
@@ -757,16 +755,18 @@ class KBContent extends SugarBean {
      * @return bool
      * @throws SugarQueryException
      */
-    private function _countExternalCategories(Category $bean) {
-        $ids = array();
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    private function _countExternalCategories(Category $bean)
+    {
+        $ids = [];
         foreach ($bean->getChildren() as $child) {
             $ids[] = $child['id'];
         }
 
-        if (count($ids)) {
+        if (safeCount($ids)) {
             $query = new SugarQuery();
             $query->select()->setCountQuery();
-            $query->from(new Category)
+            $query->from(new Category())
                 ->where()
                 ->equals('is_external', 1);
 
@@ -775,7 +775,7 @@ class KBContent extends SugarBean {
             $data = $query->execute();
             $row = array_shift($data);
             $count = array_shift($row);
-            return (boolean) $count > 0;
+            return (bool)$count > 0;
         } else {
             return false;
         }

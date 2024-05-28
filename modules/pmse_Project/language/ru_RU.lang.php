@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Описание используемых процессов',
-  'LBL_MODULE_TITLE' => 'Описание используемых процессов',
-  'LBL_MODULE_NAME_SINGULAR' => 'Описание используемых технологических процессов',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Описание используемых процессов',
+    'LBL_MODULE_TITLE' => 'Описание используемых процессов',
+    'LBL_MODULE_NAME_SINGULAR' => 'Описание используемых технологических процессов',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для определений процесса',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для определений процесса',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Информационная панель записей об определениях процессов',
-  'LNK_LIST' => 'Посмотреть описание используемых процессов',
-  'LNK_NEW_PMSE_PROJECT' => 'Создать определение процесса',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Импортировать определения процесса',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Информационная панель записей об определениях процессов',
+    'LNK_LIST' => 'Посмотреть описание используемых процессов',
+    'LNK_NEW_PMSE_PROJECT' => 'Создать определение процесса',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Импортировать определения процесса',
 
-  'LBL_PRJ_STATUS' => 'Статус',
-  'LBL_PRJ_MODULE' => 'Основной модуль',
-  'LBL_PRJ_RUN_ORDER' => 'Порядок выполнения',
-  'LBL_PMSE_BUTTON_SAVE' => 'Сохранить',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Отмена',
-  'LBL_PMSE_BUTTON_YES' => 'Да',
-  'LBL_PMSE_BUTTON_NO' => 'Нет',
-  'LBL_PMSE_BUTTON_OK' => 'Ok',
+    'LBL_PRJ_STATUS' => 'Статус',
+    'LBL_PRJ_MODULE' => 'Основной модуль',
+    'LBL_PRJ_RUN_ORDER' => 'Порядок выполнения',
+    'LBL_PMSE_BUTTON_SAVE' => 'Сохранить',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Отмена',
+    'LBL_PMSE_BUTTON_YES' => 'Да',
+    'LBL_PMSE_BUTTON_NO' => 'Нет',
+    'LBL_PMSE_BUTTON_OK' => 'Ok',
     'LBL_PMSE_FORM_ERROR' => 'Устраните все ошибки перед тем, как продолжить.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Смоделировать',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Мероприятие',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Действие',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Начальное событие предварительного контакта',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Начальное событие сделки' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Начальное событие сделки',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Начальное событие документа',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Начальное событие',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Ожидание события',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Бизнес-правило',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Действие бизнес-правила',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Шаблон письма',
-);
+];

@@ -10,35 +10,35 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Quotes']['base']['view']['preview'] = array(
-    'templateMeta' => array(
+$viewdefs['Quotes']['base']['view']['preview'] = [
+    'templateMeta' => [
         'maxColumns' => 1,
-    ),
-    'panels' => array(
-        array(
+    ],
+    'panels' => [
+        [
             'name' => 'panel_header',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'picture',
                     'type' => 'avatar',
                     'size' => 'large',
                     'dismiss_label' => true,
                     'readonly' => true,
-                ),
+                ],
                 'name',
-                array(
+                [
                     'name' => 'quote_stage',
                     'type' => 'event-status',
                     'enum_width' => 'auto',
                     'dropdown_width' => 'auto',
                     'dropdown_class' => 'select2-menu-only',
                     'container_class' => 'select2-menu-only',
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'panel_body',
-            'fields' => array(
+            'fields' => [
                 'opportunity_name',
                 'quote_num',
                 'purchase_order_num',
@@ -47,137 +47,137 @@ $viewdefs['Quotes']['base']['view']['preview'] = array(
                 'original_po_date',
                 'billing_account_name',
                 'billing_contact_name',
-                array(
+                [
                     'name' => 'billing_address_fieldset',
                     'inline' => false,
                     'type' => 'fieldset',
                     'label' => 'LBL_BILLING_ADDRESS_STREET',
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'billing_address_street',
                             'placeholder' => 'LBL_STREET',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'billing_address_city',
                             'placeholder' => 'LBL_CITY',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'billing_address_state',
                             'placeholder' => 'LBL_STATE',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'billing_address_postalcode',
                             'placeholder' => 'LBL_POSTAL_CODE',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'billing_address_country',
                             'placeholder' => 'LBL_COUNTRY',
-                        ),
-                    ),
-                ),
-                array(
+                        ],
+                    ],
+                ],
+                [
                     'name' => 'deal_tot',
                     'label' => 'LBL_LIST_DEAL_TOT',
                     'css_class' => 'quote-totals-row-item',
-                    'related_fields' => array('deal_tot_discount_percentage'),
-                ),
-                array(
+                    'related_fields' => ['deal_tot_discount_percentage'],
+                ],
+                [
                     'name' => 'new_sub',
                     'css_class' => 'quote-totals-row-item',
-                ),
-                array(
+                ],
+                [
                     'name' => 'tax',
                     'label' => 'LBL_TAX_TOTAL',
                     'css_class' => 'quote-totals-row-item',
-                ),
-                array(
+                ],
+                [
                     'name' => 'shipping',
                     'css_class' => 'quote-totals-row-item',
-                ),
-                array(
+                ],
+                [
                     'name' => 'total',
                     'label' => 'LBL_LIST_GRAND_TOTAL',
                     'css_class' => 'quote-totals-row-item',
-                ),
+                ],
                 'shipping_account_name',
                 'shipping_contact_name',
-                array(
+                [
                     'name' => 'shipping_address_fieldset',
                     'inline' => false,
                     'type' => 'fieldset',
                     'label' => 'LBL_SHIPPING_ADDRESS_STREET',
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'shipping_address_street',
                             'placeholder' => 'LBL_STREET',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'shipping_address_city',
                             'placeholder' => 'LBL_CITY',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'shipping_address_state',
                             'placeholder' => 'LBL_STATE',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'shipping_address_postalcode',
                             'placeholder' => 'LBL_POSTAL_CODE',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'shipping_address_country',
                             'placeholder' => 'LBL_COUNTRY',
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
                 'description',
                 'tag',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'panel_hidden',
             'hide' => true,
-            'fields' => array(
+            'fields' => [
                 'assigned_user_name',
                 'team_name',
-                array(
+                [
                     'name' => 'date_entered_by',
                     'readonly' => true,
                     'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_MODIFIED',
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'date_modified',
-                        ),
-                        array(
+                        ],
+                        [
                             'type' => 'label',
                             'default_value' => 'LBL_BY',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'modified_by_name',
-                        ),
-                    ),
-                ),
-                array(
+                        ],
+                    ],
+                ],
+                [
                     'name' => 'date_modified_by',
                     'readonly' => true,
                     'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_ENTERED',
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'date_entered',
-                        ),
-                        array(
+                        ],
+                        [
                             'type' => 'label',
                             'default_value' => 'LBL_BY',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'created_by_name',
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

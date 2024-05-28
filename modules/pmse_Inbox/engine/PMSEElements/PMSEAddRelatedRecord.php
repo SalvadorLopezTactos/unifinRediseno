@@ -66,13 +66,13 @@ class PMSEAddRelatedRecord extends PMSEScriptTask
      * @param type $externalAction
      * @return type
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         switch ($externalAction) {
             case 'RESUME_EXECUTION':
                 $flowAction = 'UPDATE';
                 break;
-            default :
+            default:
                 $flowAction = 'CREATE';
                 break;
         }
@@ -87,14 +87,13 @@ class PMSEAddRelatedRecord extends PMSEScriptTask
             if ((isset($definitionBean->act_field_module) && !empty($definitionBean->act_field_module)) &&
                 (isset($definitionBean->act_fields) && !empty($definitionBean->act_fields))
             ) {
-
                 $arr_module = $definitionBean->act_field_module;
                 $arr_fields = json_decode(htmlspecialchars_decode($definitionBean->act_fields, ENT_COMPAT));
 
                 // TODO: Probably the act_module field should be used instead of pro_module
                 $sugarModule = $processDefinitionBean->pro_module;
 
-                $fields = array();
+                $fields = [];
 
                 if (!empty($arr_fields)) {
                     foreach ($arr_fields as $value) {
@@ -141,10 +140,12 @@ class PMSEAddRelatedRecord extends PMSEScriptTask
                                         $newValue = $this->beanHandler->mergeBeanInTemplate($bean, $value->value);
                                     }
                             }
-                            
-                            if (in_array($key, array('assigned_user_id', 'created_by', 'modified_user_id'))) {
-                                $newValue = $this->beanHandler->mergeBeanInTemplate($bean,
-                                    $this->getCustomUser($value->value, $bean));
+
+                            if (in_array($key, ['assigned_user_id', 'created_by', 'modified_user_id'])) {
+                                $newValue = $this->beanHandler->mergeBeanInTemplate(
+                                    $bean,
+                                    $this->getCustomUser($value->value, $bean)
+                                );
                             }
                             $fields[$key] = $newValue;
                             if (is_string($newValue)) {
@@ -166,19 +167,19 @@ class PMSEAddRelatedRecord extends PMSEScriptTask
                         foreach ($relatedBeans as $relatedBean) {
                             $rel_id = $relatedBean->id;
                             $rel_name = $relatedBean->module_dir;
-                            $this->logger->debug("Create related record " . $rel_name . " ID: $rel_id");
+                            $this->logger->debug('Create related record ' . $rel_name . " ID: $rel_id");
                             $this->logger->debug("Add relationship $rel_name of $sugarModule");
                         }
                     } else {
-                        $this->logger->info("Not created related record!!!");
+                        $this->logger->info('Not created related record!!!');
                     }
                 }
-                $this->logger->debug("Script executed");
+                $this->logger->debug('Script executed');
             }
         } catch (PMSEExpressionEvaluationException $e) {
-            throw new PMSEElementException("AddRelatedRecord: ".$e, $flowData, $this);
+            throw new PMSEElementException('AddRelatedRecord: ' . $e, $flowData, $this);
         }
-        $this->logger->debug("Script executed");
+        $this->logger->debug('Script executed');
         return $this->prepareResponse($flowData, 'ROUTE', $flowAction);
     }
 }

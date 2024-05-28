@@ -11,7 +11,7 @@
  */
 
 
-$dictionary['Project'] = array(
+$dictionary['Project'] = [
     'table' => 'project',
     'color' => 'army',
     'icon' => 'sicon-projects-lg',
@@ -20,24 +20,24 @@ $dictionary['Project'] = array(
     'full_text_search' => true,
     'unified_search_default_enabled' => false,
     'comment' => 'Project',
-	'fields' => array(
-		'id' => array(
-			'name' => 'id',
-			'vname' => 'LBL_ID',
-			'required' => true,
-			'type' => 'id',
-			'reportable'=>true,
-			'comment' => 'Unique identifier'
-		),
-		'date_entered' => array(
-			'name' => 'date_entered',
-			'vname' => 'LBL_DATE_ENTERED',
-			'type' => 'datetime',
-			'comment' => 'Date record created',
-		    'enable_range_search' => true,
-		    'options' => 'date_range_search_dom',
+    'fields' => [
+        'id' => [
+            'name' => 'id',
+            'vname' => 'LBL_ID',
+            'required' => true,
+            'type' => 'id',
+            'reportable' => true,
+            'comment' => 'Unique identifier',
+        ],
+        'date_entered' => [
+            'name' => 'date_entered',
+            'vname' => 'LBL_DATE_ENTERED',
+            'type' => 'datetime',
+            'comment' => 'Date record created',
+            'enable_range_search' => true,
+            'options' => 'date_range_search_dom',
             'readonly' => true,
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => false,
                 // Disabled until UX component is available
@@ -46,17 +46,17 @@ $dictionary['Project'] = array(
                 //        'type' => 'DateRange',
                 //    ),
                 //),
-            ),
-		),
-		'date_modified' => array(
-			'name' => 'date_modified',
-			'vname' => 'LBL_DATE_MODIFIED',
-			'type' => 'datetime',
-			'comment' => 'Date record last modified',
-		    'enable_range_search' => true,
-		    'options' => 'date_range_search_dom',
+            ],
+        ],
+        'date_modified' => [
+            'name' => 'date_modified',
+            'vname' => 'LBL_DATE_MODIFIED',
+            'type' => 'datetime',
+            'comment' => 'Date record last modified',
+            'enable_range_search' => true,
+            'options' => 'date_range_search_dom',
             'readonly' => true,
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => false,
                 // Disabled until UX component is available
@@ -65,152 +65,148 @@ $dictionary['Project'] = array(
                 //        'type' => 'DateRange',
                 //    ),
                 //),
-            ),
-		),
-		'assigned_user_id' => array(
-			'name' => 'assigned_user_id',
+            ],
+        ],
+        'assigned_user_id' => [
+            'name' => 'assigned_user_id',
             'type' => 'id',
-			'vname' => 'LBL_ASSIGNED_USER_ID',
-			'required' => false,
-			'isnull' => false,
-			'reportable'=>false,
+            'vname' => 'LBL_ASSIGNED_USER_ID',
+            'required' => false,
+            'isnull' => false,
+            'reportable' => false,
             'comment' => 'User assigned to this record',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => false,
-                'aggregations' => array(
-                    'assigned_user_id' => array(
+                'aggregations' => [
+                    'assigned_user_id' => [
                         'type' => 'MyItems',
                         'label' => 'LBL_AGG_ASSIGNED_TO_ME',
-                    ),
-                ),
-            ),
-		),
-		'modified_user_id' => array(
-			'name' => 'modified_user_id',
-			'rname' => 'user_name',
-			'id_name' => 'modified_user_id',
-			'vname' => 'LBL_MODIFIED_USER_ID',
-			'type' => 'assigned_user_name',
-			'table' => 'users',
-			'isnull' => 'false',
-			'dbType' => 'id',
-			'reportable'=>true,
+                    ],
+                ],
+            ],
+        ],
+        'modified_user_id' => [
+            'name' => 'modified_user_id',
+            'rname' => 'user_name',
+            'id_name' => 'modified_user_id',
+            'vname' => 'LBL_MODIFIED_USER_ID',
+            'type' => 'assigned_user_name',
+            'table' => 'users',
+            'isnull' => 'false',
+            'dbType' => 'id',
+            'reportable' => true,
             'comment' => 'User who last modified record',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => false,
                 'type' => 'id',
-                'aggregations' => array(
-                    'modified_user_id' => array(
+                'aggregations' => [
+                    'modified_user_id' => [
                         'type' => 'MyItems',
                         'label' => 'LBL_AGG_MODIFIED_BY_ME',
-                    ),
-                ),
-            ),
-		),
-		'modified_by_name' =>
-	  array (
-	    'name' => 'modified_by_name',
-	    'vname' => 'LBL_MODIFIED_NAME',
-	    'type' => 'relate',
-	    'reportable'=>false,
-	    'source'=>'non-db',
-        'rname' => 'full_name',
-	    'table' => 'users',
-	    'id_name' => 'modified_user_id',
-	    'module'=>'Users',
-	    'link'=>'modified_user_link',
-	    'duplicate_merge'=>'disabled'
-	  ),
-		'created_by' => array(
-			'name' => 'created_by',
-			'rname' => 'user_name',
-			'id_name' => 'modified_user_id',
-			'vname' => 'LBL_CREATED_BY',
-			'type' => 'assigned_user_name',
-			'table' => 'users',
-			'isnull' => 'false',
-			'dbType' => 'id',
-			'comment' => 'User who created record',
-            'full_text_search' => array(
+                    ],
+                ],
+            ],
+        ],
+        'modified_by_name' => [
+            'name' => 'modified_by_name',
+            'vname' => 'LBL_MODIFIED_NAME',
+            'type' => 'relate',
+            'reportable' => false,
+            'source' => 'non-db',
+            'rname' => 'full_name',
+            'table' => 'users',
+            'id_name' => 'modified_user_id',
+            'module' => 'Users',
+            'link' => 'modified_user_link',
+            'duplicate_merge' => 'disabled',
+        ],
+        'created_by' => [
+            'name' => 'created_by',
+            'rname' => 'user_name',
+            'id_name' => 'modified_user_id',
+            'vname' => 'LBL_CREATED_BY',
+            'type' => 'assigned_user_name',
+            'table' => 'users',
+            'isnull' => 'false',
+            'dbType' => 'id',
+            'comment' => 'User who created record',
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => false,
                 'type' => 'id',
-                'aggregations' => array(
-                    'created_by' => array(
+                'aggregations' => [
+                    'created_by' => [
                         'type' => 'MyItems',
                         'label' => 'LBL_AGG_CREATED_BY_ME',
-                    ),
-                ),
-            ),
-		),
-		'created_by_name' =>
-	  array (
-	    'name' => 'created_by_name',
-		'vname' => 'LBL_CREATED',
-		'type' => 'relate',
-		'reportable'=>false,
-	    'link' => 'created_by_link',
-        'rname' => 'full_name',
-		'source'=>'non-db',
-		'table' => 'users',
-		'id_name' => 'created_by',
-		'module'=>'Users',
-		'duplicate_merge'=>'disabled',
-        'importable' => 'false',
-	),
-		'name' => array(
-			'name' => 'name',
-			'vname' => 'LBL_NAME',
-			'required' => true,
-			'dbType' => 'varchar',
-			'type' => 'name',
+                    ],
+                ],
+            ],
+        ],
+        'created_by_name' => [
+            'name' => 'created_by_name',
+            'vname' => 'LBL_CREATED',
+            'type' => 'relate',
+            'reportable' => false,
+            'link' => 'created_by_link',
+            'rname' => 'full_name',
+            'source' => 'non-db',
+            'table' => 'users',
+            'id_name' => 'created_by',
+            'module' => 'Users',
+            'duplicate_merge' => 'disabled',
+            'importable' => 'false',
+        ],
+        'name' => [
+            'name' => 'name',
+            'vname' => 'LBL_NAME',
+            'required' => true,
+            'dbType' => 'varchar',
+            'type' => 'name',
             'len' => 50,
-			'unified_search' => true,
-            'full_text_search' => array(
+            'unified_search' => true,
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => true,
                 'boost' => 0.84,
-            ),
-			'comment' => 'Project name',
-			'importable' => 'required',
-		),
-		'description' => array(
-			'name' => 'description',
-			'vname' => 'LBL_DESCRIPTION',
-			'required' => false,
-			'type' => 'text',
-            'full_text_search' => array(
+            ],
+            'comment' => 'Project name',
+            'importable' => 'required',
+        ],
+        'description' => [
+            'name' => 'description',
+            'vname' => 'LBL_DESCRIPTION',
+            'required' => false,
+            'type' => 'text',
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => true,
                 'boost' => 0.46,
-            ),
-			'comment' => 'Project description'
-		),
-		'deleted' => array(
-			'name' => 'deleted',
-			'vname' => 'LBL_DELETED',
-			'type' => 'bool',
-			'required' => false,
-            'reportable'=>false,
-			'default' => '0',
-			'comment' => 'Record deletion indicator'
-		),
-        'estimated_start_date' =>
-        array(
+            ],
+            'comment' => 'Project description',
+        ],
+        'deleted' => [
+            'name' => 'deleted',
+            'vname' => 'LBL_DELETED',
+            'type' => 'bool',
+            'required' => false,
+            'reportable' => false,
+            'default' => '0',
+            'comment' => 'Record deletion indicator',
+        ],
+        'estimated_start_date' => [
             'name' => 'estimated_start_date',
             'vname' => 'LBL_DATE_START',
             'required' => true,
-            'validation' => array('type' => 'isbefore', 'compareto' => 'estimated_end_date', 'blank' => true),
+            'validation' => ['type' => 'isbefore', 'compareto' => 'estimated_end_date', 'blank' => true],
             'type' => 'date',
             'importable' => 'required',
             'required' => true,
             'enable_range_search' => true,
             'options' => 'date_range_search_dom',
-        ),
-        'estimated_end_date' =>
-        array(
+        ],
+        'estimated_end_date' => [
             'name' => 'estimated_end_date',
             'vname' => 'LBL_DATE_END',
             'required' => true,
@@ -219,31 +215,29 @@ $dictionary['Project'] = array(
             'required' => true,
             'enable_range_search' => true,
             'options' => 'date_range_search_dom',
-        ),
-        'status' =>
-        array(
+        ],
+        'status' => [
             'name' => 'status',
             'vname' => 'LBL_STATUS',
             'type' => 'enum',
             'options' => 'project_status_dom',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => false,
-            ),
-        ),
+            ],
+        ],
 
-        'priority' =>
-        array(
+        'priority' => [
             'name' => 'priority',
             'vname' => 'LBL_PRIORITY',
             'type' => 'enum',
             'options' => 'projects_priority_options',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => false,
-            ),
-        ),
-        'is_template' => array(
+            ],
+        ],
+        'is_template' => [
             'name' => 'is_template',
             'vname' => 'LBL_IS_TEMPLATE',
             'type' => 'bool',
@@ -251,339 +245,312 @@ $dictionary['Project'] = array(
             'default' => '0',
             'comment' => 'Should be checked if the project is a template',
             'massupdate' => false,
-        ),
-		'total_estimated_effort' =>
-  		array (
-  			'name' => 'total_estimated_effort',
-			'type' => 'int',
-    		'source'=>'non-db',
-			'vname'=>'LBL_LIST_TOTAL_ESTIMATED_EFFORT',
-  		),
-		'total_actual_effort' =>
-  		array (
-  			'name' => 'total_actual_effort',
-			'type' => 'int',
-    		'source'=>'non-db',
-			'vname'=>'LBL_LIST_TOTAL_ACTUAL_EFFORT',
-  		),
+        ],
+        'total_estimated_effort' => [
+            'name' => 'total_estimated_effort',
+            'type' => 'int',
+            'source' => 'non-db',
+            'vname' => 'LBL_LIST_TOTAL_ESTIMATED_EFFORT',
+        ],
+        'total_actual_effort' => [
+            'name' => 'total_actual_effort',
+            'type' => 'int',
+            'source' => 'non-db',
+            'vname' => 'LBL_LIST_TOTAL_ACTUAL_EFFORT',
+        ],
 
-		'accounts' =>
-  		array (
-  			'name' => 'accounts',
-    		'type' => 'link',
-    		'relationship' => 'projects_accounts',
-    		'source'=>'non-db',
-    		'ignore_role'=>true,
-				'vname'=>'LBL_ACCOUNTS',
-  		),
-		'quotes' =>
-  		array (
-  			'name' => 'quotes',
-    		'type' => 'link',
-    		'relationship' => 'projects_quotes',
-    		'source'=>'non-db',
-    		'ignore_role'=>true,
-				'vname'=>'LBL_QUOTES',
-  		),
+        'accounts' => [
+            'name' => 'accounts',
+            'type' => 'link',
+            'relationship' => 'projects_accounts',
+            'source' => 'non-db',
+            'ignore_role' => true,
+            'vname' => 'LBL_ACCOUNTS',
+        ],
+        'quotes' => [
+            'name' => 'quotes',
+            'type' => 'link',
+            'relationship' => 'projects_quotes',
+            'source' => 'non-db',
+            'ignore_role' => true,
+            'vname' => 'LBL_QUOTES',
+        ],
 
-		'contacts' =>
-  		array (
-  			'name' => 'contacts',
-    		'type' => 'link',
-    		'relationship' => 'projects_contacts',
-    		'source'=>'non-db',
-    		'ignore_role'=>true,
-				'vname'=>'LBL_CONTACTS',
-  		),
-		'opportunities' =>
-  		array (
-  			'name' => 'opportunities',
-    		'type' => 'link',
-    		'relationship' => 'projects_opportunities',
-    		'source'=>'non-db',
-    		'ignore_role'=>true,
-				'vname'=>'LBL_OPPORTUNITIES',
-  		),
-  		'notes' =>
-  		array (
-  			'name' => 'notes',
-    		'type' => 'link',
-    		'relationship' => 'projects_notes',
-    		'source'=>'non-db',
-				'vname'=>'LBL_NOTES',
-  		),
+        'contacts' => [
+            'name' => 'contacts',
+            'type' => 'link',
+            'relationship' => 'projects_contacts',
+            'source' => 'non-db',
+            'ignore_role' => true,
+            'vname' => 'LBL_CONTACTS',
+        ],
+        'opportunities' => [
+            'name' => 'opportunities',
+            'type' => 'link',
+            'relationship' => 'projects_opportunities',
+            'source' => 'non-db',
+            'ignore_role' => true,
+            'vname' => 'LBL_OPPORTUNITIES',
+        ],
+        'notes' => [
+            'name' => 'notes',
+            'type' => 'link',
+            'relationship' => 'projects_notes',
+            'source' => 'non-db',
+            'vname' => 'LBL_NOTES',
+        ],
         'messages' => [
             'name' => 'messages',
             'type' => 'link',
             'relationship' => 'projects_messages',
-            'source'=>'non-db',
-            'vname'=>'LBL_MESSAGES',
+            'source' => 'non-db',
+            'vname' => 'LBL_MESSAGES',
         ],
-		'tasks' =>
-  			array (
-  			'name' => 'tasks',
-    		'type' => 'link',
-    		'relationship' => 'projects_tasks',
-    		'source'=>'non-db',
-				'vname'=>'LBL_TASKS',
-  		),
-  		'meetings' =>
-  			array (
-  			'name' => 'meetings',
-    		'type' => 'link',
-    		'relationship' => 'projects_meetings',
-    		'source'=>'non-db',
-				'vname'=>'LBL_MEETINGS',
-  		),
-		'calls' =>
-  			array (
-  			'name' => 'calls',
-    		'type' => 'link',
-    		'relationship' => 'projects_calls',
-    		'source'=>'non-db',
-				'vname'=>'LBL_CALLS',
-  		),
-  		'emails' =>
-  			array (
-  			'name' => 'emails',
-    		'type' => 'link',
-    		'relationship' => 'emails_projects_rel',
-    		'source'=>'non-db',
-				'vname'=>'LBL_EMAILS',
-  		),
-  		'projecttask' =>
-  			array (
-  			'name' => 'projecttask',
-    		'type' => 'link',
-    		'relationship' => 'projects_project_tasks',
-    		'source'=>'non-db',
-				'vname'=>'LBL_PROJECT_TASKS',
-  		),
-          'created_by_link' =>
-          array (
-                'name' => 'created_by_link',
+        'tasks' => [
+            'name' => 'tasks',
+            'type' => 'link',
+            'relationship' => 'projects_tasks',
+            'source' => 'non-db',
+            'vname' => 'LBL_TASKS',
+        ],
+        'meetings' => [
+            'name' => 'meetings',
+            'type' => 'link',
+            'relationship' => 'projects_meetings',
+            'source' => 'non-db',
+            'vname' => 'LBL_MEETINGS',
+        ],
+        'calls' => [
+            'name' => 'calls',
+            'type' => 'link',
+            'relationship' => 'projects_calls',
+            'source' => 'non-db',
+            'vname' => 'LBL_CALLS',
+        ],
+        'emails' => [
+            'name' => 'emails',
+            'type' => 'link',
+            'relationship' => 'emails_projects_rel',
+            'source' => 'non-db',
+            'vname' => 'LBL_EMAILS',
+        ],
+        'projecttask' => [
+            'name' => 'projecttask',
+            'type' => 'link',
+            'relationship' => 'projects_project_tasks',
+            'source' => 'non-db',
+            'vname' => 'LBL_PROJECT_TASKS',
+        ],
+        'created_by_link' => [
+            'name' => 'created_by_link',
             'type' => 'link',
             'relationship' => 'projects_created_by',
             'vname' => 'LBL_CREATED_BY_USER',
             'link_type' => 'one',
-            'module'=>'Users',
-            'bean_name'=>'User',
-            'source'=>'non-db',
-          ),
-          'modified_user_link' =>
-          array (
-                'name' => 'modified_user_link',
+            'module' => 'Users',
+            'bean_name' => 'User',
+            'source' => 'non-db',
+        ],
+        'modified_user_link' => [
+            'name' => 'modified_user_link',
             'type' => 'link',
             'relationship' => 'projects_modified_user',
             'vname' => 'LBL_MODIFIED_BY_USER',
             'link_type' => 'one',
-            'module'=>'Users',
-            'bean_name'=>'User',
-            'source'=>'non-db',
-          ),
-          'assigned_user_link' =>
-          array (
-                'name' => 'assigned_user_link',
+            'module' => 'Users',
+            'bean_name' => 'User',
+            'source' => 'non-db',
+        ],
+        'assigned_user_link' => [
+            'name' => 'assigned_user_link',
             'type' => 'link',
             'relationship' => 'projects_assigned_user',
             'vname' => 'LBL_ASSIGNED_TO_USER',
             'link_type' => 'one',
-            'module'=>'Users',
-            'bean_name'=>'User',
-            'source'=>'non-db',
-          ),
-        'assigned_user_name' =>
-        array (
-        	'name' => 'assigned_user_name',
-        	'rname' => 'full_name',
-        	'id_name' => 'assigned_user_id',
-        	'vname' => 'LBL_ASSIGNED_USER_NAME',
-        	'type' => 'relate',
-        	'table' => 'users',
-        	'module' => 'Users',
-        	'dbType' => 'varchar',
-        	'link'=>'assigned_user_link',
-        	'len' => '255',
-        	'source'=>'non-db',
-            'exportable'=> true,
-            'sort_on' => array('last_name'),
-        	),
-        'cases' =>
-            array (
+            'module' => 'Users',
+            'bean_name' => 'User',
+            'source' => 'non-db',
+        ],
+        'assigned_user_name' => [
+            'name' => 'assigned_user_name',
+            'rname' => 'full_name',
+            'id_name' => 'assigned_user_id',
+            'vname' => 'LBL_ASSIGNED_USER_NAME',
+            'type' => 'relate',
+            'table' => 'users',
+            'module' => 'Users',
+            'dbType' => 'varchar',
+            'link' => 'assigned_user_link',
+            'len' => '255',
+            'source' => 'non-db',
+            'exportable' => true,
+            'sort_on' => ['last_name'],
+        ],
+        'cases' => [
             'name' => 'cases',
             'type' => 'link',
             'relationship' => 'projects_cases',
             'side' => 'right',
-            'source'=>'non-db',
-            'vname'=>'LBL_CASES',
-        ),
-        'bugs' =>
-            array (
+            'source' => 'non-db',
+            'vname' => 'LBL_CASES',
+        ],
+        'bugs' => [
             'name' => 'bugs',
             'type' => 'link',
             'relationship' => 'projects_bugs',
             'side' => 'right',
-            'source'=>'non-db',
-            'vname'=>'LBL_BUGS',
-        ),
-        'products' =>
-            array (
+            'source' => 'non-db',
+            'vname' => 'LBL_BUGS',
+        ],
+        'products' => [
             'name' => 'products',
             'type' => 'link',
             'relationship' => 'projects_products',
             'side' => 'right',
-            'source'=>'non-db',
-            'vname'=>'LBL_PRODUCTS',
-        ),
-        'revenuelineitems' =>
-            array (
+            'source' => 'non-db',
+            'vname' => 'LBL_PRODUCTS',
+        ],
+        'revenuelineitems' => [
             'name' => 'revenuelineitems',
             'type' => 'link',
             'relationship' => 'projects_revenuelineitems',
-            'source'=>'non-db',
-            'vname'=>'LBL_REVENUELINEITEMS',
-            'workflow' => false
-        ),
-		'user_resources' =>
-  			array (
-  			'name' => 'user_resources',
-    		'type' => 'link',
-    		'relationship' => 'projects_users_resources',
-            'side' => 'right',
-    		'source'=>'non-db',
-			'vname'=>'LBL_USER_RESOURCE',
-  		),
-
-		'contact_resources' =>
-  			array (
-  			'name' => 'contact_resources',
-    		'type' => 'link',
-    		'relationship' => 'projects_contacts_resources',
-            'side' => 'right',
-    		'source'=>'non-db',
-			'vname'=>'LBL_CONTACTS_RESOURCE',
-  		),
-		'project_holidays' =>
-  			array (
-  			'name' => 'project_holidays',
-    		'type' => 'link',
-    		'relationship' => 'projects_holidays',
-    		'source'=>'non-db',
-			'vname'=>'LBL_PROJECT_HOLIDAYS',
-			'module'=>'Holidays',
-			'bean_name'=>'Holiday',
-  		),
-	),
-	'indices' => array(
-		array('name' =>'projects_primary_key_index',
-			'type' =>'primary',
-			'fields'=>array('id')
-		),
-        array('name' => 'idx_project_name', 'type' => 'index', 'fields' => array('name')),
-        array('name' => 'idx_project_estimated_start_date', 'type' => 'index', 'fields' => array('estimated_start_date')),
-        array('name' => 'idx_project_estimated_end_date', 'type' => 'index', 'fields' => array('estimated_end_date')),
-        array('name' => 'idx_project_status', 'type' => 'index', 'fields' => array('status')),
-	),
-	'relationships' => array(
-		'projects_notes' => array(
-			'lhs_module'=> 'Project', 'lhs_table'=> 'project', 'lhs_key' => 'id',
-			'rhs_module'=> 'Notes', 'rhs_table'=> 'notes', 'rhs_key' => 'parent_id',
-			'relationship_type'=>'one-to-many', 'relationship_role_column'=>'parent_type',
-			'relationship_role_column_value'=>'Project'),
-        'projects_messages' => [
-            'lhs_module'=> 'Project',
-            'lhs_table'=> 'project',
-            'lhs_key' => 'id',
-            'rhs_module'=> 'Messages',
-            'rhs_table'=> 'messages',
-            'rhs_key' => 'parent_id',
-            'relationship_type'=>'one-to-many',
-            'relationship_role_column'=>'parent_type',
-            'relationship_role_column_value'=>'Project',
+            'source' => 'non-db',
+            'vname' => 'LBL_REVENUELINEITEMS',
+            'workflow' => false,
         ],
-		'projects_tasks' => array(
-			'lhs_module'=> 'Project', 'lhs_table'=> 'project', 'lhs_key' => 'id',
-			'rhs_module'=> 'Tasks', 'rhs_table'=> 'tasks', 'rhs_key' => 'parent_id',
-			'relationship_type'=>'one-to-many', 'relationship_role_column'=>'parent_type',
-			'relationship_role_column_value'=>'Project'),
-		'projects_meetings' => array(
-			'lhs_module'=> 'Project', 'lhs_table'=> 'project', 'lhs_key' => 'id',
-			'rhs_module'=> 'Meetings', 'rhs_table'=> 'meetings', 'rhs_key' => 'parent_id',
-			'relationship_type'=>'one-to-many', 'relationship_role_column'=>'parent_type',
-			'relationship_role_column_value'=>'Project'),
-		'projects_calls' => array(
-			'lhs_module'=> 'Project', 'lhs_table'=> 'project', 'lhs_key' => 'id',
-			'rhs_module'=> 'Calls', 'rhs_table'=> 'calls', 'rhs_key' => 'parent_id',
-			'relationship_type'=>'one-to-many', 'relationship_role_column'=>'parent_type',
-			'relationship_role_column_value'=>'Project'),
-		'projects_emails' => array(
-			'lhs_module'=> 'Project', 'lhs_table'=> 'project', 'lhs_key' => 'id',
-			'rhs_module'=> 'Emails', 'rhs_table'=> 'emails', 'rhs_key' => 'parent_id',
-			'relationship_type'=>'one-to-many', 'relationship_role_column'=>'parent_type',
-			'relationship_role_column_value'=>'Project'),
-		'projects_project_tasks' => array(
-			'lhs_module'=> 'Project', 'lhs_table'=> 'project', 'lhs_key' => 'id',
-			'rhs_module'=> 'ProjectTask', 'rhs_table'=> 'project_task', 'rhs_key' => 'project_id',
-			'relationship_type'=>'one-to-many'),
-        'projects_assigned_user' =>
-           array('lhs_module'=> 'Users', 'lhs_table'=> 'users', 'lhs_key' => 'id',
-           'rhs_module'=> 'Project', 'rhs_table'=> 'project', 'rhs_key' => 'assigned_user_id',
-           'relationship_type'=>'one-to-many')
+        'user_resources' => [
+            'name' => 'user_resources',
+            'type' => 'link',
+            'relationship' => 'projects_users_resources',
+            'side' => 'right',
+            'source' => 'non-db',
+            'vname' => 'LBL_USER_RESOURCE',
+        ],
 
-           ,'projects_modified_user' =>
-           array('lhs_module'=> 'Users', 'lhs_table'=> 'users', 'lhs_key' => 'id',
-           'rhs_module'=> 'Project', 'rhs_table'=> 'project', 'rhs_key' => 'modified_user_id',
-           'relationship_type'=>'one-to-many')
-
-           ,'projects_created_by' =>
-           array('lhs_module'=> 'Users', 'lhs_table'=> 'users', 'lhs_key' => 'id',
-           'rhs_module'=> 'Project', 'rhs_table'=> 'project', 'rhs_key' => 'created_by',
-           'relationship_type'=>'one-to-many')
-        ,'projects_users_resources' => array(
-            'lhs_module'        => 'Project',
-            'lhs_table'         => 'project',
-            'lhs_key'           => 'id',
-            'rhs_module'        => 'Users',
-            'rhs_table'         => 'users',
-            'rhs_key'           => 'id',
-            'relationship_type' => 'many-to-many',
-            'join_table'        => 'project_resources',
-            'join_key_lhs'      => 'project_id',
-            'join_key_rhs'      => 'resource_id',
-            'relationship_role_column'=>'resource_type',
-            'relationship_role_column_value'=>'Users',
-        ),
-        'projects_contacts_resources' => array(
-            'lhs_module'        => 'Project',
-            'lhs_table'         => 'project',
-            'lhs_key'           => 'id',
-            'rhs_module'        => 'Contacts',
-            'rhs_table'         => 'contacts',
-            'rhs_key'           => 'id',
-            'relationship_type' => 'many-to-many',
-            'join_table'        => 'project_resources',
-            'join_key_lhs'      => 'project_id',
-            'join_key_rhs'      => 'resource_id',
-            'relationship_role_column'=>'resource_type',
-            'relationship_role_column_value'=>'Contacts',
-        ),
-
-        'projects_holidays' => array(
-            'lhs_module'        => 'Project',
-            'lhs_table'         => 'project',
-            'lhs_key'           => 'id',
-            'rhs_module'        => 'Holidays',
-            'rhs_table'         => 'holidays',
-            'rhs_key'           => 'related_module_id',
+        'contact_resources' => [
+            'name' => 'contact_resources',
+            'type' => 'link',
+            'relationship' => 'projects_contacts_resources',
+            'side' => 'right',
+            'source' => 'non-db',
+            'vname' => 'LBL_CONTACTS_RESOURCE',
+        ],
+        'project_holidays' => [
+            'name' => 'project_holidays',
+            'type' => 'link',
+            'relationship' => 'projects_holidays',
+            'source' => 'non-db',
+            'vname' => 'LBL_PROJECT_HOLIDAYS',
+            'module' => 'Holidays',
+            'bean_name' => 'Holiday',
+        ],
+    ],
+    'indices' => [
+        ['name' => 'projects_primary_key_index',
+            'type' => 'primary',
+            'fields' => ['id'],
+        ],
+        ['name' => 'idx_project_name', 'type' => 'index', 'fields' => ['name']],
+        ['name' => 'idx_project_estimated_start_date', 'type' => 'index', 'fields' => ['estimated_start_date']],
+        ['name' => 'idx_project_estimated_end_date', 'type' => 'index', 'fields' => ['estimated_end_date']],
+        ['name' => 'idx_project_status', 'type' => 'index', 'fields' => ['status']],
+    ],
+    'relationships' => [
+        'projects_notes' => [
+            'lhs_module' => 'Project', 'lhs_table' => 'project', 'lhs_key' => 'id',
+            'rhs_module' => 'Notes', 'rhs_table' => 'notes', 'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many', 'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Project'],
+        'projects_messages' => [
+            'lhs_module' => 'Project',
+            'lhs_table' => 'project',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Messages',
+            'rhs_table' => 'messages',
+            'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
-            'relationship_role_column'=>'related_module',
-            'relationship_role_column_value'=>'Project',
-        ),
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Project',
+        ],
+        'projects_tasks' => [
+            'lhs_module' => 'Project', 'lhs_table' => 'project', 'lhs_key' => 'id',
+            'rhs_module' => 'Tasks', 'rhs_table' => 'tasks', 'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many', 'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Project'],
+        'projects_meetings' => [
+            'lhs_module' => 'Project', 'lhs_table' => 'project', 'lhs_key' => 'id',
+            'rhs_module' => 'Meetings', 'rhs_table' => 'meetings', 'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many', 'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Project'],
+        'projects_calls' => [
+            'lhs_module' => 'Project', 'lhs_table' => 'project', 'lhs_key' => 'id',
+            'rhs_module' => 'Calls', 'rhs_table' => 'calls', 'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many', 'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Project'],
+        'projects_emails' => [
+            'lhs_module' => 'Project', 'lhs_table' => 'project', 'lhs_key' => 'id',
+            'rhs_module' => 'Emails', 'rhs_table' => 'emails', 'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many', 'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Project'],
+        'projects_project_tasks' => [
+            'lhs_module' => 'Project', 'lhs_table' => 'project', 'lhs_key' => 'id',
+            'rhs_module' => 'ProjectTask', 'rhs_table' => 'project_task', 'rhs_key' => 'project_id',
+            'relationship_type' => 'one-to-many'],
+        'projects_assigned_user' => ['lhs_module' => 'Users', 'lhs_table' => 'users', 'lhs_key' => 'id',
+            'rhs_module' => 'Project', 'rhs_table' => 'project', 'rhs_key' => 'assigned_user_id',
+            'relationship_type' => 'one-to-many']
 
-	),
-);
+        , 'projects_modified_user' => ['lhs_module' => 'Users', 'lhs_table' => 'users', 'lhs_key' => 'id',
+            'rhs_module' => 'Project', 'rhs_table' => 'project', 'rhs_key' => 'modified_user_id',
+            'relationship_type' => 'one-to-many']
 
-VardefManager::createVardef('Project','Project', array(
-'team_security',
-));
-?>
+        , 'projects_created_by' => ['lhs_module' => 'Users', 'lhs_table' => 'users', 'lhs_key' => 'id',
+            'rhs_module' => 'Project', 'rhs_table' => 'project', 'rhs_key' => 'created_by',
+            'relationship_type' => 'one-to-many']
+        , 'projects_users_resources' => [
+            'lhs_module' => 'Project',
+            'lhs_table' => 'project',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Users',
+            'rhs_table' => 'users',
+            'rhs_key' => 'id',
+            'relationship_type' => 'many-to-many',
+            'join_table' => 'project_resources',
+            'join_key_lhs' => 'project_id',
+            'join_key_rhs' => 'resource_id',
+            'relationship_role_column' => 'resource_type',
+            'relationship_role_column_value' => 'Users',
+        ],
+        'projects_contacts_resources' => [
+            'lhs_module' => 'Project',
+            'lhs_table' => 'project',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Contacts',
+            'rhs_table' => 'contacts',
+            'rhs_key' => 'id',
+            'relationship_type' => 'many-to-many',
+            'join_table' => 'project_resources',
+            'join_key_lhs' => 'project_id',
+            'join_key_rhs' => 'resource_id',
+            'relationship_role_column' => 'resource_type',
+            'relationship_role_column_value' => 'Contacts',
+        ],
+
+        'projects_holidays' => [
+            'lhs_module' => 'Project',
+            'lhs_table' => 'project',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Holidays',
+            'rhs_table' => 'holidays',
+            'rhs_key' => 'related_module_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'related_module',
+            'relationship_role_column_value' => 'Project',
+        ],
+
+    ],
+];
+
+VardefManager::createVardef('Project', 'Project', [
+    'team_security',
+]);

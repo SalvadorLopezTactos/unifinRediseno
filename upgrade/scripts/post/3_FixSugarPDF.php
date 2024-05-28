@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Fix sugarPDF configs that could be broken by move to vendor/
  * @see BR-1557

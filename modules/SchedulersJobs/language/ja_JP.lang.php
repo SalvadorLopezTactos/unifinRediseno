@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'ジョブ キュー',
     'LBL_MODULE_NAME_SINGULAR' => 'ジョブ キュー',
     'LBL_MODULE_TITLE' => 'ジョブキュー: ホーム',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'キャンセルされた解決',
     'LBL_RESOLUTION_FILTER_RUNNING' => '実行中の解決',
     // Errors
-    'ERR_CALL' => "ファンクションが読み出せません: %s",
-    'ERR_CURL' => "CURLなし - URLジョブを実行できません",
-    'ERR_FAILED' => "予期しない障害です　PHPログとsugarcrm.logを確認してください",
-    'ERR_PHP' => "%s [%d]: 行 %d の %s に %s があります",
-    'ERR_NOUSER' => "ジョブにユーザIDが指定されていません",
-    'ERR_NOSUCHUSER' => "ユーザID %s が見つかりません",
-    'ERR_JOBTYPE' => "不明のジョブタイプ: %s",
-    'ERR_TIMEOUT' => "タイムアウトにより強制的に中止されました",
+    'ERR_CALL' => 'ファンクションが読み出せません: %s',
+    'ERR_CURL' => 'CURLなし - URLジョブを実行できません',
+    'ERR_FAILED' => '予期しない障害です　PHPログとsugarcrm.logを確認してください',
+    'ERR_PHP' => '%s [%d]: 行 %d の %s に %s があります',
+    'ERR_NOUSER' => 'ジョブにユーザIDが指定されていません',
+    'ERR_NOSUCHUSER' => 'ユーザID %s が見つかりません',
+    'ERR_JOBTYPE' => '不明のジョブタイプ: %s',
+    'ERR_TIMEOUT' => 'タイムアウトにより強制的に中止されました',
     'ERR_JOB_FAILED_VERBOSE' => 'CRON実行時にジョブ %1$s (%2$s) で障害が発生しました',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Id: %s の bean をロードできません',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'ルート %s のハンドラが見つかりません',
@@ -94,13 +94,13 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Amazon SQS 構成のヘルプ',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Amazon SQS 構成セクション</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Amazon SQS 構成セクション</b></p>
 <ul>
     <li>アクセス キー ID: <i>Amazon SQS のアクセス キー ID を入力します</i></li>
     <li>秘密のアクセス キー: <i>Amazon SQSの秘密のアクセス キーを入力します</i></li>
     <li>地域: <i>Amazon SQS サーバーの地域を入力します</i></li>
     <li>キュー名: <i>Amazon SQS サーバーのキュー名を入力します</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'AMQP 構成のヘルプ',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>AMQP 構成セクション</b></p>
 <ul>
@@ -121,4 +121,4 @@ $mod_strings = array(
     'LBL_REGION' => '地域',
     'LBL_ACCESS_KEY_SECRET' => '秘密のアクセス キー',
     'LBL_QUEUE_NAME' => 'アダプター名',
-);
+];

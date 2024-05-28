@@ -11,9 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' =>
-'<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
+        '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
 Verkrijg een consumentensleutel bij LgMeIn door een nieuwe GoToMeeting-toepassing te registreren.<br>
 &nbsp;<br>
 Registratiestappen:<br>
@@ -36,4 +36,4 @@ Registratiestappen:<br>
 </ol>
 </td></tr></table>',
     'oauth_consumer_key' => 'Consumentensleutel',
-);
+];

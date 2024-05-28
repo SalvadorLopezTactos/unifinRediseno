@@ -9,18 +9,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ProductBundles']['base']['view']['quote-data-group-footer'] = array(
-    'panels' => array(
-        array(
+$viewdefs['ProductBundles']['base']['view']['quote-data-group-footer'] = [
+    'panels' => [
+        [
             'name' => 'panel_quote_data_group_footer',
             'label' => 'LBL_QUOTE_DATA_GROUP_FOOTER',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'new_sub',
                     'label' => 'LBL_GROUP_TOTAL',
                     'type' => 'currency',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

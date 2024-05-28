@@ -31,15 +31,15 @@ class File extends Constraint implements ConstraintReturnValueInterface
     public const ERROR_OUTSIDE_BASEDIR = 3;
     public const ERROR_DIR_TRAVERSAL = 4;
 
-    protected static $errorNames = array(
+    protected static $errorNames = [
         self::ERROR_NULL_BYTES => 'ERROR_NULL_BYTES',
         self::ERROR_FILE_NOT_FOUND => 'ERROR_FILE_NOT_FOUND',
         self::ERROR_OUTSIDE_BASEDIR => 'ERROR_OUTSIDE_BASEDIR',
         self::ERROR_DIR_TRAVERSAL => 'ERROR_DIR_TRAVERSAL',
-    );
+    ];
 
     public $message = 'File name violation: %msg%';
-    public $baseDirs = array();
+    public $baseDirs = [];
 
     /**
      * {@inheritdoc}
@@ -64,7 +64,7 @@ class File extends Constraint implements ConstraintReturnValueInterface
 
             $options['baseDirs'][$key] = $baseDir;
             // add additional base directory when shadow is enabled
-            if (defined('SHADOW_INSTANCE_DIR') && strpos($baseDir, $instanceRealPath) === 0) {
+            if (defined('SHADOW_INSTANCE_DIR') && strpos($baseDir, (string) $instanceRealPath) === 0) {
                 $shadowInstancePaths[] = str_replace($instanceRealPath, SHADOW_INSTANCE_DIR, $baseDir);
             }
         }

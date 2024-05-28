@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tooteliigid',
     'LBL_MODULE_NAME_SINGULAR' => 'Tooteliik',
     'LBL_MODULE_TITLE' => 'Tooteliigid: avaleht',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Kas olete kindel, et soovite selle kirje kustutada?',
     'ERR_DELETE_RECORD' => 'Tooteliigi kustutamiseks täpsustage kirje numbrit.',
     'NTC_LIST_ORDER' => 'Määrake järjekord, milles see liik ripploendites Tooteliik kuvatakse',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Impordi tooteliigid',
-    'LBL_CREATED_BY'=>'Looja',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Impordi tooteliigid',
+    'LBL_CREATED_BY' => 'Looja',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Määratud ID',
-    'LBL_EXPORT_CREATED_BY'=>'Looja ID',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Impordi tootekategooriad',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Määratud ID',
+    'LBL_EXPORT_CREATED_BY' => 'Looja ID',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Impordi tootekategooriad',
+];

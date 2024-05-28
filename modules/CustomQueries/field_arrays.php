@@ -10,25 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Contains field arrays that are used for caching
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-$fields_array['CustomQuery'] = array ('column_fields' => Array("id"
-		,"name"
-		,"team_id"
-		,"description"
-		,"custom_query"
-		,"query_type"
-		,"date_entered"
-		,"date_modified"
-		,"modified_user_id"
-		, "created_by"
-		,"query_locked"
-		),
-        'list_fields' => Array('id', 'name', 'description', 'custom_query'),
-        'required_fields' => array("name"=>1),
-);
-?>
+$fields_array['CustomQuery'] = ['column_fields' => ['id'
+    , 'name'
+    , 'team_id'
+    , 'description'
+    , 'custom_query'
+    , 'query_type'
+    , 'date_entered'
+    , 'date_modified'
+    , 'modified_user_id'
+    , 'created_by'
+    , 'query_locked',
+],
+    'list_fields' => ['id', 'name', 'description', 'custom_query'],
+    'required_fields' => ['name' => 1],
+];

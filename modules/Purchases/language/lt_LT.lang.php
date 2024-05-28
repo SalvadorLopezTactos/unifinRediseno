@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Pirkinių įrašų ataskaitų sritis',
     'LBL_RELATED_ACCOUNT' => 'Susijusi paskyra',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ pirkimai',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Pirkimo laiko juosta',
 ];

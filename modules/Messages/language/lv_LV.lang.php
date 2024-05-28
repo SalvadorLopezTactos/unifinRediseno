@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'procesā',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Ziņojumu fokusa panelis',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Ziņojumu ieraksta instrumentu panelis',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ziņojuma laika josla',
 ];

@@ -13,31 +13,31 @@
 
 class ReportsDashletsApi extends SugarApi
 {
-
     /**
      * @var mixed
      */
     public $title;
+
     public function registerApiRest()
     {
-        return array(
-            'getSavedReports' => array(
+        return [
+            'getSavedReports' => [
                 'reqType' => 'GET',
-                'path' => array('Reports', 'saved_reports'),
-                'pathVars' => array('', ''),
+                'path' => ['Reports', 'saved_reports'],
+                'pathVars' => ['', ''],
                 'method' => 'getSavedReports',
                 'shortHelp' => 'Returns items from the saved_reports table based on a few criteria',
                 'longHelp' => 'modules/Reports/clients/base/api/help/ReportsDashletApiGetSavedReports.html',
-            ),
-            'getSavedReportChartById' => array(
+            ],
+            'getSavedReportChartById' => [
                 'reqType' => 'POST',
-                'path' => array('Reports', 'chart', '?'),
-                'pathVars' => array('', '', 'reportId'),
+                'path' => ['Reports', 'chart', '?'],
+                'pathVars' => ['', '', 'reportId'],
                 'method' => 'getSavedReportChartById',
                 'shortHelp' => 'Updates a ForecastWorksheet model',
                 'longHelp' => 'modules/Reports/clients/base/api/help/ReportsDashletApiGetSavedReportById.html',
-            )
-        );
+            ],
+        ];
     }
 
     /**
@@ -50,9 +50,9 @@ class ReportsDashletsApi extends SugarApi
     public function getSavedReports(ServiceBase $api, array $args)
     {
         // Make sure the user isn't seeing reports they don't have access to
-        require_once('modules/Reports/SavedReport.php');
+        require_once 'modules/Reports/SavedReport.php';
         $modules = array_keys(getACLDisAllowedModules());
-        $fieldList = array('id', 'name', 'module', 'report_type', 'content', 'chart_type', 'assigned_user_id');
+        $fieldList = ['id', 'name', 'module', 'report_type', 'content', 'chart_type', 'assigned_user_id'];
 
         $sq = new SugarQuery();
         $sq->from(BeanFactory::newBean('Reports'));
@@ -60,16 +60,16 @@ class ReportsDashletsApi extends SugarApi
         $sq->orderBy('name', 'asc');
 
         // if there were restricted modules, add those to the query
-        if(count($modules)) {
+        if (safeCount($modules)) {
             $sq->where()->notIn('module', $modules);
         }
 
-        if(isset($args['has_charts']) && $args['has_charts'] == 'true') {
+        if (isset($args['has_charts']) && $args['has_charts'] == 'true') {
             $sq->where()->notEquals('chart_type', 'none');
         }
 
-        if(isset($args['module']) && $args['module'] !== '') {
-            $sq->where()->in('module', array($args['module']));
+        if (isset($args['module']) && $args['module'] !== '') {
+            $sq->where()->in('module', [$args['module']]);
         }
 
         $result = $sq->execute();
@@ -79,9 +79,8 @@ class ReportsDashletsApi extends SugarApi
 
             if ($savedReport->ACLAccess('list')) {
                 // for front-end to check acls
-                $row['_acl'] = ApiHelper::getHelper($api,$savedReport)->getBeanAcl($savedReport, $fieldList);
-            }
-            else {
+                $row['_acl'] = ApiHelper::getHelper($api, $savedReport)->getBeanAcl($savedReport, $fieldList);
+            } else {
                 unset($result[$key]);
             }
         }
@@ -110,7 +109,7 @@ class ReportsDashletsApi extends SugarApi
                 throw new SugarApiExceptionNotAuthorized('No access to view this report');
             }
 
-            $returnData = array();
+            $returnData = [];
 
             $this->title = $chartReport->name;
 
@@ -123,7 +122,7 @@ class ReportsDashletsApi extends SugarApi
             }
 
             // build report data since it isn't a SugarBean
-            $reportData = array();
+            $reportData = [];
             $reportData['name'] = $reporter->name;
             $reportData['id'] = $reporter->saved_report_id;
             $reportData['summary_columns'] = $reporter->report_def['summary_columns'];
@@ -157,7 +156,7 @@ class ReportsDashletsApi extends SugarApi
      */
     protected function getSavedReportById($reportId)
     {
-        return BeanFactory::getBean("Reports", $reportId, array("encode" => false));
+        return BeanFactory::getBean('Reports', $reportId, ['encode' => false]);
     }
 
     /**
@@ -184,71 +183,71 @@ class ReportsDashletsApi extends SugarApi
     {
         $reportDef = json_decode($contentDef, true);
 
-        switch($filterId) {
+        switch ($filterId) {
             case 'favorites':
-                $reportDef['full_table_list']['self']['dependents'] = array();
+                $reportDef['full_table_list']['self']['dependents'] = [];
 
-                $reportDef['full_table_list']['Accounts:favorite_link'] = array(
-                        "name" => "Accounts  \\u003E  Favorite",
-                        "parent" => "self",
-                        "link_def" => array(
-                            "name" => "favorite_link",
-                            "relationship_name" => "accounts_favorite",
-                            "bean_is_lhs" => true,
-                            "link_type" => "many",
-                            "label" => "Favorite",
-                            "module" => "Users",
-                            "table_key" => "Accounts:favorite_link",
-                        ),
-                        "dependents" => array("Filter.1_table_filter_row_1"),
-                        "module" => "Users",
-                        "label" => "Favorite",
-                    );
+                $reportDef['full_table_list']['Accounts:favorite_link'] = [
+                    'name' => 'Accounts  \\u003E  Favorite',
+                    'parent' => 'self',
+                    'link_def' => [
+                        'name' => 'favorite_link',
+                        'relationship_name' => 'accounts_favorite',
+                        'bean_is_lhs' => true,
+                        'link_type' => 'many',
+                        'label' => 'Favorite',
+                        'module' => 'Users',
+                        'table_key' => 'Accounts:favorite_link',
+                    ],
+                    'dependents' => ['Filter.1_table_filter_row_1'],
+                    'module' => 'Users',
+                    'label' => 'Favorite',
+                ];
 
-                $reportDef['filters_def']['Filter_1'] = array(
-                        "operator" => "AND",
-                        "0" => array(
-                            "name" => "id",
-                            "table_key" => "Accounts:favorite_link",
-                            "qualifier_name" => "is",
-                            "input_name0" => "seed_jim_id",
-                            "input_name1" => "Jim Brennan",
-                        ),
-                    );
+                $reportDef['filters_def']['Filter_1'] = [
+                    'operator' => 'AND',
+                    '0' => [
+                        'name' => 'id',
+                        'table_key' => 'Accounts:favorite_link',
+                        'qualifier_name' => 'is',
+                        'input_name0' => 'seed_jim_id',
+                        'input_name1' => 'Jim Brennan',
+                    ],
+                ];
                 return json_encode($reportDef);
 
                 break;
 
             case 'assigned_to_me':
-                $reportDef['full_table_list']['self']['dependents'] = array();
+                $reportDef['full_table_list']['self']['dependents'] = [];
 
-                $reportDef['full_table_list']['Accounts:assigned_user_link'] = array(
-                        "name" => "Accounts  \\u003E  Assigned to User",
-                        "parent" => "self",
-                        "link_def" => array(
-                            "name" => "assigned_user_link",
-                            "relationship_name" => "accounts_assigned_user",
-                            "bean_is_lhs" => false,
-                            "link_type" => "one",
-                            "label" => "Assigned to User",
-                            "module" => "Users",
-                            "table_key" => "Accounts:assigned_user_link",
-                        ),
-                        "dependents" => array("Filter.1_table_filter_row_1"),
-                        "module" => "Users",
-                        "label" => "Favorite",
-                    );
+                $reportDef['full_table_list']['Accounts:assigned_user_link'] = [
+                    'name' => 'Accounts  \\u003E  Assigned to User',
+                    'parent' => 'self',
+                    'link_def' => [
+                        'name' => 'assigned_user_link',
+                        'relationship_name' => 'accounts_assigned_user',
+                        'bean_is_lhs' => false,
+                        'link_type' => 'one',
+                        'label' => 'Assigned to User',
+                        'module' => 'Users',
+                        'table_key' => 'Accounts:assigned_user_link',
+                    ],
+                    'dependents' => ['Filter.1_table_filter_row_1'],
+                    'module' => 'Users',
+                    'label' => 'Favorite',
+                ];
 
-                $reportDef['filters_def']['Filter_1'] = array(
-                        "operator" => "AND",
-                        "0" => array(
-                            "name" => "id",
-                            "table_key" => "Accounts:assigned_user_link",
-                            "qualifier_name" => "is",
-                            "input_name0" => "seed_jim_id",
-                            "input_name1" => "Jim Brennan",
-                        ),
-                    );
+                $reportDef['filters_def']['Filter_1'] = [
+                    'operator' => 'AND',
+                    '0' => [
+                        'name' => 'id',
+                        'table_key' => 'Accounts:assigned_user_link',
+                        'qualifier_name' => 'is',
+                        'input_name0' => 'seed_jim_id',
+                        'input_name1' => 'Jim Brennan',
+                    ],
+                ];
                 return json_encode($reportDef);
 
                 break;
@@ -256,14 +255,13 @@ class ReportsDashletsApi extends SugarApi
             default: /* we assume if we don't know the type, it's raw */
                 $filter = BeanFactory::getBean('Filters', $filterId);
 
-                $reportDef['filters_def']['Filter_1'] = array(
-                        "operator" => "AND",
-                );
+                $reportDef['filters_def']['Filter_1'] = [
+                    'operator' => 'AND',
+                ];
 
                 $filter_definition = json_decode($filter->filter_definition);
 
-                foreach ($filter_definition as $filter_attr)
-                {
+                foreach ($filter_definition as $filter_attr) {
                     $filter_field = key($filter_attr);
                     $filter_props = current($filter_attr);
 
@@ -275,14 +273,15 @@ class ReportsDashletsApi extends SugarApi
                         $filter_val = current($filter_props);
                     }
 
-                    array_push($reportDef['filters_def']['Filter_1'],
-                        array(
-                            "name" => $filter_field,
-                            "table_key" => "self",
-                            "qualifier_name" => $filter_opp,
-                            "runtime" => 1,
-                            "input_name0" => $filter_val,
-                        )
+                    array_push(
+                        $reportDef['filters_def']['Filter_1'],
+                        [
+                            'name' => $filter_field,
+                            'table_key' => 'self',
+                            'qualifier_name' => $filter_opp,
+                            'runtime' => 1,
+                            'input_name0' => $filter_val,
+                        ]
                     );
                 }
 
@@ -292,8 +291,9 @@ class ReportsDashletsApi extends SugarApi
         }
     }
 
-    private function translateFilterOperator($opp) {
-        switch($opp) {
+    private function translateFilterOperator($opp)
+    {
+        switch ($opp) {
             case '$in':
                 return 'one_of';
                 break;
@@ -320,6 +320,4 @@ class ReportsDashletsApi extends SugarApi
                 break;
         }
     }
-
-
 }

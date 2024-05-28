@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'TPL_ACTIVITY_CREATE' => 'Luotiin {{{str "TPL_ACTIVITY_RECORD" "Activities" object}}} {{str "LBL_MODULE_NAME_SINGULAR" object.module}}.',
     'TPL_ACTIVITY_POST' => '{{{value}}}{{{str "TPL_ACTIVITY_ON" "Activities" this}}}',
     'TPL_ACTIVITY_UPDATE' => 'Päivitettiin {{{str "TPL_ACTIVITY_RECORD" "Activities" object}}}{{#if updateStr}}&rarr;{{{updateStr}}}{{/if}}',
@@ -28,4 +28,4 @@ $mod_strings = array(
     'TPL_MORE_COMMENT' => '{{this}} enemmän kommenttia...',
     'TPL_MORE_COMMENTS' => '{{this}} enemmän kommentteja...',
     'TPL_SHOW_MORE_MODULE' => 'Enemmän viestejä...',
-);
+];

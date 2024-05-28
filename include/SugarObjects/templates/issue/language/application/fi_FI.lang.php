@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'Administration',
-    'Product' => 'Tuote',
-    'User' => 'Käyttäjä',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => 'Uusi',
-    'Assigned' => 'Määritetty:',
-    'Closed' => 'Suljettu',
-    'Pending Input' => 'Odottaa lisätietoja',
-    'Rejected' => 'Hylätty',
-    'Duplicate' => 'Kahdenna',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => 'Korkea',
-    'P2' => 'Keskisuuri',
-    'P3' => 'Matala',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => 'Hyväksytty',
-    'Duplicate' => 'Kahdenna',
-    'Closed' => 'Suljettu',
-    'Out of Date' => 'Vanhentunut',
-    'Invalid' => 'Virheellinen',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => 'Hallinta',
+        'Product' => 'Tuote',
+        'User' => 'Käyttäjä',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => 'Uusi',
+        'Assigned' => 'Määritetty',
+        'Closed' => 'Suljettu',
+        'Pending Input' => 'Odottaa lisätietoja',
+        'Rejected' => 'Hylätty',
+        'Duplicate' => 'Kopio',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => 'Suuri',
+        'P2' => 'Keskisuuri',
+        'P3' => 'Matala',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => 'Hyväksytty',
+        'Duplicate' => 'Kopio',
+        'Closed' => 'Suljettu',
+        'Out of Date' => 'Vanhentunut',
+        'Invalid' => 'Virheellinen',
+    ],
+];

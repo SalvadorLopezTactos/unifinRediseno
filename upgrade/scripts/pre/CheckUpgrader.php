@@ -21,7 +21,7 @@ class SugarUpgradeCheckUpgrader extends UpgradeScript
 
     public function run()
     {
-        $this->log("Check Upgrade driver version");
+        $this->log('Check Upgrade driver version');
         if (empty($this->context['versionInfo'][0]) ||
             version_compare($this->context['versionInfo'][0], self::ALLOWED_UPGRADER_VERSION, '<')
         ) {

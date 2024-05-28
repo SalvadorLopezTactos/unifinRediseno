@@ -34,20 +34,21 @@ class StaticStrategy extends AbstractStrategy
      */
     public function getManagedIndices($module)
     {
-        return array($this->getStaticIndex($module));
+        return [$this->getStaticIndex($module)];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getReadIndices($module, array $context = array())
+    public function getReadIndices($module, array $context = [])
     {
-        return array($this->getStaticIndex($module));
+        return [$this->getStaticIndex($module)];
     }
+
     /**
      * {@inheritdoc}
      */
-    public function getWriteIndex($module, array $context = array())
+    public function getWriteIndex($module, array $context = [])
     {
         return $this->getStaticIndex($module);
     }

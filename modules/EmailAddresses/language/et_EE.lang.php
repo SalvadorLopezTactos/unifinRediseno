@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_EMAIL_ADDRESS_ID' => 'ID',
     'LBL_EMAIL_ADDRESS' => 'E-posti aadress',
     'LBL_EMAIL_ADDRESS_CAPS' => 'E-posti aadressi suurtähed',
@@ -31,4 +30,4 @@ $mod_strings = array (
     'LBL_CONFIRMATION_REQUESTED_ON' => 'Kinnituse taotluse tegevus on sooritatud',
     'LBL_CONFIRMATION_TITLE' => 'Aitäh',
     'LBL_CONFIRMATION_MESSAGE' => 'Teie tellimus on kinnitatud. Olete meie nimekirja lisatud ja kuulete meist peagi.',
-);
+];

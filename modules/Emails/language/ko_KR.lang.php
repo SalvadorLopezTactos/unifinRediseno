@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'FW:',
     'LBL_RE' => 'Re:',
     'LBL_BUTTON_CREATE' => '새로 만들기',
@@ -19,7 +19,7 @@ $mod_strings = array(
     'LBL_SIGNATURE_PREPEND' => '답장 위에 서명하기',
     'LBL_EMAIL_DEFAULT_DESCRIPTION' => '요청하신 견적입니다.(이 문장은 변경 가능합니다)',
     'LBL_EMAIL_QUOTE_FOR' => '견적',
-    'LBL_QUOTE_LAYOUT_DOES_NOT_EXIST_ERROR' => '견적 지면배치 파일이 존재하지 않습니다.',
+    'LBL_QUOTE_LAYOUT_DOES_NOT_EXIST_ERROR' => '견적 레이아웃 파일이 존재하지 않음: $layout',
     'LBL_QUOTE_LAYOUT_REGISTERED_ERROR' => '견적 지면 배치가 modules/Quotes/Layouts.php에 등록되지 않았습니다.',
     'LBL_CONFIRM_DELETE' => '이 폴더를 삭제하시겠습니까?',
     'LBL_ENTER_FOLDER_NAME' => '폴더명을 입력하십시오',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => '이메일 계정으로부터 선택합니다.',
     'LBL_SELECT_SIGNATURE_TITLE' => '서명을 선택합니다.',
     'LBL_SIGNATURE' => '서명',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "내정된 서명",
-    "LBL_SHOW_MORE_SIGNATURES" => "다른 서명",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => '내정된 서명',
+    'LBL_SHOW_MORE_SIGNATURES' => '다른 서명',
     'LBL_SUBJECT' => '제목',
     'LBL_TEMPLATE' => '템플릿',
     'LBL_TEXT_BODY' => '문장 본문',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => '보낸 시간',
     'LBL_LIST_TO_ADDR' => '받는 사람',
     'LBL_LIST_TYPE' => '종류',
-    "LBL_SELECTED_RECIPIENTS" => "선택된 수신자",
-    "LBL_SHOW_MORE_RECIPIENTS" => "더 많은 수신자",
-    "LBL_COMPOSE_ADDRESSBOOK" => "주소책자",
+    'LBL_SELECTED_RECIPIENTS' => '선택된 수신자',
+    'LBL_SHOW_MORE_RECIPIENTS' => '더 많은 수신자',
+    'LBL_COMPOSE_ADDRESSBOOK' => '주소책자',
     'NTC_REMOVE_INVITEE' => '이메일로부터 이 수신자를 삭제하시겠습니까?',
     'WARNING_SETTINGS_NOT_CONF' => '이메일 설정이 이메일을 보내도록 올바르게 구성되지 않았습니다. SMTP 서버는 ' .
         '<a href="#bwc/index.php?module=EmailMan&action=config">이메일 설정</a>에서 구성해야 합니다.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => '파일 첨부가 실패할 수 있습니다. "upload_tmp_dir" 값이 올바르지 않거나 사용할 수 없습니다.' .
         'php.ini 파일에서 수정하십시오.',
     'LBL_MESSAGE_UID' => '메세지 UID',
-    'LBL_OPEN_DRAFT_ALERT' => '이메일이 작성 단계입니다.'.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>를'.
+    'LBL_OPEN_DRAFT_ALERT' => '이메일이 작성 단계입니다.' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>를' .
         '클릭하여 수정하세요.',
     'LBL_EMAIL_BODY' => '이메일 메시지',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => '이메일 포커스 서랍',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => '이메일 기록 대시보드',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '이메일 타임라인',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => '수신자가 명시되지 않았습니다.',
@@ -473,4 +474,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => '이메일 전송',
     'LBL_MAILBOX' => '인바운드 계정',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => '이메일을 보내시려면 <a href="#OutboundEmail">이메일 설정</a>을 통해 아웃바운드 이메일 계정을 설정하십시오.',
-);
+    'LBL_TOO_SHORT' => '최소 {0}자 이상 입력하세요...',
+];

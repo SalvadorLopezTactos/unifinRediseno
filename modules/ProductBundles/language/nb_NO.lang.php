@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Gruppefase:',
-    'LBL_DEAL_TOT'=>'Total rabatt',
-    'LBL_DEAL_TOT_USDOLLAR'=>'Total rabatt (US Dollar)',
+    'LBL_DEAL_TOT' => 'Total rabatt',
+    'LBL_DEAL_TOT_USDOLLAR' => 'Total rabatt (US Dollar)',
     'LBL_NEW_SUB' => 'Rabattert subtotal:',
     'LBL_SHIPPING' => 'Frakt:',
-    'LBL_SHIPPING_USDOLLAR'=>'Frakt (US Dollar)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Subtotal (US dollar)',
+    'LBL_SHIPPING_USDOLLAR' => 'Frakt (US Dollar)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Subtotal (US dollar)',
     'LBL_SUBTOTAL' => 'Sumtotal:',
     'LBL_TAXABLE_SUBTOTAL' => 'Skattepliktig delsum',
-    'LBL_TAX_USDOLLAR'=>'Skatt (US Dollar)',
+    'LBL_TAX_USDOLLAR' => 'Skatt (US Dollar)',
     'LBL_TAX' => 'Skatt:',
-    'LBL_TOTAL_USDOLLAR'=>'Total (US dollar)',
+    'LBL_TOTAL_USDOLLAR' => 'Total (US dollar)',
     'LBL_TOTAL' => 'Total:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Tilbuds Posisjoner',
     'EXCEPTION_INVALID_QUOTE_ID' => 'Tilbuds ID Mangler',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'Tilbudet er ikke funnet',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'Tilbudet er ikke funnet',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Ekstra grupperabatt',
     'LBL_GROUP_TOTAL' => 'Gruppetotal',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Topptekst for gruppe',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Standard produktpakkegruppe for tilbudet',
     'LBL_ALERT_DELETING_ITEM' => 'Sletter linjeelement(er)',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Linjeelement slettet',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Produktpakketidslinje',
+];

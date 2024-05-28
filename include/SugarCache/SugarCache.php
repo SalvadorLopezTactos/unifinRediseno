@@ -18,8 +18,9 @@ use Psr\SimpleCache\CacheInterface;
  */
 class SugarCache
 {
-    public const EXTERNAL_CACHE_NULL_VALUE = "SUGAR_CACHE_NULL_ZZ";
+    public const EXTERNAL_CACHE_NULL_VALUE = 'SUGAR_CACHE_NULL_ZZ';
 
+    // @codingStandardsIgnoreLine PSR2.Classes.PropertyDeclaration.Underscore
     protected static $_cacheInstance;
 
     /**
@@ -28,11 +29,14 @@ class SugarCache
      */
     public static $isCacheReset = false;
 
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * initializes the cache in question
      */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
     protected static function _init()
     {
         self::$_cacheInstance = new SugarCachePsr(CacheInterface::class, 1000, null);
@@ -93,8 +97,9 @@ class SugarCache
      */
     public static function instance()
     {
-        if ( !is_subclass_of(self::$_cacheInstance,'SugarCacheAbstract') )
+        if (!is_subclass_of(self::$_cacheInstance, 'SugarCacheAbstract')) {
             self::_init();
+        }
 
         return self::$_cacheInstance;
     }
@@ -107,23 +112,23 @@ class SugarCache
     public static function cleanOpcodes()
     {
         // APC
-        if ( function_exists('apc_clear_cache') && ini_get('apc.stat') == 0 ) {
+        if (function_exists('apc_clear_cache') && ini_get('apc.stat') == 0) {
             apc_clear_cache();
         }
         // Wincache
-        if ( function_exists('wincache_refresh_if_changed') ) {
+        if (function_exists('wincache_refresh_if_changed')) {
             wincache_refresh_if_changed();
         }
         // Zend
-        if ( function_exists('accelerator_reset') ) {
+        if (function_exists('accelerator_reset')) {
             accelerator_reset();
         }
         // eAccelerator
-        if ( function_exists('eaccelerator_clear') ) {
+        if (function_exists('eaccelerator_clear')) {
             eaccelerator_clear();
         }
         // XCache
-        if ( function_exists('xcache_clear_cache') && !ini_get('xcache.admin.enable_auth') ) {
+        if (function_exists('xcache_clear_cache') && !ini_get('xcache.admin.enable_auth')) {
             $max = xcache_count(XC_TYPE_PHP);
             for ($i = 0; $i < $max; $i++) {
                 if (!xcache_clear_cache(XC_TYPE_PHP, $i)) {
@@ -136,12 +141,11 @@ class SugarCache
     /**
      * Try to reset file from caches
      */
-    public static function cleanFile( $file )
+    public static function cleanFile($file)
     {
         // APC
-        if ( function_exists('apc_delete_file') && ini_get('apc.stat') == 0 )
-        {
-            apc_delete_file( $file );
+        if (function_exists('apc_delete_file') && ini_get('apc.stat') == 0) {
+            apc_delete_file($file);
         }
     }
 }

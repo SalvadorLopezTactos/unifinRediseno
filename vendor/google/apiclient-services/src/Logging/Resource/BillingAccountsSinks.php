@@ -26,7 +26,7 @@ use Google\Service\Logging\LoggingEmpty;
  * Typical usage is:
  *  <code>
  *   $loggingService = new Google\Service\Logging(...);
- *   $sinks = $loggingService->sinks;
+ *   $sinks = $loggingService->billingAccounts_sinks;
  *  </code>
  */
 class BillingAccountsSinks extends \Google\Service\Resource
@@ -44,6 +44,11 @@ class BillingAccountsSinks extends \Google\Service\Resource
    * @param LogSink $postBody
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string customWriterIdentity Optional. A service account provided
+   * by the caller that will be used to write the log entries. The format must be
+   * serviceAccount:some@email. This field can only be specified if you are
+   * routing logs to a destination outside this sink's project. If not specified,
+   * a Logging service account will automatically be generated.
    * @opt_param bool uniqueWriterIdentity Optional. Determines the kind of IAM
    * identity returned as writer_identity in the new sink. If this value is
    * omitted or set to false, and if the sink's parent is a project, then the
@@ -71,8 +76,8 @@ class BillingAccountsSinks extends \Google\Service\Resource
    * "projects/[PROJECT_ID]/sinks/[SINK_ID]"
    * "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
    * "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
-   * "folders/[FOLDER_ID]/sinks/[SINK_ID]" For example:"projects/my-project/sinks
-   * /my-sink"
+   * "folders/[FOLDER_ID]/sinks/[SINK_ID]" For example:"projects/my-
+   * project/sinks/my-sink"
    * @param array $optParams Optional parameters.
    * @return LoggingEmpty
    */
@@ -89,8 +94,8 @@ class BillingAccountsSinks extends \Google\Service\Resource
    * "projects/[PROJECT_ID]/sinks/[SINK_ID]"
    * "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
    * "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
-   * "folders/[FOLDER_ID]/sinks/[SINK_ID]" For example:"projects/my-project/sinks
-   * /my-sink"
+   * "folders/[FOLDER_ID]/sinks/[SINK_ID]" For example:"projects/my-
+   * project/sinks/my-sink"
    * @param array $optParams Optional parameters.
    * @return LogSink
    */
@@ -134,11 +139,16 @@ class BillingAccountsSinks extends \Google\Service\Resource
    * "projects/[PROJECT_ID]/sinks/[SINK_ID]"
    * "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
    * "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
-   * "folders/[FOLDER_ID]/sinks/[SINK_ID]" For example:"projects/my-project/sinks
-   * /my-sink"
+   * "folders/[FOLDER_ID]/sinks/[SINK_ID]" For example:"projects/my-
+   * project/sinks/my-sink"
    * @param LogSink $postBody
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string customWriterIdentity Optional. A service account provided
+   * by the caller that will be used to write the log entries. Must be of format
+   * serviceAccount:some@email. This can only be specified if writing to a
+   * destination outside the sink's project. If not specified, a p4 service
+   * account will automatically be generated.
    * @opt_param bool uniqueWriterIdentity Optional. See sinks.create for a
    * description of this field. When updating a sink, the effect of this field on
    * the value of writer_identity in the updated sink depends on both the old and
@@ -154,9 +164,10 @@ class BillingAccountsSinks extends \Google\Service\Resource
    * mask for backwards compatibility
    * purposes:destination,filter,includeChildrenAt some point in the future,
    * behavior will be removed and specifying an empty updateMask will be an
-   * error.For a detailed FieldMask definition, see https://developers.google.com
-   * /protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMaskFor
-   * example: updateMask=filter
+   * error.For a detailed FieldMask definition, see
+   * https://developers.google.com/protocol-
+   * buffers/docs/reference/google.protobuf#google.protobuf.FieldMaskFor example:
+   * updateMask=filter
    * @return LogSink
    */
   public function patch($sinkName, LogSink $postBody, $optParams = [])
@@ -176,11 +187,16 @@ class BillingAccountsSinks extends \Google\Service\Resource
    * "projects/[PROJECT_ID]/sinks/[SINK_ID]"
    * "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
    * "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
-   * "folders/[FOLDER_ID]/sinks/[SINK_ID]" For example:"projects/my-project/sinks
-   * /my-sink"
+   * "folders/[FOLDER_ID]/sinks/[SINK_ID]" For example:"projects/my-
+   * project/sinks/my-sink"
    * @param LogSink $postBody
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string customWriterIdentity Optional. A service account provided
+   * by the caller that will be used to write the log entries. Must be of format
+   * serviceAccount:some@email. This can only be specified if writing to a
+   * destination outside the sink's project. If not specified, a p4 service
+   * account will automatically be generated.
    * @opt_param bool uniqueWriterIdentity Optional. See sinks.create for a
    * description of this field. When updating a sink, the effect of this field on
    * the value of writer_identity in the updated sink depends on both the old and
@@ -196,9 +212,10 @@ class BillingAccountsSinks extends \Google\Service\Resource
    * mask for backwards compatibility
    * purposes:destination,filter,includeChildrenAt some point in the future,
    * behavior will be removed and specifying an empty updateMask will be an
-   * error.For a detailed FieldMask definition, see https://developers.google.com
-   * /protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMaskFor
-   * example: updateMask=filter
+   * error.For a detailed FieldMask definition, see
+   * https://developers.google.com/protocol-
+   * buffers/docs/reference/google.protobuf#google.protobuf.FieldMaskFor example:
+   * updateMask=filter
    * @return LogSink
    */
   public function update($sinkName, LogSink $postBody, $optParams = [])

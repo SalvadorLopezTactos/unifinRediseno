@@ -16,7 +16,7 @@ class ViewSchedule extends SugarView
 {
     public function display()
     {
-        global $mod_strings,$timedate,$app_strings;
+        global $mod_strings, $timedate, $app_strings;
 
         $inputValidation = InputValidation::getService();
 
@@ -29,7 +29,7 @@ class ViewSchedule extends SugarView
         $smarty->assign('CALENDAR_LANG', substr($GLOBALS['current_language'], 0, 2));
         $smarty->assign('CALENDAR_DATEFORMAT', $timedate->get_cal_date_format());
         $requestId = $inputValidation->getValidInputRequest('id', 'Assert\Guid');
-        $smarty->assign("RECORD", $requestId);
+        $smarty->assign('RECORD', $requestId);
 
         $cache_dir = !empty($GLOBALS['sugar_config']['cache_dir']) ?
             rtrim($GLOBALS['sugar_config']['cache_dir'], '/\\') : 'cache';

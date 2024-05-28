@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Sie müssen eine Datensatznummer angeben, um einen Benutzer zu diesem Team hinzuzufügen.',
     'ERR_DUP_NAME' => 'Der Teamname ist vergeben. Bitte wählen Sie einen anderen.',
     'ERR_DELETE_RECORD' => 'Sie müssen eine Datensatznummer angeben, um dieses Team zu löschen.',
@@ -66,17 +66,17 @@ $mod_strings = array(
     'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
 Die Deaktivierung der Team-basierten Berechtigungen für ein Modul hat zur Folge, dass alle den Team-basierten Berechtigungen für dieses Modul zugeordneten Daten, einschließlich Prozessdefinitionen oder Prozesse mit dieser Funktion, rückgängig gemacht werden. Hierunter fallen alle Rollen mit der "Besitzer & Ausgewähltes Team"-Option für dieses Modul sowie auch alle Team-basierten Berechtigungsdaten für Datensätze in diesem Modul. Wir empfehlen auch, die Schnellreparatur (Quick Repair) und das Neuaufbau-Tool zu verwenden, um den Systemcache nach der Desaktivierung der Team-basierten Berechtigungen für jedes Modul zu leeren.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Warning:</strong> Die Deaktivierung der Team-basierten Berechtigungen für ein Modul hat zur Folge, dass alle den Team-basierten Berechtigungen für dieses Modul zugeordneten Daten, einschließlich Prozessdefinitionen oder Prozesse mit dieser Funktion, rückgängig gemacht werden. Hierunter fallen alle Rollen mit der "Besitzer & Ausgewähltes Team"-Option für dieses Modul sowie auch alle Team-basierten Berechtigungsdaten für Datensätze in diesem Modul. Wir empfehlen auch, die Schnellreparatur (Quick Repair) und das Neuaufbau-Tool zu verwenden, um den Systemcache nach der Desaktivierung der Team-basierten Berechtigungen für jedes Modul zu leeren.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Die Deaktivierung der Team-basierten Berechtigungen für ein Modul hat zur Folge, dass alle den Team-basierten Berechtigungen für dieses Modul zugeordneten Daten, einschließlich Prozessdefinitionen oder Prozesse mit dieser Funktion, rückgängig gemacht werden. Hierunter fallen alle Rollen mit der "Besitzer & Ausgewähltes Team"-Option für dieses Modul sowie auch alle Team-basierten Berechtigungsdaten für Datensätze in diesem Modul. Wir empfehlen auch, die Schnellreparatur (Quick Repair) und das Neuaufbau-Tool zu verwenden, um den Systemcache nach der Desaktivierung der Team-basierten Berechtigungen für jedes Modul zu leeren. Wenn Sie keinen Zugriff auf die Schnellreparatur (Quick Repair) und das Neuaufbau-Tool haben, kontaktieren Sie bitte einen Administrator, der auf das Reparatur-Menü Zugriff hat.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Warning:</strong> Die Deaktivierung der Team-basierten Berechtigungen für ein Modul hat zur Folge, dass alle den Team-basierten Berechtigungen für dieses Modul zugeordneten Daten, einschließlich Prozessdefinitionen oder Prozesse mit dieser Funktion, rückgängig gemacht werden. Hierunter fallen alle Rollen mit der "Besitzer & Ausgewähltes Team"-Option für dieses Modul sowie auch alle Team-basierten Berechtigungsdaten für Datensätze in diesem Modul. Wir empfehlen auch, die Schnellreparatur (Quick Repair) und das Neuaufbau-Tool zu verwenden, um den Systemcache nach der Desaktivierung der Team-basierten Berechtigungen für jedes Modul zu leeren. Wenn Sie keinen Zugriff auf die Schnellreparatur (Quick Repair) und das Neuaufbau-Tool haben, kontaktieren Sie bitte einen Administrator, der auf das Reparatur-Menü Zugriff hat.
 STR
-,
-);
+    ,
+];

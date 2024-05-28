@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Oznake',
     'LBL_GENERIC_LINK' => 'Povezani objekti',
     'LBL_NAME_LOWER' => 'Naziv oznake malim slovima',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'Moje oznake',
     'LBL_MY_FAVORITE_TAGS' => 'Moje omiljene oznake',
     'LBL_MORE_TAGS' => '{{tagsNumber}} oznake/a',
-);
+];

@@ -364,6 +364,18 @@
 
 <table width="100%" border="0" cellspacing="1" cellpadding="0" class="edit view">
 	<tr>
+		<th align="left" scope="row" colspan="4"><h4>{$MOD.LBL_DOC_MERGE_REGION_CONFIG}</h4></th>
+	</tr>
+	<tr>
+		<td width="25%" scope="row">{$MOD.LBL_DOC_MERGE_REGION}</td>
+		<td> <select name="document_merge_service_urls_default" {$doc_merge_disabled_region}>
+			{$doc_merge_default_region_url}
+		</select></td>
+	</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="edit view">
+	<tr>
 	<th align="left" scope="row" colspan="4"><h4>{$MOD.ADVANCED}</h4></th>
 	</tr>
 	<tr>

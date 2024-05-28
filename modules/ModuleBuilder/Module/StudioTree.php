@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,17 +10,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-class StudioTree extends MBPackageTree{
+
+class StudioTree extends MBPackageTree
+{
     public function __construct()
     {
-		$this->tree = new Tree('package_tree');
-		$this->tree->id = 'package_tree';
-		$this->mb = new StudioBrowser();
-		$this->populateTree($this->mb->getNodes(), $this->tree);
-	}
-	
-	function getName(){
-		return translate('LBL_SECTION_MODULES');
-	}
-	
+        $this->tree = new Tree('package_tree');
+        $this->mb = new StudioBrowser();
+        $this->populateTree($this->mb->getNodes(), $this->tree);
+    }
+
+    public function getName()
+    {
+        return translate('LBL_SECTION_MODULES');
+    }
 }

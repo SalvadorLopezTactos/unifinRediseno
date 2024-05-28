@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'i gang',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Beskeder',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Betjeningspanel for poster om beskeder',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje for besked',
 ];

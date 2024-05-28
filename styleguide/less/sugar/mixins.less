@@ -127,14 +127,6 @@
 // FORMS
 // --------------------------------------------------
 
-// Block level inputs
-.input-block-level {
-  display: block;
-  width: 100%;
-  min-height: @inputHeight; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
-  box-sizing: border-box; // Makes inputs behave like true block-level elements
-}
-
 // Mixin for form field states
 .formFieldState(@textColor: @gray80, @borderColor: @gray60, @backgroundColor: @gray20) {
   // Set the text color
@@ -397,24 +389,6 @@
   #gradient > .vertical(fade(@black, 10%), @white);
 
   background-color: @transparent; /* gradient function form twitter bootstrap adds background color, we needn't that fallback for shadow */
-}
-
-.fontawesome {
-  width: 14px;
-  height: 14px;
-  display: inline-block;
-  line-height: 14px;
-  font-size: 14px;
-  background: none;
-  font-family: FontAwesome;
-  font-weight: normal;
-  -webkit-font-smoothing: antialiased;
-
-  &::before {
-    text-decoration: inherit;
-    display: inline-block;
-    speak: none;
-  }
 }
 
 .information-underline {

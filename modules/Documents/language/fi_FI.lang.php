@@ -10,22 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     //module
     'LBL_MODULE_NAME' => 'Dokumentit',
     'LBL_MODULE_NAME_SINGULAR' => 'Dokumentti',
     'LBL_MODULE_TITLE' => 'Dokumentit: Etusivu',
     'LNK_NEW_DOCUMENT' => 'Luo dokumentti',
-    'LNK_DOCUMENT_LIST'=> 'Näytä dokumentit',
+    'LNK_DOCUMENT_LIST' => 'Näytä dokumentit',
     'LBL_DOC_REV_HEADER' => 'Dokumentin versiot',
-    'LBL_SEARCH_FORM_TITLE'=> 'Dokumentin haku',
+    'LBL_SEARCH_FORM_TITLE' => 'Dokumentin haku',
     //vardef labels
     'LBL_DOCUMENT_ID' => 'Dokumentin ID',
     'LBL_NAME' => 'Nimi',
@@ -34,31 +33,31 @@ $mod_strings = array (
     'LBL_CATEGORY' => 'Kategoria',
     'LBL_SUBCATEGORY' => 'Alakategoria',
     'LBL_STATUS' => 'Tila',
-    'LBL_CREATED_BY'=> 'Luonut',
-    'LBL_DATE_ENTERED'=> 'Luontipäivä',
-    'LBL_DATE_MODIFIED'=> 'Muokattu viimeksi',
+    'LBL_CREATED_BY' => 'Luonut',
+    'LBL_DATE_ENTERED' => 'Luontipäivä',
+    'LBL_DATE_MODIFIED' => 'Muokattu viimeksi',
     'LBL_DELETED' => 'Poistettu',
-    'LBL_MODIFIED'=> 'Muokannut',
+    'LBL_MODIFIED' => 'Muokannut',
     'LBL_MODIFIED_USER' => 'Käyttäjä muokannut',
-    'LBL_CREATED'=> 'Luonut',
-    'LBL_REVISIONS'=>'Versiot',
-    'LBL_RELATED_DOCUMENT_ID'=>'Liittyvän dokumentin ID',
-    'LBL_RELATED_DOCUMENT_REVISION_ID'=>'Liittyvän dokumentin version ID',
-    'LBL_IS_TEMPLATE'=>'On mallipohja',
-    'LBL_TEMPLATE_TYPE'=>'Dokumentin tyyppi',
-    'LBL_ASSIGNED_TO_NAME'=>'Vastuuhenkilö',
+    'LBL_CREATED' => 'Luonut',
+    'LBL_REVISIONS' => 'Versiot',
+    'LBL_RELATED_DOCUMENT_ID' => 'Liittyvän dokumentin ID',
+    'LBL_RELATED_DOCUMENT_REVISION_ID' => 'Liittyvän dokumentin version ID',
+    'LBL_IS_TEMPLATE' => 'On mallipohja',
+    'LBL_TEMPLATE_TYPE' => 'Dokumentin tyyppi',
+    'LBL_ASSIGNED_TO_NAME' => 'Vastuuhenkilö',
     'LBL_REVISION_NAME' => 'Versionumero',
     'LBL_MIME' => 'MIME-tyyppi',
     'LBL_REVISION' => 'Versio',
     'LBL_DOCUMENT' => 'Liittyvät dokumentit',
     'LBL_LATEST_REVISION' => 'Uusin versio',
     'LBL_DOCUMENT_REVISION_ID' => 'Dokumentin version ID',
-    'LBL_CHANGE_LOG'=> 'Muutosloki',
-    'LBL_ACTIVE_DATE'=> 'Julkaisupäivä',
+    'LBL_CHANGE_LOG' => 'Muutosloki',
+    'LBL_ACTIVE_DATE' => 'Julkaisupäivä',
     'LBL_EXPIRATION_DATE' => 'Erääntymispäivä',
-    'LBL_FILE_EXTENSION'  => 'Tiedostotunniste',
+    'LBL_FILE_EXTENSION' => 'Tiedostotunniste',
     'LBL_LAST_REV_MIME_TYPE' => 'Viimeisen version MIME-tyyppi',
-    'LBL_CAT_OR_SUBCAT_UNSPEC'=>'Täsmentämätön',
+    'LBL_CAT_OR_SUBCAT_UNSPEC' => 'Täsmentämätön',
     'LBL_HOMEPAGE_TITLE' => 'Omat tiedostot',
     //quick search
     'LBL_NEW_FORM_TITLE' => 'Uusi dokumentti',
@@ -70,25 +69,25 @@ $mod_strings = array (
     'LBL_FILE_UPLOAD' => 'Tiedosto:',
 
     'LBL_CATEGORY_VALUE' => 'Kategoria:',
-    'LBL_SUBCATEGORY_VALUE'=> 'Alakategoria:',
-    'LBL_DOC_STATUS'=> 'Tila:',
-    'LBL_DOC_STATUS_ID'=> 'Statuksen ID:',
+    'LBL_SUBCATEGORY_VALUE' => 'Alakategoria:',
+    'LBL_DOC_STATUS' => 'Tila:',
+    'LBL_DOC_STATUS_ID' => 'Statuksen ID:',
     'LBL_LAST_REV_CREATOR' => 'Version tekijä:',
     'LBL_LASTEST_REVISION_NAME' => 'Viimeisimmän version nimi:',
     'LBL_SELECTED_REVISION_NAME' => 'Valitun version nimi:',
     'LBL_CONTRACT_STATUS' => 'Sopimuksen status:',
     'LBL_CONTRACT_NAME' => 'Sopimuksen nimi:',
     'LBL_LAST_REV_DATE' => 'Muutettu viimeksi:',
-    'LBL_DOWNNLOAD_FILE'=> 'Ladattava tiedosto:',
-    'LBL_DET_RELATED_DOCUMENT'=>'Liittyvät dokumentit:',
-    'LBL_DET_RELATED_DOCUMENT_VERSION'=>"Liittyvän dokumentin revisio:",
-    'LBL_DET_IS_TEMPLATE'=>'Mallipohja? :',
-    'LBL_DET_TEMPLATE_TYPE'=>'Dokumentin tyyppi:',
-    'LBL_TEAM'=> 'Tiimi',
+    'LBL_DOWNNLOAD_FILE' => 'Ladattava tiedosto:',
+    'LBL_DET_RELATED_DOCUMENT' => 'Liittyvät dokumentit:',
+    'LBL_DET_RELATED_DOCUMENT_VERSION' => 'Liittyvän dokumentin revisio:',
+    'LBL_DET_IS_TEMPLATE' => 'Mallipohja? :',
+    'LBL_DET_TEMPLATE_TYPE' => 'Dokumentin tyyppi:',
+    'LBL_TEAM' => 'Tiimi',
     'LBL_IS_SHARED' => 'Saatavana ulkoisesti:',
-    'LBL_DOC_DESCRIPTION'=>'Kuvaus:',
-    'LBL_DOC_ACTIVE_DATE'=> 'Julkaisupäivämäärä:',
-    'LBL_DOC_EXP_DATE'=> 'Viimeinen voimassaolopäivä:',
+    'LBL_DOC_DESCRIPTION' => 'Kuvaus:',
+    'LBL_DOC_ACTIVE_DATE' => 'Julkaisupäivämäärä:',
+    'LBL_DOC_EXP_DATE' => 'Viimeinen voimassaolopäivä:',
 
     //document list view.
     'LBL_LIST_FORM_TITLE' => 'Dokumenttilista',
@@ -98,11 +97,11 @@ $mod_strings = array (
     'LBL_LIST_REVISION' => 'Versio',
     'LBL_LIST_LAST_REV_CREATOR' => 'Julkaisija',
     'LBL_LIST_LAST_REV_DATE' => 'Muutettu viimeksi',
-    'LBL_LIST_VIEW_DOCUMENT'=>'Näytä',
-    'LBL_LIST_DOWNLOAD'=> 'Lataa',
+    'LBL_LIST_VIEW_DOCUMENT' => 'Näytä',
+    'LBL_LIST_DOWNLOAD' => 'Lataa',
     'LBL_LIST_ACTIVE_DATE' => 'Julkaisupäivä',
     'LBL_LIST_EXP_DATE' => 'Erääntymispäivä',
-    'LBL_LIST_STATUS'=>'Tila',
+    'LBL_LIST_STATUS' => 'Tila',
     'LBL_LINKED_ID' => 'Linkitetty ID',
     'LBL_SELECTED_REVISION_ID' => 'Valitun version id',
     'LBL_LATEST_REVISION_ID' => 'Uusimman version id',
@@ -114,33 +113,33 @@ $mod_strings = array (
     //document search form.
     'LBL_SF_DOCUMENT' => 'Dokumentin nimi:',
     'LBL_SF_CATEGORY' => 'Kategoria:',
-    'LBL_SF_SUBCATEGORY'=> 'Alakategoria:',
+    'LBL_SF_SUBCATEGORY' => 'Alakategoria:',
     'LBL_SF_ACTIVE_DATE' => 'Julkaisupäivämäärä:',
-    'LBL_SF_EXP_DATE'=> 'Viimeinen voimassaolopäivä:',
+    'LBL_SF_EXP_DATE' => 'Viimeinen voimassaolopäivä:',
 
     'DEF_CREATE_LOG' => 'Dokumentti luotu',
 
     //error messages
-    'ERR_DOC_NAME'=>'Dokumentin nimi',
-    'ERR_DOC_ACTIVE_DATE'=>'Julkaisupäivä',
-    'ERR_DOC_EXP_DATE'=> 'Erääntymispäivä',
-    'ERR_FILENAME'=> 'Tiedoston nimi',
-    'ERR_DOC_VERSION'=> 'Dokumentin versio',
-    'ERR_DELETE_CONFIRM'=> 'Haluatko poistaa tämän dokumentin version?',
-    'ERR_DELETE_LATEST_VERSION'=> 'Et voi poistaa dokumentin viimeistä versiota.',
+    'ERR_DOC_NAME' => 'Dokumentin nimi',
+    'ERR_DOC_ACTIVE_DATE' => 'Julkaisupäivä',
+    'ERR_DOC_EXP_DATE' => 'Erääntymispäivä',
+    'ERR_FILENAME' => 'Tiedoston nimi',
+    'ERR_DOC_VERSION' => 'Dokumentin versio',
+    'ERR_DELETE_CONFIRM' => 'Haluatko poistaa tämän dokumentin version?',
+    'ERR_DELETE_LATEST_VERSION' => 'Et voi poistaa dokumentin viimeistä versiota.',
     'LNK_NEW_MAIL_MERGE' => 'Yhdistäminen',
     'LBL_MAIL_MERGE_DOCUMENT' => 'Yhdistämisen mallipohja:',
     'ERR_MISSING_FILE' => 'Tästä dokumentista puuttuu tiedosto, todennäköisesti johtuen latauksen aikana tapahtuneesta virheestä.  Yritä ladata tiedosto uudelleen tai ota yhteyttä ylläpitäjään.',
 
     'LBL_TREE_TITLE' => 'Dokumentit',
     //sub-panel vardefs.
-    'LBL_LIST_DOCUMENT_NAME'=>'Nimi',
-    'LBL_LIST_IS_TEMPLATE'=>'Mallipohja?',
-    'LBL_LIST_TEMPLATE_TYPE'=>'Dokumentin tyyppi',
-    'LBL_LIST_SELECTED_REVISION'=>'Valittu Versio',
-    'LBL_LIST_LATEST_REVISION'=>'Uusin versio',
-    'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Liittyvät sopimukset',
-    'LBL_LAST_REV_CREATE_DATE'=>'Viimeisen version luontipäivä',
+    'LBL_LIST_DOCUMENT_NAME' => 'Nimi',
+    'LBL_LIST_IS_TEMPLATE' => 'Mallipohja?',
+    'LBL_LIST_TEMPLATE_TYPE' => 'Dokumentin tyyppi',
+    'LBL_LIST_SELECTED_REVISION' => 'Valittu Versio',
+    'LBL_LIST_LATEST_REVISION' => 'Uusin versio',
+    'LBL_CONTRACTS_SUBPANEL_TITLE' => 'Liittyvät sopimukset',
+    'LBL_LAST_REV_CREATE_DATE' => 'Viimeisen version luontipäivä',
     //'LNK_DOCUMENT_CAT'=>'Document Categories',
     'LBL_CONTRACTS' => 'Sopimukset',
     'LBL_CREATED_USER' => 'Luoja',
@@ -171,9 +170,11 @@ $mod_strings = array (
     // Dashboards
     'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Asiakirjatietueiden työpöytä',
     'LBL_MY_DOCUMENTS' => 'Omat tiedostot',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Asiakirjojen aikajana',
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Lähetä DocuSign-palveluun',
+    'LBL_SEND_TO_DOCUSIGN_TEMPLATE_BUTTON' => 'Lähetä DocuSigniin mallin avulla',
 
     // Cloud Drive
 
@@ -183,4 +184,4 @@ $mod_strings = array (
     'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Synkronoi OneDriveen',
     'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Synkronoi kaikki Dropboxiin',
     'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Synkronoi Dropboxiin',
-);
+];

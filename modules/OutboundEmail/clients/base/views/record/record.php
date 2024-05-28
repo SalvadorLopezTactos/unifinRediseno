@@ -9,19 +9,19 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['OutboundEmail']['base']['view']['record'] = array(
-    'buttons' => array(
-        array(
+$viewdefs['OutboundEmail']['base']['view']['record'] = [
+    'buttons' => [
+        [
             'type' => 'button',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
-            'events' => array(
+            'events' => [
                 'click' => 'button:cancel_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
             'name' => 'save_button',
@@ -29,79 +29,79 @@ $viewdefs['OutboundEmail']['base']['view']['record'] = array(
             'css_class' => 'btn btn-primary',
             'showOn' => 'edit',
             'acl_action' => 'edit',
-        ),
-        array(
+        ],
+        [
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
             'primary' => true,
             'showOn' => 'view',
-            'buttons' => array(
-                array(
+            'buttons' => [
+                [
                     'type' => 'rowaction',
                     'event' => 'button:edit_button:click',
                     'name' => 'edit_button',
                     'label' => 'LBL_EDIT_BUTTON_LABEL',
                     'acl_action' => 'edit',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'event' => 'button:duplicate_button:click',
                     'name' => 'duplicate_button',
                     'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
                     'acl_module' => 'OutboundEmail',
                     'acl_action' => 'create',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'event' => 'button:delete_button:click',
                     'name' => 'delete_button',
                     'label' => 'LBL_DELETE_BUTTON_LABEL',
                     'acl_action' => 'delete',
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-    'panels' => array(
-        array(
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_header',
             'header' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'picture',
                     'type' => 'avatar',
                     'size' => 'large',
                     'dismiss_label' => true,
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'name',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'type',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'favorite',
                     'label' => 'LBL_FAVORITE',
                     'type' => 'favorite',
                     'dismiss_label' => true,
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'mail_smtptype',
                     'type' => 'email-provider',
                     'span' => 12,
-                ),
+                ],
                 [
                     'name' => 'email_authorize',
                     'type' => 'email-authorize',
@@ -118,32 +118,32 @@ $viewdefs['OutboundEmail']['base']['view']['record'] = array(
                     'readonly' => true,
                 ],
                 'authorized_account',
-                array(
+                [
                     'name' => 'mail_smtpuser',
                     'required' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'mail_smtppass',
                     'type' => 'change-password',
                     'required' => true,
-                ),
+                ],
                 'mail_smtpserver',
                 'mail_smtpport',
                 'mail_smtpauth_req',
                 'mail_smtpssl',
-                array(
+                [
                     'name' => 'email_address',
                     'type' => 'email-address',
                     'link' => false,
-                ),
+                ],
                 'reply_to_name',
-                array(
+                [
                     'name' => 'reply_to_email_address',
                     'type' => 'email-address',
                     'link' => false,
-                ),
-            ),
-        ),
+                ],
+            ],
+        ],
         [
             'name' => 'panel_hidden',
             'label' => 'LBL_RECORD_SHOWMORE',
@@ -155,17 +155,17 @@ $viewdefs['OutboundEmail']['base']['view']['record'] = array(
                 'preferred_sending_account',
             ],
         ],
-    ),
-    'dependencies' => array(
-        array(
-            'hooks' => array('edit'),
+    ],
+    'dependencies' => [
+        [
+            'hooks' => ['edit'],
             'trigger' => 'true',
-            'triggerFields' => array('mail_smtptype'),
+            'triggerFields' => ['mail_smtptype'],
             'onload' => false,
-            'actions' => array(
-                array(
+            'actions' => [
+                [
                     'action' => 'SetValue',
-                    'params' => array(
+                    'params' => [
                         'target' => 'mail_smtpserver',
                         'value' =>
                             'ifElse(or(equal($mail_smtptype,"google"), equal($mail_smtptype,"google_oauth2")), "smtp.gmail.com",
@@ -173,140 +173,140 @@ $viewdefs['OutboundEmail']['base']['view']['record'] = array(
                                     ifElse(equal($mail_smtptype,"exchange_online"), "smtp.office365.com",
                                         ifElse(equal($mail_smtptype,"outlook"), "smtp-mail.outlook.com",
                                             $mail_smtpserver))))',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'action' => 'SetValue',
-                    'params' => array(
+                    'params' => [
                         'target' => 'mail_smtpport',
                         'value' =>
                             'ifElse(or(equal($mail_smtptype,"google"), equal($mail_smtptype,"google_oauth2")), "587",
                                 ifElse(or(equal($mail_smtptype,"exchange"), equal($mail_smtptype,"exchange_online")), "587",
                                     ifElse(equal($mail_smtptype,"outlook"), "587",
                                         $mail_smtpport)))',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'action' => 'SetValue',
-                    'params' => array(
+                    'params' => [
                         'target' => 'mail_smtpssl',
                         'value' =>
                             'ifElse(or(equal($mail_smtptype,"google"), equal($mail_smtptype,"google_oauth2")), "2",
                                 ifElse(or(equal($mail_smtptype,"exchange"), equal($mail_smtptype,"exchange_online")), "2",
                                     ifElse(equal($mail_smtptype,"outlook"), "2",
                                         $mail_smtpssl)))',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'action' => 'SetValue',
-                    'params' => array(
+                    'params' => [
                         'target' => 'mail_smtpauth_req',
                         'value' =>
                             'ifElse(or(equal($mail_smtptype,"google"), equal($mail_smtptype,"google_oauth2")), "1",
                                 ifElse(or(equal($mail_smtptype,"exchange"), equal($mail_smtptype,"exchange_online")), "1",
                                     ifElse(equal($mail_smtptype,"outlook"), "1",
                                         $mail_smtpauth_req)))',
-                    ),
-                ),
-            ),
-        ),
-        array(
-            'hooks' => array('edit'),
+                    ],
+                ],
+            ],
+        ],
+        [
+            'hooks' => ['edit'],
             'trigger' => 'true',
-            'triggerFields' => array('mail_smtpssl'),
+            'triggerFields' => ['mail_smtpssl'],
             'onload' => false,
-            'actions' => array(
-                array(
+            'actions' => [
+                [
                     'action' => 'SetValue',
-                    'params' => array(
+                    'params' => [
                         'target' => 'mail_smtpport',
                         'value' =>
                             'ifElse(equal($mail_smtpssl,"1"), "465",
                                 ifElse(equal($mail_smtpssl,"2"), "587",
                                     "25"))',
-                    ),
-                ),
-            ),
-        ),
-        array(
-            'hooks' => array('edit'),
+                    ],
+                ],
+            ],
+        ],
+        [
+            'hooks' => ['edit'],
             'trigger' => 'true',
-            'triggerFields' => array('mail_smtpauth_req', 'mail_authtype'),
+            'triggerFields' => ['mail_smtpauth_req', 'mail_authtype'],
             'onload' => true,
-            'actions' => array(
-                array(
+            'actions' => [
+                [
                     'action' => 'SetRequired',
-                    'params' => array(
+                    'params' => [
                         'target' => 'mail_smtpuser',
                         'value' => 'and(equal($mail_smtpauth_req, "1"), not(equal($mail_authtype,"oauth2")))',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'action' => 'SetRequired',
-                    'params' => array(
+                    'params' => [
                         'target' => 'mail_smtppass',
                         'value' => 'and(equal($mail_smtpauth_req, "1"), not(equal($mail_authtype,"oauth2")))',
-                    ),
-                ),
-            ),
-        ),
-        array(
-            'hooks' => array('all'),
+                    ],
+                ],
+            ],
+        ],
+        [
+            'hooks' => ['all'],
             'trigger' => 'true',
-            'triggerFields' => array('mail_smtpauth_req', 'mail_authtype'),
+            'triggerFields' => ['mail_smtpauth_req', 'mail_authtype'],
             'onload' => true,
-            'actions' => array(
-                array(
+            'actions' => [
+                [
                     'action' => 'SetVisibility',
-                    'params' => array(
+                    'params' => [
                         'target' => 'mail_smtpuser',
                         'value' => 'and(equal($mail_smtpauth_req, "1"), not(equal($mail_authtype,"oauth2")))',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'action' => 'SetVisibility',
-                    'params' => array(
+                    'params' => [
                         'target' => 'mail_smtppass',
                         'value' => 'and(equal($mail_smtpauth_req, "1"), not(equal($mail_authtype,"oauth2")))',
-                    ),
-                ),
-            ),
-        ),
-        array(
-            'hooks' => array('all'),
+                    ],
+                ],
+            ],
+        ],
+        [
+            'hooks' => ['all'],
             'trigger' => 'true',
-            'triggerFields' => array('mail_authtype'),
+            'triggerFields' => ['mail_authtype'],
             'onload' => true,
-            'actions' => array(
-                array(
+            'actions' => [
+                [
                     'action' => 'SetVisibility',
-                    'params' => array(
+                    'params' => [
                         'target' => 'auth_status',
                         'value' => 'equal($mail_authtype,"oauth2")',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'action' => 'SetVisibility',
-                    'params' => array(
+                    'params' => [
                         'target' => 'authorized_account',
                         'value' => 'equal($mail_authtype,"oauth2")',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'action' => 'ReadOnly',
-                    'params' => array(
+                    'params' => [
                         'target' => 'mail_smtpauth_req',
                         'value' => 'equal($mail_authtype,"oauth2")',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'action' => 'ReadOnly',
-                    'params' => array(
+                    'params' => [
                         'target' => 'authorized_account',
                         'value' => 'equal($mail_authtype,"oauth2")',
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

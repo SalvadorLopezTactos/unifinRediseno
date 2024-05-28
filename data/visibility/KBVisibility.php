@@ -52,7 +52,7 @@ class KBVisibility extends SugarVisibility implements StrategyInterface
         } else {
             $statuses = implode(
                 ',',
-                array_map(function (string $status) use ($db) : string {
+                array_map(function (string $status) use ($db): string {
                     return $db->quoted($status);
                 }, $this->bean->getPublishedStatuses())
             );
@@ -122,7 +122,7 @@ class KBVisibility extends SugarVisibility implements StrategyInterface
      */
     public function elasticGetBeanIndexFields($module, Visibility $provider)
     {
-        return array('status' => 'id');
+        return ['status' => 'id'];
     }
 
     /**
@@ -161,7 +161,7 @@ class KBVisibility extends SugarVisibility implements StrategyInterface
     protected function getPublishedStatuses()
     {
         if (!method_exists($this->bean, 'getPublishedStatuses')) {
-            return array();
+            return [];
         }
         return $this->bean->getPublishedStatuses();
     }

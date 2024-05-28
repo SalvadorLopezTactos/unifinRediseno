@@ -21,7 +21,7 @@ $viewdefs['Cases']['portal']['layout']['records'] = [
                         'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
+                            'css_class' => 'main-pane span8 overflow-y-auto',
                             'components' => [
                                 [
                                     'layout' => 'list',

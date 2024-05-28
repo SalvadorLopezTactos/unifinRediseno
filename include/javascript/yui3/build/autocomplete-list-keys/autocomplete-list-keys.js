@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('autocomplete-list-keys', function (Y, NAME) {
 
 /**
@@ -23,7 +16,7 @@ var KEY_DOWN  = 40,
     KEY_UP    = 38;
 
 function ListKeys() {
-    Y.before(this._bindKeys, this, 'bindUI');
+    Y.after(this._bindKeys, this, 'bindUI');
     this._initKeys();
 }
 
@@ -190,4 +183,4 @@ ListKeys.prototype = {
 Y.Base.mix(Y.AutoCompleteList, [ListKeys]);
 
 
-}, '3.15.0', {"requires": ["autocomplete-list", "base-build"]});
+}, '3.18.1', {"requires": ["autocomplete-list", "base-build"]});

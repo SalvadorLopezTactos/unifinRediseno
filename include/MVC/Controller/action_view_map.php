@@ -9,21 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- //format '<action_name>' => '<view_name>'
-$action_view_map['duplicateview']= 'duplicate';
-$action_view_map['detailview']= 'detail';
-$action_view_map['editview']= 'edit';
-$action_view_map['listview']= 'list';
-$action_view_map['popup']= 'popup';
-$action_view_map['vcard']= 'vcard';
-$action_view_map['importvcard']= 'importvcard';
-$action_view_map['importvcardsave']= 'importvcardsave';
-$action_view_map['modulelistmenu']= 'modulelistmenu';
-$action_view_map['favorites']= 'favorites';
+//format '<action_name>' => '<view_name>'
+$action_view_map['duplicateview'] = 'duplicate';
+$action_view_map['detailview'] = 'detail';
+$action_view_map['editview'] = 'edit';
+$action_view_map['listview'] = 'list';
+$action_view_map['popup'] = 'popup';
+$action_view_map['vcard'] = 'vcard';
+$action_view_map['importvcard'] = 'importvcard';
+$action_view_map['importvcardsave'] = 'importvcardsave';
+$action_view_map['modulelistmenu'] = 'modulelistmenu';
+$action_view_map['favorites'] = 'favorites';
 //$action_view_map['ajaxui']= 'ajaxui';
-$action_view_map['sidecar']= 'sidecar';
-$action_view_map['noaccess']= 'noaccess';
-$action_view_map['quickedit']= 'quickedit';
+$action_view_map['sidecar'] = 'sidecar';
+$action_view_map['noaccess'] = 'noaccess';
+$action_view_map['quickedit'] = 'quickedit';
 
 // SugarWireless views
 $action_view_map['edit_mobile'] = 'edit_mobile';
@@ -37,7 +37,7 @@ $action_view_map['wirelessedit'] = 'wirelessedit';
 $action_view_map['wlsave'] = 'wirelesssave';
 
 // SugarPDF
-$action_view_map['sugarpdf']= 'sugarpdf';
+$action_view_map['sugarpdf'] = 'sugarpdf';
 $action_view_map['dc'] = 'dc';
 $action_view_map['dcajax'] = 'dcajax';
 $action_view_map['quick'] = 'quick';

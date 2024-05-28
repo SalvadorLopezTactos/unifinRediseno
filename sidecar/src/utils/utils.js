@@ -9,8 +9,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const User = require('core/user');
-const Language = require('core/language');
+const User = require('../core/user');
+const Language = require('../core/language');
 
 /**
  * The Utils module provides several utility methods, such as those for

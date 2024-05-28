@@ -24,7 +24,7 @@ class SugarUpgradeDeletedCannotBeNull extends UpgradeDBScript
      */
     public function run()
     {
-        $sql = "UPDATE outbound_email SET deleted = ? WHERE deleted IS NULL";
+        $sql = 'UPDATE outbound_email SET deleted = ? WHERE deleted IS NULL';
         $this->executeUpdate($sql, [0]);
     }
 }

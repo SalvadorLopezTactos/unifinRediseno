@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'TR :',
     'LBL_RE' => 'Re :',
     'LBL_BUTTON_CREATE' => 'Créer',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Sélectionner depuis un compte mail',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Sélectionner une signature',
     'LBL_SIGNATURE' => 'Signature',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Signature par défaut",
-    "LBL_SHOW_MORE_SIGNATURES" => "Plus de signatures...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Signature par défaut',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Plus de signatures...',
     'LBL_SUBJECT' => 'Sujet :',
     'LBL_TEMPLATE' => 'Modèle',
     'LBL_TEXT_BODY' => 'Corps Texte',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Heure d&#39;envoi',
     'LBL_LIST_TO_ADDR' => 'A',
     'LBL_LIST_TYPE' => 'Type',
-    "LBL_SELECTED_RECIPIENTS" => "Destinataires sélectionnés",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Plus de destinataires...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Carnet d'adresses",
+    'LBL_SELECTED_RECIPIENTS' => 'Destinataires sélectionnés',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Plus de destinataires...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Carnet d&#39;adresses',
     'NTC_REMOVE_INVITEE' => 'Êtes-vous sûr de vouloir supprimer ce destinataire dans cet email?',
     'WARNING_SETTINGS_NOT_CONF' => 'Vos paramètres de messagerie ne sont pas configurés correctement pour envoyer des e-mails. Un serveur SMTP ' .
         'doit être configuré dans <a href="#bwc/index.php?module=EmailMan&action=config">Paramètres de messagerie</a>.
@@ -216,8 +216,8 @@ Context | Request Context
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Échec probable sur les pièces jointes : une valeur incorrecte ou inutilisable pour « upload_tmp_dir » ' .
         'a été détectée. Veuillez corriger ceci dans votre fichier php.ini.',
     'LBL_MESSAGE_UID' => 'UID Message',
-    'LBL_OPEN_DRAFT_ALERT' => 'L&#39;e-mail est un brouillon. Cliquez sur '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'L&#39;e-mail est un brouillon. Cliquez sur ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  pour l&#39;éditer.',
     'LBL_EMAIL_BODY' => 'Message e-mail',
 
@@ -454,6 +454,7 @@ Context | Request Context
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Emails',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement d&#39;emails',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie des emails',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'aucun destinataires spécifiés',
@@ -478,4 +479,5 @@ Vous pouvez utiliser un modèle d&#39;email via le bouton "Modèles" ou inclure 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Envoyer l&#39;e-mail',
     'LBL_MAILBOX' => 'Compte d&#39;e-mails entrants',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Veuillez configurer un compte emails sortants via <a href="#OutboundEmail">Paramètres emails</a> afin d&#39;envoyer des emails.',
-);
+    'LBL_TOO_SHORT' => 'Saisissez au moins {0} caractères...',
+];

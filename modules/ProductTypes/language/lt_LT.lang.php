@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Prekių tipai',
     'LBL_MODULE_NAME_SINGULAR' => 'Produkto tipas',
     'LBL_MODULE_TITLE' => 'Prekių tipai: Pradžia',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Ar Jūs tikrai norite ištrinti šį įrašą?',
     'ERR_DELETE_RECORD' => 'Nurodykite įrašą, kad ištrinti prekių tipą.',
     'NTC_LIST_ORDER' => 'Nustatykite kokia tvarka norite matyti iššokančiame sąraše prekės tipo galimas reikšmes.',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Importuoti prekių tipus',
-    'LBL_CREATED_BY'=>'Sukūrė',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Importuoti prekių tipus',
+    'LBL_CREATED_BY' => 'Sukūrė',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Atsakingo ID:',
-    'LBL_EXPORT_CREATED_BY'=>'Sukūrėjo ID',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Import Product Categories',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Atsakingo ID:',
+    'LBL_EXPORT_CREATED_BY' => 'Sukūrėjo ID',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Import Product Categories',
+];

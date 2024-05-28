@@ -120,7 +120,7 @@ interface MappingInterface
      * @param array $copyTo Optional copy_to definition
      * @deprecated Use MappingInterface::addModuleField or MappingInterface::addCommonField
      */
-    public function addNotAnalyzedField($field, array $copyTo = array());
+    public function addNotAnalyzedField($field, array $copyTo = []);
 
     /**
      * Add not indexed field to the mapping which can be used as a multi field
@@ -132,7 +132,7 @@ interface MappingInterface
      * @param array $copyTo Optional copy_to definition
      * @deprecated Use MappingInterface::addModuleField or MappingInterface::addCommonField
      */
-    public function addNotIndexedField($field, array $copyTo = array());
+    public function addNotIndexedField($field, array $copyTo = []);
 
     /**
      * Add object (or nested) property mapping. Note that this cannot be used
@@ -170,8 +170,8 @@ interface MappingInterface
      * trying to access it as an exception is thrown if non-existant.
      *
      * @param string $field Field name
-     * @throws MappingException When
      * @return PropertyInterface
+     * @throws MappingException When
      */
     public function getProperty($field);
 
@@ -184,7 +184,7 @@ interface MappingInterface
     /**
      * Get seed bean
      * @return SugarBean
-    */
+     */
     public function getBean();
 
     /**
@@ -196,6 +196,6 @@ interface MappingInterface
     /**
      * Get excluded fields from _source
      * @return array
-    */
+     */
     public function getSourceExcludes();
 }

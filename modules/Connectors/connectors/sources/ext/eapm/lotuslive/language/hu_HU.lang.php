@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" 
 class="dataLabel">A Sugar termék új alkalmazásként való regisztrálásával IBM SmartCloud fogyasztói kulcshoz és titokhoz juthat. A regisztráció 2011. március 8-tól lehetséges.<br>
 &nbsp;<br>
@@ -29,5 +29,4 @@ A regisztrálás lépései:<br>
 </td></tr></table>',
     'oauth_consumer_key' => 'OAuth Fogyasztói kulcs',
     'oauth_consumer_secret' => 'OAuth Fogyasztói titok',
-);
-
+];

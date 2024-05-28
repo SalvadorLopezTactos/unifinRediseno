@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('node-pluginhost', function (Y, NAME) {
 
 /**
@@ -95,4 +88,4 @@ Y.NodeList.prototype.unplug = function() {
 };
 
 
-}, '3.15.0', {"requires": ["node-base", "pluginhost"]});
+}, '3.18.1', {"requires": ["node-base", "pluginhost"]});

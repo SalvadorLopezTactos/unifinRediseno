@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Archivador de datos',
     'LBL_MODULE_NAME' => 'Archivador de datos',
     'LBL_FILTER_DEF_FIELD' => 'Filtrar',
@@ -28,7 +27,7 @@ $mod_strings = array (
     'LBL_MANAGE_ARCHIVE_JOB_LIST_TITLE' => 'Archivados programados',
     'LBL_MANAGE_ARCHIVE_JOB_IS_NOT_SCHEDULED' => 'No se han programado archivados',
     'LBL_ARCHIVE_FILTER' => 'Configuración del filtro',
-    "LBL_MANAGE_ARCHIVE_SETUP" => 'Archivado de los datos de configuración',
+    'LBL_MANAGE_ARCHIVE_SETUP' => 'Archivado de los datos de configuración',
     'LBL_LIST_ARCHIVE_NAME' => 'Nombre del archivo',
     'LBL_PERFORM_NOW_BTN' => 'Realizar ahora',
     'LBL_ARCHIVE_SUCCESS_TITLE' => 'Éxito',
@@ -45,4 +44,4 @@ $mod_strings = array (
         . 'ya que puede afectar al rendimiento del sistema. ¿Seguro que desea ejecutar esta acción ahora?',
 
     'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'El archivador para el módulo {{moduleName}} debe tener el {{fieldName}} configurado como filtro',
-);
+];

@@ -12,7 +12,13 @@
 --}}
 <div class="activity-card-content-body collapsed-timeline">
 {{#each meta.panels}}
-    {{partial 'panel' ../this view=../this panel=this}}
+    {{#eq name "panel_attachments"}}
+        {{#if ../../attachments}}
+            {{partial 'panel' ../../../this view=../../../this panel=../../this}}
+        {{/if}}
+    {{else}}
+        {{partial 'panel' ../../this view=../../this panel=../this}}
+    {{/eq}}
 {{/each}}
 </div>
 <button data-action="toggle" class="btn btn-link btn-invisible toggle-text activity-card-show-more">

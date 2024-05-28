@@ -30,11 +30,11 @@ abstract class SugarApi
      * @param array $requiredFields
      * @throws SugarApiExceptionMissingParameter
      */
-    public function requireArgs(array $args, $requiredFields = array())
+    public function requireArgs(array $args, $requiredFields = [])
     {
-        foreach ( $requiredFields as $fieldName ) {
-            if ( !array_key_exists($fieldName, $args) ) {
-                throw new SugarApiExceptionMissingParameter('Missing parameter: '.$fieldName);
+        foreach ($requiredFields as $fieldName) {
+            if (!array_key_exists($fieldName, $args)) {
+                throw new SugarApiExceptionMissingParameter('Missing parameter: ' . $fieldName);
             }
         }
     }
@@ -47,44 +47,58 @@ abstract class SugarApi
      * @param $options array Formatting options
      * @return array An array version of the SugarBean with only the requested fields (also filtered by ACL)
      */
-    protected function formatBean(ServiceBase $api, array $args, SugarBean $bean, array $options = array())
+    protected function formatBean(ServiceBase $api, array $args, SugarBean $bean, array $options = [])
     {
         if ((empty($args['fields']) && !empty($args['view'])) ||
             (!empty($args['fields']) && !is_array($args['fields']))
         ) {
-            $args['fields'] = $this->getFieldsFromArgs($api, $args, $bean, 'view', $options['display_params']);
+            $args['fields'] = $this->getFieldsFromArgs(
+                $api,
+                $args,
+                $bean,
+                'view',
+                $options['display_params']
+            );
+        }
+
+        if (array_key_exists('enforceFields', $args) && is_array($args['fields'])) {
+            if (!is_array($args['enforceFields'])) {
+                $args['enforceFields'] = array_filter(explode(',', $args['enforceFields']));
+            }
+
+            $args['fields'] = [...$args['fields'], ...$args['enforceFields']];
         }
 
         if (!empty($args['fields'])) {
             $fieldList = $args['fields'];
 
-            if ( ! in_array('date_modified',$fieldList ) ) {
+            if (!safeInArray('date_modified', $fieldList)) {
                 $fieldList[] = 'date_modified';
             }
-            if ( ! in_array('id',$fieldList ) ) {
+            if (!safeInArray('id', $fieldList)) {
                 $fieldList[] = 'id';
             }
 
-            if (!in_array('locked_fields', $fieldList)) {
+            if (!safeInArray('locked_fields', $fieldList)) {
                 $fieldList[] = 'locked_fields';
             }
         } else {
-            $fieldList = array();
+            $fieldList = [];
         }
 
-        $options = array_merge(array(
+        $options = array_merge([
             'action' => $api->action,
             'args' => $args,
-        ), $options);
+        ], $options);
 
-        $data = ApiHelper::getHelper($api,$bean)->formatForApi($bean,$fieldList, $options);
+        $data = ApiHelper::getHelper($api, $bean)->formatForApi($bean, $fieldList, $options);
 
         // Should we log this as a recently viewed item?
-        if ( !empty($data) && isset($args['viewed']) && $args['viewed'] == true ) {
-            if ( !isset($this->action) ) {
+        if (!empty($data) && isset($args['viewed']) && $args['viewed'] == true) {
+            if (!isset($this->action)) {
                 $this->action = 'view';
             }
-            if ( !isset($this->api) ) {
+            if (!isset($this->api)) {
                 $this->api = $api;
             }
             $this->trackAction($bean);
@@ -94,16 +108,20 @@ abstract class SugarApi
             $data['_module'] = $bean->module_name;
         }
 
+        if (isset($bean->_is_external_link)) {
+            $data['_is_external_link'] = $bean->_is_external_link;
+        }
+
         return $data;
     }
 
-    protected function formatBeans(ServiceBase $api, array $args, $beans, array $options = array())
+    protected function formatBeans(ServiceBase $api, array $args, $beans, array $options = [])
     {
         if (!empty($args['fields']) && !is_array($args['fields'])) {
-            $args['fields'] = explode(',',$args['fields']);
+            $args['fields'] = explode(',', $args['fields']);
         }
 
-        $ret = array();
+        $ret = [];
 
         foreach ($beans as $bean) {
             if (!is_subclass_of($bean, 'SugarBean')) {
@@ -114,25 +132,25 @@ abstract class SugarApi
 
         return $ret;
     }
+
     /**
      * Recursively runs html entity decode for the reply
      * @param $data array The bean the API is returning
      */
-    protected function htmlDecodeReturn(&$data) {
-        foreach($data AS $key => $value) {
-            if((is_object($value) || is_array($value)) && !empty($value)) {
+    protected function htmlDecodeReturn(&$data)
+    {
+        foreach ($data as $key => $value) {
+            if ((is_object($value) || is_array($value)) && !empty($value)) {
                 if (is_array($data)) {
                     $this->htmlDecodeReturn($data[$key]);
                 } else {
                     $this->htmlDecodeReturn($data->$key);
                 }
-            }
-            // htmldecode screws up bools..returns '1' for true
+            } // htmldecode screws up bools..returns '1' for true
             elseif (is_string($value) && !empty($data) && !empty($value)) {
                 // USE ENT_QUOTES TO REMOVE BOTH SINGLE AND DOUBLE QUOTES, WITHOUT THIS IT WILL NOT CONVERT THEM
-                $data[$key] = html_entity_decode($value, ENT_COMPAT|ENT_QUOTES, 'UTF-8');
-            }
-            else {
+                $data[$key] = html_entity_decode($value, ENT_COMPAT | ENT_QUOTES, 'UTF-8');
+            } else {
                 $data[$key] = $value;
             }
         }
@@ -146,27 +164,27 @@ abstract class SugarApi
      * @param $options array Options to pass to the retrieveBean method
      * @return SugarBean The loaded bean
      */
-    protected function loadBean(ServiceBase $api, array $args, $aclToCheck = 'view', array $options = array())
+    protected function loadBean(ServiceBase $api, array $args, $aclToCheck = 'view', array $options = [])
     {
-        $this->requireArgs($args, array('module','record'));
+        $this->requireArgs($args, ['module', 'record']);
 
         if (!empty($args['erased_fields'])) {
             $options['erased_fields'] = true;
         }
 
-        $bean = BeanFactory::retrieveBean($args['module'],$args['record'], $options);
+        $bean = BeanFactory::retrieveBean($args['module'], $args['record'], $options);
 
         if ($api->action == 'save' && ($bean == false || $bean->deleted == 1)) {
-            throw new SugarApiExceptionNotAuthorized('SUGAR_API_EXCEPTION_RECORD_NOT_AUTHORIZED', array('save'));
+            throw new SugarApiExceptionNotAuthorized('SUGAR_API_EXCEPTION_RECORD_NOT_AUTHORIZED', ['save']);
         }
 
-        if ( $bean == FALSE || $bean->deleted == 1) {
+        if ($bean == false || $bean->deleted == 1) {
             // Couldn't load the bean
-            throw new SugarApiExceptionNotFound('Could not find record: '.$args['record'].' in module: '.$args['module']);
+            throw new SugarApiExceptionNotFound('Could not find record: ' . $args['record'] . ' in module: ' . $args['module']);
         }
 
         if (SugarACLStatic::fixUpActionName($aclToCheck) != 'view' && !$bean->ACLAccess(SugarACLStatic::fixUpActionName($aclToCheck), $options)) {
-            throw new SugarApiExceptionNotAuthorized('SUGAR_API_EXCEPTION_RECORD_NOT_AUTHORIZED',array($aclToCheck));
+            throw new SugarApiExceptionNotAuthorized('SUGAR_API_EXCEPTION_RECORD_NOT_AUTHORIZED', [$aclToCheck]);
         }
 
         return $bean;
@@ -177,7 +195,7 @@ abstract class SugarApi
      * @param $bean SugarBean The bean to be updated
      * @param ServiceBase $api The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
      * @param array $args The arguments array passed in from the API
-     * @return id Bean id
+     * @return string Bean id
      */
     protected function updateBean(SugarBean $bean, ServiceBase $api, array $args)
     {
@@ -199,22 +217,28 @@ abstract class SugarApi
      */
     protected function populateBean(SugarBean $bean, ServiceBase $api, array $args)
     {
-        $helper = ApiHelper::getHelper($api,$bean);
-        $options = array();
-        if(!empty($args['_headers']['X_TIMESTAMP'])) {
+        $helper = ApiHelper::getHelper($api, $bean);
+        $options = [];
+        if (!empty($args['_headers']['X_TIMESTAMP'])) {
             $options['optimistic_lock'] = $args['_headers']['X_TIMESTAMP'];
         }
+
+        // set allowBatching flag in the bean
+        if (isset($args['allowBatching'])) {
+            $bean->allowBatching = $args['allowBatching'];
+        }
+
         try {
-            $errors = $helper->populateFromApi($bean,$args, $options);
-        } catch(SugarApiExceptionEditConflict $conflict) {
+            $errors = $helper->populateFromApi($bean, $args, $options);
+        } catch (SugarApiExceptionEditConflict $conflict) {
             $api->action = 'view';
             $data = $this->formatBean($api, $args, $bean);
             // put current state of the record on the exception
-            $conflict->setExtraData("record", $data);
+            $conflict->setExtraData('record', $data);
             throw $conflict;
         }
 
-        if ( $errors !== true ) {
+        if ($errors !== true) {
             // There were validation errors.
             throw new SugarApiExceptionInvalidParameter('There were validation errors on the submitted data. Record was not saved.');
         }
@@ -235,11 +259,10 @@ abstract class SugarApi
 
         BeanFactory::unregisterBean($bean->module_name, $bean->id);
 
-        if(isset($args['my_favorite'])) {
+        if (isset($args['my_favorite'])) {
             $this->toggleFavorites($bean, $args['my_favorite']);
         }
     }
-
 
 
     /**
@@ -254,24 +277,22 @@ abstract class SugarApi
 
         $reindexBean = false;
 
-        $favorite = (bool) $favorite;
+        $favorite = (bool)$favorite;
 
         $module = $bean->module_dir;
         $record = $bean->id;
 
-        $fav_id = SugarFavorites::generateGUID($module,$record);
+        $fav_id = SugarFavorites::generateGUID($module, $record);
 
         // get it even if its deleted
-        $fav = BeanFactory::getBean('SugarFavorites', $fav_id, array("deleted" => false));
+        $fav = BeanFactory::getBean('SugarFavorites', $fav_id, ['deleted' => false]);
 
         // already exists
-        if(!empty($fav->id)) {
+        if (!empty($fav->id)) {
             $deleted = ($favorite) ? 0 : 1;
             $fav->toggleExistingFavorite($fav_id, $deleted);
             $reindexBean = true;
-        }
-
-        elseif($favorite && empty($fav->id)) {
+        } elseif ($favorite && empty($fav->id)) {
             $fav = BeanFactory::newBean('SugarFavorites');
             $fav->id = $fav_id;
             $fav->new_with_id = true;
@@ -297,7 +318,8 @@ abstract class SugarApi
      * @param array $context ACL context
      * @throws SugarApiExceptionNotAuthorized
      */
-    protected function verifyFieldAccess(SugarBean $bean, $field, $action = 'access', $context = array()) {
+    protected function verifyFieldAccess(SugarBean $bean, $field, $action = 'access', $context = [])
+    {
         if (!$bean->ACLFieldAccess($field, $action, $context)) {
             // @TODO Localize this exception message
             throw new SugarApiExceptionNotAuthorized('Not allowed to ' . $action . ' ' . $field . ' field in ' . $bean->object_name . ' module.');
@@ -314,11 +336,11 @@ abstract class SugarApi
         $manager = $this->getTrackerManager();
         $monitor = $manager->getMonitor('tracker');
 
-        if ( ! $monitor ) {
+        if (!$monitor) {
             // This tracker is disabled.
             return;
         }
-        if ( empty($bean->id) || (isset($bean->new_with_id) && $bean->new_with_id) ) {
+        if (empty($bean->id) || (isset($bean->new_with_id) && $bean->new_with_id)) {
             // It's a new bean, don't record it.
             // Tracking bean saves/creates happens in the SugarBean so it is always recorded
             return;
@@ -352,25 +374,26 @@ abstract class SugarApi
      * Determine field list from arguments base both "fields" and "view" parameter.
      * The final result is a merger of both.
      *
-     * @param ServiceBase $api           The API request object
-     * @param array       $args          The arguments passed in from the API
-     * @param SugarBean   $bean          Bean context
-     * @param string      $viewName      The argument used to determine the view name, defaults to view
-     * @param array       $displayParams Display parameters for some fields
+     * @param ServiceBase $api The API request object
+     * @param array $args The arguments passed in from the API
+     * @param SugarBean $bean Bean context
+     * @param string $viewName The argument used to determine the view name, defaults to view
+     * @param array $displayParams Display parameters for some fields
      * @return array
      */
     protected function getFieldsFromArgs(
         ServiceBase $api,
-        array $args,
-        SugarBean $bean = null,
+        array       $args,
+        SugarBean   $bean = null,
         $viewName = 'view',
-        &$displayParams = array()
+        &$displayParams = []
     ) {
+
         // Try to get the fields list if explicitly defined.
         if (!empty($args['fields'])) {
             $fields = $this->normalizeFields($args['fields'], $displayParams);
         } else {
-            $fields = array();
+            $fields = [];
         }
 
         // When a view name is specified and a seed is available, also include those fields
@@ -379,7 +402,7 @@ abstract class SugarApi
                 array_merge(
                     $fields,
                     $this->getMetaDataManager($api->platform)
-                         ->getModuleViewFields($bean->module_name, $args[$viewName], $displayParams)
+                        ->getModuleViewFields($bean->module_name, $args[$viewName], $displayParams)
                 )
             );
 
@@ -388,7 +411,7 @@ abstract class SugarApi
             foreach ($fields as $field) {
                 if (!empty($fieldDefs[$field]) && isset($fieldDefs[$field]['type'])) {
                     $type = $fieldDefs[$field]['type'];
-                    if (in_array($type, $bean::$relateFieldTypes)) {
+                    if (safeInArray($type, $bean::$relateFieldTypes)) {
                         $type = 'relate';
                     }
                     switch ($type) {
@@ -435,7 +458,7 @@ abstract class SugarApi
      */
     protected function normalizeFields($fields, &$displayParams)
     {
-        $displayParams = array();
+        $displayParams = [];
         if (is_string($fields)) {
             $fields = $this->parseFields($fields);
         }
@@ -446,7 +469,7 @@ abstract class SugarApi
             );
         }
 
-        $normalized = array();
+        $normalized = [];
         foreach ($fields as $field) {
             if (is_string($field)) {
                 $name = $field;
@@ -496,7 +519,7 @@ abstract class SugarApi
     protected function parseFields($fields)
     {
         $chunks = explode(',', $fields);
-        $formatted = array();
+        $formatted = [];
         foreach ($chunks as $chunk) {
             $chunk = trim($chunk);
             if (strpos($chunk, '"') === false) {
@@ -532,13 +555,13 @@ abstract class SugarApi
      */
     protected function getOrderByFromArgs(array $args, SugarBean $seed = null)
     {
-        $orderBy = array();
+        $orderBy = [];
         if (!isset($args['order_by']) || !is_string($args['order_by'])) {
             return $orderBy;
         }
 
         $columns = explode(',', $args['order_by']);
-        $parsed = array();
+        $parsed = [];
         foreach ($columns as $column) {
             $column = explode(':', $column, 2);
             $field = array_shift($column);
@@ -645,14 +668,14 @@ abstract class SugarApi
     protected function getContentLength()
     {
         if (isset($_SERVER['CONTENT_LENGTH'])) {
-            return (int) $_SERVER['CONTENT_LENGTH'];
+            return (int)$_SERVER['CONTENT_LENGTH'];
         }
 
         if (function_exists('getallheaders')) {
             $headers = getallheaders();
             $headers = array_change_key_case($headers, CASE_LOWER);
             if (isset($headers['content-length'])) {
-                return (int) $headers['content-length'];
+                return (int)$headers['content-length'];
             }
         }
 

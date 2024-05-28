@@ -64,7 +64,7 @@ $viewdefs['DocumentRevisions']['base']['view']['record'] = [
                 ],
                 [
                     'name' => 'follow',
-                    'label'=> 'LBL_FOLLOW',
+                    'label' => 'LBL_FOLLOW',
                     'type' => 'follow',
                     'readonly' => true,
                     'dismiss_label' => true,

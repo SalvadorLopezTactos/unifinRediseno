@@ -12,11 +12,11 @@
 }}
 {{#each value}}
     {{#eq mimeType 'image'}}
-        <a class="ellipsis_inline" data-placement="bottom" title="{{name}}" href="{{url}}"
+        <a class="ellipsis_inline" data-bs-placement="bottom" title="{{name}}" href="{{url}}"
            data-url="{{url}}" target="_blank">{{name}}</a>
     {{/eq}}
     {{#notEq mimeType 'image'}}
-        <a class="ellipsis_inline" data-placement="bottom" title="{{name}}" href="{{url}}"
+        <a class="ellipsis_inline" data-bs-placement="bottom" title="{{name}}" href="{{url}}"
            data-url="{{url}}" data-action="download">{{name}}</a>
     {{/notEq}}
 {{/each}}

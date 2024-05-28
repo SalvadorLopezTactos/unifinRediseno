@@ -24,9 +24,8 @@ class PMSEGatewayDefinitionWrapper
     public function __construct()
     {
         $this->gateway = BeanFactory::newBean('pmse_BpmnGateway');
-        $this->gatewayDefinition = BeanFactory::newBean("pmse_BpmGatewayDefinition");
+        $this->gatewayDefinition = BeanFactory::newBean('pmse_BpmGatewayDefinition');
         $this->flowBean = BeanFactory::newBean('pmse_BpmnFlow');
-
     }
 
     /**
@@ -111,12 +110,12 @@ class PMSEGatewayDefinitionWrapper
 
     public function _get(array $args)
     {
-        $result = array("success" => true);
-        $this->gateway->retrieve_by_string_fields(array('gat_uid' => $args['record']));
-        $orderBy = "flo_eval_priority ASC";
+        $result = ['success' => true];
+        $this->gateway->retrieve_by_string_fields(['gat_uid' => $args['record']]);
+        $orderBy = 'flo_eval_priority ASC';
         $where = "flo_element_origin='" . $this->gateway->id . "' AND flo_element_origin_type='bpmnGateway' AND flo_type!='DEFAULT'";
         $resultArray = $this->flowBean->get_full_list($orderBy, $where);
-        $data = array();
+        $data = [];
         if (is_array($resultArray)) {
             foreach ($resultArray as $key => $value) {
                 $tmpObject = new stdClass();
@@ -145,7 +144,7 @@ class PMSEGatewayDefinitionWrapper
      */
     public function _post(array $args)
     {
-        $data = array("success" => false);
+        $data = ['success' => false];
         return $data;
     }
 
@@ -158,20 +157,20 @@ class PMSEGatewayDefinitionWrapper
      */
     public function _put(array $args)
     {
-        $data = array("success" => false);
+        $data = ['success' => false];
 
-        if (isset($args['record']) && count($args) > 0) {
-            if ($this->gateway->retrieve_by_string_fields(array('gat_uid' => $args['record']))) {
+        if (isset($args['record']) && safeCount($args) > 0) {
+            if ($this->gateway->retrieve_by_string_fields(['gat_uid' => $args['record']])) {
                 if (!empty($this->gateway->fetched_row)) {
                     $orderCounter = 0;
                     foreach ($args['data'] as $key => $value) {
-                        $this->flowBean->retrieve_by_string_fields(array('flo_uid' => $value['flo_uid']));
+                        $this->flowBean->retrieve_by_string_fields(['flo_uid' => $value['flo_uid']]);
                         $this->flowBean->flo_condition = $value['flo_condition'];
                         $this->flowBean->flo_eval_priority = $orderCounter;
                         $this->flowBean->save();
                         $orderCounter++;
                     }
-                    $data = array("success" => true);
+                    $data = ['success' => true];
                 }
             }
         }

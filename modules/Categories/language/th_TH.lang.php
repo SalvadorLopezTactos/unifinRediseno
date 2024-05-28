@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'หมวดหมู่',
     'LBL_MODULE_NAME_SINGULAR' => 'หมวดหมู่',
     'LBL_MODULE_TITLE' => 'หมวดหมู่',
@@ -31,4 +31,4 @@ $mod_strings = array(
 หมวดหมู่ที่อยู่ภายในทั้งหมดจะถูกลบออกด้วย',
     'LBL_WRONG_MOVE_PATH' => 'คุณไม่สามารถย้ายโฟลเดอร์เข้าสู่โฟลเดอร์นั้นเอง',
     'ERR_EMPTY_NODE_NAME' => 'คุณไม่สามารถเพิ่มหมวดหมู่โดยไม่มีชื่อ',
-);
+];

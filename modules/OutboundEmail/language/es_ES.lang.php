@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Cuentas de correo electrónico saliente',
     'LBL_MODULE_NAME_SINGULAR' => 'Cuenta de correo electrónico saliente',
     'LBL_STATUS' => 'Estado',
@@ -40,4 +40,4 @@ $mod_strings = array(
     'LBL_PREFERRED_SENDING_ACCOUNT' => 'Cuenta de envío preferida',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Panel de enfoque en la configuración de correo electrónico',
-);
+];

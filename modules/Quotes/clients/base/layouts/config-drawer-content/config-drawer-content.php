@@ -9,16 +9,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Quotes']['base']['layout']['config-drawer-content'] = array(
-    'components' => array(
-        array(
+$viewdefs['Quotes']['base']['layout']['config-drawer-content'] = [
+    'components' => [
+        [
             'view' => 'config-summary',
-        ),
-        array(
+        ],
+        [
             'view' => 'config-columns',
-        ),
-        array(
+        ],
+        [
             'view' => 'config-footer',
-        ),
-    ),
-);
+        ],
+    ],
+];

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Konsolės konfigūracija',
     'LBL_MODULE_NAME_SINGULAR' => 'Konsolės konfigūracija',
     'LBL_CONSOLE_CONFIG_TITLE' => 'Konsolė',
@@ -55,4 +56,4 @@ $mod_strings = array(
     'LBL_CONSOLE_DIRECTIONS_CHANGE' => 'Pakeitimai bus matomi iškart, tačiau turite įrašyti, kad jie įsigaliotų.',
     'LBL_CONSOLE_DIRECTIONS_FILTER_AND' => 'ir ',
     'LBL_CONSOLE_DIRECTIONS_FILTER_OR' => 'arba ',
-);
+];

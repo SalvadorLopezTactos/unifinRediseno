@@ -111,12 +111,172 @@
                     if (buildGrid) {
                         this._buildGridsFromPanelsMetadata();
                     }
+
+                    if (!_.isUndefined(this.layout)) {
+                        this.listenTo(
+                            this.layout.context,
+                            'dashboard-filter-mode-changed',
+                            this.toggleFilterMode,
+                            this);
+                        this.listenTo(
+                            this.layout.context,
+                            'refresh-dashlet-results',
+                            this.refreshDashletResults,
+                            this);
+                        this.listenTo(
+                            this.layout.context,
+                            'silent-refresh-dashlet-results',
+                            this.silentRefreshDashletResults,
+                            this);
+                        this.listenTo(
+                            this.context,
+                            'refresh-results-complete',
+                            this.refreshDashletComplete,
+                            this);
+                        this.listenTo(
+                            this.context,
+                            'filters-loaded-successfully',
+                            this.sendDashboardFilters,
+                            this);
+                        this.listenTo(
+                            this.layout.context,
+                            'dashboard-filter-group-highlight',
+                            this.highlightFilterGroup,
+                            this);
+                        this.listenTo(
+                            this.context,
+                            'dashlet-finished-loading',
+                            this.dashletFinishedLoading,
+                            this);
+                    }
                 });
 
                 this.once('render', function() {
                     app.analytics.trackPageView('/dashlet/' + this.name);
                 });
             },
+
+            /**
+             * Send a message containing the dashboard filters for anyone interested
+             */
+            sendDashboardFilters: function() {
+                const dashboardFilters = this.layout.model.get('metadata').filters;
+                const dashletId = this.layout.el.getAttribute('data-gs-id');
+                const filtersAffected = [];
+
+                _.each(dashboardFilters, (filterGroup) => {
+                    _.each(filterGroup.fields, (field) => {
+                        if (field.dashletId === dashletId) {
+                            filtersAffected.push(field);
+                        }
+                    });
+                });
+
+                this.context.trigger('dashboard-filters-meta-ready', filtersAffected);
+            },
+
+            /**
+             * Switch ON/OFF the filter mode
+             *
+             * @param {string} state
+             */
+            toggleFilterMode: function(state, refetch) {
+                if (state === 'edit') {
+                    this._createFilterMode();
+                } else {
+                    this.refreshDashletResults(refetch);
+                }
+            },
+
+            /**
+             * Mark dashlet loaded
+             */
+            dashletFinishedLoading: function() {
+                this.isDashletLoading = false;
+            },
+
+            /**
+             * Create and display the filter mode
+             */
+            _createFilterMode: function() {
+                this.$el.children().hide();
+
+                this._filterModeController = app.view.createView({
+                    context: this.layout.context,
+                    type: 'dashlet-filter-mode',
+                    module: this.module,
+                    layout: this.layout,
+                    model: this.settings,
+                    dashletSpecificData: this.getDashletSpecificData ? this.getDashletSpecificData() : {},
+                    manager: this,
+                });
+
+                this._filterModeController.show();
+
+                this.$el.append(this._filterModeController.$el);
+            },
+
+            /**
+             * Hide and destroy the filter mode
+             */
+            _destroyFilterMode: function() {
+                if (this._filterModeController) {
+                    this._filterModeController.hide();
+                    this._filterModeController.dispose();
+                    this._filterModeController = false;
+
+                    this.$el.children().show();
+
+                    this.context.trigger('dashlet:mode:loaded');
+                }
+            },
+
+            refreshDashletComplete: function() {
+                this._destroyFilterMode();
+            },
+
+            /**
+             * Listen to show/hide the group highlight
+             *
+             * @param {Array} dashletIds
+             * @param {boolean} highlight
+             */
+            highlightFilterGroup: function(dashletIds, highlight) {
+                const dashletId = this.layout.el.getAttribute('data-gs-id');
+                const dashletEl = this.layout.$el.find('[data-type="dashlet"]');
+
+                if (_.includes(dashletIds, dashletId) && dashletEl.length === 1) {
+                    dashletEl.toggleClass('dashlet-widget-highlight', highlight);
+                    dashletEl.toggleClass('border-none', !highlight);
+                }
+            },
+
+            /**
+             * Refresh dashlet results
+             *
+             * @param {boolean} refetch
+             */
+            refreshDashletResults: function(refetch) {
+                if (_.isFunction(this.refreshResults) && refetch) {
+                    this.refreshResults();
+                } else {
+                    this._destroyFilterMode();
+                }
+            },
+
+            /**
+             * Silent refresh dashlet results
+             *
+             * @param {boolean} refetch
+             */
+            silentRefreshDashletResults: function(refetch) {
+                if (_.isFunction(this.silentRefreshResults) && refetch) {
+                    this.silentRefreshResults();
+                } else {
+                    this._destroyFilterMode();
+                }
+            },
+
             /**
              * Build grid panel metadata based on panel span size
              */

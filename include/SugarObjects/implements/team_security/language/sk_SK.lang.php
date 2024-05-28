@@ -9,8 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-'LBL_TEAM'=>'Tímy',
-'LBL_TEAMS'=>'Tímy',
-'LBL_TEAM_ID'=>'ID tímu',
-);
+$mod_strings = [
+    'LBL_TEAM' => 'Tímy',
+    'LBL_TEAMS' => 'Tímy',
+    'LBL_TEAM_ID' => 'ID tímu',
+];

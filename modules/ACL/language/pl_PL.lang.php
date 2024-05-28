@@ -9,22 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-'LBL_ALLOW_ALL'=>'Wszystko',
-'LBL_ALLOW_NONE'=>'Brak',
-'LBL_ALLOW_OWNER'=>'Właściciel',
-'LBL_ROLE'=>'Rola',
-'LBL_NAME'=>'Nazwa',
-'LBL_DESCRIPTION'=>'Opis',
-'LIST_ROLES'=>'Lista ról',
-'LBL_USERS_SUBPANEL_TITLE'=>'Użytkownicy',
-'LIST_ROLES_BY_USER'=>'Lista ról wg użytkowników',
-'LBL_ROLES_SUBPANEL_TITLE'=>'Role użytkowników',
-'LBL_SEARCH_FORM_TITLE'=>'Wyszukiwanie',
-'LBL_NO_ACCESS'=>'Brak dostępu do tego obszaru. Aby uzyskać dostęp, skontaktuj się z administratorem.',
-'LBL_REDIRECT_TO_HOME'=>'Przekierowanie do Strony głównej w',
-'LBL_SECONDS'=>'sekund',
-'LBL_ADDING'=>'Dodano dla ',
+$mod_strings = [
+    'LBL_ALLOW_ALL' => 'Wszystko',
+    'LBL_ALLOW_NONE' => 'Brak',
+    'LBL_ALLOW_OWNER' => 'Właściciel',
+    'LBL_ROLE' => 'Rola',
+    'LBL_NAME' => 'Nazwa',
+    'LBL_DESCRIPTION' => 'Opis',
+    'LIST_ROLES' => 'Lista ról',
+    'LBL_USERS_SUBPANEL_TITLE' => 'Użytkownicy',
+    'LIST_ROLES_BY_USER' => 'Lista ról wg użytkowników',
+    'LBL_ROLES_SUBPANEL_TITLE' => 'Role użytkowników',
+    'LBL_SEARCH_FORM_TITLE' => 'Wyszukiwanie',
+    'LBL_NO_ACCESS' => 'Brak dostępu do tego obszaru. Aby uzyskać dostęp, skontaktuj się z administratorem.',
+    'LBL_REDIRECT_TO_HOME' => 'Przekierowanie do Strony głównej w',
+    'LBL_SECONDS' => 'sekund',
+    'LBL_ADDING' => 'Dodano dla ',
 
-)
-?>
+];

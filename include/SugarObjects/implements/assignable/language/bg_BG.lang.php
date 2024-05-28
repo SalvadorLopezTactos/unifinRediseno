@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-'LBL_ASSIGNED_TO_ID'=>'Отговорник',
-'LBL_ASSIGNED_TO_NAME' => 'Потребител',
-);
+$mod_strings = [
+    'LBL_ASSIGNED_TO_ID' => 'Отговорник',
+    'LBL_ASSIGNED_TO_NAME' => 'Потребител',
+];

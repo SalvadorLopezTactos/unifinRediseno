@@ -11,11 +11,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['Filters'] = array(
+$dictionary['Filters'] = [
     'table' => 'filters',
     'duplicate_merge' => true,
-    'fields' => array(
-        'filter_definition' => array(
+    'fields' => [
+        'filter_definition' => [
             'required' => true,
             'name' => 'filter_definition',
             'vname' => 'LBL_FILTER_DEFINITION',
@@ -34,8 +34,8 @@ $dictionary['Filters'] = array(
             'merge_filter' => 'disabled',
             'calculated' => false,
             'studio' => 'visible',
-        ),
-        'filter_template' => array(
+        ],
+        'filter_template' => [
             'required' => true,
             'name' => 'filter_template',
             'vname' => 'LBL_FILTER_TEMPLATE',
@@ -54,8 +54,8 @@ $dictionary['Filters'] = array(
             'merge_filter' => 'disabled',
             'calculated' => false,
             'studio' => 'visible',
-        ),
-        'module_name' => array(
+        ],
+        'module_name' => [
             'required' => true,
             'name' => 'module_name',
             'vname' => 'LBL_MODULE_NAME',
@@ -74,16 +74,16 @@ $dictionary['Filters'] = array(
             'unified_search' => false,
             'merge_filter' => 'disabled',
             'calculated' => false,
-        ),
+        ],
         'app' => [
             'name' => 'app',
             'type' => 'varchar',
             'len' => 36,
             'default' => 'base',
         ],
-    ),
-    'relationships' => array(),
-    'acls' => array('SugarACLFilters' => true, 'SugarACLStatic' => false),
+    ],
+    'relationships' => [],
+    'acls' => ['SugarACLFilters' => true, 'SugarACLStatic' => false],
     'optimistic_locking' => true,
     // @TODO Fix the Default and Basic SugarObject templates so that Basic
     // implements Default. This would allow the application of various
@@ -94,14 +94,14 @@ $dictionary['Filters'] = array(
     // implementation fields. Once there is a separation of default and basic
     // templates we can safely remove these as this module will implement
     // default instead of basic.
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'Filters',
     ],
-);
+];
 
 if (!class_exists('VardefManager')) {
 }
@@ -109,5 +109,5 @@ if (!class_exists('VardefManager')) {
 VardefManager::createVardef(
     'Filters',
     'Filters',
-    array('basic', 'team_security', 'assignable')
+    ['basic', 'team_security', 'assignable']
 );

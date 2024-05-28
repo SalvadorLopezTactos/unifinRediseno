@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tietämyskanta',
     'LBL_MODULE_NAME_SINGULAR' => 'Tietämyskanta-artikkeli',
     'LBL_MODULE_TITLE' => 'Tietämyskanta-artikkeli',
@@ -17,4 +17,4 @@ $mod_strings = array(
     'LBL_KEYWORDS' => 'Avainsanat:',
     'LBL_CONTENT' => 'Sisältö',
     'LBL_ATTACHMENTS' => 'Liitteet:',
-);
+];

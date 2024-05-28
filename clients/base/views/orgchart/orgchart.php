@@ -10,35 +10,35 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['orgchart'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['base']['view']['orgchart'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_ORG_CHART',
             'description' => 'LBL_ORG_CHART_DESC',
-            'config' => array(
-            ),
-            'preview' => array(
-            ),
-            'filter' => array(
-                'module' => array(
+            'config' => [
+            ],
+            'preview' => [
+            ],
+            'filter' => [
+                'module' => [
                     'Leads',
-                ),
-                'view' => 'records'
-            )
-        ),
-        array(
+                ],
+                'view' => 'records',
+            ],
+        ],
+        [
             'label' => 'LBL_ORG_CHART',
             'description' => 'LBL_ORG_CHART_DESC',
-            'config' => array(
-            ),
-            'preview' => array(
-            ),
-            'filter' => array(
-                'module' => array(
+            'config' => [
+            ],
+            'preview' => [
+            ],
+            'filter' => [
+                'module' => [
                     'Home',
-                ),
-                'view' => 'record'
-            )
-        ),
-    ),
-);
+                ],
+                'view' => 'record',
+            ],
+        ],
+    ],
+];

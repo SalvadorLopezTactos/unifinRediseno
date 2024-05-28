@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Řídicí panel seznamu příležitostí',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Řídicí panel záznamů příležitostí',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Nabídky',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Příležitosti podle dynamického účtu',
+    'LBL_TOP_10_OPP' => '10 nejlepších otevřených příležitostí',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Dashlet: Moje aktivní příležitosti',
+    'LBL_MY_ACTIVE_OPP' => 'Moje aktivní příležitosti',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Sumář zásobníku je',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Role příležitosti',
+    'LBL_OPPORTUNITY_ROLE' => 'Role příležitosti',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Poznámky',
     'LBL_TAB_OPPORTUNITY' => 'Kontrola modulu {{module}}',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'Pokud zmáčknete potvrdit, vymažete veškerá data obchodních předpovědi a změníte celkový přehled o obchodních příležitostech. Jestliže toto nezamýšlíte, klikněte na tlačítko zrušit a vrátíte se k předchozímu nastavení.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'Kliknutím na tlačítko Potvrdit smažete VŠECHNA data prognóz a změníte své Zobrazení obchodních příležitostí. '
-        .'Také budou zakázány VŠECHNY definice procesů s modulem cílů u položek tržeb. '
-        .'Pokud to není to, co jste chtěli, klikněte na tlačítko Zrušit a vrátíte se k předchozímu nastavení.',
+        . 'Také budou zakázány VŠECHNY definice procesů s modulem cílů u položek tržeb. '
+        . 'Pokud to není to, co jste chtěli, klikněte na tlačítko Zrušit a vrátíte se k předchozímu nastavení.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Pokud všechny položky obchodní předpovědi jsou uzavřené a alespoň jedna je vyhraná,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'fáze obchodní předpovědi je určena jako "vyhraná"',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Pokud všechny položky obchodní příležitosti jsou označeny jako "prohráno",',
@@ -260,4 +263,9 @@ Chcete-li vytvořit modul {{module_name}}:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Predikce uzavření příležitosti',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Zobrazit podrobnosti predikce pro konkrétní příležitost',
-);
+    'LBL_AI_WINRATE' => 'Míra úspěšnosti',
+    'LBL_AI_WONOPP' => 'Získané příležitosti',
+    'LBL_AI_CLOSINGTIME' => 'Čas ukončení',
+    'LBL_AI_CLOSEDOPP' => 'Uzavřené příležitosti',
+    'LBL_AI_LEADTIMESPAN' => 'Čas mezi Vytvořením příležitosti a Uzavřeno úspěšně',
+];

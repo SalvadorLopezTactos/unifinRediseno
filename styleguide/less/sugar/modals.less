@@ -3,6 +3,8 @@
 
 /* twitter-bootstrap import START */
 
+// TODO optimize with Tailwind
+
 // Background
 .modal-backdrop {
   position: fixed;
@@ -17,7 +19,8 @@
 }
 
 .modal-backdrop,
-.modal-backdrop.fade.in {
+.modal-backdrop.fade.in,
+.modal-backdrop.fade.show {
   opacity: 0.8;
 }
 
@@ -39,7 +42,9 @@
     transition: 'opacity .3s linear, top .3s ease-out';
     top: -25%;
   }
-  &.fade.in { top: 10%; }
+
+  &.fade.in,
+  &.fade.show { top: 10%; }
 }
 
 .modal-header {
@@ -157,7 +162,7 @@
   }
 
   .modal.progress-modal & {
-    .p-0();
+    padding: 0;
   }
 
   textarea {
@@ -221,12 +226,12 @@
 
   .modal:not(.progress-modal) & {
     border-top: @borderWidget;
-    .bg-footer-background();
   }
 }
 
 .modal-backdrop,
-.modal-backdrop.fade.in {
+.modal-backdrop.fade.in,
+.modal-backdrop.fade.show {
   opacity: 0.5;
 }
 
@@ -255,8 +260,5 @@ body.modal-open {
     background-repeat: no-repeat;
     background-size: 300px;
     background-position: right top;
-    .absolute();
-    .w-full();
-    .h-full();
   }
 }

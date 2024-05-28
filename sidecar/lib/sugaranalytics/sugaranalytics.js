@@ -128,8 +128,12 @@
  * @class SUGAR.analytics
  */
 (function(app) {
+    const EVENT_ACTION = 0;
+    const EVENT_CATEGORY = 1;
+    const TYPE_PAGE_VIEW = 'pageview';
+    const TYPE_EVENT = 'event';
 
-    var _analytics = {
+    const _analytics = {
 
         eventSplitter: /\s{2,}/,
         currentViewId: '',
@@ -147,35 +151,35 @@
             swiperight: '[track^=swiperight]'
         },
 
-        init: function() {
+        init: function () {
             if (!app.config.analytics || !app.config.analytics.enabled ||
                 !app.config.analytics.connector || app.config.analytics.connector === 'GoogleAnalytics' ||
                 !app.analytics.connectors[app.config.analytics.connector]
             ) {
-                this.trackPageView = function() {};
-                this.trackEvent = function() {};
-                this.track = function() {};
+                this.trackPageView = () => {};
+                this.trackEvent = () => {};
+                this.track = () => {};
                 return;
             }
 
-            var self = this;
-            app.on('app:init', function() {
+            const self = this;
+            app.on('app:init', function () {
                 app.events.register('app:analytics:init', this);
                 app.analytics.connector = app.analytics.connectors[app.config.analytics.connector];
                 app.analytics.connector.initialize();
 
-                _.each(self._eventsHash, function(val, key) {
-                    $('html').on(key, val, function(e) {
-                        var data = self._parseTrackTag($(this).attr('track'));
-                        app.analytics.trackEvent(key, data.action, e, data.value);
+                _.each(self._eventsHash, function (val, key) {
+                    $('html').on(key, val, function (e) {
+                        const data = self._parseTrackTag($(this).attr('track'));
+                        app.analytics.trackEvent(key, data?.action, e, data?.value);
                     });
                 });
-            }).on('app:start', function() {
+            }).on('app:start', function () {
 
                 // Apps should do their initialization of page tracking based on the following event.
                 app.trigger('app:analytics:init');
 
-                var id = app.config.analytics.id;
+                let id = app.config.analytics.id;
                 // Keep backwards compatible with nomad
                 if (_.isObject(id)) {
                     app.logger.warn('Analytics config id needs to be a valid tracking ID.');
@@ -184,12 +188,12 @@
 
                 app.analytics.connector.start(id, app.config.analytics);
 
-            }).on('app:sync:complete', function() {
+            }).on('app:sync:complete', function () {
                 app.analytics.configure();
-            }).on('app:locale:change', function() {
+            }).on('app:locale:change', function () {
 
                 app.analytics.connector.set('language', app.user.getLanguage());
-            }).on('app:view:change', function(layout, params){
+            }).on('app:view:change', function (layout, params) {
                 app.analytics.currentViewId = layout + (params.module ? '/' + params.module : '');
                 app.analytics.trackPageView(app.analytics.currentViewId);
             });
@@ -200,13 +204,13 @@
          *
          * @member SUGAR.App.analytics
          */
-        configure: function() {
+        configure: function () {
             if (_.isFunction(app.analytics.connector.configure)) {
                 app.analytics.connector.configure();
                 return;
             }
             // old connector
-            var serverInfo = app.metadata.getServerInfo();
+            const serverInfo = app.metadata.getServerInfo();
 
             app.analytics.connector.set('appName',
                 'SugarCRM:' + app.config.platform + ':' + (serverInfo.flavor || '').toLowerCase()
@@ -217,25 +221,23 @@
         /*
          * Track an activity.
          *
-         * @param {string} trackType Activity type.
+         * @param {string} trackType Activity type (name).
          * @param {Object} trackData Activity metadata.
          * @member SUGAR.App.analytics
          */
-        track: function(trackType, trackData) {
-            trackType = trackType || '';
-            trackData = trackData || {};
+        track: function (trackType = '', trackData = {}) {
             if (_.isFunction(app.analytics.connector.track)) {
                 app.analytics.connector.track(trackType, trackData);
                 return;
             }
             // old connector
-            if (trackType === 'pageview' && !_.isEmpty(trackData.page)) {
+            if (trackType === TYPE_PAGE_VIEW && !_.isEmpty(trackData.page)) {
                 app.analytics.trackPageView(trackData.page);
-            } else if (trackType === 'event') {
-                var category = _.isEmpty(trackData.category) ? '' : trackData.category;
-                var action = _.isEmpty(trackData.action) ? '' : trackData.action;
-                var event = _.isEmpty(trackData.event) ? null : trackData.event;
-                var value = _.isEmpty(trackData.value) ? '' : trackData.value;
+            } else if (trackType === TYPE_EVENT) {
+                const category = _.isEmpty(trackData.category) ? '' : trackData.category;
+                const action = _.isEmpty(trackData.action) ? '' : trackData.action;
+                const event = _.isEmpty(trackData.event) ? null : trackData.event;
+                const value = _.isEmpty(trackData.value) ? '' : trackData.value;
                 app.analytics.trackEvent(category, action, event, value);
             }
         },
@@ -246,27 +248,33 @@
          * @param {string} page URI.
          * @member SUGAR.analytics
          */
-        trackPageView: function(page) {
-            app.logger.debug("GAN-page: " + page);
+        trackPageView: function (page) {
+            app.logger.debug(`Page: ${page}`);
             app.analytics.connector.trackPageView(page);
         },
 
         /**
-         * Track an event.
+         * Track an event. Example:
+         * {
+         *     category: 'click',
+         *     action: 'quick_create',
+         *     location: '/Accounts/<id>',
+         *     event: '',
+         *     value: '',
+         * }
          *
-         * @param {string} category Category of the event.
-         * @param {string} action Action of the event.
+         * @param {string} action Action of the event (ex. 'click').
+         * @param {string} category Category of the event (ex. 'quick_create').
          * @param {Object} event Event to track.
          * @param {number} [value] Value associated with the event.
          * @member SUGAR.analytics
          */
-        trackEvent: function(category, action, event, value) {
+        trackEvent: function (action, category, event, value) {
             action = (_.isEmpty(action) && event ? event.currentTarget.id : action) || '[unknown]';
-            app.logger.debug('GAN-event: ' + category + ':' + action  + '(' + value + ')' + ' on ' + this.currentViewId);
             app.analytics.connector.trackEvent({
-                category: category,
                 action: action,
-                label: this.currentViewId,
+                category: category,
+                currentLocation: this.currentViewId,
                 value: value
             });
         },
@@ -274,20 +282,20 @@
         /**
          * Parses the `track` attribute.
          *
-         * @param {String} track The value of the `track` attribute.
+         * @param {String} track The value of the `track` attribute (ex. 'click:quick_create').
          * @return {Object} The hash containing the data to pass to
          *   {@link SUGAR.analytics#trackEvent}
          * @return {string} return.action The action (example: 'mass_delete').
          * @return {number|null} return.value The value corresponding to the action.
          * @private
          */
-        _parseTrackTag: function(track) {
-            var result = {action: '', value: null};
-            var pieces = track.split(':');
-            if (!pieces[1]) {
+        _parseTrackTag: function (track) {
+            const result = {action: '', value: null};
+            const pieces = track.split(':');
+            if (!pieces[EVENT_CATEGORY]) {
                 return result;
             }
-            var actionValue = pieces[1].split('.');
+            const actionValue = pieces[EVENT_CATEGORY].split('.');
             result.action = actionValue[0];
             if (actionValue[1]) {
                 result.value = actionValue[1];
@@ -300,7 +308,7 @@
          * @private
          * @member SUGAR.analytics
          */
-        _attachEvents: function(events, action, css, $el) {
+        _attachEvents: function (events, action, css, $el) {
             if (events) {
                 $el.off(events);
                 $el.on(events, function (e) {
@@ -309,7 +317,7 @@
             }
         },
 
-        dispose: function() {
+        dispose: function () {
             app.off(null, null, this);
         }
     };

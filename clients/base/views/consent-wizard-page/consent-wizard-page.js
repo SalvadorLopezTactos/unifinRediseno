@@ -22,9 +22,11 @@
     },
 
     /**
+     * @deprecated Since 14.0.0. Will be removed in 14.1.0.
      * @inheritdoc
      */
     initialize: function(options) {
+        app.logger.warn('View.Views.Base.ConsentWizardPageView is deprecated and will be removed in 14.1.0');
         options.template = app.template.getView('consent-wizard-page');
         this._super('initialize', [options]);
         Handlebars.registerPartial('consent-wizard-page.header', app.template.get('consent-wizard-page.header'));

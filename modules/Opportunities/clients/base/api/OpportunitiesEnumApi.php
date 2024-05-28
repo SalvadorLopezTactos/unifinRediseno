@@ -15,16 +15,16 @@ class OpportunitiesEnumApi extends ModuleApi
 {
     public function registerApiRest()
     {
-        return array(
-            'enum' => array(
+        return [
+            'enum' => [
                 'reqType' => 'GET',
-                'path' => array('Opportunities', 'enum', '?'),
-                'pathVars' => array('module', 'enum', 'field'),
+                'path' => ['Opportunities', 'enum', '?'],
+                'pathVars' => ['module', 'enum', 'field'],
                 'method' => 'getEnumValues',
                 'shortHelp' => 'This method returns enum values for a specified field',
                 'longHelp' => 'include/api/help/module_enum_get_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     public function getEnumValues(ServiceBase $api, array $args)
@@ -53,6 +53,5 @@ class OpportunitiesEnumApi extends ModuleApi
         }
 
         // opps_view_by
-
     }
 }

@@ -20,7 +20,7 @@
 abstract class BaseMailer implements IMailer
 {
     // constants
-    public const MailTransmissionProtocol = ""; // there is no protocol by default; all derived classes must set this
+    public const MailTransmissionProtocol = ''; // there is no protocol by default; all derived classes must set this
 
     // protected members
     protected $formatter;
@@ -35,7 +35,8 @@ abstract class BaseMailer implements IMailer
      * @access public
      * @param OutboundEmailConfiguration $config required
      */
-    public function __construct(OutboundEmailConfiguration $config) {
+    public function __construct(OutboundEmailConfiguration $config)
+    {
         $this->reset(); // the equivalent of initializing the Mailer object's properties
 
         $this->config = $config;
@@ -46,14 +47,15 @@ abstract class BaseMailer implements IMailer
      *
      * @access public
      */
-    public function reset() {
+    public function reset()
+    {
         $this->clearAttachments();
         $this->clearHeaders();
 
-        $this->formatter  = new EmailFormatter();
+        $this->formatter = new EmailFormatter();
         $this->recipients = new RecipientsCollection();
-        $this->htmlBody   = null;
-        $this->textBody   = null;
+        $this->htmlBody = null;
+        $this->textBody = null;
     }
 
     /**
@@ -63,7 +65,8 @@ abstract class BaseMailer implements IMailer
      * @access public
      * @return string
      */
-    public function getMailTransmissionProtocol() {
+    public function getMailTransmissionProtocol()
+    {
         $class = get_class($this);
         return $class::MailTransmissionProtocol;
     }
@@ -74,7 +77,8 @@ abstract class BaseMailer implements IMailer
      * @access public
      * @return OutboundEmailConfiguration $config
      */
-    public function getConfig() {
+    public function getConfig()
+    {
         return $this->config;
     }
 
@@ -85,7 +89,8 @@ abstract class BaseMailer implements IMailer
      * @access public
      * @param EmailHeaders $headers required
      */
-    public function setHeaders(EmailHeaders $headers) {
+    public function setHeaders(EmailHeaders $headers)
+    {
         $this->headers = $headers;
     }
 
@@ -96,7 +101,8 @@ abstract class BaseMailer implements IMailer
      * @param array $headers required
      * @throws MailerException
      */
-    public function constructHeaders($headers = array()) {
+    public function constructHeaders($headers = [])
+    {
         $this->headers->buildFromArray($headers);
     }
 
@@ -107,7 +113,8 @@ abstract class BaseMailer implements IMailer
      * @param string $key required Should look like the real header it represents.
      * @return mixed Refer to EmailHeaders::getHeader to see the possible return types.
      */
-    public function getHeader($key) {
+    public function getHeader($key)
+    {
         return $this->headers->getHeader($key);
     }
 
@@ -115,11 +122,12 @@ abstract class BaseMailer implements IMailer
      * Adds or replaces header values.
      *
      * @access public
-     * @param string $key   required Should look like the real header it represents.
-     * @param mixed  $value          The value of the header.
+     * @param string $key required Should look like the real header it represents.
+     * @param mixed $value The value of the header.
      * @throws MailerException
      */
-    public function setHeader($key, $value = null) {
+    public function setHeader($key, $value = null)
+    {
         $this->headers->setHeader($key, $value);
     }
 
@@ -153,7 +161,8 @@ abstract class BaseMailer implements IMailer
      * @param string $subject
      * @throws MailerException
      */
-    public function setSubject($subject = null) {
+    public function setSubject($subject = null)
+    {
         $this->setHeader(EmailHeaders::Subject, $subject);
     }
 
@@ -162,7 +171,8 @@ abstract class BaseMailer implements IMailer
      *
      * @access public
      */
-    public function clearHeaders() {
+    public function clearHeaders()
+    {
         $this->headers = new EmailHeaders();
     }
 
@@ -170,11 +180,12 @@ abstract class BaseMailer implements IMailer
      * Clears the recipients from the selected recipient lists. By default, clear all recipients.
      *
      * @access public
-     * @param bool $to  true=clear the To list; false=leave the To list alone
-     * @param bool $cc  true=clear the CC list; false=leave the CC list alone
+     * @param bool $to true=clear the To list; false=leave the To list alone
+     * @param bool $cc true=clear the CC list; false=leave the CC list alone
      * @param bool $bcc true=clear the BCC list; false=leave the BCC list alone
      */
-    public function clearRecipients($to = true, $cc = true, $bcc = true) {
+    public function clearRecipients($to = true, $cc = true, $bcc = true)
+    {
         if ($to) {
             $this->clearRecipientsTo();
         }
@@ -194,7 +205,8 @@ abstract class BaseMailer implements IMailer
      * @access public
      * @param array $recipients Array of EmailIdentity objects.
      */
-    public function addRecipientsTo($recipients = array()) {
+    public function addRecipientsTo($recipients = [])
+    {
         $this->recipients->addRecipients($recipients);
     }
 
@@ -203,7 +215,8 @@ abstract class BaseMailer implements IMailer
      *
      * @access public
      */
-    public function clearRecipientsTo() {
+    public function clearRecipientsTo()
+    {
         $this->recipients->clearTo();
     }
 
@@ -213,7 +226,8 @@ abstract class BaseMailer implements IMailer
      * @access public
      * @param array $recipients Array of EmailIdentity objects.
      */
-    public function addRecipientsCc($recipients = array()) {
+    public function addRecipientsCc($recipients = [])
+    {
         return $this->recipients->addRecipients($recipients, RecipientsCollection::FunctionAddCc);
     }
 
@@ -222,7 +236,8 @@ abstract class BaseMailer implements IMailer
      *
      * @access public
      */
-    public function clearRecipientsCc() {
+    public function clearRecipientsCc()
+    {
         $this->recipients->clearCc();
     }
 
@@ -232,7 +247,8 @@ abstract class BaseMailer implements IMailer
      * @access public
      * @param array $recipients Array of EmailIdentity objects.
      */
-    public function addRecipientsBcc($recipients = array()) {
+    public function addRecipientsBcc($recipients = [])
+    {
         return $this->recipients->addRecipients($recipients, RecipientsCollection::FunctionAddBcc);
     }
 
@@ -241,7 +257,8 @@ abstract class BaseMailer implements IMailer
      *
      * @access public
      */
-    public function clearRecipientsBcc() {
+    public function clearRecipientsBcc()
+    {
         $this->recipients->clearBcc();
     }
 
@@ -251,7 +268,8 @@ abstract class BaseMailer implements IMailer
      * @access public
      * @return string
      */
-    public function getTextBody() {
+    public function getTextBody()
+    {
         return $this->textBody;
     }
 
@@ -261,7 +279,8 @@ abstract class BaseMailer implements IMailer
      * @access public
      * @param string $body
      */
-    public function setTextBody($body = null) {
+    public function setTextBody($body = null)
+    {
         $this->textBody = $body;
     }
 
@@ -271,7 +290,8 @@ abstract class BaseMailer implements IMailer
      * @access public
      * @return string
      */
-    public function getHtmlBody() {
+    public function getHtmlBody()
+    {
         return $this->htmlBody;
     }
 
@@ -281,7 +301,8 @@ abstract class BaseMailer implements IMailer
      * @access public
      * @param string $body
      */
-    public function setHtmlBody($body = null) {
+    public function setHtmlBody($body = null)
+    {
         $this->htmlBody = trim($body);
     }
 
@@ -291,7 +312,8 @@ abstract class BaseMailer implements IMailer
      * @access public
      * @param Attachment $attachment
      */
-    public function addAttachment(Attachment $attachment) {
+    public function addAttachment(Attachment $attachment)
+    {
         $this->attachments[] = $attachment;
     }
 
@@ -300,8 +322,9 @@ abstract class BaseMailer implements IMailer
      *
      * @access public
      */
-    public function clearAttachments() {
-        $this->attachments = array();
+    public function clearAttachments()
+    {
+        $this->attachments = [];
     }
 
     /**
@@ -312,9 +335,10 @@ abstract class BaseMailer implements IMailer
      * @param string $part required The content of the message part to inspect.
      * @return bool
      */
-    public function hasMessagePart($part) {
+    public function hasMessagePart($part)
+    {
         // the content is only valid if it's a string and it's not empty
-        if (is_string($part) && trim($part) != "") {
+        if (is_string($part) && trim($part) != '') {
             return true;
         }
 

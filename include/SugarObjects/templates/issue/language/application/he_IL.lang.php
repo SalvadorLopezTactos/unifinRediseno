@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'Administration',
-    'Product' => 'מוצר',
-    'User' => 'משתמש',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => 'חדש',
-    'Assigned' => 'הוקצו',
-    'Closed' => 'נסגר',
-    'Pending Input' => 'קלט תלוי ועומד',
-    'Rejected' => 'נדחה',
-    'Duplicate' => 'שכפל',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => 'גבוה',
-    'P2' => 'בינוני',
-    'P3' => 'נמוך',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => 'התקבל',
-    'Duplicate' => 'שכפל',
-    'Closed' => 'נסגר',
-    'Out of Date' => 'לא רלוונטי',
-    'Invalid' => 'לא תקין',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => 'ניהול מערכת',
+        'Product' => 'מוצר',
+        'User' => 'משתמש',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => 'חדש',
+        'Assigned' => 'הוקצה',
+        'Closed' => 'נסגר',
+        'Pending Input' => 'ממתין לקלט',
+        'Rejected' => 'נדחה',
+        'Duplicate' => 'כפילות',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => 'גבוהה',
+        'P2' => 'בינונית',
+        'P3' => 'נמוכה',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => 'התקבל',
+        'Duplicate' => 'לשכפל',
+        'Closed' => 'נסגר',
+        'Out of Date' => 'לא עדכני',
+        'Invalid' => 'לא תקין',
+    ],
+];

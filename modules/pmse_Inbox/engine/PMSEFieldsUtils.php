@@ -33,14 +33,14 @@ function bpminbox_get_display_text($temp_module, $field, $field_value, $adv_type
 {
     global $app_list_strings, $current_user;
 
-    if ($temp_module->field_defs[$field]['type'] == "relate") {
+    if ($temp_module->field_defs[$field]['type'] == 'relate') {
         //echo $field;
         //bug 23502, assigned user should be displayed as username here. But I don't know if created user, modified user or even other module should display names instead of ids.
         if ($temp_module->field_defs[$field]['name'] == 'assigned_user_id' && !empty($field_value) && !empty($context['for_action_display'])) {
             if ($adv_type != 'exist_user') {
                 return bpminbox_get_username_by_id($field_value);
             } else {
-                $target_type = "assigned_user_name";
+                $target_type = 'assigned_user_name';
             }
         } else {
             if (!empty($temp_module->field_defs[$field]['dbType'])) {
@@ -59,15 +59,14 @@ function bpminbox_get_display_text($temp_module, $field, $field_value, $adv_type
 
     //Land of the "one offs"
     //This is for meetings and calls, the reminder time
-    if ($temp_module->field_defs[$field]['name'] == "reminder_time") {
-        $target_type = "enum";
-        $temp_module->field_defs[$field]['options'] = "reminder_time_options";
+    if ($temp_module->field_defs[$field]['name'] == 'reminder_time') {
+        $target_type = 'enum';
+        $temp_module->field_defs[$field]['options'] = 'reminder_time_options';
     }
 
-    if ($target_type == "assigned_user_name") {
-
+    if ($target_type == 'assigned_user_name') {
         if ($adv_type == null) {
-            $user_array = get_user_array(true, "Active", $field_value, true);
+            $user_array = get_user_array(true, 'Active', $field_value, true);
             if (!isset($user_array[$field_value])) {
                 return false;
             }
@@ -75,10 +74,9 @@ function bpminbox_get_display_text($temp_module, $field, $field_value, $adv_type
 
             return $user_array[$field_value];
         }
-        if ($adv_type == "exist_user") {
-
-            if ($ext1 == "Manager") {
-                return "Manager of the " . $app_list_strings['wflow_adv_user_type_dom'][$field_value];
+        if ($adv_type == 'exist_user') {
+            if ($ext1 == 'Manager') {
+                return 'Manager of the ' . $app_list_strings['wflow_adv_user_type_dom'][$field_value];
             } else {
                 return $app_list_strings['wflow_adv_user_type_dom'][$field_value];
             }
@@ -86,26 +84,23 @@ function bpminbox_get_display_text($temp_module, $field, $field_value, $adv_type
     }
 
 
-    if ($adv_type == "datetime") {
+    if ($adv_type == 'datetime') {
         if (empty($field_value)) {
             $field_value = 0;
         }
-        return $app_list_strings['tselect_type_dom'][$field_value] . " from " . $app_list_strings['wflow_action_datetime_type_dom'][$ext1];
+        return $app_list_strings['tselect_type_dom'][$field_value] . ' from ' . $app_list_strings['wflow_action_datetime_type_dom'][$ext1];
     }
 
-    if ($adv_type == "exist_team") {
-
+    if ($adv_type == 'exist_team') {
         return $app_list_strings['wflow_adv_team_type_dom'][$field_value];
     }
 
-    if ($adv_type == "value_calc") {
-
-        return "existing value" . $app_list_strings['query_calc_oper_dom'][$ext1] . " by " . $field_value;
+    if ($adv_type == 'value_calc') {
+        return 'existing value' . $app_list_strings['query_calc_oper_dom'][$ext1] . ' by ' . $field_value;
     }
 
-    if ($adv_type == "enum_step") {
-
-        return $app_list_strings['wflow_adv_enum_type_dom'][$ext1] . " " . $field_value . " step(s)";
+    if ($adv_type == 'enum_step') {
+        return $app_list_strings['wflow_adv_enum_type_dom'][$ext1] . ' ' . $field_value . ' step(s)';
     }
 
     if ($target_type === 'bool') {
@@ -125,17 +120,17 @@ function bpminbox_get_href($temp_module, $field, $field_value, $adv_type = null,
     global $sugar_config;
 
     if (empty($temp_module)) {
-        PMSELogger::getInstance()->alert("Module object \$temp_module is null in function bpminbox_get_href.");
+        PMSELogger::getInstance()->alert('Module object $temp_module is null in function bpminbox_get_href.');
         return '';
     }
 
     $link = $sugar_config['site_url'];
     if (isModuleBWC($temp_module->module_dir)) {
-        $params = array(
+        $params = [
             'module' => $temp_module->module_dir,
             'action' => 'DetailView',
             'record' => $temp_module->id,
-        );
+        ];
         $link .= '#bwc/index.php?' . http_build_query($params);
     } else {
         $link .= '/index.php#' . rawurlencode($temp_module->module_name);
@@ -149,21 +144,19 @@ function bpminbox_get_href($temp_module, $field, $field_value, $adv_type = null,
 
 //////////////////////Processing actions
 
-function bpminbox_process_advanced_actions(& $focus, $field, $meta_array, & $rel_this)
+function bpminbox_process_advanced_actions(&$focus, $field, $meta_array, &$rel_this)
 {
     ////////////Later expand to be able to also extract from the rel_this as the choice of returning dynamic values
 
     global $current_user;
     if ($meta_array['adv_type'] == 'exist_user') {
-
         if ($meta_array['value'] == 'current_user') {
-
             if (!empty($current_user)) {
-                if ($meta_array['ext1'] == "Self") {
+                if ($meta_array['ext1'] == 'Self') {
                     //kbrill bug #14923
                     return $current_user->id;
                 }
-                if ($meta_array['ext1'] == "Manager") {
+                if ($meta_array['ext1'] == 'Manager') {
                     //kbrill bug #14923
                     return get_manager_info($current_user->id);
                 }
@@ -173,17 +166,16 @@ function bpminbox_process_advanced_actions(& $focus, $field, $meta_array, & $rel
             //if value is current_user
         }
 
-        if ($meta_array['ext1'] == "Self") {
+        if ($meta_array['ext1'] == 'Self') {
             return $focus->{$meta_array['value']};
         }
-        if ($meta_array['ext1'] == "Manager") {
+        if ($meta_array['ext1'] == 'Manager') {
             return get_manager_info($focus->{$meta_array['value']});
         }
     }
 
     if ($meta_array['adv_type'] == 'exist_team') {
         if ($meta_array['value'] == 'current_team') {
-
             if (!empty($current_user)) {
                 return $current_user->default_team;
             } else {
@@ -195,7 +187,6 @@ function bpminbox_process_advanced_actions(& $focus, $field, $meta_array, & $rel
     }
 
     if ($meta_array['adv_type'] == 'value_calc') {
-
         $jang = get_expression($meta_array['ext1'], $rel_this->$field, $meta_array['value']);
         //echo $jang;
         return $jang;
@@ -220,7 +211,7 @@ function bpminbox_process_advanced_actions(& $focus, $field, $meta_array, & $rel
         }
         $new_option = key($target_array);
 
-        if (!empty($new_option) && $new_option != "") {
+        if (!empty($new_option) && $new_option != '') {
             return $new_option;
         } else {
             return $rel_this->$field;
@@ -228,7 +219,7 @@ function bpminbox_process_advanced_actions(& $focus, $field, $meta_array, & $rel
     }
 }
 
-function bpminbox_find_start_position(& $target_array, $target_key)
+function bpminbox_find_start_position(&$target_array, $target_key)
 {
     $cycle_array = $target_array;
     foreach ($cycle_array as $key => $value) {
@@ -251,8 +242,10 @@ function bpminbox_check_special_fields($field_name, $source_object, $use_past_ar
             return $locale->getLocaleFormattedName($source_object->first_name, $source_object->last_name);
         } else {
             //use the past value
-            return $locale->getLocaleFormattedName($source_object->fetched_row['first_name'],
-                $source_object->fetched_row['last_name']);
+            return $locale->getLocaleFormattedName(
+                $source_object->fetched_row['first_name'],
+                $source_object->fetched_row['last_name']
+            );
         }
     } elseif ($field_name == 'modified_by_name' && $use_past_array) {
         return $source_object->old_modified_by_name;
@@ -277,15 +270,27 @@ function bpminbox_check_special_fields($field_name, $source_object, $use_past_ar
         /* One off exception for if we are getting future date_created value.
           Use the fetched row for it. - jgreen
          */
-        if ($use_past_array == false && $field_name != "date_entered") {
+        if ($use_past_array == false && $field_name != 'date_entered') {
             //use the future value
 
-            return bpminbox_get_display_text($source_object, $field_name, $source_object->$field_name, null, null,
-                $context);
+            return bpminbox_get_display_text(
+                $source_object,
+                $field_name,
+                $source_object->$field_name,
+                null,
+                null,
+                $context
+            );
         } else {
             //use the past value
-            return bpminbox_get_display_text($source_object, $field_name, $source_object->fetched_row[$field_name],
-                null, null, $context);
+            return bpminbox_get_display_text(
+                $source_object,
+                $field_name,
+                $source_object->fetched_row[$field_name],
+                null,
+                null,
+                $context
+            );
         }
     }
     //In future, check for maybe currency type
@@ -303,7 +308,7 @@ function get_bean_field_type($field_name_mapped, $bean_source_object)
     $field = $bean_source_object->field_defs[$field_name_mapped];
     $type = ($field['type'] ?? $unknown);
     $db_type = ($field['dbType'] ?? $unknown);
-    return array('type' => $type, 'db_type' => $db_type);
+    return ['type' => $type, 'db_type' => $db_type];
 }
 
 function bpminbox_execute_special_logic($field_name, &$source_object)

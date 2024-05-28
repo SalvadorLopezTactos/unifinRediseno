@@ -13,7 +13,7 @@
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\OIDC;
 
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\UpdateUserLastLoginListener as
-    BaseUpdateUserLastLoginListener;
+BaseUpdateUserLastLoginListener;
 
 use Symfony\Component\Security\Core\Event\AuthenticationEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -44,7 +44,7 @@ class UpdateUserLastLoginListener extends BaseUpdateUserLastLoginListener
      *
      * @inheritdoc
      */
-    public function execute(AuthenticationEvent $event) : void
+    public function execute(AuthenticationEvent $event): void
     {
         if ($this->session->get('oidc_login_action')) {
             parent::execute($event);

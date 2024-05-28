@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Agendas de Relatório',
     'LBL_MODULE_NAME_SINGULAR' => 'Agenda de Relatório',
     'LBL_REPORT_NAME' => 'Relatório',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Tipo(s) de ficheiro',
     'LBL_EMBED_REPORT' => 'Relatório integrado no E-mail',
     'LBL_EMBED_REPORT_INFO' => 'Nota: se o relatório exceder 200 linhas, anexaremos o relatório como ficheiro CSV.',
-);
+];

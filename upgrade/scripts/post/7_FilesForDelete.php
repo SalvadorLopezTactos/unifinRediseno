@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Select files to delete during install
  */
@@ -20,7 +21,7 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
 
     public function run()
     {
-        $files = array('themes/Sugar/js',
+        $files = ['themes/Sugar/js',
             //Remove the themes/Sugar/tpls directory
             'themes/Sugar/tpls',
             'themes/Sugar5',
@@ -184,7 +185,7 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             'modules/UpgradeWizard/populateColumns.php',
             // BR-8503 - use portal index.php file instead of index.html
             'portal2/index.html',
-        );
+        ];
 
         if (version_compare($this->from_version, '7.8.0.0', '<')) {
             $files[] = 'modules/Forecasts/clients/base/view/forecast-pipeline/forecast-pipeline.hbs';

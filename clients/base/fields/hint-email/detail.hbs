@@ -16,14 +16,14 @@
             <a {{#if ../../dir}} dir="{{../../../dir}}"{{/if}}
             rel="tooltip" href="javascript:void(0);" data-action="email"
             title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}"
-            data-placement="bottom" class="ellipsis_inline{{#if opt_out}} opt-out{{/if}}"
+            data-bs-placement="bottom" class="ellipsis_inline{{#if opt_out}} opt-out{{/if}}"
             data-email-address-id="{{email_address_id}}" data-email-to="{{email_address}}"
             data-email-opt-out="{{opt_out}}" track="click:email_address">
                 {{email_address}}
             </a>
         {{else}}
             {{#if invalid_email}}
-                <del rel="tooltip" data-placement="bottom"
+                <del rel="tooltip" data-bs-placement="bottom"
                 {{#if ../../../dir}} dir="{{../../../../dir}}"{{/if}}
                 title="{{email_address}} ({{flagLabel}})"
                 class="ellipsis_inline{{#if opt_out}} opt-out{{/if}}">
@@ -33,29 +33,12 @@
                 <span rel="tooltip"
                 {{#if ../../../dir}} dir="{{../../../../dir}}"{{/if}}
                 title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}"
-                data-placement="bottom" class="ellipsis_inline{{#if opt_out}} opt-out{{/if}}">
+                data-bs-placement="bottom" class="ellipsis_inline{{#if opt_out}} opt-out{{/if}}">
                     {{email_address}}
                 </span>
             {{/if}}
         {{/if}}
         {{#if opt_out}}
-            <style>
-                .record-cell[data-type="hint-email"] .opt-out::before {
-                    content: "\f05e";
-                    font-family: 'FontAwesome';
-                    position: absolute;
-                    left: 1px;
-                    top: 1px;
-                    margin-right: 2px;
-                }
-                .record-cell[data-type ="hint-email"] .opt-out {
-                    display: block !important;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    padding-left: 16px;
-                }
-            </style>
             <div class="btn-toolbar prevent-mousedown">
                 <div class="btn-group">
                     <button type="button" class="btn"

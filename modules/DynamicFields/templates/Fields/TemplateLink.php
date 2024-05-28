@@ -15,10 +15,10 @@ class TemplateLink extends TemplateText
     public $type = 'link';
 
     /**
-    * get array of field's properties
-    *
-    * @return array
-    */
+     * get array of field's properties
+     *
+     * @return array
+     */
     public function get_field_def()
     {
         $defs = parent::get_field_def();
@@ -26,4 +26,3 @@ class TemplateLink extends TemplateText
         return $defs;
     }
 }
-?>

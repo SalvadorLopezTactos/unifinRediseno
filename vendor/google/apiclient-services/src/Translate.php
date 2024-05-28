@@ -43,8 +43,11 @@ class Translate extends \Google\Service
 
   public $projects;
   public $projects_locations;
+  public $projects_locations_datasets;
+  public $projects_locations_datasets_examples;
   public $projects_locations_glossaries;
   public $projects_locations_glossaries_glossaryEntries;
+  public $projects_locations_models;
   public $projects_locations_operations;
 
   /**
@@ -95,6 +98,16 @@ class Translate extends \Google\Service
                 'model' => [
                   'location' => 'query',
                   'type' => 'string',
+                ],
+              ],
+            ],'romanizeText' => [
+              'path' => 'v3/{+parent}:romanizeText',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
                 ],
               ],
             ],'translateText' => [
@@ -197,6 +210,16 @@ class Translate extends \Google\Service
                   'type' => 'string',
                 ],
               ],
+            ],'romanizeText' => [
+              'path' => 'v3/{+parent}:romanizeText',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
             ],'translateDocument' => [
               'path' => 'v3/{+parent}:translateDocument',
               'httpMethod' => 'POST',
@@ -215,6 +238,116 @@ class Translate extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->projects_locations_datasets = new Translate\Resource\ProjectsLocationsDatasets(
+        $this,
+        $this->serviceName,
+        'datasets',
+        [
+          'methods' => [
+            'create' => [
+              'path' => 'v3/{+parent}/datasets',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'delete' => [
+              'path' => 'v3/{+name}',
+              'httpMethod' => 'DELETE',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'exportData' => [
+              'path' => 'v3/{+dataset}:exportData',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'dataset' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'get' => [
+              'path' => 'v3/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'importData' => [
+              'path' => 'v3/{+dataset}:importData',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'dataset' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'list' => [
+              'path' => 'v3/{+parent}/datasets',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'pageSize' => [
+                  'location' => 'query',
+                  'type' => 'integer',
+                ],
+                'pageToken' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->projects_locations_datasets_examples = new Translate\Resource\ProjectsLocationsDatasetsExamples(
+        $this,
+        $this->serviceName,
+        'examples',
+        [
+          'methods' => [
+            'list' => [
+              'path' => 'v3/{+parent}/examples',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'filter' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'pageSize' => [
+                  'location' => 'query',
+                  'type' => 'integer',
+                ],
+                'pageToken' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
               ],
             ],
@@ -359,6 +492,68 @@ class Translate extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->projects_locations_models = new Translate\Resource\ProjectsLocationsModels(
+        $this,
+        $this->serviceName,
+        'models',
+        [
+          'methods' => [
+            'create' => [
+              'path' => 'v3/{+parent}/models',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'delete' => [
+              'path' => 'v3/{+name}',
+              'httpMethod' => 'DELETE',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'get' => [
+              'path' => 'v3/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'list' => [
+              'path' => 'v3/{+parent}/models',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'filter' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'pageSize' => [
+                  'location' => 'query',
+                  'type' => 'integer',
+                ],
+                'pageToken' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
               ],
             ],

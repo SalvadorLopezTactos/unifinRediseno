@@ -58,6 +58,6 @@ EOQ;
      */
     public static function getOperationName()
     {
-        return "min";
+        return 'min';
     }
 }

@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Preluare plic',
     'LBL_CLOUD_SERVICE_TYPE' => 'Tip serviciu cloud',
     'LBL_CLOUD_PATH' => 'Cale cloud',
+    'LBL_CLOUD_DRIVE_ID' => 'ID unitate',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Tablou de bord Listă plicuri DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare plicuri DocuSign',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Plicuri DocuSign recente',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare plicuri DocuSign',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia plicului DocuSign',
 
     'LBL_NEW_ENVELOPE' => 'Plic nou',
     'LBL_DOCUMENT_IS_NOW' => ' este acum ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Trimitere',
     'LBL_BUTTON_CLEAR' => 'Ștergere',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Utilizare șablon',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Trimiteți cu șablon',
     'LBL_PLEASE_LOG_IN' => 'Conectați-vă mai întâi la DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Nu puteți descărca acest document. Acesta a fost creat de un alt utilizator!',
     'LBL_SEND_NOT_ALLOWED' => 'Nu puteți trimite acest plic. Acesta a fost creat de un alt utilizator!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Schița a fost modificată. Actualizați starea la cea actuală ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'Plic DocuSign actualizat!',
     'LBL_DRAFT_CHANGED_ERROR' => 'Starea plicului DocuSign nu a fost actualizată. Verificați jurnalele pentru detalii!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'Șablonul DocuSign nu poate fi aplicat',
     'LBL_ENVELOPE_NOT_SENT' => 'Plicul nu a fost trimis!',
     'LBL_ENVELOPE_SENT' => 'Plicul a fost trimis din nou!',
     'LBL_DOCUMENT_ADDED' => 'Document adăugat în înregistrare!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Rol',
     'LBL_SELECT_BUTTON_LABEL' => 'Selectare',
     'LBL_BACK_BUTTON_LABEL' => 'Înapoi',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Căutați după numele șablonului',
+    'LBL_ENVELOPE_NAME' => 'Numele plicului',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Numele plicului poate fi gol',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Preluarea potențialilor destinatari a eșuat!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Preluarea șabloanelor a eșuat!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Vă rugăm să selectați un rol pentru fiecare destinatar',
+    
+    'LBL_DOWNLOAD' => 'Descărcare',
+    'LBL_OPEN_DRAFT' => 'Deschidere ciornă',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Documentele fără fișier nu pot fi trimise la DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Faceți clic pe butonul Plus pentru a începe procesul de semnare',
+    'LBL_NO_DOC_SELECTED' => 'Mai întâi selectați documentele',
+    'LBL_SELECT_RECIPIENTS' => 'Selectați destinatarul semnatar',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Excludere',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Trebuie să instalați aplicația DocuSign pentru o experiență mai bună.',
 ];

@@ -33,9 +33,9 @@ class SugarACLDataPrivacy extends SugarACLStrategy
             && $context['action'] === 'save'
             && $module === 'DataPrivacy'
             && !$user->isAdminForModule($module)
-        ){
+        ) {
             $lockedFields = ['fields_to_erase'];
-            if (isset($context['field']) && in_array($context['field'], $lockedFields)) {
+            if (isset($context['field']) && safeInArray($context['field'], $lockedFields)) {
                 return false;
             }
         }

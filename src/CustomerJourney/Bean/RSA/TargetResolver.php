@@ -14,7 +14,6 @@ namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\RSA;
 
 class TargetResolver
 {
-
     /**
      * @var \CJ_Form
      */
@@ -74,12 +73,12 @@ class TargetResolver
             }
         }
 
-        return array (
+        return [
             'parent' => $parent,
             'target' => $target,
             'linkName' => $linkName,
             'module' => $module,
             'allBeans' => $allBeans,
-        );
+        ];
     }
 }

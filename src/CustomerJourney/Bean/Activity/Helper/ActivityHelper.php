@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper;
 
 use Sugarcrm\Sugarcrm\CustomerJourney\SharedData as CJSharedData;
@@ -18,12 +19,17 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Bean\ActivityTemplate\ParseVariablesInURL 
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\ActivityHandlerFactory;
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\ActivityHandlerTrait;
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\ParseData;
+use Sugarcrm\Sugarcrm\CustomerJourney\Bean\ActivityTemplate\AllowActivityBy as AllowActivityBy;
+use Sugarcrm\Sugarcrm\CustomerJourney\Exception as CustomerJourneyException;
 
 /**
  * This class here provides functions for the activities
  */
 class ActivityHelper
 {
+    use ActivityHandlerTrait {
+        ActivityHandlerTrait::__construct as activityHandlerTraitConstruct;
+    }
     /**
      * @var ActivityHelper
      */
@@ -40,9 +46,6 @@ class ActivityHelper
     protected $moduleName;
 
     protected $appointmentModules = ['Calls', 'Meetings'];
-    use ActivityHandlerTrait {
-        ActivityHandlerTrait::__construct as activityHandlerTraitConstruct;
-    }
 
     private function __construct($link, $module)
     {
@@ -257,7 +260,7 @@ class ActivityHelper
         $activity->name = $template->name;
         $activity->description = $template->description;
         $activity->customer_journey_points = $template->points;
-        $activity->is_cj_parent_activity = $template->is_parent;
+        $activity->is_cj_parent_activity = isTruthy($template->is_parent);
         $activity->customer_journey_blocked_by = $template->blocked_by;
         $activity->cj_blocked_by_stages = $template->blocked_by_stages;
 
@@ -334,6 +337,39 @@ class ActivityHelper
                 $this->setMomentumStartDateFromParentField($activity);
                 break;
         }
+    }
+
+    /**
+     * Validates the parent
+     *
+     * @param \SugarBean $activity
+     * @return void
+     * @throws CustomerJourneyException\NotFoundException
+     * @throws \SugarApiExceptionInvalidParameter
+     */
+    public function validateParent(\SugarBean $activity, string $statusChanged)
+    {
+        try {
+            if (($statusChanged === $this->statusHelper::TASK_STATUS_COMPLETED ||
+                $statusChanged === $this->statusHelper::APPOINMENT_STATUS_DEFERRED) &&
+                isTruthy($activity->is_cj_parent_activity)) {
+                if (!empty($activity->cj_allow_activity_by) && !$GLOBALS['current_user']->is_admin) {
+                    $allowFlag = AllowActivityBy::isActivityAllow($activity, $activity->cj_allow_activity_by);
+                    if (!$allowFlag) {
+                        if (!isset($activity->processing_smart_guide)) {
+                            throw new \SugarApiExceptionInvalidParameter(
+                                translate('LBL_CURRENT_USER_UNABLE_TO_COMPLETE_STATUS', 'DRI_Workflow_Task_Templates')
+                            );
+                        } else {
+                            return false;
+                        }
+                    }
+                }
+            }
+        } catch (CustomerJourneyException\InvalidLicenseException $e) {
+            // omit errors when license is not valid or user missing access
+        }
+        return true;
     }
 
     /**
@@ -439,9 +475,10 @@ class ActivityHelper
      */
     public function createFromTemplate(
         \DRI_Workflow_Task_Template $activityTemplate,
-        \DRI_SubWorkflow $stage,
-        \SugarBean $parent
+        \DRI_SubWorkflow            $stage,
+        \SugarBean                  $parent
     ) {
+
         $activity = $this->create();
 
         $this->stageHelper->populateFromStage($activity, $parent, $stage, $activityTemplate);
@@ -587,6 +624,36 @@ class ActivityHelper
     public function setStatus(\SugarBean $activity, $status)
     {
         $this->statusHelper->setStatus($activity, $status);
+        if (empty($activity->cj_parent_activity_id)) {
+            $this->updateActivityCache($activity);
+        }
+    }
+
+    /**
+     * When Activity status is updated, update that activity in the cache list maintained in the journey
+     *
+     * @param \SugarBean $activity
+     */
+    private function updateActivityCache(\SugarBean $activity)
+    {
+        // get Stage of the given activity
+        $stage = $this->getStage($activity);
+        // get Journery of the stage
+        $journey = $stage->getJourney();
+        // Get Stages from cache of the journey
+        $stages = $journey->getStages();
+        // Get Stage from Cache
+        $filteredStages = array_filter(
+            $stages,
+            function ($stageIter) use ($activity) {
+                return $stageIter->id == $activity->dri_subworkflow_id;
+            }
+        );
+
+        $foundStage = array_pop($filteredStages);
+        if (!empty($foundStage) && !is_null($foundStage->getActivities())) {
+            $foundStage->setActivity($activity);
+        }
     }
 
     /**
@@ -636,7 +703,7 @@ class ActivityHelper
     {
         return $this->statusHelper->getCancelledStatus($activity, $module_name);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -713,11 +780,12 @@ class ActivityHelper
      * {@inheritdoc}
      */
     public function populateFromStage(
-        \SugarBean $activity,
-        \SugarBean $parent,
-        \DRI_SubWorkflow $stage,
+        \SugarBean                  $activity,
+        \SugarBean                  $parent,
+        \DRI_SubWorkflow            $stage,
         \DRI_Workflow_Task_Template $activityTemplate
     ) {
+
         $this->stageHelper->populateFromStage($activity, $parent, $stage, $activityTemplate);
     }
 
@@ -838,6 +906,9 @@ class ActivityHelper
      */
     public function isBlocked(\SugarBean $activity)
     {
+        if (isset($activity->ignore_blocked_by) && $activity->ignore_blocked_by === true) {
+            return false;
+        }
         return $this->blockedByHelper->isBlocked($activity);
     }
 
@@ -846,6 +917,9 @@ class ActivityHelper
      */
     public function isBlockedByStage(\SugarBean $activity)
     {
+        if (isset($activity->ignore_blocked_by) && $activity->ignore_blocked_by === true) {
+            return false;
+        }
         return $this->blockedByHelper->isBlockedByStage($activity);
     }
 
@@ -950,7 +1024,10 @@ class ActivityHelper
      */
     public function getChildren(\SugarBean $bean)
     {
-        return $this->childActivityHelper->getChildren($bean);
+        if ($this->isParent($bean)) {
+            return $this->childActivityHelper->getChildren($bean);
+        }
+        return [];
     }
 
     /**
@@ -1155,11 +1232,13 @@ class ActivityHelper
             }
         }
 
-        if (!empty($activity->id)) {
+        if (!empty($activity->id) && $this->isParent($activity)) {
             foreach ($this->childActivityHelper->getChildren($activity) as $child) {
-                $handler = ActivityHandlerFactory::factory($child->module_dir);
-                if ($handler->start($child)) {
-                    $child->save();
+                if (!empty($child->module_dir)) {
+                    $handler = ActivityHandlerFactory::factory($child->module_dir);
+                    if ($handler->start($child)) {
+                        $child->save();
+                    }
                 }
             }
         }
@@ -1229,7 +1308,7 @@ class ActivityHelper
 
         $results = $query->execute();
 
-        if (count($results) === 0) {
+        if (safeCount($results) === 0) {
             throw new \SugarApiExceptionNotFound();
         }
 
@@ -1242,8 +1321,8 @@ class ActivityHelper
      * Check the record existance and return it
      *
      * @param string $id
-     * @throws \SugarApiExceptionNotFound
      * @return object
+     * @throws \SugarApiExceptionNotFound
      */
     public function getById($id)
     {
@@ -1266,7 +1345,7 @@ class ActivityHelper
      */
     public function getSortOrder(\SugarBean $activity)
     {
-        return (string) $activity->dri_workflow_sort_order;
+        return (string)$activity->dri_workflow_sort_order;
     }
 
     /**
@@ -1393,7 +1472,7 @@ class ActivityHelper
             ->execute()
             ->fetchAllAssociative();
 
-        if ((is_countable($ids) ? count($ids) : 0) < 1) {
+        if (safeCount($ids) < 1) {
             return [];
         }
 
@@ -1452,8 +1531,8 @@ class ActivityHelper
      * Check the record existance and return it
      *
      * @param string $id
-     * @throws \SugarApiExceptionNotFound
      * @return object
+     * @throws \SugarApiExceptionNotFound
      */
     public function isFieldChanged(\SugarBean $activity, $field)
     {
@@ -1525,7 +1604,7 @@ class ActivityHelper
                 $teamSet = new \TeamSet();
                 $teamSetIds = array_merge(
                     $teamSet->getTeamIds($stage->getTargetTeamSetId()),
-                    array($activityTemplate->target_assignee_team_id)
+                    [$activityTemplate->target_assignee_team_id]
                 );
 
                 return $teamSet->addTeams($teamSetIds);
@@ -1539,16 +1618,17 @@ class ActivityHelper
      *
      * @param \DRI_SubWorkflow $stage
      * @param \SugarBean $activityTemplate
-     * @param \SugarBean  $activity
+     * @param \SugarBean $activity
      * @param \SugrBean $parent
      * @return string
      */
     public function getTargetAssigneeId(
         \DRI_SubWorkflow $stage,
         $activityTemplate,
-        \SugarBean $activity,
-        \SugarBean $parent
+        \SugarBean       $activity,
+        \SugarBean       $parent
     ) {
+
         switch ($activityTemplate->target_assignee) {
             case \DRI_Workflow_Template::TARGET_ASSIGNEE_CURRENT_USER:
                 if (!empty($GLOBALS['current_user']->id)) {
@@ -1574,7 +1654,7 @@ class ActivityHelper
      *
      * @param \DRI_Workflow_Task_Templates $template
      * @param \SugarBean $activity
-     * @param \DRI_SubWorkflow  $stage
+     * @param \DRI_SubWorkflow $stage
      */
     public function applyAssigneeRuleOnActivity($template, $activity, $stage)
     {
@@ -1590,7 +1670,6 @@ class ActivityHelper
             $activity->team_set_id = $this->getTargetTeamSetId($stage, $template, $parent);
 
             if ($activity->setAssignmentSummary === true) {
-                $activity->processed = true;
                 $activity->save();
             } else {
                 $activity->save($stage->checkActivityNotify($activity));
@@ -1601,11 +1680,11 @@ class ActivityHelper
                 $activity->module_dir === 'Tasks') {
                 $sharedDataObj = new CJSharedData\SharedData();
                 $sharedData = $sharedDataObj->getData('assignment_summary');
-                $sharedData[$activity->assigned_user_id][] = array(
+                $sharedData[$activity->assigned_user_id][] = [
                     'activity_id' => $activity->id,
                     'activity_name' => $activity->name,
                     'module_name' => $activity->module_dir,
-                );
+                ];
                 $sharedDataObj->setData('assignment_summary', $sharedData);
             }
         } catch (CJException\ParentNotFoundException $e) {
@@ -1688,7 +1767,7 @@ class ActivityHelper
         $query->where()->equals('id', $recordId);
         $contactJoin = $query->join($contactLink)->joinName();
         $userJoin = $query->join($usersLink)->joinName();
-        $query->select([["$contactJoin.id",'contact_id'], ["$userJoin.id",'user_id']]);
+        $query->select([["$contactJoin.id", 'contact_id'], ["$userJoin.id", 'user_id']]);
         $rows = $query->execute();
         foreach ($rows as $row) {
             $inviteesIDs['contacts_arr'][$row['contact_id']] = $row['contact_id'];
@@ -1724,12 +1803,12 @@ class ActivityHelper
             if ($template->$taskTargetDays > 0) {
                 $dateClone->modify(sprintf('+ %d days', $template->$taskTargetDays));
             } else {
-                $dateClone->modify(sprintf('- %d days', $template->$taskTargetDays));
+                $dateClone->modify(sprintf('- %d days', abs($template->$taskTargetDays)));
             }
 
             // set time
             [$hour, $minute] = explode(':', $template->time_of_day);
-            $dateClone->setTime((int) $hour, (int) $minute, 0);
+            $dateClone->setTime((int)$hour, (int)$minute, 0);
 
             if ($targetDate === 'date_start') {
                 $activity->date_start = $timeDate->asUser($dateClone);
@@ -1753,10 +1832,18 @@ class ActivityHelper
         $timeDate = \TimeDate::getInstance();
         $dateClone = clone $date;
 
-        if ($template->$taskTargetDays > 0) {
-            $dateClone->modify(sprintf('+ %s days', $template->$taskTargetDays));
-        } elseif ($template->$taskTargetDays < 0) {
-            $dateClone->modify(sprintf('- %s days', -$template->$taskTargetDays));
+        if (isset($template) && isset($template->$taskTargetDays)) {
+            if ($template->$taskTargetDays > 0) {
+                $dateClone->modify(sprintf('+ %s days', $template->$taskTargetDays));
+            } elseif ($template->$taskTargetDays < 0) {
+                $dateClone->modify(sprintf('- %s days', -$template->$taskTargetDays));
+            }
+        } else {
+            if (!isset($template)) {
+                $GLOBALS['log']->fatal('ActivityHelper:getStartDueDate Template is undefined');
+            } elseif (!isset($template->$taskTargetDays)) {
+                $GLOBALS['log']->fatal('ActivityHelper:getStartDueDate target days are undefined');
+            }
         }
 
         return $timeDate->asUser($dateClone);
@@ -1776,7 +1863,7 @@ class ActivityHelper
             $activity->date_due = $timeDate->asUser($due_date);
         } else {
             [$hour, $minute] = explode(':', $template->time_of_day);
-            $due_date->setTime((int) $hour, (int) $minute, 0);
+            $due_date->setTime((int)$hour, (int)$minute, 0);
 
             $this->setDates($template, $activity, $due_date);
         }
@@ -1815,13 +1902,13 @@ class ActivityHelper
         }
 
         // add duration hours
-        $durationHours = (int) $template->duration_hours;
+        $durationHours = (int)$template->duration_hours;
         if ($durationHours > 0) {
             $endDate->modify(sprintf('+ %s hours', $durationHours));
         }
 
         // add duration minutes
-        $durationMinutes = (int) $template->duration_minutes;
+        $durationMinutes = (int)$template->duration_minutes;
         if ($durationMinutes > 0) {
             $endDate->modify(sprintf('+ %s minutes', $durationMinutes));
         }
@@ -1905,7 +1992,7 @@ class ActivityHelper
 
         //If due date was not empty then its means its was already set so it should retain
         // for this calculate the difference between start date and due date in hours
-        if ($emptyEndDate[0] !== $endDateValue[0]) {
+        if (isset($endDate) && isset($startDate) && $emptyEndDate[0] !== $endDateValue[0]) {
             //calculate the difference between start date and end date
             $interval = $endDate->diff($startDate);
             $diffHours = 0;
@@ -1917,6 +2004,10 @@ class ActivityHelper
             }
             $totalHours = $diffHours + $template->duration_hours;
             $activity->duration_hours = $totalHours;
+        } elseif (!isset($endDate)) {
+            $GLOBALS['log']->fatal('ActivityHelper:calculateDiffBetweenStartDateAndEndDateInHours end date is undefined');
+        } elseif (!isset($startDate)) {
+            $GLOBALS['log']->fatal('ActivityHelper:calculateDiffBetweenStartDateAndEndDateInHours start date is undefined');
         }
     }
 
@@ -2001,5 +2092,26 @@ class ActivityHelper
                 $activity->setUserInvitees($activity->users_arr);
             }
         }
+    }
+
+    /**
+     * Checks if the status of this activity is read-only or not
+     *
+     * @param \SugarBean $activity
+     * @return boolean true|false
+     */
+    public function isStatusReadOnly($activity)
+    {
+        $statusFieldDef = $activity->getFieldDefinitions()['status'];
+        if (isset($statusFieldDef['readonly']) && $statusFieldDef['readonly'] === true) {
+            if (!isset($statusFieldDef['readonly_formula']) || empty($statusFieldDef['readonly_formula'])) {
+                return true;
+            }
+            $result = \Parser::evaluate($statusFieldDef['readonly_formula'], $activity)->evaluate();
+            if ($result === \AbstractExpression::$TRUE) {
+                return true;
+            }
+        }
+        return false;
     }
 }

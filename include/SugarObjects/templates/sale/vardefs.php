@@ -11,29 +11,27 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$vardefs = array(
-    'fields' => array(
-        'name' =>
-        array(
+$vardefs = [
+    'fields' => [
+        'name' => [
             'name' => 'name',
             'type' => 'name',
             'dbType' => 'varchar',
             'vname' => 'LBL_NAME',
             'comment' => 'Name of the Sale',
             'unified_search' => true,
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => true,
                 'boost' => 1.63,
-            ),
+            ],
             'audited' => true,
             'merge_filter' => 'selected',
             'required' => true,
             'importable' => 'required',
             'duplicate_on_record_copy' => 'always',
-        ),
-        strtolower($object_name) . '_type' =>
-        array(
+        ],
+        strtolower($object_name) . '_type' => [
             'name' => strtolower($object_name) . '_type',
             'vname' => 'LBL_TYPE',
             'type' => 'enum',
@@ -41,9 +39,8 @@ $vardefs = array(
             'len' => 100,
             'duplicate_on_record_copy' => 'always',
             'comment' => 'The Sale is of this type',
-        ),
-        'description' =>
-        array(
+        ],
+        'description' => [
             'name' => 'description',
             'vname' => 'LBL_DESCRIPTION',
             'type' => 'text',
@@ -51,14 +48,13 @@ $vardefs = array(
             'rows' => 6,
             'cols' => 80,
             'duplicate_on_record_copy' => 'always',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => true,
                 'boost' => 0.58,
-            ),
-        ),
-        'lead_source' =>
-        array(
+            ],
+        ],
+        'lead_source' => [
             'name' => 'lead_source',
             'vname' => 'LBL_LEAD_SOURCE',
             'type' => 'enum',
@@ -66,9 +62,8 @@ $vardefs = array(
             'len' => '50',
             'duplicate_on_record_copy' => 'always',
             'comment' => 'Source of the sale',
-        ),
-        'amount' =>
-        array(
+        ],
+        'amount' => [
             'name' => 'amount',
             'vname' => 'LBL_AMOUNT',
             'type' => 'currency',
@@ -76,15 +71,14 @@ $vardefs = array(
             'duplicate_merge' => 'disabled',
             'required' => true,
             'duplicate_on_record_copy' => 'always',
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
+                'base_rate',
+            ],
             'convertToBase' => true,
             'showTransactionalAmount' => true,
-        ),
-        'amount_usdollar' =>
-        array(
+        ],
+        'amount_usdollar' => [
             'name' => 'amount_usdollar',
             'vname' => 'LBL_AMOUNT_USDOLLAR',
             'type' => 'currency',
@@ -93,21 +87,20 @@ $vardefs = array(
             'audited' => true,
             'duplicate_on_record_copy' => 'always',
             'comment' => 'Formatted amount of the sale',
-            'studio' => array(
+            'studio' => [
                 'mobile' => false,
-            ),
+            ],
             'readonly' => true,
             'is_base_currency' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
+                'base_rate',
+            ],
             'formula' => 'divide($amount,$base_rate)',
             'calculated' => true,
             'enforced' => true,
-        ),
-        'date_closed' =>
-        array(
+        ],
+        'date_closed' => [
             'name' => 'date_closed',
             'vname' => 'LBL_DATE_CLOSED',
             'type' => 'date',
@@ -117,13 +110,12 @@ $vardefs = array(
             'enable_range_search' => true,
             'options' => 'date_range_search_dom',
             'duplicate_on_record_copy' => 'always',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => false,
-            ),
-        ),
-        'next_step' =>
-        array(
+            ],
+        ],
+        'next_step' => [
             'name' => 'next_step',
             'vname' => 'LBL_NEXT_STEP',
             'type' => 'varchar',
@@ -131,14 +123,13 @@ $vardefs = array(
             'comment' => 'The next step in the sales process',
             'duplicate_on_record_copy' => 'always',
             'merge_filter' => 'enabled',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => true,
                 'boost' => 0.73,
-            ),
-        ),
-        'sales_stage' =>
-        array(
+            ],
+        ],
+        'sales_stage' => [
             'name' => 'sales_stage',
             'vname' => 'LBL_SALES_STAGE',
             'type' => 'enum',
@@ -150,33 +141,33 @@ $vardefs = array(
             'importable' => 'required',
             'duplicate_on_record_copy' => 'always',
             'merge_filter' => 'enabled',
-        ),
-        'probability' =>
-        array(
+        ],
+        'probability' => [
             'name' => 'probability',
             'vname' => 'LBL_PROBABILITY',
             'type' => 'int',
             'dbType' => 'double',
             'audited' => true,
             'comment' => 'The probability of closure',
-            'validation' => array('type' => 'range', 'min' => 0, 'max' => 100),
+            'validation' => ['type' => 'range', 'min' => 0, 'max' => 100],
             'duplicate_on_record_copy' => 'always',
             'merge_filter' => 'enabled',
-        )
-    ),
-    'uses' => array(
+        ],
+    ],
+    'uses' => [
         'taggable',
         'currency',
-    ),
-    'duplicate_check' => array(
+        'audit',
+    ],
+    'duplicate_check' => [
         'enabled' => true,
-        'FilterDuplicateCheck' => array(
-            'filter_template' => array(
-                array('name' => array('$starts' => '$name')),
-            ),
-            'ranking_fields' => array(
-                array('in_field_name' => 'name', 'dupe_field_name' => 'name'),
-            )
-        )
-    ),
-);
+        'FilterDuplicateCheck' => [
+            'filter_template' => [
+                ['name' => ['$starts' => '$name']],
+            ],
+            'ranking_fields' => [
+                ['in_field_name' => 'name', 'dupe_field_name' => 'name'],
+            ],
+        ],
+    ],
+];

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper;
 
 /**
@@ -17,12 +18,11 @@ namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper;
  */
 class ActivityDatesHelper
 {
-
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\statusHelper
      */
     private $statusHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\stageHelper
      */
@@ -99,30 +99,30 @@ class ActivityDatesHelper
     {
         $timeDate = \TimeDate::getInstance();
         $dueDate = clone $date;
-    
+
         // set correct timezone
         $timeDate->tzUser($dueDate);
         $startDate = $timeDate->fromString($bean->date_start);
         $dueDateInPercentageTimeFrame = $startDate;
-    
+
         $diffDaysHours = $this->calculateTheDiffBetweenStartDateAndDueDateInDays($bean, $dueDate);
 
         // add the days
         if (is_array($diffDaysHours) &&
-            count($diffDaysHours) > 1 &&
+            safeCount($diffDaysHours) > 1 &&
             $diffDaysHours[0] > 0) {
             //Difference between start date and due date is positive
             //Calculate the percentage only if value is between -100 to 100
             $startDueDateDaysDiff = $diffDaysHours[0];
             if ($template->task_due_days <= 100 && $template->task_due_days >= -100) {
                 $startDueDateDaysDiff = ($template->task_due_days * $diffDaysHours[0]) / 100;
-                $startDueDateDaysDiff = (int) $startDueDateDaysDiff;
+                $startDueDateDaysDiff = (int)$startDueDateDaysDiff;
             }
-    
+
             if ($template->task_due_days > 0) {
                 $dueDateInPercentageTimeFrame->modify(sprintf('+ %s days', $startDueDateDaysDiff));
             } elseif ($template->task_due_days < 0) {
-                $dueDateInPercentageTimeFrame->modify(sprintf('- %s days', -$diffDaysHours));
+                $dueDateInPercentageTimeFrame->modify(sprintf('- %s days', $diffDaysHours[0]));
             }
         }
 
@@ -136,10 +136,10 @@ class ActivityDatesHelper
                 $dueDateInPercentageTimeFrame->modify(sprintf('- %s hours', $startDueDateHoursDiff));
             }
         }
-    
+
         return $dueDateInPercentageTimeFrame;
     }
-    
+
     /**
      * Get the due date from the Parent field
      *
@@ -155,10 +155,10 @@ class ActivityDatesHelper
         $parent = $stage->getParent($template->due_date_module);
         $def = $parent->getFieldDefinition($template->due_date_field);
         $value = $parent->{$template->due_date_field};
-    
+
         return $this->formatGivenDate($def['type'], $value);
     }
-    
+
     /**
      * Get the start date from the Parent field
      *
@@ -174,10 +174,10 @@ class ActivityDatesHelper
         $parent = $stage->getParent($template->start_date_module);
         $def = $parent->getFieldDefinition($template->start_date_field);
         $value = $parent->{$template->start_date_field};
-    
+
         return $this->formatGivenDate($def['type'], $value);
     }
-    
+
     /**
      * Format the dates according to DB format
      *
@@ -190,20 +190,20 @@ class ActivityDatesHelper
     {
         if (!empty($value)) {
             $timeDate = \TimeDate::getInstance();
-            if (in_array($type, array ('datetime', 'datetimecombo'))) {
+            if (in_array($type, ['datetime', 'datetimecombo'])) {
                 $date = $timeDate->fromUser($value);
-    
+
                 if (!$date) {
                     $date = $timeDate->fromDb($value);
                 }
             } else {
                 $date = $timeDate->fromUserDate($value);
-    
+
                 if (!$date) {
                     $date = $timeDate->fromDbDate($value);
                 }
             }
-    
+
             return $date;
         }
     }

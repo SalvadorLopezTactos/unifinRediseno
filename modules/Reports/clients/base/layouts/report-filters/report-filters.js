@@ -67,7 +67,7 @@
             const hasFilters = numberOfFilters > 0;
             this._isVisible = hasFilters;
 
-            this.$el.toggleClass('hidden', !this._isVisible);
+            this.$el.toggleClass('!hidden', !this._isVisible);
         }
     },
 
@@ -82,7 +82,7 @@
         }
 
         this._isVisible = config.filtersActive;
-        this.$el.toggleClass('hidden', !this._isVisible);
+        this.$el.toggleClass('!hidden', !this._isVisible);
 
         this.context.trigger('filters-container-content-loaded', {
             filtersActive: this._isVisible,
@@ -98,7 +98,7 @@
         this._hadUserInteraction = true;
 
         this._isVisible = config.filtersActive;
-        this.$el.toggleClass('hidden', !this._isVisible);
+        this.$el.toggleClass('!hidden', !this._isVisible);
     },
 
     /**

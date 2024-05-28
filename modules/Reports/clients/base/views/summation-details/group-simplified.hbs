@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<table class="w-full simplified-table report-item-border-thick">
+<table class="simplified-table report-item-border-thick clear-both m-0 w-full">
     {{!--Display group header--}}
     {{#each groupBy}}
         <tr class="{{#if @first}}group{{else}}subgroup{{/if}} single">
@@ -51,8 +51,8 @@
                     {{#each records}}
                         <tr class="single">
                             {{#each this}}
-                                <td class="wrap-report-text overflow-hidden pl-1">
-                                    <div class="ellipsis_inline" data-placement="bottom" data-html="true" data-original-title="{{this}}">
+                                <td class="wrap-report-text bg-[--primary-content-background] overflow-hidden pl-1">
+                                    <div class="ellipsis_inline" data-bs-placement="bottom" data-html="true" data-original-title="{{this}}">
                                         {{#sanitize}}
                                             {{{this}}}
                                         {{/sanitize}}

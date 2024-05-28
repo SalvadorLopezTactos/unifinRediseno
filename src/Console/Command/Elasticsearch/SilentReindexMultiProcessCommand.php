@@ -81,8 +81,7 @@ class SilentReindexMultiProcessCommand extends Command implements InstanceModeIn
                 null,
                 InputOption::VALUE_REQUIRED,
                 'the bucket id to do indexing.'
-            )
-        ;
+            );
     }
 
     /**
@@ -95,7 +94,7 @@ class SilentReindexMultiProcessCommand extends Command implements InstanceModeIn
         $engine = SearchEngine::getInstance()->getEngine();
 
         if (!$engine instanceof Elastic) {
-            throw new RuntimeException("Backend search engine is not Elastic");
+            throw new RuntimeException('Backend search engine is not Elastic');
         }
 
         $this->container = $engine->getContainer();
@@ -104,7 +103,7 @@ class SilentReindexMultiProcessCommand extends Command implements InstanceModeIn
         if ($input->getOption('modules')) {
             $modules = explode(',', $input->getOption('modules'));
             foreach ($modules as $module) {
-                if (!in_array($module, $allModules)) {
+                if (!safeInArray($module, $allModules)) {
                     throw new RuntimeException("Invalid module name: $module");
                 }
             }
@@ -124,13 +123,13 @@ class SilentReindexMultiProcessCommand extends Command implements InstanceModeIn
 
         $bucketId = -1;
         if ($input->getOption('bucket')) {
-            $bucketId = (int) $input->getOption('bucket');
+            $bucketId = (int)$input->getOption('bucket');
             if ($bucketId <= 0 || $bucketId > 100) {
                 throw new RuntimeException("the bucket ID is out of range (1, 100): $bucketId");
             }
         }
 
-        $clearData = (bool) $input->getOption('clearData');
+        $clearData = (bool)$input->getOption('clearData');
 
         if ($bucketId > 0) {
             $start = time();
@@ -143,7 +142,7 @@ class SilentReindexMultiProcessCommand extends Command implements InstanceModeIn
         } else {
             $start = time();
             // set Elastic mapping and fill up fts_queue
-            $this->writeln("Setup elastic indices ...");
+            $this->writeln('Setup elastic indices ...');
             if ($this->setupElastic($modules, $clearData)) {
                 // disable refresh interval and replica
                 $this->reportIndexingStart($modules);
@@ -187,7 +186,7 @@ class SilentReindexMultiProcessCommand extends Command implements InstanceModeIn
                         $cwd = SHADOW_INSTANCE_DIR;
                     }
                     $process = new Process\Process($command, $cwd, null, null, 7200);
-                    $this->writeln("execute command: " . $process->getCommandLine());
+                    $this->writeln('execute command: ' . $process->getCommandLine());
                     $processes[] = $process;
                 }
 
@@ -197,7 +196,7 @@ class SilentReindexMultiProcessCommand extends Command implements InstanceModeIn
                 }
 
                 // check results
-                $count = count($processes);
+                $count = safeCount($processes);
                 while ($count > 0) {
                     foreach ($processes as $id => $process) {
                         if (!$process->isRunning()) {
@@ -217,7 +216,7 @@ class SilentReindexMultiProcessCommand extends Command implements InstanceModeIn
                     sleep(5);
                 }
             } else {
-                throw new RuntimeException("something is wrong, check sugarcrm.log");
+                throw new RuntimeException('something is wrong, check sugarcrm.log');
             }
             $this->reportIndexingDone();
             $duration = time() - $start;
@@ -233,7 +232,7 @@ class SilentReindexMultiProcessCommand extends Command implements InstanceModeIn
      */
     protected function writeln(string $msg)
     {
-        $this->output->writeln(date("Y-m-d H:i:s") . ": " . $msg);
+        $this->output->writeln(date('Y-m-d H:i:s') . ': ' . $msg);
     }
 
     /**

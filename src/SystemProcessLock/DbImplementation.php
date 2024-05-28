@@ -43,7 +43,7 @@ class DbImplementation
 
     public function lock(string $uniqueId, string $additionalKey, int $timeoutSeconds): bool
     {
-        $expirationTimestamp = (new DateTime())->add(new DateInterval(sprintf("PT%dS", $timeoutSeconds)));
+        $expirationTimestamp = (new DateTime())->add(new DateInterval(sprintf('PT%dS', $timeoutSeconds)));
         $timeDate = new TimeDate();
 
         $data = [
@@ -86,7 +86,7 @@ class DbImplementation
         ];
         try {
             $this->connection->executeStatement(
-                sprintf("DELETE FROM %s WHERE date_expires <= ?", self::TABLE),
+                sprintf('DELETE FROM %s WHERE date_expires <= ?', self::TABLE),
                 $data
             );
         } catch (\Exception $e) {

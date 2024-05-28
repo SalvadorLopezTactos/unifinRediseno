@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Dashboard für Liste der gekauften Produkte',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Dashboard für Datensätze der gekauften Produkte',
     'LBL_PARENT_PURCHASE' => 'Übergeordneter Einkauf',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Zeitleiste für gekaufte Einzelposten',
 ];

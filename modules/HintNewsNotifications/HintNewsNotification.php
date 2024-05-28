@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\Hint\Logger\Logger as HintLogger;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -123,7 +124,7 @@ class HintNewsNotification extends \Basic implements LoggerAwareInterface
             }
         }
 
-//        // REMIND: LOTS of security checking needs to be added here before we accept this request
+        //        // REMIND: LOTS of security checking needs to be added here before we accept this request
     }
 
     /**
@@ -138,7 +139,7 @@ class HintNewsNotification extends \Basic implements LoggerAwareInterface
         $newsArticles = $arguments['news'];
 
         $logger = new HintLogger();
-        $logger->alert("receiving you..." . print_r($arguments, true));
+        $logger->alert('receiving you...' . print_r($arguments, true));
 
         foreach ($targets as $target) {
             $userId = $target['userId'];

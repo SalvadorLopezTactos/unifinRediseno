@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Tags']['base']['layout']['subpanels'] = array(
-    'components' => array(),
+$viewdefs['Tags']['base']['layout']['subpanels'] = [
+    'components' => [],
     'dynamic' => true,
-);
+];

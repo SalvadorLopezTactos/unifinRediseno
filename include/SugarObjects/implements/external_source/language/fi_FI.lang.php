@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-    'LBL_SOURCE_ID'   => 'Ulkoisen lähteen ID',
+$mod_strings = [
+    'LBL_SOURCE_ID' => 'Ulkoisen lähteen ID',
     'LBL_SOURCE_TYPE' => 'Ulkoinen lähde',
     'LBL_SOURCE_META' => 'Ulkoisen lähteen metatiedot',
-);
+];

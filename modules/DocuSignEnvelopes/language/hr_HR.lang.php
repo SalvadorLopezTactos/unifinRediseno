@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Dohvati omotnicu',
     'LBL_CLOUD_SERVICE_TYPE' => 'Vrsta usluge u oblaku',
     'LBL_CLOUD_PATH' => 'Put u oblaku',
+    'LBL_CLOUD_DRIVE_ID' => 'ID pogona',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Nadzorna ploča s popisom DocuSign omotnica',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'Nadzorna ploča sa zapisom DocuSign omotnica',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Nedavne DocuSign omotnice',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za DocuSign omotnice',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija DocuSign omotnice',
 
     'LBL_NEW_ENVELOPE' => 'Nova omotnica',
     'LBL_DOCUMENT_IS_NOW' => ' je sada ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Pošalji',
     'LBL_BUTTON_CLEAR' => 'Očisti',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Upotrijebi predložak',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Pošalji s predloškom',
     'LBL_PLEASE_LOG_IN' => 'Prvo se prijavite na DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Ne možete preuzeti ovaj dokument. Izradio ga je drugi korisnik!',
     'LBL_SEND_NOT_ALLOWED' => 'Ne možete poslati ovu omotnicu. Izradio ju je drugi korisnik!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Nacrt je izmijenjen. Želite li ažurirati status na trenutačni ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'Ažurirana je DocuSign omotnica!',
     'LBL_DRAFT_CHANGED_ERROR' => 'Nije se ažurirao status DocuSign omotnice. Za pojedinosti provjerite zapisnike!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'Nije moguće primijeniti predložak za DocuSign',
     'LBL_ENVELOPE_NOT_SENT' => 'Omotnica nije poslana!',
     'LBL_ENVELOPE_SENT' => 'Omotnica je ponovno poslana!',
     'LBL_DOCUMENT_ADDED' => 'Dokument je dodan u zapis!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Uloga',
     'LBL_SELECT_BUTTON_LABEL' => 'Odaberi',
     'LBL_BACK_BUTTON_LABEL' => 'Natrag',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Pretraži po nazivu predloška',
+    'LBL_ENVELOPE_NAME' => 'Naziv omotnice',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Naziv omotnice ne može biti prazan',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Nije uspjelo dohvaćanje potencijalnih primatelja!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Nije uspjelo dohvaćanje predložaka!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Odaberite ulogu za svakog primatelja',
+    
+    'LBL_DOWNLOAD' => 'Preuzmi',
+    'LBL_OPEN_DRAFT' => 'Otvori skicu',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Dokumenti bez datoteke ne mogu se poslati u DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Kliknite na tipku Plus kako biste započeli postupak potpisivanja',
+    'LBL_NO_DOC_SELECTED' => 'Prvo odaberite dokumente',
+    'LBL_SELECT_RECIPIENTS' => 'Odaberite primatelja potpisnika',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Izostavi',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Za bolje iskustvo trebate instalirati aplikaciju DocuSign.',
 ];

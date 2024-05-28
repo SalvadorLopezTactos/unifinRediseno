@@ -14,11 +14,11 @@
     {{#if value.[0]}}
         {{#with value.[0]}}
             {{#notEq mimeType 'image'}}
-                <a class="ellipsis_inline" data-placement="bottom" title="{{name}}"
+                <a class="ellipsis_inline" data-bs-placement="bottom" title="{{name}}"
                    href="{{url}}" data-url="{{url}}" data-action="download">{{name}}</a>
             {{/notEq}}
             {{#eq mimeType 'image'}}
-                <a class="ellipsis_inline" data-placement="bottom" title="{{name}}"
+                <a class="ellipsis_inline" data-bs-placement="bottom" title="{{name}}"
                    href="{{url}}" target="_blank">{{name}}</a>
             {{/eq}}
         {{/with}}

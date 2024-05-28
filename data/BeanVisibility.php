@@ -21,7 +21,7 @@ class BeanVisibility
      * List of strategies to apply to this bean
      * @var SugarVisibility[]
      */
-    protected $strategies = array();
+    protected $strategies = [];
 
     /**
      * Parent bean
@@ -33,7 +33,7 @@ class BeanVisibility
      * Loaded Strategies
      * @var array
      */
-    protected $loadedStrategies = array();
+    protected $loadedStrategies = [];
 
     /**
      * @param SugarBean $bean
@@ -75,7 +75,7 @@ class BeanVisibility
      *
      * @deprecated Use SugarQuery and BeanVisibility::addVisibilityQuery() instead
      */
-    public function addVisibilityFrom(&$query, $options = array())
+    public function addVisibilityFrom(&$query, $options = [])
     {
         foreach ($this->strategies as $strategy) {
             $strategy->setOptions($options)->addVisibilityFrom($query);
@@ -91,9 +91,9 @@ class BeanVisibility
      *
      * @deprecated Use SugarQuery and BeanVisibility::addVisibilityQuery() instead
      */
-    public function addVisibilityWhere(&$query, $options = array())
+    public function addVisibilityWhere(&$query, $options = [])
     {
-        foreach($this->strategies as $strategy) {
+        foreach ($this->strategies as $strategy) {
             $strategy->setOptions($options)->addVisibilityWhere($query);
         }
         return $query;
@@ -107,9 +107,9 @@ class BeanVisibility
      *
      * @deprecated Use BeanVisibility::addVisibilityQuery() instead
      */
-    public function addVisibilityFromQuery(SugarQuery $query, $options = array())
+    public function addVisibilityFromQuery(SugarQuery $query, $options = [])
     {
-        foreach($this->strategies as $strategy) {
+        foreach ($this->strategies as $strategy) {
             $strategy->setOptions($options)->addVisibilityFromQuery($query);
         }
         return $query;
@@ -123,9 +123,9 @@ class BeanVisibility
      *
      * @deprecated Use BeanVisibility::addVisibilityQuery() instead
      */
-    public function addVisibilityWhereQuery(SugarQuery $query, $options = array())
+    public function addVisibilityWhereQuery(SugarQuery $query, $options = [])
     {
-        foreach($this->strategies as $strategy) {
+        foreach ($this->strategies as $strategy) {
             $strategy->setOptions($options)->addVisibilityWhereQuery($query);
         }
         return $query;
@@ -137,7 +137,7 @@ class BeanVisibility
      * @param SugarQuery $query
      * @param array $options
      */
-    public function addVisibilityQuery(SugarQuery $query, $options = array())
+    public function addVisibilityQuery(SugarQuery $query, $options = [])
     {
         foreach ($this->strategies as $strategy) {
             $strategy->setOptions($options)->addVisibilityQuery($query);
@@ -171,7 +171,7 @@ class BeanVisibility
      */
     public function beforeSseIndexing()
     {
-        $GLOBALS['log']->deprecated("BeanVisibility::beforeSseIndexing is deprecated !");
+        $GLOBALS['log']->deprecated('BeanVisibility::beforeSseIndexing is deprecated !');
     }
 
     /**
@@ -183,8 +183,7 @@ class BeanVisibility
      */
     public function addSseVisibilityFilter(SugarSearchEngineInterface $engine, $filter)
     {
-        $GLOBALS['log']->deprecated("BeanVisibility::addSseVisibilityFilter is deprecated !");
+        $GLOBALS['log']->deprecated('BeanVisibility::addSseVisibilityFilter is deprecated !');
         return $filter;
     }
 }
-

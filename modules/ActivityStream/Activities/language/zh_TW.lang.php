@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'TPL_ACTIVITY_CREATE' => '已建立 {{{str "TPL_ACTIVITY_RECORD" "Activities" object}}}{{#if object.module}} {{getModuleName object.module}}{{/if}}。',
     'TPL_ACTIVITY_POST' => '{{{value}}}{{{str "TPL_ACTIVITY_ON" "Activities" this}}}',
     'TPL_ACTIVITY_UPDATE' => '更新 {{#if updateStr}}{{{updateStr}}} 於 {{/if}}{{#if object.module}}{{{str "TPL_ACTIVITY_RECORD" "Activities" object}}}{{else}}{{object.name}}{{/if}}。',
@@ -28,4 +28,4 @@ $mod_strings = array(
     'TPL_MORE_COMMENT' => '{{this}} 更多註解&hellip;',
     'TPL_MORE_COMMENTS' => '{{this}} 更多註解&hellip;',
     'TPL_SHOW_MORE_MODULE' => '更多貼文...',
-);
+];

@@ -11,26 +11,24 @@
  */
 
 SugarAutoLoader::requireWithCustom('modules/Home/QuickSearch.php');
-if(class_exists('quicksearchQueryCustom')) {
+if (class_exists('quicksearchQueryCustom')) {
     $quicksearchQuery = new quicksearchQueryCustom();
-}
-else
-{
+} else {
     $quicksearchQuery = new QuickSearchQuery();
 }
 
 $json = getJSONobj();
 $data = $json->decode(html_entity_decode($_REQUEST['data'], ENT_COMPAT));
-if(isset($_REQUEST['query']) && !empty($_REQUEST['query'])){
-    foreach($data['conditions'] as $k=>$v){
+if (isset($_REQUEST['query']) && !empty($_REQUEST['query'])) {
+    foreach ($data['conditions'] as $k => $v) {
         if (empty($data['conditions'][$k]['value'])
             && ($data['conditions'][$k]['op'] != QuickSearchQuery::CONDITION_EQUAL)) {
-            $data['conditions'][$k]['value']=urldecode($_REQUEST['query']);
+            $data['conditions'][$k]['value'] = urldecode($_REQUEST['query']);
         }
     }
 }
 
 $method = !empty($data['method']) ? $data['method'] : 'query';
-if (is_callable(array($quicksearchQuery, $method))) {
-   echo $quicksearchQuery->$method($data);
+if (is_callable([$quicksearchQuery, $method])) {
+    echo $quicksearchQuery->$method($data);
 }

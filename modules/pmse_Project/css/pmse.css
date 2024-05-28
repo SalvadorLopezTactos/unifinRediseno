@@ -14,12 +14,6 @@
     font-size: 13px;
 }
 
-.pmse-form-error .fa-warning {
-    color: #e61718;
-    font-size: 14px;
-    margin: auto 6px;
-}
-
 .pmse-form-error-off {
     display: none;
 }

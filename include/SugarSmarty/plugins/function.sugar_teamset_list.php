@@ -30,11 +30,11 @@ r48064 - 2009-06-04 11:20:27 -0700 (Thu, 04 Jun 2009) - rob - Bug 30503: Moved o
 function smarty_function_sugar_teamset_list($params, &$smarty)
 {
     if (!isset($params['row']) && !isset($params['col'])) {
-		$smarty->trigger_error("sugar_phone: missing parameters, cannot continue");
-		return '';
+        $smarty->trigger_error('sugar_phone: missing parameters, cannot continue');
+        return '';
     }
 
     $sfh = new SugarFieldHandler();
 
-    return($sfh->displaySmarty($params['row'], $params['vardef'], 'ListView', array('col'=>$params['col'])));
+    return ($sfh->displaySmarty($params['row'], $params['vardef'], 'ListView', ['col' => $params['col']]));
 }

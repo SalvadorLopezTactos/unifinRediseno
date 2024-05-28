@@ -114,6 +114,8 @@
         this._dataTable.initComponents();
         this.$('.dataTablePlaceholder').append(this._dataTable.$el);
         this._dataTable.render();
+
+        this.$('.dataTablePlaceholder').toggleClass('!overflow-y-auto', this.reportType === 'Matrix');
     },
 
     rebuildDataTableList: function(reportType) {

@@ -11,12 +11,34 @@
  */
 
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\ActivityHandlerFactory;
+use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\ActivityHelper;
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\SelectToOption as SelectToOption;
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\RSA\TargetResolver as TargetResolver;
 use Sugarcrm\Sugarcrm\CustomerJourney\ConfigurationManager;
+use Sugarcrm\Sugarcrm\CustomerJourney\Bean\RSA\ParentToSmartGuideRSA;
+use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\StatusHelper;
+use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Journey\Canceller;
+use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Journey\StateCalculator;
+use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Journey\ProgressCalculator;
+use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Journey\MomentumCalculator;
 
 class CJ_FormsApi extends SugarApi
 {
+    /**
+     * @var array
+     */
+    public $activityModules = ['Tasks', 'Meetings', 'Calls'];
+
+    /**
+     * @var array
+     */
+    public $exception  = ['error' => false, 'success' => true];
+
+    /**
+     * @var array
+     */
+    public $statusArray = ['Completed', 'Not Applicable'];
+
     /**
      * @inheritdoc
      */
@@ -59,6 +81,24 @@ class CJ_FormsApi extends SugarApi
                 'longHelp' => '/include/api/help/customer_journeyCJ_FormsgetTemplateAvailableModules.html',
                 'minVersion' => '11.19',
             ],
+            'activitiesRSA' => [
+                'reqType' => 'GET',
+                'path' => ['?', '?', 'activitiesRSA'],
+                'pathVars' => ['module', 'record'],
+                'method' => 'activitiesRSA',
+                'shortHelp' => 'Returns the activities for which RSA will be performed',
+                'longHelp' => '/include/api/help/customer_journeyCJ_FormsactivitiesRSA.html',
+                'minVersion' => '11.22',
+            ],
+            'performTargetActions' => [
+                'reqType' => 'POST',
+                'path' => ['CJ_Forms', 'performTargetActions'],
+                'pathVars' => ['module', 'action'],
+                'method' => 'performTargetActions',
+                'shortHelp' => 'Perform the target actions against the given chunk of activities',
+                'longHelp' => '/include/api/help/customer_journeyCJ_FormsperformTargetActions.html',
+                'minVersion' => '11.22',
+            ],
         ];
     }
 
@@ -66,7 +106,7 @@ class CJ_FormsApi extends SugarApi
      * Resolves the target and return the response for the activity
      *
      * @param ServiceBase $api
-     * @param array       $args
+     * @param array $args
      * @return array
      * @throws SugarApiExceptionMissingParameter
      * @throws SugarApiExceptionNotAuthorized
@@ -132,7 +172,7 @@ class CJ_FormsApi extends SugarApi
 
         return $this->getNotFoundResponse('stage');
     }
-    
+
     /**
      * Resolves the target and return the response for the Smart Guide
      *
@@ -198,7 +238,7 @@ class CJ_FormsApi extends SugarApi
     {
         return [
             'status' => 'Not Found',
-            'message' => "Form / Stage Id was not found, so $target can not be resolved",
+            'message' => "Form / Stage Id was not found, so {$target} can not be resolved",
         ];
     }
 
@@ -284,5 +324,186 @@ class CJ_FormsApi extends SugarApi
         $result = $query->getOne();
 
         return (!empty($result)) ? unencodeMultienum($result) : [];
+    }
+
+    /**
+     * Returns the activities for which RSA will be performed
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     * @throws SugarApiExceptionMissingParameter
+     * @throws SugarApiExceptionNotAuthorized
+     * @throws SugarApiExceptionNotFound
+     * @throws Exception
+     */
+    public function activitiesRSA(ServiceBase $api, array $args)
+    {
+        // Ensure this end-point must be accessible to Sugar Automate Users
+        ConfigurationManager::ensureAutomateUser();
+
+        $this->requireArgs($args, ['module', 'record']);
+
+        $parentBean = \BeanFactory::getBean($args['module'], $args['record']);
+
+        $activityRecords = ParentToSmartGuideRSA::checkAndPerformParentRSA($parentBean, '', []);
+
+        return (!empty($activityRecords)) ? $activityRecords : [];
+    }
+
+    /**
+      * Set the target actions for activities stages and guides
+     *
+       * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     * @throws SugarApiExceptionMissingParameter
+     * @throws SugarApiExceptionNotAuthorized
+     * @throws SugarApiExceptionNotFound
+     * @throws Exception
+     */
+    public function performTargetActions(ServiceBase $api, array $args)
+    {
+        // Ensure this end-point must be accessible to Sugar Automate Users
+        ConfigurationManager::ensureAutomateUser();
+
+        $this->requireArgs($args, ['records_to_update']);
+
+        $targetFieldData = !is_array($args['records_to_update']) ? json_decode($args['records_to_update'], true) :
+        $args['records_to_update'];
+
+        foreach ($targetFieldData as $targetActionData) {
+            try {
+                if (!empty($targetActionData['id']) && !empty($targetActionData['module'])) {
+                    $bean = \BeanFactory::getBean($targetActionData['module'], $targetActionData['id'], ['use_cache' => false]);
+                    if (!empty($bean) && !is_null($bean->id)) {
+                        if ($targetActionData['module'] !== 'DRI_Workflows') {
+                            $this->performRSAonActivities($targetActionData, $bean);
+                        } else {
+                            if ($targetActionData['status'] === 'Cancelled') {
+                                $bean->process_activities = false;
+                                $canceller = new Canceller();
+                                $canceller->cancel($bean);
+                            }
+                            $this->completeGuideCalculations($bean);
+                        }
+                    }
+                }
+            } catch (\Throwable $e) {
+                $GLOBALS['log']->fatal("Sugar Actions : Sugar Action to Smart Guide :\n" . $e->getMessage());
+                $this->exception['error'] = true;
+                $this->exception['success'] = false;
+            }
+        }
+        return $this->exception;
+    }
+
+    /**
+     * Provide the name of the stage of activity
+     *
+     * @param string $stageID
+     * @return array
+     */
+    private function getStageName(string $stageID): array
+    {
+        $stageBean = \BeanFactory::newBean('DRI_SubWorkflows');
+        $query = new \SugarQuery();
+        $query->select('id', 'name');
+        $query->from($stageBean)->where()
+           ->equals('id', $stageID)
+           ->notEquals('deleted', 1);
+
+        return $query->execute();
+    }
+
+    /**
+     * Provide the name of the Journey
+     *
+     * @param string $journeyID
+     * @return array
+     */
+    private function getJourneyName(string $journeyID): array
+    {
+        $stageBean = \BeanFactory::newBean('DRI_Workflows');
+        $query = new \SugarQuery();
+        $query->select('id', 'name');
+        $query->from($stageBean)->where()
+           ->equals('id', $journeyID)
+           ->notEquals('deleted', 1);
+
+        return $query->execute();
+    }
+
+    /**
+     * Performs target action on activities
+     *
+     * @param array $targetActionData
+     * @param \SugarBean $bean
+     * @throws SugarException
+     */
+    private function performRSAonActivities(array $targetActionData, \SugarBean $bean)
+    {
+        $statusHelper = new StatusHelper();
+        if (!in_array($bean->status, $this->statusArray)) {
+            if (in_array($targetActionData['module'], $this->activityModules)) {
+                if (isset($targetActionData['error'])) {
+                    $stageName = array_pop($this->getStageName($bean->dri_subworkflow_id));
+                    $jouneyName = array_pop($this->getJourneyName($bean->dri_workflow_id));
+
+                    $msg = <<<ERROR_MESSAGE
+{$jouneyName['name']} ({$bean->dri_workflow_id}):
+{$stageName['name']} - {$bean->name} ({$bean->id}) not marked as {$targetActionData['status']} as it is blocked by activity/stage.
+ERROR_MESSAGE;
+
+                    throw new SugarException($msg);
+                }
+
+                if ($bean->status === $statusHelper::TASK_STATUS_IN_PROGRESS && in_array($bean->module_dir, ['Meetings'])) {
+                    $stageName = array_pop($this->getStageName($bean->dri_subworkflow_id));
+                    $jouneyName = array_pop($this->getJourneyName($bean->dri_workflow_id));
+
+                    $msg = <<<ERROR_MESSAGE
+{$jouneyName['name']} ({$bean->dri_workflow_id}) :
+{$stageName['name']} - {$bean->name} ({$bean->id}) not marked as {$targetActionData['status']} as it is a {$bean->module_dir} and they can't be marked as in progress.
+ERROR_MESSAGE;
+                    throw new SugarException($msg);
+                }
+            }
+
+            if (!isset($targetActionData['error'])) {
+                $statusToSet = isset($targetActionData['status']) ? $targetActionData['status'] : '';
+                $activityHelper = ActivityHelper::getInstance(sugarStrToLower($bean->module_dir), $bean->module_name);
+                $activityHelper->setStatus($bean, $statusToSet);
+                $bean->status = $statusToSet;
+                $bean->ignore_blocked_by = true;
+                if ($bean->status == 'Deleted') {
+                    $bean->mark_deleted($targetActionData['id']);
+                }
+
+                if (!$bean->save()) {
+                    throw new SugarException();
+                }
+            }
+        }
+    }
+
+    /**
+     * Performs final score and status calculations for Smart Guide
+     *
+     * @param \SugarBean $workflowBean
+     * @throws SugarException
+     */
+    private function completeGuideCalculations(\SugarBean $workflowBean)
+    {
+        $progressCalculator = new ProgressCalculator($workflowBean);
+        $progressCalculator->calculate(true);
+
+        $momentumCalculator = new MomentumCalculator($workflowBean);
+        $momentumCalculator->calculate(true);
+
+        $stateCalculator = new StateCalculator($workflowBean);
+        $stateCalculator->calculateStageStates(true);
+
+        $workflowBean->save();
     }
 }

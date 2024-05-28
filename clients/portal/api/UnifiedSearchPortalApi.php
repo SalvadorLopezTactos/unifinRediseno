@@ -10,7 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class UnifiedSearchPortalApi extends UnifiedSearchApi {
+class UnifiedSearchPortalApi extends UnifiedSearchApi
+{
     /**
      * This function is used to determine the search engine to use
      * @param ServiceBase $api The API class of the request

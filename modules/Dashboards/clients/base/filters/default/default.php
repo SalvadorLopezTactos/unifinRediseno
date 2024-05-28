@@ -9,14 +9,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Dashboards']['base']['filter']['default'] = array(
+$viewdefs['Dashboards']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'dashboard_module' => array(),
-        'view_name' => array(),
-        'assigned_user_name' => array(),
-        'default_dashboard' => array(),
-        'team_name' => array(),
-    ),
-);
+    'fields' => [
+        'name' => [],
+        'is_template' => [],
+        'dashboard_module' => [],
+        'view_name' => [],
+        'assigned_user_name' => [],
+        'default_dashboard' => [],
+        'team_name' => [],
+    ],
+];

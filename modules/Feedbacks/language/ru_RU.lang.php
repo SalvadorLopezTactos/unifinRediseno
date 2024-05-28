@@ -13,7 +13,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FEEDBACK_TEXT_PLACEHOLDER' => 'Описание обратной связи',
     'LBL_FEEDBACK_BTN_SUBMIT' => 'Отправить',
     'LBL_FEEDBACK_SENT' => 'Отзыв отправлен.',
@@ -23,4 +23,4 @@ $mod_strings = array(
     'TPL_FEEDBACK_ASIDE' => 'Мы собираем определенные данные об использовании во время представления. {{learnMoreLink}}. Мы не собираем контактную информацию. Пожалуйста, {{contactSupportLink}} для сообщения об ошибках или других вопросах, которые требуют ответа.',
     'LBL_FEEDBACK_ASIDE_CLICK_MORE' => 'Чтобы узнать больше, нажмите здесь',
     'LBL_FEEDBACK_ASIDE_CONTACT_SUPPORT' => 'обратиться в Службу поддержки',
-);
+];

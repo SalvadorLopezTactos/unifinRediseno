@@ -10,48 +10,48 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['metadata_cache'] = array(
+$dictionary['metadata_cache'] = [
     'table' => 'metadata_cache',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'type' => array(
+        ],
+        'type' => [
             'name' => 'type',
             'type' => 'varchar',
             'len' => '255',
-        ),
-        'data' => array(
+        ],
+        'data' => [
             'name' => 'data',
             'type' => 'longblob',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'matadata_cache_primary',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_type_datemodified',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'type',
                 'date_modified',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

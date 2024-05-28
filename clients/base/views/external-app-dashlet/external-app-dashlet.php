@@ -10,32 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['external-app-dashlet'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['base']['view']['external-app-dashlet'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_SUGAR_APPS_DASHLET_LABEL',
             'description' => 'LBL_SUGAR_APPS_DASHLET_DESC',
-            'config' => array(
+            'config' => [
                 'src' => '',
-            ),
-            'preview' => array(),
-            'filter' => array(),
-        ),
-    ),
-    'panels' => array(
-        array(
+            ],
+            'preview' => [],
+            'filter' => [],
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_body',
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'src',
                     'label' => 'LBL_SUGAR_APPS_DASHLET_APP_SELECT_LABEL',
                     'type' => 'enum',
                     'span' => 12,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

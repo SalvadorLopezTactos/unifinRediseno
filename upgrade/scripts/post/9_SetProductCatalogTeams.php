@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Upgrade existing product catalog.
  */
@@ -28,9 +29,9 @@ class SugarUpgradeSetProductCatalogTeams extends UpgradeScript
             // do nothing if upgrading from 10.0.0 or newer
             return;
         }
-        $this->log("Upgrading product catalog");
+        $this->log('Upgrading product catalog');
         // set team to global
-        $sql = "UPDATE product_templates SET team_id=1, team_set_id=1 WHERE deleted=0";
+        $sql = 'UPDATE product_templates SET team_id=1, team_set_id=1 WHERE deleted=0';
         $this->db->query($sql);
     }
 }

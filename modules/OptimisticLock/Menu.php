@@ -9,9 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$module_menu = Array(
+$module_menu = [
 
-);
-
-
-?>
+];

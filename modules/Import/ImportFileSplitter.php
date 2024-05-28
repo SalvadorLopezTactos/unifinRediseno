@@ -9,13 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description:  Class to handle splitting a file into separate parts
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
-
 class ImportFileSplitter
 {
     /**
@@ -33,7 +32,7 @@ class ImportFileSplitter
      */
     private $_recordCount;
 
-     /**
+    /**
      * Maximum number of records per file
      */
     private $_recordThreshold;
@@ -46,22 +45,22 @@ class ImportFileSplitter
     public function __construct(
         $source = null,
         $recordThreshold = 1000
-        )
-    {
-            // sanitize crazy values to the default value
-        if ( !is_int($recordThreshold) || $recordThreshold < 1 ){
-        	//if this is not an int but is still a
-        	//string representation of a number, then cast to an int
-        	if(!is_int($recordThreshold) && is_numeric($recordThreshold)){
-        		//cast the string to an int
-        		$recordThreshold = (int)$recordThreshold;
-        	}else{
-        		//if not a numeric string, or less than 1, then default to 100
-            	$recordThreshold = 100;
-        	}
+    ) {
+
+        // sanitize crazy values to the default value
+        if (!is_int($recordThreshold) || $recordThreshold < 1) {
+            //if this is not an int but is still a
+            //string representation of a number, then cast to an int
+            if (!is_int($recordThreshold) && is_numeric($recordThreshold)) {
+                //cast the string to an int
+                $recordThreshold = (int)$recordThreshold;
+            } else {
+                //if not a numeric string, or less than 1, then default to 100
+                $recordThreshold = 100;
+            }
         }
         $this->_recordThreshold = $recordThreshold;
-        $this->_sourceFile      = $source;
+        $this->_sourceFile = $source;
     }
 
     /**
@@ -71,8 +70,8 @@ class ImportFileSplitter
      */
     public function fileExists()
     {
-        if ( !is_file($this->_sourceFile) || !is_readable($this->_sourceFile)) {
-           return false;
+        if (!is_file($this->_sourceFile) || !is_readable($this->_sourceFile)) {
+            return false;
         }
 
         return true;
@@ -89,17 +88,20 @@ class ImportFileSplitter
         $delimiter = ',',
         $enclosure = '"',
         $has_header = false
-        )
-    {
-        if (!$this->fileExists())
+    ) {
+
+        if (!$this->fileExists()) {
             return false;
-        $importFile = new ImportFile($this->_sourceFile,$delimiter,$enclosure,false);
+        }
+        $importFile = new ImportFile($this->_sourceFile, $delimiter, $enclosure, false);
         $filecount = 0;
-        $fw = sugar_fopen("{$this->_sourceFile}-{$filecount}", "w");
+        $fw = sugar_fopen("{$this->_sourceFile}-{$filecount}", 'w');
         $count = 0;
         $rows = '';
         // skip first row if we have a header row
-        if ( $has_header && $importFile->getNextRow() ) {
+        if ($has_header && $importFile->getNextRow()) {
+            // reset temp files to keep them clean. Previous steps or Back and Next would have leave garbage
+            ImportCacheFiles::clearCacheFiles();
             // mark as duplicate to stick header row in the dupes file
             $importFile->markRowAsDuplicate();
             // same for error records file
@@ -107,12 +109,12 @@ class ImportFileSplitter
         }
         while ($row = $importFile->getNextRow(false)) {
             // after $this->_recordThreshold rows, close this import file and goto the next one
-            if ( $count >= $this->_recordThreshold ) {
+            if ($count >= $this->_recordThreshold) {
                 fwrite($fw, $rows);
                 $rows = '';
                 fclose($fw);
                 $filecount++;
-                $fw = sugar_fopen("{$this->_sourceFile}-{$filecount}", "w");
+                $fw = sugar_fopen("{$this->_sourceFile}-{$filecount}", 'w');
                 $count = 0;
             }
             $rows .= $row;
@@ -121,7 +123,7 @@ class ImportFileSplitter
 
         fwrite($fw, $rows);
         fclose($fw);
-        $this->_fileCount   = $filecount;
+        $this->_fileCount = $filecount;
         $this->_recordCount = ($filecount * $this->_recordThreshold) + $count;
         // increment by one to get true count of files created
         ++$this->_fileCount;
@@ -134,8 +136,9 @@ class ImportFileSplitter
      */
     public function getRecordCount()
     {
-        if ( !isset($this->_recordCount) )
+        if (!isset($this->_recordCount)) {
             return false;
+        }
 
         return $this->_recordCount;
     }
@@ -147,8 +150,9 @@ class ImportFileSplitter
      */
     public function getFileCount()
     {
-        if ( !isset($this->_fileCount) )
+        if (!isset($this->_fileCount)) {
             return false;
+        }
 
         return $this->_fileCount;
     }
@@ -162,13 +166,12 @@ class ImportFileSplitter
      */
     public function getSplitFileName(
         $filenumber = 0
-        )
-    {
-        if ( $filenumber >= $this->getFileCount())
+    ) {
+
+        if ($filenumber >= $this->getFileCount()) {
             return false;
+        }
 
         return "{$this->_sourceFile}-{$filenumber}";
     }
-
 }
-

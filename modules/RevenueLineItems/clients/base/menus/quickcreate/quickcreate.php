@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,22 +12,22 @@
  */
 
 $module_name = 'RevenueLineItems';
-$viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
+$viewdefs[$module_name]['base']['menu']['quickcreate'] = [
     'layout' => 'create',
     'visible' => true,
     'order' => 11,
-    'related' => array(
-        array(
+    'related' => [
+        [
             'module' => 'Accounts',
             'link' => 'revenuelineitems',
-        ),
-        array(
+        ],
+        [
             'module' => 'Contacts',
             'link' => 'revenuelineitems',
-        ),
-        array(
+        ],
+        [
             'module' => 'Opportunities',
             'link' => 'revenuelineitems',
-        ),
-    ),
-);
+        ],
+    ],
+];

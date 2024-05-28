@@ -17,17 +17,17 @@ class ImportViewRevokeAccess extends SugarView
      *
      * @param array $params Ignored
      */
-    public function process($params = array())
+    public function process($params = [])
     {
         if (isset($_REQUEST['application'])) {
-            $response = array(
+            $response = [
                 'result' => $this->revokeAccess($_REQUEST['application']),
                 'sources' => $this->getAuthenticatedImportableExternalEAPMs(),
-            );
+            ];
         } else {
-            $response = array(
+            $response = [
                 'result' => false,
-            );
+            ];
         }
 
         header('Content-Type: application/json');

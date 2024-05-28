@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmnDiagram'] = array(
+$dictionary['pmse_BpmnDiagram'] = [
     'table' => 'pmse_bpmn_diagram',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'reassignable' => false,
-    'fields' => array(
-        'dia_uid' => array(
+    'fields' => [
+        'dia_uid' => [
             'required' => true,
             'name' => 'dia_uid',
             'vname' => '',
@@ -38,8 +38,8 @@ $dictionary['pmse_BpmnDiagram'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'prj_id' => array(
+        ],
+        'prj_id' => [
             'required' => true,
             'name' => 'prj_id',
             'vname' => '',
@@ -59,8 +59,8 @@ $dictionary['pmse_BpmnDiagram'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'dia_is_closable' => array(
+        ],
+        'dia_is_closable' => [
             'required' => true,
             'name' => 'dia_is_closable',
             'vname' => '',
@@ -84,23 +84,23 @@ $dictionary['pmse_BpmnDiagram'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmnDiagram', 'pmse_BpmnDiagram');

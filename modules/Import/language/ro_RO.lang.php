@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Fisierul importat a fost citit cu succes',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Înregistrarea importată participă într-un proces şi nu poate fi editată deoarece unele câmpuri sunt blocate pentru editare de către proces.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Inregistrari sarite datorita unei erori',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Daca utilizatorul nu exista, folositi utilizatorul curent',
     'LBL_SHOW_HIDDEN' => 'Arata campurile care nu sunt in mod normal importabile',
     'LBL_UPDATE_RECORDS' => 'Actualizeaza înregistrările existente în loc sa importi acestea (Nu Anulare)',
-    'LBL_TEST'=> 'Testeaza Importul (nu salveaza sau modifica datele)',
+    'LBL_TEST' => 'Testeaza Importul (nu salveaza sau modifica datele)',
     'LBL_TRUNCATE_TABLE' => 'Golește tabelul înaintea importului (șterge toate înregistrările)',
     'LBL_RELATED_ACCOUNTS' => 'Nu crea conturi conexe',
     'LBL_NO_DATECHECK' => 'Treci peste verificarea datei (mai rapid, dar va esua daca orice data este gresita)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Valoare intreaga invalida',
     'LBL_ERROR_INVALID_NUM' => 'Valoare numerica invalida',
     'LBL_ERROR_INVALID_TIME' => 'Ora invalida',
-    'LBL_ERROR_INVALID_EMAIL'=>'Adresa Email invalida',
-    'LBL_ERROR_INVALID_BOOL'=>'Valoare invalida (ar trebui sa fie 1 sau 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Sir data invalid',
-    'LBL_ERROR_INVALID_USER'=>'Nume de utilizator sau ID invalide',
+    'LBL_ERROR_INVALID_EMAIL' => 'Adresa Email invalida',
+    'LBL_ERROR_INVALID_BOOL' => 'Valoare invalida (ar trebui sa fie 1 sau 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Sir data invalid',
+    'LBL_ERROR_INVALID_USER' => 'Nume de utilizator sau ID invalide',
     'LBL_ERROR_INVALID_TEAM' => 'NUme de echipa sau ID invalide',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Nume cont sau ID invalide',
     'LBL_ERROR_INVALID_RELATE' => 'Camp relational invalid',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'nu exista sau nu poate fi scris',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Fisierul nu a fost urcat cu succes. Poate fi din cauza ca &#39;upload_max_filesize&#39; din fisierul dumneavoastra php.ini e setata la un numar mic',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Fisierul este prea mare. Max:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Octeti. Modificati $sugar_config[&#39;upload_maxsize&#39;] din config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Octeţi. Schimbare $sugar_config[&#39;upload_maxsize&#39;] în config.php',
     'LBL_MODULE_NAME' => 'Importa',
     'LBL_MODULE_NAME_SINGULAR' => 'Importa',
     'LBL_TRY_AGAIN' => 'Incercati din nou',
     'LBL_START_OVER' => 'Start Peste',
     'LBL_ERROR' => 'Eroare',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Fişierul de import conţine {0} rânduri.Numărul optim de rânduri este de {1}. Mai multe rânduri pot încetini procesul de import. Faceţi clic pe OK pentru a continua importul. Faceţi clic pe Revocare să revizuiască şi să re-încărcaţi fişierul de import.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Nu puteti importa un utilizator administrator de sistem',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Nu puteti importa un utilizator administrator de sistem',
     'ERR_REPORT_LOOP' => 'Sistemul a detectat o buclă de raportare. Un utilizator nu se pot raporta la ei înşişi, nici managerii nu-si pot raporta lor.',
     'ERR_MULTIPLE' => 'Mai multe coloane au fost definite cu acelasi nume de camp.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Lipsesc campurile necesare:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Nu au existat randuri în fişierul de import dvs.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Fişier de import a fost deja prelucrate sau nu există',
     'LBL_SUCCESS' => 'Succes:',
-	'LBL_FAILURE' => 'Import esuat:',
+    'LBL_FAILURE' => 'Import esuat:',
     'LBL_SUCCESSFULLY' => 'Importate cu succes',
     'LBL_LAST_IMPORT_UNDONE' => 'Ultimul dvs. import a fost anulat',
     'LBL_NO_IMPORT_TO_UNDO' => 'Nu a fost niciun import pentru a anula.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Importa mai mult',
     'LBL_FINISHED' => 'Intoarce-te la',
     'LBL_UNDO_LAST_IMPORT' => 'Anulaţi Ultima Importare',
-    'LBL_LAST_IMPORTED'=>'Ultima Creata',
+    'LBL_LAST_IMPORTED' => 'Ultima Creata',
     'ERR_MULTIPLE_PARENTS' => 'Puteţi avea doar un singur părinte ID definit',
     'LBL_DUPLICATES' => 'Dubluri gasite',
     'LNK_DUPLICATE_LIST' => 'Descarca lista de dubluri',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Ascute note',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Arata Previzualizare Coloane',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Ascunde previzualizare coloane',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Verificați dacă există duplicate utilizând operatorul:',
     'LBL_SAVE_MAPPING_AS' => 'Salvare trecere pe harta ca',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Citat simplu (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Citat dublu (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Pentru a atribui înregistrările noi la alte echipe decât echipa implicit (e), utilizaţi coloana Valoare implicită pentru a selecta diferite echipe.',
     'LBL_SIGN_IN_HELP' => 'Pentru a activa acest serviciu, vă rugăm să semneze în cadrul tab-ul extern Conturi în pagina dvs. de utilizator setări.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Se încearcă gestionarea adreselor de e-mail într-un Bean care nu acceptă acest lucru.",
-);
+];

@@ -23,9 +23,9 @@ if ($samlRequest) {
         if ($relayState) {
             $redirectUrl .= '&RelayState=' . urlencode($relayState);
         }
-        $smarty->assign(array(
-                'REDIRECT_URL'  => $redirectUrl,
-        ));
+        $smarty->assign([
+            'REDIRECT_URL' => $redirectUrl,
+        ]);
         $smarty->display('modules/Users/tpls/Logout.tpl');
     } else {
         /** @var AuthenticationController $authController */
@@ -41,7 +41,7 @@ if ($samlRequest) {
         $_SESSION[$key] = ''; // cannot just overwrite session data, causes segfaults in some versions of PHP
     }
     if (isset($_COOKIE[session_name()])) {
-        setcookie(session_name(), '', ['expires' => time()-42000, 'path' => '/']);
+        setcookie(session_name(), '', ['expires' => time() - 42000, 'path' => '/']);
     }
 
     SugarApplication::endSession();

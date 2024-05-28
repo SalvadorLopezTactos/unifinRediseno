@@ -13,37 +13,36 @@
 
 class SubscriptionsApi extends SugarApi
 {
-
     public function registerApiRest()
     {
-        return array(
-            'subscribeToRecord' => array(
+        return [
+            'subscribeToRecord' => [
                 'reqType' => 'POST',
-                'path' => array('<module>','?', 'subscribe'),
-                'pathVars' => array('module','record'),
+                'path' => ['<module>', '?', 'subscribe'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'subscribeToRecord',
                 'shortHelp' => 'This method subscribes the user to the current record, for activity stream updates.',
                 'longHelp' => 'modules/ActivityStream/clients/base/api/help/recordSubscribe.html',
-            ),
-            'unsubscribeFromRecord' => array(
+            ],
+            'unsubscribeFromRecord' => [
                 'reqType' => 'DELETE',
-                'path' => array('<module>','?', 'unsubscribe'),
-                'pathVars' => array('module','record'),
+                'path' => ['<module>', '?', 'unsubscribe'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'unsubscribeFromRecord',
                 'shortHelp' => 'This method unsubscribes the user from the current record, for activity stream updates.',
                 'longHelp' => 'modules/ActivityStream/clients/base/api/help/recordUnsubscribe.html',
-            )
-        );
+            ],
+        ];
     }
 
     public function subscribeToRecord(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'record'));
+        $this->requireArgs($args, ['module', 'record']);
         $this->requireActivityStreams($args['module']);
         $bean = BeanFactory::retrieveBean($args['module'], $args['record']);
 
         if (empty($bean)) {
-            throw new SugarApiExceptionNotFound('Could not find parent record '.$args['record'].' in module '.$args['module']);
+            throw new SugarApiExceptionNotFound('Could not find parent record ' . $args['record'] . ' in module ' . $args['module']);
         }
 
         if (!$bean->ACLAccess('view')) {
@@ -54,7 +53,7 @@ class SubscriptionsApi extends SugarApi
             }
             $args = null;
             if (!empty($moduleName)) {
-                $args = array('moduleName' => $moduleName);
+                $args = ['moduleName' => $moduleName];
             }
             throw new SugarApiExceptionNotAuthorized('EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED', $args);
         }
@@ -64,15 +63,15 @@ class SubscriptionsApi extends SugarApi
 
     public function unsubscribeFromRecord(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'record'));
+        $this->requireArgs($args, ['module', 'record']);
         $this->requireActivityStreams($args['module']);
         $bean = BeanFactory::retrieveBean($args['module'], $args['record']);
 
         if (empty($bean)) {
-            throw new SugarApiExceptionNotFound('Could not find parent record '.$args['record'].' in module '.$args['module']);
+            throw new SugarApiExceptionNotFound('Could not find parent record ' . $args['record'] . ' in module ' . $args['module']);
         }
 
-        if (!$bean->ACLAccess('view')){
+        if (!$bean->ACLAccess('view')) {
             $moduleName = null;
             if (isset($args['module'])) {
                 $failed_module_strings = return_module_language($GLOBALS['current_language'], $args['module']);
@@ -80,7 +79,7 @@ class SubscriptionsApi extends SugarApi
             }
             $args = null;
             if (!empty($moduleName)) {
-                $args = array('moduleName' => $moduleName);
+                $args = ['moduleName' => $moduleName];
             }
             throw new SugarApiExceptionNotAuthorized('EXCEPTION_SUBSCRIBE_MODULE_NOT_AUTHORIZED', $args);
         }

@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Märkmete loendi töölaud',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Märkuste kirjete töölaud',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Märkmete fookuse sahtel',
     'LBL_EXTERNAL_USER' => 'Väline kasutaja',
     'LBL_EXTERNAL_USER_NAME' => 'Väline kasutaja',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Märkuse ajaskaala',
 
     'LBL_RELATED_CONTACT' => 'Seotud kontakt',
     'ERR_DELETE_RECORD' => 'Konto kustutamiseks täpsustage kirje numbrit.',
@@ -126,4 +127,4 @@ $mod_strings = array(
  - Väljad märkega Kohustuslik tuleb täita enne salvestamist.
  - Vajaduse korral lisaväljade avaldamiseks klõpsake suvandit Kuva rohkem.
 2. Uue kirje lõpetamiseks ja eelmisele lehele naasmiseks klõpsake nuppu Salvesta.',
-);
+];

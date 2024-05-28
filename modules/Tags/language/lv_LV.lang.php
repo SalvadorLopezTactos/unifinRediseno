@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Birkas',
     'LBL_GENERIC_LINK' => 'Saistītie objekti',
     'LBL_NAME_LOWER' => 'Birkas nosaukums ar mazajiem burtiem',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'Manas birkas',
     'LBL_MY_FAVORITE_TAGS' => 'Manas izvēlētās birkas',
     'LBL_MORE_TAGS' => '{{tagsNumber}} birkas',
-);
+];

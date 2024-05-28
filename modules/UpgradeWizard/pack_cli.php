@@ -11,31 +11,31 @@
  */
 
 
-include_once __DIR__.'/UpgradeDriver.php';
+include_once __DIR__ . '/UpgradeDriver.php';
 
-function packUpgradeWizardCli($phar, $params, $files = array())
+function packUpgradeWizardCli($phar, $params, $files = [])
 {
 
-    $defaults = array(
+    $defaults = [
         'version' => '7.6.1.0',
         'build' => '998',
-    );
+    ];
 
     $params = array_merge($defaults, $params);
 
     file_put_contents(__DIR__ . '/version.json', json_encode($params));
 
-    $chdir = __DIR__ . "/../..";
+    $chdir = __DIR__ . '/../..';
 
     $files = array_merge(
-        array(
-            "modules/UpgradeWizard/SILENTUPGRADE.txt" => 'SILENTUPGRADE.txt',
-            "modules/UpgradeWizard/UpgradeDriver.php" => 'UpgradeDriver.php',
-            "modules/UpgradeWizard/CliUpgrader.php" => 'CliUpgrader.php',
-            "modules/UpgradeWizard/version.json" => 'version.json',
+        [
+            'modules/UpgradeWizard/SILENTUPGRADE.txt' => 'SILENTUPGRADE.txt',
+            'modules/UpgradeWizard/UpgradeDriver.php' => 'UpgradeDriver.php',
+            'modules/UpgradeWizard/CliUpgrader.php' => 'CliUpgrader.php',
+            'modules/UpgradeWizard/version.json' => 'version.json',
             'include/SugarSystemInfo/SugarSystemInfo.php' => 'SugarSystemInfo.php',
             'include/SugarHeartbeat/SugarHeartbeatClient.php' => 'SugarHeartbeatClient.php',
-        ),
+        ],
         $files
     );
 
@@ -74,7 +74,7 @@ if (empty($argv[0]) || basename($argv[0]) != basename(__FILE__)) {
 
 $sapi_type = php_sapi_name();
 if (substr($sapi_type, 0, 3) != 'cli') {
-    die("This is command-line only script");
+    die('This is command-line only script');
 }
 
 if (empty($argv[1])) {
@@ -83,13 +83,13 @@ if (empty($argv[1])) {
 
 $pathinfo = pathinfo($argv[1]);
 
-if (isset($pathinfo['extension']) && in_array($pathinfo['extension'], array('zip', 'phar'))) {
+if (isset($pathinfo['extension']) && in_array($pathinfo['extension'], ['zip', 'phar'])) {
     $name = $pathinfo['dirname'] . DIRECTORY_SEPARATOR . $pathinfo['filename'];
 } else {
     $name = $argv[1];
 }
 
-$params = array();
+$params = [];
 if (isset($argv[2])) {
     $params['version'] = $argv[2];
 }

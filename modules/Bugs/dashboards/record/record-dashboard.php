@@ -20,6 +20,18 @@ return [
                     [
                         [
                             'view' => [
+                                'type' => 'activity-timeline',
+                                'label' => 'TPL_ACTIVITY_TIMELINE_DASHLET',
+                            ],
+                            'context' => [
+                                'module' => 'Bugs',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
                                 'type' => 'commentlog-dashlet',
                                 'label' => 'LBL_DASHLET_COMMENTLOG_NAME',
                             ],

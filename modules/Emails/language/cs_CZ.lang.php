@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'Přeposlat (fw):',
     'LBL_RE' => 'Re:',
     'LBL_BUTTON_CREATE' => 'Přidat',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Vyberte e-mailový účet',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Vyberte podpis',
     'LBL_SIGNATURE' => 'Podpis',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Výchozí podpis",
-    "LBL_SHOW_MORE_SIGNATURES" => "Více podpisů...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Výchozí podpis',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Více podpisů...',
     'LBL_SUBJECT' => 'Předmět:',
     'LBL_TEMPLATE' => 'Šablona',
     'LBL_TEXT_BODY' => 'Tělo textu',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Čas odeslání',
     'LBL_LIST_TO_ADDR' => 'Komu',
     'LBL_LIST_TYPE' => 'Typ',
-    "LBL_SELECTED_RECIPIENTS" => "Vybraní adresáti",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Více adresátů...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Adresář",
+    'LBL_SELECTED_RECIPIENTS' => 'Vybraní adresáti',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Více adresátů...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Adresář',
     'NTC_REMOVE_INVITEE' => 'Opravdu si přejete odstranit pozvánku z e-mailu?',
     'WARNING_SETTINGS_NOT_CONF' => 'Nastavení vašeho e-mailu není správně nakonfigurováno pro odesílání e-mailů. Server SMTP ' .
         'musí být nakonfigurován v <a href="#bwc/index.php?module=EmailMan&action=config">Email Settings</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Přílohy mohou selhat: Byl zjištěna nesprávná nebo nepoužitelná hodnota pro „upload_tmp_dir“. ' .
         'Opravte to prosím v souboru php.ini.',
     'LBL_MESSAGE_UID' => 'UID zprávy',
-    'LBL_OPEN_DRAFT_ALERT' => 'E-mail je koncept. Klikněte na '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'E-mail je koncept. Klikněte na ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  a upravte ho.',
     'LBL_EMAIL_BODY' => 'E-mailová zpráva',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na e-maily',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Řídicí panel záznamů e-mailů',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová osa e-mailu',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'Nebyli nastaveni adresáti',
@@ -473,4 +474,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'Odeslat e-mail',
     'LBL_MAILBOX' => 'Příchozí účet',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Chcete-li odesílat e-maily, nakonfigurujte odchozí e-mailový účet pomocí <a href="#OutboundEmail">Nastavení e-mailu</a>.',
-);
+    'LBL_TOO_SHORT' => 'Zadejte alespoň {0} znaky...',
+];

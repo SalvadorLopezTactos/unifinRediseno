@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Fajl za uvoz je uspešno pročitan',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Uvezeni zapis učestvuje u procesu i ne može da se uređuje jer je proces neka polja zaključao za uređivanje.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'zapisi nisu uvezeni zbog greške.',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Ako korisnik ne postoji koristite trenutnog korisnika',
     'LBL_SHOW_HIDDEN' => 'Prikaži polja koja obično nisu za uvoz',
     'LBL_UPDATE_RECORDS' => 'Ažuriraj postojeće zapise umesto da ih uvezeš (Nema Poništi)',
-    'LBL_TEST'=> 'Test uvoz (ne čuvaj i ne menjaj podatke)',
+    'LBL_TEST' => 'Test uvoz (ne čuvaj i ne menjaj podatke)',
     'LBL_TRUNCATE_TABLE' => 'Isprazni tabelu pre uvoza (obriši sve zapise)',
     'LBL_RELATED_ACCOUNTS' => 'Ne kreiraj povezane kompanije',
     'LBL_NO_DATECHECK' => 'Preskoči proveru datuma (brži način ali neće proći ako je neki datum pogrešan)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Neispravna celobrojna vrednost',
     'LBL_ERROR_INVALID_NUM' => 'Neispravna numerička vrednost',
     'LBL_ERROR_INVALID_TIME' => 'Neispravno vreme',
-    'LBL_ERROR_INVALID_EMAIL'=>'Neispravna Email adresa',
-    'LBL_ERROR_INVALID_BOOL'=>'Pogrešna vrednost (treba da bude 1 ili 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Neispravan format datuma (string)',
-    'LBL_ERROR_INVALID_USER'=>'Neispravno koisničko ime ili ID broj',
+    'LBL_ERROR_INVALID_EMAIL' => 'Neispravna Email adresa',
+    'LBL_ERROR_INVALID_BOOL' => 'Pogrešna vrednost (treba da bude 1 ili 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Neispravan format datuma (string)',
+    'LBL_ERROR_INVALID_USER' => 'Neispravno koisničko ime ili ID broj',
     'LBL_ERROR_INVALID_TEAM' => 'Neispravan naziv tima ili ID broj',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Neispravan naziv kompanije ili ID broj',
     'LBL_ERROR_INVALID_RELATE' => 'Neispravno relaciono polje',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'ne postoji ili nije upisiv',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Fajl nije uspešno uvežen. Možda je &#39;upload_max_filesize&#39; podešavanje u Vašem php.ini fajlu  postavljeno na mali broj',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Fajl je prevelik. Maks:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'bajtova. Promenite $sugar_config[&#39;upload_maxsize&#39;] u fajlu config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bajtova. Promenite $sugar_config[&#39;upload_maxsize&#39;] u config.php',
     'LBL_MODULE_NAME' => 'Uvoz',
     'LBL_MODULE_NAME_SINGULAR' => 'Uvoz',
     'LBL_TRY_AGAIN' => 'Pokušajte ponovo',
     'LBL_START_OVER' => 'Počni ponovo',
     'LBL_ERROR' => 'Greška:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Datoteka za uvoz sadrži {0} redova. Optimalni broj redova je {1}. Višak redova može usporiti proces uvoza. Kliknite na "U redu" da nastavite uvoz. Kliknite na "Poništi" da revidirate i ponovo postavite datoteku za uvoz.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Ne možete da uvezete korisnika tipa sistemskog administratora',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Ne možete da uvezete korisnika tipa sistemskog administratora',
     'ERR_REPORT_LOOP' => 'Sistem je detektovao petlju izveštavanja. Korisnik ne može da izveštava sam sebe, niti bilo koji od njihovih menadžera može da ih izveštava.',
     'ERR_MULTIPLE' => 'Više kolona je definisano sa istim nazivom polja.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Nedostaje obavezno polje:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'U Vašem fajlu za uvoz nema redova',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Fajl za uvoz je već obrađen ili ne postoji',
     'LBL_SUCCESS' => 'Uspešno:',
-	'LBL_FAILURE' => 'Uvoz nije uspeo:',
+    'LBL_FAILURE' => 'Uvoz nije uspeo:',
     'LBL_SUCCESSFULLY' => 'Uspešno uveženo',
     'LBL_LAST_IMPORT_UNDONE' => 'Vaš poslednji uvoz je poništen',
     'LBL_NO_IMPORT_TO_UNDO' => 'Nije bilo uvoza za poništavanje.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Uvezi još',
     'LBL_FINISHED' => 'Povratak na',
     'LBL_UNDO_LAST_IMPORT' => 'Poništi poslednji uvoz',
-    'LBL_LAST_IMPORTED'=>'Poslednji kreiran',
+    'LBL_LAST_IMPORTED' => 'Poslednji kreiran',
     'ERR_MULTIPLE_PARENTS' => 'Možete da imate definisan samo jedan matični ID broj',
     'LBL_DUPLICATES' => 'Nađeni duplikati',
     'LNK_DUPLICATE_LIST' => 'Preuzmi listu duplikata',
@@ -269,9 +268,10 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Sakri beleške',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Prikaži pregled kolona',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Sakrij pregled kolona',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Proverite da li ima duplikata koristeći operator:',
     'LBL_SAVE_MAPPING_AS' => 'Sačuvaj mapiranje',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Jednostruki navodnik (&#39;)',
-    'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Dvostruki navodnik (\")',
+    'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Dvostruki navodnik (\\")',
     'LBL_OPTION_ENCLOSURE_NONE' => 'Nijedna',
     'LBL_OPTION_ENCLOSURE_OTHER' => 'Ostalo:',
     'LBL_IMPORT_COMPLETE' => 'Uvoz završen',
@@ -291,7 +291,7 @@ $mod_strings = array (
     'LBL_MY_SAVED_HELP' => 'Sačuvana mapiranja određuju ranije korišćene kombinacije specifičnih izvora podataka i skup polja baze za mapiranje u polja u uvoznom fajlu.<br>Kliknite <b>Objavi</b> da bi uradili mapiranje dostupno drugom korisniku.<br>Kliknite <b>Poništenje objave</b> da bi mapiranje učinili nedostupno ostalim korisnicima.',
     'LBL_MY_SAVED_ADMIN_HELP' => 'Iskoristite ovu opciju da primenite prethodno određena podešavanja, uključujući svojstva uvoza, mapiranja i podešavanja provere duplikata, na ovaj uvoz.<br><br><br /><br />Kliknite na <b>Objavi</b> kako bi mapiranja bila dostupna drugim korisnicima<br><br />Kliknite na <b>Povuci</b> kako bi mapiranja prestala da budu dostupna drugim korisnicima<br><br />Kliknite na <b>Obriši</b> kako bi mapiranja bila obrisana za sve korisnike',
     'LBL_MY_PUBLISHED_HELP' => 'Objavljena mapiranja određuju ranije korišćene kombinacije specifičnih izvora podataka i skup polja baze za mapiranje u polja u uvoznom fajlu.',
-    'LBL_ENCLOSURE_HELP' => '<p><b>Granični karakter</b> je korišćen za razdvajanje sadržaja namenjenog za polje, uključujući bilo koje karaktere koji se koriste za razdvajanje .<br><br>Primer: Ako je separator zarez (,) a graničnik je dvostruki navodnik ("),<br><b>"Kupertino, Kalifornija"</b> je uvežen u polje u aplikaciji i prikazuje se <b>Kupertino, Kalifornija</b>.<br>Ako nema granični karakter, ili ako je graničnik neki drugi karakter,<br><b>"Kupertino, Kalifornija"</b> je uvežen u dva različita polja kao <b>"Kupertino</b> i <b>Kalifornija\"</b>.<br><br>Napomena: Uvozni fajl možda neće sadržati granični karakter.<br>Podrazumevani granični karakter za fajlove razdvojene zarezima ili tabulatorima kreirane u Excel-u je znak navoda.</p>',
+    'LBL_ENCLOSURE_HELP' => '<p><b>Granični karakter</b> je korišćen za razdvajanje sadržaja namenjenog za polje, uključujući bilo koje karaktere koji se koriste za razdvajanje .<br><br>Primer: Ako je separator zarez (,) a graničnik je dvostruki navodnik ("),<br><b>"Kupertino, Kalifornija"</b> je uvežen u polje u aplikaciji i prikazuje se <b>Kupertino, Kalifornija</b>.<br>Ako nema granični karakter, ili ako je graničnik neki drugi karakter,<br><b>"Kupertino, Kalifornija"</b> je uvežen u dva različita polja kao <b>"Kupertino</b> i <b>Kalifornija\\"</b>.<br><br>Napomena: Uvozni fajl možda neće sadržati granični karakter.<br>Podrazumevani granični karakter za fajlove razdvojene zarezima ili tabulatorima kreirane u Excel-u je znak navoda.</p>',
     'LBL_DELIMITER_COMMA_HELP' => 'Izaberite ovu opciju ako je karakter koji razdvaja polja u uvoznom fajlu <b>zarez</b>, ili ako je ekstenzija datoteke tipa .csv.',
     'LBL_DELIMITER_TAB_HELP' => 'Izaberite ovu opciju ako je karakter koji razdvaja polja u uvoznom fajlu <b>tabulator</b>, ili ako je ekstanzija fajla .txt.',
     'LBL_DELIMITER_CUSTOM_HELP' => 'Izaberite ovu opciju ako karakter koji odvaja polja pri uvozu nije ni zarez ni tabulator, i ukucajte karakter u susedno polje.',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Kako biste dodelili nove zapise timovima koji nisu vaši podrazumevani timovi, koristite kolonu sa podrazumevanim vrednostima da odaberete druge timove.',
     'LBL_SIGN_IN_HELP' => 'Da biste omogućili ovaj servis, molimo prijavite se na kartici za eksterne naloge u okviru korisničke strane sa podešavanjima.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Pokušaj obrade email adrese u BEAN-u koji to ne podržava.",
-);
+];

@@ -24,7 +24,13 @@
     padding-right:30px;
 }
 
+div[name="dupe_operator"] {
+    margin-top: 15px;
+}
 
+select[name="dupe_operator"] {
+  height: 28px;
+}
 -->
 </style>
 
@@ -75,6 +81,10 @@
         </td>
     </tr>
     </table>
+    <div name="dupe_operator">
+        <span><strong><label for="dupe_operator">{$MOD.LBL_DUPLICATE_CHECK_OPERATOR}</label></strong></span>
+        <span><select name="dupe_operator">{$DUPLICATE_OPERATORS_OPTIONS}</select></span>
+    </div>
      <div class="hr"></div>
     <span><strong><label for="save_map_as">{$MOD.LBL_SAVE_MAPPING_AS}</label></strong> {sugar_help text=$MOD.LBL_SAVE_MAPPING_HELP}</span>
             <span >

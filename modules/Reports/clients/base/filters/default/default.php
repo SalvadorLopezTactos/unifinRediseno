@@ -9,17 +9,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Reports']['base']['filter']['default'] = array(
+$viewdefs['Reports']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'module' => array(),
-        'name' => array(),
-        'report_type' => array(),
-        'assigned_user_name' => array(),
-        'team_name' => array(),
-        'tag' => array(),
-        'date_entered' => array(),
-        'date_modified' => array(),
-        'last_run_date' => array(),
-    ),
-);
+    'fields' => [
+        'module' => [],
+        'is_template' => [],
+        'name' => [],
+        'report_type' => [],
+        'assigned_user_name' => [],
+        'team_name' => [],
+        'tag' => [],
+        'date_entered' => [],
+        'date_modified' => [],
+        'last_run_date' => [],
+    ],
+];

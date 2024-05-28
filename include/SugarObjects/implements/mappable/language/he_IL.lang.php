@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = [
-    'LBL_GC_STATUS'=>'סטטוס קידוד גיאוגרפי',
+    'LBL_GC_STATUS' => 'סטטוס קידוד גיאוגרפי',
     'LBL_GC_LATITUDE' => 'קו רוחב של קידוד גיאוגרפי',
     'LBL_GC_LONGITUDE' => 'קו אורך של קידוד גיאוגרפי',
     'LBL_GC_STATUS_DETAIL' => 'פרטי סטטוס קידוד גיאוגרפי',

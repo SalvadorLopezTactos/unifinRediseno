@@ -20,7 +20,7 @@ class SugarUpgradeRebuildDefaultSchedulers extends UpgradeScript
     protected $stockSchedulers;
     protected $existingSchedulers;
 
-    protected $deprecatedSchedulers = array(); // add deprecated jobs here
+    protected $deprecatedSchedulers = []; // add deprecated jobs here
 
     public function run()
     {
@@ -28,15 +28,15 @@ class SugarUpgradeRebuildDefaultSchedulers extends UpgradeScript
         $scheduler = BeanFactory::newBean('Schedulers');
         $this->stockSchedulers = $scheduler->getDefaultSystemSchedulers();
 
-        $this->existingSchedulers = array();
+        $this->existingSchedulers = [];
         $query = new SugarQuery();
-        $query->select(array('id', 'job', 'name'));
+        $query->select(['id', 'job', 'name']);
         // to get all records, including deleted
-        foreach ($query->from(BeanFactory::newBean('Schedulers'), array('add_deleted' => false))->execute() as $data) {
-            $this->existingSchedulers[$data['job']] = array(
+        foreach ($query->from(BeanFactory::newBean('Schedulers'), ['add_deleted' => false])->execute() as $data) {
+            $this->existingSchedulers[$data['job']] = [
                 'id' => $data['id'],
-                'name' => $data['name']
-            );
+                'name' => $data['name'],
+            ];
         }
 
         $this->addMissingStockSchedulers();
@@ -64,7 +64,7 @@ class SugarUpgradeRebuildDefaultSchedulers extends UpgradeScript
         foreach ($this->existingSchedulers as $job => $existing) {
             if (!array_key_exists($job, $this->stockSchedulers) && isset($this->deprecatedSchedulers[$job])) {
                 $this->log("Deleting all deprecated-OOTB '{$job}' scheduler jobs");
-                $this->db->query("DELETE FROM schedulers WHERE job = " . $this->db->quoted($job));
+                $this->db->query('DELETE FROM schedulers WHERE job = ' . $this->db->quoted($job));
             }
         }
     }

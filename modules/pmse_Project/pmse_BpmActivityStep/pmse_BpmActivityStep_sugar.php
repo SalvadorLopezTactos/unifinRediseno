@@ -15,39 +15,40 @@
  * PLEASE DO NOT CHANGE THIS CLASS
  * PLACE ANY CUSTOMIZATIONS IN pmse_BpmActivityStep
  */
-class pmse_BpmActivityStep_sugar extends Basic {
-	var $new_schema = true;
-	var $module_dir = 'pmse_Project/pmse_BpmActivityStep';
+class pmse_BpmActivityStep_sugar extends Basic
+{
+    public $new_schema = true;
+    public $module_dir = 'pmse_Project/pmse_BpmActivityStep';
     public $module_name = 'pmse_BpmActivityStep';
-	var $object_name = 'pmse_BpmActivityStep';
-	var $table_name = 'pmse_bpm_activity_step';
-	var $importable = false;
-	var $disable_custom_fields = true;
-        var $id;
-		var $name;
-		var $date_entered;
-		var $date_modified;
-		var $modified_user_id;
-		var $modified_by_name;
-		var $created_by;
-		var $created_by_name;
-		var $description;
-		var $deleted;
-		var $created_by_link;
-		var $modified_user_link;
-		var $activities;
-		var $assigned_user_id;
-		var $assigned_user_name;
-		var $assigned_user_link;
-    var $pro_id;
-    var $act_step_type;
-    var $act_criteria;
-    var $act_step_form;
-    var $act_step_script;
+    public $object_name = 'pmse_BpmActivityStep';
+    public $table_name = 'pmse_bpm_activity_step';
+    public $importable = false;
+    public $disable_custom_fields = true;
+    public $id;
+    public $name;
+    public $date_entered;
+    public $date_modified;
+    public $modified_user_id;
+    public $modified_by_name;
+    public $created_by;
+    public $created_by_name;
+    public $description;
+    public $deleted;
+    public $created_by_link;
+    public $modified_user_link;
+    public $activities;
+    public $assigned_user_id;
+    public $assigned_user_name;
+    public $assigned_user_link;
+    public $pro_id;
+    public $act_step_type;
+    public $act_criteria;
+    public $act_step_form;
+    public $act_step_script;
 
 
-	public function __construct(){
-		parent::__construct();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 }
-

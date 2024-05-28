@@ -9,14 +9,14 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['DataArchiver']['base']['layout']['subpanels'] = array (
-    'components' => array (
-        array(
+$viewdefs['DataArchiver']['base']['layout']['subpanels'] = [
+    'components' => [
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_ARCHIVE_RUNS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'archive_runs',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

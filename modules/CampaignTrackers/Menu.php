@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  TODO To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,6 +17,7 @@
  ********************************************************************************/
 
 global $mod_strings;
-$module_menu  = Array();
-if(ACLController::checkAccess('Campaigns', 'list', true))$module_menu[]=	Array("index.php?module=Campaigns&action=index&return_module=Campaigns&return_action=index", $mod_strings['LNK_CAMPAIGN_LIST'],"Campaigns");
-?>
+$module_menu = [];
+if (ACLController::checkAccess('Campaigns', 'list', true)) {
+    $module_menu[] = ['index.php?module=Campaigns&action=index&return_module=Campaigns&return_action=index', $mod_strings['LNK_CAMPAIGN_LIST'], 'Campaigns'];
+}

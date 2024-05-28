@@ -12,11 +12,11 @@
  */
 
 $module_name = 'pmse_Project';
-$viewdefs[$module_name]['base']['layout']['designer'] = array(
+$viewdefs[$module_name]['base']['layout']['designer'] = [
     'uid' => '1234',
-    'components' => array(
-        array(
+    'components' => [
+        [
             'view' => 'designer',
-        ),
-    ),
-);
+        ],
+    ],
+];

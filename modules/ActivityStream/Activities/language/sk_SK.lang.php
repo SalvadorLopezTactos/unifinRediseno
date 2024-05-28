@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'TPL_ACTIVITY_CREATE' => 'Vytvorené {{{str "TPL_ACTIVITY_RECORD" "Activities" object}}}{{#if object.module}} {{getModuleName object.module}}{{/if}}.',
     'TPL_ACTIVITY_POST' => '{{{value}}}{{{str "TPL_ACTIVITY_ON" "Activities" this}}}',
     'TPL_ACTIVITY_UPDATE' => 'Aktualizované {{#if updateStr}}{{{updateStr}}} dňa {{#if object.module}}{{str "TPL_ACTIVITY_RECORD" "Activities" object}}{{else}}{{object.name}}{{/if}}.',
@@ -28,4 +28,4 @@ $mod_strings = array(
     'TPL_MORE_COMMENT' => '{{this}} ďalšie komentáre&hellip;',
     'TPL_MORE_COMMENTS' => '{{this}} ďalšie komentáre&hellip;',
     'TPL_SHOW_MORE_MODULE' => 'Viac záznamov...',
-);
+];

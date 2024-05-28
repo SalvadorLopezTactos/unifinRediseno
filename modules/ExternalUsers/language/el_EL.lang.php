@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => 'Υποθέσεις',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Ευκαιρίες',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Προσφορές',
-    'LBL_NOTES'=>'Σημειώσεις',
+    'LBL_NOTES' => 'Σημειώσεις',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => 'Πίνακας εργαλείων εγγραφών εξωτερικών χρηστών',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Χρονολόγιο εξωτερικού χρήστη',
 ];

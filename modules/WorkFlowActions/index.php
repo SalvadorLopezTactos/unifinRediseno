@@ -10,8 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
- * Description:  
+ * Description:
  ********************************************************************************/
 
-SugarApplication::redirect("index.php?action=index&module=WorkFlow");
+SugarApplication::redirect('index.php?action=index&module=WorkFlow');

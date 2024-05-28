@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => '處理程序定義',
-  'LBL_MODULE_TITLE' => '流程定義',
-  'LBL_MODULE_NAME_SINGULAR' => '流程定義',
+$mod_strings = [
+    'LBL_MODULE_NAME' => '處理程序定義',
+    'LBL_MODULE_TITLE' => '流程定義',
+    'LBL_MODULE_NAME_SINGULAR' => '流程定義',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => '流程定義焦點抽屜',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => '流程定義焦點抽屜',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => '流程定義儀表板',
-  'LNK_LIST' => '檢視處理程序定義',
-  'LNK_NEW_PMSE_PROJECT' => '建立處理程序定義',
-  'LNK_IMPORT_PMSE_PROJECT' => '匯入處理程序定義',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => '流程定義儀表板',
+    'LNK_LIST' => '檢視處理程序定義',
+    'LNK_NEW_PMSE_PROJECT' => '建立處理程序定義',
+    'LNK_IMPORT_PMSE_PROJECT' => '匯入處理程序定義',
 
-  'LBL_PRJ_STATUS' => '狀態',
-  'LBL_PRJ_MODULE' => '目標模組',
-  'LBL_PRJ_RUN_ORDER' => '運行順序',
-  'LBL_PMSE_BUTTON_SAVE' => '儲存',
-  'LBL_PMSE_BUTTON_CANCEL' => '取消',
-  'LBL_PMSE_BUTTON_YES' => '是',
-  'LBL_PMSE_BUTTON_NO' => '否',
-  'LBL_PMSE_BUTTON_OK' => '確定',
+    'LBL_PRJ_STATUS' => '狀態',
+    'LBL_PRJ_MODULE' => '目標模組',
+    'LBL_PRJ_RUN_ORDER' => '運行順序',
+    'LBL_PMSE_BUTTON_SAVE' => '儲存',
+    'LBL_PMSE_BUTTON_CANCEL' => '取消',
+    'LBL_PMSE_BUTTON_YES' => '是',
+    'LBL_PMSE_BUTTON_NO' => '否',
+    'LBL_PMSE_BUTTON_OK' => '確定',
     'LBL_PMSE_FORM_ERROR' => '繼續前請修正任何錯誤。',
 
     'LBL_PMSE_LABEL_DESIGN' => '設計',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => '活動',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => '動作',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => '潛在客戶開始事件',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => '商機開始事件' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => '商機開始事件',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => '文件開始事件',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => '開始事件',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => '等候事件',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => '商務規則',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => '商務規則行動',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => '電子郵件範本',
-);
+];

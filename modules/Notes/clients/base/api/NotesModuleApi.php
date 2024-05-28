@@ -56,7 +56,7 @@ class NotesModuleApi extends ModuleApi
         $api->action = 'save';
 
         // Users can be created only in cloud console for IDM mode.
-        if (in_array('Notes', $this->idmModeDisabledModules)
+        if (safeInArray('Notes', $this->idmModeDisabledModules)
             && $this->isIDMModeEnabled()
             && empty($args['skip_idm_mode_restrictions'])) {
             throw new SugarApiExceptionNotAuthorized();

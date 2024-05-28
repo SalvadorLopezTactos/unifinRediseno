@@ -20,7 +20,7 @@ if (!defined('sugarEntry')) {
  * Traverses the Arithmetic directory and builds the cache of
  * function to object mappings.
  */
-$GLOBALS['ignore_files'] = array(
+$GLOBALS['ignore_files'] = [
     'AbstractExpression.php',
     'EnumExpression.php',
     'NumericExpression.php',
@@ -34,7 +34,7 @@ $GLOBALS['ignore_files'] = array(
     'AbstractAction.php',
     'ActionFactory.php',
     'DefineRelateExpression.php',
-);
+];
 
 
 function recursiveParse($dir, $silent = false)
@@ -49,18 +49,18 @@ function recursiveParse($dir, $silent = false)
     }
 
     // First get a list of all the files in this directory.
-    $entries = array();
+    $entries = [];
     while ($entry = readdir($directory)) {
         $entries[] = $entry;
     }
     closedir($directory);
 
     if ($silent === false) {
-        echo "<ul>";
+        echo '<ul>';
     }
 
-    $contents = "";
-    $js_contents = "";
+    $contents = '';
+    $js_contents = '';
 
     foreach ($entries as $entry) {
         // skip current and parent
@@ -70,10 +70,10 @@ function recursiveParse($dir, $silent = false)
 
         // parse the sub-directories
         if (!is_file($entry)) {
-            $cont = recursiveParse($dir . "/" . $entry, $silent);
+            $cont = recursiveParse($dir . '/' . $entry, $silent);
             if ($cont !== null && is_array($cont)) {
-                $contents .= $cont["function_map"];
-                $js_contents .= $cont["javascript"];
+                $contents .= $cont['function_map'];
+                $js_contents .= $cont['javascript'];
             }
         }
 
@@ -83,7 +83,7 @@ function recursiveParse($dir, $silent = false)
         }
 
         // ignore files
-        if (in_array($entry."", $GLOBALS['ignore_files'])) {
+        if (safeInArray($entry . '', $GLOBALS['ignore_files'])) {
             if (!$silent) {
                 echo "<i>Ignoring $entry</i><br>";
             }
@@ -91,12 +91,12 @@ function recursiveParse($dir, $silent = false)
         }
 
         // now require this Expression file
-        require_once $dir . "/" . $entry;
-        $entry = str_replace(".php", "", $entry);
-        $js_code     = call_user_func(array($entry, "getJSEvaluate"));
-        $param_count = call_user_func(array($entry, "getParamCount"));
-        $op_name     = call_user_func(array($entry, "getOperationName"));
-        $types          = call_user_func(array($entry, "getParameterTypes"));
+        require_once $dir . '/' . $entry;
+        $entry = str_replace('.php', '', $entry);
+        $js_code = call_user_func([$entry, 'getJSEvaluate']);
+        $param_count = call_user_func([$entry, 'getParamCount']);
+        $op_name = call_user_func([$entry, 'getOperationName']);
+        $types = call_user_func([$entry, 'getParameterTypes']);
 
         if (empty($op_name)) {
             if ($silent === false) {
@@ -105,11 +105,11 @@ function recursiveParse($dir, $silent = false)
             continue;
         }
         if (!is_array($op_name)) {
-            $op_name = array($op_name);
+            $op_name = [$op_name];
         }
 
         $parent_class = get_parent_class($entry);
-        $parent_types = call_user_func(array($parent_class, "getParameterTypes"));
+        $parent_types = call_user_func([$parent_class, 'getParameterTypes']);
 
         //This is a workaround for out-of-order filesystem loading.  On some systems, things that extend base
         //expressions load before what they extend have loaded.
@@ -145,26 +145,25 @@ EOQ;
         return [
 EOQ;
 
-                $types_code = "";
+                $types_code = '';
                 foreach ($types as $type) {
                     $types_code .= "'$type',";
                 }
-                $js_contents .= substr($types_code, 0, strlen($types_code)-1);
+                $js_contents .= substr($types_code, 0, strlen($types_code) - 1);
                 $js_contents .= "];\n";
 
 
-$js_contents.= <<<EOQ
+                $js_contents .= <<<EOQ
                 }
 
 EOQ;
-
             }
 
             if (!is_array($types) && $parent_types != $types) {
                 if ($silent === false) {
-                    echo "type mismatch<br>";
+                    echo 'type mismatch<br>';
                 }
-$js_contents .= <<<EOQ
+                $js_contents .= <<<EOQ
     ,getParameterTypes: function() {
         return '$types';
     }
@@ -173,8 +172,8 @@ EOQ;
             }
 
 
-$js_contents .= "});\n\n";
-}
+            $js_contents .= "});\n\n";
+        }
         foreach ($op_name as $alias) {
             //echo the entry
             if ($silent === false) {
@@ -190,45 +189,45 @@ EOQ;
         }
     }
     if ($silent === false) {
-        echo "</ul>";
+        echo '</ul>';
     }
 
-    return array(
-        "function_map" => $contents,
-        "javascript" => $js_contents,
-    );
+    return [
+        'function_map' => $contents,
+        'javascript' => $js_contents,
+    ];
 }
 
 
 function buildCache($outputDir, $silent = false, $minify = true)
 {
-// the new contents of the functionmap.php file
-    $contents = recursiveParse("include/Expressions/Expression", $silent);
+    // the new contents of the functionmap.php file
+    $contents = recursiveParse('include/Expressions/Expression', $silent);
 
-    if (is_dir("custom/include/Expressions/Expression")) {
-        $customContents = recursiveParse("custom/include/Expressions/Expression", $silent);
-        $contents["function_map"] .= $customContents["function_map"];
-        $contents["javascript"] .= $customContents["javascript"];
+    if (is_dir('custom/include/Expressions/Expression')) {
+        $customContents = recursiveParse('custom/include/Expressions/Expression', $silent);
+        $contents['function_map'] .= $customContents['function_map'];
+        $contents['javascript'] .= $customContents['javascript'];
     }
 
-//Parse Actions into the cached javascript.
-    require_once "include/Expressions/Actions/ActionFactory.php";
-    $contents["javascript"] .= ActionFactory::buildActionCache($silent);
+    //Parse Actions into the cached javascript.
+    require_once 'include/Expressions/Actions/ActionFactory.php';
+    $contents['javascript'] .= ActionFactory::buildActionCache($silent);
 
 
     $new_contents = "<?php\n\$FUNCTION_MAP = array(\n";
-    $new_contents .= $contents["function_map"];
+    $new_contents .= $contents['function_map'];
     $new_contents .= ");\n";
 
 
-    create_cache_directory("Expressions/functionmap.php");
+    create_cache_directory('Expressions/functionmap.php');
 
-    $fmap = sugar_cached("Expressions/functionmap.php");
-// now write the new contents to functionmap.php
+    $fmap = sugar_cached('Expressions/functionmap.php');
+    // now write the new contents to functionmap.php
     sugar_file_put_contents_atomic($fmap, $new_contents);
 
-// write the functions cache file
-    $cache_contents = $contents["javascript"];
+    // write the functions cache file
+    $cache_contents = $contents['javascript'];
 
     include $fmap;
 
@@ -266,14 +265,14 @@ EOQ;
     $cache_contents = substr($cache_contents, 0, -1);
     $cache_contents .= "};\n";
 
-    create_cache_directory("Expressions/functions_cache_debug.js");
-    sugar_file_put_contents_atomic(sugar_cached("Expressions/functions_cache_debug.js"), $cache_contents);
+    create_cache_directory('Expressions/functions_cache_debug.js');
+    sugar_file_put_contents_atomic(sugar_cached('Expressions/functions_cache_debug.js'), $cache_contents);
 
 
     sugar_file_put_contents_atomic("$outputDir/functions_cache_debug.js", $cache_contents);
 
     if ($minify) {
-        require_once "jssource/minify_utils.php";
+        require_once 'jssource/minify_utils.php';
         $minifyUtils = new SugarMinifyUtils();
         $minifyUtils->CompressFiles(
             "$outputDir/functions_cache_debug.js",
@@ -289,6 +288,6 @@ EOQ;
 
 if (!isset($exec) || $exec) {
     $silent = $GLOBALS['updateSilent'] ?? true;
-    create_cache_directory("Expressions/functions_cache.js");
-    buildCache(sugar_cached("Expressions"), $silent, true);
+    create_cache_directory('Expressions/functions_cache.js');
+    buildCache(sugar_cached('Expressions'), $silent, true);
 }

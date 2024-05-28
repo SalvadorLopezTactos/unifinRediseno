@@ -32,7 +32,7 @@ class PMSEElementException extends Exception
     }
 
     // custom string representation of object
-    public function __toString()
+    public function __toString(): string
     {
         return self::class . ": [{$this->code}]: {$this->message}\n";
     }

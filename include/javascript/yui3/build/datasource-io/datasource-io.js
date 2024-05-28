@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('datasource-io', function (Y, NAME) {
 
 /**
@@ -205,4 +198,4 @@ Y.extend(DSIO, Y.DataSource.Local, {
 Y.DataSource.IO = DSIO;
 
 
-}, '3.15.0', {"requires": ["datasource-local", "io-base"]});
+}, '3.18.1', {"requires": ["datasource-local", "io-base"]});

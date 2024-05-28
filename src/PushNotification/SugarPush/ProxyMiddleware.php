@@ -24,7 +24,7 @@ class ProxyMiddleware
      *
      * @return \Closure
      */
-    public function __invoke(callable $handler) : \Closure
+    public function __invoke(callable $handler): \Closure
     {
         return function (RequestInterface $request, array $options) use ($handler) {
             $url = $this->getHttpClientProxy();
@@ -42,7 +42,7 @@ class ProxyMiddleware
      *
      * @return string
      */
-    private function getHttpClientProxy() : string
+    private function getHttpClientProxy(): string
     {
         $url = '';
 

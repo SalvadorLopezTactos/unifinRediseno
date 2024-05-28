@@ -53,17 +53,19 @@ class ParserDropDown extends ModuleBuilderParser
             $module = $mb->getPackageModule($params['view_package'], $params['view_module']);
             $this->synchMBDropDown($dropdown_name, $dropdown, $selected_lang, $module);
             //Can't use synch on selected lang as we want to overwrite values, not just keys
-            $module->mblanguage->appListStrings[$selected_lang.'.lang.php'][$dropdown_name] = $dropdown;
+            $module->mblanguage->appListStrings[$selected_lang . '.lang.php'][$dropdown_name] = $dropdown;
             $module->mblanguage->save($module->key_name, false, true); // tyoung - key is required parameter as of
         } else {
             $contents = return_custom_app_list_strings_file_contents($selected_lang);
             $my_list_strings = return_app_list_strings_language($selected_lang);
-            if ($selected_lang == $GLOBALS['current_language']){
-               $GLOBALS['app_list_strings'][$dropdown_name] = $dropdown;
+            if ($selected_lang == $GLOBALS['current_language']) {
+                $GLOBALS['app_list_strings'][$dropdown_name] = $dropdown;
             }
             //write to contents
-            $contents = str_replace("?>", '', $contents);
-            if (empty($contents)) $contents = "<?php";
+            $contents = str_replace('?>', '', $contents);
+            if (empty($contents)) {
+                $contents = '<?php';
+            }
 
             // Skip saveExemptDropdowns on upgrades
             if (empty($params['skipSaveExemptDropdowns'])) {
@@ -73,7 +75,7 @@ class ParserDropDown extends ModuleBuilderParser
             //add new drop down to the bottom
             if (!empty($params['use_push'])) {
                 //this is for handling moduleList and such where nothing should be deleted or anything but they can be renamed
-                $app_list_strings = array();
+                $app_list_strings = [];
                 $filePath = $this->getExtensionFilePath($dropdown_name, $selected_lang);
                 //Include the original extension to ensure any values sourced from it are kept.
                 if (sugar_is_file($filePath)) {
@@ -90,11 +92,11 @@ class ParserDropDown extends ModuleBuilderParser
                 //Now that we have all the values, save the overrides to the extension
                 if (!empty($app_list_strings[$dropdown_name])) {
                     $contents = "<?php\n //created: " . date('Y-m-d H:i:s') . "\n";
-                    foreach($app_list_strings[$dropdown_name] as $key => $value) {
+                    foreach ($app_list_strings[$dropdown_name] as $key => $value) {
                         $edropdownName = var_export($dropdown_name, true);
                         $ekey = var_export($key, true);
                         $contents .= "\n\$app_list_strings[$edropdownName][$ekey]="
-                            . var_export($value, true) . ";";
+                            . var_export($value, true) . ';';
                     }
                     $this->saveContents($dropdown_name, $contents, $selected_lang);
                 }
@@ -213,7 +215,7 @@ class ParserDropDown extends ModuleBuilderParser
 
     /**
      * function synchDropDown
-     * 	Ensures that the set of dropdown keys is consistant accross all languages.
+     *  Ensures that the set of dropdown keys is consistant accross all languages.
      *
      * @param string $dropdown_name The name of the dropdown to be synched
      * @param array $dropdown The dropdown currently being saved
@@ -221,13 +223,13 @@ class ParserDropDown extends ModuleBuilderParser
      */
     public function synchDropDown($dropdown_name, $dropdown, $selected_lang)
     {
-        $allLanguages =  get_languages();
+        $allLanguages = get_languages();
         foreach ($allLanguages as $lang => $langName) {
             if ($lang != $selected_lang) {
                 $listStrings = return_app_list_strings_language($lang, false);
-                $langDropDown = array();
+                $langDropDown = [];
                 if (isset($listStrings[$dropdown_name]) && is_array($listStrings[$dropdown_name])) {
-                     $langDropDown = $this->synchDDKeys($dropdown, $listStrings[$dropdown_name]);
+                    $langDropDown = $this->synchDDKeys($dropdown, $listStrings[$dropdown_name]);
                 } else {
                     //if the dropdown does not exist in the language, justt use what we have.
                     $langDropDown = $dropdown;
@@ -252,7 +254,7 @@ class ParserDropDown extends ModuleBuilderParser
 
     /**
      * function synchMBDropDown
-     * 	Ensures that the set of dropdown keys is consistant accross all languages in a ModuleBuilder Module
+     *  Ensures that the set of dropdown keys is consistant accross all languages in a ModuleBuilder Module
      *
      * @param $dropdown_name The name of the dropdown to be synched
      * @param $dropdown array The dropdown currently being saved
@@ -264,7 +266,7 @@ class ParserDropDown extends ModuleBuilderParser
         $selected_lang = $selected_lang . '.lang.php';
         foreach ($module->mblanguage->appListStrings as $lang => $listStrings) {
             if ($lang != $selected_lang) {
-                $langDropDown = array();
+                $langDropDown = [];
                 if (isset($listStrings[$dropdown_name]) && is_array($listStrings[$dropdown_name])) {
                     $langDropDown = $this->synchDDKeys($dropdown, $listStrings[$dropdown_name]);
                 } else {
@@ -279,13 +281,13 @@ class ParserDropDown extends ModuleBuilderParser
     private function synchDDKeys($dom, $sub)
     {
         //check for extra keys
-        foreach ($sub as $key=>$value) {
+        foreach ($sub as $key => $value) {
             if (!isset($dom[$key])) {
-                unset ($sub[$key]);
+                unset($sub[$key]);
             }
         }
         //check for missing keys
-        foreach ($dom as $key=>$value) {
+        foreach ($dom as $key => $value) {
             if (!isset($sub[$key])) {
                 $sub[$key] = $value;
             }
@@ -297,7 +299,7 @@ class ParserDropDown extends ModuleBuilderParser
     {
         // Change the regex to NOT look for GLOBALS anymore
         return '/\s*\$app_list_strings\s*\[\s*\''
-             . $dropdown_name.'\'\s*\]\s*=\s*array\s*\([^\)]*\)\s*;\s*/ism';
+            . $dropdown_name . '\'\s*\]\s*=\s*array\s*\([^\)]*\)\s*;\s*/ism';
     }
 
     /**
@@ -311,11 +313,13 @@ class ParserDropDown extends ModuleBuilderParser
     public function getNewCustomContents($dropdown_name, $dropdown, $lang)
     {
         $contents = return_custom_app_list_strings_file_contents($lang);
-        $contents = str_replace("?>", '', $contents);
-        if (empty($contents)) $contents = "<?php";
+        $contents = str_replace('?>', '', $contents);
+        if (empty($contents)) {
+            $contents = '<?php';
+        }
         $contents = preg_replace($this->getPatternMatch($dropdown_name), "\n\n", $contents);
         $edropdownName = var_export($dropdown_name, true);
-        $contents .= "\n\n\$app_list_strings[$edropdownName]=" . var_export($dropdown, true) . ";";
+        $contents .= "\n\n\$app_list_strings[$edropdownName]=" . var_export($dropdown, true) . ';';
         return $contents;
     }
 
@@ -330,7 +334,7 @@ class ParserDropDown extends ModuleBuilderParser
     {
         $edropdownName = var_export($dropdown_name, true);
         $contents = "<?php\n // created: " . date('Y-m-d H:i:s') . "\n";
-        $contents .= "\n\$app_list_strings[$edropdownName]=" . var_export($dropdown, true) . ";";
+        $contents .= "\n\$app_list_strings[$edropdownName]=" . var_export($dropdown, true) . ';';
 
         return $contents;
     }

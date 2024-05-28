@@ -9,70 +9,70 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Emails']['base']['view']['compose-email'] = array(
+$viewdefs['Emails']['base']['view']['compose-email'] = [
     'template' => 'record',
-    'buttons' => array(
-        array(
+    'buttons' => [
+        [
             'name' => 'cancel_button',
             'type' => 'button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
-            'events' => array(
+            'events' => [
                 'click' => 'button:cancel_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'save_button',
             'type' => 'button',
             'label' => 'LBL_SAVE_AS_DRAFT_BUTTON_LABEL',
-            'events' => array(
+            'events' => [
                 'click' => 'button:save_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'send_button',
             'type' => 'button',
             'label' => 'LBL_SEND_BUTTON_LABEL',
             'primary' => true,
-            'events' => array(
+            'events' => [
                 'click' => 'button:send_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-    'panels' => array(
-        array(
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_body',
             'label' => 'LBL_PANEL_2',
             'columns' => 1,
             'labels' => true,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'recipients',
                     'type' => 'recipients-fieldset',
                     'css_class' => 'email-recipients',
                     'dismiss_label' => true,
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'outbound_email_id',
                             'type' => 'outbound-email',
                             'label' => 'LBL_FROM',
                             'span' => 12,
                             'css_class' => 'inherit-width',
                             'searchBarThreshold' => -1,
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'to_collection',
                             'type' => 'email-recipients',
                             'label' => 'LBL_TO_ADDRS',
                             'span' => 12,
                             'max_num' => -1,
-                            'fields' => array(
+                            'fields' => [
                                 'email_address_id',
                                 'email_address',
                                 'parent_type',
@@ -80,15 +80,15 @@ $viewdefs['Emails']['base']['view']['compose-email'] = array(
                                 'parent_name',
                                 'invalid_email',
                                 'opt_out',
-                            ),
-                        ),
-                        array(
+                            ],
+                        ],
+                        [
                             'name' => 'cc_collection',
                             'type' => 'email-recipients',
                             'label' => 'LBL_CC',
                             'span' => 12,
                             'max_num' => -1,
-                            'fields' => array(
+                            'fields' => [
                                 'email_address_id',
                                 'email_address',
                                 'parent_type',
@@ -96,15 +96,15 @@ $viewdefs['Emails']['base']['view']['compose-email'] = array(
                                 'parent_name',
                                 'invalid_email',
                                 'opt_out',
-                            ),
-                        ),
-                        array(
+                            ],
+                        ],
+                        [
                             'name' => 'bcc_collection',
                             'type' => 'email-recipients',
                             'label' => 'LBL_BCC',
                             'span' => 12,
                             'max_num' => -1,
-                            'fields' => array(
+                            'fields' => [
                                 'email_address_id',
                                 'email_address',
                                 'parent_type',
@@ -112,22 +112,22 @@ $viewdefs['Emails']['base']['view']['compose-email'] = array(
                                 'parent_name',
                                 'invalid_email',
                                 'opt_out',
-                            ),
-                        ),
-                    ),
-                ),
-                array(
+                            ],
+                        ],
+                    ],
+                ],
+                [
                     'name' => 'name',
                     'label' => 'LBL_SUBJECT',
                     'dismiss_label' => true,
                     'placeholder' => 'LBL_SUBJECT',
                     'span' => 12,
                     'css_class' => 'ellipsis_inline',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'state',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'description_html',
                     'dismiss_label' => true,
                     'span' => 12,
@@ -139,14 +139,14 @@ $viewdefs['Emails']['base']['view']['compose-email'] = array(
                             'superscript | charmap | table | hr removeformat | insertdatetime | ' .
                             'sugarattachment sugarsignature sugartemplate',
                     ],
-                ),
-                array(
+                ],
+                [
                     'name' => 'attachments_collection',
                     'type' => 'email-attachments',
                     'dismiss_label' => true,
                     'span' => 12,
                     'max_num' => -1,
-                    'fields' => array(
+                    'fields' => [
                         'name',
                         'filename',
                         'file_size',
@@ -154,31 +154,31 @@ $viewdefs['Emails']['base']['view']['compose-email'] = array(
                         'file_mime_type',
                         'file_ext',
                         'upload_id',
-                    ),
-                ),
-            ),
-        ),
-        array(
+                    ],
+                ],
+            ],
+        ],
+        [
             'name' => 'panel_hidden',
             'hide' => true,
             'columns' => 1,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'type' => 'teamset',
                     'name' => 'team_name',
                     'span' => 12,
-                ),
-                array(
+                ],
+                [
                     'name' => 'parent_name',
                     'span' => 12,
-                ),
-                array(
+                ],
+                [
                     'name' => 'tag',
                     'span' => '12',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

@@ -130,13 +130,13 @@ final class ExternalResource
         }
         unset($base['fragment']);
         unset($base['query']);
-        if (substr($url, 0, 2) === "//") {
-            return self::buildUrl(array(
+        if (substr($url, 0, 2) === '//') {
+            return self::buildUrl([
                 'scheme' => $base['scheme'],
                 'path' => substr($url, 2),
-            ));
+            ]);
         }
-        if (strpos($url, "/") === 0) {
+        if (strpos($url, '/') === 0) {
             $base['path'] = $url;
         } else {
             $path = explode('/', $base['path']);
@@ -147,7 +147,7 @@ final class ExternalResource
                 if ($segment == '.') {
                     continue;
                 }
-                if ($segment === '..' && $path && $path[count($path) - 1] !== '..') {
+                if ($segment === '..' && $path && $path[safeCount($path) - 1] !== '..') {
                     array_pop($path);
                 } else {
                     $path[] = $segment;
@@ -156,8 +156,8 @@ final class ExternalResource
             if ($end === '.') {
                 $path[] = '';
             } else {
-                if ($end === '..' && $path && $path[count($path) - 1] !== '..') {
-                    $path[count($path) - 1] = '';
+                if ($end === '..' && $path && $path[safeCount($path) - 1] !== '..') {
+                    $path[safeCount($path) - 1] = '';
                 } else {
                     $path[] = $end;
                 }
@@ -174,7 +174,7 @@ final class ExternalResource
      */
     private static function buildUrl(array $parts, string $ip = null): string
     {
-        $scheme  = isset($parts['scheme']) ? $parts['scheme'] . '://' : '';
+        $scheme = isset($parts['scheme']) ? $parts['scheme'] . '://' : '';
 
         if ($ip === null) {
             $host = $parts['host'] ?? '';
@@ -184,13 +184,13 @@ final class ExternalResource
 
         $port = isset($parts['port']) ? ':' . $parts['port'] : '';
         $user = $parts['user'] ?? '';
-        $pass = isset($parts['pass']) ? ':' . $parts['pass']  : '';
+        $pass = isset($parts['pass']) ? ':' . $parts['pass'] : '';
         $pass = ($user || $pass) ? "$pass@" : '';
         $path = $parts['path'] ?? '';
-        $query    = isset($parts['query']) ? '?' . $parts['query'] : '';
+        $query = isset($parts['query']) ? '?' . $parts['query'] : '';
         $fragment = isset($parts['fragment']) ? '#' . $parts['fragment'] : '';
 
-        return $scheme.$user.$pass.$host.$port.$path.$query.$fragment;
+        return $scheme . $user . $pass . $host . $port . $path . $query . $fragment;
     }
 
     /**

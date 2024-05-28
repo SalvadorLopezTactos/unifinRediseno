@@ -16,7 +16,7 @@ $subpanel_layout = [
         [
             'widget_class' => 'SubPanelTopSelectButton',
             'popup_module' => 'ProspectLists',
-            'create' => "true",
+            'create' => 'true',
             'mode' => 'MultiSelect',
         ],
     ],

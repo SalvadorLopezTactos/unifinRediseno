@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '웹 논리 후크',
     'LBL_MODULE_NAME_SINGULAR' => '상품 범주',
     'LBL_MODULE_TITLE' => '상품 범주:홈',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => '방식 요청',
     'LBL_TRIGGER_EVENT' => '이벤트 시작하기',
     'LBL_URL' => 'URL',
-);
+];

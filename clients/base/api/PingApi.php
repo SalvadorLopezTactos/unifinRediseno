@@ -11,63 +11,66 @@
  */
 
 // A simple example class
-class PingApi extends SugarApi {
-    public function registerApiRest() {
-        return array(
-            'ping' => array(
+class PingApi extends SugarApi
+{
+    public function registerApiRest()
+    {
+        return [
+            'ping' => [
                 'reqType' => 'GET',
-                'path' => array('ping'),
-                'pathVars' => array(''),
+                'path' => ['ping'],
+                'pathVars' => [''],
                 'method' => 'ping',
                 'shortHelp' => 'An example API only responds with pong',
                 'longHelp' => 'include/api/help/ping_get_help.html',
                 'ignoreSystemStatusError' => true,
-            ),
-            'pingWithTime' => array(
+            ],
+            'pingWithTime' => [
                 'reqType' => 'GET',
-                'path' => array('ping', 'whattimeisit'),
-                'pathVars' => array('', 'sub_method'),
+                'path' => ['ping', 'whattimeisit'],
+                'pathVars' => ['', 'sub_method'],
                 'method' => 'ping',
                 'shortHelp' => 'An example API only responds with the current time in server format.',
                 'longHelp' => 'include/api/help/ping_whattimeisit_get_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
-    public function registerApiSoap() {
-        return array(
-            'functions' => array(
-                'ping' => array(
+    public function registerApiSoap()
+    {
+        return [
+            'functions' => [
+                'ping' => [
                     'methodName' => 'ping',
-                    'requestVars' => array(
-                    ),
-                    'returnVars' => array(
+                    'requestVars' => [
+                    ],
+                    'returnVars' => [
                         'xsd:string',
-                    ),
+                    ],
                     'method' => 'ping',
                     'shortHelp' => 'Sample/test API that only responds with pong',
-                ),
-                'pingWithTime' => array(
+                ],
+                'pingWithTime' => [
                     'methodName' => 'pingTime',
-                    'requestVars' => array(
-                    ),
-                    'extraVars' => array(
+                    'requestVars' => [
+                    ],
+                    'extraVars' => [
                         'sub_method' => 'whattimeisit',
-                    ),
-                    'returnVars' => array(
+                    ],
+                    'returnVars' => [
                         'xsd:string',
-                    ),
+                    ],
                     'method' => 'ping',
                     'shortHelp' => 'Sample/test API that responds with the curernt date/time',
-                ),
-            ),
-            'types' => array(),
-        );
+                ],
+            ],
+            'types' => [],
+        ];
     }
 
     public function ping(ServiceBase $api, array $args)
     {
-        if ( isset($args['sub_method']) && $args['sub_method'] == 'whattimeisit' ) {
+        if (isset($args['sub_method']) && $args['sub_method'] == 'whattimeisit') {
             $dt = new SugarDateTime();
             $td = new TimeDate();
             return $td->asIso($dt);
@@ -76,5 +79,4 @@ class PingApi extends SugarApi {
         // Just a normal ping request
         return 'pong';
     }
-
 }

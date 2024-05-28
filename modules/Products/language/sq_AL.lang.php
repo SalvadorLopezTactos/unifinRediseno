@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Paneli i listës së artikujve të linjës së kuotuar',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Paneli i regjistrit të artikujve të linjës së kuotuar',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te artikujt e kuotuar të linjës',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e artikullit të kuotuar',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Rreshti i kuotuar i kampanjës',
     'LBL_MODULE_NAME' => 'Artikujt e rreshtave të kuotuar',
@@ -177,4 +178,4 @@ Për të krijuar një {{module_name}}:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Artikull i ri në rreshtin e kuotuar)',
     'LBL_DISCOUNT_PERCENT' => '% për qind',
     'LBL_DISCOUNT_TYPE' => 'Lloji i zbritjes',
-);
+];

@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Per aggiungere un utente a questo gruppo deve essere specificato il numero del record.',
     'ERR_DUP_NAME' => 'Il nome del gruppo esiste già, si prega di sceglierne un altro.',
     'ERR_DELETE_RECORD' => 'Per eliminare il gruppo deve essere specificato il numero del record.',
@@ -70,13 +70,13 @@ La disabilitazione delle autorizzazioni basate sul gruppo per un modulo annuller
  Consigliamo anche di utilizzare lo strumento Quick Repair e Rebuild per cancellare la cache del sistema dopo aver disabilitato le autorizzazioni
  basate sul gruppo per tutti i moduli.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Avvertenza:</strong> la disabilitazione delle autorizzazioni basate sul gruppo per un modulo annullerà tutti i dati associati ad esse per quel modulo, comprese le Definizioni dei processi o i Processi che utilizzano la funzione. Sono compresi i Ruoli che utilizzano l'opzione "Proprietario e gruppo selezionato" per quel modulo e tutti i dati relativi alle autorizzazioni basate sul gruppo 
 per i record di quel modulo. Consigliamo anche di utilizzare lo strumento Quick Repair and Rebuild per cancellare la cache 
 del sistema dopo aver disabilitato le autorizzazioni basate sul gruppo per tutti i moduli.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 La disabilitazione delle autorizzazioni basate sul gruppo per un modulo annullerà tutti i dati associati ad esse per quel 
 modulo, comprese le Definizioni dei processi o i Processi che utilizzano la funzione. Sono compresi i Ruoli che utilizzano l'opzione "Proprietario e gruppo selezionato" per quel modulo e tutti i dati relativi alle autorizzazioni basate sul gruppo per i record di quel modulo.
@@ -84,7 +84,7 @@ modulo, comprese le Definizioni dei processi o i Processi che utilizzano la funz
 basate sul gruppo per tutti i moduli. Se non si ha l'accesso all'utilizzo di Quick Repair and Rebuild, contattare un amministratore con
  accesso al menu Ripara.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Avvertenza:</strong> la disabilitazione delle autorizzazioni basate sul gruppo per un modulo annullerà tutti i dati associati ad esse per quel modulo, comprese le Definizioni dei processi o i Processi che utilizzano la funzione. Sono compresi i Ruoli che utilizzano l'opzione "Proprietario e gruppo selezionato" per quel modulo e tutti i dati relativi alle autorizzazioni basate sul gruppo per i record di quel modulo.
  Consigliamo anche di utilizzare lo strumento Quick Repair and Rebuild per cancellare la cache del sistema dopo
@@ -92,5 +92,5 @@ aver disabilitato le autorizzazioni
 basate sul gruppo per tutti i moduli. Se non si ha l'accesso all'utilizzo di Quick Repair and Rebuild, contattare 
 un amministratore con accesso al menu Ripara.
 STR
-,
-);
+    ,
+];

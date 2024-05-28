@@ -11,7 +11,6 @@
  */
 
 
-
 use Sugarcrm\Sugarcrm\ProcessManager;
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 
@@ -298,7 +297,7 @@ class PMSEElement implements PMSERunnable
      * @return array
      * @codeCoverageIgnore
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         $result = $this->prepareResponse($flowData, 'ROUTE', 'CREATE');
         return $result;
@@ -321,9 +320,9 @@ class PMSEElement implements PMSERunnable
      * @param type $dataId
      * @return array
      */
-    public function prepareResponse($data = array(), $routeAction = 'ROUTE', $flowAction = 'CREATE', $filters = array())
+    public function prepareResponse($data = [], $routeAction = 'ROUTE', $flowAction = 'CREATE', $filters = [])
     {
-        $response = array();
+        $response = [];
         $response['route_action'] = $routeAction;
         if ($flowAction == 'CREATE') {
             $response['flow_action'] = $this->createFlow ? 'CREATE' : 'UPDATE';
@@ -354,31 +353,31 @@ class PMSEElement implements PMSERunnable
     {
         $flowBean = BeanFactory::getBean('pmse_BpmnFlow');
         $sugarQueryObject = $this->retrieveSugarQueryObject();
-        $sugarQueryObject->from($flowBean, array('alias' => 'f'));
+        $sugarQueryObject->from($flowBean, ['alias' => 'f']);
         $sugarQueryObject->joinTable(
             'pmse_bpmn_event',
-            array(
+            [
                 'joinType' => 'LEFT',
                 'alias' => 'e',
-            )
+            ]
         )
             ->on()
             ->equalsField('f.flo_element_dest', 'e.id');
         $sugarQueryObject->joinTable(
             'pmse_bpmn_activity',
-            array(
+            [
                 'joinType' => 'LEFT',
                 'alias' => 'a',
-            )
+            ]
         )
             ->on()
             ->equalsField('f.flo_element_dest', 'a.id');
-        $sugarQueryObject->select(array(
+        $sugarQueryObject->select([
             'f.id',
             'e.evn_type',
             'e.evn_behavior',
             'a.act_task_type',
-        ));
+        ]);
         $sugarQueryObject->where()
             ->queryAnd()
             ->addRaw('f.flo_element_origin=\'' . $flowData['bpmn_id'] . '\'');

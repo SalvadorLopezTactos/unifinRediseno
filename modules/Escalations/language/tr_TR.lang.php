@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'Artışları Göster',
     'LBL_LIST_RELATED_TO_ID' => 'İlişkili olduğu ID',
     'LNK_IMPORT_ESCALATIONS' => 'Artışları İçe Aktar',
-    
+
     'LBL_LIST_SUBJECT' => 'Konu',
     'LBL_LIST_NUMBER' => 'No.',
     'LBL_LIST_RELATED_TO_TYPE' => 'İlişkili Tipi',

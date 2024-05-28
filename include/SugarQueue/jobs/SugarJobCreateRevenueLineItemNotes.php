@@ -19,7 +19,6 @@
  */
 class SugarJobCreateRevenueLineItemNotes extends JobNotification implements RunnableSchedulerJob
 {
-
     /**
      * @var SchedulersJob
      */
@@ -70,7 +69,7 @@ class SugarJobCreateRevenueLineItemNotes extends JobNotification implements Runn
         $settings = Opportunity::getSettings();
 
         if ((isset($settings['opps_view_by']) && $settings['opps_view_by'] !== 'Opportunities')) {
-            $GLOBALS['log']->fatal("Opportunity are being used with Revenue Line Items. " . self::class . " should not be running");
+            $GLOBALS['log']->fatal('Opportunity are being used with Revenue Line Items. ' . self::class . ' should not be running');
             return false;
         }
 
@@ -80,7 +79,7 @@ class SugarJobCreateRevenueLineItemNotes extends JobNotification implements Runn
         $labels = $args['labels'];
         $data = $args['chunk'];
 
-        $currencies = array();
+        $currencies = [];
 
         Activity::disable();
         // disable the fts index as well
@@ -109,9 +108,9 @@ class SugarJobCreateRevenueLineItemNotes extends JobNotification implements Runn
                             if (!isset($currencies[$value])) {
                                 $currencies[$value] = SugarCurrency::getCurrencyByID($value);
                             }
-                            $desc .= " - " . $labels[$field] . ": " . $currencies[$value]->name . "\n";
+                            $desc .= ' - ' . $labels[$field] . ': ' . $currencies[$value]->name . "\n";
                         } elseif ($field !== 'name' && $field !== 'opportunity_id') {
-                            $desc .= " - " . $labels[$field] . ": " . $value . "\n";
+                            $desc .= ' - ' . $labels[$field] . ': ' . $value . "\n";
                         }
                     }
                 }

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Update hours_to_resolution from time_to_resolution with minute to hour conversion
  */
@@ -22,7 +23,7 @@ class SugarUpgradeUpdateTimeToResolution extends UpgradeScript
         if ($this->fromFlavor('ent') &&
             version_compare($this->from_version, '9.1.0', '>=') &&
             version_compare($this->from_version, '9.3.0', '<')) {
-            $this->log("Updating hours_to_resolution from time_to_resolution with minute to hour conversion.");
+            $this->log('Updating hours_to_resolution from time_to_resolution with minute to hour conversion.');
             $this->db->query('UPDATE cases SET hours_to_resolution = time_to_resolution / 60 WHERE time_to_resolution IS NOT NULL');
         }
     }

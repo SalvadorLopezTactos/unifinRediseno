@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -37,7 +39,7 @@ final class Configuration implements KeyStorage
     /**
      * {@inheritDoc}
      */
-    public function getKey() : ?UuidInterface
+    public function getKey(): ?UuidInterface
     {
         $key = $this->config->get('cache.encryption_key');
         if ($key === null) {
@@ -54,7 +56,7 @@ final class Configuration implements KeyStorage
     /**
      * {@inheritDoc}
      */
-    public function updateKey(UuidInterface $key) : void
+    public function updateKey(UuidInterface $key): void
     {
         $configurator = new Configurator();
         $configurator->config['cache']['encryption_key'] = $key->toString();

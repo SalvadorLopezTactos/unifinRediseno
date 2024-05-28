@@ -11,44 +11,44 @@
  */
 
 
-class vCal extends SugarBean {
-
+class vCal extends SugarBean
+{
     private static $cacheUpdate_enabled = true;
 
     private static $backtrace_log_enabled = 'none';  // 'none', 'cache', 'freebusy', 'all'
 
     // Stored fields
-	var $id;
-	var $date_modified;
-	var $user_id;
-	var $content;
-	var $deleted;
-	var $type;
-	var $source;
-	var $module_dir = "vCals";
-	var $table_name = "vcals";
+    public $id;
+    public $date_modified;
+    public $user_id;
+    public $content;
+    public $deleted;
+    public $type;
+    public $source;
+    public $module_dir = 'vCals';
+    public $table_name = 'vcals';
 
-	var $object_name = "vCal";
+    public $object_name = 'vCal';
 
-	var $new_schema = true;
+    public $new_schema = true;
 
-	var $field_defs = array(
-	);
+    public $field_defs = [
+    ];
 
-	// This is used to retrieve related fields from form posts.
-	var $additional_column_fields = Array();
+    // This is used to retrieve related fields from form posts.
+    public $additional_column_fields = [];
 
     public const UTC_FORMAT = 'Ymd\THi00\Z';
     public const EOL = "\r\n";
     public const TAB = "\t";
     public const CHARSPERLINE = 75;
 
-	public function __construct()
-	{
+    public function __construct()
+    {
 
-		parent::__construct();
-		$this->disable_row_level_security = true;
-	}
+        parent::__construct();
+        $this->disable_row_level_security = true;
+    }
 
     /**
      * Enable or Disable Cache Updates
@@ -62,29 +62,29 @@ class vCal extends SugarBean {
         return $previousValue;
     }
 
-	function get_summary_text()
-	{
-		return "";
-	}
+    public function get_summary_text()
+    {
+        return '';
+    }
 
 
-	function fill_in_additional_list_fields()
-	{
-	}
+    public function fill_in_additional_list_fields()
+    {
+    }
 
-	function fill_in_additional_detail_fields()
-	{
-	}
+    public function fill_in_additional_detail_fields()
+    {
+    }
 
     public function get_list_view_data($filter_fields = [])
-	{
-	}
+    {
+    }
 
-        // combines all freebusy vcals and returns just the FREEBUSY lines as a string
-	function get_freebusy_lines_cache(&$user_bean)
-	{
+    // combines all freebusy vcals and returns just the FREEBUSY lines as a string
+    public function get_freebusy_lines_cache(&$user_bean)
+    {
         global $sugar_config;
-        $ical_array = array();
+        $ical_array = [];
 
         if (empty($sugar_config['freebusy_use_vcal_cache'])) {
             return ''; // VCal FreeBusy Cache Is Not Enabled - No Data will be returned from vcals table
@@ -97,85 +97,83 @@ class vCal extends SugarBean {
         );
         $vcal_arr = $this->build_related_list($query, BeanFactory::newBean('vCals'));
 
-		foreach ($vcal_arr as $focus)
-		{
-			if (empty($focus->content))
-			{
-				return '';
-			}
+        foreach ($vcal_arr as $focus) {
+            if (empty($focus->content)) {
+                return '';
+            }
 
             $ical_arr = self::create_ical_array_from_string($focus->content);
             $ical_array = array_merge($ical_array, $ical_arr);
-		}
+        }
 
         return self::create_ical_string_from_array($ical_array);
-	}
+    }
 
-	// query and create the FREEBUSY lines for SugarCRM Meetings and Calls and
-        // return the string
-	function create_sugar_freebusy($user_bean, $start_date_time, $end_date_time)
-	{
-        $ical_array = array();
-		global $DO_USER_TIME_OFFSET,$timedate;
+    // query and create the FREEBUSY lines for SugarCRM Meetings and Calls and
+    // return the string
+    public function create_sugar_freebusy($user_bean, $start_date_time, $end_date_time)
+    {
+        $ical_array = [];
+        global $DO_USER_TIME_OFFSET, $timedate;
 
         $DO_USER_TIME_OFFSET = true;
-		if(empty($GLOBALS['current_user']) || empty($GLOBALS['current_user']->id)) {
-		    $GLOBALS['current_user'] = $user_bean;
-		}
-		// get activities.. queries Meetings and Calls
-		$acts_arr =
-		CalendarActivity::get_activities($user_bean->id,
-            false,
-			$start_date_time,
-			$end_date_time,
-			'freebusy',
-            true,
-            false);   // don't need to get parent data. Only need time slots.
+        if (empty($GLOBALS['current_user']) || empty($GLOBALS['current_user']->id)) {
+            $GLOBALS['current_user'] = $user_bean;
+        }
+        // get activities.. queries Meetings and Calls
+        $acts_arr =
+            CalendarActivity::get_activities(
+                $user_bean->id,
+                false,
+                $start_date_time,
+                $end_date_time,
+                'freebusy',
+                true,
+                false
+            );   // don't need to get parent data. Only need time slots.
 
-		// loop thru each activity, get start/end time in UTC, and return FREEBUSY strings
-		foreach($acts_arr as $act)
-		{
-            if(empty($act->start_time) || empty($act->end_time)){
+        // loop thru each activity, get start/end time in UTC, and return FREEBUSY strings
+        foreach ($acts_arr as $act) {
+            if (empty($act->start_time) || empty($act->end_time)) {
                 //create error message
-                $errMSG = "ERROR in Vcal::create_sugar_freebusy.  Calendar Activity was not created because of missing start or end time";
-                if(!empty($act->sugar_bean->id)){
-                    $errMSG .= ", id is ".$act->sugar_bean->id;
+                $errMSG = 'ERROR in Vcal::create_sugar_freebusy.  Calendar Activity was not created because of missing start or end time';
+                if (!empty($act->sugar_bean->id)) {
+                    $errMSG .= ', id is ' . $act->sugar_bean->id;
                 }
-                if(!empty($act->sugar_bean->name)){
-                    $errMSG .= ", name is: ".$act->sugar_bean->name;
+                if (!empty($act->sugar_bean->name)) {
+                    $errMSG .= ', name is: ' . $act->sugar_bean->name;
                 }
                 //log message and continue
                 $GLOBALS['log']->fatal($errMSG);
                 continue;
             }
-			$startTimeUTC = $act->start_time->format(self::UTC_FORMAT);
-			$endTimeUTC = $act->end_time->format(self::UTC_FORMAT);
+            $startTimeUTC = $act->start_time->format(self::UTC_FORMAT);
+            $endTimeUTC = $act->end_time->format(self::UTC_FORMAT);
 
-            $ical_array[] = array("FREEBUSY", $startTimeUTC ."/". $endTimeUTC);
-		}
+            $ical_array[] = ['FREEBUSY', $startTimeUTC . '/' . $endTimeUTC];
+        }
         return self::create_ical_string_from_array($ical_array);
-
-	}
+    }
 
     /**
      * @param $user_focus
-     * @param bool  $cached
-     * @param SugarDateTime $startDate  optional: if Not cached
-     * @param SugarDateTime $endDate    optional: if Not cached
+     * @param bool $cached
+     * @param SugarDateTime $startDate optional: if Not cached
+     * @param SugarDateTime $endDate optional: if Not cached
      * @return string freebusy vcal string
      */
     // return a freebusy vcal string
-    function get_vcal_freebusy($user_focus, $cached = true, SugarDateTime $startDate = null, SugarDateTime $endDate = null)
+    public function get_vcal_freebusy($user_focus, $cached = true, SugarDateTime $startDate = null, SugarDateTime $endDate = null)
     {
         global $locale, $timedate;
-        $ical_array = array();
-        $ical_array[] = array("BEGIN", "VCALENDAR");
-        $ical_array[] = array("VERSION", "2.0");
-        $ical_array[] = array("PRODID", "-//SugarCRM//SugarCRM Calendar//EN");
-        $ical_array[] = array("BEGIN", "VFREEBUSY");
+        $ical_array = [];
+        $ical_array[] = ['BEGIN', 'VCALENDAR'];
+        $ical_array[] = ['VERSION', '2.0'];
+        $ical_array[] = ['PRODID', '-//SugarCRM//SugarCRM Calendar//EN'];
+        $ical_array[] = ['BEGIN', 'VFREEBUSY'];
 
         if (static::$backtrace_log_enabled == 'freebusy' || static::$backtrace_log_enabled == 'all') {
-            $trace = $this->getBackTrace("VCAL:FREEBUSY - ");
+            $trace = $this->getBackTrace('VCAL:FREEBUSY - ');
             $GLOBALS['log']->fatal("VCAL:FREEBUSY - get_vcal_freebusy()\n" . $trace);
         }
 
@@ -195,12 +193,11 @@ class vCal extends SugarBean {
             $end_date_time = $endDate;
         } else {
             // get start date ( 1 day ago )
-            $start_date_time = $now_date_time->get("yesterday");
+            $start_date_time = $now_date_time->get('yesterday');
 
             // get date 2 months from start date
             global $sugar_config;
-            if (isset($sugar_config['vcal_time']) && $sugar_config['vcal_time'] != 0 && $sugar_config['vcal_time'] < 13)
-            {
+            if (isset($sugar_config['vcal_time']) && $sugar_config['vcal_time'] != 0 && $sugar_config['vcal_time'] < 13) {
                 $timeOffset = $sugar_config['vcal_time'];
             }
             $end_date_time = $start_date_time->get("+$timeOffset months");
@@ -211,9 +208,9 @@ class vCal extends SugarBean {
         $utc_end_time = $end_date_time->asDb();
         $utc_now_time = $now_date_time->asDb();
 
-        $ical_array[] = array("ORGANIZER;CN=$name", "VFREEBUSY");
-        $ical_array[] = array("DTSTART", $utc_start_time);
-        $ical_array[] = array("DTEND", $utc_end_time);
+        $ical_array[] = ["ORGANIZER;CN=$name", 'VFREEBUSY'];
+        $ical_array[] = ['DTSTART', $utc_start_time];
+        $ical_array[] = ['DTEND', $utc_end_time];
 
         $str = self::create_ical_string_from_array($ical_array);
 
@@ -226,21 +223,20 @@ class vCal extends SugarBean {
         }
 
         // UID:20030724T213406Z-10358-1000-1-12@phoenix
-        $str .= self::fold_ical_lines("DTSTAMP", $utc_now_time) . self::EOL;
-        $str .= "END:VFREEBUSY".self::EOL;
-        $str .= "END:VCALENDAR".self::EOL;
+        $str .= self::fold_ical_lines('DTSTAMP', $utc_now_time) . self::EOL;
+        $str .= 'END:VFREEBUSY' . self::EOL;
+        $str .= 'END:VCALENDAR' . self::EOL;
         return $str;
-
     }
 
-	// static function:
-        // cache vcals
-        public static function cache_sugar_vcal(&$user_focus)
-        {
-            self::cache_sugar_vcal_freebusy($user_focus);
-        }
+    // static function:
+    // cache vcals
+    public static function cache_sugar_vcal(&$user_focus)
+    {
+        self::cache_sugar_vcal_freebusy($user_focus);
+    }
 
-	// static function:
+    // static function:
     // caches vcal for Activities in Sugar database
     public static function cache_sugar_vcal_freebusy(&$user_focus)
     {
@@ -256,12 +252,12 @@ class vCal extends SugarBean {
         $focus = BeanFactory::newBean('vCals');
 
         if (static::$backtrace_log_enabled == 'cache' || static::$backtrace_log_enabled == 'all') {
-            $trace = $focus->getBackTrace("VCAL:CACHE - ");
+            $trace = $focus->getBackTrace('VCAL:CACHE - ');
             $GLOBALS['log']->fatal("VCAL:CACHE - cache_sugar_vcal_freebusy()\n" . $trace);
         }
 
         // set freebusy members and save
-        $arr = array('user_id' => $user_focus->id, 'type' => 'vfb', 'source' => 'sugar');
+        $arr = ['user_id' => $user_focus->id, 'type' => 'vfb', 'source' => 'sugar'];
         $focus->retrieve_by_string_fields($arr);
 
 
@@ -279,7 +275,7 @@ class vCal extends SugarBean {
      */
     public static function fold_ical_lines($key, $value)
     {
-        $iCalValue = $key . ":" . $value;
+        $iCalValue = $key . ':' . $value;
 
         if (strlen($iCalValue) <= self::CHARSPERLINE) {
             return $iCalValue;
@@ -307,17 +303,17 @@ class vCal extends SugarBean {
      */
     public static function create_ical_array_from_string($ical_string)
     {
-        $ical_string = preg_replace("/\r\n\s+/", "", $ical_string);
+        $ical_string = preg_replace("/\r\n\s+/", '', $ical_string);
         $lines = preg_split("/\r?\n/", $ical_string);
-        $ical_array = array();
+        $ical_array = [];
 
         foreach ($lines as $line) {
             $line = self::unescape_ical_chars($line);
-            $line = explode(":", $line, 2);
-            if (count($line) != 2) {
+            $line = explode(':', $line, 2);
+            if (safeCount($line) != 2) {
                 continue;
             }
-            $ical_array[] = array($line[0], $line[1]);
+            $ical_array[] = [$line[0], $line[1]];
         }
 
         return $ical_array;
@@ -328,7 +324,7 @@ class vCal extends SugarBean {
      */
     public static function create_ical_string_from_array($ical_array)
     {
-        $str = "";
+        $str = '';
         foreach ($ical_array as $ical) {
             $str .= self::fold_ical_lines($ical[0], self::escape_ical_chars($ical[1])) . self::EOL;
         }
@@ -343,7 +339,7 @@ class vCal extends SugarBean {
      */
     public static function escape_ical_chars($string)
     {
-        $string = str_replace(["\\", "\r", "\n", ";", ","], ["\\\\", "\\r", "\\n", "\\;", "\\,"], (string)$string);
+        $string = str_replace(['\\', "\r", "\n", ';', ','], ['\\\\', '\\r', '\\n', '\\;', '\\,'], (string)$string);
         return $string;
     }
 
@@ -355,11 +351,11 @@ class vCal extends SugarBean {
      */
     public static function unescape_ical_chars($string)
     {
-        $string = str_replace(array("\\r", "\\n", "\\;", "\\,", "\\\\"), array("\r", "\n", ";", ",", "\\"), $string);
+        $string = str_replace(['\\r', '\\n', '\\;', '\\,', '\\\\'], ["\r", "\n", ';', ',', '\\'], $string);
         return $string;
     }
 
-    private function getBacktrace($prepend = "", $ignore = 2)
+    private function getBacktrace($prepend = '', $ignore = 2)
     {
         $trace = '';
         foreach (debug_backtrace() as $k => $v) {
@@ -369,7 +365,7 @@ class vCal extends SugarBean {
             $trace .= $prepend . '#' . ($k - $ignore) . ' ' . $v['file'] . '(' . $v['line'] . '): ' . (isset($v['class']) ? $v['class'] . '->' : '') . $v['function'] . "()\n";
         }
         return $trace;
-        }
+    }
 
     /**
      * get ics file content for meeting invite email
@@ -377,33 +373,30 @@ class vCal extends SugarBean {
     public static function get_ical_event(SugarBean $bean, User $user)
     {
         global $timedate;
-        $ical_array = array();
+        $ical_array = [];
 
-        $ical_array[] = array("BEGIN", "VCALENDAR");
-        $ical_array[] = array("VERSION", "2.0");
-        $ical_array[] = array("PRODID", "-//SugarCRM//SugarCRM Calendar//EN");
-        $ical_array[] = array("BEGIN", "VEVENT");
-        $ical_array[] = array("UID", $bean->id);
-        $ical_array[] = array("ORGANIZED;CN=" . $user->full_name, $user->email1);
-        $ical_array[] = array("DTSTART", $timedate->fromDb($bean->date_start)->format(self::UTC_FORMAT));
-        $ical_array[] = array("DTEND", $timedate->fromDb($bean->date_end)->format(self::UTC_FORMAT));
+        $ical_array[] = ['BEGIN', 'VCALENDAR'];
+        $ical_array[] = ['VERSION', '2.0'];
+        $ical_array[] = ['PRODID', '-//SugarCRM//SugarCRM Calendar//EN'];
+        $ical_array[] = ['BEGIN', 'VEVENT'];
+        $ical_array[] = ['UID', $bean->id];
+        $ical_array[] = ['ORGANIZED;CN=' . $user->full_name, $user->email1];
+        $ical_array[] = ['DTSTART', $timedate->fromDb($bean->date_start)->format(self::UTC_FORMAT)];
+        $ical_array[] = ['DTEND', $timedate->fromDb($bean->date_end)->format(self::UTC_FORMAT)];
 
-        $ical_array[] = array(
-            "DTSTAMP",
-            $GLOBALS['timedate']->getNow(false)->format(self::UTC_FORMAT)
-        );
-        $ical_array[] = array("SUMMARY", $bean->name);
-        $ical_array[] = array("LOCATION", $bean->location);
+        $ical_array[] = [
+            'DTSTAMP',
+            $GLOBALS['timedate']->getNow(false)->format(self::UTC_FORMAT),
+        ];
+        $ical_array[] = ['SUMMARY', $bean->name];
+        $ical_array[] = ['LOCATION', $bean->location];
 
-        $descPrepend = empty($bean->join_url) ? "" : $bean->join_url . self::EOL . self::EOL;
-        $ical_array[] = array("DESCRIPTION", $descPrepend . $bean->description);
+        $descPrepend = empty($bean->join_url) ? '' : $bean->join_url . self::EOL . self::EOL;
+        $ical_array[] = ['DESCRIPTION', $descPrepend . $bean->description];
 
-        $ical_array[] = array("END", "VEVENT");
-        $ical_array[] = array("END", "VCALENDAR");
+        $ical_array[] = ['END', 'VEVENT'];
+        $ical_array[] = ['END', 'VCALENDAR'];
 
         return self::create_ical_string_from_array($ical_array);
     }
-
 }
-
-?>

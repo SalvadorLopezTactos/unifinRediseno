@@ -14,7 +14,7 @@ use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 use Sugarcrm\Sugarcrm\ACL\Cache as AclCacheInterface;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
-require_once('modules/ACLFields/actiondefs.php');
+require_once 'modules/ACLFields/actiondefs.php';
 
 /**
  * Field-level ACLs
@@ -37,35 +37,37 @@ class ACLField extends SugarBean
      * Cache of the ACL fields
      * @var array
      */
-    public static $acl_fields = array();
+    public static $acl_fields = [];
 
     /**
      * Adds available fields for module.
-     * @internal
      * @param string $module Module name.
      * @param bool|string $object Object name.
      * @return array List of fields available for ACL control.
+     * @internal
      */
-    static function getAvailableFields($module, $object=false)
+    public static function getAvailableFields($module, $object = false)
     {
-        static $exclude = array('deleted', 'assigned_user_id');
-        static $modulesAvailableFields = array();
-        if(!isset($modulesAvailableFields[$module])){
-            if(empty($GLOBALS['dictionary'][$object]['fields'])){
+        static $exclude = ['deleted', 'assigned_user_id'];
+        static $modulesAvailableFields = [];
+        if (!isset($modulesAvailableFields[$module])) {
+            if (empty($GLOBALS['dictionary'][$object]['fields'])) {
                 $mod = BeanFactory::newBean($module);
-                if(empty($mod->acl_fields)) return array();
+                if (empty($mod->acl_fields)) {
+                    return [];
+                }
                 $fieldDefs = $mod->field_defs;
-            }else{
+            } else {
                 $fieldDefs = $GLOBALS['dictionary'][$object]['fields'];
-                if(isset($GLOBALS['dictionary'][$object]['acl_fields']) && $GLOBALS['dictionary'][$object]=== false){
-                    return array();
+                if (isset($GLOBALS['dictionary'][$object]['acl_fields']) && $GLOBALS['dictionary'][$object] === false) {
+                    return [];
                 }
             }
             if (!is_iterable($fieldDefs)) {
                 $fieldDefs = [];
             }
 
-            $availableFields = array();
+            $availableFields = [];
             foreach ($fieldDefs as $field => $def) {
                 if (self::shouldFieldBeAvailable($field, $def, $exclude)) {
                     if (empty($def['vname'])) {
@@ -83,7 +85,7 @@ class ACLField extends SugarBean
                         $required = true;
                     }
                     if (empty($availableFields[$fkey])) {
-                        $availableFields[$fkey] = array(
+                        $availableFields[$fkey] = [
                             'id' => $fkey,
                             'required' => $required,
                             'key' => $fkey,
@@ -92,8 +94,8 @@ class ACLField extends SugarBean
                             'category' => $module,
                             'role_id' => '',
                             'aclaccess' => ACL_ALLOW_DEFAULT,
-                            'fields' => array($field => $label),
-                        );
+                            'fields' => [$field => $label],
+                        ];
                     } else {
                         if (!empty($required)) {
                             $availableFields[$fkey]['required'] = 1;
@@ -109,11 +111,11 @@ class ACLField extends SugarBean
 
     /**
      * Get ACL fields
-     * @internal
      * @param string $module
      * @param string $user_id
      * @param string $role_id
      * @return array
+     * @internal
      */
     public static function getFields($module, $user_id = null, $role_id = null)
     {
@@ -141,14 +143,14 @@ class ACLField extends SugarBean
             $stmt = $builder->execute();
 
             while (($row = $stmt->fetchAssociative())) {
-                if(!empty($fields[$row['name']]) && ($row['aclaccess'] < $fields[$row['name']]['aclaccess'] || $fields[$row['name']]['aclaccess'] == 0) ){
+                if (!empty($fields[$row['name']]) && ($row['aclaccess'] < $fields[$row['name']]['aclaccess'] || $fields[$row['name']]['aclaccess'] == 0)) {
                     $row['key'] = $row['name'];
                     $row['label'] = $fields[$row['name']]['label'];
                     $row['fields'] = $fields[$row['name']]['fields'];
-                    if(isset($fields[$row['name']]['required'])) {
-                    $row['required'] = $fields[$row['name']]['required'];
+                    if (isset($fields[$row['name']]['required'])) {
+                        $row['required'] = $fields[$row['name']]['required'];
                     }
-                    $fields[$row['name']] =  $row;
+                    $fields[$row['name']] = $row;
                 }
             }
         }
@@ -158,9 +160,9 @@ class ACLField extends SugarBean
     }
 
     /**
-     * @internal
      * @param string $role_id
      * @return array
+     * @internal
      */
     public static function getACLFieldsByRole($role_id)
     {
@@ -170,9 +172,9 @@ WHERE role_id = ?
 AND deleted = 0';
 
         $stmt = DBManagerFactory::getConnection()
-            ->executeQuery($query, array($role_id));
+            ->executeQuery($query, [$role_id]);
 
-        $fields = array();
+        $fields = [];
         while (($row = $stmt->fetchAssociative())) {
             $fields[$row['id']] = $row;
         }
@@ -193,23 +195,22 @@ AND deleted = 0';
     {
         global $dictionary;
 
-        if(empty($user_id)) {
-            return array();
+        if (empty($user_id)) {
+            return [];
         }
-        if(!$refresh && isset(self::$acl_fields[$user_id][$module_name]))
-        {
+        if (!$refresh && isset(self::$acl_fields[$user_id][$module_name])) {
             return self::$acl_fields[$user_id][$module_name];
         }
         // do not fetch data for field ACL if it's disabled
         // we need to use $dictionary directly instead of SugarBean as its constructor calls this method,
         // and creating a new bean instance to access the dictionary data will create endless recursion
         if (isset($dictionary[$object]['acl_fields']) && !$dictionary[$object]['acl_fields']) {
-            self::$acl_fields[$user_id][$module_name] = array();
-            return array();
+            self::$acl_fields[$user_id][$module_name] = [];
+            return [];
         }
 
         // We can not cache per user ID because ACLs are stored per role
-        if(!$refresh) {
+        if (!$refresh) {
             $cached = self::loadFromCache($user_id, 'fields');
             if ($cached !== null) {
                 // ACL data for some modules may already have been loaded and it shouldn't be erased
@@ -221,7 +222,7 @@ AND deleted = 0';
                 }
             }
 
-            if(isset(self::$acl_fields[$user_id][$module_name])) {
+            if (isset(self::$acl_fields[$user_id][$module_name])) {
                 return self::$acl_fields[$user_id][$module_name];
             }
         }
@@ -236,13 +237,12 @@ AND deleted = 0';
         $stmt = $GLOBALS['db']->getConnection()->executeQuery($query, [$user_id, $module_name]);
 
         $allFields = ACLField::getAvailableFields($module_name, $object);
-        self::$acl_fields[$user_id][$module_name] = array();
+        self::$acl_fields[$user_id][$module_name] = [];
         while ($row = $stmt->fetchAssociative()) {
-            if($row['aclaccess'] != 0 && (empty(self::$acl_fields[$user_id][$module_name][$row['name']]) || self::$acl_fields[$user_id][$module_name][$row['name']] > $row['aclaccess']))
-            {
+            if ($row['aclaccess'] != 0 && (empty(self::$acl_fields[$user_id][$module_name][$row['name']]) || self::$acl_fields[$user_id][$module_name][$row['name']] > $row['aclaccess'])) {
                 self::$acl_fields[$user_id][$module_name][$row['name']] = $row['aclaccess'];
-                if(!empty($allFields[$row['name']])){
-                    foreach($allFields[$row['name']]['fields'] as $field=>$label ){
+                if (!empty($allFields[$row['name']])) {
+                    foreach ($allFields[$row['name']]['fields'] as $field => $label) {
                         self::$acl_fields[$user_id][$module_name][strtolower($field)] = $row['aclaccess'];
                     }
                 }
@@ -253,12 +253,11 @@ AND deleted = 0';
         return self::$acl_fields[$user_id][$module_name];
     }
 
-    public static $field_cache = array();
+    public static $field_cache = [];
 
     /**
      * Filter fields list by ACLs
      * NOTE: works with global ACLs
-	 * @internal
      * @param array $list Field list. Will be modified.
      * @param string $category Module for ACL
      * @param string $user_id
@@ -268,52 +267,54 @@ AND deleted = 0';
      * @param bool $blank_value Put blank string in place of removed fields?
      * @param bool $addACLParam Add 'acl' key with acl access value?
      * @param string $suffix Field suffix to strip from the list.
+     * @internal
      */
     public static function listFilter(&$list, $category, $user_id, $is_owner, $by_key = true, $min_access = 1, $blank_value = false, $addACLParam = false, $suffix = '')
     {
-        foreach($list as $key=>$value){
-            if($by_key){
+        foreach ($list as $key => $value) {
+            if ($by_key) {
                 $field = $key;
-                if(is_array($value) && !empty($value['group'])){
-
+                if (is_array($value) && !empty($value['group'])) {
                     $field = $value['group'];
                 }
-            }else{
-                if(is_array($value)){
-                    if(!empty($value['group'])){
+            } else {
+                if (is_array($value)) {
+                    if (!empty($value['group'])) {
                         $value = $value['group'];
-                    }else if(!empty($value['name'])){
+                    } elseif (!empty($value['name'])) {
                         $value = $value['name'];
-                    }else{
+                    } else {
                         $value = '';
                     }
                 }
                 $field = $value;
             }
-            if(isset(self::$field_cache['lower'][$field])){
+            if (isset(self::$field_cache['lower'][$field])) {
                 $field = self::$field_cache['lower'][$field];
             } else {
                 $oField = $field;
                 $field = strtolower($field);
-                if(!empty($suffix))$field = str_replace($suffix, '', $field);
+                if (!empty($suffix)) {
+                    $field = str_replace($suffix, '', $field);
+                }
                 self::$field_cache['lower'][$oField] = $field;
             }
-            if(!isset(self::$field_cache[$is_owner][$field])){
-                $context = array("user_id" => $user_id);
-                if($is_owner) {
+            if (!isset(self::$field_cache[$is_owner][$field])) {
+                $context = ['user_id' => $user_id];
+                if ($is_owner) {
                     $context['owner_override'] = true;
                 }
                 $access = SugarACL::getFieldAccess($category, $field, $context);
                 self::$field_cache[$is_owner][$field] = $access;
-            }else{
+            } else {
                 $access = self::$field_cache[$is_owner][$field];
             }
-            if($addACLParam){
+            if ($addACLParam) {
                 $list[$key]['acl'] = $access;
-            }else if($access< $min_access){
-                if($blank_value){
+            } elseif ($access < $min_access) {
+                if ($blank_value) {
                     $list[$key] = '';
-                }else{
+                } else {
                     unset($list[$key]);
                 }
             }
@@ -321,44 +322,44 @@ AND deleted = 0';
     }
 
 
-   /**
-    * hasAccess
-    *
-    * This function returns an integer value representing the access level for a given field of a module for
-    * a user.  It also takes into account whether or not the user needs to have ownership of the record (assigned to the user)
-    *
-    * Returns 0 - for no access
-    * Returns 1 - for read access
-    * returns 2 - for write access
-    * returns 4 - for read/write access
-    * @param string|bool $field The name of the field to retrieve ACL access for.
-    * @param string|int $module The name of the module that contains the field to
-    *   look up ACL access for.
-    * @param string|User|null $user_id The user id of the user instance to check
-    *   ACL access for, or the User object, or null which means current user.
-    *   Using User is recommended since it's fastest.
-    * @param boolean $is_owner Boolean value indicating whether or not the field
-    *   access should also take into account ownership access.
-    * @return int Integer value indicating the ACL field level access.
-    */
-    static function hasAccess($field = false, $module = 0, $user_id = null, $is_owner = null)
+    /**
+     * hasAccess
+     *
+     * This function returns an integer value representing the access level for a given field of a module for
+     * a user.  It also takes into account whether or not the user needs to have ownership of the record (assigned to the user)
+     *
+     * Returns 0 - for no access
+     * Returns 1 - for read access
+     * returns 2 - for write access
+     * returns 4 - for read/write access
+     * @param string|bool $field The name of the field to retrieve ACL access for.
+     * @param string|int $module The name of the module that contains the field to
+     *   look up ACL access for.
+     * @param string|User|null $user_id The user id of the user instance to check
+     *   ACL access for, or the User object, or null which means current user.
+     *   Using User is recommended since it's fastest.
+     * @param boolean $is_owner Boolean value indicating whether or not the field
+     *   access should also take into account ownership access.
+     * @return int Integer value indicating the ACL field level access.
+     */
+    public static function hasAccess($field = false, $module = 0, $user_id = null, $is_owner = null)
     {
-        if(is_null($user_id)) {
+        if (is_null($user_id)) {
             $user = $GLOBALS['current_user'];
             $user_id = $user->id;
-        } elseif($user_id instanceof User) {
-			$user = $user_id;
-			$user_id = $user->id;
-		} elseif($user_id == $GLOBALS['current_user']->id) {
+        } elseif ($user_id instanceof User) {
+            $user = $user_id;
+            $user_id = $user->id;
+        } elseif ($user_id == $GLOBALS['current_user']->id) {
             $user = $GLOBALS['current_user'];
         }
 
-        if(!isset(self::$acl_fields[$user_id][$module][$field])){
+        if (!isset(self::$acl_fields[$user_id][$module][$field])) {
             return 4;
         }
 
-        if(empty($user)) {
-            $user = BeanFactory::getBean("Users", $user_id);
+        if (empty($user)) {
+            $user = BeanFactory::getBean('Users', $user_id);
         }
 
         if (!empty($user) && $user->isAdmin()) {
@@ -368,9 +369,9 @@ AND deleted = 0';
 
         $access = self::$acl_fields[$user_id][$module][$field];
 
-        if($access == ACL_READ_WRITE || ($is_owner && ($access == ACL_READ_OWNER_WRITE || $access == ACL_OWNER_READ_WRITE))) {
+        if ($access == ACL_READ_WRITE || ($is_owner && ($access == ACL_READ_OWNER_WRITE || $access == ACL_OWNER_READ_WRITE))) {
             return 4;
-        } elseif($access == ACL_READ_ONLY || $access==ACL_READ_OWNER_WRITE) {
+        } elseif ($access == ACL_READ_ONLY || $access == ACL_READ_OWNER_WRITE) {
             return 1;
         } elseif ($tbaConfigurator->isEnabledForModule($module) && $tbaConfigurator->isValidAccess($access)) {
             // Handled by SugarACLTeamBased.
@@ -424,11 +425,11 @@ AND deleted = 0';
             return null;
         }
 
-        $fields = array('assigned_user_id', 'created_by');
+        $fields = ['assigned_user_id', 'created_by'];
         $fields = array_intersect($fields, array_keys($bean->field_defs));
 
         $previous = $result = null;
-        while (count($fields) > 0) {
+        while (safeCount($fields) > 0) {
             $field = array_pop($fields);
 
             $condition = new SugarQuery_Builder_Condition($query);
@@ -457,21 +458,23 @@ AND deleted = 0';
     /**
      * Set ACL rules for the given field that will apply to the given role.
      *
-     * @internal
      * @param string $module Module in which the field exists.
      * @param string $role_id ID for the role this ACL will apply to.
      * @param string $field_id Name of the field.
      * @param integer? $access Access level.
      * @return bool? false if no value was given and no value has been
      *   saved before. Otherwise, void.
+     * @internal
      */
     public static function setAccessControl($module, $role_id, $field_id, $access)
     {
         $acl = new ACLField();
-        $id = md5($module. $role_id . $field_id);
-        if(!$acl->retrieve($id) ){
+        $id = md5($module . $role_id . $field_id);
+        if (!$acl->retrieve($id)) {
             //if we don't have a value and its never been saved no need to start now
-            if(empty($access))return false;
+            if (empty($access)) {
+                return false;
+            }
             $acl->id = $id;
             $acl->new_with_id = true;
         }
@@ -498,7 +501,7 @@ AND deleted = 0';
 
     public static function clearACLCache()
     {
-        self::$acl_fields = array();
+        self::$acl_fields = [];
         ACLAction::clearACLCache();
     }
 

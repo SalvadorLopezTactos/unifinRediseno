@@ -13,11 +13,12 @@
 class TemplateAddressStreet extends TemplateTextArea
 {
     //Set display type to text, but stored in db as a varchar
-    var $type = 'text';
+    public $type = 'text';
     public $ext4 = 'varchar';
-    var $len = 150;
+    public $len = 150;
 
-    function get_field_def(){
+    public function get_field_def()
+    {
         $vardef = parent::get_field_def();
         $vardef['dbType'] = $this->ext4;
         return $vardef;

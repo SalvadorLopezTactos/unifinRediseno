@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,6 +10,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class ProspectListsService
 {
     /**
@@ -21,14 +23,14 @@ class ProspectListsService
      */
     public function addRecordsToProspectList($moduleName, $prospectListId, $recordIds)
     {
-        $prospectList = BeanFactory::getBean("ProspectLists", $prospectListId, array('strict_retrieve' => true));
+        $prospectList = BeanFactory::getBean('ProspectLists', $prospectListId, ['strict_retrieve' => true]);
 
-        if(empty($prospectList)) {
+        if (empty($prospectList)) {
             return false;
         }
 
         $bean = BeanFactory::newBean($moduleName);
-        $results = array();
+        $results = [];
         $relationship = '';
 
         foreach ($bean->get_linked_fields() as $field => $def) {

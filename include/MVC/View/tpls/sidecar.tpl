@@ -18,7 +18,7 @@
         <meta charset="UTF-8">
         <title>SugarCRM</title>
 
-        {* Preload the 2 stylesheets we need for proper loading styling. *}
+        {* Preload the stylesheets we need for proper loading styling. *}
         {foreach from=$css_url item=url}
             <link rel="preload" as="style" href="{sugar_getjspath file=$url}">
         {/foreach}
@@ -30,6 +30,7 @@
             Loading the cached CSS file first to reduce changes of page loading without the necessary styles. This
             helps the situation where there is a white flash while starting a page load in Firefox.
         *}
+        {sugar_getstylesheet file="styleguide/assets/css/build.tailwind.css" type="text/css"}
         {foreach from=$css_url item=url}
             <link rel="stylesheet" href="{sugar_getjspath file=$url}">
         {/foreach}
@@ -37,29 +38,6 @@
         <link rel="stylesheet" href="styleguide/assets/css/gridstack.css" type="text/css">
         <link rel="stylesheet" href="styleguide/assets/css/gridstack-extra.css" type="text/css">
         {sugar_getscript file="include/javascript/modernizr.js"}
-        <script>
-          (function () {
-              /**
-               * Inject CSS which makes iframe invisible. Since the iframe content is loaded after the app has loaded,
-               * there are individual onload functions for each iframe we need to show after it's done loading. So far
-               * we need one for the MarketingExtras iframe and our BWC iframe.
-               */
-              let hideBwcDiv = document.createElement('div');
-              let hideMarketingContentDiv = document.createElement('div');
-              let ref = document.getElementsByTagName('base')[0] || document.getElementsByTagName('script')[0];
-
-              hideBwcDiv.innerHTML = '&shy;<style> #bwc-frame { visibility: hidden; } </style>';
-              hideBwcDiv.id = 'hide-bwc-iframe-loading';
-              hideBwcDiv.style.display = 'none';
-
-              hideMarketingContentDiv.innerHTML = '&shy;<style> #marketing-content { visibility: hidden; } </style>';
-              hideMarketingContentDiv.id = 'hide-marketing-content-loading';
-              hideMarketingContentDiv.style.display = 'none';
-
-              ref.parentNode.insertBefore(hideBwcDiv, ref);
-              ref.parentNode.insertBefore(hideMarketingContentDiv, ref);
-           })();
-        </script>
     </head>
     <body>
         <div id="sugarcrm">
@@ -84,9 +62,15 @@
                     </noscript>
                 </div>
                 <div id="impersonation-banner"></div>
-                <div id="sidebar-nav"></div>
-                <div id="header-nav"></div>
-                <div id="content"></div>
+                <nav role="navigation">
+                    <div id="sidebar-nav"></div>
+                </nav>
+                <header>
+                    <div id="header-nav"></div>
+                </header>
+                <main>
+                    <div id="content"></div>
+                </main>
                 <div id="sweetspot"></div>
                 <div id="drawers"></div>
                 <div id="side-drawer"></div>
@@ -220,6 +204,7 @@
                                 var currentLanguageForDom = _.first(currentLanguage.split('_'));
                                 // Use the simple language code as per HTML qualifications
                                 document.documentElement.lang = currentLanguageForDom;
+                                document.documentElement.dir = app.lang.direction;
                             }
 
                             // Set the dark mode flag if enabled, and listen for any future changes

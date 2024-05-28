@@ -10,53 +10,53 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['forecast_tree'] = array(
+$dictionary['forecast_tree'] = [
     'table' => 'forecast_tree',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
             'required' => true,
-        ),
-        'name' => array(
+        ],
+        'name' => [
             'name' => 'name',
             'type' => 'varchar',
             'len' => 50,
             'required' => true,
-        ),
-        'hierarchy_type' => array(
+        ],
+        'hierarchy_type' => [
             'name' => 'hierarchy_type',
             'type' => 'varchar',
             'len' => 25,
             'required' => true,
-        ),
-        'user_id' => array(
+        ],
+        'user_id' => [
             'name' => 'user_id',
             'type' => 'id',
             'default' => null,
             'required' => false,
-        ),
-        'parent_id' => array(
+        ],
+        'parent_id' => [
             'name' => 'parent_id',
             'type' => 'id',
             'default' => null,
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'forecast_tree_pk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'forecast_tree_idx_user_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'user_id',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

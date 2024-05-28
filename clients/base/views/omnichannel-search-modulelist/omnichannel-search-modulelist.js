@@ -15,12 +15,12 @@
  */
 ({
     extendsFrom: 'QuicksearchModuleListView',
-    className: 'table-cell omnichannel-search-modulelist-wrapper',
+    className: 'omnichannel-search-modulelist-wrapper cursor-pointer pl-2.5 relative table-cell w-[30px] z-[1030]',
 
     events: {
         'click [data-action=select-all]': 'selectAllModules',
         'click [data-action=select-module]': 'selectModule',
-        'click [data-toggle=dropdown]': 'moduleDropdownClick'
+        'click [data-bs-toggle=dropdown]': 'moduleDropdownClick'
     },
 
     /**

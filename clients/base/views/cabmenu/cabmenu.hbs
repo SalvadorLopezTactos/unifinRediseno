@@ -21,11 +21,12 @@
         {{/notEq}}
     {{/each}}
     {{#if cabButtons}}
-        <a class="menu-more-btn" data-toggle="dropdown" href="javascript:void(0);"
-            rel="tooltip" data-placement="bottom" title="{{str 'LBL_MORE'}}">
+        <a class="menu-more-btn" data-bs-toggle="dropdown" href="javascript:void(0);"
+           data-bs-placement="bottom" data-bs-display="static">
             <i class="sicon sicon-kebab" aria-hidden="true"></i>
+            {{tooltipTemplate (str 'LBL_MORE') 'bottom'}}
         </a>
-        <ul data-menu="dropdown" class="dropdown-menu" role="menu">
+        <ul data-menu="dropdown" class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl" role="menu">
             {{#each cabButtons}}
                 <li role="menuitem">
                     {{field ../this model=../this.model template="detail"}}
@@ -33,7 +34,7 @@
             {{/each}}
         </ul>
     {{else}}
-        <a class="menu-more-btn disabled" rel="tooltip" data-placement="bottom" title="{{str 'LBL_NO_OPTIONS'}}">
+        <a class="menu-more-btn disabled" rel="tooltip" data-bs-placement="bottom" title="{{str 'LBL_NO_OPTIONS'}}">
             <i class="sicon sicon-kebab" aria-hidden="true"></i>
         </a>
     {{/if}}

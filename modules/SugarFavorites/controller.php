@@ -10,47 +10,60 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class SugarFavoritesController extends SugarController {
-	public function __construct(){
-	}
-	public function loadBean(){
-		if(empty($this->record))$this->record = SugarFavorites::generateGUID($_REQUEST['fav_module'], $_REQUEST['fav_id']);
-		$this->bean = BeanFactory::newBean('SugarFavorites');
-	}
-	public function pre_save(){
-	    global $current_user;
+class SugarFavoritesController extends SugarController
+{
+    public function __construct()
+    {
+    }
 
-		if(!$this->bean->retrieve($this->record, true, false)){
-			$this->bean->new_with_id = true;
-		}
-		$this->bean->id = $this->record;
-		$this->bean->module = $_REQUEST['fav_module'];
-		$this->bean->record_id = $_REQUEST['fav_id'];
-		$this->bean->created_by = $current_user->id;
-		$this->bean->assigned_user_id = $current_user->id;
-		$this->bean->deleted = 0;
-	}
+    public function loadBean()
+    {
+        if (empty($this->record)) {
+            $this->record = SugarFavorites::generateGUID($_REQUEST['fav_module'], $_REQUEST['fav_id']);
+        }
+        $this->bean = BeanFactory::newBean('SugarFavorites');
+    }
 
-	public function action_save(){
-	    if(!empty($this->bean->fetched_row['deleted']) && empty($this->bean->deleted)) {
-	        $this->bean->mark_undeleted($this->bean->id);
-	    }
-		$this->bean->save();
+    public function pre_save()
+    {
+        global $current_user;
 
-	}
-	public function post_save(){
-		echo $this->record;
-	}
-	public function action_delete(){
-		$this->bean->mark_deleted($this->record);
+        if (!$this->bean->retrieve($this->record, true, false)) {
+            $this->bean->new_with_id = true;
+        }
+        $this->bean->id = $this->record;
+        $this->bean->module = $_REQUEST['fav_module'];
+        $this->bean->record_id = $_REQUEST['fav_id'];
+        $this->bean->created_by = $current_user->id;
+        $this->bean->assigned_user_id = $current_user->id;
+        $this->bean->deleted = 0;
+    }
 
-	}
-	public function post_delete(){
-		echo $this->record;
-	}
-	public function action_tag(){
-		return 'Favorite Tagged';
+    public function action_save()
+    {
+        if (!empty($this->bean->fetched_row['deleted']) && empty($this->bean->deleted)) {
+            $this->bean->mark_undeleted($this->bean->id);
+        }
+        $this->bean->save();
+    }
 
-	}
+    public function post_save()
+    {
+        echo $this->record;
+    }
+
+    public function action_delete()
+    {
+        $this->bean->mark_deleted($this->record);
+    }
+
+    public function post_delete()
+    {
+        echo $this->record;
+    }
+
+    public function action_tag()
+    {
+        return 'Favorite Tagged';
+    }
 }
-?>

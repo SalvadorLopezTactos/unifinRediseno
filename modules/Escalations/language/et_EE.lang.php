@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'Kuva eskalatsioonid',
     'LBL_LIST_RELATED_TO_ID' => 'Seotud ID-ga',
     'LNK_IMPORT_ESCALATIONS' => 'Impordi eskalatsioonid',
-    
+
     'LBL_LIST_SUBJECT' => 'Teema',
     'LBL_LIST_NUMBER' => 'Num.',
     'LBL_LIST_RELATED_TO_TYPE' => 'Seotud tüüp',

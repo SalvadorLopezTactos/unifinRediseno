@@ -22,26 +22,26 @@ class QuotesConfigApi extends ConfigModuleApi
     public function registerApiRest()
     {
         return
-            array(
-                'quotesConfigGet' => array(
+            [
+                'quotesConfigGet' => [
                     'reqType' => 'GET',
-                    'path' => array('Quotes', 'config'),
-                    'pathVars' => array('module', ''),
+                    'path' => ['Quotes', 'config'],
+                    'pathVars' => ['module', ''],
                     'minVersion' => '11.3',
                     'method' => 'config',
                     'shortHelp' => 'Retrieves the config settings for a given module',
                     'longHelp' => 'modules/Quotes/clients/base/api/help/quotes_module_config_get_help.html',
-                ),
-                'quotesConfigCreate' => array(
+                ],
+                'quotesConfigCreate' => [
                     'reqType' => 'POST',
-                    'path' => array('Quotes', 'config'),
-                    'pathVars' => array('module', ''),
+                    'path' => ['Quotes', 'config'],
+                    'pathVars' => ['module', ''],
                     'minVersion' => '11.3',
                     'method' => 'configSave',
                     'shortHelp' => 'Save the config settings for the Quotes Module',
                     'longHelp' => 'modules/Quotes/clients/base/api/help/quotes_module_config_post_help.html',
-                ),
-            );
+                ],
+            ];
     }
 
     /**
@@ -63,39 +63,39 @@ class QuotesConfigApi extends ConfigModuleApi
             'base'
         );
 
-        $defaultDiscountAmt = array(
+        $defaultDiscountAmt = [
             'name' => 'discount_field',
             'type' => 'fieldset',
             'css_class' => 'discount-field quote-discount-percent',
             'label' => 'LBL_DISCOUNT_AMOUNT',
             'sortable' => false,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'discount_amount',
                     'label' => 'LBL_DISCOUNT_AMOUNT',
                     'type' => 'discount-amount',
                     'discountFieldName' => 'discount_select',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'currency_id',
-                    ),
+                    ],
                     'convertToBase' => true,
                     'base_rate_field' => 'base_rate',
                     'showTransactionalAmount' => true,
-                ),
-                array(
+                ],
+                [
                     'type' => 'discount-select',
                     'name' => 'discount_select',
-                    'options' => array(),
-                ),
-            ),
-        );
+                    'options' => [],
+                ],
+            ],
+        ];
 
         $quotesConfig['defaultWorksheetColumns'] = $viewdefManager->loadViewdef('base', 'Products', 'quote-data-group-list', true);
 
         $quotesConfig['productsFields'] = array_merge(
             $parser->getAvailableFields(),
             $parser->getDefaultFields(),
-            array('discount_field' => $defaultDiscountAmt)
+            ['discount_field' => $defaultDiscountAmt]
         );
 
         $parser = ParserFactory::getParser(
@@ -117,14 +117,14 @@ class QuotesConfigApi extends ConfigModuleApi
      */
     public function configSave(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('worksheet_columns', 'worksheet_columns_related_fields'));
+        $this->requireArgs($args, ['worksheet_columns', 'worksheet_columns_related_fields']);
         $settings = parent::configSave($api, $args);
         $this->applyWorksheetColumnsConfig();
         $this->applySummaryColumnsConfig();
         $this->applyFooterRowsConfig();
         $this->saveMobileWorksheetColumnConfig($args);
 
-        MetaDataManager::refreshModulesCache(array('Quotes', 'Products'));
+        MetaDataManager::refreshModulesCache(['Quotes', 'Products']);
 
         return $settings;
     }
@@ -136,10 +136,10 @@ class QuotesConfigApi extends ConfigModuleApi
      */
     protected function getRelatedFieldsMap()
     {
-        $fieldVardefs = array(
+        $fieldVardefs = [
             'Products' => VardefManager::getFieldDefs('Products'),
             'Quotes' => VardefManager::getFieldDefs('Quotes'),
-        );
+        ];
 
         $productsFieldNames = array_keys($fieldVardefs['Products']);
         $quotesFieldNames = array_keys($fieldVardefs['Quotes']);
@@ -167,7 +167,7 @@ class QuotesConfigApi extends ConfigModuleApi
      */
     protected function getAllFieldDependencies(string $moduleName, array $fieldNames, array $fieldDefs)
     {
-        $retFields = array();
+        $retFields = [];
         foreach ($fieldNames as $fieldName) {
             $fieldDef = $fieldDefs[$moduleName][$fieldName];
 
@@ -175,7 +175,7 @@ class QuotesConfigApi extends ConfigModuleApi
                 // check variables links
                 $fieldsInFormula = Parser::getFieldsFromExpression($fieldDef['formula']);
 
-                if (count($fieldsInFormula)) {
+                if (safeCount($fieldsInFormula)) {
                     $matches = array_unique($fieldsInFormula);
 
                     foreach ($matches as $lockedField) {
@@ -184,19 +184,19 @@ class QuotesConfigApi extends ConfigModuleApi
                         }
 
                         if (!isset($retFields[$moduleName][$fieldName])) {
-                            $retFields[$moduleName][$fieldName] = array();
+                            $retFields[$moduleName][$fieldName] = [];
                         }
 
                         if (!isset($retFields[$moduleName][$fieldName]['locked'])) {
-                            $retFields[$moduleName][$fieldName]['locked'] = array();
+                            $retFields[$moduleName][$fieldName]['locked'] = [];
                         }
 
                         if (!isset($retFields[$moduleName][$fieldName]['locked'][$lockedField])) {
-                            $retFields[$moduleName][$fieldName]['locked'][$lockedField] = array(
+                            $retFields[$moduleName][$fieldName]['locked'][$lockedField] = [
                                 'module' => $moduleName,
                                 'field' => $fieldName,
                                 'reason' => 'formula',
-                            );
+                            ];
                         }
                     }
                 }
@@ -205,19 +205,19 @@ class QuotesConfigApi extends ConfigModuleApi
             if (isset($fieldDef['related_fields'])) {
                 foreach ($fieldDef['related_fields'] as $relatedField) {
                     if (!isset($retFields[$moduleName][$fieldName])) {
-                        $retFields[$moduleName][$fieldName] = array();
+                        $retFields[$moduleName][$fieldName] = [];
                     }
 
                     if (!isset($retFields[$moduleName][$fieldName]['related'])) {
-                        $retFields[$moduleName][$fieldName]['related'] = array();
+                        $retFields[$moduleName][$fieldName]['related'] = [];
                     }
 
                     if (!isset($retFields[$moduleName][$fieldName]['related'][$relatedField])) {
-                        $retFields[$moduleName][$fieldName]['related'][$relatedField] = array(
+                        $retFields[$moduleName][$fieldName]['related'][$relatedField] = [
                             'module' => $moduleName,
                             'field' => $fieldName,
                             'reason' => 'related_fields',
-                        );
+                        ];
                     }
                 }
             }
@@ -246,11 +246,11 @@ class QuotesConfigApi extends ConfigModuleApi
         );
         $productsFieldNames = $mm->getModuleViewFields('Products', 'quote-data-group-list');
 
-        $fieldVardefs = array(
+        $fieldVardefs = [
             'Quotes' => VardefManager::getFieldDefs('Quotes'),
             'ProductBundles' => VardefManager::getFieldDefs('ProductBundles'),
             'Products' => VardefManager::getFieldDefs('Products'),
-        );
+        ];
 
         $qFields = $this->getDependenciesFromFields(
             'Quotes',
@@ -306,7 +306,7 @@ class QuotesConfigApi extends ConfigModuleApi
      */
     protected function getDependenciesFromFields(string $moduleName, array $fieldNames, array $fieldDefs)
     {
-        $retFields = array();
+        $retFields = [];
         foreach ($fieldNames as $fieldName) {
             if (isset($fieldDefs[$moduleName][$fieldName])) {
                 $fieldDef = $fieldDefs[$moduleName][$fieldName];
@@ -333,7 +333,7 @@ class QuotesConfigApi extends ConfigModuleApi
      */
     protected function parseFieldFormula(string $moduleName, array $fieldDef, array $fieldDefs, array &$retFields)
     {
-        $matches = array();
+        $matches = [];
         $fieldName = $fieldDef['name'];
 
         // check ProductBundles links
@@ -341,22 +341,22 @@ class QuotesConfigApi extends ConfigModuleApi
         $fields = Parser::getFormulaRelateFields($expr, 'product_bundles');
 
         //$fields = Parser::getFormulaRelateFields($fieldDef['formula']);
-        if (count($fields)) {
+        if (safeCount($fields)) {
             foreach ($fields as $lockedField) {
                 if (!isset($retFields['ProductBundles'][$lockedField])) {
-                    $retFields['ProductBundles'][$lockedField] = array();
+                    $retFields['ProductBundles'][$lockedField] = [];
                 }
 
                 if (!isset($retFields['ProductBundles'][$lockedField]['locked'])) {
-                    $retFields['ProductBundles'][$lockedField]['locked'] = array();
+                    $retFields['ProductBundles'][$lockedField]['locked'] = [];
                 }
 
                 if (!isset($retFields['ProductBundles'][$lockedField]['locked'][$fieldName])) {
-                    $retFields['ProductBundles'][$lockedField]['locked'][$fieldName] = array(
+                    $retFields['ProductBundles'][$lockedField]['locked'][$fieldName] = [
                         'module' => $moduleName,
                         'field' => $fieldName,
                         'reason' => 'rollup',
-                    );
+                    ];
                 }
 
                 $rollupField = $fieldDefs['ProductBundles'][$lockedField];
@@ -383,22 +383,22 @@ class QuotesConfigApi extends ConfigModuleApi
         $expr = Parser::evaluate($fieldDef['formula'], $this);
         $fields = Parser::getFormulaRelateFields($expr, 'products');
 
-        if (count($fields)) {
+        if (safeCount($fields)) {
             foreach ($fields as $lockedField) {
                 if (!isset($retFields['Products'][$lockedField])) {
-                    $retFields['Products'][$lockedField] = array();
+                    $retFields['Products'][$lockedField] = [];
                 }
 
                 if (!isset($retFields['Products'][$lockedField]['locked'])) {
-                    $retFields['Products'][$lockedField]['locked'] = array();
+                    $retFields['Products'][$lockedField]['locked'] = [];
                 }
 
                 if (!isset($retFields['Products'][$lockedField]['locked'][$fieldName])) {
-                    $retFields['Products'][$lockedField]['locked'][$fieldName] = array(
+                    $retFields['Products'][$lockedField]['locked'][$fieldName] = [
                         'module' => $moduleName,
                         'field' => $fieldName,
                         'reason' => 'rollup',
-                    );
+                    ];
                 }
 
                 $rollupField = $fieldDefs['Products'][$lockedField];
@@ -424,7 +424,7 @@ class QuotesConfigApi extends ConfigModuleApi
         // check variables links
         $fieldsInFormula = Parser::getFieldsFromExpression($fieldDef['formula']);
 
-        if (count($fieldsInFormula)) {
+        if (safeCount($fieldsInFormula)) {
             $matches = array_unique($fieldsInFormula);
 
             foreach ($matches as $lockedField) {
@@ -435,19 +435,19 @@ class QuotesConfigApi extends ConfigModuleApi
                 }
 
                 if (!isset($retFields[$moduleName][$lockedField])) {
-                    $retFields[$moduleName][$lockedField] = array();
+                    $retFields[$moduleName][$lockedField] = [];
                 }
 
                 if (!isset($retFields[$moduleName][$lockedField]['locked'])) {
-                    $retFields[$moduleName][$lockedField]['locked'] = array();
+                    $retFields[$moduleName][$lockedField]['locked'] = [];
                 }
 
                 if (!isset($retFields[$moduleName][$lockedField]['locked'][$fieldName])) {
-                    $retFields[$moduleName][$lockedField]['locked'][$fieldName] = array(
+                    $retFields[$moduleName][$lockedField]['locked'][$fieldName] = [
                         'module' => $moduleName,
                         'field' => $fieldName,
                         'reason' => 'formula',
-                    );
+                    ];
                 }
 
                 $rollupField = $fieldDefs[$moduleName][$lockedField];
@@ -480,19 +480,19 @@ class QuotesConfigApi extends ConfigModuleApi
 
         foreach ($fieldDef['related_fields'] as $relatedField) {
             if (!isset($retFields[$moduleName][$relatedField])) {
-                $retFields[$moduleName][$relatedField] = array();
+                $retFields[$moduleName][$relatedField] = [];
             }
 
             if (!isset($retFields[$moduleName][$relatedField]['related'])) {
-                $retFields[$moduleName][$relatedField]['related'] = array();
+                $retFields[$moduleName][$relatedField]['related'] = [];
             }
 
             if (!isset($retFields[$moduleName][$relatedField]['related'][$fieldName])) {
-                $retFields[$moduleName][$relatedField]['related'][$fieldName] = array(
+                $retFields[$moduleName][$relatedField]['related'][$fieldName] = [
                     'module' => $moduleName,
                     'field' => $fieldName,
                     'reason' => 'related_fields',
-                );
+                ];
             }
         }
     }
@@ -583,11 +583,12 @@ class QuotesConfigApi extends ConfigModuleApi
      */
     protected function writeWorksheetColumnsToRecordViewDef(
         ViewdefManager $viewdefManager,
-        array $worksheetColumns,
-        string $platform,
-        string $module,
-        string $view
+        array          $worksheetColumns,
+        string         $platform,
+        string         $module,
+        string         $view
     ) {
+
         // Load the viewDef. If it does not contain the key we need to update,
         // then load from base/core
         $viewDef = $viewdefManager->loadViewdef($platform, $module, $view, false);
@@ -623,7 +624,7 @@ class QuotesConfigApi extends ConfigModuleApi
      * @param array $data Worksheet columns data from config
      * @return void
      */
-    public function saveMobileWorksheetColumnConfig(array $data) : void
+    public function saveMobileWorksheetColumnConfig(array $data): void
     {
         $worksheet_columns = $data['worksheet_columns'];
 

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Rebuild minified JS files
  */
@@ -27,9 +28,9 @@ class SugarUpgradeMinifyJS extends UpgradeScript
         $_REQUEST['force_rebuild'] = true;
 
         // Add some reasonable logging for identification later
-        $this->log("MINIFY UPGRADER: About to require minify.php");
+        $this->log('MINIFY UPGRADER: About to require minify.php');
         // Changed require_once to require, to ensure this actually gets included
         require 'jssource/minify.php';
-        $this->log("MINIFY UPGRADER: Minification should have taken place and new javascript minified files should be in place");
+        $this->log('MINIFY UPGRADER: Minification should have taken place and new javascript minified files should be in place');
     }
 }

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint;
 
 use Psr\Log\LoggerAwareInterface;
@@ -29,7 +30,8 @@ use Sugarcrm\Sugarcrm\Hint\Queue\QueueTrait;
 
 class Initializer implements LoggerAwareInterface
 {
-    use LoggerAwareTrait, QueueTrait;
+    use LoggerAwareTrait;
+    use QueueTrait;
 
     /**
      * Initializer constructor.
@@ -358,7 +360,7 @@ class Initializer implements LoggerAwareInterface
                     }
 
                     // add related ids
-                    if ($row['target_id'] && !in_array($row['target_id'], $data[$id]['targetIds'])) {
+                    if ($row['target_id'] && !safeInArray($row['target_id'], $data[$id]['targetIds'])) {
                         $data[$id]['targetIds'][] = $row['target_id'];
                     }
 
@@ -417,7 +419,7 @@ class Initializer implements LoggerAwareInterface
             // Add the completion event to the final UserInitJob chunk, so that
             // we can give the final UserInitJob chunk the completion event to send.
             $userIdChunks = array_chunk($ids, UserInitJob::ID_CHUNK_SIZE);
-            for ($i = 0; $i < count($userIdChunks); $i++) {
+            for ($i = 0; $i < safeCount($userIdChunks); $i++) {
                 $chunk = $userIdChunks[$i];
                 $job = $scheduler->createJob();
                 $job->status = \SchedulersJob::JOB_STATUS_QUEUED;
@@ -425,7 +427,7 @@ class Initializer implements LoggerAwareInterface
 
                 // If the final chunk: add the completion event to it along with user ids
                 // else: just pass user ids of the current chunk
-                if ($i == count($userIdChunks) - 1) {
+                if ($i == safeCount($userIdChunks) - 1) {
                     $job->data = json_encode([
                         'ids' => $chunk,
                         'completionEventData' => [

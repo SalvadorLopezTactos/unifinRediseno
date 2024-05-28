@@ -139,7 +139,8 @@
      */
     open: function() {
         this.layout.trigger('quicksearch:tag:open');
-        this.$('.quicksearch-tags').show();
+        this.$('.quicksearch-tags').removeClass('hidden');
+        this.$('.quicksearch-tags').addClass('flex');
     },
 
     /**
@@ -147,7 +148,8 @@
      */
     close: function() {
         this.layout.trigger('quicksearch:tag:close');
-        this.$('.quicksearch-tags').hide();
+        this.$('.quicksearch-tags').addClass('hidden');
+        this.$('.quicksearch-tags').removeClass('flex');
     },
 
     /**

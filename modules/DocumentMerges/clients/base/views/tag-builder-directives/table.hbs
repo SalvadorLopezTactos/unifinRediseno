@@ -23,7 +23,7 @@
                 <option></option>
                 {{#each moduleRelationships}}
                     <option {{#eq selected true}}selected="true" {{/eq}} value="#{{name}}" module={{module}}>
-                        {{module}}
+                        {{moduleLabelTranslation}}
                         [{{relationshipName}}]
                     </option>
                 {{/each}}

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\DocumentMerge\Client\Adapter;
 
 use Sugarcrm\Sugarcrm\DocumentMerge\Client\Constants\MergeType;
@@ -27,7 +28,7 @@ class AdapterFactory
         $class = static::getClass($options['mergeType']);
         $log = \LoggerManager::getLogger();
 
-        $adapterClass = __NAMESPACE__. $class;
+        $adapterClass = __NAMESPACE__ . $class;
         if (class_exists($adapterClass)) {
             try {
                 $instance = new $adapterClass($options);
@@ -40,6 +41,7 @@ class AdapterFactory
 
         return $instance;
     }
+
     /**
      * Return the class coresponding to the merge type
      *
@@ -57,7 +59,7 @@ class AdapterFactory
                 $class = '\\Adapters\\MergeDataAdapter';
                 break;
             case MergeType::MultiMerge:
-                $class ='\\Adapters\\MultiMergeDataAdapter';
+                $class = '\\Adapters\\MultiMergeDataAdapter';
                 break;
             case MergeType::MultiConvert:
                 $class = '\\Adapters\\MultiConvertDataAdapter';

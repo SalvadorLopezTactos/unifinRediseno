@@ -11,7 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'url' => 'Διεύθυνση URL',
-);
-
+];

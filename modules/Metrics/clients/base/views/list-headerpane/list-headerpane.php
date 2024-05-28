@@ -9,22 +9,22 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Metrics']['base']['view']['list-headerpane'] = array(
-    'fields' => array(
-        array(
+$viewdefs['Metrics']['base']['view']['list-headerpane'] = [
+    'fields' => [
+        [
             'name' => 'title',
             'type' => 'label',
             'default_value' => 'LBL_MODULE_NAME',
-        ),
-        array(
+        ],
+        [
             'name' => 'collection-count',
             'type' => 'collection-count',
-        ),
-    ),
-    'buttons' => array(
-        array(
+        ],
+    ],
+    'buttons' => [
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

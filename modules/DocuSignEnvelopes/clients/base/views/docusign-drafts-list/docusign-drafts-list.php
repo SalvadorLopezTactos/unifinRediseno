@@ -18,7 +18,7 @@ $viewdefs[$module_name]['base']['view']['docusign-drafts-list'] = [
     'rowactions' => [
         'actions' => [
             [
-                'type' => "rowaction",
+                'type' => 'rowaction',
                 'event' => 'click:draft:open',
                 'acl_action' => 'view',
                 'tooltip' => 'Open draft',

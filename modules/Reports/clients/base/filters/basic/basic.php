@@ -10,81 +10,77 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Reports']['base']['filter']['basic'] = array(
+$viewdefs['Reports']['base']['filter']['basic'] = [
     'create' => true,
-    'quicksearch_field' => array('name'),
+    'quicksearch_field' => ['name'],
     'quicksearch_priority' => 1,
     'quicksearch_split_terms' => false,
-    'filters' => array(
-        array(
+    'filters' => [
+        [
             'id' => 'all_records',
             'name' => 'LBL_LISTVIEW_FILTER_ALL',
-            'filter_definition' => array(),
+            'filter_definition' => [],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'assigned_to_me',
             'name' => 'LBL_ASSIGNED_TO_ME',
-            'filter_definition' => array(
+            'filter_definition' => [
                 '$owner' => '',
-            ),
+            ],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'favorites',
             'name' => 'LBL_FAVORITES',
-            'filter_definition' => array(
+            'filter_definition' => [
                 '$favorite' => '',
-            ),
+            ],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'recently_viewed',
             'name' => 'LBL_RECENTLY_VIEWED',
-            'filter_definition' => array(
+            'filter_definition' => [
                 '$tracker' => '-7 DAY',
-            ),
+            ],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'recently_created',
             'name' => 'LBL_NEW_RECORDS',
-            'filter_definition' => array(
-                'date_entered' => array(
+            'filter_definition' => [
+                'date_entered' => [
                     '$dateRange' => 'last_7_days',
-                ),
-            ),
+                ],
+            ],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'recently_modified',
             'name' => 'LBL_RECENTLY_MODIFIED',
-            'filter_definition' => array(
-                'date_modified' => array(
+            'filter_definition' => [
+                'date_modified' => [
                     '$dateRange' => 'last_7_days',
-                ),
-            ),
+                ],
+            ],
             'editable' => false,
-        ),
-        array(
-            'id' => 'stock_reports',
-            'name' => 'LBL_FILTER_STOCK_REPORTS',
-            'filter_definition' => array(
-                'tag' => array(
-                    '$in' => array('Stock Report'),
-                ),
-            ),
+        ],
+        [
+            'id' => 'template_reports',
+            'name' => 'LBL_FILTER_TEMPLATE_REPORTS',
+            'filter_definition' => [
+                'is_template' => '1',
+            ],
             'editable' => false,
-        ),
-        array(
-            'id' => 'non_stock_reports',
-            'name' => 'LBL_FILTER_NON_STOCK_REPORTS',
-            'filter_definition' => array(
-                'tag' => array(
-                    '$not_in' => array('Stock Report'),
-                ),
-            ),
+        ],
+        [
+            'id' => 'non_template_reports',
+            'name' => 'LBL_FILTER_NON_TEMPLATE_REPORTS',
+            'filter_definition' => [
+                'is_template' => '0',
+            ],
             'editable' => false,
-        ),
-    ),
-);
+        ],
+    ],
+];

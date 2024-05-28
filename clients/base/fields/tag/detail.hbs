@@ -15,8 +15,8 @@
     <div class="tags">
         {{#each value}}
             <span class="tag-wrapper">
-                <span class="tag-name ellipsis_inline" rel="tooltip" data-placement="bottom" title="{{#if name}}{{name}}{{else}}{{this}}{{/if}}">
-                <a class="tag-name ellipsis-inline" href="#search/?tags={{encodedValue}}" track="click:{{name}}" data-action="tag-search" data-tag="{{#if name}}{{name}}{{else}}{{this}}{{/if}}">
+                <span class="tag-name ellipsis_inline block overflow-hidden" rel="tooltip" data-bs-placement="bottom" title="{{#if name}}{{name}}{{else}}{{this}}{{/if}}">
+                <a class="tag-name ellipsis-inline block overflow-hidden" href="#search/?tags={{encodedValue}}" track="click:{{name}}" data-action="tag-search" data-tag="{{#if name}}{{name}}{{else}}{{this}}{{/if}}">
                     {{#if name}}{{name}}{{else}}{{this}}{{/if}}
                 </a>
                 </span>

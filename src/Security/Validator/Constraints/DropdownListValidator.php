@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Security\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
@@ -28,10 +29,10 @@ class DropdownListValidator extends ConstraintValidator
     public function validate($dropdownList, Constraint $constraint)
     {
         if (!$constraint instanceof DropdownList) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\DropdownList');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\DropdownList');
         }
         if (empty($dropdownList)) {
-            $dropdownList = array();
+            $dropdownList = [];
         }
         if (!is_array($dropdownList)) {
             throw new UnexpectedTypeException($dropdownList, 'array');
@@ -48,6 +49,7 @@ class DropdownListValidator extends ConstraintValidator
             return;
         }
     }
+
     /**
      * Checks array keys validity (contains only letters, numbers and underscore)
      * @param array $array

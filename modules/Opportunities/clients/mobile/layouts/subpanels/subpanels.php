@@ -9,72 +9,72 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Opportunities']['mobile']['layout']['subpanels'] = array(
-    'components' => array(
-        array(
+$viewdefs['Opportunities']['mobile']['layout']['subpanels'] = [
+    'components' => [
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_CALLS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'calls',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_MEETINGS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'meetings',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_TASKS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'tasks',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_NOTES_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'notes',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_RLI_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'revenuelineitems',
-            ),
+            ],
             'linkable' => false,
-        ),
-        array(
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_QUOTE_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'quotes',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_INVITEE',
-            'context' => array(
+            'context' => [
                 'link' => 'contacts',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_LEADS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'leads',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_DOCUMENTS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'documents',
-            ),
-        ),
+            ],
+        ],
         [
             'layout' => 'subpanel',
             'label' => 'LBL_CONTRACTS_SUBPANEL_TITLE',
@@ -82,22 +82,22 @@ $viewdefs['Opportunities']['mobile']['layout']['subpanels'] = array(
                 'link' => 'contracts',
             ],
         ],
-        array (
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_PRODUCTS_SUBPANEL_TITLE',
-            'context' => array (
+            'context' => [
                 'link' => 'products',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_EMAILS_SUBPANEL_TITLE',
             'linkable' => false,
             'unlinkable' => false,
-            'context' => array(
+            'context' => [
                 'link' => 'archived_emails',
-            ),
-        ),
+            ],
+        ],
         [
             'layout' => 'subpanel',
             'label' => 'LBL_ESCALATIONS_SUBPANEL_TITLE',
@@ -105,5 +105,5 @@ $viewdefs['Opportunities']['mobile']['layout']['subpanels'] = array(
                 'link' => 'escalations',
             ],
         ],
-    ),
-);
+    ],
+];

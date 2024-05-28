@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'Administracija',
-    'Product' => 'Proizvod',
-    'User' => 'Korisnik',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => 'Novo',
-    'Assigned' => 'Dodijeljeno',
-    'Closed' => 'Zatvoreno',
-    'Pending Input' => 'Unos na čekanju',
-    'Rejected' => 'Odbijeno',
-    'Duplicate' => 'Duplikat',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => 'Visoki',
-    'P2' => 'Srednji',
-    'P3' => 'Niski',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => 'Prihvaćeno',
-    'Duplicate' => 'Duplikat',
-    'Closed' => 'Zatvoreno',
-    'Out of Date' => 'Zastarjelo',
-    'Invalid' => 'Nije valjano',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => 'Administracija',
+        'Product' => 'Proizvod',
+        'User' => 'Korisnik',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => 'Novo',
+        'Assigned' => 'Dodijeljeno',
+        'Closed' => 'Zatvoreno',
+        'Pending Input' => 'Unos na čekanju',
+        'Rejected' => 'Odbijeno',
+        'Duplicate' => 'Duplikat',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => 'Visoko',
+        'P2' => 'Srednje',
+        'P3' => 'Nisko',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => 'Prihvaćeno',
+        'Duplicate' => 'Duplikat',
+        'Closed' => 'Zatvoreno',
+        'Out of Date' => 'Zastarjelo',
+        'Invalid' => 'Nije valjano',
+    ],
+];

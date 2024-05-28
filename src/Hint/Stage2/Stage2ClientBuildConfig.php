@@ -12,26 +12,23 @@
 
 // When the module package is built with specific non-default configuration parameters, they
 // appear here. Otherwise the module returns an empty array.
-$config = array (
-  'US' =>
-  array (
-    'service-url' => 'https://hint-data-enrichment.service.sugarcrm.com',
-    'hint-iss-service-url' => 'https://hint-interest-subscription.service.sugarcrm.com',
-    'hint-notifications-service-url' => 'https://hint-notifications.service.sugarcrm.com',
-  ),
-  'EU' =>
-  array (
-    'service-url' => 'https://hint-data-enrichment-eu-central-1.service.sugarcrm.com',
-    'hint-iss-service-url' => 'https://hint-interest-subscription-eu-central-1.service.sugarcrm.com',
-    'hint-notifications-service-url' => 'https://hint-notifications-eu-central-1.service.sugarcrm.com',
-  ),
-  'APSE' =>
-  array (
-    'service-url' => 'https://hint-data-enrichment-ap-southeast-2.service.sugarcrm.com',
-    'hint-iss-service-url' => 'https://hint-interest-subscription-ap-southeast-2.service.sugarcrm.com',
-    'hint-notifications-service-url' => 'https://hint-notifications-ap-southeast-2.service.sugarcrm.com',
-  ),
-  'hint_version' => '5.4.2',
-  'package_type' => 'prod',
-);
+$config = [
+    'US' => [
+        'service-url' => 'https://hint-data-enrichment.service.sugarcrm.com',
+        'hint-iss-service-url' => 'https://hint-interest-subscription.service.sugarcrm.com',
+        'hint-notifications-service-url' => 'https://hint-notifications.service.sugarcrm.com',
+    ],
+    'EU' => [
+        'service-url' => 'https://hint-data-enrichment-eu-central-1.service.sugarcrm.com',
+        'hint-iss-service-url' => 'https://hint-interest-subscription-eu-central-1.service.sugarcrm.com',
+        'hint-notifications-service-url' => 'https://hint-notifications-eu-central-1.service.sugarcrm.com',
+    ],
+    'APSE' => [
+        'service-url' => 'https://hint-data-enrichment-ap-southeast-2.service.sugarcrm.com',
+        'hint-iss-service-url' => 'https://hint-interest-subscription-ap-southeast-2.service.sugarcrm.com',
+        'hint-notifications-service-url' => 'https://hint-notifications-ap-southeast-2.service.sugarcrm.com',
+    ],
+    'hint_version' => '5.4.2',
+    'package_type' => 'prod',
+];
 return $config;

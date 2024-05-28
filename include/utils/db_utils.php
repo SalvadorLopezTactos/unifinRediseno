@@ -14,16 +14,16 @@
 /**
  * @deprecated use DBManager::convert() instead.
  */
-function db_convert($string, $type, $additional_parameters=array(),$additional_parameters_oracle_only=array())
-	{
+function db_convert($string, $type, $additional_parameters = [], $additional_parameters_oracle_only = [])
+{
     return $GLOBALS['db']->convert($string, $type, $additional_parameters, $additional_parameters_oracle_only);
-            }
+}
 
 /**
  * @deprecated use DBManager::concat() instead.
  */
 function db_concat($table, $fields)
-	{
+{
     return $GLOBALS['db']->concat($table, $fields);
 }
 
@@ -31,9 +31,9 @@ function db_concat($table, $fields)
  * @deprecated use DBManager::fromConvert() instead.
  */
 function from_db_convert($string, $type)
-	{
+{
     return $GLOBALS['db']->fromConvert($string, $type);
-	}
+}
 
 /**
  * Replaces specific characters with their HTML entity values
@@ -47,15 +47,15 @@ function from_db_convert($string, $type)
  * Bug 49489 - removed caching of to_html strings as it was consuming memory and
  * never releasing it
  */
-function to_html($string, $encode=true)
+function to_html($string, $encode = true)
 {
-	if (empty($string) || !$encode) {
-		return $string;
-	}
+    if (empty($string) || !$encode) {
+        return $string;
+    }
     if (isFromApi()) {
         return $string;
     }
-    return htmlspecialchars($string, ENT_QUOTES, "UTF-8");
+    return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
 }
 
 
@@ -65,7 +65,7 @@ function to_html($string, $encode=true)
  * @param bool $decode Default true
  * @return string
  */
-function from_html($string, $decode=true)
+function from_html($string, $decode = true)
 {
     if (!is_string($string) || !$decode) {
         return $string;

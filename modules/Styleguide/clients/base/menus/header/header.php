@@ -10,40 +10,40 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'Styleguide';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
-        'route'=>'#'.$module_name.'/docs/index',
-        'label' =>'Core Elements',
-        'acl_action'=>'list',
-        'acl_module'=>'Accounts',
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
+        'route' => '#' . $module_name . '/docs/index',
+        'label' => 'Core Elements',
+        'acl_action' => 'list',
+        'acl_module' => 'Accounts',
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=>'#'.$module_name.'/fields/index',
-        'label' =>'Example SugarCRM Fields',
-        'acl_action'=>'list',
-        'acl_module'=>'Accounts',
+    ],
+    [
+        'route' => '#' . $module_name . '/fields/index',
+        'label' => 'Example SugarCRM Fields',
+        'acl_action' => 'list',
+        'acl_module' => 'Accounts',
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=>'#'.$module_name.'/views/index',
-        'label' =>'Example SugarCRM Views',
-        'acl_action'=>'list',
-        'acl_module'=>'Accounts',
+    ],
+    [
+        'route' => '#' . $module_name . '/views/index',
+        'label' => 'Example SugarCRM Views',
+        'acl_action' => 'list',
+        'acl_module' => 'Accounts',
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=>'#'.$module_name.'/layout/records',
-        'label' =>'Default Module List Layout',
-        'acl_action'=>'list',
-        'acl_module'=>'Accounts',
+    ],
+    [
+        'route' => '#' . $module_name . '/layout/records',
+        'label' => 'Default Module List Layout',
+        'acl_action' => 'list',
+        'acl_module' => 'Accounts',
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=>'#'.$module_name.'/create',
-        'label' =>'Default Record Create Layout',
-        'acl_action'=>'list',
-        'acl_module'=>'Accounts',
+    ],
+    [
+        'route' => '#' . $module_name . '/create',
+        'label' => 'Default Record Create Layout',
+        'acl_action' => 'list',
+        'acl_module' => 'Accounts',
         'icon' => 'sicon-plus',
-    ),
-);
+    ],
+];

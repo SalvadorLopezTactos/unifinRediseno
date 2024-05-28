@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Processdefinitioner',
-  'LBL_MODULE_TITLE' => 'Processdefinition',
-  'LBL_MODULE_NAME_SINGULAR' => 'Processdefinition',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Processdefinitioner',
+    'LBL_MODULE_TITLE' => 'Processdefinition',
+    'LBL_MODULE_NAME_SINGULAR' => 'Processdefinition',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för processdefinitioner',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för processdefinitioner',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Instrumentpanel för processdefinitionpost',
-  'LNK_LIST' => 'Visa Processdefinitioner',
-  'LNK_NEW_PMSE_PROJECT' => 'Skapa Processdefinitioner',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Importera Processdefinitioner',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Instrumentpanel för processdefinitionpost',
+    'LNK_LIST' => 'Visa Processdefinitioner',
+    'LNK_NEW_PMSE_PROJECT' => 'Skapa Processdefinitioner',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Importera Processdefinitioner',
 
-  'LBL_PRJ_STATUS' => 'Status',
-  'LBL_PRJ_MODULE' => 'Målmodul',
-  'LBL_PRJ_RUN_ORDER' => 'Körningsordning',
-  'LBL_PMSE_BUTTON_SAVE' => 'Spara',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Avbryt',
-  'LBL_PMSE_BUTTON_YES' => 'Ja',
-  'LBL_PMSE_BUTTON_NO' => 'Nej',
-  'LBL_PMSE_BUTTON_OK' => 'Ok',
+    'LBL_PRJ_STATUS' => 'Status',
+    'LBL_PRJ_MODULE' => 'Målmodul',
+    'LBL_PRJ_RUN_ORDER' => 'Körningsordning',
+    'LBL_PMSE_BUTTON_SAVE' => 'Spara',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Avbryt',
+    'LBL_PMSE_BUTTON_YES' => 'Ja',
+    'LBL_PMSE_BUTTON_NO' => 'Nej',
+    'LBL_PMSE_BUTTON_OK' => 'Ok',
     'LBL_PMSE_FORM_ERROR' => 'Vänligen åtgärda eventuella fel innan du fortsätter.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Design',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktivitet',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Åtgärd',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Lead Starta Event',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Affärsmöjlighet Starta Event' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Affärsmöjlighet Starta Event',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Dokument Starta Event',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Annan Modul Event',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Vänta Event',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Affärsregel',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Affärsregelåtgärd',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'E-postmall',
-);
+];

@@ -83,12 +83,13 @@ class SugarVoter implements SugarVoterInterface
         $subscriptions = $this->getCurrentUserSubscriptions();
         return AccessConfigurator::instance()->getNotAccessibleModuleListByLicenseTypes($subscriptions);
     }
+
     /**
      * $key
      * @param string $key section key in access_config file
      * @return bool
      */
-    protected function supports(string $key) : bool
+    protected function supports(string $key): bool
     {
         return in_array($key, $this->getSupportedKeys());
     }
@@ -97,7 +98,7 @@ class SugarVoter implements SugarVoterInterface
      * get section keys this vote is responsible for
      * @return array
      */
-    protected function getSupportedKeys() : array
+    protected function getSupportedKeys(): array
     {
         return $this->supportedKeys;
     }
@@ -105,7 +106,7 @@ class SugarVoter implements SugarVoterInterface
     /**
      * {@inheritdoc}
      */
-    public function vote(string $key, string $subject, ?string $value = null) : bool
+    public function vote(string $key, string $subject, ?string $value = null): bool
     {
         if (!$this->supports($key)) {
             return true;

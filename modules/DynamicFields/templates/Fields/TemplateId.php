@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,12 +10,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-class TemplateId extends TemplateField{
-    var $type='id';
-    var $len = 36 ;
-    
-    
+
+class TemplateId extends TemplateField
+{
+    public $type = 'id';
+    public $len = 36;
 }
-
-
-?>

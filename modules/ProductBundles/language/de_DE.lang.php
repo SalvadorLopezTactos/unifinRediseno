@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Gruppen-Phase:',
-    'LBL_DEAL_TOT'=>'Gesamt-Rabatt',
-    'LBL_DEAL_TOT_USDOLLAR'=>'Gesamt-Rabatt Standardwährung',
+    'LBL_DEAL_TOT' => 'Gesamt-Rabatt',
+    'LBL_DEAL_TOT_USDOLLAR' => 'Gesamt-Rabatt Standardwährung',
     'LBL_NEW_SUB' => 'Zwischensumme mit Rabatt:',
     'LBL_SHIPPING' => 'Lieferung:',
-    'LBL_SHIPPING_USDOLLAR'=>'Lieferung (US-Dollar)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Zwischensumme (US-Dollar)',
+    'LBL_SHIPPING_USDOLLAR' => 'Lieferung (US-Dollar)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Zwischensumme (US-Dollar)',
     'LBL_SUBTOTAL' => 'Zwischensumme:',
     'LBL_TAXABLE_SUBTOTAL' => 'Steuerpflichtige Zwischensumme',
-    'LBL_TAX_USDOLLAR'=>'Steuer (US-Dollar)',
+    'LBL_TAX_USDOLLAR' => 'Steuer (US-Dollar)',
     'LBL_TAX' => 'Steuer:',
-    'LBL_TOTAL_USDOLLAR'=>'Gesamt (US-Dollar)',
+    'LBL_TOTAL_USDOLLAR' => 'Gesamt (US-Dollar)',
     'LBL_TOTAL' => 'Gesamt:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Angebotspaket-Position',
     'EXCEPTION_INVALID_QUOTE_ID' => 'Angebots-ID fehlt in Ladung',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'Das angeforderte Angebot wurde nicht gefunden',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'Das angeforderte Angebot wurde nicht gefunden',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Zusätzlicher Gruppenrabatt',
     'LBL_GROUP_TOTAL' => 'Gruppengesamtbetrag',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Gruppenkopfzeile',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Die standardmäßige Produktpaket-Gruppe für das Angebot',
     'LBL_ALERT_DELETING_ITEM' => 'Produkt(e) wird/werden gelöscht',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Produkt erfolgreich gelöscht',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Zeitleiste des Produktbündels',
+];

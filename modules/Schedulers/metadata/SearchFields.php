@@ -9,8 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$searchFields['Schedulers'] = 
-	array (
-		'name' => array( 'query_type'=>'default'),
-	);
-?>
+$searchFields['Schedulers'] =
+    [
+        'name' => ['query_type' => 'default'],
+    ];

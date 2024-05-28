@@ -49,7 +49,8 @@
             'report_type',
             'teams',
             'team_name',
-            'assigned_user_name'
+            'assigned_user_name',
+            'is_template',
         ];
 
         fields = _.union(fields, requiredFields);

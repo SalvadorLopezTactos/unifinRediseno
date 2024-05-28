@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -83,10 +84,10 @@ return [
                         'layout' => [
                             'name' => 'kpi-metrics',
                             'type' => 'base',
-                            'css_class' => 'kpi-metrics',
-                            "metric_module" => "Accounts",
-                            "metric_context" => "renewals_console",
-                            "order_by_primary" => "next_renewal_date",
+                            'css_class' => 'kpi-metrics flex border-b border-[--border-color]',
+                            'metric_module' => 'Accounts',
+                            'metric_context' => 'renewals_console',
+                            'order_by_primary' => 'next_renewal_date',
                             'components' => [
                                 [
                                     'context' => [
@@ -114,6 +115,15 @@ return [
                             'module' => 'Accounts',
                         ],
                         'view' => 'multi-line-list',
+                    ],
+                    [
+                        'context' => [
+                            'module' => 'Accounts',
+                        ],
+                        'view' => [
+                            'name' => 'multi-line-list-pagination',
+                            'css_class' => 'flex-table-pagination absolute bg-[--primary-content-background] w-full z-30',
+                        ],
                     ],
                 ],
             ],
@@ -125,10 +135,10 @@ return [
                         'layout' => [
                             'name' => 'kpi-metrics',
                             'type' => 'base',
-                            'css_class' => 'kpi-metrics',
-                            "metric_module" => "Opportunities",
-                            "metric_context" => "renewals_console",
-                            "order_by_primary" => "date_closed",
+                            'css_class' => 'kpi-metrics flex border-b border-[--border-color]',
+                            'metric_module' => 'Opportunities',
+                            'metric_context' => 'renewals_console',
+                            'order_by_primary' => 'date_closed',
                             'components' => [
                                 [
                                     'context' => [
@@ -156,6 +166,15 @@ return [
                             'module' => 'Opportunities',
                         ],
                         'view' => 'multi-line-list',
+                    ],
+                    [
+                        'context' => [
+                            'module' => 'Opportunities',
+                        ],
+                        'view' => [
+                            'name' => 'multi-line-list-pagination',
+                            'css_class' => 'flex-table-pagination',
+                        ],
                     ],
                 ],
             ],

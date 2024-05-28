@@ -15,45 +15,47 @@
  * PLEASE DO NOT CHANGE THIS CLASS
  * PLACE ANY CUSTOMIZATIONS IN pmse_BpmnBound
  */
-class pmse_BpmnBound_sugar extends Basic {
-	var $new_schema = true;
-	var $module_dir = 'pmse_Project/pmse_BpmnBound';
+class pmse_BpmnBound_sugar extends Basic
+{
+    public $new_schema = true;
+    public $module_dir = 'pmse_Project/pmse_BpmnBound';
     public $module_name = 'pmse_BpmnBound';
-	var $object_name = 'pmse_BpmnBound';
-	var $table_name = 'pmse_bpmn_bound';
-	var $importable = false;
-	var $disable_custom_fields = true;
-        var $id;
-		var $name;
-		var $date_entered;
-		var $date_modified;
-		var $modified_user_id;
-		var $modified_by_name;
-		var $created_by;
-		var $created_by_name;
-		var $description;
-		var $deleted;
-		var $created_by_link;
-		var $modified_user_link;
-		var $activities;
-		var $assigned_user_id;
-		var $assigned_user_name;
-		var $assigned_user_link;
-    var $bou_uid;
-    var $prj_id;
-    var $dia_id;
-    var $element_id;
-    var $bou_element;
-    var $bou_element_type;
-    var $bou_x;
-    var $bou_y;
-    var $bou_width;
-    var $bou_height;
-    var $bou_rel_position;
-    var $bou_size_identical;
-    var $bou_container;
+    public $object_name = 'pmse_BpmnBound';
+    public $table_name = 'pmse_bpmn_bound';
+    public $importable = false;
+    public $disable_custom_fields = true;
+    public $id;
+    public $name;
+    public $date_entered;
+    public $date_modified;
+    public $modified_user_id;
+    public $modified_by_name;
+    public $created_by;
+    public $created_by_name;
+    public $description;
+    public $deleted;
+    public $created_by_link;
+    public $modified_user_link;
+    public $activities;
+    public $assigned_user_id;
+    public $assigned_user_name;
+    public $assigned_user_link;
+    public $bou_uid;
+    public $prj_id;
+    public $dia_id;
+    public $element_id;
+    public $bou_element;
+    public $bou_element_type;
+    public $bou_x;
+    public $bou_y;
+    public $bou_width;
+    public $bou_height;
+    public $bou_rel_position;
+    public $bou_size_identical;
+    public $bou_container;
 
-	public function __construct(){
-		parent::__construct();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 }

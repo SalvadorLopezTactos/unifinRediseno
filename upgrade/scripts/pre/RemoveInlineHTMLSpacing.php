@@ -21,8 +21,8 @@ class SugarUpgradeRemoveInlineHTMLSpacing extends UpgradeScript
     public function run()
     {
         /** @var $node SplFileInfo */
-        $this->log("**** Removal of inline HTML started");
-        $directory = new RecursiveDirectoryIterator($this->context['source_dir'] . '/custom', FilesystemIterator::UNIX_PATHS);
+        $this->log('**** Removal of inline HTML started');
+        $directory = new RecursiveDirectoryIterator($this->context['source_dir'] . '/custom', FilesystemIterator::UNIX_PATHS | \FilesystemIterator::SKIP_DOTS);
         $offset = strlen($this->context['source_dir']) + 1;
         $iterator = new RecursiveIteratorIterator($directory);
         foreach ($iterator as $node) {
@@ -41,29 +41,29 @@ class SugarUpgradeRemoveInlineHTMLSpacing extends UpgradeScript
             $end = $length;
 
             // detecting leading spaces
-            for ($i = 0; $i < $length; $i ++) {
+            for ($i = 0; $i < $length; $i++) {
                 $char = $content[$i];
                 switch ($char) {
-                    case " " :
-                    case "\t" :
-                    case "\n" :
-                    case "\r" :
+                    case ' ':
+                    case "\t":
+                    case "\n":
+                    case "\r":
                         break;
-                    default :
+                    default:
                         $start = $i;
                         break 2;
                 }
             }
             // detecting ending spaces
-            for ($i = ($length - 1); $i > 0; $i --) {
+            for ($i = ($length - 1); $i > 0; $i--) {
                 $char = $content[$i];
                 switch ($char) {
-                    case " " :
-                    case "\t" :
-                    case "\n" :
-                    case "\r" :
+                    case ' ':
+                    case "\t":
+                    case "\n":
+                    case "\r":
                         break;
-                    default :
+                    default:
                         $end = $i + 1;
                         break 2;
                 }
@@ -84,9 +84,9 @@ class SugarUpgradeRemoveInlineHTMLSpacing extends UpgradeScript
                 $this->backupFile(substr($node->getPathname(), $offset));
                 $content = substr($content, $start, $end - $start);
                 file_put_contents($node->getPathname(), $content);
-                $this->log($node->getPathname() . " has been trimmed");
+                $this->log($node->getPathname() . ' has been trimmed');
             }
         }
-        $this->log("**** Removal of inline HTML ended");
+        $this->log('**** Removal of inline HTML ended');
     }
 }

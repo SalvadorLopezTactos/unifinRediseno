@@ -9,15 +9,14 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /*********************************************************************************
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-
-
-class TrackerQueriesDatabaseStore implements Store {
-
+class TrackerQueriesDatabaseStore implements Store
+{
     public function flush($monitor)
     {
         $fields = [];
@@ -39,21 +38,21 @@ class TrackerQueriesDatabaseStore implements Store {
             return;
         }
 
-       $metrics = $monitor->getMetrics();
-       $values = array();
-       foreach($metrics as $name=>$metric) {
-       	  if(!empty($monitor->$name)) {
-       	  	 $columns[] = $name;
-       	  	 $fields[$name] = array('name' => $name, 'type' => $metrics[$name]->_type);
-       	  	 $values[$name] = $monitor->$name;
-           }
-       } //foreach
+        $metrics = $monitor->getMetrics();
+        $values = [];
+        foreach ($metrics as $name => $metric) {
+            if (!empty($monitor->$name)) {
+                $columns[] = $name;
+                $fields[$name] = ['name' => $name, 'type' => $metrics[$name]->_type];
+                $values[$name] = $monitor->$name;
+            }
+        } //foreach
 
-       if(empty($values)) {
-       	  return;
-       }
+        if (empty($values)) {
+            return;
+        }
 
-       $fields['id'] = array('auto_increment' => true, "name" => "id", "type" => "int");
-       $db->insertParams($monitor->table_name, $fields, $values);
+        $fields['id'] = ['auto_increment' => true, 'name' => 'id', 'type' => 'int'];
+        $db->insertParams($monitor->table_name, $fields, $values);
     }
 }

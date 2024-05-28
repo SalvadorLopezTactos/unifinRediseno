@@ -76,7 +76,16 @@
         this.on('chart:complete', this.chartComplete, this);
         this.on('chart:clicked', this.onClickHandler, this);
 
+        this.listenTo(this.context, 'saved:report:chart:refresh', this._refreshChart, this);
         this.listenTo(this.layout, 'grid-panel:size:changed', this._updateChartSize, this);
+    },
+
+
+    /**
+     * Refresh
+     */
+    _refreshChart: function() {
+        this.loadData();
     },
 
     /**
@@ -703,7 +712,9 @@
 
         app.alert.show('listfromreport_loading', {level: 'process', title: app.lang.get('LBL_LOADING')});
 
-        if (this.$el.parents('.drawer.active').length === 0) {
+        const isSideDrawerClose = !app.sideDrawer.isOpen();
+
+        if (isSideDrawerClose) {
             enums = SUGAR.charts.getEnums(reportData);
             groupDefs = SUGAR.charts.getGrouping(reportData);
             drawerContext = {
@@ -717,7 +728,7 @@
                     auto_apply: false
                 },
                 groupDefs: groupDefs,
-                layout: 'drillthrough-drawer',
+                layout: 'report-side-drawer',
                 module: 'Reports',
                 reportData: reportData,
                 reportId: reportId,
@@ -725,7 +736,7 @@
                 useSavedFilters: false
             };
 
-            this.openDrawer(drawerContext);
+            this._openSideDrawer(drawerContext, reportData.label);
         } else {
             this.updateList(params, state);
         }
@@ -754,19 +765,63 @@
     },
 
     /**
+     * Open a focus drawer
+     *
+     * @param {Object} drawerContext
+     * @param {string} tabTitle
+     */
+    _openSideDrawer: function(context, tabTitle) {
+        if (app.sideDrawer) {
+            const drawerIsOpen = app.sideDrawer.isOpen();
+            const drawerContext = app.sideDrawer.currentContextDef;
+
+            if (drawerIsOpen && _.isEqual(context, drawerContext)) {
+                return;
+            }
+
+            const sideDrawerClick = !!this.$el && (this.$el.closest('#side-drawer').length > 0);
+
+            if (!_.has(context, 'dataTitle')) {
+                const baseModuleKey = 'base_module';
+
+                const hasReportData = _.has(context, 'reportData') && _.has(context.reportData, 'base_module');
+                const hasLabel = _.has(context, 'reportData') && _.has(context.reportData, 'label');
+
+                const reportModule = hasReportData ? context.reportData[baseModuleKey] : '';
+                const reportLabel = hasLabel ? context.reportData.label : '';
+
+                context.dataTitle = app.sideDrawer.getDataTitle(
+                    reportModule,
+                    'LBL_FOCUS_DRAWER_DASHBOARD',
+                    reportLabel
+                );
+            }
+
+            const sideDrawerMeta = {
+                dashboardName: tabTitle,
+                layout: 'report-side-drawer',
+                context
+            };
+
+            app.sideDrawer.open(sideDrawerMeta, null, sideDrawerClick);
+        }
+    },
+
+    /**
      * Update the record list in drill through drawer.
      *
      * @param {Object} params chart display parameters
      * @param {Object} state chart display and data state
      */
     updateList: function(params, state) {
-        var drawer = this.closestComponent('drawer').getComponent('drillthrough-drawer');
-        drawer.context.set('dashConfig', params);
-        drawer.context.set('chartState', state);
-        drawer.updateList();
+        this.context.trigger('report:side:drawer:list:refresh', params, state);
 
         if (this.chartField && this.chartField.chart) {
             this.chartField.chart.updateParams(params);
+
+            if (this.settings && this.settings.get('show_legend')) {
+                this.chartField.generateLegend();
+            }
         }
     },
 

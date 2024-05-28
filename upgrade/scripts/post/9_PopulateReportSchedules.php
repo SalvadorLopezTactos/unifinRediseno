@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Upgrade existing report schedules.
  */
@@ -28,7 +29,7 @@ class SugarUpgradePopulateReportSchedules extends UpgradeScript
             // do nothing if upgrading from 8.1.0 or newer
             return;
         }
-        $this->log("Upgrading report schedules");
+        $this->log('Upgrading report schedules');
         $sql = 'SELECT rs.id, rs.user_id, u.user_name, rs.date_modified, sr.name as report_name, t.id as team_id, ts.id as team_set_id
                 FROM report_schedules rs
                 LEFT JOIN users u on rs.user_id = u.id
@@ -47,9 +48,9 @@ class SugarUpgradePopulateReportSchedules extends UpgradeScript
                 $team_set_id = $row['team_set_id'];
             }
             $update = sprintf(
-                "UPDATE report_schedules
+                'UPDATE report_schedules
                  SET name = %s, assigned_user_id = %s, modified_user_id = %s, created_by = %s, team_id = %s, team_set_id = %s, date_entered = %s
-                 WHERE id = %s",
+                 WHERE id = %s',
                 $this->db->quoted($row['report_name'] . ' - Scheduled for : ' . $row['user_name']),
                 $this->db->quoted($row['user_id']),
                 $this->db->quoted($row['user_id']),
@@ -62,7 +63,7 @@ class SugarUpgradePopulateReportSchedules extends UpgradeScript
             $this->db->query($update);
             // link user
             $insert = sprintf(
-                "INSERT INTO reportschedules_users VALUES (%s, %s, %s, %s, %s)",
+                'INSERT INTO reportschedules_users VALUES (%s, %s, %s, %s, %s)',
                 $this->db->quoted(create_guid()),
                 $this->db->quoted($row['id']),
                 $this->db->quoted($row['user_id']),

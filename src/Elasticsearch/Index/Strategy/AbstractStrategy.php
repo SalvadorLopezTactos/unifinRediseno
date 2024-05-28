@@ -22,7 +22,7 @@ abstract class AbstractStrategy implements StrategyInterface
     /**
      * @var array Strategy configuration parameters
      */
-    protected $config = array();
+    protected $config = [];
 
     /**
      * @var string Identifier

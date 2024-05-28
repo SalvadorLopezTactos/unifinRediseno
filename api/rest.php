@@ -1,5 +1,8 @@
 <?php
-if(!defined('sugarEntry'))define('sugarEntry', true);
+
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,13 +15,12 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
  */
 
 ob_start();
-chdir(__DIR__.'/../');
+chdir(__DIR__ . '/../');
 define('ENTRY_POINT_TYPE', 'api');
-require('include/entryPoint.php');
+require 'include/entryPoint.php';
 SugarAutoLoader::load('custom/include/RestService.php');
 $restServiceClass = SugarAutoLoader::customClass('RestService');
 
 global $service;
 $service = new $restServiceClass();
 $service->execute();
-

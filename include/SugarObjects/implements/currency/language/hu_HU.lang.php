@@ -9,11 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-    'LBL_CURRENCY'=>'Pénznem',
+$mod_strings = [
+    'LBL_CURRENCY' => 'Pénznem',
     'LBL_CURRENCIES' => 'Pénznemek',
-    'LBL_CURRENCY_NAME'=>'Pénznem neve',
-    'LBL_CURRENCY_SYMBOL'=>'Pénznem szimbóluma',
+    'LBL_CURRENCY_NAME' => 'Pénznem neve',
+    'LBL_CURRENCY_SYMBOL' => 'Pénznem szimbóluma',
     'LBL_CURRENCY_RATE' => 'Alap árfolyam',
     'LBL_CURRENCY_ID' => 'Pénznem azonosítója',
-);
+];

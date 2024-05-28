@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'Näytä eskaloidut tapaukset',
     'LBL_LIST_RELATED_TO_ID' => 'Liittyy tunnukseen',
     'LNK_IMPORT_ESCALATIONS' => 'Tuo eskaloidut tapaukset',
-    
+
     'LBL_LIST_SUBJECT' => 'Aihe',
     'LBL_LIST_NUMBER' => 'Num.',
     'LBL_LIST_RELATED_TO_TYPE' => 'Tähän liittyvä tyyppi',

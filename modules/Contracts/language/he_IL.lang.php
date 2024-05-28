@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'חוזים',
-	'LBL_MODULE_NAME_SINGULAR' => 'חוזה',
-	'LBL_MODULE_TITLE' => 'חוזים: דף ראשי',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'חוזים',
+    'LBL_MODULE_NAME_SINGULAR' => 'חוזה',
+    'LBL_MODULE_TITLE' => 'חוזים: דף ראשי',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'צור חוזה',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'זהות מטבע:',
     'LBL_CURRENCY' => 'מטבע:',
     'LBL_CURRENCY_RATE' => 'שער מטבע',
-    'LBL_ASSIGNED_TO_NAME'=>'הוקצה עבור:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'הוקצה עבור:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'רשימת אנשי קשר',	
+    'LBL_LIST_FORM_TITLE' => 'רשימת אנשי קשר',
     'LBL_LIST_CONTRACT_NAME' => 'שם איש קשר',
     'LBL_LIST_ACCOUNT_NAME' => 'שם חשבון',
     'LBL_LIST_START_DATE' => 'התחלה',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'שם',
     'LBL_LIST_CONTRACT_VALUE' => 'ערך',
 
-    'LBL_TYPE'=>'סוג',
+    'LBL_TYPE' => 'סוג',
     'LBL_TYPE_NAME' => 'שם סוג',
-    'LBL_CONTRACT_TYPE'=>'סוג:',
+    'LBL_CONTRACT_TYPE' => 'סוג:',
 
     'LBL_CREATED_USER' => 'משתמש שנוצר',
     'LBL_MODIFIED_USER' => 'משתמש ששונה',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס חוזים',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות חוזים',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן של חוזים',
+];

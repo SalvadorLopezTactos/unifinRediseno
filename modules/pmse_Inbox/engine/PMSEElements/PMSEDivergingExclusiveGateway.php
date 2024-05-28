@@ -20,7 +20,7 @@ class PMSEDivergingExclusiveGateway extends PMSEDivergingGateway
      * @param type $externalAction
      * @return type
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         $flowAction = 'CREATE';
         $filters = $this->filterFlows(
@@ -29,7 +29,7 @@ class PMSEDivergingExclusiveGateway extends PMSEDivergingGateway
             $bean,
             $flowData
         );
-        
+
         switch ($externalAction) {
             case 'RESUME_EXECUTION':
                 $flowAction = 'UPDATE';

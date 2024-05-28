@@ -10,11 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="accordion-heading">
-    <a id='{{name}}Title' class="accordion-toggle" href="#{{name}}Collapse"
-       data-help-id="{{name}}" data-toggle="collapse" data-parent="#config-accordion"></a>
+<div class="accordion-heading" data-bs-toggle="collapse" data-bs-target="[data-container=loggerOptions]"
+    aria-expanded="false" aria-controls="[data-container=loggerOptions]">
+    <a id='{{name}}Title' class="accordion-toggle"></a>
 </div>
-<div id="{{name}}Collapse" class="accordion-body in collapse">
+<div class="in bs-collapse collapse show" data-container="loggerOptions">
     <div class="accordion-inner">
         {{#each meta.panels}}
             {{#each fields}}

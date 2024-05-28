@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => '行事曆',
     'LBL_MODULE_NAME_SINGULAR' => '行事曆',
     'LBL_MODULE_TITLE' => '行事曆',
@@ -90,7 +90,7 @@ $mod_strings = array (
     'LBL_INFO_RELATED_TO' => '關聯至',
 
     'LBL_NO_USER' => '欄位無匹配項：已指派至',
-    'LBL_SUBJECT' => '主題',
+    'LBL_SUBJECT' => '主旨',
     'LBL_DURATION' => '持續時間',
     'LBL_STATUS' => '狀態',
     'LBL_DATE_TIME' => '日期和時間',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => '設定',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => '以「日」和「週」檢視顯示時段：',
-    'LBL_SETTINGS_TIME_STARTS'=>'開始時間：',
-    'LBL_SETTINGS_TIME_ENDS'=>'結束時間：',
+    'LBL_SETTINGS_TIME_STARTS' => '開始時間：',
+    'LBL_SETTINGS_TIME_ENDS' => '結束時間：',
     'LBL_SETTINGS_CALLS_SHOW' => '顯示通話：',
     'LBL_SETTINGS_TASKS_SHOW' => '顯示任務：',
 
@@ -164,7 +164,7 @@ $mod_strings = array (
     'LBL_TIMELINE_EVENT_TEMPLATE' => '時間線活動',
     'LBL_SCHEDULERMONTH_EVENT_TEMPLATE' => '調度器活動',
     'LBL_ICAL_EVENT_TEMPLATE' => 'iCal 活動',
-    'LBL_SUBJECT' => '主題',
+    'LBL_SUBJECT' => '主旨',
     'LBL_CALENDAR_TYPE' => '調度器類型',
     'LBL_COLOR' => '顏色',
     'LBL_DURATION_MINUTES' => '持續分鐘數',
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => '建立行事曆',
     'LNK_CALENDAR_LIST' => '檢視行事曆',
     'LNK_CALENDAR_LEGACY' => '舊行事曆',
-    'LBL_IMPORT_CALENDAR'=> '載入行事曆',
+    'LBL_IMPORT_CALENDAR' => '載入行事曆',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => '活動時間戳',
     'LBL_INSERTFIELD' => '插入字段',
     'LBL_EVENT_START_ERROR' => '請選擇一個開始',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => '請選取行事曆',
     'LBL_SAVE_USER_CALENDARS_ERROR' => '無法儲存行事曆。',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             '星期日',
             '星期一',
             '星期二',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             '星期四',
             '星期五',
             '星期六',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             '星期日',
             '星期一',
             '星期二',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             '星期四',
             '星期五',
             '星期六',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             '1 月',
             '2 月',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             '10 月',
             '11 月',
             '12 月',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             '1 月',
             '2 月',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             '10 月',
             '11 月',
             '12 月',
-        ),
-);
+        ],
+];

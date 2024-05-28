@@ -18,63 +18,64 @@ require_once 'vendor/Zend/Oauth/Provider.php';
  */
 class OAuthKey extends Basic
 {
-	public $module_dir = 'OAuthKeys';
-	public $object_name = 'OAuthKey';
-	public $table_name = 'oauth_consumer';
-	public $c_key;
-	public $c_secret;
-	public $name;
-	public $disable_row_level_security = true;
+    public $module_dir = 'OAuthKeys';
+    public $object_name = 'OAuthKey';
+    public $table_name = 'oauth_consumer';
+    public $c_key;
+    public $c_secret;
+    public $name;
+    public $disable_row_level_security = true;
 
-	static public $keys_cache = array();
+    public static $keys_cache = [];
 
-	/**
-	 * Get record by consumer key
-	 * @param string $key
+    /**
+     * Get record by consumer key
+     * @param string $key
      * @param string $oauth_type Either "oauth1" or "oauth2", defaults to "oauth1"
-	 * @return OAuthKey|false
-	 */
-	public function getByKey($key,$oauth_type="oauth1")
-	{
-	    $this->retrieve_by_string_fields(array("c_key" => $key,"oauth_type"=>$oauth_type));
-	    if(empty($this->id)) return false;
-	    // need this to decrypt the key
+     * @return OAuthKey|false
+     */
+    public function getByKey($key, $oauth_type = 'oauth1')
+    {
+        $this->retrieve_by_string_fields(['c_key' => $key, 'oauth_type' => $oauth_type]);
+        if (empty($this->id)) {
+            return false;
+        }
+        // need this to decrypt the key
         $this->check_date_relationships_load();
-	    return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Fetch customer key by id
-	 * @param string $key
+    /**
+     * Fetch customer key by id
+     * @param string $key
      * @param string $oauth_type Either "oauth1" or "oauth2", defaults to "oauth1"
-	 * @return OAuthKey|false
-	 */
-	public static function fetchKey($key,$oauth_type="oauth1")
-	{
-	    if(isset(self::$keys_cache[$key])&&self::$keys_cache[$key]->oauth_type==$oauth_type) {
-	        return self::$keys_cache[$key];
-	    }
-	    $k = new self();
-	    if($k->getByKey($key,$oauth_type)) {
-	        self::$keys_cache[$key] = $k;
-	        BeanFactory::registerBean($k);
-	        return $k;
-	    }
-	    return false;
-	}
+     * @return OAuthKey|false
+     */
+    public static function fetchKey($key, $oauth_type = 'oauth1')
+    {
+        if (isset(self::$keys_cache[$key]) && self::$keys_cache[$key]->oauth_type == $oauth_type) {
+            return self::$keys_cache[$key];
+        }
+        $k = new self();
+        if ($k->getByKey($key, $oauth_type)) {
+            self::$keys_cache[$key] = $k;
+            BeanFactory::registerBean($k);
+            return $k;
+        }
+        return false;
+    }
 
-	/**
-	 * Delete the key
-	 * also removed all tokens
-	 */
+    /**
+     * Delete the key
+     * also removed all tokens
+     */
     protected function doMarkDeleted(): void
-	{
+    {
         $query = "DELETE FROM {$this->table_name} WHERE id = ? ";
-        $qoat = "DELETE FROM oauth_tokens WHERE consumer = ? ";
+        $qoat = 'DELETE FROM oauth_tokens WHERE consumer = ? ';
 
         $conn = $this->db->getConnection();
-        $conn->executeStatement($query, array($this->id));
-        $conn->executeStatement($qoat, array($this->id));
-	}
-
+        $conn->executeStatement($query, [$this->id]);
+        $conn->executeStatement($qoat, [$this->id]);
+    }
 }

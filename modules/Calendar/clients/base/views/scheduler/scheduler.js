@@ -353,7 +353,7 @@
             const userColor = app.Calendar.utils.pastelColor(user.id);
 
             list += '<li><div><span class="userDot" style="background-color:' + userColor +
-             '"></span> ' + user.name + '</div></li>';
+             '"></span> ' + DOMPurify.sanitize(user.name) + '</div></li>';
         });
 
         this.$('.usersLegend ul').html(list);
@@ -506,9 +506,9 @@
                 const assignedUserColor = app.Calendar.utils.pastelColor(event.assignedUserId);
                 htmlContent = $(htmlContent).prepend('<div class="previewEvent" data-module=' +
                     _.escape(event.module) +
-                    ' data-record=' +  _.escape(event.dbclickRecordId) + ' rel="tooltip" data-placement="bottom"' +
+                    ' data-record=' +  _.escape(event.dbclickRecordId) + ' rel="tooltip" data-bs-placement="bottom"' +
                     ' aria-haspopup="true" aria-expanded="false" data-original-title="' +
-                    _.escape(event.assignedUserName) +
+                    DOMPurify.sanitize(event.assignedUserName) +
                     '"><span class="userBar" style="background-color:' +
                     _.escape(assignedUserColor) + '"></span></div>');
 
@@ -519,8 +519,10 @@
 
                         htmlContent = $(htmlContent).prepend('<div class="previewEvent" data-module=' +
                             _.escape(event.module) +
-                        ' data-record=' +  _.escape(event.dbclickRecordId) + ' rel="tooltip" data-placement="bottom"' +
-                        ' aria-haspopup="true" aria-expanded="false" data-original-title="' +  _.escape(inviteeName) +
+                        ' data-record=' +  _.escape(event.dbclickRecordId) +
+                            ' rel="tooltip" data-bs-placement="bottom"' +
+                        ' aria-haspopup="true" aria-expanded="false" data-original-title="' +
+                            DOMPurify.sanitize(inviteeName) +
                         '"><span class="userBar" style="background-color:' +
                             _.escape(inviteeColor) + '"></span></div>');
                     }
@@ -689,7 +691,7 @@
                     const attendeeColor = app.Calendar.utils.pastelColor(attendee.id);
 
                     const newAttendee = '<div class="attendee"><span class="userDot" style="background-color:' +
-                        attendeeColor + '"></span><span>' + attendee.name + '</span></div>';
+                        attendeeColor + '"></span><span>' + DOMPurify.sanitize(attendee.name) + '</span></div>';
 
                     if (idx < 2) {
                         attendees += newAttendee;
@@ -1880,7 +1882,7 @@
                     .attr('value', data);
 
                 //open modal
-                $('[data-content=publish-icalendar-modal]').modal();
+                $('[data-content=publish-icalendar-modal]').modal('show');
                 //on close, remove it from body in order to not mess with other modals
                 $('[data-content=publish-icalendar-modal]')
                     .on('hidden.bs.modal', function modalCloseHandler() {
@@ -1925,7 +1927,7 @@
                 .timepicker('setTime', calendarBusinessHours.end);
         }
         //open modal
-        $('[data-content=business-hours-modal]').modal();
+        $('[data-content=business-hours-modal]').modal('show');
         //on close, remove it from body in order to not mess with other modals
         $('[data-content=business-hours-modal]')
             .on('hidden.bs.modal', function modalCloseHandler() {

@@ -18,60 +18,60 @@ global $mod_strings;
 // To add a layout, you will need to register the new file below and in the $layouts_dom array
 // in modules/Quotes/language/<lang>.lang.php
 global $layouts;
-$layouts = array();
+$layouts = [];
 
 if (file_exists('custom/modules/Quotes/sugarpdf/sugarpdf.standard.php')) {
     $layouts['Standard'] = 'custom/modules/Quotes/sugarpdf/sugarpdf.standard.php';
 }
 if (file_exists('custom/modules/Quotes/sugarpdf/sugarpdf.invoice.php')) {
-	$layouts['Invoice'] = 'custom/modules/Quotes/sugarpdf/sugarpdf.invoice.php';
+    $layouts['Invoice'] = 'custom/modules/Quotes/sugarpdf/sugarpdf.invoice.php';
 }
 
 /**
  * a kind of silly getter...
  * @returns array layout array
  */
-function get_layouts() {
-	global $mod_strings;
+function get_layouts()
+{
+    global $mod_strings;
     global $app_list_strings;
-	global $layouts;
-    $list = array();
-    if(isset($layouts)) {
-	   foreach($layouts as $key=>$value) {
-                   if(array_key_exists($key, $app_list_strings['layouts_dom'])){ //bug 49954
-		   $list[$key] = $app_list_strings['layouts_dom'][$key];
-		}
-	  }
+    global $layouts;
+    $list = [];
+    if (isset($layouts)) {
+        foreach ($layouts as $key => $value) {
+            if (array_key_exists($key, $app_list_strings['layouts_dom'])) { //bug 49954
+                $list[$key] = $app_list_strings['layouts_dom'][$key];
+            }
+        }
     }
-	return $list;
+    return $list;
 }
 
 /**
  * gets a layout and "prints" it
  * @param array array of layouts
  */
-function print_layout($layout) {
-	global $mod_strings;
-	global $layouts;
+function print_layout($layout)
+{
+    global $mod_strings;
+    global $layouts;
 
-    if(!isset($layouts[$layout])) {
-		$GLOBALS['log']->fatal("quote layout is not registered in modules/Quotes/Layouts.php");
-		sugar_die ("quote layout is not registered in modules/Quotes/Layouts.php");
-	} elseif (!is_file($layouts[$layout])) {
-		$GLOBALS['log']->fatal("quote layout file does not exist: ".$layouts[$layout]);
-		sugar_die ("quote layout file does not exist: ".$layouts[$layout]);
-	} else {
-		include_once($layouts[$layout]);
-	}
+    if (!isset($layouts[$layout])) {
+        $GLOBALS['log']->fatal('quote layout is not registered in modules/Quotes/Layouts.php');
+        sugar_die('quote layout is not registered in modules/Quotes/Layouts.php');
+    } elseif (!is_file($layouts[$layout])) {
+        $GLOBALS['log']->fatal('quote layout file does not exist: ' . $layouts[$layout]);
+        sugar_die('quote layout file does not exist: ' . $layouts[$layout]);
+    } else {
+        include_once $layouts[$layout];
+    }
 }
 
 
-foreach(SugarAutoLoader::existing('modules/Quotes/Layouts.override.php', 'custom/modules/Quotes/Layouts.php') as $file) {
+foreach (SugarAutoLoader::existing('modules/Quotes/Layouts.override.php', 'custom/modules/Quotes/Layouts.php') as $file) {
     include_once $file;
 }
 
 if (isset($_REQUEST['layout'])) {
     print_layout($_REQUEST['layout']);
 }//end if else traditional print layout
-
-?>

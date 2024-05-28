@@ -12,7 +12,7 @@
 --}}
 <div class="alert-page-overlay"></div>
 <div class="alert-confirmation">
-    <div class="alert alert-warning alert-block rounded-md shadow-lg bg-alert-background block m-auto">
+    <div class="alert alert-warning alert-block rounded-md shadow-lg bg-[--alert-background] block m-auto">
         <div class="flex">
             <div class="indicator pt-5 px-4">
                 <i class="sicon sicon-32 sicon-lg sicon-warning-lg"></i>
@@ -23,9 +23,9 @@
             </span>
         </div>
         <div class="row-fluid flex justify-end">
-            <a class="alert-btn-cancel px-4 py-4 tbold uppercase" data-action="cancel">{{str 'LBL_CANCEL_BUTTON_LABEL'}}</a>
-            <a class="alert-btn-confirm px-4 py-4 tbold uppercase" data-action="confirm">{{str 'LBL_CONFIRM_BUTTON_LABEL'}}</a>
-            <a class="alert-btn-saveAndSendEmails px-4 py-4 tbold uppercase"
+            <a class="alert-btn-cancel px-4 py-4 font-bold uppercase" data-action="cancel">{{str 'LBL_CANCEL_BUTTON_LABEL'}}</a>
+            <a class="alert-btn-confirm px-4 py-4 font-bold uppercase" data-action="confirm">{{str 'LBL_CONFIRM_BUTTON_LABEL'}}</a>
+            <a class="alert-btn-saveAndSendEmails px-4 py-4 font-bold uppercase"
                 data-action="saveAndSendEmails">{{str 'LBL_SAVE_AND_INVITES_BUTTON_LABEL' 'Calendar'}}</a>
         </div>
     </div>

@@ -16,31 +16,31 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$viewdefs['Contacts']['mobile']['view']['edit'] = array(
-    'templateMeta' => array(
+$viewdefs['Contacts']['mobile']['view']['edit'] = [
+    'templateMeta' => [
         'maxColumns' => '1',
-        'widths' => array(
-            array('label' => '10', 'field' => '30'),
-        ),
-    ),
-    'panels' => array(
-        array(
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'first_name',
                     'customCode' => '{html_options name="salutation" options=$fields.salutation.options selected=$fields.salutation.value}&nbsp;<input name="first_name" size="15" maxlength="25" type="text" value="{$fields.first_name.value}">',
-                    'displayParams' => array(
+                    'displayParams' => [
                         'wireless_edit_only' => true,
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'last_name',
-                    'displayParams' => array(
+                    'displayParams' => [
                         'required' => true,
                         'wireless_edit_only' => true,
-                    ),
-                ),
+                    ],
+                ],
                 'title',
                 'phone_work',
                 'phone_mobile',
@@ -56,8 +56,7 @@ $viewdefs['Contacts']['mobile']['view']['edit'] = array(
                 'assigned_user_name',
 
                 'team_name',
-            ),
-        )
-    )
-);
-?>
+            ],
+        ],
+    ],
+];

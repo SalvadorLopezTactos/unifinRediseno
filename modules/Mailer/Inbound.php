@@ -24,7 +24,7 @@ interface Inbound
      *
      * @return array
      */
-    public function getMailboxes() : array;
+    public function getMailboxes(): array;
 
     /**
      * Search a mailbox for messages. Criteria must be passed as an array.
@@ -53,77 +53,77 @@ interface Inbound
      * @param int $uid
      * @return string
      */
-    public function getSubject(int $uid) : string;
+    public function getSubject(int $uid): string;
 
     /**
      * Get From line from email
      * @param int $uid
      * @return string
      */
-    public function getFrom(int $uid) : string;
+    public function getFrom(int $uid): string;
 
     /**
      * Get To line from email
      * @param int $uid
      * @return string
      */
-    public function getTo(int $uid) : string;
+    public function getTo(int $uid): string;
 
     /**
      * Get CC line from email
      * @param int $uid
      * @return string
      */
-    public function getCc(int $uid) : string;
+    public function getCc(int $uid): string;
 
     /**
      * Get BCC line from email
      * @param int $uid
      * @return string
      */
-    public function getBcc(int $uid) : string;
+    public function getBcc(int $uid): string;
 
     /**
      * Get Reply-To line from email
      * @param int $uid
      * @return string
      */
-    public function getReplyTo(int $uid) : string;
+    public function getReplyTo(int $uid): string;
 
     /**
      * Get From email address from email
      * @param int $uid
      * @return array
      */
-    public function getFromAddress(int $uid) : array;
+    public function getFromAddress(int $uid): array;
 
     /**
      * Get To email addresses from email
      * @param int $uid
      * @return array
      */
-    public function getToAddresses(int $uid) : array;
+    public function getToAddresses(int $uid): array;
 
     /**
      * Get CC email addresses from email
      * @param int $uid
      * @return array
      */
-    public function getCcAddresses(int $uid) : array;
+    public function getCcAddresses(int $uid): array;
 
     /**
      * Get BCC email addresses from email
      * @param int $uid
      * @return array
      */
-    public function getBccAddresses(int $uid) : array;
+    public function getBccAddresses(int $uid): array;
 
     /**
      * Get Reply-To email addresses from email
      * @param int $uid
      * @return array
      */
-    public function getReplyToAddresses(int $uid) : array;
+    public function getReplyToAddresses(int $uid): array;
 
     /**
      * Get Body from email
@@ -132,7 +132,7 @@ interface Inbound
      *      'plain' => The plaintext (no HTML) version of the email
      *      'html' => The HTML version of the email
      */
-    public function getBody($uid) : array;
+    public function getBody($uid): array;
 
     /**
      * Get Attachment data from email
@@ -149,5 +149,5 @@ interface Inbound
      *      'fileName' => The filename of the attachment
      *      'content' => The raw content of the attachment
      */
-    public function getAttachments($uid) : array;
+    public function getAttachments($uid): array;
 }

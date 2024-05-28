@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Contracte',
-	'LBL_MODULE_NAME_SINGULAR' => 'Contract',
-	'LBL_MODULE_TITLE' => 'Contacte: Acasa',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Contracte',
+    'LBL_MODULE_NAME_SINGULAR' => 'Contract',
+    'LBL_MODULE_TITLE' => 'Contacte: Acasa',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Creeaza contact',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'Id Moneda',
     'LBL_CURRENCY' => 'Moneda',
     'LBL_CURRENCY_RATE' => 'Curs de schimb',
-    'LBL_ASSIGNED_TO_NAME'=>'Atribuit lui:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Atribuit lui:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Lista Contracte',	
+    'LBL_LIST_FORM_TITLE' => 'Lista Contracte',
     'LBL_LIST_CONTRACT_NAME' => 'Nume contract:',
     'LBL_LIST_ACCOUNT_NAME' => 'Numele Contului',
     'LBL_LIST_START_DATE' => 'Start"',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Nume',
     'LBL_LIST_CONTRACT_VALUE' => 'Valoare',
 
-    'LBL_TYPE'=>'Tip',
+    'LBL_TYPE' => 'Tip',
     'LBL_TYPE_NAME' => 'Tastaţi numele',
-    'LBL_CONTRACT_TYPE'=>'Tip',
+    'LBL_CONTRACT_TYPE' => 'Tip',
 
     'LBL_CREATED_USER' => 'Utilizator creat',
     'LBL_MODIFIED_USER' => 'Utilizator Modificat',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare contracte',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare Contracte',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologie contract',
+];

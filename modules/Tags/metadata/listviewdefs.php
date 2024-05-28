@@ -10,65 +10,65 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$listViewDefs ['Tags'] = array(
-    'ID' => array(
+$listViewDefs ['Tags'] = [
+    'ID' => [
         'width' => '20',
         'label' => 'LBL_ID',
         'default' => true,
-    ),
-    'NAME' => array(
+    ],
+    'NAME' => [
         'width' => '20',
         'label' => 'LBL_NAME',
         'default' => true,
-    ),
-    'DATE_ENTERED' => array(
+    ],
+    'DATE_ENTERED' => [
         'width' => '10',
         'label' => 'LBL_DATE_ENTERED',
         'default' => true,
-    ),
-    'DATE_MODIFIED' => array(
+    ],
+    'DATE_MODIFIED' => [
         'width' => '10',
         'label' => 'LBL_DATE_MODIFIED',
         'default' => true,
-    ),
-    'MODIFIED_USER_ID' => array(
+    ],
+    'MODIFIED_USER_ID' => [
         'width' => '10',
         'label' => 'LBL_MODIFIED_ID',
         'default' => true,
-    ),
-    'CREATED_BY' => array(
+    ],
+    'CREATED_BY' => [
         'width' => '10',
         'label' => 'LBL_CREATED',
         'default' => true,
-    ),
-    'DESCRIPTION' => array(
+    ],
+    'DESCRIPTION' => [
         'width' => '10',
         'label' => 'LBL_DESCRIPTION',
         'default' => false,
-    ),
-    'DELETED' => array(
+    ],
+    'DELETED' => [
         'width' => '10',
         'label' => 'LBL_DELETED',
         'default' => false,
-    ),
-    'SOURCE_ID' => array(
+    ],
+    'SOURCE_ID' => [
         'width' => '10',
         'label' => 'LBL_SOURCE_ID',
         'default' => false,
-    ),
-    'SOURCE_TYPE' => array(
+    ],
+    'SOURCE_TYPE' => [
         'width' => '10',
         'label' => 'LBL_SOURCE_TYPE',
         'default' => false,
-    ),
-    'SOURCE_META' => array(
+    ],
+    'SOURCE_META' => [
         'width' => '15',
         'label' => 'LBL_SOURCE_META',
         'default' => false,
-    ),
-    'ASSIGNED_USER_ID' => array(
+    ],
+    'ASSIGNED_USER_ID' => [
         'width' => '7',
         'label' => 'LBL_ASSIGNED_TO_ID',
         'default' => false,
-    ),
-);
+    ],
+];

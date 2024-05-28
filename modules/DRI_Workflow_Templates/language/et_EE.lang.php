@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Aktiivne',
     'LBL_ASSIGNEE_RULE' => 'Täitja reegel',
     'LBL_TARGET_ASSIGNEE' => 'Eesmärgi täitja',
+    'LBL_STAGE_NUMBERS' => 'Etappide nummerdamine',
     'LBL_EXPORT_BUTTON_LABEL' => 'Ekspordi',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Impordi',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Loo/värskeda automaatselt uus nutika juhise malli kirje, importides teie failisüsteemist *.json faili.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Kui kontrollimisel, kui Eesmärgi täitja = ema täitja, kui “Määratud kasutajale” kasutaja on ema juures muudetud, muutuvad “Määratud kasutajale” kasutajad automaatselt ka nutikates juhistes, etappides ja tegevustes. Pange tähele, et Tegevuse mallide Sihtkasutaja seaded on Nutika juhise mallist ülimuslikumad',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Millal peaks kasutaja olema tegevustele määratud',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Kellele peaks tegevused olema määratud',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'See lüliti võimaldab kuvada või peita automaatset etapi nummerdust.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Nutikas juhis / Etapp / Tegevuse mall',
 ];

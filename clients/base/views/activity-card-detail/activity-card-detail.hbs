@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="record-icon" rel="tooltip" title={{moduleIconToolTip this.activity.attributes.icon_module}}>
-    <i class="{{buildIcon this.activity.attributes.icon_class}}"></i>
+<div class="record-icon" rel="tooltip" title="{{moduleIconToolTip module}}">
+    {{moduleLabel module 'lg'}}
 </div>
 {{#each meta.panels}}
     <div class="{{css_class}}">
@@ -20,7 +20,8 @@
         {{/each}}
     </div>
 {{/each}}
-<div class="record-details" rel="tooltip" data-placement="bottom" title="{{str detailDateTimeTooltip activity.module}}">
+<div class="record-details mt-2" rel="tooltip"
+     data-bs-placement="bottom" title="{{str detailDateTimeTooltip activity.module}}">
     <div class="record-date-details">
         <div class="date-day">
             {{detailDay}}

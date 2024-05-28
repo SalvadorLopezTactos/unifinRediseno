@@ -19,50 +19,50 @@ class DashboardApi extends ModuleApi
      */
     public function registerApiRest()
     {
-        $dashboardApi = array(
-            'createDashboardForModule' => array(
+        $dashboardApi = [
+            'createDashboardForModule' => [
                 'reqType' => 'POST',
                 'minVersion' => '10',
                 'maxVersion' => '10',
-                'path' => array('Dashboards', '<module>'),
-                'pathVars' => array('', 'module'),
+                'path' => ['Dashboards', '<module>'],
+                'pathVars' => ['', 'module'],
                 'method' => 'createDashboard',
                 'shortHelp' => 'Create a new dashboard for a module',
                 'longHelp' => 'include/api/help/create_dashboard.html',
-            ),
-            'createDashboardForHome' => array(
+            ],
+            'createDashboardForHome' => [
                 'reqType' => 'POST',
                 'minVersion' => '10',
                 'maxVersion' => '10',
-                'path' => array('Dashboards'),
-                'pathVars' => array(''),
+                'path' => ['Dashboards'],
+                'pathVars' => [''],
                 'method' => 'createDashboard',
                 'shortHelp' => 'Create a new dashboard for home',
                 'longHelp' => 'include/api/help/create_home_dashboard.html',
-            ),
-        );
+            ],
+        ];
         return $dashboardApi;
     }
 
     /**
      * Create a new dashboard
      *
-     * @param ServiceBase $api      The Api Class
-     * @param array $args           Service Call Arguments
+     * @param ServiceBase $api The Api Class
+     * @param array $args Service Call Arguments
      * @return mixed
      */
     public function createDashboard(ServiceBase $api, array $args)
     {
         $args['dashboard_module'] = empty($args['module']) ? 'Home' : $args['module'];
         $bean = BeanFactory::newBean('Dashboards');
-        
+
         if (!$bean->ACLAccess('save')) {
             // No create access so we construct an error message and throw the exception
             $failed_module_strings = return_module_language($GLOBALS['current_language'], 'Dashboards');
             $moduleName = $failed_module_strings['LBL_MODULE_NAME'];
             $args = null;
-            if(!empty($moduleName)){
-                $args = array('moduleName' => $moduleName);
+            if (!empty($moduleName)) {
+                $args = ['moduleName' => $moduleName];
             }
             throw new SugarApiExceptionNotAuthorized('EXCEPTION_CREATE_MODULE_NOT_AUTHORIZED', $args);
         }

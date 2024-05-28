@@ -14,7 +14,7 @@
 {{#each meta.panels}}
 {{#each fields}}
     <div class="record-cell field-row{{#if ../hide}}{{#if ../../../hidePanel}} hide{{/if}} panel_hidden{{/if}}">
-        <span class="preview-lock-link-wrapper hide" data-name="{{name}}" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-placement="left">
+        <span class="preview-lock-link-wrapper hide" data-name="{{name}}" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-bs-placement="left">
             <i class="sicon sicon-lock"></i>
         </span>
         {{#if dismiss_label}}

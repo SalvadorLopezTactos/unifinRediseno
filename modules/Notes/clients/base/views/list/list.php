@@ -16,20 +16,20 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$viewdefs['Notes']['base']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Notes']['base']['view']['list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array (
+            'fields' => [
+                [
                     'name' => 'name',
                     'label' => 'LBL_LIST_SUBJECT',
                     'link' => true,
                     'enabled' => true,
                     'default' => true,
-                ),
-                array (
+                ],
+                [
                     'name' => 'contact_name',
                     'label' => 'LBL_LIST_CONTACT',
                     'link' => true,
@@ -38,12 +38,11 @@ $viewdefs['Notes']['base']['view']['list'] = array(
                     'enabled' => true,
                     'default' => true,
                     'ACLTag' => 'CONTACT',
-                    'related_fields' =>
-                    array (
+                    'related_fields' => [
                         'contact_id',
-                    ),
-                ),
-                array (
+                    ],
+                ],
+                [
                     'name' => 'parent_name',
                     'label' => 'LBL_LIST_RELATED_TO',
                     'dynamic_module' => 'PARENT_TYPE',
@@ -53,32 +52,31 @@ $viewdefs['Notes']['base']['view']['list'] = array(
                     'default' => true,
                     'sortable' => false,
                     'ACLTag' => 'PARENT',
-                    'related_fields' =>
-                    array (
+                    'related_fields' => [
                         'parent_id',
                         'parent_type',
-                    ),
-                ),
-                array (
+                    ],
+                ],
+                [
                     'name' => 'created_by_name',
                     'type' => 'relate',
                     'label' => 'LBL_CREATED_BY',
                     'enabled' => true,
                     'default' => true,
-                    'related_fields' =>  array ( 'created_by' ),
-                ),
-                array(
+                    'related_fields' => ['created_by'],
+                ],
+                [
                     'name' => 'date_modified',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_entered',
                     'enabled' => true,
                     'default' => true,
-                ),
-            ),
+                ],
+            ],
 
-        ),
-    ),
-);
+        ],
+    ],
+];

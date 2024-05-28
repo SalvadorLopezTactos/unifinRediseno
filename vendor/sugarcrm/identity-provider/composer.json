@@ -1,6 +1,6 @@
 {
     "name": "sugarcrm/identity-provider",
-    "version": "3.2.0",
+    "version": "3.2.5",
     "description": "SugarCRM Identity Provider library",
     "type": "project",
     "license": "proprietary",
@@ -27,9 +27,9 @@
         "symfony/ldap": "^5.3",
         "psr/log": "^1.1",
         "onelogin/php-saml": "~3.1.0",
-        "league/oauth2-client": "2.6.1",
+        "league/oauth2-client": "^2.7.0",
         "web-token/jwt-framework": "2.2.11",
-        "guzzlehttp/guzzle": "^6.5.8",
+        "guzzlehttp/guzzle": "^6.5.8|^7.7.0",
         "paragonie/random_compat": "^2.0"
     },
     "require-dev": {

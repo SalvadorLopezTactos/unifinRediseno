@@ -40,10 +40,10 @@ class DumpACLCacheCommand extends Command implements InstanceModeInterface
                 InputOption::VALUE_OPTIONAL,
                 'User ID to dump the ACLCache. If skipped - will try to dump the ACLCaches for all users.'
             )
-            ->setHelp("
+            ->setHelp('
             
                 Dumps ACL Cache content for a specific user or all users.
-            ");
+            ');
     }
 
     public function isEnabled()
@@ -74,6 +74,7 @@ class DumpACLCacheCommand extends Command implements InstanceModeInterface
                 );
             }
         }
+        return 0;
     }
 
     /**

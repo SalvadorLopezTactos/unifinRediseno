@@ -10,72 +10,72 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['meetings_users'] = array(
+$dictionary['meetings_users'] = [
     'table' => 'meetings_users',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'meeting_id' => array(
+        ],
+        'meeting_id' => [
             'name' => 'meeting_id',
             'type' => 'id',
-        ),
-        'user_id' => array(
+        ],
+        'user_id' => [
             'name' => 'user_id',
             'type' => 'id',
-        ),
-        'required' => array(
+        ],
+        'required' => [
             'name' => 'required',
             'type' => 'varchar',
             'len' => '1',
             'default' => '1',
-        ),
-        'accept_status' => array(
+        ],
+        'accept_status' => [
             'name' => 'accept_status',
             'type' => 'varchar',
             'len' => '25',
             'default' => 'none',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'meetings_userspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_usr_mtg_usr',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'user_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_meeting_users_del',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'meeting_id',
                 'user_id',
                 'deleted',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'meetings_users' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'meetings_users' => [
             'lhs_module' => 'Meetings',
             'lhs_table' => 'meetings',
             'lhs_key' => 'id',
@@ -86,6 +86,6 @@ $dictionary['meetings_users'] = array(
             'join_table' => 'meetings_users',
             'join_key_lhs' => 'meeting_id',
             'join_key_rhs' => 'user_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

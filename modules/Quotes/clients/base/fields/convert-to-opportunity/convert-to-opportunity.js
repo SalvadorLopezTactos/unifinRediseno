@@ -93,6 +93,9 @@
      * @private
      */
     _toggleDisable: function() {
+        if (this.disposed || _.isUndefined(this.model) || _.isNull(this.model)) {
+            return;
+        }
         var opportunityId = this.model.get('opportunity_id');
         this.setDisabled(!(_.isUndefined(opportunityId) || _.isEmpty(opportunityId)));
     },

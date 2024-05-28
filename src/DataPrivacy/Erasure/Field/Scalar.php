@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -45,7 +47,7 @@ final class Scalar implements Field
     /**
      * {@inheritDoc}
      */
-    public function erase(SugarBean $bean) : void
+    public function erase(SugarBean $bean): void
     {
         $bean->{$this->name} = null;
     }

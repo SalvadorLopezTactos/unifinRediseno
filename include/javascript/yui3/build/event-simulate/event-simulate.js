@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('event-simulate', function (Y, NAME) {
 
 (function() {
@@ -961,4 +954,4 @@ Y.Event.simulate = function(target, type, options){
 
 
 
-}, '3.15.0', {"requires": ["event-base"]});
+}, '3.18.1', {"requires": ["event-base"]});

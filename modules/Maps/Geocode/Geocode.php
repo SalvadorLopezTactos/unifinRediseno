@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- // @codingStandardsIgnoreLine
+// @codingStandardsIgnoreLine
 class Geocode extends SugarBean
 {
     public $new_schema = true;

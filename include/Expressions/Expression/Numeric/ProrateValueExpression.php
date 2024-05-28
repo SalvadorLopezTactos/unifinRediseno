@@ -105,9 +105,9 @@ class ProrateValueExpression extends NumericExpression
         } elseif ($fromUnit === 'day' && $toUnit === 'year') {
             return $value / 365;
         } elseif ($fromUnit === 'month' && $toUnit === 'day') {
-            return $value * (365/12);
+            return $value * (365 / 12);
         } elseif ($fromUnit === 'day' && $toUnit === 'month') {
-            return $value / (365/12);
+            return $value / (365 / 12);
         } else {
             // Either the units are the same or we don't support this conversion
             return $value;
@@ -201,13 +201,13 @@ EOQ;
      */
     public static function getParameterTypes()
     {
-        return array(
+        return [
             AbstractExpression::$NUMERIC_TYPE,
             AbstractExpression::$NUMERIC_TYPE,
             AbstractExpression::$STRING_TYPE,
             AbstractExpression::$NUMERIC_TYPE,
             AbstractExpression::$STRING_TYPE,
-        );
+        ];
     }
 
     /**

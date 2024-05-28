@@ -10,4 +10,22 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<iframe class="bwc-frame" id="bwc-frame" src="{{url}}"></iframe>
+
+<style id="hide-bwc-iframe-loading" type="text/css">
+    #bwc-frame {
+        visibility: hidden !important;
+    }
+</style>
+
+<script type="text/javascript">
+    function showBwcIframe() {
+        // Remove style that's hiding the iframe while it's loading
+        let helperStyle = window.parent.document.getElementById('hide-bwc-iframe-loading');
+        if (helperStyle) {
+            helperStyle.remove();
+        }
+    }
+</script>
+
+<iframe class="bwc-frame" id="bwc-frame" src="{{url}}" onload="showBwcIframe()"></iframe>
+

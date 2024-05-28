@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_ARCHIVER_ID_FIELD' => '存档程序 ID',
     'LBL_ARCHIVER_NAME_FIELD' => '存档程序名称',
     'LBL_DATE_OF_ARCHIVE_FIELD' => '处理日期',
@@ -28,4 +27,4 @@ $mod_strings = array (
     'LBL_FILTER_DEF_FIELD' => '筛选器定义',
     'LBL_SOURCE_FIELD' => '来源',
     'LBL_DOWNLOAD_ID_LIST_BUTTON' => '下载已处理 ID',
-);
+];

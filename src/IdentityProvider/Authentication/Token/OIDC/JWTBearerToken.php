@@ -43,7 +43,7 @@ class JWTBearerToken extends AbstractToken
      * @param string $tenant Tenant SRN
      * @param array $roles
      */
-    public function __construct($identity, $tenant, $roles = array())
+    public function __construct($identity, $tenant, $roles = [])
     {
         $this->identity = $identity;
         $this->tenant = $tenant;
@@ -69,7 +69,7 @@ class JWTBearerToken extends AbstractToken
     /**
      * {@inheritdoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
         $privateKeyInfo = $this->getAttribute('privateKey');
         $jwkPrivateKey = new JWK($privateKeyInfo);
@@ -87,7 +87,7 @@ class JWTBearerToken extends AbstractToken
         }
 
         $jwsBuilder = new JWSBuilder();
-        return $jwsBuilder
+        return (string) $jwsBuilder
             ->header('kid', $this->getAttribute('kid'))
             ->alg($privateKeyInfo['alg'] ?? static::DEFAULT_SIGNATURE_ALGORITHM)
             ->payload($claims)

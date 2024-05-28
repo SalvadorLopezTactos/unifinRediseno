@@ -15,7 +15,7 @@
  */
 ({
     events: {
-        'click .report-header-padding [data-toggle="dropdown"]': 'toggleActionButton',
+        'click .report-header-padding [data-bs-toggle="dropdown"]': 'toggleActionButton',
     },
 
     /**
@@ -219,13 +219,6 @@
      */
     _render: function() {
         this._super('_render');
-
-        const buttonTitle = app.lang.get('LBL_MORE', 'Reports');
-        this.$el.find('.actions .dropdown-toggle').attr({
-            'title': buttonTitle,
-            'aria-label': buttonTitle,
-            'data-original-title': buttonTitle
-        });
     },
 
     /**

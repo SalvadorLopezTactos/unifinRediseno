@@ -28,7 +28,7 @@ class MetaDataConverter
      *
      * @var array
      */
-    protected $aclActionList = array(
+    protected $aclActionList = [
         'EditView' => 'edit',
         '' => 'list',
         'index' => 'list',
@@ -36,7 +36,7 @@ class MetaDataConverter
         'Reports' => 'list',
         'DetailView' => 'view',
         'Administration' => 'admin',
-    );
+    ];
 
     /**
      * Converts edit and detail view defs that contain fieldsets to a compatible
@@ -52,7 +52,7 @@ class MetaDataConverter
     public static function fromGridFieldsets(array $defs)
     {
         if (isset($defs['panels']) && is_array($defs['panels'])) {
-            $newpanels = array();
+            $newpanels = [];
             $offset = 0;
             foreach ($defs['panels'] as $row) {
                 if (is_array($row[0]) && isset($row[0]['type'])
@@ -60,7 +60,7 @@ class MetaDataConverter
                 ) {
                     // Fieldset.... convert
                     foreach ($row[0]['related_fields'] as $fName) {
-                        $newpanels[$offset] = array($fName);
+                        $newpanels[$offset] = [$fName];
                         $offset++;
                     }
                 } else {
@@ -89,7 +89,7 @@ class MetaDataConverter
     public static function toLegacy($viewtype, $defs)
     {
         if (null === self::$converter) {
-            self::$converter = new self;
+            self::$converter = new self();
         }
 
         $method = 'toLegacy' . ucfirst(strtolower($viewtype));
@@ -113,7 +113,7 @@ class MetaDataConverter
      */
     public function toLegacyList(array $defs)
     {
-        $return = array();
+        $return = [];
 
         // Check our panels first
         if (isset($defs['panels']) && is_array($defs['panels'])) {
@@ -141,35 +141,35 @@ class MetaDataConverter
      * Takes a Sidecar Subpanel view def and returns a BWC compatibile Subpanel view def
      *
      * @param array $oldDefs Field defs to convert
-     * @param string $moduleName, the module we are converting
+     * @param string $moduleName , the module we are converting
      * @return array BWC defs
      */
     public function toLegacySubpanelsViewDefs(array $defs, $moduleName)
     {
         if (!isset($defs['panels'])) {
-            return array();
+            return [];
         }
 
-        $oldDefs = array();
+        $oldDefs = [];
 
         // for BWC, we need to have some top buttons.  Sidecar doesn't have buttons in the def
-        $oldDefs['top_buttons'] = array(
-            array(
-                'widget_class' => 'SubPanelTopCreateButton'
-            ),
-            array(
+        $oldDefs['top_buttons'] = [
+            [
+                'widget_class' => 'SubPanelTopCreateButton',
+            ],
+            [
                 'widget_class' => 'SubPanelTopSelectButton',
                 'popup_module' => $moduleName,
-            ),
-        );
+            ],
+        ];
 
         $oldDefs['list_fields'] = $this->toLegacyList($defs);
         return $oldDefs;
     }
 
-    protected $subpanelNameTranslation = array(
+    protected $subpanelNameTranslation = [
         'email1' => 'email',
-    );
+    ];
 
     /**
      * Convert legacy subpanels view defs to sidecar subpanel view defs
@@ -180,15 +180,15 @@ class MetaDataConverter
     public function fromLegacySubpanelsViewDefs(array $defs, $module)
     {
         if (!isset($defs['list_fields'])) {
-            throw new \RuntimeException("Subpanel is defined without fields");
+            throw new \RuntimeException('Subpanel is defined without fields');
         }
 
-        $viewdefs = array('panels' => array(), 'type' => 'subpanel-list');
+        $viewdefs = ['panels' => [], 'type' => 'subpanel-list'];
 
         $viewdefs['panels'][0]['name'] = 'panel_header';
         $viewdefs['panels'][0]['label'] = 'LBL_PANEL_1';
 
-        $viewdefs['panels'][0]['fields'] = array();
+        $viewdefs['panels'][0]['fields'] = [];
         $bean = BeanFactory::newBean($module);
 
         foreach ($defs['list_fields'] as $fieldName => $details) {
@@ -213,23 +213,22 @@ class MetaDataConverter
             if (!isset($details['enabled'])) {
                 $details['enabled'] = true;
             }
-            if(!empty($this->subpanelNameTranslation[$fieldName])) {
+            if (!empty($this->subpanelNameTranslation[$fieldName])) {
                 $details['name'] = $this->subpanelNameTranslation[$fieldName];
             } else {
                 $details['name'] = $fieldName;
             }
 
-            if(!empty($details['widget_class'])) {
-                if($details['widget_class'] == 'SubPanelDetailViewLink') {
+            if (!empty($details['widget_class'])) {
+                if ($details['widget_class'] == 'SubPanelDetailViewLink') {
                     $details['link'] = true;
-                } elseif($details['widget_class'] == 'SubPanelEmailLink') {
+                } elseif ($details['widget_class'] == 'SubPanelEmailLink') {
                     $details['type'] = 'email';
                 } else {
                     // See BR-1436: we will drop unknown widgets for now since Sidecar
                     // can not properly display them
                     continue;
                 }
-
             }
 
             if ($bean && !empty($bean->field_defs[$details['name']])) {
@@ -241,7 +240,7 @@ class MetaDataConverter
                     $details['type'] = $newDefs['type'];
                 }
                 // special handling for teamsets, since they have changed from 6
-                if(!empty($newDefs['custom_type']) && $newDefs['custom_type'] == 'teamset') {
+                if (!empty($newDefs['custom_type']) && $newDefs['custom_type'] == 'teamset') {
                     $details['sortable'] = false;
                     $details['link'] = false;
                     unset($details['type']);
@@ -271,7 +270,7 @@ class MetaDataConverter
      */
     public function fromLegacySubpanelField(array $fieldDefs)
     {
-        static $fieldMap = array(
+        static $fieldMap = [
             'name' => true,
             'label' => true,
             'type' => true,
@@ -282,7 +281,7 @@ class MetaDataConverter
             'link' => true,
             'fields' => true,
             'sortable' => true,
-        );
+        ];
 
         return array_intersect_key($fieldDefs, $fieldMap);
     }
@@ -319,7 +318,7 @@ class MetaDataConverter
      */
     public function toLegacySubpanelLayoutDefs(array $layoutDefs, SugarBean $bean)
     {
-        $return = array();
+        $return = [];
 
         foreach ($layoutDefs as $order => $def) {
             // no link can't move on
@@ -343,7 +342,7 @@ class MetaDataConverter
             // if we don't have a label at least set the module name as the label
             // similar to configure shortcut bar
             $label = $def['label'] ?? translate($linkModule);
-            $return[$linkName] = array(
+            $return[$linkName] = [
                 'order' => $order,
                 'module' => $linkModule,
                 'subpanel_name' => $legacySubpanelName,
@@ -351,21 +350,21 @@ class MetaDataConverter
                 'sort_by' => 'id',
                 'title_key' => $label,
                 'get_subpanel_data' => $linkName,
-                'top_buttons' => array(
-                    array(
+                'top_buttons' => [
+                    [
                         'widget_class' => 'SubPanelTopButtonQuickCreate',
-                    ),
-                    array(
+                    ],
+                    [
                         'widget_class' => 'SubPanelTopSelectButton',
                         'mode' => 'MultiSelect',
-                    ),
-                ),
-            );
+                    ],
+                ],
+            ];
             if (!empty($def['override_subpanel_list_view'])) {
                 $return[$linkName]['override_subpanel_name'] = $def['override_subpanel_list_view'];
             }
         }
-        return array('subpanel_setup' => $return);
+        return ['subpanel_setup' => $return];
     }
 
     /**
@@ -407,14 +406,14 @@ class MetaDataConverter
         // Check our panels first
         if (isset($defs['panels']) && is_array($defs['panels'])) {
             // For our new panels
-            $newpanels = array();
+            $newpanels = [];
             foreach ($defs['panels'] as $panels) {
                 // Handle fields if there are any (there should be)
                 if (isset($panels['fields']) && is_array($panels['fields'])) {
                     // Logic is fairly straight forward... take each member of
                     // the fields array and make it an array of its own
                     foreach ($panels['fields'] as $field) {
-                        $newpanels[] = array($field);
+                        $newpanels[] = [$field];
                     }
                 }
             }
@@ -442,8 +441,8 @@ class MetaDataConverter
         }
 
         $newName = ($subpanelName === 'default') ? 'list' : strtolower($subpanelName);
-        if (substr($newName, 0, 3) === "for") {
-            $newName = "for-" . substr($newName, 3);
+        if (substr($newName, 0, 3) === 'for') {
+            $newName = 'for-' . substr($newName, 3);
         }
         return 'subpanel-' . $newName;
     }
@@ -459,7 +458,7 @@ class MetaDataConverter
         $pathInfo = pathinfo($fileName);
         $dirParts = preg_split('/[\/\\\]+/', $pathInfo['dirname'], -1, PREG_SPLIT_NO_EMPTY);
 
-        if ((is_countable($dirParts) ? count($dirParts) : 0) < 3) {
+        if (safeCount($dirParts) < 3) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Directory '%s' is an incorrect path for a subpanel",
@@ -537,9 +536,9 @@ class MetaDataConverter
      */
     public function fromLegacySubpanelLayout(array $layoutdef)
     {
-        $viewdefs = array(
+        $viewdefs = [
             'layout' => 'subpanel',
-        );
+        ];
 
         // we aren't upgrading collections
         if (!empty($layoutdef['collection_list'])) {
@@ -569,7 +568,7 @@ class MetaDataConverter
                             // since we have a valid link, we need to test the relationship to see if it's custom relationship
                             $relationships = new DeployedRelationships($focus->module_name);
                             $relationship = $relationships->get($parts[1]);
-                            $relDef = array();
+                            $relDef = [];
                             if ($relationship) {
                                 $relDef = $relationship->getDefinition();
                             }
@@ -586,15 +585,13 @@ class MetaDataConverter
                         }
                     }
                 }
-                $viewdefs['override_subpanel_list_view'] = array(
+                $viewdefs['override_subpanel_list_view'] = [
                     'view' => $this->fromLegacySubpanelName($subpanelFileName),
                     'link' => ($layoutdef['get_subpanel_data'] ?? ''),
-                );
-            }
-            elseif ($key == 'title_key') {
+                ];
+            } elseif ($key == 'title_key') {
                 $viewdefs['label'] = $value;
-            }
-            elseif ($key == 'get_subpanel_data') {
+            } elseif ($key == 'get_subpanel_data') {
                 $viewdefs['context']['link'] = $value;
             }
         }
@@ -614,10 +611,10 @@ class MetaDataConverter
     {
         $arrayName = "viewdefs['{$moduleName}']['base']['menu']['header']";
 
-        $dataItems = array();
+        $dataItems = [];
 
         foreach ($menu as $option) {
-            $data = array();
+            $data = [];
             // get the menu manip done
             $url = parse_url($option[0]);
             parse_str($url['query'], $menuOptions);
@@ -631,18 +628,18 @@ class MetaDataConverter
             }
 
             if ($menuOptions['action'] == 'EditView' && empty($menuOptions['record'])) {
-                $data['icon'] = "fa fa-plus";
-            } else if($menuOptions['module'] == 'Import') {
-                $data['icon'] = 'fa fa-upload';
-            } else if($menuOptions['module'] == 'Reports' && $moduleName != 'Reports') {
-                $data['icon'] = 'fa fa-bar-chart-o';
+                $data['icon'] = 'sicon sicon-plus';
+            } elseif ($menuOptions['module'] == 'Import') {
+                $data['icon'] = 'sicon sicon-upload';
+            } elseif ($menuOptions['module'] == 'Reports' && $moduleName != 'Reports') {
+                $data['icon'] = 'sicon sicon-add-dashlet-lg';
             }
 
             $data['route'] = $this->buildMenuRoute($menuOptions, $option[0]);
             $dataItems[] = $data;
         }
 
-        return array('name' => $arrayName, 'data' => $dataItems);
+        return ['name' => $arrayName, 'data' => $dataItems];
     }
 
     /**
@@ -662,8 +659,8 @@ class MetaDataConverter
             return $link;
         }
 
-        if (in_array($menuOptions['module'], $bwcModules)) {
-            return "#bwc/index.php?" . http_build_query($menuOptions);
+        if (safeInArray($menuOptions['module'], $bwcModules)) {
+            return '#bwc/index.php?' . http_build_query($menuOptions);
         }
 
         $route = null;
@@ -677,7 +674,7 @@ class MetaDataConverter
         } elseif (empty($menuOptions['action']) || $menuOptions['action'] == 'index') {
             $route = "#{$menuOptions['module']}";
         } else {
-            $route = "#bwc/index.php?" . http_build_query($menuOptions);
+            $route = '#bwc/index.php?' . http_build_query($menuOptions);
         }
 
         return $route;
@@ -694,16 +691,16 @@ class MetaDataConverter
         $viewdefs = [];
         $menu = $this->processFromGlobalControlLinkFormat($global_control_links);
         global $app_strings;
-        include("clients/base/views/profileactions/profileactions.php");
+        include 'clients/base/views/profileactions/profileactions.php';
         $baseMeta = $viewdefs['base']['view']['profileactions'];
         $arrayName = "viewdefs['base']['view']['profileactions']";
 
-        $dataItems = array();
-        if(!empty($menu)){
+        $dataItems = [];
+        if (!empty($menu)) {
             // Convert custom items to sidecar format
             foreach ($menu as $option) {
-                foreach($baseMeta as $baseOption){
-                    if($option['LABEL'] === $app_strings[$baseOption["label"]]){
+                foreach ($baseMeta as $baseOption) {
+                    if ($option['LABEL'] === $app_strings[$baseOption['label']]) {
                         $dataItems[] = $baseOption;
                         continue 2;
                     }
@@ -712,26 +709,26 @@ class MetaDataConverter
                 // Handles submenu conversions and performs several
                 // checks to push the converted item and items if
                 // they are not empty
-                if(!empty($option['SUBMENU'])){
-                    $submenuData = array();
-                    foreach($option['SUBMENU'] as $submenu){
+                if (!empty($option['SUBMENU'])) {
+                    $submenuData = [];
+                    foreach ($option['SUBMENU'] as $submenu) {
                         $converted = $this->convertCustomMenu($submenu);
-                        if(!empty($converted)){
+                        if (!empty($converted)) {
                             $submenuData[] = $converted;
                         }
                     }
-                    if(!empty($submenuData)){
+                    if (!empty($submenuData)) {
                         $data['submenu'] = $submenuData;
                     }
                 }
-                if(!empty($data)){
+                if (!empty($data)) {
                     $dataItems[] = $data;
                 }
-
             }
         }
-        return array('name' => $arrayName, 'data' => $dataItems);
+        return ['name' => $arrayName, 'data' => $dataItems];
     }
+
     /**
      * Process the global_control_links format and extract labels, urls
      * and submenu links from globalcontrollinks
@@ -739,51 +736,55 @@ class MetaDataConverter
      * @param array $global_control_links globalcontrollink format
      * @return array of items contain label, url and submenu
      */
-    public function processFromGlobalControlLinkFormat($global_control_links){
-        $gcls = array();
-        foreach($global_control_links as $key => $value) {
+    public function processFromGlobalControlLinkFormat($global_control_links)
+    {
+        $gcls = [];
+        foreach ($global_control_links as $key => $value) {
             foreach ($value as $linkattribute => $attributevalue) {
                 // get the main link info
-                if ( $linkattribute == 'linkinfo' ) {
-                    $gcls[$key] = array(
-                        "LABEL" => key($attributevalue),
-                        "URL"   => current($attributevalue),
-                        "SUBMENU" => array(),
-                    );
-                    if(substr($gcls[$key]["URL"], 0, 11) == "javascript:") {
-                        $gcls[$key]["OPENWINDOW"] = true;
-                        $url = explode("'",$gcls[$key]["URL"]);
-                        $gcls[$key]["URL"] = $url[1];
+                if ($linkattribute == 'linkinfo') {
+                    $gcls[$key] = [
+                        'LABEL' => key($attributevalue),
+                        'URL' => current($attributevalue),
+                        'SUBMENU' => [],
+                    ];
+                    if (substr($gcls[$key]['URL'], 0, 11) == 'javascript:') {
+                        $gcls[$key]['OPENWINDOW'] = true;
+                        $url = explode("'", $gcls[$key]['URL']);
+                        $gcls[$key]['URL'] = $url[1];
                     }
                 }
                 // and now the sublinks
-                if ( $linkattribute == 'submenu' && is_array($attributevalue) ) {
-                    foreach ($attributevalue as $submenulinkkey => $submenulinkinfo)
-                        $gcls[$key]['SUBMENU'][$submenulinkkey] = array(
-                            "LABEL" => key($submenulinkinfo),
-                            "URL"   => current($submenulinkinfo),
-                        );
-                    if(substr($gcls[$key]['SUBMENU'][$submenulinkkey]["URL"], 0, 11) == "javascript:") {
-                        $gcls[$key]['SUBMENU'][$submenulinkkey]["OPENWINDOW"] = true;
-                        $url = explode("'",$gcls[$key]['SUBMENU'][$submenulinkkey]["URL"]);
-                        $gcls[$key]['SUBMENU'][$submenulinkkey]["URL"] = $url[1];
+                if ($linkattribute == 'submenu' && is_array($attributevalue)) {
+                    foreach ($attributevalue as $submenulinkkey => $submenulinkinfo) {
+                        $gcls[$key]['SUBMENU'][$submenulinkkey] = [
+                            'LABEL' => key($submenulinkinfo),
+                            'URL' => current($submenulinkinfo),
+                        ];
+                    }
+                    if (substr($gcls[$key]['SUBMENU'][$submenulinkkey]['URL'], 0, 11) == 'javascript:') {
+                        $gcls[$key]['SUBMENU'][$submenulinkkey]['OPENWINDOW'] = true;
+                        $url = explode("'", $gcls[$key]['SUBMENU'][$submenulinkkey]['URL']);
+                        $gcls[$key]['SUBMENU'][$submenulinkkey]['URL'] = $url[1];
                     }
                 }
             }
         }
         return $gcls;
     }
+
     /**
      * Convert a single item array into sidecar meta format
      *
      * @param array $option
      * @return array sidecar profileactions item meta
      */
-    public function convertCustomMenu($option){
-        $data = array();
+    public function convertCustomMenu($option)
+    {
+        $data = [];
         $data['label'] = $option['LABEL'];
         $url = parse_url($option['URL']);
-        if(isset($url['query'])){
+        if (isset($url['query'])) {
             parse_str($url['query'], $menuOptions);
             if (isset($this->aclActionList[$menuOptions['module']])) {
                 $data['acl_action'] = trim($this->aclActionList[$menuOptions['module']]);
@@ -791,27 +792,25 @@ class MetaDataConverter
                 $data['acl_action'] = trim($this->aclActionList[$menuOptions['action']]);
             }
             $data['route'] = $this->buildMenuRoute($menuOptions, $option['URL']);
-        }
-        // This condition cover cases that Routes are:
+        } // This condition cover cases that Routes are:
         // External link (eg. https://www.google.com, Host is 'www.google.com' Scheme is 'https'),
         // Sidecar list view (eg. #Accounts, #Contacts, Fragment is 'Accounts', 'Contacts')
         // Opening new window link (eg.javascript:void(0), Scheme is 'javascript')
-        elseif(isset($url['host']) || isset($url['fragment']) || isset($url['scheme'])){
+        elseif (isset($url['host']) || isset($url['fragment']) || isset($url['scheme'])) {
             $data['route'] = $option['URL'];
             $data['acl_action'] = '';
-        }
-        // This condition is for urls that does not met any above conditions, which might be
+        } // This condition is for urls that does not met any above conditions, which might be
         // a path to our internal php file (eg.client/base/views/attachments/attachments.php
         // In this case only 'Path' will be in the parsed url) Since we don't want user to access
         // our internal files, so we return nothing and not push this item to the menu list
-        else{
+        else {
             $GLOBALS['log']->error("Invalid URL {$option['URL']}");
             return;
         }
-        if(isset($option['OPENWINDOW'])){
+        if (isset($option['OPENWINDOW'])) {
             $data['openwindow'] = $option['OPENWINDOW'];
         }
-        if(isset($option['ICON'])){
+        if (isset($option['ICON'])) {
             $data['icon'] = $this->{$option['ICON']};
         }
         return $data;
@@ -820,10 +819,10 @@ class MetaDataConverter
 
     /**
      * Convert BWC searchdefs to sidecar filter metadata files.
-     * @param array  $defs       : the defs for search fields
+     * @param array $defs : the defs for search fields
      * @param string $moduleName : name of the module
-     * @param array $fieldDefs   : the defintion of the field
-     * @param string $viewType   : the type of the view
+     * @param array $fieldDefs : the defintion of the field
+     * @param string $viewType : the type of the view
      * @param string $viewClient : the name of the client
      * @return array
      */
@@ -831,11 +830,11 @@ class MetaDataConverter
     {
         // load SearchFields.php
         $searchFields = $this->loadSearchFields($moduleName);
-        $fields = array();
+        $fields = [];
         if (!empty($defs['layout']['basic_search'])) {
             $old_fields = $defs['layout']['basic_search'];
         } else {
-            $old_fields = array();
+            $old_fields = [];
         }
         if (!empty($defs['layout']['advanced_search'])) {
             $old_fields = array_merge($old_fields, $defs['layout']['advanced_search']);
@@ -853,8 +852,8 @@ class MetaDataConverter
                 continue;
             }
             // Also try range_* for date fields, see BR-1409
-            if (!empty($searchFields["range_".$name])) {
-                $searchFields[$name] = $searchFields["range_".$name];
+            if (!empty($searchFields['range_' . $name])) {
+                $searchFields[$name] = $searchFields['range_' . $name];
             }
             // We don't know this field
             if (empty($searchFields[$name])) {
@@ -888,7 +887,7 @@ class MetaDataConverter
                 );
                 if (!empty($searchFields[$name]['type'])) {
                     $fields[$name]['type'] = $searchFields[$name]['type'];
-                } else if (!empty($defaultSidecarFilter[$name]['type'])) {
+                } elseif (!empty($defaultSidecarFilter[$name]['type'])) {
                     $fields[$name]['type'] = $defaultSidecarFilter[$name]['type'];
                 }
                 if (empty($fields[$name]['dbFields']) &&
@@ -903,46 +902,48 @@ class MetaDataConverter
                 if (!$this->isValidField($name, $fieldDefs, $viewType, $viewClient)) {
                     continue;
                 }
-                $fields[$name] = array();
+                $fields[$name] = [];
             }
         }
-        $fields['$owner'] = array(
+        $fields['$owner'] = [
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',
-        );
-        $fields['$favorite'] = array(
+        ];
+        $fields['$favorite'] = [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        );
-        $sidecarViewDefs = array(
+        ];
+        $sidecarViewDefs = [
             'default_filter' => 'all_records',
-        );
+        ];
         $sidecarViewDefs['fields'] = $fields;
         return $sidecarViewDefs;
     }
+
     /**
      * Determines if a field exists on the bean.
-     * @param array $dbFields    : the db fields
-     * @param array $fieldDefs   : the defintion of the field
-     * @param string $viewType   : the type of the view
+     * @param array $dbFields : the db fields
+     * @param array $fieldDefs : the defintion of the field
+     * @param string $viewType : the type of the view
      * @param string $viewClient : the name of the client
      * @return bool
      */
     public function filterDbField($dbFields, $fieldDefs, $viewType, $viewClient)
     {
-        $filterArray = array();
+        $filterArray = [];
         foreach ($dbFields as $field) {
             if ($this->isValidField($field, $fieldDefs, $viewType, $viewClient) == true) {
                 $filterArray[] = $field;
             }
         }
-        return array('dbFields' => $filterArray);
+        return ['dbFields' => $filterArray];
     }
+
     /**
      * Determines if a field exists on the bean.
-     * @param string $field      : the name of the field
-     * @param array $fieldDefs   : the defintion of the field
-     * @param string $viewType   : the type of the view
+     * @param string $field : the name of the field
+     * @param array $fieldDefs : the defintion of the field
+     * @param string $viewType : the type of the view
      * @param string $viewClient : the name of the client
      * @return bool
      */
@@ -958,9 +959,10 @@ class MetaDataConverter
         }
         return AbstractMetaDataParser::validField($fieldDefs[$field], $viewType, $viewClient);
     }
+
     /**
      * Load search fields defs from SearchFields.php.
-     * @param string $moduleName: name of the module
+     * @param string $moduleName : name of the module
      * @return array
      */
     protected function loadSearchFields($moduleName)
@@ -976,9 +978,8 @@ class MetaDataConverter
                 $filename = 'include/SugarObjects/templates/basic/metadata/SearchFields.php';
             }
         }
-        $searchFields = array();
+        $searchFields = [];
         include $filename;
-        return ($searchFields[$moduleName] ?? array());
+        return ($searchFields[$moduleName] ?? []);
     }
-
 }

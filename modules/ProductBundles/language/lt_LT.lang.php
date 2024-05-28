@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Grupės būsena:',
-    'LBL_DEAL_TOT'=>'visa nuolaida',
-    'LBL_DEAL_TOT_USDOLLAR'=>'viso nuolaida (Lt)',
+    'LBL_DEAL_TOT' => 'visa nuolaida',
+    'LBL_DEAL_TOT_USDOLLAR' => 'viso nuolaida (Lt)',
     'LBL_NEW_SUB' => 'Tarpinė suma su nuolaida',
     'LBL_SHIPPING' => 'Pristatymas',
-    'LBL_SHIPPING_USDOLLAR'=>'Pristatymas (Lt)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Tarpinė suma (Lt)',
+    'LBL_SHIPPING_USDOLLAR' => 'Pristatymas (Lt)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Tarpinė suma (Lt)',
     'LBL_SUBTOTAL' => 'Tarpinė suma:',
     'LBL_TAXABLE_SUBTOTAL' => 'Apmokestinama tarpinė suma',
-    'LBL_TAX_USDOLLAR'=>'Mokesčiai (Lt)',
+    'LBL_TAX_USDOLLAR' => 'Mokesčiai (Lt)',
     'LBL_TAX' => 'Mokesčiai:',
-    'LBL_TOTAL_USDOLLAR'=>'Viso (Lt)',
+    'LBL_TOTAL_USDOLLAR' => 'Viso (Lt)',
     'LBL_TOTAL' => 'Viso:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Quote Bundle Position',
     'EXCEPTION_INVALID_QUOTE_ID' => 'Quote ID is missing from the payload',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'The Quote you requested was not found',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'The Quote you requested was not found',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Papildoma grupinė nuolaida',
     'LBL_GROUP_TOTAL' => 'Bendra grupinė suma',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Grupės antraštė',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Numatytoji pasiūlymo gaminio paketo grupė',
     'LBL_ALERT_DELETING_ITEM' => 'Eilutės elemento (-ų) naikinimas',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Eilutės elementas panaikintas sėkmingai',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Prekių paketo laiko juosta',
+];

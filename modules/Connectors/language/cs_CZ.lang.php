@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Vlož [Alt+C]',
     'LBL_ADDRCITY' => 'Město',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Informace' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Zavřít' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'Pro daný ID zdroje nebyl nalezen konektor.',
-);
-
+];

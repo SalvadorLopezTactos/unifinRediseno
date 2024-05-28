@@ -11,9 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' =>
-'<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
+        '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
 Szerezzen be egy fogyasztói kulcsot a LogMeIn rendszerből egy új GoToMeeting alkalmazás regisztrálásával.<br>
 &nbsp;<br>
 A példány regisztrálásának a lépései:<br>
@@ -36,4 +36,4 @@ A példány regisztrálásának a lépései:<br>
 </ol>
 </td></tr></table>',
     'oauth_consumer_key' => 'Fogyasztói kulcs',
-);
+];

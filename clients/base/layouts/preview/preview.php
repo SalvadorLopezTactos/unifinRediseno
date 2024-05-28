@@ -11,22 +11,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['preview'] = array(
+$viewdefs['base']['layout']['preview'] = [
     'lazy_loaded' => 'true',
-    'components' => array(
-        array(
+    'components' => [
+        [
             'view' => 'preview-header',
-        ),
-        array(
+        ],
+        [
             'view' => 'preview',
-        ),
-        array(
+        ],
+        [
             'layout' => 'preview-activitystream',
-            'context' => array(
+            'context' => [
                 'module' => 'Activities',
                 'forceNew' => true,
-            ),
-        ),
-    ),
-);
-
+            ],
+        ],
+    ],
+];

@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Võimaluste loendi töölaud',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Võimaluste kirjete töölaud',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Quotes',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Müügivõimalused dünaamilise konto järgi',
+    'LBL_TOP_10_OPP' => 'Avatud müügivõimaluste esikümme',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Dashlet: minu aktiivsed müügivõimalused',
+    'LBL_MY_ACTIVE_OPP' => 'Minu aktiivsed müügivõimalused',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Pipeline Total is ',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Opportunity Role',
+    'LBL_OPPORTUNITY_ROLE' => 'Opportunity Role',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Märkused:',
     'LBL_TAB_OPPORTUNITY' => 'Mooduli {{module}} ülevaade',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'By clicking Confirm, you will be erasing ALL Forecasts data and changing your Opportunities View. If this is not what you intended, click cancel to return to previous settings.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'Kui klõpsate valikut Kinnita, kustutate KÕIK prognooside andmed ja muudate oma müügivõimaluste vaadet. '
-        .'Samuti keelatakse KÕIK protsessimääratlused tulude rea üksuste sihtmoodulis. '
-        .'Kui te ei soovinud seda, klõpsake valikut Tühista, et naasta eelmiste sätete juurde.',
+        . 'Samuti keelatakse KÕIK protsessimääratlused tulude rea üksuste sihtmoodulis. '
+        . 'Kui te ei soovinud seda, klõpsake valikut Tühista, et naasta eelmiste sätete juurde.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'If all Revenue Line Items are closed and at least one was won,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'the Opportunity Sales Stage is set to "Closed Won".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'If all Revenue Line Items are in the "Closed Lost" Sales Stage,',
@@ -220,25 +223,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'After you initiate this change, Revenue Line Item records will be created for each existing {{module_name}} in the background. When the Revenue Line Items are complete and available, a notification will be sent to the email address on your user profile. Please note that your instance must be configured to send email via Admin > Email Settings in order for the notification to be sent.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moodul {{plural_module_name}} võimaldab teil jälgida konkreetseid müüke alates algusest kuni lõpuni. Mooduli {{module_name}} iga kirje kujutab endast võimalikku müüki ja sisaldab asjakohaseid müügiandmeid ja teisi olulisi kirjeid, nagu {{quotes_module}}, {{contacts_module}} jne. Moodul {{module_name}} edeneb tavaliselt läbi mitme müügietapi, kuni on saanud märgistuseks "Suletud võidetud" või "Suletud kaotatud". Moodulit {{plural_module_name}} saab kasutada veelgi enam, kasutades Sugari {{forecasts_singular_module}}ing moodulit, et mõista ja prognoosida müügitrende ning keskendada töö müügisihtide saavutamisele.',
+    'LBL_HELP_RECORDS' => 'Moodul {{plural_module_name}} võimaldab teil jälgida individuaalset müüki algusest lõpuni. Iga mooduli {{module_name}} kirje kujutab endast potentsiaalset müüki ja sisaldab asjakohaseid müügiandmeid ning on seotud muude oluliste kirjetega, näiteks {{quotes_module}}, {{contacts_module}} jne. {{module_name}} läbib tavaliselt mitu müügietappi, kuni sellele on märgitud kas "Lõpetatud võidetud" või "Suletud kaotatud". Moodulit {{plural_module_name}} saab veelgi rohkem kasutada, kasutades Sugari moodulit {{forecasts_singular_module}}, et mõista ja ennustada müügitrende ning keskenduda tööle müügikvootide saavutamiseks.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Moodul {{plural_module_name}} võimaldab teil jälgida eraldi müüke ja neile müükidele kuuluvaid jooneüksusi alates algusest kuni lõpuni. Iga mooduli {{module_name}} kirje kujutab endast võimalikku müüki ja sisaldab asjakohaseid müügiandmeid ja teiste oluliste kirjetega seonduvat, näiteks {{quotes_module}}, {{contacts_module}} jne.
+    'LBL_HELP_RECORD' => 'Moodul {{plural_module_name}} võimaldab jälgida algusest lõpuni üksikuid müüke ja nende müükide juurde kuuluvaid reaüksusi. Iga mooduli {{module_name}} kirje tähistab potentsiaalset müüki ja sisaldab asjakohaseid müügiandmeid, samuti muid olulisi kirjeid, nagu {{quotes_module}}, {{contacts_module}} jne.
 
-- Redigeerige selle kande välju, klõpsates eraldi väljal või Redigeerimisnupul.
-- Kuvage või muutke linke teistele kirjetele alampaneelides, lülitades alumise vasakpoolse paneeli seadele "Andmete kuvamine".
-- Tehke ja kuvage kasutaja kommentaare ja jäädvustage muutmisajalugu kohas {{activitystream_singular_module}}, lülitades alumise vasakpoolse paneeli olekusse "Aktiivsusvoog".
-- Järgige seda kirjet või muutke see lemmikuks, kasutades kirje nimest paremal asuvaid ikoone.
-- Täiendavad tegevused on saadaval Redigeerimisnupust paremal asuvas Tegevuste rippmenüüs.',
+- Saate muuta kirje välju, klõpsates üksikut välja või nuppu Muuda.
+- Saate vaadata või muuta linke teistele alampaneelide kirjetele, lülitades vasakpoolse alumise paani valikule „Andmevaade“.
+- Saate teha ja vaadata kasutajate kommentaare ning salvestada muudatuste ajalugu moodulis {{activitystream_singular_module}}, lülitades vasakpoolse alumise paani valikule „Tegevuste voog“.
+- Saate jälgida seda kirjet või eelistada seda, kasutades kirje nimest paremal asuvaid ikoone.
+- Täiendavad toimingud on saadaval nupust Muuda paremal asuvas rippmenüüs Toimingud.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moodul {{plural_module_name}} võimaldab teil jälgida konkreetseid müüke ja nende müükide hulka kuuluvaid reaüksusi alates algusest kuni lõpuni. Mooduli {{module_name}} iga kirje kujutab endast võimalikku müüki ja sisaldab asjakohaseid müügiandmeid ja teisi olulisi kirjeid, nagu {{quotes_module}}, {{contacts_module}} jne. 
+    'LBL_HELP_CREATE' => 'Moodul {{plural_module_name}} võimaldab jälgida algusest lõpuni üksikuid müüke ja nende müükide juurde kuuluvaid reaüksusi. Iga kirje {{module_name}} tähistab potentsiaalset müüki ja sisaldab asjakohaseid müügiandmeid, samuti muid olulisi kirjeid, nagu {{quotes_module}}, {{contacts_module}} jne.
 
-Mooduli {{module_name}} loomine:
-1. Antke väljadele soovitud väärtused.
- - Kirjega "Nõutud" väljad tuleb täita enne salvestamist.
- - Klõpsake "Näita rohkem", et näidata vajaduse korral täiendavaid välju.
-2. Klõpsake "Salvesta", et viia uus kirje lõpule ja naasta tagasi eelnevale leheküljele.',
+{{module_name}} loomiseks toimige järgmiselt.
+1. Sisestage soovitud väljade väärtused.
+ - Väljad märgistusega „Nõutav“ peavad olema enne salvestamist täidetud.
+ - Vajadusel klõpsake lisaväljade kuvamiseks nuppu „Kuva rohkem“.
+2. Uue kirje lõpetamiseks ja eelmisele lehele naasmiseks klõpsake „Salvesta“.',
 
 // END ENT/ULT
 
@@ -260,4 +263,9 @@ Mooduli {{module_name}} loomine:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Müügivõimaluse sulgemise prognoos',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Kuva konkreetse müügivõimaluse prognoosi üksikasjad',
-);
+    'LBL_AI_WINRATE' => 'Võidumäär',
+    'LBL_AI_WONOPP' => 'Võidetud võimalused',
+    'LBL_AI_CLOSINGTIME' => 'Sulgemise aeg',
+    'LBL_AI_CLOSEDOPP' => 'Suletud võimalused',
+    'LBL_AI_LEADTIMESPAN' => 'Aeg võimaluste loomise ja suletud võidu vahel',
+];

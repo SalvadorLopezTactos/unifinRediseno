@@ -9,4 +9,4 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$GLOBALS['studioDefs']['KBContents'] = array();
+$GLOBALS['studioDefs']['KBContents'] = [];

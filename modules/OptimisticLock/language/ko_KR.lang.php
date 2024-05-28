@@ -10,22 +10,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-   'LBL_YOURS' => '귀하의 소유',
-   'LBL_IN_DATABASE' => '데이타베이스',
-   'LBL_CONFLICT_EXISTS' => '대립이 존재합니다.',
-   'LBL_ACCEPT_DATABASE' => '데이타베이스 수락합니다.',
-   'LBL_ACCEPT_YOURS' => '귀하의 소유를 수락합니다.',
-   'LBL_RECORDS_MATCH' => '기록일치',
-   'LBL_NO_LOCKED_OBJECTS' => '고정된 물건이 없습니다.',
-   
-);
+$mod_strings = [
+    'LBL_YOURS' => '귀하의 소유',
+    'LBL_IN_DATABASE' => '데이타베이스',
+    'LBL_CONFLICT_EXISTS' => '대립이 존재합니다.',
+    'LBL_ACCEPT_DATABASE' => '데이타베이스 수락합니다.',
+    'LBL_ACCEPT_YOURS' => '귀하의 소유를 수락합니다.',
+    'LBL_RECORDS_MATCH' => '기록일치',
+    'LBL_NO_LOCKED_OBJECTS' => '고정된 물건이 없습니다.',
 
-?>
+];

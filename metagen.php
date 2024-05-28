@@ -1,5 +1,8 @@
 <?php
- if(!defined('sugarEntry'))define('sugarEntry', true);
+
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,4 +14,3 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 die('No Access');
-?>

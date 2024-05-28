@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint\Http;
 
 final class Request
@@ -89,7 +90,7 @@ final class Request
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf(
             '%s %s, headers: %s, body: %s',

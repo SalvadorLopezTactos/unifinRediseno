@@ -12,19 +12,19 @@
 $viewdefs['CJ_Forms']['base']['view']['massupdate'] = [
     'buttons' => [
         [
-            'name' => 'update_button',
-            'type' => 'button',
-            'label' => 'Update',
-            'acl_action' => 'massupdate',
-            'css_class' => 'btn-primary',
-            'primary' => true,
-        ],
-        [
             'type' => 'button',
             'value' => 'cancel',
             'css_class' => 'btn-invisible cancel_button',
-            'icon' => 'icon-remove',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'primary' => false,
+        ],
+        [
+            'name' => 'update_button',
+            'type' => 'button',
+            'label' => 'LBL_UPDATE',
+            'acl_action' => 'massupdate',
+            'css_class' => 'btn-primary',
+            'primary' => true,
         ],
     ],
     'panels' => [

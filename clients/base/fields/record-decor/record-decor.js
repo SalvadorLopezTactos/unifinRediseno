@@ -141,6 +141,10 @@
             return;
         }
 
+        field.model.on('acl:change', function() {
+            this.redecorate(field);
+        }, this);
+
         if (_.isArray(field.fields)) {
             _.each(field.fields, function(subField) {
                 field.model.on('change:' + subField.name, function() {

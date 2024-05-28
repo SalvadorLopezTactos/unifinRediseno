@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'Administravimas',
-    'Product' => 'Produktas',
-    'User' => 'Vartotojas',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => 'Naujas',
-    'Assigned' => 'Priskirtas',
-    'Closed' => 'Uždarytas',
-    'Pending Input' => 'Laukianti įvestis',
-    'Rejected' => 'Atmestas',
-    'Duplicate' => 'Dublikatas',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => 'Didelė',
-    'P2' => 'Vidutinė',
-    'P3' => 'Maža',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => 'Patvirtintas',
-    'Duplicate' => 'Dublikatas',
-    'Closed' => 'Uždarytas',
-    'Out of Date' => 'Pasenęs',
-    'Invalid' => 'Neleistinas',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => 'Administratorius',
+        'Product' => 'Produktas',
+        'User' => 'Vartotojas',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => 'Naujas',
+        'Assigned' => 'Priskirtas',
+        'Closed' => 'Uždaryta',
+        'Pending Input' => 'Laukianti įvestis',
+        'Rejected' => 'Atmesta',
+        'Duplicate' => 'Dublikatas',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => 'Didelis',
+        'P2' => 'Vidutinis',
+        'P3' => 'Žemas',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => 'Patvirtinta',
+        'Duplicate' => 'Dublikatas',
+        'Closed' => 'Uždaryta',
+        'Out of Date' => 'Pasenęs',
+        'Invalid' => 'Netinkamas',
+    ],
+];

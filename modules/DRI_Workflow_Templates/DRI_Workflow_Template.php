@@ -119,14 +119,38 @@ class DRI_Workflow_Template extends Basic
      * Retrieves a DRI_Workflow_Template with id $id and
      * returns an instance of the retrieved bean
      *
-     * @param string $id: the id of the DRI_Workflow_Template that should be retrieved
-     * @param bool $deleted: Set false if the bean is already deleted
+     * @param string $id : the id of the DRI_Workflow_Template that should be retrieved
+     * @param bool $deleted : Set false if the bean is already deleted
      * @return DRI_Workflow_Template
      * @throws NotFoundException: if not found
      */
     public static function getById($id, $deleted = true)
     {
         return CJBean\Repository::getInstance()->getById('DRI_Workflow_Templates', $id, $deleted);
+    }
+
+    /**
+     * Retrieves a DRI_Workflow_Template with id of activity
+     * returns an instance of the retrieved bean
+     *
+     * @param SugarBean $activity : the activity for which template bean is required
+     * @return DRI_Workflow_Template
+     * @throws NotFoundException: if not found
+     */
+    public static function getBeanByActivityId($activity)
+    {
+        $query = new SugarQuery();
+        $query->from(BeanFactory::newBean('DRI_Workflows'));
+        $query->select(['dri_workflow_template_id']);
+        $join = $query->joinTable('dri_subworkflows', ['joinType' => 'INNER']);
+        $join->on()->equals('dri_subworkflows.id', $activity->dri_subworkflow_id);
+        $join->on()->equals('dri_subworkflows.deleted', 0);
+        $query->where()->equalsField('dri_workflows.id', 'dri_subworkflows.dri_workflow_id');
+
+        $result = $query->getOne();
+        if (!empty($result) && $result) {
+            return CJBean\Repository::getInstance()->getById('DRI_Workflow_Templates', $result, 0);
+        }
     }
 
     /**
@@ -184,38 +208,6 @@ class DRI_Workflow_Template extends Basic
         }
 
         return false;
-    }
-
-    /**
-     * Get the id and name of the module if available
-     *
-     * @param string $moduleOrBean
-     * @return array
-     * @throws SugarQueryException
-     */
-    public static function listEnumValuesByModule($moduleOrBean)
-    {
-        $module = $moduleOrBean;
-        if ($moduleOrBean instanceof SugarBean) {
-            $module = $moduleOrBean->module_dir;
-        }
-        $query = new SugarQuery();
-        $query->from(new self());
-        $query->select(['id', 'name']);
-        $query->orderBy('name', 'ASC');
-        $query->where()
-            ->contains('available_modules', "^$module^")
-            ->equals('active', true);
-
-        $results = $query->execute();
-
-        $values = ['' => ''];
-
-        foreach ($results as $result) {
-            $values[$result['id']] = $result['name'];
-        }
-
-        return $values;
     }
 
     /**
@@ -286,11 +278,107 @@ class DRI_Workflow_Template extends Basic
     {
         $stages = $this->getStageTemplates();
 
-        if (count($stages) === 0) {
+        if (safeCount($stages) === 0) {
             throw new SugarApiExceptionNotFound();
         }
 
         return array_pop($stages);
+    }
+
+    /**
+     * Hide stage number if field is set to hide
+     *
+     * @throws CustomerJourneyException\NotFoundException
+     * @throws \SugarApiExceptionInvalidParameter
+     */
+    public function isHideSet()
+    {
+        if (($this->fieldChanged('stage_numbering') &&
+                $this->stage_numbering == true) ||
+            $this->stage_numbering == 1) {
+            $stages = $this->getCopiedActivities();
+            foreach ($stages as $stage) {
+                $this->updateAssigneeActivityID($stage->id, $stage->table_name, 'label', $stage->name);
+            }
+        } else {
+            $this->defaultValueShow('stage_numbering');
+        }
+    }
+
+    /**
+     * Checks if given field is changed
+     *
+     * @param string $field
+     * @return bool
+     */
+    public function fieldChanged($field)
+    {
+        if (!isset($this->fetched_row[$field])) {
+            if (isset($this->$field) && !empty($this->$field)) {
+                return true;
+            }
+            return false;
+        }
+
+        return $this->$field !== $this->fetched_row[$field];
+    }
+
+    /**
+     * Get the stage templates linked with the journey template
+     *
+     * @return DRI_SubWorkflow_Template[]
+     * @throws SugarQueryException
+     */
+    public function getCopiedActivities()
+    {
+        $bean = \BeanFactory::newBean('DRI_SubWorkflow_Templates');
+        $query = new \SugarQuery();
+        $query->from($bean, ['team_security' => false]);
+        $query->select('*');
+        $query
+            ->where()
+            ->equals('dri_workflow_template_id', $this->id);
+
+        return $bean->fetchFromQuery($query);
+    }
+
+    /**
+     * Get the stage templates linked with the journey template
+     *
+     * @param string $templateID
+     * @param string $table
+     * @param string $column
+     * @param string $name
+     */
+    public function updateAssigneeActivityID($templateID, $table, $column, $name)
+    {
+        $qb = DBManagerFactory::getConnection()->createQueryBuilder();
+        $qb->update($table)
+            ->set($column, $qb->expr()->literal($name))
+            ->where($qb->expr()->eq('id', $qb->expr()->literal($templateID)));
+        $qb->execute();
+    }
+
+    /**
+     * Show stage numbers along with stage on name
+     *
+     * @param string $field
+     * @throws SugarQueryException
+     */
+    public function defaultValueShow($field)
+    {
+        if ((!empty($this->fetched_row) && !empty($this->fetched_row[$field]) &&
+                $this->$field == false) ||
+            $this->$field == 0) {
+            $stages = $this->getCopiedActivities();
+            foreach ($stages as $stage) {
+                if (strlen($stage->sort_order) === 1) {
+                    $stage->sort_order = "0{$stage->sort_order}";
+                }
+                $name = sprintf('%s. %s', $stage->sort_order, $stage->name);
+                $this->updateAssigneeActivityID($stage->id, $stage->table_name, 'label', $name);
+            }
+        }
     }
 
     /**
@@ -305,6 +393,7 @@ class DRI_Workflow_Template extends Basic
 
         $this->calculatePoints();
         $this->calculateRelatedActivities();
+        $this->isHideSet();
 
         $return = parent::save($check_notify);
 
@@ -346,6 +435,14 @@ class DRI_Workflow_Template extends Basic
 
     private function copyFromTemplatesHelper($template)
     {
+        $assigneeRuleFlag = false;
+        $assigneeRuleChildFlag = false;
+        $startDateActivityFlag = false;
+        $startDateActivityChildFlag = false;
+        $dueDateActivityFlag = false;
+        $dueDateActivityChildFlag = false;
+        $momentumStartActivityFlag = false;
+        $momentumStartActivityChildFlag = false;
         foreach ($template->getStageTemplates() as $stageTemplateBase) {
             $stageTemplate = $this->cloneAndCopyTemplateValues($stageTemplateBase, [
                 'dri_workflow_template_id' => $this->id,
@@ -361,6 +458,22 @@ class DRI_Workflow_Template extends Basic
                     'dri_subworkflow_template_id' => $stageTemplate->id,
                     'dri_subworkflow_template_name' => $stageTemplate->name,
                 ]);
+                if (!empty($activityTemplate->assignee_rule_activity_id)) {
+                    $assigneeRuleFlag = true;
+                    $activityTemplatesID[$activityTemplate->assignee_rule_activity_id][] = $activityTemplate->id;
+                }
+                if (!empty($activityTemplate->start_date_activity_id)) {
+                    $startDateActivityFlag = true;
+                    $startDateActivityTemplatesID[$activityTemplate->start_date_activity_id][] = $activityTemplate->id;
+                }
+                if (!empty($activityTemplate->due_date_activity_id)) {
+                    $dueDateActivityFlag = true;
+                    $dueDateActivityTemplatesID[$activityTemplate->due_date_activity_id][] = $activityTemplate->id;
+                }
+                if (!empty($activityTemplate->momentum_start_activity_id)) {
+                    $momentumStartActivityFlag = true;
+                    $momentumStartActivityTemplatesID[$activityTemplate->momentum_start_activity_id][] = $activityTemplate->id;
+                }
                 $stageTemplate->dri_workflow_task_templates->add($activityTemplate);
 
                 foreach ($activityTemplateBase->getChildren() as $childTemplateBase) {
@@ -370,12 +483,112 @@ class DRI_Workflow_Template extends Basic
                         'dri_subworkflow_template_name' => $stageTemplate->name,
                         'parent_name' => $activityTemplate->name,
                     ]);
+                    if (!empty($childTemplate->assignee_rule_activity_id)) {
+                        $assigneeRuleChildFlag = true;
+                        $activityTemplatesID[$childTemplate->assignee_rule_activity_id][] = $childTemplate->id;
+                    }
+                    if (!empty($childTemplate->start_date_activity_id)) {
+                        $startDateActivityChildFlag = true;
+                        $startDateActivityTemplatesID[$childTemplate->start_date_activity_id][] = $childTemplate->id;
+                    }
+                    if (!empty($childTemplate->due_date_activity_id)) {
+                        $dueDateActivityChildFlag = true;
+                        $dueDateActivityTemplatesID[$childTemplate->due_date_activity_id][] = $childTemplate->id;
+                    }
+                    if (!empty($childTemplate->momentum_start_activity_id)) {
+                        $momentumStartActivityChildFlag = true;
+                        $momentumStartActivityTemplatesID[$childTemplate->momentum_start_activity_id][] = $childTemplate->id;
+                    }
                     $this->copyAndRegisterBean($template, $childTemplate, $childTemplateBase);
                 }
+
                 $this->copyAndRegisterBean($template, $activityTemplate, $activityTemplateBase);
+            }
+            if ($assigneeRuleChildFlag || $assigneeRuleFlag) {
+                $this->setCopiedTemplateData($activityTemplatesID, $template->id, $this->id, 'assignee_rule_activity_id');
+            }
+            if ($startDateActivityFlag || $startDateActivityChildFlag) {
+                $this->setCopiedTemplateData($startDateActivityTemplatesID, $template->id, $this->id, 'start_date_activity_id');
+            }
+            if ($dueDateActivityChildFlag || $dueDateActivityFlag) {
+                $this->setCopiedTemplateData($dueDateActivityTemplatesID, $template->id, $this->id, 'due_date_activity_id');
+            }
+            if ($momentumStartActivityChildFlag || $momentumStartActivityFlag) {
+                $this->setCopiedTemplateData($momentumStartActivityTemplatesID, $template->id, $this->id, 'momentum_start_activity_id');
             }
             $this->copyAndRegisterBean($template, $stageTemplate, $stageTemplateBase);
         }
+    }
+
+    /**
+     * set the data to the copied Template
+     *
+     * @param array $templateID
+     * @param string $parentTemplateID
+     * @param string $update
+     * @param string $id
+    */
+    private function setCopiedTemplateData($templateID, $parentTemplateID, $id, $update)
+    {
+        foreach ($templateID as $parentActivityID => $tempActivityID) {
+            $activityName = $this->getActivityName($parentTemplateID, $parentActivityID);
+            $activityID = $this->setCopiedID($id, $activityName, 'dri_workflow_template_id');
+            if ($activityID) {
+                $this->updateCopiedActivityID($tempActivityID, $activityID, $update);
+            }
+        }
+    }
+
+    /**
+     * Provide the ID of the assigne rule activity
+     *
+     * @param array $templateID
+     * @param string $activityID
+     * @param string $update
+    */
+    private function updateCopiedActivityID($templateID, $activityID, $update)
+    {
+        foreach ($templateID as $key => $idValue) {
+            $qb = DBManagerFactory::getConnection()->createQueryBuilder();
+            $qb->update('dri_workflow_task_templates')
+            ->set($update, $qb->expr()->literal($activityID))
+                ->where($qb->expr()->eq('id', $qb->expr()->literal($idValue)));
+            $qb->execute();
+        }
+    }
+
+    /**
+     * Set te assignee rule acitivity id
+     *
+     * @param string $stageID
+     * @param string $acivityName
+    */
+    private function setCopiedID($templateID, $acivityName, $update)
+    {
+        $stageTemplateBean = \BeanFactory::newBean('DRI_Workflow_Task_Templates');
+        $query = new \SugarQuery();
+        $query->select('id');
+        $query->from($stageTemplateBean);
+        $query->where()->equals($update, $templateID)
+            ->equals('name', $acivityName);
+        return $query->getOne();
+    }
+
+     /**
+     * Get the name of  activity
+     *
+     * @param string $parentStageID
+     * @param string $parentStageAcivityID
+    */
+    private function getActivityName($parentStageID, $parentStageAcivityID)
+    {
+        $stageTemplateBean = \BeanFactory::newBean('DRI_Workflow_Task_Templates');
+        $query = new \SugarQuery();
+        $query->select('name');
+        $query->from($stageTemplateBean);
+        $query->where()->equals('dri_workflow_template_id', $parentStageID)
+            ->equals('id', $parentStageAcivityID);
+        return $query->getOne();
     }
 
     private function cloneAndCopyTemplateValues($templateBase, $copyFieldsArr)
@@ -439,7 +652,7 @@ class DRI_Workflow_Template extends Basic
 
             if ($journeys[0]['record_count'] > 0) {
                 throw new SugarApiExceptionInvalidParameter(
-                    sprintf('Template cannot be deleted, template is used in %u journeys', $journeys[0]['record_count'])
+                    'This Smart Guide template is being used in active Smart Guides and cannot be deleted.'
                 );
             }
         }
@@ -454,7 +667,7 @@ class DRI_Workflow_Template extends Basic
     {
         try {
             self::getByName($this->name, $this->id);
-            throw new SugarApiExceptionInvalidParameter(sprintf('template with name %s does already exist', $this->name));
+            throw new SugarApiExceptionInvalidParameter(sprintf('Another Smart Guide template is already named %s.', $this->name));
         } catch (CJException\CustomerJourneyException $e) {
         }
     }
@@ -501,26 +714,6 @@ class DRI_Workflow_Template extends Basic
             if ($journey) {
                 $journey->save();
             }
-        }
-    }
-
-    /**
-     * @return array
-     */
-    public static function listEnabledModulesEnumOptions()
-    {
-        global $sugar_config;
-        $enabledModulesList = [];
-        if (!empty($sugar_config['customer_journey']) &&
-            !empty($sugar_config['customer_journey']['enabled_modules'])) {
-            $enabledModules = $sugar_config['customer_journey']['enabled_modules'];
-            $enabledModules = explode(',', $enabledModules);
-            foreach ($enabledModules as $enabledModule) {
-                $enabledModulesList[$enabledModule] = $enabledModule;
-            }
-            return $enabledModulesList;
-        } else {
-            return [];
         }
     }
 }

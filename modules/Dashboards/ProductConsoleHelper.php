@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -66,7 +67,7 @@ class ProductConsoleHelper
      */
     public function checkRenewalsConsole(SugarBean $bean, string $event, array $args)
     {
-        if ($this->isAuthorized() === false && !empty($args['id']) && $args['id'] ===  self::$renewalsConsoleId) {
+        if ($this->isAuthorized() === false && !empty($args['id']) && $args['id'] === self::$renewalsConsoleId) {
             throw new SugarApiExceptionNotAuthorized('SUGAR_API_EXCEPTION_RECORD_NOT_AUTHORIZED', ['view']);
         }
     }
@@ -75,7 +76,7 @@ class ProductConsoleHelper
      * Checks to see if this console is loadable. Checks adminWork setting for cases like upgrade.
      * @return boolean
      */
-    private function isAuthorized() : bool
+    private function isAuthorized(): bool
     {
         // Some console require certain setups on the system
         return $this->useRevenueLineItems() || $this->isAdminWork();
@@ -85,7 +86,7 @@ class ProductConsoleHelper
      * Determines if we are in an admin only process to allow consumption of the dashboard
      * @return boolean
      */
-    public function isAdminWork() : bool
+    public function isAdminWork(): bool
     {
         return AccessControlManager::instance()->getAdminWork() === true;
     }

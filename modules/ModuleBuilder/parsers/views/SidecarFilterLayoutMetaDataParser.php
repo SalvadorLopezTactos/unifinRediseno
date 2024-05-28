@@ -16,7 +16,7 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
     /**
      * @var array The list of field types and their filter operators.
      */
-    public $operators = array();
+    public $operators = [];
 
     /*
      * Constructor, builds the parent ListLayoutMetaDataParser then adds the
@@ -28,10 +28,10 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
      */
     public function __construct($moduleName, $packageName = '', $client = 'base')
     {
-        $GLOBALS['log']->debug(get_class($this) . ": __construct()");
+        $GLOBALS['log']->debug(get_class($this) . ': __construct()');
 
         if (empty($client)) {
-            throw new \InvalidArgumentException("Client cannot be blank in SidecarFilterLayoutMetaDataParser");
+            throw new \InvalidArgumentException('Client cannot be blank in SidecarFilterLayoutMetaDataParser');
         }
 
         // Set the client
@@ -48,7 +48,7 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
         $this->_paneldefs = $this->_viewdefs;
         $this->_fielddefs = $this->implementation->getFieldDefs();
 
-        $this->columns = array('LBL_DEFAULT' => 'getDefaultFields', 'LBL_HIDDEN' => 'getAvailableFields');
+        $this->columns = ['LBL_DEFAULT' => 'getDefaultFields', 'LBL_HIDDEN' => 'getAvailableFields'];
 
         $filterBeanClass = BeanFactory::getBeanClass('Filters');
         $this->operators = $filterBeanClass::getOperators($client);
@@ -60,7 +60,7 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
      */
     public function getDefaultFields()
     {
-        $defaultFields = array();
+        $defaultFields = [];
         foreach ($this->_viewdefs['fields'] as $name => $details) {
             $def = $this->_fielddefs[$name] ?? $details;
             if ($this->isValidField($name, $def)) {
@@ -74,8 +74,8 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
      * Checks to see if a field name is in any of the panels
      *
      * @access public
-     * @param  string $name The name of the field to check
-     * @param  array $src  The source array to scan
+     * @param string $name The name of the field to check
+     * @param array $src The source array to scan
      * @return bool
      */
     public function panelHasField($name, $src = null)
@@ -103,7 +103,7 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
         $viewDefs = $this->implementation->getOriginalViewdefs();
 
         // The array we will be working on to determine our fields
-        $availableFields = array();
+        $availableFields = [];
 
         // Inspect the original viewdefs to make sure combo fields are handled correctly
         foreach ($viewDefs['fields'] as $field => $def) {
@@ -111,11 +111,11 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
                 // Nested if here to prevent logic form always falling into the
                 // else that belongs to this ifs parent if
                 if (!isset($fieldDefs[$field])) {
-                    $fieldDefs[$field] = array();
+                    $fieldDefs[$field] = [];
                 }
             } else {
                 if (isset($def['dbFields']) && is_array($def['dbFields'])) {
-                    // Loop over the dbFields in this filter field and remove them 
+                    // Loop over the dbFields in this filter field and remove them
                     // from the field defs
                     foreach ($def['dbFields'] as $fieldName) {
                         unset($fieldDefs[$fieldName]);
@@ -140,7 +140,7 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
 
         // Now loop over the current viewdefs and remove whatever is left from the
         // available field list.
-        foreach ($this->_viewdefs['fields'] AS $name => $details) {
+        foreach ($this->_viewdefs['fields'] as $name => $details) {
             unset($availableFields[$name]);
         }
 
@@ -170,7 +170,7 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
      * @param array $defs
      * @return bool True if the field was added, false otherwise
      */
-    public function addField($fieldName, $defs = array(), $placementIndex = null, $panelIndex = 0)
+    public function addField($fieldName, $defs = [], $placementIndex = null, $panelIndex = 0)
     {
         if (!$this->panelHasField($fieldName)) {
             $this->_viewdefs['fields'][$fieldName] = $defs;
@@ -189,13 +189,13 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
     protected function _populateFromRequest()
     {
         $GLOBALS['log']->debug(
-            get_class($this) . "->populateFromRequest() - fielddefs = " . print_r($this->_fielddefs, true)
+            get_class($this) . '->populateFromRequest() - fielddefs = ' . print_r($this->_fielddefs, true)
         );
         // Transfer across any reserved fields, that is, any where studio !== true,
         // which are not editable but must be preserved
-        $newPaneldefs = array();
+        $newPaneldefs = [];
         $newPaneldefIndex = 0;
-        $newPanelFieldMonitor = array();
+        $newPanelFieldMonitor = [];
 
         if (!empty($this->_viewdefs['fields'])) {
             foreach ($this->_viewdefs['fields'] as $fieldName => $field) {
@@ -204,12 +204,12 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
                 $studioa = $studio && is_array($field['studio']);
                 $studioa = $studioa && isset($field['studio']['listview']) &&
                     ($field['studio']['listview'] === false || ($slv = strtolower(
-                            $field['studio']['listview']
-                        )) == 'false' || $slv == 'required');
+                        $field['studio']['listview']
+                    )) == 'false' || $slv == 'required');
                 $studion = $studio && !is_array($field['studio']);
                 $studion = $studion && ($field['studio'] === false || ($slv = strtolower(
-                            $field['studio']
-                        )) == 'false' || $slv == 'required');
+                    $field['studio']
+                )) == 'false' || $slv == 'required');
 
                 $studio = $studio && ($studioa || $studion);
                 if (isset($fieldName) && $studio) {
@@ -230,13 +230,13 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
                     $newPaneldefs[$fieldname] = $this->_viewdefs['fields'][$fieldname];
                 } elseif ((!empty($comboFieldDefs[$fieldname]) &&
                         isset($comboFieldDefs[$fieldname]['dbFields']))
-                        || $fieldname === '$favorite' || (hasMapsLicense() && $fieldname === '$distance')
+                    || $fieldname === '$favorite' || (hasMapsLicense() && $fieldname === '$distance')
                 ) {
                     // combo fields such as address_street
                     // Or condition is for special field found that should be added too
                     $newPaneldefs[$fieldname] = $comboFieldDefs[$fieldname];
                 } else {
-                    $newPaneldefs[$fieldname] = array();
+                    $newPaneldefs[$fieldname] = [];
                 }
             }
         }

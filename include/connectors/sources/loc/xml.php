@@ -9,16 +9,17 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Local XML source
  * @api
  */
 abstract class loc_xml extends source
 {
- 	public function __parse($file)
- 	{
- 		$contents = file_get_contents($file);
+    public function __parse($file)
+    {
+        $contents = file_get_contents($file);
         disableXmlEntityLoader();
- 		return simplexml_load_string($contents);
- 	}
+        return simplexml_load_string($contents);
+    }
 }

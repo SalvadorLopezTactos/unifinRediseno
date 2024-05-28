@@ -9,31 +9,31 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Emails']['base']['view']['compose-addressbook-headerpane'] = array(
+$viewdefs['Emails']['base']['view']['compose-addressbook-headerpane'] = [
     'template' => 'headerpane',
-    'fields' => array(
-        array(
+    'fields' => [
+        [
             'name' => 'title',
             'type' => 'label',
             'default_value' => 'LBL_COMPOSE_ADDRESSBOOK',
-        ),
-    ),
-    'buttons'  => array(
-        array(
-            'name'      => 'cancel_button',
-            'type'      => 'button',
-            'label'     => 'LBL_CANCEL_BUTTON_LABEL',
+        ],
+    ],
+    'buttons' => [
+        [
+            'name' => 'cancel_button',
+            'type' => 'button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
-        ),
-        array(
-            'name'      => 'done_button',
-            'type'      => 'button',
-            'label'     => 'LBL_DONE_BUTTON_LABEL',
+        ],
+        [
+            'name' => 'done_button',
+            'type' => 'button',
+            'label' => 'LBL_DONE_BUTTON_LABEL',
             'css_class' => 'btn-primary',
-        ),
-        array(
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

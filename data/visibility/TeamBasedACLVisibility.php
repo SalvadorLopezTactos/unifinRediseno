@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -100,7 +101,7 @@ class TeamBasedACLVisibility extends SugarVisibility implements StrategyInterfac
 
         $ow = new OwnerVisibility($this->bean, $this->params);
         if (!empty($this->getOption('table_alias'))) {
-            $ow->setOptions(array('table_alias' => $this->getOption('table_alias')));
+            $ow->setOptions(['table_alias' => $this->getOption('table_alias')]);
         }
         $ownerVisibilityRaw = '';
         $ow->addVisibilityWhere($ownerVisibilityRaw);
@@ -135,7 +136,7 @@ class TeamBasedACLVisibility extends SugarVisibility implements StrategyInterfac
         } else {
             $tableAlias = $this->bean->table_name;
         }
-        return array($teamTableAlias, $tableAlias);
+        return [$teamTableAlias, $tableAlias];
     }
 
     /**
@@ -167,7 +168,7 @@ class TeamBasedACLVisibility extends SugarVisibility implements StrategyInterfac
      */
     public function elasticGetBeanIndexFields($module, Visibility $provider)
     {
-        return array('acl_team_set_id' => 'id');
+        return ['acl_team_set_id' => 'id'];
     }
 
     /**

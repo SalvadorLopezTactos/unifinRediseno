@@ -58,7 +58,7 @@ class SugarUpgradeRenamePAToAWScheduler extends UpgradeScript
                     $val = $db->quoted($val);
                 }, $this->db);
 
-                $ids = implode(",", $ids);
+                $ids = implode(',', $ids);
 
                 $sql = "UPDATE $table SET name = $name WHERE id IN ($ids)";
                 $this->db->query($sql);
@@ -74,10 +74,10 @@ class SugarUpgradeRenamePAToAWScheduler extends UpgradeScript
      */
     protected function getModuleLangArray()
     {
-        $mod_strings = array();
-        $langfile = "modules/Scheduler/language/en_us.lang.php";
+        $mod_strings = [];
+        $langfile = 'modules/Scheduler/language/en_us.lang.php';
         if (!file_exists($langfile)) {
-            $this->log("Failed to find the language file");
+            $this->log('Failed to find the language file');
             // fail, can't find file
             return $mod_strings;
         }

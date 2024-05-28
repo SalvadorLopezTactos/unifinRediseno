@@ -24,7 +24,7 @@ class SugarUpgradeFixNotesSubpanels extends UpgradeScript
             return;
         }
 
-        $path = "custom/modules/Notes/clients/base/views/subpanel-for-*/subpanel-for-*.php";
+        $path = 'custom/modules/Notes/clients/base/views/subpanel-for-*/subpanel-for-*.php';
         foreach (glob($path) as $scanFile) {
             $viewdefs = [];
             include $scanFile;

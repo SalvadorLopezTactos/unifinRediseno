@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'アクティブ',
     'LBL_ASSIGNEE_RULE' => '担当者ルール',
     'LBL_TARGET_ASSIGNEE' => 'ターゲット担当者',
+    'LBL_STAGE_NUMBERS' => 'ステージナンバリング',
     'LBL_EXPORT_BUTTON_LABEL' => 'エクスポート',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'インポート',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'お使いのファイルシステムから*.jsonファイルをインポートして新規スマートガイドテンプレートレコードを自動的に作成/更新できます。',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'チェックを入れると、ターゲット担当者 = 親担当者の場合、親の「割り当て先」ユーザーを変更すると、スマートガイド、ステージ、アクティビティでも自動的に「割り当て先」ユーザーが変更されます。アクティビティテンプレートのターゲット担当者の設定は、スマートガイドテンプレートよりも優先されますのでご注意ください。',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'ユーザーをアクティビティに割り当てるタイミング',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'アクティビティを割り当てられる人',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'これは、自動ステージナンバリングの表示/非表示を切り替えるトグルです。',
     'CJ_FORMS_LBL_PARENT_NAME' => 'スマートガイド/ステージ/アクティビティテンプレート',
 ];

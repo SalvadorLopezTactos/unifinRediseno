@@ -1,11 +1,21 @@
 <?php
-$searchdefs['Users'] = 
-array (
+// created: 2024-05-21 12:49:42
+$searchdefs['Users'] = array (
+  'templateMeta' => 
+  array (
+    'maxColumns' => '3',
+    'maxColumnsBasic' => '4',
+    'widths' => 
+    array (
+      'label' => '10',
+      'field' => '30',
+    ),
+  ),
   'layout' => 
   array (
     'basic_search' => 
     array (
-      'search_name' => 
+      0 => 
       array (
         'name' => 'search_name',
         'label' => 'LBL_NAME',
@@ -15,37 +25,37 @@ array (
     ),
     'advanced_search' => 
     array (
-      'first_name' => 
+      0 => 
       array (
         'name' => 'first_name',
         'default' => true,
         'width' => '10',
       ),
-      'last_name' => 
+      1 => 
       array (
         'name' => 'last_name',
         'default' => true,
         'width' => '10',
       ),
-      'user_name' => 
+      2 => 
       array (
         'name' => 'user_name',
         'default' => true,
         'width' => '10',
       ),
-      'status' => 
+      3 => 
       array (
         'name' => 'status',
         'default' => true,
         'width' => '10',
       ),
-      'is_admin' => 
+      4 => 
       array (
         'name' => 'is_admin',
         'default' => true,
         'width' => '10',
       ),
-      'puestousuario_c' => 
+      5 => 
       array (
         'type' => 'enum',
         'default' => true,
@@ -53,7 +63,7 @@ array (
         'width' => '10',
         'name' => 'puestousuario_c',
       ),
-      'subpuesto_c' => 
+      6 => 
       array (
         'type' => 'enum',
         'default' => true,
@@ -61,25 +71,25 @@ array (
         'width' => '10',
         'name' => 'subpuesto_c',
       ),
-      'title' => 
+      7 => 
       array (
         'name' => 'title',
         'default' => true,
         'width' => '10',
       ),
-      'is_group' => 
+      8 => 
       array (
         'name' => 'is_group',
         'default' => true,
         'width' => '10',
       ),
-      'department' => 
+      9 => 
       array (
         'name' => 'department',
         'default' => true,
         'width' => '10',
       ),
-      'phone' => 
+      10 => 
       array (
         'name' => 'phone',
         'label' => 'LBL_ANY_PHONE',
@@ -87,7 +97,7 @@ array (
         'default' => true,
         'width' => '10',
       ),
-      'address_street' => 
+      11 => 
       array (
         'name' => 'address_street',
         'label' => 'LBL_ANY_ADDRESS',
@@ -95,7 +105,7 @@ array (
         'default' => true,
         'width' => '10',
       ),
-      'email' => 
+      12 => 
       array (
         'name' => 'email',
         'label' => 'LBL_ANY_EMAIL',
@@ -103,7 +113,7 @@ array (
         'default' => true,
         'width' => '10',
       ),
-      'address_city' => 
+      13 => 
       array (
         'name' => 'address_city',
         'label' => 'LBL_CITY',
@@ -111,7 +121,7 @@ array (
         'default' => true,
         'width' => '10',
       ),
-      'address_state' => 
+      14 => 
       array (
         'name' => 'address_state',
         'label' => 'LBL_STATE',
@@ -119,7 +129,7 @@ array (
         'default' => true,
         'width' => '10',
       ),
-      'address_postalcode' => 
+      15 => 
       array (
         'name' => 'address_postalcode',
         'label' => 'LBL_POSTAL_CODE',
@@ -127,7 +137,7 @@ array (
         'default' => true,
         'width' => '10',
       ),
-      'address_country' => 
+      16 => 
       array (
         'name' => 'address_country',
         'label' => 'LBL_COUNTRY',
@@ -135,7 +145,7 @@ array (
         'default' => true,
         'width' => '10',
       ),
-      'cac_c' => 
+      17 => 
       array (
         'readonly' => false,
         'type' => 'bool',
@@ -144,7 +154,7 @@ array (
         'width' => 10,
         'name' => 'cac_c',
       ),
-      'posicion_operativa_c' => 
+      18 => 
       array (
         'readonly' => false,
         'type' => 'multienum',
@@ -153,16 +163,6 @@ array (
         'width' => 10,
         'name' => 'posicion_operativa_c',
       ),
-    ),
-  ),
-  'templateMeta' => 
-  array (
-    'maxColumns' => '3',
-    'maxColumnsBasic' => '4',
-    'widths' => 
-    array (
-      'label' => '10',
-      'field' => '30',
     ),
   ),
 );

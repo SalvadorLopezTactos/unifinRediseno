@@ -45,6 +45,23 @@
             }
         }, this);
         this.context.on('dashboard:collapse:fire', this.collapse, this);
+        app.events.on('focusdrawer:close', this.handleFocusDrawerClose, this);
+
+        let targetLayout = (this.context && this.context.parent) ? this.context.parent.get('layout') : null;
+        if (app.controller.context.get('targetLayout') !== targetLayout) {
+            app.controller.context.set('targetLayout', targetLayout);
+        }
+    },
+
+    /**
+     * Refresh dashlet if any records have been updated
+     * after the focus drawer is closed.
+     * @param {Array} updatedModels
+     */
+    handleFocusDrawerClose: function(updatedModels) {
+        if (!_.isEmpty(updatedModels)) {
+            this.reloadDashlet();
+        }
     },
 
     /**
@@ -495,8 +512,8 @@
         // Set the proper dashlet styling based on the state (collapsed or expanded)
         this.$('.dashlet-toggle > i').toggleClass('sicon-chevron-down', collapsed);
         this.$('.dashlet-toggle > i').toggleClass('sicon-chevron-up', !collapsed);
-        this.$(".thumbnail").toggleClass("collapsed", collapsed);
-        this.$("[data-dashlet=dashlet]").toggleClass("hide", collapsed);
+        this.$('[data-action=droppable]').toggleClass('collapsed', collapsed);
+        this.$('[data-dashlet=dashlet]').toggleClass('invisible', collapsed);
         this.$el.toggleClass('collapsed', collapsed);
 
         // Notify the parent layout that the dashlet was collapsed or expanded
@@ -549,6 +566,7 @@
         this.model.off("setMode", null, this);
         this.off("render");
         this.context.off("dashboard:collapse:fire", null, this);
+        app.events.off('focusdrawer:close', this.handleFocusDrawerClose, this);
         this._super('_dispose');
     }
 })

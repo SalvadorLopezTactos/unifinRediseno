@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Definicions de processos',
-  'LBL_MODULE_TITLE' => 'Definicions de processos',
-  'LBL_MODULE_NAME_SINGULAR' => 'Definició del procés',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Definicions de processos',
+    'LBL_MODULE_TITLE' => 'Definicions de processos',
+    'LBL_MODULE_NAME_SINGULAR' => 'Definició del procés',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a les definicions de processos',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a les definicions de processos',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Quadre de comandament del registre de definicions de processos',
-  'LNK_LIST' => 'Veure definicions de processos',
-  'LNK_NEW_PMSE_PROJECT' => 'Crea definició de processos',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Importa definicions de processos',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Quadre de comandament del registre de definicions de processos',
+    'LNK_LIST' => 'Veure definicions de processos',
+    'LNK_NEW_PMSE_PROJECT' => 'Crea definició de processos',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Importa definicions de processos',
 
-  'LBL_PRJ_STATUS' => 'Estat',
-  'LBL_PRJ_MODULE' => 'Mòdul objectiu',
-  'LBL_PRJ_RUN_ORDER' => 'Executa la comanda',
-  'LBL_PMSE_BUTTON_SAVE' => 'Desa',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Cancel·la',
-  'LBL_PMSE_BUTTON_YES' => 'Si',
-  'LBL_PMSE_BUTTON_NO' => 'No',
-  'LBL_PMSE_BUTTON_OK' => 'Accepta',
+    'LBL_PRJ_STATUS' => 'Estat',
+    'LBL_PRJ_MODULE' => 'Mòdul objectiu',
+    'LBL_PRJ_RUN_ORDER' => 'Executa la comanda',
+    'LBL_PMSE_BUTTON_SAVE' => 'Desa',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Cancel·la',
+    'LBL_PMSE_BUTTON_YES' => 'Si',
+    'LBL_PMSE_BUTTON_NO' => 'No',
+    'LBL_PMSE_BUTTON_OK' => 'Accepta',
     'LBL_PMSE_FORM_ERROR' => 'Solucioneu els errors abans de continuar.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Dissenya',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Activitat',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Acció',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Esdeveniment iniciat per client potencial',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Esdeveniment iniciat per oportunitat' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Esdeveniment iniciat per oportunitat',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Esdeveniment iniciat per document',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Esdeveniment d&#39;altres mòduls',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Esdevenint d&#39;espera',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Norma empresarial',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Acció de la norma empresarial',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Plantilla de correu',
-);
+];

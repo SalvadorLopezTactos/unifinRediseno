@@ -15,7 +15,7 @@ $viewdefs['Emails']['portal']['view']['activity-card-header'] = [
         [
             'name' => 'panel_users',
             'label' => 'LBL_PANEL_USERS',
-            'css_class' => 'panel-users',
+            'css_class' => 'panel-users mt-2 flex flex-wrap gap-x-4 gap-y-2',
             'template' => 'user-to-user',
             'fields' => [
                 [

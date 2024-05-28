@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => '電話作成',
     'LNK_NEW_MEETING' => '会議作成',
     'LNK_NEW_TASK' => 'タスク作成',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => '追加メタフィールド 2',
     'COLUMN_TITLE_EXT3' => '追加メタフィールド 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'IFrameの高さ',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'デフォルトURL',
     'COLUMN_TITLE_AUDIT' => '監査',
     'COLUMN_TITLE_PII' => '個人情報',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'デフォルト値',
     'LBL_AUDITED' => '監査',
     'LBL_REPORTABLE' => 'レポート可',
-    'ERR_RESERVED_FIELD_NAME' => "予約語",
+    'ERR_RESERVED_FIELD_NAME' => '予約語',
     'ERR_SELECT_FIELD_TYPE' => 'フィールドタイプを選択',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'フィールド名は既に存在します',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'フィールド名には以下の文字だけを使用してください　: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => '完了',
     'LBL_EXE_NON_SIM_MODE' => '非シミュレーションモードを実行します',
     'LBL_CALCULATION_VISIBLE' => '計算用に閲覧可能にする',
-);
+];

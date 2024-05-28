@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Parakstam nepieciešams vārds.',
     'LBL_DEFAULT_SIGNATURE' => 'Pēc noklusējuma',
     'LBL_MODULE_NAME' => 'E-pasta paraksti',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'Lietot parakstu?',
     'LBL_SIGNATURE_PREPEND' => 'Paraksts virs atbildes?',
     'LBL_SIGNATURES' => 'Paraksti',
-);
+];

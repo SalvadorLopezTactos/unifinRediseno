@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'לוח שנה',
     'LBL_MODULE_NAME_SINGULAR' => 'לוח שנה',
     'LBL_MODULE_TITLE' => 'לוח שנה',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'הגדרות',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'הצג מרווחי זמן בימים ושובועת לצפייה',
-    'LBL_SETTINGS_TIME_STARTS'=>'זמן התחלה:',
-    'LBL_SETTINGS_TIME_ENDS'=>'זמן סיום:',
+    'LBL_SETTINGS_TIME_STARTS' => 'זמן התחלה:',
+    'LBL_SETTINGS_TIME_ENDS' => 'זמן סיום:',
     'LBL_SETTINGS_CALLS_SHOW' => 'הקראה שיחות:',
     'LBL_SETTINGS_TASKS_SHOW' => 'הראה משימות:',
 
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'צור לוח שנה',
     'LNK_CALENDAR_LIST' => 'הצג לוחות שנה',
     'LNK_CALENDAR_LEGACY' => 'לוח שנה ישן',
-    'LBL_IMPORT_CALENDAR'=> 'ייבוא לוח שנה',
+    'LBL_IMPORT_CALENDAR' => 'ייבוא לוח שנה',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'חותמת זמן של אירוע',
     'LBL_INSERTFIELD' => 'הוסף שדה',
     'LBL_EVENT_START_ERROR' => 'בחר מועד התחלה',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'נא לבחור לוח שנה',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'שמירת לוחות השנה נכשלה.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'יום א&#39;',
             'יום ב&#39;',
             'יום ג&#39;',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'יום ה&#39;',
             'יום ו&#39;',
             'שבת',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'ראשון',
             'שני',
             'שלישי',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'חמישי',
             'שישי',
             'שבת',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'ינו&#39;',
             'פב&#39;',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'אוק&#39;',
             'נוב&#39;',
             'דצמ&#39;',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'ינואר',
             'פברואר',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'אוקטובר',
             'נובמבר',
             'דצמבר',
-        ),
-);
+        ],
+];

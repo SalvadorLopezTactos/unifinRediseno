@@ -119,12 +119,12 @@ class Factory
     {
         $config = $this->config->getChannelConfig($channel);
 
-        $handlers = array();
+        $handlers = [];
         foreach ($config['handlers'] as $handler) {
             $handlers[] = $this->createHandler($handler['type'], $forceLevel ?: $handler['level'], $handler['params']);
         }
 
-        $processors = array();
+        $processors = [];
         foreach ($config['processors'] as $processor) {
             $processors[] = $this->createProcessor($processor['type'], $processor['params']);
         }
@@ -178,7 +178,7 @@ class Factory
             if (!class_exists($class)) {
                 throw new \InvalidArgumentException('Unsupported handler type ' . $type);
             }
-            $this->handlerFactories[$type] = new $class;
+            $this->handlerFactories[$type] = new $class();
         }
 
         return $this->handlerFactories[$type];
@@ -198,7 +198,7 @@ class Factory
             if (!class_exists($class)) {
                 throw new \InvalidArgumentException('Unsupported processor type ' . $type);
             }
-            $this->processorFactories[$type] = new $class;
+            $this->processorFactories[$type] = new $class();
         }
 
         return $this->processorFactories[$type];

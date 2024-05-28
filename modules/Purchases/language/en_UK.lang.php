@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Purchases Record Dashboard',
     'LBL_RELATED_ACCOUNT' => 'Related Account',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Purchases Focus Drawer',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Purchase Timeline',
 ];

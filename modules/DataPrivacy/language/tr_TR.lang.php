@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Veri Gizliliği',
     'LBL_MODULE_NAME_SINGULAR' => 'Veri Gizliliği',
     'LBL_NUMBER' => 'Numara',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Silinecek Alanlar veya Kayıtlar işaretlenmedi.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Veri Gizliliği Kaydı Panosu',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Veri Gizliliği Odak Bölmesi',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Veri Gizliliği Zaman Çizelgesi',
 
     // list view
     'LBL_HELP_RECORDS' => 'Veri Gizliliği modülü, şirketinizin gizlilik prosedürlerinizi desteklemek için izin verme ve reddetme istekleri dahil gizlilik aktivitelerini takip eder. İzni takip etmek veya bir gizlilik isteği hakkında işlem yapmak için bir kişinin kaydıyla (ör. bir kontak) bağlantılı veri gizliliği kayıtları oluşturun.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Veri Gizliliği modülü, şirketinizin gizlilik prosedürlerinizi desteklemek için izin verme ve reddetme istekleri dahil gizlilik aktivitelerini takip eder. İzni takip etmek veya bir gizlilik isteği hakkında işlem yapmak için bir kişinin kaydıyla (ör. bir kontak) bağlantılı veri gizliliği kayıtları oluşturun. Gereken eylem tamamlandığında Veri Gizliliği Yöneticisi rolündeki kullanıcılar, durumu güncellemek için "Tamamla" veya "Reddet"e tıklayabilir.
 
 Silme istekleri için aşağıdaki alt panellerde listelenen kişinin kayıtlarının her biri için "Silmek İçin İşaretle"yi seçin. İstenen tüm alanlar seçildiğinde "Sil ve Tamamla"ya tıklamak alanların değerlerini kalıcı olarak kaldıracak ve veri gizliliği kaydını tamamlandı olarak işaretleyecek.',
-);
+];

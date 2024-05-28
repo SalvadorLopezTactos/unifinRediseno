@@ -20,14 +20,9 @@
      * @inheritdoc
      */
     setUsersFields: function() {
-        var panel = this.getUsersPanel();
-        this.leftUserField = _.find(panel.fields, function(field) {
-            return field.name === 'created_by_name';
-        });
-        this.rightUserField = _.find(panel.fields, function(field) {
-            return field.name === 'assigned_user_name';
-        });
+        const panel = this.getUsersPanel();
+        this.userField = _.find(panel.fields, (field) => field.name === 'assigned_user_name');
 
-        this.hasAvatarUser = !!this.leftUserField && !!this.rightUserField;
+        this.hasAvatarUser = !!this.userField;
     }
 })

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\ACL;
 
 /**
@@ -19,20 +20,20 @@ interface Cache
     /**
      * Retrieve a value for a key from the cache. Returns NULL in case if the entry is not found.
      */
-    public function retrieve(string $userId, string $key) : ?array;
+    public function retrieve(string $userId, string $key): ?array;
 
     /**
      * Set a value for a key in the cache.
      */
-    public function store(string $userId, string $key, array $value) : void;
+    public function store(string $userId, string $key, array $value): void;
 
     /**
      * Clear cache by user ID.
      */
-    public function clearByUser(string $userId) : void;
+    public function clearByUser(string $userId): void;
 
     /**
      * Clear cache.
      */
-    public function clearAll() : void;
+    public function clearAll(): void;
 }

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'דרוש שם עבור חתימה זו',
     'LBL_DEFAULT_SIGNATURE' => 'ברירת מחדל',
     'LBL_MODULE_NAME' => 'חתימות דוא"ל',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'להתשמש בחתימה?',
     'LBL_SIGNATURE_PREPEND' => 'חתימה מעל  תגובה?',
     'LBL_SIGNATURES' => 'חתימות',
-);
+];

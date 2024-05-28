@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'ล็อกการโทร',
     'LNK_NEW_MEETING' => 'วางกำหนดการประชุม',
     'LNK_NEW_TASK' => 'สร้างงาน',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'เมตะฟิลด์เพิ่มเติม 2',
     'COLUMN_TITLE_EXT3' => 'เมตะฟิลด์เพิ่มเติม 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'ความสูงของ IFrame',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'URL เริ่มต้น',
     'COLUMN_TITLE_AUDIT' => 'ตรวจสอบ',
     'COLUMN_TITLE_PII' => 'ข้อมูลส่วนตัว',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'ค่าเริ่มต้น',
     'LBL_AUDITED' => 'ตรวจสอบแล้ว',
     'LBL_REPORTABLE' => 'รายงานได้',
-    'ERR_RESERVED_FIELD_NAME' => "คำหลักที่สงวนไว้",
+    'ERR_RESERVED_FIELD_NAME' => 'คำหลักที่สงวนไว้',
     'ERR_SELECT_FIELD_TYPE' => 'โปรดเลือกประเภทฟิลด์',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'มีชื่อฟิลด์แล้ว',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'ชื่อฟิลด์ควรมีเฉพาะอักขระต่อไปนี้: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'เสร็จสิ้น',
     'LBL_EXE_NON_SIM_MODE' => 'เรียกใช้โหมดที่ไม่ใช่การจำลอง',
     'LBL_CALCULATION_VISIBLE' => 'ทำให้สามารถมองเห็นเพื่อการคำนวณได้',
-);
+];

@@ -28,7 +28,7 @@ class LanguageApi extends SugarApi
     /**
      * @return array
      */
-    public function registerApiRest() : array
+    public function registerApiRest(): array
     {
         return [
             'updateModules' => [
@@ -66,13 +66,13 @@ class LanguageApi extends SugarApi
      * @param string $module
      * @return bool
      */
-    protected function isValidModule(string $module) : bool
+    protected function isValidModule(string $module): bool
     {
         if (empty($this->validator)) {
             $this->buildModuleNameValidator();
         }
         $errors = $this->validator->validate($module, $this->moduleNameConstraints);
-        return count($errors) == 0;
+        return safeCount($errors) == 0;
     }
 
     /**
@@ -85,13 +85,13 @@ class LanguageApi extends SugarApi
      * @throws SugarApiExceptionInvalidParameter
      * @throws SugarApiExceptionMissingParameter
      */
-    public function updateModules(ServiceBase $api, array $args) : array
+    public function updateModules(ServiceBase $api, array $args): array
     {
         global $current_user;
 
         // Only an admin can create new custom fields
         if (!is_admin($current_user)) {
-            throw new SugarApiExceptionNotAuthorized("Current user is not authorized.");
+            throw new SugarApiExceptionNotAuthorized('Current user is not authorized.');
         }
 
         $allLanguages = get_languages();
@@ -155,13 +155,13 @@ class LanguageApi extends SugarApi
      * @throws SugarApiExceptionInvalidParameter
      * @throws SugarApiExceptionMissingParameter
      */
-    public function updateDropdowns(ServiceBase $api, array $args) : array
+    public function updateDropdowns(ServiceBase $api, array $args): array
     {
         global $current_user;
 
         // Only an admin can create new custom fields
         if (!is_admin($current_user)) {
-            throw new SugarApiExceptionNotAuthorized("Current user is not authorized.");
+            throw new SugarApiExceptionNotAuthorized('Current user is not authorized.');
         }
 
         $dropdownParams = [
@@ -236,7 +236,7 @@ class LanguageApi extends SugarApi
      * @return array
      * @throws SugarApiExceptionInvalidParameter
      */
-    protected function saveFieldLabels(string $module, string $lang, array $fields) : array
+    protected function saveFieldLabels(string $module, string $lang, array $fields): array
     {
         $bean = BeanFactory::newBean($module);
         if (empty($bean->field_defs)) {
@@ -281,7 +281,7 @@ class LanguageApi extends SugarApi
      * @param string $module
      * @return object
      */
-    protected function getLabelParser(string $module) : object
+    protected function getLabelParser(string $module): object
     {
         return ParserFactory::getParser(MB_LABEL, $module);
     }
@@ -291,7 +291,7 @@ class LanguageApi extends SugarApi
      *
      * @return object
      */
-    protected function getDropdownParser() : object
+    protected function getDropdownParser(): object
     {
         return ParserFactory::getParser(MB_DROPDOWN);
     }
@@ -303,7 +303,7 @@ class LanguageApi extends SugarApi
      * @param string $lang
      * @return array
      */
-    protected function formatSysDropdownItems(string $name, string $lang) : array
+    protected function formatSysDropdownItems(string $name, string $lang): array
     {
         $appListStrings = return_app_list_strings_language($lang);
         $currentDD = isset($appListStrings[$name]) && is_array($appListStrings[$name]) ? $appListStrings[$name] : [];
@@ -321,7 +321,7 @@ class LanguageApi extends SugarApi
      * @param array $itemList
      * @return array
      */
-    protected function formatDropdownItems(array $itemList) : array
+    protected function formatDropdownItems(array $itemList): array
     {
         $dropdownItems = [];
         foreach ($itemList as $dropdownKey => $dropdownValue) {
@@ -340,7 +340,7 @@ class LanguageApi extends SugarApi
      * @param array $list
      * @return array
      */
-    protected function prepareDropdownLabels(string $name, string $lang, array $list) : array
+    protected function prepareDropdownLabels(string $name, string $lang, array $list): array
     {
         $dropdownList = $this->formatDropdownItems($list);
         if (!empty($dropdownList)) {

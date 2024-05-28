@@ -13,37 +13,40 @@
 
 class SugarFieldInt extends SugarFieldBase
 {
-    public function formatField($rawField, $vardef){
-        if ( !empty($vardef['disable_num_format']) ) {
+    public function formatField($rawField, $vardef)
+    {
+        if (!empty($vardef['disable_num_format'])) {
             return $rawField;
         }
-        if ( $rawField === '' || $rawField === NULL ) {
+        if ($rawField === '' || $rawField === null) {
             return '';
         }
 
-        return format_number($rawField,0,0);
+        return format_number($rawField, 0, 0);
     }
 
     /**
      * {@inheritDoc}
      */
     public function apiFormatField(
-        array &$data,
-        SugarBean $bean,
-        array $args,
+        array       &$data,
+        SugarBean   $bean,
+        array       $args,
         $fieldName,
         $properties,
-        array $fieldList = null,
+        array       $fieldList = null,
         ServiceBase $service = null
     ) {
+
         $this->ensureApiFormatFieldArguments($fieldList, $service);
 
         $data[$fieldName] = isset($bean->$fieldName) && is_numeric($bean->$fieldName)
-                            ? (int)$bean->$fieldName : null;
+            ? (int)$bean->$fieldName : null;
     }
 
-    public function unformatField($formattedField, $vardef){
-        if ( $formattedField === '' || $formattedField === NULL ) {
+    public function unformatField($formattedField, $vardef)
+    {
+        if ($formattedField === '' || $formattedField === null) {
             return '';
         }
         return (int)unformat_number($formattedField);
@@ -58,21 +61,24 @@ class SugarFieldInt extends SugarFieldBase
      * @param $value Mixed value being searched on
      * @return Int the value for the where clause used in search
      */
-    function getSearchWhereValue($value) {
+    public function getSearchWhereValue($value)
+    {
         $newVal = parent::getSearchWhereValue($value);
-        if (!is_numeric($newVal)){
-            if(strpos($newVal, ',') > 0) {
+        if (!is_numeric($newVal)) {
+            if (strpos($newVal, ',') > 0) {
                 $multiVals = explode(',', $newVal);
-                 $newVal = '';
-                 foreach($multiVals as $key => $val) {
-                     if (!empty($newVal))
-                         $newVal .= ',';
-                     if(!empty($val) && !(is_numeric($val)))
-                         $newVal .= -1;
-                     else
-                         $newVal .= $val;
-                 }
-                 return $newVal;
+                $newVal = '';
+                foreach ($multiVals as $key => $val) {
+                    if (!empty($newVal)) {
+                        $newVal .= ',';
+                    }
+                    if (!empty($val) && !(is_numeric($val))) {
+                        $newVal .= -1;
+                    } else {
+                        $newVal .= $val;
+                    }
+                }
+                return $newVal;
             } else {
                 return -1;
             }
@@ -80,24 +86,26 @@ class SugarFieldInt extends SugarFieldBase
         return $newVal;
     }
 
-    public function unformatSearchRequest(&$inputData, &$field) {
-        $field['value'] = $this->unformatField($field['value'],$field);
+    public function unformatSearchRequest(&$inputData, &$field)
+    {
+        $field['value'] = $this->unformatField($field['value'], $field);
     }
 
-    function getSearchViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
+    public function getSearchViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
         // Use the basic field type for searches, no need to format/unformat everything... for now
-    	$this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
-        if($this->isRangeSearchView($vardef)) {
+        $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
+        if ($this->isRangeSearchView($vardef)) {
             $id = $displayParams['idName'] ?? $vardef['name'];
- 		   $this->ss->assign('original_id', "{$id}");
-           $this->ss->assign('id_range', "range_{$id}");
-           $this->ss->assign('id_range_start', "start_range_{$id}");
-           $this->ss->assign('id_range_end', "end_range_{$id}");
-           $this->ss->assign('id_range_choice', "{$id}_range_choice");
-           return $this->fetch('include/SugarFields/Fields/Int/RangeSearchForm.tpl');
+            $this->ss->assign('original_id', "{$id}");
+            $this->ss->assign('id_range', "range_{$id}");
+            $this->ss->assign('id_range_start', "start_range_{$id}");
+            $this->ss->assign('id_range_end', "end_range_{$id}");
+            $this->ss->assign('id_range_choice', "{$id}_range_choice");
+            return $this->fetch('include/SugarFields/Fields/Int/RangeSearchForm.tpl');
         }
 
-    	return $this->fetch($this->findTemplate('SearchForm'));
+        return $this->fetch($this->findTemplate('SearchForm'));
     }
 
     /**
@@ -108,10 +116,11 @@ class SugarFieldInt extends SugarFieldBase
         $vardef,
         $focus,
         ImportFieldSanitize $settings
-        )
-    {
-        $value = str_replace((string)$settings->num_grp_sep, "", (string)$value);
-        if (!is_numeric($value) || strstr($value,".")) {
+    ) {
+
+
+        $value = str_replace((string)$settings->num_grp_sep, '', (string)$value);
+        if (!is_numeric($value) || strstr($value, '.')) {
             return false;
         }
 
@@ -172,6 +181,6 @@ class SugarFieldInt extends SugarFieldBase
         if (isset($vardef['max']) && is_int($vardef['max'])) {
             $maxValue = !is_numeric($maxValue) ? $vardef['max'] : min($maxValue, $vardef['max']);
         }
-        return array('min_value' => $minValue, 'max_value' => $maxValue);
+        return ['min_value' => $minValue, 'max_value' => $maxValue];
     }
 }

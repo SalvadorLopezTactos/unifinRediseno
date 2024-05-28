@@ -10,19 +10,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'Schedulers';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
-        'route'=>'#bwc/index.php?module=Schedulers&action=EditView',
-        'label' =>'LNK_NEW_SCHEDULER',
-        'acl_action'=>'admin',
-        'acl_module'=>'',
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
+        'route' => '#bwc/index.php?module=Schedulers&action=EditView',
+        'label' => 'LNK_NEW_SCHEDULER',
+        'acl_action' => 'admin',
+        'acl_module' => '',
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route'=>'#bwc/index.php?module=Schedulers&action=index',
-        'label' =>'LNK_LIST_SCHEDULER',
-        'acl_action'=>'admin',
-        'acl_module'=>'',
+    ],
+    [
+        'route' => '#bwc/index.php?module=Schedulers&action=index',
+        'label' => 'LNK_LIST_SCHEDULER',
+        'acl_action' => 'admin',
+        'acl_module' => '',
         'icon' => 'sicon-list-view',
-    ),
-);
+    ],
+];

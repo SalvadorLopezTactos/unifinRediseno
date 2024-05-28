@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Arxiu d´Importació Llegit amb Èxit',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'El registre importat està participant en un procés i no es pot editar perquè el procés ha blocat l&#39;edició d&#39;alguns camps.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Registres saltats a causa d´error',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Si l&#39;usuari no existeix, fes servir l&#39;usuari actual',
     'LBL_SHOW_HIDDEN' => 'Mostrar camps que no son normalmente importables',
     'LBL_UPDATE_RECORDS' => 'Actualitzar registres actuals en lloc d´importarlos (No se pot Desfer)',
-    'LBL_TEST'=> 'Probar Importació (sense guardar ni cambiar dades)',
+    'LBL_TEST' => 'Probar Importació (sense guardar ni cambiar dades)',
     'LBL_TRUNCATE_TABLE' => 'Taula buida abans d´importació (borrar tots els registres)',
     'LBL_RELATED_ACCOUNTS' => 'No crear comptes relacionats',
     'LBL_NO_DATECHECK' => 'Saltar comprobació de data (més ràpid però fallarà si la data es incorrecta)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Valor enter no vàlid',
     'LBL_ERROR_INVALID_NUM' => 'Valor numéric no vàlid',
     'LBL_ERROR_INVALID_TIME' => 'Hora no vàlida',
-    'LBL_ERROR_INVALID_EMAIL'=>'Direcció de Correu no vàlida',
-    'LBL_ERROR_INVALID_BOOL'=>'Valor no vàlid (te que 1 o 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Data no vàlida',
-    'LBL_ERROR_INVALID_USER'=>'Nom o ID de usuari no vàlid',
+    'LBL_ERROR_INVALID_EMAIL' => 'Direcció de Correu no vàlida',
+    'LBL_ERROR_INVALID_BOOL' => 'Valor no vàlid (te que 1 o 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Data no vàlida',
+    'LBL_ERROR_INVALID_USER' => 'Nom o ID de usuari no vàlid',
     'LBL_ERROR_INVALID_TEAM' => 'Nom o ID d´equip no vàlid',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Nom o ID de compte no vàlid',
     'LBL_ERROR_INVALID_RELATE' => 'Camp relacional no vàlid',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'no existeix o no té permisos d´escriptura en el mateix',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'L´arxiu no va poder pujar-se amb èxit. Pot ser que l´opció &#39;upload_max_filesize&#39; del seu arxiu php.ini estigui establerta a un valor massa petit',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'L´arxiu és massa gran. Com a màxim:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bytes. Canviï $sugar_config[&#39;upload_maxsize&#39;] a config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bytes. Canviar $sugar_config[&#39;upload_maxsize&#39;] en config.php',
     'LBL_MODULE_NAME' => 'Importar',
     'LBL_MODULE_NAME_SINGULAR' => 'Importar',
     'LBL_TRY_AGAIN' => 'Provi de nou',
     'LBL_START_OVER' => 'Començar de nou',
     'LBL_ERROR' => 'Error:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'El fitxer d&#39;importació conté {0} files. El nombre òptim de files és {1}. Més files pot retardar el procés d&#39;importació. Premeu D&#39;acord per continuar important. Feu clic a Cancel·la per revisar i re-pujar l&#39;arxiu d&#39;importació.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'No pot importar un usuari administtrador del sistema',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'No pot importar un usuari administtrador del sistema',
     'ERR_REPORT_LOOP' => 'El sistema ha detectat dependències cícliques en la jerarquia d´informadors. Un usuari no pot informar-se a si mateix, ni pot cap dels seus responsables informar-li a ell.',
     'ERR_MULTIPLE' => 'S´han definit múltiples columnes amb el mateix nom de camp.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Falten camps requerits:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'No hi ha línies en el seu arxiu d´importació',
     'LBL_FILE_ALREADY_BEEN_OR' => 'L´arxiu d´importació no existeix o ja ha estat processat',
     'LBL_SUCCESS' => 'Èxit:',
-	'LBL_FAILURE' => 'Fallada d&#39;importació:',
+    'LBL_FAILURE' => 'Fallada d&#39;importació:',
     'LBL_SUCCESSFULLY' => 'Importat amb Èxit',
     'LBL_LAST_IMPORT_UNDONE' => 'La seva última importació a estat desfeta',
     'LBL_NO_IMPORT_TO_UNDO' => 'No hi ha importació per desfer.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Importar Més',
     'LBL_FINISHED' => 'Finalitzat',
     'LBL_UNDO_LAST_IMPORT' => 'Desfer Última Importació',
-    'LBL_LAST_IMPORTED'=>'Última Importació',
+    'LBL_LAST_IMPORTED' => 'Última Importació',
     'ERR_MULTIPLE_PARENTS' => 'Només pot haver definit un ID pare',
     'LBL_DUPLICATES' => 'S´han Trobat Duplicados',
     'LNK_DUPLICATE_LIST' => 'Descarregar llista de Duplicats',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Amagar notes',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Mostrar Columnes de Vista Preliminar',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Ocultar Columnes de Vista Preliminar',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Comproveu si hi ha duplicats mitjançant l&#39;operador:',
     'LBL_SAVE_MAPPING_AS' => 'Guardar Mapeix Com',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Comilles Simples (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Comilles Dobles (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Per assignar els nous registres a altres equips del seu equip per defecte(s), utilitzeu la columna Valor per defecte per seleccionar els diferents equips.',
     'LBL_SIGN_IN_HELP' => 'Per activar aquest servei, si us plau entreu a la pestanya Comptes externes dins de la seva pàgina d&#39;usuari de configuració.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Tractant de manejar adreces de correu a un registre que no les suporta.",
-);
+];

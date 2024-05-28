@@ -42,6 +42,7 @@ class XOAUTHEncoder
         $username,
         $accessToken
     ) {
+
         $this->username = $username;
         $this->accessToken = $accessToken;
     }
@@ -53,6 +54,6 @@ class XOAUTHEncoder
      */
     public function getOauth64()
     {
-        return base64_encode("user=" . $this->username . "\001auth=Bearer " . $this->accessToken . "\001\001");
+        return base64_encode('user=' . $this->username . "\001auth=Bearer " . $this->accessToken . "\001\001");
     }
 }

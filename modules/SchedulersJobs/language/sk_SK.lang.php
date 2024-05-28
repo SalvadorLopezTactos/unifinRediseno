@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Job Queue',
     'LBL_MODULE_NAME_SINGULAR' => 'Job Queue',
     'LBL_MODULE_TITLE' => 'Job Queue: Home',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Resolution Cancelled',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Resolution Running',
     // Errors
-    'ERR_CALL' => "Nemožno volať funkciu: %s",
-    'ERR_CURL' => "Žiadna CURL - nemožno spustiť pracu URL",
-    'ERR_FAILED' => "Neočakávané zlyhanie, skontrolujte prosím záznamy PHP a sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s v %s na linke %d",
-    'ERR_NOUSER' => "Nešpecifikované ID Užívateľa pre túto prácu",
-    'ERR_NOSUCHUSER' => "ID užívateľa %s nenájdené",
-    'ERR_JOBTYPE' => "Neznámy typ práce: %s",
-    'ERR_TIMEOUT' => "Vynútené zlyhanie po vypršaní časového limitu",
+    'ERR_CALL' => 'Nemožno volať funkciu: %s',
+    'ERR_CURL' => 'Žiadna CURL - nemožno spustiť pracu URL',
+    'ERR_FAILED' => 'Neočakávané zlyhanie, skontrolujte prosím záznamy PHP a sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s v %s na linke %d',
+    'ERR_NOUSER' => 'Nešpecifikované ID Užívateľa pre túto prácu',
+    'ERR_NOSUCHUSER' => 'ID užívateľa %s nenájdené',
+    'ERR_JOBTYPE' => 'Neznámy typ práce: %s',
+    'ERR_TIMEOUT' => 'Vynútené zlyhanie po vypršaní časového limitu',
     'ERR_JOB_FAILED_VERBOSE' => 'Práca %1$s (%2$s) zlyhala v behu CRON',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Cannot load bean with id: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Cannot find handler for route %s',
@@ -95,13 +95,13 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Amazon SQS Configuration Help',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Amazon SQS Configuration Section.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Amazon SQS Configuration Section.</b></p>
 <ul>
     <li>Access Key ID: <i>Enter your access key id number for Amazon SQS</i></li>
     <li>Secret Access Key: <i>Enter your secret access key for Amazon SQS</i></li>
     <li>Region: <i>Enter the region of Amazon SQS server</i></li>
     <li>Queue Name: <i>Enter queue name of Amazon SQS server</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'AMQP Configuration Help',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>AMQP Configuration Section.</b></p>
 <ul>
@@ -122,4 +122,4 @@ $mod_strings = array(
     'LBL_REGION' => 'Region',
     'LBL_ACCESS_KEY_SECRET' => 'Secret Access Key',
     'LBL_QUEUE_NAME' => 'Adapter Name',
-);
+];

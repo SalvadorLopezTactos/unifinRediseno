@@ -11,19 +11,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['opportunity-metrics'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['base']['view']['opportunity-metrics'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_DASHLET_OPPORTUNITY_NAME',
             'description' => 'LBL_DASHLET_OPPORTUNITY_DESCRIPTION',
-            'filter' => array(
-                'module' => array(
+            'filter' => [
+                'module' => [
                     'Accounts',
-                ),
-                'view' => 'record'
-            ),
-            'config' => array(),
-            'preview' => array(),
-        ),
-    ),
-);
+                ],
+                'view' => 'record',
+            ],
+            'config' => [],
+            'preview' => [],
+        ],
+    ],
+];

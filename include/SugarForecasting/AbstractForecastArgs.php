@@ -11,7 +11,6 @@
  */
 
 
-
 abstract class SugarForecasting_AbstractForecastArgs
 {
     /**
@@ -21,7 +20,7 @@ abstract class SugarForecasting_AbstractForecastArgs
 
     /**
      * Class Constructor
-     * @param array $args       Service Arguments
+     * @param array $args Service Arguments
      */
     public function __construct($args)
     {
@@ -59,7 +58,7 @@ abstract class SugarForecasting_AbstractForecastArgs
      */
     public function getArg($key)
     {
-        return $this->args[$key] ?? "";
+        return $this->args[$key] ?? '';
     }
 
     /**
@@ -75,5 +74,4 @@ abstract class SugarForecasting_AbstractForecastArgs
 
         return $this;
     }
-
 }

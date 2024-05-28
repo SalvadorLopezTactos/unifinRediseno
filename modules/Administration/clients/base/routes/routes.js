@@ -53,6 +53,19 @@
                 }
             },
             {
+                // route for Timeline config
+                name: 'timeline-config',
+                route: ':Administration/config/timeline/:target',
+                callback: function(module, target) {
+                    app.controller.loadView({
+                        layout: 'timeline-config',
+                        category: 'timeline',
+                        target: target,
+                        module: module
+                    });
+                }
+            },
+            {
                 // route for Config Framework
                 name: 'admin-config',
                 route: ':Administration/config/:category',

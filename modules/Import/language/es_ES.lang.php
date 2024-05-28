@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Archivo de Importación Leído correctamente',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'El registro importado está participando en un proceso y no se puede editar porque algunos campos están bloqueados para la edición por el proceso.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'se ha encontrado una serie de errores. Vea la pestaña de errores para identificar las filas que no se han importado debido a errores',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Si el usuario no existe, utilice el usuario actual',
     'LBL_SHOW_HIDDEN' => 'Mostrar campos que no son normalmente importables',
     'LBL_UPDATE_RECORDS' => 'Actualizar registros actuales en lugar de importarlos (No se puede Deshacer)',
-    'LBL_TEST'=> 'Probar Importación (sin guardar ni cambiar datos)',
+    'LBL_TEST' => 'Probar Importación (sin guardar ni cambiar datos)',
     'LBL_TRUNCATE_TABLE' => 'Vaciar la tabla antes de importación (borrar todos los registros)',
     'LBL_RELATED_ACCOUNTS' => 'No crear cuentas relacionadas',
     'LBL_NO_DATECHECK' => 'Saltar comprobación de fecha (más rápido pero fallará si la fecha es incorrecta)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Valor entero no válido',
     'LBL_ERROR_INVALID_NUM' => 'Valor numérico no válido',
     'LBL_ERROR_INVALID_TIME' => 'Hora no válida',
-    'LBL_ERROR_INVALID_EMAIL'=>'Dirección de Email no válida',
-    'LBL_ERROR_INVALID_BOOL'=>'Valor no válido (debería ser 1 o 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Cadena de fecha no válida',
-    'LBL_ERROR_INVALID_USER'=>'Nombre o ID de usuario no válido',
+    'LBL_ERROR_INVALID_EMAIL' => 'Dirección de Email no válida',
+    'LBL_ERROR_INVALID_BOOL' => 'Valor no válido (debería ser 1 o 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Cadena de fecha no válida',
+    'LBL_ERROR_INVALID_USER' => 'Nombre o ID de usuario no válido',
     'LBL_ERROR_INVALID_TEAM' => 'Nombre o ID de equipo no válido',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Nombre o ID de cuenta no válido',
     'LBL_ERROR_INVALID_RELATE' => 'Campo relacional no válido',
@@ -101,7 +100,7 @@ $mod_strings = array (
     'LBL_START_OVER' => 'Comenzar de nuevo',
     'LBL_ERROR' => 'Error:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'El archivo de importación contiene {0} filas. El número óptimo de filas es {1}. Más filas puede retardar el proceso de importación. Haga clic en Aceptar para continuar importando. Haga clic en Cancelar para revisar y volver a cargar el archivo de importación.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'No puede importar un usuario administrador del sistema',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'No puede importar un usuario administrador del sistema',
     'ERR_REPORT_LOOP' => 'El sistema ha detectado dependencias cíclicas en la jerarquía de informadores. Un usuario no puede informarse a si mismo, ni puede ninguno de sus responsables informarle a él.',
     'ERR_MULTIPLE' => 'Se han definido múltiples columnas con el mismo nombre de campo.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Faltan campos requeridos:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'No se han detectado líneas en su archivo de importación. Asegúrese de que no hay líneas vacías en el archivo y vuela a intentarlo.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'El archivo de importación no existe o ya se ha procesado',
     'LBL_SUCCESS' => 'Éxito:',
-	'LBL_FAILURE' => 'Fallo en la importación:',
+    'LBL_FAILURE' => 'Fallo en la importación:',
     'LBL_SUCCESSFULLY' => 'Importado correctamente',
     'LBL_LAST_IMPORT_UNDONE' => 'Su última importación se ha desecho.',
     'LBL_NO_IMPORT_TO_UNDO' => 'No hay importación que deshacer.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Importar de nuevo',
     'LBL_FINISHED' => 'Finalizado',
     'LBL_UNDO_LAST_IMPORT' => 'Deshacer Importación',
-    'LBL_LAST_IMPORTED'=>'Creado',
+    'LBL_LAST_IMPORTED' => 'Creado',
     'ERR_MULTIPLE_PARENTS' => 'Sólo puede haber definido un ID principal',
     'LBL_DUPLICATES' => 'Se han Encontrado Duplicados',
     'LNK_DUPLICATE_LIST' => 'Descargar Lista de Duplicados',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Ocultar notas',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Mostrar Columnas de Vista Preliminar',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Ocultar Columnas de Vista Preliminar',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Compruebe si hay duplicados con el operador:',
     'LBL_SAVE_MAPPING_AS' => 'Para guardar la configuración de importación, proporcione un nombre para la configuración guardada:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Comillas Simples (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Comillas Dobles (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Para asignar los nuevos registros a otros equipos que no sean el equipo por defecto, utilice la columna Valor por defecto para seleccionar los diferentes equipos.',
     'LBL_SIGN_IN_HELP' => 'Para activar este servicio, inicie sesión en la pestaña Cuentas externas dentro de su página de configuración de usuario.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Intentando administrar direcciones de email en un Bean que no sea compatible.",
-);
+];

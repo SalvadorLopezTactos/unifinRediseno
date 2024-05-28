@@ -14,6 +14,7 @@ use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
 
 use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Platform as PlatformConstraint;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\PlatformClient as PlatformClientConstraint;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
@@ -27,9 +28,11 @@ abstract class ServiceBase implements LoggerAwareInterface
     public $action = 'view';
 
     abstract public function execute();
+
     abstract protected function handleException(\Throwable $exception);
 
-    protected function loadServiceDictionary($dictionaryName) {
+    protected function loadServiceDictionary($dictionaryName)
+    {
         $dict = new $dictionaryName();
 
         // Load the dictionary, because if the dictionary isn't there it will generate it.
@@ -37,12 +40,13 @@ abstract class ServiceBase implements LoggerAwareInterface
         return $dict;
     }
 
-    protected function loadApiClass($route) {
-        if (!SugarAutoLoader::requireWithCustom($route['file']) ) {
+    protected function loadApiClass($route)
+    {
+        if (!SugarAutoLoader::requireWithCustom($route['file'])) {
             throw new SugarApiException('Missing API file.');
         }
 
-        if ( ! class_exists($route['className']) ) {
+        if (!class_exists($route['className'])) {
             throw new SugarApiException('Missing API class.');
         }
 
@@ -61,7 +65,7 @@ abstract class ServiceBase implements LoggerAwareInterface
         $current_language = $GLOBALS['sugar_config']['default_language'];
 
         // If the session has a language set, use that
-        if(!empty($_SESSION['authenticated_user_language'])) {
+        if (!empty($_SESSION['authenticated_user_language'])) {
             $current_language = $_SESSION['authenticated_user_language'];
         }
 
@@ -92,7 +96,7 @@ abstract class ServiceBase implements LoggerAwareInterface
         $GLOBALS['app_list_strings'] = return_app_list_strings_language($current_language);
     }
 
-   /**
+    /**
      * Set a response header
      * @param string $header
      * @param string $info
@@ -128,14 +132,18 @@ abstract class ServiceBase implements LoggerAwareInterface
         return false;
     }
 
-	/**
+    /**
      * Release session data
      * Keeps $_SESSION but it's no longer preserved after the end of the request
-	 */
+     */
     protected function releaseSession()
     {
-        if(!session_id()) return;
-        if(function_exists('session_status') && session_status() != PHP_SESSION_ACTIVE) return;
+        if (!session_id()) {
+            return;
+        }
+        if (function_exists('session_status') && session_status() != PHP_SESSION_ACTIVE) {
+            return;
+        }
 
         $session_data = $_SESSION; // keep session values
         session_write_close();
@@ -150,12 +158,12 @@ abstract class ServiceBase implements LoggerAwareInterface
      */
     public function needLogin(Exception $e = null)
     {
-       if($e) {
-           $message = $e->getMessage();
-       } else {
-           // @TODO Localize exception strings
-           $message = "No valid authentication for user.";
-       }
+        if ($e) {
+            $message = $e->getMessage();
+        } else {
+            // @TODO Localize exception strings
+            $message = 'No valid authentication for user.';
+        }
         $isIDMModeEnabled = (new Config(\SugarConfig::getInstance()))->isIDMModeEnabled();
         if ($isIDMModeEnabled && !extension_loaded('gmp')) {
             throw new SugarApiExceptionError('ERR_FOR_IDM_MODE_GMP_REQUIRED', null, 'Users');
@@ -164,7 +172,7 @@ abstract class ServiceBase implements LoggerAwareInterface
         $auth = AuthenticationController::getInstance();
         if ($auth->isExternal()) {
             $loginExc
-                ->setExtraData("url", $auth->getLoginUrl(['platform' => $this->platform]))
+                ->setExtraData('url', $auth->getLoginUrl(['platform' => $this->platform]))
                 ->setExtraData('platform', $this->platform);
         }
         throw $loginExc;
@@ -190,12 +198,12 @@ abstract class ServiceBase implements LoggerAwareInterface
     public function validatePlatform($platform)
     {
         $violations = Validator::getService()->validate($platform, new PlatformConstraint());
-        if (count($violations) === 0) {
+        if (safeCount($violations) === 0) {
             return;
         }
 
         $raiseException = false;
-        $strict = (bool) SugarConfig::getInstance()->get('disable_unknown_platforms', true);
+        $strict = (bool)SugarConfig::getInstance()->get('disable_unknown_platforms', true);
 
         foreach ($violations as $violation) {
             switch ($violation->getCode()) {
@@ -214,7 +222,27 @@ abstract class ServiceBase implements LoggerAwareInterface
         }
 
         if ($raiseException) {
-            throw new SugarApiExceptionInvalidParameter("EXCEPTION_INVALID_PLATFORM");
+            throw new SugarApiExceptionInvalidParameter('EXCEPTION_INVALID_PLATFORM');
         }
+    }
+
+    /**
+     * @param string $platform
+     * @param string $client
+     * @return void
+     * @throws SugarApiExceptionClientNotAllowed
+     */
+    public function validatePlatformClient(string $platform, string $client): void
+    {
+        $violations = Validator::getService()->validate($client, new PlatformClientConstraint(['platform' => $platform]));
+        if (safeCount($violations) === 0) {
+            return;
+        }
+
+        foreach ($violations as $violation) {
+            $this->logger->alert($violation->getMessage());
+        }
+
+        throw new SugarApiExceptionClientNotAllowed();
     }
 }

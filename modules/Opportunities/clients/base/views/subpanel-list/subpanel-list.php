@@ -9,24 +9,24 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Opportunities']['base']['view']['subpanel-list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Opportunities']['base']['view']['subpanel-list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'label' => 'LBL_LIST_OPPORTUNITY_NAME',
                     'enabled' => true,
                     'default' => true,
                     'link' => true,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'sales_status',
-                        'closed_revenue_line_items'
-                    ),
-                ),
-                array(
+                        'closed_revenue_line_items',
+                    ],
+                ],
+                [
                     'target_record_key' => 'account_id',
                     'target_module' => 'Accounts',
                     'label' => 'LBL_LIST_ACCOUNT_NAME',
@@ -34,48 +34,48 @@ $viewdefs['Opportunities']['base']['view']['subpanel-list'] = array(
                     'default' => true,
                     'name' => 'account_name',
                     'sortable' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_closed',
                     'type' => 'date-cascade',
                     'label' => 'LBL_DATE_CLOSED',
                     'enabled' => true,
                     'default' => true,
-                    'disable_field' => array(
+                    'disable_field' => [
                         'total_revenue_line_items',
                         'closed_revenue_line_items',
-                    ),
+                    ],
                     'related_fields' => [
                         'total_revenue_line_items',
                         'closed_revenue_line_items',
                     ],
-                ),
+                ],
                 [
                     'name' => 'sales_status',
                     'readonly' => true,
                 ],
-                array(
+                [
                     'name' => 'sales_stage',
                     'type' => 'enum-cascade',
                     'label' => 'LBL_LIST_SALES_STAGE',
-                    'disable_field' => array(
+                    'disable_field' => [
                         'total_revenue_line_items',
                         'closed_revenue_line_items',
-                    ),
+                    ],
                     'related_fields' => [
                         'total_revenue_line_items',
                         'closed_revenue_line_items',
                     ],
-                ),
-                array(
+                ],
+                [
                     'name' => 'service_start_date',
                     'type' => 'date-cascade',
                     'label' => 'LBL_SERVICE_START_DATE',
                     'disable_field' => 'service_open_revenue_line_items',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'service_open_revenue_line_items',
-                    ),
-                ),
+                    ],
+                ],
                 [
                     'name' => 'service_duration',
                     'type' => 'fieldset-cascade',
@@ -102,29 +102,29 @@ $viewdefs['Opportunities']['base']['view']['subpanel-list'] = array(
                     'disable_field' => 'service_open_flex_duration_rlis',
                     'default' => false,
                 ],
-                array(
+                [
                     'name' => 'amount',
                     'type' => 'currency',
                     'label' => 'LBL_LIKELY',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'amount',
                         'currency_id',
                         'base_rate',
-                    ),
+                    ],
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'assigned_user_name',
                     'target_record_key' => 'assigned_user_id',
                     'target_module' => 'Employees',
                     'label' => 'LBL_LIST_ASSIGNED_TO_NAME',
                     'enabled' => true,
                     'default' => true,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

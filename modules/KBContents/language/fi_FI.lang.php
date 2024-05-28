@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Tietoarkistoluettelon työpöytä',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Tietoarkistotietueen työpöytä',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Tietämyskanta-tietolaatikko',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tietämyskannan aikajana',
 
     'LBL_MODULE_NAME' => 'Tietämyskanta',
     'LBL_MODULE_NAME_SINGULAR' => 'Tietämyskanta-artikkeli',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Aseta ensisijaiseksi arvoksi',
     'LBL_ITEM_REMOVE' => 'Poista kohde',
     'LBL_ITEM_ADD' => 'Lisää kohde',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => 'Version ID',
     'LBL_DOCUMENT_REVISION' => 'Revisio',
     'LBL_NUMBER' => 'Numero',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'Lisää {{module}} artikkeleita...',
     'LBL_LIST_FORM_TITLE' => 'Tietämyskantaluettelo',
     'LBL_SEARCH_FORM_TITLE' => 'Haku tietämyskannasta',
-);
+];

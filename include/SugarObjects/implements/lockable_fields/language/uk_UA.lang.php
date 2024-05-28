@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_LOCKED_FIELDS_LINK' => 'Поля, заблоковані для редагування',
     'LBL_LOCKED_FIELDS' => 'Поля, заблоковані для редагування',
-);
+];

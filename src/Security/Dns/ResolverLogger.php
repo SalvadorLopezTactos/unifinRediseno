@@ -34,7 +34,7 @@ final class ResolverLogger implements Resolver, LoggerAwareInterface
      */
     public function getLogger(): LoggerInterface
     {
-        return $this->logger?? new NullLogger();
+        return $this->logger ?? new NullLogger();
     }
 
     /**

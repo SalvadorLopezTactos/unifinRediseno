@@ -63,7 +63,7 @@ final class PushClient implements BatchClientInterface, LoggerAwareInterface, Pu
         try {
             $this->flushEvents();
         } catch (Exception $e) {
-            $this->logger->critical("pubsub: push: flush events: {$e->getMessage()}: {$e->getTraceAsString()}");
+            $this->logger->alert("pubsub: push: flush events: {$e->getMessage()}: {$e->getTraceAsString()}");
         }
     }
 
@@ -80,7 +80,7 @@ final class PushClient implements BatchClientInterface, LoggerAwareInterface, Pu
             try {
                 $this->client->sendEvents($url, $events);
             } catch (Exception $e) {
-                $this->logger->critical("pubsub: push: send batch of events to {$url}: {$e->getMessage()}: {$e->getTraceAsString()}");
+                $this->logger->alert("pubsub: push: send batch of events to {$url}: {$e->getMessage()}: {$e->getTraceAsString()}");
             }
         }
     }

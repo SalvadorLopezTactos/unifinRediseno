@@ -25,11 +25,13 @@ class HealthCheckScannerCli extends HealthCheckScanner
      */
     public function parseCliArgs($argv)
     {
+        if (!is_countable($argv)) {
+            return false;
+        }
         if (empty($argv) || count($argv) < 2) {
             return false;
         }
         for ($i = 1; $i < (count($argv) - 1); $i++) {
-
             // logfile name
             if ($argv[$i] == '-l') {
                 $i++;
@@ -100,28 +102,28 @@ class HealthCheckScannerCli extends HealthCheckScanner
     }
 
     /**
+     * @return bool
      * @see HealthCheckScanner::init
      *
-     * @return bool
      */
     protected function init()
     {
         if (!is_dir($this->instance)) {
             return $this->fail("{$this->instance} is not a directory");
         }
-        $this->log("Initializing the environment");
+        $this->log('Initializing the environment');
         defined('SUGAR_SHADOW_TEMPLATEPATH') ? chdir(SUGAR_SHADOW_TEMPLATEPATH) : chdir($this->instance);
-        if (!file_exists("include/entryPoint.php")) {
+        if (!file_exists('include/entryPoint.php')) {
             return $this->fail("{$this->instance} is not a Sugar instance");
         }
         define('ENTRY_POINT_TYPE', 'api');
         global $beanFiles, $beanList, $objectList, $timedate, $moduleList, $modInvisList, $sugar_config, $locale,
-               $sugar_version, $sugar_flavor, $sugar_build, $sugar_db_version, $sugar_timestamp, $db, $locale,
-               $installing, $bwcModules, $app_list_strings, $modules_exempt_from_availability_check, $current_language;
+        $sugar_version, $sugar_flavor, $sugar_build, $sugar_db_version, $sugar_timestamp, $db, $locale,
+        $installing, $bwcModules, $app_list_strings, $modules_exempt_from_availability_check, $current_language;
         if (!defined('sugarEntry')) {
             define('sugarEntry', true);
         }
-        require_once('include/entryPoint.php');
+        require_once 'include/entryPoint.php';
         $app_list_strings = return_app_list_strings_language($current_language);
 
         return parent::init();
@@ -140,7 +142,7 @@ class HealthCheckScannerCli extends HealthCheckScanner
     {
         $scanner = new self();
 
-        if(!$scanner->parseCliArgs($argv)) {
+        if (!$scanner->parseCliArgs($argv)) {
             $scanner->usageAndDie($argv[0]);
         }
 
@@ -160,9 +162,7 @@ if (empty($argv[0]) || basename($argv[0]) != basename(__FILE__)) {
 
 $sapi_type = php_sapi_name();
 if (substr($sapi_type, 0, 3) != 'cli') {
-    die("This is a command-line only script");
+    die('This is a command-line only script');
 }
 
 HealthCheckScannerCli::start($argv);
-
-

@@ -10,10 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:
  ********************************************************************************/
 
 $action_file_map['subpanelviewer'] = 'modules/Campaigns/SubPanelViewer.php';
-
-?>

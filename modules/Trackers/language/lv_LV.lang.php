@@ -10,48 +10,46 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
 
-		  //Column header mapping
-		  'action' => 'Darbība',
-		  'active_users' => 'Aktīvo lietotāju skaits',
-		  'date_modified' => 'Pēdējās darbības datums',
-		  'different_modules_accessed' => 'Lietoto moduļu skaits',
-		  'first_name' => 'Vārds',
-		  'item_id' => 'ID',
-		  'item_summary' => 'Nosaukums',
-		  'last_action' => 'Pēdējās darbības datums/laiks',
-		  'last_name' => 'Uzvārds',
-		  'module_name' => 'Moduļa nosaukums',
-		  'records_modified' => 'Kopējais modificēto ierakstu skaits',
-		  'top_module' => 'Biežāk lietotais modulis',
-		  'total_count' => 'Kopējais skatīto lapu skaits',
-		  'total_login_time' => 'Laiks (hh:mm:ss)',
-		  'user_name' => 'Lietotājvārds',
-		  'users' => 'Lietotāji',
-		  
-		  //Administration related labels
-		  'LBL_ENABLE' => 'Aktivizēts',
-		  'LBL_MODULE_NAME_TITLE' => 'Sekotāji',
-		  'LBL_MODULE_NAME' => 'Sekotājs',
-		  'LBL_MODULE_NAME_SINGULAR' => 'Sekotājs',
-		  'LBL_TRACKER_SETTINGS' => 'Sekotāja uzstādījumi',
-		  'LBL_TRACKER_QUERIES_DESC' => 'Sekotāja vaicājumi',
-		  'LBL_TRACKER_QUERIES_HELP' => 'Reģistrē SQL pieprasījumus, kad ir aktivizēts "Log slow queries" un to izpildes laiks pārsniedz "Slow query time threshold" vērtību',
-		  'LBL_TRACKER_PERF_DESC' => 'Sekotāja veiktspēja',
-		  'LBL_TRACKER_PERF_HELP' => 'Sekot datubāzes izmantošanai, izmantotajiem failiem un atmiņas izlietojumam',
-		  'LBL_TRACKER_SESSIONS_DESC' => 'Sekotāja sesijas',
-		  'LBL_TRACKER_SESSIONS_HELP' => 'Sekot aktīviem lietotājiem un lietotāju sesiju informācijai',
-		  'LBL_TRACKER_DESC' => 'Sekotāja darbības',
-		  'LBL_TRACKER_HELP' => 'Seko lietotāju atvērtajām lapām (moduļiem un ierakstiem, kam piekļūts) ierakstu izmaiņām',
-		  'LBL_TRACKER_PRUNE_INTERVAL' => 'Dienu skaits, par kādu jāglabā sekotāja dati, kad plānotājs samazina tabulas',
-		  'LBL_TRACKER_PRUNE_RANGE' => 'Dienu skaits',
-);
-?>
+    //Column header mapping
+    'action' => 'Darbība',
+    'active_users' => 'Aktīvo lietotāju skaits',
+    'date_modified' => 'Pēdējās darbības datums',
+    'different_modules_accessed' => 'Lietoto moduļu skaits',
+    'first_name' => 'Vārds',
+    'item_id' => 'ID',
+    'item_summary' => 'Nosaukums',
+    'last_action' => 'Pēdējās darbības datums/laiks',
+    'last_name' => 'Uzvārds',
+    'module_name' => 'Moduļa nosaukums',
+    'records_modified' => 'Kopējais modificēto ierakstu skaits',
+    'top_module' => 'Biežāk lietotais modulis',
+    'total_count' => 'Kopējais skatīto lapu skaits',
+    'total_login_time' => 'Laiks (hh:mm:ss)',
+    'user_name' => 'Lietotājvārds',
+    'users' => 'Lietotāji',
+
+    //Administration related labels
+    'LBL_ENABLE' => 'Aktivizēts',
+    'LBL_MODULE_NAME_TITLE' => 'Sekotāji',
+    'LBL_MODULE_NAME' => 'Sekotājs',
+    'LBL_MODULE_NAME_SINGULAR' => 'Sekotājs',
+    'LBL_TRACKER_SETTINGS' => 'Sekotāja uzstādījumi',
+    'LBL_TRACKER_QUERIES_DESC' => 'Sekotāja vaicājumi',
+    'LBL_TRACKER_QUERIES_HELP' => 'Reģistrē SQL pieprasījumus, kad ir aktivizēts "Log slow queries" un to izpildes laiks pārsniedz "Slow query time threshold" vērtību',
+    'LBL_TRACKER_PERF_DESC' => 'Sekotāja veiktspēja',
+    'LBL_TRACKER_PERF_HELP' => 'Sekot datubāzes izmantošanai, izmantotajiem failiem un atmiņas izlietojumam',
+    'LBL_TRACKER_SESSIONS_DESC' => 'Sekotāja sesijas',
+    'LBL_TRACKER_SESSIONS_HELP' => 'Sekot aktīviem lietotājiem un lietotāju sesiju informācijai',
+    'LBL_TRACKER_DESC' => 'Sekotāja darbības',
+    'LBL_TRACKER_HELP' => 'Seko lietotāju atvērtajām lapām (moduļiem un ierakstiem, kam piekļūts) ierakstu izmaiņām',
+    'LBL_TRACKER_PRUNE_INTERVAL' => 'Dienu skaits, par kādu jāglabā sekotāja dati, kad plānotājs samazina tabulas',
+    'LBL_TRACKER_PRUNE_RANGE' => 'Dienu skaits',
+];

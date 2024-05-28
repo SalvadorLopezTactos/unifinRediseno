@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_EMAIL_ADDRESS_ID' => 'מזהה',
     'LBL_EMAIL_ADDRESS' => 'כתובות דואר אלקטרוני',
     'LBL_EMAIL_ADDRESS_CAPS' => 'כתובת דוא"ל באותיות גדולות',
@@ -31,4 +30,4 @@ $mod_strings = array (
     'LBL_CONFIRMATION_REQUESTED_ON' => 'פעולת בקשת האישור בוצעה',
     'LBL_CONFIRMATION_TITLE' => 'תודה',
     'LBL_CONFIRMATION_MESSAGE' => 'המנוי שלך אושר. נוספת לרשימה שלנו ותשמע מאיתנו בקרוב.',
-);
+];

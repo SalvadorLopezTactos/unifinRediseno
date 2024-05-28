@@ -15,9 +15,9 @@
 class SugarFieldEmail extends SugarFieldBase
 {
     public $needsSecondaryQuery = true;
-    protected $formTemplateMap = array(
+    protected $formTemplateMap = [
         'popup_query_form' => 'Base',
-    );
+    ];
 
     /**
      * {@inheritDoc}
@@ -25,14 +25,15 @@ class SugarFieldEmail extends SugarFieldBase
      * Unsets the email record from the data array if the user does not have access
      */
     public function apiFormatField(
-        array &$data,
-        SugarBean $bean,
-        array $args,
+        array       &$data,
+        SugarBean   $bean,
+        array       $args,
         $fieldName,
         $properties,
-        array $fieldList = null,
+        array       $fieldList = null,
         ServiceBase $service = null
     ) {
+
         $this->ensureApiFormatFieldArguments($fieldList, $service);
 
         if (empty($bean->emailAddress->hasFetched)) {
@@ -42,17 +43,18 @@ class SugarFieldEmail extends SugarFieldBase
         }
 
         if (!empty($emailsRaw)) {
-            array_walk($emailsRaw, array($this, "formatEmails"));
+            array_walk($emailsRaw, [$this, 'formatEmails']);
             $data[$fieldName] = $emailsRaw;
         } else {
-            $data[$fieldName] = array();
+            $data[$fieldName] = [];
         }
     }
+
     /**
-     * This should be called when the bean is saved from the API. 
-     * Most fields can just use default, which calls the field's 
+     * This should be called when the bean is saved from the API.
+     * Most fields can just use default, which calls the field's
      * individual ->save() function instead.
-     * 
+     *
      * @param SugarBean $bean the bean performing the save
      * @param array $params an array of parameters relevant to the save, which will be an array passed up to the API
      * @param string $field The name of the field to save (the vardef name, not the form element name)
@@ -68,28 +70,29 @@ class SugarFieldEmail extends SugarFieldBase
         if (!isset($bean->emailAddress)) {
             $bean->emailAddress = BeanFactory::newBean('EmailAddresses');
         }
-        if (empty($bean->emailAddress->addresses) 
+        if (empty($bean->emailAddress->addresses)
             && !isset($bean->emailAddress->hasFetched)) {
             $oldAddresses = $bean->emailAddress->getAddressesByGUID($bean->id, $bean->module_name);
         } else {
             $oldAddresses = $bean->emailAddress->addresses;
         }
-        
-        array_walk($params[$field], array($this, 'formatEmails'));
+
+        array_walk($params[$field], [$this, 'formatEmails']);
         $emailOptoutDefault = !empty($GLOBALS['sugar_config']['new_email_addresses_opted_out']);
 
-        $bean->emailAddress->addresses = array();
-        foreach ($params[$field] as $email ) {
+        $bean->emailAddress->addresses = [];
+        foreach ($params[$field] as $email) {
             if (empty($email['email_address'])) {
                 // Can't save an empty email address
                 continue;
             }
             // Search each one for a matching set, otherwise use the defaults
-            $mergeAddr = array(
+            $mergeAddr = [
                 'primary_address' => false,
+                'reply_to_address' => false,
                 'invalid_email' => false,
                 'opt_out' => $emailOptoutDefault,
-            );
+            ];
             foreach ($oldAddresses as $address) {
                 if (strtolower($address['email_address']) == strtolower($email['email_address'])) {
                     $mergeAddr = $address;
@@ -101,11 +104,13 @@ class SugarFieldEmail extends SugarFieldBase
             if (!SugarEmailAddress::isValidEmail($email['email_address'])) {
                 throw new SugarApiExceptionInvalidParameter("{$email['email_address']} is an invalid email address");
             }
-            $bean->emailAddress->addAddress($email['email_address'],
-                                            $email['primary_address'],
-                                            false,
-                                            $email['invalid_email'],
-                                            $email['opt_out']);
+            $bean->emailAddress->addAddress(
+                $email['email_address'],
+                $email['primary_address'],
+                $email['reply_to_address'],
+                $email['invalid_email'],
+                $email['opt_out']
+            );
         }
 
         $bean->emailAddress->save($bean->id, $bean->module_dir, $params[$field]);
@@ -117,36 +122,36 @@ class SugarFieldEmail extends SugarFieldBase
 
     /**
      * Format a Raw email array record from the email_address relationship
-     * 
-     * @param array $rawEmail 
+     *
+     * @param array $rawEmail
      * @return array
      */
-    public function formatEmails(array &$rawEmail, $key) 
+    public function formatEmails(array &$rawEmail, $key)
     {
-        static $emailProperties = array(
+        static $emailProperties = [
             'email_address_id' => true,
             'email_address' => true,
             'opt_out' => true,
             'invalid_email' => true,
             'primary_address' => true,
             'reply_to_address' => true,
-        );
+        ];
 
-        static $boolProperties = array(
+        static $boolProperties = [
             'opt_out',
             'invalid_email',
             'primary_address',
             'reply_to_address',
-        );            
+        ];
 
         $rawEmail = array_intersect_key($rawEmail, $emailProperties);
-        
+
         foreach ($boolProperties as $prop) {
             if (isset($rawEmail[$prop])) {
                 $rawEmail[$prop] = (bool)$rawEmail[$prop];
             }
         }
-        
+
         if (isset($rawEmail['email_address'])) {
             $rawEmail['email_address'] = trim($rawEmail['email_address']);
         }
@@ -166,9 +171,9 @@ class SugarFieldEmail extends SugarFieldBase
         if (!isset($seed->emailAddress)) {
             $seed->emailAddress = BeanFactory::newBean('EmailAddresses');
         }
-        
+
         $query = $seed->emailAddress->getEmailsQuery($seed->module_name);
-        
+
         $query->where()->in('ear.bean_id', array_keys($beans));
         // Directly fetch rows because the emailAddress bean expects addresses as arrays, not beans
         $query->select('ear.bean_id');
@@ -186,7 +191,7 @@ class SugarFieldEmail extends SugarFieldBase
         // The getEmailsQuery() code orders by primary_address
         // So the first email address returned by bean should be primary
         // Even if it isn't flagged because the old primary was deleted or whatever
-        $has_primary = array();
+        $has_primary = [];
 
         foreach ($rows as $row) {
             $row['bean_id'] = $GLOBALS['db']->fromConvert($row['bean_id'], 'id');

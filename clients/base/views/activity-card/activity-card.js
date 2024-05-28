@@ -102,6 +102,19 @@
     },
 
     /**
+     * Check if a field is empty.
+     * @param {Object} fieldDef
+     * @return {boolean}
+     */
+    isFieldEmpty: function(fieldDef) {
+        const fields = _.union([fieldDef.name], fieldDef.fields, fieldDef.related_fields);
+        return !_.find(fields, function(field) {
+            const value = this.activity.get(field);
+            return !_.isUndefined(value) && value !== '';
+        }, this);
+    },
+
+    /**
      * Set and pick fields from fieldsMeta
      *
      * panel.fields will be replaced with the picked fields while the default fields
@@ -116,15 +129,27 @@
             // store a copy of default fields metadata
             panel.defaultFields = panel.fields;
 
+            panel.empty = true;
+            if (_.isArray(panel.fields)) {
+                panel.fields.map((item) => {
+                    if (panel.empty && !this.isFieldEmpty(item)) {
+                        panel.empty = false;
+                    }
+                });
+            }
+
             var pickedFields = [];
 
             _.each(panel.defaultFields, function(field) {
                 var meta = this.getFieldDefFromFieldMeta(field.name);
+                let pickedField = field;
 
                 if (!_.isEmpty(meta)) {
-                    meta = _.extend(meta, field);
-                    pickedFields.push(meta);
+                    pickedField = _.extend(meta, field);
                 }
+
+                pickedField.empty = this.isFieldEmpty(pickedField);
+                pickedFields.push(pickedField);
             }, this);
 
             // replace panel fields with picked fields

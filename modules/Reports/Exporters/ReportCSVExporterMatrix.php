@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 declare(strict_types=1);
+
 namespace Sugarcrm\Sugarcrm\modules\Reports\Exporters;
 
 /**
@@ -18,7 +19,6 @@ namespace Sugarcrm\Sugarcrm\modules\Reports\Exporters;
  */
 abstract class ReportCSVExporterMatrix extends ReportCSVExporterBase
 {
-
     /**
      * The detail information for headers in this report, specifically for matrix
      * @var array
@@ -55,7 +55,7 @@ abstract class ReportCSVExporterMatrix extends ReportCSVExporterBase
      * @param \Report $reporter
      * @return string
      */
-    public static function getSubTypeExporter(\Report $reporter) : string
+    public static function getSubTypeExporter(\Report $reporter): string
     {
         $layout = $reporter->report_def['layout_options'];
         if ($layout == '2x2') {
@@ -86,11 +86,11 @@ abstract class ReportCSVExporterMatrix extends ReportCSVExporterBase
      * @param int $count The amount of ,"" to generate
      * @return string A string containing $count of ,"", comma may be swapped with other user defined delimiter
      */
-    protected function spacePadder(int $count) : string
+    protected function spacePadder(int $count): string
     {
-        $output = "";
+        $output = '';
         for ($i = 0; $i < $count; $i++) {
-            $output .= $this->getDelimiter(false) . "\"\"";
+            $output .= $this->getDelimiter(false) . '""';
         }
         return $output;
     }
@@ -110,8 +110,9 @@ abstract class ReportCSVExporterMatrix extends ReportCSVExporterBase
         $data,
         $count,
         $current,
-        bool $noDataCheck = true
+        bool   $noDataCheck = true
     ) {
+
         if ($noDataCheck && ($count == null || $count == 0)) {
             return $current;
         }
@@ -155,7 +156,7 @@ abstract class ReportCSVExporterMatrix extends ReportCSVExporterBase
      */
     protected function matrixCleanUpHeaders()
     {
-        $output = array();
+        $output = [];
         $groupings = $this->reporter->report_def['group_defs'];
         $headers = $this->reporter->get_summary_header_row(true);
         foreach ($headers as $header) {
@@ -190,32 +191,32 @@ abstract class ReportCSVExporterMatrix extends ReportCSVExporterBase
      */
     protected function matrixTrieBuilder()
     {
-        $output = array();
+        $output = [];
         $grouping = $this->reporter->report_def['group_defs'];
         $headers = $this->reporter->get_summary_header_row(true);
         while (($row = $this->reporter->get_summary_next_row(true)) != 0) {
             $data = $this->makeDetailData($row, $headers);
             $walker = &$output;
             // make the trie for the grouping part
-            for ($i = 0; $i < (is_countable($grouping) ? count($grouping) : 0); $i++) {
+            for ($i = 0; $i < safeCount($grouping); $i++) {
                 if (!isset($walker[$grouping[$i]['label']])) {
                     // if the label is not yet there
-                    $walker[$grouping[$i]['label']] = array();
+                    $walker[$grouping[$i]['label']] = [];
                 }
                 $walker = &$walker[$grouping[$i]['label']];
                 if (!isset($walker[$data['cells'][$grouping[$i]['label']]])) {
-                    $walker[$data['cells'][$grouping[$i]['label']]] = array();
+                    $walker[$data['cells'][$grouping[$i]['label']]] = [];
                 }
                 $walker = &$walker[$data['cells'][$grouping[$i]['label']]];
                 // unset the data that are grouping to ensure only grouping is in trie path
                 unset($data['cells'][$grouping[$i]['label']]);
             }
-            $remainingData = array(
-                'cells' => array(),
+            $remainingData = [
+                'cells' => [],
                 'count' => $data['count'],
-            );
+            ];
             // append the reset of the data to the end of this trie route
-            for ($i = 0; $i < count($headers); $i++) {
+            for ($i = 0; $i < safeCount($headers); $i++) {
                 if (isset($data['cells'][$headers[$i]])) {
                     $remainingData['cells'][$headers[$i]] = $data['cells'][$headers[$i]];
                 }
@@ -233,9 +234,9 @@ abstract class ReportCSVExporterMatrix extends ReportCSVExporterBase
      *               will have two array with the higher grouping in the first array, and the second
      *               array with the lower level header
      */
-    protected function columnHeaderDictionary() : array
+    protected function columnHeaderDictionary(): array
     {
-        $output = array();
+        $output = [];
         $groupings = $this->reporter->report_def['group_defs'];
         $layout = $this->getLayoutOptions();
         $walker1 = &$this->trie[$groupings[0]['label']];
@@ -247,14 +248,14 @@ abstract class ReportCSVExporterMatrix extends ReportCSVExporterBase
                 foreach ($walker1 as $d1 => &$value1) {
                     $walker2 = &$value1[$groupings[1]['label']];
                     foreach ($walker2 as $d2 => &$value2) {
-                        if (!in_array($d2, $output)) {
+                        if (!safeInArray($d2, $output)) {
                             $output[] = $d2;
                         }
                     }
                 }
             } else {
-                $output[] = array(); // higher level header
-                $output[] = array(); // lower level header
+                $output[] = []; // higher level header
+                $output[] = []; // lower level header
                 foreach ($walker1 as $d1 => &$value1) {
                     $walker2 = &$value1[$groupings[1]['label']];
                     foreach ($walker2 as $d2 => &$value2) {
@@ -280,7 +281,7 @@ abstract class ReportCSVExporterMatrix extends ReportCSVExporterBase
                 foreach ($walker2 as $d2 => &$value) {
                     $walker3 = &$value[$groupings[2]['label']];
                     foreach ($walker3 as $d3 => &$data) {
-                        if (!in_array($d3, $output)) {
+                        if (!safeInArray($d3, $output)) {
                             $output[] = $d3;
                         }
                     }
@@ -299,15 +300,15 @@ abstract class ReportCSVExporterMatrix extends ReportCSVExporterBase
      */
     protected function rowHeaderDictionary()
     {
-        $output = array();
+        $output = [];
         $groupings = $this->reporter->report_def['group_defs'];
         $layout = $this->getLayoutOptions();
         if ($layout[0] == '1') {
             $trieValue = $this->trie[$groupings[0]['label']];
             $output = !is_null($trieValue) ? array_keys($trieValue) : [];
         } else {
-            $output[] = array();
-            $output[] = array();
+            $output[] = [];
+            $output[] = [];
             $walker1 = &$this->trie[$groupings[0]['label']];
             foreach ($walker1 as $d1 => &$next) {
                 $walker2 = &$next[$groupings[1]['label']];
@@ -327,7 +328,7 @@ abstract class ReportCSVExporterMatrix extends ReportCSVExporterBase
     /**
      * @return array
      */
-    protected function getLayoutOptions() : array
+    protected function getLayoutOptions(): array
     {
         return explode(
             'x',

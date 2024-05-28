@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = [
-    'LBL_GC_STATUS'=>'สถานะจีโอโค้ด',
+    'LBL_GC_STATUS' => 'สถานะจีโอโค้ด',
     'LBL_GC_LATITUDE' => 'ละติจูดจีโอโค้ด',
     'LBL_GC_LONGITUDE' => 'ลองจิจูดจีโอโค้ด',
     'LBL_GC_STATUS_DETAIL' => 'รายละเอียดสถานะจีโอโค้ด',

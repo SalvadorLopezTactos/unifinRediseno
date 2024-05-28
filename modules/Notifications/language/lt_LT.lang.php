@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_ASSIGNED_TO_ID' => 'Priskirto vartotojo ID',
     'LBL_ASSIGNED_TO_NAME' => 'Atsakingas',
     'LBL_ID' => 'ID',
@@ -52,4 +52,4 @@ $mod_strings = array(
     'LBL_UNREAD' => 'Unread',
     'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Jus paminėjo',
     'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Jus paminėjo',
-);
+];

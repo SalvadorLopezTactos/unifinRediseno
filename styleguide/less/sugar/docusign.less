@@ -1,6 +1,8 @@
 .dashlet .docusign {
   ul.nav-tabs {
+    display: flex;
     height: 30px;
+    border-bottom: none;
 
     li.dropdown {
       float: right;
@@ -13,15 +15,21 @@
 
   .envelopes_docusign_content {
     display: none;
+    border-top: 1px solid @docusignDashletBorderColor;
   }
 
   .documents_docusign_content {
     display: none;
-    width: 100%;
+    border-top: 1px solid @docusignDashletBorderColor;
+
+    .flex-list-view {
+      clear: right;
+    }
   }
 
   .drafts_docusign_content {
     display: none;
+    border-top: 1px solid @docusignDashletBorderColor;
   }
 
   .stick-first {
@@ -30,12 +38,12 @@
 
   .addDocument,
   .sendEnvelope,
-  .selectTemplate {
+  .selectTemplate,
+  .sendWithTemplate {
     line-height: 18px;
   }
 
   .nav > li {
-    width: 20%;
     white-space: nowrap;
 
     a {
@@ -66,6 +74,7 @@
 
     .main {
       height: 100%;
+      border-top: 1px solid @docusignDashletBorderColor;
 
       .overview_docusign_content {
         height: 100%;
@@ -93,9 +102,36 @@
   }
 }
 
-.templates-list .flex-list-view[class$="-actions"]:not(.scroll-width)
-  .flex-list-view-content .dataTable td:last-child:not(.alert) {
+.envelopeSetup {
+  margin: 50px 20px;
+}
+
+.templates-list .flex-list-view[class$="-actions"]:not(.scroll-width) .flex-list-view-content .dataTable td:last-child:not(.alert) {
   height: 28px;
+}
+
+.templatesFilter {
+  .width-auto();
+
+  padding: 5px 8px;
+
+  input {
+    width: -webkit-fill-available;
+
+    &:focus {
+      outline: 3px auto #517bf8;
+      outline-offset: 0;
+      box-shadow: none;
+      border-color: @docusignInputFocus;
+    }
+  }
+
+  .sicon.sicon-close {
+    position: absolute;
+    right: 7px;
+    padding: 7px 10px;
+    cursor: pointer;
+  }
 }
 
 body.safari-browser {

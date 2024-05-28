@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Etapa de Grupo:',
-    'LBL_DEAL_TOT'=>'descuento total',
-    'LBL_DEAL_TOT_USDOLLAR'=>'descuento total (Dólares EEUU)',
+    'LBL_DEAL_TOT' => 'descuento total',
+    'LBL_DEAL_TOT_USDOLLAR' => 'descuento total (Dólares EEUU)',
     'LBL_NEW_SUB' => 'Subtotal Descontado:',
     'LBL_SHIPPING' => 'Envío:',
-    'LBL_SHIPPING_USDOLLAR'=>'Envío (Dólares EEUU)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Subtotal (Dólares EEUU)',
+    'LBL_SHIPPING_USDOLLAR' => 'Envío (Dólares EEUU)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Subtotal (Dólares EEUU)',
     'LBL_SUBTOTAL' => 'Subtotal:',
     'LBL_TAXABLE_SUBTOTAL' => 'Subtotal imponible',
-    'LBL_TAX_USDOLLAR'=>'Impuestos (Dólares EEUU)',
+    'LBL_TAX_USDOLLAR' => 'Impuestos (Dólares EEUU)',
     'LBL_TAX' => 'Impuestos:',
-    'LBL_TOTAL_USDOLLAR'=>'Total (Dólares EEUU)',
+    'LBL_TOTAL_USDOLLAR' => 'Total (Dólares EEUU)',
     'LBL_TOTAL' => 'Total',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Posición del paquete de presupuestos',
     'EXCEPTION_INVALID_QUOTE_ID' => 'Falta el ID del presupuesto de la carga',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'No se ha encontrado el presupuesto solicitado',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'No se ha encontrado el presupuesto solicitado',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Descuento adicional del grupo',
     'LBL_GROUP_TOTAL' => 'Total de grupo',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Encabezado de grupo',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'El grupo de Juego de productos predeterminado para el presupuesto',
     'LBL_ALERT_DELETING_ITEM' => 'Eliminando elemento(s) de la línea',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Elemento de la línea eliminado correctamente',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Línea de tiempo del paquete de productos',
+];

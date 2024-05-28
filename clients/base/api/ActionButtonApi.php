@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\ProcessManager;
 
 class ActionButtonApi extends SugarApi
@@ -27,7 +28,7 @@ class ActionButtonApi extends SugarApi
             ],
             'evaluateEmailTemplate' => [
                 'reqType' => 'POST',
-                'path' => ["actionButton", "evaluateEmailTemplate"],
+                'path' => ['actionButton', 'evaluateEmailTemplate'],
                 'pathVars' => [''],
                 'method' => 'evaluateEmailTemplate',
                 'shortHelp' => 'Merges a standard Sugar Email Template and returns the merged data',
@@ -214,9 +215,9 @@ class ActionButtonApi extends SugarApi
      * @throws Doctrine\DBAL\Exception
      * @throws Doctrine\DBAL\Query\QueryException
      */
-    private function getEmailAddresses(String $formula, String $module, String $recordId)
+    private function getEmailAddresses(string $formula, string $module, string $recordId)
     {
-        $formula = str_replace("'", "\"", $formula);
+        $formula = str_replace("'", '"', $formula);
         $record = BeanFactory::retrieveBean($module, $recordId);
 
         if (empty($record)) {
@@ -325,7 +326,7 @@ class ActionButtonApi extends SugarApi
             //by user when the drawer will be opened
             foreach ($beanFields as $fieldName => $fieldValue) {
                 if (array_key_exists($fieldName, $fieldDefs) && $fieldDefs[$fieldName]['type'] === 'multienum' && is_array($fieldValue)) {
-                    $fieldValue = implode(",", $fieldValue);
+                    $fieldValue = implode(',', $fieldValue);
                 }
 
                 $record->{$fieldName} = $fieldValue;
@@ -333,7 +334,6 @@ class ActionButtonApi extends SugarApi
         } else {
             $record = BeanFactory::retrieveBean($targetModule, $targetRecordId);
         }
-
 
 
         if (empty($record)) {
@@ -347,11 +347,20 @@ class ActionButtonApi extends SugarApi
         }
 
         foreach ($fieldsToBeUpdated as $fieldName => $paramsData) {
-            $formula = $paramsData['formula'];
+            if (array_key_exists('formula', $paramsData)) {
+                $formula = $paramsData['formula'];
 
-            $record->field_defs[$paramsData['fieldName']]['enforced'] = true;
-            $record->field_defs[$paramsData['fieldName']]['calculated'] = true;
-            $record->field_defs[$paramsData['fieldName']]['formula'] = $formula;
+                $record->field_defs[$fieldName]['enforced'] = true;
+                $record->field_defs[$fieldName]['calculated'] = true;
+                $record->field_defs[$fieldName]['formula'] = $formula;
+            }
+
+            if (array_key_exists('required_formula', $paramsData)) {
+                $formula = $paramsData['required_formula'];
+
+                $record->field_defs[$fieldName]['enforced'] = true;
+                $record->field_defs[$fieldName]['required_formula'] = $formula;
+            }
         }
 
         $record->updateCalculatedFields();
@@ -435,7 +444,6 @@ class ActionButtonApi extends SugarApi
             if (array_key_exists($fieldName, $bean->field_defs) && $bean->field_defs[$fieldName]['type'] === 'link') {
                 continue;
             }
-
             $bean->{$fieldName} = $fieldValue;
         }
 
@@ -451,7 +459,7 @@ class ActionButtonApi extends SugarApi
             $fieldType = $bean->field_defs[$paramsData['targetField']]['type'];
 
             // handle setting a bool value to a text field
-            if (($fieldType == "varchar" || $fieldType == "text") && is_bool($value)) {
+            if (($fieldType == 'varchar' || $fieldType == 'text') && is_bool($value)) {
                 $value = ($value) ? 'true' : 'false';
             }
 

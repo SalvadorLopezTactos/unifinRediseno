@@ -11,21 +11,21 @@
  */
 --}}
 {{#each meta.panels}}
-<div class="flex-list-view-content">
-<table class="table table-striped dataTable{{#has "ReorderableColumns" ../plugins}} reorderable-columns{{/has}}">
+<div class="flex-list-view-content h-full overflow-auto">
+<table class="table table-striped dataTable overflow-auto{{#has "ReorderableColumns" ../plugins}} reorderable-columns{{/has}}">
     <thead>
     <tr>
         {{#each ../leftColumns}}
-          <th{{#if name}} data-fieldname="{{name}}"{{/if}} class="sticky-column stick-left">
+          <th{{#if name}} data-fieldname="{{name}}"{{/if}} class="left-0 sticky stick-left z-20">
             <span>
                 {{field ../../this template="list-header"}}
             </span>
           </th>
         {{/each}}
         {{#each ../_fields.visible}}
-            <th class="{{#isSortable ../../module this}}sorting{{#eq ../../../orderBy.field name}}_{{../../../../orderBy.direction}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if widthClass}} {{widthClass}}{{/if}}"
+            <th class="relative {{#isSortable ../../module this}}sorting{{#eq ../../../orderBy.field name}}_{{../../../../orderBy.direction}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if widthClass}} {{widthClass}}{{/if}}"
                 {{#if name}} data-fieldname="{{name}}"{{/if}} data-orderby="{{orderBy}}">
-                <div class="sortable-row-header-container">
+                <div class="sortable-row-header-container p-2">
                     {{#has "ReorderableColumns" ../../plugins}}
                     {{! Insert a <div> around all the inner element of the column.
                         This is a fix for firefox because the <th> does not support
@@ -59,10 +59,15 @@
         {{/each}}
         {{#each ../rightColumns}}
             {{#if isColumnDropdown}}
-              <th class="nosort morecol sticky-column stick-right">
+              <th class="nosort morecol right-0 sticky z-10 stick-right">
                 <div class="dropdown">
-                    <button class="btn btn-invisible" data-toggle="dropdown" rel="tooltip" title="{{str "LBL_COLUMNS"}}" data-placement="bottom" data-action="fields-toggle" track="click:morecol" aria-label="{{str 'LBL_COLUMNS'}}" aria-haspopup="true" aria-expanded="false"><i class="sicon sicon-kebab"></i></button>
-                    <ul class="dropdown-menu left">
+                    <button class="btn btn-invisible" data-bs-toggle="dropdown" data-action="fields-toggle"
+                            track="click:morecol" aria-label="{{str 'LBL_COLUMNS'}}" aria-haspopup="true"
+                            aria-expanded="false">
+                        <i class="sicon sicon-kebab"></i>
+                        {{tooltipTemplate (str 'LBL_COLUMNS') 'bottom'}}
+                    </button>
+                    <ul class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl left">
                     {{#each ../../../_fields.all}}
                         <li>
                             <button{{#if selected}} class="active"{{/if}} data-field-toggle="{{name}}" track="click:{{name}}">
@@ -90,7 +95,7 @@
     {{#each ../collection.models}}
     <tr name="{{module}}_{{attributes.id}}" data-parent-id="{{attributes.user_id}}" class="single" >
         {{#each ../../leftColumns}}
-            <td class="sticky-column stick-left">
+            <td class="left-0 sticky stick-left z-20">
              {{field ../../../this model=../this template=../../../this.viewName}}
         </td>
         {{/each}}
@@ -100,7 +105,7 @@
             </td>
         {{/each}}
         {{#each ../../rightColumns}}
-          <td class="sticky-column stick-right">
+          <td class="right-0 sticky stick-right z-20">
              {{field ../../../this model=../this template=../../../this.viewName}}
         </td>
         {{/each}}

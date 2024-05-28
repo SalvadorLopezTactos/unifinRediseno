@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tööde järjekord',
     'LBL_MODULE_NAME_SINGULAR' => 'Tööde järjekord',
     'LBL_MODULE_TITLE' => 'Tööde järjekord: avaleht',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Tühistatud resolutsioon',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Resolutsioon töötab',
     // Errors
-    'ERR_CALL' => "Funktsiooni kutse pole võimalik: %s",
-    'ERR_CURL' => "CURL puudub – URL-töid ei saa käivitada",
-    'ERR_FAILED' => "Ootamatu tõrge, kontrollige PHP logisid ja suvandit sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s suvandis %s real %d",
-    'ERR_NOUSER' => "Ühtegi kasutaja ID-d pole töö puhul määratud",
-    'ERR_NOSUCHUSER' => "Kasutaja ID-d %s ei leitud",
-    'ERR_JOBTYPE' => "Tundmatu töö tüüp: %s",
-    'ERR_TIMEOUT' => "Sunnitud tõrge ajalõpul",
+    'ERR_CALL' => 'Funktsiooni kutse pole võimalik: %s',
+    'ERR_CURL' => 'CURL puudub – URL-töid ei saa käivitada',
+    'ERR_FAILED' => 'Ootamatu tõrge, kontrollige PHP logisid ja suvandit sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s suvandis %s real %d',
+    'ERR_NOUSER' => 'Ühtegi kasutaja ID-d pole töö puhul määratud',
+    'ERR_NOSUCHUSER' => 'Kasutaja ID-d %s ei leitud',
+    'ERR_JOBTYPE' => 'Tundmatu töö tüüp: %s',
+    'ERR_TIMEOUT' => 'Sunnitud tõrge ajalõpul',
     'ERR_JOB_FAILED_VERBOSE' => 'Töö %1$s (%2$s) nurjus CRON-i käivitamisel',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Ei saa laadida uba ID-ga: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Marsruudi %s draiverit pole võimalik leida',
@@ -91,13 +91,13 @@ See toetab teadete programmilist saatmist veebiteenuse kaudu interneti teel suht
 </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Amazon SQS-i konfiguratsiooni spikker',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Jaotis Amazon SQS konfiguratsioon.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Jaotis Amazon SQS konfiguratsioon.</b></p>
 <ul>
 <li>Pääsuvõtme ID: <i>sisestage Amazon SQS-i puhul oma pääsuvõtme ID</i></li>
 <li>Salajane pääsuvõti: <i>sisestage Amazon SQS-i puhul salajane pääsuvõti</i></li>
 <li>Piirkond: <i>sisestage Amazon SQS-i serveri piirkond</i></li>
 <li>Järjekorra nimi: <i>sisestage Amazon SQS-i serveri järjekorra nimi</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'AMQP konfiguratsiooni spikker',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>Jaotis AMQP konfiguratsioon.</b></p>
 <ul>
@@ -118,4 +118,4 @@ See toetab teadete programmilist saatmist veebiteenuse kaudu interneti teel suht
     'LBL_REGION' => 'Piirkond',
     'LBL_ACCESS_KEY_SECRET' => 'Salajane pääsuvõti',
     'LBL_QUEUE_NAME' => 'Adapteri nimi',
-);
+];

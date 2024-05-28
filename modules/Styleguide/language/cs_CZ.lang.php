@@ -10,17 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-	'LBL_MODULE_NAME' => 'Průvodce styly',
-    'LBL_MODULE_NAME_SINGULAR'	=> 'Průvodce styly',
-	'LBL_MODULE_TITLE' => 'Průvodce styly',
-);
-
-?>
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Průvodce styly',
+    'LBL_MODULE_NAME_SINGULAR' => 'Průvodce styly',
+    'LBL_MODULE_TITLE' => 'Průvodce styly',
+];

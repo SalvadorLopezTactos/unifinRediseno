@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border=\'0\' cellspacing=\'1\'><tr><td valign=\'top\' width=\'35%\' class=\'dataLabel\'>Hae avain ja salasana IBM SmartCloud -palvelusta rekisteröimällä Sugar-instanssisi uutena sovelluksena. Rekisteröinti on mahdollista 8. toukokuuta 2011 alkaen.<br>
 &nbsp;<br>
 Instanssisi rekisteröinnin vaiheet:<br>
@@ -28,5 +28,4 @@ Instanssisi rekisteröinnin vaiheet:<br>
 </td></tr></table>',
     'oauth_consumer_key' => 'Kuluttajan OAuth-avain',
     'oauth_consumer_secret' => 'Kuluttajan OAuth-salasana',
-);
-
+];

@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Kontrakter',
-	'LBL_MODULE_NAME_SINGULAR' => 'Kontrakt',
-	'LBL_MODULE_TITLE' => 'Kontrakter: Startside',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Kontrakter',
+    'LBL_MODULE_NAME_SINGULAR' => 'Kontrakt',
+    'LBL_MODULE_TITLE' => 'Kontrakter: Startside',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Opret kontrakt',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'Valuta-id:',
     'LBL_CURRENCY' => 'Valuta:',
     'LBL_CURRENCY_RATE' => 'Valuta kurs',
-    'LBL_ASSIGNED_TO_NAME'=>'Tildelt til:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Tildelt til:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Liste over kontrakter',	
+    'LBL_LIST_FORM_TITLE' => 'Liste over kontrakter',
     'LBL_LIST_CONTRACT_NAME' => 'Kontraktens navn:',
     'LBL_LIST_ACCOUNT_NAME' => 'Kontonavn',
     'LBL_LIST_START_DATE' => 'Start',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Navn',
     'LBL_LIST_CONTRACT_VALUE' => 'Værdi',
 
-    'LBL_TYPE'=>'Type',
+    'LBL_TYPE' => 'Type',
     'LBL_TYPE_NAME' => 'Typenavn',
-    'LBL_CONTRACT_TYPE'=>'Type:',
+    'LBL_CONTRACT_TYPE' => 'Type:',
 
     'LBL_CREATED_USER' => 'Oprettet bruger',
     'LBL_MODIFIED_USER' => 'Ændret bruger',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Kontrakter',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Betjeningspanel til kontraktoptegnelse',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje for kontrakt',
+];

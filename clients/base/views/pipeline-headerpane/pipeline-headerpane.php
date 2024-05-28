@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,24 +11,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['pipeline-headerpane'] = array(
-    'buttons' => array(
-        array(
+$viewdefs['base']['view']['pipeline-headerpane'] = [
+    'buttons' => [
+        [
             'name' => 'pipeline_create_button',
             'type' => 'button',
             'label' => 'LBL_CREATE_BUTTON_LABEL',
-            'css_class'=>'btn btn-primary',
-            'acl_action'=>"create",
-            'events' => array(
+            'css_class' => 'btn btn-primary',
+            'acl_action' => 'create',
+            'events' => [
                 'click' => 'button:pipeline_create_button:click',
-            ),
-        ),
-    ),
-    'fields' => array(
-        array(
+            ],
+        ],
+    ],
+    'fields' => [
+        [
             'name' => 'pipeline_type',
             'label' => 'LBL_PIPELINE_TYPE',
             'type' => 'pipeline-type',
-        ),
-    ),
-);
+        ],
+    ],
+];

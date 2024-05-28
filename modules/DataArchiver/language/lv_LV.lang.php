@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Datu arhivētājs',
     'LBL_MODULE_NAME' => 'Datu arhivētājs',
     'LBL_FILTER_DEF_FIELD' => 'Filtrs',
@@ -28,7 +27,7 @@ $mod_strings = array (
     'LBL_MANAGE_ARCHIVE_JOB_LIST_TITLE' => 'Ieplānotie arhīvi',
     'LBL_MANAGE_ARCHIVE_JOB_IS_NOT_SCHEDULED' => 'Nav ieplānotu arhīvu',
     'LBL_ARCHIVE_FILTER' => 'Filtra iestatījumi',
-    "LBL_MANAGE_ARCHIVE_SETUP" => 'Iestatīt datu arhivēšanu',
+    'LBL_MANAGE_ARCHIVE_SETUP' => 'Iestatīt datu arhivēšanu',
     'LBL_LIST_ARCHIVE_NAME' => 'Arhīva nosaukums',
     'LBL_PERFORM_NOW_BTN' => 'Izpildīt tagad',
     'LBL_ARCHIVE_SUCCESS_TITLE' => 'Veiksmīgi',
@@ -45,4 +44,4 @@ $mod_strings = array (
         . 'jo tā var ietekmēt sistēmas darbību. Vai tiešām vēlaties veikt šo darbību tagad?',
 
     'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Moduļa {{moduleName}} arhivētājam ir jābūt iestatītam {{fieldName}} kā filtram',
-);
+];

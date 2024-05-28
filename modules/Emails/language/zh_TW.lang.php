@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => '轉寄：',
     'LBL_RE' => '回覆:',
     'LBL_BUTTON_CREATE' => '建立',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => '從電子郵件帳戶中選取',
     'LBL_SELECT_SIGNATURE_TITLE' => '選取簽名',
     'LBL_SIGNATURE' => '簽名',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "預設簽名",
-    "LBL_SHOW_MORE_SIGNATURES" => "更多簽名...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => '預設簽名',
+    'LBL_SHOW_MORE_SIGNATURES' => '更多簽名...',
     'LBL_SUBJECT' => '主題：',
     'LBL_TEMPLATE' => '範本',
     'LBL_TEXT_BODY' => '正文文字',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => '傳送時間',
     'LBL_LIST_TO_ADDR' => '至',
     'LBL_LIST_TYPE' => '類型',
-    "LBL_SELECTED_RECIPIENTS" => "已選取的收件者",
-    "LBL_SHOW_MORE_RECIPIENTS" => "更多收件者",
-    "LBL_COMPOSE_ADDRESSBOOK" => "地址簿",
+    'LBL_SELECTED_RECIPIENTS' => '已選取的收件者',
+    'LBL_SHOW_MORE_RECIPIENTS' => '更多收件者',
+    'LBL_COMPOSE_ADDRESSBOOK' => '地址簿',
     'NTC_REMOVE_INVITEE' => '確定要將此收件者從電子郵件中移除嗎？',
     'WARNING_SETTINGS_NOT_CONF' => '您的電子郵件設置未正確設定，無法發送電子郵件。必須在 ' .
         '<a href="#bwc/index.php?module=EmailMan&action=config">電子郵件設置</a>中配置SMTP 伺服器。',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => '附件可能失败：檢測到“upload_tmp_dir”的值錯誤或不可用。 ' .
         '請在您的 php.ini 文件中更正。',
     'LBL_MESSAGE_UID' => '訊息 UID',
-    'LBL_OPEN_DRAFT_ALERT' => '電子郵件是一份草案。按一下 '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => '電子郵件是一份草案。按一下 ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  以編輯。',
     'LBL_EMAIL_BODY' => '電子郵件訊息',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => '電子郵件焦點抽屜',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => '電子郵件紀錄儀表板',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '電子郵件時間軸',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => '未指定收件者',
@@ -474,4 +475,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => '傳送電子郵件',
     'LBL_MAILBOX' => '收件帳戶',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => '請通過<a href="#OutboundEmail">電子郵件設置</a>配置出站電子郵件帳戶以發送電子郵件。',
-);
+    'LBL_TOO_SHORT' => '輸入至少 {0} 個字元...',
+];

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Schemalägg telefonsamtal',
     'LNK_NEW_MEETING' => 'Schemalägg möte',
     'LNK_NEW_TASK' => 'Skapa uppgift',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Extra meta fält 2',
     'COLUMN_TITLE_EXT3' => 'Extra meta fält 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'IFrame höjd',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'Standard URL',
     'COLUMN_TITLE_AUDIT' => 'Spårbarhet',
     'COLUMN_TITLE_PII' => 'Personlig information',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Standardvärde',
     'LBL_AUDITED' => 'Granskad',
     'LBL_REPORTABLE' => 'Rapporteringsbar',
-    'ERR_RESERVED_FIELD_NAME' => "Reserverat nyckelord",
+    'ERR_RESERVED_FIELD_NAME' => 'Reserverat nyckelord',
     'ERR_SELECT_FIELD_TYPE' => 'Vänligen välj fält typ',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Fältnamn existerar redan',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Fältnamn ska endast innehålla följande tecken: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Klar',
     'LBL_EXE_NON_SIM_MODE' => 'Utför icke-simuleringsläge',
     'LBL_CALCULATION_VISIBLE' => 'Gör synligt för beräkningar',
-);
+];

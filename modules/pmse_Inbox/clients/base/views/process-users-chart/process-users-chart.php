@@ -10,62 +10,62 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['pmse_Inbox']['base']['view']['process-users-chart'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['pmse_Inbox']['base']['view']['process-users-chart'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_PMSE_PROCESS_USERS_CHART_NAME',
             'description' => 'LBL_PMSE_PROCESS_USERS_CHART_DESCRIPTION',
-            'filter' => array(
-                'module' => array(
+            'filter' => [
+                'module' => [
                     'Home',
                     'pmse_Project',
-                ),
-                'view' => array(
+                ],
+                'view' => [
                     'records',
-                ),
-            ),
-            'config' => array(
+                ],
+            ],
+            'config' => [
                 'isRecord' => '0',
-            ),
-            'preview' => array(
+            ],
+            'preview' => [
                 'isRecord' => '0',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'label' => 'LBL_PMSE_PROCESS_USERS_CHART_NAME_RECORD',
             'description' => 'LBL_PMSE_PROCESS_USERS_CHART_DESCRIPTION',
-            'filter' => array(
-                'module' => array(
+            'filter' => [
+                'module' => [
                     'pmse_Project',
-                ),
-                'view' => array(
+                ],
+                'view' => [
                     'record',
-                ),
-            ),
-            'config' => array(
+                ],
+            ],
+            'config' => [
                 'isRecord' => '1',
-            ),
-            'preview' => array(
+            ],
+            'preview' => [
                 'isRecord' => '1',
-            ),
-        ),
-    ),
-    'processes_selector' => array(
-        array(
+            ],
+        ],
+    ],
+    'processes_selector' => [
+        [
             'name' => 'processes_selector',
             'label' => 'Process Selector',
             'type' => 'enum',
-            'options' => array(),
-        ),
-    ),
-    'config' => array(
-        'fields' => array(
-            array(
+            'options' => [],
+        ],
+    ],
+    'config' => [
+        'fields' => [
+            [
                 'name' => 'isRecord',
                 'label' => 'isRecord',
                 'desc' => 'LBL_DNB_PRIM_NAME_DESC',
-                'type' => 'text'
-            ),
-        ),
-    ),
-);
+                'type' => 'text',
+            ],
+        ],
+    ],
+];

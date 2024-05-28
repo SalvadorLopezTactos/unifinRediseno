@@ -21,32 +21,32 @@ class ForecastsConfigApi extends ConfigModuleApi
     public function registerApiRest()
     {
         return
-            array(
-                'forecastsConfigGet' => array(
+            [
+                'forecastsConfigGet' => [
                     'reqType' => 'GET',
-                    'path' => array('Forecasts', 'config'),
-                    'pathVars' => array('module', ''),
+                    'path' => ['Forecasts', 'config'],
+                    'pathVars' => ['module', ''],
                     'method' => 'config',
                     'shortHelp' => 'Retrieves the config settings for a given module',
                     'longHelp' => 'include/api/help/config_get_help.html',
-                ),
-                'forecastsConfigCreate' => array(
+                ],
+                'forecastsConfigCreate' => [
                     'reqType' => 'POST',
-                    'path' => array('Forecasts', 'config'),
-                    'pathVars' => array('module', ''),
+                    'path' => ['Forecasts', 'config'],
+                    'pathVars' => ['module', ''],
                     'method' => 'forecastsConfigSave',
                     'shortHelp' => 'Creates the config entries for the Forecasts module.',
                     'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastsConfigPut.html',
-                ),
-                'forecastsConfigUpdate' => array(
+                ],
+                'forecastsConfigUpdate' => [
                     'reqType' => 'PUT',
-                    'path' => array('Forecasts', 'config'),
-                    'pathVars' => array('module', ''),
+                    'path' => ['Forecasts', 'config'],
+                    'pathVars' => ['module', ''],
                     'method' => 'forecastsConfigSave',
                     'shortHelp' => 'Updates the config entries for the Forecasts module',
                     'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastsConfigPut.html',
-                ),
-            );
+                ],
+            ];
     }
 
     /**
@@ -64,7 +64,7 @@ class ForecastsConfigApi extends ConfigModuleApi
 
             $args = null;
             if (!empty($moduleName)) {
-                $args = array('moduleName' => $moduleName);
+                $args = ['moduleName' => $moduleName];
             }
             throw new SugarApiExceptionNotAuthorized(
                 $GLOBALS['app_strings']['EXCEPTION_CHANGE_MODULE_CONFIG_NOT_AUTHORIZED'],
@@ -99,13 +99,13 @@ class ForecastsConfigApi extends ConfigModuleApi
 
         if (isset($args['show_custom_buckets_options'])) {
             $json = getJSONobj();
-            $_args = array(
+            $_args = [
                 'dropdown_lang' => $_SESSION['authenticated_user_language'] ?? $GLOBALS['current_language'],
                 'dropdown_name' => 'commit_stage_custom_dom',
                 'view_package' => 'studio',
                 'list_value' => $json->encode($args['show_custom_buckets_options']),
                 'skip_sync' => true,
-            );
+            ];
             $_REQUEST['view_package'] = 'studio';
             $parser = ParserFactory::getParser('dropdown');
             $parser->saveDropDown($_args);
@@ -115,11 +115,11 @@ class ForecastsConfigApi extends ConfigModuleApi
         // we do the double check here since the front ent will send one one value if the input is empty
         if (empty($args['worksheet_columns']) || empty($args['worksheet_columns'][0])) {
             // set the defaults
-            $args['worksheet_columns'] = array(
+            $args['worksheet_columns'] = [
                 'commit_stage',
                 'parent_name',
                 'likely_case',
-            );
+            ];
             if ($args['show_worksheet_best'] == 1) {
                 $args['worksheet_columns'][] = 'best_case';
             }
@@ -165,6 +165,7 @@ class ForecastsConfigApi extends ConfigModuleApi
         return $current_forecasts_settings;
     }
 
+
     /**
      * Refreshes the ForecastBy module's metadata.  Needed for when forecasts is set up after any opps/rli switching.
      * @param $forecast_by
@@ -202,7 +203,7 @@ class ForecastsConfigApi extends ConfigModuleApi
     public function rebuildExtensions($modules)
     {
         if (!is_array($modules)) {
-            $modules = array($modules);
+            $modules = [$modules];
         }
 
         $rac = $this->getRepairAndClear();
@@ -222,6 +223,7 @@ class ForecastsConfigApi extends ConfigModuleApi
         return new RepairAndClear();
     }
 
+
     /**
      * Compares two sets of forecasting settings to see if the primary timeperiods settings are the same
      *
@@ -233,42 +235,48 @@ class ForecastsConfigApi extends ConfigModuleApi
     public function timePeriodSettingsChanged($priorSettings, $currentSettings)
     {
         if (!isset($priorSettings['timeperiod_shown_backward']) ||
-            (isset($currentSettings['timeperiod_shown_backward']) &&
+            (
+                isset($currentSettings['timeperiod_shown_backward']) &&
                 ($currentSettings['timeperiod_shown_backward'] != $priorSettings['timeperiod_shown_backward'])
             )
         ) {
             return true;
         }
         if (!isset($priorSettings['timeperiod_shown_forward']) ||
-            (isset($currentSettings['timeperiod_shown_forward']) &&
+            (
+                isset($currentSettings['timeperiod_shown_forward']) &&
                 ($currentSettings['timeperiod_shown_forward'] != $priorSettings['timeperiod_shown_forward'])
             )
         ) {
             return true;
         }
         if (!isset($priorSettings['timeperiod_interval']) ||
-            (isset($currentSettings['timeperiod_interval']) &&
+            (
+                isset($currentSettings['timeperiod_interval']) &&
                 ($currentSettings['timeperiod_interval'] != $priorSettings['timeperiod_interval'])
             )
         ) {
             return true;
         }
         if (!isset($priorSettings['timeperiod_type']) ||
-            (isset($currentSettings['timeperiod_type']) &&
+            (
+                isset($currentSettings['timeperiod_type']) &&
                 ($currentSettings['timeperiod_type'] != $priorSettings['timeperiod_type'])
             )
         ) {
             return true;
         }
         if (!isset($priorSettings['timeperiod_start_date']) ||
-            (isset($currentSettings['timeperiod_start_date']) &&
+            (
+                isset($currentSettings['timeperiod_start_date']) &&
                 ($currentSettings['timeperiod_start_date'] != $priorSettings['timeperiod_start_date'])
             )
         ) {
             return true;
         }
         if (!isset($priorSettings['timeperiod_leaf_interval']) ||
-            (isset($currentSettings['timeperiod_leaf_interval']) &&
+            (
+                isset($currentSettings['timeperiod_leaf_interval']) &&
                 ($currentSettings['timeperiod_leaf_interval'] != $priorSettings['timeperiod_leaf_interval'])
             )
         ) {

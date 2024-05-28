@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => '見積り済商品一覧のダッシュ ボード',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => '見積商品レコードダッシュボード',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => '見積済商品フォーカス ドロワ',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '見積り済み商品のタイムライン',
 
     'LBL_CAMPAIGN_PRODUCT' => 'キャンペーン商品',
     'LBL_MODULE_NAME' => '見積済商品',
@@ -177,4 +178,4 @@ $mod_strings = array(
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (新規見積り済み商品)',
     'LBL_DISCOUNT_PERCENT' => '% パーセント',
     'LBL_DISCOUNT_TYPE' => '値引タイプ',
-);
+];

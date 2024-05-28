@@ -9,18 +9,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['UserSignature'] = array(
+$dictionary['UserSignature'] = [
     'table' => 'users_signatures',
     'archive' => false,
     'hidden_to_role_assignment' => true,
     'favorites' => false,
-    'fields' => array(
-        'user_id' => array(
+    'fields' => [
+        'user_id' => [
             'name' => 'user_id',
             'vname' => 'LBL_USER_ID',
             'type' => 'id',
-        ),
-        'name' => array(
+        ],
+        'name' => [
             'name' => 'name',
             'vname' => 'LBL_NAME',
             'type' => 'name',
@@ -32,20 +32,20 @@ $dictionary['UserSignature'] = array(
             'duplicate_merge' => 'enabled',
             'merge_filter' => 'selected',
             'duplicate_on_record_copy' => 'always',
-        ),
-        'signature' => array(
+        ],
+        'signature' => [
             'name' => 'signature',
             'vname' => 'LBL_SIGNATURE',
             'type' => 'text',
             'reportable' => false,
-        ),
-        'signature_html' => array(
+        ],
+        'signature_html' => [
             'name' => 'signature_html',
             'vname' => 'LBL_SIGNATURE_HTML',
             'type' => 'text',
             'reportable' => false,
-        ),
-        'is_default' => array(
+        ],
+        'is_default' => [
             'name' => 'is_default',
             'vname' => 'LBL_DEFAULT_SIGNATURE',
             'type' => 'bool',
@@ -53,20 +53,20 @@ $dictionary['UserSignature'] = array(
             'source' => 'non-db',
             'duplicate_on_record_copy' => 'no',
             'massupdate' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'idx_usersig_uid',
             'type' => 'index',
-            'fields' => array('user_id'),
-        ),
-        array(
+            'fields' => ['user_id'],
+        ],
+        [
             'name' => 'idx_usersig_created_by',
             'type' => 'index',
-            'fields' => array('created_by'),
-        ),
-    ),
-    'visibility' => array('OwnerVisibility' => true),
-);
-VardefManager::createVardef('UserSignatures', 'UserSignature', array('default'));
+            'fields' => ['created_by'],
+        ],
+    ],
+    'visibility' => ['OwnerVisibility' => true],
+];
+VardefManager::createVardef('UserSignatures', 'UserSignature', ['default']);

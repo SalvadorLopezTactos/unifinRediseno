@@ -45,26 +45,23 @@ class SugarSearchEngineMetadataHelper
     public static function retrieveFtsEnabledFieldsForAllModules()
     {
         $cachedResults = sugar_cache_retrieve(self::ENABLE_MODULE_CACHE_KEY);
-        if($cachedResults != null && !empty($cachedResults) )
-        {
-            $GLOBALS['log']->debug("Retrieving enabled fts modules from cache");
+        if ($cachedResults != null && !empty($cachedResults)) {
+            $GLOBALS['log']->debug('Retrieving enabled fts modules from cache');
             return $cachedResults;
         }
 
-        $results = array();
+        $results = [];
 
         $usa = new UnifiedSearchAdvanced();
         $modules = $usa->retrieveEnabledAndDisabledModules();
 
-        foreach($modules['enabled'] as $module)
-        {
+        foreach ($modules['enabled'] as $module) {
             $fields = self::retrieveFtsEnabledFieldsPerModule($module['module']);
             $results[$module['module']] = $fields;
         }
 
         sugar_cache_put(self::ENABLE_MODULE_CACHE_KEY, $results, 0);
         return $results;
-
     }
 
     /**
@@ -76,10 +73,9 @@ class SugarSearchEngineMetadataHelper
     {
         $usa = new UnifiedSearchAdvanced();
         $modules = $usa->retrieveEnabledAndDisabledModules();
-        $enabledModules = array();
-        foreach($modules['enabled'] as $module)
-        {
-            $enabledModules[ $module['module'] ] = $module['module'];
+        $enabledModules = [];
+        foreach ($modules['enabled'] as $module) {
+            $enabledModules[$module['module']] = $module['module'];
         }
 
         return $enabledModules;
@@ -93,19 +89,15 @@ class SugarSearchEngineMetadataHelper
      */
     public static function retrieveFtsEnabledFieldsPerModule($module)
     {
-        $results = array();
-        if( is_string($module))
-        {
+        $results = [];
+        if (is_string($module)) {
             $obj = BeanFactory::getBean($module, null);
-            if($obj == null)
-               return FALSE;
-        }
-        else if( is_a($module, 'SugarBean') )
-        {
+            if ($obj == null) {
+                return false;
+            }
+        } elseif (is_a($module, 'SugarBean')) {
             $obj = $module;
-        }
-        else
-        {
+        } else {
             return $results;
         }
 
@@ -115,11 +107,11 @@ class SugarSearchEngineMetadataHelper
 
         $cacheKey = self::FTS_FIELDS_CACHE_KEY_PREFIX . $obj->module_name;
         $cacheResults = sugar_cache_retrieve($cacheKey);
-        if(!empty($cacheResults))
+        if (!empty($cacheResults)) {
             return $cacheResults;
+        }
 
-        foreach($obj->field_defs as $field => $def)
-        {
+        foreach ($obj->field_defs as $field => $def) {
             if (isset($def['full_text_search']) && is_array($def['full_text_search']) && !empty($def['full_text_search']['enabled'])) {
                 $results[$field] = $def;
             }
@@ -127,7 +119,6 @@ class SugarSearchEngineMetadataHelper
 
         sugar_cache_put($cacheKey, $results);
         return $results;
-
     }
 
     /**
@@ -139,20 +130,19 @@ class SugarSearchEngineMetadataHelper
      */
     public static function getUserEnabledFTSModules(User $user = null)
     {
-        if($user == null)
+        if ($user == null) {
             $user = $GLOBALS['current_user'];
+        }
 
         $userDisabled = $user->getPreference('fts_disabled_modules');
-        $userDisabled = explode(",", (string)$userDisabled);
+        $userDisabled = explode(',', (string)$userDisabled);
 
         $enabledModules = self::retrieveFtsEnabledFieldsForAllModules();
         $enabledModules = array_keys($enabledModules);
 
-        $filteredEnabled = array();
-        foreach($enabledModules as $m)
-        {
-            if( ! in_array($m, $userDisabled) )
-            {
+        $filteredEnabled = [];
+        foreach ($enabledModules as $m) {
+            if (!in_array($m, $userDisabled)) {
                 $filteredEnabled[] = $m;
             }
         }
@@ -168,10 +158,10 @@ class SugarSearchEngineMetadataHelper
      */
     public static function isModuleFtsEnabled($module)
     {
-        $GLOBALS['log']->debug("Checking if module is fts enabled");
+        $GLOBALS['log']->debug('Checking if module is fts enabled');
         $enabledModules = self::getSystemEnabledFTSModules();
 
-        return in_array($module, $enabledModules);
+        return safeInArray($module, $enabledModules);
     }
 
     /**

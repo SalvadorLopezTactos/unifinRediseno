@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('uploader-flash', function (Y, NAME) {
 
 /**
@@ -1604,7 +1597,7 @@ Y.UploaderFlash = Y.extend(UploaderFlash, Y.Widget, {
 Y.UploaderFlash.Queue = UploaderQueue;
 
 
-}, '3.15.0', {
+}, '3.18.1', {
     "requires": [
         "swfdetect",
         "escape",

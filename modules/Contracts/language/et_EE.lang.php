@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Lepingud',
-	'LBL_MODULE_NAME_SINGULAR' => 'Leping',
-	'LBL_MODULE_TITLE' => 'Lepingud: avaleht',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Lepingud',
+    'LBL_MODULE_NAME_SINGULAR' => 'Leping',
+    'LBL_MODULE_TITLE' => 'Lepingud: avaleht',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Loo leping',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'Valuuta ID:',
     'LBL_CURRENCY' => 'Valuuta:',
     'LBL_CURRENCY_RATE' => 'Valuutakurss',
-    'LBL_ASSIGNED_TO_NAME'=>'Määratud kasutajale:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Määratud kasutajale:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Lepingute loend',	
+    'LBL_LIST_FORM_TITLE' => 'Lepingute loend',
     'LBL_LIST_CONTRACT_NAME' => 'Lepingu nimi',
     'LBL_LIST_ACCOUNT_NAME' => 'Konto nimi',
     'LBL_LIST_START_DATE' => 'Alusta',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Nimi',
     'LBL_LIST_CONTRACT_VALUE' => 'Väärtus',
 
-    'LBL_TYPE'=>'Tüüp',
+    'LBL_TYPE' => 'Tüüp',
     'LBL_TYPE_NAME' => 'Tüübi nimi',
-    'LBL_CONTRACT_TYPE'=>'Tüüp:',
+    'LBL_CONTRACT_TYPE' => 'Tüüp:',
 
     'LBL_CREATED_USER' => 'Loodud kasutaja',
     'LBL_MODIFIED_USER' => 'Muudetud kasutaja',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Lepingute fookuse sahtel',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Lepingukirjete töölaud',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Lepingu ajaskaala',
+];

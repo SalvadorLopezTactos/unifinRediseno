@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Zdobądź Poufny klucz klienta z IBM SmartCloud, rejestrując swoją instancję Sugar jako nową aplikację.<br>
 &nbsp;<br>
 Etapy rejestracji instancji:<br>
@@ -28,5 +28,4 @@ Etapy rejestracji instancji:<br>
 </td></tr></table>',
     'oauth_consumer_key' => 'Klucz użytkownika OAuth',
     'oauth_consumer_secret' => 'Poufny klucz klienta OAuth',
-);
-
+];

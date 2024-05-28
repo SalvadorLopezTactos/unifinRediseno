@@ -42,12 +42,12 @@ if (!empty($return_module)) {
     ];
     $cancel_location = 'index.php?' . http_build_query($queryData);
 } else {
-    $cancel_location = "index.php?module=Users&action=index";
+    $cancel_location = '';
 }
 
 ?>
 <h2 class="moduleTitle" style="margin-bottom:0;">
-    <?= htmlspecialchars($mod_strings_users['LBL_REASS_SCRIPT_TITLE'], ENT_COMPAT);?>
+    <?= htmlspecialchars($mod_strings_users['LBL_REASS_SCRIPT_TITLE'], ENT_COMPAT); ?>
 </h2>
 <?php
 // Include Metadata for processing
@@ -69,15 +69,26 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
         <table cellspacing="1" cellpadding="1" border="0">
             <tr>
                 <td>
-                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_DESC_PART1'], ENT_COMPAT);?>
+                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_DESC_PART1'], ENT_COMPAT); ?>
                     <br/><br/>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="submit" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CONTINUE'], ENT_COMPAT); ?>" name="steponesubmit"/>
-                    &nbsp;<input type=button class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CLEAR'], ENT_COMPAT); ?>" onclick="clearCurrentRecords();"/>
-                    <input type="button" class="button" value="<?= htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_LABEL'], ENT_COMPAT); ?>" onclick="document.location=<?= htmlspecialchars(json_encode($cancel_location, JSON_HEX_TAG, JSON_HEX_QUOT), ENT_COMPAT); ?>;">
+                    <input type="submit" class="button"
+                           value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CONTINUE'], ENT_COMPAT); ?>"
+                           name="steponesubmit"/>
+                    &nbsp;<input type=button class="button"
+                                 value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CLEAR'], ENT_COMPAT); ?>"
+                                 onclick="clearCurrentRecords();"/>
+                    <input type="button" class="button"
+                           value="<?= htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_LABEL'], ENT_COMPAT); ?>"
+                        <?php if (!empty($cancel_location)) : ?>
+                           onclick="document.location=<?= htmlspecialchars(json_encode($cancel_location, JSON_HEX_TAG, JSON_HEX_QUOT), ENT_COMPAT); ?>"
+                        <?php else : ?>
+                           onclick='if(parent.SUGAR.App) parent.SUGAR.App.router.navigate("#Users", {trigger: true});'
+                        <?php endif; ?>
+                    >
                 </td>
             </tr>
         </table>
@@ -91,7 +102,7 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
                         <?php
                         $all_users = User::getAllUsers();
                         echo get_select_options_with_id($all_users, $_SESSION['reassignRecords']['fromuser'] ?? '');
-                        ?>
+    ?>
                     </select>
                     <br>
                     <br>
@@ -100,11 +111,11 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
                     <select name="touser" id="touser">
                         <?php
                         if (isset($_SESSION['reassignRecords']['fromuser'])
-                            && isset($all_users[$_SESSION['reassignRecords']['fromuser']])) {
+                        && isset($all_users[$_SESSION['reassignRecords']['fromuser']])) {
                             unset($all_users[$_SESSION['reassignRecords']['fromuser']]);
                         }
                         echo get_select_options_with_id($all_users, $_SESSION['reassignRecords']['touser'] ?? '');
-                        ?>
+    ?>
                     </select>
                     <br>
                     <br>
@@ -117,11 +128,12 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
                     $sqs_objects = $teamSetField->getClassicViewQS();
 
                     echo $teamSetField->getClassicView();
-                    ?>
+    ?>
                     <br>
                     <?= htmlspecialchars($mod_strings_users['LBL_REASS_MOD_REASSIGN'], ENT_COMPAT); ?>
                     <br>
-                    <select size="6" name="modules[]" multiple="true" id="modulemultiselect" onchange="updateDivDisplay(this);">
+                    <select size="6" name="modules[]" multiple="true" id="modulemultiselect"
+                            onchange="updateDivDisplay(this);">
                         <?= getModuleMultiSelectOptions(); ?>
                     </select>
                     <br>
@@ -131,69 +143,81 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
                 <td>
                     <?php
                     foreach ($moduleFilters as $modFilter => $fieldArray) :
-                        $display = !empty($fieldArray['display_default']) ? "block" : "none";
+                        $display = !empty($fieldArray['display_default']) ? 'block' : 'none';
                         //Leon bug 20739
                         $t_mod_strings = return_module_language($GLOBALS['current_language'], $modFilter);
                         ?>
-                    <div id="reassign_<?= htmlspecialchars($modFilter, ENT_COMPAT);?>" style="display:<?= htmlspecialchars($display, ENT_COMPAT);?>">
-                        <h5 style="padding-left:0; margin-bottom:4px;">
-                            <?= htmlspecialchars($app_list_strings['moduleList'][$modFilter], ENT_COMPAT);?> <?= htmlspecialchars($mod_strings_users['LBL_REASS_FILTERS'], ENT_COMPAT);?>
-                        </h5>
-                        <?php
-                        foreach ($fieldArray['fields'] as $meta) :
-                            $multi = '';
-                            $name = !empty($meta['name']) ? $meta['name'] : '';
-                            $sizeHtml = !empty($meta['size']) ? 'size="' . intval($meta['size']) . '"' : '';
-                            //Leon bug 20739
-                            ?>
-                            <?= htmlspecialchars($t_mod_strings[$meta['vname']], ENT_COMPAT);?><br>
+                        <div id="reassign_<?= htmlspecialchars($modFilter, ENT_COMPAT); ?>"
+                             style="display:<?= htmlspecialchars($display, ENT_COMPAT); ?>">
+                            <h5 style="padding-left:0; margin-bottom:4px;">
+                                <?= htmlspecialchars($app_list_strings['moduleList'][$modFilter], ENT_COMPAT); ?> <?= htmlspecialchars($mod_strings_users['LBL_REASS_FILTERS'], ENT_COMPAT); ?>
+                            </h5>
                             <?php
-                            $extraHtml = '';
-                            switch ($meta['type']) {
-                                case 'text':
-                                    $tag = 'input';
-                                    break;
-                                case 'multiselect':
-                                    $multi = 'multiple';
-                                    $name .= '[]';
-                                // NO BREAK - Continue into select
-                                case 'select':
-                                    $tag = 'select';
-                                    $sel = '';
-                                    if (!empty($_SESSION['reassignRecords']['filters'][$meta['name']])) {
-                                        $sel = $_SESSION['reassignRecords']['filters'][$meta['name']];
-                                    }
-                                    $extraHtml = get_select_options_with_id($meta['dropdown'], $sel);
-                                    $extraHtml .= "\n</select>";
-                                    break;
-                                default:
-                                    continue 2;
-                            }
-                            ?>
-                            <<?= htmlspecialchars($tag, ENT_COMPAT);?> <?=$sizeHtml;?> name="<?= htmlspecialchars($name, ENT_COMPAT);?>" <?= htmlspecialchars($multi, ENT_COMPAT);?>>
-                            <?=$extraHtml;?>
-                            <br>
-                            <?php
-                        endforeach;
-                        ?>
-                    </div>
-                        <?php
+                            foreach ($fieldArray['fields'] as $meta) :
+                                $multi = '';
+                                $name = !empty($meta['name']) ? $meta['name'] : '';
+                                $sizeHtml = !empty($meta['size']) ? 'size="' . intval($meta['size']) . '"' : '';
+                                //Leon bug 20739
+                                ?>
+                                <?= htmlspecialchars($t_mod_strings[$meta['vname']], ENT_COMPAT); ?><br>
+                                <?php
+                                $extraHtml = '';
+                                switch ($meta['type']) {
+                                    case 'text':
+                                        $tag = 'input';
+                                        break;
+                                    case 'multiselect':
+                                        $multi = 'multiple';
+                                        $name .= '[]';
+                                        // no break - Continue into select
+                                    case 'select':
+                                        $tag = 'select';
+                                        $sel = '';
+                                        if (!empty($_SESSION['reassignRecords']['filters'][$meta['name']])) {
+                                            $sel = $_SESSION['reassignRecords']['filters'][$meta['name']];
+                                        }
+                                        $extraHtml = get_select_options_with_id($meta['dropdown'], $sel);
+                                        $extraHtml .= "\n</select>";
+                                        break;
+                                    default:
+                                        continue 2;
+                                }
+                                ?>
+                                <<?= htmlspecialchars($tag, ENT_COMPAT); ?> <?= $sizeHtml; ?> name="<?= htmlspecialchars($name, ENT_COMPAT); ?>" <?= htmlspecialchars($multi, ENT_COMPAT); ?>>
+                                <?= $extraHtml; ?>
+                                <br>
+<?php
+                            endforeach;
+                                        ?>
+                                        </div>
+                                                    <?php
                     endforeach;
-                    ?>
+    ?>
                 </td>
             </tr>
         </table>
         <table cellspacing="1" cellpadding="1" border="0">
             <tr>
                 <td>
-                    <input type="submit" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CONTINUE'], ENT_COMPAT); ?>" name="steponesubmit">
-                    <input type="button" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CLEAR'], ENT_COMPAT); ?>" onclick="clearCurrentRecords();">
-                    <input type="button" class="button" value="<?= htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_LABEL'], ENT_COMPAT); ?>" onclick="document.location=<?= htmlspecialchars(json_encode($cancel_location, JSON_HEX_TAG, JSON_HEX_QUOT), ENT_COMPAT); ?>">
+                    <input type="submit" class="button"
+                           value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CONTINUE'], ENT_COMPAT); ?>"
+                           name="steponesubmit">
+                    <input type="button" class="button"
+                           value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CLEAR'], ENT_COMPAT); ?>"
+                           onclick="clearCurrentRecords();">
+                    <input type="button" class="button"
+                           value="<?= htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_LABEL'], ENT_COMPAT); ?>"
+                        <?php if (!empty($cancel_location)) : ?>
+                           onclick="document.location=<?= htmlspecialchars(json_encode($cancel_location, JSON_HEX_TAG, JSON_HEX_QUOT), ENT_COMPAT); ?>"
+                        <?php else : ?>
+                           onclick='if(parent.SUGAR.App) parent.SUGAR.App.router.navigate("#Users", {trigger: true});'
+                        <?php endif; ?>
+                    >
                 </td>
             </tr>
         </table>
     </form>
-    <?php
+<?php
 else :
     if (empty($_GET['execute'])) :
         $modules = InputValidation::getService()
@@ -211,7 +235,7 @@ else :
         }
 
         global $current_user;
-// Set the from and to user names so that we can display them in the results
+        // Set the from and to user names so that we can display them in the results
         $result = $db->getConnection()
             ->executeQuery(
                 'SELECT user_name, id FROM users WHERE id IN (?)',
@@ -228,7 +252,7 @@ else :
             }
         }
 
-//rrs bug: 31056 - instead of setting the team_id let's set the team_set_id and set the team_id as the primary
+        //rrs bug: 31056 - instead of setting the team_id let's set the team_set_id and set the team_id as the primary
         $sugarFieldTeamSet = new SugarFieldTeamset('Teamset');
         $teams = $sugarFieldTeamSet->getTeamsFromRequest('team_name');
         $team_ids = array_keys($teams);
@@ -239,85 +263,90 @@ else :
 
         $toteamname = TeamSetManager::getCommaDelimitedTeams($team_set_id, $team_id, true);
         ?>
-        <?= htmlspecialchars($mod_strings_users['LBL_REASS_DESC_PART2'], ENT_COMPAT);?>
-<form action="index.php?module=Users&action=reassignUserRecords&execute=true" method="post">
-    <br><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_TITLE'], ENT_COMPAT);?>
-    <ul>
-        <li><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_ONE'], ENT_COMPAT);?></li>
-        <li><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_TWO'], ENT_COMPAT);?></li>
-        <li><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_THREE'], ENT_COMPAT);?></li>
-    </ul>
-        <?php
-        require_once 'include/SugarSmarty/plugins/function.sugar_help.php';
-        $sugar_smarty = new Sugar_Smarty();
-        $help_img = smarty_function_sugar_help(["text" => $mod_strings['LBL_REASS_VERBOSE_HELP']], $sugar_smarty);
-        ?>
-    <br>
-    <input type="checkbox" name="verbose">
-        <?= htmlspecialchars($mod_strings_users['LBL_REASS_VERBOSE_OUTPUT'], ENT_COMPAT);?>
-        <?=$help_img;?>
-    <br>
-        <?php
-        unset($_SESSION['reassignRecords']['modules']);
-        unset($_SESSION['reassignRecords']['POST']);
-        $_SESSION['reassignRecords']['POST'] = $_POST;
-
-        $beanListFlip = $_SESSION['reassignRecords']['assignedModuleListCache'];
-
-        $_SESSION['reassignRecords']['toteam'] = $team_id;
-        $_SESSION['reassignRecords']['toteamsetid'] = $team_set_id;
-        $_SESSION['reassignRecords']['toteamname'] = $toteamname;
-        $_SESSION['reassignRecords']['fromuser'] = $fromuser;
-        $_SESSION['reassignRecords']['touser'] = $touser;
-        $_SESSION['reassignRecords']['fromusername'] = $fromusername;
-        $_SESSION['reassignRecords']['tousername'] = $tousername;
-
-        foreach ($modules as $module) :
-            if ($beanListFlip instanceof \ArrayObject) {
-                $beanListFlip = $beanListFlip->getArrayCopy();
-            }
-            if (empty($beanListFlip) || !is_array($beanListFlip) || !array_key_exists($module, $beanListFlip)) {
-                continue;
-            }
-
-            $object = BeanFactory::newBean($module);
-
-            if (empty($object->table_name)) {
-                continue;
-            }
-
-            $moduleLabel = $app_list_strings['moduleList'][$module] ?? $module;
-            ?>
-            <h5>
-                <?= htmlspecialchars($mod_strings_users['LBL_REASS_ASSESSING'], ENT_COMPAT); ?> <?= htmlspecialchars($moduleLabel, ENT_COMPAT); ?>
-            </h5>
-            <table border="0" cellspacing="0" cellpadding="0" class="detail view">
-                <tr>
-                    <td>
-                        <?php
-                        [$q_tables, $q_where] = processConditions($object, $fromuser, $moduleFilters, $module, $_POST);
-                        $_SESSION['reassignRecords']['modules']['list'][] = $module;
-                        $count = $db->getOne("SELECT COUNT(*) AS count FROM $q_tables $q_where");
-                        ?>
-                        <?= $count; ?>
-                        <?= htmlspecialchars($mod_strings_users['LBL_REASS_RECORDS_FROM'], ENT_COMPAT); ?>
-                        <?= htmlspecialchars($moduleLabel, ENT_COMPAT); ?>
-                        <?= htmlspecialchars($mod_strings_users['LBL_REASS_WILL_BE_UPDATED'], ENT_COMPAT); ?>
-                        <br>
-                        <input type="checkbox" name="<?= htmlspecialchars($module, ENT_COMPAT); ?>_workflow">
-                        <?= htmlspecialchars($mod_strings_users['LBL_REASS_WORK_NOTIF_AUDIT'], ENT_COMPAT); ?>
-                        <br>
-                    </td>
-                </tr>
-            </table>
+        <?= htmlspecialchars($mod_strings_users['LBL_REASS_DESC_PART2'], ENT_COMPAT); ?>
+        <form action="index.php?module=Users&action=reassignUserRecords&execute=true" method="post">
+            <br><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_TITLE'], ENT_COMPAT); ?>
+            <ul>
+                <li><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_ONE'], ENT_COMPAT); ?></li>
+                <li><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_TWO'], ENT_COMPAT); ?></li>
+                <li><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_THREE'], ENT_COMPAT); ?></li>
+            </ul>
             <?php
-        endforeach;
+            require_once 'include/SugarSmarty/plugins/function.sugar_help.php';
+            $sugar_smarty = new Sugar_Smarty();
+            $help_img = smarty_function_sugar_help(['text' => $mod_strings['LBL_REASS_VERBOSE_HELP']], $sugar_smarty);
         ?>
-    <br><input type="button" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_GO_BACK'], ENT_COMPAT);?>" onclick="document.location='index.php?module=Users&action=reassignUserRecords';">
-    &nbsp;<input type="submit" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CONTINUE'], ENT_COMPAT);?>">
-    &nbsp;<input type="button" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_RESTART'], ENT_COMPAT);?>" onclick="document.location='index.php?module=Users&action=reassignUserRecords&clear=true';">
-</form>
-        <?php
+            <br>
+            <input type="checkbox" name="verbose">
+            <?= htmlspecialchars($mod_strings_users['LBL_REASS_VERBOSE_OUTPUT'], ENT_COMPAT); ?>
+            <?= $help_img; ?>
+            <br>
+            <?php
+            unset($_SESSION['reassignRecords']['modules']);
+            unset($_SESSION['reassignRecords']['POST']);
+            $_SESSION['reassignRecords']['POST'] = $_POST;
+
+            $beanListFlip = $_SESSION['reassignRecords']['assignedModuleListCache'];
+
+            $_SESSION['reassignRecords']['toteam'] = $team_id;
+            $_SESSION['reassignRecords']['toteamsetid'] = $team_set_id;
+            $_SESSION['reassignRecords']['toteamname'] = $toteamname;
+            $_SESSION['reassignRecords']['fromuser'] = $fromuser;
+            $_SESSION['reassignRecords']['touser'] = $touser;
+            $_SESSION['reassignRecords']['fromusername'] = $fromusername;
+            $_SESSION['reassignRecords']['tousername'] = $tousername;
+
+            foreach ($modules as $module) :
+                if ($beanListFlip instanceof \ArrayObject) {
+                    $beanListFlip = $beanListFlip->getArrayCopy();
+                }
+                if (empty($beanListFlip) || !is_array($beanListFlip) || !array_key_exists($module, $beanListFlip)) {
+                    continue;
+                }
+
+                $object = BeanFactory::newBean($module);
+
+                if (empty($object->table_name)) {
+                    continue;
+                }
+
+                $moduleLabel = $app_list_strings['moduleList'][$module] ?? $module;
+                ?>
+                <h5>
+                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_ASSESSING'], ENT_COMPAT); ?> <?= htmlspecialchars($moduleLabel, ENT_COMPAT); ?>
+                </h5>
+                <table border="0" cellspacing="0" cellpadding="0" class="detail view">
+                    <tr>
+                        <td>
+                            <?php
+                            [$q_tables, $q_where] = processConditions($object, $fromuser, $moduleFilters, $module, $_POST);
+                            $_SESSION['reassignRecords']['modules']['list'][] = $module;
+                            $count = $db->getOne("SELECT COUNT(*) AS count FROM $q_tables $q_where");
+                    ?>
+                            <?= $count; ?>
+                            <?= htmlspecialchars($mod_strings_users['LBL_REASS_RECORDS_FROM'], ENT_COMPAT); ?>
+                            <?= htmlspecialchars($moduleLabel, ENT_COMPAT); ?>
+                            <?= htmlspecialchars($mod_strings_users['LBL_REASS_WILL_BE_UPDATED'], ENT_COMPAT); ?>
+                            <br>
+                            <input type="checkbox" name="<?= htmlspecialchars($module, ENT_COMPAT); ?>_workflow">
+                            <?= htmlspecialchars($mod_strings_users['LBL_REASS_WORK_NOTIF_AUDIT'], ENT_COMPAT); ?>
+                            <br>
+                        </td>
+                    </tr>
+                </table>
+                <?php
+            endforeach;
+        ?>
+            <br><input type="button" class="button"
+                       value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_GO_BACK'], ENT_COMPAT); ?>"
+                       onclick="document.location='index.php?module=Users&action=reassignUserRecords';">
+            &nbsp;<input type="submit" class="button"
+                         value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CONTINUE'], ENT_COMPAT); ?>">
+            &nbsp;<input type="button" class="button"
+                         value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_RESTART'], ENT_COMPAT); ?>"
+                         onclick="document.location='index.php?module=Users&action=reassignUserRecords&clear=true';">
+        </form>
+    <?php
     else :
         $fromuser = $_SESSION['reassignRecords']['fromuser'];
         $touser = $_SESSION['reassignRecords']['touser'];
@@ -355,22 +384,22 @@ else :
 
             $moduleLabel = $app_list_strings['moduleList'][$module] ?? $module;
 
-            $workflow = !empty($_POST[$module . "_workflow"]);
+            $workflow = !empty($_POST[$module . '_workflow']);
             ?>
             <h5>
-                <?= htmlspecialchars($mod_strings_users['LBL_PROCESSING'], ENT_COMPAT);?> <?= htmlspecialchars($moduleLabel, ENT_COMPAT);?>
+                <?= htmlspecialchars($mod_strings_users['LBL_PROCESSING'], ENT_COMPAT); ?> <?= htmlspecialchars($moduleLabel, ENT_COMPAT); ?>
             </h5>
             <?php
 
-            $q_set = " SET assigned_user_id = " . $db->quoted($touser) . ", " .
+            $q_set = ' SET assigned_user_id = ' . $db->quoted($touser) . ', ' .
                 "date_modified = '" . TimeDate::getInstance()->nowDb() . "'";
 
-//@todo  $obj is defined inside function getModuleMultiSelectOptions()
+            //@todo  $obj is defined inside function getModuleMultiSelectOptions()
             if (isset($object->field_defs['modified_user_id'])) {
                 $q_set .= ', modified_user_id = ' . $db->quoted($current_user->id);
             }
 
-//make sure team_id and team_set_id columns are available
+            //make sure team_id and team_set_id columns are available
             if (!empty($team_id) && isset($object->field_defs['team_id'])) {
                 $q_set .= sprintf(
                     ', team_id = %s, team_set_id = %s ',
@@ -503,7 +532,7 @@ HTML;
                                 }
                             }
 
-                            if (isset($_POST['verbose']) && $_POST['verbose'] == "on") {
+                            if (isset($_POST['verbose']) && $_POST['verbose'] == 'on') {
                                 ?>
                                 <h5>
                                     <?= htmlspecialchars($mod_strings_users['LBL_REASS_THE_FOLLOWING'], ENT_COMPAT); ?>
@@ -536,24 +565,26 @@ HTML;
                                 }
                             } else {
                                 echo htmlspecialchars($mod_strings_users['LBL_REASS_UPDATE_COMPLETE'], ENT_COMPAT) . '<br>';
-                                echo '&nbsp;&nbsp;' . count($succeed) . ' ' . htmlspecialchars($mod_strings_users['LBL_REASS_SUCCESSFUL'], ENT_COMPAT) . '<br>';
-                                echo '&nbsp;&nbsp;' . count($failed) . ' ' . htmlspecialchars($mod_strings_users['LBL_REASS_FAILED'], ENT_COMPAT);
+                                echo '&nbsp;&nbsp;' . safeCount($succeed) . ' ' . htmlspecialchars($mod_strings_users['LBL_REASS_SUCCESSFUL'], ENT_COMPAT) . '<br>';
+                                echo '&nbsp;&nbsp;' . safeCount($failed) . ' ' . htmlspecialchars($mod_strings_users['LBL_REASS_FAILED'], ENT_COMPAT);
                             }
                             ?>
                             <br>
-                            <?php
+                        <?php
                         endif;
-                        ?>
+            ?>
                     </td>
                 </tr>
             </table>
-            <?php
+        <?php
         endforeach;
         Activity::restoreToPreviousState();
         ?>
         <br>
-        <input type="button" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_RETURN'], ENT_COMPAT); ?>" onclick="document.location='index.php?module=Users&action=reassignUserRecords'">
-        <?php
+        <input type="button" class="button"
+               value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_RETURN'], ENT_COMPAT); ?>"
+               onclick="document.location='index.php?module=Users&action=reassignUserRecords'">
+    <?php
     endif;
 endif;
 if (!empty($sqs_objects)) {

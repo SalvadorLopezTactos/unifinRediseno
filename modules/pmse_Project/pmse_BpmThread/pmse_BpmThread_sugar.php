@@ -15,40 +15,42 @@
  * PLEASE DO NOT CHANGE THIS CLASS
  * PLACE ANY CUSTOMIZATIONS IN pmse_BpmThread
  */
-class pmse_BpmThread_sugar extends Basic {
-	var $new_schema = true;
-	var $module_dir = 'pmse_Project/pmse_BpmThread';
+class pmse_BpmThread_sugar extends Basic
+{
+    public $new_schema = true;
+    public $module_dir = 'pmse_Project/pmse_BpmThread';
     public $module_name = 'pmse_BpmThread';
-	var $object_name = 'pmse_BpmThread';
-	var $table_name = 'pmse_bpm_thread';
-	var $importable = false;
-    var $disable_custom_fields = true;
-    var $id;
-    var $name;
-    var $date_entered;
-    var $date_modified;
-    var $modified_user_id;
-    var $modified_by_name;
-    var $created_by;
-    var $created_by_name;
-    var $description;
-    var $deleted;
-    var $created_by_link;
-    var $modified_user_link;
-    var $activities;
-    var $assigned_user_id;
-    var $assigned_user_name;
-    var $assigned_user_link;
-    var $cas_id;
-    var $cas_thread_index;
-    var $cas_thread_parent;
-    var $cas_thread_status;
-    var $cas_flow_index;
-    var $cas_thread_tokens;
-    var $cas_thread_passes;
+    public $object_name = 'pmse_BpmThread';
+    public $table_name = 'pmse_bpm_thread';
+    public $importable = false;
+    public $disable_custom_fields = true;
+    public $id;
+    public $name;
+    public $date_entered;
+    public $date_modified;
+    public $modified_user_id;
+    public $modified_by_name;
+    public $created_by;
+    public $created_by_name;
+    public $description;
+    public $deleted;
+    public $created_by_link;
+    public $modified_user_link;
+    public $activities;
+    public $assigned_user_id;
+    public $assigned_user_name;
+    public $assigned_user_link;
+    public $cas_id;
+    public $cas_thread_index;
+    public $cas_thread_parent;
+    public $cas_thread_status;
+    public $cas_flow_index;
+    public $cas_thread_tokens;
+    public $cas_thread_passes;
 
 
-	public function __construct(){
-		parent::__construct();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 }

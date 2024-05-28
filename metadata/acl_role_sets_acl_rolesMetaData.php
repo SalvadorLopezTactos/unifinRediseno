@@ -10,58 +10,58 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['acl_role_sets_acl_roles'] = array(
+$dictionary['acl_role_sets_acl_roles'] = [
     'table' => 'acl_role_sets_acl_roles',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'vname' => 'LBL_ID',
             'type' => 'id',
             'required' => true,
-        ),
-        'acl_role_set_id' => array(
+        ],
+        'acl_role_set_id' => [
             'name' => 'acl_role_set_id',
             'type' => 'id',
-        ),
-        'acl_role_id' => array(
+        ],
+        'acl_role_id' => [
             'name' => 'acl_role_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'idx_rsr_id',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_rsr_set_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'acl_role_set_id',
                 'acl_role_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_rsr_role_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'acl_role_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'acl_role_sets_acl_roles' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'acl_role_sets_acl_roles' => [
             'lhs_module' => 'ACLRoleSets',
             'lhs_table' => 'acl_role_sets',
             'lhs_key' => 'id',
@@ -72,6 +72,6 @@ $dictionary['acl_role_sets_acl_roles'] = array(
             'join_table' => 'acl_role_sets_roles',
             'join_key_lhs' => 'acl_role_set_id',
             'join_key_rhs' => 'acl_role_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

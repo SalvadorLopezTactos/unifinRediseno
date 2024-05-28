@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Instrumentpanel med lista över möjligheter',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Instrumentpanel med poster över möjligheter',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Offerter',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Möjligheter med ett dynamiskt konto',
+    'LBL_TOP_10_OPP' => 'Topp 10 öppna möjligheter',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Dashlet: Mina aktiva möjligheter',
+    'LBL_MY_ACTIVE_OPP' => 'Mina aktiva möjligheter',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Pipeline Totalt är',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Affärsmöjlighetsroll',
+    'LBL_OPPORTUNITY_ROLE' => 'Affärsmöjlighetsroll',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Anteckningar',
     'LBL_TAB_OPPORTUNITY' => '{{module}} recension',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'Genom att klicka på Godkänn tar du bort ALL Prognosdata och förändrar Affärsmöjlighetsvyn. Om inte detta är vad du vill, tryck på avbryt för att gå tillbaka till tidigare inställningar.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'Genom att klicka på bekräfta, kommer du att radera alla prognosdata och ändra vyn Möjligheter. '
-        .'Också alla processdefinitioner med en träffmodul för inkomstbringande artiklar kommer att inaktiveras. '
-        .'Om detta inte är vad du tänkte gära, klicka på Avbryt för att återgå till föregående inställningar.',
+        . 'Också alla processdefinitioner med en träffmodul för inkomstbringande artiklar kommer att inaktiveras. '
+        . 'Om detta inte är vad du tänkte gära, klicka på Avbryt för att återgå till föregående inställningar.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Om alla Inkomstposter är stängda och minst en vanns.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'Affärsmöjlighetens säljfas är satt till "Stängd vunnen".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Om alla Inkomstposter är i försäljningsskedet "Stängd förlorad",',
@@ -220,19 +223,19 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Efter att förändringen påbörjas kommer Inkomstposter att skapas för varje {{module_name}} i bakgrunden. När de är klara och tillgängliga kommer du att få ett meddelande till mailadressen på din profil. Obs. att din instans måste vara inställd på att skicka email via Admin -> Emailinställningar för att meddelanden ska kunna skickas.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Med {{plural_module_name}} modulen kan du spåra individuell försäljning från början till slut. Varje {{module_name}} post representerar en potentiell försäljning och innehåller relevant försäljningsdata samt relaterar till andra viktiga poster som {{quotes_module}}, {{contacts_module}}etc. En {{module_name}} går vanligtvis igenom flera försäljningssteg tills den är markerad antingen "Stängd Vunnen" eller "Stängd Förlorad". {{plural_module_name}} kan utnyttjas ytterligare genom att använda Sugars {{forecasts_singular_module}}ing-modul för att förstå och förutsäga försäljningstrender samt fokusera arbetet för att uppnå försäljningskvoter.',
+    'LBL_HELP_RECORDS' => 'Med modulen {{plural_module_name}} kan du spåra enskilda försäljningar från början till slut. Varje {{module_name}}-post representerar en möjlig försäljning och innefattar relevant försäljningsdata samt relaterar till andra viktiga poster som {{quotes_module}}, {{contacts_module}}, osv. En {{module_name}} går vanligtvis igenom flera försäljningsetapper tills den markeras som antingen "Stängd vunnen" eller "Stängd förlorad". {{plural_module_name}} kan utnyttjas vidare genom att använda Sugars {{forecasts_singular_module}}-modul för att förstå och förutsäga försäljningstrender samt inrikta arbetet för att uppnå försäljningskvoter.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Med {{plural_module_name}}-modulen kan du följa enskilda försäljningar och tillhörande radartiklar från början till slut. Varje {{module_name}}-post representerar en potentiell försäljning och inkluderar relevant säljdata och kopplingar till andra viktiga poster som {{quotes_module}}, {{contacts_module}} etc.
+    'LBL_HELP_RECORD' => 'Med modulen {{plural_module_name}} kan du spåra enskilda försäljningar och de radartiklar som tillhör dessa försäljningar från början till slut. Varje {{module_name}}-post representerar en möjlig försäljning och innefattar relevant försäljningsdata samt kopplingar till andra viktiga poster som {{quotes_module}}, {{contacts_module}} osv.
 
-- Redigera den här postens fält genom att klicka på ett enskilt fält eller redigeringsknappen.
-- Visa eller ändra länkar till andra poster i underpanelerna genom att växla den nedre vänstra rutan till ”Datavy”.
-- Kommentera och visa användarkommentarer och historik över poständringar i {{activitystream_singular_module}} genom att växla den nedre vänstra rutan till ”Aktivitetsflöde”.
-- Följ eller favoritmarkera denna post med hjälp av ikonerna till höger om postens namn.
-- Ytterligare åtgärder är tillgängliga i rullgardingsmenyn Åtgärder till höger om redigeringsknappen.',
+- Redigera fälten för denna post genom att klicka på ett enskilt fält eller Redigeringsknappen.
+- Visa eller ändra länkar till andra poster i subpanelerna genom att växla panelen längst ner till vänster till "Datavy".
+- Skapa och visa användarkommentarer och historik över poständring i {{activitystream_singular_module}} genom att växla panelen längst ner till vänster till "Aktivitetsströmning".
+- Följ eller gilla denna post med ikonerna till höger om postnamnet.
+- Ytterligare åtgärder finns tillgängliga i rullgardinsmenyn Åtgärder till höger om Redigeringsknappen.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modulen {{plural_module_name}} låter dig spåra enskilda försäljningar och de radartiklar som hör till dessa försäljningar från början till slut. Varje {{module_name}}-post representerar en potentiell försäljning och innehåller relevanta försäljningsdata samt kopplingar till andra viktiga poster som {{quotes_module}}, {{contacts_module}} etc.
+    'LBL_HELP_CREATE' => 'Med modulen {{plural_module_name}} kan du spåra enskilda försäljningar och de radartiklar som tillhör dessa försäljningar från början till slut. Varje {{module_name}}-post representerar en möjlig försäljning och innehåller relevanta försäljningsdata samt kopplingar till andra viktiga poster som {{quotes_module}}, {{contacts_module}} osv.
 
 För att skapa en {{module_name}}:
 1. Ange värden för fälten efter önskemål.
@@ -260,4 +263,9 @@ För att skapa en {{module_name}}:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Affärsmöjlighet nära förutsägelse',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Visa förutsägelseinformation för en specifik affärsmöjlighet',
-);
+    'LBL_AI_WINRATE' => 'Vinstandel',
+    'LBL_AI_WONOPP' => 'Vunna affärsmöjligheter',
+    'LBL_AI_CLOSINGTIME' => 'Stängningstid',
+    'LBL_AI_CLOSEDOPP' => 'Stängda affärsmöjligheter',
+    'LBL_AI_LEADTIMESPAN' => 'Tid mellan skapande av affärsmöjlighet och stängd vinst',
+];

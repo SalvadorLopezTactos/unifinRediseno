@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'baza e njohurisë',
     'LBL_MODULE_NAME_SINGULAR' => 'Artikuj të bazës së nojurive',
     'LBL_MODULE_TITLE' => 'Artikuj të bazës së nojurive',
     'LBL_REVISIONS_SUBPANEL_TITLE' => 'Revizionet',
-);
+];

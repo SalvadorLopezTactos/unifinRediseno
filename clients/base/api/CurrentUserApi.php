@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/Users/password_utils.php');
+require_once 'modules/Users/password_utils.php';
 
 use Sugarcrm\Sugarcrm\Entitlements\Subscription;
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
@@ -21,6 +21,8 @@ use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
 use Sugarcrm\Sugarcrm\SugarCloud\Discovery;
 use Sugarcrm\Sugarcrm\SugarCloud\UserApi;
+use Sugarcrm\Sugarcrm\FeatureToggle\FeatureFlag;
+use Sugarcrm\Sugarcrm\FeatureToggle\Features\UserDownloadsHideOpiWpiPlugins;
 
 class CurrentUserApi extends SugarApi
 {
@@ -34,7 +36,7 @@ class CurrentUserApi extends SugarApi
      *
      * @var array
      */
-    protected $userPrefMeta = array(
+    protected $userPrefMeta = [
         'timezone' => 'timezone',
         'datef' => 'datepref',
         'timef' => 'timepref',
@@ -53,121 +55,121 @@ class CurrentUserApi extends SugarApi
         'mobile_notification_on_mention' => 'mobile_notification_on_mention',
         'appearance' => 'appearance',
         'number_pinned_modules' => 'number_pinned_modules',
-    );
+    ];
 
-    public const TYPE_ADMIN = "admin";
-    public const TYPE_USER = "user";
+    public const TYPE_ADMIN = 'admin';
+    public const TYPE_USER = 'user';
 
     public function registerApiRest()
     {
-        return array(
-            'retrieve' => array(
+        return [
+            'retrieve' => [
                 'reqType' => 'GET',
-                'path' => array('me',),
-                'pathVars' => array(),
+                'path' => ['me',],
+                'pathVars' => [],
                 'method' => 'retrieveCurrentUser',
                 'shortHelp' => 'Returns current user',
                 'longHelp' => 'include/api/help/me_get_help.html',
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
                 'noEtag' => true,
-            ),
-            'update' => array(
+            ],
+            'update' => [
                 'reqType' => 'PUT',
-                'path' => array('me',),
-                'pathVars' => array(),
+                'path' => ['me',],
+                'pathVars' => [],
                 'method' => 'updateCurrentUser',
                 'shortHelp' => 'Updates current user',
                 'longHelp' => 'include/api/help/me_put_help.html',
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
-            ),
-            'updatePassword' =>  array(
+            ],
+            'updatePassword' => [
                 'reqType' => 'PUT',
-                'path' => array('me','password'),
-                'pathVars'=> array(''),
+                'path' => ['me', 'password'],
+                'pathVars' => [''],
                 'method' => 'updatePassword',
                 'shortHelp' => "Updates current user's password",
                 'longHelp' => 'include/api/help/me_password_put_help.html',
                 'ignoreSystemStatusError' => true,
-            ),
-            'verifyPassword' =>  array(
+            ],
+            'verifyPassword' => [
                 'reqType' => 'POST',
-                'path' => array('me','password'),
-                'pathVars'=> array(''),
+                'path' => ['me', 'password'],
+                'pathVars' => [''],
                 'method' => 'verifyPassword',
                 'shortHelp' => "Verifies current user's password",
                 'longHelp' => 'include/api/help/me_password_post_help.html',
                 'ignoreSystemStatusError' => true,
-            ),
+            ],
 
-            'userPreferences' =>  array(
+            'userPreferences' => [
                 'reqType' => 'GET',
-                'path' => array('me','preferences'),
-                'pathVars'=> array(),
+                'path' => ['me', 'preferences'],
+                'pathVars' => [],
                 'method' => 'userPreferences',
                 'shortHelp' => "Returns all the current user's stored preferences",
                 'longHelp' => 'include/api/help/me_preferences_get_help.html',
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
-            ),
+            ],
 
-            'userPreferencesSave' =>  array(
+            'userPreferencesSave' => [
                 'reqType' => 'PUT',
-                'path' => array('me','preferences'),
-                'pathVars'=> array(),
+                'path' => ['me', 'preferences'],
+                'pathVars' => [],
                 'method' => 'userPreferencesSave',
-                'shortHelp' => "Mass Save Updated Preferences For a User",
+                'shortHelp' => 'Mass Save Updated Preferences For a User',
                 'longHelp' => 'include/api/help/me_preferences_put_help.html',
                 'ignoreSystemStatusError' => true,
-            ),
+            ],
 
-            'userPreference' =>  array(
+            'userPreference' => [
                 'reqType' => 'GET',
-                'path' => array('me','preference', '?'),
-                'pathVars'=> array('', '', 'preference_name'),
+                'path' => ['me', 'preference', '?'],
+                'pathVars' => ['', '', 'preference_name'],
                 'method' => 'userPreference',
-                'shortHelp' => "Returns a specific preference for the current user",
+                'shortHelp' => 'Returns a specific preference for the current user',
                 'longHelp' => 'include/api/help/me_preference_preference_name_get_help.html',
                 'ignoreSystemStatusError' => true,
-            ),
+            ],
 
-            'userPreferenceCreate' =>  array(
+            'userPreferenceCreate' => [
                 'reqType' => 'POST',
-                'path' => array('me','preference', '?'),
-                'pathVars'=> array('', '', 'preference_name'),
+                'path' => ['me', 'preference', '?'],
+                'pathVars' => ['', '', 'preference_name'],
                 'method' => 'userPreferenceSave',
-                'shortHelp' => "Create a preference for the current user",
+                'shortHelp' => 'Create a preference for the current user',
                 'longHelp' => 'include/api/help/me_preference_preference_name_post_help.html',
                 'ignoreSystemStatusError' => true,
-            ),
-            'userPreferenceUpdate' =>  array(
+            ],
+            'userPreferenceUpdate' => [
                 'reqType' => 'PUT',
-                'path' => array('me','preference', '?'),
-                'pathVars'=> array('', '', 'preference_name'),
+                'path' => ['me', 'preference', '?'],
+                'pathVars' => ['', '', 'preference_name'],
                 'method' => 'userPreferenceSave',
-                'shortHelp' => "Update a specific preference for the current user",
+                'shortHelp' => 'Update a specific preference for the current user',
                 'longHelp' => 'include/api/help/me_preference_preference_name_put_help.html',
                 'ignoreSystemStatusError' => true,
-            ),
-            'userPreferenceDelete' =>  array(
+            ],
+            'userPreferenceDelete' => [
                 'reqType' => 'DELETE',
-                'path' => array('me','preference', '?'),
-                'pathVars'=> array('', '', 'preference_name'),
+                'path' => ['me', 'preference', '?'],
+                'pathVars' => ['', '', 'preference_name'],
                 'method' => 'userPreferenceDelete',
-                'shortHelp' => "Delete a specific preference for the current user",
+                'shortHelp' => 'Delete a specific preference for the current user',
                 'longHelp' => 'include/api/help/me_preference_preference_name_delete_help.html',
                 'ignoreSystemStatusError' => true,
-            ),
-            'getMyFollowedRecords' => array(
+            ],
+            'getMyFollowedRecords' => [
                 'reqType' => 'GET',
-                'path' => array('me','following'),
-                'pathVars' => array('',''),
+                'path' => ['me', 'following'],
+                'pathVars' => ['', ''],
                 'method' => 'getMyFollowedRecords',
                 'shortHelp' => 'This method retrieves all followed methods for the user.',
                 'longHelp' => 'include/api/help/me_getfollowed_help.html',
                 'ignoreSystemStatusError' => true,
-            ),
+            ],
             'mfaReset' => [
                 'reqType' => 'PUT',
                 'path' => ['mfa', 'reset'],
@@ -218,7 +220,16 @@ class CurrentUserApi extends SugarApi
                 'longHelp' => 'include/api/help/me_last_states_by_platform_put_help.html',
                 'ignoreSystemStatusError' => true,
             ],
-        );
+            'getPlugins' => [
+                'reqType' => 'GET',
+                'path' => ['me', 'plugins'],
+                'pathVars' => [''],
+                'method' => 'getPlugins',
+                'shortHelp' => 'Retrieves a list of all Sugar plugins available for Word, Excel, etc.',
+                'longHelp' => 'include/api/help/plugins_get_help.html',
+                'minVersion' => '11.23',
+            ],
+        ];
     }
 
     /**
@@ -271,8 +282,8 @@ class CurrentUserApi extends SugarApi
     public function setExpiredPassword($user_data)
     {
         $user_data['is_password_expired'] = false;
-        $user_data['password_expired_message'] = "";
-        require_once('modules/Users/password_utils.php');
+        $user_data['password_expired_message'] = '';
+        require_once 'modules/Users/password_utils.php';
         if (hasPasswordExpired($user_data['user_name'])) {
             $messageLabel = $_SESSION['expiration_label'];
             $message = translate($messageLabel, 'Users');
@@ -288,16 +299,16 @@ class CurrentUserApi extends SugarApi
     public function getPasswordRequirements($passwordSettings)
     {
         global $current_language;
-        $settings = array();
+        $settings = [];
         $administrationModStrings = return_module_language($current_language, 'Administration');
 
         //simple password settings keys
-        $keys = array(
+        $keys = [
             'oneupper' => 'LBL_PASSWORD_ONE_UPPER_CASE',
             'onelower' => 'LBL_PASSWORD_ONE_LOWER_CASE',
             'onenumber' => 'LBL_PASSWORD_ONE_NUMBER',
-            'onespecial' => 'LBL_PASSWORD_ONE_SPECIAL_CHAR'
-        );
+            'onespecial' => 'LBL_PASSWORD_ONE_SPECIAL_CHAR',
+        ];
         foreach ($keys as $key => $labelKey) {
             if (!empty($passwordSettings[$key])) {
                 $settings[$key] = $administrationModStrings[$labelKey] ?? '';
@@ -312,11 +323,11 @@ class CurrentUserApi extends SugarApi
         $min = isset($passwordSettings['minpwdlength']) && $passwordSettings['minpwdlength'] > 0;
         $max = isset($passwordSettings['maxpwdlength']) && $passwordSettings['maxpwdlength'] > 0;
         if ($min && $max) {
-            $settings['lengths'] = $administrationModStrings['LBL_PASSWORD_MINIMUM_LENGTH'].' = '.$passwordSettings['minpwdlength'].' '.$administrationModStrings['LBL_PASSWORD_AND_MAXIMUM_LENGTH'].' = '.$passwordSettings['maxpwdlength'];
-        } else if ($min) {
-            $settings['lengths'] = $administrationModStrings['LBL_PASSWORD_MINIMUM_LENGTH'].' = '.$passwordSettings['minpwdlength'];
-        } else if ($max) {
-            $settings['lengths'] = $administrationModStrings['LBL_PASSWORD_MAXIMUM_LENGTH'].' = '.$passwordSettings['maxpwdlength'];
+            $settings['lengths'] = $administrationModStrings['LBL_PASSWORD_MINIMUM_LENGTH'] . ' = ' . $passwordSettings['minpwdlength'] . ' ' . $administrationModStrings['LBL_PASSWORD_AND_MAXIMUM_LENGTH'] . ' = ' . $passwordSettings['maxpwdlength'];
+        } elseif ($min) {
+            $settings['lengths'] = $administrationModStrings['LBL_PASSWORD_MINIMUM_LENGTH'] . ' = ' . $passwordSettings['minpwdlength'];
+        } elseif ($max) {
+            $settings['lengths'] = $administrationModStrings['LBL_PASSWORD_MAXIMUM_LENGTH'] . ' = ' . $passwordSettings['maxpwdlength'];
         }
 
         return $settings;
@@ -414,16 +425,16 @@ class CurrentUserApi extends SugarApi
         global $current_user;
         $mm = $this->getMetaDataManager($platform);
         $fullModuleList = array_keys($GLOBALS['app_list_strings']['moduleList']);
-        $acls = array();
+        $acls = [];
         foreach ($fullModuleList as $modName) {
             $bean = BeanFactory::newBean($modName);
-            if (!$bean || !is_a($bean,'SugarBean') ) {
+            if (!$bean || !is_a($bean, 'SugarBean')) {
                 // There is no bean, we can't get data on this
                 continue;
             }
 
 
-            $acls[$modName] = $mm->getAclForModule($modName,$current_user);
+            $acls[$modName] = $mm->getAclForModule($modName, $current_user);
             $acls[$modName] = $this->verifyACLs($acls[$modName]);
         }
         // Handle enforcement of acls for clients that override this (e.g. portal)
@@ -435,10 +446,10 @@ class CurrentUserApi extends SugarApi
     /**
      * Manipulates the ACLs as needed, per client
      *
-     * @param  array $acls
+     * @param array $acls
      * @return array
      */
-    protected function verifyACLs(Array $acls)
+    protected function verifyACLs(array $acls)
     {
         // No manipulation for base acls
         return $acls;
@@ -447,10 +458,10 @@ class CurrentUserApi extends SugarApi
     /**
      * Enforces module specific ACLs for users without accounts, as needed
      *
-     * @param  array $acls
+     * @param array $acls
      * @return array
      */
-    protected function enforceModuleACLs(Array $acls)
+    protected function enforceModuleACLs(array $acls)
     {
         // No manipulation for base acls
         return $acls;
@@ -459,7 +470,7 @@ class CurrentUserApi extends SugarApi
     /**
      * Checks a given password and sends back the user bean if the password matches
      *
-     * @param  string $passwordToVerify
+     * @param string $passwordToVerify
      * @return User
      */
     protected function getUserIfPassword($passwordToVerify)
@@ -507,7 +518,7 @@ class CurrentUserApi extends SugarApi
             $val = '';
         }
 
-        return array($metaName => $val);
+        return [$metaName => $val];
     }
 
     /**
@@ -518,7 +529,7 @@ class CurrentUserApi extends SugarApi
      */
     protected function getUserPreferenceName($metaName)
     {
-        if(false !== $preferenceName = array_search($metaName, $this->userPrefMeta)) {
+        if (false !== $preferenceName = array_search($metaName, $this->userPrefMeta)) {
             return $preferenceName;
         }
         return $metaName;
@@ -549,10 +560,10 @@ class CurrentUserApi extends SugarApi
 
         $dateTime = new SugarDateTime();
         $timeDate->tzUser($dateTime, $user);
-        $offset = $timeDate->getIsoOffset($dateTime,array('stripTZColon' => true));
+        $offset = $timeDate->getIsoOffset($dateTime, ['stripTZColon' => true]);
         $offsetSec = $dateTime->getOffset();
 
-        return array('timezone' => $val, 'tz_offset' => $offset, 'tz_offset_sec' => $offsetSec);
+        return ['timezone' => $val, 'tz_offset' => $offset, 'tz_offset_sec' => $offsetSec];
     }
 
     protected function getUserPrefCurrency(User $user, $category = 'global')
@@ -588,7 +599,7 @@ class CurrentUserApi extends SugarApi
     protected function getUserPrefSignature_default(User $user)
     {
         // email signature preferences
-        return array('signature_default' => $user->getDefaultSignature());
+        return ['signature_default' => $user->getDefaultSignature()];
     }
 
     /**
@@ -599,21 +610,21 @@ class CurrentUserApi extends SugarApi
     protected function getUserPrefEmail_link_type(User $user)
     {
         $emailClientPreference = $user->getEmailClientPreference();
-        $preferences = array ('type' => $emailClientPreference);
+        $preferences = ['type' => $emailClientPreference];
 
         if ($emailClientPreference === 'sugar') {
             $statusCode = OutboundEmailConfigurationPeer::getMailConfigurationStatusForUser($user);
-            if($statusCode != OutboundEmailConfigurationPeer::STATUS_VALID_CONFIG) {
-                $preferences['error'] = array (
+            if ($statusCode != OutboundEmailConfigurationPeer::STATUS_VALID_CONFIG) {
+                $preferences['error'] = [
                     'code' => $statusCode,
                     'message' => OutboundEmailConfigurationPeer::$configurationStatusMessageMappings[$statusCode],
-                );
+                ];
             }
         }
 
-        return array(
+        return [
             'email_client_preference' => $preferences,
-        );
+        ];
     }
 
     /**
@@ -635,7 +646,7 @@ class CurrentUserApi extends SugarApi
             $language = $GLOBALS['sugar_config']['default_language'];
         }
 
-        return array('language' => $language);
+        return ['language' => $language];
     }
 
     /**
@@ -696,7 +707,7 @@ class CurrentUserApi extends SugarApi
         $user_data['is_top_level_manager'] = false;
         $user_data['reports_to_id'] = $current_user->reports_to_id;
         $user_data['reports_to_name'] = $current_user->reports_to_name;
-        if($user_data['is_manager']) {
+        if ($user_data['is_manager']) {
             $user_data['is_top_level_manager'] = User::isTopLevelManager($current_user->id);
         }
         $user_data['site_user_id'] = $current_user->site_user_id;
@@ -729,14 +740,14 @@ class CurrentUserApi extends SugarApi
         require_once 'modules/Teams/TeamSetManager.php';
 
         $teams = $current_user->get_my_teams();
-        $my_teams = array();
+        $my_teams = [];
         foreach ($teams as $id => $name) {
-            $my_teams[] = array('id' => $id, 'name' => $name,);
+            $my_teams[] = ['id' => $id, 'name' => $name,];
         }
         $user_data['my_teams'] = $my_teams;
         $user_data['private_team_id'] = $current_user->getPrivateTeamID();
         $defaultTeams = TeamSetManager::getTeamsFromSet($current_user->team_set_id);
-        $defaultSelectedTeamIds = array();
+        $defaultSelectedTeamIds = [];
         foreach (TeamSetManager::getTeamsFromSet($current_user->acl_team_set_id) as $selectedTeam) {
             $defaultSelectedTeamIds[] = $selectedTeam['id'];
         }
@@ -745,7 +756,7 @@ class CurrentUserApi extends SugarApi
             if ($team['id'] == $current_user->team_id) {
                 $defaultTeams[$id]['primary'] = true;
             }
-            $defaultTeams[$id]['selected'] = in_array($team['id'], $defaultSelectedTeamIds);
+            $defaultTeams[$id]['selected'] = safeInArray($team['id'], $defaultSelectedTeamIds);
         }
         $user_data['preferences']['default_teams'] = $defaultTeams;
 
@@ -761,7 +772,7 @@ class CurrentUserApi extends SugarApi
         // Send back a hash of this data for use by the client
         $user_data['_hash'] = $current_user->getUserMDHash();
 
-        return array('current_user' => $user_data);
+        return ['current_user' => $user_data];
     }
 
     /**
@@ -797,7 +808,7 @@ class CurrentUserApi extends SugarApi
     {
         return [
             'field_name_placement' =>
-            $user->getPreference('field_name_placement', $category) ?? 'field_on_side',
+                $user->getPreference('field_name_placement', $category) ?? 'field_on_side',
         ];
     }
 
@@ -813,7 +824,7 @@ class CurrentUserApi extends SugarApi
     {
         return [
             'send_email_on_mention' =>
-            $user->getPreference('send_email_on_mention', $category) ?? 'send_email_on_mention',
+                $user->getPreference('send_email_on_mention', $category) ?? 'send_email_on_mention',
         ];
     }
 
@@ -878,7 +889,7 @@ class CurrentUserApi extends SugarApi
 
         $this->forceUserPreferenceReload($current_user);
 
-        $user_data['preferences'] = array();
+        $user_data['preferences'] = [];
         foreach ($this->userPrefMeta as $pref => $metaName) {
             // Twitterate this, since long lines are the devil
             $val = $this->getUserPref($current_user, $pref, $metaName, $category);
@@ -910,26 +921,26 @@ class CurrentUserApi extends SugarApi
     /**
      * Changes a password for a user from old to new
      *
-     * @param  User   $bean User bean
-     * @param  string $old  Old password
-     * @param  string $new  New password
+     * @param User $bean User bean
+     * @param string $old Old password
+     * @param string $new New password
      * @return array
      */
     protected function changePassword(SugarBean $bean, $old, $new)
     {
         if ($bean->change_password($old, $new)) {
-            return array(
+            return [
                 'valid' => true,
                 'message' => 'Password updated.',
                 'expiration' => $bean->getPreference('loginexpiration'),
-            );
+            ];
         }
         //Legacy change_password populates user bean with an error_string on error
         $errorMessage = $bean->error_string ?? $GLOBALS['app_strings']['LBL_PASSWORD_UPDATE_GENERIC_ISSUE'];
-        return array(
+        return [
             'valid' => false,
             'message' => $errorMessage,
-        );
+        ];
     }
 
     /**
@@ -947,8 +958,8 @@ class CurrentUserApi extends SugarApi
     /**
      * Return all the current users preferences
      *
-     * @param  ServiceBase $api  Api Service
-     * @param  array       $args Array of arguments from the rest call
+     * @param ServiceBase $api Api Service
+     * @param array $args Array of arguments from the rest call
      * @return mixed       User Preferences, if the category exists.  If it doesn't then return an empty array
      */
     public function userPreferences(ServiceBase $api, array $args)
@@ -956,7 +967,7 @@ class CurrentUserApi extends SugarApi
         $current_user = $this->getUserBean();
 
         // For filtering results back
-        $pref_filter = array();
+        $pref_filter = [];
         if (isset($args['pref_filter'])) {
             $pref_filter = explode(',', $args['pref_filter']);
         }
@@ -967,7 +978,7 @@ class CurrentUserApi extends SugarApi
         }
         $this->forceUserPreferenceReload($current_user);
 
-        $prefs = $current_user->user_preferences[$category] ?? array();
+        $prefs = $current_user->user_preferences[$category] ?? [];
 
         // Handle filtration of requested preferences
         $data = $this->filterResults($prefs, $pref_filter);
@@ -988,7 +999,7 @@ class CurrentUserApi extends SugarApi
             return $prefs;
         }
 
-        $return = array();
+        $return = [];
         foreach ($prefFilter as $key) {
             if (isset($prefs[$key])) {
                 $return[$key] = $prefs[$key];
@@ -996,11 +1007,12 @@ class CurrentUserApi extends SugarApi
         }
         return $return;
     }
+
     /**
      * Update multiple user preferences at once
      *
-     * @param  ServiceBase $api  Api Service
-     * @param  array       $args Array of arguments from the rest call
+     * @param ServiceBase $api Api Service
+     * @param array $args Array of arguments from the rest call
      * @return mixed       Return the updated keys with their values
      */
     public function userPreferencesSave(ServiceBase $api, array $args)
@@ -1034,8 +1046,8 @@ class CurrentUserApi extends SugarApi
     /**
      * Return a specific preference for the key that was passed in.
      *
-     * @param  ServiceBase $api
-     * @param  array       $args
+     * @param ServiceBase $api
+     * @param array $args
      * @return mixed
      * @return mixed
      */
@@ -1053,7 +1065,7 @@ class CurrentUserApi extends SugarApi
 
         // Handle special cases if there are any
         $prefKey = array_search($pref, $this->userPrefMeta);
-        $alias   = $prefKey ?: $pref;
+        $alias = $prefKey ?: $pref;
         $data = $this->getUserPref($current_user, $alias, $pref, $category);
 
         // If the value of the user pref is not an array, or is an array but does
@@ -1061,7 +1073,7 @@ class CurrentUserApi extends SugarApi
         // back an array keyed on the pref. This turns prefs like "m/d/Y" or ""
         // into {"datef": "m/d/Y"} on the client.
         if (!is_array($data) || !isset($data[$pref])) {
-            $data = array($pref => $data);
+            $data = [$pref => $data];
         }
 
         $this->htmlDecodeReturn($data);
@@ -1071,8 +1083,8 @@ class CurrentUserApi extends SugarApi
     /**
      * Update a preference.  The key is part of the url and the value comes from the value $args variable
      *
-     * @param  ServiceBase $api
-     * @param  array       $args
+     * @param ServiceBase $api
+     * @param array $args
      * @return array
      */
     public function userPreferenceSave(ServiceBase $api, array $args)
@@ -1089,15 +1101,15 @@ class CurrentUserApi extends SugarApi
         $current_user->setPreference($preferenceName, $args['value'], 0, $category);
         $current_user->save();
 
-        return array($preferenceName => $args['value']);
+        return [$preferenceName => $args['value']];
     }
 
     /**
      * Delete a preference.  Since there is no way to actually delete with out resetting the whole category, we just
      * set the value of the key = null.
      *
-     * @param  ServiceBase $api
-     * @param  array       $args
+     * @param ServiceBase $api
+     * @param array $args
      * @return array
      */
     public function userPreferenceDelete(ServiceBase $api, array $args)
@@ -1114,7 +1126,7 @@ class CurrentUserApi extends SugarApi
         $current_user->setPreference($preferenceName, null, 0, $category);
         $current_user->save();
 
-        return array($preferenceName => "");
+        return [$preferenceName => ''];
     }
 
     /**
@@ -1154,7 +1166,7 @@ class CurrentUserApi extends SugarApi
     {
         $current_user = $this->getUserBean();
 
-        $options = array();
+        $options = [];
         $options['limit'] = !empty($args['limit']) ? $args['limit'] : 20;
         $options['offset'] = 0;
 
@@ -1162,17 +1174,17 @@ class CurrentUserApi extends SugarApi
             if ($args['offset'] == 'end') {
                 $options['offset'] = 'end';
             } else {
-                $options['offset'] = (int) $args['offset'];
+                $options['offset'] = (int)$args['offset'];
             }
         }
         $records = Subscription::getSubscribedRecords($current_user, 'array', $options);
-        $beans = array();
+        $beans = [];
 
-        $data = array();
+        $data = [];
         $data['next_offset'] = -1;
         foreach ($records as $i => $record) {
             if ($i == $options['limit']) {
-                $data['next_offset'] = (int) ($options['limit'] + $options['offset']);
+                $data['next_offset'] = (int)($options['limit'] + $options['offset']);
                 continue;
             }
             $beans[] = BeanFactory::getBean($record['parent_type'], $record['parent_id']);
@@ -1193,11 +1205,11 @@ class CurrentUserApi extends SugarApi
         $idmConfig = $this->getIdmConfig();
         $idmModeConfig = $idmConfig->getIDMModeConfig();
         if (!$idmConfig->isIDMModeEnabled()) {
-            throw new SugarApiExceptionNoMethod("This method works only in IDM mode");
+            throw new SugarApiExceptionNoMethod('This method works only in IDM mode');
         }
 
         if (!$idmConfig->isMultiFactorAuthenticationEnabled()) {
-            throw new SugarApiExceptionNoMethod("This method works only if MFA enabled");
+            throw new SugarApiExceptionNoMethod('This method works only if MFA enabled');
         }
 
         $user = $this->getCurrentUser();
@@ -1215,7 +1227,7 @@ class CurrentUserApi extends SugarApi
 
         if (!$userApi->resetMfa($userSrn, $api->grabToken())) {
             throw new SugarApiExceptionServiceUnavailable(
-                sprintf("Can not reset MFA for user %s", $userSrn)
+                sprintf('Can not reset MFA for user %s', $userSrn)
             );
         }
 
@@ -1300,5 +1312,82 @@ class CurrentUserApi extends SugarApi
     protected function getCurrentUser(): \User
     {
         return $GLOBALS['current_user'];
+    }
+
+    /**
+     * Retrieves a list of all Sugar plugins available for Word, Excel, etc.
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array[] the list of available plugins grouped by category
+     */
+    public function getPlugins(ServiceBase $api, array $args)
+    {
+        global $app_strings;
+
+        // Get the full list of plugins
+        $sp = $this->getSugarPluginsInstance();
+        $plugins = $sp->getPluginList();
+
+        // Build the list of plugin categories
+        $pluginsCat = [
+            'Outlook' => [
+                'name' => $app_strings['LBL_PLUGIN_OUTLOOK_NAME'],
+                'desc' => $app_strings['LBL_PLUGIN_OUTLOOK_DESC'],
+                'plugins' => [],
+            ],
+            'Word' => [
+                'name' => $app_strings['LBL_PLUGIN_WORD_NAME'],
+                'desc' => $app_strings['LBL_PLUGIN_WORD_DESC'],
+                'plugins' => [],
+            ],
+            'Excel' => [
+                'name' => $app_strings['LBL_PLUGIN_EXCEL_NAME'],
+                'desc' => $app_strings['LBL_PLUGIN_EXCEL_DESC'],
+                'plugins' => [],
+            ],
+        ];
+
+        if ($this->shouldHideOpiWpiPlugins()) {
+            unset($pluginsCat['Outlook']);
+            unset($pluginsCat['Word']);
+        }
+
+        // Group the plugins into their respective categories
+        foreach ($pluginsCat as $key => $value) {
+            foreach ($plugins as $plugin) {
+                $display_name = str_replace('_', ' ', (string)$plugin['formatted_name']);
+                if (strpos($display_name, $key) !== false) {
+                    $pluginsCat[$key]['plugins'][] = [
+                        'link' => $sp->getPluginLink($plugin['raw_name']),
+                        'label' => $display_name,
+                    ];
+                }
+            }
+        }
+
+        return $pluginsCat;
+    }
+
+    /**
+     * Returns whether the UserDownloadsHideOpiWpiPlugins feature flag is
+     * toggled
+     *
+     * @return bool true if the feature is set; false otherwise
+     */
+    protected function shouldHideOpiWpiPlugins()
+    {
+        $features = Container::getInstance()->get(FeatureFlag::class);
+        return $features->isEnabled(UserDownloadsHideOpiWpiPlugins::getName());
+    }
+
+    /**
+     * Returns an instance of the SugarPlugins class
+     *
+     * @return SugarPlugins
+     */
+    protected function getSugarPluginsInstance()
+    {
+        return new SugarPlugins();
     }
 }

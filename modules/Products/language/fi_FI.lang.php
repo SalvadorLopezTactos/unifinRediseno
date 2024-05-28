@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Tarjottujen tuoterivien luettelon työpöytä',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Tarjousten tuoterivitietueiden koontinäyttö',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Tarjotut tuoterivit -tuotelaatikko',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tarjouksen rivinimikkeen aikajana',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Kampanjan tarjottu tuoterivi',
     'LBL_MODULE_NAME' => 'Tarjotut tuoterivit',
@@ -187,4 +188,4 @@ $mod_strings = array(
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Uusi tarjottu tuoterivi)',
     'LBL_DISCOUNT_PERCENT' => '% Prosenttia',
     'LBL_DISCOUNT_TYPE' => 'Alennustyyppi',
-);
+];

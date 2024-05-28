@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('io-xdr', function (Y, NAME) {
 
 /**
@@ -322,4 +315,4 @@ event is fired, this value will be set to 0.
 Y.io.xdr = { delay : 100 };
 
 
-}, '3.15.0', {"requires": ["io-base", "datatype-xml-parse"]});
+}, '3.18.1', {"requires": ["io-base", "datatype-xml-parse"]});

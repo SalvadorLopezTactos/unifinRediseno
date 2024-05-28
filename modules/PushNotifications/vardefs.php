@@ -28,8 +28,7 @@ $dictionary['PushNotification'] = [
             'vname' => 'LBL_NOTIFICATION_TYPE',
             'comment' => 'Type of notification, eg, record_assignment.',
         ],
-        'parent_type' =>
-        [
+        'parent_type' => [
             'name' => 'parent_type',
             'vname' => 'LBL_PARENT_TYPE',
             'type' => 'parent_type',
@@ -39,8 +38,7 @@ $dictionary['PushNotification'] = [
             'len' => 100,
             'comment' => 'Module notification is associated with.',
         ],
-        'parent_id' =>
-        [
+        'parent_id' => [
             'name' => 'parent_id',
             'vname' => 'LBL_PARENT_ID',
             'type' => 'id',

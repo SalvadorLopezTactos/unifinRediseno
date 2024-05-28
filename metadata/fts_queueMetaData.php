@@ -10,51 +10,66 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['fts_queue'] = array(
+$dictionary['fts_queue'] = [
     'table' => 'fts_queue',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'bean_id' => array(
+        ],
+        'bean_id' => [
             'name' => 'bean_id',
             'dbType' => 'id',
             'type' => 'varchar',
             'len' => '36',
             'comment' => 'FK to various beans\'s tables',
-        ),
-        'bean_module' => array(
+        ],
+        'bean_module' => [
             'name' => 'bean_module',
             'type' => 'varchar',
             'len' => '100',
             'comment' => 'bean\'s Module',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'date_created' => array(
+        ],
+        'date_created' => [
             'name' => 'date_created',
             'type' => 'datetime',
-        ),
-        'processed' => array(
+        ],
+        'processed' => [
             'name' => 'processed',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'idx_fts_queue_pk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-    ),
-);
+            ],
+        ],
+        [
+            'name' => 'idx_beanid',
+            'type' => 'index',
+            'fields' => [
+                'bean_id',
+            ],
+        ],
+        [
+            'name' => 'idx_beanmodule_processed',
+            'type' => 'index',
+            'fields' => [
+                'bean_module',
+                'processed',
+            ],
+        ],
+    ],
+    'relationships' => [
+    ],
+];

@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmnActivity'] = array(
+$dictionary['pmse_BpmnActivity'] = [
     'table' => 'pmse_bpmn_activity',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'reassignable' => false,
-    'fields' => array(
-        'act_uid' => array(
+    'fields' => [
+        'act_uid' => [
             'required' => true,
             'name' => 'act_uid',
             'vname' => '',
@@ -38,8 +38,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'prj_id' => array(
+        ],
+        'prj_id' => [
             'required' => true,
             'name' => 'prj_id',
             'vname' => '',
@@ -59,8 +59,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'pro_id' => array(
+        ],
+        'pro_id' => [
             'required' => true,
             'name' => 'pro_id',
             'vname' => '',
@@ -80,8 +80,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'act_type' => array(
+        ],
+        'act_type' => [
             'required' => true,
             'name' => 'act_type',
             'vname' => '',
@@ -101,8 +101,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'calculated' => false,
             'len' => '30',
             'size' => '30',
-        ),
-        'act_is_for_compensation' => array(
+        ],
+        'act_is_for_compensation' => [
             'required' => true,
             'name' => 'act_is_for_compensation',
             'vname' => '',
@@ -126,8 +126,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_start_quantity' => array(
+        ],
+        'act_start_quantity' => [
             'required' => true,
             'name' => 'act_start_quantity',
             'vname' => '',
@@ -151,8 +151,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_completion_quantity' => array(
+        ],
+        'act_completion_quantity' => [
             'required' => true,
             'name' => 'act_completion_quantity',
             'vname' => '',
@@ -176,8 +176,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_task_type' => array(
+        ],
+        'act_task_type' => [
             'required' => true,
             'name' => 'act_task_type',
             'vname' => '',
@@ -197,8 +197,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'calculated' => false,
             'len' => '20',
             'size' => '20',
-        ),
-        'act_implementation' => array(
+        ],
+        'act_implementation' => [
             'required' => false,
             'name' => 'act_implementation',
             'vname' => '',
@@ -218,8 +218,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'act_instantiate' => array(
+        ],
+        'act_instantiate' => [
             'required' => true,
             'name' => 'act_instantiate',
             'vname' => '',
@@ -243,8 +243,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_script_type' => array(
+        ],
+        'act_script_type' => [
             'required' => true,
             'name' => 'act_script_type',
             'vname' => '',
@@ -264,8 +264,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'act_script' => array(
+        ],
+        'act_script' => [
             'required' => false,
             'name' => 'act_script',
             'vname' => '',
@@ -285,8 +285,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'act_loop_type' => array(
+        ],
+        'act_loop_type' => [
             'required' => true,
             'name' => 'act_loop_type',
             'vname' => '',
@@ -306,8 +306,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'calculated' => false,
             'len' => '20',
             'size' => '20',
-        ),
-        'act_test_before' => array(
+        ],
+        'act_test_before' => [
             'required' => true,
             'name' => 'act_test_before',
             'vname' => '',
@@ -331,8 +331,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_loop_maximum' => array(
+        ],
+        'act_loop_maximum' => [
             'required' => true,
             'name' => 'act_loop_maximum',
             'vname' => '',
@@ -356,8 +356,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_loop_condition' => array(
+        ],
+        'act_loop_condition' => [
             'required' => true,
             'name' => 'act_loop_condition',
             'vname' => '',
@@ -377,8 +377,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'calculated' => false,
             'len' => '100',
             'size' => '100',
-        ),
-        'act_loop_cardinality' => array(
+        ],
+        'act_loop_cardinality' => [
             'required' => true,
             'name' => 'act_loop_cardinality',
             'vname' => '',
@@ -402,8 +402,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_loop_behavior' => array(
+        ],
+        'act_loop_behavior' => [
             'required' => true,
             'name' => 'act_loop_behavior',
             'vname' => '',
@@ -423,8 +423,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'calculated' => false,
             'len' => '20',
             'size' => '20',
-        ),
-        'act_is_adhoc' => array(
+        ],
+        'act_is_adhoc' => [
             'required' => true,
             'name' => 'act_is_adhoc',
             'vname' => '',
@@ -448,8 +448,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_is_collapsed' => array(
+        ],
+        'act_is_collapsed' => [
             'required' => true,
             'name' => 'act_is_collapsed',
             'vname' => '',
@@ -473,8 +473,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_completion_condition' => array(
+        ],
+        'act_completion_condition' => [
             'required' => true,
             'name' => 'act_completion_condition',
             'vname' => '',
@@ -494,8 +494,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'act_ordering' => array(
+        ],
+        'act_ordering' => [
             'required' => true,
             'name' => 'act_ordering',
             'vname' => '',
@@ -515,8 +515,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'calculated' => false,
             'len' => '20',
             'size' => '20',
-        ),
-        'act_cancel_remaining_instances' => array(
+        ],
+        'act_cancel_remaining_instances' => [
             'required' => true,
             'name' => 'act_cancel_remaining_instances',
             'vname' => '',
@@ -540,8 +540,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_protocol' => array(
+        ],
+        'act_protocol' => [
             'required' => true,
             'name' => 'act_protocol',
             'vname' => '',
@@ -561,8 +561,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'act_method' => array(
+        ],
+        'act_method' => [
             'required' => true,
             'name' => 'act_method',
             'vname' => '',
@@ -582,8 +582,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'act_is_global' => array(
+        ],
+        'act_is_global' => [
             'required' => true,
             'name' => 'act_is_global',
             'vname' => '',
@@ -607,8 +607,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_referer' => array(
+        ],
+        'act_referer' => [
             'required' => false,
             'name' => 'act_referer',
             'vname' => '',
@@ -632,8 +632,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_default_flow' => array(
+        ],
+        'act_default_flow' => [
             'required' => false,
             'name' => 'act_default_flow',
             'vname' => '',
@@ -657,8 +657,8 @@ $dictionary['pmse_BpmnActivity'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_master_diagram' => array(
+        ],
+        'act_master_diagram' => [
             'required' => false,
             'name' => 'act_master_diagram',
             'vname' => '',
@@ -682,23 +682,23 @@ $dictionary['pmse_BpmnActivity'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmnActivity', 'pmse_BpmnActivity');

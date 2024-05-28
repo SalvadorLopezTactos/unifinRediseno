@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'יומן שיחה',
     'LNK_NEW_MEETING' => 'תזמן פגישה',
     'LNK_NEW_TASK' => 'צור משימה',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'שדה על נוסף 2',
     'COLUMN_TITLE_EXT3' => 'שדה על נוסף 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'IFrame גובה',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'ברירת מחדל URL',
     'COLUMN_TITLE_AUDIT' => 'Audit',
     'COLUMN_TITLE_PII' => 'מידע אישי',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'ערך ברירת מחדל',
     'LBL_AUDITED' => 'עבר ביקורת',
     'LBL_REPORTABLE' => 'יופיע בדוחות',
-    'ERR_RESERVED_FIELD_NAME' => "מילות מפתח שמורות",
+    'ERR_RESERVED_FIELD_NAME' => 'מילות מפתח שמורות',
     'ERR_SELECT_FIELD_TYPE' => 'בחר בבקשה סוג שדה',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'שם שדה כבר קיים',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'שם השדה יכול להכיל רק את התווים הבאים: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'בוצע',
     'LBL_EXE_NON_SIM_MODE' => 'בצע מצב שאינו סימולציה',
     'LBL_CALCULATION_VISIBLE' => 'הפוך לזמין לצורך חישובים',
-);
+];

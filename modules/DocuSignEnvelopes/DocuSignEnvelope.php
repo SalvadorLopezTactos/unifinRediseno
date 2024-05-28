@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,11 +10,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class DocuSignEnvelope extends Basic
 {
     public $module_dir = 'DocuSignEnvelopes';
     public $object_name = 'DocuSignEnvelope';
-    public $table_name  = 'docusign_envelopes';
+    public $table_name = 'docusign_envelopes';
     public $module_name = 'DocuSignEnvelopes';
 
     public $id;
@@ -56,6 +58,7 @@ class DocuSignEnvelope extends Basic
     public $importable = true;
 
     public $cloud_service_type;
+    public $driveId;
     public $cloud_path;
 
     /**

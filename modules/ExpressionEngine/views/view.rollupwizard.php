@@ -22,20 +22,19 @@ class ViewRollupWizard extends SugarView
      */
     public $selLink;
     public $tmodule;
-    var $vars = array("tmodule", "selLink", 'type');
+    public $vars = ['tmodule', 'selLink', 'type'];
 
     public function __construct()
     {
         parent::__construct();
-        foreach($this->vars as $var)
-        {
-            if (!isset($_REQUEST[$var]))
+        foreach ($this->vars as $var) {
+            if (!isset($_REQUEST[$var])) {
                 sugar_die("Required paramter $var not set in Rollup Wizard");
+            }
             $this->$var = $_REQUEST[$var];
         }
         $mb = new ModuleBuilder();
-        $this->package = empty($_REQUEST['package']) || $_REQUEST['package'] == 'studio' ? "" : $mb->getPackage($_REQUEST['package']);
-
+        $this->package = empty($_REQUEST['package']) || $_REQUEST['package'] == 'studio' ? '' : $mb->getPackage($_REQUEST['package']);
     }
 
     /**
@@ -43,17 +42,17 @@ class ViewRollupWizard extends SugarView
      */
     public function display()
     {
-        $valid_links = array();
+        $valid_links = [];
         $links = FormulaHelper::getLinksForModule($this->tmodule, $this->package);
 
         // loop over all the $links and if we don't have any fields, don't pass it down
-        $current_fields = array();
+        $current_fields = [];
 
         //Preload the related fields from the first relationship
         if (!empty($links)) {
             $selected_link = $links[$this->selLink] ?? $links[array_key_first($links)];
             foreach ($links as $link_key => $link) {
-                $rfields = FormulaHelper::getRelatableFieldsForLink($link, $this->package, array("number"));
+                $rfields = FormulaHelper::getRelatableFieldsForLink($link, $this->package, ['number']);
                 if (!empty($rfields)) {
                     $valid_links[$link_key] = $link['label'];
                     if ($link === $selected_link || empty($current_fields)) {
@@ -61,18 +60,17 @@ class ViewRollupWizard extends SugarView
                     }
                 }
             }
-
         }
 
-        $this->ss->assign("rmodules", $valid_links);
-        $this->ss->assign("rfields", $current_fields);
-        $this->ss->assign("tmodule", $this->tmodule);
-        $this->ss->assign("selLink", $this->selLink);
+        $this->ss->assign('rmodules', $valid_links);
+        $this->ss->assign('rfields', $current_fields);
+        $this->ss->assign('tmodule', $this->tmodule);
+        $this->ss->assign('selLink', $this->selLink);
 
-        $this->ss->assign("rollup_types", array(
-            "Sum" => "Sum", "Ave" => "Average", "Min" => "Minimum", "Max" => "Maximum"
-        ));
-        $this->ss->assign("rollupType", $this->type);
+        $this->ss->assign('rollup_types', [
+            'Sum' => 'Sum', 'Ave' => 'Average', 'Min' => 'Minimum', 'Max' => 'Maximum',
+        ]);
+        $this->ss->assign('rollupType', $this->type);
 
         $this->ss->display('modules/ExpressionEngine/tpls/rollupWizard.tpl');
     }

@@ -27,7 +27,7 @@ class SugarUpgradeOpportunityFixFieldsForMobile extends UpgradeScript
     {
         if (version_compare($this->from_version, '11.2.0', '<')) {
             if ($this->shouldUpdateForOpps()) {
-                $this->log("Updating three read-only fields for Opportunities");
+                $this->log('Updating three read-only fields for Opportunities');
                 $this->updateForOpps();
             }
         }

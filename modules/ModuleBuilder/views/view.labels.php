@@ -21,14 +21,14 @@ class ViewLabels extends ViewModulefields
     {
         global $mod_strings;
 
-        return array(
-            translate('LBL_MODULE_NAME','Administration'),
+        return [
+            translate('LBL_MODULE_NAME', 'Administration'),
             ModuleBuilderController::getModuleTitle(),
-        );
+        ];
     }
 
-     //STUDIO LABELS ONLY//
-     //TODO Bundle Studio and ModuleBuilder label handling to increase maintainability.
+    //STUDIO LABELS ONLY//
+    //TODO Bundle Studio and ModuleBuilder label handling to increase maintainability.
     public function display()
     {
         $translatedEditModule = null;
@@ -51,7 +51,7 @@ class ViewLabels extends ViewModulefields
         $smarty->assign('view_module', $editModule);
         $smarty->assign('APP', $GLOBALS['app_strings']);
         $smarty->assign('defaultHelp', 'labelsBtn');
-        $smarty->assign('assistant', array('key'=>'labels', 'group'=>'module'));
+        $smarty->assign('assistant', ['key' => 'labels', 'group' => 'module']);
         $smarty->assign('labels_choice', $mod_strings['labelTypes']);
         $smarty->assign('labels_current', $allLabels ? 'all' : '');
 
@@ -63,7 +63,7 @@ class ViewLabels extends ViewModulefields
             $moduleNames = array_change_key_case($app_list_strings['moduleList']);
             $translatedEditModule = $moduleNames[strtolower($editModule)];
         }
-        $ajax->addCrumb($translatedEditModule, 'ModuleBuilder.getContent("module=ModuleBuilder&action=wizard&view_module='.$editModule.'")');
+        $ajax->addCrumb($translatedEditModule, 'ModuleBuilder.getContent("module=ModuleBuilder&action=wizard&view_module=' . $editModule . '")');
         $ajax->addCrumb($mod_strings['LBL_LABELS'], '');
 
         // Output the template result
@@ -92,7 +92,7 @@ class ViewLabels extends ViewModulefields
         $vnames = $this->getVnames($module);
 
         // Setup the options for the "Language" selector
-        $smarty->assign('available_languages',get_languages());
+        $smarty->assign('available_languages', get_languages());
 
         // Setup the key/value label pairs for the selected language
         $selectedLang = $this->request->getValidInputRequest(
@@ -189,7 +189,7 @@ class ViewLabels extends ViewModulefields
         }
 
         // Get field labels
-        foreach ($dictionary[$objectName]['fields'] as $name=>$def) {
+        foreach ($dictionary[$objectName]['fields'] as $name => $def) {
             if (isset($def['vname'])) {
                 $vnames[$def['vname']] = $def['vname'];
             }
@@ -219,7 +219,7 @@ class ViewLabels extends ViewModulefields
         // the mod_strings will be included from cache files here.
         foreach (return_module_language($language, $module, false) as $name => $label) {
             //#25294
-            if($allLabels || isset($vnames[$name]) || preg_match( '/lbl_city|lbl_country|lbl_billing_address|lbl_alt_address|lbl_shipping_address|lbl_postal_code|lbl_state$/si' , $name)) {
+            if ($allLabels || isset($vnames[$name]) || preg_match('/lbl_city|lbl_country|lbl_billing_address|lbl_alt_address|lbl_shipping_address|lbl_postal_code|lbl_state$/si', $name)) {
                 // Bug 58174 - Escaped labels are sent to the client escaped
                 // even in the label editor in studio
                 $formattedModStrings[$name] = html_entity_decode($label, null, 'UTF-8');
@@ -227,12 +227,12 @@ class ViewLabels extends ViewModulefields
         }
 
         //Grab everything from the custom files
-        $files = array(
+        $files = [
             "custom/modules/$module/language/$language.lang.php",
             "custom/modules/$module/Ext/Language/$language.lang.ext.php",
-        );
+        ];
         foreach ($files as $langfile) {
-            $mod_strings = array();
+            $mod_strings = [];
             if (is_file($langfile)) {
                 include $langfile;
                 foreach ($mod_strings as $key => $label) {
@@ -251,29 +251,28 @@ class ViewLabels extends ViewModulefields
     public function getVariableMap($module)
     {
         if (isModuleBWC($module)) {
-            $variableMap = array(
+            $variableMap = [
                 MB_EDITVIEW => 'EditView',
                 MB_DETAILVIEW => 'DetailView',
                 MB_QUICKCREATE => 'QuickCreate',
-            );
+            ];
 
-            $hideQuickCreateForModules = array(
+            $hideQuickCreateForModules = [
                 'Campaigns',
                 'Quotes',
                 'ProductTemplates',
-                'ProjectTask'
-            );
+                'ProjectTask',
+            ];
 
             if (in_array($module, $hideQuickCreateForModules)) {
                 if (isset($variableMap['quickcreate'])) {
                     unset($variableMap['quickcreate']);
                 }
             }
-
         } else {
-            $variableMap = array(
+            $variableMap = [
                 MB_RECORDVIEW => 'record',
-            );
+            ];
         }
 
         return $variableMap;

@@ -16,11 +16,11 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$viewdefs['ProductTemplates']['mobile']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['ProductTemplates']['mobile']['view']['list'] = [
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
+            'fields' => [
                 'name',
                 'type_name',
                 'category_name',
@@ -29,7 +29,7 @@ $viewdefs['ProductTemplates']['mobile']['view']['list'] = array(
                 'cost_price',
                 'list_price',
                 'discount_price',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

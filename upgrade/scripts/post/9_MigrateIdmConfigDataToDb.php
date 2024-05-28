@@ -33,7 +33,7 @@ class SugarUpgradeMigrateIdmConfigDataToDb extends UpgradeScript
 
         $this->migrateConfigDataToDb($GLOBALS['sugar_config']['idm_mode']);
     }
-    
+
     protected function migrateConfigDataToDb(array $configData)
     {
         $config = new Authentication\Config(SugarConfig::getInstance());

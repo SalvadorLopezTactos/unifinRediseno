@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Mahdollisuusluettelon työpöytä',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Mahdollisuusluettelon työpöytä',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Tarjoukset',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Myyntimahdollisuudet dynaamisen tilin mukaan',
+    'LBL_TOP_10_OPP' => 'Top 10 av. mahd.',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Dashlet: Omat aktiiviset mahdollisuudet',
+    'LBL_MY_ACTIVE_OPP' => 'Omat akt. mahd.',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Myyntiputken summa on',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Myyntimahdollisuuden rooli',
+    'LBL_OPPORTUNITY_ROLE' => 'Myyntimahdollisuuden rooli',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Muistiot',
     'LBL_TAB_OPPORTUNITY' => '{{module}} arvio',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'Klikkaamalla "hyväksy", poistat -kaikki- ennustetiedot ja myytät myyntimahdollisuusnäkymääsi. Jos tämä ei ole mitä haluat, klikkaa "peruuta" palataksesi vanhoihin asetuksiin.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'Napsauttamalla Vahvista voit poistaa KAIKKI ennustetiedot ja muuttaa Myyntimahdollisuudet-näkymää.'
-        .'Myös KAIKKI prosessimääritelmät Tuoterivit-kohdemoodulilla poistetaan käytöstä. '
-        .'Jos tämä ei ole haluamasi toiminto, palaa edellisiin asetuksiin napsauttamalla Peruuta.',
+        . 'Myös KAIKKI prosessimääritelmät Tuoterivit-kohdemoodulilla poistetaan käytöstä. '
+        . 'Jos tämä ei ole haluamasi toiminto, palaa edellisiin asetuksiin napsauttamalla Peruuta.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Jos kaikki tuoterivit ovat suljettu ja ainakin yksi on voitettu,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'myyntimahdollisuuden myyntivaiheen arvoksi asetetaan “suljettu - voitettu”.',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Jos kaikkien tuoterivien myyntivaiheet ovat “suljettu - hävitty”,',
@@ -220,25 +223,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Kun aloitat tämän muutosprosessin, jokaista {{module_name}}-tietuetta kohti luodaan tuoterivitietueita. Kun tuoterivit ovat valmiit ja saatavilla, sähköpostiosoiteeseesi lähetetään ilmoitus. [Instanssisi sähköpostiasetusten on oltava kunnossa, jotta sähköposti voidaan lähettää.].',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} -moduulin avulla voit seurata yksittäisiä myyntejä alusta loppuun. Jokainen {{module_name}} tietue edustaa mahdollista myyntiä ja sisältää asiaankuuluvia myyntitietoja sekä liittyy muihin tärkeisiin tietueisiin, kuten {{quotes_module}}, {{contacts_module}}jne. {{module_name}} etenee yleensä useiden myyntivaiheiden läpi, kunnes se on merkitty joko "Suljettu voitettu" tai "Suljettu hävitty" tilaan. {{plural_module_name}} voidaan hyödyntää jopa paremmin käyttämällä Sugarin {{forecasts_singular_module}}ing -moduulia myyntitrendien ymmärtämiseen ja ennustamiseen sekä työn keskittämiseen myyntikiintiöiden saavuttamiseksi.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}}-moduulin avulla pystyt seuraamaan yksittäisiä myyntitapahtumia alusta loppuun. Kukin {{module_name}}-tietue kuvastaa mahdollista myyntitapahtumaa ja sisältää liittyvät myyntitiedot sekä tiedot muista liittyvistä tärkeistä tietueista, kuten {{quotes_module}}, {{contacts_module}} jne. {{module_name}} kulkee tavallisesti usean myyntivaiheen läpi, kunnes se merkitään joko ”suljetuksi voitetuksi” tai ”suljetuksi hävityksi”. {{plural_module_name}} voidaan hyödyntää entistä pidemmälle käyttäen Sugarin {{forecasts_singular_module}}-moduulia, jonka avulla voidaan ymmärtää ja ennustaa myyntitrendejä sekä keskittää työ myyntikiintiöiden saavuttamiseksi.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} -moduulin avulla voit seurata yksittäisiä myyntejä ja niihin kuuluvia rivinimikkeitä alusta loppuun. Jokainen {{module_name}} tietue edustaa mahdollista myyntiä ja sisältää asiaankuuluvia myyntitietoja sekä liittyy muihin tärkeisiin tietueisiin, kuten {{quotes_module}}, {{contacts_module}}jne.
+    'LBL_HELP_RECORD' => '{{plural_module_name}}-moduulin avulla pystyt seuraamaan yksittäisiä myyntitapahtumia alusta loppuun. Kukin {{module_name}}-tietue kuvastaa mahdollista myyntitapahtumaa ja sisältää liittyvät myyntitiedot sekä tiedot muista liittyvistä tärkeistä tietueista, kuten {{quotes_module}}, {{contacts_module}} jne.
 
-- Muokkaa tämän tietueen kenttiä klikkaamalla yksittäistä kenttää tai Muokkaa-painiketta.
-- Tarkastele tai muokkaa linkkejä muihin alipaneelien tietueisiin vaihtamalla vasemmassa alakulmassa olevaan ruutuun "Data View".
-- Tee ja tarkastele käyttäjien kommentteja ja tallenna muutoshistoria {{activitystream_singular_module}} vaihtamalla vasemmassa alakulmassa olevaan ruutuun "Activity Stream".
-– Seuraa tai lisää tämä tietue suosikiksi käyttämällä tietueen nimen oikealla puolella olevia kuvakkeita.
-- Lisätoiminnot ovat käytettävissä Muokkaa-painikkeen oikealla puolella olevassa avattavassa Toiminnot-valikossa.',
+- Muokkaa tämän tietueen kenttiä napsauttamalla yksittäistä kenttää tai Muokkaa-painiketta.
+- Tarkastele tai muokkaa linkkejä muihin tietueisiin alapaneeleissa kytkemällä vasen alapaneeli asentoon ”Tietonäkymä”.
+- Tee ja tarkastele käyttäjäkommentteja ja tietueen muutoshistoriaa {{activitystream_singular_module}}-moduulissa kytkemällä vasen alapaneeli asentoon ”Aktiviteettivirta”.
+- Seuraa tätä tietuetta tai merkitse se suosikkeihin käyttäen tietueen nimen oikealla olevia kuvakkeita.
+- Lisätoimintoja on saatavilla Toiminnot-pudotusvalikossa Muokkaa-painikkeen oikealla puolella.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} -moduulin avulla voit seurata yksittäisiä myyntejä ja niihin kuuluvia rivinimikkeitä alusta loppuun. Jokainen {{module_name}} tietue edustaa mahdollista myyntiä ja sisältää asiaankuuluvia myyntitietoja sekä liittyy muihin tärkeisiin tietueisiin, kuten {{quotes_module}}, {{contacts_module}}jne.,
+    'LBL_HELP_CREATE' => '{{plural_module_name}}-moduulin avulla pystyt seuraamaan yksittäisiä myyntitapahtumia alusta loppuun. Kukin {{module_name}}-tietue kuvastaa mahdollista myyntitapahtumaa ja sisältää liittyvät myyntitiedot sekä tiedot muista liittyvistä tärkeistä tietueista, kuten {{quotes_module}}, {{contacts_module}} jne.
 
-Luodaksesi {{module_name}}:
-1. Anna kentille arvot haluamallasi tavalla.
- – Pakolliset kentät on täytettävä ennen tallentamista.
- - Klikkaa "Näytä lisää" paljastaaksesi tarvittaessa lisää kenttiä.
-2. Klikkaa "Tallenna" viimeistelläksesi uuden tietueen ja palataksesi edelliselle sivulle.',
+{{module_name}}-moduulin luominen:
+1. Anna kenttiin haluamasi arvot.
+ - ”Pakollinen”-merkityt kentät on täytettävä ennen tallentamista.
+ - Paljasta lisää kenttiä tarvittaessa napsauttamalla ”Näytä lisää”.
+2. Viimeistele uusi tietue ja palaa edelliselle sivulle napsauttamalla ”Tallenna”.',
 
 // END ENT/ULT
 
@@ -260,4 +263,9 @@ Luodaksesi {{module_name}}:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Myyntimahdollisuuden sulkeutumisennuste',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Tarkastele tietyn myyntimahdollisuuden ennustetietoja',
-);
+    'LBL_AI_WINRATE' => 'Voittoprosentti',
+    'LBL_AI_WONOPP' => 'Voitetut mahdollisuudet',
+    'LBL_AI_CLOSINGTIME' => 'Sulkemisaika',
+    'LBL_AI_CLOSEDOPP' => 'Suljetut myyntimahdollisuudet',
+    'LBL_AI_LEADTIMESPAN' => 'Mahdollisuuden luonnin ja suljetun voitetun välinen aika',
+];

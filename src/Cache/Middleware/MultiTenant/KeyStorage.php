@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -24,12 +26,12 @@ interface KeyStorage
      *
      * @return UuidInterface
      */
-    public function getKey() : ?UuidInterface;
+    public function getKey(): ?UuidInterface;
 
     /**
      * Updates the key
      *
      * @param UuidInterface $key
      */
-    public function updateKey(UuidInterface $key) : void;
+    public function updateKey(UuidInterface $key): void;
 }

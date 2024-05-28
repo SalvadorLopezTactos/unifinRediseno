@@ -26,6 +26,7 @@ class ServiceHealth extends Entity
 {
     /**
     * Gets the service
+    * The service name. Use the list healthOverviews operation to get exact string names for services subscribed by the tenant.
     *
     * @return string|null The service
     */
@@ -37,9 +38,10 @@ class ServiceHealth extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the service
+    * The service name. Use the list healthOverviews operation to get exact string names for services subscribed by the tenant.
     *
     * @param string $val The service
     *
@@ -50,9 +52,10 @@ class ServiceHealth extends Entity
         $this->_propDict["service"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the status
+    * Show the overall service health status. Possible values are: serviceOperational, investigating, restoringService, verifyingService, serviceRestored, postIncidentReviewPublished, serviceDegradation, serviceInterruption, extendedRecovery, falsePositive, investigationSuspended, resolved, mitigatedExternal, mitigated, resolvedExternal, confirmed, reported, unknownFutureValue. For more details, see serviceHealthStatus values.
     *
     * @return ServiceHealthStatus|null The status
     */
@@ -68,9 +71,10 @@ class ServiceHealth extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the status
+    * Show the overall service health status. Possible values are: serviceOperational, investigating, restoringService, verifyingService, serviceRestored, postIncidentReviewPublished, serviceDegradation, serviceInterruption, extendedRecovery, falsePositive, investigationSuspended, resolved, mitigatedExternal, mitigated, resolvedExternal, confirmed, reported, unknownFutureValue. For more details, see serviceHealthStatus values.
     *
     * @param ServiceHealthStatus $val The status
     *
@@ -81,10 +85,11 @@ class ServiceHealth extends Entity
         $this->_propDict["status"] = $val;
         return $this;
     }
-    
 
-     /** 
+
+     /**
      * Gets the issues
+    * A collection of issues that happened on the service, with detailed information for each issue.
      *
      * @return array|null The issues
      */
@@ -96,11 +101,12 @@ class ServiceHealth extends Entity
             return null;
         }
     }
-    
-    /** 
+
+    /**
     * Sets the issues
+    * A collection of issues that happened on the service, with detailed information for each issue.
     *
-    * @param ServiceHealthIssue $val The issues
+    * @param ServiceHealthIssue[] $val The issues
     *
     * @return ServiceHealth
     */
@@ -109,5 +115,5 @@ class ServiceHealth extends Entity
         $this->_propDict["issues"] = $val;
         return $this;
     }
-    
+
 }

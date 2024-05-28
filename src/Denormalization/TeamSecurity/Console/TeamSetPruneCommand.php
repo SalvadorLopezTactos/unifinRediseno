@@ -37,14 +37,14 @@ abstract class TeamSetPruneCommand extends Command implements InstanceModeInterf
 
         if ($state->isEnabled()) {
             if (!$state->isAvailable()) {
-                $msg = "The Team Security Denormalization table is not available. It may not exist. "
-                    . "You can create it with the team-security:rebuild command.";
+                $msg = 'The Team Security Denormalization table is not available. It may not exist. '
+                    . 'You can create it with the team-security:rebuild command.';
                 throw new \Exception($msg);
             }
 
             if ($state->isRebuildRunning()) {
-                $msg = "The Team Security Denormalization table is currently being rebuilt. "
-                    . "We cannot prune until the rebuild is complete";
+                $msg = 'The Team Security Denormalization table is currently being rebuilt. '
+                    . 'We cannot prune until the rebuild is complete';
                 throw new \Exception($msg);
             }
         }

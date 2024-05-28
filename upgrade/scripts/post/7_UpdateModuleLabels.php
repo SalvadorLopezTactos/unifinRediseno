@@ -33,9 +33,9 @@ class SugarUpgradeUpdateModuleLabels extends UpgradeScript
         foreach ($this->upgrader->state['mismatching_labels'] as $language => $modules) {
             foreach ($modules as $module => $label) {
                 $this->log('Updating the label of the ' . $module . ' module to ' . $label . ' in ' . $language);
-                ParserLabel::addLabels($language, array(
+                ParserLabel::addLabels($language, [
                     'LBL_MODULE_NAME' => $label,
-                ), $module);
+                ], $module);
             }
         }
     }

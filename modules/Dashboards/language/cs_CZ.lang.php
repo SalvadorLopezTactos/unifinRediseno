@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_DASHBOARD_MODULE' => 'Modul',
     'LBL_MODULE_NAME' => 'Řídicí panely',
     'LBL_MODULE_NAME_SINGULAR' => 'Řídicí panel',
@@ -26,8 +26,12 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Všechny řídicí panely pro modul {{module}} zobrazení {{view}}',
     'LBL_COPY_OF' => 'Kopie {{{name}}}',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Vytvořit řídicí panel',
-    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
-    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Opravdu chcete obnovit tento řídicí panel do výchozího rozložení?",
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => 'Are you sure you want to restore this tab to the default layout?',
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => 'Opravdu chcete obnovit tento řídicí panel do výchozího rozložení?',
     'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Opravdu chcete obnovit výchozí rozložení řídicího panelu?',
     'LBL_FILTER_UTILS_SELECT' => 'Přiřazeno',
-);
+    'LBL_FILTER_UPDATES_SINCE_LAST_REFRESH' => 'Tento řídicí panel obsahuje filtry modulu runtime, které byly od poslední aktualizace upraveny.',
+    'LBL_TEMPLATE' => 'Šablona',
+    'LBL_UNSELECT_DELETE_TEMPLATES' => 'Váš výběr obsahuje šablony řídicích panelů, které nelze hromadně odstranit. Chcete-li pokračovat, zrušte výběr šablon.',
+    'LBL_UNSELECT_UPDATE_TEMPLATES' => 'Váš výběr obsahuje šablony řídicích panelů, které nelze hromadně aktualizovat. Chcete-li pokračovat, zrušte výběr šablon.',
+];

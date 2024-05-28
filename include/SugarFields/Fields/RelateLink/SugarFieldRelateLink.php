@@ -44,14 +44,15 @@ class SugarFieldRelateLink extends SugarFieldBase
      * {@inheritDoc}
      */
     public function apiFormatField(
-        array &$data,
-        SugarBean $bean,
-        array $args,
+        array       &$data,
+        SugarBean   $bean,
+        array       $args,
         $fieldName,
         $properties,
-        array $fieldList = null,
+        array       $fieldList = null,
         ServiceBase $service = null
     ) {
+
         if (!is_array($fieldList)) {
             throw new SugarApiExceptionError('$fieldList argument of apiFormatField() is missing');
         }
@@ -68,7 +69,7 @@ class SugarFieldRelateLink extends SugarFieldBase
         if (isset($args['display_params'][$fieldName])) {
             $displayParams = $args['display_params'][$fieldName];
         } else {
-            $displayParams = array();
+            $displayParams = [];
         }
 
         $data[$fieldName] = $this->getBeanCollection($bean, $properties, $displayParams, $service);
@@ -81,10 +82,12 @@ class SugarFieldRelateLink extends SugarFieldBase
      * to be retrieved, not nested fields as in base field.
      */
     public function iterateViewField(
-        ViewIterator $iterator,
-        array $field,
-        /* callable */ $callback
+        ViewIterator   $iterator,
+        array          $field,
+        /* callable */
+        $callback
     ) {
+
         $callback($field);
     }
 
@@ -101,15 +104,15 @@ class SugarFieldRelateLink extends SugarFieldBase
      */
     protected function getBeanCollection(SugarBean $bean, array $field, array $displayParams, ServiceBase $service)
     {
-        $args = array_merge(array(
+        $args = array_merge([
             // make sure "fields" argument is always passed to the API
             // since otherwise it will return all fields by default
-            'fields' => array('id', 'date_modified'),
-        ), $displayParams, array(
+            'fields' => ['id', 'date_modified'],
+        ], $displayParams, [
             'module' => $bean->module_name,
             'record' => $bean->id,
             'link_name' => $field['name'],
-        ));
+        ]);
 
         $response = $this->getRelateApi()->filterRelated($service, $args);
 

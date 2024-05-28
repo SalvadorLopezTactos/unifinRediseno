@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Raporttiaikataulut',
     'LBL_MODULE_NAME_SINGULAR' => 'Raporttiaikataulu',
     'LBL_REPORT_NAME' => 'Raportti',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Tiedostotyyppi',
     'LBL_EMBED_REPORT' => 'Upota raportti sähköpostiin',
     'LBL_EMBED_REPORT_INFO' => 'Huomaathan, että jos raportissa on yli 200 riviä, liitämme raportin CSV-tiedostona.',
-);
+];

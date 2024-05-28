@@ -24,14 +24,15 @@ class EmbeddedImage extends Attachment
 
     /**
      * @access public
-     * @param string      $path     required
-     * @param string      $cid      required
-     * @param null|string $name              Should be a string, but null is acceptable if the path will be used for
+     * @param string $path required
+     * @param string $cid required
+     * @param null|string $name Should be a string, but null is acceptable if the path will be used for
      *                                       the name.
-     * @param string      $encoding
-     * @param string      $mimeType
+     * @param string $encoding
+     * @param string $mimeType
      */
-    public function __construct($cid, $path, $name = null, $encoding = Encoding::Base64, $mimeType = "") {
+    public function __construct($cid, $path, $name = null, $encoding = Encoding::Base64, $mimeType = '')
+    {
         $this->setCid($cid);
         parent::__construct($path, $name, $encoding, $mimeType);
     }
@@ -40,14 +41,16 @@ class EmbeddedImage extends Attachment
      * @access public
      * @param string $cid required
      */
-    public function setCid($cid) {
+    public function setCid($cid)
+    {
         $this->cid = $cid;
     }
 
     /**
      * @return string
      */
-    public function getCid() {
+    public function getCid()
+    {
         return $this->cid;
     }
 
@@ -58,9 +61,10 @@ class EmbeddedImage extends Attachment
      * @access public
      * @return array Array of key value pairs representing the properties of the attachment.
      */
-    public function toArray() {
+    public function toArray()
+    {
         $image = parent::toArray();
-        $image["cid"] = $this->getCid();
+        $image['cid'] = $this->getCid();
 
         return $image;
     }

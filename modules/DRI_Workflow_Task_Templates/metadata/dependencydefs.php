@@ -25,7 +25,7 @@ $dependencies['DRI_Workflow_Task_Templates']['days_type_dep'] = [
             // The parameters passed in depend on the action type
             'params' => [
                 'target' => 'task_due_date_type',
-                'label'  => 'task_due_date_type_label', // normally <field>_label
+                'label' => 'task_due_date_type_label', // normally <field>_label
                 'value' => 'or(equal($activity_type, "Meetings"), equal($activity_type, "Calls"))',
             ],
         ],

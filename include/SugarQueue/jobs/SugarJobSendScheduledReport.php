@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\Reports\ReportFactory;
 use Sugarcrm\Sugarcrm\Reports\Schedules\ReportSchedules;
 use Sugarcrm\Sugarcrm\Reports\Schedules\ReportSchedulesHelper;
@@ -55,16 +56,16 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
         $reportSchedule = new ReportSchedule();
         $scheduleInfo = $reportSchedule->getInfo($report_schedule_id);
 
-        $GLOBALS["log"]->debug("-----> in Reports foreach() loop");
+        $GLOBALS['log']->debug('-----> in Reports foreach() loop');
 
-        $savedReport = BeanFactory::getBean('Reports', $scheduleInfo['report_id'], array('use_cache' => false));
+        $savedReport = BeanFactory::getBean('Reports', $scheduleInfo['report_id'], ['use_cache' => false]);
         if (!$savedReport || !$savedReport->id || !$savedReport->ACLAccess('view')) {
-            $GLOBALS["log"]->error('ScheduleReport: User ' . $current_user->id . ' can not access report id ' . $scheduleInfo['report_id']);
+            $GLOBALS['log']->error('ScheduleReport: User ' . $current_user->id . ' can not access report id ' . $scheduleInfo['report_id']);
             $this->job->succeedJob();
             return true;
         }
 
-        $GLOBALS["log"]->debug("-----> Generating Reporter");
+        $GLOBALS['log']->debug('-----> Generating Reporter');
         $reporter = new Report(from_html($savedReport->content));
 
         $reporter->is_saved_report = true;
@@ -77,10 +78,10 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
         // prevent invalid report from being processed
         if (!$reporter->is_definition_valid()) {
             $invalidFields = $reporter->get_invalid_fields();
-            $args          = array($scheduleInfo['report_id'], implode(', ', $invalidFields));
-            $message       = string_format($mod_strings['ERR_REPORT_INVALID'], $args);
+            $args = [$scheduleInfo['report_id'], implode(', ', $invalidFields)];
+            $message = string_format($mod_strings['ERR_REPORT_INVALID'], $args);
 
-            $GLOBALS["log"]->fatal("-----> {$message}");
+            $GLOBALS['log']->fatal("-----> {$message}");
 
             $reportOwner = BeanFactory::retrieveBean('Users', $savedReport->assigned_user_id);
             if ($reportOwner) {
@@ -122,10 +123,10 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
                 $dataTableHtml = $data['dataTableHtml'];
             }
 
-            $GLOBALS["log"]->debug("-----> Reporter settings attributes");
-            $reporter->layout_manager->setAttribute("no_sort", 1);
+            $GLOBALS['log']->debug('-----> Reporter settings attributes');
+            $reporter->layout_manager->setAttribute('no_sort', 1);
 
-            $GLOBALS["log"]->debug("-----> Reporter Handling PDF output");
+            $GLOBALS['log']->debug('-----> Reporter Handling PDF output');
             $filesToUnlink = [];
 
             if (!empty($fileType)) {
@@ -150,7 +151,7 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
             // get the recipient's data...
 
             // first get all email addresses known for this recipient
-            $recipientEmailAddresses = array($current_user->email1, $current_user->email2);
+            $recipientEmailAddresses = [$current_user->email1, $current_user->email2];
             $recipientEmailAddresses = array_filter($recipientEmailAddresses);
 
             // then retrieve first non-empty email address
@@ -160,20 +161,20 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
             $recipientName = $locale->formatName($current_user);
 
             try {
-                $GLOBALS["log"]->debug("-----> Generating Mailer");
+                $GLOBALS['log']->debug('-----> Generating Mailer');
                 $mailer = MailerFactory::getSystemDefaultMailer();
                 $timedate = TimeDate::getInstance();
                 $reportTime = $timedate->getNow();
                 $reportTime = $timedate->asUser($reportTime) . ' ' . $reportTime->format('T');
-                $reportName = empty($savedReport->name) ? "Report" : $savedReport->name;
+                $reportName = empty($savedReport->name) ? 'Report' : $savedReport->name;
 
                 // add the recipient
                 $mailer->addRecipientsTo(new EmailIdentity($recipientEmailAddress, $recipientName));
 
                 // attach the report
-                $charsToRemove = array("\r", "\n");
+                $charsToRemove = ["\r", "\n"];
                 // remove these characters from the attachment name
-                $attachmentName = str_replace($charsToRemove, "", $reportName . ' ' . $reportTime);
+                $attachmentName = str_replace($charsToRemove, '', $reportName . ' ' . $reportTime);
                 // replace spaces with the underscores
                 if (!empty($fileType)) {
                     if ($fileType == 'PDF') {
@@ -206,24 +207,24 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
                     $body = str_replace(array_keys($variables), array_values($variables), $emailBody);
                 } else {
                     // set the subject of the email
-                    $subject = $mod_strings["LBL_SUBJECT_SCHEDULED_REPORT"] . $reportName .
-                        $mod_strings["LBL_SUBJECT_AS_OF"] . $reportTime;
+                    $subject = $mod_strings['LBL_SUBJECT_SCHEDULED_REPORT'] . $reportName .
+                        $mod_strings['LBL_SUBJECT_AS_OF'] . $reportTime;
 
                     // set the body of the email
-                    $body = $mod_strings["LBL_HELLO"];
+                    $body = $mod_strings['LBL_HELLO'];
 
-                    if ($recipientName != "") {
+                    if ($recipientName != '') {
                         $body .= " {$recipientName}";
                     }
 
-                    $body .= ",<br><br>" .
-                        $mod_strings["LBL_SCHEDULED_REPORT_MSG_INTRO"] .
-                        "<br><br>" .
-                        $mod_strings["LBL_SCHEDULED_REPORT_MSG_BODY1"] .
-                        $reportName . "<br><br>" .
-                        $mod_strings["LBL_SCHEDULED_REPORT_MSG_BODY2"] .
+                    $body .= ',<br><br>' .
+                        $mod_strings['LBL_SCHEDULED_REPORT_MSG_INTRO'] .
+                        '<br><br>' .
+                        $mod_strings['LBL_SCHEDULED_REPORT_MSG_BODY1'] .
+                        $reportName . '<br><br>' .
+                        $mod_strings['LBL_SCHEDULED_REPORT_MSG_BODY2'] .
                         $reportTime .
-                        "<br><br>";
+                        '<br><br>';
                 }
 
                 if ($chartImage) {
@@ -260,27 +261,27 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
                 }
                 $mailer->setSubject($subject);
 
-                $GLOBALS["log"]->debug("-----> Sending PDF via Email to [ {$recipientEmailAddress} ]");
+                $GLOBALS['log']->debug("-----> Sending PDF via Email to [ {$recipientEmailAddress} ]");
                 $mailer->send();
 
-                $GLOBALS["log"]->debug("-----> Send successful");
+                $GLOBALS['log']->debug('-----> Send successful');
                 $reportSchedule->update_next_run_time(
                     $report_schedule_id,
-                    $scheduleInfo["next_run"],
-                    $scheduleInfo["time_interval"]
+                    $scheduleInfo['next_run'],
+                    $scheduleInfo['time_interval']
                 );
             } catch (MailerException $me) {
                 switch ($me->getCode()) {
                     case MailerException::InvalidEmailAddress:
-                        $GLOBALS["log"]->info("No email address for {$recipientName}");
+                        $GLOBALS['log']->info("No email address for {$recipientName}");
                         break;
                     default:
-                        $GLOBALS["log"]->fatal("Mail error: " . $me->getMessage());
+                        $GLOBALS['log']->fatal('Mail error: ' . $me->getMessage());
                         break;
                 }
             }
 
-            $GLOBALS["log"]->debug("-----> Removing temporary files");
+            $GLOBALS['log']->debug('-----> Removing temporary files');
             foreach ($filesToUnlink as $file) {
                 unlink($file);
             }
@@ -297,10 +298,10 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
      * @param String $attachmentName
      * @param String $filename
      */
-    protected function attachFile(String $type, Object $mailer, string $attachmentName, string $filename)
+    protected function attachFile(string $type, object $mailer, string $attachmentName, string $filename)
     {
         $typeLower = strtolower($type);
-        $attachmentName = str_replace(" ", "_", "{$attachmentName}.{$typeLower}");
+        $attachmentName = str_replace(' ', '_', "{$attachmentName}.{$typeLower}");
         $attachment = new Attachment($filename, $attachmentName, Encoding::Base64, "application/{$typeLower}");
         $mailer->addAttachment($attachment);
     }

@@ -66,7 +66,7 @@ class SugarUpgradeUpdateRelateFieldFilters extends UpgradeScript
      * @param array $row Array of key values from a single row of filter data
      * @return array
      */
-    protected function convertRow(array $row) : array
+    protected function convertRow(array $row): array
     {
         // Marker to tell the calling method how to proceed
         $row['converted'] = [];
@@ -102,7 +102,7 @@ class SugarUpgradeUpdateRelateFieldFilters extends UpgradeScript
      * @param string $module The module to get a bean for
      * @return SugarBean
      */
-    protected function getBean(string $module) : SugarBean
+    protected function getBean(string $module): SugarBean
     {
         return BeanFactory::getBean($module);
     }
@@ -113,7 +113,7 @@ class SugarUpgradeUpdateRelateFieldFilters extends UpgradeScript
      * @param SugarBean $bean The bean the filter is based on
      * @return string JSON string after being converted
      */
-    public function convertFilter(string $json, SugarBean $bean) : string
+    public function convertFilter(string $json, SugarBean $bean): string
     {
         // Decode the row data
         $filters = json_decode($json, true);

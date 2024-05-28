@@ -11,7 +11,6 @@
  */
 
 
-
 use Sugarcrm\Sugarcrm\ProcessManager;
 
 class PMSEEmailsTemplates extends vCardApi
@@ -20,6 +19,7 @@ class PMSEEmailsTemplates extends vCardApi
      * @var Sugarcrm\Sugarcrm\ProcessManager\PMSE|mixed
      */
     public $crmDataWrapper;
+
     public function __construct()
     {
         $this->crmDataWrapper = ProcessManager\Factory::getPMSEObject('PMSECrmDataWrapper');
@@ -27,47 +27,47 @@ class PMSEEmailsTemplates extends vCardApi
 
     public function registerApiRest()
     {
-        return array(
-            'emailTemplateDownload' => array(
+        return [
+            'emailTemplateDownload' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Emails_Templates', '?', 'etemplate'),
-                'pathVars' => array('module', 'record', ''),
+                'path' => ['pmse_Emails_Templates', '?', 'etemplate'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'emailTemplateDownload',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
                 'acl' => 'view',
                 'shortHelp' => 'Exports a .pet file with a Process Email Templates definition',
-                'longHelp'  => 'modules/pmse_Emails_Templates/clients/base/api/help/email_templates_export_help.html',
-            ),
-            'emailTemplatesImportPost' => array(
+                'longHelp' => 'modules/pmse_Emails_Templates/clients/base/api/help/email_templates_export_help.html',
+            ],
+            'emailTemplatesImportPost' => [
                 'reqType' => 'POST',
-                'path' => array('pmse_Emails_Templates', 'file', 'emailtemplates_import'),
-                'pathVars' => array('module', '', ''),
+                'path' => ['pmse_Emails_Templates', 'file', 'emailtemplates_import'],
+                'pathVars' => ['module', '', ''],
                 'method' => 'emailTemplatesImport',
                 'rawPostContents' => true,
                 'acl' => 'create',
                 'shortHelp' => 'Imports a Process Email Templates from a .pet file',
-                'longHelp'  => 'modules/pmse_Emails_Templates/clients/base/api/help/email_templates_import_help.html',
-            ),
-            'listVariables' => array(
+                'longHelp' => 'modules/pmse_Emails_Templates/clients/base/api/help/email_templates_import_help.html',
+            ],
+            'listVariables' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Emails_Templates', 'variables', 'find'),
-                'pathVars' => array('module', '', ''),
+                'path' => ['pmse_Emails_Templates', 'variables', 'find'],
+                'pathVars' => ['module', '', ''],
                 'method' => 'findVariables',
                 'acl' => 'view',
                 'shortHelp' => 'Get the variable list for a module',
-                'longHelp'  => 'modules/pmse_Emails_Templates/clients/base/api/help/email_templates_variable_list_get_help.html',
-            ),
-            'listModulesRelated' => array(
+                'longHelp' => 'modules/pmse_Emails_Templates/clients/base/api/help/email_templates_variable_list_get_help.html',
+            ],
+            'listModulesRelated' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Emails_Templates', '?', 'find_modules'),
-                'pathVars' => array('module', '', ''),
+                'path' => ['pmse_Emails_Templates', '?', 'find_modules'],
+                'pathVars' => ['module', '', ''],
                 'method' => 'retrieveRelatedBeans',
                 'acl' => 'view',
                 'shortHelp' => 'Retrieve a list of related modules',
-                'longHelp'  => 'modules/pmse_Emails_Templates/clients/base/api/help/email_templates_module_list_get_help.html',
-            ),
-        );
+                'longHelp' => 'modules/pmse_Emails_Templates/clients/base/api/help/email_templates_module_list_get_help.html',
+            ],
+        ];
     }
 
     /**
@@ -89,35 +89,35 @@ class PMSEEmailsTemplates extends vCardApi
     {
         $direction = null;
         // Initialize this var since not all requests send 'q'
-        $q = $args["q"] ?? null;
+        $q = $args['q'] ?? null;
         ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
         $offset = 0;
-        $limit = (!empty($args["max_num"])) ? (int)$args["max_num"] : 20;
-        $orderBy = array();
+        $limit = (!empty($args['max_num'])) ? (int)$args['max_num'] : 20;
+        $orderBy = [];
 
-        if (!empty($args["offset"])) {
-            if ($args["offset"] === "end") {
-                $offset = "end";
+        if (!empty($args['offset'])) {
+            if ($args['offset'] === 'end') {
+                $offset = 'end';
             } else {
-                $offset = (int)$args["offset"];
+                $offset = (int)$args['offset'];
             }
         }
 
-        if (!empty($args["order_by"])) {
-            $orderBys = explode(",", $args["order_by"]);
+        if (!empty($args['order_by'])) {
+            $orderBys = explode(',', $args['order_by']);
 
             foreach ($orderBys as $sortBy) {
                 $column = $sortBy;
-                $direction = "ASC";
+                $direction = 'ASC';
 
-                if (strpos($sortBy, ":")) {
+                if (strpos($sortBy, ':')) {
                     // it has a :, it's specifying ASC / DESC
-                    [$column, $direction] = explode(":", $sortBy);
+                    [$column, $direction] = explode(':', $sortBy);
 
-                    if (strtolower($direction) == "desc") {
-                        $direction = "DESC";
+                    if (strtolower($direction) == 'desc') {
+                        $direction = 'DESC';
                     } else {
-                        $direction = "ASC";
+                        $direction = 'ASC';
                     }
                 }
 
@@ -128,17 +128,18 @@ class PMSEEmailsTemplates extends vCardApi
             }
         }
 
-        $records = array();
+        $records = [];
         $nextOffset = -1;
 
-        if ($offset !== "end") {
+        if ($offset !== 'end') {
             $records = $this->retrieveFields(
-                $args["module_list"],
+                $args['module_list'],
                 $direction,
                 $limit,
                 $offset,
-                $args["base_module"],
-                $q);
+                $args['base_module'],
+                $q
+            );
             $totalRecords = $records['totalRecords'];
             $trueOffset = $offset + $limit;
 
@@ -147,11 +148,12 @@ class PMSEEmailsTemplates extends vCardApi
             }
         }
 
-        return array(
-            "next_offset" => $nextOffset,
-            "records" => $records['records'],
-        );
-}
+        return [
+            'next_offset' => $nextOffset,
+            'records' => $records['records'],
+        ];
+    }
+
     public function retrieveFields($filter, $orderBy, $limit, $offset, $baseModule, $q = null)
     {
         global $beanList;
@@ -162,29 +164,29 @@ class PMSEEmailsTemplates extends vCardApi
             $newModuleFilter = $pmseRelatedModule->getRelatedModuleName($baseModule, $filter);
         }
 
-        $output = array();
+        $output = [];
         $moduleBean = BeanFactory::newBean($newModuleFilter);
-        $fieldsData = $moduleBean->field_defs ?? array();
+        $fieldsData = $moduleBean->field_defs ?? [];
         foreach ($fieldsData as $field) {
             //$retrieveId = isset($additionalArgs['retrieveId']) && !empty($additionalArgs['retrieveId']) && $field['name'] == 'id' ? $additionalArgs['retrieveId'] : false;
             if (isset($field['vname']) && PMSEEngineUtils::isValidField($field, 'ET') &&
                 PMSEEngineUtils::isSupportedField($moduleBean->object_name, $field['name'], 'ET')) {
-                $tmpField = array();
+                $tmpField = [];
                 $tmpField['id'] = $field['name'];
                 $tmpField['_module'] = $newModuleFilter;
                 $tmpField['name'] = str_replace(':', '', translate($field['vname'], $newModuleFilter));
                 $tmpField['rhs_module'] = $filter;
-                if (empty($q) || stripos($tmpField['name'], $q) !== false) {
+                if (empty($q) || stripos($tmpField['name'], (string) $q) !== false) {
                     $output[] = $tmpField;
                 }
             }
         }
 
-        $text = array();
+        $text = [];
         foreach ($output as $key => $row) {
             $text[$key] = strtolower($row['name']);
         }
-        if($orderBy == "ASC"){
+        if ($orderBy == 'ASC') {
             array_multisort($text, SORT_ASC, $output);
         } else {
             array_multisort($text, SORT_DESC, $output);
@@ -192,28 +194,28 @@ class PMSEEmailsTemplates extends vCardApi
         $start = $offset;
         $end = $offset + $limit;
         $count = 0;
-        $outputTmp = array();
-        foreach($output as $field){
-            if($count >= $start && $count < $end){
+        $outputTmp = [];
+        foreach ($output as $field) {
+            if ($count >= $start && $count < $end) {
                 $outputTmp[] = $field;
             }
             $count++;
         }
 
-        return array('totalRecords' => count($output),'records' => $outputTmp);
+        return ['totalRecords' => safeCount($output), 'records' => $outputTmp];
     }
 
     public function retrieveRelatedBeans($api, $args)
     {
         ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
-        $related_modules = $this->crmDataWrapper->retrieveRelatedBeans($args['module_list'],'one-to-one');
+        $related_modules = $this->crmDataWrapper->retrieveRelatedBeans($args['module_list'], 'one-to-one');
         return $related_modules;
     }
 
     public function emailTemplatesImport($api, $args)
     {
         ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
-        $this->requireArgs($args, array('module'));
+        $this->requireArgs($args, ['module']);
 
         $bean = BeanFactory::newBean($args['module']);
         if (!$bean->ACLAccess('save') || !$bean->ACLAccess('import')) {
@@ -221,7 +223,7 @@ class PMSEEmailsTemplates extends vCardApi
             PMSELogger::getInstance()->alert($sugarApiExceptionNotAuthorized->getMessage());
             throw $sugarApiExceptionNotAuthorized;
         }
-        if (isset($_FILES) && count($_FILES) === 1) {
+        if (isset($_FILES) && safeCount($_FILES) === 1) {
             $first_key = array_key_first($_FILES);
             if (isset($_FILES[$first_key]['tmp_name'])
                 && $this->isUploadedFile($_FILES[$first_key]['tmp_name'])
@@ -229,7 +231,7 @@ class PMSEEmailsTemplates extends vCardApi
             ) {
                 $importerObject = PMSEImporterFactory::getImporter('email_template');
                 $name = $_FILES[$first_key]['name'];
-                $extension = pathinfo($name,  PATHINFO_EXTENSION);
+                $extension = pathinfo($name, PATHINFO_EXTENSION);
                 if ($extension == $importerObject->getExtension()) {
                     try {
                         $data = $importerObject->importProject($_FILES[$first_key]['tmp_name']);
@@ -238,8 +240,8 @@ class PMSEEmailsTemplates extends vCardApi
                         PMSELogger::getInstance()->alert($e->getMessage());
                         throw $e;
                     }
-                    $result = array('emailtemplates_import' => $data);
-                } else  {
+                    $result = ['emailtemplates_import' => $data];
+                } else {
                     $sugarApiExceptionRequestMethodFailure = new SugarApiExceptionRequestMethodFailure(
                         'ERROR_UPLOAD_FAILED'
                     );
@@ -255,7 +257,7 @@ class PMSEEmailsTemplates extends vCardApi
         }
     }
 
-    public function emailTemplateDownload ($api, $args)
+    public function emailTemplateDownload($api, $args)
     {
         ProcessManager\AccessManager::getInstance()->verifyRecordAccess($api, $args);
         if (PMSEEngineUtils::isExportDisabled($args['module'])) {

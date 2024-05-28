@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tudásbázis',
     'LBL_MODULE_NAME_SINGULAR' => 'Tudásbázis cikk',
     'LBL_MODULE_TITLE' => 'Tudásbázis cikk',
@@ -17,4 +17,4 @@ $mod_strings = array(
     'LBL_KEYWORDS' => 'Kulcsszavak:',
     'LBL_CONTENT' => 'Tartalom',
     'LBL_ATTACHMENTS' => 'Mellékletek:',
-);
+];

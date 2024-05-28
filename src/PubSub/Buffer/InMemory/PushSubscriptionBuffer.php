@@ -58,7 +58,7 @@ final class PushSubscriptionBuffer implements PushSubscriptionBufferInterface
     protected function getLength(): int
     {
         return array_reduce($this->buffer, function ($length, $events) {
-            return $length + count($events);
+            return $length + safeCount($events);
         }, 0);
     }
 }

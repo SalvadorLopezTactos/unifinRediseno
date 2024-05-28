@@ -17,7 +17,7 @@ use Sugarcrm\Sugarcrm\Logger\Processor\Factory;
 
 /**
  * Backtrace processor factory
-  */
+ */
 class Backtrace implements Factory
 {
     /** @inheritDoc */

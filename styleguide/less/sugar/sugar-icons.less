@@ -39,7 +39,6 @@
 @sicon-document: "\ea2c";
 @sicon-note: "\ea2d";
 @sicon-preview: "\ea2e";
-@sicon-copy: "\ea2f";
 @sicon-launch: "\ea30";
 @sicon-lock: "\ea32";
 @sicon-arrow-top-right: "\ea33";
@@ -71,7 +70,6 @@
 @sicon-hamburger-lg: "\ea4e";
 @sicon-pin-fill-lg: "\ea4f";
 @sicon-expand-lg: "\ea50";
-@sicon-copy-lg: "\ea51";
 @sicon-dashboard-lg: "\ea52";
 @sicon-star-outline: "\ea54";
 @sicon-reset: "\ea55";
@@ -385,9 +383,43 @@
 @sicon-dollar-lg: "\ebe5";
 @sicon-euro-lg: "\ebe6";
 @sicon-logout-lg: "\ebe7";
-@sicon-stacked: "\ebe8";
+@sicon-archive-lg: "\ebe8";
 @sicon-sidebyside: "\ebe9";
-@sicon-archive-lg: "\ea01";
+@sicon-stacked: "\ebea";
+@sicon-file-upload: "\ebee";
+@sicon-add-folder: "\ebef";
+@sicon-route: "\ebf0";
+@sicon-timeline: "\ebf1";
+@sicon-all-fields-xxl: "\ebf5";
+@sicon-warning-xl-32: "\ebf6";
+@sicon-automate-stacked: "\ebf7";
+@sicon-automate-scroll: "\ebf8";
+@sicon-copy-xl: "\ebf9";
+@sicon-copy: "\ebfa";
+@sicon-copy-lg: "\ebfb";
+@sicon-info-fill-xl-32: "\ebfc";
+@sicon-warning-circle-xl-32: "\ebfd";
+@sicon-trash-xl: "\ebfe";
+@sicon-edit-xl: "\ebff";
+@sicon-copy-calendar-link-xl: "\ec00";
+@sicon-copy-meeting-xl: "\ec01";
+@sicon-sort-fields-xxl: "\ec02";
+@sicon-swap: "\ec03";
+@sicon-tile-view-2: "\ec04";
+@sicon-warning-triangle: "\ec05";
+@sicon-validate: "\ec06";
+@sicon-save: "\ec07";
+@sicon-redo: "\ec08";
+@sicon-parallel: "\ec0a";
+@sicon-inbox: "\ec0b";
+@sicon-exclusive: "\ec0c";
+@sicon-end-event: "\ec0d";
+@sicon-activity: "\ec0e";
+@sicon-play: "\ec0f";
+@sicon-ellipsis: "\ec10";
+@sicon-linkedin: "\ec11";
+@sicon-facebook: "\ec12";
+@sicon-check-circle-xl-32: "\ea01";
 
 .sicon-arrow-down::before {
   content: @sicon-arrow-down;
@@ -541,10 +573,6 @@
   content: @sicon-preview;
 }
 
-.sicon-copy::before {
-  content: @sicon-copy;
-}
-
 .sicon-launch::before {
   content: @sicon-launch;
 }
@@ -667,10 +695,6 @@
 
 .sicon-expand-lg::before {
   content: @sicon-expand-lg;
-}
-
-.sicon-copy-lg::before {
-  content: @sicon-copy-lg;
 }
 
 .sicon-dashboard-lg::before {
@@ -1925,15 +1949,150 @@
   content: @sicon-logout-lg;
 }
 
-.sicon-stacked::before {
-  content: @sicon-stacked;
+.sicon-archive-lg::before {
+  content: @sicon-archive-lg;
 }
 
 .sicon-sidebyside::before {
   content: @sicon-sidebyside;
 }
 
-.sicon-archive-lg::before {
-  content: @sicon-archive-lg;
+.sicon-stacked::before {
+  content: @sicon-stacked;
 }
 
+.sicon-file-upload::before {
+  content: @sicon-file-upload;
+}
+
+.sicon-add-folder::before {
+  content: @sicon-add-folder;
+}
+
+.sicon-route::before {
+  content: @sicon-route;
+}
+
+.sicon-timeline::before {
+  content: @sicon-timeline;
+}
+
+.sicon-all-fields-xxl::before {
+  content: @sicon-all-fields-xxl;
+}
+
+.sicon-warning-xl-32::before {
+  content: @sicon-warning-xl-32;
+}
+
+.sicon-automate-stacked::before {
+  content: @sicon-automate-stacked;
+}
+
+.sicon-automate-scroll::before {
+  content: @sicon-automate-scroll;
+}
+
+.sicon-copy-xl::before {
+  content: @sicon-copy-xl;
+}
+
+.sicon-copy::before {
+  content: @sicon-copy;
+}
+
+.sicon-copy-lg::before {
+  content: @sicon-copy-lg;
+}
+
+.sicon-info-fill-xl-32::before {
+  content: @sicon-info-fill-xl-32;
+}
+
+.sicon-warning-circle-xl-32::before {
+  content: @sicon-warning-circle-xl-32;
+}
+
+.sicon-trash-xl::before {
+  content: @sicon-trash-xl;
+}
+
+.sicon-edit-xl::before {
+  content: @sicon-edit-xl;
+}
+
+.sicon-copy-calendar-link-xl::before {
+  content: @sicon-copy-calendar-link-xl;
+}
+
+.sicon-copy-meeting-xl::before {
+  content: @sicon-copy-meeting-xl;
+}
+
+.sicon-sort-fields-xxl::before {
+  content: @sicon-sort-fields-xxl;
+}
+
+.sicon-swap::before {
+  content: @sicon-swap;
+}
+
+.sicon-tile-view-2::before {
+  content: @sicon-tile-view-2;
+}
+
+.sicon-warning-triangle::before {
+  content: @sicon-warning-triangle;
+}
+
+.sicon-validate::before {
+  content: @sicon-validate;
+}
+
+.sicon-save::before {
+  content: @sicon-save;
+}
+
+.sicon-redo::before {
+  content: @sicon-redo;
+}
+
+.sicon-parallel::before {
+  content: @sicon-parallel;
+}
+
+.sicon-inbox::before {
+  content: @sicon-inbox;
+}
+
+.sicon-exclusive::before {
+  content: @sicon-exclusive;
+}
+
+.sicon-end-event::before {
+  content: @sicon-end-event;
+}
+
+.sicon-activity::before {
+  content: @sicon-activity;
+}
+
+.sicon-play::before {
+  content: @sicon-play;
+}
+
+.sicon-ellipsis::before {
+  content: @sicon-ellipsis;
+}
+
+.sicon-linkedin::before {
+  content: @sicon-linkedin;
+}
+
+.sicon-facebook::before {
+  content: @sicon-facebook;
+}
+
+.sicon-check-circle-xl-32::before {
+  content: @sicon-check-circle-xl-32;
+}

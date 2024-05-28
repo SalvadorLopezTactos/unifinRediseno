@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Информационная панель записей покупок',
     'LBL_RELATED_ACCOUNT' => 'Связанный контрагент',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для покупок',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Временная шкала покупки',
 ];

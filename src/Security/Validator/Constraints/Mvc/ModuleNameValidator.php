@@ -27,7 +27,7 @@ class ModuleNameValidator extends BeanModuleNameValidator
      * List of all available modules.
      * @var array
      */
-    protected $moduleList = array();
+    protected $moduleList = [];
 
     /**
      * List of explicit module name we allow which cannot
@@ -41,11 +41,11 @@ class ModuleNameValidator extends BeanModuleNameValidator
      *
      * @var array
      */
-    protected $explicitModules = array(
+    protected $explicitModules = [
         'app_strings',
         'Charts', // @see BR-3616
         'ExpressionEngine', // @see BR-3617
-    );
+    ];
 
     /**
      * Ctor
@@ -61,8 +61,8 @@ class ModuleNameValidator extends BeanModuleNameValidator
      */
     protected function getModulesFromGlobals()
     {
-        $moduleList = $GLOBALS['moduleList'] ?? array();
-        $modInvisList = $GLOBALS['modInvisList'] ?? array();
+        $moduleList = $GLOBALS['moduleList'] ?? [];
+        $modInvisList = $GLOBALS['modInvisList'] ?? [];
         return array_merge($moduleList, $modInvisList);
     }
 

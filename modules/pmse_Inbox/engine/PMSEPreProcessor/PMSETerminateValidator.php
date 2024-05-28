@@ -55,7 +55,7 @@ class PMSETerminateValidator extends PMSEBaseValidator implements PMSEValidate
      * @param array $paramsRelated
      * @return PMSERequest
      */
-    public function validateExpression($bean, $flowData, $request, $paramsRelated = array())
+    public function validateExpression($bean, $flowData, $request, $paramsRelated = [])
     {
         // Start with trimming our criteria for evaluation
         $criteria = trim($flowData['evn_criteria']);
@@ -86,20 +86,20 @@ class PMSETerminateValidator extends PMSEBaseValidator implements PMSEValidate
      */
     public function validateParamsRelated($bean, $flowData)
     {
-        $paramsRelated = array();
+        $paramsRelated = [];
         if (!PMSEEngineUtils::isTargetModule($flowData, $bean)) {
             if ($this->hasAnyOrAllTypeOperation(trim($flowData['pro_terminate_variables']))) {
                 $paramsRelated['updateRelateCriteria'] = true;
             } else {
-                $paramsRelated = array(
-                    'replace_fields' => array(
+                $paramsRelated = [
+                    'replace_fields' => [
                         $flowData['rel_element_relationship'] => $flowData['rel_element_module'],
-                    ),
-                );
+                    ],
+                ];
             }
         }
 
-        $this->getLogger()->debug("Parameters related returned :" . print_r($paramsRelated, true));
+        $this->getLogger()->debug('Parameters related returned :' . print_r($paramsRelated, true));
         return $paramsRelated;
     }
 }

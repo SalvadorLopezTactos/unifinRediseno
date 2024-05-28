@@ -10,53 +10,53 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Forecasts']['mobile']['view']['forecast-pipeline'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['Forecasts']['mobile']['view']['forecast-pipeline'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_DASHLET_PIPELINE_CHART_NAME',
             'description' => 'LBL_DASHLET_PIPELINE_CHART_DESC',
-            'config' => array(
-                'module' => 'Forecasts'
-            ),
-            'preview' => array(
-                'module' => 'Forecasts'
-            ),
-            'filter' => array(
-                'module' => array(
+            'config' => [
+                'module' => 'Forecasts',
+            ],
+            'preview' => [
+                'module' => 'Forecasts',
+            ],
+            'filter' => [
+                'module' => [
                     'Home',
                     'Accounts',
                     'Opportunities',
-                    'RevenueLineItems'
-                ),
-                'view' => array(
+                    'RevenueLineItems',
+                ],
+                'view' => [
                     'record',
-                    'records'
-                )
-            )
-        ),
-    ),
-    'panels' => array(
-        array(
+                    'records',
+                ],
+            ],
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_body',
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'visibility',
                     'label' => 'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY',
                     'type' => 'enum',
                     'options' => 'forecast_pipeline_visibility_options',
                     'enum_width' => 'auto',
-                ),
-            ),
-        ),
-    ),
-    'timeperiod' => array(
-        array(
+                ],
+            ],
+        ],
+    ],
+    'timeperiod' => [
+        [
             'name' => 'selectedTimePeriod',
             'label' => 'TimePeriod',
             'type' => 'timeperiod',
-        ),
-    )
-);
+        ],
+    ],
+];

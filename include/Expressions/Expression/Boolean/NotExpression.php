@@ -15,48 +15,54 @@
  * Returns false if <i>b</i> is true, and true if <i>b</i> is false.<br/>
  * ex: <i>not(false)</i> = true
  */
-class NotExpression extends BooleanExpression {
-	/**
-	 * Returns itself when evaluating.
-	 */
-	function evaluate() {
-		if ( $this->getParameters()->evaluate() === AbstractExpression::$FALSE)
-			return AbstractExpression::$TRUE;
-		else
-			return AbstractExpression::$FALSE;
-	}
+class NotExpression extends BooleanExpression
+{
+    /**
+     * Returns itself when evaluating.
+     */
+    public function evaluate()
+    {
+        if ($this->getParameters()->evaluate() === AbstractExpression::$FALSE) {
+            return AbstractExpression::$TRUE;
+        } else {
+            return AbstractExpression::$FALSE;
+        }
+    }
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
 			if ( this.getParameters().evaluate() == SUGAR.expressions.Expression.FALSE )
 				return SUGAR.expressions.Expression.TRUE;
 			else
 				return SUGAR.expressions.Expression.FALSE;
 EOQ;
-	}
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return "not";
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return 'not';
+    }
 
-	/**
-	 * Returns the maximum number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 1;
-	}
+    /**
+     * Returns the maximum number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 1;
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 }
-?>

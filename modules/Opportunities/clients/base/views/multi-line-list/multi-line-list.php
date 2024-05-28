@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,11 +21,23 @@ $viewdefs['Opportunities']['base']['view']['multi-line-list'] = [
                     'subfields' => [
                         [
                             'name' => 'sales_stage',
+                            'type' => 'fieldset-cascade',
+                            'show_child_labels' => false,
                             'label' => 'LBL_WIDGET_SALES_STAGE',
                             'default' => true,
                             'enabled' => true,
-                            'type' => 'enum-colorcoded-fore-bkgd',
                             'widget_name' => 'widget_sales_stage',
+                            'fields' => [
+                                [
+                                    'name' => 'sales_stage',
+                                    'label' => 'LBL_SALES_STAGE',
+                                    'type' => 'enum-colorcoded-fore-bkgd',
+                                ],
+                            ],
+                            'disable_field' => [
+                                'total_revenue_line_items',
+                                'closed_revenue_line_items',
+                            ],
                         ],
                         [
                             'name' => 'sales_status',
@@ -70,13 +83,18 @@ $viewdefs['Opportunities']['base']['view']['multi-line-list'] = [
                             'enabled' => true,
                             'type' => 'relative-date',
                             'widget_name' => 'widget_date_closed',
+                            'readonly' => true,
                         ],
                         [
                             'name' => 'date_closed',
                             'label' => 'LBL_DATE_CLOSED',
                             'default' => true,
                             'enabled' => true,
-                            'type' => 'date',
+                            'type' => 'date-cascade',
+                            'disable_field' => [
+                                'total_revenue_line_items',
+                                'closed_revenue_line_items',
+                            ],
                         ],
                     ],
                 ],
@@ -127,9 +145,7 @@ $viewdefs['Opportunities']['base']['view']['multi-line-list'] = [
         ],
     ],
     'collectionOptions' => [
-        'limit' => 100,
         'params' => [
-            'max_num' => 100,
             'order_by' => 'date_closed',
             'nulls_last' => true,
         ],
@@ -138,9 +154,5 @@ $viewdefs['Opportunities']['base']['view']['multi-line-list'] = [
         'order_by_primary' => 'date_closed:asc',
         'order_by_secondary' => '',
         'freeze_first_column' => true,
-    ],
-    'orderBy' => [
-        'field' => 'date_closed',
-        'direction' => 'asc',
     ],
 ];

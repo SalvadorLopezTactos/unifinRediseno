@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => '노트 목록 대시보드',
     'LBL_NOTES_RECORD_DASHBOARD' => '노트 기록 대시보드',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => '노트 포커스 서랍',
     'LBL_EXTERNAL_USER' => '외부 사용자',
     'LBL_EXTERNAL_USER_NAME' => '외부 사용자',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '노트 타임라인',
 
     'LBL_RELATED_CONTACT' => '관련 문의',
     'ERR_DELETE_RECORD' => '거래처를 삭제하시려면 정확한 자료 고유번호를 입력하셔야합니다.',
@@ -120,4 +121,4 @@ $mod_strings = array(
 - "필수"로표시된 필드는 저장하기 전에완료해야 합니다.
 - 필요한경우추가필드를노출하려면 "더보기"를클릭합니다. 
 2. “저장하기”를 클릭하여 새 기록을 완성하고 이전 페이지로 복귀합니다.',
-);
+];

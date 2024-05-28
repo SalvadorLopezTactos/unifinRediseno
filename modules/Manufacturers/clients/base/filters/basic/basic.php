@@ -9,17 +9,17 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Manufacturers']['base']['filter']['basic'] = array(
+$viewdefs['Manufacturers']['base']['filter']['basic'] = [
     'create' => true,
-    'quicksearch_field' => array('name'),
+    'quicksearch_field' => ['name'],
     'quicksearch_priority' => 1,
-    'filters' => array(
-        array(
+    'filters' => [
+        [
             'id' => 'all_records', // need 'all_records' to make filter irremovable
             'name' => 'LBL_MODULE_NAME',
-            'filter_definition' => array(
-            ),
+            'filter_definition' => [
+            ],
             'editable' => false,
-        ),
-    ),
-);
+        ],
+    ],
+];

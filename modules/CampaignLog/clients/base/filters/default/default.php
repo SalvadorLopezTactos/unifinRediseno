@@ -9,13 +9,13 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['CampaignLog']['base']['filter']['default'] = array(
+$viewdefs['CampaignLog']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'campaign_name1' => array(),
-        'activity_type' => array(),
-        'activity_date' => array(),
-        'related_id' => array(),
-        'date_modified' => array(),
-    ),
-);
+    'fields' => [
+        'campaign_name1' => [],
+        'activity_type' => [],
+        'activity_date' => [],
+        'related_id' => [],
+        'date_modified' => [],
+    ],
+];

@@ -10,6 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-    $server = new HTTP_WebDAV_Server_iCal();
-    $server->ServeICalRequest();
-    sugar_cleanup();
+$server = new HTTP_WebDAV_Server_iCal();
+$server->ServeICalRequest();
+sugar_cleanup();

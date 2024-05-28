@@ -10,52 +10,51 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/formbase.php');
+require_once 'include/formbase.php';
 
 class File extends Basic
 {
-	public $file_url;
-	public $file_url_noimage;
+    public $file_url;
+    public $file_url_noimage;
 
-	/**
-	 * @see SugarBean::save()
-	 */
-	public function save($check_notify=false)
-	{
-		if (!empty($this->uploadfile)) {
-			$this->filename = $this->uploadfile;
-		}
+    /**
+     * @see SugarBean::save()
+     */
+    public function save($check_notify = false)
+    {
+        if (!empty($this->uploadfile)) {
+            $this->filename = $this->uploadfile;
+        }
 
-		return parent::save($check_notify);
- 	}
+        return parent::save($check_notify);
+    }
 
- 	/**
-	 * @see SugarBean::fill_in_additional_detail_fields()
-	 */
-	public function fill_in_additional_detail_fields()
- 	{
-		global $app_list_strings;
-		global $img_name;
-		global $img_name_bare;
+    /**
+     * @see SugarBean::fill_in_additional_detail_fields()
+     */
+    public function fill_in_additional_detail_fields()
+    {
+        global $app_list_strings;
+        global $img_name;
+        global $img_name_bare;
 
-		$this->uploadfile = $this->filename;
+        $this->uploadfile = $this->filename;
 
-		// Bug 41453 - Make sure we call the parent method as well
-		parent::fill_in_additional_detail_fields();
+        // Bug 41453 - Make sure we call the parent method as well
+        parent::fill_in_additional_detail_fields();
 
-		if (!$this->file_ext) {
-			$img_name = SugarThemeRegistry::current()->getImageURL(strtolower($this->file_ext)."_image_inline.gif");
-			$img_name_bare = strtolower($this->file_ext)."_image_inline";
-		}
+        if (!$this->file_ext) {
+            $img_name = SugarThemeRegistry::current()->getImageURL(strtolower($this->file_ext) . '_image_inline.gif');
+            $img_name_bare = strtolower($this->file_ext) . '_image_inline';
+        }
 
-		//set default file name.
-		if (!empty ($img_name) && file_exists($img_name)) {
-			$img_name = $img_name_bare;
-		}
-		else {
-			$img_name = "def_image_inline"; //todo change the default image.
-		}
-		$this->file_url_noimage = $this->id;
+        //set default file name.
+        if (!empty($img_name) && file_exists($img_name)) {
+            $img_name = $img_name_bare;
+        } else {
+            $img_name = 'def_image_inline'; //todo change the default image.
+        }
+        $this->file_url_noimage = $this->id;
 
         // Handle getting the status if the source of the status id field has
         // changed
@@ -78,17 +77,17 @@ class File extends Basic
         $this->name = $this->document_name;
     }
 
-	/**
-	 * @see SugarBean::retrieve()
-	 */
-	public function retrieve($id = -1, $encode=true, $deleted=true)
-	{
-		$ret_val = parent::retrieve($id, $encode, $deleted);
+    /**
+     * @see SugarBean::retrieve()
+     */
+    public function retrieve($id = -1, $encode = true, $deleted = true)
+    {
+        $ret_val = parent::retrieve($id, $encode, $deleted);
 
-		$this->name = $this->document_name;
+        $this->name = $this->document_name;
 
-		return $ret_val;
-	}
+        return $ret_val;
+    }
 
     /**
      * Method to delete an attachment
@@ -96,11 +95,11 @@ class File extends Basic
      * @param string $isduplicate
      * @return bool
      */
-    public function deleteAttachment($isduplicate = "false")
+    public function deleteAttachment($isduplicate = 'false')
     {
         $removeFile = null;
         if ($this->ACLAccess('edit')) {
-            if ($isduplicate == "true") {
+            if ($isduplicate == 'true') {
                 return true;
             }
             $removeFile = "upload://{$this->id}";
@@ -109,7 +108,8 @@ class File extends Basic
             if (!unlink($removeFile)) {
                 $GLOBALS['log']->error("*** Could not unlink() file: [ {$removeFile} ]");
             } else {
-                $this->uploadfile = '';$this->uploadfile = '';
+                $this->uploadfile = '';
+                $this->uploadfile = '';
                 $this->filename = '';
                 $this->file_mime_type = '';
                 $this->file_ext = '';

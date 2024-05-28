@@ -10,36 +10,36 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = '<module_name>';
-$viewdefs[$module_name]['base']['view']['search-list'] = array(
-    'panels' => array(
-        array(
+$viewdefs[$module_name]['base']['view']['search-list'] = [
+    'panels' => [
+        [
             'name' => 'primary',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'picture',
                     'type' => 'avatar',
                     'size' => 'medium',
                     'readonly' => true,
                     'css_class' => 'pull-left',
-                ),
-                array(
+                ],
+                [
                     'name' => 'name',
                     'type' => 'fullname',
-                    'fields' => array(
+                    'fields' => [
                         'salutation',
                         'first_name',
                         'last_name',
-                    ),
+                    ],
                     'link' => true,
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'secondary',
-            'fields' => array(
+            'fields' => [
                 'phone_work',
                 'email',
-             ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

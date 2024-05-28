@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class SugarMin {
-
+class SugarMin
+{
     /**
      * @var string|mixed
      */
     public $text;
     public $compression;
+
     /**
      * jsParser will take javascript source code and minify it.
      *
@@ -33,8 +34,9 @@ class SugarMin {
      * @param string $currentOptions
      * @return void
      */
-    private function __construct($text, $compression) {
-        $this->text = trim($text)."\n";
+    private function __construct($text, $compression)
+    {
+        $this->text = trim($text) . "\n";
         $this->compression = $compression;
     }
 
@@ -45,7 +47,8 @@ class SugarMin {
      * @param string $compression Compression option. {light, deep}.
      * @return string $output Output javascript code as a string.
      */
-    static public function minify($js, $compression = 'light') {
+    public static function minify($js, $compression = 'light')
+    {
         try {
             $me = new SugarMin($js, $compression);
             $output = $me->jsParser();
@@ -57,7 +60,8 @@ class SugarMin {
         }
     }
 
-    protected function jsParser() {
+    protected function jsParser()
+    {
         if (!shouldResourcesBeMinified()) {
             return $this->text;
         }
@@ -68,7 +72,7 @@ class SugarMin {
         }
 
         return JShrink\Minifier::minify($this->text);
-	}
+    }
 
     /**
      * @return bool true if native jsmin extension that works exists on the system.
@@ -82,7 +86,8 @@ class SugarMin {
     /**
      * @return bool true if a more native js minifier exists on the system.
      */
-    public static function isMinifyFast() {
-        return self::isJSMinExtAvailable()  || !empty($GLOBALS['sugar_config']['uglify']);
+    public static function isMinifyFast()
+    {
+        return self::isJSMinExtAvailable() || !empty($GLOBALS['sugar_config']['uglify']);
     }
 }

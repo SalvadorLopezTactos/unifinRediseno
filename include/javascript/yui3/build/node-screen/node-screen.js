@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('node-screen', function (Y, NAME) {
 
 /**
@@ -226,7 +219,7 @@ Y.Node.prototype.intersect = function(node2, altRegion) {
 };
 
 /**
- * Determines whether or not the node is within the giving region.
+ * Determines whether or not the node is within the given region.
  * @method inRegion
  * @param {Node|Object} node2 The node or region to compare with.
  * @param {Boolean} all Whether or not all of the node must be in the region.
@@ -242,4 +235,4 @@ Y.Node.prototype.inRegion = function(node2, all, altRegion) {
 };
 
 
-}, '3.15.0', {"requires": ["dom-screen", "node-base"]});
+}, '3.18.1', {"requires": ["dom-screen", "node-base"]});

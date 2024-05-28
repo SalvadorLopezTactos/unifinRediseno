@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Cola de trabajos',
     'LBL_MODULE_NAME_SINGULAR' => 'Cola de trabajos',
     'LBL_MODULE_TITLE' => 'Cola de trabajo: Inicio',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Resolución Cancelada',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Resolución en ejecución',
     // Errors
-    'ERR_CALL' => "No se puede llamar a la función: %s",
-    'ERR_CURL' => "No CURL - no se pueden ejecutar trabajos de URL",
-    'ERR_FAILED' => "Error inesperado, por favor, consulte los registros de PHP y sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s en %s on line %d",
-    'ERR_NOUSER' => "No se ha especificado un ID de usuario para el trabajo",
-    'ERR_NOSUCHUSER' => "No se ha encontrado un ID %s de usuario",
-    'ERR_JOBTYPE' => "Tipo de tarea desconocido: %s",
-    'ERR_TIMEOUT' => "Falla forzosa por tiempo de espera agotado",
+    'ERR_CALL' => 'No se puede llamar a la función: %s',
+    'ERR_CURL' => 'No CURL - no se pueden ejecutar trabajos de URL',
+    'ERR_FAILED' => 'Error inesperado, por favor, consulte los registros de PHP y sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s en %s on line %d',
+    'ERR_NOUSER' => 'No se ha especificado un ID de usuario para el trabajo',
+    'ERR_NOSUCHUSER' => 'No se ha encontrado un ID %s de usuario',
+    'ERR_JOBTYPE' => 'Tipo de tarea desconocido: %s',
+    'ERR_TIMEOUT' => 'Falla forzosa por tiempo de espera agotado',
     'ERR_JOB_FAILED_VERBOSE' => 'La tarea %1$s (%2$s) ha fallado en la ejecución del CRON',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'No se puede cargar bean con id.: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'No se puede encontrar el controlador para la ruta %s',
@@ -91,14 +91,14 @@ Admite el envío programático de mensajes mediante aplicaciones del servicio we
 </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Ayuda de configuración de Amazon SQS',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Sección de configuración de Amazon SQS.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Sección de configuración de Amazon SQS.</b></p>
 <ul>
 <li>Id. de clave de acceso: <i>escriba su número de id. de la clave de acceso de Amazon SQS</i></li>
 <li>Clave de acceso secreta: <i>escriba su clave de acceso secreta de Amazon SQS</i></li>
 <li>Región: <i>escriba la región del servidor Amazon SQS</i>
 </li>
 <li>Nombre de la cola: <i>ingrese el nombre de cola del servidor Amazon SQS</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'Ayuda de configuración de AMQP',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>Sección de configuración de AMQP.</b></p> <ul><li>URL del servidor: <i>Introduzca el URL de su servidor de mensajes en cola.</i></li>     <li>Login: <i>ingrese su login para RabbitMQ</i></li>     <li>Contraseña: <i>Introduzca su contraseña para RabbitMQ</i></li></ul>",
     'LBL_CONFIG_GEARMAN_TITLE' => 'Ayuda para la Configuración de Gearman',
@@ -114,4 +114,4 @@ Admite el envío programático de mensajes mediante aplicaciones del servicio we
     'LBL_REGION' => 'Región',
     'LBL_ACCESS_KEY_SECRET' => 'Clave de Acceso Secreta',
     'LBL_QUEUE_NAME' => 'Nombre del Adaptador',
-);
+];

@@ -17,6 +17,7 @@ use RobRichards\XMLSecLibs\XMLSecurityKey;
 use Sugarcrm\IdentityProvider\Srn;
 use Sugarcrm\IdentityProvider\STS\EndpointInterface;
 use Sugarcrm\IdentityProvider\STS\EndpointService;
+
 use function GuzzleHttp\default_user_agent;
 
 /**
@@ -143,7 +144,7 @@ class Config
      * @param string $key
      * @return bool
      */
-    protected function isArrayTypeValue(string $key) : bool
+    protected function isArrayTypeValue(string $key): bool
     {
         return in_array($key, $this->idmArrayTypeAttributes);
     }
@@ -300,7 +301,7 @@ class Config
             $userSrn = $this->getSrnManager()->createUserSrn($tenantSrn->getTenantId(), $userId);
             $query['user_hint'] = Srn\Converter::toString($userSrn);
         }
-        return join('/', array_merge([$serverUrl], $additional)) .'?'. http_build_query($query) ;
+        return join('/', array_merge([$serverUrl], $additional)) . '?' . http_build_query($query);
     }
 
     /**
@@ -324,7 +325,7 @@ class Config
      * Checks IDM mode is enabled
      * @return bool
      */
-    public function isIDMModeEnabled() : bool
+    public function isIDMModeEnabled(): bool
     {
         return (bool)$this->getIdmSettingsByKey('enabled', false);
     }
@@ -360,7 +361,7 @@ class Config
      *
      * @param false|array $config
      */
-    public function setIDMMode($config, $refreshCache = true) : void
+    public function setIDMMode($config, $refreshCache = true): void
     {
         // get IDM config data from source
         $oldConfig = $this->getIdmModeData();
@@ -400,6 +401,7 @@ class Config
             $this->refreshCache();
         }
     }
+
 
     /**
      * Enable or disable push notification.
@@ -493,11 +495,12 @@ class Config
      * return IDM mode disabled fields
      * @return array
      */
-    public function getIDMModeDisabledFields()
+    public function getIDMModeDisabledFields(array $exceptionNames = []) : array
     {
-        return array_filter($this->getUserVardef(), function ($def) {
-            return (!empty($def['idm_mode_disabled']) &&
-                ($def['name'] != 'license_type' ||
+        return array_filter($this->getUserVardef(), function ($def) use ($exceptionNames) {
+            return (!empty($def['idm_mode_disabled']) && !in_array($def['name'], $exceptionNames) &&
+                (
+                    $def['name'] != 'license_type' ||
                     ($def['name'] === 'license_type' && $this->getUserLicenseTypeIdmModeLock())
                 )
             );
@@ -621,7 +624,7 @@ class Config
             );
             $ldap['groupAttribute'] = $this->getLdapSetting('ldap_group_attr');
             $ldap['userUniqueAttribute'] = $this->getLdapSetting('ldap_group_user_attr');
-            $ldap['includeUserDN'] = (bool) $this->getLdapSetting('ldap_group_attr_req_dn', false);
+            $ldap['includeUserDN'] = (bool)$this->getLdapSetting('ldap_group_attr_req_dn', false);
         }
 
         return array_merge($this->getLdapDefaultConfig(), $ldap);
@@ -701,7 +704,7 @@ class Config
      *
      * @return array
      */
-    protected function getIDMModeDefaultCachingConfig() : array
+    protected function getIDMModeDefaultCachingConfig(): array
     {
         return [
             'ttl' => [

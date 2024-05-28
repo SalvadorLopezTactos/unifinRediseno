@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Törzs',
     'LBL_BASE_MODULE' => 'Cél Modul',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Nem sikerült a fájlból generálni a Folyamati Email Sablont',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Ez az E-mail sablon jelenleg egy Folyamat-meghatározásban használatos. Ennek ellenére szerkeszti a Folyamatsablont?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Nem törölheti ezt az E-mail sablont, mivel jelenleg egy Folyamat-meghatározásban használatos.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Nem törölheti ezt az E-mail sablont, mivel jelenleg egy Folyamat-meghatározásban használatos.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Mezőválasztó',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Választás',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Mező értékének típusa',
-);
+];

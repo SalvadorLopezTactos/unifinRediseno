@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Tuluüksuste loendi töölaud',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Tuluüksuste kirjete töölaud',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Tooteliigid',
     'LBL_ASSIGNED_TO_NAME' => 'Määratud kasutajale:',
     'LBL_ASSIGNED_TO' => 'Määratud kasutajale',
-    'LBL_ASSIGNED_TO_ID'=>'Määratud kasutaja ID',
+    'LBL_ASSIGNED_TO_ID' => 'Määratud kasutaja ID',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Määratud kasutaja nimi',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Määratud kasutaja ID',
     'LBL_CAMPAIGN_ID' => 'Kampaania ID',
@@ -217,4 +217,5 @@ Mooduli {{module_name}} loomiseks tehke järgmist.
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Kuvab top kümme tuluartiklit mulldiagrammis.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Minu tuluartiklid',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Minu meeskonna tuluartiklid",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tulu reaüksuse ajaskaala',
+];

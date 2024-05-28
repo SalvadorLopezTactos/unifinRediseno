@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<ul class="typeahead dropdown-menu rounded-t-none search-results m-0">
+<ul class="typeahead dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl rounded-t-none search-results m-0">
 {{#if collection.models}}
     {{#each collection.models}}
         <li class="search-result">
@@ -25,7 +25,7 @@
         </li>
     {{/each}}
     {{#notEq collection.next_offset "-1"}}
-        <li class="view-all-results ellipsis_inline" data-placement="bottom" title="" data-original-title="">
+        <li class="view-all-results ellipsis_inline" data-bs-placement="bottom" title="" data-original-title="">
             {{#if ../layout.v2}}
             <a href="#{{searchLink}}" tabindex="-1">{{str "LNK_SEARCH_FTS_VIEW_ALL"}}</a>
             {{else}}
@@ -34,7 +34,7 @@
         </li>
     {{/notEq}}
 {{else}}
-        <li class="no-results ellipsis_inline" data-placement="bottom" title="" data-original-title="">
+        <li class="no-results ellipsis_inline" data-bs-placement="bottom" title="" data-original-title="">
             {{#if collection.dataFetched}}
                 {{str 'LNK_SEARCH_NO_RESULTS'}}
             {{else}}

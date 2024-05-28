@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Активний',
     'LBL_ASSIGNEE_RULE' => 'Правило виконавця',
     'LBL_TARGET_ASSIGNEE' => 'Цільовий виконавець',
+    'LBL_STAGE_NUMBERS' => 'Нумерація етапів',
     'LBL_EXPORT_BUTTON_LABEL' => 'Експорт',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Імпорт',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Автоматично створити/оновити новий запис шаблона Smart Guide за допомогою імпорту файлу *.json із файлової системи.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Якщо позначено, що цільовий виконавець — це виконавець батьківського рівня, а користувача з позначкою «Призначено» замінено на батьківський елемент, користувачі з позначкою «Призначено» також будуть автоматично змінені у відповідних Smart Guide, стадіях і активностях. Зауважте, що налаштування цільового виконавця в шаблонах активності мають пріоритет над шаблоном Smart Guide',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Коли певним активностям має бути призначений користувач',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Кому слід призначити дії',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'За допомогою цього перемикача можна відобразити або приховати автоматичну нумерацію етапів.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Smart Guide/Стадія/Шаблон дії',
 ];

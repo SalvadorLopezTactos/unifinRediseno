@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Bu takıma kullanıcı eklemek için bir kayıt numarası belirtmelisiniz.',
     'ERR_DUP_NAME' => 'Takım İsmi zaten kullanılmakta, lütfen başka bir tane seçiniz.',
     'ERR_DELETE_RECORD' => 'Bu takımı silmek için kayıt numarasını belirtmelisiniz.',
@@ -69,26 +69,26 @@ Bir modül için takım bazlı izinlerin devre dışı bırakılması bu modül 
  Ayrıca herhangi bir modül için takım bazlı izinleri devre dışı bıraktıktan sonra sistem önbelleğinizi temizlemek için Hızlı Onarım
  ve Yeniden Oluşturma aracını kullanmanızı öneririz.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Uyarı</strong> Bir modül için takım bazlı izinlerin devre dışı bırakılması bu modül için takım bazlı izinlerle ilişkili tüm verileri eski haline
  döndürür, örneğin özelliği kullanan tüm İşlem Tanımları veya İşlemler dahil. Bu, o modül için "Sahip ve Seçili takım" seçeneğini kullanan tüm Rolleri ve o modüldeki kayıtlar için tüm takım bazlı izinler verilerini içerir.
  Ayrıca herhangi bir modül için takım bazlı izinleri devre dışı bıraktıktan sonra sistem önbelleğinizi temizlemek için Hızlı Onarım
  ve Yeniden Oluşturma aracını kullanmanızı öneririz.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Bir modül için takım bazlı izinlerin devre dışı bırakılması bu modül için takım bazlı izinlerle ilişkili tüm verileri eski haline
  döndürür, örneğin özelliği kullanan tüm İşlem Tanımları veya İşlemler dahil. Bu, o modül için "Sahip ve Seçili takım" seçeneğini kullanan tüm Rolleri ve o modüldeki kayıtlar için tüm takım bazlı izinler verilerini içerir.
  Ayrıca herhangi bir modül için takım bazlı izinleri devre dışı bıraktıktan sonra sistem önbelleğinizi temizlemek için Hızlı Onarım
  ve Yeniden Oluşturma aracını kullanmanızı öneririz. Hızlı Onarım ve Yeniden Oluşturma aracına erişim izniniz yoksa Onarım menüsüne erişimi bulunan bir yöneticiyle iletişime geçin.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Uyarı:</strong> Bir modül için takım bazlı izinlerin devre dışı bırakılması bu modül için takım bazlı izinlerle ilişkili tüm verileri eski haline
  döndürür, örneğin özelliği kullanan tüm İşlem Tanımları veya İşlemler dahil. Bu, o modül için "Sahip ve Seçili takım" seçeneğini kullanan tüm Rolleri ve o modüldeki kayıtlar için tüm takım bazlı izinler verilerini içerir.
  Ayrıca herhangi bir modül için takım bazlı izinleri devre dışı bıraktıktan sonra sistem önbelleğinizi temizlemek için Hızlı Onarım
  ve Yeniden Oluşturma aracını kullanmanızı öneririz. Hızlı Onarım ve Yeniden Oluşturma aracına erişim izniniz yoksa Onarım menüsüne erişimi bulunan bir yöneticiyle iletişime geçin.
 STR
-,
-);
+    ,
+];

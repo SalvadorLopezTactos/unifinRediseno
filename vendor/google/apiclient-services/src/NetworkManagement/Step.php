@@ -21,12 +21,16 @@ class Step extends \Google\Model
 {
   protected $abortType = AbortInfo::class;
   protected $abortDataType = '';
+  protected $appEngineVersionType = AppEngineVersionInfo::class;
+  protected $appEngineVersionDataType = '';
   /**
    * @var bool
    */
   public $causesDrop;
   protected $cloudFunctionType = CloudFunctionInfo::class;
   protected $cloudFunctionDataType = '';
+  protected $cloudRunRevisionType = CloudRunRevisionInfo::class;
+  protected $cloudRunRevisionDataType = '';
   protected $cloudSqlInstanceType = CloudSQLInstanceInfo::class;
   protected $cloudSqlInstanceDataType = '';
   protected $deliverType = DeliverInfo::class;
@@ -47,6 +51,8 @@ class Step extends \Google\Model
   protected $forwardingRuleDataType = '';
   protected $gkeMasterType = GKEMasterInfo::class;
   protected $gkeMasterDataType = '';
+  protected $googleServiceType = GoogleServiceInfo::class;
+  protected $googleServiceDataType = '';
   protected $instanceType = InstanceInfo::class;
   protected $instanceDataType = '';
   protected $loadBalancerType = LoadBalancerInfo::class;
@@ -85,6 +91,20 @@ class Step extends \Google\Model
     return $this->abort;
   }
   /**
+   * @param AppEngineVersionInfo
+   */
+  public function setAppEngineVersion(AppEngineVersionInfo $appEngineVersion)
+  {
+    $this->appEngineVersion = $appEngineVersion;
+  }
+  /**
+   * @return AppEngineVersionInfo
+   */
+  public function getAppEngineVersion()
+  {
+    return $this->appEngineVersion;
+  }
+  /**
    * @param bool
    */
   public function setCausesDrop($causesDrop)
@@ -111,6 +131,20 @@ class Step extends \Google\Model
   public function getCloudFunction()
   {
     return $this->cloudFunction;
+  }
+  /**
+   * @param CloudRunRevisionInfo
+   */
+  public function setCloudRunRevision(CloudRunRevisionInfo $cloudRunRevision)
+  {
+    $this->cloudRunRevision = $cloudRunRevision;
+  }
+  /**
+   * @return CloudRunRevisionInfo
+   */
+  public function getCloudRunRevision()
+  {
+    return $this->cloudRunRevision;
   }
   /**
    * @param CloudSQLInstanceInfo
@@ -237,6 +271,20 @@ class Step extends \Google\Model
   public function getGkeMaster()
   {
     return $this->gkeMaster;
+  }
+  /**
+   * @param GoogleServiceInfo
+   */
+  public function setGoogleService(GoogleServiceInfo $googleService)
+  {
+    $this->googleService = $googleService;
+  }
+  /**
+   * @return GoogleServiceInfo
+   */
+  public function getGoogleService()
+  {
+    return $this->googleService;
   }
   /**
    * @param InstanceInfo

@@ -25,7 +25,7 @@ if ($idpConfig->isIDMModeEnabled()) {
     sugar_die(null);
 }
 
-if(!is_admin($current_user)){
+if (!is_admin($current_user)) {
     sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
 }
 
@@ -33,21 +33,22 @@ if(!is_admin($current_user)){
  * clearPasswordSettings
  * @deprecated as of 7.5
  */
-function clearPasswordSettings() {
-    $GLOBALS['log']->deprecated("This method is no longer valid for use and will be removed in a future version of SugarCRM");
+function clearPasswordSettings()
+{
+    $GLOBALS['log']->deprecated('This method is no longer valid for use and will be removed in a future version of SugarCRM');
 }
 
-require_once('modules/Administration/Forms.php');
+require_once 'modules/Administration/Forms.php';
 require_once 'include/upload_file.php';
 
 echo getClassicModuleTitle(
-        "Administration",
-        array(
-            "<a href='#Administration'>".translate('LBL_MODULE_NAME', 'Administration')."</a>",
-           $mod_strings['LBL_MANAGE_PASSWORD_TITLE'],
-           ),
-        false
-        );
+    'Administration',
+    [
+        "<a href='#Administration'>" . translate('LBL_MODULE_NAME', 'Administration') . '</a>',
+        $mod_strings['LBL_MANAGE_PASSWORD_TITLE'],
+    ],
+    false
+);
 $configurator = new Configurator();
 $sugarConfig = SugarConfig::getInstance();
 $focus = BeanFactory::newBean('Administration');
@@ -63,18 +64,17 @@ $ldapEncryptionOptions = [
 ];
 if (!empty($_POST['saveConfig'])) {
     do {
-		if (isset($_REQUEST['system_ldap_enabled']) && $_REQUEST['system_ldap_enabled'] == 'on') {
-			$_POST['system_ldap_enabled'] = 1;
-		}
-		else
-			$_POST['system_ldap_enabled'] = 0;
-
-
-        if(isset($_REQUEST['authenticationClass']))
-        {
-	        $configurator->useAuthenticationClass = true;
+        if (isset($_REQUEST['system_ldap_enabled']) && $_REQUEST['system_ldap_enabled'] == 'on') {
+            $_POST['system_ldap_enabled'] = 1;
         } else {
-	        $configurator->useAuthenticationClass = false;
+            $_POST['system_ldap_enabled'] = 0;
+        }
+
+
+        if (isset($_REQUEST['authenticationClass'])) {
+            $configurator->useAuthenticationClass = true;
+        } else {
+            $configurator->useAuthenticationClass = false;
             $_POST['authenticationClass'] = '';
         }
 
@@ -84,22 +84,25 @@ if (!empty($_POST['saveConfig'])) {
             $_POST['ldap_group_attr_req_dn'] = 0;
         }
 
-		if (isset($_REQUEST['ldap_group_checkbox']) && $_REQUEST['ldap_group_checkbox'] == 'on')
-			$_POST['ldap_group'] = 1;
-		else
-			$_POST['ldap_group'] = 0;
+        if (isset($_REQUEST['ldap_group_checkbox']) && $_REQUEST['ldap_group_checkbox'] == 'on') {
+            $_POST['ldap_group'] = 1;
+        } else {
+            $_POST['ldap_group'] = 0;
+        }
 
-		if (isset($_REQUEST['ldap_authentication_checkbox']) && $_REQUEST['ldap_authentication_checkbox'] == 'on')
-			$_POST['ldap_authentication'] = 1;
-		else
-		    $_POST['ldap_authentication'] = 0;
+        if (isset($_REQUEST['ldap_authentication_checkbox']) && $_REQUEST['ldap_authentication_checkbox'] == 'on') {
+            $_POST['ldap_authentication'] = 1;
+        } else {
+            $_POST['ldap_authentication'] = 0;
+        }
 
         if (!empty($_POST['ldap_admin_password']) && $_POST['ldap_admin_password'] == Administration::$passwordPlaceholder) {
             unset($_POST['ldap_admin_password']);
         }
 
-		if( isset($_REQUEST['passwordsetting_lockoutexpirationtime']) && is_numeric($_REQUEST['passwordsetting_lockoutexpirationtime'])  )
-		    $_POST['passwordsetting_lockoutexpiration'] = 2;
+        if (isset($_REQUEST['passwordsetting_lockoutexpirationtime']) && is_numeric($_REQUEST['passwordsetting_lockoutexpirationtime'])) {
+            $_POST['passwordsetting_lockoutexpiration'] = 2;
+        }
 
         // Check SAML settings
         if (!empty($_POST['authenticationClass']) && $_POST['authenticationClass'] == 'IdMSAMLAuthenticate') {
@@ -211,11 +214,11 @@ if (!empty($_POST['saveConfig'])) {
             }
         }
 
-		$configurator->saveConfig();
-		$focus->saveConfig();
+        $configurator->saveConfig();
+        $focus->saveConfig();
 
-		// Clean API cache since we may have changed the authentication settings
-		MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_CONFIG));
+        // Clean API cache since we may have changed the authentication settings
+        MetaDataManager::refreshSectionCache([MetaDataManager::MM_CONFIG]);
 
         die("
             <script>
@@ -228,12 +231,11 @@ if (!empty($_POST['saveConfig'])) {
                         });        
                     }
                 });
-            </script>"
-        );
-	} while (false);
+            </script>");
+    } while (false);
 
-	// We did not succeed saving, but we still want to load data from post to display it
-	$configurator->populateFromPost();
+    // We did not succeed saving, but we still want to load data from post to display it
+    $configurator->populateFromPost();
 }
 
 $focus->retrieveSettings();
@@ -261,14 +263,14 @@ $sugar_smarty->assign('APP_LIST', $app_list_strings);
 $sugar_smarty->assign('config', $configurator->config);
 $sugar_smarty->assign('error', $configurator->errors);
 $sugar_smarty->assign('LANGUAGES', get_languages());
-$sugar_smarty->assign("settings", $focus->settings);
+$sugar_smarty->assign('settings', $focus->settings);
 
 $sugar_smarty->assign('saml_enabled_checked', false);
 $sugar_smarty->assign('SAML_AVAILABLE_SIGNING_ALGOS', $samlSigningAlgos);
 
 $sugar_smarty->assign('csrf_field_name', \Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator::FORM_TOKEN_FIELD);
 
-$sugar_smarty->assign("LDAP_ENC_KEY_DESC", $config_strings['LBL_LDAP_ENC_KEY_DESC']);
+$sugar_smarty->assign('LDAP_ENC_KEY_DESC', $config_strings['LBL_LDAP_ENC_KEY_DESC']);
 $sugar_smarty->assign(
     'LDAP_ENCRYPTION_TYPE_OPTIONS',
     get_select_options_with_id(
@@ -277,24 +279,24 @@ $sugar_smarty->assign(
     )
 );
 
-$sugar_smarty->assign("settings", $focus->settings);
+$sugar_smarty->assign('settings', $focus->settings);
 
-$res=$GLOBALS['sugar_config']['passwordsetting'];
+$res = $GLOBALS['sugar_config']['passwordsetting'];
 
 $outboundMailConfig = OutboundEmailConfigurationPeer::getSystemDefaultMailConfiguration();
-$smtpServerIsSet    = (OutboundEmailConfigurationPeer::isMailConfigurationValid($outboundMailConfig)) ? "0" : "1";
-$sugar_smarty->assign("SMTP_SERVER_NOT_SET", $smtpServerIsSet);
+$smtpServerIsSet = (OutboundEmailConfigurationPeer::isMailConfigurationValid($outboundMailConfig)) ? '0' : '1';
+$sugar_smarty->assign('SMTP_SERVER_NOT_SET', $smtpServerIsSet);
 
 $focus = BeanFactory::newBean('InboundEmail');
 $focus->checkImap();
 $storedOptions = unserialize(base64_decode($focus->stored_options), ['allowed_classes' => false]);
-$email_templates_arr = get_bean_select_array(true, 'EmailTemplate','name', '','name',true);
-$create_case_email_template = $storedOptions['create_case_email_template'] ?? "";
-$TMPL_DRPDWN_LOST =get_select_options_with_id($email_templates_arr, $res['lostpasswordtmpl']);
+$email_templates_arr = get_bean_select_array(true, 'EmailTemplate', 'name', '', 'name', true);
+$create_case_email_template = $storedOptions['create_case_email_template'] ?? '';
+$TMPL_DRPDWN_LOST = get_select_options_with_id($email_templates_arr, $res['lostpasswordtmpl']);
 
-$sugar_smarty->assign("TMPL_DRPDWN_LOST", $TMPL_DRPDWN_LOST);
+$sugar_smarty->assign('TMPL_DRPDWN_LOST', $TMPL_DRPDWN_LOST);
 
-$LOGGED_OUT_DISPLAY= (isset($res['lockoutexpiration']) && $res['lockoutexpiration'] == '0') ? 'none' : '';
-$sugar_smarty->assign("LOGGED_OUT_DISPLAY_STATUS", $LOGGED_OUT_DISPLAY);
+$LOGGED_OUT_DISPLAY = (isset($res['lockoutexpiration']) && $res['lockoutexpiration'] == '0') ? 'none' : '';
+$sugar_smarty->assign('LOGGED_OUT_DISPLAY_STATUS', $LOGGED_OUT_DISPLAY);
 
 $sugar_smarty->display('modules/Administration/PasswordManager.tpl');

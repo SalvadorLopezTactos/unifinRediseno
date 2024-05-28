@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-if( !isset( $install_script ) || !$install_script ){
+if (!isset($install_script) || !$install_script) {
     die($mod_strings['ERR_NO_DIRECT_SCRIPT']);
 }
 
@@ -20,7 +20,7 @@ $langHeader = get_language_header();
 /**
  * @psalm-suppress UndefinedGlobalVariable
  */
-$out =<<<EOQ
+$out = <<<EOQ
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <html {$langHeader}>

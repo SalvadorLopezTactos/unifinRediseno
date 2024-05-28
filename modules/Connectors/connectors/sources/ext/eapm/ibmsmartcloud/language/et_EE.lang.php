@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Hankige võti ja salavõti IBM-i SmartCloudist, registreerides oma Sugari eksemplari uue rakendusena.<br>
 &nbsp;<br>
 Teie eksemplari registreerimise etapid on järgmised:<br>
@@ -28,5 +28,4 @@ Teie eksemplari registreerimise etapid on järgmised:<br>
 </td></tr></table>',
     'oauth_consumer_key' => 'OAuthi tarbija võti',
     'oauth_consumer_secret' => 'OAuthi tarbija salavõti',
-);
-
+];

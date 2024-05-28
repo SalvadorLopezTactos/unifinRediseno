@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Piezīmju saraksta instrumentu panelis',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Piezīmju ierakstu instrumentu panelis',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Piezīmju fokusa panelis',
     'LBL_EXTERNAL_USER' => 'Ārējais lietotājs',
     'LBL_EXTERNAL_USER_NAME' => 'Ārējais lietotājs',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Piezīmes laika josla',
 
     'LBL_RELATED_CONTACT' => 'Saistītā kontaktpersona',
     'ERR_DELETE_RECORD' => 'Jums ir jānorāda ieraksta numurs, lai dzēstu uzņēmumu.',
@@ -126,4 +127,4 @@ $mod_strings = array(
 - Pirms saglabāšanas ir jāaizpilda lauki, kuri ir atzīmēti kā obligāti.
 - Ja nepieciešams apskatīt papildu laukus, spiediet uz "Rādīt vairāk".
 2. Spiediet "Saglabāt", lai pabeigtu jauna ieraksta izveidi un atgrieztos iepriekšējā lapā.',
-);
+];

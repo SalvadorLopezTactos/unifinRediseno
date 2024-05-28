@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Update moduleList and moduleListSingular with new modules
  */
@@ -19,37 +20,38 @@ class SugarUpgradeNewModules extends UpgradeScript
 
     public function run()
     {
-        if(empty($this->upgrader->state['old_moduleList'])) {
-            $this->log("Did not find old modules?");
+        $app_list_strings = null;
+        if (empty($this->upgrader->state['old_moduleList'])) {
+            $this->log('Did not find old modules?');
             return;
         }
         include 'include/language/en_us.lang.php';
         $en_strings = $app_list_strings;
 
-        $newModules = array_diff($en_strings['moduleList'],  $this->upgrader->state['old_moduleList']);
-        if(empty($newModules)) {
+        $newModules = array_diff($en_strings['moduleList'], $this->upgrader->state['old_moduleList']);
+        if (empty($newModules)) {
             return;
         }
-        $this->log("New modules to add: ".var_export($newModules, true));
+        $this->log('New modules to add: ' . var_export($newModules, true));
 
-        $keyList = array('moduleList', 'moduleListSingular', 'moduleIconList');
+        $keyList = ['moduleList', 'moduleListSingular', 'moduleIconList'];
 
         foreach (get_languages() as $langKey => $langName) {
-            if(!file_exists("custom/include/language/$langKey.lang.php")) {
+            if (!file_exists("custom/include/language/$langKey.lang.php")) {
                 // no custom file, nothing to do
                 continue;
             }
-            $app_list_strings = array();
+            $app_list_strings = [];
             if (file_exists("include/language/$langKey.lang.php")) {
                 include "include/language/$langKey.lang.php";
             }
             $orig_lang_strings = $app_list_strings;
             $all_strings = return_app_list_strings_language($langKey);
-            $addModStrings = array();
-            foreach($newModules as $modKey => $modName) {
-                foreach($keyList as $appKey) {
-                    if(empty($all_strings[$appKey][$modKey])) {
-                        if(!empty($orig_lang_strings[$appKey][$modKey])) {
+            $addModStrings = [];
+            foreach ($newModules as $modKey => $modName) {
+                foreach ($keyList as $appKey) {
+                    if (empty($all_strings[$appKey][$modKey])) {
+                        if (!empty($orig_lang_strings[$appKey][$modKey])) {
                             $addModStrings[$appKey][$modKey] = $orig_lang_strings[$appKey][$modKey];
                         } elseif (!empty($en_strings[$appKey][$modKey])) {
                             $addModStrings[$appKey][$modKey] = $en_strings[$appKey][$modKey];
@@ -60,7 +62,7 @@ class SugarUpgradeNewModules extends UpgradeScript
                     }
                 }
             }
-            if(!empty($addModStrings)) {
+            if (!empty($addModStrings)) {
                 $this->updateCustomFile($langKey, $addModStrings);
             }
         }
@@ -73,18 +75,18 @@ class SugarUpgradeNewModules extends UpgradeScript
      */
     protected function updateCustomFile($lang, $data)
     {
-        if(empty($data)) {
+        if (empty($data)) {
             return;
         }
         $file_data = trim(file_get_contents("custom/include/language/$lang.lang.php"));
-        if(substr($file_data, -2) == "?>") {
+        if (substr($file_data, -2) == '?>') {
             // strip closing tag
             $file_data = substr($file_data, 0, -2);
         }
         $file_data .= "\n/* This file was modified by Sugar Upgrade */\n";
-        foreach($data as $key => $array) {
-            foreach($array as $akey => $aval) {
-                $file_data .= "\$app_list_strings['$key']['$akey'] = ".var_export($aval, true).";\n";
+        foreach ($data as $key => $array) {
+            foreach ($array as $akey => $aval) {
+                $file_data .= "\$app_list_strings['$key']['$akey'] = " . var_export($aval, true) . ";\n";
             }
         }
 

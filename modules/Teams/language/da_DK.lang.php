@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Du skal angive et postnummer for at tilføje en bruger til dette team.',
     'ERR_DUP_NAME' => 'Team navn eksistere allerede, venligst vælg et andet.',
     'ERR_DELETE_RECORD' => 'Du skal angive et postnummer for at slette dette team.',
@@ -66,17 +66,17 @@ $mod_strings = array(
     'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
 Deaktivering af team-baserede tilladelser for et modul vil still alle data i forbindelse med team-baserede tilladelser til dette modul tilbage, herunder alle procesdefinitioner eller processer, der bruger funktionen. Dette omfatter alle roller, der anvender indstillingen "Ejer & valgte team" til dette modul, og alle team-baserede tilladelsesdata for poster i det pågældende modul. Det anbefales også, at du bruger værktøjet til hurtig reparation og genopbygning for at rydde systemcachen efter deaktivering af team-baserede tilladelser for ethvert modul.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Advarsel:</strong> Deaktivering af team-baserede tilladelser for et modul vil still alle data i forbindelse med team-baserede tilladelser til dette modul tilbage, herunder alle procesdefinitioner eller processer, der bruger funktionen. Dette omfatter alle roller, der anvender indstillingen "Ejer & valgte team" til dette modul, og alle team-baserede tilladelsesdata for poster i det pågældende modul. Det anbefales også, at du bruger værktøjet til hurtig reparation og genopbygning for at rydde systemcachen efter deaktivering af team-baserede tilladelser for ethvert modul.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Deaktivering af team-baserede tilladelser for et modul vil still alle data i forbindelse med team-baserede tilladelser til dette modul tilbage, herunder alle procesdefinitioner eller processer, der bruger funktionen. Dette omfatter alle roller, der anvender indstillingen "Ejer & valgte team" til dette modul, og alle team-baserede tilladelsesdata for poster i det pågældende modul. Det anbefales også, at du bruger værktøjet til hurtig reparation og genopbygning for at rydde systemcachen efter deaktivering af team-baserede tilladelser for ethvert modul. Hvis du ikke har adgang til hurtig reparation og genopretning, så kontakt en administrator med adgang til reparationsmenuen.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Advarsel:</strong> Deaktivering af team-baserede tilladelser for et modul vil still alle data i forbindelse med team-baserede tilladelser til dette modul tilbage, herunder alle procesdefinitioner eller processer, der bruger funktionen. Dette omfatter alle roller, der anvender indstillingen "Ejer & valgte team" til dette modul, og alle team-baserede tilladelsesdata for poster i det pågældende modul. Det anbefales også, at du bruger værktøjet til hurtig reparation og genopbygning for at rydde systemcachen efter deaktivering af team-baserede tilladelser for ethvert modul. Hvis du ikke har adgang til hurtig reparation og genopretning, så kontakt en administrator med adgang til reparationsmenuen.
 STR
-,
-);
+    ,
+];

@@ -10,33 +10,37 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class TemplateParent extends TemplateEnum{
+class TemplateParent extends TemplateEnum
+{
     public $max_size = 36;
-    var $type='parent';
-    
-    function get_field_def(){
+    public $type = 'parent';
+
+    public function get_field_def()
+    {
         $def = parent::get_field_def();
         $def['type_name'] = 'parent_type';
         $def['id_name'] = 'parent_id';
         $def['parent_type'] = 'record_type_display';
         $def['source'] = 'non-db';
         $def['studio'] = 'visible';
-        return $def;    
+        return $def;
     }
-    
-    function delete($df){
+
+    public function delete($df)
+    {
         parent::delete($df);
         //currency id
         $parent_type = new TemplateText();
         $parent_type->name = 'parent_type';
-        $parent_type->delete($df);  
-        
+        $parent_type->delete($df);
+
         $parent_id = new TemplateId();
         $parent_id->name = 'parent_id';
         $parent_id->delete($df);
     }
-    
-    function save($df){
+
+    public function save($df)
+    {
         $this->ext1 = 'parent_type_display';
         $this->name = 'parent_name';
         $this->default_value = '';
@@ -93,6 +97,3 @@ class TemplateParent extends TemplateEnum{
         return '';
     }
 }
-
-
-?>

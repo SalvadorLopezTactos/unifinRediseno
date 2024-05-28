@@ -12,43 +12,50 @@
 
 class SugarModule
 {
-    protected static $_instances = array();
+    // @codingStandardsIgnoreLine PSR2.Classes.PropertyDeclaration.Underscore
+    protected static $_instances = [];
 
+    // @codingStandardsIgnoreLine PSR2.Classes.PropertyDeclaration.Underscore
     protected $_moduleName;
 
     public static function get(
         $moduleName
-        )
-    {
-        if ( !isset(self::$_instances[$moduleName]) )
+    ) {
+
+
+        if (!isset(self::$_instances[$moduleName])) {
             self::$_instances[$moduleName] = new SugarModule($moduleName);
+        }
 
         return self::$_instances[$moduleName];
     }
 
     public function __construct(
         $moduleName
-        )
-    {
+    ) {
+
+
         $this->_moduleName = $moduleName;
     }
 
     /**
      * Returns true if the given module implements the indicated template
      *
-     * @param  string $template
+     * @param string $template
      * @return bool
      */
     public function moduleImplements(
         $template
-        )
-    {
+    ) {
+
+
         $focus = self::loadBean();
 
-        if ( !$focus )
+        if (!$focus) {
             return false;
+        }
 
-        return is_a($focus,$template);
+        return is_a($focus, $template);
     }
 
     /**

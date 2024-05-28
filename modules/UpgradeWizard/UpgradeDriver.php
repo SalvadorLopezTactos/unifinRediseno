@@ -20,7 +20,7 @@ abstract class UpgradeDriver
      * @var array<string, mixed>|mixed[]
      */
     public $mod_strings;
-    public const STATE_FILE = "upgrade_state.php";
+    public const STATE_FILE = 'upgrade_state.php';
 
     public const DEFAULT_HEALTHCHECK_PATH = '/HealthCheck';
 
@@ -95,7 +95,7 @@ abstract class UpgradeDriver
      * - files_deleter - Hash that contains files as keys and which class::function requested delete
      * @var array
      */
-    public $state = array();
+    public $state = [];
 
     /**
      * Current stage
@@ -172,7 +172,7 @@ abstract class UpgradeDriver
             return false;
         }
 
-        $zip_from_dir = $this->context['extract_dir'] . "/" . $this->manifest['copy_files']['from_dir'];
+        $zip_from_dir = $this->context['extract_dir'] . '/' . $this->manifest['copy_files']['from_dir'];
         $target_dir = $this->context['source_dir'];
         $files = $this->findFiles($zip_from_dir);
         foreach ($files as $file) {
@@ -201,7 +201,7 @@ abstract class UpgradeDriver
     protected function loadState()
     {
         if (file_exists($this->context['state_file'])) {
-            $state = array();
+            $state = [];
             include $this->context['state_file'];
             $this->state = $state;
         }
@@ -212,7 +212,7 @@ abstract class UpgradeDriver
      */
     public function cleanState()
     {
-        $this->state = array();
+        $this->state = [];
         $this->saveState();
     }
 
@@ -230,7 +230,7 @@ abstract class UpgradeDriver
      */
     protected function saveState()
     {
-        $data = "<?php \$state = " . var_export($this->state, true) . ";";
+        $data = '<?php $state = ' . var_export($this->state, true) . ';';
         file_put_contents($this->context['state_file'], $data);
     }
 
@@ -244,16 +244,16 @@ abstract class UpgradeDriver
      */
     public function cleanCaches()
     {
-        require_once "include/MetaDataManager/MetaDataManager.php";
+        require_once 'include/MetaDataManager/MetaDataManager.php';
 
-        $this->log("Cleaning cache");
+        $this->log('Cleaning cache');
         $this->cleanFileCache();
-        $this->cleanDir($this->cacheDir("smarty"));
-        $this->cleanDir($this->cacheDir("modules"));
-        $this->cleanDir($this->cacheDir("jsLanguage"));
-        $this->cleanDir($this->cacheDir("Expressions"));
-        $this->cleanDir($this->cacheDir("themes"));
-        $this->cleanDir($this->cacheDir("include/api"));
+        $this->cleanDir($this->cacheDir('smarty'));
+        $this->cleanDir($this->cacheDir('modules'));
+        $this->cleanDir($this->cacheDir('jsLanguage'));
+        $this->cleanDir($this->cacheDir('Expressions'));
+        $this->cleanDir($this->cacheDir('themes'));
+        $this->cleanDir($this->cacheDir('include/api'));
 
         // as far as database schema hasn't been rebuilt yet, it's needed to check
         // if metadata manager is operable
@@ -264,7 +264,7 @@ abstract class UpgradeDriver
             MetaDataManager::disableCache();
         }
 
-        $this->log("Cache cleaned");
+        $this->log('Cache cleaned');
     }
 
     /**
@@ -272,11 +272,11 @@ abstract class UpgradeDriver
      */
     public function cleanFileCache()
     {
-        if (is_callable(array('SugarAutoLoader', 'buildCache'))) {
+        if (is_callable(['SugarAutoLoader', 'buildCache'])) {
             SugarAutoLoader::buildCache();
         } else {
             // delete dangerous files manually
-            @unlink("cache/class_map.php");
+            @unlink('cache/class_map.php');
         }
     }
 
@@ -289,11 +289,11 @@ abstract class UpgradeDriver
     {
         //Now that installation is complete, we need to set this to false to have the caches build correctly
         $GLOBALS['installing'] = false;
-        $this->log("Populating metadata cache");
+        $this->log('Populating metadata cache');
         $GLOBALS['app_list_strings'] = return_app_list_strings_language('en_us');
         require_once 'include/MetaDataManager/MetaDataManager.php';
-        MetaDataManager::setupMetadata(array('base'), array('en_us'));
-        $this->log("Metadata cache populated");
+        MetaDataManager::setupMetadata(['base'], ['en_us']);
+        $this->log('Metadata cache populated');
     }
 
     /**
@@ -322,7 +322,7 @@ abstract class UpgradeDriver
      */
     public function start()
     {
-        die("Must override this function in a driver");
+        die('Must override this function in a driver');
     }
 
     public function __construct()
@@ -340,16 +340,16 @@ abstract class UpgradeDriver
     {
         chdir($this->context['source_dir']);
         $this->loadConfig();
-        $this->context['temp_dir'] = $this->cacheDir("upgrades/temp");
+        $this->context['temp_dir'] = $this->cacheDir('upgrades/temp');
         $this->context['extract_dir'] = $this->context['temp_dir'];
         $this->ensureDir($this->context['temp_dir']);
         $this->context['state_file'] = $this->cacheDir('upgrades/') . self::STATE_FILE;
         $this->context['upgrader_dir'] = __DIR__;
         $this->loadState();
-        $this->context['backup_dir'] = "upgrades/backup/" . pathinfo(
-                $this->context['zip'],
-                PATHINFO_FILENAME
-            ) . "-restore";
+        $this->context['backup_dir'] = 'upgrades/backup/' . pathinfo(
+            $this->context['zip'],
+            PATHINFO_FILENAME
+        ) . '-restore';
         if (isset($this->context['script_mask'])) {
             $this->script_mask &= $this->context['script_mask'];
         }
@@ -450,7 +450,7 @@ abstract class UpgradeDriver
                 return false;
             }
             while (false !== ($f = $d->read())) {
-                if ($f == "." || $f == "..") {
+                if ($f == '.' || $f == '..') {
                     continue;
                 }
                 $status &= $this->copyDir("$path/$f", "$pathto/$f");
@@ -493,7 +493,7 @@ abstract class UpgradeDriver
         $d = dir($path);
 
         while (($f = $d->read()) !== false) {
-            if ($f == "." || $f == "..") {
+            if ($f == '.' || $f == '..') {
                 continue;
             }
             if (is_file("$path/$f")) {
@@ -518,14 +518,14 @@ abstract class UpgradeDriver
      */
     protected function loadConfig()
     {
-        $sugar_config = array();
-        if (!is_readable($this->context['source_dir'] . "/config.php")) {
+        $sugar_config = [];
+        if (!is_readable($this->context['source_dir'] . '/config.php')) {
             $this->error("{$this->context['source_dir']}/config.php can not be loaded!", true);
             return;
         }
-        include $this->context['source_dir'] . "/config.php";
-        if (is_readable($this->context['source_dir'] . "/config_override.php")) {
-            include $this->context['source_dir'] . "/config_override.php";
+        include $this->context['source_dir'] . '/config.php';
+        if (is_readable($this->context['source_dir'] . '/config_override.php')) {
+            include $this->context['source_dir'] . '/config_override.php';
         }
         $GLOBALS['sugar_config'] = $sugar_config;
         // by-ref so we can modify it
@@ -592,7 +592,7 @@ abstract class UpgradeDriver
         $sugar_version = $sugar_flavor = null;
         include "$dir/sugar_version.php";
         $sugar_flavor = strtolower($sugar_flavor);
-        return array($sugar_version, $sugar_flavor);
+        return [$sugar_version, $sugar_flavor];
     }
 
     /**
@@ -602,7 +602,7 @@ abstract class UpgradeDriver
      */
     public function cacheDir($dir)
     {
-        return rtrim($this->config['cache_dir'], '/') . "/" . $dir;
+        return rtrim($this->config['cache_dir'], '/') . '/' . $dir;
     }
 
     /**
@@ -643,7 +643,7 @@ abstract class UpgradeDriver
      */
     protected function preflightPHPSettings()
     {
-        if (ini_get("zend.ze1_compatibility_mode")) {
+        if (ini_get('zend.ze1_compatibility_mode')) {
             return $this->error(
                 'PHP Backward Compatibility mode is turned on. Set zend.ze1_compatibility_mode to Off for proceeding further.',
                 true
@@ -664,18 +664,18 @@ abstract class UpgradeDriver
         }
         $server_software = $_SERVER['SERVER_SOFTWARE'];
         if (strpos($server_software, 'Microsoft-IIS') !== false && preg_match_all(
-                '/^.*\/(\d+\.?\d*)$/',
-                $server_software,
-                $out
-            )
+            '/^.*\/(\d+\.?\d*)$/',
+            $server_software,
+            $out
+        )
         ) {
             $iis_version = $out[1][0];
         }
         if (empty($iis_version)) {
             return true;
         }
-        if (version_compare($iis_version, "6.0", '<')) {
-            return $this->error($this->translate('ERR_CHECKSYS_IIS_INVALID_VER') . " " . $iis_version, true);
+        if (version_compare($iis_version, '6.0', '<')) {
+            return $this->error($this->translate('ERR_CHECKSYS_IIS_INVALID_VER') . ' ' . $iis_version, true);
         }
         if (ini_get('fastcgi.logging')) {
             return $this->error($this->translate('ERR_CHECKSYS_FASTCGI_LOGGING'), true);
@@ -686,12 +686,12 @@ abstract class UpgradeDriver
     /**
      * Array or required modules - module => function
      */
-    protected $requiredModules = array(
-        "XML" => "xml_parser_create",
-        "bcmath" => "bcadd",
-        "zip" => "zip_open",
-        "mbstring" => "mb_strlen",
-    );
+    protected $requiredModules = [
+        'XML' => 'xml_parser_create',
+        'bcmath' => 'bcadd',
+        'zip' => 'zip_open',
+        'mbstring' => 'mb_strlen',
+    ];
 
     /**
      * Check PHP modules
@@ -713,8 +713,8 @@ abstract class UpgradeDriver
      */
     protected function preflightWriteUnzip()
     {
-        if (!is_writable($this->context["extract_dir"])) {
-            return $this->error("{$this->context["extract_dir"]} is not writable", true);
+        if (!is_writable($this->context['extract_dir'])) {
+            return $this->error("{$this->context['extract_dir']} is not writable", true);
         }
         return true;
     }
@@ -725,12 +725,12 @@ abstract class UpgradeDriver
      */
     protected function preflightWriteSugar()
     {
-        if (!is_writable("config.php")) {
-            return $this->error("config.php is not writable!", true);
+        if (!is_writable('config.php')) {
+            return $this->error('config.php is not writable!', true);
         }
 
-        if (file_exists('config_override.php') && !is_writable("config_override.php")) {
-            return $this->error("config_override.php is not writable!", true);
+        if (file_exists('config_override.php') && !is_writable('config_override.php')) {
+            return $this->error('config_override.php is not writable!', true);
         }
         return true;
     }
@@ -741,15 +741,15 @@ abstract class UpgradeDriver
      */
     protected function preflightWriteCustom()
     {
-        if (!is_writable("custom/")) {
-            return $this->error("Custom directory not writable!", true);
+        if (!is_writable('custom/')) {
+            return $this->error('Custom directory not writable!', true);
         }
         $test = uniqid();
         file_put_contents("custom/upgradetest.$test", $test);
         $test2 = file_get_contents("custom/upgradetest.$test");
         @unlink("custom/upgradetest.$test");
         if ($test != $test2) {
-            return $this->error("Custom directory write test failed!", true);
+            return $this->error('Custom directory write test failed!', true);
         }
         return true;
     }
@@ -766,19 +766,19 @@ abstract class UpgradeDriver
             array_unshift($check, $this->translate($error));
             return $this->error(call_user_func_array('sprintf', $check), true);
         }
-        $tablename = "uptest" . uniqid();
+        $tablename = 'uptest' . uniqid();
         if (!$this->db->query("CREATE TABLE $tablename(a int, b int)")) {
-            $fail = "Table creation";
+            $fail = 'Table creation';
         } elseif (!$this->db->query("INSERT INTO $tablename(a,b) VALUES(1,2)")) {
-            $fail = "Insertion";
+            $fail = 'Insertion';
         } elseif (!$this->db->query("UPDATE $tablename SET a=2 WHERE a=1")) {
-            $fail = "Update";
+            $fail = 'Update';
         } elseif (!$this->db->query("DELETE FROM $tablename WHERE a=2")) {
-            $fail = "Deletion";
+            $fail = 'Deletion';
         }
         if ($this->db->tableExists($tablename)) {
             if (!$this->db->query("DROP TABLE $tablename") && empty($fail)) {
-                $fail = "Table deletion";
+                $fail = 'Table deletion';
             }
         }
         if (!empty($fail)) {
@@ -793,11 +793,11 @@ abstract class UpgradeDriver
      */
     protected function preflightSugarFiles()
     {
-        if (!is_readable("config.php")) {
-            return $this->error("Can not read config.php", true);
+        if (!is_readable('config.php')) {
+            return $this->error('Can not read config.php', true);
         }
-        if (!is_readable("include/entryPoint.php")) {
-            return $this->error("Can not read include/entryPoint.php", true);
+        if (!is_readable('include/entryPoint.php')) {
+            return $this->error('Can not read include/entryPoint.php', true);
         }
         if (empty($this->config)) {
             return $this->error('Failed to read Sugar configs.', true);
@@ -830,21 +830,21 @@ abstract class UpgradeDriver
      * List of preflight check functions
      * @var array
      */
-    protected $preflightChecksBeforeInit = array(
-        "PHP" => true, // check php version
-        "SugarFiles" => true, // check if Sugar dirs are accessible
-    );
+    protected $preflightChecksBeforeInit = [
+        'PHP' => true, // check php version
+        'SugarFiles' => true, // check if Sugar dirs are accessible
+    ];
 
-    protected $preflightChecksAfterInit = array(
-        "IIS" => true, // check IIS version
-        "PHPModules" => true, // check PHP modules
-        "PHPSettings" => true, // check php settings
-        "WriteUnzip" => true, // check if zip dir is writeable
-        "WriteSugar" => true, // check if Sugar directory is writable
-        "WriteCustom" => true, // check if Sugar custom directory is writable
-        "DB" => true, // check DB permissions
-        "DuplicateUpgrade" => true, // check if we already seen this upgrade
-    );
+    protected $preflightChecksAfterInit = [
+        'IIS' => true, // check IIS version
+        'PHPModules' => true, // check PHP modules
+        'PHPSettings' => true, // check php settings
+        'WriteUnzip' => true, // check if zip dir is writeable
+        'WriteSugar' => true, // check if Sugar directory is writable
+        'WriteCustom' => true, // check if Sugar custom directory is writable
+        'DB' => true, // check DB permissions
+        'DuplicateUpgrade' => true, // check if we already seen this upgrade
+    ];
 
     /**
      * Preflight checks for Sugar upgrade
@@ -858,7 +858,7 @@ abstract class UpgradeDriver
                 continue;
             }
             $checkfunc = "preflight$check";
-            if (is_callable(array($this, $checkfunc))) {
+            if (is_callable([$this, $checkfunc])) {
                 $this->log("Checking preflight: $check");
                 if (!$this->$checkfunc()) {
                     return $this->error("Preflight check $check failed!");
@@ -881,12 +881,12 @@ abstract class UpgradeDriver
         $unzip_dir = realpath($this->context['extract_dir']);
         $this->cleanDir($unzip_dir);
         // unzip file
-        $zip = new ZipArchive;
+        $zip = new ZipArchive();
         $res = $zip->open($this->context['zip']);
         if ($res !== true) {
             return $this->error(
                 sprintf(
-                    "ZIP Error(%d): Status(%s): Arhive(%s): Directory(%s)",
+                    'ZIP Error(%d): Status(%s): Arhive(%s): Directory(%s)',
                     $res,
                     $zip->status,
                     $this->context['zip'],
@@ -899,7 +899,7 @@ abstract class UpgradeDriver
         if ($res !== true) {
             return $this->error(
                 sprintf(
-                    "ZIP Error(%d): Status(%s): Arhive(%s): Directory(%s)",
+                    'ZIP Error(%d): Status(%s): Arhive(%s): Directory(%s)',
                     $res,
                     $zip->status,
                     $this->context['zip'],
@@ -912,7 +912,7 @@ abstract class UpgradeDriver
         // check manifest
         if (!file_exists("$unzip_dir/manifest.php")) {
             $this->cleanDir($unzip_dir);
-            return $this->error("Package does not contain manifest.php");
+            return $this->error('Package does not contain manifest.php');
         }
 
         return true;
@@ -935,8 +935,7 @@ abstract class UpgradeDriver
             return false;
         }
         // Check the user
-        if (empty($GLOBALS['current_user']) || empty($GLOBALS['current_user']->id) || !$GLOBALS['current_user']->isAdmin(
-            )
+        if (empty($GLOBALS['current_user']) || empty($GLOBALS['current_user']->id) || !$GLOBALS['current_user']->isAdmin()
         ) {
             return $this->error("{$this->context['admin']} is not a valid admin user");
         }
@@ -955,7 +954,7 @@ abstract class UpgradeDriver
             }
             return $this->error($res, true);
         }
-        $this->log("**** Upgrade checks passed");
+        $this->log('**** Upgrade checks passed');
         return true;
     }
 
@@ -966,20 +965,20 @@ abstract class UpgradeDriver
     public function checkDataFile($file)
     {
         if (!file_exists($file)) {
-            return $this->error("Manifest does not exist", true);
+            return $this->error('Manifest does not exist', true);
         }
         $tokens = @token_get_all(file_get_contents($file));
         $checkFunction = false;
         foreach ($tokens as $index => $token) {
             if (is_string($token)) {
-                if ($token == "`") {
-                    return $this->error("Backtick is not allowed");
+                if ($token == '`') {
+                    return $this->error('Backtick is not allowed');
                 }
                 if ($checkFunction && $token == '(') {
-                    return $this->error("Functions are not allowed");
+                    return $this->error('Functions are not allowed');
                 }
                 if ($token == '$' && !empty($tokens[$index + 1][0]) && $tokens[$index + 1][0] == T_VARIABLE) {
-                    return $this->error("Variable vars are not allowed");
+                    return $this->error('Variable vars are not allowed');
                 }
             } else {
                 switch ($token[0]) {
@@ -994,12 +993,12 @@ abstract class UpgradeDriver
                         break;
                     case T_OBJECT_OPERATOR:
                     case T_DOUBLE_COLON:
-                        return $this->error("Object access is not allowed");
+                        return $this->error('Object access is not allowed');
                     case T_REQUIRE_ONCE:
                     case T_REQUIRE:
                     case T_INCLUDE_ONCE:
                     case T_INCLUDE:
-                        return $this->error("Includes are not allowed");
+                        return $this->error('Includes are not allowed');
                     default:
                         $checkFunction = false;
                 }
@@ -1038,14 +1037,14 @@ abstract class UpgradeDriver
 
     protected function loadLangFile($langdir, $lang)
     {
-        $mod_strings = array();
+        $mod_strings = [];
         $this->log("Loading language $lang from $langdir");
         $langfile = "$langdir/$lang.lang.php";
         if (!file_exists($langfile)) {
             $langfile = "$langdir/en_us.lang.php";
         }
         if (!file_exists($langfile)) {
-            $this->log("Failed to find the language file");
+            $this->log('Failed to find the language file');
             // fail, can't find file
             return $mod_strings;
         }
@@ -1070,19 +1069,19 @@ abstract class UpgradeDriver
         } else {
             $lang = 'en_us';
         }
-        $this->mod_strings = $GLOBALS['mod_strings'] = $mod_strings = array();
+        $this->mod_strings = $GLOBALS['mod_strings'] = $mod_strings = [];
 
         if (!empty($this->context['new_source_dir'])) {
             // add install strings if they are available, since some DB routines rely on it
-            $langdirs[] = $this->context['new_source_dir'] . "/install/language";
-            $langdirs[] = $this->context['new_source_dir'] . "/modules/UpgradeWizard/language";
-            $langdirs[] = $this->context['new_source_dir'] . "/custom/modules/UpgradeWizard/language";
+            $langdirs[] = $this->context['new_source_dir'] . '/install/language';
+            $langdirs[] = $this->context['new_source_dir'] . '/modules/UpgradeWizard/language';
+            $langdirs[] = $this->context['new_source_dir'] . '/custom/modules/UpgradeWizard/language';
         } elseif (!empty($this->context['source_dir'])) {
-            $langdirs[] = $this->context['source_dir'] . "/install/language";
-            $langdirs[] = $this->context['source_dir'] . "/modules/UpgradeWizard/language";
-            $langdirs[] = $this->context['source_dir'] . "/custom/modules/UpgradeWizard/language";
+            $langdirs[] = $this->context['source_dir'] . '/install/language';
+            $langdirs[] = $this->context['source_dir'] . '/modules/UpgradeWizard/language';
+            $langdirs[] = $this->context['source_dir'] . '/custom/modules/UpgradeWizard/language';
         }
-        $langdirs[] = __DIR__ . "/language";
+        $langdirs[] = __DIR__ . '/language';
 
         foreach ($langdirs as $langdir) {
             if (!file_exists($langdir)) {
@@ -1094,8 +1093,8 @@ abstract class UpgradeDriver
 
         if (empty($mod_strings)) {
             // no language, bad
-            $this->log("ERROR: Failed to find the language files, expect error messages to be broken");
-            return array();
+            $this->log('ERROR: Failed to find the language files, expect error messages to be broken');
+            return [];
         }
 
         $this->mod_strings = $GLOBALS['mod_strings'] = $mod_strings;
@@ -1122,7 +1121,7 @@ abstract class UpgradeDriver
 
         if (version_compare($manifest['version'], '7.6', '<')) {
             return sprintf(
-                "Can not upgrade to version %s with %s upgrader",
+                'Can not upgrade to version %s with %s upgrader',
                 $manifest['version'],
                 $this->context['versionInfo'][0]
             );
@@ -1192,9 +1191,9 @@ abstract class UpgradeDriver
      */
     protected function getUser()
     {
-        return $this->loadUser(array(
+        return $this->loadUser([
             'user_name' => $this->context['admin'],
-        ));
+        ]);
     }
 
     /**
@@ -1227,7 +1226,7 @@ abstract class UpgradeDriver
 
         $params['deleted'] = 0;
 
-        $where = array();
+        $where = [];
         foreach ($params as $param => $value) {
             $where[] = sprintf('%s = %s', $param, $this->db->quoted($value));
         }
@@ -1262,10 +1261,10 @@ abstract class UpgradeDriver
         if (!defined('sugarEntry')) {
             define('sugarEntry', true);
         }
-        $this->log("Initializing SugarCRM environment");
+        $this->log('Initializing SugarCRM environment');
         global $beanFiles, $beanList, $objectList, $timedate, $moduleList, $modInvisList, $sugar_config, $locale,
-               $sugar_version, $sugar_flavor, $sugar_build, $sugar_db_version, $sugar_timestamp, $db, $locale,
-               $installing, $bwcModules, $app_list_strings, $modules_exempt_from_availability_check;
+        $sugar_version, $sugar_flavor, $sugar_build, $sugar_db_version, $sugar_timestamp, $db, $locale,
+        $installing, $bwcModules, $app_list_strings, $modules_exempt_from_availability_check;
         $installing = true;
 
         // CRYS-741 On windows $_SERVER['PHP_SELF'] is 'C:\i.....'; in console, not url like for web request.
@@ -1287,7 +1286,7 @@ abstract class UpgradeDriver
             }
         }
 
-        include('include/entryPoint.php');
+        include 'include/entryPoint.php';
 
         $fromVersion = $this->getFromVersion();
 
@@ -1326,7 +1325,7 @@ abstract class UpgradeDriver
                 $locale = new Localization();
             }
         }
-        if (!isset ($_SERVER['REQUEST_URI'])) {
+        if (!isset($_SERVER['REQUEST_URI'])) {
             $_SERVER['REQUEST_URI'] = '';
         }
 
@@ -1335,9 +1334,9 @@ abstract class UpgradeDriver
         // Prepare DB
         if ($this->config['dbconfig']['db_type'] == 'mysql') {
             //Change the db wait_timeout for this session
-            $now_timeout = $this->db->getOne("select @@wait_timeout");
-            $this->db->query("set wait_timeout=28800");
-            $now_timeout = $this->db->getOne("select @@wait_timeout");
+            $now_timeout = $this->db->getOne('select @@wait_timeout');
+            $this->db->query('set wait_timeout=28800');
+            $now_timeout = $this->db->getOne('select @@wait_timeout');
             $this->log("DB timeout set to $now_timeout");
         }
         // stop trackers
@@ -1347,7 +1346,7 @@ abstract class UpgradeDriver
         $this->sugar_initialized = true;
         $this->loadStrings();
         $GLOBALS['app_list_strings'] = return_app_list_strings_language($GLOBALS['current_language']);
-        $this->log("Done initializing SugarCRM environment");
+        $this->log('Done initializing SugarCRM environment');
     }
 
     /**
@@ -1374,47 +1373,47 @@ abstract class UpgradeDriver
      */
     protected function getScripts($dir, $stage)
     {
-        $dirs = array("$dir/upgrade/scripts/", "$dir/custom/upgrade/scripts/");
-        foreach (array("$dir/modules/", "$dir/custom/modules/") as $moduledir) {
+        $dirs = ["$dir/upgrade/scripts/", "$dir/custom/upgrade/scripts/"];
+        foreach (["$dir/modules/", "$dir/custom/modules/"] as $moduledir) {
             if (!is_dir($moduledir)) {
                 continue;
             }
             try {
                 foreach (new FilesystemIterator(
-                             $moduledir,
-                             FilesystemIterator::KEY_AS_FILENAME | FilesystemIterator::SKIP_DOTS
-                         ) as $filename => $fileInfo) {
+                    $moduledir,
+                    FilesystemIterator::KEY_AS_FILENAME | FilesystemIterator::SKIP_DOTS
+                ) as $filename => $fileInfo) {
                     if (!$fileInfo->isDir()) {
                         continue;
                     }
-                    if (file_exists($moduledir . $filename . "/upgrade/scripts/")) {
-                        $dirs[] = $moduledir . $filename . "/upgrade/scripts/";
+                    if (file_exists($moduledir . $filename . '/upgrade/scripts/')) {
+                        $dirs[] = $moduledir . $filename . '/upgrade/scripts/';
                     }
                 }
             } catch (Exception $e) {
                 // ignore Iterator exceptions
-                $this->log("FilesystemIterator: " . $e->getMessage());
+                $this->log('FilesystemIterator: ' . $e->getMessage());
             }
         }
-        $results = array();
-        $this->log("Checking for scripts: " . var_export($dirs, true));
+        $results = [];
+        $this->log('Checking for scripts: ' . var_export($dirs, true));
         foreach ($dirs as $dirname) {
             if (!file_exists($dirname . $stage)) {
                 continue;
             }
             try {
                 foreach (new FilesystemIterator($dirname . $stage, FilesystemIterator::SKIP_DOTS) as $fileInfo) {
-                    if (!$fileInfo->isFile() || $fileInfo->getExtension() != "php") {
+                    if (!$fileInfo->isFile() || $fileInfo->getExtension() != 'php') {
                         continue;
                     }
 
                     include_once $fileInfo->getPathName();
-                    $scriptname = $fileInfo->getBasename(".php");
-                    $classname = "SugarUpgrade" . preg_replace(
-                            '/^\d+_/',
-                            "",
-                            $scriptname
-                        ); // strip numeric prefix, add SugarUpgrade
+                    $scriptname = $fileInfo->getBasename('.php');
+                    $classname = 'SugarUpgrade' . preg_replace(
+                        '/^\d+_/',
+                        '',
+                        $scriptname
+                    ); // strip numeric prefix, add SugarUpgrade
                     if (!class_exists($classname)) {
                         continue;
                     }
@@ -1428,12 +1427,12 @@ abstract class UpgradeDriver
                 }
             } catch (Exception $e) {
                 // ignore Iterator exceptions
-                $this->log("FilesystemIterator: " . $e->getMessage());
+                $this->log('FilesystemIterator: ' . $e->getMessage());
             }
         }
         $cnt = count($results);
         $this->log("Found $cnt scripts");
-        uasort($results, array($this, "sortByOrder"));
+        uasort($results, [$this, 'sortByOrder']);
         return $results;
     }
 
@@ -1445,16 +1444,16 @@ abstract class UpgradeDriver
     public function findFiles($dir)
     {
         if (!file_exists($dir)) {
-            return array();
+            return [];
         }
         $dirlen = strlen(rtrim($dir, '/')) + 1;
-        $names = array();
+        $names = [];
         foreach (new RecursiveIteratorIterator(
-                     new RecursiveDirectoryIterator(
-                         $dir,
-                         FilesystemIterator::SKIP_DOTS
-                     )
-                 ) as $pathname => $fileInfo) {
+            new RecursiveDirectoryIterator(
+                $dir,
+                FilesystemIterator::SKIP_DOTS
+            )
+        ) as $pathname => $fileInfo) {
             if (!$fileInfo->isFile()) {
                 continue;
             }
@@ -1515,6 +1514,11 @@ abstract class UpgradeDriver
     /**
      * Implodes some parts of version with specified delimiter, beta & rc parts are removed all time
      *
+     * @param string $version like 6, 6.2, 6.5.0beta1, 6.6.0rc1, 6.5.7 (separated by dot)
+     * @param int $size number of the first parts of version which are requested
+     * @param string $lastSymbol replace last part of version by some string
+     * @param string $delimiter delimiter for result
+     * @return string
      * @example ('6.5.6') returns 656
      * @example ('6.5.6beta2') returns 656
      * @example ('6.5.6rc3') returns 656
@@ -1522,16 +1526,11 @@ abstract class UpgradeDriver
      * @example ('6.5.6', 3, 'x') returns 65x
      * @example ('6', 3, '', '.') returns 6.0.0
      *
-     * @param string $version like 6, 6.2, 6.5.0beta1, 6.6.0rc1, 6.5.7 (separated by dot)
-     * @param int $size number of the first parts of version which are requested
-     * @param string $lastSymbol replace last part of version by some string
-     * @param string $delimiter delimiter for result
-     * @return string
      */
     public function implodeVersion($version, $size = 0, $lastSymbol = '', $delimiter = '')
     {
         preg_match('/^\d+(\.\d+)*/', $version, $parsedVersion);
-        if (empty($parsedVersion)) {
+        if (empty($parsedVersion) || !is_array($parsedVersion)) {
             return '';
         }
 
@@ -1561,15 +1560,15 @@ abstract class UpgradeDriver
     public function fileToDelete($files, UpgradeScript $caller)
     {
         if (!isset($this->state['files_to_delete'])) {
-            $this->state['files_to_delete'] = array();
+            $this->state['files_to_delete'] = [];
         }
 
         if (!isset($this->state['files_deleter'])) {
-            $this->state['files_deleter'] = array();
+            $this->state['files_deleter'] = [];
         }
 
         if (!is_array($files)) {
-            $files = array($files);
+            $files = [$files];
         }
 
         $this->state['files_to_delete'] = array_merge($this->state['files_to_delete'], $files);
@@ -1613,12 +1612,12 @@ abstract class UpgradeDriver
      */
     protected function runScript(UpgradeScript $script)
     {
-        set_error_handler(array($this, 'scriptErrorHandler'), E_ALL & ~E_STRICT & ~E_DEPRECATED);
+        set_error_handler([$this, 'scriptErrorHandler'], E_ALL & ~E_STRICT & ~E_DEPRECATED);
         ob_start();
         try {
             $script->run();
         } catch (Exception $e) {
-            $this->error("Exception: " . $e->getMessage());
+            $this->error('Exception: ' . $e->getMessage());
         }
         $out = ob_get_clean();
         if ($out) {
@@ -1639,7 +1638,7 @@ abstract class UpgradeDriver
             return false;
         }
         if (!empty($this->manifest['copy_files']['from_dir'])) {
-            $this->context['new_source_dir'] = $this->context['extract_dir'] . "/" . $this->manifest['copy_files']['from_dir'];
+            $this->context['new_source_dir'] = $this->context['extract_dir'] . '/' . $this->manifest['copy_files']['from_dir'];
         }
         $scripts = $this->getScripts($this->context['new_source_dir'], $stage);
         $this->state['script_count'][$stage] = count($scripts);
@@ -1693,14 +1692,17 @@ abstract class UpgradeDriver
                 if ($is == 'pro') {
                     return true;
                 }
+                // no break
             case 'corp':
                 if ($is == 'corp') {
                     return true;
                 }
+                // no break
             case 'ent':
                 if ($is == 'ent') {
                     return true;
                 }
+                // no break
             case 'ult':
                 if ($is == 'ult') {
                     return true;
@@ -1737,7 +1739,7 @@ abstract class UpgradeDriver
      */
     public function readConfigFiles()
     {
-        $sugar_config = array();
+        $sugar_config = [];
         if (is_readable('config.php')) {
             include 'config.php';
         }
@@ -1745,15 +1747,15 @@ abstract class UpgradeDriver
         if (is_readable('config_override.php')) {
             include 'config_override.php';
         }
-        return array($oldConfig, deepArrayDiff($sugar_config, $oldConfig));
+        return [$oldConfig, deepArrayDiff($sugar_config, $oldConfig)];
     }
 
     /**
      * Compare 3 configs and generate one to be saved to the config.php file.
      *
-     * @param array $old  : the old configs from "config.php" before upgrade.
+     * @param array $old : the old configs from "config.php" before upgrade.
      * @param array $over : the override configs from "config_override.php".
-     * @param array $new  : the new configs generated during the upgrade.
+     * @param array $new : the new configs generated during the upgrade.
      *
      * @return array the array to be saved.
      */
@@ -1764,6 +1766,7 @@ abstract class UpgradeDriver
         $saveArray = sugarArrayMergeRecursive($old, $diffArray);
         return $saveArray;
     }
+
     /**
      * Save config.php
      * @return boolean
@@ -1783,7 +1786,7 @@ abstract class UpgradeDriver
         return rebuildConfigFile($configs, $sugar_version);
     }
 
-    protected $stages = array('unpack', 'healthcheck', 'pre', 'commit', 'post', 'cleanup');
+    protected $stages = ['unpack', 'healthcheck', 'pre', 'commit', 'post', 'cleanup'];
 
     /**
      * Run one step in the upgrade
@@ -1801,7 +1804,7 @@ abstract class UpgradeDriver
                 }
                 if (!empty($this->state['stage'][$stage]) && $this->state['stage'][$stage] == 'done') {
                     // everything is done
-                    $this->log("Nothing to continue, everything is done.");
+                    $this->log('Nothing to continue, everything is done.');
                     return true;
                 }
                 $this->log("Continuing from $stage");
@@ -1851,46 +1854,46 @@ abstract class UpgradeDriver
             $this->state['stage'][$stage] = 'started';
             $this->saveState();
             switch ($stage) {
-                case "healthcheck":
+                case 'healthcheck':
                     $this->initSugar();
                     if (!$this->healthcheck()) {
                         return false;
                     }
                     break;
-                case "unpack":
+                case 'unpack':
                     // Verify package
                     unset($this->state['extract_dir']);
                     if (!$this->verify($this->context['zip'], $this->context['extract_dir'])) {
-                        $this->error("Package verificaition failed");
+                        $this->error('Package verificaition failed');
                         return false;
                     }
                     $this->state['extract_dir'] = $this->context['extract_dir'];
                     break;
-                case "pre":
+                case 'pre':
                     // Run pre-upgrade
                     $this->initSugar();
                     [$this->from_version, $this->from_flavor] = $this->getFromVersion();
-                    $this->state['old_version'] = array($this->from_version, $this->from_flavor);
+                    $this->state['old_version'] = [$this->from_version, $this->from_flavor];
                     $this->saveState();
-                    if (!$this->runScripts("pre")) {
-                        $this->error("Pre-upgrade stage failed!");
+                    if (!$this->runScripts('pre')) {
+                        $this->error('Pre-upgrade stage failed!');
                         return false;
                     }
                     break;
-                case "commit":
+                case 'commit':
                     // Run copy files
                     if (!$this->commit()) {
-                        $this->error("Commit stage failed!");
+                        $this->error('Commit stage failed!');
                         return false;
                     }
                     break;
-                case "post":
+                case 'post':
                     // Run post-upgrade
                     $this->initSugar();
                     $this->cleanCaches();
                     [$this->from_version, $this->from_flavor] = $this->state['old_version'];
-                    if (!$this->runScripts("post")) {
-                        $this->error("Post-upgrade stage failed! Error executing post scripts");
+                    if (!$this->runScripts('post')) {
+                        $this->error('Post-upgrade stage failed! Error executing post scripts');
                         return false;
                     }
                     if (!$this->saveConfig()) {
@@ -1899,7 +1902,7 @@ abstract class UpgradeDriver
                     }
                     $this->cleanCaches();
                     break;
-                case "cleanup":
+                case 'cleanup':
                     // do it on cleanup so that caches from post won't interfere
                     $this->initSugar();
                     $this->prewarmCache();
@@ -1911,7 +1914,7 @@ abstract class UpgradeDriver
                     return false;
             }
         } catch (Exception $e) {
-            $this->error("Exception: " . $e->getMessage());
+            $this->error('Exception: ' . $e->getMessage());
             return false;
         }
         $this->state['stage'][$stage] = 'done';
@@ -1954,7 +1957,6 @@ abstract class UpgradeDriver
         } else {
             return copy($file, $target);
         }
-
     }
 
     public const VERSION_FILE = 'version.json';
@@ -1965,9 +1967,11 @@ abstract class UpgradeDriver
      */
     public static function getVersion()
     {
+        $sugar_version = null;
+        $sugar_build = null;
         $version = self::$version;
         $build = self::$build;
-        $vfile = __DIR__ . "/" . self::VERSION_FILE;
+        $vfile = __DIR__ . '/' . self::VERSION_FILE;
         if (file_exists($vfile)) {
             $data = json_decode(file_get_contents($vfile), true);
             if (!empty($data['version'])) {
@@ -1984,7 +1988,7 @@ abstract class UpgradeDriver
             $version = $sugar_version;
             $build = $sugar_build;
         }
-        return array($version, $build);
+        return [$version, $build];
     }
 
     /**
@@ -1994,7 +1998,7 @@ abstract class UpgradeDriver
      */
     public function healthcheck()
     {
-        [$version, ] = $this->getFromVersion();
+        [$version,] = $this->getFromVersion();
         return $this->doHealthcheck();
     }
 
@@ -2012,15 +2016,14 @@ abstract class UpgradeDriver
 
     /**
      * Get Scanner object
-     * @param string    $scannerType                Web or Cli scanner
-     * @param null      $logFilePointer optional    Pointer to log file
-     * @param null      $verbose        optional    Verbose level
+     * @param string $scannerType Web or Cli scanner
+     * @param null $logFilePointer optional    Pointer to log file
+     * @param null $verbose optional    Verbose level
      * @return bool | HealthCheckScanner
      */
     protected function getHealthCheckScanner($scannerType, $logFilePointer = null, $verbose = null)
     {
         if ($this->isHealthCheckInstalled($scannerType)) {
-
             $scanner = $this->getHelper()->getScanner($scannerType);
 
             if (!is_null($verbose)) {
@@ -2042,7 +2045,7 @@ abstract class UpgradeDriver
      *
      * @return boolean
      */
-    protected abstract function doHealthcheck();
+    abstract protected function doHealthcheck();
 }
 
 /**
@@ -2087,7 +2090,7 @@ abstract class UpgradeScript
      * Version where this script appears
      * @var string
      */
-    public $version = "6.7.0";
+    public $version = '6.7.0';
     public $type = self::UPGRADE_ALL;
     /**
      * Upgrade driver
@@ -2109,8 +2112,8 @@ abstract class UpgradeScript
 
     public function __call($name, $args)
     {
-        if (is_callable(array($this->upgrader, $name))) {
-            return call_user_func_array(array($this->upgrader, $name), $args);
+        if (is_callable([$this->upgrader, $name])) {
+            return call_user_func_array([$this->upgrader, $name], $args);
         }
         throw new Exception("Can not call unknown method $name");
     }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -47,9 +48,9 @@ return [
                                         [
                                             'dropdown_buttons' => [
                                                 [
-                                                    "type" => "dashletaction",
-                                                    "action" => "editClicked",
-                                                    "label" => "LBL_DASHLET_CONFIG_EDIT_LABEL",
+                                                    'type' => 'dashletaction',
+                                                    'action' => 'editClicked',
+                                                    'label' => 'LBL_DASHLET_CONFIG_EDIT_LABEL',
                                                 ],
                                                 [
                                                     'type' => 'dashletaction',

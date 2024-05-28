@@ -37,6 +37,7 @@ use DocuSign\eSign\ObjectSerializer;
  * ConnectCustomConfiguration Class Doc Comment
  *
  * @category    Class
+ * @description The &#x60;connectCustomConfiguration&#x60; object describes how Connect is configured for your account.
  * @package     DocuSign\eSign
  * @author      Swagger Codegen team <apihelp@docusign.com>
  * @license     The DocuSign PHP Client SDK is licensed under the MIT License.
@@ -66,6 +67,7 @@ class ConnectCustomConfiguration implements ModelInterface, ArrayAccess
         'configuration_type' => '?string',
         'connect_id' => '?string',
         'delivery_mode' => '?string',
+        'disabled_by' => '?string',
         'enable_log' => '?string',
         'envelope_events' => '?string[]',
         'event_data' => '\DocuSign\eSign\Model\ConnectEventData',
@@ -79,8 +81,10 @@ class ConnectCustomConfiguration implements ModelInterface, ArrayAccess
         'include_documents' => '?string',
         'include_envelope_void_reason' => '?string',
         'include_hmac' => '?string',
+        'include_o_auth' => '?string',
         'include_sender_accountas_custom_field' => '?string',
         'include_time_zone_information' => '?string',
+        'integrator_managed' => '?string',
         'name' => '?string',
         'password' => '?string',
         'recipient_events' => '?string[]',
@@ -114,6 +118,7 @@ class ConnectCustomConfiguration implements ModelInterface, ArrayAccess
         'configuration_type' => null,
         'connect_id' => null,
         'delivery_mode' => null,
+        'disabled_by' => null,
         'enable_log' => null,
         'envelope_events' => null,
         'event_data' => null,
@@ -127,8 +132,10 @@ class ConnectCustomConfiguration implements ModelInterface, ArrayAccess
         'include_documents' => null,
         'include_envelope_void_reason' => null,
         'include_hmac' => null,
+        'include_o_auth' => null,
         'include_sender_accountas_custom_field' => null,
         'include_time_zone_information' => null,
+        'integrator_managed' => null,
         'name' => null,
         'password' => null,
         'recipient_events' => null,
@@ -183,6 +190,7 @@ class ConnectCustomConfiguration implements ModelInterface, ArrayAccess
         'configuration_type' => 'configurationType',
         'connect_id' => 'connectId',
         'delivery_mode' => 'deliveryMode',
+        'disabled_by' => 'disabledBy',
         'enable_log' => 'enableLog',
         'envelope_events' => 'envelopeEvents',
         'event_data' => 'eventData',
@@ -196,8 +204,10 @@ class ConnectCustomConfiguration implements ModelInterface, ArrayAccess
         'include_documents' => 'includeDocuments',
         'include_envelope_void_reason' => 'includeEnvelopeVoidReason',
         'include_hmac' => 'includeHMAC',
+        'include_o_auth' => 'includeOAuth',
         'include_sender_accountas_custom_field' => 'includeSenderAccountasCustomField',
         'include_time_zone_information' => 'includeTimeZoneInformation',
+        'integrator_managed' => 'integratorManaged',
         'name' => 'name',
         'password' => 'password',
         'recipient_events' => 'recipientEvents',
@@ -231,6 +241,7 @@ class ConnectCustomConfiguration implements ModelInterface, ArrayAccess
         'configuration_type' => 'setConfigurationType',
         'connect_id' => 'setConnectId',
         'delivery_mode' => 'setDeliveryMode',
+        'disabled_by' => 'setDisabledBy',
         'enable_log' => 'setEnableLog',
         'envelope_events' => 'setEnvelopeEvents',
         'event_data' => 'setEventData',
@@ -244,8 +255,10 @@ class ConnectCustomConfiguration implements ModelInterface, ArrayAccess
         'include_documents' => 'setIncludeDocuments',
         'include_envelope_void_reason' => 'setIncludeEnvelopeVoidReason',
         'include_hmac' => 'setIncludeHmac',
+        'include_o_auth' => 'setIncludeOAuth',
         'include_sender_accountas_custom_field' => 'setIncludeSenderAccountasCustomField',
         'include_time_zone_information' => 'setIncludeTimeZoneInformation',
+        'integrator_managed' => 'setIntegratorManaged',
         'name' => 'setName',
         'password' => 'setPassword',
         'recipient_events' => 'setRecipientEvents',
@@ -279,6 +292,7 @@ class ConnectCustomConfiguration implements ModelInterface, ArrayAccess
         'configuration_type' => 'getConfigurationType',
         'connect_id' => 'getConnectId',
         'delivery_mode' => 'getDeliveryMode',
+        'disabled_by' => 'getDisabledBy',
         'enable_log' => 'getEnableLog',
         'envelope_events' => 'getEnvelopeEvents',
         'event_data' => 'getEventData',
@@ -292,8 +306,10 @@ class ConnectCustomConfiguration implements ModelInterface, ArrayAccess
         'include_documents' => 'getIncludeDocuments',
         'include_envelope_void_reason' => 'getIncludeEnvelopeVoidReason',
         'include_hmac' => 'getIncludeHmac',
+        'include_o_auth' => 'getIncludeOAuth',
         'include_sender_accountas_custom_field' => 'getIncludeSenderAccountasCustomField',
         'include_time_zone_information' => 'getIncludeTimeZoneInformation',
+        'integrator_managed' => 'getIntegratorManaged',
         'name' => 'getName',
         'password' => 'getPassword',
         'recipient_events' => 'getRecipientEvents',
@@ -381,6 +397,7 @@ class ConnectCustomConfiguration implements ModelInterface, ArrayAccess
         $this->container['configuration_type'] = isset($data['configuration_type']) ? $data['configuration_type'] : null;
         $this->container['connect_id'] = isset($data['connect_id']) ? $data['connect_id'] : null;
         $this->container['delivery_mode'] = isset($data['delivery_mode']) ? $data['delivery_mode'] : null;
+        $this->container['disabled_by'] = isset($data['disabled_by']) ? $data['disabled_by'] : null;
         $this->container['enable_log'] = isset($data['enable_log']) ? $data['enable_log'] : null;
         $this->container['envelope_events'] = isset($data['envelope_events']) ? $data['envelope_events'] : null;
         $this->container['event_data'] = isset($data['event_data']) ? $data['event_data'] : null;
@@ -394,8 +411,10 @@ class ConnectCustomConfiguration implements ModelInterface, ArrayAccess
         $this->container['include_documents'] = isset($data['include_documents']) ? $data['include_documents'] : null;
         $this->container['include_envelope_void_reason'] = isset($data['include_envelope_void_reason']) ? $data['include_envelope_void_reason'] : null;
         $this->container['include_hmac'] = isset($data['include_hmac']) ? $data['include_hmac'] : null;
+        $this->container['include_o_auth'] = isset($data['include_o_auth']) ? $data['include_o_auth'] : null;
         $this->container['include_sender_accountas_custom_field'] = isset($data['include_sender_accountas_custom_field']) ? $data['include_sender_accountas_custom_field'] : null;
         $this->container['include_time_zone_information'] = isset($data['include_time_zone_information']) ? $data['include_time_zone_information'] : null;
+        $this->container['integrator_managed'] = isset($data['integrator_managed']) ? $data['integrator_managed'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['password'] = isset($data['password']) ? $data['password'] : null;
         $this->container['recipient_events'] = isset($data['recipient_events']) ? $data['recipient_events'] : null;
@@ -609,6 +628,30 @@ class ConnectCustomConfiguration implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets disabled_by
+     *
+     * @return ?string
+     */
+    public function getDisabledBy()
+    {
+        return $this->container['disabled_by'];
+    }
+
+    /**
+     * Sets disabled_by
+     *
+     * @param ?string $disabled_by 
+     *
+     * @return $this
+     */
+    public function setDisabledBy($disabled_by)
+    {
+        $this->container['disabled_by'] = $disabled_by;
+
+        return $this;
+    }
+
+    /**
      * Gets enable_log
      *
      * @return ?string
@@ -669,7 +712,7 @@ class ConnectCustomConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets event_data
      *
-     * @param \DocuSign\eSign\Model\ConnectEventData $event_data event_data
+     * @param \DocuSign\eSign\Model\ConnectEventData $event_data Allows you to specify the format of the information the Connect webhooks returns. For more information, see [Connect webhooks with JSON notifications](https://www.docusign.com/blog/developers/connect-webhooks-json-notifications)
      *
      * @return $this
      */
@@ -921,6 +964,30 @@ class ConnectCustomConfiguration implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets include_o_auth
+     *
+     * @return ?string
+     */
+    public function getIncludeOAuth()
+    {
+        return $this->container['include_o_auth'];
+    }
+
+    /**
+     * Sets include_o_auth
+     *
+     * @param ?string $include_o_auth 
+     *
+     * @return $this
+     */
+    public function setIncludeOAuth($include_o_auth)
+    {
+        $this->container['include_o_auth'] = $include_o_auth;
+
+        return $this;
+    }
+
+    /**
      * Gets include_sender_accountas_custom_field
      *
      * @return ?string
@@ -964,6 +1031,30 @@ class ConnectCustomConfiguration implements ModelInterface, ArrayAccess
     public function setIncludeTimeZoneInformation($include_time_zone_information)
     {
         $this->container['include_time_zone_information'] = $include_time_zone_information;
+
+        return $this;
+    }
+
+    /**
+     * Gets integrator_managed
+     *
+     * @return ?string
+     */
+    public function getIntegratorManaged()
+    {
+        return $this->container['integrator_managed'];
+    }
+
+    /**
+     * Sets integrator_managed
+     *
+     * @param ?string $integrator_managed 
+     *
+     * @return $this
+     */
+    public function setIntegratorManaged($integrator_managed)
+    {
+        $this->container['integrator_managed'] = $integrator_managed;
 
         return $this;
     }

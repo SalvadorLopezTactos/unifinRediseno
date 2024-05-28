@@ -102,8 +102,8 @@
              * @param {String} module Module name.
              */
             createRelatedRecord: function(module, link) {
-                var bwcExceptions = ['Emails'],
-                    moduleMeta = app.metadata.getModule(module);
+                let bwcExceptions = ['Emails', 'Teams', 'ACLRoles', 'Holidays', 'EAPM'];
+                let moduleMeta = app.metadata.getModule(module);
 
                 if (moduleMeta && moduleMeta.isBwcEnabled && !_.contains(bwcExceptions, module)) {
                     this.routeToBwcCreate(module);
@@ -158,16 +158,19 @@
                         return;
                     }
 
-                    let slCtx = self.closestComponent('main-pane').getComponent('record')._slCtx;
-                    if (slCtx) {
-                        slCtx.updateRelatedCollectionValues(
-                            parentModel,
-                            link,
-                            null,
-                            null,
-                            model,
-                            'add'
-                        );
+                    let mainPane = self.closestComponent('main-pane');
+                    if (mainPane) {
+                        let slCtx = mainPane.getComponent('record')._slCtx;
+                        if (slCtx) {
+                            slCtx.updateRelatedCollectionValues(
+                                parentModel,
+                                link,
+                                null,
+                                null,
+                                model,
+                                'add'
+                            );
+                        }
                     }
 
                     self.trigger('linked-model:create', model);

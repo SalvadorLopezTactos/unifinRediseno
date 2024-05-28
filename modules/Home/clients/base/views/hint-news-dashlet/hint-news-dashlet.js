@@ -14,8 +14,8 @@
     /**
      * Classes that are responsible of COG icon on the dashlet.
      */
-    cogIconDefaultClass: 'fa-cog',
-    cogIconLoadingClass: 'fa-refresh fa-spin',
+    cogIconDefaultClass: 'sicon-settings',
+    cogIconLoadingClass: 'sicon-refresh sicon-is-spinning',
 
     events: {
         'click [name=edit_button]': 'editClicked',
@@ -88,7 +88,6 @@
     tokenExpirationTimeOut: 60 * 60 * 1000,
 
     initDashlet: function() {
-        this.shouldShowNewCog = app.hint.versionCompare('11.1.0') >= 0;
         this.moduleName = this.context.get('module');
         this.getDependencies();
         this.isDarkMode = app.hint.isDarkMode();
@@ -103,8 +102,8 @@
      * @param {boolean} loading Flag indicating if the news are being loaded.
      */
     toggleCogIcon: function(loading) {
-        this.cogIconDefaultClass = this.shouldShowNewCog ? 'sicon-settings' : 'fa-cog';
-        this.cogIconLoadingClass = this.shouldShowNewCog ? 'sicon-refresh sicon-is-spinning' : 'fa-refresh fa-spin';
+        this.cogIconDefaultClass = 'sicon-settings';
+        this.cogIconLoadingClass = 'sicon-refresh sicon-is-spinning';
         var iconToAdd = loading ? this.cogIconLoadingClass : this.cogIconDefaultClass;
         var iconToRemove = loading ? this.cogIconDefaultClass : this.cogIconLoadingClass;
         this.cogIcon.removeClass(iconToRemove).addClass(iconToAdd);
@@ -188,12 +187,19 @@
         });
     },
 
+    /**
+     * Checks the instance license AND user license to determine whether the hint dashlet should be displayed
+     */
     getLicenseMetadataForHint: function() {
         var self = this;
         var url = app.api.buildURL('hint/license/check');
         app.api.call('GET', url, null, {
             success: function(data) {
-                self.isNotHintUser = !data.isHintUser;
+                const instanceHasHintLicense = data.isHintUser;
+                const userHasHintLicense = app.hint.isHintUser();
+                const isHintUser = instanceHasHintLicense && userHasHintLicense;
+
+                self.isNotHintUser = !isHintUser;
                 self.render();
             },
             error: function(err) {

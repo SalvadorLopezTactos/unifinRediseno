@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\modules\Users;
 
 use Sugarcrm\Sugarcrm\Hint\LogicHook\LogicHook;
@@ -59,10 +60,13 @@ class HintUsersHook extends LogicHook
         if (!empty($arguments['dataChanges']['license_type']) || $removeLicense) {
             $license = $arguments['dataChanges']['license_type'];
 
-            $oldData = json_decode(($license['before'] ?: '[]'), true);
+            $before = $license['before'] ?: '[]';
+            $oldData = is_array($before) ? $before : json_decode($before, true);
             $oldLicensedUser = $this->isHintUser($oldData);
 
-            $newData = json_decode(($license['after'] ?: '[]'), true);
+            $after = $license['after'] ?: '[]';
+
+            $newData = is_array($after) ? $after : json_decode($after, true);
             $newLicensedUser = $this->isHintUser($newData);
             if (!$oldLicensedUser && $newLicensedUser) {
                 // If they were previously licensed, revive their old accountsets and targets.

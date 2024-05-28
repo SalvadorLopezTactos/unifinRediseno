@@ -26,6 +26,7 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
 {
     /**
     * Gets the city
+    * The city where the managed tenant is located. Optional. Read-only.
     *
     * @return string|null The city
     */
@@ -37,9 +38,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the city
+    * The city where the managed tenant is located. Optional. Read-only.
     *
     * @param string $val The city
     *
@@ -50,9 +52,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["city"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the countryCode
+    * The code for the country where the managed tenant is located. Optional. Read-only.
     *
     * @return string|null The countryCode
     */
@@ -64,9 +67,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the countryCode
+    * The code for the country where the managed tenant is located. Optional. Read-only.
     *
     * @param string $val The countryCode
     *
@@ -77,9 +81,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["countryCode"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the countryName
+    * The name for the country where the managed tenant is located. Optional. Read-only.
     *
     * @return string|null The countryName
     */
@@ -91,9 +96,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the countryName
+    * The name for the country where the managed tenant is located. Optional. Read-only.
     *
     * @param string $val The countryName
     *
@@ -104,9 +110,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["countryName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the defaultDomainName
+    * The default domain name for the managed tenant. Optional. Read-only.
     *
     * @return string|null The defaultDomainName
     */
@@ -118,9 +125,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the defaultDomainName
+    * The default domain name for the managed tenant. Optional. Read-only.
     *
     * @param string $val The defaultDomainName
     *
@@ -131,9 +139,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["defaultDomainName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the displayName
+    * The display name for the managed tenant.
     *
     * @return string|null The displayName
     */
@@ -145,9 +154,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the displayName
+    * The display name for the managed tenant.
     *
     * @param string $val The displayName
     *
@@ -158,9 +168,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["displayName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the industryName
+    * The business industry associated with the managed tenant. Optional. Read-only.
     *
     * @return string|null The industryName
     */
@@ -172,9 +183,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the industryName
+    * The business industry associated with the managed tenant. Optional. Read-only.
     *
     * @param string $val The industryName
     *
@@ -185,9 +197,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["industryName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the region
+    * The region where the managed tenant is located. Optional. Read-only.
     *
     * @return string|null The region
     */
@@ -199,9 +212,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the region
+    * The region where the managed tenant is located. Optional. Read-only.
     *
     * @param string $val The region
     *
@@ -212,9 +226,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["region"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the segmentName
+    * The business segment associated with the managed tenant. Optional. Read-only.
     *
     * @return string|null The segmentName
     */
@@ -226,9 +241,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the segmentName
+    * The business segment associated with the managed tenant. Optional. Read-only.
     *
     * @param string $val The segmentName
     *
@@ -239,9 +255,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["segmentName"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the tenantId
+    * The Azure Active Directory tenant identifier for the managed tenant.
     *
     * @return string|null The tenantId
     */
@@ -253,9 +270,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the tenantId
+    * The Azure Active Directory tenant identifier for the managed tenant.
     *
     * @param string $val The tenantId
     *
@@ -266,9 +284,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["tenantId"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the verticalName
+    * The vertical associated with the managed tenant. Optional. Read-only.
     *
     * @return string|null The verticalName
     */
@@ -280,9 +299,10 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the verticalName
+    * The vertical associated with the managed tenant. Optional. Read-only.
     *
     * @param string $val The verticalName
     *
@@ -293,5 +313,5 @@ class TenantDetailedInformation extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["verticalName"] = $val;
         return $this;
     }
-    
+
 }

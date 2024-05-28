@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Γραμμής Στοιχείων Προσφοράς',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Γραμμής Εισηγμένων Ειδών',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης γραμμής εισηγμένων ειδών',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Χρονολόγιο Γραμμής Εισηγμένων Στοιχείων',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Εισηγμένα Στοιχεία Γραμμής, Εκστρατεία',
     'LBL_MODULE_NAME' => 'Στοιχεία Γραμμής με Προσφορά',
@@ -184,4 +185,4 @@ $mod_strings = array(
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Νέα Γραμμή Εισηγμένων Ειδών)',
     'LBL_DISCOUNT_PERCENT' => 'Ποσοστό %',
     'LBL_DISCOUNT_TYPE' => 'Τύπος έκπτωσης',
-);
+];

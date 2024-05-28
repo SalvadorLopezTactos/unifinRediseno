@@ -11,6 +11,8 @@
  */
 
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\FeatureToggle\FeatureFlag;
+use Sugarcrm\Sugarcrm\FeatureToggle\Features\HttpOnlyCookies;
 use Sugarcrm\Sugarcrm\Security\Context;
 use Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
@@ -28,10 +30,10 @@ use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
  */
 class SugarApplication
 {
-    var $controller = null;
-    var $headerDisplayed = false;
-    var $default_module = 'Home';
-    var $default_action = 'sidecar';
+    public $controller = null;
+    public $headerDisplayed = false;
+    public $default_module = 'Home';
+    public $default_action = 'sidecar';
 
     /**
      * @var boolean
@@ -53,11 +55,11 @@ class SugarApplication
         $this->request = InputValidation::getService();
 
         // Safe $_GET['bwcFrame']
-        $bwcFrame = array(
-            'Assert\Type' => array('type' => 'numeric'),
-            'Assert\Range' => array('min' => 0, 'max' => 1),
-        );
-        $this->inBwc = (bool) $this->request->getValidInputGet('bwcFrame', $bwcFrame, 0);
+        $bwcFrame = [
+            'Assert\Type' => ['type' => 'numeric'],
+            'Assert\Range' => ['min' => 0, 'max' => 1],
+        ];
+        $this->inBwc = (bool)$this->request->getValidInputGet('bwcFrame', $bwcFrame, 0);
 
         if (isset($sugar_config['allowed_actions']) && is_array($sugar_config['allowed_actions'])) {
             $this->whiteListActions = array_unique(array_merge($this->whiteListActions, $sugar_config['allowed_actions']));
@@ -67,7 +69,7 @@ class SugarApplication
     /**
      * Perform execution of the application. This method is called from index2.php
      */
-    function execute()
+    public function execute()
     {
         global $sugar_config;
         if (!empty($sugar_config['default_module'])) {
@@ -87,7 +89,7 @@ class SugarApplication
         // TODO the rest of the code will be removed as soon as we migrate all modules to sidecar
 
         // Safe $_REQUEST['MSID']
-        $msid = $this->request->getValidInputRequest('MSID', array('Assert\Type' => array('type' => 'string')));
+        $msid = $this->request->getValidInputRequest('MSID', ['Assert\Type' => ['type' => 'string']]);
 
         // Safe $_REQUEST['entryPoint']
         // add entry point validator
@@ -96,18 +98,18 @@ class SugarApplication
             && ($this->controller->action !== 'Authenticate' || $this->controller->module !== 'Users')
         ) {
             //This is not longer a valid path for MSID. We can only accept it through view.authenticate.php
-            $url = 'index.php?module=Users&action=Authenticate&MSID=' . urlencode($msid);
+            $url = 'index.php?module=Users&action=Authenticate&MSID=' . urlencode((string)$msid);
 
             // TODO: add example with safe redirect builder/validator
-            $req = array_diff_key($this->getRequestVars(), array("MSID" => 1));
+            $req = array_diff_key($this->getRequestVars(), ['MSID' => 1]);
             if (!empty($req['module'])) {
                 if (isModuleBWC($req['module'])) {
                     $url .= '#bwc/index.php?' . http_build_query($req);
                 } else {
                     // otherwise compose basic Sidecar route
-                    $url .= '#' . rawurlencode($req['module']);
+                    $url .= '#' . rawurlencode((string)$req['module']);
                     if (isset($req['record'])) {
-                        $url .= '/' . rawurlencode($req['record']);
+                        $url .= '/' . rawurlencode((string)$req['record']);
                     }
                 }
             }
@@ -133,7 +135,7 @@ class SugarApplication
             // TODO remove this when we are "iFrame free"
 
             // by default login location is base site URL
-            $location = rtrim($sugar_config['site_url'], '/') . '/';
+            $location = rtrim((string)$sugar_config['site_url'], '/') . '/';
             $loginRedirect = $this->getLoginRedirect();
 
             $loginVars = $this->getLoginVars();
@@ -145,9 +147,9 @@ class SugarApplication
                     $location .= '#bwc/' . $loginRedirect;
                 } else {
                     // otherwise compose basic Sidecar route
-                    $location .= '#' . rawurlencode($loginVars['module']);
+                    $location .= '#' . rawurlencode((string)$loginVars['module']);
                     if (isset($loginVars['record'])) {
-                        $location .= '/' . rawurlencode($loginVars['record']);
+                        $location .= '/' . rawurlencode((string)$loginVars['record']);
                     }
                 }
             }
@@ -174,7 +176,7 @@ class SugarApplication
             || $this->controller->checkEntryPointRequiresAuth($_REQUEST['entryPoint'])
         ) {
             $this->startSession();
-             // check for authorised users
+            // check for authorised users
             $this->checkMobileRedirect();
             $this->loadUser();
             // Do not filter for saml login
@@ -273,7 +275,7 @@ class SugarApplication
     protected function getRequestMethod()
     {
         return !empty($_SERVER['REQUEST_METHOD'])
-            ? strtolower($_SERVER['REQUEST_METHOD'])
+            ? strtolower((string)$_SERVER['REQUEST_METHOD'])
             : false;
     }
 
@@ -289,7 +291,8 @@ class SugarApplication
         return array_merge($_GET, $_POST);
     }
 
-    public function checkMobileRedirect () {
+    public function checkMobileRedirect()
+    {
         // do nothing if mobile version is not enabled in config
         if (!$this->isMobileRedirectEnabled()) {
             return false;
@@ -307,19 +310,20 @@ class SugarApplication
                 if (!isset($_COOKIE['sugar_mobile']) || $_COOKIE['sugar_mobile'] != '0') {
                     setcookie('sugar_mobile', '0'); // expires on browser closed
                 }
-                if (isset($_SESSION['isMobile'])) unset($_SESSION['isMobile']);
-            }
-            else {
+                if (isset($_SESSION['isMobile'])) {
+                    unset($_SESSION['isMobile']);
+                }
+            } else {
                 // redirect to mobile version
                 $this->redirectToMobileApp();
             }
-        }
-        elseif ($this->checkForNomadSupport()) {
+        } elseif ($this->checkForNomadSupport()) {
             $this->redirectToMobileApp();
         }
     }
 
-    public function redirectToMobileApp(){
+    public function redirectToMobileApp()
+    {
         $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
         $sidecarConfig = $moduleInstallerClass::getBaseConfig();
         $auth = AuthenticationController::getInstance();
@@ -337,7 +341,6 @@ class SugarApplication
     window.location = {$mobileUrl_escaped} + location.hash;
 </script>
 EOF;
-
     }
 
     /**
@@ -370,14 +373,17 @@ EOF;
      *
      * @return bool
      */
-    public function checkForNomadSupport(){
+    public function checkForNomadSupport()
+    {
 
-        if (empty($_SERVER['HTTP_USER_AGENT'])) return false;
+        if (empty($_SERVER['HTTP_USER_AGENT'])) {
+            return false;
+        }
 
-        $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+        $ua = strtolower((string)$_SERVER['HTTP_USER_AGENT']);
 
 
-        $isIosDevice = preg_match("/(iphone|ipod)/i", $ua);
+        $isIosDevice = preg_match('/(iphone|ipod)/i', $ua);
         if ($isIosDevice) {
             // detect iOS version
             preg_match("/OS (\d+)_\d+(_\d+)?\s+/i", $ua, $osVersionMatches);
@@ -400,7 +406,7 @@ EOF;
     /**
      * Load the authenticated user. If there is not an authenticated user then redirect to login screen.
      */
-    function loadUser()
+    public function loadUser()
     {
         global $authController, $sugar_config;
         $sess = SessionStorage::getInstance();
@@ -408,8 +414,8 @@ EOF;
         // Double check the server's unique key is in the session.  Make sure this is not an attempt to hijack a session
         $user_unique_key = $_SESSION['unique_key'] ?? '';
         $server_unique_key = $sugar_config['unique_key'] ?? '';
-        if(!empty($this->controller->allowed_actions)) {
-            $allowed_actions =  $this->controller->allowed_actions;
+        if (!empty($this->controller->allowed_actions)) {
+            $allowed_actions = $this->controller->allowed_actions;
         } else {
             $allowed_actions = ['Authenticate', 'Login', 'Logout', 'LoggedOut', 'OAuth2CodeExchange', 'impersonation'];
         }
@@ -417,7 +423,6 @@ EOF;
         if (($user_unique_key != $server_unique_key) && (!in_array($this->controller->action, $allowed_actions))
             && (!isset($_SESSION['login_error']))
         ) {
-
             if ($sess->getId()) {
                 $sess->destroy();
             };
@@ -438,21 +443,21 @@ EOF;
             }
 
             header('Location: ' . $this->getUnauthenticatedHomeUrl(true));
-            exit ();
+            exit();
         }
 
-		$authController = AuthenticationController::getInstance();
-		$GLOBALS['current_user'] = BeanFactory::newBean('Users');
-		if(isset($_SESSION['authenticated_user_id'])){
-			// set in modules/Users/Authenticate.php
-			if(!$authController->sessionAuthenticate()){
-				 // if the object we get back is null for some reason, this will break - like user prefs are corrupted
-				$GLOBALS['log']->fatal('User retrieval for ID: ('.$_SESSION['authenticated_user_id'].') does not exist in database or retrieval failed catastrophically.  Calling session_destroy() and sending user to Login page.');
+        $authController = AuthenticationController::getInstance();
+        $GLOBALS['current_user'] = BeanFactory::newBean('Users');
+        if (isset($_SESSION['authenticated_user_id'])) {
+            // set in modules/Users/Authenticate.php
+            if (!$authController->sessionAuthenticate()) {
+                // if the object we get back is null for some reason, this will break - like user prefs are corrupted
+                $GLOBALS['log']->fatal('User retrieval for ID: (' . $_SESSION['authenticated_user_id'] . ') does not exist in database or retrieval failed catastrophically.  Calling session_destroy() and sending user to Login page.');
                 if ($sess->getId()) {
                     $sess->destroy();
                 };
-				SugarApplication::redirect($this->getUnauthenticatedHomeUrl());
-				die();
+                SugarApplication::redirect($this->getUnauthenticatedHomeUrl());
+                die();
             } else {
                 static::trackSession();
             }
@@ -482,13 +487,13 @@ EOF;
      * on the ResourceManager instance.
      *
      */
-    function setupResourceManagement($module)
+    public function setupResourceManagement($module)
     {
         $resourceManager = ResourceManager::getInstance();
         $resourceManager->setup($module);
     }
 
-    function setupPrint()
+    public function setupPrint()
     {
         $GLOBALS['request_string'] = '';
 
@@ -504,36 +509,37 @@ EOF;
                         continue;
                     }
 
-                    $GLOBALS['request_string'] .= urlencode($key) . '[' . $k . ']=' . urlencode($v) . '&';
+                    $GLOBALS['request_string'] .= urlencode($key) . '[' . $k . ']=' . urlencode((string)$v) . '&';
                 }
             } else {
-                $GLOBALS['request_string'] .= urlencode($key) . '=' . urlencode($val) . '&';
+                $GLOBALS['request_string'] .= urlencode($key) . '=' . urlencode((string)$val) . '&';
             }
         }
         $GLOBALS['request_string'] .= 'print=true';
     }
 
-	function preProcess(){
-		if(!empty($_SESSION['authenticated_user_id'])){
-			if(isset($_SESSION['hasExpiredPassword']) && $_SESSION['hasExpiredPassword'] == '1'){
-				if( $this->controller->action!= 'Save' && $this->controller->action != 'Logout') {
-	                $this->controller->module = 'Users';
-	                $this->controller->action = 'ChangePassword';
-				 }
+    public function preProcess()
+    {
+        if (!empty($_SESSION['authenticated_user_id'])) {
+            if (isset($_SESSION['hasExpiredPassword']) && $_SESSION['hasExpiredPassword'] == '1') {
+                if ($this->controller->action != 'Save' && $this->controller->action != 'Logout') {
+                    $this->controller->module = 'Users';
+                    $this->controller->action = 'ChangePassword';
+                }
             }
-		}
-		$this->handleAccessControl();
-	}
+        }
+        $this->handleAccessControl();
+    }
 
     /**
      * Handles everything related to authorization.
      */
-    function handleAccessControl()
+    public function handleAccessControl()
     {
         if ($GLOBALS['current_user']->isDeveloperForAnyModule()) {
             return;
         }
-        if (!empty($_REQUEST['action']) && $_REQUEST['action'] == "RetrieveEmail") {
+        if (!empty($_REQUEST['action']) && $_REQUEST['action'] == 'RetrieveEmail') {
             return;
         }
         if (!is_admin($GLOBALS['current_user']) && !empty($GLOBALS['adminOnlyList'][$this->controller->module])
@@ -570,7 +576,7 @@ EOF;
     /**
      * Load only bare minimum of language that can be done before user init and MVC stuff
      */
-    static function preLoadLanguages()
+    public static function preLoadLanguages()
     {
         if (!empty($_SESSION['authenticated_user_language'])) {
             $GLOBALS['current_language'] = $_SESSION['authenticated_user_language'];
@@ -586,7 +592,7 @@ EOF;
      * Load application wide languages as well as module based languages so they are accessible
      * from the module.
      */
-    function loadLanguages()
+    public function loadLanguages()
     {
         global $locale;
         $GLOBALS['current_language'] = $locale->getAuthenticatedUserLanguage();
@@ -612,15 +618,15 @@ EOF;
      * Check the db version sugar_version.php and compare to what the version is stored in the config table.
      * Ensure that both are the same.
      */
-    function checkDatabaseVersion($dieOnFailure = true)
+    public function checkDatabaseVersion($dieOnFailure = true)
     {
         $row_count = sugar_cache_retrieve('checkDatabaseVersion_row_count');
         if (empty($row_count)) {
             $version_query
                 = "SELECT count(*) as the_count FROM config WHERE category='info' AND name='sugar_version' AND " .
-                $GLOBALS['db']->convert('value', 'text2char') . " = " . $GLOBALS['db']->quoted(
-                $GLOBALS['sugar_db_version']
-            );
+                $GLOBALS['db']->convert('value', 'text2char') . ' = ' . $GLOBALS['db']->quoted(
+                    $GLOBALS['sugar_db_version']
+                );
 
             $row = $GLOBALS['db']->fetchOne($version_query);
             $row_count = $row['the_count'];
@@ -629,10 +635,10 @@ EOF;
 
         if ($row_count == 0) {
             if ($dieOnFailure) {
-                $replacementStrings = array(
+                $replacementStrings = [
                     0 => $GLOBALS['sugar_version'],
                     1 => $GLOBALS['sugar_db_version'],
-                );
+                ];
                 sugar_die(string_format($GLOBALS['app_strings']['ERR_DB_VERSION'], $replacementStrings));
             } else {
                 return false;
@@ -645,14 +651,14 @@ EOF;
     /**
      * Load the themes/images.
      */
-    function loadDisplaySettings()
+    public function loadDisplaySettings()
     {
         global $theme;
 
         $theme = $GLOBALS['current_user']->getBWCTheme();
 
         SugarThemeRegistry::set($theme);
-        require_once('include/utils/layout_utils.php');
+        require_once 'include/utils/layout_utils.php';
         $GLOBALS['image_path'] = SugarThemeRegistry::current()->getImagePath() . '/';
         if (defined('TEMPLATE_URL')) {
             $GLOBALS['image_path'] = TEMPLATE_URL . '/' . $GLOBALS['image_path'];
@@ -663,7 +669,7 @@ EOF;
         }
     }
 
-    function loadLicense()
+    public function loadLicense()
     {
         $sugar_config = [];
         loadLicense();
@@ -672,7 +678,7 @@ EOF;
         $server_unique_key = $sugar_config['unique_key'] ?? '';
     }
 
-    function loadGlobals()
+    public function loadGlobals()
     {
         global $currentModule;
         $currentModule = $this->controller->module;
@@ -689,47 +695,45 @@ EOF;
      *
      * @var array
      */
-    protected $modifyActions = array();
+    protected $modifyActions = [];
     /**
      * Actions that always modify data and thus require referrers
      * save* and delete* hardcoded as modified
-     *
-     * @var array
      */
-    private $globalModifyActions
-        = array(
+    private array $globalModifyActions
+        = [
             'massupdate', 'import', 'importvcardsave', 'inlinefieldsave',
-            'wlsave', 'quicksave'
-        );
+            'wlsave', 'quicksave',
+        ];
 
-	/**
-	 * Modules that modify data and thus require referrers for all actions
-	 */
-	private $modifyModules = array(
-		'Administration' => true,
-		'UpgradeWizard' => true,
-		'Configurator' => true,
-		'Studio' => true,
-		'ModuleBuilder' => true,
-		'Emails' => true,
-	    'Trackers' => array('trackersettings'),
-	    'SugarFavorites' => array('tag'),
-	    'Import' => array('last', 'undo'),
-	    'Users' => array('changepassword', "generatepassword"),
+    /**
+     * Modules that modify data and thus require referrers for all actions
+     */
+    private array $modifyModules = [
+        'Administration' => true,
+        'UpgradeWizard' => true,
+        'Configurator' => true,
+        'Studio' => true,
+        'ModuleBuilder' => true,
+        'Emails' => true,
+        'Trackers' => ['trackersettings'],
+        'SugarFavorites' => ['tag'],
+        'Import' => ['last', 'undo'],
+        'Users' => ['changepassword', 'generatepassword'],
         'Reports' => ['reportswizard'],
-	);
+    ];
 
     protected function isModifyAction()
     {
         $action = strtolower($this->controller->action);
-        if (substr($action, 0, 4) == "save" || substr($action, 0, 6) == "delete") {
+        if (substr($action, 0, 4) == 'save' || substr($action, 0, 6) == 'delete') {
             return true;
         }
         if (isset($this->modifyModules[$this->controller->module])) {
             if ($this->modifyModules[$this->controller->module] === true) {
                 return true;
             }
-            if (in_array($action, $this->modifyModules[$this->controller->module])) {
+            if (safeInArray($action, $this->modifyModules[$this->controller->module])) {
                 return true;
             }
         }
@@ -747,7 +751,7 @@ EOF;
      *
      * @var array
      */
-    protected $whiteListActions = array(
+    protected $whiteListActions = [
         'index',
         'ListView',
         'DetailView',
@@ -790,7 +794,7 @@ EOF;
         'DiagnosticDelete',
         'apiplatforms',
         'CloudInsights',
-    );
+    ];
 
     /**
      * Respond to XSF attempt
@@ -806,23 +810,23 @@ EOF;
         $whiteListActions[] = $this->controller->action;
         $whiteListString = "'" . implode("', '", $whiteListActions) . "'";
         if ($dieIfInvalid) {
-            if($inBWC) {
+            if ($inBWC) {
                 $http_params = [
                     'module' => !empty($this->controller->module) ? $this->controller->module : 'Home',
                     'action' => 'index',
                 ];
-                header('Location: index.php?'.http_build_query($http_params));
+                header('Location: index.php?' . http_build_query($http_params));
             } else {
-                header("Cache-Control: no-cache, must-revalidate");
-                $ss = new Sugar_Smarty;
+                header('Cache-Control: no-cache, must-revalidate');
+                $ss = new Sugar_Smarty();
                 if ($authFailure) {
                     $ss->assign('csrfAuthFailure', true);
                     $ss->assign('module', $this->controller->module);
-                    $ss->assign('action', htmlspecialchars($this->controller->action, ENT_QUOTES, "UTF-8"));
+                    $ss->assign('action', htmlspecialchars($this->controller->action, ENT_QUOTES, 'UTF-8'));
                 } else {
                     $ss->assign('csrfAuthFailure', false);
                     $ss->assign('host', $http_host);
-                    $ss->assign('action', htmlspecialchars($this->controller->action, ENT_QUOTES, "UTF-8"));
+                    $ss->assign('action', htmlspecialchars($this->controller->action, ENT_QUOTES, 'UTF-8'));
                     $ss->assign('whiteListString', $whiteListString);
                 }
                 $ss->display('include/MVC/View/tpls/xsrf.tpl');
@@ -846,7 +850,7 @@ EOF;
         $strong = empty($sugar_config['http_referer']['weak']);
 
         // Bug 39691 - Make sure localhost and 127.0.0.1 are always valid HTTP referers
-        $whiteListReferers = array('127.0.0.1', 'localhost');
+        $whiteListReferers = ['127.0.0.1', 'localhost'];
         if (!empty($_SERVER['SERVER_ADDR'])) {
             $whiteListReferers[] = $_SERVER['SERVER_ADDR'];
         }
@@ -863,11 +867,11 @@ EOF;
             && !in_array($this->controller->action, $this->whiteListActions)
             && $this->isModifyAction()
         ) {
-            $http_host = empty($_SERVER['HTTP_HOST'])?array(''):explode(':',$_SERVER['HTTP_HOST']);
+            $http_host = empty($_SERVER['HTTP_HOST']) ? [''] : explode(':', (string)$_SERVER['HTTP_HOST']);
             return $this->xsrfResponse($http_host[0], $dieIfInvalid, $this->inBwc);
         } else {
             if (!empty($_SERVER['HTTP_REFERER']) && !empty($_SERVER['SERVER_NAME'])) {
-                $http_ref = parse_url($_SERVER['HTTP_REFERER']);
+                $http_ref = parse_url((string)$_SERVER['HTTP_REFERER']);
                 if ($http_ref['host'] !== $_SERVER['SERVER_NAME']
                     && !in_array($this->controller->action, $this->whiteListActions)
                     && (empty($whiteListReferers) || !in_array($http_ref['host'], $whiteListReferers))
@@ -879,7 +883,7 @@ EOF;
         return true;
     }
 
-    function startSession()
+    public function startSession()
     {
         $sess = SessionStorage::getInstance();
         $sessionIdCookie = $_COOKIE['PHPSESSID'] ?? null;
@@ -983,7 +987,7 @@ EOF;
     public static function appendErrorMessage($error_message)
     {
         if (empty($_SESSION['user_error_message']) || !ArrayFunctions::is_array_access($_SESSION['user_error_message'])) {
-            $_SESSION['user_error_message'] = array();
+            $_SESSION['user_error_message'] = [];
         }
         $_SESSION['user_error_message'][] = $error_message;
     }
@@ -995,7 +999,7 @@ EOF;
             unset($_SESSION['user_error_message']);
             return $msgs;
         } else {
-            return array();
+            return [];
         }
     }
 
@@ -1011,18 +1015,24 @@ EOF;
         $domain = null,
         $secure = false,
         $httponly = false
-    )
-    {
+    ) {
+
+
         if (is_null($domain)) {
-            if (isset($_SERVER["HTTP_HOST"])) {
-                $domain = $_SERVER["HTTP_HOST"];
+            if (isset($_SERVER['HTTP_HOST'])) {
+                $domain = $_SERVER['HTTP_HOST'];
             } else {
                 $domain = 'localhost';
             }
         }
 
+        $features = Container::getInstance()->get(FeatureFlag::class);
+        if ($features->isEnabled(HttpOnlyCookies::getName())) {
+            $httponly = true;
+        }
+
         if (!headers_sent()) {
-            setcookie($name, $value, ['expires' => $expire, 'path' => $path, 'domain' => $domain, 'secure' => $secure, 'httponly' => $httponly]);
+            setcookie($name, (string)$value, ['expires' => $expire, 'path' => $path, 'domain' => $domain, 'secure' => $secure, 'httponly' => $httponly]);
         }
 
         $_COOKIE[$name] = $value;
@@ -1046,15 +1056,16 @@ EOF;
      * @param bool $add_empty Add empty vars to the result?
      * @return array
      */
-    public function filterRequestVars($prefix, $request, $add_empty = true) {
-        $vars = array();
+    public function filterRequestVars($prefix, $request, $add_empty = true)
+    {
+        $vars = [];
         $decode = SugarConfig::getInstance()->get('validation.compat_mode', true);
 
         foreach ($request as $key => $value) {
-            if (strpos($key, $prefix) === 0) {
+            if (strncmp($key, $prefix, strlen($prefix)) === 0) {
                 if ($value !== '' || $add_empty) {
                     $vars[substr($key, strlen($prefix))] =
-                        $decode ? htmlspecialchars_decode($value, ENT_QUOTES) : $value;
+                        (is_string($value) && $decode) ? htmlspecialchars_decode($value, ENT_QUOTES) : $value;
                 }
             }
         }
@@ -1071,14 +1082,15 @@ EOF;
     public function createLoginVars()
     {
         $decode = SugarConfig::getInstance()->get('validation.compat_mode', true);
-        $ret = array();
+        $ret = [];
         $req = $this->filterCsrfToken($this->getRequestVars());
         foreach (array_keys($req) as $var) {
-            if(!empty($this->controller->$var)){
-                $ret["login_" . $var] = $this->controller->$var;
+            if (!empty($this->controller->$var)) {
+                $ret['login_' . $var] = $this->controller->$var;
                 continue;
             }
-            $ret["login_" . $var] = $decode ? htmlspecialchars_decode($req[$var], ENT_QUOTES) : $req[$var];
+            $ret['login_' . $var] =
+                (is_string($req[$var]) && $decode) ? htmlspecialchars_decode($req[$var], ENT_QUOTES) : $req[$var];
         }
         if (isset($req['mobile'])) {
             $ret['mobile'] = $req['mobile'];
@@ -1089,7 +1101,7 @@ EOF;
         if (empty($ret)) {
             return '';
         }
-        return "&" . http_build_query($ret);
+        return '&' . http_build_query($ret);
     }
 
     /**
@@ -1126,9 +1138,8 @@ EOF;
         }
         if (empty($vars)) {
             return $this->getAuthenticatedHomeUrl();
-        }
-        else {
-            return "index.php?" . http_build_query($vars);
+        } else {
+            return 'index.php?' . http_build_query($vars);
         }
     }
 
@@ -1143,27 +1154,29 @@ EOF;
      */
     protected function shouldUseSidecar()
     {
-        if ( array_key_exists('sidecar', $_GET) && $_GET['sidecar'] === '0' ) {
+        if (array_key_exists('sidecar', $_GET) && $_GET['sidecar'] === '0') {
             return false;
         } else {
             return true;
         }
     }
 
-    protected function getAuthenticatedHomeUrl() {
-        $url = "index.php?module=Home&action=index";
+    protected function getAuthenticatedHomeUrl()
+    {
+        $url = 'index.php?module=Home&action=index';
 
-        if ( $this->shouldUseSidecar() ) {
-            $url = "index.php?action=sidecar#Home";
+        if ($this->shouldUseSidecar()) {
+            $url = 'index.php?action=sidecar#Home';
         }
 
         return $url;
     }
 
-    protected function getUnauthenticatedHomeUrl($addLoginVars=false) {
-        $url = "index.php?action=Login&module=Users";
+    protected function getUnauthenticatedHomeUrl($addLoginVars = false)
+    {
+        $url = 'index.php?action=Login&module=Users';
 
-        if ( $addLoginVars ) {
+        if ($addLoginVars) {
             $url .= $this->createLoginVars();
         }
 
@@ -1172,7 +1185,6 @@ EOF;
 
     /**
      * Filter csrf_token from request array
-     * @param array $request
      * @return array
      */
     protected function filterCsrfToken(array $request)

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Dashboard für Umsatzpostenliste',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Dashboard für Umsatzpostenbericht',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Produktarten',
     'LBL_ASSIGNED_TO_NAME' => 'Zugewiesen an:',
     'LBL_ASSIGNED_TO' => 'Zugewiesen an',
-    'LBL_ASSIGNED_TO_ID'=>'Zugewiesene Benutzer-ID',
+    'LBL_ASSIGNED_TO_ID' => 'Zugewiesene Benutzer-ID',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Zugewiesener Benutzer',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Zugewiesene Benutzer-ID',
     'LBL_CAMPAIGN_ID' => 'Kampagnen-ID',
@@ -217,4 +217,5 @@ So erstellen Sie ein {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Zeigt die Top 10 der Verkaufschancen in einem Blasendiagramm an.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Meine Umsatzposten',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Umsatzposten in meinem Team",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Zeitleiste für Umsatzposten',
+];

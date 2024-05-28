@@ -54,16 +54,16 @@ class DynamicFieldVerification
 
         if ($this->db->tableExists($tableNameCustom)) {
             $query = "create table $tableNameClone like $tableNameCustom";
-            $ret = $this->db->query($query, false, "Cannot clone table");
+            $ret = $this->db->query($query, false, 'Cannot clone table');
             if (!$ret) {
                 throw new DynamicFieldVerificationException(self::ERROR_DATABASE_ROW_SIZE_LIMIT);
             }
         } else {
             $iddef = [
-                "id_c" => [
-                    "name" => "id_c",
-                    "type" => "id",
-                    "required" => 1,
+                'id_c' => [
+                    'name' => 'id_c',
+                    'type' => 'id',
+                    'required' => 1,
                 ],
             ];
             $ididx = [
@@ -74,7 +74,7 @@ class DynamicFieldVerification
                 ],
             ];
             $query = $this->db->createTableSQLParams($tableNameClone, $iddef, $ididx);
-            $ret = $this->db->query($query, false, "Cannot create verification table");
+            $ret = $this->db->query($query, false, 'Cannot create verification table');
             if (!$ret) {
                 throw new DynamicFieldVerificationException(self::ERROR_DATABASE_ROW_SIZE_LIMIT);
             }
@@ -91,17 +91,17 @@ class DynamicFieldVerification
         }
         if ($newDefsAdd) {
             $addColumnsSQL = $this->db->addColumnSQL($tableNameClone, $newDefsAdd);
-            $ret = $this->db->query($addColumnsSQL, false, "Cannot alter cloned table");
+            $ret = $this->db->query($addColumnsSQL, false, 'Cannot alter cloned table');
         } else {
             $ret = true;
         }
         if ($ret && $newDefsAlter) {
             $alterColumnsSQL = $this->db->alterColumnSQL($tableNameClone, $newDefsAlter);
-            $ret = $this->db->query($alterColumnsSQL, false, "Cannot alter cloned table");
+            $ret = $this->db->query($alterColumnsSQL, false, 'Cannot alter cloned table');
         }
 
         $dropSql = $this->db->dropTableNameSQL($tableNameClone);
-        $dropped = $this->db->query($dropSql, false, "Cannot alter cloned table");
+        $dropped = $this->db->query($dropSql, false, 'Cannot alter cloned table');
         if (!$dropped) {
             $this->log->warn("Cannot drop temporary table $tableNameClone");
         }

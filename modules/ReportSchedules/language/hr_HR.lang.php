@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Rasporedi izvješća',
     'LBL_MODULE_NAME_SINGULAR' => 'Raspored izvješća',
     'LBL_REPORT_NAME' => 'Izvješće',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Vrsta/vrste datoteke',
     'LBL_EMBED_REPORT' => 'Umetni izvješće u e-poštu',
     'LBL_EMBED_REPORT_INFO' => 'Napomena: ako je izvješće dulje od 200 redaka, priložit čemo izvješće u obliku CSV datoteke.',
-);
+];

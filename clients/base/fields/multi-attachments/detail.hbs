@@ -16,14 +16,14 @@
         {{#each value}}
         <li class="select2-search-choice">
             <div>
-                <span class="select2-choice-type" rel="tooltip" data-original-title="{{fileName}}{{fileExt}}">
-                    <a class="ellipsis_inline multi-attachment-link"
-                       data-placement="bottom"
+                <span class="select2-choice-type flex" rel="tooltip" data-original-title="{{fileName}}{{fileExt}}">
+                    <a class="ellipsis_inline leading-[18px] !m-0 multi-attachment-link !p-0"
+                       data-bs-placement="bottom"
                        href="{{url}}"
                        data-url="{{url}}"
                        target="_blank">{{fileName}}
                     </a>
-                    <a class="multi-attachment-link-type"
+                    <a class="multi-attachment-link-type leading-[18px] !m-0 !p-0"
                        href="{{url}}"
                        data-url="{{url}}"
                        target="_blank">{{fileExt}}</a>
@@ -47,7 +47,8 @@
 </div>
 {{#if singleImage }}
     <a class="attachment-preview"
-       data-placement="bottom"
+       data-action="open-preview"
+       data-bs-placement="bottom"
        title="{{value.[0].name}}"
        href="{{value.[0].url}}"
        data-url="{{value.[0].url}}"

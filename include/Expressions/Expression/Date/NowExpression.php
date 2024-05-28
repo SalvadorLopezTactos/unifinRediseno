@@ -16,19 +16,21 @@
  */
 class NowExpression extends DateExpression
 {
-	/**
-	 * Returns the entire enumeration bare.
-	 */
-	function evaluate() {
-		return TimeDate::getInstance()->getNow(true);
-	}
+    /**
+     * Returns the entire enumeration bare.
+     */
+    public function evaluate()
+    {
+        return TimeDate::getInstance()->getNow(true);
+    }
 
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
 		    var d = SUGAR.util.DateUtils.getUserTime();
 		    d.setSeconds(0);
 
@@ -40,28 +42,29 @@ class NowExpression extends DateExpression
 
 		    return d;
 EOQ;
-	}
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return "now";
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return 'now';
+    }
 
-	/**
-	 * Returns the maximum number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 0;
-	}
+    /**
+     * Returns the maximum number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 0;
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 }
-
-?>

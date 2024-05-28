@@ -64,7 +64,7 @@ class PMSEEvaluator
      *
      * @return PMSEExpressionEvaluator
      */
-    function getExpressionEvaluator()
+    public function getExpressionEvaluator()
     {
         return $this->expressionEvaluator;
     }
@@ -73,7 +73,7 @@ class PMSEEvaluator
      *
      * @return PMSECriteriaEvaluator
      */
-    function getCriteriaEvaluator()
+    public function getCriteriaEvaluator()
     {
         return $this->criteriaEvaluator;
     }
@@ -82,7 +82,7 @@ class PMSEEvaluator
      *
      * @param PMSEExpressionEvaluator $expressionEvaluator
      */
-    function setExpressionEvaluator($expressionEvaluator)
+    public function setExpressionEvaluator($expressionEvaluator)
     {
         $this->expressionEvaluator = $expressionEvaluator;
     }
@@ -91,7 +91,7 @@ class PMSEEvaluator
      *
      * @param PMSECriteriaEvaluator $criteriaEvaluator
      */
-    function setCriteriaEvaluator($criteriaEvaluator)
+    public function setCriteriaEvaluator($criteriaEvaluator)
     {
         $this->criteriaEvaluator = $criteriaEvaluator;
     }
@@ -110,15 +110,15 @@ class PMSEEvaluator
     /**
      * Parsing and evaluation of expression
      * the expression is in json
-     * @global object $current_user this is the current user object
-     * @global object $beanList list of all modules of sugar
      * @param json $expression expression to evaluate
      * @param object $evaluatedBean this is the bean object
      * @param array $params if additional parameters
      * @param bool $returnToken DEPRECATED AS OF 7.9 AND WILL BE REMOVED IN A FUTURE RELEASE
      * @return bool
+     * @global object $beanList list of all modules of sugar
+     * @global object $current_user this is the current user object
      */
-    public function evaluateExpression($expression, $evaluatedBean, $params = array(), $returnToken = false)
+    public function evaluateExpression($expression, $evaluatedBean, $params = [], $returnToken = false)
     {
         global $current_user;
         global $beanList;
@@ -135,7 +135,7 @@ class PMSEEvaluator
             }
         }
 
-        $parsedArray = $this->parser->parseCriteriaArray (
+        $parsedArray = $this->parser->parseCriteriaArray(
             $expression,
             $evaluatedBean,
             $current_user,
@@ -166,7 +166,7 @@ class PMSEEvaluator
                     case 'textarea':
                     case 'textfield':
                     case 'url':
-                        if ((is_countable($resultArray) ? count($resultArray) : 0) > 1) {
+                        if (safeCount($resultArray) > 1) {
                             $result = '';
                             foreach ($resultArray as $item) {
                                 $result .= $item->expValue;

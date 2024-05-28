@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">IBM SmartCloud&copy; で Sugar インスタンスを新規アプリケーションとして登録することにより、コンシューマキーとコンシューマシークレットを取得してください。本登録は2011年5月8日から有効になります。<br>
 &nbsp;<br>
 あなたのインスタンスに登録する手順は次の通りです。<br>
@@ -28,5 +28,4 @@ $connector_strings = array (
 </td></tr></table>',
     'oauth_consumer_key' => 'OAuth コンシューマキー',
     'oauth_consumer_secret' => 'OAuth コンシューマシークレット',
-);
-
+];

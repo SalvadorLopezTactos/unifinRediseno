@@ -9,24 +9,27 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Quick create form as a pop-up window
  * @api
  */
-class PopupQuickCreate extends SubpanelQuickCreate{
-
+class PopupQuickCreate extends SubpanelQuickCreate
+{
     public $ev;
+
     public function __construct($module, $view = 'QuickCreate')
     {
-		$this->defaultProcess = false;
+        $this->defaultProcess = false;
         parent::__construct($module, $view, true);
-		$this->ev->defs['templateMeta']['form']['buttons'] = array('POPUPSAVE', 'POPUPCANCEL');
-	}
+        $this->ev->defs['templateMeta']['form']['buttons'] = ['POPUPSAVE', 'POPUPCANCEL'];
+    }
 
-	function process($module){
+    public function process($module)
+    {
         $form_name = 'form_QuickCreate_' . $module;
         $this->ev->formName = $form_name;
         $this->ev->process(true, $form_name);
-		return $this->ev->display(false, true);
-	}
+        return $this->ev->display(false, true);
+    }
 }

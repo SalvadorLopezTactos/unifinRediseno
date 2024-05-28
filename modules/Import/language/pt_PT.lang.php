@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Importação de Ficheiro de Leitura com Sucesso',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'O registo importado está a participar num processo e não pode ser editado porque alguns campos estão bloqueados para edição pelo processo.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Registos ignorados devido a erro',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'se o utilizador não existir use o utilizador actual',
     'LBL_SHOW_HIDDEN' => 'Mostrar campos que não são normalmente importáveis',
     'LBL_UPDATE_RECORDS' => 'Actualizar registos existentes em vez de importá-los (Sem Desfazer)',
-    'LBL_TEST'=> 'Teste de Importação (não grave ou modifique dados)',
+    'LBL_TEST' => 'Teste de Importação (não grave ou modifique dados)',
     'LBL_TRUNCATE_TABLE' => 'Esvaziar tabela antes de importar (eliminar todos os registos)',
     'LBL_RELATED_ACCOUNTS' => 'Não criar contas relacionadas',
     'LBL_NO_DATECHECK' => 'Ignorar verificação da data (mais rápida mas irá falhar se alguma data estiver errada)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Valor inteiro inválido',
     'LBL_ERROR_INVALID_NUM' => 'Valor numérico inválido',
     'LBL_ERROR_INVALID_TIME' => 'Hora inválida',
-    'LBL_ERROR_INVALID_EMAIL'=>'Endereço de E-mail inválido',
-    'LBL_ERROR_INVALID_BOOL'=>'valor inválido (deve ser 1 ou 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Data inválida',
-    'LBL_ERROR_INVALID_USER'=>'Nome do utilizador ou ID inválido',
+    'LBL_ERROR_INVALID_EMAIL' => 'Endereço de E-mail inválido',
+    'LBL_ERROR_INVALID_BOOL' => 'valor inválido (deve ser 1 ou 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Data inválida',
+    'LBL_ERROR_INVALID_USER' => 'Nome do utilizador ou ID inválido',
     'LBL_ERROR_INVALID_TEAM' => 'Nome de equipa ou ID inválido',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Nome de conta ou ID inválido',
     'LBL_ERROR_INVALID_RELATE' => 'Campo relacional inválido',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'não existe ou não tem permissões de escrita',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'O ficheiro não foi carregado com sucesso. É possível que a definição &#39;upload_max_filesize&#39; do seu ficheiro php.ini esteja definida como um número pequeno',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'O ficheiro é muito grande. Max:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bytes. Altera $sugar_config[&#39;upload_maxsize&#39;] no config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bytes. Alterar $sugar_config[&#39;upload_maxsize&#39;] em config.php',
     'LBL_MODULE_NAME' => 'Importar',
     'LBL_MODULE_NAME_SINGULAR' => 'Importar',
     'LBL_TRY_AGAIN' => 'Tente novamente',
     'LBL_START_OVER' => 'Começar de novo',
     'LBL_ERROR' => 'Erro:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'O ficheiro de importação contém {0} linhas. O número ideal de linhas é {1}. Mais linhas poderão abrandar o processo de importação. Carregar em OK para continuar a importação. Carregar em Cancel para rever e recarregar o ficheiro de importação.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Não pode importar um utilizador administrador do sistema',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Não pode importar um utilizador administrador do sistema',
     'ERR_REPORT_LOOP' => 'O sistema detectou um erro. Um Utilizador não pode reportar a si mesmo e nenhum dos seus superiores podem reportar a ele.',
     'ERR_MULTIPLE' => 'Múltiplas colunas foram definidas com o mesmo nome de campo.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Campos obrigatórios em falta:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Não há linhas (registos) no seu ficheiro de importação',
     'LBL_FILE_ALREADY_BEEN_OR' => 'O ficheiro de importação já foi processado ou não existe',
     'LBL_SUCCESS' => 'Sucesso:',
-	'LBL_FAILURE' => 'Importação Falhou:',
+    'LBL_FAILURE' => 'Importação Falhou:',
     'LBL_SUCCESSFULLY' => 'Importados com Sucesso',
     'LBL_LAST_IMPORT_UNDONE' => 'A sua última importação foi desfeita',
     'LBL_NO_IMPORT_TO_UNDO' => 'Não há importação para desfazer.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Importar Mais',
     'LBL_FINISHED' => 'Concluído',
     'LBL_UNDO_LAST_IMPORT' => 'Desfazer Última Importação',
-    'LBL_LAST_IMPORTED'=>'Criada',
+    'LBL_LAST_IMPORTED' => 'Criada',
     'ERR_MULTIPLE_PARENTS' => 'Você pode ter somente um ID Membro definido',
     'LBL_DUPLICATES' => 'Duplicados Encontrados',
     'LNK_DUPLICATE_LIST' => 'Transferir lista de duplicados',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Ocultar Notas',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Mostrar Previsão de Colunas',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Ocultar Previsão de Colunas',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Verifique se há duplicados usando o operador:',
     'LBL_SAVE_MAPPING_AS' => 'Para gravar as definições de importação, forneça um nome para as definições gravadas:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Aspas Simples (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Aspas Duplas (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Para atribuir os novos registos a outras equipas para além da(s) sua(s) equipa(s) predefinida(s), utilize a coluna Valor Predefinido para selecionar equipas diferentes.',
     'LBL_SIGN_IN_HELP' => 'Para habilitar este serviço, por favor entrar no separador Contas Externas, presente na página de definições do utilizador.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "A tentar utilizar endereços de e-mail num Bean que não fornece suporte.",
-);
+];

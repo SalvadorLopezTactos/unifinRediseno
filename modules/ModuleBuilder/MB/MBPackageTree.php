@@ -11,6 +11,7 @@
  */
 require_once 'vendor/ytree/Tree.php';
 require_once 'vendor/ytree/Node.php';
+
 class MBPackageTree
 {
     /**
@@ -21,10 +22,10 @@ class MBPackageTree
      * @var \ModuleBuilder|mixed
      */
     public $mb;
+
     public function __construct()
     {
         $this->tree = new Tree('package_tree');
-        $this->tree->id = 'package_tree';
         $this->mb = new ModuleBuilder();
         $this->populateTree($this->mb->getNodes(), $this->tree);
     }
@@ -37,13 +38,18 @@ class MBPackageTree
     public function populateTree($nodes, &$parent)
     {
         foreach ($nodes as $node) {
-            if(empty($node['label']))$node['label'] = $node['name'];
-            $yn = new Node($parent->id . '/' . $node['name'],$node['label']);
-            if(!empty($node['action']))
-            $yn->set_property('action', $node['action']);
+            if (empty($node['label'])) {
+                $node['label'] = $node['name'];
+            }
+            $yn = new Node($parent->id . '/' . $node['name'], $node['label']);
+            if (!empty($node['action'])) {
+                $yn->set_property('action', $node['action']);
+            }
             $yn->set_property('href', 'javascript:void(0);');
             $yn->id = $parent->id . '/' . $node['name'];
-            if(!empty($node['children']))$this->populateTree($node['children'], $yn);
+            if (!empty($node['children'])) {
+                $this->populateTree($node['children'], $yn);
+            }
 
             // Sets backward compatibility flag into the node defs for use on the
             // client if needed
@@ -64,6 +70,4 @@ class MBPackageTree
     {
         return $this->tree->generateNodesRaw();
     }
-
 }
-

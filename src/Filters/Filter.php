@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -98,7 +100,7 @@ final class Filter implements ApiSerializable
      * @throws \SugarApiException The operand and field implementations throw
      * instances of {@link \SugarApiException} implementations.
      */
-    private function doFilters(array $filters, callable $fn) : array
+    private function doFilters(array $filters, callable $fn): array
     {
         foreach ($filters as $i => $filter) {
             if (!is_array($filter)) {

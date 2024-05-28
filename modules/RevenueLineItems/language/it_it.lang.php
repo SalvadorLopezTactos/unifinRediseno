@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Dashboard elenco elementi dell&#39;opportunità',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Dashboard record elementi dell&#39;opportunità',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Tipi prodotto',
     'LBL_ASSIGNED_TO_NAME' => 'Assegnato a',
     'LBL_ASSIGNED_TO' => 'Assegnato A:',
-    'LBL_ASSIGNED_TO_ID'=>'Assegnato a ID',
+    'LBL_ASSIGNED_TO_ID' => 'Assegnato a ID',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Assegnato a',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Assegnato a ID',
     'LBL_CAMPAIGN_ID' => 'ID Campagna',
@@ -211,4 +211,5 @@ Per creare un {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Visualizza i 10 migliori Elementi dell´Opportunità in un grafico a bolle.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'I miei Elementi delle Opportunità',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Gli Elementi delle Opportunità del mio Gruppo",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia elementi dell´opportunità',
+];

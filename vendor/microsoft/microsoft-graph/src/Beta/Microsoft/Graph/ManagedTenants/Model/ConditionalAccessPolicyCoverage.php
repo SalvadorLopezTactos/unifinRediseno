@@ -26,6 +26,7 @@ class ConditionalAccessPolicyCoverage extends \Beta\Microsoft\Graph\Model\Entity
 {
     /**
     * Gets the conditionalAccessPolicyState
+    * The state for the conditional access policy. Possible values are: enabled, disabled, enabledForReportingButNotEnforced. Required. Read-only.
     *
     * @return string|null The conditionalAccessPolicyState
     */
@@ -37,9 +38,10 @@ class ConditionalAccessPolicyCoverage extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the conditionalAccessPolicyState
+    * The state for the conditional access policy. Possible values are: enabled, disabled, enabledForReportingButNotEnforced. Required. Read-only.
     *
     * @param string $val The conditionalAccessPolicyState
     *
@@ -50,9 +52,10 @@ class ConditionalAccessPolicyCoverage extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["conditionalAccessPolicyState"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the latestPolicyModifiedDateTime
+    * The date and time the conditional access policy was last modified. Required. Read-only.
     *
     * @return \DateTime|null The latestPolicyModifiedDateTime
     */
@@ -68,9 +71,10 @@ class ConditionalAccessPolicyCoverage extends \Beta\Microsoft\Graph\Model\Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the latestPolicyModifiedDateTime
+    * The date and time the conditional access policy was last modified. Required. Read-only.
     *
     * @param \DateTime $val The latestPolicyModifiedDateTime
     *
@@ -81,9 +85,10 @@ class ConditionalAccessPolicyCoverage extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["latestPolicyModifiedDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the requiresDeviceCompliance
+    * A flag indicating whether the conditional access policy requires device compliance. Required. Read-only.
     *
     * @return bool|null The requiresDeviceCompliance
     */
@@ -95,9 +100,10 @@ class ConditionalAccessPolicyCoverage extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the requiresDeviceCompliance
+    * A flag indicating whether the conditional access policy requires device compliance. Required. Read-only.
     *
     * @param bool $val The requiresDeviceCompliance
     *
@@ -108,9 +114,10 @@ class ConditionalAccessPolicyCoverage extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["requiresDeviceCompliance"] = boolval($val);
         return $this;
     }
-    
+
     /**
     * Gets the tenantDisplayName
+    * The display name for the managed tenant. Required. Read-only.
     *
     * @return string|null The tenantDisplayName
     */
@@ -122,9 +129,10 @@ class ConditionalAccessPolicyCoverage extends \Beta\Microsoft\Graph\Model\Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the tenantDisplayName
+    * The display name for the managed tenant. Required. Read-only.
     *
     * @param string $val The tenantDisplayName
     *
@@ -135,5 +143,5 @@ class ConditionalAccessPolicyCoverage extends \Beta\Microsoft\Graph\Model\Entity
         $this->_propDict["tenantDisplayName"] = $val;
         return $this;
     }
-    
+
 }

@@ -12,9 +12,9 @@
 
 class SugarWidgetFieldImage extends SugarWidgetFieldVarchar
 {
-
-	function displayListPlain($layout_def) {
-		$value = $this->_get_list_value($layout_def);
+    public function displayListPlain($layout_def)
+    {
+        $value = $this->_get_list_value($layout_def);
         if (is_string($value) && !empty($value)) {
             return <<<HTML
                 <img class="w-11" src="index.php?entryPoint=download&id={$value}&type=SugarFieldImage&isTempFile=1"/>
@@ -25,7 +25,7 @@ class SugarWidgetFieldImage extends SugarWidgetFieldVarchar
         return <<<HTML
             <div></div>
         HTML;
-	}
+    }
 
     /**
      * Get image value for sidecar field
@@ -38,7 +38,7 @@ class SugarWidgetFieldImage extends SugarWidgetFieldVarchar
     {
         $parentRecordId = null;
         $imageId = $this->_get_list_value($layoutDef);
-        $dataForImage = array_key_exists('fields', $layoutDef) ? $layoutDef['fields']: [];
+        $dataForImage = array_key_exists('fields', $layoutDef) ? $layoutDef['fields'] : [];
 
         if (!empty($dataForImage)) {
             $parentRecordId = array_key_exists('PRIMARYID', $dataForImage) ? $dataForImage['PRIMARYID'] : null;

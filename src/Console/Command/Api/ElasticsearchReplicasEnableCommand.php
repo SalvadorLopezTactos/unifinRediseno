@@ -63,10 +63,10 @@ class ElasticsearchReplicasEnableCommand extends Command implements InstanceMode
      * @param array $args Arguments to be passed to the public API
      * @codeCoverageIgnore
      */
-    protected function callApi($method, array $args = array())
+    protected function callApi($method, array $args = [])
     {
-        $args = array($this->service, $args);
-        return call_user_func_array(array($this->api, $method), $args);
+        $args = [$this->service, $args];
+        return call_user_func_array([$this->api, $method], $args);
     }
 
     /**
@@ -87,8 +87,7 @@ class ElasticsearchReplicasEnableCommand extends Command implements InstanceMode
     {
         $this
             ->setName('elastic:replicas_enable')
-            ->setDescription('Enable replicas on all indices')
-        ;
+            ->setDescription('Enable replicas on all indices');
     }
 
     /**
@@ -98,11 +97,10 @@ class ElasticsearchReplicasEnableCommand extends Command implements InstanceMode
     {
         $result = $this
             ->initApi($this->getApi())
-            ->callApi('elasticSearchReplicasEnable', array())
-        ;
+            ->callApi('elasticSearchReplicasEnable', []);
 
         $table = new Table($output);
-        $table->setHeaders(array('Index', 'Status'));
+        $table->setHeaders(['Index', 'Status']);
 
         if ($result) {
             foreach ($result as $index => $status) {
@@ -111,7 +109,7 @@ class ElasticsearchReplicasEnableCommand extends Command implements InstanceMode
                 } else {
                     $status = sprintf('<error>%s</error>', $status);
                 }
-                $table->addRow(array($index, $status));
+                $table->addRow([$index, $status]);
             }
         }
 

@@ -36,16 +36,15 @@ class PMSEInvalidElement extends PMSEShape
      * @return array
      * @codeCoverageIgnore
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
-         switch ($externalAction) {
+        switch ($externalAction) {
             case 'RESUME_EXECUTION':
                 return $this->prepareResponse($flowData, 'NONE', 'NONE');
                 break;
-            default :
+            default:
                 throw new PMSEElementException('Invalid Element', $flowData, $this);
                 break;
         }
-        
     }
 }

@@ -26,16 +26,16 @@ class PMSECriteriaEvaluator
 
     public function isCriteriaToken($token)
     {
-        $criteriaTypes = array (
+        $criteriaTypes = [
             'MODULE',
             'CONTROL',
             'BUSINESS_RULES',
             'USER_ROLE',
             'USER_ADMIN',
-            'USER_IDENTITY'
-        );
+            'USER_IDENTITY',
+        ];
 
-        return in_array($token->expType, $criteriaTypes);
+        return safeInArray($token->expType, $criteriaTypes);
     }
 
     public function evaluateCriteriaToken($criteriaToken)

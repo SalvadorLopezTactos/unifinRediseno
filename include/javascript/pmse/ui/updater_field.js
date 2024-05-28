@@ -1024,9 +1024,9 @@ UpdaterItem.prototype._createConfigButton = function () {
     }
     var button = this.createHTMLElement("a");
     button.href = "#";
-    button.className = "adam-itemupdater-cfg fa fa-cog";
+    button.className = 'adam-itemupdater-cfg sicon sicon-settings';
     button.setAttribute('rel', 'tooltip');
-    button.setAttribute('data-placement', 'right');
+    button.setAttribute('data-bs-placement', 'right');
     button.setAttribute('data-original-title', App.lang.get('LBL_SUGAR_FIELD_SELECTOR', 'pmse_Emails_Templates'));
     this._configButton = button;
     return this._configButton;
@@ -1127,7 +1127,7 @@ UpdaterItem.prototype.createHTML = function () {
         labelText = this.createHTMLElement("span");
         labelText.className = "adam-itemupdater-labeltext";
         labelText.setAttribute('rel', 'tooltip');
-        labelText.setAttribute('data-placement', 'left');
+        labelText.setAttribute('data-bs-placement', 'left');
 
         requiredContainer = this.createHTMLElement("span");
         requiredContainer.className = "adam-itemupdater-required required noshadow";
@@ -1304,7 +1304,7 @@ TeamUpdaterItem.prototype.setSelectedTeams = function (teams) {
             if (!_.isEmpty(data)) {
                 if (that._selectedTeams.indexOf(data) >= 0) {
                     var $lockButton = $(item).find('.adam-team-action[name=lock]');
-                    $lockButton.addClass('active').find('i').removeClass('fa-lock').addClass('active fa-unlock-alt');
+                    $lockButton.addClass('active').find('i').removeClass('sicon-lock').addClass('active sicon-unlock');
                     $lockButton.attr('data-original-title', App.lang.get('LBL_TEAM_SET_DISABLE'));
 
                     existingValues.push(data);
@@ -1585,11 +1585,11 @@ TeamUpdaterItem.prototype._getAddButton = function () {
     addButton = this.createHTMLElement('button')
     addButton.className = 'btn adam-team-action';
     i = this.createHTMLElement('i');
-    i.className = 'fa fa-plus';
+    i.className = 'sicon sicon-plus';
     addButton.appendChild(i);
     addButton.name = 'add';
     addButton.setAttribute('rel', 'tooltip');
-    addButton.setAttribute('data-placement', 'top');
+    addButton.setAttribute('data-bs-placement', 'top');
     addButton.setAttribute('data-original-title', App.lang.get('LBL_TEAM_ADD'));
 
     this._addButton = addButton;
@@ -1606,30 +1606,30 @@ TeamUpdaterItem.prototype._addButtonsToLine = function (line) {
         return this;
     }
 
-    i.className = 'fa fa-star';
+    i.className = 'sicon sicon-star-fill';
     primaryButton.appendChild(i);
     primaryButton.className = 'btn adam-team-action ';
     primaryButton.name = 'primary';
     primaryButton.setAttribute('rel', 'tooltip');
-    primaryButton.setAttribute('data-placement', 'top');
+    primaryButton.setAttribute('data-bs-placement', 'top');
     primaryButton.setAttribute('data-original-title', App.lang.get('LBL_TEAM_PRIMARY'));
 
     removeButton = primaryButton.cloneNode(false);
     i = i.cloneNode(false);
-    i.className = 'fa fa-minus';
+    i.className = 'sicon sicon-minus';
     removeButton.appendChild(i);
     removeButton.name = 'remove';
     removeButton.setAttribute('rel', 'tooltip');
-    removeButton.setAttribute('data-placement', 'top');
+    removeButton.setAttribute('data-bs-placement', 'top');
     removeButton.setAttribute('data-original-title', App.lang.get('LBL_TEAM_REMOVE'));
 
     lockButton = primaryButton.cloneNode(false);
     i = i.cloneNode(false);
-    i.className = 'fa fa-lock';
+    i.className = 'sicon sicon-lock';
     lockButton.appendChild(i);
     lockButton.name = 'lock';
     lockButton.setAttribute('rel', 'tooltip');
-    lockButton.setAttribute('data-placement', 'top');
+    lockButton.setAttribute('data-bs-placement', 'top');
     lockButton.setAttribute('data-original-title', App.lang.get('LBL_TEAM_SET_ENABLE'));
     if ($(this._control).find('*').index(line) === 0) {
         removeButton.style.visibility = 'hidden';
@@ -1784,7 +1784,7 @@ TeamUpdaterItem.prototype._performTeamAction = function () {
                 break;
             case 'lock':
                 if (!_.isEmpty(lineData)) {
-                    $button.toggleClass('active').find('i').toggleClass('fa-lock fa-unlock-alt');
+                    $button.toggleClass('active').find('i').toggleClass('sicon-lock sicon-unlock');
                     if ($button.hasClass('active')) {
                         $button.attr('data-original-title', App.lang.get('LBL_TEAM_SET_DISABLE'));
                     } else {

@@ -20,7 +20,7 @@ class PMSEStartEvent extends PMSEEvent
      * @param array $arguments The arguments passed in from the Request
      * @return array
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         // Needed for checking on triggered starts
         $regKey = 'triggered_starts';
@@ -29,7 +29,7 @@ class PMSEStartEvent extends PMSEEvent
         $registry = $this->getRegistry();
 
         // Get our list of triggered starts
-        $triggered = $registry->get($regKey, array());
+        $triggered = $registry->get($regKey, []);
 
         if (isset($flowData['evn_params']) && $flowData['evn_params'] === 'relationshipchange') {
             $beanId = "{$arguments['related_id']}:{$bean->id}";
@@ -46,11 +46,11 @@ class PMSEStartEvent extends PMSEEvent
             if (!empty($triggered[$startEventID][$beanId])) {
                 // Log a message for this event
                 $msg = "Start Event ID $startEventID has already been triggered" .
-                       " for Bean ID {$bean->id} in this request and cannot be triggered again.";
+                    " for Bean ID {$bean->id} in this request and cannot be triggered again.";
                 $this->logger->alert($msg);
 
                 // We need to call this method to ensure what is needed later is there
-                return $this->prepareResponse(array(), '', '');
+                return $this->prepareResponse([], '', '');
             }
         }
 
@@ -85,8 +85,7 @@ class PMSEStartEvent extends PMSEEvent
         if ($processDefinitionBean->pro_module != $bean->module_name) {
             foreach ($bean as $key => $attribute) {
                 if ($bean->$key instanceof Link2) {
-                    if (
-                        ($bean->$key->relationship->def['lhs_module'] == $processDefinitionBean->pro_module
+                    if (($bean->$key->relationship->def['lhs_module'] == $processDefinitionBean->pro_module
                             && $bean->$key->relationship->def['rhs_module'] == $bean->module_name) ||
                         ($bean->$key->relationship->def['lhs_module'] == $bean->module_name
                             && $bean->$key->relationship->def['rhs_module'] == $processDefinitionBean->pro_module)
@@ -172,7 +171,7 @@ class PMSEStartEvent extends PMSEEvent
 
         $case->save();
 
-        $flowData = array();
+        $flowData = [];
 
         $flowData['cas_id'] = $case->cas_id;
         $flowData['cas_index'] = 1;

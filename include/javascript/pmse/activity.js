@@ -3797,6 +3797,8 @@ AdamActivity.prototype.getAction = function(type, w) {
                             evn_criteria: emailTemplateId
                         };
 
+                        const requiredFields = [comboDocumentTemplates];
+
                         if (fromSelector) {
                             var from = {
                                 id: fromSelector.value,
@@ -3804,6 +3806,7 @@ AdamActivity.prototype.getAction = function(type, w) {
                             };
                             if (sendEmail) {
                                 params = _.extend(params, {from: from});
+                                requiredFields.push(emailTemplateCombobox, fromSelector);
                             } else {
                                 params = _.extend(params, {from: null});
                             }
@@ -3823,6 +3826,19 @@ AdamActivity.prototype.getAction = function(type, w) {
                             params = _.extend(params, {
                                 to: null, cc: null, bcc: null,
                             });
+                        }
+
+                        this._errorDecoration(requiredFields);
+
+                        const validFields = _.every(requiredFields, function(field) {
+                            return !_.isEmpty(field.value);
+                        });
+
+                        $(this.footer).append(this._errorMessage);
+                        this._toggleErrorMessage(validFields);
+
+                        if (!validFields) {
+                            return;
                         }
 
                         var data = {

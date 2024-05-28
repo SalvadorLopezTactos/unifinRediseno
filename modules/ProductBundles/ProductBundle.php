@@ -57,17 +57,17 @@ class ProductBundle extends SugarBean
     public $contact_id;
     public $related_product_id;
 
-    public $table_name = "product_bundles";
-    public $rel_quotes = "product_bundle_quote";
-    public $rel_products = "product_bundle_product";
-    public $rel_notes = "product_bundle_note";
+    public $table_name = 'product_bundles';
+    public $rel_quotes = 'product_bundle_quote';
+    public $rel_products = 'product_bundle_product';
+    public $rel_notes = 'product_bundle_note';
     public $module_dir = 'ProductBundles';
-    public $object_name = "ProductBundle";
+    public $object_name = 'ProductBundle';
 
     public $new_schema = true;
 
     // This is used to retrieve related fields from form posts.
-    public $additional_column_fields = Array();
+    public $additional_column_fields = [];
 
     //deletes related products might want to change this in the future if we allow for sharing of products
     public function mark_deleted($id)
@@ -91,7 +91,7 @@ class ProductBundle extends SugarBean
      */
     public function get_index($quote_id)
     {
-        $values = array('quote_id' => $quote_id, 'bundle_id' => $this->id);
+        $values = ['quote_id' => $quote_id, 'bundle_id' => $this->id];
         return $this->retrieve_relationships($this->rel_quotes, $values, 'bundle_index');
     }
 
@@ -100,7 +100,7 @@ class ProductBundle extends SugarBean
      */
     public function get_bundle_product_indexes()
     {
-        $values = array('bundle_id' => $this->id);
+        $values = ['bundle_id' => $this->id];
         return $this->retrieve_relationships($this->rel_products, $values, 'product_index');
     }
 
@@ -109,7 +109,7 @@ class ProductBundle extends SugarBean
      */
     public function get_bundle_note_indexes()
     {
-        $values = array('bundle_id' => $this->id);
+        $values = ['bundle_id' => $this->id];
         return $this->retrieve_relationships($this->rel_notes, $values, 'note_index');
     }
 
@@ -133,7 +133,7 @@ class ProductBundle extends SugarBean
         $this->load_relationship('products');
         $beans = $this->products->getBeans();
 
-        usort($beans, array(self::class, 'compareProductOrNoteIndexAsc'));
+        usort($beans, [self::class, 'compareProductOrNoteIndexAsc']);
 
         return $beans;
     }
@@ -160,9 +160,9 @@ class ProductBundle extends SugarBean
     }
 
     /**
-     * @deprecated
-     * @see getNotes()
      * @return array
+     * @see getNotes()
+     * @deprecated
      */
     public function get_notes()
     {
@@ -179,15 +179,15 @@ class ProductBundle extends SugarBean
         $this->load_relationship('product_bundle_notes');
         $beans = $this->product_bundle_notes->getBeans();
 
-        usort($beans, array(self::class, 'compareProductOrNoteIndexAsc'));
+        usort($beans, [self::class, 'compareProductOrNoteIndexAsc']);
 
         return $beans;
     }
 
     /**
-     * @deprecated
-     * @see getLineItems()
      * @return array
+     * @see getLineItems()
+     * @deprecated
      */
     public function get_product_bundle_line_items()
     {
@@ -209,15 +209,15 @@ class ProductBundle extends SugarBean
             $this->product_bundle_notes->getBeans()
         );
 
-        usort($bundle_list, array(self::class, 'compareProductOrNoteIndexAsc'));
+        usort($bundle_list, [self::class, 'compareProductOrNoteIndexAsc']);
 
         return $bundle_list;
     }
 
     /**
-     * @deprecated
      * @param string $bundle_id
      * @return bool
+     * @deprecated
      */
     public function clear_productbundle_product_relationship($bundle_id)
     {
@@ -227,9 +227,9 @@ class ProductBundle extends SugarBean
     }
 
     /**
-     * @deprecated
      * @param string $product_id
      * @return bool
+     * @deprecated
      */
     public function clear_product_productbundle_relationship($product_id)
     {
@@ -239,9 +239,9 @@ class ProductBundle extends SugarBean
     }
 
     /**
-     * @deprecated
      * @param string $product_id
      * @return bool
+     * @deprecated
      */
     public function retrieve_productbundle_from_product($product_id)
     {
@@ -255,9 +255,9 @@ class ProductBundle extends SugarBean
     }
 
     /**
-     * @deprecated
      * @param string $product_id
      * @return bool
+     * @deprecated
      */
     public function in_productbundle_from_product($product_id)
     {
@@ -270,11 +270,11 @@ class ProductBundle extends SugarBean
     }
 
     /**
-     * @deprecated
      * @param string $product_id
      * @param string $product_index
      * @param string $bundle_id
      * @return bool
+     * @deprecated
      */
     public function set_productbundle_product_relationship($product_id, $product_index, $bundle_id = '')
     {
@@ -290,17 +290,17 @@ class ProductBundle extends SugarBean
             $this->db->quoted($bundle_id),
             db_convert("'" . TimeDate::getInstance()->nowDb() . "'", 'datetime')
         );
-        $this->db->query($query, true, "Error setting product to product bundle relationship: " . "<BR>$query");
+        $this->db->query($query, true, 'Error setting product to product bundle relationship: ' . "<BR>$query");
         $GLOBALS['log']->debug("Setting product to product bundle relationship for $product_id and $bundle_id");
         return true;
     }
 
     /**
-     * @deprecated
      * @param string $note_index
      * @param string $note_id
      * @param string $bundle_id
      * @return bool
+     * @deprecated
      */
     public function set_product_bundle_note_relationship($note_index, $note_id, $bundle_id = '')
     {
@@ -308,14 +308,13 @@ class ProductBundle extends SugarBean
             $bundle_id = $this->id;
         }
 
-        $query = "INSERT INTO $this->rel_notes (id,bundle_id,note_id,note_index, date_modified) VALUES ('" . create_guid(
-        ) . "'," . $this->db->quoted($bundle_id) . "," . $this->db->quoted($note_id) . "," .
-            $this->db->quoted($note_index) . ", " . db_convert(
+        $query = "INSERT INTO $this->rel_notes (id,bundle_id,note_id,note_index, date_modified) VALUES ('" . create_guid() . "'," . $this->db->quoted($bundle_id) . ',' . $this->db->quoted($note_id) . ',' .
+            $this->db->quoted($note_index) . ', ' . db_convert(
                 "'" . TimeDate::getInstance()->nowDb() . "'",
                 'datetime'
-            ) . ")";
+            ) . ')';
 
-        $this->db->query($query, true, "Error setting note to product to product bundle relationship: " . "<BR>$query");
+        $this->db->query($query, true, 'Error setting note to product to product bundle relationship: ' . "<BR>$query");
         $GLOBALS['log']->debug(
             "Setting note to product to product bundle relationship for bundle_id: $bundle_id, note_index: $note_index, and note_id: $note_id"
         );
@@ -323,48 +322,48 @@ class ProductBundle extends SugarBean
     }
 
     /**
-     * @deprecated
      * @param string $bundle_id
      * @return bool
+     * @deprecated
      */
     public function clear_product_bundle_note_relationship($bundle_id = '')
     {
-        $query = "DELETE FROM $this->rel_notes WHERE (bundle_id=".$this->db->quoted($bundle_id).") AND deleted=0";
+        $query = "DELETE FROM $this->rel_notes WHERE (bundle_id=" . $this->db->quoted($bundle_id) . ') AND deleted=0';
 
-        $this->db->query($query, true, "Error clearing note to product to product bundle relationship");
+        $this->db->query($query, true, 'Error clearing note to product to product bundle relationship');
         return true;
     }
 
     /**
-     * @deprecated
      * @param string $bundle_id
      * @return bool
+     * @deprecated
      */
     public function clear_productbundle_quote_relationship($bundle_id)
     {
-        $query = "delete from $this->rel_quotes where (bundle_id=".$this->db->quoted($bundle_id).") and deleted=0";
-        $this->db->query($query, true, "Error clearing product bundle to quote relationship: ");
+        $query = "delete from $this->rel_quotes where (bundle_id=" . $this->db->quoted($bundle_id) . ') and deleted=0';
+        $this->db->query($query, true, 'Error clearing product bundle to quote relationship: ');
         return true;
     }
 
     /**
-     * @deprecated
      * @param string $quote_id
      * @return bool
+     * @deprecated
      */
     public function clear_quote_productbundle_relationship($quote_id)
     {
         $query = "delete from $this->rel_quotes where (quote_id='$quote_id') and deleted=0";
-        $this->db->query($query, true, "Error clearing quote to product bundle relationship: ");
+        $this->db->query($query, true, 'Error clearing quote to product bundle relationship: ');
         return true;
     }
 
     /**
-     * @deprecated
      * @param string $quote_id
      * @param string $bundle_id
      * @param string $bundle_index
      * @return bool
+     * @deprecated
      */
     public function set_productbundle_quote_relationship($quote_id, $bundle_id, $bundle_index = '0')
     {
@@ -372,11 +371,11 @@ class ProductBundle extends SugarBean
             $bundle_id = $this->id;
         }
         $query = "insert into $this->rel_quotes (id,quote_id,bundle_id,bundle_index, date_modified) values (" . $this->db->quoted(
-                create_guid()
-            ) . ", " . $this->db->quoted($quote_id) . ", " . $this->db->quoted($bundle_id) . ", " . $this->db->quoted(
-                $bundle_index
-            ) . ", " . $this->db->convert($this->db->quoted(TimeDate::getInstance()->nowDb()), 'datetime') . ")";
-        $this->db->query($query, true, "Error setting quote to product bundle relationship: " . "<BR>$query");
+            create_guid()
+        ) . ', ' . $this->db->quoted($quote_id) . ', ' . $this->db->quoted($bundle_id) . ', ' . $this->db->quoted(
+            $bundle_index
+        ) . ', ' . $this->db->convert($this->db->quoted(TimeDate::getInstance()->nowDb()), 'datetime') . ')';
+        $this->db->query($query, true, 'Error setting quote to product bundle relationship: ' . "<BR>$query");
         $GLOBALS['log']->debug("Setting quote to product bundle relationship for $quote_id and $bundle_id");
         return true;
     }
@@ -396,7 +395,6 @@ class ProductBundle extends SugarBean
             $this->total = $this->total_usdollar;
             $this->currency_id = $currency->id;
         }
-
     }
 
 
@@ -406,9 +404,9 @@ class ProductBundle extends SugarBean
     public function get_list_view_data($filter_fields = [])
     {
         global $current_language, $app_strings, $app_list_strings;
-//		global $support_expired, $support_coming_due, $support_coming_due_color, $support_expired_color;
-        $product_mod_strings = return_module_language($current_language, "Products");
-        include('modules/Products/config.php');
+        //		global $support_expired, $support_coming_due, $support_coming_due_color, $support_expired_color;
+        $product_mod_strings = return_module_language($current_language, 'Products');
+        include 'modules/Products/config.php';
 
         global $current_user;
 
@@ -422,34 +420,34 @@ class ProductBundle extends SugarBean
         }
 
 
-        return Array(
+        return [
             'ID' => $this->id,
-            'NAME' => (($this->name == "") ? "<em>blank</em>" : $this->name),
+            'NAME' => (($this->name == '') ? '<em>blank</em>' : $this->name),
             'SHIPPING' => $symbol . '&nbsp;' . number_format(
-                    round($currency->convertFromDollar($this->shipping_usdollar), 2),
-                    2,
-                    '.',
-                    ''
-                ),
+                round($currency->convertFromDollar($this->shipping_usdollar), 2),
+                2,
+                '.',
+                ''
+            ),
             'TAX' => $symbol . '&nbsp;' . number_format(
-                    round($currency->convertFromDollar($this->tax_usdollar), 2),
-                    2,
-                    '.',
-                    ''
-                ),
+                round($currency->convertFromDollar($this->tax_usdollar), 2),
+                2,
+                '.',
+                ''
+            ),
             'TOTAL' => $symbol . '&nbsp;' . number_format(
-                    round($currency->convertFromDollar($this->total_usdollar), 2),
-                    2,
-                    '.',
-                    ''
-                ),
+                round($currency->convertFromDollar($this->total_usdollar), 2),
+                2,
+                '.',
+                ''
+            ),
             'SUBTOTAL' => $symbol . '&nbsp;' . number_format(
-                    round($currency->convertFromDollar($this->subtotal_usdollar), 2),
-                    2,
-                    '.',
-                    ''
-                ),
-        );
+                round($currency->convertFromDollar($this->subtotal_usdollar), 2),
+                2,
+                '.',
+                ''
+            ),
+        ];
     }
 
     /**
@@ -458,13 +456,13 @@ class ProductBundle extends SugarBean
      */
     public function build_generic_where_clause($the_query_string)
     {
-        $where_clauses = Array();
+        $where_clauses = [];
         $the_query_string = $GLOBALS['db']->quote($the_query_string);
         array_push($where_clauses, "name like '$the_query_string%'");
-        $the_where = "";
+        $the_where = '';
         foreach ($where_clauses as $clause) {
-            if ($the_where != "") {
-                $the_where .= " or ";
+            if ($the_where != '') {
+                $the_where .= ' or ';
             }
             $the_where .= $clause;
         }
@@ -519,7 +517,6 @@ class ProductBundle extends SugarBean
 
         // if the quote is not closed, we should update the base rate
         return !$quote->isClosed();
-
     }
 
     public function get_summary_text()

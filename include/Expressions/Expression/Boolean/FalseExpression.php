@@ -14,40 +14,46 @@
  * false
  * returns the boolean value of false.
  */
-class FalseExpression extends BooleanExpression {
-	/**
-	 * Returns itself when evaluating.
-	 */
-	function evaluate() {
-		return AbstractExpression::$FALSE;
-	}
+class FalseExpression extends BooleanExpression
+{
+    /**
+     * Returns itself when evaluating.
+     */
+    public function evaluate()
+    {
+        return AbstractExpression::$FALSE;
+    }
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return "\t\t\treturn SUGAR.expressions.Expression.FALSE;";
-	}
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return "\t\t\treturn SUGAR.expressions.Expression.FALSE;";
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return "false";
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return 'false';
+    }
 
-	/**
-	 * Returns the maximum number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 0;
-	}
+    /**
+     * Returns the maximum number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 0;
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-		return "false";
-	}
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+        return 'false';
+    }
 }

@@ -68,8 +68,8 @@ class SugarSNIP
      */
     public static function getInstance()
     {
-        if(!self::$instance) {
-            self::$instance = new self;
+        if (!self::$instance) {
+            self::$instance = new self();
         }
         return self::$instance;
     }
@@ -82,9 +82,9 @@ class SugarSNIP
     }
 
     /**
-    * Set client to talk to SNIP
-    * @param SugarHttpClient $client
-    */
+     * Set client to talk to SNIP
+     * @param SugarHttpClient $client
+     */
     public function setClient(SugarHttpClient $client)
     {
         $this->client = $client;
@@ -93,7 +93,7 @@ class SugarSNIP
 
     protected function getKey()
     {
-        return md5($this->config['unique_key'].$this->getURL());
+        return md5($this->config['unique_key'] . $this->getURL());
     }
 
     /**
@@ -106,7 +106,7 @@ class SugarSNIP
      */
     public function callRest(string $name, array $params = [], $json = false, &$connectionfailed = false)
     {
-        if(isset($params['url'])) {
+        if (isset($params['url'])) {
             $url = $params['url'];
             unset($params['url']);
         } else {
@@ -114,26 +114,26 @@ class SugarSNIP
         }
 
         $url .= $name;
-        $params["sugarkey"] = $this->config['unique_key'];
-        $params["idkey"] = $this->getKey();
-        if($json) {
-            $postArgs = http_build_query(array('data' => json_encode($params)));
+        $params['sugarkey'] = $this->config['unique_key'];
+        $params['idkey'] = $this->getKey();
+        if ($json) {
+            $postArgs = http_build_query(['data' => json_encode($params)]);
         } else {
             $postArgs = http_build_query($params);
         }
         $this->last_error = '';
         $response = $this->client->callRest($url, $postArgs);
 
-        if(!empty($response)) {
+        if (!empty($response)) {
             $result = json_decode($response);
         } else {
-            $GLOBALS['log']->debug("SNIP: REST request failed");
+            $GLOBALS['log']->debug('SNIP: REST request failed');
             $this->last_error = translate($this->client->getLastError(), 'SNIP');
-            $connectionfailed=true;
+            $connectionfailed = true;
             return false;
         }
         $this->last_result = $result;
-        if(empty($result)) {
+        if (empty($result)) {
             $this->last_error = translate('ERROR_BAD_RESULT', 'SNIP');
         }
         $GLOBALS['log']->debug(var_export($result, true));
@@ -153,7 +153,7 @@ class SugarSNIP
      * Register this instance with SNIP server
      * @return mixed server response
      */
-    public function registerSnip ()
+    public function registerSnip()
     {
         global $sugar_config;
 
@@ -163,14 +163,14 @@ class SugarSNIP
 
         $snipuser = $this->getSnipUser();
 
-        $request = array (
-                        'user' => $snipuser->user_name,
-                        'password' => '',
-                        'client_api_url' => $this->getURL(),
-                        'license' => $license,
-            );
+        $request = [
+            'user' => $snipuser->user_name,
+            'password' => '',
+            'client_api_url' => $this->getURL(),
+            'license' => $license,
+        ];
         $token = $this->getSnipToken();
-        if(!empty($token)) {
+        if (!empty($token)) {
             $consumer = $this->getSnipConsumer();
             $request['oauth_token'] = $token->token;
             $request['oauth_secret'] = $token->secret;
@@ -180,10 +180,10 @@ class SugarSNIP
 
         $response = $this->callRest('register', $request, true, $connectionfailed);
 
-        if ($connectionfailed)
+        if ($connectionfailed) {
             return false;
-        else {
-            if (is_object($this->last_result)  && $this->last_result->result == 'ok' && property_exists($this->last_result,'email')) {
+        } else {
+            if (is_object($this->last_result) && $this->last_result->result == 'ok' && property_exists($this->last_result, 'email')) {
                 $this->setSnipEmail($this->last_result->email);
             }
 
@@ -210,8 +210,9 @@ class SugarSNIP
     public function getSnipEmail()
     {
         $admin = Administration::getSettings('snip');
-        if (isset($admin->settings['snip_email']))
+        if (isset($admin->settings['snip_email'])) {
             return $admin->settings['snip_email'];
+        }
         return '';
     }
 
@@ -219,27 +220,27 @@ class SugarSNIP
      * Unregister SNIP from server
      * @return mixed server response
      */
-    public function unregisterSnip ()
+    public function unregisterSnip()
     {
         global $sugar_config;
 
         $connectionfailed = false;
         $snipuser = $this->getSnipUser();
-        $request = array (
-                        'user' => $snipuser->user_name,
-        // still get the hash because of old instances, see bug 56376
-                        'password' => $snipuser->user_hash
-        );
+        $request = [
+            'user' => $snipuser->user_name,
+            // still get the hash because of old instances, see bug 56376
+            'password' => $snipuser->user_hash,
+        ];
         $consumer = $this->getSnipConsumer();
-        if(!empty($consumer)) {
+        if (!empty($consumer)) {
             $request['consumer_key'] = $consumer->c_key;
             $request['consumer_secret'] = $consumer->c_secret;
         }
         $response = $this->callRest('unregister', $request, true, $connectionfailed);
 
-        if ($connectionfailed)
+        if ($connectionfailed) {
             return false;
-        else {
+        } else {
             if ($response) {
                 $this->setSnipEmail('');
 
@@ -254,16 +255,16 @@ class SugarSNIP
     }
 
     /**
-    * Generate the url that the user can visit to purchase SNIP.
-    * @return string the generated url
-    */
+     * Generate the url that the user can visit to purchase SNIP.
+     * @return string the generated url
+     */
     public function createPurchaseURL($snipuser)
     {
         // NOT ACTIVE right now
         global $sugar_config;
-        $msg=base64_encode(json_encode(array('unique_key' => $this->config['unique_key'],
-                                               'snipuser'   => $snipuser->user_name,
-                                               'password'   => $snipuser->user_hash)));
+        $msg = base64_encode(json_encode(['unique_key' => $this->config['unique_key'],
+            'snipuser' => $snipuser->user_name,
+            'password' => $snipuser->user_hash]));
         return "localhost:8080/purchaseSnip?info=$msg";
     }
 
@@ -273,7 +274,7 @@ class SugarSNIP
      */
     public function getURL()
     {
-        return rtrim($this->config['site_url'],'/').'/service/v4/rest.php';
+        return rtrim($this->config['site_url'], '/') . '/service/v4/rest.php';
     }
 
     /**
@@ -283,7 +284,7 @@ class SugarSNIP
     public function setSnipURL($url)
     {
         $cfg = new Configurator();
-        $cfg->config['snip_url']=$url;
+        $cfg->config['snip_url'] = $url;
         $cfg->handleOverride();
         $this->config['snip_url'] = $url;
         return $this;
@@ -295,7 +296,7 @@ class SugarSNIP
      */
     public function getSnipURL()
     {
-        if(!isset($this->config['snip_url'])) {
+        if (!isset($this->config['snip_url'])) {
             return self::DEFAULT_URL;
         }
         return $this->config['snip_url'];
@@ -320,52 +321,57 @@ class SugarSNIP
     }
 
     /**
-    * Get status of the SNIP installation
-    * @return array Returns an associative array ('status'=>string, 'message'=>string|null), with 'status' as one of the following:
-    *  - purchased  (instance has snip license)
-    *  - notpurchased     (instance does not have snip license)
-    *  - down (snip server unresponsive)
-    *  - purchased_error (instance has snip license, server is not down, but server detects something is wrong).
-    * Iff 'status' is 'purchased_error', 'message' will be the error returned by the server. Otherwise $message will be NULL.
-    */
+     * Get status of the SNIP installation
+     * @return array Returns an associative array ('status'=>string, 'message'=>string|null), with 'status' as one of the following:
+     *  - purchased  (instance has snip license)
+     *  - notpurchased     (instance does not have snip license)
+     *  - down (snip server unresponsive)
+     *  - purchased_error (instance has snip license, server is not down, but server detects something is wrong).
+     * Iff 'status' is 'purchased_error', 'message' will be the error returned by the server. Otherwise $message will be NULL.
+     */
     public function getStatus()
     {
         //if inactive,
-        if(!$this->isActive())
-            return array('status'=>'notpurchased','message'=>null);
+        if (!$this->isActive()) {
+            return ['status' => 'notpurchased', 'message' => null];
+        }
 
-        $connectionfailed=false;
+        $connectionfailed = false;
         $this->callRest('status', [], false, $connectionfailed);
 
         //check if server is down
-        if ($connectionfailed || !is_object($this->last_result) || $this->last_result->result!='ok' && $this->last_result->result!='instance not found'){
+        if ($connectionfailed || !is_object($this->last_result) || $this->last_result->result != 'ok' && $this->last_result->result != 'instance not found') {
             //check to see if we haven't enabled snip (in which case show the welcome screen)
             $email = $this->getSnipEmail();
-            if (empty($email)){
-                return array('status'=>'notpurchased','message'=>null);
+            if (empty($email)) {
+                return ['status' => 'notpurchased', 'message' => null];
             }
 
             //we have enabled snip - show the error screen
-            return array('status'=>'down','message'=>null);
+            return ['status' => 'down', 'message' => null];
         }
 
         //server is up but unable to ping back
-        if ($this->last_result->result == 'ping failed')
-            return array('status'=>'pingfailed','message'=>null);
+        if ($this->last_result->result == 'ping failed') {
+            return ['status' => 'pingfailed', 'message' => null];
+        }
 
         //server is up but snip is not purchased
-        if ($this->last_result->result == 'instance not found')
-            return array('status'=>'notpurchased','message'=>null);
+        if ($this->last_result->result == 'instance not found') {
+            return ['status' => 'notpurchased', 'message' => null];
+        }
 
         //server is up, snip is purchased. check if status is good
-        if (isset($this->last_result->status) && $this->last_result->status=='success')
-            return array('status'=>'purchased','message'=>null);
+        if (isset($this->last_result->status) && $this->last_result->status == 'success') {
+            return ['status' => 'purchased', 'message' => null];
+        }
 
         //server is up, snip is purchased, but status is not good. return error message.
-        if (!isset($this->last_result->status) || empty($this->last_result->status))
-            return array('status'=>'purchased_error','message'=>'');
-        else
-            return array('status'=>'purchased_error','message'=>$this->last_result->status);
+        if (!isset($this->last_result->status) || empty($this->last_result->status)) {
+            return ['status' => 'purchased_error', 'message' => ''];
+        } else {
+            return ['status' => 'purchased_error', 'message' => $this->last_result->status];
+        }
     }
 
     /**
@@ -375,7 +381,7 @@ class SugarSNIP
     protected function getSnipConsumer()
     {
         $consumer = OAuthKey::fetchKey(self::OAUTH_KEY);
-        if(empty($consumer)) {
+        if (empty($consumer)) {
             $provider = new Zend_Oauth_Provider();
             $consumer = BeanFactory::newBean('OAuthKeys');
             $consumer->c_key = self::OAUTH_KEY;
@@ -393,12 +399,12 @@ class SugarSNIP
      */
     protected function getSnipToken()
     {
-        if(empty($this->token)) {
+        if (empty($this->token)) {
             $user = $this->getSnipUser();
-            if(!empty($user->authenticate_id)) {
+            if (!empty($user->authenticate_id)) {
                 $this->token = OAuthToken::load($user->authenticate_id);
             }
-            if(empty($this->token)) {
+            if (empty($this->token)) {
                 $this->token = $this->createSnipToken($user);
             }
         }
@@ -425,7 +431,7 @@ class SugarSNIP
     protected function deleteSnipTokens($user)
     {
         $consumer = $this->getSnipConsumer();
-        if(!empty($consumer)) {
+        if (!empty($consumer)) {
             OAuthToken::deleteByConsumer($consumer->id);
         }
         OAuthToken::deleteByUser($user->id);
@@ -441,9 +447,9 @@ class SugarSNIP
         $user->user_name = self::SNIP_USER;
         $user->title = translate('LBL_SNIP_USER_DESC', 'SNIP');
         $user->description = $user->title;
-        $user->first_name = "";
+        $user->first_name = '';
         $user->last_name = $user->title;
-        $user->status='Reserved';
+        $user->status = 'Reserved';
         $user->receive_notifications = 0;
         $user->is_admin = 0;
         $random = CSPRNG::getInstance()->generate(32, true);
@@ -465,7 +471,7 @@ class SugarSNIP
     public function getSnipUser()
     {
         $user = null;
-        if($this->user) {
+        if ($this->user) {
             return $this->user;
         }
 
@@ -495,14 +501,14 @@ class SugarSNIP
         $user = BeanFactory::newBean('Users');
         // if sugar_config['snip']['assign_ignore_email'] is set, assign everything to one user
         // which will be specified below
-        if(empty($GLOBALS['sugar_config']['snip']['assign_ignore_email'])) {
-	        foreach($email->all_addrs as $addr) {
-	        	$iusr = $user->retrieve_by_email_address($addr);
-				if(!empty($iusr) && !empty($user->id)) {
-					$email->assigned_user_id = $user->id;
-					return;
-				}
-	        }
+        if (empty($GLOBALS['sugar_config']['snip']['assign_ignore_email'])) {
+            foreach ($email->all_addrs as $addr) {
+                $iusr = $user->retrieve_by_email_address($addr);
+                if (!empty($iusr) && !empty($user->id)) {
+                    $email->assigned_user_id = $user->id;
+                    return;
+                }
+            }
         }
     }
 
@@ -515,14 +521,14 @@ class SugarSNIP
     {
         global $current_user;
 
-        if(!$email['message']['message_id']) {
+        if (!$email['message']['message_id']) {
             // messages should have IDs
             $GLOBALS['log']->error("SNIP: message has no ID, can't import");
             return;
         }
         $e = BeanFactory::newBean('Emails');
-        $e->retrieve_by_string_fields(array("message_id" => $email['message']['message_id']));
-        if(!empty($e->id)) {
+        $e->retrieve_by_string_fields(['message_id' => $email['message']['message_id']]);
+        if (!empty($e->id)) {
             $GLOBALS['log']->debug("SNIP: Duplicate ID {$email['message']['message_id']} - not importing");
             return;
         }
@@ -534,10 +540,9 @@ class SugarSNIP
         $e->assigned_user_id = null;
 
         //Can't use sugar_bean field definition to determine which fields to import.
-        $copyFields = array('from_name','description','description_html','to_addrs','cc_addrs','bcc_addrs','date_sent', 'message_id', 'subject');
-        foreach ($copyFields as $field)
-        {
-            if(isset($email['message'][$field])) {
+        $copyFields = ['from_name', 'description', 'description_html', 'to_addrs', 'cc_addrs', 'bcc_addrs', 'date_sent', 'message_id', 'subject'];
+        foreach ($copyFields as $field) {
+            if (isset($email['message'][$field])) {
                 $e->$field = $email['message'][$field];
             } else {
                 $e->$field = '';
@@ -546,8 +551,8 @@ class SugarSNIP
         // preserve name because bean cleanup can strip <>
         $from_name = $e->from_addr_name = $e->from_name;
         $from = $this->splitEmailAddress($e, $e->from_name);
-        $e->from_addr = $from["email"];
-        $e->from_name = $from["name"];
+        $e->from_addr = $from['email'];
+        $e->from_name = $from['name'];
         $e->name = $e->subject;
         $e->date_sent = gmdate($GLOBALS['timedate']->get_db_date_time_format(), strtotime($e->date_sent));
         $e->type = 'inbound';
@@ -558,42 +563,43 @@ class SugarSNIP
         $e->bcc_addrs_names = $e->bcc_addrs;
         $e->state = Email::STATE_ARCHIVED;
 
-        $addrs = explode(',',$e->to_addrs.",".$e->cc_addrs.",".$e->bcc_addrs);
-        $e->all_addrs = array();
-    	foreach($addrs as $addr) {
-    		if(empty($addr)) continue;
-    		$addr = $this->splitEmailAddress($e, $addr);
-    		if(!empty($addr["email"])) {
-        		$e->all_addrs[] = $addr["email"];
-    		}
-    	}
-        if(!empty($e->from_addr)) {
-        	array_unshift($e->all_addrs, $e->from_addr);
+        $addrs = explode(',', $e->to_addrs . ',' . $e->cc_addrs . ',' . $e->bcc_addrs);
+        $e->all_addrs = [];
+        foreach ($addrs as $addr) {
+            if (empty($addr)) {
+                continue;
+            }
+            $addr = $this->splitEmailAddress($e, $addr);
+            if (!empty($addr['email'])) {
+                $e->all_addrs[] = $addr['email'];
+            }
+        }
+        if (!empty($e->from_addr)) {
+            array_unshift($e->all_addrs, $e->from_addr);
         }
 
-        if(empty($e->description) && !empty($e->description_html)) {
+        if (empty($e->description) && !empty($e->description_html)) {
             // html-only mail - provide plaintext if possible
             $e->description = strip_tags($e->description_html);
         }
 
         // assign to proper user
-        if(!empty($e->all_addrs)) {
-        	$this->assignUser($e, $email['user']);
+        if (!empty($e->all_addrs)) {
+            $this->assignUser($e, $email['user']);
         }
         // For snipLite, use Global team
         $e->team_id = $e->default_team = '1';
         self::assignUserTeam($e, $e->assigned_user_id);
 
-        $e->call_custom_logic("before_email_import");
+        $e->call_custom_logic('before_email_import');
         // If custom logic cleared the object, skip it
-        if(empty($e->id)) return;
+        if (empty($e->id)) {
+            return;
+        }
 
         //Process attachments
-        if (isset($email['message']['attachments']) && (is_countable($email['message']['attachments']) ? count(
-            $email['message']['attachments']
-        ) : 0)) {
-            foreach ($email['message']['attachments'] as $attach)
-            {
+        if (isset($email['message']['attachments']) && safeCount($email['message']['attachments'])) {
+            foreach ($email['message']['attachments'] as $attach) {
                 $note = $this->processEmailAttachment($attach, $e);
                 if (!empty($note)) {
                     [$image, $subtype] = explode('/', $note->file_mime_type);
@@ -601,7 +607,7 @@ class SugarSNIP
                         // A File Attachment was created in a Note object. If it represents an inline image, we
                         // need to update any 'cid:' references in the description html to reference this note id
                         $cidFrom = 'src="cid:' . $attach['partid'];
-                        $cidTo   = ' class="image" src="cid:' . $note->id . '.' . strtolower($subtype);
+                        $cidTo = ' class="image" src="cid:' . $note->id . '.' . strtolower($subtype);
                         $e->description_html = str_replace($cidFrom, $cidTo, $e->description_html);
                     }
                 }
@@ -617,7 +623,7 @@ class SugarSNIP
         }
 
         // Relate records
-        if(!empty($e->subject)) {
+        if (!empty($e->subject)) {
             $this->relateRecords($e);
         }
     }
@@ -630,9 +636,9 @@ class SugarSNIP
      */
     protected function splitEmailAddress($email, $addr)
     {
-    	$email = $email->emailAddress->_cleanAddress($addr);
-		$name = trim(str_replace(array($email, '<', '>', '"', "'"), '', $addr));
-		return array("name" => $name, "email" => strtolower($email));
+        $email = $email->emailAddress->_cleanAddress($addr);
+        $name = trim(str_replace([$email, '<', '>', '"', "'"], '', $addr));
+        return ['name' => $name, 'email' => strtolower($email)];
     }
 
     /**
@@ -640,12 +646,12 @@ class SugarSNIP
      * Example definition:
      * <code>
      * $createdef['email@host.com']['Contacts'] = array(
-     * 		'fields' => array(
-     * 			'email1' => '{from_addr}',
-     * 			'last_name' => '{from_name}',
-     * 			'description' => 'created from {subject}',
-     * 			'lead_source' => 'Email',
-     * 		),
+     *      'fields' => array(
+     *          'email1' => '{from_addr}',
+     *          'last_name' => '{from_name}',
+     *          'description' => 'created from {subject}',
+     *          'lead_source' => 'Email',
+     *      ),
      * );
      * </code>
      * Supported variables:
@@ -662,88 +668,93 @@ class SugarSNIP
      */
     protected function createObject($email)
     {
-    	if(!SugarAutoLoader::existing('custom/modules/SNIP/createdefs.php')) {
-    		return false;
-    	}
-    	$createdef = array();
-		include 'custom/modules/SNIP/createdefs.php';
-		$emaildata = array();
-		foreach(array("subject", "description", "description_html", "message_id", "from_addr", "from_name") as $prop) {
-			$emaildata["{".$prop."}"] = $email->$prop;
-		}
-		$emaildata["{from}"] = to_html($email->from_addr_name);
-		$emaildata["{date}"] = $email->date_sent;
-		$emaildata["{email_id}"] = $email->id;
+        if (!SugarAutoLoader::existing('custom/modules/SNIP/createdefs.php')) {
+            return false;
+        }
+        $createdef = [];
+        include 'custom/modules/SNIP/createdefs.php';
+        $emaildata = [];
+        foreach (['subject', 'description', 'description_html', 'message_id', 'from_addr', 'from_name'] as $prop) {
+            $emaildata['{' . $prop . '}'] = $email->$prop;
+        }
+        $emaildata['{from}'] = to_html($email->from_addr_name);
+        $emaildata['{date}'] = $email->date_sent;
+        $emaildata['{email_id}'] = $email->id;
 
 
-    	foreach($email->all_addrs as $cleanaddr) {
-			if(!isset($createdef[$cleanaddr])) {
-				continue;
-			}
-			foreach($createdef[$cleanaddr] as $module => $data) {
-				//
-				$obj = BeanFactory::newBean($module);
-				if(!$obj) {
-					$GLOBALS['log']->error("Unable to create bean for module $module");
-					continue;
-				}
-				// instantiate the data
-				foreach($data["fields"] as $key => $value) {
-					$obj->$key = str_replace(array_keys($emaildata), array_values($emaildata), $value);
-				}
+        foreach ($email->all_addrs as $cleanaddr) {
+            if (!isset($createdef[$cleanaddr])) {
+                continue;
+            }
+            foreach ($createdef[$cleanaddr] as $module => $data) {
+                //
+                $obj = BeanFactory::newBean($module);
+                if (!$obj) {
+                    $GLOBALS['log']->error("Unable to create bean for module $module");
+                    continue;
+                }
+                // instantiate the data
+                foreach ($data['fields'] as $key => $value) {
+                    $obj->$key = str_replace(array_keys($emaildata), array_values($emaildata), $value);
+                }
                 // special case for Opportunity
-                if ( $obj instanceof Opportunity && empty($obj->date_closed) )
-                {
+                if ($obj instanceof Opportunity && empty($obj->date_closed)) {
                     $obj->date_closed = TimeDate::getInstance()->getNow()->asDbDate();
                 }
-				// save
-				$obj->save();
-				// associate email to new object
-				if(empty($obj->id)) continue; // save failed
+                // save
+                $obj->save();
+                // associate email to new object
+                if (empty($obj->id)) {
+                    continue; // save failed
+                }
 
                 $linkName = $email->findEmailsLink($obj);
 
                 if ($obj->load_relationship($linkName)) {
                     $obj->$linkName->add($email);
-	            }
-			}
-    	}
-    	return true;
+                }
+            }
+        }
+        return true;
     }
 
     /**
-    * Assign user's private team to an email
-    * @param SugarBean $email Email object
-    * @param string $userid User ID
-    */
-    static function assignUserTeam($email, $userid)
+     * Assign user's private team to an email
+     * @param SugarBean $email Email object
+     * @param string $userid User ID
+     */
+    public static function assignUserTeam($email, $userid)
     {
-        if(empty($userid)) return null;
+        if (empty($userid)) {
+            return null;
+        }
 
         $teamid = User::staticGetPrivateTeamID($userid);
-        if(empty($teamid)) return null;
+        if (empty($teamid)) {
+            return null;
+        }
 
-        if(empty($email->teams)){
+        if (empty($email->teams)) {
             $email->load_relationship('teams');
         }
         $GLOBALS['log']->debug("Assigning {$email->id} to user $userid team $teamid");
-        $email->teams->add($teamid, array(), false);
+        $email->teams->add($teamid, [], false);
         return $teamid;
     }
 
     /**
-    * Save a snip email attachment and associated it to a parent email.  Content is base64 encoded.
-    * @return note object if one was created, otherwise null
-    */
+     * Save a snip email attachment and associated it to a parent email.  Content is base64 encoded.
+     * @return note object if one was created, otherwise null
+     */
     protected function processEmailAttachment($data, $email)
     {
-        if (substr($data['filename'], - 4) === '.ics') {
+        if (substr($data['filename'], -4) === '.ics') {
             $ic = new iCalendar();
             try {
                 $ic->parse(base64_decode($data['content']));
                 $ic->createSugarEvents($email);
-            } catch(Exception $e) {
-                $GLOBALS['log']->info("Could not process calendar attachment: ".$e->getMessage());
+            } catch (Exception $e) {
+                $GLOBALS['log']->info('Could not process calendar attachment: ' . $e->getMessage());
             }
         } else {
             $note = $this->createNote($data, $email);
@@ -753,28 +764,28 @@ class SugarSNIP
     }
 
     /**
-    * Create a new Note object
-    * @param array $data Note data
-    * @param Email $email parent email
-    */
+     * Create a new Note object
+     * @param array $data Note data
+     * @param Email $email parent email
+     */
     protected function createNote($data, $email)
     {
         $upload_file = new UploadFile('uploadfile');
         $decodedFile = base64_decode($data['content']);
         $upload_file->set_for_soap($data['filename'], $decodedFile);
-        $ext_pos = strrpos($upload_file->stored_file_name, ".");
+        $ext_pos = strrpos($upload_file->stored_file_name, '.');
         $upload_file->file_ext = substr($upload_file->stored_file_name, $ext_pos + 1);
 
         $note = BeanFactory::newBean('Notes');
         $note->id = create_guid();
         $note->new_with_id = true;
-        if (in_array($upload_file->file_ext, $this->config['upload_badext'])) {
-            $upload_file->stored_file_name .= ".txt";
-            $upload_file->file_ext = "txt";
+        if (safeInArray($upload_file->file_ext, $this->config['upload_badext'])) {
+            $upload_file->stored_file_name .= '.txt';
+            $upload_file->file_ext = 'txt';
         }
 
         $note->filename = $upload_file->get_stored_file_name();
-        if(isset($data['type'])) {
+        if (isset($data['type'])) {
             $note->file_mime_type = $data['type'];
         } else {
             $note->file_mime_type = $upload_file->getMimeSoap($note->filename);
@@ -801,17 +812,17 @@ class SugarSNIP
     {
         // relate a case
         $case = BeanFactory::newBean('Cases');
-        $subj = str_replace("%1", '(\d+)', preg_quote($case->getEmailSubjectMacro(), "#"));
-        if(preg_match("#$subj#", $e->subject, $match) && !empty($match[1])) {
+        $subj = str_replace('%1', '(\d+)', preg_quote($case->getEmailSubjectMacro(), '#'));
+        if (preg_match("#$subj#", $e->subject, $match) && !empty($match[1])) {
             $caseid = $match[1];
             $GLOBALS['log']->info("Trying to link to case $caseid");
-            $case->retrieve_by_string_fields(array("case_number" => $caseid));
-            if(!empty($case->id)) {
-                $case->load_relationship("emails");
+            $case->retrieve_by_string_fields(['case_number' => $caseid]);
+            if (!empty($case->id)) {
+                $case->load_relationship('emails');
                 $case->emails->add($e);
             }
         }
         // allow custom stuff
-        $e->call_custom_logic("after_email_import");
+        $e->call_custom_logic('after_email_import');
     }
 }

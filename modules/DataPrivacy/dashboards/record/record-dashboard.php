@@ -16,6 +16,18 @@ return [
                 'rows' => [
                     [
                         [
+                            [
+                                'view' => [
+                                    'type' => 'activity-timeline',
+                                    'label' => 'TPL_ACTIVITY_TIMELINE_DASHLET',
+                                ],
+                                'context' => [
+                                    'module' => 'DataPrivacy',
+                                ],
+                                'width' => 12,
+                            ],
+                        ],
+                        [
                             'view' => [
                                 'type' => 'marked-for-erasure-dashlet',
                                 'label' => 'LBL_MARKED_FOR_ERASURE_TITLE',
@@ -24,9 +36,9 @@ return [
                                         [
                                             'dropdown_buttons' => [
                                                 [
-                                                    "type" => "dashletaction",
-                                                    "action" => "editClicked",
-                                                    "label" => "LBL_DASHLET_CONFIG_EDIT_LABEL",
+                                                    'type' => 'dashletaction',
+                                                    'action' => 'editClicked',
+                                                    'label' => 'LBL_DASHLET_CONFIG_EDIT_LABEL',
                                                 ],
                                                 [
                                                     'type' => 'dashletaction',

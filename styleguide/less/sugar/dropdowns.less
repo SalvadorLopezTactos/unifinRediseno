@@ -3,12 +3,6 @@
 
 /* twitter-bootstrap import START */
 
-// Use the .menu class on any <li> element within the topbar or ul.tabs and you'll get some superfancy dropdowns
-.dropup,
-.dropdown {
-  position: relative;
-}
-
 .dropdown-toggle:active,
 .open .dropdown-toggle {
   outline: 0;
@@ -38,13 +32,18 @@
 .dropdown-menu {
   position: absolute;
   left: 0;
+  // A little misleading - depending on the z-index (and position prop) of the parent element from which it's called.
+  // Will remove in the future.
   z-index: @zindexDropdown;
   display: none; // none by default, but block on "open" of the menu
   float: left;
   min-width: 160px;
   list-style: none;
   background-color: @dropdownBackground;
-  background-clip: padding-box;
+
+  &.show {
+    display: block;
+  }
 
   // Aligns the dropdown menu to right
   &.pull-right {
@@ -131,37 +130,11 @@
 // Just add .dropup after the standard .dropdown class and you're set, bro.
 // TODO: abstract this so that the navbar fixed styles are not placed here?
 .dropup {
-  // Reverse the caret
-  .caret {
-    border-top: 0;
-    border-bottom: 4px solid @black;
-    content: "";
-  }
   // Different positioning for bottom up menu
   .dropdown-menu {
     top: auto;
     bottom: 100%;
     margin-bottom: 1px;
-  }
-}
-
-// Rule only for Safari browsers
-@media not all and (min-resolution: 0.001dpcm) {
-  @supports (-webkit-appearance:none) {
-    .dropup {
-      .dropdown-menu {
-        bottom: auto;
-      }
-    }
-  }
-}
-
-// Rule only for Chrome browsers
-@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
-  .dropup {
-    .dropdown-menu {
-      bottom: auto;
-    }
   }
 }
 
@@ -243,10 +216,6 @@
 /* twitter-bootstrap import END */
 
 .dropdown-menu {
-  .shadow-xl();
-  .rounded-md();
-  .border-dropdown-widget();
-
   top: 100%;
   padding: 0;
   overflow: hidden;
@@ -310,8 +279,6 @@
   a,
   .menuitem-config > span,
   button {
-    .w-full();
-
     display: flex;
     align-items: center;
     padding: 8px 10px;
@@ -322,6 +289,7 @@
     background-color: @dropdownBackground;
     white-space: nowrap;
     margin: 0;
+    width: 100%;
 
     > .sicon {
       margin-right: 8px;
@@ -333,7 +301,7 @@
   }
 
   .menuitem-config > span {
-    .w-auto();
+    width: auto;
   }
 
   .menuitem-config input {
@@ -354,8 +322,7 @@
     cursor: default;
     color: @dropdownDisabledLinkColor;
 
-    & .sicon,
-    & .fa {
+    & .sicon {
       color: @dropdownDisabledLinkColor;
     }
   }
@@ -377,15 +344,12 @@
   .active > a:focus,
   .active > span > a:hover,
   .active > span > a:focus {
-    color: @dropdownLinkColor;
+    color: var(--text-color);
     text-decoration: none;
-    //this causes sharp corners on dropdown-menu
-    //fixed by setting border radius on li > a
-    background: @dropdownLinkBackgroundHover;
-    filter: none;
+    background-color: var(--dropdown-link-background-hover);
 
     .sicon:not(.label-module) {
-      color: @sicon-active-color;
+      color: var(--sicon-active-color);
     }
   }
 
@@ -494,7 +458,6 @@
   .dropdown-menu {
     left: auto;
     right: 0;
-    z-index: 1001;
   }
 
   &.actionmenu {
@@ -515,8 +478,7 @@
         box-shadow: none;
         background-color: @gray80;
 
-        > .sicon,
-        > .fa {
+        > .sicon {
           color: @white;
         }
       }
@@ -537,10 +499,6 @@
 
       &.active {
         font-weight: bold;
-      }
-
-      .fa {
-        margin-right: 5px;
       }
     }
 

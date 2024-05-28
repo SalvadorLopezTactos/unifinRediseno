@@ -255,6 +255,7 @@
         this.context.trigger('split-screens-visibility-change', config);
         this.context.trigger('split-screens-resized', config);
         this.context.trigger('orientation-visibility-change', config.hidden === false);
+        this.context.trigger('container-resizing');
     },
 
     /**

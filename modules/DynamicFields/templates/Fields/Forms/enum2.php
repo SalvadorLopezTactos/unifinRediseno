@@ -9,66 +9,68 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- function get_body(&$ss, $vardef){
- 	$multi = false;
+function get_body(&$ss, $vardef)
+{
+    $multi = false;
     $radio = false;
- 	if (isset ($vardef['type']) && $vardef['type'] == 'multienum')
- 		$multi = true;
+    if (isset($vardef['type']) && $vardef['type'] == 'multienum') {
+        $multi = true;
+    }
 
- 	$selected_options = "";
- 	if ($multi && !empty($vardef['default'])) {
- 		$selected_options = unencodeMultienum( $vardef['default']);
- 	} else if (isset($vardef['default'])){
- 		$selected_options = $vardef['default'];
- 	}
+    $selected_options = '';
+    if ($multi && !empty($vardef['default'])) {
+        $selected_options = unencodeMultienum($vardef['default']);
+    } elseif (isset($vardef['default'])) {
+        $selected_options = $vardef['default'];
+    }
 
     $edit_mod_strings = return_module_language($GLOBALS['current_language'], 'EditCustomFields');
 
-	if ((!empty($_REQUEST['type']) && $_REQUEST['type'] == 'radioenum') ||
+    if ((!empty($_REQUEST['type']) && $_REQUEST['type'] == 'radioenum') ||
         (isset($vardef['type']) && $vardef['type'] == 'radioenum')) {
-		$edit_mod_strings['LBL_DROP_DOWN_LIST'] = $edit_mod_strings['LBL_RADIO_FIELDS'];
+        $edit_mod_strings['LBL_DROP_DOWN_LIST'] = $edit_mod_strings['LBL_RADIO_FIELDS'];
         $radio = true;
-	}
+    }
 
     $my_list_strings = enum_get_lists();
     // should not display read only options
-    $excludedOptions = array('Elastic_boost_options');
+    $excludedOptions = ['Elastic_boost_options'];
     foreach ($excludedOptions as $options) {
         if (isset($my_list_strings[$options])) {
             unset($my_list_strings[$options]);
         }
     }
 
-	$dropdowns = array_keys($my_list_strings);
-    if(!empty($vardef['options']) && !empty($my_list_strings[$vardef['options']])){
-    		$default_dropdowns = $my_list_strings[$vardef['options']];
-    }else{
-    	//since we do not have a default value then we should assign the first one.
-    	$key = $dropdowns[0];
-    	$default_dropdowns = $my_list_strings[$key];
+    $dropdowns = array_keys($my_list_strings);
+    if (!empty($vardef['options']) && !empty($my_list_strings[$vardef['options']])) {
+        $default_dropdowns = $my_list_strings[$vardef['options']];
+    } else {
+        //since we do not have a default value then we should assign the first one.
+        $key = $dropdowns[0];
+        $default_dropdowns = $my_list_strings[$key];
     }
 
     $selected_dropdown = '';
-    if(!empty($vardef['options'])){
-    	$selected_dropdown = $vardef['options'];
-
+    if (!empty($vardef['options'])) {
+        $selected_dropdown = $vardef['options'];
     }
     $show = true;
-	if(!empty($_REQUEST['refresh_dropdown']))
-		$show = false;
+    if (!empty($_REQUEST['refresh_dropdown'])) {
+        $show = false;
+    }
 
-	$ss->assign('dropdowns', $dropdowns);
-	$ss->assign('default_dropdowns', $default_dropdowns);
-	$ss->assign('selected_dropdown', $selected_dropdown);
-	$ss->assign('show', $show);
-	$ss->assign('selected_options', $selected_options);
-     $ss->assign('multi', $multi ?? false);
+    $ss->assign('dropdowns', $dropdowns);
+    $ss->assign('default_dropdowns', $default_dropdowns);
+    $ss->assign('selected_dropdown', $selected_dropdown);
+    $ss->assign('show', $show);
+    $ss->assign('selected_options', $selected_options);
+    $ss->assign('multi', $multi ?? false);
     $ss->assign('radio', $radio ?? false);
-	$ss->assign('dropdown_name',(!empty($vardef['options']) ? $vardef['options'] : ''));
+    $ss->assign('dropdown_name', (!empty($vardef['options']) ? $vardef['options'] : ''));
 
-	$ss->assign('app_list_strings', "''");
-	return $ss->fetch('modules/DynamicFields/templates/Fields/Forms/enum.tpl');
- }
+    $ss->assign('app_list_strings', "''");
+    return $ss->fetch('modules/DynamicFields/templates/Fields/Forms/enum.tpl');
+}
 
 /**
  * Returns drop-down lists available for requested package and module
@@ -79,7 +81,7 @@ function enum_get_lists()
 {
     global $app_list_strings;
 
-    $package_strings = array();
+    $package_strings = [];
     if (!empty($_REQUEST['view_package'])) {
         $view_package = $_REQUEST['view_package'];
         if ($view_package != 'studio') {

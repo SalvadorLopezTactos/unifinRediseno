@@ -38,7 +38,7 @@ class ApplePushNotificationCertificate extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the appleIdentifier
     * Apple Id of the account used to create the MDM push certificate.
@@ -52,7 +52,7 @@ class ApplePushNotificationCertificate extends Entity
         $this->_propDict["appleIdentifier"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the certificate
     * Not yet documented
@@ -67,7 +67,7 @@ class ApplePushNotificationCertificate extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the certificate
     * Not yet documented
@@ -81,7 +81,7 @@ class ApplePushNotificationCertificate extends Entity
         $this->_propDict["certificate"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the certificateSerialNumber
     * Certificate serial number. This property is read-only.
@@ -96,7 +96,7 @@ class ApplePushNotificationCertificate extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the certificateSerialNumber
     * Certificate serial number. This property is read-only.
@@ -110,7 +110,65 @@ class ApplePushNotificationCertificate extends Entity
         $this->_propDict["certificateSerialNumber"] = $val;
         return $this;
     }
-    
+
+    /**
+    * Gets the certificateUploadFailureReason
+    * The reason the certificate upload failed.
+    *
+    * @return string|null The certificateUploadFailureReason
+    */
+    public function getCertificateUploadFailureReason()
+    {
+        if (array_key_exists("certificateUploadFailureReason", $this->_propDict)) {
+            return $this->_propDict["certificateUploadFailureReason"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the certificateUploadFailureReason
+    * The reason the certificate upload failed.
+    *
+    * @param string $val The certificateUploadFailureReason
+    *
+    * @return ApplePushNotificationCertificate
+    */
+    public function setCertificateUploadFailureReason($val)
+    {
+        $this->_propDict["certificateUploadFailureReason"] = $val;
+        return $this;
+    }
+
+    /**
+    * Gets the certificateUploadStatus
+    * The certificate upload status.
+    *
+    * @return string|null The certificateUploadStatus
+    */
+    public function getCertificateUploadStatus()
+    {
+        if (array_key_exists("certificateUploadStatus", $this->_propDict)) {
+            return $this->_propDict["certificateUploadStatus"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the certificateUploadStatus
+    * The certificate upload status.
+    *
+    * @param string $val The certificateUploadStatus
+    *
+    * @return ApplePushNotificationCertificate
+    */
+    public function setCertificateUploadStatus($val)
+    {
+        $this->_propDict["certificateUploadStatus"] = $val;
+        return $this;
+    }
+
     /**
     * Gets the expirationDateTime
     * The expiration date and time for Apple push notification certificate.
@@ -129,7 +187,7 @@ class ApplePushNotificationCertificate extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the expirationDateTime
     * The expiration date and time for Apple push notification certificate.
@@ -143,7 +201,7 @@ class ApplePushNotificationCertificate extends Entity
         $this->_propDict["expirationDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the lastModifiedDateTime
     * Last modified date and time for Apple push notification certificate.
@@ -162,7 +220,7 @@ class ApplePushNotificationCertificate extends Entity
         }
         return null;
     }
-    
+
     /**
     * Sets the lastModifiedDateTime
     * Last modified date and time for Apple push notification certificate.
@@ -176,7 +234,7 @@ class ApplePushNotificationCertificate extends Entity
         $this->_propDict["lastModifiedDateTime"] = $val;
         return $this;
     }
-    
+
     /**
     * Gets the topicIdentifier
     * Topic Id.
@@ -191,7 +249,7 @@ class ApplePushNotificationCertificate extends Entity
             return null;
         }
     }
-    
+
     /**
     * Sets the topicIdentifier
     * Topic Id.
@@ -205,5 +263,5 @@ class ApplePushNotificationCertificate extends Entity
         $this->_propDict["topicIdentifier"] = $val;
         return $this;
     }
-    
+
 }

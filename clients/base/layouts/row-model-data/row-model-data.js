@@ -49,19 +49,33 @@
                     this.context.parent.set('rowModel', rowModelBean);
                     _.each(app.sideDrawer._tabs, function(tab) {
                         if (tab.context.modelId === rowModelBean.get('id')) {
+                            rowModelBean.set(
+                                'tag',
+                                this._format(rowModelBean.has('tag') ? rowModelBean.get('tag') : null)
+                            );
                             tab.context.model = rowModelBean;
                         }
-                    });
+                    }, this);
                     this._super('loadData', [options]);
                 }, this),
                 complete: function() {
                     app.alert.dismiss('load_row_data_model');
                 },
                 viewed: true,
+                view: 'record',
             });
         } else {
             this._super('loadData', [options]);
         }
+    },
+
+    /**
+     * @param {Array} value
+     */
+    _format: function(value) {
+        return _.map(value, function(tag) {
+            return _.extend(tag, {encodedValue: encodeURIComponent(tag.name)});
+        });
     },
 
     /**

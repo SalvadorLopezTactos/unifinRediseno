@@ -11,12 +11,12 @@
  */
 --}}
 <div class="report-loading-screen-overlay" data-widget="split-screens-loading">
-    <i class="sicon sicon-refresh sicon-is-spinning fa-md"></i>
+    <i class="sicon sicon-refresh sicon-is-spinning"></i>
 </div>
-<div data-container="split-screens-container" class="split-screens-container">
-    <div class="first-split-screen" data-container="first-split-screen"></div>
+<div data-container="split-screens-container" class="split-screens-container flex h-full w-full">
+    <div class="first-split-screen overflow-auto" data-container="first-split-screen"></div>
     <div data-action="resizer">
         <div data-action="drag-handle"></div>
     </div>
-    <div class="second-split-screen" data-container="second-split-screen"></div>
+    <div class="second-split-screen flex-1 overflow-auto" data-container="second-split-screen"></div>
 </div>

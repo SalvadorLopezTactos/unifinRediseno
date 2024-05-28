@@ -12,12 +12,13 @@
 --}}
 <div class="dropdown">
     {{partial 'dashboardtitle' this value=value dir=dir hasEditAccess=hasEditAccess name=name type=type}}
-    <a class="dropdown-toggle btn btn-invisible btn-link" data-toggle="dropdown" href="javascript:void(0);" role="button"
+    <a class="dropdown-toggle btn btn-invisible btn-link" data-bs-toggle="dropdown"
+       href="javascript:void(0);" role="button"
        aria-haspopup="true" aria-expanded="false" tabindex="0" aria-label="{{str 'LBL_DASHBOARD_CONFIG'}}"
     >
         <i class="sicon sicon-chevron-down"></i>
     </a>
-<ul class="dropdown-menu" role="menu">
+<ul class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl" role="menu">
     {{!
         FIXME TY-1464: Don't hardcode the "Dashboards" module.
     }}

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,62 +11,62 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$serviceFieldDefaults = array(
+$serviceFieldDefaults = [
     'service_duration_value' => '1',
     'service_duration_unit' => '"year"',
-);
+];
 
 // Handle the dependencies when the 'service' field is checked/unchecked
-$serviceFieldActions = array();
+$serviceFieldActions = [];
 foreach ($serviceFieldDefaults as $field => $defaultValue) {
-    $serviceFieldActions[] = array(
+    $serviceFieldActions[] = [
         'name' => 'ReadOnly',
-        'params' => array(
+        'params' => [
             'target' => $field,
             'value' => 'equal($service, "0")',
-        ),
-    );
-    $serviceFieldActions[] = array(
+        ],
+    ];
+    $serviceFieldActions[] = [
         'name' => 'SetRequired',
-        'params' => array(
+        'params' => [
             'target' => $field,
             'value' => 'equal($service, "1")',
-        ),
-    );
-    $serviceFieldActions[] = array(
+        ],
+    ];
+    $serviceFieldActions[] = [
         'name' => 'SetValue',
-        'params' => array(
+        'params' => [
             'target' => $field,
             'value' => 'ifElse(
                 equal($service, "1"),
                 ifElse(
                     equal($' . $field . ', ""),
-                    '. $defaultValue .',
-                    $'. $field .'
+                    ' . $defaultValue . ',
+                    $' . $field . '
                 ),
                 "")',
-        ),
-    );
+        ],
+    ];
 }
 
 // 'renewable' field is similar to the other service fields, but never required
-$serviceFieldActions[] = array(
+$serviceFieldActions[] = [
     'name' => 'ReadOnly',
-    'params' => array(
+    'params' => [
         'target' => 'renewable',
         'value' => 'equal($service, "0")',
-    ),
-);
-$serviceFieldActions[] = array(
+    ],
+];
+$serviceFieldActions[] = [
     'name' => 'SetValue',
-    'params' => array(
+    'params' => [
         'target' => 'renewable',
         'value' => 'ifElse(
                 equal($service, "1"),
                 $renewable,
                 "0")',
-    ),
-);
+    ],
+];
 $serviceFieldActions[] = [
     'name' => 'ReadOnly',
     'params' => [
@@ -83,10 +84,10 @@ $serviceFieldActions[] = [
                 "0")',
     ],
 ];
-$dependencies['ProductTemplates']['handle_service_dependencies'] = array(
-    'hooks' => array('edit'),
+$dependencies['ProductTemplates']['handle_service_dependencies'] = [
+    'hooks' => ['edit'],
     'trigger' => 'true',
-    'triggerFields' => array('service'),
+    'triggerFields' => ['service'],
     'onload' => true,
     'actions' => $serviceFieldActions,
-);
+];

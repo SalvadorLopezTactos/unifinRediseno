@@ -12,36 +12,33 @@
  */
 
 $viewdefs['portal']['view']['resetpassword'] = [
-    'buttons' =>
+    'buttons' => [
         [
-            [
-                'name' => 'reset_password_button',
-                'type' => 'button',
-                'label' => 'LBL_PORTAL_RESET_PASSWORD',
-                'primary' => true,
+            'name' => 'reset_password_button',
+            'type' => 'button',
+            'label' => 'LBL_PORTAL_RESET_PASSWORD',
+            'primary' => true,
+        ],
+    ],
+    'panels' => [
+        [
+            'label' => 'LBL_PANEL_DEFAULT',
+            'fields' => [
+                [
+                    'name' => 'password1',
+                    'type' => 'password',
+                    'placeholder' => 'LBL_PORTAL_LOGIN_PASSWORD',
+                    'required' => true,
+                    'no_required_placeholder' => true,
+                ],
+                [
+                    'name' => 'password2',
+                    'type' => 'password',
+                    'placeholder' => 'LBL_PORTAL_REENTER_PASSWORD',
+                    'required' => true,
+                    'no_required_placeholder' => true,
+                ],
             ],
         ],
-    'panels' =>
-        [
-            [
-                'label' => 'LBL_PANEL_DEFAULT',
-                'fields' =>
-                    [
-                        [
-                            'name' => 'password1',
-                            'type' => 'password',
-                            'placeholder' => 'LBL_PORTAL_LOGIN_PASSWORD',
-                            'required' => true,
-                            'no_required_placeholder' => true,
-                        ],
-                        [
-                            'name' => 'password2',
-                            'type' => 'password',
-                            'placeholder' => 'LBL_PORTAL_REENTER_PASSWORD',
-                            'required' => true,
-                            'no_required_placeholder' => true,
-                        ],
-                    ],
-            ],
-        ],
+    ],
 ];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Produkttyper',
     'LBL_MODULE_NAME_SINGULAR' => 'Produkttype:',
     'LBL_MODULE_TITLE' => 'Produkttyper: Startside',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Er du sikker på, at du vil slette denne post?',
     'ERR_DELETE_RECORD' => 'Du skal angive et postnummer for at slette produkttypen.',
     'NTC_LIST_ORDER' => 'Angiv den rækkefølge, som denne type vil blive vist i på rullelisterne med produkttyper',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Importér produkttyper',
-    'LBL_CREATED_BY'=>'Oprettet af',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Importér produkttyper',
+    'LBL_CREATED_BY' => 'Oprettet af',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Tildelt til id',
-    'LBL_EXPORT_CREATED_BY'=>'Oprettet af id',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Importér produktkategorier',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Tildelt til id',
+    'LBL_EXPORT_CREATED_BY' => 'Oprettet af id',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Importér produktkategorier',
+];

@@ -101,10 +101,34 @@
     drawerHidden: false,
 
     /**
+     * Models updated in this drawer
+     */
+    updatedModels: [],
+
+    /**
+     * Flag indicating if context layout is 'pipeline-records'.
+     * @property {boolean}
+     */
+    isPipelineLayout: null,
+
+    /**
+     * Side drawer opening animation duration
+     * @property {integer}
+     */
+    openingDuration: 300,
+
+    /**
+     * Side drawer closing animation duration
+     * @property {integer}
+     */
+    closingDuration: 300,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
         this._super('initialize', [options]);
+        this.defaultDrawerConfigs = app.utils.deepCopy(this.drawerConfigs);
         this.$main = app.$contentEl.children().first();
         this.addDrawerHandler = _.bind(this.toggle, this);
         this.removeDrawerHandler = _.bind(this.toggle, this);
@@ -151,7 +175,7 @@
         }, this);
 
         // If the side drawer is on a tile view (not the global side drawer), make sure it is not visible
-        if (this.layout && this.layout.name === 'filterpanel') {
+        if (this.layout && (this.layout.name === 'pipeline-filterpanel' || this.layout.name === 'filterpanel')) {
             this.hide();
         }
         $(window).on('resize.' + this.cid, _.bind(_.debounce(this.resetTabs, 100), this));
@@ -233,6 +257,18 @@
         }
     },
 
+    /**
+     * Refresh active tab.
+     */
+    refreshTab: function() {
+        let self = this;
+        if (this.hasUnsavedChanges(function() {
+            self.showComponent(self.currentContextDef);
+        }, app.lang.get('LBL_WARN_UNSAVED_CHANGES'))) {
+            return;
+        }
+        this.showComponent(this.currentContextDef);
+    },
 
     /**
      * Close tab handler.
@@ -316,13 +352,16 @@
      * @param {Object} def The component definition.
      * @param {Function} onClose Callback method when the drawer closes.
      * @param {boolean} sideDrawerClick True if the click originated from a side-drawer
+     * @param {Object} $el Focus Drawer icon been clicked
      */
-    open: function(def, onClose, sideDrawerClick) {
+    open: function(def, onClose, sideDrawerClick, $el) {
+        this.context.trigger('side-drawer:before:open', $el);
         if (this.isOpen() && this.hasUnsavedChanges(
             _.bind(this._open, this, def, onClose, sideDrawerClick))) {
             return;
         }
         this._open(def, onClose, sideDrawerClick);
+        this.context.trigger('side-drawer:start:open', $el);
     },
 
     /**
@@ -338,6 +377,8 @@
      * @private
      */
     _open: function(def, onClose, sideDrawerClick) {
+        this.isPipelineLayout = ('pipeline-records' === this.context.get('layout'));
+
         // store the callback function to be called later
         this.onCloseCallback = onClose;
 
@@ -352,16 +393,12 @@
 
         // set tab title
         if (def) {
-            def.isFocusDashboard = def.isFocusDashboard || true;
+            def.isFocusDashboard = true;
             if (def.context.model) {
                 def.recordName = def.context.model.get('name');
             }
 
-            if (def.isFocusDashboard) {
-                def.hasTitle = !_.isUndefined(def.dashboardName);
-            } else {
-                def.hasTitle = !!def.recordName;
-            }
+            def.hasTitle = !_.isUndefined(def.dashboardName);
 
             if (def.context.layout === 'record') {
                 def.context.skipRouting = true;
@@ -386,7 +423,7 @@
 
             this.currentState = 'opening';
             this.config();
-            this.$el.show('slide', {direction: 'right'}, 300, _.bind(this.showComponent, this, def));
+            this.$el.show('slide', {direction: 'right'}, this.openingDuration, _.bind(this.showComponent, this, def));
             this.currentState = 'idle';
         } else {
             let _showComponent = _.bind(this.showComponent, this, def);
@@ -448,6 +485,28 @@
         if (!context || app.utils.isTruthy(this.getParentContextDef('disableRecordSwitching'))) {
             this._setButtonState(prevButton, false);
             this._setButtonState(nextButton, false);
+            return;
+        }
+
+        if (this.isPipelineLayout) {
+            let module = this.getParentContextDef('module') || this.context.get('module');
+            let currLi = this.getParentContextDef('evtSource').closest('li');
+            if (!currLi.length) {
+                currLi = $('.blue-border').closest('li');
+            }
+
+            let liTags = currLi.closest('ul.column').find(`.${module}`).closest('li');
+
+            var currLiInd = 0;
+            _.each(liTags, (item, index) => {
+                if (currLi.is($(item))) {
+                    currLiInd = index;
+                    return;
+                }
+            }, this);
+
+            this._setButtonState(prevButton, currLiInd > 0);
+            this._setButtonState(nextButton, currLiInd < liTags.length - 1);
             return;
         }
 
@@ -632,17 +691,24 @@
     /**
      * Determines if there are any unsaved changes
      *
-     * @param callback the callback
+     * @param {requestCallback} callback the callback
+     * @param {string} message the message to show if there are unsaved changes
      * @return boolean true if has unsaved changes, false otherwise
      */
-    hasUnsavedChanges: function(callback) {
-        return !this.triggerBefore('side-drawer:close', {callback: callback});
+    hasUnsavedChanges: function(callback, message) {
+        let params = {callback: callback};
+        if (message) {
+            params.message = message;
+        }
+        return !this.triggerBefore('side-drawer:close', params);
     },
 
     /**
      * Check if it's okay to close the drawer before doing so.
+     *
+     * @param el
      */
-    close: function() {
+    close: function(el) {
         if (this.areActionsEnabled) {
             var _close = _.bind(this._close, this);
             if (this.hasUnsavedChanges(_close)) {
@@ -650,8 +716,14 @@
             }
             _close();
 
+            let closeButtonClicked = !_.isUndefined(el) &&
+                this.$(el.currentTarget).closest('.close-drawer').length > 0;
+
             this.currentContextDef = null;
             this.parentContextDef = null;
+            if (this.context && closeButtonClicked) {
+                this.context.trigger('side-drawer:start:close');
+            }
         }
     },
 
@@ -666,7 +738,7 @@
         }
 
         this.currentState = 'closing';
-        this.$el.hide('slide', {direction: 'right'}, 300);
+        this.$el.hide('slide', {direction: 'right'}, this.closingDuration);
         this.currentState = '';
         this._tabs = [];
         this.drawerHidden = false;
@@ -684,7 +756,23 @@
         if (this.onCloseCallback) {
             this.onCloseCallback.apply(window, callbackArgs);
         }
+
+        app.events.trigger('focusdrawer:close', this.updatedModels || []);
+        this.updatedModels = [];
+
         app.shortcuts.restoreSession();
+    },
+
+    /**
+     * Add a model to the list of updated models.
+     */
+    addUpdatedModel: function(model) {
+        if (!_.find(this.updatedModels, function(updatedModel) {
+            return updatedModel.get('id') === model.get('id') &&
+                updatedModel.get('_module') === model.get('_module');
+        })) {
+            this.updatedModels.push(model);
+        }
     },
 
     /**
@@ -767,10 +855,37 @@
         let list = context.get('collection');
         let baseModelId = this.getParentContextDef('baseModelId');
         let model = list.get(baseModelId);
+        if (!model) {
+            model = list.models[0];
+        }
         let actionType = evt.currentTarget.dataset.actionType;
         if (this.hasUnsavedChanges(_.bind(this._doSwitchRecord, this, model, actionType))) {
             return;
         }
+
+        if (this.isPipelineLayout) {
+            let module = this.getParentContextDef('module') || this.context.get('module');
+            let currLi = this.getParentContextDef('evtSource').closest('li');
+            if (!currLi.length) {
+                currLi = $('.blue-border').closest('li');
+            }
+            let liTags = currLi.closest('ul.column').find(`.${module}`).closest('li');
+
+            var currLiInd = 0;
+            _.each(liTags, (item, index) => {
+                if (currLi.is($(item))) {
+                    currLiInd = index;
+                    return;
+                }
+            }, this);
+
+            let targetIndex = (actionType === 'prev') ? currLiInd - 1 : currLiInd + 1;
+            let focusIconContainer = $(liTags[targetIndex]).find(`.${module}`).closest('.relate-field-container');
+            let focusIcon = focusIconContainer.find('.focus-icon');
+            focusIcon.trigger('click');
+            return;
+        }
+
         this._doSwitchRecord(model, actionType);
     },
 
@@ -835,7 +950,7 @@
                 return model.get('_module');
             case 'relate':
                 if (fieldDefs.module) {
-                    return fieldDefs.module;
+                    return fieldDefs.module === 'Users' ? 'Employees' : fieldDefs.module;
                 }
                 let link = fieldDefs.link && model.fields && model.fields[fieldDefs.link] || {};
                 if (link.module) {

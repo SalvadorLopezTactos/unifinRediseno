@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'You must specify a record number to add a user to this team.',
     'ERR_DUP_NAME' => 'Team Name already existed, please choose another one.',
     'ERR_DELETE_RECORD' => 'You must specify a record number to delete this team.',
@@ -54,23 +54,23 @@ $mod_strings = array(
     'LNK_NEW_TEAM' => 'Create Team',
     'LNK_NEW_TEAM_NOTICE' => 'Create Team Notice',
     'NTC_DELETE_CONFIRMATION' => 'Are you sure you want to delete this record?',
-    'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => 'Are you sure you want to remove this user\\\'s membership?',
+    'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => 'Are you sure you want to remove this user&#39;s membership?',
     'LBL_EDITLAYOUT' => 'Edit Layout' /*for 508 compliance fix*/,
 
     // Team-Based Permissions
     'LBL_TBA_CONFIGURATION' => 'Team-based Permissions',
-    'LBL_TBA_CONFIGURATION_DESC' => 'Enable team access, and manage access by module.',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Enable team access and manage access by module.',
     'LBL_TBA_CONFIGURATION_LABEL' => 'Enable team-based permissions',
     'LBL_TBA_CONFIGURATION_MOD_LABEL' => 'Select modules to enable',
     'LBL_TBA_CONFIGURATION_TITLE' => 'Enabling team-based permissions will allow you to assign specific access rights to teams and users for individual modules, through Role Management.',
     'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
 Disabling team-based permissions for a module will revert any data associated with team-based permissions for that
  module, including any Process Definitions or Processes using the feature. This includes any Roles using the
- "Owner & Selected team" option for that module, and any team-based permissions data for records in that module.
+ "Owner & Selected team" option for that module and any team-based permissions data for records in that module.
  We also recommend that you use the Quick Repair and Rebuild tool to clear your system cache after disabling team-based
  permissions for any module.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Warning:</strong> Disabling team-based permissions for a module will revert any data associated with
  team-based permissions for that module, including any Process Definitions or Processes using the feature. This
@@ -78,7 +78,7 @@ STR
  for records in that module. We also recommend that you use the Quick Repair and Rebuild tool to clear your system cache
  after disabling team-based permissions for any module.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Disabling team-based permissions for a module will revert any data associated with team-based permissions for that
  module, including any Process Definitions or Processes using the feature. This includes any Roles using the
@@ -87,7 +87,7 @@ Disabling team-based permissions for a module will revert any data associated wi
  permissions for any module. If you do not have access to use Quick Repair and Rebuild, contact an administrator with
  access to the Repair menu.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Warning:</strong> Disabling team-based permissions for a module will revert any data associated with
  team-based permissions for that module, including any Process Definitions or Processes using the feature. This
@@ -96,5 +96,5 @@ STR
  disabling team-based permissions for any module. If you do not have access to use Quick Repair and Rebuild, contact
  an administrator with access to the Repair menu.
 STR
-,
-);
+    ,
+];

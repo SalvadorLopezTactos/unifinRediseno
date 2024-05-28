@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_LISTVIEW_FILTER_ALL' => 'Të gjitha {0}',
     'LBL_TEAM' => 'Ekipet',
     'LBL_TEAMS' => 'Ekipet',
@@ -77,4 +77,4 @@ $mod_strings = array(
     'LBL_OPEN_ISSUES' => 'Hap {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Zgjidhur së fundmi',
     'LBL_FILTER_UTILS_CREATED' => 'Krijuar nga',
-);
+];

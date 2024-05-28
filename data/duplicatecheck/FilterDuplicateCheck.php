@@ -20,8 +20,8 @@ class FilterDuplicateCheck extends DuplicateCheckStrategy
     public const FIELD_PLACEHOLDER = '$';
     public const FILTER_QUERY_LIMIT = 20;
 
-    var $filterTemplate = array();
-    var $rankingFields = array();
+    public $filterTemplate = [];
+    public $rankingFields = [];
 
     /**
      * Parses out the duplicate check filter and rankings into protected variables
@@ -131,12 +131,12 @@ class FilterDuplicateCheck extends DuplicateCheckStrategy
      */
     protected function addFilterForEdits($filter, $id)
     {
-        return array(
-            array('$and' => array(
-                array('id' => array('$not_equals' => $id)),
+        return [
+            ['$and' => [
+                ['id' => ['$not_equals' => $id]],
                 $filter,
-            ))
-        );
+            ]],
+        ];
     }
 
     /**
@@ -160,11 +160,11 @@ class FilterDuplicateCheck extends DuplicateCheckStrategy
         $filterApi = new FilterApi();
         $api = new RestService();
         $api->user = $GLOBALS['current_user'];
-        $filterArgs = array(
+        $filterArgs = [
             'filter' => $filter,
             'module' => $this->bean->module_name,
             'max_num' => self::FILTER_QUERY_LIMIT,
-        );
+        ];
         return $filterApi->filterList($api, $filterArgs, 'view');
     }
 
@@ -182,7 +182,7 @@ class FilterDuplicateCheck extends DuplicateCheckStrategy
 
         $duplicates = $results['records'];
         //calculate rank of each duplicate based on rank field metadata
-        $startingFieldWeight = count($this->rankingFields);
+        $startingFieldWeight = safeCount($this->rankingFields);
         foreach ($duplicates as &$duplicate) {
             $rank = 0;
             $fieldWeight = $startingFieldWeight;
@@ -199,7 +199,7 @@ class FilterDuplicateCheck extends DuplicateCheckStrategy
         }
 
         //sort the duplicates based on rank
-        usort($duplicates, array($this, 'compareDuplicateRanks'));
+        usort($duplicates, [$this, 'compareDuplicateRanks']);
         $results['records'] = $duplicates;
 
         return $results;
@@ -236,5 +236,4 @@ class FilterDuplicateCheck extends DuplicateCheckStrategy
         $dupe2Rank = $dupe2[self::DUPE_CHECK_RANK];
         return $dupe2Rank <=> $dupe1Rank;
     }
-
 }

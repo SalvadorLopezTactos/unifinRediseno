@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmnParticipant'] = array(
+$dictionary['pmse_BpmnParticipant'] = [
     'table' => 'pmse_bpmn_participant',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'reassignable' => false,
-    'fields' => array(
-        'par_uid' => array(
+    'fields' => [
+        'par_uid' => [
             'required' => true,
             'name' => 'par_uid',
             'vname' => '',
@@ -38,8 +38,8 @@ $dictionary['pmse_BpmnParticipant'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'prj_id' => array(
+        ],
+        'prj_id' => [
             'required' => true,
             'name' => 'prj_id',
             'vname' => '',
@@ -59,8 +59,8 @@ $dictionary['pmse_BpmnParticipant'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'pro_id' => array(
+        ],
+        'pro_id' => [
             'required' => true,
             'name' => 'pro_id',
             'vname' => '',
@@ -80,8 +80,8 @@ $dictionary['pmse_BpmnParticipant'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'lns_id' => array(
+        ],
+        'lns_id' => [
             'required' => true,
             'name' => 'lns_id',
             'vname' => '',
@@ -101,8 +101,8 @@ $dictionary['pmse_BpmnParticipant'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'par_minimum' => array(
+        ],
+        'par_minimum' => [
             'required' => true,
             'name' => 'par_minimum',
             'vname' => '',
@@ -126,8 +126,8 @@ $dictionary['pmse_BpmnParticipant'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'par_maximum' => array(
+        ],
+        'par_maximum' => [
             'required' => true,
             'name' => 'par_maximum',
             'vname' => '',
@@ -151,8 +151,8 @@ $dictionary['pmse_BpmnParticipant'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'par_num_participants' => array(
+        ],
+        'par_num_participants' => [
             'required' => true,
             'name' => 'par_num_participants',
             'vname' => '',
@@ -176,8 +176,8 @@ $dictionary['pmse_BpmnParticipant'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'par_is_horizontal' => array(
+        ],
+        'par_is_horizontal' => [
             'required' => true,
             'name' => 'par_is_horizontal',
             'vname' => '',
@@ -201,23 +201,23 @@ $dictionary['pmse_BpmnParticipant'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmnParticipant', 'pmse_BpmnParticipant');

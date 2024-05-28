@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Stav skupiny:',
-    'LBL_DEAL_TOT'=>'Celková sleva',
-    'LBL_DEAL_TOT_USDOLLAR'=>'Celková sleva (US Dollar)',
+    'LBL_DEAL_TOT' => 'Celková sleva',
+    'LBL_DEAL_TOT_USDOLLAR' => 'Celková sleva (US Dollar)',
     'LBL_NEW_SUB' => 'Součet po slevě:',
     'LBL_SHIPPING' => 'Dodaní:',
-    'LBL_SHIPPING_USDOLLAR'=>'Cena dodání (US Dollar)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Mezisoučet (US Dollar)',
+    'LBL_SHIPPING_USDOLLAR' => 'Cena dodání (US Dollar)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Mezisoučet (US Dollar)',
     'LBL_SUBTOTAL' => 'Mezisoučet:',
     'LBL_TAXABLE_SUBTOTAL' => 'Zdanitelný mezisoučet',
-    'LBL_TAX_USDOLLAR'=>'Dan (US Dollar)',
+    'LBL_TAX_USDOLLAR' => 'Dan (US Dollar)',
     'LBL_TAX' => 'Dan:',
-    'LBL_TOTAL_USDOLLAR'=>'Celkem(US Dollar)',
+    'LBL_TOTAL_USDOLLAR' => 'Celkem(US Dollar)',
     'LBL_TOTAL' => 'Součet:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Pozice balíku dotazů',
     'EXCEPTION_INVALID_QUOTE_ID' => 'Id nabídky chybí z payloadu',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'Nabídka, kterou jste zažádal nebyla nalezena',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'Nabídka, kterou jste zažádal nebyla nalezena',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Dodatečná sleva pro skupinu',
     'LBL_GROUP_TOTAL' => 'Celkem za skupinu',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Záhlaví skupiny',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Výchozí skupina balíčku produktů pro nabidku',
     'LBL_ALERT_DELETING_ITEM' => 'Odstraňování řádkové položky (položek)',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Řádková položka byla úspěšně odstraněna',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová osa balíčku produktů',
+];

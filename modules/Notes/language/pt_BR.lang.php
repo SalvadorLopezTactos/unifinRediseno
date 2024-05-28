@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Painel de lista de notas',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Painel de registro de notas',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco em notas',
     'LBL_EXTERNAL_USER' => 'Usuário externo',
     'LBL_EXTERNAL_USER_NAME' => 'Usuário externo',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Linha do tempo da nota',
 
     'LBL_RELATED_CONTACT' => 'Contato relacionado',
     'ERR_DELETE_RECORD' => 'Um número de registro deve ser especificado para excluir a Conta.',
@@ -126,4 +127,4 @@ $mod_strings = array(
 - Os campos marcados como "obrigatórios" devem ser preenchido antes de salvar. 
 - Clique em "Mostrar mais" para expor campos adicionais, se necessário. 
 2. Clique em "Salvar" para finalizar o novo registro e retornar à página anterior.',
-);
+];

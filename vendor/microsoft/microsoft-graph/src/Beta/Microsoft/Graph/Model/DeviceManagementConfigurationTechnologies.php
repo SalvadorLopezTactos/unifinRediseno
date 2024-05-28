@@ -33,5 +33,11 @@ class DeviceManagementConfigurationTechnologies extends Enum
     const MDM = "mdm";
     const WINDOWS10_X_MANAGEMENT = "windows10XManagement";
     const CONFIG_MANAGER = "configManager";
+    const APPLE_REMOTE_MANAGEMENT = "appleRemoteManagement";
     const MICROSOFT_SENSE = "microsoftSense";
+    const EXCHANGE_ONLINE = "exchangeOnline";
+    const LINUX_MDM = "linuxMdm";
+    const ENROLLMENT = "enrollment";
+    const ENDPOINT_PRIVILEGE_MANAGEMENT = "endpointPrivilegeManagement";
+    const UNKNOWN_FUTURE_VALUE = "unknownFutureValue";
 }

@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Turundus',
-    'Knowledge Base' => 'Teadmusbaas',
-    'Sales' => 'Müük',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Turundusmaterjalid',
-    'Product Brochures' => 'Tootebrošüürid',
-    'FAQ' => 'KKK',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Turundus',
+        'Knowledge Base' => 'Teadmusbaas',
+        'Sales' => 'Müük',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Aktiivne',
-    'Draft' => 'Mustand',
-    'FAQ' => 'KKK',
-    'Expired' => 'Aegunud',
-    'Under Review' => 'Ülevaatamisel',
-    'Pending' => 'Ootel',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Turundustagatis',
+        'Product Brochures' => 'Toote brošüürid',
+        'FAQ' => 'KKK',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Aktiivne',
+        'Draft' => 'Visand',
+        'FAQ' => 'KKK',
+        'Expired' => 'Aegunud',
+        'Under Review' => 'Ülevaatamisel',
+        'Pending' => 'Ootel',
+    ],
+];

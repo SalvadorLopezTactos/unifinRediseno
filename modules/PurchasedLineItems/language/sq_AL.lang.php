@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Paneli i listës së artikujve të blerë të rreshtit',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Paneli i regjistrit të artikujve të blerë të rreshtit',
     'LBL_PARENT_PURCHASE' => 'Blerja kryesore',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e artikullit të blerë',
 ];

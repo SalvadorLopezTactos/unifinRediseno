@@ -65,7 +65,15 @@
         var cabDropdown = _.find(this.cabMenu, function(menuItem) {
             return menuItem.type === 'cab_actiondropdown';
         });
-        this.cabButtons = cabDropdown ? cabDropdown.buttons : null;
+        let cabButtons = cabDropdown ? cabDropdown.buttons : [];
+        this.cabButtons = _.filter(cabButtons, function(buttonDef) {
+            let parentModule = this.context.get('module');
+            let link = this.layout && this.layout.model &&
+                this.layout.model.link && this.layout.model.link.name || '';
+            let unlinkable = app.utils.isRequiredLink(parentModule, link) ||
+                (this.layout && this.layout.model && this.layout.model.get('_is_external_link'));
+            return buttonDef.type !== 'unlinkcab' || !unlinkable;
+        }, this) || [];
     },
 
     /**

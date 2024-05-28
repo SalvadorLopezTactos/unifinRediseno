@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint\Http;
 
 final class Response
@@ -61,7 +62,7 @@ final class Response
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf('%s, %s', $this->code, $this->body);
     }

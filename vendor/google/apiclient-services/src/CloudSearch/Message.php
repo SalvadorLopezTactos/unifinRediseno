@@ -56,10 +56,6 @@ class Message extends \Google\Collection
    * @var bool
    */
   public $deletedByVault;
-  /**
-   * @var string
-   */
-  public $dlpScanOutcome;
   protected $dlpScanSummaryType = DlpScanSummary::class;
   protected $dlpScanSummaryDataType = '';
   /**
@@ -98,10 +94,18 @@ class Message extends \Google\Collection
    * @var string
    */
   public $messageOrigin;
+  protected $messageReferenceType = MessageReference::class;
+  protected $messageReferenceDataType = '';
+  protected $messageSearchInfoType = AppsDynamiteSharedMessageSearchInfo::class;
+  protected $messageSearchInfoDataType = '';
   /**
    * @var string
    */
   public $messageState;
+  /**
+   * @var int
+   */
+  public $numberOfUnicodeEmojis;
   protected $originAppSuggestionsType = AppsDynamiteSharedOriginAppSuggestion::class;
   protected $originAppSuggestionsDataType = 'array';
   protected $personalLabelsType = PersonalLabelTag::class;
@@ -124,6 +128,10 @@ class Message extends \Google\Collection
   protected $reportsDataType = 'array';
   protected $retentionSettingsType = AppsDynamiteSharedRetentionSettings::class;
   protected $retentionSettingsDataType = '';
+  /**
+   * @var string
+   */
+  public $richTextFormattingType;
   /**
    * @var string
    */
@@ -322,20 +330,6 @@ class Message extends \Google\Collection
     return $this->deletedByVault;
   }
   /**
-   * @param string
-   */
-  public function setDlpScanOutcome($dlpScanOutcome)
-  {
-    $this->dlpScanOutcome = $dlpScanOutcome;
-  }
-  /**
-   * @return string
-   */
-  public function getDlpScanOutcome()
-  {
-    return $this->dlpScanOutcome;
-  }
-  /**
    * @param DlpScanSummary
    */
   public function setDlpScanSummary(DlpScanSummary $dlpScanSummary)
@@ -490,6 +484,34 @@ class Message extends \Google\Collection
     return $this->messageOrigin;
   }
   /**
+   * @param MessageReference
+   */
+  public function setMessageReference(MessageReference $messageReference)
+  {
+    $this->messageReference = $messageReference;
+  }
+  /**
+   * @return MessageReference
+   */
+  public function getMessageReference()
+  {
+    return $this->messageReference;
+  }
+  /**
+   * @param AppsDynamiteSharedMessageSearchInfo
+   */
+  public function setMessageSearchInfo(AppsDynamiteSharedMessageSearchInfo $messageSearchInfo)
+  {
+    $this->messageSearchInfo = $messageSearchInfo;
+  }
+  /**
+   * @return AppsDynamiteSharedMessageSearchInfo
+   */
+  public function getMessageSearchInfo()
+  {
+    return $this->messageSearchInfo;
+  }
+  /**
    * @param string
    */
   public function setMessageState($messageState)
@@ -502,6 +524,20 @@ class Message extends \Google\Collection
   public function getMessageState()
   {
     return $this->messageState;
+  }
+  /**
+   * @param int
+   */
+  public function setNumberOfUnicodeEmojis($numberOfUnicodeEmojis)
+  {
+    $this->numberOfUnicodeEmojis = $numberOfUnicodeEmojis;
+  }
+  /**
+   * @return int
+   */
+  public function getNumberOfUnicodeEmojis()
+  {
+    return $this->numberOfUnicodeEmojis;
   }
   /**
    * @param AppsDynamiteSharedOriginAppSuggestion[]
@@ -642,6 +678,20 @@ class Message extends \Google\Collection
   public function getRetentionSettings()
   {
     return $this->retentionSettings;
+  }
+  /**
+   * @param string
+   */
+  public function setRichTextFormattingType($richTextFormattingType)
+  {
+    $this->richTextFormattingType = $richTextFormattingType;
+  }
+  /**
+   * @return string
+   */
+  public function getRichTextFormattingType()
+  {
+    return $this->richTextFormattingType;
   }
   /**
    * @param string

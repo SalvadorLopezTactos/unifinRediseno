@@ -13,7 +13,6 @@
 // This class is used for the Manager Views
 class SugarForecasting_Manager extends SugarForecasting_AbstractForecast implements SugarForecasting_ForecastSaveInterface
 {
-
     /**
      * @var bool
      */
@@ -22,10 +21,11 @@ class SugarForecasting_Manager extends SugarForecasting_AbstractForecast impleme
      * @var array<string, string>
      */
     public $defaultData;
+
     /**
      * Class Constructor
      *
-     * @param array $args       Service Arguments
+     * @param array $args Service Arguments
      */
     public function __construct($args)
     {
@@ -41,20 +41,20 @@ class SugarForecasting_Manager extends SugarForecasting_AbstractForecast impleme
     /**
      * Run all the tasks we need to process get the data back
      *
-     * @deprecated @see ForecastManagerWorksheetsFilterApi
      * @return array
+     * @deprecated @see ForecastManagerWorksheetsFilterApi
      */
     public function process()
     {
-        return array();
+        return [];
     }
 
     /**
      * Save the Manager Worksheet, This method is deprecated and should be done though use of
      * the ForecastManagerWorksheet bean
      *
-     * @deprecated
      * @return string
+     * @deprecated
      */
     public function save()
     {

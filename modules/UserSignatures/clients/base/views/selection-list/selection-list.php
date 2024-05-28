@@ -9,35 +9,35 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['UserSignatures']['base']['view']['selection-list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['UserSignatures']['base']['view']['selection-list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'link' => true,
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'is_default',
                     'type' => 'bool',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array (
-                    'name'  => 'date_entered',
+                ],
+                [
+                    'name' => 'date_entered',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_modified',
                     'enabled' => true,
                     'default' => true,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

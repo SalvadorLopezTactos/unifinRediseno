@@ -40,16 +40,16 @@ try {
 
 $mode = InputValidation::getService()->getValidInputRequest(
     'mode',
-    array(
-        'Assert\Choice' => array(
-            'choices' => array(
+    [
+        'Assert\Choice' => [
+            'choices' => [
                 'Install',
                 'Uninstall',
                 'Disable',
-                'Enable'
-            )
-        )
-    ),
+                'Enable',
+            ],
+        ],
+    ],
     ''
 );
 if (empty($mode)) {
@@ -115,7 +115,6 @@ HTML;
 </div>
 HTML;
         }
-
     }
 }
 
@@ -130,7 +129,7 @@ switch ($mode) {
         $actionLabel = htmlspecialchars(translate('LBL_UW_UNINSTALL_READY', 'Administration'), ENT_COMPAT);
         if ($installType === PackageManifest::PACKAGE_TYPE_LANGPACK) {
             $actionLabel = htmlspecialchars(translate('LBL_UW_LANGPACK_READY', 'Administration'), ENT_COMPAT);
-        } elseif ($installType !==  PackageManifest::PACKAGE_TYPE_MODULE) {
+        } elseif ($installType !== PackageManifest::PACKAGE_TYPE_MODULE) {
             $actionLabel = htmlspecialchars(translate('LBL_UW_FILES_REMOVED', 'Administration'), ENT_COMPAT);
         }
         break;
@@ -170,7 +169,7 @@ if ($removeTables === 'prompt' && $mode === 'Uninstall') {
 HTML;
 }
 $overwriteFilesContent = '';
-if ($mode === "Disable" || $mode === "Enable") {
+if ($mode === 'Disable' || $mode === 'Enable') {
     $copyFiles = $historyManifest->getInstallDefsValue('copy');
     if (!empty($copyFiles)) {
         $overwriteFilesLabel = htmlspecialchars(translate('LBL_OVERWRITE_FILES', 'Administration'), ENT_COMPAT);
@@ -320,7 +319,7 @@ echo <<<HTML
             progressMessageEl.find('#ml-installing-error-lbl').toggle();
             progressMessageEl.find('.alert-info').removeClass('alert-info').addClass('alert-danger');
             progressMessageEl.find('button').toggle();
-            progressMessageEl.find('.fa-angle-down').parent().find('a').click();
+            progressMessageEl.find('.sicon-chevron-down').parent().find('a').click();
         }
         
         let checkInstallationProgress = function() {

@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Teadmusbaas',
     'LBL_MODULE_NAME_SINGULAR' => 'Teadmusbaasi artikkel',
     'LBL_MODULE_TITLE' => 'Teadmusbaasi artikkel',
     'LBL_REVISIONS_SUBPANEL_TITLE' => 'Parandused',
-);
+];

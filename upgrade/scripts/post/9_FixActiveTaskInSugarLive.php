@@ -26,7 +26,7 @@ class SugarUpgradeFixActiveTaskInSugarLive extends UpgradeScript
 
         $bean = BeanFactory::newBean('Dashboards');
         $query = new SugarQuery();
-        $query->select(array('id', 'name', 'metadata'));
+        $query->select(['id', 'name', 'metadata']);
         $query->from($bean);
         $query->where()->equals('id', '32bc5cd0-b1a0-11ea-ad16-f45c898a3ce7');
         $results = $query->execute();

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Расписания отчетов',
     'LBL_MODULE_NAME_SINGULAR' => 'Расписание отчетов',
     'LBL_REPORT_NAME' => 'Отчет',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Тип(-ы) файла',
     'LBL_EMBED_REPORT' => 'Вставить отчет в электронное сообщение',
     'LBL_EMBED_REPORT_INFO' => 'Примечание. Если количество строк в отчете превышает 200, мы прикрепим отчет в виде CSV-файла.',
-);
+];

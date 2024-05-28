@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Produktu veidi',
     'LBL_MODULE_NAME_SINGULAR' => 'Produkta veids',
     'LBL_MODULE_TITLE' => 'Produktu veidi: Sākums',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Vai tiešām vēlaties dzēst šo ierakstu?',
     'ERR_DELETE_RECORD' => 'Lai dzēstu produkta veidu, jānorāda ieraksta numurs.',
     'NTC_LIST_ORDER' => 'Norādiet secību, kādā šis veids parādīsies produkta veidu nolaižamajos sarakstos',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Importēt produkta veidus',
-    'LBL_CREATED_BY'=>'Izveidoja',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Importēt produkta veidus',
+    'LBL_CREATED_BY' => 'Izveidoja',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Piešķirts ID',
-    'LBL_EXPORT_CREATED_BY'=>'Izveidoja ID',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Importēt produktu kategorijas',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Piešķirts ID',
+    'LBL_EXPORT_CREATED_BY' => 'Izveidoja ID',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Importēt produktu kategorijas',
+];

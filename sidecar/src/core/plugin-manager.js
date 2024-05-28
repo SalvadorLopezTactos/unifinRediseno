@@ -15,7 +15,7 @@
  * Example:
  *
  * ```
- * const PluginManager = require('core/plugin-manager');
+ * const PluginManager = require('./plugin-manager');
  *
  * PluginManager.register('fast-click-highlight', ['view', 'field'], {
  *     color : "red",
@@ -43,7 +43,7 @@
  * plugin in it:
  *
  * ```
- * const ViewManager = require('view/view-manager');
+ * const ViewManager = require('../view/view-manager');
  * var MyView = ViewManager.View.extend({
  *     initialize: function(options) {},
  *     plugins: ['fast-click-highlight'],

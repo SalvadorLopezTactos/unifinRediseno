@@ -32,7 +32,7 @@ class CspConfigApiHandler extends ConfigApiHandler
      */
     public function setConfig(ServiceBase $api, array $args)
     {
-        $prefix =  'csp_';
+        $prefix = 'csp_';
         $directives = [];
         foreach ($args as $key => $value) {
             if (substr($key, 0, 4) === $prefix) {

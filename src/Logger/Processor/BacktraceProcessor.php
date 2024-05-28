@@ -33,7 +33,7 @@ class BacktraceProcessor
 
     private function getFormatedBacktrace($includeArgs = false)
     {
-        $trace = "";
+        $trace = '';
         $stack = $this->trimStack(
             debug_backtrace(
                 DEBUG_BACKTRACE_PROVIDE_OBJECT | (!$includeArgs ? DEBUG_BACKTRACE_IGNORE_ARGS : 0)
@@ -47,7 +47,7 @@ class BacktraceProcessor
                     $trace .= " - {$call['class']}::{$call['function']}()";
                 }
                 if (!empty($call['args'])) {
-                    $trace .= "(";
+                    $trace .= '(';
                     foreach ($call['args'] as $i => $a) {
                         $trace .= "\n    $i: " . $this->print_var($a, 1, true);
                     }
@@ -61,9 +61,9 @@ class BacktraceProcessor
 
     private function trimStack($stack)
     {
-        for ($i = (is_countable($stack) ? count($stack) : 0) - 1; $i >= 0; $i--) {
+        for ($i = safeCount($stack) - 1; $i >= 0; $i--) {
             $call = $stack[$i];
-            if (!empty($call['class']) && in_array(LoggerInterface::class, class_implements($call['class']))) {
+            if (!empty($call['class']) && safeInArray(LoggerInterface::class, class_implements($call['class']))) {
                 $stack = array_slice($stack, $i);
                 break;
             }
@@ -76,16 +76,16 @@ class BacktraceProcessor
     {
         $ret = '';
         if (is_object($o)) {
-            $ret .= "Object - {" . get_class($o) . "}";
+            $ret .= 'Object - {' . get_class($o) . '}';
         } elseif (is_array($o)) {
-            $ret .= "Array[" . sizeof($o) . "]";
+            $ret .= 'Array[' . sizeof($o) . ']';
         } else {
             return var_export($o, true);
         }
 
         if ($includeProps) {
             foreach ($o as $k => $v) {
-                $ret .= "\n" . str_repeat("    ", $indent + 1) . "$k => " . $this->print_var($v, $indent + 1);
+                $ret .= "\n" . str_repeat('    ', $indent + 1) . "$k => " . $this->print_var($v, $indent + 1);
             }
         }
 

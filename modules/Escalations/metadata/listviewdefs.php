@@ -22,8 +22,8 @@ $listViewDefs ['Escalations'] = [
         'default' => true,
     ],
     'PARENT_NAME' => [
-        'width'   => '20',
-        'label'   => 'LBL_LIST_RELATED_TO',
+        'width' => '20',
+        'label' => 'LBL_LIST_RELATED_TO',
         'dynamic_module' => 'PARENT_TYPE',
         'id' => 'PARENT_ID',
         'link' => true,

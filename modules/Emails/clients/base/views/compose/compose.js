@@ -892,7 +892,7 @@
             component: this,
             description: 'LBL_SHORTCUT_OPEN_MORE_ACTION',
             handler: function() {
-                var $primaryDropdown = this.$('.btn-primary[data-toggle=dropdown]');
+                var $primaryDropdown = this.$('.btn-primary[data-bs-toggle=dropdown]');
                 if ($primaryDropdown.is(':visible') && !$primaryDropdown.hasClass('disabled')) {
                     $primaryDropdown.click();
                 }

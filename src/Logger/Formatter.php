@@ -63,6 +63,6 @@ class Formatter extends LineFormatter
             return $str;
         }
 
-        return str_replace(array("\r", "\n"), array('\r', '\n'), $str);
+        return str_replace(["\r", "\n"], ['\r', '\n'], $str);
     }
 }

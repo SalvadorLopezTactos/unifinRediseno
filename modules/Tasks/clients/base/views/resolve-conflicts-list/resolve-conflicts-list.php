@@ -9,19 +9,19 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Tasks']['base']['view']['resolve-conflicts-list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Tasks']['base']['view']['resolve-conflicts-list'] = [
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'link' => true,
                     'label' => 'LBL_LIST_SUBJECT',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'contact_name',
                     'label' => 'LBL_LIST_CONTACT',
                     'link' => true,
@@ -30,9 +30,9 @@ $viewdefs['Tasks']['base']['view']['resolve-conflicts-list'] = array(
                     'enabled' => true,
                     'default' => true,
                     'ACLTag' => 'CONTACT',
-                    'related_fields' => array('contact_id'),
-                ),
-                array(
+                    'related_fields' => ['contact_id'],
+                ],
+                [
                     'name' => 'parent_name',
                     'label' => 'LBL_LIST_RELATED_TO',
                     'dynamic_module' => 'PARENT_TYPE',
@@ -42,50 +42,50 @@ $viewdefs['Tasks']['base']['view']['resolve-conflicts-list'] = array(
                     'default' => true,
                     'sortable' => false,
                     'ACLTag' => 'PARENT',
-                    'related_fields' => array('parent_id', 'parent_type'),
-                ),
-                array(
+                    'related_fields' => ['parent_id', 'parent_type'],
+                ],
+                [
                     'name' => 'date_due',
                     'label' => 'LBL_LIST_DUE_DATE',
                     'link' => false,
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'team_name',
                     'label' => 'LBL_LIST_TEAM',
                     'enabled' => true,
                     'default' => false,
-                ),
-                array(
+                ],
+                [
                     'name' => 'assigned_user_name',
                     'label' => 'LBL_LIST_ASSIGNED_TO_NAME',
                     'id' => 'ASSIGNED_USER_ID',
                     'enabled' => true,
                     'default' => false,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_start',
                     'label' => 'LBL_LIST_START_DATE',
                     'link' => false,
                     'enabled' => true,
                     'default' => false,
-                ),
-                array(
+                ],
+                [
                     'name' => 'status',
                     'label' => 'LBL_LIST_STATUS',
                     'link' => false,
                     'enabled' => true,
                     'default' => false,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_entered',
                     'label' => 'LBL_DATE_ENTERED',
                     'enabled' => true,
                     'default' => false,
                     'readonly' => true,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

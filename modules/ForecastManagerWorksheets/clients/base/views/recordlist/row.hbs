@@ -14,7 +14,7 @@
     {{#with rowModel}}
         <tr name="{{module}}_{{attributes.id}}" data-parent-id="{{attributes.user_id}}" class="single">
             {{#each ../leftColumns}}
-                <td class="sticky-column stick-left">
+                <td class="left-0 sticky stick-left z-20">
                     {{field ../../this model=../this template=../../viewName}}
                 </td>
             {{/each}}
@@ -24,7 +24,7 @@
                 </td>
             {{/each}}
             {{#each ../rightColumns}}
-                <td class="sticky-column stick-right">
+                <td class="right-0 sticky stick-right z-20">
                     {{field ../../this model=../this template=../../viewName}}
                 </td>
             {{/each}}
@@ -33,7 +33,7 @@
 {{else}}
     <tr name="{{module}}_{{model.id}}" data-parent-id="{{attributes.user_id}}" class="single">
         {{#each view.leftColumns}}
-            <td class="sticky-column stick-left">
+            <td class="left-0 sticky stick-left z-20">
                 {{field ../view model=../model template=../view.viewName}}
             </td>
         {{/each}}
@@ -43,7 +43,7 @@
             </td>
         {{/each}}
         {{#each view.rightColumns}}
-            <td class="sticky-column stick-right">
+            <td class="right-0 sticky stick-right z-20">
                 {{field ../view model=../model template=../view.viewName}}
             </td>
         {{/each}}

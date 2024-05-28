@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Tablero de Lista de Artículos Cotizados',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Tablero de Registro de Artículos Cotizados',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Tipos de Producto',
     'LBL_ASSIGNED_TO_NAME' => 'Asignado a:',
     'LBL_ASSIGNED_TO' => 'Asignada a',
-    'LBL_ASSIGNED_TO_ID'=>'ID de Usuario Asignado',
+    'LBL_ASSIGNED_TO_ID' => 'ID de Usuario Asignado',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nombre de Usuario Asignado',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'ID de Usuario Asignado',
     'LBL_CAMPAIGN_ID' => 'ID de Campaña',
@@ -217,4 +217,5 @@ Para crear un {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Muestra los 10 mejores Artículos de Línea de Ganancia en un gráfico de burbuja.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Mis Artículos de Línea de Ganancia',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Los Artículos de Línea de Ganancia de mi Equipo",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Línea de tiempo de la partida de ingresos',
+];

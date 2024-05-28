@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Grup Aşaması:',
-    'LBL_DEAL_TOT'=>'indirim toplamı',
-    'LBL_DEAL_TOT_USDOLLAR'=>'indirim toplamı (US Dolar)',
+    'LBL_DEAL_TOT' => 'indirim toplamı',
+    'LBL_DEAL_TOT_USDOLLAR' => 'indirim toplamı (US Dolar)',
     'LBL_NEW_SUB' => 'İndirimli Alt Toplam:',
     'LBL_SHIPPING' => 'Nakliyat:',
-    'LBL_SHIPPING_USDOLLAR'=>'Teslimat (US Dolar)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Alt Toplam (US Dolar)',
+    'LBL_SHIPPING_USDOLLAR' => 'Teslimat (US Dolar)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Alt Toplam (US Dolar)',
     'LBL_SUBTOTAL' => 'Alt toplam:',
     'LBL_TAXABLE_SUBTOTAL' => 'Vergite Tabi Alt Toplam',
-    'LBL_TAX_USDOLLAR'=>'Vergi (US Dolar)',
+    'LBL_TAX_USDOLLAR' => 'Vergi (US Dolar)',
     'LBL_TAX' => 'Vergi:',
-    'LBL_TOTAL_USDOLLAR'=>'Toplam (US Dolar)',
+    'LBL_TOTAL_USDOLLAR' => 'Toplam (US Dolar)',
     'LBL_TOTAL' => 'Toplam:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Teklif Bundle Pozisyonu',
     'EXCEPTION_INVALID_QUOTE_ID' => 'Teklif Id eksik',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'İstediğiniz teklif bulunamadı',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'İstediğiniz teklif bulunamadı',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Ek Grup İndirimi',
     'LBL_GROUP_TOTAL' => 'Grup Toplamı',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Grup Üst Bilgisi',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Teklif için varsayılan Ürün Paketi grubu',
     'LBL_ALERT_DELETING_ITEM' => 'Kalem(ler) siliniyor',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Kalem başarıyla silindi',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ürün Paketi Zaman Çizelgesi',
+];

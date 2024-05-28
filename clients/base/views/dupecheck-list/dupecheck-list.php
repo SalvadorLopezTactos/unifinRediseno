@@ -9,18 +9,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['dupecheck-list'] = array(
+$viewdefs['base']['view']['dupecheck-list'] = [
     'template' => 'flex-list',
-    'rowactions' => array(
-        'actions' => array(
-            array(
+    'rowactions' => [
+        'actions' => [
+            [
                 'type' => 'rowaction',
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
                 'icon' => 'sicon-preview',
                 'acl_action' => 'view',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

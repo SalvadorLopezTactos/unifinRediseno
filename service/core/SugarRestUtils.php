@@ -9,7 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('service/core/SoapHelperWebService.php');
-class SugarRestUtils extends SoapHelperWebServices {
-	
+require_once 'service/core/SoapHelperWebService.php';
+
+class SugarRestUtils extends SoapHelperWebServices
+{
 }

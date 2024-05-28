@@ -46,15 +46,15 @@ class GoogleCloudAssuredworkloadsV1Violation extends \Google\Model
   /**
    * @var string
    */
+  public $exceptionAuditLogLink;
+  /**
+   * @var string
+   */
   public $name;
   /**
    * @var string
    */
   public $nonCompliantOrgPolicy;
-  /**
-   * @var string
-   */
-  public $orgPolicyConstraint;
   protected $remediationType = GoogleCloudAssuredworkloadsV1ViolationRemediation::class;
   protected $remediationDataType = '';
   /**
@@ -157,6 +157,20 @@ class GoogleCloudAssuredworkloadsV1Violation extends \Google\Model
   /**
    * @param string
    */
+  public function setExceptionAuditLogLink($exceptionAuditLogLink)
+  {
+    $this->exceptionAuditLogLink = $exceptionAuditLogLink;
+  }
+  /**
+   * @return string
+   */
+  public function getExceptionAuditLogLink()
+  {
+    return $this->exceptionAuditLogLink;
+  }
+  /**
+   * @param string
+   */
   public function setName($name)
   {
     $this->name = $name;
@@ -181,20 +195,6 @@ class GoogleCloudAssuredworkloadsV1Violation extends \Google\Model
   public function getNonCompliantOrgPolicy()
   {
     return $this->nonCompliantOrgPolicy;
-  }
-  /**
-   * @param string
-   */
-  public function setOrgPolicyConstraint($orgPolicyConstraint)
-  {
-    $this->orgPolicyConstraint = $orgPolicyConstraint;
-  }
-  /**
-   * @return string
-   */
-  public function getOrgPolicyConstraint()
-  {
-    return $this->orgPolicyConstraint;
   }
   /**
    * @param GoogleCloudAssuredworkloadsV1ViolationRemediation

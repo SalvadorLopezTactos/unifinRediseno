@@ -34,8 +34,79 @@ $viewdefs['DRI_SubWorkflows']['mobile']['view']['edit'] = [
             'labelsOnTop' => 1,
             'placeholders' => 1,
             'fields' => [
-                'assigned_user_name',
+                'name',
+                [
+                    'name' => 'dri_workflow_name',
+                    'label' => 'LBL_DRI_WORKFLOW',
+                ],
+                [
+                    'name' => 'dri_subworkflow_template_name',
+                    'label' => 'LBL_DRI_SUBWORKFLOW_TEMPLATE',
+                ],
+                [
+                    'name' => 'progress',
+                    'readonly' => true,
+                    'label' => 'LBL_PROGRESS',
+                ],
+                [
+                    'name' => 'momentum_ratio',
+                    'readonly' => true,
+                    'label' => 'LBL_MOMENTUM_RATIO',
+                ],
+                [
+                    'name' => 'score',
+                    'readonly' => true,
+                    'label' => 'LBL_SCORE',
+                ],
+                [
+                    'name' => 'points',
+                    'readonly' => true,
+                    'label' => 'LBL_POINTS',
+                ],
+                [
+                    'name' => 'momentum_score',
+                    'readonly' => true,
+                    'label' => 'LBL_MOMENTUM_SCORE',
+                ],
+                [
+                    'name' => 'momentum_points',
+                    'readonly' => true,
+                    'label' => 'LBL_MOMENTUM_POINTS',
+                ],
+                [
+                    'name' => 'state',
+                    'readonly' => true,
+                    'label' => 'LBL_STATE',
+                ],
+                [
+                    'name' => 'sort_order',
+                    'readonly' => false,
+                    'label' => 'LBL_SORT_ORDER',
+                ],
+                [
+                    'name' => 'description',
+                    'comment' => 'Full text of the note',
+                    'label' => 'LBL_DESCRIPTION',
+                ],
+                [
+                    'name' => 'date_started',
+                    'readonly' => true,
+                    'label' => 'LBL_DATE_STARTED',
+                ],
+                [
+                    'name' => 'date_completed',
+                    'readonly' => true,
+                    'label' => 'LBL_DATE_COMPLETED',
+                ],
                 'team_name',
+                'assigned_user_name',
+                'date_modified',
+                'modified_by_name',
+                'date_entered',
+                'created_by_name',
+                [
+                    'name' => 'tag',
+                ],
             ],
         ],
     ],

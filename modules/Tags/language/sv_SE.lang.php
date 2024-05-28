@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Taggar',
     'LBL_GENERIC_LINK' => 'Relaterade objekt',
     'LBL_NAME_LOWER' => 'Taggnamn i gemener',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'Mina taggar',
     'LBL_MY_FAVORITE_TAGS' => 'Mina favorittaggar',
     'LBL_MORE_TAGS' => '{{tagsNumber}} Taggar',
-);
+];

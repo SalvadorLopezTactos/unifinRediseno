@@ -9,21 +9,20 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- $app_list_strings = array (
+$app_list_strings = [
 
-  strtolower($object_name).'_type_dom' =>
-  array (
-    '' => '',
-    'Analyst' => 'Analytik',
-    'Competitor' => 'Konkurence',
-    'Customer' => 'Zákazník',
-    'Integrator' => 'Integrator',
-    'Investor' => 'Investor',
-    'Partner' => 'Partner',
-    'Press' => 'Stiskněte',
-    'Prospect' => 'Vyhlídka',
-    'Reseller' => 'Prodejce',
-    'Other' => 'Jiné',
-  ),
+    strtolower($object_name) . '_type_dom' => [
+        '' => '',
+        'Analyst' => 'Analytik',
+        'Competitor' => 'Konkurent',
+        'Customer' => 'Zákazník',
+        'Integrator' => 'Integrátor',
+        'Investor' => 'Investor',
+        'Partner' => 'Partner',
+        'Press' => 'Tisk',
+        'Prospect' => 'Vyhlídka',
+        'Reseller' => 'Prodejce',
+        'Other' => 'Jiné',
+    ],
 
-  );
+];

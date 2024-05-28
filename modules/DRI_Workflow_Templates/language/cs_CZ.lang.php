@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Aktivní',
     'LBL_ASSIGNEE_RULE' => 'Pravidlo pověřené osoby',
     'LBL_TARGET_ASSIGNEE' => 'Cílová pověřená osoba',
+    'LBL_STAGE_NUMBERS' => 'Číslování fází',
     'LBL_EXPORT_BUTTON_LABEL' => 'Exportovat',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Importovat',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Automatické vytvoření/aktualizace nového záznamu šablony chytrého průvodce importem souboru *.json ze souborového systému.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Pokud je zaškrtnuto, pak pokud cílová pověřená osoba = nadřízená pověřená osoba, pak se při změně uživatele „Přiřazen k“ u nadřízené pověřené osoby automaticky změní i uživatelé „Přiřazen k“ u chytrých průvodců, fází a aktivit. Upozorňujeme, že nastavení cílové pověřené osoby v šablonách aktivit má přednost před šablonou chytrého průvodce',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Kdy by měl být uživatel přiřazen k aktivitám',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Komu by měly být aktivity přiděleny',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Tento přepínač umožňuje zobrazit nebo skrýt automatické číslování fází.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Šablona aktivity / fáze / chytrého průvodce',
 ];

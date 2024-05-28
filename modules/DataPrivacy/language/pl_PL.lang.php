@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Ochrona danych osobowych',
     'LBL_MODULE_NAME_SINGULAR' => 'Ochrona danych osobowych',
     'LBL_NUMBER' => 'Numer',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Brak pól lub rekordów oznaczonych do usunięcia.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Pulpit nawigacyjny rekordów ochrony prywatności danych',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy ochrony prywatności danych',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Oś czasu ochrony danych osobowych',
 
     // list view
     'LBL_HELP_RECORDS' => 'Moduł ochrony danych śledzi działania z zakresu ochrony prywatności, w tym zgody i żądania podmiotów danych w celu obsługi procedur ochrony prywatności danej organizacji. Utwórz rekordy ochrony danych osobowych związane z rekordem danej osoby (np. kontaktu) do śledzenia zgody lub w celu podjęcia działań na żądanie prywatności.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Moduł ochrony danych śledzi działania z zakresu ochrony prywatności, w tym zgody i żądania podmiotów danych w celu obsługi procedur ochrony prywatności danej organizacji. Utwórz rekordy danych ochrony prywatności związane z rekordem danej osoby (np. kontaktu) do śledzenia zgody lub w celu podjęcia działań na żądanie prywatności. Po zakończeniu niezbędnych działań użytkownik pełniący rolę Menedżera prywatności może kliknąć przycisk „Zakończ” lub „Odrzuć”, aby zaktualizować status. 
 
 W przypadku żądań usunięcia danych wybierz „Zaznacz do usunięcia” dla każdego z poszczególnych rekordów wyszczególnionych w panelach podrzędnych poniżej. Gdy wszystkie wymagane pola zostaną zaznaczone, kliknij przycisk „Usuń i zakończ”, aby trwale usunąć wartości pól i oznaczyć rekord prywatności danych jako zakończony.',
-);
+];

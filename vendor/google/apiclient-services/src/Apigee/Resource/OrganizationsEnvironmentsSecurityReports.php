@@ -28,7 +28,7 @@ use Google\Service\Apigee\GoogleCloudApigeeV1SecurityReportResultView;
  * Typical usage is:
  *  <code>
  *   $apigeeService = new Google\Service\Apigee(...);
- *   $securityReports = $apigeeService->securityReports;
+ *   $securityReports = $apigeeService->organizations_environments_securityReports;
  *  </code>
  */
 class OrganizationsEnvironmentsSecurityReports extends \Google\Service\Resource
@@ -71,8 +71,9 @@ class OrganizationsEnvironmentsSecurityReports extends \Google\Service\Resource
    * After the query is completed, use this API to retrieve the results as file.
    * If the request succeeds, and there is a non-zero result set, the result is
    * downloaded to the client as a zipped JSON file. The name of the downloaded
-   * file will be: OfflineQueryResult-.zip Example: `OfflineQueryResult-
-   * 9cfc0d85-0f30-46d6-ae6f-318d0cb961bd.zip` (securityReports.getResult)
+   * file will be: OfflineQueryResult-.zip Example:
+   * `OfflineQueryResult-9cfc0d85-0f30-46d6-ae6f-318d0cb961bd.zip`
+   * (securityReports.getResult)
    *
    * @param string $name Required. Name of the security report result to get. Must
    * be of the form

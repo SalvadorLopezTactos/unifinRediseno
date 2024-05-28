@@ -20,11 +20,11 @@ class SugarLogicFunctionsApi extends SugarApi
      */
     public function registerApiRest()
     {
-        $parentApi = array(
-            'sugarlogic_functions' => array(
+        $parentApi = [
+            'sugarlogic_functions' => [
                 'reqType' => 'GET',
-                'path' => array('ExpressionEngine', 'functions'),
-                'pathVars' => array('', ''),
+                'path' => ['ExpressionEngine', 'functions'],
+                'pathVars' => ['', ''],
                 'method' => 'getSugarLogicFunctions',
                 'shortHelp' => 'Retrieve the js for SugarLogic Expressions and Actions',
                 'longHelp' => '',
@@ -33,8 +33,8 @@ class SugarLogicFunctionsApi extends SugarApi
                 'noEtag' => true,
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
-            ),
-        );
+            ],
+        ];
         return $parentApi;
     }
 
@@ -42,21 +42,21 @@ class SugarLogicFunctionsApi extends SugarApi
      * Will return the javascript for the Sugar Logic expressions and actions installed on this instance.
      *
      * @param ServiceBase $api
-     * @param array       $args
+     * @param array $args
      */
     public function getSugarLogicFunctions(ServiceBase $api, array $args)
     {
         $useDebug = (!shouldResourcesBeMinified() || !empty($args['debug']));
-        $phpCacheFile = sugar_cached("Expressions/functionmap.php");
+        $phpCacheFile = sugar_cached('Expressions/functionmap.php');
         $jsCacheFile = $useDebug ?
-            sugar_cached("Expressions/functions_cache_debug.js") :
+            sugar_cached('Expressions/functions_cache_debug.js') :
             sugar_cached('Expressions/functions_cache.js');
         // @jvink - check with @dwheeler
         if (!file_exists($phpCacheFile) || !file_exists($jsCacheFile)) {
             $GLOBALS['updateSilent'] = true;
-            include("include/Expressions/updatecache.php");
+            include 'include/Expressions/updatecache.php';
         }
-        $api->setHeader("Content-Type", "application/javascript");
+        $api->setHeader('Content-Type', 'application/javascript');
         return sugar_file_get_contents($jsCacheFile);
     }
 }

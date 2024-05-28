@@ -10,9 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- /**
-  * The ViewdefManager is a service designed to read and write viewdef files.
-  */
+/**
+ * The ViewdefManager is a service designed to read and write viewdef files.
+ */
+
 namespace Sugarcrm\Sugarcrm\MetaData;
 
 class ViewdefManager
@@ -80,7 +81,7 @@ class ViewdefManager
      */
     protected function loadDef($path)
     {
-        $viewdefs = array();
+        $viewdefs = [];
         if (!empty($path)) {
             require $path;
         }
@@ -105,10 +106,10 @@ class ViewdefManager
      * Sorts through the output of MetaDataFiles::getClientFiles to find the proper definition file for a viewdef,
      * starting with custom first and working down from there.
      *
-     * @param array<string,array<string,mixed>> $paths      Output from calling {@link MetaDataFiles::getClientFiles}
-     * @param string                            $module     Quotes, Opportunities, etc
-     * @param string                            $view       record, edit, detail, etc
-     * @param bool                              $preferBase Flag to load base value over custom if base exists
+     * @param array<string,array<string,mixed>> $paths Output from calling {@link MetaDataFiles::getClientFiles}
+     * @param string $module Quotes, Opportunities, etc
+     * @param string $view record, edit, detail, etc
+     * @param bool $preferBase Flag to load base value over custom if base exists
      *
      * @return array<string,mixed>|null
      */

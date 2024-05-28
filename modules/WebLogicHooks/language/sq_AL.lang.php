@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Grepat e logjikës së webit',
     'LBL_MODULE_NAME_SINGULAR' => 'Grepat e logjikës së webit',
     'LBL_MODULE_TITLE' => 'Grepat e logjikës së webit',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => 'Metoda e kërkuar',
     'LBL_TRIGGER_EVENT' => 'Event shënues',
     'LBL_URL' => 'URL',
-);
+];

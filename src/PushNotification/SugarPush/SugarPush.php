@@ -65,7 +65,7 @@ class SugarPush implements NotificationService
      * @param string $baseURI The url for SugarPush service
      * @return GuzzleClient
      */
-    protected function getHTTPClient(string $baseURI) : GuzzleClient
+    protected function getHTTPClient(string $baseURI): GuzzleClient
     {
         $proxy = new ProxyMiddleware();
         $auth = new AuthMiddleware();
@@ -86,14 +86,14 @@ class SugarPush implements NotificationService
      *
      * @return string
      */
-    protected function getServiceURL() : string
+    protected function getServiceURL(): string
     {
         $sugarConfig = \SugarConfig::getInstance();
         $pushConfig = $sugarConfig->get('sugar_push');
         [$region, $environment] = $this->getRegionAndEnvironment($sugarConfig);
 
         if (!$region) {
-            return "";
+            return '';
         }
 
         if (!empty($pushConfig['service_urls'][$region])) {
@@ -143,7 +143,7 @@ class SugarPush implements NotificationService
      * @param Response $respone Server response.
      * @return bool
      */
-    protected function isSuccess(Response $response) : bool
+    protected function isSuccess(Response $response): bool
     {
         $success = false;
 
@@ -155,7 +155,7 @@ class SugarPush implements NotificationService
         if (!$success) {
             $log = \LoggerManager::getLogger();
             $statusCode = $response->getStatusCode();
-            $body = (string) $response->getBody();
+            $body = (string)$response->getBody();
             $log->error('sugar push: statusCode: ' . $statusCode . ' body: ' . $body);
         }
 
@@ -169,7 +169,7 @@ class SugarPush implements NotificationService
      * @param string $deviceId The device's ID.
      * @return bool
      */
-    public function register(string $platform, string $deviceId) : bool
+    public function register(string $platform, string $deviceId): bool
     {
         $response = $this->client->request(
             'PUT',
@@ -190,7 +190,7 @@ class SugarPush implements NotificationService
     /**
      * Updates a user's device.
      */
-    public function update(string $platform, string $oldDeviceId, string $newDeviceId = '') : bool
+    public function update(string $platform, string $oldDeviceId, string $newDeviceId = ''): bool
     {
         $post = [
             'application_id' => $this->getApplicationId($platform),
@@ -220,7 +220,7 @@ class SugarPush implements NotificationService
      * @param string $deviceId The device's ID.
      * @return bool
      */
-    public function delete(string $platform, string $deviceId) : bool
+    public function delete(string $platform, string $deviceId): bool
     {
         $response = $this->client->request(
             'DELETE',
@@ -287,7 +287,7 @@ class SugarPush implements NotificationService
      *
      * @return bool
      */
-    public function send(array $userIds, array $message) : bool
+    public function send(array $userIds, array $message): bool
     {
         $data = array_merge(['target_user_id' => implode(',', $userIds)], $message);
 

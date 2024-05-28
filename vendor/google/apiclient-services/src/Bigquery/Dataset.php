@@ -41,6 +41,10 @@ class Dataset extends \Google\Collection
   /**
    * @var string
    */
+  public $defaultRoundingMode;
+  /**
+   * @var string
+   */
   public $defaultTableExpirationMs;
   /**
    * @var string
@@ -90,6 +94,10 @@ class Dataset extends \Google\Collection
    * @var string
    */
   public $selfLink;
+  /**
+   * @var string
+   */
+  public $storageBillingModel;
   protected $tagsType = DatasetTags::class;
   protected $tagsDataType = 'array';
 
@@ -176,6 +184,20 @@ class Dataset extends \Google\Collection
   public function getDefaultPartitionExpirationMs()
   {
     return $this->defaultPartitionExpirationMs;
+  }
+  /**
+   * @param string
+   */
+  public function setDefaultRoundingMode($defaultRoundingMode)
+  {
+    $this->defaultRoundingMode = $defaultRoundingMode;
+  }
+  /**
+   * @return string
+   */
+  public function getDefaultRoundingMode()
+  {
+    return $this->defaultRoundingMode;
   }
   /**
    * @param string
@@ -358,6 +380,20 @@ class Dataset extends \Google\Collection
   public function getSelfLink()
   {
     return $this->selfLink;
+  }
+  /**
+   * @param string
+   */
+  public function setStorageBillingModel($storageBillingModel)
+  {
+    $this->storageBillingModel = $storageBillingModel;
+  }
+  /**
+   * @return string
+   */
+  public function getStorageBillingModel()
+  {
+    return $this->storageBillingModel;
   }
   /**
    * @param DatasetTags[]

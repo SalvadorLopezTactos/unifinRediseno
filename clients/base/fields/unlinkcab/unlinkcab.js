@@ -51,7 +51,14 @@
                 }
             },
             relate: true,
-            success: _.bind(this.reloadData, this)
+            success: _.bind(function() {
+                let parentModel = this.context && this.context.parent &&
+                    this.context.parent.get('model') || null;
+                let parentModule = parentModel ? parentModel.get('_module') : '';
+                let parentId = parentModel ? parentModel.get('id') : '';
+                app.events.trigger('timeline:link:removed', parentModule, parentId, model);
+                this.reloadData();
+            }, this)
         });
     },
 

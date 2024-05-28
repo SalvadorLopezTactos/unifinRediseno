@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Файлът с информация за импорт беше прочетен успешно',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Импортираният запис е част от процес и не може да бъде редактиран, защото някои полета са заключени за редактиране от процеса.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Пропуснати записи поради възникнала грешка',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'В случай че потребителят не съществува, използвайте текущия потребител',
     'LBL_SHOW_HIDDEN' => 'Показване на полета с проблем при импортирането',
     'LBL_UPDATE_RECORDS' => 'Актуализация на съществуващи записи (Не подлежи на отмяна)',
-    'LBL_TEST'=> 'Тестване на импортирането (без запазване и промяна на данни)',
+    'LBL_TEST' => 'Тестване на импортирането (без запазване и промяна на данни)',
     'LBL_TRUNCATE_TABLE' => 'Изчистване на таблицата преди импортиране (изтриване на всички записи)',
     'LBL_RELATED_ACCOUNTS' => 'Да не се създават свързани записи',
     'LBL_NO_DATECHECK' => 'Без сверяване на дати (води до ускоряване на процеса, но с възможност за грешка при невалидни дати)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Невалидна стойност за цели числа',
     'LBL_ERROR_INVALID_NUM' => 'Невалидна стойност за числа',
     'LBL_ERROR_INVALID_TIME' => 'Невалидна стойност за час',
-    'LBL_ERROR_INVALID_EMAIL'=>'Невалиден адрес на електронна поща',
-    'LBL_ERROR_INVALID_BOOL'=>'Невалидна стойност (следва да бъде 1 или 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Невалидна стойност за дата',
-    'LBL_ERROR_INVALID_USER'=>'Невалидно потребителско име или ID',
+    'LBL_ERROR_INVALID_EMAIL' => 'Невалиден адрес на електронна поща',
+    'LBL_ERROR_INVALID_BOOL' => 'Невалидна стойност (следва да бъде 1 или 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Невалидна стойност за дата',
+    'LBL_ERROR_INVALID_USER' => 'Невалидно потребителско име или ID',
     'LBL_ERROR_INVALID_TEAM' => 'Невалидно име на екип или ID',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Невалидно име на организация или ID',
     'LBL_ERROR_INVALID_RELATE' => 'Невалидно релационно поле',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'не съществува или е недостъпна за запис',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Неправилно зареден файл. Възможно е настройките на &#39;upload_max_filesize&#39; във файл php.ini да са с малка стойност',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Файлът е твърде голям. Max:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'байта. Променете $sugar_config[&#39;upload_maxsize&#39;] във файл config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Байтове. Променете $sugar_config[&#39;upload_maxsize&#39;] в config.php',
     'LBL_MODULE_NAME' => 'Импортиране',
     'LBL_MODULE_NAME_SINGULAR' => 'Импорт',
     'LBL_TRY_AGAIN' => 'Нов импорт',
     'LBL_START_OVER' => 'Започни от начало',
     'LBL_ERROR' => 'Грешка:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Импортираният фай съдържа  {0} реда. Оптималният брой редове е {1}. По-големият брой редове може да намали скоростта на процеса на импортиране. Натиснете ОК, за да продължите с импортирането. Натиснете Откажи, за да модифицирате или качите отново файл за импорт.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Не можете да импортирате потребителя на системния администратор',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Не можете да импортирате потребителя на системния администратор',
     'ERR_REPORT_LOOP' => 'Намерено е зацикляне в йерархичната структура. Потребителят не може да докладва сам на себе си, както и началниците не могат да му се отчитат.',
     'ERR_MULTIPLE' => 'Няколко колони са дефинирани с еднакво име на поле.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Пропуснати задължителни полета:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Не бяха открити редове във вашия импортен файл',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Този импортен файл е бил вече обработен или не съществува',
     'LBL_SUCCESS' => 'Успешна операция:',
-	'LBL_FAILURE' => 'Импортът неуспешен:',
+    'LBL_FAILURE' => 'Импортът неуспешен:',
     'LBL_SUCCESSFULLY' => 'успешно импортирани записа',
     'LBL_LAST_IMPORT_UNDONE' => 'Вашето последно импортиране беше отменено',
     'LBL_NO_IMPORT_TO_UNDO' => 'Няма импортиране, което да бъде отменено.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Ново импортиране',
     'LBL_FINISHED' => 'Приключено',
     'LBL_UNDO_LAST_IMPORT' => 'Отмяна на последното импортиране',
-    'LBL_LAST_IMPORTED'=>'Създадено',
+    'LBL_LAST_IMPORTED' => 'Създадено',
     'ERR_MULTIPLE_PARENTS' => 'Можете да определите само едно родителско ID',
     'LBL_DUPLICATES' => 'Намерени дублирани записи',
     'LNK_DUPLICATE_LIST' => 'Зареждане на списък с дублирани записи',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Скрий бележките',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Покажи колоните за преглед',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Скрий колоните за преглед',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Проверка за дубликати с помощта на оператор:',
     'LBL_SAVE_MAPPING_AS' => 'За да запазите текущите настройки за импортиране въведете име:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Кавичка (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Кавички (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'За да присвоите новите записи на екипи, различни от Вашите екипи по подразбиране, използвайте колоната за Стойност по подразбиране, за да изберете други екипи.',
     'LBL_SIGN_IN_HELP' => 'За да активирате тази услуга, моля влезте от табулатора Външни профили в рамките на Вашата страница за потребителски настройки.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Избраният модул не поддържа управление на адреси за електронна поща.",
-);
+];

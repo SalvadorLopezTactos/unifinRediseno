@@ -37,7 +37,7 @@ $viewdefs['Reports']['base']['view']['report-header'] = [
                     'name' => 'main_dropdown',
                     'primary' => true,
                     'showOn' => 'view',
-                    'buttons' =>[
+                    'buttons' => [
                         [
                             'type' => 'rowaction',
                             'event' => 'button:refresh:click',

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_ANY_EMAIL' => 'További Email:',
     'LBL_EMAIL' => 'Email cím:',
     'LBL_PRIMARY_EMAIL' => 'Elsődleges e-mail',
@@ -18,7 +18,7 @@ $mod_strings = array (
     'LBL_OTHER_EMAIL_ADDRESS' => 'További email:',
     'LBL_EMAIL_ADDRESS' => 'Email cím',
     'LBL_EMAIL_ADDRESSES' => 'Email cím(ek)',
-    'LBL_INVALID_EMAIL'=>'Érvénytelen email:',
+    'LBL_INVALID_EMAIL' => 'Érvénytelen email:',
     'LBL_EMAIL_OPT_OUT' => 'Leiratkozva az emailről:',
     'LBL_EMAIL_NON_PRIMARY' => 'Nem elsődleges emailek',
-);
+];

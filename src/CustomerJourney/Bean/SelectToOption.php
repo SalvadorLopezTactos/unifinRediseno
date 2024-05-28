@@ -20,7 +20,6 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Exception as CJException;
  */
 class SelectToOption
 {
-
     private static $separator = '|';
     private static $dropdownName = 'cj_select_to_options_list';
     private static $moduleMappingDropdownName = 'cj_select_to_options_list_module_mapping';
@@ -184,10 +183,10 @@ class SelectToOption
                 $type = $relationShipObject->true_relationship_type ?? $relationShipObject->relationship_type;
 
                 if ((((empty($linkField['module']) || $linkField['module'] !== 'Contacts') &&
-                        ($relationShipObject->getRHSModule() === 'Contacts' ||
-                        $relationShipObject->getLHSModule() === 'Contacts')) ||
+                            ($relationShipObject->getRHSModule() === 'Contacts' ||
+                                $relationShipObject->getLHSModule() === 'Contacts')) ||
                         (isset($linkField['module']) && $linkField['module'] === 'Contacts')) &&
-                        ($type === 'many-to-many' || $type === 'one-to-many')) {
+                    ($type === 'many-to-many' || $type === 'one-to-many')) {
                     $parentRecord->{$linkField['name']}->resetLoaded();
                     $parentRecord->{$linkField['name']}->load([
                         'deleted' => 0,
@@ -271,13 +270,13 @@ class SelectToOption
 
         $join = $sugarQuery->joinTable('email_addr_bean_rel', ['alias' => 'ear', 'joinType' => 'INNER', 'linkingTable' => true]);
         $join->on()
-                ->equalsField($sugarQuery->getFromAlias() . '.id', 'ear.email_address_id')
-                ->equals('ear.deleted', 0)
-                ->equals('ear.bean_module', $module)
-                ->in('ear.bean_id', $ids);
+            ->equalsField($sugarQuery->getFromAlias() . '.id', 'ear.email_address_id')
+            ->equals('ear.deleted', 0)
+            ->equals('ear.bean_module', $module)
+            ->in('ear.bean_id', $ids);
         $sugarQuery->where()
-                ->equals('opt_out', 0)
-                ->equals('invalid_email', 0);
+            ->equals('opt_out', 0)
+            ->equals('invalid_email', 0);
         $sugarQuery->select(['email_address', 'ear.bean_id', 'ear.bean_module']);
 
         return $sugarQuery;
@@ -326,7 +325,7 @@ class SelectToOption
         $sugarQuery->from($fromBean, ['team_security' => false]);
 
         $sugarQuery->where()
-                ->in('id', $ids);
+            ->in('id', $ids);
         $sugarQuery->select(['first_name', 'last_name', 'id']);
 
         return $sugarQuery;

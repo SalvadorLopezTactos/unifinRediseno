@@ -12,13 +12,24 @@
 
 namespace Sugarcrm\Sugarcrm\PackageManager\File;
 
+use FilesystemIterator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use RegexIterator;
+use SugarConfig;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\FeatureToggle\FeatureFlag;
+use Sugarcrm\Sugarcrm\FeatureToggle\Features\TranslateMLPCode;
 use Sugarcrm\Sugarcrm\PackageManager\Exception\NoPackageFileException;
 use Sugarcrm\Sugarcrm\PackageManager\Exception\NoUploadFileException;
+use Sugarcrm\Sugarcrm\PackageManager\Exception\PackageConvertingException;
 use Sugarcrm\Sugarcrm\PackageManager\Exception\PackageExistsException;
 use Sugarcrm\Sugarcrm\PackageManager\Exception\UnableExtractFileException;
 use Sugarcrm\Sugarcrm\PackageManager\Exception\NoPackageManifestFileException;
+use Sugarcrm\Sugarcrm\Security\ModuleScanner\SweetTranslator;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 use Sugarcrm\Sugarcrm\Util\Files\FilePhpEntriesConverter;
+use SugarException;
 use ZipArchive;
 use RuntimeException;
 
@@ -119,8 +130,16 @@ class PackageZipFile
         }
 
         if (strpos($zipFile, \UploadStream::getDir()) !== false) {
-            $this->zipFile = $this->fileConverter->revert($zipFile);
-            register_shutdown_function([$this, 'unlinkZip']);
+            try {
+                //We should abort the process in case if file converter returns SugarException
+                $this->zipFile = $this->fileConverter->revert($zipFile);
+
+                register_shutdown_function([$this, 'unlinkZip']);
+            } catch (SugarException $e) {
+                $exception = new PackageConvertingException();
+                $exception->setErrorDescription($e->getMessage());
+                throw $exception;
+            }
         } else {
             $this->zipFile = $zipFile;
         }
@@ -160,6 +179,14 @@ class PackageZipFile
         if ($result !== true) {
             throw new UnableExtractFileException('ERR_UW_UNABLE_EXTRACT_FILE', [intval($result), $archive->status]);
         }
+
+        if (SugarConfig::getInstance()->get('moduleInstaller.packageScan', false)) {
+            $features = Container::getInstance()->get(FeatureFlag::class);
+            if ($features->isEnabled(TranslateMLPCode::getName())) {
+                $this->translateCode();
+            }
+        }
+
         $this->isFullPackageExtracted = true;
     }
 
@@ -327,5 +354,26 @@ class PackageZipFile
     public function unlinkZip(): void
     {
         unlink($this->zipFile);
+    }
+
+    /**
+     * @return void
+     */
+    protected function translateCode(): void
+    {
+        $recursiveIterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator(
+                $this->packageDir,
+                FilesystemIterator::SKIP_DOTS | FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::CURRENT_AS_FILEINFO
+            )
+        );
+        $regex = '/^.+\.php$/i';
+        foreach (new RegexIterator($recursiveIterator, $regex) as $phpFile) {
+            $code = file_get_contents($phpFile);
+            $translatedCode = SweetTranslator::translate($code);
+            if (false === sugar_file_put_contents($phpFile, $translatedCode)) {
+                throw new \RuntimeException("Failed to write translated code into $phpFile");
+            }
+        }
     }
 }

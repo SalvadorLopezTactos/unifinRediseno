@@ -10,40 +10,40 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['dashletselect'] = array(
+$viewdefs['base']['view']['dashletselect'] = [
     'template' => 'filtered-list',
-    'panels' => array(
-        array(
-            'fields' => array(
-                array(
+    'panels' => [
+        [
+            'fields' => [
+                [
                     'label' => 'LBL_DASHLET_CONFIGURE_TITLE',
                     'name' => 'title',
                     'type' => 'text',
                     'link' => true,
-                    'events' => array(
+                    'events' => [
                         'click a' => 'dashletlist:select-and-edit',
-                    ),
+                    ],
                     'filter' => 'startsWith',
                     'sortable' => true,
-                ),
-                array(
+                ],
+                [
                     'label' => 'LBL_DESCRIPTION',
                     'name' => 'description',
                     'type' => 'text',
                     'filter' => 'contains',
                     'sortable' => true,
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'tooltip' => 'LBL_PREVIEW',
                     'event' => 'dashletlist:preview:fire',
-                    'css_class' => 'btn border-none bg-none no-inset',
+                    'css_class' => 'btn !border-0 bg-none no-inset',
                     'icon' => 'sicon-preview',
                     'width' => '2.75rem',
                     'widthClass' => 'cell-xsmall',
                     'sortable' => false,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

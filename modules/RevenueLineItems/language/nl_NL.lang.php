@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Dashboard Lijst regelitems omzet',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Dashboard Record regelitems omzet',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Producttypes',
     'LBL_ASSIGNED_TO_NAME' => 'Toegewezen aan:',
     'LBL_ASSIGNED_TO' => 'Toegewezen aan',
-    'LBL_ASSIGNED_TO_ID'=>'Toegewezen aan ID',
+    'LBL_ASSIGNED_TO_ID' => 'Toegewezen aan ID',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Toegewezen aan',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Toegewezen aan ID',
     'LBL_CAMPAIGN_ID' => 'Campagne ID',
@@ -217,4 +217,5 @@ Om een {{module_name}} aan te maken:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Toont de top 10 Revenue Line Items in een &#39;bubble&#39; diagram.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Mijn Opportunityregel',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Mijn Team Revenue Line Items",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn regelitem Omzet',
+];

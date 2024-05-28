@@ -16,7 +16,6 @@ use User;
 
 class Tracker
 {
-
     /**
      * Keeping the track of user's activeness
      *
@@ -35,10 +34,12 @@ class Tracker
 
             if ($lastActive < $date) {
                 $user->customer_journey_last_active = $timeDate->nowDb();
+                $user->update_date_modified = false;
                 $user->save();
             }
         } else {
             $user->customer_journey_last_active = $timeDate->nowDb();
+            $user->update_date_modified = false;
             $user->save();
         }
     }

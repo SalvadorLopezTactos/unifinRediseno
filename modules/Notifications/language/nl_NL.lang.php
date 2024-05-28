@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_ASSIGNED_TO_ID' => 'Toegewezen aan ID',
     'LBL_ASSIGNED_TO_NAME' => 'Toegewezen aan',
     'LBL_ID' => 'ID',
@@ -52,4 +52,4 @@ $mod_strings = array(
     'LBL_UNREAD' => 'Ongelezen',
     'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'U bent vermeld door',
     'LBL_YOU_HAVE_BEEN_MENTIONED' => 'U bent vermeld',
-);
+];

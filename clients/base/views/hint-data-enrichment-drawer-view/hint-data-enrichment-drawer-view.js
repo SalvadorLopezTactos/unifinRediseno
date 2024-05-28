@@ -318,8 +318,8 @@
         });
 
         //Listen to tab changes for the tab events (module changed)
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-            var target = $(e.target).attr('href'); // activated tab
+        $('li[data-bs-toggle="tab"]').on('shown.bs.tab', function(e) {
+            var target = $(e.target).attr('data-bs-target'); // activated tab
             var module = target.substring(1).charAt(0).toUpperCase() + target.substring(2);
 
             self._hidePanelsForOtherModules(module);

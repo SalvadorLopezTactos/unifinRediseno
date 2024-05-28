@@ -9,49 +9,49 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Emails']['base']['filter']['default'] = array(
+$viewdefs['Emails']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'state' => array(
+    'fields' => [
+        'name' => [],
+        'state' => [
             'vname' => 'LBL_LIST_STATUS',
-        ),
-        'date_sent' => array(
+        ],
+        'date_sent' => [
             'vname' => 'LBL_LIST_DATE_COLUMN',
-        ),
-        'assigned_user_name' => array(),
-        'parent_name' => array(),
-        'direction' => array(),
-        'tag' => array(),
-        'mailbox_name' => array(),
-        'total_attachments' => array(),
-        '$owner' => array(
+        ],
+        'assigned_user_name' => [],
+        'parent_name' => [],
+        'direction' => [],
+        'tag' => [],
+        'mailbox_name' => [],
+        'total_attachments' => [],
+        '$owner' => [
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',
-        ),
-        '$favorite' => array(
+        ],
+        '$favorite' => [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        ),
-        'from_collection' => array(
+        ],
+        'from_collection' => [
             'type' => 'email-recipients',
             'decorate_invalid' => false,
             'decorate_opt_out' => false,
-        ),
-        'to_collection' => array(
+        ],
+        'to_collection' => [
             'type' => 'email-recipients',
             'decorate_invalid' => false,
             'decorate_opt_out' => false,
-        ),
-        'cc_collection' => array(
+        ],
+        'cc_collection' => [
             'type' => 'email-recipients',
             'decorate_invalid' => false,
             'decorate_opt_out' => false,
-        ),
-        'bcc_collection' => array(
+        ],
+        'bcc_collection' => [
             'type' => 'email-recipients',
             'decorate_invalid' => false,
             'decorate_opt_out' => false,
-        ),
-    ),
-);
+        ],
+    ],
+];

@@ -11,30 +11,30 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = '<module_name>';
-$viewdefs[$module_name]['mobile']['view']['edit'] = array(
-	'templateMeta' => array('maxColumns' => '1',
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'),
-                                            array('label' => '10', 'field' => '30')
-                                            ),
-                            ),
+$viewdefs[$module_name]['mobile']['view']['edit'] = [
+    'templateMeta' => ['maxColumns' => '1',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
 
 
-	'panels' => array (
-		array (
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
+            'fields' => [
                 'name',
                 'phone_office',
-                array (
-                    'name'=>'website',
-                    'type'=>'link',
-                ),
+                [
+                    'name' => 'website',
+                    'type' => 'link',
+                ],
                 'email1',
                 'tag',
                 'assigned_user_name',
                 'team_name',
-            ),
-  		),
-	),
-);
+            ],
+        ],
+    ],
+];

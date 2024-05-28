@@ -29,9 +29,9 @@ class Ldap implements LdapInterface, LoggerAwareInterface
 
     private $adapter;
 
-    private static $adapterMap = array(
+    private static $adapterMap = [
         'ext_ldap' => \Symfony\Component\Ldap\Adapter\ExtLdap\Adapter::class,
-    );
+    ];
 
     public function __construct(AdapterInterface $adapter)
     {
@@ -54,7 +54,7 @@ class Ldap implements LdapInterface, LoggerAwareInterface
     /**
      * {@inheritdoc}
      */
-    public function query($dn, $query, array $options = array())
+    public function query($dn, $query, array $options = [])
     {
         $this->logger->debug(sprintf('LDAP: querying with DN=%s and query=%s', $dn, $query));
 
@@ -81,11 +81,11 @@ class Ldap implements LdapInterface, LoggerAwareInterface
      * Creates a new Ldap instance.
      *
      * @param string $adapter The adapter name
-     * @param array  $config  The adapter's configuration
+     * @param array $config The adapter's configuration
      *
      * @return static
      */
-    public static function create($adapter, array $config = array())
+    public static function create($adapter, array $config = [])
     {
         if (!isset(self::$adapterMap[$adapter])) {
             throw new DriverNotFoundException(sprintf(

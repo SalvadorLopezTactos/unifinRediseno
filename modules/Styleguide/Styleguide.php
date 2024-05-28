@@ -17,71 +17,71 @@ class Styleguide extends Person
     public $module_name = 'Styleguide';
     public $module_dir = 'Styleguide';
     public $object_name = 'Styleguide';
-    var $id;
-    var $name;
-    var $date_entered;
-    var $date_modified;
-    var $modified_user_id;
-    var $modified_by_name;
-    var $created_by;
-    var $created_by_name;
-    var $description;
-    var $deleted;
-    var $created_by_link;
-    var $modified_user_link;
-    var $activities;
-    var $team_id;
-    var $team_set_id;
-    var $team_count;
-    var $team_name;
-    var $team_link;
-    var $team_count_link;
-    var $teams;
-    var $assigned_user_id;
-    var $assigned_user_name;
-    var $assigned_user_link;
-    var $salutation;
-    var $first_name;
-    var $last_name;
-    var $full_name;
-    var $title;
-    var $facebook;
-    var $twitter;
-    var $googleplus;
-    var $department;
-    var $do_not_call;
-    var $phone_home;
-    var $email;
-    var $phone_mobile;
-    var $phone_work;
-    var $phone_other;
-    var $phone_fax;
-    var $email1;
-    var $email2;
-    var $invalid_email;
-    var $email_opt_out;
-    var $primary_address_street;
-    var $primary_address_street_2;
-    var $primary_address_street_3;
-    var $primary_address_city;
-    var $primary_address_state;
-    var $primary_address_postalcode;
-    var $primary_address_country;
-    var $alt_address_street;
-    var $alt_address_street_2;
-    var $alt_address_street_3;
-    var $alt_address_city;
-    var $alt_address_state;
-    var $alt_address_postalcode;
-    var $alt_address_country;
-    var $assistant;
-    var $assistant_phone;
-    var $email_addresses_primary;
-    var $email_addresses;
-    var $picture;
-    var $date_start;
-    var $birthdate;
-    var $radio_button_group;
+    public $id;
+    public $name;
+    public $date_entered;
+    public $date_modified;
+    public $modified_user_id;
+    public $modified_by_name;
+    public $created_by;
+    public $created_by_name;
+    public $description;
+    public $deleted;
+    public $created_by_link;
+    public $modified_user_link;
+    public $activities;
+    public $team_id;
+    public $team_set_id;
+    public $team_count;
+    public $team_name;
+    public $team_link;
+    public $team_count_link;
+    public $teams;
+    public $assigned_user_id;
+    public $assigned_user_name;
+    public $assigned_user_link;
+    public $salutation;
+    public $first_name;
+    public $last_name;
+    public $full_name;
+    public $title;
+    public $facebook;
+    public $twitter;
+    public $googleplus;
+    public $department;
+    public $do_not_call;
+    public $phone_home;
+    public $email;
+    public $phone_mobile;
+    public $phone_work;
+    public $phone_other;
+    public $phone_fax;
+    public $email1;
+    public $email2;
+    public $invalid_email;
+    public $email_opt_out;
+    public $primary_address_street;
+    public $primary_address_street_2;
+    public $primary_address_street_3;
+    public $primary_address_city;
+    public $primary_address_state;
+    public $primary_address_postalcode;
+    public $primary_address_country;
+    public $alt_address_street;
+    public $alt_address_street_2;
+    public $alt_address_street_3;
+    public $alt_address_city;
+    public $alt_address_state;
+    public $alt_address_postalcode;
+    public $alt_address_country;
+    public $assistant;
+    public $assistant_phone;
+    public $email_addresses_primary;
+    public $email_addresses;
+    public $picture;
+    public $date_start;
+    public $birthdate;
+    public $radio_button_group;
 
     public $list_price;
     public $currency_id;
@@ -95,7 +95,7 @@ class Styleguide extends Person
     /**
      * This overrides the default retrieve function setting the default to encode to false
      */
-    function retrieve($id='-1', $encode=false,$deleted=true)
+    public function retrieve($id = '-1', $encode = false, $deleted = true)
     {
         return parent::retrieve($id, false, $deleted);
     }
@@ -104,7 +104,7 @@ class Styleguide extends Person
      * This overrides the default save function setting assigned_user_id
      * @see SugarBean::save()
      */
-    function save($check_notify = FALSE)
+    public function save($check_notify = false)
     {
         $this->assigned_user_id = $GLOBALS['current_user']->id;
         return parent::save($check_notify);

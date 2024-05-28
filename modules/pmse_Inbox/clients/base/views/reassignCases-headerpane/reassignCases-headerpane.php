@@ -11,21 +11,21 @@
  */
 
 $module_name = 'pmse_Inbox';
-$viewdefs[$module_name]['base']['view']['reassignCases-headerpane'] = array(
+$viewdefs[$module_name]['base']['view']['reassignCases-headerpane'] = [
     'template' => 'headerpane',
-    'title'    => 'LBL_PMSE_TITLE_ACTIVITY_TO_REASSIGN',
-    'buttons'  => array(
-        array(
-            'name'      => 'cancel_button',
-            'type'      => 'button',
-            'label'     => 'LBL_CANCEL_BUTTON_LABEL',
+    'title' => 'LBL_PMSE_TITLE_ACTIVITY_TO_REASSIGN',
+    'buttons' => [
+        [
+            'name' => 'cancel_button',
+            'type' => 'button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
-        ),
-        array(
-            'name'      => 'done_button',
-            'type'      => 'button',
-            'label'     => 'LBL_DONE_BUTTON_LABEL',
+        ],
+        [
+            'name' => 'done_button',
+            'type' => 'button',
+            'label' => 'LBL_DONE_BUTTON_LABEL',
             'css_class' => 'btn-primary',
-        )
-    ),
-);
+        ],
+    ],
+];

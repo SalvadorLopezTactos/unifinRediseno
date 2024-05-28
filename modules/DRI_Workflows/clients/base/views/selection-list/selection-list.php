@@ -13,8 +13,7 @@ $viewdefs['DRI_Workflows']['base']['view']['selection-list'] = [
     'panels' => [
         [
             'label' => 'LBL_PANEL_1',
-            'fields' =>
-            [
+            'fields' => [
                 [
                     'name' => 'name',
                     'label' => 'LBL_NAME',
@@ -47,8 +46,7 @@ $viewdefs['DRI_Workflows']['base']['view']['selection-list'] = [
             ],
         ],
     ],
-    'orderBy' =>
-    [
+    'orderBy' => [
         'field' => 'date_modified',
         'direction' => 'desc',
     ],

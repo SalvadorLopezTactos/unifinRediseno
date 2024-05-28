@@ -11,54 +11,54 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['rssfeed'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['base']['view']['rssfeed'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_RSS_FEED_DASHLET',
             'description' => 'LBL_RSS_FEED_DASHLET_DESCRIPTION',
-            'config' => array(
+            'config' => [
                 'limit' => 5,
                 'auto_refresh' => 0,
-            ),
-            'preview' => array(
+            ],
+            'preview' => [
                 'limit' => 5,
                 'auto_refresh' => 0,
                 'feed_url' => 'http://blog.sugarcrm.com/feed/',
-            ),
+            ],
             'filter' => [
                 'blacklist' => [
                     'module' => 'Administration',
                 ],
             ],
-        ),
-    ),
-    'panels' => array(
-        array(
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_body',
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'feed_url',
                     'label' => 'LBL_RSS_FEED_URL',
                     'type' => 'text',
                     'span' => 12,
                     'required' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'limit',
                     'label' => 'LBL_RSS_FEED_ENTRIES_COUNT',
                     'type' => 'enum',
                     'options' => 'tasks_limit_options',
-                ),
-                array(
+                ],
+                [
                     'name' => 'auto_refresh',
                     'label' => 'LBL_DASHLET_REFRESH_LABEL',
                     'type' => 'enum',
                     'options' => 'sugar7_dashlet_reports_auto_refresh_options',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

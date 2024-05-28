@@ -20,7 +20,7 @@ namespace Sugarcrm\Sugarcrm\Elasticsearch\Query\Parser;
 class TermParserHelper
 {
     protected $defaultOperator;
-    
+
     /**
      * consts definition for operators
      */
@@ -32,21 +32,20 @@ class TermParserHelper
      * list of valid operators
      * @var array
      */
-    protected static $operators = array(
+    protected static $operators = [
         self::OPERATOR_AND,
         self::OPERATOR_OR,
         self::OPERATOR_NOT,
         '&',
         '|',
         '-',
-    );
+    ];
 
     /**
      * static class, not ctor is provided
      */
     private function __construct()
     {
-
     }
 
     /**
@@ -73,7 +72,7 @@ class TermParserHelper
      */
     public static function isAndOperator($operator)
     {
-        return is_string($operator) && in_array($operator, array(self::OPERATOR_AND, '&'));
+        return is_string($operator) && in_array($operator, [self::OPERATOR_AND, '&']);
     }
 
     /**
@@ -83,7 +82,7 @@ class TermParserHelper
      */
     public static function isOrOperator($operator)
     {
-        return is_string($operator) && in_array($operator, array(self::OPERATOR_OR, '|'));
+        return is_string($operator) && in_array($operator, [self::OPERATOR_OR, '|']);
     }
 
     /**
@@ -93,7 +92,7 @@ class TermParserHelper
      */
     public static function isNotOperator($operator)
     {
-        return is_string($operator) && in_array($operator, array(self::OPERATOR_NOT, '-'));
+        return is_string($operator) && in_array($operator, [self::OPERATOR_NOT, '-']);
     }
 
     /**

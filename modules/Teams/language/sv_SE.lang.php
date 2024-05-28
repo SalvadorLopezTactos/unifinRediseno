@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Ett objektnummer måste specificeras för att lägga till användare till teamet.',
     'ERR_DUP_NAME' => 'Team namnet existerar redan, var snäll och välj en annan.',
     'ERR_DELETE_RECORD' => 'Ett objektnummer måste specificeras för att radera teamet.',
@@ -67,18 +67,18 @@ $mod_strings = array(
 Genom att inaktivera team-baserade rättigheter till en modul betyder att modulen omvanldar alla data associerade med de team-baserade rättigheterna för denna modul liksom alla processdefinitioner eller processer som använder sig av dessa. Detta innefattar även roller som används under "Owner & Selected team" för denna modul och alla team-baserade rättigheter till data i denna modul.
 Vi rekommenderar också att Du använder Dig av Quick Repair och Rebuild-verktygen för att rensa systemcachen efter att ha inaktiverat rättigheter för alla moduler.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Warning:</strong> Genom att spärra team-baserade rättigheter för en modul kommer alla data som hör ihop med team-baserade rättigheter för denna modul att återgå till grundinställningen liksom alla processdefinitioner eller processer som använder dessa. Detta innefattar även alla roller som används av "Ägare & utvalda team"-alternativet för denna modul och alla team-baserade rättigheter till data i denna modul. Vi rekommenderar också att 'du använder Snabbreparations- och Återuppbyggnadsverktygen för att tömma systemcache efter att ha spärrat team-baserade rättigheter för en modul.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Genom att inaktivera teambaserade rättigheter till en modul betyder det att modulen omvandlar alla data associerade med de teambaserade rättigheterna för denna modul liksom alla processdefinitioner eller processer som använder sig av dessa. Detta innefattar även roller som används under "Owner & Selected team" för denna modul och alla teambaserade rättigheter till data i denna modul.
 Vi rekommenderar också att Du använder Dig av Quick Repair och Rebuild-verktygen för att rensa systemcachen efter att ha inaktiverat rättigheter för alla moduler.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Warning:</strong> Genom att spärra teambaserade rättigheter för en modul kommer alla data som hör ihop med teambaserade rättigheter för denna modul att återgå till grundinställningen liksom alla processdefinitioner eller processer som använder dessa. Detta innefattar även alla roller som används av "Ägare & utvalda team"-alternativet för denna modul och alla teambaserade rättigheter till data i denna modul. Vi rekommenderar också att Du använder Snabbreparations- och Återuppbyggnadsverktygen för att tömma systemcachen efter att ha spärrat teambaserade rättigheter för en modul.
 STR
-,
-);
+    ,
+];

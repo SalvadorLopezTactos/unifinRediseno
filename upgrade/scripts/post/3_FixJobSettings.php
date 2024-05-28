@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Update config.php settings
  * @see BR-1868
@@ -35,6 +36,5 @@ class SugarUpgradeFixJobSettings extends UpgradeScript
         if (!isset($this->upgrader->config['cron']['enforce_runtime'])) {
             $this->upgrader->config['cron']['enforce_runtime'] = false;
         }
-
     }
 }

@@ -9,19 +9,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['OAuthKeys']['EditView'] = array(
-    'templateMeta' => array('maxColumns' => '2',
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'),
-                                            array('label' => '10', 'field' => '30')
-                                            ),
- ),
- 'panels' =>array (
-  'default' =>
-  array (
-      array('name','oauth_type'),
-    array ('c_key', 'client_type'),
-    array('c_secret','description'),
-  ),
-),
-);
+$viewdefs['OAuthKeys']['EditView'] = [
+    'templateMeta' => ['maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        'default' => [
+            ['name', 'oauth_type'],
+            ['c_key', 'client_type'],
+            ['c_secret', 'description'],
+        ],
+    ],
+];

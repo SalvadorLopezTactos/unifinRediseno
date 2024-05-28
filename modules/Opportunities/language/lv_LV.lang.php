@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Darījumu saraksta instrumentu panelis',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Darījumu ierakstu instrumentu panelis',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Piedāvājumi',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Darījumi pēc dinamiskā uzņēmuma',
+    'LBL_TOP_10_OPP' => 'Top 10 atvērtie darījumi',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Dašlets: Mani aktīvie darījumi',
+    'LBL_MY_ACTIVE_OPP' => 'Mani aktīvie darījumi',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Piltuves kopsumma ir',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Iespējas loma',
+    'LBL_OPPORTUNITY_ROLE' => 'Iespējas loma',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Piezīmes',
     'LBL_TAB_OPPORTUNITY' => '{{module}} apskate',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'Spiežot apstiprināt tiks izdzēsti VISI prognožu dati un mainīts jūsu Pārdošanas iespēju skats. Ja tas nav, tas ko vēlaties, spiediet Atcelt un atgriezties pie iepriekšējiem uzstādījumiem.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'Noklikšķinot uz "Apstiprināt", tiks izdzēsti VISI prognozes dati, kā arī mainīts Darījumu skatījums. '
-        .'Tāpat tiks atspējotas VISAS procesu definīcijas ar ieņēmumu posteņu mērķa moduli. '
-        .'Ja tas nav tas, ko vēlējāties, spiediet Atcelt un atgriezties pie iepriekšējiem iestatījumiem.',
+        . 'Tāpat tiks atspējotas VISAS procesu definīcijas ar ieņēmumu posteņu mērķa moduli. '
+        . 'Ja tas nav tas, ko vēlējāties, spiediet Atcelt un atgriezties pie iepriekšējiem iestatījumiem.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Ja visas ieņēmumu rindas ir aizvērtas un vismaz viena vinnēta,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'iespējas pārdošanas fāze tiek iestatīta uz "Aizvērts - iegūts"',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Ja visas ieņēmumu rindas ir statusā Aizvērts zaudēts',
@@ -220,7 +223,7 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Pēc tam, kad jūs uzsāksiet šo izmaiņu, fonā tiks izveidoti ieņēmumu posteņu ieraksti katram esošajam {{module_name}}. Kad ieņēmumu posteņi tiks pabeigti un būs pieejami, paziņojums tiks nosūtīts uz e-pasta adresi jūsu lietotāja profilā. Lūdzu, ņemiet vērā, ka jūsu instancei ir jābūt konfigurētai uz e-pastu nosūtīšanu caur Admin > e-pasta iestatījumiem, lai paziņojumi tiktu nosūtīti.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulis {{plural_module_name}} ļauj sekot atsevišķiem pārdošanas darījumiem no sākuma līdz beigām. Katrs moduļa {{module_name}} ieraksts ir kāda produkta potenciāls pārdošanas darījums, un tas ietver atbilstošu pārdošanas informāciju, kā arī ir saistīts ar citiem svarīgiem ierakstiem, piemēram, moduļiem {{quotes_module}}, {{contacts_module}} u. c. Modulis {{module_name}} parasti iziet vairākus pārdošanas posmus, līdz tas tiek atzīmēts kā „Aizvērts-iegūts” vai „Aizvērts bez panākumiem”. Moduļa {{plural_module_name}} izmantošanu var vēl vairāk uzlabot, izmantojot „Sugar” moduli {{forecasts_singular_module}}, ar kura palīdzību var saprast un prognozēt pārdošanas tendences, kā arī koncentrēt darbu uz pārdošanas kvotu sasniegšanu.',
+    'LBL_HELP_RECORDS' => 'Modulis {{plural_module_name}} ļauj sekot atsevišķiem pārdošanas darījumiem no sākuma līdz beigām. Katrs moduļa {{module_name}} ieraksts ir kāda produkta potenciāls pārdošanas darījums, un tas ietver atbilstošu pārdošanas informāciju, kā arī ir saistīts ar citiem svarīgiem ierakstiem, piemēram, moduļiem {{quotes_module}}, {{contacts_module}} u. c. Modulis {{module_name}} parasti iziet vairākus pārdošanas posmus, līdz tas tiek atzīmēts kā „Aizvērts-iegūts” vai „Aizvērts-zaudēts”. Moduļa {{plural_module_name}} izmantošanu var vēl vairāk uzlabot, izmantojot Sugar moduli {{forecasts_singular_module}}, ar kura palīdzību var saprast un prognozēt pārdošanas tendences, kā arī koncentrēt darbu uz pārdošanas kvotu sasniegšanu.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Modulis {{plural_module_name}} ļauj sekot atsevišķiem pārdošanas darījumiem un tiem piederošajiem produktiem no sākuma līdz beigām. Katrs moduļa {{module_name}} ieraksts ir potenciāls pārdošanas darījums un ietver atbilstošus pārdošanas datus, kā arī ir saistīts ar citiem svarīgiem ierakstiem, piemēram, moduļiem {{quotes_module}}, {{contacts_module}}, utt.
@@ -260,4 +263,9 @@ Lai izveidotu moduli {{module_name}}:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Darījuma noslēgšanas prognoze',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Apskatīt prognozes informāciju par konkrētu darījumu',
-);
+    'LBL_AI_WINRATE' => 'Iegūto darījumu līmenis',
+    'LBL_AI_WONOPP' => 'Iegūtie darījumi',
+    'LBL_AI_CLOSINGTIME' => 'Slēgšanas laiks',
+    'LBL_AI_CLOSEDOPP' => 'Slēgtie darījumi',
+    'LBL_AI_LEADTIMESPAN' => 'Laiks starp darījuma izveidi un iegūtā darījuma slēgšanu',
+];

@@ -9,61 +9,59 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- 
 
-$popupMeta = array (
-	'moduleMain' => 'Quote',
-	'varName' => 'QUOTE',
-	'orderBy' => 'name',
-	'whereClauses' => array (
-		'name' => 'quotes.name',
-		'account_name' => 'accounts.name', 
-		'date_quote_expected_closed' => 'quotes.date_quote_expected_closed',
-	),
-	'searchInputs' => array('name', 'account_name'),
-	'listviewdefs' => array(
-											'QUOTE_NUM' => array(
-												'width' => '10',  
-												'label' => 'LBL_LIST_QUOTE_NUM', 
-												'link' => false,
-										        'default' => true),
-											'NAME' => array(
-												'width' => '25', 
-												'label' => 'LBL_LIST_QUOTE_NAME',
-												'link' => true, 
-										        'default' => true),
-										    'BILLING_ACCOUNT_NAME' => array(
-												'width' => '20',  
-												'label' => 'LBL_LIST_ACCOUNT_NAME',
-										        'id' => 'ACCOUNT_ID',
-										        'module'  => 'Accounts',  
-												'link' => true,      
-										        'default' => true), 
-											'QUOTE_STAGE' => array(
-												'width' => '10', 
-												'label' => 'LBL_LIST_QUOTE_STAGE', 
-										        'link' => false,
-										        'default' => true        
-											),
-											'PURCHASE_ORDER_NUM' => array(
-												'width' => '25', 
-												'label' => 'LBL_PURCHASE_ORDER_NUM', 
-										        'default' => true),
-											'ASSIGNED_USER_NAME' => array(
-												'width' => '10', 
-												'label' => 'LBL_LIST_ASSIGNED_USER',
-										        'link' => false,
-										        'default' => true        
-										        ),
-											),
-						'searchdefs'   => array(
-										 	'quote_num', 
-											'name', 
-											array('name' => 'billing_account_name', 'displayParams' => array('hideButtons'=>'true', 'size'=>30, 'class'=>'sqsEnabled sqsNoAutofill')),
-											'quote_stage',
-											'purchase_order_num',
-											array('name' => 'assigned_user_id', 'type' => 'enum', 'label' => 'LBL_ASSIGNED_TO', 'function' => array('name' => 'get_user_array', 'params' => array(false))),
-										  )
-);
 
-?>
+$popupMeta = [
+    'moduleMain' => 'Quote',
+    'varName' => 'QUOTE',
+    'orderBy' => 'name',
+    'whereClauses' => [
+        'name' => 'quotes.name',
+        'account_name' => 'accounts.name',
+        'date_quote_expected_closed' => 'quotes.date_quote_expected_closed',
+    ],
+    'searchInputs' => ['name', 'account_name'],
+    'listviewdefs' => [
+        'QUOTE_NUM' => [
+            'width' => '10',
+            'label' => 'LBL_LIST_QUOTE_NUM',
+            'link' => false,
+            'default' => true],
+        'NAME' => [
+            'width' => '25',
+            'label' => 'LBL_LIST_QUOTE_NAME',
+            'link' => true,
+            'default' => true],
+        'BILLING_ACCOUNT_NAME' => [
+            'width' => '20',
+            'label' => 'LBL_LIST_ACCOUNT_NAME',
+            'id' => 'ACCOUNT_ID',
+            'module' => 'Accounts',
+            'link' => true,
+            'default' => true],
+        'QUOTE_STAGE' => [
+            'width' => '10',
+            'label' => 'LBL_LIST_QUOTE_STAGE',
+            'link' => false,
+            'default' => true,
+        ],
+        'PURCHASE_ORDER_NUM' => [
+            'width' => '25',
+            'label' => 'LBL_PURCHASE_ORDER_NUM',
+            'default' => true],
+        'ASSIGNED_USER_NAME' => [
+            'width' => '10',
+            'label' => 'LBL_LIST_ASSIGNED_USER',
+            'link' => false,
+            'default' => true,
+        ],
+    ],
+    'searchdefs' => [
+        'quote_num',
+        'name',
+        ['name' => 'billing_account_name', 'displayParams' => ['hideButtons' => 'true', 'size' => 30, 'class' => 'sqsEnabled sqsNoAutofill']],
+        'quote_stage',
+        'purchase_order_num',
+        ['name' => 'assigned_user_id', 'type' => 'enum', 'label' => 'LBL_ASSIGNED_TO', 'function' => ['name' => 'get_user_array', 'params' => [false]]],
+    ],
+];

@@ -22,7 +22,6 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 /**
  * Class OAuth2Authenticate
  */
-
 class OAuth2Authenticate extends BaseAuthenticate implements ExternalLoginInterface
 {
     /**
@@ -53,7 +52,7 @@ class OAuth2Authenticate extends BaseAuthenticate implements ExternalLoginInterf
      * Create oauth2 state
      * @return string
      */
-    protected function createState() : string
+    protected function createState(): string
     {
         $state = Uuid::uuid4();
         $this->getStateRegistry()->registerState($state);
@@ -69,9 +68,9 @@ class OAuth2Authenticate extends BaseAuthenticate implements ExternalLoginInterf
         $idmModeConfig = $this->getIDMModeConfig();
         $userSrn = $this->getCurrentUserSrn();
         return $idmModeConfig['idpUrl'] . '/logout?' . http_build_query([
-            'redirect_uri' => $config->get('site_url') . '/#logout', // logout landing page
-            'user_hint' => $userSrn,
-        ]);
+                'redirect_uri' => $config->get('site_url') . '/#logout', // logout landing page
+                'user_hint' => $userSrn,
+            ]);
     }
 
     /**
@@ -127,7 +126,7 @@ class OAuth2Authenticate extends BaseAuthenticate implements ExternalLoginInterf
     /**
      * @return OAuth2StateRegistry
      */
-    protected function getStateRegistry() : OAuth2StateRegistry
+    protected function getStateRegistry(): OAuth2StateRegistry
     {
         return new OAuth2StateRegistry();
     }

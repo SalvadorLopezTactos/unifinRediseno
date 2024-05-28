@@ -38,64 +38,64 @@ class MultiFieldHandler extends AbstractHandler implements
      * Mappings for types using multi field definition
      * @var array
      */
-    protected $typesMultiField = array(
-        'varchar' => array(
+    protected $typesMultiField = [
+        'varchar' => [
             'gs_string',
             'gs_string_wildcard',
-        ),
-        'name' => array(
+        ],
+        'name' => [
             'gs_string',
             'gs_string_wildcard',
-        ),
-        'text' => array(
+        ],
+        'text' => [
             'gs_string',
             'gs_string_wildcard',
-        ),
-        'datetime' => array(
+        ],
+        'datetime' => [
             'gs_datetime',
-        ),
-        'datetimecombo' => array(
+        ],
+        'datetimecombo' => [
             'gs_datetime',
-        ),
-        'date' => array(
+        ],
+        'date' => [
             'gs_date',
-        ),
-        'int' => array(
+        ],
+        'int' => [
             'gs_integer',
             'gs_string',
             'gs_string_wildcard',
-        ),
-        'phone' => array(
+        ],
+        'phone' => [
             'gs_not_analyzed',
             'gs_phone_wildcard',
-        ),
-        'url' => array(
+        ],
+        'url' => [
             'gs_url',
             'gs_url_wildcard',
-        ),
-        'id' => array(
+        ],
+        'id' => [
             'gs_not_analyzed',
-        ),
-        'exact' => array(
+        ],
+        'exact' => [
             'gs_string_exact',
-        ),
-        'longtext' => array(
+        ],
+        'longtext' => [
             'gs_string',
             // Disable wildcard search awaiting optimization
             //'gs_text_wildcard',
-        ),
+        ],
         'textarea' => [
             'gs_string',
         ],
-        'htmleditable_tinymce' => array(
+        'htmleditable_tinymce' => [
             'gs_string',
             // Disable wildcard search awaiting optimization
             //'gs_text_wildcard',
-        ),
-        'enum' => array(
+        ],
+        'enum' => [
             'gs_not_analyzed',
-        ),
-    );
+        ],
+    ];
 
     /**
      * By default this handler creates not_analyzed multi field base to stack
@@ -105,35 +105,35 @@ class MultiFieldHandler extends AbstractHandler implements
      *
      * @var array
      */
-    protected $longFieldTypes = array(
+    protected $longFieldTypes = [
         'longtext',
         'htmleditable_tinymce',
-    );
+    ];
 
     /**
      * Weighted boost definition
      * @var array
      */
-    protected $weightedBoost = array(
+    protected $weightedBoost = [
         'gs_string_wildcard' => 0.45,
         'gs_text_wildcard' => 0.35,
         'gs_phone_wildcard' => 0.20,
         'gs_url_wildcard' => 0.35,
-    );
+    ];
 
     /**
      * Highlighter field definitions
      * @var array
      */
-    protected $highlighterFields = array(
-        '*.gs_not_analyzed' => array(),
-        '*.gs_string' => array(),
-        '*.gs_string_exact' => array(),
-        '*.gs_string_html' => array(),
-        '*.gs_string_wildcard' => array(),
-        '*.gs_text_wildcard' => array(),
-        '*.gs_phone_wildcard' => array(),
-    );
+    protected $highlighterFields = [
+        '*.gs_not_analyzed' => [],
+        '*.gs_string' => [],
+        '*.gs_string_exact' => [],
+        '*.gs_string_html' => [],
+        '*.gs_string_wildcard' => [],
+        '*.gs_text_wildcard' => [],
+        '*.gs_phone_wildcard' => [],
+    ];
 
     /**
      * Multi field definitions
@@ -302,96 +302,95 @@ class MultiFieldHandler extends AbstractHandler implements
             ->addFilter(
                 'gs_filter_ngram_1_15',
                 'ngram',
-                array('min_gram' => 1, 'max_gram' => 15)
+                ['min_gram' => 1, 'max_gram' => 15]
             )
 
             // ngram filter using 2_15
             ->addFilter(
                 'gs_filter_ngram_2_15',
                 'ngram',
-                array('min_gram' => 2, 'max_gram' => 15)
+                ['min_gram' => 2, 'max_gram' => 15]
             )
 
             // ngram filter using 3_15
             ->addFilter(
                 'gs_filter_ngram_3_15',
                 'ngram',
-                array('min_gram' => 3, 'max_gram' => 15)
+                ['min_gram' => 3, 'max_gram' => 15]
             )
 
             // char filter keeping only numeric values
             ->addCharFilter(
                 'gs_char_num_pattern',
                 'pattern_replace',
-                array('pattern' => '[^\\d]+', 'replacement' => '')
+                ['pattern' => '[^\\d]+', 'replacement' => '']
             )
 
             // base analyzer using standard tokenizer
             ->addCustomAnalyzer(
                 'gs_analyzer_string',
                 'standard',
-                array('lowercase')
+                ['lowercase']
             )
 
             // base ngram analyzer
             ->addCustomAnalyzer(
                 'gs_analyzer_string_ngram',
                 'standard',
-                array('lowercase', 'gs_filter_ngram_1_15')
+                ['lowercase', 'gs_filter_ngram_1_15']
             )
 
             // phone analyzer
             ->addCustomAnalyzer(
                 'gs_analyzer_phone',
                 'whitespace',
-                array(),
-                array('gs_char_num_pattern')
+                [],
+                ['gs_char_num_pattern']
             )
 
             // phone ngram analyzer
             ->addCustomAnalyzer(
                 'gs_analyzer_phone_ngram',
                 'whitespace',
-                array('gs_filter_ngram_3_15'),
-                array('gs_char_num_pattern')
+                ['gs_filter_ngram_3_15'],
+                ['gs_char_num_pattern']
             )
 
             // analyzer for text fields with lower tokens
             ->addCustomAnalyzer(
                 'gs_analyzer_text_ngram',
                 'standard',
-                array('lowercase', 'gs_filter_ngram_3_15')
+                ['lowercase', 'gs_filter_ngram_3_15']
             )
 
             // url analyzer
             ->addCustomAnalyzer(
                 'gs_analyzer_url',
                 'uax_url_email',
-                array('lowercase')
+                ['lowercase']
             )
 
             // url ngram analyzer
             ->addCustomAnalyzer(
                 'gs_analyzer_url_ngram',
                 'uax_url_email',
-                array('lowercase', 'gs_filter_ngram_3_15')
+                ['lowercase', 'gs_filter_ngram_3_15']
             )
 
             // String Analyzer using whitespace tokenizer for exact matching
             ->addCustomAnalyzer(
                 'gs_analyzer_string_exact',
                 'whitespace',
-                array('lowercase')
+                ['lowercase']
             )
 
             // html analyzer
             ->addCustomAnalyzer(
                 'gs_analyzer_string_html',
                 'standard',
-                array('lowercase'),
-                array('html_strip')
-            )
-        ;
+                ['lowercase'],
+                ['html_strip']
+            );
     }
 
     /**
@@ -399,7 +398,7 @@ class MultiFieldHandler extends AbstractHandler implements
      * @param string $type
      * @return bool
      */
-    protected function isLongType(string $type) : bool
+    protected function isLongType(string $type): bool
     {
         return in_array($type, $this->longFieldTypes);
     }
@@ -466,7 +465,7 @@ class MultiFieldHandler extends AbstractHandler implements
      * @param string $field Field name
      * @param array $settings Highlighter settings
      */
-    protected function addHighlighterField($module, $field, array $settings = array())
+    protected function addHighlighterField($module, $field, array $settings = [])
     {
         $this->provider->addHighlighterFields([$field => $settings]);
     }
@@ -478,7 +477,7 @@ class MultiFieldHandler extends AbstractHandler implements
      */
     protected function getStringFieldsForType($type)
     {
-        $list = array();
+        $list = [];
         foreach ($this->typesMultiField[$type] as $multiFieldDef) {
             if ($this->isStringBased($multiFieldDef)) {
                 $list[] = $multiFieldDef;
@@ -505,8 +504,8 @@ class MultiFieldHandler extends AbstractHandler implements
     /**
      * Get multi field property object
      * @param string $name Multi field property name
-     * @throws MappingException
      * @return MultiFieldProperty|false
+     * @throws MappingException
      */
     protected function getMultiFieldProperty($name)
     {

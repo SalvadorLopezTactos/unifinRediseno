@@ -19,7 +19,6 @@
     _rendered: false,
     loadDataClicked: false,
     enabled: true,
-    journeyCreated: false,
     startingJourney: false,
     showHeaderRow: true,
     fieldsToValidate: {},
@@ -48,24 +47,30 @@
         this.context.set('skipFetch', false);
 
         let parent = this.context.get('parentModel');
-        parent.on('sync', this.reloadJourneys, this);
+        this.listenTo(parent, 'sync', function() {
+            this.reloadJourneys(false);
+        });
 
         this.listenTo(this.collection, 'add', this.addJourney);
-        this.listenTo(this.collection, 'remove', this.removeJourney);
+        this.listenTo(this.collection, 'remove', this.deleteJourney);
         this.listenTo(this.collection, 'sync', this._populateJourneys);
         this.listenTo(this.collection, 'sync', this.cleanJourneys);
 
         this.listenTo(this.context, 'reload_workflows', this.reloadJourneys);
         this.listenTo(this.context, 'change:moreLess', this.toggleMoreLess);
         this.listenTo(this.context, 'parent:start_cycle:click', this.startJourneyClicked);
-        this.listenTo(this.context, 'parent:widget_layout_configuration:click', this.openWidgetConfigurationLayout);
+        this.listenTo(this.context, 'parent:vertical_scroll_view:click', this.applyScrollView);
+        this.listenTo(this.context, 'parent:horizontal_scroll_view:click', this.applyScrollView);
+        this.listenTo(this.context, 'parent:active_smart_guides:click', this.toggleGuides);
+        this.listenTo(this.context, 'parent:archive_smart_guides:click', this.toggleGuides);
+        this.listenTo(this.context, 'parent:all_smart_guides:click', this.toggleGuides);
 
         this.toggleMoreLess();
 
         this.context.set('fields', ['id', 'name']);
         this.collection.orderBy = {
             field: 'date_entered',
-            direction: 'desc',
+            direction: 'asc',
         };
         this.addFiltersInCollection();
 
@@ -80,12 +85,12 @@
         }
 
         _.each(driWorkflow.fields, function(def) {
-                if (def.module === parent.module && def.customer_journey_parent) {
-                    if (!def.customer_journey_parent.enabled) {
-                        this.enabled = false;
-                    }
+            if (def.module === parent.module && def.customer_journey_parent) {
+                if (!def.customer_journey_parent.enabled) {
+                    this.enabled = false;
                 }
-            }, this
+            }
+        }, this
         );
     },
 
@@ -96,6 +101,9 @@
         this._super('_render');
         if (!this.enabled) {
             this.hide();
+        }
+        if (this.isPanelTop()) {
+            this.renderHeaderPanelData();
         }
     },
 
@@ -111,9 +119,23 @@
 
     /**
      * Reloads all journey view data
+     *
+     * @param {boolean} forceReload
+     * @return {undefined}
      */
-    reloadJourneys: function() {
+    reloadJourneys: function(forceReload) {
+        if (forceReload) {
+            this.syncNewJourneys();
+            return;
+        }
+
+        if (this.context && this.context.parent && this.context.parent.get('reloadSingleJourney')) {
+            return;
+        }
+
         this.addFiltersInCollection();
+        let component = this.getComponent('dri-workflows-header');
+        component.loadRemoval = !_.isUndefined(component) && !_.isEqual(component.collection.length, 0) ? true : false;
         this.removeJourneyViews();
         this.context.children = [];
         this.context.resetLoadFlag();
@@ -121,19 +143,36 @@
     },
 
     /**
+     * Add newly created journeys in the DOM and
+     * close the completed journeys panel
+     */
+    syncNewJourneys: function() {
+        this.loadData();
+
+        _.each(this._components, function(component) {
+            if (_.isEqual(component.name, 'dri-workflow') &&
+                _.isFunction(component.addRemoveClasses) && component.MORE_LESS_STATUS &&
+                component.model && _.isEqual(component.model.get('state'), 'completed')
+            ) {
+                component.addRemoveClasses(component.MORE_LESS_STATUS.LESS);
+            }
+        });
+    },
+
+    /**
      * Removes all journey views
      */
     cleanJourneys: function() {
         _.each(this._components, function(component) {
-                if (component.name === 'dri-workflow' && !this.collection.get(component.model.id)) {
-                    this.removeJourneyView(component);
-                }
-            }, this
+            if (component.name === 'dri-workflow' && !this.collection.get(component.model.id)) {
+                this.removeJourneyView(component);
+            }
+        }, this
         );
     },
 
     /**
-     * Populate the collection of Journey by addinyg the journeys
+     * Populate the collection of Journey by adding the journeys
      */
     _populateJourneys: function() {
         if (!this.context || !this.context.parent) {
@@ -144,6 +183,7 @@
             this.context.parent.get('modelId'),
             this.context.parent.get('module')
         );
+        this.setSmartGuideCount();
         let sortedOrder = app.user.lastState.get(key);
 
         // if user preference is empty then render journeys
@@ -154,6 +194,40 @@
             let sortedJourneys = this.getSortedJourneys(sortedOrder);
 
             _.each(sortedJourneys, this.addJourney, this);
+        }
+    },
+
+    /**
+     * Set the SmartGuide Count
+    */
+    setSmartGuideCount: function() {
+        let component = this.getComponent('dri-workflows-header');
+        if (!_.isUndefined(component) && !_.isNull(this.context.parent) && !_.isUndefined(this.context.parent)) {
+            const url = app.api.buildURL(this.context.parent.get('module'), 'get-smartguides-count', {
+                id: this.collection.link.bean.get('id'),
+            });
+            component.loadRemoval = false;
+            app.api.call('read', url, null, {
+                success: _.bind(function(data) {
+                    if (this.disposed) {
+                        return;
+                    }
+                    component.smartGuidesFlag = true;
+                    component.smartGuidesCount = data;
+                    this.collection.dataFetched = true;
+                    if (this.isPanelTop()) {
+                        this.renderHeaderPanelData();
+                    }
+                    component._render();
+                }, this),
+                error: _.bind(function(result) {
+                    app.alert.show('error', {
+                        level: 'error',
+                        messages: result.message,
+                        autoClose: true
+                    });
+                })
+            });
         }
     },
 
@@ -183,7 +257,9 @@
             }
         }, this);
 
-        return _.union(notSyncedJourneys, _.values(syncedJourneys));
+        const sortedJourneys = _.union(notSyncedJourneys, _.values(syncedJourneys));
+
+        return sortedJourneys.reverse();
     },
 
     /**
@@ -236,7 +312,7 @@
             context: context,
         });
 
-        this.addComponent(view);
+        this.addComponentAfterHeader(view);
 
         view.loadData();
 
@@ -245,16 +321,39 @@
         view.render();
 
         journey.on('change:state', function() {
-                if (journey.get('state') === 'completed') {
-                    this.checkHide();
-                }
-            }, this
+            if (journey.get('state') === 'completed') {
+                this.checkHide();
+            }
+        }, this
         );
+    },
 
-        // when a journey is created we should open it by default
-        if (this.journeyCreated) {
-            view.toggleMoreLess(view.MORE_LESS_STATUS.MORE);
+    /**
+     * Adds a component to this layout after header.
+     *
+     * @param {Object} component Component (view or layout) to add.
+     */
+    addComponentAfterHeader: function(component) {
+        let workflowsHeader = this.$el.find('.dri-workflows-header-wrapper');
+
+        if (!component.layout) {
+            component.layout = this;
         }
+
+        // add component at 1st index after header
+        this._components.splice(1, 0, component);
+        // insert component element after header element
+        workflowsHeader.after(component.el);
+    },
+
+    /**
+     * Deletes a journey
+     *
+     * @param {Object} model
+     */
+    deleteJourney: function(model) {
+        this.removeJourney(model);
+        this.setSmartGuideCount();
     },
 
     /**
@@ -266,7 +365,6 @@
         delete this._addedIds[view.model.id];
         this.removeComponent(view);
         view.dispose();
-        this.collection.remove(view.model);
     },
 
     /**
@@ -276,11 +374,11 @@
      */
     removeJourney: function(model) {
         _.each(this._components, function(component) {
-                if (component && component.name === 'dri-workflow' && component.model === model) {
-                    this.removeJourneyView(component);
-                }
-            }, this
-        );
+            if (component && _.isEqual(component.name, 'dri-workflow') &&
+                component.model && _.isEqual(component.model.get('id'), model.get('id'))) {
+                this.removeJourneyView(component);
+            }
+        }, this);
     },
 
     /**
@@ -290,10 +388,10 @@
         let remove = [];
 
         _.each(this._components, function(component) {
-                if (component.name === 'dri-workflow') {
-                    remove.push(component);
-                }
-            }, this
+            if (component.name === 'dri-workflow') {
+                remove.push(component);
+            }
+        }, this
         );
 
         _.each(remove, this.removeJourneyView, this);
@@ -366,8 +464,6 @@
 
         this._updateJourneysOrder(data.journeyId);
 
-        this.journeyCreated = true;
-
         let parentModel = this.context.get('parentModel');
         let _modelBackup = app.utils.deepCopy(parentModel.attributes);
 
@@ -384,8 +480,61 @@
             parentModel.set(key, diff[key]);
         });
 
-        parentModel.trigger('customer_journey:active-cycle:click', null);
-        this.reloadJourneys();
+        this.setGuidesCount(this._components);
+        if (this.isPanelTop()) {
+            this.renderHeaderPanelData();
+        }
+        if (_.isEqual(this.getActiveOrArchiveMode(), 'active') ||
+            _.isEqual(this.getActiveOrArchiveMode(), 'all')) {
+            let newJourney = app.data.createBean('DRI_Workflows', {id: data.journeyId});
+
+            if (this.collection.length < app.config.maxQueryResult) {
+                this.collection.add(newJourney);
+                parentModel.trigger('customer_journey:active-cycle:click', null);
+            } else {
+                this._render();
+            }
+        } else {
+            this._render();
+        }
+    },
+
+    /**
+     * Is Display Setting equals to Panel Top
+     * @return {bool}
+     */
+    isPanelTop: function() {
+        return _.first(this._components) && _.isEqual(_.first(this._components).displaySetting, 'panel_top');
+    },
+
+    /* render the data in header panel
+    * @return {undefined}
+    * @private
+    */
+    renderHeaderPanelData: function() {
+        let cj = !_.isUndefined(this._CJ) ? this._CJ : this;
+
+        if (!_.isEqual(cj.context.get('module'), 'DRI_Workflows')) {
+            return;
+        }
+
+        if (_.isUndefined(_.first(cj.meta.components)) || _.size(cj.meta.components) === 0) {
+            return;
+        }
+        let headerView = cj.getComponent(_.first(cj.meta.components).view);
+        if (!_.isUndefined(headerView) && headerView.smartGuidesFlag && app.config.maxQueryResult) {
+            let configCount = app.config.maxQueryResult;
+            headerView.smartGuidesCount = headerView.smartGuidesCount < configCount ?
+            headerView.smartGuidesCount : configCount;
+
+            let headerText = app.template.get('dri-workflows-header.smart-guide-count')(headerView);
+
+            const journeyTabSelector = '[data-panelname=customer_journey_tab] .record-panel-header span';
+            const journeyTab = _.first(this.$el.parent().parent().parent().find(journeyTabSelector));
+            if (journeyTab) {
+                $(journeyTab).html(headerText);
+            }
+        }
     },
 
     /**
@@ -423,28 +572,75 @@
     },
 
     /**
-     * Open the Widget Configuration Layout in drawer. Here user can set the CJ view setting.
-     * And on close the drawer, reload the layout on the base of flag i.e.
-     * returnParam and this depicts that save button has been clicked.
+     * Applying horizontal or vertical scroll view
+     *
+     * @param {Object} attribute
+     * @param {Object} button
      */
-    openWidgetConfigurationLayout: function() {
-        let context = this.context.getChildContext({
-            model: this.model,
-            parentLayout: this,
-            parentModule: this.context.get('parentModule'),
-            parentModel: this.context.get('parentModel'),
-        });
-        app.drawer.open(
-            {
-                layout: 'dri-workflows-widget-configuration',
-                context: context,
-            },
-            function(currentThis, returnParam) {
-                if (_.isEqual(returnParam, 'widget-config-saved') && _.isFunction(currentThis.reloadJourneys)) {
-                    currentThis.reloadJourneys();
-                }
-            }
-        );
+    applyScrollView: function(attribute, button) {
+        if (_.isEqual(button.name, 'vertical_scroll_view')) {
+            this.model.set('cj_presentation_mode', 'V');
+        } else {
+            this.model.set('cj_presentation_mode', 'H');
+        }
+        this.setFieldStateInCache();
+        let component = this.getComponent('dri-workflow');
+        if (!_.isUndefined(component)) {
+            component.setHorizontalScrollBarPosition();
+        }
+
+        this.reloadJourneys(false);
+    },
+
+    /**
+     * set the field state in cache
+     * @return {string}
+     */
+    setFieldStateInCache: function() {
+        const moduleName = (this.context && this.context.get('parentModule')) ? this.context.get('parentModule') : '';
+        this.statekey = app.user.lastState.buildKey('togglestate', 'cj_presentation_mode', moduleName);
+        return app.user.lastState.set(this.statekey, this.model.get('cj_presentation_mode'));
+    },
+
+    /**
+     * Applying active or archieve
+     * @param {Object} attribute
+     * @param {Object} button
+     */
+    toggleGuides: function(attribute, button) {
+        if (_.isEqual(button.name, 'archive_smart_guides')) {
+            this.model.set('cj_active_or_archive_filter', 'archived');
+        } else if (_.isEqual(button.name, 'active_smart_guides')) {
+            this.model.set('cj_active_or_archive_filter', 'active');
+        } else {
+            this.model.set('cj_active_or_archive_filter', 'all');
+        }
+
+        this.setActiveArchiveInCache();
+        this.reloadJourneys();
+
+    },
+
+    /**
+     * set the field state in cache
+     *
+     * @return {string}
+    */
+    setActiveArchiveInCache: function() {
+        const moduleName = (this.context && this.context.get('parentModule')) ? this.context.get('parentModule') : '';
+        this.statekey = app.user.lastState.buildKey('toggleActiveArchived', 'cj_active_or_archive_filter', moduleName);
+        return app.user.lastState.set(this.statekey, this.model.get('cj_active_or_archive_filter'));
+    },
+
+    /**
+     * Unset reloadSingleJourney variable from parent context
+     */
+    unsetReloadSingleJourney: function() {
+        if (!this.context || !this.context.parent) {
+            return;
+        }
+
+        this.context.parent.unset('reloadSingleJourney');
     },
 
     /**
@@ -454,7 +650,7 @@
     addFiltersInCollection: function() {
         let activeOrArchive = this.getActiveOrArchiveMode();
 
-        if (_.isEmpty(activeOrArchive) || _.isEqual(activeOrArchive, 'active')) {
+        if (_.isEqual(activeOrArchive, 'active')) {
             this.collection.filterDef = {
                 archived: 0,
             };
@@ -462,6 +658,8 @@
             this.collection.filterDef = {
                 archived: 1,
             };
+        } else {
+            this.collection.filterDef = {};
         }
     },
 
@@ -473,8 +671,10 @@
     getActiveOrArchiveMode: function() {
         let moduleName = (this.context && this.context.get('parentModule')) ? this.context.get('parentModule') : '';
 
-        return app.CJBaseHelper.getValueFromCache('toggleActiveArchived', 'cj_active_or_archive_filter',
+        let mode = app.CJBaseHelper.getValueFromCache('toggleActiveArchived', 'cj_active_or_archive_filter',
             moduleName, 'dri-workflows-widget-configuration');
+
+        return !_.isEmpty(mode) ? mode : 'active';
     },
 
     /**
@@ -529,6 +729,20 @@
                 }
 
                 this.fieldsToValidate[module] = fieldsToValidate;
+            }
+        }, this);
+    },
+
+    /**
+     * Give the count of number of guides
+     *
+     * @param {Object} views
+     */
+    setGuidesCount: function(views) {
+        _.each(views, function(view) {
+            if (view && _.isEqual(view.name, 'dri-workflows-header') &&
+                !_.isUndefined(this.collection) && this.collection.length < app.config.maxQueryResult) {
+                return ++view.smartGuidesCount;
             }
         }, this);
     },

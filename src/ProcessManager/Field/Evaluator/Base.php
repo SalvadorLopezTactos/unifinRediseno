@@ -43,7 +43,7 @@ class Base extends AbstractEvaluator implements EvaluatorInterface
         // Logic is basically, if the field value is null or an empty string, it
         // is empty
         return $this->bean->{$this->name} === null
-               || $this->getTrimmedValue() === '';
+            || $this->getTrimmedValue() === '';
     }
 
     /**

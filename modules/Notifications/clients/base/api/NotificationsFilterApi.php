@@ -13,24 +13,23 @@
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionPrefetcher;
 
-class NotificationsFilterApi extends FilterApi {
-
-
+class NotificationsFilterApi extends FilterApi
+{
     //Override the parent definition to allow responses to be cached for a short period client side
     public function registerApiRest()
     {
         $parentDef = parent::registerApiRest();
         if (!empty($parentDef['filterModuleAll'])) {
-            $def = array_merge($parentDef['filterModuleAll'], array(
-                'path' => array('Notifications'),
+            $def = array_merge($parentDef['filterModuleAll'], [
+                'path' => ['Notifications'],
                 //Should be the only change from the parent method
                 'cacheEtag' => true,
-            ));
+            ]);
 
-            return array('retrieve' => $def);
+            return ['retrieve' => $def];
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -50,5 +49,4 @@ class NotificationsFilterApi extends FilterApi {
         Container::getInstance()->get(SubscriptionPrefetcher::class)->register();
         return $result;
     }
-
 }

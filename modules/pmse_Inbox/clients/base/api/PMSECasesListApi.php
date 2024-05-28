@@ -16,6 +16,7 @@ use Sugarcrm\Sugarcrm\ProcessManager;
 class PMSECasesListApi extends FilterApi
 {
     public $pmse;
+
     public function __construct()
     {
         $this->pmse = PMSE::getInstance();
@@ -27,71 +28,71 @@ class PMSECasesListApi extends FilterApi
      */
     public function registerApiRest()
     {
-        return array(
-            'getModuleCaseList' => array(
+        return [
+            'getModuleCaseList' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Inbox', 'casesList'),
-                'pathVars' => array('module', 'casesList'),
+                'path' => ['pmse_Inbox', 'casesList'],
+                'pathVars' => ['module', 'casesList'],
                 'method' => 'selectCasesList',
-                'jsonParams' => array('filter'),
+                'jsonParams' => ['filter'],
                 'acl' => 'adminOrDev',
                 'shortHelp' => 'Returns a list with the processes for Process Management',
-                'longHelp' =>  'modules/pmse_Inbox/clients/base/api/help/process_select_cases_list_help.html',
-            ),
-            'getLoadLogs' => array(
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_select_cases_list_help.html',
+            ],
+            'getLoadLogs' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Inbox', 'getLog'),
-                'pathVars' => array('module', 'getLog'),
+                'path' => ['pmse_Inbox', 'getLog'],
+                'pathVars' => ['module', 'getLog'],
                 'method' => 'selectLogLoad',
-                'jsonParams' => array(),
+                'jsonParams' => [],
                 'acl' => 'adminOrDev',
                 'shortHelp' => 'Return the text of the PMSE.log file',
-                'longHelp' =>  'modules/pmse_Inbox/clients/base/api/help/process_select_log_load_help.html',
-            ),
-            'clearLogs' => array(
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_select_log_load_help.html',
+            ],
+            'clearLogs' => [
                 'reqType' => 'PUT',
-                'path' => array('pmse_Inbox', 'clearLog', '?'),
-                'pathVars' => array('module', 'clearLog', 'typelog'),
+                'path' => ['pmse_Inbox', 'clearLog', '?'],
+                'pathVars' => ['module', 'clearLog', 'typelog'],
                 'method' => 'clearLog',
-                'jsonParams' => array(),
+                'jsonParams' => [],
                 'acl' => 'adminOrDev',
                 'shortHelp' => 'Clear the PMSE.log file log',
-                'longHelp' =>  'modules/pmse_Inbox/clients/base/api/help/process_clear_log_help.html',
-            ),
-            'getConfigLogs' => array(
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_clear_log_help.html',
+            ],
+            'getConfigLogs' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Inbox', 'logGetConfig'),
-                'pathVars' => array('module', 'logGetConfig'),
+                'path' => ['pmse_Inbox', 'logGetConfig'],
+                'pathVars' => ['module', 'logGetConfig'],
                 'method' => 'configLogLoad',
-                'jsonParams' => array(),
+                'jsonParams' => [],
                 'acl' => 'adminOrDev',
 //                'shortHelp' => 'Retrieve PA configuration values',
-            ),
-            'setConfigLogs' => array(
+            ],
+            'setConfigLogs' => [
                 'reqType' => 'PUT',
-                'path' => array('pmse_Inbox', 'logSetConfig'),
-                'pathVars' => array('module', ''),
+                'path' => ['pmse_Inbox', 'logSetConfig'],
+                'pathVars' => ['module', ''],
                 'method' => 'configLogPut',
                 'acl' => 'adminOrDev',
 //                'shortHelp' => 'Update PA configuration values',
-            ),
-            'getProcessUsers' => array(
+            ],
+            'getProcessUsers' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Inbox', 'processUsersChart', '?'),
-                'pathVars' => array('module', '', 'filter'),
+                'path' => ['pmse_Inbox', 'processUsersChart', '?'],
+                'pathVars' => ['module', '', 'filter'],
                 'method' => 'returnProcessUsersChart',
                 'acl' => 'adminOrDev',
 //                'shortHelp' => 'Returns a list of users to be used on reassign section',
-            ),
-            'getProcessStatus' => array(
+            ],
+            'getProcessStatus' => [
                 'reqType' => 'GET',
-                'path' => array('pmse_Inbox', 'processStatusChart', '?'),
-                'pathVars' => array('module', '', 'filter'),
+                'path' => ['pmse_Inbox', 'processStatusChart', '?'],
+                'pathVars' => ['module', '', 'filter'],
                 'method' => 'returnProcessStatusChart',
                 'acl' => 'adminOrDev',
 //                'shortHelp' => 'Returns the process definition status',
-            ),
-        );
+            ],
+        ];
     }
 
     public function selectCasesList(ServiceBase $api, array $args)
@@ -130,26 +131,26 @@ class PMSECasesListApi extends FilterApi
 
         // Now put them into a format that SugarQuery likes
         foreach ($inboxFields as $field) {
-            $fields[] = array("a.$field", $field);
+            $fields[] = ["a.$field", $field];
         }
 
-        $q->from($inboxBean, array('alias' => 'a'));
+        $q->from($inboxBean, ['alias' => 'a']);
 
         //INNER USER TABLE
-        $q->joinTable('users', array('alias' => 'u', 'joinType' => 'INNER', 'linkingTable' => true))
+        $q->joinTable('users', ['alias' => 'u', 'joinType' => 'INNER', 'linkingTable' => true])
             ->on()
             ->equalsField('u.id', 'a.created_by');
         $fields[] = ['u.last_name', 'assigned_user_name'];
 
         //INNER PROCESS TABLE
-        $q->joinTable('pmse_bpmn_process', array('alias' => 'pr', 'joinType' => 'INNER', 'linkingTable' => true))
+        $q->joinTable('pmse_bpmn_process', ['alias' => 'pr', 'joinType' => 'INNER', 'linkingTable' => true])
             ->on()
             ->equalsField('pr.id', 'a.pro_id');
-        $fields[] = array('pr.prj_id', 'prj_id');
-        $fields[] = array('pr.name', 'pro_title');
+        $fields[] = ['pr.prj_id', 'prj_id'];
+        $fields[] = ['pr.name', 'pro_title'];
 
         //INNER PROJECT TABLE
-        $q->joinTable('pmse_project', array('alias' => 'prj', 'joinType' => 'INNER', 'linkingTable' => true))
+        $q->joinTable('pmse_project', ['alias' => 'prj', 'joinType' => 'INNER', 'linkingTable' => true])
             ->on()
             ->equalsField('prj.id', 'pr.prj_id');
         $fields[] = ['prj.assigned_user_id', 'prj_created_by'];
@@ -159,7 +160,7 @@ class PMSECasesListApi extends FilterApi
         //INNER BPM FLOW
         // This relationship is adding several duplicated rows to the query
         // use of DISTINCT should be added
-        $q->joinTable('pmse_bpm_flow', array('alias' => 'pf', 'joinType' => 'INNER', 'linkingTable' => true))
+        $q->joinTable('pmse_bpm_flow', ['alias' => 'pf', 'joinType' => 'INNER', 'linkingTable' => true])
             ->on()
             ->equalsField('pf.cas_id', 'a.cas_id');
 
@@ -168,7 +169,7 @@ class PMSECasesListApi extends FilterApi
 
         // Since we are retrieving deleted project's processes, we need to know
         // which of them are from deleted projects.
-        $fields[] = array('pr.deleted', 'prj_deleted');
+        $fields[] = ['pr.deleted', 'prj_deleted'];
 
         $q->select($fields);
 
@@ -192,7 +193,7 @@ class PMSECasesListApi extends FilterApi
                     last_name LIKE $qLike
                 ");
         }
-        if (!empty($args['module_list'])){
+        if (!empty($args['module_list'])) {
             switch ($args['module_list']) {
                 case translate('LBL_STATUS_COMPLETED', 'pmse_Inbox'):
                     $q->where()->queryAnd()
@@ -232,7 +233,7 @@ class PMSECasesListApi extends FilterApi
                 // Get the assigned bean early. This allows us to check for a bean
                 // id to determine if the bean has been deleted or not. This bean
                 // will also be used later to the assigned user of the record.
-                $params = array('erased_fields' => true);
+                $params = ['erased_fields' => true];
                 $assignedBean = BeanFactory::getBean($list[$key]['cas_sugar_module'], $list[$key]['cas_sugar_object_id'], $params);
 
                 if (is_null($assignedBean)) {
@@ -256,7 +257,7 @@ class PMSECasesListApi extends FilterApi
 
                 $processUsers = $qA->execute();
                 if (!empty($processUsers)) {
-                    $processUsersNames = array();
+                    $processUsersNames = [];
                     foreach ($processUsers as $k => $v) {
                         if ($processUsers[$k]['cas_flow_status'] != 'CLOSED') {
                             $casUsersBean = BeanFactory::getBean('Users', $processUsers[$k]['cas_user_id']);
@@ -284,7 +285,7 @@ class PMSECasesListApi extends FilterApi
             $offset = -1;
         }
 
-        $data = array();
+        $data = [];
         $data['next_offset'] = $offset;
         $data['records'] = array_values($list);
         return $data;
@@ -292,12 +293,12 @@ class PMSECasesListApi extends FilterApi
 
     protected function getOrderByFromArgs(array $args, SugarBean $seed = null)
     {
-        $orderBy = array();
+        $orderBy = [];
         if (!isset($args['order_by']) || !is_string($args['order_by'])) {
             return $orderBy;
         }
         $columns = explode(',', $args['order_by']);
-        $parsed = array();
+        $parsed = [];
         foreach ($columns as $column) {
             $column = explode(':', $column, 2);
             $field = array_shift($column);
@@ -307,9 +308,9 @@ class PMSECasesListApi extends FilterApi
                 $parsed[$field] = strtolower($direction) !== 'desc';
             }
         }
-        $converted = array();
+        $converted = [];
         foreach ($parsed as $field => $direction) {
-            $converted[] = array($field, $direction ? 'ASC' : 'DESC');
+            $converted[] = [$field, $direction ? 'ASC' : 'DESC'];
         }
         return $converted;
     }
@@ -321,7 +322,8 @@ class PMSECasesListApi extends FilterApi
         $pmse = PMSE::getInstance();
         $log = $pmse->getLogFile($logger->getLogFileNameWithPath());
         return $log;
-        }
+    }
+
     public function clearLog(ServiceBase $api, array $args)
     {
         ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
@@ -342,12 +344,12 @@ class PMSECasesListApi extends FilterApi
         ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
         $q = new SugarQuery();
         $configLogBean = BeanFactory::newBean('pmse_BpmConfig');
-        $fields = array(
-            'c.cfg_value'
-        );
+        $fields = [
+            'c.cfg_value',
+        ];
 
         $q->select($fields);
-        $q->from($configLogBean, array('alias' => 'c'));
+        $q->from($configLogBean, ['alias' => 'c']);
         $q->where()->queryAnd()
             ->addRaw("c.cfg_status='ACTIVE' AND c.name='logger_level'");
         $list = $q->execute();
@@ -358,9 +360,9 @@ class PMSECasesListApi extends FilterApi
             $bean->description = 'Logger Level';
             $bean->save();
 
-            $list = array(0 => array('cfg_value' => 'warning'));
+            $list = [0 => ['cfg_value' => 'warning']];
         }
-        $data = array();
+        $data = [];
         $data['records'] = $list;
         return $data;
     }
@@ -374,11 +376,11 @@ class PMSECasesListApi extends FilterApi
         ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
         $data = $args['cfg_value'];
         $bean = BeanFactory::newBean('pmse_BpmConfig')
-            ->retrieve_by_string_fields(array('cfg_status' => 'ACTIVE', 'name' => 'logger_level'));
+            ->retrieve_by_string_fields(['cfg_status' => 'ACTIVE', 'name' => 'logger_level']);
         $bean->cfg_value = $data;
         $bean->save();
 
-        return array('success' => true);
+        return ['success' => true];
     }
 
     public function returnProcessUsersChart(ServiceBase $api, array $args)
@@ -408,16 +410,16 @@ class PMSECasesListApi extends FilterApi
         // joining the users table
         $q->joinTable('users')->on()->equalsField('users.id', 'pmse_bpm_flow.cas_user_id');
         // joining the process definition table in order to retrieve the process status
-        $q->joinTable('pmse_bpm_process_definition', array('alias' => 'pdef'))
+        $q->joinTable('pmse_bpm_process_definition', ['alias' => 'pdef'])
             ->on()->equalsField('pmse_bpm_flow.pro_id', 'pdef.id');
         // retrieving the user_name attribute,
         // it could be the first_name or last_name
-        $q->select->fieldRaw("users.id", "user_name");
+        $q->select->fieldRaw('users.id', 'user_name');
         $q->select->fieldRaw('users.first_name');
         $q->select->fieldRaw('users.last_name');
         // adding a custom field raw call since there is no other way to add an
         // aggregated member
-        $q->select->fieldRaw("COUNT(pmse_bpm_flow.id)", "derivation_count");
+        $q->select->fieldRaw('COUNT(pmse_bpm_flow.id)', 'derivation_count');
         // ordering by raw member
         //$q->orderByRaw('derivation_count');
         // grouping by user_name
@@ -433,7 +435,7 @@ class PMSECasesListApi extends FilterApi
 
         $data_bean = $q->execute();
 
-        $data = array();
+        $data = [];
         $total = 0;
         foreach ($data_bean as $record) {
             if (isset($record['user_name'])) {
@@ -441,20 +443,20 @@ class PMSECasesListApi extends FilterApi
                 // that returns the user name depending the Sugar's configuration
                 $name = trim($record['first_name'] . ' ' . $record['last_name']);
 
-                $data[] = array(
+                $data[] = [
                     'key' => $name,
                     'value' => $record['derivation_count'],
-                );
+                ];
                 $total += $record['derivation_count'];
             }
         }
 
-        return array(
-            "properties" => array(
-                "total" => $total,
-            ),
-            "data" => $data,
-        );
+        return [
+            'properties' => [
+                'total' => $total,
+            ],
+            'data' => $data,
+        ];
     }
 
     protected function createProcessStatusChartData($filter)
@@ -466,16 +468,16 @@ class PMSECasesListApi extends FilterApi
         $qp->select->field('name');
         $processes = $qp->execute();
 
-        $process_map = array();
+        $process_map = [];
         for ($i = 0; $i < sizeof($processes); $i++) {
             $processes[$i]['total'] = 0;
-            $processes[$i]['status'] = array(
+            $processes[$i]['status'] = [
                 'IN PROGRESS' => 0,
                 'COMPLETED' => 0,
                 'CANCELLED' => 0,
                 'ERROR' => 0,
                 'TERMINATED' => 0,
-            );
+            ];
             $process_map[$processes[$i]['id']] = $i;
         }
 
@@ -488,9 +490,9 @@ class PMSECasesListApi extends FilterApi
         // joining the users table
         $q->joinTable('pmse_bpmn_process')->on()->equalsField('pmse_bpmn_process.id', 'pmse_inbox.pro_id');
 
-        $q->select->field("cas_status");
-        $q->select->fieldRaw("COUNT(*) as total");
-        $q->select->fieldRaw("prj_id");
+        $q->select->field('cas_status');
+        $q->select->fieldRaw('COUNT(*) as total');
+        $q->select->fieldRaw('prj_id');
 
         $q->groupByRaw('pro_id, cas_status, prj_id');
 
@@ -506,82 +508,82 @@ class PMSECasesListApi extends FilterApi
             $processes[$index]['total'] += $row['total'];
         }
 
-        $groups = array();
-        $in_progress = array();
-        $completed = array();
-        $cancelled = array();
-        $terminated = array();
-        $error = array();
+        $groups = [];
+        $in_progress = [];
+        $completed = [];
+        $cancelled = [];
+        $terminated = [];
+        $error = [];
 
         for ($i = 0; $i < sizeof($processes); $i++) {
-            $groups[] = array(
-                "group" => ($i + 1),
-                "label" => $processes[$i]['name'],
-                "total" => $processes[$i]['total'],
-            );
-            $in_progress[] = array(
-                "series" => 0,
-                "x" => ($i + 1),
-                "y" => $processes[$i]['status']['IN PROGRESS'],
-            );
-            $completed[] = array(
-                "series" => 1,
-                "x" => ($i + 1),
-                "y" => $processes[$i]['status']['COMPLETED'],
-            );
-            $cancelled[] = array(
-                "series" => 2,
-                "x" => ($i + 1),
-                "y" => $processes[$i]['status']['CANCELLED'],
-            );
-            $terminated[] = array(
-                "series" => 3,
-                "x" => ($i + 1),
-                "y" => $processes[$i]['status']['TERMINATED'],
-            );
-            $error[] = array(
-                "series" => 4,
-                "x" => ($i + 1),
-                "y" => $processes[$i]['status']['ERROR'],
-            );
+            $groups[] = [
+                'group' => ($i + 1),
+                'label' => $processes[$i]['name'],
+                'total' => $processes[$i]['total'],
+            ];
+            $in_progress[] = [
+                'series' => 0,
+                'x' => ($i + 1),
+                'y' => $processes[$i]['status']['IN PROGRESS'],
+            ];
+            $completed[] = [
+                'series' => 1,
+                'x' => ($i + 1),
+                'y' => $processes[$i]['status']['COMPLETED'],
+            ];
+            $cancelled[] = [
+                'series' => 2,
+                'x' => ($i + 1),
+                'y' => $processes[$i]['status']['CANCELLED'],
+            ];
+            $terminated[] = [
+                'series' => 3,
+                'x' => ($i + 1),
+                'y' => $processes[$i]['status']['TERMINATED'],
+            ];
+            $error[] = [
+                'series' => 4,
+                'x' => ($i + 1),
+                'y' => $processes[$i]['status']['ERROR'],
+            ];
         }
 
-        return array(
-            "properties" => array(
-                "groups" => $groups,
-            ),
-            "data" => array(
-                array(
-                    "key" => translate("LBL_PMSE_IN_PROGESS_STATUS"),
-                    "type" => "bar",
-                    "color" => '#176de5',
-                    "values" => $in_progress,
-                ),
-                array(
-                    "key" => translate("LBL_PMSE_COMPLETED_STATUS"),
-                    "type" => "bar",
-                    "color" => '#33800d',
-                    "values" => $completed,
-                ),
-                array(
-                    "key" => translate("LBL_PMSE_CANCELLED_STATUS"),
-                    "type" => "bar",
-                    "color" => '#e5a117',
-                    "values" => $cancelled,
-                ),
-                array(
-                    "key" => translate("LBL_PMSE_TERMINATED_STATUS"),
-                    "type" => "bar",
-                    "color" => '#6d17e5',
-                    "values" => $terminated,
-                ),
-                array(
-                    "key" => translate("LBL_PMSE_ERROR_STATUS"),
-                    "type" => "bar",
-                    "color" => '#E61718',
-                    "values" => $error,
-                ),
-            ),
-        );
+        return [
+            'properties' => [
+                'groups' => $groups,
+            ],
+            'data' => [
+                [
+                    'key' => translate('LBL_PMSE_IN_PROGESS_STATUS'),
+                    'type' => 'bar',
+                    'color' => '#176de5',
+                    'values' => $in_progress,
+                ],
+                [
+                    'key' => translate('LBL_PMSE_COMPLETED_STATUS'),
+                    'type' => 'bar',
+                    'color' => '#33800d',
+                    'values' => $completed,
+                ],
+                [
+                    'key' => translate('LBL_PMSE_CANCELLED_STATUS'),
+                    'type' => 'bar',
+                    'color' => '#e5a117',
+                    'values' => $cancelled,
+                ],
+                [
+                    'key' => translate('LBL_PMSE_TERMINATED_STATUS'),
+                    'type' => 'bar',
+                    'color' => '#6d17e5',
+                    'values' => $terminated,
+                ],
+                [
+                    'key' => translate('LBL_PMSE_ERROR_STATUS'),
+                    'type' => 'bar',
+                    'color' => '#E61718',
+                    'values' => $error,
+                ],
+            ],
+        ];
     }
 }

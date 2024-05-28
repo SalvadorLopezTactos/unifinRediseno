@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Musíte zadať číslo záznamu, pre pripojenie užívateľa do tímu.',
     'ERR_DUP_NAME' => 'Názov tímu už existuje, skúste nejaké iné.',
     'ERR_DELETE_RECORD' => 'K odstráneniu tohto tímu musíte zadať číslo záznamu.',
@@ -71,7 +71,7 @@ oprávneniami pre daný
  Taktiež odporúčame, aby ste po zakázaní tímových oprávnení pre ktorýkoľvek modul, použili nástroj Rýchla oprava a obnova
  a vyčistili vyrovnávaciu pamäť systému.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Upozornenie:</strong> Zakázanie tímových oprávnení vráti všetky údaje
 súvisiace s
@@ -81,7 +81,7 @@ súvisiace s
 pre ktorýkoľvek modul, 
  použili nástroj Rýchla oprava a obnova a vyčistili vyrovnávaciu pamäť systému.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Zakázanie tímových oprávnení vráti všetky údaje súvisiace s tímovými 
 oprávneniami pre daný
@@ -91,7 +91,7 @@ oprávneniami pre daný
  a vyčistili vyrovnávaciu pamäť systému. Ak nemáte prístup k nástroju Rýchla oprava a obnova, kontaktujte správcu a požiadajte
  o prístup k ponuke Oprava.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Upozornenie:</strong> Zakázanie tímových oprávnení vráti všetky údaje súvisiace s tímovými 
 oprávneniami pre daný
@@ -101,5 +101,5 @@ oprávneniami pre daný
  a vyčistili vyrovnávaciu pamäť systému. Ak nemáte prístup k nástroju Rýchla oprava a obnova, kontaktujte správcu a požiadajte
  o prístup k ponuke Oprava.
 STR
-,
-);
+    ,
+];

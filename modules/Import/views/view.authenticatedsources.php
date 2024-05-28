@@ -17,7 +17,7 @@ class ImportViewAuthenticatedSources extends SugarView
      *
      * @param array $params Ignored
      */
-    public function process($params = array())
+    public function process($params = [])
     {
         $sources = $this->getAuthenticatedImportableExternalEAPMs();
 

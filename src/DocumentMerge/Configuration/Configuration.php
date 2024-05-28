@@ -26,12 +26,13 @@ class Configuration implements ConfigurationInterface
     {
         $this->config = $sugarConfig;
     }
+
     /**
      * Returns the URL to DocumentMerge service for the given region.
      *
      * @return string
      */
-    public function getServiceURL() : string
+    public function getServiceURL(): string
     {
         $mergeConfig = $this->config->get('document_merge');
         $region = $this->getRegion();
@@ -48,7 +49,7 @@ class Configuration implements ConfigurationInterface
      *
      * @return string
      */
-    protected function getRegion() : string
+    protected function getRegion(): string
     {
         $region = 'default';
         $idmConfig = new IdmConfig($this->config);
@@ -73,7 +74,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getSystemKey(): string
     {
-        return $this->config->get("unique_key");
+        return $this->config->get('unique_key');
     }
 
     /**
@@ -83,7 +84,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getSystemUrl(): string
     {
-        return $this->config->get("site_url");
+        return $this->config->get('site_url');
     }
 
     /**

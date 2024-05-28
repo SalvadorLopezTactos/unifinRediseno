@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Upgrade existing report schedules.
  */
@@ -33,7 +34,7 @@ class SugarUpgradeUpdateOutboundEmailAccountTeams extends UpgradeDBScript
         $bean = BeanFactory::newBean('OutboundEmail');
 
         // all records
-        $query->from($bean, array('team_security' => false, 'add_deleted' => false, 'alias' => 'oe'));
+        $query->from($bean, ['team_security' => false, 'add_deleted' => false, 'alias' => 'oe']);
 
         // INNER join teams
         $query->joinTable('teams', ['alias' => 't'])
@@ -43,7 +44,7 @@ class SugarUpgradeUpdateOutboundEmailAccountTeams extends UpgradeDBScript
         $query->joinTable('team_sets', ['alias' => 'ts', 'joinType' => 'LEFT'])
             ->on()->equalsField('ts.id', 't.id');
 
-        $query->select(array(['oe.id', 'oe_id'], ['oe.type','oe_type'], ['t.id', 'team_id'], ['ts.id', 'team_set_id']));
+        $query->select([['oe.id', 'oe_id'], ['oe.type', 'oe_type'], ['t.id', 'team_id'], ['ts.id', 'team_set_id']]);
 
         $rows = $query->execute();
 
@@ -66,7 +67,7 @@ class SugarUpgradeUpdateOutboundEmailAccountTeams extends UpgradeDBScript
             }
 
             // update team and team_set
-            $sql = "UPDATE outbound_email SET team_id = ?, team_set_id = ? WHERE id = ?";
+            $sql = 'UPDATE outbound_email SET team_id = ?, team_set_id = ? WHERE id = ?';
             $this->executeUpdate($sql, [$teamId, $teamSetId, $row['oe_id']]);
         }
     }

@@ -9,7 +9,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const Utils = require('utils/utils');
+const Utils = require('./utils');
 
 let path = window.location.pathname.replace(/\/[^\/]*$/, '/cookie.html');
 let getCookie = function() {

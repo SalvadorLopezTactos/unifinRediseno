@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '발신 이메일 계정',
     'LBL_MODULE_NAME_SINGULAR' => '발신 이메일 계정',
     'LBL_STATUS' => '상태',
@@ -40,4 +40,4 @@ $mod_strings = array(
     'LBL_PREFERRED_SENDING_ACCOUNT' => '선호하는 전송 계정',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => '이메일 설정 포커스 서랍',
-);
+];

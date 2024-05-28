@@ -17,10 +17,14 @@
     {{#if dropdownFields}}
         <a track="click:actiondropdown"
            class="btn dropdown-toggle{{#if def.no_default_action}} btn-invisible{{/if}}{{#if def.primary}} btn-primary{{/if}}"
-           data-toggle="dropdown" href="javascript:void(0);" data-placement="bottom"
-           rel="tooltip" title="{{str 'LBL_LISTVIEW_ACTIONS'}}"
+           data-bs-toggle="dropdown" href="javascript:void(0);"
            role="button" tabindex="{{tabIndex}}" aria-haspopup="true" aria-expanded="false"
-           aria-label="{{str 'LBL_LISTVIEW_ACTIONS'}}"><span class="{{buildIcon caretIcon}}"></span></a>
-        <ul data-menu="dropdown" class="dropdown-menu" role="menu"></ul>
+           aria-label="{{str 'LBL_LISTVIEW_ACTIONS'}}"
+           data-bs-display="static"
+        >
+            <span class="{{buildIcon caretIcon}}"></span>
+            {{tooltipTemplate (str tooltip) 'bottom'}}
+        </a>
+        <ul data-menu="dropdown" class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl" role="menu"></ul>
     {{/if}}
 {{/if}}

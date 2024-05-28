@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Denník auditu',
     'LBL_FIELD_NAME' => 'Pole',
     'LBL_OLD_NAME' => 'Stará hodnota',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Aktualizovať na',
     'LBL_BLANK' => '-prázdne-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová os auditu',
+    'LBL_CREATED' => 'Vytvorené',
+];

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -24,11 +25,11 @@ class SugarUpgradeAddCustomEmailTemplate extends UpgradeScript
 
             global $mod_strings;
 
-            $templateData = array(
+            $templateData = [
                 'Meeting' => 'meeting_notification_email',
                 'Call' => 'call_notification_email',
                 '‌ReportSchedule' => 'scheduled_report_email',
-            );
+            ];
 
             foreach ($templateData as $templateKey => $templateValue) {
                 $emailTemp = new EmailTemplate();
@@ -48,7 +49,7 @@ class SugarUpgradeAddCustomEmailTemplate extends UpgradeScript
                     $emailTemp->text_only = 0;
                 }
 
-                $id =$emailTemp->save();
+                $id = $emailTemp->save();
                 $this->upgrader->config['emailTemplate'][$templateKey] = $id;
             }
         }

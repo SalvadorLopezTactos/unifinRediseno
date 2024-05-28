@@ -10,20 +10,20 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Filters']['base']['layout']['filter'] = array(
-    'components' => array(
-        array(
+$viewdefs['Filters']['base']['layout']['filter'] = [
+    'components' => [
+        [
             'view' => 'filter-module-dropdown',
-        ),
-        array(
+        ],
+        [
             'view' => 'filter-filter-dropdown',
-        ),
-        array(
+        ],
+        [
             'view' => 'filter-quicksearch',
-        ),
-    ),
-    'last_state' => array(
+        ],
+    ],
+    'last_state' => [
         'id' => 'filter',
-    ),
+    ],
     'layoutType' => 'records',
-);
+];

@@ -12,34 +12,47 @@
  */
 
 
-class SugarFieldDatetime extends SugarFieldBase {
+class SugarFieldDatetime extends SugarFieldBase
+{
+    protected $amountDaysOperators = [
+        '$more_x_days_ago',
+        '$last_x_days',
+        '$next_x_days',
+        '$more_x_days_ahead',
+    ];
 
-    function getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
+    protected $largeRangeOperators = [
+        'before_today',
+        'after_today',
+    ];
+
+    public function getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
 
         // Create Smarty variables for the Calendar picker widget
-        if(!isset($displayParams['showMinutesDropdown'])) {
-           $displayParams['showMinutesDropdown'] = false;
+        if (!isset($displayParams['showMinutesDropdown'])) {
+            $displayParams['showMinutesDropdown'] = false;
         }
 
-        if(!isset($displayParams['showHoursDropdown'])) {
-           $displayParams['showHoursDropdown'] = false;
+        if (!isset($displayParams['showHoursDropdown'])) {
+            $displayParams['showHoursDropdown'] = false;
         }
 
-        if(!isset($displayParams['showNoneCheckbox'])) {
-           $displayParams['showNoneCheckbox'] = false;
+        if (!isset($displayParams['showNoneCheckbox'])) {
+            $displayParams['showNoneCheckbox'] = false;
         }
 
-        if(!isset($displayParams['showFormats'])) {
-           $displayParams['showFormats'] = false;
+        if (!isset($displayParams['showFormats'])) {
+            $displayParams['showFormats'] = false;
         }
 
-        if(!isset($displayParams['hiddeCalendar'])) {
-           $displayParams['hiddeCalendar'] = false;
+        if (!isset($displayParams['hiddeCalendar'])) {
+            $displayParams['hiddeCalendar'] = false;
         }
 
         // jpereira@dri - #Bug49552 - Datetime field unable to follow parent class methods
         //jchi , bug #24557 , 10/31/2008
-        if(isset($vardef['name']) && ($vardef['name'] == 'date_entered' || $vardef['name'] == 'date_modified')){
+        if (isset($vardef['name']) && ($vardef['name'] == 'date_entered' || $vardef['name'] == 'date_modified')) {
             return $this->getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
         }
         //end
@@ -47,7 +60,7 @@ class SugarFieldDatetime extends SugarFieldBase {
         // ~ jpereira@dri - #Bug49552 - Datetime field unable to follow parent class methods
     }
 
-    function getImportViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    public function getImportViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
     {
         $displayParams['showMinutesDropdown'] = false;
         $displayParams['showHoursDropdown'] = false;
@@ -59,7 +72,8 @@ class SugarFieldDatetime extends SugarFieldBase {
         return $this->fetch($this->findTemplate('EditView'));
     }
 
-    function getWirelessEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
+    public function getWirelessEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
         global $timedate;
         $datetime_prefs = $GLOBALS['current_user']->getUserDateTimePreferences();
         $datetime = explode(' ', $vardef['value']);
@@ -68,13 +82,11 @@ class SugarFieldDatetime extends SugarFieldBase {
         $date_start = $timedate->swap_formats($datetime[0], $datetime_prefs['date'], $timedate->dbDayFormat);
 
         // pass date parameters to smarty
-        if ($datetime_prefs['date'] == 'Y-m-d' || $datetime_prefs['date'] == 'Y/m/d' || $datetime_prefs['date'] == 'Y.m.d'){
+        if ($datetime_prefs['date'] == 'Y-m-d' || $datetime_prefs['date'] == 'Y/m/d' || $datetime_prefs['date'] == 'Y.m.d') {
             $this->ss->assign('field_order', 'YMD');
-        }
-        else if ($datetime_prefs['date'] == 'd-m-Y' || $datetime_prefs['date'] == 'd/m/Y' || $datetime_prefs['date'] == 'd.m.Y'){
+        } elseif ($datetime_prefs['date'] == 'd-m-Y' || $datetime_prefs['date'] == 'd/m/Y' || $datetime_prefs['date'] == 'd.m.Y') {
             $this->ss->assign('field_order', 'DMY');
-        }
-        else{
+        } else {
             $this->ss->assign('field_order', 'MDY');
         }
         $this->ss->assign('date_start', $date_start);
@@ -83,50 +95,52 @@ class SugarFieldDatetime extends SugarFieldBase {
         return $this->fetch($this->findTemplate('WirelessEditView'));
     }
 
-    function getSearchViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
-        if($this->isRangeSearchView($vardef)) {
-           $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
+    public function getSearchViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
+        if ($this->isRangeSearchView($vardef)) {
+            $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
             $id = $displayParams['idName'] ?? $vardef['name'];
-           $this->ss->assign('original_id', "{$id}");
-           $this->ss->assign('id_range', "range_{$id}");
-           $this->ss->assign('id_range_start', "start_range_{$id}");
-           $this->ss->assign('id_range_end', "end_range_{$id}");
-           $this->ss->assign('id_range_choice', "{$id}_range_choice");
-           return $this->fetch('include/SugarFields/Fields/Datetimecombo/RangeSearchForm.tpl');
+            $this->ss->assign('original_id', "{$id}");
+            $this->ss->assign('id_range', "range_{$id}");
+            $this->ss->assign('id_range_start', "start_range_{$id}");
+            $this->ss->assign('id_range_end', "end_range_{$id}");
+            $this->ss->assign('id_range_choice', "{$id}_range_choice");
+            return $this->fetch('include/SugarFields/Fields/Datetimecombo/RangeSearchForm.tpl');
         }
         return $this->getSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex, 'EditView');
     }
 
-    public function getEmailTemplateValue($inputField, $vardef, $context = null){
+    public function getEmailTemplateValue($inputField, $vardef, $context = null)
+    {
         global $timedate;
         // This does not return a smarty section, instead it returns a direct value
-        if(isset($context['notify_user'])) {
+        if (isset($context['notify_user'])) {
             $user = $context['notify_user'];
         } else {
             $user = $GLOBALS['current_user'];
         }
-        if($vardef['type'] == 'date') {
-            if(!$timedate->check_matching_format($inputField, TimeDate::DB_DATE_FORMAT)) {
+        if ($vardef['type'] == 'date') {
+            if (!$timedate->check_matching_format($inputField, TimeDate::DB_DATE_FORMAT)) {
                 return $inputField;
             }
             // convert without TZ
-            return $timedate->to_display($inputField, $timedate->get_db_date_format(),  $timedate->get_date_format($user));
+            return $timedate->to_display($inputField, $timedate->get_db_date_format(), $timedate->get_date_format($user));
         } else {
-            if(!$timedate->check_matching_format($inputField, TimeDate::DB_DATETIME_FORMAT)) {
+            if (!$timedate->check_matching_format($inputField, TimeDate::DB_DATETIME_FORMAT)) {
                 return $inputField;
             }
             return $timedate->to_display_date_time($inputField, true, true, $user);
         }
     }
 
-    public function save($bean, $inputData, $field, $def, $prefix = '') {
+    public function save($bean, $inputData, $field, $def, $prefix = '')
+    {
         global $timedate;
-        if ( !isset($inputData[$prefix.$field]) ) {
+        if (!isset($inputData[$prefix . $field])) {
             return;
         }
 
-        $bean->$field = $this->convertFieldForDB($inputData[$prefix.$field]);
-
+        $bean->$field = $this->convertFieldForDB($inputData[$prefix . $field]);
     }
 
     /**
@@ -137,7 +151,7 @@ class SugarFieldDatetime extends SugarFieldBase {
     public function convertFieldForDB($value)
     {
         $timedate = TimeDate::getInstance();
-        $values = array();
+        $values = [];
         if (is_array($value)) {
             $values = $value;
         } else {
@@ -151,8 +165,6 @@ class SugarFieldDatetime extends SugarFieldBase {
         }
         return $value;
     }
-
-
 
     /**
      * Unformat a value from an API Format
@@ -184,10 +196,10 @@ class SugarFieldDatetime extends SugarFieldBase {
     {
         $timeDate = TimeDate::getInstance();
         // supported variables
-        $vars = array(
+        $vars = [
             '$nowTime' => $timeDate->tzUser($timeDate->getNow()),
             '$tomorrowTime' => $timeDate->tzUser($timeDate->getNow())->modify('+1 day'),
-        );
+        ];
         return isset($vars[$var]) && ($var = $vars[$var]->format('Y-m-d\TH:i:s'));
     }
 
@@ -215,29 +227,169 @@ class SugarFieldDatetime extends SugarFieldBase {
     }
 
     /**
+     * It is an offshoot of the fixForFilter function and forms a 'Where' statement
+     * for a specific set of filters, where the user is given the opportunity to enter
+     * a large time range like 'before_today' and 'after_today'
+     *
+     * @see fixForFilter()
+     */
+    public function fixForLargeRangeFilter($range, $columnName, SugarBean $bean, SugarQuery_Builder_Where $where, $op)
+    {
+        if ('$dateRange' !== $op) {
+            return;
+        }
+
+        $date = null;
+
+        switch ($range) {
+            case 'before_today':
+                $date = $this->getBeforeTodayDate();
+                $where->lte($columnName, $this->apiUnformatField($date), $bean);
+                break;
+
+            case 'after_today':
+                $date = $this->getAfterTodayDate();
+                $where->gte($columnName, $this->apiUnformatField($date), $bean);
+                break;
+        }
+        return $date;
+    }
+
+    /**
+     * It is an offshoot of the fixForFilter function and forms a 'Where' statement
+     * for a specific set of filters, where the user is given the opportunity to enter
+     * an arbitrary number of days to form the desired time period.
+     *
+     * @see fixForFilter()
+     */
+    public function fixForAmountDaysFilter($daysAmount, $columnName, SugarBean $bean, SugarQuery_Builder_Where $where, $op)
+    {
+        $range = [];
+        $daysAmount = intval($daysAmount);
+
+        if ($daysAmount === 0) {
+            return;
+        }
+
+        $tsTodayStart = $this->getVeryStartToday();
+        $tsTodayEnd = $this->getVeryEndToday();
+
+        switch ($op) {
+            case '$more_x_days_ago':
+                $tsDateIndicated = strtotime("-{$daysAmount} days", $tsTodayStart);
+                $gmDate = gmdate('Y-m-d\TH:i:s', $tsDateIndicated);
+                $where->lt($columnName, $this->apiUnformatField($gmDate), $bean);
+                break;
+            case '$last_x_days':
+                $tsDateIndicated = strtotime("-{$daysAmount} days", $tsTodayStart);
+                $range = [];
+                $range[] = gmdate('Y-m-d\TH:i:s', $tsDateIndicated);
+                $range[] = gmdate('Y-m-d\TH:i:s', $tsTodayEnd);
+                $where->between($columnName, $this->apiUnformatField($range[0]), $this->apiUnformatField($range[1]), $bean);
+                break;
+            case '$next_x_days':
+                $tsDateIndicated = strtotime("+{$daysAmount} days", $tsTodayStart);
+                $range = [];
+                $range[] = gmdate('Y-m-d\TH:i:s', $tsTodayStart);
+                $range[] = gmdate('Y-m-d\TH:i:s', $tsDateIndicated);
+                $where->between($columnName, $this->apiUnformatField($range[0]), $this->apiUnformatField($range[1]), $bean);
+                break;
+            case '$more_x_days_ahead':
+                $tsDateIndicated = strtotime("+{$daysAmount} days", $tsTodayEnd);
+                $gmDate = gmdate('Y-m-d\TH:i:s', $tsDateIndicated);
+                $where->gt($columnName, $this->apiUnformatField($gmDate), $bean);
+                break;
+        }
+
+        return $gmDate ?? $range;
+    }
+
+    /**
+     * Get Unix timestamp of the very Start of today
+     *
+     * @return timestamp
+     */
+    public function getVeryStartToday()
+    {
+        return strtotime('today');
+    }
+
+    /**
+     * Get Unix timestamp of the very End of today
+     *
+     * @return timestamp
+     */
+    public function getVeryEndToday()
+    {
+        return strtotime('tomorrow') - 1;
+    }
+
+    /**
+     * Returns the date of yesterday's very end of day
+     *
+     * @return string
+     */
+    public function getBeforeTodayDate()
+    {
+        $beforeToday = date_parse(
+            date('Y-m-d', strtotime('yesterday'))
+        );
+
+        return gmdate(
+            'Y-m-d\TH:i:s',
+            gmmktime(23, 59, 59, $beforeToday['month'], $beforeToday['day'], $beforeToday['year'])
+        );
+    }
+
+
+    /**
+     * Returns the date of tomorrow's very start of day
+     *
+     * @return string
+     */
+    public function getAfterTodayDate()
+    {
+        $afterToday = date_parse(
+            date('Y-m-d', strtotime('tomorrow'))
+        );
+
+        return gmdate(
+            'Y-m-d\TH:i:s',
+            gmmktime(0, 0, 0, $afterToday['month'], $afterToday['day'], $afterToday['year'])
+        );
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function fixForFilter(&$value, $columnName, SugarBean $bean, SugarQuery $q, SugarQuery_Builder_Where $where, $op)
     {
         $dateParsed = [];
-        if($op === '$daterange') {
+        if ($op === '$daterange' || $this->parseVariable($value)) {
             return true;
         }
-        if ($this->parseVariable($value)) {
-            return true;
+
+        if (in_array($op, $this->amountDaysOperators)) {
+            $this->fixForAmountDaysFilter($value, $columnName, $bean, $where, $op);
+            return false;
         }
+
+        if ('$dateRange' === $op && in_array($value, $this->largeRangeOperators)) {
+            $this->fixForLargeRangeFilter($value, $columnName, $bean, $where, $op);
+            return false;
+        }
+
         $dateLengthCheck = is_array($value) ? reset($value) : $value;
-        if(strlen(trim($dateLengthCheck)) < 11) {
-            if(!is_array($value)) {
+        if (strlen(trim($dateLengthCheck)) < 11) {
+            if (!is_array($value)) {
                 $dateParsed = date_parse($value);
             } else {
                 $dateParsed[0] = date_parse($value[0]);
                 $dateParsed[1] = date_parse($value[1]);
             }
-            switch($op)
-            {
+            switch ($op) {
                 case '$gt':
-                    $value = date("Y-m-d", strtotime($value . "+1 day"));
+                    $value = date('Y-m-d', strtotime($value . '+1 day'));
                     $dateParsed = date_parse($value);
                     $value = gmdate(
                         'Y-m-d\TH:i:s',
@@ -251,7 +403,7 @@ class SugarFieldDatetime extends SugarFieldBase {
                     );
                     break;
                 case '$lt':
-                    $value = date("Y-m-d", strtotime($value . "-1 day"));
+                    $value = date('Y-m-d', strtotime($value . '-1 day'));
                     $dateParsed = date_parse($value);
                     $value = gmdate(
                         'Y-m-d\TH:i:s',
@@ -278,7 +430,7 @@ class SugarFieldDatetime extends SugarFieldBase {
                     break;
                 case '$starts':
                 case '$equals':
-                    $value = array();
+                    $value = [];
                     $value[0] = gmdate(
                         'Y-m-d\TH:i:s',
                         gmmktime(0, 0, 0, $dateParsed['month'], $dateParsed['day'], $dateParsed['year'])
@@ -304,48 +456,48 @@ class SugarFieldDatetime extends SugarFieldBase {
         $vardef,
         $focus,
         ImportFieldSanitize $settings
-        )
-    {
+    ) {
+
+
         global $timedate;
 
         $format = $timedate->merge_date_time($settings->dateformat, $settings->timeformat);
 
-        if ( !$timedate->check_matching_format($value, $format) ) {
+        if (!$timedate->check_matching_format($value, $format)) {
             $parts = $timedate->split_date_time($value);
-            if(empty($parts[0])) {
-               $datepart = $timedate->getNow()->format($settings->dateformat);
+            if (empty($parts[0])) {
+                $datepart = $timedate->getNow()->format($settings->dateformat);
+            } else {
+                $datepart = $parts[0];
             }
-            else {
-               $datepart = $parts[0];
-            }
-            if(empty($parts[1])) {
+            if (empty($parts[1])) {
                 $timepart = $timedate->fromTimestamp(0)->format($settings->timeformat);
             } else {
                 $timepart = $parts[1];
                 // see if we can get by stripping the seconds
-                if(strpos($settings->timeformat, 's') === false) {
+                if (strpos($settings->timeformat, 's') === false) {
                     $sep = $timedate->timeSeparatorFormat($settings->timeformat);
                     // We are assuming here seconds are the last component, which
                     // is kind of reasonable - no sane time format puts seconds first
                     $timeparts = explode($sep, $timepart);
-                    if(!empty($timeparts[2])) {
-                        $timepart = join($sep, array($timeparts[0], $timeparts[1]));
+                    if (!empty($timeparts[2])) {
+                        $timepart = join($sep, [$timeparts[0], $timeparts[1]]);
                     }
                 }
             }
 
             $value = $timedate->merge_date_time($datepart, $timepart);
-            if ( !$timedate->check_matching_format($value, $format) ) {
+            if (!$timedate->check_matching_format($value, $format)) {
                 return false;
             }
         }
 
         try {
             $date = SugarDateTime::createFromFormat($format, $value, new DateTimeZone($settings->timezone));
-            if ((int) $date->year < 100) {
+            if ((int)$date->year < 100) {
                 return false;
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
         return $date->asDb();
@@ -361,16 +513,16 @@ class SugarFieldDatetime extends SugarFieldBase {
      *
      * @return string sanitized value
      */
-    public function exportSanitize($value, $vardef, $focus, $row=array())
+    public function exportSanitize($value, $vardef, $focus, $row = [])
     {
-        $timedate =  TimeDate::getInstance();
+        $timedate = TimeDate::getInstance();
         $db = DBManagerFactory::getInstance();
 
         //If it's in ISO format, convert it to db format
         if (preg_match('/(\d{4})\-?(\d{2})\-?(\d{2})T(\d{2}):?(\d{2}):?(\d{2})\.?\d*([Z+-]?)(\d{0,2}):?(\d{0,2})/i', (string)$value)) {
-           $value = $timedate->fromIso($value)->asDb();
-        } elseif (preg_match("/" . TimeDate::DB_DATE_FORMAT . "/", (string)$value)) {
-           $value = $timedate->fromDbDate($value)->asDb();
+            $value = $timedate->fromIso($value)->asDb();
+        } elseif (preg_match('/' . TimeDate::DB_DATE_FORMAT . '/', (string)$value)) {
+            $value = $timedate->fromDbDate($value)->asDb();
         }
 
         $value = $timedate->to_display_date_time($db->fromConvert($value, 'datetime'));
@@ -381,18 +533,19 @@ class SugarFieldDatetime extends SugarFieldBase {
      * {@inheritDoc}
      */
     public function apiFormatField(
-        array &$data,
-        SugarBean $bean,
-        array $args,
+        array       &$data,
+        SugarBean   $bean,
+        array       $args,
         $fieldName,
         $properties,
-        array $fieldList = null,
+        array       $fieldList = null,
         ServiceBase $service = null
     ) {
+
         global $timedate;
         $this->ensureApiFormatFieldArguments($fieldList, $service);
 
-        if(empty($bean->$fieldName)) {
+        if (empty($bean->$fieldName)) {
             $data[$fieldName] = '';
             return;
         }
@@ -402,18 +555,18 @@ class SugarFieldDatetime extends SugarFieldBase {
         $dbType = DBManagerFactory::getInstance()->getFieldType($properties);
         $date = $timedate->fromDbType($theDate, $dbType);
 
-        if ( $date == null ) {
+        if ($date == null) {
             // Could not parse date... try User format
-            $date = $timedate->fromUserType($bean->$fieldName,$properties['type']);
-            if ( $date == null ) {
+            $date = $timedate->fromUserType($bean->$fieldName, $properties['type']);
+            if ($date == null) {
                 return;
             }
         }
 
-        if ( $properties['type'] == 'date' ) {
+        if ($properties['type'] == 'date') {
             // It's just a date, not a datetime
             $data[$fieldName] = $timedate->asIsoDate($date);
-        } else if ( $properties['type'] == 'time' ) {
+        } elseif ($properties['type'] == 'time') {
             $data[$fieldName] = $timedate->asIsoTime($date);
         } else {
             $data[$fieldName] = $timedate->asIso($date);
@@ -423,20 +576,21 @@ class SugarFieldDatetime extends SugarFieldBase {
     /**
      * @see SugarFieldBase::apiSave
      */
-    public function apiSave(SugarBean $bean, array $params, $field, $properties) {
+    public function apiSave(SugarBean $bean, array $params, $field, $properties)
+    {
         global $timedate;
 
         $inputDate = $params[$field];
 
-        if ( empty($inputDate) ) {
+        if (empty($inputDate)) {
             $bean->$field = '';
             return;
         }
 
-        if ( $properties['type'] == 'date' ) {
+        if ($properties['type'] == 'date') {
             // It's just a date, not a datetime
             $date = $timedate->fromIsoDate($inputDate);
-        } else if ( $properties['type'] == 'time' ) {
+        } elseif ($properties['type'] == 'time') {
             $date = $timedate->fromIsoTime($inputDate);
         }
 
@@ -450,7 +604,6 @@ class SugarFieldDatetime extends SugarFieldBase {
         }
 
 
-        $bean->$field = $timedate->asDbType($date,$properties['type']);
+        $bean->$field = $timedate->asDbType($date, $properties['type']);
     }
-
 }

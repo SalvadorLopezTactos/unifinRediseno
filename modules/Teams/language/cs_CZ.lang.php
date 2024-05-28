@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'ERR_ADD_RECORD' => 'Musíte zadat číslo záznamu, pro připojení tohoto uživatele do týmu.',
     'ERR_DUP_NAME' => 'Jméno týmu už existuje!',
     'ERR_DELETE_RECORD' => 'Musíte zadat číslo záznamu pro smazání tohoto týmu.',
@@ -66,17 +66,17 @@ $mod_strings = array(
     'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
 Zakázání týmových oprávnění pro modul vrátí jakákoli původní data spojená s týmovými oprávněními pro daný modul, včetně jakýchkoli definic procesů nebo procesů využívajících funkci. Zahrnuje to jakékoli role využívající možnost „Vlastník a vybraný tým“ a jakákoli data týmových oprávnění pro záznamy v daném modulu. Po zakázání týmových oprávnění pro jakýkoli modul také doporučujeme použít k vymazání mezipaměti vašeho systému nástroj Rychlá oprava a obnova.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
 <strong>Varování:</strong> Zakázání týmových oprávnění pro modul vrátí jakákoli původní data spojená s týmovými oprávněními pro daný modul, včetně jakýchkoli definic procesů nebo procesů využívajících funkci. Zahrnuje to jakékoli role využívající možnost „Vlastník a vybraný tým“ a jakákoli data týmových oprávnění pro záznamy v daném modulu. Po zakázání týmových oprávnění pro jakýkoli modul také doporučujeme použít k vymazání mezipaměti vašeho systému nástroj Rychlá oprava a obnova.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
 Zakázání týmových oprávnění pro modul vrátí jakákoli původní data spojená s týmovými oprávněními pro daný modul, včetně jakýchkoli definic procesů nebo procesů využívajících funkci. Zahrnuje to jakékoli role využívající možnost „Vlastník a vybraný tým“ a jakákoli data týmových oprávnění pro záznamy v daném modulu. Po zakázání týmových oprávnění pro jakýkoli modul také doporučujeme použít k vymazání mezipaměti vašeho systému nástroj Rychlá oprava a obnova. Nemáte-li přístup k použití nástroje Rychlá oprava a obnova, obraťte se na správce, aby vám dal přístup k nabídce Opravit.
 STR
-,
+    ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
 <strong>Varování:</strong> Zakázání týmových oprávnění pro modul vrátí jakákoli původní data spojená s týmovými oprávněními pro daný modul, včetně jakýchkoli definic procesů nebo procesů využívajících funkci. Zahrnuje to jakékoli role využívající možnost „Vlastník a vybraný tým“ a jakákoli data týmových oprávnění pro záznamy v daném modulu. Po zakázání týmových oprávnění pro jakýkoli modul také doporučujeme použít k vymazání mezipaměti vašeho systému nástroj Rychlá oprava a obnova. Nemáte-li přístup k použití nástroje Rychlá oprava a obnova, obraťte se na správce, aby vám dal přístup k nabídce Opravit.
 STR
-,
-);
+    ,
+];

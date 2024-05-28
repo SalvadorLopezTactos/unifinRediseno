@@ -45,7 +45,7 @@ abstract class CurrencyRateUpdateAbstract
      *   'tableBar'=>array('base_rate')
      * ));
      */
-    protected $rateColumnDefinitions = array();
+    protected $rateColumnDefinitions = [];
 
     /*
      * automatic updating of usdollar fields
@@ -64,7 +64,7 @@ abstract class CurrencyRateUpdateAbstract
     *   'tableBar'=>array('foo'=>'foo_usdollar')
     * ));
     */
-    protected $usDollarColumnDefinitions = array();
+    protected $usDollarColumnDefinitions = [];
 
     /**
      * ID of the currency that is being modified
@@ -77,7 +77,9 @@ abstract class CurrencyRateUpdateAbstract
      *
      * @access public
      */
-    public function __construct() {}
+    public function __construct()
+    {
+    }
 
     /**
      * run
@@ -85,7 +87,7 @@ abstract class CurrencyRateUpdateAbstract
      * run the job to process the rate fields
      *
      * @access public
-     * @param  object    $currencyId
+     * @param object $currencyId
      * @return boolean   true on success
      */
     public function run($currencyId)
@@ -95,42 +97,40 @@ abstract class CurrencyRateUpdateAbstract
         if (empty($currencyId)) {
             return false;
         }
-        if($this->exclude) {
+        if ($this->exclude) {
             // module excluded, silent exit
             return true;
         }
-        if(empty($this->rateColumnDefinitions)) {
+        if (empty($this->rateColumnDefinitions)) {
             // no definitions, we are done
             return true;
         }
         $this->db = DBManagerFactory::getInstance();
-        if(empty($this->db)) {
-            $GLOBALS['log']->error(string_format($GLOBALS['app_strings']['ERR_DB_QUERY'],array('CurrencyRateUpdate','unable to load database manager')));
+        if (empty($this->db)) {
+            $GLOBALS['log']->error(string_format($GLOBALS['app_strings']['ERR_DB_QUERY'], ['CurrencyRateUpdate', 'unable to load database manager']));
             return false;
         }
         $this->doPreUpdateAction();
         $dbTables = $this->db->getTablesArray();
         // loop each defined table and update each rate column according to the currency id
-        foreach($this->rateColumnDefinitions as $tableName=>$tableColumns) {
+        foreach ($this->rateColumnDefinitions as $tableName => $tableColumns) {
             // make sure table exists
-            if(!in_array($tableName,$dbTables)) {
-                $GLOBALS['log']->error(string_format($GLOBALS['app_strings']['ERR_DB_QUERY'],array('CurrencyRateUpdate','unknown table')));
+            if (!in_array($tableName, $dbTables)) {
+                $GLOBALS['log']->error(string_format($GLOBALS['app_strings']['ERR_DB_QUERY'], ['CurrencyRateUpdate', 'unknown table']));
                 return false;
             }
             $columns = $this->db->get_columns($tableName);
-            foreach($tableColumns as $columnName) {
+            foreach ($tableColumns as $columnName) {
                 // make sure column exists
-                if(empty($columns[$columnName]))
-                {
-                    $GLOBALS['log']->error(string_format($GLOBALS['app_strings']['ERR_DB_QUERY'],array('CurrencyRateUpdate','unknown column')));
+                if (empty($columns[$columnName])) {
+                    $GLOBALS['log']->error(string_format($GLOBALS['app_strings']['ERR_DB_QUERY'], ['CurrencyRateUpdate', 'unknown column']));
                     return false;
                 }
-                if(empty($columns['currency_id']))
-                {
-                    $GLOBALS['log']->error(string_format($GLOBALS['app_strings']['ERR_DB_QUERY'],array('CurrencyRateUpdate','table must have currency_id column')));
+                if (empty($columns['currency_id'])) {
+                    $GLOBALS['log']->error(string_format($GLOBALS['app_strings']['ERR_DB_QUERY'], ['CurrencyRateUpdate', 'table must have currency_id column']));
                     return false;
                 }
-                if(!$result = $this->doCustomUpdateRate($tableName, $columnName, $currencyId)) {
+                if (!$result = $this->doCustomUpdateRate($tableName, $columnName, $currencyId)) {
                     // if no custom processing required, we do the standard update
                     $result = $this->updateRate($tableName, $columnName, $currencyId);
                 }
@@ -139,8 +139,8 @@ abstract class CurrencyRateUpdateAbstract
                 }
             }
         }
-        if($this->updateUsDollar) {
-            if(!$this->processUsDollarColumns($currencyId)) {
+        if ($this->updateUsDollar) {
+            if (!$this->processUsDollarColumns($currencyId)) {
                 return false;
             }
         }
@@ -183,9 +183,9 @@ abstract class CurrencyRateUpdateAbstract
      * to do custom tests and actions.
      *
      * @access protected
-     * @param  string $table
-     * @param  string $column
-     * @param  string $currencyId
+     * @param string $table
+     * @param string $column
+     * @param string $currencyId
      * @return boolean true if custom processing was done
      */
     protected function doCustomUpdateRate($table, $column, $currencyId)
@@ -201,9 +201,9 @@ abstract class CurrencyRateUpdateAbstract
      * in your extended class and make your own.
      *
      * @access protected
-     * @param  string $table
-     * @param  string $column
-     * @param  string $currencyId
+     * @param string $table
+     * @param string $column
+     * @param string $currencyId
      * @return bool
      */
     protected function updateRate($table, $column, $currencyId)
@@ -219,7 +219,7 @@ abstract class CurrencyRateUpdateAbstract
             $GLOBALS['log']->error(
                 string_format(
                     $GLOBALS['app_strings']['ERR_DB_QUERY'],
-                    array('CurrencyRateUpdate', 'unknown currency: ' . $currencyId)
+                    ['CurrencyRateUpdate', 'unknown currency: ' . $currencyId]
                 )
             );
             return false;
@@ -238,23 +238,23 @@ abstract class CurrencyRateUpdateAbstract
      * the base_rate field for the rate calculations.
      *
      * @access protected
-     * @param  string    $currencyId
+     * @param string $currencyId
      * @return boolean true on success
      */
     protected function processUsDollarColumns($currencyId)
     {
         // loop through all the tables
-        foreach($this->usDollarColumnDefinitions as $tableName=>$tableDefs) {
+        foreach ($this->usDollarColumnDefinitions as $tableName => $tableDefs) {
             $columns = $this->db->get_columns($tableName);
-            if(empty($columns)) {
+            if (empty($columns)) {
                 continue;
             }
-            foreach($tableDefs as $amountColumn=>$usDollarColumn) {
-                if(empty($columns[$amountColumn]) || empty($columns[$usDollarColumn]) || empty($columns['base_rate'])) {
+            foreach ($tableDefs as $amountColumn => $usDollarColumn) {
+                if (empty($columns[$amountColumn]) || empty($columns[$usDollarColumn]) || empty($columns['base_rate'])) {
                     continue;
                 }
-                if(!$this->doCustomUpdateUsDollarRate($tableName, $usDollarColumn, $amountColumn, $currencyId)) {
-                    if(!$this->doUpdateUsDollarRate($tableName, $usDollarColumn, $amountColumn, $currencyId)) {
+                if (!$this->doCustomUpdateUsDollarRate($tableName, $usDollarColumn, $amountColumn, $currencyId)) {
+                    if (!$this->doUpdateUsDollarRate($tableName, $usDollarColumn, $amountColumn, $currencyId)) {
                         return false;
                     }
                 }
@@ -270,10 +270,10 @@ abstract class CurrencyRateUpdateAbstract
      * to do custom tests and actions.
      *
      * @access protected
-     * @param  string    $tableName
-     * @param  string    $usDollarColumn
-     * @param  string    $amountColumn
-     * @param  string    $currencyId
+     * @param string $tableName
+     * @param string $usDollarColumn
+     * @param string $amountColumn
+     * @param string $currencyId
      * @return boolean true if custom processing was done
      */
     protected function doCustomUpdateUsDollarRate($tableName, $usDollarColumn, $amountColumn, $currencyId)
@@ -290,24 +290,25 @@ abstract class CurrencyRateUpdateAbstract
      * in your extended class and make your own.
      *
      * @access protected
-     * @param  string    $tableName
-     * @param  string    $usDollarColumn
-     * @param  string    $amountColumn
-     * @param  string    $currencyId
+     * @param string $tableName
+     * @param string $usDollarColumn
+     * @param string $amountColumn
+     * @param string $currencyId
      * @return boolean true on success
      */
     protected function doUpdateUsDollarRate($tableName, $usDollarColumn, $amountColumn, $currencyId)
     {
         // setup SQL statement
-        $query = sprintf("UPDATE %s SET %s = %s / base_rate where currency_id = '%s'",
+        $query = sprintf(
+            "UPDATE %s SET %s = %s / base_rate where currency_id = '%s'",
             $tableName,
             $usDollarColumn,
             $amountColumn,
             $currencyId
         );
         // execute
-        $result = $this->db->query($query, true, string_format($GLOBALS['app_strings']['ERR_DB_QUERY'],array('CurrencyRateUpdate',$query)));
-        if(empty($result)) {
+        $result = $this->db->query($query, true, string_format($GLOBALS['app_strings']['ERR_DB_QUERY'], ['CurrencyRateUpdate', $query]));
+        if (empty($result)) {
             return false;
         }
         return true;
@@ -335,10 +336,10 @@ abstract class CurrencyRateUpdateAbstract
      */
     public function addRateColumnDefinition($table, $column)
     {
-        if(!isset($this->rateColumnDefinitions[$table])) {
-            $this->rateColumnDefinitions[$table] = array();
+        if (!isset($this->rateColumnDefinitions[$table])) {
+            $this->rateColumnDefinitions[$table] = [];
         }
-        if(in_array($column, $this->rateColumnDefinitions[$table])) {
+        if (safeInArray($column, $this->rateColumnDefinitions[$table])) {
             return true;
         }
         $this->rateColumnDefinitions[$table][] = $column;
@@ -353,14 +354,14 @@ abstract class CurrencyRateUpdateAbstract
      */
     public function removeRateColumnDefinition($table, $column)
     {
-        if(!isset($this->rateColumnDefinitions[$table])) {
-            $this->rateColumnDefinitions[$table] = array();
+        if (!isset($this->rateColumnDefinitions[$table])) {
+            $this->rateColumnDefinitions[$table] = [];
         }
-        if(!in_array($column, $this->rateColumnDefinitions[$table])) {
+        if (!safeInArray($column, $this->rateColumnDefinitions[$table])) {
             return true;
         }
         // remove value
-        $this->rateColumnDefinitions[$table] = array_diff($this->rateColumnDefinitions[$table], array($column));
+        $this->rateColumnDefinitions[$table] = array_diff($this->rateColumnDefinitions[$table], [$column]);
         // reindex array
         $this->rateColumnDefinitions[$table] = array_values($this->rateColumnDefinitions[$table]);
         return true;
@@ -382,7 +383,7 @@ abstract class CurrencyRateUpdateAbstract
      */
     public function setExclude($exclude)
     {
-        if(!is_bool($exclude)) {
+        if (!is_bool($exclude)) {
             return false;
         }
         $this->exclude = $exclude;
@@ -407,8 +408,8 @@ abstract class CurrencyRateUpdateAbstract
      */
     public function addUsDollarColumnDefinition($table, $amountColumn, $usDollarColumn)
     {
-        if(!isset($this->usDollarColumnDefinitions[$table])) {
-            $this->usDollarColumnDefinitions[$table] = array();
+        if (!isset($this->usDollarColumnDefinitions[$table])) {
+            $this->usDollarColumnDefinitions[$table] = [];
         }
         $this->usDollarColumnDefinitions[$table][$amountColumn] = $usDollarColumn;
         return true;
@@ -422,7 +423,7 @@ abstract class CurrencyRateUpdateAbstract
      */
     public function removeUsDollarColumnDefinition($table, $amountColumn)
     {
-        if(!isset($this->usDollarColumnDefinitions[$table])) {
+        if (!isset($this->usDollarColumnDefinitions[$table])) {
             return false;
         }
         unset($this->usDollarColumnDefinitions[$table][$amountColumn]);

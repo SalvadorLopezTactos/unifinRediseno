@@ -141,8 +141,8 @@ class IdmProvider extends BasicGenericProvider
     /**
      * Introspect token and return resource owner details
      * @param AccessToken $token
-     * @throws \RuntimeException
      * @return string
+     * @throws \RuntimeException
      */
     public function introspectToken(AccessToken $token)
     {
@@ -207,9 +207,9 @@ class IdmProvider extends BasicGenericProvider
         $authHeaders = $this->getAuthorizationHeaders($token->getToken());
         $options = [
             'headers' => [
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
-            ] + $authHeaders,
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json',
+                ] + $authHeaders,
         ];
         $request = $this->getRequestFactory()->getRequestWithOptions(
             self::METHOD_POST,
@@ -244,8 +244,8 @@ class IdmProvider extends BasicGenericProvider
         $authHeaders = $this->getAuthorizationHeaders($accessToken->getToken());
         $options = [
             'headers' => [
-                'content-type' => 'application/x-www-form-urlencoded',
-            ] + $authHeaders,
+                    'content-type' => 'application/x-www-form-urlencoded',
+                ] + $authHeaders,
             'body' => $this->buildQueryString(['user_name' => $username, 'password' => $password, 'tid' => $tenant]),
         ];
 
@@ -319,7 +319,7 @@ class IdmProvider extends BasicGenericProvider
     {
         $options = [];
         if (isset($config['http_client']['retry_count'])) {
-            $options['retry_count'] = (int) $config['http_client']['retry_count'];
+            $options['retry_count'] = (int)$config['http_client']['retry_count'];
         }
         $options['delay_strategy'] = $config['http_client']['delay_strategy'] ?? RetryHttpClientBuilder::DELAY_STRATEGY_LINEAR;
 
@@ -386,7 +386,7 @@ class IdmProvider extends BasicGenericProvider
      *
      * @return CacheInterface
      */
-    protected function getSugarCache() : CacheInterface
+    protected function getSugarCache(): CacheInterface
     {
         return Container::getInstance()->get(CacheInterface::class);
     }

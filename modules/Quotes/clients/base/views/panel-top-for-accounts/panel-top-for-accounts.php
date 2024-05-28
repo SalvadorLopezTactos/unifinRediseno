@@ -10,16 +10,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Quotes']['base']['view']['panel-top-for-accounts'] = array(
+$viewdefs['Quotes']['base']['view']['panel-top-for-accounts'] = [
     'type' => 'panel-top',
     'template' => 'panel-top',
-    'buttons' => array(
-        array(
+    'buttons' => [
+        [
             'type' => 'actiondropdown',
             'name' => 'panel_dropdown',
             'css_class' => 'pull-right',
-            'buttons' => array(
-                array(
+            'buttons' => [
+                [
                     'type' => 'sticky-rowaction',
                     'icon' => 'sicon-plus',
                     'name' => 'create_button',
@@ -27,14 +27,14 @@ $viewdefs['Quotes']['base']['view']['panel-top-for-accounts'] = array(
                     'label' => '',
                     'acl_action' => 'create',
                     'tooltip' => 'LBL_CREATE_BUTTON_LABEL',
-                ),
-                array(
+                ],
+                [
                     'type' => 'link-action',
                     'name' => 'select_button',
                     'label' => 'LBL_ASSOC_RELATED_RECORD',
-                    'css_class' => 'disabled'
-                ),
-            ),
-        ),
-    ),
-);
+                    'css_class' => 'disabled',
+                ],
+            ],
+        ],
+    ],
+];

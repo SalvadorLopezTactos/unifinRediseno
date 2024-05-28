@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Fitxers integrats',
     'LBL_MODULE_NAME_SINGULAR' => 'Fitxer integrat',
     'LBL_MODULE_TITLE' => 'Fitxer integrat',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => 'Nom d´Arxiu',
     'LBL_FILENAME' => 'Nom d´Arxiu',
     'LBL_UPLOAD_ONLY_IMAGE' => 'El fitxer seleccionat hauria de ser una imatge.',
-);
+];

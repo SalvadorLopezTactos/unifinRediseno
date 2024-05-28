@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -29,7 +30,7 @@ class SugarUpgradeInstallProcessDesigns extends UpgradeScript
     public function run()
     {
         // Get the installer
-        $bpi = new BusinessProcessInstaller;
+        $bpi = new BusinessProcessInstaller();
 
         // Prepare the upgrade then run the installer
         $bpi->setLogger('log', $this)->prepareUpgrade()->install();

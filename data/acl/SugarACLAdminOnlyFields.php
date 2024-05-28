@@ -20,7 +20,7 @@ class SugarACLAdminOnlyFields extends SugarACLStrategy
     /**
      * @var array List of non writable fields for non-admin users.
      */
-    private $nonWritableFields = array();
+    private $nonWritableFields = [];
 
     /**
      * Class constructor.
@@ -73,6 +73,6 @@ class SugarACLAdminOnlyFields extends SugarACLStrategy
      */
     private function isNonWriteableField($field)
     {
-        return in_array($field, $this->nonWritableFields);
+        return safeInArray($field, $this->nonWritableFields);
     }
 }

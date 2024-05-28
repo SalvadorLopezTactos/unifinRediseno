@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -24,7 +25,7 @@ class SugarACLTeamBased extends SugarACLStrategy
     /**
      * @var array $cacheAccess Internal cache of team intersection.
      */
-    public static $cacheAccess = array();
+    public static $cacheAccess = [];
 
     /**
      * {@inheritDoc}
@@ -126,7 +127,7 @@ class SugarACLTeamBased extends SugarACLStrategy
             $user->isAdmin() ||
             !ACLField::hasACLs($user->id, $module)
         ) {
-            return array();
+            return [];
         }
         return parent::getFieldListAccess($module, $field_list, $context);
     }
@@ -201,16 +202,16 @@ class SugarACLTeamBased extends SugarACLStrategy
         }
         $sq = new SugarQuery();
         $sq->select('id');
-        $sq->from($bean, array('alias' => 'bean', 'team_security' => false));
+        $sq->from($bean, ['alias' => 'bean', 'team_security' => false]);
 
-        $join = $sq->joinTable('team_sets_teams', array(
+        $join = $sq->joinTable('team_sets_teams', [
             'alias' => 'tst',
-        ));
+        ]);
         $join->on()->equalsField('tst.team_set_id', 'bean.acl_team_set_id');
 
-        $join = $sq->joinTable('team_memberships', array(
+        $join = $sq->joinTable('team_memberships', [
             'alias' => 'tm',
-        ));
+        ]);
         $join->on()->equalsField('tm.team_id', 'tst.team_id');
         $join->on()->equals('tm.user_id', $user->id);
         $join->on()->equals('tm.deleted', 0);

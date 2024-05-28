@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Gauti voką',
     'LBL_CLOUD_SERVICE_TYPE' => 'Debesies paslaugos tipas',
     'LBL_CLOUD_PATH' => 'Debesies kelias',
+    'LBL_CLOUD_DRIVE_ID' => 'Disko ID',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => '„DocuSign“ vokų sąrašo prietaisas',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => '„DocuSign“ vokų įrašų prietaisas',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Naujausi „DocuSign“ vokai',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => '„DocuSign“ vokų fokusavimo stalčius',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '„DocuSign“ voko grafikas',
 
     'LBL_NEW_ENVELOPE' => 'Naujas vokas',
     'LBL_DOCUMENT_IS_NOW' => ' yra dabar ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Siųsti',
     'LBL_BUTTON_CLEAR' => 'Išvalyti',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Naudoti šabloną',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Siųsti naudojant šabloną',
     'LBL_PLEASE_LOG_IN' => 'Pirmiausia prisijunkite prie „DocuSign“!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Šio dokumento atsisiųsti negalite. Jį sukūrė kitas vartotojas!',
     'LBL_SEND_NOT_ALLOWED' => 'Negalite siųsti šio voko. Jį sukūrė kitas vartotojas!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Juodraštis pakeistas. Atnaujinti būseną į dabartinę ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => '„Docusign“ vokas atnaujintas!',
     'LBL_DRAFT_CHANGED_ERROR' => '„DocuSign“ voko būsena neatnaujinta. Išsamesnės informacijos ieškokite žurnaluose!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'Neįmanoma pritaikyti „DocuSign“ šablono',
     'LBL_ENVELOPE_NOT_SENT' => 'Vokas neišsiųstas!',
     'LBL_ENVELOPE_SENT' => 'Vokas vėl išsiųstas!',
     'LBL_DOCUMENT_ADDED' => 'Dokumentas įtrauktas į įrašą!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Vaidmuo',
     'LBL_SELECT_BUTTON_LABEL' => 'Pasirinkti',
     'LBL_BACK_BUTTON_LABEL' => 'Atgal',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Paieška pagal šablono pavadinimą',
+    'LBL_ENVELOPE_NAME' => 'Voko pavadinimas',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Voko pavadinimas gali būti tuščias',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Nepavyko gauti potencialių gavėjų!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Nepavyko gauti šablonų!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Pasirinkite vaidmenį kiekvienam gavėjui',
+    
+    'LBL_DOWNLOAD' => 'Atsisiųsti',
+    'LBL_OPEN_DRAFT' => 'Atidaryti juodraštį',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Dokumentai be failo negali būti siunčiami į „DocuSign“.',
+    'LBL_START_SIGN_PROMPT' => 'Paspauskite pliuso mygtuką, kad pradėtumėte pasirašymo procesą',
+    'LBL_NO_DOC_SELECTED' => 'Pirmiausia pasirinkite dokumentus',
+    'LBL_SELECT_RECIPIENTS' => 'Pasirinkite pasirašantįjį gavėją',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Neįtraukti',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Norint gauti geresnę patirtį, reikia įdiegti „DocuSign“ programą.',
 ];

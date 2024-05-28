@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint\LogicHook;
 
 use Psr\Log\LoggerAwareInterface;
@@ -19,7 +20,9 @@ use Sugarcrm\Sugarcrm\Hint\Queue\QueueTrait;
 
 abstract class LogicHook implements LoggerAwareInterface
 {
-    use LoggerAwareTrait, ConfigTrait, QueueTrait;
+    use LoggerAwareTrait;
+    use ConfigTrait;
+    use QueueTrait;
 
     /**
      * InsightsTrait constructor.

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Ochrana osobných údajov',
     'LBL_MODULE_NAME_SINGULAR' => 'Ochrana osobných údajov',
     'LBL_NUMBER' => 'Číslo',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Žiadne polia ani záznamy neboli označené na vymazanie.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Informačný panel so záznamami o ochrane osobných údajov',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na ochranu osobných údajov',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová os ochrany osobných údajov',
 
     // list view
     'LBL_HELP_RECORDS' => 'Modul ochrany osobných údajov sleduje aktivity na ochranu osobných údajov vrátane žiadostí o súhlas a žiadostí subjektu, ktoré podporujú postupy vašej organizácie v oblasti ochrany osobných údajov. Vytvorte záznamy o ochrane osobných údajov, ktoré sa vzťahujú na záznam jednotlivca (napríklad kontakt), aby ste mohli sledovať súhlas alebo prijať opatrenia týkajúce sa žiadosti o ochranu osobných údajov.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Modul ochrany osobných údajov sleduje aktivity na ochranu osobných údajov vrátane žiadostí o súhlas a žiadostí subjektu, ktoré podporujú postupy vašej organizácie v oblasti ochrany osobných údajov. Vytvorte záznamy o ochrane osobných údajov, ktoré sa vzťahujú na záznam jednotlivca (napríklad kontakt), aby ste mohli sledovať súhlas alebo prijať opatrenia týkajúce sa žiadosti o ochranu osobných údajov. Po dokončení potrebnej akcie môžu používatelia s rolou Správca ochrany údajov kliknúť na tlačidlo „Dokončiť“ alebo „Odmietnuť“, aby aktualizovali stav.
 
 V prípade žiadostí o vymazanie vyberte možnosť „Označiť na vymazanie“ pre každý z jednotlivých záznamov uvedených v podpaneloch nižšie. Po výbere všetkých požadovaných polí kliknutím na položku „Vymazať a dokončiť“ natrvalo odstráňte hodnoty polí a označte záznam o ochrane osobných údajov za dokončený.',
-);
+];

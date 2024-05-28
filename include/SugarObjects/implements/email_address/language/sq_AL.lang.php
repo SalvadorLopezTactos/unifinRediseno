@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_ANY_EMAIL' => 'çdo email',
     'LBL_EMAIL' => 'Email Adresa',
     'LBL_PRIMARY_EMAIL' => 'Primary Email',
@@ -18,7 +18,7 @@ $mod_strings = array (
     'LBL_OTHER_EMAIL_ADDRESS' => 'Email tjetër',
     'LBL_EMAIL_ADDRESS' => 'Email adresa',
     'LBL_EMAIL_ADDRESSES' => 'Email Adresa',
-    'LBL_INVALID_EMAIL'=>'Email Jo Valide',
+    'LBL_INVALID_EMAIL' => 'Email Jo Valide',
     'LBL_EMAIL_OPT_OUT' => 'Email i zgjedhur jashtë:',
     'LBL_EMAIL_NON_PRIMARY' => 'Emaila jo prioritarë',
-);
+];

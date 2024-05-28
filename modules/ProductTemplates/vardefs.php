@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['ProductTemplate'] = array(
+$dictionary['ProductTemplate'] = [
     'table' => 'product_templates',
     'color' => 'pink',
     'icon' => 'sicon-catalog',
@@ -23,8 +23,8 @@ $dictionary['ProductTemplate'] = array(
             'active_status' => ['Active'],
         ],
     ],
-    'fields' => array(
-        'type_id' => array(
+    'fields' => [
+        'type_id' => [
             'name' => 'type_id',
             'type' => 'id',
             'required' => false,
@@ -32,22 +32,22 @@ $dictionary['ProductTemplate'] = array(
             'vname' => 'LBL_TYPE_ID',
             'importable' => 'true',
             'comment' => 'Product type (ex: hardware, software)',
-        ),
-        'manufacturer_id' => array(
+        ],
+        'manufacturer_id' => [
             'name' => 'manufacturer_id',
             'type' => 'id',
-            'required'=>false,
-            'reportable'=>false,
-            'vname' =>'LBL_LIST_MANUFACTURER_ID',
+            'required' => false,
+            'reportable' => false,
+            'vname' => 'LBL_LIST_MANUFACTURER_ID',
             'importable' => 'true',
             'comment' => 'Manufacturer of the product',
-        ),
-        'manufacturer_name' => array(
+        ],
+        'manufacturer_name' => [
             'name' => 'manufacturer_name',
             'rname' => 'name',
-            'id_name'=> 'manufacturer_id',
+            'id_name' => 'manufacturer_id',
             'type' => 'relate',
-            'vname' =>'LBL_MANUFACTURER_NAME',
+            'vname' => 'LBL_MANUFACTURER_NAME',
             'join_name' => 'manufacturers',
             'link' => 'manufacturer_link',
             'table' => 'manufacturers',
@@ -56,23 +56,23 @@ $dictionary['ProductTemplate'] = array(
             'module' => 'Manufacturers',
             'dbType' => 'varchar',
             'len' => '255',
-            'studio' => 'false'
-        ),
-        'category_id' => array(
+            'studio' => 'false',
+        ],
+        'category_id' => [
             'name' => 'category_id',
             'type' => 'id',
             'required' => false,
             'reportable' => false,
             'vname' => 'LBL_LIST_CATEGORY_ID',
             'importable' => 'true',
-            'comment' => 'Category of the product'
-        ),
-        'category_name' => array(
+            'comment' => 'Category of the product',
+        ],
+        'category_name' => [
             'name' => 'category_name',
             'rname' => 'name',
             'id_name' => 'category_id',
             'vname' => 'LBL_CATEGORY_NAME',
-            'join_name'=>'product_categories',
+            'join_name' => 'product_categories',
             'type' => 'relate',
             'link' => 'category_link',
             'table' => 'product_categories',
@@ -81,13 +81,13 @@ $dictionary['ProductTemplate'] = array(
             'dbType' => 'varchar',
             'len' => '255',
             'source' => 'non-db',
-        ),
-        'type_name' => array(
+        ],
+        'type_name' => [
             'name' => 'type_name',
             'rname' => 'name',
             'id_name' => 'type_id',
             'vname' => 'LBL_PRODUCT_TYPE',
-            'join_name'=>'product_types',
+            'join_name' => 'product_types',
             'type' => 'relate',
             'link' => 'type_link',
             'table' => 'product_types',
@@ -97,29 +97,29 @@ $dictionary['ProductTemplate'] = array(
             'len' => '255',
             'source' => 'non-db',
             'importable' => 'true',
-        ),
-        'mft_part_num' => array(
+        ],
+        'mft_part_num' => [
             'name' => 'mft_part_num',
             'vname' => 'LBL_MFT_PART_NUM',
             'type' => 'varchar',
             'len' => '50',
-            'comment' => 'Manufacturer part number'
-        ),
-        'vendor_part_num' => array(
+            'comment' => 'Manufacturer part number',
+        ],
+        'vendor_part_num' => [
             'name' => 'vendor_part_num',
             'vname' => 'LBL_VENDOR_PART_NUM',
             'type' => 'varchar',
             'len' => '50',
-            'comment' => 'Vendor part number'
-        ),
-        'date_cost_price' => array(
+            'comment' => 'Vendor part number',
+        ],
+        'date_cost_price' => [
             'name' => 'date_cost_price',
             'vname' => 'LBL_DATE_COST_PRICE',
             'type' => 'date',
             'massupdate' => false,
-            'comment' => 'Starting date cost price is valid'
-        ),
-        'cost_price' => array(
+            'comment' => 'Starting date cost price is valid',
+        ],
+        'cost_price' => [
             'name' => 'cost_price',
             'vname' => 'LBL_COST_PRICE',
             'type' => 'currency',
@@ -127,12 +127,12 @@ $dictionary['ProductTemplate'] = array(
             'len' => '26,6',
             'comment' => 'Product cost ("Cost" in Quote)',
             'importable' => 'required',
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
-        ),
-        'discount_price' => array(
+                'base_rate',
+            ],
+        ],
+        'discount_price' => [
             'name' => 'discount_price',
             'vname' => 'LBL_DISCOUNT_PRICE',
             'type' => 'currency',
@@ -140,12 +140,12 @@ $dictionary['ProductTemplate'] = array(
             'comment' => 'Discounted price ("Unit Price" in Quote)',
             'importable' => 'required',
             'required' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
-        ),
-        'list_price' => array(
+                'base_rate',
+            ],
+        ],
+        'list_price' => [
             'name' => 'list_price',
             'vname' => 'LBL_LIST_PRICE',
             'type' => 'currency',
@@ -153,87 +153,87 @@ $dictionary['ProductTemplate'] = array(
             'importable' => 'required',
             'required' => true,
             'comment' => 'List price of product ("List" in Quote)',
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
-        ),
-        'cost_usdollar' => array(
+                'base_rate',
+            ],
+        ],
+        'cost_usdollar' => [
             'name' => 'cost_usdollar',
             'vname' => 'LBL_COST_USDOLLAR',
             'type' => 'currency',
-            'currency_id'=> '-99',
+            'currency_id' => '-99',
             'len' => '26,6',
             'comment' => 'Cost expressed in USD',
-            'studio' => array(
+            'studio' => [
                 'mobile' => false,
-            ),
+            ],
             'readonly' => true,
             'is_base_currency' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
+                'base_rate',
+            ],
             'formula' => 'ifElse(isNumeric($cost_price), currencyDivide($cost_price, $base_rate), "")',
             'calculated' => true,
             'enforced' => true,
-        ),
-        'discount_usdollar' => array(
+        ],
+        'discount_usdollar' => [
             'name' => 'discount_usdollar',
             'vname' => 'LBL_DISCOUNT_USDOLLAR',
             'type' => 'currency',
-            'currency_id'=> '-99',
+            'currency_id' => '-99',
             'len' => '26,6',
             'comment' => 'Discount price expressed in USD',
-            'studio' => array(
+            'studio' => [
                 'mobile' => false,
-            ),
+            ],
             'readonly' => true,
             'is_base_currency' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
+                'base_rate',
+            ],
             'formula' => 'ifElse(isNumeric($discount_price), currencyDivide($discount_price, $base_rate), "")',
             'calculated' => true,
             'enforced' => true,
-        ),
-        'list_usdollar' => array(
+        ],
+        'list_usdollar' => [
             'name' => 'list_usdollar',
             'vname' => 'LBL_LIST_USDOLLAR',
             'type' => 'currency',
-            'currency_id'=> '-99',
+            'currency_id' => '-99',
             'len' => '26,6',
             'comment' => 'List price expressed in USD',
-            'studio' => array(
+            'studio' => [
                 'mobile' => false,
-            ),
+            ],
             'readonly' => true,
             'is_base_currency' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
+                'base_rate',
+            ],
             'formula' => 'ifElse(isNumeric($list_price), currencyDivide($list_price, $base_rate), "")',
             'calculated' => true,
             'enforced' => true,
-        ),
-        'status' => array(
+        ],
+        'status' => [
             'name' => 'status',
             'vname' => 'LBL_STATUS',
             'type' => 'enum',
             'options' => 'product_template_status_dom',
             'len' => 100,
             'comment' => 'Product status (not used in product Catalog)',
-        ),
-        'tax_class' => array(
+        ],
+        'tax_class' => [
             'name' => 'tax_class',
             'vname' => 'LBL_TAX_CLASS',
             'type' => 'enum',
             'options' => 'tax_class_dom',
             'len' => 100,
             'comment' => 'Tax classification (ex: Taxable, Non-taxable)',
-        ),
+        ],
         'active_status' => [
             'name' => 'active_status',
             'vname' => 'LBL_ACTIVE_STATUS',
@@ -252,64 +252,64 @@ $dictionary['ProductTemplate'] = array(
             ],
             'massupdate' => true,
         ],
-        'date_available' => array(
+        'date_available' => [
             'name' => 'date_available',
             'vname' => 'LBL_DATE_AVAILABLE',
             'type' => 'date',
             'comment' => 'Availability date',
-        ),
-        'website' => array(
+        ],
+        'website' => [
             'name' => 'website',
             'vname' => 'LBL_URL',
             'type' => 'varchar',
             'len' => '255',
             'comment' => 'Product URL',
-        ),
-        'weight' => array(
+        ],
+        'weight' => [
             'name' => 'weight',
             'vname' => 'LBL_WEIGHT',
             'type' => 'decimal',
             'len' => '12',
             'precision' => '2',
             'comment' => 'Weight of the product',
-        ),
-        'qty_in_stock' => array(
+        ],
+        'qty_in_stock' => [
             'name' => 'qty_in_stock',
             'vname' => 'LBL_QUANTITY',
             'type' => 'int',
             'len' => '5',
             'comment' => 'Quantity on hand',
-        ),
-        'support_name' => array(
+        ],
+        'support_name' => [
             'name' => 'support_name',
             'vname' => 'LBL_SUPPORT_NAME',
             'type' => 'varchar',
             'len' => '50',
             'comment' => 'Name of product for support purposes',
-        ),
-        'support_description' => array(
+        ],
+        'support_description' => [
             'name' => 'support_description',
             'vname' => 'LBL_SUPPORT_DESCRIPTION',
             'type' => 'varchar',
             'len' => '255',
             'comment' => 'Description of product for support purposes',
-        ),
-        'support_contact' => array(
+        ],
+        'support_contact' => [
             'name' => 'support_contact',
             'vname' => 'LBL_SUPPORT_CONTACT',
             'type' => 'varchar',
             'len' => '50',
             'comment' => 'Contact for support purposes',
-        ),
-        'support_term' => array(
+        ],
+        'support_term' => [
             'name' => 'support_term',
             'vname' => 'LBL_SUPPORT_TERM',
             'type' => 'enum',
             'options' => 'support_term_dom',
             'len' => 100,
             'comment' => 'Term (length) of support contract',
-        ),
-        'pricing_formula' => array(
+        ],
+        'pricing_formula' => [
             'name' => 'pricing_formula',
             'vname' => 'LBL_PRICING_FORMULA',
             'type' => 'pricing-formula',
@@ -317,27 +317,27 @@ $dictionary['ProductTemplate'] = array(
             'options' => 'pricing_formula_dom',
             'len' => 100,
             'comment' => 'Pricing formula (ex: Fixed, Markup over Cost)',
-            'studio' => array(
-                'field' => array(
+            'studio' => [
+                'field' => [
                     'options' => false,
-                ),
-            ),
-            'related_fields' => array(
+                ],
+            ],
+            'related_fields' => [
                 'pricing_factor',
-            ),
-        ),
-        'pricing_factor' => array(
+            ],
+        ],
+        'pricing_factor' => [
             'name' => 'pricing_factor',
             'vname' => 'LBL_PRICING_FACTOR',
             'type' => 'decimal',
             'len' => '8',
             'precision' => '2',
             'comment' => 'Variable pricing factor depending on pricing_formula',
-            'related_fields' => array(
+            'related_fields' => [
                 'pricing_formula',
-            ),
-        ),
-        'category_link' => array(
+            ],
+        ],
+        'category_link' => [
             'name' => 'category_link',
             'type' => 'link',
             'relationship' => 'product_templates_product_categories',
@@ -346,8 +346,8 @@ $dictionary['ProductTemplate'] = array(
             'module' => 'ProductCategories',
             'bean_name' => 'ProductCategory',
             'source' => 'non-db',
-        ),
-        'type_link' => array(
+        ],
+        'type_link' => [
             'name' => 'type_link',
             'type' => 'link',
             'relationship' => 'product_templates_product_types',
@@ -356,8 +356,8 @@ $dictionary['ProductTemplate'] = array(
             'module' => 'ProductTypes',
             'bean_name' => 'ProductType',
             'source' => 'non-db',
-        ),
-        'manufacturer_link' => array(
+        ],
+        'manufacturer_link' => [
             'name' => 'manufacturer_link',
             'type' => 'link',
             'relationship' => 'product_templates_manufacturers',
@@ -366,15 +366,15 @@ $dictionary['ProductTemplate'] = array(
             'module' => 'Manufacturers',
             'bean_name' => 'Manufacturer',
             'source' => 'non-db',
-        ),
-        'forecastworksheet' => array(
+        ],
+        'forecastworksheet' => [
             'name' => 'forecastworksheet',
             'type' => 'link',
             'relationship' => 'forecastworksheets_templates',
             'source' => 'non-db',
             'vname' => 'LBL_FORECAST_WORKSHEET',
-        ),
-        'service_duration_value' => array(
+        ],
+        'service_duration_value' => [
             'name' => 'service_duration_value',
             'vname' => 'LBL_SERVICE_DURATION_VALUE',
             'type' => 'int',
@@ -383,8 +383,8 @@ $dictionary['ProductTemplate'] = array(
             'studio' => false,
             'required' => false,
             'comment' => 'Value of the service duration, if service duration is 4 Months the value is 4',
-        ),
-        'service_duration_unit' => array (
+        ],
+        'service_duration_unit' => [
             'name' => 'service_duration_unit',
             'vname' => 'LBL_SERVICE_DURATION_UNIT',
             'type' => 'enum',
@@ -393,7 +393,7 @@ $dictionary['ProductTemplate'] = array(
             'studio' => false,
             'audited' => false,
             'comment' => 'Service Duration unit like Year(s), Month(s) or Day(s)',
-        ),
+        ],
         'renewable' => [
             'name' => 'renewable',
             'vname' => 'LBL_RENEWABLE',
@@ -415,39 +415,39 @@ $dictionary['ProductTemplate'] = array(
             'default' => 0,
             'comment' => 'Indicates whether the duration can be manually changed',
         ],
-    ),
-    'relationships' => array(
-        'product_templates_product_categories' => array(
+    ],
+    'relationships' => [
+        'product_templates_product_categories' => [
             'lhs_module' => 'ProductCategories',
             'lhs_table' => 'product_categories',
             'lhs_key' => 'id',
             'rhs_module' => 'ProductTemplates',
             'rhs_table' => 'product_templates',
             'rhs_key' => 'category_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'product_templates_product_types' => array(
-            'lhs_module'=> 'ProductTypes',
-            'lhs_table'=> 'product_types',
+            'relationship_type' => 'one-to-many',
+        ],
+        'product_templates_product_types' => [
+            'lhs_module' => 'ProductTypes',
+            'lhs_table' => 'product_types',
             'lhs_key' => 'id',
-            'rhs_module'=> 'ProductTemplates',
-            'rhs_table'=> 'product_templates',
+            'rhs_module' => 'ProductTemplates',
+            'rhs_table' => 'product_templates',
             'rhs_key' => 'type_id',
-            'relationship_type'=>'one-to-many'
-        ),
-        'product_templates_manufacturers' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'product_templates_manufacturers' => [
             'lhs_module' => 'Manufacturers',
-            'lhs_table'=> 'manufacturers',
+            'lhs_table' => 'manufacturers',
             'lhs_key' => 'id',
             'rhs_module' => 'ProductTemplates',
             'rhs_table' => 'product_templates',
             'rhs_key' => 'manufacturer_id',
-            'relationship_type' => 'one-to-many'
-        ),
-    ),
-    'indices' => array (
-        array('name' => 'idx_producttemplate_qty_in_stock', 'type' => 'index', 'fields' => array('qty_in_stock')),
-        array('name' => 'idx_producttemplate_category', 'type' => 'index', 'fields' => array('category_id', 'active_status', 'deleted')),
+            'relationship_type' => 'one-to-many',
+        ],
+    ],
+    'indices' => [
+        ['name' => 'idx_producttemplate_qty_in_stock', 'type' => 'index', 'fields' => ['qty_in_stock']],
+        ['name' => 'idx_producttemplate_category', 'type' => 'index', 'fields' => ['category_id', 'active_status', 'deleted']],
         [
             'name' => 'idx_id_name',
             'type' => 'index',
@@ -456,16 +456,17 @@ $dictionary['ProductTemplate'] = array(
                 'name',
             ],
         ],
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef(
     'ProductTemplates',
     'ProductTemplate',
-    array(
+    [
         'default',
         'assignable',
         'currency',
         'team_security',
-    )
+        'audit',
+    ]
 );

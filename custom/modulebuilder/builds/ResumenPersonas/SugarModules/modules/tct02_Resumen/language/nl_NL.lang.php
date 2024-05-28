@@ -1,5 +1,5 @@
 <?php
-// created: 2024-05-20 10:35:20
+// created: 2024-05-21 12:56:53
 $mod_strings = array (
   'LBL_ASSIGNED_TO_ID' => 'Toegewezen aan ID',
   'LBL_ASSIGNED_TO_NAME' => 'Toegewezen aan',

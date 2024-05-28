@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint\Queue;
 
 use Sugarcrm\Sugarcrm\Hint\HintConstants;
@@ -22,7 +23,8 @@ use Psr\Log\LoggerAwareTrait;
 
 class QueueProcessor implements LoggerAwareInterface
 {
-    use LoggerAwareTrait, QueueTrait;
+    use LoggerAwareTrait;
+    use QueueTrait;
 
     /**
      * @var EventConverter
@@ -90,7 +92,7 @@ class QueueProcessor implements LoggerAwareInterface
                 $command = $this->processorFactory->getProcessor($event['type'])($eventData);
 
                 // If we aren't disabled, push the command
-                if ($notificationsDisabled === "" || $notificationsDisabled === null || $notificationsDisabled == false) {
+                if ($notificationsDisabled === '' || $notificationsDisabled === null || $notificationsDisabled == false) {
                     $issCommands[] = $command;
                 } else {
                     // Make sure the event is one of the commands that are executed unconditionally
@@ -102,7 +104,7 @@ class QueueProcessor implements LoggerAwareInterface
             }
 
             // Only call send if we have commands to send, for efficiency
-            if (count($issCommands) > 0) {
+            if (safeCount($issCommands) > 0) {
                 $this->issManager->sendCommands($issCommands);
             }
             $this->eventQueue->finishedProcessingEvents();

@@ -10,35 +10,35 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = '<module_name>';
-$viewdefs[$module_name]['base']['view']['twitter'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs[$module_name]['base']['view']['twitter'] = [
+    'dashlets' => [
+        [
             'name' => 'LBL_TWITTER_NAME',
             'description' => 'LBL_TWITTER_DESCRIPTION',
-            'config' => array(
+            'config' => [
                 'limit' => '20',
-            ),
-            'preview' => array(
+            ],
+            'preview' => [
                 'title' => 'LBL_TWITTER_MY_ACCOUNT',
                 'twitter' => 'sugarcrm',
                 'limit' => '3',
-            ),
-        ),
-    ),
-    'config' => array(
-        'fields' => array(
-            array(
+            ],
+        ],
+    ],
+    'config' => [
+        'fields' => [
+            [
                 'name' => 'limit',
                 'label' => 'LBL_TWITTER_DISPLAY_ROWS',
                 'type' => 'enum',
-                'options' => array(
+                'options' => [
                     5 => 5,
                     10 => 10,
                     15 => 15,
                     20 => 20,
                     50 => 50,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '콘솔 설정',
     'LBL_MODULE_NAME_SINGULAR' => '콘솔 설정',
     'LBL_CONSOLE_CONFIG_TITLE' => '콘솔',
@@ -55,4 +56,4 @@ $mod_strings = array(
     'LBL_CONSOLE_DIRECTIONS_CHANGE' => '변경 사항은 즉시 적용되지만, 효력을 발휘하려면 저장을 해야 합니다.',
     'LBL_CONSOLE_DIRECTIONS_FILTER_AND' => '그리고 ',
     'LBL_CONSOLE_DIRECTIONS_FILTER_OR' => '또는 ',
-);
+];

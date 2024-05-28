@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Rinkodara',
-    'Knowledge Base' => 'Žinių bazė',
-    'Sales' => 'Pardavimas',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Rinkodaros dokumentacija',
-    'Product Brochures' => 'Produktų brošiūros',
-    'FAQ' => 'DUK',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Rinkodara',
+        'Knowledge Base' => 'Žinių bazė',
+        'Sales' => 'Pardavimas',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Aktyvus',
-    'Draft' => 'Juodraštis',
-    'FAQ' => 'DUK',
-    'Expired' => 'Nebegalioja',
-    'Under Review' => 'Peržiūrimas',
-    'Pending' => 'Laukiantis',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Rinkodaros dokumentacija',
+        'Product Brochures' => 'Produktų brošiūros',
+        'FAQ' => 'DUK',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Aktyvus',
+        'Draft' => 'Juodraštis',
+        'FAQ' => 'DUK',
+        'Expired' => 'Nebegalioja',
+        'Under Review' => 'Peržiūrimas',
+        'Pending' => 'Laukiantis',
+    ],
+];

@@ -10,6 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<span class="ellipsis_inline" title="{{value}}" data-placement="bottom" data-fieldname="{{name}}">
-    {{#if def.link}}<a href="{{#if def.events}}javascript:void(0);{{else}}{{href}}{{/if}}">{{value}}</a>{{else}}{{value}}{{/if}}
+<span class="ellipsis_inline relate-field-container" title="{{value}}" data-bs-placement="bottom"
+      data-fieldname="{{name}}">
+    {{#if def.link}}
+        <a href="{{#if def.events}}javascript:void(0);{{else}}{{href}}{{/if}}">{{value}}</a>{{partial 'focus-icon' this this}}
+    {{else}}
+        {{value}}
+    {{/if}}
 </span>

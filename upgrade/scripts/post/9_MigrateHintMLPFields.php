@@ -82,6 +82,7 @@ class SugarUpgradeMigrateHintMLPFields extends UpgradeScript
         'hint_account_fiscal_year_end_c' => 'hint_account_fiscal_year_end',
         'hint_account_annual_revenue_c' => 'hint_account_annual_revenue',
     ];
+
     /**
      * {@inheritDoc}
      */
@@ -92,10 +93,10 @@ class SugarUpgradeMigrateHintMLPFields extends UpgradeScript
 
             $this->accountsMapping = $this->updateAvailableFields($this->accountsMapping, 'Accounts');
             $this->executeMigration('Accounts', $this->accountsMapping);
-            
+
             $this->leadsMapping = $this->updateAvailableFields($this->leadsMapping, 'Leads');
             $this->executeMigration('Leads', $this->leadsMapping);
-            
+
             $this->contactsMapping = $this->updateAvailableFields($this->contactsMapping, 'Contacts');
             $this->executeMigration('Contacts', $this->contactsMapping);
 
@@ -115,7 +116,7 @@ class SugarUpgradeMigrateHintMLPFields extends UpgradeScript
         if (version_compare($this->from_version, '12.0.0', '>=')) {
             return false;
         }
-        
+
         $accountSeed = BeanFactory::newBean('Accounts');
         $hasCustomFields = $accountSeed->hasCustomFields();
         if ($hasCustomFields) {
@@ -166,7 +167,7 @@ class SugarUpgradeMigrateHintMLPFields extends UpgradeScript
         $bean = BeanFactory::newBean($module);
         $table = $bean->getTableName();
         $customTable = $bean->get_custom_table_name();
-        
+
         // Get cstm values
         $qb = $this->db->getConnection()->createQueryBuilder();
 
@@ -175,7 +176,7 @@ class SugarUpgradeMigrateHintMLPFields extends UpgradeScript
 
         $qb->select($selectFields);
         $qb->from($customTable);
-        
+
         //only select records that have at least a value to migrate
         $or = $qb->expr()->orx();
         foreach ($mapping as $oldFieldName => $newFieldName) {

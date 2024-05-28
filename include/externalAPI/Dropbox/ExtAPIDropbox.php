@@ -12,7 +12,7 @@
 
 require_once 'include/externalAPI/Dropbox/DropboxClient.php';
 
- /**
+/**
  * ExtAPIDropbox
  */
 class ExtAPIDropbox extends ExternalAPIBase
@@ -214,7 +214,7 @@ class ExtAPIDropbox extends ExternalAPIBase
      *
      * @return SugarBean
      */
-    public function getUserEAPM(): SugarBean
+    public function getUserEAPM(): ?SugarBean
     {
         global $current_user;
 
@@ -249,22 +249,41 @@ class ExtAPIDropbox extends ExternalAPIBase
      */
     public function listFolder(array $data): array
     {
-        $client = $this->getClient();
-        $tokenData = $client->getAccessToken();
-        $accessToken = $tokenData['access_token'];
-        $headers = [];
-        $headers[] = "Authorization: Bearer {$accessToken}";
-        $headers[] = 'Content-Type: application/json';
+        $cursor = isset($data['cursor']) ? $data['cursor'] : null;
+
         $url = "{$this->baseApiUrl}/files/list_folder";
 
-        if ($data['cursor']) {
-            $url .= '/continue';
-            $data = [
-                'cursor' => $data['cursor'],
-            ];
-        }
+        $callParams = $this->getCallParams($data, $url);
+        return $callParams['client']->call('POST', $callParams['url'], $callParams['data'], $callParams['headers'], false);
+    }
 
-        return $client->call('POST', $url, $data, $headers, false);
+    /**
+     * Lists Shared with me folders
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function listSharedFolder(array $data): array
+    {
+
+        $url = "{$this->baseApiUrl}/sharing/list_folders";
+        $callParams = $this->getCallParams($data, $url);
+        return $callParams['client']->call('POST', $callParams['url'], $callParams['data'], $callParams['headers'], false);
+    }
+
+    /**
+     * Lists Shared with me files
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function listSharedFiles(array $data): array
+    {
+        $url = "{$this->baseApiUrl}/sharing/list_received_files";
+        $callParams = $this->getCallParams($data, $url);
+        return $callParams['client']->call('POST', $callParams['url'], $callParams['data'], $callParams['headers'], false);
     }
 
     /**
@@ -276,17 +295,11 @@ class ExtAPIDropbox extends ExternalAPIBase
      */
     public function createFolder(array $data): array
     {
-        $client = $this->getClient();
-        $tokenData = $client->getAccessToken();
-        $accessToken = $tokenData['access_token'];
-        $headers = [];
-        $headers[] = "Authorization: Bearer {$accessToken}";
-        $headers[] = 'Content-Type: application/json';
         $url = "{$this->baseApiUrl}/files/create_folder_v2";
-
         $data['autorename'] = false;
+        $callParams = $this->getCallParams($data, $url);
 
-        return $client->call('POST', $url, $data, $headers, false);
+        return $callParams['client']->call('POST', $callParams['url'], $callParams['data'], $callParams['headers'], false);
     }
 
     /**
@@ -298,15 +311,9 @@ class ExtAPIDropbox extends ExternalAPIBase
      */
     public function deleteFile(array $data): array
     {
-        $client = $this->getClient();
-        $tokenData = $client->getAccessToken();
-        $accessToken = $tokenData['access_token'];
-        $headers = [];
-        $headers[] = "Authorization: Bearer {$accessToken}";
-        $headers[] = 'Content-Type: application/json';
         $url = "{$this->baseApiUrl}/files/delete_v2";
-
-        return $client->call('POST', $url, $data, $headers, false);
+        $callParams = $this->getCallParams($data, $url);
+        return $callParams['client']->call('POST', $callParams['url'], $callParams['data'], $callParams['headers'], false);
     }
 
     /**
@@ -318,16 +325,10 @@ class ExtAPIDropbox extends ExternalAPIBase
      */
     public function downloadFile(string $fileId): string
     {
-        $client = $this->getClient();
-        $tokenData = $client->getAccessToken();
-        $accessToken = $tokenData['access_token'];
-        $headers = [];
-        $headers[] = "Authorization: Bearer {$accessToken}";
-        $headers[] = 'Content-Type: application/octet-stream';
-        $headers[] = 'Dropbox-API-Arg: {"path":"' . $fileId . '"}';
-        $url = "{$this->contentUrl}/files/download";
-
-        $response = $client->call('POST', $url, null, $headers, false);
+        $url = "{$this->baseApiUrl}/files/delete_v2";
+        $data['fileId'] = $fileId;
+        $callParams = $this->getCallParams($data, $url, 'downloadFile');
+        $response = $callParams['client']->call('POST', $callParams['url'], null, $callParams['headers'], false);
 
         if (!is_string($response)) {
             return false;
@@ -343,15 +344,9 @@ class ExtAPIDropbox extends ExternalAPIBase
      */
     public function getSharedLink(array $data)
     {
-        $client = $this->getClient();
-        $tokenData = $client->getAccessToken();
-        $accessToken = $tokenData['access_token'];
-        $headers = [];
-        $headers[] = "Authorization: Bearer {$accessToken}";
-        $headers[] = 'Content-Type: application/json';
         $url = "{$this->baseApiUrl}/sharing/create_shared_link_with_settings";
-
-        return $client->call('POST', $url, $data, $headers, false);
+        $callParams = $this->getCallParams($data, $url);
+        return $callParams['client']->call('POST', $callParams['url'], $callParams['data'], $callParams['headers'], false);
     }
 
     /**
@@ -363,16 +358,10 @@ class ExtAPIDropbox extends ExternalAPIBase
      */
     public function uploadFile(string $path, array $data)
     {
-        $client = $this->getClient();
-        $tokenData = $client->getAccessToken();
-        $accessToken = $tokenData['access_token'];
-        $headers = [];
-        $headers[] = "Authorization: Bearer {$accessToken}";
-        $headers[] = 'Content-Type: application/octet-stream';
-        $headers[] = 'Dropbox-API-Arg: {"path":"' . $path . '", "mode":{".tag":"overwrite"}}';
         $url = "{$this->contentUrl}/files/upload";
-
-        return $client->call('POST', $url, $data, $headers, false);
+        $data['path'] = $path;
+        $callParams = $this->getCallParams($data, $url, 'uploadFile');
+        return $callParams['client']->call('POST', $callParams['url'], $callParams['data'], $callParams['headers'], false);
     }
 
     /**
@@ -388,5 +377,55 @@ class ExtAPIDropbox extends ExternalAPIBase
             . '/oauth-handler/DropboxOauth2Redirect';
 
         return $config;
+    }
+
+    /**
+     * Get common parameters for client-call() function
+     *
+     * @param array $data
+     * @param string $url
+     * @return array
+     */
+    private function getCallParams(array $data, string $url, ?string $typeOfOperation = null)
+    {
+        $client = $this->getClient();
+        $tokenData = $client->getAccessToken();
+        $accessToken = $tokenData['access_token'];
+        $headers = [];
+        $headers[] = "Authorization: Bearer {$accessToken}";
+
+        if ($typeOfOperation === null) {
+            $headers[] = 'Content-Type: application/json';
+        } else {
+            switch ($typeOfOperation) {
+                case "uploadFile":
+                    $headers[] = 'Content-Type: application/octet-stream';
+                    $headers[] = 'Dropbox-API-Arg: {"path":"' . ($data['path'] ?? '') . '", "mode":{".tag":"overwrite"}}';
+                    break;
+                case 'downloadFile':
+                    $headers[] = 'Content-Type: application/octet-stream';
+                    $headers[] = 'Dropbox-API-Arg: {"path":"' . ($data['fileId'] ?? '') . '"}';
+                    break;
+                default:
+                    $headers[] = 'Content-Type: application/json';
+                    break;
+            }
+        }
+
+        if (isset($data['cursor'])) {
+            $url .= '/continue';
+            $data = [
+                'cursor' => $data['cursor'],
+            ];
+        }
+
+        $params = [
+            'client' => $client,
+            'headers' => $headers,
+            'data' => $data,
+            'url' => $url,
+        ];
+
+        return $params;
     }
 }

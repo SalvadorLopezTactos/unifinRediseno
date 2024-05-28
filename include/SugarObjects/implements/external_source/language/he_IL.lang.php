@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-    'LBL_SOURCE_ID'   => 'מזהה מקור חיצוני',
+$mod_strings = [
+    'LBL_SOURCE_ID' => 'מזהה מקור חיצוני',
     'LBL_SOURCE_TYPE' => 'מקור חיצוני',
     'LBL_SOURCE_META' => 'מטה-מזהה מקור',
-);
+];

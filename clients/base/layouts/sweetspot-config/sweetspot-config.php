@@ -9,30 +9,30 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['layout']['sweetspot-config'] = array(
+$viewdefs['base']['layout']['sweetspot-config'] = [
     'css_class' => 'sweetspot-config',
-    'components' => array(
-        array(
+    'components' => [
+        [
             'view' => 'sweetspot-config-headerpane',
-        ),
-        array(
-            'layout' => array(
+        ],
+        [
+            'layout' => [
                 'type' => 'fluid',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'sweetspot-config-list',
                             'span' => 8,
-                        ),
-                    ),
-                    array(
-                        'view' => array(
+                        ],
+                    ],
+                    [
+                        'view' => [
                             'type' => 'sweetspot-config-theme',
                             'span' => 4,
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,6 +11,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Search\Providers;
 
 /**
@@ -50,7 +53,7 @@ class Elastic extends Search
     /**
      * @return array
      */
-    public function getPropertiesToCopy() : array
+    public function getPropertiesToCopy(): array
     {
         return $this->propertiesToCopy ?? [];
     }
@@ -58,7 +61,7 @@ class Elastic extends Search
     /**
      * {@inheritDoc}
      */
-    public function formatData(array $data) : array
+    public function formatData(array $data): array
     {
         $newData = [];
 

@@ -10,43 +10,43 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$subpanel_layout = array(
-    'list_fields' => array(
-        'name' => array(
+$subpanel_layout = [
+    'list_fields' => [
+        'name' => [
             'vname' => 'LBL_NAME',
             'widget_class' => 'SubPanelDetailViewLink',
             'width' => '30%',
             'sortable' => true,
-        ),
-        'shift_exception_type' => array(
+        ],
+        'shift_exception_type' => [
             'vname' => 'LBL_TYPE',
             'width' => '10%',
             'sortable' => true,
-        ),
-        'start_date' => array(
+        ],
+        'start_date' => [
             'vname' => 'LBL_START_DATE',
             'width' => '10%',
             'sortable' => true,
-        ),
-        'end_date' => array(
+        ],
+        'end_date' => [
             'vname' => 'LBL_END_DATE',
             'width' => '10%',
             'sortable' => true,
-        ),
-        'timezone' => array(
+        ],
+        'timezone' => [
             'vname' => 'LBL_TIMEZONE',
             'width' => '20%',
             'sortable' => true,
-        ),
-        'all_day' => array(
+        ],
+        'all_day' => [
             'vname' => 'LBL_ALL_DAY',
             'width' => '10%',
             'sortable' => true,
-        ),
-        'enabled' => array(
+        ],
+        'enabled' => [
             'vname' => 'LBL_ENABLED',
             'width' => '10%',
             'sortable' => true,
-        ),
-    ),
-);
+        ],
+    ],
+];

@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'Vis opptrappinger',
     'LBL_LIST_RELATED_TO_ID' => 'Relatert til ID',
     'LNK_IMPORT_ESCALATIONS' => 'Importopptrappinger',
-    
+
     'LBL_LIST_SUBJECT' => 'Emne',
     'LBL_LIST_NUMBER' => 'Num.',
     'LBL_LIST_RELATED_TO_TYPE' => 'Beslektet type',

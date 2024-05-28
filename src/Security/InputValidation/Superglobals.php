@@ -57,13 +57,13 @@ class Superglobals
      * Raw $_GET values
      * @var array
      */
-    private $rawGet = array();
+    private $rawGet = [];
 
     /**
      * Raw $_POST values
      * @var array
      */
-    private $rawPost = array();
+    private $rawPost = [];
 
     /**
      * @var LoggerInterface
@@ -74,19 +74,19 @@ class Superglobals
      * Sanitized $_GET values
      * @var array
      */
-    private $sanitizedGet = array();
+    private $sanitizedGet = [];
 
     /**
      * Sanitized $_POST values
      * @var array
      */
-    private $sanitizedPost = array();
+    private $sanitizedPost = [];
 
     /**
      * Sanitized $_REQUEST values
      * @var array
      */
-    private $sanitizedRequest = array();
+    private $sanitizedRequest = [];
 
     /**
      * Enable/disable compatibility layer.
@@ -308,19 +308,19 @@ class Superglobals
          */
         switch ($type) {
             case self::GET:
-                $superglobal = empty($_GET) ? array() : $_GET;
+                $superglobal = empty($_GET) ? [] : $_GET;
                 $raw = $this->rawGet;
                 $sanitized = $this->sanitizedGet;
                 break;
 
             case self::POST:
-                $superglobal = empty($_POST) ? array() : $_POST;
+                $superglobal = empty($_POST) ? [] : $_POST;
                 $raw = $this->rawPost;
                 $sanitized = $this->sanitizedPost;
                 break;
 
             case self::REQUEST:
-                $superglobal = empty($_REQUEST) ? array() : $_REQUEST;
+                $superglobal = empty($_REQUEST) ? [] : $_REQUEST;
                 $raw = array_merge($this->rawGet, $this->rawPost);
                 $sanitized = $this->sanitizedRequest;
                 break;

@@ -24,6 +24,13 @@
     presentationModeClass: 'dri-workflow-details-vertical',
 
     /**
+     * Archived fields
+     *
+     * @property
+     */
+    recordIsArchived: false,
+
+    /**
      * Status values.
      *
      * @property
@@ -43,14 +50,15 @@
     events: {
         'click .dri-workflow-info': 'workflowInfoClicked',
         'click .dri-workflow-action-buttons': 'actionButtonsClicked',
-        'click .cj_blocked .fa-ban': 'blockedActivityClicked',
-        'click .cj_blocked_by_stage .fa-ban': 'blockedByStageActivityClicked',
-        'click .dri-workflow-wrapper': 'activeCycleClicked',
+        'click .cj_blocked .sicon-ban': 'blockedActivityClicked',
+        'click .cj_blocked_by_stage .sicon-ban': 'blockedByStageActivityClicked',
+        'click .sortable-journey': 'activeCycleClicked',
         'click .dri-subworkflow-activity .activity-preview-icon-name': 'previewActivityClicked',
         'click .dri-subworkflow-activity .activity-preview-icon': 'previewActivityClicked',
         'click .activity-form': 'activityFormClicked',
         'click .dri-activity-hide-children': 'hideActivityChildrenClicked',
         'click .dri-activity-show-children': 'showActivityChildrenClicked',
+        'click .dri-workflow-assigned-user-link': 'viewAssignedUserClick',
     },
 
     tplErrorMap: {
@@ -58,7 +66,7 @@
     },
 
     className: 'dri-workflow-wrapper mx-2 my-3.5 rounded-md shadow hover:shadow-lg ' +
-        'transition-shadow hover:bg-dashlet-background-hover ui-sortable-handle',
+        'transition-shadow hover:bg-[--dashlet-background-hover] ui-sortable-handle',
 
     stageModule: 'DRI_SubWorkflows',
     stageLink: 'dri_subworkflows',
@@ -74,6 +82,8 @@
         this._initProperties();
         this._super('initialize', [options]);
         this.listenTo(this.model, 'change:state', this._setStateClass);
+        this.listenTo(this.model, 'change:archived', this.hasArchivedField);
+        this.listenTo(this.model, 'workflow-template:hide-show:click', this.reloadData);
 
         if (this.model) {
             this.listenTo(this.context, 'sync', this.reloadViewData);
@@ -135,7 +145,7 @@
     _bindJourneryEvents: function() {
         this.listenTo(this.context, 'journey:add_stage_button:click', this.addStageClick);
         this.listenTo(this.context, 'journey:configure_template_button:click', this.configureTemplateClick);
-        this.listenTo(this.context, 'journey:view_button:click', this.viewJourneyClick);
+        this.listenTo(this.context, 'journey:edit_button:click', this.editJourneyClick);
         this.listenTo(this.context, 'journey:cancel_button:click', this.cancelJourneyClick);
         this.listenTo(this.context, 'journey:archive_button:click', this.archiveJourneyClick);
         this.listenTo(this.context, 'journey:unarchive_button:click', this.unarchiveJourneyClick);
@@ -149,11 +159,15 @@
      */
     _bindStageEvents: function() {
         this.listenTo(this.context, 'stage:edit_button:click', this.editStageClick);
-        this.listenTo(this.context, 'stage:delete_button:click', this.deleteModelClick);
+        this.listenTo(this.context, 'stage:delete_button:click', this.deleteCycleClicked);
 
         this.listenTo(this.context, 'stage:add_task_button:click', this.addTask);
         this.listenTo(this.context, 'stage:add_meeting_button:click', this.addMeeting);
         this.listenTo(this.context, 'stage:add_call_button:click', this.addCall);
+
+        this.listenTo(this.context, 'stage:link_task_button:click', this.linkExistingTask);
+        this.listenTo(this.context, 'stage:link_meeting_button:click', this.linkExistingMeeting);
+        this.listenTo(this.context, 'stage:link_call_button:click', this.linkExistingCall);
 
         this.listenTo(this.context, 'stage:add_sub_task_button:click', this.addSubTask);
         this.listenTo(this.context, 'stage:add_sub_meeting_button:click', this.addSubMeeting);
@@ -167,18 +181,21 @@
      */
     _bindActivityEvents: function() {
         this.listenTo(this.context, 'activity:complete_button:click', function(activity) {
-            this.childActivityCount = this.getChildActivityCount(activity);
-            this.childActivityCount -= this.getNotApplicableChildrenCount(activity);
+            this.childActivitiesCount = this.getNotCompletedChildrenCount(activity);
 
-            this.completeActivityClick(activity);
+            this.completeActivityClick(activity, true);
         });
         this.listenTo(this.context, 'activity:edit_button:click', this.editActivityClick);
         this.listenTo(this.context, 'activity:start_button:click', this.startActivityClick);
         this.listenTo(this.context, 'activity:assign_me_button:click', this.assignMeActivityClick);
         this.listenTo(this.context, 'activity:delete_button:click', this.deleteModelClick);
-        this.listenTo(this.context, 'activity:not_applicable_button:click', this.notApplicableActivityClick);
-        this.listenTo(this.context, 'activity:preview_button:click', this.previewModel);
+        this.listenTo(this.context, 'activity:not_applicable_button:click', function(activity) {
+            this.childActivitiesCount = this.getNotCompletedChildrenCount(activity);
 
+            this.notApplicableActivityClick(activity);
+            this.enablingJourneyAndDoneLoading();
+        });
+        this.listenTo(this.context, 'activity:preview_button:click', this.previewModel);
         this.listenTo(this.context, 'activity:duplicate_button:click', this.duplicateButton);
     },
 
@@ -196,21 +213,34 @@
         }
 
         let bean = parent ? parent : activity;
+
+        //send item clicked when it's parent to be able to make validations
+        let targetItem = null;
+        if (parent) {
+            targetItem = {
+                id: parent.get('id'),
+                module: parent.get('_module'),
+            };
+        }
         let url = app.api.buildURL(
             'DRI_Workflows',
             'update-activity-state',
-            null,
-            {
-                status: updatedStatus,
-                activity_id: activity.id,
-                activity_module: activity.module,
-                fieldsToValidate: this.getFieldsToValidate(),
-                parentActivity: this.getParentActivity(activity, updatedStatus),
-                activities: this.getActivitiesInfo(bean.get('children'), bean),
-            }
+            null
         );
+        let data = {
+            module: this.model.module,
+            record: this.model.get('id'),
+            status: updatedStatus,
+            activity_id: activity.id,
+            activity_module: activity.module,
+            fieldsToValidate: this.getFieldsToValidate(),
+            parentActivity: this.getParentActivity(activity, updatedStatus),
+            activities: this.getActivitiesInfo(bean.get('children'), bean),
+            childActivitiesCount: this.childActivitiesCount,
+            targetItem: targetItem,
+        };
 
-        return url;
+        return [url, data];
     },
 
     /**
@@ -259,27 +289,29 @@
      * @param {string} url
      * @param {Object} activity
      */
-    callActivityStatusUpdateApi: function(url, activity) {
+    callActivityStatusUpdateApi: function(url, activity, data) {
         if (_.isEmpty(url)) {
             return;
         }
-        app.api.call('create', url, null, {
+        app.api.call('create', url, data, null, {
             success: _.bind(function(response) {
-                if (!_.isEmpty(response)) {
+                if (!response.isValid) {
                     this.alertForRequiredFieldDependency(response);
-                    this.reloadData();
                     return;
                 }
-
-                this.reloadData();
-                let stage = this.stages[activity.get('dri_subworkflow_id')];
-                let stageRSATriggerFlag = false;
-
-                if (stage.model.get('state') === 'not_started') {
-                    stageRSATriggerFlag = true;
+                if (!_.isUndefined(response.isActivityChangeNotAllowed) &&
+                    response.isActivityChangeNotAllowed === true && !_.isUndefined(this.completeQueue)) {
+                    app.alert.dismiss('process_complete_activity');
+                    app.alert.show('error_activity_not_allowed', {
+                        level: 'error',
+                        messages: app.lang.get('LBL_CURRENT_USER_UNABLE_TO_COMPLETE_STATUS',
+                            'DRI_Workflow_Task_Templates'),
+                        autoClose: false,
+                    });
                 }
 
-                this.handleFormsForStage(activity, activity.get('dri_subworkflow_id'), stageRSATriggerFlag);
+                this.reloadData(response.data);
+                this.handleFormsForStage(activity, activity.get('dri_subworkflow_id'));
             }, this),
             error: _.bind(function(result) {
                 this.reloadData();
@@ -312,10 +344,7 @@
     activateCycleAndReloadWorkflow: function(parentContext, remove = false) {
         if (parentContext) {
             parentContext.get('parentModel').trigger('customer_journey:active-cycle:click', null);
-            if (remove) {
-                parentContext.get('collection').remove(this.model);
-            }
-            parentContext.trigger('reload_workflows');
+            this.layout.reloadJourneys(false);
         }
     },
 
@@ -397,7 +426,8 @@
      */
     getFormsOrStageAndJourneyForms: function(forms, triggerEvent) {
         return _.filter(forms || [], function(form) {
-            return !triggerEvent || (form.trigger_event === triggerEvent &&
+            return !triggerEvent || (form.main_trigger_type !== 'sugar_action_to_smart_guide' &&
+                form.trigger_event === triggerEvent &&
                 form.action_trigger_type !== 'automatic_create' && form.action_trigger_type !== 'automatic_update');
         });
     },
@@ -458,6 +488,22 @@
     },
 
     /**
+     * Update the picture url's property for model's assigned user.
+     *
+     * @param {string} userId
+     */
+    updateUserAvatar: function(userId) {
+        const pictureUrl = this.model.get('assigned_user_picture') ? app.api.buildFileURL({
+            module: 'Users',
+            id: userId,
+            field: 'picture'
+        }, {
+            cleanCache: true
+        }) : '';
+        this.model.set('assigned_user_picture_url', pictureUrl);
+    },
+
+    /**
      * {@inheritdoc}
      */
     _render: function() {
@@ -469,6 +515,10 @@
         if (this.model.fields.momentum_ratio) {
             // Make sure to use the right type of momentum bar
             this.model.fields.momentum_ratio.type = 'cj-momentum-bar';
+        }
+
+        if (this.model.get('assigned_user_id')) {
+            this.updateUserAvatar(this.model.get('assigned_user_id'));
         }
 
         this._super('_render');
@@ -500,6 +550,19 @@
 
         // set data-id attribute of journey
         this.$el.attr('data-id', this.model.get('id'));
+
+        if (this.model.get('assigned_user_id')) {
+            const resize = _.bind(this.resizeWorkflowInfo, this);
+            let timeout = false;
+
+            this.resizeWorkflowInfo();
+
+            this.handleResize = function() {
+                clearTimeout(timeout);
+                timeout = setTimeout(resize, 50);
+            };
+            window.addEventListener('resize', this.handleResize, true);
+        }
     },
 
     /**
@@ -588,7 +651,7 @@
                 stages[id] = this.stages[id];
                 var model = stages[id].model;
                 if (model.get('sort_order') != order) {
-                    model.set('sort_order', order);
+                    model.set('sort_order', order, {silent: true});
                     save.push(function(callback) {
                         model.save(null, {
                             success: function() {
@@ -752,24 +815,39 @@
                 success: function() {
                     let diff = parentModel.getChangeDiff(_modelBackup);
                     _.each(changedAttributes, function(item, key) {
-                        parentModel.set(key, diff[key]);
+                        if (!_.isUndefined(diff[key])) {
+                            parentModel.set(key, diff[key]);
+                        }
                     });
-                }
+                },
+                complete: _.bind(function() {
+                    this.unsetReloadSingleJourney();
+                }, this)
             });
         }
     },
 
     /**
      * Reloads the view data
+     *
+     * @param {Object} data
      */
-    reloadViewData: function() {
+    reloadViewData: function(data) {
         var parentModel = this.getParentModel();
 
         if (parentModel) {
             parentModel.trigger('customer_journey_widget_reloading');
         }
 
-        this.loadData();
+        this.loadData({'data': data});
+    },
+
+    /**
+     * Sets if model has archived field
+     *
+     */
+    hasArchivedField: function() {
+        this.recordIsArchived = this.model.get('archived') === true;
     },
 
     /**
@@ -849,10 +927,35 @@
 
     /**
      * Reloads the view & parent model data
+     *
+     * @param {Object} data
      */
-    reloadData: function() {
-        this.reloadViewData();
+    reloadData: function(data) {
+        this.setReloadSingleJourney();
+        this.reloadViewData(data);
         this.reloadParentModel();
+    },
+
+    /**
+     * Set reloadSingleJourney flag so we do not load all journeys when this is set
+     */
+    setReloadSingleJourney: function() {
+        if (!this.context || !this.context.parent || !this.context.parent.parent) {
+            return;
+        }
+
+        this.context.parent.parent.set('reloadSingleJourney', true);
+    },
+
+    /**
+     * Unset reloadSingleJourney flag so if refreshing all journey is required we can do that
+     */
+    unsetReloadSingleJourney: function() {
+        if (!this.context || !this.context.parent || !this.context.parent.parent) {
+            return;
+        }
+
+        this.context.parent.parent.unset('reloadSingleJourney');
     },
 
     /**
@@ -879,6 +982,25 @@
                 }
             }, this);
         }
+        if (!_.isNull(this.context) &&
+            !_.isEmpty(this.context.parent) &&
+            !_.isEmpty(this.context.parent.parent) &&
+            _.isFunction(this.context.parent.parent.get)) {
+            const moduleName = (this.context && this.context.parent.parent.get('module')) ?
+                this.context.parent.parent.get('module') : '';
+            this.fieldValue = app.CJBaseHelper.getValueFromCache('toggleActiveArchived', 'cj_active_or_archive_filter',
+                moduleName, 'dri-workflows-widget-configuration');
+            if (!_.isUndefined(this.layout.getComponent('dri-workflows-header'))) {
+                let renderfield = this.layout.getComponent('dri-workflows-header').getField('filter');
+                if (!_.isUndefined(renderfield)) {
+                    renderfield.model.set('cj_active_or_archive_filter', this.fieldValue);
+                    _.each(renderfield.dropdownFields, function(field) {
+                        renderfield.handleFieldCss(field);
+                        field.render();
+                    }, renderfield);
+                }
+            }
+        }
     },
 
     /**
@@ -889,10 +1011,17 @@
             return;
         }
 
+        this.disablingJourneyAndStartLoading();
+
+        if (options && options.data) {
+            this.loadCompleted(options.data);
+            return;
+        }
+
         this.loaded = false;
         this.loading = true;
-        this.disablingJourneyAndStartLoading();
-        var url = app.api.buildURL(this.model.module, 'widget-data', {
+
+        let url = app.api.buildURL(this.model.module, 'widget-data', {
             id: this.model.get('id')
         });
 
@@ -953,6 +1082,7 @@
      * @param {Object} response
      */
     loadCompleted: function(response) {
+        this.getPresentationMode();
         this.loaded = true;
         this.loading = false;
 
@@ -1078,10 +1208,31 @@
      * @return {string}
      */
     getPresentationMode: function() {
-        var moduleName = (this.layout && this.layout.context &&
+        const moduleName = (this.layout && this.layout.context &&
             this.layout.context.get('parentModule')) ? this.layout.context.get('parentModule') : '';
-        return app.CJBaseHelper.getValueFromCache('togglestate', 'cj_presentation_mode', moduleName,
-            'dri-workflows-widget-configuration');
+        const mode = app.CJBaseHelper.getValueFromCache('togglestate', 'cj_presentation_mode', moduleName,
+            'dri-workflows');
+        this.formatButton(mode);
+        return mode;
+    },
+
+    /**
+     * Apply the css class on the button
+     * Based upon the presentation mode
+     *
+     * @param {string} presentationMode
+     */
+    formatButton: function(presentationMode) {
+        if (_.isUndefined(this.$el) || _.isNull(this.$el)) {
+            return;
+        }
+        if (_.isEqual(presentationMode, 'V')) {
+            this.$(`[name = "vertical_scroll_view"]`).addClass('toggleButtonBg');
+            this.$(`[name = "horizontal_scroll_view"]`).removeClass('toggleButtonBg');
+        } else {
+            this.$(`[name = "horizontal_scroll_view"]`).addClass('toggleButtonBg');
+            this.$(`[name = "vertical_scroll_view"]`).removeClass('toggleButtonBg');
+        }
     },
 
     /**
@@ -1138,10 +1289,10 @@
         });
 
         app.drawer.open({
-                module: module,
-                layout: 'create',
-                context: context,
-            },
+            module: module,
+            layout: 'create',
+            context: context,
+        },
             _.bind(function(context, model) {
                 // Only reload if the model was saved
                 if (model) {
@@ -1168,12 +1319,12 @@
 
         let subActivity =
             this.stages[activity.get(this.activityStageId)].activities[
-                activity.id
+            activity.id
             ];
         var children =
             this.stages[activity.get(this.activityStageId)] && subActivity ?
-            subActivity.children :
-            {};
+                subActivity.children :
+                {};
 
         var last = _.last(_.values(children));
 
@@ -1212,10 +1363,10 @@
         });
 
         app.drawer.open({
-                module: module,
-                layout: 'create',
-                context: context,
-            },
+            module: module,
+            layout: 'create',
+            context: context,
+        },
             _.bind(function(context, model) {
                 // Only reload if the model was saved
                 if (model) {
@@ -1260,6 +1411,214 @@
     },
 
     /**
+     * Links an existing activity of given type to a stage
+     *
+     * @param {Object} stage
+     * @param {string} module
+     */
+    linkExistingActivity: function(stage, module) {
+        const parent = this.getParentModel();
+        const stageLinkBean = stage.link ? stage.link.bean : undefined;
+
+        let activityData = {
+            dri_subworkflow_id: stage.get('id'),
+            dri_subworkflow_name: stage.get('name'),
+            dri_workflow_template_id: this.model.get(
+                'dri_workflow_template_id'
+            ),
+            dri_workflow_template_name: this.model.get(
+                'dri_workflow_template_name'
+            ),
+            dri_subworkflow_template_id: stage.get(
+                'dri_subworkflow_template_id'
+            ),
+            dri_subworkflow_template_name: stage.get(
+                'dri_subworkflow_template_name'
+            ),
+            dri_workflow_id: stageLinkBean ? stageLinkBean.get('id') : '',
+            dri_workflow_name: stageLinkBean ? stageLinkBean.get('name') : '',
+            parent_type: parent ? parent.module : '',
+            parent_name: parent ?
+                parent.get('name') || parent.get('full_name') :
+                '',
+            parent_id: parent ? parent.id : '',
+        };
+
+        const lastActivity =
+            this.stages[stage.id] &&
+            _.last(_.toArray(this.stages[stage.id].activities));
+
+        if (lastActivity) {
+            activityData[this.activitySortOrder] = parseInt(lastActivity.data[this.activitySortOrder]);
+        }
+
+        let filterLabel = '';
+        switch (module) {
+            case 'Tasks':
+                filterLabel = 'LBL_AVAILABLE_TASKS';
+                break;
+            case 'Calls':
+                filterLabel = 'LBL_AVAILABLE_CALLS';
+                break;
+            case 'Meetings':
+                filterLabel = 'LBL_AVAILABLE_MEETINGS';
+                break;
+            default:
+                break;
+        }
+
+        const filterOptions = new app.utils.FilterOptions()
+            .config({
+                initial_filter: 'available_items',
+                initial_filter_label: filterLabel,
+                filter_populate: {
+                    'is_customer_journey_activity': {
+                        $equals: 0,
+                    },
+                    'status': {
+                        $not_in: module === 'Tasks' ? ['Not Applicable'] : ['Not Held'],
+                    }
+                },
+            }).format();
+
+        app.drawer.open({
+            layout: 'dri-link-existing-activity',
+            context: {
+                module: module,
+                isMultiSelect: true,
+                filterOptions: filterOptions,
+                stageParent: stage,
+            },
+        },
+            _.bind(function(newActivities) {
+                if (newActivities && newActivities.length) {
+                    app.alert.show('loading', {
+                        title: app.lang.get('LBL_LOADING'),
+                        level: 'process',
+                    });
+                    const moduleSingularLower = app.lang.getModuleName(module).toLowerCase();
+                    const modulePluralLower = app.lang.getModuleName(module, {plural: true}).toLowerCase();
+
+                    let bulkCalls = newActivities.map((activity) => {
+                        activityData[this.activitySortOrder] = activityData[this.activitySortOrder] + 1;
+                        let url = app.api.buildURL(module + '/' + activity.get('id'));
+                        return {
+                            url: url.substr(4),
+                            method: 'PUT',
+                            data: _.extend(activity.attributes, activityData),
+                        };
+                    });
+
+                    if (bulkCalls.length) {
+                        let genericErrorAlert = {
+                            level: 'error',
+                            messages: app.lang.get('LBL_CJ_ACTIVITY_LINK_ERROR_GENERIC', null, {moduleSingularLower}),
+                            autoClose: true,
+                            autoCloseDelay: 7000,
+                        };
+
+                        app.api.call('create', app.api.buildURL(null, 'bulk'), {
+                            requests: bulkCalls
+                        }, null, {
+                            success: _.bind(function(bulkResponses) {
+                                let message = '';
+                                let messageData = {};
+                                let successRequests = [];
+                                let errorRequests = [];
+
+                                _.each(bulkResponses, function(response) {
+                                    let activity = response.contents;
+                                    if (response.status === 200) {
+                                        successRequests.push(activity);
+                                    } else {
+                                        errorRequests.push(activity);
+                                    }
+                                }, this);
+
+                                if (successRequests.length) {
+                                    if (successRequests.length === 1) {
+                                        let activity = successRequests[0];
+                                        message = 'LBL_CJ_ACTIVITY_LINK_SUCCESS';
+                                        messageData = {
+                                            id: activity.id,
+                                            module,
+                                            moduleSingularLower,
+                                            name: activity.name,
+                                        };
+                                    } else {
+                                        message = 'LBL_CJ_ACTIVITY_LINK_SUCCESS_PLURAL';
+                                        messageData = {
+                                            modulePluralLower,
+                                        };
+                                    }
+
+                                    app.alert.show('success', {
+                                        level: 'success',
+                                        messages: app.lang.get(message, null, messageData),
+                                        autoClose: true,
+                                        autoCloseDelay: 7000,
+                                    });
+                                }
+
+                                if (errorRequests.length) {
+                                    if (errorRequests.length === 1) {
+                                        let activity = errorRequests[0];
+                                        message = 'LBL_CJ_ACTIVITY_LINK_ERROR';
+                                        messageData = {
+                                            id: activity.id,
+                                            module,
+                                            moduleSingularLower,
+                                            name: activity.name,
+                                        };
+                                    } else {
+                                        message = 'LBL_CJ_ACTIVITY_LINK_ERROR_PLURAL';
+                                        messageData = {
+                                            modulePluralLower,
+                                        };
+                                    }
+
+                                    app.alert.show('error', {
+                                        level: 'error',
+                                        messages: app.lang.get(message, null, messageData),
+                                        autoClose: true,
+                                        autoCloseDelay: 7000,
+                                    });
+                                }
+
+                                stage.save({}, {
+                                    success: _.bind(function() {
+                                        stageLinkBean.save({}, {
+                                            success: _.bind(function() {
+                                                let layout = this.layout;
+                                                layout.loadDataClicked = true;
+                                                layout.context.set('customer_journey_fetching_parent_model', false);
+                                                this.reloadData();
+                                                app.alert.dismiss('loading');
+                                            }, this),
+                                            error: function() {
+                                                app.alert.dismiss('loading');
+                                                app.alert.show('error', genericErrorAlert);
+                                            },
+                                        });
+                                    }, this),
+                                    error: function() {
+                                        app.alert.dismiss('loading');
+                                        app.alert.show('error', genericErrorAlert);
+                                    },
+                                });
+                            }, this),
+                            error: function() {
+                                app.alert.dismiss('loading');
+                                app.alert.show('error', genericErrorAlert);
+                            },
+                        });
+                    }
+                }
+            }, this)
+        );
+    },
+
+    /**
      * Get the icon tool-tip
      *
      * @param {Object} activity
@@ -1270,7 +1629,7 @@
         switch (activity.module) {
             case 'Tasks':
                 var typeList = app.lang.getAppListStrings('dri_workflow_task_templates_type_list');
-                return typeList[activity.get('type')] || activityTypeList[activity.module];
+                return typeList[activity.get('customer_journey_type')] || activityTypeList[activity.module];
             default:
                 return activityTypeList[activity.module];
         }
@@ -1457,10 +1816,25 @@
     },
 
     /**
+    * Set the flag value
+    */
+    setGuidesFlag: function() {
+        if (!_.isUndefined(this.layout.getComponent('dri-workflows-header'))) {
+            let headerView = this.layout.getComponent('dri-workflows-header');
+            if (!_.isUndefined(headerView)) {
+                headerView.smartGuidesFlag = false;
+            }
+        }
+    },
+
+    /**
      * {@inheritdoc}
      */
     _dispose: function() {
         this.stopListening();
+        if (this.model.get('assigned_user_id')) {
+            window.removeEventListener('resize', this.handleResize, true);
+        }
         this._super('_dispose');
     },
 });

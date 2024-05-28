@@ -9,21 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['product-catalog-dashlet'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['base']['view']['product-catalog-dashlet'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_PRODUCT_CATALOG_DASHLET_NAME',
             'description' => 'LBL_PRODUCT_CATALOG_DASHLET_DESC',
-            'config' => array(
+            'config' => [
                 'module' => 'ProductTemplates',
-            ),
-            'preview' => array(
-            ),
+            ],
+            'preview' => [
+            ],
             'filter' => [
                 'blacklist' => [
                     'module' => 'Administration',
                 ],
             ],
-        ),
-    ),
-);
+        ],
+    ],
+];

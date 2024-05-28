@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Dashboard lijst met aangeschafte regelitems',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Dashboard record aangeschafte regelitems',
     'LBL_PARENT_PURCHASE' => 'Bovenliggende aankoop',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn regelitem aangeschaft',
 ];

@@ -11,16 +11,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Notifications']['base']['view']['massupdate'] = array(
-    'panels' => array(
-        array(
-            'fields' => array(
-                array(
+$viewdefs['Notifications']['base']['view']['massupdate'] = [
+    'panels' => [
+        [
+            'fields' => [
+                [
                     'name' => 'is_read',
                     'type' => 'enum',
                     'options' => 'notifications_status_dom',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

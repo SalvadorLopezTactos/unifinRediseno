@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint;
 
 use Psr\Log\LoggerAwareInterface;
@@ -25,6 +26,7 @@ use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
  */
 class Manager implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
     /**
      * @var mixed[]|array<string, mixed>|mixed
      */
@@ -38,7 +40,6 @@ class Manager implements LoggerAwareInterface
      */
     public $licenseKey;
     public $sugarVersion;
-    use LoggerAwareTrait;
 
     //
     //  Class constants
@@ -387,7 +388,7 @@ class Manager implements LoggerAwareInterface
         $query->where()
             ->equals('id_name', 'hint-package');
         $response = $query->execute();
-        return count($response) > 1;
+        return safeCount($response) > 1;
     }
 
     /**
@@ -479,8 +480,8 @@ class Manager implements LoggerAwareInterface
             if (array_key_exists($option, $services)) {
                 return $services[$option];
             }
-            $missingServiceMessage = sprintf("Provided service option %s missing", $option);
-            throw new \Exception($missingServiceMessage . vsprintf(" from config %s", $buildConfig));
+            $missingServiceMessage = sprintf('Provided service option %s missing', $option);
+            throw new \Exception($missingServiceMessage . vsprintf(' from config %s', $buildConfig));
         }
         throw new \Exception(vsprintf('Missing geo key in provided buildConfig: %s', $buildConfig));
     }

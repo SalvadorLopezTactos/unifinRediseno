@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Lecture du fichier à importer réussie',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'L&#39;enregistrement importé participe dans un processus et ne peut pas être édité parce que certains champs sont verrouillés pour édition par le processus.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'enregistrement(s) non importés en raison d&#39;une erreur',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Si l&#39;utilisateur n&#39;existe pas, utiliser l&#39;utilisateur courant',
     'LBL_SHOW_HIDDEN' => 'Visaualiser les champs qui, normalement, ne peuvent pas être importés',
     'LBL_UPDATE_RECORDS' => 'Mettre à jour les enregistrements existants au lieu de les importer à nouveau (pas d&#39;annulation possible)',
-    'LBL_TEST'=> 'Tester l&#39;import (ne sauvegarde pas et ne change pas les données contenu dans la base)',
+    'LBL_TEST' => 'Tester l&#39;import (ne sauvegarde pas et ne change pas les données contenu dans la base)',
     'LBL_TRUNCATE_TABLE' => 'Vider la table avant l&#39;import (supprime tous les enregistrements)',
     'LBL_RELATED_ACCOUNTS' => 'Ne pas créer les comptes liés',
     'LBL_NO_DATECHECK' => 'Sauter la vérification de date (rend l&#39;import plus rapide mais le fera échouer si une date est mal formatée)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Entier invalide',
     'LBL_ERROR_INVALID_NUM' => 'Numérique invalide',
     'LBL_ERROR_INVALID_TIME' => 'Temps invalide',
-    'LBL_ERROR_INVALID_EMAIL'=>'Adresse email invalide',
-    'LBL_ERROR_INVALID_BOOL'=>'Valeur invalide (doit être 1 ou 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Date est invalide',
-    'LBL_ERROR_INVALID_USER'=>'Nom ou ID utilisateur invalide',
+    'LBL_ERROR_INVALID_EMAIL' => 'Adresse email invalide',
+    'LBL_ERROR_INVALID_BOOL' => 'Valeur invalide (doit être 1 ou 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Date est invalide',
+    'LBL_ERROR_INVALID_USER' => 'Nom ou ID utilisateur invalide',
     'LBL_ERROR_INVALID_TEAM' => 'Nom ou ID equipe invalide',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Nom ou ID compte invalide',
     'LBL_ERROR_INVALID_RELATE' => 'Champ relatif invalide',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'n&#39;existe pas ou il n&#39;est pas possible d&#39;y écrire',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Le fichier n&#39;a pas été envoyé correctement, veuillez réessayer et vérifiez bien que la variable "upload_max_filesize" du fichier php.ini est supérieure à la taille de votre fichier',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Fichier trop volumineux. Max :',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Octets. Changer $sugar_config[&#39;upload_maxsize&#39;] dans le fichier config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Octets. Modifiez $sugar_config[&#39;upload_maxsize&#39;] dans config.php',
     'LBL_MODULE_NAME' => 'Import -',
     'LBL_MODULE_NAME_SINGULAR' => 'Import',
     'LBL_TRY_AGAIN' => 'Nouvel import',
     'LBL_START_OVER' => 'Recommencer depuis le début',
     'LBL_ERROR' => 'Erreur:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Le fichier importé contient {0} lignes. Le nombre optimum de lignes est {1}. Plus de lignes peut ralentir le process d&#39;import. Cliquer sur OK pour continuer cet import. Cliquer Annuler pour revoir le fichier et réimporter un fichier à importer.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Vous ne pouvez pas importer des utilisateurs de type administrateur',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Vous ne pouvez pas importer des utilisateurs de type administrateur',
     'ERR_REPORT_LOOP' => 'Une boucle sur le reporting a été détectée. Un utilisateur ne peut se reporter à lui même, un de ses managers ne peut pas non plus reporter à cet utilisateur.',
     'ERR_MULTIPLE' => 'Plusieurs colonnes ont étés définies avec le même nom de champ en sortie.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Champ(s) obligatoire(s) manquant :',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Aucune ligne dans votre fichier d&#39;import',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Le fichier d&#39;import à déjà à été utilisé ou n&#39;existe pas',
     'LBL_SUCCESS' => 'Opération terminée avec succès :<br>&nbsp;',
-	'LBL_FAILURE' => 'L&#39;import a échoué :',
+    'LBL_FAILURE' => 'L&#39;import a échoué :',
     'LBL_SUCCESSFULLY' => 'import(s) réussi(s)',
     'LBL_LAST_IMPORT_UNDONE' => 'Votre dernier import a été annulé.',
     'LBL_NO_IMPORT_TO_UNDO' => 'Il n&#39;y a pas d&#39;import à annuler.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Nouvel import',
     'LBL_FINISHED' => 'Retouner au listing des',
     'LBL_UNDO_LAST_IMPORT' => 'Annuler le dernier import',
-    'LBL_LAST_IMPORTED'=>'Enregistrement(s) créé(s) dans la table',
+    'LBL_LAST_IMPORTED' => 'Enregistrement(s) créé(s) dans la table',
     'ERR_MULTIPLE_PARENTS' => 'Vous ne pouvez définir qu&#39;un seul "Parent ID"',
     'LBL_DUPLICATES' => 'doublon(s) trouvé(s)',
     'LNK_DUPLICATE_LIST' => 'Télécharger la liste des doublons',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Masquer les Notes',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Afficher la prévisualisation des colonnes',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Masquer la prévisualisation des colonnes',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Recherchez les doublons à l&#39;aide de l&#39;opérateur :',
     'LBL_SAVE_MAPPING_AS' => 'Sauvegarder le mapping sous',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Apostrophe simple (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Guillemet double (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Pour assigner les enregistrements à des équipes autres que votre(vos) équipe(s) par défaut, utilisez la colonne valeur par défaut pour définir d&#39;autre(s) équipe(s).',
     'LBL_SIGN_IN_HELP' => 'Pour activer ce service, veuillez vous identifier sur l&#39;onglet "Comptes Externes" dans la section appropriée sur vos paramètres utilisateur.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Essaye de gérer les adresses e-mail dans un module qui ne le prend pas en charge",
-);
+];

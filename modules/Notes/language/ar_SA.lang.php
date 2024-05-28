@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'لوحة معلومات قائمة الملاحظات',
     'LBL_NOTES_RECORD_DASHBOARD' => 'لوحة معلومات سجل الملاحظات',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم الملاحظات',
     'LBL_EXTERNAL_USER' => 'المستخدم الخارجي',
     'LBL_EXTERNAL_USER_NAME' => 'المستخدم الخارجي',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني للملاحظة',
 
     'LBL_RELATED_CONTACT' => 'جهة الاتصال ذات الصلة',
     'ERR_DELETE_RECORD' => 'يجب تحديد رقم السجل لحذف الحساب.',
@@ -126,4 +127,4 @@ $mod_strings = array(
  - يجب أن يتم إكمال الحقول المميزة على أنها "مطلوبة" قبل الحفظ.
  - انقر فوق "إظهار المزيد" لعرض حقول إضافية إذا لزم الأمر.
 2. انقر فوق "حفظ" لإنهاء السجل الجديد والعودة إلى الصفحة السابقة.',
-);
+];

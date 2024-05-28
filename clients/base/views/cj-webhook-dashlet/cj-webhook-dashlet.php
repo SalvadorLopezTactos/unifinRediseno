@@ -28,11 +28,11 @@ $viewdefs['base']['view']['cj-webhook-dashlet'] = [
     'custom_toolbar' => [
         'buttons' => [
             [
-                "type" => "dashletaction",
-                "css_class" => "btn btn-invisible sendRequest",
-                "icon" => "sicon-launch",
-                "action" => "sendClicked",
-                "tooltip" => "Send Test Request",
+                'type' => 'dashletaction',
+                'css_class' => 'btn btn-invisible sendRequest',
+                'icon' => 'sicon-launch',
+                'action' => 'sendClicked',
+                'tooltip' => 'Send Test Request',
             ],
             [
                 'dropdown_buttons' => [

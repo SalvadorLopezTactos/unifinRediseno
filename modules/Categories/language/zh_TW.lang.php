@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '類別',
     'LBL_MODULE_NAME_SINGULAR' => '類別',
     'LBL_MODULE_TITLE' => '類別',
@@ -31,4 +31,4 @@ $mod_strings = array(
 所有嵌套的類也將被移除',
     'LBL_WRONG_MOVE_PATH' => 'You cannot move a folder into itself.',
     'ERR_EMPTY_NODE_NAME' => 'You cannot add a category without title',
-);
+];

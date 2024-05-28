@@ -79,6 +79,7 @@ class PMSEBaseValidator
     {
         return self::$logicHookArgs;
     }
+
     /**
      *
      * @return PMSEEvaluator
@@ -262,7 +263,7 @@ class PMSEBaseValidator
 
     /**
      * Checks if the current field object is a changes/to/from operation
-     * @param  stdClass $field The field criteria object
+     * @param stdClass $field The field criteria object
      * @return boolean
      */
     public function isChangeOperation(stdClass $field)
@@ -285,7 +286,7 @@ class PMSEBaseValidator
      * @param mixed $data Data to be JSON encoded
      * @return string
      */
-    public function getEncodedCriteria($data) : string
+    public function getEncodedCriteria($data): string
     {
         return json_encode($data);
     }
@@ -297,7 +298,7 @@ class PMSEBaseValidator
      * @param array $args The request arguments
      * @return string
      */
-    public function validateUpdateState(string $criteria, array $args = []) : string
+    public function validateUpdateState(string $criteria, array $args = []): string
     {
         // Need to check the isUpdate flag that is set by the after_save hook
         // changes/to/from operations should not be evaluated for new records

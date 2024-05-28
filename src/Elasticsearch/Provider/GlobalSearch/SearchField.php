@@ -121,7 +121,7 @@ class SearchField
      * getter method for $this->>path
      * @return array
      */
-    public function getPath() : array
+    public function getPath(): array
     {
         return $this->path;
     }
@@ -139,7 +139,7 @@ class SearchField
      * getter method for $this->>boost
      * @return float
      */
-    public function getBoost() : float
+    public function getBoost(): float
     {
         if (isset($this->boost)) {
             return $this->boost;

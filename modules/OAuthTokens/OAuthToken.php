@@ -17,12 +17,12 @@ use Doctrine\DBAL\Connection;
  */
 class OAuthToken extends SugarBean
 {
-	public $module_dir = 'OAuthTokens';
-	public $object_name = 'OAuthToken';
-	public $table_name = 'oauth_tokens';
-	public $disable_row_level_security = true;
+    public $module_dir = 'OAuthTokens';
+    public $object_name = 'OAuthToken';
+    public $table_name = 'oauth_tokens';
+    public $disable_row_level_security = true;
 
-	public $token;
+    public $token;
     public $secret;
     public $tstate;
     public $token_ts;
@@ -39,45 +39,45 @@ class OAuthToken extends SugarBean
     public const ACCESS = 2;
     public const INVALID = 3;
 
-    public function __construct($token='', $secret='')
-	{
-	    parent::__construct();
+    public function __construct($token = '', $secret = '')
+    {
+        parent::__construct();
         $this->token = $token;
         $this->secret = $secret;
         $this->setState(self::REQUEST);
-        if(!empty($GLOBALS['current_user']->id)) {
+        if (!empty($GLOBALS['current_user']->id)) {
             $this->addVisibilityStrategy('OwnerVisibility');
         }
-	}
+    }
 
-	/**
-	 * Set token state
-	 * @param int $s
-	 * @return OAuthToken
-	 */
-	public function setState($s)
-	{
-	    $this->tstate = $s;
-	    return $this;
-	}
+    /**
+     * Set token state
+     * @param int $s
+     * @return OAuthToken
+     */
+    public function setState($s)
+    {
+        $this->tstate = $s;
+        return $this;
+    }
 
-	/**
-	 * Associate the token with the consumer key
-	 * @param OAuthKey $consumer
-	 * @return OAuthToken
-	 */
-	public function setConsumer($consumer)
-	{
-	    $this->consumer = $consumer->id;
-	    $this->consumer_obj = $consumer;
-	    return $this;
-	}
+    /**
+     * Associate the token with the consumer key
+     * @param OAuthKey $consumer
+     * @return OAuthToken
+     */
+    public function setConsumer($consumer)
+    {
+        $this->consumer = $consumer->id;
+        $this->consumer_obj = $consumer;
+        return $this;
+    }
 
-	/**
-	 * Set callback URL for request token
-	 * @param string $url
-	 * @return OAuthToken
-	 */
+    /**
+     * Set callback URL for request token
+     * @param string $url
+     * @return OAuthToken
+     */
     public function setCallbackURL($url)
     {
         $this->callback_url = $url;
@@ -85,21 +85,21 @@ class OAuthToken extends SugarBean
     }
 
     /**
-	 * Generate random token
-	 * @return string
-	 */
-	protected static function randomValue()
-	{
+     * Generate random token
+     * @return string
+     */
+    protected static function randomValue()
+    {
         $provider = new Zend_Oauth_Provider();
         $token = $provider->generateToken(6);
         return bin2hex($token);
-	}
+    }
 
-	/**
-	 * Generate random token/secret pair and create token
-	 * @return OAuthToken
-	 */
-    static function generate()
+    /**
+     * Generate random token/secret pair and create token
+     * @return OAuthToken
+     */
+    public static function generate()
     {
         $t = self::randomValue();
         $s = self::randomValue();
@@ -109,7 +109,7 @@ class OAuthToken extends SugarBean
     public function save($check_notify = false)
     {
         $this->token_ts = time();
-        if(!isset($this->id)) {
+        if (!isset($this->id)) {
             $this->new_with_id = true;
             $this->id = $this->token;
         }
@@ -120,105 +120,106 @@ class OAuthToken extends SugarBean
      * Load token by ID
      * @param string $token
      * @param string $oauth_type Either "oauth1" or "oauth2", defaults to "oauth1"
-	 * @return OAuthToken
+     * @return OAuthToken
      */
-    static function load($token,$oauth_type="oauth1")
-	{
-	    $ltoken = new self();
-	    $ltoken->retrieve($token);
-        if(empty($ltoken->id)) return null;
+    public static function load($token, $oauth_type = 'oauth1')
+    {
+        $ltoken = new self();
+        $ltoken->retrieve($token);
+        if (empty($ltoken->id)) {
+            return null;
+        }
         $ltoken->token = $ltoken->id;
-        if(!empty($ltoken->consumer)) {
-            $ltoken->consumer_obj = BeanFactory::getBean('OAuthKeys',$ltoken->consumer);
-            if(empty($ltoken->consumer_obj->id) || $ltoken->consumer_obj->oauth_type != $oauth_type ) {
+        if (!empty($ltoken->consumer)) {
+            $ltoken->consumer_obj = BeanFactory::getBean('OAuthKeys', $ltoken->consumer);
+            if (empty($ltoken->consumer_obj->id) || $ltoken->consumer_obj->oauth_type != $oauth_type) {
                 return null;
             }
         }
         return $ltoken;
-	}
+    }
 
-	/**
-	 * Invalidate token
-	 */
-	public function invalidate()
-	{
-	    $this->setState(self::INVALID);
-	    $this->verify = false;
-	    return $this->save();
-	}
+    /**
+     * Invalidate token
+     */
+    public function invalidate()
+    {
+        $this->setState(self::INVALID);
+        $this->verify = false;
+        return $this->save();
+    }
 
-	/**
-	 * Create a new authorized token for specific user
-	 * This bypasses normal OAuth process and creates a ready-made access token
-	 * @param OAuthKey $consumer
-	 * @param User $user
-	 * @return OAuthToken
-	 */
-	public static function createAuthorized($consumer, $user)
-	{
-	    $token = self::generate();
-	    $token->setConsumer($consumer);
-	    $token->setState(self::ACCESS);
-	    $token->assigned_user_id = $user->id;
+    /**
+     * Create a new authorized token for specific user
+     * This bypasses normal OAuth process and creates a ready-made access token
+     * @param OAuthKey $consumer
+     * @param User $user
+     * @return OAuthToken
+     */
+    public static function createAuthorized($consumer, $user)
+    {
+        $token = self::generate();
+        $token->setConsumer($consumer);
+        $token->setState(self::ACCESS);
+        $token->assigned_user_id = $user->id;
         $token->save();
         return $token;
-	}
+    }
 
-	/**
-	 * Authorize request token
-	 * @param mixed $authdata
-	 * @return string Validation token
-	 */
-	public function authorize($authdata)
-	{
-	    if($this->tstate != self::REQUEST) {
-	        return false;
-	    }
-	    $this->verify = self::randomValue();
-	    $this->authdata = $authdata;
-	    if(isset($authdata['user'])) {
-	        $this->assigned_user_id = $authdata['user'];
-	    }
-	    $this->save();
-	    return $this->verify;
-	}
+    /**
+     * Authorize request token
+     * @param mixed $authdata
+     * @return string Validation token
+     */
+    public function authorize($authdata)
+    {
+        if ($this->tstate != self::REQUEST) {
+            return false;
+        }
+        $this->verify = self::randomValue();
+        $this->authdata = $authdata;
+        if (isset($authdata['user'])) {
+            $this->assigned_user_id = $authdata['user'];
+        }
+        $this->save();
+        return $this->verify;
+    }
 
-	/**
-	 * Copy auth data between tokens
-	 * @param OAuthToken $token
-	 * @return OAuthToken
-	 */
-	public function copyAuthData(OAuthToken $token)
-	{
-	    $this->authdata = $token->authdata;
-	    $this->assigned_user_id = $token->assigned_user_id;
-	    return $this;
-	}
+    /**
+     * Copy auth data between tokens
+     * @param OAuthToken $token
+     * @return OAuthToken
+     */
+    public function copyAuthData(OAuthToken $token)
+    {
+        $this->authdata = $token->authdata;
+        $this->assigned_user_id = $token->assigned_user_id;
+        return $this;
+    }
 
-	/**
-	 * Get query string for the token
-	 */
-	public function queryString()
-	{
-	    return "oauth_token={$this->token}&oauth_token_secret={$this->secret}";
-	}
+    /**
+     * Get query string for the token
+     */
+    public function queryString()
+    {
+        return "oauth_token={$this->token}&oauth_token_secret={$this->secret}";
+    }
 
-	/**
-	 * Clean up stale tokens
-	 */
-    static public function cleanup()
-	{
-	    global $db;
-	    $cleanup_start = microtime(true);
+    /**
+     * Clean up stale tokens
+     */
+    public static function cleanup()
+    {
+        global $db;
+        $cleanup_start = microtime(true);
         $sugarConfig = SugarConfig::getInstance();
         // delete invalidated/request tokens older than oauth_token_life config value
-        $db->query("DELETE FROM oauth_tokens WHERE tstate IN (".self::INVALID.",".self::REQUEST.") AND token_ts < ".(time()-$sugarConfig->get('oauth_token_life',60*60*24)));
+        $db->query('DELETE FROM oauth_tokens WHERE tstate IN (' . self::INVALID . ',' . self::REQUEST . ') AND token_ts < ' . (time() - $sugarConfig->get('oauth_token_life', 60 * 60 * 24)));
         // delete expired access tokens
-        $db->query("DELETE FROM oauth_tokens WHERE tstate = ".self::ACCESS." AND expire_ts <> -1 AND expire_ts < ".(time()-$sugarConfig->get('oauth_token_expiry',0)));
+        $db->query('DELETE FROM oauth_tokens WHERE tstate = ' . self::ACCESS . ' AND expire_ts <> -1 AND expire_ts < ' . (time() - $sugarConfig->get('oauth_token_expiry', 0)));
 
-	    $GLOBALS['log']->info(sprintf("OAuthToken::cleanup() Cleaning up old tokens took: %.03f ms",microtime(true)-$cleanup_start));
-
-	}
+        $GLOBALS['log']->info(sprintf('OAuthToken::cleanup() Cleaning up old tokens took: %.03f ms', microtime(true) - $cleanup_start));
+    }
 
     /**
      * Clean up extra tokens for a user
@@ -264,7 +265,7 @@ ORDER BY expire_ts DESC';
         );
 
         foreach ($result->iterateAssociative() as $row) {
-            if (count($skip) < $limit) {
+            if (safeCount($skip) < $limit) {
                 $skip[$row['id']] = $row['id'];
             } else {
                 $ids[$row['id']] = $row['id'];
@@ -284,73 +285,75 @@ ORDER BY expire_ts DESC';
         }
     }
 
-	/**
-	 * Check if the nonce is valid
-	 * @param string $key
-	 * @param string $nonce
-	 * @param string $ts
-	 */
-	public static function checkNonce($key, $nonce, $ts)
-	{
-	    global $db;
+    /**
+     * Check if the nonce is valid
+     * @param string $key
+     * @param string $nonce
+     * @param string $ts
+     */
+    public static function checkNonce($key, $nonce, $ts)
+    {
+        global $db;
 
-	    $res = $db->query(sprintf("SELECT * FROM oauth_nonce WHERE conskey='%s' AND nonce_ts > %d", $db->quote($key), $ts));
-	    if($res && $db->fetchByAssoc($res)) {
-	        // we have later ts
-	        return Zend_Oauth_Provider::BAD_TIMESTAMP;
-	    }
+        $res = $db->query(sprintf("SELECT * FROM oauth_nonce WHERE conskey='%s' AND nonce_ts > %d", $db->quote($key), $ts));
+        if ($res && $db->fetchByAssoc($res)) {
+            // we have later ts
+            return Zend_Oauth_Provider::BAD_TIMESTAMP;
+        }
 
-	    $res = $db->query(sprintf("SELECT * FROM oauth_nonce WHERE conskey='%s' AND nonce='%s' AND nonce_ts = %d", $db->quote($key), $db->quote($nonce), $ts));
-	    if($res && $db->fetchByAssoc($res)) {
-	        // Already seen this one
-	        return Zend_Oauth_Provider::BAD_NONCE;
+        $res = $db->query(sprintf("SELECT * FROM oauth_nonce WHERE conskey='%s' AND nonce='%s' AND nonce_ts = %d", $db->quote($key), $db->quote($nonce), $ts));
+        if ($res && $db->fetchByAssoc($res)) {
+            // Already seen this one
+            return Zend_Oauth_Provider::BAD_NONCE;
         }
         $db->query(sprintf("DELETE FROM oauth_nonce WHERE conskey='%s' AND nonce_ts < %d", $db->quote($key), $ts));
         $db->query(sprintf("INSERT INTO oauth_nonce(conskey, nonce, nonce_ts) VALUES('%s', '%s', %d)", $db->quote($key), $db->quote($nonce), $ts));
-	    return Zend_Oauth_Provider::OK;
-	}
+        return Zend_Oauth_Provider::OK;
+    }
 
-	/**
-	 * Delete token by ID
-	 * @param string id
+    /**
+     * Delete token by ID
+     * @param string id
      * @see SugarBean::doMarkDeleted()
-	 */
+     */
     protected function doMarkDeleted(): void
-	{
+    {
         $query = "DELETE FROM {$this->table_name} WHERE id = ? ";
         $conn = $this->db->getConnection();
-        $conn->executeStatement($query, array($this->id));
-	}
+        $conn->executeStatement($query, [$this->id]);
+    }
 
-	/**
-	 * Delete tokens by consumer ID
-	 * @param string $user
-	 */
-	public static function deleteByConsumer($consumer_id)
-	{
-	   global $db;
-	   $db->query("DELETE FROM oauth_tokens WHERE consumer='".$db->quote($consumer_id) ."'");
-	}
+    /**
+     * Delete tokens by consumer ID
+     * @param string $user
+     */
+    public static function deleteByConsumer($consumer_id)
+    {
+        global $db;
+        $db->query("DELETE FROM oauth_tokens WHERE consumer='" . $db->quote($consumer_id) . "'");
+    }
 
-	/**
-	 * Delete tokens by user ID
-	 * @param string $user
-	 */
-	public static function deleteByUser($user_id)
-	{
-	   global $db;
-	   $db->query("DELETE FROM oauth_tokens WHERE assigned_user_id='".$db->quote($user_id) ."'");
-	}
-
-
+    /**
+     * Delete tokens by user ID
+     * @param string $user
+     */
+    public static function deleteByUser($user_id)
+    {
+        global $db;
+        $db->query("DELETE FROM oauth_tokens WHERE assigned_user_id='" . $db->quote($user_id) . "'");
+    }
 }
 
-function displayDateFromTs($focus, $field, $value, $view='ListView')
+function displayDateFromTs($focus, $field, $value, $view = 'ListView')
 {
     $field = strtoupper($field);
-    if(!isset($focus[$field])) return '';
+    if (!isset($focus[$field])) {
+        return '';
+    }
     // No date, don't return anything
-    if($focus[$field]==-1) return '';
+    if ($focus[$field] == -1) {
+        return '';
+    }
     global $timedate;
     return $timedate->asUser($timedate->fromTimestamp($focus[$field]));
 }

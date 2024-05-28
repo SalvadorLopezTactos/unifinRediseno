@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Työjono',
     'LBL_MODULE_NAME_SINGULAR' => 'Työjono',
     'LBL_MODULE_TITLE' => 'Työjono: Alkuun',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Ratkaisu peruutettu',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Ratkaisua käsitellään',
     // Errors
-    'ERR_CALL' => "Ei voida kutsua funktiota: %s",
-    'ERR_CURL' => "Ei CURL:a - ei voida ajaa URL-tehtäviä",
-    'ERR_FAILED' => "Odottamaton virhe, tarkista PHP:n lokitiedostot ja sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s tiedostossa %s rivillä %d",
-    'ERR_NOUSER' => "Käyttäjätunnusta ei ole määritelty tehtävälle",
-    'ERR_NOSUCHUSER' => "Käyttäjätunnusta %s ei löytynyt",
-    'ERR_JOBTYPE' => "Tuntematon tehtävätyyppi: %s",
-    'ERR_TIMEOUT' => "Pakotettu epäonnistuminen aikakatkaisun vuoksi",
+    'ERR_CALL' => 'Ei voida kutsua funktiota: %s',
+    'ERR_CURL' => 'Ei CURL:a - ei voida ajaa URL-tehtäviä',
+    'ERR_FAILED' => 'Odottamaton virhe, tarkista PHP:n lokitiedostot ja sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s tiedostossa %s rivillä %d',
+    'ERR_NOUSER' => 'Käyttäjätunnusta ei ole määritelty tehtävälle',
+    'ERR_NOSUCHUSER' => 'Käyttäjätunnusta %s ei löytynyt',
+    'ERR_JOBTYPE' => 'Tuntematon tehtävätyyppi: %s',
+    'ERR_TIMEOUT' => 'Pakotettu epäonnistuminen aikakatkaisun vuoksi',
     'ERR_JOB_FAILED_VERBOSE' => 'Tehtävä %1$s (%2$s) epäonnistui CRON-ajossa',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Ei voida ladata beania id: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Ei löydetä käsittelijää reitille %s',
@@ -95,13 +95,13 @@ useille tietokoneille, jolloin työläät tehtävät voidaan suorittaa nopeammin
 </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Amazon SQS -määrittelyn ohje',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Amazon SQS -määrittely.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Amazon SQS -määrittely.</b></p>
 <ul>
     <li>Käyttöavaimen ID: <i>Syötä Amazon SQS -palvelun käyttöavaimesi ID-numero</i></li>
     <li>Salainen käyttöavain: <i>Syötä Amazon SQS -palvelun salainen käyttöavaimesi</i></li>
     <li>Alue: <i>Syötä Amazon SQS -palvelimen alue<i></li>
     <li>Jonon nimi: <i>Syötä Amazon SQS -palvelimen jonon nimi</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'AMQP -määrittelyn ohje',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>AMQP-määrittely</b></p>
 <ul>
@@ -122,4 +122,4 @@ useille tietokoneille, jolloin työläät tehtävät voidaan suorittaa nopeammin
     'LBL_REGION' => 'Alue',
     'LBL_ACCESS_KEY_SECRET' => 'Salainen käyttöavain',
     'LBL_QUEUE_NAME' => 'Adapterin nimi',
-);
+];

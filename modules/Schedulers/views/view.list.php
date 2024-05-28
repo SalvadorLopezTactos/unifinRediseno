@@ -13,11 +13,11 @@
 
 class SchedulersViewList extends ViewList
 {
- 	public function display()
- 	{
- 		parent::display();
- 		$this->seed->displayCronInstructions();
- 	}
+    public function display()
+    {
+        parent::display();
+        $this->seed->displayCronInstructions();
+    }
 
     /**
      * process list view

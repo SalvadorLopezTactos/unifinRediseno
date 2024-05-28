@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('button-group', function (Y, NAME) {
 
 /**
@@ -198,4 +191,4 @@ Y.ButtonGroup = Y.extend(ButtonGroup, Y.Widget, {
 });
 
 
-}, '3.15.0', {"requires": ["button-plugin", "cssbutton", "widget"]});
+}, '3.18.1', {"requires": ["button-plugin", "cssbutton", "widget"]});

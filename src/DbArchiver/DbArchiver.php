@@ -18,6 +18,9 @@ use Doctrine\DBAL\Connection;
 use Email;
 use Document;
 use RuntimeException;
+use Sugarcrm\Sugarcrm\Elasticsearch\Container;
+use Sugarcrm\Sugarcrm\SearchEngine\Engine\Elastic;
+use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 
 /**
  * Class DbArchiver
@@ -82,7 +85,7 @@ class DbArchiver
      * @return \SugarBean
      * @throws RuntimeException
      */
-    public function getBean() : ?\SugarBean
+    public function getBean(): ?\SugarBean
     {
         if (is_null($this->bean)) {
             $bean = \BeanFactory::newBean($this->module);
@@ -98,7 +101,7 @@ class DbArchiver
      * Returns the module name
      * @return string
      */
-    public function getModule() : ?string
+    public function getModule(): ?string
     {
         return $this->module;
     }
@@ -137,7 +140,7 @@ class DbArchiver
      * @return bool
      * @throws RuntimeException
      */
-    public function createArchiveTable($bean = null) : bool
+    public function createArchiveTable($bean = null): bool
     {
         $indices = [];
         if (is_null($bean)) {
@@ -176,16 +179,16 @@ class DbArchiver
             $this->cstmArchiveTableName = $bean2->getArchiveTableName();
 
             // Default cstmFieldDef for all custom tables
-            $cstmFieldDefs = array(
-                "id_c" => array(
-                    "name" => "id_c",
-                    "type" => "id",
-                    "required" => 1,
-                ),
-            );
+            $cstmFieldDefs = [
+                'id_c' => [
+                    'name' => 'id_c',
+                    'type' => 'id',
+                    'required' => 1,
+                ],
+            ];
 
             // Add each fieldDef to the cstmFieldDef array
-            $cstmFieldsOnBean = $bean2->getFieldDefinitions('source', array('custom_fields'));
+            $cstmFieldsOnBean = $bean2->getFieldDefinitions('source', ['custom_fields']);
             foreach ($cstmFieldsOnBean as $field => $def) {
                 unset($def['source']);
                 $cstmFieldDefs[$field] = $def;
@@ -234,7 +237,7 @@ class DbArchiver
 
         // Custom logic needed when dealing with pmse_bpmInbox table
         $casIds = array_column($results, 'cas_id');
-        if (count($casIds) === 0) {
+        if (safeCount($casIds) === 0) {
             unset($casIds);
         }
 
@@ -249,7 +252,7 @@ class DbArchiver
         if ($type === DataArchiver::PROCESS_TYPE_ARCHIVE) {
             $this->createArchiveTable();
             $this->archive($results, $cstmResults);
-            if (isset($casIds) && count($casIds) > 0) {
+            if (isset($casIds) && safeCount($casIds) > 0) {
                 $this->cascadeBpmProcess($casIds, $type);
             }
         }
@@ -275,7 +278,7 @@ class DbArchiver
         $this->delete($ids);
 
         // Do cascading bpm deletion if this is from the bpm inbox table
-        if (isset($casIds) && count($casIds) > 0) {
+        if (isset($casIds) && safeCount($casIds) > 0) {
             $this->cascadeBpmProcess($casIds, DataArchiver::PROCESS_TYPE_DELETE);
         }
 
@@ -293,9 +296,23 @@ class DbArchiver
             if ($this->hasAuditTable()) {
                 $this->delete($ids, $this->getBean()->get_audit_table_name(), 'parent_id');
             }
-        // Hard delete process with the bpm inbox table
-        } elseif ($type === DataArchiver::PROCESS_TYPE_DELETE && isset($casIds) && count($casIds) > 0) {
+            // Hard delete process with the bpm inbox table
+        } elseif ($type === DataArchiver::PROCESS_TYPE_DELETE && isset($casIds) && safeCount($casIds) > 0) {
             $this->cascadeBpmProcess($casIds, $type);
+        }
+
+        $engine = SearchEngine::getInstance()->getEngine();
+        if ($engine instanceof Elastic) {
+            $indexer = $engine->getContainer()->indexer;
+            $indexer->finishBatch();
+            if (!empty($ids)) {
+                $index = $engine->getContainer()->indexPool->getWriteIndex($this->getBean()->getModuleName());
+                foreach ($ids as $id) {
+                    if (!empty($id)) {
+                        $index->deleteById($id);
+                    }
+                }
+            }
         }
 
         return $ids;
@@ -332,7 +349,7 @@ class DbArchiver
                 ->insert($this->cstmArchiveTableName);
         }
 
-        for ($i = 0, $m = is_countable($rows) ? count($rows) : 0, $cm = is_countable($cstmRows) ? count($cstmRows) : 0; $i < $m; $i++) {
+        for ($i = 0, $m = safeCount($rows), $cm = safeCount($cstmRows); $i < $m; $i++) {
             $qbArchive
                 ->values(
                     array_map(function ($value) use ($builder) {
@@ -416,7 +433,7 @@ class DbArchiver
         $curTable = $this->getBean()->getTableName();
         // Grab the linked fields from the bean
         $bean = $this->getBean();
-        $linked_fields=$bean->get_linked_fields();
+        $linked_fields = $bean->get_linked_fields();
 
         // Loop through each field, determine if there is an associated table and remove the row from that table
         foreach ($linked_fields as $name => $value) {
@@ -438,7 +455,7 @@ class DbArchiver
                 // removing the entire row anyway.
                 // We only want to remove from the primary relationship tables that have the naming convention of
                 // accounts_contacts, etc.
-                if (! $bean->$name->getRelationshipObject() instanceof \M2MRelationship ||
+                if (!$bean->$name->getRelationshipObject() instanceof \M2MRelationship ||
                     !$this->getBean()->db->tableExists($rel_table) || $rel_table == $curTable) {
                     continue;
                 }
@@ -518,13 +535,13 @@ class DbArchiver
         $archivedCustomTables = $this->getCstmRowsArchived();
 
         foreach ($archivedTables as $archiveTable => $ids) {
-            if ((is_countable($ids) ? count($ids) : 0) > 0) {
+            if (safeCount($ids) > 0) {
                 $this->delete($ids, $archiveTable, 'id');
             }
         }
 
         foreach ($archivedCustomTables as $archiveCustomTable => $ids) {
-            if ((is_countable($ids) ? count($ids) : 0) > 0) {
+            if (safeCount($ids) > 0) {
                 $this->delete($ids, $archiveCustomTable, 'id_c');
             }
         }
@@ -562,7 +579,7 @@ class DbArchiver
             $bean = $this->getBean();
         }
         $allFieldDefs = $bean->getFieldDefinitions();
-        $cstmFieldDefs = $bean->getFieldDefinitions('source', array('custom_fields'));
+        $cstmFieldDefs = $bean->getFieldDefinitions('source', ['custom_fields']);
         $dbFieldDefs = array_filter($allFieldDefs, function ($field) use ($cstmFieldDefs) {
             return !key_exists('source', $field) && !in_array($field, $cstmFieldDefs);
         });
@@ -571,7 +588,7 @@ class DbArchiver
 
         $sq = new \SugarQuery();
         $sq->select($dbFields);
-        $sq->from($bean, array('add_deleted' => false));
+        $sq->from($bean, ['add_deleted' => false]);
         foreach ($where->conditions as $condition) {
             if ($or) {
                 $sq->orWhere($condition);
@@ -594,7 +611,7 @@ class DbArchiver
         }
 
         // Return a results array used to create queries
-        return array($results, $cstmResults);
+        return [$results, $cstmResults];
     }
 
     /**
@@ -613,8 +630,8 @@ class DbArchiver
         $ids = array_map(function ($row) {
             return $row['id'];
         }, $rows);
-        $fields = array('id_c');
-        $customFields = array_keys($bean->getFieldDefinitions('source', array('custom_fields')));
+        $fields = ['id_c'];
+        $customFields = array_keys($bean->getFieldDefinitions('source', ['custom_fields']));
         $fields = array_merge($fields, $customFields);
         $table = $bean->get_custom_table_name();
 
@@ -697,6 +714,8 @@ class DbArchiver
 
     private function cleanupEmailTextEmbeddedFiles(array $emailIds): void
     {
+        /** @var Email $emailBean */
+        $emailBean = \BeanFactory::newBean('Emails');
         $emailTextTable = BeanFactory::getBean('EmailText')->getTableName();
         $embeddedFilesTable = BeanFactory::getBean('EmbeddedFiles')->getTableName();
         $builder = $this->conn->createQueryBuilder();
@@ -709,7 +728,13 @@ class DbArchiver
         $embeddedFileIds = [];
         $pattern = '~EmbeddedFiles/([a-zA-Z0-9-]+)/file/description_html_file~';
         foreach ($results as $emailText) {
-            if (!is_string($emailText) || !preg_match($pattern, $emailText, $matches)) {
+            if (!is_string($emailText)) {
+                continue;
+            }
+            if ($emailBean->supportsGzip()) {
+                $emailText = $emailBean->ungzipContent($emailText);
+            }
+            if (!preg_match($pattern, $emailText, $matches)) {
                 continue;
             }
             $embeddedFileIds[] = $matches[1];

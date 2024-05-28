@@ -33,7 +33,7 @@
      *
      * @property
      */
-    className: 'dri-workflows-header-wrapper',
+    className: 'dri-workflows-header-wrapper -mb-1 relative',
 
     /**
      * Status values.
@@ -107,6 +107,10 @@
         }
 
         this.displaySetting = app.CJBaseHelper.getCJRecordViewSettings(this.context.get('parentModule'));
+        this.useTabs = app.metadata.getView(this.context.get('parentModule'), 'record');
+        this.smartGuidesCount = 0;
+        this.smartGuidesFlag = false;
+        this.loadRemoval = true;
 
         let url = app.api.buildURL('DRI_Workflows', 'graceperiod-remaining-days');
 

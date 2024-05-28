@@ -15,14 +15,14 @@
         {{#if def.link}}
             <a href="{{#if def.events}}javascript:void(0);{{else}}{{href}}{{/if}}"
                 class="ellipsis_inline"
-                data-placement="bottom"
+                data-bs-placement="bottom"
                 title="{{value}}"
             >
                 {{value}}
             </a>
             {{partial 'focus-icon' this this}}
         {{else}}
-            <span class="ellipsis_inline" data-placement="bottom" title="{{value}}">
+            <span class="ellipsis_inline" data-bs-placement="bottom" title="{{value}}">
                 {{value}}
             </span>
         {{/if}}

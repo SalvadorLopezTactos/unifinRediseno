@@ -10,52 +10,52 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['forecast-pareto'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['base']['view']['forecast-pareto'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_DASHLET_FORECASTS_CHART_NAME',
             'description' => 'LBL_DASHLET_FORECASTS_CHART_DESC',
-            'config' => array(
-                'module' => 'Forecasts'
-            ),
-            'preview' => array(),
-            'filter' => array(
-                'module' => array(
+            'config' => [
+                'module' => 'Forecasts',
+            ],
+            'preview' => [],
+            'filter' => [
+                'module' => [
                     'Home',
                     'Opportunities',
-                    'RevenueLineItems'
-                ),
-                'view' => array(
-                    'record'
-                )
-            )
-        )
-    ),
-    'panels' => array(
-        array(
+                    'RevenueLineItems',
+                ],
+                'view' => [
+                    'record',
+                ],
+            ],
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_body',
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'visibility',
                     'label' => 'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY',
                     'type' => 'enum',
                     'options' => 'forecast_pareto_visibility_options',
                     'enum_width' => 'auto',
-                ),
-            ),
-        ),
-    ),
-    'chart' => array(
+                ],
+            ],
+        ],
+    ],
+    'chart' => [
         'name' => 'paretoChart',
         'label' => 'Pareto Chart',
         'type' => 'forecast-pareto-chart',
-        'view' => 'detail'
-    ),
-    'timeperiod' => array(
-        array(
+        'view' => 'detail',
+    ],
+    'timeperiod' => [
+        [
             'module' => 'Forecasts',
             'name' => 'selectedTimePeriod',
             'label' => 'TimePeriod',
@@ -63,9 +63,9 @@ $viewdefs['base']['view']['forecast-pareto'] = array(
             'default' => true,
             'enabled' => true,
             'view' => 'edit',
-        ),
-    ),
-    'group_by' => array(
+        ],
+    ],
+    'group_by' => [
         'name' => 'group_by',
         'label' => 'LBL_DASHLET_FORECASTS_GROUPBY',
         'type' => 'enum',
@@ -73,9 +73,9 @@ $viewdefs['base']['view']['forecast-pareto'] = array(
         'default' => true,
         'enabled' => true,
         'view' => 'edit',
-        'options' => 'forecasts_chart_options_group'
-    ),
-    'dataset' => array(
+        'options' => 'forecasts_chart_options_group',
+    ],
+    'dataset' => [
         'name' => 'dataset',
         'label' => 'LBL_DASHLET_FORECASTS_DATASET',
         'type' => 'enum',
@@ -83,6 +83,6 @@ $viewdefs['base']['view']['forecast-pareto'] = array(
         'default' => true,
         'enabled' => true,
         'view' => 'edit',
-        'options' => 'forecasts_options_dataset'
-    )
-);
+        'options' => 'forecasts_options_dataset',
+    ],
+];

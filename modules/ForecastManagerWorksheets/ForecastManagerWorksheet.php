@@ -86,7 +86,7 @@ class ForecastManagerWorksheet extends SugarBean
             $worksheet = BeanFactory::newBean('ForecastManagerWorksheets');
 
             $worksheet->retrieve_by_string_fields(
-                array(
+                [
                     'user_id' => $row['user_id'],
                     // user id comes from the user model
                     'assigned_user_id' => $row['assigned_user_id'],
@@ -96,7 +96,7 @@ class ForecastManagerWorksheet extends SugarBean
                     'draft' => 0,
                     // we want to update the committed row
                     'deleted' => 0,
-                )
+                ]
             );
             foreach ($row as $key => $value) {
                 $worksheet->$key = $value;
@@ -144,17 +144,18 @@ class ForecastManagerWorksheet extends SugarBean
      * @param string $quota_type
      * @return Quota
      */
-    protected function getQuota($user_id, $timeperiod_id, $quota_type) {
+    protected function getQuota($user_id, $timeperiod_id, $quota_type)
+    {
         /* @var $quota Quota */
         $quota = $this->getBean('Quotas');
         $quota->retrieve_by_string_fields(
-            array(
+            [
                 'timeperiod_id' => $timeperiod_id,
                 'user_id' => $user_id,
                 'committed' => 1,
                 'quota_type' => $quota_type,
-                'deleted' => 0
-            )
+                'deleted' => 0,
+            ]
         );
 
         return $quota;
@@ -184,12 +185,12 @@ class ForecastManagerWorksheet extends SugarBean
         if (isset($data['forecast_type'])) {
             // check forecast type to see if the assigned_user_id should be equal to the $reportee as it's their own
             // rep worksheet
-            if ($data['forecast_type'] == "Direct" && $this->isUserManager($reportee->id)) {
+            if ($data['forecast_type'] == 'Direct' && $this->isUserManager($reportee->id)) {
                 // this is the manager committing their own data, the $reports_to should be them
                 // and not their actual manager
                 $reports_to = $reportee->id;
             } else {
-                if ($data['forecast_type'] == "Rollup" && $reports_to == $reportee->id) {
+                if ($data['forecast_type'] == 'Rollup' && $reports_to == $reportee->id) {
                     // if type is rollup and reports_to is equal to the $reportee->id (aka no top level manager),
                     // we don't want to update their draft record so just ignore this,
                     return false;
@@ -203,44 +204,44 @@ class ForecastManagerWorksheet extends SugarBean
         }
 
         $this->retrieve_by_string_fields(
-            array(
+            [
                 'user_id' => $reportee->id, // user id comes from the user model
                 'assigned_user_id' => $reports_to, // the assigned user of the row is who the user reports to
                 'timeperiod_id' => $data['timeperiod_id'], // the current timeperiod
                 'draft' => 1, // we only ever update the draft row
                 'deleted' => 0,
-            )
+            ]
         );
 
-        $copyMap = array(
+        $copyMap = [
             'currency_id',
             'base_rate',
             'timeperiod_id',
             'opp_count',
             'pipeline_opp_count',
             'pipeline_amount',
-            'closed_amount'
-        );
+            'closed_amount',
+        ];
 
-        if ($data["forecast_type"] == "Direct") {
-            $copyMap[] = "likely_case";
-            $copyMap[] = "best_case";
-            $copyMap[] = "worst_case";
-        } else if ($data["forecast_type"] == "Rollup") {
-            $copyMap[] = array("likely_case" => "likely_adjusted");
-            $copyMap[] = array("best_case" => "best_adjusted");
-            $copyMap[] = array("worst_case" => "worst_adjusted");
+        if ($data['forecast_type'] == 'Direct') {
+            $copyMap[] = 'likely_case';
+            $copyMap[] = 'best_case';
+            $copyMap[] = 'worst_case';
+        } elseif ($data['forecast_type'] == 'Rollup') {
+            $copyMap[] = ['likely_case' => 'likely_adjusted'];
+            $copyMap[] = ['best_case' => 'best_adjusted'];
+            $copyMap[] = ['worst_case' => 'worst_adjusted'];
         }
 
         if (empty($this->id) || $this->manager_saved == false) {
-            if ($data["forecast_type"] == "Rollup") {
-                $copyMap[] = array('likely_case_adjusted' => 'likely_adjusted');
-                $copyMap[] = array('best_case_adjusted' => 'best_adjusted');
-                $copyMap[] = array('worst_case_adjusted' => 'worst_adjusted');
-            } elseif ($data["forecast_type"] == "Direct") {
-                $copyMap[] = array('likely_case_adjusted' => 'likely_case');
-                $copyMap[] = array('best_case_adjusted' => 'best_case');
-                $copyMap[] = array('worst_case_adjusted' => 'worst_case');
+            if ($data['forecast_type'] == 'Rollup') {
+                $copyMap[] = ['likely_case_adjusted' => 'likely_adjusted'];
+                $copyMap[] = ['best_case_adjusted' => 'best_adjusted'];
+                $copyMap[] = ['worst_case_adjusted' => 'worst_adjusted'];
+            } elseif ($data['forecast_type'] == 'Direct') {
+                $copyMap[] = ['likely_case_adjusted' => 'likely_case'];
+                $copyMap[] = ['best_case_adjusted' => 'best_case'];
+                $copyMap[] = ['worst_case_adjusted' => 'worst_case'];
             }
         }
         if (empty($this->id)) {
@@ -256,7 +257,7 @@ class ForecastManagerWorksheet extends SugarBean
                 $quota = $quotaSeed->getRollupQuota($data['timeperiod_id'], $reportee->id, $getRollupQuota);
                 $data['quota'] = $quota['amount'];
             }
-            $copyMap[] = "quota";
+            $copyMap[] = 'quota';
         }
 
         $this->copyValues($copyMap, $data);
@@ -279,23 +280,23 @@ class ForecastManagerWorksheet extends SugarBean
     }
 
     /**
-     * @param ForecastManagerWorksheet $worksheet   The Draft Worksheet
-     * @param array $copyMap                        What we want to copy, if left empty it will default to
+     * @param ForecastManagerWorksheet $worksheet The Draft Worksheet
+     * @param array $copyMap What we want to copy, if left empty it will default to
      *                                              worst, likely and best case fields
      * @return bool
      */
-    protected function rollupDraftToCommittedWorksheet(ForecastManagerWorksheet $worksheet, $copyMap = array())
+    protected function rollupDraftToCommittedWorksheet(ForecastManagerWorksheet $worksheet, $copyMap = [])
     {
         /* @var $committed_worksheet ForecastManagerWorksheet */
         $committed_worksheet = $this->getBean($this->module_name);
         $committed_worksheet->retrieve_by_string_fields(
-            array(
+            [
                 'user_id' => $worksheet->user_id, // user id comes from the user model
                 'assigned_user_id' => $worksheet->assigned_user_id,
                 'timeperiod_id' => $worksheet->timeperiod_id, // the current timeperiod
                 'draft' => 0,
                 'deleted' => 0,
-            )
+            ]
         );
 
         if (empty($committed_worksheet->id)) {
@@ -304,11 +305,11 @@ class ForecastManagerWorksheet extends SugarBean
 
         // if we don't pass in a copy map, just use the default
         if (empty($copyMap)) {
-            $copyMap = array(
+            $copyMap = [
                 'likely_case',
                 'best_case',
                 'worst_case',
-            );
+            ];
         }
 
         $this->copyValues($copyMap, $worksheet->toArray(), $committed_worksheet);
@@ -325,7 +326,7 @@ class ForecastManagerWorksheet extends SugarBean
      *
      * @param array $fields
      * @param array $seed
-     * @param ForecastManagerWorksheet $bean        Optional, If not set, it will be set to the current object
+     * @param ForecastManagerWorksheet $bean Optional, If not set, it will be set to the current object
      */
     protected function copyValues($fields, array $seed, ForecastManagerWorksheet &$bean = null)
     {
@@ -351,8 +352,8 @@ class ForecastManagerWorksheet extends SugarBean
     /**
      * Assign the Quota out to the reporting users for the given user if they are a manager
      *
-     * @param string $user_id           The User for which we want to look for reportee's for
-     * @param string $timeperiod_id     Which timeperiod
+     * @param string $user_id The User for which we want to look for reportee's for
+     * @param string $timeperiod_id Which timeperiod
      * @return bool
      */
     public function assignQuota($user_id, $timeperiod_id)
@@ -363,7 +364,7 @@ class ForecastManagerWorksheet extends SugarBean
 
         // get everyone but the current user
         $sq = $this->getSugarQuery();
-        $sq->select(array('id', 'quota', 'user_id'));
+        $sq->select(['id', 'quota', 'user_id']);
         $sq->from($this);
         $sq->where()
             ->equals('assigned_user_id', $user_id)
@@ -373,7 +374,7 @@ class ForecastManagerWorksheet extends SugarBean
 
         // now just get the current user
         $sq2 = $this->getSugarQuery();
-        $sq2->select(array('id', 'quota', 'user_id'));
+        $sq2->select(['id', 'quota', 'user_id']);
         $sq2->from($this);
         $sq2->where()
             ->equals('assigned_user_id', $user_id)
@@ -382,7 +383,7 @@ class ForecastManagerWorksheet extends SugarBean
             ->equals('draft', 1);
 
         // create the union query now
-        $sqU =$this->getSugarQuery();
+        $sqU = $this->getSugarQuery();
         $sqU->union($sq)->addQuery($sq2);
 
         // run the query
@@ -399,7 +400,7 @@ class ForecastManagerWorksheet extends SugarBean
 
             /* @var $worksheet_obj ForecastManagerWorksheet */
             $worksheet_obj = $this->getBean($this->module_name, $worksheet['id']);
-            $this->rollupDraftToCommittedWorksheet($worksheet_obj, array('quota'));
+            $this->rollupDraftToCommittedWorksheet($worksheet_obj, ['quota']);
         }
 
         return true;
@@ -436,17 +437,17 @@ class ForecastManagerWorksheet extends SugarBean
             Activity::restoreToPreviousState();
 
             if ($new_quota !== $current_quota->amount) {
-                $args = array(
+                $args = [
                     'isUpdate' => !empty($current_quota->amount),
-                    'dataChanges' => array(
-                        'amount' => array(
+                    'dataChanges' => [
+                        'amount' => [
                             'field_name' => 'amount',
                             'field_type' => 'currency',
                             'before' => $current_quota->amount,
-                            'after' => $new_quota
-                        )
-                    )
-                );
+                            'after' => $new_quota,
+                        ],
+                    ],
+                ];
 
                 // Manually Create the Activity Stream Entry!
                 $aqm = $this->getActivityQueueManager();
@@ -465,9 +466,8 @@ class ForecastManagerWorksheet extends SugarBean
     protected function fixTopLevelManagerQuotaRollup($user_id, $timeperiod_id)
     {
         if ($this->isTopLevelManager($user_id)) {
-
             $sq = $this->getSugarQuery();
-            $sq->select(array())
+            $sq->select([])
                 ->fieldRaw('sum(quota * base_rate)', 'quota');
             $sq->from($this);
             $sq->where()
@@ -500,11 +500,11 @@ class ForecastManagerWorksheet extends SugarBean
     /**
      * Save Worksheet
      *
+     * @param bool $check_notify
      * @deprecated
      *
      * This is no longer used in 7.8, so it can safely be deprecated
      *
-     * @param bool $check_notify
      */
     public function saveWorksheet($check_notify = false)
     {
@@ -518,8 +518,6 @@ class ForecastManagerWorksheet extends SugarBean
         /* @var $mgr_worksheet ForecastManagerWorksheet */
         $mgr_worksheet = $this->getBean('ForecastManagerWorksheets');
         $mgr_worksheet->reporteeForecastRollUp($userObj, $this->args);
-
-
     }
 
     /**
@@ -563,15 +561,14 @@ class ForecastManagerWorksheet extends SugarBean
                 $this->show_history_log = 1;
             } else {
                 $bean = $beans[0];
-                $committed_date = $this->db->fromConvert($bean["date_modified"], "datetime");
+                $committed_date = $this->db->fromConvert($bean['date_modified'], 'datetime');
 
                 if (strtotime($committed_date) < strtotime($this->date_modified)) {
-
                     // find the differences via the audit table
                     // we use a direct query since SugarQuery can't do the audit tables...
                     $sql = sprintf(
-                        "SELECT field_name, before_value_string, after_value_string FROM %s
-                        WHERE parent_id = %s AND date_created >= " . $this->db->convert('%s', 'datetime'),
+                        'SELECT field_name, before_value_string, after_value_string FROM %s
+                        WHERE parent_id = %s AND date_created >= ' . $this->db->convert('%s', 'datetime'),
                         $this->get_audit_table_name(),
                         $this->db->quoted($this->id),
                         $this->db->quoted($this->fetched_row['date_modified'])
@@ -586,7 +583,7 @@ class ForecastManagerWorksheet extends SugarBean
 
                     while ($row = $this->db->fetchByAssoc($results)) {
                         $field = substr($row['field_name'], 0, strpos($row['field_name'], '_'));
-                        if (isset($settings['show_worksheet_' . $field]) && $settings['show_worksheet_' . $field] == "1") {
+                        if (isset($settings['show_worksheet_' . $field]) && $settings['show_worksheet_' . $field] == '1') {
                             // calculate the difference to make sure it actually changed at 2 digits vs changed at 6 digits
                             $diff = SugarMath::init($row['after_value_string'], 6)->sub(
                                 $row['before_value_string']
@@ -628,16 +625,16 @@ class ForecastManagerWorksheet extends SugarBean
      * Gets a sum of the passed in user's reportees quotas for a specific timeperiod
      *
      * @param string $userId The userID for which you want a reportee quota sum.
-     * @param string $timeperiodId      the timeperiod to use
+     * @param string $timeperiodId the timeperiod to use
      * @return int Sum of quota amounts.
      */
     protected function getQuotaSum($userId, $timeperiodId)
     {
-        $sql = "SELECT sum(q.amount) amount " .
-            "FROM quotas q " .
-            "INNER JOIN users u ON u.reports_to_id = " . $this->db->quoted($userId) . " " .
-            "AND q.user_id = u.id " .
-            "AND q.timeperiod_id = " . $this->db->quoted($timeperiodId) . " " .
+        $sql = 'SELECT sum(q.amount) amount ' .
+            'FROM quotas q ' .
+            'INNER JOIN users u ON u.reports_to_id = ' . $this->db->quoted($userId) . ' ' .
+            'AND q.user_id = u.id ' .
+            'AND q.timeperiod_id = ' . $this->db->quoted($timeperiodId) . ' ' .
             "AND q.quota_type = 'Rollup'";
         $amount = 0;
 
@@ -653,7 +650,7 @@ class ForecastManagerWorksheet extends SugarBean
      * Gets the passed in user's committed quota value and direct quota ID
      *
      * @param string userId User id to query for
-     * @param string $timeperiodId      the timeperiod to use
+     * @param string $timeperiodId the timeperiod to use
      * @return array id, Quota value
      */
     protected function getManagerQuota($userId, $timeperiodId)
@@ -667,25 +664,25 @@ class ForecastManagerWorksheet extends SugarBean
          * We are looking for the ID of the quota where quota_type = Direct
          * and the AMOUNT of the quota where quota_type = Rollup
          */
-        $sql = "SELECT q1.amount, q2.id FROM quotas q1 " .
-            "left outer join quotas q2 " .
-            "on q1.user_id = q2.user_id " .
-            "and q1.timeperiod_id = q2.timeperiod_id " .
+        $sql = 'SELECT q1.amount, q2.id FROM quotas q1 ' .
+            'left outer join quotas q2 ' .
+            'on q1.user_id = q2.user_id ' .
+            'and q1.timeperiod_id = q2.timeperiod_id ' .
             "and q2.quota_type = 'Direct' " .
-            "where q1.user_id = " . $this->db->quoted($userId) . " " .
-            "and q1.timeperiod_id = " . $this->db->quoted($timeperiodId) . " " .
+            'where q1.user_id = ' . $this->db->quoted($userId) . ' ' .
+            'and q1.timeperiod_id = ' . $this->db->quoted($timeperiodId) . ' ' .
             "and q1.quota_type = 'Rollup' " .
-            "union all " .
-            "SELECT q2.amount, q1.id FROM quotas q1 " .
-            "left outer join quotas q2 " .
-            "on q1.user_id = q2.user_id " .
-            "and q1.timeperiod_id = q2.timeperiod_id " .
+            'union all ' .
+            'SELECT q2.amount, q1.id FROM quotas q1 ' .
+            'left outer join quotas q2 ' .
+            'on q1.user_id = q2.user_id ' .
+            'and q1.timeperiod_id = q2.timeperiod_id ' .
             "and q2.quota_type = 'Rollup' " .
-            "where q1.user_id = " . $this->db->quoted($userId) . " " .
-            "and q1.timeperiod_id = " . $this->db->quoted($timeperiodId) . " " .
+            'where q1.user_id = ' . $this->db->quoted($userId) . ' ' .
+            'and q1.timeperiod_id = ' . $this->db->quoted($timeperiodId) . ' ' .
             "and q1.quota_type = 'Direct'";
 
-        $quota = array();
+        $quota = [];
 
         $result = $this->db->query($sql);
         while ($row = $this->db->fetchByAssoc($result)) {
@@ -750,13 +747,13 @@ class ForecastManagerWorksheet extends SugarBean
         $worksheet = $this->getBean('ForecastManagerWorksheets');
 
         $return = $worksheet->retrieve_by_string_fields(
-            array(
+            [
                 'user_id' => $manager_id, // user id comes from the user model
                 'assigned_user_id' => $manager_id, // the assigned user of the row is who the user reports to
                 'timeperiod_id' => $timeperiod, // the current timeperiod
                 'draft' => intval($isDraft),
                 'deleted' => 0,
-            )
+            ]
         );
 
         if (is_null($return) && $isDraft === true) {
@@ -778,7 +775,6 @@ class ForecastManagerWorksheet extends SugarBean
             $worksheet->closed_amount = 0;
             $worksheet->quota = 0;
             $worksheet->name = $user->full_name;
-
         } else {
             if (!is_null($return) && $isDraft === false) {
                 // only update the date_modified if it's a draft version
@@ -804,8 +800,8 @@ class ForecastManagerWorksheet extends SugarBean
     /**
      * Recalculates a specific user's direct quota
      *
-     * @param string $userId    User Id of quota that needs recalculated.
-     * @param string $timeperiodId      the timeperiod to use
+     * @param string $userId User Id of quota that needs recalculated.
+     * @param string $timeperiodId the timeperiod to use
      * @return number           The New total for the passed in user
      */
     protected function recalcUserQuota($userId, $timeperiodId)
@@ -816,7 +812,7 @@ class ForecastManagerWorksheet extends SugarBean
         $reporteeTotal = $this->getQuotaSum($userId, $timeperiodId);
         $managerQuota = $this->getManagerQuota($userId, $timeperiodId);
         $managerAmount = (isset($managerQuota['amount']) && !empty($managerQuota['amount']))
-                            ? $managerQuota['amount'] : '0';
+            ? $managerQuota['amount'] : '0';
         $newTotal = SugarMath::init($managerAmount, 6)->sub($reporteeTotal)->result();
         $quota = BeanFactory::getBean('Quotas', $managerQuota['id'] ?? null);
         $quotaAmount = $quota->amount ?? '0';
@@ -876,7 +872,7 @@ class ForecastManagerWorksheet extends SugarBean
             return false;
         }
 
-        $return = array(
+        $return = [
             'quota' => '0',
             'best_case' => '0',
             'best_adjusted' => '0',
@@ -887,14 +883,14 @@ class ForecastManagerWorksheet extends SugarBean
             'included_opp_count' => 0,
             'pipeline_opp_count' => 0,
             'pipeline_amount' => '0',
-            'closed_amount' => '0'
-        );
+            'closed_amount' => '0',
+        ];
 
         global $current_user;
 
         $sq = $this->getSugarQuery();
         $bean_obj = $this->getBean($this->module_name);
-        $sq->select(array($bean_obj->getTableName().'.*'));
+        $sq->select([$bean_obj->getTableName() . '.*']);
         $sq->from($bean_obj)->where()
             ->equals('timeperiod_id', $tp->id)
             ->equals('assigned_user_id', $userId)

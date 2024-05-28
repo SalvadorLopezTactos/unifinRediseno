@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Отримати конверт',
     'LBL_CLOUD_SERVICE_TYPE' => 'Тип хмарного сервісу',
     'LBL_CLOUD_PATH' => 'Хмарний шлях',
+    'LBL_CLOUD_DRIVE_ID' => 'Ідентифікатор диска',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Інформаційна панель списку конвертів DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'Інформаційна панель записів конвертів DocuSign',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Останні конверти DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель конвертів DocuSign',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Часова шкала конвертів DocuSign',
 
     'LBL_NEW_ENVELOPE' => 'Новий конверт',
     'LBL_DOCUMENT_IS_NOW' => ' тепер ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Надіслати',
     'LBL_BUTTON_CLEAR' => 'Очистити',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Використати шаблон',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Надіслати за шаблоном',
     'LBL_PLEASE_LOG_IN' => 'Спершу ввійдіть у DocuSign.',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Ви не можете завантажити цей документ. Його створив інший користувач.',
     'LBL_SEND_NOT_ALLOWED' => 'Ви не можете надіслати цей конверт. Його створив інший користувач.',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Чернетку було змінено. Оновити статус до поточного ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'Конверт DocuSign оновлено.',
     'LBL_DRAFT_CHANGED_ERROR' => 'Статус DocuSign Envelope не оновлено. Докладні відомості дивіться в журналах.',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'Шаблон DocuSign неможливо застосувати',
     'LBL_ENVELOPE_NOT_SENT' => 'Конверт не надіслано.',
     'LBL_ENVELOPE_SENT' => 'Конверт знову надіслано.',
     'LBL_DOCUMENT_ADDED' => 'Документ додано до запису.',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Роль',
     'LBL_SELECT_BUTTON_LABEL' => 'Вибрати',
     'LBL_BACK_BUTTON_LABEL' => 'Назад',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Пошук за назвою шаблону',
+    'LBL_ENVELOPE_NAME' => 'Назва конверта',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Назва конверта може бути порожньою',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Не вдалося відобразити потенційних отримувачів!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Не вдалося відобразити шаблони!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Виберіть роль для кожного одержувача',
+    
+    'LBL_DOWNLOAD' => 'Завантажити',
+    'LBL_OPEN_DRAFT' => 'Відкрити чернетку',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Неможливо надіслати в DocuSign документи без файлу.',
+    'LBL_START_SIGN_PROMPT' => 'Натисніть кнопку зі знаком плюса, щоб розпочати процес підписання',
+    'LBL_NO_DOC_SELECTED' => 'Спочатку виберіть документи',
+    'LBL_SELECT_RECIPIENTS' => 'Виберіть одержувача з правом підпису',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Виключити',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Для оптимізації роботи потрібно встановити додаток DocuSign.',
 ];

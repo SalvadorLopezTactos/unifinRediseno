@@ -9,26 +9,26 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['TaxRates']['base']['filter']['basic'] = array(
+$viewdefs['TaxRates']['base']['filter']['basic'] = [
     'create' => false,
-    'quicksearch_field' => array('name'),
+    'quicksearch_field' => ['name'],
     'quicksearch_priority' => 1,
-    'filters' => array(
-        array(
+    'filters' => [
+        [
             'id' => 'all_records', // need 'all_records' to make filter irremovable
             'name' => 'LBL_MODULE_NAME',
-            'filter_definition' => array(),
+            'filter_definition' => [],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'active_taxrates',
             'name' => 'LBL_FILTER_ACTIVE',
-            'filter_definition' => array(
-                'status' => array(
-                    '$in' => array('Active'),
-                ),
-            ),
+            'filter_definition' => [
+                'status' => [
+                    '$in' => ['Active'],
+                ],
+            ],
             'editable' => false,
-        ),
-    ),
-);
+        ],
+    ],
+];

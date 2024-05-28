@@ -14,7 +14,6 @@ namespace Sugarcrm\Sugarcrm\Elasticsearch\Queue;
 
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 
-
 /**
  *
  * Handle the consumption of records from the database queue.
@@ -56,12 +55,12 @@ class ConsumerJob implements \RunnableSchedulerJob
     {
         // We can only run for Elasticsearch engine
         if (!$this->isElasticSearchEngine()) {
-            return $this->job->failJob("The current configured SearchEngine is not Elasticsearch");
+            return $this->job->failJob('The current configured SearchEngine is not Elasticsearch');
         }
 
         // The passed in data is expected to contain the module name
         if (empty($module)) {
-            return $this->job->failJob("Missing module parameter");
+            return $this->job->failJob('Missing module parameter');
         }
 
         // Force connectivity check
@@ -72,7 +71,7 @@ class ConsumerJob implements \RunnableSchedulerJob
 
         [$success, $processed, $duration, $errorMsg] = $this->consumeModuleFromQueue($module);
 
-        $msg = sprintf("Processed %s records in %s second(s)", $processed, $duration);
+        $msg = sprintf('Processed %s records in %s second(s)', $processed, $duration);
         if ($success) {
             return $this->job->succeedJob($msg);
         } else {

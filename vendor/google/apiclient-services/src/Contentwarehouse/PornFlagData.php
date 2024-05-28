@@ -19,21 +19,7 @@ namespace Google\Service\Contentwarehouse;
 
 class PornFlagData extends \Google\Collection
 {
-  protected $collection_key = 'textStats';
-  /**
-   * @var float
-   */
-  public $adaboostContentScore;
-  /**
-   * @var int
-   */
-  public $adaboostContentScoreMinorVersion;
-  /**
-   * @var int
-   */
-  public $adaboostContentScoreVersion;
-  protected $coclickBrainScoresType = ImageSafesearchContentBrainPornAnnotation::class;
-  protected $coclickBrainScoresDataType = '';
+  protected $collection_key = 'debugInfo';
   /**
    * @var float
    */
@@ -52,20 +38,8 @@ class PornFlagData extends \Google\Collection
    * @var string
    */
   public $finalViolenceScoreVersion;
-  /**
-   * @var float
-   */
-  public $imageEntitiesViolenceScore;
-  protected $imageStatsType = PornStatsImage::class;
-  protected $imageStatsDataType = 'array';
-  /**
-   * @var float
-   */
-  public $largestFaceFrac;
-  /**
-   * @var int
-   */
-  public $largestFaceFraction;
+  protected $internalSignalsType = SafesearchInternalImageSignals::class;
+  protected $internalSignalsDataType = '';
   /**
    * @var int
    */
@@ -79,10 +53,6 @@ class PornFlagData extends \Google\Collection
   protected $offensiveSymbolDetectionType = ImageSafesearchContentOffensiveSymbolDetection::class;
   protected $offensiveSymbolDetectionDataType = '';
   /**
-   * @var float
-   */
-  public $overallPornScore;
-  /**
    * @var string
    */
   public $photodnaHash;
@@ -90,18 +60,6 @@ class PornFlagData extends \Google\Collection
    * @var bool
    */
   public $pornWithHighConfidence;
-  /**
-   * @var bool
-   */
-  public $propAnyPornFlag;
-  /**
-   * @var bool
-   */
-  public $propPornFlag;
-  /**
-   * @var bool
-   */
-  public $propSoftpornFlag;
   /**
    * @var float
    */
@@ -127,78 +85,12 @@ class PornFlagData extends \Google\Collection
    */
   public $semanticSexualizationScore;
   /**
-   * @var float
-   */
-  public $starburstPornScore;
-  /**
-   * @var float
-   */
-  public $starburstViolenceScore;
-  protected $textStatsType = PornStatsText::class;
-  protected $textStatsDataType = 'array';
-  /**
    * @var string
    */
   public $url;
   protected $urlPornScoresType = ClassifierPornAggregatedUrlPornScores::class;
   protected $urlPornScoresDataType = '';
 
-  /**
-   * @param float
-   */
-  public function setAdaboostContentScore($adaboostContentScore)
-  {
-    $this->adaboostContentScore = $adaboostContentScore;
-  }
-  /**
-   * @return float
-   */
-  public function getAdaboostContentScore()
-  {
-    return $this->adaboostContentScore;
-  }
-  /**
-   * @param int
-   */
-  public function setAdaboostContentScoreMinorVersion($adaboostContentScoreMinorVersion)
-  {
-    $this->adaboostContentScoreMinorVersion = $adaboostContentScoreMinorVersion;
-  }
-  /**
-   * @return int
-   */
-  public function getAdaboostContentScoreMinorVersion()
-  {
-    return $this->adaboostContentScoreMinorVersion;
-  }
-  /**
-   * @param int
-   */
-  public function setAdaboostContentScoreVersion($adaboostContentScoreVersion)
-  {
-    $this->adaboostContentScoreVersion = $adaboostContentScoreVersion;
-  }
-  /**
-   * @return int
-   */
-  public function getAdaboostContentScoreVersion()
-  {
-    return $this->adaboostContentScoreVersion;
-  }
-  /**
-   * @param ImageSafesearchContentBrainPornAnnotation
-   */
-  public function setCoclickBrainScores(ImageSafesearchContentBrainPornAnnotation $coclickBrainScores)
-  {
-    $this->coclickBrainScores = $coclickBrainScores;
-  }
-  /**
-   * @return ImageSafesearchContentBrainPornAnnotation
-   */
-  public function getCoclickBrainScores()
-  {
-    return $this->coclickBrainScores;
-  }
   /**
    * @param float
    */
@@ -270,60 +162,18 @@ class PornFlagData extends \Google\Collection
     return $this->finalViolenceScoreVersion;
   }
   /**
-   * @param float
+   * @param SafesearchInternalImageSignals
    */
-  public function setImageEntitiesViolenceScore($imageEntitiesViolenceScore)
+  public function setInternalSignals(SafesearchInternalImageSignals $internalSignals)
   {
-    $this->imageEntitiesViolenceScore = $imageEntitiesViolenceScore;
+    $this->internalSignals = $internalSignals;
   }
   /**
-   * @return float
+   * @return SafesearchInternalImageSignals
    */
-  public function getImageEntitiesViolenceScore()
+  public function getInternalSignals()
   {
-    return $this->imageEntitiesViolenceScore;
-  }
-  /**
-   * @param PornStatsImage[]
-   */
-  public function setImageStats($imageStats)
-  {
-    $this->imageStats = $imageStats;
-  }
-  /**
-   * @return PornStatsImage[]
-   */
-  public function getImageStats()
-  {
-    return $this->imageStats;
-  }
-  /**
-   * @param float
-   */
-  public function setLargestFaceFrac($largestFaceFrac)
-  {
-    $this->largestFaceFrac = $largestFaceFrac;
-  }
-  /**
-   * @return float
-   */
-  public function getLargestFaceFrac()
-  {
-    return $this->largestFaceFrac;
-  }
-  /**
-   * @param int
-   */
-  public function setLargestFaceFraction($largestFaceFraction)
-  {
-    $this->largestFaceFraction = $largestFaceFraction;
-  }
-  /**
-   * @return int
-   */
-  public function getLargestFaceFraction()
-  {
-    return $this->largestFaceFraction;
+    return $this->internalSignals;
   }
   /**
    * @param int
@@ -382,20 +232,6 @@ class PornFlagData extends \Google\Collection
     return $this->offensiveSymbolDetection;
   }
   /**
-   * @param float
-   */
-  public function setOverallPornScore($overallPornScore)
-  {
-    $this->overallPornScore = $overallPornScore;
-  }
-  /**
-   * @return float
-   */
-  public function getOverallPornScore()
-  {
-    return $this->overallPornScore;
-  }
-  /**
    * @param string
    */
   public function setPhotodnaHash($photodnaHash)
@@ -422,48 +258,6 @@ class PornFlagData extends \Google\Collection
   public function getPornWithHighConfidence()
   {
     return $this->pornWithHighConfidence;
-  }
-  /**
-   * @param bool
-   */
-  public function setPropAnyPornFlag($propAnyPornFlag)
-  {
-    $this->propAnyPornFlag = $propAnyPornFlag;
-  }
-  /**
-   * @return bool
-   */
-  public function getPropAnyPornFlag()
-  {
-    return $this->propAnyPornFlag;
-  }
-  /**
-   * @param bool
-   */
-  public function setPropPornFlag($propPornFlag)
-  {
-    $this->propPornFlag = $propPornFlag;
-  }
-  /**
-   * @return bool
-   */
-  public function getPropPornFlag()
-  {
-    return $this->propPornFlag;
-  }
-  /**
-   * @param bool
-   */
-  public function setPropSoftpornFlag($propSoftpornFlag)
-  {
-    $this->propSoftpornFlag = $propSoftpornFlag;
-  }
-  /**
-   * @return bool
-   */
-  public function getPropSoftpornFlag()
-  {
-    return $this->propSoftpornFlag;
   }
   /**
    * @param float
@@ -562,48 +356,6 @@ class PornFlagData extends \Google\Collection
   public function getSemanticSexualizationScore()
   {
     return $this->semanticSexualizationScore;
-  }
-  /**
-   * @param float
-   */
-  public function setStarburstPornScore($starburstPornScore)
-  {
-    $this->starburstPornScore = $starburstPornScore;
-  }
-  /**
-   * @return float
-   */
-  public function getStarburstPornScore()
-  {
-    return $this->starburstPornScore;
-  }
-  /**
-   * @param float
-   */
-  public function setStarburstViolenceScore($starburstViolenceScore)
-  {
-    $this->starburstViolenceScore = $starburstViolenceScore;
-  }
-  /**
-   * @return float
-   */
-  public function getStarburstViolenceScore()
-  {
-    return $this->starburstViolenceScore;
-  }
-  /**
-   * @param PornStatsText[]
-   */
-  public function setTextStats($textStats)
-  {
-    $this->textStats = $textStats;
-  }
-  /**
-   * @return PornStatsText[]
-   */
-  public function getTextStats()
-  {
-    return $this->textStats;
   }
   /**
    * @param string

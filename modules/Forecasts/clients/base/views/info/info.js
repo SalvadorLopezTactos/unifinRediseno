@@ -196,16 +196,15 @@
     },
 
     /**
-     * Takes the last committed model (if applicable) and the initial
-     * totals from the worksheet, and determines which values should
+     * Takes the last committed model (if applicable) and determines if this values should
      * be used at the synced/baseline values for the datapoint fields
+     * or initiate that value at 0
      *
      * @private
      */
     _syncDatapointValues: function() {
-        // Get the commit models
+        // Get the last commit model
         let lastCommitModel = this.context.get('lastCommitModel');
-        let nextCommitModel = this.context.get('nextCommitModel');
 
         // Sync any last committed datapoint values if necessary
         let valuesToSync = {};
@@ -215,12 +214,22 @@
             }, this);
         } else if (this.syncedTotals) {
             _.each(this.meta.datapoints, function(datapoint) {
-                if (!_.isUndefined(this.syncedTotals[datapoint.name])) {
-                    valuesToSync[datapoint.name] = this.syncedTotals[datapoint.name];
-                }
+                valuesToSync[datapoint.name] = 0;
             }, this);
         }
 
+        this._setNextCommitModel(valuesToSync);
+    },
+
+    /**
+     * Set next committed model data for the datapoint fields
+     *
+     * @param {Object} valuesToSync
+     * @private
+     */
+    _setNextCommitModel: function(valuesToSync) {
+        // Get the next commit model
+        let nextCommitModel = this.context.get('nextCommitModel');
         nextCommitModel.setSyncedAttributes(valuesToSync);
         nextCommitModel.set(valuesToSync);
     },

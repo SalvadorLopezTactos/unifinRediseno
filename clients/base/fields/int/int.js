@@ -76,16 +76,6 @@
     },
 
     /**
-     * Used by the FocusDrawer plugin to get the name of the record this
-     * field links to
-     *
-     * @return {string} the name of the related record
-     */
-    getFocusContextTitle: function() {
-        return this.model && this.model.get('name') ? this.model.get('name') : '';
-    },
-
-    /**
      * Used by the FocusDrawer plugin to get field defs
      *
      * @return {Object} the field defs

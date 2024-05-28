@@ -24,7 +24,7 @@ class StandardDeviationExpression extends NumericExpression
     public function evaluate()
     {
         $params = $this->getParameters();
-        $values = array();
+        $values = [];
 
         // find the mean
         $sum = 0;
@@ -43,8 +43,7 @@ class StandardDeviationExpression extends NumericExpression
         }
 
         // find the std dev
-        return SugarMath::init()->exp('((1/?)*?)', array($count, $deviation_sum))->sqrt()->result();
-
+        return SugarMath::init()->exp('((1/?)*?)', [$count, $deviation_sum])->sqrt()->result();
     }
 
     /**
@@ -84,7 +83,7 @@ EOQ;
      */
     public static function getOperationName()
     {
-        return "stddev";
+        return 'stddev';
     }
 
     /**

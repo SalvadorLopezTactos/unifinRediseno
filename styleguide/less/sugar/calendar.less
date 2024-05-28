@@ -6,6 +6,7 @@
     color: @textColor;
     padding-left: 0;
     padding-right: 0;
+    overflow: visible;
 
     .k-button-text {
       color: @textColor;
@@ -692,11 +693,14 @@
 
     i {
       width: 20px;
-      display: inline;
       position: absolute;
       right: 0;
       line-height: inherit;
       top: 2px;
+
+      &:not(.hidden) {
+        display: inline;
+      }
     }
 
     input:focus + i {

@@ -9,16 +9,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['sweetspot-config-theme'] = array(
+$viewdefs['base']['view']['sweetspot-config-theme'] = [
     'action' => 'edit',
-    'fields' => array(
-        array(
+    'fields' => [
+        [
             'name' => 'theme',
             'type' => 'enum',
             'label' => 'LBL_SWEETSPOT_THEME_SELECT',
             'enum_width' => 'resolve',
             'options' => 'sweetspot_theme_options',
-        ),
-    ),
-);
-
+        ],
+    ],
+];

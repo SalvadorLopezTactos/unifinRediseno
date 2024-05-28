@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Gelir Kalemleri Listesi Panosu',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Gelir Kalemleri Kaydı Panosu',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Ürün Tipleri',
     'LBL_ASSIGNED_TO_NAME' => 'Atanan Kişi:',
     'LBL_ASSIGNED_TO' => 'Atanan Kişi',
-    'LBL_ASSIGNED_TO_ID'=>'Atanan Kullanıcı ID',
+    'LBL_ASSIGNED_TO_ID' => 'Atanan Kullanıcı ID',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Atanan Kullanıcı İsmi',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Atanan Kullanıcı ID',
     'LBL_CAMPAIGN_ID' => 'Kampanya ID',
@@ -217,4 +217,5 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'En iyi on Gelir Kalemini Balon grafiğinde gösterir.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Gelir Kalemlerim',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Takımımın Gelir Kalemleri",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Gelir Kalemi Zaman Çizelgesi',
+];

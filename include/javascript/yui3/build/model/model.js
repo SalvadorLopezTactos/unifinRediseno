@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('model', function (Y, NAME) {
 
 /**
@@ -1011,4 +1004,4 @@ Y.Model = Y.extend(Model, Y.Base, {
 });
 
 
-}, '3.15.0', {"requires": ["base-build", "escape", "json-parse"]});
+}, '3.18.1', {"requires": ["base-build", "escape", "json-parse"]});

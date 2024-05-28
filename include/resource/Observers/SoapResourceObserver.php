@@ -40,7 +40,7 @@ class SoapResourceObserver extends ResourceObserver
 
         //Override the description
         $error->description = $msg;
-        $this->soapServer->methodreturn = array('result' => $msg, 'error' => $error->get_soap_array());
+        $this->soapServer->methodreturn = ['result' => $msg, 'error' => $error->get_soap_array()];
         $this->soapServer->serialize_return();
         $this->soapServer->send_response();
 

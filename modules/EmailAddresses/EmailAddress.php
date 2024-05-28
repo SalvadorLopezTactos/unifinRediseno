@@ -16,7 +16,7 @@
  */
 class EmailAddress extends SugarEmailAddress
 {
-	var $disable_row_level_security = true;
+    public $disable_row_level_security = true;
 
     /**
      * Called by DuplicateCheck api to remove email_addr_bean_rel records created in the process
@@ -27,7 +27,7 @@ class EmailAddress extends SugarEmailAddress
     {
         // Need to correct this to handle the Employee/User split
         $module = $this->getCorrectedModule($module);
-        $query = "update email_addr_bean_rel set deleted = 1 WHERE bean_id = '".$this->db->quote($id)."' AND bean_module = '".$this->db->quote($module)."'";
+        $query = "update email_addr_bean_rel set deleted = 1 WHERE bean_id = '" . $this->db->quote($id) . "' AND bean_module = '" . $this->db->quote($module) . "'";
         $this->db->query($query);
     }
 }

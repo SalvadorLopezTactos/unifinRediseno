@@ -11,27 +11,27 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$wireless_module_registry = array(
-	'Accounts' => array(),
-	'Contacts' => array(),
-    'Opportunities' => array('disable_create' => true),
-	'Leads' => array(),
-    'Reports' => array('disable_create' => true),
+$wireless_module_registry = [
+    'Accounts' => [],
+    'Contacts' => [],
+    'Opportunities' => ['disable_create' => true],
+    'Leads' => [],
+    'Reports' => ['disable_create' => true],
     'Quotes' => [],
     'Documents' => [],
-    'Emails' => array(),
-    'Calls' => array(),
-    'Meetings' => array(),
-    'Tasks' => array(),
+    'Emails' => [],
+    'Calls' => [],
+    'Meetings' => [],
+    'Tasks' => [],
     'Escalations' => [],
-    'Notes' => array(),
-    'Cases' => array('disable_create' => true),
-    'pmse_Inbox' => array(),
+    'Notes' => [],
+    'Cases' => ['disable_create' => true],
+    'pmse_Inbox' => [],
     'Purchases' => [],
     'Messages' => [],
     'KBContents' => [],
-    'RevenueLineItems' => array(),
-    'Employees' => array('disable_create' => true),
+    'RevenueLineItems' => [],
+    'Employees' => ['disable_create' => true],
     'Contracts' => [],
     'ContractTypes' => [],
     'EmailTemplates' => [],
@@ -40,4 +40,4 @@ $wireless_module_registry = array(
     'Geocode' => [],
     'Calendar' => [],
     'DocuSignEnvelopes' => [],
-);
+];

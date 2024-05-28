@@ -88,7 +88,7 @@
                 }
 
                 if (_.has(customOptions, 'filtersDef') && customOptions.filtersDef) {
-                    filters = customOptions.filtersDef;
+                    filters = this._applyDashboardFilters(customOptions.filtersDef);
                 }
 
                 if (!stateKey) {
@@ -98,10 +98,128 @@
                 const lastState = app.user.lastState.get(stateKey);
 
                 if (_.has(lastState, 'filtersDef')) {
-                    filters = lastState.filtersDef;
+                    filters = this._applyDashboardFilters(lastState.filtersDef);
                 }
 
                 return filters;
+            },
+
+            /**
+             * Apply dashboard filters
+             *
+             * @param {Object} filters
+             *
+             * @return {Object}
+             */
+            _applyDashboardFilters: function(filters) {
+                const customFilters = app.utils.deepCopy(filters);
+                const dashletFilters = customFilters.Filter_1;
+                const customContainer = this.closestComponentByType(this.layout, 'dashlet-grid-wrapper');
+
+                let dashboardFilterGroups = customContainer.model.get('metadata').filters;
+
+                const dashletId = customContainer.el.getAttribute('data-gs-id');
+                const dashboardId = customContainer.model.get('id');
+                const userDashboardFiltersSetup = this._getUserDashboardLastState(dashboardId);
+
+                if (!_.isEmpty(userDashboardFiltersSetup)) {
+                    dashboardFilterGroups = userDashboardFiltersSetup.filters;
+                }
+
+                _.each(dashboardFilterGroups, (dashboardFilterGroup) => {
+                    _.each(
+                        dashboardFilterGroup.fields,
+                        _.bind(
+                            this._applyFiltersFields,
+                            this,
+                            dashletId,
+                            dashletFilters,
+                            dashboardFilterGroup
+                        )
+                    );
+                });
+
+                return customFilters;
+            },
+
+            /**
+             * Apply filters fields
+             *
+             * @param {string} dashletId
+             * @param {Object} dashletFilters
+             * @param {Object} dashboardFilterGroup
+             * @param {Object} dashboardFilterField
+             */
+            _applyFiltersFields: function(dashletId, dashletFilters, dashboardFilterGroup, dashboardFilterField) {
+                _.each(dashletFilters, (dashletFilter, dashletFilterKey) => {
+                    if (dashletFilterKey === 'operator') {
+                        return;
+                    }
+
+                    if (!_.isEmpty(dashletFilter.operator)) {
+                        this._applyFiltersFields(dashletId, dashletFilter, dashboardFilterGroup, dashboardFilterField);
+                    } else if (dashboardFilterField.dashletId === dashletId &&
+                        dashboardFilterField.fieldName === dashletFilter.name &&
+                        dashboardFilterField.tableKey === dashletFilter.table_key) {
+                        const inputValues = 4;
+
+                        for (let inputValueIdx = 0; inputValueIdx < inputValues; inputValueIdx++) {
+                            dashletFilter[`input_name${inputValueIdx}`] = '';
+                        }
+
+                        _.each(dashboardFilterGroup.filterDef, (propertyValue, propertyKey) => {
+                            dashletFilter[propertyKey] = propertyValue;
+                        });
+                    }
+                });
+            },
+
+            /**
+             * Gets the closest component to the dashlet
+             *
+             * @param {Object} container
+             * @param {string} type
+             *
+             * @return {Object|null}
+             */
+            closestComponentByType: function(container, type) {
+               if (!container) {
+                   return;
+               }
+               if (container.type === type) {
+                   return container;
+               }
+               return this.closestComponentByType(container.layout, type);
+           },
+
+            /**
+             * Get User Dashboard Filters setup (i.e. filters and the date modified)
+             *
+             * @param {string} dashboardId
+             * @return {Object}
+             */
+            _getUserDashboardLastState: function(dashboardId) {
+                const userDashboardStateKey = this._getUserDashboardLastStateKey(dashboardId);
+                const dashboardFiltersStored = app.user.lastState.get(userDashboardStateKey);
+
+                return dashboardFiltersStored;
+            },
+
+            /**
+             * Get the key for the Dashboard and User Filters
+             *
+             * @return {string}
+             */
+            _getUserDashboardLastStateKey: function(dashboardId) {
+                const dashboardKey = `Dashboards:${dashboardId}`;
+                const dashboardComponentKey = 'dashboard-filters';
+                const lastStateKey = app.user.lastState.buildKey(
+                    dashboardComponentKey,
+                    app.user.id,
+                    dashboardKey
+                );
+
+                return lastStateKey;
             },
 
             /**
@@ -197,6 +315,12 @@
                     if (_.isFunction(this._hideAdditionalComponents)) {
                         this._hideAdditionalComponents();
                     }
+
+                    this.context.trigger('refresh-results-complete');
+                }
+
+                if (!show) {
+                    this.context.trigger('dashlet-finished-loading');
                 }
             },
         });

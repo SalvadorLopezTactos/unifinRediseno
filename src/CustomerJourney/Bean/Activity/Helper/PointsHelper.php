@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper;
 
 /**
@@ -17,22 +18,21 @@ namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper;
  */
 class PointsHelper
 {
-
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\parentHelper
      */
     private $parentHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\activityHelper
      */
     private $activityHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\childActivityHelper
      */
     private $childActivityHelper;
-    
+
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\statusHelper
      */
@@ -57,7 +57,7 @@ class PointsHelper
      */
     public function getPoints(\SugarBean $activity)
     {
-        return (int) $activity->customer_journey_points;
+        return (int)$activity->customer_journey_points;
     }
 
     /**
@@ -80,17 +80,19 @@ class PointsHelper
         if (0 === $points) {
             if (!empty($activity->dri_workflow_template_id)) {
                 $template = \DRI_Workflow_Template::getById($activity->dri_workflow_template_id);
+            } elseif (!empty($activity->dri_subworkflow_id)) {
+                $template = \DRI_Workflow_Template::getBeanByActivityId($activity);
             }
             if (!empty($template->id)) {
                 if ($template->not_applicable_action === 'custom' &&
                     ($this->statusHelper->isNotApplicable($activity) ||
-                    $this->statusHelper->isCancelled($activity))) {
-                        $points = 0;
+                        $this->statusHelper->isCancelled($activity))) {
+                    $points = 0;
                 } else {
-                    $points = (int) $activity->customer_journey_points;
+                    $points = (int)$activity->customer_journey_points;
                 }
             } else {
-                $points = (int) $activity->customer_journey_points;
+                $points = (int)$activity->customer_journey_points;
             }
         }
 
@@ -121,7 +123,7 @@ class PointsHelper
             $fetched_row_value = $activity->fetched_row_before['customer_journey_points'];
         }
 
-        return (int) $fetched_row_value !== $activity->customer_journey_points;
+        return (int)$fetched_row_value !== $activity->customer_journey_points;
     }
 
     /**

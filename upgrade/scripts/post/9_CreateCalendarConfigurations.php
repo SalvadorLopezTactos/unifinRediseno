@@ -42,7 +42,7 @@ class SugarUpgradeCreateCalendarConfigurations extends UpgradeScript
                 'dblclick_event' => 'detail:self:id',
                 'calendar_type' => '^main^',
                 'calendar_filter' =>
-                '{"filterId":"calls_attending","filterName":"My Calls as Guest","filterDef":[{"$guest":""}]}',
+                    '{"filterId":"calls_attending","filterName":"My Calls as Guest","filterDef":[{"$guest":""}]}',
                 'event_tooltip_template' => '<p>{::description::}</p>',
                 'day_event_template' => '<p><strong>{::name::}</strong></p><p>{::description::}</p>',
                 'week_event_template' => '<p><strong>{::name::}</strong></p><p>{::description::}</p>',
@@ -68,7 +68,7 @@ class SugarUpgradeCreateCalendarConfigurations extends UpgradeScript
                 'dblclick_event' => 'detail:self:id',
                 'calendar_type' => '^main^',
                 'calendar_filter' =>
-                '{"filterId":"meetings_attending","filterName":"My Meetings as Guest","filterDef":[{"$guest":""}]}',
+                    '{"filterId":"meetings_attending","filterName":"My Meetings as Guest","filterDef":[{"$guest":""}]}',
                 'event_tooltip_template' => '<p>{::description::}</p>',
                 'day_event_template' => '<p><strong>{::name::}</strong></p><p>{::description::}</p>',
                 'week_event_template' => '<p><strong>{::name::}</strong></p><p>{::description::}</p>',

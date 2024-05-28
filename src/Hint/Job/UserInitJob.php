@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint\Job;
 
 use Sugarcrm\Sugarcrm\Hint\Logger\Logger;
@@ -18,6 +19,7 @@ use Sugarcrm\Sugarcrm\Hint\HintConstants;
 class UserInitJob implements \RunnableSchedulerJob
 {
     use QueueTrait;
+
     /**
      * Job name
      */
@@ -46,6 +48,7 @@ class UserInitJob implements \RunnableSchedulerJob
      */
     public function run($data)
     {
+        $processed = null;
         $data = json_decode($data, true);
         $logger = new Logger();
         $users = $this->getUsers($data['ids']);
@@ -54,15 +57,8 @@ class UserInitJob implements \RunnableSchedulerJob
             return $this->job->failJob('Invalid data');
         }
 
-        try {
-            $processed = [];
-            foreach ($users as $user) {
-                \HintAccountset::createUserAccountset($user);
-                $processed[] = $user->id;
-            }
-        } catch (\Throwable $e) {
-            $logger->fatal('Hint: Error occurred in User Init Job creating user account set');
-            throw new \SugarApiException($e->getMessage());
+        if (!hasSystemHintLicense()) {
+            return $this->job->succeedJob(translate('LBL_HINT_NO_LICENSE_ACCESS'));
         }
 
         // Only the final UserInitJob that runs on package installation will contain the completion

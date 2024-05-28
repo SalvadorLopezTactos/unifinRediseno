@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -43,9 +44,7 @@ if (!class_exists('UserUtilitiesJob')) {
          */
         public function run($data)
         {
-            $this->job->runnable_ran = true;
-            $this->job->runnable_data = $data;
-            $data = unserialize(base64_decode($this->job->runnable_data), ['allowed_classes' => false]);
+            $data = $this->getJobData($data);
             $invoker = new Invoker([$data]);
             $newCommands = [];
             foreach ($invoker->getCommands() as $command) {
@@ -59,6 +58,17 @@ if (!class_exists('UserUtilitiesJob')) {
             $invoker->execute();
 
             return true;
+        }
+
+        /**
+         * @param $data
+         * @return mixed
+         */
+        protected function getJobData($data)
+        {
+            $this->job->runnable_ran = true;
+            $this->job->runnable_data = $data;
+            return unserialize(base64_decode($this->job->runnable_data), ['allowed_classes' => false]);
         }
     }
 }

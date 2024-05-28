@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint;
 
 use Sugarcrm\Sugarcrm\Hint\Logger\Logger as HintLogger;
@@ -47,7 +48,7 @@ class ConfigurationManager
             ->equals('platform', HintConstants::HINT_CONFIG_MAP[$key]['platform'])
             ->equals('name', HintConstants::HINT_CONFIG_MAP[$key]['name']);
         $response = $query->execute();
-        return count($response) > 0 ? $response[0] : null;
+        return safeCount($response) > 0 ? $response[0] : null;
     }
 
     /**
@@ -59,7 +60,7 @@ class ConfigurationManager
     public static function createInitialModuleConfig($configFieldsForModule)
     {
         $configArray = [];
-        for ($x = 0; $x < count($configFieldsForModule); $x++) {
+        for ($x = 0; $x < safeCount($configFieldsForModule); $x++) {
             $key = $configFieldsForModule[$x];
             $configArray[$key] = true;
         }
@@ -79,7 +80,7 @@ class ConfigurationManager
         $query->select(['*']);
         $query->from($tableBean);
         $response = $query->execute();
-        return count($response) > 0 ? true : false;
+        return safeCount($response) > 0 ? true : false;
     }
 
     /**

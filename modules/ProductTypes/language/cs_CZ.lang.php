@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Typy produktu',
     'LBL_MODULE_NAME_SINGULAR' => 'Typ produktu',
     'LBL_MODULE_TITLE' => 'Typy produktu: Hlavní stránka',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Jste si jist, že chcete smazat tento záznam?',
     'ERR_DELETE_RECORD' => 'Číslo zánamu musí být uvedeno pro smazání typu produktu.',
     'NTC_LIST_ORDER' => 'Stanovit pořadí, ve kterém se tento typ objeví v "dropdown" seznamu Typu výdobrů',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Importovat typy výrobku',
-    'LBL_CREATED_BY'=>'Vytvořil:',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Importovat typy výrobku',
+    'LBL_CREATED_BY' => 'Vytvořil:',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Přiděleno ID:',
-    'LBL_EXPORT_CREATED_BY'=>'Vytvořeno od ID:',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Importovat kategorie produktů',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Přiděleno ID:',
+    'LBL_EXPORT_CREATED_BY' => 'Vytvořeno od ID:',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Importovat kategorie produktů',
+];

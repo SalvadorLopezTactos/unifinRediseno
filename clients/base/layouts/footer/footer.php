@@ -11,13 +11,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['footer'] = array(
-    'components' => array(
-        array(
+$viewdefs['base']['layout']['footer'] = [
+    'components' => [
+        [
             'layout' => 'footer-logos',
-        ),
-        array(
+        ],
+        [
             'layout' => 'footer-buttons',
-        ),
-    ),
-);
+        ],
+    ],
+];

@@ -11,58 +11,64 @@
  */
 
 
-
-
-class SugarWidgetSubPanelEmailLink extends SugarWidgetField {
-
+class SugarWidgetSubPanelEmailLink extends SugarWidgetField
+{
     public function displayList($layout_def)
     {
-		global $current_user;
-		global $beanList;
-		global $focus;
-		global $sugar_config;
-		global $locale;
+        global $current_user;
+        global $beanList;
+        global $focus;
+        global $sugar_config;
+        global $locale;
 
-		if(isset($layout_def['varname'])) {
-			$key = strtoupper($layout_def['varname']);
-		} else {
-			$key = $this->_get_column_alias($layout_def);
-			$key = strtoupper($key);
-		}
-		$value = $layout_def['fields'][$key];
+        if (isset($layout_def['varname'])) {
+            $key = strtoupper($layout_def['varname']);
+        } else {
+            $key = $this->_get_column_alias($layout_def);
+            $key = strtoupper($key);
+        }
+        $value = $layout_def['fields'][$key];
 
 
+        if (isset($_REQUEST['action'])) {
+            $action = $_REQUEST['action'];
+        } else {
+            $action = '';
+        }
 
-			if(isset($_REQUEST['action'])) $action = $_REQUEST['action'];
-			else $action = '';
+        if (isset($_REQUEST['module'])) {
+            $module = $_REQUEST['module'];
+        } else {
+            $module = '';
+        }
 
-			if(isset($_REQUEST['module'])) $module = $_REQUEST['module'];
-			else $module = '';
+        if (isset($_REQUEST['record'])) {
+            $record = $_REQUEST['record'];
+        } else {
+            $record = '';
+        }
 
-			if(isset($_REQUEST['record'])) $record = $_REQUEST['record'];
-			else $record = '';
+        if (!empty($focus->name)) {
+            $name = $focus->name;
+        } else {
+            if (!empty($focus->first_name) && !empty($focus->last_name)) {
+                $name = $locale->formatName($focus);
+            }
+            if (empty($name)) {
+                $name = '*';
+            }
+        }
 
-			if (!empty($focus->name)) {
-				$name = $focus->name;
-			} else {
-				if( !empty($focus->first_name) && !empty($focus->last_name)) {
-                    $name = $locale->formatName($focus);
-					}
-				if(empty($name)) {
-					$name = '*';
-				}
-			}
-
-			$userPref = $current_user->getPreference('email_link_type');
-			$defaultPref = $sugar_config['email_default_client'];
-			if($userPref != '') {
-				$client = $userPref;
-			} else {
-				$client = $defaultPref;
-			}
+        $userPref = $current_user->getPreference('email_link_type');
+        $defaultPref = $sugar_config['email_default_client'];
+        if ($userPref != '') {
+            $client = $userPref;
+        } else {
+            $client = $defaultPref;
+        }
 
         if ($client === 'sugar' && ACLController::checkAccess('Emails', 'edit')) {
-            $composeData = array(
+            $composeData = [
                 'load_id' => $layout_def['fields']['ID'],
                 'load_module' => $this->layout_manager->defs['module_name'],
                 'parent_type' => $this->layout_manager->defs['module_name'],
@@ -70,7 +76,7 @@ class SugarWidgetSubPanelEmailLink extends SugarWidgetField {
                 'return_module' => $module,
                 'return_action' => $action,
                 'return_id' => $record,
-            );
+            ];
             if (isset($layout_def['fields']['FULL_NAME'])) {
                 $composeData['parent_name'] = $layout_def['fields']['FULL_NAME'];
                 $composeData['to_email_addrs'] = sprintf(
@@ -93,7 +99,6 @@ class SugarWidgetSubPanelEmailLink extends SugarWidgetField {
             $link = '<a href="mailto:' . $value . '" >';
         }
 
-			return $link.$value.'</a>';
-
-	}
+        return $link . $value . '</a>';
+    }
 } // end class def

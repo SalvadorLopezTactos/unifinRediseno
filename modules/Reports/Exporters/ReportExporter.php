@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 declare(strict_types=1);
+
 namespace Sugarcrm\Sugarcrm\modules\Reports\Exporters;
 
 /**
@@ -62,12 +63,12 @@ class ReportExporter
      * @return ReportExporterInterface
      * @throws \Exception
      */
-    protected function getExporter(string $type, string $format) : ReportExporterInterface
+    protected function getExporter(string $type, string $format): ReportExporterInterface
     {
         $type = $this->typeMapping[$type] ?? '';
         $format = $this->formatMapping[$format] ?? '';
 
-        $class = "Sugarcrm\\Sugarcrm\\modules\\Reports\\Exporters\\" . 'Report' . $format . 'Exporter' . $type;
+        $class = 'Sugarcrm\\Sugarcrm\\modules\\Reports\\Exporters\\' . 'Report' . $format . 'Exporter' . $type;
         if (!class_exists($class)) {
             throw new \Exception('Report and/or export type is not supported');
         }

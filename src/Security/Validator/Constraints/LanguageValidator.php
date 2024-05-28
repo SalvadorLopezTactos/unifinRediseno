@@ -27,7 +27,7 @@ class LanguageValidator extends ConstraintValidator
      * Supported languages as defined in $sugar_config['languages']
      * @var array
      */
-    protected $languages = array();
+    protected $languages = [];
 
     /**
      * Ctor
@@ -43,7 +43,7 @@ class LanguageValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof Language) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Language');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\Language');
         }
 
         if (null === $value || '' === $value) {
@@ -54,7 +54,7 @@ class LanguageValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, 'string');
         }
 
-        $value = (string) $value;
+        $value = (string)$value;
 
         if (!isset($this->languages[$value])) {
             $this->context->buildViolation($constraint->message)

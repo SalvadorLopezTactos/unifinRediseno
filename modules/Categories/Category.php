@@ -14,7 +14,6 @@
 
 class Category extends SugarBean implements NestedBeanInterface
 {
-
     public $table_name = 'categories';
     public $object_name = 'Category';
     public $module_dir = 'Categories';
@@ -62,9 +61,9 @@ class Category extends SugarBean implements NestedBeanInterface
      */
     public function getTree($depth = null)
     {
-        $tree = array();
+        $tree = [];
         $stackLength = 0;
-        $stack = array();
+        $stack = [];
         $subnodes = $this->getTreeData($this->root);
 
         foreach ($subnodes as $node) {
@@ -73,8 +72,8 @@ class Category extends SugarBean implements NestedBeanInterface
             }
 
             $data = $node;
-            $data['children'] = array();
-            $stackLength = count($stack);
+            $data['children'] = [];
+            $stackLength = safeCount($stack);
 
             while ($stackLength > 0 && $stack[$stackLength - 1]['lvl'] >= $data['lvl']) {
                 array_pop($stack);
@@ -82,13 +81,13 @@ class Category extends SugarBean implements NestedBeanInterface
             }
 
             if ($stackLength == 0) {
-                $i = count($tree);
+                $i = safeCount($tree);
                 $tree[$i] = $data;
-                $stack[] = & $tree[$i];
+                $stack[] = &$tree[$i];
             } else {
-                $i = is_countable($stack[$stackLength - 1]['children']) ? count($stack[$stackLength - 1]['children']) : 0;
+                $i = safeCount($stack[$stackLength - 1]['children']);
                 $stack[$stackLength - 1]['children'][$i] = $data;
-                $stack[] = & $stack[$stackLength - 1]['children'][$i];
+                $stack[] = &$stack[$stackLength - 1]['children'][$i];
             }
         }
 
@@ -103,11 +102,11 @@ class Category extends SugarBean implements NestedBeanInterface
         $db = DBManagerFactory::getInstance();
         $query = $this->getQuery();
 
-        $condition = array(
+        $condition = [
             'node.lft > ' . intval($this->lft),
             'node.rgt < ' . intval($this->rgt),
             'node.root = ' . $db->quoted($this->root),
-        );
+        ];
 
         if ($depth) {
             $lvl = $this->lvl + $depth;
@@ -127,10 +126,10 @@ class Category extends SugarBean implements NestedBeanInterface
         $db = DBManagerFactory::getInstance();
         $query = $this->getQuery();
 
-        $condition = array(
+        $condition = [
             'node.lft = ' . ($this->rgt + 1),
             'node.root = ' . $db->quoted($this->root),
-        );
+        ];
 
         $query->whereRaw(implode(' AND ', $condition));
         $query->limit = 1;
@@ -146,10 +145,10 @@ class Category extends SugarBean implements NestedBeanInterface
         $db = DBManagerFactory::getInstance();
         $query = $this->getQuery();
 
-        $condition = array(
+        $condition = [
             'node.rgt = ' . ($this->lft - 1),
             'node.root = ' . $db->quoted($this->root),
-        );
+        ];
 
         $query->whereRaw(implode(' AND ', $condition));
         $query->limit = 1;
@@ -164,15 +163,15 @@ class Category extends SugarBean implements NestedBeanInterface
     {
         $db = DBManagerFactory::getInstance();
         $query = $this->getQuery();
-        $query->joinTable($this->table_name, array(
+        $query->joinTable($this->table_name, [
             'alias' => 'root',
-        ))->on()->equalsField('root.id', 'node.root');
+        ])->on()->equalsField('root.id', 'node.root');
 
-        $condition = array(
+        $condition = [
             'node.lft < ' . $this->lft,
             'node.rgt > ' . $this->rgt,
             'root.id = ' . $db->quoted($this->root),
-        );
+        ];
 
         $query->whereRaw(implode(' AND ', $condition));
         if ($reverseOrder) {
@@ -281,9 +280,9 @@ class Category extends SugarBean implements NestedBeanInterface
     protected function getQuery()
     {
         $query = new SugarQuery();
-        $query->from($this, array(
+        $query->from($this, [
             'alias' => 'node',
-        ));
+        ]);
 
         return $query;
     }
@@ -297,9 +296,9 @@ class Category extends SugarBean implements NestedBeanInterface
     {
         $db = DBManagerFactory::getInstance();
         $query = $this->getQuery();
-        $query->joinTable($this->table_name, array(
+        $query->joinTable($this->table_name, [
             'alias' => 'root',
-        ))->on()->equalsField('root.id', 'node.root');
+        ])->on()->equalsField('root.id', 'node.root');
         $query->whereRaw('root.id = ' . $db->quoted($root) . ' AND node.lft > 1');
         $query->orderByRaw('node.lft', 'ASC');
         return $query->execute();
@@ -326,20 +325,20 @@ class Category extends SugarBean implements NestedBeanInterface
         }
 
         $this->update(
-            array('lvl = lvl + ?'),
+            ['lvl = lvl + ?'],
             'lft >= ? AND rgt <= ? AND root = ?',
-            array($levelDelta, $left, $right, $this->root)
+            [$levelDelta, $left, $right, $this->root]
         );
 
-        foreach (array('lft', 'rgt') as $attribute) {
+        foreach (['lft', 'rgt'] as $attribute) {
             $condition = $attribute . ' >= ?'
                 . ' AND ' . $attribute . ' <= ?'
                 . ' AND root = ?';
 
             $this->update(
-                array($attribute . ' = ' . $attribute . ' + ?'),
+                [$attribute . ' = ' . $attribute . ' + ?'],
                 $condition,
-                array($key - $left, $left, $right, $this->root)
+                [$key - $left, $left, $right, $this->root]
             );
         }
 
@@ -352,8 +351,8 @@ class Category extends SugarBean implements NestedBeanInterface
     /**
      * Add new node to tree.
      * @param Category $node new child node.
-     * @param int $key.
-     * @param int $levelUp.
+     * @param int $key .
+     * @param int $levelUp .
      * @return string
      * @throws CategoriesExceptionInterface
      */
@@ -399,11 +398,11 @@ class Category extends SugarBean implements NestedBeanInterface
      */
     protected function shiftLeftRight($key, $delta)
     {
-        foreach (array('lft', 'rgt') AS $attribute) {
+        foreach (['lft', 'rgt'] as $attribute) {
             $this->update(
-                array($attribute . ' = ' . $attribute . ' + ?'),
+                [$attribute . ' = ' . $attribute . ' + ?'],
                 $attribute . ' >= ? AND (root = ?)',
-                array($delta, $key, $this->root)
+                [$delta, $key, $this->root]
             );
         }
     }
@@ -444,12 +443,13 @@ class Category extends SugarBean implements NestedBeanInterface
         parent::mark_deleted($id);
         $this->shiftLeftRight($this->rgt + 1, ($this->lft - $this->rgt) - 1);
     }
-    
+
     /**
      *  override default behavior
      * {@inheritDoc}
      */
-    public function isACLRoleEditable(){
+    public function isACLRoleEditable()
+    {
         return false;
     }
 }

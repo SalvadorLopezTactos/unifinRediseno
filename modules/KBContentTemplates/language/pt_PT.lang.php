@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Modelos de base de conhecimento',
     'LBL_MODULE_NAME_SINGULAR' => 'Modelo de Base de Conhecimento',
     'LBL_MODULE_TITLE' => 'Modelo de Base de Conhecimento',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Ver modelos',
     'LBL_TEXT_BODY' => 'Corpo',
     'LBL_LIST_TEMPLATE_NAME' => 'Nome de Modelo',
-);
+];

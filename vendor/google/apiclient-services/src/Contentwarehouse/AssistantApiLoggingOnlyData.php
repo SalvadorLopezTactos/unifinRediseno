@@ -26,6 +26,10 @@ class AssistantApiLoggingOnlyData extends \Google\Model
   /**
    * @var string
    */
+  public $androidId;
+  /**
+   * @var string
+   */
   public $appVersion;
   /**
    * @var string
@@ -54,6 +58,10 @@ class AssistantApiLoggingOnlyData extends \Google\Model
    */
   public $initialAppVersion;
   /**
+   * @var bool
+   */
+  public $isPrimaryUser;
+  /**
    * @var string
    */
   public $mdnsDisplayName;
@@ -79,6 +87,20 @@ class AssistantApiLoggingOnlyData extends \Google\Model
   public function getAcpVersion()
   {
     return $this->acpVersion;
+  }
+  /**
+   * @param string
+   */
+  public function setAndroidId($androidId)
+  {
+    $this->androidId = $androidId;
+  }
+  /**
+   * @return string
+   */
+  public function getAndroidId()
+  {
+    return $this->androidId;
   }
   /**
    * @param string
@@ -191,6 +213,20 @@ class AssistantApiLoggingOnlyData extends \Google\Model
   public function getInitialAppVersion()
   {
     return $this->initialAppVersion;
+  }
+  /**
+   * @param bool
+   */
+  public function setIsPrimaryUser($isPrimaryUser)
+  {
+    $this->isPrimaryUser = $isPrimaryUser;
+  }
+  /**
+   * @return bool
+   */
+  public function getIsPrimaryUser()
+  {
+    return $this->isPrimaryUser;
   }
   /**
    * @param string

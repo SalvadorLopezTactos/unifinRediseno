@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['KBContents']['base']['view']['config-languages'] = array(
+$viewdefs['KBContents']['base']['view']['config-languages'] = [
     'label' => 'LBL_ADMIN_LABEL_LANGUAGES',
-    'panels' => array(
-        array(
-            'fields' => array(
-                array(
+    'panels' => [
+        [
+            'fields' => [
+                [
                     'name' => 'languages',
                     'type' => 'languages',
                     'searchBarThreshold' => 5,
@@ -22,9 +22,9 @@ $viewdefs['KBContents']['base']['view']['config-languages'] = array(
                     'default' => false,
                     'enabled' => true,
                     'view' => 'edit',
-                    'span' => 6
-                ),
-            ),
-        ),
-    ),
-);
+                    'span' => 6,
+                ],
+            ],
+        ],
+    ],
+];

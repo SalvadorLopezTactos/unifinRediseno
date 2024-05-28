@@ -32,8 +32,9 @@ final class DatabaseConfiguration implements Configuration
         string $moduleName,
         string $fieldName,
         string $relationshipName,
-        array $value
+        array  $value
     ): void {
+
         if (!isset($this->administration->settings[self::CATEGORY])) {
             $this->administration->retrieveSettings(self::CATEGORY);
         }

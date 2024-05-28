@@ -34,9 +34,9 @@ class SugarForecasting_Progress_Individual extends SugarForecasting_Progress_Abs
         $quota = BeanFactory::newBean('Quotas');
         $quotaData = $quota->getRollupQuota($this->getArg('timeperiod_id'), $this->getArg('user_id'));
 
-        $progressData = array(
-            "quota_amount" => $quotaData["amount"] ?? 0,
-        );
+        $progressData = [
+            'quota_amount' => $quotaData['amount'] ?? 0,
+        ];
 
         // get what we are forecasting on
         /* @var $admin Administration */
@@ -50,20 +50,20 @@ class SugarForecasting_Progress_Individual extends SugarForecasting_Progress_Abs
 
         /* @var $worksheet ForecastWorksheet */
         $worksheet = BeanFactory::newBean('ForecastWorksheets');
-        $totals = $worksheet->worksheetTotals($timeperiod_id, $user_id,  $forecast_by);
+        $totals = $worksheet->worksheetTotals($timeperiod_id, $user_id, $forecast_by);
 
         $acl = new SugarACLForecastWorksheets();
 
         $bestAccess = $acl->checkAccess(
             'ForecastWorksheets',
             'field',
-            array('field' => 'best_case', 'action' => 'read')
+            ['field' => 'best_case', 'action' => 'read']
         );
 
         $worstAccess = $acl->checkAccess(
             'ForecastWorksheets',
             'field',
-            array('field' => 'worst_case', 'action' => 'read')
+            ['field' => 'worst_case', 'action' => 'read']
         );
 
         // if the user doesn't have access to best field, remove the value from totals

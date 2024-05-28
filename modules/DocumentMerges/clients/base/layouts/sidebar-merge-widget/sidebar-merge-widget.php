@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['DocumentMerges']['base']['layout']['sidebar-merge-widget'] = [
-    'css_class' => 'w-100',
+    'css_class' => 'w-96',
     'components' => [
         [
             'view' => [

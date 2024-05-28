@@ -9,100 +9,100 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Styleguide']['base']['layout']['records'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['Styleguide']['base']['layout']['records'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
                             'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'view' => 'list-headerpane',
-                                ),
-                                array(
-                                    'layout' => array(
+                                ],
+                                [
+                                    'layout' => [
                                         'type' => 'filterpanel',
-                                        'last_state' => array(
+                                        'last_state' => [
                                             'id' => 'list-filterpanel',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'toggle-view' => 'list',
-                                            ),
-                                        ),
-                                        'availableToggles' => array(
-                                            array(
+                                            ],
+                                        ],
+                                        'availableToggles' => [
+                                            [
                                                 'name' => 'list',
                                                 'icon' => 'sicon-list',
                                                 'label' => 'LBL_LISTVIEW',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'name' => 'activitystream',
                                                 'icon' => 'sicon-clock',
                                                 'label' => 'LBL_ACTIVITY_STREAM',
-                                            ),
-                                        ),
-                                        'components' => array(
-                                            array(
+                                            ],
+                                        ],
+                                        'components' => [
+                                            [
                                                 'layout' => 'filter',
                                                 'loadModule' => 'Filters',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'filter-rows',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'filter-actions',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'layout' => 'activitystream',
-                                                'context' => array(
+                                                'context' => [
                                                     'module' => 'Activities',
-                                                ),
-                                            ),
-                                            array(
+                                                ],
+                                            ],
+                                            [
                                                 'layout' => 'list',
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'dashboard-pane',
                             'css_class' => 'dashboard-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'dashboard',
-                                    'context' => array(
+                                    'context' => [
                                         'forceNew' => true,
                                         'module' => 'Home',
-                                    ),
+                                    ],
                                     'loadModule' => 'Dashboards',
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'preview-pane',
                             'css_class' => 'preview-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'preview',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

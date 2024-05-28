@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'تكوين وحدة التحكم',
     'LBL_MODULE_NAME_SINGULAR' => 'تكوين وحدة التحكم',
     'LBL_CONSOLE_CONFIG_TITLE' => 'وحدة التحكم',
@@ -55,4 +56,4 @@ $mod_strings = array(
     'LBL_CONSOLE_DIRECTIONS_CHANGE' => 'ستنعكس التغييرات على الفور، لكن عليك الحفظ من أجل سريان مفعولها.',
     'LBL_CONSOLE_DIRECTIONS_FILTER_AND' => 'و ',
     'LBL_CONSOLE_DIRECTIONS_FILTER_OR' => 'أو ',
-);
+];

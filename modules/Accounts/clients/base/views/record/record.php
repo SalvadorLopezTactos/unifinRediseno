@@ -12,19 +12,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Accounts']['base']['view']['record'] = array(
-    'buttons' => array(
-        array(
+$viewdefs['Accounts']['base']['view']['record'] = [
+    'buttons' => [
+        [
             'type' => 'button',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
-            'events' => array(
+            'events' => [
                 'click' => 'button:cancel_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
             'name' => 'save_button',
@@ -32,20 +32,20 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
             'css_class' => 'btn btn-primary',
             'showOn' => 'edit',
             'acl_action' => 'edit',
-        ),
-        array(
+        ],
+        [
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
             'primary' => true,
             'showOn' => 'view',
-            'buttons' => array(
-                array(
+            'buttons' => [
+                [
                     'type' => 'rowaction',
                     'event' => 'button:edit_button:click',
                     'name' => 'edit_button',
                     'label' => 'LBL_EDIT_BUTTON_LABEL',
                     'acl_action' => 'edit',
-                ),
+                ],
                 [
                     'type' => 'escalate-action',
                     'event' => 'button:escalate_button:click',
@@ -53,82 +53,82 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                     'label' => 'LBL_ESCALATE_BUTTON_LABEL',
                     'acl_action' => 'create',
                 ],
-                array(
+                [
                     'type' => 'shareaction',
                     'name' => 'share',
                     'label' => 'LBL_RECORD_SHARE_BUTTON',
                     'acl_action' => 'view',
-                ),
-                array(
+                ],
+                [
                     'type' => 'pdfaction',
                     'name' => 'download-pdf',
                     'label' => 'LBL_PDF_VIEW',
                     'action' => 'download',
                     'acl_action' => 'view',
-                ),
-                array(
+                ],
+                [
                     'type' => 'pdfaction',
                     'name' => 'email-pdf',
                     'label' => 'LBL_PDF_EMAIL',
                     'action' => 'email',
                     'acl_action' => 'view',
-                ),
-                array(
+                ],
+                [
                     'type' => 'divider',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'event' => 'button:find_duplicates_button:click',
                     'name' => 'find_duplicates_button',
                     'label' => 'LBL_DUP_MERGE',
                     'acl_action' => 'edit',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'event' => 'button:duplicate_button:click',
                     'name' => 'duplicate_button',
                     'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
                     'acl_module' => 'Accounts',
                     'acl_action' => 'create',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'event' => 'button:historical_summary_button:click',
                     'name' => 'historical_summary_button',
                     'label' => 'LBL_HISTORICAL_SUMMARY',
                     'acl_action' => 'view',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'event' => 'button:audit_button:click',
                     'name' => 'audit_button',
                     'label' => 'LNK_VIEW_CHANGE_LOG',
                     'acl_action' => 'view',
-                ),
-                array(
+                ],
+                [
                     'type' => 'divider',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'event' => 'button:delete_button:click',
                     'name' => 'delete_button',
                     'label' => 'LBL_DELETE_BUTTON_LABEL',
                     'acl_action' => 'delete',
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-    'panels' => array(
-        array(
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_HEADER',
             'header' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'picture',
                     'type' => 'avatar',
                     'size' => 'large',
@@ -141,8 +141,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                             'type' => 'hint-accounts-logo',
                         ],
                     ],
-                ),
-                array(
+                ],
+                [
                     'name' => 'name',
                     'type' => 'name',
                     'licenseDependency' => [
@@ -150,13 +150,13 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                             'type' => 'hint-accounts-search-dropdown',
                         ],
                     ],
-                ),
-                array(
+                ],
+                [
                     'name' => 'favorite',
                     'label' => 'LBL_FAVORITE',
                     'type' => 'favorite',
                     'dismiss_label' => true,
-                ),
+                ],
                 [
                     'name' => 'is_escalated',
                     'type' => 'badge',
@@ -166,19 +166,19 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                 ],
                 [
                     'name' => 'follow',
-                    'label'=> 'LBL_FOLLOW',
+                    'label' => 'LBL_FOLLOW',
                     'type' => 'follow',
                     'readonly' => true,
                     'dismiss_label' => true,
                 ],
-            )
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'placeholders' => true,
-            'fields' => array(
+            'fields' => [
                 'website',
                 'industry',
                 'parent_name',
@@ -187,101 +187,101 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                 'service_level',
                 'assigned_user_name',
                 'phone_office',
-                array(
+                [
                     'name' => 'tag',
                     'span' => 12,
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'panel_hidden',
             'label' => 'LBL_RECORD_SHOWMORE',
             'hide' => true,
             'columns' => 2,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'billing_address',
                     'type' => 'fieldset',
                     'css_class' => 'address',
                     'label' => 'LBL_BILLING_ADDRESS',
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'billing_address_street',
                             'css_class' => 'address_street',
                             'placeholder' => 'LBL_BILLING_ADDRESS_STREET',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'billing_address_city',
                             'css_class' => 'address_city',
                             'placeholder' => 'LBL_BILLING_ADDRESS_CITY',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'billing_address_state',
                             'css_class' => 'address_state',
                             'placeholder' => 'LBL_BILLING_ADDRESS_STATE',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'billing_address_postalcode',
                             'css_class' => 'address_zip',
                             'placeholder' => 'LBL_BILLING_ADDRESS_POSTALCODE',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'billing_address_country',
                             'css_class' => 'address_country',
                             'placeholder' => 'LBL_BILLING_ADDRESS_COUNTRY',
-                        ),
-                    ),
-                ),
-                array(
+                        ],
+                    ],
+                ],
+                [
                     'name' => 'shipping_address',
                     'type' => 'fieldset',
                     'css_class' => 'address',
                     'label' => 'LBL_SHIPPING_ADDRESS',
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'shipping_address_street',
                             'css_class' => 'address_street',
                             'placeholder' => 'LBL_SHIPPING_ADDRESS_STREET',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'shipping_address_city',
                             'css_class' => 'address_city',
                             'placeholder' => 'LBL_SHIPPING_ADDRESS_CITY',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'shipping_address_state',
                             'css_class' => 'address_state',
                             'placeholder' => 'LBL_SHIPPING_ADDRESS_STATE',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'shipping_address_postalcode',
                             'css_class' => 'address_zip',
                             'placeholder' => 'LBL_SHIPPING_ADDRESS_POSTALCODE',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'shipping_address_country',
                             'css_class' => 'address_country',
                             'placeholder' => 'LBL_SHIPPING_ADDRESS_COUNTRY',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'copy',
                             'label' => 'NTC_COPY_BILLING_ADDRESS',
                             'type' => 'copy',
-                            'mapping' => array(
+                            'mapping' => [
                                 'billing_address_street' => 'shipping_address_street',
                                 'billing_address_city' => 'shipping_address_city',
                                 'billing_address_state' => 'shipping_address_state',
                                 'billing_address_postalcode' => 'shipping_address_postalcode',
                                 'billing_address_country' => 'shipping_address_country',
-                            ),
-                        ),
-                    ),
-                ),
-                array(
+                            ],
+                        ],
+                    ],
+                ],
+                [
                     'name' => 'phone_alternate',
                     'label' => 'LBL_PHONE_ALT',
-                ),
+                ],
                 [
                     'name' => 'geocode_status',
                     'licenseFilter' => ['MAPS'],
@@ -290,10 +290,10 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                 'phone_fax',
                 'campaign_name',
                 'twitter',
-                array(
+                [
                     'name' => 'description',
                     'span' => 12,
-                ),
+                ],
                 'sic_code',
                 'ticker_symbol',
                 'annual_revenue',
@@ -301,51 +301,51 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                 'ownership',
                 'rating',
 
-                array(
+                [
                     'name' => 'duns_num',
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_entered_by',
                     'readonly' => true,
                     'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_ENTERED',
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'date_entered',
-                        ),
-                        array(
+                        ],
+                        [
                             'type' => 'label',
                             'default_value' => 'LBL_BY',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'created_by_name',
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
                 'team_name',
-                array(
+                [
                     'name' => 'date_modified_by',
                     'readonly' => true,
                     'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_MODIFIED',
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'date_modified',
-                        ),
-                        array(
+                        ],
+                        [
                             'type' => 'label',
                             'default_value' => 'LBL_BY',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'modified_by_name',
-                        ),
-                    ),
-                ),
-            ),
-        ),
+                        ],
+                    ],
+                ],
+            ],
+        ],
         [
             'name' => 'panel_hint',
             'label' => 'LBL_HINT_PANEL',
@@ -376,5 +376,5 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
             ],
             'licenseFilter' => ['HINT'],
         ],
-    ),
-);
+    ],
+];

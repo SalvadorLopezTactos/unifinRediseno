@@ -20,7 +20,7 @@ class ParserLabel extends ModuleBuilderParser
     public $packageName;
     /**
      * A ModuleInstaller instance
-     * 
+     *
      * @var ModuleInstaller
      */
     protected static $moduleInstaller;
@@ -28,24 +28,23 @@ class ParserLabel extends ModuleBuilderParser
     public function __construct($moduleName, $packageName = '')
     {
         $this->moduleName = $moduleName;
-        if (!empty($packageName))
-            $this->packageName = $packageName ;
+        if (!empty($packageName)) {
+            $this->packageName = $packageName;
+        }
     }
 
     /**
      * Takes in the request params from a save request and processes
      * them for the save.
      * @param array $params Labels as "label_".System label => Display label pairs
-     * @param string $language      Language key, for example 'en_us'
+     * @param string $language Language key, for example 'en_us'
      */
-    function handleSave($params = null, $language = null)
+    public function handleSave($params = null, $language = null)
     {
-        $labels = array ( ) ;
-        foreach ( $params as $key => $value )
-        {
-            if (preg_match ( '/^label_/', $key ) && strcmp ( $value, 'no_change' ) != 0)
-            {
-                $labels [ strtoupper(substr ( $key, 6 )) ] = SugarCleaner::cleanHtml(from_html($value),false);
+        $labels = [];
+        foreach ($params as $key => $value) {
+            if (preg_match('/^label_/', $key) && strcmp($value, 'no_change') != 0) {
+                $labels [strtoupper(substr($key, 6))] = SugarCleaner::cleanHtml(from_html($value), false);
             }
         }
 
@@ -68,17 +67,17 @@ class ParserLabel extends ModuleBuilderParser
     protected function saveModuleLists($language, array $labels)
     {
         $wizard = new RenameModules();
-        $moduleLists = array(
+        $moduleLists = [
             'LBL_MODULE_NAME' => 'moduleList',
             'LBL_MODULE_NAME_SINGULAR' => 'moduleListSingular',
-        );
+        ];
 
         $saved = false;
         foreach ($moduleLists as $labelName => $moduleList) {
             if (isset($labels[$labelName])) {
-                $wizard->updateModuleList($moduleList, array(
+                $wizard->updateModuleList($moduleList, [
                     $this->moduleName => $labels[$labelName],
-                ), $language);
+                ], $language);
                 $saved = true;
             }
         }
@@ -92,7 +91,7 @@ class ParserLabel extends ModuleBuilderParser
     /**
      * Gets custom strings for this module. If $ext is true, will look in the
      * extension language file. Otherwise will look in the custom lang file.
-     * 
+     *
      * @param string $language The language to get the strings for
      * @param boolean $ext Whether to use the extension file
      * @return array
@@ -100,32 +99,33 @@ class ParserLabel extends ModuleBuilderParser
     protected function getCustomModStrings($language, $ext = false)
     {
         if ($ext) {
-            $file = "custom/modules/".$this->moduleName."/Ext/Language/".$language.".lang.ext.php";
+            $file = 'custom/modules/' . $this->moduleName . '/Ext/Language/' . $language . '.lang.ext.php';
         } else {
-            $file = "custom/modules/".$this->moduleName."/language/".$language.".lang.php";
+            $file = 'custom/modules/' . $this->moduleName . '/language/' . $language . '.lang.php';
         }
 
         if (is_file($file)) {
             include $file;
         }
 
-        return $mod_strings ?? array();
+        return $mod_strings ?? [];
     }
 
     /**
      * Remove a label from the language pack for a module
-     * 
-     * @param string $language      Language key, for example 'en_us'
-     * @param string $label         The label to remove
-     * @param string $labelvalue    The value of the label to remove
-     * @param string $moduleName    Name of the module to which to add these labels
-     * @param string $basepath      base path of the language file
+     *
+     * @param string $language Language key, for example 'en_us'
+     * @param string $label The label to remove
+     * @param string $labelvalue The value of the label to remove
+     * @param string $moduleName Name of the module to which to add these labels
+     * @param string $basepath base path of the language file
      */
-    static function removeLabel($language, $label, $labelvalue, $moduleName, $basepath = null) {
+    public static function removeLabel($language, $label, $labelvalue, $moduleName, $basepath = null)
+    {
         $deployedModule = null;
         $GLOBALS['log']->debug("ParserLabel->removeLabels($language, \$label, \$labelvalue, $moduleName, $basepath );");
         if (is_null($basepath)) {
-            $deployedModule = true ;
+            $deployedModule = true;
             $basepath = "custom/Extension/modules/$moduleName/Ext/Language";
             if (!file_exists($basepath)) {
                 $GLOBALS['log']->debug("$basepath is not a directory.");
@@ -142,7 +142,7 @@ class ParserLabel extends ModuleBuilderParser
         }
 
         $filename = "$basepath/$language.lang.php";
-        $mod_strings = array();
+        $mod_strings = [];
 
         if (file_exists($basepath)) {
             if (file_exists($filename)) {
@@ -154,42 +154,42 @@ class ParserLabel extends ModuleBuilderParser
             }
         } else {
             $GLOBALS['log']->debug("directory $basepath does not exist.");
-            return false ;
+            return false;
         }
 
         $changed = false;
-        if (isset($mod_strings[$label]) && $mod_strings[$label]==$labelvalue) {
+        if (isset($mod_strings[$label]) && $mod_strings[$label] == $labelvalue) {
             unset($mod_strings[$label]);
             $changed = true;
         }
 
         if ($changed) {
-            $write  = "<?php\n// WARNING: The contents of this file are auto-generated.\n";
+            $write = "<?php\n// WARNING: The contents of this file are auto-generated.\n";
             foreach ($mod_strings as $k => $v) {
                 $ek = var_export($k, true);
                 $write .= "\$mod_strings[$ek] = " . var_export($v, true) . ";\n";
             }
-            
+
             if (file_put_contents($filename, $write) == false) {
                 $GLOBALS['log']->fatal("Could not write $filename");
             } else {
                 // if we have a cache to worry about, then clear it now
                 if ($deployedModule) {
-                    $GLOBALS['log']->debug("PaserLabel->addLabels: clearing language cache");
+                    $GLOBALS['log']->debug('PaserLabel->addLabels: clearing language cache');
                     self::rebuildLanguageExtensions($language, $moduleName);
-                    $cache_key = "module_language." . $language . $moduleName;
+                    $cache_key = 'module_language.' . $language . $moduleName;
                     sugar_cache_clear($cache_key);
                     LanguageManager::clearLanguageCache($moduleName, $language);
                 }
             }
         }
 
-        return true ;
+        return true;
     }
 
     /**
      * Add a set of labels to the language pack for a module, deployed or undeployed
-     * 
+     *
      * @param string $language Language key, for example 'en_us'
      * @param array $labels The labels to add in the form of an array of System label => Display label pairs
      * @param string $moduleName Name of the module to which to add these labels
@@ -198,11 +198,11 @@ class ParserLabel extends ModuleBuilderParser
     public static function addLabels($language, $labels, $moduleName, $basepath = null)
     {
         $GLOBALS['log']->debug("ParserLabel->addLabels($language, \$labels, $moduleName, $basepath);");
-        $GLOBALS['log']->debug("\$labels:" . print_r($labels, true));
+        $GLOBALS['log']->debug('$labels:' . print_r($labels, true));
 
-        $deployedModule = false ;
+        $deployedModule = false;
         if (is_null($basepath)) {
-            $deployedModule = true ;
+            $deployedModule = true;
             $basepath = "custom/Extension/modules/$moduleName/Ext/Language";
             if (!file_exists($basepath)) {
                 mkdir_recursive($basepath);
@@ -218,16 +218,16 @@ class ParserLabel extends ModuleBuilderParser
         }
 
         $filename = "$basepath/$language.lang.php";
-        $mod_strings = array();
+        $mod_strings = [];
         $changed = false;
-        
+
         if (file_exists($basepath)) {
             if (file_exists($filename)) {
                 // Get the current $mod_strings
                 include $filename;
             }
             $mod_lang_strings = return_module_language($language, $moduleName);
-            foreach($labels as $key => $value) {
+            foreach ($labels as $key => $value) {
                 if (!isset($mod_lang_strings[$key]) || strcmp($value, $mod_lang_strings[$key]) != 0) {
                     // Must match encoding used in view.labels.php
                     $mod_strings[$key] = to_html(strip_tags(from_html($value)));
@@ -240,9 +240,9 @@ class ParserLabel extends ModuleBuilderParser
 
         if (!empty($mod_strings) && $changed) {
             $GLOBALS['log']->debug("ParserLabel->addLabels: writing new mod_strings to $filename");
-            $GLOBALS['log']->debug("ParserLabel->addLabels: mod_strings=".print_r($mod_strings, true));
-            
-            $write  = "<?php\n// WARNING: The contents of this file are auto-generated.\n";
+            $GLOBALS['log']->debug('ParserLabel->addLabels: mod_strings=' . print_r($mod_strings, true));
+
+            $write = "<?php\n// WARNING: The contents of this file are auto-generated.\n";
             // We can't use normal array writing here since multiple files can be
             // structured differently. This is dirty, yes, but necessary.
             foreach ($mod_strings as $k => $v) {
@@ -256,9 +256,9 @@ class ParserLabel extends ModuleBuilderParser
                 // if we have a cache to worry about, then clear it now
                 if ($deployedModule) {
                     SugarCache::cleanOpcodes();
-                    $GLOBALS['log']->debug("PaserLabel->addLabels: clearing language cache");
+                    $GLOBALS['log']->debug('PaserLabel->addLabels: clearing language cache');
                     self::rebuildLanguageExtensions($language, $moduleName);
-                    $cache_key = "module_language." . $language . $moduleName;
+                    $cache_key = 'module_language.' . $language . $moduleName;
                     sugar_cache_clear($cache_key);
                     LanguageManager::clearLanguageCache($moduleName, $language);
                     LanguageManager::invalidateJsLanguageCache();
@@ -267,7 +267,7 @@ class ParserLabel extends ModuleBuilderParser
             }
         }
 
-        return true ;
+        return true;
     }
 
     /**
@@ -278,7 +278,7 @@ class ParserLabel extends ModuleBuilderParser
      */
     public function handleSaveRelationshipLabels($metadata, $language)
     {
-        $labels = array();
+        $labels = [];
         foreach ($metadata as $definition) {
             $labels[$definition['module']][$definition['system_label']] = $definition['display_label'];
         }
@@ -288,18 +288,17 @@ class ParserLabel extends ModuleBuilderParser
         }
     }
 
-    function addLabelsToAllLanguages($labels)
-            {
-    	$langs = get_languages();
-    	foreach($langs as $lang_key => $lang_display)
-        {
-    		self::addLabels($lang_key, $labels, $this->moduleName);
+    public function addLabelsToAllLanguages($labels)
+    {
+        $langs = get_languages();
+        foreach ($langs as $lang_key => $lang_display) {
+            self::addLabels($lang_key, $labels, $this->moduleName);
         }
     }
 
     /**
      * Rebuilds extensions and language files for this language and module
-     * 
+     *
      * @param string $language The language to rebuild extensions for
      * @param string $moduleName The name of the module whose extensions are being rebuilt
      */
@@ -313,15 +312,14 @@ class ParserLabel extends ModuleBuilderParser
         }
 
         if (!empty($moduleName)) {
-            self::$moduleInstaller->modules = array($moduleName => $moduleName);
+            self::$moduleInstaller->modules = [$moduleName => $moduleName];
         }
-        
-        self::$moduleInstaller->rebuild_extensions(array($moduleName), array('languages'));
-        
+
+        self::$moduleInstaller->rebuild_extensions([$moduleName], ['languages']);
+
         // While this *is* called from rebuild_extensions, it doesn't do anything
         // there because there is no language or module provided to it. This fixes
         // that.
-        self::$moduleInstaller->rebuild_languages(array($language => $language), array($moduleName));
+        self::$moduleInstaller->rebuild_languages([$language => $language], [$moduleName]);
     }
 }
-

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -76,10 +77,10 @@ if (!class_exists('OneDriveUploadJob')) {
 
                 $data = $oneDriveClient->getFileChunk($filePath, $chunkSize, $offset);
                 $contentRange = " bytes {$start}-{$end}/{$fileSize}";
-                $headers = array(
-                    'Content-Length'=> $numBytes,
-                    'Content-Range'=> $contentRange,
-                );
+                $headers = [
+                    'Content-Length' => $numBytes,
+                    'Content-Range' => $contentRange,
+                ];
 
                 $request = $client->createRequest('PUT', $uploadUrl);
                 $request->addHeaders($headers);

@@ -9,65 +9,65 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Quotes']['base']['layout']['subpanels'] = array(
+$viewdefs['Quotes']['base']['layout']['subpanels'] = [
     'type' => 'subpanels',
     'span' => 12,
-    'components' => array(
-        array(
+    'components' => [
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_CALLS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'calls',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_MEETINGS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'meetings',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_EMAILS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'emails',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_TASKS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'tasks',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_NOTES_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'notes',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_DOCUMENTS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'documents',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_CONTRACTS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'contracts',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_PROJECTS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'project',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'سجل التدقيق',
     'LBL_FIELD_NAME' => 'الحقل',
     'LBL_OLD_NAME' => 'قيمة قديمة',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'تحديث إلى',
     'LBL_BLANK' => '-فارغ-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني للتدقيق',
+    'LBL_CREATED' => 'تم الإنشاء',
+];

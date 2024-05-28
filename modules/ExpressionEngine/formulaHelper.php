@@ -13,7 +13,6 @@
 
 class FormulaHelper
 {
-
     /**
      * Takes an array of field defs and returns a formated list of fields that are valid for use in expressions.
      *
@@ -22,56 +21,57 @@ class FormulaHelper
      */
     public static function cleanFields($fieldDef, $includeLinks = true, $forRelatedField = false, $returnKeys = false)
     {
-        $fieldArray = array();
+        $fieldArray = [];
         foreach ($fieldDef as $fieldName => $def) {
-            if (!is_array($def) || $fieldName == 'deleted' || $fieldName == 'email1' || empty($def['type']))
+            if (!is_array($def) || $fieldName == 'deleted' || $fieldName == 'email1' || empty($def['type'])) {
                 continue;
+            }
             //Check the studio property of the field def.
             if (isset($def['studio']) && (self::isFalse($def['studio']) || (is_array($def['studio']) && (
                 (isset($def['studio']['formula']) && self::isFalse($def['studio']['formula'])) ||
-                ($forRelatedField && isset($def['studio']['related']) && self::isFalse($def['studio']['related']))
-            ))))
-            {
+                            ($forRelatedField && isset($def['studio']['related']) && self::isFalse($def['studio']['related']))
+            )))) {
                 continue;
             }
             switch ($def['type']) {
-                case "int":
-                case "float":
-                case "decimal":
-                case "discount":
-                case "currency":
-                    $fieldArray[$fieldName] = array($fieldName, 'number');
+                case 'int':
+                case 'float':
+                case 'decimal':
+                case 'discount':
+                case 'currency':
+                    $fieldArray[$fieldName] = [$fieldName, 'number'];
                     break;
-                case "bool":
-                    $fieldArray[$fieldName] = array($fieldName, 'boolean');
+                case 'bool':
+                    $fieldArray[$fieldName] = [$fieldName, 'boolean'];
                     break;
-                case "varchar":
-                case "name":
-                case "phone":
-                case "text":
-                case "url":
-                case "encrypt":
-                case "enum":
-                case "radioenum":
-                    $fieldArray[$fieldName] = array($fieldName, 'string');
+                case 'varchar':
+                case 'name':
+                case 'phone':
+                case 'text':
+                case 'url':
+                case 'encrypt':
+                case 'enum':
+                case 'radioenum':
+                    $fieldArray[$fieldName] = [$fieldName, 'string'];
                     break;
                 case 'fullname':
                     if ($forRelatedField) {
-                        $fieldArray[$fieldName] = array($fieldName, 'string');
+                        $fieldArray[$fieldName] = [$fieldName, 'string'];
                     }
                     break;
-                case "date":
-                case "datetime":
-                case "datetimecombo":
-                case "service-enddate":
-                    $fieldArray[$fieldName] = array($fieldName, 'date');
+                case 'date':
+                case 'datetime':
+                case 'datetimecombo':
+                case 'service-enddate':
+                    $fieldArray[$fieldName] = [$fieldName, 'date'];
                     break;
-                case "link":
-                    if ($includeLinks)
-                        $fieldArray[$fieldName] = array($fieldName, 'relate');
+                case 'link':
+                    if ($includeLinks) {
+                        $fieldArray[$fieldName] = [$fieldName, 'relate'];
+                    }
                     break;
-                case "multienum":
-                    $fieldArray[$fieldName] = array($fieldName, 'enum');
+                case 'multienum':
+                    $fieldArray[$fieldName] = [$fieldName, 'enum'];
                     break;
                 default:
                     //Do Nothing
@@ -79,8 +79,9 @@ class FormulaHelper
             }
         }
 
-        if ($returnKeys)
+        if ($returnKeys) {
             return $fieldArray;
+        }
 
         return array_values($fieldArray);
     }
@@ -106,12 +107,14 @@ class FormulaHelper
         return $filteredFields;
     }
 
-    protected static function isFalse($v){
-        if (is_string($v)){
-            return strToLower($v) == "false";
+    protected static function isFalse($v)
+    {
+        if (is_string($v)) {
+            return strToLower($v) == 'false';
         }
-        if (is_array($v))
+        if (is_array($v)) {
             return false;
+        }
 
         return $v == false;
     }
@@ -119,21 +122,15 @@ class FormulaHelper
     public static function getFieldValue($focus, $field)
     {
         //First check if the field exists
-        if(!isset($focus->field_defs[$field]) || !isset($focus->$field))
-        {
-            return "unknown field";
-        }
-        else if ($focus->field_defs[$field]['type'] == "bool")
-        {
-            return ($focus->$field ? "true" : "false");
-        }
-        //Otherwise, send it to the formula builder to evaluate further
-        else
-        {
+        if (!isset($focus->field_defs[$field]) || !isset($focus->$field)) {
+            return 'unknown field';
+        } elseif ($focus->field_defs[$field]['type'] == 'bool') {
+            return ($focus->$field ? 'true' : 'false');
+        } //Otherwise, send it to the formula builder to evaluate further
+        else {
             return $focus->$field;
         }
     }
-
 
 
     /**
@@ -142,15 +139,18 @@ class FormulaHelper
      * @param MBPackage $package
      * @return array set of links that are valid for related module function is the formula builder
      */
-    public static function getLinksForModule($module, $package = null){
-        if (!empty($package))
+    public static function getLinksForModule($module, $package = null)
+    {
+        if (!empty($package)) {
             return self::getLinksForMBModule($module, $package);
-        else
+        } else {
             return self::getLinksForDeployedModule($module);
+        }
     }
 
-    protected static function getLinksForDeployedModule($module){
-        $links = array();
+    protected static function getLinksForDeployedModule($module)
+    {
+        $links = [];
         $focus = BeanFactory::newBean($module);
         $focus->id = create_guid();
         $fields = FormulaHelper::cleanFields($focus->field_defs);
@@ -159,21 +159,21 @@ class FormulaHelper
         foreach ($fields as $val) {
             $name = $val[0];
             $def = $focus->field_defs[$name];
-            if ($val[1] == "relate" && $focus->load_relationship($name)) {
+            if ($val[1] == 'relate' && $focus->load_relationship($name)) {
                 $relatedModule = $focus->$name->getRelatedModuleName();
                 //MB will sometimes produce extra link fields that we need to ignore
                 //We also should not display the EmailAddress Module
-                if ($relatedModule == "EmailAddresses" ||
-                    (!empty($def['side']) && (substr($name, -4) == "_ida" || substr($name, -4) == "_idb"))
-                ){
+                if ($relatedModule == 'EmailAddresses' ||
+                    (!empty($def['side']) && (substr($name, -4) == '_ida' || substr($name, -4) == '_idb'))
+                ) {
                     continue;
                 }
 
                 $label = empty($def['vname']) ? $name : translate($def['vname'], $module);
-                $links[$name] = array(
-                    "label" => "$relatedModule ($label)",
-                    "module" => $relatedModule
-                );
+                $links[$name] = [
+                    'label' => "$relatedModule ($label)",
+                    'module' => $relatedModule,
+                ];
             }
         }
 
@@ -184,29 +184,30 @@ class FormulaHelper
      * For In module builder, the vardef and link fields are not yet solidifed, so we need to run through the
      * undeployed relationships and get the link fields from there
      */
-    protected static function getLinksForMBModule($module, $package){
-        $links = array();
-        $mbModule = $package->getModule ($module);
+    protected static function getLinksForMBModule($module, $package)
+    {
+        $links = [];
+        $mbModule = $package->getModule($module);
         $linksFields = $mbModule->getLinkFields();
         $fields = FormulaHelper::cleanFields($linksFields);
         foreach ($fields as $val) {
             $name = $val[0];
             $def = $linksFields[$name];
-            if ($val[1] == "relate") {
+            if ($val[1] == 'relate') {
                 $relatedModule = $def['module'];
                 //MB will sometimes produce extra link fields that we need to ignore
                 //We also should not display the EmailAddress Module
-                if ($relatedModule == "EmailAddresses" ||
-                    (!empty($def['side']) && (substr($name, -4) == "_ida" || substr($name, -4) == "_idb"))
-                ){
+                if ($relatedModule == 'EmailAddresses' ||
+                    (!empty($def['side']) && (substr($name, -4) == '_ida' || substr($name, -4) == '_idb'))
+                ) {
                     continue;
                 }
 
                 $label = $def['translated_label'];
-                $links[$name] = array(
-                    "label" => "$relatedModule ($label)",
-                    "module" => $relatedModule
-                );
+                $links[$name] = [
+                    'label' => "$relatedModule ($label)",
+                    'module' => $relatedModule,
+                ];
             }
         }
 
@@ -220,13 +221,14 @@ class FormulaHelper
      * @param array $allowedTypes list of types to allow as related fields
      * @return array
      */
-    public static function getRelatableFieldsForLink($link, $package = null, $allowedTypes = array())
+    public static function getRelatableFieldsForLink($link, $package = null, $allowedTypes = [])
     {
-        $rfields = array();
-        $relatedModule = $link["module"];
+        $rfields = [];
+        $relatedModule = $link['module'];
         $mbModule = null;
-        if (!empty($package))
+        if (!empty($package)) {
             $mbModule = $package->getModuleByFullName($relatedModule);
+        }
         //First, create a dummy bean to access the relationship info
         if (empty($mbModule)) {
             $relatedBean = BeanFactory::newBean($relatedModule);
@@ -240,17 +242,20 @@ class FormulaHelper
         foreach ($relatedFields as $val) {
             $name = $val[0];
             //Rollups must be either a number or a possible number (like a string) to roll up
-            if (!empty($allowedTypes) && !in_array($val[1], $allowedTypes))
+            if (!empty($allowedTypes) && !safeInArray($val[1], $allowedTypes)) {
                 continue;
+            }
 
             $def = $field_defs[$name];
-            if (empty($mbModule))
+            if (empty($mbModule)) {
                 $rfields[$name] = empty($def['vname']) ? $name : translate($def['vname'], $relatedModule);
-            else
+            } else {
                 $rfields[$name] = empty($def['vname']) ? $name : $mbModule->mblanguage->translate($def['vname']);
+            }
             //Strip the ":" from any labels that have one
-            if (substr($rfields[$name], -1) == ":")
+            if (substr($rfields[$name], -1) == ':') {
                 $rfields[$name] = substr($rfields[$name], 0, strlen($rfields[$name]) - 1);
+            }
         }
 
         return $rfields;

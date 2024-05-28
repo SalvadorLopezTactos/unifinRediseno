@@ -101,12 +101,12 @@ class AuthProviderBasicManagerBuilder
     public function buildAuthProviders(EventDispatcherInterface $eventDispatcher = null)
     {
         $providers = array_filter([
-                                      $this->getLocalAuthProvider(),
-                                      $this->getLdapAuthProvider(),
-                                      $this->getSamlAuthIDP(),
-                                      $this->getOidcAuthProvider(),
-                                      $this->getIdpAuthProvider(),
-                                  ]);
+            $this->getLocalAuthProvider(),
+            $this->getLdapAuthProvider(),
+            $this->getSamlAuthIDP(),
+            $this->getOidcAuthProvider(),
+            $this->getIdpAuthProvider(),
+        ]);
         $providers[] = new MixedAuthenticationProvider($providers, static::PROVIDER_KEY_MIXED);
         $manager = new AuthenticationProviderManager($providers);
 
@@ -147,7 +147,7 @@ class AuthProviderBasicManagerBuilder
             return null;
         }
 
-        $userChecker =new LdapUserChecker(
+        $userChecker = new LdapUserChecker(
             new Lockout(),
             new SugarLocalUserProvider(),
             $this->ldapConfig

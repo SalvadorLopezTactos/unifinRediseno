@@ -22,6 +22,22 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
       top: calc(~"50% - 15px");
     }
   }
+
+  .copy-clipboard-info {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    align-items: top;
+    justify-content: center;
+    position: relative;
+    height: inherit;
+    width: 48px;
+
+    i {
+      display: block;
+      top: calc(~"50% - 15px");
+    }
+  }
 }
 
 .alert {
@@ -36,14 +52,14 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
   &:not(.alert-process) {
     &::before {
       content: "";
+      height: 100%;
       position: absolute;
       background-image: @stackBackground;
       background-repeat: no-repeat;
       background-size: 150px;
       background-position: right top;
+      width: 100%;
       z-index: -1;
-      .w-full();
-      .h-full();
     }
 
     > * {
@@ -192,7 +208,7 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
 
   .alert {
     .text {
-      .pr-4();
+      padding-right: 1rem;
     }
   }
 }
@@ -231,3 +247,18 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
 }
 
 /* NEW SKIN END */
+
+.alert-confirmation {
+  .alert-info,
+  .alert-info .alert-heading {
+    .copy-clipboard-info {
+      i {
+        color: @alertInfo;
+      }
+    }
+
+    a {
+      font-weight: 700;
+    }
+  }
+}

@@ -9,57 +9,53 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Administration'] = array(
+$dictionary['Administration'] = [
     'table' => 'config',
     'archive' => false,
     'comment' => 'System table containing system-wide definitions',
     'color' => 'teal',
     'icon' => 'sicon-settings-lg',
     'hidden_to_role_assignment' => true,
-    'fields' => array (
-  'category' =>
-  array (
-    'name' => 'category',
-    'vname' => 'LBL_LIST_SYMBOL',
-    'type' => 'varchar',
-    'len' => '32',
-    'comment' => 'Settings are grouped under this category; arbitraily defined based on requirements'
-  ),
-  'name' =>
-  array (
-    'name' => 'name',
-    'vname' => 'LBL_LIST_NAME',
-    'type' => 'varchar',
-    'len' => '32',
-    'comment' => 'The name given to the setting'
-  ),
-  'value' =>
-  array (
-    'name' => 'value',
-    'vname' => 'LBL_LIST_RATE',
-    'type' => 'text',
-    'comment' => 'The value given to the setting'
-  ),
-  'platform' =>
-  array (
-    'name' => 'platform',
-    'vname' => 'LBL_LIST_PLATFORM',
-    'type' => 'varchar',
-    'len' => '32',
-    'comment' => 'Which platform to send this back with vai the api'
-  ),
-),
-    'indices' => array(
-        array(
+    'fields' => [
+        'category' => [
+            'name' => 'category',
+            'vname' => 'LBL_LIST_SYMBOL',
+            'type' => 'varchar',
+            'len' => '32',
+            'comment' => 'Settings are grouped under this category; arbitraily defined based on requirements',
+        ],
+        'name' => [
+            'name' => 'name',
+            'vname' => 'LBL_LIST_NAME',
+            'type' => 'varchar',
+            'len' => '32',
+            'comment' => 'The name given to the setting',
+        ],
+        'value' => [
+            'name' => 'value',
+            'vname' => 'LBL_LIST_RATE',
+            'type' => 'text',
+            'comment' => 'The value given to the setting',
+        ],
+        'platform' => [
+            'name' => 'platform',
+            'vname' => 'LBL_LIST_PLATFORM',
+            'type' => 'varchar',
+            'len' => '32',
+            'comment' => 'Which platform to send this back with vai the api',
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'idx_config_cat',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'category',
-            ),
-        ),
-    ),
-'acls' => array('SugarACLDeveloperForTarget' => ['allowUserRead' => true], 'SugarACLStatic' => false),
-                            );
+            ],
+        ],
+    ],
+    'acls' => ['SugarACLDeveloperForTarget' => ['allowUserRead' => true], 'SugarACLStatic' => false],
+];
 
 $dictionary['UpgradeHistory'] = [
     'table' => 'upgrade_history',
@@ -188,61 +184,61 @@ $dictionary['UpgradeHistory'] = [
     ],
 ];
 
-                    $dictionary['SessionManager'] = array ( 'table' => 'session_active', 'archive' => false,
-                         'fields' => array (
-                                'id' => array(
-                                      'name' =>'id',
-                                      'type' =>'id'
-                                     ),
+$dictionary['SessionManager'] = ['table' => 'session_active', 'archive' => false,
+    'fields' => [
+        'id' => [
+            'name' => 'id',
+            'type' => 'id',
+        ],
 
-                               'session_id' => array(
-                                      'name' =>'session_id',
-                                      'type' =>'varchar',
-                                      'len' => '100',
-                                     ),
-                                 'last_request_time' => array (
-                                      'name' => 'last_request_time',
-                                       'type' => 'datetime',
-                                      ),
-                                 'session_type' => array (
-                                      'name' => 'session_type',
-                                       'type' => 'varchar',
-                                        'len' => '100',
-                                      ),
-                                'is_violation' => array(
-                                      'name' => 'is_violation',
-                                      'type' => 'bool',
-                                      'len'  => '1',
-                                      'default'   => '0',
-                                ),
-                                'num_active_sessions' => array (
-                                      'name' => 'num_active_sessions',
-                                       'type' => 'int',
-                                       'default'=>'0',
-                                      ),
-                                'date_entered' => array (
-                                      'name' => 'date_entered',
-                                       'type' => 'datetime'
-                                      ),
-                                'date_modified' => array (
-                                       'name' => 'date_modified',
-                                       'type' => 'datetime'
-                                      ),
-                                 'deleted' => array(
-                                      'name' => 'deleted',
-                                      'type' => 'bool',
-                                      'len'  => '1',
-                                      'default'   => '0',
-                                      'required'  => false
-                                ),
-                             ),
-                             'indices' => array (
-                                array('name' =>'session_active_pk',
-                                      'type' =>'primary',
-                                      'fields'=>array('id')
-                                      ),
-                               array('name' =>'idx_session_id' ,
-                                     'type'=>'unique' ,
-                                     'fields'=>array('session_id')),
-                             )
-                    );
+        'session_id' => [
+            'name' => 'session_id',
+            'type' => 'varchar',
+            'len' => '100',
+        ],
+        'last_request_time' => [
+            'name' => 'last_request_time',
+            'type' => 'datetime',
+        ],
+        'session_type' => [
+            'name' => 'session_type',
+            'type' => 'varchar',
+            'len' => '100',
+        ],
+        'is_violation' => [
+            'name' => 'is_violation',
+            'type' => 'bool',
+            'len' => '1',
+            'default' => '0',
+        ],
+        'num_active_sessions' => [
+            'name' => 'num_active_sessions',
+            'type' => 'int',
+            'default' => '0',
+        ],
+        'date_entered' => [
+            'name' => 'date_entered',
+            'type' => 'datetime',
+        ],
+        'date_modified' => [
+            'name' => 'date_modified',
+            'type' => 'datetime',
+        ],
+        'deleted' => [
+            'name' => 'deleted',
+            'type' => 'bool',
+            'len' => '1',
+            'default' => '0',
+            'required' => false,
+        ],
+    ],
+    'indices' => [
+        ['name' => 'session_active_pk',
+            'type' => 'primary',
+            'fields' => ['id'],
+        ],
+        ['name' => 'idx_session_id',
+            'type' => 'unique',
+            'fields' => ['session_id']],
+    ],
+];

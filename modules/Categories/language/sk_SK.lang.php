@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kategórie',
     'LBL_MODULE_NAME_SINGULAR' => 'Kategória',
     'LBL_MODULE_TITLE' => 'Kategórie',
@@ -30,4 +30,4 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION_FORMATTED_PLURAL' => 'Naozaj chcete vymazať {0}? Všetky vnorené kategórie sa takisto odstránia',
     'LBL_WRONG_MOVE_PATH' => 'Priečinok nemožno premiestniť do seba.',
     'ERR_EMPTY_NODE_NAME' => 'Nemôžete pridávať kategórie bez názvu',
-);
+];

@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'กฎทางธุรกิจของกระบวนการ',
-  'LBL_MODULE_TITLE' => 'กฎทางธุรกิจของกระบวนการ',
-  'LBL_MODULE_NAME_SINGULAR' => 'กฎทางธุรกิจของกระบวนการ',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'กฎทางธุรกิจของกระบวนการ',
+    'LBL_MODULE_TITLE' => 'กฎทางธุรกิจของกระบวนการ',
+    'LBL_MODULE_NAME_SINGULAR' => 'กฎทางธุรกิจของกระบวนการ',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'กฎการดำเนินธุรกิจระบบลิ้นชัก',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'กฎการดำเนินธุรกิจระบบลิ้นชัก',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนกฎเกณฑ์การดำเนินการธุรกิจ',
-  'LBL_RST_UID' => 'ID กฎทางธุรกิจ',
-  'LBL_RST_TYPE' => 'ประเภทกฎทางธุรกิจ',
-  'LBL_RST_DEFINITION' => 'การกำหนดกฎทางธุรกิจ',
-  'LBL_RST_EDITABLE' => 'กฎทางธุรกิจสามารถแก้ไขได้',
-  'LBL_RST_SOURCE' => 'ที่มาของกฎทางธุรกิจ',
-  'LBL_RST_SOURCE_DEFINITION' => 'การกำหนดที่มาของกฎทางธุรกิจ',
-  'LBL_RST_MODULE' => 'โมดูลเป้าหมาย',
-  'LBL_RST_FILENAME' => 'ชื่อไฟล์ของกฎทางธุรกิจ',
-  'LBL_RST_CREATE_DATE' => 'วันที่สร้างกฎทางธุรกิจ',
-  'LBL_RST_UPDATE_DATE' => 'วันที่อัปเดตกฎทางธุรกิจ',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนกฎเกณฑ์การดำเนินการธุรกิจ',
+    'LBL_RST_UID' => 'ID กฎทางธุรกิจ',
+    'LBL_RST_TYPE' => 'ประเภทกฎทางธุรกิจ',
+    'LBL_RST_DEFINITION' => 'การกำหนดกฎทางธุรกิจ',
+    'LBL_RST_EDITABLE' => 'กฎทางธุรกิจสามารถแก้ไขได้',
+    'LBL_RST_SOURCE' => 'ที่มาของกฎทางธุรกิจ',
+    'LBL_RST_SOURCE_DEFINITION' => 'การกำหนดที่มาของกฎทางธุรกิจ',
+    'LBL_RST_MODULE' => 'โมดูลเป้าหมาย',
+    'LBL_RST_FILENAME' => 'ชื่อไฟล์ของกฎทางธุรกิจ',
+    'LBL_RST_CREATE_DATE' => 'วันที่สร้างกฎทางธุรกิจ',
+    'LBL_RST_UPDATE_DATE' => 'วันที่อัปเดตกฎทางธุรกิจ',
 
     'LNK_LIST' => 'ดูกฎทางธุรกิจของกระบวนการ',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'สร้างกฎทางธุรกิจของกระบวนการ',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'กฎทางธุรกิจไม่ถูกต้องเนื่องจากใช้ฟิลด์ที่ไม่ถูกต้อง หรือไม่พบฟิลด์ในอินสแตนซ์ SugarCRM ของคุณ โปรดแก้ไขข้อผิดพลาดที่ด้านล่างและบันทึกกฎทางธุรกิจ',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'ขณะนี้มีการใช้กฎทางธุรกิจนี้ในการกำหนดกระบวนการ คุณยังต้องการแก้ไขกฎทางธุรกิจนี้หรือไม่',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "คุณไม่สามารถลบกฎทางธุรกิจนี้ เนื่องจากขณะนี้มีการใช้อยู่ในการกำหนดกระบวนการ",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'คุณไม่สามารถลบกฎทางธุรกิจนี้ เนื่องจากขณะนี้มีการใช้อยู่ในการกำหนดกระบวนการ',
+];

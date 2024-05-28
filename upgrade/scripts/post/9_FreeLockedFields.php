@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -43,7 +44,7 @@ class SugarUpgradeFreeLockedFields extends UpgradeScript
         $db = DBManagerFactory::getInstance();
         $conn = $db->getConnection();
 
-        $sql = "SELECT pd_id, bean_id, bean_module FROM locked_field_bean_rel WHERE deleted = 0";
+        $sql = 'SELECT pd_id, bean_id, bean_module FROM locked_field_bean_rel WHERE deleted = 0';
         $stmt = $conn->executeQuery($sql);
 
         $this->caseFlowHandler = ProcessManager\Factory::getPMSEObject('PMSECaseFlowHandler');

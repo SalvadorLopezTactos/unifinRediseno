@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'Administration',
-    'Product' => 'Προϊόν',
-    'User' => 'Χρήστης',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => 'Νέα',
-    'Assigned' => 'Ανατέθηκε',
-    'Closed' => 'Κλειστό',
-    'Pending Input' => 'Εκκρεμής',
-    'Rejected' => 'Απορρίφθηκε',
-    'Duplicate' => 'Αντίγραφο',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => 'Υψηλή',
-    'P2' => 'Μεσαία',
-    'P3' => 'Χαμηλή',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => 'Αποδεκτό',
-    'Duplicate' => 'Αντίγραφο',
-    'Closed' => 'Κλειστό',
-    'Out of Date' => 'Άκυρο',
-    'Invalid' => 'Άκυρο',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => 'Διαχείριση',
+        'Product' => 'Προϊόν',
+        'User' => 'Χρήστης',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => 'Νέο',
+        'Assigned' => 'Ανατέθηκε',
+        'Closed' => 'Κλειστό',
+        'Pending Input' => 'Εισαγωγή Σε Εκκρεμότητα',
+        'Rejected' => 'Απορρίφθηκε',
+        'Duplicate' => 'Αντίγραφο',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => 'Υψηλό',
+        'P2' => 'Μέσο',
+        'P3' => 'Χαμηλό',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => 'Αποδεκτό',
+        'Duplicate' => 'Αντίγραφο',
+        'Closed' => 'Κλειστό',
+        'Out of Date' => 'Άκυρο',
+        'Invalid' => 'Άκυρο',
+    ],
+];

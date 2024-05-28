@@ -65,7 +65,7 @@ class Client implements ClientInterface
      *
      * @return ResponseInterface
      */
-    public function call(string $method, array $options) : ResponseInterface
+    public function call(string $method, array $options): ResponseInterface
     {
         $endpoint = $this->url . '/merge';
 

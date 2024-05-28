@@ -16,17 +16,17 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$viewdefs['Leads']['mobile']['view']['detail'] = array(
-    'templateMeta' => array(
+$viewdefs['Leads']['mobile']['view']['detail'] = [
+    'templateMeta' => [
         'maxColumns' => '1',
-        'widths' => array(
-            array('label' => '10', 'field' => '30'),
-        ),
-    ),
-    'panels' => array(
-        array(
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
+            'fields' => [
                 'full_name',
                 'title',
                 'account_name',
@@ -49,8 +49,7 @@ $viewdefs['Leads']['mobile']['view']['detail'] = array(
                 'assigned_user_name',
 
                 'team_name',
-            )
-        ),
-    )
-);
-?>
+            ],
+        ],
+    ],
+];

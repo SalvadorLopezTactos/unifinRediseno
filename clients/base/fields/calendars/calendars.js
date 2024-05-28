@@ -399,6 +399,7 @@
 
                 let calendarItems = [];
                 _.each(calendars, function(calendar) {
+                    calendar.userName = DOMPurify.sanitize(calendar.userName);
                     let cal = {
                         id: calendar.calendarId,
                         name: calendar.name,

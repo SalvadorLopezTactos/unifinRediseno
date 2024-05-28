@@ -241,6 +241,10 @@
         this.collection.filterDef = filtersDef;
         this.collection.fetch({
             success: _.bind(function success() {
+                if (this.disposed || !this.context || !this.collection) {
+                    return;
+                }
+
                 const isPanelCollapsed = this.context.get('collapsed');
                 const isCollectionEmpty = this.collection.length === 0;
 
@@ -305,7 +309,10 @@
         const mapsDistanceField = _.find(this._fields.visible, function getDistanceField(field) {
             return field.name === 'maps_distance';
         });
-        mapsDistanceField.expectedWidth = 'small';
+
+        if (mapsDistanceField) {
+            mapsDistanceField.expectedWidth = 'small';
+        }
 
         this._updateCollectionFields(newFieldsMeta);
         this.orderBy = this._initOrderBy();

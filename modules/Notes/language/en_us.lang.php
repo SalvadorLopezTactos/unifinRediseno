@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Notes List Dashboard',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Notes Record Dashboard',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Notes Focus Dashboard',
     'LBL_EXTERNAL_USER' => 'External User',
     'LBL_EXTERNAL_USER_NAME' => 'External User',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Note Timeline',
 
     'LBL_RELATED_CONTACT' => 'Related Contact',
     'ERR_DELETE_RECORD' => 'You must specify a record number to delete the Account.',
@@ -126,4 +127,4 @@ $mod_strings = array(
  - Fields marked "Required" must be completed prior to saving.
  - Click "Show More" to expose additional fields if necessary.
 2. Click "Save" to finalize the new record and return to the previous page.',
-);
+];

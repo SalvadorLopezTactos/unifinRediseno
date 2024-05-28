@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'jurnal apeluri',
     'LNK_NEW_MEETING' => 'orar intalniri',
     'LNK_NEW_TASK' => 'Creează sarcina',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Camp Extra Meta 2',
     'COLUMN_TITLE_EXT3' => 'Camp Extra Meta 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'Inaltime ICadru',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'URL-ul prestabilit',
     'COLUMN_TITLE_AUDIT' => 'Bilant',
     'COLUMN_TITLE_PII' => 'Informații personale',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Valoare implicita',
     'LBL_AUDITED' => 'Verificat',
     'LBL_REPORTABLE' => 'Raportabil',
-    'ERR_RESERVED_FIELD_NAME' => "Cuvant cheie rezervat",
+    'ERR_RESERVED_FIELD_NAME' => 'Cuvant cheie rezervat',
     'ERR_SELECT_FIELD_TYPE' => 'Va rugam selectati campul',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Nume camp există deja',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Numele câmpului trebuie să conţină doar unul dintre următoarele caractere: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Finalizat',
     'LBL_EXE_NON_SIM_MODE' => 'Executare mod non-simulare',
     'LBL_CALCULATION_VISIBLE' => 'Faceți vizibil pentru calcule',
-);
+];

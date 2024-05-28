@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Attivo',
     'LBL_ASSIGNEE_RULE' => 'Regola dell&#39;assegnatario',
     'LBL_TARGET_ASSIGNEE' => 'Assegnatario di destinazione',
+    'LBL_STAGE_NUMBERS' => 'Numerazione fasi',
     'LBL_EXPORT_BUTTON_LABEL' => 'Esporta',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Importa',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Crea/Aggiorna automaticamente un nuovo record Modello della Guida Intelligente importando un file *.json dal tuo file system.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Se si seleziona Se Assegnatario di Destinazione = Assegnatario padre, quando l&#39;utente "Assegnato a" viene modificato in un genitore, gli utenti "Assegnato a" cambieranno automaticamente anche nelle Guide Intelligenti, fasi e attività. Si noti che le impostazioni di Assegnatario di Destinazione nei modelli di attività hanno la precedenza sul modello della Guida Intelligente.',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Quando un utente deve essere assegnato alle Attività',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'A chi devono essere assegnate le Attività',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Questo interruttore consente di mostrare o nascondere la numerazione automatica delle fasi.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Guida Intelligente/Fase/Modello di attività',
 ];

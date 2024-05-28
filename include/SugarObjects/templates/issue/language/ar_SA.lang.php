@@ -10,25 +10,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
 
-  'LBL_NAME' =>'الاسم',
-  'LBL_NUMBER' => 'الرقم:',
-  'LBL_STATUS' => 'الحالة:',
-  'LBL_PRIORITY' => 'الأولوية:',
-  'LBL_DESCRIPTION' => 'الوصف:',
-  'LBL_RESOLUTION' => 'الحل',
-  'LBL_LAST_MODIFIED' => 'تاريخ آخر تعديل',
-  'LBL_ASSIGNED_TO_ID'=>'تعيين إلى:',
-  'LBL_ASSIGNED_TO_NAME' => 'المستخدم:',
-  'LBL_WORK_LOG' => 'سجل الأعمال:',
+    'LBL_NAME' => 'الاسم',
+    'LBL_NUMBER' => 'الرقم:',
+    'LBL_STATUS' => 'الحالة:',
+    'LBL_PRIORITY' => 'الأولوية:',
+    'LBL_DESCRIPTION' => 'الوصف:',
+    'LBL_RESOLUTION' => 'الحل',
+    'LBL_LAST_MODIFIED' => 'تاريخ آخر تعديل',
+    'LBL_ASSIGNED_TO_ID' => 'تعيين إلى:',
+    'LBL_ASSIGNED_TO_NAME' => 'المستخدم:',
+    'LBL_WORK_LOG' => 'سجل الأعمال:',
     'LBL_FOLLOW_UP' => 'المتابعة',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
     'LBL_RESOLVED_DATETIME' => 'تاريخ الحل',
@@ -36,19 +35,19 @@ $mod_strings = array (
     'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'عدد ساعات العمل إلى الحل',
     'LBL_PENDING_PROCESSING' => 'معالجة معلقة',
     'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'تاريخ المتابعة',
-  'LBL_CREATED_BY' => 'تم الإنشاء بواسطة:',
-  'LBL_DATE_CREATED' => 'تاريخ الإنشاء:',
-  'LBL_DATE_ENTERED' => 'تاريخ الإنشاء:',
-  'LBL_DATE_MODIFIED'=>'تاريخ التعديل:',
-  'LBL_MODIFIED_BY' => 'تم التعديل الأخير بواسطة:',
-  'LBL_ASSIGNED_USER' => 'المستخدم المعين:',
-  'LBL_ASSIGNED_USER_NAME' => 'تعيين إلى',
-  'LBL_TEAM_NAME' =>'اسم الفريق:',
-  'LBL_TYPE'=>'النوع:',
-  'LBL_SUBJECT' => 'الموضوع:',
+    'LBL_CREATED_BY' => 'تم الإنشاء بواسطة:',
+    'LBL_DATE_CREATED' => 'تاريخ الإنشاء:',
+    'LBL_DATE_ENTERED' => 'تاريخ الإنشاء:',
+    'LBL_DATE_MODIFIED' => 'تاريخ التعديل:',
+    'LBL_MODIFIED_BY' => 'تم التعديل الأخير بواسطة:',
+    'LBL_ASSIGNED_USER' => 'المستخدم المعين:',
+    'LBL_ASSIGNED_USER_NAME' => 'تعيين إلى',
+    'LBL_TEAM_NAME' => 'اسم الفريق:',
+    'LBL_TYPE' => 'النوع:',
+    'LBL_SUBJECT' => 'الموضوع:',
 
     'LBL_EDIT_BUTTON' => 'تحرير',
     'LBL_REMOVE' => 'إزالة',
 
 
-  );
+];

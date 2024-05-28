@@ -16,7 +16,7 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$viewdefs['Documents']['base']['view']['record'] = array(
+$viewdefs['Documents']['base']['view']['record'] = [
     'buttons' => [
         [
             'type' => 'button',
@@ -91,51 +91,51 @@ $viewdefs['Documents']['base']['view']['record'] = array(
             'type' => 'sidebartoggle',
         ],
     ],
-    'panels' => array(
-        array(
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_HEADER',
             'header' => true,
-            'fields' => array(
-                array(
-                    'name'          => 'picture',
-                    'type'          => 'avatar',
-                    'size'          => 'large',
+            'fields' => [
+                [
+                    'name' => 'picture',
+                    'type' => 'avatar',
+                    'size' => 'large',
                     'dismiss_label' => true,
-                    'readonly'      => true,
-                ),
+                    'readonly' => true,
+                ],
                 [
                     'name' => 'document_name',
                     'type' => 'name',
                     'label' => 'LBL_NAME',
                 ],
-                array(
+                [
                     'name' => 'favorite',
                     'label' => 'LBL_FAVORITE',
                     'type' => 'favorite',
                     'dismiss_label' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'follow',
-                    'label'=> 'LBL_FOLLOW',
+                    'label' => 'LBL_FOLLOW',
                     'type' => 'follow',
                     'readonly' => true,
                     'dismiss_label' => true,
-                ),
-            )
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'placeholders' => true,
-            'fields' => array(
+            'fields' => [
                 'filename',
                 'doc_type',
-                array(
+                [
                     'name' => 'tag',
                     'span' => 12,
-                ),
+                ],
                 'status_id',
                 'revision',
                 'template_type',
@@ -144,17 +144,17 @@ $viewdefs['Documents']['base']['view']['record'] = array(
                 'category_id',
                 'exp_date',
                 'subcategory_id',
-                array(
+                [
                     'name' => 'description',
                     'span' => 12,
-                ),
+                ],
                 'assigned_user_name',
                 'related_doc_name',
                 'related_doc_rev_number',
                 'team_name',
                 'is_shared',
-            ),
-        ),
+            ],
+        ],
         [
             'name' => 'panel_hidden',
             'label' => 'LBL_RECORD_SHOWMORE',
@@ -183,5 +183,5 @@ $viewdefs['Documents']['base']['view']['record'] = array(
                 ],
             ],
         ],
-    ),
-);
+    ],
+];

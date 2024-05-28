@@ -1,109 +1,100 @@
 <?php
-$viewdefs['Leads'] = 
-array (
-  'base' => 
+// created: 2024-05-21 12:55:59
+$viewdefs['Leads']['base']['view']['list'] = array (
+  'panels' => 
   array (
-    'view' => 
+    0 => 
     array (
-      'list' => 
+      'name' => 'panel_header',
+      'label' => 'LBL_PANEL_1',
+      'fields' => 
       array (
-        'panels' => 
+        0 => 
         array (
-          0 => 
-          array (
-            'name' => 'panel_header',
-            'label' => 'LBL_PANEL_1',
-            'fields' => 
-            array (
-              0 => 
-              array (
-                'name' => 'name_c',
-                'link' => true,
-                'label' => 'LBL_NAME',
-                'enabled' => true,
-                'default' => true,
-              ),
-              1 => 
-              array (
-                'name' => 'tipo_registro_c',
-                'label' => 'LBL_TIPO_REGISTRO',
-                'enabled' => true,
-                'default' => true,
-                'readonly' => true,
-              ),
-              2 => 
-              array (
-                'name' => 'subtipo_registro_c',
-                'label' => 'LBL_SUBTIPO_REGISTRO',
-                'enabled' => true,
-                'default' => true,
-                'readonly' => true,
-              ),
-              3 => 
-              array (
-                'name' => 'regimen_fiscal_c',
-                'label' => 'LBL_REGIMEN_FISCAL',
-                'enabled' => true,
-                'default' => true,
-              ),
-              4 => 
-              array (
-                'name' => 'assigned_user_name',
-                'label' => 'LBL_LIST_ASSIGNED_USER',
-                'enabled' => true,
-                'default' => true,
-              ),
-              5 => 
-              array (
-                'name' => 'date_entered',
-                'label' => 'LBL_DATE_ENTERED',
-                'enabled' => true,
-                'default' => true,
-                'readonly' => true,
-              ),
-              6 => 
-              array (
-                'name' => 'nombre_de_cargar_c',
-                'label' => 'LBL_NOMBRE_DE_CARGAR',
-                'enabled' => true,
-                'default' => true,
-              ),
-              7 => 
-              array (
-                'name' => 'contacto_asociado_c',
-                'label' => 'LBL_CONTACTO_ASOCIADO_C',
-                'enabled' => true,
-                'default' => true,
-              ),
-              8 => 
-              array (
-                'name' => 'date_modified',
-                'enabled' => true,
-                'default' => false,
-              ),
-              9 => 
-              array (
-                'name' => 'phone_work',
-                'label' => 'LBL_LIST_PHONE',
-                'enabled' => true,
-                'default' => false,
-              ),
-              10 => 
-              array (
-                'name' => 'email',
-                'label' => 'LBL_LIST_EMAIL_ADDRESS',
-                'enabled' => true,
-                'default' => false,
-              ),
-              11 => 
-              array (
-                'name' => 'status',
-                'label' => 'LBL_LIST_STATUS',
-                'enabled' => true,
-                'default' => false,
-              ),
-            ),
-          ),
+          'name' => 'name_c',
+          'link' => true,
+          'label' => 'LBL_NAME',
+          'enabled' => true,
+          'default' => true,
+        ),
+        1 => 
+        array (
+          'name' => 'tipo_registro_c',
+          'label' => 'LBL_TIPO_REGISTRO',
+          'enabled' => true,
+          'default' => true,
+          'readonly' => true,
+        ),
+        2 => 
+        array (
+          'name' => 'subtipo_registro_c',
+          'label' => 'LBL_SUBTIPO_REGISTRO',
+          'enabled' => true,
+          'default' => true,
+          'readonly' => true,
+        ),
+        3 => 
+        array (
+          'name' => 'regimen_fiscal_c',
+          'label' => 'LBL_REGIMEN_FISCAL',
+          'enabled' => true,
+          'default' => true,
+        ),
+        4 => 
+        array (
+          'name' => 'assigned_user_name',
+          'label' => 'LBL_LIST_ASSIGNED_USER',
+          'enabled' => true,
+          'default' => true,
+        ),
+        5 => 
+        array (
+          'name' => 'date_entered',
+          'label' => 'LBL_DATE_ENTERED',
+          'enabled' => true,
+          'default' => true,
+          'readonly' => true,
+        ),
+        6 => 
+        array (
+          'name' => 'nombre_de_cargar_c',
+          'label' => 'LBL_NOMBRE_DE_CARGAR',
+          'enabled' => true,
+          'default' => true,
+        ),
+        7 => 
+        array (
+          'name' => 'contacto_asociado_c',
+          'label' => 'LBL_CONTACTO_ASOCIADO_C',
+          'enabled' => true,
+          'default' => true,
+        ),
+        8 => 
+        array (
+          'name' => 'date_modified',
+          'enabled' => true,
+          'default' => false,
+        ),
+        9 => 
+        array (
+          'name' => 'phone_work',
+          'label' => 'LBL_LIST_PHONE',
+          'enabled' => true,
+          'default' => false,
+        ),
+        10 => 
+        array (
+          'name' => 'email',
+          'label' => 'LBL_LIST_EMAIL_ADDRESS',
+          'enabled' => true,
+          'default' => false,
+        ),
+        11 => 
+        array (
+          'name' => 'status',
+          'label' => 'LBL_LIST_STATUS',
+          'enabled' => true,
+          'default' => false,
         ),
       ),
     ),

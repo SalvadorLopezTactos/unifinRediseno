@@ -14,11 +14,10 @@
     <div class="content-tabs ab-admin-tabs">
         <ul class="nav nav-tabs">
             {{#each _uiButtons}}
-                <li class="tab tab-badgeable {{#if active}}active{{/if}}">
+                <li class="tab tab-badgeable {{#if active}}active{{/if}}" data-bs-toggle="tab">
                     <a
                         class="ellipsis_inline"
                         data-index="{{orderNumber}}"
-                        data-toggle="tab"
                         data-original-title="{{properties.label}}"
                         data-tabId="{{buttonId}}"
                     >
@@ -29,7 +28,7 @@
                             rel="tooltip"
                             title="{{str 'LBL_REMOVE'}}"
                             aria-label="{{str 'LBL_REMOVE'}}"
-                            data-placement="bottom"
+                            data-bs-placement="bottom"
                             aria-pressed="false"
                             data-action="remove-tab"
                             data-id="{{buttonId}}"

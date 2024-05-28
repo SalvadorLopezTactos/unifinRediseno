@@ -133,16 +133,14 @@ $dictionary['GeocodeJob'] = [
             'len' => '64',
             'size' => '64',
         ],
-        'addresses_data' =>
-        [
+        'addresses_data' => [
             'name' => 'addresses_data',
             'vname' => 'LBL_ADDRESSES_DATA',
             'type' => 'json',
             'dbType' => 'longtext',
             'comment' => '',
         ],
-        'geocode_result' =>
-        [
+        'geocode_result' => [
             'name' => 'geocode_result',
             'vname' => 'LBL_GEOCODE_RESULT',
             'type' => 'json',

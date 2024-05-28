@@ -10,6 +10,22 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
+<style id="hide-mc-iframe-loading" type="text/css">
+    #marketing-content {
+        visibility: hidden !important;
+    }
+</style>
+
+<script type="text/javascript">
+    function showMarketingContentIframe() {
+        // Remove style that's hiding the iframe while it's loading
+        let helperStyle = window.parent.document.getElementById('hide-mc-iframe-loading');
+        if (helperStyle) {
+            helperStyle.remove();
+        }
+    }
+</script>
+
 <div class="iframe-container">
-    <iframe title="Marketing Content" id="marketing-content" scrolling="no"></iframe>
+    <iframe title="Marketing Content" id="marketing-content" scrolling="no" onload="showMarketingContentIframe()"></iframe>
 </div>

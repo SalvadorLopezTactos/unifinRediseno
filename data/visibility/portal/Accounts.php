@@ -18,6 +18,6 @@ class Accounts extends Portal
 {
     public function addVisibilityQuery(\SugarQuery $query, array $options = [])
     {
-        $query->where()->in($options['table_alias'].'.id', PortalFactory::getInstance('Session')->getAccountIds());
+        $query->where()->in($options['table_alias'] . '.id', PortalFactory::getInstance('Session')->getAccountIds());
     }
 }

@@ -13,12 +13,12 @@
 {{#each value}}
     {{#eq mimeType 'image'}}
         <div class="file-field">
-            <a class="ellipsis_inline" data-placement="bottom" title="{{name}}" href="{{url}}" target="_blank">{{name}}</a>
+            <a class="ellipsis_inline" data-bs-placement="bottom" title="{{name}}" href="{{url}}" target="_blank">{{name}}</a>
         </div>
         <a href="{{url}}" target="_blank"><img src="{{url}}"></a>
     {{else}}
         <div class="file-field">
-            <a class="ellipsis_inline" data-placement="bottom" title="{{name}}" href="javascript:void(0);" data-url="{{url}}" data-action="download">{{name}}</a>
+            <a class="ellipsis_inline" data-bs-placement="bottom" title="{{name}}" href="javascript:void(0);" data-url="{{url}}" data-action="download">{{name}}</a>
         </div>
     {{/eq}}
 {{/each}}

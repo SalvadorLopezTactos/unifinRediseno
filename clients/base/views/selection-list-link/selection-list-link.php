@@ -9,6 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['selection-list-link'] = array(
+$viewdefs['base']['view']['selection-list-link'] = [
     'template' => 'flex-list',
-);
+];

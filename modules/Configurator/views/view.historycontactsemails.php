@@ -22,7 +22,7 @@ class ConfiguratorViewHistoryContactsEmails extends SugarView
 
     public function display()
     {
-        $modules = array();
+        $modules = [];
         foreach ($GLOBALS['beanList'] as $moduleName => $objectName) {
             $bean = BeanFactory::newBean($moduleName);
 
@@ -34,15 +34,15 @@ class ConfiguratorViewHistoryContactsEmails extends SugarView
             }
 
             // these are the specific modules we care about
-            if (!in_array($moduleName, array('Opportunities','Accounts','Cases'))) {
+            if (!in_array($moduleName, ['Opportunities', 'Accounts', 'Cases'])) {
                 continue;
             }
 
-            $modules[$moduleName] = array(
+            $modules[$moduleName] = [
                 'module' => $moduleName,
                 'label' => translate($moduleName),
                 'enabled' => true,
-                );
+            ];
         }
 
         if (!empty($GLOBALS['sugar_config']['hide_history_contacts_emails'])) {

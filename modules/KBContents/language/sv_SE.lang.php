@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Instrumentpanel med lista över kunskapsbas',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Instrumentpanel med poster över kunskapsbas',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för kunskapsbas',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje för kunskapsbas',
 
     'LBL_MODULE_NAME' => 'Kunskapsbas',
     'LBL_MODULE_NAME_SINGULAR' => 'Kunskapsbasartikel',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Sätt värde som primärt',
     'LBL_ITEM_REMOVE' => 'Ta bort värde',
     'LBL_ITEM_ADD' => 'Lägg till värde',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => 'Revisions-ID',
     'LBL_DOCUMENT_REVISION' => 'Revision',
     'LBL_NUMBER' => 'Nummer',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'Fler {{module}}-artiklar...',
     'LBL_LIST_FORM_TITLE' => 'Kunskapsdatabaslista',
     'LBL_SEARCH_FORM_TITLE' => 'Kunskapsdatabassökning',
-);
+];

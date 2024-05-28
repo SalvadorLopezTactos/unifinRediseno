@@ -51,14 +51,12 @@
     {"pattern": "include/javascript/sugar7/plugins/customer-journey/*.js", "included": true, "served": true, "watched": true},
     
     {"pattern": "include/javascript/sugar7/actions/*.js", "included": true, "served": true, "watched": true},
+    {"pattern": "include/javascript/sugar7/filter-operators/*.js", "included": true, "served": true, "watched": true},
 
     "include/javascript/jquery/jquery.dataTables.min.js",
     "include/javascript/jquery/jquery-ui.min.js",
     "include/javascript/jquery/sugar.resizableColumns.js",
-    "include/javascript/twitterbootstrap/bootstrap-collapse.js",
-    "include/javascript/twitterbootstrap/bootstrap-tooltip.js",
-    "include/javascript/twitterbootstrap/bootstrap-tab.js",
-    "include/javascript/twitterbootstrap/bootstrap-dropdown.js",
+    "jssource/src/build/grp-bootstrap.min.js",
     "include/javascript/twitterbootstrap/bootstrap-datepicker.js",
     "include/javascript/jquery/jquery.timepicker.js",
     "include/javascript/select2/select2.js",
@@ -83,9 +81,12 @@
     "include/javascript/gridstack/gridstack-poly.js",
     "include/javascript/gridstack/gridstack.js",
     "include/javascript/gridstack/gridstack.JQueryUI.js",
-    "include/javascript/amazon-connect/amazon-connect-streams-1.6.9.js",
+    "include/javascript/amazon-connect/amazon-connect-streams.js",
     "include/javascript/amazon-connect/amazon-connect-chat.js",
     "include/javascript/dom-purify/purify.min.js",
+    "include/javascript/kendo/kendo.min.js",
+    "include/javascript/kendo/agendaView.js",
+    "include/javascript/calendar/utils.js",
 
     // jasmine and sinon core files
     "node_modules/sinon/pkg/sinon.js",

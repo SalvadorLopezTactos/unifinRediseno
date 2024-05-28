@@ -10,8 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
- * Description:  
+ * Description:
  ********************************************************************************/
 
 if (!is_admin($current_user)) {
@@ -20,40 +19,42 @@ if (!is_admin($current_user)) {
 
 $focus = BeanFactory::getBean('ReportMaker', $_POST['record']);
 
-foreach($focus->column_fields as $field)
-{
-	if(isset($_POST[$field]))
-	{
-		$focus->$field = $_POST[$field];
-		
-	}
+foreach ($focus->column_fields as $field) {
+    if (isset($_POST[$field])) {
+        $focus->$field = $_POST[$field];
+    }
 }
 
-foreach($focus->additional_column_fields as $field)
-{
-	if(isset($_POST[$field]))
-	{
-		$value = $_POST[$field];
-		$focus->$field = $value;
-		
-	}
+foreach ($focus->additional_column_fields as $field) {
+    if (isset($_POST[$field])) {
+        $value = $_POST[$field];
+        $focus->$field = $value;
+    }
 }
 
 // replace currently assigned teams with the one from request
 // since the UI doesn't allow to specify multiple teams
 if ($focus->load_relationship('teams')) {
-    $focus->teams->replace(array($focus->team_id));
+    $focus->teams->replace([$focus->team_id]);
 }
 
 $focus->save();
 
 $return_id = $focus->id;
 
-if(isset($_POST['return_module']) && $_POST['return_module'] != "") $return_module = $_POST['return_module'];
-else $return_module = "ReportMaker";
-if(isset($_POST['return_action']) && $_POST['return_action'] != "") $return_action = $_POST['return_action'];
-else $return_action = "DetailView";
-if(isset($_POST['return_id']) && $_POST['return_id'] != "") $return_id = $_POST['return_id'];
+if (isset($_POST['return_module']) && $_POST['return_module'] != '') {
+    $return_module = $_POST['return_module'];
+} else {
+    $return_module = 'ReportMaker';
+}
+if (isset($_POST['return_action']) && $_POST['return_action'] != '') {
+    $return_action = $_POST['return_action'];
+} else {
+    $return_action = 'DetailView';
+}
+if (isset($_POST['return_id']) && $_POST['return_id'] != '') {
+    $return_id = $_POST['return_id'];
+}
 
 $GLOBALS['log']->debug('Saved record with id of ' . $return_id);
 

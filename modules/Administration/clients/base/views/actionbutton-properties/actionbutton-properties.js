@@ -281,6 +281,11 @@
     _updateProperties: function(activeButton) {
         this._formula = activeButton.properties.formula;
 
+        if (activeButton.properties.label && activeButton.properties.label.includes('LBL_')) {
+            const module = this.context.get('model').get('module');
+            activeButton.properties.label = app.lang.get(activeButton.properties.label, module);
+        }
+
         this.properties = {
             label: {
                 template: 'actionbutton-text-property',

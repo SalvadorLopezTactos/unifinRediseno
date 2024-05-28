@@ -13,8 +13,8 @@
 namespace Sugarcrm\Sugarcrm\UserUtils\Invoker\payloads;
 
 /**
-* The InvokerUserSettingsPayload class handles payloads related to user settings
-*/
+ * The InvokerUserSettingsPayload class handles payloads related to user settings
+ */
 class InvokerUserSettingsPayload extends InvokerBasePayload
 {
     /**

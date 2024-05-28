@@ -35,7 +35,7 @@ class SumConditionalRelatedExpression extends NumericExpression
         $conditionalValues = $params[3]->evaluate();
 
         if (!is_array($conditionalValues)) {
-            $conditionalValues = array($conditionalValues);
+            $conditionalValues = [$conditionalValues];
         }
 
         $ret = '0';
@@ -53,7 +53,7 @@ class SumConditionalRelatedExpression extends NumericExpression
         $relFieldIsCurrency = false;
 
         foreach ($linkField as $bean) {
-            if (!in_array($bean->$conditionalField, $conditionalValues)) {
+            if (!safeInArray($bean->$conditionalField, $conditionalValues)) {
                 continue;
             }
             // only check the target field once to see if it's a currency field.
@@ -159,7 +159,6 @@ class SumConditionalRelatedExpression extends NumericExpression
         return rollup_value;
         
 JS;
-
     }
 
     /**
@@ -168,7 +167,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return array("rollupConditionalSum");
+        return ['rollupConditionalSum'];
     }
 
     /**
@@ -176,12 +175,12 @@ JS;
      */
     public static function getParameterTypes()
     {
-        return array(
+        return [
             AbstractExpression::$RELATE_TYPE,
             AbstractExpression::$STRING_TYPE,
             AbstractExpression::$STRING_TYPE,
-            AbstractExpression::$GENERIC_TYPE
-        );
+            AbstractExpression::$GENERIC_TYPE,
+        ];
     }
 
     /**

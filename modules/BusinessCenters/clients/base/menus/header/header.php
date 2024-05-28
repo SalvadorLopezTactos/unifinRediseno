@@ -11,32 +11,32 @@
  */
 
 $moduleName = 'BusinessCenters';
-$viewdefs[$moduleName]['base']['menu']['header'] = array(
-    array(
+$viewdefs[$moduleName]['base']['menu']['header'] = [
+    [
         'label' => 'LNK_NEW_BUSINESS_CENTER',
         'acl_action' => 'create',
         'acl_module' => $moduleName,
         'icon' => 'sicon-plus',
-        'route'=> '#' . $moduleName . '/create',
-    ),
-    array(
+        'route' => '#' . $moduleName . '/create',
+    ],
+    [
         'route' => '#' . $moduleName,
-        'label' =>'LNK_BUSINESS_CENTERS_LIST',
-        'acl_action'=>'list',
-        'acl_module'=>$moduleName,
+        'label' => 'LNK_BUSINESS_CENTERS_LIST',
+        'acl_action' => 'list',
+        'acl_module' => $moduleName,
         'icon' => 'sicon-list-view',
-    ),
-    array(
+    ],
+    [
         'route' => '#bwc/index.php?' . http_build_query(
-            array(
-                'module' => 'Import',
-                'action' => 'Step1',
-                'import_module' => $moduleName,
-            )
+            [
+                    'module' => 'Import',
+                    'action' => 'Step1',
+                    'import_module' => $moduleName,
+                ]
         ),
-        'label' =>'LNK_IMPORT_BUSINESS_CENTERS',
+        'label' => 'LNK_IMPORT_BUSINESS_CENTERS',
         'acl_action' => 'import',
         'acl_module' => $moduleName,
         'icon' => 'sicon-upload',
-    ),
-);
+    ],
+];

@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'ขั้นตอนของกลุ่ม:',
-    'LBL_DEAL_TOT'=>'ยอดรวมส่วนลด',
-    'LBL_DEAL_TOT_USDOLLAR'=>'ยอดรวมส่วนลด (ดอลลาร์สหรัฐ)',
+    'LBL_DEAL_TOT' => 'ยอดรวมส่วนลด',
+    'LBL_DEAL_TOT_USDOLLAR' => 'ยอดรวมส่วนลด (ดอลลาร์สหรัฐ)',
     'LBL_NEW_SUB' => 'ผลรวมย่อยที่มีส่วนลด:',
     'LBL_SHIPPING' => 'การขนส่ง:',
-    'LBL_SHIPPING_USDOLLAR'=>'การขนส่ง (ดอลลาร์สหรัฐ)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'ผลรวมย่อย (ดอลลาร์สหรัฐ)',
+    'LBL_SHIPPING_USDOLLAR' => 'การขนส่ง (ดอลลาร์สหรัฐ)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'ผลรวมย่อย (ดอลลาร์สหรัฐ)',
     'LBL_SUBTOTAL' => 'ผลรวมย่อย:',
     'LBL_TAXABLE_SUBTOTAL' => 'ผลรวมย่อยที่ต้องคำนวณภาษี',
-    'LBL_TAX_USDOLLAR'=>'ภาษี (ดอลลาร์สหรัฐ)',
+    'LBL_TAX_USDOLLAR' => 'ภาษี (ดอลลาร์สหรัฐ)',
     'LBL_TAX' => 'ภาษี:',
-    'LBL_TOTAL_USDOLLAR'=>'ผลรวม (ดอลลาร์สหรัฐ)',
+    'LBL_TOTAL_USDOLLAR' => 'ผลรวม (ดอลลาร์สหรัฐ)',
     'LBL_TOTAL' => 'รวม:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'ตำแหน่งของชุดการเสนอราคา',
     'EXCEPTION_INVALID_QUOTE_ID' => 'ไม่มี ID การเสนอราคาในเพย์โหลด',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'ไม่พบการเสนอราคาที่คุณต้องการ',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'ไม่พบการเสนอราคาที่คุณต้องการ',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'ส่วนลดกลุ่มเพิ่มเติม',
     'LBL_GROUP_TOTAL' => 'ยอดรวมของกลุ่ม',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'ส่วนหัวของกลุ่ม',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'กลุ่มชุดผลิตภัณฑ์เริ่มต้นสำหรับการเสนอราคา',
     'LBL_ALERT_DELETING_ITEM' => 'กำลังลบรายการบรรทัด',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'ลบรายการบรรทัดสำเร็จแล้ว',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์ชุดผลิตภัณฑ์',
+];

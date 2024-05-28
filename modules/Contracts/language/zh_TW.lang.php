@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => '合約',
-	'LBL_MODULE_NAME_SINGULAR' => '合約',
-	'LBL_MODULE_TITLE' => '合約：首頁',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => '合約',
+    'LBL_MODULE_NAME_SINGULAR' => '合約',
+    'LBL_MODULE_TITLE' => '合約：首頁',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => '建立合約',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => '貨幣 ID：',
     'LBL_CURRENCY' => '貨幣：',
     'LBL_CURRENCY_RATE' => '貨幣匯率',
-    'LBL_ASSIGNED_TO_NAME'=>'指派至：',                   
+    'LBL_ASSIGNED_TO_NAME' => '指派至：',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => '合約清單',	
+    'LBL_LIST_FORM_TITLE' => '合約清單',
     'LBL_LIST_CONTRACT_NAME' => '合約名稱',
     'LBL_LIST_ACCOUNT_NAME' => '帳戶名稱',
     'LBL_LIST_START_DATE' => '開始',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => '名稱',
     'LBL_LIST_CONTRACT_VALUE' => '值',
 
-    'LBL_TYPE'=>'類型',
+    'LBL_TYPE' => '類型',
     'LBL_TYPE_NAME' => '類型名稱',
-    'LBL_CONTRACT_TYPE'=>'類型：',
+    'LBL_CONTRACT_TYPE' => '類型：',
 
     'LBL_CREATED_USER' => '已建立使用者',
     'LBL_MODIFIED_USER' => '已修改使用者',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => '合約集點抽屜',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => '合約紀錄儀表板',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '合約時間軸',
+];

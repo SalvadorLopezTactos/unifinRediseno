@@ -19,6 +19,18 @@ return [
                     [
                         [
                             'view' => [
+                                'type' => 'activity-timeline',
+                                'label' => 'TPL_ACTIVITY_TIMELINE_DASHLET',
+                            ],
+                            'context' => [
+                                'module' => 'Documents',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
                                 'type' => 'dashablerecord',
                                 'module' => 'Documents',
                                 'tabs' => [

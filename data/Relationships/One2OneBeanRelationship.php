@@ -16,14 +16,13 @@
  */
 class One2OneBeanRelationship extends One2MBeanRelationship
 {
-
     /**
      * @param  $lhs SugarBean left side bean to add to the relationship.
      * @param  $rhs SugarBean right side bean to add to the relationship.
      * @param  $additionalFields key=>value pairs of fields to save on the relationship
      * @return boolean true if successful
      */
-    public function add($lhs, $rhs, $additionalFields = array())
+    public function add($lhs, $rhs, $additionalFields = [])
     {
         $success = true;
         $lhsLinkName = $this->lhsLink;
@@ -44,14 +43,16 @@ class One2OneBeanRelationship extends One2MBeanRelationship
     protected function updateLinks($lhs, $lhsLinkName, $rhs, $rhsLinkName)
     {
         //RHS and LHS only ever have one bean
-        if (isset($lhs->$lhsLinkName))
-            $lhs->$lhsLinkName->beans = array($rhs->id => $rhs);
+        if (isset($lhs->$lhsLinkName)) {
+            $lhs->$lhsLinkName->beans = [$rhs->id => $rhs];
+        }
 
-        if (isset($rhs->$rhsLinkName))
-            $rhs->$rhsLinkName->beans = array($lhs->id => $lhs);
+        if (isset($rhs->$rhsLinkName)) {
+            $rhs->$rhsLinkName->beans = [$lhs->id => $lhs];
+        }
     }
 
-    public function getJoin($link, $params = array(), $return_array = false)
+    public function getJoin($link, $params = [], $return_array = false)
     {
         $linkIsLHS = $link->getSide() == REL_LHS;
         $startingTable = (empty($params['left_join_table_alias']) ? $this->def['lhs_table'] : $params['left_join_table_alias']);
@@ -62,14 +63,13 @@ class One2OneBeanRelationship extends One2MBeanRelationship
         $targetTable = $linkIsLHS ? $this->def['rhs_table'] : $this->def['lhs_table'];
         $targetTableWithAlias = $targetTable;
         $targetKey = $linkIsLHS ? $this->def['rhs_key'] : $this->def['lhs_key'];
-        $join_type= $params['join_type'] ?? ' INNER JOIN ';
+        $join_type = $params['join_type'] ?? ' INNER JOIN ';
 
         $join = '';
 
         //Set up any table aliases required
-        if ( ! empty($params['join_table_alias']))
-        {
-            $targetTableWithAlias = $targetTable . " ". $params['join_table_alias'];
+        if (!empty($params['join_table_alias'])) {
+            $targetTableWithAlias = $targetTable . ' ' . $params['join_table_alias'];
             $targetTable = $params['join_table_alias'];
         }
 
@@ -77,19 +77,19 @@ class One2OneBeanRelationship extends One2MBeanRelationship
 
         //join the related module's table
         $join .= "$join_type $targetTableWithAlias ON $targetTable.$targetKey=$startingTable.$startingKey"
-               . " AND $targetTable.deleted=$deleted\n"
-        //Next add any role filters
-               . $this->getRoleWhere();
+            . " AND $targetTable.deleted=$deleted\n"
+            //Next add any role filters
+            . $this->getRoleWhere();
 
-        if($return_array){
-            return array(
+        if ($return_array) {
+            return [
                 'join' => $join,
                 'type' => $this->type,
                 'rel_key' => $targetKey,
-                'join_tables' => array($targetTable),
-                'where' => "",
+                'join_tables' => [$targetTable],
+                'where' => '',
                 'select' => "$targetTable.id",
-            );
+            ];
         }
         return $join;
     }
@@ -125,12 +125,12 @@ class One2OneBeanRelationship extends One2MBeanRelationship
         $targetKey = $linkIsLHS ? $this->def['rhs_key'] : $this->def['lhs_key'];
         $targetModule = $linkIsLHS ? $this->def['rhs_module'] : $this->def['lhs_module'];
 
-        $join_type= $options['joinType'] ?? 'INNER';
+        $join_type = $options['joinType'] ?? 'INNER';
 
-        $joinParams = array(
+        $joinParams = [
             'joinType' => $join_type,
             'bean' => BeanFactory::getDefinition($targetModule),
-        );
+        ];
         $jta = $targetTable;
         if (!empty($options['joinTableAlias'])) {
             $jta = $joinParams['alias'] = $options['joinTableAlias'];
@@ -138,7 +138,7 @@ class One2OneBeanRelationship extends One2MBeanRelationship
 
         $join = $sugar_query->joinTable($targetTable, $joinParams);
         $join->on()->equalsField("{$startingTable}.{$startingKey}", "{$jta}.{$targetKey}")
-            ->equals("{$jta}.deleted", "0");
+            ->equals("{$jta}.deleted", '0');
 
 
         if (empty($options['ignoreRole'])) {

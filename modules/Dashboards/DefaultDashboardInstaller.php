@@ -52,6 +52,7 @@ class DefaultDashboardInstaller
      */
     public function buildDashboardFromFile(string $dashboardFile, string $module, string $layout)
     {
+        $id = null;
         $dashboardContents = $this->getFileContents($dashboardFile);
         if (!$dashboardContents) {
             return false;
@@ -75,8 +76,13 @@ class DefaultDashboardInstaller
             'view_name' => $module !== 'Home' ? $layout : 'home',
             'metadata' => json_encode($dashboardContents['metadata']),
             'default_dashboard' => true,
+            'is_template' => isset($dashboardContents['is_template']) ? $dashboardContents['is_template'] : false,
             'team_id' => $this->globalTeamId,
         ];
+
+        if (isset($dashboardContents['assigned_user_id'])) {
+            $dashboardProperties['assigned_user_id'] = $dashboardContents['assigned_user_id'];
+        }
 
         // set up preset ID if necessary
         if (isset($dashboardContents['id'])) {
@@ -114,10 +120,10 @@ class DefaultDashboardInstaller
         }
 
         if (!empty($metadata['components'])) {
-            for ($i = 0; $i < (is_countable($metadata['components']) ? count($metadata['components']) : 0); $i++) {
+            for ($i = 0; $i < safeCount($metadata['components']); $i++) {
                 if (!empty($metadata['components'][$i]['rows'])) {
-                    for ($j = 0; $j < (is_countable($metadata['components'][$i]['rows']) ? count($metadata['components'][$i]['rows']) : 0); $j++) {
-                        for ($k = 0; $k < (is_countable($metadata['components'][$i]['rows'][$j]) ? count($metadata['components'][$i]['rows'][$j]) : 0); $k++) {
+                    for ($j = 0; $j < safeCount($metadata['components'][$i]['rows']); $j++) {
+                        for ($k = 0; $k < safeCount($metadata['components'][$i]['rows'][$j]); $k++) {
                             if (!empty($metadata['components'][$i]['rows'][$j][$k]['view'])) {
                                 $view = &$metadata['components'][$i]['rows'][$j][$k]['view'];
                                 $isSavedReportsChart = !empty($view['type']) && $view['type'] == 'saved-reports-chart';
@@ -136,7 +142,7 @@ class DefaultDashboardInstaller
                                     }
                                     if (empty($view['saved_report_id'])) {
                                         // Remove this dashlet because we can't find the report
-                                        installLog("removed invalid report dashlet: " . print_r($metadata['components'][$i]['rows'][$j][$k], true));
+                                        installLog('removed invalid report dashlet: ' . print_r($metadata['components'][$i]['rows'][$j][$k], true));
                                         unset($metadata['components'][$i]['rows'][$j][$k]);
                                     }
                                 } elseif ($isSavedReportsChart &&
@@ -163,7 +169,7 @@ class DefaultDashboardInstaller
      */
     public function getSubDirs($dir)
     {
-        return glob($dir . '/*' , GLOB_ONLYDIR);
+        return glob($dir . '/*', GLOB_ONLYDIR);
     }
 
     /**

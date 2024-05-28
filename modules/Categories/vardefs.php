@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['Category'] = array(
+$dictionary['Category'] = [
     'comment' => 'Category module',
     'table' => 'categories',
     'audited' => false,
@@ -20,41 +20,41 @@ $dictionary['Category'] = array(
     'unified_search' => true,
     'full_text_search' => false,
     'unified_search_default_enabled' => true,
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
             'required' => true,
-        ),
-        'root' => array(
+        ],
+        'root' => [
             'name' => 'root',
             'type' => 'id',
             'comment' => 'Root ID',
             'isnull' => true,
             'required' => false,
-        ),
-        'lft' => array(
+        ],
+        'lft' => [
             'name' => 'lft',
             'type' => 'int',
             'comment' => 'Left node index',
             'isnull' => false,
             'required' => true,
-        ),
-        'rgt' => array(
+        ],
+        'rgt' => [
             'name' => 'rgt',
             'type' => 'int',
             'comment' => 'Right node index',
             'isnull' => false,
             'required' => true,
-        ),
-        'lvl' => array(
+        ],
+        'lvl' => [
             'name' => 'lvl',
             'type' => 'int',
             'comment' => 'Node level',
             'isnull' => false,
             'required' => true,
-        ),
-        'name' => array(
+        ],
+        'name' => [
             'name' => 'name',
             'vname' => 'LBL_NAME',
             'type' => 'name',
@@ -62,8 +62,8 @@ $dictionary['Category'] = array(
             'len' => '255',
             'comment' => 'Category name',
             'required' => true,
-        ),
-        'is_external' => array(
+        ],
+        'is_external' => [
             'name' => 'is_external',
             'vname' => 'LBL_IS_EXTERNAL',
             'type' => 'bool',
@@ -71,25 +71,25 @@ $dictionary['Category'] = array(
             'comment' => 'External category flag',
             'default' => 0,
             'duplicate_on_record_copy' => 'no',
-        ),
-    ),
-    'relationships' => array(),
-    'indices' => array(),
-    'duplicate_check' => array(
+        ],
+    ],
+    'relationships' => [],
+    'indices' => [],
+    'duplicate_check' => [
         'enabled' => false,
-    ),
-    'uses' => array(
+    ],
+    'uses' => [
         'basic',
         'external_source',
-    ),
-    'ignore_templates' => array(
+    ],
+    'ignore_templates' => [
         'taggable',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'Categories',
     ],
-);
+];
 
 VardefManager::createVardef(
     'Categories',

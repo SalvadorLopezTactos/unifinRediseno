@@ -14,7 +14,7 @@
 class LeadsVarDefHandler extends VarDefHandler
 {
     /**
-     * Overriden to filter legacy pre-5.1 calls and meetings 
+     * Overriden to filter legacy pre-5.1 calls and meetings
      * @see VarDefHandler::get_vardef_array()
      */
     public function get_vardef_array(
@@ -25,6 +25,7 @@ class LeadsVarDefHandler extends VarDefHandler
         $visible_only = false,
         $mlink = true
     ) {
+
         $options_array = parent::get_vardef_array(
             $use_singular,
             $remove_dups,
@@ -33,8 +34,9 @@ class LeadsVarDefHandler extends VarDefHandler
             $visible_only,
             $mlink
         );
-        if ($this->meta_array_name == 'rel_filter')
+        if ($this->meta_array_name == 'rel_filter') {
             unset($options_array['calls_parent'], $options_array['meetings_parent']);
+        }
         return $options_array;
     }
 }

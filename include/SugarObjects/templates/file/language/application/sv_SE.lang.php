@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Marknad',
-    'Knowledge Base' => 'Kunskapsbas',
-    'Sales' => 'Säljsida',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Marknadsföringsmaterial',
-    'Product Brochures' => 'Produktbroschyrer',
-    'FAQ' => 'Frågor och svar',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Marknadsföring',
+        'Knowledge Base' => 'Kunskapsbas',
+        'Sales' => 'Försäljning',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Aktiv',
-    'Draft' => 'Utkast',
-    'FAQ' => 'Frågor och svar',
-    'Expired' => 'Utgången',
-    'Under Review' => 'Under granskning',
-    'Pending' => 'Avvaktar',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Marknadsföringsmaterial',
+        'Product Brochures' => 'Produktbroschyrer',
+        'FAQ' => 'Frågor och svar',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Aktiv',
+        'Draft' => 'Utkast',
+        'FAQ' => 'Frågor och svar',
+        'Expired' => 'Utgången',
+        'Under Review' => 'Under granskning',
+        'Pending' => 'Avvaktar',
+    ],
+];

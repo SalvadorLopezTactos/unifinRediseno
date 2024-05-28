@@ -131,7 +131,7 @@ class CreatePayload
      * @param array $arguments
      * @return array
      */
-    public function getPayload(SugarBean $bean, string $event, array $arguments) : array
+    public function getPayload(SugarBean $bean, string $event, array $arguments): array
     {
         global $current_user;
 
@@ -139,7 +139,7 @@ class CreatePayload
         $sfh = new SugarFieldHandler();
 
         $result = [];
-        $result['bean'] =  get_class($bean);
+        $result['bean'] = get_class($bean);
 
         if (isset($bean->id)) {
             $data['id'] = $bean->id;
@@ -155,8 +155,8 @@ class CreatePayload
             foreach ($fieldList as $fieldName => $properties) {
                 $fieldType = !empty($properties['custom_type']) ? $properties['custom_type'] : $properties['type'];
                 $field = $sfh->getSugarField($fieldType);
-                if ('link' !== $fieldType && !empty($field) && (isset($bean->$fieldName)  || 'relate' === $fieldType)) {
-                    $field->apiFormatField($data, $bean, array(), $fieldName, $properties, array(), $service);
+                if ('link' !== $fieldType && !empty($field) && (isset($bean->$fieldName) || 'relate' === $fieldType)) {
+                    $field->apiFormatField($data, $bean, [], $fieldName, $properties, [], $service);
                 }
             }
         }

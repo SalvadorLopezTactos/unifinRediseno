@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$vardefs = array(
-    'fields' => array(
-        'following' => array(
+$vardefs = [
+    'fields' => [
+        'following' => [
             'massupdate' => false,
             'name' => 'following',
             'vname' => 'LBL_FOLLOWING',
@@ -23,34 +23,33 @@ $vardefs = array(
             'link' => 'following_link',
             'rname' => 'id',
             'rname_exists' => true,
-        ),
-        'following_link' => array(
+        ],
+        'following_link' => [
             'name' => 'following_link',
             'type' => 'link',
-            'relationship' => strtolower($module).'_following',
+            'relationship' => strtolower($module) . '_following',
             'source' => 'non-db',
             'vname' => 'LBL_FOLLOWING',
             'reportable' => false,
-        ),
-    ),
-    'relationships' => array(
-        strtolower($module).'_following' => array(
+        ],
+    ],
+    'relationships' => [
+        strtolower($module) . '_following' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
             'rhs_module' => $module,
             'rhs_table' => $table_name,
             'rhs_key' => 'id',
-            'relationship_type'=>'user-based',
-            'join_table'=> 'subscriptions',
+            'relationship_type' => 'user-based',
+            'join_table' => 'subscriptions',
             'join_key_lhs' => 'created_by',
             'join_key_rhs' => 'parent_id',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => $module,
-            'user_field'=>'created_by',
-        ),
-    ),
-    'indices' => array(
-    ),
-);
-
+            'user_field' => 'created_by',
+        ],
+    ],
+    'indices' => [
+    ],
+];

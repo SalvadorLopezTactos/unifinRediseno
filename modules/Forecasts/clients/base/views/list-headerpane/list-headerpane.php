@@ -10,13 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Forecasts']['base']['view']['list-headerpane'] = array(
-    'tree' => array(
-        array(
+$viewdefs['Forecasts']['base']['view']['list-headerpane'] = [
+    'tree' => [
+        [
             'type' => 'reportingUsers',
-            'acl_action' => 'is_manager'
-        )
-    ),
+            'acl_action' => 'is_manager',
+        ],
+    ],
     'timeperiod' => [
         [
             'name' => 'selectedTimePeriod',
@@ -31,23 +31,23 @@ $viewdefs['Forecasts']['base']['view']['list-headerpane'] = array(
             'enabled' => true,
         ],
     ],
-    'header-datapoints' => array(
-        array(
+    'header-datapoints' => [
+        [
             'name' => 'likely_case',
             'label' => 'LBL_COMMITMENT',
             'type' => 'header-datapoint',
             'click_to_edit' => false,
-        ),
-        array(
+        ],
+        [
             'name' => 'quota',
             'label' => 'LBL_QUOTA',
             'type' => 'header-quotapoint',
-        ),
-    ),
-    'buttons' => array(
-        array(
+        ],
+    ],
+    'buttons' => [
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

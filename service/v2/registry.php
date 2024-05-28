@@ -1,5 +1,8 @@
 <?php
-if(!defined('sugarEntry'))define('sugarEntry', true);
+
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,35 +18,39 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
  * This class is responsible for providing all the registration of all the functions and complex types
  *
  */
-class registry {
-
+class registry
+{
     use SoapLogTrait;
-	protected $serviceClass = null;
-	
-	/**
-	 * Constructor.
-	 *
-	 * @param Class - $serviceClass
-	 */
-	public function __construct($serviceClass) {
-		$this->serviceClass = $serviceClass;
-	} // fn
-			
-	/**
-	 * It registers all the functions and types by doign a call back method on service object
-	 *
-	 */
-	public function register() {
-		$this->registerFunction();
-	}
-	
-	/**
-	 * This mehtod registers all the functions on the service class
-	 *
-	 */
-	protected function registerFunction() {
-		// START OF REGISTER FUNCTIONS
-		
+
+    protected $serviceClass = null;
+
+    /**
+     * Constructor.
+     *
+     * @param Class - $serviceClass
+     */
+    public function __construct($serviceClass)
+    {
+        $this->serviceClass = $serviceClass;
+    } // fn
+
+    /**
+     * It registers all the functions and types by doign a call back method on service object
+     *
+     */
+    public function register()
+    {
+        $this->registerFunction();
+    }
+
+    /**
+     * This mehtod registers all the functions on the service class
+     *
+     */
+    protected function registerFunction()
+    {
+        // START OF REGISTER FUNCTIONS
+
         $this->getLogger()->info('Begin: registry->registerFunction');
         $this->serviceClass->getServer()->addFunction([
             'login',
@@ -71,9 +78,9 @@ class registry {
             'get_entries_count',
             'get_report_entries',
         ]);
-    		
+
         $this->getLogger()->info('END: registry->registerFunction');
-	        
-		// END OF REGISTER FUNCTIONS
-	} // fn
+
+        // END OF REGISTER FUNCTIONS
+    } // fn
 } // clazz

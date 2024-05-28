@@ -13,12 +13,12 @@
 global $sugar_version, $js_custom_version;
 
 
-if(empty($_SESSION['setup_db_host_name'])){
-      $_SESSION['setup_db_host_name'] = $sugar_config['db_host_name'] ?? $_SERVER['SERVER_NAME'];
+if (empty($_SESSION['setup_db_host_name'])) {
+    $_SESSION['setup_db_host_name'] = $sugar_config['db_host_name'] ?? $_SERVER['SERVER_NAME'];
 }
 
-if( !isset( $install_script ) || !$install_script ){
-	die($mod_strings['ERR_NO_DIRECT_SCRIPT']);
+if (!isset($install_script) || !$install_script) {
+    die($mod_strings['ERR_NO_DIRECT_SCRIPT']);
 }
 
 
@@ -27,13 +27,13 @@ $createDbCheckbox = '';
 $createDb = (!empty($_SESSION['setup_db_create_database'])) ? 'checked="checked"' : '';
 $dropCreate = (!empty($_SESSION['setup_db_drop_tables'])) ? 'checked="checked"' : '';
 $instanceName = '';
-if (isset($_SESSION['setup_db_host_instance']) && !empty($_SESSION['setup_db_host_instance'])){
-	$instanceName = $_SESSION['setup_db_host_instance'];
+if (isset($_SESSION['setup_db_host_instance']) && !empty($_SESSION['setup_db_host_instance'])) {
+    $instanceName = $_SESSION['setup_db_host_instance'];
 }
 
-$setupDbPortNum ='';
-if (isset($_SESSION['setup_db_port_num']) && !empty($_SESSION['setup_db_port_num'])){
-	$setupDbPortNum = $_SESSION['setup_db_port_num'];
+$setupDbPortNum = '';
+if (isset($_SESSION['setup_db_port_num']) && !empty($_SESSION['setup_db_port_num'])) {
+    $setupDbPortNum = $_SESSION['setup_db_port_num'];
 }
 
 $db = getInstallDbInstance();
@@ -44,7 +44,7 @@ $db = getInstallDbInstance();
 $langHeader = get_language_header();
 $versionToken = getVersionedPath(null);
 
-$out =<<<EOQ
+$out = <<<EOQ
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html {$langHeader}>
 <head>
@@ -70,7 +70,7 @@ $out =<<<EOQ
 EOQ;
 $out .= '<body onload="document.getElementById(\'button_next2\').focus();">';
 
-$out2 =<<<EOQ2
+$out2 = <<<EOQ2
 <form action="install.php" method="post" name="setConfig" id="form">
 <input type='hidden' name='setup_db_drop_tables' id='setup_db_drop_tables' value=''>
 <input type="hidden" id="hidden_goto" name="goto" value="{$mod_strings['LBL_BACK']}" />
@@ -104,7 +104,7 @@ if (!empty($si_errors) && sizeof($db_errors) > 0) {
     $out2 .= '<div id="errorMsgs" style="display:none"></div>';
 }
 
-$out2 .=<<<EOQ2
+$out2 .= <<<EOQ2
 
 <div class="required">{$mod_strings['LBL_REQUIRED']}</div>
 <table width="100%" cellpadding="0" cellpadding="0" border="0" class="StyleDottedHr">
@@ -113,29 +113,29 @@ EOQ2;
 
 $config_params = $db->installConfig();
 $form = '';
-foreach($config_params as $group => $gdata) {
+foreach ($config_params as $group => $gdata) {
     $form .= "<tr><td colspan=\"3\" align=\"left\">{$mod_strings[$group]}</td></tr>\n";
-    foreach($gdata as $name => $value) {
-        if(!empty($value)) {
-            $form .= "<tr>";
-            if(!empty($value['required'])) {
-               $form .= "<td><span class=\"required\">*</span></td>\n";
+    foreach ($gdata as $name => $value) {
+        if (!empty($value)) {
+            $form .= '<tr>';
+            if (!empty($value['required'])) {
+                $form .= "<td><span class=\"required\">*</span></td>\n";
             } else {
                 $form .= "<td>&nbsp;</td>\n";
             }
-            if(!empty($_SESSION[$name])) {
+            if (!empty($_SESSION[$name])) {
                 $sessval = $_SESSION[$name];
             } else {
                 $sessval = '';
             }
-            if(!empty($value["type"])) {
-                $type = $value["type"];
+            if (!empty($value['type'])) {
+                $type = $value['type'];
             } else {
                 $type = '';
             }
 
             $form .= <<<FORM
-            <td nowrap><b>{$mod_strings[$value["label"]]}</b></td>
+            <td nowrap><b>{$mod_strings[$value['label']]}</b></td>
             <td align="left">
 FORM;
             //if the type is password, set a hidden field to capture the value.  This is so that we can properly encode special characters, which is a limitation with password fields
@@ -156,11 +156,9 @@ HTML;
             }
 
 
-
             $form .= <<<FORM
             </td></tr>
 FORM;
-
         } else {
             $nameHtml = htmlspecialchars($name);
             $form .= <<<HTML
@@ -173,23 +171,32 @@ HTML;
 $out2 .= $form;
 
 //if we are installing in custom mode, include the following html
-if($db->supports("create_user")){
-// create / set db user dropdown
-$auto_select = '';$provide_select ='';$create_select = '';$same_select = '';
-if(isset($_SESSION['dbUSRData'])){
-    if($_SESSION['dbUSRData']=='provide') {$provide_select ='selected';}
-if(isset($_SESSION['install_type'])  && !empty($_SESSION['install_type'])  && strtolower($_SESSION['install_type'])=='custom'){
-    if($_SESSION['dbUSRData']=='create')  {$create_select ='selected';}
-}
-    if($_SESSION['dbUSRData']=='same')  {$same_select ='selected';}
-}else{
-    $same_select ='selected';
-}
-$dbUSRDD   = "<select name='dbUSRData' id='dbUSRData' onchange='toggleDBUser();'>";
-$dbUSRDD  .= "<option value='provide' $provide_select>".$mod_strings['LBL_DBCONFIG_PROVIDE_DD']."</option>";
-$dbUSRDD  .= "<option value='create' $create_select>".$mod_strings['LBL_DBCONFIG_CREATE_DD']."</option>";
-$dbUSRDD  .= "<option value='same' $same_select>".$mod_strings['LBL_DBCONFIG_SAME_DD']."</option>";
-$dbUSRDD  .= "</select><br>&nbsp;";
+if ($db->supports('create_user')) {
+    // create / set db user dropdown
+    $auto_select = '';
+    $provide_select = '';
+    $create_select = '';
+    $same_select = '';
+    if (isset($_SESSION['dbUSRData'])) {
+        if ($_SESSION['dbUSRData'] == 'provide') {
+            $provide_select = 'selected';
+        }
+        if (isset($_SESSION['install_type']) && !empty($_SESSION['install_type']) && strtolower($_SESSION['install_type']) == 'custom') {
+            if ($_SESSION['dbUSRData'] == 'create') {
+                $create_select = 'selected';
+            }
+        }
+        if ($_SESSION['dbUSRData'] == 'same') {
+            $same_select = 'selected';
+        }
+    } else {
+        $same_select = 'selected';
+    }
+    $dbUSRDD = "<select name='dbUSRData' id='dbUSRData' onchange='toggleDBUser();'>";
+    $dbUSRDD .= "<option value='provide' $provide_select>" . $mod_strings['LBL_DBCONFIG_PROVIDE_DD'] . '</option>';
+    $dbUSRDD .= "<option value='create' $create_select>" . $mod_strings['LBL_DBCONFIG_CREATE_DD'] . '</option>';
+    $dbUSRDD .= "<option value='same' $same_select>" . $mod_strings['LBL_DBCONFIG_SAME_DD'] . '</option>';
+    $dbUSRDD .= '</select><br>&nbsp;';
 
 
     $setup_db_sugarsales_password = urldecode($_SESSION['setup_db_sugarsales_password']);
@@ -200,7 +207,7 @@ $dbUSRDD  .= "</select><br>&nbsp;";
     $setup_db_sugarsales_password_retype = urldecode($_SESSION['setup_db_sugarsales_password_retype']);
     $setup_db_sugarsales_password_retype_html = htmlspecialchars($setup_db_sugarsales_password_retype);
 
-$out2 .=<<<EOQ2
+    $out2 .= <<<EOQ2
 
 <table width="100%" cellpadding="0" cellpadding="0" border="0" class="StyleDottedHr">
 <tr><td colspan="3" align="left"><br>{$mod_strings['LBL_DBCONFIG_SECURITY']}</td></tr>
@@ -234,11 +241,11 @@ $out2 .=<<<EOQ2
 EOQ2;
 }
 
-$demoDD = "<select name='demoData' id='demoData'><option value='no' >".$mod_strings['LBL_NO']."</option><option value='yes'>".$mod_strings['LBL_YES']."</option>";
-$demoDD .= "</select><br>&nbsp;";
+$demoDD = "<select name='demoData' id='demoData'><option value='no' >" . $mod_strings['LBL_NO'] . "</option><option value='yes'>" . $mod_strings['LBL_YES'] . '</option>';
+$demoDD .= '</select><br>&nbsp;';
 
 
-$out3 =<<<EOQ3
+$out3 = <<<EOQ3
 <table width="100%" cellpadding="0" cellpadding="0" border="0" class="StyleDottedHr">
 <tr><th colspan="3" align="left">{$mod_strings['LBL_DBCONF_DEMO_DATA_TITLE']}</th></tr>
 <tr>
@@ -258,9 +265,9 @@ $GLOBALS['sugar_config']['languages'] = ['en_us' => 'English (US)'];
 $app_list_strings = return_app_list_strings_language($GLOBALS['sugar_config']['default_language']);
 $ftsTypeDropdown = "<select name='setup_fts_type' id='setup_fts_type'>";
 $ftsTypeDropdown .= get_select_options_with_id($app_list_strings['fts_type'], '');
-$ftsTypeDropdown .= "</select>";
+$ftsTypeDropdown .= '</select>';
 
-$outFTS =<<<EOQ3
+$outFTS = <<<EOQ3
 <table width="100%" cellpadding="0" cellpadding="0" border="0" class="StyleDottedHr">
 <tr><th colspan="3" align="left">{$mod_strings['LBL_FTS_TABLE_TITLE']}</th></tr>
 <tr><td colspan='3'>{$mod_strings['LBL_FTS_HELP']}</td></tr>
@@ -289,7 +296,7 @@ $outFTS =<<<EOQ3
 EOQ3;
 
 
-$out4 =<<<EOQ4
+$out4 = <<<EOQ4
 </td>
 </tr>
 <tr>
@@ -436,7 +443,7 @@ $out4 .= <<<FTSTEST
 FTSTEST;
 
 $out_dd = 'postData += "&demoData="+document.setConfig.demoData.value;';
-$out5 =<<<EOQ5
+$out5 = <<<EOQ5
                 postData += "&to_pdf=1&sugar_body_only=1";
 
                 //if this is a call already in progress, then just return
@@ -504,10 +511,10 @@ function confirm_drop_tables(yes_no){
 EOQ5;
 
 
-$sslDD = "<select name='setup_db_ssl_is_enabled' id='setup_db_ssl_is_enabled'><option value='no' >".$mod_strings['LBL_NO']."</option><option value='yes' ".(!empty($_SESSION['setup_db_options']['ssl'])?'selected':'').">".$mod_strings['LBL_YES']."</option>";
-$sslDD .= "</select><br>&nbsp;";
+$sslDD = "<select name='setup_db_ssl_is_enabled' id='setup_db_ssl_is_enabled'><option value='no' >" . $mod_strings['LBL_NO'] . "</option><option value='yes' " . (!empty($_SESSION['setup_db_options']['ssl']) ? 'selected' : '') . '>' . $mod_strings['LBL_YES'] . '</option>';
+$sslDD .= '</select><br>&nbsp;';
 
-$outSSL=<<<SSL
+$outSSL = <<<SSL
 <table width="100%" cellpadding="0" cellpadding="0" border="0" class="StyleDottedHr">
 <tr><td width='1%'>&nbsp;</td><td width='60%'><div id='sugarDBSSL'><b>{$mod_strings['LBL_DBCONF_SSL_ENABLED']}</b></div>&nbsp;</td><td width='35%'>$sslDD</td></tr>
 </table>
@@ -531,7 +538,7 @@ $sugar_smarty->assign('MOD', $mod_strings);
 echo $out;
 echo $out2;
 
-if ($db->supports("ssl")) {
+if ($db->supports('ssl')) {
     echo $outSSL;
 }
 

@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -63,11 +64,11 @@ $viewdefs['Opportunities']['base']['view']['recorddashlet'] = [
             'header' => true,
             'fields' => [
                 [
-                    'name'          => 'picture',
-                    'type'          => 'avatar',
-                    'size'          => 'large',
+                    'name' => 'picture',
+                    'type' => 'avatar',
+                    'size' => 'large',
                     'dismiss_label' => true,
-                    'readonly'      => true,
+                    'readonly' => true,
                 ],
                 'name',
             ],
@@ -157,23 +158,21 @@ $viewdefs['Opportunities']['base']['view']['recorddashlet'] = [
                     'type' => 'enum-cascade',
                     'disable_field' => 'closed_won_revenue_line_items',
                     'disable_positive' => true,
-                    'related_fields' =>
-                        [
-                            0 => 'probability',
-                            1 => 'closed_won_revenue_line_items',
-                        ],
+                    'related_fields' => [
+                        0 => 'probability',
+                        1 => 'closed_won_revenue_line_items',
+                    ],
                     'span' => 6,
                 ],
                 [
                     'name' => 'lost',
                     'comment' => 'Rollup of lost RLIs on the Opportunity',
                     'readonly' => true,
-                    'related_fields' =>
-                        [
-                            0 => 'currency_id',
-                            1 => 'base_rate',
-                        ],
-                        'label' => 'LBL_LOST',
+                    'related_fields' => [
+                        0 => 'currency_id',
+                        1 => 'base_rate',
+                    ],
+                    'label' => 'LBL_LOST',
                 ],
             ],
         ],

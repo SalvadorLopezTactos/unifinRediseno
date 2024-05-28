@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Za ovaj je potpis potrebno ime.',
     'LBL_DEFAULT_SIGNATURE' => 'Zadano',
     'LBL_MODULE_NAME' => 'Potpisi e-pošte',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'Upotrijebiti potpis?',
     'LBL_SIGNATURE_PREPEND' => 'Potpis iznad odgovora?',
     'LBL_SIGNATURES' => 'Potpisi',
-);
+];

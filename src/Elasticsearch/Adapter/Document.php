@@ -26,6 +26,7 @@ class Document extends BaseDocument
      * @var string
      */
     protected $type = '';
+
     /**
      * Check whether the document has data
      * @return boolean
@@ -60,7 +61,7 @@ class Document extends BaseDocument
      * get type
      * @return string
      */
-    public function getType() : string
+    public function getType(): string
     {
         return $this->type;
     }
@@ -72,7 +73,7 @@ class Document extends BaseDocument
      *
      * @return $this
      */
-    public function setType(string $type) : self
+    public function setType(string $type): self
     {
         $this->type = $type;
         return $this;

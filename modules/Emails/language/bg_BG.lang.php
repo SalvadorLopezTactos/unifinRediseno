@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'Препращане:',
     'LBL_RE' => 'Re:',
     'LBL_BUTTON_CREATE' => 'Създай',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Изберете изходяща електронна поща',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Изберете електронен подпис на изпращача',
     'LBL_SIGNATURE' => 'Подпис',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Подпис по подразбиране",
-    "LBL_SHOW_MORE_SIGNATURES" => "Допълнителни електронни подписи....",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Подпис по подразбиране',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Допълнителни електронни подписи....',
     'LBL_SUBJECT' => 'Относно:',
     'LBL_TEMPLATE' => 'Шаблон',
     'LBL_TEXT_BODY' => 'Текст',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Изпратено в',
     'LBL_LIST_TO_ADDR' => 'До',
     'LBL_LIST_TYPE' => 'Тип',
-    "LBL_SELECTED_RECIPIENTS" => "Избраните получатели",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Допълнителни получатели...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Адресна книга",
+    'LBL_SELECTED_RECIPIENTS' => 'Избраните получатели',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Допълнителни получатели...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Адресна книга',
     'NTC_REMOVE_INVITEE' => 'Сигурни ли сте, че искате да премахнете този получател от писмото?',
     'WARNING_SETTINGS_NOT_CONF' => 'Настройките на вашата електронна поща не са конфигурирани правилно за изпращане на електронно писмо. SMTP сървър ' .
         'трябва да бъде конфигуриран в <a href="#bwc/index.php?module=EmailMan&action=config">Настройки на електронна поща</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Зареждането е неуспешно: Беше открита неправилна или неизползваема стойност за "upload_tmp_dir" ' .
         'Моля, отстранете грешката в php.ini файла.',
     'LBL_MESSAGE_UID' => 'UID на съобщението',
-    'LBL_OPEN_DRAFT_ALERT' => 'Електронното писмо е чернова. Щракнете върху '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'Електронното писмо е чернова. Щракнете върху ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  за да редактирате.',
     'LBL_EMAIL_BODY' => 'Имейл съобщение',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на имейли',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Електронно табло със запис на имейлите',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Хронология на електронна поща',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'не са посочени получатели',
@@ -473,4 +474,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'Изпрати електронно писмо',
     'LBL_MAILBOX' => 'Входящ профил',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Моля, конфигурирайте акаунт за изходяща електронна поща чрез <a href="#OutboundEmail">Настройки на електронна поща</a>, за да изпращате съобщения по електронна поща.',
-);
+    'LBL_TOO_SHORT' => 'Въведете поне {0} знака...',
+];

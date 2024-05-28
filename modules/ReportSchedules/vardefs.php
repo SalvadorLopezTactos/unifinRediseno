@@ -10,22 +10,22 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['ReportSchedule'] = array(
+$dictionary['ReportSchedule'] = [
     'table' => 'report_schedules',
     'archive' => false,
     'audited' => true,
-    'fields' => array(
-        'user_id' => array(
+    'fields' => [
+        'user_id' => [
             'name' => 'user_id',
             'type' => 'id',
-        ),
-        'report_id' => array(
+        ],
+        'report_id' => [
             'name' => 'report_id',
             'type' => 'id',
             'required' => true,
             'massupdate' => false,
-        ),
-        'report_name' => array(
+        ],
+        'report_name' => [
             'name' => 'report_name',
             'rname' => 'name',
             'id_name' => 'report_id',
@@ -37,26 +37,26 @@ $dictionary['ReportSchedule'] = array(
             'dbType' => 'varchar',
             'link' => 'report',
             'len' => '255',
-            'source'=>'non-db',
+            'source' => 'non-db',
             'required' => true,
             'massupdate' => false,
-        ),
-        'report'=> array (
+        ],
+        'report' => [
             'name' => 'report',
             'type' => 'link',
             'relationship' => 'report_reportschedules',
             'source' => 'non-db',
-            'vname'=> 'LBL_REPORTS',
+            'vname' => 'LBL_REPORTS',
             'massupdate' => false,
-        ),
-        'date_start' => array(
+        ],
+        'date_start' => [
             'name' => 'date_start',
             'vname' => 'LBL_DATE_START',
             'type' => 'datetime',
             'required' => true,
             'audited' => true,
-        ),
-        'time_interval' => array(
+        ],
+        'time_interval' => [
             'name' => 'time_interval',
             'type' => 'enum',
             'dbType' => 'int',
@@ -66,36 +66,36 @@ $dictionary['ReportSchedule'] = array(
             'required' => true,
             'default' => '604800',
             'audited' => true,
-        ),
-        'next_run' => array(
+        ],
+        'next_run' => [
             'name' => 'next_run',
             'type' => 'datetime',
             'vname' => 'LBL_NEXT_RUN',
             'massupdate' => false,
-        ),
-        'active' => array(
+        ],
+        'active' => [
             'name' => 'active',
             'vname' => 'LBL_ACTIVE',
             'type' => 'bool',
             'len' => '1',
             'default' => '1',
             'audited' => true,
-        ),
-        'schedule_type' => array(
+        ],
+        'schedule_type' => [
             'name' => 'schedule_type',
             'type' => 'varchar',
             'len' => 3,
             'vname' => 'LBL_SCHEDULE_TYPE',
             'required' => true,
             'comment' => 'Legacy field. ent for advanced reports, pro for regular reports',
-        ),
-        'users' => array(
+        ],
+        'users' => [
             'name' => 'users',
             'type' => 'link',
             'relationship' => 'reportschedules_users',
             'source' => 'non-db',
             'vname' => 'LBL_USERS',
-        ),
+        ],
         'file_type' => [
             'name' => 'file_type',
             'vname' => 'LBL_FILE_TYPE',
@@ -115,9 +115,9 @@ $dictionary['ReportSchedule'] = array(
             'default' => '',
             'comment' => 'Embed report in email',
         ],
-    ),
-    'relationships' => array(
-        'report_reportschedules' => array (
+    ],
+    'relationships' => [
+        'report_reportschedules' => [
             'lhs_module' => 'Reports',
             'lhs_table' => 'saved_reports',
             'lhs_key' => 'id',
@@ -125,8 +125,8 @@ $dictionary['ReportSchedule'] = array(
             'rhs_table' => 'report_schedules',
             'rhs_key' => 'report_id',
             'relationship_type' => 'one-to-many',
-        ),
-    ),
+        ],
+    ],
     'indices' => [
         [
             'name' => 'idx_del_active',
@@ -138,21 +138,21 @@ $dictionary['ReportSchedule'] = array(
         ],
     ],
 
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'commentlog',
-    ),
-    'acls' => array('SugarACLStatic' => true),
-);
+    ],
+    'acls' => ['SugarACLStatic' => true],
+];
 
 VardefManager::createVardef(
     'ReportSchedules',
     'ReportSchedule',
-    array(
+    [
         'basic',
         'assignable',
         'team_security',
-    )
+    ]
 );
 
 $dictionary['ReportSchedule']['fields']['name']['audited'] = true;

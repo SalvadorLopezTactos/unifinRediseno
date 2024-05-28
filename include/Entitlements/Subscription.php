@@ -32,6 +32,7 @@ class Subscription
     public const SUGAR_SELL_ESSENTIALS_KEY = 'SUGAR_SELL_ESSENTIALS';
     public const SUGAR_SELL_BUNDLE_KEY = 'SUGAR_SELL_BUNDLE';
     public const SUGAR_SELL_PREMIER_BUNDLE_KEY = 'SUGAR_SELL_PREMIER_BUNDLE';
+    public const SUGAR_SELL_PREMIER_KEY = 'SELL_PREMIER';
     public const SUGAR_SELL_ADVANCED_BUNDLE_KEY = 'SUGAR_SELL_ADVANCED_BUNDLE';
     public const SUGAR_SERVE_KEY = 'SUGAR_SERVE';
     public const SUGAR_BASIC_KEY = 'CURRENT';
@@ -56,6 +57,7 @@ class Subscription
      */
     public const MANGO_KEYS = [
         Subscription::SUGAR_SELL_PREMIER_BUNDLE_KEY,
+        Subscription::SUGAR_SELL_PREMIER_KEY,
         Subscription::SUGAR_SELL_ADVANCED_BUNDLE_KEY,
         Subscription::SUGAR_SELL_ESSENTIALS_KEY,
         Subscription::SUGAR_SELL_BUNDLE_KEY,
@@ -71,6 +73,7 @@ class Subscription
         Subscription::SUGAR_SELL_ESSENTIALS_KEY,
         Subscription::SUGAR_SELL_BUNDLE_KEY,
         Subscription::SUGAR_SELL_PREMIER_BUNDLE_KEY,
+        Subscription::SUGAR_SELL_PREMIER_KEY,
         Subscription::SUGAR_SELL_ADVANCED_BUNDLE_KEY,
     ];
 
@@ -82,6 +85,7 @@ class Subscription
         self::SUGAR_SELL_ESSENTIALS_KEY,
         self::SUGAR_SELL_BUNDLE_KEY,
         self::SUGAR_SELL_PREMIER_BUNDLE_KEY,
+        self::SUGAR_SELL_PREMIER_KEY,
         self::SUGAR_SELL_ADVANCED_BUNDLE_KEY,
     ];
 
@@ -105,6 +109,8 @@ class Subscription
         self::SUGAR_DISCOVER_KEY,
         self::SUGAR_MAPS_KEY,
         self::SUGAR_ADVANCEDFORECAST_KEY,
+        // new in 14.0.0
+        self::SUGAR_SELL_PREMIER_KEY,
     ];
 
     /**
@@ -141,6 +147,15 @@ class Subscription
      * visible Non CRM products in user's licese types' list
      */
     public const VISIBLE_NONCRM_PRODUCTS = [
+        Subscription::SUGAR_HINT_KEY,
+        Subscription::SUGAR_MAPS_KEY,
+        Subscription::SUGAR_AUTOMATE_KEY,
+    ];
+
+    /**
+     * bundled producted
+     */
+    public const SELL_PREMIER_INCLUDED_PRODUCTS = [
         Subscription::SUGAR_HINT_KEY,
         Subscription::SUGAR_MAPS_KEY,
         Subscription::SUGAR_AUTOMATE_KEY,
@@ -201,13 +216,13 @@ class Subscription
         if ($decodedData === null) {
             throw new SubscriptionException('Invalid subscription json data');
         }
-        
+
         if (empty($decodedData['subscription'])) {
             return;
         }
 
         foreach ($decodedData['subscription'] as $key => $value) {
-            if ($key === 'addons' && (is_countable($decodedData['subscription'][$key]) ? count($decodedData['subscription'][$key]) : 0) > 0) {
+            if ($key === 'addons' && safeCount($decodedData['subscription'][$key]) > 0) {
                 foreach ($decodedData['subscription'][$key] as $addonId => $addonData) {
                     $this->addons[$addonId] = new Addon($addonId, $addonData);
                 }
@@ -242,7 +257,7 @@ class Subscription
      * ];
      * @return array
      */
-    public function getSubscriptions() : array
+    public function getSubscriptions(): array
     {
         if (!empty($this->subscriptions) || $this->useDefault) {
             return $this->subscriptions;
@@ -253,7 +268,7 @@ class Subscription
         }
 
         if (!empty($this->error)) {
-            $GLOBALS['log']->fatal("there is an error in license server response: " . $this->error);
+            $GLOBALS['log']->fatal('there is an error in license server response: ' . $this->error);
             return [];
         }
 
@@ -272,7 +287,7 @@ class Subscription
      *
      * @return array
      */
-    protected function getSubscriptionFromAddons(array $addons, bool $isTopLevel = true, $expDate = '', $sttDate = '') : array
+    protected function getSubscriptionFromAddons(array $addons, bool $isTopLevel = true, $expDate = '', $sttDate = ''): array
     {
         $subscriptions = [];
         // will skip top level of the subscription
@@ -369,7 +384,7 @@ class Subscription
      * @param array $subscriptions
      * @return array
      */
-    protected function removeZeroQuantityKeys(array $subscriptions) : array
+    protected function removeZeroQuantityKeys(array $subscriptions): array
     {
         // remove 0 quantity keys
         foreach ($subscriptions as $key => $value) {
@@ -380,6 +395,7 @@ class Subscription
 
         return $subscriptions;
     }
+
     /**
      * to get all subscriptions, including expired and not yet started
      *
@@ -391,7 +407,7 @@ class Subscription
      *
      * @return array
      */
-    public function getExpiredSubscriptions() : array
+    public function getExpiredSubscriptions(): array
     {
         if (!empty($this->expiredSubscriptions)) {
             return $this->expiredSubscriptions;
@@ -402,7 +418,7 @@ class Subscription
         }
 
         if (!empty($this->error)) {
-            $GLOBALS['log']->fatal("there is an error in license server response: " . $this->error);
+            $GLOBALS['log']->fatal('there is an error in license server response: ' . $this->error);
             return [];
         }
 
@@ -451,7 +467,7 @@ class Subscription
      * @param bool $getAll to get all subscription keys if it is true
      * need to take care of ENT, PRO, etc
      */
-    public function getSubscriptionKeys(bool $getAll = true) : array
+    public function getSubscriptionKeys(bool $getAll = true): array
     {
         $subscriptions = $this->getSubscriptions();
         if (empty($subscriptions)) {
@@ -480,7 +496,7 @@ class Subscription
      * get all subscription keys
      * @return array
      */
-    public function getAllSubscriptionKeys() : array
+    public function getAllSubscriptionKeys(): array
     {
         return $this->getSubscriptionKeys(true);
     }
@@ -489,17 +505,18 @@ class Subscription
      * get top level subscription keys only
      * @return array
      */
-    public function getTopLevelSubscriptionKeys() : array
+    public function getTopLevelSubscriptionKeys(): array
     {
         return $this->getSubscriptionKeys(false);
     }
+
     /**
      * get subscription(s) for a key
      *
      * @param string $key key to search
      * need to take care of ENT, PRO, etc
      */
-    public function getSubscriptionByKey(?string $key) : array
+    public function getSubscriptionByKey(?string $key): array
     {
         $subscriptions = $this->getSubscriptions();
         if (empty($subscriptions)) {
@@ -526,7 +543,7 @@ class Subscription
      * get current supported addon products,
      * @return array
      */
-    public function getAddonProducts() : array
+    public function getAddonProducts(): array
     {
         return [
             Subscription::SUGAR_SELL_KEY,
@@ -551,7 +568,7 @@ class Subscription
      * check if a key is Mango key
      * @return array
      */
-    public static function isMangoKey(?string $key) : bool
+    public static function isMangoKey(?string $key): bool
     {
         return in_array($key, self::MANGO_KEYS);
     }
@@ -561,7 +578,7 @@ class Subscription
      * @param string|null $key
      * @return bool
      */
-    public static function isBundleKey(?string $key) : bool
+    public static function isBundleKey(?string $key): bool
     {
         return in_array($key, self::BUNDLE_KEYS);
     }
@@ -571,7 +588,7 @@ class Subscription
      * @param string|null $key
      * @return bool
      */
-    public static function isProductKey(?string $key) : bool
+    public static function isProductKey(?string $key): bool
     {
         if (empty($key)) {
             return false;
@@ -586,13 +603,14 @@ class Subscription
      * @param string $key
      * @return string[]
      */
-    public static function getBundledKeys(string $key) : array
+    public static function getBundledKeys(string $key): array
     {
         switch ($key) {
             case (self::SUGAR_SELL_ESSENTIALS_KEY):
             case (self::SUGAR_SELL_BUNDLE_KEY):
             case (self::SUGAR_SELL_PREMIER_BUNDLE_KEY):
             case (self::SUGAR_SELL_ADVANCED_BUNDLE_KEY):
+            case (self::SUGAR_SELL_PREMIER_KEY):
                 return [self::SUGAR_SELL_KEY, $key];
             default:
                 return [];
@@ -604,7 +622,7 @@ class Subscription
      * @param array $licenseTypes license types array
      * @return string
      */
-    public static function getSellKey(array $licenseTypes) : string
+    public static function getSellKey(array $licenseTypes): string
     {
         foreach (Subscription::SELL_KEYS as $key) {
             if (in_array($key, $licenseTypes)) {
@@ -613,17 +631,18 @@ class Subscription
         }
         return '';
     }
+
     /**
      * get default subscription in case of offline, client is not able to download from license server
      * @return array
      */
-    protected function getDefaultSubscription() : array
+    protected function getDefaultSubscription(): array
     {
 
         $expiredDate = $this->getLicenseSettingByKey('license_expire_date', '+12 months');
         if (strtotime($expiredDate) - time() < 0) {
             if (!empty($GLOBALS['log'])) {
-                $GLOBALS['log']->fatal("license was expired at " . $expiredDate);
+                $GLOBALS['log']->fatal('license was expired at ' . $expiredDate);
             }
             return [];
         }
@@ -663,7 +682,7 @@ class Subscription
      * @param array|null $licTypes user's license type
      * @return array
      */
-    public static function getOrderedLicenseTypes(?array $licTypes) : array
+    public static function getOrderedLicenseTypes(?array $licTypes): array
     {
         if (empty($licTypes)) {
             return [];

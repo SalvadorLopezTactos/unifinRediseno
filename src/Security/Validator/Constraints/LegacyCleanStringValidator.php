@@ -28,18 +28,18 @@ class LegacyCleanStringValidator extends ConstraintValidator
      * List of available filter expressions
      * @var array
      */
-    protected $filters = array(
-        "STANDARD"        => '#[^A-Z0-9\-_\.\@]#i',
-        "STANDARDSPACE"   => '#[^A-Z0-9\-_\.\@\ ]#i',
-        "FILE"            => '#[^A-Z0-9\-_\.]#i',
-        "NUMBER"          => '#[^0-9\-]#i',
-        "SQL_COLUMN_LIST" => '#[^A-Z0-9\(\),_\.]#i',
-        "PATH_NO_URL"     => '#://#i',
-        "SAFED_GET"		  => '#[^A-Z0-9\@\=\&\?\.\/\-_~+]#i',
-        "UNIFIED_SEARCH"  => "#[\\x00]#",
-        "AUTO_INCREMENT"  => '#[^0-9\-,\ ]#i',
-        "ALPHANUM"        => '#[^A-Z0-9\-]#i',
-    );
+    protected $filters = [
+        'STANDARD' => '#[^A-Z0-9\-_\.\@]#i',
+        'STANDARDSPACE' => '#[^A-Z0-9\-_\.\@\ ]#i',
+        'FILE' => '#[^A-Z0-9\-_\.]#i',
+        'NUMBER' => '#[^0-9\-]#i',
+        'SQL_COLUMN_LIST' => '#[^A-Z0-9\(\),_\.]#i',
+        'PATH_NO_URL' => '#://#i',
+        'SAFED_GET' => '#[^A-Z0-9\@\=\&\?\.\/\-_~+]#i',
+        'UNIFIED_SEARCH' => '#[\\x00]#',
+        'AUTO_INCREMENT' => '#[^0-9\-,\ ]#i',
+        'ALPHANUM' => '#[^A-Z0-9\-]#i',
+    ];
 
     /**
      * {@inheritdoc}
@@ -47,7 +47,7 @@ class LegacyCleanStringValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof LegacyCleanString) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\LegacyCleanString');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\LegacyCleanString');
         }
 
         if (!array_key_exists($constraint->filter, $this->filters)) {

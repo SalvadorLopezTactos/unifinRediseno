@@ -805,7 +805,11 @@
         this.$('[name=newRow]').css('display', 'table-row');
 
         if (event) {
-            $(event.currentTarget).hide();
+            const addButton = $(event.target).closest('[data-action=addRow]');
+
+            if (addButton.length) {
+                $(addButton).hide();
+            }
         }
 
         this.getFieldElement().select2('open');
@@ -823,22 +827,27 @@
      * @param {Event} event
      */
     _removeRowImmediately: function(event) {
-        var id, participants;
+        const removeButton = $(event.target).closest('[data-action=removeRow]');
 
-        id = $(event.currentTarget).data('id');
+        if (removeButton.length) {
+            let id;
+            let participants;
 
-        if (id) {
-            try {
-                participants = this.getFieldValue();
-                participants.remove(participants.get(id));
-            } catch (e) {
-                app.logger.warn(e);
+            id = $(removeButton).data('id');
+
+            if (id) {
+                try {
+                    participants = this.getFieldValue();
+                    participants.remove(participants.get(id));
+                } catch (e) {
+                    app.logger.warn(e);
+                }
+            } else {
+                this.$('[name=newRow]').hide();
+                this.$('button[data-action=addRow]').show();
+                this.$('.participants-schedule').removeClass('new');
+                this.adjustStartAndEnd();
             }
-        } else {
-            this.$('[name=newRow]').hide();
-            this.$('button[data-action=addRow]').show();
-            this.$('.participants-schedule').removeClass('new');
-            this.adjustStartAndEnd();
         }
     },
 
@@ -849,24 +858,30 @@
      * @param {Event} event
      */
     _previewRowImmediately: function(event) {
-        var data, model, success;
+        const previewButton = $(event.target).closest('[data-action=previewRow]');
 
-        success = _.bind(function(model) {
-            model.module = data.module;
-            app.events.trigger('preview:render', model);
-        }, this);
+        if (previewButton.length) {
+            let data;
+            let model;
+            let success;
 
-        data = $(event.currentTarget).data();
+            success = _.bind(function(model) {
+                model.module = data.module;
+                app.events.trigger('preview:render', model);
+            }, this);
 
-        if (data && data.module && data.id) {
-            model = app.data.createBean(data.module, {id: data.id});
-            model.fetch({
-                showAlerts: true,
-                success: success,
-                params: {
-                    erased_fields: true
-                }
-            });
+            data = $(previewButton).data();
+
+            if (data && data.module && data.id) {
+                model = app.data.createBean(data.module, {id: data.id});
+                model.fetch({
+                    showAlerts: true,
+                    success: success,
+                    params: {
+                        erased_fields: true
+                    }
+                });
+            }
         }
     },
 

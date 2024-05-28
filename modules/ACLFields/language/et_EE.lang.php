@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_DEFAULT' => 'Pole määratud',
     'LBL_READ_WRITE' => 'Lugemine/kirjutamine',
     'LBL_READ_OWNER_WRITE' => 'Lugemine/omaniku kirjutamine',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_READ_SELECTED_TEAMS_WRITE' => 'Lugemine / (omanik ja valitud meeskonnad) kirjutamine',
     'LBL_SELECTED_TEAMS_READ_OWNER_WRITE' => '(Omanik ja valitud meeskonnad) lugemine / omaniku kirjutamine',
     'LBL_SELECTED_TEAMS_READ_WRITE' => '(Omanik ja valitud meeskonnad) lugemine / (omanik ja valitud meeskonnad) kirjutamine',
-);
+];

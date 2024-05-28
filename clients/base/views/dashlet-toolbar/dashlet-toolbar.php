@@ -9,14 +9,14 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs["base"]["view"]["dashlet-toolbar"] = array(
-    "buttons" => array(
-        array(
-            "type" => "dashletaction",
-            "css_class" => "btn btn-invisible dashlet-toggle minify",
-            "icon" => "sicon-chevron-up",
-            "action" => "toggleMinify",
-            "tooltip" => "LBL_DASHLET_TOGGLE",
+$viewdefs['base']['view']['dashlet-toolbar'] = [
+    'buttons' => [
+        [
+            'type' => 'dashletaction',
+            'css_class' => 'btn btn-invisible dashlet-toggle minify',
+            'icon' => 'sicon-chevron-up',
+            'action' => 'toggleMinify',
+            'tooltip' => 'LBL_DASHLET_TOGGLE',
             'disallowed_layouts' => [
                 [
                     'name' => 'omnichannel-dashboard',
@@ -24,33 +24,33 @@ $viewdefs["base"]["view"]["dashlet-toolbar"] = array(
                     'name' => 'portal-preview',
                 ],
             ],
-        ),
-        array(
-            "dropdown_buttons" => array(
-                array(
-                    "type" => "dashletaction",
-                    "action" => "editClicked",
-                    "label" => "LBL_DASHLET_CONFIG_EDIT_LABEL",
-                    "name" => "edit_button",
-                ),
-                array(
-                    "type" => "dashletaction",
-                    "action" => "refreshClicked",
-                    "label" => "LBL_DASHLET_REFRESH_LABEL",
-                    "name" => "refresh_button",
-                ),
-                array(
-                    "type" => "dashletaction",
-                    "action" => "removeClicked",
-                    "label" => "LBL_DASHLET_REMOVE_LABEL",
-                    "name" => "remove_button",
+        ],
+        [
+            'dropdown_buttons' => [
+                [
+                    'type' => 'dashletaction',
+                    'action' => 'editClicked',
+                    'label' => 'LBL_DASHLET_CONFIG_EDIT_LABEL',
+                    'name' => 'edit_button',
+                ],
+                [
+                    'type' => 'dashletaction',
+                    'action' => 'refreshClicked',
+                    'label' => 'LBL_DASHLET_REFRESH_LABEL',
+                    'name' => 'refresh_button',
+                ],
+                [
+                    'type' => 'dashletaction',
+                    'action' => 'removeClicked',
+                    'label' => 'LBL_DASHLET_REMOVE_LABEL',
+                    'name' => 'remove_button',
                     'disallowed_layouts' => [
                         [
                             'name' => 'omnichannel-dashboard',
                         ],
                     ],
-                ),
-            )
-        )
-    )
-);
+                ],
+            ],
+        ],
+    ],
+];

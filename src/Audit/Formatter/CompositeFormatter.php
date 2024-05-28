@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Audit\Formatter;
 
 use Sugarcrm\Sugarcrm\Audit\Formatter;
@@ -23,7 +24,7 @@ final class CompositeFormatter implements Formatter
     /**
      * @var Formatter[]
      */
-    private $formatters = array();
+    private $formatters = [];
 
     public function __construct(Formatter ...$formatters)
     {

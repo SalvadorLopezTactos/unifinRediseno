@@ -22,17 +22,17 @@ class TestUpgrader extends UpgradeDriver
      * List of upgrade scripts
      * @var string
      */
-    protected $scripts = array();
+    protected $scripts = [];
 
     public function __construct($admin)
     {
-        $this->context = array(
-            "admin" => $admin->user_name,
-            "log" => "cache/upgrade.log",
-            "source_dir" => realpath(__DIR__."/../../"),
-            'new_source_dir' => realpath(__DIR__."/../../"),
-            "zip" => "UNITTEST",
-        );
+        $this->context = [
+            'admin' => $admin->user_name,
+            'log' => 'cache/upgrade.log',
+            'source_dir' => realpath(__DIR__ . '/../../'),
+            'new_source_dir' => realpath(__DIR__ . '/../../'),
+            'zip' => 'UNITTEST',
+        ];
         parent::__construct();
         $this->init();
         $this->start();
@@ -46,8 +46,8 @@ class TestUpgrader extends UpgradeDriver
 
     public function cleanState()
     {
-        $statefile = $this->cacheDir('upgrades/').self::STATE_FILE;
-        if(file_exists($statefile)) {
+        $statefile = $this->cacheDir('upgrades/') . self::STATE_FILE;
+        if (file_exists($statefile)) {
             unlink($statefile);
         }
     }
@@ -70,7 +70,7 @@ class TestUpgrader extends UpgradeDriver
      */
     public function getScript($stage, $script)
     {
-        if(empty($this->scripts[$stage])) {
+        if (empty($this->scripts[$stage])) {
             $this->scripts[$stage] = $this->getScripts(dirname($script), $stage);
         }
         return $this->scripts[$stage][$script];

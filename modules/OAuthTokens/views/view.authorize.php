@@ -11,12 +11,11 @@
  */
 
 
-
 class OauthTokensViewAuthorize extends SugarView
 {
-	public function display()
+    public function display()
     {
-        if(!SugarOAuthServer::enabled()) {
+        if (!SugarOAuthServer::enabled()) {
             sugar_die($GLOBALS['mod_strings']['LBL_OAUTH_DISABLED']);
         }
         global $current_user;
@@ -30,26 +29,26 @@ class OauthTokensViewAuthorize extends SugarView
         $sugar_smarty->assign('token', htmlspecialchars($requestToken, ENT_COMPAT));
         $sugar_smarty->assign('sid', session_id());
         $token = OAuthToken::load($requestToken);
-        if(empty($token) || empty($token->consumer) || $token->tstate != OAuthToken::REQUEST || empty($token->consumer_obj)) {
+        if (empty($token) || empty($token->consumer) || $token->tstate != OAuthToken::REQUEST || empty($token->consumer_obj)) {
             sugar_die('Invalid token');
         }
 
-        if(empty($_REQUEST['confirm'])) {
+        if (empty($_REQUEST['confirm'])) {
             $sugar_smarty->assign('consumer', sprintf($GLOBALS['mod_strings']['LBL_OAUTH_CONSUMERREQ'], htmlspecialchars($token->consumer_obj->name, ENT_COMPAT)));
             echo $sugar_smarty->fetch('modules/OAuthTokens/tpl/authorize.tpl');
         } else {
             if ($_REQUEST['sid'] != session_id()) {
                 sugar_die('Invalid request');
             }
-            $verify = $token->authorize(array("user" => $current_user->id));
-            if(!empty($token->callback_url)){
-                $redirect_url=$token->callback_url;
-                if(strchr($redirect_url, "?") !== false) {
+            $verify = $token->authorize(['user' => $current_user->id]);
+            if (!empty($token->callback_url)) {
+                $redirect_url = $token->callback_url;
+                if (strchr($redirect_url, '?') !== false) {
                     $redirect_url .= '&';
                 } else {
                     $redirect_url .= '?';
                 }
-                $redirect_url .= "oauth_verifier=".$verify.'&oauth_token=' . $requestToken;
+                $redirect_url .= 'oauth_verifier=' . $verify . '&oauth_token=' . $requestToken;
                 SugarApplication::redirect($redirect_url);
             }
             $sugar_smarty->assign('VERIFY', htmlspecialchars($verify, ENT_COMPAT));
@@ -57,6 +56,4 @@ class OauthTokensViewAuthorize extends SugarView
             echo $sugar_smarty->fetch('modules/OAuthTokens/tpl/authorized.tpl');
         }
     }
-
 }
-

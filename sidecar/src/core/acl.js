@@ -9,7 +9,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const User = require('core/user');
+const User = require('./user');
 
 /**
  * Dictionary that maps actions to permissions.
@@ -162,7 +162,7 @@ let Acl = {
      * action on any model.
      *
      * ```
-     * const Acl = require('core/acl');
+     * const Acl = require('./acl');
      *
      * // Check whether user has `admin` access for any module.
      * Acl.hasAccessToAny('admin');

@@ -26,7 +26,7 @@ use Google\Service\CertificateManager\Operation;
  * Typical usage is:
  *  <code>
  *   $certificatemanagerService = new Google\Service\CertificateManager(...);
- *   $certificateMaps = $certificatemanagerService->certificateMaps;
+ *   $certificateMaps = $certificatemanagerService->projects_locations_certificateMaps;
  *  </code>
  */
 class ProjectsLocationsCertificateMaps extends \Google\Service\Resource
@@ -118,8 +118,9 @@ class ProjectsLocationsCertificateMaps extends \Google\Service\Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string updateMask Required. The update mask applies to the
-   * resource. For the `FieldMask` definition, see https://developers.google.com
-   * /protocol-buffers/docs/reference/google.protobuf#fieldmask.
+   * resource. For the `FieldMask` definition, see
+   * https://developers.google.com/protocol-
+   * buffers/docs/reference/google.protobuf#fieldmask.
    * @return Operation
    */
   public function patch($name, CertificateMap $postBody, $optParams = [])

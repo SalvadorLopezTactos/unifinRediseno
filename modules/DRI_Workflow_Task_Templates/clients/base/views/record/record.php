@@ -232,7 +232,6 @@ $viewdefs['DRI_Workflow_Task_Templates']['base']['view']['record'] = [
                 [
                     'name' => 'task_start_date_type',
                     'label' => 'LBL_TASK_START_DATE_TYPE',
-                    'tooltip_content' => 'My Custom tooltip_content',
                 ],
                 [
                     'name' => 'task_start_days',
@@ -267,7 +266,6 @@ $viewdefs['DRI_Workflow_Task_Templates']['base']['view']['record'] = [
                 [
                     'name' => 'task_due_date_type',
                     'label' => 'LBL_TASK_DUE_DATE_TYPE',
-                    'tooltip_content' => 'My Custom tooltip_content',
                 ],
                 [
                     'name' => 'task_due_days',

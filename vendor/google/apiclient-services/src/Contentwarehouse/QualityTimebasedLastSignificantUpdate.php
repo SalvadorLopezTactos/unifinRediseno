@@ -19,6 +19,8 @@ namespace Google\Service\Contentwarehouse;
 
 class QualityTimebasedLastSignificantUpdate extends \Google\Model
 {
+  protected $adjustmentInfoType = QualityTimebasedLastSignificantUpdateAdjustments::class;
+  protected $adjustmentInfoDataType = '';
   /**
    * @var string
    */
@@ -28,6 +30,20 @@ class QualityTimebasedLastSignificantUpdate extends \Google\Model
    */
   public $source;
 
+  /**
+   * @param QualityTimebasedLastSignificantUpdateAdjustments
+   */
+  public function setAdjustmentInfo(QualityTimebasedLastSignificantUpdateAdjustments $adjustmentInfo)
+  {
+    $this->adjustmentInfo = $adjustmentInfo;
+  }
+  /**
+   * @return QualityTimebasedLastSignificantUpdateAdjustments
+   */
+  public function getAdjustmentInfo()
+  {
+    return $this->adjustmentInfo;
+  }
   /**
    * @param string
    */

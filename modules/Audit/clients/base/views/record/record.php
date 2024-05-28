@@ -9,5 +9,5 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Audit']['base']['view']['record'] = array(
-);
+$viewdefs['Audit']['base']['view']['record'] = [
+];

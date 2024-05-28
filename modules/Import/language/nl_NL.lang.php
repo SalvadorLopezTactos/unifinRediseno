@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Lezen Importbestand gelukt.',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Het geïmporteerde record neemt deel aan een proces en kan niet worden bewerkt omdat sommige velden voor bewerking zijn vergrendeld door het proces.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Records overgeslagen i.v.m. error',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Gebruik huidige gebruiker indien gebruiker niet bestaat',
     'LBL_SHOW_HIDDEN' => 'Toon velden die niet op normale wijze te Importeren zijn',
     'LBL_UPDATE_RECORDS' => 'Bestaande Records bijwerken i.p.v. Importeren (kan niet ongedaan gemaakt worden)',
-    'LBL_TEST'=> 'Test Import (Data wordt niet Opgeslagen of Bijgewerkt)',
+    'LBL_TEST' => 'Test Import (Data wordt niet Opgeslagen of Bijgewerkt)',
     'LBL_TRUNCATE_TABLE' => 'Tabel eerst leegmaken (Verwijder alle Records)',
     'LBL_RELATED_ACCOUNTS' => 'Geen gerelateerde Organisaties aanmaken',
     'LBL_NO_DATECHECK' => 'Datum controle overslaan (sneller, maar resulteert in fouten indien datum foutief is)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Ongeldige Integer waarde',
     'LBL_ERROR_INVALID_NUM' => 'Ongeldige Numerieke waarde',
     'LBL_ERROR_INVALID_TIME' => 'Ongeldige Tijd',
-    'LBL_ERROR_INVALID_EMAIL'=>'Ongeldig E-mailadres',
-    'LBL_ERROR_INVALID_BOOL'=>'Ongeldige waarde (moet 1 of 0 zijn)',
-    'LBL_ERROR_INVALID_DATE'=>'Ongeldige &#39;date string&#39;',
-    'LBL_ERROR_INVALID_USER'=>'Ongeldige Gebruikersnaam of ID',
+    'LBL_ERROR_INVALID_EMAIL' => 'Ongeldig E-mailadres',
+    'LBL_ERROR_INVALID_BOOL' => 'Ongeldige waarde (moet 1 of 0 zijn)',
+    'LBL_ERROR_INVALID_DATE' => 'Ongeldige &#39;date string&#39;',
+    'LBL_ERROR_INVALID_USER' => 'Ongeldige Gebruikersnaam of ID',
     'LBL_ERROR_INVALID_TEAM' => 'Ongeldige Teamnaam of ID',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Ongeldige Organisatienaam of ID',
     'LBL_ERROR_INVALID_RELATE' => 'Ongeldig relatie-veld',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'bestaat niet of is niet beschrijfbaar',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Het bestand kan niet worden opgehaald. Controleer de &#39;upload_max_filesize&#39; in php.ini voldoende toereikend is.',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Het bestand is te groot. Maximale grootte:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'bytes. Wijzig de string $sugar_config[&#39;$upload_maxsize&#39;] in config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bytes. Verander $sugar_config[&#39;upload_maxsize&#39;] in config.php',
     'LBL_MODULE_NAME' => 'Importeren',
     'LBL_MODULE_NAME_SINGULAR' => 'Importeer',
     'LBL_TRY_AGAIN' => 'Probeer opnieuw',
     'LBL_START_OVER' => 'Opnieuw',
     'LBL_ERROR' => 'Fout:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Het importbestand bevat {0} rijen. Het optimale aantal rijen is {1}. Meer rijen vertragen mogelijk het importproces. Klik op OK om door te gaan met importeren. Klik op Annuleren om het importbestand te wijzigen en opnieuw te uploaden.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Het is niet mogelijk een system Administrator Gebruiker te Importeren',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Het is niet mogelijk een system Administrator Gebruiker te Importeren',
     'ERR_REPORT_LOOP' => 'Het systeem heeft een rapportage lus gedetecteerd. Een gebruiker kan niet naar zichzelf rapporteren. Een manager kan ook niet richting een gebruiker rapporteren.',
     'ERR_MULTIPLE' => 'Er zijn meerdere kolommen gedefinieerd met dezelfde veldnaam .',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Er ontbreken vereiste velden:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Er zijn geen bestands regels in het te importeren bestan ( bestand is leeg)',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Het import bestand is al verwerkt of bestaat niet',
     'LBL_SUCCESS' => 'Succes:',
-	'LBL_FAILURE' => 'Import Mislukt:',
+    'LBL_FAILURE' => 'Import Mislukt:',
     'LBL_SUCCESSFULLY' => 'Succesvol geïmporteerd',
     'LBL_LAST_IMPORT_UNDONE' => 'Uw laatste import bewerking is ongedaan gemaakt',
     'LBL_NO_IMPORT_TO_UNDO' => 'Er bestaat geen import bewerking die ongedaan kan worden gemaakt.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Meer importeren',
     'LBL_FINISHED' => 'Terugkeren naar',
     'LBL_UNDO_LAST_IMPORT' => 'Maak de laatste import bewerking ongedaan',
-    'LBL_LAST_IMPORTED'=>'Laatst geïmporteerd',
+    'LBL_LAST_IMPORTED' => 'Laatst geïmporteerd',
     'ERR_MULTIPLE_PARENTS' => 'Er kan maar één Bovenliggende-ID gedefinieerd zijn',
     'LBL_DUPLICATES' => 'Duplicaten gevonden',
     'LNK_DUPLICATE_LIST' => 'Download lijst van Duplicaten',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Notities Verbergen',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Toon Preview Kolommen',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Verberg Preview Kolommen',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Controleren op duplicaten met behulp van operator:',
     'LBL_SAVE_MAPPING_AS' => 'Om uw importinstellingen te bewaren, kies dan hier een naam:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Enkele Quote (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Dubbele Quote (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Om de nieuwe records aan (een) ander(e) team(s) toe te voegen dan uw standaard (default) team gebruikt u de Standaard Waarde kolom (Default Value).',
     'LBL_SIGN_IN_HELP' => 'Om deze dienst in te schakelen dient u zich aan te melden via de gebruikersinstellingen onder het tabblad Externe Accounts (External Accounts).',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Trying to handle email addresses in a Bean that doesn&#39;t support it.",
-);
+];

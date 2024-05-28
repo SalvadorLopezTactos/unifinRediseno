@@ -9,33 +9,33 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['multi-line-list'] = array(
-    'rowactions' => array(
-        'actions' => array(
-            array(
+$viewdefs['base']['view']['multi-line-list'] = [
+    'rowactions' => [
+        'actions' => [
+            [
                 'type' => 'rowaction',
                 'label' => 'LBL_EDIT_IN_NEW_TAB',
                 'tooltip' => 'LBL_EDIT_IN_NEW_TAB',
                 'event' => 'list:editrow:fire',
                 'icon' => 'sicon-edit',
                 'acl_action' => 'edit',
-            ),
-            array(
+            ],
+            [
                 'type' => 'rowaction',
                 'label' => 'LBL_COPY_RECORD_URL',
                 'tooltip' => 'LBL_COPY_RECORD_URL',
                 'event' => 'list:copyrow:fire',
                 'icon' => 'sicon-copy',
                 'acl_action' => 'view',
-            ),
-            array(
+            ],
+            [
                 'type' => 'rowaction',
                 'label' => 'LBL_OPEN_IN_NEW_TAB',
                 'tooltip' => 'LBL_OPEN_IN_NEW_TAB',
                 'event' => 'list:openrow:fire',
                 'icon' => 'sicon-launch',
                 'acl_action' => 'view',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

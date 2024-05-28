@@ -10,77 +10,77 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Reports']['base']['layout']['drillthrough-drawer'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['Reports']['base']['layout']['drillthrough-drawer'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
                             'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'view' => 'drillthrough-headerpane',
-                                ),
-                                array(
+                                ],
+                                [
                                     'layout' => 'drillthrough-list',
-                                    'xmeta' => array(
-                                        'components' => array(
-                                            array(
+                                    'xmeta' => [
+                                        'components' => [
+                                            [
                                                 'view' => 'massupdate',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'massaddtolist',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'recordlist',
                                                 'primary' => true,
-                                                'xmeta' => array(
+                                                'xmeta' => [
                                                     'favorite' => true,
-                                                ),
-                                            ),
-                                            array(
+                                                ],
+                                            ],
+                                            [
                                                 'view' => 'list-bottom',
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'dashboard-pane',
                             'css_class' => 'dashboard-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'drillthrough-pane',
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'preview-pane',
                             'css_class' => 'preview-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'preview',
                                     'xmeta' => [
                                         'editable' => true,
                                     ],
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

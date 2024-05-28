@@ -10,35 +10,35 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Reports']['base']['view']['drillthrough-headerpane'] = array(
+$viewdefs['Reports']['base']['view']['drillthrough-headerpane'] = [
     'template' => 'headerpane',
-    'fields' => array(
-        array(
+    'fields' => [
+        [
             'name' => 'title',
             'type' => 'label',
-        ),
-        array(
+        ],
+        [
             'name' => 'drillthrough-collection-count',
             'type' => 'drillthrough-collection-count',
-        ),
-        array(
+        ],
+        [
             'name' => 'drillthrough-labels',
             'type' => 'drillthrough-labels',
-        ),
-    ),
-    'buttons' => array(
-        array(
+        ],
+    ],
+    'buttons' => [
+        [
             'name' => 'close',
             'type' => 'button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
-            'events' => array(
+            'events' => [
                 'click' => 'drillthrough:closedrawer:fire',
-            ),
+            ],
             'css_class' => 'btn-invisible btn-link',
-        ),
-        array(
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

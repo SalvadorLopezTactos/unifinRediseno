@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'База знаний',
     'LBL_MODULE_NAME_SINGULAR' => 'База знаний: статья',
     'LBL_MODULE_TITLE' => 'База знаний: статья',
@@ -17,4 +17,4 @@ $mod_strings = array(
     'LBL_KEYWORDS' => 'Ключевые слова:',
     'LBL_CONTENT' => 'Содержание',
     'LBL_ATTACHMENTS' => 'Вложения:',
-);
+];

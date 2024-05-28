@@ -65,43 +65,43 @@ $dictionary['Metric'] = [
             'audited' => false,
             'massupdate' => false,
         ],
-        'filter_def' => array(
+        'filter_def' => [
             'name' => 'filter_def',
             'vname' => 'LBL_METRIC_FILTER',
             'type' => 'json',
             'dbType' => 'text',
             'massupdate' => false,
-        ),
-        'order_by_primary' => array(
+        ],
+        'order_by_primary' => [
             'required' => true,
             'name' => 'order_by_primary',
             'vname' => 'LBL_METRIC_SORT_ORDER_PRIMARY',
             'type' => 'enum',
             'options' => '',
             'massupdate' => false,
-        ),
-        'order_by_secondary' => array(
+        ],
+        'order_by_secondary' => [
             'name' => 'order_by_secondary',
             'vname' => 'LBL_METRIC_SORT_ORDER_SECONDARY',
             'type' => 'enum',
             'options' => '',
             'massupdate' => false,
-        ),
-        'order_by_primary_direction' => array(
+        ],
+        'order_by_primary_direction' => [
             'required' => true,
             'name' => 'order_by_primary_direction',
             'vname' => 'LBL_METRIC_SORT_ORDER_PRIMARY_DIRECTION',
             'type' => 'enum',
             'options' => '',
             'massupdate' => false,
-        ),
-        'order_by_secondary_direction' => array(
+        ],
+        'order_by_secondary_direction' => [
             'name' => 'order_by_secondary_direction',
             'vname' => 'LBL_METRIC_SORT_ORDER_SECONDARY_DIRECTION',
             'type' => 'enum',
             'options' => '',
             'massupdate' => false,
-        ),
+        ],
         'freeze_first_column' => [
             'name' => 'freeze_first_column',
             'vname' => 'LBL_FREEZE_FIRST_COLUMN',

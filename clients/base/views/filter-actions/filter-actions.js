@@ -199,7 +199,7 @@
      */
     triggerClose: function() {
         var filter = this.context.editingFilter,
-            filterLayout = this.layout.getComponent('filter'),
+            filterLayout = this.layout.getComponent('filter') || this.layout.getComponent('multi-line-list-filter'),
             id = filter.get('id'),
             changedAttributes = filter.changedAttributes(filter.getSynced());
             filter.revertAttributes();

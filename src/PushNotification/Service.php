@@ -21,7 +21,7 @@ interface Service
      * @param string $deviceId The device's ID.
      * @return bool
      */
-    public function register(string $platform, string $deviceId) : bool;
+    public function register(string $platform, string $deviceId): bool;
 
     /**
      * Updates a user's device.
@@ -31,7 +31,7 @@ interface Service
      * @param string $newDeviceId The device's new ID.
      * @return bool
      */
-    public function update(string $platform, string $oldDeviceId, string $newDeviceId = '') : bool;
+    public function update(string $platform, string $oldDeviceId, string $newDeviceId = ''): bool;
 
     /**
      * Removes a user's device.
@@ -40,7 +40,7 @@ interface Service
      * @param string $deviceId The device's ID.
      * @return bool
      */
-    public function delete(string $platform, string $deviceId) : bool;
+    public function delete(string $platform, string $deviceId): bool;
 
     /**
      * Activates/deactivates a user (makes possible/impossible to receive push notifications on user's devices)
@@ -64,5 +64,5 @@ interface Service
      *
      * @return bool
      */
-    public function send(array $userIds, array $message) : bool;
+    public function send(array $userIds, array $message): bool;
 }

@@ -70,5 +70,5 @@ interface SugarMetric_Provider_Interface
     /**
      * @return void
      */
-    public static function ignoreTransaction() : void;
+    public static function ignoreTransaction(): void;
 }

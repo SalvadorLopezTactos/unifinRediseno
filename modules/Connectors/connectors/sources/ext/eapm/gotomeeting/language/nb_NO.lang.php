@@ -11,9 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' =>
-'<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
+        '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
 Skaff en forbrukernøkkel fra LogMeIn ved å registrere en ny GoToMeeting-applikasjon.<br>
 &nbsp;<br>
 Trinn for å registrere instansen din:<br>
@@ -36,4 +36,4 @@ Trinn for å registrere instansen din:<br>
 </ol>
 </td></tr></table>',
     'oauth_consumer_key' => 'Forbrukernøkkel',
-);
+];

@@ -64,7 +64,9 @@ class ConvertToReportDashlet
      */
     private function massageDashletSettings(array $settings): array
     {
-        if ($settings['type'] !== 'saved-reports-chart' ||
+        if (!array_key_exists('type', $settings) ||
+            !$settings['type'] ||
+            $settings['type'] !== 'saved-reports-chart' ||
             !array_key_exists('saved_report_id', $settings) ||
             !$settings['saved_report_id']) {
             return $settings;
@@ -72,14 +74,14 @@ class ConvertToReportDashlet
 
         $mappingTable = [
             'saved_report_id' => 'reportId',
-            'show_legend'     => 'showLegend',
-            'show_title'      => 'showTitle',
-            'show_x_label'    => 'showXLabel',
-            'show_y_label'    => 'showYLabel',
-            'x_axis_label'    => 'xAxisLabel',
-            'y_axis_label'    => 'yAxisLabel',
-            'report_title'    => 'title',
-            'auto_refresh'    => 'autoRefresh',
+            'show_legend' => 'showLegend',
+            'show_title' => 'showTitle',
+            'show_x_label' => 'showXLabel',
+            'show_y_label' => 'showYLabel',
+            'x_axis_label' => 'xAxisLabel',
+            'y_axis_label' => 'yAxisLabel',
+            'report_title' => 'title',
+            'auto_refresh' => 'autoRefresh',
         ];
 
         $chartTypesMapping = [
@@ -98,8 +100,8 @@ class ConvertToReportDashlet
 
         foreach ($settings as $propertyName => $propertyValue) {
             $reportDashletKey = array_key_exists($propertyName, $mappingTable) ?
-                                $mappingTable[$propertyName] :
-                                $propertyName;
+                $mappingTable[$propertyName] :
+                $propertyName;
 
             $reportDashletSettings[$reportDashletKey] = $propertyValue;
         }

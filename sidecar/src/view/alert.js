@@ -9,9 +9,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const AlertView = require('view/alert-view');
-const Utils = require('utils/utils');
-const ViewManager = require('view/view-manager');
+const AlertView = require('./alert-view');
+const Utils = require('../utils/utils');
+const ViewManager = require('./view-manager');
 
 /**
  * Alert.
@@ -110,7 +110,7 @@ const Alert = {
      *
      * Examples:
      * ```
-     * const Alert = require('view/alert');
+     * const Alert = require('./alert');
      * var a1 = Alert.show('delete_warning', {
      *     level: 'warning',
      *     title: 'Warning',

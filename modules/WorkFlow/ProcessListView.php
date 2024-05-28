@@ -21,9 +21,8 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 global $current_user;
 $workflow_modules = get_workflow_admin_modules_for_user($current_user);
-if (!is_admin($current_user) && empty($workflow_modules))
-{
-   sugar_die("Unauthorized access to WorkFlow.");
+if (!is_admin($current_user) && empty($workflow_modules)) {
+    sugar_die('Unauthorized access to WorkFlow.');
 }
 
 $workflow_object = BeanFactory::newBean('WorkFlow');
@@ -33,7 +32,10 @@ global $mod_strings;
 $header_text = '';
 global $list_max_entries_per_page;
 global $urlPrefix;
-if(empty($_POST['mass']) && empty($where) && empty($_REQUEST['query'])){$_REQUEST['query']='true'; $_REQUEST['current_user_only']='checked'; };
+if (empty($_POST['mass']) && empty($where) && empty($_REQUEST['query'])) {
+    $_REQUEST['query'] = 'true';
+    $_REQUEST['current_user_only'] = 'checked';
+};
 $log = LoggerManager::getLogger();
 
 global $currentModule;
@@ -41,68 +43,65 @@ global $currentModule;
 // focus_list is the means of passing data to a ListView.
 global $focus_list;
 
-echo getClassicModuleTitle($mod_strings['LBL_MODULE_ID'], array($mod_strings['LBL_PROCESS_LIST'])	, true); 
+echo getClassicModuleTitle($mod_strings['LBL_MODULE_ID'], [$mod_strings['LBL_PROCESS_LIST']], true);
 
 $request = InputValidation::getService();
 $target_base_module = $request->getValidInputRequest('base_module', 'Assert\Bean\ModuleName');
 
 $storeQuery = new StoreQuery();
-if(!isset($_REQUEST['query'])){
-	$storeQuery->loadQuery($currentModule);
-	$storeQuery->populateRequest();
-}else{
-	$storeQuery->saveFromGet($currentModule);	
+if (!isset($_REQUEST['query'])) {
+    $storeQuery->loadQuery($currentModule);
+    $storeQuery->populateRequest();
+} else {
+    $storeQuery->saveFromGet($currentModule);
 }
 
 $where = "base_module!=''";
 
 
-echo "<p><p>";
+echo '<p><p>';
 
 //echo get_form_header($mod_strings['LBL_PROCESS_LIST']. $header_text, "", false);
 
 $base_module = $workflow_object->get_limited_module_array();
 $access = get_workflow_admin_modules_for_user($current_user);
-foreach($base_module as $key=>$values){
-   if(empty($access[$key])){
-       unset($base_module[$key]);
-   }   
+foreach ($base_module as $key => $values) {
+    if (empty($access[$key])) {
+        unset($base_module[$key]);
+    }
 }
 
 /////////////Display Alert Template Stuff//
 
-	$template_form=new XTemplate ('modules/WorkFlow/ProcessTemplateForm.html');
-	$template_form->assign("MOD", $mod_strings);
-	$template_form->assign("APP", $app_strings);
-	$template_form->assign("BASE_MODULE", get_select_options_with_id($base_module,$target_base_module));
-	$template_form->assign("TARGET_BASE_MODULE", $target_base_module);
-	$template_form->parse("main");
-	$template_form->out("main");
+$template_form = new XTemplate('modules/WorkFlow/ProcessTemplateForm.html');
+$template_form->assign('MOD', $mod_strings);
+$template_form->assign('APP', $app_strings);
+$template_form->assign('BASE_MODULE', get_select_options_with_id($base_module, $target_base_module));
+$template_form->assign('TARGET_BASE_MODULE', $target_base_module);
+$template_form->parse('main');
+$template_form->out('main');
 
-if($target_base_module!=""){
-global $title;
-$display_title = $mod_strings['LNK_PROCESS_VIEW'].": ".$app_list_strings['moduleList'][$target_base_module];
-if ($title) $display_title = $title;
+if ($target_base_module != '') {
+    global $title;
+    $display_title = $mod_strings['LNK_PROCESS_VIEW'] . ': ' . $app_list_strings['moduleList'][$target_base_module];
+    if ($title) {
+        $display_title = $title;
+    }
 
 
+    $where = 'workflow.base_module=' . $GLOBALS['db']->quoted($target_base_module);
 
-
-	$where = "workflow.base_module=".$GLOBALS['db']->quoted($target_base_module);
-	
-	$ListView = new ListView();
+    $ListView = new ListView();
 
     $ListView->show_export_button = false;
     $ListView->show_delete_button = false;
     $ListView->show_select_menu = false;
-	$ListView->initNewXTemplate( 'modules/WorkFlow/ProcessListView.html',$mod_strings);
-	$ListView->setHeaderTitle($display_title . $header_text);
-	$ListView->xTemplateAssign("TARGET_BASE_MODULE", $target_base_module);
-	$ListView->xTemplateAssign('UPARROW_INLINE', SugarThemeRegistry::current()->getImage('uparrow_inline','align="absmiddle" border="0"',null,null,'.gif',$mod_strings['LBL_UP']));
-	$ListView->xTemplateAssign('DOWNARROW_INLINE', SugarThemeRegistry::current()->getImage('downarrow_inline','align="absmiddle"  border="0"',null,null,'.gif',$mod_strings['LBL_DOWN']));
-	$ListView->setQuery($where, "", "", "WORKFLOW");
-	$ListView->query_orderby = "workflow.list_order_y ASC";
-	$ListView->processListView($workflow_object, "main", "WORKFLOW");
-
-}	
-	
-	?>
+    $ListView->initNewXTemplate('modules/WorkFlow/ProcessListView.html', $mod_strings);
+    $ListView->setHeaderTitle($display_title . $header_text);
+    $ListView->xTemplateAssign('TARGET_BASE_MODULE', $target_base_module);
+    $ListView->xTemplateAssign('UPARROW_INLINE', SugarThemeRegistry::current()->getImage('uparrow_inline', 'align="absmiddle" border="0"', null, null, '.gif', $mod_strings['LBL_UP']));
+    $ListView->xTemplateAssign('DOWNARROW_INLINE', SugarThemeRegistry::current()->getImage('downarrow_inline', 'align="absmiddle"  border="0"', null, null, '.gif', $mod_strings['LBL_DOWN']));
+    $ListView->setQuery($where, '', '', 'WORKFLOW');
+    $ListView->query_orderby = 'workflow.list_order_y ASC';
+    $ListView->processListView($workflow_object, 'main', 'WORKFLOW');
+}

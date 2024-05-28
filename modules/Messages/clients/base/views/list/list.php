@@ -34,8 +34,7 @@ $viewdefs['Messages']['base']['view']['list'] = [
                     'default' => true,
                     'sortable' => false,
                     'ACLTag' => 'PARENT',
-                    'related_fields' =>
-                    [
+                    'related_fields' => [
                         'parent_id',
                         'parent_type',
                     ],
@@ -74,7 +73,7 @@ $viewdefs['Messages']['base']['view']['list'] = [
                     'label' => 'LBL_CREATED_BY',
                     'enabled' => true,
                     'default' => true,
-                    'related_fields' =>  ['created_by'],
+                    'related_fields' => ['created_by'],
                 ],
                 [
                     'name' => 'date_entered',

@@ -16,14 +16,16 @@ use Sugarcrm\Sugarcrm\Security\Crypto\Blowfish;
  * source is the parent class of any source object.
  * @api
  */
-abstract class source{
-	/**
-	 * The name of an wrapper to use if the class wants to provide an override
-	 */
-	public $wrapperName;
-	protected $_config;
-	protected $_mapping;
-	protected $_field_defs;
+abstract class source
+{
+    /**
+     * The name of an wrapper to use if the class wants to provide an override
+     */
+    // @codingStandardsIgnoreStart PSR2.Classes.PropertyDeclaration.Underscore
+    public $wrapperName;
+    protected $_config;
+    protected $_mapping;
+    protected $_field_defs;
 
     /**
      * @var bool enable_in_wizard Boolean value marking whether or not the connector may appear in the wizard (Get Data) views
@@ -33,7 +35,7 @@ abstract class source{
     /**
      * @var bool enable_in_hover Boolean value marking whether or not a hover link could be applied to the connector
      */
-	protected $_enable_in_hover = false;
+    protected $_enable_in_hover = false;
 
     /**
      * @var bool enable_in_admin_mapping Boolean value marking whether or not this connector should be shown in the Modify Mapping view
@@ -58,11 +60,12 @@ abstract class source{
     /**
      * @var bool has_testing_enabled Boolean value marking whether or not the connector should display the test button in administration view
      */
-	protected $_has_testing_enabled = false;
+    protected $_has_testing_enabled = false;
 
-	protected $_required_config_fields = array();
-	protected $_required_config_fields_for_button = array();
-	protected $config_decrypted = false;
+    protected $_required_config_fields = [];
+    protected $_required_config_fields_for_button = [];
+    // @codingStandardsIgnoreEnd PSR2.Classes.PropertyDeclaration.Underscore
+    protected $config_decrypted = false;
 
     /**
      * The ExternalAPI Base that instantiated this connector.
@@ -70,26 +73,36 @@ abstract class source{
      */
     protected $_eapm = null;
 
-	public function __construct(){
-		$this->loadConfig();
-		$this->loadMapping();
-		$this->loadVardefs();
- 	}
+    /**
+     * The name of checkbox field and all the related fields inside the container block
+     */
+    protected array $visibilityCheckBoxConfigForFields = [];
 
- 	public function init(){}
+    public function __construct()
+    {
+        $this->loadConfig();
+        $this->loadMapping();
+        $this->loadVardefs();
+    }
 
- 	//////// CALLED FROM component.php ///////
-	public function loadMapping() {
- 		$mapping = array();
- 		$dir = str_replace('_','/',get_class($this));
- 		$map = SugarAutoLoader::existingCustomOne("modules/Connectors/connectors/sources/{$dir}/mapping.php");
- 		if(!empty($map)) {
- 		    require $map;
- 		}
-	    $this->_mapping = $mapping;
- 	}
+    public function init()
+    {
+    }
 
-    public function saveMappingHook($mapping) {
+    //////// CALLED FROM component.php ///////
+    public function loadMapping()
+    {
+        $mapping = [];
+        $dir = str_replace('_', '/', get_class($this));
+        $map = SugarAutoLoader::existingCustomOne("modules/Connectors/connectors/sources/{$dir}/mapping.php");
+        if (!empty($map)) {
+            require $map;
+        }
+        $this->_mapping = $mapping;
+    }
+
+    public function saveMappingHook($mapping)
+    {
         // Most classes don't care that the mapping has changed, but this is here if they do.
         return;
     }
@@ -97,37 +110,38 @@ abstract class source{
     /**
      * Load source's vardef file
      */
- 	public function loadVardefs() {
+    public function loadVardefs()
+    {
         $dictionary = [];
-		$dir = str_replace('_','/',$class = get_class($this));
-		$defs = SugarAutoLoader::existingCustomOne("modules/Connectors/connectors/sources/{$dir}/vardefs.php");
-		if(!empty($defs)) {
-			require $defs;
-		}
+        $dir = str_replace('_', '/', $class = get_class($this));
+        $defs = SugarAutoLoader::existingCustomOne("modules/Connectors/connectors/sources/{$dir}/vardefs.php");
+        if (!empty($defs)) {
+            require $defs;
+        }
 
-		$this->_field_defs = !empty($dictionary[$class]['fields']) ? $dictionary[$class]['fields'] : array();
- 	}
+        $this->_field_defs = !empty($dictionary[$class]['fields']) ? $dictionary[$class]['fields'] : [];
+    }
 
- 	/**
- 	 * Given a parameter in a vardef field, return the list of fields that match the param and value
- 	 *
- 	 * @param string $param_name
- 	 * @param string $param_value
- 	 * @return array
- 	 */
-	public function getFieldsWithParams($param_name, $param_value)
-	{
-		if(empty($this->_field_defs)){
-			$this->loadVardefs();
-		}
-		$fields_with_param = array();
-		foreach($this->_field_defs as $key => $def){
-			if(!empty($def[$param_name]) && ($def[$param_name] == $param_value)){
-				$fields_with_param[$key] = $def;
-			}
-		}
-		return $fields_with_param;
- 	}
+    /**
+     * Given a parameter in a vardef field, return the list of fields that match the param and value
+     *
+     * @param string $param_name
+     * @param string $param_value
+     * @return array
+     */
+    public function getFieldsWithParams($param_name, $param_value)
+    {
+        if (empty($this->_field_defs)) {
+            $this->loadVardefs();
+        }
+        $fields_with_param = [];
+        foreach ($this->_field_defs as $key => $def) {
+            if (!empty($def[$param_name]) && ($def[$param_name] == $param_value)) {
+                $fields_with_param[$key] = $def;
+            }
+        }
+        return $fields_with_param;
+    }
 
     /**
      * Save source's config to custom directory
@@ -141,9 +155,9 @@ abstract class source{
         $config_str = "<?php\n/***CONNECTOR SOURCE***/\n";
 
         // Handle encryption
-        if(!empty($this->_config['encrypt_properties']) && is_array($this->_config['encrypt_properties']) && !empty($this->_config['properties'])){
-            foreach($this->_config['encrypt_properties'] as $name) {
-                if(!empty($this->_config['properties'][$name])) {
+        if (!empty($this->_config['encrypt_properties']) && is_array($this->_config['encrypt_properties']) && !empty($this->_config['properties'])) {
+            foreach ($this->_config['encrypt_properties'] as $name) {
+                if (!empty($this->_config['properties'][$name])) {
                     $this->_config['properties'][$name] = Blowfish::encode(
                         Blowfish::getKey('encrypt_field'),
                         $this->_config['properties'][$name]
@@ -152,14 +166,14 @@ abstract class source{
             }
         }
 
-        foreach($this->_config as $key => $val) {
-            if(!empty($val)){
+        foreach ($this->_config as $key => $val) {
+            if (!empty($val)) {
                 $config_str .= $this->getConfigString($key, $val);
             }
         }
         $dir = str_replace('_', '/', get_class($this));
 
-        if(!file_exists("custom/modules/Connectors/connectors/sources/{$dir}")) {
+        if (!file_exists("custom/modules/Connectors/connectors/sources/{$dir}")) {
             mkdir_recursive("custom/modules/Connectors/connectors/sources/{$dir}");
         }
         file_put_contents("custom/modules/Connectors/connectors/sources/{$dir}/config.php", $config_str);
@@ -179,20 +193,23 @@ abstract class source{
      * @param $key array key
      * @param $val array value
      */
-    public function getConfigString($key, $val) {
+    public function getConfigString($key, $val)
+    {
         return override_value_to_string_recursive2('config', $key, $val, true);
     }
 
- 	/**
- 	 * Initialize config - decrypt encrypted fields
- 	 */
- 	public function initConfig()
- 	{
-        if($this->config_decrypted) return;
+    /**
+     * Initialize config - decrypt encrypted fields
+     */
+    public function initConfig()
+    {
+        if ($this->config_decrypted) {
+            return;
+        }
         // Handle decryption
-        if(!empty($this->_config['encrypt_properties']) && is_array($this->_config['encrypt_properties']) && !empty($this->_config['properties'])){
-            foreach($this->_config['encrypt_properties'] as $name) {
-                if(!empty($this->_config['properties'][$name])) {
+        if (!empty($this->_config['encrypt_properties']) && is_array($this->_config['encrypt_properties']) && !empty($this->_config['properties'])) {
+            foreach ($this->_config['encrypt_properties'] as $name) {
+                if (!empty($this->_config['properties'][$name])) {
                     $this->_config['properties'][$name] = Blowfish::decode(
                         Blowfish::getKey('encrypt_field'),
                         $this->_config['properties'][$name]
@@ -201,76 +218,80 @@ abstract class source{
             }
         }
         $this->config_decrypted = true;
- 	}
+    }
 
- 	/**
- 	 * Load config.php for this source
- 	 */
-	public function loadConfig()
-	{
-		$config = array();
-		$dir = str_replace('_','/',get_class($this));
-		foreach(SugarAutoLoader::existingCustom("modules/Connectors/connectors/sources/{$dir}/config.php") as $file) {
-		    require $file;
-		}
-		$this->_config = $config;
+    /**
+     * Load config.php for this source
+     */
+    public function loadConfig()
+    {
+        $config = [];
+        $dir = str_replace('_', '/', get_class($this));
+        foreach (SugarAutoLoader::existingCustom("modules/Connectors/connectors/sources/{$dir}/config.php") as $file) {
+            require $file;
+        }
+        $this->_config = $config;
 
-		//If there are no required config fields specified, we will default them to all be required
-		if(empty($this->_required_config_fields)) {
-		   foreach($this->_config['properties'] as $id=>$value) {
-		   	  $this->_required_config_fields[] = $id;
-		   }
-		}
- 	}
+        //If there are no required config fields specified, we will default them to all be required
+        if (empty($this->_required_config_fields)) {
+            foreach ($this->_config['properties'] as $id => $value) {
+                $this->_required_config_fields[] = $id;
+            }
+        }
+    }
 
     // Helper function for the settings panels
+
     /**
      * Filter which modules are allowed to connect
      * @param array $moduleList
      * @return array Allowed modules
      */
-    public function filterAllowedModules( $moduleList )
+    public function filterAllowedModules($moduleList)
     {
         // Most modules can connect to everything, no further filtering necessary
         return $moduleList;
     }
 
- 	////////////// GETTERS and SETTERS ////////////////////
-	public function getMapping()
-	{
- 		return $this->_mapping;
- 	}
+    ////////////// GETTERS and SETTERS ////////////////////
+    public function getMapping()
+    {
+        return $this->_mapping;
+    }
 
-	public function getOriginalMapping() {
- 		$mapping = array();
- 		$dir = str_replace('_','/',get_class($this));
-        foreach(SugarAutoLoader::existing("modules/Connectors/connectors/sources/{$dir}/mapping.php") as $file) {
+    public function getOriginalMapping()
+    {
+        $mapping = [];
+        $dir = str_replace('_', '/', get_class($this));
+        foreach (SugarAutoLoader::existing("modules/Connectors/connectors/sources/{$dir}/mapping.php") as $file) {
             require $file;
         }
-		return $mapping;
- 	}
+        return $mapping;
+    }
 
- 	public function setMapping($mapping)
- 	{
- 		$this->_mapping = $mapping;
- 	}
+    public function setMapping($mapping)
+    {
+        $this->_mapping = $mapping;
+    }
 
- 	public function getFieldDefs()
- 	{
- 		return $this->_field_defs;
- 	}
+    public function getFieldDefs()
+    {
+        return $this->_field_defs;
+    }
 
- 	public function getConfig()
- 	{
- 	    if(!$this->config_decrypted) $this->initConfig();
- 		return $this->_config;
- 	}
+    public function getConfig()
+    {
+        if (!$this->config_decrypted) {
+            $this->initConfig();
+        }
+        return $this->_config;
+    }
 
- 	public function setConfig($config)
- 	{
- 		$this->_config = $config;
- 		$this->config_decrypted = true; // Don't decrypt external configs
- 	}
+    public function setConfig($config)
+    {
+        $this->_config = $config;
+        $this->config_decrypted = true; // Don't decrypt external configs
+    }
 
     public function setEAPM(ExternalAPIBase $eapm)
     {
@@ -282,56 +303,59 @@ abstract class source{
         return $this->_eapm;
     }
 
-    public function setProperties($properties=array())
+    public function setProperties($properties = [])
     {
- 	 	if(!empty($this->_config) && isset($this->_config['properties'])) {
- 		   $this->_config['properties'] = $properties;
- 		   $this->config_decrypted = true; // Don't decrypt external configs
- 		}
- 	}
+        if (!empty($this->_config) && isset($this->_config['properties'])) {
+            $this->_config['properties'] = $properties;
+            $this->config_decrypted = true; // Don't decrypt external configs
+        }
+    }
 
- 	public function getProperties()
- 	{
- 	 	if(!empty($this->_config) && isset($this->_config['properties'])) {
- 	 	   if(!$this->config_decrypted) $this->initConfig();
- 		   return $this->_config['properties'];
- 		}
- 		return array();
- 	}
+    public function getProperties()
+    {
+        if (!empty($this->_config) && isset($this->_config['properties'])) {
+            if (!$this->config_decrypted) {
+                $this->initConfig();
+            }
+            return $this->_config['properties'];
+        }
+        return [];
+    }
 
- 	/**
- 	 * Check if certain property contains non-empty value
- 	 * @param string $name
- 	 * @return bool
- 	 */
- 	public function propertyExists($name)
- 	{
- 	    return !empty($this->_config['properties'][$name]);
- 	}
+    /**
+     * Check if certain property contains non-empty value
+     * @param string $name
+     * @return bool
+     */
+    public function propertyExists($name)
+    {
+        return !empty($this->_config['properties'][$name]);
+    }
 
- 	public function getProperty($name)
- 	{
- 	    if(!empty($this->_config) && isset($this->_config['properties'][$name])) {
- 	        // check if we're asking for encrypted property and we didn't decrypt yet
- 	        if(!$this->config_decrypted && !empty($this->_config['encrypt_properties']) && in_array($name, $this->_config['encrypt_properties']) && !empty($this->_config['properties'][$name])) {
- 	            $this->initConfig();
- 	        }
- 	        return $this->_config['properties'][$name];
- 		} else {
- 			return '';
- 		}
- 	}
+    public function getProperty($name)
+    {
+        if (!empty($this->_config) && isset($this->_config['properties'][$name])) {
+            // check if we're asking for encrypted property and we didn't decrypt yet
+            if (!$this->config_decrypted && !empty($this->_config['encrypt_properties']) && safeInArray($name, $this->_config['encrypt_properties']) && !empty($this->_config['properties'][$name])) {
+                $this->initConfig();
+            }
+            return $this->_config['properties'][$name];
+        } else {
+            return '';
+        }
+    }
 
- 	/**
- 	 * hasTestingEnabled
- 	 * This method is used to indicate whether or not a data source has testing enabled so that
- 	 * the administration interface may call the test method on the data source instance
- 	 *
- 	 * @return enabled boolean value indicating whether or not testing is enabled
- 	 */
- 	public function hasTestingEnabled() {
- 		return $this->_has_testing_enabled;
- 	}
+    /**
+     * hasTestingEnabled
+     * This method is used to indicate whether or not a data source has testing enabled so that
+     * the administration interface may call the test method on the data source instance
+     *
+     * @return enabled boolean value indicating whether or not testing is enabled
+     */
+    public function hasTestingEnabled()
+    {
+        return $this->_has_testing_enabled;
+    }
 
     /**
      * test
@@ -341,7 +365,8 @@ abstract class source{
      *
      * @return result boolean result of the test function
      */
-    public function test() {
+    public function test()
+    {
         return true;
     }
 
@@ -354,8 +379,9 @@ abstract class source{
      *
      * @return $enabled boolean variable indicating whether or not the connector is enabled for the wizard
      */
-    public function isEnabledInWizard() {
-    	return $this->_enable_in_wizard;
+    public function isEnabledInWizard()
+    {
+        return $this->_enable_in_wizard;
     }
 
 
@@ -368,8 +394,9 @@ abstract class source{
      * @return $enabled boolean variable indicating whether or not the connector is enabled for the hover links
      *
      */
-    public function isEnabledInHover() {
-    	return $this->_enable_in_hover;
+    public function isEnabledInHover()
+    {
+        return $this->_enable_in_hover;
     }
 
     /**
@@ -436,8 +463,9 @@ abstract class source{
      *
      * @return $fields Array of Connector config fields that are required
      */
-    public function getRequiredConfigFields() {
-    	return $this->_required_config_fields;
+    public function getRequiredConfigFields()
+    {
+        return $this->_required_config_fields;
     }
 
 
@@ -448,14 +476,15 @@ abstract class source{
      *
      * @return $set boolean value indicating whether or not the required config fields are set
      */
-    public function isRequiredConfigFieldsSet() {
+    public function isRequiredConfigFieldsSet()
+    {
         //Check if required fields are set
-   		foreach($this->_required_config_fields as $field) {
-	    	if(empty($this->_config['properties'][$field])) {
-	    	   return false;
-	    	}
-   		}
-    	return true;
+        foreach ($this->_required_config_fields as $field) {
+            if (empty($this->_config['properties'][$field])) {
+                return false;
+            }
+        }
+        return true;
     }
 
 
@@ -467,8 +496,9 @@ abstract class source{
      *
      * @return $fields Array of Connector config fields that are required to be set for the "Get Data" button to appear
      */
-    public function getRequiredConfigFieldsForButton() {
-    	return $this->_required_config_fields_for_button;
+    public function getRequiredConfigFieldsForButton()
+    {
+        return $this->_required_config_fields_for_button;
     }
 
 
@@ -479,11 +509,12 @@ abstract class source{
      *
      * @return $set boolean value indicating whether or not the required config fields are set
      */
-    public function isRequiredConfigFieldsForButtonSet() {
+    public function isRequiredConfigFieldsForButtonSet()
+    {
         //Check if required fields for button are set
         foreach ($this->_required_config_fields_for_button as $field) {
             if (empty($this->_config['properties'][$field])) {
-               return false;
+                return false;
             }
         }
 
@@ -496,62 +527,73 @@ abstract class source{
      *
      * @param string $log_data
      */
-    protected function log($log_data){
-    	$name = get_class($this);
-    	$property_name = $this->getProperty('name');
-    	if(!empty($property_name)){
-    		$name = $property_name;
-    	}
-    	$GLOBALS['log']->info($name. ': '.$log_data);
+    protected function log($log_data)
+    {
+        $name = get_class($this);
+        $property_name = $this->getProperty('name');
+        if (!empty($property_name)) {
+            $name = $property_name;
+        }
+        $GLOBALS['log']->info($name . ': ' . $log_data);
     }
 
- 	/**
- 	 * getItem
- 	 * Returns an array containing a key/value pair(s) of a connector record. To be overridden by the implementation
- 	 * source.
- 	 *
- 	 * @param $args Array of arguments to search/filter by
- 	 * @param $module String optional value of the module that the connector framework is attempting to map to
- 	 * @return Array of key/value pair(s) of connector record; empty Array if no results are found
- 	 */
-	public abstract function getItem($args=array(), $module=null);
+    /**
+     * getItem
+     * Returns an array containing a key/value pair(s) of a connector record. To be overridden by the implementation
+     * source.
+     *
+     * @param $args Array of arguments to search/filter by
+     * @param $module String optional value of the module that the connector framework is attempting to map to
+     * @return Array of key/value pair(s) of connector record; empty Array if no results are found
+     */
+    abstract public function getItem($args = [], $module = null);
 
-
- 	/**
- 	 * getList
- 	 * Returns a nested array containing a key/value pair(s) of a connector record. To be overridden by the
- 	 * implementation source.
- 	 *
- 	 * @param $args Array of arguments to search/filter by
- 	 * @param $module String optional value of the module that the connector framework is attempting to map to
- 	 * @return Array of key/value pair(s) of connector record; empty Array if no results are found
- 	 */
-	public abstract function getList($args=array(), $module=null);
 
     /**
-	 * Default destructor
-	 *
-	 */
- 	public function __destruct(){
-         // Bug # 47233 - This desctructor was originally removed by bug # 44533.
-         // We have to add this destructor back in
-         // because there are customers who upgrade from 61x to 623
-         // who have the Jigsaw connector enabled, and the jigsaw connector
-         // makes a call to this destructor.
+     * getList
+     * Returns a nested array containing a key/value pair(s) of a connector record. To be overridden by the
+     * implementation source.
+     *
+     * @param $args Array of arguments to search/filter by
+     * @param $module String optional value of the module that the connector framework is attempting to map to
+     * @return Array of key/value pair(s) of connector record; empty Array if no results are found
+     */
+    abstract public function getList($args = [], $module = null);
 
-     }
+    /**
+     * Default destructor
+     *
+     */
+    public function __destruct()
+    {
+        // Bug # 47233 - This desctructor was originally removed by bug # 44533.
+        // We have to add this destructor back in
+        // because there are customers who upgrade from 61x to 623
+        // who have the Jigsaw connector enabled, and the jigsaw connector
+        // makes a call to this destructor.
+    }
 
-     /**
-      * Handles actions at the beginning of saveConfig(). This should be defined
-      * in child classes if there are actions to carry out.
-      */
-     public function preSaveConfig()
-     {}
+    /**
+     * Handles actions at the beginning of saveConfig(). This should be defined
+     * in child classes if there are actions to carry out.
+     */
+    public function preSaveConfig()
+    {
+    }
 
-     /**
-      * Handles actions and the end of saveConfig(). This should be defined
-      * in child classes if there are actions to carry out.
-      */
-     public function postSaveConfig()
-     {}
+    /**
+     * Handles actions and the end of saveConfig(). This should be defined
+     * in child classes if there are actions to carry out.
+     */
+    public function postSaveConfig()
+    {
+    }
+
+    /**
+     * CheckBox visibility configurations: The name of checkbox field and all related fields inside the container block
+     */
+    public function getVisibilityCheckBoxConfigForFields(): array
+    {
+        return $this->visibilityCheckBoxConfigForFields;
+    }
 }

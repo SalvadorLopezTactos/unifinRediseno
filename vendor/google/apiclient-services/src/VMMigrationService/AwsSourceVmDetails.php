@@ -17,12 +17,15 @@
 
 namespace Google\Service\VMMigrationService;
 
-class AwsSourceVmDetails extends \Google\Model
+class AwsSourceVmDetails extends \Google\Collection
 {
+  protected $collection_key = 'disks';
   /**
    * @var string
    */
   public $committedStorageBytes;
+  protected $disksType = AwsDiskDetails::class;
+  protected $disksDataType = 'array';
   /**
    * @var string
    */
@@ -41,6 +44,20 @@ class AwsSourceVmDetails extends \Google\Model
   public function getCommittedStorageBytes()
   {
     return $this->committedStorageBytes;
+  }
+  /**
+   * @param AwsDiskDetails[]
+   */
+  public function setDisks($disks)
+  {
+    $this->disks = $disks;
+  }
+  /**
+   * @return AwsDiskDetails[]
+   */
+  public function getDisks()
+  {
+    return $this->disks;
   }
   /**
    * @param string

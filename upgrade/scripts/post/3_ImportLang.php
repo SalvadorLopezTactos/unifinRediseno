@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * add language pack config information to config.php
  */
@@ -19,15 +20,17 @@ class SugarUpgradeImportLang extends UpgradeScript
 
     public function run()
     {
-        if(!$this->toFlavor('pro')) return;
-        if(!is_file('install/lang.config.php')){
-       	    return;
-       	}
-		$this->log('install/lang.config.php exists, let\'s import the file/array into sugar_config/config.php');
-		include('install/lang.config.php');
+        if (!$this->toFlavor('pro')) {
+            return;
+        }
+        if (!is_file('install/lang.config.php')) {
+            return;
+        }
+        $this->log('install/lang.config.php exists, let\'s import the file/array into sugar_config/config.php');
+        include 'install/lang.config.php';
 
-		foreach($config['languages'] as $k=>$v){
-			$this->upgrader->config['languages'][$k] = $v;
-		}
+        foreach ($config['languages'] as $k => $v) {
+            $this->upgrader->config['languages'][$k] = $v;
+        }
     }
 }

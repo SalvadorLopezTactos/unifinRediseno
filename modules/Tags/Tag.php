@@ -32,7 +32,6 @@ class Tag extends Basic
     public $verifiedUnique = false;
 
     public function __construct()
-
     {
         parent::__construct();
     }
@@ -40,7 +39,7 @@ class Tag extends Basic
     /**
      * @inheritDoc
      */
-    function bean_implements($interface)
+    public function bean_implements($interface)
     {
         switch ($interface) {
             case 'ACL':
@@ -70,7 +69,7 @@ class Tag extends Basic
         $this->verifyUniqueness($nameLower);
 
         // Handle setting the assigned user if not already set
-        if ($this->assigned_user_id === null  && !$this->isUpdate()) {
+        if ($this->assigned_user_id === null && !$this->isUpdate()) {
             $this->assigned_user_id = $current_user->id;
         }
 
@@ -91,7 +90,7 @@ class Tag extends Basic
         // Handle uniqueness checking early
         if (!$this->verifiedUnique) {
             // Handle check return value defaults
-            $result = array();
+            $result = [];
 
             // Uniqueness needs to be checked for two cases...
             // 1. New tags must be unique
@@ -102,10 +101,10 @@ class Tag extends Basic
                 $q = new SugarQuery();
 
                 // We really only need to check to see if there is a single row
-                $q->select(array('id'));
+                $q->select(['id']);
                 $q->from($this)
-                  ->where()
-                  ->equals('name_lower', $nameLower);
+                    ->where()
+                    ->equals('name_lower', $nameLower);
                 $result = $q->execute();
             }
 
@@ -126,7 +125,7 @@ class Tag extends Basic
     /**
      * Gets all the tags for every record id given
      *
-     * @param $focus
+     * @param SugarBean $focus
      * @param $ids string|string[] $records Record ID or array of records IDs
      * @return array
      * @throws Doctrine\DBAL\Exception
@@ -136,24 +135,27 @@ class Tag extends Basic
         // No ids means nothing to do
         // Not use this in Tags module, use only for other modules
         if (empty($ids) || ($focus == null) || ($focus->table_name === 'tags')) {
-            return array();
+            return [];
         }
 
-        $sql = <<<SQL
-SELECT tags.id, tags.name, tbr.bean_id
-FROM tags INNER JOIN tag_bean_rel tbr ON tags.id=tbr.tag_id
-WHERE tbr.bean_module = ? AND tbr.bean_id IN (?) AND tbr.deleted=0
-ORDER BY tags.name_lower ASC
-SQL;
-        $rows = $this->db->getConnection()
-            ->executeQuery(
-                $sql,
-                [$focus->module_name, is_array($ids) ? $ids : [$ids]],
-                [null, Connection::PARAM_STR_ARRAY]
-            );
+        // Create a new SugarQuery instance
+        $query = new SugarQuery(DBManagerFactory::getInstance('listviews'));
+
+        $query->from(BeanFactory::newBean('Tags'));
+        $query->joinTable('tag_bean_rel', ['joinType' => 'INNER'])
+            ->on()
+            ->equalsField('tags.id', 'tag_bean_rel.tag_id');
+        $query->select(['tags.id', 'tags.name', ['tag_bean_rel.bean_id', 'bean_id']]);
+        $query->where()->equals('tag_bean_rel.bean_module', $focus->getModuleName());
+        $query->where()->in('tag_bean_rel.bean_id', $ids);
+        $query->where()->equals('tag_bean_rel.deleted', 0);
+        $query->orderBy('tags.name_lower', 'ASC');
+
+        $rows = $query->execute();
+
         $returnArray = [];
 
-        foreach ($rows->iterateAssociative() as $data) {
+        foreach ($rows as $data) {
             $returnArray[$data['bean_id']][] = ['id' => $data['id'], 'name' => $data['name']];
         }
 
@@ -190,16 +192,17 @@ SQL;
     /**
      * @inheritDoc
      */
-    public function mark_deleted($id) {
+    public function mark_deleted($id)
+    {
         //When deleting a tag, also delete the tag relation rows associated with that tag
         $date_modified = $GLOBALS['timedate']->nowDb();
 
-        $sql = "UPDATE tag_bean_rel";
-        $sql .= " SET deleted = 1, date_modified = ? ";
-        $sql .= " WHERE tag_id= ? ";
+        $sql = 'UPDATE tag_bean_rel';
+        $sql .= ' SET deleted = 1, date_modified = ? ';
+        $sql .= ' WHERE tag_id= ? ';
         $db = DBManagerFactory::getInstance();
         $conn = $db->getConnection();
-        $conn->executeStatement($sql, array($date_modified, $id));
+        $conn->executeStatement($sql, [$date_modified, $id]);
         parent::mark_deleted($id);
     }
 

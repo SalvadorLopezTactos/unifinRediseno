@@ -95,7 +95,7 @@ class CsrfAuthenticator
         $this->logger = $logger;
 
         // set config options
-        $this->softFailForm = (bool) $config->get('csrf.soft_fail_form', false);
+        $this->softFailForm = (bool)$config->get('csrf.soft_fail_form', false);
     }
 
     /**
@@ -105,7 +105,6 @@ class CsrfAuthenticator
     public static function getInstance()
     {
         if (empty(static::$instance)) {
-
             $config = \SugarConfig::getInstance();
 
             // setup token generator
@@ -142,11 +141,11 @@ class CsrfAuthenticator
     {
         // handle missing token
         if (empty($post[self::FORM_TOKEN_FIELD])) {
-            $this->logger->critical("CSRF: attack vector detected, missing form token field");
+            $this->logger->critical('CSRF: attack vector detected, missing form token field');
 
             // return valid on soft failures, log a convenience message
             if ($this->softFailForm) {
-                $this->logger->critical("CSRF: attack vector *NOT* mitigated, soft failure mode enabled");
+                $this->logger->critical('CSRF: attack vector *NOT* mitigated, soft failure mode enabled');
                 return true;
             }
 
@@ -157,11 +156,11 @@ class CsrfAuthenticator
 
         // handle token mismatch
         if (!$this->isTokenValid(self::FORM_TOKEN_ID, $token)) {
-            $this->logger->critical("CSRF: attack vector detected, invalid form token detected");
+            $this->logger->critical('CSRF: attack vector detected, invalid form token detected');
 
             // return valid on soft failures, log a convenience message
             if ($this->softFailForm) {
-                $this->logger->critical("CSRF: attack vector *NOT* mitigated, soft failure mode enabled");
+                $this->logger->critical('CSRF: attack vector *NOT* mitigated, soft failure mode enabled');
                 return true;
             }
 
@@ -201,4 +200,3 @@ class CsrfAuthenticator
         return $this->manager->isTokenValid(new CsrfToken($tokenId, $value));
     }
 }
-

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Hívás napló',
     'LNK_NEW_MEETING' => 'Találkozó ütemezése',
     'LNK_NEW_TASK' => 'Új feladat létrehozása',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Extra meta mező 2',
     'COLUMN_TITLE_EXT3' => 'Extra meta mező 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'iFrame magasság',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'Alapértelmezett URL',
     'COLUMN_TITLE_AUDIT' => 'Ellenőrzés',
     'COLUMN_TITLE_PII' => 'Személyes adatok',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Alapértelmezett érték',
     'LBL_AUDITED' => 'Ellenőrzött',
     'LBL_REPORTABLE' => 'Megjeleníthető',
-    'ERR_RESERVED_FIELD_NAME' => "Foglalt kulcsszó",
+    'ERR_RESERVED_FIELD_NAME' => 'Foglalt kulcsszó',
     'ERR_SELECT_FIELD_TYPE' => 'Kérem, válasszon egy mezőtípust',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Mezőnév már létezik',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'A mező neve csak az alábbi karaktereket tartalmazhatja: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Kész',
     'LBL_EXE_NON_SIM_MODE' => 'Szimulációs üzemmód elhagyása',
     'LBL_CALCULATION_VISIBLE' => 'Láthatóvá tétel számítások számára',
-);
+];

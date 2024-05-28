@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Hent omslag',
     'LBL_CLOUD_SERVICE_TYPE' => 'Skytjenestetype',
     'LBL_CLOUD_PATH' => 'Skybane',
+    'LBL_CLOUD_DRIVE_ID' => 'Disk-ID',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign omslagsliste dashbord',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'DocuSign omslag oppføring dashbord',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Aktuelle DocuSign omslag',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign omslag fokusskuff',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'DocuSign omslag tidslinje',
 
     'LBL_NEW_ENVELOPE' => 'Nytt omslag',
     'LBL_DOCUMENT_IS_NOW' => ' er nå ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Send',
     'LBL_BUTTON_CLEAR' => 'Fjern',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Bruk mal',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Send med mal',
     'LBL_PLEASE_LOG_IN' => 'Logg inn hos DocuSign først!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Du kan ikke laste ned dette dokumentet. Det ble opprettet av en annen bruker!',
     'LBL_SEND_NOT_ALLOWED' => 'Du kan ikke sende dette omslaget. Det ble opprettet av en annen bruker!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Utkastet ble endret. Oppdater statusen til den aktuelle ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'DocuSign omslag oppdatert!',
     'LBL_DRAFT_CHANGED_ERROR' => 'DocuSign omslag status ikke oppdatert. Sjekk logger for informasjon!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'DocuSign-mal kan ikke brukes',
     'LBL_ENVELOPE_NOT_SENT' => 'Omslag ikke sendt!',
     'LBL_ENVELOPE_SENT' => 'Omslag ble sendt igjen!',
     'LBL_DOCUMENT_ADDED' => 'Dokument lagt til oppføring!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Rolle',
     'LBL_SELECT_BUTTON_LABEL' => 'Velg',
     'LBL_BACK_BUTTON_LABEL' => 'Tilbake',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Søk etter malnavn',
+    'LBL_ENVELOPE_NAME' => 'Konvoluttnavn',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Konvoluttnavn kan være tomt',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Kunne ikke hente potensielle mottakere!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Kunne ikke hente maler!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Velg en rolle for hver mottaker',
+    
+    'LBL_DOWNLOAD' => 'Last ned',
+    'LBL_OPEN_DRAFT' => 'Åpne utkast',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Dokumenter uten en fil kan ikke sendes til DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Klikk på Pluss-knappen for å starte signeringsprosessen',
+    'LBL_NO_DOC_SELECTED' => 'Velg dokumenter først',
+    'LBL_SELECT_RECIPIENTS' => 'Velg mottaker for underskriver',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Ekskluder',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Du må installere DocuSign-applikasjonen for en bedre opplevelse.',
 ];

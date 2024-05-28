@@ -106,8 +106,8 @@ class SugarUpgradeInstallRecordDashboards extends UpgradeScript
         $contents = str_replace('<module_name>', $module, $contents);
         $contents = str_replace('<MODULE_NAME>', strtoupper($module), $contents);
         $fw = sugar_fopen($destDir . 'record-dashboard.php', 'w');
-        fwrite($fw, $contents) ;
-        fclose($fw) ;
+        fwrite($fw, $contents);
+        fclose($fw);
     }
 
     /**

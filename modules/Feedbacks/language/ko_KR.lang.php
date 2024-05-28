@@ -13,7 +13,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FEEDBACK_TEXT_PLACEHOLDER' => '피드백 설명',
     'LBL_FEEDBACK_BTN_SUBMIT' => '보내기',
     'LBL_FEEDBACK_SENT' => '피드백 전송',
@@ -24,4 +24,4 @@ $mod_strings = array(
  {{contactSupportLink}} 로 연락해주세요.',
     'LBL_FEEDBACK_ASIDE_CLICK_MORE' => '자세한 내용을 보려면 여기를 클릭하십시오',
     'LBL_FEEDBACK_ASIDE_CONTACT_SUPPORT' => '연락처 지원',
-);
+];

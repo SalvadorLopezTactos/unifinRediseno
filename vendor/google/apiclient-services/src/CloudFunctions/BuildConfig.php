@@ -26,6 +26,10 @@ class BuildConfig extends \Google\Model
   /**
    * @var string
    */
+  public $dockerRegistry;
+  /**
+   * @var string
+   */
   public $dockerRepository;
   /**
    * @var string
@@ -61,6 +65,20 @@ class BuildConfig extends \Google\Model
   public function getBuild()
   {
     return $this->build;
+  }
+  /**
+   * @param string
+   */
+  public function setDockerRegistry($dockerRegistry)
+  {
+    $this->dockerRegistry = $dockerRegistry;
+  }
+  /**
+   * @return string
+   */
+  public function getDockerRegistry()
+  {
+    return $this->dockerRegistry;
   }
   /**
    * @param string

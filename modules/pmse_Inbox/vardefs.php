@@ -11,7 +11,7 @@
  */
 
 
-$dictionary['pmse_Inbox'] = array(
+$dictionary['pmse_Inbox'] = [
     'table' => 'pmse_inbox',
     'color' => 'orange',
     'icon' => 'sicon-processes-lg',
@@ -19,8 +19,8 @@ $dictionary['pmse_Inbox'] = array(
     'activity_enabled' => true,
     'reassignable' => false,
     'duplicate_merge' => true,
-    'fields' => array(
-        'cas_id' => array(
+    'fields' => [
+        'cas_id' => [
             'required' => true,
             'name' => 'cas_id',
             'vname' => 'LBL_CAS_ID',
@@ -42,8 +42,8 @@ $dictionary['pmse_Inbox'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'cas_parent' => array(
+        ],
+        'cas_parent' => [
             'required' => true,
             'name' => 'cas_parent',
             'vname' => 'LBL_CAS_PARENT',
@@ -64,8 +64,8 @@ $dictionary['pmse_Inbox'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'cas_status' => array(
+        ],
+        'cas_status' => [
             'required' => true,
             'name' => 'cas_status',
             'vname' => 'LBL_CAS_STATUS',
@@ -87,8 +87,8 @@ $dictionary['pmse_Inbox'] = array(
             'calculated' => false,
             'len' => '32',
             'size' => '20',
-        ),
-        'pro_id' => array(
+        ],
+        'pro_id' => [
             'required' => true,
             'name' => 'pro_id',
             'vname' => 'LBL_PRO_ID',
@@ -107,8 +107,8 @@ $dictionary['pmse_Inbox'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '20',
-        ),
-        'cas_title' => array(
+        ],
+        'cas_title' => [
             'required' => false,
             'name' => 'cas_title',
             'vname' => 'LBL_CAS_TITLE',
@@ -127,8 +127,8 @@ $dictionary['pmse_Inbox'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'pro_title' => array(
+        ],
+        'pro_title' => [
             'required' => false,
             'name' => 'pro_title',
             'vname' => 'LBL_PRO_TITLE',
@@ -147,8 +147,8 @@ $dictionary['pmse_Inbox'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '20',
-        ),
-        'cas_custom_status' => array(
+        ],
+        'cas_custom_status' => [
             'required' => false,
             'name' => 'cas_custom_status',
             'vname' => 'LBL_CAS_CUSTOM_STATUS',
@@ -167,8 +167,8 @@ $dictionary['pmse_Inbox'] = array(
             'calculated' => false,
             'len' => '32',
             'size' => '20',
-        ),
-        'cas_init_user' => array(
+        ],
+        'cas_init_user' => [
             'required' => false,
             'name' => 'cas_init_user',
             'vname' => 'LBL_CAS_INIT_USER',
@@ -187,8 +187,8 @@ $dictionary['pmse_Inbox'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '20',
-        ),
-        'cas_create_date' => array(
+        ],
+        'cas_create_date' => [
             'required' => false,
             'name' => 'cas_create_date',
             'vname' => 'LBL_CAS_CREATE_DATE',
@@ -209,8 +209,8 @@ $dictionary['pmse_Inbox'] = array(
             'enable_range_search' => false,
             'dbType' => 'datetime',
             'display_default' => 'now&12:00am',
-        ),
-        'cas_update_date' => array(
+        ],
+        'cas_update_date' => [
             'required' => false,
             'name' => 'cas_update_date',
             'vname' => 'LBL_CAS_UPDATE_DATE',
@@ -230,8 +230,8 @@ $dictionary['pmse_Inbox'] = array(
             'size' => '20',
             'enable_range_search' => false,
             'dbType' => 'datetime',
-        ),
-        'cas_finish_date' => array(
+        ],
+        'cas_finish_date' => [
             'required' => false,
             'name' => 'cas_finish_date',
             'vname' => 'LBL_CAS_FINISH_DATE',
@@ -251,8 +251,8 @@ $dictionary['pmse_Inbox'] = array(
             'size' => '20',
             'enable_range_search' => false,
             'dbType' => 'datetime',
-        ),
-        'cas_pin' => array(
+        ],
+        'cas_pin' => [
             'required' => false,
             'name' => 'cas_pin',
             'vname' => 'LBL_CAS_PIN',
@@ -272,8 +272,8 @@ $dictionary['pmse_Inbox'] = array(
             'calculated' => false,
             'len' => '10',
             'size' => '20',
-        ),
-        'cas_assigned_status' => array(
+        ],
+        'cas_assigned_status' => [
             'required' => false,
             'name' => 'cas_assigned_status',
             'vname' => 'LBL_CAS_ASSIGNED_STATUS',
@@ -293,8 +293,8 @@ $dictionary['pmse_Inbox'] = array(
             'calculated' => false,
             'len' => '12',
             'size' => '20',
-        ),
-        'name' => array(
+        ],
+        'name' => [
             'name' => 'name',
             'vname' => 'LBL_NAME',
             'type' => 'name',
@@ -306,8 +306,8 @@ $dictionary['pmse_Inbox'] = array(
             'duplicate_merge' => 'enabled',
             'merge_filter' => 'selected',
             'duplicate_on_record_copy' => 'always',
-        ),
-        'cas_module' => array(
+        ],
+        'cas_module' => [
             'required' => true,
             'name' => 'cas_module',
             'vname' => 'LBL_RST_MODULE',
@@ -329,9 +329,9 @@ $dictionary['pmse_Inbox'] = array(
             'options' => '',
             'studio' => 'visible',
             'dependency' => false,
-        ),
+        ],
         //We need this field to set "Process Name" on quicksearch filter
-        'act_name' => array(
+        'act_name' => [
             'name' => 'act_name',
             'vname' => 'LBL_PROCESS_NAME',
             'type' => 'varchar',
@@ -339,17 +339,17 @@ $dictionary['pmse_Inbox'] = array(
             'studio' => false,
             'reportable' => false,
             'massupdate' => false,
-        ),
-    ),
-    'relationships' => array(),
-    'indices' => array(
-        array(
-            'name'   => 'idx_pmse_inbox_case_id',
-            'type'   => 'index',
-            'fields' => array(
+        ],
+    ],
+    'relationships' => [],
+    'indices' => [
+        [
+            'name' => 'idx_pmse_inbox_case_id',
+            'type' => 'index',
+            'fields' => [
                 'cas_id',
-            ),
-        ),
+            ],
+        ],
         [
             'name' => 'idx_proid_status_del',
             'type' => 'index',
@@ -359,7 +359,7 @@ $dictionary['pmse_Inbox'] = array(
                 'deleted',
             ],
         ],
-    ),
+    ],
     'optimistic_locking' => true,
     'unified_search' => true,
     'hide_fields_to_edit_role' => false,
@@ -372,18 +372,18 @@ $dictionary['pmse_Inbox'] = array(
     // implementation fields. Once there is a separation of default and basic
     // templates we can safely remove these as this module will implement
     // default instead of basic.
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'team_security',
         'assignable',
-    ),
-);
+    ],
+];
 VardefManager::createVardef('pmse_Inbox', 'pmse_Inbox');

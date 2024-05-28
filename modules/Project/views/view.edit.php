@@ -11,12 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class ProjectViewEdit extends ViewEdit {
- 	function display() {
+class ProjectViewEdit extends ViewEdit
+{
+    public function display()
+    {
         $this->bean->is_template = 0;
-        if (!empty($this->ev->ss)){
-            $this->ev->ss->assign("is_template", 0);
+        if (!empty($this->ev->ss)) {
+            $this->ev->ss->assign('is_template', 0);
         }
- 		parent::display();
- 	}
+        parent::display();
+    }
 }

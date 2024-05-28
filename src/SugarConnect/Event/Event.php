@@ -27,13 +27,13 @@ final class Event
      * for the specified event.
      *
      * @param ConfigurationInterface $config The SugarConnect configuration.
-     * @param string                 $event  The type of event.
-     *
-     * @throws \Exception Throws if the instance does not implement Publisher.
+     * @param string $event The type of event.
      *
      * @return Publisher
+     * @throws \Exception Throws if the instance does not implement Publisher.
+     *
      */
-    public static function getInstance(ConfigurationInterface $config, string $event) : Publisher
+    public static function getInstance(ConfigurationInterface $config, string $event): Publisher
     {
         // Event names are transformed from snake_case to PascalCase to match
         // PHP class names.
@@ -59,12 +59,12 @@ final class Event
      * Sends the event to the Sugar Connect webhook.
      *
      * @param ConfigurationInterface $config The SugarConnect configuration.
-     * @param array                  $event  The final event or message to
+     * @param array $event The final event or message to
      *                                       publish.
      *
      * @return void
      */
-    public static function publish(ConfigurationInterface $config, array $event) : void
+    public static function publish(ConfigurationInterface $config, array $event): void
     {
         // Every notification declares where it came from.
         $event['source'] = \SugarConfig::getInstance()->get('site_url');
@@ -80,12 +80,12 @@ final class Event
      *
      * @return array
      */
-    public static function getFields(\SugarBean $bean) : array
+    public static function getFields(\SugarBean $bean): array
     {
         return array_keys(
             array_filter(
                 $bean->getFieldDefinitions(),
-                function (array $def) : bool {
+                function (array $def): bool {
                     return !isset($def['type']) || $def['type'] !== 'link';
                 }
             )

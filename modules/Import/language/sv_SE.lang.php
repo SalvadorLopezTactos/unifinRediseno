@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Importfilen lästes framgångsrikt',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Den Importerade posten deltar i en process och kan inte redigeras eftersom vissa fält är låsta för redigering av processen.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Poster skippade på grund av error',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'On användaren inte finns använd den nuvarande användaren',
     'LBL_SHOW_HIDDEN' => 'Visa fält som inte normalt är importeringsbara',
     'LBL_UPDATE_RECORDS' => 'Uppdatera befintliga poster istället för importera dom (Ingen ångra)',
-    'LBL_TEST'=> 'Testa import (varken sparar eller ändrar data)',
+    'LBL_TEST' => 'Testa import (varken sparar eller ändrar data)',
     'LBL_TRUNCATE_TABLE' => 'Töm tabell innan import (tar bort alla poster)',
     'LBL_RELATED_ACCOUNTS' => 'Skapa inte relaterade organisationer',
     'LBL_NO_DATECHECK' => 'Skippa datumkontroll (snabbare men kommer att misslyckas om datan är fel)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Ogiltigt integer-värde',
     'LBL_ERROR_INVALID_NUM' => 'Ogiltig numeriskt värde',
     'LBL_ERROR_INVALID_TIME' => 'Ogiltig time',
-    'LBL_ERROR_INVALID_EMAIL'=>'Ogiltig Email-adress',
-    'LBL_ERROR_INVALID_BOOL'=>'Ogiltigt värde (skall vara 1 eller 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Ogiltig datumsträng',
-    'LBL_ERROR_INVALID_USER'=>'Ogiltigt användarnamn eller ID',
+    'LBL_ERROR_INVALID_EMAIL' => 'Ogiltig Email-adress',
+    'LBL_ERROR_INVALID_BOOL' => 'Ogiltigt värde (skall vara 1 eller 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Ogiltig datumsträng',
+    'LBL_ERROR_INVALID_USER' => 'Ogiltigt användarnamn eller ID',
     'LBL_ERROR_INVALID_TEAM' => 'Ogiltigt teamnamn eller ID',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Ogiltigt organisationsnamn eller ID',
     'LBL_ERROR_INVALID_RELATE' => 'Ogiltigt relationsfält',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'finns inte eller är inte skrivbar',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Filerna laddades ej upp korrekt. Det kan bero på att inställningarna i &#39;upload_max_filesize&#39; i php.ini filen är satt till ett för lågt värde',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Filen är för stor. Max:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bytes. Ändra $sugar_config[&#39;upload_maxsize&#39;] i config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Byte. Ändra $sugar_config[&#39;upload_maxsize&#39;] i config.php',
     'LBL_MODULE_NAME' => 'Importera',
     'LBL_MODULE_NAME_SINGULAR' => 'Importera',
     'LBL_TRY_AGAIN' => 'Försök igen',
     'LBL_START_OVER' => 'Börja Om',
     'LBL_ERROR' => 'Fel:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Den importerade filen innehåller {0} rader. Det optimala antalet rader är {1}. Fler rader kan sakta ner importeringsprocessen. Klicka OK för att fortsätta importering. Klicka Avbryt för att se över och ladda upp den importerade filen igen.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Du kan inte importera en system administratörs användare',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Du kan inte importera en system administratörs användare',
     'ERR_REPORT_LOOP' => 'Systemet upptäckte en rapporteringsloop. En användare kan inte rapportera till sig själv, en chef kan inte rapportera till en användare.',
     'ERR_MULTIPLE' => 'Flera kolumner har definierats till samma fältnamn.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Saknar obligatoriska fälten:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Det var inga linjer i din importfil',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Importfilen har redan blivit processad eller finns inte',
     'LBL_SUCCESS' => 'Genomfört:',
-	'LBL_FAILURE' => 'Importering misslyckades:',
+    'LBL_FAILURE' => 'Importering misslyckades:',
     'LBL_SUCCESSFULLY' => 'Importen genomförd',
     'LBL_LAST_IMPORT_UNDONE' => 'Din senaste import är ogjord',
     'LBL_NO_IMPORT_TO_UNDO' => 'Det fanns ingen import att göra ogjord',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Importera mera',
     'LBL_FINISHED' => 'Avsluta',
     'LBL_UNDO_LAST_IMPORT' => 'Ångra senaste importen',
-    'LBL_LAST_IMPORTED'=>'Senast importerade',
+    'LBL_LAST_IMPORTED' => 'Senast importerade',
     'ERR_MULTIPLE_PARENTS' => 'Du kan endast ha ett Föräldra ID definierat',
     'LBL_DUPLICATES' => 'Kopia hittad',
     'LNK_DUPLICATE_LIST' => 'Ladda ner en lista över kopior',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Göm Anteckningar',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Visa tidigare columner',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Göm tidigare columner',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Sök efter dubletter med operator:',
     'LBL_SAVE_MAPPING_AS' => 'Spara mappning som',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Enkelt citationstecken (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Dubbelt citationstecken (")',
@@ -286,12 +286,12 @@ $mod_strings = array (
     'LBL_DECIMAL_SEP' => 'Decimalsymbol',
     'LBL_LOCALE_DEFAULT_NAME_FORMAT' => 'Namnvisningsformat',
     'LBL_LOCALE_EXAMPLE_NAME_FORMAT' => 'Exempel',
-    'LBL_LOCALE_NAME_FORMAT_DESC' => '<i>\"s\" Titel, \"f\" Förnamn, \"l\" Efternamn</i>',
+    'LBL_LOCALE_NAME_FORMAT_DESC' => '<i>\\"s\\" Titel, \\"f\\" Förnamn, \\"l\\" Efternamn</i>',
     'LBL_CHARSET' => 'Filencodning',
     'LBL_MY_SAVED_HELP' => 'En sparad mappning specificerar en tidigare använd kombination av en tidigare använd datakälla och en uppsättning databasfält att mappa fälten mot i importfilen. <br>Klicka <b>Publicera</b> för att göra mappningen tillgänglig för andra användare. <br>Klicka <b>Opublicera</b> för att göra mappnings otillgänglig för andra användare..',
     'LBL_MY_SAVED_ADMIN_HELP' => 'Använd det här alternativet för att använda dina förinställda importinställningar, inklusive import egenskaper, mappning, och dubbelpostkontroll, till den här importeringen.<br><br>Klicka <b>Publicera</b> för att göra mappning möjlig för andra användare.<br>Klicka <b>Avpublicera</b> för att inte göra mappning möjlig för andra användare.<br>Klicka <b>Radera</b> för att radera mappning för andra användare.',
     'LBL_MY_PUBLISHED_HELP' => 'En sparad mappning specificerar en tidigare använd kombination av en tidigare använd datakälla och en uppsättning databasfält att mappa fälten mot i importfilen.',
-    'LBL_ENCLOSURE_HELP' => '<p><b>Inhängnings tecknet</b> används för att hålla ihop data i filen, som inkluderar vilket tecken som helst som används som avgräsare.<br><br>Exempel: Om avgräsaren är komma (,) och inhängare är citationstecken (\"),<br><b>"Cupertino, California"</b> blir importerar till ett fält i applikationen och visas som <b>Cupertino, California</b>.<br>Om det inte finns några inhängningstecken eller om det är ett annat tecken så importeras <br><b>"Cupertino, California"</b> till två fält som <b>"Cupertino</b> och <b>Texas"</b>.<br><br>Anteckning: Importfilen behlver inte innehålla inhängningstecken.<br>Standardtecknet för komma- och tab- separerade filer skapade i Excel är citationstecken.</p>',
+    'LBL_ENCLOSURE_HELP' => '<p><b>Inhängnings tecknet</b> används för att hålla ihop data i filen, som inkluderar vilket tecken som helst som används som avgräsare.<br><br>Exempel: Om avgräsaren är komma (,) och inhängare är citationstecken (\\"),<br><b>"Cupertino, California"</b> blir importerar till ett fält i applikationen och visas som <b>Cupertino, California</b>.<br>Om det inte finns några inhängningstecken eller om det är ett annat tecken så importeras <br><b>"Cupertino, California"</b> till två fält som <b>"Cupertino</b> och <b>Texas"</b>.<br><br>Anteckning: Importfilen behlver inte innehålla inhängningstecken.<br>Standardtecknet för komma- och tab- separerade filer skapade i Excel är citationstecken.</p>',
     'LBL_DELIMITER_COMMA_HELP' => 'Välj detta om fältsepareraren i importfilen är ett <b>komma</b> eller om filändelsen är .csv',
     'LBL_DELIMITER_TAB_HELP' => 'Välj detta om tecknet som separerar fälten vid import är <b>TAB</b> pcj filändelsen är .txt.',
     'LBL_DELIMITER_CUSTOM_HELP' => 'Välj detta om tecknet som separerar fälten i importfilen varken är komma eller TAB och skriv in tecknet i det intilliggande fältet.',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'För att tilldela nya protokoll till andra grupper än ditt standard team(s), använd Standard Värde kolumnen för att välja ett annat team.',
     'LBL_SIGN_IN_HELP' => 'För att aktivera den här servicen, vänligen logga in under Externa Konton fliken på din användarinställning sida.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Försöker att hantera emailadresser i en Bean som inte stödjer det.",
-);
+];

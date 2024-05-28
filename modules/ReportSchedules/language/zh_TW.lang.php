@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '報表排程',
     'LBL_MODULE_NAME_SINGULAR' => '報表排程',
     'LBL_REPORT_NAME' => '報表',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => '文件類型',
     'LBL_EMBED_REPORT' => '在電子郵件中嵌入報告',
     'LBL_EMBED_REPORT_INFO' => '注意：如果報告超過200行，我們會將報告附加為CSV文件。',
-);
+];

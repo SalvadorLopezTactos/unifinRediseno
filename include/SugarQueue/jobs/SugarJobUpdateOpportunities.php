@@ -17,8 +17,8 @@
  * Class to run a job which should upgrade every old opp with commit stage, date_closed_timestamp,
  * best/worst cases and related product
  */
-class SugarJobUpdateOpportunities extends JobNotification implements RunnableSchedulerJob {
-
+class SugarJobUpdateOpportunities extends JobNotification implements RunnableSchedulerJob
+{
     /**
      * @var SchedulersJob
      */
@@ -104,7 +104,7 @@ class SugarJobUpdateOpportunities extends JobNotification implements RunnableSch
     public static function updateOpportunitiesForForecasting($perJob = 100)
     {
         $sq = new SugarQuery();
-        $sq->select(array('id'));
+        $sq->select(['id']);
         $sq->from(BeanFactory::newBean('Opportunities'));
         $sq->orderBy('date_closed');
 
@@ -153,7 +153,7 @@ class SugarJobUpdateOpportunities extends JobNotification implements RunnableSch
         $chunks = array_chunk($rows, $perJob);
         $job_group = md5(microtime());
 
-        $jobs = array();
+        $jobs = [];
         // process the first job now
         $job = static::createJob($chunks[0], $runImmediately, $runImmediately ? null : $job_group, $delay);
 
@@ -169,12 +169,12 @@ class SugarJobUpdateOpportunities extends JobNotification implements RunnableSch
             $jobs[] = $job;
         }
 
-        for ($i = 1; $i < count($chunks); $i++) {
+        for ($i = 1; $i < safeCount($chunks); $i++) {
             $jobs[] = static::createJob($chunks[$i], false, $job_group, $delay);
         }
 
         // if only one job was created, just return that id
-        if (count($jobs) == 1) {
+        if (safeCount($jobs) == 1) {
             return array_shift($jobs);
         }
 
@@ -194,8 +194,8 @@ class SugarJobUpdateOpportunities extends JobNotification implements RunnableSch
 
         /* @var $job SchedulersJob */
         $job = BeanFactory::newBean('SchedulersJobs');
-        $job->name = "Update Old Opportunities";
-        $job->target = "class::SugarJobUpdateOpportunities";
+        $job->name = 'Update Old Opportunities';
+        $job->target = 'class::SugarJobUpdateOpportunities';
         $job->data = json_encode($data);
         $job->retry_count = 0;
         $job->assigned_user_id = $current_user->id;

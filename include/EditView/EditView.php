@@ -9,26 +9,28 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Old EditView
  * @deprecated
  */
-class EditView {
+class EditView
+{
     /**
      * smarty object
      * @var object
      */
-    var $ss;
+    public $ss;
     /**
      * location of template to use
      * @var string
      */
-    var $template;
+    public $template;
     /**
      * Module to use
      * @var string
      */
-    var $module;
+    public $module;
 
     /**
      *
@@ -47,8 +49,10 @@ class EditView {
      * assigns all things to the template like mod_srings and app_strings
      *
      */
-    function process() {
-        global $current_language, $app_strings, $sugar_version, $sugar_config, $timedate, $theme;;
+    public function process()
+    {
+        global $current_language, $app_strings, $sugar_version, $sugar_config, $timedate, $theme;
+        ;
         $module_strings = return_module_language($current_language, $this->module);
 
         $this->ss->assign('SUGAR_VERSION', $sugar_version);
@@ -65,9 +69,8 @@ class EditView {
      *
      * @return string HTML of parsed template
      */
-    function display() {
+    public function display()
+    {
         return $this->ss->fetch($this->template);
     }
-
 }
-

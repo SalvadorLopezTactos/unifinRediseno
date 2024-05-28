@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Importuotas failas sėkmingai nuskaitytas',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Importuotas įrašas naudojamas procese ir jo redaguoti negalima, nes kai kurių laukų redaguoti vykdant procesą neleidžiama.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'rastų klaidų skaičius. Peržiūrėkite eilučių, kurios dėl klaidos nebuvo importuotos, klaidos skirtuką  ',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Jeigu tokio vartotojo nėra, naudoti esamą vartotoją',
     'LBL_SHOW_HIDDEN' => 'Rodo laukus, kurie standartiškai nėra importuojami',
     'LBL_UPDATE_RECORDS' => 'Atnaujinti egzistuojančius įrašus',
-    'LBL_TEST'=> 'Testuoti importavimą (nepakeičia ir neišsaugo duomenų)',
+    'LBL_TEST' => 'Testuoti importavimą (nepakeičia ir neišsaugo duomenų)',
     'LBL_TRUNCATE_TABLE' => 'Išvalyti lentelę prieš importavimą (ištrinti visus įrašus)',
     'LBL_RELATED_ACCOUNTS' => 'Nesukurti susijusių klientų',
     'LBL_NO_DATECHECK' => 'Netikrinti datų (bus greičiau, bet sustos, jei ras klaidą kurioje nors datoje)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Neteisinga sveiko skaičiaus reikšmė',
     'LBL_ERROR_INVALID_NUM' => 'Neteisinga skaitmenų reikšmė',
     'LBL_ERROR_INVALID_TIME' => 'Neteisingas laikas',
-    'LBL_ERROR_INVALID_EMAIL'=>'Neteisingas el. pašto adresas',
-    'LBL_ERROR_INVALID_BOOL'=>'Neteisinga reikšmė (turi būti 1 arba 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Neteisingas datos laukas',
-    'LBL_ERROR_INVALID_USER'=>'Neteisingas vartotojo vardas arba ID',
+    'LBL_ERROR_INVALID_EMAIL' => 'Neteisingas el. pašto adresas',
+    'LBL_ERROR_INVALID_BOOL' => 'Neteisinga reikšmė (turi būti 1 arba 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Neteisingas datos laukas',
+    'LBL_ERROR_INVALID_USER' => 'Neteisingas vartotojo vardas arba ID',
     'LBL_ERROR_INVALID_TEAM' => 'Neteisingas komandos vardas arba ID',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Neteisingas kliento vardas arba ID',
     'LBL_ERROR_INVALID_RELATE' => 'Neteisingas susiejimo laukas',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => 'neegzistuoja arba nėra įrašomas',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Nepavyko sėkmingai užkrauti failo. Tai gali būti dėl to, kad php.ini  nustatymuose Jūsų php.ini faile &#39;upload_max_filesize&#39; parametro reikšmė yra labai mažas skaičius.',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Failas yra per didelis. Maksimalus:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Baitai. Pakeisti $sugar_config[&#39;upload_maxsize&#39;] config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Baitai. Keisti $sugar_config[&#39;upload_maxsize&#39;] konfigūracijoje.php',
     'LBL_MODULE_NAME' => 'Importuoti',
     'LBL_MODULE_NAME_SINGULAR' => 'Importas',
     'LBL_TRY_AGAIN' => 'Bandyti dar kartą',
     'LBL_START_OVER' => 'Pradėti iš naujo',
     'LBL_ERROR' => 'Klaida:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Importavimo failas turi {0} eilutes. Rekomenduotinas eilučių skaičius yra {1}. Didesnis kiekis eilučių gali sulėtinti importavimo eigą. Spauskite Gerai, kad tęsti importavimą. Spauskite Atšaukti, jei norite iš naujo naujo įkelti mažesnį failą.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Jūs negalite importuoti administracinio vartotojo',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Jūs negalite importuoti administracinio vartotojo',
     'ERR_REPORT_LOOP' => 'Sistema aptiko pavaldumo ciklą. Nei vartotojai, nei jo vadovai negali būti pavaldūs sau.',
     'ERR_MULTIPLE' => 'Keli stulpeliai buvo pavadinti tuo pačiu lauko pavadinimu.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Trūksta reikiamų laukų:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Nerasta eilučių Jūsų importuojamame faile',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Importuojamas failas jau buvo įvykdytas arba neegzistuoja',
     'LBL_SUCCESS' => 'Sėkmė:',
-	'LBL_FAILURE' => 'Importas nepavyko:',
+    'LBL_FAILURE' => 'Importas nepavyko:',
     'LBL_SUCCESSFULLY' => 'Sėkmingai importuotas',
     'LBL_LAST_IMPORT_UNDONE' => 'Jūsų paskutinis importavimas buvo panaikintas',
     'LBL_NO_IMPORT_TO_UNDO' => 'Nėra jokio importo kurį būtų galima panaikinti',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Importuoti daugiau',
     'LBL_FINISHED' => 'Grįžti į',
     'LBL_UNDO_LAST_IMPORT' => 'Pašalinti paskutinį importą',
-    'LBL_LAST_IMPORTED'=>'Paskutinis importuotas',
+    'LBL_LAST_IMPORTED' => 'Paskutinis importuotas',
     'ERR_MULTIPLE_PARENTS' => 'Jūs galite nurodyti tik vieną pagrindinį ID',
     'LBL_DUPLICATES' => 'Rasti dublikatai',
     'LNK_DUPLICATE_LIST' => 'Nusikrauti dublikatų sąrašą',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Paslėpti užrašus',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Rodyti peržiūrimus stulpelius',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Slėpti peržiūrimus stulpelius',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Patikrinkite, ar nėra dublikatų, naudodami operatorių:',
     'LBL_SAVE_MAPPING_AS' => 'Išsaugoti susiejimą kaip',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Viengubos kabutės (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Dvigubos kabutės (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Jei norite naujus įrašus priskirti kitai komandai,  tam panaudokite numatytos reikšmės stulpelį ir pasirinkite kitą komandą.',
     'LBL_SIGN_IN_HELP' => 'Kad įjungti šį servisą, prašome nurodyti  savo vartotojo profilyje->Išoriniai prisijungimai.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Trying to handle email addresses in a Bean that doesn't support it.",
-);
+];

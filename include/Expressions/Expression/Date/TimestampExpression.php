@@ -58,7 +58,7 @@ EOQ;
      */
     public static function getOperationName()
     {
-        return "timestamp";
+        return 'timestamp';
     }
 
     /**

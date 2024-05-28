@@ -25,7 +25,7 @@ class InboundEmailUtils
      */
     public static function handleTransferEncoding($text, $encoding)
     {
-        switch (strtolower($encoding)) {
+        switch (strtolower((string)$encoding)) {
             case 'base64':
                 return base64_decode($text);
             case 'quoted-printable':
@@ -49,7 +49,7 @@ class InboundEmailUtils
         // If no charset was provided, attempt to detect it
         $charset = !empty($charset) ? $charset : $locale->detectCharset($text, true);
         if (empty($charset)) {
-            $GLOBALS['log']->debug("InboundEmailUtils::handleCharsetTranslation() called without \$charset");
+            $GLOBALS['log']->debug('InboundEmailUtils::handleCharsetTranslation() called without $charset');
             return $text;
         }
 

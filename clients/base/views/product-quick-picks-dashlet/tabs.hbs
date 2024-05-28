@@ -12,8 +12,9 @@
 --}}
 <div class="dashlet-tabs-row">
     {{#each this.tabs}}
-        <div class="dashlet-tab{{#eq ../settings.attributes.activeTab @index}} active{{/eq}}">
-            <a data-toggle="tab" data-action="tab-switcher" data-index="{{@index}}">
+        <div class="dashlet-tab first:border-l-0 last:border-r-0{{#eq ../settings.attributes.activeTab @index}} active font-bold{{/eq}}"
+             data-bs-toggle="tab">
+            <a class="flex flex-col items-center" data-action="tab-switcher" data-index="{{@index}}">
                 {{str label module}}
             </a>
         </div>

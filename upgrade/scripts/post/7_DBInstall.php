@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Recreate hierarchy search stored procedures
  */
@@ -19,7 +20,7 @@ class SugarUpgradeDBInstall extends UpgradeScript
 
     public function run()
     {
-        if($this->db->supports('recursive_query')) {
+        if ($this->db->supports('recursive_query')) {
             $this->db->preInstall();
         }
     }

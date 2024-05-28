@@ -87,8 +87,8 @@ class HandlerCollection implements \IteratorAggregate
     /**
      * Get handler by name
      * @param string $name
-     * @throws HandlerCollectionException
      * @return HandlerInterface
+     * @throws HandlerCollectionException
      */
     public function getHandler($name)
     {

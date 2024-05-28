@@ -87,119 +87,119 @@ abstract class DBManager implements LoggerAwareInterface
      */
     public $variant;
 
-	/**
-	 * Actual database link, used in concrete classes
-	 * @var resource
-	 */
-	public $database = null;
+    /**
+     * Actual database link, used in concrete classes
+     * @var resource
+     */
+    public $database = null;
 
-	/**
-	 * Indicates whether we should die when we get an error from the DB
-	 */
-	protected $dieOnError = false;
+    /**
+     * Indicates whether we should die when we get an error from the DB
+     */
+    protected $dieOnError = false;
 
-	/**
-	 * Indicates whether we should html encode the results from a query by default
-	 */
-	protected $encode = true;
+    /**
+     * Indicates whether we should html encode the results from a query by default
+     */
+    protected $encode = true;
 
-	/**
-	 * Records the execution time of the last query
-	 */
-	public $query_time = 0;
+    /**
+     * Records the execution time of the last query
+     */
+    public $query_time = 0;
 
-	/**
-	 * Last error message from the DB backend
-	 */
-	protected $last_error = false;
+    /**
+     * Last error message from the DB backend
+     */
+    protected $last_error = false;
 
-	/**
-	 * Registry of available result sets
-	 */
-	protected $lastResult;
+    /**
+     * Registry of available result sets
+     */
+    protected $lastResult;
 
-	/**
-	 * Current query count
-	 */
-	private static $queryCount = 0;
+    /**
+     * Current query count
+     */
+    private static $queryCount = 0;
 
-	/**
-	 * Query threshold limit
-	 */
-	private static $queryLimit = 0;
+    /**
+     * Query threshold limit
+     */
+    private static $queryLimit = 0;
 
-	/**
-	 * Array of prepared statements and their correspoding parsed tokens
-	 */
-	protected $preparedTokens = array();
+    /**
+     * Array of prepared statements and their correspoding parsed tokens
+     */
+    protected $preparedTokens = [];
 
-	/**
-	 * TimeDate instance
-	 * @var TimeDate
-	 */
-	protected $timedate;
+    /**
+     * TimeDate instance
+     * @var TimeDate
+     */
+    protected $timedate;
 
     /**
      * @var Request
      */
     protected $request;
 
-	/**
-	 * Table descriptions
-	 * @var array
-	 */
-	protected static $table_descriptions = array();
+    /**
+     * Table descriptions
+     * @var array
+     */
+    protected static $table_descriptions = [];
 
-	/**
-	 * Index descriptions
-	 * @var array
-	 */
-	protected static $index_descriptions = array();
+    /**
+     * Index descriptions
+     * @var array
+     */
+    protected static $index_descriptions = [];
 
     /**
      * @var DB version. Set by \DBManager::version()
      */
     protected static $version;
 
-	/**
-	 * Maximum length of identifiers
-	 * @abstract
-	 * @var array
-	 */
-	protected $maxNameLengths = array(
-		'table' => 64,
-		'column' => 64,
-		'index' => 64,
-		'alias' => 64
-	);
+    /**
+     * Maximum length of identifiers
+     * @abstract
+     * @var array
+     */
+    protected $maxNameLengths = [
+        'table' => 64,
+        'column' => 64,
+        'index' => 64,
+        'alias' => 64,
+    ];
 
-	/**
-	 * DB driver priority
-	 * Higher priority drivers override lower priority ones
-	 * @var int
-	 */
-	public $priority = 0;
+    /**
+     * DB driver priority
+     * Higher priority drivers override lower priority ones
+     * @var int
+     */
+    public $priority = 0;
 
-	/**
-	 * Driver name label, for install
-	 * @absrtact
-	 * @var string
-	 */
-	public $label = '';
+    /**
+     * Driver name label, for install
+     * @absrtact
+     * @var string
+     */
+    public $label = '';
 
-	/**
-	 * Type names map
-	 * @abstract
-	 * @var array
-	 */
-	protected $type_map = array();
+    /**
+     * Type names map
+     * @abstract
+     * @var array
+     */
+    protected $type_map = [];
 
     /**
      * Type min:max value
      * @abstract
      * @var array
      */
-    protected $type_range = array();
+    protected $type_range = [];
 
     /**
      * Field's max size
@@ -208,78 +208,78 @@ abstract class DBManager implements LoggerAwareInterface
      */
     protected $max_size = [];
 
-	/**
-	 * Type classification into:
-	 * - int
-	 * - bigint
-	 * - bool
-	 * - float
-	 * - date
-	 * - time
-	 * @var array
-	 */
-	protected $type_class = array(
-			'int'      => 'int',
-			'integer'  => 'int',
-			'double'   => 'float',
-			'float'    => 'float',
-			'uint'     => 'int',
-			'ulong'    => 'bigint',
-			'long'     => 'bigint',
-			'bigint'   => 'bigint',
-			'short'    => 'int',
-			'date'     => 'date',
-			'datetime' => 'date',
-			'datetimecombo' => 'date',
-			'time'     => 'time',
-			'bool'     => 'bool',
-			'tinyint'  => 'int',
-			'currency' => 'float',
-			'decimal'  => 'float',
-			'decimal2' => 'float',
-	        'decimal_tpl' => 'float',
-	);
+    /**
+     * Type classification into:
+     * - int
+     * - bigint
+     * - bool
+     * - float
+     * - date
+     * - time
+     * @var array
+     */
+    protected $type_class = [
+        'int' => 'int',
+        'integer' => 'int',
+        'double' => 'float',
+        'float' => 'float',
+        'uint' => 'int',
+        'ulong' => 'bigint',
+        'long' => 'bigint',
+        'bigint' => 'bigint',
+        'short' => 'int',
+        'date' => 'date',
+        'datetime' => 'date',
+        'datetimecombo' => 'date',
+        'time' => 'time',
+        'bool' => 'bool',
+        'tinyint' => 'int',
+        'currency' => 'float',
+        'decimal' => 'float',
+        'decimal2' => 'float',
+        'decimal_tpl' => 'float',
+    ];
 
-	/**
-	 * Capabilities this DB supports. Supported list:
-	 * affected_rows	Can report query affected rows for UPDATE/DELETE
-	 * 					implement getAffectedRowCount()
-	 * select_rows		Can report row count for SELECT
-	 * 					implement getRowCount()
-	 * case_sensitive	Supports case-sensitive text columns
-	 * inline_keys		Supports defining keys together with the table
-	 * auto_increment_sequence Autoincrement support implemented as sequence
-	 * limit_subquery   Supports LIMIT clauses in subqueries
-	 * create_user		Can create users for Sugar
-	 * create_db		Can create databases
-	 * collation		Supports setting collations
-	 * disable_keys     Supports temporarily disabling keys (for upgrades, etc.)
+    /**
+     * Capabilities this DB supports. Supported list:
+     * affected_rows    Can report query affected rows for UPDATE/DELETE
+     *                  implement getAffectedRowCount()
+     * select_rows      Can report row count for SELECT
+     *                  implement getRowCount()
+     * case_sensitive   Supports case-sensitive text columns
+     * inline_keys      Supports defining keys together with the table
+     * auto_increment_sequence Autoincrement support implemented as sequence
+     * limit_subquery   Supports LIMIT clauses in subqueries
+     * create_user      Can create users for Sugar
+     * create_db        Can create databases
+     * collation        Supports setting collations
+     * disable_keys     Supports temporarily disabling keys (for upgrades, etc.)
      * recursive_query  Supports recursive queries
      *
      * order_stability  Supports stable order on SELECTs without the need for
      *                  unique column usage in the `ORDER BY` clause when no
      *                  huge insert/delete operations are happening on the
      *                  SELECTed tables.
-	 *
-	 * @abstract
-	 * Special cases:
-	 * fix:expandDatabase - needs expandDatabase fix, see expandDatabase.php
-	 * TODO: verify if we need these cases
-	 */
-	protected $capabilities = array();
+     *
+     * @abstract
+     * Special cases:
+     * fix:expandDatabase - needs expandDatabase fix, see expandDatabase.php
+     * TODO: verify if we need these cases
+     */
+    protected $capabilities = [];
 
-	/**
-	 * Database options
-	 * @var array
-	 */
-	protected $options = array();
+    /**
+     * Database options
+     * @var array
+     */
+    protected $options = [];
 
 
     /**
      * Default performance profile
      * @var array
      */
-    protected $defaultPerfProfile = array();
+    protected $defaultPerfProfile = [];
 
 
     /**
@@ -390,8 +390,8 @@ abstract class DBManager implements LoggerAwareInterface
     public function setEmptyWhere(SugarQuery_Builder_Where $where, $field, $bean = false)
     {
         $where->queryOr()
-              ->equals($field, '', $bean)
-              ->isNull($field, $bean);
+            ->equals($field, '', $bean)
+            ->isNull($field, $bean);
         return $where;
     }
 
@@ -405,8 +405,8 @@ abstract class DBManager implements LoggerAwareInterface
     public function setNotEmptyWhere(SugarQuery_Builder_Where $where, $field, $bean = false)
     {
         $where->queryAnd()
-              ->notEquals($field, '', $bean)
-              ->notNull($field, $bean);
+            ->notEquals($field, '', $bean)
+            ->notNull($field, $bean);
         return $where;
     }
 
@@ -420,32 +420,32 @@ abstract class DBManager implements LoggerAwareInterface
         if (isset($this->defaultPerfProfile[$name])) {
             return $this->defaultPerfProfile[$name];
         } else {
-            return array();
+            return [];
         }
     }
 
     /**
      * Do we encode HTML?
-	 * @return bool $encode
-	 */
-	public function getEncode()
-	{
-		return $this->encode;
-	}
+     * @return bool $encode
+     */
+    public function getEncode()
+    {
+        return $this->encode;
+    }
 
-	/**
-	 * Set HTML encoding flag
-	 * @param boolean $encode
-	 */
-	public function setEncode($encode)
-	{
-		$this->encode = $encode;
-	}
+    /**
+     * Set HTML encoding flag
+     * @param boolean $encode
+     */
+    public function setEncode($encode)
+    {
+        $this->encode = $encode;
+    }
 
-	/**
+    /**
      * Create DB Driver
      */
-	public function __construct()
+    public function __construct()
     {
         $this->timedate = TimeDate::getInstance();
         $this->setLogger(new NullLogger());
@@ -461,21 +461,21 @@ abstract class DBManager implements LoggerAwareInterface
      * @param string $p var name
      * @return mixed
      */
-	public function __get($p)
-	{
+    public function __get($p)
+    {
         $this->logger->notice('Call to DBManager::$' . $p . ' is deprecated');
-		return $this->$p;
-	}
+        return $this->$p;
+    }
 
-	/**
-	 * Returns the current database handle
-	 * @return resource
-	 */
-	public function getDatabase()
-	{
-		$this->checkConnection();
-		return $this->database;
-	}
+    /**
+     * Returns the current database handle
+     * @return resource
+     */
+    public function getDatabase()
+    {
+        $this->checkConnection();
+        return $this->database;
+    }
 
     /**
      * Returns the Doctrine connection with the same connection resource
@@ -492,69 +492,69 @@ abstract class DBManager implements LoggerAwareInterface
         return $this->conn;
     }
 
-	/**
-	 * Checks for error happening in the database
-	 *
-	 * @param  string $msg        message to prepend to the error message
-	 * @param  bool   $dieOnError true if we want to die immediately on error
-	 * @return bool True if there was an error
-	 */
-	public function checkError($msg = '', $dieOnError = false)
-	{
-		if (empty($this->database)) {
-			$this->registerError($msg, "Database Is Not Connected", $dieOnError);
-			return true;
-		}
+    /**
+     * Checks for error happening in the database
+     *
+     * @param string $msg message to prepend to the error message
+     * @param bool $dieOnError true if we want to die immediately on error
+     * @return bool True if there was an error
+     */
+    public function checkError($msg = '', $dieOnError = false)
+    {
+        if (empty($this->database)) {
+            $this->registerError($msg, 'Database Is Not Connected', $dieOnError);
+            return true;
+        }
 
-		$dberror = $this->lastDbError();
-		if($dberror === false) {
-    		$this->last_error = false;
-	    	return false;
-		}
-		$this->registerError($msg, $dberror, $dieOnError);
+        $dberror = $this->lastDbError();
+        if ($dberror === false) {
+            $this->last_error = false;
+            return false;
+        }
+        $this->registerError($msg, $dberror, $dieOnError);
         return true;
-	}
+    }
 
-	/**
-	 * Register database error
-	 * If die-on-error flag is set, logs the message and dies,
-	 * otherwise sets last_error to the message
-	 * @param string $userMessage Message from function user
-	 * @param string $message Message from SQL driver
-	 * @param bool $dieOnError
-	 */
-	public function registerError($userMessage, $message, $dieOnError = false)
-	{
-		if(!empty($message)) {
-			if(!empty($userMessage)) {
-				$message = "$userMessage: $message";
-			}
-			if(empty($message)) {
-			    $message = "Database error";
-			}
+    /**
+     * Register database error
+     * If die-on-error flag is set, logs the message and dies,
+     * otherwise sets last_error to the message
+     * @param string $userMessage Message from function user
+     * @param string $message Message from SQL driver
+     * @param bool $dieOnError
+     */
+    public function registerError($userMessage, $message, $dieOnError = false)
+    {
+        if (!empty($message)) {
+            if (!empty($userMessage)) {
+                $message = "$userMessage: $message";
+            }
+            if (empty($message)) {
+                $message = 'Database error';
+            }
 
             $this->logger->alert($message);
 
-			if ($dieOnError || $this->dieOnError) {
-				if(isset($GLOBALS['app_strings']['ERR_DB_FAIL'])) {
-					sugar_die($GLOBALS['app_strings']['ERR_DB_FAIL']);
-				} else {
-					sugar_die("Database error. Please check sugarcrm.log for details.");
-				}
-			} else {
-				$this->last_error = $message;
-			}
-		}
-	}
+            if ($dieOnError || $this->dieOnError) {
+                if (isset($GLOBALS['app_strings']['ERR_DB_FAIL'])) {
+                    sugar_die($GLOBALS['app_strings']['ERR_DB_FAIL']);
+                } else {
+                    sugar_die('Database error. Please check sugarcrm.log for details.');
+                }
+            } else {
+                $this->last_error = $message;
+            }
+        }
+    }
 
-	/**
-	 * Return DB error message for the last query executed
-	 * @return string Last error message
-	 */
-	public function lastError()
-	{
-		return $this->last_error;
-	}
+    /**
+     * Return DB error message for the last query executed
+     * @return string Last error message
+     */
+    public function lastError()
+    {
+        return $this->last_error;
+    }
 
     /**
      * This method is called by every method that runs a query.
@@ -562,7 +562,7 @@ abstract class DBManager implements LoggerAwareInterface
      * the time limit, we will log the query. This function may do
      * additional reporting or log in a different area in the future.
      *
-     * @param  string  $query query to log
+     * @param string $query query to log
      * @return boolean true if the query was logged, false otherwise
      */
     public function dump_slow_queries($query)
@@ -597,7 +597,7 @@ abstract class DBManager implements LoggerAwareInterface
      * Tracks slow queries in the tracker database table. This is implicitly
      * called from DBManager::dump_slow_queries.
      *
-     * @param string $query  value of query to track
+     * @param string $query value of query to track
      */
     public function track_slow_queries($query)
     {
@@ -616,26 +616,26 @@ abstract class DBManager implements LoggerAwareInterface
         }
     }
 
-	/**
-	 * Service method for addDistinctClause, replaces subquery with JOIN
-	 * @param array $matches
-	 * @return string
-	 */
-	protected function replaceTeamClause($matches)
-	{
-	    $part = $matches[0];
-	    $search = array();
-	    $replace = array();
+    /**
+     * Service method for addDistinctClause, replaces subquery with JOIN
+     * @param array $matches
+     * @return string
+     */
+    protected function replaceTeamClause($matches)
+    {
+        $part = $matches[0];
+        $search = [];
+        $replace = [];
 
-	    $table = $matches[2];
-	    $search[] =  'INNER JOIN (select tst.team_set_id from team_sets_teams tst';
-	    $replace[] =  ' INNER JOIN team_sets_teams tst ON tst.team_set_id = ' . $table . '.team_set_id';
-	    $search[] = 'group by tst.team_set_id) ' . $table . '_tf on ' . $table . '_tf.team_set_id  = ' . $table .'.team_set_id';
-	    $replace[] = '';
+        $table = $matches[2];
+        $search[] = 'INNER JOIN (select tst.team_set_id from team_sets_teams tst';
+        $replace[] = ' INNER JOIN team_sets_teams tst ON tst.team_set_id = ' . $table . '.team_set_id';
+        $search[] = 'group by tst.team_set_id) ' . $table . '_tf on ' . $table . '_tf.team_set_id  = ' . $table . '.team_set_id';
+        $replace[] = '';
 
-	    $part= str_replace($search, $replace, $part);
-	    return $part;
-	}
+        $part = str_replace($search, $replace, $part);
+        return $part;
+    }
 
     /**
      * addDistinctClause
@@ -646,58 +646,66 @@ abstract class DBManager implements LoggerAwareInterface
      * @param string $sql value of SQL statement to alter
      * @deprecated
      */
-	protected function addDistinctClause(&$sql)
-	{
-	    preg_match('|^\W*(\w+)|i', $sql, $firstword);
-	    if(empty($firstword[1]) || strtolower($firstword[1]) != 'select') {
-	        // take first word of the query, if it's not SELECT - ignore it
-	        return;
-	    }
-		if(!empty($GLOBALS['sugar_config']['disable_count_query']) && (stripos($sql, 'count(*)') === false && stripos($sql, ' JOIN (select tst.team_set_id from') !==false)){
-			if(stripos( $sql, 'UNION ALL') !== false){
-				$parts = explode('UNION ALL', $sql);
-			}else{
-				$parts = array($sql);
-			}
-			$newSql = '';
-			foreach($parts as $p=>$part){
-			    $newpart = preg_replace_callback('/INNER JOIN \((select tst\.team_set_id[^\)]*)\)\s*(\w*)_tf on \w*_tf\.team_set_id  = \w*\.team_set_id/i',
-			        array($this, "replaceTeamClause"), $part);
-			    $selects = array();
-			    preg_match_all('/SELECT\s+(.*?)\s+FROM\s+/is', $newpart, $selects, PREG_OFFSET_CAPTURE);
-			    if(!empty($selects[1])) {
-			        $offset = 0;
-			        do {
-    			        foreach($selects[1] as $match) {
-                            if(stripos($match[0], 'distinct') !== false) continue; /* already have distinct */
-                            if(preg_match('/(avg|sum|min|max|count)\(.*\)/i', $match[0])) {
+    protected function addDistinctClause(&$sql)
+    {
+        preg_match('|^\W*(\w+)|i', $sql, $firstword);
+        if (empty($firstword[1]) || strtolower($firstword[1]) != 'select') {
+            // take first word of the query, if it's not SELECT - ignore it
+            return;
+        }
+        if (!empty($GLOBALS['sugar_config']['disable_count_query']) && (stripos($sql, 'count(*)') === false && stripos($sql, ' JOIN (select tst.team_set_id from') !== false)) {
+            if (stripos($sql, 'UNION ALL') !== false) {
+                $parts = explode('UNION ALL', $sql);
+            } else {
+                $parts = [$sql];
+            }
+            $newSql = '';
+            foreach ($parts as $p => $part) {
+                $newpart = preg_replace_callback(
+                    '/INNER JOIN \((select tst\.team_set_id[^\)]*)\)\s*(\w*)_tf on \w*_tf\.team_set_id  = \w*\.team_set_id/i',
+                    [$this, 'replaceTeamClause'],
+                    $part
+                );
+                $selects = [];
+                preg_match_all('/SELECT\s+(.*?)\s+FROM\s+/is', $newpart, $selects, PREG_OFFSET_CAPTURE);
+                if (!empty($selects[1])) {
+                    $offset = 0;
+                    do {
+                        foreach ($selects[1] as $match) {
+                            if (stripos($match[0], 'distinct') !== false) {
+                                continue;
+                            } /* already have distinct */
+                            if (preg_match('/(avg|sum|min|max|count)\(.*\)/i', $match[0])) {
                                 /* bug #61011 - don't rewrite queries with aggregates */
                                 break 2;
                             }
-                            $newpart = substr($newpart, 0, $match[1]+$offset)."DISTINCT ".substr($newpart, $match[1]+$offset);
-                            $offset += strlen("DISTINCT "); // adjust following offsets since we've added stuff
-    			        }
-			            $part = $newpart;
-			        } while(false);
-			    }
+                            $newpart = substr($newpart, 0, $match[1] + $offset) . 'DISTINCT ' . substr($newpart, $match[1] + $offset);
+                            $offset += strlen('DISTINCT '); // adjust following offsets since we've added stuff
+                        }
+                        $part = $newpart;
+                    } while (false);
+                }
 
-				if( $p < count($parts) - 1 )$part .= 'UNION ALL';
-				$newSql .= $part;
+                if ($p < safeCount($parts) - 1) {
+                    $part .= 'UNION ALL';
+                }
+                $newSql .= $part;
+            }
+            if (!empty($newSql)) {
+                $sql = $newSql;
+            }
+        }
+    }
 
-			}
-			if(!empty($newSql))$sql = $newSql;
-		}
-	}
-
-   /**
-	* Scans order by to ensure that any field being ordered by is.
-	*
-	* It will throw a warning error to the log file - fatal if slow query logging is enabled
-	*
-	* @param  string $sql         query to be run
-	* @param  bool   $object_name optional, object to look up indices in
-	* @return bool   true if an index is found false otherwise
-	*/
+    /**
+     * Scans order by to ensure that any field being ordered by is.
+     *
+     * It will throw a warning error to the log file - fatal if slow query logging is enabled
+     *
+     * @param string $sql query to be run
+     * @param bool $object_name optional, object to look up indices in
+     * @return bool   true if an index is found false otherwise
+     */
     protected function checkQuery($sql, $object_name = false)
     {
         preg_match_all("'.* FROM ([^ ]*).* ORDER BY (.*)'is", $sql, $match);
@@ -750,7 +758,7 @@ abstract class DBManager implements LoggerAwareInterface
                 continue;
             }
 
-            $orderBy = str_replace(array($table . '.', ','), '', $orderBy);
+            $orderBy = str_replace([$table . '.', ','], '', $orderBy);
 
             foreach ($indices as $index) {
                 if (empty($index['db']) || $index['db'] == $this->dbType) {
@@ -762,7 +770,7 @@ abstract class DBManager implements LoggerAwareInterface
                 }
             }
 
-            $warning = 'Missing Index For Order By Table: ' . $table . ' Order By:' . $orderBy ;
+            $warning = 'Missing Index For Order By Table: ' . $table . ' Order By:' . $orderBy;
 
             $this->logger->warning('CHECK QUERY:' . $warning);
         }
@@ -770,35 +778,36 @@ abstract class DBManager implements LoggerAwareInterface
         return false;
     }
 
-	/**
-	 * Returns the time the last query took to execute
-	 *
-	 * @return int
-	 */
-	public function getQueryTime()
-	{
-		return $this->query_time;
-	}
+    /**
+     * Returns the time the last query took to execute
+     *
+     * @return int
+     */
+    public function getQueryTime()
+    {
+        return $this->query_time;
+    }
 
-	/**
-	 * Checks the current connection; if it is not connected then reconnect
-	 */
-	public function checkConnection()
-	{
-		$this->last_error = '';
-		if (!isset($this->database))
-			$this->connect();
-	}
+    /**
+     * Checks the current connection; if it is not connected then reconnect
+     */
+    public function checkConnection()
+    {
+        $this->last_error = '';
+        if (!isset($this->database)) {
+            $this->connect();
+        }
+    }
 
-	/**
-	 * Sets the dieOnError value
-	 *
-	 * @param bool $value
-	 */
-	public function setDieOnError($value)
-	{
-		$this->dieOnError = $value;
-	}
+    /**
+     * Sets the dieOnError value
+     *
+     * @param bool $value
+     */
+    public function setDieOnError($value)
+    {
+        $this->dieOnError = $value;
+    }
 
     /**
      * Implements a generic insert for any bean.
@@ -806,68 +815,71 @@ abstract class DBManager implements LoggerAwareInterface
      * @param SugarBean $bean SugarBean instance
      * @return bool
      */
-	public function insert(SugarBean $bean)
-	{
+    public function insert(SugarBean $bean)
+    {
         return $this->insertParams(
             $bean->getTableName(),
             $bean->getFieldDefinitions(),
             $bean->toArray()
         );
-	}
+    }
 
-	/**
-	 * Replaces specific characters with their HTML entity values
-	 * @param string $string String to check/replace
-	 * @return string
-	 *
-	 */
-	public function encodeHTML($string)
-	{
-		if (empty($string) || !$this->encode) {
-			return $string;
-		}
-		/** Not using ENT_HTML401|ENT_SUBSTITUTE since they are 5.4+ only */
-		return htmlspecialchars($string, ENT_QUOTES, "UTF-8");
-	}
+    /**
+     * Replaces specific characters with their HTML entity values
+     * @param string $string String to check/replace
+     * @return string
+     *
+     */
+    public function encodeHTML($string)
+    {
+        if (empty($string) || !$this->encode) {
+            return $string;
+        }
+        /** Not using ENT_HTML401|ENT_SUBSTITUTE since they are 5.4+ only */
+        return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+    }
 
 
-	/**
-	 * Replaces specific HTML entity values with the true characters
-	 * @param string $string String to check/replace
-	 * @param bool $encode Default true
-	 * @return string
-	 */
-	public function decodeHTML($string)
-	{
-		if (!is_string($string) || !$this->encode) {
-			return $string;
-		}
-		return htmlspecialchars_decode($string, ENT_QUOTES);
-	}
-	/**
-	 * Insert data into table by parameter definition
-	 * @param string $table Table name
-	 * @param array $field_defs Definitions in vardef-like format
-	 * @param array $data Key/value to insert
+    /**
+     * Replaces specific HTML entity values with the true characters
+     * @param string $string String to check/replace
+     * @param bool $encode Default true
+     * @return string
+     */
+    public function decodeHTML($string)
+    {
+        if (!is_string($string) || !$this->encode) {
+            return $string;
+        }
+        return htmlspecialchars_decode($string, ENT_QUOTES);
+    }
+
+    /**
+     * Insert data into table by parameter definition
+     * @param string $table Table name
+     * @param array $field_defs Definitions in vardef-like format
+     * @param array $data Key/value to insert
      * @return bool
      */
     public function insertParams($table, $field_defs, $data)
-	{
-        $values = $expressions = array();
+    {
+        $values = $expressions = [];
         foreach ($field_defs as $field => $fieldDef) {
-			if (isset($fieldDef['source']) && $fieldDef['source'] != 'db')  continue;
-			//custom fields handle their save separately
+            if (isset($fieldDef['source']) && $fieldDef['source'] != 'db') {
+                continue;
+            }
+            //custom fields handle their save separately
             if (!empty($fieldDef['custom_type'])) {
                 continue;
             }
 
-			//handle auto increment values here - we may have to do something like nextval for oracle
-			if (!empty($fieldDef['auto_increment'])) {
-				$auto = $this->getAutoIncrementSQL($table, $fieldDef['name']);
-				if(!empty($auto)) {
+            //handle auto increment values here - we may have to do something like nextval for oracle
+            if (!empty($fieldDef['auto_increment'])) {
+                $auto = $this->getAutoIncrementSQL($table, $fieldDef['name']);
+                if (!empty($auto)) {
                     $expressions[$field] = $auto;
-				}
-			} else {
+                }
+            } else {
                 if (!array_key_exists($field, $data)) {
                     continue;
                 }
@@ -897,7 +909,7 @@ abstract class DBManager implements LoggerAwareInterface
         $builder->execute();
 
         return true;
-	}
+    }
 
     /**
      * Implements a generic update for any bean
@@ -907,8 +919,8 @@ abstract class DBManager implements LoggerAwareInterface
      */
     public function update(SugarBean $bean)
     {
-        $dataFields = array();
-        $dataValues = array();
+        $dataFields = [];
+        $dataValues = [];
         $primaryField = $bean->getPrimaryFieldDefinition();
         $fields = $bean->getFieldDefinitions();
         // get column names and values
@@ -930,150 +942,160 @@ abstract class DBManager implements LoggerAwareInterface
 
         // build where clause
         $where_data = $this->updateWhereArray($bean);
-        if (count($where_data) == 0) {
+        if (safeCount($where_data) == 0) {
             $GLOBALS['log']->fatal('Unable to update Bean. The Bean does not have an ID.');
             return false;
         }
         if (isset($fields['deleted'])) {
-            $where_data['deleted'] = "0";
+            $where_data['deleted'] = '0';
         }
         foreach ($where_data as $field => $value) {
             $dataFields[$field] = $fields[$field];
         }
 
         return $this->updateParams($bean->getTableName(), $dataFields, $dataValues, $where_data);
-	}
+    }
 
-	/**
-	 * Implements a generic retrieve for a collection of beans.
-	 *
-	 * These beans will be joined in the sql by the key attribute of field defs.
-	 * Currently, this function does support outer joins.
-	 *
-	 * @param  array $beans Sugarbean instance(s)
-	 * @param  array $cols  columns to be returned with the keys as names of bean as identified by
-	 * get_class of bean. Values of this array is the array of fieldDefs to be returned for a bean.
-	 * If an empty array is passed, all columns are selected.
-	 * @param  array $where  values with the keys as names of bean as identified by get_class of bean
-	 * Each value at the first level is an array of values for that bean identified by name of fields.
-	 * If we want to pass multiple values for a name, pass it as an array
-	 * If where is not passed, all the rows will be returned.
-	 * @return resource
-	 */
-	public function retrieveView(array $beans, array $cols = array(), array $where = array())
-	{
-		$sql = $this->retrieveViewSQL($beans, $cols, $where);
-		$msg = "Error retriving values from View Collection:";
-		return $this->query($sql,true,$msg);
-	}
+    /**
+     * Implements a generic retrieve for a collection of beans.
+     *
+     * These beans will be joined in the sql by the key attribute of field defs.
+     * Currently, this function does support outer joins.
+     *
+     * @param array $beans Sugarbean instance(s)
+     * @param array $cols columns to be returned with the keys as names of bean as identified by
+     * get_class of bean. Values of this array is the array of fieldDefs to be returned for a bean.
+     * If an empty array is passed, all columns are selected.
+     * @param array $where values with the keys as names of bean as identified by get_class of bean
+     * Each value at the first level is an array of values for that bean identified by name of fields.
+     * If we want to pass multiple values for a name, pass it as an array
+     * If where is not passed, all the rows will be returned.
+     * @return resource
+     */
+    public function retrieveView(array $beans, array $cols = [], array $where = [])
+    {
+        $sql = $this->retrieveViewSQL($beans, $cols, $where);
+        $msg = 'Error retriving values from View Collection:';
+        return $this->query($sql, true, $msg);
+    }
 
-	/**
-	 * Implements creation of a db table for a bean.
-	 *
-	 * NOTE: does not handle out-of-table constraints, use createConstraintSQL for that
-	 * @param SugarBean $bean  Sugarbean instance
-	 */
-	public function createTable(SugarBean $bean)
-	{
-		$sql = $this->createTableSQL($bean);
-		$tablename = $bean->getTableName();
-		$msg = "Error creating table: $tablename:";
-		$this->query($sql,true,$msg);
-		if(!$this->supports("inline_keys")) {
-		// handle constraints and indices
-			$indicesArr = $this->createConstraintSql($bean);
-			if (count($indicesArr) > 0)
-				foreach ($indicesArr as $indexSql)
-					$this->query($indexSql, true, $msg);
-		}
-	}
+    /**
+     * Implements creation of a db table for a bean.
+     *
+     * NOTE: does not handle out-of-table constraints, use createConstraintSQL for that
+     * @param SugarBean $bean Sugarbean instance
+     */
+    public function createTable(SugarBean $bean)
+    {
+        $sql = $this->createTableSQL($bean);
+        $tablename = $bean->getTableName();
+        $msg = "Error creating table: $tablename:";
+        $this->query($sql, true, $msg);
+        if (!$this->supports('inline_keys')) {
+            // handle constraints and indices
+            $indicesArr = $this->createConstraintSql($bean);
+            if (safeCount($indicesArr) > 0) {
+                foreach ($indicesArr as $indexSql) {
+                    $this->query($indexSql, true, $msg);
+                }
+            }
+        }
+    }
 
-	/**
-	 * returns SQL to create constraints or indices
-	 *
-	 * @param  SugarBean $bean SugarBean instance
-	 * @return array list of SQL statements
-	 */
-	protected function createConstraintSql(SugarBean $bean)
-	{
+    /**
+     * returns SQL to create constraints or indices
+     *
+     * @param SugarBean $bean SugarBean instance
+     * @return array list of SQL statements
+     */
+    protected function createConstraintSql(SugarBean $bean)
+    {
         $indices = $this->massageIndexDefs($bean->getFieldDefinitions(), $bean->getIndices());
         return $this->getConstraintSql($indices, $bean->getTableName());
-	}
+    }
 
-	/**
-	 * Implements creation of a db table
-	 *
-	 * @param string $tablename
-	 * @param array  $fieldDefs  Field definitions, in vardef format
-	 * @param array  $indices    Index definitions, in vardef format
-	 * @param string $engine    Engine parameter, used for MySQL engine so far
-     * @todo: refactor engine param to be more generic
+    /**
+     * Implements creation of a db table
+     *
+     * @param string $tablename
+     * @param array $fieldDefs Field definitions, in vardef format
+     * @param array $indices Index definitions, in vardef format
+     * @param string $engine Engine parameter, used for MySQL engine so far
      * @return bool success value
+     * @todo: refactor engine param to be more generic
      */
-	public function createTableParams($tablename, $fieldDefs, $indices, $engine = null)
-	{
+    public function createTableParams($tablename, $fieldDefs, $indices, $engine = null)
+    {
         $indices = $this->massageIndexDefs($fieldDefs, $indices);
-		if (!empty($fieldDefs)) {
+        if (!empty($fieldDefs)) {
             $sql = $this->createTableSQLParams($tablename, $fieldDefs, $indices);
-			$res = true;
-			if ($sql) {
-				$msg = "Error creating table: $tablename";
-				$res = ($res and $this->query($sql,true,$msg));
-			}
-			if(!$this->supports("inline_keys")) {
-				// handle constraints and indices
-				$indicesArr = $this->getConstraintSql($indices, $tablename);
-				if (count($indicesArr) > 0)
-					foreach ($indicesArr as $indexSql)
-						$res = ($res and $this->query($indexSql, true, "Error creating indexes"));
-			}
-			return $res;
-		}
-		return false;
-	}
+            $res = true;
+            if ($sql) {
+                $msg = "Error creating table: $tablename";
+                $res = ($res and $this->query($sql, true, $msg));
+            }
+            if (!$this->supports('inline_keys')) {
+                // handle constraints and indices
+                $indicesArr = $this->getConstraintSql($indices, $tablename);
+                if (safeCount($indicesArr) > 0) {
+                    foreach ($indicesArr as $indexSql) {
+                        $res = ($res and $this->query($indexSql, true, 'Error creating indexes'));
+                    }
+                }
+            }
+            return $res;
+        }
+        return false;
+    }
 
-	/**
-	 * Implements repair of a db table for a bean.
-	 *
-	 * @param  SugarBean $bean    SugarBean instance
-	 * @param  bool   $execute true if we want the action to take place, false if we just want the sql returned
-	 * @return string SQL statement or empty string, depending upon $execute
-	 */
-	public function repairTable(SugarBean $bean, $execute = true)
-	{
-		$indices   = $bean->getIndices();
-		$fielddefs = $bean->getFieldDefinitions();
-		$tablename = $bean->getTableName();
+    /**
+     * Implements repair of a db table for a bean.
+     *
+     * @param SugarBean $bean SugarBean instance
+     * @param bool $execute true if we want the action to take place, false if we just want the sql returned
+     * @return string SQL statement or empty string, depending upon $execute
+     */
+    public function repairTable(SugarBean $bean, $execute = true)
+    {
+        $indices = $bean->getIndices();
+        $fielddefs = $bean->getFieldDefinitions();
+        $tablename = $bean->getTableName();
 
-		//Clean the indexes to prevent duplicate definitions
-		$new_index = array();
-		foreach($indices as $ind_def){
-			$new_index[$ind_def['name']] = $ind_def;
-		}
-		//jc: added this for beans that do not actually have a table, namely
-		//ForecastOpportunities
-		if($tablename == 'does_not_exist' || $tablename == '')
-			return '';
+        //Clean the indexes to prevent duplicate definitions
+        $new_index = [];
+        foreach ($indices as $ind_def) {
+            if (!isset($ind_def['name'])) {
+                $this->logger->error('Invalid index def passed: ' . (new Exception)->getTraceAsString());
+                continue;
+            }
+            $new_index[$ind_def['name']] = $ind_def;
+        }
+        //jc: added this for beans that do not actually have a table, namely
+        //ForecastOpportunities
+        if ($tablename == 'does_not_exist' || $tablename == '') {
+            return '';
+        }
 
-		global $dictionary;
-		$engine=null;
-		if (isset($dictionary[$bean->getObjectName()]['engine']) && !empty($dictionary[$bean->getObjectName()]['engine']) )
-			$engine = $dictionary[$bean->getObjectName()]['engine'];
+        global $dictionary;
+        $engine = null;
+        if (isset($dictionary[$bean->getObjectName()]['engine']) && !empty($dictionary[$bean->getObjectName()]['engine'])) {
+            $engine = $dictionary[$bean->getObjectName()]['engine'];
+        }
 
-		return $this->repairTableParams($tablename, $fielddefs,$new_index,$execute,$engine);
-	}
+        return $this->repairTableParams($tablename, $fielddefs, $new_index, $execute, $engine);
+    }
 
-	/**
-	 * Can this field be null?
-	 * Auto-increment and ID fields can not be null
-	 * @param array $vardef
+    /**
+     * Can this field be null?
+     * Auto-increment and ID fields can not be null
+     * @param array $vardef
      * @return bool
      */
     protected function isNullable($vardef)
     {
         if (isset($vardef['isnull']) && (strtolower($vardef['isnull']) == 'false' || $vardef['isnull'] === false)
             && !empty($vardef['required'])) {
-                /* required + is_null=false => not null */
+            /* required + is_null=false => not null */
             return false;
         }
         if ((isset($vardef['type']) && $vardef['type'] == 'bool')
@@ -1091,31 +1113,32 @@ abstract class DBManager implements LoggerAwareInterface
     }
 
 
-	/**
-	 * Builds the SQL commands that repair a table structure
-	 *
-     * @param  string $tableName Table name
-	 * @param  array  $fielddefs Field definitions, in vardef format
-	 * @param  array  $indices   Index definitions, in vardef format
-	 * @param  bool   $execute   optional, true if we want the queries executed instead of returned
-	 * @param  string $engine    optional, MySQL engine
-     * @todo: refactor engine param to be more generic
+    /**
+     * Builds the SQL commands that repair a table structure
+     *
+     * @param string $tableName Table name
+     * @param array $fielddefs Field definitions, in vardef format
+     * @param array $indices Index definitions, in vardef format
+     * @param bool $execute optional, true if we want the queries executed instead of returned
+     * @param string $engine optional, MySQL engine
      * @return string
+     * @todo: refactor engine param to be more generic
      */
     public function repairTableParams($tableName, $fielddefs, array $indices, $execute = true, $engine = null)
     {
-        global  $sugar_config;
+        global $sugar_config;
         //jc: had a bug when running the repair if the tablename is blank the repair will
         //fail when it tries to create a repair table
-        if ($tableName == '' || empty($fielddefs))
+        if ($tableName == '' || empty($fielddefs)) {
             return '';
+        }
 
         //if the table does not exist create it and we are done
         $sql = "/* Table : $tableName */\n";
         if (!$this->tableExists($tableName)) {
             $createtablesql = $this->createTableSQLParams($tableName, $fielddefs, $indices);
-            if($execute && $createtablesql){
-                $this->createTableParams($tableName,$fielddefs,$indices,$engine);
+            if ($execute && $createtablesql) {
+                $this->createTableParams($tableName, $fielddefs, $indices, $engine);
             }
 
             $sql .= "/* MISSING TABLE: {$tableName} */\n";
@@ -1138,21 +1161,21 @@ abstract class DBManager implements LoggerAwareInterface
      */
     protected function parseLenPrecision($def)
     {
-        if (strpos($def['len'], ",") !== false) {
-            return explode(",", $def['len']);
+        if (strpos($def['len'], ',') !== false) {
+            return explode(',', $def['len']);
         }
         if (isset($def['precision'])) {
-            return array($def['len'], $def['precision']);
+            return [$def['len'], $def['precision']];
         }
-        return array($def['len'], null);
+        return [$def['len'], null];
     }
 
     /**
      * Supplies the SQL commands that repair a table structure
      *
-     * @param  string $tableName
-     * @param  array  $fielddefs Field definitions, in vardef format
-     * @param  bool   $execute   optional, true if we want the queries executed instead of returned
+     * @param string $tableName
+     * @param array $fielddefs Field definitions, in vardef format
+     * @param bool $execute optional, true if we want the queries executed instead of returned
      *
      * @return string
      */
@@ -1164,75 +1187,70 @@ abstract class DBManager implements LoggerAwareInterface
 
         // do column comparisons
         foreach ($fielddefs as $name => $value) {
-            if (isset($value['source']) && $value['source'] != 'db')
-                continue;
-
-            // Bug #42406. Skipping broken vardef without type or name
-            if (isset($value['name']) == false || $value['name'] == false)
-            {
-                $sql .= "/* NAME IS MISSING IN VARDEF $tableName::$name */\n";
+            if (isset($value['source']) && $value['source'] != 'db') {
                 continue;
             }
-            else if (isset($value['type']) == false || $value['type'] == false)
-            {
+
+            // Bug #42406. Skipping broken vardef without type or name
+            if (isset($value['name']) == false || $value['name'] == false) {
+                $sql .= "/* NAME IS MISSING IN VARDEF $tableName::$name */\n";
+                continue;
+            } elseif (isset($value['type']) == false || $value['type'] == false) {
                 $sql .= "/* TYPE IS MISSING IN VARDEF $tableName::$name */\n";
                 continue;
             }
 
             $name = strtolower($value['name']);
 
-            $ignorerequired=false;
+            $ignorerequired = false;
 
             //Do not track requiredness in the DB, auto_increment, ID,
             // and deleted fields are always required in the DB, so don't force those
             if ($this->isNullable($value)) {
                 $value['required'] = false;
-            }
-            //Should match the conditions in DBManager::oneColumnSQLRep for DB required fields, type='id' fields will sometimes
+            } //Should match the conditions in DBManager::oneColumnSQLRep for DB required fields, type='id' fields will sometimes
             //come into this function as 'type' = 'char', 'dbType' = 'id' without required set in $value. Assume they are correct and leave them alone.
-            else if (($name == 'id' || $value['type'] == 'id' || (isset($value['dbType']) && $value['dbType'] == 'id'))
-                && (!isset($value['required']) && isset($compareFieldDefs[$name]['required'])) || (!empty($value['auto_increment']) && isset($compareFieldDefs[$name]['required'])))
-            {
+            elseif (($name == 'id' || $value['type'] == 'id' || (isset($value['dbType']) && $value['dbType'] == 'id'))
+                && (!isset($value['required']) && isset($compareFieldDefs[$name]['required'])) || (!empty($value['auto_increment']) && isset($compareFieldDefs[$name]['required']))) {
                 $value['required'] = $compareFieldDefs[$name]['required'];
             }
 
-            if ( !isset($compareFieldDefs[$name]) ) {
+            if (!isset($compareFieldDefs[$name])) {
                 // ok we need this field lets create it
-                $sql .=	"/*MISSING IN DATABASE - $name -  ROW*/\n";
-                $sql .= $this->addColumnSQL($tableName, $value) .  "\n";
+                $sql .= "/*MISSING IN DATABASE - $name -  ROW*/\n";
+                $sql .= $this->addColumnSQL($tableName, $value) . "\n";
                 if ($execute) {
                     $this->addColumn($tableName, $value);
                 }
                 $take_action = true;
             } elseif (!$this->compareVarDefs($compareFieldDefs[$name], $this->createColumnDefinition($value))) {
                 //fields are different lets alter it
-                $sql .=	"/*MISMATCH WITH DATABASE - $name -  ROW ";
-                foreach($compareFieldDefs[$name] as $rKey => $rValue) {
-                    $sql .=	"[$rKey] => '$rValue'  ";
+                $sql .= "/*MISMATCH WITH DATABASE - $name -  ROW ";
+                foreach ($compareFieldDefs[$name] as $rKey => $rValue) {
+                    $sql .= "[$rKey] => '$rValue'  ";
                 }
-                $sql .=	"*/\n";
-                $sql .=	"/* VARDEF - $name -  ROW";
-                foreach($value as $rKey => $rValue) {
-                    if(is_array($rValue)) {
+                $sql .= "*/\n";
+                $sql .= "/* VARDEF - $name -  ROW";
+                foreach ($value as $rKey => $rValue) {
+                    if (is_array($rValue)) {
                         // no newlines
-                        $rValue = str_replace("\n", " ", print_r($rValue, true));
+                        $rValue = str_replace("\n", ' ', print_r($rValue, true));
                     }
-                    $sql .=	"[$rKey] => '$rValue'  ";
+                    $sql .= "[$rKey] => '$rValue'  ";
                 }
-                $sql .=	"*/\n";
+                $sql .= "*/\n";
 
                 //jc: oracle will complain if you try to execute a statement that sets a column to (not) null
                 //when it is already (not) null
-                if ( isset($value['isnull']) && isset($compareFieldDefs[$name]['isnull']) &&
+                if (isset($value['isnull']) && isset($compareFieldDefs[$name]['isnull']) &&
                     $value['isnull'] === $compareFieldDefs[$name]['isnull']) {
                     unset($value['required']);
-                    $ignorerequired=true;
+                    $ignorerequired = true;
                 }
 
                 //dwheeler: Once a column has been defined as null, we cannot try to force it back to !null
                 if ((isset($value['required']) && ($value['required'] === true || $value['required'] == 'true' || $value['required'] === 1))
-                    && (empty($compareFieldDefs[$name]['required']) || $compareFieldDefs[$name]['required'] != 'true'))
-                {
+                    && (empty($compareFieldDefs[$name]['required']) || $compareFieldDefs[$name]['required'] != 'true')) {
                     $ignorerequired = true;
                 }
 
@@ -1264,11 +1282,11 @@ abstract class DBManager implements LoggerAwareInterface
                 }
 
                 $altersql = $this->alterColumnSQL($tableName, $value, $ignorerequired);
-                if(is_array($altersql)) {
+                if (is_array($altersql)) {
                     $altersql = join("\n", $altersql);
                 }
-                $sql .= $altersql .  "\n";
-                if($execute){
+                $sql .= $altersql . "\n";
+                if ($execute) {
                     $this->alterColumn($tableName, $value, $ignorerequired);
                 }
                 $take_action = true;
@@ -1283,7 +1301,7 @@ abstract class DBManager implements LoggerAwareInterface
      * @param mixed[] $fieldDefinition
      * @return mixed[]
      */
-    private function createColumnDefinition(array $fieldDefinition) : array
+    private function createColumnDefinition(array $fieldDefinition): array
     {
         $this->massageFieldDef($fieldDefinition);
 
@@ -1293,10 +1311,10 @@ abstract class DBManager implements LoggerAwareInterface
     /**
      * Supplies the SQL commands that repair a table Indices
      *
-     * @param  string $tableName
-     * @param  array $fieldDefs field definitions of the table
-     * @param  array $indices Index definitions, in vardef format
-     * @param  bool $execute optional, true if we want the queries executed instead of returned
+     * @param string $tableName
+     * @param array $fieldDefs field definitions of the table
+     * @param array $indices Index definitions, in vardef format
+     * @param bool $execute optional, true if we want the queries executed instead of returned
      * @return string
      */
     private function repairTableIndices($tableName, $fieldDefs, $indices, $execute)
@@ -1321,34 +1339,34 @@ abstract class DBManager implements LoggerAwareInterface
         $take_action = false;
         $tableDefs = $this->get_columns($tableName);
         $sql = "/* INDEXES */\n";
-        $correctedIndexes = array();
+        $correctedIndexes = [];
 
-        $compareIndices_ci = array();
+        $compareIndices_ci = [];
 
         // ****************************************
         // do indices comparisons case-insensitive
         // ****************************************
 
         //First change the DB indices to lower case
-        foreach($compareIndices as $k => $value){
+        foreach ($compareIndices as $k => $value) {
             $value['name'] = strtolower($value['name']);
             $value['type'] = strtolower($value['type']);
             if (isset($value['fields'])) {
-                foreach($value['fields'] as $index=>$fieldName) {
-                    $value['fields'][$index]=strtolower($fieldName);
+                foreach ($value['fields'] as $index => $fieldName) {
+                    $value['fields'][$index] = strtolower($fieldName);
                 }
             }
             $compareIndices_ci[strtolower($k)] = $value;
         }
         $compareIndices = $compareIndices_ci;
-        $compareIndices_ci = array();
+        $compareIndices_ci = [];
         //Then change the $indices to lower case
-        foreach($indices as $k => $value){
+        foreach ($indices as $k => $value) {
             $value['name'] = strtolower($value['name']);
             $value['type'] = strtolower($value['type']);
             if (isset($value['fields'])) {
-                foreach($value['fields'] as $index=>$fieldName) {
-                    $value['fields'][$index]=strtolower($fieldName);
+                foreach ($value['fields'] as $index => $fieldName) {
+                    $value['fields'][$index] = strtolower($fieldName);
                 }
             }
             $compareIndices_ci[strtolower($k)] = $value;
@@ -1368,58 +1386,64 @@ abstract class DBManager implements LoggerAwareInterface
             $name = strtolower($value['name']);
 
             //Don't attempt to fix the same index twice in one pass;
-            if (isset($correctedIndexes[$name]))
+            if (isset($correctedIndexes[$name])) {
                 continue;
+            }
 
-            if ( in_array($value['type'],array('alternate_key','foreign')) )
+            if (in_array($value['type'], ['alternate_key', 'foreign'])) {
                 $value['type'] = 'index';
+            }
 
             // Filter the fields, remove non-indexable ones
             $value['fields'] = $this->filterIndexFields($tableDefs, $value['fields']);
-            if(empty($value['fields'])) {
+            if (empty($value['fields'])) {
                 // if we have no fields, ignore this index
                 continue;
             }
 
-            if ( !isset($compareIndices[$name]) ) {
+            if (!isset($compareIndices[$name])) {
                 //First check if an index exists that doesn't match our name, if so, try to rename it
                 $found = false;
                 foreach ($compareIndices as $ex_name => $ex_value) {
-                    if($this->compareVarDefs($ex_value, $value, true)) {
+                    if ($this->compareVarDefs($ex_value, $value, true)) {
                         $found = $ex_name;
                         break;
                     }
                 }
                 if ($found === false) {
                     // ok we need this field lets create it
-                    $sql .=	 "/*MISSING INDEX IN DATABASE - $name - {$value['type']}  ROW */\n";
-                    $sql .= $this->addIndexes($tableName,array($value), $execute) .  "\n";
+                    $sql .= "/*MISSING INDEX IN DATABASE - $name - {$value['type']}  ROW */\n";
+                    $sql .= $this->addIndexes($tableName, [$value], $execute) . "\n";
                     $take_action = true;
                     $correctedIndexes[$name] = true;
                 }
-            } elseif ( !$this->compareVarDefs($compareIndices[$name],$value) ) {
+            } elseif (!$this->compareVarDefs($compareIndices[$name], $value)) {
                 // fields are different lets alter it
-                $sql .=	"/*INDEX MISMATCH WITH DATABASE - $name -  ROW ";
+                $sql .= "/*INDEX MISMATCH WITH DATABASE - $name -  ROW ";
                 foreach ($compareIndices[$name] as $n1 => $t1) {
-                    $sql .=	 "<$n1>";
-                    if ( $n1 == 'fields' )
-                        foreach($t1 as $rKey => $rValue)
+                    $sql .= "<$n1>";
+                    if ($n1 == 'fields') {
+                        foreach ($t1 as $rKey => $rValue) {
                             $sql .= "[$rKey] => '$rValue'  ";
-                    else
+                        }
+                    } else {
                         $sql .= " $t1 ";
+                    }
                 }
-                $sql .=	"*/\n";
-                $sql .=	"/* VARDEF - $name -  ROW";
+                $sql .= "*/\n";
+                $sql .= "/* VARDEF - $name -  ROW";
                 foreach ($value as $n1 => $t1) {
-                    $sql .=	"<$n1>";
-                    if ( $n1 == 'fields' )
-                        foreach ($t1 as $rKey => $rValue)
-                            $sql .=	"[$rKey] => '$rValue'  ";
-                    else
+                    $sql .= "<$n1>";
+                    if ($n1 == 'fields') {
+                        foreach ($t1 as $rKey => $rValue) {
+                            $sql .= "[$rKey] => '$rValue'  ";
+                        }
+                    } else {
                         $sql .= " $t1 ";
+                    }
                 }
-                $sql .=	"*/\n";
-                $sql .= $this->modifyIndexes($tableName,array($value), $execute) .  "\n";
+                $sql .= "*/\n";
+                $sql .= $this->modifyIndexes($tableName, [$value], $execute) . "\n";
                 $take_action = true;
                 $correctedIndexes[$name] = true;
             }
@@ -1431,8 +1455,8 @@ abstract class DBManager implements LoggerAwareInterface
     /**
      * Compares two vardefs
      *
-     * @param  array  $fielddef1 This is from the database
-     * @param  array  $fielddef2 This is from the vardef
+     * @param array $fielddef1 This is from the database
+     * @param array $fielddef2 This is from the vardef
      * @param bool $ignoreName Ignore name-only differences?
      * @return bool   true if they match, false if they don't
      */
@@ -1441,7 +1465,7 @@ abstract class DBManager implements LoggerAwareInterface
         foreach ($fielddef1 as $key => $value) {
             if ($key == 'name' &&
                 (strtolower($fielddef1[$key]) == strtolower($fielddef2[$key]) ||
-                    $ignoreName) ) {
+                    $ignoreName)) {
                 continue;
             }
             if (isset($fielddef2[$key])) {
@@ -1479,491 +1503,486 @@ abstract class DBManager implements LoggerAwareInterface
         return true;
     }
 
-	/**
-	 * Compare a field in two tables
-	 * @deprecated
-	 * @param  string $name   field name
-	 * @param  string $table1
-	 * @param  string $table2
-	 * @return array  array with keys 'msg','table1','table2'
-	 */
-	public function compareFieldInTables($name, $table1, $table2)
-	{
-		$row1 = $this->describeField($name, $table1);
-		$row2 = $this->describeField($name, $table2);
-		$returnArray = array(
-			'table1' => $row1,
-			'table2' => $row2,
-			'msg'    => 'error',
-			);
+    /**
+     * Compare a field in two tables
+     * @param string $name field name
+     * @param string $table1
+     * @param string $table2
+     * @return array  array with keys 'msg','table1','table2'
+     * @deprecated
+     */
+    public function compareFieldInTables($name, $table1, $table2)
+    {
+        $row1 = $this->describeField($name, $table1);
+        $row2 = $this->describeField($name, $table2);
+        $returnArray = [
+            'table1' => $row1,
+            'table2' => $row2,
+            'msg' => 'error',
+        ];
 
-		$ignore_filter = array('Key'=>1);
-		if ($row1) {
-			if (!$row2) {
-				// Exists on table1 but not table2
-				$returnArray['msg'] = 'not_exists_table2';
-			}
-			else {
-				if (sizeof($row1) != sizeof($row2)) {
-					$returnArray['msg'] = 'no_match';
-				}
-				else {
-					$returnArray['msg'] = 'match';
-					foreach($row1 as $key => $value){
-						//ignore keys when checking we will check them when we do the index check
-						if( !isset($ignore_filter[$key]) && (!isset($row2[$key]) || $row1[$key] !== $row2[$key])){
-							$returnArray['msg'] = 'no_match';
-						}
-					}
-				}
-			}
-		}
-		else {
-			$returnArray['msg'] = 'not_exists_table1';
-		}
+        $ignore_filter = ['Key' => 1];
+        if ($row1) {
+            if (!$row2) {
+                // Exists on table1 but not table2
+                $returnArray['msg'] = 'not_exists_table2';
+            } else {
+                if (sizeof($row1) != sizeof($row2)) {
+                    $returnArray['msg'] = 'no_match';
+                } else {
+                    $returnArray['msg'] = 'match';
+                    foreach ($row1 as $key => $value) {
+                        //ignore keys when checking we will check them when we do the index check
+                        if (!isset($ignore_filter[$key]) && (!isset($row2[$key]) || $row1[$key] !== $row2[$key])) {
+                            $returnArray['msg'] = 'no_match';
+                        }
+                    }
+                }
+            }
+        } else {
+            $returnArray['msg'] = 'not_exists_table1';
+        }
 
-		return $returnArray;
-	}
+        return $returnArray;
+    }
 
-	/**
-	 * Creates an index identified by name on the given fields.
-	 *
-	 * @param SugarBean $bean      SugarBean instance
-	 * @param array  $fieldDefs Field definitions, in vardef format
-	 * @param string $name      index name
-	 * @param bool   $unique    optional, true if we want to create an unique index
+    /**
+     * Creates an index identified by name on the given fields.
+     *
+     * @param SugarBean $bean SugarBean instance
+     * @param array $fieldDefs Field definitions, in vardef format
+     * @param string $name index name
+     * @param bool $unique optional, true if we want to create an unique index
      * @return bool query result
      */
-	public function createIndex(SugarBean $bean, $fieldDefs, $name, $unique = true)
-	{
-		$sql = $this->createIndexSQL($bean, $fieldDefs, $name, $unique);
-		$tablename = $bean->getTableName();
-		$msg = "Error creating index $name on table: $tablename:";
-		return $this->query($sql,true,$msg);
-	}
+    public function createIndex(SugarBean $bean, $fieldDefs, $name, $unique = true)
+    {
+        $sql = $this->createIndexSQL($bean, $fieldDefs, $name, $unique);
+        $tablename = $bean->getTableName();
+        $msg = "Error creating index $name on table: $tablename:";
+        return $this->query($sql, true, $msg);
+    }
 
-	/**
-	 * Filter indexed fields, remove non-indexable ones
-	 * @param array $tableDefs Table field definitions
-	 * @param array $fields Fields to filter
-	 */
-	public function filterIndexFields($tableDefs, $fields)
-	{
-	    if(!is_array($fields)) {
-	        $fields = array($fields);
-	    }
-	    foreach($fields as $k => $field) {
-            if(empty($tableDefs[$field]) || empty($tableDefs[$field]['type'])) {
+    /**
+     * Filter indexed fields, remove non-indexable ones
+     * @param array $tableDefs Table field definitions
+     * @param array $fields Fields to filter
+     */
+    public function filterIndexFields($tableDefs, $fields)
+    {
+        if (!is_array($fields)) {
+            $fields = [$fields];
+        }
+        foreach ($fields as $k => $field) {
+            if (empty($tableDefs[$field]) || empty($tableDefs[$field]['type'])) {
                 // if we don't know this field, ignore it - we may add it as a part of bulk SQL update
                 // we're assuming that if somebody adds field they won't lead us astray
                 continue;
             }
-            if($this->isTextType($tableDefs[$field]['type'])) {
+            if ($this->isTextType($tableDefs[$field]['type'])) {
                 unset($fields[$k]);
             }
-	    }
-	    return $fields;
-	}
+        }
+        return $fields;
+    }
 
-	/**
-	 * returns a SQL query that creates the indices as defined in metadata
-	 * @param  array  $indices Assoc array with index definitions from vardefs
-	 * @param  string $table Focus table
-	 * @return array  Array of SQL queries to generate indices
-	 */
-	public function getConstraintSql($indices, $table)
-	{
-		if (!$this->isFieldArray($indices))
-			$indices = array($indices);
+    /**
+     * returns a SQL query that creates the indices as defined in metadata
+     * @param array $indices Assoc array with index definitions from vardefs
+     * @param string $table Focus table
+     * @return array  Array of SQL queries to generate indices
+     */
+    public function getConstraintSql($indices, $table)
+    {
+        if (!$this->isFieldArray($indices)) {
+            $indices = [$indices];
+        }
 
-		$columns = array();
+        $columns = [];
 
-		foreach ($indices as $index) {
-			if(!empty($index['db']) && $index['db'] != $this->dbType) {
-				continue;
-			}
-			if (isset($index['source']) && $index['source'] != 'db') {
-			    continue;
-			}
+        foreach ($indices as $index) {
+            if (!empty($index['db']) && $index['db'] != $this->dbType) {
+                continue;
+            }
+            if (isset($index['source']) && $index['source'] != 'db') {
+                continue;
+            }
 
-			$sql = $this->add_drop_constraint($table, $index);
+            $sql = $this->add_drop_constraint($table, $index);
 
-			if(!empty($sql)) {
-				$columns[] = $sql;
-			}
-		}
+            if (!empty($sql)) {
+                $columns[] = $sql;
+            }
+        }
 
-		return $columns;
-	}
+        return $columns;
+    }
 
-	/**
-	 * Adds a new indexes
-	 *
-	 * @param  string $tablename
-	 * @param  array  $indexes   indexes to add
-	 * @param  bool   $execute   true if we want to execute the returned sql statement
-	 * @return string SQL statement
-	 */
-	public function addIndexes($tablename, $indexes, $execute = true)
-	{
-		$alters = $this->getConstraintSql($indexes, $tablename);
-		if ($execute) {
-			foreach($alters as $sql) {
-				$this->query($sql, true, "Error adding index: ");
-			}
-		}
-		if(!empty($alters)) {
-			$sql = join(";\n", $alters).";\n";
-		} else {
-			$sql = '';
-		}
-		return $sql;
-	}
+    /**
+     * Adds a new indexes
+     *
+     * @param string $tablename
+     * @param array $indexes indexes to add
+     * @param bool $execute true if we want to execute the returned sql statement
+     * @return string SQL statement
+     */
+    public function addIndexes($tablename, $indexes, $execute = true)
+    {
+        $alters = $this->getConstraintSql($indexes, $tablename);
+        if ($execute) {
+            foreach ($alters as $sql) {
+                $this->query($sql, true, 'Error adding index: ');
+            }
+        }
+        if (!empty($alters)) {
+            $sql = join(";\n", $alters) . ";\n";
+        } else {
+            $sql = '';
+        }
+        return $sql;
+    }
 
-	/**
-	 * Drops indexes
-	 *
-	 * @param  string $tablename
-	 * @param  array  $indexes   indexes to drop
-	 * @param  bool   $execute   true if we want to execute the returned sql statement
-	 * @return string SQL statement
-	 */
-	public function dropIndexes($tablename, $indexes, $execute = true)
-	{
-		$sqls = array();
-		foreach ($indexes as $index) {
-			$name =$index['name'];
-			$sqls[$name] = $this->add_drop_constraint($tablename,$index,true);
-		}
-		if (!empty($sqls) && $execute) {
-			foreach($sqls as $name => $sql) {
-				unset(self::$index_descriptions[$tablename][$name]);
-				$this->query($sql);
-			}
-		}
-		if(!empty($sqls)) {
-			return join(";\n",$sqls).";";
-		} else {
-			return '';
-		}
-	}
+    /**
+     * Drops indexes
+     *
+     * @param string $tablename
+     * @param array $indexes indexes to drop
+     * @param bool $execute true if we want to execute the returned sql statement
+     * @return string SQL statement
+     */
+    public function dropIndexes($tablename, $indexes, $execute = true)
+    {
+        $sqls = [];
+        foreach ($indexes as $index) {
+            $name = $index['name'];
+            $sqls[$name] = $this->add_drop_constraint($tablename, $index, true);
+        }
+        if (!empty($sqls) && $execute) {
+            foreach ($sqls as $name => $sql) {
+                unset(self::$index_descriptions[$tablename][$name]);
+                $this->query($sql);
+            }
+        }
+        if (!empty($sqls)) {
+            return join(";\n", $sqls) . ';';
+        } else {
+            return '';
+        }
+    }
 
-	/**
-	 * Modifies indexes
-	 *
-	 * @param  string $tablename
-	 * @param  array  $indexes   indexes to modify
-	 * @param  bool   $execute   true if we want to execute the returned sql statement
-	 * @return string SQL statement
-	 */
-	public function modifyIndexes($tablename, $indexes, $execute = true)
-	{
-		return $this->dropIndexes($tablename, $indexes, $execute)."\n".
-			$this->addIndexes($tablename, $indexes, $execute);
-	}
+    /**
+     * Modifies indexes
+     *
+     * @param string $tablename
+     * @param array $indexes indexes to modify
+     * @param bool $execute true if we want to execute the returned sql statement
+     * @return string SQL statement
+     */
+    public function modifyIndexes($tablename, $indexes, $execute = true)
+    {
+        return $this->dropIndexes($tablename, $indexes, $execute) . "\n" .
+            $this->addIndexes($tablename, $indexes, $execute);
+    }
 
-	/**
-	 * Adds a column to table identified by field def.
-	 *
-	 * @param string $tablename
-	 * @param array  $fieldDefs
+    /**
+     * Adds a column to table identified by field def.
+     *
+     * @param string $tablename
+     * @param array $fieldDefs
      * @return bool query result
      */
-	public function addColumn($tablename, $fieldDefs)
-	{
-		$sql = $this->addColumnSQL($tablename, $fieldDefs);
-		if ($this->isFieldArray($fieldDefs)){
-			$columns = array();
-			foreach ($fieldDefs as $fieldDef)
-				$columns[] = $fieldDef['name'];
-			$columns = implode(",", $columns);
-		}
-		else {
-			$columns = $fieldDefs['name'];
-		}
-		$msg = "Error adding column(s) $columns on table: $tablename:";
-		return $this->query($sql,true,$msg);
-	}
+    public function addColumn($tablename, $fieldDefs)
+    {
+        $sql = $this->addColumnSQL($tablename, $fieldDefs);
+        if ($this->isFieldArray($fieldDefs)) {
+            $columns = [];
+            foreach ($fieldDefs as $fieldDef) {
+                $columns[] = $fieldDef['name'];
+            }
+            $columns = implode(',', $columns);
+        } else {
+            $columns = $fieldDefs['name'];
+        }
+        $msg = "Error adding column(s) $columns on table: $tablename:";
+        return $this->query($sql, true, $msg);
+    }
 
-	/**
-	 * Alters old column identified by oldFieldDef to new fieldDef.
-	 *
-	 * @param string $tablename
-	 * @param array  $newFieldDef
-	 * @param bool   $ignoreRequired optional, true if we are ignoring this being a required field
+    /**
+     * Alters old column identified by oldFieldDef to new fieldDef.
+     *
+     * @param string $tablename
+     * @param array $newFieldDef
+     * @param bool $ignoreRequired optional, true if we are ignoring this being a required field
      * @return bool query result
      */
-	public function alterColumn($tablename, $newFieldDef, $ignoreRequired = false)
-	{
-		$sql = $this->alterColumnSQL($tablename, $newFieldDef,$ignoreRequired);
-		if ($this->isFieldArray($newFieldDef)){
-			$columns = array();
-			foreach ($newFieldDef as $fieldDef) {
-				$columns[] = $fieldDef['name'];
-			}
-			$columns = implode(",", $columns);
-		}
-		else {
-			$columns = $newFieldDef['name'];
-		}
+    public function alterColumn($tablename, $newFieldDef, $ignoreRequired = false)
+    {
+        $sql = $this->alterColumnSQL($tablename, $newFieldDef, $ignoreRequired);
+        if ($this->isFieldArray($newFieldDef)) {
+            $columns = [];
+            foreach ($newFieldDef as $fieldDef) {
+                $columns[] = $fieldDef['name'];
+            }
+            $columns = implode(',', $columns);
+        } else {
+            $columns = $newFieldDef['name'];
+        }
 
-		$msg = "Error altering column(s) $columns on table: $tablename:";
-		$res = $this->query($sql,true,$msg);
-		if($res) {
-			$this->getTableDescription($tablename, true); // reload table description after altering
-		}
-		return $res;
-	}
+        $msg = "Error altering column(s) $columns on table: $tablename:";
+        $res = $this->query($sql, true, $msg);
+        if ($res) {
+            $this->getTableDescription($tablename, true); // reload table description after altering
+        }
+        return $res;
+    }
 
-	/**
-	 * Drops the table associated with a bean
-	 *
-	 * @param SugarBean $bean SugarBean instance
+    /**
+     * Drops the table associated with a bean
+     *
+     * @param SugarBean $bean SugarBean instance
      * @return bool query result
-	 */
-	public function dropTable(SugarBean $bean)
-	{
-		return $this->dropTableName($bean->getTableName());
-	}
+     */
+    public function dropTable(SugarBean $bean)
+    {
+        return $this->dropTableName($bean->getTableName());
+    }
 
-	/**
-	 * Drops the table by name
-	 *
-	 * @param string $name Table name
+    /**
+     * Drops the table by name
+     *
+     * @param string $name Table name
      * @return bool query result
-	 */
-	public function dropTableName($name)
-	{
+     */
+    public function dropTableName($name)
+    {
         unset(self::$table_descriptions[$name]);
 
-		$sql = $this->dropTableNameSQL($name);
-		return $this->query($sql,true,"Error dropping table $name:");
-	}
+        $sql = $this->dropTableNameSQL($name);
+        return $this->query($sql, true, "Error dropping table $name:");
+    }
 
     /**
      * Deletes a column identified by fieldDef.
      *
-     * @param SugarBean $bean   SugarBean containing the field
-     * @param array  $fieldDefs Vardef definition of the field
+     * @param SugarBean $bean SugarBean containing the field
+     * @param array $fieldDefs Vardef definition of the field
      * @return bool query result
      */
-	public function deleteColumn(SugarBean $bean, $fieldDefs)
-	{
-		$tablename = $bean->getTableName();
-		$sql = $this->dropColumnSQL($tablename, $fieldDefs);
-		$msg = "Error deleting column(s) on table: $tablename:";
-		return $this->query($sql,true,$msg);
-	}
+    public function deleteColumn(SugarBean $bean, $fieldDefs)
+    {
+        $tablename = $bean->getTableName();
+        $sql = $this->dropColumnSQL($tablename, $fieldDefs);
+        $msg = "Error deleting column(s) on table: $tablename:";
+        return $this->query($sql, true, $msg);
+    }
 
-	/**
-	 * Decode string and quote it
-	 * @param unknown_type $string
-	 * @return string
-	 */
-	protected function quotedDecode($string)
-	{
-	    if($this->encode) {
-	        return $this->quoted($this->decodeHTML($string));
-	    } else {
-	        return $this->quoted($string);
-	    }
-	}
+    /**
+     * Decode string and quote it
+     * @param unknown_type $string
+     * @return string
+     */
+    protected function quotedDecode($string)
+    {
+        if ($this->encode) {
+            return $this->quoted($this->decodeHTML($string));
+        } else {
+            return $this->quoted($string);
+        }
+    }
 
     /**
      * Generate a set of Insert statements based on the bean given
      *
-     * @deprecated
-     *
-     * @param  SugarBean $bean         the bean from which table we will generate insert stmts
-     * @param  string $select_query the query which will give us the set of objects we want to place into our insert statement
-     * @param  int    $start        the first row to query
-     * @param  int    $count        the number of rows to query, -1 for maximum allowed
-     * @param  string $table        the table to query from
+     * @param SugarBean $bean the bean from which table we will generate insert stmts
+     * @param string $select_query the query which will give us the set of objects we want to place into our insert statement
+     * @param int $start the first row to query
+     * @param int $count the number of rows to query, -1 for maximum allowed
+     * @param string $table the table to query from
      * @param bool $is_related_query
      * @return array SQL insert statement
+     * @deprecated
+     *
      */
     public function generateInsertSQL(SugarBean $bean, string $select_query, int $start, int $count, string $table, bool $is_related_query = false): array
-	{
+    {
         $this->logger->info('call to DBManager::generateInsertSQL() is deprecated');
-		global $sugar_config;
+        global $sugar_config;
 
-		$rows_found = 0;
-		$count_query = $bean->create_list_count_query($select_query);
-		if(!empty($count_query))
-		{
-			// We have a count query.  Run it and get the results.
+        $rows_found = 0;
+        $count_query = $bean->create_list_count_query($select_query);
+        if (!empty($count_query)) {
+            // We have a count query.  Run it and get the results.
             $result = $this->query($count_query, true, "Error running count query for $bean->object_name List: ");
-			$assoc = $this->fetchByAssoc($result);
+            $assoc = $this->fetchByAssoc($result);
 
-			// free resource
-			$this->freeDbResult($result);
-			if(!empty($assoc['c']))
-			{
-				$rows_found = $assoc['c'];
-			}
-		}
-		if($count == -1){
-			$count 	= $sugar_config['list_max_entries_per_page'];
-		}
-		$next_offset = $start + $count;
+            // free resource
+            $this->freeDbResult($result);
+            if (!empty($assoc['c'])) {
+                $rows_found = $assoc['c'];
+            }
+        }
+        if ($count == -1) {
+            $count = $sugar_config['list_max_entries_per_page'];
+        }
+        $next_offset = $start + $count;
 
-		$result = $this->limitQuery($select_query, $start, $count);
-		// get basic insert
-		$sql = "INSERT INTO ".$table;
-		$custom_sql = "INSERT INTO ".$table."_cstm";
+        $result = $this->limitQuery($select_query, $start, $count);
+        // get basic insert
+        $sql = 'INSERT INTO ' . $table;
+        $custom_sql = 'INSERT INTO ' . $table . '_cstm';
 
-		// get field definitions
-		$fields = $bean->getFieldDefinitions();
-		$custom_fields = array();
+        // get field definitions
+        $fields = $bean->getFieldDefinitions();
+        $custom_fields = [];
 
-		if($bean->hasCustomFields()){
-			foreach ($fields as $fieldDef){
-				if($fieldDef['source'] == 'custom_fields'){
-					$custom_fields[$fieldDef['name']] = $fieldDef['name'];
-				}
-			}
-			if(!empty($custom_fields)){
-				$custom_fields['id_c'] = 'id_c';
-				$id_field = array('name' => 'id_c', 'custom_type' => 'id',);
-				$fields[] = $id_field;
-			}
-		}
+        if ($bean->hasCustomFields()) {
+            foreach ($fields as $fieldDef) {
+                if ($fieldDef['source'] == 'custom_fields') {
+                    $custom_fields[$fieldDef['name']] = $fieldDef['name'];
+                }
+            }
+            if (!empty($custom_fields)) {
+                $custom_fields['id_c'] = 'id_c';
+                $id_field = ['name' => 'id_c', 'custom_type' => 'id',];
+                $fields[] = $id_field;
+            }
+        }
 
-		// get column names and values
-		$row_array = array();
-		$columns = array();
-		$cstm_row_array = array();
-		$cstm_columns = array();
-		$built_columns = false;
-		while(($row = $this->fetchByAssoc($result)) != null)
-		{
-			$values = array();
-			$cstm_values = array();
-			if(!$is_related_query){
-				foreach ($fields as $fieldDef)
-				{
-					if(isset($fieldDef['source']) && $fieldDef['source'] != 'db' && $fieldDef['source'] != 'custom_fields') continue;
-					$val = $row[$fieldDef['name']];
+        // get column names and values
+        $row_array = [];
+        $columns = [];
+        $cstm_row_array = [];
+        $cstm_columns = [];
+        $built_columns = false;
+        while (($row = $this->fetchByAssoc($result)) != null) {
+            $values = [];
+            $cstm_values = [];
+            if (!$is_related_query) {
+                foreach ($fields as $fieldDef) {
+                    if (isset($fieldDef['source']) && $fieldDef['source'] != 'db' && $fieldDef['source'] != 'custom_fields') {
+                        continue;
+                    }
+                    $val = $row[$fieldDef['name']];
 
-					//handle auto increment values here only need to do this on insert not create
-					if ($fieldDef['name'] == 'deleted'){
-							$values['deleted'] = $val;
-							if(!$built_columns){
-							$columns[] = 'deleted';
-						}
-					}
-					else
-					{
-						$type = $fieldDef['type'];
-						if(!empty($fieldDef['custom_type'])){
-							$type = $fieldDef['custom_type'];
-						}
-						// need to do some thing about types of values
-						if($this->dbType == 'mysql' && $val == '' && ($type == 'datetime' ||  $type == 'date' || $type == 'int' || $type == 'currency' || $type == 'decimal')){
-							if(!empty($custom_fields[$fieldDef['name']]))
-								$cstm_values[$fieldDef['name']] = 'null';
-							else
-								$values[$fieldDef['name']] = 'null';
-						}else{
-							if(isset($type) && $type=='int') {
-								if(!empty($custom_fields[$fieldDef['name']]))
-									$cstm_values[$fieldDef['name']] = $this->quote($this->decodeHTML($val));
-								else
-									$values[$fieldDef['name']] = $this->quote($this->decodeHTML($val));
-							} else {
-								if(!empty($custom_fields[$fieldDef['name']]))
-									$cstm_values[$fieldDef['name']] = $this->quotedDecode($val);
-								else
-									$values[$fieldDef['name']] = $this->quotedDecode($val);
-							}
-						}
-						if(!$built_columns){
-							if(!empty($custom_fields[$fieldDef['name']]))
-								$cstm_columns[] = $fieldDef['name'];
-							else
-								$columns[] = $fieldDef['name'];
-						}
-					}
+                    //handle auto increment values here only need to do this on insert not create
+                    if ($fieldDef['name'] == 'deleted') {
+                        $values['deleted'] = $val;
+                        if (!$built_columns) {
+                            $columns[] = 'deleted';
+                        }
+                    } else {
+                        $type = $fieldDef['type'];
+                        if (!empty($fieldDef['custom_type'])) {
+                            $type = $fieldDef['custom_type'];
+                        }
+                        // need to do some thing about types of values
+                        if ($this->dbType == 'mysql' && $val == '' && ($type == 'datetime' || $type == 'date' || $type == 'int' || $type == 'currency' || $type == 'decimal')) {
+                            if (!empty($custom_fields[$fieldDef['name']])) {
+                                $cstm_values[$fieldDef['name']] = 'null';
+                            } else {
+                                $values[$fieldDef['name']] = 'null';
+                            }
+                        } else {
+                            if (isset($type) && $type == 'int') {
+                                if (!empty($custom_fields[$fieldDef['name']])) {
+                                    $cstm_values[$fieldDef['name']] = $this->quote($this->decodeHTML($val));
+                                } else {
+                                    $values[$fieldDef['name']] = $this->quote($this->decodeHTML($val));
+                                }
+                            } else {
+                                if (!empty($custom_fields[$fieldDef['name']])) {
+                                    $cstm_values[$fieldDef['name']] = $this->quotedDecode($val);
+                                } else {
+                                    $values[$fieldDef['name']] = $this->quotedDecode($val);
+                                }
+                            }
+                        }
+                        if (!$built_columns) {
+                            if (!empty($custom_fields[$fieldDef['name']])) {
+                                $cstm_columns[] = $fieldDef['name'];
+                            } else {
+                                $columns[] = $fieldDef['name'];
+                            }
+                        }
+                    }
+                }
+            } else {
+                foreach ($row as $key => $val) {
+                    if ($key != 'orc_row') {
+                        $values[$key] = "'$val'";
+                        if (!$built_columns) {
+                            $columns[] = $key;
+                        }
+                    }
+                }
+            }
+            $built_columns = true;
+            if (!empty($values)) {
+                $row_array[] = $values;
+            }
+            if (!empty($cstm_values) && !empty($cstm_values['id_c']) && (strlen($cstm_values['id_c']) > 7)) {
+                $cstm_row_array[] = $cstm_values;
+            }
+        }
 
-				}
-			} else {
-			foreach ($row as $key=>$val)
-			{
-					if($key != 'orc_row'){
-						$values[$key] = "'$val'";
-						if(!$built_columns){
-							$columns[] = $key;
-						}
-					}
-			}
-			}
-			$built_columns = true;
-			if(!empty($values)){
-				$row_array[] = $values;
-			}
-			if(!empty($cstm_values) && !empty($cstm_values['id_c']) && (strlen($cstm_values['id_c']) > 7)){
-				$cstm_row_array[] = $cstm_values;
-			}
-		}
+        // get the entire sql
+        $sql .= '(' . implode(',', $columns) . ') ';
+        $sql .= 'VALUES';
+        for ($i = 0; $i < safeCount($row_array); $i++) {
+            $sql .= ' (' . implode(',', $row_array[$i]) . ')';
+            if ($i < (safeCount($row_array) - 1)) {
+                $sql .= ', ';
+            }
+        }
+        //custom
+        // get the entire sql
+        $custom_sql .= '(' . implode(',', $cstm_columns) . ') ';
+        $custom_sql .= 'VALUES';
 
-		// get the entire sql
-		$sql .= "(".implode(",", $columns).") ";
-		$sql .= "VALUES";
-		for($i = 0; $i < count($row_array); $i++){
-			$sql .= " (".implode(",", $row_array[$i]).")";
-			if($i < (count($row_array) - 1)){
-				$sql .= ", ";
-			}
-		}
-		//custom
-		// get the entire sql
-		$custom_sql .= "(".implode(",", $cstm_columns).") ";
-		$custom_sql .= "VALUES";
-
-		for($i = 0; $i < count($cstm_row_array); $i++){
-			$custom_sql .= " (".implode(",", $cstm_row_array[$i]).")";
-			if($i < (count($cstm_row_array) - 1)){
-				$custom_sql .= ", ";
-			}
-		}
-        return array(
+        for ($i = 0; $i < safeCount($cstm_row_array); $i++) {
+            $custom_sql .= ' (' . implode(',', $cstm_row_array[$i]) . ')';
+            if ($i < (safeCount($cstm_row_array) - 1)) {
+                $custom_sql .= ', ';
+            }
+        }
+        return [
             'data' => $sql,
             'cstm_sql' => $custom_sql,
             'total_count' => $rows_found,
             'next_offset' => $next_offset,
-        );
-	}
+        ];
+    }
 
-	/**
-	 * @deprecated
-	 * Disconnects all instances
-	 */
-	public function disconnectAll()
-	{
-		DBManagerFactory::disconnectAll();
-	}
+    /**
+     * @deprecated
+     * Disconnects all instances
+     */
+    public function disconnectAll()
+    {
+        DBManagerFactory::disconnectAll();
+    }
 
-	/**
-	 * This function sets the query threshold limit
-	 *
-	 * @param int $limit value of query threshold limit
-	 */
-	public static function setQueryLimit($limit)
-	{
-		//reset the queryCount
-		self::$queryCount = 0;
-		self::$queryLimit = $limit;
-	}
+    /**
+     * This function sets the query threshold limit
+     *
+     * @param int $limit value of query threshold limit
+     */
+    public static function setQueryLimit($limit)
+    {
+        //reset the queryCount
+        self::$queryCount = 0;
+        self::$queryLimit = $limit;
+    }
 
-	/**
-	 * Returns the static queryCount value
-	 *
-	 * @return int value of the queryCount static variable
-	 */
-	public static function getQueryCount()
-	{
-		return self::$queryCount;
-	}
+    /**
+     * Returns the static queryCount value
+     *
+     * @return int value of the queryCount static variable
+     */
+    public static function getQueryCount()
+    {
+        return self::$queryCount;
+    }
 
     /**
      * This function takes a user input string and returns a string that contains wild card(s)
@@ -2005,14 +2024,14 @@ abstract class DBManager implements LoggerAwareInterface
         return $str;
     }
 
-	/**
-	 * Resets the queryCount value to 0
-	 *
-	 */
-	public static function resetQueryCount()
-	{
-		self::$queryCount = 0;
-	}
+    /**
+     * Resets the queryCount value to 0
+     *
+     */
+    public static function resetQueryCount()
+    {
+        self::$queryCount = 0;
+    }
 
     /**
      * @param int $amount
@@ -2053,28 +2072,28 @@ abstract class DBManager implements LoggerAwareInterface
         $in_count_query = false;
     }
 
-	/**
-	 * Pre-process string for quoting
-	 * @internal
-	 * @param string $string
+    /**
+     * Pre-process string for quoting
+     * @param string $string
+     * @return string
+     * @internal
+     */
+    protected function quoteInternal($string)
+    {
+        return $this->decodeHTML($string);
+    }
+
+    /**
+     * Return string properly quoted with ''
+     * @param string $string
      * @return string
      */
-	protected function quoteInternal($string)
-	{
-		return $this->decodeHTML($string);
-	}
+    public function quoted($string)
+    {
+        return "'" . $this->quote($string) . "'";
+    }
 
-	/**
-	 * Return string properly quoted with ''
-	 * @param string $string
-	 * @return string
-	 */
-	public function quoted($string)
-	{
-		return "'".$this->quote($string)."'";
-	}
-
-	/**
+    /**
      * Quote value according to type
      * Numerics aren't quoted
      * Dates are converted and quoted
@@ -2084,35 +2103,35 @@ abstract class DBManager implements LoggerAwareInterface
      * @return string Quoted value
      */
     public function quoteType($type, $value)
-	{
-	    if($type == 'date') {
-	        return $this->convert($this->quoted($value), "date");
-	    }
-	    if($type == 'time') {
-	        return $this->convert($this->quoted($value), "time");
-	    }
-        if(isset($this->type_class[$type]) &&  $this->type_class[$type] == "date") {
-            return $this->convert($this->quoted($value), "datetime");
+    {
+        if ($type == 'date') {
+            return $this->convert($this->quoted($value), 'date');
         }
-        if($this->isNumericType($type)) {
-            return 0+$value; // ensure it's numeric
+        if ($type == 'time') {
+            return $this->convert($this->quoted($value), 'time');
+        }
+        if (isset($this->type_class[$type]) && $this->type_class[$type] == 'date') {
+            return $this->convert($this->quoted($value), 'datetime');
+        }
+        if ($this->isNumericType($type)) {
+            return 0 + $value; // ensure it's numeric
         }
 
         return $this->quoted($value);
-	}
+    }
 
-	/**
-	 * Get type class for certain type
-	 * @param string $type
-	 * @return string
-	 */
-	public function getTypeClass($type)
-	{
-	    if(isset($this->type_class[$type])) {
-	        return $this->type_class[$type];
-	    }
-	    return 'string';
-	}
+    /**
+     * Get type class for certain type
+     * @param string $type
+     * @return string
+     */
+    public function getTypeClass($type)
+    {
+        if (isset($this->type_class[$type])) {
+            return $this->type_class[$type];
+        }
+        return 'string';
+    }
 
     /**
      * Quote the strings of the passed in array
@@ -2122,193 +2141,201 @@ abstract class DBManager implements LoggerAwareInterface
      * @param array $array
      * @return array Quoted strings
      */
-	public function arrayQuote(array &$array)
-	{
-		foreach($array as &$val) {
-			$val = $this->quote($val);
-		}
-		return $array;
-	}
+    public function arrayQuote(array &$array)
+    {
+        foreach ($array as &$val) {
+            $val = $this->quote($val);
+        }
+        return $array;
+    }
 
     /**
      * Frees out previous results
      *
      * @param resource|bool $result optional, pass if you want to free a single result instead of all results
      */
-	protected function freeResult($result = false)
-	{
-		if($result) {
-			$this->freeDbResult($result);
-		}
-		if($this->lastResult) {
-			$this->freeDbResult($this->lastResult);
-			$this->lastResult = null;
-		}
-	}
+    protected function freeResult($result = false)
+    {
+        if ($result) {
+            $this->freeDbResult($result);
+        }
+        if ($this->lastResult) {
+            $this->freeDbResult($this->lastResult);
+            $this->lastResult = null;
+        }
+    }
 
-	/**
-	 * @abstract
-	 * Check if query has LIMIT clause
-	 * Relevant for now only for Mysql
-	 * @param string $sql
-	 * @return bool
-	 */
-	protected function hasLimit($sql)
-	{
-	    return false;
-	}
+    /**
+     * @abstract
+     * Check if query has LIMIT clause
+     * Relevant for now only for Mysql
+     * @param string $sql
+     * @return bool
+     */
+    protected function hasLimit($sql)
+    {
+        return false;
+    }
 
-	/**
-	 * Runs a query and returns a single row containing single value
-	 *
-	 * @param  string   $sql        SQL Statement to execute
-	 * @param  bool     $dieOnError True if we want to call die if the query returns errors
-	 * @param  string   $msg        Message to log if error occurs
-	 * @param  bool     $encode   	encode the result
-	 * @return array    single value from the query
-	 */
-	public function getOne($sql, $dieOnError = false, $msg = '', $encode = true)
-	{
+    /**
+     * Runs a query and returns a single row containing single value
+     *
+     * @param string $sql SQL Statement to execute
+     * @param bool $dieOnError True if we want to call die if the query returns errors
+     * @param string $msg Message to log if error occurs
+     * @param bool $encode encode the result
+     * @return array    single value from the query
+     */
+    public function getOne($sql, $dieOnError = false, $msg = '', $encode = true)
+    {
         $this->logger->info("Get One: |$sql|");
-		if(!$this->hasLimit($sql)) {
-		    $queryresult = $this->limitQuery($sql, 0, 1, $dieOnError, $msg);
-		} else {
-		    // support old code that passes LIMIT to sql
-		    // works only for mysql, so do not rely on this
-		    $queryresult = $this->query($sql, $dieOnError, $msg);
-		}
-		$this->checkError($msg.' Get One Failed:' . $sql, $dieOnError);
-		if (!$queryresult) return false;
-		$row = $this->fetchByAssoc($queryresult, $encode);
+        if (!$this->hasLimit($sql)) {
+            $queryresult = $this->limitQuery($sql, 0, 1, $dieOnError, $msg);
+        } else {
+            // support old code that passes LIMIT to sql
+            // works only for mysql, so do not rely on this
+            $queryresult = $this->query($sql, $dieOnError, $msg);
+        }
+        $this->checkError($msg . ' Get One Failed:' . $sql, $dieOnError);
+        if (!$queryresult) {
+            return false;
+        }
+        $row = $this->fetchByAssoc($queryresult, $encode);
 
-		$this->freeDbResult($queryresult);
-		if(!empty($row)) {
-			return array_shift($row);
-		}
-		return false;
-	}
+        $this->freeDbResult($queryresult);
+        if (!empty($row)) {
+            return array_shift($row);
+        }
+        return false;
+    }
 
-	/**
-	 * Runs a query and returns a single row
-	 *
-	 * @param  string   $sql        SQL Statement to execute
-	 * @param  bool     $dieOnError True if we want to call die if the query returns errors
-	 * @param  string   $msg        Message to log if error occurs
-	 * @param  bool     $encode   	encode the result
-	 * @return array    single row from the query
-	 */
-	public function fetchOne($sql, $dieOnError = false, $msg = '', $encode = true)
-	{
+    /**
+     * Runs a query and returns a single row
+     *
+     * @param string $sql SQL Statement to execute
+     * @param bool $dieOnError True if we want to call die if the query returns errors
+     * @param string $msg Message to log if error occurs
+     * @param bool $encode encode the result
+     * @return array    single row from the query
+     */
+    public function fetchOne($sql, $dieOnError = false, $msg = '', $encode = true)
+    {
         $this->logger->info("Fetch One: |$sql|");
-		$this->checkConnection();
-		$queryresult = $this->query($sql, $dieOnError, $msg);
-		$this->checkError($msg.' Fetch One Failed:' . $sql, $dieOnError);
+        $this->checkConnection();
+        $queryresult = $this->query($sql, $dieOnError, $msg);
+        $this->checkError($msg . ' Fetch One Failed:' . $sql, $dieOnError);
 
-		if (!$queryresult) return false;
+        if (!$queryresult) {
+            return false;
+        }
 
-		$row = $this->fetchByAssoc($queryresult, $encode);
-		$this->freeResult($queryresult);
+        $row = $this->fetchByAssoc($queryresult, $encode);
+        $this->freeResult($queryresult);
 
-		if ( !$row ) return false;
+        if (!$row) {
+            return false;
+        }
 
-		return $row;
-	}
+        return $row;
+    }
 
-	/**
-	 * Runs a limit offset, 1 query and returns a single row
-	 *
-	 * @param  string   $sql        SQL Statement to execute
-	 * @param  bool     $dieOnError True if we want to call die if the query returns errors
-	 * @param  string   $msg        Message to log if error occurs
-	 * @param  bool     $encode     encode result
-	 * @return array    single row from the query
-	 */
-	public function fetchOneOffset($sql, $offset, $dieOnError = false, $msg = '', $encode = true)
-	{
+    /**
+     * Runs a limit offset, 1 query and returns a single row
+     *
+     * @param string $sql SQL Statement to execute
+     * @param bool $dieOnError True if we want to call die if the query returns errors
+     * @param string $msg Message to log if error occurs
+     * @param bool $encode encode result
+     * @return array    single row from the query
+     */
+    public function fetchOneOffset($sql, $offset, $dieOnError = false, $msg = '', $encode = true)
+    {
         $suppress = null;
         $this->logger->info("fetch OneOffset: |$sql|");
-		$this->checkConnection();
+        $this->checkConnection();
 
-		if(!$this->hasLimit($sql)) {
-			$queryresult = $this->limitQuery($sql, $offset, 1, $dieOnError, $msg);
-		} else {
-			$queryresult = $this->query($sql, $dieOnError, $msg, $suppress);
-		}
-		$this->checkError($msg.' fetch OneOffset Failed:' . $sql, $dieOnError);
-		if (!$queryresult) {
-			return false;
-		}
-		$row = $this->fetchByAssoc($queryresult, $encode);
-		$this->freeDbResult($queryresult);
+        if (!$this->hasLimit($sql)) {
+            $queryresult = $this->limitQuery($sql, $offset, 1, $dieOnError, $msg);
+        } else {
+            $queryresult = $this->query($sql, $dieOnError, $msg, $suppress);
+        }
+        $this->checkError($msg . ' fetch OneOffset Failed:' . $sql, $dieOnError);
+        if (!$queryresult) {
+            return false;
+        }
+        $row = $this->fetchByAssoc($queryresult, $encode);
+        $this->freeDbResult($queryresult);
 
-		if (!$row) {
-			return false;
-		}
+        if (!$row) {
+            return false;
+        }
 
-		return $row;
-	}
+        return $row;
+    }
 
     /**
      * Returns the number of rows affected by the last query
      * @abstract
-	 * See also affected_rows capability, will return 0 unless the DB supports it
+     * See also affected_rows capability, will return 0 unless the DB supports it
      * @param resource $result query result resource
      * @return int
      */
-	public function getAffectedRowCount($result)
-	{
-		return 0;
-	}
+    public function getAffectedRowCount($result)
+    {
+        return 0;
+    }
 
-	/**
-	 * Returns the number of rows returned by the result
-	 *
-	 * This function can't be reliably implemented on most DB, do not use it.
-	 * @abstract
-	 * @deprecated
-	 * @param  resource $result
-	 * @return int
-	 */
-	public function getRowCount($result)
-	{
-	    return 0;
-	}
+    /**
+     * Returns the number of rows returned by the result
+     *
+     * This function can't be reliably implemented on most DB, do not use it.
+     * @abstract
+     * @param resource $result
+     * @return int
+     * @deprecated
+     */
+    public function getRowCount($result)
+    {
+        return 0;
+    }
 
-	/**
+    /**
      * Get table description
      * @param string $tablename
      * @param bool $reload true means load from DB, false allows using cache
      * @return array Vardef-format table description
      *
      */
-	public function getTableDescription($tablename, $reload = false)
-	{
-		if($reload || empty(self::$table_descriptions[$tablename])) {
-			self::$table_descriptions[$tablename] = $this->get_columns($tablename);
-		}
-		return self::$table_descriptions[$tablename];
-	}
+    public function getTableDescription($tablename, $reload = false)
+    {
+        if ($reload || empty(self::$table_descriptions[$tablename])) {
+            self::$table_descriptions[$tablename] = $this->get_columns($tablename);
+        }
+        return self::$table_descriptions[$tablename];
+    }
 
-	/**
-	 * Returns the field description for a given field in table
-	 *
-	 * @param  string $name
-	 * @param  string $tablename
-	 * @return array
-	 */
-	protected function describeField($name, $tablename)
-	{
-		$table = $this->getTableDescription($tablename);
-		if(!empty($table) && isset($table[$name]))
-			return 	$table[$name];
+    /**
+     * Returns the field description for a given field in table
+     *
+     * @param string $name
+     * @param string $tablename
+     * @return array
+     */
+    protected function describeField($name, $tablename)
+    {
+        $table = $this->getTableDescription($tablename);
+        if (!empty($table) && isset($table[$name])) {
+            return $table[$name];
+        }
 
-		$table = $this->getTableDescription($tablename, true);
+        $table = $this->getTableDescription($tablename, true);
 
-		if(isset($table[$name]))
-		return $table[$name];
+        if (isset($table[$name])) {
+            return $table[$name];
+        }
 
-		return array();
-	}
+        return [];
+    }
 
     /**
      * Returns the min and max number that the field can store. False if not supported
@@ -2342,44 +2369,43 @@ abstract class DBManager implements LoggerAwareInterface
         return -1;
     }
 
-	/**
-	 * Returns the index description for a given index in table
-	 *
-	 * @param  string $name
-	 * @param  string $tablename
-	 * @return array
-	 */
-	protected function describeIndex($name, $tablename)
-	{
-		if(isset(self::$index_descriptions[$tablename]) && isset(self::$index_descriptions[$tablename]) && isset(self::$index_descriptions[$tablename][$name])){
-			return 	self::$index_descriptions[$tablename][$name];
-		}
+    /**
+     * Returns the index description for a given index in table
+     *
+     * @param string $name
+     * @param string $tablename
+     * @return array
+     */
+    protected function describeIndex($name, $tablename)
+    {
+        if (isset(self::$index_descriptions[$tablename]) && isset(self::$index_descriptions[$tablename]) && isset(self::$index_descriptions[$tablename][$name])) {
+            return self::$index_descriptions[$tablename][$name];
+        }
 
-		self::$index_descriptions[$tablename] = $this->get_indices($tablename);
+        self::$index_descriptions[$tablename] = $this->get_indices($tablename);
 
-		if(isset(self::$index_descriptions[$tablename][$name])){
-			return 	self::$index_descriptions[$tablename][$name];
-		}
+        if (isset(self::$index_descriptions[$tablename][$name])) {
+            return self::$index_descriptions[$tablename][$name];
+        }
 
-		return array();
-	}
+        return [];
+    }
 
     /**
      * Truncates a string to a given length
      *
      * @param string $string
-     * @param int    $len    length to trim to
+     * @param int $len length to trim to
      * @return string
      *
      */
-	public function truncate($string, $len)
-	{
-		if ( is_numeric($len) && $len > 0)
-		{
-			$string = mb_substr($string,0,(int) $len, "UTF-8");
-		}
-		return $string;
-	}
+    public function truncate($string, $len)
+    {
+        if (is_numeric($len) && $len > 0) {
+            $string = mb_substr($string, 0, (int)$len, 'UTF-8');
+        }
+        return $string;
+    }
 
     /**
      * Returns the database string needed for concatinating multiple database strings together
@@ -2389,20 +2415,24 @@ abstract class DBManager implements LoggerAwareInterface
      * @param string $space Separator between strings, default is single space
      * @return string
      */
-	public function concat($table, array $fields, $space = ' ')
-	{
-		if(empty($fields)) return '';
-		$elems = array();
-		$space = $this->quoted($space);
-		foreach ( $fields as $field ) {
-			if(!empty($elems)) $elems[] = $space;
-			$elems[] = $this->convert("$table.$field", 'IFNULL', array("''"));
-		}
-		$first = array_shift($elems);
-		return "LTRIM(RTRIM(".$this->convert($first, 'CONCAT', $elems)."))";
-	}
+    public function concat($table, array $fields, $space = ' ')
+    {
+        if (empty($fields)) {
+            return '';
+        }
+        $elems = [];
+        $space = $this->quoted($space);
+        foreach ($fields as $field) {
+            if (!empty($elems)) {
+                $elems[] = $space;
+            }
+            $elems[] = $this->convert("$table.$field", 'IFNULL', ["''"]);
+        }
+        $first = array_shift($elems);
+        return 'LTRIM(RTRIM(' . $this->convert($first, 'CONCAT', $elems) . '))';
+    }
 
-/********************** SQL FUNCTIONS ****************************/
+    /********************** SQL FUNCTIONS ****************************/
     /**
      * Generates sql for create table statement for a bean.
      *
@@ -2410,13 +2440,13 @@ abstract class DBManager implements LoggerAwareInterface
      * @param SugarBean $bean SugarBean instance
      * @return string SQL Create Table statement
      */
-	public function createTableSQL(SugarBean $bean)
-	{
-		$tablename = $bean->getTableName();
-		$fieldDefs = $bean->getFieldDefinitions();
-		$indices = $bean->getIndices();
-		return $this->createTableSQLParams($tablename, $fieldDefs, $indices);
-	}
+    public function createTableSQL(SugarBean $bean)
+    {
+        $tablename = $bean->getTableName();
+        $fieldDefs = $bean->getFieldDefinitions();
+        $indices = $bean->getIndices();
+        return $this->createTableSQLParams($tablename, $fieldDefs, $indices);
+    }
 
     /**
      * Update data in table by parameter definition
@@ -2427,9 +2457,9 @@ abstract class DBManager implements LoggerAwareInterface
      * @param array $where Key/value for where
      * @return bool
      */
-    public function updateParams($table, $field_defs, $data, array $where = array())
+    public function updateParams($table, $field_defs, $data, array $where = [])
     {
-        $values = array();
+        $values = [];
         foreach ($field_defs as $fieldDef) {
             $field = $fieldDef['name'];
             if (!array_key_exists($field, $data)) {
@@ -2489,13 +2519,13 @@ abstract class DBManager implements LoggerAwareInterface
             );
         }
 
-        if (count($where) > 0) {
-            $predicates = array();
+        if (safeCount($where) > 0) {
+            $predicates = [];
             foreach ($where as $field => $value) {
                 $predicates[] = $field . ' = ' . $this->bindValue($builder, $value, $field_defs[$field]);
             }
 
-            call_user_func_array(array($builder, 'where'), $predicates);
+            call_user_func_array([$builder, 'where'], $predicates);
         }
 
         $builder->execute();
@@ -2543,69 +2573,70 @@ abstract class DBManager implements LoggerAwareInterface
         return ParameterType::STRING;
     }
 
-	/**
-	 * This method returns a where array so that it has id entry if
-	 * where is not an array or is empty
-	 *
-	 * @param  SugarBean $bean SugarBean instance
-	 * @param  array  $where Optional, where conditions in an array
-	 * @return array
-	 */
-	protected function updateWhereArray(SugarBean $bean, array $where = array())
-	{
-		if (count($where) == 0) {
-			$fieldDef = $bean->getPrimaryFieldDefinition();
-			$primaryColumn = $fieldDef['name'];
+    /**
+     * This method returns a where array so that it has id entry if
+     * where is not an array or is empty
+     *
+     * @param SugarBean $bean SugarBean instance
+     * @param array $where Optional, where conditions in an array
+     * @return array
+     */
+    protected function updateWhereArray(SugarBean $bean, array $where = [])
+    {
+        if (safeCount($where) == 0) {
+            $fieldDef = $bean->getPrimaryFieldDefinition();
+            $primaryColumn = $fieldDef['name'];
 
-			$val = $bean->getFieldValue($fieldDef['name']);
-			if ($val != FALSE){
-				$where[$primaryColumn] = $val;
-			}
-		}
+            $val = $bean->getFieldValue($fieldDef['name']);
+            if ($val != false) {
+                $where[$primaryColumn] = $val;
+            }
+        }
 
-		return $where;
-	}
+        return $where;
+    }
 
-	/**
-	 * Returns a where clause without the 'where' key word
-	 *
-	 * The clause returned does not have an 'and' at the beginning and the columns
-	 * are joined by 'and'.
-	 *
-	 * @param  string $table table name
-	 * @param  array  $whereArray Optional, where conditions in an array
-	 * @return string
-	 */
-    protected function getColumnWhereClause($table, array $whereArray = array())
-	{
-		$where = array();
-		foreach ($whereArray as $name => $val) {
-			$op = "=";
-			if (is_array($val)) {
-				$op = "IN";
-				$temp = array();
-				foreach ($val as $tval){
+    /**
+     * Returns a where clause without the 'where' key word
+     *
+     * The clause returned does not have an 'and' at the beginning and the columns
+     * are joined by 'and'.
+     *
+     * @param string $table table name
+     * @param array $whereArray Optional, where conditions in an array
+     * @return string
+     */
+    protected function getColumnWhereClause($table, array $whereArray = [])
+    {
+        $where = [];
+        foreach ($whereArray as $name => $val) {
+            $op = '=';
+            if (is_array($val)) {
+                $op = 'IN';
+                $temp = [];
+                foreach ($val as $tval) {
                     $temp[] = $tval;
-				}
-				$val = implode(",", $temp);
-				$val = "($val)";
-			}
+                }
+                $val = implode(',', $temp);
+                $val = "($val)";
+            }
 
-			$where[] = " $table.$name $op $val";
-		}
+            $where[] = " $table.$name $op $val";
+        }
 
-		if (!empty($where))
-			return implode(" AND ", $where);
+        if (!empty($where)) {
+            return implode(' AND ', $where);
+        }
 
-		return '';
-	}
+        return '';
+    }
 
     /**
      * Called in SearchForm and QuickSearch and overriden in OracleManager to
      * support case insensitive search.
      *
-     * @param  string $name column name
-     * @param  string $value search string
+     * @param string $name column name
+     * @param string $value search string
      * @return string
      */
     public function getLikeSQL($name, $value)
@@ -2618,23 +2649,23 @@ abstract class DBManager implements LoggerAwareInterface
         return $name . ' LIKE ' . $this->quoted($value);
     }
 
-	/**
-	 * This method returns a complete where clause built from the
-	 * where values specified.
-	 *
-	 * @param  SugarBean $bean SugarBean that describes the table
-	 * @param  array  $whereArray Optional, where conditions in an array
-	 * @return string
-	 */
-    protected function getWhereClause(SugarBean $bean, array $whereArray = array())
+    /**
+     * This method returns a complete where clause built from the
+     * where values specified.
+     *
+     * @param SugarBean $bean SugarBean that describes the table
+     * @param array $whereArray Optional, where conditions in an array
+     * @return string
+     */
+    protected function getWhereClause(SugarBean $bean, array $whereArray = [])
     {
         $where = $this->getColumnWhereClause(
             $bean->getTableName(),
             $whereArray
         );
 
-	    return " WHERE $where";
-	}
+        return " WHERE $where";
+    }
 
     /**
      * Helper function for massageValue used to abstract logic for empty values.
@@ -2649,7 +2680,7 @@ abstract class DBManager implements LoggerAwareInterface
         if (!$this->isNullable($fieldDef)) {
             return $this->emptyValue($this->getFieldType($fieldDef), $forPrepared);
         } else {
-            return $forPrepared ? null : "NULL";
+            return $forPrepared ? null : 'NULL';
         }
     }
 
@@ -2671,17 +2702,17 @@ abstract class DBManager implements LoggerAwareInterface
             switch ($this->type_class[$type]) {
                 case 'bool':
                     return ($val === '' || is_null($val))
-                            ? $this->massageEmptyValue($fieldDef, $forPrepared) : intval($val);
+                        ? $this->massageEmptyValue($fieldDef, $forPrepared) : intval($val);
                 case 'int':
                     return ($val === '' || is_null($val))
-                            ? $this->massageEmptyValue($fieldDef, $forPrepared) : intval($val);
+                        ? $this->massageEmptyValue($fieldDef, $forPrepared) : intval($val);
                 case 'bigint':
                     $val = (float)$val;
                     return ($val === false || is_null($val))
-                            ? $this->massageEmptyValue($fieldDef, $forPrepared) : $val;
+                        ? $this->massageEmptyValue($fieldDef, $forPrepared) : $val;
                 case 'float':
                     return ($val === '' || is_null($val))
-                            ? $this->massageEmptyValue($fieldDef, $forPrepared) : floatval($val);
+                        ? $this->massageEmptyValue($fieldDef, $forPrepared) : floatval($val);
                 case 'time':
                 case 'date':
                     // empty date can't be '', so convert it to either NULL or empty date value
@@ -2702,8 +2733,8 @@ abstract class DBManager implements LoggerAwareInterface
             return '';
         }
 
-        if ($type == "datetimecombo") {
-            $type = "datetime";
+        if ($type == 'datetimecombo') {
+            $type = 'datetime';
         }
 
         return $forPrepared ? $val : $this->convert($this->quoted($val), $type);
@@ -2715,100 +2746,98 @@ abstract class DBManager implements LoggerAwareInterface
      *
      * @param mixed[] $fieldDef
      */
-    public function massageFieldDef(array &$fieldDef) : void
+    public function massageFieldDef(array &$fieldDef): void
     {
-		if ( !isset($fieldDef['dbType']) ) {
-			if ( isset($fieldDef['dbtype']) )
-				$fieldDef['dbType'] = $fieldDef['dbtype'];
-			else
-				$fieldDef['dbType'] = $fieldDef['type'];
-		}
+        if (!isset($fieldDef['dbType'])) {
+            if (isset($fieldDef['dbtype'])) {
+                $fieldDef['dbType'] = $fieldDef['dbtype'];
+            } else {
+                $fieldDef['dbType'] = $fieldDef['type'];
+            }
+        }
 
         $type = $this->getColumnType($fieldDef['dbType']);
-		$matches = array();
+        $matches = [];
         // len can be a number or a string like 'max', for example, nvarchar(max)
         preg_match_all('/(\w+)(?:\(([0-9]+,?[0-9]*|\w+)\)|)/i', $type, $matches);
-		if ( isset($matches[1][0]) )
-			$fieldDef['type'] = $matches[1][0];
-		if ( isset($matches[2][0]) && empty($fieldDef['len']) )
-			$fieldDef['len'] = $matches[2][0];
-		if ( !empty($fieldDef['precision']) && is_numeric($fieldDef['precision']) && !strstr($fieldDef['len'],',') )
-			$fieldDef['len'] .= ",{$fieldDef['precision']}";
-		if (!empty($fieldDef['required']) || ($fieldDef['name'] == 'id' && !isset($fieldDef['required'])) ) {
-			$fieldDef['required'] = 'true';
-		}
+        if (isset($matches[1][0])) {
+            $fieldDef['type'] = $matches[1][0];
+        }
+        if (isset($matches[2][0]) && empty($fieldDef['len'])) {
+            $fieldDef['len'] = $matches[2][0];
+        }
+        if (!empty($fieldDef['precision']) && is_numeric($fieldDef['precision']) && !strstr($fieldDef['len'], ',')) {
+            $fieldDef['len'] .= ",{$fieldDef['precision']}";
+        }
+        if (!empty($fieldDef['required']) || ($fieldDef['name'] == 'id' && !isset($fieldDef['required']))) {
+            $fieldDef['required'] = 'true';
+        }
         if ($fieldDef['type'] === 'bool') {
             $fieldDef['required'] = 'true';
         }
-	}
+    }
 
-	/**
-	 * Take an SQL statement and produce a list of fields used in that select
-	 * @param string $selectStatement
-	 * @return array
-	 */
-	public function getSelectFieldsFromQuery($selectStatement)
-	{
-		$selectStatement = trim($selectStatement);
-		if (strtoupper(substr($selectStatement, 0, 6)) == "SELECT")
-			$selectStatement = trim(substr($selectStatement, 6));
+    /**
+     * Take an SQL statement and produce a list of fields used in that select
+     * @param string $selectStatement
+     * @return array
+     */
+    public function getSelectFieldsFromQuery($selectStatement)
+    {
+        $selectStatement = trim($selectStatement);
+        if (strtoupper(substr($selectStatement, 0, 6)) == 'SELECT') {
+            $selectStatement = trim(substr($selectStatement, 6));
+        }
 
-		//Due to sql functions existing in many selects, we can't use php explode
-		$fields = array();
-		$level = 0;
-		$selectField = "";
-		$strLen = strlen($selectStatement);
-		for($i = 0; $i < $strLen; $i++)
-		{
-			$char = $selectStatement[$i];
+        //Due to sql functions existing in many selects, we can't use php explode
+        $fields = [];
+        $level = 0;
+        $selectField = '';
+        $strLen = strlen($selectStatement);
+        for ($i = 0; $i < $strLen; $i++) {
+            $char = $selectStatement[$i];
 
-			if ($char == "," && $level == 0)
-			{
-				$field = $this->getFieldNameFromSelect(trim($selectField));
-				$fields[$field] = $selectField;
-				$selectField = "";
-			}
-			else if ($char == "("){
-				$level++;
-				$selectField .= $char;
-			}
-			else if($char == ")"){
-				$level--;
-				$selectField .= $char;
+            if ($char == ',' && $level == 0) {
+                $field = $this->getFieldNameFromSelect(trim($selectField));
+                $fields[$field] = $selectField;
+                $selectField = '';
+            } elseif ($char == '(') {
+                $level++;
+                $selectField .= $char;
+            } elseif ($char == ')') {
+                $level--;
+                $selectField .= $char;
+            } else {
+                $selectField .= $char;
+            }
+        }
+        $fields[$this->getFieldNameFromSelect($selectField)] = $selectField;
+        return $fields;
+    }
 
-
-			}else{
-				$selectField .= $char;
-			}
-
-		}
-		$fields[$this->getFieldNameFromSelect($selectField)] = $selectField;
-		return $fields;
-	}
-
-	/**
-	 * returns the field name used in a select
-	 * @param string $string SELECT query
+    /**
+     * returns the field name used in a select
+     * @param string $string SELECT query
      * @return string
      */
-	protected function getFieldNameFromSelect($string)
-	{
-		if(strncasecmp($string, "DISTINCT ", 9) == 0) {
-			$string = substr($string, 9);
-		}
-		if (stripos($string, " as ") !== false)
-			//"as" used for an alias
-			return trim(substr($string, strripos($string, " as ") + 4));
-		else if (strrpos($string, " ") != 0)
-			//Space used as a delimiter for an alias
-			return trim(substr($string, strrpos($string, " ")));
-		else if (strpos($string, ".") !== false)
-			//No alias, but a table.field format was used
-			return substr($string, strpos($string, ".") + 1);
-		else
-			//Give up and assume the whole thing is the field name
-			return $string;
-	}
+    protected function getFieldNameFromSelect($string)
+    {
+        if (strncasecmp($string, 'DISTINCT ', 9) == 0) {
+            $string = substr($string, 9);
+        }
+        if (stripos($string, ' as ') !== false) {
+            //"as" used for an alias
+            return trim(substr($string, strripos($string, ' as ') + 4));
+        } elseif (strrpos($string, ' ') != 0) {
+            //Space used as a delimiter for an alias
+            return trim(substr($string, strrpos($string, ' ')));
+        } elseif (strpos($string, '.') !== false) {
+            //No alias, but a table.field format was used
+            return substr($string, strpos($string, '.') + 1);
+        } else { //Give up and assume the whole thing is the field name
+            return $string;
+        }
+    }
 
     /**
      * This method implements a generic sql for a collection of beans.
@@ -2818,99 +2847,107 @@ abstract class DBManager implements LoggerAwareInterface
      * @param array $beans Array of values returned by get_class method as the keys and a bean as
      *      the value for that key. These beans will be joined in the sql by the key
      *      attribute of field defs.
-     * @param  array $cols Optional, columns to be returned with the keys as names of bean
+     * @param array $cols Optional, columns to be returned with the keys as names of bean
      *      as identified by get_class of bean. Values of this array is the array of fieldDefs
      *      to be returned for a bean. If an empty array is passed, all columns are selected.
-     * @param  array $whereClause Optional, values with the keys as names of bean as identified
+     * @param array $whereClause Optional, values with the keys as names of bean as identified
      *      by get_class of bean. Each value at the first level is an array of values for that
      *      bean identified by name of fields. If we want to pass multiple values for a name,
      *      pass it as an array. If where is not passed, all the rows will be returned.
      *
      * @return string SQL Select Statement
      */
-	public function retrieveViewSQL(array $beans, array $cols = array(), array $whereClause = array())
-	{
-		$relations = array(); // stores relations between tables as they are discovered
-		$where = $select = array();
-		foreach ($beans as $beanID => $bean) {
-			$tableName = $bean->getTableName();
-			$beanTables[$beanID] = $tableName;
+    public function retrieveViewSQL(array $beans, array $cols = [], array $whereClause = [])
+    {
+        $relations = []; // stores relations between tables as they are discovered
+        $where = $select = [];
+        foreach ($beans as $beanID => $bean) {
+            $tableName = $bean->getTableName();
+            $beanTables[$beanID] = $tableName;
 
-			$table = $beanID;
-			$tables[$table] = $tableName;
-			$aliases[$tableName][] = $table;
+            $table = $beanID;
+            $tables[$table] = $tableName;
+            $aliases[$tableName][] = $table;
 
-			// build part of select for this table
-			if (is_array($cols[$beanID]))
-				foreach ($cols[$beanID] as $def) $select[] = $table.".".$def['name'];
+            // build part of select for this table
+            if (is_array($cols[$beanID])) {
+                foreach ($cols[$beanID] as $def) {
+                    $select[] = $table . '.' . $def['name'];
+                }
+            }
 
-			// build part of where clause
-			if (is_array($whereClause[$beanID])){
-				$where[] = $this->getColumnWhereClause($table, $whereClause[$beanID]);
-			}
-			// initialize so that it can be used properly in form clause generation
-			$table_used_in_from[$table] = false;
+            // build part of where clause
+            if (is_array($whereClause[$beanID])) {
+                $where[] = $this->getColumnWhereClause($table, $whereClause[$beanID]);
+            }
+            // initialize so that it can be used properly in form clause generation
+            $table_used_in_from[$table] = false;
 
-			$indices = $bean->getIndices();
-			foreach ($indices as $index){
-				if ($index['type'] == 'foreign') {
-					$relationship[$table][] = array('foreignTable'=> $index['foreignTable']
-												,'foreignColumn'=>$index['foreignField']
-												,'localColumn'=> $index['fields']
-												);
-				}
-			}
-			$where[] = " $table.deleted = 0";
-		}
+            $indices = $bean->getIndices();
+            foreach ($indices as $index) {
+                if ($index['type'] == 'foreign') {
+                    $relationship[$table][] = ['foreignTable' => $index['foreignTable']
+                        , 'foreignColumn' => $index['foreignField']
+                        , 'localColumn' => $index['fields'],
+                    ];
+                }
+            }
+            $where[] = " $table.deleted = 0";
+        }
 
-		// join these clauses
-		$select = !empty($select) ? implode(",", $select) : "*";
-		$where = implode(" AND ", $where);
+        // join these clauses
+        $select = !empty($select) ? implode(',', $select) : '*';
+        $where = implode(' AND ', $where);
 
-		// generate the from clause. Use relations array to generate outer joins
-		// all the rest of the tables will be used as a simple from
-		// relations table define relations between table1 and table2 through column on table 1
-		// table2 is assumed to joining through primary key called id
-		$separator = "";
-		$from = ''; $table_used_in_from = array();
-		foreach ($relations as $table1 => $rightsidearray){
-			if ($table_used_in_from[$table1]) continue; // table has been joined
+        // generate the from clause. Use relations array to generate outer joins
+        // all the rest of the tables will be used as a simple from
+        // relations table define relations between table1 and table2 through column on table 1
+        // table2 is assumed to joining through primary key called id
+        $separator = '';
+        $from = '';
+        $table_used_in_from = [];
+        foreach ($relations as $table1 => $rightsidearray) {
+            if ($table_used_in_from[$table1]) {
+                continue; // table has been joined
+            }
 
-			$from .= $separator." ".$table1;
-			$table_used_in_from[$table1] = true;
-			foreach ($rightsidearray as $tablearray){
-				$table2 = $tablearray['foreignTable']; // get foreign table
-				$tableAlias = $aliases[$table2]; // get a list of aliases for this table
-				foreach ($tableAlias as $table2) {
-					//choose first alias that does not match
-					// we are doing this because of self joins.
-					// in case of self joins, the same table will have many aliases.
-					if ($table2 != $table1) break;
-				}
+            $from .= $separator . ' ' . $table1;
+            $table_used_in_from[$table1] = true;
+            foreach ($rightsidearray as $tablearray) {
+                $table2 = $tablearray['foreignTable']; // get foreign table
+                $tableAlias = $aliases[$table2]; // get a list of aliases for this table
+                foreach ($tableAlias as $table2) {
+                    //choose first alias that does not match
+                    // we are doing this because of self joins.
+                    // in case of self joins, the same table will have many aliases.
+                    if ($table2 != $table1) {
+                        break;
+                    }
+                }
 
-				$col = $tablearray['foreingColumn'];
-				$name = $tablearray['localColumn'];
-				$from .= " LEFT JOIN $table on ($table1.$name = $table2.$col)";
-				$table_used_in_from[$table2] = true;
-			}
-			$separator = ",";
-		}
+                $col = $tablearray['foreingColumn'];
+                $name = $tablearray['localColumn'];
+                $from .= " LEFT JOIN $table on ($table1.$name = $table2.$col)";
+                $table_used_in_from[$table2] = true;
+            }
+            $separator = ',';
+        }
 
-		return "SELECT $select FROM $from WHERE $where";
-	}
+        return "SELECT $select FROM $from WHERE $where";
+    }
 
-	/**
-	 * Generates SQL for create index statement for a bean.
-	 *
-     * @param  SugarBean|string $beanOrTableName SugarBean instance or a table name
-	 * @param  array  $fields fields used in the index
-	 * @param  string $name index name
-	 * @param  bool   $unique Optional, set to true if this is an unique index
-	 * @return string SQL Select Statement
-	 */
+    /**
+     * Generates SQL for create index statement for a bean.
+     *
+     * @param SugarBean|string $beanOrTableName SugarBean instance or a table name
+     * @param array $fields fields used in the index
+     * @param string $name index name
+     * @param bool $unique Optional, set to true if this is an unique index
+     * @return string SQL Select Statement
+     */
     public function createIndexSQL($beanOrTableName, array $fields, $name, $unique = true): string
     {
-        $unique = ($unique) ? "unique" : "";
+        $unique = ($unique) ? 'unique' : '';
         $tableName = $beanOrTableName instanceof SugarBean ? $beanOrTableName->getTableName() : $beanOrTableName;
         $columns = [];
         // get column names
@@ -2919,40 +2956,45 @@ abstract class DBManager implements LoggerAwareInterface
         }
 
         if (empty($columns)) {
-            return "";
+            return '';
         }
 
-        $columns = implode(",", $columns);
+        $columns = implode(',', $columns);
 
         return "CREATE $unique INDEX $name ON $tableName ($columns)";
     }
 
     /**
-	 * Returns the type of the variable in the field
-	 *
-	 * @param  array $fieldDef Vardef-format field def
-	 * @return string
-	 */
-	public function getFieldType($fieldDef)
-	{
-		// get the type for db type. if that is not set,
-		// get it from type. This is done so that
-		// we do not have change a lot of existing code
-		// and add dbtype where type is being used for some special
-		// purposes like referring to foreign table etc.
-		if(!empty($fieldDef['dbType']))
-			return  $fieldDef['dbType'];
-		if(!empty($fieldDef['dbtype']))
-			return  $fieldDef['dbtype'];
-		if (!empty($fieldDef['type']))
-			return  $fieldDef['type'];
-		if (!empty($fieldDef['Type']))
-			return  $fieldDef['Type'];
-		if (!empty($fieldDef['data_type']))
-			return  $fieldDef['data_type'];
+     * Returns the type of the variable in the field
+     *
+     * @param array $fieldDef Vardef-format field def
+     * @return string
+     */
+    public function getFieldType($fieldDef)
+    {
+        // get the type for db type. if that is not set,
+        // get it from type. This is done so that
+        // we do not have change a lot of existing code
+        // and add dbtype where type is being used for some special
+        // purposes like referring to foreign table etc.
+        if (!empty($fieldDef['dbType'])) {
+            return $fieldDef['dbType'];
+        }
+        if (!empty($fieldDef['dbtype'])) {
+            return $fieldDef['dbtype'];
+        }
+        if (!empty($fieldDef['type'])) {
+            return $fieldDef['type'];
+        }
+        if (!empty($fieldDef['Type'])) {
+            return $fieldDef['Type'];
+        }
+        if (!empty($fieldDef['data_type'])) {
+            return $fieldDef['data_type'];
+        }
 
-		return null;
-	}
+        return null;
+    }
 
     /**
      * retrieves the different components from the passed column type as it is used in the type mapping and vardefs
@@ -2962,17 +3004,16 @@ abstract class DBManager implements LoggerAwareInterface
      */
     public function getTypeParts($type)
     {
-        if(preg_match('#(?P<type>\w+)\s*(?P<arg>\((?P<len>\w+)\s*(,\s*(?P<scale>\d+))*\))*#', $type, $matches))
-        {
-            $return = array();  // Not returning matches array as such as we don't want to expose the regex make up on the interface
+        if (preg_match('#(?P<type>\w+)\s*(?P<arg>\((?P<len>\w+)\s*(,\s*(?P<scale>\d+))*\))*#', $type, $matches)) {
+            $return = [];  // Not returning matches array as such as we don't want to expose the regex make up on the interface
             $return['baseType'] = $matches['type'];
-            if( isset($matches['arg'])) {
+            if (isset($matches['arg'])) {
                 $return['arg'] = $matches['arg'];
             }
-            if( isset($matches['len'])) {
+            if (isset($matches['len'])) {
                 $return['len'] = $matches['len'];
             }
-            if( isset($matches['scale'])) {
+            if (isset($matches['scale'])) {
                 $return['scale'] = $matches['scale'];
             }
             return $return;
@@ -2993,279 +3034,280 @@ abstract class DBManager implements LoggerAwareInterface
             // nothing to do
         } elseif ($this->getFieldType($fieldDef) == 'bool') {
             if (isset($fieldDef['default'])) {
-                $value = (int) isTruthy($fieldDef['default']);
+                $value = (int)isTruthy($fieldDef['default']);
             } else {
                 $value = 0;
             }
-            $default = " DEFAULT " . $value;
+            $default = ' DEFAULT ' . $value;
         } elseif (isset($fieldDef['default'])) {
-            $default = " DEFAULT " . $this->massageValue($fieldDef['default'], $fieldDef);
+            $default = ' DEFAULT ' . $this->massageValue($fieldDef['default'], $fieldDef);
         }
         return $default;
     }
 
-	/**
-	 * Returns the defintion for a single column
-	 *
-	 * @param  array  $fieldDef Vardef-format field def
-	 * @param  bool   $ignoreRequired  Optional, true if we should ignore this being a required field
-	 * @param  string $table           Optional, table name
-	 * @param  bool   $return_as_array Optional, true if we should return the result as an array instead of sql
-     * @param  string $action          Optional, 'add' or 'modify' based on path of execution. Used to determine how we
+    /**
+     * Returns the defintion for a single column
+     *
+     * @param array $fieldDef Vardef-format field def
+     * @param bool $ignoreRequired Optional, true if we should ignore this being a required field
+     * @param string $table Optional, table name
+     * @param bool $return_as_array Optional, true if we should return the result as an array instead of sql
+     * @param string $action Optional, 'add' or 'modify' based on path of execution. Used to determine how we
      *                                           set the auto_increment property
      * @return string|string[]
-	 */
+     */
     protected function oneColumnSQLRep($fieldDef, $ignoreRequired = false, $table = '', $return_as_array = false, $action = null)
-	{
+    {
         $colBaseType = null;
         $defLen = null;
-		$name = $fieldDef['name'];
-		$type = $this->getFieldType($fieldDef);
+        $name = $fieldDef['name'];
+        $type = $this->getFieldType($fieldDef);
         $colType = $this->getColumnType($type);
 
-        if($parts = $this->getTypeParts($colType))
-        {
+        if ($parts = $this->getTypeParts($colType)) {
             $colBaseType = $parts['baseType'];
             $defLen = 255;
             if ($type == 'char') {
                 $defLen = 254;
             }
-            $defLen =  $parts['len'] ?? $defLen; // Use the mappings length (precision) as default if it exists
+            $defLen = $parts['len'] ?? $defLen; // Use the mappings length (precision) as default if it exists
         }
 
-        if(!empty($fieldDef['len'])) {
-            if (in_array($colBaseType, array( 'nvarchar', 'nchar', 'varchar', 'varchar2', 'char',
-                                          'clob', 'blob', 'text', 'binary', 'varbinary'))) {
-          	    $colType = "$colBaseType({$fieldDef['len']})";
+        if (!empty($fieldDef['len'])) {
+            if (in_array($colBaseType, ['nvarchar', 'nchar', 'varchar', 'varchar2', 'char',
+                'clob', 'blob', 'text', 'binary', 'varbinary'])) {
+                $colType = "$colBaseType({$fieldDef['len']})";
             } elseif (($colBaseType == 'decimal' || $colBaseType == 'float' || $colBaseType == 'number')) {
-                  if(!empty($fieldDef['precision']) && is_numeric($fieldDef['precision']))
-                      if(strpos($fieldDef['len'],',') === false){
-                          $colType = $colBaseType . "(".$fieldDef['len'].",".$fieldDef['precision'].")";
-                      }else{
-                          $colType = $colBaseType . "(".$fieldDef['len'].")";
-                      }
-                  else
-                          $colType = $colBaseType . "(".$fieldDef['len'].")";
-              }
+                if (!empty($fieldDef['precision']) && is_numeric($fieldDef['precision'])) {
+                    if (strpos($fieldDef['len'], ',') === false) {
+                        $colType = $colBaseType . '(' . $fieldDef['len'] . ',' . $fieldDef['precision'] . ')';
+                    } else {
+                        $colType = $colBaseType . '(' . $fieldDef['len'] . ')';
+                    }
+                } else {
+                    $colType = $colBaseType . '(' . $fieldDef['len'] . ')';
+                }
+            }
         } else {
-            if (in_array($colBaseType, array( 'nvarchar', 'nchar', 'varchar', 'varchar2', 'char'))) {
+            if (in_array($colBaseType, ['nvarchar', 'nchar', 'varchar', 'varchar2', 'char'])) {
                 $colType = "$colBaseType($defLen)";
             }
         }
 
         $default = $this->getDefaultFromDefinition($fieldDef);
 
-		$auto_increment = '';
-		if(!empty($fieldDef['auto_increment']) && $fieldDef['auto_increment'])
+        $auto_increment = '';
+        if (!empty($fieldDef['auto_increment']) && $fieldDef['auto_increment']) {
             $auto_increment = $this->setAutoIncrement(
                 $table,
                 $fieldDef['name'],
                 $fieldDef['auto_increment_platform_options'] ?? [],
                 $action,
             );
+        }
 
-		$required = 'NULL';  // MySQL defaults to NULL, SQL Server defaults to NOT NULL -- must specify
-		//Starting in 6.0, only ID and auto_increment fields will be NOT NULL in the DB.
-		if ((empty($fieldDef['isnull']) || strtolower($fieldDef['isnull']) == 'false') &&
-			(!empty($auto_increment) || $name == 'id' || ($fieldDef['type'] == 'id' && !empty($fieldDef['required'])))) {
-			$required =  "NOT NULL";
-		}
-		// If the field is marked both required & isnull=>false - alwqys make it not null
-		// Use this to ensure primary key fields never defined as null
-		if(isset($fieldDef['isnull']) && (strtolower($fieldDef['isnull']) == 'false' || $fieldDef['isnull'] === false)
-			&& !empty($fieldDef['required'])) {
-			$required =  "NOT NULL";
-		}
-		if ($ignoreRequired)
-			$required = "";
+        $required = 'NULL';  // MySQL defaults to NULL, SQL Server defaults to NOT NULL -- must specify
+        //Starting in 6.0, only ID and auto_increment fields will be NOT NULL in the DB.
+        if ((empty($fieldDef['isnull']) || strtolower($fieldDef['isnull']) == 'false') &&
+            (!empty($auto_increment) || $name == 'id' || ($fieldDef['type'] == 'id' && !empty($fieldDef['required'])))) {
+            $required = 'NOT NULL';
+        }
+        // If the field is marked both required & isnull=>false - alwqys make it not null
+        // Use this to ensure primary key fields never defined as null
+        if (isset($fieldDef['isnull']) && (strtolower($fieldDef['isnull']) == 'false' || $fieldDef['isnull'] === false)
+            && !empty($fieldDef['required'])) {
+            $required = 'NOT NULL';
+        }
+        if ($ignoreRequired) {
+            $required = '';
+        }
 
-		if ( $return_as_array ) {
-			return array(
-				'name' => $name,
-				'colType' => $colType,
+        if ($return_as_array) {
+            return [
+                'name' => $name,
+                'colType' => $colType,
                 'colBaseType' => $colBaseType,  // Adding base type for easier processing in derived classes
-				'default' => $default,
-				'required' => $required,
-				'auto_increment' => $auto_increment,
-				'full' => "$name $colType $default $required $auto_increment",
-				);
-		} else {
-			return "$name $colType $default $required $auto_increment";
-		}
-	}
+                'default' => $default,
+                'required' => $required,
+                'auto_increment' => $auto_increment,
+                'full' => "$name $colType $default $required $auto_increment",
+            ];
+        } else {
+            return "$name $colType $default $required $auto_increment";
+        }
+    }
 
-	/**
-	 * Returns SQL defintions for all columns in a table
-	 *
-	 * @param  array  $fieldDefs  Vardef-format field def
-     * @param  bool   $ignoreRequired True if we should ignor this being a required field
-     * @param  string $tablename      Table name
-	 * @return string SQL column definitions
-	 */
+    /**
+     * Returns SQL defintions for all columns in a table
+     *
+     * @param array $fieldDefs Vardef-format field def
+     * @param bool $ignoreRequired True if we should ignor this being a required field
+     * @param string $tablename Table name
+     * @return string SQL column definitions
+     */
     protected function columnSQLRep(array $fieldDefs, bool $ignoreRequired, string $tablename): string
-	{
-		$columns = array();
+    {
+        $columns = [];
 
-		if ($this->isFieldArray($fieldDefs)) {
-			foreach ($fieldDefs as $fieldDef) {
-				if(!isset($fieldDef['source']) || $fieldDef['source'] == 'db') {
-					$columns[] = $this->oneColumnSQLRep($fieldDef,false, $tablename);
-				}
-			}
-			$columns = implode(",", $columns);
-		}
-		else {
-			$columns = $this->oneColumnSQLRep($fieldDefs,$ignoreRequired, $tablename);
-		}
+        if ($this->isFieldArray($fieldDefs)) {
+            foreach ($fieldDefs as $fieldDef) {
+                if (!isset($fieldDef['source']) || $fieldDef['source'] == 'db') {
+                    $columns[] = $this->oneColumnSQLRep($fieldDef, false, $tablename);
+                }
+            }
+            $columns = implode(',', $columns);
+        } else {
+            $columns = $this->oneColumnSQLRep($fieldDefs, $ignoreRequired, $tablename);
+        }
 
-		return $columns;
-	}
+        return $columns;
+    }
 
-	/**
-	 * Returns the next value for an auto increment
-	 * @abstract
-	 * @param  string $table Table name
-	 * @param  string $field_name Field name
-	 * @return string
-	 */
-	public function getAutoIncrement($table, $field_name)
-	{
-		return "";
-	}
+    /**
+     * Returns the next value for an auto increment
+     * @abstract
+     * @param string $table Table name
+     * @param string $field_name Field name
+     * @return string
+     */
+    public function getAutoIncrement($table, $field_name)
+    {
+        return '';
+    }
 
-	/**
-	 * Returns the sql for the next value in a sequence
-	 * @abstract
-	 * @param  string $table  Table name
-	 * @param  string $field_name  Field name
-	 * @return string
-	 */
-	public function getAutoIncrementSQL($table, $field_name)
-	{
-		return "";
-	}
+    /**
+     * Returns the sql for the next value in a sequence
+     * @abstract
+     * @param string $table Table name
+     * @param string $field_name Field name
+     * @return string
+     */
+    public function getAutoIncrementSQL($table, $field_name)
+    {
+        return '';
+    }
 
-	/**
-	 * Either creates an auto increment through queries or returns sql for auto increment
-	 * that can be appended to the end of column defination (mysql)
-	 * @abstract
-	 * @param  string $table Table name
-	 * @param  string $field_name Field name
-     * @param  array $platformOptions Options related to a platform autoincrement statement
-	 * @return string
-	 */
+    /**
+     * Either creates an auto increment through queries or returns sql for auto increment
+     * that can be appended to the end of column defination (mysql)
+     * @abstract
+     * @param string $table Table name
+     * @param string $field_name Field name
+     * @param array $platformOptions Options related to a platform autoincrement statement
+     * @return string
+     */
     protected function setAutoIncrement($table, $field_name, array $platformOptions = [], $action = null)
-	{
-		$this->deleteAutoIncrement($table, $field_name);
-		return "";
-	}
+    {
+        $this->deleteAutoIncrement($table, $field_name);
+        return '';
+    }
 
     /**
      * Sets the next auto-increment value of a column to a specific value.
      * @abstract
-     * @param  string $table Table name
-     * @param  string $field_name Field name
-     * @param  int $start_value  Starting autoincrement value
+     * @param string $table Table name
+     * @param string $field_name Field name
+     * @param int $start_value Starting autoincrement value
      * @return string
      *
      */
-	public function setAutoIncrementStart($table, $field_name, $start_value)
-	{
-		return "";
-	}
+    public function setAutoIncrementStart($table, $field_name, $start_value)
+    {
+        return '';
+    }
 
-	/**
-	 * Deletes an auto increment
-	 * @abstract
-	 * @param string $table tablename
-	 * @param string $field_name
-	 */
-	public function deleteAutoIncrement($table, $field_name)
-	{
-		return;
-	}
+    /**
+     * Deletes an auto increment
+     * @abstract
+     * @param string $table tablename
+     * @param string $field_name
+     */
+    public function deleteAutoIncrement($table, $field_name)
+    {
+        return;
+    }
 
-	/**
-	 * This method generates sql for adding a column to table identified by field def.
-	 *
-	 * @param  string $tablename
-	 * @param  array  $fieldDefs
-	 * @return string SQL statement
-	 */
-	public function addColumnSQL($tablename, $fieldDefs)
-	{
-	    return $this->changeColumnSQL($tablename, $fieldDefs, 'add');
-	}
+    /**
+     * This method generates sql for adding a column to table identified by field def.
+     *
+     * @param string $tablename
+     * @param array $fieldDefs
+     * @return string SQL statement
+     */
+    public function addColumnSQL($tablename, $fieldDefs)
+    {
+        return $this->changeColumnSQL($tablename, $fieldDefs, 'add');
+    }
 
-	/**
-	 * This method genrates sql for altering old column identified by oldFieldDef to new fieldDef.
-	 *
-	 * @param  string $tablename
-	 * @param  array  $newFieldDefs
-	 * @param  bool  $ignorerequired Optional, true if we should ignor this being a required field
-	 * @return string|array SQL statement(s)
-	 */
-	public function alterColumnSQL($tablename, $newFieldDefs, $ignorerequired = false)
-	{
-		return $this->changeColumnSQL($tablename, $newFieldDefs, 'modify', $ignorerequired);
-	}
+    /**
+     * This method genrates sql for altering old column identified by oldFieldDef to new fieldDef.
+     *
+     * @param string $tablename
+     * @param array $newFieldDefs
+     * @param bool $ignorerequired Optional, true if we should ignor this being a required field
+     * @return string|array SQL statement(s)
+     */
+    public function alterColumnSQL($tablename, $newFieldDefs, $ignorerequired = false)
+    {
+        return $this->changeColumnSQL($tablename, $newFieldDefs, 'modify', $ignorerequired);
+    }
 
-	/**
-	 * Generates SQL for dropping a table.
-	 *
-	 * @param  SugarBean $bean Sugarbean instance
-	 * @return string SQL statement
-	 */
-	public function dropTableSQL(SugarBean $bean)
-	{
-		return $this->dropTableNameSQL($bean->getTableName());
-	}
+    /**
+     * Generates SQL for dropping a table.
+     *
+     * @param SugarBean $bean Sugarbean instance
+     * @return string SQL statement
+     */
+    public function dropTableSQL(SugarBean $bean)
+    {
+        return $this->dropTableNameSQL($bean->getTableName());
+    }
 
-	/**
-	 * Generates SQL for dropping a table.
-	 *
-	 * @param  string $name table name
-	 * @return string SQL statement
-	 */
-	public function dropTableNameSQL($name)
-	{
-		return "DROP TABLE ".$name;
-	}
+    /**
+     * Generates SQL for dropping a table.
+     *
+     * @param string $name table name
+     * @return string SQL statement
+     */
+    public function dropTableNameSQL($name)
+    {
+        return 'DROP TABLE ' . $name;
+    }
 
-	/**
-	 * Generates SQL for truncating a table.
-	 * @param  string $name  table name
-	 * @return string
-	 */
-	public function truncateTableSQL($name)
-	{
-		return "TRUNCATE $name";
-	}
+    /**
+     * Generates SQL for truncating a table.
+     * @param string $name table name
+     * @return string
+     */
+    public function truncateTableSQL($name)
+    {
+        return "TRUNCATE $name";
+    }
 
-	/**
-	 * This method generates sql that deletes a column identified by fieldDef.
-	 *
-	 * @param  SugarBean $bean      Sugarbean instance
-	 * @param  array  $fieldDefs
-	 * @return string SQL statement
-	 */
-	public function deleteColumnSQL(SugarBean $bean, $fieldDefs)
-	{
-		return $this->dropColumnSQL($bean->getTableName(), $fieldDefs);
-	}
+    /**
+     * This method generates sql that deletes a column identified by fieldDef.
+     *
+     * @param SugarBean $bean Sugarbean instance
+     * @param array $fieldDefs
+     * @return string SQL statement
+     */
+    public function deleteColumnSQL(SugarBean $bean, $fieldDefs)
+    {
+        return $this->dropColumnSQL($bean->getTableName(), $fieldDefs);
+    }
 
-	/**
-	 * This method generates sql that drops a column identified by fieldDef.
-	 * Designed to work like the other addColumnSQL() and alterColumnSQL() functions
-	 *
-	 * @param  string $tablename
-	 * @param  array  $fieldDefs
-	 * @return string SQL statement
-	 */
-	public function dropColumnSQL($tablename, $fieldDefs)
-	{
-		return $this->changeColumnSQL($tablename, $fieldDefs, 'drop');
-	}
+    /**
+     * This method generates sql that drops a column identified by fieldDef.
+     * Designed to work like the other addColumnSQL() and alterColumnSQL() functions
+     *
+     * @param string $tablename
+     * @param array $fieldDefs
+     * @return string SQL statement
+     */
+    public function dropColumnSQL($tablename, $fieldDefs)
+    {
+        return $this->changeColumnSQL($tablename, $fieldDefs, 'drop');
+    }
 
     /**
      * Return a version of $proposed that can be used as a column name in any of our supported databases
@@ -3276,103 +3318,104 @@ abstract class DBManager implements LoggerAwareInterface
      * @param bool $force Force new name
      * @return string|array Valid column name trimmed to right length and with invalid characters removed
      */
-	public function getValidDBName($name, $ensureUnique = false, $type = 'column', $force = false)
-	{
-		if(is_array($name)) {
-			$result = array();
-			foreach($name as $field) {
-				$result[] = $this->getValidDBName($field, $ensureUnique, $type);
-			}
-			return $result;
-		} else {
-		    if(strchr($name, ".")) {
-		        // this is a compound name with dots, handle separately
-		        $parts = explode(".", $name);
-		        if(count($parts) > 2) {
-		            // some weird name, cut to table.name
-		            array_splice($parts, 0, count($parts)-2);
-		        }
-		        $parts = $this->getValidDBName($parts, $ensureUnique, $type, $force);
-                return join(".", $parts);
-		    }
-			// first strip any invalid characters - all but word chars (which is alphanumeric and _)
-			$name = preg_replace( '/[^\w]+/i', '', $name ) ;
-			$len = strlen( $name ) ;
-			$maxLen = empty($this->maxNameLengths[$type]) ? $this->maxNameLengths[$type]['column'] : $this->maxNameLengths[$type];
-			if ($len <= $maxLen && !$force) {
-				return strtolower($name);
-			}
-			if ($ensureUnique) {
-				$md5str = md5($name);
-				$tail = substr ( $name, -11) ;
-				$temp = substr($md5str , strlen($md5str)-4 );
-				$result = substr( $name, 0, 10) . $temp . $tail ;
-			} else {
-				$result = substr( $name, 0, 11) . substr( $name, 11 - $maxLen);
-			}
+    public function getValidDBName($name, $ensureUnique = false, $type = 'column', $force = false)
+    {
+        if (is_array($name)) {
+            $result = [];
+            foreach ($name as $field) {
+                $result[] = $this->getValidDBName($field, $ensureUnique, $type);
+            }
+            return $result;
+        } else {
+            if (strchr($name, '.')) {
+                // this is a compound name with dots, handle separately
+                $parts = explode('.', $name);
+                if (safeCount($parts) > 2) {
+                    // some weird name, cut to table.name
+                    array_splice($parts, 0, safeCount($parts) - 2);
+                }
+                $parts = $this->getValidDBName($parts, $ensureUnique, $type, $force);
+                return join('.', $parts);
+            }
+            // first strip any invalid characters - all but word chars (which is alphanumeric and _)
+            $name = preg_replace('/[^\w]+/i', '', $name);
+            $len = strlen($name);
+            $maxLen = empty($this->maxNameLengths[$type]) ? $this->maxNameLengths[$type]['column'] : $this->maxNameLengths[$type];
+            if ($len <= $maxLen && !$force) {
+                return strtolower($name);
+            }
+            if ($ensureUnique) {
+                $md5str = md5($name);
+                $tail = substr($name, -11);
+                $temp = substr($md5str, strlen($md5str) - 4);
+                $result = substr($name, 0, 10) . $temp . $tail;
+            } else {
+                $result = substr($name, 0, 11) . substr($name, 11 - $maxLen);
+            }
 
-			return strtolower( $result ) ;
-		}
-	}
+            return strtolower($result);
+        }
+    }
 
-	/**
-	 * Returns the valid type for a column given the type in fieldDef
-	 *
-	 * @param  string $type field type
-	 * @return string valid type for the given field
-	 */
-	public function getColumnType($type)
-	{
+    /**
+     * Returns the valid type for a column given the type in fieldDef
+     *
+     * @param string $type field type
+     * @return string valid type for the given field
+     */
+    public function getColumnType($type)
+    {
         return $this->type_map[$type] ?? $type;
-	}
+    }
 
-	/**
-	 * Checks to see if passed array is truely an array of defitions
-	 *
-	 * Such an array may have type as a key but it will point to an array
-	 * for a true array of definitions an to a col type for a definition only
-	 *
-	 * @param  mixed $defArray
-	 * @return bool
-	 */
-	public function isFieldArray($defArray)
-	{
-		if ( !is_array($defArray) )
-			return false;
+    /**
+     * Checks to see if passed array is truely an array of defitions
+     *
+     * Such an array may have type as a key but it will point to an array
+     * for a true array of definitions an to a col type for a definition only
+     *
+     * @param mixed $defArray
+     * @return bool
+     */
+    public function isFieldArray($defArray)
+    {
+        if (!is_array($defArray)) {
+            return false;
+        }
 
-		if ( isset($defArray['type']) ){
-			// type key exists. May be an array of defs or a simple definition
-			return is_array($defArray['type']); // type is not an array => definition else array
-		}
+        if (isset($defArray['type'])) {
+            // type key exists. May be an array of defs or a simple definition
+            return is_array($defArray['type']); // type is not an array => definition else array
+        }
 
-		// type does not exist. Must be array of definitions
-		return true;
-	}
+        // type does not exist. Must be array of definitions
+        return true;
+    }
 
-	/**
-	 * returns true if the type can be mapped to a valid column type
-	 *
-	 * @param  string $type
-	 * @return bool
-	 */
-	protected function validColumnType($type)
-	{
-		$type = $this->getColumnType($type);
-		return !empty($type);
-	}
+    /**
+     * returns true if the type can be mapped to a valid column type
+     *
+     * @param string $type
+     * @return bool
+     */
+    protected function validColumnType($type)
+    {
+        $type = $this->getColumnType($type);
+        return !empty($type);
+    }
 
-	/**
-	 * Generate query for audit table
-	 * @param SugarBean $bean SugarBean that was changed
-	 * @param array $changes List of changes, contains 'before' and 'after'
+    /**
+     * Generate query for audit table
+     * @param SugarBean $bean SugarBean that was changed
+     * @param array $changes List of changes, contains 'before' and 'after'
      * @param string $event_id Audit event id
      * @return string  Audit table INSERT query
      * @deprecated Use SugarBean::auditSQL()
      */
     protected function auditSQL(SugarBean $bean, $changes, $event_id)
-	{
+    {
         return $bean->auditSQL($bean, $changes, $event_id);
-	}
+    }
 
     /**
      * Saves changes to module's audit table
@@ -3383,9 +3426,9 @@ abstract class DBManager implements LoggerAwareInterface
      * @deprecated Use SugarBean::saveAuditRecords()
      */
     public function save_audit_records(SugarBean $bean, $changes)
-	{
+    {
         return $bean->saveAuditRecords($bean, $changes, Uuid::uuid1());
-	}
+    }
 
     /**
      * Finds fields whose value has changed.
@@ -3410,12 +3453,12 @@ abstract class DBManager implements LoggerAwareInterface
 
     public function getStateChanges(SugarBean $bean, array $prevState, array $options = [])
     {
-        $changed_values=array();
+        $changed_values = [];
 
         $fields = $bean->field_defs;
 
         if (!empty($options['for']) && $options['for'] == 'activity') {
-            $excludeType = array('datetime');
+            $excludeType = ['datetime'];
             if (isset($options['excludeType'])) {
                 $excludeType = $options['excludeType'];
             }
@@ -3436,7 +3479,7 @@ abstract class DBManager implements LoggerAwareInterface
         // remove fields which do not present in the current state
         $fields = array_intersect_key($fields, $bean->toArray());
 
-        if (is_array($fields) and count($fields) > 0) {
+        if (is_array($fields) and safeCount($fields) > 0) {
             foreach ($fields as $field => $vardefs) {
                 $before_value = $prevState[$field] ?? null;
                 $after_value = $bean->$field;
@@ -3454,12 +3497,12 @@ abstract class DBManager implements LoggerAwareInterface
                         $after_value = $bean->emailAddress->addresses;
                     }
                     if ($this->didEmailAddressesChange($before_value, $after_value)) {
-                        $changed_values[$field] = array(
+                        $changed_values[$field] = [
                             'field_name' => $field,
                             'data_type' => $field_type,
                             'before' => $before_value,
                             'after' => $after_value,
-                        );
+                        ];
                     }
 
                     continue;
@@ -3482,12 +3525,12 @@ abstract class DBManager implements LoggerAwareInterface
                 }
 
                 //if the type and values match, do nothing.
-                if (!($this->_emptyValue($before_value,$field_type) && $this->_emptyValue($after_value,$field_type))) {
+                if (!($this->_emptyValue($before_value, $field_type) && $this->_emptyValue($after_value, $field_type))) {
                     $change = false;
 
                     // Only scalar values should be run through trim()
-                    $check_before = !is_scalar($before_value)?$before_value:trim($before_value);
-                    $check_after = !is_scalar($after_value)?$after_value:trim($after_value);
+                    $check_before = !is_scalar($before_value) ? $before_value : trim($before_value);
+                    $check_after = !is_scalar($after_value) ? $after_value : trim($after_value);
                     if ($check_before !== $check_after) {
                         // Bug #42475: Don't directly compare numeric values, instead do the subtract and see if the comparison comes out to be "close enough", it is necessary for floating point numbers.
                         // Manual merge of fix 95727f2eed44852f1b6bce9a9eccbe065fe6249f from DBHelper
@@ -3504,27 +3547,25 @@ abstract class DBManager implements LoggerAwareInterface
                             $before_value = empty($before_value) ? 0 : (float)$before_value;
                             $after_value = empty($after_value) ? 0 : (float)$after_value;
 
-                            $numerator = abs(2*($before_value - $after_value));
+                            $numerator = abs(2 * ($before_value - $after_value));
                             $denominator = abs($before_value + $after_value);
                             // detect whether to use absolute or relative error. use absolute if denominator is zero to avoid division by zero
                             $error = ($denominator == 0) ? $numerator : $numerator / $denominator;
                             if ($error >= 0.0000000001) {    // Smaller than 10E-10
                                 $change = true;
                             }
-                        }
-                        else if ($this->isBooleanType($field_type)) {
+                        } elseif ($this->isBooleanType($field_type)) {
                             if ($this->_getBooleanValue($before_value) != $this->_getBooleanValue($after_value)) {
                                 $change = true;
                             }
-                        }
-                        else {
+                        } else {
                             $change = true;
                         }
                         if ($change) {
-                            $changed_values[$field]=array('field_name'=>$field,
-                                'data_type'=>$field_type,
-                                'before'=>$before_value,
-                                'after'=>$after_value);
+                            $changed_values[$field] = ['field_name' => $field,
+                                'data_type' => $field_type,
+                                'before' => $before_value,
+                                'after' => $after_value];
                         }
                     }
                 }
@@ -3559,81 +3600,83 @@ abstract class DBManager implements LoggerAwareInterface
     public function getAuditDataChanges(SugarBean $bean)
     {
         $audit_fields = $bean->getAuditEnabledFieldDefinitions();
-        return $this->getDataChanges($bean, array('field_filter'=>array_keys($audit_fields)));
+        return $this->getDataChanges($bean, ['field_filter' => array_keys($audit_fields)]);
     }
 
-	/**
-	 * Quotes a string for storing in the database
-	 * @deprecated
-	 * Return value will be not surrounded by quotes
-	 *
-	 * @param  string $string
-	 * @return string
-	 */
-	public function escape_quote($string)
-	{
-		return $this->quote($string);
-	}
+    /**
+     * Quotes a string for storing in the database
+     * @param string $string
+     * @return string
+     * @deprecated
+     * Return value will be not surrounded by quotes
+     *
+     */
+    public function escape_quote($string)
+    {
+        return $this->quote($string);
+    }
 
-	/**
-	 * Quotes a string for storing in the database
-	 * @deprecated
-	 * Return value will be not surrounded by quotes
-	 *
-	 * @param  string $string
-	 * @return string
-	 */
-	public function quoteFormEmail($string)
-	{
-		return $this->quote($string);
-	}
+    /**
+     * Quotes a string for storing in the database
+     * @param string $string
+     * @return string
+     * @deprecated
+     * Return value will be not surrounded by quotes
+     *
+     */
+    public function quoteFormEmail($string)
+    {
+        return $this->quote($string);
+    }
 
     /**
      * Renames an index using fields definition
      *
-     * @param  array  $old_definition
-     * @param  array  $new_definition
-     * @param  string $table_name
+     * @param array $old_definition
+     * @param array $new_definition
+     * @param string $table_name
      * @return string SQL statement
      */
-	public function renameIndexDefs($old_definition, $new_definition, $table_name)
-	{
-        return array(
+    public function renameIndexDefs($old_definition, $new_definition, $table_name)
+    {
+        return [
             $this->add_drop_constraint($table_name, $old_definition, true),
             $this->add_drop_constraint($table_name, $new_definition, false),
-        );
-	}
+        ];
+    }
 
-	/**
-	 * Check if type is boolean
-	 * @param string $type
+    /**
+     * Check if type is boolean
+     * @param string $type
      * @return bool
      */
-	public function isBooleanType($type)
-	{
-		return 'bool' == $type;
-	}
+    public function isBooleanType($type)
+    {
+        return 'bool' == $type;
+    }
 
-	/**
-	 * Get truth value for boolean type
-	 * Allows 'off' to mean false, along with all 'empty' values
-	 * @param mixed $val
+    /**
+     * Get truth value for boolean type
+     * Allows 'off' to mean false, along with all 'empty' values
+     * @param mixed $val
      * @return bool
-	 */
-	protected function _getBooleanValue($val)
-	{
-		//need to put the === sign here otherwise true == 'non empty string'
-		if (empty($val) or $val==='off')
-			return false;
+     */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _getBooleanValue($val)
+    {
+        //need to put the === sign here otherwise true == 'non empty string'
+        if (empty($val) or $val === 'off') {
+            return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * Check if type is a number
-	 * @param string $type
+    /**
+     * Check if type is a number
+     * @param string $type
      * @return bool
-	 */
+     */
     public function isNumericType($type)
     {
         if (isset($this->type_class[$type])) {
@@ -3651,47 +3694,51 @@ abstract class DBManager implements LoggerAwareInterface
      * @param string $type Type (one of vardef types)
      * @return bool true if the value if empty
      */
-	protected function _emptyValue($val, $type)
-	{
-		if (empty($val))
-			return true;
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _emptyValue($val, $type)
+    {
+        if (empty($val)) {
+            return true;
+        }
 
-		// Use raw empty value
-		if($this->emptyValue($type, true) == $val) {
-			return true;
-		}
-		switch ($type) {
-			case 'decimal':
-			case 'decimal2':
-			case 'int':
-			case 'double':
-			case 'float':
-			case 'uint':
-			case 'ulong':
-			case 'long':
-			case 'short':
-				return ($val == 0);
-			case 'date':
-				if ($val == '0000-00-00')
-					return true;
-				if ($val == 'NULL')
-					return true;
-				return false;
-		}
+        // Use raw empty value
+        if ($this->emptyValue($type, true) == $val) {
+            return true;
+        }
+        switch ($type) {
+            case 'decimal':
+            case 'decimal2':
+            case 'int':
+            case 'double':
+            case 'float':
+            case 'uint':
+            case 'ulong':
+            case 'long':
+            case 'short':
+                return ($val == 0);
+            case 'date':
+                if ($val == '0000-00-00') {
+                    return true;
+                }
+                if ($val == 'NULL') {
+                    return true;
+                }
+                return false;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	/**
+    /**
      * @abstract
-	 * Does this type represent text (i.e., non-varchar) value?
-	 * @param string $type
+     * Does this type represent text (i.e., non-varchar) value?
+     * @param string $type
      * @return bool
-	 */
-	public function isTextType($type)
-	{
-		return false;
-	}
+     */
+    public function isTextType($type)
+    {
+        return false;
+    }
 
     /**
      * Does this type represent blob value?
@@ -3704,48 +3751,47 @@ abstract class DBManager implements LoggerAwareInterface
         return false;
     }
 
-	/**
-	 * Check if this DB supports certain capability
-	 * See $this->capabilities for the list
-	 * @param string $cap
+    /**
+     * Check if this DB supports certain capability
+     * See $this->capabilities for the list
+     * @param string $cap
      * @return bool
-	 */
-	public function supports($cap)
-	{
-		return !empty($this->capabilities[$cap]);
-	}
+     */
+    public function supports($cap)
+    {
+        return !empty($this->capabilities[$cap]);
+    }
 
-	/**
-	 * Create ORDER BY clause for ENUM type field
-	 * @param string $order_by Field name
-	 * @param array $values Possible enum value
-	 * @param string $order_dir Order direction, ASC or DESC
+    /**
+     * Create ORDER BY clause for ENUM type field
+     * @param string $order_by Field name
+     * @param array $values Possible enum value
+     * @param string $order_dir Order direction, ASC or DESC
      * @return string
      */
-	public function orderByEnum($order_by, $values, $order_dir)
-	{
-		$i = 0;
-		$order_by_arr = array();
+    public function orderByEnum($order_by, $values, $order_dir)
+    {
+        $i = 0;
+        $order_by_arr = [];
         $returnValue = '';
         if (!safeIsIterable($values)) {
             return $returnValue;
         }
-		foreach ($values as $key => $value) {
-			if($key == '') {
-				$order_by_arr[] = "WHEN ($order_by='' OR $order_by IS NULL) THEN $i";
-			} else {
-				$order_by_arr[] = "WHEN $order_by=".$this->quoted($key)." THEN $i";
-			}
-			$i++;
-
+        foreach ($values as $key => $value) {
+            if ($key == '') {
+                $order_by_arr[] = "WHEN ($order_by='' OR $order_by IS NULL) THEN $i";
+            } else {
+                $order_by_arr[] = "WHEN $order_by=" . $this->quoted($key) . " THEN $i";
+            }
+            $i++;
         }
 
-        if (count($order_by_arr) > 0){
-            $returnValue = "CASE ".implode("\n", $order_by_arr)." ELSE $i END $order_dir\n";
+        if (safeCount($order_by_arr) > 0) {
+            $returnValue = 'CASE ' . implode("\n", $order_by_arr) . " ELSE $i END $order_dir\n";
         }
 
         return $returnValue;
-	}
+    }
 
     /**
      * Return representation of an empty value depending on type.
@@ -3765,147 +3811,147 @@ abstract class DBManager implements LoggerAwareInterface
                 case 'bigint':
                     return 0;
                 case 'date':
-                    return $forPrepared ? null : "NULL";
+                    return $forPrepared ? null : 'NULL';
             }
         }
 
-        return $forPrepared ? "" : "''";
+        return $forPrepared ? '' : "''";
     }
 
-	/**
+    /**
      * Returns the default collation for the database.
      *
      * @abstract
-	 * @return string
-	 */
-	public function getDefaultCollation()
-	{
-		return null;
-	}
+     * @return string
+     */
+    public function getDefaultCollation()
+    {
+        return null;
+    }
 
-	/**
-	 * List of available collation settings
+    /**
+     * List of available collation settings
      * @abstract
-	 * @return array
-	 */
-	public function getCollationList()
-	{
-		return null;
-	}
+     * @return array
+     */
+    public function getCollationList()
+    {
+        return null;
+    }
 
-	/**
-	 * Returns the number of columns in a table
-	 *
-	 * @param  string $table_name
-	 * @return int
-	 */
-	public function number_of_columns($table_name)
-	{
-		$table = $this->getTableDescription($table_name);
-		return count($table);
-	}
+    /**
+     * Returns the number of columns in a table
+     *
+     * @param string $table_name
+     * @return int
+     */
+    public function number_of_columns($table_name)
+    {
+        $table = $this->getTableDescription($table_name);
+        return safeCount($table);
+    }
 
-	/**
-	 * Return limit query based on given query
-	 * @param string $sql
-	 * @param int $start
-	 * @param int $count
-	 * @param bool $dieOnError
-	 * @param string $msg
+    /**
+     * Return limit query based on given query
+     * @param string $sql
+     * @param int $start
+     * @param int $count
+     * @param bool $dieOnError
+     * @param string $msg
      * @return resource|bool query result
      * @see DBManager::limitQuery()
-	 */
-	public function limitQuerySql($sql, $start, $count, $dieOnError=false, $msg='')
-	{
-		return $this->limitQuery($sql,$start,$count,$dieOnError,$msg,false);
-	}
+     */
+    public function limitQuerySql($sql, $start, $count, $dieOnError = false, $msg = '')
+    {
+        return $this->limitQuery($sql, $start, $count, $dieOnError, $msg, false);
+    }
 
-	/**
-	 * Return current time in format fit for insertion into DB (with quotes)
-	 * @return string
-	 */
-	public function now()
-	{
-		return $this->convert($this->quoted(TimeDate::getInstance()->nowDb()), "datetime");
-	}
+    /**
+     * Return current time in format fit for insertion into DB (with quotes)
+     * @return string
+     */
+    public function now()
+    {
+        return $this->convert($this->quoted(TimeDate::getInstance()->nowDb()), 'datetime');
+    }
 
-	/**
-	 * Check if connecting user has certain privilege
-	 * @param string $privilege
+    /**
+     * Check if connecting user has certain privilege
+     * @param string $privilege
      * @return bool Privilege allowed?
      */
-	public function checkPrivilege($privilege)
-	{
-		switch($privilege) {
-			case "CREATE TABLE":
-				$this->query("CREATE TABLE temp (id varchar(36))");
-				break;
-			case "DROP TABLE":
-				$sql = $this->dropTableNameSQL("temp");
-				$this->query($sql);
-				break;
-			case "INSERT":
-				$this->query("INSERT INTO temp (id) VALUES ('abcdef0123456789abcdef0123456789abcd')");
-				break;
-			case "UPDATE":
-				$this->query("UPDATE temp SET id = '100000000000000000000000000000000000' WHERE id = 'abcdef0123456789abcdef0123456789abcd'");
-				break;
-			case 'SELECT':
-				return $this->getOne('SELECT id FROM temp WHERE id=\'100000000000000000000000000000000000\'', false);
-			case 'DELETE':
-				$this->query("DELETE FROM temp WHERE id = '100000000000000000000000000000000000'");
-				break;
-			case "ADD COLUMN":
-				$test = array("test" => array("name" => "test", "type" => "varchar", "len" => 50));
-				$sql = 	$this->changeColumnSQL("temp", $test, "add");
-				$this->query($sql);
-				break;
-			case "CHANGE COLUMN":
-				$test = array("test" => array("name" => "test", "type" => "varchar", "len" => 100));
-				$sql = 	$this->changeColumnSQL("temp", $test, "modify");
-				$this->query($sql);
-				break;
-			case "DROP COLUMN":
-				$test = array("test" => array("name" => "test", "type" => "varchar", "len" => 100));
-				$sql = 	$this->changeColumnSQL("temp", $test, "drop");
-				$this->query($sql);
-				break;
-			default:
-				return false;
-		}
-		if($this->checkError("Checking privileges")) {
-			return false;
-		}
-		return true;
-	}
+    public function checkPrivilege($privilege)
+    {
+        switch ($privilege) {
+            case 'CREATE TABLE':
+                $this->query('CREATE TABLE temp (id varchar(36))');
+                break;
+            case 'DROP TABLE':
+                $sql = $this->dropTableNameSQL('temp');
+                $this->query($sql);
+                break;
+            case 'INSERT':
+                $this->query("INSERT INTO temp (id) VALUES ('abcdef0123456789abcdef0123456789abcd')");
+                break;
+            case 'UPDATE':
+                $this->query("UPDATE temp SET id = '100000000000000000000000000000000000' WHERE id = 'abcdef0123456789abcdef0123456789abcd'");
+                break;
+            case 'SELECT':
+                return $this->getOne('SELECT id FROM temp WHERE id=\'100000000000000000000000000000000000\'', false);
+            case 'DELETE':
+                $this->query("DELETE FROM temp WHERE id = '100000000000000000000000000000000000'");
+                break;
+            case 'ADD COLUMN':
+                $test = ['test' => ['name' => 'test', 'type' => 'varchar', 'len' => 50]];
+                $sql = $this->changeColumnSQL('temp', $test, 'add');
+                $this->query($sql);
+                break;
+            case 'CHANGE COLUMN':
+                $test = ['test' => ['name' => 'test', 'type' => 'varchar', 'len' => 100]];
+                $sql = $this->changeColumnSQL('temp', $test, 'modify');
+                $this->query($sql);
+                break;
+            case 'DROP COLUMN':
+                $test = ['test' => ['name' => 'test', 'type' => 'varchar', 'len' => 100]];
+                $sql = $this->changeColumnSQL('temp', $test, 'drop');
+                $this->query($sql);
+                break;
+            default:
+                return false;
+        }
+        if ($this->checkError('Checking privileges')) {
+            return false;
+        }
+        return true;
+    }
 
-	/**
-	 * Check if the query is a select query
-	 * @param string $query
+    /**
+     * Check if the query is a select query
+     * @param string $query
      * @return bool  Is query SELECT?
      */
-	protected function isSelect($query)
-	{
-		$query = trim($query);
-		$select_check = strpos(strtolower($query), strtolower("SELECT"));
-		//Checks to see if there is union select which is valid
-		$select_check2 = strpos(strtolower($query), strtolower("(SELECT"));
-		if($select_check==0 || $select_check2==0){
-			//Returning false means query is ok!
-			return true;
-		}
-		return false;
-	}
+    protected function isSelect($query)
+    {
+        $query = trim($query);
+        $select_check = strpos(strtolower($query), strtolower('SELECT'));
+        //Checks to see if there is union select which is valid
+        $select_check2 = strpos(strtolower($query), strtolower('(SELECT'));
+        if ($select_check == 0 || $select_check2 == 0) {
+            //Returning false means query is ok!
+            return true;
+        }
+        return false;
+    }
 
     // Methods to check respective queries
-	protected $standardQueries = array(
-		'ALTER TABLE' => 'verifyAlterTable',
-		'DROP TABLE' => 'verifyDropTable',
-		'CREATE TABLE' => 'verifyCreateTable',
-		'INSERT INTO' => 'verifyInsertInto',
-		'UPDATE' => 'verifyUpdate',
-		'DELETE FROM' => 'verifyDeleteFrom',
-	);
+    protected $standardQueries = [
+        'ALTER TABLE' => 'verifyAlterTable',
+        'DROP TABLE' => 'verifyDropTable',
+        'CREATE TABLE' => 'verifyCreateTable',
+        'INSERT INTO' => 'verifyInsertInto',
+        'UPDATE' => 'verifyUpdate',
+        'DELETE FROM' => 'verifyDeleteFrom',
+    ];
 
 
     /**
@@ -3913,17 +3959,17 @@ abstract class DBManager implements LoggerAwareInterface
      * @param string $query SQL query
      * @return string
      */
-	protected function extractTableName($query)
-	{
-        $query = preg_replace('/[^A-Za-z0-9_\s]/', "", $query);
+    protected function extractTableName($query)
+    {
+        $query = preg_replace('/[^A-Za-z0-9_\s]/', '', $query);
         $query = trim(str_replace(array_keys($this->standardQueries), '', $query));
 
-        $firstSpc = strpos($query, " ");
+        $firstSpc = strpos($query, ' ');
         $end = ($firstSpc > 0) ? $firstSpc : strlen($query);
         $table = substr($query, 0, $end);
 
         return $table;
-	}
+    }
 
     /**
      * Verify SQl statement using per-DB verification function
@@ -3932,96 +3978,98 @@ abstract class DBManager implements LoggerAwareInterface
      * @param array $skipTables List of blacklisted tables that aren't checked
      * @return string
      */
-	public function verifySQLStatement($query, $skipTables)
-	{
-		$query = trim($query);
-		foreach($this->standardQueries as $qstart => $check) {
-			if(strncasecmp($qstart, $query, strlen($qstart)) == 0) {
-				if(is_callable(array($this, $check))) {
-					$table = $this->extractTableName($query);
-					if(!in_array($table, $skipTables)) {
-						return call_user_func(array($this, $check), $table, $query);
-					} else {
+    public function verifySQLStatement($query, $skipTables)
+    {
+        $query = trim($query);
+        foreach ($this->standardQueries as $qstart => $check) {
+            if (strncasecmp($qstart, $query, strlen($qstart)) == 0) {
+                if (is_callable([$this, $check])) {
+                    $table = $this->extractTableName($query);
+                    if (!safeInArray($table, $skipTables)) {
+                        return call_user_func([$this, $check], $table, $query);
+                    } else {
                         $this->logger->debug("Skipping table $table as blacklisted");
-					}
-				} else {
+                    }
+                } else {
                     $this->logger->debug("No verification for $qstart on {$this->dbType}");
-				}
-				break;
-			}
-		}
-		return "";
-	}
+                }
+                break;
+            }
+        }
+        return '';
+    }
 
-	/**
-	 * Tests an CREATE TABLE query
-	 * @param string $table The table name to get DDL
-	 * @param string $query The query to test.
-	 * @return string Non-empty if error found
-	 */
-	protected function verifyCreateTable($table, $query)
-	{
+    /**
+     * Tests an CREATE TABLE query
+     * @param string $table The table name to get DDL
+     * @param string $query The query to test.
+     * @return string Non-empty if error found
+     */
+    protected function verifyCreateTable($table, $query)
+    {
         $this->logger->debug('verifying CREATE statement...');
 
-		// rewrite DDL with _temp name
-        $this->logger->debug('testing query: ['.$query.']');
-		$tempname = $table."__uw_temp";
-		$tempTableQuery = str_replace("CREATE TABLE {$table}", "CREATE TABLE $tempname", $query);
+        // rewrite DDL with _temp name
+        $this->logger->debug('testing query: [' . $query . ']');
+        $tempname = $table . '__uw_temp';
+        $tempTableQuery = str_replace("CREATE TABLE {$table}", "CREATE TABLE $tempname", $query);
 
-		if(strpos($tempTableQuery, '__uw_temp') === false) {
-			return 'Could not use a temp table to test query!';
-		}
+        if (strpos($tempTableQuery, '__uw_temp') === false) {
+            return 'Could not use a temp table to test query!';
+        }
 
-		$this->query($tempTableQuery, false, "Preflight Failed for: {$query}");
+        $this->query($tempTableQuery, false, "Preflight Failed for: {$query}");
 
-		$error = $this->lastError(); // empty on no-errors
-		if(!empty($error)) {
-			return $error;
-		}
+        $error = $this->lastError(); // empty on no-errors
+        if (!empty($error)) {
+            return $error;
+        }
 
-		// check if table exists
-        $this->logger->debug('testing for table: '.$table);
+        // check if table exists
+        $this->logger->debug('testing for table: ' . $table);
 
-		if(!$this->tableExists($tempname)) {
-			return "Failed to create temp table!";
-		}
+        if (!$this->tableExists($tempname)) {
+            return 'Failed to create temp table!';
+        }
 
-		$this->dropTableName($tempname);
-		return '';
-	}
+        $this->dropTableName($tempname);
+        return '';
+    }
 
-	/**
-	 * Execute multiple queries one after another
-	 * @param array $sqls Queries
-	 * @param bool $dieOnError Die on error, passed to query()
-	 * @param string $msg Error message, passed to query()
-	 * @param bool $suppress Supress errors, passed to query()
-	 * @return resource|bool result set or success/failure bool
-	 */
-	public function queryArray(array $sqls, $dieOnError = false, $msg = '', $suppress = false)
-	{
-		$last = true;
-		foreach($sqls as $sql) {
-			if(!($last = $this->query($sql, $dieOnError, $msg, $suppress))) {
-				break;
-			}
-		}
-		return $last;
-	}
+    /**
+     * Execute multiple queries one after another
+     * @param array $sqls Queries
+     * @param bool $dieOnError Die on error, passed to query()
+     * @param string $msg Error message, passed to query()
+     * @param bool $suppress Supress errors, passed to query()
+     * @return resource|bool result set or success/failure bool
+     */
+    public function queryArray(array $sqls, $dieOnError = false, $msg = '', $suppress = false)
+    {
+        $last = true;
+        foreach ($sqls as $sql) {
+            if (!($last = $this->query($sql, $dieOnError, $msg, $suppress))) {
+                break;
+            }
+        }
+        return $last;
+    }
 
     /**
      * Fetches the next row in the query result into an associative array
      *
-     * @param  resource $result
-     * @param  bool $encode Need to HTML-encode the result?
-     * @param  bool $freeResult need to free Result or Statement reference
+     * @param resource $result
+     * @param bool $encode Need to HTML-encode the result?
+     * @param bool $freeResult need to free Result or Statement reference
      * @return array    returns false if there are no more rows available to fetch
      */
     public function fetchByAssoc($result, $encode = true, $freeResult = false)
     {
-        if (empty($result))	return false;
+        if (empty($result)) {
+            return false;
+        }
 
-        if(is_int($encode) && func_num_args() == 3) {
+        if (is_int($encode) && func_num_args() == 3) {
             // old API: $result, $rowNum, $encode
             $this->logger->notice(
                 'Using row number in fetchByAssoc is not portable and no longer supported. Please fix your code.'
@@ -4037,57 +4085,57 @@ abstract class DBManager implements LoggerAwareInterface
         }
 
         if (!empty($row) && $encode && $this->encode) {
-            return array_map(function ($value) : ?string {
+            return array_map(function ($value): ?string {
                 return $this->encodeHTML($value);
             }, $row);
         } else {
-           return $row;
+            return $row;
         }
     }
 
-	/**
-	 * Get DB driver name used for install/upgrade scripts
-	 * @return string
-	 */
-	public function getScriptName()
-	{
-		// Usually the same name as dbType
-		return $this->dbType;
-	}
+    /**
+     * Get DB driver name used for install/upgrade scripts
+     * @return string
+     */
+    public function getScriptName()
+    {
+        // Usually the same name as dbType
+        return $this->dbType;
+    }
 
-	/**
-	 * Set database options
-	 * Options are usually db-dependant and derive from $config['dbconfigoption']
-	 * @param array $options
-	 * @return DBManager
-	 */
-	public function setOptions($options)
-	{
-	    $this->options = $options;
-	    return $this;
-	}
+    /**
+     * Set database options
+     * Options are usually db-dependant and derive from $config['dbconfigoption']
+     * @param array $options
+     * @return DBManager
+     */
+    public function setOptions($options)
+    {
+        $this->options = $options;
+        return $this;
+    }
 
-	/**
-	 * Get DB options
-	 * @return array
-	 */
-	public function getOptions()
-	{
-	    return $this->options;
-	}
+    /**
+     * Get DB options
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
 
-	/**
-	 * Get DB option by name
-	 * @param string $option Option name
-	 * @return mixed Option value or null if doesn't exist
-	 */
-	public function getOption($option)
-	{
-	    if(isset($this->options[$option])) {
-	        return $this->options[$option];
-	    }
-	    return null;
-	}
+    /**
+     * Get DB option by name
+     * @param string $option Option name
+     * @return mixed Option value or null if doesn't exist
+     */
+    public function getOption($option)
+    {
+        if (isset($this->options[$option])) {
+            return $this->options[$option];
+        }
+        return null;
+    }
 
     /**
      * Set DB option
@@ -4100,66 +4148,66 @@ abstract class DBManager implements LoggerAwareInterface
         $this->options[$option] = $value;
     }
 
-	/**
-	 * Commits pending changes to the database when the driver is setup to support transactions.
-	 * Note that the default implementation is applicable for transaction-less or auto commit scenarios.
-	 * @abstract
-	 * @return bool true if commit succeeded, false if it failed
-	 */
-	public function commit()
-	{
-        $this->logger->info("DBManager.commit() stub");
-		return true;
-	}
+    /**
+     * Commits pending changes to the database when the driver is setup to support transactions.
+     * Note that the default implementation is applicable for transaction-less or auto commit scenarios.
+     * @abstract
+     * @return bool true if commit succeeded, false if it failed
+     */
+    public function commit()
+    {
+        $this->logger->info('DBManager.commit() stub');
+        return true;
+    }
 
-	/**
-	 * Rollsback pending changes to the database when the driver is setup to support transactions.
-	 * Note that the default implementation is applicable for transaction-less or auto commit scenarios.
-	 * Since rollbacks cannot be done, this implementation always returns false.
-	 * @abstract
-	 * @return bool true if rollback succeeded, false if it failed
-	 */
-	public function rollback()
-	{
-        $this->logger->info("DBManager.rollback() stub");
-		return false;
-	}
+    /**
+     * Rollsback pending changes to the database when the driver is setup to support transactions.
+     * Note that the default implementation is applicable for transaction-less or auto commit scenarios.
+     * Since rollbacks cannot be done, this implementation always returns false.
+     * @abstract
+     * @return bool true if rollback succeeded, false if it failed
+     */
+    public function rollback()
+    {
+        $this->logger->info('DBManager.rollback() stub');
+        return false;
+    }
 
-	/**
-	 * Check if this DB name is valid
-	 *
-	 * @param string $name
-	 * @return bool
-	 */
-	public function isDatabaseNameValid($name)
-	{
-		// Generic case - no slashes, no dots
-		return preg_match('#[/.\\\\]#', $name)==0;
-	}
+    /**
+     * Check if this DB name is valid
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function isDatabaseNameValid($name)
+    {
+        // Generic case - no slashes, no dots
+        return preg_match('#[/.\\\\]#', $name) == 0;
+    }
 
     /**
      * Generates the a recursive SQL query or equivalent stored procedure implementation.
      * The DBManager's default implementation is based on SQL-99's recursive common table expressions.
      * Databases supporting recursive CTEs (such as SQL server) only need to set the recursive_query capability to true
-     * @param string    $tablename       table name
-     * @param string    $key             primary key field name
-     * @param string    $parent_key      foreign key field name self referencing the table
-     * @param string    $fields          list of fields that should be returned. The pseudocolumn "level" may be in the list
-     * @param bool      $lineage         find the lineage, if false, find the children
-     * @param string    $startWith       identifies starting element(s) as in a where clause
-     * @param string    $max_level       when not null is the maximum number of levels to traverse in the the tree
-	 * @return string               Recursive SQL query or equivalent representation.
+     * @param string $tablename table name
+     * @param string $key primary key field name
+     * @param string $parent_key foreign key field name self referencing the table
+     * @param string $fields list of fields that should be returned. The pseudocolumn "level" may be in the list
+     * @param bool $lineage find the lineage, if false, find the children
+     * @param string $startWith identifies starting element(s) as in a where clause
+     * @param string $max_level when not null is the maximum number of levels to traverse in the the tree
+     * @return string               Recursive SQL query or equivalent representation.
      */
     public function getRecursiveSelectSQL($tablename, $key, $parent_key, $fields, $lineage = false, $startWith = null, $level = null, $whereClause = null)
     {
 
-        if($lineage) {
+        if ($lineage) {
             $connectWhere = "e.$key = sg.$parent_key";  // Search up the tree to get lineage
         } else {
             $connectWhere = "sg.$key = e.$parent_key";  // Search down the tree to find children
         }
 
-        if(!empty($startWith)) {
+        if (!empty($startWith)) {
             $startWith = 'WHERE ' . $startWith;
         } else {
             $startWith = '';
@@ -4167,36 +4215,34 @@ abstract class DBManager implements LoggerAwareInterface
 
         // cleanup WHERE clause
         if (empty($whereClause)) {
-			 $whereClause = '';
-		}
-		else {
-			$whereClause = ltrim($whereClause);
-			if (strtoupper(substr($whereClause, 0, 5)) == 'WHERE' ) {   // remove WHERE
-				$whereClause = substr($whereClause, 6);
+            $whereClause = '';
+        } else {
+            $whereClause = ltrim($whereClause);
+            if (strtoupper(substr($whereClause, 0, 5)) == 'WHERE') {   // remove WHERE
+                $whereClause = substr($whereClause, 6);
             }
-            if (strtoupper(substr($whereClause, 0, 4)) != 'AND ' ) {  // Add AND
+            if (strtoupper(substr($whereClause, 0, 4)) != 'AND ') {  // Add AND
                 $whereClause = "AND $whereClause";
             }
             $whereClause .= ' ';  // make sure there is a trailing blank
-		}
+        }
 
         // compose level clause of query if Level is in the fieldList passed
-		$tokens = explode(',', $fields);
-		$fieldsTop = "";
-		$fieldsBottom = "";
-		$delimiter = "";
-		foreach ($tokens as $token) {
-			if (trim($token) == '_level') {
-	            $fieldsTop = $fieldsTop . $delimiter . " 1 as _level";
-		        $fieldsBottom = $fieldsBottom . $delimiter . " sg._level + 1 as _level";
-                $delimiter = ",";
-			}
-			else {
-	            $fieldsTop = $fieldsTop . $delimiter . $token;
-		        $fieldsBottom = $fieldsBottom . $delimiter . "e.$token";
-                $delimiter = ",";
-			}
-		}
+        $tokens = explode(',', $fields);
+        $fieldsTop = '';
+        $fieldsBottom = '';
+        $delimiter = '';
+        foreach ($tokens as $token) {
+            if (trim($token) == '_level') {
+                $fieldsTop = $fieldsTop . $delimiter . ' 1 as _level';
+                $fieldsBottom = $fieldsBottom . $delimiter . ' sg._level + 1 as _level';
+                $delimiter = ',';
+            } else {
+                $fieldsTop = $fieldsTop . $delimiter . $token;
+                $fieldsBottom = $fieldsBottom . $delimiter . "e.$token";
+                $delimiter = ',';
+            }
+        }
 
         $sql = "WITH search_graph AS (
                    SELECT $fieldsTop
@@ -4231,150 +4277,150 @@ abstract class DBManager implements LoggerAwareInterface
         return !empty(self::$reserved_words[strtoupper($word)]);
     }
 
-	/**
-	 * Check special requirements for DB installation.
-	 * @abstract
-	 * If everything is OK, return true.
-	 * If something's wrong, return array of error code and parameters
-	 * @return mixed
-	 */
-	public function canInstall()
-	{
-		return true;
-	}
-
-	/**
-	 * @abstract
-     * Code run on new database before installing
-	 */
-	public function preInstall()
-	{
-	}
-
-	/**
+    /**
+     * Check special requirements for DB installation.
      * @abstract
-	 * Code run on new database after installing
-	 */
-	public function postInstall()
-	{
-	}
-
-	/**
-	 * Disable keys on the table
-	 * @abstract
-	 * @param string $tableName
-	 */
-	public function disableKeys($tableName)
-	{
-	}
-
-	/**
-	 * Re-enable keys on the table
-	 * @abstract
-	 * @param string $tableName
-	 */
-	public function enableKeys($tableName)
-	{
-	}
+     * If everything is OK, return true.
+     * If something's wrong, return array of error code and parameters
+     * @return mixed
+     */
+    public function canInstall()
+    {
+        return true;
+    }
 
     /**
-    * Updates all tables to match the specified collation
-    * @abstract
-    * @param string $collation Collation to set
-    */
+     * @abstract
+     * Code run on new database before installing
+     */
+    public function preInstall()
+    {
+    }
+
+    /**
+     * @abstract
+     * Code run on new database after installing
+     */
+    public function postInstall()
+    {
+    }
+
+    /**
+     * Disable keys on the table
+     * @abstract
+     * @param string $tableName
+     */
+    public function disableKeys($tableName)
+    {
+    }
+
+    /**
+     * Re-enable keys on the table
+     * @abstract
+     * @param string $tableName
+     */
+    public function enableKeys($tableName)
+    {
+    }
+
+    /**
+     * Updates all tables to match the specified collation
+     * @abstract
+     * @param string $collation Collation to set
+     */
     public function setCollation($collation)
     {
     }
 
-	/**
-	 * Quote string in DB-specific manner
-	 * @param string $string
-	 * @return string
-	 */
-	abstract public function quote($string);
+    /**
+     * Quote string in DB-specific manner
+     * @param string $string
+     * @return string
+     */
+    abstract public function quote($string);
 
-	/**
-	 * Use when you need to convert a database string to a different value; this function does it in a
-	 * database-backend aware way
-	 * Supported conversions:
-	 *      today		return current date
-	 *      left		Take substring from the left
-	 *      date_format	Format date as string, supports %Y-%m-%d, %Y-%m, %Y
+    /**
+     * Use when you need to convert a database string to a different value; this function does it in a
+     * database-backend aware way
+     * Supported conversions:
+     *      today       return current date
+     *      left        Take substring from the left
+     *      date_format Format date as string, supports %Y-%m-%d, %Y-%m, %Y
      *      time_format Format time as string
      *      date        Convert date string to datetime value
      *      time        Convert time string to datetime value
-	 *      datetime	Convert datetime string to datetime value
-	 *      ifnull		If var is null, use default value
-	 *      concat		Concatenate strings
-	 *      quarter		Quarter number of the date
-	 *      length		Length of string
-	 *      month		Month number of the date
-	 *      add_date	Add specified interval to a date
+     *      datetime    Convert datetime string to datetime value
+     *      ifnull      If var is null, use default value
+     *      concat      Concatenate strings
+     *      quarter     Quarter number of the date
+     *      length      Length of string
+     *      month       Month number of the date
+     *      add_date    Add specified interval to a date
      *      add_time    Add time interval to a date
      *      text2char   Convert text field to varchar
-	 *
-	 * @param string $string database string to convert
-	 * @param string $type type of conversion to do
-	 * @param array  $additional_parameters optional, additional parameters to pass to the db function
-	 * @return string
-	 */
-	abstract public function convert($string, $type, array $additional_parameters = array());
+     *
+     * @param string $string database string to convert
+     * @param string $type type of conversion to do
+     * @param array $additional_parameters optional, additional parameters to pass to the db function
+     * @return string
+     */
+    abstract public function convert($string, $type, array $additional_parameters = []);
 
-	/**
-	 * Converts from Database data to app data
-	 *
-	 * Supported types
-	 * - date
-	 * - time
-	 * - datetime
+    /**
+     * Converts from Database data to app data
+     *
+     * Supported types
+     * - date
+     * - time
+     * - datetime
      * - datetimecombo
      * - timestamp
-	 *
-	 * @param string $string database string to convert
-	 * @param string $type type of conversion to do
-	 * @return string
-	 */
-	abstract public function fromConvert($string, $type);
+     *
+     * @param string $string database string to convert
+     * @param string $type type of conversion to do
+     * @return string
+     */
+    abstract public function fromConvert($string, $type);
 
     /**
      * Parses and runs queries
      *
-     * @param  string   $sql        SQL Statement to execute
-     * @param  bool     $dieOnError True if we want to call die if the query returns errors
-     * @param  string   $msg        Message to log if error occurs
-     * @param  bool     $suppress   Flag to suppress all error output unless in debug logging mode.
-     * @param  bool     $keepResult Keep query result in the object?
+     * @param string $sql SQL Statement to execute
+     * @param bool $dieOnError True if we want to call die if the query returns errors
+     * @param string $msg Message to log if error occurs
+     * @param bool $suppress Flag to suppress all error output unless in debug logging mode.
+     * @param bool $keepResult Keep query result in the object?
      * @return resource|bool result set or success/failure bool
      */
-	abstract public function query($sql, $dieOnError = false, $msg = '', $suppress = false, $keepResult = false);
+    abstract public function query($sql, $dieOnError = false, $msg = '', $suppress = false, $keepResult = false);
 
     /**
      * Runs a limit query: one where we specify where to start getting records and how many to get
      *
-     * @param  string   $sql     SELECT query
-     * @param  int      $start   Starting row
-     * @param  int      $count   How many rows
-     * @param  boolean  $dieOnError  True if we want to call die if the query returns errors
-     * @param  string   $msg     Message to log if error occurs
-     * @param  bool     $execute Execute or return SQL?
+     * @param string $sql SELECT query
+     * @param int $start Starting row
+     * @param int $count How many rows
+     * @param boolean $dieOnError True if we want to call die if the query returns errors
+     * @param string $msg Message to log if error occurs
+     * @param bool $execute Execute or return SQL?
      * @return resource query result
      */
-	abstract function limitQuery($sql, $start, $count, $dieOnError = false, $msg = '', $execute = true);
+    abstract public function limitQuery($sql, $start, $count, $dieOnError = false, $msg = '', $execute = true);
 
 
-	/**
-	 * Free Database result
-	 * @param resource $dbResult
-	 */
-	abstract protected function freeDbResult($dbResult);
+    /**
+     * Free Database result
+     * @param resource $dbResult
+     */
+    abstract protected function freeDbResult($dbResult);
 
-	/**
-	 * Rename column in the DB
-	 * @param string $tablename
-	 * @param string $column
-	 * @param string $newname
-	 */
-	abstract function renameColumnSQL($tablename, $column, $newname);
+    /**
+     * Rename column in the DB
+     * @param string $tablename
+     * @param string $column
+     * @param string $newname
+     */
+    abstract public function renameColumnSQL($tablename, $column, $newname);
 
     /**
      * Returns definitions of all indices for current schema.
@@ -4386,27 +4432,27 @@ abstract class DBManager implements LoggerAwareInterface
         return $this->get_index_data();
     }
 
-	/**
-	 * Returns definitions of all indies for passed table.
-	 *
-	 * return will is a multi-dimensional array that
-	 * categorizes the index definition by types, unique, primary and index.
-	 * <code>
-	 * <?php
-	 * array(                                                              O
-	 *       'index1'=> array (
-	 *           'name'   => 'index1',
-	 *           'type'   => 'primary',
-	 *           'fields' => array('field1','field2')
-	 *           )
-	 *       )
-	 * ?>
-	 * </code>
-	 * This format is similar to how indicies are defined in vardef file.
-	 *
+    /**
+     * Returns definitions of all indies for passed table.
+     *
+     * return will is a multi-dimensional array that
+     * categorizes the index definition by types, unique, primary and index.
+     * <code>
+     * <?php
+     * array(                                                              O
+     *       'index1'=> array (
+     *           'name'   => 'index1',
+     *           'type'   => 'primary',
+     *           'fields' => array('field1','field2')
+     *           )
+     *       )
+     * ?>
+     * </code>
+     * This format is similar to how indicies are defined in vardef file.
+     *
      * @param string $table_name Table name
-	 * @return array
-	 */
+     * @return array
+     */
     public function get_indices($table_name)
     {
         $data = $this->get_index_data($table_name);
@@ -4414,7 +4460,7 @@ abstract class DBManager implements LoggerAwareInterface
             return $data[$table_name];
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -4432,7 +4478,7 @@ abstract class DBManager implements LoggerAwareInterface
             return $data[$table_name][$index_name];
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -4445,125 +4491,125 @@ abstract class DBManager implements LoggerAwareInterface
      */
     abstract protected function get_index_data($table_name = null, $index_name = null);
 
-	/**
-	 * Returns definitions of all indies for passed table.
-	 *
-	 * return will is a multi-dimensional array that
-	 * categorizes the index definition by types, unique, primary and index.
-	 * <code>
-	 * <?php
-	 * array(
-	 *       'field1'=> array (
-	 *           'name'   => 'field1',
-	 *           'type'   => 'varchar',
-	 *           'len' => '200'
-	 *           )
-	 *       )
-	 * ?>
-	 * </code>
-	 * This format is similar to how indicies are defined in vardef file.
-	 *
-	 * @param  string $tablename
-	 * @return array
-	 */
-	abstract public function get_columns($tablename);
+    /**
+     * Returns definitions of all indies for passed table.
+     *
+     * return will is a multi-dimensional array that
+     * categorizes the index definition by types, unique, primary and index.
+     * <code>
+     * <?php
+     * array(
+     *       'field1'=> array (
+     *           'name'   => 'field1',
+     *           'type'   => 'varchar',
+     *           'len' => '200'
+     *           )
+     *       )
+     * ?>
+     * </code>
+     * This format is similar to how indicies are defined in vardef file.
+     *
+     * @param string $tablename
+     * @return array
+     */
+    abstract public function get_columns($tablename);
 
-	/**
-	 * Generates alter constraint statement given a table name and vardef definition.
-	 *
-	 * Supports both adding and droping a constraint.
-	 *
-	 * @param  string $table      tablename
-     * @param  array<string,array<string,mixed>>  $definition field definition
-	 * @param  bool   $drop       true if we are dropping the constraint, false if we are adding it
-	 * @return string SQL statement
-	 */
+    /**
+     * Generates alter constraint statement given a table name and vardef definition.
+     *
+     * Supports both adding and droping a constraint.
+     *
+     * @param string $table tablename
+     * @param array<string,array<string,mixed>> $definition field definition
+     * @param bool $drop true if we are dropping the constraint, false if we are adding it
+     * @return string SQL statement
+     */
     abstract public function add_drop_constraint(string $table, array $definition, bool $drop = false): string;
 
-	/**
-	 * Returns the description of fields based on the result
-	 *
-	 * @param  resource $result
-	 * @param  boolean  $make_lower_case
-	 * @return array field array
-	 */
-	abstract public function getFieldsArray($result, $make_lower_case = false);
+    /**
+     * Returns the description of fields based on the result
+     *
+     * @param resource $result
+     * @param boolean $make_lower_case
+     * @return array field array
+     */
+    abstract public function getFieldsArray($result, $make_lower_case = false);
 
-	/**
-	 * Returns an array of tables for this database
-	 *
-	 * @return	array|false 	an array of with table names, false if no tables found
-	 */
-	abstract public function getTablesArray();
+    /**
+     * Returns an array of tables for this database
+     *
+     * @return  array|false     an array of with table names, false if no tables found
+     */
+    abstract public function getTablesArray();
 
-	/**
-	 * Return's the version of the database
-	 *
-	 * @return string
-	 */
-	abstract public function version();
+    /**
+     * Return's the version of the database
+     *
+     * @return string
+     */
+    abstract public function version();
 
-	/**
-	 * to check if a table with the name $tableName exists
-	 * and returns true if it does or false otherwise
-	 *
-	 * @param  string $tableName
-	 * @return bool
-	 */
-	abstract public function tableExists($tableName);
+    /**
+     * to check if a table with the name $tableName exists
+     * and returns true if it does or false otherwise
+     *
+     * @param string $tableName
+     * @return bool
+     */
+    abstract public function tableExists($tableName);
 
 
-	/**
-	 * Fetches the next row in the query result into an associative array
-	 *
-	 * @param  resource $result
-	 * @return array    returns false if there are no more rows available to fetch
-	 */
-	abstract public function fetchRow($result);
+    /**
+     * Fetches the next row in the query result into an associative array
+     *
+     * @param resource $result
+     * @return array    returns false if there are no more rows available to fetch
+     */
+    abstract public function fetchRow($result);
 
-	/**
-	 * Connects to the database backend
-	 *
-	 * Takes in the database settings and opens a database connection based on those
-	 * will open either a persistent or non-persistent connection.
-	 * If a persistent connection is desired but not available it will defualt to non-persistent
-	 *
-	 * configOptions must include
-	 * db_host_name - server ip
-	 * db_user_name - database user name
-	 * db_password - database password
-	 *
-	 * @param array   $configOptions
-	 * @param boolean $dieOnError
-	 */
-	abstract public function connect(array $configOptions = null, $dieOnError = false);
+    /**
+     * Connects to the database backend
+     *
+     * Takes in the database settings and opens a database connection based on those
+     * will open either a persistent or non-persistent connection.
+     * If a persistent connection is desired but not available it will defualt to non-persistent
+     *
+     * configOptions must include
+     * db_host_name - server ip
+     * db_user_name - database user name
+     * db_password - database password
+     *
+     * @param array $configOptions
+     * @param boolean $dieOnError
+     */
+    abstract public function connect(array $configOptions = null, $dieOnError = false);
 
-	/**
-	 * Generates sql for create table statement for a bean.
-	 *
-	 * @param  string $tablename
-	 * @param  array  $fieldDefs
-	 * @param  array  $indices
-	 * @return string SQL Create Table statement
-	 */
-	abstract public function createTableSQLParams($tablename, $fieldDefs, $indices);
+    /**
+     * Generates sql for create table statement for a bean.
+     *
+     * @param string $tablename
+     * @param array $fieldDefs
+     * @param array $indices
+     * @return string SQL Create Table statement
+     */
+    abstract public function createTableSQLParams($tablename, $fieldDefs, $indices);
 
-	/**
-	 * Generates the SQL for changing columns
-	 *
-	 * @param string $tablename
-	 * @param array  $fieldDefs
-	 * @param string $action
-	 * @param bool   $ignoreRequired Optional, true if we should ignor this being a required field
+    /**
+     * Generates the SQL for changing columns
+     *
+     * @param string $tablename
+     * @param array $fieldDefs
+     * @param string $action
+     * @param bool $ignoreRequired Optional, true if we should ignor this being a required field
      * @return string|string[]
-	 */
-	abstract protected function changeColumnSQL($tablename, $fieldDefs, $action, $ignoreRequired = false);
+     */
+    abstract protected function changeColumnSQL($tablename, $fieldDefs, $action, $ignoreRequired = false);
 
-	/**
-	 * Disconnects from the database
-	 *
-	 * Also handles any cleanup needed
-	 */
+    /**
+     * Disconnects from the database
+     *
+     * Also handles any cleanup needed
+     */
     public function disconnect()
     {
         if ($this->conn) {
@@ -4576,13 +4622,13 @@ abstract class DBManager implements LoggerAwareInterface
         Container::resetInstance();
     }
 
-	/**
-	 * Get last database error
-	 * This function should return last error as reported by DB driver
-	 * and should return false if no error condition happened
-	 * @return string|false Error message or false if no error happened
-	 */
-	abstract public function lastDbError();
+    /**
+     * Get last database error
+     * This function should return last error as reported by DB driver
+     * and should return false if no error condition happened
+     * @return string|false Error message or false if no error happened
+     */
+    abstract public function lastDbError();
 
     /**
      * Check if this query is valid
@@ -4590,65 +4636,65 @@ abstract class DBManager implements LoggerAwareInterface
      * @param string $query
      * @return bool
      */
-	abstract public function validateQuery($query);
+    abstract public function validateQuery($query);
 
-	/**
-	 * Check if this driver can be used
-	 * @return bool
-	 */
-	abstract public function valid();
+    /**
+     * Check if this driver can be used
+     * @return bool
+     */
+    abstract public function valid();
 
-	/**
-	 * Check if certain database exists
-	 * @param string $dbname
-	 */
-	abstract public function dbExists($dbname);
+    /**
+     * Check if certain database exists
+     * @param string $dbname
+     */
+    abstract public function dbExists($dbname);
 
-	/**
-	 * Get tables like expression
-	 * @param string $like Expression describing tables
-	 * @return array
-	 */
-	abstract public function tablesLike($like);
+    /**
+     * Get tables like expression
+     * @param string $like Expression describing tables
+     * @return array
+     */
+    abstract public function tablesLike($like);
 
-	/**
-	 * Create a database
-	 * @param string $dbname
-	 */
-	abstract public function createDatabase($dbname);
+    /**
+     * Create a database
+     * @param string $dbname
+     */
+    abstract public function createDatabase($dbname);
 
-	/**
-	 * Drop a database
-	 * @param string $dbname
-	 */
-	abstract public function dropDatabase($dbname);
+    /**
+     * Drop a database
+     * @param string $dbname
+     */
+    abstract public function dropDatabase($dbname);
 
-	/**
-	 * Get database configuration information (DB-dependent)
-	 * @return array|null
-	 */
-	abstract public function getDbInfo();
+    /**
+     * Get database configuration information (DB-dependent)
+     * @return array|null
+     */
+    abstract public function getDbInfo();
 
-	/**
-	 * Check if certain DB user exists
-	 * @param string $username
-	 */
-	abstract public function userExists($username);
+    /**
+     * Check if certain DB user exists
+     * @param string $username
+     */
+    abstract public function userExists($username);
 
-	/**
-	 * Create DB user
-	 * @param string $database_name
-	 * @param string $host_name
-	 * @param string $user
-	 * @param string $password
-	 */
-	abstract public function createDbUser($database_name, $host_name, $user, $password);
+    /**
+     * Create DB user
+     * @param string $database_name
+     * @param string $host_name
+     * @param string $user
+     * @param string $password
+     */
+    abstract public function createDbUser($database_name, $host_name, $user, $password);
 
-	/**
-	 * Get install configuration for this DB
-	 * @return array
-	 */
-	abstract public function installConfig();
+    /**
+     * Get install configuration for this DB
+     * @return array
+     */
+    abstract public function installConfig();
 
     /**
      * Returns a DB specific FROM clause which can be used to select against functions.
@@ -4665,7 +4711,7 @@ abstract class DBManager implements LoggerAwareInterface
      * @abstract
      * @return string
      */
-	abstract public function getGuidSQL();
+    abstract public function getGuidSQL();
 
     /**
      * get DB random number function, to get random number >= $min and <= $max
@@ -4677,20 +4723,20 @@ abstract class DBManager implements LoggerAwareInterface
      * @param int $max
      * @return string, the DB function
      */
-    public function getDbRandomNumberFunction(int $min, int $max) : string
+    public function getDbRandomNumberFunction(int $min, int $max): string
     {
         return sprintf('FLOOR(%d + RAND() * %d)', $min, $max - $min + 1);
     }
 
-	/**
-	 * List of SQL reserved words
-	 * Column can not be named as one of these
-	 * Sources:
-	 * http://msdn.microsoft.com/en-us/library/aa238507(SQL.80).aspx
-	 * http://dev.mysql.com/doc/refman/5.0/en/reserved-words.html
-	 * @var array
-	 */
-    public static $reserved_words = array('ACCESS' => true, 'ACCESSIBLE' => true, 'ADD' => true,
+    /**
+     * List of SQL reserved words
+     * Column can not be named as one of these
+     * Sources:
+     * http://msdn.microsoft.com/en-us/library/aa238507(SQL.80).aspx
+     * http://dev.mysql.com/doc/refman/5.0/en/reserved-words.html
+     * @var array
+     */
+    public static $reserved_words = ['ACCESS' => true, 'ACCESSIBLE' => true, 'ADD' => true,
         'AFTER' => true, 'ALL' => true, 'ALLOCATE' => true, 'ALLOW' => true, 'ALTER' => true,
         'ANALYZE' => true, 'AND' => true, 'ANY' => true, 'AS' => true, 'ASC' => true,
         'ASENSITIVE' => true, 'ASSOCIATE' => true, 'ASUTIME' => true, 'AT' => true, 'AUDIT' => true,
@@ -4808,7 +4854,7 @@ abstract class DBManager implements LoggerAwareInterface
         'WHILE' => true, 'WITH' => true, 'WLM' => true, 'WRITE' => true, 'WRITETEXT' => true,
         'XMLCAST' => true, 'XMLEXISTS' => true, 'XMLNAMESPACES' => true, 'XMLTYPE' => true,
         'XOR' => true, 'YEAR' => true, 'YEARS' => true, 'YEAR_MONTH' => true, 'ZEROFILL' => true,
-        'ZEROFILLADD' => true, 'ZONE' => true);
+        'ZEROFILLADD' => true, 'ZONE' => true];
 
     /**
      * Adapts indices for a concrete database
@@ -4820,7 +4866,7 @@ abstract class DBManager implements LoggerAwareInterface
     protected function massageIndexDefs($fieldDefs, $indices)
     {
         if (!$this->isFieldArray($indices)) {
-            $indices = array($indices);
+            $indices = [$indices];
         }
 
         return $indices;
@@ -4835,7 +4881,7 @@ abstract class DBManager implements LoggerAwareInterface
      * @param DBManager|null $db
      * @return bool
      */
-    public static function isMysql(?DBManager $db) : bool
+    public static function isMysql(?DBManager $db): bool
     {
         return ($db instanceof MysqlManager);
     }
@@ -4845,7 +4891,7 @@ abstract class DBManager implements LoggerAwareInterface
      * @param DBManager|null $db
      * @return bool
      */
-    public static function isOracle(?DBManager $db) : bool
+    public static function isOracle(?DBManager $db): bool
     {
         return ($db instanceof OracleManager);
     }
@@ -4855,7 +4901,7 @@ abstract class DBManager implements LoggerAwareInterface
      * @param DBManager|null $db
      * @return bool
      */
-    public static function isDb2(?DBManager $db) : bool
+    public static function isDb2(?DBManager $db): bool
     {
         return ($db instanceof IBMDB2Manager);
     }
@@ -4865,7 +4911,7 @@ abstract class DBManager implements LoggerAwareInterface
      * @param DBManager|null $db
      * @return bool
      */
-    public static function isSqlServer(?DBManager $db) : bool
+    public static function isSqlServer(?DBManager $db): bool
     {
         return ($db instanceof SqlsrvManager);
     }

@@ -9,37 +9,37 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['KBContents']['base']['view']['kbs-dashlet-localizations'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['KBContents']['base']['view']['kbs-dashlet-localizations'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_DASHLET_LOCALIZATIONS_NAME',
             'description' => 'LBL_DASHLET_LOCALIZATIONS_DESCRIPTION',
-            'config' => array(
+            'config' => [
                 'module' => 'KBContents',
-            ),
-            'preview' => array(),
-            'filter' => array(
-                'module' => array(
-                    'KBContents'
-                ),
+            ],
+            'preview' => [],
+            'filter' => [
+                'module' => [
+                    'KBContents',
+                ],
                 'view' => 'record',
-            ),
-        ),
-    ),
-    'panels' => array(
-        array(
+            ],
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_body',
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'limit',
                     'label' => 'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS',
                     'type' => 'enum',
                     'options' => 'dashlet_limit_options',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

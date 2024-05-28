@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Исходящие учетные записи электронной почты',
     'LBL_MODULE_NAME_SINGULAR' => 'Исходящая учетная запись электронной почты',
     'LBL_STATUS' => 'Статус',
@@ -40,4 +40,4 @@ $mod_strings = array(
     'LBL_PREFERRED_SENDING_ACCOUNT' => 'Предпочтительный контрагент для отправки',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для настроек электронной почты',
-);
+];

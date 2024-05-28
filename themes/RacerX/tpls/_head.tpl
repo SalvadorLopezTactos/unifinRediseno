@@ -27,46 +27,28 @@
 {sugar_getscript file="include/javascript/mousetrap/mousetrap.min.js"}
 
 <script type="text/javascript">
-<!--
-SUGAR.themes.theme_name      = '{$THEME}';
-SUGAR.themes.hide_image      = '{sugar_getimagepath file="hide.gif"}';
-SUGAR.themes.show_image      = '{sugar_getimagepath file="show.gif"}';
-SUGAR.themes.loading_image      = '{sugar_getimagepath file="img_loading.gif"}';
-if ( YAHOO.env.ua )
-    UA = YAHOO.env.ua;
--->
+    <!--
+    SUGAR.themes.theme_name      = '{$THEME}';
+    SUGAR.themes.hide_image      = '{sugar_getimagepath file="hide.gif"}';
+    SUGAR.themes.show_image      = '{sugar_getimagepath file="show.gif"}';
+    SUGAR.themes.loading_image      = '{sugar_getimagepath file="img_loading.gif"}';
+    if ( YAHOO.env.ua )
+        UA = YAHOO.env.ua;
+    -->
 
-
+    if (window.parent && typeof(window.parent.SUGAR) !== 'undefined' && typeof(window.parent.SUGAR.App) !== 'undefined') {
+        // update bwc context
+        var app = window.parent.SUGAR.App;
+        if (app.additionalComponents.sweetspot) {
+            Mousetrap.bind('esc', function(e) {
+                app.additionalComponents.sweetspot.hide()
+                return false;
+            });
+            Mousetrap.bind('mod+shift+space', function(e) {
+                app.additionalComponents.sweetspot.show()
+                return false;
+            });
+        }
+    }
 </script>
-    <script type="text/javascript">
-        function showBwcIframe() {
-            // Remove the element hiding the BWC iframe upon iframe content load
-            let helperDiv = window.parent.document.getElementById('hide-bwc-iframe-loading');
-            if (helperDiv) {
-                helperDiv.parentNode.removeChild(helperDiv);
-            }
-        }
-
-        window.onload = showBwcIframe();
-
-        if (window.parent && typeof(window.parent.SUGAR) !== 'undefined' && typeof(window.parent.SUGAR.App) !== 'undefined') {
-            // update bwc context
-            var app = window.parent.SUGAR.App;
-            if (app.additionalComponents.sweetspot) {
-                Mousetrap.bind('esc', function(e) {
-                    app.additionalComponents.sweetspot.hide()
-                    return false;
-                });
-                Mousetrap.bind('mod+shift+space', function(e) {
-                    app.additionalComponents.sweetspot.show()
-                    return false;
-                });
-            }
-        }
-
-        // Manually fire this in case an onload event is not present (in the case of Reports)
-        if (document.readyState === 'complete') {
-            showBwcIframe();
-        }
-    </script>
 </head>

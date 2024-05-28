@@ -10,6 +10,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\Security\ValueObjects\PlatformName;
 
 /**
@@ -20,13 +21,11 @@ use Sugarcrm\Sugarcrm\Security\ValueObjects\PlatformName;
  * specific support.
  *
  */
-
-
 class SidecarView extends SugarView
 {
-    protected $configFileName = "config.js";
+    protected $configFileName = 'config.js';
     protected $configFile;
-    
+
     public function __construct()
     {
         $this->configFile = sugar_cached($this->configFileName);
@@ -44,22 +43,22 @@ class SidecarView extends SugarView
      *
      * @param array $params additional view paramters passed through from the controller
      */
-    public function preDisplay($params = array())
+    public function preDisplay($params = [])
     {
         global $app_strings;
 
         SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
         $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
         //Rebuild config file if it doesn't exist
-        if(!file_exists($this->configFile)) {
-           $moduleInstallerClass::handleBaseConfig();
+        if (!file_exists($this->configFile)) {
+            $moduleInstallerClass::handleBaseConfig();
         }
-        $this->ss->assign("configFile", $this->configFile);
+        $this->ss->assign('configFile', $this->configFile);
         $config = $moduleInstallerClass::getBaseConfig();
         $this->ss->assign('configHash', md5(serialize($config)));
 
         $sugarSidecarPath = ensureJSCacheFilesExist();
-        $this->ss->assign("sugarSidecarPath", $sugarSidecarPath);
+        $this->ss->assign('sugarSidecarPath', $sugarSidecarPath);
 
         // TODO: come up with a better way to deal with the various JS files
         // littered in sidecar.tpl.
@@ -74,8 +73,8 @@ class SidecarView extends SugarView
 
         $theme = new SidecarTheme(PlatformName::base());
 
-        $this->ss->assign("css_url", $theme->getCSSURL());
-        $this->ss->assign("developerMode", inDeveloperMode());
+        $this->ss->assign('css_url', $theme->getCSSURL());
+        $this->ss->assign('developerMode', inDeveloperMode());
         $this->ss->assign('shouldResourcesBeMinified', shouldResourcesBeMinified());
 
         //Loading label
@@ -87,11 +86,11 @@ class SidecarView extends SugarView
             : 'cache/Expressions/functions_cache_debug.js';
         if (!is_file($slFunctionsPath)) {
             $GLOBALS['updateSilent'] = true;
-            include("include/Expressions/updatecache.php");
+            include 'include/Expressions/updatecache.php';
         }
-        $this->ss->assign("SLFunctionsPath", $slFunctionsPath);
-        if(!empty($this->authorization)) {
-            $this->ss->assign('appPrefix', $config['env'].":".$config['appId'].":");
+        $this->ss->assign('SLFunctionsPath', $slFunctionsPath);
+        if (!empty($this->authorization)) {
+            $this->ss->assign('appPrefix', $config['env'] . ':' . $config['appId'] . ':');
             $this->ss->assign('authorization', $this->authorization);
         }
     }
@@ -101,7 +100,7 @@ class SidecarView extends SugarView
      *
      * @param array $params additional view paramters passed through from the controller
      */
-    public function display($params = array())
+    public function display($params = [])
     {
         $this->ss->display(SugarAutoLoader::existingCustomOne('include/MVC/View/tpls/sidecar.tpl'));
     }

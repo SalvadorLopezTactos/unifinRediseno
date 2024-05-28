@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => '营收单项列表仪表板',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => '营收单项记录仪表板',
@@ -104,7 +104,7 @@ $mod_strings = array(
     'LBL_PRICING_FACTOR' => '价格因素',
     'LBL_ACCOUNT_ID' => '帐户 ID',
     'LBL_CONTACT_ID' => '联系人 ID',
-    'LBL_ASSIGNED_USER_ID' => '分配的用户 ID',
+    'LBL_ASSIGNED_USER_ID' => '担当ID',
     'LBL_CATEGORY_NAME' => '产品类别：',
     'LBL_NOTES_SUBPANEL_TITLE' => '笔记',
     'LBL_MEMBER_OF' => '归属组织：',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => '产品类型',
     'LBL_ASSIGNED_TO_NAME' => '负责人：',
     'LBL_ASSIGNED_TO' => '负责人',
-    'LBL_ASSIGNED_TO_ID'=>'分配的用户 ID',
+    'LBL_ASSIGNED_TO_ID' => '担当ID',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => '分配的用户名',
     'LBL_EXPORT_ASSIGNED_USER_ID' => '分配的用户 ID',
     'LBL_CAMPAIGN_ID' => '市场活动 ID',
@@ -218,4 +218,5 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => '在气泡图内显示前十个营收单项。',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => '我的营收单项',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "我的团队的营收单项",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '营收明细项目时间轴',
+];

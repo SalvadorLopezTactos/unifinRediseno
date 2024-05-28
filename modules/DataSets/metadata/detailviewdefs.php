@@ -9,79 +9,77 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['DataSets']['DetailView'] = array(
-    'templateMeta' => array('maxColumns' => '2',
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'),
-                                            array('label' => '10', 'field' => '30')
-                                            ),
-    ),
- 'panels' =>array (
-  'default' =>
-  array (
+$viewdefs['DataSets']['DetailView'] = [
+    'templateMeta' => ['maxColumns' => '2',
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        'default' => [
 
-    array (
-	  'name',
-      array (
-        'name' => 'report_name',
-        'customCode' => '<a href="index.php?module=ReportMaker&action=DetailView&record={$fields.report_id.value}">{$fields.report_name.value}</a>',
-      ),
-    ),
+            [
+                'name',
+                [
+                    'name' => 'report_name',
+                    'customCode' => '<a href="index.php?module=ReportMaker&action=DetailView&record={$fields.report_id.value}">{$fields.report_name.value}</a>',
+                ],
+            ],
 
-    array (
-      array('name'=>'query_name', 'type'=>'varchar'),
-      'parent_name',
-    ),
+            [
+                ['name' => 'query_name', 'type' => 'varchar'],
+                'parent_name',
+            ],
 
-    array (
-      array (
-        'name' => 'child_name',
-        'customCode' => '{if isset($bean->child_id) && !empty($bean->child_id)}
+            [
+                [
+                    'name' => 'child_name',
+                    'customCode' => '{if isset($bean->child_id) && !empty($bean->child_id)}
 						 <a href="index.php?module=DataSets&action=DetailView&record={$bean->child_id}">{$bean->child_name}</a>
 						 {else}
 						 {$bean->child_name}
-						 {/if}'
-      ),
-      'team_name',
-    ),
+						 {/if}',
+                ],
+                'team_name',
+            ],
 
-    array (
-      'description',
-    ),
+            [
+                'description',
+            ],
 
-    array (
+            [
 
-      array (
-        'name' => 'table_width',
-        'fields'=>array('table_width', 'table_width_type'),
-      ),
-      'font_size',
-    ),
+                [
+                    'name' => 'table_width',
+                    'fields' => ['table_width', 'table_width_type'],
+                ],
+                'font_size',
+            ],
 
-    array (
-      'exportable',
-      'header_text_color',
-    ),
+            [
+                'exportable',
+                'header_text_color',
+            ],
 
-    array (
-      'header',
-      'body_text_color',
-    ),
+            [
+                'header',
+                'body_text_color',
+            ],
 
-    array (
-      'prespace_y',
-      'header_back_color',
-    ),
+            [
+                'prespace_y',
+                'header_back_color',
+            ],
 
-    array (
-      'use_prev_header',
-      'body_back_color',
-    ),
-
-
-  ),
-)
+            [
+                'use_prev_header',
+                'body_back_color',
+            ],
 
 
-);
-?>
+        ],
+    ],
+
+
+];

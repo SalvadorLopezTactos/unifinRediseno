@@ -1,5 +1,8 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+
+if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,20 +18,20 @@
 
 $pmseHookClassPath = SugarAutoLoader::requireWithCustom('modules/pmse_Inbox/engine/PMSELogicHook.php');
 $pmseHookClassName = SugarAutoLoader::customClass('PMSELogicHook');
-$hook_array['after_save'][] = array(
+$hook_array['after_save'][] = [
     100,
     'pmse',
     $pmseHookClassPath,
     $pmseHookClassName,
-    'after_save'
-);
-$hook_array['after_delete'][] = array(
+    'after_save',
+];
+$hook_array['after_delete'][] = [
     100,
     'pmse',
     $pmseHookClassPath,
     $pmseHookClassName,
-    'after_delete'
-);
+    'after_delete',
+];
 $hook_array['after_relationship_add'][] = [
     100,
     'pmse',

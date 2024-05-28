@@ -13,7 +13,7 @@
  * Mixin intended to be used with `_.mixin`.
  *
  * ```
- * const Mixins = require('utils/underscore-mixins');
+ * const Mixins = require('./underscore-mixins');
  * _.mixin(Mixins);
  * ```
  * @alias Utils/UnderscoreMixins

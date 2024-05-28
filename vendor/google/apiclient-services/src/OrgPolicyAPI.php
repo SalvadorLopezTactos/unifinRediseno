@@ -23,8 +23,8 @@ use Google\Client;
  * Service definition for OrgPolicyAPI (v2).
  *
  * <p>
- * The Org Policy API allows users to configure governance rules on their GCP
- * resources across the Cloud Resource Hierarchy.</p>
+ * The Organization Policy API allows users to configure governance rules on
+ * their Google Cloud resources across the resource hierarchy.</p>
  *
  * <p>
  * For more information about this service, see the API
@@ -163,6 +163,10 @@ class OrgPolicyAPI extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+                'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
               ],
             ],
@@ -338,6 +342,10 @@ class OrgPolicyAPI extends \Google\Service
                   'type' => 'string',
                   'required' => true,
                 ],
+                'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
               ],
             ],
           ]
@@ -443,6 +451,10 @@ class OrgPolicyAPI extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+                'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
               ],
             ],

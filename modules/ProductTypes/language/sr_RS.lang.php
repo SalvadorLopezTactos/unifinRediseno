@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tipovi proizvoda',
     'LBL_MODULE_NAME_SINGULAR' => 'Tip proizvoda',
     'LBL_MODULE_TITLE' => 'Tipovi proizvoda: Početna strana',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Da li ste sigurni da želite da obrišete ovaj zapis?',
     'ERR_DELETE_RECORD' => 'Morate navesti broj zapisa da bi obrisali tip proizvoda.',
     'NTC_LIST_ORDER' => 'Postavi redosled po kome će se ovaj tip prikazati u padajućoj listi tipova proizvoda',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Uvezi tipove proizvoda',
-    'LBL_CREATED_BY'=>'Autor',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Uvezi tipove proizvoda',
+    'LBL_CREATED_BY' => 'Autor',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'ID broj dodeljenog korisnika',
-    'LBL_EXPORT_CREATED_BY'=>'ID broj osobe koja je kreirala',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Uvezi Kategorije Proizvoda',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'ID broj dodeljenog korisnika',
+    'LBL_EXPORT_CREATED_BY' => 'ID broj osobe koja je kreirala',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Uvezi Kategorije Proizvoda',
+];

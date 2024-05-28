@@ -3,6 +3,8 @@
 
 /* twitter-bootstrap import START */
 
+// TODO consider moving to Tailwind
+
 // ANIMATIONS
 // ----------
 
@@ -338,6 +340,8 @@
   * Modified to match Sugar7 Color scheme
   */
 
+// TODO Move nprogress styles to tailwind.css
+
 #nprogress {
   /* Make clicks pass-through */
   pointer-events: none;
@@ -349,14 +353,14 @@
       background: @borderColorLight;
       box-shadow: none;
       height: 1px;
-      .m-0();
+      margin: 0;
     }
   }
 
   .bar {
     /* override with variable */
     background: @linkColor;
-    .w-full();
+    width: 100%;
   }
 
   &.banner-shifted {
@@ -365,10 +369,9 @@
   }
 
   .peg {
-    .block();
-    .absolute();
-    .h-full();
-
+    display: block;
+    height: 100%;
+    position: absolute;
     right: 0;
     width: 100px;
     box-shadow: 0 0 10px @BorderColor, 0 0 5px @BorderColor;

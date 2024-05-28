@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmGroup'] = array(
+$dictionary['pmse_BpmGroup'] = [
     'table' => 'pmse_bpm_group',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'reassignable' => false,
-    'fields' => array(
-        'grp_uid' => array(
+    'fields' => [
+        'grp_uid' => [
             'required' => true,
             'name' => 'grp_uid',
             'vname' => 'Group Identifier',
@@ -38,8 +38,8 @@ $dictionary['pmse_BpmGroup'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'grp_parent_group' => array(
+        ],
+        'grp_parent_group' => [
             'required' => false,
             'name' => 'grp_parent_group',
             'vname' => 'Parent group ',
@@ -63,23 +63,23 @@ $dictionary['pmse_BpmGroup'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmGroup', 'pmse_BpmGroup');

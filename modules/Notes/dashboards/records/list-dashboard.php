@@ -11,60 +11,50 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-return array(
-    'metadata' =>
-    array(
-        'components' =>
-        array(
-            array(
-                'rows' =>
-                array(
-                    array(
-                        array(
-                            'view' =>
-                            array(
+return [
+    'metadata' => [
+        'components' => [
+            [
+                'rows' => [
+                    [
+                        [
+                            'view' => [
                                 'type' => 'dashablelist',
                                 'label' => 'TPL_DASHLET_MY_MODULE',
-                                'display_columns' =>
-                                array(
+                                'display_columns' => [
                                     'name',
                                     'billing_address_country',
                                     'billing_address_city',
-                                ),
-                            ),
-                            'context' =>
-                            array(
+                                ],
+                            ],
+                            'context' => [
                                 'module' => 'Accounts',
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' =>
-                            array(
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
                                 'type' => 'dashablelist',
                                 'label' => 'TPL_DASHLET_MY_MODULE',
-                                'display_columns' =>
-                                array(
+                                'display_columns' => [
                                     'name',
                                     'account_name',
                                     'email',
                                     'phone_work',
-                                ),
-                            ),
-                            'context' =>
-                            array(
+                                ],
+                            ],
+                            'context' => [
                                 'module' => 'Contacts',
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
                 'width' => 12,
-            ),
-        ),
-    ),
+            ],
+        ],
+    ],
     'name' => 'LBL_NOTES_LIST_DASHBOARD',
-);
-
+];

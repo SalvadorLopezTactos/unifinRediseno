@@ -12,14 +12,14 @@
 $module_name = 'Escalations';
 $viewdefs[$module_name]['base']['menu']['header'] = [
     [
-        'route' => '#'.$module_name.'/create',
+        'route' => '#' . $module_name . '/create',
         'label' => 'LNK_NEW_ESCALATIOM',
         'acl_action' => 'create',
         'acl_module' => $module_name,
         'icon' => 'sicon-plus',
     ],
     [
-        'route' => '#'.$module_name,
+        'route' => '#' . $module_name,
         'label' => 'LNK_ESCALATION_LIST',
         'acl_action' => 'list',
         'acl_module' => $module_name,
@@ -27,12 +27,12 @@ $viewdefs[$module_name]['base']['menu']['header'] = [
     ],
     [
         'route' => '#bwc/index.php?' . http_build_query([
-            'module' => 'Import',
-            'action' => 'Step1',
-            'import_module' => $module_name,
-            'return_module' => $module_name,
-            'return_action' => 'index',
-        ]),
+                'module' => 'Import',
+                'action' => 'Step1',
+                'import_module' => $module_name,
+                'return_module' => $module_name,
+                'return_action' => 'index',
+            ]),
         'label' => 'LNK_IMPORT_ESCALATIONS',
         'acl_action' => 'import',
         'acl_module' => $module_name,

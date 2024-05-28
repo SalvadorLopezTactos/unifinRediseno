@@ -13,7 +13,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FEEDBACK_TEXT_PLACEHOLDER' => 'Përshkrim i informacionit kthyes',
     'LBL_FEEDBACK_BTN_SUBMIT' => 'Dërgo',
     'LBL_FEEDBACK_SENT' => 'Informacioni kthyes u dërgua',
@@ -23,4 +23,4 @@ $mod_strings = array(
     'TPL_FEEDBACK_ASIDE' => 'Ne mbledhim të dhëna të sigurta përdorimi në këtë kohë të regjistrimit. {{learnMoreLink}}. Ne nuk mbledhim informacione kontakti. Ju lutemi {{contactSupportLink}} për bugs ose çështje tjera të cilat kërkojnë përgjigje.',
     'LBL_FEEDBACK_ASIDE_CLICK_MORE' => 'Klikoni këtu të mësoni më shumë',
     'LBL_FEEDBACK_ASIDE_CONTACT_SUPPORT' => 'kontakto Mbështetjen',
-);
+];

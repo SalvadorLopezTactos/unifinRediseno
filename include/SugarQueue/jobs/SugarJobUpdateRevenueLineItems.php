@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,7 +19,6 @@
  */
 class SugarJobUpdateRevenueLineItems implements RunnableSchedulerJob
 {
-
     /**
      * @var SchedulersJob
      */
@@ -65,18 +65,18 @@ class SugarJobUpdateRevenueLineItems implements RunnableSchedulerJob
         /* @var $db DBManager */
         $db = DBManagerFactory::getInstance();
         // get all the opps to break into groups of 100 and go newest to oldest
-        $sql = "select id from revenue_line_items where deleted = 0 ORDER BY date_modified DESC";
+        $sql = 'select id from revenue_line_items where deleted = 0 ORDER BY date_modified DESC';
         $results = $db->query($sql);
 
-        $jobs = array();
+        $jobs = [];
 
-        $toProcess = array();
+        $toProcess = [];
         while ($row = $db->fetchRow($results)) {
             $toProcess[] = $row['id'];
 
-            if (count($toProcess) == $perJob) {
+            if (safeCount($toProcess) == $perJob) {
                 $jobs[] = static::createJob($toProcess);
-                $toProcess = array();
+                $toProcess = [];
             }
         }
 
@@ -85,7 +85,7 @@ class SugarJobUpdateRevenueLineItems implements RunnableSchedulerJob
         }
 
         // if only one job was created, just return that id
-        if (count($jobs) == 1) {
+        if (safeCount($jobs) == 1) {
             return array_shift($jobs);
         }
 
@@ -105,8 +105,8 @@ class SugarJobUpdateRevenueLineItems implements RunnableSchedulerJob
         //Create an entry in the job queue to run UpdateOppsJob which handles updating all opportunities
         /* @var $job SchedulersJob */
         $job = BeanFactory::newBean('SchedulersJobs');
-        $job->name = "Resave All RevenueLineItems";
-        $job->target = "class::SugarJobUpdateRevenueLineItems";
+        $job->name = 'Resave All RevenueLineItems';
+        $job->target = 'class::SugarJobUpdateRevenueLineItems';
         $job->data = json_encode($data);
         $job->retry_count = 0;
         $job->assigned_user_id = $current_user->id;

@@ -31,33 +31,33 @@ class SugarUpgradeFixCustomLabelsForCoreModules extends UpgradeScript
      *
      * @var array
      */
-    public $upgradeLabels = array(
-        'Campaigns' => array(
+    public $upgradeLabels = [
+        'Campaigns' => [
             'LBL_CAMPAIGN_TYPE' => 'LBL_TYPE',
-        ),
-        'Opportunities' => array(
-            'LBL_BEST_CASE'  => 'LBL_BEST',
+        ],
+        'Opportunities' => [
+            'LBL_BEST_CASE' => 'LBL_BEST',
             'LBL_WORST_CASE' => 'LBL_WORST',
-            'LBL_AMOUNT'     => 'LBL_LIKELY',
-        ),
-        'Forecasts' => array(
-            'LBL_BEST_CASE'  => 'LBL_BEST',
+            'LBL_AMOUNT' => 'LBL_LIKELY',
+        ],
+        'Forecasts' => [
+            'LBL_BEST_CASE' => 'LBL_BEST',
             'LBL_WORST_CASE' => 'LBL_WORST',
-            'LBL_AMOUNT'     => 'LBL_LIKELY',
-        ),
-        'Products' => array(
-            'LBL_BEST_CASE'  => 'LBL_BEST',
+            'LBL_AMOUNT' => 'LBL_LIKELY',
+        ],
+        'Products' => [
+            'LBL_BEST_CASE' => 'LBL_BEST',
             'LBL_WORST_CASE' => 'LBL_WORST',
-            'LBL_AMOUNT'     => 'LBL_LIKELY',
-        ),
-    );
+            'LBL_AMOUNT' => 'LBL_LIKELY',
+        ],
+    ];
 
     public function run()
     {
         $config = SugarConfig::getInstance();
 
         foreach ($this->upgradeLabels as $module => $labels) {
-            $changedLanguages = array();
+            $changedLanguages = [];
 
             // Let's fix labels for all languages
             foreach ($config->get('languages') as $key => $value) {
@@ -71,13 +71,13 @@ class SugarUpgradeFixCustomLabelsForCoreModules extends UpgradeScript
                 $this->rebuildLanguages($changedLanguages, $module);
             }
 
-            $changedSubpanels = array();
+            $changedSubpanels = [];
             // Fix subpanels
             if ($this->upgradeSubpanelModuleLabels($module)) {
                 $changedSubpanels[$key] = $key;
             }
 
-            $changedListViews = array();
+            $changedListViews = [];
             // Fix list views
             if ($this->upgradeListViewModuleLabels($module)) {
                 $changedListViews[$key] = $key;
@@ -99,7 +99,7 @@ class SugarUpgradeFixCustomLabelsForCoreModules extends UpgradeScript
         // upgrade viewdefs
         $path = "custom/modules/{$module}/clients/base/views/subpanel-for-*/subpanel-for-*.php";
         foreach (glob($path) as $scanFile) {
-            $viewdefs = array();
+            $viewdefs = [];
 
             include $scanFile;
             // Modification flag
@@ -123,7 +123,7 @@ class SugarUpgradeFixCustomLabelsForCoreModules extends UpgradeScript
             if ($changed) {
                 $this->backupFile($scanFile);
                 $upgraded = $upgraded || $changed;
-                $keyNames = array();
+                $keyNames = [];
                 $viewdefsWrite = $viewdefs;
 
                 // collect key names for array path "{module}/{platform}/{view_type}/{view}"
@@ -148,7 +148,7 @@ class SugarUpgradeFixCustomLabelsForCoreModules extends UpgradeScript
         // upgrade subpanel_layout
         $path = "custom/modules/{$module}/metadata/subpanels/*.php";
         foreach (glob($path) as $scanFile) {
-            $subpanel_layout = array();
+            $subpanel_layout = [];
             include $scanFile;
             // Modification flag
             $changed = false;
@@ -194,7 +194,7 @@ class SugarUpgradeFixCustomLabelsForCoreModules extends UpgradeScript
         $scanFile = "custom/modules/{$module}/clients/base/views/list/list.php";
         if (file_exists($scanFile)) {
             $changed = false;
-            $viewdefs = array();
+            $viewdefs = [];
 
             include $scanFile;
 
@@ -233,10 +233,10 @@ class SugarUpgradeFixCustomLabelsForCoreModules extends UpgradeScript
      */
     public function upgradeModuleLabels($module, $language)
     {
-        $path = 'custom/modules/' . $module . '/language/' . $language. '.lang.php';
+        $path = 'custom/modules/' . $module . '/language/' . $language . '.lang.php';
 
         if (file_exists($path) && is_array($this->upgradeLabels[$module])) {
-            $mod_strings = array();
+            $mod_strings = [];
             include $path;
 
             // Modification flag
@@ -283,6 +283,6 @@ class SugarUpgradeFixCustomLabelsForCoreModules extends UpgradeScript
             $this->mi->silent = true;
         }
 
-        $this->mi->rebuild_languages($languages, array($module));
+        $this->mi->rebuild_languages($languages, [$module]);
     }
 }

@@ -36,7 +36,7 @@ class PMSELogger extends AbstractLogger
      *
      * @var type
      */
-    private $logLevels = array(
+    private $logLevels = [
         LogLevel::EMERGENCY => 0,
         LogLevel::ALERT => 1,
         LogLevel::CRITICAL => 2,
@@ -45,7 +45,7 @@ class PMSELogger extends AbstractLogger
         LogLevel::NOTICE => 5,
         LogLevel::INFO => 6,
         LogLevel::DEBUG => 7,
-    );
+    ];
 
     /**
      * Valid PHP date() format string for log timestamps
@@ -95,7 +95,7 @@ class PMSELogger extends AbstractLogger
     {
         if (!isset(self::$instance)) {
             $c = self::class;
-            self::$instance = new $c;
+            self::$instance = new $c();
         }
 
         return self::$instance;
@@ -140,7 +140,7 @@ class PMSELogger extends AbstractLogger
      * @param array $context
      * @return null
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         if ($this->logLevels[$this->logLevel] < $this->logLevels[$level]) {
             return;
@@ -162,8 +162,8 @@ class PMSELogger extends AbstractLogger
     /**
      * Formats the message for logging.
      *
-     * @param  string $message The message to log
-     * @param  array $context The context
+     * @param string $message The message to log
+     * @param array $context The context
      * @return string
      * @codeCoverageIgnore
      */
@@ -182,7 +182,7 @@ class PMSELogger extends AbstractLogger
     /**
      * Takes the given context and coverts it to a string.
      *
-     * @param  array $context The Context
+     * @param array $context The Context
      * @return string
      * @codeCoverageIgnore
      */
@@ -191,25 +191,25 @@ class PMSELogger extends AbstractLogger
         $export = '';
         foreach ($context as $key => $value) {
             $export .= "{$key}: ";
-            $export .= preg_replace(array(
+            $export .= preg_replace([
                 '/=>\s+([a-zA-Z])/im',
                 '/array\(\s+\)/im',
                 '/^  |\G  /m',
-            ), array(
+            ], [
                 '=> $1',
                 'array()',
                 '    ',
-            ), str_replace('array (', 'array(', var_export($value, true)));
+            ], str_replace('array (', 'array(', var_export($value, true)));
             $export .= PHP_EOL;
         }
-        return str_replace(array('\\\\', '\\\''), array('\\', '\''), rtrim($export));
+        return str_replace(['\\\\', '\\\''], ['\\', '\''], rtrim($export));
     }
 
     /**
      * Indents the given string with the given indent.
      *
-     * @param  string $string The string to indent
-     * @param  string $indent What to use as the indent.
+     * @param string $string The string to indent
+     * @param string $indent What to use as the indent.
      * @return string
      * @codeCoverageIgnore
      */
@@ -240,7 +240,7 @@ class PMSELogger extends AbstractLogger
     {
         $data = new stdClass();
         $data->value = $message;
-        
+
         // If there are tags, parse them
         if (!empty($params['tags']) && is_array($params['tags'])) {
             $data->tags = $params['tags'];
@@ -258,13 +258,14 @@ class PMSELogger extends AbstractLogger
 
         return $data;
     }
+
     /**
      * Creates an activity entry from a message
      * @param string $message The string to massage
      * @param array $params The values to inject into the message
      * @codeCoverageIgnore
      */
-    public function activity($message, $params = array())
+    public function activity($message, $params = [])
     {
         // Handle the assembly of the data for the activity
         $data = $this->prepareActivityData($message, $params);
@@ -272,7 +273,7 @@ class PMSELogger extends AbstractLogger
         // Get data we need for the activity record
         $module_id = $params['module_id'] ?? null;
         $module_name = $params['module_name'] ?? 'pmse_Inbox';
-        
+
         $beanActivity = new Activity();
         $beanActivity->parent_id = $module_id;
         $beanActivity->parent_type = $module_name;
@@ -281,9 +282,10 @@ class PMSELogger extends AbstractLogger
         $beanActivity->save();
     }
 
-    private function getNameField($args){
-        $result = array();
-        if (!empty($args['id']) && !empty($args['module'])){
+    private function getNameField($args)
+    {
+        $result = [];
+        if (!empty($args['id']) && !empty($args['module'])) {
             $moduleBean = BeanFactory::getBean($args['module'], $args['id']);
             $result['id'] = $moduleBean->id;
             $result['module'] = $moduleBean->module_name;
@@ -291,5 +293,4 @@ class PMSELogger extends AbstractLogger
         }
         return $result;
     }
-
 }

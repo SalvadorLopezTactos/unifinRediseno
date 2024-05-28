@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'أنواع المنتج',
     'LBL_MODULE_NAME_SINGULAR' => 'نوع المنتج',
     'LBL_MODULE_TITLE' => 'أنواع المنتج: الصفحة الرئيسية',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'هل تريد بالتأكيد حذف هذا السجل؟',
     'ERR_DELETE_RECORD' => 'يجب أن يتم تحديد رقم السجل لحذف نوع المنتج.',
     'NTC_LIST_ORDER' => 'اضبط الترتيب الذي يتم عرض هذا النوع به في القوائم المنسدلة لنوع المنتج',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'استيراد أنواع المنتجات',
-    'LBL_CREATED_BY'=>'تم الإنشاء بواسطة',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'استيراد أنواع المنتجات',
+    'LBL_CREATED_BY' => 'تم الإنشاء بواسطة',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'معين إلى معرّف',
-    'LBL_EXPORT_CREATED_BY'=>'تم الإنشاء بواسطة المعرّف',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'استيراد فئات المنتج',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'معين إلى معرّف',
+    'LBL_EXPORT_CREATED_BY' => 'تم الإنشاء بواسطة المعرّف',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'استيراد فئات المنتج',
+];

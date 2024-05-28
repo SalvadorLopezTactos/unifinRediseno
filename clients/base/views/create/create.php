@@ -9,61 +9,61 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['create'] = array(
+$viewdefs['base']['view']['create'] = [
     'template' => 'record',
-    'buttons' => array(
-        array(
+    'buttons' => [
+        [
             'name' => 'cancel_button',
             'type' => 'button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
-            'events' => array(
+            'events' => [
                 'click' => 'button:cancel_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'restore_button',
             'type' => 'button',
             'label' => 'LBL_RESTORE',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'select',
-            'events' => array(
+            'events' => [
                 'click' => 'button:restore_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'save_button',
             'type' => 'button',
             'label' => 'LBL_SAVE_BUTTON_LABEL',
             'primary' => true,
             'showOn' => 'create',
-            'events' => array(
+            'events' => [
                 'click' => 'button:save_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'duplicate_button',
             'type' => 'button',
             'label' => 'LBL_IGNORE_DUPLICATE_AND_SAVE',
             'primary' => true,
             'showOn' => 'duplicate',
-            'events' => array(
+            'events' => [
                 'click' => 'button:save_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'select_button',
             'type' => 'button',
             'label' => 'LBL_SAVE_BUTTON_LABEL',
             'primary' => true,
             'showOn' => 'select',
-            'events' => array(
+            'events' => [
                 'click' => 'button:save_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

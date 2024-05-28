@@ -15,7 +15,7 @@ $viewdefs['Audit']['base']['view']['activity-card-content'] = [
         [
             'name' => 'panel_change',
             'label' => 'LBL_PANEL_1',
-            'css_class' => 'panel-change',
+            'css_class' => 'panel-change mt-2',
             'fields' => [
                 [
                     'name' => 'field_name',

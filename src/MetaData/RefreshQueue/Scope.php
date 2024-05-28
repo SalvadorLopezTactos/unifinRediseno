@@ -22,7 +22,7 @@ class Scope
      *
      * @var array
      */
-    protected $params = array();
+    protected $params = [];
 
     /**
      * Constructor.

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Suplanuoti skambutį',
     'LNK_NEW_MEETING' => 'Suplanuoti susitikimą',
     'LNK_NEW_TASK' => 'Sukurti užduotį',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Papildomas Meta laukas 2',
     'COLUMN_TITLE_EXT3' => 'Papildomas Meta laukas 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'IFrame aukštis',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'Numatytas adresas',
     'COLUMN_TITLE_AUDIT' => 'Auditas',
     'COLUMN_TITLE_PII' => 'Asmeninė informacija',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Numatyta reikšmė',
     'LBL_AUDITED' => 'Auditas',
     'LBL_REPORTABLE' => 'Matomas ataskaitose',
-    'ERR_RESERVED_FIELD_NAME' => "Rezervuotas raktažodis",
+    'ERR_RESERVED_FIELD_NAME' => 'Rezervuotas raktažodis',
     'ERR_SELECT_FIELD_TYPE' => 'Pasirinkite lauko tipą',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Toks lauko pavadinimas jau egzistuoja',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Field name should contain only the following characters: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Baigti',
     'LBL_EXE_NON_SIM_MODE' => 'Execute non-simulation mode',
     'LBL_CALCULATION_VISIBLE' => 'Padaryti matomas, kad būtų galima apskaičiuoti',
-);
+];

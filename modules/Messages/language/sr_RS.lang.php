@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'u toku',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za poruke',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Kontrolna tabla za zapise poruka',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija poruke',
 ];

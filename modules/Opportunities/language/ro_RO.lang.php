@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Tabloul de bord Listă oportunități',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare oportunități',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Oferte',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Oportunități de la un cont dinamic',
+    'LBL_TOP_10_OPP' => 'Top 10 oportunități deschise',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Tablou: Oportunitățile mele active',
+    'LBL_MY_ACTIVE_OPP' => 'Oportunitățile mele active',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Pipeline Total is',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Rol Oportunitate',
+    'LBL_OPPORTUNITY_ROLE' => 'Rol Oportunitate',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Note',
     'LBL_TAB_OPPORTUNITY' => 'Revizie {{module}}',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'Făcând clic pe Confirmare, veţi şterge TOATE datele cu previzionări şi veţi modifica Fereastra Oportunităţi. Dacă nu asta aţi dorit, faceţi clic pe Anulare pentru a reveni la setările anterioare.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'Făcând clic pe Confirmare, veţi şterge TOATE datele Previziunilor şi veţi modifica Vizualizarea de oportunităţi. '
-        .'De asemenea, se vor dezactiva TOATE definiţiile procesului cu un modul ţintă de Elemente pe linia de venituri. '
-        .'Dacă nu aţi intenţionat acest lucru, faceţi clic pe revocare pentru a reveni la setările anterioare.',
+        . 'De asemenea, se vor dezactiva TOATE definiţiile procesului cu un modul ţintă de Elemente pe linia de venituri. '
+        . 'Dacă nu aţi intenţionat acest lucru, faceţi clic pe revocare pentru a reveni la setările anterioare.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Dacă toate elementele de venit sunt încheiate şi cel puţin unul a fost câştigat,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'Stadiul de vânzări din Oportunităţi este setat la „Încheiat cu succes”.',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Dacă toate elementele de venit sunt în stadiul de vânzări „Încheiat în pierdere”,',
@@ -220,25 +223,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'După ce iniţiaţi această modificare, în fundal vor fi create înregistrări de elemente de venit pentru fiecare {{module_name} existent. Atunci când elementele de venit sunt complete şi disponibile, va fi trimisă o notificare la adresa de e-mail de pe profilul dvs. de utilizator. De reţinut faptul că platforma dvs. trebuie configurată pentru a trimite e-mail-uri prin Admin > Setări E-mail pentru ca notificările să fie trimise.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulul {{plural_module_name}} vă permite să urmăriți vânzările individuale de la început până la sfârșit. Fiecare înregistrare din {{module_name}} reprezintă o vânzare potențială și include date de vânzare relevante, precum și date legate de alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}} etc. Un {{module_name}} va parcurge de obicei câteva etape ale procesului de vânzare până când va fi marcat „Încheiat cu succes” sau „Încheiat fără succes”. {{plural_module_name}} pot fi valorificate și mai mult folosind modulul {{forecasts_singular_module}} oferit de Sugar pentru a înțelege și pentru a estima tendințe de vânzări, precum și pentru a direcționa activitatea cu scopul de a atinge cotele de vânzări.',
+    'LBL_HELP_RECORDS' => 'Modulul {{plural_module_name}} vă permite să urmăriți vânzările individuale de la început până la sfârșit. Fiecare {{module_name}} înregistrare reprezintă o vânzare potențială și include date relevante privind vânzările, precum și referitoare la alte înregistrări importante, cum ar fi: {{quotes_module}}, {{contacts_module}}etc. Un {{module_name}} va progresa de obicei prin mai multe etape de vânzare până când este marcat fie "Închis câștigat", fie "Închis pierdut". {{plural_module_name}} poate fi valorificat și mai mult prin utilizarea modulului Sugar {{forecasts_singular_module}} pentru a înțelege și prezice tendințele vânzărilor, precum și pentru a concentra activitatea pentru atingerea cotelor de vânzări.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modulul {{plural_module_name}} vă permite să urmăriți vânzările individuale și articolele aferente vânzărilor respective de la început până la sfârșit. Fiecare înregistrare din {{module_name}} reprezintă o vânzare potențială și include date de vânzare relevante, precum și date legate de alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}} etc.
+    'LBL_HELP_RECORD' => 'Modulul {{plural_module_name}} vă permite să urmăriți vânzările individuale și elementele de rând aparținând acestor vânzări de la început până la sfârșit. Fiecare înregistrare {{module_name}} reprezintă o vânzare potențială și include date relevante privind vânzările, precum și referitoare la alte înregistrări importante, cum ar fi: {{quotes_module}}, {{contacts_module}} etc.
 
 - Editați câmpurile acestei înregistrări făcând clic pe un câmp individual sau pe butonul Editare.
-- Vizualizați sau modificați link-uri către alte înregistrări în panourile secundare, comutând fereastra din stânga jos în modul „Vizualizare date”.
-- Creați și vizualizați comentariile utilizatorilor și înregistrați istoricul modificărilor în {{activitystream_singular_module}} comutând fereastra din stânga jos în modul „Flux de activitate”.
-- Urmăriți sau marcați ca favorit această înregistrare folosind pictogramele din dreapta numelui înregistrării.
-- Sunt disponibile acțiuni suplimentare în meniul derulant Acțiuni din dreapta butonului Editare.',
+- Vizualizați sau modificați linkurile către alte înregistrări din panourile secundare comutând panoul din stânga jos la „Vizualizare date".
+- Faceți și vizualizați comentariile utilizatorilor și înregistrați istoricul modificărilor în {{activitystream_singular_module}} comutând panoul din stânga jos la „Flux de activitate".
+- Urmați sau preferați această înregistrare folosind pictogramele din dreapta numelui înregistrării.
+- Acțiuni suplimentare sunt disponibile în meniul derulant Acțiuni din dreapta butonului Editare.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modulul {{plural_module_name}} vă permite să urmăriți vânzările individuale și articolele aferente vânzărilor respective de la început până la sfârșit. Fiecare înregistrare din {{module_name}} reprezintă o vânzare potențială și include date de vânzare relevante, precum și date legate de alte înregistrări importante cum ar fi {{quotes_module}}, {{contacts_module}} etc.
+    'LBL_HELP_CREATE' => 'Modulul {{plural_module_name}} vă permite să urmăriți vânzările individuale și articolele de linie aferente vânzărilor respective de la început până la sfârșit. Fiecare înregistrare {{module_name}} reprezintă o vânzare potențială și include date de vânzare relevante, precum și date legate de alte înregistrări importante cum ar fi {{quotes_module}}, {{contacts_module}} etc.
 
 Pentru a crea un {{module_name}}:
 1. Introduceți valori pentru câmpuri după cum doriți.
- - Câmpurile marcate cu „Obligatoriu” trebuie să fie completate înainte de salvare.
+ - Câmpurile marcate cu „Obligatoriu” trebuie completate înainte de salvare.
  - Faceți clic pe „Afișare mai multe” pentru a afișa câmpuri suplimentare dacă este necesar.
-2. Faceți clic pe „Salvare” pentru a finaliza noua înregistrare și pentru a reveni la pagina anterioară.',
+2. Faceți clic pe „Salvare” pentru a finaliza înregistrarea nouă și pentru a reveni la pagina anterioară.',
 
 // END ENT/ULT
 
@@ -260,4 +263,9 @@ Pentru a crea un {{module_name}}:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Oportunitate Închidere Predicție',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Vedeți detaliile de predicție pentru o anumită Oportunitate',
-);
+    'LBL_AI_WINRATE' => 'Rata de câștig',
+    'LBL_AI_WONOPP' => 'Oportunități câștigate',
+    'LBL_AI_CLOSINGTIME' => 'Ora închiderii',
+    'LBL_AI_CLOSEDOPP' => 'Oportunități închise',
+    'LBL_AI_LEADTIMESPAN' => 'Timpul dintre crearea oportunității și câștigul închis',
+];

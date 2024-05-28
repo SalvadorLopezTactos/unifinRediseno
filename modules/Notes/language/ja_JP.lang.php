@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'メモリストのダッシュ ボード',
     'LBL_NOTES_RECORD_DASHBOARD' => '注記レコードダッシュボード',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => '注記 フォーカス ドロワ',
     'LBL_EXTERNAL_USER' => '外部ユーザー',
     'LBL_EXTERNAL_USER_NAME' => '外部ユーザー',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'メモのタイムライン',
 
     'LBL_RELATED_CONTACT' => '関連する担当者',
     'ERR_DELETE_RECORD' => 'あなたがアカウントを削除するには、レコード番号を指定する必要があります。',
@@ -121,4 +122,4 @@ $mod_strings = array(
 - 「必須」フィールドは保存前に入力完了してください。
 - 必要に応じて、追加のフィールドを展開する「更に表示」をクリックします。
 2. 新しいレコードを確定し、前のページに戻るには「保存」をクリックします。',
-);
+];

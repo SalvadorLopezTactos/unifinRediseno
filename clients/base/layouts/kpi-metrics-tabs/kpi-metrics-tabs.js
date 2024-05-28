@@ -22,6 +22,7 @@
     initialize: function(options) {
         this._super('initialize', [options]);
         this.context.metrics = [];
+        this.context.set('noCollectionField', true);
     },
 
     /**

@@ -42,10 +42,10 @@ final class Client implements ClientInterface
      * Creates a client for sending events to the Sugar Connect webhook as JSON
      * over HTTP.
      *
-     * @param string           $url        The URL to the Sugar Connect webhook.
-     * @param int              $maxRetries Maximum number of retries.
-     * @param AbstractProvider $provider   OAuth 2.0 service provider client.
-     * @param CacheInterface   $cache      Access tokens are cached for reuse.
+     * @param string $url The URL to the Sugar Connect webhook.
+     * @param int $maxRetries Maximum number of retries.
+     * @param AbstractProvider $provider OAuth 2.0 service provider client.
+     * @param CacheInterface $cache Access tokens are cached for reuse.
      */
     public function __construct(string $url, int $maxRetries, AbstractProvider $provider, CacheInterface $cache)
     {
@@ -74,7 +74,7 @@ final class Client implements ClientInterface
      *
      * @return void
      */
-    public function send(array $events) : void
+    public function send(array $events): void
     {
         $this->client->post(
             $this->url,

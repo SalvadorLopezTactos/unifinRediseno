@@ -22,7 +22,8 @@ require_once 'include/utils/file_utils.php';
 /**
  * Class to handle downloading of files. Should eventually replace download.php
  */
-class DownloadFile {
+class DownloadFile
+{
     /**
      * Gets a file and returns an HTTP response with the contents of the request file for download
      *
@@ -30,7 +31,8 @@ class DownloadFile {
      * @param string $field The field name to get the file for
      * @param boolean $forceDownload force to download the file if true.
      */
-    public function getFile(SugarBean $bean, $field, $forceDownload = false) {
+    public function getFile(SugarBean $bean, $field, $forceDownload = false)
+    {
         $info = [];
         if ($this->validateBeanAndField($bean, $field, 'file') || $this->validateBeanAndField($bean, $field, 'image')) {
             $def = $bean->field_defs[$field];
@@ -65,19 +67,20 @@ class DownloadFile {
      * @param boolean $forceDownload force to download the file if true.
      * @param array $info Array containing the file details.
      */
-    public function outputFile($forceDownload, array $info) {
-        header("Pragma: public");
-        header("Cache-Control: max-age=1, post-check=0, pre-check=0");
+    public function outputFile($forceDownload, array $info)
+    {
+        header('Pragma: public');
+        header('Cache-Control: max-age=1, post-check=0, pre-check=0');
 
         if (!$forceDownload) {
             header("Content-Type: {$info['content-type']}");
         } else {
-            header("Content-Type: application/force-download");
-            header("Content-type: application/octet-stream");
-            header("Content-Disposition: attachment; filename=\"" . $this->cleanFilename($info['name']) . "\"");
+            header('Content-Type: application/force-download');
+            header('Content-type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . $this->cleanFilename($info['name']) . '"');
         }
-        header("X-Content-Type-Options: nosniff");
-        header("Content-Length: " . filesize($info['path']));
+        header('X-Content-Type-Options: nosniff');
+        header('Content-Length: ' . filesize($info['path']));
         header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time() + 2592000));
         set_time_limit(0);
         ob_start();
@@ -92,7 +95,8 @@ class DownloadFile {
      * @param string $fileid The name of the file to get - Can be a path as well
      * @return string
      */
-    public function getFilePathFromId($fileid) {
+    public function getFilePathFromId($fileid)
+    {
         return 'upload://' . $fileid;
     }
 
@@ -103,7 +107,8 @@ class DownloadFile {
      * @param string $field The field name to get the file information for
      * @return array|bool
      */
-    public function getImageInfo($bean, $field) {
+    public function getImageInfo($bean, $field)
+    {
         if ($this->validateBeanAndField($bean, $field, 'image')) {
             $filename = $bean->{$field};
             $filepath = $this->getFilePathFromId($filename);
@@ -116,12 +121,12 @@ class DownloadFile {
 
             $filedata = getimagesize($filepath);
 
-            $info = array(
+            $info = [
                 'content-type' => $filedata['mime'],
                 'content-length' => filesize($filepath),
                 'name' => $filename,
                 'path' => $filepath,
-            );
+            ];
             return $info;
         }
     }
@@ -160,70 +165,70 @@ class DownloadFile {
      * @param string $field The field name to get the file information for
      * @return array|bool
      */
-    public function getFileInfo($bean, $field) {
+    public function getFileInfo($bean, $field)
+    {
         if ($this->validateBeanAndField($bean, $field, 'file')) {
-                    // Default the file id and url
-                    $fileid  = $bean->id;
-                    $fileurl = '';
+            // Default the file id and url
+            $fileid = $bean->id;
+            $fileurl = '';
 
-                    // Handle special cases, like Documents
-                    if (isset($bean->object_name)) {
-                        if ($bean->object_name == 'Document') {
-                            // Documents store their file information in DocumentRevisions
-                            $revision = BeanFactory::retrieveBean('DocumentRevisions', $bean->id);
+            // Handle special cases, like Documents
+            if (isset($bean->object_name)) {
+                if ($bean->object_name == 'Document') {
+                    // Documents store their file information in DocumentRevisions
+                    $revision = BeanFactory::retrieveBean('DocumentRevisions', $bean->id);
 
-                            if (!empty($revision)) {
-                                $fileid  = $revision->id;
-                                $name    = $revision->filename;
-                                $fileurl = empty($revision->doc_url) ? '' : $revision->doc_url;
-                            } else {
-                                // The id is not a revision id, try the actual document revision id
-                                $revision = BeanFactory::retrieveBean('DocumentRevisions', $bean->document_revision_id);
-
-                                if (!empty($revision)) {
-                                    // Revision will hold the file id AND the file name
-                                    $fileid = $revision->id;
-                                    $name   = $revision->filename;
-                                    $fileurl = empty($revision->doc_url) ? '' : $revision->doc_url;
-                                } else {
-                                    // Nothing to find
-                                    return false;
-                                }
-                            }
-                        }
-                        else if ($bean->object_name == 'Note') {
-                            $fileid = $bean->getUploadId();
-                        }
+                    if (!empty($revision)) {
+                        $fileid = $revision->id;
+                        $name = $revision->filename;
+                        $fileurl = empty($revision->doc_url) ? '' : $revision->doc_url;
                     } else {
-                        $fileid = $bean->id;
-                        $fileurl  = '';
+                        // The id is not a revision id, try the actual document revision id
+                        $revision = BeanFactory::retrieveBean('DocumentRevisions', $bean->document_revision_id);
+
+                        if (!empty($revision)) {
+                            // Revision will hold the file id AND the file name
+                            $fileid = $revision->id;
+                            $name = $revision->filename;
+                            $fileurl = empty($revision->doc_url) ? '' : $revision->doc_url;
+                        } else {
+                            // Nothing to find
+                            return false;
+                        }
                     }
+                } elseif ($bean->object_name == 'Note') {
+                    $fileid = $bean->getUploadId();
+                }
+            } else {
+                $fileid = $bean->id;
+                $fileurl = '';
+            }
 
-                    $filepath = $this->getFilePathFromId($fileid);
+            $filepath = $this->getFilePathFromId($fileid);
 
-                    // Quick existence check to make sure we are actually working
-                    // on a real file
-            if (!file_exists($filepath) && ($bean->doc_type == "Sugar" || empty($bean->doc_type))) {
+            // Quick existence check to make sure we are actually working
+            // on a real file
+            if (!file_exists($filepath) && ($bean->doc_type == 'Sugar' || empty($bean->doc_type))) {
                 return false;
             }
 
-                    if (empty($fileurl) && !empty($bean->doc_url)) {
-                        $fileurl = $bean->doc_url;
-                    }
+            if (empty($fileurl) && !empty($bean->doc_url)) {
+                $fileurl = $bean->doc_url;
+            }
 
-                    // Get our filename if we don't have it already
-                    if (empty($name)) {
-                        $name = $bean->getFileName();
-                    }
+            // Get our filename if we don't have it already
+            if (empty($name)) {
+                $name = $bean->getFileName();
+            }
 
-                    return array(
-                        'content-type' => $this->getMimeType($filepath),
-                        'content-length' => $this->getFileSize($filepath),
-                        'name' => $name,
-                        'uri' => $fileurl,
-                        'path' => $filepath,
-                        'doc_type' => $bean->doc_type
-                    );
+            return [
+                'content-type' => $this->getMimeType($filepath),
+                'content-length' => $this->getFileSize($filepath),
+                'name' => $name,
+                'uri' => $fileurl,
+                'path' => $filepath,
+                'doc_type' => $bean->doc_type,
+            ];
         } else {
             return null;
         }
@@ -262,7 +267,7 @@ class DownloadFile {
 
         $files = $this->getFileNamesForArchive($beans, $field);
 
-        if (count($files) == 0) {
+        if (safeCount($files) == 0) {
             throw new Exception('Files could not be retrieved for this record');
         }
 
@@ -276,18 +281,18 @@ class DownloadFile {
         $outputName = trim($outputName);
         if (empty($outputName)) {
             $outputName = 'archive.zip';
-        } else if (get_file_extension($outputName) != 'zip') {
+        } elseif (get_file_extension($outputName) != 'zip') {
             $outputName .= '.zip';
         }
 
         $this->outputFile(
             true,
-            array(
+            [
                 'content-type' => $this->getMimeType($archive),
                 'content-length' => filesize($archive),
                 'name' => $outputName,
                 'path' => $archive,
-            )
+            ]
         );
     }
 
@@ -299,17 +304,16 @@ class DownloadFile {
      */
     public function getFileNamesForArchive($beans, $field)
     {
-        $aliases = array();
-        $result = array();
+        $aliases = [];
+        $result = [];
 
         foreach ($beans as $bean) {
             if ($this->validateBeanAndField($bean, $field, 'file')
                 || $this->validateBeanAndField($bean, $field, 'image')) {
-
                 $info = $this->getFileInfo($bean, $field);
                 if ($info) {
                     if (empty($aliases[$info['name']])) {
-                        $aliases[$info['name']] = array();
+                        $aliases[$info['name']] = [];
                     }
                     array_push($aliases[$info['name']], $info['path']);
                 }
@@ -317,16 +321,16 @@ class DownloadFile {
         }
 
         foreach ($aliases as $fname => $paths) {
-            if (count($paths) == 1) {
+            if (safeCount($paths) == 1) {
                 $result[$fname] = reset($paths);
             } else {
                 $count = 0;
                 $fparts = explode('.', $fname);
-                $ind = count($fparts) > 1 ? count($fparts) - 2 : 0;
+                $ind = safeCount($fparts) > 1 ? safeCount($fparts) - 2 : 0;
                 $tmp = $fparts[$ind];
                 foreach ($paths as $path) {
                     $fparts[$ind] .= "_{$count}";
-                    $count ++;
+                    $count++;
                     $result[implode('.', $fparts)] = $path;
                     $fparts[$ind] = $tmp;
                 }
@@ -341,7 +345,8 @@ class DownloadFile {
      * @param string $filename Path to the file
      * @return string|false The string mime type or false if the file does not exist
      */
-    public function getMimeType($filename) {
+    public function getMimeType($filename)
+    {
         return get_file_mime_type($filename);
     }
 
@@ -367,14 +372,12 @@ class DownloadFile {
      */
     public function getFileByFilename($file)
     {
-        if(!file_exists($file))
-        {
+        if (!file_exists($file)) {
             // handle exception elsewhere
             throw new Exception('File could not be retrieved', 'FILE_DOWNLOAD_INCORRECT_DEF_TYPE');
         }
 
         return file_get_contents($file);
-
     }
 }
 
@@ -405,44 +408,51 @@ class DownloadFileApi extends DownloadFile
      */
     public function outputFile($forceDownload, array $info)
     {
-        if(empty($info['path'])) {
+        if (empty($info['path'])) {
             throw new SugarApiException('No file name supplied');
         }
 
-        if (!empty($info['doc_type']) && $info['doc_type'] != "Sugar") {
-            $this->api->setHeader("Location", $info['uri']);
+        if (!empty($info['doc_type']) && $info['doc_type'] != 'Sugar') {
+            $this->api->setHeader('Location', $info['uri']);
             return;
         }
 
-        $this->api->setHeader("Expires", TimeDate::httpTime(time() + 2592000));
+        $this->api->setHeader('Expires', TimeDate::httpTime(time() + 2592000));
 
         if (!$forceDownload) {
-            if(!empty($info['content-type'])) {
-                $this->api->setHeader("Content-Type", $info['content-type']);
-            } else {
-                $this->api->setHeader("Content-Type", "application/octet-stream");
-            }
-        } else {
-            $this->api->setHeader("Content-Type", "application/force-download");
             if (!empty($info['content-type'])) {
                 $this->api->setHeader('Content-Type', $info['content-type']);
             } else {
                 $this->api->setHeader('Content-Type', 'application/octet-stream');
             }
-            if(empty($info['name'])) {
+        } else {
+            $this->api->setHeader('Content-Type', 'application/force-download');
+            if (!empty($info['content-type'])) {
+                $this->api->setHeader('Content-Type', $info['content-type']);
+            } else {
+                $this->api->setHeader('Content-Type', 'application/octet-stream');
+            }
+            if (empty($info['name'])) {
                 $info['name'] = pathinfo($info['path'], PATHINFO_BASENAME);
             }
-            $this->api->setHeader("Content-Disposition", "attachment; filename=\"" . $this->cleanFilename($info['name']) . "\"");
+            $this->api->setHeader('Content-Disposition', 'attachment; filename="' . $this->cleanFilename($info['name']) . '"');
         }
 
         $path = $info['path'];
 
-        if (substr($path, 0, 9) === "upload://") {
+        if (substr($path, 0, 9) === 'upload://') {
             $fileConverter = new FilePhpEntriesConverter();
-            $path = $fileConverter->revert(UploadFile::realpath($path));
-            register_shutdown_function(function () use ($path) {
-                unlink($path);
-            });
+
+            try {
+                //We should abort the process in case if file converter returns SugarException
+                $path = $fileConverter->revert(UploadFile::realpath($path));
+
+                register_shutdown_function(function () use ($path) {
+                    unlink($path);
+                });
+            } catch (SugarException $exception) {
+                throw new SugarApiException($exception->getMessage());
+            }
         }
 
         $this->api->fileResponse($path);

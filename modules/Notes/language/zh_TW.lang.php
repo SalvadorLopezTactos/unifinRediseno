@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => '筆記清單儀表板',
     'LBL_NOTES_RECORD_DASHBOARD' => '備註記錄儀表板',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => '註釋焦點抽屜',
     'LBL_EXTERNAL_USER' => '外部使用者',
     'LBL_EXTERNAL_USER_NAME' => '外部使用者',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '附註時間軸',
 
     'LBL_RELATED_CONTACT' => '相關連絡人',
     'ERR_DELETE_RECORD' => '您必須指定記錄編號才能刪除「帳戶」。',
@@ -126,4 +127,4 @@ $mod_strings = array(
  - 標記為「必填」的欄位在儲存前必須先填寫完整。
  - 按一下「顯示更多」以顯示更多欄位（若需）。
 2. 按一下「儲存」以完成新記錄並返回至上一頁。',
-);
+];

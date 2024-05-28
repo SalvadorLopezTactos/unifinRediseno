@@ -33,7 +33,7 @@ class Dbal
             return [];
         }
 
-        $traverser = new NodeTraverser;
+        $traverser = new NodeTraverser();
         $traverser->addVisitor(new NameResolver());
         $traverser->addVisitor(new ParentConnectingVisitor());
         $dbalUpgradeVisitor = new DbalUpgradeVisitor();
@@ -360,7 +360,7 @@ final class DbalUpgradeVisitor extends NodeVisitorAbstract
      * @param Node $node
      * @return string
      */
-    protected function nodeNameToLowerString(Node $node) : string
+    protected function nodeNameToLowerString(Node $node): string
     {
         if (is_string($node->name)) {
             return \strtolower($node->name);
@@ -376,7 +376,7 @@ final class DbalUpgradeVisitor extends NodeVisitorAbstract
      * @param Node $node
      * @return string
      */
-    protected function nodeNameToString(Node $node) : string
+    protected function nodeNameToString(Node $node): string
     {
         if (is_string($node->name)) {
             return $node->name;

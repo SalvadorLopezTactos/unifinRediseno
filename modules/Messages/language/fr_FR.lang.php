@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'en cours',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Messages',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Tableau de bord d’enregistrements de messages',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie de message',
 ];

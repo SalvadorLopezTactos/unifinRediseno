@@ -35,7 +35,7 @@ class component
      * @param $bean SugarBean instance to load values into
      * @throws Exception Thrown if results could not be loaded into bean
      */
-    public function fillBean($args = array(), $module = null, $bean = null)
+    public function fillBean($args = [], $module = null, $bean = null)
     {
         $result = null;
         if (is_object($bean)) {
@@ -45,7 +45,7 @@ class component
         } elseif (!empty($module) && ($bean = BeanFactory::newBean($module))) {
             return $this->fillBean($args, $module, $bean);
         } else {
-            throw new Exception("Invalid bean");
+            throw new Exception('Invalid bean');
         }
 
         return $result;
@@ -62,9 +62,9 @@ class component
      * @param $bean Array to load SugarBean intances into
      * @throws Exception Thrown if errors are found
      */
-    public function fillBeans($args = array(), $module = null, $beans = array())
+    public function fillBeans($args = [], $module = null, $beans = [])
     {
-        $results = array();
+        $results = [];
         $args = $this->mapInput($args, $module);
         if (empty($args)) {
             $GLOBALS['log']->fatal($GLOBALS['app_strings']['ERR_MISSING_MAPPING_ENTRY_FORM_MODULE']);
@@ -75,13 +75,13 @@ class component
         $list = $filter->getList($args, $module);
 
         if (!empty($list)) {
-            $resultSize = is_countable($list) ? count($list) : 0;
+            $resultSize = safeCount($list);
             if (!empty($beans)) {
-                if ((is_countable($beans) ? count($beans) : 0) != $resultSize) {
+                if (safeCount($beans) != $resultSize) {
                     throw new Exception($GLOBALS['app_strings']['ERR_CONNECTOR_FILL_BEANS_SIZE_MISMATCH']);
                 }
             } else {
-                for ($x=0; $x < $resultSize; $x++) {
+                for ($x = 0; $x < $resultSize; $x++) {
                     $beans[$x] = BeanFactory::newBean($module);
                 }
             }
@@ -104,7 +104,7 @@ class component
             $hasOptions = !empty($map['options']) ? true : false;
             if ($hasOptions) {
                 $options = $map['options'];
-                $optionFields = array();
+                $optionFields = [];
 
                 foreach ($field_defs as $name => $field) {
                     if (!empty($field['options']) && !empty($map['options'][$field['options']]) && !empty($map['beans'][$module][$name])) {
@@ -115,7 +115,7 @@ class component
                 foreach ($results as $key => $bean) {
                     foreach ($optionFields as $sourceField => $sugarField) {
                         $options_map = $options[$field_defs[$sourceField]['options']];
-                        $results[$key]->$sugarField =  !empty($options_map[$results[$key]->$sugarField]) ? $options_map[$results[$key]->$sugarField] : $results[$key]->$sugarField;
+                        $results[$key]->$sugarField = !empty($options_map[$results[$key]->$sugarField]) ? $options_map[$results[$key]->$sugarField] : $results[$key]->$sugarField;
                     }
                 } //foreach
             }
@@ -128,7 +128,7 @@ class component
      * Obtain a list of items
      *
      * @param string $module ideally this method should return a list of beans of type $module.
-     * @param Mixed  $args   this represents the 'query' on the data source.
+     * @param Mixed $args this represents the 'query' on the data source.
      */
 
     /**
@@ -175,7 +175,7 @@ class component
      */
     public function mapInput($inputData, $module)
     {
-        $input_params = array();
+        $input_params = [];
         $map = $this->getMapping();
         if (empty($map['beans'][$module])) {
             return $input_params;
@@ -190,11 +190,11 @@ class component
                 if (!empty($field_defs[$arg]['input'])) {
                     $in_field = $field_defs[$arg]['input'];
                     $temp = explode('.', $in_field);
-                    $eval_code = "\$input_params";
+                    $eval_code = '$input_params';
                     foreach ($temp as $arr_key) {
                         $eval_code .= '[\'' . $arr_key . '\']';
                     }
-                    $eval_code .= "= \$val;";
+                    $eval_code .= '= $val;';
                     eval($eval_code);
                 } else {
                     $input_params[$arg] = $val;
@@ -212,12 +212,12 @@ class component
             $mapping = $map['beans'][$bean->module_dir];
 
             //Check for situation where nothing was mapped or the only field mapped was id
-            if (empty($mapping) || ((is_countable($mapping) ? count($mapping) : 0) == 1 && isset($mapping['id']))) {
+            if (empty($mapping) || (safeCount($mapping) == 1 && isset($mapping['id']))) {
                 $GLOBALS['log']->error($GLOBALS['mod_strings']['ERROR_NO_DISPLAYABLE_MAPPED_FIELDS']);
                 throw new Exception($GLOBALS['mod_strings']['ERROR_NO_DISPLAYABLE_MAPPED_FIELDS']);
             }
 
-            $mapped = array();
+            $mapped = [];
             if (!empty($mapping)) {
                 foreach ($mapping as $source_field => $sugar_field) {
                     $bean->$sugar_field = $this->getFieldValue($bean, $result, $source_field);
@@ -267,7 +267,7 @@ class component
                 if (is_array($function) && isset($function['name'])) {
                     $function = $def['function']['name'];
                     if (!empty($def['function']['include'])) {
-                        require_once($def['function']['include']);
+                        require_once $def['function']['include'];
                     }
                 }
                 $value = $function($bean, $out_field, $value);
@@ -287,7 +287,7 @@ class component
         $this->_source->loadConfig($persister);
     }
 
-    public function setMapping($map = array())
+    public function setMapping($map = [])
     {
         $this->_source->setMapping($map);
     }
@@ -301,7 +301,7 @@ class component
     {
         $map = $this->getMapping();
 
-        return !empty($map['beans'][$module]) ? $map['beans'][$module] : array();
+        return !empty($map['beans'][$module]) ? $map['beans'][$module] : [];
     }
 
     public function getModuleFieldDef($module, $field)
@@ -318,9 +318,9 @@ class component
                 return $field;
             }
         } elseif (!empty($field_defs[$field])) {
-                return $field_defs[$field];
+            return $field_defs[$field];
         } else {
-                return $field;
+            return $field;
         }
     }
 
@@ -345,7 +345,7 @@ class component
             return $this->_source->getProperties();
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -359,7 +359,7 @@ class component
             return $this->_source->getRequiredConfigFields();
         }
 
-        return array();
+        return [];
     }
 
     /**

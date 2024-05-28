@@ -10,26 +10,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['Activity'] = array(
+$dictionary['Activity'] = [
     'table' => 'activities',
-    'fields' => array(
+    'fields' => [
         // Set unnecessary fields from Basic to non-required/non-db.
-        'name' => array(
+        'name' => [
             'name' => 'name',
             'type' => 'varchar',
             'required' => false,
             'source' => 'non-db',
-        ),
+        ],
 
-        'description' => array(
+        'description' => [
             'name' => 'description',
             'type' => 'varchar',
             'required' => false,
             'source' => 'non-db',
-        ),
+        ],
 
         // Add relationship fields.
-        'comments' => array(
+        'comments' => [
             'name' => 'comments',
             'type' => 'link',
             'relationship' => 'comments',
@@ -37,9 +37,9 @@ $dictionary['Activity'] = array(
             'module' => 'Comments',
             'bean_name' => 'Comment',
             'source' => 'non-db',
-        ),
+        ],
 
-        'activities_users' => array(
+        'activities_users' => [
             'name' => 'activities_users',
             'type' => 'link',
             'relationship' => 'activities_users',
@@ -47,9 +47,9 @@ $dictionary['Activity'] = array(
             'module' => 'Users',
             'bean_name' => 'User',
             'source' => 'non-db',
-        ),
+        ],
 
-        'activities_teams' => array(
+        'activities_teams' => [
             'name' => 'activities_teams',
             'type' => 'link',
             'relationship' => 'activities_teams',
@@ -57,158 +57,158 @@ $dictionary['Activity'] = array(
             'module' => 'Users',
             'bean_name' => 'User',
             'source' => 'non-db',
-        ),
+        ],
 
         // Relationships for M2M related beans.
-        'contacts' => array(
+        'contacts' => [
             'name' => 'contacts',
             'type' => 'link',
             'relationship' => 'contact_activities',
             'vname' => 'LBL_LIST_CONTACT_NAME',
             'source' => 'non-db',
-        ),
-        'cases' => array(
+        ],
+        'cases' => [
             'name' => 'cases',
             'type' => 'link',
             'relationship' => 'case_activities',
             'vname' => 'LBL_CASES',
             'source' => 'non-db',
-        ),
-        'accounts' => array(
+        ],
+        'accounts' => [
             'name' => 'accounts',
             'type' => 'link',
             'relationship' => 'account_activities',
             'source' => 'non-db',
             'vname' => 'LBL_ACCOUNTS',
-        ),
-        'opportunities' => array(
+        ],
+        'opportunities' => [
             'name' => 'opportunities',
             'type' => 'link',
             'relationship' => 'opportunity_activities',
             'source' => 'non-db',
             'vname' => 'LBL_OPPORTUNITIES',
-        ),
-        'quotas' => array(
+        ],
+        'quotas' => [
             'name' => 'quotas',
             'type' => 'link',
             'relationship' => 'quota_activities',
             'source' => 'non-db',
             'vname' => 'LBL_QUOTAS',
-        ),
-        'leads' => array(
+        ],
+        'leads' => [
             'name' => 'leads',
             'type' => 'link',
             'relationship' => 'lead_activities',
             'source' => 'non-db',
             'vname' => 'LBL_LEADS',
-        ),
-        'products' => array(
+        ],
+        'products' => [
             'name' => 'products',
             'type' => 'link',
             'relationship' => 'product_activities',
             'source' => 'non-db',
             'vname' => 'LBL_PRODUCTS',
-        ),
-        'revenuelineitems' => array(
+        ],
+        'revenuelineitems' => [
             'name' => 'revenuelineitems',
             'type' => 'link',
             'relationship' => 'revenuelineitem_activities',
             'source' => 'non-db',
             'vname' => 'LBL_REVENUELINEITEMS',
-            'workflow' => false
-        ),
-        'quotes' => array(
+            'workflow' => false,
+        ],
+        'quotes' => [
             'name' => 'quotes',
             'type' => 'link',
             'relationship' => 'quote_activities',
             'vname' => 'LBL_QUOTES',
             'source' => 'non-db',
-        ),
-        'contracts' => array(
+        ],
+        'contracts' => [
             'name' => 'contracts',
             'type' => 'link',
             'relationship' => 'contract_activities',
             'source' => 'non-db',
             'vname' => 'LBL_CONTRACTS',
-        ),
-        'bugs' => array(
+        ],
+        'bugs' => [
             'name' => 'bugs',
             'type' => 'link',
             'relationship' => 'bug_activities',
             'source' => 'non-db',
             'vname' => 'LBL_BUGS',
-        ),
-        'meetings' => array(
+        ],
+        'meetings' => [
             'name' => 'meetings',
             'type' => 'link',
             'relationship' => 'meeting_activities',
             'source' => 'non-db',
             'vname' => 'LBL_MEETINGS',
-        ),
-        'calls' => array(
+        ],
+        'calls' => [
             'name' => 'calls',
             'type' => 'link',
             'relationship' => 'call_activities',
             'source' => 'non-db',
             'vname' => 'LBL_CALLS',
-        ),
-        'tasks' => array(
+        ],
+        'tasks' => [
             'name' => 'tasks',
             'type' => 'link',
             'relationship' => 'task_activities',
             'source' => 'non-db',
             'vname' => 'LBL_TASKS',
-        ),
-        'notes' => array(
-            'name'         => 'notes',
-            'type'         => 'link',
+        ],
+        'notes' => [
+            'name' => 'notes',
+            'type' => 'link',
             'relationship' => 'note_activities',
-            'source'       => 'non-db',
-            'vname'        => 'LBL_NOTES',
-        ),
-        'kbcontents' => array(
+            'source' => 'non-db',
+            'vname' => 'LBL_NOTES',
+        ],
+        'kbcontents' => [
             'name' => 'kbcontents',
             'type' => 'link',
             'relationship' => 'kbcontent_activities',
             'source' => 'non-db',
             'vname' => 'LBL_KBCONTENTS',
-        ),
-        'kbtemplates' => array(
+        ],
+        'kbtemplates' => [
             'name' => 'kbtemplates',
             'type' => 'link',
             'relationship' => 'kbcontenttemplate_activities',
             'source' => 'non-db',
             'vname' => 'LBL_KBTEMPLATES',
-        ),
-        'campaigns' => array(
+        ],
+        'campaigns' => [
             'name' => 'campaigns',
             'type' => 'link',
             'relationship' => 'campaign_activities',
             'source' => 'non-db',
             'vname' => 'LBL_CAMPAIGN',
-        ),
+        ],
 
-        'pmse_Project' => array(
-            'name'         => 'pmse_Project',
-            'type'         => 'link',
+        'pmse_Project' => [
+            'name' => 'pmse_Project',
+            'type' => 'link',
             'relationship' => 'pmse_project_activities',
-            'source'       => 'non-db',
-            'vname'        => 'LBL_PMSE_PROJECT_ACTIVITIES_TITLE',
-        ),
-        'pmse_Business_Rules' => array(
-            'name'         => 'pmse_Business_Rules',
-            'type'         => 'link',
+            'source' => 'non-db',
+            'vname' => 'LBL_PMSE_PROJECT_ACTIVITIES_TITLE',
+        ],
+        'pmse_Business_Rules' => [
+            'name' => 'pmse_Business_Rules',
+            'type' => 'link',
             'relationship' => 'pmse_business_rules_activities',
-            'source'       => 'non-db',
-            'vname'        => 'LBL_PMSE_BUSINESS_RULES_ACTIVITIES_TITLE',
-        ),
-        'pmse_Emails_Templates' => array(
-            'name'         => 'pmse_Emails_Templates',
-            'type'         => 'link',
+            'source' => 'non-db',
+            'vname' => 'LBL_PMSE_BUSINESS_RULES_ACTIVITIES_TITLE',
+        ],
+        'pmse_Emails_Templates' => [
+            'name' => 'pmse_Emails_Templates',
+            'type' => 'link',
             'relationship' => 'pmse_emails_templates_activities',
-            'source'       => 'non-db',
-            'vname'        => 'LBL_PMSE_EMAILS_TEMPLATES_ACTIVITIES_TITLE',
-        ),
+            'source' => 'non-db',
+            'vname' => 'LBL_PMSE_EMAILS_TEMPLATES_ACTIVITIES_TITLE',
+        ],
         'purchasedlineitems' => [
             'name' => 'purchasedlineitems',
             'type' => 'link',
@@ -218,59 +218,59 @@ $dictionary['Activity'] = array(
         ],
 
         // Add table columns.
-        'parent_id' => array(
-            'name'     => 'parent_id',
-            'type'     => 'id',
-        ),
+        'parent_id' => [
+            'name' => 'parent_id',
+            'type' => 'id',
+        ],
 
-        'parent_type' => array(
+        'parent_type' => [
             'name' => 'parent_type',
             'type' => 'varchar',
-            'len'  => 100,
-        ),
+            'len' => 100,
+        ],
 
-        'activity_type' => array(
+        'activity_type' => [
             'name' => 'activity_type',
             'type' => 'varchar',
-            'len'  => 100,
+            'len' => 100,
             'required' => true,
-        ),
+        ],
 
-        'data' => array(
+        'data' => [
             'name' => 'data',
             'type' => 'json',
             'dbType' => 'longtext',
             'required' => true,
-        ),
+        ],
 
-        'comment_count' => array(
+        'comment_count' => [
             'name' => 'comment_count',
             'type' => 'int',
             'required' => true,
             'default' => 0,
-        ),
+        ],
 
-        'last_comment' => array(
+        'last_comment' => [
             'name' => 'last_comment',
             'type' => 'json',
             'dbType' => 'longtext',
             'required' => true,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'activity_records',
             'type' => 'index',
-            'fields' => array('parent_type', 'parent_id'),
-        ),
-        array(
+            'fields' => ['parent_type', 'parent_id'],
+        ],
+        [
             'name' => 'activity_type_date',
             'type' => 'index',
-            'fields' => array('activity_type', 'date_entered'),
-        ),
-    ),
-    'relationships' => array(
-        'comments' => array(
+            'fields' => ['activity_type', 'date_entered'],
+        ],
+    ],
+    'relationships' => [
+        'comments' => [
             'lhs_module' => 'Activities',
             'lhs_table' => 'activities',
             'lhs_key' => 'id',
@@ -278,8 +278,8 @@ $dictionary['Activity'] = array(
             'rhs_table' => 'comments',
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
-        ),
-    ),
+        ],
+    ],
     // @TODO Fix the Default and Basic SugarObject templates so that Basic
     // implements Default. This would allow the application of various
     // implementations on Basic without forcing Default to have those so that
@@ -289,13 +289,13 @@ $dictionary['Activity'] = array(
     // implementation fields. Once there is a separation of default and basic
     // templates we can safely remove these as this module will implement
     // default instead of basic.
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'commentlog',
-    ),
-);
+    ],
+];
 
-VardefManager::createVardef('ActivityStream/Activities', 'Activity', array('basic'));
+VardefManager::createVardef('ActivityStream/Activities', 'Activity', ['basic']);
 
 //Need to override the relationship because lhs_module is populed with ActivityStream/Activities instead of module name Activities
 $dictionary['Activity']['relationships']['activity_activities']['lhs_module'] = 'Activities';

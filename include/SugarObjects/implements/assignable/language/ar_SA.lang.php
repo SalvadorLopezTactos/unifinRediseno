@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-'LBL_ASSIGNED_TO_ID'=>'معرّف المستخدم المعين',
-'LBL_ASSIGNED_TO_NAME' => 'تعيين إلى',
-);
+$mod_strings = [
+    'LBL_ASSIGNED_TO_ID' => 'معرّف المستخدم المعين',
+    'LBL_ASSIGNED_TO_NAME' => 'تعيين إلى',
+];

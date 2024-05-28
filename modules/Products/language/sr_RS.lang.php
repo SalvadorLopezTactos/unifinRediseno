@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Kontrolna tabla liste ponuđenih stavki',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Kontrolna tabla za zapise o prodatim stavkama',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za stavke sa ponudom',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija ponuđenih stavki',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Proizvod kampanje',
     'LBL_MODULE_NAME' => 'Proizvodi',
@@ -183,4 +184,4 @@ Da bi {{module_name}} bio kreiran:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (nova ponuđena stavka)',
     'LBL_DISCOUNT_PERCENT' => '% Procenat',
     'LBL_DISCOUNT_TYPE' => 'Vrsta popusta',
-);
+];

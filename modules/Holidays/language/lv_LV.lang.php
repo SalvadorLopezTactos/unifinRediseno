@@ -32,7 +32,7 @@ $mod_strings = [
 
     'LBL_RESOURCE' => 'Resurss:',
     'LBL_PERSON_TYPE' => 'Personas veids',
-    'LBL_RELATED_MODULE'=> 'Saistītais modulis:',
+    'LBL_RELATED_MODULE' => 'Saistītais modulis:',
 
     // For HolidaysQuickCreate.php
     'LBL_SELECT_RESOURCE_TYPE' => 'Izvēlēties resursa veidu...',

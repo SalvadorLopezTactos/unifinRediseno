@@ -10,19 +10,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'EmailTemplates';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
-        'route'=>'#EmailTemplates/create',
-        'label' =>'LNK_NEW_EMAIL_TEMPLATE',
-        'acl_action'=>'create',
-        'acl_module'=>'EmailTemplates',
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
+        'route' => '#EmailTemplates/create',
+        'label' => 'LNK_NEW_EMAIL_TEMPLATE',
+        'acl_action' => 'create',
+        'acl_module' => 'EmailTemplates',
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route'=>'#' . $module_name,
-        'label' =>'LNK_EMAIL_TEMPLATE_LIST',
-        'acl_action'=>'list',
-        'acl_module'=>'EmailTemplates',
+    ],
+    [
+        'route' => '#' . $module_name,
+        'label' => 'LNK_EMAIL_TEMPLATE_LIST',
+        'acl_action' => 'list',
+        'acl_module' => 'EmailTemplates',
         'icon' => 'sicon-list-view',
-    ),
-);
+    ],
+];

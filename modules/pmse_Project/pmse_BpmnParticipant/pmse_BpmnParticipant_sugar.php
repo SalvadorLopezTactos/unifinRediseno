@@ -15,41 +15,43 @@
  * PLEASE DO NOT CHANGE THIS CLASS
  * PLACE ANY CUSTOMIZATIONS IN pmse_BpmnParticipant
  */
-class pmse_BpmnParticipant_sugar extends Basic {
-	var $new_schema = true;
-	var $module_dir = 'pmse_Project/pmse_BpmnParticipant';
+class pmse_BpmnParticipant_sugar extends Basic
+{
+    public $new_schema = true;
+    public $module_dir = 'pmse_Project/pmse_BpmnParticipant';
     public $module_name = 'pmse_BpmnParticipant';
-	var $object_name = 'pmse_BpmnParticipant';
-	var $table_name = 'pmse_bpmn_participant';
-	var $importable = false;
-    var $disable_custom_fields = true;
-    var $id;
-    var $name;
-    var $date_entered;
-    var $date_modified;
-    var $modified_user_id;
-    var $modified_by_name;
-    var $created_by;
-    var $created_by_name;
-    var $description;
-    var $deleted;
-    var $created_by_link;
-    var $modified_user_link;
-    var $activities;
-    var $assigned_user_id;
-    var $assigned_user_name;
-    var $assigned_user_link;
-    var $par_uid;
-    var $prj_id;
-    var $pro_id;
-    var $lns_id;
-    var $par_minimum;
-    var $par_maximum;
-    var $par_num_participants;
-    var $par_is_horizontal;
+    public $object_name = 'pmse_BpmnParticipant';
+    public $table_name = 'pmse_bpmn_participant';
+    public $importable = false;
+    public $disable_custom_fields = true;
+    public $id;
+    public $name;
+    public $date_entered;
+    public $date_modified;
+    public $modified_user_id;
+    public $modified_by_name;
+    public $created_by;
+    public $created_by_name;
+    public $description;
+    public $deleted;
+    public $created_by_link;
+    public $modified_user_link;
+    public $activities;
+    public $assigned_user_id;
+    public $assigned_user_name;
+    public $assigned_user_link;
+    public $par_uid;
+    public $prj_id;
+    public $pro_id;
+    public $lns_id;
+    public $par_minimum;
+    public $par_maximum;
+    public $par_num_participants;
+    public $par_is_horizontal;
 
 
-	public function __construct(){
-		parent::__construct();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -21,11 +22,11 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
     // override_subpanel_name => override_subpanel_list_view
     // get_subpanel_data => link
     // title_key => label
-    protected static $conversionKeys = array(
-            'override_subpanel_name' => 'override_subpanel_list_view',
-            'get_subpanel_data' => 'link',
-            'title_key' => 'label',
-    );
+    protected static $conversionKeys = [
+        'override_subpanel_name' => 'override_subpanel_list_view',
+        'get_subpanel_data' => 'link',
+        'title_key' => 'label',
+    ];
 
     // don't delete old layoutdefs
     public $deleteOld = false;
@@ -39,17 +40,17 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
      * Storage for labels to create
      * @var array
      */
-    protected $labels = array();
+    protected $labels = [];
 
     /**
      * Subpanels full data by module
      * @var array
      */
-    protected static $supanelData = array();
+    protected static $supanelData = [];
 
     public function loadSubpanelData($module)
     {
-        if(!isset(self::$supanelData[$module])) {
+        if (!isset(self::$supanelData[$module])) {
             $layout_defs = null;
             if (file_exists("modules/{$module}/metadata/subpaneldefs.php")) {
                 include "modules/{$module}/metadata/subpaneldefs.php";
@@ -60,10 +61,10 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
             if (file_exists("custom/modules/{$module}/Ext/Layoutdefs/layoutdefs.ext.php")) {
                 include "custom/modules/{$module}/Ext/Layoutdefs/layoutdefs.ext.php";
             }
-            if($layout_defs[$module]['subpanel_setup']) {
+            if ($layout_defs[$module]['subpanel_setup']) {
                 self::$supanelData[$module] = $layout_defs[$module]['subpanel_setup'];
             } else {
-                self::$supanelData[$module] = array();
+                self::$supanelData[$module] = [];
             }
         }
     }
@@ -91,7 +92,7 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
      * @param array $newdefs current sidecar definition
      * @return array New sidecar definition
      */
-    protected function extractSidecarData($legacyDefs, $fullDefs, $newdefs = array())
+    protected function extractSidecarData($legacyDefs, $fullDefs, $newdefs = [])
     {
         unset($fullDefs['top_buttons']); // we don't care about the buttons for now
         $sidecarDef = $this->metaDataConverter->fromLegacySubpanelLayout($fullDefs);
@@ -116,7 +117,7 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
     protected function havePanel($module)
     {
         foreach (self::$supanelData[$this->module] as $key => $def) {
-            if(!empty($def['module']) && $def['module'] == $module) {
+            if (!empty($def['module']) && $def['module'] == $module) {
                 return true;
             }
         }
@@ -129,19 +130,19 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
     protected function convertActivityPanel()
     {
         $this->collection = true;
-        $done_modules = array();
-        $convertSubpanelDefs = array();
-        $label_prefix = "LBL_".strtoupper($this->module)."_";
+        $done_modules = [];
+        $convertSubpanelDefs = [];
+        $label_prefix = "LBL_" . strtoupper($this->module) . "_";
         foreach ($this->legacyViewdefs as $name => $def) {
             $convertSubpanelDefs[$name] = array_intersect_key($def, self::$conversionKeys);
         }
 
-        foreach(array('activities', 'history') as $part) {
-            foreach($this->legacyViewdefs[$part]['collection_list'] as $key => $actpanel) {
-                if(empty($actpanel['module']) || isset($done_modules[$actpanel['module']])) {
+        foreach (['activities', 'history'] as $part) {
+            foreach ($this->legacyViewdefs[$part]['collection_list'] as $key => $actpanel) {
+                if (empty($actpanel['module']) || isset($done_modules[$actpanel['module']])) {
                     continue;
                 }
-                if($this->havePanel($actpanel['module'])) {
+                if ($this->havePanel($actpanel['module'])) {
                     // already have another panel for this module - skip it
                     $done_modules[$actpanel['module']] = true;
                     continue;
@@ -157,11 +158,11 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
                 $newdefs = $this->extractSidecarData($paneldata, $fullData);
 
                 if (!empty($newdefs)) {
-                    if(empty($newdefs['override_subpanel_list_view'])) {
+                    if (empty($newdefs['override_subpanel_list_view'])) {
                         $newdefs['layout'] = 'subpanel';
                     }
                     $ukey = strtoupper($key);
-                    $newdefs['label'] = $label_prefix."{$ukey}_FROM_{$ukey}_TITLE";
+                    $newdefs['label'] = $label_prefix . "{$ukey}_FROM_{$ukey}_TITLE";
                     $this->sidecarViewdefs[$key] = $newdefs;
                     $this->labels[$newdefs['label']] = $actpanel['module'];
                     $this->logUpgradeStatus("Adding subpanel $key from $part");
@@ -179,12 +180,12 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
      */
     public function convertLegacyViewDefsToSidecar()
     {
-        if(empty($this->legacyViewdefs)) {
+        if (empty($this->legacyViewdefs)) {
             return true;
         }
 
         // detect activity/history panel
-        if(isset($this->legacyViewdefs['activities']['module'])
+        if (isset($this->legacyViewdefs['activities']['module'])
             && $this->legacyViewdefs['activities']['module'] == 'Activities'
             && isset($this->legacyViewdefs['activities']['collection_list'])
             && isset($this->legacyViewdefs['history']['module'])
@@ -204,8 +205,8 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
         }
 
         $bean = BeanFactory::newBean($this->module);
-        $newdefs = array();
-        $allNewDefs = array();
+        $newdefs = [];
+        $allNewDefs = [];
 
         // find the subpaneldef that contains the $convertSubpanelDefs
         foreach (self::$supanelData[$this->module] as $key => $def) {
@@ -254,7 +255,6 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
                 }
                 $allNewDefs[$key] = $newdefs;
             }
-
         }
 
         if (!empty($allNewDefs)) {
@@ -266,7 +266,6 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
                 $this->collection = false;
             }
         }
-
     }
 
     /**
@@ -280,7 +279,7 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
         ) {
             $subpanelView = $this->sidecarViewdefs['override_subpanel_list_view']['view'];
             $subpanelLink = self::$supanelData[$this->module][$this->sidecarViewdefs['override_subpanel_list_view']['link']];
-            
+
             $fileName = "modules/{$subpanelLink['module']}/clients/{$this->client}/views/{$subpanelView}/{$subpanelView}.php";
             $subpanelFile = "modules/{$subpanelLink['module']}/metadata/subpanels/{$subpanelLink['override_subpanel_name']}.php";
 
@@ -290,26 +289,28 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
                 return true;
             }
         }
-        
-        if($this->collection) {
+
+        if ($this->collection) {
             $allviewdefs = $this->sidecarViewdefs;
 
-            foreach($allviewdefs as $key => $subpanel) {
+            foreach ($allviewdefs as $key => $subpanel) {
                 $this->sidecarViewdefs = $subpanel;
-                if(!$this->handleSaveArray("viewdefs['{$this->module}']['{$this->client}']['layout']['subpanels']['components'][]",
-                    "custom/Extension/modules/{$this->module}/Ext/clients/{$this->client}/layouts/subpanels/" . "{$key}_".basename($this->fullpath))) {
+                if (!$this->handleSaveArray(
+                    "viewdefs['{$this->module}']['{$this->client}']['layout']['subpanels']['components'][]",
+                    "custom/Extension/modules/{$this->module}/Ext/clients/{$this->client}/layouts/subpanels/" . "{$key}_" . basename($this->fullpath)
+                )) {
                     return false;
                 }
             }
             // save labels for subpanels
-            if(!empty($this->labels)) {
+            if (!empty($this->labels)) {
                 $languages = get_languages();
                 $enstrings = return_app_list_strings_language("en_us");
-                foreach($languages as $langKey => $langName) {
+                foreach ($languages as $langKey => $langName) {
                     $strings = return_app_list_strings_language($langKey);
-                    $reslabels = array();
-                    foreach($this->labels as $label => $module) {
-                        if(!empty($strings['moduleList'][$module])) {
+                    $reslabels = [];
+                    foreach ($this->labels as $label => $module) {
+                        if (!empty($strings['moduleList'][$module])) {
                             $reslabels[$label] = $strings['moduleList'][$module];
                         } elseif ($enstrings['moduleList'][$module]) {
                             $reslabels[$label] = $enstrings['moduleList'][$module];
@@ -318,18 +319,22 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
                         }
                     }
                     $labeldata = "<?php\n";
-                    foreach($reslabels as $label => $str) {
-                        $labeldata .= "\$mod_strings['$label'] = ".var_export($str, true).";\n";
+                    foreach ($reslabels as $label => $str) {
+                        $labeldata .= "\$mod_strings['$label'] = " . var_export($str, true) . ";\n";
                     }
-                    file_put_contents("custom/Extension/modules/{$this->module}/Ext/Language/{$langKey}.{$this->client}_".basename($this->fullpath), $labeldata);
+                    file_put_contents(
+                        "custom/Extension/modules/{$this->module}/Ext/Language/{$langKey}.{$this->client}_" . basename($this->fullpath),
+                        $labeldata
+                    );
                 }
             }
 
             return true;
         } else {
-            return $this->handleSaveArray("viewdefs['{$this->module}']['{$this->client}']['layout']['subpanels']['components'][]",
-                "custom/Extension/modules/{$this->module}/Ext/clients/{$this->client}/layouts/subpanels/" . basename($this->fullpath));
+            return $this->handleSaveArray(
+                "viewdefs['{$this->module}']['{$this->client}']['layout']['subpanels']['components'][]",
+                "custom/Extension/modules/{$this->module}/Ext/clients/{$this->client}/layouts/subpanels/" . basename($this->fullpath)
+            );
         }
     }
 }
-

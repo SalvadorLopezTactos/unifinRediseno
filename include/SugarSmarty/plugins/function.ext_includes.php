@@ -50,11 +50,10 @@ r31615 - 2008-02-05 10:52:49 -0800 (Tue, 05 Feb 2008) - dwheeler - Added Ext the
 */
 
 
-
 function smarty_function_ext_includes($params, &$smarty)
 {
-    $ret = '<link rel="stylesheet" type="text/css" href="' . getJSPath("themes/default/ext/resources/css/ext-all.css") . '" />'
-         . '<link rel="stylesheet" type="text/css" href="' . getJSPath("themes/default/ext/resources/css/xtheme-gray.css") . '" />';
+    $ret = '<link rel="stylesheet" type="text/css" href="' . getJSPath('themes/default/ext/resources/css/ext-all.css') . '" />'
+        . '<link rel="stylesheet" type="text/css" href="' . getJSPath('themes/default/ext/resources/css/xtheme-gray.css') . '" />';
 
     global $theme;
     if (is_dir("themes/$theme/ext/resources/css")) {

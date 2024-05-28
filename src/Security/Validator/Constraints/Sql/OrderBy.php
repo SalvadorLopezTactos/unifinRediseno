@@ -23,9 +23,9 @@ class OrderBy extends Constraint
 {
     public const ERROR_ILLEGAL_FORMAT = 1;
 
-    protected static $errorNames = array(
+    protected static $errorNames = [
         self::ERROR_ILLEGAL_FORMAT => 'ERROR_ILLEGAL_FORMAT',
-    );
+    ];
 
     public $message = 'Order by violation: %msg%';
 }

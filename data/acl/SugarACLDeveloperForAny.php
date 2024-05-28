@@ -15,7 +15,6 @@
  */
 class SugarACLDeveloperForAny extends SugarACLStrategy
 {
-
     /**
      * Only allow access to users with the user admin setting
      * @param string $module
@@ -26,7 +25,7 @@ class SugarACLDeveloperForAny extends SugarACLStrategy
     public function checkAccess($module, $view, $context)
     {
         $current_user = $this->getCurrentUser($context);
-        if ( !$current_user ) {
+        if (!$current_user) {
             return false;
         }
 
@@ -37,11 +36,10 @@ class SugarACLDeveloperForAny extends SugarACLStrategy
         // if they are a developer for any module
         $devForAny = $current_user->isDeveloperForAnyModule();
 
-        if(!empty($devForAny)) {
+        if (!empty($devForAny)) {
             return true;
         }
 
         return false;
     }
-
 }

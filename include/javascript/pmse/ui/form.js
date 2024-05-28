@@ -174,7 +174,7 @@ PMSE.Form.prototype.initObject = function(options) {
  */
 PMSE.Form.prototype._setErrorMessage = function() {
     var iconSpan = this.createHTMLElement('span');
-    iconSpan.className = 'fa fa-warning';
+    iconSpan.className = 'sicon sicon-warning-lg';
     var messageLabel = this.createHTMLElement('span');
     messageLabel.innerHTML = translate('LBL_PMSE_FORM_ERROR');
     this._errorMessage = this.createHTMLElement('div');
@@ -674,4 +674,20 @@ PMSE.Form.prototype.createHTML = function() {
 PMSE.Form.prototype.setParent = function(parent) {
     this.parent = parent;
     return this;
+};
+
+PMSE.Form.prototype._errorDecoration = function(fields) {
+    _.each(fields, function(field) {
+        const isNotEmptyValue = !_.isEmpty(field.value);
+
+        if (_.isFunction(field.decorateRequiredField)) {
+            field.setValid(isNotEmptyValue, true);
+        } else {
+            field.setValid(isNotEmptyValue);
+        }
+    });
+};
+
+PMSE.Form.prototype._toggleErrorMessage = function(isValid) {
+    $(this._errorMessage).toggleClass('pmse-form-error-off', isValid);
 };

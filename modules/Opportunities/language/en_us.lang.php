@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Opportunities List Dashboard',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Opportunities Record Dashboard',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Quotes',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Opportunities By A Dynamic Account',
+    'LBL_THIS_QUARTER_OPPORTUNITIES' => 'This Quarter\'s Opportunities',
+    'LBL_MY_OPEN_EXISTING_BUSINESS' => 'My Open Existing Business Opportunities',
+    'LBL_MY_OPEN_OPPORTUNITIES' => 'My Open Opportunities',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Pipeline Total is ',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Opportunity Role',
+    'LBL_OPPORTUNITY_ROLE' => 'Opportunity Role',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notes',
     'LBL_TAB_OPPORTUNITY' => '{{module}} Review',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'By clicking Confirm, you will be erasing ALL Forecasts data and changing your Opportunities View. If this is not what you intended, click cancel to return to previous settings.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'By clicking Confirm, you will be erasing ALL Forecasts data and changing your Opportunities View. '
-        .'Also ALL Process Definitions with a target module of Revenue Line Items will be disabled. '
-        .'If this is not what you intended, click cancel to return to previous settings.',
+        . 'Also ALL Process Definitions with a target module of Revenue Line Items will be disabled. '
+        . 'If this is not what you intended, click cancel to return to previous settings.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'If all Revenue Line Items are closed and at least one was won,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'the Opportunity Sales Stage is set to "Closed Won".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'If all Revenue Line Items are in the "Closed Lost" Sales Stage,',
@@ -261,4 +264,9 @@ To create an {{module_name}}:
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Opportunity Close Prediction',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'View prediction details for a specific Opportunity',
-);
+    'LBL_AI_WINRATE' => 'Win Rate',
+    'LBL_AI_WONOPP' => 'Won Opportunities',
+    'LBL_AI_CLOSINGTIME' => 'Closing time',
+    'LBL_AI_CLOSEDOPP' => 'Closed Opportunities',
+    'LBL_AI_LEADTIMESPAN' => 'Time Between Opportunity Creation and Closed Won',
+];

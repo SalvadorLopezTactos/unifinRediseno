@@ -26,12 +26,11 @@ ARGS:
   3) $_REQUEST['return_action']; :
 */
 
-require_once('include/formbase.php');
+require_once 'include/formbase.php';
 
 $focus = BeanFactory::newBean($_REQUEST['module']);
-if (  empty($_REQUEST['linked_id']) || empty($_REQUEST['linked_field'])  || empty($_REQUEST['record']))
-{
-	die("need linked_field, linked_id and record fields");
+if (empty($_REQUEST['linked_id']) || empty($_REQUEST['linked_field']) || empty($_REQUEST['record'])) {
+    die('need linked_field, linked_id and record fields');
 }
 $linked_field = $_REQUEST['linked_field'];
 $record = $_REQUEST['record'];
@@ -45,26 +44,25 @@ $query = sprintf(
     $projectTaskBean->db->quoted($linked_id),
     $projectTaskBean->db->quoted($record)
 );
-$result = $projectTaskBean->db->query($query, true, "Unable to select project task id from user project");
+$result = $projectTaskBean->db->query($query, true, 'Unable to select project task id from user project');
 $row = $projectTaskBean->db->fetchByAssoc($result);
 
-while ($row != null){
+while ($row != null) {
     $update_query = sprintf(
         'UPDATE project_task SET resource_id = NULL, assigned_user_id = NULL WHERE id = %s',
         $projectTaskBean->db->quoted($row['id'])
     );
-	$projectTaskBean->db->query($update_query, true, "Unable to update resource for project task");
+    $projectTaskBean->db->query($update_query, true, 'Unable to update resource for project task');
 
-	$row = $projectTaskBean->db->fetchByAssoc($result);
+    $row = $projectTaskBean->db->fetchByAssoc($result);
 }
 
 // cut it off:
 $focus->load_relationship($linked_field);
-$focus->$linked_field->delete($record,$linked_id);
+$focus->$linked_field->delete($record, $linked_id);
 
-$GLOBALS['log']->debug("deleted relationship: bean: {$_REQUEST['module']}, linked_field: $linked_field, linked_id:$linked_id" );
-if(empty($_REQUEST['refresh_page'])){
-	handleRedirect();
+$GLOBALS['log']->debug("deleted relationship: bean: {$_REQUEST['module']}, linked_field: $linked_field, linked_id:$linked_id");
+if (empty($_REQUEST['refresh_page'])) {
+    handleRedirect();
 }
 exit;
-

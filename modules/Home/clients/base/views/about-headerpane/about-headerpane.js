@@ -28,7 +28,6 @@
             version: serverInfo.version,
             custom_version: serverInfo.custom_version,
             build: serverInfo.build,
-            flav: serverInfo.flavor[0]
         };
         return app.lang.get(title, this.module, aboutVars) + this._getMarketingVersion(serverInfo.marketing_version);
     },

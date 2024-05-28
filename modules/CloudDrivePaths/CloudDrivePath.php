@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,6 +10,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class CloudDrivePath extends Basic
 {
     public $id;
@@ -23,8 +25,8 @@ class CloudDrivePath extends Basic
     public $record_id;
     public $module;
     public $drive_id;
-    public $table_name  = 'cloud_drive_paths';
+    public $table_name = 'cloud_drive_paths';
     public $object_name = 'CloudDrivePath';
-    public $module_dir  = 'CloudDrivePaths';
-    public $new_schema  = true;
+    public $module_dir = 'CloudDrivePaths';
+    public $new_schema = true;
 }

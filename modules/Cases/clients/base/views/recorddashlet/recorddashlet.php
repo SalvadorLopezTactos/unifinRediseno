@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -63,11 +64,11 @@ $viewdefs['Cases']['base']['view']['recorddashlet'] = [
             'header' => true,
             'fields' => [
                 [
-                    'name'          => 'picture',
-                    'type'          => 'avatar',
-                    'size'          => 'large',
+                    'name' => 'picture',
+                    'type' => 'avatar',
+                    'size' => 'large',
                     'dismiss_label' => true,
-                    'readonly'      => true,
+                    'readonly' => true,
                 ],
                 'name',
             ],
@@ -91,13 +92,33 @@ $viewdefs['Cases']['base']['view']['recorddashlet'] = [
                     'name' => 'case_number',
                     'readonly' => true,
                 ],
-                'priority',
+                [
+                    'name' => 'follow_up_datetime',
+                    'label' => 'LBL_FOLLOW_UP_DATETIME',
+                    'type' => 'fieldset',
+                    'inline' => true,
+                    'fields' => [
+                        [
+                            'name' => 'follow_up_datetime',
+                            'enabled' => true,
+                            'readonly' => true,
+                            'type' => 'follow-up-datetime-colorcoded',
+                            'hide_on_edit' => true,
+                            'color_code_classes' => [
+                                'overdue' => 'expired',
+                                'in_a_day' => 'soon-expired',
+                                'more_than_a_day' => 'white black-text',
+                            ],
+                        ],
+                        [
+                            'name' => 'follow_up_datetime',
+                            'enabled' => true,
+                            'type' => 'datetimecombo',
+                        ],
+                    ],
+                ],
+                'primary_contact_name',
                 'account_name',
-                'portal_viewable',
-                'type',
-                'source',
-                'status',
-                'assigned_user_name',
                 [
                     'name' => 'description',
                     'nl2br' => true,
@@ -127,6 +148,14 @@ $viewdefs['Cases']['base']['view']['recorddashlet'] = [
                         'upload_id',
                     ],
                 ],
+                'priority',
+                [
+                    'name' => 'status',
+                    'type' => 'case-status',
+                    'label' => 'LBL_STATUS',
+                ],
+                'type',
+                'source',
                 'tag',
                 'business_center_name',
                 'request_close',
@@ -141,12 +170,16 @@ $viewdefs['Cases']['base']['view']['recorddashlet'] = [
             'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => [
-                'follow_up_datetime',
-                'resolved_datetime',
-                'resolution',
+                'assigned_user_name',
                 'team_name',
-                [],
-                [],
+                [
+                    'name' => 'resolution',
+                    'span' => 12,
+                ],
+                [
+                    'name' => 'resolved_datetime',
+                    'span' => 12,
+                ],
                 [
                     'name' => 'date_entered_by',
                     'readonly' => true,

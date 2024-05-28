@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Zobrazenie dlaždíc',
     'LBL_MODULE_NAME_SINGULAR' => 'Zobrazenie dlaždíc',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'Zobrazenie dlaždíc',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => 'Povolené moduly',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'Moduly zobrazenia dlaždíc',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'Nastavenia modulu',
-    'LBL_PIPELINE_TABLE_HEADER' => "Vyberte pole, ktorého hodnoty sa použijú ako stĺpce",
+    'LBL_PIPELINE_TABLE_HEADER' => 'Vyberte pole, ktorého hodnoty sa použijú ako stĺpce',
     'LBL_PIPELINE_TILE_HEADER' => 'Pole hlavičky dlaždíc',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => 'Dostupné stĺpce',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => 'Polia tela dlaždíc',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'Náhľad dlaždíc',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'Príliš veľa polí na dlaždici.',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => 'Pred tým, ako budete pokračovať, vyriešte chyby v nasledujúcich kartách nastavení modulov:<br><br>',
-);
+    'LBL_MODULE_SELECTION' => 'Vyberte modul, ktorý chcete zobraziť a nakonfigurovať nižšie',
+    'LBL_SHOW_COLUMN_COUNT' => 'Zobraziť počet stĺpcov',
+    'LBL_SHOW_COLUMN_TOTAL' => 'Zobraziť celkový počet stĺpcov',
+    'LBL_TOTAL_FIELD' => 'Pole Celkom',
+];

@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Dashboard für Liste der angebotenen Produkte',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Dashboard für Berichte der angebotenen Produkte',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für angebotene Produkte',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Zeitleiste für angebotene Einzelposten',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Kampagnen-Produkt',
     'LBL_MODULE_NAME' => 'Produkte',
@@ -182,4 +183,4 @@ So erstellen Sie ein Modul {{module_name}}:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Neues angebotenes Produkt)',
     'LBL_DISCOUNT_PERCENT' => '% Prozent',
     'LBL_DISCOUNT_TYPE' => 'Rabatt-Typ',
-);
+];

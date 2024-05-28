@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -50,7 +52,7 @@ class Session
     /**
      * @return bool
      */
-    public function isActive() : bool
+    public function isActive(): bool
     {
         return (isset($_SESSION['type']) && $_SESSION['type'] === $this->type);
     }
@@ -58,19 +60,19 @@ class Session
     /**
      * @return string
      */
-    public function getContactId() : string
+    public function getContactId(): string
     {
         if (!isset($this->contactId)) {
             $this->contactId = !empty($_SESSION[$this->sessionContactId]) ? $_SESSION[$this->sessionContactId] : '';
         }
-    
+
         return $this->contactId;
     }
 
     /**
      * @param string $contactId
      */
-    public function setContactId(String $contactId) : void
+    public function setContactId(string $contactId): void
     {
         $this->unsetCachedContact();
         $this->contactId = $_SESSION[$this->sessionContactId] = $contactId;
@@ -79,7 +81,7 @@ class Session
     /**
      * Unset previously loaded Contact and Contact id
      */
-    protected function unsetCachedContact() : void
+    protected function unsetCachedContact(): void
     {
         unset($this->contact);
         unset($this->contactId);
@@ -88,7 +90,7 @@ class Session
     /**
      * Unset previously loaded Account ids, Contact and Contact Ids
      */
-    public function unsetCache() : void
+    public function unsetCache(): void
     {
         $this->getCacheObject()->delete($this->getContactCacheKey($this->getContactId()));
         $this->unsetCachedContact();
@@ -100,7 +102,7 @@ class Session
      *
      * @return CacheInterface
      */
-    public function getCacheObject() : CacheInterface
+    public function getCacheObject(): CacheInterface
     {
         return Container::getInstance()->get(CacheInterface::class);
     }
@@ -108,7 +110,7 @@ class Session
     /**
      * @return \Contact|null
      */
-    public function getContact() : ?\Contact
+    public function getContact(): ?\Contact
     {
         if (!isset($this->contact)) {
             $contactId = ($id = $this->getContactId()) ? $id : null;
@@ -126,7 +128,7 @@ class Session
      *
      * @return \Contact|null
      */
-    protected function executeRetrieveContact($contactId) : ?\Contact
+    protected function executeRetrieveContact($contactId): ?\Contact
     {
         return \BeanFactory::retrieveBean('Contacts', $contactId);
     }
@@ -136,7 +138,7 @@ class Session
      *
      * @return Sugarcrm\Sugarcrm\Visibility\Portal\Context
      */
-    public function getVisibilityContext(\SugarBean $bean) : \Sugarcrm\Sugarcrm\Visibility\Portal\Context
+    public function getVisibilityContext(\SugarBean $bean): \Sugarcrm\Sugarcrm\Visibility\Portal\Context
     {
         \SugarAutoLoader::requireWithCustom('data/visibility/portal/Context.php');
         $contextClass = \SugarAutoLoader::customClass(\Sugarcrm\Sugarcrm\Visibility\Portal\Context::class);
@@ -152,12 +154,12 @@ class Session
      *
      * @return array
      */
-    public function getBeanVisibilityLinks(\SugarBean $bean) : array
+    public function getBeanVisibilityLinks(\SugarBean $bean): array
     {
         return
-        !empty($GLOBALS['dictionary'][$bean->getObjectName()]['portal_visibility']['links']) ?
-            $GLOBALS['dictionary'][$bean->getObjectName()]['portal_visibility']['links'] :
-            [];
+            !empty($GLOBALS['dictionary'][$bean->getObjectName()]['portal_visibility']['links']) ?
+                $GLOBALS['dictionary'][$bean->getObjectName()]['portal_visibility']['links'] :
+                [];
     }
 
     /**
@@ -165,7 +167,7 @@ class Session
      *
      * @return string
      */
-    protected function getContactCacheKey(String $contactId) : string
+    protected function getContactCacheKey(string $contactId): string
     {
         return !empty($contactId) ? sprintf('portal_accounts_%s', strtolower(preg_replace('/\s/', '', $contactId))) : '';
     }
@@ -176,7 +178,7 @@ class Session
      *
      * @return array|null
      */
-    public function getAccountIds() : ?array
+    public function getAccountIds(): ?array
     {
         if (!isset($this->accountIds)) {
             if (!empty($this->getContactId())) {

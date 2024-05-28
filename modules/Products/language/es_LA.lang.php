@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Tablero de Lista de Artículos Cotizados',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Tablero de Registro de Partidas Individuales Cotizadas',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Panel de Efoque de Partidas Individuales Cotizadas',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Línea de tiempo de la línea de presupuesto',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Campaña de Partida Individual Cotizada',
     'LBL_MODULE_NAME' => 'Partidas Individuales Cotizadas',
@@ -184,4 +185,4 @@ Para crear un {{module_name}}:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nuevo Artículo Cotizado)',
     'LBL_DISCOUNT_PERCENT' => '% Porcentaje',
     'LBL_DISCOUNT_TYPE' => 'Tipo de descuento',
-);
+];

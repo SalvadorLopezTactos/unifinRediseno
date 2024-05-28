@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Опашка от заявки',
     'LBL_MODULE_NAME_SINGULAR' => 'Опашка от заявки',
     'LBL_MODULE_TITLE' => 'Опашка от заявки: Начало',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Анулирано решение',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Решението е в процес на обработка',
     // Errors
-    'ERR_CALL' => "Не може да бъде извикана функцията: %s",
-    'ERR_CURL' => "Не е достъшноPHP разширението CURL - не могат да се изпълняват URL задачи",
-    'ERR_FAILED' => "Грешка при изпълнението. Моля проверете логовете на PHP и файла sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s в %s на линия %d",
-    'ERR_NOUSER' => "Не е посочен идентификатор на потребителя за задачата",
-    'ERR_NOSUCHUSER' => "Не е намерен идентификаторът на потребителя %s",
-    'ERR_JOBTYPE' => "Неизвестен тип на задача: %s",
-    'ERR_TIMEOUT' => "Принудителен неуспех при изчакване",
+    'ERR_CALL' => 'Не може да бъде извикана функцията: %s',
+    'ERR_CURL' => 'Не е достъшноPHP разширението CURL - не могат да се изпълняват URL задачи',
+    'ERR_FAILED' => 'Грешка при изпълнението. Моля проверете логовете на PHP и файла sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s в %s на линия %d',
+    'ERR_NOUSER' => 'Не е посочен идентификатор на потребителя за задачата',
+    'ERR_NOSUCHUSER' => 'Не е намерен идентификаторът на потребителя %s',
+    'ERR_JOBTYPE' => 'Неизвестен тип на задача: %s',
+    'ERR_TIMEOUT' => 'Принудителен неуспех при изчакване',
     'ERR_JOB_FAILED_VERBOSE' => 'Задачата %1$s (%2$s) не се изпълни коректно при стартиране на скрипта за автоматично изпълнение.',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Дефиницията на модул (Bean) с идентификатор: %s не се зарежда',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Не може да намери маршрут %s',
@@ -91,13 +91,13 @@ $mod_strings = array(
    </li> 
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Помощ за конфигуриране на Amazon SQS',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Раздел за конфигуриране на Amazon SQS.</b></p> 
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Раздел за конфигуриране на Amazon SQS.</b></p> 
 <ul>
     <li>Идентификатор на ключа за достъп: <i>Въведете номера на идентификатора на вашия ключ за достъп за Amazon SQS</i></li> 
     <li>Таен ключ за достъп: <i>Въведете вашия таен ключ за достъп за Amazon SQS</i></li> 
     <li>Регион: <i>Въведете региона на сървъра на Amazon SQS</i></li> 
     <li>Име на опашката: <i>Въведете името на опашката на сървъра на Amazon SQS</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'Помощ за конфигуриране на AMQP',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>Раздел за конфигурация на AMQP.</b></p> 
 <ul>
@@ -118,4 +118,4 @@ $mod_strings = array(
     'LBL_REGION' => 'Region',
     'LBL_ACCESS_KEY_SECRET' => 'Таен ключ за достъп',
     'LBL_QUEUE_NAME' => 'Име на адаптера',
-);
+];

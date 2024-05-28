@@ -30,7 +30,7 @@ class FlexRelateChildrenLink extends Link2
      *
      * {@inheritDoc}
      */
-    public function buildJoinSugarQuery($sugar_query, $options = array())
+    public function buildJoinSugarQuery($sugar_query, $options = [])
     {
         parent::buildJoinSugarQuery($sugar_query, $options);
 

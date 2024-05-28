@@ -23,7 +23,7 @@ class AggregationFactory
      * Local cache
      * @var array
      */
-    protected static $loaded = array();
+    protected static $loaded = [];
 
     /**
      * Load aggregation object. Be careful as this is a cached factory.

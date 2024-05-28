@@ -96,7 +96,7 @@ final class Formatter implements FormatterInterface
      *
      * @param Logger $logger
      */
-    public static function wrapLogger(Logger $logger) : void
+    public static function wrapLogger(Logger $logger): void
     {
         foreach ($logger->getHandlers() as $handler) {
             $handler->setFormatter(

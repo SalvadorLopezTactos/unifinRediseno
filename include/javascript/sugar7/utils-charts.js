@@ -210,6 +210,11 @@
                     // if absolute value less than 1k
                     else if (Math.abs(d) < 1000) {
                         d = app.utils.charts.round(d, p);
+                    } else if (Math.abs(d) >= 1e9) {
+                        // Format as billions with "B"
+                        d /= 1e9;
+                        f = typeof l === 'undefined' ? d3sugar.format : d3sugar.formatLocale(l).format;
+                        return f('s')(d) + 'B';
                     } else {
                         f = typeof l === 'undefined' ? d3sugar.formatPrefix : d3sugar.formatLocale(l).formatPrefix;
                         if (p !== 0) {

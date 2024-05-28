@@ -21,16 +21,16 @@ class OpportunitiesConfigApi extends ConfigModuleApi
     public function registerApiRest()
     {
         return
-            array(
-                'opportunitiesConfigCreate' => array(
+            [
+                'opportunitiesConfigCreate' => [
                     'reqType' => 'POST',
-                    'path' => array('Opportunities', 'config'),
-                    'pathVars' => array('module', ''),
+                    'path' => ['Opportunities', 'config'],
+                    'pathVars' => ['module', ''],
                     'method' => 'configSave',
                     'shortHelp' => 'Save the config settings for the Opportunities Module',
                     'longHelp' => 'modules/Opportunities/clients/base/api/help/config_post_help.html',
-                )
-            );
+                ],
+            ];
     }
 
     /**
@@ -49,7 +49,7 @@ class OpportunitiesConfigApi extends ConfigModuleApi
 
             $args = null;
             if (!empty($moduleName)) {
-                $args = array('moduleName' => $moduleName);
+                $args = ['moduleName' => $moduleName];
             }
             throw new SugarApiExceptionNotAuthorized(
                 $GLOBALS['app_strings']['EXCEPTION_CHANGE_MODULE_CONFIG_NOT_AUTHORIZED'],
@@ -96,10 +96,10 @@ class OpportunitiesConfigApi extends ConfigModuleApi
             // then do data
             $converter->doDataConvert();
 
-            register_shutdown_function(array('UnifiedSearchAdvanced', 'clearCache'));
+            register_shutdown_function(['UnifiedSearchAdvanced', 'clearCache']);
 
             // we need to refresh the cache but do it in the shutdown for this process
-            register_shutdown_function(array('MetaDataManager', 'refreshCache'));
+            register_shutdown_function(['MetaDataManager', 'refreshCache']);
         }
 
         return $settings;

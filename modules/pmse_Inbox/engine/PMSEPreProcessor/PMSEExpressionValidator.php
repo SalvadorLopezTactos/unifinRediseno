@@ -57,10 +57,12 @@ class PMSEExpressionValidator extends PMSEBaseValidator implements PMSEValidate
      * @param type $paramsRelated
      * @return type
      */
-    public function validateExpression($bean, $flowData, $request, $paramsRelated = array())
+    public function validateExpression($bean, $flowData, $request, $paramsRelated = [])
     {
         // Start with trimming our criteria for evaluation
-        $criteria = trim($flowData['evn_criteria']);
+        $criteria = !isset($flowData['evn_criteria']) || is_null($flowData['evn_criteria']) ?
+            '' :
+            trim($flowData['evn_criteria']);
 
         // Empty criteria is valid
         $valid = $criteria === '' || $criteria === '[]';
@@ -97,7 +99,7 @@ class PMSEExpressionValidator extends PMSEBaseValidator implements PMSEValidate
      */
     public function validateParamsRelated($bean, $flowData, $request)
     {
-        $paramsRelated = array();
+        $paramsRelated = [];
         if ($request->getExternalAction() == 'EVALUATE_RELATED_MODULE') {
             // If this expression is for a waiting event with criteria on a related
             // record then evaluation is different when doing an ANY or ALL criteria
@@ -108,11 +110,11 @@ class PMSEExpressionValidator extends PMSEBaseValidator implements PMSEValidate
                 if ($this->hasAnyOrAllTypeOperation(trim($flowData['evn_criteria']))) {
                     $paramsRelated['updateRelateCriteria'] = true;
                 } else {
-                    $paramsRelated = array(
-                        'replace_fields' => array(
+                    $paramsRelated = [
+                        'replace_fields' => [
                             $flowData['rel_element_relationship'] => $flowData['rel_element_module'],
-                        ),
-                    );
+                        ],
+                    ];
                 }
             } else {
                 $request->invalidate();
@@ -120,8 +122,7 @@ class PMSEExpressionValidator extends PMSEBaseValidator implements PMSEValidate
         }
 
         if ($request->getExternalAction() == 'EVALUATE_MAIN_MODULE') {
-            if (
-                $bean->module_name != $flowData['cas_sugar_module']
+            if ($bean->module_name != $flowData['cas_sugar_module']
                 || $bean->id != $flowData['cas_sugar_object_id']
             ) {
                 $request->invalidate();
@@ -131,15 +132,15 @@ class PMSEExpressionValidator extends PMSEBaseValidator implements PMSEValidate
         if ($request->getExternalAction() == 'NEW') {
             if (!PMSEEngineUtils::isTargetModule($flowData, $bean)
             ) {
-                $paramsRelated = array(
-                    'replace_fields' => array(
-                        $flowData['rel_element_relationship'] => $flowData['rel_element_module']
-                    )
-                );
+                $paramsRelated = [
+                    'replace_fields' => [
+                        $flowData['rel_element_relationship'] => $flowData['rel_element_module'],
+                    ],
+                ];
             }
         }
 
-        $this->getLogger()->debug("Parameters related returned :" . print_r($paramsRelated, true));
+        $this->getLogger()->debug('Parameters related returned :' . print_r($paramsRelated, true));
         return $paramsRelated;
     }
 
@@ -181,19 +182,19 @@ class PMSEExpressionValidator extends PMSEBaseValidator implements PMSEValidate
         if ($seedBean->id && $hasRel) {
             // Get the row for this relationship by query instead through beans
             // which is much more expensive
-            $relWhere = array(
-                'where' => array(
+            $relWhere = [
+                'where' => [
                     'lhs_field' => 'id',
                     'operator' => '=',
                     'rhs_value' => $bean->id,
-                ),
-            );
+                ],
+            ];
 
             // use load() since getQuery() is deprecated
             $results = $seedBean->$relField->getRelationshipObject()->load($seedBean->$relField, $relWhere);
-            
+
             $rows = !empty($results['rows']) ? $results['rows'] : [];
-            if ((is_countable($rows) ? count($rows) : 0) > 0) {
+            if (safeCount($rows) > 0) {
                 // And verify that the relationship is actually valid record to record
                 $id = key($rows);
                 $return = $id === $bean->id;

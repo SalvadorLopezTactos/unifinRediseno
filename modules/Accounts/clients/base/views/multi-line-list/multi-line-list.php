@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -17,12 +18,12 @@ $viewdefs['Accounts']['base']['view']['multi-line-list'] = [
                 [
                     'name' => 'name',
                     'label' => 'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY',
-                    'width' =>  'xlarge',
+                    'width' => 'xlarge',
                     'subfields' => [
                         [
                             'name' => 'name',
                             'label' => 'LBL_LIST_ACCOUNT_NAME',
-                            'width' =>  'large',
+                            'width' => 'large',
                         ],
                         [
                             'name' => 'industry',
@@ -113,9 +114,7 @@ $viewdefs['Accounts']['base']['view']['multi-line-list'] = [
         ],
     ],
     'collectionOptions' => [
-        'limit' => 100,
         'params' => [
-            'max_num' => 100,
             'order_by' => 'date_modified',
             'nulls_last' => true,
         ],
@@ -129,9 +128,5 @@ $viewdefs['Accounts']['base']['view']['multi-line-list'] = [
         'order_by_primary' => 'next_renewal_date:asc',
         'order_by_secondary' => '',
         'freeze_first_column' => true,
-    ],
-    'orderBy' => [
-        'field' => 'next_renewal_date',
-        'direction' => 'asc',
     ],
 ];

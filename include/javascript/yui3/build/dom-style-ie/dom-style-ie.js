@@ -1,13 +1,5 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('dom-style-ie', function (Y, NAME) {
 
-(function(Y) {
 var HAS_LAYOUT = 'hasLayout',
     PX = 'px',
     FILTER = 'filter',
@@ -25,7 +17,6 @@ var HAS_LAYOUT = 'hasLayout',
     TRANSPARENT = 'transparent',
     VISIBLE = 'visible',
     GET_COMPUTED_STYLE = 'getComputedStyle',
-    UNDEFINED = undefined,
     documentElement = Y.config.doc.documentElement,
 
     testFeature = Y.Features.test,
@@ -76,7 +67,6 @@ var HAS_LAYOUT = 'hasLayout',
         getOffset: function(el, prop) {
             var current = _getStyleObj(el)[prop],                     // value of "width", "top", etc.
                 capped = prop.charAt(0).toUpperCase() + prop.substr(1), // "Width", "Top", etc.
-                offset = 'offset' + capped,                             // "offsetWidth", "offsetTop", etc.
                 pixel = 'pixel' + capped,                               // "pixelWidth", "pixelTop", etc.
                 sizeOffsets = ComputedStyle.sizeOffsets[prop],
                 mode = el.ownerDocument.compatMode,
@@ -119,8 +109,7 @@ var HAS_LAYOUT = 'hasLayout',
         },
 
         getBorderWidth: function(el, property, omitUnit) {
-            var unit = omitUnit ? '' : PX,
-                current = el.currentStyle[property];
+            var current = el.currentStyle[property];
 
             if (current.indexOf(PX) < 0) { // look up keywords if a border exists
                 if (ComputedStyle.borderMap[current] &&
@@ -151,7 +140,7 @@ var HAS_LAYOUT = 'hasLayout',
             var val,
                 style = _getStyleObj(node);
 
-            if (style[att] == AUTO) {
+            if (style[att] === AUTO) {
                 val = 0;
             } else {
                 val = ComputedStyle.getPixel(node, att);
@@ -161,7 +150,7 @@ var HAS_LAYOUT = 'hasLayout',
 
         getVisibility: function(node, att) {
             var current;
-            while ( (current = node.currentStyle) && current[att] == 'inherit') { // NOTE: assignment in test
+            while ( (current = node.currentStyle) && current[att] === 'inherit') { // NOTE: assignment in test
                 node = node.parentNode;
             }
             return (current) ? current[att] : VISIBLE;
@@ -239,7 +228,7 @@ if (!testFeature('style', 'opacity') && testFeature('style', 'filter')) {
                 val = current;
             }
 
-            if (typeof currentFilter == 'string') { // in case not appended
+            if (typeof currentFilter === 'string') { // in case not appended
                 style[FILTER] = currentFilter.replace(/alpha([^)]*\))/gi, '') +
                         ((val <= 1) ? 'alpha(' + OPACITY + '=' + val * 100 + ')' : '');
 
@@ -304,7 +293,5 @@ if (!testFeature('style', 'computedStyle')) {
     Y.DOM.IE.ComputedStyle = ComputedStyle;
 }
 
-})(Y);
 
-
-}, '3.15.0', {"requires": ["dom-style"]});
+}, '3.18.1', {"requires": ["dom-style", "color-base"]});

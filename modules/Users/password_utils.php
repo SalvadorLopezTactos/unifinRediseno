@@ -9,8 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description:  TODO To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -19,14 +19,15 @@
 
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
 
-function canSendPassword() {
+function canSendPassword()
+{
     global $mod_strings,
-           $current_user,
-           $app_strings;
+    $current_user,
+    $app_strings;
 
 
     if ($current_user->is_admin) {
-        $emailTemplate                             = new EmailTemplate();
+        $emailTemplate = new EmailTemplate();
         $emailTemplate->disable_row_level_security = true;
 
         if ($emailTemplate->retrieve($GLOBALS['sugar_config']['passwordsetting']['generatepasswordtmpl']) == '') {
@@ -83,22 +84,21 @@ function hasPasswordExpired($user, $updateNumberLogins = false)
         $user = BeanFactory::getBean('Users', $usr_id);
     }
     $type = '';
-	if ($user->system_generated_password == '1'){
-        $type='syst';
-    }
-    else{
-        $type='user';
+    if ($user->system_generated_password == '1') {
+        $type = 'syst';
+    } else {
+        $type = 'user';
     }
 
-    if ($user->portal_only=='0'){
-	    $res=$GLOBALS['sugar_config']['passwordsetting'];
+    if ($user->portal_only == '0') {
+        $res = $GLOBALS['sugar_config']['passwordsetting'];
 
-	  	if ($type != '') {
-		    switch($res[$type.'expiration']) {
-	        case '1':
-		    	global $timedate;
+        if ($type != '') {
+            switch ($res[$type . 'expiration']) {
+                case '1':
+                    global $timedate;
                     if ($user->pwd_last_changed == '') {
-                        $user->pwd_last_changed= $timedate->nowDb();
+                        $user->pwd_last_changed = $timedate->nowDb();
                         //Suppress date_modified so a new _hash isn't generated
                         $user->update_date_modified = false;
                         $user->save();
@@ -110,46 +110,45 @@ function hasPasswordExpired($user, $updateNumberLogins = false)
                     } else {
                         $pass_changed_timestamp = $timedate->fromUser($user->pwd_last_changed, $user);
                     }
-                // SP-1790: Creating user with default password expiration settings results in password expired page on first login
-                // Below, we calc $expireday essentially doing type*time; that requires that expirationtype factor is 1 or
-                // greater, however, expirationtype defaults to following values: 0/day, 7/week, 30/month
-                // (See and {debug} PasswordManager.tpl for more info)
-                $expiretype = $res[$type.'expirationtype'];
-                $expiretype = (!isset($expiretype) || $expiretype == '0') ? '1' : $expiretype;
-                $expireday = $expiretype * $res[$type.'expirationtime'];
+                    // SP-1790: Creating user with default password expiration settings results in password expired page on first login
+                    // Below, we calc $expireday essentially doing type*time; that requires that expirationtype factor is 1 or
+                    // greater, however, expirationtype defaults to following values: 0/day, 7/week, 30/month
+                    // (See and {debug} PasswordManager.tpl for more info)
+                    $expiretype = $res[$type . 'expirationtype'];
+                    $expiretype = (!isset($expiretype) || $expiretype == '0') ? '1' : $expiretype;
+                    $expireday = $expiretype * $res[$type . 'expirationtime'];
                     $expiretime = $pass_changed_timestamp->get("+{$expireday} days")->ts;
 
-                if ($timedate->getNow()->ts < $expiretime) {
-                    return false;
-                } else {
-                    $_SESSION['expiration_label']= 'LBL_PASSWORD_EXPIRATION_TIME';
-                    return true;
-                }
-                break;
+                    if ($timedate->getNow()->ts < $expiretime) {
+                        return false;
+                    } else {
+                        $_SESSION['expiration_label'] = 'LBL_PASSWORD_EXPIRATION_TIME';
+                        return true;
+                    }
+                    break;
 
-		    case '2':
-		    	$login = $user->getPreference('loginexpiration');
-                //Only increment number of logins if we're actually doing an update
-                if ($updateNumberLogins) {
-                    $login = $login + 1;
-                    $user->setPreference('loginexpiration',$login);
-                    //Suppress date_modified so a new _hash isn't generated
-                    $user->update_date_modified = false;
-                    $user->save();
-                }
-		        if ($login >= $res[$type.'expirationlogin']){
-		        	$_SESSION['expiration_label']= 'LBL_PASSWORD_EXPIRATION_LOGIN';
-		        	return true;
-                }
-                else {
-                    return false;
-                }
-                break;
+                case '2':
+                    $login = $user->getPreference('loginexpiration');
+                    //Only increment number of logins if we're actually doing an update
+                    if ($updateNumberLogins) {
+                        $login = $login + 1;
+                        $user->setPreference('loginexpiration', $login);
+                        //Suppress date_modified so a new _hash isn't generated
+                        $user->update_date_modified = false;
+                        $user->save();
+                    }
+                    if ($login >= $res[$type . 'expirationlogin']) {
+                        $_SESSION['expiration_label'] = 'LBL_PASSWORD_EXPIRATION_LOGIN';
+                        return true;
+                    } else {
+                        return false;
+                    }
+                    break;
 
-		    case '0':
-		        return false;
-		   	 	break;
-		    }
-		}
+                case '0':
+                    return false;
+                    break;
+            }
+        }
     }
 }

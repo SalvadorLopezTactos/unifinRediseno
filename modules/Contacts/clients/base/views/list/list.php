@@ -11,84 +11,82 @@
  */
 
 
-$viewdefs['Contacts']['base']['view']['list'] = array(
-    'panels' =>
-    array(
+$viewdefs['Contacts']['base']['view']['list'] = [
+    'panels' => [
         0 =>
-        array(
-            'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
-                    'name' => 'name',
-                    'type' => 'fullname',
-                    'fields' => array(
-                        'salutation',
-                        'first_name',
-                        'last_name',
-                    ),
-                    'link' => true,
-                    'label' => 'LBL_LIST_NAME',
-                    'enabled' => true,
-                    'default' => true,
-                ),
-                array(
-                    'name' => 'title',
-                    'enabled' => true,
-                    'default' => true,
-                ),
-                array(
-                    'name' => 'account_name',
-                    'enabled' => true,
-                    'default' => true,
-                ),
-                array(
-                    'name' => 'email',
-                    'enabled' => true,
-                    'default' => true,
-                ),
-                array(
-                    'name' => 'phone_mobile',
-                    'enabled' => true,
-                    'default' => true,
-                    'selected' => false,
-                ),
-                array(
-                    'name' => 'phone_work',
-                    'enabled' => true,
-                    'default' => true,
-                ),
-                array(
-                    'name' => 'phone_other',
-                    'enabled' => true,
-                    'default' => true,
-                    'selected' => false,
-                ),
-                array(
-                    'name' => 'assistant_phone',
-                    'enabled' => true,
-                    'default' => true,
-                    'selected' => false,
-                ),
-                array(
-                    'name' => 'assigned_user_name',
-                    'label' => 'LBL_LIST_ASSIGNED_USER',
-                    'id' => 'ASSIGNED_USER_ID',
-                    'enabled' => true,
-                    'default' => true,
-                ),
-                array(
-                    'name' => 'date_modified',
-                    'enabled' => true,
-                    'default' => true,
-                ),
-                array(
-                    'name' => 'date_entered',
-                    'enabled' => true,
-                    'default' => true,
-                    'readonly' => true,
-                ),
-            ),
-        ),
-    ),
-);
-
+            [
+                'label' => 'LBL_PANEL_1',
+                'fields' => [
+                    [
+                        'name' => 'name',
+                        'type' => 'fullname',
+                        'fields' => [
+                            'salutation',
+                            'first_name',
+                            'last_name',
+                        ],
+                        'link' => true,
+                        'label' => 'LBL_LIST_NAME',
+                        'enabled' => true,
+                        'default' => true,
+                    ],
+                    [
+                        'name' => 'title',
+                        'enabled' => true,
+                        'default' => true,
+                    ],
+                    [
+                        'name' => 'account_name',
+                        'enabled' => true,
+                        'default' => true,
+                    ],
+                    [
+                        'name' => 'email',
+                        'enabled' => true,
+                        'default' => true,
+                    ],
+                    [
+                        'name' => 'phone_mobile',
+                        'enabled' => true,
+                        'default' => true,
+                        'selected' => false,
+                    ],
+                    [
+                        'name' => 'phone_work',
+                        'enabled' => true,
+                        'default' => true,
+                    ],
+                    [
+                        'name' => 'phone_other',
+                        'enabled' => true,
+                        'default' => true,
+                        'selected' => false,
+                    ],
+                    [
+                        'name' => 'assistant_phone',
+                        'enabled' => true,
+                        'default' => true,
+                        'selected' => false,
+                    ],
+                    [
+                        'name' => 'assigned_user_name',
+                        'label' => 'LBL_LIST_ASSIGNED_USER',
+                        'id' => 'ASSIGNED_USER_ID',
+                        'enabled' => true,
+                        'default' => true,
+                    ],
+                    [
+                        'name' => 'date_modified',
+                        'enabled' => true,
+                        'default' => true,
+                    ],
+                    [
+                        'name' => 'date_entered',
+                        'enabled' => true,
+                        'default' => true,
+                        'readonly' => true,
+                    ],
+                ],
+            ],
+    ],
+];

@@ -10,15 +10,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /*********************************************************************************
- * $Id: view.sugarpdf.php 
+ * $Id: view.sugarpdf.php
  * Description: This file is used to override the default Meta-data EditView behavior
  * to provide customization specific to the Quotes module.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-
 class LeadsStudioModule extends StudioModule
 {
     public function __construct($module)
@@ -30,12 +30,12 @@ class LeadsStudioModule extends StudioModule
     {
         $layouts = parent::getLayouts();
 
-        $layouts = array_merge(array( translate("LBL_CONVERTLEAD", "Leads") => array (
-            'name' => translate("LBL_CONVERTLEAD", "Leads") ,
-            'action' => "module=Leads&action=Editconvert&to_pdf=1" ,
-            'imageTitle' => 'icon_ConvertLead' ,
-            'help' => 'layoutsBtn' ,
-            'size' => '48')), $layouts);
+        $layouts = array_merge([translate('LBL_CONVERTLEAD', 'Leads') => [
+            'name' => translate('LBL_CONVERTLEAD', 'Leads'),
+            'action' => 'module=Leads&action=Editconvert&to_pdf=1',
+            'imageTitle' => 'icon_ConvertLead',
+            'help' => 'layoutsBtn',
+            'size' => '48']], $layouts);
 
         return $layouts;
     }

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Hint\Queue\Event;
 
 use Sugarcrm\Sugarcrm\modules\HintAccountsets\HintAccountsetTypes;
@@ -171,7 +172,7 @@ abstract class AccountsetEvent extends QueueEvent
             [$tagsAlias . '.id', 'account_tag_id',],
         ]);
 
-        if (count($tagIds) === 1) {
+        if (safeCount($tagIds) === 1) {
             $query->where()->equals($tagsAlias . '.id', $tagIds[0]);
         } else {
             $query->where()->in($tagsAlias . '.id', $tagIds);

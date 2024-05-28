@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Vložené soubory',
     'LBL_MODULE_NAME_SINGULAR' => 'Vložený soubor',
     'LBL_MODULE_TITLE' => 'Vložený soubor',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => 'Název souboru',
     'LBL_FILENAME' => 'Název souboru',
     'LBL_UPLOAD_ONLY_IMAGE' => 'Vybraný soubor by měl být obrázek.',
-);
+];

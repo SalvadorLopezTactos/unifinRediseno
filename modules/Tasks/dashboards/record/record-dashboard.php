@@ -15,6 +15,18 @@ return [
         'dashlets' => [
             [
                 'view' => [
+                    'type' => 'activity-timeline',
+                    'label' => 'TPL_ACTIVITY_TIMELINE_DASHLET',
+                ],
+                'context' => [
+                    'module' => 'Tasks',
+                ],
+                'width' => 12,
+                'x' => 0,
+                'y' => 0,
+            ],
+            [
+                'view' => [
                     'label' => 'LBL_MY_TASKS',
                     'type' => 'dashablelist',
                     'module' => 'Tasks',

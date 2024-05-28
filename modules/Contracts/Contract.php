@@ -10,8 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use  Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
-
+use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 
 if (!defined('SUGARCRM_SECONDS_PER_DAY')) {
     define('SUGARCRM_SECONDS_PER_DAY', 60 * 60 * 24);
@@ -74,14 +73,14 @@ class Contract extends SugarBean
     public $object_name = 'Contract';
     public $user_preferences;
 
-    public $encodeFields = array();
-    public $relationship_fields = array(
+    public $encodeFields = [];
+    public $relationship_fields = [
         'opportunity_id' => 'opportunities',
         'note_id' => 'notes',
         'quote_id' => 'quotes',
-    );
+    ];
     // This is used to retrieve related fields from form posts.
-    public $additional_column_fields = array('revision');
+    public $additional_column_fields = ['revision'];
 
     public $importable = true;
 
@@ -97,16 +96,16 @@ class Contract extends SugarBean
         //$this->disable_row_level_security = false;
     }
 
-    function save($check_notify = false)
+    public function save($check_notify = false)
     {
         $time_array = [];
         /** @var TimeDate $timedate */
         global $timedate;
 
-        $isCronWorkFlow = !empty($_SESSION["workflow_cron"]) && $_SESSION["workflow_cron"] == "Yes";
-        $isCronWorkFlow = $isCronWorkFlow && !empty($_SESSION["workflow_id_cron"]) && ArrayFunctions::in_array_access(
+        $isCronWorkFlow = !empty($_SESSION['workflow_cron']) && $_SESSION['workflow_cron'] == 'Yes';
+        $isCronWorkFlow = $isCronWorkFlow && !empty($_SESSION['workflow_id_cron']) && ArrayFunctions::in_array_access(
             CONTRACT_BUILT_IN_WORKFLOW_ID,
-            $_SESSION["workflow_id_cron"]
+            $_SESSION['workflow_id_cron']
         );
 
         //decimals cant be null in sql server
@@ -122,7 +121,7 @@ class Contract extends SugarBean
                 $this->special_notification = true;
                 $check_notify = true;
             } elseif ($expNotice != $this->fetched_row['expiration_notice']) {
-                require_once("include/workflow/time_utils.php");
+                require_once 'include/workflow/time_utils.php';
                 $time_array['time_int'] = '0';
                 $time_array['time_int_type'] = 'datetime';
                 $time_array['target_field'] = 'expiration_notice';
@@ -147,9 +146,9 @@ class Contract extends SugarBean
             $this->db->query($query);
         }
 
-        $this->setCalculatedValues(false);
+        $this->setCalculatedValues();
         $return_id = parent::save($check_notify);
-        
+
         if ($this->expiration_notice && $isCronWorkFlow) {
             $this->special_notification = false;
         }
@@ -157,29 +156,30 @@ class Contract extends SugarBean
         return $return_id;
     }
 
-    function get_summary_text()
+    public function get_summary_text()
     {
         return $this->name;
     }
 
-    function is_authenticated()
+    public function is_authenticated()
     {
         return $this->authenticated;
     }
 
-    function fill_in_additional_list_fields()
+    public function fill_in_additional_list_fields()
     {
         $this->fill_in_additional_detail_fields();
     }
 
-    function _set_related_opportunity_info()
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    public function _set_related_opportunity_info()
     {
         // only need to populate opp if it's empty
         if (empty($this->opportunity_id)) {
             $contracts_table = $this->table_name;
             $opportunity_link_table = $this->rel_opportunity_table;
-            $query = "SELECT opportunities.id, opportunities.name "
-                . "FROM opportunities "
+            $query = 'SELECT opportunities.id, opportunities.name '
+                . 'FROM opportunities '
                 . "INNER JOIN $opportunity_link_table "
                 . "ON opportunities.id=$opportunity_link_table.opportunity_id "
                 . "INNER JOIN $contracts_table "
@@ -195,13 +195,14 @@ class Contract extends SugarBean
         }
     }
 
-    function _set_related_account_info()
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    public function _set_related_account_info()
     {
         $contracts_table = $this->table_name;
 
         if (!empty($this->account_id)) {
-            $query = "SELECT accounts.name "
-                . "FROM accounts "
+            $query = 'SELECT accounts.name '
+                . 'FROM accounts '
                 . "INNER JOIN $contracts_table "
                 . "ON accounts.id=$contracts_table.account_id "
                 . "WHERE $contracts_table.id='$this->id' AND $contracts_table.deleted=0 AND accounts.deleted=0 ";
@@ -215,13 +216,11 @@ class Contract extends SugarBean
 
     /**
      * Set contract term based on start and end dates
-     *
-     * @param bool $isFromDb Whether the bean is fetched from database
      */
-    protected function _set_contract_term($isFromDb)
+    protected function set_contract_term()
     {
-        $start_date_timestamp = $this->dateToTimestamp($this->start_date, $isFromDb);
-        $end_date_timestamp = $this->dateToTimestamp($this->end_date, $isFromDb);
+        $start_date_timestamp = $this->dateToTimestamp($this->start_date);
+        $end_date_timestamp = $this->dateToTimestamp($this->end_date);
         $this->contract_term = '';
         if (!empty($start_date_timestamp) && !empty($end_date_timestamp)) {
             $this->contract_term = floor(($end_date_timestamp - $start_date_timestamp) / constant('SUGARCRM_SECONDS_PER_DAY'));
@@ -230,12 +229,10 @@ class Contract extends SugarBean
 
     /**
      * Set contract time to expiry based on end date
-     *
-     * @param bool $isFromDb Whether the bean is fetched from database
      */
-    protected function _set_time_to_expiry($isFromDb)
+    protected function set_time_to_expiry()
     {
-        $end_date_timestamp = $this->dateToTimestamp($this->end_date, $isFromDb);
+        $end_date_timestamp = $this->dateToTimestamp($this->end_date);
         $now = time();
         $this->time_to_expiry = '';
         if (!empty($end_date_timestamp)) {
@@ -246,31 +243,19 @@ class Contract extends SugarBean
     /**
      * Convert date to timestamp
      *
-     * @param string $date   Date string representation
-     * @param bool $isFromDb Whether the bean is fetched from database
+     * @param string $date Date string representation
      *
      * @return int
      */
-    protected function dateToTimestamp($date, $isFromDb)
+    protected function dateToTimestamp($date)
     {
-        global $timedate;
-
-        if (!$date) {
-            return 0;
-        }
-
-        if ($isFromDb) {
-            $date = $timedate->to_db_date($date, false);
-        }
-        $timestamp = strtotime($date);
-
-        return $timestamp;
+        return (int)strtotime($date);
     }
 
-    function fill_in_additional_detail_fields()
+    public function fill_in_additional_detail_fields()
     {
         parent::fill_in_additional_detail_fields();
-        $this->setCalculatedValues(true);
+        $this->setCalculatedValues();
 
         $types = get_bean_select_array(true, 'ContractType', 'name', 'deleted=0', 'list_order');
         $this->type_options = get_select_options_with_id($types, $this->type);
@@ -291,15 +276,13 @@ class Contract extends SugarBean
 
     /**
      * Set the non-generic calculated value
-     *
-     * @param bool $isFromDb Whether the bean is fetched from database
      */
-    protected function setCalculatedValues($isFromDb)
+    protected function setCalculatedValues()
     {
         $this->_set_related_account_info();
         $this->_set_related_opportunity_info();
-        $this->_set_contract_term($isFromDb);
-        $this->_set_time_to_expiry($isFromDb);
+        $this->set_contract_term();
+        $this->set_time_to_expiry();
     }
 
     public function list_view_parse_additional_sections(&$list_form)
@@ -317,13 +300,13 @@ class Contract extends SugarBean
         return $fields;
     }
 
-    function mark_relationships_deleted($id)
+    public function mark_relationships_deleted($id)
     {
         // Do nothing, this call is here to avoid default delete processing
         // since Delete.php handles deletion of children records.
     }
 
-    function bean_implements($interface)
+    public function bean_implements($interface)
     {
         $ret_val = false;
 
@@ -336,7 +319,7 @@ class Contract extends SugarBean
         return $ret_val;
     }
 
-    function listviewACLHelper()
+    public function listviewACLHelper()
     {
         global $current_user;
         $array_assign = parent::listviewACLHelper();
@@ -350,10 +333,10 @@ class Contract extends SugarBean
         }
 
         if (!ACLController::moduleSupportsACL('Accounts') || ACLController::checkAccess(
-                'Accounts',
-                'view',
-                $is_owner
-            )
+            'Accounts',
+            'view',
+            $is_owner
+        )
         ) {
             $array_assign['ACCOUNT'] = 'a';
         } else {
@@ -368,10 +351,10 @@ class Contract extends SugarBean
         }
 
         if (!ACLController::moduleSupportsACL('Opportunities') || ACLController::checkAccess(
-                'Opportunities',
-                'view',
-                $is_owner
-            )
+            'Opportunities',
+            'view',
+            $is_owner
+        )
         ) {
             $array_assign['OPPORTUNITY'] = 'a';
         } else {
@@ -392,10 +375,10 @@ class Contract extends SugarBean
      *
      * @return $query String SQL query to retrieve the documents to display in the subpanel
      */
-    function get_contract_documents()
+    public function get_contract_documents()
     {
         $this->load_relationship('contracts_documents');
-        $query_array = $this->contracts_documents->getQuery(array('return_as_array' => true));
+        $query_array = $this->contracts_documents->getQuery(['return_as_array' => true]);
         $query = <<<KGB
             SELECT documents.*,
 				documents.document_revision_id AS latest_revision_id,
@@ -424,13 +407,12 @@ CIA;
         return $query;
     }
 
-    function set_notification_body($xtpl, $contract)
+    public function set_notification_body($xtpl, $contract)
     {
-        $xtpl->assign("CONTRACT_NAME", $contract->name);
-        $xtpl->assign("CONTRACT_END_DATE", $contract->end_date);
+        $xtpl->assign('CONTRACT_NAME', $contract->name);
+        $xtpl->assign('CONTRACT_END_DATE', $contract->end_date);
         return $xtpl;
     }
-
 }
 
 /*
@@ -441,7 +423,7 @@ CIA;
  * @param string $searchID value of id to search contract type array keys for
  * @param returns array of contract types or label value of matching searchID if found
  */
-function getContractTypesDropDown($searchID='')
+function getContractTypesDropDown($searchID = '')
 {
     static $contractTypes = null;
     if (!$contractTypes) {
@@ -450,10 +432,8 @@ function getContractTypesDropDown($searchID='')
     }
 
     //if $search_id is a string and a key in the contract type array, then return the contract type value
-    if(!empty($searchID) && is_string($searchID) && !empty($contractTypes[$searchID])) {
+    if (!empty($searchID) && is_string($searchID) && !empty($contractTypes[$searchID])) {
         return $contractTypes[$searchID];
     }
     return $contractTypes;
 }
-
-?>

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 namespace Sugarcrm\Sugarcrm\Maps\Engine\Geocode;
 
 use BeanFactory;
@@ -40,8 +39,8 @@ class Geocoder
     /**
      * Get Geocoder instance.
      *
-     * @throws \RuntimeException
      * @return \Sugarcrm\Sugarcrm\Maps\Engine\Geocode\Geocoder
+     * @throws \RuntimeException
      */
     public static function getInstance(): Geocoder
     {
@@ -161,7 +160,7 @@ class Geocoder
 
         if (empty($coords)) {
             $message = sprintf(
-                "Invalid Address[GeocodeMaps][%s][%s]: %s",
+                'Invalid Address[GeocodeMaps][%s][%s]: %s',
                 $moduleName,
                 $beanId,
                 json_encode($address)
@@ -218,7 +217,7 @@ class Geocoder
      */
     public function getFormattedValue(SugarBean $bean, string $key): string
     {
-        if (!property_exists(get_class($bean), $key)) {
+        if (!property_exists($bean, $key)) {
             return '';
         }
 
@@ -228,7 +227,7 @@ class Geocoder
         $regex = '~[^\p{L}\p{N}\n]+~u';
 
         $value = $bean->{$key};
-        $value = preg_replace($regex, " ", (string)$value);
+        $value = preg_replace($regex, ' ', (string)$value);
         $value = trim($value);
 
         return $value;

@@ -10,79 +10,76 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-include_once __DIR__.'/UpgradeDriver.php';
+include_once __DIR__ . '/UpgradeDriver.php';
 
-function packUpgradeWizardWeb($zip, $manifest, $installdefs, $params) {
+function packUpgradeWizardWeb($zip, $manifest, $installdefs, $params)
+{
 
-    $defaults = array(
+    $defaults = [
         'version' => '7.5.0.0',
         'build' => '998',
-        'from' => array('6.5.17'),
-    );
+        'from' => ['6.5.17'],
+    ];
 
     $params = array_merge($defaults, $params);
 
     file_put_contents(__DIR__ . '/version.json', json_encode($params));
 
-    $chdir = __DIR__ . "/../..";
+    $chdir = __DIR__ . '/../..';
 
-    $files = array(
+    $files = [
         // UW
-        "UpgradeWizard.php",
-        "modules/UpgradeWizard/UpgradeDriver.php",
-        "modules/UpgradeWizard/WebUpgrader.php",
-        "modules/UpgradeWizard/upgrade_screen.php",
-        "modules/UpgradeWizard/version.json",
+        'UpgradeWizard.php',
+        'modules/UpgradeWizard/UpgradeDriver.php',
+        'modules/UpgradeWizard/WebUpgrader.php',
+        'modules/UpgradeWizard/upgrade_screen.php',
+        'modules/UpgradeWizard/version.json',
         'modules/UpgradeWizard/language/en_us.lang.php',
-        'styleguide/assets/css/upgrade.css',
-        'styleguide/assets/fonts/fontawesome-webfont.eot',
-        'styleguide/assets/fonts/fontawesome-webfont.svg',
-        'styleguide/assets/fonts/fontawesome-webfont.ttf',
-        'styleguide/assets/fonts/fontawesome-webfont.woff',
-        'styleguide/assets/fonts/FontAwesome.otf',
+        'styleguide/assets/css/upgrader.tailwind.css',
+        'styleguide/assets/css/upgrade.css', // TODO remove dependency
         'include/SugarSystemInfo/SugarSystemInfo.php',
         'include/SugarHeartbeat/SugarHeartbeatClient.php',
         'include/SugarHttpClient.php',
         'modules/HealthCheck/smarty.phar',
         'modules/HealthCheck/Scanner/Checks/Dbal.php',
         'modules/HealthCheck/Scanner/Checks/PasswordHashAlgo.php',
-    );
+    ];
 
     if (!is_array($params['from'])) {
-        $params['from'] = array($params['from']);
+        $params['from'] = [$params['from']];
     }
 
-    $manifest = array_merge($manifest, array(
+    $manifest = array_merge($manifest, [
         'author' => 'SugarCRM, Inc.',
-        'description' => 'SugarCRM Upgrader '.$params['version'],
+        'description' => 'SugarCRM Upgrader ' . $params['version'],
         'icon' => '',
         'is_uninstallable' => 'true',
-        'name' => 'SugarCRM Upgrader '.$params['version'],
-        'published_date' => date("Y-m-d H:i:s"),
+        'name' => 'SugarCRM Upgrader ' . $params['version'],
+        'published_date' => date('Y-m-d H:i:s'),
         'type' => 'module',
         'version' => $params['version'],
-        'acceptable_sugar_versions' => $params['from']
-    ));
+        'acceptable_sugar_versions' => $params['from'],
+    ]);
 
     foreach ($files as $file) {
         $zip->addFile($chdir . '/' . $file, $file);
-        $installdefs['copy'][] = array("from" => "<basepath>/$file", "to" => $file);
+        $installdefs['copy'][] = ['from' => "<basepath>/$file", 'to' => $file];
     }
 
     foreach ($installdefs['copy'] as $k => $fileData) {
         if ($fileData['from'] == '<basepath>/modules/UpgradeWizard/language/en_us.lang.php') {
-            $installdefs['copy'][$k]['to'] = "custom/modules/UpgradeWizard/language/en_us.lang.php";
+            $installdefs['copy'][$k]['to'] = 'custom/modules/UpgradeWizard/language/en_us.lang.php';
             break;
         }
     }
 
-// administration menu entry
-    $installdefs['copy'][] = array(
-        "from" => "<basepath>/upgrader2.php",
-        "to" => "custom/Extension/modules/Administration/Ext/Administration/upgrader2.php"
-    );
+    // administration menu entry
+    $installdefs['copy'][] = [
+        'from' => '<basepath>/upgrader2.php',
+        'to' => 'custom/Extension/modules/Administration/Ext/Administration/upgrader2.php',
+    ];
     $zip->addFromString(
-        "upgrader2.php",
+        'upgrader2.php',
         "<?php\n\$admin_group_header[2][3]['Administration']['upgrade_wizard']= array('Upgrade','LBL_UPGRADE_WIZARD_TITLE','LBL_UPGRADE_WIZARD','./UpgradeWizard.php');"
     );
 
@@ -91,9 +88,9 @@ function packUpgradeWizardWeb($zip, $manifest, $installdefs, $params) {
         var_export($manifest, true),
         var_export($installdefs, true)
     );
-    $zip->addFromString("manifest.php", $cont);
+    $zip->addFromString('manifest.php', $cont);
 
-    return array($zip, $manifest, $installdefs);
+    return [$zip, $manifest, $installdefs];
 }
 
 if (empty($argv[0]) || basename($argv[0]) != basename(__FILE__)) {
@@ -102,7 +99,7 @@ if (empty($argv[0]) || basename($argv[0]) != basename(__FILE__)) {
 
 $sapi_type = php_sapi_name();
 if (substr($sapi_type, 0, 3) != 'cli') {
-    die("This is command-line only script");
+    die('This is command-line only script');
 }
 
 if (empty($argv[1])) {
@@ -111,12 +108,12 @@ if (empty($argv[1])) {
 
 $name = $argv[1];
 
-$params = array();
+$params = [];
 
-if(isset($argv[2])) {
+if (isset($argv[2])) {
     $params['version'] = $argv[2];
 }
-if(isset($argv[3])) {
+if (isset($argv[3])) {
     $params['build'] = $argv[3];
 }
 if (isset($argv[4])) {
@@ -126,10 +123,12 @@ if (isset($argv[4])) {
 $zip = new ZipArchive();
 $zip->open($name, ZipArchive::CREATE);
 
-packUpgradeWizardWeb($zip,
-    array(),
-    array("id" => "upgrader" . time(), "copy" => array()),
-    $params);
+packUpgradeWizardWeb(
+    $zip,
+    [],
+    ['id' => 'upgrader' . time(), 'copy' => []],
+    $params
+);
 
 $zip->close();
 exit(0);

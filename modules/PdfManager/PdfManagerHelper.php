@@ -22,7 +22,6 @@ function getPdfManagerAvailableModules()
 
 class PdfManagerHelper
 {
-
     /**
      * Returns a list of banned Fields and Links by module for PdfManager
      *
@@ -32,9 +31,9 @@ class PdfManagerHelper
     public static function getBannnedFieldsAndLinks()
     {
 
-        $bannedPdfManagerFieldsAndLinks = array();
+        $bannedPdfManagerFieldsAndLinks = [];
 
-        foreach(SugarAutoLoader::existingCustom('modules/PdfManager/metadata/pdfmanagermodulesdefs.php') as $file) {
+        foreach (SugarAutoLoader::existingCustom('modules/PdfManager/metadata/pdfmanagermodulesdefs.php') as $file) {
             include $file;
         }
 
@@ -51,9 +50,9 @@ class PdfManagerHelper
     public static function getBannnedModules()
     {
 
-        $bannedPdfManagerModules = array();
+        $bannedPdfManagerModules = [];
 
-        foreach(SugarAutoLoader::existingCustom('modules/PdfManager/metadata/pdfmanagermodulesdefs.php') as $file) {
+        foreach (SugarAutoLoader::existingCustom('modules/PdfManager/metadata/pdfmanagermodulesdefs.php') as $file) {
             include $file;
         }
 
@@ -71,7 +70,7 @@ class PdfManagerHelper
         $available_modules = [];
         $bannedModules = PdfManagerHelper::getBannnedModules();
 
-        $module_names = array_change_key_case ($GLOBALS['app_list_strings']['moduleList']);
+        $module_names = array_change_key_case($GLOBALS['app_list_strings']['moduleList']);
         $studio_browser = new StudioBrowser();
         $studio_browser->loadModules();
         $studio_modules = array_keys($studio_browser->modules);
@@ -98,31 +97,30 @@ class PdfManagerHelper
     /**
      * Takes an module name and returns a list of fields and links available for this module in PdfManager
      *
-     * @param  string  $moduleName
-     * @param  boolean $addLinks
+     * @param string $moduleName
+     * @param boolean $addLinks
      * @return array
      */
     public static function getFields($moduleName, $addLinks = false)
     {
-        $fieldsForSelectedModule = array();
+        $fieldsForSelectedModule = [];
         if (!empty($moduleName)) {
             // Retrieve the list of field
-            $fieldsForSelectedModule = PdfManagerHelper::getRelatableFieldsForLink(array('module' => $moduleName));
+            $fieldsForSelectedModule = PdfManagerHelper::getRelatableFieldsForLink(['module' => $moduleName]);
             asort($fieldsForSelectedModule);
 
             if (!empty($fieldsForSelectedModule) && $addLinks) {
                 $linksForSelectedModule = PdfManagerHelper::getLinksForModule($moduleName);
-                if ((is_countable($linksForSelectedModule) ? count($linksForSelectedModule) : 0) > 0) {
-                    $linksFieldsForSelectedModule = array();
+                if (safeCount($linksForSelectedModule) > 0) {
+                    $linksFieldsForSelectedModule = [];
                     foreach ($linksForSelectedModule as $linkName => $linkDef) {
                         $linksFieldsForSelectedModule['pdfManagerRelateLink_' . $linkName] = $linkDef['label'];
                     }
                     asort($linksFieldsForSelectedModule);
-                    $fieldsForSelectedModule = array(
+                    $fieldsForSelectedModule = [
                         translate('LBL_FIELDS_LIST', 'PdfManager') => $fieldsForSelectedModule,
                         translate('LBL_LINK_LIST', 'PdfManager') => $linksFieldsForSelectedModule,
-                    );
-
+                    ];
                 }
             }
         }
@@ -141,7 +139,7 @@ class PdfManagerHelper
 
         $fields = PdfManagerHelper::cleanFields($focus->field_defs, $module);
 
-        $links = array();
+        $links = [];
 
         if ($module == 'Quotes') {
             $focusBundle = BeanFactory::newBean('ProductBundles');
@@ -150,54 +148,52 @@ class PdfManagerHelper
             $def = $focusBundle->field_defs[$name];
             $focusBundle->load_relationship($name);
             $fieldsBundle = PdfManagerHelper::cleanFields($focusBundle->field_defs, 'Products');
-            $label = empty($def['vname']) ? $name : str_replace(":" , "", translate($def['vname'], $module));
+            $label = empty($def['vname']) ? $name : str_replace(':', '', translate($def['vname'], $module));
             $relatedModule = (!empty($app_list_strings['moduleListSingular']['Product'])) ?
-                                $app_list_strings['moduleListSingular']['Product'] : 'Product';
-            $links[$name] = array (
-                "label" => "$label ($relatedModule)",
-                "module" => $relatedModule
-            );
+                $app_list_strings['moduleListSingular']['Product'] : 'Product';
+            $links[$name] = [
+                'label' => "$label ($relatedModule)",
+                'module' => $relatedModule,
+            ];
 
             $name = 'product_bundles';
             $def = $focus->field_defs[$name];
             $focus->load_relationship($name);
             $relatedModule = (!empty($app_list_strings['moduleListSingular'][$focus->$name->getRelatedModuleName()])) ?
-                                $app_list_strings['moduleListSingular'][$focus->$name->getRelatedModuleName()] : $focus->$name->getRelatedModuleName();
-            $label = empty($def['vname']) ? $name : str_replace(":" , "", translate($def['vname'], $module));
-            $links[$name] = array(
-                "label" => "$label ($relatedModule)",
-                "module" => $relatedModule
-            );
-
+                $app_list_strings['moduleListSingular'][$focus->$name->getRelatedModuleName()] : $focus->$name->getRelatedModuleName();
+            $label = empty($def['vname']) ? $name : str_replace(':', '', translate($def['vname'], $module));
+            $links[$name] = [
+                'label' => "$label ($relatedModule)",
+                'module' => $relatedModule,
+            ];
         }
 
         //Next, get a list of all links and the related modules
         foreach ($fields as $val) {
             $name = $val[0];
             $def = $focus->field_defs[$name];
-            if ($val[1] == "relate" && $focus->load_relationship($name)) {
+            if ($val[1] == 'relate' && $focus->load_relationship($name)) {
                 $relatedModule = (!empty($app_list_strings['moduleListSingular'][$focus->$name->getRelatedModuleName()])) ?
-                                $app_list_strings['moduleListSingular'][$focus->$name->getRelatedModuleName()] : $focus->$name->getRelatedModuleName();
-                if (
-                    (isset($def['link_type']) && $def['link_type'] == 'one') ||
+                    $app_list_strings['moduleListSingular'][$focus->$name->getRelatedModuleName()] : $focus->$name->getRelatedModuleName();
+                if ((isset($def['link_type']) && $def['link_type'] == 'one') ||
                     ($focus->$name->getType() == 'one') ||
                     ($focus->$name->getType() == 'one' && !$focus->$name->_get_bean_position()) ||
                     ($focus->$name->getType() == 'many' && !isset($def['side']) && $focus->$name->_get_link_table_definition($focus->$name->_relationship_name, 'true_relationship_type') == 'one-to-many' && !$focus->$name->_get_bean_position()) ||
                     ($focus->$name->getType() == 'many' && !isset($def['side']) && $focus->$name->_get_link_table_definition($focus->$name->_relationship_name, 'true_relationship_type') == 'many-to-one' && $focus->$name->_get_bean_position())
                 ) {
-                    if (!empty($def['side']) && (substr($name, -4) == "_ida" || substr($name, -4) == "_idb")) {
+                    if (!empty($def['side']) && (substr($name, -4) == '_ida' || substr($name, -4) == '_idb')) {
                         continue;
                     }
 
-                    if (isset($bannedFieldsAndLinks[$module]) && isset($bannedFieldsAndLinks[$module]['relationships']) && in_array($name, $bannedFieldsAndLinks[$module]['relationships'])) {
+                    if (isset($bannedFieldsAndLinks[$module]) && isset($bannedFieldsAndLinks[$module]['relationships']) && safeInArray($name, $bannedFieldsAndLinks[$module]['relationships'])) {
                         continue;
                     }
 
-                    $label = empty($def['vname']) ? $name : str_replace(":" , "", translate($def['vname'], $module));
-                    $links[$name] = array(
-                        "label" => "$label ($relatedModule)",
-                        "module" => $relatedModule
-                    );
+                    $label = empty($def['vname']) ? $name : str_replace(':', '', translate($def['vname'], $module));
+                    $links[$name] = [
+                        'label' => "$label ($relatedModule)",
+                        'module' => $relatedModule,
+                    ];
                 }
             }
         }
@@ -207,15 +203,15 @@ class PdfManagerHelper
 
     /**
      * @static
-     * @param  array     $link
-     * @param  MBPackage $package
-     * @param  array     $allowedTypes list of types to allow as related fields
+     * @param array $link
+     * @param MBPackage $package
+     * @param array $allowedTypes list of types to allow as related fields
      * @return array
      */
-    public static function getRelatableFieldsForLink($link, $package = null, $allowedTypes = array())
+    public static function getRelatableFieldsForLink($link, $package = null, $allowedTypes = [])
     {
-        $rfields = array();
-        $relatedModule = $link["module"];
+        $rfields = [];
+        $relatedModule = $link['module'];
         $mbModule = null;
         if (!empty($package)) {
             $mbModule = $package->getModuleByFullName($relatedModule);
@@ -231,40 +227,40 @@ class PdfManagerHelper
 
         // Adding special fields not available in vardefs
         if ($relatedModule == 'Quotes') {
-            $field_defs['taxrate_value'] = array(
+            $field_defs['taxrate_value'] = [
                 'name' => 'taxrate_value',
                 'vname' => 'LBL_TAXRATE',
-                'type' => 'decimal'
-            );
-            $field_defs['currency_iso'] = array(
+                'type' => 'decimal',
+            ];
+            $field_defs['currency_iso'] = [
                 'name' => 'currency_iso',
                 'vname' => 'LBL_CURRENCY',
-                'type' => 'varchar'
-            );
+                'type' => 'varchar',
+            ];
         } elseif ($relatedModule == 'Products') {
-            $field_defs['discount_amount'] = array(
+            $field_defs['discount_amount'] = [
                 'name' => 'discount_amount',
                 'vname' => 'LBL_EXT_PRICE',
-                'type' => 'decimal'
-            );
+                'type' => 'decimal',
+            ];
         }
 
         $relatedFields = PdfManagerHelper::cleanFields($field_defs, $relatedModule, false, true);
         foreach ($relatedFields as $val) {
             $name = $val[0];
             //Rollups must be either a number or a possible number (like a string) to roll up
-            if (!empty($allowedTypes) && !in_array($val[1], $allowedTypes)) {
+            if (!empty($allowedTypes) && !safeInArray($val[1], $allowedTypes)) {
                 continue;
             }
 
             $def = $field_defs[$name];
             if (empty($mbModule)) {
-                $rfields[$name] = empty($def['vname']) ? $name : str_replace(":", "", translate($def['vname'], $relatedModule));
+                $rfields[$name] = empty($def['vname']) ? $name : str_replace(':', '', translate($def['vname'], $relatedModule));
             } else {
-                $rfields[$name] = empty($def['vname']) ? $name : str_replace(":", "", $mbModule->mblanguage->translate($def['vname']));
+                $rfields[$name] = empty($def['vname']) ? $name : str_replace(':', '', $mbModule->mblanguage->translate($def['vname']));
             }
             //Strip the ":" from any labels that have one
-            if (substr($rfields[$name], -1) == ":") {
+            if (substr($rfields[$name], -1) == ':') {
                 $rfields[$name] = substr($rfields[$name], 0, strlen($rfields[$name]) - 1);
             }
         }
@@ -275,20 +271,20 @@ class PdfManagerHelper
     /**
      * Takes an array of field defs and returns a formated list of fields that are valid for use in select list.
      *
-     * @param  array $fieldDef
+     * @param array $fieldDef
      * @return array
      */
     public static function cleanFields($fieldDef, $moduleName = '', $includeLinks = true, $forRelatedField = false, $returnKeys = false)
     {
 
         $bannedFieldsAndLinks = PdfManagerHelper::getBannnedFieldsAndLinks();
-        $fieldArray = array();
+        $fieldArray = [];
         foreach ($fieldDef as $fieldName => $def) {
             if (!is_array($def) || $fieldName == 'deleted' || empty($def['type'])) {
                 continue;
             }
 
-            if (isset($bannedFieldsAndLinks[$moduleName]) && isset($bannedFieldsAndLinks[$moduleName]['fields']) && in_array($fieldName, $bannedFieldsAndLinks[$moduleName]['fields'])) {
+            if (isset($bannedFieldsAndLinks[$moduleName]) && isset($bannedFieldsAndLinks[$moduleName]['fields']) && safeInArray($fieldName, $bannedFieldsAndLinks[$moduleName]['fields'])) {
                 continue;
             }
 
@@ -300,9 +296,8 @@ class PdfManagerHelper
             //Check the studio property of the field def.
             if (isset($def['studio']) && (self::isFalse($def['studio']) || (is_array($def['studio']) && (
                 (isset($def['studio']['formula']) && self::isFalse($def['studio']['formula'])) ||
-                ($forRelatedField && isset($def['studio']['related']) && self::isFalse($def['studio']['related']))
-            ))))
-            {
+                            ($forRelatedField && isset($def['studio']['related']) && self::isFalse($def['studio']['related']))
+            )))) {
                 continue;
             }
 
@@ -311,41 +306,41 @@ class PdfManagerHelper
             }
 
             switch ($def['type']) {
-                case "int":
-                case "float":
-                case "decimal":
-                case "currency":
-                    $fieldArray[$fieldName] = array($fieldName, 'number');
+                case 'int':
+                case 'float':
+                case 'decimal':
+                case 'currency':
+                    $fieldArray[$fieldName] = [$fieldName, 'number'];
                     break;
-                case "bool":
-                    $fieldArray[$fieldName] = array($fieldName, 'boolean');
+                case 'bool':
+                    $fieldArray[$fieldName] = [$fieldName, 'boolean'];
                     break;
-                case "varchar":
-                case "name":
-                case "user_name":
-                case "phone":
-                case "text":
-                case "url":
-                case "encrypt":
-                case "enum":
-                case "radio":
-                case "radioenum":
-                case "multienum":
-                    $fieldArray[$fieldName] = array($fieldName, 'string');
+                case 'varchar':
+                case 'name':
+                case 'user_name':
+                case 'phone':
+                case 'text':
+                case 'url':
+                case 'encrypt':
+                case 'enum':
+                case 'radio':
+                case 'radioenum':
+                case 'multienum':
+                    $fieldArray[$fieldName] = [$fieldName, 'string'];
                     break;
-                case "relate":
+                case 'relate':
                     if (!empty($def['ext2'])) {
-                        $fieldArray[$fieldName] = array($fieldName, 'string');
+                        $fieldArray[$fieldName] = [$fieldName, 'string'];
                     }
                     break;
-                case "date":
-                case "datetime":
-                case "datetimecombo":
-                    $fieldArray[$fieldName] = array($fieldName, 'date');
+                case 'date':
+                case 'datetime':
+                case 'datetimecombo':
+                    $fieldArray[$fieldName] = [$fieldName, 'date'];
                     break;
-                case "link":
+                case 'link':
                     if ($includeLinks) {
-                        $fieldArray[$fieldName] = array($fieldName, 'relate');
+                        $fieldArray[$fieldName] = [$fieldName, 'relate'];
                     }
                     break;
                 default:
@@ -364,7 +359,7 @@ class PdfManagerHelper
     protected static function isFalse($v)
     {
         if (is_string($v)) {
-            return strToLower($v) == "false";
+            return strToLower($v) == 'false';
         }
         if (is_array($v)) {
             return false;
@@ -376,7 +371,7 @@ class PdfManagerHelper
     /**
      * Get the available templates for a specific module
      *
-     * @param  string $module
+     * @param string $module
      * @return array
      *
      */
@@ -384,7 +379,7 @@ class PdfManagerHelper
     {
         $pdfManager = BeanFactory::newBean('PdfManager');
 
-        return $pdfManager->get_full_list('', "base_module='" .  $GLOBALS['db']->quote($module) . "' AND published = 'yes'");
+        return $pdfManager->get_full_list('', "base_module='" . $GLOBALS['db']->quote($module) . "' AND published = 'yes'");
     }
 
     /**
@@ -431,6 +426,7 @@ class PdfManagerHelper
                     default:
                         return false;
                 }
+                // no break
             default:
                 return false;
         }
@@ -439,54 +435,56 @@ class PdfManagerHelper
     /**
      * Make array from bean
      *
-     * @param  array   $module_instance -- Instance of module
-     * @param  boolean $recursive       -- If TRUE parse related one-to-many fields
+     * @param array $module_instance -- Instance of module
+     * @param boolean $recursive -- If TRUE parse related one-to-many fields
      * @return array   -- key    : field Name
      *                                     value  : field Value
      */
-    public static function parseBeanFields($module_instance, $recursive = FALSE)
+    public static function parseBeanFields($module_instance, $recursive = false)
     {
         global $app_list_strings;
 
         $module_instance->ACLFilterFields();
 
-        $fields_module = array();
+        $fields_module = [];
         foreach ($module_instance->toArray() as $name => $value) {
             if (!is_scalar($name) && $name !== null) {
-                LoggerManager::getLogger()->fatal(sprintf('array key is expected to be scalar, %s given. %s', gettype($name), PHP_EOL . (new Exception())->getTraceAsString()));
+                LoggerManager::getLogger()->warn(sprintf('array key is expected to be scalar, %s given. %s', gettype($name), PHP_EOL . (new Exception())->getTraceAsString()));
                 continue;
             }
             if (isset($module_instance->field_defs[$name]['type']) &&
                 ($module_instance->field_defs[$name]['type'] == 'enum' || $module_instance->field_defs[$name]['type'] == 'radio' || $module_instance->field_defs[$name]['type'] == 'radioenum') &&
                 isset($module_instance->field_defs[$name]['options']) &&
+                is_scalar($module_instance->field_defs[$name]['options']) &&
                 isset($app_list_strings[$module_instance->field_defs[$name]['options']]) &&
                 isset($app_list_strings[$module_instance->field_defs[$name]['options']][$value])
-               ) {
+            ) {
                 $fields_module[$name] = $app_list_strings[$module_instance->field_defs[$name]['options']][$value];
-                $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $fields_module[$name]);
+                $fields_module[$name] = str_replace(['&#39;', '&#039;'], "'", $fields_module[$name]);
             } elseif (isset($module_instance->field_defs[$name]['type']) &&
                 $module_instance->field_defs[$name]['type'] == 'multienum' &&
                 isset($module_instance->field_defs[$name]['options']) &&
+                is_scalar($module_instance->field_defs[$name]['options']) &&
                 isset($app_list_strings[$module_instance->field_defs[$name]['options']])
-               ) {
+            ) {
                 $multienums = unencodeMultienum($value);
-                $multienums_value = array();
+                $multienums_value = [];
                 foreach ($multienums as $multienum) {
-                  if (isset($app_list_strings[$module_instance->field_defs[$name]['options']][$multienum])) {
-                      $multienums_value[] = $app_list_strings[$module_instance->field_defs[$name]['options']][$multienum];
-                  } else {
-                      $multienums_value[] = $multienum;
-                  }
+                    if (isset($app_list_strings[$module_instance->field_defs[$name]['options']][$multienum])) {
+                        $multienums_value[] = $app_list_strings[$module_instance->field_defs[$name]['options']][$multienum];
+                    } else {
+                        $multienums_value[] = $multienum;
+                    }
                 }
                 $fields_module[$name] = implode(', ', $multienums_value);
-                $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $fields_module[$name]);
+                $fields_module[$name] = str_replace(['&#39;', '&#039;'], "'", $fields_module[$name]);
             } elseif ($recursive &&
                 isset($module_instance->field_defs[$name]['type']) &&
                 $module_instance->field_defs[$name]['type'] == 'link' &&
                 $module_instance->load_relationship($name) &&
                 self::hasOneRelationship($module_instance, $name) &&
-                (is_countable($module_instance->$name->get()) ? count($module_instance->$name->get()) : 0) == 1
-               ) {
+                safeCount($module_instance->$name->get()) == 1
+            ) {
                 $related_module = $module_instance->$name->getRelatedModuleName();
                 $related_instance = BeanFactory::newBean($related_module);
                 $related_instance_id = $module_instance->$name->get();
@@ -494,39 +492,36 @@ class PdfManagerHelper
                     $GLOBALS['log']->fatal(__FILE__ . ' Failed loading module ' . $related_module . ' with id ' . $related_instance_id[0]);
                 }
 
-                $fields_module[$name] = self::parseBeanFields($related_instance, FALSE);
-            } elseif (
-                isset($module_instance->field_defs[$name]['type']) &&
+                $fields_module[$name] = self::parseBeanFields($related_instance, false);
+            } elseif (isset($module_instance->field_defs[$name]['type']) &&
                 $module_instance->field_defs[$name]['type'] == 'currency' &&
                 isset($module_instance->currency_id)
-               ) {
+            ) {
                 global $locale;
-                $format_number_array = array(
+                $format_number_array = [
                     'currency_symbol' => true,
                     'currency_id' => (!empty($module_instance->field_defs[$name]['currency_id']) ? $module_instance->field_defs[$name]['currency_id'] : $module_instance->currency_id),
                     'type' => 'sugarpdf',
                     'charset_convert' => true,
-                );
+                ];
 
                 $fields_module[$name] = format_number_sugarpdf($module_instance->$name, $locale->getPrecision(), $locale->getPrecision(), $format_number_array);
-            } elseif (
-                isset($module_instance->field_defs[$name]['type']) &&
+            } elseif (isset($module_instance->field_defs[$name]['type']) &&
                 ($module_instance->field_defs[$name]['type'] == 'decimal')
-               ) {
+            ) {
                 global $locale;
-                $format_number_array = array(
+                $format_number_array = [
                     'convert' => false,
-                );
+                ];
                 if (!isset($module_instance->$name)) {
                     $module_instance->$name = 0;
                 }
 
                 $fields_module[$name] = format_number_sugarpdf($module_instance->$name, $locale->getPrecision(), $locale->getPrecision(), $format_number_array);
-            } elseif (
-                isset($module_instance->field_defs[$name]['type']) &&
+            } elseif (isset($module_instance->field_defs[$name]['type']) &&
                 ($module_instance->field_defs[$name]['type'] == 'image')
-               ) {
-                $fields_module[$name] = "upload://" . $value;
+            ) {
+                $fields_module[$name] = 'upload://' . $value;
             } elseif (is_string($value)) {
                 $value = nl2br(stripslashes($value));
 

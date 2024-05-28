@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Pulpit listy uwag',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Pulpit rekordów notatek',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy notatek',
     'LBL_EXTERNAL_USER' => 'Zewnętrzny użytkownik',
     'LBL_EXTERNAL_USER_NAME' => 'Zewnętrzny użytkownik',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Oś czasu notatki',
 
     'LBL_RELATED_CONTACT' => 'Powiązany kontakt',
     'ERR_DELETE_RECORD' => 'Aby usunąć Kontrahenta, musisz podać numer rekordu.',
@@ -130,4 +131,4 @@ Po utworzeniu rekordu {{module_name}}, można wyświetlać i edytować informacj
 - Pola oznaczone jako Wymagane należy uzupełnić przed zapisem.
 - Kliknij opcję Pokaż więcej, aby w razie konieczności wyświetlić dodatkowe pola.
 2. Kliknij opcję Zapisz, aby zapisać nowy rekord i powrócić do poprzedniej strony.',
-);
+];

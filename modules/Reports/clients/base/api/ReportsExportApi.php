@@ -11,23 +11,27 @@
  */
 
 use Sugarcrm\Sugarcrm\modules\Reports\Exporters\ReportExporter;
+use Sugarcrm\Sugarcrm\Reports\AccessRules\AccessRulesManager;
 
-require_once('include/download_file.php');
+require_once 'include/download_file.php';
+
 /**
  * @api
  */
-class ReportsExportApi extends SugarApi {
+class ReportsExportApi extends SugarApi
+{
     // how long the cache is ok, in minutes
     private $cacheLength = 10;
 
-    public function registerApiRest() {
-        return array(
-            'exportRecord' => array(
+    public function registerApiRest()
+    {
+        return [
+            'exportRecord' => [
                 'reqType' => 'GET',
-                'path' => array('Reports', '?', '?'),
-                'pathVars' => array('module', 'record', 'export_type'),
+                'path' => ['Reports', '?', '?'],
+                'pathVars' => ['module', 'record', 'export_type'],
                 'method' => 'exportRecord',
-                'rawReply'=> true,
+                'rawReply' => true,
                 'shortHelp' => 'This method exports a report in the specified type',
                 'longHelp' => 'modules/Reports/clients/base/api/help/report_export_get_help.html',
                 'exceptions' => [
@@ -35,9 +39,17 @@ class ReportsExportApi extends SugarApi {
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNoMethod',
                     'SugarApiExceptionNotAuthorized',
+                    'SugarReportsExceptionAccessDisabled',
+                    'SugarReportsExceptionAdminExportOnly',
+                    'SugarReportsExceptionDisabledExport',
+                    'SugarReportsExceptionExportNotAllowed',
+                    'SugarReportsExceptionExportOwner',
+                    'SugarReportsExceptionFieldsRestricted',
+                    'SugarReportsExceptionListNotAllowed',
+                    'SugarReportsExceptionViewNotAllowed',
                 ],
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -49,22 +61,32 @@ class ReportsExportApi extends SugarApi {
     public function exportRecord(ServiceBase $api, array $args)
     {
 
-        $this->requireArgs($args,array('record', 'export_type'));
+        $this->requireArgs($args, ['record', 'export_type']);
         $args['module'] = 'Reports';
 
-        $GLOBALS['disable_date_format'] = FALSE;
+        $GLOBALS['disable_date_format'] = false;
 
         $method = 'export' . ucwords($args['export_type']);
 
-        if(!method_exists($this, $method)) {
+        if (!method_exists($this, $method)) {
             throw new SugarApiExceptionNoMethod('Export Type Does Not Exists');
         }
 
         $saved_report = $this->loadBean($api, $args, 'view');
 
-        if(!$saved_report->ACLAccess('view')) {
+        if (!$saved_report->ACLAccess('view')) {
             throw new SugarApiExceptionNotAuthorized('No access to view records for module: Reports');
         }
+
+        $rulesToTest = [
+            'configExport',
+            'viewRights',
+            'exportRights',
+            'accessFieldsRights',
+        ];
+        AccessRulesManager::getInstance()
+            ->setRules($rulesToTest)
+            ->validate($saved_report);
 
         if (isset($args['shouldHaveChartCanvas'])) {
             $saved_report->shouldHaveChartCanvas = true;
@@ -83,7 +105,6 @@ class ReportsExportApi extends SugarApi {
         }
 
         return $this->$method($api, $saved_report);
-
     }
 
     /**
@@ -93,16 +114,15 @@ class ReportsExportApi extends SugarApi {
      */
     protected function exportBase64(ServiceBase $api, SugarBean $report)
     {
-        global  $beanList, $beanFiles;
-        global $sugar_config,$current_language;
-        require_once('modules/Reports/templates/templates_pdf.php');
+        global $beanList, $beanFiles;
+        global $sugar_config, $current_language;
+        require_once 'modules/Reports/templates/templates_pdf.php';
         $contents = '';
         $report_filename = false;
-        if($report->id != null)
-        {
+        if ($report->id != null) {
             //Translate pdf to correct language
             $reporter = new Report(html_entity_decode($report->content, ENT_COMPAT), '', '');
-            $reporter->layout_manager->setAttribute("no_sort",1);
+            $reporter->layout_manager->setAttribute('no_sort', 1);
             $reporter->fromApi = true;
 
             if ($report->shouldHaveChartCanvas) {
@@ -122,7 +142,7 @@ class ReportsExportApi extends SugarApi {
             $dl = new DownloadFile();
             $contents = $dl->getFileByFilename($report_filename);
         }
-        if(empty($contents)) {
+        if (empty($contents)) {
             throw new SugarApiException('File contents empty.');
         }
         // Reply is raw just pass back the base64 encoded contents
@@ -136,15 +156,14 @@ class ReportsExportApi extends SugarApi {
      */
     protected function exportPdf(ServiceBase $api, SugarBean $report)
     {
-        global  $beanList, $beanFiles;
-        global $sugar_config,$current_language;
-        require_once('modules/Reports/templates/templates_pdf.php');
+        global $beanList, $beanFiles;
+        global $sugar_config, $current_language;
+        require_once 'modules/Reports/templates/templates_pdf.php';
         $report_filename = false;
-        if($report->id != null)
-        {
+        if ($report->id != null) {
             //Translate pdf to correct language
             $reporter = new Report(html_entity_decode($report->content, ENT_COMPAT), '', '');
-            $reporter->layout_manager->setAttribute("no_sort",1);
+            $reporter->layout_manager->setAttribute('no_sort', 1);
             $reporter->fromApi = true;
             $reporter->saved_report_id = $report->id;
             $reporter->is_saved_report = true;
@@ -156,9 +175,9 @@ class ReportsExportApi extends SugarApi {
             //Generate actual pdf
             $report_filename = template_handle_pdf($reporter, false);
 
-            $api->setHeader("Content-Type", "application/pdf");
-            $api->setHeader("Content-Disposition", 'attachment; filename="'.basename($report_filename).'"');
-            $api->setHeader("Expires", TimeDate::httpTime(time() + 2592000));
+            $api->setHeader('Content-Type', 'application/pdf');
+            $api->setHeader('Content-Disposition', 'attachment; filename="' . basename($report_filename) . '"');
+            $api->setHeader('Expires', TimeDate::httpTime(time() + 2592000));
             $api->fileResponse($report_filename);
         }
     }

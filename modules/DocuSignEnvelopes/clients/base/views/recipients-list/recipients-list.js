@@ -11,7 +11,7 @@
 /**
  * @class View.Views.Base.DocuSignEnvelopes.RecipientsListView
  * @alias SUGAR.App.view.views.BaseDocuSignEnvelopesRecipientsListView
- * @extends View.Views.Base.View
+ * @extends View.Views.Base.MultiSelectionListView
  */
 ({
     extendsFrom: 'MultiSelectionListView',
@@ -52,7 +52,7 @@
      * @param {Event} event The `click` event.
      */
     triggerCheck: function(event) {
-        const editableFieldTypes = ['base', 'enum', 'recipient-role'];
+        const editableFieldTypes = ['base', 'enum', 'docusign-recipient-role'];
         const parentTd = event.target.closest('td');
         if (!parentTd) {
             return;
@@ -126,6 +126,29 @@
                 return field.sfId !== fieldUUID;
             });
         }
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _validateSelection: function() {
+        let selectedModels = this.context.get('mass_collection');
+
+        let recipientWithoutRole = _.find(selectedModels.models, function(recipient) {
+            return !_.isString(recipient.get('role')) && !_.isString(recipient.get('type'));
+        });
+
+        if (!_.isUndefined(recipientWithoutRole)) {
+            app.DocuSign.utils._showRolesNotSetAlert();
+            return;
+        }
+
+        if (selectedModels.length > this.maxSelectedRecords) {
+            this._showMaxSelectedRecordsAlert();
+            return;
+        }
+
+        app.drawer.close(this._getCollectionAttributes(selectedModels));
     },
 
     /**

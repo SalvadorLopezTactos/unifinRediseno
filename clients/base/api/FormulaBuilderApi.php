@@ -84,9 +84,9 @@ class FormulaBuilderApi extends SugarApi
             }
         }
 
-        if ((!$strictType || $strictType === "parent") &&
-            (isset($bean->field_defs["parent_name"]) && $bean->field_defs["parent_name"])) {
-            $fields["parent_name"] = "parent";
+        if ((!$strictType || $strictType === 'parent') &&
+            (isset($bean->field_defs['parent_name']) && $bean->field_defs['parent_name'])) {
+            $fields['parent_name'] = 'parent';
         }
 
         return $fields;
@@ -179,7 +179,7 @@ class FormulaBuilderApi extends SugarApi
         $cacheFile = sugar_cached('Expressions/functionmap.php');
         if (!file_exists($cacheFile)) {
             $GLOBALS['updateSilent'] = true;
-            include "include/Expressions/updatecache.php";
+            include 'include/Expressions/updatecache.php';
         }
 
         include $cacheFile;

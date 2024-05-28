@@ -9,8 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$searchFields['ACLRoles'] = 
-	array (
-		'name' => array( 'query_type'=>'default'),
-		);
-?>
+$searchFields['ACLRoles'] =
+    [
+        'name' => ['query_type' => 'default'],
+    ];

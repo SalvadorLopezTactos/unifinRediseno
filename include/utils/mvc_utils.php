@@ -12,12 +12,12 @@
 
 function loadParentView($type)
 {
-    SugarAutoLoader::requireWithCustom('include/MVC/View/views/view.'.$type.'.php');
+    SugarAutoLoader::requireWithCustom('include/MVC/View/views/view.' . $type . '.php');
 }
 
 
 function getPrintLink()
 {
     return "javascript:void window.open('index.php?',"
-         . "'printwin','menubar=1,status=0,resizable=1,scrollbars=1,toolbar=0,location=1')";
+        . "'printwin','menubar=1,status=0,resizable=1,scrollbars=1,toolbar=0,location=1')";
 }

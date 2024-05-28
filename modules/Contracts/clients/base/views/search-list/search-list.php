@@ -9,31 +9,31 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Contracts']['base']['view']['search-list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Contracts']['base']['view']['search-list'] = [
+    'panels' => [
+        [
             'name' => 'primary',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'picture',
                     'type' => 'avatar',
                     'size' => 'medium',
                     'readonly' => true,
                     'css_class' => 'pull-left',
-                ),
-                array(
+                ],
+                [
                     'name' => 'name',
                     'type' => 'name',
                     'link' => true,
                     'label' => 'LBL_LIST_CONTRACT_NAME',
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'secondary',
-            'fields' => array(
-                'status'
-            ),
-        ),
-    ),
-);
+            'fields' => [
+                'status',
+            ],
+        ],
+    ],
+];

@@ -25,7 +25,7 @@
             </select>
             {{#each ../subFieldsMapping}}
                 {{#eq @key ../id}}
-                    <div class="cj-select-to-email-address-subfield" id="{{name}}">
+                    <div class="cj-select-to-email-address-subfield inline-block w-[15.625rem]" id="{{name}}">
                         {{field ../../../this.view model=../../../this.view.model template='edit'}}
                     </div>
                 {{/eq}}

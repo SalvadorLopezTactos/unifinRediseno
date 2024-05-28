@@ -10,25 +10,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
 
-  'LBL_NAME' =>'Nimi',
-  'LBL_NUMBER' => 'Numero:',
-  'LBL_STATUS' => 'Tila:',
-  'LBL_PRIORITY' => 'Prioriteetti:',
-  'LBL_DESCRIPTION' => 'Kuvaus',
-  'LBL_RESOLUTION' => 'Ratkaisuvaihe',
-  'LBL_LAST_MODIFIED' => 'Päivitetty',
-  'LBL_ASSIGNED_TO_ID'=>'Vastuuhenkilö:',
-  'LBL_ASSIGNED_TO_NAME' => 'Vastuuhenkilö',
-  'LBL_WORK_LOG' => 'Työloki:',
+    'LBL_NAME' => 'Nimi',
+    'LBL_NUMBER' => 'Numero:',
+    'LBL_STATUS' => 'Tila:',
+    'LBL_PRIORITY' => 'Prioriteetti:',
+    'LBL_DESCRIPTION' => 'Kuvaus',
+    'LBL_RESOLUTION' => 'Ratkaisuvaihe',
+    'LBL_LAST_MODIFIED' => 'Päivitetty',
+    'LBL_ASSIGNED_TO_ID' => 'Vastuuhenkilö:',
+    'LBL_ASSIGNED_TO_NAME' => 'Vastuuhenkilö',
+    'LBL_WORK_LOG' => 'Työloki:',
     'LBL_FOLLOW_UP' => 'Seuranta',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
     'LBL_RESOLVED_DATETIME' => 'Ratkaisupäivä',
@@ -36,19 +35,19 @@ $mod_strings = array (
     'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Ratkaisuaika tunneissa (aukioloaikaa)',
     'LBL_PENDING_PROCESSING' => 'Odottaa käsittelyä',
     'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Seurannan päivämäärä',
-  'LBL_CREATED_BY' => 'Luonut:',
-  'LBL_DATE_CREATED' => 'Luotu:',
-  'LBL_DATE_ENTERED' => 'Luontipäivä',
-  'LBL_DATE_MODIFIED'=>'Muokattu viimeksi',
-  'LBL_MODIFIED_BY' => 'Muokkaaja',
-  'LBL_ASSIGNED_USER' => 'Vastuukäyttäjä',
-  'LBL_ASSIGNED_USER_NAME' => 'Vastuuhenkilö',
-  'LBL_TEAM_NAME' =>'Tiimin nimi',
-  'LBL_TYPE'=>'Tyyppi',
-  'LBL_SUBJECT' => 'Aihe',
+    'LBL_CREATED_BY' => 'Luonut:',
+    'LBL_DATE_CREATED' => 'Luotu:',
+    'LBL_DATE_ENTERED' => 'Luontipäivä',
+    'LBL_DATE_MODIFIED' => 'Muokattu viimeksi',
+    'LBL_MODIFIED_BY' => 'Muokkaaja',
+    'LBL_ASSIGNED_USER' => 'Vastuukäyttäjä',
+    'LBL_ASSIGNED_USER_NAME' => 'Vastuuhenkilö',
+    'LBL_TEAM_NAME' => 'Tiimin nimi',
+    'LBL_TYPE' => 'Tyyppi',
+    'LBL_SUBJECT' => 'Aihe',
 
     'LBL_EDIT_BUTTON' => 'Muokkaa',
     'LBL_REMOVE' => 'Poista',
 
 
-  );
+];

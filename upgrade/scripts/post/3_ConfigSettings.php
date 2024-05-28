@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Update config.php settings
  */
@@ -53,23 +54,22 @@ class SugarUpgradeConfigSettings extends UpgradeScript
 
         $this->upgrader->config['sugar_version'] = $this->to_version;
 
-	    if(!isset($this->upgrader->config['logger'])){
-		    $this->upgrader->config['logger'] =array (
-				'level'=>'fatal',
-				'file' =>
-				array (
-						'name' => 'sugarcrm',
-						'dateFormat' => '%c',
-						'maxSize' => '10MB',
-						'maxLogs' => 10,
-						'suffix' => '', // bug51583, change default suffix to blank for backwards comptability
-				),
-		    );
-	    }
+        if (!isset($this->upgrader->config['logger'])) {
+            $this->upgrader->config['logger'] = [
+                'level' => 'fatal',
+                'file' => [
+                    'name' => 'sugarcrm',
+                    'dateFormat' => '%c',
+                    'maxSize' => '10MB',
+                    'maxLogs' => 10,
+                    'suffix' => '', // bug51583, change default suffix to blank for backwards comptability
+                ],
+            ];
+        }
 
-	    if (!isset($this->upgrader->config['lead_conv_activity_opt'])) {
-	        $this->upgrader->config['lead_conv_activity_opt'] = 'copy';
-	    }
+        if (!isset($this->upgrader->config['lead_conv_activity_opt'])) {
+            $this->upgrader->config['lead_conv_activity_opt'] = 'copy';
+        }
 
 
         // We no longer have multiple themes support.
@@ -118,11 +118,11 @@ class SugarUpgradeConfigSettings extends UpgradeScript
      */
     private function fixConfigSettings($config)
     {
-        $data = array(
-            '7.8.0.0' => array(
+        $data = [
+            '7.8.0.0' => [
                 'snip_url',
-            ),
-        );
+            ],
+        ];
 
         foreach ($data as $version => $config_keys) {
             if (version_compare($this->from_version, $version, '<')) {
@@ -145,11 +145,11 @@ class SugarUpgradeConfigSettings extends UpgradeScript
             return;
         }
         $this->log('Checking mass config action values...');
-        $settings = array(
+        $settings = [
             'mass_update_chunk_size' => 20,
             'mass_delete_chunk_size' => 20,
             'mass_link_chunk_size' => 20,
-        );
+        ];
         foreach ($settings as $setting => $previousDefaultValue) {
             if (!empty($this->upgrader->config['mass_actions'][$setting]) &&
                 $this->upgrader->config['mass_actions'][$setting] === $previousDefaultValue

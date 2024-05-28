@@ -11,7 +11,7 @@
  */
 
 $module_name = 'Prospects';
-$viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
+$viewdefs[$module_name]['base']['menu']['quickcreate'] = [
     'layout' => 'create',
     'visible' => false,
-);
+];

@@ -32,13 +32,13 @@ abstract class AbstractAggregation implements AggregationInterface
      * List of possible configuration
      * @var array
      */
-    protected $acceptedOptions = array();
+    protected $acceptedOptions = [];
 
     /**
      * Aggregation configuration options
      * @var array
      */
-    protected $options = array();
+    protected $options = [];
 
     /**
      * Flag to indicate we use a filtered query
@@ -96,7 +96,7 @@ abstract class AbstractAggregation implements AggregationInterface
             $buckets = $results['buckets'];
         }
 
-        $parsed = array();
+        $parsed = [];
         foreach ($buckets as $bucket) {
             $parsed[$bucket['key']] = $bucket['doc_count'];
         }
@@ -116,8 +116,8 @@ abstract class AbstractAggregation implements AggregationInterface
         foreach ($this->options as $option => $value) {
             $method = 'set' . ucfirst($option);
             if (method_exists($agg, $method)) {
-                $value = is_array($value) ? $value : array($value);
-                call_user_func_array(array($agg, $method), $value);
+                $value = is_array($value) ? $value : [$value];
+                call_user_func_array([$agg, $method], $value);
             }
         }
     }

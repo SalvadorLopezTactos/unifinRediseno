@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['<module_name>']['base']['filter']['file'] = array(
-    'quicksearch_field' => array('document_name'),
+$viewdefs['<module_name>']['base']['filter']['file'] = [
+    'quicksearch_field' => ['document_name'],
     'quicksearch_priority' => 2,
-);
+];

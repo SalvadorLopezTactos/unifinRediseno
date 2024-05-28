@@ -24,6 +24,7 @@ class SugarOIDCUserProvider implements UserProviderInterface
      * @var SugarLocalUserProvider
      */
     protected $sugarLocalUserProvider;
+
     /**
      * SugarOIDCUserProvider constructor.
      * @param UserProviderInterface $sugarLocalUserProvider
@@ -62,9 +63,9 @@ class SugarOIDCUserProvider implements UserProviderInterface
         $srnObject = $userSrn->getResource();
 
         if ($srnObject[0] === 'sa') {
-            $user = new ServiceAccount(null, null);
+            $user = new ServiceAccount('', '');
         } else {
-            $user = new User(null, null);
+            $user = new User('', '');
         }
         $user->setSrn($srn);
         return $user;

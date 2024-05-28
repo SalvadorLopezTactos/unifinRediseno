@@ -18,5 +18,4 @@
  */
 class SugarMath_Exception extends Exception
 {
-
 }

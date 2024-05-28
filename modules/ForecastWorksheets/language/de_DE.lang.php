@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
 
     //module strings.
     'LBL_MODULE_NAME' => 'Prognose-Arbeitsblätter',
@@ -41,14 +41,14 @@ $mod_strings = array (
     'LBL_FORECAST_TYPE' => 'Prognose-Typ',
     'LBL_FORECAST_OPP_COUNT' => 'Verkaufschancen-Anzahl',
     'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Verkaufschancen in Pipeline',
-    'LBL_FORECAST_OPP_WEIGH'=> 'Gewichteter Betrag',
+    'LBL_FORECAST_OPP_WEIGH' => 'Gewichteter Betrag',
     'LBL_FORECAST_USER' => 'Benutzer',
-    'LBL_DATE_COMMITTED'=> 'Bestätigungs-Datum',
+    'LBL_DATE_COMMITTED' => 'Bestätigungs-Datum',
     'LBL_DATE_ENTERED' => 'Erstellungsdatum',
     'LBL_DATE_MODIFIED' => 'Änderungsdatum',
     'LBL_CREATED_BY' => 'Erstellt von',
     'LBL_DELETED' => 'Gelöscht',
-    'LBL_MODIFIED_USER_ID'=>'Geändert von',
+    'LBL_MODIFIED_USER_ID' => 'Geändert von',
     'LBL_WK_VERSION' => 'Version',
     'LBL_WK_REVISION' => 'Revision',
 
@@ -65,68 +65,68 @@ $mod_strings = array (
     'LBL_QC_UPCOMING_FORECASTS' => 'Meine Prognosen',
     'LBL_QC_LAST_DATE_COMMITTED' => 'Letztes Bestätigungsdatum:',
     'LBL_QC_LAST_COMMIT_VALUE' => 'Letzter festgelegter Betrag:',
-    'LBL_QC_HEADER_DELIM'=> 'bis',
+    'LBL_QC_HEADER_DELIM' => 'bis',
 
     //opportunity worksheet list view labels
-    'LBL_OW_OPPORTUNITIES' => "Verkaufschance",
-    'LBL_OW_ACCOUNTNAME' => "Firma",
-    'LBL_OW_REVENUE' => "Betrag",
-    'LBL_OW_WEIGHTED' => "Gewichteter Betrag",
-    'LBL_OW_MODULE_TITLE'=> 'Verkaufschancen-Arbeitsblatt',
-    'LBL_OW_PROBABILITY'=>'Wahrscheinlichkeit',
-    'LBL_OW_NEXT_STEP'=>'Nächster Schritt',
-    'LBL_OW_DESCRIPTION'=>'Beschreibung',
-    'LBL_OW_TYPE'=>'Typ',
+    'LBL_OW_OPPORTUNITIES' => 'Verkaufschance',
+    'LBL_OW_ACCOUNTNAME' => 'Firma',
+    'LBL_OW_REVENUE' => 'Betrag',
+    'LBL_OW_WEIGHTED' => 'Gewichteter Betrag',
+    'LBL_OW_MODULE_TITLE' => 'Verkaufschancen-Arbeitsblatt',
+    'LBL_OW_PROBABILITY' => 'Wahrscheinlichkeit',
+    'LBL_OW_NEXT_STEP' => 'Nächster Schritt',
+    'LBL_OW_DESCRIPTION' => 'Beschreibung',
+    'LBL_OW_TYPE' => 'Typ',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'Direktbericht',
-    'LBL_FDR_OPPORTUNITIES'=>'Verkaufschancen in Prognose:',
-    'LBL_FDR_WEIGH'=>'Gewichteter Betrag der Verkaufschancen:',
-    'LBL_FDR_COMMIT'=>'Bestätigter Betrag',
-    'LBL_FDR_DATE_COMMIT'=>'Bestätigungsdatum',
+    'LBL_FDR_USER_NAME' => 'Direktbericht',
+    'LBL_FDR_OPPORTUNITIES' => 'Verkaufschancen in Prognose:',
+    'LBL_FDR_WEIGH' => 'Gewichteter Betrag der Verkaufschancen:',
+    'LBL_FDR_COMMIT' => 'Bestätigter Betrag',
+    'LBL_FDR_DATE_COMMIT' => 'Bestätigungsdatum',
 
     //detail view.
     'LBL_DV_HEADER' => 'Prognose: Arbeitsblatt',
     'LBL_DV_MY_FORECASTS' => 'Meine Prognosen',
-    'LBL_DV_MY_TEAM' => "Meine Team-Prognose" ,
+    'LBL_DV_MY_TEAM' => "Meine Team-Prognose",
     'LBL_DV_TIMEPERIODS' => 'Zeitspannen:',
     'LBL_DV_FORECAST_PERIOD' => 'Prognose-Zeitspanne',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Prognose-Verkaufschancen',
     'LBL_SEARCH' => 'Auswählen',
     'LBL_SEARCH_LABEL' => 'Auswählen',
     'LBL_COMMIT_HEADER' => 'Prognose-Bestätigung',
-    'LBL_DV_LAST_COMMIT_DATE' =>'Letztes Bestätigungsdatum:',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'Letzte bestätigte Beträge:',
+    'LBL_DV_LAST_COMMIT_DATE' => 'Letztes Bestätigungsdatum:',
+    'LBL_DV_LAST_COMMIT_AMOUNT' => 'Letzte bestätigte Beträge:',
     'LBL_DV_FORECAST_ROLLUP' => 'Prognose-Rollup',
     'LBL_DV_TIMEPERIOD' => 'Zeitraum:',
     'LBL_DV_TIMPERIOD_DATES' => 'Datumsbereich:',
     'LBL_LOADING_COMMIT_HISTORY' => 'Bestätigungsverlauf wird geladen...',
 
     //list view
-    'LBL_LV_TIMPERIOD'=> 'Zeitraum',
-    'LBL_LV_TIMPERIOD_START_DATE'=> 'Startdatum',
-    'LBL_LV_TIMPERIOD_END_DATE'=> 'Enddatum',
-    'LBL_LV_TYPE'=> 'Prognose-Typ',
-    'LBL_LV_COMMIT_DATE'=> 'Bestätigungs-Datum',
-    'LBL_LV_OPPORTUNITIES'=> 'Verkaufschancen',
-    'LBL_LV_WEIGH'=> 'Gewichteter Betrag',
-    'LBL_LV_COMMIT'=> 'Bestätigter Betrag',
+    'LBL_LV_TIMPERIOD' => 'Zeitraum',
+    'LBL_LV_TIMPERIOD_START_DATE' => 'Startdatum',
+    'LBL_LV_TIMPERIOD_END_DATE' => 'Enddatum',
+    'LBL_LV_TYPE' => 'Prognose-Typ',
+    'LBL_LV_COMMIT_DATE' => 'Bestätigungs-Datum',
+    'LBL_LV_OPPORTUNITIES' => 'Verkaufschancen',
+    'LBL_LV_WEIGH' => 'Gewichteter Betrag',
+    'LBL_LV_COMMIT' => 'Bestätigter Betrag',
 
-    'LBL_COMMIT_NOTE'=> 'Geben Sie Beträge ein, die Sie für die gewählte Zeitspanne bestätigen möchten:',
+    'LBL_COMMIT_NOTE' => 'Geben Sie Beträge ein, die Sie für die gewählte Zeitspanne bestätigen möchten:',
 
-    'LBL_COMMIT_MESSAGE'=> 'Möchten Sie diese Beträge bestätigen?',
+    'LBL_COMMIT_MESSAGE' => 'Möchten Sie diese Beträge bestätigen?',
     'ERR_FORECAST_AMOUNT' => 'Der bestätigte Betrag wird benötigt und muss eine Zahl sein.',
 
     // js error strings
     'LBL_FC_START_DATE' => 'Startdatum',
     'LBL_FC_USER' => 'Zeitplan für',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'Keine aktiven Zeiträume für Prognose',
-    'LBL_FDR_ADJ_AMOUNT'=>'Angepasster Betrag',
-    'LBL_SAVE_WOKSHEET'=>'Arbeitsblatt speichern',
-    'LBL_RESET_WOKSHEET'=>'Arbeitsblatt zurücksetzen',
-    'LBL_SHOW_CHART'=>'Diagramm anzeigen',
-    'LBL_RESET_CHECK'=>'Alle Arbeitsblattdaten für den gewählten Zeitraum und den angemeldeten Benutzer werden entfernt. Fortsetzen?',
+    'LBL_NO_ACTIVE_TIMEPERIOD' => 'Keine aktiven Zeiträume für Prognose',
+    'LBL_FDR_ADJ_AMOUNT' => 'Angepasster Betrag',
+    'LBL_SAVE_WOKSHEET' => 'Arbeitsblatt speichern',
+    'LBL_RESET_WOKSHEET' => 'Arbeitsblatt zurücksetzen',
+    'LBL_SHOW_CHART' => 'Diagramm anzeigen',
+    'LBL_RESET_CHECK' => 'Alle Arbeitsblattdaten für den gewählten Zeitraum und den angemeldeten Benutzer werden entfernt. Fortsetzen?',
 
     'LBL_CURRENCY' => 'Währung',
     'LBL_CURRENCY_ID' => 'Währungs-ID',
@@ -159,5 +159,5 @@ $mod_strings = array (
     'LBL_EDITABLE_INVALID' => 'Ungültiger Wert für {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Wert muss zwischen {{min}} und {{max}} sein',
     'LBL_MANAGER_NOTIFY' => 'Folgende(r) {0} {1} wurde(n) bei der letzten Aktualisierung nicht inkludiert, da er (sie) bereits in der vorherigen Übertragung enthalten war(en)',
-    'LBL_MANAGER_NOTIFY_NAME' => '{0} Bestätigungsänderung'
-);
+    'LBL_MANAGER_NOTIFY_NAME' => '{0} Bestätigungsänderung',
+];

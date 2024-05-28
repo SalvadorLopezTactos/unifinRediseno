@@ -92,7 +92,9 @@
                 }).join('/');
             }
         } catch (err) {
-            this.rootPathDisplay = '';
+            this.rootPathDisplay = this.driveType === 'sharepoint' ?
+                app.lang.get('LBL_SHAREPOINT_ROOT_PATH', this.module) :
+                '';
         }
 
         this.render();
@@ -138,6 +140,12 @@
                     messages: app.lang.get('LBL_ROOT_PATH_REMOVED', this.module),
                 });
                 this.loadRootPath();
+            }, this),
+            error: _.bind(function(error) {
+                app.alert.show('path-delete-error', {
+                    level: 'error',
+                    messages: error.message,
+                });
             }, this),
         });
     }

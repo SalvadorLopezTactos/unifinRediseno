@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'قواعد الأعمال للعملية',
-  'LBL_MODULE_TITLE' => 'القواعد التجارية للعملية',
-  'LBL_MODULE_NAME_SINGULAR' => 'القاعدة التجارية للعملية',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'قواعد الأعمال للعملية',
+    'LBL_MODULE_TITLE' => 'القواعد التجارية للعملية',
+    'LBL_MODULE_NAME_SINGULAR' => 'القاعدة التجارية للعملية',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم القواعد التجارية للعمليات',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم القواعد التجارية للعمليات',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'لوحة معلومات سجل قواعد أعمال العمليات',
-  'LBL_RST_UID' => 'معرف قاعدة الأعمال',
-  'LBL_RST_TYPE' => 'نوع قاعدة الأعمال',
-  'LBL_RST_DEFINITION' => 'تعريف قاعدة الأعمال',
-  'LBL_RST_EDITABLE' => 'قاعدة الأعمال القابلة للتحرير',
-  'LBL_RST_SOURCE' => 'مصدر قاعدة الأعمال',
-  'LBL_RST_SOURCE_DEFINITION' => 'تعريف مصدر قاعدة الأعمال',
-  'LBL_RST_MODULE' => 'الوحدة المستهدفة',
-  'LBL_RST_FILENAME' => 'اسم ملف قاعدة الأعمال',
-  'LBL_RST_CREATE_DATE' => 'تاريخ إنشاء قاعدة الأعمال',
-  'LBL_RST_UPDATE_DATE' => 'تاريخ تحديث قاعدة الأعمال',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'لوحة معلومات سجل قواعد أعمال العمليات',
+    'LBL_RST_UID' => 'معرف قاعدة الأعمال',
+    'LBL_RST_TYPE' => 'نوع قاعدة الأعمال',
+    'LBL_RST_DEFINITION' => 'تعريف قاعدة الأعمال',
+    'LBL_RST_EDITABLE' => 'قاعدة الأعمال القابلة للتحرير',
+    'LBL_RST_SOURCE' => 'مصدر قاعدة الأعمال',
+    'LBL_RST_SOURCE_DEFINITION' => 'تعريف مصدر قاعدة الأعمال',
+    'LBL_RST_MODULE' => 'الوحدة المستهدفة',
+    'LBL_RST_FILENAME' => 'اسم ملف قاعدة الأعمال',
+    'LBL_RST_CREATE_DATE' => 'تاريخ إنشاء قاعدة الأعمال',
+    'LBL_RST_UPDATE_DATE' => 'تاريخ تحديث قاعدة الأعمال',
 
     'LNK_LIST' => 'عرض قواعد أعمال العملية',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'إنشاء قاعدة الأعمال للعملية',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => '"قاعدة الأعمال" هذه غير صالحة لأنها تستخدم حقول غير صالحة أو حقول لم يتم العثور عليها في مثيل SugarCRM الخاص بك. يُرجى إصلاح الأخطاء أدناه وحفظ "قاعدة الأعمال".',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => '"قاعدة الأعمال" هذه يجري استخدامها حاليًا في "تعريف العملية". هل ما زلت تريد تعديل "قاعدة الأعمال" هذه؟',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "لا يمكنك حذف هذه \"قاعدة الأعمال\" هذه لأنها يجري استخدامها حاليًا في \"تعريف العملية\".",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'لا يمكنك حذف هذه "قاعدة الأعمال" هذه لأنها يجري استخدامها حاليًا في "تعريف العملية".',
+];

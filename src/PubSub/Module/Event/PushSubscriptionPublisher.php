@@ -111,11 +111,11 @@ final class PushSubscriptionPublisher implements PublisherInterface, LoggerAware
                     // Send the event (as a list of one) to the webhook.
                     $this->client->sendEvents($sub->webhook_url, [$payload]);
                 } catch (Exception $e) {
-                    $this->logger->critical("pubsub: push: publish module event ({$eventName}) for {$recordIdentifier} to {$sub->webhook_url}: {$e->getMessage()}: {$e->getTraceAsString()}");
+                    $this->logger->alert("pubsub: push: publish module event ({$eventName}) for {$recordIdentifier} to {$sub->webhook_url}: {$e->getMessage()}: {$e->getTraceAsString()}");
                 }
             }
         } catch (Exception $e) {
-            $this->logger->critical("pubsub: push: publish module event ({$eventName}) for {$recordIdentifier} to push subscribers: {$e->getMessage()}: {$e->getTraceAsString()}");
+            $this->logger->alert("pubsub: push: publish module event ({$eventName}) for {$recordIdentifier} to push subscribers: {$e->getMessage()}: {$e->getTraceAsString()}");
         }
     }
 }

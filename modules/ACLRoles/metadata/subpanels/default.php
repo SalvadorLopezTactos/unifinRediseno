@@ -10,24 +10,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$subpanel_layout = array(
-	'top_buttons' => array(
-			array('widget_class' => 'SubPanelTopCreateButton'),
-			array('widget_class' => 'SubPanelTopSelectButton'),
-	),
+$subpanel_layout = [
+    'top_buttons' => [
+        ['widget_class' => 'SubPanelTopCreateButton'],
+        ['widget_class' => 'SubPanelTopSelectButton'],
+    ],
 
-	'where' => '',
+    'where' => '',
 
 
-	'list_fields' => array(
-        'name'=>array(
-		 	'vname' => 'LBL_NAME',
-			'width' => '25%',
-		),
-		'description'=>array(
-		 	'vname' => 'LBL_DESCRIPTION',
-			'width' => '70%',
-			'sortable'=>false,
-		),
-	),
-);
+    'list_fields' => [
+        'name' => [
+            'vname' => 'LBL_NAME',
+            'width' => '25%',
+        ],
+        'description' => [
+            'vname' => 'LBL_DESCRIPTION',
+            'width' => '70%',
+            'sortable' => false,
+        ],
+    ],
+];

@@ -10,31 +10,31 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['DocumentRevision'] = array(
+$dictionary['DocumentRevision'] = [
     'table' => 'document_revisions',
     'archive' => false,
     'favorites' => true,
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'vname' => 'LBL_REVISION_NAME',
             'type' => 'id',
             'required' => true,
             'reportable' => false,
-        ),
-        'change_log' => array(
+        ],
+        'change_log' => [
             'name' => 'change_log',
             'vname' => 'LBL_CHANGE_LOG',
             'type' => 'varchar',
             'len' => '255',
-        ),
-        'document_id' => array(
+        ],
+        'document_id' => [
             'name' => 'document_id',
             'vname' => 'LBL_DOCUMENT',
             'type' => 'id',
             'required' => false,
             'reportable' => false,
-        ),
+        ],
         'related_document_name' => [
             'name' => 'related_document_name',
             'rname' => 'name',
@@ -58,7 +58,7 @@ $dictionary['DocumentRevision'] = array(
             'bean_name' => 'Document',
             'source' => 'non-db',
         ],
-        'doc_id' => array(
+        'doc_id' => [
             'name' => 'doc_id',
             'vname' => 'LBL_DOC_ID',
             'type' => 'varchar',
@@ -66,16 +66,16 @@ $dictionary['DocumentRevision'] = array(
             'comment' => 'Document ID from documents web server provider',
             'importable' => false,
             'studio' => 'false',
-        ),
-        'doc_type' => array(
+        ],
+        'doc_type' => [
             'name' => 'doc_type',
             'vname' => 'LBL_DOC_TYPE',
             'type' => 'enum',
             'function' => 'getDocumentsExternalApiDropDown',
             'len' => '100',
             'comment' => 'Document type (ex: Google, box.net, IBM SmartCloud)',
-        ),
-        'doc_url' => array(
+        ],
+        'doc_url' => [
             'name' => 'doc_url',
             'vname' => 'LBL_DOC_URL',
             'type' => 'varchar',
@@ -83,13 +83,13 @@ $dictionary['DocumentRevision'] = array(
             'comment' => 'Document URL from documents web server provider',
             'importable' => false,
             'studio' => 'false',
-        ),
-        'date_entered' => array(
+        ],
+        'date_entered' => [
             'name' => 'date_entered',
             'vname' => 'LBL_DATE_ENTERED',
             'type' => 'datetime',
-        ),
-        'created_by' => array(
+        ],
+        'created_by' => [
             'name' => 'created_by',
             'rname' => 'user_name',
             'id_name' => 'modified_user_id',
@@ -99,8 +99,8 @@ $dictionary['DocumentRevision'] = array(
             'isnull' => 'false',
             'dbType' => 'id',
             'source' => 'db',
-        ),
-        'filename' => array(
+        ],
+        'filename' => [
             'name' => 'filename',
             'vname' => 'LBL_FILENAME',
             'type' => 'file',
@@ -112,64 +112,63 @@ $dictionary['DocumentRevision'] = array(
             'docUrl' => 'doc_url',
             'docId' => 'doc_id',
             'linkModuleOverride' => 'Documents',
-        ),
-        'file_ext' => array(
+        ],
+        'file_ext' => [
             'name' => 'file_ext',
             'vname' => 'LBL_FILE_EXTENSION',
             'type' => 'varchar',
             'len' => 100,
-        ),
-        'file_mime_type' => array(
+        ],
+        'file_mime_type' => [
             'name' => 'file_mime_type',
             'vname' => 'LBL_MIME',
             'type' => 'varchar',
             'len' => '100',
-        ),
-        'file_size' => array(
+        ],
+        'file_size' => [
             'name' => 'file_size',
             'vname' => 'LBL_FILE_SIZE',
             'type' => 'int',
             'comment' => 'The size of the file',
             'importable' => false,
             'massupdate' => false,
-        ),
-        'revision' => array(
+        ],
+        'revision' => [
             'name' => 'revision',
             'vname' => 'LBL_REVISION',
             'type' => 'varchar',
             'len' => 100,
             'importable' => 'required',
-        ),
+        ],
 
-        'deleted' => array(
+        'deleted' => [
             'name' => 'deleted',
             'vname' => 'LBL_DELETED',
             'type' => 'bool',
             'default' => 0,
             'reportable' => false,
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'vname' => 'LBL_DATE_MODIFIED',
             'type' => 'datetime',
-        ),
-        'documents' => array(
+        ],
+        'documents' => [
             'name' => 'documents',
             'type' => 'link',
             'relationship' => 'document_revisions',
             'source' => 'non-db',
             'vname' => 'LBL_REVISIONS',
-        ),
-        'latest_document_revision_link' =>
-        array(
+        ],
+        'latest_document_revision_link' => [
             'name' => 'latest_document_revision_link',
             'type' => 'link',
             'relationship' => 'latest_document_revision',
             'source' => 'non-db',
             'vname' => 'LBL_LATEST_REVISION',
-        ),
+        ],
 
-        'created_by_link' => array(
+        'created_by_link' => [
             'name' => 'created_by_link',
             'type' => 'link',
             'relationship' => 'revisions_created_by',
@@ -178,9 +177,9 @@ $dictionary['DocumentRevision'] = array(
             'module' => 'Users',
             'bean_name' => 'User',
             'source' => 'non-db',
-        ),
+        ],
 
-        'created_by_name' => array(
+        'created_by_name' => [
             'name' => 'created_by_name',
             'rname' => 'full_name',
             'id_name' => 'created_by',
@@ -193,34 +192,34 @@ $dictionary['DocumentRevision'] = array(
             'link' => 'created_by_link',
             'len' => '255',
             'source' => 'non-db',
-        ),
-        'latest_revision_id' => array(
+        ],
+        'latest_revision_id' => [
             'name' => 'latest_revision_id',
             'vname' => 'LBL_REVISION',
             'type' => 'id',
             'source' => 'non-db',
-        ),
-        'document_name' => array(
+        ],
+        'document_name' => [
             'name' => 'document_name',
             'vname' => 'LBL_DOC_NAME',
             'type' => 'varchar',
             'len' => '255',
             'source' => 'non-db',
-        ),
-        'latest_revision' => array(
+        ],
+        'latest_revision' => [
             'name' => 'latest_revision',
             'vname' => 'LBL_CURRENT_DOC_VERSION',
             'type' => 'varchar',
             'len' => '255',
             'source' => 'non-db',
-        ),
-    ),
-    'relationships' => array(
-        'revisions_created_by' => array(
+        ],
+    ],
+    'relationships' => [
+        'revisions_created_by' => [
             'lhs_module' => 'Users', 'lhs_table' => 'users', 'lhs_key' => 'id',
             'rhs_module' => 'DocumentRevisions', 'rhs_table' => 'document_revisions', 'rhs_key' => 'created_by',
-            'relationship_type' => 'one-to-many'
-        ),
+            'relationship_type' => 'one-to-many',
+        ],
         'documentrevisions_document' => [
             'lhs_module' => 'Documents',
             'lhs_table' => 'documents',
@@ -230,16 +229,15 @@ $dictionary['DocumentRevision'] = array(
             'rhs_key' => 'document_id',
             'relationship_type' => 'one-to-many',
         ],
-    ),
-    'indices' => array(
-        array('name' => 'documentrevisionspk', 'type' => 'primary', 'fields' => array('id')),
-        array('name' => 'documentrevision_mimetype', 'type' => 'index', 'fields' => array('file_mime_type')),
-        array('name' => 'idx_document_revisions_document_id_deleted', 'type' => 'index', 'fields' => array(
+    ],
+    'indices' => [
+        ['name' => 'documentrevisionspk', 'type' => 'primary', 'fields' => ['id']],
+        ['name' => 'documentrevision_mimetype', 'type' => 'index', 'fields' => ['file_mime_type']],
+        ['name' => 'idx_document_revisions_document_id_deleted', 'type' => 'index', 'fields' => [
             'document_id',
             'deleted',
-        )),
-    ),
-    'acls' => array('SugarACLParentModule' => array('parentModule' => 'Documents', 'parentLink' => 'documents')),
-    'visibility' => array('ParentModuleVisibility' => array('parentLink' => 'documents')),
-);
-?>
+        ]],
+    ],
+    'acls' => ['SugarACLParentModule' => ['parentModule' => 'Documents', 'parentLink' => 'documents']],
+    'visibility' => ['ParentModuleVisibility' => ['parentLink' => 'documents']],
+];

@@ -25,7 +25,7 @@ class IdMSugarAuthenticate extends BaseAuthenticate implements LoginInterface
     {
         $authManager = $this->getAuthProviderBuilder(new Config(\SugarConfig::getInstance()))->buildAuthProviders();
         $token = $this->getUsernamePasswordTokenFactory($username, $password, $params)
-                      ->createLocalAuthenticationToken();
+            ->createLocalAuthenticationToken();
         $token = $authManager->authenticate($token);
         return $token && $token->isAuthenticated();
     }

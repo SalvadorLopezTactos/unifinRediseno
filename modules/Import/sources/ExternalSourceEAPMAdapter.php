@@ -12,13 +12,12 @@
  */
 
 
-
 class ExternalSourceEAPMAdapter extends ImportDataSource
 {
-
     /**
      * @var string The name of the EAPM object.
      */
+    // @codingStandardsIgnoreStart PSR2.Classes.PropertyDeclaration.Underscore
     private $_eapmName = 'Google';
 
     /**
@@ -29,24 +28,28 @@ class ExternalSourceEAPMAdapter extends ImportDataSource
     /**
      * @var The record set loaded from the external source
      */
-    private $_recordSet = array();
+    private $_recordSet = [];
 
-    protected $_localeSettings = array('importlocale_charset' => 'UTF-8',
-                                       'importlocale_dateformat' => 'Y-m-d',
-                                       'importlocale_timeformat' => 'H:i',
-                                       'importlocale_timezone' => '',
-                                       'importlocale_currency' => '',
-                                       'importlocale_default_currency_significant_digits' => '',
-                                       'importlocale_num_grp_sep' => '',
-                                       'importlocale_dec_sep' => '',
-                                       'importlocale_default_locale_name_format' => '');
+    protected $_localeSettings = [
+        'importlocale_charset' => 'UTF-8',
+        'importlocale_dateformat' => 'Y-m-d',
+        'importlocale_timeformat' => 'H:i',
+        'importlocale_timezone' => '',
+        'importlocale_currency' => '',
+        'importlocale_default_currency_significant_digits' => '',
+        'importlocale_num_grp_sep' => '',
+        'importlocale_dec_sep' => '',
+        'importlocale_default_locale_name_format' => '',
+    ];
+
+    // @codingStandardsIgnoreEnd PSR2.Classes.PropertyDeclaration.Underscore
 
 
     public function __construct($eapmName)
     {
         global $current_user, $locale;
         $this->_eapmName = $eapmName;
-      
+
         $this->_localeSettings['importlocale_num_grp_sep'] = $current_user->getPreference('num_grp_sep');
         $this->_localeSettings['importlocale_dec_sep'] = $current_user->getPreference('dec_sep');
         $this->_localeSettings['importlocale_default_currency_significant_digits'] = $locale->getPrecedentPreference('default_currency_significant_digits', $current_user);
@@ -56,32 +59,29 @@ class ExternalSourceEAPMAdapter extends ImportDataSource
 
         $this->setSourceName();
     }
+
     /**
      * Return a feed of google contacts using the EAPM and Connectors farmework.
      *
-     * @throws Exception
      * @param  $maxResults
      * @return array
+     * @throws Exception
      */
     public function loadDataSet($maxResults = 0)
     {
-         if ( !$eapmBean = EAPM::getLoginInfo($this->_eapmName,true) )
-         {
+        if (!$eapmBean = EAPM::getLoginInfo($this->_eapmName, true)) {
             throw new Exception("Authentication error with {$this->_eapmName}");
-         }
+        }
 
         $api = ExternalAPIFactory::loadAPI($this->_eapmName);
         $api->loadEAPM($eapmBean);
         $conn = $api->getConnector();
 
-        $feed = $conn->getList(array('maxResults' => $maxResults, 'startIndex' => $this->_offset));
-        if($feed !== FALSE)
-        {
+        $feed = $conn->getList(['maxResults' => $maxResults, 'startIndex' => $this->_offset]);
+        if ($feed !== false) {
             $this->_totalRecordCount = $feed['totalResults'];
             $this->_recordSet = $feed['records'];
-        }
-        else
-        {
+        } else {
             throw new Exception("Unable to retrieve {$this->_eapmName} feed.");
         }
     }
@@ -90,7 +90,7 @@ class ExternalSourceEAPMAdapter extends ImportDataSource
     {
         return '';
     }
-    
+
     public function getTotalRecordCount()
     {
         return $this->_totalRecordCount;
@@ -105,7 +105,7 @@ class ExternalSourceEAPMAdapter extends ImportDataSource
     #[\ReturnTypeWillChange]
     public function current()
     {
-        $this->_currentRow =  current($this->_recordSet);
+        $this->_currentRow = current($this->_recordSet);
         return $this->_currentRow;
     }
 
@@ -114,7 +114,7 @@ class ExternalSourceEAPMAdapter extends ImportDataSource
     {
         return key($this->_recordSet);
     }
-    
+
     public function rewind(): void
     {
         reset($this->_recordSet);
@@ -128,7 +128,6 @@ class ExternalSourceEAPMAdapter extends ImportDataSource
 
     public function valid(): bool
     {
-        return (current($this->_recordSet) !== FALSE);
+        return (current($this->_recordSet) !== false);
     }
 }
-

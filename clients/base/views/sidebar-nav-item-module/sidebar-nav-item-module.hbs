@@ -11,22 +11,25 @@
  */
 --}}
 {{#if appIsSynced}}
-    <a class="sidebar-nav-item-btn flex flex-row items-center h-full w-full bg-transparent absolute text-base" href="{{route}}">
-        <span class="collapsed h-full w-full" rel="tooltip" data-placement="{{tooltipPlacement}}" title="{{str label module}}">
-            {{moduleLabel module 'lg' class='h-full w-15 label-module-color-sidebar cursor-pointer'}}
+    <a class="sidebar-nav-item-btn absolute bg-transparent flex flex-row items-center h-full rtl:text-right text-base w-full" href="{{route}}"  aria-label="{{str label module}}">
+        <span
+            class="collapsed h-full w-full" rel="tooltip" data-bs-placement="{{tooltipPlacement}}"
+            title="{{str label module}}"
+        >
+            {{moduleLabel module 'lg' class='h-full w-15 cursor-pointer' color='sidebar'}}
         </span>
 
-        <span class="expanded h-full w-full ellipsis_inline pr-4 text-white" data-placement="{{tooltipPlacement}}" title="{{str label module}}">
-            {{moduleLabel module 'lg' class='h-full w-15 label-module-color-sidebar cursor-pointer'}}
-            <span class="align-middle text-sm">
+        <span class="expanded h-full w-full ellipsis_inline pr-4 text-white" data-bs-placement="{{tooltipPlacement}}" title="{{str label module}}">
+            {{moduleLabel module 'lg' class='h-full w-15 cursor-pointer' color='sidebar'}}
+            <span class="text-sm">
                 {{str label module}}
             </span>
         </span>
     </a>
 
     {{#if secondaryAction}}
-        <button class="sidebar-nav-item-kebab bg-transparent absolute p-0 h-full w-4" aria-label="{{secondaryActionLabel}}">
-            <i class="{{buildIcon 'sicon-kebab'}} text-white"></i>
+        <button class="sidebar-nav-item-kebab bg-transparent absolute focus-within:bg-blue-100 h-full hover:bg-blue-100 invisible group/kebab group-hover/nav-item:visible group-focus-within/nav-item:visible p-0 right-0 w-4" aria-label="{{secondaryActionLabel}}">
+            <i class="{{buildIcon 'sicon-kebab'}} text-white group-hover/kebab:text-blue-600 group-focus-within/nav-item:text-blue-600"></i>
         </button>
     {{/if}}
 {{/if}}

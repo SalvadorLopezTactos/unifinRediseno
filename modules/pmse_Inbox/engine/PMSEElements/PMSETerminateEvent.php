@@ -36,7 +36,7 @@ class PMSETerminateEvent extends PMSEEndEvent
      * @param type $externalAction
      * @return type
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         $this->caseFlowHandler->terminateCase($flowData, $bean, 'TERMINATED');
         //parent::execute($flowData, $bean);
@@ -44,6 +44,4 @@ class PMSETerminateEvent extends PMSEEndEvent
 
         return $this->prepareResponse($flowData, 'ROUTE', 'CREATE');
     }
-
-
 }

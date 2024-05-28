@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tagit',
     'LBL_GENERIC_LINK' => 'Liittyvät objektit',
     'LBL_NAME_LOWER' => 'Tunnisteen nimi pienin kirjaimin',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'Omat tunnisteet',
     'LBL_MY_FAVORITE_TAGS' => 'Suosikkitunnisteet',
     'LBL_MORE_TAGS' => '{{tagsNumber}} Tunnisteet',
-);
+];

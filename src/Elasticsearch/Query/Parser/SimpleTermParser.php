@@ -31,7 +31,7 @@ class SimpleTermParser implements ParserInterface
      */
     public function getDefaultOperator()
     {
-        return !empty($this->defaultOperator)? $this->defaultOperator : TermParserHelper::OPERATOR_AND;
+        return !empty($this->defaultOperator) ? $this->defaultOperator : TermParserHelper::OPERATOR_AND;
     }
 
     /**
@@ -106,28 +106,28 @@ class SimpleTermParser implements ParserInterface
     {
         // to replace '-' to 'NOT' operator, keep leading space to make parser happy
         $terms = ' ' . $terms;
-        $patterns = array(
+        $patterns = [
             '/\(/',
             '/\)/',
-            );
-        $replacedBy = array(
+        ];
+        $replacedBy = [
             ' ( ',
             ' ) ',
-        );
+        ];
         $temp = preg_replace($patterns, $replacedBy, $terms);
 
         $processed = $temp;
         if ($this->useShortcutOperator) {
-            $patterns = array(
+            $patterns = [
                 '/\s+(\-)/',
                 '/\&/',
                 '/\|/',
-            );
-            $replacedBy = array(
+            ];
+            $replacedBy = [
                 ' ' . TermParserHelper::OPERATOR_NOT . ' ',
                 ' ' . TermParserHelper::OPERATOR_AND . ' ',
                 ' ' . TermParserHelper::OPERATOR_OR . ' ',
-            );
+            ];
             $processed = preg_replace($patterns, $replacedBy, $temp);
         }
 
@@ -162,7 +162,7 @@ class SimpleTermParser implements ParserInterface
                 }
             }
         }
-        
+
         return trim($searchString);
     }
 
@@ -186,13 +186,13 @@ class SimpleTermParser implements ParserInterface
 
         if (empty($terms)) {
             // keep one white space
-            return new BasicTerms(TermParserHelper::OPERATOR_OR, array(' '));
+            return new BasicTerms(TermParserHelper::OPERATOR_OR, [' ']);
         }
 
-        $andTerms = array();
-        $notTerms = array();
+        $andTerms = [];
+        $notTerms = [];
 
-        for ($i = 0; $i < count($terms); $i++) {
+        for ($i = 0; $i < safeCount($terms); $i++) {
             $term = $terms[$i];
             if (empty($term)) {
                 continue;
@@ -216,9 +216,9 @@ class SimpleTermParser implements ParserInterface
             }
 
             //check next operator
-            if (isset($terms[$i+1])) {
-                if (TermParserHelper::isOperator($terms[$i+1])) {
-                    $nextOperator = $terms[$i+1];
+            if (isset($terms[$i + 1])) {
+                if (TermParserHelper::isOperator($terms[$i + 1])) {
+                    $nextOperator = $terms[$i + 1];
                 } else {
                     $nextOperator = $this->getDefaultOperator();
                 }
@@ -228,16 +228,16 @@ class SimpleTermParser implements ParserInterface
                         // starting none-OR operator
                         if (TermParserHelper::isAndOperator($nextOperator)) {
                             // a OR b AND c => a OR (b AND c), at posiion b,
-                            $andTerms = array($term);
+                            $andTerms = [$term];
                         } else {
-                            $notTerms = array();
+                            $notTerms = [];
                             if (empty($prevTerm)) {
                                 // b NOT c, at the beginning, this is AND
-                                $andTerms = array($term);
+                                $andTerms = [$term];
                             } else {
                                 // a OR b NOT c => a OR (b NOT c)
                                 // will staring
-                                $andTerms[] =$term;
+                                $andTerms[] = $term;
                             }
                         }
                     } else {
@@ -251,8 +251,8 @@ class SimpleTermParser implements ParserInterface
                                 $notTerms[] = $term;
                             }
                             $orTerms->addTerm($this->createAndNotTerms($andTerms, $notTerms));
-                            $andTerms = array();
-                            $notTerms = array();
+                            $andTerms = [];
+                            $notTerms = [];
                         } else {
                             if (TermParserHelper::isNotOperator($currentOperator)) {
                                 // a NOT b AND c, at position b
@@ -324,7 +324,7 @@ class SimpleTermParser implements ParserInterface
             return $andTerm;
         } else {
             // combine AND and NOT basicTerms together
-            return new BasicTerms(TermParserHelper::OPERATOR_AND, array($andTerm, $notTerm));
+            return new BasicTerms(TermParserHelper::OPERATOR_AND, [$andTerm, $notTerm]);
         }
     }
 }

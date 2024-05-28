@@ -9,9 +9,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const Events = require('core/events');
-const Context = require('core/context');
-const ViewManager = require('view/view-manager');
+const Events = require('./events');
+const Context = require('./context');
+const ViewManager = require('../view/view-manager');
 
 /**
  * The controller manages the loading and unloading of layouts.

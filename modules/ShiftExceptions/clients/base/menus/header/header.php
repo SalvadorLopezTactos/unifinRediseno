@@ -13,14 +13,14 @@
 
 $viewdefs['ShiftExceptions']['base']['menu']['header'] = [
     [
-        'route' => "#ShiftExceptions/create",
+        'route' => '#ShiftExceptions/create',
         'label' => 'LNK_NEW_SHIFT_EXCEPTION',
         'acl_action' => 'create',
         'acl_module' => 'ShiftExceptions',
         'icon' => 'sicon-plus',
     ],
     [
-        'route' => "#ShiftExceptions",
+        'route' => '#ShiftExceptions',
         'label' => 'LNK_VIEW_SHIFT_EXCEPTIONS',
         'acl_action' => 'list',
         'acl_module' => 'ShiftExceptions',

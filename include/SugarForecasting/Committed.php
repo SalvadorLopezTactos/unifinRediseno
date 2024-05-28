@@ -51,7 +51,7 @@ class SugarForecasting_Committed extends SugarForecasting_AbstractForecast imple
         $field_ext = self::BASE_WORKSHEET_FIELD_EXTENSION;
 
         // Get the worksheet values
-        if ($commit_type == "manager") {
+        if ($commit_type == 'manager') {
             $worksheet_totals = $mgr_worksheet->worksheetTotals($current_user->id, $args['timeperiod_id']);
             // we don't need the *_case values so lets make them the same as the *_adjusted values
             $field_ext = self::MANAGER_WORKSHEET_FIELD_EXTENSION;
@@ -78,7 +78,7 @@ class SugarForecasting_Committed extends SugarForecasting_AbstractForecast imple
         $forecast->opp_count = $worksheet_totals['included_opp_count'];
         $forecast->currency_id = '-99';
         $forecast->base_rate = '1';
-        
+
         //If we are committing a rep forecast, calculate things.  Otherwise, for a manager, just use what is passed in.
         if ($args['commit_type'] == 'sales_rep') {
             $forecast->calculatePipelineData(
@@ -94,7 +94,7 @@ class SugarForecasting_Committed extends SugarForecasting_AbstractForecast imple
             $forecast->pipeline_amount = $worksheet_totals['pipeline_amount'];
             $forecast->closed_amount = $worksheet_totals['closed_amount'];
         }
-       
+
         if ($worksheet_totals['likely_case'] != 0 && $worksheet_totals['included_opp_count'] != 0) {
             $forecast->opp_weigh_value = $worksheet_totals['likely_case'] / $worksheet_totals['included_opp_count'];
         }
@@ -109,9 +109,9 @@ class SugarForecasting_Committed extends SugarForecasting_AbstractForecast imple
 
         $mgr_worksheet->reporteeForecastRollUp($current_user, $mgr_rollup_data);
 
-        if ($this->getArg('commit_type') == "sales_rep") {
+        if ($this->getArg('commit_type') == 'sales_rep') {
             $worksheet->commitWorksheet($current_user->id, $args['timeperiod_id']);
-        } elseif ($this->getArg('commit_type') == "manager") {
+        } elseif ($this->getArg('commit_type') == 'manager') {
             $mgr_worksheet->commitManagerForecast($current_user, $args['timeperiod_id']);
         }
 
@@ -120,7 +120,7 @@ class SugarForecasting_Committed extends SugarForecasting_AbstractForecast imple
         $settings = $admin->getConfigForModule('Forecasts');
         if (!isset($settings['has_commits']) || !$settings['has_commits']) {
             $admin->saveSetting('Forecasts', 'has_commits', true, 'base');
-            MetaDataManager::refreshModulesCache(array('Forecasts'));
+            MetaDataManager::refreshModulesCache(['Forecasts']);
         }
 
         $forecast->date_entered = $this->convertDateTimeToISO($db->fromConvert($forecast->date_entered, 'datetime'));

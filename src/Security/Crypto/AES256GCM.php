@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -43,7 +45,7 @@ class AES256GCM
         $this->ivLength = openssl_cipher_iv_length(self::ALGO);
     }
 
-    public function encrypt(string $value) : string
+    public function encrypt(string $value): string
     {
         $iv = openssl_random_pseudo_bytes($this->ivLength);
         $cipherText = openssl_encrypt($value, self::ALGO, $this->key, OPENSSL_RAW_DATA, $iv, $tag);
@@ -57,7 +59,7 @@ class AES256GCM
      * @return string
      * @throws RuntimeException
      */
-    public function decrypt(string $value) : string
+    public function decrypt(string $value): string
     {
         $iv = $this->substr($value, 0, $this->ivLength);
         $tag = $this->substr($value, $this->ivLength, 16);
@@ -78,7 +80,7 @@ class AES256GCM
         return $result;
     }
 
-    private function substr(string $string, int $start, ?int $length = null) : string
+    private function substr(string $string, int $start, ?int $length = null): string
     {
         return mb_substr($string, $start, $length, '8bit');
     }

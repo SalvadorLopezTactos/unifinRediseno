@@ -20,17 +20,18 @@
         <a
         class="btn dropdown-toggle actionbtn-toggle btn-{{this.settings.colorScheme}}"
         track="click:dropdown"
-        data-toggle="dropdown"
+        data-bs-toggle="dropdown"
         href="javascript:void(0);"
-        rel="tooltip"
         role="button"
         aria-label="{{str 'LBL_ACTIONBUTTON_ACTIONS'}}"
         data-original-title="{{str 'LBL_ACTIONBUTTON_ACTIONS'}}"
-        data-placement="bottom"
         aria-haspopup="true"
         aria-expanded="false"
-        ><span class="sicon sicon-caret-down"></span></a>
-        <ul data-menu="dropdown" class="dropdown-menu" role="menu">
+        >
+            <span class="sicon sicon-caret-down"></span>
+            {{tooltipTemplate (str 'LBL_ACTIONBUTTON_ACTIONS') 'bottom'}}
+        </a>
+        <ul data-menu="dropdown" class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl" role="menu">
             {{#each this.uiButtons}}
                 {{#notEq this.orderNumber 0}}
                     <li><a id="{{buttonId}}" title="{{properties.description}}" class="actionbuttons ab-dropdown-item-limit" href="javascript:void(0);" role="button">{{#if properties.showIcon}}<i class="{{buildIcon properties.icon}}"></i>{{/if}}{{#if properties.showLabel}}{{properties.label}}{{/if}}</a></li>

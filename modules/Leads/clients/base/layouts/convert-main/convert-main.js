@@ -186,7 +186,6 @@
 
         //apply the accordion to this layout
         this.$('.collapse').collapse({toggle: false, parent: '#convert-accordion'});
-        this.$('.collapse').on('shown hidden', _.bind(this.handlePanelCollapseEvent, this));
 
         //copy lead data down to each module when we get the lead data
         this.context.get('leadsModel').fetch({
@@ -194,8 +193,17 @@
                 if (this.context) {
                     this.context.trigger('lead:convert:populate', model);
                 }
+
+                this._applyAccorditionEvents();
             }, this)
         });
+    },
+
+    /**
+     * Apply accordition events
+     */
+    _applyAccorditionEvents: function() {
+        this.$('.collapse').on('shown.bs.collapse hidden.bs.collapse', _.bind(this.handlePanelCollapseEvent, this));
     },
 
     /**
@@ -278,8 +286,6 @@
         // Disable the save button to prevent double click
         this.context.trigger('lead:convert-save:toggle', false);
 
-        app.alert.show('processing_convert', {level: 'process', title: app.lang.get('LBL_SAVING')});
-
         // Before building the convert model, make sure that if any of the module panels have create subpanels,
         // their subpanel models are added to the save correctly
         _.each(this.convertPanels, function(panel, module) {
@@ -290,7 +296,10 @@
 
         // Build the convert model that will be sent into the convert API
         let convertModel = new Backbone.Model(_.extend(
-            {'modules' : this.parseEditableFields(this.associatedModels)},
+            {
+                'modules': this.parseEditableFields(this.associatedModels),
+                'allowBatching': true
+            },
             this.getTransferActivitiesAttributes()
         ));
 
@@ -301,12 +310,27 @@
             }
         }, this);
 
-        // Call the convert API with the convert model
-        let myURL = app.api.buildURL('Leads', 'convert', {id: this.context.get('leadsModel').id});
-        app.api.call('create', myURL, convertModel, {
-            success: _.bind(this.convertSuccess, this),
-            error: _.bind(this.convertError, this)
-        });
+        const leadsModel = this.context.get('leadsModel');
+        const convertLeadsCallback = (view) => {
+            this.cjFormBatch = view;
+
+            // if form batching has to be performed then don't show saving alert
+            if (_.isUndefined(this.cjFormBatch)) {
+                app.alert.show('processing_convert', {level: 'process', title: app.lang.get('LBL_SAVING')});
+            }
+
+            // Call the convert API with the convert model
+            let myURL = app.api.buildURL('Leads', 'convert', {id: leadsModel.id});
+
+            app.api.call('create', myURL, convertModel, {
+                success: _.bind(this.convertSuccess, this),
+                error: _.bind(this.convertError, this)
+            });
+        };
+
+        app.CJBaseHelper.fetchActiveSmartGuideCount(this.context, this, this.module, leadsModel.id,
+            convertLeadsCallback
+        );
     },
 
     /**
@@ -345,7 +369,17 @@
      * Lead was successfully converted
      */
     convertSuccess: function() {
-        this.convertComplete('success', 'LBL_CONVERTLEAD_SUCCESS', true);
+        if (!_.isUndefined(this.cjFormBatch)) {
+            const params = {
+                record: this.context.get('leadsModel').id,
+                module: this.module,
+            };
+
+            this.cjFormBatch.startBatchingProcess(params);
+            this.cjFormBatch = undefined;
+        } else {
+            this.convertComplete('success', 'LBL_CONVERTLEAD_SUCCESS', true);
+        }
     },
 
     /**
@@ -353,6 +387,11 @@
      */
     convertError: function() {
         this.convertComplete('error', 'LBL_CONVERTLEAD_ERROR', false);
+
+        if (!_.isUndefined(this.cjFormBatch)) {
+            this.cjFormBatch.endBatchingProcess(false, false);
+            this.cjFormBatch = undefined;
+        }
 
         if (!this.disposed) {
             this.context.trigger('lead:convert-save:toggle', true);

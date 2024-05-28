@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Adatvédelem',
     'LBL_MODULE_NAME_SINGULAR' => 'Adatvédelem',
     'LBL_NUMBER' => 'Szám',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Nincs egyetlen törlésre jelölt mező vagy rekord sem.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Adatvédelmi rekord műszerfal',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Adatvédelem figyelemfelhívás',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Adatvédelmi idővonal',
 
     // list view
     'LBL_HELP_RECORDS' => 'Az Adatvédelem modul nyomon követi az adatvédelmi tevékenységeket, beleértve a hozzájárulási és tárgyra vonatkozó kéréseket a szervezet adatvédelmi eljárásai támogatásához. A hozzájárulás követéséhez vagy adatvédelmi kérés nyomán valamilyen intézkedés foganatosításához hozzon létre adatvédelmi rekordokat, amelyek valamilyen egyéni rekordhoz (pl. kapcsolati adatokhoz) kapcsolódnak.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Az Adatvédelem modul nyomon követi az adatvédelmi tevékenységeket, beleértve a hozzájárulási és tárgyra vonatkozó kéréseket a szervezet adatvédelmi eljárásai támogatásához. A hozzájárulás követéséhez vagy adatvédelmi kérés nyomán valamilyen intézkedés foganatosításához hozzon létre adatvédelmi rekordokat, amelyek valamilyen egyéni rekordhoz (pl. kapcsolati adatokhoz) kapcsolódnak. Amint végrehajtotta a szükséges tevékenységet, az adatvédelmi menedzser szerepkörrel rendelkező felhasználók az állapot frissítéséhez kattinthat a „Befejezés” vagy „Elutasítás” lehetőségre.
 
 Törlési kérésekhez válassza ki az alábbi alpanelekben megjelenített egyéni rekordok melletti „Megjelölés törléshez” lehetőségeket. Amint kiválasztotta az összes kívánt mezőt, a „Törlés és befejezés” lehetőségre kattintással eltávolítja a mezőértékeket, az adatvédelmi rekordot pedig befejezettnek jelöli.',
-);
+];

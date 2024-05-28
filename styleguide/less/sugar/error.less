@@ -18,8 +18,7 @@
   }
 
   textarea,
-  input,
-  .preview > span > .fa-plus {
+  input {
     border-color: @errorText !important;
     color: @errorText !important;
   }
@@ -35,12 +34,13 @@
 
   /* On fieldset/email, only the input that has an error must be decorate */
   .control-group.email input,
-    &[data-type=fieldset] input {
+  &[data-type=fieldset] input {
     border-color: @gray80;
     color: @gray80;
   }
+
   .control-group.email .input-append.error input,
-    &[data-type=fieldset] .error input {
+  &[data-type=fieldset] .error input {
     border-color: @errorText !important;
     color: @errorText !important;
   }
@@ -68,11 +68,6 @@
   // }
   .select2-choice > .select2-chosen {
     margin-right: 18px;
-  }
-
-  .preview > span > .fa-plus {
-    border-color: @errorText;
-    color: @errorText;
   }
 
   .select2-choice > .select2-chosen {

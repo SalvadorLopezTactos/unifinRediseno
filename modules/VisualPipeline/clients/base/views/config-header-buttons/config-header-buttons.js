@@ -82,8 +82,9 @@
         var recordsPerColumn = {};
         var hiddenValues = {};
         var availableColumns = {};
-
-        var availableColumnNames = [];
+        let showColumnCount = {};
+        let showColumnTotal = {};
+        let totalField = {};
 
         _.each(this.collection.models, function(model) {
             var moduleName = model.get('enabled_module');
@@ -92,9 +93,11 @@
             tileBodyFields[moduleName] = model.get('tile_body_fields');
             recordsPerColumn[moduleName] = model.get('records_per_column');
             hiddenValues[moduleName] = model.get('hidden_values');
-
-            availableColumnNames = this.getAvailableColumnNames(moduleName);
-            availableColumns[moduleName] = availableColumnNames || model.get('white_listed_header_vals');
+            showColumnCount[moduleName] = model.get('show_column_count');
+            showColumnTotal[moduleName] = model.get('show_column_total');
+            totalField[moduleName] = model.get('total_field');
+            availableColumns[moduleName] = model.get('available_columns_edited') ||
+                model.get('available_columns');
         }, this);
 
         ctxModel.set({
@@ -105,38 +108,11 @@
             tile_body_fields: tileBodyFields,
             records_per_column: recordsPerColumn,
             hidden_values: hiddenValues,
-            available_columns: availableColumns
+            available_columns: availableColumns,
+            show_column_count: showColumnCount,
+            show_column_total: showColumnTotal,
+            total_field: totalField
         }, {silent: true});
-    },
-
-    /**
-     * Gets the list of all the available columns in the exact order from the config
-     *
-     * @param {string} moduleName name of the current Module tab in Pipeline config
-     * @return {Array} List of available whitelisted column names
-     */
-    getAvailableColumnNames: function(moduleName) {
-        var availableColumnNames = {};
-        var columnsWithHeaders = {};
-        var tableHeader = '';
-        var fields = app.metadata.getModule(moduleName, 'fields');
-
-        var $divElem = this.layout.$el.find('#' + moduleName);
-        var $elemList = $divElem[0].querySelector('#pipeline-sortable-1').getElementsByTagName('li');
-
-        _.each(this.collection.models, function(model) {
-            if (model.get('enabled_module') === moduleName) {
-                tableHeader = model.get('table_header');
-            }
-        }, this);
-
-        _.each($elemList, function($itemElem) {
-            availableColumnNames[$itemElem.getAttribute('data-headervalue')] = $itemElem.innerText.trim();
-        });
-
-        columnsWithHeaders[tableHeader] = availableColumnNames;
-
-        return columnsWithHeaders;
     },
 
     /**

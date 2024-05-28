@@ -20,8 +20,8 @@ class DivideExpression extends NumericExpression
     /**
      * The Logic for running in PHP, this uses SugarMath as to avoid potential floating-point errors
      *
-     * @throws Exception
      * @return String
+     * @throws Exception
      */
     public function evaluate()
     {
@@ -29,7 +29,7 @@ class DivideExpression extends NumericExpression
         $numerator = $params[0]->evaluate();
         $denominator = $params[1]->evaluate();
         if ($denominator == 0) {
-            throw new Exception("Division by zero");
+            throw new Exception('Division by zero');
         }
 
         return (string)SugarMath::init($numerator, 6)->div($denominator)->result();
@@ -59,7 +59,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return array('divide', 'currencyDivide', 'div');
+        return ['divide', 'currencyDivide', 'div'];
     }
 
     /**

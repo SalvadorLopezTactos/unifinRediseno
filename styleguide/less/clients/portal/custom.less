@@ -50,10 +50,10 @@ ul.nav.nav-tabs li.activity {
   }
 
   #drawers {
-    .main-pane {
-      &.span8 {
-        width: calc(66vw ~"-" @sidebarNavWidth);
-      }
+    .drawer {
+      left: 0;
+      right: 0;
+      width: 100%;
     }
   }
 
@@ -135,7 +135,7 @@ ul.nav.nav-tabs li.activity {
 
 .span8 .headerpane {
   background: @headerpaneBackground;
-  width: calc(~"65.957446802% - 1px");
+  width: 65.957446802%;
   left: 0;
 }
 
@@ -234,4 +234,25 @@ ul.nav.nav-tabs li.activity {
 
 .side.sidebar-content {
   background-color: @gray20;
+}
+
+@media (min-width: 768px) {
+  .row-fluid .main-pane.span8 {
+    width: 66%;
+    overflow-y: auto;
+
+    > div .flex-list-view {
+      height: ~'calc(100% - 40px)';
+
+      .dataTable {
+        overflow: auto;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .dataTable {
+    min-height: 200px;
+  }
 }

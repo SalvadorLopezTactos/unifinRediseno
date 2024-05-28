@@ -51,7 +51,7 @@ EOQ;
      */
     public static function getOperationName()
     {
-        return "pow";
+        return 'pow';
     }
 
     /**

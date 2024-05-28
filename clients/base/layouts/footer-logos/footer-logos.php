@@ -11,8 +11,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['footer-logos'] = array(
-    'components' => array(
+$viewdefs['base']['layout']['footer-logos'] = [
+    'components' => [
         ['view' => 'omnichannel-button'],
-    ),
-);
+    ],
+];

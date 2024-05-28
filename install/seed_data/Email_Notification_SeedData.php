@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('sugarEntry') || !sugarEntry) {
     die('Not A Valid Entry Point');
 }
@@ -17,12 +18,12 @@ require 'config.php';
 global $sugar_config;
 global $mod_strings;
 
-$templateData = array(
+$templateData = [
     'Meeting' => 'meeting_notification_email',
     'Call' => 'call_notification_email',
     '‌ReportSchedule' => 'scheduled_report_email',
     'CommentLogMention' => 'comment_log_mention_email',
-);
+];
 
 $team = new Team();
 $teamId = $team->retrieve_team_id('Administrator');
@@ -45,8 +46,8 @@ foreach ($templateData as $templateKey => $templateValue) {
         $emailTemp->text_only = 0;
     }
 
-    $id =$emailTemp->save();
+    $id = $emailTemp->save();
     $sugar_config['emailTemplate'][$templateKey] = $id;
 }
 
-write_array_to_file("sugar_config", $sugar_config, "config.php");
+write_array_to_file('sugar_config', $sugar_config, 'config.php');

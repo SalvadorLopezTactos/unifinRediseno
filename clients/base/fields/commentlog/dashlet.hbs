@@ -29,21 +29,7 @@
                     {{relativeTime date_entered class="relative"}}
                 </div>
                 <div class="body">
-                    {{#if showShort}}
-                        {{#if collapsed}}
-                            <div class="msg-content">{{entryShort}}...</div>
-                            <button data-action="toggle" class="btn btn-link btn-invisible toggle-text" data-comment-id="{{id}}">
-                                {{str 'LBL_COMMENT_LOG_SHOW_MORE' ../module}}
-                            </button>
-                        {{else}}
-                            <div class="msg-content">{{entry}}</div>
-                            <button data-action="toggle" class="btn btn-link btn-invisible toggle-text" data-comment-id="{{id}}">
-                                {{str 'LBL_COMMENT_LOG_SHOW_LESS' ../module}}
-                            </button>
-                        {{/if}}
-                    {{else}}
-                        <div class="msg-content">{{entry}}</div>
-                    {{/if}}
+                    {{partial 'comment' ../this this}}
                 </div>
             </li>
             {{/each}}
@@ -51,7 +37,7 @@
             {{#if view.collection.dataFetched}}
             <em>{{str "LBL_COMMENTS_LOG_DASHLET_NO_COMMENTS"}}</em>
             {{else}}
-                <div class="block-footer tcenter">
+                <div class="block-footer text-center">
                     {{loading 'LBL_ALERT_TITLE_LOADING'}}
                 </div>
             {{/if}}
@@ -59,7 +45,7 @@
     </ul>
 </div>
 {{#if _showViewAll}}
-<div class="block-footer tleft">
+<div class="block-footer text-left">
     <button data-action="showall" class="btn btn-link btn-invisible more">{{str "LBL_COMMENTS_LOG_DASHLET_VIEW_ALL"}}</button>
 </div>
 {{/if}}

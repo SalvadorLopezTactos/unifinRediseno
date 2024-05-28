@@ -38,13 +38,13 @@ class Visibility extends AbstractProvider implements ContainerAwareInterface
      * List of strategy collection per module
      * @var StrategyCollection[]
      */
-    protected $strategies = array();
+    protected $strategies = [];
 
     /**
      * List of loaded filter objects
      * @var FilterInterface[]
      */
-    protected $filters = array();
+    protected $filters = [];
 
     /**
      * {@inheritdoc}
@@ -82,7 +82,7 @@ class Visibility extends AbstractProvider implements ContainerAwareInterface
      */
     public function getBeanIndexFields($module, $fromQueue = false)
     {
-        $fields = array();
+        $fields = [];
         foreach ($this->getModuleStrategies($module) as $strategy) {
             $fields = array_merge(
                 $fields,
@@ -102,10 +102,9 @@ class Visibility extends AbstractProvider implements ContainerAwareInterface
         $main = new \Elastica\Query\BoolQuery();
 
         foreach ($modules as $module) {
-
             // main module filter
             $modFilter = new \Elastica\Query\BoolQuery();
-            $modFilter->addMust($this->createFilter('Type', array('module' => $module)));
+            $modFilter->addMust($this->createFilter('Type', ['module' => $module]));
 
             // now add filters from different strategies
             $this->addVisibilityFilters($builder->getUser(), $modFilter, $module);
@@ -124,7 +123,7 @@ class Visibility extends AbstractProvider implements ContainerAwareInterface
      * @param array $options
      * @return \Elastica\Query\AbstractQuery
      */
-    public function createFilter($name, array $options = array())
+    public function createFilter($name, array $options = [])
     {
         $filter = $this->getFilter($name);
         return $filter->buildFilter($options);
@@ -182,7 +181,7 @@ class Visibility extends AbstractProvider implements ContainerAwareInterface
     {
         // cache strategies per module
         if (!isset($this->strategies[$module])) {
-            $this->strategies[$module] = $this->getStrategies(array($module));
+            $this->strategies[$module] = $this->getStrategies([$module]);
         }
         return $this->strategies[$module];
     }

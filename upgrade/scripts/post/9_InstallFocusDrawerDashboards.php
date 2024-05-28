@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -103,8 +104,8 @@ class SugarUpgradeInstallFocusDrawerDashboards extends UpgradeScript
             $contents = str_replace('<module_name>', $module, $contents);
             $contents = str_replace('<MODULE_NAME>', strtoupper($module), $contents);
             $fw = sugar_fopen($destDir . 'focus-dashboard.php', 'w');
-            fwrite($fw, $contents) ;
-            fclose($fw) ;
+            fwrite($fw, $contents);
+            fclose($fw);
         }
     }
 

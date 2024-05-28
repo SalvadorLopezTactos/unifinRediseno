@@ -14,6 +14,6 @@ $hook_array['after_save'][] = [
     1,
     'Sugarcrm\Sugarcrm\CustomerJourney\LogicHooks\JourneyParentHooksHelper::afterSave',
     null,
-    '\\Sugarcrm\\Sugarcrm\\CustomerJourney\\LogicHooks\\JourneyParentHooksHelper',
+    '\\' . \Sugarcrm\Sugarcrm\CustomerJourney\LogicHooks\JourneyParentHooksHelper::class,
     'afterSave',
 ];

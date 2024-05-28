@@ -147,7 +147,7 @@ class SugarUpgradeUpdatePackages extends UpgradeScript
                 }
                 $this->upgrader->log(
                     $this->logPrefix . 'Delete broken installed package information and related files. ' .
-                    'Filename: ' .  $package->filename . '. Error: ' . $e->getMessage() . ' ' .
+                    'Filename: ' . $package->filename . '. Error: ' . $e->getMessage() . ' ' .
                     'The installed package files should be removed manually.'
                 );
                 continue;
@@ -184,7 +184,7 @@ class SugarUpgradeUpdatePackages extends UpgradeScript
                     $this->deleteHistoryFromDb($package);
                     $this->upgrader->log(
                         $this->logPrefix . 'Delete broken installed package information and related files. ' .
-                        'Filename: ' .  $package->filename . '. md5sum already exists:  ' . $md5sum .
+                        'Filename: ' . $package->filename . '. md5sum already exists:  ' . $md5sum .
                         '. The installed package files should be removed manually.'
                     );
                     continue;
@@ -367,7 +367,7 @@ class SugarUpgradeUpdatePackages extends UpgradeScript
                 $this->upgrader->log(
                     $this->logPrefix .
                     'Delete broken staged package file ' . $relatedFile . ' ' .
-                    'Error: ' .  $e->getMessage()
+                    'Error: ' . $e->getMessage()
                 );
                 continue;
             }
@@ -378,7 +378,7 @@ class SugarUpgradeUpdatePackages extends UpgradeScript
             );
         }
         $this->upgrader->log(
-            $this->logPrefix . 'Process staged ' . $type .' packages. Count: ' . $processedCount
+            $this->logPrefix . 'Process staged ' . $type . ' packages. Count: ' . $processedCount
         );
     }
 
@@ -461,7 +461,7 @@ class SugarUpgradeUpdatePackages extends UpgradeScript
         $typeDir = $this->getUpgradeTypeDir($type);
         $zipFiles = new \GlobIterator($typeDir . DIRECTORY_SEPARATOR . '*.zip');
         $this->upgrader->log(
-            $this->logPrefix . 'Count staged ' . $type .' packages. Count: ' . $zipFiles->count()
+            $this->logPrefix . 'Count staged ' . $type . ' packages. Count: ' . $zipFiles->count()
         );
     }
 }

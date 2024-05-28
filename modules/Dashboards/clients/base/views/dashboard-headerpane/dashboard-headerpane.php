@@ -9,49 +9,49 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Dashboards']['base']['view']['dashboard-headerpane'] = array(
-    'buttons' => array(
-        array(
+$viewdefs['Dashboards']['base']['view']['dashboard-headerpane'] = [
+    'buttons' => [
+        [
             'name' => 'edit_button',
             'type' => 'rowaction',
             'label' => 'LBL_EDIT_BUTTON',
             'acl_action' => 'edit',
             'showOn' => 'view',
-        ),
-        array(
+        ],
+        [
             'name' => 'create_cancel_button',
             'type' => 'button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'create',
-        ),
-        array(
+        ],
+        [
             'name' => 'create_button',
             'type' => 'button',
-            'events' => array(
+            'events' => [
                 'click' => 'button:save_button:click',
-            ),
+            ],
             'label' => 'LBL_SAVE_BUTTON_LABEL',
             'css_class' => 'btn-primary',
             'showOn' => 'create',
-        ),
-    ),
-    'panels' => array(
-        array(
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'header',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'type' => 'dashboardtitle',
                     'name' => 'name',
                     'placeholder' => 'LBL_DASHBOARD_TITLE',
-                ),
-                array(
+                ],
+                [
                     'name' => 'my_favorite',
                     'label' => 'LBL_FAVORITE',
                     'type' => 'favorite',
                     'dismiss_label' => true,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

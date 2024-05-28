@@ -46,8 +46,12 @@
 
                     this.before('unsavedchange', this.beforeViewChange, this);
 
-                    if (app.sideDrawer && app.sideDrawer.before) {
-                        app.sideDrawer.before(
+                    this.listenTo(this.model, 'sync', this.manageTemplateFields);
+
+                    // check unsaved changes inside the focus drawer only
+                    let sideDrawer = this.closestComponent('side-drawer');
+                    if (sideDrawer && sideDrawer.before) {
+                        sideDrawer.before(
                             'side-drawer:close side-drawer:content-changed',
                             this.beforeContainerChange,
                             this
@@ -213,9 +217,37 @@
                 var numOfToggledFields = fields.length;
                 var view = this;
 
+                const fieldModuleData = app.metadata.getModule(this.module) || {};
+                const templateEditableFields = fieldModuleData.templateEditableFields || [];
+
                 _.each(fields, function(field) {
                     if (field.disposed) {
                         // if a field is disposed, skip this field
+                        return;
+                    }
+
+                    const isTemplateEditable = templateEditableFields.indexOf(field.name) > -1 || !field.name;
+
+                    if (field.model && field.model.get('is_template') && !isTemplateEditable) {
+                        // if the model is a template then we don't allow edit
+                        // unless the module vardefs allows it
+                        _.defer(function(field) {
+                            if (field.disposed !== true) {
+                                field.setMode('detail');
+                                field.$el.closest('.record-cell').toggleClass('edit', false);
+
+                                numOfToggledFields--;
+
+                                if (numOfToggledFields === 0) {
+                                    if (_.isFunction(callback)) {
+                                        callback();
+                                    }
+
+                                    view.trigger('editable:toggle_fields', fields, viewName);
+                                }
+                            }
+                        }, field);
+
                         return;
                     }
 
@@ -532,14 +564,59 @@
             },
 
             /**
+             * Prevent the pencil from appearing on fields that are not editable
+             * @param {Array} editableFields Field names
+             */
+            hidePencil: function(editableFields) {
+                _.each(this.fields, function(field) {
+                    const isEditableField = editableFields.indexOf(field.name) > -1 || !field.name;
+
+                    if (!isEditableField) {
+                        this.$('.record-edit-link-wrapper[data-name=' + field.name + ']').toggleClass('hide', true);
+                    }
+                }, this);
+            },
+
+            /**
+             * Get the editable field names for templates from module metadata
+             * @return {Array}
+             */
+            getTemplateEditableFields: function() {
+                const fieldModuleData = app.metadata.getModule(this.module) || {};
+
+                return fieldModuleData.templateEditableFields || [];
+            },
+
+            /**
+             * Make template fields readonly
+             */
+            manageTemplateFields: function() {
+                if (this.disposed) {
+                    return;
+                }
+
+                if (this.model.get('is_template') &&
+                    _.isFunction(this.toggleEdit) &&
+                    _.isFunction(this.hidePencil) &&
+                    this.action === 'edit') {
+                    // at this point in time we have the model synced so the fields can properly display
+                    this.toggleEdit(true);
+
+                    const templateEditableFields = this.getTemplateEditableFields();
+                    this.hidePencil(templateEditableFields);
+                }
+            },
+
+            /**
              * Detach the event handlers for warning unsaved changes.
              */
             unbindBeforeHandler: function() {
                 app.routing.offBefore('route', this.beforeRouteChange, this);
                 $(window).off('beforeunload.' + this.cid);
 
-                if (app.sideDrawer && app.sideDrawer.offBefore) {
-                    app.sideDrawer.offBefore(
+                let sideDrawer = this.closestComponent('side-drawer');
+                if (sideDrawer && sideDrawer.offBefore) {
+                    sideDrawer.offBefore(
                         'side-drawer:close side-drawer:content-changed',
                         this.beforeContainerChange,
                         this
@@ -568,6 +645,7 @@
              * Unbind beforeHandlers.
              */
             onDetach: function() {
+                this.stopListening();
                 $(document).off('mousedown', this.editableMouseClicked);
                 this.editableKeyDowned = null;
                 this.editableMouseClicked = null;

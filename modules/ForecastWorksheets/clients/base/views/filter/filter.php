@@ -10,12 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['ForecastWorksheets']['base']['view']['filter'] = array(
-    'panels' => array(
-        0 => array(
+$viewdefs['ForecastWorksheets']['base']['view']['filter'] = [
+    'panels' => [
+        0 => [
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'ranges',
                     /*
                     This is an enum field, however the 'options' string is set dynamically in the view (which is why it
@@ -26,11 +26,11 @@ $viewdefs['ForecastWorksheets']['base']['view']['filter'] = array(
                     'label' => 'LBL_FILTERS',
                     'default' => false,
                     'enabled' => true,
-                ),
-            ),
-        ),
-    ),
-    'last_state' => array(
+                ],
+            ],
+        ],
+    ],
+    'last_state' => [
         'id' => 'filter',
-    ),
-);
+    ],
+];

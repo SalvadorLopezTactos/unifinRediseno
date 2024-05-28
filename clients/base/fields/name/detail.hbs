@@ -15,12 +15,12 @@
         {{#if def.link}}
             <a class="ellipsis_inline" href="{{#if def.events}}javascript:void(0);{{else}}{{href}}{{/if}}"
                data-link-target="{{linkTarget}}" data-module="{{module}}" data-model-id="{{modelId}}"
-               data-placement="bottom" title="{{value}}"
+               data-bs-placement="bottom" title="{{value}}"
             >
                 {{value}}
             </a>
         {{else}}
-            <span class="ellipsis_inline" data-placement="bottom" title="{{value}}">
+            <span class="ellipsis_inline" data-bs-placement="bottom" title="{{value}}">
                 {{value}}
             </span>
         {{/if}}

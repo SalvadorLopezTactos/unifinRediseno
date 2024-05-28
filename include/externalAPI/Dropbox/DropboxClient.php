@@ -20,10 +20,10 @@ class DropboxClient
     public $tokenUri = 'https://api.dropboxapi.com/oauth2/token';
     public $revokeUri = 'https://api.dropboxapi.com/2/auth/token/revoke';
 
-    public static $POST = "POST";
-    public static $GET = "GET";
-    public static $PUT = "PUT";
-    public static $DELETE = "DELETE";
+    public static $POST = 'POST';
+    public static $GET = 'GET';
+    public static $PUT = 'PUT';
+    public static $DELETE = 'DELETE';
 
     private $clientId;
     private $clientSecret;
@@ -165,10 +165,10 @@ class DropboxClient
                 }
             }
         } elseif ($method === self::$PUT) {
-            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
             curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
         } elseif ($method === self::$DELETE) {
-            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
             curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
         }
 
@@ -216,7 +216,7 @@ class DropboxClient
                 $key = $h[0];
             } else {
                 if (substr($h[0], 0, 1) === "\t") {
-                    $headers[$key] .= "\r\n\t".trim($h[0]);
+                    $headers[$key] .= "\r\n\t" . trim($h[0]);
                 } elseif (!$key) {
                     $headers[0] = trim($h[0]);
                 }

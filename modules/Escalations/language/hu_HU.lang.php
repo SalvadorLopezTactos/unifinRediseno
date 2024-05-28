@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'Eszkalációk megtekintése',
     'LBL_LIST_RELATED_TO_ID' => 'Kapcsolódó azonosító',
     'LNK_IMPORT_ESCALATIONS' => 'Eszkalálások importálása',
-    
+
     'LBL_LIST_SUBJECT' => 'Tárgy',
     'LBL_LIST_NUMBER' => 'Szám',
     'LBL_LIST_RELATED_TO_TYPE' => 'Kapcsolódó típus',

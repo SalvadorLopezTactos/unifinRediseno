@@ -11,14 +11,14 @@
  */
 
 $module_name = 'Notes';
-$viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
+$viewdefs[$module_name]['base']['menu']['quickcreate'] = [
     'layout' => 'create',
     'visible' => true,
     'order' => 10,
-    'related' => array(
-        array(
+    'related' => [
+        [
             'module' => 'Contacts',
             'link' => 'notes',
-        ),
-    ),
-);
+        ],
+    ],
+];

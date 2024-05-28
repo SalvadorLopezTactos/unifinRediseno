@@ -25,7 +25,7 @@
         'change [data-filter=operator] input[type=hidden]': 'handleOperatorSelected'
     },
 
-    className: 'filter-definition-container',
+    className: 'filter-definition-container overflow-auto max-h-[215px]',
 
     filterFields: [],
 
@@ -40,6 +40,14 @@
         'datetime' : 'date',
         'datetimecombo' : 'date'
     },
+
+    /* Operators that use a text field (instead of datetime) to enter the amount of days */
+    amountDaysOperators: [
+        '$more_x_days_ago',
+        '$last_x_days',
+        '$next_x_days',
+        '$more_x_days_ahead',
+    ],
 
     /**
      * @override
@@ -771,7 +779,7 @@
                 break;
             case 'datetimecombo':
             case 'date':
-                fieldDef.type = 'date';
+                fieldDef.type = (_.includes(this.amountDaysOperators, operation)) ? 'text' : 'date';
                 //Flag to indicate the value needs to be formatted correctly
                 data.isDate = true;
                 if (operation.charAt(0) !== '$') {

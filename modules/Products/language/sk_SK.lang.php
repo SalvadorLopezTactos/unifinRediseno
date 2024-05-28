@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Informačný panel so zoznamom položiek riadkov ponúk',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Informačný panel so záznamom riadkových položiek ponúk',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na položky riadkov ponúk',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová os ponúkanej riadkovej položky',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Kampaň ocenených položiek krivky',
     'LBL_MODULE_NAME' => 'Quoted Line Items',
@@ -183,4 +184,4 @@ To create a {{module_name}}:
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nová ponúkaná položka)',
     'LBL_DISCOUNT_PERCENT' => '% percent',
     'LBL_DISCOUNT_TYPE' => 'Typ zľavy',
-);
+];

@@ -12,7 +12,6 @@
 
 abstract class SugarForecasting_Export_AbstractExport extends SugarForecasting_AbstractForecastArgs implements SugarForecasting_ForecastProcessInterface
 {
-
     /**
      * @var mixed
      */
@@ -22,11 +21,11 @@ abstract class SugarForecasting_Export_AbstractExport extends SugarForecasting_A
      *
      * @var array
      */
-    protected $dataArray = array();
+    protected $dataArray = [];
 
     /**
      * Class Constructor
-     * @param array $args       Service Arguments
+     * @param array $args Service Arguments
      */
     public function __construct($args)
     {
@@ -56,22 +55,22 @@ abstract class SugarForecasting_Export_AbstractExport extends SugarForecasting_A
      * @param $data
      * @param $focus
      * @param $fields_array
-     * @param string $filter_by     What field that should be filtered on
-     * @param array $filters        The values to check $filter_by
+     * @param string $filter_by What field that should be filtered on
+     * @param array $filters The values to check $filter_by
      *
      * @return string content for the export file
      */
-    protected function getContent($data, $focus, $fields_array, $filter_by = null, array $filters = array())
+    protected function getContent($data, $focus, $fields_array, $filter_by = null, array $filters = [])
     {
-        require_once('include/export_utils.php');
+        require_once 'include/export_utils.php';
         $fields_array = get_field_order_mapping($focus->object_name, $fields_array);
 
         foreach ($fields_array as $key => $label) {
-             $fields_array[$key] = translateForExport($label, $focus);
+            $fields_array[$key] = translateForExport($label, $focus);
         }
 
         // setup the "header" line with proper delimiters
-        $content = "\"".implode("\"".getDelimiter()."\"", array_values($fields_array))."\"\r\n";
+        $content = '"' . implode('"' . getDelimiter() . '"', array_values($fields_array)) . "\"\r\n";
 
         if (!empty($data)) {
             $content .= $this->getExportDataContent($data, $focus, $fields_array, $filter_by, $filters);
@@ -88,14 +87,14 @@ abstract class SugarForecasting_Export_AbstractExport extends SugarForecasting_A
      * @param $data
      * @param $focus
      * @param $fields_array
-     * @param string $filter_by     What field that should be filtered on
-     * @param array $filters        The values to check $filter_by
+     * @param string $filter_by What field that should be filtered on
+     * @param array $filters The values to check $filter_by
      *
      * @return string content for the data portion of export
      */
-    protected function getExportDataContent($data, $focus, $fields_array, $filter_by = null, array $filters = array())
+    protected function getExportDataContent($data, $focus, $fields_array, $filter_by = null, array $filters = [])
     {
-        require_once('include/export_utils.php');
+        require_once 'include/export_utils.php';
 
         global $current_user;
         $content = '';
@@ -113,13 +112,13 @@ abstract class SugarForecasting_Export_AbstractExport extends SugarForecasting_A
                 continue;
             }
 
-            $new_arr = array();
+            $new_arr = [];
 
             if (!$isAdminUser) {
-                $focus->id = (!empty($val['id']))?$val['id']:'';
-                $focus->assigned_user_id = (!empty($val['assigned_user_id']))?$val['assigned_user_id']:'' ;
-                $focus->created_by = (!empty($val['created_by']))?$val['created_by']:'';
-                $focus->ACLFilterFieldList($val, array(), array("blank_value" => true));
+                $focus->id = (!empty($val['id'])) ? $val['id'] : '';
+                $focus->assigned_user_id = (!empty($val['assigned_user_id'])) ? $val['assigned_user_id'] : '';
+                $focus->created_by = (!empty($val['created_by'])) ? $val['created_by'] : '';
+                $focus->ACLFilterFieldList($val, [], ['blank_value' => true]);
             }
 
             foreach ($fields_array as $key => $label) {
@@ -131,11 +130,11 @@ abstract class SugarForecasting_Export_AbstractExport extends SugarForecasting_A
                     $value = $sfh->exportSanitize($value, $focus->field_defs[$key], $focus, $val);
                 }
 
-                $new_arr[$key] = preg_replace("/\"/", "\"\"", $value);
+                $new_arr[$key] = preg_replace('/"/', '""', $value);
             }
 
-            $line = implode("\"". $delimiter ."\"", $new_arr);
-            $content .= "\"" . $line . "\"\r\n";
+            $line = implode('"' . $delimiter . '"', $new_arr);
+            $content .= '"' . $line . "\"\r\n";
         }
 
         return $content;
@@ -165,11 +164,11 @@ abstract class SugarForecasting_Export_AbstractExport extends SugarForecasting_A
         global $locale;
         $filename = $this->getFilename();
         header("Content-Disposition: attachment; filename=\"{$filename}\"");
-        header("Content-Type: text/x-csv");
-        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        header("Last-Modified: " . TimeDate::httpTime());
-        header("Cache-Control: post-check=0, pre-check=0", false);
-        header("Content-Length: ".mb_strlen($locale->translateCharset($contents, 'UTF-8', $locale->getExportCharset())));
+        header('Content-Type: text/x-csv');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Last-Modified: ' . TimeDate::httpTime());
+        header('Cache-Control: post-check=0, pre-check=0', false);
+        header('Content-Length: ' . mb_strlen($locale->translateCharset($contents, 'UTF-8', $locale->getExportCharset())));
         echo $locale->translateCharset($contents, 'UTF-8', $locale->getExportCharset());
     }
 }

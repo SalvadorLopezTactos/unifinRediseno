@@ -1,5 +1,8 @@
 <?php
-if(!defined('sugarEntry'))define('sugarEntry', true);
+
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +14,7 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('service/core/REST/SugarRest.php');
+require_once 'service/core/REST/SugarRest.php';
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
@@ -19,63 +22,68 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
  * This class is a serialize implementation of REST protocol
  * @api
  */
-class SugarRestSerialize extends SugarRest{
-
+class SugarRestSerialize extends SugarRest
+{
     public $faultObject;
 
     /**
-	 * It will serialize the input object and echo's it
-	 *
-	 * @param array $input - assoc array of input values: key = param name, value = param type
-	 * @return String - echos serialize string of $input
-	 */
-	function generateResponse($input){
-		ob_clean();
-		if (isset($this->faultObject)) {
-			$this->generateFaultResponse($this->faultObject);
-		} else {
-			echo serialize($input);
-		}
-	} // fn
+     * It will serialize the input object and echo's it
+     *
+     * @param array $input - assoc array of input values: key = param name, value = param type
+     * @return String - echos serialize string of $input
+     */
+    public function generateResponse($input)
+    {
+        ob_clean();
+        if (isset($this->faultObject)) {
+            $this->generateFaultResponse($this->faultObject);
+        } else {
+            echo serialize($input);
+        }
+    } // fn
 
-	/**
-	 * This method calls functions on the implementation class and returns the output or Fault object in case of error to client
-	 *
-	 * @return unknown
-	 */
-	function serve(){
-		$GLOBALS['log']->info('Begin: SugarRestSerialize->serve');
-		if(empty($_REQUEST['method']) || !method_exists($this->implementation, $_REQUEST['method'])){
-			$er = new SoapError();
-			$er->set_error('invalid_call');
-			$this->fault($er);
-		}else{
+    /**
+     * This method calls functions on the implementation class and returns the output or Fault object in case of error to client
+     *
+     * @return unknown
+     */
+    public function serve()
+    {
+        $GLOBALS['log']->info('Begin: SugarRestSerialize->serve');
+        if (empty($_REQUEST['method']) || !method_exists($this->implementation, $_REQUEST['method'])) {
+            $er = new SoapError();
+            $er->set_error('invalid_call');
+            $this->fault($er);
+        } else {
             if (isset($_REQUEST['rest_data'])) {
                 $data = unserialize(htmlspecialchars_decode($_REQUEST['rest_data'], ENT_QUOTES), ['allowed_classes' => false]);
             } else {
                 $data = '';
             }
-			if(!is_array($data))$data = array($data);
-			$GLOBALS['log']->info('End: SugarRestSerialize->serve');
+            if (!is_array($data)) {
+                $data = [$data];
+            }
+            $GLOBALS['log']->info('End: SugarRestSerialize->serve');
             return $this->invoke($_REQUEST['method'], $data);
-		} // else
-	} // fn
+        } // else
+    } // fn
 
-	/**
-	 * This function sends response to client containing error object
-	 *
-	 * @param SoapError $errorObject - This is an object of type SoapError
-	 * @access public
-	 */
-	function fault($errorObject){
-		$this->faultServer->faultObject = $errorObject;
-	} // fn
+    /**
+     * This function sends response to client containing error object
+     *
+     * @param SoapError $errorObject - This is an object of type SoapError
+     * @access public
+     */
+    public function fault($errorObject)
+    {
+        $this->faultServer->faultObject = $errorObject;
+    } // fn
 
-	function generateFaultResponse($errorObject){
-		$error = $errorObject->number . ': ' . $errorObject->name . '<br>' . $errorObject->description;
-		$GLOBALS['log']->error($error);
-		ob_clean();
-		echo serialize($errorObject);
-	} // fn
-
+    public function generateFaultResponse($errorObject)
+    {
+        $error = $errorObject->number . ': ' . $errorObject->name . '<br>' . $errorObject->description;
+        $GLOBALS['log']->error($error);
+        ob_clean();
+        echo serialize($errorObject);
+    } // fn
 } // clazz

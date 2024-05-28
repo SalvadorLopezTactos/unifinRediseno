@@ -30,6 +30,7 @@
         this.chart_loaded = false;
         this.chartType = '';
         this.locale = SUGAR.charts.getSystemLocale();
+        this._customLegend = false;
 
         this.langDirection = app.lang.direction;
     },
@@ -38,7 +39,7 @@
      * Register events
      */
     _registerEvents: function() {
-        this.listenTo(this.view, 'chart-container:size:changed', this.preserveAspectRatio, this);
+        this.listenTo(this.view, 'chart-container:size:changed', this.containerResizing, this);
     },
 
     /**
@@ -62,12 +63,25 @@
     },
 
     /**
+     * Take care of the chart size when container resizes
+     */
+    containerResizing: function() {
+        // waiting until all gridstack animation is done, then notify everyone about resizing
+        // gridstack does not offer an event for when the animation is done
+        const gridstackAnimationDuration = 300;
+        _.debounce(() => {
+            this.context.trigger('container-resizing');
+            this.preserveAspectRatio();
+        }, gridstackAnimationDuration)();
+    },
+
+    /**
      * Update chart size according to container size and x/y axes
      */
-    preserveAspectRatio: function() {
+    preserveAspectRatio: _.debounce(function() {
         const chartData = this.model.get('rawChartData');
 
-        if (!chartData) {
+        if (!chartData || this.disposed) {
             return;
         }
 
@@ -79,29 +93,34 @@
         }
 
         const chartEl = this.$(`#chart_${this.cid}_wrapper`);
-        const marginOffset = 0.1;
-        const ratio = config.aspectRatio - marginOffset;
+        const chartContainer = this.$('#chart-wrapper-container');
+        const chartMinSize = 120;
 
         chartEl.css({
             height: '',
             width: '',
-            marginLeft: '',
+            'min-width': `${chartMinSize}px`,
+            'min-height': `${chartMinSize}px`,
         });
 
         const size = {
-            width: chartEl.innerWidth(),
-            height: chartEl.innerHeight()
+            width: chartContainer.width(),
+            height: chartContainer.height()
         };
 
-        if (size.height * ratio < size.width) {
-            const width = size.height * ratio;
+        const width = Math.max(size.height < size.width ? size.height : size.width, chartMinSize);
+        const height = width;
 
-            chartEl.css({
-                width: width,
-                marginLeft: (size.width - width) / 2,
-            });
+        chartEl.css({
+            width,
+            height,
+        });
+
+        if (this.chart && this.chart.chart) {
+            this.chart.chart.resize();
+            this.chart.chart.update();
         }
-    },
+    }),
 
     overflowHandler: function(distance) {
         var b = this.view.$el.parents().filter(function() {
@@ -149,13 +168,35 @@
             this.chart.destroyChart();
         }
 
-        this.preserveAspectRatio();
+        const showLegend = params.show_legend;
+        const showTitle = params.show_title;
+
+        // hide base legend if we have a custom one
+        params.show_legend = showLegend && !this.def.customLegend;
+        params.show_title = showTitle && !this.def.customLegend;
 
         loadSugarChart(id, chartData, [], config, params, chart => {
             this.chart = chart;
-            if (this.chart && this.chart.wrapperProperties) {
-                this.updateChartWrapperCss(this.chart.wrapperProperties);
+
+            if (this.chart) {
+                if (this.chart.wrapperProperties) {
+                    this.updateChartWrapperCss(this.chart.wrapperProperties);
+                }
+
+                if (this.chart.chartType === 'funnel') {
+                    this.justifyCenterChartWrapperContainer();
+                }
+
+                if (showLegend && this.def.customLegend) {
+                    this.generateLegend();
+                }
             }
+
+            if (showTitle && this.def.customLegend) {
+                this.generateTitle();
+            }
+
+            this.preserveAspectRatio();
         });
 
         // Resize chart on print.
@@ -173,6 +214,14 @@
         if (chartWrapper) {
             Object.assign(chartWrapper.style, properties);
         }
+    },
+
+    /**
+     * Justify center the chart
+     */
+    justifyCenterChartWrapperContainer: function() {
+        const container = this.$('#chart-wrapper-container');
+        container.toggleClass('justify-center', true);
     },
 
     getChartParams: function(chartData) {
@@ -264,9 +313,6 @@
 
             case 'funnel chart':
             case 'funnel chart 3D':
-                // funnel preserves its aspect ratio so it needs scroll
-                this.$('[data-content="chart"]').css('overflow-y', 'auto');
-
                 chartConfig = {
                     funnelType: 'basic',
                     chartType: 'funnelChart',
@@ -431,14 +477,234 @@
      */
     displayNoData: function(state) {
         this.$('[data-content="chart"]').toggleClass('hide', state);
+        this.$('#chart-wrapper-container').toggleClass('hide', state);
+        this.$('.chart-main').toggleClass('hide', state);
         this.$('[data-content="nodata"]').toggleClass('hide', !state);
+
+        this.disposeLegend();
+        this.disposeTitle();
+    },
+
+    /**
+     * Generate custom title element
+     */
+    generateTitle: function() {
+        this.disposeTitle();
+
+        this.$('#custom-title').toggleClass('hidden', false).text(this.model.get('rawChartParams').report_title);
+    },
+
+    /**
+     * Generate custom legend element
+     */
+    generateLegend: function() {
+        this.disposeLegend();
+
+        // we do not support legend for treemap charts yet
+        const chartParams = this.model.get('rawChartParams') || {};
+
+        if (chartParams.chart_type === 'treemap chart') {
+            return;
+        }
+
+        this.$('#custom-legend').toggleClass('hidden', false);
+
+        const legendMeta = [];
+        const chartEl = this.chart.chart;
+
+        const datasets = chartEl.data.datasets;
+        const topLevelLabels = chartEl.data.labels;
+
+        // go through every data set and gather legend data
+        _.each(datasets, (dataset, index) => {
+            if (!dataset.label) {
+                return;
+            }
+
+            const legendItem = this.generateLegendItem(dataset, chartEl, index, dataset.label);
+
+            if (legendItem) {
+                legendMeta.push(legendItem);
+            }
+        });
+
+        // go through all top level labels and see if there are any legend compatible elements
+        _.each(topLevelLabels, (topLevelLabel, index) => {
+            const dataset = _.first(datasets);
+
+            // if the dataset already has a legend item we can skip it
+            if (dataset.label) {
+                return;
+            }
+
+            const legendItem = this.generateLegendItem(dataset, chartEl, index, topLevelLabel);
+
+            if (legendItem) {
+                legendMeta.push(legendItem);
+            }
+        });
+
+        this._customLegend = app.view.createView({
+            type: 'legend',
+            context: this.context,
+            model: this.model,
+            layout: this,
+            legendMeta,
+        });
+
+        this._customLegend.render();
+
+        const legendContainer = this.$('#custom-legend');
+
+        legendContainer.empty();
+        legendContainer.append(this._customLegend.$el);
+    },
+
+    /**
+     * Generate Legend item config
+     *
+     * @param {Object} dataset
+     * @param {Object} chartEl
+     * @param {string} index
+     * @param {string} label
+     *
+     * @return {mixed}
+     */
+    generateLegendItem: function(dataset, chartEl, index, label) {
+        // most charts keep their data into the 'data' property but treemap keeps it in 'tree'
+        dataset.origData = app.utils.deepCopy(_.values(dataset.tree || dataset.data));
+
+        if (!label) {
+            return false;
+        }
+
+        const backgroundColors = dataset.backgroundColor;
+        let legendIndex = index;
+
+        if (_.isArray(backgroundColors)) {
+            const chartParams = this.model.get('rawChartParams') || {};
+
+            if (chartParams.dataType === 'grouped') {
+                _.each(backgroundColors, (bgColor, idx) => {
+                    if (!_.isString(bgColor)) {
+                        legendIndex = idx;
+                    }
+                });
+            }
+
+            legendIndex = Math.min(legendIndex, backgroundColors.length - 1);
+        }
+
+        const color = _.isString(backgroundColors) ?
+                            backgroundColors :
+                        _.isFunction(backgroundColors) ?
+                            backgroundColors({
+                                dataIndex: legendIndex,
+                                type: 'data',
+                            }) :
+                        backgroundColors[legendIndex];
+
+        return {
+            id: app.utils.generateUUID(),
+            visible: true,
+            label,
+            color,
+            callback: () => {
+                this.toggleStackedDatasetVisibility(chartEl, dataset.label, index);
+                chartEl.update();
+            },
+        };
+    },
+
+    /**
+     * Either Hide or Show a chart segment
+     *
+     * @param {Object} chartEl
+     * @param {string} label
+     * @param {string} index
+     */
+    toggleStackedDatasetVisibility: function(chartEl, label, index) {
+        let datasetIndex = chartEl.data.datasets.findIndex(function(dataset) {
+            return dataset.label === label && label;
+        });
+
+        if (datasetIndex !== -1) {
+            const targetSet = chartEl.data.datasets[datasetIndex];
+            // if we found the dataset with that label, we need to hide it(mostly valid for bar charts)
+            targetSet.hidden = !targetSet.hidden;
+        } else {
+            // if there is not a dataset with that label, we need to remove the value(valid for non stackable charts)
+            datasetIndex = 0;
+            const targetSet = chartEl.data.datasets[datasetIndex];
+
+            const treelikeStructure = !!targetSet.tree;
+
+            if (treelikeStructure) {
+                const origElPos = this.findElementInTreeStructure(targetSet.tree, targetSet.origData[index]);
+
+                targetSet.tree[origElPos].value = targetSet.tree[origElPos].value === null ?
+                                                targetSet.origData[index].value :
+                                                null;
+
+                targetSet.tree.sort((a, b) => b.value - a.value);
+                chartEl.data.labels = targetSet.tree.map(value => this.chart.pickLabel(value.label));
+            } else {
+                const segmentValue = targetSet.data[index];
+
+                targetSet.data[index] = segmentValue === null ?
+                                        targetSet.origData[index] :
+                                        null;
+            }
+        }
+    },
+
+    /**
+     * Check wether an item is already in the tree
+     *
+     * @param {Array} haystack
+     * @param {Object} needle
+     *
+     * @return {string}
+     */
+    findElementInTreeStructure: function(haystack, needle) {
+        let targetElementPos = -1;
+
+        _.each(haystack, (hay, pos) => {
+            if ((hay.value === needle.value || hay.value === null) && hay.label === needle.label) {
+                targetElementPos = pos;
+            }
+        });
+
+        return targetElementPos;
+    },
+
+    /**
+     * Dispose title element
+     */
+    disposeTitle: function() {
+        this.$('#custom-title').toggleClass('hidden', true);
+    },
+
+    /**
+     * Dispose legend element
+     */
+    disposeLegend: function() {
+        if (this._customLegend) {
+            this._customLegend.dispose();
+
+            this._customLegend = false;
+        }
     },
 
     /**
      * @inheritdoc
      */
     _dispose: function() {
+        this.disposeLegend();
+        this.disposeTitle();
+
         this.handlePrinting('off');
+
         if (this.chart) {
             this.chart.destroyChart();
         }

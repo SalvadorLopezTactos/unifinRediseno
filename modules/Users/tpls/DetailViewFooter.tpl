@@ -197,7 +197,7 @@
                 <tr>
                     <td width="15%" scope="row"><slot>{$MOD.LBL_PDF_FONT_NAME_MAIN|strip_semicolon}:</slot></td>
                     <td width="35%"><slot>{$PDF_FONT_NAME_MAIN_DISPLAY}&nbsp;</slot></td>
-                    <td colspan="2"><slot>{$MOD.LBL_PDF_FONT_NAME_MAIN_TEXT}&nbsp;</slot></td>
+                    <td colspan="2"><slot>{$PDF_FONT_NAME_MAIN_TEXT}&nbsp;</slot></td>
                 </tr>
                 <tr>
                     <td width="15%" scope="row"><slot>{$MOD.LBL_PDF_FONT_SIZE_MAIN|strip_semicolon}:</slot></td>
@@ -207,7 +207,7 @@
                 <tr>
                     <td width="15%" scope="row"><slot>{$MOD.LBL_PDF_FONT_NAME_DATA|strip_semicolon}:</slot></td>
                     <td width="35%"><slot>{$PDF_FONT_NAME_DATA_DISPLAY}&nbsp;</slot></td>
-                    <td colspan="2" class="tabDetailViewDF"><slot>{$MOD.LBL_PDF_FONT_NAME_DATA_TEXT}&nbsp;</slot></td>
+                    <td colspan="2" class="tabDetailViewDF"><slot>{$PDF_FONT_NAME_DATA_TEXT}&nbsp;</slot></td>
                 </tr>
                 <tr>
                     <td width="15%"  scope="row"><slot>{$MOD.LBL_PDF_FONT_SIZE_DATA|strip_semicolon}:</slot></td>

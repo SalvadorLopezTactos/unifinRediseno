@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Metrics']['base']['view']['record-header-buttons'] = array(
+$viewdefs['Metrics']['base']['view']['record-header-buttons'] = [
     'fields' => [
         [
             'name' => 'name',
@@ -17,29 +17,29 @@ $viewdefs['Metrics']['base']['view']['record-header-buttons'] = array(
             'type' => 'name',
         ],
     ],
-    'buttons' => array(
-        array(
-            'name'    => 'cancel_button',
-            'type'    => 'button',
-            'label'   => 'LBL_CANCEL_BUTTON_LABEL',
+    'buttons' => [
+        [
+            'name' => 'cancel_button',
+            'type' => 'button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link hide',
-        ),
-        array(
+        ],
+        [
             'type' => 'rowaction',
             'css_class' => 'btn btn-primary hide',
             'primary' => true,
             'name' => 'save_button',
             'label' => 'LBL_SAVE_BUTTON_LABEL',
-        ),
-        array(
+        ],
+        [
             'type' => 'rowaction',
             'css_class' => 'btn btn-primary hide',
             'name' => 'edit_button',
             'label' => 'LBL_EDIT_BUTTON_LABEL',
-        ),
-        array(
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

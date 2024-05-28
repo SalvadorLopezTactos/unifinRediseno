@@ -10,45 +10,50 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-function get_expression($express_type, $first, $second){
-	
-	if($express_type=="+"){
-		return express_add($first, $second);
-	}	
-	if($express_type=="-"){
-		return express_subtract($first, $second);
-	}		
-	if($express_type=="*"){
-		return express_multiple($first, $second);
-	}		
-	if($express_type=="/"){
-		return express_divide($first, $second);
-	}			
-//end function get_expression
+function get_expression($express_type, $first, $second)
+{
+
+    if ($express_type == '+') {
+        return express_add($first, $second);
+    }
+    if ($express_type == '-') {
+        return express_subtract($first, $second);
+    }
+    if ($express_type == '*') {
+        return express_multiple($first, $second);
+    }
+    if ($express_type == '/') {
+        return express_divide($first, $second);
+    }
+    //end function get_expression
 }
 
-function express_add($first, $second){
+function express_add($first, $second)
+{
     [$first, $second] = express_prepare_params($first, $second);
-	return $first + $second;
-}	
-
-function express_subtract($first, $second){
-    [$first, $second] = express_prepare_params($first, $second);
-	return $first - $second;
+    return $first + $second;
 }
 
-function express_multiple($first, $second){
+function express_subtract($first, $second)
+{
     [$first, $second] = express_prepare_params($first, $second);
-	return $first * $second;
+    return $first - $second;
 }
 
-function express_divide($first, $second){
+function express_multiple($first, $second)
+{
+    [$first, $second] = express_prepare_params($first, $second);
+    return $first * $second;
+}
+
+function express_divide($first, $second)
+{
     [$first, $second] = express_prepare_params($first, $second);
     if ($second == 0) {
-        LoggerManager::getLogger()->fatal('Division by zero: ' . (new Exception())->getTraceAsString());
+        LoggerManager::getLogger()->warn('Division by zero: ' . (new Exception())->getTraceAsString());
         return $first;
     }
-	return $first / $second;
+    return $first / $second;
 }
 
 /**
@@ -66,7 +71,3 @@ function express_prepare_params($first, $second): array
     }
     return [$first, $second];
 }
-
-
-
-?>

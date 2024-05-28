@@ -26,7 +26,7 @@ function setupActionButtons() {
             if (typeof childData === 'object' && childData !== null) {
                 data[key] = encodeData(childData, encode);
             } else if (typeof childData === 'string') {
-                data[key] = encode ? btoa(childData) : atob(childData);
+                data[key] = encode ? btoa(encodeURIComponent(childData)) : decodeURIComponent(atob(childData));
             }
         });
         return data;

@@ -12,7 +12,7 @@
 $module_name = 'DocuSignEnvelopes';
 $viewdefs[$module_name]['base']['menu']['header'] = [
     [
-        'route' => '#'.$module_name,
+        'route' => '#' . $module_name,
         'label' => 'View Envelopes',
         'acl_action' => 'list',
         'acl_module' => $module_name,
@@ -21,10 +21,10 @@ $viewdefs[$module_name]['base']['menu']['header'] = [
     [
         'route' => '#bwc/index.php?' . http_build_query(
             [
-                'module' => 'Import',
-                'action' => 'Step1',
-                'import_module' => $module_name,
-            ],
+                    'module' => 'Import',
+                    'action' => 'Step1',
+                    'import_module' => $module_name,
+                ],
         ),
         'label' => 'LNK_IMPORT_DOCUSIGN_ENVELOPE',
         'acl_action' => 'import',

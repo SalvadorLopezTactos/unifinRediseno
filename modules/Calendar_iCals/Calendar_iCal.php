@@ -33,14 +33,14 @@ class Calendar_iCal extends iCal
         $restService = new RestService();
 
         $start_date_time = date('Y') . '-01-01 00:00:00';
-        $end_date_time   = date('Y') . '-12-31 11:59:59';
+        $end_date_time = date('Y') . '-12-31 11:59:59';
 
         $ical_array = [];
-        $calendars  = $_REQUEST['calendarConfigurations'];
+        $calendars = $_REQUEST['calendarConfigurations'];
 
         $calendarSettings = [
-            'startDate'=> $start_date_time,
-            'endDate'=> $end_date_time,
+            'startDate' => $start_date_time,
+            'endDate' => $end_date_time,
             'calendarConfigurations' => $calendars,
         ];
 

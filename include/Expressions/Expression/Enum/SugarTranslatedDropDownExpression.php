@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * <b>getDropdownValueSet(String list_name)</b><br>
  * Returns a collection of the translated values in the supplied dropdown list.<br/>
@@ -17,26 +18,29 @@
  */
 class SugarTranslatedDropDownExpression extends EnumExpression
 {
-	/**
-	 * Returns the entire enumeration bare.
-	 */
-	function evaluate() {
-		global $app_list_strings;
-		$dd = $this->getParameters()->evaluate();;
-		
-		if (isset($app_list_strings[$dd]) && is_array($app_list_strings[$dd])) {
-			return array_values($app_list_strings[$dd]);
-		} 
-		
-		return array();
-	}
+    /**
+     * Returns the entire enumeration bare.
+     */
+    public function evaluate()
+    {
+        global $app_list_strings;
+        $dd = $this->getParameters()->evaluate();
+        ;
+
+        if (isset($app_list_strings[$dd]) && is_array($app_list_strings[$dd])) {
+            return array_values($app_list_strings[$dd]);
+        }
+
+        return [];
+    }
 
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
 			var dd = this.getParameters().evaluate(),
 				arr, ret = [];
 			if (App){
@@ -54,36 +58,38 @@ class SugarTranslatedDropDownExpression extends EnumExpression
 
 			return ret;
 EOQ;
-	}
+    }
 
 
-	/**
-	 * Returns the exact number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 1;
-	}
-	
-	/**
-	 * All parameters have to be a string.
-	 */
-    static function getParameterTypes() {
-		return AbstractExpression::$STRING_TYPE;
-	}
+    /**
+     * Returns the exact number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 1;
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return array("getDropdownValueSet", "getTransDD");
-	}
+    /**
+     * All parameters have to be a string.
+     */
+    public static function getParameterTypes()
+    {
+        return AbstractExpression::$STRING_TYPE;
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return ['getDropdownValueSet', 'getTransDD'];
+    }
+
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 }
-
-?>

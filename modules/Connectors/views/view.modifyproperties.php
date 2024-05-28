@@ -1,4 +1,5 @@
 <?php
+
 // @codingStandardsIgnoreFile
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -21,11 +22,11 @@ class ViewModifyProperties extends SugarView
     {
         global $mod_strings;
 
-        return array(
-            "<a href='#Administration'>".translate('LBL_MODULE_NAME', 'Administration')."</a>",
-            "<a href='index.php?module=Connectors&action=ConnectorSettings'>".$mod_strings['LBL_ADMINISTRATION_MAIN']."</a>",
+        return [
+            "<a href='#Administration'>" . translate('LBL_MODULE_NAME', 'Administration') . '</a>',
+            "<a href='index.php?module=Connectors&action=ConnectorSettings'>" . $mod_strings['LBL_ADMINISTRATION_MAIN'] . '</a>',
             $mod_strings['LBL_MODIFY_PROPERTIES_TITLE'],
-        );
+        ];
     }
 
     /**
@@ -46,7 +47,7 @@ class ViewModifyProperties extends SugarView
         $this->ss->assign('mod', $mod_strings);
         $this->ss->assign('APP', $app_strings);
         $connectors = ConnectorUtils::getConnectors(true);
-        $required_fields = array();
+        $required_fields = [];
         //Get required fields for first connector only
 
         $connectorsToShow = $connectors;
@@ -60,10 +61,10 @@ class ViewModifyProperties extends SugarView
             $connector_strings = ConnectorUtils::getConnectorStrings($id);
             $fields = $s->getRequiredConfigFields();
 
-            if(!$s->isEnabledInAdminProperties() || empty($fields)){
+            if (!$s->isEnabledInAdminProperties() || empty($fields)) {
                 unset($connectorsToShow[$id]);
-            }else{
-                if (empty($required_fields)){
+            } else {
+                if (empty($required_fields)) {
                     foreach ($fields as $field_id) {
                         $label = $connector_strings[$field_id] ?? $field_id;
                         $required_fields[$id][$field_id] = $label;

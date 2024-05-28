@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-'LBL_ASSIGNED_TO_ID'=>'ID dodijeljenog korisnika',
-'LBL_ASSIGNED_TO_NAME' => 'Dodijeljeno',
-);
+$mod_strings = [
+    'LBL_ASSIGNED_TO_ID' => 'ID dodijeljenog korisnika',
+    'LBL_ASSIGNED_TO_NAME' => 'Dodijeljeno',
+];

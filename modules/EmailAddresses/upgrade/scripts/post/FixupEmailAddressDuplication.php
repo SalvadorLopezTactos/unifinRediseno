@@ -34,16 +34,16 @@ class SugarUpgradeFixupEmailAddressDuplication extends UpgradeScript
             return;
         }
 
-        $dupEmailAddresses = array();
+        $dupEmailAddresses = [];
 
         // Find any duplicate email addresses
         $eaBean = BeanFactory::newBean('EmailAddresses');
 
         $q = new SugarQuery();
-        $q->select(array('email_address_caps'))->fieldRaw('COUNT(email_address_caps)', 'emcount');
-        $q->from($eaBean, array('alias' => 'ea'));
+        $q->select(['email_address_caps'])->fieldRaw('COUNT(email_address_caps)', 'emcount');
+        $q->from($eaBean, ['alias' => 'ea']);
         $q->groupBy('email_address_caps');
-        if (count($rows = $q->execute()) > 0) {
+        if (safeCount($rows = $q->execute()) > 0) {
             foreach ($rows as $row) {
                 if ($row['emcount'] > 1) { // is Duplicate?
                     // Get id as well as the opt_out and invalid_email flag settings
@@ -51,11 +51,11 @@ class SugarUpgradeFixupEmailAddressDuplication extends UpgradeScript
                     $q2->from($eaBean)->where()->equals('email_address_caps', $row['email_address_caps']);
                     $matches = $eaBean->fetchFromQuery($q2);
 
-                    $eaInfo = array(
+                    $eaInfo = [
                         'opt_out' => 0,
                         'invalid_email' => 0,
                         'email_addresses' => [],
-                    );
+                    ];
                     foreach ($matches as $match) {
                         // Use most conservative strategy - true always wins
                         if (boolval($match->opt_out)) {
@@ -125,7 +125,7 @@ class SugarUpgradeFixupEmailAddressDuplication extends UpgradeScript
         $qb->having('COUNT(id) > 1');
         $res = $qb->execute();
 
-        $dups = array();
+        $dups = [];
         while ($row = $res->fetchAssociative()) {
             $dups[] = $row;
         }
@@ -197,7 +197,7 @@ class SugarUpgradeFixupEmailAddressDuplication extends UpgradeScript
      */
     protected function updateEmailAddressesRecord($id, $optOut, $invalidEmail)
     {
-        $sql = "UPDATE email_addresses" .
+        $sql = 'UPDATE email_addresses' .
             " SET opt_out={$optOut}, invalid_email={$invalidEmail} WHERE id='{$id}' AND deleted=0";
 
         $this->log('Fixup_EmailAddress_Duplication::updateEmailAddressesRecord: Query: ' . $sql);

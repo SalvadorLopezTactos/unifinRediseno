@@ -10,26 +10,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'Contracts';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
         'route' => '#Contracts/create',
-        'label' =>'LNK_NEW_CONTRACT',
-        'acl_action'=>'create',
-        'acl_module'=>$module_name,
+        'label' => 'LNK_NEW_CONTRACT',
+        'acl_action' => 'create',
+        'acl_module' => $module_name,
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route'=>'#Contracts',
-        'label' =>'LNK_CONTRACT_LIST',
-        'acl_action'=>'list',
-        'acl_module'=>$module_name,
+    ],
+    [
+        'route' => '#Contracts',
+        'label' => 'LNK_CONTRACT_LIST',
+        'acl_action' => 'list',
+        'acl_module' => $module_name,
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=>'#bwc/index.php?module=Import&action=Step1&import_module=Contracts&return_module=Contracts&return_action=index',
-        'label' =>'LNK_IMPORT_CONTRACTS',
-        'acl_action'=>'import',
-        'acl_module'=>$module_name,
+    ],
+    [
+        'route' => '#bwc/index.php?module=Import&action=Step1&import_module=Contracts&return_module=Contracts&return_action=index',
+        'label' => 'LNK_IMPORT_CONTRACTS',
+        'acl_action' => 'import',
+        'acl_module' => $module_name,
         'icon' => 'sicon-upload',
-    ),
-);
+    ],
+];

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Remove files that were scheduled to be deleted
  * Files are backed up to custom/backup
@@ -22,12 +23,12 @@ class SugarUpgradeRemoveFiles extends UpgradeScript
 
     public function run()
     {
-        if(empty($this->state['files_to_delete'])) {
+        if (empty($this->state['files_to_delete'])) {
             return;
         }
 
         $caseInsensitiveFS = $this->upgrader->context['case_insensitive_fs'];
-        $foldersToCheck = array();
+        $foldersToCheck = [];
 
         foreach ($this->state['files_to_delete'] as $file) {
             $deleter = isset($this->state['files_deleter'][$file]) ?
@@ -63,7 +64,7 @@ class SugarUpgradeRemoveFiles extends UpgradeScript
             }
 
             $files = glob($folder . '/*');
-            $numberOfFiles = is_countable($files) ? count($files) : 0;
+            $numberOfFiles = safeCount($files);
 
             if ($numberOfFiles === 0) {
                 $this->removeDir($folder);

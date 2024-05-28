@@ -37,7 +37,7 @@ class PMSEEndEvent extends PMSEEvent
      * @return array
      * @throws SugarQueryException
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         if (!$this->hasMultipleOpenThreads($flowData['cas_id'])) {
             //close the whole case, flows and remaining threads included
@@ -62,12 +62,12 @@ class PMSEEndEvent extends PMSEEvent
     {
         $q = $this->caseFlowHandler->retrieveSugarQueryObject();
         $q->from($this->caseFlowHandler->retrieveBean('pmse_BpmThread'));
-        $q->select()->fieldRaw("NULL");
+        $q->select()->fieldRaw('NULL');
         $q->where()->equals('cas_id', $casId);
         $q->where()->equals('cas_thread_status', 'OPEN');
         $q->limit(2);
         $result = $q->execute();
-        $count = count($result);
+        $count = safeCount($result);
 
         return $count > 1;
     }

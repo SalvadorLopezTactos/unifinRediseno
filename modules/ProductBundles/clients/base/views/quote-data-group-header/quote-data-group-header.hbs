@@ -10,14 +10,17 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<tr name="{{model.module}}_{{model.cid}}" class="flex-list-row-header quote-data-group-header ui-not-droppable">
-    <td class="two-dropdowns"{{#if name}} data-fieldname="{{name}}"{{/if}}>
-        <span class="action-button-wrapper left-column-save-cancel">
+<tr
+    class="bg-[--content-background] flex-list-row-header left-0 quote-data-group-header stick-left ui-not-droppable"
+    name="{{model.module}}_{{model.cid}}"
+>
+    <td class="absolute bg-[--content-background] flex focus-within:z-30 justify-evenly two-dropdowns z-10"{{#if name}} data-fieldname="{{name}}"{{/if}}>
+        <span class="absolute action-button-wrapper inset-0 left-column-save-cancel px-2 py-1">
             {{#each leftSaveCancelColumn}}
                 {{field ../this model=../model template=../viewName}}
             {{/each}}
         </span>
-        <span class="action-button-wrapper left-column-buttons">
+        <span class="absolute action-button-wrapper inset-0 left-column-buttons p-2">
             {{#each leftColumns}}
                 {{field ../this model=../model template=../viewName}}
             {{/each}}

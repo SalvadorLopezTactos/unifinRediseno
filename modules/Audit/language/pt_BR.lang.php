@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Registo de Auditorias',
     'LBL_FIELD_NAME' => 'Campo',
     'LBL_OLD_NAME' => 'Valor Anterior',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Atualizar para',
     'LBL_BLANK' => '-vazio-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Linha do tempo de auditoria',
+    'LBL_CREATED' => 'Criado',
+];

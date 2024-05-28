@@ -10,19 +10,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'Holidays';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
-        'route'=>'#'.$module_name.'/create',
-        'label' =>'LNK_NEW_HOLIDAY',
-        'acl_action'=>'create',
-        'acl_module'=>$module_name,
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
+        'route' => '#' . $module_name . '/create',
+        'label' => 'LNK_NEW_HOLIDAY',
+        'acl_action' => 'create',
+        'acl_module' => $module_name,
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route'=>'#'.$module_name,
-        'label' =>'LNK_HOLIDAYS',
-        'acl_action'=>'admin',
-        'acl_module'=>$module_name,
+    ],
+    [
+        'route' => '#' . $module_name,
+        'label' => 'LNK_HOLIDAYS',
+        'acl_action' => 'admin',
+        'acl_module' => $module_name,
         'icon' => '',
-    ),
-);
+    ],
+];

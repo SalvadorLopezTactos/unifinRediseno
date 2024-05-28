@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'TPL_ACTIVITY_CREATE' => 'Създаден {{{str "TPL_ACTIVITY_RECORD" "Activities" object}}} {{#if object.module}} {{getModuleName object.module}}.',
     'TPL_ACTIVITY_POST' => '{{{value}}}{{{str "TPL_ACTIVITY_ON" "Activities" this}}}',
     'TPL_ACTIVITY_UPDATE' => 'Актуализиран {{#if updateStr}}{{{updateStr}}} в {{/if}}{{{str "TPL_ACTIVITY_RECORD" "Activities" object}}}.',
@@ -28,4 +28,4 @@ $mod_strings = array(
     'TPL_MORE_COMMENT' => '{{this}} допълнителен коментар...',
     'TPL_MORE_COMMENTS' => '{{this}} още коментари...',
     'TPL_SHOW_MORE_MODULE' => 'Повече публикации...',
-);
+];

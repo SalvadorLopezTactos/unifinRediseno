@@ -31,6 +31,7 @@ $viewdefs['base']['view']['activity-timeline'] = [
                 'type' => 'actiondropdown',
                 'no_default_action' => true,
                 'icon' => 'sicon-plus',
+                'tooltip' => 'LBL_CREATE_BUTTON_LABEL',
                 'buttons' => [
                     [
                         'type' => 'dashletaction',
@@ -80,6 +81,13 @@ $viewdefs['base']['view']['activity-timeline'] = [
             ],
             [
                 'type' => 'dashletaction',
+                'css_class' => 'btn btn-invisible',
+                'icon' => 'sicon-refresh',
+                'action' => 'reloadData',
+                'tooltip' => 'LBL_DASHLET_REFRESH_LABEL',
+            ],
+            [
+                'type' => 'dashletaction',
                 'css_class' => 'dashlet-toggle btn btn-invisible minify',
                 'icon' => 'sicon-chevron-up',
                 'action' => 'toggleMinify',
@@ -91,11 +99,6 @@ $viewdefs['base']['view']['activity-timeline'] = [
                         'type' => 'dashletaction',
                         'action' => 'editClicked',
                         'label' => 'LBL_DASHLET_CONFIG_EDIT_LABEL',
-                    ],
-                    [
-                        'type' => 'dashletaction',
-                        'action' => 'reloadData',
-                        'label' => 'LBL_DASHLET_REFRESH_LABEL',
                     ],
                     [
                         'type' => 'dashletaction',

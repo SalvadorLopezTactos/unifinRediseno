@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Ajouter',
     'LBL_ADDRCITY' => 'Ville',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Info' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Fermer' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'Aucun connecteur n&#39;a été trouvé pour l&#39;ID source fourni.',
-);
-
+];

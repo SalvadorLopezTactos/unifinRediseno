@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kalendārs',
     'LBL_MODULE_NAME_SINGULAR' => 'Kalendārs',
     'LBL_MODULE_TITLE' => 'Kalendārs',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Uzstādījumi',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Attēlot laika spraugas dienas un nedēļas skatos:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Sākuma laiks:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Beigu laiks:',
+    'LBL_SETTINGS_TIME_STARTS' => 'Sākuma laiks:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Beigu laiks:',
     'LBL_SETTINGS_CALLS_SHOW' => 'Rādīt zvanus:',
     'LBL_SETTINGS_TASKS_SHOW' => 'Rādīt uzdevumus:',
 
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Izveidot kalendāru',
     'LNK_CALENDAR_LIST' => 'Skatīt kalendārus',
     'LNK_CALENDAR_LEGACY' => 'Legacy kalendārs',
-    'LBL_IMPORT_CALENDAR'=> 'Importēt kalendāru',
+    'LBL_IMPORT_CALENDAR' => 'Importēt kalendāru',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Notikuma laikspiedols',
     'LBL_INSERTFIELD' => 'Ievietot lauku',
     'LBL_EVENT_START_ERROR' => 'Izvēlieties sākumu',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Atlasiet kalendāru',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Neizdevās saglabāt kalendārus.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Sv',
             'Pi',
             'Ot',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Ce',
             'Pk',
             'Se',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Svētdiena',
             'Pirmdiena',
             'Otrdiena',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Ceturtdiena',
             'Piektdiena',
             'Sestdiena',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Jan',
             'Feb',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Okt',
             'Nov',
             'Dec',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Janvāris',
             'Februāris',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Oktobris',
             'Novembris',
             'Decembris',
-        ),
-);
+        ],
+];

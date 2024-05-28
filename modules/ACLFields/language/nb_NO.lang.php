@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_DEFAULT' => 'Ikke fastsatt',
     'LBL_READ_WRITE' => 'Les/Skriv',
     'LBL_READ_OWNER_WRITE' => 'Les/Skriv som eier',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_READ_SELECTED_TEAMS_WRITE' => 'Les / (eier og valgte grupper) skriving',
     'LBL_SELECTED_TEAMS_READ_OWNER_WRITE' => '(Eier og valgte grupper) Les/eier skrive',
     'LBL_SELECTED_TEAMS_READ_WRITE' => '(Eier og valgte grupper) Les/(eier og valgte grupper) skrive',
-);
+];

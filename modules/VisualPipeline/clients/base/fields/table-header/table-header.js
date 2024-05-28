@@ -17,6 +17,12 @@
     extendsFrom: 'EnumField',
 
     /**
+     * The name of the fields that should be excluded from the
+     * Tile View header options.
+     */
+    excludedTileHeaderOptions: ['commentlog'],
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -32,7 +38,10 @@
             items = tabContent.dropdownFields;
         }
         if (options.def.name === 'tile_body_fields' || options.def.name === 'tile_header') {
-            items = tabContent.fields;
+            items = _.omit(tabContent.fields, this.excludedTileHeaderOptions);
+        }
+        if (options.def.name === 'total_field') {
+            items = tabContent.allTotalableFields;
         }
         this.items = items;
 
@@ -44,6 +53,16 @@
                 this.model.set('tile_body_fields', parsedOptions);
             }
         }
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _render: function() {
+        if (this.def.name === 'total_field' && _.isEmpty(this.model.get('tabContent').allTotalableFields)) {
+            return;
+        }
+        this._super('_render');
     },
 
     /**

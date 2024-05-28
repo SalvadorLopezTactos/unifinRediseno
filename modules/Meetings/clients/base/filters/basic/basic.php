@@ -9,67 +9,67 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Meetings']['base']['filter']['basic'] = array(
+$viewdefs['Meetings']['base']['filter']['basic'] = [
     'create' => true,
-    'quicksearch_field' => array('name'),
+    'quicksearch_field' => ['name'],
     'quicksearch_priority' => 1,
     'quicksearch_split_terms' => false,
-    'filters' => array(
-        array(
+    'filters' => [
+        [
             'id' => 'all_records',
             'name' => 'LBL_LISTVIEW_FILTER_ALL',
-            'filter_definition' => array(),
+            'filter_definition' => [],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'assigned_to_me',
             'name' => 'LBL_LIST_MY_MEETINGS',
-            'filter_definition' => array(
+            'filter_definition' => [
                 '$owner' => '',
-            ),
+            ],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'favorites',
             'name' => 'LBL_FAVORITES',
-            'filter_definition' => array(
+            'filter_definition' => [
                 '$favorite' => '',
-            ),
+            ],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'recently_viewed',
             'name' => 'LBL_RECENTLY_VIEWED',
-            'filter_definition' => array(
+            'filter_definition' => [
                 '$tracker' => '-7 DAY',
-            ),
+            ],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'recently_created',
             'name' => 'LBL_NEW_RECORDS',
-            'filter_definition' => array(
-                'date_entered' => array(
+            'filter_definition' => [
+                'date_entered' => [
                     '$dateRange' => 'last_7_days',
-                ),
-            ),
+                ],
+            ],
             'editable' => false,
-        ),
-        array(
+        ],
+        [
             'id' => 'my_scheduled_meetings',
             'name' => 'LBL_MY_SCHEDULED_MEETINGS',
-            'filter_definition' => array(
-                array(
+            'filter_definition' => [
+                [
                     '$owner' => '',
-                ),
-                array(
-                    'status' => array(
-                        '$in' => array('Planned'),
-                    ),
-                ),
-            ),
+                ],
+                [
+                    'status' => [
+                        '$in' => ['Planned'],
+                    ],
+                ],
+            ],
             'editable' => false,
-        ),
+        ],
         [
             'id' => 'meetings_attending',
             'name' => 'LBL_GUEST_MEETINGS',
@@ -95,5 +95,23 @@ $viewdefs['Meetings']['base']['filter']['basic'] = array(
             ],
             'editable' => false,
         ],
-    ),
-);
+        [
+            'id' => 'available_items',
+            'name' => 'LBL_AVAILABLE_MEETINGS',
+            'filter_definition' => [
+                [
+                    'is_customer_journey_activity' => [
+                        '$equals' => 0,
+                    ],
+                ],
+                [
+                    'status' => [
+                        '$not_in' => ['Not Held'],
+                    ],
+                ],
+            ],
+            'editable' => true,
+            'is_template' => true,
+        ],
+    ],
+];

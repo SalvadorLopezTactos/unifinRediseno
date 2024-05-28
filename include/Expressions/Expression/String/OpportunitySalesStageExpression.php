@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * <b>opportunitySalesStage(String $linkName, String $field)</b><br>
  * Return the correct sales_stage based on the sales_stage set on all RevenueLineItems
@@ -41,7 +42,7 @@ class OpportunitySalesStageExpression extends StringExpression
         }
 
         $ret = '';
-        $totalCt = count($linkField);
+        $totalCt = safeCount($linkField);
         $closedLostCt = 0;
         $closedWonCt = 0;
         $latestSalesStageIndex = 0;
@@ -161,10 +162,10 @@ JS;
      */
     public static function getParameterTypes()
     {
-        return array(
+        return [
             AbstractExpression::$RELATE_TYPE,
             AbstractExpression::$STRING_TYPE,
-        );
+        ];
     }
 
     /**
@@ -172,7 +173,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return array('opportunitySalesStage');
+        return ['opportunitySalesStage'];
     }
 
     /**

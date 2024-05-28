@@ -20,7 +20,8 @@
         'click a[name=clear_button]': 'clear',
         'click .addDocument': 'openDocumentsSelectionList',
         'click .sendEnvelope': 'sendToDocuSign',
-        'click .selectTemplate': 'selectTemplate'
+        'click .selectTemplate': 'selectTemplate',
+        'click .sendWithTemplate': 'sendWithTemplate'
     },
 
     /**
@@ -91,7 +92,14 @@
      * Select template
      */
     selectTemplate: function() {
-        this.context.parent.trigger('selectTemplate');
+        this.context.parent.trigger('selectTemplate', 'selectTemplate');
+    },
+
+    /**
+     * Select template
+     */
+    sendWithTemplate: function() {
+        this.context.parent.trigger('sendWithTemplate', 'sendWithTemplate');
     },
 
     _render: function() {

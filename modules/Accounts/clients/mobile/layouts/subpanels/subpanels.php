@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Accounts']['mobile']['layout']['subpanels'] = array(
+$viewdefs['Accounts']['mobile']['layout']['subpanels'] = [
     'components' => [
         [
             'layout' => 'subpanel',
@@ -164,4 +164,4 @@ $viewdefs['Accounts']['mobile']['layout']['subpanels'] = array(
             ],
         ],
     ],
-);
+];

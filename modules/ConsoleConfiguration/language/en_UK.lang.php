@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Console Configuration',
     'LBL_MODULE_NAME_SINGULAR' => 'Console Configuration',
     'LBL_CONSOLE_CONFIG_TITLE' => 'Console',
@@ -55,4 +56,4 @@ $mod_strings = array(
     'LBL_CONSOLE_DIRECTIONS_CHANGE' => 'The changes will be reflected immediately, but you must save in order for them to take effect.',
     'LBL_CONSOLE_DIRECTIONS_FILTER_AND' => 'and ',
     'LBL_CONSOLE_DIRECTIONS_FILTER_OR' => 'or ',
-);
+];

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Ochrana osobních údajů',
     'LBL_MODULE_NAME_SINGULAR' => 'Ochrana osobních údajů',
     'LBL_NUMBER' => 'Číslo',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'K vymazání nebyla označena žádná pole nebo záznamy.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Řídicí panel záznamů o ochraně osobních údajů',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na ochranu osobních dat',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová osa ochrany osobních údajů',
 
     // list view
     'LBL_HELP_RECORDS' => 'Modul Ochrana osobních údajů sleduje aktivity spojené s ochranou osobních údajů, včetně souhlasu a požadavků subjektů, za účelem podpory postupů ochrany osobních údajů vaší organizace. Vytváří záznamy o ochraně osobních údajů souvisejících se záznamem jednotlivce (např. kontakt), aby bylo možné sledovat poskytnutý souhlas nebo podniknout opatření týkající se požadavku na ochranu osobních údajů.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Modul Ochrana osobních údajů sleduje aktivity spojené s ochranou osobních údajů, včetně souhlasu a požadavků subjektů, za účelem podpory postupů ochrany osobních údajů vaší organizace. Vytváří záznamy o ochraně osobních údajů souvisejících se záznamem jednotlivce (např. kontakt), aby bylo možné sledovat poskytnutý souhlas nebo podniknout opatření týkající se požadavku na ochranu osobních údajů. Jakmile je potřebné opatření dokončeno, mohou uživatelé v roli Správce ochrany osobních údajů aktualizovat stav kliknutím na možnosti „Dokončeno“ nebo „Zamítnuto“.
 
 U požadavků na vymazání údajů vyberte možnost „Označit k vymazání“ pro všechny záznamy jednotlivce v níže uvedených dílčích panelech. Jakmile jsou vybrána všechna požadovaná pole, kliknutím na možnost „Vymazat a dokončit“ trvale odstraníte hodnoty polí a označíte záznam s osobními údaji jako dokončený.',
-);
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'FW:',
     'LBL_RE' => 'Dėl:',
     'LBL_BUTTON_CREATE' => 'Sukurti',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Choose From Email Account',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Choose Signature',
     'LBL_SIGNATURE' => 'Parašas',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Default Signature",
-    "LBL_SHOW_MORE_SIGNATURES" => "More Signatures...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Default Signature',
+    'LBL_SHOW_MORE_SIGNATURES' => 'More Signatures...',
     'LBL_SUBJECT' => 'Tema:',
     'LBL_TEMPLATE' => 'Šablonas',
     'LBL_TEXT_BODY' => 'Teksto turinys',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Išsiuntimo laikas',
     'LBL_LIST_TO_ADDR' => 'Kam',
     'LBL_LIST_TYPE' => 'Tipas',
-    "LBL_SELECTED_RECIPIENTS" => "Selected Recipients",
-    "LBL_SHOW_MORE_RECIPIENTS" => "More recipients...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Address Book",
+    'LBL_SELECTED_RECIPIENTS' => 'Selected Recipients',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'More recipients...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Address Book',
     'NTC_REMOVE_INVITEE' => 'Ar tikrai norite išimti šį gavėją iš laiško?',
     'WARNING_SETTINGS_NOT_CONF' => 'El. pašto nustatymai nėra tinkamai sukonfigūruoti siųsti el. laiškus. ' .
         'Dalyje <a href="#bwc/index.php?module=EmailMan&action=config">el. pašto nustatymai</a> reikia sukonfigūruoti SMTP serverį.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Gali nepavykti pridėti priedų: aptikta neteisinga arba netinkama „upload_tmp_dir“ reikšmė.' .
         'Pataisykite php.ini failą.',
     'LBL_MESSAGE_UID' => 'Message UID',
-    'LBL_OPEN_DRAFT_ALERT' => 'El. laiškas yra juodraštis. Paspauskite '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>,'.
+    'LBL_OPEN_DRAFT_ALERT' => 'El. laiškas yra juodraštis. Paspauskite ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>,' .
         '  kad redaguotumėte.',
     'LBL_EMAIL_BODY' => 'El. pašto pranešimas',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ el. laiškai',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'El. paštų duomenų ataskaitų sritis',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'El. pašto chronologija',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'no recipients specified',
@@ -475,4 +476,5 @@ You may apply a predefined template using the Template button or include one of 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Siųsti el. laišką',
     'LBL_MAILBOX' => 'Įeinančio pašto klientas',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Sukonfigūruokite siunčiamo el. pašto paskyrą naudodami <a href="#OutboundEmail">el. pašto nustatymus</a>, kad galėtumėte siųsti el. laiškus.',
-);
+    'LBL_TOO_SHORT' => 'Įveskite bent {0} simbolių...',
+];

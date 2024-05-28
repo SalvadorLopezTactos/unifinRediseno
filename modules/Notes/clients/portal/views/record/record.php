@@ -9,35 +9,35 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Notes']['portal']['view']['record'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Notes']['portal']['view']['record'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'header' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'picture',
                     'type' => 'avatar',
                     'size' => 'large',
                     'dismiss_label' => true,
                     'readonly' => true,
-                ),
+                ],
                 'name',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'description',
                     'span' => 12,
                     'rows' => 5,
                     'default' => true,
                     'enabled' => true,
-                ),
+                ],
                 [
                     'name' => 'attachment_list',
                     'default' => true,
@@ -64,18 +64,18 @@ $viewdefs['Notes']['portal']['view']['record'] = array(
                         'upload_id',
                     ],
                 ],
-                array(
+                [
                     'name' => 'date_entered_by',
                     'readonly' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_ENTERED',
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'date_entered',
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => 'Slučajevi',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Prilike',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Ponude',
-    'LBL_NOTES'=>'Bilješke',
+    'LBL_NOTES' => 'Bilješke',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise vanjskih korisnika',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija vanjskog korisnika',
 ];

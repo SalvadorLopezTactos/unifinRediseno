@@ -12,17 +12,16 @@
 
 global $current_user;
 
-if(!empty($_REQUEST['layout']) && !empty($_REQUEST['layoutModule'])) {
+if (!empty($_REQUEST['layout']) && !empty($_REQUEST['layoutModule'])) {
     $subpanels = explode(',', $_REQUEST['layout']);
-    
+
     $layoutParam = $_REQUEST['layoutModule'];
-    
-    if(!empty($_REQUEST['layoutGroup']) && $_REQUEST['layoutGroup']!= translate('LBL_MODULE_ALL')) {
-    	$layoutParam .= ':'.$_REQUEST['layoutGroup'];
+
+    if (!empty($_REQUEST['layoutGroup']) && $_REQUEST['layoutGroup'] != translate('LBL_MODULE_ALL')) {
+        $layoutParam .= ':' . $_REQUEST['layoutGroup'];
     }
-    
+
     $current_user->setPreference('subpanelLayout', $subpanels, 0, $layoutParam);
-}
-else {
+} else {
     echo 'oops';
 }

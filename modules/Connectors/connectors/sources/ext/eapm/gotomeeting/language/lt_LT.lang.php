@@ -11,9 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' =>
-'<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
+        '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
 Gaukite vartotojo kodą iš „LogMeIn“ užregistruodami naują „GoToMeeting“ programą.<br>
 &nbsp;<br>
 Veiksmai, kuriuos reikia atlikti norint užregistruoti jūsų atvejį:<br>
@@ -36,4 +36,4 @@ Veiksmai, kuriuos reikia atlikti norint užregistruoti jūsų atvejį:<br>
 </ol>
 </td></tr></table>',
     'oauth_consumer_key' => 'Vartotojo kodas',
-);
+];

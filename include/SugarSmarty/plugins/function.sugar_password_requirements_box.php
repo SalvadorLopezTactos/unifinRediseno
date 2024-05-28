@@ -31,7 +31,7 @@ r53057 - 2009-12-07 17:36:37 -0800 (Mon, 07 Dec 2009) - mitani - Cleans up tag s
 
 r52695 - 2009-11-23 12:43:45 -0800 (Mon, 23 Nov 2009) - jmertic - Bug 34084 - Correct tag the password strength indicators on the Users EditView for sales and pro instead of just pro.
 
-r51719 - 2009-10-22 10:18:00 -0700 (Thu, 22 Oct 2009) - mitani - Converted to Build 3  tags and updated the build system 
+r51719 - 2009-10-22 10:18:00 -0700 (Thu, 22 Oct 2009) - mitani - Converted to Build 3  tags and updated the build system
 
 r51634 - 2009-10-19 13:32:22 -0700 (Mon, 19 Oct 2009) - mitani - Windex is the branch for Sugar Sales 1.0 development
 
@@ -60,39 +60,54 @@ r45859 - 2009-04-03 12:26:29 -0700 (Fri, 03 Apr 2009) - faissah - Now using Smar
  * Name:     smarty_function_sugar_password_box<br>
  * Purpose:  display the password requirement box in the User Module
  *
- * @author Aissah Fabrice {faissah at sugarcrm.com
  * @param array
  * @param Smarty
+ * @author Aissah Fabrice {faissah at sugarcrm.com
  */
 function smarty_function_sugar_password_requirements_box($params, &$smarty)
 {
     $DIVFLAGS = [];
-global $current_language;
-$administration_module_strings = return_module_language($current_language, 'Administration');
-$pwd_settings=$GLOBALS['sugar_config']['passwordsetting'];
-if ($pwd_settings['oneupper'] == '1')    $DIVFLAGS['1upcase']=$administration_module_strings['LBL_PASSWORD_ONE_UPPER_CASE']; 
-if ($pwd_settings['onelower'] == '1')    $DIVFLAGS['1lowcase']=$administration_module_strings['LBL_PASSWORD_ONE_LOWER_CASE']; 
-if ($pwd_settings['onenumber'] == '1')   $DIVFLAGS['1number']=$administration_module_strings['LBL_PASSWORD_ONE_NUMBER']; 
-if ($pwd_settings['onespecial'] == '1')  $DIVFLAGS['1special']=$administration_module_strings['LBL_PASSWORD_ONE_SPECIAL_CHAR'];  
-if ($pwd_settings['customregex'] != '')  $DIVFLAGS['regex']=$pwd_settings['regexcomment'];
-if ($pwd_settings['minpwdlength'] >0 && $pwd_settings['maxpwdlength'] >0)
-    $DIVFLAGS['lengths']=$administration_module_strings['LBL_PASSWORD_MINIMUM_LENGTH'].' ='.$pwd_settings['minpwdlength'].' '.$administration_module_strings['LBL_PASSWORD_AND_MAXIMUM_LENGTH'].' ='.$pwd_settings['maxpwdlength'];   
-else if ($pwd_settings['minpwdlength'] >0)
-        $DIVFLAGS['lengths']=$administration_module_strings['LBL_PASSWORD_MINIMUM_LENGTH'].' ='.$pwd_settings['minpwdlength'];    
-    else if ($pwd_settings['maxpwdlength'] >0)
-        $DIVFLAGS['lengths']=$administration_module_strings['LBL_PASSWORD_MAXIMUM_LENGTH'].' ='.$pwd_settings['maxpwdlength'];
-           
-if ($DIVFLAGS=='')
-	return;
-$table_style='';
+    global $current_language;
+    $administration_module_strings = return_module_language($current_language, 'Administration');
+    $pwd_settings = $GLOBALS['sugar_config']['passwordsetting'];
+    if ($pwd_settings['oneupper'] == '1') {
+        $DIVFLAGS['1upcase'] = $administration_module_strings['LBL_PASSWORD_ONE_UPPER_CASE'];
+    }
+    if ($pwd_settings['onelower'] == '1') {
+        $DIVFLAGS['1lowcase'] = $administration_module_strings['LBL_PASSWORD_ONE_LOWER_CASE'];
+    }
+    if ($pwd_settings['onenumber'] == '1') {
+        $DIVFLAGS['1number'] = $administration_module_strings['LBL_PASSWORD_ONE_NUMBER'];
+    }
+    if ($pwd_settings['onespecial'] == '1') {
+        $DIVFLAGS['1special'] = $administration_module_strings['LBL_PASSWORD_ONE_SPECIAL_CHAR'];
+    }
+    if ($pwd_settings['customregex'] != '') {
+        $DIVFLAGS['regex'] = $pwd_settings['regexcomment'];
+    }
+    if ($pwd_settings['minpwdlength'] > 0 && $pwd_settings['maxpwdlength'] > 0) {
+        $DIVFLAGS['lengths'] = $administration_module_strings['LBL_PASSWORD_MINIMUM_LENGTH'] . ' =' . $pwd_settings['minpwdlength'] . ' ' . $administration_module_strings['LBL_PASSWORD_AND_MAXIMUM_LENGTH'] . ' =' . $pwd_settings['maxpwdlength'];
+    } elseif ($pwd_settings['minpwdlength'] > 0) {
+        $DIVFLAGS['lengths'] = $administration_module_strings['LBL_PASSWORD_MINIMUM_LENGTH'] . ' =' . $pwd_settings['minpwdlength'];
+    } elseif ($pwd_settings['maxpwdlength'] > 0) {
+        $DIVFLAGS['lengths'] = $administration_module_strings['LBL_PASSWORD_MAXIMUM_LENGTH'] . ' =' . $pwd_settings['maxpwdlength'];
+    }
 
-foreach($params as $prop => $value){$table_style.= $prop."='".$value."' ";}
-$box="	<table ".$table_style.">
+    if ($DIVFLAGS == '') {
+        return;
+    }
+    $table_style = '';
+
+    foreach ($params as $prop => $value) {
+        $table_style .= $prop . "='" . $value . "' ";
+    }
+    $box = '	<table ' . $table_style . ">
 <tr><td width='18px'></td><td></td></tr>";
-foreach($DIVFLAGS as $key => $value) {
-	if ($key != '')
-		$box.="<tr><td> <div class='bad' id='$key'></div> </td><td>  <div align='left'>$value</div></td></tr>";    	
-}
-$box.="</table>";
-return $box;
+    foreach ($DIVFLAGS as $key => $value) {
+        if ($key != '') {
+            $box .= "<tr><td> <div class='bad' id='$key'></div> </td><td>  <div align='left'>$value</div></td></tr>";
+        }
+    }
+    $box .= '</table>';
+    return $box;
 }

@@ -97,7 +97,7 @@ interface ProviderInterface
      * around corner cases avoiding heavy bulk queries retrieving data we
      * don't really need at this point.
      *
-     * @param string  $module    Module name
+     * @param string $module Module name
      * @param boolean $fromQueue Set if coming from QueueManager
      * @return array
      */

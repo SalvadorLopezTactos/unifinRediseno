@@ -49,18 +49,18 @@ class PMSEProjectExporter extends PMSEExporter
         $bean = $this->getBean();
         $bean->retrieve($args['id']);
 
-        $project = array();
+        $project = [];
 
         if (($data = $this->getBeanData($bean)) !== []) {
-            $project= PMSEEngineUtils::unsetCommonFields($data, array('name', 'description', 'assigned_user_id'));
+            $project = PMSEEngineUtils::unsetCommonFields($data, ['name', 'description', 'assigned_user_id']);
             $project['process'] = $this->getProjectProcess($bean->id);
             $project['diagram'] = $this->getProjectDiagram($bean->id);
             $project['definition'] = $this->getProcessDefinition($bean->id);
             $project['dynaforms'] = $this->getDynaforms($bean->id);
 
-            return array("metadata" => $this->getMetadata(), "project" => $project);
+            return ['metadata' => $this->getMetadata(), 'project' => $project];
         } else {
-            return array("error" => true);
+            return ['error' => true];
         }
     }
 
@@ -71,10 +71,10 @@ class PMSEProjectExporter extends PMSEExporter
     public function getProjectProcess($prjID)
     {
         $processBean = BeanFactory::newBean('pmse_BpmnProcess');
-        $processData = array();
-        $processBean->retrieve_by_string_fields(array("prj_id" => $prjID));
+        $processData = [];
+        $processBean->retrieve_by_string_fields(['prj_id' => $prjID]);
         if (!empty($processBean->fetched_row)) {
-            $processData = PMSEEngineUtils::unsetCommonFields($processBean->fetched_row, array('name', 'description'));
+            $processData = PMSEEngineUtils::unsetCommonFields($processBean->fetched_row, ['name', 'description']);
             $processData = PMSEEngineUtils::sanitizeKeyFields($processData);
         }
         return $processData;
@@ -88,10 +88,10 @@ class PMSEProjectExporter extends PMSEExporter
     public function getProjectDiagram($prjID)
     {
         $diagramBean = BeanFactory::newBean('pmse_BpmnDiagram'); //new BpmnDiagram();
-        $diagramData = array();
+        $diagramData = [];
 
-        if ($diagramBean->retrieve_by_string_fields(array("prj_id" => $prjID))) {
-            $diagramData = PMSEEngineUtils::unsetCommonFields($diagramBean->fetched_row, array('name', 'description', 'assigned_user_id'));
+        if ($diagramBean->retrieve_by_string_fields(['prj_id' => $prjID])) {
+            $diagramData = PMSEEngineUtils::unsetCommonFields($diagramBean->fetched_row, ['name', 'description', 'assigned_user_id']);
 
             //Get Activities
             $diagramData['activities'] = $this->getElementData($prjID, 'bpmnActivity');
@@ -107,7 +107,6 @@ class PMSEProjectExporter extends PMSEExporter
 
             //Get Flows
             $diagramData['flows'] = $this->getFlowData($prjID);
-
         }
         return $diagramData;
     }
@@ -115,30 +114,30 @@ class PMSEProjectExporter extends PMSEExporter
     private function getElementData($prjID, $element)
     {
         $definition = $this->getElementDefinitions($element);
-        if (empty($definition)){
-            return array();
+        if (empty($definition)) {
+            return [];
         }
 
         $activityBean = BeanFactory::newBean($definition['element']['module']);
 
         $q = new SugarQuery();
-        $q->from($activityBean, array('add_deleted' => true));
+        $q->from($activityBean, ['add_deleted' => true]);
         $q->distinct(false);
-        $fields = $this->getFields($definition['element']['module'], array('id', 'name'));
+        $fields = $this->getFields($definition['element']['module'], ['id', 'name']);
 
         //INNER JOIN BOUND TABLE
-        $q->joinTable('pmse_bpmn_bound', array('alias' => 'bound', 'joinType' => 'INNER', 'linkingTable' => true))
+        $q->joinTable('pmse_bpmn_bound', ['alias' => 'bound', 'joinType' => 'INNER', 'linkingTable' => true])
             ->on()
             ->equalsField('id', 'bound.bou_element')
             ->equals('bound.deleted', 0);
-        $fields = array_merge($fields, $this->getFields('pmse_BpmnBound', array(), 'bound'));
+        $fields = array_merge($fields, $this->getFields('pmse_BpmnBound', [], 'bound'));
 
         //INNER JOIN DEFINITION TABLE
-        $q->joinTable($definition['definition']['table'], array('alias' => 'def', 'joinType' => 'INNER', 'linkingTable' => true))
+        $q->joinTable($definition['definition']['table'], ['alias' => 'def', 'joinType' => 'INNER', 'linkingTable' => true])
             ->on()
             ->equalsField('id', 'def.id')
             ->equals('def.deleted', 0);
-        $fields = array_merge($fields, $this->getFields($definition['definition']['module'], array(), 'def'));
+        $fields = array_merge($fields, $this->getFields($definition['definition']['module'], [], 'def'));
 
         $q->where()
             ->equals('prj_id', $prjID)
@@ -154,16 +153,16 @@ class PMSEProjectExporter extends PMSEExporter
         $artifactBean = BeanFactory::newBean('pmse_BpmnArtifact');
 
         $q = new SugarQuery();
-        $q->from($artifactBean, array('add_deleted' => true));
+        $q->from($artifactBean, ['add_deleted' => true]);
         $q->distinct(false);
-        $fields = $this->getFields('pmse_BpmnArtifact', array('id', 'name'));
+        $fields = $this->getFields('pmse_BpmnArtifact', ['id', 'name']);
 
         //INNER JOIN BOUND TABLE
-        $q->joinTable('pmse_bpmn_bound', array('alias' => 'bound', 'joinType' => 'INNER', 'linkingTable' => true))
+        $q->joinTable('pmse_bpmn_bound', ['alias' => 'bound', 'joinType' => 'INNER', 'linkingTable' => true])
             ->on()
             ->equalsField('id', 'bound.bou_element')
             ->equals('bound.deleted', 0);
-        $fields = array_merge($fields, $this->getFields('pmse_BpmnBound', array(), 'bound'));
+        $fields = array_merge($fields, $this->getFields('pmse_BpmnBound', [], 'bound'));
 
         $q->where()
             ->equals('prj_id', $prjID)
@@ -179,9 +178,9 @@ class PMSEProjectExporter extends PMSEExporter
         $flowBean = BeanFactory::newBean('pmse_BpmnFlow');
 
         $q = new SugarQuery();
-        $q->from($flowBean, array('add_deleted' => true));
+        $q->from($flowBean, ['add_deleted' => true]);
         $q->distinct(false);
-        $fields = $this->getFields('pmse_BpmnFlow', array('id', 'name'));
+        $fields = $this->getFields('pmse_BpmnFlow', ['id', 'name']);
 
         $q->where()
             ->equals('prj_id', $prjID);
@@ -198,11 +197,13 @@ class PMSEProjectExporter extends PMSEExporter
     public function getProcessDefinition($prjID)
     {
         $definitionBean = BeanFactory::newBean('pmse_BpmProcessDefinition');
-        $definitionData = array();
-        $definitionBean->retrieve_by_string_fields(array("prj_id" => $prjID));
+        $definitionData = [];
+        $definitionBean->retrieve_by_string_fields(['prj_id' => $prjID]);
         if (!empty($definitionBean->fetched_row)) {
-            $definitionData = PMSEEngineUtils::unsetCommonFields($definitionBean->fetched_row,
-                array('name', 'description'));
+            $definitionData = PMSEEngineUtils::unsetCommonFields(
+                $definitionBean->fetched_row,
+                ['name', 'description']
+            );
             $definitionData = PMSEEngineUtils::sanitizeKeyFields($definitionBean->fetched_row);
         }
         return $definitionData;
@@ -217,9 +218,9 @@ class PMSEProjectExporter extends PMSEExporter
         $dynaFormBean = BeanFactory::newBean('pmse_BpmDynaForm');
 
         $q = new SugarQuery();
-        $q->from($dynaFormBean, array('add_deleted' => true));
+        $q->from($dynaFormBean, ['add_deleted' => true]);
         $q->distinct(false);
-        $fields = $this->getFields('pmse_BpmDynaForm', array('id'));
+        $fields = $this->getFields('pmse_BpmDynaForm', ['id']);
 
         $q->where()
             ->equals('prj_id', $prjID);
@@ -234,7 +235,7 @@ class PMSEProjectExporter extends PMSEExporter
      * @param array $conditionArray
      * @return array
      */
-    public function processBusinessRulesData($conditionArray = array())
+    public function processBusinessRulesData($conditionArray = [])
     {
         if (is_array($conditionArray)) {
             foreach ($conditionArray as $key => $value) {
@@ -247,14 +248,14 @@ class PMSEProjectExporter extends PMSEExporter
         return $conditionArray;
     }
 
-    private function getFields($module, $except = array(), $alias = '')
+    private function getFields($module, $except = [], $alias = '')
     {
-        $result = array();
+        $result = [];
         $rows = PMSEEngineUtils::getAllFieldsBean($module);
         $rows = PMSEEngineUtils::unsetCommonFields($rows, $except, true);
         if (!empty($alias)) {
             foreach ($rows as $value) {
-                $result[] = array($alias . '.' . $value, $alias . '_' . $value);
+                $result[] = [$alias . '.' . $value, $alias . '_' . $value];
             }
         } else {
             $result = $rows;
@@ -262,44 +263,45 @@ class PMSEProjectExporter extends PMSEExporter
         return $result;
     }
 
-    private function getElementDefinitions($element) {
-        $result = array();
-        switch ($element){
+    private function getElementDefinitions($element)
+    {
+        $result = [];
+        switch ($element) {
             case 'bpmnActivity':
-                $result = array(
-                    'element' => array(
+                $result = [
+                    'element' => [
                         'module' => 'pmse_BpmnActivity',
                         'table' => 'pmse_bpmn_activity',
-                    ),
-                    'definition' => array(
+                    ],
+                    'definition' => [
                         'module' => 'pmse_BpmActivityDefinition',
-                        'table' => 'pmse_bpm_activity_definition'
-                    )
-                );
+                        'table' => 'pmse_bpm_activity_definition',
+                    ],
+                ];
                 break;
             case 'bpmnEvent':
-                $result = array(
-                    'element' => array(
+                $result = [
+                    'element' => [
                         'module' => 'pmse_BpmnEvent',
                         'table' => 'pmse_bpmn_event',
-                    ),
-                    'definition' => array(
+                    ],
+                    'definition' => [
                         'module' => 'pmse_BpmEventDefinition',
-                        'table' => 'pmse_bpm_event_definition'
-                    )
-                );
+                        'table' => 'pmse_bpm_event_definition',
+                    ],
+                ];
                 break;
             case 'bpmnGateway':
-                $result = array(
-                    'element' => array(
+                $result = [
+                    'element' => [
                         'module' => 'pmse_BpmnGateway',
                         'table' => 'pmse_bpmn_gateway',
-                    ),
-                    'definition' => array(
+                    ],
+                    'definition' => [
                         'module' => 'pmse_BpmGatewayDefinition',
-                        'table' => 'pmse_bpm_gateway_definition'
-                    )
-                );
+                        'table' => 'pmse_bpm_gateway_definition',
+                    ],
+                ];
                 break;
         }
         return $result;

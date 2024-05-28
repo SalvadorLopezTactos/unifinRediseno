@@ -39,7 +39,7 @@
         this.currentLang = app.lang.getLanguage() || "en_us";
         this.languageList = this.formatLanguageList();
         app.view.View.prototype._renderHtml.call(this);
-        this.$('[data-toggle="dropdown"]').dropdown();
+        this.$('[data-bs-toggle="dropdown"]').dropdown();
         this.adjustMenuHeight();
     },
     /**

@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Reguły biznesowe procesu',
-  'LBL_MODULE_TITLE' => 'Reguły biznesowe procesu',
-  'LBL_MODULE_NAME_SINGULAR' => 'Reguła biznesowa procesu',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Reguły biznesowe procesu',
+    'LBL_MODULE_TITLE' => 'Reguły biznesowe procesu',
+    'LBL_MODULE_NAME_SINGULAR' => 'Reguła biznesowa procesu',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy reguł biznesowych procesu',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy reguł biznesowych procesu',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Pulpit rekordów reguł biznesowych procesu',
-  'LBL_RST_UID' => 'ID reguły biznesowej',
-  'LBL_RST_TYPE' => 'Typ reguły biznesowej',
-  'LBL_RST_DEFINITION' => 'Definicja reguły biznesowej',
-  'LBL_RST_EDITABLE' => 'Edytowanie reguły biznesowej',
-  'LBL_RST_SOURCE' => 'Źródło reguły biznesowej',
-  'LBL_RST_SOURCE_DEFINITION' => 'Definicja źródła reguły biznesowej',
-  'LBL_RST_MODULE' => 'Moduł docelowy',
-  'LBL_RST_FILENAME' => 'Nazwa pliku reguły biznesowej',
-  'LBL_RST_CREATE_DATE' => 'Data utworzenia reguły biznesowej',
-  'LBL_RST_UPDATE_DATE' => 'Data aktualizacji reguły biznesowej',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Pulpit rekordów reguł biznesowych procesu',
+    'LBL_RST_UID' => 'ID reguły biznesowej',
+    'LBL_RST_TYPE' => 'Typ reguły biznesowej',
+    'LBL_RST_DEFINITION' => 'Definicja reguły biznesowej',
+    'LBL_RST_EDITABLE' => 'Edytowanie reguły biznesowej',
+    'LBL_RST_SOURCE' => 'Źródło reguły biznesowej',
+    'LBL_RST_SOURCE_DEFINITION' => 'Definicja źródła reguły biznesowej',
+    'LBL_RST_MODULE' => 'Moduł docelowy',
+    'LBL_RST_FILENAME' => 'Nazwa pliku reguły biznesowej',
+    'LBL_RST_CREATE_DATE' => 'Data utworzenia reguły biznesowej',
+    'LBL_RST_UPDATE_DATE' => 'Data aktualizacji reguły biznesowej',
 
     'LNK_LIST' => 'Wyświetl reguły biznesowe procesów',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Utwórz regułę biznesową procesu',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Ta reguła biznesowa jest nieprawidłowa, ponieważ wykorzystuje nieprawidłowe pola, których nie można znaleźć w instancji SugarCRM użytkownika. Napraw błędy wyszczególnione poniżej i zapisz regułę biznesową.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Ta reguła biznesowa jest aktualnie używana w Definicji procesu. Czy wciąż chcesz edytować tę regułę biznesową?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Nie można usunąć tej reguły biznesowej, ponieważ jest aktualnie używana w Definicji procesu.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Nie można usunąć tej reguły biznesowej, ponieważ jest aktualnie używana w Definicji procesu.',
+];

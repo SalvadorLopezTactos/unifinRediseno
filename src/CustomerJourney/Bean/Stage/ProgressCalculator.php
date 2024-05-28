@@ -16,7 +16,6 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\ActivityHandlerFactory;
 
 class ProgressCalculator
 {
-
     /**
      * @var \DRI_SubWorkflow
      */
@@ -54,7 +53,8 @@ class ProgressCalculator
     {
         $this->load();
 
-        $count = count((array) $this->activities);
+        $this->activities = (array)$this->activities;
+        $count = safeCount($this->activities);
 
         $this->stage->points = 0;
         $this->stage->score = 0;
@@ -92,7 +92,7 @@ class ProgressCalculator
         $fieldsToBeCheck = ['progress', 'score', 'points'];
         foreach ($fieldsToBeCheck as $field) {
             if ($this->stage->isFieldChanged($field)) {
-                $isProgressChanged =  true;
+                $isProgressChanged = true;
                 break;
             }
         }

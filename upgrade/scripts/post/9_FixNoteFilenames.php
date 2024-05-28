@@ -87,11 +87,11 @@ class SugarUpgradeFixNoteFilenames extends UpgradeScript
         // Remove the newlines in the column, then remove the resulting string's
         // carriage returns. This is to ensure that both characters are removed
         // regardless of their position or proximity to each other
-        return "REPLACE(" .
-            "REPLACE(" .
-            $column . "," . $this->db->quoted("\n") . "," . $this->db->quoted('') . ")," .
-            $this->db->quoted("\r") . "," .
+        return 'REPLACE(' .
+            'REPLACE(' .
+            $column . ',' . $this->db->quoted("\n") . ',' . $this->db->quoted('') . '),' .
+            $this->db->quoted("\r") . ',' .
             $this->db->quoted('') .
-            ")";
+            ')';
     }
 }

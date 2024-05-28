@@ -9,8 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Documents']['mobile']['layout']['subpanels'] = array(
-    'components' => array(
+$viewdefs['Documents']['mobile']['layout']['subpanels'] = [
+    'components' => [
         [
             'layout' => 'subpanel',
             'label' => 'LBL_CONTRACTS_SUBPANEL_TITLE',
@@ -18,49 +18,49 @@ $viewdefs['Documents']['mobile']['layout']['subpanels'] = array(
                 'link' => 'contracts',
             ],
         ],
-        array(
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_ACCOUNTS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'accounts',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_CONTACTS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'contacts',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_OPPORTUNITIES_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'opportunities',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_CASES_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'cases',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_RLI_SUBPANEL_TITLE',
             'creatable' => false,
-            'context' => array(
+            'context' => [
                 'link' => 'revenuelineitems',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_QUOTES_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'quotes',
-            ),
-        ),
+            ],
+        ],
         [
             'layout' => 'subpanel',
             'label' => 'LBL_PURCHASES_SUBPANEL_TITLE',
@@ -75,5 +75,5 @@ $viewdefs['Documents']['mobile']['layout']['subpanels'] = array(
                 'link' => 'purchasedlineitems',
             ],
         ],
-    ),
-);
+    ],
+];

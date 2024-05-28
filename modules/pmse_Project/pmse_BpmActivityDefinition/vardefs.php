@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmActivityDefinition'] = array(
+$dictionary['pmse_BpmActivityDefinition'] = [
     'table' => 'pmse_bpm_activity_definition',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'reassignable' => false,
     'duplicate_merge' => true,
-    'fields' => array(
-        'pro_id' => array(
+    'fields' => [
+        'pro_id' => [
             'required' => true,
             'name' => 'pro_id',
             'vname' => 'Process identifier',
@@ -38,8 +38,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'act_type' => array(
+        ],
+        'act_type' => [
             'required' => true,
             'name' => 'act_type',
             'vname' => '',
@@ -59,8 +59,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '32',
             'size' => '32',
-        ),
-        'act_duration' => array(
+        ],
+        'act_duration' => [
             'required' => true,
             'name' => 'act_duration',
             'vname' => 'Estimated duration for this activity',
@@ -84,8 +84,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_duration_unit' => array(
+        ],
+        'act_duration_unit' => [
             'required' => true,
             'name' => 'act_duration_unit',
             'vname' => 'Time unit used in the Estimated duration for this activity',
@@ -105,8 +105,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '32',
             'size' => '32',
-        ),
-        'act_send_notification' => array(
+        ],
+        'act_send_notification' => [
             'required' => true,
             'name' => 'act_send_notification',
             'vname' => 'Boolean value indicates if an email notification is send in each route',
@@ -130,8 +130,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_assignment_method' => array(
+        ],
+        'act_assignment_method' => [
             'required' => true,
             'name' => 'act_assignment_method',
             'vname' => 'Method used to assign user to this activity',
@@ -151,8 +151,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '32',
             'size' => '32',
-        ),
-        'act_assign_team' => array(
+        ],
+        'act_assign_team' => [
             'required' => true,
             'name' => 'act_assign_team',
             'vname' => 'if team will change with this script',
@@ -172,8 +172,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '40',
             'size' => '40',
-        ),
-        'act_assign_user' => array(
+        ],
+        'act_assign_user' => [
             'required' => true,
             'name' => 'act_assign_user',
             'vname' => 'if user will change with this script',
@@ -193,8 +193,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '40',
             'size' => '40',
-        ),
-        'act_value_based_assignment' => array(
+        ],
+        'act_value_based_assignment' => [
             'required' => true,
             'name' => 'act_value_based_assignment',
             'vname' => 'Method used to assign user to this activity',
@@ -214,8 +214,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'act_reassign' => array(
+        ],
+        'act_reassign' => [
             'required' => true,
             'name' => 'act_reassign',
             'vname' => 'Boolean value used to define adhoc assignment',
@@ -239,8 +239,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_reassign_team' => array(
+        ],
+        'act_reassign_team' => [
             'required' => true,
             'name' => 'act_reassign_team',
             'vname' => 'if team will change with this script',
@@ -260,8 +260,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '40',
             'size' => '40',
-        ),
-        'act_adhoc' => array(
+        ],
+        'act_adhoc' => [
             'required' => true,
             'name' => 'act_adhoc',
             'vname' => 'Boolean value used to define adhoc assignment',
@@ -285,8 +285,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_adhoc_behavior' => array(
+        ],
+        'act_adhoc_behavior' => [
             'required' => true,
             'name' => 'act_adhoc_behavior',
             'vname' => 'Adhoc assignment behavior, can be one way or round trip',
@@ -306,8 +306,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '40',
             'size' => '40',
-        ),
-        'act_adhoc_team' => array(
+        ],
+        'act_adhoc_team' => [
             'required' => true,
             'name' => 'act_adhoc_team',
             'vname' => 'if team will change with this script',
@@ -327,8 +327,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '40',
             'size' => '40',
-        ),
-        'act_response_buttons' => array(
+        ],
+        'act_response_buttons' => [
             'required' => true,
             'name' => 'act_response_buttons',
             'vname' => 'if team will change with this script',
@@ -348,8 +348,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '40',
             'size' => '40',
-        ),
-        'act_last_user_assigned' => array(
+        ],
+        'act_last_user_assigned' => [
             'required' => true,
             'name' => 'act_last_user_assigned',
             'vname' => 'last User Identifier used in balanced assignment',
@@ -369,8 +369,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '40',
             'size' => '40',
-        ),
-        'act_field_module' => array(
+        ],
+        'act_field_module' => [
             'required' => true,
             'name' => 'act_field_module',
             'vname' => 'Field Module',
@@ -390,8 +390,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '100',
             'size' => '100',
-        ),
-        'act_fields' => array(
+        ],
+        'act_fields' => [
             'required' => false,
             'name' => 'act_fields',
             'vname' => 'fields array to change',
@@ -411,8 +411,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'act_params' => array(
+        ],
+        'act_params' => [
             'required' => true,
             'name' => 'act_params',
             'vname' => 'some parameters',
@@ -432,8 +432,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'act_readonly_fields' => array(
+        ],
+        'act_readonly_fields' => [
             'required' => false,
             'name' => 'act_readonly_fields',
             'vname' => 'fields array to change',
@@ -453,8 +453,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'act_expected_time' => array(
+        ],
+        'act_expected_time' => [
             'required' => false,
             'name' => 'act_expected_time',
             'vname' => 'expected time to complete the task',
@@ -474,8 +474,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'act_required_fields' => array(
+        ],
+        'act_required_fields' => [
             'required' => false,
             'name' => 'act_required_fields',
             'vname' => 'fields array to change',
@@ -495,8 +495,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'act_related_modules' => array(
+        ],
+        'act_related_modules' => [
             'required' => false,
             'name' => 'act_related_modules',
             'vname' => 'fields array to change',
@@ -516,8 +516,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'act_service_url' => array(
+        ],
+        'act_service_url' => [
             'required' => false,
             'name' => 'act_service_url',
             'vname' => 'fields array to change',
@@ -537,8 +537,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'act_service_params' => array(
+        ],
+        'act_service_params' => [
             'required' => false,
             'name' => 'act_service_params',
             'vname' => 'fields array to change',
@@ -558,8 +558,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'act_service_method' => array(
+        ],
+        'act_service_method' => [
             'required' => false,
             'name' => 'act_service_method',
             'vname' => 'fields array to change',
@@ -579,8 +579,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'act_update_record_owner' => array(
+        ],
+        'act_update_record_owner' => [
             'required' => false,
             'name' => 'act_update_record_owner',
             'vname' => 'fields array to change',
@@ -604,7 +604,7 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
+        ],
         'act_email_process_user' => [
             'required' => false,
             'name' => 'act_email_process_user',
@@ -637,7 +637,7 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'rows' => '4',
             'cols' => '20',
         ],
-        'act_set_by_avl' => array(
+        'act_set_by_avl' => [
             'required' => false,
             'name' => 'act_set_by_avl',
             'vname' => 'assign by available',
@@ -655,8 +655,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'unified_search' => false,
             'merge_filter' => 'disabled',
             'calculated' => false,
-        ),
-        'act_avl_count' => array(
+        ],
+        'act_avl_count' => [
             'required' => false,
             'name' => 'act_avl_count',
             'vname' => 'available time count',
@@ -680,8 +680,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_avl_type' => array(
+        ],
+        'act_avl_type' => [
             'required' => false,
             'name' => 'act_avl_type',
             'vname' => 'available time type',
@@ -700,8 +700,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '40',
             'size' => '40',
-        ),
-        'act_avl_before_type' => array(
+        ],
+        'act_avl_before_type' => [
             'required' => false,
             'name' => 'act_avl_before_type',
             'vname' => 'available before field',
@@ -720,8 +720,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '40',
             'size' => '40',
-        ),
-        'act_reserve_user' => array(
+        ],
+        'act_reserve_user' => [
             'required' => false,
             'name' => 'act_reserve_user',
             'vname' => 'id of reserve user',
@@ -741,8 +741,8 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'execution_mode' => array(
+        ],
+        'execution_mode' => [
             'required' => true,
             'name' => 'execution_mode',
             'vname' => 'script to be executed',
@@ -762,23 +762,23 @@ $dictionary['pmse_BpmActivityDefinition'] = array(
             'calculated' => false,
             'len' => '10',
             'size' => '10',
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmActivityDefinition', 'pmse_BpmActivityDefinition');

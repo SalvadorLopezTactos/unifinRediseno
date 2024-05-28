@@ -188,7 +188,7 @@ class Highlighter implements HighlighterInterface
      */
     public function setRequiredFieldMatch($toggle)
     {
-        $this->requireFieldMatch = (bool) $toggle;
+        $this->requireFieldMatch = (bool)$toggle;
         return $this;
     }
 
@@ -199,7 +199,7 @@ class Highlighter implements HighlighterInterface
      */
     public function setNumberOfFrags($value)
     {
-        $this->numberOfFrags = (int) $value;
+        $this->numberOfFrags = (int)$value;
         return $this;
     }
 
@@ -210,7 +210,7 @@ class Highlighter implements HighlighterInterface
      */
     public function setFragSize($value)
     {
-        $this->fragSize = (int) $value;
+        $this->fragSize = (int)$value;
         return $this;
     }
 }

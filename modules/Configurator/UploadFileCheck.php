@@ -39,7 +39,9 @@ if ($hasFile) {
     if ($upload->confirm_upload()) {
         $upload_dir = dirname($upload_path);
         UploadStream::ensureDir($upload_dir);
-        if ($upload->final_move($upload_path)) {
+
+        $tempPath = $_FILES[$upload->field_name]['tmp_name'];
+        if (verify_uploaded_image($tempPath) && $upload->final_move($upload_path)) {
             $upload_ok = true;
         }
     }

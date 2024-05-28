@@ -9,71 +9,71 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['audit_events'] = array(
+$dictionary['audit_events'] = [
     'table' => 'audit_events',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
             'required' => true,
-        ),
-        'type' => array(
-              'name' => 'type',
-              'type' => 'char',
-              'len' => 10,
-              'required' => true,
-        ),
-        'parent_id' => array(
-              'name' => 'parent_id',
-              'type' => 'id',
-              'required' => true,
-        ),
-        'module_name' => array(
+        ],
+        'type' => [
+            'name' => 'type',
+            'type' => 'char',
+            'len' => 10,
+            'required' => true,
+        ],
+        'parent_id' => [
+            'name' => 'parent_id',
+            'type' => 'id',
+            'required' => true,
+        ],
+        'module_name' => [
             'name' => 'module_name',
             'type' => 'varchar',
             'len' => 100,
             'required' => true,
-        ),
-        'source' => array(
+        ],
+        'source' => [
             'name' => 'source',
             'type' => 'json',
             'dbType' => 'text',
             'required' => false,
-        ),
+        ],
         'impersonated_by' => [
-            'name' =>'impersonated_by',
+            'name' => 'impersonated_by',
             'type' => 'id',
             'required' => false,
         ],
-        'date_created' => array(
+        'date_created' => [
             'name' => 'date_created',
             'type' => 'datetime',
             'required' => true,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'idx_aud_eve_id',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_aud_eve_ptd',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'parent_id',
                 'type',
                 'date_created',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_modulename',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'module_name',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

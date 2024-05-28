@@ -10,8 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['DocumentMerges']['base']['layout']['tag-builder-tabs'] = [
-    'components' =>
-    [
+    'components' => [
         [
             'view' => 'tag-builder-relationships',
         ],

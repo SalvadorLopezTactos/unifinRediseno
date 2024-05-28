@@ -9,18 +9,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['layout']['subpanel-create'] = array(
+$viewdefs['base']['layout']['subpanel-create'] = [
     'type' => 'subpanel',
     'template' => 'panel',
-    'components' => array (
-        array (
+    'components' => [
+        [
             'view' => 'panel-top-create',
-        ),
-        array (
+        ],
+        [
             'view' => 'subpanel-list-create',
-        )
-    ),
-    'last_state' => array(
-        'id' => 'subpanel-create'
-    ),
-);
+        ],
+    ],
+    'last_state' => [
+        'id' => 'subpanel-create',
+    ],
+];

@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Definice procesu',
-  'LBL_MODULE_TITLE' => 'Definice procesu',
-  'LBL_MODULE_NAME_SINGULAR' => 'Definice procesu',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Definice procesu',
+    'LBL_MODULE_TITLE' => 'Definice procesu',
+    'LBL_MODULE_NAME_SINGULAR' => 'Definice procesu',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na definice procesů',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na definice procesů',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Řídicí panel definic procesů',
-  'LNK_LIST' => 'Zobrazit definice procesů',
-  'LNK_NEW_PMSE_PROJECT' => 'Vytvořit definici procesu',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Importovat definice procesu',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Řídicí panel definic procesů',
+    'LNK_LIST' => 'Zobrazit definice procesů',
+    'LNK_NEW_PMSE_PROJECT' => 'Vytvořit definici procesu',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Importovat definice procesu',
 
-  'LBL_PRJ_STATUS' => 'Stav',
-  'LBL_PRJ_MODULE' => 'Cílový Modul:',
-  'LBL_PRJ_RUN_ORDER' => 'Spustit příkaz',
-  'LBL_PMSE_BUTTON_SAVE' => 'Uložit',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Zrušit',
-  'LBL_PMSE_BUTTON_YES' => 'Ano',
-  'LBL_PMSE_BUTTON_NO' => 'Ne',
-  'LBL_PMSE_BUTTON_OK' => 'OK',
+    'LBL_PRJ_STATUS' => 'Stav',
+    'LBL_PRJ_MODULE' => 'Cílový Modul:',
+    'LBL_PRJ_RUN_ORDER' => 'Spustit příkaz',
+    'LBL_PMSE_BUTTON_SAVE' => 'Uložit',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Zrušit',
+    'LBL_PMSE_BUTTON_YES' => 'Ano',
+    'LBL_PMSE_BUTTON_NO' => 'Ne',
+    'LBL_PMSE_BUTTON_OK' => 'OK',
     'LBL_PMSE_FORM_ERROR' => 'Před pokračováním prosím vyřešte jakékoli chyby.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Design',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktivity',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Akce',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Startovací event příležitosti',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Startovací event obchodní příležitosti' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Startovací event obchodní příležitosti',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Startovací event dokumentů',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Další modulový event',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Čekací event',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Obchodní pravidlo',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Akce obchodního pravidla',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Šablona e-mailu',
-);
+];

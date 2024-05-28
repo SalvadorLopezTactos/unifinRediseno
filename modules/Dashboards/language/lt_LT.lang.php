@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_DASHBOARD_MODULE' => 'Modulis',
     'LBL_MODULE_NAME' => 'Ataskaitų sritys',
     'LBL_MODULE_NAME_SINGULAR' => 'Ataskaitų sritis',
@@ -26,8 +26,12 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Visų modulio {{module}} ataskaitų sričių rodinys {{view}}',
     'LBL_COPY_OF' => '{{{Name}}} kopija',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Sukurti ataskaitų sritį',
-    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
-    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Ar tikrai norite atkurti numatytąjį šios informacijos suvestinės išdėstymą?",
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => 'Are you sure you want to restore this tab to the default layout?',
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => 'Ar tikrai norite atkurti numatytąjį šios informacijos suvestinės išdėstymą?',
     'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Ar tikrai norite atkurti ataskaitų srities skydelio numatytąjį išdėstymą?',
     'LBL_FILTER_UTILS_SELECT' => 'Priskirta',
-);
+    'LBL_FILTER_UPDATES_SINCE_LAST_REFRESH' => 'Šiame prietaisų skydelyje pateikiami vykdymo laiko filtrai, kurie buvo pakeisti nuo paskutinio atnaujinimo.',
+    'LBL_TEMPLATE' => 'Šablonas',
+    'LBL_UNSELECT_DELETE_TEMPLATES' => 'Jūsų pasirinkime yra prietaisų skydelio šablonų, kurių negalima masiškai ištrinti. Norėdami tęsti, panaikinkite šablonų pasirinkimą.',
+    'LBL_UNSELECT_UPDATE_TEMPLATES' => 'Jūsų pasirinkime yra prietaisų skydelio šablonų, kurių negalima masiškai atnaujinti. Norėdami tęsti, panaikinkite šablonų pasirinkimą.',
+];

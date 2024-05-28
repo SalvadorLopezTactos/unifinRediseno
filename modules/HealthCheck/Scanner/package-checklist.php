@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-return array(
+return [
     'Process Author' => [
         'checkDisabled' => true,
         [
@@ -437,4 +437,4 @@ return array(
             'version' => '*',
         ],
     ],
-);
+];

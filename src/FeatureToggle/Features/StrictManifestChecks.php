@@ -34,7 +34,7 @@ TEXT;
 
     public static function isEnabledIn(string $version): bool
     {
-        return version_compare($version, '13.0.0', '>=');
+        return version_compare($version, '13.3.0', '>=');
     }
 
     public static function isToggleableIn(string $version): bool

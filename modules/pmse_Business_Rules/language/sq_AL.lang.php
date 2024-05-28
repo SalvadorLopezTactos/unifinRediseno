@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Rregullat e procesit të biznesit',
-  'LBL_MODULE_TITLE' => 'Rregulla biznes procesi',
-  'LBL_MODULE_NAME_SINGULAR' => 'Rregulla biznes procesi',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Rregullat e procesit të biznesit',
+    'LBL_MODULE_TITLE' => 'Rregulla biznes procesi',
+    'LBL_MODULE_NAME_SINGULAR' => 'Rregulla biznes procesi',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te rregullat tregtare të proceseve',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te rregullat tregtare të proceseve',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Paneli i regjistrimit të rregullave të biznesit të procesit',
-  'LBL_RST_UID' => 'ID e biznes rregullave',
-  'LBL_RST_TYPE' => 'Lloji i rregullit të biznesit',
-  'LBL_RST_DEFINITION' => 'Definimi i biznes rregullave',
-  'LBL_RST_EDITABLE' => 'Biznes rregull i edituar',
-  'LBL_RST_SOURCE' => 'Burimi i biznes rregullave',
-  'LBL_RST_SOURCE_DEFINITION' => 'Definimi i burimit të biznes rregullave',
-  'LBL_RST_MODULE' => 'Moduli i synimit',
-  'LBL_RST_FILENAME' => 'Fajllemri i biznes rregullave',
-  'LBL_RST_CREATE_DATE' => 'Data e krijimit të biznes rregullave',
-  'LBL_RST_UPDATE_DATE' => 'Data e përditësimit të biznes rregullave',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Paneli i regjistrimit të rregullave të biznesit të procesit',
+    'LBL_RST_UID' => 'ID e biznes rregullave',
+    'LBL_RST_TYPE' => 'Lloji i rregullit të biznesit',
+    'LBL_RST_DEFINITION' => 'Definimi i biznes rregullave',
+    'LBL_RST_EDITABLE' => 'Biznes rregull i edituar',
+    'LBL_RST_SOURCE' => 'Burimi i biznes rregullave',
+    'LBL_RST_SOURCE_DEFINITION' => 'Definimi i burimit të biznes rregullave',
+    'LBL_RST_MODULE' => 'Moduli i synimit',
+    'LBL_RST_FILENAME' => 'Fajllemri i biznes rregullave',
+    'LBL_RST_CREATE_DATE' => 'Data e krijimit të biznes rregullave',
+    'LBL_RST_UPDATE_DATE' => 'Data e përditësimit të biznes rregullave',
 
     'LNK_LIST' => 'Shiko rregullat e biznesit të procesit',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Krijo rregullat e procesit të biznesit',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'This Business Rule is invalid as it uses invalid fields or fields that are not found in your instance of SugarCRM. Please fix the errors below and save the Business Rule.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Rregulli i biznesit po përdoret aktualisht në përcaktimin e një procesi. Të ndryshohet rregulli i biznesit?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Nuk mund ta fshish rregullin e biznesit sepse po përdoret aktualisht në përcaktimin e një procesi.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Nuk mund ta fshish rregullin e biznesit sepse po përdoret aktualisht në përcaktimin e një procesi.',
+];

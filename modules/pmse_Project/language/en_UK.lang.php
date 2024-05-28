@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Process Definitions',
-  'LBL_MODULE_TITLE' => 'Process Definitions',
-  'LBL_MODULE_NAME_SINGULAR' => 'Process Definition',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Process Definitions',
+    'LBL_MODULE_TITLE' => 'Process Definitions',
+    'LBL_MODULE_NAME_SINGULAR' => 'Process Definition',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Process Definitions Focus Drawer',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Process Definitions Focus Drawer',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Process Definitions Record Dashboard',
-  'LNK_LIST' => 'View Process Definitions',
-  'LNK_NEW_PMSE_PROJECT' => 'Create Process Definitions',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Import Process Definitions',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Process Definitions Record Dashboard',
+    'LNK_LIST' => 'View Process Definitions',
+    'LNK_NEW_PMSE_PROJECT' => 'Create Process Definitions',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Import Process Definitions',
 
-  'LBL_PRJ_STATUS' => 'Status',
-  'LBL_PRJ_MODULE' => 'Target Module',
-  'LBL_PRJ_RUN_ORDER' => 'Run Order',
-  'LBL_PMSE_BUTTON_SAVE' => 'Save',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Cancel',
-  'LBL_PMSE_BUTTON_YES' => 'Yes',
-  'LBL_PMSE_BUTTON_NO' => 'No',
-  'LBL_PMSE_BUTTON_OK' => 'Ok',
+    'LBL_PRJ_STATUS' => 'Status',
+    'LBL_PRJ_MODULE' => 'Target Module',
+    'LBL_PRJ_RUN_ORDER' => 'Run Order',
+    'LBL_PMSE_BUTTON_SAVE' => 'Save',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Cancel',
+    'LBL_PMSE_BUTTON_YES' => 'Yes',
+    'LBL_PMSE_BUTTON_NO' => 'No',
+    'LBL_PMSE_BUTTON_OK' => 'Ok',
     'LBL_PMSE_FORM_ERROR' => 'Please resolve any errors before proceeding.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Design',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Activity',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Action',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Lead Start Event',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Opportunity Start Event' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Opportunity Start Event',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Document Start Event',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Start Event',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Wait Event',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Business rule',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Business rule action',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Email template',
-);
+];

@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['TaxRates']['base']['filter']['default'] = array(
+$viewdefs['TaxRates']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-    ),
-);
+    'fields' => [
+        'name' => [],
+    ],
+];

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'タグ',
     'LBL_GENERIC_LINK' => '関連オブジェクト',
     'LBL_NAME_LOWER' => '小文字のタグ名',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'マイタグ',
     'LBL_MY_FAVORITE_TAGS' => 'お気に入りのタグ',
     'LBL_MORE_TAGS' => '{{tagsNumber}} 件のタグ',
-);
+];

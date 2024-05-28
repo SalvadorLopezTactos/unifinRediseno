@@ -37,7 +37,8 @@
 
         this.listenTo(this, 'chart:clicked', this.chartClickHandler, this);
         this.listenTo(this.context, 'sendDocumentsToDocuSign', this.sendToDocuSign, this);
-        this.listenTo(this.context, 'selectTemplate', this.selectTemplate, this);
+        this.listenTo(this.context, 'selectTemplate', this.sendToDocuSignUsingTemplates, this);
+        this.listenTo(this.context, 'sendWithTemplate', this.sendToDocuSignUsingTemplates, this);
     },
 
     /**
@@ -315,6 +316,7 @@
 
         if (statuses.all === 0) {
             if (!this.meta.config && this.chartField) {
+                this.chartField.$el.find('.chart-main').removeClass('h-full');
                 this.chartField.displayNoData(true);
             }
             return;
@@ -572,9 +574,11 @@
     },
 
     /**
-     * Select template from DocuSign
+     * Send to DocuSign using templates
+     *
+     * @param {string} event
      */
-    selectTemplate: function() {
+    sendToDocuSignUsingTemplates: function(event) {
         if (!this.userIsConfigured) {
             app.alert.show('warn-docusign-user-not-logged-in', {
                 level: 'warning',
@@ -602,7 +606,12 @@
         };
 
         const step = 'selectTemplate';
-        app.events.trigger('docusign:send:initiate', data, step);
+
+        if (event === 'selectTemplate') {
+            app.events.trigger('docusign:send:initiate', data, step);
+        } else if (event === 'sendWithTemplate') {
+            app.events.trigger('docusign:compositeSend:initiate', data, step);
+        }
     },
 
     /**
@@ -703,7 +712,9 @@
             documents: documents
         };
 
-        app.events.trigger('docusign:send:initiate', data);
+        const step = 'openDraft';
+
+        app.events.trigger('docusign:send:initiate', data, step);
     },
 
     /**

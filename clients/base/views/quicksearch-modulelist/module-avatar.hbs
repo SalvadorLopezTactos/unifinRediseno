@@ -15,12 +15,12 @@
         {{moduleLabel module 'sm' class="align-middle mr-0.5" title=(getModuleName module plural=true)}}
     {{else}}
         {{#if multipleLabel}}
-            <span class="label non-module-label ellipsis_inline max-w-12 border-none" data-placement="bottom"
+            <span class="label non-module-label ellipsis_inline max-w-[3rem] border-none" data-bs-placement="bottom"
                   aria-label="{{str 'LBL_GLOBAL_SEARCH_MODULE_FILTER'}}" title="{{multipleLabel}}">
                 {{multipleLabel}}
             </span>
         {{else}}
-            <span class="label non-module-label ellipsis_inline max-w-12 border-none" data-placement="bottom" aria-label="{{str 'LBL_GLOBAL_SEARCH_MODULE_FILTER'}}" title="{{str 'LBL_MODULE_ALL'}}">{{str 'LBL_MODULE_ALL'}}</span>
+            <span class="label non-module-label ellipsis_inline max-w-[3rem] border-none" data-bs-placement="bottom" aria-label="{{str 'LBL_GLOBAL_SEARCH_MODULE_FILTER'}}" title="{{str 'LBL_MODULE_ALL'}}">{{str 'LBL_MODULE_ALL'}}</span>
         {{/if}}
     {{/if}}
 {{/each}}

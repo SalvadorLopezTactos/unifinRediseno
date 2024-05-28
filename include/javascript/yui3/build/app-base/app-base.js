@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('app-base', function (Y, NAME) {
 
 /**
@@ -1120,4 +1113,4 @@ Default `serverRouting` attribute value for all apps.
 **/
 
 
-}, '3.15.0', {"requires": ["classnamemanager", "pjax-base", "router", "view"]});
+}, '3.18.1', {"requires": ["classnamemanager", "pjax-base", "router", "view"]});

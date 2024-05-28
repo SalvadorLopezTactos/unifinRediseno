@@ -13,9 +13,8 @@
 
 class Relationship extends SugarBean
 {
-
-    public $table_name = "relationships";
-    public $object_name = "Relationship";
+    public $table_name = 'relationships';
+    public $object_name = 'Relationship';
 
     public function __construct()
     {
@@ -25,7 +24,7 @@ class Relationship extends SugarBean
     /*returns true if the relationship is self referencing. equality check is performed for both table and
      * key names.
      */
-    function is_self_referencing()
+    public function is_self_referencing()
     {
         if (empty($this->_self_referencing)) {
             $this->_self_referencing = false;
@@ -44,11 +43,11 @@ class Relationship extends SugarBean
      *
      * @param string $relationship_name The name of the relationship to check
      *
+     * @return boolean
      * @deprecated Please use SugarRelationshipFactory::relationshipExists
      *
-     * @return boolean
      */
-    function exists($relationship_name)
+    public function exists($relationship_name)
     {
         return SugarRelationshipFactory::getInstance()->relationshipExists($relationship_name);
     }
@@ -56,16 +55,15 @@ class Relationship extends SugarBean
     /**
      * @deprecated Please use SugarRelationshipFactory
      */
-    function delete($relationship_name, &$db)
+    public function delete($relationship_name, &$db)
     {
-
     }
 
 
     /**
      * @deprecated Please use SugarRelationshipFactory
      */
-    function get_other_module($relationship_name, $base_module)
+    public function get_other_module($relationship_name, $base_module)
     {
         $rel = SugarRelationshipFactory::getInstance()->getRelationship($relationship_name);
         return $base_module == $rel->getLHSModule() ? $rel->getRHSModule() : $rel->getLHSModule();
@@ -84,7 +82,7 @@ class Relationship extends SugarBean
         $srf = SugarRelationshipFactory::getInstance();
         $rels = $srf->getRelationshipsBetweenModules($lhs_module, $rhs_module);
         if (!empty($rels)) {
-            foreach($rels as $name) {
+            foreach ($rels as $name) {
                 $def = $srf->getRelationshipDef($name);
                 if ($def['lhs_module'] == $lhs_module && $def['rhs_module'] == $rhs_module) {
                     return $srf->getRelationshipDef($rels[0]);
@@ -111,7 +109,7 @@ class Relationship extends SugarBean
     /**
      * @deprecated Please use SugarRelationshipFactory
      */
-    function retrieve_by_name($relationship_name)
+    public function retrieve_by_name($relationship_name)
     {
         return SugarRelationshipFactory::getInstance()->getRelationship($relationship_name);
     }
@@ -119,7 +117,7 @@ class Relationship extends SugarBean
     /**
      * @deprecated Please use SugarRelationshipFactory
      */
-    function load_relationship_meta()
+    public function load_relationship_meta()
     {
         //Contructing the relationship factory will load all metadata.
         SugarRelationshipFactory::getInstance();
@@ -152,7 +150,7 @@ class Relationship extends SugarBean
     /**
      * @deprecated Please use SugarRelationshipFactory
      */
-    function trace_relationship_module($base_module, $rel_module1_name, $rel_module2_name = "")
+    public function trace_relationship_module($base_module, $rel_module1_name, $rel_module2_name = '')
     {
         return null;
     }
@@ -163,13 +161,13 @@ class Relationship extends SugarBean
     }
 
     /**
-     * @see SugarBean::bean_implements
-     *
      * @param string $interface
      *
      * @return bool
+     * @see SugarBean::bean_implements
+     *
      */
-    function bean_implements($interface)
+    public function bean_implements($interface)
     {
         switch ($interface) {
             case 'ACL':
@@ -179,7 +177,8 @@ class Relationship extends SugarBean
         return false;
     }
 
-    protected function cache_exists() {
+    protected function cache_exists()
+    {
         return file_exists(Relationship::cache_file_dir() . '/' . Relationship::cache_file_name_only());
     }
 }

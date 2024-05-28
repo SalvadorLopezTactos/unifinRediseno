@@ -21,7 +21,7 @@ class ForecastManagerWorksheetHooks
      * @param string $event
      * @param array $params
      */
-    public static function fixDateModified(ForecastManagerWorksheet $worksheet, $event, $params = array())
+    public static function fixDateModified(ForecastManagerWorksheet $worksheet, $event, $params = [])
     {
         $worksheet->date_modified = $worksheet->fetched_row['date_modified'];
     }
@@ -36,12 +36,12 @@ class ForecastManagerWorksheetHooks
      * @param $event
      * @param array $params
      */
-    public static function setManagerSavedFlag(ForecastManagerWorksheet $worksheet, $event, $params = array())
+    public static function setManagerSavedFlag(ForecastManagerWorksheet $worksheet, $event, $params = [])
     {
         if ($event == 'before_save' && $worksheet->draft == true
-            && $worksheet->manager_saved == false && in_array($worksheet->draft_save_type, array('commit','draft'))
+            && $worksheet->manager_saved == false && in_array($worksheet->draft_save_type, ['commit', 'draft'])
             && $worksheet->assigned_user_id == $worksheet->modified_user_id) {
-                $worksheet->manager_saved = true;
+            $worksheet->manager_saved = true;
         }
     }
 
@@ -49,11 +49,11 @@ class ForecastManagerWorksheetHooks
      * This checks to see if the only thing that has changed is the quota, if it is, then don't update the date
      * modified
      *
-     * @param ForecastManagerWorksheet $worksheet       The Bean
-     * @param string $event                             Which event is being fired
-     * @param array $params                             Extra Params
+     * @param ForecastManagerWorksheet $worksheet The Bean
+     * @param string $event Which event is being fired
+     * @param array $params Extra Params
      */
-    public static function draftRecordQuotaOnlyCheck(ForecastManagerWorksheet $worksheet, $event, $params = array())
+    public static function draftRecordQuotaOnlyCheck(ForecastManagerWorksheet $worksheet, $event, $params = [])
     {
         // this should only run on before_save and when the worksheet is a draft record
         // and the draft_save_type is assign_quota

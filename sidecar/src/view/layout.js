@@ -9,10 +9,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const Component = require('view/component');
-const PluginManager = require('core/plugin-manager');
-const Template = require('view/template');
-const ViewManager = require('view/view-manager');
+const Component = require('./component');
+const PluginManager = require('../core/plugin-manager');
+const Template = require('./template');
+const ViewManager = require('./view-manager');
 
 /**
  * The Layout Object is a definition of views and their placement on a certain

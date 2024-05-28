@@ -12,8 +12,8 @@
 
 namespace Sugarcrm\Sugarcrm\Trackers;
 
-class Metric {
-
+class Metric
+{
     //@codingStandardsIgnoreStart
     public $_name;
     public $_type;
@@ -21,6 +21,7 @@ class Metric {
      * @var bool|mixed
      */
     public $_mutable;
+
     //@codingStandardsIgnoreEnd
 
     public function __construct($type, $name)
@@ -29,17 +30,19 @@ class Metric {
         $this->_type = $type;
         $this->_mutable = $name == 'monitor_id' ? false : true;
     }
-    
-    function type() {
-        return $this->_type;	
+
+    public function type()
+    {
+        return $this->_type;
     }
-    
-    function name() {
+
+    public function name()
+    {
         return $this->_name;
     }
-    
-    function isMutable() {
-        return $this->_mutable;	
+
+    public function isMutable()
+    {
+        return $this->_mutable;
     }
-    
 }

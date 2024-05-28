@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'VB:',
     'LBL_RE' => 'Re:',
     'LBL_BUTTON_CREATE' => 'Skapa',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Välj från emailkonto',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Välj signatur',
     'LBL_SIGNATURE' => 'Signatur',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Standard signatur",
-    "LBL_SHOW_MORE_SIGNATURES" => "Flera Signaturer...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Standard signatur',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Flera Signaturer...',
     'LBL_SUBJECT' => 'Ämne:',
     'LBL_TEMPLATE' => 'Mall',
     'LBL_TEXT_BODY' => 'Text meddelande',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Tid för skickat',
     'LBL_LIST_TO_ADDR' => 'Till',
     'LBL_LIST_TYPE' => 'Typ',
-    "LBL_SELECTED_RECIPIENTS" => "Utvalda mottagare",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Flera mottagare...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Adressbok",
+    'LBL_SELECTED_RECIPIENTS' => 'Utvalda mottagare',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Flera mottagare...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Adressbok',
     'NTC_REMOVE_INVITEE' => 'Är du säker på att du vill ta bort mottagaren från meddelandet?',
     'WARNING_SETTINGS_NOT_CONF' => 'Dina e-postinställningar är inte korrekt konfigurerade för att skicka e-post. En SMTP-server ' .
         'måste konfigureras i <a href="#bwc/index.php?module=EmailMan&action=config"> E-postinställningar</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Bilagor kan misslyckas: ett felaktigt eller oanvändbart värdet för ”upload_tmp_dir” ' .
         'upptäcktes.  Vänligen rätta till detta i din php.ini-fil.',
     'LBL_MESSAGE_UID' => 'Meddelande UID',
-    'LBL_OPEN_DRAFT_ALERT' => 'E-post är ett utkast. Klicka på '.
-        '<a href="javascript:void(0);" data-action="email-draft"> ”{{subject}}”</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'E-post är ett utkast. Klicka på ' .
+        '<a href="javascript:void(0);" data-action="email-draft"> ”{{subject}}”</a>' .
         '  för att redigera.',
     'LBL_EMAIL_BODY' => 'E-postmeddelande',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för e-postmeddelanden',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Instrumentpanel för e-postmeddelandeposter',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje för e-post',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'ingen mottagare angivna',
@@ -473,4 +474,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'Skicka e-post',
     'LBL_MAILBOX' => 'Inkommande konto',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Konfigurera ett utgående e-postkonto via <a href="#OutboundEmail">E-postinställningar</a> för att skicka e-post.',
-);
+    'LBL_TOO_SHORT' => 'Ange minst {0} tecken...',
+];

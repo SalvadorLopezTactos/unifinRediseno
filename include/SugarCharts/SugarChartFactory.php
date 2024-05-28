@@ -17,7 +17,7 @@
 class SugarChartFactory
 {
     /**
-	 * Returns a reference to the ChartEngine object for instance $chartEngine, or the default
+     * Returns a reference to the ChartEngine object for instance $chartEngine, or the default
      * instance if one is not specified
      *
      * @param string $chartEngine optional, name of the chart engine from $sugar_config['chartEngine']
@@ -27,7 +27,7 @@ class SugarChartFactory
     public static function getInstance($chartEngine = '', $module = '')
     {
         global $sugar_config;
-        $defaultEngine = "chartjs";
+        $defaultEngine = 'chartjs';
         //fall back to the default Js Engine if config is not defined
         if (empty($sugar_config['chartEngine'])) {
             $sugar_config['chartEngine'] = $defaultEngine;
@@ -39,12 +39,11 @@ class SugarChartFactory
 
         if (!SugarAutoLoader::requireWithCustom("include/SugarCharts/{$chartEngine}/{$chartEngine}{$module}.php")) {
             $GLOBALS['log']->debug("using default engine include/SugarCharts/{$defaultEngine}/{$defaultEngine}{$module}.php");
-            require_once("include/SugarCharts/{$defaultEngine}/{$defaultEngine}{$module}.php");
+            require_once "include/SugarCharts/{$defaultEngine}/{$defaultEngine}{$module}.php";
             $chartEngine = $defaultEngine;
         }
 
-        $className = $chartEngine.$module;
+        $className = $chartEngine . $module;
         return new $className();
-
     }
 }

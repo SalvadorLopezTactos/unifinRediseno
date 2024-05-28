@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'σε εξέλιξη',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης μηνυμάτων',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Πίνακας εργαλείων εγγραφών μηνυμάτων',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Χρονολόγιο μηνυμάτων',
 ];

@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -29,29 +30,29 @@ return [
                                     'label' => 'LBL_REPORT_DASHLET_TITLE_135',
                                     'type' => 'saved-reports-chart',
                                     'module' => 'Cases',
-                                    'saved_report_id' => 'c290a6da-7606-11e9-a76d-f218983a1c3e',
+                                    'saved_report_id' => '87e0c5c4-beae-11ee-9d94-095590d26ca4',
                                 ],
                             ], [
-                                'width' => 4,
-                                'view' => [
-                                    'limit' => '10',
-                                    'date' => 'today',
-                                    'visibility' => 'user',
-                                    'label' => 'LBL_PLANNED_ACTIVITIES_DASHLET',
-                                    'type' => 'planned-activities',
-                                    'module' => null,
-                                    'template' => 'tabbed-dashlet',
-                                ],
+                            'width' => 4,
+                            'view' => [
+                                'limit' => '10',
+                                'date' => 'today',
+                                'visibility' => 'user',
+                                'label' => 'LBL_PLANNED_ACTIVITIES_DASHLET',
+                                'type' => 'planned-activities',
+                                'module' => null,
+                                'template' => 'tabbed-dashlet',
+                            ],
                             ], [
-                                'width' => 4,
-                                'view' => [
-                                    'limit' => 10,
-                                    'visibility' => 'user',
-                                    'label' => 'LBL_ACTIVE_TASKS_DASHLET',
-                                    'type' => 'active-tasks',
-                                    'module' => null,
-                                    'template' => 'tabbed-dashlet',
-                                ],
+                            'width' => 4,
+                            'view' => [
+                                'limit' => 10,
+                                'visibility' => 'user',
+                                'label' => 'LBL_ACTIVE_TASKS_DASHLET',
+                                'type' => 'active-tasks',
+                                'module' => null,
+                                'template' => 'tabbed-dashlet',
+                            ],
                             ],
                         ], [
                             [
@@ -63,7 +64,7 @@ return [
                                     'label' => 'LBL_REPORT_DASHLET_TITLE_137',
                                     'type' => 'saved-reports-chart',
                                     'module' => 'Cases',
-                                    'saved_report_id' => 'c290abda-7606-11e9-9f3e-f218983a1c3e',
+                                    'saved_report_id' => '67f4d7d2-beae-11ee-9d94-095590d26ca4',
                                     'chart_type' => 'pie chart',
                                 ],
                             ], [
@@ -105,7 +106,7 @@ return [
                                     'label' => 'LBL_REPORT_DASHLET_TITLE_138',
                                     'type' => 'saved-reports-chart',
                                     'module' => 'Cases',
-                                    'saved_report_id' => 'c290ae50-7606-11e9-9cb2-f218983a1c3e',
+                                    'saved_report_id' => '490c8d6a-beae-11ee-9d94-095590d26ca4',
                                     'chart_type' => 'horizontal group by chart',
                                 ],
                             ],
@@ -120,7 +121,7 @@ return [
                                     'label' => 'LBL_REPORT_DASHLET_TITLE_12',
                                     'type' => 'saved-reports-chart',
                                     'module' => 'Cases',
-                                    'saved_report_id' => '5d6766f8-7b52-11e9-8da8-f218983a1c3e',
+                                    'saved_report_id' => '3b90b1dc-beab-11ee-9d94-095590d26ca4',
                                     'chart_type' => 'horizontal group by chart',
                                 ],
                             ], [
@@ -132,7 +133,7 @@ return [
                                     'label' => 'LBL_REPORT_DASHLET_TITLE_132',
                                     'type' => 'saved-reports-chart',
                                     'module' => 'Cases',
-                                    'saved_report_id' => 'c2909f50-7606-11e9-b00e-f218983a1c3e',
+                                    'saved_report_id' => 'aee89246-beae-11ee-9d94-095590d26ca4',
                                 ],
                             ], [
                                 'width' => 4,
@@ -143,7 +144,7 @@ return [
                                     'label' => 'LBL_REPORT_DASHLET_TITLE_139',
                                     'type' => 'saved-reports-chart',
                                     'module' => 'Tasks',
-                                    'saved_report_id' => 'c290b0da-7606-11e9-81f9-f218983a1c3e',
+                                    'saved_report_id' => '0da8f498-beae-11ee-9d94-095590d26ca4',
                                 ],
                             ],
                         ],
@@ -159,10 +160,10 @@ return [
                         'layout' => [
                             'name' => 'kpi-metrics',
                             'type' => 'base',
-                            'css_class' => 'kpi-metrics',
-                            "metric_module" => "Cases",
-                            "metric_context" => "service_console",
-                            "order_by_primary" => "follow_up_datetime",
+                            'css_class' => 'kpi-metrics flex border-b border-[--border-color]',
+                            'metric_module' => 'Cases',
+                            'metric_context' => 'service_console',
+                            'order_by_primary' => 'follow_up_datetime',
                             'badges' => [
                                 [
                                     'type' => 'record-count',
@@ -231,6 +232,15 @@ return [
                             'module' => 'Cases',
                         ],
                         'view' => 'multi-line-list',
+                    ],
+                    [
+                        'context' => [
+                            'module' => 'Cases',
+                        ],
+                        'view' => [
+                            'name' => 'multi-line-list-pagination',
+                            'css_class' => 'flex-table-pagination absolute bg-[--primary-content-background] w-full z-30',
+                        ],
                     ],
                 ],
             ],

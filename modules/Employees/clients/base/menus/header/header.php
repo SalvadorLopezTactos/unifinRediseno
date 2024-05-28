@@ -15,18 +15,18 @@ $newEmployeeLink = [
             'module' => $module_name,
             'action' => 'EditView',
         ]),
-    'label' =>'LNK_NEW_EMPLOYEE',
-    'acl_action'=>'admin',
-    'acl_module'=>$module_name,
+    'label' => 'LNK_NEW_EMPLOYEE',
+    'acl_action' => 'admin',
+    'acl_module' => $module_name,
     'icon' => 'sicon-plus',
 ];
-$viewdefs[$module_name]['base']['menu']['header'] = array(
+$viewdefs[$module_name]['base']['menu']['header'] = [
     $newEmployeeLink,
-    array(
-        'route'=>'#'.$module_name,
-        'label' =>'LNK_EMPLOYEE_LIST',
-        'acl_action'=>'list',
-        'acl_module'=>$module_name,
+    [
+        'route' => '#' . $module_name,
+        'label' => 'LNK_EMPLOYEE_LIST',
+        'acl_action' => 'list',
+        'acl_module' => $module_name,
         'icon' => 'sicon-list-view',
-    ),
-);
+    ],
+];

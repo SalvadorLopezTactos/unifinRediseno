@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => '캘린더',
     'LBL_MODULE_NAME_SINGULAR' => '캘린더',
     'LBL_MODULE_TITLE' => '캘린더',
@@ -90,7 +90,7 @@ $mod_strings = array (
     'LBL_INFO_RELATED_TO' => '관련된 정보',
 
     'LBL_NO_USER' => '다음항목이 일치하지 않습니다: 담당자',
-    'LBL_SUBJECT' => '대상',
+    'LBL_SUBJECT' => '제목',
     'LBL_DURATION' => '기간',
     'LBL_STATUS' => '상태',
     'LBL_DATE_TIME' => '날짜와 시간',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => '설정',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => '시간 슬롯을 주와 일로 표시',
-    'LBL_SETTINGS_TIME_STARTS'=>'시작 시간',
-    'LBL_SETTINGS_TIME_ENDS'=>'완료 시간',
+    'LBL_SETTINGS_TIME_STARTS' => '시작 시간',
+    'LBL_SETTINGS_TIME_ENDS' => '완료 시간',
     'LBL_SETTINGS_CALLS_SHOW' => '전화 표시여부',
     'LBL_SETTINGS_TASKS_SHOW' => '작업 표시여부',
 
@@ -123,7 +123,7 @@ $mod_strings = array (
     'LBL_REPEAT_DOW' => '다음 기간 까지:',
     'LBL_REPEAT_UNTIL' => '다음 기간까지 반복',
     'LBL_REPEAT_COUNT' => '반복 횟수',
-    'LBL_RECURRING_LIMIT_ERROR' => '허용된 반복 개수를 초과하므로 예약이 완료 될 수 없습니다.',
+    'LBL_RECURRING_LIMIT_ERROR' => '허용된 $limit 반복 개수를 초과하므로 반복되는 $moduleTitle 예약이 완료 될 수 없습니다.',
 
     'LBL_EDIT_ALL_RECURRENCES' => '모든 반복일정 편집하기',
     'LBL_REMOVE_ALL_RECURRENCES' => '모든 반복일정 삭제',
@@ -155,8 +155,8 @@ $mod_strings = array (
     'LBL_RECORD_TEMPLATES_TAB' => '템플릿',
     'LBL_RECORD_OTHER_TAB' => '기타',
     'LBL_EVENT_START' => '시작',
-    'LBL_EVENT_END' => '마지막',
-    'LBL_EVENT_END' => '마지막',
+    'LBL_EVENT_END' => '종료 날짜',
+    'LBL_EVENT_END' => '종료',
     'LBL_DAY_EVENT_TEMPLATE' => '일간 이벤트',
     'LBL_WEEK_EVENT_TEMPLATE' => '주간 이벤트',
     'LBL_MONTH_EVENT_TEMPLATE' => '월간 이벤트',
@@ -164,7 +164,7 @@ $mod_strings = array (
     'LBL_TIMELINE_EVENT_TEMPLATE' => '타임라인 이벤트',
     'LBL_SCHEDULERMONTH_EVENT_TEMPLATE' => '일정관리 이벤트',
     'LBL_ICAL_EVENT_TEMPLATE' => 'iCal 이벤트',
-    'LBL_SUBJECT' => '대상',
+    'LBL_SUBJECT' => '제목',
     'LBL_CALENDAR_TYPE' => '캘린더 유형',
     'LBL_COLOR' => '색',
     'LBL_DURATION_MINUTES' => '기간(분)',
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => '캘린더 생성',
     'LNK_CALENDAR_LIST' => '캘린더 보기',
     'LNK_CALENDAR_LEGACY' => '레거시 캘린더',
-    'LBL_IMPORT_CALENDAR'=> '캘린더 가져오기',
+    'LBL_IMPORT_CALENDAR' => '캘린더 가져오기',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => '이벤트 타임스탬프',
     'LBL_INSERTFIELD' => '필드 삽입',
     'LBL_EVENT_START_ERROR' => '시작을 선택하십시오',
@@ -318,7 +318,7 @@ $mod_strings = array (
     'LBL_FEB' => '2월',
     'LBL_MAR' => '3월',
     'LBL_APR' => '4월',
-    'LBL_MAY' => '5월',
+    'LBL_MAY' => '가능',
     'LBL_JUN' => '6월',
     'LBL_JUL' => '7월',
     'LBL_AUG' => '8월',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => '캘린더를 선택하십시오',
     'LBL_SAVE_USER_CALENDARS_ERROR' => '캘린더를 저장하지 못했습니다',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             '일',
             '월',
             '화',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             '목',
             '금',
             '토',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             '일요일',
             '월요일',
             '화요일',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             '목요일',
             '금요일',
             '토요일',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             '1월',
             '2월',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             '10월',
             '11월',
             '12월',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             '1월',
             '2월',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             '10월',
             '11월',
             '12월',
-        ),
-);
+        ],
+];

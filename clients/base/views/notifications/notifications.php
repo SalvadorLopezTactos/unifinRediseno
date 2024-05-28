@@ -11,25 +11,25 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['notifications'] = array(
+$viewdefs['base']['view']['notifications'] = [
     // currently we don't support different filters per module
     // (Calls and Meetings) because this is temporary code.
-    'remindersFilterDef' => array(
-        'reminder_time' => array(
+    'remindersFilterDef' => [
+        'reminder_time' => [
             '$gte' => 0,
-        ),
-        'status' => array(
+        ],
+        'status' => [
             '$equals' => 'Planned',
-        ),
-        'accept_status_users' => array(
+        ],
+        'accept_status_users' => [
             '$not_equals' => 'decline',
-        ),
-    ),
+        ],
+    ],
     'remindersLimit' => 100,
-    'fields' => array(
-        'severity' => array(
+    'fields' => [
+        'severity' => [
             'name' => 'severity',
             'type' => 'severity',
-        ),
-    ),
-);
+        ],
+    ],
+];

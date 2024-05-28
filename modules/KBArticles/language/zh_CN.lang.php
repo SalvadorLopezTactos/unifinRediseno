@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => '知识库',
     'LBL_MODULE_NAME_SINGULAR' => '知识库文章',
     'LBL_MODULE_TITLE' => '知识库文章',
     'LBL_REVISIONS_SUBPANEL_TITLE' => '修订版',
-);
+];

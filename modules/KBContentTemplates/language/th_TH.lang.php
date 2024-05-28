@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'เทมเพลทฐานความรู้',
     'LBL_MODULE_NAME_SINGULAR' => 'เทมเพลทฐานความรู้',
     'LBL_MODULE_TITLE' => 'เทมเพลทฐานความรู้',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'ดูเทมเพลท',
     'LBL_TEXT_BODY' => 'เนื้อหา',
     'LBL_LIST_TEMPLATE_NAME' => 'ชื่อเทมเพลท',
-);
+];

@@ -12,81 +12,80 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Bugs']['portal']['view']['record'] = array(
-    'buttons' => array(
-        array(
+$viewdefs['Bugs']['portal']['view']['record'] = [
+    'buttons' => [
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-    'panels' => array(
-        array(
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_header',
             'header' => true,
-            'fields' => array(
-                array(
-                    'name'          => 'picture',
-                    'type'          => 'avatar',
-                    'size'          => 'large',
+            'fields' => [
+                [
+                    'name' => 'picture',
+                    'type' => 'avatar',
+                    'size' => 'large',
                     'dismiss_label' => true,
-                    'readonly'      => true,
-                ),
+                    'readonly' => true,
+                ],
                 'name',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'placeholders' => true,
-            'fields' =>
-            array(
-                array(
+            'fields' => [
+                [
                     'name' => 'bug_number',
                     'span' => 12,
-                ),
-                array(
+                ],
+                [
                     'name' => 'description',
                     'span' => 12,
-                ),
+                ],
                 'status',
                 'type',
                 'source',
                 'product_category',
                 'priority',
-                array(
+                [
                     'name' => 'resolution',
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_entered_by',
                     'readonly' => true,
                     'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_ENTERED',
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'date_entered',
-                        ),
-                    ),
-                ),
-                array(
+                        ],
+                    ],
+                ],
+                [
                     'name' => 'date_modified_by',
                     'readonly' => true,
                     'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_MODIFIED',
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'date_modified',
-                        ),
-                    ),
-                ),
-                array(
+                        ],
+                    ],
+                ],
+                [
                     'name' => 'work_log',
                     'span' => 12,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

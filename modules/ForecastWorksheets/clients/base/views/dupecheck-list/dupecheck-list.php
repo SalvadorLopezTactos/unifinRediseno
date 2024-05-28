@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ForecastWorksheets']['base']['view']['dupecheck-list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['ForecastWorksheets']['base']['view']['dupecheck-list'] = [
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'commit_stage',
                     'type' => 'enum',
                     'searchBarThreshold' => 7,
@@ -22,9 +22,9 @@ $viewdefs['ForecastWorksheets']['base']['view']['dupecheck-list'] = array(
                     'sortable' => false,
                     'default' => true,
                     'enabled' => true,
-                    'click_to_edit' => true
-                ),
-                array(
+                    'click_to_edit' => true,
+                ],
+                [
                     'name' => 'parent_name',
                     'label' => 'LBL_REVENUELINEITEM_NAME',
                     'link' => true,
@@ -35,8 +35,8 @@ $viewdefs['ForecastWorksheets']['base']['view']['dupecheck-list'] = array(
                     'display' => false,
                     'type' => 'parent',
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'opportunity_name',
                     'label' => 'LBL_OPPORTUNITY_NAME',
                     'link' => true,
@@ -47,9 +47,9 @@ $viewdefs['ForecastWorksheets']['base']['view']['dupecheck-list'] = array(
                     'default' => true,
                     'enabled' => true,
                     'type' => 'relate',
-                    'readonly' => true
-                ),
-                array(
+                    'readonly' => true,
+                ],
+                [
                     'name' => 'account_name',
                     'label' => 'LBL_ACCOUNT_NAME',
                     'link' => true,
@@ -60,9 +60,9 @@ $viewdefs['ForecastWorksheets']['base']['view']['dupecheck-list'] = array(
                     'default' => true,
                     'enabled' => true,
                     'type' => 'relate',
-                    'readonly' => true
-                ),
-                array(
+                    'readonly' => true,
+                ],
+                [
                     'name' => 'date_closed',
                     'label' => 'LBL_DATE_CLOSED',
                     'sortable' => true,
@@ -70,9 +70,9 @@ $viewdefs['ForecastWorksheets']['base']['view']['dupecheck-list'] = array(
                     'enabled' => true,
                     'type' => 'date',
                     'view' => 'detail',
-                    'click_to_edit' => true
-                ),
-                array(
+                    'click_to_edit' => true,
+                ],
+                [
                     'name' => 'sales_stage',
                     'label' => 'LBL_SALES_STAGE',
                     'type' => 'enum',
@@ -81,9 +81,9 @@ $viewdefs['ForecastWorksheets']['base']['view']['dupecheck-list'] = array(
                     'sortable' => false,
                     'default' => false,
                     'enabled' => true,
-                    'click_to_edit' => true
-                ),
-                array(
+                    'click_to_edit' => true,
+                ],
+                [
                     'name' => 'probability',
                     'label' => 'LBL_OW_PROBABILITY',
                     'type' => 'int',
@@ -91,8 +91,8 @@ $viewdefs['ForecastWorksheets']['base']['view']['dupecheck-list'] = array(
                     'enabled' => true,
                     'click_to_edit' => true,
                     'align' => 'right',
-                ),
-                array(
+                ],
+                [
                     'name' => 'likely_case',
                     'label' => 'LBL_LIKELY',
                     'type' => 'currency',
@@ -102,8 +102,8 @@ $viewdefs['ForecastWorksheets']['base']['view']['dupecheck-list'] = array(
                     'showTransactionalAmount' => true,
                     'align' => 'right',
                     'click_to_edit' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'best_case',
                     'label' => 'LBL_BEST',
                     'type' => 'currency',
@@ -113,8 +113,8 @@ $viewdefs['ForecastWorksheets']['base']['view']['dupecheck-list'] = array(
                     'showTransactionalAmount' => true,
                     'align' => 'right',
                     'click_to_edit' => true,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

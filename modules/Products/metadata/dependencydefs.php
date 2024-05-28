@@ -9,48 +9,48 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$fields = array(
+$fields = [
     'category_name',
     'list_price',
     'cost_price',
     'tax_class',
     'mft_part_num',
-    'weight'
-);
+    'weight',
+];
 
-$serviceFieldDefaults = array(
+$serviceFieldDefaults = [
     'service_start_date' => 'now()',
     'service_duration_value' => '1',
     'service_duration_unit' => '"year"',
-);
+];
 
-$dependencies['Products']['read_only_fields'] = array(
-    'hooks' => array("edit"),
+$dependencies['Products']['read_only_fields'] = [
+    'hooks' => ['edit'],
     //Trigger formula for the dependency. Defaults to 'true'.
     'trigger' => 'true',
-    'triggerFields' => array('product_template_id'),
+    'triggerFields' => ['product_template_id'],
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
-    'actions' => array(),
-);
+    'actions' => [],
+];
 
 foreach ($fields as $field) {
-    $dependencies['Products']['read_only_fields']['actions'][] = array(
+    $dependencies['Products']['read_only_fields']['actions'][] = [
         'name' => 'ReadOnly', //Action type
         //The parameters passed in depend on the action type
-        'params' => array(
+        'params' => [
             'target' => $field,
             'label' => $field . '_label', //normally <field>_label
             'value' => 'not(equal($product_template_id,""))', //Formula
-        ),
-    );
+        ],
+    ];
 }
 
 // Handle dependencies related to service fields
 $dependencies['Products']['service_fields_required'] = [
-    'hooks' => array('edit'),
+    'hooks' => ['edit'],
     'trigger' => 'true',
-    'triggerFields' => array('service'),
+    'triggerFields' => ['service'],
     'onload' => true,
     'actions' => [
         [
@@ -78,9 +78,9 @@ $dependencies['Products']['service_fields_required'] = [
 ];
 
 $dependencies['Products']['service_fields_values'] = [
-    'hooks' => array('edit'),
+    'hooks' => ['edit'],
     'trigger' => 'true',
-    'triggerFields' => array('service'),
+    'triggerFields' => ['service'],
     'onload' => true,
     'actions' => [
         [
@@ -91,7 +91,7 @@ $dependencies['Products']['service_fields_values'] = [
                     equal($service,1),
                     ifElse(
                         equal($service_start_date,""),
-                        '. $serviceFieldDefaults['service_start_date'] .',
+                        ' . $serviceFieldDefaults['service_start_date'] . ',
                         $service_start_date
                     ),
                     "")',
@@ -105,7 +105,7 @@ $dependencies['Products']['service_fields_values'] = [
                     equal($service,1),
                     ifElse(
                         equal($service_duration_value,""),
-                        '. $serviceFieldDefaults['service_duration_value'] .',
+                        ' . $serviceFieldDefaults['service_duration_value'] . ',
                         $service_duration_value
                     ),
                     "")',
@@ -119,7 +119,7 @@ $dependencies['Products']['service_fields_values'] = [
                     equal($service,1),
                     ifElse(
                         equal($service_duration_unit,""),
-                        '. $serviceFieldDefaults['service_duration_unit'] .',
+                        ' . $serviceFieldDefaults['service_duration_unit'] . ',
                         $service_duration_unit
                     ),
                     "")',

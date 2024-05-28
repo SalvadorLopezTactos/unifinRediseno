@@ -21,10 +21,22 @@ $viewdefs['Administration']['base']['layout']['drive-path-select'] = [
                         'layout' => [
                             'type' => 'simple',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
+                            'css_class' => 'main-pane span8 overflow-y-auto',
                             'components' => [
                                 ['view' => 'drive-path-buttons'],
                                 ['view' => 'drive-path-select'],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
+                            'type' => 'base',
+                            'name' => 'preview-pane',
+                            'css_class' => 'preview-pane',
+                            'components' => [
+                                [
+                                    'view' => 'preview',
+                                ],
                             ],
                         ],
                     ],

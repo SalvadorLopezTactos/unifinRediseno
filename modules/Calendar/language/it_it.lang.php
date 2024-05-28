@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Calendario',
     'LBL_MODULE_NAME_SINGULAR' => 'Calendario',
     'LBL_MODULE_TITLE' => 'Calendario',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Impostazioni',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Visualizza le fasce orarie nelle viste giornaliere e settimanali:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Ora inizio:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Ora fine:',
+    'LBL_SETTINGS_TIME_STARTS' => 'Ora inizio:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Ora fine:',
     'LBL_SETTINGS_CALLS_SHOW' => 'Mostra Chiamate:',
     'LBL_SETTINGS_TASKS_SHOW' => 'Mostra Compiti:',
 
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Crea calendario',
     'LNK_CALENDAR_LIST' => 'Visualizza Calendario',
     'LNK_CALENDAR_LEGACY' => 'Calendario precedente',
-    'LBL_IMPORT_CALENDAR'=> 'Importa calendario',
+    'LBL_IMPORT_CALENDAR' => 'Importa calendario',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Evento Timbro orario',
     'LBL_INSERTFIELD' => 'Inserisci campo',
     'LBL_EVENT_START_ERROR' => 'Scegli un inizio',
@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_FEBRUARY' => 'Febbraio',
     'LBL_MARCH' => 'Marzo',
     'LBL_APRIL' => 'Aprile',
-    'LBL_MAY' => 'Può',
+    'LBL_MAY' => 'Maggio',
     'LBL_JUNE' => 'Giugno',
     'LBL_JULY' => 'Luglio',
     'LBL_AUGUST' => 'Agosto',
@@ -318,7 +318,7 @@ $mod_strings = array (
     'LBL_FEB' => 'Feb',
     'LBL_MAR' => 'Mar',
     'LBL_APR' => 'Apr',
-    'LBL_MAY' => 'Può',
+    'LBL_MAY' => 'Maggio',
     'LBL_JUN' => 'Giu',
     'LBL_JUL' => 'Lug',
     'LBL_AUG' => 'Ago',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Selezionare un calendario',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Salvataggio dei calendari non riuscito.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Dom',
             'Lun',
             'Mar',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Gio',
             'Ven',
             'Sab',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Domenica',
             'Lunedì',
             'Martedì',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Giovedì',
             'Venerdì',
             'Sabato',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Gen',
             'Feb',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Ott',
             'Nov',
             'Dic',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Gennaio',
             'Febbraio',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Ottobre',
             'Novembre',
             'Dicembre',
-        ),
-);
+        ],
+];

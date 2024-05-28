@@ -10,174 +10,174 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['ProductTemplates']['base']['view']['product-catalog-dashlet-drawer-record'] = array(
-    'buttons' => array(
-        array(
+$viewdefs['ProductTemplates']['base']['view']['product-catalog-dashlet-drawer-record'] = [
+    'buttons' => [
+        [
             'type' => 'button',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'view',
-            'events' => array(
+            'events' => [
                 'click' => 'button:cancel_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'type' => 'button',
             'event' => 'button:add_to_quote_button:click',
             'name' => 'add_to_quote_button',
             'label' => 'LBL_ADD_TO_QUOTE_BUTTON',
             'css_class' => 'btn btn-primary',
             'showOn' => 'view',
-            'showOnModules' => array(
-                'Quotes' => array(
+            'showOnModules' => [
+                'Quotes' => [
                     'create',
                     'record',
-                ),
-                'Opportunities' => array(
+                ],
+                'Opportunities' => [
                     'create',
                     'record',
-                ),
-            ),
-            'events' => array(
+                ],
+            ],
+            'events' => [
                 'click' => 'button:add_to_quote_button:click',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-    'panels' => array(
-        array(
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_header',
             'header' => true,
-            'fields' => array(
-                array(
-                    'name'          => 'picture',
-                    'type'          => 'avatar',
-                    'size'          => 'large',
+            'fields' => [
+                [
+                    'name' => 'picture',
+                    'type' => 'avatar',
+                    'size' => 'large',
                     'dismiss_label' => true,
-                    'readonly'      => true,
-                ),
-                array(
+                    'readonly' => true,
+                ],
+                [
                     'name' => 'name',
-                ),
-                array(
+                ],
+                [
                     'name' => 'favorite',
                     'label' => 'LBL_FAVORITE',
                     'type' => 'favorite',
                     'dismiss_label' => true,
-                ),
-            ),
-        ),
-        array(
+                ],
+            ],
+        ],
+        [
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'labels' => true,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
+            'fields' => [
                 'status',
-                array(
+                [
                     'name' => 'website',
-                    'type' => 'url'),
+                    'type' => 'url'],
                 'date_available',
                 'tax_class',
                 'qty_in_stock',
                 'category_name',
                 'manufacturer_name',
                 'mft_part_num',
-                array(
+                [
                     'name' => 'service_duration',
                     'type' => 'fieldset',
                     'css_class' => 'service-duration-field',
                     'label' => 'LBL_SERVICE_DURATION',
                     'inline' => true,
                     'show_child_labels' => false,
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'service_duration_value',
                             'label' => 'LBL_SERVICE_DURATION_VALUE',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'service_duration_unit',
                             'label' => 'LBL_SERVICE_DURATION_UNIT',
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
                 'vendor_part_num',
                 'weight',
                 'type_name',
-                array(
+                [
                     'name' => 'cost_price',
                     'type' => 'currency',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'cost_usdollar',
                         'currency_id',
                         'base_rate',
-                    ),
+                    ],
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => true,
                     'convertToBase' => true,
                     'showTransactionalAmount' => true,
-                ),
+                ],
                 'cost_usdollar',
                 'date_cost_price',
-                array(
+                [
                     'name' => 'discount_price',
                     'type' => 'currency',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'discount_usdollar',
                         'currency_id',
                         'base_rate',
-                    ),
+                    ],
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => true,
                     'convertToBase' => true,
                     'showTransactionalAmount' => true,
-                ),
+                ],
                 'discount_usdollar',
-                array(
+                [
                     'name' => 'list_price',
                     'type' => 'currency',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'list_usdollar',
                         'currency_id',
                         'base_rate',
-                    ),
+                    ],
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => true,
                     'convertToBase' => true,
                     'showTransactionalAmount' => true,
-                ),
+                ],
                 'list_usdollar',
-                array(
+                [
                     'name' => 'pricing_formula',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'pricing_factor',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'description',
                     'span' => 12,
-                ),
+                ],
                 'support_name',
                 'support_description',
                 'support_contact',
                 'support_term',
-                array(
+                [
                     'name' => 'tag',
                     'span' => 12,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

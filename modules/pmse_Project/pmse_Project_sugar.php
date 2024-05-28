@@ -14,46 +14,46 @@ use Sugarcrm\Sugarcrm\ProcessManager;
 
 class pmse_Project_sugar extends Basic
 {
-    var $new_schema = true;
-    var $module_name = 'pmse_Project';
-    var $module_dir = 'pmse_Project';
-    var $object_name = 'pmse_Project';
-    var $table_name = 'pmse_project';
-    var $importable = false;
-    var $id;
-    var $name;
-    var $date_entered;
-    var $date_modified;
-    var $modified_user_id;
-    var $modified_by_name;
-    var $created_by;
-    var $created_by_name;
-    var $description;
-    var $deleted;
-    var $created_by_link;
-    var $modified_user_link;
-    var $activities;
-    var $team_id;
-    var $team_set_id;
-    var $team_count;
-    var $team_name;
-    var $team_link;
-    var $team_count_link;
-    var $teams;
-    var $assigned_user_id;
-    var $assigned_user_name;
-    var $assigned_user_link;
-    var $prj_uid;
-    var $prj_target_namespace;
-    var $prj_expression_language;
-    var $prj_type_language;
-    var $prj_exporter;
-    var $prj_exporter_version;
-    var $prj_author;
-    var $prj_author_version;
-    var $prj_original_source;
-    var $prj_status;
-    var $prj_module;
+    public $new_schema = true;
+    public $module_name = 'pmse_Project';
+    public $module_dir = 'pmse_Project';
+    public $object_name = 'pmse_Project';
+    public $table_name = 'pmse_project';
+    public $importable = false;
+    public $id;
+    public $name;
+    public $date_entered;
+    public $date_modified;
+    public $modified_user_id;
+    public $modified_by_name;
+    public $created_by;
+    public $created_by_name;
+    public $description;
+    public $deleted;
+    public $created_by_link;
+    public $modified_user_link;
+    public $activities;
+    public $team_id;
+    public $team_set_id;
+    public $team_count;
+    public $team_name;
+    public $team_link;
+    public $team_count_link;
+    public $teams;
+    public $assigned_user_id;
+    public $assigned_user_name;
+    public $assigned_user_link;
+    public $prj_uid;
+    public $prj_target_namespace;
+    public $prj_expression_language;
+    public $prj_type_language;
+    public $prj_exporter;
+    public $prj_exporter_version;
+    public $prj_author;
+    public $prj_author_version;
+    public $prj_original_source;
+    public $prj_status;
+    public $prj_module;
 
 
     public function __construct()
@@ -76,8 +76,8 @@ class pmse_Project_sugar extends Basic
     public function saveRelatedBeans()
     {
         //Create a Diagram row
-        $diagramBean =  BeanFactory::newBean('pmse_BpmnDiagram')
-            ->retrieve_by_string_fields(array('prj_id' => $this->id));
+        $diagramBean = BeanFactory::newBean('pmse_BpmnDiagram')
+            ->retrieve_by_string_fields(['prj_id' => $this->id]);
 
         if (empty($diagramBean)) {
             $diagramBean = BeanFactory::newBean('pmse_BpmnDiagram');
@@ -91,7 +91,7 @@ class pmse_Project_sugar extends Basic
 
         //Create a Process row
         $processBean = BeanFactory::newBean('pmse_BpmnProcess')
-            ->retrieve_by_string_fields(array('prj_id' => $this->id));
+            ->retrieve_by_string_fields(['prj_id' => $this->id]);
 
         if (empty($processBean)) {
             $processBean = BeanFactory::newBean('pmse_BpmnProcess');
@@ -106,7 +106,7 @@ class pmse_Project_sugar extends Basic
 
         //Create a ProcessDefinition row
         $processDefinitionBean = BeanFactory::newBean('pmse_BpmProcessDefinition')
-            ->retrieve_by_string_fields(array('prj_id' => $this->id));
+            ->retrieve_by_string_fields(['prj_id' => $this->id]);
 
         if (empty($processDefinitionBean)) {
             $processDefinitionBean = BeanFactory::newBean('pmse_BpmProcessDefinition');
@@ -121,15 +121,15 @@ class pmse_Project_sugar extends Basic
 
         $relDepStatus = $this->prj_status == 'ACTIVE' ? 'INACTIVE' : 'ACTIVE';
         while ($relatedDepBean = BeanFactory::newBean('pmse_BpmRelatedDependency')
-            ->retrieve_by_string_fields(array('pro_id'=>$pro_id, 'pro_status'=>$relDepStatus))
+            ->retrieve_by_string_fields(['pro_id' => $pro_id, 'pro_status' => $relDepStatus])
         ) {
             $relatedDepBean->pro_status = $this->prj_status;
             $relatedDepBean->save();
         }
 
-        $keysArray = array('prj_id' => $this->id, 'pro_id' => $pro_id);
+        $keysArray = ['prj_id' => $this->id, 'pro_id' => $pro_id];
         $dynaF = BeanFactory::newBean('pmse_BpmDynaForm')
-            ->retrieve_by_string_fields(array('prj_id' => $this->id, 'pro_id' => $pro_id, 'name' => 'Default'));
+            ->retrieve_by_string_fields(['prj_id' => $this->id, 'pro_id' => $pro_id, 'name' => 'Default']);
         $editDyna = !empty($dynaF);
         $dynaForm = ProcessManager\Factory::getPMSEObject('PMSEDynaForm');
         $dynaForm->generateDefaultDynaform($processDefinitionBean->pro_module, $keysArray, $editDyna);

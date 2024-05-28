@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Class SugarUpgradeFilesToRemoveCustom
  *
@@ -21,10 +22,10 @@ class SugarUpgradeFilesToRemoveCustom extends UpgradeScript
 
     public function run()
     {
-        $filesToRemove = array(
+        $filesToRemove = [
             // remove the old FTS Logic Hook
             'custom/Extension/application/Ext/LogicHooks/SugarFTSHooks.php',
-        );
+        ];
 
         $this->upgrader->fileToDelete($filesToRemove, $this);
     }

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Confidentialité des données',
     'LBL_MODULE_NAME_SINGULAR' => 'Confidentialité des données',
     'LBL_NUMBER' => 'Numéro',
@@ -56,6 +56,7 @@ $mod_strings = array(
     'LBL_NO_RECORDS_MARKED' => 'Aucun champ ou enregistrement n&#39;a été marqué pour effacement.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrements de confidentialité des données',
     'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Confidentialité des données',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie de confidentialité des données',
 
     // list view
     'LBL_HELP_RECORDS' => 'Le module de confidentialité de données suit les activités de confidentialité, y compris le consentement et les demandes, pour supporter les procédures de confidentialité de votre organisation. Créez des enregistrements de confidentialité de données liés à l&#39;enregistrement d&#39;un individu (p. ex. à contact) pour suivre le consentement ou de réaliser une action concernant une demande de confidentialité.',
@@ -63,4 +64,4 @@ $mod_strings = array(
     'LBL_HELP_RECORD' => 'Le module de confidentialité de données suit les activités de confidentialité, y compris le consentement et les demandes, pour supporter les procédures de confidentialité de votre organisation. Créez des enregistrements de confidentialité de données liés à l&#39;enregistrement d&#39;un individu (p. ex. à contact) pour suivre le consentement ou de réaliser une action concernant une demande de confidentialité. Une fois que l&#39;action nécessaire est terminée, des utilisateurs dans le rôle de Gestionnaire de confidentialité des données peuvent appuyer sur « Terminer » ou « Rejeter » pour mettre à jour le statut.
 
 Pour des demandes d&#39;effacement, sélectionner « Marquer pour effacement » pour chacun des enregistrements de l&#39;individu énumérés dans les sous-panels ci-dessous. Une fois tous les champs souhaités sont sélectionnés, un clic sur « Effacer et terminer » éliminera de manière permanente les valeurs des champs et marquera l&#39;enregistrement de confidentialité de données comme terminé.',
-);
+];

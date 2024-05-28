@@ -157,12 +157,13 @@ include/SugarSmarty/modifier.default_date_value.php
  * Type:     modifier<br>
  * Name:     default_date_value<br>
  * Purpose:  Utility to return a default date value given the field's default value settings
- * @author   Collin Lee <clee at sugarcrm dot com>
  * @param defaultValue The date field's default value setting
  * @return String representing date value
+ * @author   Collin Lee <clee at sugarcrm dot com>
  */
-function smarty_modifier_default_date_value($defaultValue) {
-	global $timedate;
-	$td = new TemplateDate();
-	return $timedate->asUser(new SugarDateTime($td->dateStrings[$defaultValue]));
+function smarty_modifier_default_date_value($defaultValue)
+{
+    global $timedate;
+    $td = new TemplateDate();
+    return $timedate->asUser(new SugarDateTime($td->dateStrings[$defaultValue]));
 }

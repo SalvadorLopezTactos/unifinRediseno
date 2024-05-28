@@ -30,7 +30,7 @@
         'change [data-fieldname="enum-multiple"]': 'enumMultipleChanged',
         'change [data-fieldname="select-multiple"]': 'selectMultipleChanged',
         'click [data-panelaction="toggleCollapse"]': 'toggleCollapse',
-        'click .reports-runtime-widget': 'filterCollapse',
+        'click .reports-runtime-widget-body': 'filterCollapse',
         'hide': 'handleHideDatePicker',
     },
 
@@ -55,6 +55,7 @@
         this._filterData = options.filterData;
         this._runtimeFilterId = options.runtimeFilterId;
         this._users = this._reportData ? this._reportData.get('users') : [];
+        this._isEnabled = true;
 
         if (!this._users) {
             this._users = options.users ? options.users : [];
@@ -145,6 +146,12 @@
 
         if (this._stayCollapsed) {
             this.toggleCollapse();
+        }
+
+        if (this._isEnabled) {
+            this.enableRuntimeFilter();
+        } else {
+            this.disableRuntimeFilter();
         }
 
         if (this._hideToolbar) {
@@ -402,9 +409,9 @@
     /**
      * Handle collapse
      */
-    toggleCollapse: function(e) {
+    toggleCollapse: function(e, forceCollapse) {
         const $el = this.$('.panel-toggle > i');
-        const collapsed = $el.is('.sicon-chevron-up');
+        const collapsed = forceCollapse || $el.is('.sicon-chevron-up');
 
         $el.toggleClass('sicon-chevron-down', collapsed);
         $el.toggleClass('sicon-chevron-up', !collapsed);
@@ -814,7 +821,7 @@
 
             if (this._inputType === 'datetime-between') {
                 requiredValuesAreGiven = data.input_name0 && data.input_name1 && data.input_name2 && data.input_name3;
-            } else if (this._inputType === 'date-between') {
+            } else if (this._inputType === 'date-between' || this._inputType === 'datetimecombo') {
                 requiredValuesAreGiven = data.input_name0 && data.input_name1;
             } else {
                 requiredValuesAreGiven = !_.isEmpty(data.input_name0);
@@ -883,6 +890,50 @@
     },
 
     /**
+     * Disable the widget
+     */
+    disableRuntimeFilter: function() {
+        this._isEnabled = false;
+
+        this.$el.css({
+            opacity: 0.5,
+        });
+
+        this.$('.reports-runtime-widget-body').css({
+            'pointer-events': 'none',
+        });
+
+        this.$('.reports-runtime-widget').attr('rel', 'tooltip');
+
+        this.$('[data-tooltip="runtime-filter-widget-container"]').tooltip({
+            delay: 100,
+            container: 'body',
+            placement: 'bottom',
+            title: 'This filter is already being used in a dashboard filter.',
+            trigger: 'hover',
+        });
+
+        this.toggleCollapse(false, true);
+    },
+
+    /**
+     * Enable the widget
+     */
+    enableRuntimeFilter: function() {
+        this._isEnabled = true;
+
+        this.$el.css({
+            opacity: 1,
+        });
+
+        this.$('.reports-runtime-widget-body').css({
+            'pointer-events': '',
+        });
+
+        this.$('.reports-runtime-widget').removeAttr('rel');
+    },
+
+    /**
      * Handle search param changed
      *
      * @param {UIEvent} e
@@ -895,14 +946,20 @@
         const data = (this._targetField.options || this._targetField.enumOptions) ? this._inputData : this._users;
 
         _.each(this._filterData.input_name0, function getOptions(option) {
-            if (!_.isEmpty(option) && option.toLocaleLowerCase().includes(this._searchTerm.toLocaleLowerCase())) {
+            const insensitiveSearchTerm = this._searchTerm.toLocaleLowerCase();
+            const insensitiveOption = option.toLocaleLowerCase();
+            if (!_.isEmpty(option) && (insensitiveOption.includes(insensitiveSearchTerm) ||
+                (!_.isEmpty(data[option]) &&  data[option].toLocaleLowerCase().includes(insensitiveSearchTerm)))) {
                 this._inputValue[option] = data[option];
             }
         }, this);
 
         _.each(data, function getOptions(option, key) {
+            const insensitiveSearchTerm = this._searchTerm.toLocaleLowerCase();
+            const insensitiveOption = option.toLocaleLowerCase();
             if (!_.has(this._inputValue, key) &&
-                !_.isEmpty(option) && option.toLocaleLowerCase().includes(this._searchTerm.toLocaleLowerCase())) {
+                (insensitiveOption.includes(insensitiveSearchTerm) ||
+                (!_.isEmpty(data[option]) &&  data[option].toLocaleLowerCase().includes(insensitiveSearchTerm)))) {
                 this._inputValue1[key] = option;
             }
         }, this);
@@ -1075,7 +1132,7 @@
                 const translatedValues = [];
 
                 _.each(filterValue, function translateLabels(value) {
-                    translatedValues.push(this._users[value]);
+                    translatedValues.push(this._users[value] || value);
                 }, this);
 
                 filterValue = translatedValues;
@@ -1145,7 +1202,9 @@
         this._inputValue3 = false;
 
         // it is ugly, unfortunately we had to keep the logic of the bwc reports when deciding what input type to render
-        if (qualifierName === 'between') {
+        if (qualifierName === 'anything') {
+            this._inputType = false;
+        } else if (qualifierName === 'between') {
             this._inputType = 'text-between';
             this._inputValue = this._filterData.input_name0;
             this._inputValue1 = this._filterData.input_name1;
@@ -1166,7 +1225,10 @@
             this._updateNameFilterData(qualifierName);
         } else if (_.contains(['username', 'assigned_user_name'], fieldType)) {
             this._updateUsernameFilterData(qualifierName);
-        } else if (_.contains(['enum', 'multienum', 'parent_type', 'timeperiod', 'currency_id'], fieldType)) {
+        } else if (_.contains(
+            ['enum', 'multienum', 'parent_type', 'radioenum', 'timeperiod', 'currency_id'],
+            fieldType)
+        ) {
             this._updateEnumFilterData(qualifierName);
         } else if (fieldType === 'bool') {
             this._inputType = 'enum-single';
@@ -1361,6 +1423,15 @@
 
         if (!_.isEmpty(this._targetField.enumOptions)) {
             this._inputData = this._targetField.enumOptions;
+        }
+
+        if (!_.isEmpty(this._inputData)) {
+            delete this._inputData[''];
+        }
+
+        if (qualifierName === 'anything') {
+            this.inputData = [];
+            return;
         }
 
         if (_.contains(['one_of', 'not_one_of'], qualifierName)) {

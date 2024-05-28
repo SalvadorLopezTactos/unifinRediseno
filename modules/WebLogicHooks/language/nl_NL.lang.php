@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Web Logic Hooks',
     'LBL_MODULE_NAME_SINGULAR' => 'Web Logic Hook',
     'LBL_MODULE_TITLE' => 'Web Logic Hooks',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => 'Request methode',
     'LBL_TRIGGER_EVENT' => 'Trigger Gebeurtenis',
     'LBL_URL' => 'URL',
-);
+];

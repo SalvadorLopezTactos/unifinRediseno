@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Process Business Rules',
-  'LBL_MODULE_TITLE' => 'Process Business Rules',
-  'LBL_MODULE_NAME_SINGULAR' => 'Process Business Rule',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Process Business Rules',
+    'LBL_MODULE_TITLE' => 'Process Business Rules',
+    'LBL_MODULE_NAME_SINGULAR' => 'Process Business Rule',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Process Business Rules Focus Dashboard',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Process Business Rules Focus Dashboard',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Process Business Rules Record Dashboard',
-  'LBL_RST_UID' => 'Business Rule ID',
-  'LBL_RST_TYPE' => 'Business Rule Type',
-  'LBL_RST_DEFINITION' => 'Business Rule Definition',
-  'LBL_RST_EDITABLE' => 'Business Rule Editable',
-  'LBL_RST_SOURCE' => 'Business Rule Source',
-  'LBL_RST_SOURCE_DEFINITION' => 'Business Rule Source Definition',
-  'LBL_RST_MODULE' => 'Target Module',
-  'LBL_RST_FILENAME' => 'Business Rule Filename',
-  'LBL_RST_CREATE_DATE' => 'Business Rule Create Date',
-  'LBL_RST_UPDATE_DATE' => 'Business Rule Update Date',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Process Business Rules Record Dashboard',
+    'LBL_RST_UID' => 'Business Rule ID',
+    'LBL_RST_TYPE' => 'Business Rule Type',
+    'LBL_RST_DEFINITION' => 'Business Rule Definition',
+    'LBL_RST_EDITABLE' => 'Business Rule Editable',
+    'LBL_RST_SOURCE' => 'Business Rule Source',
+    'LBL_RST_SOURCE_DEFINITION' => 'Business Rule Source Definition',
+    'LBL_RST_MODULE' => 'Target Module',
+    'LBL_RST_FILENAME' => 'Business Rule Filename',
+    'LBL_RST_CREATE_DATE' => 'Business Rule Create Date',
+    'LBL_RST_UPDATE_DATE' => 'Business Rule Update Date',
 
     'LNK_LIST' => 'View Process Business Rules',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Create Process Business Rule',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'This Business Rule is invalid as it uses invalid fields or fields that are not found in your instance of SugarCRM. Please fix the errors below and save the Business Rule.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'This Business Rule is currently being used in a Process Definition. Do you still want to edit this Business Rule?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "You cannot delete this Business Rule because it is currently used in a Process Definition.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'You cannot delete this Business Rule because it is currently used in a Process Definition.',
+];

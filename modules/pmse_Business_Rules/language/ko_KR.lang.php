@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => '프로세스 비즈니스 규칙',
-  'LBL_MODULE_TITLE' => '프로세스 비즈니스 규칙',
-  'LBL_MODULE_NAME_SINGULAR' => '프로세스 비즈니스 규칙',
+$mod_strings = [
+    'LBL_MODULE_NAME' => '프로세스 비즈니스 규칙',
+    'LBL_MODULE_TITLE' => '프로세스 비즈니스 규칙',
+    'LBL_MODULE_NAME_SINGULAR' => '프로세스 비즈니스 규칙',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => '프로세스 비즈니스 규칙 포커스 서랍',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => '프로세스 비즈니스 규칙 포커스 서랍',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => '프로세스 비즈니스 규칙 기록 대시보드',
-  'LBL_RST_UID' => '비즈니스 규칙 ID',
-  'LBL_RST_TYPE' => '비즈니스 규칙 유형',
-  'LBL_RST_DEFINITION' => '비즈니스 규칙 정의',
-  'LBL_RST_EDITABLE' => '비즈니스 규칙 편집',
-  'LBL_RST_SOURCE' => '비즈니스 규칙 소스',
-  'LBL_RST_SOURCE_DEFINITION' => '비즈니스 규칙 소스 정의',
-  'LBL_RST_MODULE' => '대상 모듈',
-  'LBL_RST_FILENAME' => '비즈니스 규칙 파일 이름',
-  'LBL_RST_CREATE_DATE' => '비즈니스 규칙 생성 날짜',
-  'LBL_RST_UPDATE_DATE' => '비즈니스 규칙 업데이트 날짜',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => '프로세스 비즈니스 규칙 기록 대시보드',
+    'LBL_RST_UID' => '비즈니스 규칙 ID',
+    'LBL_RST_TYPE' => '비즈니스 규칙 유형',
+    'LBL_RST_DEFINITION' => '비즈니스 규칙 정의',
+    'LBL_RST_EDITABLE' => '비즈니스 규칙 편집',
+    'LBL_RST_SOURCE' => '비즈니스 규칙 소스',
+    'LBL_RST_SOURCE_DEFINITION' => '비즈니스 규칙 소스 정의',
+    'LBL_RST_MODULE' => '대상 모듈',
+    'LBL_RST_FILENAME' => '비즈니스 규칙 파일 이름',
+    'LBL_RST_CREATE_DATE' => '비즈니스 규칙 생성 날짜',
+    'LBL_RST_UPDATE_DATE' => '비즈니스 규칙 업데이트 날짜',
 
     'LNK_LIST' => '보기 프로세스 비즈니스 규칙',
     'LNK_NEW_PMSE_BUSINESS_RULES' => '프로세스 업무 규칙 생성',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => '이 비즈니스 규칙은 유효하지 않은 필드나 해당 SugarCRM 인스턴스에서 찾을 수 없는 필드를 사용하므로 유효하지 않습니다. 아래 오류를 수정하고 비즈니스 규칙을 저장하십시오.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => '이 비즈니스 규칙은 현재 프로세스 정의에 사용 중입니다. 이 비즈니스 규칙을 편집하시겠습니까?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "현재 프로세스 정의에서 사용 중이므로 이 비즈니스 규칙을 삭제할 수 없습니다.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => '현재 프로세스 정의에서 사용 중이므로 이 비즈니스 규칙을 삭제할 수 없습니다.',
+];

@@ -40,10 +40,10 @@
           <h3>Four directions</h3>
           <div class="bs-docs-example tooltip-demo">
             <ul class="bs-docs-tooltip-examples">
-              <li><a rel="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</a></li>
-              <li><a rel="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</a></li>
-              <li><a rel="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</a></li>
-              <li><a rel="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</a></li>
+              <li><a rel="tooltip" data-bs-placement="top" title="Tooltip on top">Tooltip on top</a></li>
+              <li><a rel="tooltip" data-bs-placement="right" title="Tooltip on right">Tooltip on right</a></li>
+              <li><a rel="tooltip" data-bs-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</a></li>
+              <li><a rel="tooltip" data-bs-placement="left" title="Tooltip on left">Tooltip on left</a></li>
             </ul>
           </div>
 
@@ -96,7 +96,7 @@ $('[rel=tooltip]').tooltip();
         // Unbind all tooltips on page
         var unbindTooltips = _.bind(function(sel) {
             this.$(sel).each(function() {
-                $(this).tooltip('destroy');
+                $(this).tooltip('dispose');
             });
         }, this);
         unbindTooltips('[rel="tooltip"]');
@@ -192,9 +192,9 @@ $('[rel=tooltip]').tooltip();
           <h4>.tooltip('toggle')</h4>
           <p>Toggles an element's tooltip.</p>
           <pre class="prettyprint linenums">$('#element').tooltip('toggle')</pre>
-          <h4>.tooltip('destroy')</h4>
+          <h4>.tooltip('dispose')</h4>
           <p>Hides and destroys an element's tooltip.</p>
-          <pre class="prettyprint linenums">$('#element').tooltip('destroy')</pre>
+          <pre class="prettyprint linenums">$('#element').tooltip('dispose')</pre>
 
     </div>
   </div>

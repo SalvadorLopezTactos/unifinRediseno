@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'ΠΡ:',
     'LBL_RE' => 'Απάντηση:',
     'LBL_BUTTON_CREATE' => 'Δημιουργία',
@@ -19,7 +19,7 @@ $mod_strings = array(
     'LBL_SIGNATURE_PREPEND' => 'Υπογραφή επάνω από την απάντηση;',
     'LBL_EMAIL_DEFAULT_DESCRIPTION' => 'Εδώ είναι η προσφορά που ζητήσατε (Μπορείτε να αλλάξετε αυτό το κείμενο)',
     'LBL_EMAIL_QUOTE_FOR' => 'Προσφορά για:',
-    'LBL_QUOTE_LAYOUT_DOES_NOT_EXIST_ERROR' => 'προσφορά αρχείου διάταξης δεν υπάρχει: $διάταξη',
+    'LBL_QUOTE_LAYOUT_DOES_NOT_EXIST_ERROR' => 'προσφορά αρχείου διάταξης δεν υπάρχει: $layout',
     'LBL_QUOTE_LAYOUT_REGISTERED_ERROR' => 'προσφορά διάταξης δεν είναι καταχωρημένη στις ενότητες/Προφορές/Διατάξεις. php',
     'LBL_CONFIRM_DELETE' => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτόν το φάκελο;',
     'LBL_ENTER_FOLDER_NAME' => 'Παρακαλώ εισάγετε όνομα φακέλου',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Επιλέξτε Από Λογαριασμό Email',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Επιλέξτε Υπογραφή',
     'LBL_SIGNATURE' => 'Υπογραφή',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Προεπιλεγμένη Υπογραφή",
-    "LBL_SHOW_MORE_SIGNATURES" => "Περισσότερες Υπογραφές...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Προεπιλεγμένη Υπογραφή',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Περισσότερες Υπογραφές...',
     'LBL_SUBJECT' => 'Θέμα:',
     'LBL_TEMPLATE' => 'Πρότυπο',
     'LBL_TEXT_BODY' => 'Σώμα Κειμένου',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Ώρα Αποστολής',
     'LBL_LIST_TO_ADDR' => 'Προς',
     'LBL_LIST_TYPE' => 'Τύπος',
-    "LBL_SELECTED_RECIPIENTS" => "Επιλεγμένοι Παραλήπτες",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Περισσότεροι Παραλήπτες...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Βιβλίο Διεύθυνσης",
+    'LBL_SELECTED_RECIPIENTS' => 'Επιλεγμένοι Παραλήπτες',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Περισσότεροι Παραλήπτες...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Βιβλίο Διεύθυνσης',
     'NTC_REMOVE_INVITEE' => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε τον παραλήπτη από το email;',
     'WARNING_SETTINGS_NOT_CONF' => 'Οι ρυθμίσεις email σας δεν έχουν ρυθμιστεί σωστά για την αποστολή email. Ένας διακομιστής SMTP ' .
         'πρέπει να ρυθμιστεί στις <a href="#bwc/index.php?module=EmailMan&action=config"> Ρυθμίσεις Email</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Συνημμένα ενδέχεται να αποτύχουν: μια τιμή εσφαλμένη ή άχρηστη για το «upload_tmp_dir» ' .
         'εντοπίστηκε.  Παρακαλώ διορθώστε το στο αρχείο php.ini.',
     'LBL_MESSAGE_UID' => 'Μήνυμα UID',
-    'LBL_OPEN_DRAFT_ALERT' => 'Το email είναι προσσχέδιο. Κάντε κλικ στο '.
-        '<a href="javascript:void(0);" data-action="email-draft"> «{{subject}}»</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'Το email είναι προσσχέδιο. Κάντε κλικ στο ' .
+        '<a href="javascript:void(0);" data-action="email-draft"> «{{subject}}»</a>' .
         '  για να επεξεργαστείτε.',
     'LBL_EMAIL_BODY' => 'Μήνυμα ηλεκτρονικού ταχυδρομείου',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Focus Drawer emails',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Emails',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Χρονολόγιο μηνυμάτων email',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'δεν προσδιορίστηκαν παραλήπτες',
@@ -473,4 +474,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'Αποστολή email',
     'LBL_MAILBOX' => 'Λογαριασμός Εισερχόμενων',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Διαμορφώστε έναν λογαριασμό εξερχόμενου email μέσω των <a href="#OutboundEmail">Ρυθμίσεων email</a> για να στείλετε email.',
-);
+    'LBL_TOO_SHORT' => 'Πληκτρολογήστε τουλάχιστον {0} χαρακτήρες...',
+];

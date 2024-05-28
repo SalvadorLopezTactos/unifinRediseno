@@ -9,28 +9,37 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Users']['base']['filter']['default'] = array(
+$viewdefs['Users']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'first_name' => array(),
-        'last_name' => array(),
-        'address_city' => array(),
-        'created_by_name' => array(),
-        'email' => array(),
-        'tag' => array(),
-        'status' => array(),
-        '$owner' => array(
+    'quicksearch_field' => [
+        [
+            'first_name',
+            'last_name',
+        ],
+        'email',
+        'phone_work',
+    ],
+    'quicksearch_priority' => 2,
+    'fields' => [
+        'first_name' => [],
+        'last_name' => [],
+        'address_city' => [],
+        'created_by_name' => [],
+        'email' => [],
+        'tag' => [],
+        'status' => [],
+        '$owner' => [
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',
-        ),
-        '$favorite' => array(
+        ],
+        '$favorite' => [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        ),
+        ],
         'department' => [],
         'title' => [],
         'address_country' => [],
         'user_name' => [],
         'customer_journey_access' => [],
-    ),
-);
+    ],
+];

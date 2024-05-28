@@ -9,21 +9,20 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- $app_list_strings = array (
+$app_list_strings = [
 
-  strtolower($object_name).'_type_dom' =>
-  array (
-    '' => '',
-    'Analyst' => 'アナリスト',
-    'Competitor' => '競合他社',
-    'Customer' => '顧客',
-    'Integrator' => 'インテグレーター',
-    'Investor' => '投資家',
-    'Partner' => 'パートナー',
-    'Press' => 'プレス',
-    'Prospect' => '見込み顧客',
-    'Reseller' => 'リセラー',
-    'Other' => 'その他',
-  ),
+    strtolower($object_name) . '_type_dom' => [
+        '' => '',
+        'Analyst' => 'アナリスト',
+        'Competitor' => '競合他社',
+        'Customer' => '顧客',
+        'Integrator' => 'インテグレーター',
+        'Investor' => '投資家',
+        'Partner' => 'パートナー',
+        'Press' => '広報機関',
+        'Prospect' => '見込み顧客',
+        'Reseller' => 'リセラー',
+        'Other' => 'その他',
+    ],
 
-  );
+];

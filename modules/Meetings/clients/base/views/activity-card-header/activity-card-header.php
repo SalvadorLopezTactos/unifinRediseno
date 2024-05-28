@@ -14,8 +14,8 @@ $viewdefs['Meetings']['base']['view']['activity-card-header'] = [
     'panels' => [
         [
             'name' => 'panel_users',
-            'label' => 'LBL_PANEL_USERS',
-            'css_class' => 'panel-users',
+            'label' => 'LBL_INVITEES',
+            'css_class' => 'panel-users mt-2 flex flex-wrap gap-y-2',
             'template' => 'user-list',
             'fields' => [
                 [
@@ -23,6 +23,7 @@ $viewdefs['Meetings']['base']['view']['activity-card-header'] = [
                     'name' => 'name',
                     'type' => 'relate',
                     'link' => true,
+                    'id_name' => 'id',
                 ],
             ],
         ],
@@ -33,7 +34,9 @@ $viewdefs['Meetings']['base']['view']['activity-card-header'] = [
             'fields' => [
                 [
                     'name' => 'name',
-                    'type' => 'name',
+                    'type' => 'relate',
+                    'link' => true,
+                    'id_name' => 'id',
                 ],
             ],
         ],

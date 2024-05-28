@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'İş Sırası',
     'LBL_MODULE_NAME_SINGULAR' => 'İş Sırası',
     'LBL_MODULE_TITLE' => 'İş Sırası: Ana Sayfa',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Çözünürlük İptal Edildi',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Çözünürlük Çalışıyor',
     // Errors
-    'ERR_CALL' => "Fonksiyonu çağrılamıyor: %s",
-    'ERR_CURL' => "CURL Yok - URL işlerini çalıştıramazsınız",
-    'ERR_FAILED' => "Beklenmedik bir hata oluştu, PHP log&#39;larını ve sugarcrm.log&#39;unu kontrol ediniz",
-    'ERR_PHP' => "%s [%d]: %s  içinde  %s  satırında %d",
-    'ERR_NOUSER' => "İş için belirtilen Kullanıcı ID&#39;si yok",
-    'ERR_NOSUCHUSER' => "Kullanıcı ID %s bulunamadı",
-    'ERR_JOBTYPE' => "Bilinmeyen iş türü: %s",
-    'ERR_TIMEOUT' => "Zaman aşımından dolayı hata oluştu",
+    'ERR_CALL' => 'Fonksiyonu çağrılamıyor: %s',
+    'ERR_CURL' => 'CURL Yok - URL işlerini çalıştıramazsınız',
+    'ERR_FAILED' => 'Beklenmedik bir hata oluştu, PHP log&#39;larını ve sugarcrm.log&#39;unu kontrol ediniz',
+    'ERR_PHP' => '%s [%d]: %s  içinde  %s  satırında %d',
+    'ERR_NOUSER' => 'İş için belirtilen Kullanıcı ID&#39;si yok',
+    'ERR_NOSUCHUSER' => 'Kullanıcı ID %s bulunamadı',
+    'ERR_JOBTYPE' => 'Bilinmeyen iş türü: %s',
+    'ERR_TIMEOUT' => 'Zaman aşımından dolayı hata oluştu',
     'ERR_JOB_FAILED_VERBOSE' => 'İş %1$s (%2$s) CRON çalıştırılmasında başarısız',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Şu kimliğe sahip çekirdek yüklenemiyor: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => '%s rotasının işleyicisi bulunamıyor',
@@ -92,13 +92,13 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Amazon SQS yapılandırma Yardımı',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Amazon SQS Yapılandırma Bölümü.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Amazon SQS Yapılandırma Bölümü.</b></p>
 <ul>
     <li>Erişim Anahtarı Kimliği: <i>Amozon SQS için erişim anahtarı kimliğinizi girin</i></li>
     <li>Gizli Erişim Anahtarı: <i>Amazon SQS için gizli erişim anahtarınızı girin</i></li>
     <li>Bölge: <i>Amazon SQS sunucusunun bölgesini girin</i></li>
     <li>Sıra Adı: <i>Amazon SQS sunucusunun sıra adını girin</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'AMQP Yapılandırma Yardımı',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>AMQP Yapılandırma Bölümü.</b></p>
 <ul>
@@ -119,4 +119,4 @@ $mod_strings = array(
     'LBL_REGION' => 'Bölge',
     'LBL_ACCESS_KEY_SECRET' => 'Gizli Erişim Anahtarı',
     'LBL_QUEUE_NAME' => 'Bağdaştırıcı Adı',
-);
+];

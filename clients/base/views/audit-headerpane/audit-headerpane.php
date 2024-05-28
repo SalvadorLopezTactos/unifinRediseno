@@ -9,21 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['audit-headerpane'] = array(
+$viewdefs['base']['view']['audit-headerpane'] = [
     'template' => 'headerpane',
-    'fields' => array(
-        array(
+    'fields' => [
+        [
             'name' => 'title',
             'type' => 'label',
             'default_value' => 'LBL_AUDIT_TITLE',
-        ),
-    ),
-    'buttons' => array(
-        array(
+        ],
+    ],
+    'buttons' => [
+        [
             'name' => 'close_button',
             'type' => 'button',
             'label' => 'LBL_CLOSE_BUTTON_TITLE',
             'css_class' => 'btn btn-primary',
-        ),
-    ),
-);
+        ],
+    ],
+];

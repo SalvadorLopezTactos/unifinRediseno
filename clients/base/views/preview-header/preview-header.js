@@ -14,7 +14,7 @@
  * @extends View.View
  */
 ({
-    className: 'preview-headerbar bg-secondary-content-background',
+    className: 'preview-headerbar bg-[--secondary-content-background]',
 
     events: {
         'click [data-direction]': 'triggerPagination',

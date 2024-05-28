@@ -113,8 +113,8 @@
         <li class="active"><a>Home</a></li>
         <li><a>Profile</a></li>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown">Dropdown <i class="sicon sicon-chevron-down"></i></a>
-          <ul class="dropdown-menu">
+          <a class="dropdown-toggle" data-bs-toggle="dropdown">Dropdown <i class="sicon sicon-chevron-down"></i></a>
+          <ul class="dropdown-menu border border-[--dropdown-border-widget] rounded-md shadow-xl">
             <li><a>Action</a></li>
             <li><a>Another action</a></li>
             <li><a>Something else here</a></li>
@@ -127,7 +127,7 @@
 &lt;ul class="nav nav-tabs"&gt;
   &lt;li class="dropdown"&gt;
     &lt;a class="dropdown-toggle"
-       data-toggle="dropdown"
+       data-bs-toggle="dropdown"
       &gt;
         Dropdown
         &lt;i class="sicon sicon-chevron-down"&gt;&lt;/i&gt;
@@ -145,8 +145,8 @@
         <li class="active"><a>Home</a></li>
         <li><a>Profile</a></li>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown">Dropdown <i class="sicon sicon-chevron-down"></i></a>
-          <ul class="dropdown-menu">
+          <a class="dropdown-toggle" data-bs-toggle="dropdown">Dropdown <i class="sicon sicon-chevron-down"></i></a>
+          <ul class="dropdown-menu border border-[--dropdown-border-widget] rounded-md shadow-xl">
             <li><a>Action</a></li>
             <li><a>Another action</a></li>
             <li><a>Something else here</a></li>
@@ -159,7 +159,7 @@
 &lt;ul class="nav nav-pills"&gt;
   &lt;li class="dropdown"&gt;
     &lt;a class="dropdown-toggle"
-       data-toggle="dropdown"
+       data-bs-toggle="dropdown"
       &gt;
         Dropdown
         &lt;i class="sicon sicon-chevron-down"&gt;&lt;/i&gt;
@@ -256,9 +256,9 @@
       <p>To make tabs tabbable, wrap the <code>.nav-tabs</code> in another div with class <code>.tabbable</code>.</p>
       <div class="tabbable" style="margin-bottom: 9px;">
         <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" data-target="tab1">Section 1</a></li>
-          <li><a data-toggle="tab" data-target="tab2">Section 2</a></li>
-          <li><a data-toggle="tab" data-target="tab3">Section 3</a></li>
+          <li class="active" data-bs-toggle="tab" data-bs-target="#tab1"><a>Section 1</a></li>
+          <li data-bs-toggle="tab" data-bs-target="#tab2"><a>Section 2</a></li>
+          <li data-bs-toggle="tab" data-bs-target="#tab3"><a>Section 3</a></li>
         </ul>
         <div class="tab-content">
           <div class="tab-pane active" id="tab1">
@@ -285,8 +285,8 @@
 <pre class="prettyprint linenums">
 &lt;div class="tabbable"&gt;
   &lt;ul class="nav nav-tabs"&gt;
-    &lt;li class="active"&gt;&lt;a data-toggle="tab" data-target="tab1"&gt;Section 1&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a data-toggle="tab" data-target="tab2"&gt;Section 2&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="active" data-bs-toggle="tab" data-bs-target="#tab1"&gt;&lt;a&gt;Section 1&lt;/a&gt;&lt;/li&gt;
+    &lt;li data-bs-toggle="tab" data-bs-target="#tab2"&gt;&lt;a&gt;Section 2&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
   &lt;div class="tab-content"&gt;
     &lt;div class="tab-pane active" id="tab1"&gt;
@@ -317,9 +317,9 @@
           </div>
         </div>
         <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" data-target="tabA">Section 1</a></li>
-          <li><a data-toggle="tab" data-target="tabB">Section 2</a></li>
-          <li><a data-toggle="tab" data-target="tabC">Section 3</a></li>
+          <li class="active" data-bs-toggle="tab" data-bs-target="#tabA"><a>Section 1</a></li>
+          <li data-bs-toggle="tab" data-bs-target="#tabB"><a>Section 2</a></li>
+          <li data-bs-toggle="tab" data-bs-target="#tabC"><a>Section 3</a></li>
         </ul>
       </div> <!-- /tabbable -->
 <pre class="prettyprint linenums" style="margin-top: 11px;">
@@ -338,9 +338,9 @@
       <p>Swap the class to put tabs on the left.</p>
       <div class="tabbable tabs-left">
         <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" data-target="tablA">Section 1</a></li>
-          <li><a data-toggle="tab" data-target="tablB">Section 2</a></li>
-          <li><a data-toggle="tab" data-target="tablC">Section 3</a></li>
+          <li class="active" data-bs-toggle="tab" data-bs-target="#tablA"><a>Section 1</a></li>
+          <li data-bs-toggle="tab" data-bs-target="#tablB"><a>Section 2</a></li>
+          <li data-bs-toggle="tab" data-bs-target="#tablC"><a>Section 3</a></li>
         </ul>
         <div class="tab-content">
           <div class="tab-pane active" id="tablA">
@@ -370,9 +370,9 @@
       <p>Swap the class to put tabs on the right.</p>
       <div class="tabbable tabs-right">
         <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" data-target="tabrA">Section 1</a></li>
-          <li><a data-toggle="tab" data-target="tabrA">Section 2</a></li>
-          <li><a data-toggle="tab" data-target="tabrA">Section 3</a></li>
+          <li class="active" data-bs-toggle="tab" data-bs-target="#tabrA"><a>Section 1</a></li>
+          <li data-bs-toggle="tab" data-bs-target="#tabrA"><a>Section 2</a></li>
+          <li data-bs-toggle="tab" data-bs-target="#tabrA"><a>Section 3</a></li>
         </ul>
         <div class="tab-content">
           <div class="tab-pane active" id="tabrA">

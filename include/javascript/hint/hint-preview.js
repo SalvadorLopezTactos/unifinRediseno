@@ -367,7 +367,7 @@
             hintTabsHidden.removeClass('hide-tabs');
         }
 
-        self.$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+        self.$('li[data-bs-toggle="tab"]').on('shown.bs.tab', function(e) {
             var tabName = $(e.target.parentElement).data('tab-name');
             $navTabs = $(e.target).parents('.nav-tabs');
             $tabbableClass = $(e.target).parents('.tabbable');

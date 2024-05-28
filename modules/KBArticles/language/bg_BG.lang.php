@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'База от знания',
     'LBL_MODULE_NAME_SINGULAR' => 'Материал',
     'LBL_MODULE_TITLE' => 'Материал',
     'LBL_REVISIONS_SUBPANEL_TITLE' => 'Ревизии',
-);
+];

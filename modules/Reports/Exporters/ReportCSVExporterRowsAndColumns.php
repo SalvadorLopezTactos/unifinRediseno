@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 declare(strict_types=1);
+
 namespace Sugarcrm\Sugarcrm\modules\Reports\Exporters;
 
 /**
@@ -35,21 +36,25 @@ class ReportCSVExporterRowsAndColumns extends ReportCSVExporterBase
 
         $headerRow = $this->reporter->get_header_row('display_columns', false, true, false);
 
-        $header = "\"" . implode($this->getDelimiter(), array_values($headerRow));
-        $header .= "\"" . $this->getLineEnd();
+        $header = '"' . implode($this->getDelimiter(), array_values($headerRow));
+        $header .= '"' . $this->getLineEnd();
         $content = $header;
 
         while (($row = $this->reporter->get_next_row('result', 'display_columns', false, true)) !== 0) {
-            $newArr = array();
+            $newArr = [];
 
-            $cellCount = is_countable($row['cells']) ? count($row['cells']) : 0;
+            $cellCount = safeCount($row['cells']);
             for ($i = 0; $i < $cellCount; $i++) {
-                array_push($newArr, preg_replace("/\"/", "\"\"", from_html($row['cells'][$i])));
+                $rowVal = $row['cells'][$i];
+                if (!is_string($rowVal)) {
+                    $rowVal = strval($rowVal);
+                }
+                array_push($newArr, preg_replace('/"/', '""', from_html($rowVal)));
             }
 
-            $line = "\"";
+            $line = '"';
             $line .= implode($this->getDelimiter(), $newArr);
-            $line .= "\"" . $this->getLineEnd();
+            $line .= '"' . $this->getLineEnd();
 
             $content .= $line;
         }

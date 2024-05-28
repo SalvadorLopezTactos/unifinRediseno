@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Metrics']['base']['view']['config-tab-settings'] = array(
+$viewdefs['Metrics']['base']['view']['config-tab-settings'] = [
     'label' => 'LBL_MODULE_NAME',
     'left-panels' => [
         [
@@ -37,4 +37,4 @@ $viewdefs['Metrics']['base']['view']['config-tab-settings'] = array(
             ],
         ],
     ],
-);
+];

@@ -10,127 +10,127 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$listViewDefs['ForecastOpportunities'] = array(
-    'NAME' => array(
+$listViewDefs['ForecastOpportunities'] = [
+    'NAME' => [
         'width' => '25',
         'label' => 'LBL_OW_OPPORTUNITIES',
         'tablename' => 'opportunities',
-    ),
-    'REVENUE' => array(
+    ],
+    'REVENUE' => [
         'width' => '10',
         'label' => 'LBL_OW_REVENUE',
-    ),
-    'PROBABILITY' => array(
+    ],
+    'PROBABILITY' => [
         'width' => '5',
         'label' => 'LBL_OW_PROBABILITY',
         'tablename' => 'opportunities',
-    ),
-    'WEIGHTED_VALUE' => array(
+    ],
+    'WEIGHTED_VALUE' => [
         'width' => '15',
         'label' => 'LBL_OW_WEIGHTED',
-    ),
-    'WK_BEST_CASE' => array(
+    ],
+    'WK_BEST_CASE' => [
         'width' => '15',
         'label' => 'LBL_FDR_WK_BEST_CASE',
         'edit' => true,
         'sortable' => false,
-    ),
-    'WK_LIKELY_CASE' => array(
+    ],
+    'WK_LIKELY_CASE' => [
         'width' => '15',
         'label' => 'LBL_FDR_WK_LIKELY_CASE',
         'edit' => true,
         'sortable' => false,
-    ),
-    'WK_WORST_CASE' => array(
+    ],
+    'WK_WORST_CASE' => [
         'width' => '15',
         'label' => 'LBL_FDR_WK_WORST_CASE',
         'edit' => true,
         'sortable' => false,
-    ),
+    ],
     //not visible in the list view.
-    'ACCOUNT_NAME' => array(
+    'ACCOUNT_NAME' => [
         'label' => 'LBL_OW_ACCOUNTNAME',
         'hidden' => true,
-        'width' => '0'
-    ),
-    'NEXT_STEP' => array(
+        'width' => '0',
+    ],
+    'NEXT_STEP' => [
         'label' => 'LBL_OW_NEXT_STEP',
         'hidden' => true,
-        'width' => '0'
-    ),
-    'OPPORTUNITY_TYPE' => array(
+        'width' => '0',
+    ],
+    'OPPORTUNITY_TYPE' => [
         'label' => 'LBL_OW_TYPE',
         'hidden' => true,
-        'width' => '0'
-    ),
-    'DESCRIPTION' => array(
+        'width' => '0',
+    ],
+    'DESCRIPTION' => [
         'label' => 'LBL_OW_DESCRIPTION',
         'hidden' => true,
-        'width' => '0'
-    )
-);
-
-$listViewDefs['ForecastDirectReports'] = array(
-	'USER_NAME' => array(
-        'width' => '16',
-		'label' => 'LBL_FDR_USER_NAME',
-        'tablename'=>'users',
-		), 
-	'BEST_CASE' => array(
-        'width' => '12',
-		'label' => 'LBL_FDR_C_BEST_CASE',
-        'sortable'  => false,
-    ),
-	'LIKELY_CASE' => array(
-        'width' => '12',
-		'label' => 'LBL_FDR_C_LIKELY_CASE',
-        'sortable'  => false,
-    ),
-	'WORST_CASE' => array(
-        'width' => '12',
-		'label' => 'LBL_FDR_C_WORST_CASE',
-        'sortable'  => false,
-    ),		
-	'DATE_COMMITTED' => array(
-        'width' => '12',
-		'label' => 'LBL_FDR_DATE_COMMIT',
-        'sortable'  => false,
-    ),
-	'WK_BEST_CASE' => array(
-        'width' => '12',
-		'label' => 'LBL_FDR_WK_BEST_CASE',		
-		'edit' => true,
-        'sortable'  => false,
-    ),
-	'WK_LIKELY_CASE' => array(
-        'width' => '12',
-		'label' => 'LBL_FDR_WK_LIKELY_CASE',		
-		'edit' => true,
-        'sortable'  => false,
-    ),
-	'WK_WORST_CASE' => array(
-        'width' => '12',
-		'label' => 'LBL_FDR_WK_WORST_CASE',		
-		'edit' => true,
-        'sortable'  => false,
-    ),		
-//fields not visible in the list view.
-    'OPP_COUNT' => array(
-        'hidden' => true,    
         'width' => '0',
-        'label' => 'LBL_FDR_OPPORTUNITIES'), 
-    'OPP_WEIGH_VALUE' => array(
+    ],
+];
+
+$listViewDefs['ForecastDirectReports'] = [
+    'USER_NAME' => [
+        'width' => '16',
+        'label' => 'LBL_FDR_USER_NAME',
+        'tablename' => 'users',
+    ],
+    'BEST_CASE' => [
+        'width' => '12',
+        'label' => 'LBL_FDR_C_BEST_CASE',
+        'sortable' => false,
+    ],
+    'LIKELY_CASE' => [
+        'width' => '12',
+        'label' => 'LBL_FDR_C_LIKELY_CASE',
+        'sortable' => false,
+    ],
+    'WORST_CASE' => [
+        'width' => '12',
+        'label' => 'LBL_FDR_C_WORST_CASE',
+        'sortable' => false,
+    ],
+    'DATE_COMMITTED' => [
+        'width' => '12',
+        'label' => 'LBL_FDR_DATE_COMMIT',
+        'sortable' => false,
+    ],
+    'WK_BEST_CASE' => [
+        'width' => '12',
+        'label' => 'LBL_FDR_WK_BEST_CASE',
+        'edit' => true,
+        'sortable' => false,
+    ],
+    'WK_LIKELY_CASE' => [
+        'width' => '12',
+        'label' => 'LBL_FDR_WK_LIKELY_CASE',
+        'edit' => true,
+        'sortable' => false,
+    ],
+    'WK_WORST_CASE' => [
+        'width' => '12',
+        'label' => 'LBL_FDR_WK_WORST_CASE',
+        'edit' => true,
+        'sortable' => false,
+    ],
+//fields not visible in the list view.
+    'OPP_COUNT' => [
         'hidden' => true,
         'width' => '0',
-        'label' => 'LBL_FDR_WEIGH'), 
-	'FORECAST_TYPE' => array(
+        'label' => 'LBL_FDR_OPPORTUNITIES'],
+    'OPP_WEIGH_VALUE' => [
+        'hidden' => true,
         'width' => '0',
-		'label' => 'LBL_FDR_ADJ_AMOUNT',		
-		'hidden' => true,),
-    'DATE_ENTERED' => array(
+        'label' => 'LBL_FDR_WEIGH'],
+    'FORECAST_TYPE' => [
+        'width' => '0',
+        'label' => 'LBL_FDR_ADJ_AMOUNT',
+        'hidden' => true,],
+    'DATE_ENTERED' => [
         'width' => '0',
         'label' => 'LBL_FDR_DATE_COMMIT',
         'hidden' => true,
-    ),
+    ],
 
-);
+];

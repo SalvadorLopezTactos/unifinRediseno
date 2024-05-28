@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Muistiinpanoluettelon työpöytä',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Muistiinpanotietueiden työpöytä',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Muistiinpanot-tietolaatikko',
     'LBL_EXTERNAL_USER' => 'Ulkoinen käyttäjä',
     'LBL_EXTERNAL_USER_NAME' => 'Ulkoinen käyttäjä',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Huomautuksen aikajana',
 
     'LBL_RELATED_CONTACT' => 'Liittyvä kontakti',
     'ERR_DELETE_RECORD' => 'Tietuenumero tulee määritellä, jotta voit poistaa asiakkaan.',
@@ -130,4 +131,4 @@ $mod_strings = array(
 - Pakollisiksi merkityt kentät pitää täyttää ennen tallentamista. 
 - Saat esille lisää kenttiä tarvittaessa napsauttamalla "Näytä lisää".
 2. Paina "Tallenna" luodaksesi uuden tietueen. Tämän jälkeen palaat edelliselle sivulle.',
-);
+];

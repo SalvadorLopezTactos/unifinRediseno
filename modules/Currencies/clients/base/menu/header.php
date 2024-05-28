@@ -10,5 +10,5 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'Currencies';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-);
+$viewdefs[$module_name]['base']['menu']['header'] = [
+];

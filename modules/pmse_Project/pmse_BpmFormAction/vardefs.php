@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmFormAction'] = array(
+$dictionary['pmse_BpmFormAction'] = [
     'table' => 'pmse_bpm_form_action',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'reassignable' => false,
     'duplicate_merge' => true,
-    'fields' => array(
-        'cas_id' => array(
+    'fields' => [
+        'cas_id' => [
             'required' => true,
             'name' => 'cas_id',
             'vname' => 'Case identifier',
@@ -41,8 +41,8 @@ $dictionary['pmse_BpmFormAction'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'act_id' => array(
+        ],
+        'act_id' => [
             'required' => true,
             'name' => 'act_id',
             'vname' => 'Activity identifier',
@@ -62,8 +62,8 @@ $dictionary['pmse_BpmFormAction'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'pro_id' => array(
+        ],
+        'pro_id' => [
             'required' => true,
             'name' => 'pro_id',
             'vname' => 'Process identifier',
@@ -83,8 +83,8 @@ $dictionary['pmse_BpmFormAction'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'user_id' => array(
+        ],
+        'user_id' => [
             'required' => true,
             'name' => 'user_id',
             'vname' => 'Sugar User identifier',
@@ -104,8 +104,8 @@ $dictionary['pmse_BpmFormAction'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'frm_index' => array(
+        ],
+        'frm_index' => [
             'required' => true,
             'name' => 'frm_index',
             'vname' => 'Form Index',
@@ -129,8 +129,8 @@ $dictionary['pmse_BpmFormAction'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'frm_last' => array(
+        ],
+        'frm_last' => [
             'required' => true,
             'name' => 'frm_last',
             'vname' => 'Form Last',
@@ -154,8 +154,8 @@ $dictionary['pmse_BpmFormAction'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'frm_action' => array(
+        ],
+        'frm_action' => [
             'required' => true,
             'name' => 'frm_action',
             'vname' => 'Form Action',
@@ -175,8 +175,8 @@ $dictionary['pmse_BpmFormAction'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'frm_user_id' => array(
+        ],
+        'frm_user_id' => [
             'required' => true,
             'name' => 'frm_user_id',
             'vname' => 'Sugar User Derivated',
@@ -196,8 +196,8 @@ $dictionary['pmse_BpmFormAction'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'frm_user_name' => array(
+        ],
+        'frm_user_name' => [
             'required' => true,
             'name' => 'frm_user_name',
             'vname' => 'Sugar User Name Derivated',
@@ -217,8 +217,8 @@ $dictionary['pmse_BpmFormAction'] = array(
             'calculated' => false,
             'len' => '255',
             'size' => '255',
-        ),
-        'frm_date' => array(
+        ],
+        'frm_date' => [
             'required' => true,
             'name' => 'frm_date',
             'vname' => 'Form Sent Date',
@@ -238,8 +238,8 @@ $dictionary['pmse_BpmFormAction'] = array(
             'size' => '20',
             'enable_range_search' => false,
             'dbType' => 'datetime',
-        ),
-        'frm_comment' => array(
+        ],
+        'frm_comment' => [
             'required' => true,
             'name' => 'frm_comment',
             'vname' => 'Form Comments',
@@ -259,42 +259,42 @@ $dictionary['pmse_BpmFormAction'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'idx_pmse_bpm_form_action_del_cas_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'cas_id',
                 'deleted',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_pmse_bpm_form_action_cas_id_frm_last',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'cas_id',
                 'frm_last',
                 'deleted',
-            ),
-        ),
-    ),
-    'relationships' => array(),
+            ],
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmFormAction', 'pmse_BpmFormAction');

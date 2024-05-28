@@ -16,11 +16,25 @@
 ({
     extendsFrom: 'BaseConfigDrawerContentLayout',
 
+    events: {
+        'change select.module-selection': '_changeModule',
+    },
+
     /**
      * @inheritdoc
      */
     _render: function() {
         this._super('_render');
         this.$el.addClass('record-panel');
-    }
+        this._changeModule();
+    },
+
+    /**
+     * Trigger module selection change
+     * @private
+     */
+    _changeModule: function() {
+        let selectedModule = this.$el.find('select.module-selection').val();
+        this.context.trigger('pipeline:config:set-active-module', selectedModule);
+    },
 })

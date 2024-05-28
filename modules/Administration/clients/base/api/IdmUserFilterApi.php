@@ -69,7 +69,7 @@ class IdmUserFilterApi extends FilterApi
      * @param array $options
      * @return array
      */
-    protected function formatBeans(ServiceBase $api, array $args, $beans, array $options = array())
+    protected function formatBeans(ServiceBase $api, array $args, $beans, array $options = [])
     {
         // backup user hashes
         $userHashes = array_map(function (\User $user) {
@@ -91,7 +91,7 @@ class IdmUserFilterApi extends FilterApi
      * Ensure current user has admin permissions
      * @throws SugarApiExceptionNotAuthorized
      */
-    private function ensureAdminUser() : void
+    private function ensureAdminUser(): void
     {
         if (empty($GLOBALS['current_user']) || !$GLOBALS['current_user']->isAdmin()) {
             throw new \SugarApiExceptionNotAuthorized(

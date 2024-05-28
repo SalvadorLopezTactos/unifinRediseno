@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_SALUTATION' => '称谓',
     'LBL_NAME' => '姓名',
     'LBL_FIRST_NAME' => '名',
@@ -63,9 +63,9 @@ $mod_strings = array(
     'LBL_EDIT_BUTTON' => '编辑',
     'LBL_REMOVE' => '移除',
     'LBL_LINKEDIN' => 'LinkedIn 会员帐号',
-    'LBL_FACEBOOK' => 'Facebook账号',
+    'LBL_FACEBOOK' => '脸书账号',
     'LBL_TWITTER' => 'Twitter 账号',
     'LBL_GOOGLEPLUS' => 'Google Plus ID',
     'NTC_COPY_ALTERNATE_ADDRESS' => '复制备用地址到主要地址',
     'NTC_COPY_PRIMARY_ADDRESS' => '复制主要地址到备用地址',
-);
+];

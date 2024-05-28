@@ -147,6 +147,7 @@
             contextModule = this.context.parent.get('module');
         }
         var dashletConfigModule = metadata.config.module || metadata.module || contextModule;
+        let context = {moduleSingular: app.lang.getModuleName(dashletConfigModule)};
 
         app.drawer.load({
             layout: {
@@ -154,7 +155,7 @@
                 components: [
                     {
                         view: _.extend({}, metadata.config, {
-                            label: app.lang.get(metadata.label, metadata.config.module),
+                            label: app.lang.get(metadata.label, metadata.config.module, context),
                             type: metadata.type,
                             config: true,
                             module: dashletConfigModule
@@ -291,6 +292,7 @@
             if (!dashlet.config) {
                 return;
             }
+            let context = {moduleSingular: app.lang.getModuleName(dashlet.config.module)};
             var description = app.lang.get(dashlet.description, dashlet.config.module);
             if (!app.acl.hasAccess('access', module || dashlet.config.module)) {
                 return;
@@ -303,7 +305,7 @@
                     module: module,
                     type: name
                 }, dashlet),
-                title: app.lang.get(dashlet.label, dashlet.config.module),
+                title: app.lang.get(dashlet.label, dashlet.config.module, context),
                 description: description
             });
         }, this);

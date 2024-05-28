@@ -11,24 +11,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Epost-arkivering',
-    'LBL_SNIP_SUMMARY' => "Epost-arkivering er en automatisk import-tjeneste som åpner for at brukere kan importere epost inn i Sugar ved å sende disse fra hvilken som helst epost-klient eller -tjeneste til en Sugar-opprettet epostadresse. Hver Sugar-instanse har sin egen unike epostadresse. For å importere epost, så sender brukeren eposten til den unike adressen ved å bruke Til:, CC: eller BCC:-feltet. Epost-arkiveringsfunksjonen vil da importere eposten inn i Sugar. Tjenesten importerer eposten, sammen med eventuelle vedlegg, bilder eller kalenderhendelser, og skaper oppføringer i applikasjonen som er assosiert med eksisterende data basert på matchende epostadresser.<br /><br />Eksempel: Jeg som bruker, når jeg ser på en Konto, vil kunne se alle eposter som er assosiert med Kontoen basert på den tilhørende epostkontoen. Jeg vil også kunne se eposter assosiert med Kontakter relatert til Kontoen.<br /><br />Akseptér vilkårene under og klikk Aktivér for å begynne å bruke tjenesten. Du kan avslutte tjenesten når som helst. Straks tjenesten har startet, vil epostadressen for bruk av tjenesten vises.",
-	'LBL_REGISTER_SNIP_FAIL' => 'Mislyktes med å kontakte Epost-arkiveringstjenesten: %s!',
-	'LBL_CONFIGURE_SNIP' => 'Epost-arkivering',
+    'LBL_SNIP_SUMMARY' => 'Epost-arkivering er en automatisk import-tjeneste som åpner for at brukere kan importere epost inn i Sugar ved å sende disse fra hvilken som helst epost-klient eller -tjeneste til en Sugar-opprettet epostadresse. Hver Sugar-instanse har sin egen unike epostadresse. For å importere epost, så sender brukeren eposten til den unike adressen ved å bruke Til:, CC: eller BCC:-feltet. Epost-arkiveringsfunksjonen vil da importere eposten inn i Sugar. Tjenesten importerer eposten, sammen med eventuelle vedlegg, bilder eller kalenderhendelser, og skaper oppføringer i applikasjonen som er assosiert med eksisterende data basert på matchende epostadresser.<br /><br />Eksempel: Jeg som bruker, når jeg ser på en Konto, vil kunne se alle eposter som er assosiert med Kontoen basert på den tilhørende epostkontoen. Jeg vil også kunne se eposter assosiert med Kontakter relatert til Kontoen.<br /><br />Akseptér vilkårene under og klikk Aktivér for å begynne å bruke tjenesten. Du kan avslutte tjenesten når som helst. Straks tjenesten har startet, vil epostadressen for bruk av tjenesten vises.',
+    'LBL_REGISTER_SNIP_FAIL' => 'Mislyktes med å kontakte Epost-arkiveringstjenesten: %s!',
+    'LBL_CONFIGURE_SNIP' => 'Epost-arkivering',
     'LBL_DISABLE_SNIP' => 'Avslutt',
     'LBL_SNIP_APPLICATION_UNIQUE_KEY' => 'Unik Nøkkel for Applikasjonen',
     'LBL_SNIP_USER' => 'Epost-arkiveringsbruker',
     'LBL_SNIP_PWD' => 'Epost-arkiveringspassord',
     'LBL_SNIP_SUGAR_URL' => 'Denne Sugar-installasjonens URL',
-	'LBL_SNIP_CALLBACK_URL' => 'Epost-arkiveringstjenestens URL',
+    'LBL_SNIP_CALLBACK_URL' => 'Epost-arkiveringstjenestens URL',
     'LBL_SNIP_USER_DESC' => 'Epost-arkiveringsbruker',
     'LBL_SNIP_KEY_DESC' => 'Epost-arkivering oAuth-nøkkel. Brukes for å aksessere denne instansen for å importere epost.',
     'LBL_SNIP_STATUS_OK' => 'Aktivert',
@@ -39,17 +38,17 @@ $mod_strings = array(
     'LBL_SNIP_STATUS_FAIL_SUMMARY' => 'Epost-arkiveringstjenesten er for øyeblikket utilgjengelig. Enten er tjenesten nede eller koblingen til denne Sugar-instansen feilet.',
     'LBL_SNIP_GENERIC_ERROR' => 'Epost-arkiveringstjenesten er for øyeblikket utilgjengelig. Enten er tjenesten nede eller koblingen til denne Sugar-instansen feilet.',
 
-	'LBL_SNIP_STATUS_RESET' => 'Ikke kjørt ennå',
-	'LBL_SNIP_STATUS_PROBLEM' => 'Problem: %s',
-    'LBL_SNIP_NEVER' => "Aldri",
-    'LBL_SNIP_STATUS_SUMMARY' => "Epost-arkiveringstjeneste status:",
-    'LBL_SNIP_ACCOUNT' => "Konto",
-    'LBL_SNIP_STATUS' => "Status",
-    'LBL_SNIP_LAST_SUCCESS' => "Siste vellykkede kjøring",
-    "LBL_SNIP_DESCRIPTION" => "Epost-arkiveringstjenesten er et automatisk epostarkiveringssystem",
-    "LBL_SNIP_DESCRIPTION_SUMMARY" => "Det lar deg se e-poster som har blitt sendt til eller fra dine kontakter, i SugarCRM, uten at du behøver å manuelt importere og assosiere e-postene",
-    "LBL_SNIP_PURCHASE_SUMMARY" => "For å kunne benytte Epost-arkivering må du kjøpe en lisens for din SugarCRM-instans",
-    "LBL_SNIP_PURCHASE" => "Klikk her for å kjøpe",
+    'LBL_SNIP_STATUS_RESET' => 'Ikke kjørt ennå',
+    'LBL_SNIP_STATUS_PROBLEM' => 'Problem: %s',
+    'LBL_SNIP_NEVER' => 'Aldri',
+    'LBL_SNIP_STATUS_SUMMARY' => 'Epost-arkiveringstjeneste status:',
+    'LBL_SNIP_ACCOUNT' => 'Konto',
+    'LBL_SNIP_STATUS' => 'Status',
+    'LBL_SNIP_LAST_SUCCESS' => 'Siste vellykkede kjøring',
+    'LBL_SNIP_DESCRIPTION' => 'Epost-arkiveringstjenesten er et automatisk epostarkiveringssystem',
+    'LBL_SNIP_DESCRIPTION_SUMMARY' => 'Det lar deg se e-poster som har blitt sendt til eller fra dine kontakter, i SugarCRM, uten at du behøver å manuelt importere og assosiere e-postene',
+    'LBL_SNIP_PURCHASE_SUMMARY' => 'For å kunne benytte Epost-arkivering må du kjøpe en lisens for din SugarCRM-instans',
+    'LBL_SNIP_PURCHASE' => 'Klikk her for å kjøpe',
     'LBL_SNIP_EMAIL' => 'Epost-arkiveringsadresse',
     'LBL_SNIP_AGREE' => "Jeg samtykker til vilkårene over og <a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>personvernerklæringen</a>.",
     'LBL_SNIP_PRIVACY' => 'personvernavtale',
@@ -65,8 +64,8 @@ $mod_strings = array(
     'LBL_CONTACT_SUPPORT' => 'Vennligst forsøk på nytt eller kontakt SugarCRM Support.',
     'LBL_SNIP_SUPPORT' => 'Vennligst be om assistanse fra SugarCRM Support.',
     'ERROR_BAD_RESULT' => '"Noe galt har skjedd", melder tjenesten...',
-	'ERROR_NO_CURL' => 'cURL -utvidelser er nødvendige, men har ikke blitt aktivert',
-	'ERROR_REQUEST_FAILED' => 'Fikk ikke kontakt med tjeneren',
+    'ERROR_NO_CURL' => 'cURL -utvidelser er nødvendige, men har ikke blitt aktivert',
+    'ERROR_REQUEST_FAILED' => 'Fikk ikke kontakt med tjeneren',
 
     'LBL_CANCEL_BUTTON_TITLE' => 'Avbryt',
 
@@ -74,4 +73,4 @@ $mod_strings = array(
     'LBL_SNIP_MOUSEOVER_EMAIL' => 'Dette er e-postadressen for e-post-arkivering som du må benytte for å importere e-poster inn i Sugar.',
     'LBL_SNIP_MOUSEOVER_SERVICE_URL' => 'Dette er URL-adressen til Epost-Arkiveringstjeneren. Alle henvendelser, så som aktivering og deaktivering av Epost-Arkiveringstjenesten, må rutes gjennom denne URL-en.',
     'LBL_SNIP_MOUSEOVER_INSTANCE_URL' => 'Dette er webservices-URL&#39;-en for din Sugar-installasjon. Epost-Arkiveringstjeneren vil koble seg mot din tjener via denne URL-en.',
-);
+];

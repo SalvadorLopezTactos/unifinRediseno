@@ -28,7 +28,7 @@ class SugarUpgradeDisableViews extends UpgradeScript
             return;
         }
 
-        $files = array();
+        $files = [];
 
         foreach ($this->state['healthcheck'] as $meta) {
             if (empty($meta['report'])) {
@@ -46,8 +46,6 @@ class SugarUpgradeDisableViews extends UpgradeScript
         if ($files) {
             $this->renameDisabled($files);
         }
-
-
     }
 
     public function renameDisabled($files)

@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'Meetings';
-$viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
+$viewdefs[$module_name]['base']['menu']['quickcreate'] = [
     'layout' => 'create',
     'label' => 'LNK_NEW_MEETING',
     'visible' => true,
     'order' => 8,
-);
+];

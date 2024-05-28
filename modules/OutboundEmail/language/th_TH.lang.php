@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'บัญชีอีเมลขาออก',
     'LBL_MODULE_NAME_SINGULAR' => 'บัญชีอีเมลขาออก',
     'LBL_STATUS' => 'สถานะ',
@@ -40,4 +40,4 @@ $mod_strings = array(
     'LBL_PREFERRED_SENDING_ACCOUNT' => 'บัญชีส่งที่ต้องการ',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'การตั้งค่าอีเมลระบบลิ้นชัก',
-);
+];

@@ -87,4 +87,5 @@ $mod_strings = [
     'LBL_PURCHASEDLINEITEMS_LIST_DASHBOARD' => 'Instrumentpanel med lista över köpta poster',
     'LBL_PURCHASEDLINEITEMS_RECORD_DASHBOARD' => 'Instrumentpanel med register över köpta poster',
     'LBL_PARENT_PURCHASE' => 'Huvudköp',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje för köpt radartikel',
 ];

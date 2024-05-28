@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Afegir',
     'LBL_ADDRCITY' => 'Ciutat',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Info' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Tancar' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'No s&#39;ha trobat cap connector per a la ID d&#39;origen indicada.',
-);
-
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Информационная панель списка доходов по продуктам',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Информационная панель записей доходов по продуктам',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Типы продуктов',
     'LBL_ASSIGNED_TO_NAME' => 'За кем ответственный (-ая)',
     'LBL_ASSIGNED_TO' => 'Ответственный (-ая)',
-    'LBL_ASSIGNED_TO_ID'=>'Ответственный (ID)',
+    'LBL_ASSIGNED_TO_ID' => 'Ответственный (ID)',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Ответственный пользователь',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Ответственный (ID)',
     'LBL_CAMPAIGN_ID' => 'Маркетинговая кампания (ID)',
@@ -217,4 +217,5 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Отображает топ 10 продуктов с показателем дохода в круговой диаграмме.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Мой доход по продуктам',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Доход по продуктам моей команды",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Временная шкала доходного продукта',
+];

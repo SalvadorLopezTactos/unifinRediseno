@@ -37,6 +37,7 @@ use DocuSign\eSign\ObjectSerializer;
  * UserAccountManagementGranularInformation Class Doc Comment
  *
  * @category    Class
+ * @description Describes which account management capabilities a user has.
  * @package     DocuSign\eSign
  * @author      Swagger Codegen team <apihelp@docusign.com>
  * @license     The DocuSign PHP Client SDK is licensed under the MIT License.
@@ -73,12 +74,16 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
         'can_manage_envelope_transfer_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'can_manage_groups_but_not_users' => '?string',
         'can_manage_groups_but_not_users_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'can_manage_joint_agreements' => '?string',
+        'can_manage_joint_agreements_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'can_manage_reporting' => '?string',
         'can_manage_reporting_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'can_manage_sharing' => '?string',
         'can_manage_sharing_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'can_manage_signing_groups' => '?string',
         'can_manage_signing_groups_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
+        'can_manage_stamps' => '?string',
+        'can_manage_stamps_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'can_manage_users' => '?string',
         'can_manage_users_metadata' => '\DocuSign\eSign\Model\SettingsMetadata',
         'can_view_users' => '?string'
@@ -104,12 +109,16 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
         'can_manage_envelope_transfer_metadata' => null,
         'can_manage_groups_but_not_users' => null,
         'can_manage_groups_but_not_users_metadata' => null,
+        'can_manage_joint_agreements' => null,
+        'can_manage_joint_agreements_metadata' => null,
         'can_manage_reporting' => null,
         'can_manage_reporting_metadata' => null,
         'can_manage_sharing' => null,
         'can_manage_sharing_metadata' => null,
         'can_manage_signing_groups' => null,
         'can_manage_signing_groups_metadata' => null,
+        'can_manage_stamps' => null,
+        'can_manage_stamps_metadata' => null,
         'can_manage_users' => null,
         'can_manage_users_metadata' => null,
         'can_view_users' => null
@@ -156,12 +165,16 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
         'can_manage_envelope_transfer_metadata' => 'canManageEnvelopeTransferMetadata',
         'can_manage_groups_but_not_users' => 'canManageGroupsButNotUsers',
         'can_manage_groups_but_not_users_metadata' => 'canManageGroupsButNotUsersMetadata',
+        'can_manage_joint_agreements' => 'canManageJointAgreements',
+        'can_manage_joint_agreements_metadata' => 'canManageJointAgreementsMetadata',
         'can_manage_reporting' => 'canManageReporting',
         'can_manage_reporting_metadata' => 'canManageReportingMetadata',
         'can_manage_sharing' => 'canManageSharing',
         'can_manage_sharing_metadata' => 'canManageSharingMetadata',
         'can_manage_signing_groups' => 'canManageSigningGroups',
         'can_manage_signing_groups_metadata' => 'canManageSigningGroupsMetadata',
+        'can_manage_stamps' => 'canManageStamps',
+        'can_manage_stamps_metadata' => 'canManageStampsMetadata',
         'can_manage_users' => 'canManageUsers',
         'can_manage_users_metadata' => 'canManageUsersMetadata',
         'can_view_users' => 'canViewUsers'
@@ -187,12 +200,16 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
         'can_manage_envelope_transfer_metadata' => 'setCanManageEnvelopeTransferMetadata',
         'can_manage_groups_but_not_users' => 'setCanManageGroupsButNotUsers',
         'can_manage_groups_but_not_users_metadata' => 'setCanManageGroupsButNotUsersMetadata',
+        'can_manage_joint_agreements' => 'setCanManageJointAgreements',
+        'can_manage_joint_agreements_metadata' => 'setCanManageJointAgreementsMetadata',
         'can_manage_reporting' => 'setCanManageReporting',
         'can_manage_reporting_metadata' => 'setCanManageReportingMetadata',
         'can_manage_sharing' => 'setCanManageSharing',
         'can_manage_sharing_metadata' => 'setCanManageSharingMetadata',
         'can_manage_signing_groups' => 'setCanManageSigningGroups',
         'can_manage_signing_groups_metadata' => 'setCanManageSigningGroupsMetadata',
+        'can_manage_stamps' => 'setCanManageStamps',
+        'can_manage_stamps_metadata' => 'setCanManageStampsMetadata',
         'can_manage_users' => 'setCanManageUsers',
         'can_manage_users_metadata' => 'setCanManageUsersMetadata',
         'can_view_users' => 'setCanViewUsers'
@@ -218,12 +235,16 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
         'can_manage_envelope_transfer_metadata' => 'getCanManageEnvelopeTransferMetadata',
         'can_manage_groups_but_not_users' => 'getCanManageGroupsButNotUsers',
         'can_manage_groups_but_not_users_metadata' => 'getCanManageGroupsButNotUsersMetadata',
+        'can_manage_joint_agreements' => 'getCanManageJointAgreements',
+        'can_manage_joint_agreements_metadata' => 'getCanManageJointAgreementsMetadata',
         'can_manage_reporting' => 'getCanManageReporting',
         'can_manage_reporting_metadata' => 'getCanManageReportingMetadata',
         'can_manage_sharing' => 'getCanManageSharing',
         'can_manage_sharing_metadata' => 'getCanManageSharingMetadata',
         'can_manage_signing_groups' => 'getCanManageSigningGroups',
         'can_manage_signing_groups_metadata' => 'getCanManageSigningGroupsMetadata',
+        'can_manage_stamps' => 'getCanManageStamps',
+        'can_manage_stamps_metadata' => 'getCanManageStampsMetadata',
         'can_manage_users' => 'getCanManageUsers',
         'can_manage_users_metadata' => 'getCanManageUsersMetadata',
         'can_view_users' => 'getCanViewUsers'
@@ -303,12 +324,16 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
         $this->container['can_manage_envelope_transfer_metadata'] = isset($data['can_manage_envelope_transfer_metadata']) ? $data['can_manage_envelope_transfer_metadata'] : null;
         $this->container['can_manage_groups_but_not_users'] = isset($data['can_manage_groups_but_not_users']) ? $data['can_manage_groups_but_not_users'] : null;
         $this->container['can_manage_groups_but_not_users_metadata'] = isset($data['can_manage_groups_but_not_users_metadata']) ? $data['can_manage_groups_but_not_users_metadata'] : null;
+        $this->container['can_manage_joint_agreements'] = isset($data['can_manage_joint_agreements']) ? $data['can_manage_joint_agreements'] : null;
+        $this->container['can_manage_joint_agreements_metadata'] = isset($data['can_manage_joint_agreements_metadata']) ? $data['can_manage_joint_agreements_metadata'] : null;
         $this->container['can_manage_reporting'] = isset($data['can_manage_reporting']) ? $data['can_manage_reporting'] : null;
         $this->container['can_manage_reporting_metadata'] = isset($data['can_manage_reporting_metadata']) ? $data['can_manage_reporting_metadata'] : null;
         $this->container['can_manage_sharing'] = isset($data['can_manage_sharing']) ? $data['can_manage_sharing'] : null;
         $this->container['can_manage_sharing_metadata'] = isset($data['can_manage_sharing_metadata']) ? $data['can_manage_sharing_metadata'] : null;
         $this->container['can_manage_signing_groups'] = isset($data['can_manage_signing_groups']) ? $data['can_manage_signing_groups'] : null;
         $this->container['can_manage_signing_groups_metadata'] = isset($data['can_manage_signing_groups_metadata']) ? $data['can_manage_signing_groups_metadata'] : null;
+        $this->container['can_manage_stamps'] = isset($data['can_manage_stamps']) ? $data['can_manage_stamps'] : null;
+        $this->container['can_manage_stamps_metadata'] = isset($data['can_manage_stamps_metadata']) ? $data['can_manage_stamps_metadata'] : null;
         $this->container['can_manage_users'] = isset($data['can_manage_users']) ? $data['can_manage_users'] : null;
         $this->container['can_manage_users_metadata'] = isset($data['can_manage_users_metadata']) ? $data['can_manage_users_metadata'] : null;
         $this->container['can_view_users'] = isset($data['can_view_users']) ? $data['can_view_users'] : null;
@@ -375,7 +400,7 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
     /**
      * Sets can_manage_account_security_settings_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_account_security_settings_metadata can_manage_account_security_settings_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_account_security_settings_metadata 
      *
      * @return $this
      */
@@ -423,7 +448,7 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
     /**
      * Sets can_manage_account_settings_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_account_settings_metadata can_manage_account_settings_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_account_settings_metadata 
      *
      * @return $this
      */
@@ -471,7 +496,7 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
     /**
      * Sets can_manage_admins_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_admins_metadata can_manage_admins_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_admins_metadata Metadata that indicates whether the `canManageAdmins` property is editable.
      *
      * @return $this
      */
@@ -519,7 +544,7 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
     /**
      * Sets can_manage_connect_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_connect_metadata can_manage_connect_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_connect_metadata 
      *
      * @return $this
      */
@@ -567,7 +592,7 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
     /**
      * Sets can_manage_document_retention_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_document_retention_metadata can_manage_document_retention_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_document_retention_metadata 
      *
      * @return $this
      */
@@ -615,7 +640,7 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
     /**
      * Sets can_manage_envelope_transfer_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_envelope_transfer_metadata can_manage_envelope_transfer_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_envelope_transfer_metadata 
      *
      * @return $this
      */
@@ -663,13 +688,61 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
     /**
      * Sets can_manage_groups_but_not_users_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_groups_but_not_users_metadata can_manage_groups_but_not_users_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_groups_but_not_users_metadata 
      *
      * @return $this
      */
     public function setCanManageGroupsButNotUsersMetadata($can_manage_groups_but_not_users_metadata)
     {
         $this->container['can_manage_groups_but_not_users_metadata'] = $can_manage_groups_but_not_users_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets can_manage_joint_agreements
+     *
+     * @return ?string
+     */
+    public function getCanManageJointAgreements()
+    {
+        return $this->container['can_manage_joint_agreements'];
+    }
+
+    /**
+     * Sets can_manage_joint_agreements
+     *
+     * @param ?string $can_manage_joint_agreements 
+     *
+     * @return $this
+     */
+    public function setCanManageJointAgreements($can_manage_joint_agreements)
+    {
+        $this->container['can_manage_joint_agreements'] = $can_manage_joint_agreements;
+
+        return $this;
+    }
+
+    /**
+     * Gets can_manage_joint_agreements_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getCanManageJointAgreementsMetadata()
+    {
+        return $this->container['can_manage_joint_agreements_metadata'];
+    }
+
+    /**
+     * Sets can_manage_joint_agreements_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_joint_agreements_metadata 
+     *
+     * @return $this
+     */
+    public function setCanManageJointAgreementsMetadata($can_manage_joint_agreements_metadata)
+    {
+        $this->container['can_manage_joint_agreements_metadata'] = $can_manage_joint_agreements_metadata;
 
         return $this;
     }
@@ -711,7 +784,7 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
     /**
      * Sets can_manage_reporting_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_reporting_metadata can_manage_reporting_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_reporting_metadata 
      *
      * @return $this
      */
@@ -759,7 +832,7 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
     /**
      * Sets can_manage_sharing_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_sharing_metadata can_manage_sharing_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_sharing_metadata Metadata that indicates whether the `canManageSharing` property is editable.
      *
      * @return $this
      */
@@ -807,13 +880,61 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
     /**
      * Sets can_manage_signing_groups_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_signing_groups_metadata can_manage_signing_groups_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_signing_groups_metadata 
      *
      * @return $this
      */
     public function setCanManageSigningGroupsMetadata($can_manage_signing_groups_metadata)
     {
         $this->container['can_manage_signing_groups_metadata'] = $can_manage_signing_groups_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets can_manage_stamps
+     *
+     * @return ?string
+     */
+    public function getCanManageStamps()
+    {
+        return $this->container['can_manage_stamps'];
+    }
+
+    /**
+     * Sets can_manage_stamps
+     *
+     * @param ?string $can_manage_stamps 
+     *
+     * @return $this
+     */
+    public function setCanManageStamps($can_manage_stamps)
+    {
+        $this->container['can_manage_stamps'] = $can_manage_stamps;
+
+        return $this;
+    }
+
+    /**
+     * Gets can_manage_stamps_metadata
+     *
+     * @return \DocuSign\eSign\Model\SettingsMetadata
+     */
+    public function getCanManageStampsMetadata()
+    {
+        return $this->container['can_manage_stamps_metadata'];
+    }
+
+    /**
+     * Sets can_manage_stamps_metadata
+     *
+     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_stamps_metadata 
+     *
+     * @return $this
+     */
+    public function setCanManageStampsMetadata($can_manage_stamps_metadata)
+    {
+        $this->container['can_manage_stamps_metadata'] = $can_manage_stamps_metadata;
 
         return $this;
     }
@@ -855,7 +976,7 @@ class UserAccountManagementGranularInformation implements ModelInterface, ArrayA
     /**
      * Sets can_manage_users_metadata
      *
-     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_users_metadata can_manage_users_metadata
+     * @param \DocuSign\eSign\Model\SettingsMetadata $can_manage_users_metadata Metadata that indicates whether the `canManageUsers` property is editable.
      *
      * @return $this
      */

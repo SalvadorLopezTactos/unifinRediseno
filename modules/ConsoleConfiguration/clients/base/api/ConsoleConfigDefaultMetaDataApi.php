@@ -47,13 +47,13 @@ class ConsoleConfigDefaultMetaDataApi extends SugarApi
      * @param string $module
      * @return bool
      */
-    protected function isValidModule(string $module) : bool
+    protected function isValidModule(string $module): bool
     {
         if (empty($this->validator)) {
             $this->buildModuleNameValidator();
         }
         $errors = $this->validator->validate($module, $this->moduleNameConstraints);
-        return (is_countable($errors) ? count($errors) : 0) == 0;
+        return safeCount($errors) == 0;
     }
 
     /**

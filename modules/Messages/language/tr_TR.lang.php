@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'devam ediyor',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Mesajlar Odak Bölmesi',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Mesaj Kayıtları Panosu',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Mesaj Zaman Çizelgesi',
 ];

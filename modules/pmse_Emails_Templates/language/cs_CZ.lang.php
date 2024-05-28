@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Tělo',
     'LBL_BASE_MODULE' => 'Cílový Modul:',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Vytvoření šablony e-mailu procesu ze souboru se nezdařilo',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Tato e-mailová šablona se právě používá v definici procesu. Přejete si tuto e-mailovou šablonu upravit?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Tuto e-mailovou šablonu nelze odstranit, protože se aktuálně používá v definici procesu.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Tuto e-mailovou šablonu nelze odstranit, protože se aktuálně používá v definici procesu.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Výběr polí',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Označit',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Typ hodnoty pole',
-);
+];

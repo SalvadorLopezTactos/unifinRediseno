@@ -58,8 +58,8 @@ class Filters extends Basic
     public static function getOperators($client = 'base')
     {
         $filtersMetadata = MetaDataManager::getManager($client)->getSugarFilters();
-        if(empty($filtersMetadata['operators']['meta'])) {
-            return array();
+        if (empty($filtersMetadata['operators']['meta'])) {
+            return [];
         }
         return $filtersMetadata['operators']['meta'];
     }

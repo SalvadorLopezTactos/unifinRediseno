@@ -19,21 +19,6 @@
     /**
      * @inheritdoc
      */
-    setUsersFields: function() {
-        var panel = this.getUsersPanel();
-
-        // the Audit module does not have user configurable preview/record
-        // metadata, so retrieve the field def from default fields
-        this.userField = _.find(panel.defaultFields, function(field) {
-            return field.name === 'source';
-        });
-
-        this.hasAvatarUser = !!this.userField;
-    },
-
-    /**
-     * @inheritdoc
-     */
     setHeaderPanel: function() {
         this._super('setHeaderPanel');
         this.updateModule = this.activity.get('parent_model').get('_module') ?

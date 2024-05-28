@@ -16,7 +16,6 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\ActivityHandlerFactory;
 
 class StateCalculator
 {
-
     /**
      * @var \DRI_SubWorkflow
      */
@@ -76,7 +75,8 @@ class StateCalculator
     {
         $this->load();
 
-        $count = count((array) $this->activities);
+        $this->activities = (array)$this->activities;
+        $count = safeCount($this->activities);
         $notStarted = 0;
         $completed = 0;
         $cancelled = 0;

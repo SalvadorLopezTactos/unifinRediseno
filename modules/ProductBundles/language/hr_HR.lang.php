@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Faza grupe:',
-    'LBL_DEAL_TOT'=>'ukupni popust',
-    'LBL_DEAL_TOT_USDOLLAR'=>'ukupni popust (američki dolar)',
+    'LBL_DEAL_TOT' => 'ukupni popust',
+    'LBL_DEAL_TOT_USDOLLAR' => 'ukupni popust (američki dolar)',
     'LBL_NEW_SUB' => 'Podzbroj s popustom:',
     'LBL_SHIPPING' => 'Dostava:',
-    'LBL_SHIPPING_USDOLLAR'=>'Dostava (američki dolar)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Podzbroj (američki dolar)',
+    'LBL_SHIPPING_USDOLLAR' => 'Dostava (američki dolar)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Podzbroj (američki dolar)',
     'LBL_SUBTOTAL' => 'Podzbroj:',
     'LBL_TAXABLE_SUBTOTAL' => 'Oporezivi podzbroj',
-    'LBL_TAX_USDOLLAR'=>'Porez (američki dolar)',
+    'LBL_TAX_USDOLLAR' => 'Porez (američki dolar)',
     'LBL_TAX' => 'Porez:',
-    'LBL_TOTAL_USDOLLAR'=>'Ukupno (američki dolar)',
+    'LBL_TOTAL_USDOLLAR' => 'Ukupno (američki dolar)',
     'LBL_TOTAL' => 'Ukupno:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Položaj paketa ponude',
     'EXCEPTION_INVALID_QUOTE_ID' => 'ID-a ponude nema u korisnim podacima',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'Ponuda koju ste zatražili nije pronađena',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'Ponuda koju ste zatražili nije pronađena',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Dodatni grupni popust',
     'LBL_GROUP_TOTAL' => 'Ukupni iznos grupe',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Zaglavlje grupe',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Zadana grupa paketa proizvoda za ovu ponudu',
     'LBL_ALERT_DELETING_ITEM' => 'Brisanje stavke/i',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Stavka uspješno izbrisana',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija paketa proizvoda',
+];

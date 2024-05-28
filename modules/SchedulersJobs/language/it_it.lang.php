@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Coda lavoro',
     'LBL_MODULE_NAME_SINGULAR' => 'Coda lavoro',
     'LBL_MODULE_TITLE' => 'Coda lavoro: Home',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Risoluzione annullata',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Risoluzione in corso',
     // Errors
-    'ERR_CALL' => "Impossibile eseguire la funzione: %s",
-    'ERR_CURL' => "Nessun CURL - impossibile  eseguire URL jobs",
-    'ERR_FAILED' => "Interruzione imprevista, si pregs di controllare i log PHP e sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s in %s sulla riga %d",
-    'ERR_NOUSER' => "Nessun ID utente specificato per il job",
-    'ERR_NOSUCHUSER' => "Impossibile trovare User ID %",
-    'ERR_JOBTYPE' => "Tipo job non specificato: %",
-    'ERR_TIMEOUT' => "Fallimento forzato su timeout",
+    'ERR_CALL' => 'Impossibile eseguire la funzione: %s',
+    'ERR_CURL' => 'Nessun CURL - impossibile  eseguire URL jobs',
+    'ERR_FAILED' => 'Interruzione imprevista, si pregs di controllare i log PHP e sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s in %s sulla riga %d',
+    'ERR_NOUSER' => 'Nessun ID utente specificato per il job',
+    'ERR_NOSUCHUSER' => 'ID utente %s non trovato',
+    'ERR_JOBTYPE' => 'Tipo di lavoro sconosciuto: %s',
+    'ERR_TIMEOUT' => 'Fallimento forzato su timeout',
     'ERR_JOB_FAILED_VERBOSE' => 'Lavoro %1$s (%2$s) non andato a buon fine in esecuzione CRON',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Non è stato possibile caricare bean con id: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Non è possibile trovare handler per il percorso %s',
@@ -93,13 +93,13 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Aiuto di configurazione Amazon SQS',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Sezione Configurazione Amazon SQS.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Sezione Configurazione Amazon SQS.</b></p>
 <ul>
     <li>ID chiave accesso: <i>Inserire il numero ID chiave di accesso per Amazon SQS</i></li>
     <li>Chiave di accesso segreto: <i>Inserire la chiave di accesso segreto per Amazon SQS</i></li>
     <li>Regione: <i>Enter the region of Amazon SQS server</i></li>
     <li>Nome coda: <i>Inserire il nome della coda del server Amazon SQS</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'Aiuto Configurazione AMQP',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>Sezione Configurazione AMQP.</b></p>
 <ul>
@@ -120,4 +120,4 @@ $mod_strings = array(
     'LBL_REGION' => 'Regione',
     'LBL_ACCESS_KEY_SECRET' => 'Chiave accesso segreto',
     'LBL_QUEUE_NAME' => 'Nome adattatore',
-);
+];

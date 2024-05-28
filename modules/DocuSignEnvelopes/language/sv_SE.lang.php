@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Hämta kuvert',
     'LBL_CLOUD_SERVICE_TYPE' => 'Typ av molntjänst',
     'LBL_CLOUD_PATH' => 'Molnsökväg',
+    'LBL_CLOUD_DRIVE_ID' => 'Enhets-id',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Panel DocuSign-kuvertlista',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'Panel DocuSign-kuvertpost',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Senaste DocuSign-kuvert',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda DocuSign-kuvert',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'DocuSign-kuvertets tidslinje',
 
     'LBL_NEW_ENVELOPE' => 'Nytt kuvert',
     'LBL_DOCUMENT_IS_NOW' => ' är nu ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Skicka',
     'LBL_BUTTON_CLEAR' => 'Rensa',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Använd mall',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Skicka med mall',
     'LBL_PLEASE_LOG_IN' => 'Logga in i DocuSign först!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Du kan inte ladda ner det här dokumentet. Det har skapats av en annan användare!',
     'LBL_SEND_NOT_ALLOWED' => 'Du kan inte skicka det här kuvertet. Det har skapats av en annan användare!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Utkastet har ändrats. Vill du uppdatera statusen till aktuell status ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'DocuSign-kuvertet har uppdaterats!',
     'LBL_DRAFT_CHANGED_ERROR' => 'DocuSign-kuvertet uppdaterades inte. Kontrollera loggarna för mer information!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'DocuSign-mallen kan inte tillämpas',
     'LBL_ENVELOPE_NOT_SENT' => 'Kuvertet skickades inte!',
     'LBL_ENVELOPE_SENT' => 'Kuvertet skickades igen!',
     'LBL_DOCUMENT_ADDED' => 'Dokumentet har lagts till i en post!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Roll',
     'LBL_SELECT_BUTTON_LABEL' => 'Välj',
     'LBL_BACK_BUTTON_LABEL' => 'Tillbaka',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Sök efter mallnamn',
+    'LBL_ENVELOPE_NAME' => 'Kuvertets namn',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Kuvertets namn måste fyllas i',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Kunde inte hämta potentiella mottagare!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Kunde inte hämta mallar!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Välj en roll för varje mottagare',
+    
+    'LBL_DOWNLOAD' => 'Ladda ner',
+    'LBL_OPEN_DRAFT' => 'Öppna utkast',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Det går inte att skicka dokument utan en fil till DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Klicka på Plus-knappen för att påbörja signeringsprocessen',
+    'LBL_NO_DOC_SELECTED' => 'Välj dokument först',
+    'LBL_SELECT_RECIPIENTS' => 'Välj signeringsmottagare',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Uteslut',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Du måste installera DocuSign-programmet för en bättre upplevelse.',
 ];

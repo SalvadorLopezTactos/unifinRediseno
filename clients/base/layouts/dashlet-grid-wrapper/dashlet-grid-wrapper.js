@@ -21,6 +21,7 @@
      */
     removeDashlet: function() {
         this.layout.removeDashlet(this);
+        this.dispose();
     },
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -111,9 +112,9 @@ class SugarUpgradeUpdateOmniChannelDashboard extends UpgradeScript
                     }
                 }
 
-                    $dashboardBean->metadata = json_encode($dashboardContents['metadata']);
-                    $dashboardBean->save();
-                    $isUpdated = true;
+                $dashboardBean->metadata = json_encode($dashboardContents['metadata']);
+                $dashboardBean->save();
+                $isUpdated = true;
             }
         }
 
@@ -186,7 +187,7 @@ class SugarUpgradeUpdateOmniChannelDashboard extends UpgradeScript
      * @param array $modules module array.
      * @return array
      */
-    private function getOldTabMeta(SugarBean $dashboardBean, array $modules) : array
+    private function getOldTabMeta(SugarBean $dashboardBean, array $modules): array
     {
         $oldTabMeta = [];
         if (!empty($dashboardBean->metadata)) {
@@ -207,7 +208,7 @@ class SugarUpgradeUpdateOmniChannelDashboard extends UpgradeScript
      *
      * @return array
      */
-    private function getOldDefaultContactMeta() : array
+    private function getOldDefaultContactMeta(): array
     {
         return [
             'icon' => [
@@ -292,7 +293,7 @@ class SugarUpgradeUpdateOmniChannelDashboard extends UpgradeScript
                                 [
                                     'type' => 'actiondropdown',
                                     'no_default_action' => true,
-                                    'icon' => 'fa-plus',
+                                    'icon' => 'sicon-plus',
                                     'buttons' => [
                                         [
                                             'type' => 'dashletaction',
@@ -302,7 +303,7 @@ class SugarUpgradeUpdateOmniChannelDashboard extends UpgradeScript
                                                 'module' => 'Emails',
                                             ],
                                             'label' => 'LBL_COMPOSE_EMAIL_BUTTON_LABEL',
-                                            'icon' => 'fa-plus',
+                                            'icon' => 'sicon-plus',
                                             'acl_action' => 'create',
                                             'acl_module' => 'Emails',
                                         ],
@@ -314,7 +315,7 @@ class SugarUpgradeUpdateOmniChannelDashboard extends UpgradeScript
                                                 'module' => 'Calls',
                                             ],
                                             'label' => 'LBL_SCHEDULE_CALL',
-                                            'icon' => 'fa-phone',
+                                            'icon' => 'sicon-phone',
                                             'acl_action' => 'create',
                                             'acl_module' => 'Calls',
                                         ],
@@ -326,7 +327,7 @@ class SugarUpgradeUpdateOmniChannelDashboard extends UpgradeScript
                                                 'module' => 'Meetings',
                                             ],
                                             'label' => 'LBL_SCHEDULE_MEETING',
-                                            'icon' => 'fa-calendar',
+                                            'icon' => 'sicon-calendar',
                                             'acl_action' => 'create',
                                             'acl_module' => 'Meetings',
                                         ],
@@ -338,7 +339,7 @@ class SugarUpgradeUpdateOmniChannelDashboard extends UpgradeScript
                                                 'module' => 'Notes',
                                             ],
                                             'label' => 'LBL_CREATE_NOTE_OR_ATTACHMENT',
-                                            'icon' => 'fa-plus',
+                                            'icon' => 'sicon-plus',
                                             'acl_action' => 'create',
                                             'acl_module' => 'Notes',
                                         ],
@@ -347,7 +348,7 @@ class SugarUpgradeUpdateOmniChannelDashboard extends UpgradeScript
                                 [
                                     'type' => 'dashletaction',
                                     'css_class' => 'btn btn-invisible dashlet-toggle minify',
-                                    'icon' => 'fa-chevron-up',
+                                    'icon' => 'sicon-chevron-up',
                                     'action' => 'toggleMinify',
                                     'tooltip' => 'LBL_DASHLET_TOGGLE',
                                     'disallowed_layouts' => [

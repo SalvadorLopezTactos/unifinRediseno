@@ -18,16 +18,16 @@ use Google\Service\Gmail;
  */
 class ExtAPIGoogleEmail extends ExternalAPIBase
 {
-    public $supportedModules = array('OutboundEmail', 'InboundEmail');
+    public $supportedModules = ['OutboundEmail', 'InboundEmail'];
     public $authMethod = 'oauth2';
     public $connector = 'ext_eapm_google';
 
     public $useAuth = true;
     public $requireAuth = true;
 
-    protected $scopes = array(
+    protected $scopes = [
         Gmail::MAIL_GOOGLE_COM,
-    );
+    ];
 
     public $needsUrl = false;
     public $sharingOptions = null;
@@ -62,7 +62,7 @@ class ExtAPIGoogleEmail extends ExternalAPIBase
         $client->setState('email');
         $client->setScopes($this->scopes);
         $client->setAccessType('offline');
-        $client->setApprovalPrompt('force');
+        $client->setPrompt('consent');
 
         return $client;
     }
@@ -75,7 +75,7 @@ class ExtAPIGoogleEmail extends ExternalAPIBase
      */
     protected function getGoogleOauth2Config()
     {
-        $config = array();
+        $config = [];
         require SugarAutoLoader::existingCustomOne('modules/Connectors/connectors/sources/ext/eapm/google/config.php');
         $config['redirect_uri'] = rtrim(SugarConfig::getInstance()->get('site_url'), '/')
             . '/index.php?module=EAPM&action=GoogleOauth2Redirect';
@@ -111,12 +111,12 @@ class ExtAPIGoogleEmail extends ExternalAPIBase
 
         // Return the token and account information
         $emailAddress = $this->getEmailAddress($eapmId);
-        return array(
+        return [
             'token' => json_encode($token),
             'eapmId' => $eapmId,
             'emailAddress' => $emailAddress,
             'userName' => $emailAddress,
-        );
+        ];
     }
 
     /**

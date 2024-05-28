@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Process Definitions',
-  'LBL_MODULE_TITLE' => 'Proceso apibrėžimai',
-  'LBL_MODULE_NAME_SINGULAR' => 'Process Definition',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Process Definitions',
+    'LBL_MODULE_TITLE' => 'Proceso apibrėžimai',
+    'LBL_MODULE_NAME_SINGULAR' => 'Process Definition',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ proceso apibrėžimai',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ proceso apibrėžimai',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Proceso apibrėžimų įrašų ataskaitų sritis',
-  'LNK_LIST' => 'View Process Definitions',
-  'LNK_NEW_PMSE_PROJECT' => 'Create Process Definition',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Import Process Definitions',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Proceso apibrėžimų įrašų ataskaitų sritis',
+    'LNK_LIST' => 'View Process Definitions',
+    'LNK_NEW_PMSE_PROJECT' => 'Create Process Definition',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Import Process Definitions',
 
-  'LBL_PRJ_STATUS' => 'Statusas:',
-  'LBL_PRJ_MODULE' => 'Target Module',
-  'LBL_PRJ_RUN_ORDER' => 'Vykdyti užsakymą',
-  'LBL_PMSE_BUTTON_SAVE' => 'Saugoti',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Atšaukti',
-  'LBL_PMSE_BUTTON_YES' => 'Taip',
-  'LBL_PMSE_BUTTON_NO' => 'Ne',
-  'LBL_PMSE_BUTTON_OK' => 'Ok',
+    'LBL_PRJ_STATUS' => 'Statusas:',
+    'LBL_PRJ_MODULE' => 'Target Module',
+    'LBL_PRJ_RUN_ORDER' => 'Vykdyti užsakymą',
+    'LBL_PMSE_BUTTON_SAVE' => 'Saugoti',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Atšaukti',
+    'LBL_PMSE_BUTTON_YES' => 'Taip',
+    'LBL_PMSE_BUTTON_NO' => 'Ne',
+    'LBL_PMSE_BUTTON_OK' => 'Ok',
     'LBL_PMSE_FORM_ERROR' => 'Prieš tęsdami išspręskite visas klaidas.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Design',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Priminimas',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Veiksmas',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Lead Start Event',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Opportunity Start Event' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Opportunity Start Event',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Document Start Event',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Start Event',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Wait Event',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Verslo taisyklė',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Verslo taisyklės veiksmas',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Laiško šablonas',
-);
+];

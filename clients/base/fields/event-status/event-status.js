@@ -33,7 +33,9 @@
         this.statusClasses = {
             'Held': 'label-success',
             'Not Held': 'label-important',
-            'Planned': 'label-pending'
+            'Planned': 'label-pending',
+            'Deferred': 'label-inverse',
+            'In Progress': 'label-inverse'
         };
 
         this.type = 'badge-select';

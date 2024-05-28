@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tile View',
     'LBL_MODULE_NAME_SINGULAR' => 'Tile View',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'Tile View',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => 'Aktiverede moduler',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'Felter med visningsmoduler',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'Modul-indstillinger',
-    'LBL_PIPELINE_TABLE_HEADER' => "Vælg det felt, hvis værdi vil blive brugt som kolonner",
+    'LBL_PIPELINE_TABLE_HEADER' => 'Vælg det felt, hvis værdi vil blive brugt som kolonner',
     'LBL_PIPELINE_TILE_HEADER' => 'Feltets overskriftsområde',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => 'Tilgængelige kolonner',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => 'Feltets brødtekstsområde',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'Feltforhåndsvisning',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'For mange felter i visning.',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => 'Løs evt. fejl på følgende faner med modulindstillinger, før du går videre:<br><br>',
-);
+    'LBL_MODULE_SELECTION' => 'Vælg modulet, som du ønsker at få vist og konfigurere, nedenfor',
+    'LBL_SHOW_COLUMN_COUNT' => 'Vis kolonneantal',
+    'LBL_SHOW_COLUMN_TOTAL' => 'Vis antal kolonner i alt',
+    'LBL_TOTAL_FIELD' => 'Feltet Total',
+];

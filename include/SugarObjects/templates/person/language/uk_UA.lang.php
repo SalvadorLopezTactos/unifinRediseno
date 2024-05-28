@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_SALUTATION' => 'Вітання',
     'LBL_NAME' => 'Назва',
     'LBL_FIRST_NAME' => 'Ім&#39;я',
@@ -68,4 +68,4 @@ $mod_strings = array(
     'LBL_GOOGLEPLUS' => 'Google Plus (ID)',
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Копіювати альтернативну адресу до основної адреси',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Копіювати основну адресу до альтернативної адреси',
-);
+];

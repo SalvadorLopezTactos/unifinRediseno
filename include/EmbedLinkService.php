@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,6 +10,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class EmbedLinkService
 {
     // regular expression from http://daringfireball.net/2010/07/improved_regex_for_matching_urls
@@ -24,20 +26,20 @@ class EmbedLinkService
      */
     public function get($text)
     {
-        $embeds = array();
+        $embeds = [];
         $urls = $this->findAllUrls($text);
 
         foreach ($urls as $url) {
             if ($this->isImage($url)) {
-                $embed = array(
+                $embed = [
                     'type' => 'image',
-                    'src'  => $url,
-                );
+                    'src' => $url,
+                ];
                 array_push($embeds, $embed);
             }
         }
 
-        return array('embeds' => $embeds);
+        return ['embeds' => $embeds];
     }
 
     /**

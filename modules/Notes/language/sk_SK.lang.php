@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Informačný panel so zoznamom poznámok',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Informačný panel so záznamom poznámok',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na poznámky',
     'LBL_EXTERNAL_USER' => 'Externý používateľ',
     'LBL_EXTERNAL_USER_NAME' => 'Externý používateľ',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová os poznámok',
 
     'LBL_RELATED_CONTACT' => 'Súvisiaci kontakt',
     'ERR_DELETE_RECORD' => 'K odstráneniu verzie musíte zadať číslo záznamu.',
@@ -126,4 +127,4 @@ $mod_strings = array(
  - Fields marked "Required" must be completed prior to saving.
  - Click "Show More" to expose additional fields if necessary.
 2. Click "Save" to finalize the new record and return to the previous page.',
-);
+];

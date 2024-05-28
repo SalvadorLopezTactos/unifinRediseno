@@ -13,19 +13,18 @@
 
 class ForecastWorksheetsApi extends SugarApi
 {
-
     public function registerApiRest()
     {
-        return array(
-            'forecastWorksheetSave' => array(
+        return [
+            'forecastWorksheetSave' => [
                 'reqType' => 'PUT',
-                'path' => array('ForecastWorksheets', '?'),
-                'pathVars' => array('module', 'record'),
+                'path' => ['ForecastWorksheets', '?'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'forecastWorksheetSave',
                 'shortHelp' => 'Updates a ForecastWorksheet model',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastWorksheetPut.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**

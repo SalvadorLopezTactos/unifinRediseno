@@ -9,7 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\ACL\Cache;
+
 /**
  * ACL data cache
  */
@@ -50,9 +52,9 @@ class AclCache implements Cache
 
     /**
      * Returns single instance of the class
+     * @return static
      * @deprecated Please use Container::getInstance()->get(AclCache::class)
      *
-     * @return static
      */
     public static function getInstance()
     {
@@ -76,7 +78,7 @@ class AclCache implements Cache
     /**
      * Retrieve a value for a key from the cache. Returns NULL in case if the entry is not found.
      */
-    public function retrieve(string $userId, string $key) : ?array
+    public function retrieve(string $userId, string $key): ?array
     {
         $this->hashes = $this->getHashes();
 
@@ -92,7 +94,7 @@ class AclCache implements Cache
     /**
      * Set a value for a key in the cache.
      */
-    public function store(string $userId, string $key, array $value) : void
+    public function store(string $userId, string $key, array $value): void
     {
         $hash = md5(serialize($value));
         $this->hashes = $this->getHashes();
@@ -108,7 +110,7 @@ class AclCache implements Cache
      * @deprecated Please use {@link Cache::clearAll()} and {@link Cache::clearByUser()}
      * Clear cache.
      */
-    public function clear(?string $userId = null, ?string $key = null) : void
+    public function clear(?string $userId = null, ?string $key = null): void
     {
         // clear cache for a single user
         if ($userId) {
@@ -135,9 +137,9 @@ class AclCache implements Cache
      * to init hashes
      * @return array|null
      */
-    protected function getHashes() : ?array
+    protected function getHashes(): ?array
     {
-        return $this->hashes?? $this->cache->get(self::HASH_KEY);
+        return $this->hashes ?? $this->cache->get(self::HASH_KEY);
     }
 
     public function clearByUser(string $userId): void

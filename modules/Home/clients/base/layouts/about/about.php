@@ -11,16 +11,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Home']['base']['layout']['about'] = array(
-    'css_class' => 'row-fluid w-full h-full bg-primary-content-background about-page',
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['Home']['base']['layout']['about'] = [
+    'css_class' => 'row-fluid about-page bg-[--primary-content-background] h-full w-full',
+    'components' => [
+        [
+            'layout' => [
                 'css_class' => 'main-pane span12 bg-transparent',
-                'components' => array(
-                    array(
+                'components' => [
+                    [
                         'view' => 'about-headerpane',
-                    ),
+                    ],
                     [
                         'layout' => [
                             'type' => 'fluid',
@@ -34,40 +34,40 @@ $viewdefs['Home']['base']['layout']['about'] = array(
                             ],
                         ],
                     ],
-                    array(
-                        'layout' => array(
+                    [
+                        'layout' => [
                             'type' => 'fluid',
-                            'components' => array(
-                                array(
-                                    'view' => array(
+                            'components' => [
+                                [
+                                    'view' => [
                                         'type' => 'about-copyright',
                                         'span' => 12,
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'fluid',
-                            'components' => array(
-                                array(
-                                    'view' => array(
+                            'components' => [
+                                [
+                                    'view' => [
                                         'type' => 'about-resources',
                                         'span' => 6,
-                                    ),
-                                ),
-                                array(
-                                    'view' => array(
+                                    ],
+                                ],
+                                [
+                                    'view' => [
                                         'type' => 'about-source-code',
                                         'span' => 6,
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

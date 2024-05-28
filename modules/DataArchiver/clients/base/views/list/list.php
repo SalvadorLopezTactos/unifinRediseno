@@ -16,54 +16,54 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$viewdefs['DataArchiver']['base']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['DataArchiver']['base']['view']['list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'link' => true,
                     'label' => 'LBL_LIST_ARCHIVE_NAME',
                     'enabled' => true,
                     'default' => true,
-                    'width' =>  'xlarge',
-                ),
-                array(
-                  'name' => 'filter_module_name',
-                  'link' => false,
-                  'label' => 'LBL_MODULE_FIELD',
-                  'enabled' => true,
-                  'default' => true,
-                ),
-                array(
+                    'width' => 'xlarge',
+                ],
+                [
+                    'name' => 'filter_module_name',
+                    'link' => false,
+                    'label' => 'LBL_MODULE_FIELD',
+                    'enabled' => true,
+                    'default' => true,
+                ],
+                [
                     'name' => 'process_type',
                     'link' => false,
                     'label' => 'LBL_PROCESS_TYPE_FIELD',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_modified',
                     'enabled' => true,
                     'default' => false,
-                ),
-                array (
+                ],
+                [
                     'name' => 'date_entered',
                     'type' => 'datetime',
                     'label' => 'LBL_DATE_ENTERED',
                     'enabled' => true,
                     'default' => false,
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'filter_def',
                     'label' => 'LBL_FILTER_DEF_FIELD',
                     'enabled' => true,
                     'default' => false,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

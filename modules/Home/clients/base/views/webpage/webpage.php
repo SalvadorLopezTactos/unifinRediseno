@@ -10,51 +10,51 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Home']['base']['view']['webpage'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['Home']['base']['view']['webpage'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_DASHLET_WEBPAGE_NAME',
             'description' => 'LBL_DASHLET_WEBPAGE_DESC',
-            'config' => array(
+            'config' => [
                 'url' => '',
                 'module' => 'Home',
                 'limit' => 3,
-            ),
-            'preview' => array(
+            ],
+            'preview' => [
                 'title' => 'LBL_DASHLET_WEBPAGE_NAME',
                 'url' => '',
                 'limit' => '3',
                 'module' => 'Home',
-            ),
+            ],
             'filter' => [
                 'blacklist' => [
                     'module' => 'Administration',
                 ],
             ],
-        ),
-    ),
-    'config' => array(
-        'fields' => array(
-            array(
+        ],
+    ],
+    'config' => [
+        'fields' => [
+            [
                 'type' => 'iframe',
                 'name' => 'url',
                 'label' => 'LBL_DASHLET_WEBPAGE_URL',
                 'help' => 'LBL_DASHLET_WEBPAGE_URL_HELP',
-            ),
-            array(
+            ],
+            [
                 'name' => 'limit',
                 'label' => 'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS',
                 'type' => 'enum',
                 'options' => 'dashlet_webpage_limit_options',
-            ),
-        ),
-    ),
-    'view_panel' => array(
-        array(
+            ],
+        ],
+    ],
+    'view_panel' => [
+        [
             'type' => 'iframe',
             'name' => 'url',
             'label' => 'LBL_DASHLET_WEBPAGE_URL',
             'width' => '100%',
-        ),
-    ),
-);
+        ],
+    ],
+];

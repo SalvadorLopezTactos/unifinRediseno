@@ -457,6 +457,209 @@ class GetAccountSignaturesOptions
 
 
 /**
+ * GetAgentUserAuthorizationsOptions Class Doc Comment
+ *
+ * @category Class
+ * @package  DocuSign\eSign
+ * @author   Swagger Codegen team <apihelp@docusign.com>
+ * @license  The DocuSign PHP Client SDK is licensed under the MIT License.
+ * @link     https://github.com/swagger-api/swagger-codegen
+ */
+class GetAgentUserAuthorizationsOptions
+{
+    /**
+      * $active_only 
+      * @var ?string
+      */
+    protected ?string $active_only = null;
+
+    /**
+     * Gets active_only
+     *
+     * @return ?string
+     */
+    public function getActiveOnly(): ?string
+    {
+        return $this->active_only;
+    }
+
+    /**
+     * Sets active_only
+     * @param ?string $active_only 
+     *
+     * @return self
+     */
+    public function setActiveOnly(?string $active_only): self
+    {
+        $this->active_only = $active_only;
+        return $this;
+    }
+    /**
+      * $count 
+      * @var ?string
+      */
+    protected ?string $count = null;
+
+    /**
+     * Gets count
+     *
+     * @return ?string
+     */
+    public function getCount(): ?string
+    {
+        return $this->count;
+    }
+
+    /**
+     * Sets count
+     * @param ?string $count 
+     *
+     * @return self
+     */
+    public function setCount(?string $count): self
+    {
+        $this->count = $count;
+        return $this;
+    }
+    /**
+      * $email_substring Part (substring) of email we are searching for.
+      * @var ?string
+      */
+    protected ?string $email_substring = null;
+
+    /**
+     * Gets email_substring
+     *
+     * @return ?string
+     */
+    public function getEmailSubstring(): ?string
+    {
+        return $this->email_substring;
+    }
+
+    /**
+     * Sets email_substring
+     * @param ?string $email_substring Part (substring) of email we are searching for.
+     *
+     * @return self
+     */
+    public function setEmailSubstring(?string $email_substring): self
+    {
+        $this->email_substring = $email_substring;
+        return $this;
+    }
+    /**
+      * $include_closed_users 
+      * @var ?string
+      */
+    protected ?string $include_closed_users = null;
+
+    /**
+     * Gets include_closed_users
+     *
+     * @return ?string
+     */
+    public function getIncludeClosedUsers(): ?string
+    {
+        return $this->include_closed_users;
+    }
+
+    /**
+     * Sets include_closed_users
+     * @param ?string $include_closed_users 
+     *
+     * @return self
+     */
+    public function setIncludeClosedUsers(?string $include_closed_users): self
+    {
+        $this->include_closed_users = $include_closed_users;
+        return $this;
+    }
+    /**
+      * $permissions 
+      * @var ?string
+      */
+    protected ?string $permissions = null;
+
+    /**
+     * Gets permissions
+     *
+     * @return ?string
+     */
+    public function getPermissions(): ?string
+    {
+        return $this->permissions;
+    }
+
+    /**
+     * Sets permissions
+     * @param ?string $permissions 
+     *
+     * @return self
+     */
+    public function setPermissions(?string $permissions): self
+    {
+        $this->permissions = $permissions;
+        return $this;
+    }
+    /**
+      * $start_position 
+      * @var ?string
+      */
+    protected ?string $start_position = null;
+
+    /**
+     * Gets start_position
+     *
+     * @return ?string
+     */
+    public function getStartPosition(): ?string
+    {
+        return $this->start_position;
+    }
+
+    /**
+     * Sets start_position
+     * @param ?string $start_position 
+     *
+     * @return self
+     */
+    public function setStartPosition(?string $start_position): self
+    {
+        $this->start_position = $start_position;
+        return $this;
+    }
+    /**
+      * $user_name_substring 
+      * @var ?string
+      */
+    protected ?string $user_name_substring = null;
+
+    /**
+     * Gets user_name_substring
+     *
+     * @return ?string
+     */
+    public function getUserNameSubstring(): ?string
+    {
+        return $this->user_name_substring;
+    }
+
+    /**
+     * Sets user_name_substring
+     * @param ?string $user_name_substring 
+     *
+     * @return self
+     */
+    public function setUserNameSubstring(?string $user_name_substring): self
+    {
+        $this->user_name_substring = $user_name_substring;
+        return $this;
+    }
+}
+
+
+/**
  * GetBillingChargesOptions Class Doc Comment
  *
  * @category Class
@@ -710,6 +913,209 @@ class GetPermissionProfileOptions
     public function setInclude(?string $include): self
     {
         $this->include = $include;
+        return $this;
+    }
+}
+
+
+/**
+ * GetPrincipalUserAuthorizationsOptions Class Doc Comment
+ *
+ * @category Class
+ * @package  DocuSign\eSign
+ * @author   Swagger Codegen team <apihelp@docusign.com>
+ * @license  The DocuSign PHP Client SDK is licensed under the MIT License.
+ * @link     https://github.com/swagger-api/swagger-codegen
+ */
+class GetPrincipalUserAuthorizationsOptions
+{
+    /**
+      * $active_only 
+      * @var ?string
+      */
+    protected ?string $active_only = null;
+
+    /**
+     * Gets active_only
+     *
+     * @return ?string
+     */
+    public function getActiveOnly(): ?string
+    {
+        return $this->active_only;
+    }
+
+    /**
+     * Sets active_only
+     * @param ?string $active_only 
+     *
+     * @return self
+     */
+    public function setActiveOnly(?string $active_only): self
+    {
+        $this->active_only = $active_only;
+        return $this;
+    }
+    /**
+      * $count 
+      * @var ?string
+      */
+    protected ?string $count = null;
+
+    /**
+     * Gets count
+     *
+     * @return ?string
+     */
+    public function getCount(): ?string
+    {
+        return $this->count;
+    }
+
+    /**
+     * Sets count
+     * @param ?string $count 
+     *
+     * @return self
+     */
+    public function setCount(?string $count): self
+    {
+        $this->count = $count;
+        return $this;
+    }
+    /**
+      * $email_substring Part (substring) of email we are searching for.
+      * @var ?string
+      */
+    protected ?string $email_substring = null;
+
+    /**
+     * Gets email_substring
+     *
+     * @return ?string
+     */
+    public function getEmailSubstring(): ?string
+    {
+        return $this->email_substring;
+    }
+
+    /**
+     * Sets email_substring
+     * @param ?string $email_substring Part (substring) of email we are searching for.
+     *
+     * @return self
+     */
+    public function setEmailSubstring(?string $email_substring): self
+    {
+        $this->email_substring = $email_substring;
+        return $this;
+    }
+    /**
+      * $include_closed_users 
+      * @var ?string
+      */
+    protected ?string $include_closed_users = null;
+
+    /**
+     * Gets include_closed_users
+     *
+     * @return ?string
+     */
+    public function getIncludeClosedUsers(): ?string
+    {
+        return $this->include_closed_users;
+    }
+
+    /**
+     * Sets include_closed_users
+     * @param ?string $include_closed_users 
+     *
+     * @return self
+     */
+    public function setIncludeClosedUsers(?string $include_closed_users): self
+    {
+        $this->include_closed_users = $include_closed_users;
+        return $this;
+    }
+    /**
+      * $permissions 
+      * @var ?string
+      */
+    protected ?string $permissions = null;
+
+    /**
+     * Gets permissions
+     *
+     * @return ?string
+     */
+    public function getPermissions(): ?string
+    {
+        return $this->permissions;
+    }
+
+    /**
+     * Sets permissions
+     * @param ?string $permissions 
+     *
+     * @return self
+     */
+    public function setPermissions(?string $permissions): self
+    {
+        $this->permissions = $permissions;
+        return $this;
+    }
+    /**
+      * $start_position 
+      * @var ?string
+      */
+    protected ?string $start_position = null;
+
+    /**
+     * Gets start_position
+     *
+     * @return ?string
+     */
+    public function getStartPosition(): ?string
+    {
+        return $this->start_position;
+    }
+
+    /**
+     * Sets start_position
+     * @param ?string $start_position 
+     *
+     * @return self
+     */
+    public function setStartPosition(?string $start_position): self
+    {
+        $this->start_position = $start_position;
+        return $this;
+    }
+    /**
+      * $user_name_substring 
+      * @var ?string
+      */
+    protected ?string $user_name_substring = null;
+
+    /**
+     * Gets user_name_substring
+     *
+     * @return ?string
+     */
+    public function getUserNameSubstring(): ?string
+    {
+        return $this->user_name_substring;
+    }
+
+    /**
+     * Sets user_name_substring
+     * @param ?string $user_name_substring 
+     *
+     * @return self
+     */
+    public function setUserNameSubstring(?string $user_name_substring): self
+    {
+        $this->user_name_substring = $user_name_substring;
         return $this;
     }
 }
@@ -2013,6 +2419,214 @@ class AccountsApi
     }
 
     /**
+     * Operation createUserAuthorization
+     *
+     * Creates the user authorization
+     *
+     * @param ?string $account_id The external account number (int) or account ID Guid.
+     * @param ?string $user_id The user ID of the user being accessed. Generally this is the user ID of the authenticated user, but if the authenticated user is an Admin on the account, this may be another user the Admin user is accessing.
+     * @param \DocuSign\eSign\Model\UserAuthorizationCreateRequest $user_authorization_create_request  (optional)
+     *
+     * @throws ApiException on non-2xx response
+     * @return \DocuSign\eSign\Model\UserAuthorization
+     */
+    public function createUserAuthorization($account_id, $user_id, $user_authorization_create_request = null)
+    {
+        list($response) = $this->createUserAuthorizationWithHttpInfo($account_id, $user_id, $user_authorization_create_request);
+        return $response;
+    }
+
+    /**
+     * Operation createUserAuthorizationWithHttpInfo
+     *
+     * Creates the user authorization
+     *
+     * @param ?string $account_id The external account number (int) or account ID Guid.
+     * @param ?string $user_id The user ID of the user being accessed. Generally this is the user ID of the authenticated user, but if the authenticated user is an Admin on the account, this may be another user the Admin user is accessing.
+     * @param \DocuSign\eSign\Model\UserAuthorizationCreateRequest $user_authorization_create_request  (optional)
+     *
+     * @throws ApiException on non-2xx response
+     * @return array of \DocuSign\eSign\Model\UserAuthorization, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createUserAuthorizationWithHttpInfo($account_id, $user_id, $user_authorization_create_request = null): array
+    {
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $account_id when calling createUserAuthorization');
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $user_id when calling createUserAuthorization');
+        }
+        // parse inputs
+        $resourcePath = "/v2.1/accounts/{accountId}/users/{userId}/authorization";
+        $httpBody = $_tempBody ?? ''; // $_tempBody is the method argument, if present
+        $queryParams = $headerParams = $formParams = [];
+        $headerParams['Accept'] ??= $this->apiClient->selectHeaderAccept(['application/json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
+
+
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "accountId", $account_id);
+        }
+        // path params
+        if ($user_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "userId", $user_id);
+        }
+
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        // body params
+        $_tempBody = null;
+        if (isset($user_authorization_create_request)) {
+            $_tempBody = $user_authorization_create_request;
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires OAuth (access token)
+        if (strlen($this->apiClient->getConfig()->getAccessToken()) !== 0) {
+            $headerParams['Authorization'] = 'Bearer ' . $this->apiClient->getConfig()->getAccessToken();
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'POST',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\DocuSign\eSign\Model\UserAuthorization',
+                '/v2.1/accounts/{accountId}/users/{userId}/authorization'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\DocuSign\eSign\Model\UserAuthorization', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\UserAuthorization', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\ErrorDetails', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createUserAuthorizations
+     *
+     * Creates ot updates user authorizations
+     *
+     * @param ?string $account_id The external account number (int) or account ID Guid.
+     * @param ?string $user_id The user ID of the user being accessed. Generally this is the user ID of the authenticated user, but if the authenticated user is an Admin on the account, this may be another user the Admin user is accessing.
+     * @param \DocuSign\eSign\Model\UserAuthorizationsRequest $user_authorizations_request  (optional)
+     *
+     * @throws ApiException on non-2xx response
+     * @return \DocuSign\eSign\Model\UserAuthorizationsResponse
+     */
+    public function createUserAuthorizations($account_id, $user_id, $user_authorizations_request = null)
+    {
+        list($response) = $this->createUserAuthorizationsWithHttpInfo($account_id, $user_id, $user_authorizations_request);
+        return $response;
+    }
+
+    /**
+     * Operation createUserAuthorizationsWithHttpInfo
+     *
+     * Creates ot updates user authorizations
+     *
+     * @param ?string $account_id The external account number (int) or account ID Guid.
+     * @param ?string $user_id The user ID of the user being accessed. Generally this is the user ID of the authenticated user, but if the authenticated user is an Admin on the account, this may be another user the Admin user is accessing.
+     * @param \DocuSign\eSign\Model\UserAuthorizationsRequest $user_authorizations_request  (optional)
+     *
+     * @throws ApiException on non-2xx response
+     * @return array of \DocuSign\eSign\Model\UserAuthorizationsResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createUserAuthorizationsWithHttpInfo($account_id, $user_id, $user_authorizations_request = null): array
+    {
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $account_id when calling createUserAuthorizations');
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $user_id when calling createUserAuthorizations');
+        }
+        // parse inputs
+        $resourcePath = "/v2.1/accounts/{accountId}/users/{userId}/authorizations";
+        $httpBody = $_tempBody ?? ''; // $_tempBody is the method argument, if present
+        $queryParams = $headerParams = $formParams = [];
+        $headerParams['Accept'] ??= $this->apiClient->selectHeaderAccept(['application/json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
+
+
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "accountId", $account_id);
+        }
+        // path params
+        if ($user_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "userId", $user_id);
+        }
+
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        // body params
+        $_tempBody = null;
+        if (isset($user_authorizations_request)) {
+            $_tempBody = $user_authorizations_request;
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires OAuth (access token)
+        if (strlen($this->apiClient->getConfig()->getAccessToken()) !== 0) {
+            $headerParams['Authorization'] = 'Bearer ' . $this->apiClient->getConfig()->getAccessToken();
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'POST',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\DocuSign\eSign\Model\UserAuthorizationsResponse',
+                '/v2.1/accounts/{accountId}/users/{userId}/authorizations'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\DocuSign\eSign\Model\UserAuthorizationsResponse', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\UserAuthorizationsResponse', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\ErrorDetails', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
      * Operation delete
      *
      * Deletes the specified account.
@@ -2977,6 +3591,213 @@ class AccountsApi
     }
 
     /**
+     * Operation deleteUserAuthorization
+     *
+     * Deletes the user authorization
+     *
+     * @param ?string $account_id The external account number (int) or account ID Guid.
+     * @param ?string $authorization_id 
+     * @param ?string $user_id The user ID of the user being accessed. Generally this is the user ID of the authenticated user, but if the authenticated user is an Admin on the account, this may be another user the Admin user is accessing.
+     *
+     * @throws ApiException on non-2xx response
+     * @return mixed
+     */
+    public function deleteUserAuthorization($account_id, $authorization_id, $user_id)
+    {
+        list($response) = $this->deleteUserAuthorizationWithHttpInfo($account_id, $authorization_id, $user_id);
+        return $response;
+    }
+
+    /**
+     * Operation deleteUserAuthorizationWithHttpInfo
+     *
+     * Deletes the user authorization
+     *
+     * @param ?string $account_id The external account number (int) or account ID Guid.
+     * @param ?string $authorization_id 
+     * @param ?string $user_id The user ID of the user being accessed. Generally this is the user ID of the authenticated user, but if the authenticated user is an Admin on the account, this may be another user the Admin user is accessing.
+     *
+     * @throws ApiException on non-2xx response
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteUserAuthorizationWithHttpInfo($account_id, $authorization_id, $user_id): array
+    {
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $account_id when calling deleteUserAuthorization');
+        }
+        // verify the required parameter 'authorization_id' is set
+        if ($authorization_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $authorization_id when calling deleteUserAuthorization');
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $user_id when calling deleteUserAuthorization');
+        }
+        // parse inputs
+        $resourcePath = "/v2.1/accounts/{accountId}/users/{userId}/authorization/{authorizationId}";
+        $httpBody = $_tempBody ?? ''; // $_tempBody is the method argument, if present
+        $queryParams = $headerParams = $formParams = [];
+        $headerParams['Accept'] ??= $this->apiClient->selectHeaderAccept(['application/json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
+
+
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "accountId", $account_id);
+        }
+        // path params
+        if ($authorization_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "authorizationId", $authorization_id);
+        }
+        // path params
+        if ($user_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "userId", $user_id);
+        }
+
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires OAuth (access token)
+        if (strlen($this->apiClient->getConfig()->getAccessToken()) !== 0) {
+            $headerParams['Authorization'] = 'Bearer ' . $this->apiClient->getConfig()->getAccessToken();
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'DELETE',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                null,
+                '/v2.1/accounts/{accountId}/users/{userId}/authorization/{authorizationId}'
+            );
+
+            return [null, $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 400:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\ErrorDetails', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteUserAuthorizations
+     *
+     * Creates ot updates user authorizations
+     *
+     * @param ?string $account_id The external account number (int) or account ID Guid.
+     * @param ?string $user_id The user ID of the user being accessed. Generally this is the user ID of the authenticated user, but if the authenticated user is an Admin on the account, this may be another user the Admin user is accessing.
+     * @param \DocuSign\eSign\Model\UserAuthorizationsDeleteRequest $user_authorizations_delete_request  (optional)
+     *
+     * @throws ApiException on non-2xx response
+     * @return \DocuSign\eSign\Model\UserAuthorizationsDeleteResponse
+     */
+    public function deleteUserAuthorizations($account_id, $user_id, $user_authorizations_delete_request = null)
+    {
+        list($response) = $this->deleteUserAuthorizationsWithHttpInfo($account_id, $user_id, $user_authorizations_delete_request);
+        return $response;
+    }
+
+    /**
+     * Operation deleteUserAuthorizationsWithHttpInfo
+     *
+     * Creates ot updates user authorizations
+     *
+     * @param ?string $account_id The external account number (int) or account ID Guid.
+     * @param ?string $user_id The user ID of the user being accessed. Generally this is the user ID of the authenticated user, but if the authenticated user is an Admin on the account, this may be another user the Admin user is accessing.
+     * @param \DocuSign\eSign\Model\UserAuthorizationsDeleteRequest $user_authorizations_delete_request  (optional)
+     *
+     * @throws ApiException on non-2xx response
+     * @return array of \DocuSign\eSign\Model\UserAuthorizationsDeleteResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteUserAuthorizationsWithHttpInfo($account_id, $user_id, $user_authorizations_delete_request = null): array
+    {
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $account_id when calling deleteUserAuthorizations');
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $user_id when calling deleteUserAuthorizations');
+        }
+        // parse inputs
+        $resourcePath = "/v2.1/accounts/{accountId}/users/{userId}/authorizations";
+        $httpBody = $_tempBody ?? ''; // $_tempBody is the method argument, if present
+        $queryParams = $headerParams = $formParams = [];
+        $headerParams['Accept'] ??= $this->apiClient->selectHeaderAccept(['application/json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
+
+
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "accountId", $account_id);
+        }
+        // path params
+        if ($user_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "userId", $user_id);
+        }
+
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        // body params
+        $_tempBody = null;
+        if (isset($user_authorizations_delete_request)) {
+            $_tempBody = $user_authorizations_delete_request;
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires OAuth (access token)
+        if (strlen($this->apiClient->getConfig()->getAccessToken()) !== 0) {
+            $headerParams['Authorization'] = 'Bearer ' . $this->apiClient->getConfig()->getAccessToken();
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'DELETE',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\DocuSign\eSign\Model\UserAuthorizationsDeleteResponse',
+                '/v2.1/accounts/{accountId}/users/{userId}/authorizations'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\DocuSign\eSign\Model\UserAuthorizationsDeleteResponse', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\UserAuthorizationsDeleteResponse', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\ErrorDetails', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
      * Operation getAccountIdentityVerification
      *
      * Get the list of identity verification options for an account
@@ -3549,6 +4370,130 @@ class AccountsApi
             switch ($e->getCode()) {
                 case 200:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\TabAccountSettings', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\ErrorDetails', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getAgentUserAuthorizations
+     *
+     * Returns the agent user authorizations
+     *
+     * @param ?string $account_id The external account number (int) or account ID Guid.
+     * @param ?string $user_id The user ID of the user being accessed. Generally this is the user ID of the authenticated user, but if the authenticated user is an Admin on the account, this may be another user the Admin user is accessing.
+     * @param  \DocuSign\eSign\Api\AccountsApi\GetAgentUserAuthorizationsOptions  $options for modifying the behavior of the function. (optional)
+     *
+     * @throws ApiException on non-2xx response
+     * @return \DocuSign\eSign\Model\UserAuthorizations
+     */
+    public function getAgentUserAuthorizations($account_id, $user_id, \DocuSign\eSign\Api\AccountsApi\GetAgentUserAuthorizationsOptions $options = null)
+    {
+        list($response) = $this->getAgentUserAuthorizationsWithHttpInfo($account_id, $user_id, $options);
+        return $response;
+    }
+
+    /**
+     * Operation getAgentUserAuthorizationsWithHttpInfo
+     *
+     * Returns the agent user authorizations
+     *
+     * @param ?string $account_id The external account number (int) or account ID Guid.
+     * @param ?string $user_id The user ID of the user being accessed. Generally this is the user ID of the authenticated user, but if the authenticated user is an Admin on the account, this may be another user the Admin user is accessing.
+     * @param  \DocuSign\eSign\Api\AccountsApi\GetAgentUserAuthorizationsOptions  $options for modifying the behavior of the function. (optional)
+     *
+     * @throws ApiException on non-2xx response
+     * @return array of \DocuSign\eSign\Model\UserAuthorizations, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getAgentUserAuthorizationsWithHttpInfo($account_id, $user_id, \DocuSign\eSign\Api\AccountsApi\GetAgentUserAuthorizationsOptions $options = null): array
+    {
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $account_id when calling getAgentUserAuthorizations');
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $user_id when calling getAgentUserAuthorizations');
+        }
+        // parse inputs
+        $resourcePath = "/v2.1/accounts/{accountId}/users/{userId}/authorizations/agent";
+        $httpBody = $_tempBody ?? ''; // $_tempBody is the method argument, if present
+        $queryParams = $headerParams = $formParams = [];
+        $headerParams['Accept'] ??= $this->apiClient->selectHeaderAccept(['application/json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
+
+        if ($options != null)
+        {
+            // query params
+            if ($options->getActiveOnly() != 'null') {
+                $queryParams['active_only'] = $this->apiClient->getSerializer()->toQueryValue($options->getActiveOnly());
+            }
+            if ($options->getCount() != 'null') {
+                $queryParams['count'] = $this->apiClient->getSerializer()->toQueryValue($options->getCount());
+            }
+            if ($options->getEmailSubstring() != 'null') {
+                $queryParams['email_substring'] = $this->apiClient->getSerializer()->toQueryValue($options->getEmailSubstring());
+            }
+            if ($options->getIncludeClosedUsers() != 'null') {
+                $queryParams['include_closed_users'] = $this->apiClient->getSerializer()->toQueryValue($options->getIncludeClosedUsers());
+            }
+            if ($options->getPermissions() != 'null') {
+                $queryParams['permissions'] = $this->apiClient->getSerializer()->toQueryValue($options->getPermissions());
+            }
+            if ($options->getStartPosition() != 'null') {
+                $queryParams['start_position'] = $this->apiClient->getSerializer()->toQueryValue($options->getStartPosition());
+            }
+            if ($options->getUserNameSubstring() != 'null') {
+                $queryParams['user_name_substring'] = $this->apiClient->getSerializer()->toQueryValue($options->getUserNameSubstring());
+            }
+        }
+
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "accountId", $account_id);
+        }
+        // path params
+        if ($user_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "userId", $user_id);
+        }
+
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires OAuth (access token)
+        if (strlen($this->apiClient->getConfig()->getAccessToken()) !== 0) {
+            $headerParams['Authorization'] = 'Bearer ' . $this->apiClient->getConfig()->getAccessToken();
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'GET',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\DocuSign\eSign\Model\UserAuthorizations',
+                '/v2.1/accounts/{accountId}/users/{userId}/authorizations/agent'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\DocuSign\eSign\Model\UserAuthorizations', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\UserAuthorizations', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
                 case 400:
@@ -4271,7 +5216,7 @@ class AccountsApi
      * Gets the Electronic Record and Signature Disclosure.
      *
      * @param ?string $account_id The external account number (int) or account ID Guid.
-     * @param ?string $lang_code The simple type enumeration the language used in the response. The supported languages, with the language value shown in parenthesis, are:Arabic (ar), Armenian (hy), Bulgarian (bg), Czech (cs), Chinese Simplified (zh_CN), Chinese Traditional (zh_TW), Croatian (hr), Danish (da), Dutch (nl), English US (en), English UK (en_GB), Estonian (et), Farsi (fa), Finnish (fi), French (fr), French Canada (fr_CA), German (de), Greek (el), Hebrew (he), Hindi (hi), Hungarian (hu), Bahasa Indonesia (id), Italian (it), Japanese (ja), Korean (ko), Latvian (lv), Lithuanian (lt), Bahasa Melayu (ms), Norwegian (no), Polish (pl), Portuguese (pt), Portuguese Brazil (pt_BR), Romanian (ro), Russian (ru), Serbian (sr), Slovak (sk), Slovenian (sl), Spanish (es),Spanish Latin America (es_MX), Swedish (sv), Thai (th), Turkish (tr), Ukrainian (uk) and Vietnamese (vi). Additionally, the value can be set to ï¿½browserï¿½ to automatically detect the browser language being used by the viewer and display the disclosure in that language.
+     * @param ?string $lang_code The simple type enumeration the language used in the response. The supported languages, with the language value shown in parenthesis, are:Arabic (ar), Armenian (hy), Armenian (hy), Bulgarian (bg), Czech (cs), Chinese Simplified (zh_CN), Chinese Traditional (zh_TW), Croatian (hr), Danish (da), Dutch (nl), English US (en), English UK (en_GB), Estonian (et), Farsi (fa), Finnish (fi), French (fr), French Canada (fr_CA), German (de), Greek (el), Hebrew (he), Hindi (hi), Hungarian (hu), Bahasa Indonesia (id), Italian (it), Japanese (ja), Korean (ko), Latvian (lv), Lithuanian (lt), Bahasa Melayu (ms), Norwegian (no), Polish (pl), Portuguese (pt), Portuguese Brazil (pt_BR), Romanian (ro), Russian (ru), Serbian (sr), Slovak (sk), Slovenian (sl), Spanish (es),Spanish Latin America (es_MX), Swedish (sv), Thai (th), Turkish (tr), Ukrainian (uk) and Vietnamese (vi). Additionally, the value can be set to ï¿½browserï¿½ to automatically detect the browser language being used by the viewer and display the disclosure in that language.
      *
      * @throws ApiException on non-2xx response
      * @return \DocuSign\eSign\Model\ConsumerDisclosure
@@ -4288,7 +5233,7 @@ class AccountsApi
      * Gets the Electronic Record and Signature Disclosure.
      *
      * @param ?string $account_id The external account number (int) or account ID Guid.
-     * @param ?string $lang_code The simple type enumeration the language used in the response. The supported languages, with the language value shown in parenthesis, are:Arabic (ar), Armenian (hy), Bulgarian (bg), Czech (cs), Chinese Simplified (zh_CN), Chinese Traditional (zh_TW), Croatian (hr), Danish (da), Dutch (nl), English US (en), English UK (en_GB), Estonian (et), Farsi (fa), Finnish (fi), French (fr), French Canada (fr_CA), German (de), Greek (el), Hebrew (he), Hindi (hi), Hungarian (hu), Bahasa Indonesia (id), Italian (it), Japanese (ja), Korean (ko), Latvian (lv), Lithuanian (lt), Bahasa Melayu (ms), Norwegian (no), Polish (pl), Portuguese (pt), Portuguese Brazil (pt_BR), Romanian (ro), Russian (ru), Serbian (sr), Slovak (sk), Slovenian (sl), Spanish (es),Spanish Latin America (es_MX), Swedish (sv), Thai (th), Turkish (tr), Ukrainian (uk) and Vietnamese (vi). Additionally, the value can be set to ï¿½browserï¿½ to automatically detect the browser language being used by the viewer and display the disclosure in that language.
+     * @param ?string $lang_code The simple type enumeration the language used in the response. The supported languages, with the language value shown in parenthesis, are:Arabic (ar), Armenian (hy), Armenian (hy), Bulgarian (bg), Czech (cs), Chinese Simplified (zh_CN), Chinese Traditional (zh_TW), Croatian (hr), Danish (da), Dutch (nl), English US (en), English UK (en_GB), Estonian (et), Farsi (fa), Finnish (fi), French (fr), French Canada (fr_CA), German (de), Greek (el), Hebrew (he), Hindi (hi), Hungarian (hu), Bahasa Indonesia (id), Italian (it), Japanese (ja), Korean (ko), Latvian (lv), Lithuanian (lt), Bahasa Melayu (ms), Norwegian (no), Polish (pl), Portuguese (pt), Portuguese Brazil (pt_BR), Romanian (ro), Russian (ru), Serbian (sr), Slovak (sk), Slovenian (sl), Spanish (es),Spanish Latin America (es_MX), Swedish (sv), Thai (th), Turkish (tr), Ukrainian (uk) and Vietnamese (vi). Additionally, the value can be set to ï¿½browserï¿½ to automatically detect the browser language being used by the viewer and display the disclosure in that language.
      *
      * @throws ApiException on non-2xx response
      * @return array of \DocuSign\eSign\Model\ConsumerDisclosure, HTTP status code, HTTP response headers (array of strings)
@@ -5077,6 +6022,130 @@ class AccountsApi
     }
 
     /**
+     * Operation getPrincipalUserAuthorizations
+     *
+     * Returns the principal user authorizations
+     *
+     * @param ?string $account_id The external account number (int) or account ID Guid.
+     * @param ?string $user_id The user ID of the user being accessed. Generally this is the user ID of the authenticated user, but if the authenticated user is an Admin on the account, this may be another user the Admin user is accessing.
+     * @param  \DocuSign\eSign\Api\AccountsApi\GetPrincipalUserAuthorizationsOptions  $options for modifying the behavior of the function. (optional)
+     *
+     * @throws ApiException on non-2xx response
+     * @return \DocuSign\eSign\Model\UserAuthorizations
+     */
+    public function getPrincipalUserAuthorizations($account_id, $user_id, \DocuSign\eSign\Api\AccountsApi\GetPrincipalUserAuthorizationsOptions $options = null)
+    {
+        list($response) = $this->getPrincipalUserAuthorizationsWithHttpInfo($account_id, $user_id, $options);
+        return $response;
+    }
+
+    /**
+     * Operation getPrincipalUserAuthorizationsWithHttpInfo
+     *
+     * Returns the principal user authorizations
+     *
+     * @param ?string $account_id The external account number (int) or account ID Guid.
+     * @param ?string $user_id The user ID of the user being accessed. Generally this is the user ID of the authenticated user, but if the authenticated user is an Admin on the account, this may be another user the Admin user is accessing.
+     * @param  \DocuSign\eSign\Api\AccountsApi\GetPrincipalUserAuthorizationsOptions  $options for modifying the behavior of the function. (optional)
+     *
+     * @throws ApiException on non-2xx response
+     * @return array of \DocuSign\eSign\Model\UserAuthorizations, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPrincipalUserAuthorizationsWithHttpInfo($account_id, $user_id, \DocuSign\eSign\Api\AccountsApi\GetPrincipalUserAuthorizationsOptions $options = null): array
+    {
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $account_id when calling getPrincipalUserAuthorizations');
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $user_id when calling getPrincipalUserAuthorizations');
+        }
+        // parse inputs
+        $resourcePath = "/v2.1/accounts/{accountId}/users/{userId}/authorizations";
+        $httpBody = $_tempBody ?? ''; // $_tempBody is the method argument, if present
+        $queryParams = $headerParams = $formParams = [];
+        $headerParams['Accept'] ??= $this->apiClient->selectHeaderAccept(['application/json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
+
+        if ($options != null)
+        {
+            // query params
+            if ($options->getActiveOnly() != 'null') {
+                $queryParams['active_only'] = $this->apiClient->getSerializer()->toQueryValue($options->getActiveOnly());
+            }
+            if ($options->getCount() != 'null') {
+                $queryParams['count'] = $this->apiClient->getSerializer()->toQueryValue($options->getCount());
+            }
+            if ($options->getEmailSubstring() != 'null') {
+                $queryParams['email_substring'] = $this->apiClient->getSerializer()->toQueryValue($options->getEmailSubstring());
+            }
+            if ($options->getIncludeClosedUsers() != 'null') {
+                $queryParams['include_closed_users'] = $this->apiClient->getSerializer()->toQueryValue($options->getIncludeClosedUsers());
+            }
+            if ($options->getPermissions() != 'null') {
+                $queryParams['permissions'] = $this->apiClient->getSerializer()->toQueryValue($options->getPermissions());
+            }
+            if ($options->getStartPosition() != 'null') {
+                $queryParams['start_position'] = $this->apiClient->getSerializer()->toQueryValue($options->getStartPosition());
+            }
+            if ($options->getUserNameSubstring() != 'null') {
+                $queryParams['user_name_substring'] = $this->apiClient->getSerializer()->toQueryValue($options->getUserNameSubstring());
+            }
+        }
+
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "accountId", $account_id);
+        }
+        // path params
+        if ($user_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "userId", $user_id);
+        }
+
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires OAuth (access token)
+        if (strlen($this->apiClient->getConfig()->getAccessToken()) !== 0) {
+            $headerParams['Authorization'] = 'Bearer ' . $this->apiClient->getConfig()->getAccessToken();
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'GET',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\DocuSign\eSign\Model\UserAuthorizations',
+                '/v2.1/accounts/{accountId}/users/{userId}/authorizations'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\DocuSign\eSign\Model\UserAuthorizations', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\UserAuthorizations', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\ErrorDetails', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
      * Operation getProvisioning
      *
      * Retrieves the account provisioning information for the account.
@@ -5228,6 +6297,113 @@ class AccountsApi
             switch ($e->getCode()) {
                 case 200:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\SupportedLanguages', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\ErrorDetails', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getUserAuthorization
+     *
+     * Returns the user authorization for a given authorization id
+     *
+     * @param ?string $account_id The external account number (int) or account ID Guid.
+     * @param ?string $authorization_id 
+     * @param ?string $user_id The user ID of the user being accessed. Generally this is the user ID of the authenticated user, but if the authenticated user is an Admin on the account, this may be another user the Admin user is accessing.
+     *
+     * @throws ApiException on non-2xx response
+     * @return \DocuSign\eSign\Model\UserAuthorization
+     */
+    public function getUserAuthorization($account_id, $authorization_id, $user_id)
+    {
+        list($response) = $this->getUserAuthorizationWithHttpInfo($account_id, $authorization_id, $user_id);
+        return $response;
+    }
+
+    /**
+     * Operation getUserAuthorizationWithHttpInfo
+     *
+     * Returns the user authorization for a given authorization id
+     *
+     * @param ?string $account_id The external account number (int) or account ID Guid.
+     * @param ?string $authorization_id 
+     * @param ?string $user_id The user ID of the user being accessed. Generally this is the user ID of the authenticated user, but if the authenticated user is an Admin on the account, this may be another user the Admin user is accessing.
+     *
+     * @throws ApiException on non-2xx response
+     * @return array of \DocuSign\eSign\Model\UserAuthorization, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getUserAuthorizationWithHttpInfo($account_id, $authorization_id, $user_id): array
+    {
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $account_id when calling getUserAuthorization');
+        }
+        // verify the required parameter 'authorization_id' is set
+        if ($authorization_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $authorization_id when calling getUserAuthorization');
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $user_id when calling getUserAuthorization');
+        }
+        // parse inputs
+        $resourcePath = "/v2.1/accounts/{accountId}/users/{userId}/authorization/{authorizationId}";
+        $httpBody = $_tempBody ?? ''; // $_tempBody is the method argument, if present
+        $queryParams = $headerParams = $formParams = [];
+        $headerParams['Accept'] ??= $this->apiClient->selectHeaderAccept(['application/json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
+
+
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "accountId", $account_id);
+        }
+        // path params
+        if ($authorization_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "authorizationId", $authorization_id);
+        }
+        // path params
+        if ($user_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "userId", $user_id);
+        }
+
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires OAuth (access token)
+        if (strlen($this->apiClient->getConfig()->getAccessToken()) !== 0) {
+            $headerParams['Authorization'] = 'Bearer ' . $this->apiClient->getConfig()->getAccessToken();
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'GET',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\DocuSign\eSign\Model\UserAuthorization',
+                '/v2.1/accounts/{accountId}/users/{userId}/authorization/{authorizationId}'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\DocuSign\eSign\Model\UserAuthorization', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\UserAuthorization', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
                 case 400:
@@ -7044,7 +8220,7 @@ class AccountsApi
      * Update Consumer Disclosure.
      *
      * @param ?string $account_id The external account number (int) or account ID Guid.
-     * @param ?string $lang_code The simple type enumeration the language used in the response. The supported languages, with the language value shown in parenthesis, are:Arabic (ar), Armenian (hy), Bulgarian (bg), Czech (cs), Chinese Simplified (zh_CN), Chinese Traditional (zh_TW), Croatian (hr), Danish (da), Dutch (nl), English US (en), English UK (en_GB), Estonian (et), Farsi (fa), Finnish (fi), French (fr), French Canada (fr_CA), German (de), Greek (el), Hebrew (he), Hindi (hi), Hungarian (hu), Bahasa Indonesia (id), Italian (it), Japanese (ja), Korean (ko), Latvian (lv), Lithuanian (lt), Bahasa Melayu (ms), Norwegian (no), Polish (pl), Portuguese (pt), Portuguese Brazil (pt_BR), Romanian (ro), Russian (ru), Serbian (sr), Slovak (sk), Slovenian (sl), Spanish (es),Spanish Latin America (es_MX), Swedish (sv), Thai (th), Turkish (tr), Ukrainian (uk) and Vietnamese (vi). Additionally, the value can be set to ï¿½browserï¿½ to automatically detect the browser language being used by the viewer and display the disclosure in that language.
+     * @param ?string $lang_code The simple type enumeration the language used in the response. The supported languages, with the language value shown in parenthesis, are:Arabic (ar), Armenian (hy), Armenian (hy), Bulgarian (bg), Czech (cs), Chinese Simplified (zh_CN), Chinese Traditional (zh_TW), Croatian (hr), Danish (da), Dutch (nl), English US (en), English UK (en_GB), Estonian (et), Farsi (fa), Finnish (fi), French (fr), French Canada (fr_CA), German (de), Greek (el), Hebrew (he), Hindi (hi), Hungarian (hu), Bahasa Indonesia (id), Italian (it), Japanese (ja), Korean (ko), Latvian (lv), Lithuanian (lt), Bahasa Melayu (ms), Norwegian (no), Polish (pl), Portuguese (pt), Portuguese Brazil (pt_BR), Romanian (ro), Russian (ru), Serbian (sr), Slovak (sk), Slovenian (sl), Spanish (es),Spanish Latin America (es_MX), Swedish (sv), Thai (th), Turkish (tr), Ukrainian (uk) and Vietnamese (vi). Additionally, the value can be set to ï¿½browserï¿½ to automatically detect the browser language being used by the viewer and display the disclosure in that language.
      * @param \DocuSign\eSign\Model\ConsumerDisclosure $consumer_disclosure  (optional)
      * @param  \DocuSign\eSign\Api\AccountsApi\UpdateConsumerDisclosureOptions  $options for modifying the behavior of the function. (optional)
      *
@@ -7063,7 +8239,7 @@ class AccountsApi
      * Update Consumer Disclosure.
      *
      * @param ?string $account_id The external account number (int) or account ID Guid.
-     * @param ?string $lang_code The simple type enumeration the language used in the response. The supported languages, with the language value shown in parenthesis, are:Arabic (ar), Armenian (hy), Bulgarian (bg), Czech (cs), Chinese Simplified (zh_CN), Chinese Traditional (zh_TW), Croatian (hr), Danish (da), Dutch (nl), English US (en), English UK (en_GB), Estonian (et), Farsi (fa), Finnish (fi), French (fr), French Canada (fr_CA), German (de), Greek (el), Hebrew (he), Hindi (hi), Hungarian (hu), Bahasa Indonesia (id), Italian (it), Japanese (ja), Korean (ko), Latvian (lv), Lithuanian (lt), Bahasa Melayu (ms), Norwegian (no), Polish (pl), Portuguese (pt), Portuguese Brazil (pt_BR), Romanian (ro), Russian (ru), Serbian (sr), Slovak (sk), Slovenian (sl), Spanish (es),Spanish Latin America (es_MX), Swedish (sv), Thai (th), Turkish (tr), Ukrainian (uk) and Vietnamese (vi). Additionally, the value can be set to ï¿½browserï¿½ to automatically detect the browser language being used by the viewer and display the disclosure in that language.
+     * @param ?string $lang_code The simple type enumeration the language used in the response. The supported languages, with the language value shown in parenthesis, are:Arabic (ar), Armenian (hy), Armenian (hy), Bulgarian (bg), Czech (cs), Chinese Simplified (zh_CN), Chinese Traditional (zh_TW), Croatian (hr), Danish (da), Dutch (nl), English US (en), English UK (en_GB), Estonian (et), Farsi (fa), Finnish (fi), French (fr), French Canada (fr_CA), German (de), Greek (el), Hebrew (he), Hindi (hi), Hungarian (hu), Bahasa Indonesia (id), Italian (it), Japanese (ja), Korean (ko), Latvian (lv), Lithuanian (lt), Bahasa Melayu (ms), Norwegian (no), Polish (pl), Portuguese (pt), Portuguese Brazil (pt_BR), Romanian (ro), Russian (ru), Serbian (sr), Slovak (sk), Slovenian (sl), Spanish (es),Spanish Latin America (es_MX), Swedish (sv), Thai (th), Turkish (tr), Ukrainian (uk) and Vietnamese (vi). Additionally, the value can be set to ï¿½browserï¿½ to automatically detect the browser language being used by the viewer and display the disclosure in that language.
      * @param \DocuSign\eSign\Model\ConsumerDisclosure $consumer_disclosure  (optional)
      * @param  \DocuSign\eSign\Api\AccountsApi\UpdateConsumerDisclosureOptions  $options for modifying the behavior of the function. (optional)
      *
@@ -8034,6 +9210,120 @@ class AccountsApi
             switch ($e->getCode()) {
                 case 200:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\AccountSharedAccess', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\ErrorDetails', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation updateUserAuthorization
+     *
+     * Updates the user authorization
+     *
+     * @param ?string $account_id The external account number (int) or account ID Guid.
+     * @param ?string $authorization_id 
+     * @param ?string $user_id The user ID of the user being accessed. Generally this is the user ID of the authenticated user, but if the authenticated user is an Admin on the account, this may be another user the Admin user is accessing.
+     * @param \DocuSign\eSign\Model\UserAuthorizationUpdateRequest $user_authorization_update_request  (optional)
+     *
+     * @throws ApiException on non-2xx response
+     * @return \DocuSign\eSign\Model\UserAuthorization
+     */
+    public function updateUserAuthorization($account_id, $authorization_id, $user_id, $user_authorization_update_request = null)
+    {
+        list($response) = $this->updateUserAuthorizationWithHttpInfo($account_id, $authorization_id, $user_id, $user_authorization_update_request);
+        return $response;
+    }
+
+    /**
+     * Operation updateUserAuthorizationWithHttpInfo
+     *
+     * Updates the user authorization
+     *
+     * @param ?string $account_id The external account number (int) or account ID Guid.
+     * @param ?string $authorization_id 
+     * @param ?string $user_id The user ID of the user being accessed. Generally this is the user ID of the authenticated user, but if the authenticated user is an Admin on the account, this may be another user the Admin user is accessing.
+     * @param \DocuSign\eSign\Model\UserAuthorizationUpdateRequest $user_authorization_update_request  (optional)
+     *
+     * @throws ApiException on non-2xx response
+     * @return array of \DocuSign\eSign\Model\UserAuthorization, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function updateUserAuthorizationWithHttpInfo($account_id, $authorization_id, $user_id, $user_authorization_update_request = null): array
+    {
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $account_id when calling updateUserAuthorization');
+        }
+        // verify the required parameter 'authorization_id' is set
+        if ($authorization_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $authorization_id when calling updateUserAuthorization');
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $user_id when calling updateUserAuthorization');
+        }
+        // parse inputs
+        $resourcePath = "/v2.1/accounts/{accountId}/users/{userId}/authorization/{authorizationId}";
+        $httpBody = $_tempBody ?? ''; // $_tempBody is the method argument, if present
+        $queryParams = $headerParams = $formParams = [];
+        $headerParams['Accept'] ??= $this->apiClient->selectHeaderAccept(['application/json']);
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
+
+
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "accountId", $account_id);
+        }
+        // path params
+        if ($authorization_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "authorizationId", $authorization_id);
+        }
+        // path params
+        if ($user_id !== null) {
+            $resourcePath = self::updateResourcePath($resourcePath, "userId", $user_id);
+        }
+
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        // body params
+        $_tempBody = null;
+        if (isset($user_authorization_update_request)) {
+            $_tempBody = $user_authorization_update_request;
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires OAuth (access token)
+        if (strlen($this->apiClient->getConfig()->getAccessToken()) !== 0) {
+            $headerParams['Authorization'] = 'Bearer ' . $this->apiClient->getConfig()->getAccessToken();
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'PUT',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\DocuSign\eSign\Model\UserAuthorization',
+                '/v2.1/accounts/{accountId}/users/{userId}/authorization/{authorizationId}'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\DocuSign\eSign\Model\UserAuthorization', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\DocuSign\eSign\Model\UserAuthorization', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
                 case 400:

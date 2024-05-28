@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Update analytics settings
  */
@@ -30,11 +31,11 @@ class SugarUpgradeUpdateAnalyticsSettings extends UpgradeScript
         }
 
         $configurator = new Configurator();
-        $configurator->config['analytics'] = array(
+        $configurator->config['analytics'] = [
             'enabled' => true,
             'connector' => 'Pendo',
             'id' => '1dd345e9-b638-4bd2-7bfb-147a937d4728',
-        );
+        ];
         $configurator->handleOverride();
         $configurator->clearCache();
         SugarConfig::getInstance()->clearCache();

@@ -63,35 +63,47 @@
     _onSaveSuccess: function(model) {
         this.changed = false;
         this.view.toggleRow(model.id, false);
+
+        const saveRecordCallback = (view) => {
+            let cjFormBatch = view;
+
+            if (!_.isUndefined(cjFormBatch)) {
+                const params = {
+                    record: this.model.get('id'),
+                    module: this.module,
+                };
+
+                cjFormBatch.startBatchingProcess(params);
+            }
+        };
+
+        app.CJBaseHelper.fetchActiveSmartGuideCount(this.context, this.layout, this.module,
+            this.model.get('id'),
+            saveRecordCallback
+        );
+
+    },
+
+    /**
+     * Called when the model is save cycle is complete
+     */
+    onSaveComplete: function() {
+        // remove this model from the list if it has been unlinked
+        if (this.model.get('_unlinked')) {
+            this.collection.remove(this.model, {silent: true});
+            this.collection.trigger('reset');
+            this.view.render();
+        } else {
+            this.setDisabled(false);
+        }
     },
 
     _save: function() {
         var self = this,
             options = {
                 success: _.bind(this._onSaveSuccess, this),
-                error: function(model, error) {
-                    if (error.status === 409) {
-                        app.utils.resolve409Conflict(error, self.model, function(model, isDatabaseData) {
-                            if (model) {
-                                if (isDatabaseData) {
-                                    successCallback(model);
-                                } else {
-                                    self._save();
-                                }
-                            }
-                        });
-                    }
-                },
-                complete: function() {
-                    // remove this model from the list if it has been unlinked
-                    if (self.model.get('_unlinked')) {
-                        self.collection.remove(self.model, { silent: true });
-                        self.collection.trigger('reset');
-                        self.view.render();
-                    } else {
-                        self.setDisabled(false);
-                    }
-                },
+                error: _.bind(this._onSaveError, this),
+                complete: _.bind(this.onSaveComplete, this),
                 lastModified: self.model.get('date_modified'),
                 //Show alerts for this request
                 showAlerts: {
@@ -103,9 +115,61 @@
                 relate: this.model.link ? true : false
             };
 
+        options.params = options.params || {};
+        // set a flag to ensure that model is saved from front-end
+        options.params.allowBatching = true;
+
         options = _.extend({}, options, this.getCustomSaveOptions(options));
 
         this.model.save({}, options);
+    },
+
+    /**
+     * Handles when an error is encountered during a model save
+     *
+     * @param {Object} model the model being saved
+     * @param {Object} error the error details
+     * @private
+     */
+    _onSaveError: function(model, error) {
+        if (error.status === 409) {
+            app.utils.resolve409Conflict(error, self.model, (model, isDatabaseData) => {
+                if (model) {
+                    if (isDatabaseData) {
+                        successCallback(model);
+                    } else {
+                        this._save();
+                    }
+                }
+            });
+        }
+
+        if (error.code === 'license_seats_needed') {
+            // Dismiss the default error
+            app.alert.dismiss('data:sync:error');
+
+            // Display no access error
+            app.alert.show('server-error', {
+                level: 'error',
+                messages: this._getNoAccessErrorMessage(error)
+            });
+        }
+
+        if (!_.isUndefined(this.cjFormBatch)) {
+            this.cjFormBatch.endBatchingProcess(false, false);
+            this.cjFormBatch = undefined;
+        }
+    },
+
+    /**
+     * Returns the message displayed when a 403/no access error is encountered
+     *
+     * @param {Object} error the error from the API
+     * @return {string} the error message to display
+     * @private
+     */
+    _getNoAccessErrorMessage: function(error) {
+        return 'ERR_HTTP_404_TEXT_LINE1';
     },
 
     getCustomSaveOptions: function(options) {
@@ -150,5 +214,15 @@
     },
     cancelClicked: function(evt) {
         this.cancelEdit();
-    }
+    },
+
+    /**
+     * Fetch the parent model if it exists
+     */
+    _fetchParentModel: function() {
+        const ctxParentModel = this.context.get('parentModel');
+        if (!_.isUndefined(ctxParentModel)) {
+            ctxParentModel.fetch();
+        }
+    },
 })

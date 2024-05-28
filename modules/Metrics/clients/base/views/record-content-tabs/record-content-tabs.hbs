@@ -76,7 +76,7 @@
                     {{str label ../this.module}}
                 </h4>
                 {{#each fields}}
-                    <div class="row-fluid">
+                    <div class="row-fluid{{#if ../css_class}} {{../../css_class}}{{/if}}">
                         <div class="{{#if span}}span{{span}}{{/if}} record-cell">
                             {{#if label}}
                                 {{#unless dismiss_label}}

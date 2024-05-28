@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'รายงาน Audit Log',
     'LBL_FIELD_NAME' => 'ฟิลด์',
     'LBL_OLD_NAME' => 'ค่าเดิม',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'อัปเดตเป็น',
     'LBL_BLANK' => '-ว่าง-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ตรวจสอบไทม์ไลน์',
+    'LBL_CREATED' => 'สร้างแล้ว',
+];

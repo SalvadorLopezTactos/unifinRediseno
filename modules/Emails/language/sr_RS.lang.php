@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'FW:',
     'LBL_RE' => 'Re:',
     'LBL_BUTTON_CREATE' => 'Kreiraj',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Izaberite iz email naloga',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Izaberite potpis',
     'LBL_SIGNATURE' => 'Potpis',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Podrazumevani potpis",
-    "LBL_SHOW_MORE_SIGNATURES" => "Još potpisa...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Podrazumevani potpis',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Još potpisa...',
     'LBL_SUBJECT' => 'Naslov:',
     'LBL_TEMPLATE' => 'Šablon',
     'LBL_TEXT_BODY' => 'Tekst',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Vreme slanja',
     'LBL_LIST_TO_ADDR' => 'Za',
     'LBL_LIST_TYPE' => 'Tip',
-    "LBL_SELECTED_RECIPIENTS" => "Izaberite primaoce",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Još primaoca...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Adresar",
+    'LBL_SELECTED_RECIPIENTS' => 'Izaberite primaoce',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Još primaoca...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Adresar',
     'NTC_REMOVE_INVITEE' => 'Da li ste sigurni da želite da uklonite ovog primaoca iz email-a?',
     'WARNING_SETTINGS_NOT_CONF' => 'Podešavanja e-pošte nisu pravilno konfigurisana za slanje e-poruke. SMTP server ' .
         'mora da se konfiguriše u <a href="#bwc/index.php?module=EmailMan&action=config">podešavanjima e-pošte</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Prilozi se mogu izgubiti: otkrivena je neispravna ili neupotrebljiva vrednost za „upload_tmp_dir“. ' .
         'Ispravite to u datoteci php.ini.',
     'LBL_MESSAGE_UID' => 'UID poruke',
-    'LBL_OPEN_DRAFT_ALERT' => 'E-poruka je nacrt. Kliknite na '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'E-poruka je nacrt. Kliknite na ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  da biste izmenili.',
     'LBL_EMAIL_BODY' => 'E-poruka',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za e-poruke',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa e-poruka',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija imejla',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'nisu navedeni primaoci',
@@ -473,4 +474,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'Pošalji e-poruku',
     'LBL_MAILBOX' => 'Dolazni nalog',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Konfigurišite nalog za odlazni nalog e-pošte pomoću <a href="#OutboundEmail">Podešavanja e-pošte</a> da biste slali e-poruke.',
-);
+    'LBL_TOO_SHORT' => 'Ukucajte najmanje {0} znakova...',
+];

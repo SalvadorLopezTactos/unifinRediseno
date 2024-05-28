@@ -9,19 +9,19 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['KBDocuments']['base']['filter']['basic'] = array(
+$viewdefs['KBDocuments']['base']['filter']['basic'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'status' => array(),
-        '$owner' => array(
+    'fields' => [
+        'name' => [],
+        'status' => [],
+        '$owner' => [
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',
-        ),
-        'assigned_user_name' => array(),
-        '$favorite' => array(
+        ],
+        'assigned_user_name' => [],
+        '$favorite' => [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        ),
-    ),
-);
+        ],
+    ],
+];

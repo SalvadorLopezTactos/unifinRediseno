@@ -10,19 +10,18 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Contracts']['base']['filter']['default'] = array (
+$viewdefs['Contracts']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' =>
-    array (
-        'name' => array (),
-        'type' => array (),
-        'account_name' => array ('dbFields' => array (),),
-        'start_date' => array (),
-        'end_date' => array (),
-        'tag' => array(),
-        'status' => array (),
-        'assigned_user_name' => array (),
-        '$owner' => array ('predefined_filter' => true, 'vname' => 'LBL_CURRENT_USER_FILTER',),
-        '$favorite' => array ('predefined_filter' => true, 'vname' => 'LBL_FAVORITES_FILTER',),
-    ),
-);
+    'fields' => [
+        'name' => [],
+        'type' => [],
+        'account_name' => ['dbFields' => [],],
+        'start_date' => [],
+        'end_date' => [],
+        'tag' => [],
+        'status' => [],
+        'assigned_user_name' => [],
+        '$owner' => ['predefined_filter' => true, 'vname' => 'LBL_CURRENT_USER_FILTER',],
+        '$favorite' => ['predefined_filter' => true, 'vname' => 'LBL_FAVORITES_FILTER',],
+    ],
+];

@@ -15,16 +15,16 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-$viewdefs['Products']['mobile']['view']['detail'] = array(
-    'templateMeta' => array(
+$viewdefs['Products']['mobile']['view']['detail'] = [
+    'templateMeta' => [
         'maxColumns' => '1',
-        'widths' => array(
-            array('label' => '10', 'field' => '30'),
-        ),
-    ),
-    'panels' => array(
-        array(
-            'fields' => array(
+        'widths' => [
+            ['label' => '10', 'field' => '30'],
+        ],
+    ],
+    'panels' => [
+        [
+            'fields' => [
                 'name',
                 'status',
                 'account_name',
@@ -34,7 +34,7 @@ $viewdefs['Products']['mobile']['view']['detail'] = array(
                 'tag',
                 'assigned_user_name',
                 'team_name',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

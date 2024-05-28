@@ -183,10 +183,13 @@
     _getAlertTemplate: function(options, templateOptions) {
         options = options || {};
         var alert = this._getAlertProps(options);
+        var indicatorClass = templateOptions && templateOptions.indicatorClass ?
+                templateOptions.indicatorClass : 'indicator';
         var template = alert.templateName ? app.template.getView(alert.templateName) : app.template.empty;
         var seed = _.extend({}, {
             alertClass: alert.cssClass,
             alertIcon: alert.icon,
+            indicatorClass: indicatorClass,
             title: this.getTranslatedLabels(alert.title),
             messages: this.getTranslatedLabels(options.messages),
             closeable: _.isUndefined(options.closeable) || options.closeable,
@@ -238,7 +241,7 @@
                     title: title || 'LBL_ALERT_TITLE_WARNING',
                     templateName: defaultTemplateName,
                     cssClass: 'alert-warning',
-                    icon: 'sicon-warning-lg'
+                    icon: 'sicon-warning-line-lg'
                 };
             case this.LEVEL.INFO:
                 return {
@@ -259,7 +262,7 @@
                     title: title || 'LBL_ALERT_TITLE_WARNING',
                     templateName: this.name + '.confirmation',
                     cssClass: 'alert-warning',
-                    icon: 'sicon-warning-lg'
+                    icon: 'sicon-warning-line-lg'
                 };
             default:
                 return {

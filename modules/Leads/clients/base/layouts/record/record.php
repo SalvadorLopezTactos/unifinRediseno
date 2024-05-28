@@ -9,140 +9,140 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Leads']['base']['layout']['record'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['Leads']['base']['layout']['record'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'css_class' => 'main-pane overflow-scroll span8',
+                            'components' => [
+                                [
                                     'view' => 'record',
                                     'primary' => true,
-                                ),
-                                array(
+                                ],
+                                [
                                     'layout' => 'extra-info',
-                                ),
-                                array(
-                                    'layout' => array(
+                                ],
+                                [
+                                    'layout' => [
                                         'type' => 'filterpanel',
                                         'css_class' => 'subpanels-container',
-                                        'last_state' => array(
+                                        'last_state' => [
                                             'id' => 'record-filterpanel',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'toggle-view' => 'subpanels',
-                                            ),
-                                        ),
+                                            ],
+                                        ],
                                         'refresh_button' => true,
-                                        'availableToggles' => array(
-                                            array(
+                                        'availableToggles' => [
+                                            [
                                                 'name' => 'subpanels',
                                                 'icon' => 'sicon-list-view',
                                                 'label' => 'LBL_DATA_VIEW',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'name' => 'list',
                                                 'icon' => 'sicon-list-view',
                                                 'label' => 'LBL_LISTVIEW',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'name' => 'activitystream',
                                                 'icon' => 'sicon-clock',
                                                 'label' => 'LBL_ACTIVITY_STREAM',
-                                            ),
-                                        ),
-                                        'components' => array(
-                                            array(
+                                            ],
+                                        ],
+                                        'components' => [
+                                            [
                                                 'layout' => 'filter',
-                                                'xmeta' => array(
+                                                'xmeta' => [
                                                     'layoutType' => '',
-                                                ),
+                                                ],
                                                 'loadModule' => 'Filters',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'filter-rows',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'filter-actions',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'layout' => 'activitystream',
-                                                'context' => array(
+                                                'context' => [
                                                     'module' => 'Activities',
-                                                ),
-                                            ),
-                                            array(
+                                                ],
+                                            ],
+                                            [
                                                 'layout' => 'subpanels',
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'tabbed-layout',
                             'name' => 'dashboard-pane',
                             'label' => 'LBL_DASHBOARD',
                             'css_class' => 'dashboard-pane',
                             'notabs' => true,
-                            'components' => array(
-                                array(
-                                    'layout' => array(
+                            'components' => [
+                                [
+                                    'layout' => [
                                         'type' => 'base',
                                         'label' => 'LBL_DASHBOARD',
                                         'css_class' => 'dashboard-pane',
-                                        'components' => array(
-                                            array(
-                                                'layout' => array(
+                                        'components' => [
+                                            [
+                                                'layout' => [
                                                     'label' => 'LBL_DASHBOARD',
                                                     'type' => 'dashboard',
-                                                    'last_state' => array(
+                                                    'last_state' => [
                                                         'id' => 'last-visit',
-                                                    ),
-                                                ),
-                                                'context' => array(
+                                                    ],
+                                                ],
+                                                'context' => [
                                                     'forceNew' => true,
                                                     'module' => 'Home',
-                                                ),
+                                                ],
                                                 'loadModule' => 'Dashboards',
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'tabbed-layout',
                             'name' => 'preview-pane',
                             'label' => 'LBL_PREVIEW',
                             'css_class' => 'preview-pane',
                             'notabs' => true,
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'preview',
                                     'xmeta' => [
                                         'editable' => true,
                                     ],
-                                ),
-                                array(
+                                ],
+                                [
                                     'layout' => 'preview',
                                     'label' => 'Hint-Tab',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

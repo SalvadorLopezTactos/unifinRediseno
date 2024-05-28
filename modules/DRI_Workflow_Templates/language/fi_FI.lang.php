@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Aktiivinen',
     'LBL_ASSIGNEE_RULE' => 'Toimeksisaajan sääntö',
     'LBL_TARGET_ASSIGNEE' => 'Kohde toimeksisaaja',
+    'LBL_STAGE_NUMBERS' => 'Vaiheiden numerointi',
     'LBL_EXPORT_BUTTON_LABEL' => 'Vie',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Tuo',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Luo tai päivitä uusi Älykäs opas mallitietue automaattisesti tuomalla *.json-tiedosto tiedostojärjestelmästäsi.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Jos tämä valittuna, jos kohde toimeksisaaja = vanhempi +toimeksisaaja, kun "Alloikoitu" -käyttäjää muutetaan vanhemmassa, "Allokoidut" -käyttäjät muuttuvat automaattisesti myös Älykkäissä oppaissa, vaiheissa ja aktiviteeteissa. Huomaa, että toimeksisaajan asetukset aktiviteettimalleissa ovat etusijalla Älykkääseen opasmalliin nähden',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Milloin käyttäjä tulisi allokoida aktiviteetteille',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Kenelle aktiviteetit tulisi allokoida',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Tämän valitsimen avulla voit näyttää tai piilottaa automaattisen vaihenumeroinnin.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Älykäs opas/vaihe/aktiviteettimalli',
 ];

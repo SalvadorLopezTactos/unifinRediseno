@@ -16,7 +16,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 global $current_user;
 
 if (!$current_user->isAdminForModule('Users')) {
-    sugar_die("Unauthorized access to administration.");
+    sugar_die('Unauthorized access to administration.');
 }
 
 $request = InputValidation::getService();
@@ -25,7 +25,7 @@ $record = $request->getValidInputRequest('record', 'Assert\Guid');
 $user_id = $request->getValidInputRequest('user_id', 'Assert\Guid');
 $records = $request->getValidInputRequest(
     'records',
-    array('Assert\All' => array('constraints' => 'Assert\Guid'))
+    ['Assert\All' => ['constraints' => 'Assert\Guid']]
 );
 
 if ((empty($record) && empty($records)) || empty($user_id)) {
@@ -36,7 +36,7 @@ if ((empty($record) && empty($records)) || empty($user_id)) {
     $focus = BeanFactory::newBean('Teams');
 
     if (!is_array($records)) {
-        $records = array();
+        $records = [];
     }
 
     if (!empty($record)) {
@@ -49,10 +49,10 @@ if ((empty($record) && empty($records)) || empty($user_id)) {
     }
 }
 
-$query = http_build_query(array(
+$query = http_build_query([
     'module' => $_REQUEST['return_module'],
     'action' => $_REQUEST['return_action'],
     'record' => $_REQUEST['return_id'],
-));
+]);
 
 header('Location: index.php?' . $query);

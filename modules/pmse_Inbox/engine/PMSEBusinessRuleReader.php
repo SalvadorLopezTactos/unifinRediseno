@@ -31,20 +31,20 @@ class PMSEBusinessRuleReader
      * additional variables necessary
      * @var array
      */
-    public $appDataVar = array();
+    public $appDataVar = [];
 
     /**
      * global variables
      * @var array
      */
-    public $globalVar = array();
+    public $globalVar = [];
 
     /**
      * Object of class PMSEExpressionEvaluator
      * @var object
      */
     public $evaluator;
-    
+
     /**
      * Object of class PMSEBusinessRuleConversor
      * @var object
@@ -56,8 +56,8 @@ class PMSEBusinessRuleReader
      */
     public function __construct()
     {
-        $this->appDataVar = array();
-        $this->globalVar = array();
+        $this->appDataVar = [];
+        $this->globalVar = [];
         $this->businessRuleConversor = ProcessManager\Factory::getPMSEObject('PMSEBusinessRuleConversor');
         $this->evaluator = ProcessManager\Factory::getPMSEObject('PMSEEvaluator');
     }
@@ -67,7 +67,7 @@ class PMSEBusinessRuleReader
      * @param array $appData
      * @param array $global
      */
-    public function init($appData = array(), $global = array())
+    public function init($appData = [], $global = [])
     {
         $this->appDataVar = $appData;
         $this->globalVar = $global;
@@ -122,8 +122,8 @@ class PMSEBusinessRuleReader
         $res = '';
         $evaluatedBean = BeanFactory::getBean($sugarModule, $this->appDataVar['id']);
         $ruleSet = json_decode($ruleSetJSON);
-        $appData = array();
-        $successReturn = "";
+        $appData = [];
+        $successReturn = '';
         $this->businessRuleConversor->setBaseModule($ruleSet->base_module);
         if (isset($ruleSet->ruleset) && safeIsIterable($ruleSet->ruleset)) {
             foreach ($ruleSet->ruleset as $rule) {
@@ -140,11 +140,11 @@ class PMSEBusinessRuleReader
                 }
             }
         }
-        if (is_countable($appData) ? count($appData) : 0) {
-            $res .= $this->businessRuleConversor->processConditionResult(array(), $appData);
+        if (safeCount($appData)) {
+            $res .= $this->businessRuleConversor->processConditionResult([], $appData);
         }
         $log = "The following condition: \n" . $transformedCondition . " has returned: \n" . json_encode($successReturn);
-        $resultArray = array('log' => $log, 'return' => $successReturn, 'result' => $res, 'newAppData' => $appData);
+        $resultArray = ['log' => $log, 'return' => $successReturn, 'result' => $res, 'newAppData' => $appData];
         return $resultArray;
     }
 }

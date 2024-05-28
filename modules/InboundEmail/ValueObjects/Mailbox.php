@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -72,6 +73,6 @@ final class Mailbox
 
     public function getSecurityProtocol(): string
     {
-        return in_array('/ssl', $this->flags) ? 'ssl': 'none';
+        return in_array('/ssl', $this->flags) ? 'ssl' : 'none';
     }
 }

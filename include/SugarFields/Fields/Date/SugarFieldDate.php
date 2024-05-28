@@ -12,8 +12,8 @@
  */
 
 
-class SugarFieldDate extends SugarFieldDatetime {
-
+class SugarFieldDate extends SugarFieldDatetime
+{
     /**
      * Handles export field sanitizing for field type
      *
@@ -24,13 +24,13 @@ class SugarFieldDate extends SugarFieldDatetime {
      *
      * @return string sanitized value
      */
-    public function exportSanitize($value, $vardef, $focus, $row=array())
+    public function exportSanitize($value, $vardef, $focus, $row = [])
     {
         $timedate = TimeDate::getInstance();
         $db = DBManagerFactory::getInstance();
         //If it's in ISO format, convert it to db format
         if (preg_match('/(\d{4})\-?(\d{2})\-?(\d{2})T(\d{2}):?(\d{2}):?(\d{2})\.?\d*([Z+-]?)(\d{0,2}):?(\d{0,2})/i', (string)$value)) {
-           $value = $timedate->fromIso($value)->asDbDate(false);
+            $value = $timedate->fromIso($value)->asDbDate(false);
         }
 
         return $timedate->to_display_date($db->fromConvert($value, 'date'), false);
@@ -41,6 +41,15 @@ class SugarFieldDate extends SugarFieldDatetime {
      */
     public function fixForFilter(&$value, $columnName, SugarBean $bean, SugarQuery $q, SugarQuery_Builder_Where $where, $op)
     {
+        if (in_array($op, $this->amountDaysOperators)) {
+            $this->fixForAmountDaysFilter($value, $columnName, $bean, $where, $op);
+            return false;
+        }
+
+        if ('$dateRange' === $op && in_array($value, $this->largeRangeOperators)) {
+            $this->fixForLargeRangeFilter($value, $columnName, $bean, $where, $op);
+            return false;
+        }
         return true;
     }
 
@@ -69,6 +78,9 @@ class SugarFieldDate extends SugarFieldDatetime {
                 $settings->dateformat,
                 $value
             );
+            if ($date === false) {
+                return false;
+            }
             if (intval($date->year) < 100) {
                 return false;
             }

@@ -21,8 +21,8 @@ require_once __DIR__ . '/Scanner.php';
 class HealthCheckScannerWeb extends HealthCheckScanner
 {
     /**
-     * @see HealthCheckScanner::run()
      * @return array
+     * @see HealthCheckScanner::run()
      */
     public function scan(): array
     {

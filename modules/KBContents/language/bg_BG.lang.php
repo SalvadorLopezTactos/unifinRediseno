@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Електронно табло със списък на Базата от знания',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Електронно табло със запис на Базата от знания',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на база знания',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Хронология на базата от знания',
 
     'LBL_MODULE_NAME' => 'База от знания',
     'LBL_MODULE_NAME_SINGULAR' => 'Материал',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Задай стойността като Основна',
     'LBL_ITEM_REMOVE' => 'Премахни записите',
     'LBL_ITEM_ADD' => 'Добави записи',
-    'LBL_MODULE_ID'=> 'Съдържание на Базата от знания',
+    'LBL_MODULE_ID' => 'Съдържание на Базата от знания',
     'LBL_DOCUMENT_REVISION_ID' => 'Идентификатор на Ревизията',
     'LBL_DOCUMENT_REVISION' => 'Ревизия',
     'LBL_NUMBER' => 'Номер',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'Още {{module}}...',
     'LBL_LIST_FORM_TITLE' => 'Списък на база от знания',
     'LBL_SEARCH_FORM_TITLE' => 'Търсене в Базата от знания',
-);
+];

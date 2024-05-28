@@ -12,6 +12,8 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Queue;
 
+use BeanFactory;
+use Email;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container as SugarContainer;
 use Sugarcrm\Sugarcrm\Dbal\Connection;
 use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Document;
@@ -99,7 +101,7 @@ class QueueManager
      * In memory queue for processed queue record ids
      * @var array
      */
-    protected $deleteFromQueue = array();
+    protected $deleteFromQueue = [];
 
     /**
      * Ctor
@@ -108,16 +110,16 @@ class QueueManager
     public function __construct(array $config, Container $container, \DBManager $db = null)
     {
         if (!empty($config['max_bulk_query_threshold'])) {
-            $this->maxBulkQueryThreshold = (int) $config['max_bulk_query_threshold'];
+            $this->maxBulkQueryThreshold = (int)$config['max_bulk_query_threshold'];
         }
         if (!empty($config['max_bulk_delete_threshold'])) {
-            $this->maxBulkDeleteThreshold = (int) $config['max_bulk_delete_threshold'];
+            $this->maxBulkDeleteThreshold = (int)$config['max_bulk_delete_threshold'];
         }
         if (!empty($config['postpone_job_time'])) {
-            $this->maxBulkDeleteThreshold = (int) $config['postpone_job_time'];
+            $this->maxBulkDeleteThreshold = (int)$config['postpone_job_time'];
         }
         if (!empty($config['num_of_records_in_batch'])) {
-            $this->numOfRecordsToRetrieveFromDBInBatch = (int) $config['num_of_records_in_batch'];
+            $this->numOfRecordsToRetrieveFromDBInBatch = (int)$config['num_of_records_in_batch'];
         }
 
         $this->container = $container;
@@ -129,7 +131,7 @@ class QueueManager
      * @param int $bucketId
      * @return bool
      */
-    private function isDefaultBucketId(int $bucketId) : bool
+    private function isDefaultBucketId(int $bucketId): bool
     {
         return $bucketId === self::DEFAULT_BUCKET_ID;
     }
@@ -217,11 +219,11 @@ class QueueManager
             $scheduler->date_time_start = '2001-01-01 00:00:01';
             $scheduler->date_time_end = null;
             $scheduler->catch_up = '0';
-            $this->getLogger()->info("Create elastic queue scheduler");
+            $this->getLogger()->info('Create elastic queue scheduler');
         } else {
             $scheduler = array_shift($result);
             $scheduler->status = 'Active';
-            $this->getLogger()->info("Elasticsearch queue scheduler already exists, activating");
+            $this->getLogger()->info('Elasticsearch queue scheduler already exists, activating');
         }
 
         $scheduler->save();
@@ -335,7 +337,7 @@ class QueueManager
      * everything is cleared from the queue table - use with caution !
      * @param array $modules List of modules to clear
      */
-    public function resetQueue(array $modules = array())
+    public function resetQueue(array $modules = [])
     {
         if (empty($modules)) {
             // TRUNCATE should be the first query in the transaction in DB2
@@ -358,7 +360,7 @@ class QueueManager
      */
     public function cleanupQueue()
     {
-        $remove = array();
+        $remove = [];
         $sql = sprintf('SELECT DISTINCT bean_module FROM %s', self::FTS_QUEUE);
         $result = $this->db->query($sql);
         while ($row = $this->db->fetchByAssoc($result)) {
@@ -423,11 +425,11 @@ class QueueManager
      * @param int $bucketId
      * @return array
      */
-    public function consumeModuleFromQueue(string $module, int $bucketId = self::DEFAULT_BUCKET_ID) : array
+    public function consumeModuleFromQueue(string $module, int $bucketId = self::DEFAULT_BUCKET_ID): array
     {
         // make sure the module is fts enabled
         if (!$this->container->metaDataHelper->isModuleEnabled($module)) {
-            return array(false, 0, 0, "Module $module not enabled");
+            return [false, 0, 0, "Module $module not enabled"];
         }
 
         $start = time();
@@ -446,7 +448,7 @@ class QueueManager
                 $row['erased_fields'] = null;
             }
             $bean = $this->processQueryRow($module, $row);
-            if (isset($ftsIds[$bean->id])) {
+            if (is_scalar($bean->id) && isset($ftsIds[$bean->id])) {
                 $this->batchDeleteFromQueue($ftsIds[$bean->id], $module);
             }
             $ftsIds[$bean->id] = $row['fts_id'];
@@ -474,7 +476,7 @@ class QueueManager
         }
 
         $duration = time() - $start;
-        return array($success, $processed, $duration, $errorMsg);
+        return [$success, $processed, $duration, $errorMsg];
     }
 
     /**
@@ -482,9 +484,9 @@ class QueueManager
      * @param int $bucketId
      * @return array
      */
-    public function getQueuedModules(int $bucketId = self::DEFAULT_BUCKET_ID) : array
+    public function getQueuedModules(int $bucketId = self::DEFAULT_BUCKET_ID): array
     {
-        $modules = array();
+        $modules = [];
         $sql = sprintf(
             'SELECT DISTINCT bean_module FROM %s WHERE processed = %s',
             self::FTS_QUEUE,
@@ -497,7 +499,7 @@ class QueueManager
                 $modules[] = $module;
             } else {
                 // remove module from queue as there is no use to have them
-                $this->resetQueue(array($module));
+                $this->resetQueue([$module]);
             }
         }
         return $modules;
@@ -511,7 +513,7 @@ class QueueManager
     public function getQueueCountModule(string $module, int $bucketId = self::DEFAULT_BUCKET_ID)
     {
         $sql = sprintf(
-            "SELECT count(bean_id) FROM %s WHERE processed = %s AND bean_module = %s",
+            'SELECT count(bean_id) FROM %s WHERE processed = %s AND bean_module = %s',
             self::FTS_QUEUE,
             $this->isDefaultBucketId($bucketId) ? self::PROCESSED_NEW : $bucketId,
             $this->db->quoted($module)
@@ -559,7 +561,7 @@ class QueueManager
      */
     protected function getNewBean($module)
     {
-        return \BeanFactory::newBean($module);
+        return BeanFactory::newBean($module);
     }
 
     /**
@@ -628,10 +630,10 @@ class QueueManager
                 ->equals(self::FTS_QUEUE . '.processed', $bucketId);
         }
 
-        $additionalFields = array(
-            array(self::FTS_QUEUE . '.id', 'fts_id'),
-            array(self::FTS_QUEUE . '.processed', 'fts_processed'),
-        );
+        $additionalFields = [
+            [self::FTS_QUEUE . '.id', 'fts_id'],
+            [self::FTS_QUEUE . '.processed', 'fts_processed'],
+        ];
 
         $sq->select($additionalFields);
 
@@ -645,9 +647,9 @@ class QueueManager
      * @param array $ftsIds
      * @return int
      */
-    protected function batchRetrieveRelatedDataAndIndexBeans(string $module, array $beans, array $ftsIds) : int
+    protected function batchRetrieveRelatedDataAndIndexBeans(string $module, array $beans, array $ftsIds): int
     {
-        $count = count($beans);
+        $count = safeCount($beans);
         $start = 0;
         $processed = 0;
 
@@ -676,7 +678,7 @@ class QueueManager
 
     /**
      * batch retrieve related data for beans
-     * @param string $module, module name
+     * @param string $module , module name
      * @param array $beans
      * @return array
      */
@@ -703,18 +705,18 @@ class QueueManager
      * @param array $beans
      * @return array
      */
-    protected function batchUpdateTeamSetIds(string $module, array $beans) : array
+    protected function batchUpdateTeamSetIds(string $module, array $beans): array
     {
         $globalTeamSetId = '1';
         $beanTeamSetIds = array_column($beans, 'team_set_id', 'id');
         $teamSetIdsToCheck = array_diff(array_values($beanTeamSetIds), array_keys(static::$fetchedTeamSetIds));
 
         if (!empty($teamSetIdsToCheck)) {
-            $query = "SELECT team_set_id
+            $query = 'SELECT team_set_id
             FROM team_sets_teams
             WHERE team_id = ?
                AND team_set_id IN (?)
-               AND deleted = 0";
+               AND deleted = 0';
 
             $teamSetIdsWithGlobalTeams = $this->db->getConnection()->executeQuery(
                 $query,
@@ -747,7 +749,7 @@ class QueueManager
     protected function batchRetrieveEmails(string $module, array $beans)
     {
         // do secondary query to get emails
-        $seed = \BeanFactory::newBean($module);
+        $seed = BeanFactory::newBean($module);
         $fieldHandler = \SugarFieldHandler::getSugarField('email');
         $fieldHandler->runSecondaryQuery('email', $seed, $beans);
         return $beans;
@@ -764,11 +766,11 @@ class QueueManager
         $ids = array_keys($beans);
         // do secondary query to retrieve tags
         if (!empty($ids)) {
-            $query = "SELECT tag_id, bean_id
+            $query = 'SELECT tag_id, bean_id
             FROM tag_bean_rel
             WHERE bean_module = ?
                 AND bean_id IN (?)
-                AND deleted = 0";
+                AND deleted = 0';
             $stmt = $this->db->getConnection()->executeQuery(
                 $query,
                 [$module, $ids],
@@ -777,7 +779,9 @@ class QueueManager
 
             while ($row = $stmt->fetchAssociative()) {
                 $id = $row['bean_id'];
-                $beans[$id]->fetchedFtsData['tags'][] = $row['tag_id'];
+                if (array_key_exists($id, $beans) && $beans[$id] instanceof \SugarBean) {
+                    $beans[$id]->fetchedFtsData['tags'][] = $row['tag_id'];
+                }
             }
         }
         return $beans;
@@ -794,11 +798,11 @@ class QueueManager
         $ids = array_keys($beans);
 
         if (!empty($ids)) {
-            $query = "SELECT assigned_user_id, record_id
+            $query = 'SELECT assigned_user_id, record_id
             FROM sugarfavorites 
             WHERE module = ?  
                AND record_id IN (?) 
-               AND deleted = 0";
+               AND deleted = 0';
 
             $stmt = $this->db->getConnection()->executeQuery(
                 $query,
@@ -808,7 +812,9 @@ class QueueManager
 
             while ($row = $stmt->fetchAssociative()) {
                 $id = $row['record_id'];
-                $beans[$id]->fetchedFtsData['user_favorites'][] = $row['assigned_user_id'];
+                if (array_key_exists($id, $beans) && $beans[$id] instanceof \SugarBean) {
+                    $beans[$id]->fetchedFtsData['user_favorites'][] = $row['assigned_user_id'];
+                }
             }
         }
         return $beans;
@@ -826,25 +832,32 @@ class QueueManager
             return $beans;
         }
 
+        /** @var Email $emailBean */
+        $emailBean = BeanFactory::newBean($module);
+
         $ids = array_keys($beans);
 
         if (!empty($ids)) {
-            $query = "SELECT email_id, from_addr, reply_to_addr, to_addrs, cc_addrs, bcc_addrs, " .
-                "description, description_html, raw_source " .
-                " FROM emails_text WHERE email_id IN (?)";
+            $query = 'SELECT email_id, from_addr, reply_to_addr, to_addrs, cc_addrs, bcc_addrs, ' .
+                'description, description_html, raw_source ' .
+                ' FROM emails_text WHERE email_id IN (?)';
             $conn = $this->db->getConnection();
             $stmt = $conn->executeQuery($query, [$ids], [Connection::PARAM_STR_ARRAY]);
 
             while ($row = $stmt->fetchAssociative()) {
                 $id = $row['email_id'];
-                $beans[$id]->description = $row['description'];
-                $beans[$id]->description_html = $row['description_html'];
-                $beans[$id]->raw_source = $row['raw_source'];
-                $beans[$id]->from_addr_name = $row['from_addr'];
-                $beans[$id]->reply_to_addr = $row['reply_to_addr'];
-                $beans[$id]->to_addrs_names = $row['to_addrs'];
-                $beans[$id]->cc_addrs_names = $row['cc_addrs'];
-                $beans[$id]->bcc_addrs_names = $row['bcc_addrs'];
+                if (array_key_exists($id, $beans) && $beans[$id] instanceof \SugarBean) {
+                    $beans[$id]->description = $row['description'];
+                    $beans[$id]->description_html = $row['description_html'];
+                    $beans[$id]->raw_source = $row['raw_source'];
+                    $beans[$id]->from_addr_name = $row['from_addr'];
+                    $beans[$id]->reply_to_addr = $row['reply_to_addr'];
+                    $beans[$id]->to_addrs_names = $row['to_addrs'];
+                    $beans[$id]->cc_addrs_names = $row['cc_addrs'];
+                    $beans[$id]->bcc_addrs_names = $row['bcc_addrs'];
+
+                    $emailBean->ungzipContentFields($beans[$id]);
+                }
             }
         }
         return $beans;
@@ -859,7 +872,7 @@ class QueueManager
     protected function batchDeleteFromQueue($id, $module = null)
     {
         $this->deleteFromQueue[] = $id;
-        if (count($this->deleteFromQueue) >= $this->maxBulkDeleteThreshold) {
+        if (safeCount($this->deleteFromQueue) >= $this->maxBulkDeleteThreshold) {
             $this->flushDeleteFromQueue($module);
         }
     }
@@ -871,7 +884,7 @@ class QueueManager
     protected function flushDeleteFromQueue($module = null)
     {
         $moduleClause = $module ? sprintf('bean_module = %s AND', $this->db->quoted($module)) : '';
-        $idClause = implode(',', array_map(array($this->db, 'quoted'), $this->deleteFromQueue));
+        $idClause = implode(',', array_map([$this->db, 'quoted'], $this->deleteFromQueue));
         $sql = sprintf(
             'DELETE FROM %s WHERE %s id IN (%s)',
             self::FTS_QUEUE,
@@ -880,7 +893,7 @@ class QueueManager
         );
         $this->db->query($sql);
         $this->db->commit();
-        $this->deleteFromQueue = array();
+        $this->deleteFromQueue = [];
     }
 
     /**
@@ -903,7 +916,7 @@ class QueueManager
      * @param int $bucketId
      * @return int, number of records have been processed
      */
-    public function consumeQueue(int $bucketId = self::DEFAULT_BUCKET_ID) : int
+    public function consumeQueue(int $bucketId = self::DEFAULT_BUCKET_ID): int
     {
         $total = 0;
         foreach ($this->getQueuedModules($bucketId) as $module) {
@@ -939,7 +952,7 @@ class QueueManager
      * loop through Queue to process all data in the queue
      * @return int
      */
-    public function consumeAllDataFromQueue(int $bucketId) : int
+    public function consumeAllDataFromQueue(int $bucketId): int
     {
         $total = 0;
         while ($this->hasMoreRecords($bucketId)) {
@@ -1000,7 +1013,7 @@ class QueueManager
      * static method, to check if the instance has large team sets
      * @return bool
      */
-    public static function isLargeTeamsets() : bool
+    public static function isLargeTeamsets(): bool
     {
         return SugarContainer::getInstance()
             ->get(\SugarConfig::class)
@@ -1011,7 +1024,7 @@ class QueueManager
      * record memory usage: log the currant used memory and memory usage delta
      * @param string $msg
      */
-    protected function recordMemoryUsge(string $msg) : void
+    protected function recordMemoryUsge(string $msg): void
     {
         $currntUsage = 0;
         $memoryDelta = $this->stopRecord($currntUsage);

@@ -11,9 +11,8 @@
  */
 
 
-if(!defined('SUGAR_SMARTY_DIR'))
-{
-	define('SUGAR_SMARTY_DIR', sugar_cached('smarty/'));
+if (!defined('SUGAR_SMARTY_DIR')) {
+    define('SUGAR_SMARTY_DIR', sugar_cached('smarty/'));
 }
 
 /**
@@ -77,7 +76,7 @@ class Sugar_Smarty extends Smarty
         $this->use_sub_dirs = true;
 
         if (empty(self::$_plugins_dir)) {
-            self::$_plugins_dir = array();
+            self::$_plugins_dir = [];
             if (file_exists('custom/include/SugarSmarty/plugins')) {
                 self::$_plugins_dir[] = 'custom/include/SugarSmarty/plugins';
             }
@@ -92,7 +91,7 @@ class Sugar_Smarty extends Smarty
         }
         $this->plugins_dir = self::$_plugins_dir;
 
-        $this->assign("VERSION_MARK", getVersionedPath(''));
+        $this->assign('VERSION_MARK', getVersionedPath(''));
     }
 
     public function mutingErrorHandler($errno, $errstr, $errfile, $errline, $errcontext = [])
@@ -119,7 +118,7 @@ class Sugar_Smarty extends Smarty
             return; // suppresses this error
         }
         if ($isSmartyRelated && $this->allowUndefinedArrayKeys && preg_match(
-            '/^(Undefined array key|Trying to access array offset on value of type null)/',
+            '/^(Undefined array key|Trying to access array offset on)/',
             $errstr
         )) {
             return;// suppresses this error
@@ -179,54 +178,38 @@ class Sugar_Smarty extends Smarty
         }
     }
 
-	/**
-	 * Fetch template or custom double
-	 * @see Smarty::fetch()
+    /**
+     * Fetch template or custom double
      * @param string $resource_name
      * @param string $cache_id
      * @param string $compile_id
      * @param boolean $display
-	 */
-	public function fetchCustom($resource_name, $cache_id = null, $compile_id = null, $display = false)
-	{
-	    return $this->fetch(SugarAutoLoader::existingCustomOne($resource_name), $cache_id, $compile_id, $display);
-	}
+     * @see Smarty::fetch()
+     */
+    public function fetchCustom($resource_name, $cache_id = null, $compile_id = null, $display = false)
+    {
+        return $this->fetch(SugarAutoLoader::existingCustomOne($resource_name), $cache_id, $compile_id, $display);
+    }
 
-	/**
-	 * Display template or custom double
-	 * @see Smarty::display()
+    /**
+     * Display template or custom double
      * @param string $resource_name
      * @param string $cache_id
      * @param string $compile_id
-	 */
-	function displayCustom($resource_name, $cache_id = null, $compile_id = null)
-	{
-	    return $this->display(SugarAutoLoader::existingCustomOne($resource_name), $cache_id, $compile_id);
-	}
-
-	/**
-	 * Override default _unlink method call to fix Bug 53010
-	 *
-	 * @param string $resource
-     * @param integer $exp_time
+     * @see Smarty::display()
      */
-    function _unlink($resource, $exp_time = null)
+    public function displayCustom($resource_name, $cache_id = null, $compile_id = null)
     {
-        if(file_exists($resource)) {
-            return parent::_unlink($resource, $exp_time);
-        }
-
-        // file wasn't found, so it must be gone.
-        return true;
+        return $this->display(SugarAutoLoader::existingCustomOne($resource_name), $cache_id, $compile_id);
     }
 
     /**
      * assigns a Smarty variable and also assign to a new smarty object
      *
-     * @param Smarty       $smartyTpl
+     * @param Smarty $smartyTpl
      * @param array|string $tpl_var the template variable name(s)
-     * @param mixed        $value   the value to assign
-     * @param boolean      $nocache if true any output of this variable will be not cached
+     * @param mixed $value the value to assign
+     * @param boolean $nocache if true any output of this variable will be not cached
      *
      * @return Smarty_Internal_Data current Smarty_Internal_Data (or Smarty or Smarty_Internal_Template) instance for
      *                              chaining
@@ -290,7 +273,7 @@ class Sugar_Smarty extends Smarty
      * wrapper for assign_by_ref
      *
      * @param string $tpl_var the template variable name
-     * @param mixed  &$value  the referenced value to assign
+     * @param mixed  &$value the referenced value to assign
      */
     public function assign_by_ref($tpl_var, &$value)
     {
@@ -300,9 +283,9 @@ class Sugar_Smarty extends Smarty
     /**
      * wrapper for append_by_ref
      *
-     * @param string  $tpl_var the template variable name
-     * @param mixed   &$value  the referenced value to append
-     * @param boolean $merge   flag if array elements shall be merged
+     * @param string $tpl_var the template variable name
+     * @param mixed   &$value the referenced value to append
+     * @param boolean $merge flag if array elements shall be merged
      */
     public function append_by_ref($tpl_var, &$value, $merge = false)
     {
@@ -322,10 +305,10 @@ class Sugar_Smarty extends Smarty
     /**
      * Registers custom function to be used in templates
      *
-     * @param string $function      the name of the template function
+     * @param string $function the name of the template function
      * @param string $function_impl the name of the PHP function to register
-     * @param bool   $cacheable
-     * @param mixed  $cache_attrs
+     * @param bool $cacheable
+     * @param mixed $cache_attrs
      */
     public function register_function($function, $function_impl, $cacheable = true, $cache_attrs = null)
     {
@@ -345,16 +328,16 @@ class Sugar_Smarty extends Smarty
     /**
      * Registers object to be used in templates
      *
-     * @param string  $object      name of template object
-     * @param object  $object_impl the referenced PHP object to register
-     * @param array   $allowed     list of allowed methods (empty = all)
+     * @param string $object name of template object
+     * @param object $object_impl the referenced PHP object to register
+     * @param array $allowed list of allowed methods (empty = all)
      * @param boolean $smarty_args smarty argument format, else traditional
-     * @param array   $block_methods list of methods that are block format
+     * @param array $block_methods list of methods that are block format
      *
      * @throws SmartyException
      * @internal param array $block_functs list of methods that are block format
      */
-    public function register_object($object, $object_impl, $allowed = array(), $smarty_args = true, $block_methods = array())
+    public function register_object($object, $object_impl, $allowed = [], $smarty_args = true, $block_methods = [])
     {
         settype($allowed, 'array');
         settype($smarty_args, 'boolean');
@@ -374,10 +357,10 @@ class Sugar_Smarty extends Smarty
     /**
      * Registers block function to be used in templates
      *
-     * @param string $block      name of template block
+     * @param string $block name of template block
      * @param string $block_impl PHP function to register
-     * @param bool   $cacheable
-     * @param mixed  $cache_attrs
+     * @param bool $cacheable
+     * @param mixed $cache_attrs
      */
     public function register_block($block, $block_impl, $cacheable = true, $cache_attrs = null)
     {
@@ -397,9 +380,9 @@ class Sugar_Smarty extends Smarty
     /**
      * Registers compiler function
      *
-     * @param string $function      name of template function
+     * @param string $function name of template function
      * @param string $function_impl name of PHP function to register
-     * @param bool   $cacheable
+     * @param bool $cacheable
      */
     public function register_compiler_function($function, $function_impl, $cacheable = true)
     {
@@ -419,7 +402,7 @@ class Sugar_Smarty extends Smarty
     /**
      * Registers modifier to be used in templates
      *
-     * @param string $modifier      name of template modifier
+     * @param string $modifier name of template modifier
      * @param string $modifier_impl name of PHP function to register
      */
     public function register_modifier($modifier, $modifier_impl)
@@ -440,8 +423,8 @@ class Sugar_Smarty extends Smarty
     /**
      * Registers a resource to fetch a template
      *
-     * @param string $type      name of resource
-     * @param array  $functions array of functions to handle resource
+     * @param string $type name of resource
+     * @param array $functions array of functions to handle resource
      */
     public function register_resource($type, $functions)
     {
@@ -535,10 +518,10 @@ class Sugar_Smarty extends Smarty
     /**
      * clear cached content for the given template and cache id
      *
-     * @param  string $tpl_file   name of template file
-     * @param  string $cache_id   name of cache_id
-     * @param  string $compile_id name of compile_id
-     * @param  string $exp_time   expiration time
+     * @param string $tpl_file name of template file
+     * @param string $cache_id name of cache_id
+     * @param string $compile_id name of compile_id
+     * @param string $exp_time expiration time
      *
      * @return boolean
      */
@@ -550,7 +533,7 @@ class Sugar_Smarty extends Smarty
     /**
      * clear the entire contents of cache (all templates)
      *
-     * @param  string $exp_time expire time
+     * @param string $exp_time expire time
      *
      * @return boolean
      */
@@ -562,9 +545,9 @@ class Sugar_Smarty extends Smarty
     /**
      * test to see if valid cache exists for this template
      *
-     * @param  string $tpl_file name of template file
-     * @param  string $cache_id
-     * @param  string $compile_id
+     * @param string $tpl_file name of template file
+     * @param string $cache_id
+     * @param string $compile_id
      *
      * @return boolean
      */
@@ -586,9 +569,9 @@ class Sugar_Smarty extends Smarty
      * or all compiled template files if one is not specified.
      * This function is for advanced use only, not normally needed.
      *
-     * @param  string $tpl_file
-     * @param  string $compile_id
-     * @param  string $exp_time
+     * @param string $tpl_file
+     * @param string $compile_id
+     * @param string $exp_time
      *
      * @return boolean results of {@link smarty_core_rm_auto()}
      */
@@ -600,7 +583,7 @@ class Sugar_Smarty extends Smarty
     /**
      * Checks whether requested template exists.
      *
-     * @param  string $tpl_file
+     * @param string $tpl_file
      *
      * @return boolean
      */
@@ -612,7 +595,7 @@ class Sugar_Smarty extends Smarty
     /**
      * Returns an array containing template variables
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return array
      */
@@ -624,7 +607,7 @@ class Sugar_Smarty extends Smarty
     /**
      * Returns an array containing config variables
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return array
      */
@@ -648,7 +631,7 @@ class Sugar_Smarty extends Smarty
     /**
      * return a reference to a registered object
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return object
      */
@@ -670,7 +653,7 @@ class Sugar_Smarty extends Smarty
     /**
      * trigger Smarty error
      *
-     * @param string  $error_msg
+     * @param string $error_msg
      * @param integer $error_type
      */
     public function trigger_error($error_msg, $error_type = E_USER_WARNING)

@@ -29,27 +29,28 @@ class SugarFieldLocked_fields extends SugarFieldRelatecollection
      * {@inheritDoc}
      */
     public function apiFormatField(
-        array &$data,
-        SugarBean $bean,
-        array $args,
+        array       &$data,
+        SugarBean   $bean,
+        array       $args,
         $fieldName,
         $properties,
-        array $fieldList = null,
+        array       $fieldList = null,
         ServiceBase $service = null
     ) {
+
         // This is the expectation from the FilterApi
         if (isset($args['rc_beans'])) {
             if (!empty($args['rc_beans'][$fieldName][$bean->id])) {
                 $data[$fieldName] = $args['rc_beans'][$fieldName][$bean->id];
             } else {
-                $data[$fieldName] = array();
+                $data[$fieldName] = [];
             }
         } else {
             // This block is the expectation from the ModuleApi...
             // If the skip flag is set, it will be true, so check if it is true
             // to determine if we need to even set locked fields
             if (Registry\Registry::getInstance()->get('skip_locked_field_checks') === true) {
-                $data[$fieldName] = array();
+                $data[$fieldName] = [];
             } else {
                 // Get locked fields from the bean
                 $data[$fieldName] = $bean->getLockedFields();

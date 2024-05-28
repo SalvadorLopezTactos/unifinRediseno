@@ -30,9 +30,9 @@ class CaseEmailsLink extends ArchivedEmailsBeanLink
             $emailsSubQuery = $this->getEmailsSubquery($relation);
             $subQuery = "( SELECT id, email_id, MIN(source) sources
                 FROM ($emailsSubQuery) email_ids2 GROUP BY id, email_id )";
-            $where = str_replace("%1", $this->focus->case_number, $this->focus->getEmailSubjectMacro());
+            $where = str_replace('%1', $this->focus->case_number, $this->focus->getEmailSubjectMacro());
             $where = DBManagerFactory::getInstance()->sqlLikeString($where, '%', false);
-            $join = $query->joinTable($subQuery, array('alias' => $alias));
+            $join = $query->joinTable($subQuery, ['alias' => $alias]);
             $join->on()->equalsField($fromAlias . '.id', $alias . '.email_id');
             $condition = $join->on()->queryAnd()->queryOr();
             $condition->equals($alias . '.sources', 1)->contains($fromAlias . '.name', $where);
@@ -46,10 +46,10 @@ class CaseEmailsLink extends ArchivedEmailsBeanLink
      * We need this one because cases have match by subject macro
      * @see ArchivedEmailsBeanLink::getEmailsJoin()
      */
-    protected function getEmailsJoin($params = array())
+    protected function getEmailsJoin($params = [])
     {
         if ($this->focus instanceof aCase && !empty($this->focus->case_number)) {
-            $where = str_replace("%1", $this->focus->case_number, $this->focus->getEmailSubjectMacro());
+            $where = str_replace('%1', $this->focus->case_number, $this->focus->getEmailSubjectMacro());
             if (!empty($params['join_table_alias'])) {
                 $table_name = $params['join_table_alias'];
             } else {

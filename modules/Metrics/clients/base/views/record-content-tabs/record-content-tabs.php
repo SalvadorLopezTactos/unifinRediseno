@@ -167,6 +167,7 @@ $viewdefs['Metrics']['base']['view']['record-content-tabs'] = [
         ],
         [
             'label' => 'LBL_PREVIEW',
+            'css_class' => 'overflow-auto',
             'fields' => [
                 [
                     'name' => 'preview-table',

@@ -91,7 +91,7 @@
         var self = this,
             model = this._modelToUnlink;
 
-        model.destroy({
+        let options = {
             //Show alerts for this request
             showAlerts: {
                 'process': true,
@@ -108,6 +108,7 @@
                     context: self.context
                 };
                 self.collection.remove(model, { silent: redirect });
+                app.events.trigger('link:removed', self.context.get('parentModel'));
 
                 if (redirect) {
                     self.unbindBeforeRouteUnlink();
@@ -122,7 +123,21 @@
                 self.collection.trigger('reset', self.collection, options);
                 self.render();
             }
-        });
+        };
+
+        // If the parent model has a 'fields' option set, we need to also add
+        // it here so that the proper fields are returned from the API
+        let parentModel = this.context.get('parentModel');
+        if (parentModel) {
+            let fields = parentModel.getOption('fields');
+            if (fields) {
+                options.params = {
+                    fields: fields
+                };
+            }
+        }
+
+        model.destroy(options);
     },
 
     /**

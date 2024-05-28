@@ -25,7 +25,7 @@ $viewdefs['base']['view']['commentlog-dashlet'] = [
                         'KBContentTemplates',
                         'KBDocuments',
                         'ProductCategories',
-                        'Quotes',
+                        'Metrics',
                     ],
                 ],
             ],

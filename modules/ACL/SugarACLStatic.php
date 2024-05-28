@@ -34,17 +34,17 @@ class SugarACLStatic extends SugarACLStrategy
 
         // Check if we have to apply team security based on ACLs
         // If user had admin rights then team security is disabled
-        if($action == "team_security") {
-            if(isset($context['bean']) && $context['bean']->bean_implements('ACL')) {
+        if ($action == 'team_security') {
+            if (isset($context['bean']) && $context['bean']->bean_implements('ACL')) {
                 $user_id = $this->getUserID($context);
-                if(ACLAction::getUserAccessLevel($user_id, $module, 'access') != ACL_ALLOW_ENABLED) {
+                if (ACLAction::getUserAccessLevel($user_id, $module, 'access') != ACL_ALLOW_ENABLED) {
                     return true;
                 }
-                if(ACLAction::getUserAccessLevel($user_id, $module, 'admin') == ACL_ALLOW_ADMIN
+                if (ACLAction::getUserAccessLevel($user_id, $module, 'admin') == ACL_ALLOW_ADMIN
                     || ACLAction::getUserAccessLevel($user_id, $module, 'admin') == ACL_ALLOW_ADMIN_DEV) {
-                        // disable team security for admins
-                        return false;
-                    }
+                    // disable team security for admins
+                    return false;
+                }
                 return true;
             } else {
                 // True means team security is enabled and it's the default
@@ -52,29 +52,29 @@ class SugarACLStatic extends SugarACLStrategy
             }
         }
         $user = $this->getCurrentUser($context);
-        if($user && $user->isAdmin()) {
+        if ($user && $user->isAdmin()) {
             return true;
         }
 
         // make sure we have the correct action name
         $action = !empty($_REQUEST['bwcFrame']) ? strtolower($action) : static::fixUpActionName($action);
-        if($action == "field") {
+        if ($action == 'field') {
             return $this->fieldACL($module, $context['action'], $context);
         }
-        if(!empty($context['bean'])) {
+        if (!empty($context['bean'])) {
             return $this->beanACL($module, $action, $context);
         }
 
-        if(empty($action)) {
+        if (empty($action)) {
             return true;
         }
 
-        if($module == 'Trackers') {
+        if ($module == 'Trackers') {
             return ACLController::checkAccessInternal($module, $action, true, 'Tracker');
         }
 
         // if we're editing and we do not have the bean, if owner is allowed then action is allowed
-        if(empty($context['bean']) && !empty(self::$edit_actions[$action]) && !isset($context['owner_override'])) {
+        if (empty($context['bean']) && !empty(self::$edit_actions[$action]) && !isset($context['owner_override'])) {
             $context['owner_override'] = true;
         }
 
@@ -86,21 +86,22 @@ class SugarACLStatic extends SugarACLStrategy
         return ACLController::checkAccessInternal($module, $action, !empty($context['owner_override']), $type);
     }
 
-    static $edit_actions = array(
+    public static $edit_actions = [
         'popupeditview' => 1,
         'editview' => 1,
         'save' => 1,
         'edit' => 1,
         'delete' => 1,
-    );
+    ];
 
-    static $action_translate = array(
+    public static $action_translate = [
         'listview' => 'list',
         'index' => 'list',
         'detail' => 'view',
         'detailview' => 'view',
         'save' => 'edit',
-    );
+    ];
+
     /**
      * Check access to fields
      * @param string $module Module name.
@@ -112,28 +113,30 @@ class SugarACLStatic extends SugarACLStrategy
     {
         $bean = $context['bean'] ?? null;
         $is_owner = false;
-        if(!empty($context['owner_override'])) {
+        if (!empty($context['owner_override'])) {
             $is_owner = $context['owner_override'];
         } else {
-            if($bean) {
+            if ($bean) {
                 // non-ACL bean - access granted
-                if(!$bean->bean_implements('ACL')) return true;
+                if (!$bean->bean_implements('ACL')) {
+                    return true;
+                }
                 $is_owner = $bean->isOwner($this->getUserID($context));
             }
         }
 
-        if(!empty($context["user"])) {
-            $user = $context["user"];
+        if (!empty($context['user'])) {
+            $user = $context['user'];
         } else {
             $user = $this->getUserID($context);
         }
-        if(!$user) {
+        if (!$user) {
             return true;
         }
 
-        $field_access = ACLField::hasAccess($context['field'], $module, $user,  $is_owner);
+        $field_access = ACLField::hasAccess($context['field'], $module, $user, $is_owner);
 
-        switch($action) {
+        switch ($action) {
             case 'access':
                 return $field_access > 0;
             case 'read':
@@ -151,6 +154,7 @@ class SugarACLStatic extends SugarACLStrategy
 
         return ($field_access == 4 || $field_access == $access);
     }
+
     /**
      * Check bean ACLs
      * @param string $module
@@ -161,15 +165,17 @@ class SugarACLStatic extends SugarACLStrategy
     {
         $bean = $context['bean'];
         //if we don't implent acls return true
-        if(!$bean->bean_implements('ACL')) return true;
+        if (!$bean->bean_implements('ACL')) {
+            return true;
+        }
 
-        if(!empty($context['owner_override'])) {
+        if (!empty($context['owner_override'])) {
             $is_owner = $context['owner_override'];
         } else {
             $is_owner = $bean->isOwner($this->getUserID($context));
         }
 
-        if(isset(self::$action_translate[$action])) {
+        if (isset(self::$action_translate[$action])) {
             $action = self::$action_translate[$action];
         }
 
@@ -179,8 +185,7 @@ class SugarACLStatic extends SugarACLStrategy
             $aclType = $bean->acltype;
         }
 
-        switch ($action)
-        {
+        switch ($action) {
             case 'import':
             case 'list':
                 return ACLController::checkAccessInternal($module, $action, true, $aclType);
@@ -190,43 +195,43 @@ class SugarACLStatic extends SugarACLStrategy
             case 'massupdate':
                 return ACLController::checkAccessInternal($module, $action, $is_owner, $aclType);
             case 'edit':
-                if(!isset($context['owner_override']) && !empty($bean->id)) {
+                if (!isset($context['owner_override']) && !empty($bean->id)) {
                     if (!empty($bean->fetched_row['id']) && (
                         !empty($bean->fetched_row['assigned_user_id']) || !empty($bean->fetched_row['created_by'])
                     )) {
                         $temp = BeanFactory::newBean($bean->module_dir);
                         $temp->createLocaleFormattedName = false;
                         $temp->populateFromRow($bean->fetched_row, false, false);
-                    }else{
-                        if($bean->new_with_id) {
+                    } else {
+                        if ($bean->new_with_id) {
                             $is_owner = true;
                         } else {
                             $GLOBALS['log']->warn('The bean does not have owner fields populated. Re-retrieving');
                             $temp = BeanFactory::getBean($bean->module_dir, $bean->id);
                         }
                     }
-                    if(!empty($temp)) {
+                    if (!empty($temp)) {
                         $is_owner = $temp->isOwner($this->getUserID($context));
                         unset($temp);
                     }
                 }
+                // no break
             case 'popupeditview':
             case 'editview':
-                return ACLController::checkAccessInternal($module,'edit', $is_owner, $aclType);
+                return ACLController::checkAccessInternal($module, 'edit', $is_owner, $aclType);
         }
         //if it is not one of the above views then it should be implemented on the page level
         return true;
-
     }
 
     public function checkFieldList($module, $field_list, $action, $context)
     {
         $user = $this->getCurrentUser($context);
-        if(empty($user) || empty($user->id) || is_admin($user)) {
-            return array();
+        if (empty($user) || empty($user->id) || is_admin($user)) {
+            return [];
         }
-        if(!ACLField::hasACLs($user->id, $module)) {
-            return array();
+        if (!ACLField::hasACLs($user->id, $module)) {
+            return [];
         }
         return parent::checkFieldList($module, $field_list, $action, $context);
     }
@@ -234,11 +239,11 @@ class SugarACLStatic extends SugarACLStrategy
     public function getFieldListAccess($module, $field_list, $context)
     {
         $user = $this->getCurrentUser($context);
-        if(empty($user) || empty($user->id) || is_admin($user)) {
-        	return array();
+        if (empty($user) || empty($user->id) || is_admin($user)) {
+            return [];
         }
-        if(!ACLField::hasACLs($user->id, $module)) {
-            return array();
+        if (!ACLField::hasACLs($user->id, $module)) {
+            return [];
         }
         return parent::getFieldListAccess($module, $field_list, $context);
     }
@@ -247,13 +252,13 @@ class SugarACLStatic extends SugarACLStrategy
      * For some mysterious reasons Tracker ACLs are "special" and do not follow the rules.
      * @var array
      */
-    protected static $non_module_acls = array(
+    protected static $non_module_acls = [
         'Trackers' => 'Tracker',
         'TrackerQueries' => 'TrackerQuery',
         'TrackerPerfs' => 'TrackerPerf',
         'TrackerSessions' => 'TrackerSession',
 
-    );
+    ];
 
     /**
      * Get user access for the list of actions
@@ -264,39 +269,39 @@ class SugarACLStatic extends SugarACLStrategy
     public function getUserAccess($module, $access_list, $context)
     {
         $user = $this->getCurrentUser($context);
-        if(empty($user) || empty($user->id) || is_admin($user)) {
+        if (empty($user) || empty($user->id) || is_admin($user)) {
             // no user or admin - do nothing
             return $access_list;
         }
         $is_owner = !(isset($context['owner_override']) && $context['owner_override'] == false);
-        if(isset(self::$non_module_acls[$module])) {
+        if (isset(self::$non_module_acls[$module])) {
             $level = self::$non_module_acls[$module];
         } else {
             $level = 'module';
         }
         $allActs = ACLAction::getUserActions($user->id);
         $actions = $allActs[$module][$level] ?? [];
-        if(empty($actions)) {
+        if (empty($actions)) {
             return $access_list;
         }
         // default implementation, specific ACLs can override
         $access = $access_list;
         // check 'access' first - if it's false all others will be false
-        if(isset($access_list['access'])) {
-        	if(!ACLAction::userHasAccess($user->id, $module, 'access', $level, true)) {
-        		foreach($access_list as $action => $value) {
-        			$access[$action] = false;
-        		}
-        		return $access;
-        	}
-        	// no need to check it second time
-        	unset($access_list['access']);
+        if (isset($access_list['access'])) {
+            if (!ACLAction::userHasAccess($user->id, $module, 'access', $level, true)) {
+                foreach ($access_list as $action => $value) {
+                    $access[$action] = false;
+                }
+                return $access;
+            }
+            // no need to check it second time
+            unset($access_list['access']);
         }
-        foreach($access_list as $action => $value) {
+        foreach ($access_list as $action => $value) {
             // may have the bean, so we need to use checkAccess
-        	if(!$this->checkAccess($module, $action, $context) || (isset($actions[$action]['aclaccess']) && !ACLAction::hasAccess($is_owner, $actions[$action]['aclaccess']))) {
-        		$access[$action] = false;
-        	}
+            if (!$this->checkAccess($module, $action, $context) || (isset($actions[$action]['aclaccess']) && !ACLAction::hasAccess($is_owner, $actions[$action]['aclaccess']))) {
+                $access[$action] = false;
+            }
         }
         return $access;
     }

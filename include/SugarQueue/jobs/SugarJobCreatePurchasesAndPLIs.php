@@ -35,14 +35,14 @@ class SugarJobCreatePurchasesAndPLIs implements RunnableSchedulerJob
      * Running this job takes the array of RLI IDs from $data, and generates
      * Purchases/PLIs for each RLI using the processRliIds method in
      * RevenueLineItem.php
-     * @see RevenueLineItem
      * @param string $data The job data for this Scheduled Job instance
      * @return boolean true if job succeeded, otherwise false
+     * @see RevenueLineItem
      */
     public function run($data): bool
     {
         if (!Opportunity::usingRevenueLineItems()) {
-            LoggerManager::getLogger()->fatal("Current Opportunities configuration does not allow automatic creation of Purchases");
+            LoggerManager::getLogger()->fatal('Current Opportunities configuration does not allow automatic creation of Purchases');
             return false;
         }
 

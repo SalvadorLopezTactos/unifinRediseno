@@ -10,37 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $object_name = strtolower($object_name);
- $app_list_strings = array (
+$app_list_strings = [
 
-  $object_name.'_type_dom' =>
-  array (
-  	'Administration' => 'Administration',
-    'Product' => 'المنتج',
-    'User' => 'المستخدم',
-  ),
-   $object_name.'_status_dom' =>
-  array (
-    'New' => 'جديد',
-    'Assigned' => 'معيَّن',
-    'Closed' => 'مغلق',
-    'Pending Input' => 'إدخال معلق',
-    'Rejected' => 'مرفوض',
-    'Duplicate' => 'تكرار',
-  ),
-  $object_name.'_priority_dom' =>
-  array (
-    'P1' => 'عالية',
-    'P2' => 'متوسط',
-    'P3' => 'منخفض',
-  ),
-  $object_name.'_resolution_dom' =>
-  array (
-  	'' => '',
-  	'Accepted' => 'مقبول',
-    'Duplicate' => 'تكرار',
-    'Closed' => 'مغلق',
-    'Out of Date' => 'قديم',
-    'Invalid' => 'غير صالح',
-  ),
-  );
-?>
+    $object_name . '_type_dom' => [
+        'Administration' => 'الإدارة',
+        'Product' => 'المنتج',
+        'User' => 'المستخدم',
+    ],
+    $object_name . '_status_dom' => [
+        'New' => 'جديد',
+        'Assigned' => 'معيَّن',
+        'Closed' => 'مغلق',
+        'Pending Input' => 'إدخال معلق',
+        'Rejected' => 'مرفوض',
+        'Duplicate' => 'تكرار',
+    ],
+    $object_name . '_priority_dom' => [
+        'P1' => 'مرتفع',
+        'P2' => 'متوسط',
+        'P3' => 'منخفض',
+    ],
+    $object_name . '_resolution_dom' => [
+        '' => '',
+        'Accepted' => 'مقبول',
+        'Duplicate' => 'تكرار',
+        'Closed' => 'مغلق',
+        'Out of Date' => 'قديم',
+        'Invalid' => 'غير صالح',
+    ],
+];

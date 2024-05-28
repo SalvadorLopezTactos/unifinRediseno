@@ -130,7 +130,7 @@ JS;
         }
         restore_error_handler();
         $field = $this->targetField;
-        $def = array();
+        $def = [];
         if (!empty($target->field_defs[$field])) {
             $def = $target->field_defs[$field];
         }
@@ -159,11 +159,11 @@ JS;
             }
         } else {
             $isDateTimeField = !empty($def['type']) && in_array($def['type'], [
-                'date',
-                'time',
-                'datetime',
-                'datetimecombo',
-            ]);
+                    'date',
+                    'time',
+                    'datetime',
+                    'datetimecombo',
+                ]);
             if (isset($def['type']) && $def['type'] == 'bool') {
                 $target->$field = $result === true || $result === AbstractExpression::$TRUE;
             } elseif (is_array($result) && $def['type'] != 'multienum') {
@@ -183,14 +183,14 @@ JS;
      */
     public function getDefinition()
     {
-        return array(
+        return [
             'action' => static::getActionName(),
-            'params' => array(
+            'params' => [
                 'target' => $this->targetField,
                 'value' => $this->expression,
-                'errorValue' => $this->errorValue
-            )
-        );
+                'errorValue' => $this->errorValue,
+            ],
+        ];
     }
 
     /**

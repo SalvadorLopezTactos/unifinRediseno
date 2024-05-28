@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => 'Ugovori',
-	'LBL_MODULE_NAME_SINGULAR' => 'Ugovor',
-	'LBL_MODULE_TITLE' => 'Ugovori: Početna strana',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => 'Ugovori',
+    'LBL_MODULE_NAME_SINGULAR' => 'Ugovor',
+    'LBL_MODULE_TITLE' => 'Ugovori: Početna strana',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Kreiraj ugovor',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => 'ID broj valute:',
     'LBL_CURRENCY' => 'Valuta:',
     'LBL_CURRENCY_RATE' => 'Kursna Lista',
-    'LBL_ASSIGNED_TO_NAME'=>'Dodeljeno:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'Dodeljeno:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => 'Lista ugovora',	
+    'LBL_LIST_FORM_TITLE' => 'Lista ugovora',
     'LBL_LIST_CONTRACT_NAME' => 'Naziv ugovora',
     'LBL_LIST_ACCOUNT_NAME' => 'Naziv kompanije',
     'LBL_LIST_START_DATE' => 'Početak',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => 'Naziv',
     'LBL_LIST_CONTRACT_VALUE' => 'Vrednost:',
 
-    'LBL_TYPE'=>'Tip',
+    'LBL_TYPE' => 'Tip',
     'LBL_TYPE_NAME' => 'Naziv tipa',
-    'LBL_CONTRACT_TYPE'=>'Tip Ugovora',
+    'LBL_CONTRACT_TYPE' => 'Tip Ugovora',
 
     'LBL_CREATED_USER' => 'Kreirao',
     'LBL_MODIFIED_USER' => 'Promenio',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za ugovore',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa o ugovorima',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija ugovora',
+];

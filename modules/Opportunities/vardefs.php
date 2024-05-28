@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['Opportunity'] = array(
+$dictionary['Opportunity'] = [
     'table' => 'opportunities',
     'color' => 'red',
     'icon' => 'sicon-opportunity-lg',
@@ -22,21 +22,21 @@ $dictionary['Opportunity'] = array(
     'unified_search_default_enabled' => true,
     'duplicate_merge' => true,
     'comment' => 'An opportunity is the target of selling activities',
-    'fields' => array(
-        'name' => array(
+    'fields' => [
+        'name' => [
             'name' => 'name',
             'vname' => 'LBL_OPPORTUNITY_NAME',
             'type' => 'name',
             'dbType' => 'varchar',
             'len' => '255',
             'unified_search' => true,
-            'full_text_search' => array('enabled' => true, 'searchable' => true, 'boost' => 1.65),
+            'full_text_search' => ['enabled' => true, 'searchable' => true, 'boost' => 1.65],
             'comment' => 'Name of the opportunity',
             'merge_filter' => 'selected',
             'importable' => 'required',
             'required' => true,
-        ),
-        'opportunity_type' => array(
+        ],
+        'opportunity_type' => [
             'name' => 'opportunity_type',
             'vname' => 'LBL_TYPE',
             'type' => 'enum',
@@ -45,8 +45,8 @@ $dictionary['Opportunity'] = array(
             'audited' => true,
             'comment' => 'Type of opportunity (ex: Existing, New)',
             'merge_filter' => 'enabled',
-        ),
-        'account_name' => array(
+        ],
+        'account_name' => [
             'name' => 'account_name',
             'rname' => 'name',
             'id_name' => 'account_id',
@@ -63,13 +63,13 @@ $dictionary['Opportunity'] = array(
             'unified_search' => true,
             'required' => true,
             'importable' => 'required',
-            'related_fields' => array(
+            'related_fields' => [
                 'account_id',
-            ),
-            'exportable'=> true,
+            ],
+            'exportable' => true,
             'export_link_type' => 'one',//relationship type to be used during export
-        ),
-        'account_id' => array(
+        ],
+        'account_id' => [
             'name' => 'account_id',
             'vname' => 'LBL_ACCOUNT_ID',
             'id_name' => 'account_id',
@@ -81,8 +81,9 @@ $dictionary['Opportunity'] = array(
             'dbType' => 'id',
             'module' => 'Accounts',
             'massupdate' => false,
-        ),
-        'campaign_id' => array(
+            'label' => 'LBL_ACCOUNT_NAME',
+        ],
+        'campaign_id' => [
             'name' => 'campaign_id',
             'comment' => 'Campaign that generated lead',
             'vname' => 'LBL_CAMPAIGN_ID',
@@ -95,33 +96,33 @@ $dictionary['Opportunity'] = array(
             'reportable' => false,
             'massupdate' => false,
             'duplicate_merge' => 'disabled',
-        ),
-        'campaign_name' => array(
+        ],
+        'campaign_name' => [
             'name' => 'campaign_name',
             'rname' => 'name',
             'id_name' => 'campaign_id',
             'vname' => 'LBL_CAMPAIGN',
             'type' => 'relate',
-            'related_fields' => array(
+            'related_fields' => [
                 'campaign_id',
-            ),
+            ],
             'link' => 'campaign_opportunities',
             'isnull' => true,
             'table' => 'campaigns',
             'module' => 'Campaigns',
             'source' => 'non-db',
-            'studio' => array(
+            'studio' => [
                 'mobile' => false,
-            ),
-        ),
-        'campaign_opportunities' => array(
+            ],
+        ],
+        'campaign_opportunities' => [
             'name' => 'campaign_opportunities',
             'type' => 'link',
             'vname' => 'LBL_CAMPAIGN_OPPORTUNITY',
             'relationship' => 'campaign_opportunities',
             'source' => 'non-db',
-        ),
-        'lead_source' => array(
+        ],
+        'lead_source' => [
             'name' => 'lead_source',
             'vname' => 'LBL_LEAD_SOURCE',
             'type' => 'enum',
@@ -129,8 +130,8 @@ $dictionary['Opportunity'] = array(
             'len' => '50',
             'comment' => 'Source of the opportunity',
             'merge_filter' => 'enabled',
-        ),
-        'amount' => array(
+        ],
+        'amount' => [
             'name' => 'amount',
             'vname' => 'LBL_LIKELY',
             'type' => 'currency',
@@ -142,14 +143,14 @@ $dictionary['Opportunity'] = array(
             'options' => 'numeric_range_search_dom',
             'enable_range_search' => true,
             'audited' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
+                'base_rate',
+            ],
             'convertToBase' => true,
             'showTransactionalAmount' => true,
-        ),
-        'amount_usdollar' => array(
+        ],
+        'amount_usdollar' => [
             'name' => 'amount_usdollar',
             'vname' => 'LBL_AMOUNT_USDOLLAR',
             'type' => 'currency',
@@ -158,7 +159,7 @@ $dictionary['Opportunity'] = array(
             'disable_num_format' => true,
             'duplicate_merge' => '0',
             'comment' => 'Formatted amount of the opportunity',
-            'studio' => array(
+            'studio' => [
                 'wirelesslistview' => false,
                 'wirelesseditview' => false,
                 'wirelessdetailview' => false,
@@ -168,18 +169,18 @@ $dictionary['Opportunity'] = array(
                 'detailview' => false,
                 'quickcreate' => false,
                 'mobile' => false,
-            ),
+            ],
             'readonly' => true,
             'is_base_currency' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
+                'base_rate',
+            ],
             'formula' => 'ifElse(isNumeric($amount), currencyDivide($amount, $base_rate), "")',
             'calculated' => true,
             'enforced' => true,
-        ),
-        'date_closed' => array(
+        ],
+        'date_closed' => [
             'name' => 'date_closed',
             'vname' => 'LBL_DATE_CLOSED',
             'type' => 'date',
@@ -189,19 +190,19 @@ $dictionary['Opportunity'] = array(
             'required' => true,
             'enable_range_search' => true,
             'options' => 'date_range_search_dom',
-            'related_fields' => array(
-                'date_closed_timestamp'
-            ),
-            'full_text_search' => array(
+            'related_fields' => [
+                'date_closed_timestamp',
+            ],
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => false,
-            ),
-        ),
-        'date_closed_timestamp' => array(
+            ],
+        ],
+        'date_closed_timestamp' => [
             'name' => 'date_closed_timestamp',
             'vname' => 'LBL_DATE_CLOSED_TIMESTAMP',
             'type' => 'ulong',
-            'studio' => array(
+            'studio' => [
                 'formula' => true,
                 'related' => true,
                 'recordview' => false,
@@ -209,8 +210,8 @@ $dictionary['Opportunity'] = array(
                 'detailview' => false,
                 'searchview' => false,
                 'createview' => false,
-                'editField' => false
-            ),
+                'editField' => false,
+            ],
             'reportable' => false,
             'workflow' => false,
             'massupdate' => false,
@@ -218,18 +219,18 @@ $dictionary['Opportunity'] = array(
             'calculated' => true,
             'formula' => 'timestamp($date_closed)',
             'importable' => false,
-        ),
-        'next_step' => array(
+        ],
+        'next_step' => [
             'name' => 'next_step',
             'vname' => 'LBL_NEXT_STEP',
             'type' => 'varchar',
             'len' => '100',
-            'full_text_search' => array('enabled' => true, 'searchable' => true, 'boost' => 0.74),
+            'full_text_search' => ['enabled' => true, 'searchable' => true, 'boost' => 0.74],
             'comment' => 'The next step in the sales process',
             'merge_filter' => 'enabled',
             'massupdate' => true,
-        ),
-        'sales_stage' => array(
+        ],
+        'sales_stage' => [
             'name' => 'sales_stage',
             'vname' => 'LBL_SALES_STAGE',
             'type' => 'enum',
@@ -241,8 +242,8 @@ $dictionary['Opportunity'] = array(
             'importable' => 'required',
             'audited' => true,
             'required' => true,
-        ),
-        'sales_status' => array(
+        ],
+        'sales_status' => [
             'name' => 'sales_status',
             'vname' => 'LBL_SALES_STATUS',
             'type' => 'enum',
@@ -255,9 +256,9 @@ $dictionary['Opportunity'] = array(
             'reportable' => false,
             'massupdate' => false,
             'importable' => false,
-            'default' => 'New'
-        ),
-        'probability' => array(
+            'default' => 'New',
+        ],
+        'probability' => [
             'name' => 'probability',
             'vname' => 'LBL_PROBABILITY',
             'type' => 'int',
@@ -268,37 +269,37 @@ $dictionary['Opportunity'] = array(
             'enforced' => true,
             'workflow' => false,
             'comment' => 'The probability of closure',
-            'validation' => array('type' => 'range', 'min' => 0, 'max' => 100),
+            'validation' => ['type' => 'range', 'min' => 0, 'max' => 100],
             'merge_filter' => 'enabled',
-        ),
-        'best_case' => array(
+        ],
+        'best_case' => [
             'name' => 'best_case',
             'vname' => 'LBL_BEST',
             'dbType' => 'currency',
             'type' => 'currency',
             'len' => '26,6',
             'audited' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
+                'base_rate',
+            ],
             'convertToBase' => true,
             'showTransactionalAmount' => true,
-        ),
-        'worst_case' => array(
+        ],
+        'worst_case' => [
             'name' => 'worst_case',
             'vname' => 'LBL_WORST',
             'dbType' => 'currency',
             'type' => 'currency',
             'len' => '26,6',
             'audited' => true,
-            'related_fields' => array(
+            'related_fields' => [
                 'currency_id',
-                'base_rate'
-            ),
+                'base_rate',
+            ],
             'convertToBase' => true,
             'showTransactionalAmount' => true,
-        ),
+        ],
         'commit_stage' => [
             'name' => 'commit_stage',
             'vname' => 'LBL_COMMIT_STAGE_FORECAST',
@@ -394,11 +395,11 @@ $dictionary['Opportunity'] = array(
             'related_fields' => [
                 'service_open_revenue_line_items',
             ],
-            'studio' => array(
+            'studio' => [
                 'calculated' => false,
-            ),
+            ],
         ],
-        'service_open_revenue_line_items' => array(
+        'service_open_revenue_line_items' => [
             'name' => 'service_open_revenue_line_items',
             'vname' => 'LBL_CLOSED_RLIS',
             'type' => 'int',
@@ -406,7 +407,7 @@ $dictionary['Opportunity'] = array(
             'workflow' => false,
             'reportable' => false,
             'importable' => false,
-        ),
+        ],
         'service_start_date_cascade' => [
             'name' => 'service_start_date_cascade',
             'type' => 'date',
@@ -418,7 +419,7 @@ $dictionary['Opportunity'] = array(
             'importable' => false,
             'massupdate' => false,
         ],
-        'total_revenue_line_items' => array(
+        'total_revenue_line_items' => [
             'name' => 'total_revenue_line_items',
             'vname' => 'LBL_TOTAL_RLIS',
             'type' => 'int',
@@ -428,9 +429,9 @@ $dictionary['Opportunity'] = array(
             'studio' => false,
             'workflow' => false,
             'reportable' => false,
-            'importable' => false
-        ),
-        'closed_revenue_line_items' => array(
+            'importable' => false,
+        ],
+        'closed_revenue_line_items' => [
             'name' => 'closed_revenue_line_items',
             'vname' => 'LBL_CLOSED_RLIS',
             'type' => 'int',
@@ -440,9 +441,9 @@ $dictionary['Opportunity'] = array(
             'studio' => false,
             'workflow' => false,
             'reportable' => false,
-            'importable' => false
-        ),
-        'included_revenue_line_items' => array(
+            'importable' => false,
+        ],
+        'included_revenue_line_items' => [
             'name' => 'included_revenue_line_items',
             'vname' => 'LBL_INCLUDED_RLIS',
             'type' => 'int',
@@ -452,8 +453,8 @@ $dictionary['Opportunity'] = array(
             'studio' => false,
             'workflow' => false,
             'reportable' => false,
-            'importable' => false
-        ),
+            'importable' => false,
+        ],
         'renewal_opportunities' => [
             'name' => 'renewal_opportunities',
             'type' => 'link',
@@ -511,7 +512,20 @@ $dictionary['Opportunity'] = array(
             'console' => [
                 'name' => 'sales_stage',
                 'label' => 'LBL_WIDGET_SALES_STAGE',
-                'type' => 'enum-colorcoded-fore-bkgd',
+                'type' => 'fieldset-cascade',
+                'show_child_labels' => false,
+                'label' => 'LBL_WIDGET_SALES_STAGE',
+                'fields' => [
+                    [
+                        'name' => 'sales_stage',
+                        'label' => 'LBL_SALES_STAGE',
+                        'type' => 'enum-colorcoded-fore-bkgd',
+                    ],
+                ],
+                'disable_field' => [
+                    'total_revenue_line_items',
+                    'closed_revenue_line_items',
+                ],
             ],
         ],
         'widget_date_closed' => [
@@ -583,7 +597,7 @@ $dictionary['Opportunity'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_EXTERNAL_USERS',
         ],
-        'accounts' => array(
+        'accounts' => [
             'name' => 'accounts',
             'type' => 'link',
             'relationship' => 'accounts_opportunities',
@@ -592,27 +606,27 @@ $dictionary['Opportunity'] = array(
             'module' => 'Accounts',
             'bean_name' => 'Account',
             'vname' => 'LBL_ACCOUNTS',
-        ),
-        'contacts' => array(
+        ],
+        'contacts' => [
             'name' => 'contacts',
             'type' => 'link',
             'relationship' => 'opportunities_contacts',
             'source' => 'non-db',
             'module' => 'Contacts',
             'bean_name' => 'Contact',
-            'rel_fields' => array(
-                'contact_role' => array(
+            'rel_fields' => [
+                'contact_role' => [
                     'type' => 'enum',
-                    'options' => 'opportunity_relationship_type_dom'
-                )
-            ),
+                    'options' => 'opportunity_relationship_type_dom',
+                ],
+            ],
             'vname' => 'LBL_CONTACTS',
-            'populate_list' => array(
+            'populate_list' => [
                 'account_id' => 'account_id',
                 'account_name' => 'account_name',
-            )
-        ),
-        'contact_role' => array(
+            ],
+        ],
+        'contact_role' => [
             'name' => 'contact_role',
             'type' => 'enum',
             'studio' => 'false',
@@ -622,21 +636,21 @@ $dictionary['Opportunity'] = array(
             'options' => 'opportunity_relationship_type_dom',
             'link' => 'contacts',
             'rname_link' => 'contact_role',
-        ),
-        'tasks' => array(
+        ],
+        'tasks' => [
             'name' => 'tasks',
             'type' => 'link',
             'relationship' => 'opportunity_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_TASKS',
-        ),
-        'notes' => array(
+        ],
+        'notes' => [
             'name' => 'notes',
             'type' => 'link',
             'relationship' => 'opportunity_notes',
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
-        ),
+        ],
         'messages' => [
             'name' => 'messages',
             'type' => 'link',
@@ -653,28 +667,28 @@ $dictionary['Opportunity'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_ESCALATIONS',
         ],
-        'meetings' => array(
+        'meetings' => [
             'name' => 'meetings',
             'type' => 'link',
             'relationship' => 'opportunity_meetings',
             'source' => 'non-db',
             'vname' => 'LBL_MEETINGS',
-        ),
-        'calls' => array(
+        ],
+        'calls' => [
             'name' => 'calls',
             'type' => 'link',
             'relationship' => 'opportunity_calls',
             'source' => 'non-db',
             'vname' => 'LBL_CALLS',
-        ),
-        'emails' => array(
+        ],
+        'emails' => [
             'name' => 'emails',
             'type' => 'link',
             'relationship' => 'emails_opportunities_rel', /* reldef in emails */
             'source' => 'non-db',
             'vname' => 'LBL_EMAILS',
-        ),
-        'archived_emails' => array(
+        ],
+        'archived_emails' => [
             'name' => 'archived_emails',
             'type' => 'link',
             'link_class' => 'ArchivedEmailsBeanLink',
@@ -686,37 +700,37 @@ $dictionary['Opportunity'] = array(
             'relationship' => '',
             'hideacl' => true,
             'readonly' => true,
-        ),
-        'documents' => array(
+        ],
+        'documents' => [
             'name' => 'documents',
             'type' => 'link',
             'relationship' => 'documents_opportunities',
             'source' => 'non-db',
             'vname' => 'LBL_DOCUMENTS_SUBPANEL_TITLE',
-        ),
-        'quotes' => array(
+        ],
+        'quotes' => [
             'name' => 'quotes',
             'type' => 'link',
             'relationship' => 'quotes_opportunities',
             'source' => 'non-db',
             'vname' => 'LBL_QUOTES',
-        ),
+        ],
 
-        'project' => array(
+        'project' => [
             'name' => 'project',
             'type' => 'link',
             'relationship' => 'projects_opportunities',
             'source' => 'non-db',
             'vname' => 'LBL_PROJECTS',
-        ),
-        'leads' => array(
+        ],
+        'leads' => [
             'name' => 'leads',
             'type' => 'link',
             'relationship' => 'opportunity_leads',
             'source' => 'non-db',
             'vname' => 'LBL_LEADS',
-        ),
-        'campaigns' => array(
+        ],
+        'campaigns' => [
             'name' => 'campaigns',
             'type' => 'link',
             'relationship' => 'campaignlog_created_opportunities',
@@ -724,29 +738,29 @@ $dictionary['Opportunity'] = array(
             'bean_name' => 'CampaignLog',
             'source' => 'non-db',
             'vname' => 'LBL_CAMPAIGNS',
-            'reportable' => false
-        ),
-        'contracts' => array(
+            'reportable' => false,
+        ],
+        'contracts' => [
             'name' => 'contracts',
             'type' => 'link',
             'vname' => 'LBL_CONTRACTS',
             'relationship' => 'contracts_opportunities',
             //'link_type' => 'one', bug# 31652 relationship is one to many from opportunities to contracts
             'source' => 'non-db',
-            'populate_list' => array(
+            'populate_list' => [
                 'account_id' => 'account_id',
                 'account_name' => 'account_name',
-            )
-        ),
-        'revenuelineitems' => array(
+            ],
+        ],
+        'revenuelineitems' => [
             'name' => 'revenuelineitems',
             'type' => 'link',
             'vname' => 'LBL_RLI',
             'relationship' => 'opportunities_revenuelineitems',
             'source' => 'non-db',
-            'workflow' => false
-        ),
-        'forecastworksheets' =>  array(
+            'workflow' => false,
+        ],
+        'forecastworksheets' => [
             'name' => 'forecastworksheets',
             'type' => 'link',
             'relationship' => 'forecastworksheets_opportunities',
@@ -754,18 +768,20 @@ $dictionary['Opportunity'] = array(
             'module' => 'ForecastWorksheets',
             'bean_name' => 'ForecastWorksheet',
             'source' => 'non-db',
-        ),
-        'products' => array(
+        ],
+        'products' => [
             'name' => 'products',
             'type' => 'link',
             'vname' => 'LBL_PRODUCTS',
             'relationship' => 'opportunities_products',
             'source' => 'non-db',
-        ),
+        ],
         'ai_opp_conv_score_absolute' => [
             'name' => 'ai_opp_conv_score_absolute',
             'vname' => 'LBL_AI_CONV_SCORE_ABSOLUTE',
             'type' => 'decimal',
+            'len' => 10,
+            'precision' => 8,
             'reportable' => true,
             'importable' => false,
             'readonly' => true,
@@ -776,6 +792,8 @@ $dictionary['Opportunity'] = array(
             'name' => 'ai_opp_conv_bin_accuracy',
             'vname' => 'LBL_AI_CONV_BIN_ACCURACY',
             'type' => 'decimal',
+            'len' => 10,
+            'precision' => 8,
             'reportable' => true,
             'importable' => false,
             'readonly' => true,
@@ -786,6 +804,8 @@ $dictionary['Opportunity'] = array(
             'name' => 'ai_opp_conv_multiplier',
             'vname' => 'LBL_AI_CONV_MULTIPLIER',
             'type' => 'decimal',
+            'len' => 10,
+            'precision' => 8,
             'reportable' => true,
             'importable' => false,
             'readonly' => true,
@@ -885,32 +905,30 @@ $dictionary['Opportunity'] = array(
         ],
 
         // Marketo Fields
-        'mkto_sync' =>
-            array(
-                'name' => 'mkto_sync',
-                'vname' => 'LBL_MKTO_SYNC',
-                'type' => 'bool',
-                'default' => '0',
-                'comment' => 'Should the Lead be synced to Marketo',
-                'massupdate' => true,
-                'audited' => true,
-                'duplicate_merge' => true,
-                'reportable' => true,
-                'importable' => 'true',
-            ),
-        'mkto_id' =>
-            array(
-                'name' => 'mkto_id',
-                'vname' => 'LBL_MKTO_ID',
-                'comment' => 'Associated Marketo Lead ID',
-                'type' => 'int',
-                'default' => null,
-                'audited' => true,
-                'mass_update' => false,
-                'duplicate_merge' => true,
-                'reportable' => true,
-                'importable' => 'false',
-            ),
+        'mkto_sync' => [
+            'name' => 'mkto_sync',
+            'vname' => 'LBL_MKTO_SYNC',
+            'type' => 'bool',
+            'default' => '0',
+            'comment' => 'Should the Lead be synced to Marketo',
+            'massupdate' => true,
+            'audited' => true,
+            'duplicate_merge' => true,
+            'reportable' => true,
+            'importable' => 'true',
+        ],
+        'mkto_id' => [
+            'name' => 'mkto_id',
+            'vname' => 'LBL_MKTO_ID',
+            'comment' => 'Associated Marketo Lead ID',
+            'type' => 'int',
+            'default' => null,
+            'audited' => true,
+            'mass_update' => false,
+            'duplicate_merge' => true,
+            'reportable' => true,
+            'importable' => 'false',
+        ],
         'ai_opp_close_week_scores' => [
             'name' => 'ai_opp_close_week_scores',
             'vname' => 'LBL_AI_OPP_CLOSE_WEEK_SCORES',
@@ -922,13 +940,13 @@ $dictionary['Opportunity'] = array(
             'duplicate_merge' => 'disabled',
             'studio' => false,
         ],
-        'renewal' => array(
+        'renewal' => [
             'name' => 'renewal',
             'vname' => 'LBL_RENEWAL',
             'type' => 'bool',
             'default' => 0,
             'comment' => 'Indicates whether the opportunity is a renewal',
-        ),
+        ],
         'ai_opp_conv_score_enum' => [
             'name' => 'ai_opp_conv_score_enum',
             'vname' => 'LBL_AI_CONV_SCORE_CLASSIFICATION_FIELD',
@@ -936,7 +954,7 @@ $dictionary['Opportunity'] = array(
             'options' => 'ai_conv_score_classification_dropdown',
             'default_value' => '',
             'reportable' => true,
-            'audited' => false,
+            'audited' => true,
             'importable' => false,
             'listview' => true,
             'readonly' => true,
@@ -949,17 +967,17 @@ $dictionary['Opportunity'] = array(
                 ],
             ],
         ],
-    ),
-    'indices' => array(
-        array(
+    ],
+    'indices' => [
+        [
             'name' => 'idx_opp_name',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'deleted',
                 'name',
                 'date_modified',
-            ),
-        ),
+            ],
+        ],
         [
             'name' => 'idx_opportunity_next_step',
             'type' => 'index',
@@ -978,9 +996,9 @@ $dictionary['Opportunity'] = array(
                 'id',
             ],
         ],
-    ),
-    'relationships' => array(
-        'opportunity_calls' => array(
+    ],
+    'relationships' => [
+        'opportunity_calls' => [
             'lhs_module' => 'Opportunities',
             'lhs_table' => 'opportunities',
             'lhs_key' => 'id',
@@ -989,9 +1007,9 @@ $dictionary['Opportunity'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Opportunities'
-        ),
-        'opportunity_meetings' => array(
+            'relationship_role_column_value' => 'Opportunities',
+        ],
+        'opportunity_meetings' => [
             'lhs_module' => 'Opportunities',
             'lhs_table' => 'opportunities',
             'lhs_key' => 'id',
@@ -1000,9 +1018,9 @@ $dictionary['Opportunity'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Opportunities'
-        ),
-        'opportunity_tasks' => array(
+            'relationship_role_column_value' => 'Opportunities',
+        ],
+        'opportunity_tasks' => [
             'lhs_module' => 'Opportunities',
             'lhs_table' => 'opportunities',
             'lhs_key' => 'id',
@@ -1011,9 +1029,9 @@ $dictionary['Opportunity'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Opportunities'
-        ),
-        'opportunity_notes' => array(
+            'relationship_role_column_value' => 'Opportunities',
+        ],
+        'opportunity_notes' => [
             'lhs_module' => 'Opportunities',
             'lhs_table' => 'opportunities',
             'lhs_key' => 'id',
@@ -1022,9 +1040,9 @@ $dictionary['Opportunity'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Opportunities'
-        ),
-        'opportunity_emails' => array(
+            'relationship_role_column_value' => 'Opportunities',
+        ],
+        'opportunity_emails' => [
             'lhs_module' => 'Opportunities',
             'lhs_table' => 'opportunities',
             'lhs_key' => 'id',
@@ -1033,18 +1051,18 @@ $dictionary['Opportunity'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Opportunities'
-        ),
-        'opportunity_leads' => array(
+            'relationship_role_column_value' => 'Opportunities',
+        ],
+        'opportunity_leads' => [
             'lhs_module' => 'Opportunities',
             'lhs_table' => 'opportunities',
             'lhs_key' => 'id',
             'rhs_module' => 'Leads',
             'rhs_table' => 'leads',
             'rhs_key' => 'opportunity_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'opportunities_assigned_user' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'opportunities_assigned_user' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
@@ -1052,26 +1070,26 @@ $dictionary['Opportunity'] = array(
             'rhs_table' => 'opportunities',
             'rhs_key' => 'assigned_user_id',
             'relationship_type' => 'one-to-many',
-        ),
-        'opportunities_modified_user' => array(
+        ],
+        'opportunities_modified_user' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
             'rhs_module' => 'Opportunities',
             'rhs_table' => 'opportunities',
             'rhs_key' => 'modified_user_id',
-            'relationship_type' => 'one-to-many'
-        ),
-        'opportunities_created_by' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'opportunities_created_by' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
             'rhs_module' => 'Opportunities',
             'rhs_table' => 'opportunities',
             'rhs_key' => 'created_by',
-            'relationship_type' => 'one-to-many'
-        ),
-        'opportunities_revenuelineitems' => array(
+            'relationship_type' => 'one-to-many',
+        ],
+        'opportunities_revenuelineitems' => [
             'lhs_module' => 'Opportunities',
             'lhs_table' => 'opportunities',
             'lhs_key' => 'id',
@@ -1079,7 +1097,7 @@ $dictionary['Opportunity'] = array(
             'rhs_table' => 'revenue_line_items',
             'rhs_key' => 'opportunity_id',
             'relationship_type' => 'one-to-many',
-        ),
+        ],
         'opportunity_messages' => [
             'lhs_module' => 'Opportunities',
             'lhs_table' => 'opportunities',
@@ -1111,32 +1129,32 @@ $dictionary['Opportunity'] = array(
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Opportunities',
         ],
-    ),
-    'duplicate_check' => array(
+    ],
+    'duplicate_check' => [
         'enabled' => true,
-        'FilterDuplicateCheck' => array(
-            'filter_template' => array(
-                array(
-                    '$and' => array(
-                        array('name' => array('$starts' => '$name')),
-                        array('sales_stage' => array('$not_equals' => 'Closed Lost')),
-                        array('sales_stage' => array('$not_equals' => 'Closed Won')),
-                        array('accounts.id' => array('$equals' => '$account_id')),
-                    )
-                ),
-            ),
-            'ranking_fields' => array(
-                array('in_field_name' => 'name', 'dupe_field_name' => 'name'),
-            )
-        )
-    ),
+        'FilterDuplicateCheck' => [
+            'filter_template' => [
+                [
+                    '$and' => [
+                        ['name' => ['$starts' => '$name']],
+                        ['sales_stage' => ['$not_equals' => 'Closed Lost']],
+                        ['sales_stage' => ['$not_equals' => 'Closed Won']],
+                        ['accounts.id' => ['$equals' => '$account_id']],
+                    ],
+                ],
+            ],
+            'ranking_fields' => [
+                ['in_field_name' => 'name', 'dupe_field_name' => 'name'],
+            ],
+        ],
+    ],
 //This enables optimistic locking for Saves From EditView
     'optimistic_locking' => true,
-);
+];
 VardefManager::createVardef(
     'Opportunities',
     'Opportunity',
-    array(
+    [
         'default',
         'assignable',
         'team_security',
@@ -1144,7 +1162,7 @@ VardefManager::createVardef(
         'audit',
         'escalatable',
         'customer_journey_parent',
-    )
+    ]
 );
 
 $dictionary['Opportunity']['fields']['base_rate']['readonly'] = true;

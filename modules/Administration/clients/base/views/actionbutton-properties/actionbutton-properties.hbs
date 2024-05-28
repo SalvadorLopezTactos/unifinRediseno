@@ -11,11 +11,11 @@
  */
 --}}
 <div class="record ab-admin-button-properties">
-    <button class="btn btn-invisible" type="button" data-toggle="collapse" data-target="[data-container=properties]"
+    <button class="btn btn-invisible" type="button" data-bs-toggle="collapse" data-bs-target="[data-container=properties]"
         aria-expanded="false" aria-controls="[data-container=properties]">
         <h1><i class="sicon sicon-chevron-down"></i> {{str "LBL_ACTIONBUTTON_PROPERTIES"}}</h1>
     </button>
-    <div class="in collapse" data-container="properties">
+    <div class="in bs-collapse collapse show" data-container="properties">
         {{#each properties}}
             {{partial template ../this data=this}}
         {{/each}}

@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Tablero de registro de compras',
     'LBL_RELATED_ACCOUNT' => 'Cuenta relacionada',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Panel de Enfoque de Compras',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Línea de tiempo de compras',
 ];

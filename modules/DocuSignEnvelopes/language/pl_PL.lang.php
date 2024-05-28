@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Pobierz kopertę',
     'LBL_CLOUD_SERVICE_TYPE' => 'Typ usługi chmury',
     'LBL_CLOUD_PATH' => 'Ścieżka do chmury',
+    'LBL_CLOUD_DRIVE_ID' => 'ID dysku',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Pulpit listy kopert DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'Pulpit rekordu kopert DocuSign',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Ostatnie koperty DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy kopert DocuSign',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Oś czasu koperty DocuSign',
 
     'LBL_NEW_ENVELOPE' => 'Nowa koperta',
     'LBL_DOCUMENT_IS_NOW' => ' jest teraz ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Wyślij',
     'LBL_BUTTON_CLEAR' => 'Wyczyść',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Użyj szablonu',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Wyślij z szablonem',
     'LBL_PLEASE_LOG_IN' => 'Najpierw zaloguj się do DocuSign.',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Nie można pobrać tego dokumentu. Został utworzony przez innego użytkownika.',
     'LBL_SEND_NOT_ALLOWED' => 'Nie można wysłać tej koperty. Została utworzona przez innego użytkownika.',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Wersja robocza została zmieniona. Czy zaktualizować status na bieżący ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'Koperta DocuSign została zaktualizowana.',
     'LBL_DRAFT_CHANGED_ERROR' => 'Nie można zaktualizować stanu koperty DocuSign. Więcej informacji można znaleźć w dziennikach.',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'Nie można zastosować szablonu DocuSign',
     'LBL_ENVELOPE_NOT_SENT' => 'Koperta nie została wysłana.',
     'LBL_ENVELOPE_SENT' => 'Koperta została wysłana ponownie.',
     'LBL_DOCUMENT_ADDED' => 'Dokument dodany do rekordu.',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Rola',
     'LBL_SELECT_BUTTON_LABEL' => 'Wybierz',
     'LBL_BACK_BUTTON_LABEL' => 'Wstecz',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Wyszukaj wg nazwy szablonu',
+    'LBL_ENVELOPE_NAME' => 'Nazwa koperty',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Nazwa koperty nie może być pusta',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Pobranie potencjalnych odbiorców nie powiodło się.',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Pobranie szablonów nie powiodło się.',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Wybierz rolę dla każdego odbiorcy',
+    
+    'LBL_DOWNLOAD' => 'Pobierz',
+    'LBL_OPEN_DRAFT' => 'Otwórz wersję roboczą',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Nie można wysyłać dokumentów bez pliku do DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Kliknij przycisk Plus, aby rozpocząć podpisywanie',
+    'LBL_NO_DOC_SELECTED' => 'Najpierw wybierz dokumenty',
+    'LBL_SELECT_RECIPIENTS' => 'Wybierz odbiorcę os. podpisującej',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Wyklucz',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Aby poprawić funkcjonalność, zainstaluj aplikację DocuSign.',
 ];

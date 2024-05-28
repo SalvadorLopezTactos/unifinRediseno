@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,12 +17,9 @@
  ********************************************************************************/
 
 
-
-
-
-$current_module_strings = return_module_language($current_language, "Opportunities");
+$current_module_strings = return_module_language($current_language, 'Opportunities');
 $seedOpportunity = BeanFactory::newBean('Opportunities');
-	
+
 //build top 5 opportunity list
 $where = "opportunities.sales_stage <> '"
     . $seedOpportunity::STAGE_CLOSED_LOST
@@ -33,7 +29,7 @@ $where = "opportunities.sales_stage <> '"
     . $seedOpportunity->db->quote($current_user->id) . "'";
 $header_text = '';
 $ListView = new ListView();
-$ListView->initNewXTemplate( 'modules/Opportunities/ListViewTop.html',$current_module_strings);
-$ListView->setHeaderTitle($current_module_strings['LBL_TOP_OPPORTUNITIES']. $header_text );
-$ListView->setQuery($where, 5, "amount  DESC", "OPPORTUNITY", false);
-$ListView->processListView($seedOpportunity, "main", "OPPORTUNITY");
+$ListView->initNewXTemplate('modules/Opportunities/ListViewTop.html', $current_module_strings);
+$ListView->setHeaderTitle($current_module_strings['LBL_TOP_OPPORTUNITIES'] . $header_text);
+$ListView->setQuery($where, 5, 'amount  DESC', 'OPPORTUNITY', false);
+$ListView->processListView($seedOpportunity, 'main', 'OPPORTUNITY');

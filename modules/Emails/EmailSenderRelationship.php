@@ -53,7 +53,7 @@ class EmailSenderRelationship extends EmailRecipientRelationship
      *
      * {@inheritdoc}
      */
-    public function add($lhs, $rhs, $additionalFields = array())
+    public function add($lhs, $rhs, $additionalFields = [])
     {
         if ($lhs->isArchived()) {
             throw new SugarApiExceptionNotAuthorized("Cannot add to {$this->name} when the email is archived");

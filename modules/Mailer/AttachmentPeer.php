@@ -26,15 +26,16 @@ class AttachmentPeer
      * @return Attachment
      * @throws MailerException
      */
-    public static function attachmentFromSugarBean(SugarBean $bean) {
+    public static function attachmentFromSugarBean(SugarBean $bean)
+    {
         $filePath = null;
         $fileName = null;
-        $mimeType = "";
+        $mimeType = '';
 
         if ($bean instanceof Document) {
             if (empty($bean->id)) {
                 throw new MailerException(
-                    "Invalid Attachment: document not found",
+                    'Invalid Attachment: document not found',
                     MailerException::InvalidAttachment
                 );
             }
@@ -45,7 +46,7 @@ class AttachmentPeer
             }
             if (empty($document_revision_id) || $documentRevision->id != $document_revision_id) {
                 throw new MailerException(
-                    "Invalid Attachment: Document with Id (" . $bean->id . ")  contains an invalid or empty revision id: (" . $document_revision_id . ")",
+                    'Invalid Attachment: Document with Id (' . $bean->id . ')  contains an invalid or empty revision id: (' . $document_revision_id . ')',
                     MailerException::InvalidAttachment
                 );
             }
@@ -54,8 +55,8 @@ class AttachmentPeer
 
         $beanName = get_class($bean);
         switch ($beanName) {
-            case "Note":
-            case "DocumentRevision":
+            case 'Note':
+            case 'DocumentRevision':
                 $filePath = 'upload://' . (method_exists($bean, 'getUploadId') ? $bean->getUploadId() : $bean->id);
                 $fileName = empty($bean->filename) ? $bean->name : $bean->filename;
                 $mimeType = empty($bean->file_mime_type) ? $mimeType : $bean->file_mime_type;
@@ -92,14 +93,15 @@ class AttachmentPeer
      * @return EmbeddedImage
      * @throws MailerException
      */
-    public static function embeddedImageFromSugarBean(SugarBean $bean, $cid) {
+    public static function embeddedImageFromSugarBean(SugarBean $bean, $cid)
+    {
         $beanName = get_class($bean);
         $filePath = null;
         $fileName = null;
-        $mimeType = "";
+        $mimeType = '';
 
         switch ($beanName) {
-            case "Note":
+            case 'Note':
                 $filePath = 'upload://' . $bean->getUploadId();
                 $fileName = empty($bean->filename) ? $bean->name : $bean->filename;
                 $mimeType = empty($bean->file_mime_type) ? $mimeType : $bean->file_mime_type;

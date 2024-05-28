@@ -23,7 +23,7 @@ class SugarMerge7 extends SugarMerge
     public function setUpgrader($u)
     {
         $this->upgrader = $u;
-        if(!empty($u->fp)) {
+        if (!empty($u->fp)) {
             $this->setLogFilePointer($u->fp);
         }
     }
@@ -38,12 +38,12 @@ class SugarMerge7 extends SugarMerge
      * Override so that we would have better logging
      * @see SugarMerge::createHistoryLog()
      */
-    protected function createHistoryLog($module,$customFile,$file)
+    protected function createHistoryLog($module, $customFile, $file)
     {
         $historyPath = 'custom/' . MB_HISTORYMETADATALOCATION . "/modules/$module/metadata/$file";
         $history = new History($historyPath);
         $timeStamp = $history->append($customFile);
-        $this->log("Created history file after merge with new file: " . $historyPath .'_'.$timeStamp);
+        $this->log('Created history file after merge with new file: ' . $historyPath . '_' . $timeStamp);
     }
 
     /**
@@ -52,11 +52,8 @@ class SugarMerge7 extends SugarMerge
      */
     protected function log($message)
     {
-        if($this->upgrader) {
+        if ($this->upgrader) {
             $this->upgrader->log($message);
         }
     }
-
 }
-
-

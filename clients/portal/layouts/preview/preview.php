@@ -11,18 +11,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['portal']['layout']['preview'] = array(
+$viewdefs['portal']['layout']['preview'] = [
     'lazy_loaded' => true,
-    'components' =>
-    array(
-        array(
+    'components' => [
+        [
             'view' => 'preview-header',
-        ),
-        array(
+        ],
+        [
             'view' => 'preview',
-        ),
-    ),
+        ],
+    ],
     'type' => 'preview',
     'span' => 12,
-);
-
+];

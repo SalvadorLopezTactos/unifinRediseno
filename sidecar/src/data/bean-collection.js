@@ -9,8 +9,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const Bean = require('data/bean');
-const PluginManager = require('core/plugin-manager');
+const Bean = require('./bean');
+const PluginManager = require('../core/plugin-manager');
 
 /**
  * Base bean collection class. It extends `Backbone.Collection`.
@@ -24,7 +24,7 @@ const PluginManager = require('core/plugin-manager');
  * module 'Accounts':
  *
  * ```
- * const DataManager = require('data/data-manager');
+ * const DataManager = require('./data-manager');
  * let accounts = DataManager.createBeanCollection('Accounts');
  * accounts.add({name: 'account1', industry: 'Banking'});
  * ```
@@ -35,7 +35,7 @@ const PluginManager = require('core/plugin-manager');
  * search options. For example, to search favorite accounts that have the string
  * `"Acme"` in their name:
  * ```
- * const DataManager = require('data/data-manager');
+ * const DataManager = require('./data-manager');
  * let accounts = DataManager.createBeanCollection('Accounts');
  * accounts.fetch({
  *     favorites: true,

@@ -37,12 +37,12 @@ class EmailsApiHelper extends SugarBeanApiHelper
     private function cids2Links($email, &$descriptionHtml)
     {
         $settings = new ApiSettings();
-        $imageUrlTemplate = rtrim(SugarConfig::getInstance()->get("site_url", false), '/')
-            . "/rest/" . $settings->formatVersionForUrl() ."/Notes/%s/file/filename?force_download=0&platform=base";
+        $imageUrlTemplate = rtrim(SugarConfig::getInstance()->get('site_url', false), '/')
+            . '/rest/' . $settings->formatVersionForUrl() . '/Notes/%s/file/filename?force_download=0&platform=base';
 
         $stmt = $email->db->getConnection()->executeQuery(
             'SELECT id, file_mime_type FROM notes WHERE email_id = ? AND deleted = 0',
-            array($email->id)
+            [$email->id]
         );
 
         sugar_mkdir(sugar_cached('images/'));
@@ -61,7 +61,7 @@ class EmailsApiHelper extends SugarBeanApiHelper
      * `outbound_email_id` is not included in the response if the user does not have access to the outbound email
      * account.
      */
-    public function formatForApi(\SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(\SugarBean $bean, array $fieldList = [], array $options = [])
     {
         $data = parent::formatForApi($bean, $fieldList, $options);
         $oe = null;
@@ -71,7 +71,7 @@ class EmailsApiHelper extends SugarBeanApiHelper
         }
 
         if (empty($oe)) {
-             unset($data['outbound_email_id']);
+            unset($data['outbound_email_id']);
         }
 
         if (!empty($data['description_html'])) {
@@ -101,7 +101,7 @@ class EmailsApiHelper extends SugarBeanApiHelper
      * @throws SugarApiExceptionNotFound Thrown if `outbound_email_id` is submitted and the record cannot be found or is
      * inaccessible to the user.
      */
-    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = array())
+    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = [])
     {
         // Set the state before anything else because field-level ACL checks are dependent on an email's state and the
         // ACL checks are performed before the fields are populated.

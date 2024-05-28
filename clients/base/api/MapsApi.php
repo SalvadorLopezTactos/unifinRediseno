@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\Maps\FilterUtils as MapsFilterUtils;
 use Sugarcrm\Sugarcrm\Maps\MapsGenerator;
 
@@ -313,7 +314,7 @@ class MapsApi extends FilterApi
 
             if ($relatedLink) {
                 $relatedRecords = $relatedLink->getBeans();
-                $hasParent = (is_countable($relatedRecords) ? count($relatedRecords) : 0) > 0;
+                $hasParent = safeCount($relatedRecords) > 0;
 
                 $recordId = $hasParent ? array_keys($relatedRecords)[0] : $recordId;
                 $recordModule = $hasParent ? $relatedRecords[$recordId]->module_name : $recordModule;
@@ -333,10 +334,11 @@ class MapsApi extends FilterApi
      */
     private static function addMapsSelectFields(
         SugarQuery $q,
-        array $fields,
-        string $targetModule = '',
-        string $targetTableAlias = ''
+        array      $fields,
+        string     $targetModule = '',
+        string     $targetTableAlias = ''
     ) {
+
         global $db;
 
         $module = $targetModule ?: $q->getFromBean()->getModuleName();
@@ -366,7 +368,7 @@ class MapsApi extends FilterApi
      *
      * @return array
      */
-    public function getNearBy(ServiceBase $api, array $args):array
+    public function getNearBy(ServiceBase $api, array $args): array
     {
         $result = [];
         if (!hasMapsLicense()) {
@@ -375,7 +377,7 @@ class MapsApi extends FilterApi
 
         $this->requireArgs($args, ['radius', 'latitude', 'longitude']);
 
-        $coords  = [
+        $coords = [
             'latitude' => $args['latitude'],
             'longitude' => $args['longitude'],
         ];
@@ -548,7 +550,7 @@ class MapsApi extends FilterApi
                     ->execute()
                     ->fetchFirstColumn();
             } catch (\Throwable $e) {
-                $errorMessage = sprintf("Maps failed retrieving geocoded records: %s", $e->getMessage());
+                $errorMessage = sprintf('Maps failed retrieving geocoded records: %s', $e->getMessage());
                 $GLOBALS['log']->fatal($errorMessage);
 
                 return [
@@ -557,7 +559,7 @@ class MapsApi extends FilterApi
                 ];
             }
 
-            if ((is_countable($ids) ? count($ids) : 0) < 1) {
+            if (safeCount($ids) < 1) {
                 return [
                     'records' => [],
                     'next_offset' => -1,
@@ -601,10 +603,10 @@ class MapsApi extends FilterApi
         $i = $distinctCompensation;
         foreach ($beans as $beanId => $bean) {
             if ($i == $options['limit']) {
-                if ((is_countable($beans) ? count($beans) : 0) > $options['limit']) {
+                if (safeCount($beans) > $options['limit']) {
                     unset($beans[$beanId]);
                 }
-                $data['next_offset'] = (int) ($options['limit'] + $options['offset']);
+                $data['next_offset'] = (int)($options['limit'] + $options['offset']);
                 continue;
             }
             $i++;

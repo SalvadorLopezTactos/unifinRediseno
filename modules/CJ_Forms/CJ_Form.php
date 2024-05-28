@@ -27,6 +27,9 @@ class CJ_Form extends Basic
     public const ACTION_TRIGGER_AUTOMATIC_UPDATE = 'automatic_update';
     public const ACTION_TRIGGER_MANUAL_UPDATE = 'manual_update';
 
+    public const MAIN_TRIGGER_EVENT_SG_To_SA = 'smart_guide_to_sugar_action';
+    public const MAIN_TRIGGER_EVENT_SA_To_SG = 'sugar_action_to_smart_guide';
+
     public const TABLE_NAME = 'cj_forms';
 
     public $disable_row_level_security = false;
@@ -98,15 +101,16 @@ class CJ_Form extends Basic
     /**
      * Get the enum values for the relationships
      *
+     * @deprecated
      * @return array
      */
     public static function getRelationshipEnumValues()
     {
         $values = array_merge(
             ['' => ''],
-            self::addValuesForModule('Tasks', 'Tasks', 'Tasks', null),
-            self::addValuesForModule('Meetings', 'Meetings', 'Meetings', null),
-            self::addValuesForModule('Calls', 'Calls', 'Calls', null)
+            self::addValuesForModule('Tasks', 'Tasks', 'Tasks', ''),
+            self::addValuesForModule('Meetings', 'Meetings', 'Meetings', ''),
+            self::addValuesForModule('Calls', 'Calls', 'Calls', '')
         );
 
         ksort($values);
@@ -120,6 +124,7 @@ class CJ_Form extends Basic
      * @param string $prefixName
      * @param string $skipLink
      * @param integer $depth
+     * @deprecated
      * @return array
      */
     public static function addValuesForModule(
@@ -127,8 +132,9 @@ class CJ_Form extends Basic
         string $prefix,
         string $prefixName,
         string $skipLink,
-        int $depth = 0
+        int    $depth = 0
     ) {
+
         $GLOBALS['log']->fatal('loading $module');
         $bean = BeanFactory::newBean($module);
         $fieldsArr = [
@@ -216,7 +222,10 @@ class CJ_Form extends Basic
             $form->id = \Sugarcrm\Sugarcrm\Util\Uuid::uuid4();
             $form->new_with_id = true;
             $form->dri_workflow_template_id = $journeyTemplate->id;
-            $form->dri_workflow_template_name = $journeyTemplate->name;
+            // Set Smart Guide Template in case of Sugar Action to Smart Guide
+            if ($form->main_trigger_type === 'sugar_action_to_smart_guide') {
+                $form->smart_guide_template_id = $journeyTemplate->id;
+            }
             $form->parent_id = $parent->id;
             $form->parent_name = $parent->name;
             $form->parent_type = $parent->module_dir;
@@ -232,7 +241,9 @@ class CJ_Form extends Basic
      */
     private function validateUniqueTriggerEvent()
     {
-        if (!$this->active ||
+        if (empty($this->main_trigger_type) ||
+            $this->main_trigger_type == 'sugar_action_to_smart_guide' ||
+            !$this->active ||
             $this->action_trigger_type === self::ACTION_TRIGGER_AUTOMATIC_CREATE ||
             $this->action_trigger_type === self::ACTION_TRIGGER_AUTOMATIC_UPDATE) {
             return;
@@ -258,9 +269,11 @@ class CJ_Form extends Basic
 
         $results = $query->execute();
 
-        if (count($results) > 0) {
+        if (safeCount($results) > 0) {
+            $bean = BeanFactory::getBean('CJ_Forms', $results[0]['id']);
+            $templateName = $bean->parent_name ?? 'Undefined parent';
             $event = translate('cj_forms_trigger_event_list', 'CJ_Forms', $this->trigger_event);
-            $message = sprintf(translate('LBL_DUPLICATE_TRIGGER_EVENT_FOUND_ERROR', 'CJ_Forms'), $event);
+            $message = sprintf(translate('LBL_DUPLICATE_TRIGGER_EVENT_FOUND_ERROR', 'CJ_Forms'), $templateName, $event);
             throw new SugarApiExceptionInvalidParameter($message);
         }
     }

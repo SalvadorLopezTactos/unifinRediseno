@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Dataarkiverare',
     'LBL_MODULE_NAME' => 'Dataarkiverare',
     'LBL_FILTER_DEF_FIELD' => 'Filter',
@@ -28,7 +27,7 @@ $mod_strings = array (
     'LBL_MANAGE_ARCHIVE_JOB_LIST_TITLE' => 'Schemalagda arkiv',
     'LBL_MANAGE_ARCHIVE_JOB_IS_NOT_SCHEDULED' => 'Inga schemalagda arkiv',
     'LBL_ARCHIVE_FILTER' => 'Filterinställningar',
-    "LBL_MANAGE_ARCHIVE_SETUP" => 'Konfigurera dataarkivering',
+    'LBL_MANAGE_ARCHIVE_SETUP' => 'Konfigurera dataarkivering',
     'LBL_LIST_ARCHIVE_NAME' => 'Arkivnamn',
     'LBL_PERFORM_NOW_BTN' => 'Genomför nu',
     'LBL_ARCHIVE_SUCCESS_TITLE' => 'Genomfört',
@@ -45,4 +44,4 @@ $mod_strings = array (
         . 'eftersom det kan påverka systemets prestanda. Vill du utföra denna åtgärd nu?',
 
     'TPL_PMSE_INBOX_ERROR_MESSAGE' => 'Arkiverare för {{moduleName}}-modulen måste ha {{fieldName}} inställt som filter',
-);
+];

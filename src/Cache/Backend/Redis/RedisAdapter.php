@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -30,8 +32,8 @@ final class RedisAdapter extends AbstractAdapter
 
     /**
      * @param \Redis|\RedisArray|\RedisCluster|\Predis\Client $redisClient
-     * @param string                                          $namespace
-     * @param int                                             $defaultLifetime
+     * @param string $namespace
+     * @param int $defaultLifetime
      */
     public function __construct($redisClient, $namespace = '', $defaultLifetime = 0)
     {
@@ -44,7 +46,7 @@ final class RedisAdapter extends AbstractAdapter
             return [];
         }
         $result = [];
-        if (\count($ids) === 1) {
+        if (safeCount($ids) === 1) {
             $values = $this->traitPipeline(function () use ($ids) {
                 foreach ($ids as $id) {
                     yield 'get' => [$id];

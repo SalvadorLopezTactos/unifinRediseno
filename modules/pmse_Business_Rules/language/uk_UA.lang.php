@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Правила бізнес-процесів',
-  'LBL_MODULE_TITLE' => 'Правила бізнес-процесів',
-  'LBL_MODULE_NAME_SINGULAR' => 'Правило бізнес-процесу',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Правила бізнес-процесів',
+    'LBL_MODULE_TITLE' => 'Правила бізнес-процесів',
+    'LBL_MODULE_NAME_SINGULAR' => 'Правило бізнес-процесу',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель бізнес-правил процесів',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель бізнес-правил процесів',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Інформаційна панель записів щодо бізнес-правил процесів',
-  'LBL_RST_UID' => 'Бізнес-правило (ID)',
-  'LBL_RST_TYPE' => 'Тип бізнес-правила',
-  'LBL_RST_DEFINITION' => 'Визначення бізнес-правила',
-  'LBL_RST_EDITABLE' => 'Бізнес-правила для редагування',
-  'LBL_RST_SOURCE' => 'Джерело бізнес-правила',
-  'LBL_RST_SOURCE_DEFINITION' => 'Визначення джерела бізнес-правила',
-  'LBL_RST_MODULE' => 'Основний модуль',
-  'LBL_RST_FILENAME' => 'Назва файлу бізнес-правила',
-  'LBL_RST_CREATE_DATE' => 'Дата створення бізнес-правила',
-  'LBL_RST_UPDATE_DATE' => 'Дата оновлення бізнес-правила',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Інформаційна панель записів щодо бізнес-правил процесів',
+    'LBL_RST_UID' => 'Бізнес-правило (ID)',
+    'LBL_RST_TYPE' => 'Тип бізнес-правила',
+    'LBL_RST_DEFINITION' => 'Визначення бізнес-правила',
+    'LBL_RST_EDITABLE' => 'Бізнес-правила для редагування',
+    'LBL_RST_SOURCE' => 'Джерело бізнес-правила',
+    'LBL_RST_SOURCE_DEFINITION' => 'Визначення джерела бізнес-правила',
+    'LBL_RST_MODULE' => 'Основний модуль',
+    'LBL_RST_FILENAME' => 'Назва файлу бізнес-правила',
+    'LBL_RST_CREATE_DATE' => 'Дата створення бізнес-правила',
+    'LBL_RST_UPDATE_DATE' => 'Дата оновлення бізнес-правила',
 
     'LNK_LIST' => 'Переглянути процес обробки бізнес-правил',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Створити процес обробки бізнес-правила',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Це бізнес-правило недійсне, оскільки воно використовує недійсні поля або поля, які не знайдено у вашій версії SugarCRM. Виправте наведені нижче помилки та збережіть бізнес-правило.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Це бізнес-правило використовується у визначенні процесів. Справді редагувати бізнес-правило?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Це бізнес-правило не можна видалити, оскільки воно використовується у визначенні процесів.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Це бізнес-правило не можна видалити, оскільки воно використовується у визначенні процесів.',
+];

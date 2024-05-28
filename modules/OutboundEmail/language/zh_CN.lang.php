@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '发送电子邮件账户',
     'LBL_MODULE_NAME_SINGULAR' => '发送电子邮件帐户',
     'LBL_STATUS' => '状态',
@@ -40,4 +40,4 @@ $mod_strings = array(
     'LBL_PREFERRED_SENDING_ACCOUNT' => '首选发送帐户',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => '电子邮件设置焦点抽屉',
-);
+];

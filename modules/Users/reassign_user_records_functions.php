@@ -14,11 +14,11 @@ function getModuleMultiSelectOptions()
     global $beanList, $beanFiles, $dictionary, $app_list_strings;
 
     $exclude_modules = [
-        "ImportMap",
-        "UsersLastImport",
-        "SavedSearch",
-        "UserPreference",
-        "SugarFavorites",
+        'ImportMap',
+        'UsersLastImport',
+        'SavedSearch',
+        'UserPreference',
+        'SugarFavorites',
         'OAuthKey',
         'OAuthToken',
     ];
@@ -34,12 +34,12 @@ function getModuleMultiSelectOptions()
             } else {
                 $obj = BeanFactory::newBean($m);
                 if (!isset($obj->field_defs['assigned_user_id']) || (
-                        isset($obj->field_defs['assigned_user_id']['source']) &&
-                        $obj->field_defs['assigned_user_id']['source'] === "non-db"
-                    ) || (
-                        isset($dictionary[$obj->object_name]['reassignable']) &&
-                        !isTruthy($dictionary[$obj->object_name]['reassignable'])
-                    )
+                    isset($obj->field_defs['assigned_user_id']['source']) &&
+                        $obj->field_defs['assigned_user_id']['source'] === 'non-db'
+                ) || (
+                    isset($dictionary[$obj->object_name]['reassignable']) &&
+                    !isTruthy($dictionary[$obj->object_name]['reassignable'])
+                )
                 ) {
                     unset($beanListDup[$m]);
                 }
@@ -61,7 +61,7 @@ function getModuleMultiSelectOptions()
         $_SESSION['reassignRecords']['assignedModuleListCacheDisp'] = $beanListDupDisp;
     }
 
-    $selected = array();
+    $selected = [];
 
     if (!empty($_SESSION['reassignRecords']['modules'])) {
         foreach ($_SESSION['reassignRecords']['modules'] as $key => $mod) {
@@ -103,8 +103,8 @@ function processConditions(SugarBean $bean, string $fromuser, array $moduleFilte
             $addcstm = $is_custom ? '_cstm' : '';
 
             switch ($meta['type']) {
-                case "text":
-                case "select":
+                case 'text':
+                case 'select':
                     $q_where .= sprintf(
                         ' and %s.%s = %s ',
                         $table . $addcstm,
@@ -113,7 +113,7 @@ function processConditions(SugarBean $bean, string $fromuser, array $moduleFilte
                     );
 
                     break;
-                case "multiselect":
+                case 'multiselect':
                     if (empty($data[$metaName])) {
                         continue 2;
                     }
@@ -122,7 +122,7 @@ function processConditions(SugarBean $bean, string $fromuser, array $moduleFilte
                     // only thing and set to none. However, we need to
                     // exclude '0', since '0' is considered by php
                     // to be empty, but in our logic, it is a valid value.
-                    if ((is_countable($data[$metaName]) ? count($data[$metaName]) : 0) == 1 &&
+                    if (safeCount($data[$metaName]) == 1 &&
                         empty($data[$metaName][0]) &&
                         $data[$metaName][0] !== '0') {
                         continue 2;
@@ -135,9 +135,9 @@ function processConditions(SugarBean $bean, string $fromuser, array $moduleFilte
                         }
                     }
 
-                    $in_string = implode(',', array_map(function ($value) use ($db) : string {
+                    $in_string = implode(',', array_map(function ($value) use ($db): string {
                         return $db->quoted($value);
-                    }, (array) $data[$metaName]));
+                    }, (array)$data[$metaName]));
 
                     $q_where .= " AND ({$table}{$addcstm}.{$meta['dbname']} IN ($in_string) $empty_check)";
                     break;
@@ -147,5 +147,5 @@ function processConditions(SugarBean $bean, string $fromuser, array $moduleFilte
             }
         }
     }
-    return array($q_tables, $q_where);
+    return [$q_tables, $q_where];
 }

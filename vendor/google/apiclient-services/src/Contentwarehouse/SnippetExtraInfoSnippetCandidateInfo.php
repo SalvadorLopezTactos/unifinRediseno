@@ -20,6 +20,10 @@ namespace Google\Service\Contentwarehouse;
 class SnippetExtraInfoSnippetCandidateInfo extends \Google\Collection
 {
   protected $collection_key = 'snippet';
+  protected $boldedRangesType = QualitySnippetsTruncationSnippetBoldedRange::class;
+  protected $boldedRangesDataType = 'array';
+  protected $extendedSnippetType = SnippetExtraInfoSnippetCandidateInfoExtendedSnippet::class;
+  protected $extendedSnippetDataType = '';
   /**
    * @var int
    */
@@ -36,14 +40,12 @@ class SnippetExtraInfoSnippetCandidateInfo extends \Google\Collection
   protected $listInfoDataType = '';
   protected $scoringInfoType = SnippetExtraInfoSnippetScoringInfo::class;
   protected $scoringInfoDataType = '';
+  protected $sentenceStartsType = QualitySnippetsTruncationSnippetBoldedRangePosition::class;
+  protected $sentenceStartsDataType = 'array';
   /**
    * @var string[]
    */
   public $snippet;
-  /**
-   * @var string
-   */
-  public $snippetSource;
   /**
    * @var string
    */
@@ -53,6 +55,34 @@ class SnippetExtraInfoSnippetCandidateInfo extends \Google\Collection
    */
   public $snippetType;
 
+  /**
+   * @param QualitySnippetsTruncationSnippetBoldedRange[]
+   */
+  public function setBoldedRanges($boldedRanges)
+  {
+    $this->boldedRanges = $boldedRanges;
+  }
+  /**
+   * @return QualitySnippetsTruncationSnippetBoldedRange[]
+   */
+  public function getBoldedRanges()
+  {
+    return $this->boldedRanges;
+  }
+  /**
+   * @param SnippetExtraInfoSnippetCandidateInfoExtendedSnippet
+   */
+  public function setExtendedSnippet(SnippetExtraInfoSnippetCandidateInfoExtendedSnippet $extendedSnippet)
+  {
+    $this->extendedSnippet = $extendedSnippet;
+  }
+  /**
+   * @return SnippetExtraInfoSnippetCandidateInfoExtendedSnippet
+   */
+  public function getExtendedSnippet()
+  {
+    return $this->extendedSnippet;
+  }
   /**
    * @param int
    */
@@ -124,6 +154,20 @@ class SnippetExtraInfoSnippetCandidateInfo extends \Google\Collection
     return $this->scoringInfo;
   }
   /**
+   * @param QualitySnippetsTruncationSnippetBoldedRangePosition[]
+   */
+  public function setSentenceStarts($sentenceStarts)
+  {
+    $this->sentenceStarts = $sentenceStarts;
+  }
+  /**
+   * @return QualitySnippetsTruncationSnippetBoldedRangePosition[]
+   */
+  public function getSentenceStarts()
+  {
+    return $this->sentenceStarts;
+  }
+  /**
    * @param string[]
    */
   public function setSnippet($snippet)
@@ -136,20 +180,6 @@ class SnippetExtraInfoSnippetCandidateInfo extends \Google\Collection
   public function getSnippet()
   {
     return $this->snippet;
-  }
-  /**
-   * @param string
-   */
-  public function setSnippetSource($snippetSource)
-  {
-    $this->snippetSource = $snippetSource;
-  }
-  /**
-   * @return string
-   */
-  public function getSnippetSource()
-  {
-    return $this->snippetSource;
   }
   /**
    * @param string

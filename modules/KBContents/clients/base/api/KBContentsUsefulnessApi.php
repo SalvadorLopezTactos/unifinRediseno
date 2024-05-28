@@ -15,24 +15,24 @@ class KBContentsUsefulnessApi extends ModuleApi
 {
     public function registerApiRest()
     {
-        return array(
-            'useful' => array(
+        return [
+            'useful' => [
                 'reqType' => 'PUT',
-                'path' => array('KBContents', '?', 'useful'),
-                'pathVars' => array('module', 'record', 'useful'),
+                'path' => ['KBContents', '?', 'useful'],
+                'pathVars' => ['module', 'record', 'useful'],
                 'method' => 'voteUseful',
                 'shortHelp' => 'This method votes a record of the specified type as useful',
                 'longHelp' => 'include/api/help/kb_vote_put_help.html',
-            ),
-            'notuseful' => array(
+            ],
+            'notuseful' => [
                 'reqType' => 'PUT',
-                'path' => array('KBContents', '?', 'notuseful'),
-                'pathVars' => array('module', 'record', 'notuseful'),
+                'path' => ['KBContents', '?', 'notuseful'],
+                'pathVars' => ['module', 'record', 'notuseful'],
                 'method' => 'voteNotUseful',
                 'shortHelp' => 'This method votes a record of the specified type as not useful',
                 'longHelp' => 'include/api/help/kb_vote_put_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -42,13 +42,13 @@ class KBContentsUsefulnessApi extends ModuleApi
      * @param array $args
      * @param bool $isUseful
      *
+     * @return array An array version of the SugarBean with only the requested fields (also filtered by ACL)
      * @throws SugarApiExceptionNotAuthorized
      *
-     * @return array An array version of the SugarBean with only the requested fields (also filtered by ACL)
      */
     protected function vote(ServiceBase $api, array $args, $isUseful)
     {
-        $this->requireArgs($args, array('module', 'record'));
+        $this->requireArgs($args, ['module', 'record']);
         $bean = $this->loadBean($api, $args, 'view');
 
         if (!$bean->ACLAccess('view')) {
@@ -57,7 +57,7 @@ class KBContentsUsefulnessApi extends ModuleApi
             $moduleName = $failed_module_strings['LBL_MODULE_NAME'];
             $exceptionArgs = null;
             if (!empty($moduleName)) {
-                $exceptionArgs = array('moduleName' => $moduleName);
+                $exceptionArgs = ['moduleName' => $moduleName];
             }
             throw new SugarApiExceptionNotAuthorized(
                 'EXCEPTION_VOTE_USEFULNESS_NOT_AUTHORIZED',
@@ -89,7 +89,7 @@ class KBContentsUsefulnessApi extends ModuleApi
         }
         $bean->saveUsefulness();
 
-        $bean = BeanFactory::getBean($bean->module_dir, $bean->id, array('use_cache' => false));
+        $bean = BeanFactory::getBean($bean->module_dir, $bean->id, ['use_cache' => false]);
         $api->action = 'view';
         $data = $this->formatBean($api, $args, $bean);
 

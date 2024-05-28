@@ -64,6 +64,7 @@ class SugarApiException extends SugarException
         return $this->httpCode;
     }
 }
+
 /**
  * General error, no specific cause known.
  */
@@ -116,6 +117,7 @@ class SugarApiExceptionNotAuthorized extends SugarApiException
     public $errorLabel = 'not_authorized';
     public $messageLabel = 'EXCEPTION_NOT_AUTHORIZED';
 }
+
 /**
  * This user is not active.
  */
@@ -125,6 +127,7 @@ class SugarApiExceptionPortalUserInactive extends SugarApiException
     public $errorLabel = 'inactive_portal_user';
     public $messageLabel = 'EXCEPTION_INACTIVE_PORTAL_USER';
 }
+
 /**
  * Portal is not activated by configuration.
  */
@@ -134,7 +137,9 @@ class SugarApiExceptionPortalNotConfigured extends SugarApiException
     public $errorLabel = 'portal_not_configured';
     public $messageLabel = 'EXCEPTION_PORTAL_NOT_CONFIGURED';
 }
+
 // @codingStandardsIgnoreStart
+
 /**
  * # of active users exceeds license seats
  */
@@ -144,7 +149,9 @@ class SugarApiExceptionLicenseSeatsNeeded extends SugarApiException
     public $errorLabel = 'license_seats_needed';
     public $messageLabel = 'EXCEPTION_LICENSE_SEATS_NEEDED';
 }
+
 // @codingStandardsIgnoreEnd
+
 /**
  * URL does not resolve into a valid REST API method.
  */
@@ -154,6 +161,7 @@ class SugarApiExceptionNoMethod extends SugarApiException
     public $errorLabel = 'no_method';
     public $messageLabel = 'EXCEPTION_NO_METHOD';
 }
+
 /**
  * Resource specified by the URL does not exist.
  */
@@ -163,6 +171,7 @@ class SugarApiExceptionNotFound extends SugarApiException
     public $errorLabel = 'not_found';
     public $messageLabel = 'EXCEPTION_NOT_FOUND';
 }
+
 /**
  * Thrown when the client attempts to edit the data on the server that was already edited by
  * different client.
@@ -187,6 +196,7 @@ class SugarApiExceptionRequestTooLarge extends SugarApiException
     public $errorLabel = 'request_too_large';
     public $messageLabel = 'EXCEPTION_REQUEST_TOO_LARGE';
 }
+
 /**
  * One of the required parameters for the request is missing.
  */
@@ -196,6 +206,7 @@ class SugarApiExceptionMissingParameter extends SugarApiException
     public $errorLabel = 'missing_parameter';
     public $messageLabel = 'EXCEPTION_MISSING_PARAMTER';
 }
+
 /**
  * One of the required parameters for the request is incorrect.
  */
@@ -205,6 +216,7 @@ class SugarApiExceptionInvalidParameter extends SugarApiException
     public $errorLabel = 'invalid_parameter';
     public $messageLabel = 'EXCEPTION_INVALID_PARAMETER';
 }
+
 /**
  * The API method is unable to process parameters due to some of them being wrong.
  */
@@ -303,4 +315,14 @@ class SugarApiExceptionFieldDisabled extends SugarApiExceptionNotAuthorized
 {
     public $errorLabel = 'field_disabled';
     public $messageLabel = 'EXCEPTION_FIELD_DISABLED';
+}
+
+/**
+ * Attempt to access the SugarCRM instance with the client that is missed in the allowlist
+ */
+class SugarApiExceptionClientNotAllowed extends SugarApiException
+{
+    public $httpCode = 403;
+    public $errorLabel = 'client_not_allowed';
+    public $messageLabel = 'EXCEPTION_CLIENT_NOT_ALLOWED';
 }

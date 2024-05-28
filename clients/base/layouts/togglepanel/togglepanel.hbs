@@ -16,11 +16,11 @@
             <div class="toggle-actions actions">
                 <div class="btn-group" data-toggle="buttons-radio">
                     {{#each toggles}}
-                        <button type="button" class="btn {{#eq ../options.meta.default toggle}}active{{/eq}}" data-view="{{toggle}}" data-route="{{route}}" data-mode="view" rel="tooltip" title="{{str title}}" aria-label="{{str title}}" aria-pressed="{{#eq ../options.meta.default toggle}}true{{else}}false{{/eq}}"><i class="fa {{class}}"></i></button>
+                        <button type="button" class="btn {{#eq ../options.meta.default toggle}}active{{/eq}}" data-view="{{toggle}}" data-route="{{route}}" data-mode="view" rel="tooltip" title="{{str title}}" aria-label="{{str title}}" aria-pressed="{{#eq ../options.meta.default toggle}}true{{else}}false{{/eq}}"><i class="sicon {{class}}"></i></button>
                     {{/each}}
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="main-content"></div>
+<div class="main-content h-full overflow-hidden"></div>

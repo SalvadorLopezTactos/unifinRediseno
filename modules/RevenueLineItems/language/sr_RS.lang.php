@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Kontrolna tabla liste stavki prihoda',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa stavki prihoda',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Tipovi proizvoda',
     'LBL_ASSIGNED_TO_NAME' => 'Dodeljeni korisnik:',
     'LBL_ASSIGNED_TO' => 'Dodeljeno',
-    'LBL_ASSIGNED_TO_ID'=>'ID broj dodeljenog korisnika',
+    'LBL_ASSIGNED_TO_ID' => 'ID broj dodeljenog korisnika',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Ime dodeljenog korisnika',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'ID broj dodeljenog korisnika',
     'LBL_CAMPAIGN_ID' => 'ID kampanje',
@@ -217,4 +217,5 @@ Da bi {{module_name}} bio kreiran:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Prikazuje deset najboljih prodajnih prilika kružnim grafikonom.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Moje stavke prihoda',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Prodajne prilike moga tima",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija stavke prihoda',
+];

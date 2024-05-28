@@ -10,26 +10,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['Comment'] = array(
+$dictionary['Comment'] = [
     'table' => 'comments',
-    'fields' => array(
+    'fields' => [
         // Set unnecessary fields from Basic to non-required/non-db.
-        'name' => array (
+        'name' => [
             'name' => 'name',
             'type' => 'varchar',
             'required' => false,
             'source' => 'non-db',
-        ),
+        ],
 
-        'description' => array (
+        'description' => [
             'name' => 'description',
             'type' => 'varchar',
             'required' => false,
             'source' => 'non-db',
-        ),
+        ],
 
         // Add relationship fields.
-        'activities' => array(
+        'activities' => [
             'name' => 'activities',
             'type' => 'link',
             'relationship' => 'comments',
@@ -37,30 +37,30 @@ $dictionary['Comment'] = array(
             'module' => 'Activities',
             'bean_name' => 'Activity',
             'source' => 'non-db',
-        ),
+        ],
 
         // Add table columns.
-        'parent_id' => array(
-            'name'     => 'parent_id',
-            'type'     => 'id',
+        'parent_id' => [
+            'name' => 'parent_id',
+            'type' => 'id',
             'required' => true,
-        ),
+        ],
 
-        'data' => array(
+        'data' => [
             'name' => 'data',
             'type' => 'json',
             'dbType' => 'longtext',
             'required' => true,
-        ),
-    ),
+        ],
+    ],
 
-    'indices' => array(
-        array(
+    'indices' => [
+        [
             'name' => 'comment_activities',
             'type' => 'index',
-            'fields' => array('parent_id'),
-        ),
-    ),
+            'fields' => ['parent_id'],
+        ],
+    ],
     // @TODO Fix the Default and Basic SugarObject templates so that Basic
     // implements Default. This would allow the application of various
     // implementations on Basic without forcing Default to have those so that
@@ -70,10 +70,10 @@ $dictionary['Comment'] = array(
     // implementation fields. Once there is a separation of default and basic
     // templates we can safely remove these as this module will implement
     // default instead of basic.
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'commentlog',
-    ),
-);
+    ],
+];
 
-VardefManager::createVardef('ActivityStream/Comments', 'Comment', array('basic'));
+VardefManager::createVardef('ActivityStream/Comments', 'Comment', ['basic']);

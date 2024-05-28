@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kalenteri',
     'LBL_MODULE_NAME_SINGULAR' => 'Kalenteri',
     'LBL_MODULE_TITLE' => 'Kalenteri',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Asetukset',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Näytä aikavälit päivä- ja kuukausinäkymissä:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Aloitusaika:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Päättymisaika:',
+    'LBL_SETTINGS_TIME_STARTS' => 'Aloitusaika:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Päättymisaika:',
     'LBL_SETTINGS_CALLS_SHOW' => 'Näytä puhelut:',
     'LBL_SETTINGS_TASKS_SHOW' => 'Näytä tehtävät:',
 
@@ -155,8 +155,8 @@ $mod_strings = array (
     'LBL_RECORD_TEMPLATES_TAB' => 'Mallit',
     'LBL_RECORD_OTHER_TAB' => 'Muu',
     'LBL_EVENT_START' => 'Alkaa',
-    'LBL_EVENT_END' => 'Loppu',
-    'LBL_EVENT_END' => 'Loppu',
+    'LBL_EVENT_END' => 'Päättyy',
+    'LBL_EVENT_END' => 'Päättyy',
     'LBL_DAY_EVENT_TEMPLATE' => 'Päivittäinen tapahtuma',
     'LBL_WEEK_EVENT_TEMPLATE' => 'Viikoittainen tapahtuma',
     'LBL_MONTH_EVENT_TEMPLATE' => 'Kuukausittainen tapahtuma',
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Luo kalenteri',
     'LNK_CALENDAR_LIST' => 'Näytä kalenterit',
     'LNK_CALENDAR_LEGACY' => 'Vanha kalenteri',
-    'LBL_IMPORT_CALENDAR'=> 'Tuo kalenteri',
+    'LBL_IMPORT_CALENDAR' => 'Tuo kalenteri',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Tapahtuman aikaleima',
     'LBL_INSERTFIELD' => 'Aseta kenttä',
     'LBL_EVENT_START_ERROR' => 'Valitse aloitusajankohta',
@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_FEBRUARY' => 'helmikuu',
     'LBL_MARCH' => 'maaliskuu',
     'LBL_APRIL' => 'huhtikuu',
-    'LBL_MAY' => 'Voi',
+    'LBL_MAY' => 'toukokuu',
     'LBL_JUNE' => 'kesäkuu',
     'LBL_JULY' => 'heinäkuu',
     'LBL_AUGUST' => 'elokuu',
@@ -318,7 +318,7 @@ $mod_strings = array (
     'LBL_FEB' => 'helmikuu',
     'LBL_MAR' => 'maaliskuu',
     'LBL_APR' => 'huhtikuu',
-    'LBL_MAY' => 'Voi',
+    'LBL_MAY' => 'toukokuu',
     'LBL_JUN' => 'kesäkuu',
     'LBL_JUL' => 'heinäkuu',
     'LBL_AUG' => 'elokuu',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Valitse kalenteri',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Kalenterien tallentaminen epäonnistui.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Su',
             'Ma',
             'Ti',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'To',
             'Pe',
             'La',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Sunnuntai',
             'Maanantai',
             'Tiistai',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Torstai',
             'Perjantai',
             'Lauantai',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'tammi',
             'helmi',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'loka',
             'marras',
             'joulu',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'tammikuu',
             'helmikuu',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'lokakuu',
             'marraskuu',
             'joulukuu',
-        ),
-);
+        ],
+];

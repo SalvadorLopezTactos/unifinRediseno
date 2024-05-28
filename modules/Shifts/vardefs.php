@@ -67,4 +67,4 @@ $dictionary['Shift'] = [
     'uses' => ['basic', 'assignable', 'team_security', 'business_hours'],
 ];
 
-VardefManager::createVardef('Shifts','Shift');
+VardefManager::createVardef('Shifts', 'Shift');

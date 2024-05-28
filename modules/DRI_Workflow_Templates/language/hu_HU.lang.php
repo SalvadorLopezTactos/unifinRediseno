@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Aktív',
     'LBL_ASSIGNEE_RULE' => 'Kedvezményezett szabály',
     'LBL_TARGET_ASSIGNEE' => 'Cél megbíztott',
+    'LBL_STAGE_NUMBERS' => 'Szint számozása',
     'LBL_EXPORT_BUTTON_LABEL' => 'Exportálás',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Importálás',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Egy új Smart Guide sablon adat automatikus létrehozása/frissítése egy *.json fájl importálásával az Ön fájlrendszeréből.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Ha be van jelölve, ha a Cél megbízott = Szülő megbízott, ha a "Hozzárendelt" felhasználó megváltozik egy szülőn, a "Hozzárendelt" felhasználók automatikusan megváltoznak a Smart Guide-okban, szakaszokon és tevékenységeken is. Vegye figyelembe, hogy a cél megbízott tevékenységsablonok beállításai elsőbbséget élveznek Smart Guide sablonnal szemben',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Mikor kell egy felhasználót hozzárendelni a tevékenységekhez',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Kihez kell hozzárendelni a tevékenységeket',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Ez a kapcsoló lehetővé teszi az automatikus szintszámozás megjelenítését vagy elrejtését.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Smart Guide/szint/tevékenységsablon',
 ];

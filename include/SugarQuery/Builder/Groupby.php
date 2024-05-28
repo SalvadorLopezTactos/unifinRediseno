@@ -32,8 +32,9 @@ class SugarQuery_Builder_Groupby
         $this->column = new SugarQuery_Builder_Field_Groupby($column, $this->query);
         return $this;
     }
-    
-    public function addRaw($expression) {
+
+    public function addRaw($expression)
+    {
         $this->column = new SugarQuery_Builder_Field_Raw($expression, $this->query);
         return $this;
     }

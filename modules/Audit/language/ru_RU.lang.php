@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => 'Журнал аудита',
     'LBL_FIELD_NAME' => 'Поле',
     'LBL_OLD_NAME' => 'Старое значение',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => 'Обновить до',
     'LBL_BLANK' => '-пусто-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Временная шкала аудита',
+    'LBL_CREATED' => 'Создано',
+];

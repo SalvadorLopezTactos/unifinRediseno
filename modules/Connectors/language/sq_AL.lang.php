@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Shto',
     'LBL_ADDRCITY' => 'Qyteti',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Info' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Mbyll' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'Nuk u gjet bashkues për identifikuesin e dhënë të burimit.',
-);
-
+];

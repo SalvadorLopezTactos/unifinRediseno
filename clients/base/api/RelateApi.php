@@ -11,34 +11,36 @@
  */
 
 
-class RelateApi extends FilterApi {
-    public function registerApiRest() {
-        return array(
-            'filterRelatedRecords' => array(
+class RelateApi extends FilterApi
+{
+    public function registerApiRest()
+    {
+        return [
+            'filterRelatedRecords' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'link', '?', 'filter'),
-                'pathVars' => array('module', 'record', '', 'link_name', ''),
-                'jsonParams' => array('filter'),
+                'path' => ['<module>', '?', 'link', '?', 'filter'],
+                'pathVars' => ['module', 'record', '', 'link_name', ''],
+                'jsonParams' => ['filter'],
                 'method' => 'filterRelated',
                 'shortHelp' => 'Lists related filtered records.',
                 'longHelp' => 'include/api/help/module_record_link_link_name_filter_get_help.html',
-            ),
-            'filterRelatedRecordsCount' => array(
+            ],
+            'filterRelatedRecordsCount' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'link', '?', 'filter', 'count'),
-                'pathVars' => array('module', 'record', '', 'link_name', '', ''),
-                'jsonParams' => array('filter'),
+                'path' => ['<module>', '?', 'link', '?', 'filter', 'count'],
+                'pathVars' => ['module', 'record', '', 'link_name', '', ''],
+                'jsonParams' => ['filter'],
                 'method' => 'filterRelatedCount',
                 'shortHelp' => 'Lists related filtered records.',
                 'longHelp' => 'include/api/help/module_record_link_link_name_filter_get_help.html',
 
-            ),
-            'filterRelatedRecordsLeanCount' => array(
+            ],
+            'filterRelatedRecordsLeanCount' => [
                 'reqType' => 'GET',
                 'minVersion' => '11.4',
-                'path' => array('<module>', '?', 'link', '?', 'filter', 'leancount'),
-                'pathVars' => array('module', 'record', '', 'link_name', '', ''),
-                'jsonParams' => array('filter'),
+                'path' => ['<module>', '?', 'link', '?', 'filter', 'leancount'],
+                'pathVars' => ['module', 'record', '', 'link_name', '', ''],
+                'jsonParams' => ['filter'],
                 'method' => 'filterRelatedLeanCount',
                 'shortHelp' => 'Gets the "lean" count of filtered related items. ' .
                     'The count should always be in the range: 0..max_num. ' .
@@ -46,48 +48,48 @@ class RelateApi extends FilterApi {
                     'than max_num parameter value.',
                 'longHelp' => 'include/api/help/module_record_link_link_name_filter_get_help.html',
 
-            ),
-            'listRelatedRecords' => array(
+            ],
+            'listRelatedRecords' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'link', '?'),
-                'pathVars' => array('module', 'record', '', 'link_name'),
-                'jsonParams' => array('filter'),
+                'path' => ['<module>', '?', 'link', '?'],
+                'pathVars' => ['module', 'record', '', 'link_name'],
+                'jsonParams' => ['filter'],
                 'method' => 'filterRelated',
                 'shortHelp' => 'Lists related records.',
                 'longHelp' => 'include/api/help/module_record_link_link_name_filter_get_help.html',
-            ),
-            'listRelatedRecordsCount' => array(
+            ],
+            'listRelatedRecordsCount' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'link', '?', 'count'),
-                'pathVars' => array('module', 'record', '', 'link_name', ''),
-                'jsonParams' => array('filter'),
+                'path' => ['<module>', '?', 'link', '?', 'count'],
+                'pathVars' => ['module', 'record', '', 'link_name', ''],
+                'jsonParams' => ['filter'],
                 'method' => 'filterRelatedCount',
                 'shortHelp' => 'Counts all filtered related records.',
                 'longHelp' => 'include/api/help/module_record_link_link_name_filter_get_help.html',
-            ),
-            'listRelatedRecordsLeanCount' => array(
+            ],
+            'listRelatedRecordsLeanCount' => [
                 'reqType' => 'GET',
                 'minVersion' => '11.4',
-                'path' => array('<module>', '?', 'link', '?', 'leancount'),
-                'pathVars' => array('module', 'record', '', 'link_name', ''),
-                'jsonParams' => array('filter'),
+                'path' => ['<module>', '?', 'link', '?', 'leancount'],
+                'pathVars' => ['module', 'record', '', 'link_name', ''],
+                'jsonParams' => ['filter'],
                 'method' => 'filterRelatedLeanCount',
                 'shortHelp' => 'Gets the "lean" count of related items.' .
                     'The count should always be in the range: 0..max_num. ' .
                     'The response has a boolean flag "has_more" that defines if there are more rows, ' .
                     'than max_num parameter value.',
                 'longHelp' => 'include/api/help/module_record_link_link_name_filter_get_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
      * Gets a new relate bean for a link.
      * @param SugarBean $record
      * @param string $linkName
-     * @throws SugarApiExceptionNotFound
-     * @throws SugarApiExceptionNotAuthorized
      * @return SugarBean
+     * @throws SugarApiExceptionNotAuthorized
+     * @throws SugarApiExceptionNotFound
      */
     protected function getLinkBean(SugarBean $record, string $linkName): SugarBean
     {
@@ -138,7 +140,7 @@ class RelateApi extends FilterApi {
         // for this relationship
         if (empty($args['fields']) && is_array($linkSeed->field_defs)) {
             $relatedLinkName = $record->$linkName->getRelatedModuleLinkName();
-            $options['linkDataFields'] = array();
+            $options['linkDataFields'] = [];
             foreach ($linkSeed->field_defs as $field => $def) {
                 if (empty($def['rname_link']) || empty($def['link'])) {
                     continue;
@@ -171,12 +173,21 @@ class RelateApi extends FilterApi {
             $ignoreRole = false;
         }
 
-        $q->joinSubpanel($record, $linkName, array('joinType' => 'INNER', 'ignoreRole' => $ignoreRole));
-        
-        $q->setJoinOn(array('baseBeanId' => $record->id));
+        $q->joinSubpanel($record, $linkName, ['joinType' => 'INNER', 'ignoreRole' => $ignoreRole]);
+
+        $q->setJoinOn(['baseBeanId' => $record->id]);
+
+        // return 'is_external_link' for records created by external users
+        if ($this->hasExternalRecords($record, $linkName)) {
+            $join = $q->getJoinForLink($linkName);
+            if ($join && $join->relationshipTableAlias) {
+                $alias = $join->relationshipTableAlias;
+                $q->select()->fieldRaw("$alias.is_external_link");
+            }
+        }
 
         if (!isset($args['filter']) || !is_array($args['filter'])) {
-            $args['filter'] = array();
+            $args['filter'] = [];
         }
         self::addFilters($args['filter'], $q->where(), $q);
 
@@ -192,7 +203,20 @@ class RelateApi extends FilterApi {
         // they are still filtered by one primary record, so the subset is at most one-to-many
         $options['skipFixQuery'] = true;
 
-        return array($args, $q, $options, $linkSeed);
+        return [$args, $q, $options, $linkSeed];
+    }
+
+    /**
+     * Checks if a link has external records.
+     * @param SugarBean $bean
+     * @param string $link
+     * @return bool
+     */
+    protected function hasExternalRecords(SugarBean $bean, string $link): bool
+    {
+        $relObj = $bean->$link->getRelationshipObject();
+        return $relObj && get_class($relObj) === 'PersonM2MRelationship' &&
+            $relObj->hasExternalRecords();
     }
 
     public function filterRelated(ServiceBase $api, array $args)
@@ -217,11 +241,11 @@ class RelateApi extends FilterApi {
         $q->orderByReset();
 
         $stmt = $q->compile()->execute();
-        $count = (int) $stmt->fetchOne();
+        $count = (int)$stmt->fetchOne();
 
-        return array(
+        return [
             'record_count' => $count,
-        );
+        ];
     }
 
     /**
@@ -235,7 +259,7 @@ class RelateApi extends FilterApi {
     public function filterRelatedLeanCount(ServiceBase $api, array $args)
     {
         if (isset($args['max_num'])) {
-            $args['max_num'] = (int) $args['max_num'];
+            $args['max_num'] = (int)$args['max_num'];
         }
         if (!isset($args['max_num'])
             || $args['max_num'] <= 0) {
@@ -249,12 +273,11 @@ class RelateApi extends FilterApi {
         [, $q] = $this->filterRelatedSetup($api, $args);
         $q->orderByReset();
         $stmt = $q->compile()->execute();
-        $count = count($stmt->fetchFirstColumn());
+        $count = safeCount($stmt->fetchFirstColumn());
 
-        return array(
+        return [
             'record_count' => $count > $args['max_num'] ? $args['max_num'] : $count,
             'has_more' => $count > $args['max_num'],
-        );
+        ];
     }
-
 }

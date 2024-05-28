@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kalendorius',
     'LBL_MODULE_NAME_SINGULAR' => 'Kalendorius',
     'LBL_MODULE_TITLE' => 'Kalendorius',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Nustatymai',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Atvaizduoti laiką dienų ir savaičių vaizdais:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Pradžios laikas:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Pabaigos laikas:',
+    'LBL_SETTINGS_TIME_STARTS' => 'Pradžios laikas:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Pabaigos laikas:',
     'LBL_SETTINGS_CALLS_SHOW' => 'Rodyti skambučius',
     'LBL_SETTINGS_TASKS_SHOW' => 'Rodyti užduotis:',
 
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Sukurti kalendorių',
     'LNK_CALENDAR_LIST' => 'Peržiūrėti kalendorius',
     'LNK_CALENDAR_LEGACY' => 'Senas kalendorius',
-    'LBL_IMPORT_CALENDAR'=> 'Importuoti kalendorių',
+    'LBL_IMPORT_CALENDAR' => 'Importuoti kalendorių',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Įvykio laiko žyma',
     'LBL_INSERTFIELD' => 'Įterpti lauką',
     'LBL_EVENT_START_ERROR' => 'Pasirinkite pradžią',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Pasirinkite kalendorių',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Nepavyko išsaugoti kalendorių.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'S',
             'P',
             'A',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'K',
             'Pn',
             'Š',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Sekmadienis',
             'Pirmadienis',
             'Antradienis',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Ketvirtadienis',
             'Penktadienis',
             'Šeštadienis',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Sau',
             'Vas',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Spl',
             'Lap',
             'Grd',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Sausis',
             'Vasaris',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Spalis',
             'Lapkritis',
             'Gruodis',
-        ),
-);
+        ],
+];

@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_ASSIGNED_TO_ID' => 'מזהה משתמש מוקצה',
     'LBL_ASSIGNED_TO_NAME' => 'הוקצה עבור',
     'LBL_ID' => 'מזהה',
@@ -52,4 +52,4 @@ $mod_strings = array(
     'LBL_UNREAD' => 'לא נקרא',
     'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'קיבלת אזכור מ-',
     'LBL_YOU_HAVE_BEEN_MENTIONED' => 'קיבלת אזכור',
-);
+];

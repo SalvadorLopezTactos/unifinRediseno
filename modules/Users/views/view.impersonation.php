@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\IdentityProvider\Srn;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\AuthProviderBasicManagerBuilder;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\IntrospectToken;
@@ -24,6 +26,8 @@ class UsersViewImpersonation extends SidecarView
      */
     protected $issuer = null;
 
+    protected const TOKEN_TIME_WINDOW = 30;
+
     /**
      * @inheritdoc
      */
@@ -34,7 +38,7 @@ class UsersViewImpersonation extends SidecarView
         $this->options['show_javascript'] = false;
     }
 
-    public function preDisplay($params = array())
+    public function preDisplay($params = [])
     {
         if (!$this->getIdpConfig()->isIDMModeEnabled()) {
             $this->redirect();
@@ -47,6 +51,10 @@ class UsersViewImpersonation extends SidecarView
 
         try {
             $this->ensureIssuer();
+
+            if (!$this->isImpersonationAllowed()) {
+                $this->redirect();
+            }
 
             $this->setupUser();
         } catch (SubscriptionException $e) {
@@ -98,6 +106,56 @@ class UsersViewImpersonation extends SidecarView
         ];
     }
 
+    protected function isImpersonationAllowed(): bool
+    {
+        $accessToken = $this->request->getValidInputPost('access_token');
+        if (empty($accessToken)) {
+            return false;
+        }
+
+        $accessTokenInfo = $this->introspectAccessToken($accessToken);
+
+        if (!$accessTokenInfo) {
+            return false;
+        }
+
+        $iat = intval($accessTokenInfo->getAttribute('iat'), 10);
+
+        $tn = time();
+        if ($iat + static::TOKEN_TIME_WINDOW < $tn || $iat - static::TOKEN_TIME_WINDOW > $tn) {
+            return false;
+        }
+
+        $user = $accessTokenInfo->getUser();
+
+        if (!$user || !$user->hasAttribute('sudoer')) {
+            return false;
+        }
+
+        // Forbid to impersonate yourself
+        if (!$user->getSugarUser() || $user->getSugarUser()->id == $this->issuer->id) {
+            return false;
+        }
+
+        $sudoer = $user->getAttribute('sudoer');
+
+        if (!$sudoer) {
+            return false;
+        }
+
+        // Forbid impersonate user in case the sudoer is not the issuer
+        try {
+            $sudoerSrn = Srn\Converter::fromString($sudoer);
+            if (!Srn\Manager::isUser($sudoerSrn) || $sudoerSrn->getResource()[1] != $this->issuer->id) {
+                return false;
+            }
+        } catch (Exception $e) {
+            return false;
+        }
+
+        return true;
+    }
+
     protected function ensureIssuer(): void
     {
         $token = $this->grabIssuerToken();
@@ -105,13 +163,7 @@ class UsersViewImpersonation extends SidecarView
             $this->redirect();
         }
 
-        $idmModeConfig = $this->getIdpConfig()->getIDMModeConfig();
-        $authManager = (new AuthProviderBasicManagerBuilder($this->getIdpConfig()))->buildAuthProviders();
-
-        $introspectToken = new IntrospectToken($token, $idmModeConfig['tid'], $idmModeConfig['crmOAuthScope']);
-        $introspectToken->setAttribute('platform', $this->platform);
-
-        $issuerToken = $authManager->authenticate($introspectToken);
+        $issuerToken = $this->introspectAccessToken($token);
 
         if (!$issuerToken) {
             $this->redirect();
@@ -134,6 +186,22 @@ class UsersViewImpersonation extends SidecarView
             $this->redirect();
         }
         $this->issuer = $issuer;
+    }
+
+
+    /**
+     * @param string $token
+     * @return TokenInterface|null
+     */
+    protected function introspectAccessToken(string $token): ?TokenInterface
+    {
+        $idmModeConfig = $this->getIdpConfig()->getIDMModeConfig();
+        $authManager = (new AuthProviderBasicManagerBuilder($this->getIdpConfig()))->buildAuthProviders();
+
+        $introspectToken = new IntrospectToken($token, $idmModeConfig['tid'], $idmModeConfig['crmOAuthScope']);
+        $introspectToken->setAttribute('platform', $this->platform);
+
+        return $authManager->authenticate($introspectToken);
     }
 
     protected function grabIssuerToken(): ?string

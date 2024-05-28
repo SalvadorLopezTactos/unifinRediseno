@@ -53,6 +53,8 @@
              * Takes care of adding the merge document buttons
              */
             _addDocumentMergeButtons: function() {
+                let isUsersSubpanel = this.context.get('isSubpanel') && this.context.get('parentModule') === 'Users';
+
                 /**
                  * Merge buttons meta
                  */
@@ -61,15 +63,16 @@
                         'type': 'rowaction',
                         'event': 'button:merge_template:click',
                         'name': 'merge_template',
+                        'icon': 'sicon-document-lg',
                         'label': 'LBL_MERGE_TEMPLATE_BUTTON_LABEL',
-                        'acl_action': 'view',
+                        'acl_action': isUsersSubpanel ? 'admin' : 'view',
                     },
                     {
                         'type': 'rowaction',
                         'event': 'button:merge_template_pdf:click',
                         'name': 'merge_template_pdf',
                         'label': 'LBL_MERGE_TEMPLATE_PDF_BUTTON_LABEL',
-                        'acl_action': 'view',
+                        'acl_action': isUsersSubpanel ? 'admin' : 'view',
                     },
                     {
                         'type': 'divider',

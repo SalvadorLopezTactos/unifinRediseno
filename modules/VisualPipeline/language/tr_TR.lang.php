@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tile View',
     'LBL_MODULE_NAME_SINGULAR' => 'Tile View',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'Tile View',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => 'İzinli Modüller',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'Pencere Görünümü Modülleri',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'Modül Ayarları',
-    'LBL_PIPELINE_TABLE_HEADER' => "Değerleri sütunlar olarak kullanılacak alanı seçin",
+    'LBL_PIPELINE_TABLE_HEADER' => 'Değerleri sütunlar olarak kullanılacak alanı seçin',
     'LBL_PIPELINE_TILE_HEADER' => 'Pencere Başlığı Alanı',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => 'Mevcut Sütunlar',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => 'Pencere Gövdesi Alanları',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'Kutucuk Önizleme',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'Kutucukta çok fazla alan var.',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => 'Devam etmeden önce lütfen aşağıdaki modül ayarları sekmelerindeki hataları çözün:<br><br>',
-);
+    'LBL_MODULE_SELECTION' => 'Aşağıdan görüntülemek ve yapılandırmak istediğiniz modülü seçin',
+    'LBL_SHOW_COLUMN_COUNT' => 'Sütun Sayısını Göster',
+    'LBL_SHOW_COLUMN_TOTAL' => 'Sütun Toplamını Göster',
+    'LBL_TOTAL_FIELD' => 'Toplam Alan',
+];

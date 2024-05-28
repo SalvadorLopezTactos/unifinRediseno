@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Paneli i listës së këndit të njohurive',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të këndit të njohurive',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te baza e njohurive',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e bazës së njohurive',
 
     'LBL_MODULE_NAME' => 'Baza e njohurisë',
     'LBL_MODULE_NAME_SINGULAR' => 'Artikuj të bazës së nojurive',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Cakto vlerën si kryesore',
     'LBL_ITEM_REMOVE' => 'Hiq artikullin',
     'LBL_ITEM_ADD' => 'Shto artikull',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => 'ID-ja e rishikimit',
     'LBL_DOCUMENT_REVISION' => 'Revizion',
     'LBL_NUMBER' => 'Numri',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'Artikuj të tjerë {{module}}...',
     'LBL_LIST_FORM_TITLE' => 'Lista e bazës së njohurive',
     'LBL_SEARCH_FORM_TITLE' => 'Kërkim në bazën e njohurive',
-);
+];

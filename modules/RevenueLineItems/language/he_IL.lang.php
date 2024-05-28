@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת פריטי שורת הכנסה',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת פריטי שורת הכנסה',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'סוגי מוצרים',
     'LBL_ASSIGNED_TO_NAME' => 'הוקצה עבור',
     'LBL_ASSIGNED_TO' => 'הוקצה עבור',
-    'LBL_ASSIGNED_TO_ID'=>'הוקצה למשתמש ID',
+    'LBL_ASSIGNED_TO_ID' => 'הוקצה למשתמש ID',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'הוקצה למשתמש ששמו',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'הוקצה למשתמש ID',
     'LBL_CAMPAIGN_ID' => 'קמפיין ID',
@@ -217,4 +217,5 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'מציג 10 שורות פרטי רווח הטובים ביותר בתרשים בועות',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'שורות פרטי רווח שלי',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "ההזדמנויות של הצוות שלי",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן של פריטי שורה בהכנסות',
+];

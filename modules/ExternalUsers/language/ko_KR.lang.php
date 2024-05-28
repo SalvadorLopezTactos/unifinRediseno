@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => '사례',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => '영업기회',
     'LBL_QUOTES_SUBPANEL_TITLE' => '견적',
-    'LBL_NOTES'=>'노트:',
+    'LBL_NOTES' => '노트:',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => '외부 사용자 기록 대시보드',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '외부 사용자 타임라인',
 ];

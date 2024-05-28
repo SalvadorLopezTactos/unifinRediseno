@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_LOCKED_FIELDS_LINK' => 'Полетата са заключени за редактиране',
     'LBL_LOCKED_FIELDS' => 'Полетата са заключени за редактиране',
-);
+];

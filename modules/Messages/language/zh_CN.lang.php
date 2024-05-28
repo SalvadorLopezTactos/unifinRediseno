@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => '进行中',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => '邮件焦点抽屉',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => '消息记录控制面板',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '消息时间轴',
 ];

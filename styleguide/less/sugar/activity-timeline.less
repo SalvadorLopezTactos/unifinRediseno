@@ -4,26 +4,30 @@
   display: flex;
   position: relative;
 
+  .fieldset,
+  .fieldset-inline {
+    &.fieldset-empty {
+      display: none;
+    }
+  }
+
+  .panel-attachments .square-pill {
+    margin-top: 0.5rem;
+  }
+
   .activity-card-detail {
-    background: @secondaryContentBackground;
+    background: @contentTimelineBackground;
     padding: 10px 7px;
     text-align: center;
     flex: 0 0 60px;
     font-size: 10px;
     line-height: 14px;
-    color: @textColor;
+    color: @textColorLight;
 
     .record-icon {
       .center-content();
 
-      width: 32px;
-      height: 32px;
-      background-color: @ocean;
       border-radius: 50%;
-
-      .sicon {
-        color: @lightOcean;
-      }
     }
 
     .panel-header {
@@ -38,14 +42,25 @@
     width: 100%;
     color: @textColor;
 
+    .activity-label {
+      color: @labelColor;
+      align-self: center;
+    }
+
+    .panel-user-single {
+      align-items: baseline;
+    }
+
     .activity-card-header {
       .panel-header {
         font-weight: 600;
         font-size: 14px;
-        margin-top: 8px;
         display: inline-flex;
+        width: 100%;
 
         .activity-card-header {
+          margin-right: 0.5rem;
+
           &.email-state {
             color: @textColor;
             font-size: 12px;
@@ -59,11 +74,52 @@
             white-space: normal;
           }
         }
+
+        &.panel-header-create .relate-field-container {
+          padding: 0;
+        }
+      }
+
+      .created-status {
+        color: @historyLogColor;
+        font-weight: 600;
       }
 
       .panel-users {
+        & > span {
+          line-height: 22px;
+
+          .relate-field-container {
+            padding: 0;
+
+            .label-module {
+              margin-right: 0.375rem;
+
+              &.label-module-size-sm {
+                height: 1.25rem;
+                width: 1.25rem;
+              }
+            }
+          }
+        }
+
+        .activity-label {
+          display: flex;
+          margin-right: 0.5rem;
+          line-height: 22px;
+          color: @labelColor;
+        }
+
         .sicon-user {
           font-size: 10px;
+        }
+
+        .header-user-item {
+          display: flex;
+
+          &:not(:last-child) {
+            margin-bottom: 0.5rem;
+          }
         }
       }
 
@@ -75,13 +131,16 @@
         .header-user {
           display: flex;
           align-items: center;
+          align-self: center;
 
           .avatar {
             .center-content();
 
             background-color: @gray30;
             height: 16px;
+            min-width: 16px;
             width: 16px;
+            align-self: center;
           }
 
           .user-value {
@@ -119,12 +178,44 @@
     }
 
     .activity-card-content {
+      .label-module {
+        margin-right: 0.375rem;
+
+        &.label-module-size-sm {
+          height: 1.25rem;
+          width: 1.25rem;
+        }
+      }
+
+      .relate-field-container {
+        padding: 0;
+
+        .label-module {
+          margin-top: -1px;
+        }
+      }
+
+      .currency-field {
+        .original:empty {
+          display: none;
+        }
+      }
+
+      .change-before-value {
+        .currency-field {
+          .converted,
+          .original {
+            text-decoration: line-through;
+          }
+        }
+      }
+
       .activity-date-modified {
+        margin-top: 0.5rem;
         text-align: left;
         font-size: 10px;
         line-height: 14px;
         color: @labelColor;
-        margin-top: 8px;
       }
 
       .btn {
@@ -139,6 +230,18 @@
         }
       }
 
+      .select2-container-multi .select2-choices {
+        display: flex;
+        padding: 0;
+        background: none;
+        gap: 0.25rem;
+
+        .select2-search-choice {
+          margin-right: 0.5rem;
+          padding: 0.125rem 0.5rem;
+        }
+      }
+
       .activity-card-content-body {
         &.collapsed-timeline {
           max-height: 300px;
@@ -150,7 +253,7 @@
         }
 
         .panel-header {
-          margin-top: 8px;
+          margin-top: 0.5rem;
           display: flex;
           align-items: baseline;
 
@@ -164,38 +267,35 @@
         .label {
           &.label-pending,
           &.label-important,
-          &.label-success {
+          &.label-success,
+          &.label-inverse {
             margin-left: 12px;
           }
         }
 
-        .panel-change {
-          margin-top: 8px;
-        }
+        .panel-group {
+          column-gap: 1rem;
+          row-gap: 0.5rem;
+          flex-wrap: wrap;
 
-        .panel-body {
-          margin-top: 8px;
-        }
+          .fieldset {
+            gap: 0.5rem;
+          }
 
-        .panel-attachments {
-          margin-top: 8px;
+          .fieldset-field {
+            margin: auto 0;
+          }
         }
       }
 
       [class^="panel"] {
-        margin-top: 8px;
+        margin-top: 0.5rem;
       }
 
       .panel-attachments {
         ul.select2-choices {
           border: none;
-        }
-
-        > .detail {
-          a.multi-attachment-link-type {
-            position: relative;
-            z-index: 1;
-          }
+          flex-wrap: wrap;
         }
       }
 
@@ -203,33 +303,14 @@
       .activity-card-text {
         margin-bottom: 10px;
       }
-    }
-  }
 
-  .activityCardDetail(@background, @color) {
-    .activity-card-detail {
-      .record-icon {
-        background: @background;
-
-        .sicon {
-          color: @color;
-          font: normal normal normal 16px 'SugarIcons';
-        }
+      .control-group.email .btn-toolbar.prevent-mousedown {
+        display: none;
       }
     }
   }
 
-  &.activity-card-messages {
-    .activityCardDetail(@army, @lightArmy);
-  }
-
-  &.activity-card-emails {
-    .activityCardDetail(@ocean, @lightOcean);
-  }
-
   &.activity-card-notes {
-    .activityCardDetail(@green, @lightGreen);
-
     .activity-card-main .activity-card-content-body {
       .panel-attachments {
         .attachment-preview img {
@@ -239,36 +320,14 @@
     }
   }
 
-  &.activity-card-cases {
-    .activityCardDetail(@orange, @lightOrange);
+  &.activity-card-emails .panel-header {
+    flex-direction: column;
+    row-gap: 0.5rem;
 
-    .cabmenu {
-      display: none !important;
+    .label-state {
+      font-weight: normal;
+      font-size: 12px;
     }
-  }
-
-  &.activity-card-contacts {
-    .activityCardDetail(@pink, @lightPink);
-  }
-
-  &.activity-card-accounts {
-    .activityCardDetail(@green, @lightGreen);
-  }
-
-  &.activity-card-leads {
-    .activityCardDetail(@purple, @lightPurple);
-  }
-
-  &.activity-card-opportunities {
-    .activityCardDetail(@red, @lightRed);
-  }
-
-  &.activity-card-quotes {
-    .activityCardDetail(@pacific, @lightPacific);
-  }
-
-  &.activity-card-tasks {
-    .activityCardDetail(@purple, @lightPurple);
   }
 
   .cabmenu {
@@ -285,18 +344,6 @@
       display: flex;
       border-radius: 15px;
     }
-  }
-
-  &.activity-card-meetings {
-    .activityCardDetail(@teal, @lightTeal);
-  }
-
-  &.activity-card-calls {
-    .activityCardDetail(@pacific, @lightPacific);
-  }
-
-  &.activity-card-escalations {
-    .activityCardDetail(@red, @lightRed);
   }
 
   &.activity-card-audit {

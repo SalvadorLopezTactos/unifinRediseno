@@ -197,6 +197,8 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
         } else if (Array.isArray(value)) {
             //This is probably an array that we must convert to an expression
             result = this.getEnumExpression(value);
+        } else if (_.isObject(value) && def.type === 'json') {
+            result = SEC.parser.toConstant(`"${JSON.stringify(value)}"`);
         } else if (typeof(value) == "object" && value != null && value.getTime) {
             //This is probably a date object that we must convert to an expression
             result = this.getDateExpression(value);

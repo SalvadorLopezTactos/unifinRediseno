@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_DEFAULT' => 'I papërcaktuar',
     'LBL_READ_WRITE' => 'Lexo/Shkruaj',
     'LBL_READ_OWNER_WRITE' => 'Lexo/Pronar shkruaj',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_READ_SELECTED_TEAMS_WRITE' => 'Lexo/(Pronari dhe grupet e zgjedhura) Shkruaj',
     'LBL_SELECTED_TEAMS_READ_OWNER_WRITE' => '(Pronari dhe grupet e zgjedhura) Lexim/Shkrim i pronarit',
     'LBL_SELECTED_TEAMS_READ_WRITE' => '(Pronari dhe grupet e zgjedhura) Lexo/(Pronari dhe grupet e zgjedhura) Shkruaj',
-);
+];

@@ -19,9 +19,10 @@ class SugarACLFilters extends SugarACLStrategy
      * @param array $context
      * @return bool|void
      */
-    public function checkAccess($module, $view, $context) {
-        
-        if($module != 'Filters') {
+    public function checkAccess($module, $view, $context)
+    {
+
+        if ($module != 'Filters') {
             // how'd you get here...
             return false;
         }
@@ -32,14 +33,14 @@ class SugarACLFilters extends SugarACLStrategy
         $bean = self::loadBean($module, $context);
 
         // non-admin users cannot edit a default filter
-        if(!is_admin($current_user)) {
-            if(isset($bean) && $bean instanceof SugarBean && !empty($bean->id) && isset($bean->default_filter) && $bean->default_filter == 1){
-                if($view == 'save') {
+        if (!is_admin($current_user)) {
+            if (isset($bean) && $bean instanceof SugarBean && !empty($bean->id) && isset($bean->default_filter) && $bean->default_filter == 1) {
+                if ($view == 'save') {
                     return false;
                 }
             }
         }
-        
+
         return true;
     }
 
@@ -50,13 +51,13 @@ class SugarACLFilters extends SugarACLStrategy
      * @param array $context
      * @return SugarBean
      */
-    protected static function loadBean($module, $context = array()) {
-        if(isset($context['bean']) && $context['bean'] instanceof SugarBean && $context['bean']->module_dir == $module) {
+    protected static function loadBean($module, $context = [])
+    {
+        if (isset($context['bean']) && $context['bean'] instanceof SugarBean && $context['bean']->module_dir == $module) {
             $bean = $context['bean'];
         } else {
             $bean = BeanFactory::newBean($module);
         }
         return $bean;
     }
-
 }

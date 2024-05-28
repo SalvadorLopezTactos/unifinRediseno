@@ -129,7 +129,7 @@ $dictionary['ShiftException'] = [
             'vname' => 'LBL_ENABLED',
             'type' => 'bool',
             'default' => '0',
-            'audited'=> true,
+            'audited' => true,
             'duplicate_on_record_copy' => 'always',
             'comment' => 'An indicator of whether shift exception is enabled',
         ],

@@ -9,21 +9,20 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- $app_list_strings = array (
+$app_list_strings = [
 
-  strtolower($object_name).'_type_dom' =>
-  array (
-    '' => '',
-    'Analyst' => 'Elemző',
-    'Competitor' => 'Versenytárs',
-    'Customer' => 'Ügyfél',
-    'Integrator' => 'Integrátor',
-    'Investor' => 'Befektető',
-    'Partner' => 'Partner',
-    'Press' => 'Sajtó',
-    'Prospect' => 'Potenciális üzleti partner',
-    'Reseller' => 'Viszonteladó',
-    'Other' => 'Egyéb',
-  ),
+    strtolower($object_name) . '_type_dom' => [
+        '' => '',
+        'Analyst' => 'Elemző',
+        'Competitor' => 'Versenytárs',
+        'Customer' => 'Ügyfél',
+        'Integrator' => 'Integrátor',
+        'Investor' => 'Befektető',
+        'Partner' => 'Partner',
+        'Press' => 'Sajtó',
+        'Prospect' => 'Potenciális üzleti partner',
+        'Reseller' => 'Viszonteladó',
+        'Other' => 'Egyéb',
+    ],
 
-  );
+];

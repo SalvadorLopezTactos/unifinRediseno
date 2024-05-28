@@ -9,6 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['history-summary-list-bottom'] = array(
+$viewdefs['base']['view']['history-summary-list-bottom'] = [
     'template' => 'list-bottom',
-);
+];

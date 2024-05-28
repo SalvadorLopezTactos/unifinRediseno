@@ -38,30 +38,30 @@ class SugarUpgradeAddNewModulesToMegamenu extends UpgradeScript
      */
     public $newModuleDefs = [
         // Upgrade from 7.5.X and below to 7.6+ on ent
-        array(
+        [
             'name' => 'PMSE Modules',
-            'toFlavor' => array('ent', 'ult'),
-            'fromVersion' => array('7.6.0', '<'),
-            'modules' => array(
+            'toFlavor' => ['ent', 'ult'],
+            'fromVersion' => ['7.6.0', '<'],
+            'modules' => [
                 'pmse_Project',
                 'pmse_Inbox',
                 'pmse_Business_Rules',
                 'pmse_Emails_Templates',
-            ),
-        ),
+            ],
+        ],
         // Conversion from CORP or PRO to ENT or ULT on 7.7+
-        array(
+        [
             'name' => 'PMSE Modules',
-            'fromFlavor' => array('corp', 'pro'),
-            'toFlavor' => array('ent', 'ult'),
-            'fromVersion' => array('7.7', '>='),
-            'modules' => array(
+            'fromFlavor' => ['corp', 'pro'],
+            'toFlavor' => ['ent', 'ult'],
+            'fromVersion' => ['7.7', '>='],
+            'modules' => [
                 'pmse_Project',
                 'pmse_Inbox',
                 'pmse_Business_Rules',
                 'pmse_Emails_Templates',
-            ),
-        ),
+            ],
+        ],
         // 9.1.0 new Business Center module
         [
             'name' => 'Business Centers Module',
@@ -109,7 +109,7 @@ class SugarUpgradeAddNewModulesToMegamenu extends UpgradeScript
             'name' => 'Smart Guide and Smart Guide Stages Modules',
             'fromVersion' => ['12.3.0', '<'],
             'toFlavor' => ['ent'],
-            'modules' => ['DRI_Workflows','DRI_SubWorkflows'],
+            'modules' => ['DRI_Workflows', 'DRI_SubWorkflows'],
             'forceVisible' => true,
         ],
     ];
@@ -155,7 +155,7 @@ class SugarUpgradeAddNewModulesToMegamenu extends UpgradeScript
      * @param Array $def New module def
      * @return boolean
      */
-    public function buildCheckCriteria(Array $def)
+    public function buildCheckCriteria(array $def)
     {
         // First check is to ensure the modules array
         if (!isset($def['modules'])) {
@@ -218,6 +218,7 @@ class SugarUpgradeAddNewModulesToMegamenu extends UpgradeScript
      */
     protected function getFlavorCheck($check, $flavor, $type)
     {
+        $checkFlavor = null;
         if ($type === 'from' || $type === 'to') {
             // Set our check method based on type
             $method = $type . 'Flavor';
@@ -295,7 +296,7 @@ class SugarUpgradeAddNewModulesToMegamenu extends UpgradeScript
      * @param TabController $tc TabController object
      * @param Array $tabs Array of new modules to be saved to the tab list
      */
-    protected function saveModifiedTabs(TabController $tc, Array $tabs)
+    protected function saveModifiedTabs(TabController $tc, array $tabs)
     {
         $tc->set_system_tabs($tabs);
     }

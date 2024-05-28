@@ -133,7 +133,7 @@ class PMSERequest
      * The request arguments.
      * @return array
      */
-    public function getArguments() : array
+    public function getArguments(): array
     {
         // Base case is the arguments property is already an array
         if (is_array($this->arguments)) {
@@ -162,7 +162,7 @@ class PMSERequest
      *
      * @return type
      */
-    function getResult()
+    public function getResult()
     {
         return $this->result;
     }
@@ -171,7 +171,7 @@ class PMSERequest
      *
      * @param type $result
      */
-    function setResult($result)
+    public function setResult($result)
     {
         $this->result = $result;
     }

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Red čekanja posla',
     'LBL_MODULE_NAME_SINGULAR' => 'Red čekanja posla',
     'LBL_MODULE_TITLE' => 'Red čekanja posla: početno',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Otkazano rješenje',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Pokrenuto rješenje',
     // Errors
-    'ERR_CALL' => "Nije moguće pozvati funkciju: %s",
-    'ERR_CURL' => "Nema softvera CURL - nije moguće pokrenuti poslove URL-a",
-    'ERR_FAILED' => "Neočekivana pogreška, provjerite zapisnike za PHP i sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s u %s u retku %d",
-    'ERR_NOUSER' => "Nema korisničkog ID-a određenog za ovaj posao",
-    'ERR_NOSUCHUSER' => "Korisnički ID %s nije pronađen",
-    'ERR_JOBTYPE' => "Nepoznata vrsta posla: %s",
-    'ERR_TIMEOUT' => "Prisilni prekid zbog prekoračenja vremena",
+    'ERR_CALL' => 'Nije moguće pozvati funkciju: %s',
+    'ERR_CURL' => 'Nema softvera CURL - nije moguće pokrenuti poslove URL-a',
+    'ERR_FAILED' => 'Neočekivana pogreška, provjerite zapisnike za PHP i sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s u %s u retku %d',
+    'ERR_NOUSER' => 'Nema korisničkog ID-a određenog za ovaj posao',
+    'ERR_NOSUCHUSER' => 'Korisnički ID %s nije pronađen',
+    'ERR_JOBTYPE' => 'Nepoznata vrsta posla: %s',
+    'ERR_TIMEOUT' => 'Prisilni prekid zbog prekoračenja vremena',
     'ERR_JOB_FAILED_VERBOSE' => 'Posao %1$s (%2$s) nije uspio pri izvođenju softvera CRON',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Nije moguće učitati podatkovno zrno s ID-om: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Nije moguće pronaći rukovatelja za rutu %s',
@@ -93,13 +93,13 @@ zadataka većem broju računala, tako da se veći zadaci mogu brže izvršiti.</
 </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Pomoć za konfiguraciju usluge Amazon SQS',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Odjeljak za konfiguraciju usluge Amazon SQS.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Odjeljak za konfiguraciju usluge Amazon SQS.</b></p>
 <ul>
     <li>ID ključa za pristup: <i>unesite ID broj pristupnog ključa za Amazon SQS</i></li>
     <li>Ključ za tajni pristup: <i>unesite svoj ključ za tajni pristup za Amazon SQS</i></li>
     <li>Regija: <i>unesite regiju poslužitelja Amazon SQS</i></li>
     <li>Naziv reda čekanja: <i>unesite naziv reda čekanja za poslužitelj Amazon SQS</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'Pomoć za konfiguraciju protokola AMQP',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>Odjeljak za konfiguraciju protokola AMQP.</b></p>
 <ul>
@@ -120,4 +120,4 @@ zadataka većem broju računala, tako da se veći zadaci mogu brže izvršiti.</
     'LBL_REGION' => 'Regija',
     'LBL_ACCESS_KEY_SECRET' => 'Ključ za tajni pristup',
     'LBL_QUEUE_NAME' => 'Naziv prilagodnika',
-);
+];

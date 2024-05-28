@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['documents_accounts'] = array(
+$dictionary['documents_accounts'] = [
     'true_relationship_type' => 'many-to-many',
-    'relationships' => array(
-        'documents_accounts' => array(
+    'relationships' => [
+        'documents_accounts' => [
             'lhs_module' => 'Documents',
             'lhs_table' => 'documents',
             'lhs_key' => 'id',
@@ -24,57 +24,57 @@ $dictionary['documents_accounts'] = array(
             'join_table' => 'documents_accounts',
             'join_key_lhs' => 'document_id',
             'join_key_rhs' => 'account_id',
-        ),
-    ),
+        ],
+    ],
     'table' => 'documents_accounts',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => true,
-        ),
-        'document_id' => array(
+        ],
+        'document_id' => [
             'name' => 'document_id',
             'type' => 'id',
-        ),
-        'account_id' => array(
+        ],
+        'account_id' => [
             'name' => 'account_id',
             'type' => 'id',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'documents_accountsspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'documents_accounts_account_id',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'account_id',
                 'document_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'documents_accounts_document_id',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'document_id',
                 'account_id',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

@@ -11,27 +11,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Arquivamento de e-mail',
-    'LBL_SNIP_SUMMARY' => "O Arquivamento de e-mail é um serviço de importação automática que permite aos usuários importar e-mails no Sugar, enviando-os de qualquer cliente ou serviço de e-mail para um endereço de e-mail fornecido pelo Sugar. Cada instância do Sugar tem seu próprio e-mail exclusivo. Para importar e-mails, o usuário envia para o endereço de e-mail fornecido usando os campos TO, CC, BCC. O serviço de Arquivamento de e-mail importará o e-mail para a instância do Sugar. O serviço  importa o e-mail, juntamente com anexos, imagens e eventos de calendário, e cria registros dentro do aplicativo que estão associados com os registros existentes com base nos endereços de e-mail correspondentes.
+    'LBL_SNIP_SUMMARY' => 'O Arquivamento de e-mail é um serviço de importação automática que permite aos usuários importar e-mails no Sugar, enviando-os de qualquer cliente ou serviço de e-mail para um endereço de e-mail fornecido pelo Sugar. Cada instância do Sugar tem seu próprio e-mail exclusivo. Para importar e-mails, o usuário envia para o endereço de e-mail fornecido usando os campos TO, CC, BCC. O serviço de Arquivamento de e-mail importará o e-mail para a instância do Sugar. O serviço  importa o e-mail, juntamente com anexos, imagens e eventos de calendário, e cria registros dentro do aplicativo que estão associados com os registros existentes com base nos endereços de e-mail correspondentes.
 <br><br>Exemplo: Como um usuário, quando visualizo uma conta, poderei visualizar todos os e-mails associados à conta com base no endereço de e-mail no registro da conta. Também poderei visualizar e-mails que estão associados com os contatos relacionados à conta.
 <br><br>Aceite os termos abaixo e clique em Ativar para começar a usar o serviço. Você pode desabilitar o serviço a qualquer momento. Quando o serviço estiver ativado, o endereço de e-mail para usar o serviço será exibido.
-<br><br>",
-	'LBL_REGISTER_SNIP_FAIL' => 'Falha ao entrar em contato com o serviço de arquivamento de e-mail:%s!<br>',
-	'LBL_CONFIGURE_SNIP' => 'Arquivamento de e-mail',
+<br><br>',
+    'LBL_REGISTER_SNIP_FAIL' => 'Falha ao entrar em contato com o serviço de arquivamento de e-mail:%s!<br>',
+    'LBL_CONFIGURE_SNIP' => 'Arquivamento de e-mail',
     'LBL_DISABLE_SNIP' => 'Desativar',
     'LBL_SNIP_APPLICATION_UNIQUE_KEY' => 'Chave única do aplicativo',
     'LBL_SNIP_USER' => 'Usuário do arquivamento de e-mail',
     'LBL_SNIP_PWD' => 'Senha do arquivamento de e-mail',
     'LBL_SNIP_SUGAR_URL' => 'URL desta instância do Sugar',
-	'LBL_SNIP_CALLBACK_URL' => 'URL do serviço arquivamento de e-mail',
+    'LBL_SNIP_CALLBACK_URL' => 'URL do serviço arquivamento de e-mail',
     'LBL_SNIP_USER_DESC' => 'Usuário do arquivamento de e-mail',
     'LBL_SNIP_KEY_DESC' => 'Chave OAuth do arquivamento de e-mail. Usada para acessar a instância para fins de importação de e-mails.',
     'LBL_SNIP_STATUS_OK' => 'Ativo',
@@ -42,17 +41,17 @@ $mod_strings = array(
     'LBL_SNIP_STATUS_FAIL_SUMMARY' => 'O serviço de arquivamento de e-mail está indisponível no momento. Ou o serviço está inoperante ou a conexão a essa instância do Sugar falhou.',
     'LBL_SNIP_GENERIC_ERROR' => 'O serviço de arquivamento de e-mail está indisponível no momento. Ou o serviço está inoperante ou a conexão a essa instância do Sugar falhou.',
 
-	'LBL_SNIP_STATUS_RESET' => 'Ainda não foi executado',
-	'LBL_SNIP_STATUS_PROBLEM' => 'Problema: %s',
-    'LBL_SNIP_NEVER' => "Nunca",
-    'LBL_SNIP_STATUS_SUMMARY' => "Status do serviço de arquivamento de e-mail:",
-    'LBL_SNIP_ACCOUNT' => "Conta",
-    'LBL_SNIP_STATUS' => "Status",
-    'LBL_SNIP_LAST_SUCCESS' => "Última execução bem-sucedida",
-    "LBL_SNIP_DESCRIPTION" => "O serviço de arquivamento de e-mail é um sistema de arquivamento automático de e-mail",
-    "LBL_SNIP_DESCRIPTION_SUMMARY" => "Ele permite que você visualize e-mails que foram enviados para ou pelos seus contatos dentro do SugarCRM, sem precisar importar e vincular os e-mails manualmente",
-    "LBL_SNIP_PURCHASE_SUMMARY" => "Para usar o arquivamento de e-mail, você deve adquirir uma licença para sua instância do SugarCRM",
-    "LBL_SNIP_PURCHASE" => "Clique aqui para comprar",
+    'LBL_SNIP_STATUS_RESET' => 'Ainda não foi executado',
+    'LBL_SNIP_STATUS_PROBLEM' => 'Problema: %s',
+    'LBL_SNIP_NEVER' => 'Nunca',
+    'LBL_SNIP_STATUS_SUMMARY' => 'Status do serviço de arquivamento de e-mail:',
+    'LBL_SNIP_ACCOUNT' => 'Conta',
+    'LBL_SNIP_STATUS' => 'Status',
+    'LBL_SNIP_LAST_SUCCESS' => 'Última execução bem-sucedida',
+    'LBL_SNIP_DESCRIPTION' => 'O serviço de arquivamento de e-mail é um sistema de arquivamento automático de e-mail',
+    'LBL_SNIP_DESCRIPTION_SUMMARY' => 'Ele permite que você visualize e-mails que foram enviados para ou pelos seus contatos dentro do SugarCRM, sem precisar importar e vincular os e-mails manualmente',
+    'LBL_SNIP_PURCHASE_SUMMARY' => 'Para usar o arquivamento de e-mail, você deve adquirir uma licença para sua instância do SugarCRM',
+    'LBL_SNIP_PURCHASE' => 'Clique aqui para comprar',
     'LBL_SNIP_EMAIL' => 'Endereço do arquivamento de e-mail',
     'LBL_SNIP_AGREE' => "Concordo com os termos acima e a <a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>política de privacidade</a>.",
     'LBL_SNIP_PRIVACY' => 'contrato de privacidade.',
@@ -68,8 +67,8 @@ $mod_strings = array(
     'LBL_CONTACT_SUPPORT' => 'Tente novamente ou entre em contato com o Suporte do SugarCRM.',
     'LBL_SNIP_SUPPORT' => 'Entre em contato com o Suporte do SugarCRM para obter assistência.',
     'ERROR_BAD_RESULT' => 'Resultado de falha retornado pelo serviço',
-	'ERROR_NO_CURL' => 'Extensões cURL são necessárias, mas não foram habilitadas',
-	'ERROR_REQUEST_FAILED' => 'Não foi possível contatar o servidor',
+    'ERROR_NO_CURL' => 'Extensões cURL são necessárias, mas não foram habilitadas',
+    'ERROR_REQUEST_FAILED' => 'Não foi possível contatar o servidor',
 
     'LBL_CANCEL_BUTTON_TITLE' => 'Cancelar',
 
@@ -77,4 +76,4 @@ $mod_strings = array(
     'LBL_SNIP_MOUSEOVER_EMAIL' => 'Este é o endereço de envio do arquivamento de e-mail para importação de e-mails no Sugar.',
     'LBL_SNIP_MOUSEOVER_SERVICE_URL' => 'Esta é a URL do servidor de arquivamento de e-mail. Todos os pedidos, como habilitar e desabilitar o serviço arquivamento de e-mail, serão retransmitidos por meio desta URL.',
     'LBL_SNIP_MOUSEOVER_INSTANCE_URL' => 'Esta é a URL dos serviços da Web da sua instância do Sugar. O servidor de arquivamento de e-mail vai se conectar ao seu servidor por meio desta URL.',
-);
+];

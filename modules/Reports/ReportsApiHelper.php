@@ -20,7 +20,7 @@ class ReportsApiHelper extends SugarBeanApiHelper
      * @param array $options
      * @return array
      */
-    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = array())
+    public function populateFromApi(SugarBean $bean, array $submittedData, array $options = [])
     {
         $bean->fromApi = true;
 
@@ -46,9 +46,9 @@ class ReportsApiHelper extends SugarBeanApiHelper
      * @param $options array Currently no options are supported
      * @return array The bean in array format, ready for passing out the API to clients.
      */
-    public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(SugarBean $bean, array $fieldList = [], array $options = [])
     {
-        if(isset($bean->fetched_row) && !empty($bean->fetched_row['report_type']) && $bean->report_type == 'summary' && $bean->fetched_row['report_type'] == 'Matrix') {
+        if (isset($bean->fetched_row) && !empty($bean->fetched_row['report_type']) && $bean->report_type == 'summary' && $bean->fetched_row['report_type'] == 'Matrix') {
             $bean->report_type = $bean->fetched_row['report_type'];
         }
         return parent::formatForApi($bean, $fieldList, $options);

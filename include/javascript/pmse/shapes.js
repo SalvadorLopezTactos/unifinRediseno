@@ -486,9 +486,9 @@ AdamShape.prototype.addErrors = function(newLayer, pos, warning) {
     }
     for (i = 0; i < newLayer.ZOOMSCALES; i += 1) {
         if (warning) {
-            cls = 'element-zoom-' + ((i * 25) + 50) + '-marker adam-warning-color fa fa-exclamation-triangle';
+            cls = 'element-zoom-' + ((i * 25) + 50) + '-marker adam-warning-color sicon sicon-warning-lg';
         } else {
-            cls = 'element-zoom-' + ((i * 25) + 50) + '-marker adam-error-color fa fa-exclamation-circle';
+            cls = 'element-zoom-' + ((i * 25) + 50) + '-marker adam-error-color sicon sicon-warning-circle-lg';
         }
         errorArrayClass.push(cls);
     }

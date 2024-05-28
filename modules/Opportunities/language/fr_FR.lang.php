@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Tableau de bord de la liste d&#39;affaires',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Tableau de bord de l&#39;enregistrement d&#39;affaires',
@@ -186,6 +186,9 @@ $mod_strings = array(
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Devis',
     'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Affaires par compte dynamique A',
+    'LBL_TOP_10_OPP' => 'Top 10 des affaires ouvertes',
+    'LBL_DASHLET_MY_ACTIVE_OPP' => 'Dashlet : Mes affaires actives',
+    'LBL_MY_ACTIVE_OPP' => 'Mes affaires actives',
 
 
     // Config
@@ -195,7 +198,7 @@ $mod_strings = array(
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Montant du portefeuille',
 
-    'LBL_OPPORTUNITY_ROLE'=>'Rôle pour cette Affaire',
+    'LBL_OPPORTUNITY_ROLE' => 'Rôle pour cette Affaire',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notes',
     'LBL_TAB_OPPORTUNITY' => 'Vérifier le module {{module}}',
 
@@ -203,8 +206,8 @@ $mod_strings = array(
     'LBL_OPPS_CONFIG_ALERT' => 'En cliquant sur Confirmer, vous effacerez TOUTES les données des Prévisions et modifierez la vue des Affaires. Si vous ne souhaitez pas faire cela veuillez cliquer sur Annuler.',
     'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
         'En cliquant sur Confirmer, vous effacerez TOUTES les données des Prévisions et modifierez la vue des Affaires. '
-        .'TOUTES les définitions des processus avec un module cible de Lignes de revenu seront également désactivées. '
-        .'Si ce n’est pas ce que vous souhaitiez, cliquez sur Annuler pour revenir aux paramètres précédents.',
+        . 'TOUTES les définitions des processus avec un module cible de Lignes de revenu seront également désactivées. '
+        . 'Si ce n’est pas ce que vous souhaitiez, cliquez sur Annuler pour revenir aux paramètres précédents.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Si toutes les Lignes de revenu sont closes et qu&#39;au moins une a été gagnée,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'la phase de vente de l&#39;Affaire est définie à "Gagné"',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Si toutes les Lignes de revenu sont dans la phase de vente "Perdu",',
@@ -220,24 +223,24 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Une fois que vous avez lancé cette modification, des enregistrements de ligne de revenu seront créés pour chaque module {{module_name}} existant en tâche de fond. Lorsque les lignes de revenu seront complètes et disponibles, une notification sera envoyée à l&#39;adresse email de votre profil utilisateur. Veuillez noter que votre instance doit être configurée pour envoyer un email via Admin > Configuration email pour que la notification soit envoyée.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles du début jusqu&#39;à la fin. Chaque enregistrement de {{module_name}} représente une vente future et comprend des données de vente pertinentes ainsi que liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} progressera typiquement à travers plusieurs étapes de vente jusqu&#39;à être marqué soit comme « Clôturé gagné » soit comme « Clôturé perdu ». {{plural_module_name}} peut être exploité davantage en utilisant le module de {{forecasts_singular_module}} de Sugar pour comprendre et prédire les tendances de vente ainsi que pour orienter le travail afin d&#39;obtenir des quotas de vente.',
+    'LBL_HELP_RECORDS' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles du début à la fin. Chaque enregistrement {{module_name}} représente une vente potentielle et comprend des données de vente pertinentes ainsi que des liens avec d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} progressera typiquement à travers plusieurs étapes de vente jusqu’à être marqué « Fermé gagné » ou « Fermé perdu ». {{plural_module_name}} peut être exploité encore davantage en utilisant le module de {{forecasts_singular_module}} de Sugar pour comprendre et prédire les tendances de vente ainsi que pour concentrer le travail sur l’atteinte de quotas de vente.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les lignes correspondant à ces ventes du début jusqu&#39;à la fin. Chaque enregistrement de {{module_name}} représente une vente future et comprend des données de vente pertinentes ainsi que liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. 
+    'LBL_HELP_RECORD' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles du début à la fin. Chaque enregistrement {{module_name}} represente une vente potentielle et comprend des données de vente pertinentes ainsi que des liens avec d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc.
 
 - Éditer chaque champs en cliquant directement sur le champ concerné ou en cliquant sur le bouton Éditer. 
-- Afficher ou modifier les liaisons avec d&#39;autres enregistrements dans les sous-panneaux en activant "Vue des données" dans le volet inférieur gauche.
-- Afficher et participer aux commentaires et enregistrer l&#39;historique des modifications dans le module {{activitystream_singular_module}} en activant " Flux d&#39;activité " dans le volet inférieur gauche.
-- Suivre ou mettre en favoris l&#39;enregistrement en utilisant les icônes prévues à cet effet à droite du nom de l&#39;enregistrement. 
-- Des actions complémentaires sont disponibles dans la listes déroulantes des actions à droite du bouton Éditer.',
+- Afficher ou modifier les liaisons avec les autres enregistrements via les sous-panels. 
+- Afficher et participer aux commentaires et au flux d&#39;activité via le module {{activitystream_singular_module}} en cliquant sur le bouton "Flux d’activité".
+- Suivre ou mettre en favori l&#39;enregistrement en utilisant les icônes prévues à cet effet à droite du nom de l&#39;enregistrement. 
+- Des actions complémentaires sont disponibles dans la liste déroulantes des actions à droite du bouton Éditer.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les lignes correspondant à ces ventes du début jusqu&#39;à la fin. Chaque enregistrement de {{module_name}} représente une vente future et comprend des données de vente pertinentes ainsi que liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles du début à la fin. Chaque enregistrement {{module_name}} représente une vente potentielle et comprend des données de vente pertinentes ainsi que des liens avec d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc.
 
 Pour créer un enregistrement {{module_name}}, les étapes suivantes sont nécessaires : 
 1. Remplir les champs souhaités. 
  - Les champs identifiés comme "Obligatoire" doivent être complétés avant la sauvegarde. 
- - Cliquer sur "Voir plus" pour afficher plus de champs, si nécessaire. 
+ - Cliquer sur "Afficher plus" pour afficher plus de champs, si nécessaire. 
 2. Cliquer sur "Sauvegarder" pour finaliser l&#39;enregistrement et retourner sur la page précédente.',
 
 // END ENT/ULT
@@ -260,4 +263,9 @@ Pour créer un enregistrement {{module_name}}, les étapes suivantes sont néces
     // AI Predict
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Prévision de clôture d&#39;affaire',
     'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Afficher les détails des prévisions pour une affaire spécifique',
-);
+    'LBL_AI_WINRATE' => 'Taux de réussite',
+    'LBL_AI_WONOPP' => 'Opportunités gagnées',
+    'LBL_AI_CLOSINGTIME' => 'Temps de fermeture',
+    'LBL_AI_CLOSEDOPP' => 'Opportunités fermées',
+    'LBL_AI_LEADTIMESPAN' => 'Temps entre la création d’opportunités et la fermeture gagnée',
+];

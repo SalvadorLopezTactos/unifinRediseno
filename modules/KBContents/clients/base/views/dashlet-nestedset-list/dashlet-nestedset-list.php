@@ -9,42 +9,42 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['KBContents']['base']['view']['dashlet-nestedset-list'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['KBContents']['base']['view']['dashlet-nestedset-list'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_DASHLET_CATEGORIES_NAME',
             'description' => 'LBL_DASHLET_CATEGORIES_DESCRIPTION',
-            'config' => array(
-                'last_state' => array(
+            'config' => [
+                'last_state' => [
                     'id' => 'dashlet-nestedset-list-kbcontents',
-                ),
+                ],
                 'data_provider' => 'Categories',
                 'config_provider' => 'KBContents',
                 'root_name' => 'category_root',
-                'extra_provider' => array(
+                'extra_provider' => [
                     'module' => 'KBContents',
                     'field' => 'category_id',
-                ),
-            ),
-            'preview' => array(
+                ],
+            ],
+            'preview' => [
                 'data_provider' => 'Categories',
                 'config_provider' => 'KBContents',
                 'root_name' => 'category_root',
-            ),
-            'filter' => array(
-                'module' => array(
+            ],
+            'filter' => [
+                'module' => [
                     'KBContents',
                     'KBContentTemplates',
                     'Administration',
-                ),
-                'view' => array(
+                ],
+                'view' => [
                     'record',
                     'records',
                     'portaltheme-config',
-                ),
-            ),
-        ),
-    ),
-    'config' => array (
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+    'config' => [
+    ],
+];

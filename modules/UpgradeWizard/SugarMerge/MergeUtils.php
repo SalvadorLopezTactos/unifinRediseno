@@ -22,7 +22,6 @@
  */
 class MergeUtils
 {
-
     /**
      * Performs a 3-way merge with Old, New, and Custom metadata defs. New that has changed wins over Custom wins over Old
      * @param $oldDefs
@@ -42,16 +41,16 @@ class MergeUtils
         // steps to keep horizontal scrolling to a minimum.
         $keys = array_merge(array_keys($oldDefs), array_keys($newDefs), array_keys($customDefs));
         $keys = array_unique($keys);
-        $ret = array();
+        $ret = [];
 
 
         // Loop and merge each key in the set
         foreach ($keys as $key) {
             // We are going to merge custom into new into old, so set up what is
             // needed up front
-            $old = isset($oldDefs[$key]) ? (array)$oldDefs[$key] : array();
-            $new = isset($newDefs[$key]) ? (array)$newDefs[$key] : array();
-            $cst = isset($customDefs[$key]) ? (array)$customDefs[$key] : array();
+            $old = isset($oldDefs[$key]) ? (array)$oldDefs[$key] : [];
+            $new = isset($newDefs[$key]) ? (array)$newDefs[$key] : [];
+            $cst = isset($customDefs[$key]) ? (array)$customDefs[$key] : [];
 
             // If there is something in custom that isn't in the old or new,
             // keep it
@@ -166,7 +165,7 @@ class MergeUtils
      */
     public static function removeDeletedElements($data, $del)
     {
-        $track = array();
+        $track = [];
 
         // Get the elements that are deleted, by name
         foreach ($del as $val) {
@@ -192,7 +191,7 @@ class MergeUtils
      *
      * @param array $data The custom metadata to add to
      * @param array $add The array of elements to add to the metadata
-     * @param bool  $preserveOrder if true, will attempt to insert add values at the indexes found in the $add array
+     * @param bool $preserveOrder if true, will attempt to insert add values at the indexes found in the $add array
      *
      * @return array
      */
@@ -200,7 +199,7 @@ class MergeUtils
     {
         // Track is used to keep track of added elements
         // Names is used to keep track of existing names in the metadata
-        $values = $order = $track = $names = array();
+        $values = $order = $track = $names = [];
 
         foreach ($data as $k => $v) {
             $t = static::getUniqueIdForValue($v);
@@ -210,7 +209,7 @@ class MergeUtils
                     //Need a real unique ID for elements that existed multiple times in the original defs
                     //But had no name
                     while (isset($order[$t])) {
-                        $t .= "_";
+                        $t .= '_';
                     }
                     //Preserve the superset of values to build the final result
                     $order[$t] = $k;
@@ -233,7 +232,7 @@ class MergeUtils
 
         if ($preserveOrder) {
             stable_asort($order);
-            $ret = array();
+            $ret = [];
             foreach ($order as $t => $o) {
                 $ret[] = $values[$t];
             }

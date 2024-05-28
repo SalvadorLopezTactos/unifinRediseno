@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Leads']['base']['view']['convert-options'] = array(
-    'fields' => array(
-        array(
+$viewdefs['Leads']['base']['view']['convert-options'] = [
+    'fields' => [
+        [
             'name' => 'transfer_activities',
             'type' => 'bool',
             'view' => 'edit',
-        ),
-    ),
-);
+        ],
+    ],
+];

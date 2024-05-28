@@ -295,7 +295,6 @@
 .adam-status-100-warning {
   vertical-align: top;
   font-size: 20px;
-  /*background: white; border-radius: 17px;*/
 }
 
 .adam-status-100-info {
@@ -1121,8 +1120,6 @@
   vertical-align: middle;
   background-image: url("../img/pmse_sprite_with_zoom.gif");
   background-repeat: no-repeat;
-  /*margin-top: 3px;*/
-  /*margin-bottom: 2px;*/
   background-position: -565px -510px;
 }
 
@@ -1192,13 +1189,10 @@
 
 .adam-tooltip-icon-default {
   background-image: none;
-  font-family: FontAwesome;
   font-size: 14px;
   color: #aaa;
 }
-.adam-tooltip-icon-default:before {
-  content: "\f05a";
-}
+
 .adam-tooltip-icon-default:hover {
   color: #555;
 }
@@ -1225,9 +1219,6 @@
   box-shadow: none;
 }
 
-/*#container {*/
-/*height: 450px;*/
-/*}*/
 .pane {
   display: none;
   /* will appear when layout inits */
@@ -1242,8 +1233,12 @@
 }
 
 #adam_toolbar {
-  margin: 2px;
-  padding: 2px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    column-gap: 1.5rem;
+    padding: 8px 12px;
 }
 #adam_toolbar span.navbtn {
   cursor: pointer;
@@ -1255,9 +1250,6 @@
   border-color: var(--border-color-focus);
 }
 
-#adam_toolbar span.navbtn:not(.mod).fa:hover {
-  color: var(--sicon-hover-color);
-}
 #adam_toolbar span.navbtn .button {
   background-color: #F5F5F5;
   border: 1px solid #999999;
@@ -1297,13 +1289,33 @@
   padding: 0;
 }
 
+.ui-layout-pane-north {
+    height: auto !important;
+}
+
+.pmse-toolbar-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 5px;
+}
+
+.pmse-toolbar-title {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row-reverse;
+    align-items: center;
+    max-width: 25%;
+}
+
 #ProjectTitle {
-  font-family: Arial,Verdana,Helvetica,sans-serif;
-  color: var(--text-color);
-  font-weight: bold;
-  font-size: 12pt;
-  float: right;
-  padding: 8px;
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
 }
 
 .adam-activity-task {
@@ -1320,13 +1332,9 @@
 
 .friendly-select {
   width: 70px;
-  display: inline-block;
   text-align: center;
   vertical-align: middle;
-  height: 30px;
-  background-color: var(--input-background);
-  font-size: 12px;
-  margin: 0px;
+  margin: 0;
 }
 
 .datepicker {
@@ -1339,9 +1347,7 @@ div.line {
   -webkit-transform-origin: left top;
   transform-origin: left top;
   height: 1px;
-  /* Line width of 3 */
   background: var(--text-color);
-  /* Black fill */
   background-clip: content-box;
   cursor: pointer;
 }
@@ -1356,7 +1362,6 @@ div.line {
 
 .adam-flow:hover div.line {
   background: #C30;
-  /*box-shadow: 0 0 8px #C30;*/
   opacity: 1;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;

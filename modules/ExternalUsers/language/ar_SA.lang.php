@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => 'الحالات',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'الفرص',
     'LBL_QUOTES_SUBPANEL_TITLE' => '‏‏عروض الأسعار',
-    'LBL_NOTES'=>'ملاحظات',
+    'LBL_NOTES' => 'ملاحظات',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => 'لوحة معلومات سجل المستخدمين الخارجيين',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني للمستخدم الخارجي',
 ];

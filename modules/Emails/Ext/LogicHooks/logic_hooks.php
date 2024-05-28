@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$hook_array['after_relationship_add'][] = array(
+$hook_array['after_relationship_add'][] = [
     1,
     'update_attachment_visibility',
     SugarAutoLoader::requireWithCustom('modules/Emails/EmailsHookHandler.php'),
     SugarAutoLoader::customClass('EmailsHookHandler'),
     'updateAttachmentVisibility',
-);
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kategooriad',
     'LBL_MODULE_NAME_SINGULAR' => 'Kategooria',
     'LBL_MODULE_TITLE' => 'Kategooriad',
@@ -31,4 +31,4 @@ $mod_strings = array(
 Eemaldatakse ka kõik pesastatud kategooriad',
     'LBL_WRONG_MOVE_PATH' => 'Te ei saa kausta iseendasse teisaldada.',
     'ERR_EMPTY_NODE_NAME' => 'Kategooriat ei saa lisada ilma pealkirjata',
-);
+];

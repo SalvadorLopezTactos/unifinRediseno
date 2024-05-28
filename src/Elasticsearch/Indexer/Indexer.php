@@ -72,10 +72,10 @@ class Indexer
      * long text type
      * @var array
      */
-    protected $longFieldTypes = array(
+    protected $longFieldTypes = [
         'longtext',
         'htmleditable_tinymce',
-    );
+    ];
 
     /**
      * long text search flag
@@ -92,13 +92,13 @@ class Indexer
     public function __construct(array $config, Container $container, \DBManager $db)
     {
         if (!empty($config['force_async_index'])) {
-            $this->async = (bool) $config['force_async_index'];
+            $this->async = (bool)$config['force_async_index'];
         }
         if (!empty($config['max_bulk_threshold'])) {
-            $this->maxBulkThreshold = (int) $config['max_bulk_threshold'];
+            $this->maxBulkThreshold = (int)$config['max_bulk_threshold'];
         }
         if (!empty($config['enable_long_text_search'])) {
-            $this->longTextEnabled = (bool) $config['enable_long_text_search'];
+            $this->longTextEnabled = (bool)$config['enable_long_text_search'];
         }
         $this->container = $container;
         $this->db = $db;
@@ -214,7 +214,7 @@ class Indexer
      */
     protected function getRegisteredProviders()
     {
-        return  new ProviderCollection($this->container, $this->container->getRegisteredProviders());
+        return new ProviderCollection($this->container, $this->container->getRegisteredProviders());
     }
 
 
@@ -295,7 +295,7 @@ class Indexer
      */
     protected function getWriteIndex(\SugarBean $bean)
     {
-        $context = array('bean' => $bean);
+        $context = ['bean' => $bean];
         return $this->container->indexPool->getWriteIndex($bean->module_name, $context);
     }
 
@@ -307,7 +307,7 @@ class Indexer
      */
     public function getBeanIndexFields($module, $fromQueue = false)
     {
-        $fields = array();
+        $fields = [];
 
         foreach ($this->getRegisteredProviders() as $provider) {
             /* @var $provider ProviderInterace */
@@ -329,7 +329,7 @@ class Indexer
     {
         $module = $bean->module_name;
         $index = $this->getWriteIndex($bean);
-        $document = new Document($bean->id, array(), $index);
+        $document = new Document($bean->id, [], $index);
         $document->setType($bean->getModuleName());
 
         // We dont need to send the whole data when deleting a record
@@ -345,7 +345,7 @@ class Indexer
         $fields = $this->getBeanIndexFields($module);
 
         // Populate field data from bean for bean index fields
-        $data = array();
+        $data = [];
         foreach ($fields as $field => $type) {
             if (isset($bean->$field)) {
                 if (is_string($bean->$field)

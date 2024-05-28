@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'ナレッジベース',
     'LBL_MODULE_NAME_SINGULAR' => 'ナレッジベース記事',
     'LBL_MODULE_TITLE' => 'ナレッジベース記事',
@@ -17,4 +17,4 @@ $mod_strings = array(
     'LBL_KEYWORDS' => 'キーワード:',
     'LBL_CONTENT' => '内容',
     'LBL_ATTACHMENTS' => '添付',
-);
+];

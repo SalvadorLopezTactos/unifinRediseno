@@ -28,7 +28,7 @@ class Blowfish
      */
     public static function getKey($type)
     {
-        $key = array();
+        $key = [];
 
         $type = str_rot13($type);
 
@@ -53,7 +53,7 @@ class Blowfish
     /**
      * Uses blowfish to encrypt data and base 64 encodes it. It stores the iv as part of the data
      *
-     * @param string $key  key to base encoding off of
+     * @param string $key key to base encoding off of
      * @param string $data string to be encrypted and encoded
      *
      * @return string
@@ -68,7 +68,7 @@ class Blowfish
     /**
      * Uses blowfish to decode data assumes data has been base64 encoded with the iv stored as part of the data
      *
-     * @param string $key     key to base decoding off of
+     * @param string $key key to base decoding off of
      * @param string $encoded base64 encoded blowfish encrypted data
      *
      * @return string

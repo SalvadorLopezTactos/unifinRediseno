@@ -12,19 +12,21 @@
 
 class TrackerPerf extends SugarBean
 {
-    var $module_dir = 'Trackers';
-    var $object_name = 'tracker_perf';
-    var $module_name = 'TrackerPerfs';
-    var $table_name = 'tracker_perf';
-    var $acltype = 'TrackerPerf';
-    var $acl_category = 'TrackerPerfs';
-    var $disable_custom_fields = true;
+    public $module_dir = 'Trackers';
+    public $object_name = 'tracker_perf';
+    public $module_name = 'TrackerPerfs';
+    public $table_name = 'tracker_perf';
+    public $acltype = 'TrackerPerf';
+    public $acl_category = 'TrackerPerfs';
+    public $disable_custom_fields = true;
 
-    var $disable_row_level_security = true;
+    public $disable_row_level_security = true;
 
-    function bean_implements($interface){
-        switch($interface){
-            case 'ACL': return true;
+    public function bean_implements($interface)
+    {
+        switch ($interface) {
+            case 'ACL':
+                return true;
         }
         return false;
     }

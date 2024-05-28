@@ -8,14 +8,9 @@
 .badge {
   display: inline-block;
   padding: 2px 4px;
-  font-size: @baseFontSize * 0.846;
-  font-weight: bold;
-  line-height: 14px; // ensure proper line-height if floated
-  color: @white;
   vertical-align: baseline;
   white-space: nowrap;
-  text-shadow: 0 -1px 0 @gray80;
-  background-color: @gray80;
+  text-shadow: 0 -1px 0 @color-gray-800;
 }
 // Set unique padding and border-radius
 .label {
@@ -40,7 +35,7 @@
 a {
   &.label:hover,
   &.badge:hover {
-    color: @white;
+    color: @color-white;
     text-decoration: none;
     cursor: pointer;
   }
@@ -76,10 +71,10 @@ a {
   &-info[href] { background-color: @infoBackground; }
   // Inverse (black)
   &-inverse {
-    background-color: @gray70;
-    color: @gray90;
+    background-color: @color-gray-700;
+    color: @color-white;
   }
-  &-inverse[href] { background-color: @gray80; }
+  &-inverse[href] { background-color: @color-gray-800; }
 }
 
 // Quick fix for labels/badges in buttons
@@ -105,11 +100,7 @@ a {
   text-shadow: none;
   display: inline-block;
   max-width: 100%;
-  cursor: default;
   padding: 2px 4px;
-  background: @gray80;
-  border: 1px solid @gray80;
-  color: @white;
   font-weight: 600;
   text-align: center;
   border-radius: @borderRadiusSmall;
@@ -128,7 +119,7 @@ a > .label {
 .label a {
   font-weight: inherit;
   text-shadow: none;
-  color: @white;
+  color: @color-white;
   text-decoration: none;
   cursor: pointer;
 }
@@ -140,20 +131,20 @@ a > .label {
 }
 
 .disabled .label-Users,
-  .inactive [class*="label-"],
-  [data-type="follow"] .label,
-  [data-type="follow"] .label:hover {
-  background-color: @transparent;
-  border: 1px solid @gray80;
-  color: @gray90;
+.inactive [class*="label-"],
+[data-type="follow"] .label,
+[data-type="follow"] .label:hover {
+  background-color: @color-transparent;
+  border: 1px solid @color-gray-800;
+  color: @color-gray-900;
   font-weight: 500;
 }
 
 [data-type="follow"] {
   .label[class*="label-"] {
-    background-color: @gray80;
-    border: 1px solid @gray90;
-    color: @white;
+    background-color: @color-gray-800;
+    border: 1px solid @color-gray-900;
+    color: @color-white;
     font-weight: 600;
     width: 100%;
   }
@@ -162,9 +153,9 @@ a > .label {
 [data-type="follow"],
 [data-type="badge"] {
   .label:not([class*="label-"]) {
-    background: @secondaryContentBackground;
-    border-color: @borderColor;
-    color: @textColor;
+    background: var(--secondary-content-background);
+    border-color: var(--border-color);
+    color: var(--text-color);
     font-weight: 500;
     width: 100%;
   }
@@ -172,16 +163,12 @@ a > .label {
 
 [data-type="badge"] [data-action="convert"]:hover {
   cursor: pointer;
-  background-color: @secondaryContentBackground;
-  color: @textColor;
+  background-color: var(--secondary-content-background);
+  color: var(--text-color);
   font-weight: 600;
 }
 
 .label-module {
-  height: @sizeDefault;
-  width: @sizeDefault;
-  font-size: 11px;
-  line-height: 11px;
   padding: 3px 0 0 3px;
   text-align: left;
   margin: 0;
@@ -276,14 +263,16 @@ a > .label {
   &-info {
     background-color: @infoBackground;
     border: 1px solid @infoBackground;
-    color: @inform;
+    color: var(--inform-text-color);
   }
 
   &-inverse,
-  &-unknown { background-color: @gray80; }
-  &-log { background-color: @black; }
+  &-unknown { background-color: @color-gray-800; }
+  &-log { background-color: @color-black; }
 
   /* Modules */
+
+  /* TODO: Deprecated - as this is no longer used because of Module Names and Icons config */
   &-Accounts {
     background-color: @el-accounts-bg;
     border: 1px solid @el-accounts-bg;
@@ -711,7 +700,7 @@ a > .label {
 
 // had to move &-dark-text out because a > .label was overriding
 a .label-dark-text {
-  color: @gray90;
+  color: @color-gray-900;
 }
 
 /* Disabled: no box-shadow*/
@@ -721,170 +710,22 @@ a .label-dark-text {
   box-shadow: none;
 }
 
-/* NEW SKIN START */
+// TODO consider moving to Tailwind
 
 .label-module,
 .label-module-md,
 .label-module-sm,
 .label-module-mini {
-  .inline-flex();
+  display: inline-flex;
 
   /* override */
   border-radius: @labelBorderRadius;
   text-align: center;
   padding: 0;
-
-  /* additive */
   justify-content: center;
   align-items: center;
 
   &.sicon:empty {
-    .inline-flex();
+    display: inline-flex;
   }
 }
-
-// Module label sizes
-
-.label-module-size-sm {
-  .h-6();
-  .w-6();
-  .text-xs();
-}
-
-.label-module-size-lg {
-  .h-8();
-  .w-8();
-  .text-base();
-}
-
-// Module label colors
-
-.label-module-color-army,
-.label-module-color-army a {
-  background-color: @lightArmy;
-  color: @darkArmy;
-
-  &.sicon {
-    background-color: @army;
-    color: @lightArmy;
-  }
-}
-
-.label-module-color-coral,
-.label-module-color-coral a {
-  background-color: @lightCoral;
-  color: @darkCoral;
-
-  &.sicon {
-    background-color: @coral;
-    color: @lightCoral;
-  }
-}
-
-.label-module-color-green,
-.label-module-color-green a {
-  background-color: @lightGreen;
-  color: @darkGreen;
-
-  &.sicon {
-    background-color: @green;
-    color: @lightGreen;
-  }
-}
-
-.label-module-color-ocean,
-.label-module-color-ocean a {
-  background-color: @lightOcean;
-  color: @darkOcean;
-
-  &.sicon {
-    background-color: @ocean;
-    color: @lightOcean;
-  }
-}
-
-.label-module-color-orange,
-.label-module-color-orange a {
-  background-color: @lightOrange;
-  color: @darkOrange;
-
-  &.sicon {
-    background-color: @orange;
-    color: @lightOrange;
-  }
-}
-
-.label-module-color-pacific,
-.label-module-color-pacific a {
-  background-color: @lightPacific;
-  color: @darkPacific;
-
-  &.sicon {
-    background-color: @pacific;
-    color: @lightPacific;
-  }
-}
-
-.label-module-color-pink,
-.label-module-color-pink a {
-  background-color: @lightPink;
-  color: @darkPink;
-
-  &.sicon {
-    background-color: @pink;
-    color: @lightPink;
-  }
-}
-
-.label-module-color-purple,
-.label-module-color-purple a {
-  background-color: @lightPurple;
-  color: @darkPurple;
-
-  &.sicon {
-    background-color: @purple;
-    color: @lightPurple;
-  }
-}
-
-.label-module-color-red,
-.label-module-color-red a {
-  background-color: @lightRed;
-  color: @darkRed;
-
-  &.sicon {
-    background-color: @red;
-    color: @lightRed;
-  }
-}
-
-.label-module-color-teal,
-.label-module-color-teal a {
-  background-color: @lightTeal;
-  color: @darkTeal;
-
-  &.sicon {
-    background-color: @teal;
-    color: @lightTeal;
-  }
-}
-
-.label-module-color-yellow,
-.label-module-color-yellow a {
-  background-color: @lightYellow;
-  color: @darkYellow;
-
-  &.sicon {
-    background-color: @yellow;
-    color: @lightYellow;
-  }
-}
-
-.label-module-color-sidebar,
-.label-module-color-sidebar.sicon,
-.label-module-color-sidebar a {
-  background-color: transparent;
-  color: @white;
-}
-
-/* NEW SKIN END */

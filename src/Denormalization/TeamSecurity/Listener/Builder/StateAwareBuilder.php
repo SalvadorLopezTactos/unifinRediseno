@@ -83,11 +83,11 @@ final class StateAwareBuilder implements Builder
             $components[] = new Invalidator($this->state);
         }
 
-        if (count($components) === 0) {
+        if (safeCount($components) === 0) {
             return new NullListener();
         }
 
-        if (count($components) === 1) {
+        if (safeCount($components) === 1) {
             return $components[0];
         }
 

@@ -20,9 +20,9 @@ interface MetaDataParserInterface
      */
     public function handleSave($populate = true, $clearCache = true);
 
-    public function getLayout () ;
+    public function getLayout();
 
-    public function getLanguage () ;
+    public function getLanguage();
 
-    public function getHistory () ;
+    public function getHistory();
 }

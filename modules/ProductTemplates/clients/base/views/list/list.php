@@ -9,109 +9,109 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ProductTemplates']['base']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['ProductTemplates']['base']['view']['list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'link' => true,
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'type_name',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'category_name',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'status',
                     'enabled' => true,
                     'default' => true,
-                ),
+                ],
                 [
                     'name' => 'active_status',
                     'enabled' => true,
                     'default' => true,
                 ],
-                array(
+                [
                     'name' => 'qty_in_stock',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'cost_price',
                     'type' => 'currency',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'cost_usdollar',
                         'currency_id',
                         'base_rate',
-                    ),
+                    ],
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => true,
                     'convertToBase' => true,
                     'showTransactionalAmount' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'list_price',
                     'type' => 'currency',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'list_usdollar',
                         'currency_id',
                         'base_rate',
-                    ),
+                    ],
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => true,
                     'convertToBase' => true,
                     'showTransactionalAmount' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'discount_price',
                     'type' => 'currency',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'discount_usdollar',
                         'currency_id',
                         'base_rate',
-                    ),
+                    ],
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => true,
                     'convertToBase' => true,
                     'showTransactionalAmount' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'service',
-                ),
-                array(
+                ],
+                [
                     'name' => 'service_duration',
                     'type' => 'fieldset',
                     'css_class' => 'service-duration-field',
                     'label' => 'LBL_SERVICE_DURATION',
                     'inline' => true,
                     'show_child_labels' => false,
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'name' => 'service_duration_value',
                             'label' => 'LBL_SERVICE_DURATION_VALUE',
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'service_duration_unit',
                             'label' => 'LBL_SERVICE_DURATION_UNIT',
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Lisa',
     'LBL_ADDRCITY' => 'Linn',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Teave' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Sulge' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'Selle allika ID jaoks ei leitud ühtki ühendust.',
-);
-
+];

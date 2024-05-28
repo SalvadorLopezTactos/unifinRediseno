@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
 
     'LBL_ADD_MODULE' => 'Adauga',
     'LBL_ADDRCITY' => 'Oraş',
@@ -88,5 +88,4 @@ $mod_strings = array(
     'LBL_INFO_INLINE' => 'Informaţii' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Inchide:' /*for 508 compliance fix*/,
     'ERROR_NO_CONNECTOR' => 'Nu s-a găsit nicio conexiune pentru ID-ul sursă dat.',
-);
-
+];

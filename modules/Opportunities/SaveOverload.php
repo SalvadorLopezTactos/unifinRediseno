@@ -11,7 +11,7 @@
  */
 
 /**
- * @param Opportunity $focus        The Current Opportunity we are working with
+ * @param Opportunity $focus The Current Opportunity we are working with
  */
 function perform_save($focus)
 {
@@ -23,11 +23,11 @@ function perform_save($focus)
     $settings = $admin->getConfigForModule('Forecasts');
 
     // if any of the case fields are NULL or an empty string set it to the amount from the main opportunity
-    if (is_null($focus->best_case) || strval($focus->best_case) === "") {
+    if (is_null($focus->best_case) || strval($focus->best_case) === '') {
         $focus->best_case = $focus->amount;
     }
 
-    if (is_null($focus->worst_case) || strval($focus->worst_case) === "") {
+    if (is_null($focus->worst_case) || strval($focus->worst_case) === '') {
         $focus->worst_case = $focus->amount;
     }
 

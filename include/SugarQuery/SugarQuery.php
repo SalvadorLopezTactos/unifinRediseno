@@ -13,7 +13,6 @@
 
 class SugarQuery
 {
-
     /**
      * This is the Select Object
      * @var null|SugarQuery_Builder_Select
@@ -29,7 +28,7 @@ class SugarQuery
     /**
      * @var SugarQuery_Builder_Groupby[]
      */
-    public $group_by = array();
+    public $group_by = [];
 
     /**
      * @var null|SugarQuery_Builder_Where
@@ -39,7 +38,7 @@ class SugarQuery
     /**
      * @var SugarQuery_Builder_Orderby[]
      */
-    public $order_by = array();
+    public $order_by = [];
 
     /**
      * @var null|integer
@@ -71,7 +70,7 @@ class SugarQuery
      *
      * @var SugarQuery_Builder_Join[]
      */
-    public $join = array();
+    public $join = [];
 
     protected $jt_index = 0;
 
@@ -84,7 +83,7 @@ class SugarQuery
      * Stores joins corresponding to links
      * @var array
      */
-    protected $links = array();
+    protected $links = [];
 
     /**
      * Stores parent field for this query
@@ -96,7 +95,7 @@ class SugarQuery
      * Bean templates for used tables
      * @var array
      */
-    protected $table_beans = array();
+    protected $table_beans = [];
 
     /**
      * If an rname_link field is used, this is the join alias
@@ -104,11 +103,11 @@ class SugarQuery
      */
     public $rname_link = false;
 
-    public $joinTableToKey = array();
+    public $joinTableToKey = [];
 
-    public $joinLinkToKey = array();
+    public $joinLinkToKey = [];
 
-    public $fields = array();
+    public $fields = [];
 
     /**
      * Forces query compiler to expand 'SELECT *' in \SugarQuery_Builder_Field_Select::expandField
@@ -156,7 +155,7 @@ class SugarQuery
      */
     public function __construct(DBManager $db = null)
     {
-        $this->select = new SugarQuery_Builder_Select($this, array());
+        $this->select = new SugarQuery_Builder_Select($this, []);
         $this->setDBManager($db ?: DBManagerFactory::getInstance());
     }
 
@@ -184,7 +183,7 @@ class SugarQuery
      */
     public function setOrderByStability($val)
     {
-        $this->orderByStability = (bool) $val;
+        $this->orderByStability = (bool)$val;
     }
 
     /**
@@ -203,7 +202,7 @@ class SugarQuery
      *
      * @return null|SugarQuery_Builder_Select
      */
-    public function select($fields = array())
+    public function select($fields = [])
     {
         if (!is_array($fields)) {
             $fields = func_get_args();
@@ -237,14 +236,14 @@ class SugarQuery
      * Set the from bean
      *
      * @param SugarBean $bean
-     * @param array     $options
+     * @param array $options
      *
      * @return SugarQuery
      */
-    public function from(SugarBean $bean, $options = array())
+    public function from(SugarBean $bean, $options = [])
     {
-        if (is_string($options)){
-            $options = array('alias' => $options);
+        if (is_string($options)) {
+            $options = ['alias' => $options];
         }
 
         $alias = $options['alias'] ?? false;
@@ -252,14 +251,14 @@ class SugarQuery
         if (!empty($alias)) {
             $newAlias = $this->db->getValidDBName($alias, false, 'alias');
             if (strtolower($alias) != $newAlias) {
-                throw new SugarQueryException("From alias is more than the max allowed length for an alias");
+                throw new SugarQueryException('From alias is more than the max allowed length for an alias');
             }
         }
 
         $team_security = $options['team_security'] ?? true;
         $this->from = $bean;
         if (!empty($alias)) {
-            $this->from = array($bean, $alias);
+            $this->from = [$bean, $alias];
         }
 
         if ($team_security === true) {
@@ -292,7 +291,7 @@ class SugarQuery
      *
      * @return SugarQuery_Builder_Where
      */
-    public function where($conditions = array())
+    public function where($conditions = [])
     {
         if (isset($this->where)) {
             if (!$this->where instanceof SugarQuery_Builder_Andwhere) {
@@ -338,7 +337,7 @@ class SugarQuery
      *
      * @return SugarQuery_Builder_Orwhere
      */
-    public function orWhere($conditions = array())
+    public function orWhere($conditions = [])
     {
         if (isset($this->where)) {
             if (!$this->where instanceof SugarQuery_Builder_Orwhere) {
@@ -367,7 +366,7 @@ class SugarQuery
      *
      * @return SugarQuery_Builder_Join
      */
-    public function joinTable($table, $options = array())
+    public function joinTable($table, $options = [])
     {
         if (!isset($options['linkingTable']) && !isset($options['bean'])) {
             $options['linkingTable'] = true;
@@ -397,7 +396,7 @@ class SugarQuery
      *
      * @return SugarQuery_Builder_Join
      */
-    public function join($link_name, $options = array())
+    public function join($link_name, $options = [])
     {
         $relatedJoin = empty($options['relatedJoin']) ? false : $options['relatedJoin'];
         if (!isset($options['alias'])) {
@@ -439,16 +438,16 @@ class SugarQuery
      *
      * @return string
      */
-    public function getJoinTableAlias($table_name = "", $relatedJoin = false, $isLink = true)
+    public function getJoinTableAlias($table_name = '', $relatedJoin = false, $isLink = true)
     {
         $table_name = $relatedJoin ? $relatedJoin . '_' . $table_name : $table_name;
         if ($alias = $this->getJoinAlias($table_name, $isLink)) {
             return $alias;
         }
 
-        $alias = "jt" . $this->jt_index++;
+        $alias = 'jt' . $this->jt_index++;
         if (!empty($table_name)) {
-            $alias .= "_" . $table_name;
+            $alias .= '_' . $table_name;
         }
 
         return $this->db->getValidDBName($alias, true, 'alias');
@@ -463,7 +462,7 @@ class SugarQuery
      *
      * @return SugarQuery
      */
-    public function joinSubpanel($bean, $link_name, $options = array())
+    public function joinSubpanel($bean, $link_name, $options = [])
     {
         //Force a unique join table alias for self referencing relationships and multiple joins against the same table
         $alias = !empty($options['joinTableAlias']) ? $options['joinTableAlias'] : $this->getJoinTableAlias(
@@ -476,13 +475,13 @@ class SugarQuery
             throw new SugarApiExceptionInvalidParameter("Unable to load link $link_name");
         }
 
-        $joinParams = array(
+        $joinParams = [
             'joinTableAlias' => $alias,
             'joinType' => $joinType,
             'ignoreRole' => $ignoreRole,
             'reverse' => true,
             'includeCustom' => true,
-        );
+        ];
         if (!empty($options['myAlias'])) {
             $joinParams['myAlias'] = $options['myAlias'];
         }
@@ -504,7 +503,8 @@ class SugarQuery
      * @param string $linkName
      * @return null|string
      */
-    protected function getJoinOnField($linkName) {
+    protected function getJoinOnField($linkName)
+    {
         $bean = $this->from;
 
         if (is_array($bean)) {
@@ -536,7 +536,7 @@ class SugarQuery
      * @param array $options
      * @throws SugarQueryException
      */
-    public function setJoinOn($options = array())
+    public function setJoinOn($options = [])
     {
         if ($this->rname_link !== false && !empty($options['baseBeanId'])) {
             // get the field name from the relationship instead of just assuming it's something
@@ -566,9 +566,9 @@ class SugarQuery
 
         //make sure 'group by' is not empty, if 'group by' is empty then we don't need to modify 'group by'
         if (!empty($this->group_by)) {
-            $groupByCols = array();
+            $groupByCols = [];
             //grab the defined cols so we don't add them twice
-            foreach ($this->group_by AS $groupBy) {
+            foreach ($this->group_by as $groupBy) {
                 $groupByCols[$groupBy->column->table . '.' . $groupBy->column->field] = $groupBy->column->field;
             }
             //make sure all the fields in the select statement are in the group by
@@ -609,7 +609,7 @@ class SugarQuery
                             $fieldStringArray = explode(' ', $fieldToAdd);
 
                             foreach ($fieldStringArray as $fieldStr) {
-                                if (strpos($fieldStr, '.' ) !== false) {
+                                if (strpos($fieldStr, '.') !== false) {
                                     $fieldToAdd = $fieldStr;
                                     break;
                                 }
@@ -655,7 +655,7 @@ class SugarQuery
      */
     public function execute()
     {
-        $result = array();
+        $result = [];
         $stmt = $this->runQuery();
         while ($row = $stmt->fetchAssociative()) {
             //Apply any post data cleanup/db abstraction
@@ -669,7 +669,7 @@ class SugarQuery
      * @return Generator
      * @throws \Doctrine\DBAL\Driver\Exception
      */
-    public function executeAndReturnAsGenerator() : Generator
+    public function executeAndReturnAsGenerator(): Generator
     {
         $stmt = $this->runQuery();
         while ($row = $stmt->fetchAssociative()) {
@@ -677,15 +677,16 @@ class SugarQuery
             yield $this->formatRow($row);
         }
     }
+
     /**
      * Get one value result from the query
      * @return false|string
      */
     public function getOne()
     {
-       if(empty($this->limit)) {
-           $this->offset(0)->limit(1);
-       }
+        if (empty($this->limit)) {
+            $this->offset(0)->limit(1);
+        }
 
         $stmt = $this->runQuery();
         $result = $stmt->fetchOne();
@@ -863,9 +864,9 @@ class SugarQuery
     public function orderBy($column, $direction = 'DESC', $nullsLast = false)
     {
         $orderBy = new SugarQuery_Builder_Orderby($this, $direction);
-        $orderBy->addField($column);
+        $orderBy->addField($column, $nullsLast);
 
-        if ($nullsLast) {
+        if ($nullsLast && !$orderBy->column->isNonDb()) {
             $field = $orderBy->column->field;
             if ($orderBy->column->table && strpos($field, '.') === false) {
                 $field = $orderBy->column->table . '.' . $field;
@@ -902,7 +903,7 @@ class SugarQuery
      */
     public function orderByReset()
     {
-        $this->order_by = array();
+        $this->order_by = [];
         return $this;
     }
 
@@ -1020,11 +1021,11 @@ class SugarQuery
 
         $bean->$join->buildJoinSugarQuery(
             $this,
-            array(
+            [
                 'joinTableAlias' => $alias,
                 'joinType' => $joinType,
                 'ignoreRole' => $ignoreRole,
-            )
+            ]
         );
         $joined = BeanFactory::getDefinition($bean->$join->getRelatedModuleName());
         if ($team_security === true) {
@@ -1084,12 +1085,12 @@ class SugarQuery
         global $dictionary;
 
         if (!isset($this->join[$alias])) {
-            return array();
+            return [];
         }
 
         $table = $this->join[$alias]->table;
         if (!is_string($table) || !isset($dictionary[$table])) {
-            return array();
+            return [];
         }
 
         return $dictionary[$table];
@@ -1173,10 +1174,10 @@ class SugarQuery
 
         $joinAlias = $this->getCustomTableAlias($bean, $primaryTableAlias);
 
-        $this->joinTable($bean->get_custom_table_name(), array(
+        $this->joinTable($bean->get_custom_table_name(), [
             'joinType' => 'left',
             'alias' => $joinAlias,
-        ))
+        ])
             ->on()->equalsField($joinAlias . '.id_c', $primaryTableAlias . '.id');
     }
 
@@ -1206,7 +1207,7 @@ class SugarQuery
      * @param string $alias Original column alias
      * @return string
      */
-    public function getValidColumnAlias(string $alias) : string
+    public function getValidColumnAlias(string $alias): string
     {
         $validAlias = $this->db->getValidDBName($alias, true);
 
@@ -1224,7 +1225,7 @@ class SugarQuery
      * @param null|string $alias
      * @return string
      */
-    public function getCustomTableAlias(SugarBean $bean, ?string $alias) : string
+    public function getCustomTableAlias(SugarBean $bean, ?string $alias): string
     {
         if (!empty($alias)) {
             return $alias . '_cstm';

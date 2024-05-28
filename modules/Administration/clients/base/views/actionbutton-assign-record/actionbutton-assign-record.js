@@ -17,6 +17,13 @@
  */
 ({
     /**
+     * Event listeners
+     */
+    events: {
+        'change input[type=checkbox]': 'assignToCurrentUser',
+    },
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -44,7 +51,8 @@
         } else {
             this._properties = {
                 id: '',
-                name: ''
+                name: '',
+                assignToCurrentUser: false,
             };
         }
     },
@@ -78,19 +86,21 @@
      * @return {bool}
      */
     canSave: function() {
-        if (this._properties.id === '') {
-            app.alert.show('alert_actionbutton_assign_nodata', {
-                level: 'error',
-                title: app.lang.get('LBL_ACTIONBUTTON_INVALID_DATA'),
-                messages: app.lang.get('LBL_ACTIONBUTTON_SELECT_RECORD'),
-                autoClose: true,
-                autoCloseDelay: 5000
-            });
-
-            return false;
-        }
-
+        // Selection is not required
+        // Unassign a record if no user is selected
         return true;
+    },
+
+    /**
+     * Event handler for checkbox
+     *
+     * @param {UIEvent} e
+     *
+     */
+    assignToCurrentUser: function(e) {
+        this._properties.assignToCurrentUser = e.currentTarget.checked;
+        this._updateActionProperties();
+        this._updateSelectVisibility();
     },
 
     /**
@@ -119,11 +129,25 @@
         if (selection) {
             this._properties = {
                 id: selection.id,
-                name: selection.name
+                name: selection.name,
+                assignToCurrentUser: false,
             };
 
             this._updateSelect2View();
             this._updateActionProperties();
+        }
+    },
+
+    /**
+     * Show or hide the select2 dropdown
+     */
+    _updateSelectVisibility: function() {
+        const $select2 = this.$('[name="preset_user_name"]');
+
+        if (this._properties.assignToCurrentUser) {
+            $select2.prop('disabled', true);
+        } else {
+            $select2.prop('disabled', false);
         }
     },
 
@@ -183,6 +207,8 @@
         this.userSelectField.render();
         this.userSelectField.setValue = _.bind(this.setValue, this);
         this.$('[data-container="field"]').append(this.userSelectField.$el);
+
+        this._updateSelectVisibility();
     },
 
     /**

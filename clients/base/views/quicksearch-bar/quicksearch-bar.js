@@ -15,7 +15,7 @@
 */
 ({
 
-    className: 'quicksearch-bar-wrapper max-w-150',
+    className: 'quicksearch-bar-wrapper max-w-[37.5rem]',
     /**
      * The minimum number of characters before the search bar attempts to
      * retrieve results.

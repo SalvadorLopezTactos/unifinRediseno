@@ -87,7 +87,7 @@
                 this.module, data.record);
             this.showAlert('template-import-duplicate', 'error', alertMessage, true, 20000);
 
-        } else if (data.update) {
+        } else if (data.update && !_.isEmpty(data.record.id)) {
             app.alert.show('template-import-confirm-update', {
                 level: 'confirmation',
                 messages: app.lang.get('LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_UPDATE_CONFIRM', this.module, data.record),

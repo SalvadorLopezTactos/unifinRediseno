@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Tietämyskannan mallit',
     'LBL_MODULE_NAME_SINGULAR' => 'Tietämyskannan malli',
     'LBL_MODULE_TITLE' => 'Tietämyskannan malli',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Näytä mallit',
     'LBL_TEXT_BODY' => 'Leipäteksti',
     'LBL_LIST_TEMPLATE_NAME' => 'Mallin nimi',
-);
+];

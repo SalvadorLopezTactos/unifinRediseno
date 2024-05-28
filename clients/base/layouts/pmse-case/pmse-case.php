@@ -12,115 +12,114 @@
  */
 
 
-$viewdefs['base']['layout']['pmse-case'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['base']['layout']['pmse-case'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
                             'css_class' => 'main-pane span8',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'view' => 'pmse-case',
                                     'primary' => true,
-                                ),
-                                array(
+                                ],
+                                [
                                     'layout' => 'extra-info',
-                                ),
-                                array(
-                                    'layout' => array(
+                                ],
+                                [
+                                    'layout' => [
                                         'type' => 'filterpanel',
-                                        'last_state' => array(
+                                        'last_state' => [
                                             'id' => 'record-filterpanel',
-                                            'defaults' => array(
+                                            'defaults' => [
                                                 'toggle-view' => 'subpanels',
-                                            ),
-                                        ),
-                                        'availableToggles' => array(
-                                            array(
+                                            ],
+                                        ],
+                                        'availableToggles' => [
+                                            [
                                                 'name' => 'subpanels',
                                                 'icon' => 'sicon-list-view',
                                                 'label' => 'LBL_DATA_VIEW',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'name' => 'list',
                                                 'icon' => 'sicon-list-view',
                                                 'label' => 'LBL_LISTVIEW',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'name' => 'activitystream',
                                                 'icon' => 'sicon-clock',
                                                 'label' => 'LBL_ACTIVITY_STREAM',
-                                            ),
-                                        ),
-                                        'components' => array(
-                                            array(
+                                            ],
+                                        ],
+                                        'components' => [
+                                            [
                                                 'layout' => 'filter',
                                                 'loadModule' => 'Filters',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'filter-rows',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'view' => 'filter-actions',
-                                            ),
-                                            array(
+                                            ],
+                                            [
                                                 'layout' => 'activitystream',
-                                                'context' =>
-                                                array(
+                                                'context' => [
                                                     'module' => 'Activities',
-                                                ),
-                                            ),
-                                            array(
+                                                ],
+                                            ],
+                                            [
                                                 'layout' => 'subpanels',
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'dashboard-pane',
                             'css_class' => 'dashboard-pane',
-                            'components' => array(
-                                array(
-                                    'layout' => array(
+                            'components' => [
+                                [
+                                    'layout' => [
                                         'type' => 'dashboard',
-                                        'last_state' => array(
+                                        'last_state' => [
                                             'id' => 'last-visit',
-                                        )
-                                    ),
+                                        ],
+                                    ],
                                     'loadModule' => 'Dashboards',
-                                    'context' => array(
+                                    'context' => [
                                         'forceNew' => true,
                                         'module' => 'Home',
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'preview-pane',
                             'css_class' => 'preview-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'preview',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

@@ -10,62 +10,62 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['linked_documents'] = array(
+$dictionary['linked_documents'] = [
     'table' => 'linked_documents',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'parent_id' => array(
+        ],
+        'parent_id' => [
             'name' => 'parent_id',
             'type' => 'id',
-        ),
-        'parent_type' => array(
+        ],
+        'parent_type' => [
             'name' => 'parent_type',
             'type' => 'varchar',
             'len' => '25',
-        ),
-        'document_id' => array(
+        ],
+        'document_id' => [
             'name' => 'document_id',
             'type' => 'id',
-        ),
-        'document_revision_id' => array(
+        ],
+        'document_revision_id' => [
             'name' => 'document_revision_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'linked_documentspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_parent_document',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'parent_type',
                 'parent_id',
                 'document_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'contracts_documents' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'contracts_documents' => [
             'lhs_module' => 'Contracts',
             'lhs_table' => 'contracts',
             'lhs_key' => 'id',
@@ -78,8 +78,8 @@ $dictionary['linked_documents'] = array(
             'join_key_rhs' => 'document_id',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Contracts',
-        ),
-        'contracttype_documents' => array(
+        ],
+        'contracttype_documents' => [
             'lhs_module' => 'ContractTypes',
             'lhs_table' => 'contract_types',
             'lhs_key' => 'id',
@@ -92,6 +92,6 @@ $dictionary['linked_documents'] = array(
             'join_key_rhs' => 'document_id',
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'ContracTemplates',
-        ),
-    ),
-);
+        ],
+    ],
+];

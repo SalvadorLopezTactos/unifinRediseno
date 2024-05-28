@@ -12,9 +12,9 @@
 --}}
 <div class="alert-page-overlay"></div>
 <div class="alert-confirmation">
-    <div class="alert {{alertClass}} alert-block rounded-md shadow-lg bg-alert-background block m-auto">
+    <div class="alert {{alertClass}} alert-block rounded-md shadow-lg bg-[--alert-background] block m-auto">
         <div class="flex">
-            <div class="indicator pt-5 px-4">
+            <div class="{{indicatorClass}}  pt-5 px-4">
                 <i class="sicon sicon-32 {{alertIcon}}"></i>
             </div>
             <span class="text pt-5 pr-4">
@@ -25,8 +25,8 @@
             </span>
         </div>
         <div class="row-fluid flex justify-end">
-            <a class="alert-btn-cancel px-4 py-4 tbold uppercase" data-action="cancel">{{str alert.cancelLabel}}</a>
-            <a class="alert-btn-confirm px-4 py-4 tbold uppercase" data-action="confirm">{{str alert.confirmLabel}}</a>
+            <a class="alert-btn-cancel px-4 py-4 font-bold uppercase" data-action="cancel">{{str alert.cancelLabel}}</a>
+            <a class="alert-btn-confirm px-4 py-4 font-bold uppercase" data-action="confirm">{{str alert.confirmLabel}}</a>
         </div>
     </div>
 </div>

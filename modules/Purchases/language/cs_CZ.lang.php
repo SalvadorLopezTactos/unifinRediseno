@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Řídicí panel záznamů nákupů',
     'LBL_RELATED_ACCOUNT' => 'Související účet',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na nákupy',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová osa nákupu',
 ];

@@ -1,11 +1,21 @@
 <?php
-$searchdefs['Employees'] = 
-array (
+// created: 2024-05-21 12:49:42
+$searchdefs['Employees'] = array (
+  'templateMeta' => 
+  array (
+    'maxColumns' => '3',
+    'maxColumnsBasic' => '4',
+    'widths' => 
+    array (
+      'label' => '10',
+      'field' => '30',
+    ),
+  ),
   'layout' => 
   array (
     'basic_search' => 
     array (
-      'search_name' => 
+      0 => 
       array (
         'name' => 'search_name',
         'label' => 'LBL_NAME',
@@ -13,7 +23,7 @@ array (
         'default' => true,
         'width' => 10,
       ),
-      'open_only_active_users' => 
+      1 => 
       array (
         'name' => 'open_only_active_users',
         'label' => 'LBL_ONLY_ACTIVE',
@@ -21,7 +31,7 @@ array (
         'default' => true,
         'width' => 10,
       ),
-      'puestousuario_c' => 
+      2 => 
       array (
         'type' => 'enum',
         'default' => true,
@@ -32,31 +42,31 @@ array (
     ),
     'advanced_search' => 
     array (
-      'first_name' => 
+      0 => 
       array (
         'name' => 'first_name',
         'default' => true,
         'width' => 10,
       ),
-      'last_name' => 
+      1 => 
       array (
         'name' => 'last_name',
         'default' => true,
         'width' => 10,
       ),
-      'employee_status' => 
+      2 => 
       array (
         'name' => 'employee_status',
         'default' => true,
         'width' => 10,
       ),
-      'title' => 
+      3 => 
       array (
         'name' => 'title',
         'default' => true,
         'width' => 10,
       ),
-      'phone' => 
+      4 => 
       array (
         'name' => 'phone',
         'label' => 'LBL_ANY_PHONE',
@@ -64,13 +74,13 @@ array (
         'default' => true,
         'width' => '10',
       ),
-      'department' => 
+      5 => 
       array (
         'name' => 'department',
         'default' => true,
         'width' => 10,
       ),
-      'puestousuario_c' => 
+      6 => 
       array (
         'type' => 'enum',
         'default' => true,
@@ -78,7 +88,7 @@ array (
         'width' => '10',
         'name' => 'puestousuario_c',
       ),
-      'email' => 
+      7 => 
       array (
         'name' => 'email',
         'label' => 'LBL_ANY_EMAIL',
@@ -86,7 +96,7 @@ array (
         'default' => true,
         'width' => '10',
       ),
-      'address_street' => 
+      8 => 
       array (
         'name' => 'address_street',
         'label' => 'LBL_ANY_ADDRESS',
@@ -94,7 +104,7 @@ array (
         'default' => true,
         'width' => '10',
       ),
-      'address_city' => 
+      9 => 
       array (
         'name' => 'address_city',
         'label' => 'LBL_CITY',
@@ -102,7 +112,7 @@ array (
         'default' => true,
         'width' => '10',
       ),
-      'address_state' => 
+      10 => 
       array (
         'name' => 'address_state',
         'label' => 'LBL_STATE',
@@ -110,7 +120,7 @@ array (
         'default' => true,
         'width' => '10',
       ),
-      'address_postalcode' => 
+      11 => 
       array (
         'name' => 'address_postalcode',
         'label' => 'LBL_POSTAL_CODE',
@@ -118,7 +128,7 @@ array (
         'default' => true,
         'width' => '10',
       ),
-      'address_country' => 
+      12 => 
       array (
         'name' => 'address_country',
         'label' => 'LBL_COUNTRY',
@@ -126,16 +136,6 @@ array (
         'default' => true,
         'width' => '10',
       ),
-    ),
-  ),
-  'templateMeta' => 
-  array (
-    'maxColumns' => '3',
-    'maxColumnsBasic' => '4',
-    'widths' => 
-    array (
-      'label' => '10',
-      'field' => '30',
     ),
   ),
 );

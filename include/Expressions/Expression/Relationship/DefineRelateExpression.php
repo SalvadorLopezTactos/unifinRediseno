@@ -12,26 +12,29 @@
 
 class DefineRelateExpression extends RelateExpression
 {
-	/**
-	 * Returns the entire enumeration bare.
-	 */
-	function evaluate() {
-		$fieldName = $this->getParameters()->evaluate();
+    /**
+     * Returns the entire enumeration bare.
+     */
+    public function evaluate()
+    {
+        $fieldName = $this->getParameters()->evaluate();
 
-        if (!isset($this->context))
-        {
+        if (!isset($this->context)) {
             //If we don't have a context provided, we have to guess. This can be a large performanc hit.
             $this->setContext();
         }
 
-        if (empty($this->context->field_defs[$fieldName]))
+        if (empty($this->context->field_defs[$fieldName])) {
             throw new Exception("Unable to find field {$fieldName}");
+        }
 
-        if(!$this->context->load_relationship($fieldName))
+        if (!$this->context->load_relationship($fieldName)) {
             throw new Exception("Unable to load relationship $fieldName");
+        }
 
-        if(empty($this->context->$fieldName))
+        if (empty($this->context->$fieldName)) {
             throw new Exception("Relationship $fieldName was not set");
+        }
 
         $rmodule = $this->context->$fieldName->getRelatedModuleName();
 
@@ -39,7 +42,7 @@ class DefineRelateExpression extends RelateExpression
         $seed = $this->getBean($rmodule);
 
         return $this->context->$fieldName->getBeans($seed);
-	}
+    }
 
     protected function setContext()
     {
@@ -53,45 +56,49 @@ class DefineRelateExpression extends RelateExpression
     protected function getBean($module)
     {
         $bean = BeanFactory::newBean($module);
-        if (empty($bean))
-           throw new Exception("No bean for module $module");
+        if (empty($bean)) {
+            throw new Exception("No bean for module $module");
+        }
         return $bean;
     }
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return "";
-	}
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return '';
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return "link";
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return 'link';
+    }
 
-	/**
-	 * All parameters have to be a string.
-	 */
-    static function getParameterTypes() {
-		return array("string");
-	}
+    /**
+     * All parameters have to be a string.
+     */
+    public static function getParameterTypes()
+    {
+        return ['string'];
+    }
 
-	/**
-	 * Returns the maximum number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 1;
-	}
+    /**
+     * Returns the maximum number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 1;
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 }
-
-?>

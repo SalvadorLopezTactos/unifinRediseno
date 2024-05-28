@@ -9,33 +9,32 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-  $searchdefs['Cases'] = array(
-					'templateMeta' => array(
-							'maxColumns' => '3', 
-  							'maxColumnsBasic' => '4',
-                            'widths' => array('label' => '10', 'field' => '30'),                 
-                           ),
-                    'layout' => array(  					
-						'basic_search' => array(
-						 	'name', 
-							array('name'=>'current_user_only', 'label'=>'LBL_CURRENT_USER_FILTER', 'type'=>'bool'),
-							
+$searchdefs['Cases'] = [
+    'templateMeta' => [
+        'maxColumns' => '3',
+        'maxColumnsBasic' => '4',
+        'widths' => ['label' => '10', 'field' => '30'],
+    ],
+    'layout' => [
+        'basic_search' => [
+            'name',
+            ['name' => 'current_user_only', 'label' => 'LBL_CURRENT_USER_FILTER', 'type' => 'bool'],
 
-						    array ('name' => 'favorites_only','label' => 'LBL_FAVORITES_FILTER','type' => 'bool',),
-				     	    array ('name' => 'open_only', 'label' => 'LBL_OPEN_ITEMS', 'type' => 'bool', 'default' => false, 'width' => '10%'),
-		      
-		      ),
-						'advanced_search' => array(
-							'case_number', 
-							'name',
-							'account_name',
-							'status',
-							array('name' => 'assigned_user_id', 'type' => 'enum', 'label' => 'LBL_ASSIGNED_TO', 'function' => array('name' => 'get_user_array', 'params' => array(false))),
-							'priority',
-							
 
-		      array ('name' => 'favorites_only','label' => 'LBL_FAVORITES_FILTER','type' => 'bool',),
-						),
-					),
- 			   );
-?>
+            ['name' => 'favorites_only', 'label' => 'LBL_FAVORITES_FILTER', 'type' => 'bool',],
+            ['name' => 'open_only', 'label' => 'LBL_OPEN_ITEMS', 'type' => 'bool', 'default' => false, 'width' => '10%'],
+
+        ],
+        'advanced_search' => [
+            'case_number',
+            'name',
+            'account_name',
+            'status',
+            ['name' => 'assigned_user_id', 'type' => 'enum', 'label' => 'LBL_ASSIGNED_TO', 'function' => ['name' => 'get_user_array', 'params' => [false]]],
+            'priority',
+
+
+            ['name' => 'favorites_only', 'label' => 'LBL_FAVORITES_FILTER', 'type' => 'bool',],
+        ],
+    ],
+];

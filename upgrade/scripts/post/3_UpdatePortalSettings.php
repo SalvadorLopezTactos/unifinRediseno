@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Update portal settings
  */
@@ -20,7 +21,7 @@ class SugarUpgradeUpdatePortalSettings extends UpgradeScript
     /**
      * @return bool
      */
-    protected function shouldAddConfig() : bool
+    protected function shouldAddConfig(): bool
     {
         // upgrade, not convert
         if ($this->to_flavor == $this->from_flavor) {
@@ -40,6 +41,7 @@ class SugarUpgradeUpdatePortalSettings extends UpgradeScript
         }
         return true;
     }
+
     /**
      * This script updates portal settings to enable search
      * @see UpgradeScript::run()

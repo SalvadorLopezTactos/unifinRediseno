@@ -207,7 +207,11 @@
         short = !!short;
         description = Handlebars.Utils.escapeExpression(description);
         description = short ? this.getShortComment(description) : description;
-        description = this.insertHtmlLinks(description);
+
+        if (this.def.add_links !== false) {
+            description = this.insertHtmlLinks(description);
+        }
+
         return new Handlebars.SafeString(description);
     },
 

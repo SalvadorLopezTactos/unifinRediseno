@@ -80,7 +80,8 @@
                                     },
                                     parent_type: record.module,
                                     parent_id: record.get('id'),
-                                    parent_name: parentName
+                                    parent_name: parentName,
+                                    email_address: record.get('email_address') || ''
                                 });
 
                                 component.prepareModel(ep);
@@ -106,7 +107,7 @@
                     };
 
                     app.api.call('read', url, null, callbacks);
-                }, 300);
+                }, app.config.ajaxDebounceInterval || 500);
 
                 this.on('init', function() {
                     var task = getValidationTaskName(this);
@@ -271,7 +272,7 @@
                             width: '100%'
                         },
                         width: 'off',
-                        minimumInputLength: 1,
+                        minimumInputLength: app.config.emailParticipantsMinSearch || 1,
                         selectOnBlur: true,
                         data: this.getFormattedValue(),
 
@@ -405,7 +406,7 @@
                          * @return {string}
                          */
                         formatInputTooShort: function(term, min) {
-                            return '';
+                            return term === '' ? '' : app.lang.get('LBL_TOO_SHORT', module).replace('{0}', min);
                         }
                     };
                 };

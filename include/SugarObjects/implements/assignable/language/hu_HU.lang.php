@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-'LBL_ASSIGNED_TO_ID'=>'Hozzárendelt felhasználó azonosító',
-'LBL_ASSIGNED_TO_NAME' => 'Felelős felhasználó',
-);
+$mod_strings = [
+    'LBL_ASSIGNED_TO_ID' => 'Hozzárendelt felhasználó azonosító',
+    'LBL_ASSIGNED_TO_NAME' => 'Felelős felhasználó',
+];

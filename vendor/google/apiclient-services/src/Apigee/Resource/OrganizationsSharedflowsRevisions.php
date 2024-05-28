@@ -25,7 +25,7 @@ use Google\Service\Apigee\GoogleCloudApigeeV1SharedFlowRevision;
  * Typical usage is:
  *  <code>
  *   $apigeeService = new Google\Service\Apigee(...);
- *   $revisions = $apigeeService->revisions;
+ *   $revisions = $apigeeService->organizations_sharedflows_revisions;
  *  </code>
  */
 class OrganizationsSharedflowsRevisions extends \Google\Service\Resource
@@ -74,8 +74,8 @@ class OrganizationsSharedflowsRevisions extends \Google\Service\Resource
    * Updates a shared flow revision. This operation is only allowed on revisions
    * which have never been deployed. After deployment a revision becomes
    * immutable, even if it becomes undeployed. The payload is a ZIP-formatted
-   * shared flow. Content type must be either multipart/form-data or application
-   * /octet-stream. (revisions.updateSharedFlowRevision)
+   * shared flow. Content type must be either multipart/form-data or
+   * application/octet-stream. (revisions.updateSharedFlowRevision)
    *
    * @param string $name Required. The name of the shared flow revision to update.
    * Must be of the form: `organizations/{organization_id}/sharedflows/{shared_flo

@@ -12,60 +12,69 @@
 
 /**
  * <b>isValidPhone(String phone)</b><br/>
- * Returns true if <i>phone</i> is in a valid phone format. 
+ * Returns true if <i>phone</i> is in a valid phone format.
  */
-class IsValidPhoneExpression extends BooleanExpression {
-	/**
-	 * Returns itself when evaluating.
-	 */
-	function evaluate() {
-		$phoneStr = $this->getParameters()->evaluate();
+class IsValidPhoneExpression extends BooleanExpression
+{
+    /**
+     * Returns itself when evaluating.
+     */
+    public function evaluate()
+    {
+        $phoneStr = $this->getParameters()->evaluate();
 
-		if( strlen($phoneStr) == 0) return AbstractExpression::$TRUE;
-		if(! preg_match('/^\+?[0-9\-\(\)\s]+$/', $phoneStr) )
-			return AbstractExpression::$FALSE;
-		return AbstractExpression::$TRUE;
-	}
+        if (strlen($phoneStr) == 0) {
+            return AbstractExpression::$TRUE;
+        }
+        if (!preg_match('/^\+?[0-9\-\(\)\s]+$/', $phoneStr)) {
+            return AbstractExpression::$FALSE;
+        }
+        return AbstractExpression::$TRUE;
+    }
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
+    /**
+     * Returns the JS Equivalent of the evaluate function.
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<EOQ
 		var phoneStr = this.getParameters().evaluate();
 		if(phoneStr.length== 0) 	return SUGAR.expressions.Expression.TRUE;
 		if( ! /^\+?[0-9\-\(\)\s]+$/.test(phoneStr) )
 			return SUGAR.expressions.Expression.FALSE;
 		return SUGAR.expressions.Expression.TRUE;
 EOQ;
-	}
+    }
 
-	/**
-	 * Any generic type will suffice.
-	 */
-	static function getParameterTypes() {
-		return array("string");
-	}
+    /**
+     * Any generic type will suffice.
+     */
+    public static function getParameterTypes()
+    {
+        return ['string'];
+    }
 
-	/**
-	 * Returns the maximum number of parameters needed.
-	 */
-	static function getParamCount() {
-		return 1;
-	}
+    /**
+     * Returns the maximum number of parameters needed.
+     */
+    public static function getParamCount()
+    {
+        return 1;
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return "isValidPhone";
-	}
+    /**
+     * Returns the opreation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return 'isValidPhone';
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-	}
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+    }
 }
-?>

@@ -17,7 +17,7 @@ use Sugarcrm\Sugarcrm\Logger\Processor\Factory;
 
 /**
  * Request processor factory
-  */
+ */
 class Request implements Factory
 {
     /** @inheritDoc */

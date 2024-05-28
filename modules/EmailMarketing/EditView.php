@@ -198,7 +198,7 @@ require_once 'modules/Campaigns/utils.php';
 $json = getJSONobj();
 $IEStoredOptions = get_campaign_mailboxes_with_stored_options();
 $IEStoredOptionsJSON = (!empty($IEStoredOptions)) ? $json->encode($IEStoredOptions) : 'new Object()';
-$xtpl->assign("IEStoredOptions", $IEStoredOptionsJSON);
+$xtpl->assign('IEStoredOptions', $IEStoredOptionsJSON);
 
 $xtpl->parse('main');
 $xtpl->out('main');

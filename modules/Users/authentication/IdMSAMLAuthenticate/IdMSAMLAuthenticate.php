@@ -36,7 +36,7 @@ class IdMSAMLAuthenticate extends BaseAuthenticate implements ExternalLoginInter
      * @return string
      * @throws AuthenticationException
      */
-    public function getLoginUrl($returnQueryVars = array())
+    public function getLoginUrl($returnQueryVars = [])
     {
         $initToken = new InitiateToken();
 

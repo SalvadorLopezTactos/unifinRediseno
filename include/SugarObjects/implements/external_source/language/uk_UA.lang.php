@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-    'LBL_SOURCE_ID'   => 'Ідентифікатор зовнішнього джерела',
+$mod_strings = [
+    'LBL_SOURCE_ID' => 'Ідентифікатор зовнішнього джерела',
     'LBL_SOURCE_TYPE' => 'Зовнішнє джерело',
     'LBL_SOURCE_META' => 'Метадані зовнішнього джерела',
-);
+];

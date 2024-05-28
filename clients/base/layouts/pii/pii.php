@@ -9,26 +9,26 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['layout']['pii'] = array(
+$viewdefs['base']['layout']['pii'] = [
     'css_class' => 'row-fluid',
-    'components' => array(
-        array(
-            'layout' => array(
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'base',
                 'name' => 'main-pane',
-                'css_class' => 'main-pane span12',
-                'components' => array(
-                    array(
+                'css_class' => 'main-pane span12 overflow-y-auto',
+                'components' => [
+                    [
                         'view' => 'pii-headerpane',
-                    ),
-                    array(
+                    ],
+                    [
                         'view' => 'filtered-search',
-                    ),
-                    array(
+                    ],
+                    [
                         'view' => 'pii',
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'Zobrazit eskalace',
     'LBL_LIST_RELATED_TO_ID' => 'Související s ID',
     'LNK_IMPORT_ESCALATIONS' => 'Importovat eskalace',
-    
+
     'LBL_LIST_SUBJECT' => 'Předmět',
     'LBL_LIST_NUMBER' => 'Čís.',
     'LBL_LIST_RELATED_TO_TYPE' => 'Související typ',

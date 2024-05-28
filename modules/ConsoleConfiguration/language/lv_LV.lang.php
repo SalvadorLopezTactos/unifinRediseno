@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Konsoles konfigurācija',
     'LBL_MODULE_NAME_SINGULAR' => 'Konsoles konfigurācija',
     'LBL_CONSOLE_CONFIG_TITLE' => 'Konsole',
@@ -55,4 +56,4 @@ $mod_strings = array(
     'LBL_CONSOLE_DIRECTIONS_CHANGE' => 'Izmaiņas tiks parādītas uzreiz, taču, lai tās stātos spēkā, tās ir jāsaglabā.',
     'LBL_CONSOLE_DIRECTIONS_FILTER_AND' => 'un ',
     'LBL_CONSOLE_DIRECTIONS_FILTER_OR' => 'vai ',
-);
+];

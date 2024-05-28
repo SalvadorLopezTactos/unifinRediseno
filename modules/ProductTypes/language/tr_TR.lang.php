@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Ürün Tipleri',
     'LBL_MODULE_NAME_SINGULAR' => 'Ürün Tipi',
     'LBL_MODULE_TITLE' => 'Ürün Tipleri: Ana Sayfa',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Bu kaydı silmek istediğinizden emin misiniz?',
     'ERR_DELETE_RECORD' => 'Ürün tipini silmek için kayıt numarasını belirtmeniz gerekmektedir.',
     'NTC_LIST_ORDER' => 'Bu ürün tipinin, Ürün Tipi açılır-listesinde görünmesini istediğiniz sırayı belirleyin',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Ürün Tipi Verilerini Yükle',
-    'LBL_CREATED_BY'=>'Oluşturan',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Ürün Tipi Verilerini Yükle',
+    'LBL_CREATED_BY' => 'Oluşturan',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Atanan Id',
-    'LBL_EXPORT_CREATED_BY'=>'Oluşturan ID',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Ürün Kategori Verilerini Yükle',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Atanan Id',
+    'LBL_EXPORT_CREATED_BY' => 'Oluşturan ID',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Ürün Kategori Verilerini Yükle',
+];

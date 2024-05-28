@@ -21,11 +21,11 @@ $excludeLabel = 'LBL_EXCLUDED_PIPELINE_HELP';
 $upsideLabel = 'LBL_UPSIDE_PIPELINE_HELP';
 $commitStageDom = '';
 
-if ($forecastRange  === 'show_binary') {
+if ($forecastRange === 'show_binary') {
     $commitStageDom = 'commit_stage_binary_dom';
-} elseif ($forecastRange  === 'show_buckets') {
+} elseif ($forecastRange === 'show_buckets') {
     $commitStageDom = 'commit_stage_dom';
-} elseif ($forecastRange  === 'show_custom_buckets') {
+} elseif ($forecastRange === 'show_custom_buckets') {
     $includeLabel = 'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE';
     $excludeLabel = 'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE';
 }
@@ -67,7 +67,7 @@ $viewdefs['Forecasts']['base']['view']['forecast-metrics']['forecast-metrics'][]
 ];
 
 //This metric should only be displayed for show_buckets forecasts
-if ($forecastRange  === 'show_buckets') {
+if ($forecastRange === 'show_buckets') {
     $viewdefs['Forecasts']['base']['view']['forecast-metrics']['forecast-metrics'][] = [
         'name' => 'upside_pipeline',
         'label' => 'LBL_UPSIDE_PIPELINE',
@@ -128,7 +128,6 @@ if ($forecastRange  === 'show_buckets') {
         ],
     ];
 }
-
 
 
 $viewdefs['Forecasts']['base']['view']['forecast-metrics']['forecast-metrics'][] = [

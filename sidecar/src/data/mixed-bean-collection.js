@@ -9,8 +9,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const Bean = require('data/bean');
-const BeanCollection = require('data/bean-collection');
+const Bean = require('./bean');
+const BeanCollection = require('./bean-collection');
 
 /**
  * Mixed collection class.
@@ -26,7 +26,7 @@ const BeanCollection = require('data/bean-collection');
  * contacts for favorite records that have the string `"Acme"` in their
  * searchable fields:
  * ```
- * const DataManager = require('data/data-manager');
+ * const DataManager = require('./data-manager');
  * var records = SUGAR.App.data.getMixedBeanCollection();
  * records.fetch({
  *     favorites: true,

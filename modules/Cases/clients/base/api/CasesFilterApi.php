@@ -17,21 +17,21 @@ class CasesFilterApi extends FilterApi
 {
     public function registerApiRest()
     {
-        return array(
-            'getContactCases' => array(
+        return [
+            'getContactCases' => [
                 'reqType' => 'GET',
-                'path' => array('Contact', '?', 'Cases'),
-                'pathVars' => array('', 'contact_id', 'module'),
+                'path' => ['Contact', '?', 'Cases'],
+                'pathVars' => ['', 'contact_id', 'module'],
                 'method' => 'getContactCases',
                 'shortHelp' => 'Get cases accessible to a contact with portal visibility',
                 'longHelp' => 'include/api/help/get_contact_cases.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionError',
                     'SugarApiExceptionNotAuthorized',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**

@@ -9,10 +9,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Quotes']['base']['layout']['quote-data-list-groups'] = array(
-    'components' => array(
-        array(
+$viewdefs['Quotes']['base']['layout']['quote-data-list-groups'] = [
+    'components' => [
+        [
             'view' => 'quote-data-list-header',
-        ),
-    ),
-);
+        ],
+    ],
+];

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper;
 
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\ActivityHandlerFactory;
@@ -19,7 +20,6 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\ActivityHandlerFactory;
  */
 class BlockedByHelper
 {
-
     /**
      * @var Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Helper\stageHelper
      */
@@ -33,7 +33,7 @@ class BlockedByHelper
         $this->stageHelper = new StageHelper();
     }
 
-     /**
+    /**
      * Checks if a activity is blocked by another activity in the journey
      *
      * @param \SugarBean $activity
@@ -75,7 +75,7 @@ class BlockedByHelper
      */
     public function hasBlockedBy(\SugarBean $activity)
     {
-        return count($this->getBlockedByIds($activity)) > 0;
+        return safeCount($this->getBlockedByIds($activity)) > 0;
     }
 
     /**
@@ -86,7 +86,7 @@ class BlockedByHelper
      */
     public function hasBlockedByStages(\SugarBean $activity)
     {
-        return count($this->getBlockedByStageIds($activity)) > 0;
+        return safeCount($this->getBlockedByStageIds($activity)) > 0;
     }
 
     /**
@@ -152,14 +152,35 @@ class BlockedByHelper
         if (empty($activity->cj_blocked_by_stages)) {
             return [];
         }
-
+        
         if (is_string($activity->cj_blocked_by_stages)) {
-            return json_decode($activity->cj_blocked_by_stages, true);
+            return $this->getJsonDecodedData($activity->cj_blocked_by_stages);
         } elseif (is_array($activity->cj_blocked_by_stages)) {
             return $activity->cj_blocked_by_stages;
         } else {
             return [];
         }
+    }
+
+    /**
+     * Decode the json data into an array
+     * @param string $stringData
+     * @return array
+     */
+    private function getJsonDecodedData(string $stringData): array
+    {
+        global $app_strings;
+
+        if (empty($stringData)) {
+            return [];
+        }
+
+        $data = json_decode($stringData, true);
+        if (json_last_error() === JSON_ERROR_NONE) {
+            return $data;
+        }
+        $GLOBALS['log']->fatal($app_strings['LBL_CJ_ACTIVITY_BLOCKED_BY_STAGE_PARSING_ERROR'] . $activity->id);
+        return [];
     }
 
     /**
@@ -218,7 +239,7 @@ class BlockedByHelper
             $stageBean = $journey->getStageByStageTemplateId($id);
 
             if (!empty($stageBean->id)) {
-                if ($stageBean->state !== "completed") {
+                if ($stageBean->state !== 'completed') {
                     $blockedByStages[] = $stageBean;
                 }
             }

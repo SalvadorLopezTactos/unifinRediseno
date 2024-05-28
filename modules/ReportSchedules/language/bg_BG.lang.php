@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Графици на справките',
     'LBL_MODULE_NAME_SINGULAR' => 'График на справките',
     'LBL_REPORT_NAME' => 'Справка',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Тип(ове) файлове',
     'LBL_EMBED_REPORT' => 'Вгради справка в електронно писмо',
     'LBL_EMBED_REPORT_INFO' => 'Забележка: Ако справката надвишава 200 реда, ще я прикачим като CSV файл.',
-);
+];

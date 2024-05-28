@@ -24,7 +24,7 @@ class SugarUpgradeDropUnusedUserFeedsTable extends UpgradeScript
     public function run()
     {
         $unusedTable = 'users_feeds';
-        if (version_compare($this->from_version, '10.1.0', '<') && $this->db->tableExists($unusedTable)) {
+        if (version_compare($this->from_version, '14.0.0', '<') && $this->db->tableExists($unusedTable)) {
             $this->db->dropTableName($unusedTable);
         }
     }

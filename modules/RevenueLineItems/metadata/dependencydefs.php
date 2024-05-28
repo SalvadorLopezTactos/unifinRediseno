@@ -9,181 +9,181 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$fields = array(
+$fields = [
     'category_name',
     'discount_price',
     'tax_class',
     'mft_part_num',
-    'weight'
-);
+    'weight',
+];
 
-$serviceFieldDefaults = array(
+$serviceFieldDefaults = [
     'service_start_date' => 'now()',
     'service_duration_value' => '1',
     'service_duration_unit' => '"year"',
-);
+];
 
-$dependencies['RevenueLineItems']['read_only_fields'] = array(
-    'hooks' => array("edit"),
+$dependencies['RevenueLineItems']['read_only_fields'] = [
+    'hooks' => ['edit'],
     //Trigger formula for the dependency. Defaults to 'true'.
     'trigger' => 'true',
-    'triggerFields' => array('product_template_name'),
+    'triggerFields' => ['product_template_name'],
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
-    'actions' => array(),
-);
+    'actions' => [],
+];
 
 foreach ($fields as $field) {
-    $dependencies['RevenueLineItems']['read_only_fields']['actions'][] = array(
+    $dependencies['RevenueLineItems']['read_only_fields']['actions'][] = [
         'name' => 'ReadOnly', //Action type
         //The parameters passed in depend on the action type
-        'params' => array(
+        'params' => [
             'target' => $field,
             'label' => $field . '_label', //normally <field>_label
             'value' => 'not(equal($product_template_name,""))', //Formula
-        ),
-    );
+        ],
+    ];
 }
 
 /**
  * This dependency set the commit_stage to the correct value and to read only when the sales stage
  * is Closed Won (include) or Closed Lost (exclude)
  */
-$dependencies['RevenueLineItems']['commit_stage_readonly_set_value'] = array(
-    'hooks' => array("edit"),
+$dependencies['RevenueLineItems']['commit_stage_readonly_set_value'] = [
+    'hooks' => ['edit'],
     //Trigger formula for the dependency. Defaults to 'true'.
     'trigger' => 'true',
-    'triggerFields' => array('sales_stage'),
+    'triggerFields' => ['sales_stage'],
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
-    'actions' => array(
-        array(
+    'actions' => [
+        [
             'name' => 'ReadOnly', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'commit_stage',
                 'label' => 'commit_stage_label', //normally <field>_label
                 'value' => 'isForecastClosed($sales_stage)', //Formula
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'SetValue', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'commit_stage',
                 'label' => 'commit_stage_label', //normally <field>_label
                 'value' => 'ifElse(isForecastClosedWon($sales_stage), "include",
                     ifElse(isForecastClosedLost($sales_stage), "exclude", $commit_stage))', //Formula
-            ),
-        )
-    ),
-);
+            ],
+        ],
+    ],
+];
 
-$dependencies['RevenueLineItems']['set_base_rate'] = array(
-    'hooks' => array("edit"),
+$dependencies['RevenueLineItems']['set_base_rate'] = [
+    'hooks' => ['edit'],
     //Trigger formula for the dependency. Defaults to 'true'.
     'trigger' => 'true',
-    'triggerFields' => array('sales_stage'),
+    'triggerFields' => ['sales_stage'],
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
-    'actions' => array(
-        array(
+    'actions' => [
+        [
             'name' => 'SetValue', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'base_rate',
                 'label' => 'base_rate_lable', //normally <field>_label
                 'value' => 'ifElse(isForecastClosed($sales_stage), $base_rate, currencyRate($currency_id))', //Formula
-            ),
-        )
-    )
-);
+            ],
+        ],
+    ],
+];
 
 /**
  * This dependency set the best and worst values to equal likely when the sales stage is
  * set to closed won.
  */
-$dependencies['RevenueLineItems']['best_worst_sales_stage_read_only'] = array(
-    'hooks' => array("edit"),
+$dependencies['RevenueLineItems']['best_worst_sales_stage_read_only'] = [
+    'hooks' => ['edit'],
     //Trigger formula for the dependency. Defaults to 'true'.
     'trigger' => 'true',
-    'triggerFields' => array('sales_stage'),
+    'triggerFields' => ['sales_stage'],
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
-    'actions' => array(
-        array(
+    'actions' => [
+        [
             'name' => 'ReadOnly', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'best_case',
                 'label' => 'best_case_label', //normally <field>_label
                 'value' => 'isForecastClosed($sales_stage)', //Formula
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'ReadOnly', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'worst_case',
                 'label' => 'worst_case_label', //normally <field>_label
                 'value' => 'isForecastClosed($sales_stage)', //Formula
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'SetValue', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'best_case',
                 'label' => 'best_case_label',
                 'value' => 'string(ifElse(isForecastClosed($sales_stage), $likely_case, $best_case))',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'SetValue', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'worst_case',
                 'label' => 'worst_case_label',
                 'value' => 'string(ifElse(isForecastClosed($sales_stage), $likely_case, $worst_case))',
-            ),
-        ),
-    )
-);
+            ],
+        ],
+    ],
+];
 
-$dependencies['RevenueLineItems']['likely_case_copy_when_closed'] = array(
-    'hooks' => array("edit"),
+$dependencies['RevenueLineItems']['likely_case_copy_when_closed'] = [
+    'hooks' => ['edit'],
     //Trigger formula for the dependency. Defaults to 'true'.
     'trigger' => 'true',
-    'triggerFields' => array('likely_case'),
+    'triggerFields' => ['likely_case'],
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
-    'actions' => array(
-        array(
+    'actions' => [
+        [
             'name' => 'SetValue', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'best_case',
                 'label' => 'best_case_label',
                 'value' => 'string(ifElse(isForecastClosed($sales_stage), $likely_case, $best_case))',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'SetValue', //Action type
             //The parameters passed in depend on the action type
-            'params' => array(
+            'params' => [
                 'target' => 'worst_case',
                 'label' => 'worst_case_label',
                 'value' => 'string(ifElse(isForecastClosed($sales_stage), $likely_case, $worst_case))',
-            ),
-        ),
-    )
-);
+            ],
+        ],
+    ],
+];
 
 // Handle dependencies related to service fields
 $dependencies['RevenueLineItems']['service_fields_required'] = [
-    'hooks' => array('edit'),
+    'hooks' => ['edit'],
     'trigger' => 'true',
-    'triggerFields' => array('service'),
+    'triggerFields' => ['service'],
     'onload' => true,
     'actions' => [
         [
@@ -211,9 +211,9 @@ $dependencies['RevenueLineItems']['service_fields_required'] = [
 ];
 
 $dependencies['RevenueLineItems']['service_fields_values'] = [
-    'hooks' => array('edit'),
+    'hooks' => ['edit'],
     'trigger' => 'true',
-    'triggerFields' => array('service'),
+    'triggerFields' => ['service'],
     'onload' => true,
     'actions' => [
         [
@@ -224,7 +224,7 @@ $dependencies['RevenueLineItems']['service_fields_values'] = [
                     equal($service,1),
                     ifElse(
                         equal($service_start_date,""),
-                        '. $serviceFieldDefaults['service_start_date'] .',
+                        ' . $serviceFieldDefaults['service_start_date'] . ',
                         $service_start_date
                     ),
                     "")',
@@ -238,7 +238,7 @@ $dependencies['RevenueLineItems']['service_fields_values'] = [
                     equal($service,1),
                     ifElse(
                         equal($service_duration_value,""),
-                        '. $serviceFieldDefaults['service_duration_value'] .',
+                        ' . $serviceFieldDefaults['service_duration_value'] . ',
                         $service_duration_value
                     ),
                     "")',
@@ -252,7 +252,7 @@ $dependencies['RevenueLineItems']['service_fields_values'] = [
                     equal($service,1),
                     ifElse(
                         equal($service_duration_unit,""),
-                        '. $serviceFieldDefaults['service_duration_unit'] .',
+                        ' . $serviceFieldDefaults['service_duration_unit'] . ',
                         $service_duration_unit
                     ),
                     "")',

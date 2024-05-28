@@ -10,59 +10,59 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['users_holidays'] = array(
+$dictionary['users_holidays'] = [
     'table' => 'users_holidays',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'user_id' => array(
+        ],
+        'user_id' => [
             'name' => 'user_id',
             'type' => 'id',
-        ),
-        'holiday_id' => array(
+        ],
+        'holiday_id' => [
             'name' => 'holiday_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'users_holidays_pk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_user_holi_holi',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'holiday_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'users_quotes_alt',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'user_id',
                 'holiday_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'users_holidays' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'users_holidays' => [
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
             'lhs_key' => 'id',
@@ -72,6 +72,6 @@ $dictionary['users_holidays'] = array(
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'related_module',
             'relationship_role_column_value' => null,
-        ),
-    ),
-);
+        ],
+    ],
+];

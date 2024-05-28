@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Treść',
     'LBL_BASE_MODULE' => 'Moduł docelowy',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'Tworzenie szablonu wiadomości e-mail procesów z pliku zakończyło się niepowodzeniem',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Ten szablon wiadomości e-mail jest obecnie używany w Definicji procesu. Czy mimo to chcesz go edytować?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Nie można usunąć tego szablonu wiadomości e-mail, ponieważ jest on aktualnie używany w Definicji procesu.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Nie można usunąć tego szablonu wiadomości e-mail, ponieważ jest on aktualnie używany w Definicji procesu.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Selektor pól',
     'LBL_SUGAR_LINK_SELECTOR' => 'Selektor linku rekordu',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Powiązano z modułem docelowym',
     'LBL_SELECT_BUTTON_LABEL' => 'Wybierz',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Typ wartości pola',
-);
+];

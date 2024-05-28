@@ -35,11 +35,12 @@
             content: _.bind(function() {
                 return this.$el;
             }, this),
+            container: '.metrics-help-button',
             html: true,
-            placement: app.lang.direction === 'rtl' ? 'left' : 'right',
-            template: '<div class="popover helpmodal fixed metrics-help-modal" data-modal="metrics-help">' +
-                '<h3 class="popover-title bg-transparent"></h3>' +
-                '<div class="popover-content p-0 bg-transparent"></div>' +
+            template: '<div class="helpmodal metrics-help-modal overflow-hidden z-40 border border-solid ' +
+                'border-[--border-color] rounded-md shadow-xl" data-modal="metrics-help">' +
+                '<h3 class="popover-title popover-header"></h3>' +
+                '<div class="popover-content !p-0 popover-body"></div>' +
                 '</div>'
         });
 

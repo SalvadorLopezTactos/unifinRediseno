@@ -139,7 +139,7 @@ class MarketingExtrasContent
             'language' => empty($lang) ? $helper->chooseLanguage(null) : $lang,
             'flavor' => $sugarDetails['flavor'],
             'version' => $sugarDetails['version'],
-            'license'   => $sugarDetails['license'],
+            'license' => $sugarDetails['license'],
         ];
     }
 
@@ -196,7 +196,7 @@ class MarketingExtrasContent
         $headers = strtolower($headers);
 
         foreach ($this->blacklistedHeaders as $blacklistedHeader) {
-            if (strpos($headers, $blacklistedHeader) !== false) {
+            if (strpos($headers, (string) $blacklistedHeader) !== false) {
                 \LoggerManager::getLogger()->warn('MarketingExtrasContent:: Cannot load iframe due to ' .
                     $blacklistedHeader . ' header from URL ' . $url);
                 return false;

@@ -11,33 +11,33 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Forecasts']['base']['layout']['records'] = array(
-    'css_class' => 'flex-list-layout flex flex-column h-full',
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['Forecasts']['base']['layout']['records'] = [
+    'css_class' => 'flex-list-layout flex flex-col group/records h-full overflow-hidden',
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'default',
                 'name' => 'sidebar',
                 'css_class' => 'forecasts-records h-full',
-                'components' => array(
-                    array(
-                        'layout' => array(
+                'components' => [
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'main-pane',
                             'css_class' => 'main-pane forecasts-main span8',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'view' => 'list-headerpane',
-                                ),
+                                ],
                                 [
                                     'layout' => [
                                         'type' => 'tabbed-layout',
                                         'name' => 'tabbed-layout',
-                                        'css_class' => 'h-full',
+                                        'css_class' => 'h-full relative',
                                         'components' => [
                                             [
                                                 'layout' => [
-                                                    'css_class' => 'h-full',
+                                                    'css_class' => 'flex flex-col h-full',
                                                     'type' => 'filterpanel',
                                                     'last_state' => [
                                                         'id' => 'forecasts-list-filterpanel',
@@ -70,7 +70,7 @@ $viewdefs['Forecasts']['base']['layout']['records'] = array(
                                                             'layout' => [
                                                                 'name' => 'forecast-metrics',
                                                                 'type' => 'base',
-                                                                'css_class' => 'forecast-metrics m-4 border-solid border-b border-default',
+                                                                'css_class' => 'forecast-metrics m-4 border-solid border-b border-[--border-color]',
                                                                 'components' => [
                                                                     [
                                                                         'view' => 'forecast-metrics',
@@ -120,45 +120,45 @@ $viewdefs['Forecasts']['base']['layout']['records'] = array(
                                         ],
                                     ],
                                 ],
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'dashboard-pane',
                             'css_class' => 'dashboard-pane',
-                            'components' => array(
-                                array(
-                                    'layout' => array(
+                            'components' => [
+                                [
+                                    'layout' => [
                                         'type' => 'dashboard',
-                                        'last_state' => array(
+                                        'last_state' => [
                                             'id' => 'last-visit',
-                                        )
-                                    ),
-                                    'context' => array(
+                                        ],
+                                    ],
+                                    'context' => [
                                         'forceNew' => true,
                                         'module' => 'Home',
-                                    ),
+                                    ],
                                     'loadModule' => 'Dashboards',
-                                ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'layout' => [
                             'type' => 'base',
                             'name' => 'preview-pane',
                             'css_class' => 'preview-pane',
-                            'components' => array(
-                                array(
+                            'components' => [
+                                [
                                     'layout' => 'preview',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Proces bedrijfsregels',
-  'LBL_MODULE_TITLE' => 'Proces bedrijfsregels',
-  'LBL_MODULE_NAME_SINGULAR' => 'Proces bedrijfsregel',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Proces bedrijfsregels',
+    'LBL_MODULE_TITLE' => 'Proces bedrijfsregels',
+    'LBL_MODULE_NAME_SINGULAR' => 'Proces bedrijfsregel',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer bedrijfsregels verwerken',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer bedrijfsregels verwerken',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Dashboard record bedrijfsregels verwerken',
-  'LBL_RST_UID' => 'ID zakelijke regel',
-  'LBL_RST_TYPE' => 'Type zakelijke regel',
-  'LBL_RST_DEFINITION' => 'Business Rule Definitie',
-  'LBL_RST_EDITABLE' => 'Bewerkbare Business Rule',
-  'LBL_RST_SOURCE' => 'Business Rule Bron',
-  'LBL_RST_SOURCE_DEFINITION' => 'Business Rule Bron Definitie',
-  'LBL_RST_MODULE' => 'Doel Module',
-  'LBL_RST_FILENAME' => 'Business Rule Bestandsnaam',
-  'LBL_RST_CREATE_DATE' => 'Business Rule Datum Aangemaakt',
-  'LBL_RST_UPDATE_DATE' => 'Business Rule Datum Bijgewerkt',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Dashboard record bedrijfsregels verwerken',
+    'LBL_RST_UID' => 'ID zakelijke regel',
+    'LBL_RST_TYPE' => 'Type zakelijke regel',
+    'LBL_RST_DEFINITION' => 'Business Rule Definitie',
+    'LBL_RST_EDITABLE' => 'Bewerkbare Business Rule',
+    'LBL_RST_SOURCE' => 'Business Rule Bron',
+    'LBL_RST_SOURCE_DEFINITION' => 'Business Rule Bron Definitie',
+    'LBL_RST_MODULE' => 'Doel Module',
+    'LBL_RST_FILENAME' => 'Business Rule Bestandsnaam',
+    'LBL_RST_CREATE_DATE' => 'Business Rule Datum Aangemaakt',
+    'LBL_RST_UPDATE_DATE' => 'Business Rule Datum Bijgewerkt',
 
     'LNK_LIST' => 'Bekijk Process Business Rules',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Nieuwe Process Business Rule',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'Deze Business Rule is ongeldig omdat deze ongeldige velden gebruikt of velden die niet in uw exemplaar van SugarCRM voorkomen. Verhelp de onderstaande fouten om de Business Rule op te slaan.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Deze zakelijke regel wordt momenteel in een procesdefinitie gebruikt. Wilt u nog steeds deze zakelijke regel bewerken?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "U kunt deze zakelijke regel niet verwijderen omdat deze momenteel in een procesdefinitie wordt gebruikt.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'U kunt deze zakelijke regel niet verwijderen omdat deze momenteel in een procesdefinitie wordt gebruikt.',
+];

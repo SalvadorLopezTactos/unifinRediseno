@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'выполняется',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для сообщений',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Информационная панель записи сообщений',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Информационная панель сообщений',
 ];

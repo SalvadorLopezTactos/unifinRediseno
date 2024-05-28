@@ -70,39 +70,39 @@ class UnifiedSearchApi extends SugarListApi
 
         // We need to support 'deleted' same as ListApi
         $options['deleted'] = false;
-        if (isset($args['deleted']) && (strtolower($args['deleted']) == 'true' || $args['deleted'] == '1' )) {
+        if (isset($args['deleted']) && (strtolower($args['deleted']) == 'true' || $args['deleted'] == '1')) {
             $options['deleted'] = true;
         }
 
         $options['query'] = '';
-        if ( isset($args['q']) ) {
+        if (isset($args['q'])) {
             $options['query'] = trim($args['q']);
         }
 
         $options['limitPerModule'] = $this->defaultModuleLimit;
-        if ( !empty($args['max_num_module']) ) {
+        if (!empty($args['max_num_module'])) {
             $options['limitPerModule'] = (int)$args['max_num_module'];
         }
 
-        $options['searchFields'] = array();
+        $options['searchFields'] = [];
         if (!empty($args['search_fields'])) {
             $options['searchFields'] = explode(',', $args['search_fields']);
         }
 
-        $options['selectFields'] = array('id');
-        if ( !empty($args['order_by']) ) {
-            if ( strpos($args['order_by'],',') !== 0 ) {
+        $options['selectFields'] = ['id'];
+        if (!empty($args['order_by'])) {
+            if (strpos($args['order_by'], ',') !== 0) {
                 // There is a comma, we are ordering by more than one thing
-                $orderBys = explode(',',$args['order_by']);
+                $orderBys = explode(',', $args['order_by']);
             } else {
-                $orderBys = array($args['order_by']);
+                $orderBys = [$args['order_by']];
             }
-            $orderByArray = array();
-            foreach ( $orderBys as $order ) {
-                if ( strpos($order,':') ) {
+            $orderByArray = [];
+            foreach ($orderBys as $order) {
+                if (strpos($order, ':')) {
                     // It has a :, it's specifying ASC / DESC
                     [$column, $direction] = explode(':', $order);
-                    if ( strtolower($direction) == 'desc' ) {
+                    if (strtolower($direction) == 'desc') {
                         $direction = 'DESC';
                     } else {
                         $direction = 'ASC';
@@ -116,23 +116,23 @@ class UnifiedSearchApi extends SugarListApi
                 // If this field has already been added, don't do it again
                 // Common cause of this was the id field, since we always add it
                 // by default.
-                if (in_array($column, $options['selectFields'])) {
+                if (safeInArray($column, $options['selectFields'])) {
                     // Before busting out of this, ensure we have what we need
                     if (empty($orderByData[$column])) {
-                        $orderByData[$column] = ($direction=='ASC'?true:false);
-                        if (!in_array("$column $direction", $orderByArray)) {
-                            $orderByArray[] = $column.' '.$direction;
+                        $orderByData[$column] = ($direction == 'ASC' ? true : false);
+                        if (!safeInArray("$column $direction", $orderByArray)) {
+                            $orderByArray[] = $column . ' ' . $direction;
                         }
                     }
 
                     continue;
                 }
                 $options['selectFields'][] = $column;
-                $orderByData[$column] = ($direction=='ASC'?true:false);
-                $orderByArray[] = $column.' '.$direction;
+                $orderByData[$column] = ($direction == 'ASC' ? true : false);
+                $orderByArray[] = $column . ' ' . $direction;
             }
             $options['orderBySetByApi'] = true;
-            $orderBy = implode(',',$orderByArray);
+            $orderBy = implode(',', $orderByArray);
         } else {
             /*
              * Adding id to the default sort by.  When data has the same date_modified the sort could change with the
@@ -147,53 +147,53 @@ class UnifiedSearchApi extends SugarListApi
         $options['orderByArray'] = $orderByData;
         $options['orderBy'] = $orderBy;
 
-        $options['moduleList'] = array();
-        if ( !empty($args['module_list']) ) {
-            $options['moduleList'] = explode(',',$args['module_list']);
+        $options['moduleList'] = [];
+        if (!empty($args['module_list'])) {
+            $options['moduleList'] = explode(',', $args['module_list']);
             // remove any empty moduleList array entries..if someone were to do Contacts, it would not hit elastic because '' is not an elastic module.
             $options['moduleList'] = array_filter($options['moduleList']);
         }
         $options['primaryModule'] = 'Home';
-        if ( !empty($args['primary_module']) ) {
-            $options['primaryModule']=$args['primary_module'];
-        } else if ( isset($options['moduleList'][0]) ) {
+        if (!empty($args['primary_module'])) {
+            $options['primaryModule'] = $args['primary_module'];
+        } elseif (isset($options['moduleList'][0])) {
             $options['primaryModule'] = $options['moduleList'][0];
         }
 
         // we want favorites info with records, so that we can flag a favorite out of a recordset
         $options['favorites'] = false;
-        if ( !empty($args['favorites']) && $args['favorites'] == true ) {
+        if (!empty($args['favorites']) && $args['favorites'] == true) {
             // Setting favorites to 1 includes favorites information,
             // setting it to 2 searches for favorite records.
             $options['favorites'] = 2;
         }
         $options['my_items'] = false;
-        if ( !empty($args['my_items']) ) {
+        if (!empty($args['my_items'])) {
             // TODO: When the real filters get in, change it so that this is just described as an additional filter.
             $options['my_items'] = $args['my_items'];
         }
 
-        $fieldFilters = array();
+        $fieldFilters = [];
         // Sort out the multi-module field filter
-        if ( !empty($args['fields']) ) {
-            if ( is_array($args['fields']) ) {
+        if (!empty($args['fields'])) {
+            if (is_array($args['fields'])) {
                 // This one has multiple modules in it we need to split it up among all of the modules
                 $fieldFilters = $args['fields'];
-            } else  {
+            } else {
                 // They want one filter across all modules
-                $fieldFilters['_default'] = explode(',',$args['fields']);
+                $fieldFilters['_default'] = explode(',', $args['fields']);
             }
         } else {
             $fieldFilters['_default'] = '';
         }
         // Ensure date_modified and id are in the list of fields
-        foreach ( $fieldFilters as $key => $fieldArray ) {
-            if ( empty($fieldArray) ) {
+        foreach ($fieldFilters as $key => $fieldArray) {
+            if (empty($fieldArray)) {
                 // Just allow the defaults to take over
                 continue;
             }
-            foreach ( array('id','date_modified') as $requiredField ) {
-                if ( !in_array($requiredField,$fieldArray) ) {
+            foreach (['id', 'date_modified'] as $requiredField) {
+                if (!safeInArray($requiredField, $fieldArray)) {
                     $fieldFilters[$key][] = $requiredField;
                 }
             }
@@ -211,23 +211,24 @@ class UnifiedSearchApi extends SugarListApi
      * @param array $args The arguments array passed in from the API
      * @return array result set
      */
-    public function globalSearch(ServiceBase $api, array $args) {
+    public function globalSearch(ServiceBase $api, array $args)
+    {
         $api->action = 'list';
 
         // This is required to keep the loadFromRow() function in the bean from making our day harder than it already is.
         $GLOBALS['disable_date_format'] = true;
 
-        $options = $this->parseSearchOptions($api,$args);
+        $options = $this->parseSearchOptions($api, $args);
 
         // determine the correct serach engine, don't pass any configs and fallback to the default search engine if the determiend one is down
-        $searchEngine = SugarSearchEngineFactory::getInstance($this->determineSugarSearchEngine($api, $args, $options), array(), false);
+        $searchEngine = SugarSearchEngineFactory::getInstance($this->determineSugarSearchEngine($api, $args, $options), [], false);
 
-        if ( $searchEngine instanceOf SugarSearchEngine) {
+        if ($searchEngine instanceof SugarSearchEngine) {
             $options['resortResults'] = true;
-            $recordSet = $this->globalSearchSpot($api,$args,$searchEngine,$options);
+            $recordSet = $this->globalSearchSpot($api, $args, $searchEngine, $options);
             $sortByDateModified = true;
         } else {
-            $recordSet = $this->globalSearchFullText($api,$args,$searchEngine,$options);
+            $recordSet = $this->globalSearchFullText($api, $args, $searchEngine, $options);
             $sortByDateModified = false;
         }
 
@@ -257,10 +258,8 @@ class UnifiedSearchApi extends SugarListApi
          * If a module isn't FTS switch to spot search.  Global Search should be done with either the enabled modules
          * Using the new ServerInfo endpoint OR passing in a blank module list.
          */
-        if(!empty($options['moduleList']))
-        {
-            foreach($options['moduleList'] AS $module)
-            {
+        if (!empty($options['moduleList'])) {
+            foreach ($options['moduleList'] as $module) {
                 //A module enabled in unified search but disabled in the new FTS (Elastic) search should also
                 //use the local database search, i.e., return 'SugarSearchEngine' here.
                 if (!$metaDataHelper->isModuleEnabled($module)) {
@@ -272,18 +271,18 @@ class UnifiedSearchApi extends SugarListApi
         /*
          * Currently we cannot do an order by in FTS.  Thus any ordering must be done using the Spot Search
          */
-        if(isset($options['orderBySetByApi']) && $options['orderBySetByApi'] == true) {
+        if (isset($options['orderBySetByApi']) && $options['orderBySetByApi'] == true) {
             return 'SugarSearchEngine';
         }
 
         // if the query is empty no reason to pass through FTS they want a normal list view.
-        if(empty($args['q'])) {
+        if (empty($args['q'])) {
             return 'SugarSearchEngine';
         }
 
         $fts = SugarSearchEngineFactory::getFTSEngineNameFromConfig();
         //everything is groovy for FTS, get the FTS Engine Name from the conig
-        if(!empty($fts)) {
+        if (!empty($fts)) {
             return $fts;
         }
         return 'SugarSearchEngine';
@@ -300,20 +299,19 @@ class UnifiedSearchApi extends SugarListApi
     protected function globalSearchFullText(ServiceBase $api, array $args, SugarSearchEngineAbstractBase $searchEngine, array $options)
     {
         $api->action = 'list';
-        $returnedRecords = array();
+        $returnedRecords = [];
 
         // SugarSearchEngine uses moduleFilter instead of moduleList, pass it along
-        $options['moduleFilter'] = empty($options['moduleList']) ? array() : $options['moduleList'];
+        $options['moduleFilter'] = empty($options['moduleList']) ? [] : $options['moduleList'];
 
         $results = $searchEngine->search($options['query'], $options['offset'], $options['limit'], $options);
 
         if (empty($results)) {
-            return array('next_offset' => -1, 'records' => array());
+            return ['next_offset' => -1, 'records' => []];
         }
 
         // format results
         foreach ($results as $result) {
-
             $bean = $result->getBean();
 
             // if we can't get the bean skip it
@@ -329,15 +327,15 @@ class UnifiedSearchApi extends SugarListApi
             } elseif (!empty($options['fieldFilters']['_default'])) {
                 $moduleFields = $options['fieldFilters']['_default'];
             } else {
-                $moduleFields = array();
+                $moduleFields = [];
             }
 
-            if (!empty($moduleFields) && !in_array('id', $moduleFields)) {
+            if (!empty($moduleFields) && !safeInArray('id', $moduleFields)) {
                 $moduleFields[] = 'id';
             }
 
             $moduleArgs['fields'] = implode(',', $moduleFields);
-            $moduleArgs['erased_fields'] = $args['erased_fields']?? null;
+            $moduleArgs['erased_fields'] = $args['erased_fields'] ?? null;
             $formattedRecord = $this->formatBean($api, $moduleArgs, $bean);
 
             // add additional parameters expected to be returned
@@ -349,12 +347,12 @@ class UnifiedSearchApi extends SugarListApi
         // calculate next offset
         $total = $results->getTotalHits();
         if ($total > ($options['limit'] + $options['offset'])) {
-            $nextOffset = $options['offset']+$options['limit'];
+            $nextOffset = $options['offset'] + $options['limit'];
         } else {
             $nextOffset = -1;
         }
 
-        return array('next_offset' => $nextOffset, 'records' => $returnedRecords);
+        return ['next_offset' => $nextOffset, 'records' => $returnedRecords];
     }
 
     /**
@@ -372,34 +370,33 @@ class UnifiedSearchApi extends SugarListApi
     {
 
 
-        $searchOptions = array(
-            'modules'=>$options['moduleList'],
-            'current_module'=>$options['primaryModule'],
-            'return_beans'=>true,
-            'my_items'=>$options['my_items'],
-            'favorites'=>$options['favorites'],
-            'orderBy'=>$options['orderBy'],
-            'fields'=>$options['fieldFilters'],
-            'selectFields'=>$options['selectFields'],
-            'limitPerModule'=>$options['limitPerModule'],
-            'allowEmptySearch'=>true,
-            'distinct'=>'DISTINCT', // Needed until we get a query builder
-            'return_beans'=>true,
-            );
+        $searchOptions = [
+            'modules' => $options['moduleList'],
+            'current_module' => $options['primaryModule'],
+            'return_beans' => true,
+            'my_items' => $options['my_items'],
+            'favorites' => $options['favorites'],
+            'orderBy' => $options['orderBy'],
+            'fields' => $options['fieldFilters'],
+            'selectFields' => $options['selectFields'],
+            'limitPerModule' => $options['limitPerModule'],
+            'allowEmptySearch' => true,
+            'distinct' => 'DISTINCT', // Needed until we get a query builder
+            'return_beans' => true,
+        ];
 
         if (isset($options['deleted'])) {
             $searchOptions['deleted'] = $options['deleted'];
         }
 
         $multiModule = false;
-        if (empty($options['moduleList']) || (is_countable($options['moduleList']) ? count(
-            $options['moduleList']
-        ) : 0) == 0 || (is_countable($options['moduleList']) ? count($options['moduleList']) : 0) > 1) {
+        if (empty($options['moduleList'])
+            || safeCount($options['moduleList']) == 0
+            || safeCount($options['moduleList']) > 1) {
             $multiModule = true;
         }
 
-        if(empty($options['moduleList']))
-        {
+        if (empty($options['moduleList'])) {
             $usa = new UnifiedSearchAdvanced();
             $moduleList = $usa->getUnifiedSearchModules();
 
@@ -413,7 +410,7 @@ class UnifiedSearchApi extends SugarListApi
         }
 
         if (!empty($options['searchFields'])) {
-            $customWhere = array();
+            $customWhere = [];
             foreach ($options['moduleList'] as $module) {
                 $seed = BeanFactory::newBean($module);
                 $fields = array_keys($seed->field_defs);
@@ -430,7 +427,7 @@ class UnifiedSearchApi extends SugarListApi
                             $prefix = $customTable;
                         }
                         if (!isset($seed->field_defs[$field]['source']) || $seed->field_defs[$field]['source'] != 'non-db') {
-                            $customWhere[$module][] = "{$prefix}.{$field} LIKE '". $seed->db->quote($options['query']) . "%'";
+                            $customWhere[$module][] = "{$prefix}.{$field} LIKE '" . $seed->db->quote($options['query']) . "%'";
                         }
                     }
                     if (isset($customWhere[$module])) {
@@ -443,31 +440,31 @@ class UnifiedSearchApi extends SugarListApi
         $offset = $options['offset'];
         // One for luck.
         // Well, actually it's so that we know that there are additional results
-        $limit = $options['limit']+1;
-        if ( $multiModule && $options['offset'] != 0 ) {
+        $limit = $options['limit'] + 1;
+        if ($multiModule && $options['offset'] != 0) {
             // With more than one module, there is no way to do offsets for real, so we have to fake it.
-            $limit = $limit+$offset;
+            $limit = $limit + $offset;
             $offset = 0;
         }
 
-        if ( !$multiModule ) {
+        if (!$multiModule) {
             // It's not multi-module, the per-module limit should be the same as the master limit
             $searchOptions['limitPerModule'] = $limit;
         }
 
-        if(isset($options['custom_select'])) {
+        if (isset($options['custom_select'])) {
             $searchOptions['custom_select'] = $options['custom_select'];
         }
 
-        if(isset($options['custom_from'])) {
+        if (isset($options['custom_from'])) {
             $searchOptions['custom_from'] = $options['custom_from'];
         }
 
-        if(isset($options['custom_where'])) {
+        if (isset($options['custom_where'])) {
             $searchOptions['custom_where'] = $options['custom_where'];
         }
 
-        $searchOptions['erased_fields'] = $args['erased_fields']?? null;
+        $searchOptions['erased_fields'] = $args['erased_fields'] ?? null;
 
         $api->action = 'list';
 
@@ -505,62 +502,64 @@ class UnifiedSearchApi extends SugarListApi
             }
         }
 
-        if ( $multiModule ) {
+        if ($multiModule) {
             // Need to re-sort the results because the DB search engine clumps them together per-module
             $this->resultSetSortData = $options['orderByArray'];
-            usort($returnedRecords,array($this,'resultSetSort'));
+            usort($returnedRecords, [$this, 'resultSetSort']);
         }
 
-        if ( $multiModule && $options['offset'] != 0 ) {
+        if ($multiModule && $options['offset'] != 0) {
             // The merged module mess leaves us in a bit of a pickle with offsets and limits
-            if ( count($returnedRecords) > ($options['offset']+$options['limit']) ) {
-                $nextOffset = $options['offset']+$options['limit'];
+            if (safeCount($returnedRecords) > ($options['offset'] + $options['limit'])) {
+                $nextOffset = $options['offset'] + $options['limit'];
             } else {
                 $nextOffset = -1;
             }
-            $returnedRecords = array_slice($returnedRecords,$options['offset'],$options['limit']);
+            $returnedRecords = array_slice($returnedRecords, $options['offset'], $options['limit']);
         } else {
             // Otherwise, offsets and limits should work.
-            if ( count($returnedRecords) > $options['limit'] ) {
-                $nextOffset = $options['offset']+$options['limit'];
+            if (safeCount($returnedRecords) > $options['limit']) {
+                $nextOffset = $options['offset'] + $options['limit'];
             } else {
                 $nextOffset = -1;
             }
-            $returnedRecords = array_slice($returnedRecords,0,$options['limit']);
+            $returnedRecords = array_slice($returnedRecords, 0, $options['limit']);
         }
 
-        if ( $options['offset'] === 'end' ) {
+        if ($options['offset'] === 'end') {
             $nextOffset = -1;
         }
 
-        return array('next_offset'=>$nextOffset,'records'=>$returnedRecords);
+        return ['next_offset' => $nextOffset, 'records' => $returnedRecords];
     }
 
     protected $resultSetSortData;
+
     /**
      * This function is used to resort the results that come out of SpotSearch, they are clumped per module and we need them sorted by potentially multiple columns.
      * For reference on how this function reacts, look at the PHP manual for usort()
      */
-    public function resultSetSort($left, $right) {
+    public function resultSetSort($left, $right)
+    {
         $greaterThan = 0;
-        foreach ( $this->resultSetSortData as $key => $isAscending ) {
+        foreach ($this->resultSetSortData as $key => $isAscending) {
             $greaterThan = 0;
-            if ( isset($left[$key]) != isset($right[$key]) ) {
+            if (isset($left[$key]) != isset($right[$key])) {
                 // One of them is set, the other one isn't
                 // If the left one is set, then it is greater than the right one
-                $greaterThan = (isset($left[$key])?1:-1);
-            } else if ( !isset($left[$key]) ) {
+                $greaterThan = (isset($left[$key]) ? 1 : -1);
+            } elseif (!isset($left[$key])) {
                 // Since the isset matches, and the left one isn't set, neither of them are set
                 $greaterThan = 0;
-            } else if ( $left[$key] == $right[$key] ) {
+            } elseif ($left[$key] == $right[$key]) {
                 $greaterThan = 0;
             } else {
-                $greaterThan = ($left[$key]>$right[$key]?1:-1);
+                $greaterThan = ($left[$key] > $right[$key] ? 1 : -1);
             }
 
             // Figured out if the left is greater than the right, now time to act
-            if ( $greaterThan != 0 ) {
-                if ( $isAscending ) {
+            if ($greaterThan != 0) {
+                if ($isAscending) {
                     return $greaterThan;
                 } else {
                     return -$greaterThan;

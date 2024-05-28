@@ -10,65 +10,65 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['quotes_accounts'] = array(
+$dictionary['quotes_accounts'] = [
     'table' => 'quotes_accounts',
     'true_relationship_type' => 'one-to-many',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'quote_id' => array(
+        ],
+        'quote_id' => [
             'name' => 'quote_id',
             'type' => 'id',
-        ),
-        'account_id' => array(
+        ],
+        'account_id' => [
             'name' => 'account_id',
             'type' => 'id',
-        ),
-        'account_role' => array(
+        ],
+        'account_role' => [
             'name' => 'account_role',
             'type' => 'varchar',
             'len' => '20',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'quotes_accountspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_acc_qte_acc',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'account_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_quote_account_role',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'quote_id',
                 'account_role',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'quotes_billto_accounts' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'quotes_billto_accounts' => [
             'rhs_module' => 'Quotes',
             'rhs_table' => 'quotes',
             'rhs_key' => 'id',
@@ -82,8 +82,8 @@ $dictionary['quotes_accounts'] = array(
             'join_key_lhs' => 'account_id',
             'relationship_role_column' => 'account_role',
             'relationship_role_column_value' => 'Bill To',
-        ),
-        'quotes_shipto_accounts' => array(
+        ],
+        'quotes_shipto_accounts' => [
             'rhs_module' => 'Quotes',
             'rhs_table' => 'quotes',
             'rhs_key' => 'id',
@@ -97,6 +97,6 @@ $dictionary['quotes_accounts'] = array(
             'join_key_lhs' => 'account_id',
             'relationship_role_column' => 'account_role',
             'relationship_role_column_value' => 'Ship To',
-        ),
-    ),
-);
+        ],
+    ],
+];

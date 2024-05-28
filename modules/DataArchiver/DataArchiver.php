@@ -13,14 +13,11 @@
 use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 /*********************************************************************************
-
  * Description: .
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-
-
 class DataArchiver extends SugarBean
 {
     // Stored fields
@@ -45,7 +42,7 @@ class DataArchiver extends SugarBean
      */
     public function getArchiveModuleList()
     {
-        $modules = array();
+        $modules = [];
         global $beanList;
         global $dictionary;
         foreach ($beanList as $module => $object) {
@@ -58,7 +55,7 @@ class DataArchiver extends SugarBean
             // Also check to make sure the module has a valid bean associated with it
             if ((!isset($dictionary[$object]['archive']) || $dictionary[$object]['archive'] !== false) && BeanFactory::getBeanClass($module)) {
                 // Check ACL access for module under given license. Ignore invisible modules.
-                if (!in_array($module, $GLOBALS['modInvisList'])) {
+                if (!safeInArray($module, $GLOBALS['modInvisList'])) {
                     if (!AccessControlManager::instance()->allowModuleAccess($module)) {
                         continue;
                     }
@@ -75,7 +72,7 @@ class DataArchiver extends SugarBean
      * @param string $type The requested process type
      * @return string
      */
-    public static function getProcessType(string $type = '') : string
+    public static function getProcessType(string $type = ''): string
     {
         if ($type !== DataArchiver::PROCESS_TYPE_DELETE) {
             $type = DataArchiver::PROCESS_TYPE_ARCHIVE;

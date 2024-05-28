@@ -23,9 +23,9 @@ class Guid extends Constraint
 {
     public const ERROR_INVALID_FORMAT = 1;
 
-    protected static $errorNames = array(
+    protected static $errorNames = [
         self::ERROR_INVALID_FORMAT => 'ERROR_INVALID_FORMAT',
-    );
+    ];
 
     public $message = 'GUID violation: %msg%';
 }

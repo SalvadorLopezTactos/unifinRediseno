@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Datoteka za uvoz uspješno pročitana',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Uvezeni zapis sudjeluje u procesu i ne može se uređivati jer je proces zaključao neka polja za uređivanje.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'broj pogrešaka. Pogledajte karticu s pogreškama za retke koji nisu uvezeni zbog pogreške',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'Ako korisnik ne postoji, upotrijebite trenutačnog korisnika',
     'LBL_SHOW_HIDDEN' => 'Prikaži polja koja se inače ne mogu uvoziti',
     'LBL_UPDATE_RECORDS' => 'Ažuriraj postojeće zapise umjesto uvoza (nema poništenja)',
-    'LBL_TEST'=> 'Testni uvoz (nemoj spremiti ili promijeniti podatke)',
+    'LBL_TEST' => 'Testni uvoz (nemoj spremiti ili promijeniti podatke)',
     'LBL_TRUNCATE_TABLE' => 'Isprazni tablicu prije uvoza (izbriši sve zapise)',
     'LBL_RELATED_ACCOUNTS' => 'Nemoj stvoriti povezane račune',
     'LBL_NO_DATECHECK' => 'Preskoči provjeru datuma (brže, no bit će neuspješno ako je bilo koji datum pogrešan)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Neispravna vrijednost cijelog broja',
     'LBL_ERROR_INVALID_NUM' => 'Neispravna brojčana vrijednost',
     'LBL_ERROR_INVALID_TIME' => 'Neispravno vrijeme',
-    'LBL_ERROR_INVALID_EMAIL'=>'Neispravna adresa e-pošte',
-    'LBL_ERROR_INVALID_BOOL'=>'Neispravna vrijednost (mora biti 1 ili 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Neispravan niz s datumom',
-    'LBL_ERROR_INVALID_USER'=>'Neispravno korisničko ime ili ID',
+    'LBL_ERROR_INVALID_EMAIL' => 'Neispravna adresa e-pošte',
+    'LBL_ERROR_INVALID_BOOL' => 'Neispravna vrijednost (mora biti 1 ili 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Neispravan niz s datumom',
+    'LBL_ERROR_INVALID_USER' => 'Neispravno korisničko ime ili ID',
     'LBL_ERROR_INVALID_TEAM' => 'Neispravan naziv tima ili ID',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Neispravan naziv računa ili ID',
     'LBL_ERROR_INVALID_RELATE' => 'Neispravno relacijsko polje',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => ' ne postoji ili se u njemu ne može pisati',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => 'Datoteka nije uspješno učitana. Možda je postavka „upload_max_filesize” u vašoj datoteci php.ini postavljena na mali broj',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => 'Datoteka je prevelika. Maks.:',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'bajt(ov)a. Promijenite $sugar_config[&#39;upload_maxsize&#39;] u datoteci config.php',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => 'Bajtova. Promijenite $sugar_config[&#39;upload_maxsize&#39;] u config.php',
     'LBL_MODULE_NAME' => 'Uvoz',
     'LBL_MODULE_NAME_SINGULAR' => 'Uvoz',
     'LBL_TRY_AGAIN' => 'Pokušajte ponovno',
     'LBL_START_OVER' => 'Započnite ispočetka',
     'LBL_ERROR' => 'Pogreška:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'Datoteka za uvoz sadrži više redaka (njih {0}). Optimalni je broj redaka {1}. Više redaka može usporiti postupak uvoza. Kliknite na U redu za nastavak uvoza. Kliknite na Odustani za pregled i ponovno učitavanje datoteke za uvoz.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'Ne možete uvesti korisnika administratora sustava',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'Ne možete uvesti korisnika administratora sustava',
     'ERR_REPORT_LOOP' => 'Sustav je otkrio pogrešku u izvještavanju. Korisnici ne mogu podnositi izvješća sami sebi, a njihovi voditelji ne mogu podnositi izvješća korisnicima.',
     'ERR_MULTIPLE' => 'Više je stupaca definirano s istim nazivom polja.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Nedostaju obavezna polja:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'Nisu otkriveni reci u vašoj datoteci za uvoz. Provjerite ima li praznih redaka u vašoj datoteci i pokušajte ponovno.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'Datoteka za uvoz već je obrađena ili ne postoji',
     'LBL_SUCCESS' => 'Uspjeh:',
-	'LBL_FAILURE' => 'Uvoz nije uspio:',
+    'LBL_FAILURE' => 'Uvoz nije uspio:',
     'LBL_SUCCESSFULLY' => 'Uspješno uvezeno',
     'LBL_LAST_IMPORT_UNDONE' => 'Uvoz je poništen.',
     'LBL_NO_IMPORT_TO_UNDO' => 'Nema uvoza za poništiti.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Ponovno uvezi',
     'LBL_FINISHED' => 'Završeno',
     'LBL_UNDO_LAST_IMPORT' => 'Poništi uvoz',
-    'LBL_LAST_IMPORTED'=>'Stvoreno',
+    'LBL_LAST_IMPORTED' => 'Stvoreno',
     'ERR_MULTIPLE_PARENTS' => 'Možete imati samo jedan definirani nadređeni ID',
     'LBL_DUPLICATES' => 'Pronađeni duplikati',
     'LNK_DUPLICATE_LIST' => 'Preuzmi popis duplikata',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Sakrij bilješke',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Prikaži stupce za pregled',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Sakrij stupce za pregled',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Provjerite ima li duplikata pomoću operatora:',
     'LBL_SAVE_MAPPING_AS' => 'Za spremanje postavki uvoza navedite naziv za spremljene postavke:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Jednostruki navodnik (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Dvostruki navodnik (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'Da biste dodijelili nove zapise timovima osim vaših zadanih timova, upotrijebite stupac sa zadanom vrijednošću za odabir drugih timova.',
     'LBL_SIGN_IN_HELP' => 'Da biste omogućili ovu uslugu, prijavite se pod karticom vanjskih računa na stranici s korisničkim postavkama.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Pokušaj upravljanja adresama e-pošte u podatkovnom zrnu koje to ne podržava.",
-);
+];

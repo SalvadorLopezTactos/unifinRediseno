@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '태그',
     'LBL_GENERIC_LINK' => '관련 오브젝트',
     'LBL_NAME_LOWER' => '소문자 태그 이름',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => '내 태그',
     'LBL_MY_FAVORITE_TAGS' => '내 즐겨찾기 태그',
     'LBL_MORE_TAGS' => '{{tagsNumber}}개 태그',
-);
+];

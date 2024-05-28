@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'Przekaż:',
     'LBL_RE' => 'Dot.:',
     'LBL_BUTTON_CREATE' => 'Utwórz',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Wybierz konto nadawcy',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Wybierz podpis',
     'LBL_SIGNATURE' => 'Podpis',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Podpis domyślny",
-    "LBL_SHOW_MORE_SIGNATURES" => "Więcej podpisów...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Podpis domyślny',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Więcej podpisów...',
     'LBL_SUBJECT' => 'Temat:',
     'LBL_TEMPLATE' => 'Szablon',
     'LBL_TEXT_BODY' => 'Treść tekstu',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Czas wysłania',
     'LBL_LIST_TO_ADDR' => 'Do',
     'LBL_LIST_TYPE' => 'Typ',
-    "LBL_SELECTED_RECIPIENTS" => "Wybrani odbiorcy",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Więcej odbiorców...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Książka adresowa",
+    'LBL_SELECTED_RECIPIENTS' => 'Wybrani odbiorcy',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Więcej odbiorców...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Książka adresowa',
     'NTC_REMOVE_INVITEE' => 'Czy na pewno usunąć tego odbiorcę?',
     'WARNING_SETTINGS_NOT_CONF' => 'Twoje ustawienia poczty e-mail nie są poprawnie skonfigurowane do wysyłania wiadomości e-mail. Serwer SMTP ' .
         'musi być skonfigurowany w <a href="#bwc/index.php?module=EmailMan&action=config"> Ustawieniach poczty e-mail</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Może wystąpić problem z załącznikami: okryto wartość niepoprawną lub nieużywaną dla ' .
         '"upload_tmp_dir".  Proszę rozwiązać ten problem w pliku php.ini.',
     'LBL_MESSAGE_UID' => 'UID wiadomości',
-    'LBL_OPEN_DRAFT_ALERT' => 'Wiadomość e-mail jest wersją roboczą. Kliknij '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'Wiadomość e-mail jest wersją roboczą. Kliknij ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  aby ją edytować.',
     'LBL_EMAIL_BODY' => 'Wiadomości e-mail',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy wiadomości e-mail',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Pulpit rekordów wiadomości e-mail',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Oś czasu poczty e-mail',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'nie określono odbiorców',
@@ -475,4 +476,5 @@ Możesz użyć wstępnie zdefiniowanego szablonu (przycisk Szablony) lub dodać 
     'LBL_SHORTCUT_EMAIL_SEND' => 'Wyślij wiadomość e-mail',
     'LBL_MAILBOX' => 'Konto przychodzące',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Aby móc wysyłać wiadomości email, skonfiguruj konto poczty wychodzącej w obszarze <a href="#OutboundEmail">Ustawienia poczty e-mail</a>.',
-);
+    'LBL_TOO_SHORT' => 'Wprowadź przynajmniej {0} znaków...',
+];

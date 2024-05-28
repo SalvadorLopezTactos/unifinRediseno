@@ -9,10 +9,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const DateUtils = require('utils/date');
-const User = require('core/user');
-const Utils = require('utils/utils');
-const Language = require('core/language');
+const DateUtils = require('../utils/date');
+const User = require('../core/user');
+const Utils = require('../utils/utils');
+const Language = require('../core/language');
 
 /**
  * Validation module.

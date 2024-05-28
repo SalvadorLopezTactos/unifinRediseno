@@ -9,8 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description:  printable license page.
  ********************************************************************************/
 
@@ -19,12 +19,12 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 $language = InputValidation::getService()->getValidInputGet('language', 'Assert\Language');
 
 require_once "install/language/{$language}.lang.php";
-require_once "install/install_utils.php";
+require_once 'install/install_utils.php';
 
-$license_file = getLicenseContents("LICENSE");
+$license_file = getLicenseContents('LICENSE');
 $license_file = formatLicense($license_file);
 $langHeader = get_language_header();
-$out =<<<EOQ
+$out = <<<EOQ
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html {$langHeader}>
 <head>

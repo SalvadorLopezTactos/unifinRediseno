@@ -62,14 +62,8 @@
         $toggles.splice(0, 1);
         $toggles.addClass('collapsed');
 
-        //apply the accordion to this layout
-        this.$('.collapse').collapse({
-            toggle: false,
-            parent: '#' + this.collapseDivId
-        });
-
-        // select the first panel in metadata
-        this.selectPanel(_.first(this.meta.components).view);
+        let firstPanel = _.first(this.meta.components).view;
+        $(`.accordion-toggle[data-name=${firstPanel}]`).trigger('click');
     },
 
     /**
@@ -90,7 +84,9 @@
      * @param {jQuery.Event|undefined} evt
      */
     onAccordionToggleClicked: function(evt) {
-        var panelName = (evt) ? $(evt.currentTarget).data('help-id') : this.selectedPanel;
+        evt.preventDefault();
+
+        var panelName = (evt) ? $(evt.currentTarget).data('name') : this.selectedPanel;
         var oldPanel;
         var newPanel;
         var currentEventViewColumns;
@@ -153,6 +149,16 @@
         }, this);
 
         newPanel.trigger('config:panel:show');
+
+        $('.accordion-toggle').addClass('collapsed');
+        $('.bs-collapse').removeClass('show');
+
+        let currToggle = $(evt.target).closest('.accordion-heading').find('.accordion-toggle');
+        let name = currToggle.attr('data-name');
+        let currBody = $(`[data-name=${name}].accordion-body`);
+
+        currToggle.removeClass('collapsed');
+        currBody.addClass('show');
     },
 
     /**

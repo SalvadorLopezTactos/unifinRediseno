@@ -12,7 +12,7 @@
 --}}
 <tr>
     {{#each fields}}
-        <th class="list-row-header {{#isSortable ../view.module this}}sorting{{#eq ../view.orderBy.field name}}_{{../view.orderBy.direction}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if widthClass}} {{widthClass}}{{/if}}"
+        <th class="list-row-header relative {{#isSortable ../view.module this}}sorting{{#eq ../view.orderBy.field name}}_{{../view.orderBy.direction}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if widthClass}} {{widthClass}}{{/if}}"
             {{#if styles}} style="{{styles}}"{{/if}}
             {{#if name}} data-fieldname="{{name}}"{{/if}} data-orderby="{{orderBy}}">
                  <span>

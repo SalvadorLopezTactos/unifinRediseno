@@ -20,7 +20,7 @@ class ApiHelper
      *
      * @var array
      */
-    public static $moduleHelpers = array();
+    public static $moduleHelpers = [];
 
     /**
      * This method looks up the helper class for the bean and will provide the default helper
@@ -41,7 +41,7 @@ class ApiHelper
             if (SugarAutoLoader::requireWithCustom('modules/' . $modulePath . '/' . $moduleName . 'ApiHelper.php')) {
                 $moduleHelperClass = SugarAutoLoader::customClass($moduleName . 'ApiHelper');
             } elseif (file_exists('custom/data/SugarBeanApiHelper.php')) {
-                require_once('custom/data/SugarBeanApiHelper.php');
+                require_once 'custom/data/SugarBeanApiHelper.php';
                 $moduleHelperClass = 'CustomSugarBeanApiHelper';
             } else {
                 $moduleHelperClass = 'SugarBeanApiHelper';

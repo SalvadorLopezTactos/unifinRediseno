@@ -10,16 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$listViewDefs['DataSets'] = array(
-	'NAME' => array(
-		'width' => '30', 
-		'label' => 'LBL_LIST_NAME', 
-		'link' => true,
-        'default' => true), 
-	'QUERY_NAME' => array(
-		'width' => '35', 
-		'label' => 'LBL_QUERY_NAME',
-        'default' => true 
-		),
-);
-?>
+$listViewDefs['DataSets'] = [
+    'NAME' => [
+        'width' => '30',
+        'label' => 'LBL_LIST_NAME',
+        'link' => true,
+        'default' => true],
+    'QUERY_NAME' => [
+        'width' => '35',
+        'label' => 'LBL_QUERY_NAME',
+        'default' => true,
+    ],
+];

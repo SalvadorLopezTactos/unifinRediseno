@@ -9,58 +9,57 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$listViewDefs['ProductTemplates'] = array(
-    'NAME' => array(
-		'width' => '30', 
-		'label' => 'LBL_LIST_NAME', 
-		'link' => true,
-        'default' => true),
- 	'TYPE_NAME' => array (
+$listViewDefs['ProductTemplates'] = [
+    'NAME' => [
+        'width' => '30',
+        'label' => 'LBL_LIST_NAME',
+        'link' => true,
+        'default' => true],
+    'TYPE_NAME' => [
         'width' => '10',
-		'label' =>'LBL_LIST_TYPE',
+        'label' => 'LBL_LIST_TYPE',
         'link' => false,
         'sortable' => true,
-        'default' => true),
-	'CATEGORY_NAME' => array (
+        'default' => true],
+    'CATEGORY_NAME' => [
         'width' => '10',
-		'label' =>'LBL_LIST_CATEGORY',
+        'label' => 'LBL_LIST_CATEGORY',
         'link' => false,
         'sortable' => true,
-        'default' => true),
-	'STATUS' => array (
+        'default' => true],
+    'STATUS' => [
         'width' => '10',
-		'label' =>'LBL_LIST_STATUS',
+        'label' => 'LBL_LIST_STATUS',
         'link' => false,
-        'default' => true),
-    'QTY_IN_STOCK' => array (
+        'default' => true],
+    'QTY_IN_STOCK' => [
         'width' => '10',
-		'label' =>'LBL_LIST_QTY_IN_STOCK',
+        'label' => 'LBL_LIST_QTY_IN_STOCK',
         'link' => false,
-        'default' => true),
-    'COST_USDOLLAR'  => array (
+        'default' => true],
+    'COST_USDOLLAR' => [
         'width' => '10',
-		'label' =>'LBL_LIST_COST_PRICE',
-        'link' => false,
-        'default' => true,
-        'align' => 'right',
-        'related_fields' => array('currency_id'),
-        'currency_format' => true),
-    'LIST_USDOLLAR' => array (
-        'width' => '10',
-		'label' =>'LBL_LIST_LIST_PRICE',
+        'label' => 'LBL_LIST_COST_PRICE',
         'link' => false,
         'default' => true,
         'align' => 'right',
-        'related_fields' => array('currency_id'),
-        'currency_format' => true),
-    'DISCOUNT_USDOLLAR' => array (
+        'related_fields' => ['currency_id'],
+        'currency_format' => true],
+    'LIST_USDOLLAR' => [
         'width' => '10',
-		'label' =>'LBL_LIST_DISCOUNT_PRICE',
+        'label' => 'LBL_LIST_LIST_PRICE',
         'link' => false,
         'default' => true,
         'align' => 'right',
-        'related_fields' => array('currency_id'),
-        'currency_format' => true),	    
-        
-);
-?>
+        'related_fields' => ['currency_id'],
+        'currency_format' => true],
+    'DISCOUNT_USDOLLAR' => [
+        'width' => '10',
+        'label' => 'LBL_LIST_DISCOUNT_PRICE',
+        'link' => false,
+        'default' => true,
+        'align' => 'right',
+        'related_fields' => ['currency_id'],
+        'currency_format' => true],
+
+];

@@ -21,8 +21,8 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 //set default root directory
 $from = getcwd();
 $request = InputValidation::getService();
-$rootDirectory = $request->getValidInputRequest('root_directory', array('Assert\File'));
-$jsAdminRepair = $request->getValidInputRequest('js_admin_repair', array('Assert\Type' => (array('type' => 'string'))));
+$rootDirectory = $request->getValidInputRequest('root_directory', ['Assert\File']);
+$jsAdminRepair = $request->getValidInputRequest('js_admin_repair', ['Assert\Type' => (['type' => 'string'])]);
 
 if (!empty($rootDirectory)) {
     $from = $rootDirectory;
@@ -30,11 +30,11 @@ if (!empty($rootDirectory)) {
 
 //this script can take a while, change max execution time to 10 mins
 $tmp_time = ini_get('max_execution_time');
-ini_set('max_execution_time','600');
+ini_set('max_execution_time', '600');
 
 //concatenate mode, call the files that will concatenate javascript group files
 $_REQUEST['js_rebuild_concat'] = 'rebuild';
 require_once 'jssource/minify.php';
 
 //set execution time back to what it was
-ini_set('max_execution_time',$tmp_time);
+ini_set('max_execution_time', $tmp_time);

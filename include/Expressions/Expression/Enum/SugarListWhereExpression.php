@@ -20,11 +20,12 @@ class SugarListWhereExpression extends EnumExpression
     /**
      * Returns the matched array.
      */
-    function evaluate() {
+    public function evaluate()
+    {
         $params = $this->getParameters();
         $trigger = $params[0]->evaluate();
         $lists = $params[1]->evaluate();
-        $array = array();
+        $array = [];
         foreach (is_iterable($lists) ? $lists : [] as $list) {
             if (is_array($list) && isset($list[0], $list[1])) {
                 if ($list[0] == $trigger) {
@@ -39,7 +40,8 @@ class SugarListWhereExpression extends EnumExpression
     /**
      * Returns the JS Equivalent of the evaluate function.
      */
-    static function getJSEvaluate() {
+    public static function getJSEvaluate()
+    {
         return <<<EOQ
         	var params = this.getParameters();
         	var trigger = params[0].evaluate();
@@ -61,30 +63,32 @@ EOQ;
     /**
      * Returns the exact number of parameters needed.
      */
-    static function getParamCount() {
+    public static function getParamCount()
+    {
         return 2;
     }
 
     /**
      * The first parameter is a string and the second is an enum.
      */
-    static function getParameterTypes() {
-        return array(AbstractExpression::$STRING_TYPE, AbstractExpression::$ENUM_TYPE);
+    public static function getParameterTypes()
+    {
+        return [AbstractExpression::$STRING_TYPE, AbstractExpression::$ENUM_TYPE];
     }
 
     /**
      * Returns the operation name that this Expression should be
      * called by.
      */
-    static function getOperationName() {
-        return "getListWhere";
+    public static function getOperationName()
+    {
+        return 'getListWhere';
     }
 
     /**
      * Returns the String representation of this Expression.
      */
-    function toString() {
+    public function toString()
+    {
     }
 }
-
-?>

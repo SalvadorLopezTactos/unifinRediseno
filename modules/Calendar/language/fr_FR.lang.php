@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Calendrier',
     'LBL_MODULE_NAME_SINGULAR' => 'Calendrier',
     'LBL_MODULE_TITLE' => 'Calendrier',
@@ -90,7 +90,7 @@ $mod_strings = array (
     'LBL_INFO_RELATED_TO' => 'Relatif à',
 
     'LBL_NO_USER' => 'Aucune correspondance pour le champ : Assigné à',
-    'LBL_SUBJECT' => 'Sujet',
+    'LBL_SUBJECT' => 'Objet',
     'LBL_DURATION' => 'Durée',
     'LBL_STATUS' => 'Statut',
     'LBL_DATE_TIME' => 'Date et Heure',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Paramètres',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Afficher les créneaux horaires dans les vues Jour et Semaine :',
-    'LBL_SETTINGS_TIME_STARTS'=>'Heure début :',
-    'LBL_SETTINGS_TIME_ENDS'=>'Heure fin :',
+    'LBL_SETTINGS_TIME_STARTS' => 'Heure début :',
+    'LBL_SETTINGS_TIME_ENDS' => 'Heure fin :',
     'LBL_SETTINGS_CALLS_SHOW' => 'Afficher les appels :',
     'LBL_SETTINGS_TASKS_SHOW' => 'Afficher les tâches :',
 
@@ -164,7 +164,7 @@ $mod_strings = array (
     'LBL_TIMELINE_EVENT_TEMPLATE' => 'Événement chronologique',
     'LBL_SCHEDULERMONTH_EVENT_TEMPLATE' => 'Événement du planificateur',
     'LBL_ICAL_EVENT_TEMPLATE' => 'Événement iCal',
-    'LBL_SUBJECT' => 'Sujet',
+    'LBL_SUBJECT' => 'Objet',
     'LBL_CALENDAR_TYPE' => 'Type de calendrier',
     'LBL_COLOR' => 'Couleur',
     'LBL_DURATION_MINUTES' => 'Durée en minutes',
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Créer un calendrier',
     'LNK_CALENDAR_LIST' => 'Afficher les calendriers',
     'LNK_CALENDAR_LEGACY' => 'Anciens calendriers',
-    'LBL_IMPORT_CALENDAR'=> 'Importer le calendrier',
+    'LBL_IMPORT_CALENDAR' => 'Importer le calendrier',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Timestamp de l&#39;événement',
     'LBL_INSERTFIELD' => 'Insérer un champ',
     'LBL_EVENT_START_ERROR' => 'Veuillez choisir un début',
@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_FEBRUARY' => 'Février',
     'LBL_MARCH' => 'Mars',
     'LBL_APRIL' => 'Avril',
-    'LBL_MAY' => 'Peut',
+    'LBL_MAY' => 'Mai',
     'LBL_JUNE' => 'Juin',
     'LBL_JULY' => 'Juillet',
     'LBL_AUGUST' => 'Août',
@@ -318,7 +318,7 @@ $mod_strings = array (
     'LBL_FEB' => 'Fév',
     'LBL_MAR' => 'Mars',
     'LBL_APR' => 'Avr',
-    'LBL_MAY' => 'Peut',
+    'LBL_MAY' => 'Mai',
     'LBL_JUN' => 'Juin',
     'LBL_JUL' => 'Juil',
     'LBL_AUG' => 'Août',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Veuillez sélectionner un calendrier',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Échec de l&#39;enregistrement des calendriers.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Dim',
             'Lun',
             'Mar',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Jeu',
             'Ven',
             'Sam',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Dimanche',
             'Lundi',
             'Mardi',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Jeudi',
             'Vendredi',
             'Samedi',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Jan',
             'Fév',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Oct',
             'Nov',
             'Déc',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Janvier',
             'Février',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Octobre',
             'Novembre',
             'Décembre',
-        ),
-);
+        ],
+];

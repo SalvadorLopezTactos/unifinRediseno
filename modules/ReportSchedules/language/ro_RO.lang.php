@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Raport Programe',
     'LBL_MODULE_NAME_SINGULAR' => 'Raport Program',
     'LBL_REPORT_NAME' => 'Raport',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Tip de fișier',
     'LBL_EMBED_REPORT' => 'Încorporare raport în e-mail',
     'LBL_EMBED_REPORT_INFO' => 'Notă: dacă raportul depășește 200 de rânduri, vom atașa raportul ca fișier CSV.',
-);
+];

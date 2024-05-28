@@ -20,37 +20,37 @@ class EmbeddedFileApi extends FileApi
      */
     public function registerApiRest()
     {
-        return array(
-            'saveFilePost' => array(
+        return [
+            'saveFilePost' => [
                 'reqType' => 'POST',
-                'path' => array('EmbeddedFiles', '?', 'file', '?'),
-                'pathVars' => array('module', 'record', '', 'field'),
+                'path' => ['EmbeddedFiles', '?', 'file', '?'],
+                'pathVars' => ['module', 'record', '', 'field'],
                 'method' => 'saveFilePost',
                 'rawPostContents' => true,
                 'shortHelp' => 'Saves a file. The file can be a new file or a file override.',
                 'longHelp' => 'include/api/help/module_record_file_field_post_help.html',
-            ),
-            'saveFilePut' => array(
+            ],
+            'saveFilePut' => [
                 'reqType' => 'PUT',
-                'path' => array('EmbeddedFiles', '?', 'file', '?'),
-                'pathVars' => array('module', 'record', '', 'field'),
+                'path' => ['EmbeddedFiles', '?', 'file', '?'],
+                'pathVars' => ['module', 'record', '', 'field'],
                 'method' => 'saveFilePut',
                 'rawPostContents' => true,
                 'shortHelp' => 'Saves a file. The file can be a new file or a file override.
                     (This is an alias of the POST method save.)',
                 'longHelp' => 'include/api/help/module_record_file_field_put_help.html',
-            ),
-            'getFileContents' => array(
+            ],
+            'getFileContents' => [
                 'reqType' => 'GET',
-                'path' => array('EmbeddedFiles', '?', 'file', '?'),
-                'pathVars' => array('module', 'record', '', 'field'),
+                'path' => ['EmbeddedFiles', '?', 'file', '?'],
+                'pathVars' => ['module', 'record', '', 'field'],
                 'method' => 'getFile',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
                 'shortHelp' => 'Gets the contents of a single file related to a field for a module record.',
                 'longHelp' => 'include/api/help/module_record_file_field_get_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -67,7 +67,7 @@ class EmbeddedFileApi extends FileApi
         $filesIndex = $prefix . $field;
 
         if ($field !== 'filename') {
-            $args['field']  = 'filename';
+            $args['field'] = 'filename';
             $_FILES[$prefix . 'filename'] = $_FILES[$filesIndex];
             unset($_FILES[$filesIndex]);
         }

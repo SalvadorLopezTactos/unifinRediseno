@@ -15,76 +15,76 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$viewdefs['Bugs']['base']['view']['list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Bugs']['base']['view']['list'] = [
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'bug_number',
                     'enabled' => true,
                     'default' => true,
                     'readonly' => true,
-                ),
-                array(
-                    'name'=>  'name',
+                ],
+                [
+                    'name' => 'name',
                     'enabled' => true,
-                    'default'=>true,
+                    'default' => true,
                     'link' => true,
-                ),
-                array(
-                    'name'=>  'status',
+                ],
+                [
+                    'name' => 'status',
                     'enabled' => true,
-                    'default'=>true,
-                ),
-                array(
-                    'name'=>  'type',
+                    'default' => true,
+                ],
+                [
+                    'name' => 'type',
                     'enabled' => true,
-                    'default'=>true
-                ),
-                array(
-                    'name'=>  'priority',
+                    'default' => true,
+                ],
+                [
+                    'name' => 'priority',
                     'enabled' => true,
-                    'default'=>true,
-                ),
-                array(
-                    'name'=>  'fixed_in_release_name',
+                    'default' => true,
+                ],
+                [
+                    'name' => 'fixed_in_release_name',
                     'enabled' => true,
-                    'default'=>true,
+                    'default' => true,
                     'link' => false,
-                ),
-                array(
-                    'name'=>  'assigned_user_name',
+                ],
+                [
+                    'name' => 'assigned_user_name',
                     'enabled' => true,
-                    'default'=>true,
-                ),
-                array(
-                    'name'=>  'release_name',
+                    'default' => true,
+                ],
+                [
+                    'name' => 'release_name',
                     'enabled' => true,
                     'default' => false,
                     'link' => false,
-                ),
-                array(
-                    'name'=>  'resolution',
+                ],
+                [
+                    'name' => 'resolution',
                     'enabled' => true,
-                    'default'=>false,
-                ),
-                array(
-                    'name'=>  'team_name',
+                    'default' => false,
+                ],
+                [
+                    'name' => 'team_name',
                     'enabled' => true,
-                    'default'=>false,
-                ),
-                array(
+                    'default' => false,
+                ],
+                [
                     'name' => 'date_modified',
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_entered',
                     'enabled' => true,
                     'default' => true,
-                ),
+                ],
                 [
                     'name' => 'is_escalated',
                     'label' => 'LBL_ESCALATED',
@@ -94,8 +94,8 @@ $viewdefs['Bugs']['base']['view']['list'] = array(
                     'enabled' => true,
                     'default' => false,
                 ],
-            ),
+            ],
 
-        ),
-    ),
-);
+        ],
+    ],
+];

@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 declare(strict_types=1);
+
 namespace Sugarcrm\Sugarcrm\modules\Reports\Exporters;
 
 /**
@@ -36,12 +37,12 @@ class ReportCSVExporterSummation extends ReportCSVExporterBase
 
         $content = '';
 
-        $content .= "\"" . implode($this->getDelimiter(), $this->reporter->get_summary_header_row());
-        $content .= "\"" . $this->getLineEnd();
+        $content .= '"' . implode($this->getDelimiter(), $this->reporter->get_summary_header_row());
+        $content .= '"' . $this->getLineEnd();
 
         while (($row = $this->reporter->get_next_row('summary_result', 'summary_columns', false, true)) != 0) {
-            $content .= "\"" . implode($this->getDelimiter(), $row['cells']);
-            $content .= "\"" . $this->getLineEnd();
+            $content .= '"' . implode($this->getDelimiter(), $row['cells']);
+            $content .= '"' . $this->getLineEnd();
         }
 
         $content .= $this->getLineEnd(2);

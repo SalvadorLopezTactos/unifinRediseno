@@ -13,11 +13,12 @@
 <div class="btn btn-invisible checkall"><input data-check="all" type="checkbox" name="check"></div>
 {{#if dropdownFields}}
     <a track="click:listactiondropdown" class="btn btn-invisible dropdown-toggle"
-       data-toggle="dropdown" href="javascript:void(0);" data-placement="bottom"
-       rel="tooltip" title="{{str 'LBL_LISTVIEW_ACTIONS'}}"
+       data-bs-toggle="dropdown" href="javascript:void(0);"
        role="button" tabindex="{{tabIndex}}" aria-label="{{str 'LBL_LISTVIEW_ACTIONS'}}"
     >
         <span class="sicon sicon-kebab"></span>
+        {{tooltipTemplate (str 'LBL_LISTVIEW_ACTIONS') 'bottom'}}
     </a>
-    <ul data-menu="dropdown" class="dropdown-menu" role="menu"></ul>
+<!--    adding fixed property here as the bootstrap library is adding aboslute property dynamically causing the popover to show behind the parent div-->
+    <ul data-menu="dropdown" class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] !fixed rounded-md shadow-xl" role="menu"></ul>
 {{/if}}

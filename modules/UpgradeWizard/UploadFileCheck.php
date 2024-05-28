@@ -9,22 +9,22 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- //Request object must have these property values:
- //		Module: module name, this module should have a file called TreeData.php
- //		Function: name of the function to be called in TreeData.php, the function will be called statically.
- //		PARAM prefixed properties: array of these property/values will be passed to the function as parameter.
+//Request object must have these property values:
+//		Module: module name, this module should have a file called TreeData.php
+//		Function: name of the function to be called in TreeData.php, the function will be called statically.
+//		PARAM prefixed properties: array of these property/values will be passed to the function as parameter.
 
 use Sugarcrm\Sugarcrm\Security\Validator\Constraints\File;
 use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 
-require_once('include/JSON.php');
-require_once('include/upload_file.php');
+require_once 'include/JSON.php';
+require_once 'include/upload_file.php';
 
 $json = getJSONobj();
 $file_name = $json->decode(html_entity_decode($_REQUEST['file_name'], ENT_COMPAT));
- if(isset($file_name['jsonObject']) && $file_name['jsonObject'] != null){
-	$file_name = $file_name['jsonObject'];
-  }
+if (isset($file_name['jsonObject']) && $file_name['jsonObject'] != null) {
+    $file_name = $file_name['jsonObject'];
+}
 
 $constraint = new File([
     'baseDirs' => [
@@ -39,16 +39,16 @@ if (count($violations) > 0) {
 }
 
 $filesize = '';
-if(file_exists($file_name)){
+if (file_exists($file_name)) {
     $filesize = filesize($file_name);
 }
 
 $response = '';
 
-if($filesize != null){
-	if(($filesize > return_bytes(ini_get("upload_max_filesize"))) || ($filesize > return_bytes(ini_get("post_max_size")))){
-		$response=$filesize;
-	}
+if ($filesize != null) {
+    if (($filesize > return_bytes(ini_get('upload_max_filesize'))) || ($filesize > return_bytes(ini_get('post_max_size')))) {
+        $response = $filesize;
+    }
 }
 
 if (!empty($response)) {

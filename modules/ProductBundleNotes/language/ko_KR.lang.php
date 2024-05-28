@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_NOTE_POSITION' => '제품 번들 위치',
     'LBL_PRODUCT_BUNDLE_NOTES_QUOTE_DATA_LIST' => '제품 번들 참고 견적 데이터 목록',
-);
+];

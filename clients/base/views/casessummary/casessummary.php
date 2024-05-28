@@ -9,26 +9,26 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['casessummary'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['base']['view']['casessummary'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_CASE_SUMMARY_CHART',
             'description' => 'LBL_CASE_SUMMARY_CHART_DESC',
-            'config' => array(),
-            'preview' => array(),
-            'filter' => array(
-                'module' => array(
+            'config' => [],
+            'preview' => [],
+            'filter' => [
+                'module' => [
                     'Accounts',
-                ),
+                ],
                 'view' => 'record',
-            ),
-            'fields' => array(
+            ],
+            'fields' => [
                 'name',
                 'account_id',
                 'id',
                 'status',
                 'my_favorite',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

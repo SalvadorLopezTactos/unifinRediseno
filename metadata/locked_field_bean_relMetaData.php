@@ -10,73 +10,73 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['locked_field_bean_rel'] = array(
+$dictionary['locked_field_bean_rel'] = [
     'table' => 'locked_field_bean_rel',
-    'relationships' => array(
-    ),
-    'fields' => array(
-        'id' => array(
+    'relationships' => [
+    ],
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
             'required' => true,
-        ),
-        'pd_id' => array(
+        ],
+        'pd_id' => [
             'name' => 'pd_id',
             'type' => 'id',
             'required' => true,
-        ),
-        'bean_id' => array(
+        ],
+        'bean_id' => [
             'name' => 'bean_id',
             'type' => 'id',
             'required' => true,
-        ),
-        'bean_module' => array(
+        ],
+        'bean_module' => [
             'name' => 'bean_module',
             'type' => 'varchar',
             'len' => 100,
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'locked_fields_bean_relpk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_locked_fields_rel_pdid_beanid',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'pd_id',
                 'bean_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_locked_field_bean_rel_del_bean_module_beanid',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'bean_module',
                 'deleted',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_locked_field_bean_rel_beanid_del_bean_module',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'bean_id',
                 'deleted',
                 'bean_module',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

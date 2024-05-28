@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_DASHBOARD_MODULE' => 'Modul',
     'LBL_MODULE_NAME' => 'Dashboards',
     'LBL_MODULE_NAME_SINGULAR' => 'Dashboard',
@@ -26,8 +26,12 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Alle Dashboards für Modul {{module}} Ansicht {{view}}',
     'LBL_COPY_OF' => 'Kopy von {{{name}}}',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Neues Dashboard',
-    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
-    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Möchten Sie wirklich dieses Dashboard im Standardlayout wiederherstellen?",
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => 'Are you sure you want to restore this tab to the default layout?',
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => 'Möchten Sie wirklich dieses Dashboard im Standardlayout wiederherstellen?',
     'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Möchten Sie wirklich das Standardlayout des Dashboard-Bereichs wiederherstellen?',
     'LBL_FILTER_UTILS_SELECT' => 'Zugewiesen',
-);
+    'LBL_FILTER_UPDATES_SINCE_LAST_REFRESH' => 'Dieses Dashboard enthält Laufzeitfilter, die seit der letzten Aktualisierung geändert wurden.',
+    'LBL_TEMPLATE' => 'Vorlage',
+    'LBL_UNSELECT_DELETE_TEMPLATES' => 'Ihre Auswahl enthält Dashboard-Vorlagen, die nicht als Mehrfachauswahl gelöscht werden können. Deaktivieren Sie bitte Vorlagen, um fortzufahren.',
+    'LBL_UNSELECT_UPDATE_TEMPLATES' => 'Ihre Auswahl enthält Dashboard-Vorlagen, die nicht als Mehrfachauswahl aktualisiert werden können. Deaktivieren Sie bitte Vorlagen, um fortzufahren.',
+];

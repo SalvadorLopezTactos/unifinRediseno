@@ -254,7 +254,8 @@
 
 .preview-data {
   /* override */
-  padding: 60px 12px 10px;
+  padding: 14px 15px 14px 16px;
+  margin: 60px 16px 24px 14px;
 
   &.block {
     background: @primaryContentBackground;
@@ -405,17 +406,40 @@ These will be removed with completion of ticket https://sugarcrm.atlassian.net/b
 .side,
 .sidebar-content {
   .tabbable:not(.hide-tabs) {
-    .preview-pane-tabs {
+    .preview-pane-tabs.nav-tabs {
       margin-top: 55px;
+      margin-left: 16px;
+
+      .nav-item {
+        border: none;
+        margin: 0;
+        padding: 13px 14px;
+
+        &.active {
+          border-bottom: 3px @PrimaryButton solid;
+        }
+      }
+
+      .nav-item:first-child {
+        margin-left: 0;
+      }
+
+      .nav-item.border-right {
+        border-right: none;
+      }
+
+      .active a {
+        color: @PrimaryButton;
+      }
 
       .preview-data {
-        padding: 10px 12px;
+        margin-top: 1rem;
       }
     }
 
     &.preview-active {
       .preview-data {
-        padding: 10px 12px;
+        margin-top: 1rem;
       }
     }
   }

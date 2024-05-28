@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
 
     //module strings.
     'LBL_MODULE_NAME' => 'Fulls de càlcul del gestor de previsions',
@@ -35,14 +35,14 @@ $mod_strings = array (
     'LBL_FORECAST_TYPE' => 'Tipus de previsió',
     'LBL_FORECAST_OPP_COUNT' => 'Compte total d&#39;Oportunitats',
     'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Comte pipeline d&#39;oportunitats',
-    'LBL_FORECAST_OPP_WEIGH'=> 'Quantitat Ponderada',
+    'LBL_FORECAST_OPP_WEIGH' => 'Quantitat Ponderada',
     'LBL_FORECAST_USER' => 'Usuari',
-    'LBL_DATE_COMMITTED'=> 'Data Realització',
+    'LBL_DATE_COMMITTED' => 'Data Realització',
     'LBL_DATE_ENTERED' => 'Data d&#39;introducció',
     'LBL_DATE_MODIFIED' => 'Data de modificació',
     'LBL_CREATED_BY' => 'Creat per',
     'LBL_DELETED' => 'Suprimit',
-    'LBL_MODIFIED_USER_ID'=>'Modificat per',
+    'LBL_MODIFIED_USER_ID' => 'Modificat per',
     'LBL_WK_VERSION' => 'Versió',
     'LBL_WK_REVISION' => 'Revisió',
 
@@ -59,68 +59,68 @@ $mod_strings = array (
     'LBL_QC_UPCOMING_FORECASTS' => 'Els Meus Objectius',
     'LBL_QC_LAST_DATE_COMMITTED' => 'Última Data de Realització:',
     'LBL_QC_LAST_COMMIT_VALUE' => 'Última Quantitat Realitzada:',
-    'LBL_QC_HEADER_DELIM'=> 'Per a',
+    'LBL_QC_HEADER_DELIM' => 'Per a',
 
     //opportunity worksheet list view labels
-    'LBL_OW_OPPORTUNITIES' => "Oportunitat",
-    'LBL_OW_ACCOUNTNAME' => "Compte",
-    'LBL_OW_REVENUE' => "Quantitat",
-    'LBL_OW_WEIGHTED' => "Quantitat Ponderada",
-    'LBL_OW_MODULE_TITLE'=> 'Full d´Oportunitat',
-    'LBL_OW_PROBABILITY'=>'Probabilitat',
-    'LBL_OW_NEXT_STEP'=>'Següent Pas',
-    'LBL_OW_DESCRIPTION'=>'Descripció',
-    'LBL_OW_TYPE'=>'Tipus:',
+    'LBL_OW_OPPORTUNITIES' => 'Oportunitat',
+    'LBL_OW_ACCOUNTNAME' => 'Compte',
+    'LBL_OW_REVENUE' => 'Quantitat',
+    'LBL_OW_WEIGHTED' => 'Quantitat Ponderada',
+    'LBL_OW_MODULE_TITLE' => 'Full d´Oportunitat',
+    'LBL_OW_PROBABILITY' => 'Probabilitat',
+    'LBL_OW_NEXT_STEP' => 'Següent Pas',
+    'LBL_OW_DESCRIPTION' => 'Descripció',
+    'LBL_OW_TYPE' => 'Tipus:',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'Informador Directe',
-    'LBL_FDR_OPPORTUNITIES'=>'Oportunitats en objectiu:',
-    'LBL_FDR_WEIGH'=>'Quantitat Ponderada d´oportunitats:',
-    'LBL_FDR_COMMIT'=>'Quantitat Realitzada',
-    'LBL_FDR_DATE_COMMIT'=>'Data de Realització',
+    'LBL_FDR_USER_NAME' => 'Informador Directe',
+    'LBL_FDR_OPPORTUNITIES' => 'Oportunitats en objectiu:',
+    'LBL_FDR_WEIGH' => 'Quantitat Ponderada d´oportunitats:',
+    'LBL_FDR_COMMIT' => 'Quantitat Realitzada',
+    'LBL_FDR_DATE_COMMIT' => 'Data de Realització',
 
     //detail view.
     'LBL_DV_HEADER' => 'Objectius: Full de càlcul',
     'LBL_DV_MY_FORECASTS' => 'Els Meus Objectius',
-    'LBL_DV_MY_TEAM' => "Objectius del meu Equip" ,
+    'LBL_DV_MY_TEAM' => "Objectius del meu Equip",
     'LBL_DV_TIMEPERIODS' => 'Períodes de Temps:',
     'LBL_DV_FORECAST_PERIOD' => 'Període de Temps del Objectiu',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Oportunitats del Objectiu',
     'LBL_SEARCH' => 'Selecciona',
     'LBL_SEARCH_LABEL' => 'Selecciona',
     'LBL_COMMIT_HEADER' => 'Realització d´Objectiu',
-    'LBL_DV_LAST_COMMIT_DATE' =>'Última Data de Realització:',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'Últimes Quantitats Realitzades:',
+    'LBL_DV_LAST_COMMIT_DATE' => 'Última Data de Realització:',
+    'LBL_DV_LAST_COMMIT_AMOUNT' => 'Últimes Quantitats Realitzades:',
     'LBL_DV_FORECAST_ROLLUP' => 'Previsió Dinàmica',
     'LBL_DV_TIMEPERIOD' => 'Període de Temps:',
     'LBL_DV_TIMPERIOD_DATES' => 'Rang de Dates:',
     'LBL_LOADING_COMMIT_HISTORY' => 'Carregant Historial Commit ...',
 
     //list view
-    'LBL_LV_TIMPERIOD'=> 'Període de temps',
-    'LBL_LV_TIMPERIOD_START_DATE'=> 'Data d&#39;inici',
-    'LBL_LV_TIMPERIOD_END_DATE'=> 'Data de finalització',
-    'LBL_LV_TYPE'=> 'Tipus de previsió',
-    'LBL_LV_COMMIT_DATE'=> 'Data Realització',
-    'LBL_LV_OPPORTUNITIES'=> 'Oportunitats',
-    'LBL_LV_WEIGH'=> 'Quantitat Ponderada',
-    'LBL_LV_COMMIT'=> 'Quantitat Realitzada',
+    'LBL_LV_TIMPERIOD' => 'Període de temps',
+    'LBL_LV_TIMPERIOD_START_DATE' => 'Data d&#39;inici',
+    'LBL_LV_TIMPERIOD_END_DATE' => 'Data de finalització',
+    'LBL_LV_TYPE' => 'Tipus de previsió',
+    'LBL_LV_COMMIT_DATE' => 'Data Realització',
+    'LBL_LV_OPPORTUNITIES' => 'Oportunitats',
+    'LBL_LV_WEIGH' => 'Quantitat Ponderada',
+    'LBL_LV_COMMIT' => 'Quantitat Realitzada',
 
-    'LBL_COMMIT_NOTE'=> 'Introdueixi les quantitats que desitgi realitzar en el Període de Temps seleccionat:',
+    'LBL_COMMIT_NOTE' => 'Introdueixi les quantitats que desitgi realitzar en el Període de Temps seleccionat:',
 
-    'LBL_COMMIT_MESSAGE'=> 'Vol introduir aquestes quantitats com realitzades?',
+    'LBL_COMMIT_MESSAGE' => 'Vol introduir aquestes quantitats com realitzades?',
     'ERR_FORECAST_AMOUNT' => 'La Quantitat Realitzada és un valor requerit, i ha de ser numèric.',
 
     // js error strings
     'LBL_FC_START_DATE' => 'Data d&#39;inici',
     'LBL_FC_USER' => 'Programar per a',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'No hi ha cap període de temps Actiu per al Objectiu.',
-    'LBL_FDR_ADJ_AMOUNT'=>'Quantitat Ajustada',
-    'LBL_SAVE_WOKSHEET'=>'Guardar Full de càlcul',
-    'LBL_RESET_WOKSHEET'=>'Reiniciar Full de càlcul',
-    'LBL_SHOW_CHART'=>'Veure Gràfic',
-    'LBL_RESET_CHECK'=>'Tots les dades del full de càlcul per al període de temps seleccionat i per a l´usuari que ha iniciat la sessió s´eliminaran, desitja continuar?',
+    'LBL_NO_ACTIVE_TIMEPERIOD' => 'No hi ha cap període de temps Actiu per al Objectiu.',
+    'LBL_FDR_ADJ_AMOUNT' => 'Quantitat Ajustada',
+    'LBL_SAVE_WOKSHEET' => 'Guardar Full de càlcul',
+    'LBL_RESET_WOKSHEET' => 'Reiniciar Full de càlcul',
+    'LBL_SHOW_CHART' => 'Veure Gràfic',
+    'LBL_RESET_CHECK' => 'Tots les dades del full de càlcul per al període de temps seleccionat i per a l´usuari que ha iniciat la sessió s´eliminaran, desitja continuar?',
 
     'LBL_CURRENCY' => 'Moneda',
     'LBL_CURRENCY_ID' => 'ID Moneda',
@@ -149,6 +149,6 @@ $mod_strings = array (
     'LBL_HISTORY_LOG' => 'Última confirmació',
     'LBL_NO_COMMIT' => 'No hi ha relitzacions prèvies',
 
-    'LBL_MANGER_SAVED' => 'Gestor guardat'
+    'LBL_MANGER_SAVED' => 'Gestor guardat',
 
-);
+];

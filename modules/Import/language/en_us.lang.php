@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => 'Import File Read Successfully',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'The imported record is participating in a process and cannot be edited because some fields are locked for editing by the process.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'number of errors were found.  View error tab for rows that were not imported due to error',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => 'If the user does not exist use the current user',
     'LBL_SHOW_HIDDEN' => 'Show fields that are not normally importable',
     'LBL_UPDATE_RECORDS' => 'Update existing records instead of importing them (No Undo)',
-    'LBL_TEST'=> 'Test Import (do not save or change data)',
+    'LBL_TEST' => 'Test Import (do not save or change data)',
     'LBL_TRUNCATE_TABLE' => 'Empty table before import (delete all records)',
     'LBL_RELATED_ACCOUNTS' => 'Do not create related accounts',
     'LBL_NO_DATECHECK' => 'Skip date check (faster but will fail if any date is wrong)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Invalid integer value',
     'LBL_ERROR_INVALID_NUM' => 'Invalid numeric value',
     'LBL_ERROR_INVALID_TIME' => 'Invalid time',
-    'LBL_ERROR_INVALID_EMAIL'=>'Invalid Email address',
-    'LBL_ERROR_INVALID_BOOL'=>'Invalid value (should be a 1 or 0)',
-    'LBL_ERROR_INVALID_DATE'=>'Invalid date string',
-    'LBL_ERROR_INVALID_USER'=>'Invalid user name or ID',
+    'LBL_ERROR_INVALID_EMAIL' => 'Invalid Email address',
+    'LBL_ERROR_INVALID_BOOL' => 'Invalid value (should be a 1 or 0)',
+    'LBL_ERROR_INVALID_DATE' => 'Invalid date string',
+    'LBL_ERROR_INVALID_USER' => 'Invalid user name or ID',
     'LBL_ERROR_INVALID_TEAM' => 'Invalid team name or ID',
     'LBL_ERROR_INVALID_ACCOUNT' => 'Invalid account name or ID',
     'LBL_ERROR_INVALID_RELATE' => 'Invalid relational field',
@@ -101,7 +100,7 @@ $mod_strings = array (
     'LBL_START_OVER' => 'Start Over',
     'LBL_ERROR' => 'Error:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => 'The import file contains {0} rows. The optimal number of rows is {1}. More rows may slow the import process. Click OK to continue importing. Click Cancel to revise and re-upload the import file.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => 'You cannot import a system administrator user',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => 'You cannot import a system administrator user',
     'ERR_REPORT_LOOP' => 'The system detected a reporting loop. A user cannot report to themselves, nor can any of their managers report to them.',
     'ERR_MULTIPLE' => 'Multiple columns have been defined with the same field name.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Missing required fields:',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => 'There were no lines detected in your import file.  Please make sure there are no empty lines in your file and try again.',
     'LBL_FILE_ALREADY_BEEN_OR' => 'The import file has already been processed or does not exist',
     'LBL_SUCCESS' => 'Success:',
-	'LBL_FAILURE' => 'Import Failed:',
+    'LBL_FAILURE' => 'Import Failed:',
     'LBL_SUCCESSFULLY' => 'Successfully imported',
     'LBL_LAST_IMPORT_UNDONE' => 'The import was undone.',
     'LBL_NO_IMPORT_TO_UNDO' => 'There was no import to undo.',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => 'Import Again',
     'LBL_FINISHED' => 'Finished',
     'LBL_UNDO_LAST_IMPORT' => 'Undo Import',
-    'LBL_LAST_IMPORTED'=>'Created',
+    'LBL_LAST_IMPORTED' => 'Created',
     'ERR_MULTIPLE_PARENTS' => 'You can only have one Parent ID defined',
     'LBL_DUPLICATES' => 'Duplicates Found',
     'LNK_DUPLICATE_LIST' => 'Download list of duplicates',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => 'Hide Notes',
     'LBL_SHOW_PREVIEW_COLUMNS' => 'Show Preview Columns',
     'LBL_HIDE_PREVIEW_COLUMNS' => 'Hide Preview Columns',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => 'Check for duplicates using operator:',
     'LBL_SAVE_MAPPING_AS' => 'To save the import settings, provide a name for the saved settings:',
     'LBL_OPTION_ENCLOSURE_QUOTE' => 'Single Quote (\')',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => 'Double Quote (")',
@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_VERIFY_DUPLCATES_HELP' => 'Find existing records in the system that could be considered duplicates of the records about to be imported  by performing a duplicate check for matching data.  Fields dragged into the "Check Data" column will be used for the duplicate check.  The rows in your import file containing matching data will be listed within the next page, and you will be able to select which rows to import',
     'LBL_IMPORT_STARTED' => 'Import Started:',
     'LBL_IMPORT_FILE_SETTINGS' => 'Import File Settings',
-    'LBL_IDM_RECORD_CANNOT_BE_CREATED' => 'Record not added. New users must be added in SugarCloud Settings',
+    'LBL_IDM_RECORD_CANNOT_BE_CREATED' => 'Record not added. New users must be added in SugarIdentity',
     'LBL_RECORD_CANNOT_BE_UPDATED' => 'The record could not be updated due to a permissions issue',
     'LBL_DELETE_MAP_CONFIRMATION' => 'Are you sure you want to delete this saved set of import settings?',
     'LBL_THIRD_PARTY_CSV_SOURCES' => 'If the import file data was exported from any of the following sources, select which one.',
@@ -329,12 +329,12 @@ $mod_strings = array (
     'LBL_CANCEL' => 'Cancel',
     'LBL_SELECT_DS_INSTRUCTION' => 'Ready to start importing? Select the source of the data that you would like to import.',
     'LBL_SELECT_UPLOAD_INSTRUCTION' => 'Select a file on your computer that contains the data that you would like to import, or download the template to get a head start on creating the import file.',
-    'LBL_SELECT_IDM_CREATE_INSTRUCTION' => 'To create new records, access <a href="{0}" target="_blank">SugarCloud Settings</a>.',
+    'LBL_SELECT_IDM_CREATE_INSTRUCTION' => 'To create new records, access <a href="{0}" target="_blank">SugarIdentity</a>.',
     'LBL_SELECT_IDM_UPLOAD_INSTRUCTION' => 'To update existing records, select a file on your computer that contains the data that you would like to import.',
     'LBL_SELECT_PROPERTY_INSTRUCTION' => 'Here is how the the first several rows of the import file appear with the detected file properties. If a header row was detected, it is displayed in the top row of the table. View the import file properties to make changes to the detected properties and to set additional properties. Updating the settings will update the data appearing in the table.',
     'LBL_SELECT_MAPPING_INSTRUCTION' => 'The table below contains all of the fields in the module that can be mapped to the data in the import file. If the file contains a header row, the columns in the file have been mapped to matching fields. If the import data contain dates, the year must be in YYYY format. Check the mappings to make sure that they are what you expect, and make changes, as necessary. To help you check the mappings, Row 1 displays the data in the file. Be sure to map to all of the required fields (noted by an asterisk).',
     'LBL_IDM_SELECT_MAPPING_INSTRUCTION' => 'The table below contains all of the editable fields in the module that can be mapped to the data in the import file. If the file contains a header row, the columns in the file have been mapped to matching fields. If the import data contain dates, the year must be in YYYY format. Check the mappings to make sure that they are what you expect, and make changes, as necessary. To help you check the mappings, Row 1 displays the data in the file. Be sure to map to all of the required fields (noted by an asterisk).',
-    'LBL_IDM_SELECT_MAPPING_FIELDS_INSTRUCTION' => '<a href="{0}" target="_blank">Fields</a> that are only editable in SugarIdentity via the SugarCloud Settings console will not be available to map.',
+    'LBL_IDM_SELECT_MAPPING_FIELDS_INSTRUCTION' => '<a href="{0}" target="_blank">Fields</a> that are only editable in SugarIdentity via the SugarIdentity console will not be available to map.',
     'LBL_SELECT_DUPLICATE_INSTRUCTION' => 'To avoid creating duplicate records, select which of the mapped fields you would like to use to perform a duplicate check while data is being imported. Values within existing records in the selected fields will be checked against the data in the import file. If matching data is found, the rows in the import file containing the data will be displayed along with the import results (next page). You will then be able to select which of these rows to continue importing.',
     'LBL_EXT_SOURCE_SIGN_IN' => 'Sign In',
     'LBL_EXT_SOURCE_SIGN_OUT' => 'Sign Out',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'To assign the new records to teams other than your default team(s), use the Default Value column to select different teams.',
     'LBL_SIGN_IN_HELP' => 'To enable this service, please sign in under the External Accounts tab within your user settings page.',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Trying to handle email addresses in a Bean that doesn't support it.",
-);
+];

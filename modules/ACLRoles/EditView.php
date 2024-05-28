@@ -12,7 +12,6 @@
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
-
 global $app_list_strings;// $modInvisList;
 
 $sugar_smarty = new Sugar_Smarty();
@@ -20,32 +19,31 @@ $sugar_smarty = new Sugar_Smarty();
 $sugar_smarty->assign('MOD', $mod_strings);
 $sugar_smarty->assign('APP', $app_strings);
 $sugar_smarty->assign('ISDUPLICATE', '');
-$duplicateString='';
+$duplicateString = '';
 //mass localization
 $sugar_smarty->assign('APP_LIST', $app_list_strings);
 $role = BeanFactory::newBean('ACLRoles');
 $role_name = '';
-$return= array('module'=>'ACLRoles', 'action'=>'index', 'record'=>'');
+$return = ['module' => 'ACLRoles', 'action' => 'index', 'record' => ''];
 $request = InputValidation::getService();
 $record = $request->getValidInputRequest('record', 'Assert\Guid');
 $isDuplicate = $request->getValidInputRequest('isDuplicate');
 
 if (!empty($record)) {
-	$role->retrieve($record);
-	$categories = ACLRole::getRoleActions($record);
-	$role_name =  $role->name;
-	if (!empty($isDuplicate)) {
-		//role id is stripped here in duplicate so anything using role id after this will not have it
-		$role->id = '';
-		$sugar_smarty->assign('ISDUPLICATE', $record);
-		$duplicateString=translate('LBL_DUPLICATE_OF', 'ACLRoles');
-	} else {
-		$return['record']= $role->id;
-		$return['action']='DetailView';
-	}
-
+    $role->retrieve($record);
+    $categories = ACLRole::getRoleActions($record);
+    $role_name = $role->name;
+    if (!empty($isDuplicate)) {
+        //role id is stripped here in duplicate so anything using role id after this will not have it
+        $role->id = '';
+        $sugar_smarty->assign('ISDUPLICATE', $record);
+        $duplicateString = translate('LBL_DUPLICATE_OF', 'ACLRoles');
+    } else {
+        $return['record'] = $role->id;
+        $return['action'] = 'DetailView';
+    }
 } else {
-	$categories = ACLRole::getRoleActions('');
+    $categories = ACLRole::getRoleActions('');
 }
 $sugar_smarty->assign('ROLE', $role->toArray());
 $tdwidth = 10;
@@ -56,18 +54,18 @@ $returnAction = $request->getValidInputRequest('return_action');
 $returnRecord = $request->getValidInputRequest('return_record', 'Assert\Guid');
 
 if ($returnModule !== null) {
-	$return['module'] = $returnModule;
+    $return['module'] = $returnModule;
 
-	if($returnId !== null) {
-		$return['record'] = $returnId;
-	}
-	if($returnRecord !== null) {
-		$return['record'] = $returnRecord;
-	}
-	if($returnAction !== null) {
-		$return['action'] = $returnAction;
-	}
-    if ( !empty($return['record']) ) {
+    if ($returnId !== null) {
+        $return['record'] = $returnId;
+    }
+    if ($returnRecord !== null) {
+        $return['record'] = $returnRecord;
+    }
+    if ($returnAction !== null) {
+        $return['action'] = $returnAction;
+    }
+    if (!empty($return['record'])) {
         $return['action'] = 'DetailView';
     }
 }
@@ -79,14 +77,14 @@ $sugar_smarty->assign('CATEGORIES', $categories);
 $sugar_smarty->assign('TDWIDTH', $tdwidth);
 $sugar_smarty->assign('ACTION_NAMES', $names);
 
-$params = array();
+$params = [];
 $params[] = sprintf(
     '<a href="index.php?module=ACLRoles&action=index">%s</a>',
     htmlspecialchars($mod_strings['LBL_MODULE_NAME'], ENT_COMPAT)
 );
-if(empty($role->id)){
+if (empty($role->id)) {
     $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL'], ENT_COMPAT);
-}else{
+} else {
     $params[] = htmlspecialchars($role->get_summary_text(), ENT_COMPAT);
 }
 echo getClassicModuleTitle('ACLRoles', $params, true);

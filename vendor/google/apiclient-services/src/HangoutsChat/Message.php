@@ -19,7 +19,7 @@ namespace Google\Service\HangoutsChat;
 
 class Message extends \Google\Collection
 {
-  protected $collection_key = 'cardsV2';
+  protected $collection_key = 'emojiReactionSummaries';
   protected $actionResponseType = ActionResponse::class;
   protected $actionResponseDataType = '';
   protected $annotationsType = Annotation::class;
@@ -28,6 +28,8 @@ class Message extends \Google\Collection
    * @var string
    */
   public $argumentText;
+  protected $attachedGifsType = AttachedGif::class;
+  protected $attachedGifsDataType = 'array';
   protected $attachmentType = Attachment::class;
   protected $attachmentDataType = 'array';
   protected $cardsType = Card::class;
@@ -37,7 +39,19 @@ class Message extends \Google\Collection
   /**
    * @var string
    */
+  public $clientAssignedMessageId;
+  /**
+   * @var string
+   */
   public $createTime;
+  /**
+   * @var string
+   */
+  public $deleteTime;
+  protected $deletionMetadataType = DeletionMetadata::class;
+  protected $deletionMetadataDataType = '';
+  protected $emojiReactionSummariesType = EmojiReactionSummary::class;
+  protected $emojiReactionSummariesDataType = 'array';
   /**
    * @var string
    */
@@ -64,6 +78,10 @@ class Message extends \Google\Collection
   public $text;
   protected $threadType = Thread::class;
   protected $threadDataType = '';
+  /**
+   * @var bool
+   */
+  public $threadReply;
 
   /**
    * @param ActionResponse
@@ -106,6 +124,20 @@ class Message extends \Google\Collection
   public function getArgumentText()
   {
     return $this->argumentText;
+  }
+  /**
+   * @param AttachedGif[]
+   */
+  public function setAttachedGifs($attachedGifs)
+  {
+    $this->attachedGifs = $attachedGifs;
+  }
+  /**
+   * @return AttachedGif[]
+   */
+  public function getAttachedGifs()
+  {
+    return $this->attachedGifs;
   }
   /**
    * @param Attachment[]
@@ -152,6 +184,20 @@ class Message extends \Google\Collection
   /**
    * @param string
    */
+  public function setClientAssignedMessageId($clientAssignedMessageId)
+  {
+    $this->clientAssignedMessageId = $clientAssignedMessageId;
+  }
+  /**
+   * @return string
+   */
+  public function getClientAssignedMessageId()
+  {
+    return $this->clientAssignedMessageId;
+  }
+  /**
+   * @param string
+   */
   public function setCreateTime($createTime)
   {
     $this->createTime = $createTime;
@@ -162,6 +208,48 @@ class Message extends \Google\Collection
   public function getCreateTime()
   {
     return $this->createTime;
+  }
+  /**
+   * @param string
+   */
+  public function setDeleteTime($deleteTime)
+  {
+    $this->deleteTime = $deleteTime;
+  }
+  /**
+   * @return string
+   */
+  public function getDeleteTime()
+  {
+    return $this->deleteTime;
+  }
+  /**
+   * @param DeletionMetadata
+   */
+  public function setDeletionMetadata(DeletionMetadata $deletionMetadata)
+  {
+    $this->deletionMetadata = $deletionMetadata;
+  }
+  /**
+   * @return DeletionMetadata
+   */
+  public function getDeletionMetadata()
+  {
+    return $this->deletionMetadata;
+  }
+  /**
+   * @param EmojiReactionSummary[]
+   */
+  public function setEmojiReactionSummaries($emojiReactionSummaries)
+  {
+    $this->emojiReactionSummaries = $emojiReactionSummaries;
+  }
+  /**
+   * @return EmojiReactionSummary[]
+   */
+  public function getEmojiReactionSummaries()
+  {
+    return $this->emojiReactionSummaries;
   }
   /**
    * @param string
@@ -288,6 +376,20 @@ class Message extends \Google\Collection
   public function getThread()
   {
     return $this->thread;
+  }
+  /**
+   * @param bool
+   */
+  public function setThreadReply($threadReply)
+  {
+    $this->threadReply = $threadReply;
+  }
+  /**
+   * @return bool
+   */
+  public function getThreadReply()
+  {
+    return $this->threadReply;
   }
 }
 

@@ -19,7 +19,6 @@ use Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\ActivityHandlerFactory;
  */
 class MomentumUpdater
 {
-
     public function run()
     {
         if (!hasAutomateLicense()) {
@@ -53,30 +52,30 @@ class MomentumUpdater
     {
         $activityBean = \BeanFactory::newBean($module_name);
         $query = new \SugarQuery();
-        $query->from($activityBean, array (
+        $query->from($activityBean, [
             'alias' => 'activity',
             'team_security' => false,
-        ));
+        ]);
 
-        $query->joinTable('dri_workflow_templates', array (
-                    'joinType' => 'INNER',
-                    'alias' => 'dri_wt',
-                    'linkingTable' => true,
-                ))
-                ->on()
-                ->equalsField('activity.dri_workflow_template_id', 'dri_wt.id');
+        $query->joinTable('dri_workflow_templates', [
+            'joinType' => 'INNER',
+            'alias' => 'dri_wt',
+            'linkingTable' => true,
+        ])
+            ->on()
+            ->equalsField('activity.dri_workflow_template_id', 'dri_wt.id');
 
         $handler = ActivityHandlerFactory::factory($module_name);
 
         $query->select('activity.id');
         $query->where()
-                ->isNull('activity.cj_momentum_end_date')
-                ->notNull('activity.cj_momentum_start_date')
-                ->notNull('activity.dri_workflow_task_template_id')
-                ->notEquals('activity.status', $handler->getCompletedStatus($activityBean))
-                ->notEquals('activity.status', $handler->getNotApplicableStatus($activityBean))
-                ->equals('activity.deleted', 0)
-                ->equals('dri_wt.deleted', 0);
+            ->isNull('activity.cj_momentum_end_date')
+            ->notNull('activity.cj_momentum_start_date')
+            ->notNull('activity.dri_workflow_task_template_id')
+            ->notEquals('activity.status', $handler->getCompletedStatus($activityBean))
+            ->notEquals('activity.status', $handler->getNotApplicableStatus($activityBean))
+            ->equals('activity.deleted', 0)
+            ->equals('dri_wt.deleted', 0);
 
         $result = $query->execute();
 
@@ -99,20 +98,20 @@ class MomentumUpdater
         if (!empty($bean) && !empty($bean->id)) {
             $handler = ActivityHandlerFactory::factory($bean->module_dir);
 
-            $ratio = (float) $bean->cj_momentum_ratio;
-            $score = (int) $bean->cj_momentum_score;
+            $ratio = (float)$bean->cj_momentum_ratio;
+            $score = (int)$bean->cj_momentum_score;
 
             $handler->calculateMomentum($bean);
 
-            if ($ratio !== (float) $bean->cj_momentum_ratio || $score !== (int) $bean->cj_momentum_score) {
+            if ($ratio !== (float)$bean->cj_momentum_ratio || $score !== (int)$bean->cj_momentum_score) {
                 $GLOBALS['log']->debug(
                     sprintf(
-                        "Updating %s with ratio %s (%s) and score %s (%s) id=%s",
+                        'Updating %s with ratio %s (%s) and score %s (%s) id=%s',
                         $bean->object_name,
                         $ratio,
-                        (float) $bean->cj_momentum_ratio,
+                        (float)$bean->cj_momentum_ratio,
                         $score,
-                        (int) $bean->cj_momentum_score,
+                        (int)$bean->cj_momentum_score,
                         $bean->id
                     )
                 );
@@ -121,7 +120,7 @@ class MomentumUpdater
 
                 $query = 'UPDATE ' . $table . ' SET cj_momentum_ratio = ? , cj_momentum_score = ? WHERE id = ?';
                 $conn = $GLOBALS['db']->getConnection();
-                $stmt = $conn->executeQuery($query, array("$bean->cj_momentum_ratio", "$bean->cj_momentum_score", "$id"));
+                $stmt = $conn->executeQuery($query, ["$bean->cj_momentum_ratio", "$bean->cj_momentum_score", "$id"]);
                 return $bean->dri_subworkflow_id;
             }
         }
@@ -140,7 +139,7 @@ class MomentumUpdater
         if (!empty($bean) && !empty($bean->id)) {
             $score = 0;
             $points = 0;
-            
+
             if ($moduleName === 'DRI_SubWorkflows') {
                 $bean->reloadActivities();
                 //Get all the activities which are related to this stage
@@ -156,21 +155,21 @@ class MomentumUpdater
                 }
             }
             $ratio = $points > 0 ? $score / $points : 1;
-    
-            if ($ratio !== (float) $bean->momentum_ratio ||
-                    $score !== (int) $bean->momentum_score ||
-                    $points !== (int) $bean->momentum_points) {
+
+            if ($ratio !== (float)$bean->momentum_ratio ||
+                $score !== (int)$bean->momentum_score ||
+                $points !== (int)$bean->momentum_points) {
                 $GLOBALS['log']->debug(sprintf(
                     "Updating $moduleName with ratio %s (%s) and score %s (%s) of points %s (%s) id=%s",
                     $ratio,
-                    (float) $bean->momentum_ratio,
+                    (float)$bean->momentum_ratio,
                     $score,
-                    (int) $bean->momentum_score,
+                    (int)$bean->momentum_score,
                     $points,
-                    (int) $bean->momentum_points,
+                    (int)$bean->momentum_points,
                     $bean->id
                 ));
-    
+
                 $this->updateScoresAndRatio($bean->getTableName(), $score, $ratio, $points, $bean->id);
 
                 if ($moduleName === 'DRI_Workflows') {
@@ -195,7 +194,7 @@ class MomentumUpdater
             return;
         }
 
-        return \BeanFactory::retrieveBean($module, $id, array ('use_cache' => false));
+        return \BeanFactory::retrieveBean($module, $id, ['use_cache' => false]);
     }
 
     /**
@@ -214,7 +213,7 @@ class MomentumUpdater
         }
         $query = 'UPDATE ' . $table . ' SET cj_momentum_ratio = ? , cj_momentum_score = ? , momentum_points = ? WHERE id = ?';
         $conn = $GLOBALS['db']->getConnection();
-        $stmt = $conn->executeQuery($query, array("$ratio", "$score", "$points", "$id"));
+        $stmt = $conn->executeQuery($query, ["$ratio", "$score", "$points", "$id"]);
     }
 
     /**

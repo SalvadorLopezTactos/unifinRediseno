@@ -14,6 +14,6 @@ $hook_array['before_save'][] = [
     2,
     'Sugarcrm\Sugarcrm\CustomerJourney\Bean\StageTemplate\StageTemplateHooks::beforeSave',
     null,
-    'Sugarcrm\\Sugarcrm\\CustomerJourney\\Bean\\StageTemplate\\StageTemplateHooks',
+    \Sugarcrm\Sugarcrm\CustomerJourney\Bean\StageTemplate\StageTemplateHooks::class,
     'beforeSave',
 ];

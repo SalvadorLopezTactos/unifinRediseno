@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,20 +10,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class SugarWidgetFieldDate extends SugarWidgetFieldDateTime
 {
-    function displayList($layout_def)
+    public function displayList($layout_def)
     {
         // i guess qualifier and column_function are the same..
-        if (! empty($layout_def['column_function'])) {
-            $func_name = 'displayList'.$layout_def['column_function'];
-            if ( method_exists($this,$func_name)) {
+        if (!empty($layout_def['column_function'])) {
+            $func_name = 'displayList' . $layout_def['column_function'];
+            if (method_exists($this, $func_name)) {
                 $display = $this->$func_name($layout_def);
                 return $display;
             }
         }
         $content = $this->displayListPlain($layout_def);
-		return $content;
+        return $content;
     }
 
     /**
@@ -35,7 +37,7 @@ class SugarWidgetFieldDate extends SugarWidgetFieldDateTime
     public function getFieldControllerData(array $layoutDef)
     {
         if (!empty($layoutDef['column_function'])) {
-            $func_name = 'displayList'.$layoutDef['column_function'];
+            $func_name = 'displayList' . $layoutDef['column_function'];
             if (method_exists($this, $func_name)) {
                 $display = $this->$func_name($layoutDef);
                 return $display;
@@ -47,26 +49,26 @@ class SugarWidgetFieldDate extends SugarWidgetFieldDateTime
         return $value;
     }
 
-    function queryFilterBefore($layout_def)
+    public function queryFilterBefore($layout_def)
     {
-        return $this->queryDateOp($this->_get_column_select($layout_def), $layout_def['input_name0'], "<", "date");
+        return $this->queryDateOp($this->_get_column_select($layout_def), $layout_def['input_name0'], '<', 'date');
     }
 
-    function queryFilterAfter($layout_def)
+    public function queryFilterAfter($layout_def)
     {
-        return $this->queryDateOp($this->_get_column_select($layout_def), $layout_def['input_name0'], ">", "date");
+        return $this->queryDateOp($this->_get_column_select($layout_def), $layout_def['input_name0'], '>', 'date');
     }
 
-    function queryFilterNot_Equals_str($layout_def)
+    public function queryFilterNot_Equals_str($layout_def)
     {
         $column = $this->_get_column_select($layout_def);
 
-        return "($column IS NULL OR " . $this->queryDateOp($column, $layout_def['input_name0'], '!=', "date") . ")\n";
+        return "($column IS NULL OR " . $this->queryDateOp($column, $layout_def['input_name0'], '!=', 'date') . ")\n";
     }
 
-    function queryFilterOn($layout_def)
+    public function queryFilterOn($layout_def)
     {
-        return $this->queryDateOp($this->_get_column_select($layout_def), $layout_def['input_name0'], "=", "date");
+        return $this->queryDateOp($this->_get_column_select($layout_def), $layout_def['input_name0'], '=', 'date');
     }
 
     protected function queryDay($layout_def, SugarDateTime $day)

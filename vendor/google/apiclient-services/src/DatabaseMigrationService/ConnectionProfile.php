@@ -43,6 +43,8 @@ class ConnectionProfile extends \Google\Model
    * @var string
    */
   public $name;
+  protected $oracleType = OracleConnectionProfile::class;
+  protected $oracleDataType = '';
   protected $postgresqlType = PostgreSqlConnectionProfile::class;
   protected $postgresqlDataType = '';
   /**
@@ -169,6 +171,20 @@ class ConnectionProfile extends \Google\Model
   public function getName()
   {
     return $this->name;
+  }
+  /**
+   * @param OracleConnectionProfile
+   */
+  public function setOracle(OracleConnectionProfile $oracle)
+  {
+    $this->oracle = $oracle;
+  }
+  /**
+   * @return OracleConnectionProfile
+   */
+  public function getOracle()
+  {
+    return $this->oracle;
   }
   /**
    * @param PostgreSqlConnectionProfile

@@ -14,7 +14,7 @@ class QuotaHooks
 {
     public static function setQuotaSubscriptions(Quota $bean, $event, $args)
     {
-        if($event !== 'before_save') {
+        if ($event !== 'before_save') {
             return false;
         }
 

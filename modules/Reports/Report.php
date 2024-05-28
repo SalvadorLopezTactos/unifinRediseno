@@ -40,99 +40,100 @@ class Report
      * @var mixed[]|string
      */
     public $child_filter_name;
-    var $result;
-    var $summary_result;
-    var $total_result;
-    var $row_start = 0;
-    var $row_end = 0;
-    var $row_count = 0;
-    var $summary_row_start = 0;
-    var $summary_row_end = 0;
-    var $summary_row_count = 0;
-    var $current_summary_row_count = 0;
-    var $requested_fields_map = array();
-    var $group_fields_map = array();
-    var $summary_fields_map = array();
-    var $full_table_list = array();
+    public $result;
+    public $summary_result;
+    public $total_result;
+    public $row_start = 0;
+    public $row_end = 0;
+    public $row_count = 0;
+    public $summary_row_start = 0;
+    public $summary_row_end = 0;
+    public $summary_row_count = 0;
+    public $current_summary_row_count = 0;
+    public $requested_fields_map = [];
+    public $group_fields_map = [];
+    public $summary_fields_map = [];
+    public $full_table_list = [];
     public $summary_order_by;
 
     /**
      * @var SugarBean[]
      */
-    public $full_bean_list = array();
+    public $full_bean_list = [];
 
     /**
      * @var string
      */
     public $from;
 
-    var $where;
-    var $order_by;
-    var $order_by_arr = array();
-    var $summary_order_by_arr = array();
-    var $order_by_special;
-    var $group_by;
-    var $group_order_by = '';
-    var $module = 'Accounts';
+    public $where;
+    public $order_by;
+    public $order_by_arr = [];
+    public $summary_order_by_arr = [];
+    public $order_by_special;
+    public $group_by;
+    public $group_order_by = '';
+    public $module = 'Accounts';
 
     /**
      * @var SugarBean
      */
-    var $focus;
+    public $focus;
 
-    var $currency_symbol;
+    public $currency_symbol;
 
     /** @var Currency */
-    var $currency_obj;
-    var $name;
-    var $select_fields = array();
-    var $summary_select_fields = array();
-    var $total_select_fields = array();
-    var $report_def = array();
-    var $group_defs_Info = array();
-    var $addedColumns = 0;
-    var $do_export = false;
-    var $report_type = 'tabular';
-    var $show_columns = false;
-    var $enable_paging = true;
+    public $currency_obj;
+    public $name;
+    public $select_fields = [];
+    public $summary_select_fields = [];
+    public $total_select_fields = [];
+    public $report_def = [];
+    public $group_defs_Info = [];
+    public $addedColumns = 0;
+    public $do_export = false;
+    public $embeddedData = false;
+    public $report_type = 'tabular';
+    public $show_columns = false;
+    public $enable_paging = true;
 
-    var $query_list = array();
-    var $query = '';
-    var $summary_query = '';
-    var $total_query = '';
+    public $query_list = [];
+    public $query = '';
+    public $summary_query = '';
+    public $total_query = '';
 
-    var $module_dir = 'Reports';
-    var $time_date_obj = null;
-    var $is_saved_report = false;
-    var $saved_report_id = '';
-    var $saved_report = null;
-    var $alias_lookup = array();
-    var $upgrade_lookup = array();
+    public $module_dir = 'Reports';
+    public $time_date_obj = null;
+    public $is_saved_report = false;
+    public $saved_report_id = '';
+    public $saved_report = null;
+    public $alias_lookup = [];
+    public $upgrade_lookup = [];
 
-    var $all_fields = array();
-    var $relationships = array();
-    var $loaded_links = array();
-    var $selected_loaded_links = array();
-    var $selected_loaded_custom_links = array();
-    var $layout_manager = null;
-    var $plain_text_output = false;
-    var $obj_array = array(); //array to store the object reference in get_next_row()
-    var $default_report_def_str = '{"report_type":"tabular","display_columns":[],"summary_columns":[],"order_by":[{"name":"","sort_dir":""}],"filters_def":[],"group_defs":[],"links_def":[],"module":"Accounts","chart_type":"hBarF","chart_description":""}';
+    public $all_fields = [];
+    public $relationships = [];
+    public $loaded_links = [];
+    public $selected_loaded_links = [];
+    public $selected_loaded_custom_links = [];
+    public $layout_manager = null;
+    public $plain_text_output = false;
+    public $obj_array = []; //array to store the object reference in get_next_row()
+    public $default_report_def_str = '{"report_type":"tabular","display_columns":[],"summary_columns":[],"order_by":[{"name":"","sort_dir":""}],"filters_def":[],"group_defs":[],"links_def":[],"module":"Accounts","chart_type":"hBarF","chart_description":""}';
 
-    var $select_already_defined_hash = array();
+    public $select_already_defined_hash = [];
 
-    var $do_chart = true;
-    var $chart_header_row = array();
-    var $chart_rows = array();
-    var $chart_type = 'vBarF';
-    var $table_name = 'saved_reports';
-    var $chart_description = '';
-    var $chart_group_position = array();
-    var $chart_numerical_position = 0;
-    var $group_header;
-    var $group_column_is_invisible = 0;
-    var $chart_total_header_row = array();
-    var $jtcount = 0;
+    public $do_chart = true;
+    public $chart_header_row = [];
+    public $chart_rows = [];
+    public $chart_type = 'vBarF';
+    public $table_name = 'saved_reports';
+    public $chart_description = '';
+    public $chart_group_position = [];
+    public $chart_numerical_position = 0;
+    public $group_header;
+    public $group_column_is_invisible = 0;
+    public $chart_total_header_row = [];
+    public $jtcount = 0;
 
     // this is a var not in metadata that is set to bypass the sugar_die calls used throughout this class
     public $fromApi = false;
@@ -146,37 +147,37 @@ class Report
     /**
      * @var array these types support export
      */
-    static protected $allowExportType = array('summary', 'tabular', 'detailed_summary', 'Matrix');
+    protected static $allowExportType = ['summary', 'tabular', 'detailed_summary', 'Matrix'];
 
     /**
      *
      * Default visibility options
      * @var array
      */
-    protected $visibilityOpts = array(
+    protected $visibilityOpts = [
         // notify visibility strategies we are running from reports
-        'report_query' => true
-    );
+        'report_query' => true,
+    ];
 
     /**
      * Array of invalid report fields. Populated during is_definition_valid() call.
      *
      * @var array
      */
-    var $invalid_fields = array();
+    public $invalid_fields = [];
 
     /**
      * List of relationships/links that are no longer valid/deleted
      * @var array
      */
-    public $invalid_links = array();
+    public $invalid_links = [];
 
     /**
      * Array, which reflects whether or not to consider the currency in the query.
      *
      * @var array
      */
-    protected $currency_join = array();
+    protected $currency_join = [];
 
     /**
      * @var DBManager
@@ -186,19 +187,19 @@ class Report
     /**
      * @var array
      */
-    protected $group_by_arr = array();
+    protected $group_by_arr = [];
 
     /**
      * @var array
      */
-    protected $group_order_by_arr = array();
+    protected $group_order_by_arr = [];
 
     /**
      *
      * SugarBeans in JOIN
      * @var array
      */
-    public $extModules = array();
+    public $extModules = [];
 
     /**
      * @var \Sugarcrm\Sugarcrm\Security\InputValidation\Request
@@ -209,14 +210,13 @@ class Report
      * Query is used for chart
      *
      * @var boolean
-    */
+     */
     protected $chartQuery = false;
 
     public function __construct($report_def_str = '', $filters_def_str = '', $panels_def_str = '')
     {
         global $current_user, $current_language, $app_list_strings;
         if (!isset($current_user) || empty($current_user)) {
-
             $current_user = BeanFactory::getBean('Users', '1');
         }
 
@@ -230,10 +230,12 @@ class Report
         $mod_strings = return_module_language($current_language, 'Reports');
 
         $this->report_max = (!empty($GLOBALS['sugar_config']['list_report_max_per_page']))
-                ? $GLOBALS['sugar_config']['list_report_max_per_page'] : 100;
-        $this->report_offset = (int) $this->request->getValidInputRequest('report_offset', null, 0);
+            ? $GLOBALS['sugar_config']['list_report_max_per_page'] : 100;
+        $this->report_offset = (int)$this->request->getValidInputRequest('report_offset', null, 0);
 
-        if ($this->report_offset < 0) $this->report_offset = 0;
+        if ($this->report_offset < 0) {
+            $this->report_offset = 0;
+        }
         $this->time_date_obj = new TimeDate();
         $this->name = $mod_strings['LBL_UNTITLED'];
         $this->db = DBManagerFactory::getInstance('reports');
@@ -270,8 +272,7 @@ class Report
             $this->parseUIFiltersDef($json->decode($filters_def_str), $json->decode($panels_def_str));
         }
 
-        if (!empty($this->report_def['full_table_list']))
-        {
+        if (!empty($this->report_def['full_table_list'])) {
             $this->fixReportDefs();
         }
         $this->cleanLabels();
@@ -286,13 +287,12 @@ class Report
         if (!empty($this->report_def['report_type'])) {
             $this->report_type = $this->report_def['report_type'];
         }
-        if (!empty($this->report_def['display_columns']) && (is_countable($this->report_def['display_columns']) ? count($this->report_def['display_columns']) : 0) > 0 && $this->report_type == 'summary') {
+        if (!empty($this->report_def['display_columns']) && safeCount($this->report_def['display_columns']) > 0 && $this->report_type == 'summary') {
             $this->show_columns = true;
         }
         if (!empty($this->report_def['chart_type'])) {
             $this->chart_type = $this->report_def['chart_type'];
-        } else
-        {
+        } else {
             $this->report_def['chart_type'] = 'none';
             $this->chart_type = $this->report_def['chart_type'];
         }
@@ -301,7 +301,7 @@ class Report
         }
 
         //Upgrade the pre-5.1 reports that had a summary column field that wasn't in the group by or an aggregate field.
-        if (!empty ($this->report_def['summary_columns'])) {
+        if (!empty($this->report_def['summary_columns'])) {
             foreach ($this->report_def['summary_columns'] as $summary_column) {
                 if (!isset($summary_column['group_function']) && !isset($summary_column['is_group_by']) && !isset($summary_column['column_function'])) {
                     $isInGroupBy = false;
@@ -311,25 +311,24 @@ class Report
                             break;
                         }
                     }
-                    if (!$isInGroupBy)
-                        $this->report_def['group_defs'][is_countable($this->report_def['group_defs']) ? count($this->report_def['group_defs']) : 0] = $summary_column;
+                    if (!$isInGroupBy) {
+                        $this->report_def['group_defs'][safeCount($this->report_def['group_defs'])] = $summary_column;
+                    }
                 }
             }
         }
 
         if (!empty($this->report_def['full_table_list'])) {
             $this->full_table_list = $this->report_def['full_table_list'];
-        }
-        else
-        {
+        } else {
             $this->full_table_list['self']['value'] = $this->module;
             $this->full_table_list['self']['module'] = $this->module;
             $this->full_table_list['self']['label'] = $app_list_strings['moduleList'][$this->module] ?? $this->module;
             $this->full_table_list['self']['parent'] = '';
-            $this->full_table_list['self']['children'] = array();
+            $this->full_table_list['self']['children'] = [];
         }
 
-        $tempFullTableList = array();
+        $tempFullTableList = [];
         $tempFullTableList['self'] = $this->full_table_list['self'];
         unset($tempFullTableList['self']['children']);
         unset($tempFullTableList['self']['parent']);
@@ -341,8 +340,7 @@ class Report
             $tmpBean = BeanFactory::newBean($this->full_table_list['self']['module']);
             $linked_fields = $tmpBean->get_linked_fields();
 
-            foreach ($this->report_def['links_def'] as $old_link)
-            {
+            foreach ($this->report_def['links_def'] as $old_link) {
                 $tmpBean->load_relationship($old_link);
                 $linkObject = $tmpBean->$old_link;
                 $relationship = $tmpBean->$old_link->_relationship;
@@ -357,11 +355,9 @@ class Report
 
                 $tempFullTableList[$newIndex]['parent'] = 'self';
 
-                if (isset($this->report_def['link_joins']) && is_array($this->report_def['link_joins']) && in_array($old_link, $this->report_def['link_joins']) || $relationship->relationship_type == 'one-to-many') {
+                if (isset($this->report_def['link_joins']) && is_array($this->report_def['link_joins']) && safeInArray($old_link, $this->report_def['link_joins']) || $relationship->relationship_type == 'one-to-many') {
                     $tempFullTableList[$newIndex]['optional'] = 1;
-                }
-                else
-                {
+                } else {
                     $tempFullTableList[$newIndex]['optional'] = 0;
                 }
 
@@ -369,8 +365,7 @@ class Report
                 $tempFullTableList['self']['children'][$old_link] = $old_link;
                 $tempFullTableList[$newIndex]['module'] = $linkObject->getRelatedModuleName();
                 $tempFullTableList[$newIndex]['link_def']['bean_is_lhs'] = $linkObject->_get_bean_position() ? 1 : 0;
-                $tempFullTableList[$newIndex]['name'] = $tempFullTableList['self']['module'] . " > " . $tempFullTableList[$newIndex]['module'];
-
+                $tempFullTableList[$newIndex]['name'] = $tempFullTableList['self']['module'] . ' > ' . $tempFullTableList[$newIndex]['module'];
             }
 
             unset($this->report_def['links_def']);
@@ -379,71 +374,71 @@ class Report
         }
         // END: Dynamically convert ancient versions to 5.1 version of content string.
         // START: Dynamically convert previous versions to 5.1 version of content string.
-        foreach ($this->full_table_list as $table_key => $table_data)
-        {
+        foreach ($this->full_table_list as $table_key => $table_data) {
             if (preg_match('/self_/', $table_key) == 1) {
                 $currLinkIndex = strripos($table_key, '_link_');
                 $parentLink = substr($table_key, 0, $currLinkIndex);
                 if ($parentLink == 'self') {
-                    $newIndex = $tempFullTableList['self']['module'] . ":" . $table_data['link_def']['name'];
+                    $newIndex = $tempFullTableList['self']['module'] . ':' . $table_data['link_def']['name'];
                     $tempFullTableList[$newIndex] = $table_data;
                     $tempFullTableList[$newIndex]['link_def']['table_key'] = $newIndex;
                     $tempFullTableList[$newIndex]['parent'] = 'self';
-                    $tempFullTableList[$newIndex]['name'] = $tempFullTableList['self']['module'] . " > " . $table_data['module'];
-                    if (isset($table_data['optional']) && $table_data['optional'] == 1)
+                    $tempFullTableList[$newIndex]['name'] = $tempFullTableList['self']['module'] . ' > ' . $table_data['module'];
+                    if (isset($table_data['optional']) && $table_data['optional'] == 1) {
                         $tempFullTableList[$newIndex]['optional'] = 1;
+                    }
                     unset($tempFullTableList[$newIndex]['children']);
                     unset($tempFullTableList[$newIndex]['value']);
                     $upgrade_lookup[$table_key] = $newIndex;
-                }
-                else {
-                    $newIndex = $tempFullTableList[$upgrade_lookup[$parentLink]]['link_def']['table_key'] . ":" .
-                                $table_data['link_def']['name'];
+                } else {
+                    $newIndex = $tempFullTableList[$upgrade_lookup[$parentLink]]['link_def']['table_key'] . ':' .
+                        $table_data['link_def']['name'];
                     $tempFullTableList[$newIndex] = $table_data;
                     $tempFullTableList[$newIndex]['link_def']['table_key'] = $newIndex;
                     $tempFullTableList[$newIndex]['parent'] = $upgrade_lookup[$parentLink];
-                    $tempFullTableList[$newIndex]['name'] = $tempFullTableList[$upgrade_lookup[$parentLink]]['name'] . " > " . $table_data['module'];
+                    $tempFullTableList[$newIndex]['name'] = $tempFullTableList[$upgrade_lookup[$parentLink]]['name'] . ' > ' . $table_data['module'];
                     unset($tempFullTableList[$newIndex]['children']);
                     unset($tempFullTableList[$newIndex]['value']);
-                    if (isset($table_data['optional']) && $table_data['optional'] == 1)
+                    if (isset($table_data['optional']) && $table_data['optional'] == 1) {
                         $tempFullTableList[$newIndex]['optional'] = 1;
+                    }
                     $upgrade_lookup[$table_key] = $newIndex;
                 }
-            }
-            else if ($table_key != 'self' && preg_match('/:/', $table_key) == 0) {
-                $newIndex = $tempFullTableList['self']['module'] . ":" . $table_data['link_def']['name'];
+            } elseif ($table_key != 'self' && preg_match('/:/', $table_key) == 0) {
+                $newIndex = $tempFullTableList['self']['module'] . ':' . $table_data['link_def']['name'];
                 $tempFullTableList[$newIndex] = $table_data;
                 $tempFullTableList[$newIndex]['link_def']['table_key'] = $newIndex;
                 $tempFullTableList[$newIndex]['parent'] = 'self';
-                $tempFullTableList[$newIndex]['name'] = $tempFullTableList['self']['module'] . " > " . $table_data['module'];
-                if (isset($table_data['optional']) && $table_data['optional'] == 1)
+                $tempFullTableList[$newIndex]['name'] = $tempFullTableList['self']['module'] . ' > ' . $table_data['module'];
+                if (isset($table_data['optional']) && $table_data['optional'] == 1) {
                     $tempFullTableList[$newIndex]['optional'] = 1;
+                }
                 unset($tempFullTableList[$newIndex]['children']);
                 unset($tempFullTableList[$newIndex]['value']);
                 $upgrade_lookup[$table_key] = $newIndex;
             }
         }
-        if (isset($upgrade_lookup) && count($upgrade_lookup) > 0) {
+        if (isset($upgrade_lookup) && safeCount($upgrade_lookup) > 0) {
             $this->full_table_list = $tempFullTableList;
             $this->report_def['full_table_list'] = $tempFullTableList;
-            for ($i = 0; $i < (is_countable($this->report_def['display_columns']) ? count($this->report_def['display_columns']) : 0); $i++) {
+            for ($i = 0; $i < safeCount($this->report_def['display_columns']); $i++) {
                 if ($this->report_def['display_columns'][$i]['table_key'] != 'self') {
                     $this->report_def['display_columns'][$i]['table_key'] = $upgrade_lookup[$this->report_def['display_columns'][$i]['table_key']];
                 }
             }
-            for ($i = 0; $i < (is_countable($this->report_def['summary_columns']) ? count($this->report_def['summary_columns']) : 0); $i++) {
+            for ($i = 0; $i < safeCount($this->report_def['summary_columns']); $i++) {
                 if ($this->report_def['summary_columns'][$i]['table_key'] != 'self') {
                     $this->report_def['summary_columns'][$i]['table_key'] = $upgrade_lookup[$this->report_def['summary_columns'][$i]['table_key']];
                 }
             }
 
-            for ($i = 0; $i < (is_countable($this->report_def['group_defs']) ? count($this->report_def['group_defs']) : 0); $i++) {
+            for ($i = 0; $i < safeCount($this->report_def['group_defs']); $i++) {
                 if ($this->report_def['group_defs'][$i]['table_key'] != 'self') {
                     $this->report_def['group_defs'][$i]['table_key'] = $upgrade_lookup[$this->report_def['group_defs'][$i]['table_key']];
                 }
             }
             if (isset($this->report_def['order_by'])) {
-                for ($i = 0; $i < (is_countable($this->report_def['order_by']) ? count($this->report_def['order_by']) : 0); $i++) {
+                for ($i = 0; $i < safeCount($this->report_def['order_by']); $i++) {
                     if ($this->report_def['order_by'][$i]['table_key'] != 'self') {
                         $this->report_def['order_by'][$i]['table_key'] = $upgrade_lookup[$this->report_def['order_by'][$i]['table_key']];
                     }
@@ -451,14 +446,14 @@ class Report
             }
 
             if (empty($this->report_def['filters_def']) || !isset($this->report_def['filters_def']['Filter_1'])) {
-                $filters = array();
-                $filters['Filter_1'] = array();
+                $filters = [];
+                $filters['Filter_1'] = [];
                 if (isset($this->report_def['filters_combiner'])) {
                     $filters['Filter_1']['operator'] = $this->report_def['filters_combiner'];
                 } else {
                     $filters['Filter_1']['operator'] = 'AND';
                 }
-                for ($i = 0; $i < (is_countable($this->report_def['filters_def']) ? count($this->report_def['filters_def']) : 0); $i++) {
+                for ($i = 0; $i < safeCount($this->report_def['filters_def']); $i++) {
                     if ($this->report_def['filters_def'][$i]['table_key'] != 'self') {
                         $this->report_def['filters_def'][$i]['table_key'] = $upgrade_lookup[$this->report_def['filters_def'][$i]['table_key']];
                     }
@@ -469,19 +464,19 @@ class Report
 
             // Re-encode the report definition
             $this->report_def_str = $json->encode($this->report_def);
-
         }
 
         // Still need to update older formats that only have self in the full_table_list
         if (!isset($this->report_def['filters_def']['Filter_1'])) {
-            $filters = array();
-            $filters['Filter_1'] = array();
-            if (isset($this->report_def['filters_combiner']))
+            $filters = [];
+            $filters['Filter_1'] = [];
+            if (isset($this->report_def['filters_combiner'])) {
                 $filters['Filter_1']['operator'] = $this->report_def['filters_combiner'];
-            else
+            } else {
                 $filters['Filter_1']['operator'] = 'AND';
+            }
 
-            for ($i = 0; $i < (is_countable($this->report_def['filters_def']) ? count($this->report_def['filters_def']) : 0); $i++) {
+            for ($i = 0; $i < safeCount($this->report_def['filters_def']); $i++) {
                 array_push($filters['Filter_1'], $this->report_def['filters_def'][$i]);
             }
             $this->report_def['filters_def'] = $filters;
@@ -489,14 +484,13 @@ class Report
             $this->report_def_str = $json->encode($this->report_def);
         }
 
-        if (isset($this->report_def['numerical_chart_column']) && $this->report_def['numerical_chart_column'] == 'count')
+        if (isset($this->report_def['numerical_chart_column']) && $this->report_def['numerical_chart_column'] == 'count') {
             $this->report_def['numerical_chart_column'] = 'self:count';
+        }
         // END: Dynamically convert previous versions to 5.1 version of content string.
 
         // Load all the necessary beans, and populate the full_bean_list array
-        foreach ($this->full_table_list as $table_key => $table_data)
-        {
-
+        foreach ($this->full_table_list as $table_key => $table_data) {
             // Set this to a reasonable default
             $beanLabel = 'Accounts';
             if (isset($table_data['module'])) {
@@ -519,7 +513,7 @@ class Report
                 // Alias that to $this->focus, because it is very commonly used
                 $this->focus = $this->full_bean_list[$table_key];
             }
-            $this->alias_lookup[$table_key] = 'l' . count($this->alias_lookup);
+            $this->alias_lookup[$table_key] = 'l' . safeCount($this->alias_lookup);
         }
 
         $this->_load_all_fields();
@@ -533,8 +527,6 @@ class Report
         }
         // Re-encode the report definition
         $this->report_def_str = $json->encode($this->report_def);
-
-
     }
 
     /**
@@ -543,7 +535,7 @@ class Report
      */
     public function fixReportDefs()
     {
-        $validTableKeys = array();
+        $validTableKeys = [];
         // Collecting table_keys from display_columns
         foreach ($this->report_def['display_columns'] as $column) {
             if (in_array($column['table_key'], $validTableKeys) == false) {
@@ -563,7 +555,7 @@ class Report
             }
         }
         // Collecting table_keys from filter_defs
-        $filters_def = array();
+        $filters_def = [];
         $recursiveArrayIterator = new RecursiveArrayIterator($this->report_def['filters_def']);
         $recursiveIteratorIterator = new RecursiveIteratorIterator($recursiveArrayIterator, RecursiveIteratorIterator::SELF_FIRST);
         foreach ($recursiveIteratorIterator as $k => $v) {
@@ -578,9 +570,9 @@ class Report
         }
 
         // Filling dependencies from validTableKeys
-        $requiredTableKeys = array(
-            'self' => $this->module
-        );
+        $requiredTableKeys = [
+            'self' => $this->module,
+        ];
         foreach ($this->report_def['full_table_list'] as $k => $v) {
             if (in_array($k, $validTableKeys) == true) {
                 $offset = -1;
@@ -608,35 +600,34 @@ class Report
      */
     protected function cleanLabels()
     {
-        foreach(array('summary_columns', 'display_columns', 'group_defs', 'full_table_list') as $def) {
-            if (!empty ($this->report_def[$def])) {
+        foreach (['summary_columns', 'display_columns', 'group_defs', 'full_table_list'] as $def) {
+            if (!empty($this->report_def[$def])) {
                 foreach ($this->report_def[$def] as &$column) {
-                    if(!empty($column['label'])) {
+                    if (!empty($column['label'])) {
                         // clean up the label
                         $column['label'] = strip_tags($column['label']);
                     }
                 }
             }
         }
-        if(!empty($this->report_def['report_name'])) {
+        if (!empty($this->report_def['report_name'])) {
             $this->report_def['report_name'] = strip_tags($this->report_def['report_name']);
         }
-        if(!empty($this->report_def['chart_description'])) {
+        if (!empty($this->report_def['chart_description'])) {
             $this->report_def['chart_description'] = strip_tags($this->report_def['chart_description']);
         }
     }
 
     // gets rid of fields that user shouldn't see
     // assumes all_fields only contains viewable fields
-    function clean_report_def()
+    public function clean_report_def()
     {
-        $fields = array('display_columns', 'summary_columns', 'order_by', 'filters_def', 'group_defs');
-        foreach ($fields as $field)
-        {
-            if (is_countable($this->report_def[$field]) ? count($this->report_def[$field]) : 0) {
+        $fields = ['display_columns', 'summary_columns', 'order_by', 'filters_def', 'group_defs'];
+        foreach ($fields as $field) {
+            if (safeCount($this->report_def[$field])) {
                 continue;
             }
-            for ($i = 0; $i < (is_countable($this->report_def[$field]) ? count($this->report_def[$field]) : 0); $i++) {
+            for ($i = 0; $i < safeCount($this->report_def[$field]); $i++) {
                 $def = $this->report_def[$field][$i];
                 if (empty($def['table_key']) && empty($def['name'])) {
                     continue;
@@ -656,43 +647,39 @@ class Report
     }
 
 // make sure this user can report on this module
-
-    function _check_user_permissions()
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    public function _check_user_permissions()
     {
         global $current_user;
         if (isset($current_user)) {
             $tabs = new TabController();
             $tabArray = $tabs->get_user_tabs($current_user);
 
-            $moduleMap = array();
+            $moduleMap = [];
 
             foreach ($tabArray as $user_module) {
-
                 $moduleMap[$user_module] = 1;
-
             }
 
-            if (isset($moduleMap["Calendar"]) || isset($moduleMap["Activities"])) {
+            if (isset($moduleMap['Calendar']) || isset($moduleMap['Activities'])) {
                 //also include reports that are in the following modules
                 $moduleMap['Tasks'] = 1;
                 $moduleMap['Calls'] = 1;
                 $moduleMap['Meetings'] = 1;
                 $moduleMap['Notes'] = 1;
             }
-            if (isset($moduleMap["Project"])) {
+            if (isset($moduleMap['Project'])) {
                 $moduleMap['ProjectTask'] = 1;
             }
             if (empty($moduleMap[$this->module_dir])) {
-                die ("you do not have access to report this module");
+                die('you do not have access to report this module');
             }
-
-        } else
-        {
-            die ("you shouldn't be here");
+        } else {
+            die("you shouldn't be here");
         }
     }
 
-    function isVisibleModule($related_module)
+    public function isVisibleModule($related_module)
     {
         global $report_modules;
         if (empty($report_modules[$related_module])) {
@@ -701,37 +688,37 @@ class Report
         return true;
     }
 
-    function _load_all_fields()
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    public function _load_all_fields()
     {
-        $tmp = array();
+        $tmp = [];
         foreach ($this->full_table_list as $table_key => $table_data) {
-            if(!isset($table_data['module'])) continue;
+            if (!isset($table_data['module'])) {
+                continue;
+            }
 
-            if(!isset($tmp[$table_data['module']]))
-            {
-                $tmp[$table_data['module']] = array();
+            if (!isset($tmp[$table_data['module']])) {
+                $tmp[$table_data['module']] = [];
             }
 
             if (!isset($this->full_bean_list[$table_key])) {
                 continue;
             }
 
-            foreach ($this->full_bean_list[$table_key]->field_defs as $field_def)
-            {
+            foreach ($this->full_bean_list[$table_key]->field_defs as $field_def) {
                 $tmp[$table_data['module']][$field_def['name']] = 0;
                 $field_def['module'] = $this->full_table_list[$table_key]['bean_label'];
                 $field_def['real_table'] = $this->full_bean_list[$table_key]->table_name;
                 if (!empty($field_def['source']) && ($field_def['source'] == 'custom_fields' || ($field_def['source'] == 'non-db'
-                                                                                                 && !empty($field_def['ext2']) && !empty($field_def['id']))) && !empty($field_def['real_table'])
+                            && !empty($field_def['ext2']) && !empty($field_def['id']))) && !empty($field_def['real_table'])
                 ) {
                     $field_def['real_table'] .= '_cstm';
                 }
                 if ($field_def['type'] == 'relate' && !empty($field_def['ext2'])) {
                     $joinFocus = BeanFactory::newBean($field_def['ext2']);
                     $field_def['secondary_table'] = $joinFocus->table_name;
-                    if(isset($table_data['link_def']) && isset($table_data['link_def']['module']) && isset($table_data['module'])
-                        && $table_data['link_def']['module'] == $table_data['module'])
-                    {
+                    if (isset($table_data['link_def']) && isset($table_data['link_def']['module']) && isset($table_data['module'])
+                        && $table_data['link_def']['module'] == $table_data['module']) {
                         $tmp[$table_data['module']][$field_def['name']]++;
                     }
                 }
@@ -739,23 +726,23 @@ class Report
                 $this->all_fields[$table_key . ':' . $field_def['name']] = $field_def;
             }
         }
-	unset($tmp);
+        unset($tmp);
     }
 
-
-    function _load_currency()
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    public function _load_currency()
     {
         $this->currency_obj = BeanFactory::newBean('Currencies')->getUserCurrency();
         $this->currency_symbol = $this->currency_obj->symbol;
     }
 
-    function clear_results()
+    public function clear_results()
     {
         $this->from = null;
         $this->where = null;
         $this->order_by = null;
         $this->group_by = null;
-        $this->select_fields = array();
+        $this->select_fields = [];
         $this->query = null;
         $this->result = null;
         $this->summary_result = null;
@@ -768,9 +755,11 @@ class Report
         $this->chartQuery = false;
     }
 
-    function run_summary_combo_query($run_main_query = true)
+    public function run_summary_combo_query($run_main_query = true)
     {
-        if ($run_main_query) $this->run_query();
+        if ($run_main_query) {
+            $this->run_query();
+        }
 
         $this->run_summary_query();
         if ($this->has_summary_columns()) {
@@ -778,7 +767,7 @@ class Report
         }
     }
 
-    function run_summary_child_query()
+    public function run_summary_child_query()
     {
         $this->clear_group_by();
         $this->create_order_by();
@@ -795,14 +784,14 @@ class Report
 
         $query = $this->query;
         if (!empty($this->group_order_by)) {
-            $queries = explode("ORDER BY", $query);
+            $queries = explode('ORDER BY', $query);
             $query = $queries[0] . " AND  $this->child_filter= '$this->child_filter_by'";
         }
         $query_name = $this->child_filter;
         $this->$query_name = $query;
         $this->create_order_by();
         if (!empty($this->order_by_arr)) {
-            $this->$query_name .= " ORDER BY " . implode(',', $this->order_by_arr);
+            $this->$query_name .= ' ORDER BY ' . implode(',', $this->order_by_arr);
         }
         $this->execute_query($query_name, 'child_result', '', '', '');
 
@@ -810,28 +799,28 @@ class Report
     }
 
 
-    function create_summary_select()
+    public function create_summary_select()
     {
         $this->create_select('summary_columns', 'summary_select_fields');
     }
 
-    function create_total_select()
+    public function create_total_select()
     {
         $this->create_select('summary_columns', 'total_select_fields');
     }
 
-    function create_total_query()
+    public function create_total_query()
     {
         $this->create_query('total_query', 'total_select_fields');
     }
 
-    function create_summary_query()
+    public function create_summary_query()
     {
         $this->create_query('summary_query', 'summary_select_fields');
     }
 
 
-    function run_summary_query()
+    public function run_summary_query()
     {
         $this->create_group_by();
         $this->create_order_by();
@@ -840,10 +829,9 @@ class Report
         $this->create_from('summary_columns');
         $this->create_summary_query();
         $this->execute_summary_query();
-
     }
 
-    function run_total_query()
+    public function run_total_query()
     {
         $this->create_order_by();
         $this->create_total_select();
@@ -853,7 +841,7 @@ class Report
         $this->execute_total_query();
     }
 
-    function run_query($do_group_by = false)
+    public function run_query($do_group_by = false)
     {
         $this->clear_group_by();
         $this->create_order_by();
@@ -872,64 +860,92 @@ class Report
         $this->execute_query('query', 'result', 'row_count', 'row_start', 'row_end', $limit);
     }
 
-    function execute_count_query($query_name = 'query')
+    /**
+     * Splitting the query so that we can get the FROM
+     */
+    private function splitQueryByDelimiter(string $query, string $delimiter)
     {
+        $keyword = $delimiter;
+        $pattern = '/(?<!\w)' . preg_quote($keyword, '/') . '(?!\w)/';
+        $queries = preg_split($pattern, $query, 2, PREG_SPLIT_DELIM_CAPTURE);
+        $queries = array_filter($queries, 'strlen');
 
+        return $queries;
+    }
+
+    public function execute_count_query($query_name = 'query')
+    {
         $query = $this->$query_name;
-        $queries = explode('FROM', $query, 2);
-        if (count($queries) == 1) {
-            $queries = explode('from', $query, 2);
+        $queries = $this->splitQueryByDelimiter($query, 'FROM');
+
+        if (safeCount($queries) == 1) {
+            $queries = $this->splitQueryByDelimiter($query, 'from');
         }
-        if (count($queries) == 2) {
+        if (safeCount($queries) == 2) {
             $queries = explode('ORDER BY', $queries[1]);
-            $result = $this->db->query("SELECT count(*) as total_count FROM " . $queries[0]);
+            $result = $this->db->query('SELECT count(*) as total_count FROM ' . $queries[0]);
 
             if ($row = $this->db->fetchByAssoc($result)) {
                 return $row['total_count'];
             }
-
         }
         return 0;
     }
 
-    function execute_total_query()
+    public function execute_total_query()
     {
-        $this->execute_query('total_query',
-                             'total_result',
-                             '',
-                             '',
-                             '');
+        $this->execute_query(
+            'total_query',
+            'total_result',
+            '',
+            '',
+            ''
+        );
     }
 
 
-    function execute_summary_query()
+    public function execute_summary_query()
     {
-        $this->execute_query('summary_query',
-                             'summary_result',
-                             'summary_row_count',
-                             'summary_row_start',
-                             'summary_row_end');
+        $this->execute_query(
+            'summary_query',
+            'summary_result',
+            'summary_row_count',
+            'summary_row_start',
+            'summary_row_end'
+        );
     }
 
-    function execute_query($query_name = 'query', $result_name = 'result', $row_count_name = 'row_count',
-        $row_start_name = 'row_start', $row_end_name = 'row_end', $limit = false)
-    {
+    public function execute_query(
+        $query_name = 'query',
+        $result_name = 'result',
+        $row_count_name = 'row_count',
+        $row_start_name = 'row_start',
+        $row_end_name = 'row_end',
+        $limit = false
+    ) {
+
+
         // FIXME: needs DB-independent code here
         if (empty($this->$query_name)) {
             $this->$result_name = '';
         } elseif ($limit) {
-            $this->$result_name = $this->db->limitQuery($this->$query_name, $this->report_offset, $this->report_max, true,
-                                                        "Error executing query ");
+            $this->$result_name = $this->db->limitQuery(
+                $this->$query_name,
+                $this->report_offset,
+                $this->report_max,
+                true,
+                'Error executing query '
+            );
         } else {
-            $this->$result_name = $this->db->query($this->$query_name, true, "Error executing query ");
+            $this->$result_name = $this->db->query($this->$query_name, true, 'Error executing query ');
         }
         if (!empty($row_count_name) && empty($this->$row_count_name)) {
-                $this->$row_count_name = $this->report_offset;
-                $this->$row_end_name = $this->report_max;
+            $this->$row_count_name = $this->report_offset;
+            $this->$row_end_name = $this->report_max;
 
-                if ($limit && $this->total_count < $this->$row_end_name + $this->$row_count_name) {
-                    $this->$row_end_name = $this->total_count - $this->$row_count_name;
-                }
+            if ($limit && $this->total_count < $this->$row_end_name + $this->$row_count_name) {
+                $this->$row_end_name = $this->total_count - $this->$row_count_name;
+            }
             if ($this->$row_count_name > 0) {
                 $this->$row_start_name = 1;
             }
@@ -937,7 +953,7 @@ class Report
     }
 
 
-    function getTableFromField(&$layout_def)
+    public function getTableFromField(&$layout_def)
     {
 
         $field = $this->getFieldDefFromLayoutDef($layout_def);
@@ -969,23 +985,19 @@ class Report
      *
      * @return bool
      */
-    function is_definition_valid()
+    public function is_definition_valid()
     {
-        $column_defs = array(
+        $column_defs = [
             'display_columns',
             'summary_columns',
-        );
+        ];
 
-        $this->invalid_fields = array();
+        $this->invalid_fields = [];
 
-        foreach ($column_defs as $def)
-        {
-            if (isset($this->report_def[$def]) && is_array($this->report_def[$def]))
-            {
-                foreach ($this->report_def[$def] as $layout_def)
-                {
-                    if (!$this->is_layout_def_valid($layout_def))
-                    {
+        foreach ($column_defs as $def) {
+            if (isset($this->report_def[$def]) && is_array($this->report_def[$def])) {
+                foreach ($this->report_def[$def] as $layout_def) {
+                    if (!$this->is_layout_def_valid($layout_def)) {
                         $this->invalid_fields[] = $layout_def['name'];
                     }
                 }
@@ -996,7 +1008,7 @@ class Report
 
         $this->invalid_fields = array_unique(array_merge($this->invalid_fields, $this->invalid_links));
 
-        return 0 == count($this->invalid_fields);
+        return 0 == safeCount($this->invalid_fields);
     }
 
     /**
@@ -1030,7 +1042,7 @@ class Report
      */
     public function getInvalidTableDefs()
     {
-        $ret = array();
+        $ret = [];
         if (!empty($this->report_def['full_table_list'])) {
             foreach ($this->report_def['full_table_list'] as $k => $v) {
                 if (!empty($v['link_def']['name'])) {
@@ -1055,11 +1067,11 @@ class Report
     {
         global $current_language;
         if (!$this->is_definition_valid()) {
-            $mod_strings = return_module_language($current_language, "Reports");
+            $mod_strings = return_module_language($current_language, 'Reports');
             $this->handleException(
                 '%s <b>%s</b> %s',
                 $mod_strings['LBL_DELETED_FIELD_IN_REPORT1'],
-                implode(",", array_merge($this->invalid_links, $this->invalid_fields)),
+                implode(',', array_merge($this->invalid_links, $this->invalid_fields)),
                 $mod_strings['LBL_DELETED_FIELD_IN_REPORT2']
             );
         }
@@ -1071,20 +1083,17 @@ class Report
      * @param array $layout_def
      * @return bool
      */
-    function is_layout_def_valid($layout_def)
+    public function is_layout_def_valid($layout_def)
     {
         $layout_def['table_alias'] = $this->getTableFromField($layout_def);
         $full_key = $this->_get_full_key($layout_def);
 
-        if (!empty($this->all_fields[$full_key]))
-        {
+        if (!empty($this->all_fields[$full_key])) {
             return true;
         }
 
-        if (isset($layout_def['group_function']))
-        {
-            switch ($layout_def['group_function'])
-            {
+        if (isset($layout_def['group_function'])) {
+            switch ($layout_def['group_function']) {
                 case 'count':           // fall through
                 case 'weighted_sum':    // fall through
                 case 'weighted_amount':
@@ -1100,13 +1109,13 @@ class Report
      *
      * @return array
      */
-    function get_invalid_fields()
+    public function get_invalid_fields()
     {
         return $this->invalid_fields;
     }
 
     // used mainly to register the join if this column needs it
-    function register_field_for_query(&$layout_def)
+    public function register_field_for_query(&$layout_def)
     {
         if (!$this->is_layout_def_valid($layout_def)) {
             global $current_language;
@@ -1123,16 +1132,15 @@ class Report
         $field_def = $this->getFieldDefFromLayoutDef($layout_def);
 
         if (!empty($field_def['source']) && ($field_def['source'] == 'custom_fields' || ($field_def['source'] == 'non-db'
-                                                                                         && !empty($field_def['ext2']) && !empty($field_def['id']))) && !empty($field_def['real_table'])
+                    && !empty($field_def['ext2']) && !empty($field_def['id']))) && !empty($field_def['real_table'])
         ) {
             $layout_def['table_alias'] .= '_cstm';
-            $params = array('join_table_alias' => $layout_def['table_alias'], 'base_table' => $this->focus->table_name, 'real_table' => $field_def['real_table'],);
+            $params = ['join_table_alias' => $layout_def['table_alias'], 'base_table' => $this->focus->table_name, 'real_table' => $field_def['real_table'],];
 
             if ($layout_def['table_key'] != 'self') {
                 $params['base_table'] = $this->getRelatedAliasName($layout_def['table_key']);
             }
             $this->selected_loaded_custom_links[$layout_def['table_alias']] = $params;
-
         }
         $layout_def['column_key'] = $this->_get_full_key($layout_def);
         if (!empty($field_def['ext2']) && !empty($field_def['id_name'])) {
@@ -1141,26 +1149,23 @@ class Report
             $kk = $field_def['secondary_table'] . '_' . $field_def['rep_rel_name'];
             if (!isset($this->selected_loaded_custom_links[$kk])) {
                 $this->jtcount++;
-                $params = array(
+                $params = [
                     'join_table_alias' => $field_def['secondary_table'] . $this->jtcount,
                     'base_table' => $field_def['secondary_table'],
-                    'join_id' => $layout_def['table_alias'] . '.' . $field_def['id_name']);
+                    'join_id' => $layout_def['table_alias'] . '.' . $field_def['id_name']];
                 $this->selected_loaded_custom_links[$kk] = $params;
             }
         }
 
-        if (!empty($layout_def['name']))
-        {
-	        if ($layout_def['name'] == 'weighted_amount' || $layout_def['name'] == 'weighted_sum')
-	        {
-	            $field_def['type'] = 'currency';
-	        }
+        if (!empty($layout_def['name'])) {
+            if ($layout_def['name'] == 'weighted_amount' || $layout_def['name'] == 'weighted_sum') {
+                $field_def['type'] = 'currency';
+            }
 
-	        // In case of DOCUMENTS table must set 'document_name' field type of to 'name' manually, because _load_all_fields() function sets field type to 'name' only if the field name is 'name' also
-	        if (strtolower($layout_def['name']) == 'document_name')
-	        {
-	            $field_def['type'] = 'name';
-	        }
+            // In case of DOCUMENTS table must set 'document_name' field type of to 'name' manually, because _load_all_fields() function sets field type to 'name' only if the field name is 'name' also
+            if (strtolower($layout_def['name']) == 'document_name') {
+                $field_def['type'] = 'name';
+            }
         }
 
         $layout_def['type'] = $field_def['type'] ?? '';
@@ -1174,16 +1179,16 @@ class Report
         }
     }
 
-    function parseUIFiltersDef($filters_def_str, $panels_def_str)
+    public function parseUIFiltersDef($filters_def_str, $panels_def_str)
     {
-        $filters = array();
-        $panelParents = array();
+        $filters = [];
+        $panelParents = [];
         foreach ($panels_def_str as $index => $key) {
             $panelParents[$key['id']] = $key['parentId'];
             foreach ($filters_def_str as $filter_key => $filter_def) {
                 if ($filter_def['panelId'] == $key['id']) {
-                    if (!isset ($filters[$filter_def['panelId']])) {
-                        $filters[$filter_def['panelId']] = array();
+                    if (!isset($filters[$filter_def['panelId']])) {
+                        $filters[$filter_def['panelId']] = [];
                         $filters[$filter_def['panelId']]['operator'] = $key['operator'];
                     }
                     // Remove the panelId from the filter definition as it's no longer needed.
@@ -1192,7 +1197,7 @@ class Report
                 }
             }
             if (!isset($filters[$key['id']])) {
-                $filters[$key['id']] = array();
+                $filters[$key['id']] = [];
                 $filters[$key['id']]['operator'] = $key['operator'];
             }
         }
@@ -1214,22 +1219,21 @@ class Report
         $this->report_def['filters_def'] = $filters;
     }
 
-    function filtersIterate($filters, &$where_clause)
+    public function filtersIterate($filters, &$where_clause)
     {
         $where_clause .= '(';
         $operator = $this->getFilterOperator($filters['operator']);
         $isSubCondition = 0;
-        if ((is_countable($filters) ? count($filters) : 0) < 2) { // We only have an operator and an empty Filter Box.
-            $where_clause .= "1=1";
+        if (safeCount($filters) < 2) { // We only have an operator and an empty Filter Box.
+            $where_clause .= '1=1';
         }
-        for ($i = 0; $i < (is_countable($filters) ? count($filters) : 0) - 1; $i++) {
+        for ($i = 0; $i < safeCount($filters) - 1; $i++) {
             $current_filter = $filters[$i];
             if (isset($current_filter['operator'])) {
-                $where_clause .= "(";
+                $where_clause .= '(';
                 $isSubCondition = 1;
                 $this->filtersIterate($current_filter, $where_clause);
-            }
-            else {
+            } else {
                 if (!empty($current_filter['type']) && ($current_filter['type'] == 'datetimecombo' || $current_filter['type'] == 'datetime')) {
                     if (!empty($current_filter['input_name0'])) {
                         $current_filter['input_name0'] = $GLOBALS['timedate']->asDbType(new DateTime($current_filter['input_name0']), $current_filter['type']);
@@ -1239,18 +1243,17 @@ class Report
                     }
                 }
                 $this->register_field_for_query($current_filter);
-                $select_piece = "(" . $this->layout_manager->widgetQuery($current_filter) . ")";
+                $select_piece = '(' . $this->layout_manager->widgetQuery($current_filter) . ')';
                 $where_clause .= $select_piece;
             }
             if ($isSubCondition == 1) {
-                $where_clause .= ")";
+                $where_clause .= ')';
                 // reset the subCondition
                 $isSubCondition = 0;
             }
-            if ($i != (is_countable($filters) ? count($filters) : 0) - 2) {
+            if ($i != safeCount($filters) - 2) {
                 $where_clause .= " $operator ";
             }
-
         }
         $where_clause .= ')';
     }
@@ -1295,25 +1298,25 @@ class Report
         return $where;
     }
 
-    function create_where()
+    public function create_where()
     {
         $this->layout_manager->setAttribute('context', 'Filter');
         $filters = $this->report_def['filters_def'];
-        $where_clause = "";
-        if (isset($filters['Filter_1']))
+        $where_clause = '';
+        if (isset($filters['Filter_1'])) {
             $this->filtersIterate($filters['Filter_1'], $where_clause);
+        }
         $this->where = $where_clause;
     }
 
     private function filtersIterateForUI($filters, &$verdef_arr_for_filters)
     {
         $operator = $filters['operator'];
-        for ($i = 0; $i < (is_countable($filters) ? count($filters) : 0) - 1; $i++) {
+        for ($i = 0; $i < safeCount($filters) - 1; $i++) {
             $current_filter = $filters[$i];
             if (isset($current_filter['operator'])) {
                 $this->filtersIterateForUI($current_filter, $verdef_arr_for_filters);
-            }
-            else {
+            } else {
                 $fieldDef = $this->getFieldDefFromLayoutDef($current_filter);
                 $verdef_arr_for_filters[$fieldDef['name']] = $fieldDef;
             }
@@ -1332,10 +1335,10 @@ class Report
         return $options;
     }
 
-    function createFilterStringForUI()
+    public function createFilterStringForUI()
     {
         global $app_list_strings;
-        $verdef_arr_for_filters = array();
+        $verdef_arr_for_filters = [];
         $filters = $this->report_def['filters_def'];
         $originalWhereClause = $this->where;
         if (isset($filters['Filter_1'])) {
@@ -1344,7 +1347,7 @@ class Report
         $where_clause = $this->where;
         global $reportAlias;
         if (empty($reportAlias) || empty($where_clause)) {
-            return "";
+            return '';
         }
         // reportalias is a table.cllumn key to filter object
         foreach ($reportAlias as $key => $value) {
@@ -1352,14 +1355,14 @@ class Report
             $tableKey = $value['table_key'];
             $tableArray = $this->report_def['full_table_list'][$tableKey];
             //This is used for old data. the 'label' in old data is not translated at all.
-            $reportDisplayTableName = ($tableKey == "self")
-                    ? ($app_list_strings['moduleList'][$tableArray['label']] ?? $tableArray['label'])
-                    : $tableArray['name'];
-            $columnKeyArray = explode(":", $columnKey);
+            $reportDisplayTableName = ($tableKey == 'self')
+                ? ($app_list_strings['moduleList'][$tableArray['label']] ?? $tableArray['label'])
+                : $tableArray['name'];
+            $columnKeyArray = explode(':', $columnKey);
             if (isset($verdef_arr_for_filters[$columnKeyArray[sizeof($columnKeyArray) - 1]])) {
                 $varDefLabel = $verdef_arr_for_filters[$columnKeyArray[sizeof($columnKeyArray) - 1]]['vname'];
                 $varDefLabel = translate($varDefLabel, $verdef_arr_for_filters[$columnKeyArray[sizeof($columnKeyArray) - 1]]['module']);
-                $finalDisplayName = $reportDisplayTableName . " > " . $varDefLabel;
+                $finalDisplayName = $reportDisplayTableName . ' > ' . $varDefLabel;
                 // Wrap the search and replace terms in spaces to ensure exact match
                 // and replace
                 $where_clause = str_replace(" $key ", " $finalDisplayName ", $where_clause);
@@ -1368,7 +1371,7 @@ class Report
         return $where_clause;
     } // fn
 
-    public function getFieldDefFromLayoutDef(array &$layout_def) : array
+    public function getFieldDefFromLayoutDef(array &$layout_def): array
     {
         $field = [];
         if (!empty($this->all_fields[$this->_get_full_key($layout_def)])) {
@@ -1377,26 +1380,28 @@ class Report
         return $field;
     }
 
-    function _get_full_key(&$layout_def)
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    public function _get_full_key(&$layout_def)
     {
         if (empty($layout_def['table_key'])) {
             $table_key = 'self';
         } else {
             $table_key = $layout_def['table_key'];
         }
-        if (empty($layout_def['name']))
+        if (empty($layout_def['name'])) {
             return $table_key;
+        }
 
-        return $table_key . ":" . $layout_def['name'];
+        return $table_key . ':' . $layout_def['name'];
     }
 
-    function parseLinkedField($fieldname)
+    public function parseLinkedField($fieldname)
     {
         preg_match('/^(\w+):/', $fieldname, $match);
         return $match[1];
     }
 
-    function getRelatedAliasName($linked_field)
+    public function getRelatedAliasName($linked_field)
     {
         if (!empty($this->alias_lookup[$linked_field])) {
             return $this->alias_lookup[$linked_field];
@@ -1404,12 +1409,12 @@ class Report
         return $linked_field;
     }
 
-    function getRelatedLinkAliasName($linked_field)
+    public function getRelatedLinkAliasName($linked_field)
     {
         return $this->alias_lookup[$linked_field] . '_1';
     }
 
-    function has_summary_columns()
+    public function has_summary_columns()
     {
         $key = 'summary_columns';
 
@@ -1427,7 +1432,7 @@ class Report
         return $got_summary;
     }
 
-    function is_group_column(&$display_column)
+    public function is_group_column(&$display_column)
     {
         $qualifier = '';
 
@@ -1436,21 +1441,17 @@ class Report
         }
 
 
-        for ($i = 0; $i < (is_countable($this->report_def['group_defs']) ? count(
-            $this->report_def['group_defs']
-        ) : 0); $i++) {
+        for ($i = 0; $i < safeCount($this->report_def['group_defs']); $i++) {
             $def_qualifier = '';
             if (!empty($this->report_def['group_defs'][$i]['qualifier'])) {
                 $def_qualifier = $this->report_def['group_defs'][$i]['qualifier'];
             }
 
-            if ($this->report_def['group_defs'][$i]['table_key'] . "_" . $this->report_def['group_defs'][$i]['name'] . "_" . $def_qualifier ==
-                $display_column['table_key'] . "_" . $display_column['name'] . "_" . $qualifier
+            if ($this->report_def['group_defs'][$i]['table_key'] . '_' . $this->report_def['group_defs'][$i]['name'] . '_' . $def_qualifier ==
+                $display_column['table_key'] . '_' . $display_column['name'] . '_' . $qualifier
             ) {
                 return 1;
-
             }
-
         }
         return 0;
     }
@@ -1462,17 +1463,17 @@ class Report
      */
     public function createNameList($table)
     {
-        $defs_list = array();
-        if(empty($this->full_bean_list[$table])) {
-            return array();
+        $defs_list = [];
+        if (empty($this->full_bean_list[$table])) {
+            return [];
         }
         $bean = $this->full_bean_list[$table];
-        if(empty($bean->name_format_map)) {
-            return array();
+        if (empty($bean->name_format_map)) {
+            return [];
         }
-        foreach(array_unique(array_values($bean->name_format_map)) as $column) {
-            $def = array();
-            if(empty($bean->field_defs[$column])) {
+        foreach (array_unique(array_values($bean->name_format_map)) as $column) {
+            $def = [];
+            if (empty($bean->field_defs[$column])) {
                 // we don't know this field, skip it
                 continue;
             }
@@ -1483,7 +1484,7 @@ class Report
             $def['column_key'] = $def['table_key'] . ':' . $def['name'];
             $def['table_alias'] = $this->getTableFromField($def);
             if (!empty($field_def['source']) && ($field_def['source'] == 'custom_fields' || ($field_def['source'] == 'non-db'
-                    && !empty($field_def['ext2']) && !empty($field_def['id'])))
+                        && !empty($field_def['ext2']) && !empty($field_def['id'])))
             ) {
                 $def['table_alias'] .= '_cstm';
             }
@@ -1492,33 +1493,29 @@ class Report
         return $defs_list;
     }
 
-    function create_select($key = 'display_columns', $field_list_name = 'select_fields')
+    public function create_select($key = 'display_columns', $field_list_name = 'select_fields')
     {
         $this->layout_manager->setAttribute('context', 'Select');
         $got_count = 0;
-        $got_join = array();
+        $got_join = [];
         $tp_count = 1;
         if (is_array($this->report_def) && isset($this->report_def[$key]) && safeIsIterable($this->report_def[$key])) {
             foreach ($this->report_def[$key] as $index => $display_column) {
                 if ($display_column['name'] == 'count') {
-                if ('self' != $display_column['table_key'])
-                {
+                    if ('self' != $display_column['table_key']) {
                         // use table name itself, not it's alias
                         $table_name = $this->alias_lookup[$display_column['table_key']];
-                }
-                else
-                {
-                    // use table alias
-                        if (isset($this->full_table_list['self']['params']['join_table_alias'])) {
-                        $table_name = $this->full_table_list['self']['params']['join_table_alias'];
                     } else {
-                        $table_name = $this->full_bean_list['self']->table_name;
+                        // use table alias
+                        if (isset($this->full_table_list['self']['params']['join_table_alias'])) {
+                            $table_name = $this->full_table_list['self']['params']['join_table_alias'];
+                        } else {
+                            $table_name = $this->full_bean_list['self']->table_name;
+                        }
                     }
-                }
                     $select_piece = "COUNT($table_name.id) {$table_name}__allcount, COUNT(DISTINCT  $table_name.id) {$table_name}__count ";
                     $got_count = 1;
-            }
-            else {
+                } else {
                     if ($field_list_name == 'total_select_fields' && empty($display_column['group_function'])) {
                         continue;
                     }
@@ -1529,21 +1526,20 @@ class Report
                         $this->handleException('table_key doesnt exist for %s', $display_column['name']);
                     }
 
-                if($display_column['type'] == 'fullname') {
+                    if ($display_column['type'] == 'fullname') {
                         $name = "{$key}_{$display_column['name']}";
                         $this->report_def[$name] = $this->createNameList($display_column['table_key']);
                         $this->create_select($name, $field_list_name);
                         continue;
-                }
+                    }
 
                     if (empty($got_join[$display_column['table_key']])) {
-                    $id_column = array();
+                        $id_column = [];
                         $got_join[$display_column['table_key']] = 1;
 
                         if (!empty($display_column['column_key']) && !empty($this->all_fields[$display_column['column_key']]) && !empty($this->all_fields[$display_column['column_key']]['custom_type'])) {
                             $do_id = 0;
-                    }
-                    else {
+                        } else {
                             $do_id = 1;
                         }
                         // Bug 45019: don't add ID column if this column is the ID column
@@ -1567,15 +1563,15 @@ class Report
                     // specify "currency_alias" parameter for fields of currency type
                     if (!empty($display_column['column_key']) && !empty($this->all_fields[$display_column['column_key']])
                         && $display_column['type'] == 'currency') {
-                            $field_def = $this->all_fields[$display_column['column_key']];
-                            $hasBaseRate = !empty($this->full_bean_list[$display_column['table_key']]
+                        $field_def = $this->all_fields[$display_column['column_key']];
+                        $hasBaseRate = !empty($this->full_bean_list[$display_column['table_key']]
                             ->field_defs['base_rate']);
                         // When base rate exists in the module, we want to use the base rate from the module
                         // rather than using the conversion rate from currencies table. We don't need to join
                         // currencies table in this case.
-                            if (strpos($field_def['name'], '_usdoll') === false && !$hasBaseRate) {
-                                $display_column['currency_alias'] = $display_column['table_alias'] . '_currencies';
-                            }
+                        if (strpos($field_def['name'], '_usdoll') === false && !$hasBaseRate) {
+                            $display_column['currency_alias'] = $display_column['table_alias'] . '_currencies';
+                        }
                     }
                     if (!empty($display_column['qualifier']) && $display_column['qualifier'] == 'fiscalQuarter') {
                         $display_column['timeperiods_count'] = $tp_count++;
@@ -1630,8 +1626,7 @@ class Report
         // 'register' the joins for the other column defs since we need to join all for summary to work.. else the count and maybe other group functions won't work.
         if ($key == 'display_columns') {
             $key = 'summary_columns';
-        }
-        else {
+        } else {
             $key = 'display_columns';
         }
 
@@ -1640,12 +1635,12 @@ class Report
         }
     } // end create_select
 
-    function clear_group_by()
+    public function clear_group_by()
     {
         $this->group_by = '';
     }
 
-    function create_order_by()
+    public function create_order_by()
     {
         $this->buildOrderBy('order_by', 'order_by_arr');
 
@@ -1698,10 +1693,10 @@ class Report
     }
 
 
-    function select_already_defined($select, $which = 'select_fields')
+    public function select_already_defined($select, $which = 'select_fields')
     {
         if (empty($this->select_already_defined_hash[$which])) {
-            $this->select_already_defined_hash[$which] = array();
+            $this->select_already_defined_hash[$which] = [];
         }
 
         if (empty($this->select_already_defined_hash[$which][$select])) {
@@ -1709,18 +1704,16 @@ class Report
             return false;
         }
         return true;
-
     }
 
-    function create_group_by($register_group_by = true)
+    public function create_group_by($register_group_by = true)
     {
 
         if (!empty($this->report_def['group_defs']) && is_array($this->report_def['group_defs'])) {
-            $this->group_by_arr = array();
-            $this->group_order_by_arr = array();
+            $this->group_by_arr = [];
+            $this->group_order_by_arr = [];
             $tp_count = 1;
-            foreach ($this->report_def['group_defs'] as $group_column)
-            {
+            foreach ($this->report_def['group_defs'] as $group_column) {
                 $this->layout_manager->setAttribute('context', 'GroupBy');
                 $this->register_field_for_query($group_column);
 
@@ -1771,8 +1764,8 @@ class Report
         global $beanFiles;
         foreach ($this->full_table_list as $linkKey => $def) {
             if ($linkKey != 'self' && isset($def['link_def'])) {
-                $params = array('join_table_alias' => $this->getRelatedAliasName($def['link_def']['table_key']),
-                                'join_table_link_alias' => $this->getRelatedLinkAliasName($def['link_def']['table_key']));
+                $params = ['join_table_alias' => $this->getRelatedAliasName($def['link_def']['table_key']),
+                    'join_table_link_alias' => $this->getRelatedLinkAliasName($def['link_def']['table_key'])];
 
                 $this->full_table_list[$def['link_def']['table_key']]['params'] = $params;
                 // Be sure to load in the parents
@@ -1781,8 +1774,8 @@ class Report
 
                 while ($curr_parent != '' && $curr_parent != 'self' && !isset($this->full_table_list[$curr_parent]['params'])) {
                     // The parent is not loaded.
-                    $params = array('join_table_alias' => $this->getRelatedAliasName($curr_parent),
-                                    'join_table_link_alias' => $this->getRelatedLinkAliasName($curr_parent));
+                    $params = ['join_table_alias' => $this->getRelatedAliasName($curr_parent),
+                        'join_table_link_alias' => $this->getRelatedLinkAliasName($curr_parent)];
                     $this->full_table_list[$curr_parent]['params'] = $params;
                     // Find out if my parent's parent is loaded or not
                     $curr_parent = $this->full_table_list[$curr_parent]['parent'];
@@ -1792,32 +1785,32 @@ class Report
 
         // Setup some data structures so they can be used later
         $this->full_table_list['self']['params']['join_table_alias'] = $this->focus->table_name;
-        $this->full_table_list['self']['params']['join_table_link_alias'] = $this->focus->table_name . "_l";
+        $this->full_table_list['self']['params']['join_table_link_alias'] = $this->focus->table_name . '_l';
 
         $from = "\nFROM " . $this->focus->table_name . "\n";
         $this->from = $this->addVisibilityFrom($this->focus, $from, $this->focus->table_name);
 
         $this->jtcount = 0;
-        foreach ($this->full_table_list as $table_key => $table_def)
-        {
-
+        foreach ($this->full_table_list as $table_key => $table_def) {
             // Increment the join table count
             $this->jtcount++;
 
-            if ($table_key == 'self') continue; // self table, no join required
+            if ($table_key == 'self') {
+                continue; // self table, no join required
+            }
             if (empty($table_def['params'])) { // always join on tables!
-                $table_def['params'] = array(
+                $table_def['params'] = [
                     'join_table_alias' => $this->getRelatedAliasName($table_key),
                     'join_table_link_alias' => $this->getRelatedLinkAliasName($table_key),
-                );
+                ];
             }
             $params = $table_def['params'];
             if (!isset($params['join_table_alias'])) {
-                $params['join_table_alias'] = "jt" . $this->jtcount;
+                $params['join_table_alias'] = 'jt' . $this->jtcount;
             }
 
             if (!isset($params['join_table_link_alias'])) {
-                $params['join_table_link_alias'] = "jtl" . $this->jtcount;
+                $params['join_table_link_alias'] = 'jtl' . $this->jtcount;
             }
             $team_join_type = 'INNER';
             if (isset($table_def['optional']) && $table_def['optional'] == 1) {
@@ -1830,15 +1823,13 @@ class Report
                 $link_name = $table_def['link_def']['name'];
                 $rel_name = $table_def['link_def']['relationship_name'];
                 $linked_fields = $this->full_bean_list[$table_def['parent']]->get_linked_fields();
-                foreach ($linked_fields as $tmp_link_name => $link)
-                {
+                foreach ($linked_fields as $tmp_link_name => $link) {
                     if ($link['name'] == $link_name) {
                         $link_name = $tmp_link_name;
                     }
                     if ($link['relationship'] == $rel_name) {
                         $rel_name = $tmp_link_name;
                     }
-
                 }
                 if ($link_name != '') {
                     $focus = BeanFactory::newBean($table_def['module']);
@@ -1868,14 +1859,13 @@ class Report
 
                         if ($list_action == ACL_ALLOW_NONE || $view_action == ACL_ALLOW_NONE) {
                             if ((isset($_REQUEST['DynamicAction']) && $_REQUEST['DynamicAction'] === 'retrievePage') || (isset($_REQUEST['module']) && $_REQUEST['module'] === 'Home')) {
-                                throw new Exception($mod_strings['LBL_NO_ACCESS'] . "----" . $linkModName);
+                                throw new Exception($mod_strings['LBL_NO_ACCESS'] . '----' . $linkModName);
                             } else {
                                 $this->handleException('%s----%s', $mod_strings['LBL_NO_ACCESS'], $linkModName);
                             }
                         }
                         // End ACL check
-                    }
-                    else {
+                    } else {
                         // Start ACL check
                         global $current_user, $mod_strings;
 
@@ -1889,8 +1879,9 @@ class Report
                         if (!$link->loadedSuccesfully()) {
                             $this->handleException('Unable to load link: %s', $rel_name);
                         }
-                        if ($list_action == ACL_ALLOW_NONE || $view_action == ACL_ALLOW_NONE)
+                        if ($list_action == ACL_ALLOW_NONE || $view_action == ACL_ALLOW_NONE) {
                             $this->handleException('%s----%s', $mod_strings['LBL_NO_ACCESS'], $linkModName);
+                        }
                         // End ACL check
                     }
 
@@ -1899,33 +1890,27 @@ class Report
                         $link->getJoin($params),
                         $params['join_table_alias']
                     );
+                } else {
+                    die('Could not find link name, searching through for: ' . $link_name);
                 }
-                else
-                {
-                    die("Could not find link name, searching through for: " . $link_name);
-                }
-            }
-            else
-            {
-                die("table_def[parent] is not an object! (" . $table_def['parent'] . ")<br>");
+            } else {
+                die('table_def[parent] is not an object! (' . $table_def['parent'] . ')<br>');
             }
         }
-        foreach ($this->selected_loaded_custom_links as $custom_table => $params)
-        {
+        foreach ($this->selected_loaded_custom_links as $custom_table => $params) {
             if (!empty($params['join_id'])) {
-                $this->from .= "LEFT JOIN " . $params['base_table'] . " " . $params['join_table_alias'] . " ON " . $params['join_table_alias'] . ".id = ";
+                $this->from .= 'LEFT JOIN ' . $params['base_table'] . ' ' . $params['join_table_alias'] . ' ON ' . $params['join_table_alias'] . '.id = ';
                 $this->from .= $params['join_id'];
-                $this->from .= ' AND ' . $this->db->convert($params['join_table_alias'] . '.deleted', 'IFNULL', array(0)) . "=0 \n";
-            }
-            else {
+                $this->from .= ' AND ' . $this->db->convert($params['join_table_alias'] . '.deleted', 'IFNULL', [0]) . "=0 \n";
+            } else {
                 $tablename = (empty($params['real_table']) ? $params['base_table'] : $params['real_table']);
-                $this->from .= "LEFT JOIN " . $tablename . " " . $params['join_table_alias'] . " ON " . $params['base_table'] . ".id = ";
+                $this->from .= 'LEFT JOIN ' . $tablename . ' ' . $params['join_table_alias'] . ' ON ' . $params['base_table'] . '.id = ';
                 $this->from .= $params['join_table_alias'] . ".id_c\n";
             }
         }
 
         if ($key && isset($this->currency_join[$key])) {
-            $join = array();
+            $join = [];
             $currency_table = $this->currency_obj->table_name;
             foreach ($this->currency_join[$key] as $currency_alias => $table_alias) {
                 $join[] = 'LEFT JOIN ' . $currency_table . ' ' . $currency_alias
@@ -1940,16 +1925,18 @@ class Report
             foreach ($this->report_def['group_defs'] as $id => $group_field) {
                 if (!empty($group_field['qualifier']) && $group_field['qualifier'] == 'fiscalQuarter') {
                     $fieldDef = $this->getFieldDefFromLayoutDef($group_field);
-                    if ($fieldDef['source'] == 'custom_fields' && ($fieldDef['real_table'] ?? false)) {
+                    $customSource = array_key_exists('source', $fieldDef) && $fieldDef['source'] == 'custom_fields';
+
+                    if ($customSource && ($fieldDef['real_table'] ?? false)) {
                         $table_alias = $fieldDef['real_table'];
                     } else {
                         $table_alias = $this->getTableFromField($group_field);
                     }
 
-                    $field_name = $table_alias . "." . $group_field['name'];
-                    $this->from .= " INNER JOIN timeperiods tp" . $tp_count . " ON (" . $field_name .
-                        " >= tp" . $tp_count . ".start_date AND " . $field_name . " <= tp" . $tp_count . ".end_date" .
-                        " AND tp" . $tp_count . ".type = 'Quarter' AND tp" . $tp_count . ".deleted='0')\n";
+                    $field_name = $table_alias . '.' . $group_field['name'];
+                    $this->from .= ' INNER JOIN timeperiods tp' . $tp_count . ' ON (' . $field_name .
+                        ' >= tp' . $tp_count . '.start_date AND ' . $field_name . ' <= tp' . $tp_count . '.end_date' .
+                        ' AND tp' . $tp_count . ".type = 'Quarter' AND tp" . $tp_count . ".deleted='0')\n";
                     $tp_count++;
                 }
             }
@@ -1967,7 +1954,7 @@ class Report
      * @return string
      * @throws SugarApiException
      */
-    private function applyVisibilityToJoin(SugarBean $bean, string $join, string $tableAlias) : string
+    private function applyVisibilityToJoin(SugarBean $bean, string $join, string $tableAlias): string
     {
         // instead of applying visibility to the query itself, apply it to the target table
         if (!preg_match(
@@ -1998,9 +1985,9 @@ class Report
 
     protected function wrapIfNull($field)
     {
-        $has_space = strrpos($field, " ");
+        $has_space = strrpos($field, ' ');
         // Check if the field has space - i.e. it's "table.field alias"
-        if ($has_space && !stristr("' '", $field)) {
+        if ($has_space && !stristr("' '", (string) $field)) {
             $aggregate_func = strtolower(substr($field, 0, 4));
             if ($aggregate_func == 'max(' || $aggregate_func == 'min(' || $aggregate_func == 'avg(' || $aggregate_func == 'sum(') {
                 return $field;
@@ -2010,7 +1997,7 @@ class Report
             }
             // This is field name as table.field
             $field_name = substr($field, 0, $has_space);
-            $field_data = explode(".", $field_name);
+            $field_data = explode('.', $field_name);
             if (!isset($field_data[1])) {
                 return $field;
             }
@@ -2035,7 +2022,7 @@ class Report
                 return $field;
             }
 
-            if (!in_array($field_type, array('currency','double','float','decimal','int','date','datetime'))) {
+            if (!in_array($field_type, ['currency', 'double', 'float', 'decimal', 'int', 'date', 'datetime'])) {
                 if ($field_type === 'bool') {
                     $default = '0';
                 } else {
@@ -2043,17 +2030,17 @@ class Report
                 }
 
                 // add IFNULL to the field and then re-add alias back
-                return $this->db->convert($field_name, "IFNULL", array($default))
-                    . " " . substr($field, $has_space + 1) . "\n";
+                return $this->db->convert($field_name, 'IFNULL', [$default])
+                    . ' ' . substr($field, $has_space + 1) . "\n";
             }
         }
         return $field;
     }
 
-    function create_query($query_name = 'query', $field_list_name = 'select_fields')
+    public function create_query($query_name = 'query', $field_list_name = 'select_fields')
     {
 
-        $query = "SELECT ";
+        $query = 'SELECT ';
         $field_list_name_array = $this->$field_list_name;
         foreach ($field_list_name_array as $field) {
             $field = trim($field);
@@ -2070,16 +2057,16 @@ class Report
             return;
         }
         $this->$field_list_name = $field_not_null;
-        $query .= implode(",", $this->$field_list_name);
+        $query .= implode(',', $this->$field_list_name);
         $query .= $this->from . "\n";
 
-        $where_auto = " " . $this->focus->table_name . ".deleted=0 \n";
+        $where_auto = ' ' . $this->focus->table_name . ".deleted=0 \n";
 
         // related custom fields could have record in the {MODULE}_cstm table and at the same time could not have
         // record in the related module table. So we need to check for NULL value.
-        foreach($this->extModules as $tableAlias => $extModule) {
+        foreach ($this->extModules as $tableAlias => $extModule) {
             if (isset($extModule->deleted)) {
-                $where_auto .= ' AND ' . $this->db->convert($tableAlias . '.deleted', 'IFNULL', array(0)) . "=0 \n";
+                $where_auto .= ' AND ' . $this->db->convert($tableAlias . '.deleted', 'IFNULL', [0]) . "=0 \n";
             }
         }
 
@@ -2093,9 +2080,9 @@ class Report
                 $this->handleException('%s', $mod_strings['LBL_NO_ACCESS']);
             }
             $aclVisibility = new ACLVisibility($this->focus);
-            $aclVisibility->setOptions(array('action' => 'view'));
+            $aclVisibility->setOptions(['action' => 'view']);
             $aclVisibility->addVisibilityWhere($where_auto);
-            $aclVisibility->setOptions(array('action' => 'list'));
+            $aclVisibility->setOptions(['action' => 'list']);
             $aclVisibility->addVisibilityWhere($where_auto);
         }
         // End ACL check
@@ -2107,15 +2094,15 @@ class Report
         if (!empty($this->where)) {
             $query .= " WHERE ($this->where) \nAND " . $where_auto;
         } else {
-            $query .= " WHERE " . $where_auto;
+            $query .= ' WHERE ' . $where_auto;
         }
 
         if (!empty($this->group_order_by_arr) && is_array($this->group_order_by_arr) && $query_name != 'summary_query') {
             foreach ($this->group_order_by_arr as $group_order_by) {
                 array_unshift($this->order_by_arr, $group_order_by);
             }
-        } else if (!empty($this->group_order_by_arr) && is_array($this->group_order_by_arr) &&
-                   $query_name == 'summary_query' && empty($this->summary_order_by_arr)
+        } elseif (!empty($this->group_order_by_arr) && is_array($this->group_order_by_arr) &&
+            $query_name == 'summary_query' && empty($this->summary_order_by_arr)
         ) {
             foreach ($this->group_order_by_arr as $group_order_by) {
                 array_unshift($this->summary_order_by_arr, $group_order_by);
@@ -2126,18 +2113,18 @@ class Report
         // to be sorted by the group by
 
         if (!empty($this->group_by_arr) && is_array($this->group_by_arr) && $query_name != 'total_query') {
-            $query .= " GROUP BY " . join(",", $this->group_by_arr);
+            $query .= ' GROUP BY ' . join(',', $this->group_by_arr);
         }
 
         if ($query_name == 'summary_query') {
             if (!empty($this->summary_order_by_arr)) {
                 $this->summary_order_by_arr = array_unique($this->summary_order_by_arr);
-                $query .= " ORDER BY " . implode(',', $this->summary_order_by_arr);
+                $query .= ' ORDER BY ' . implode(',', $this->summary_order_by_arr);
             }
-        } else if ($query_name == 'query') {
+        } elseif ($query_name == 'query') {
             if (!empty($this->order_by_arr)) {
                 $this->order_by_arr = array_unique($this->order_by_arr);
-                $query .= " ORDER BY " . implode(',', $this->order_by_arr);
+                $query .= ' ORDER BY ' . implode(',', $this->order_by_arr);
             }
         }
 
@@ -2161,7 +2148,7 @@ class Report
         return $header_row;
     }
 
-    function get_total_header_row($exporting = false)
+    public function get_total_header_row($exporting = false)
     {
         $this->layout_manager->setAttribute('list_type', 'summary');
         $this->layout_manager->setAttribute('no_sort', '1');
@@ -2179,7 +2166,7 @@ class Report
      * @param bool $force_distinct
      * @return array The next header row.
      */
-    function get_header_row($column_field_name = 'display_columns', $skip_non_group = false, $exporting = false, $force_distinct = false)
+    public function get_header_row($column_field_name = 'display_columns', $skip_non_group = false, $exporting = false, $force_distinct = false)
     {
         $this->layout_manager->setAttribute('list_type', 'columns');
 
@@ -2197,34 +2184,34 @@ class Report
      *   distinct. Defaults to false.
      * @return array
      */
-    function get_header_row_generic($column_field_name = 'display_columns', $skip_non_group = false, $exporting = false, $force_distinct = false)
+    public function get_header_row_generic($column_field_name = 'display_columns', $skip_non_group = false, $exporting = false, $force_distinct = false)
     {
         if ($this->plain_text_output == true) {
             $this->layout_manager->setAttribute('context', 'HeaderCellPlain');
-        }
-        else {
+        } else {
             $this->layout_manager->setAttribute('context', 'HeaderCell');
         }
 
-        $header_row = array();
+        $header_row = [];
         $summary_count = 0;
 
         if (is_array($this->report_def) && isset($this->report_def[$column_field_name]) && safeIsIterable($this->report_def[$column_field_name])) {
             foreach ($this->report_def[$column_field_name] as $display_column) {
                 if ($skip_non_group && empty($display_column['group_function'])) {
-                if ($exporting || $this->plain_text_output)
+                    if ($exporting || $this->plain_text_output) {
                         array_push($header_row, ' ');
-                else
+                    } else {
                         array_push($header_row, '&nbsp;');
+                    }
                     continue;
                 }
 
                 $group_by_key = '';
                 if (!empty($this->report_def['group_defs'][0])) {
-                $group_by_key = $this->report_def['group_defs'][0]['table_key'] . ":" . $this->report_def['group_defs'][0]['name'];
+                    $group_by_key = $this->report_def['group_defs'][0]['table_key'] . ':' . $this->report_def['group_defs'][0]['name'];
                 }
                 if (!empty($this->report_def['order_by'][0])) {
-                    $order_by_key = $this->report_def['order_by'][0]['table_key'] . ":" . $this->report_def['order_by'][0]['name'];
+                    $order_by_key = $this->report_def['order_by'][0]['table_key'] . ':' . $this->report_def['order_by'][0]['name'];
                     $column_key = $this->_get_full_key($display_column);
 
                     if (!empty($display_column['group_function'])) {
@@ -2249,22 +2236,21 @@ class Report
                 $column_key = $this->_get_full_key($display_column);
 
                 if (!empty($display_column['group_function']) && $display_column['group_function'] != 'count') {
-                $column_key .= ":" . $display_column['group_function'];
-            }
-            elseif (!empty($display_column['column_function']) && $display_column['column_function'] != 'count') {
-                $column_key .= ":" . $display_column['column_function'];
-            }
+                    $column_key .= ':' . $display_column['group_function'];
+                } elseif (!empty($display_column['column_function']) && $display_column['column_function'] != 'count') {
+                    $column_key .= ':' . $display_column['column_function'];
+                }
 
                 if (!empty($this->report_def['summary_order_by'][0])) {
                     if (!empty($this->report_def['summary_order_by'][0]['group_function']) && $this->report_def['summary_order_by'][0]['group_function'] == 'count') {
-                        $order_by_key = $this->report_def['summary_order_by'][0]['table_key'] . ":" . 'count';
+                        $order_by_key = $this->report_def['summary_order_by'][0]['table_key'] . ':' . 'count';
                     } else {
-                        $order_by_key = $this->report_def['summary_order_by'][0]['table_key'] . ":" . $this->report_def['summary_order_by'][0]['name'];
+                        $order_by_key = $this->report_def['summary_order_by'][0]['table_key'] . ':' . $this->report_def['summary_order_by'][0]['name'];
 
                         if (!empty($this->report_def['summary_order_by'][0]['group_function'])) {
-                            $order_by_key .= ":" . $this->report_def['summary_order_by'][0]['group_function'];
+                            $order_by_key .= ':' . $this->report_def['summary_order_by'][0]['group_function'];
                         } elseif (!empty($this->report_def['summary_order_by'][0]['column_function'])) {
-                            $order_by_key .= ":" . $this->report_def['summary_order_by'][0]['column_function'];
+                            $order_by_key .= ':' . $this->report_def['summary_order_by'][0]['column_function'];
                         }
                     }
 
@@ -2282,40 +2268,36 @@ class Report
                     if ($display_column['is_group_by'] != 'hidden') {
                         $this->group_column_is_invisible = 0;
                         array_push($header_row, $display);
-                }
-                else {
+                    } else {
                         $this->group_column_is_invisible = 1;
-                }
+                    }
                     $this->group_header = $display;
                     $this->chart_group_position[] = $summary_count;
-            }
-            else {
+                } else {
                     array_push($header_row, $display);
-            }
+                }
                 $summary_count++;
 
                 //if summary, but not the total summary, and doing the chart
                 if ($skip_non_group == false && $column_field_name == 'summary_columns' && $this->do_chart == true) {
                     //              $this->layout_manager->setAttribute('context', 'HeaderCellPlain');
-                $chart_header = array();
+                    $chart_header = [];
                     $chart_header['label'] = $this->layout_manager->widgetDisplay($display_column);
                     $chart_header['column_key'] = $column_key;
                     array_push($this->chart_header_row, $chart_header);
-            }
-            elseif ($skip_non_group == true && $column_field_name == 'summary_columns' && $this->do_chart == true) {
+                } elseif ($skip_non_group == true && $column_field_name == 'summary_columns' && $this->do_chart == true) {
                     $this->layout_manager->setAttribute('context', 'HeaderCellPlain');
-                $chart_header = array();
+                    $chart_header = [];
                     $chart_header['label'] = $this->layout_manager->widgetDisplay($display_column);
                     $chart_header['column_key'] = $column_key;
                     array_push($this->chart_total_header_row, $chart_header);
-            }
-
+                }
             } // END foreach
         }
 
         // Bug 29829 Make sure the header names are distinct labels for sugarpdf writeCellTable()
         if ($force_distinct) {
-            $distinct_labels = array();
+            $distinct_labels = [];
             for ($i = 0; $i < sizeof($header_row); $i++) {
                 $label = $header_row[$i];
                 if (!in_array($label, $distinct_labels)) {
@@ -2333,7 +2315,7 @@ class Report
         return $header_row;
     }
 
-    function get_summary_total_row($exporting = false)
+    public function get_summary_total_row($exporting = false)
     {
         $this->_load_currency();
         $get_next_row = $this->get_next_row('total_result', 'summary_columns', true, $exporting);
@@ -2351,7 +2333,7 @@ class Report
     {
         $this->_load_currency();
         $get_next_row = $this->get_next_row('summary_result', 'summary_columns', false, $exporting);
-        if(isset($get_next_row['count'])) {
+        if (isset($get_next_row['count'])) {
             $this->current_summary_row_count = $get_next_row['count'];
         } else {
             $this->current_summary_row_count = null;
@@ -2360,21 +2342,23 @@ class Report
         return $get_next_row;
     }
 
-    function get_next_child_row($result_name)
+    public function get_next_child_row($result_name)
     {
-        if (empty($this->child_filter)) return false;
+        if (empty($this->child_filter)) {
+            return false;
+        }
         $db_row = $this->db->fetchByAssoc($this->$result_name);
-        if (!$db_row) return false;
-        $fields = array();
-        foreach ($db_row as $key => $value)
-        {
+        if (!$db_row) {
+            return false;
+        }
+        $fields = [];
+        foreach ($db_row as $key => $value) {
             $fields[strtoupper($key)] = $value;
         }
         $this->_load_currency();
         // here we want to make copies, so use foreach
-        $cells = array();
-        foreach ($this->report_def['display_columns'] as $display_column)
-        {
+        $cells = [];
+        foreach ($this->report_def['display_columns'] as $display_column) {
             $display_column['table_alias'] = $this->getTableFromField($display_column);
             $display_column['fields'] = $fields;
 
@@ -2396,9 +2380,9 @@ class Report
         return $cells;
     }
 
-    function getDataTypeForColumnsForMatrix($column_field_name = 'summary_columns')
+    public function getDataTypeForColumnsForMatrix($column_field_name = 'summary_columns')
     {
-        $labelToDataTypeArray = array();
+        $labelToDataTypeArray = [];
         foreach ($this->report_def[$column_field_name] as $display_column) {
             $display_column['table_alias'] = $this->getTableFromField($display_column);
             $this->register_field_for_query($display_column);
@@ -2409,7 +2393,6 @@ class Report
     } // fn
 
 
-
     /**
      * Get data field name for the display column
      * @param array $display_column
@@ -2418,11 +2401,11 @@ class Report
     protected function getColumnFieldName($display_column)
     {
         if (isset($display_column['group_function'])) {
-            $field_name = $this->getTruncatedColumnAlias(strtoupper($display_column['table_alias']) . "_" . strtoupper($display_column['group_function']) . "_" . strtoupper($display_column['name']));
+            $field_name = $this->getTruncatedColumnAlias(strtoupper($display_column['table_alias']) . '_' . strtoupper($display_column['group_function']) . '_' . strtoupper($display_column['name']));
         }
 
         if (!isset($field_name) || !isset($display_column['fields'][$field_name])) {
-            $field_name = $this->getTruncatedColumnAlias(strtoupper($display_column['table_alias']) . "_" . strtoupper($display_column['name']));
+            $field_name = $this->getTruncatedColumnAlias(strtoupper($display_column['table_alias']) . '_' . strtoupper($display_column['name']));
         }
 
         return $field_name;
@@ -2444,15 +2427,15 @@ class Report
         $skip_non_summary_columns = false,
         $exporting = false,
         $layoutManagerProcessor = 'widgetDisplay'
-    )
-    {
+    ) {
+
+
         global $current_user;
-        $chart_cells = array();
+        $chart_cells = [];
 
         if ($this->do_export) {
             $db_row = $this->db->fetchByAssoc($this->$result_field_name, false);
-        }
-        else {
+        } else {
             $db_row = $this->db->fetchByAssoc($this->$result_field_name);
         }
 
@@ -2466,24 +2449,23 @@ class Report
             && method_exists($this->full_bean_list['self'], 'call_custom_logic')) {
             $this->full_bean_list['self']->call_custom_logic(
                 'process_report_row',
-                array('row' => &$db_row, 'reporter' => $this)
+                ['row' => &$db_row, 'reporter' => $this]
             );
         }
 
         if ($result_field_name == 'summary_result') {
             if (!empty($this->child_filter) && !empty($db_row[$this->child_filter_name])) {
                 $this->child_filter_by = $db_row[$this->child_filter_name];
-            }
-            else {
+            } else {
                 $this->child_filter = '';
                 $this->child_filter_by = '';
                 $this->child_filter_name = '';
             }
         }
 
-        $row = array();
-        $cells = array();
-        $fields = array();
+        $row = [];
+        $cells = [];
+        $fields = [];
 
         foreach ($db_row as $key => $value) {
             //if value is null or not set, then change to empty string.  This prevents array index errors while processing
@@ -2515,14 +2497,13 @@ class Report
                 /*nsingh: bug 13554- date and time fields must be displayed using user's locale settings.
                 * Since to_pdf uses plain_text_output=true, we handle the date and time case here by using the 'List' context of the layout_manager
                 */
-                $dateTimeTypes = array('date', 'time', 'datetimecombo', 'datetime');
+                $dateTimeTypes = ['date', 'time', 'datetimecombo', 'datetime'];
                 if (!empty($display_column['type']) && in_array($display_column['type'], $dateTimeTypes)) {
                     $this->layout_manager->setAttribute('context', 'List');
                 } else {
                     $this->layout_manager->setAttribute('context', 'ListPlain');
                 }
-            }
-            else {
+            } else {
                 $this->layout_manager->setAttribute('context', 'List');
             }
 
@@ -2536,11 +2517,12 @@ class Report
                 $display_column['type'] = 'float';
             }
 
-            if ($display_column['type'] != 'currency' || (substr_count($display_column['name'], '_usdoll') == 0 &&
+            if ($display_column['type'] != 'currency' || (
+                substr_count($display_column['name'], '_usdoll') == 0 &&
                     (isset($display_column['group_function']) ?
                         ($display_column['group_function'] != 'weighted_amount' && $display_column['group_function'] != 'weighted_sum') :
                         true)
-                )
+            )
             ) {
                 $pos = $display_column['table_key'];
                 $module_name = '';
@@ -2571,17 +2553,15 @@ class Report
                     }
                     $display = $this->layout_manager->{$layoutManagerProcessor}($display_column);
                 }
-
             } else {
-
                 if (isset($display_column['group_function'])) {
-                    $field_name = $this->getTruncatedColumnAlias(strtoupper($display_column['table_alias']) . "_" . strtoupper($display_column['group_function']) . "_" . strtoupper($display_column['name']));
+                    $field_name = $this->getTruncatedColumnAlias(strtoupper($display_column['table_alias']) . '_' . strtoupper($display_column['group_function']) . '_' . strtoupper($display_column['name']));
                 } else {
                     unset($field_name);
                 }
 
                 if (!isset($field_name) || !isset($display_column['fields'][$field_name])) {
-                    $field_name = $this->getTruncatedColumnAlias(strtoupper($display_column['table_alias']) . "_" . strtoupper($display_column['name']));
+                    $field_name = $this->getTruncatedColumnAlias(strtoupper($display_column['table_alias']) . '_' . strtoupper($display_column['name']));
                 }
 
                 if (isset($display_column['fields'][$field_name])) {
@@ -2598,7 +2578,7 @@ class Report
                 $display_column['type'] == 'currency' &&
                 (strpos($display_column['name'], '_usdoll') !== false || !empty($display_column['group_function']))) {
                 // convert base to user preferred if set in user prefs
-                if($current_user->getPreference('currency_show_preferred')) {
+                if ($current_user->getPreference('currency_show_preferred')) {
                     $userCurrency = SugarCurrency::getUserLocaleCurrency();
                     $raw_display = SugarCurrency::convertWithRate($display_column['fields'][$field_name], 1.0, $userCurrency->conversion_rate);
                     $display = SugarCurrency::formatAmountUserLocale($raw_display, $userCurrency->id);
@@ -2657,7 +2637,7 @@ class Report
                 if (array_key_exists($array_key, $display_column['fields'])) {
                     $displayData = $display_column['fields'][$array_key];
                     if (empty($displayData) && $display_column['type'] != 'bool' && ($display_column['type'] != 'enum' || $display_column['type'] == 'enum' && $displayData != '0')) {
-                        $display = "";
+                        $display = '';
                     }
                 } // if
 
@@ -2679,12 +2659,12 @@ class Report
             if ($column_field_name == 'summary_columns' && $this->do_chart) {
                 $columnClass = $this->layout_manager->getClassFromWidgetDef($display_column);
                 $columnAlias = strtoupper($columnClass->_get_column_alias($display_column));
-                $cell_arr = array(
+                $cell_arr = [
                     'val' => $raw_display,
                     'key' => $display_column['column_key'],
                     'alias' => $columnAlias,
                     'raw_value' => $fields[$columnAlias] ?? '',
-                );
+                ];
                 array_push($chart_cells, $cell_arr);
             }
 
@@ -2693,8 +2673,11 @@ class Report
                 // parse out checkboxes
                 // TODO: wp this should be done in the widget
                 if (preg_match('/type.*=.*checkbox/Uis', $display)) {
-                    if (preg_match('/checked/i', $display)) $display = $app_list_strings['dom_switch_bool']['on'];
-                    else $display = $app_list_strings['dom_switch_bool']['off'];
+                    if (preg_match('/checked/i', $display)) {
+                        $display = $app_list_strings['dom_switch_bool']['on'];
+                    } else {
+                        $display = $app_list_strings['dom_switch_bool']['off'];
+                    }
                 }
             }
             array_push($cells, $display);
@@ -2705,10 +2688,9 @@ class Report
         // calculate summary rows count by returning the highest number of 'count' fields for the given db row
         $count = 1;
         $count_exists = false;
-        foreach ($db_row as $count_column => $count_value)
-        {
-            if (substr($count_column, -10) == "__allcount" || $count_column == 'count') {
-                $count = max(array($count,$count_value, 1));
+        foreach ($db_row as $count_column => $count_value) {
+            if (substr($count_column, -10) == '__allcount' || $count_column == 'count') {
+                $count = max([$count, $count_value, 1]);
                 $count_exists = true;
             }
         }
@@ -2721,10 +2703,9 @@ class Report
         if ($column_field_name == 'summary_columns' && $this->do_chart) {
             $chart_row = 0;
             if (!empty($db_row['count'])) {
-                $chart_row = array('cells' => $chart_cells, 'count' => $db_row['count']);
-            }
-            else {
-                $chart_row = array('cells' => $chart_cells);
+                $chart_row = ['cells' => $chart_cells, 'count' => $db_row['count']];
+            } else {
+                $chart_row = ['cells' => $chart_cells];
             }
             array_push($this->chart_rows, $chart_row);
         }
@@ -2777,8 +2758,8 @@ class Report
             }
 
             if (!empty($fieldDefSource) && ($fieldDefSource === 'custom_fields' ||
-                ($fieldDefSource === 'non-db' && !empty($baseFieldDef['ext2']) &&
-                !empty($baseFieldDef['id']))) && !empty($baseFieldDef['real_table'])
+                    ($fieldDefSource === 'non-db' && !empty($baseFieldDef['ext2']) &&
+                        !empty($baseFieldDef['id']))) && !empty($baseFieldDef['real_table'])
             ) {
                 $displayColumn['table_alias'] .= '_cstm';
             }
@@ -2786,7 +2767,7 @@ class Report
             $displayColumn['column_key'] = $this->_get_full_key($displayColumn);
             $displayColumn['onlyValue'] = false;
         } elseif (!$currentFieldDef && is_array($displayColumn) && array_key_exists('type', $displayColumn)
-            && empty($displayColumn['type'])  && $displayColumn['name'] === 'count'
+            && empty($displayColumn['type']) && $displayColumn['name'] === 'count'
         ) {
             $displayColumn['type'] = 'int';
         }
@@ -2821,7 +2802,7 @@ class Report
                 if (!empty($this->report_def['group_defs'])) {
                     $group_def_array = $this->report_def['group_defs'];
                     if (isset($this->report_def['layout_options']) &&
-                        (((is_countable($group_def_array) ? count($group_def_array) : 0) == 2) || ((is_countable($group_def_array) ? count($group_def_array) : 0) == 3))
+                        ((safeCount($group_def_array) == 2) || (safeCount($group_def_array) == 3))
                     ) {
                         $reportType = 'Matrix';
                     }
@@ -2849,7 +2830,7 @@ class Report
         $record = $this->request->getValidInputRequest('record', 'Assert\Guid', -1) ?: null;
         $assignedUserId = $this->request->getValidInputRequest('assigned_user_id', 'Assert\Guid');
 
-        require_once('include/formbase.php');
+        require_once 'include/formbase.php';
         populateFromPost('', $saved_report);
 
         $result = $saved_report->save_report(
@@ -2878,9 +2859,9 @@ class Report
      */
     public static function clearCaches($user = null)
     {
-        $md5 = !empty($user) ? '_'.md5($user->id) : '';
+        $md5 = !empty($user) ? '_' . md5($user->id) : '';
 
-        foreach (glob(sugar_cached('modules').'/modules_def_*'.$md5.'.js') as $file) {
+        foreach (glob(sugar_cached('modules') . '/modules_def_*' . $md5 . '.js') as $file) {
             unlink($file);
         }
     }
@@ -2891,17 +2872,17 @@ class Report
         $cacheDefsJs = sugar_cached('modules/modules_def_' . $current_language . '_' . md5($current_user->id) . '.js');
         $cacheFiscalJs = sugar_cached('modules/modules_def_fiscal_' . $current_language . '_' . md5($current_user->id) . '.js');
 
-        $files = array(
-            array($cacheDefsJs, 'template_module_defs_js'),
-            array($cacheFiscalJs, 'template_module_defs_fiscal_js'),
-        );
+        $files = [
+            [$cacheDefsJs, 'template_module_defs_js'],
+            [$cacheFiscalJs, 'template_module_defs_fiscal_js'],
+        ];
 
         foreach ($files as $file) {
             $fileName = $file[0];
             $function = $file[1];
 
             if (!file_exists($fileName)) {
-                require_once('modules/Reports/templates/templates_modules_def_js.php');
+                require_once 'modules/Reports/templates/templates_modules_def_js.php';
 
                 ob_start();
                 $function();
@@ -2921,10 +2902,9 @@ class Report
             return true;
         }
         return false;
-
     }
 
-    function run_chart_queries()
+    public function run_chart_queries()
     {
         $this->chartQuery = true;
 
@@ -2932,8 +2912,7 @@ class Report
 
         $this->get_summary_header_row();
 
-        while (($row = $this->get_summary_next_row()) != 0)
-        {
+        while (($row = $this->get_summary_next_row()) != 0) {
         }
         if ($this->has_summary_columns()) {
             $this->run_total_query();
@@ -2942,10 +2921,10 @@ class Report
     }
 
     // static function to return the modules associated to a report definition
-    function getModules(&$report_def)
+    public function getModules(&$report_def)
     {
         $modules_hash = [];
-        $modules = array();
+        $modules = [];
         $modules_hash[$report_def['module']] = 1;
         $focus = BeanFactory::newBean($report_def['module']);
         $linked_fields = $focus->get_linked_fields();
@@ -2996,7 +2975,7 @@ class Report
         $secondaryTableAlias = $field_def['secondary_table'];
         if (!empty($this->selected_loaded_custom_links) && !empty($this->selected_loaded_custom_links[$field_def['secondary_table'] . '_' . $field_def['rep_rel_name']])) {
             $secondaryTableAlias = $this->selected_loaded_custom_links[$field_def['secondary_table'] . '_' . $field_def['rep_rel_name']]['join_table_alias'];
-        } else if (!empty($this->selected_loaded_custom_links) && !empty($this->selected_loaded_custom_links[$field_def['secondary_table']])) {
+        } elseif (!empty($this->selected_loaded_custom_links) && !empty($this->selected_loaded_custom_links[$field_def['secondary_table']])) {
             $secondaryTableAlias = $this->selected_loaded_custom_links[$field_def['secondary_table']]['join_table_alias'];
         }
 
@@ -3004,8 +2983,8 @@ class Report
 
         if (isset($extModule->field_defs['name']['db_concat_fields'])) {
             $select_piece = db_concat($secondaryTableAlias, $extModule->field_defs['name']['db_concat_fields']);
-        } else if(isset($field_def['rname']) && isset($extModule->field_defs[$field_def['rname']])) {
-         	$select_piece = $secondaryTableAlias . ".{$field_def['rname']}";
+        } elseif (isset($field_def['rname']) && isset($extModule->field_defs[$field_def['rname']])) {
+            $select_piece = $secondaryTableAlias . ".{$field_def['rname']}";
         } else {
             $select_piece = $secondaryTableAlias . '.name';
         }
@@ -3020,10 +2999,10 @@ class Report
      * @param string ...$args
      * @throws SugarApiExceptionNotAuthorized
      */
-    protected function handleException(string ... $args)
+    protected function handleException(string ...$args)
     {
         $template = array_shift($args);
-        if($this->fromApi === false) {
+        if ($this->fromApi === false) {
             $msg = sprintf($template, ... array_map('htmlspecialchars', $args));
             sugar_die($msg);
         } else {
@@ -3068,7 +3047,7 @@ class Report
      */
     private function getRecordWhere()
     {
-        $where = " " . $this->focus->table_name . ".deleted=0 \n";
+        $where = ' ' . $this->focus->table_name . ".deleted=0 \n";
         $options = $this->getVisibilityOptions();
         $options['action'] = 'list';
         $where = $this->focus->addVisibilityWhere($where, $options);
@@ -3087,7 +3066,7 @@ class Report
      */
     public function getRecordIds($offset = 0, $limit = -1)
     {
-        $recordIds = array();
+        $recordIds = [];
         $this->create_where();
 
         $this->create_from();
@@ -3095,11 +3074,11 @@ class Report
         $where = $this->getRecordWhere();
         $query = "SELECT DISTINCT $id {$this->from} WHERE $where";
         $query .= " ORDER BY $id ASC";
-        $query = str_replace("\n", " ", $query);
+        $query = str_replace("\n", ' ', $query);
         if ($offset > 0 || $limit > 0) {
-            $result = $this->db->limitQuery($query, $offset, $limit, true, "Error executing query");
+            $result = $this->db->limitQuery($query, $offset, $limit, true, 'Error executing query');
         } else {
-            $result = $this->db->query($query, true, "Error executing query");
+            $result = $this->db->query($query, true, 'Error executing query');
         }
         if ($result) {
             while ($row = $this->db->fetchByAssoc($result)) {
@@ -3121,10 +3100,10 @@ class Report
         $id = $this->focus->table_name . '.id';
         $where = $this->getRecordWhere();
         $query = "SELECT COUNT(DISTINCT $id) AS record_count {$this->from} WHERE $where";
-        $result = $this->db->query($query, true, "Error executing query");
+        $result = $this->db->query($query, true, 'Error executing query');
         if ($result) {
             $row = $this->db->fetchByAssoc($result);
-            $recordCount = (int) $row['record_count'];
+            $recordCount = (int)$row['record_count'];
         }
         return $recordCount;
     }
@@ -3136,7 +3115,7 @@ class Report
     {
         // Summary labels are customizable. Summary label should be used instead of group label
         if (isset($this->report_def['summary_columns']) && isset($this->report_def['group_defs'])) {
-            for ($i = 0; $i < (is_countable($this->report_def['group_defs']) ? count($this->report_def['group_defs']) : 0); $i++) {
+            for ($i = 0; $i < safeCount($this->report_def['group_defs']); $i++) {
                 $isValid = true;
                 if (isset($this->report_def['group_defs'][$i]['qualifier'])) {
                     if (!isset($this->report_def['summary_columns'][$i]['qualifier'])) {
@@ -3155,11 +3134,11 @@ class Report
     }
 
     /**
-    * Prepare operator to combine filters. Allowed AND or OR
-    *
-    * @param string $operator
-    * @return  string
-    */
+     * Prepare operator to combine filters. Allowed AND or OR
+     *
+     * @param string $operator
+     * @return  string
+     */
     protected function getFilterOperator(string $operator): string
     {
         $operator = trim(mb_convert_case($operator, MB_CASE_UPPER));
@@ -3171,5 +3150,4 @@ class Report
 
         return $operator;
     }
-
 }

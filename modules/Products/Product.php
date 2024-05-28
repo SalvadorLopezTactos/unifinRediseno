@@ -108,13 +108,13 @@ class Product extends SugarBean
      */
     public $ignoreQuoteSave = false;
 
-    public $table_name = "products";
-    public $rel_manufacturers = "manufacturers";
-    public $rel_types = "product_types";
-    public $rel_products = "product_product";
-    public $rel_categories = "product_categories";
+    public $table_name = 'products';
+    public $rel_manufacturers = 'manufacturers';
+    public $rel_types = 'product_types';
+    public $rel_products = 'product_product';
+    public $rel_categories = 'product_categories';
 
-    public $object_name = "Product";
+    public $object_name = 'Product';
     public $module_dir = 'Products';
     public $new_schema = true;
     public $importable = true;
@@ -122,13 +122,13 @@ class Product extends SugarBean
     public $experts;
 
     // This is used to retrieve related fields from form posts.
-    public $additional_column_fields = array('quote_id', 'quote_name', 'related_product_id');
+    public $additional_column_fields = ['quote_id', 'quote_name', 'related_product_id'];
 
-    public $relationship_fields = array('account_id'=> 'account_link', 'related_product_id' => 'related_products');
+    public $relationship_fields = ['account_id' => 'account_link', 'related_product_id' => 'related_products'];
 
 
     // This is the list of fields that are copied over from product template.
-    public $template_fields = array(
+    public $template_fields = [
         'mft_part_num',
         'vendor_part_num',
         'website',
@@ -145,7 +145,7 @@ class Product extends SugarBean
         'cost_price',
         'discount_price',
         'list_price',
-    );
+    ];
 
 
     public function __construct()
@@ -188,8 +188,8 @@ class Product extends SugarBean
         $params = [];
         $GLOBALS['log']->deprecated('Product::get_list_view_data() has been deprecated in 7.8');
         global $current_language, $app_strings, $app_list_strings, $current_user, $timedate, $locale;
-        $product_mod_strings = return_module_language($current_language,"Products");
-        require('modules/Products/config.php');
+        $product_mod_strings = return_module_language($current_language, 'Products');
+        require 'modules/Products/config.php';
         //$this->format_all_fields();
 
         if ($this->date_purchased == '0000-00-00') {
@@ -197,7 +197,6 @@ class Product extends SugarBean
         } else {
             $the_date_purchased = $this->date_purchased;
             $db_date_purchased = $timedate->to_db_date($this->date_purchased, false);
-
         }
         $the_date_support_expires = $this->date_support_expires;
         $db_date_support_expires = $timedate->to_db_date($this->date_support_expires, false);
@@ -216,7 +215,7 @@ class Product extends SugarBean
         }
 
         $temp_array = $this->get_list_view_array();
-        $temp_array['NAME'] = (($this->name == "") ? "<em>blank</em>" : $this->name);
+        $temp_array['NAME'] = (($this->name == '') ? '<em>blank</em>' : $this->name);
         if (!empty($this->status)) {
             $temp_array['STATUS'] = $app_list_strings['product_status_dom'][$this->status];
         }
@@ -230,7 +229,7 @@ class Product extends SugarBean
         $temp_array['DISCOUNT_PRICE'] = $this->discount_price;
         $temp_array['COST_PRICE'] = $this->cost_price;
         if (isset($this->discount_select) && $this->discount_select) {
-            $temp_array['DISCOUNT_AMOUNT'] = $this->discount_amount . "%";
+            $temp_array['DISCOUNT_AMOUNT'] = $this->discount_amount . '%';
         } else {
             $temp_array['DISCOUNT_AMOUNT'] = $this->discount_amount;
         }
@@ -251,7 +250,7 @@ class Product extends SugarBean
     public function build_generic_where_clause($the_query_string)
     {
         $GLOBALS['log']->deprecated('Product::build_generic_where_clause() has been deprecated in 7.8');
-        $where_clauses = array();
+        $where_clauses = [];
         $the_query_string = $GLOBALS['db']->quote($the_query_string);
         array_push($where_clauses, "name like '$the_query_string%'");
         if (is_numeric($the_query_string)) {
@@ -259,10 +258,10 @@ class Product extends SugarBean
             array_push($where_clauses, "vendor_part_num like '%$the_query_string%'");
         }
 
-        $the_where = "";
+        $the_where = '';
         foreach ($where_clauses as $clause) {
-            if ($the_where != "") {
-                $the_where .= " or ";
+            if ($the_where != '') {
+                $the_where .= ' or ';
             }
             $the_where .= $clause;
         }
@@ -292,7 +291,12 @@ class Product extends SugarBean
     {
         global $dictionary;
 
-        $links = $dictionary[$this->object_name]['related_calc_fields'];
+        $links = $dictionary[$this->object_name]['related_calc_fields'] ?? null;
+
+        if (!is_array($links)) {
+            return null;
+        }
+
         $quotesIndex = array_search('quotes', $links);
         $pbIndex = array_search('product_bundles', $links);
 
@@ -303,7 +307,7 @@ class Product extends SugarBean
             if (!function_exists('pbQuotesArraySwap')) {
                 function pbQuotesArraySwap(&$array, $swapFirst, $swapSecond)
                 {
-                    [$array[$swapFirst], $array[$swapSecond]] = array($array[$swapSecond], $array[$swapFirst]);
+                    [$array[$swapFirst], $array[$swapSecond]] = [$array[$swapSecond], $array[$swapFirst]];
                 }
             }
             pbQuotesArraySwap($links, $quotesIndex, $pbIndex);
@@ -358,7 +362,8 @@ class Product extends SugarBean
         $id = parent::save($check_notify);
 
         return $id;
-	}
+    }
+
 
     /**
      * Calculate service_end_date for a service Product.
@@ -434,7 +439,7 @@ class Product extends SugarBean
     protected function mapFieldsFromOpportunity()
     {
         $GLOBALS['log']->deprecated('Product::mapFieldsFromOpportunity() has been deprecated in 7.8');
-        if(!empty($this->opportunity_id) && empty($this->product_type)) {
+        if (!empty($this->opportunity_id) && empty($this->product_type)) {
             $opp = BeanFactory::getBean('Opportunities', $this->opportunity_id);
             $this->product_type = $opp->opportunity_type;
         }
@@ -493,11 +498,11 @@ class Product extends SugarBean
     }
 
     /**
+     * @return array
      * @deprecated
      *
      * This is only used for BWC modules, so need to keep it around
      *
-     * @return array
      */
     public function listviewACLHelper()
     {
@@ -506,7 +511,6 @@ class Product extends SugarBean
 
         $is_owner = false;
         if (!empty($this->contact_name)) {
-
             if (!empty($this->contact_name_owner)) {
                 global $current_user;
                 $is_owner = $current_user->id == $this->contact_name_owner;
@@ -519,7 +523,6 @@ class Product extends SugarBean
         }
         $is_owner = false;
         if (!empty($this->account_name)) {
-
             if (!empty($this->account_name_owner)) {
                 global $current_user;
                 $is_owner = $current_user->id == $this->account_name_owner;
@@ -532,7 +535,6 @@ class Product extends SugarBean
         }
         $is_owner = false;
         if (!empty($this->quote_name)) {
-
             if (!empty($this->quote_name_owner)) {
                 global $current_user;
                 $is_owner = $current_user->id == $this->quote_name_owner;
@@ -557,7 +559,7 @@ class Product extends SugarBean
         $rli = BeanFactory::newBean('RevenueLineItems');
         $rli->id = create_guid();
         $rli->new_with_id = true;
-        $rli->fetched_row = array();
+        $rli->fetched_row = [];
 
         foreach ($this->getFieldDefinitions() as $field) {
             if ($field['name'] != 'id' && isset($this->fetched_row[$field['name']])) {
@@ -614,12 +616,14 @@ class Product extends SugarBean
         foreach ($this->template_fields as $template_field) {
             // do not copy from template if field is:  Not empty, or has an int value equal to zero, or a string value equal to '0' or '0.0'
             if (!empty($this->$template_field)
-                || (isset($this->$template_field)
-                    && ($this->$template_field === 0
+                || (
+                    isset($this->$template_field)
+                    && (
+                        $this->$template_field === 0
                         || $this->$template_field === '0'
                         || $this->$template_field === '0.0'
-                        )
                     )
+                )
             ) {
                 continue;
             }
@@ -641,11 +645,10 @@ class Product extends SugarBean
             || !empty($this->list_price)
             || !empty($this->discount_price)
             || !empty($this->pricing_factor)) {
-
             $formula = $this->getPriceFormula($this->pricing_formula);
 
             if ($formula) {
-                $this->discount_price = $formula->calculate_price($this->cost_price,$this->list_price,$this->discount_price,$this->pricing_factor);
+                $this->discount_price = $formula->calculate_price($this->cost_price, $this->list_price, $this->discount_price, $this->pricing_factor);
             }
         }
     }
@@ -660,7 +663,7 @@ class Product extends SugarBean
     protected function getPriceFormula($formula, $refresh = false)
     {
         if (!isset($GLOBALS['price_formulas']) || $refresh) {
-             SugarAutoLoader::load('modules/ProductTemplates/Formulas.php');
+            SugarAutoLoader::load('modules/ProductTemplates/Formulas.php');
             refresh_price_formulas();
         }
 
@@ -670,7 +673,7 @@ class Product extends SugarBean
         }
 
         SugarAutoLoader::load($GLOBALS['price_formulas'][$formula]);
-        return new $formula;
+        return new $formula();
     }
 
     /**
@@ -709,6 +712,24 @@ class Product extends SugarBean
 
         // if the quote is not closed, we should update the base rate
         return !$quote->isClosed();
+    }
 
+    /**
+     * @inheritdoc
+     */
+    protected function doMarkDeleted(): void
+    {
+        $quoteId = $this->quote_id;
+        parent::doMarkDeleted();
+
+        // The parent doMarkDeleted() will cause the related Quote to be resaved,
+        // but we can't guarantee that happens before the related ProductBundle
+        // is resaved. Here we need to resave the Quote again to make sure its
+        // calculated fields that are calculated from ProductBundles are recalculated
+        // after the ProductBundle has been updated
+        $quoteBean = BeanFactory::retrieveBean('Quotes', $quoteId);
+        if (!empty($quoteBean->id) && empty($quoteBean->deleted) && empty($quoteBean->in_save)) {
+            $quoteBean->save();
+        }
     }
 }

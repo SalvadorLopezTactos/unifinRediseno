@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_LISTVIEW_FILTER_ALL' => 'Összes {0}',
     'LBL_TEAM' => 'Csoportok',
     'LBL_TEAMS' => 'Csoportok',
@@ -77,4 +77,4 @@ $mod_strings = array(
     'LBL_OPEN_ISSUES' => '{0} megnyitása',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Legutóbb megoldott',
     'LBL_FILTER_UTILS_CREATED' => 'Létrehozta:',
-);
+];

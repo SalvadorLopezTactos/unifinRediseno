@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Vizualizare tip mozaic',
     'LBL_MODULE_NAME_SINGULAR' => 'Vizualizare tip mozaic',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'Vizualizare tip mozaic',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => 'Module activate',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'Module cu vizualizare tip mozaic',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'Setări modul',
-    'LBL_PIPELINE_TABLE_HEADER' => "Selectează câmpul ale cărui valori vor fi utilizate drept coloane",
+    'LBL_PIPELINE_TABLE_HEADER' => 'Selectează câmpul ale cărui valori vor fi utilizate drept coloane',
     'LBL_PIPELINE_TILE_HEADER' => 'Câmp de titlu dală',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => 'Coloane disponibile',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => 'Câmpuri de corp dală',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'Previzualizare tip mozaic',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'Prea multe câmpuri pe mozaic.',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => 'Remediați erorile din filele cu setări ale modulului de mai jos înainte de a continua:<br><br>',
-);
+    'LBL_MODULE_SELECTION' => 'Selectați modulul pe care doriți să-l vizualizați și să-l configurați mai jos',
+    'LBL_SHOW_COLUMN_COUNT' => 'Afișare număr de coloane',
+    'LBL_SHOW_COLUMN_TOTAL' => 'Afișare număr total de coloane',
+    'LBL_TOTAL_FIELD' => 'Câmp Total',
+];

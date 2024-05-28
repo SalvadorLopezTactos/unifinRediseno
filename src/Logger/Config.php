@@ -24,15 +24,15 @@ class Config
      *
      * @var array
      */
-    protected static $levels = array(
+    protected static $levels = [
         'debug' => Logger::DEBUG,
-        'info'  => Logger::INFO,
+        'info' => Logger::INFO,
         'warn' => Logger::WARNING,
         'deprecated' => Logger::NOTICE,
         'error' => Logger::ERROR,
         'fatal' => Logger::ALERT,
         'security' => Logger::CRITICAL,
-    );
+    ];
 
     /**
      * @var \SugarConfig
@@ -46,10 +46,10 @@ class Config
      */
     public function __construct(\SugarConfig $config)
     {
-        $params = array(
+        $params = [
             'log_dir' => 'logger.handlers.file.dir',
             'logger.file' => 'logger.handlers.file',
-        );
+        ];
 
         // copy file logger settings under the "handlers" section for unification
         foreach ($params as $src => $dst) {
@@ -67,19 +67,19 @@ class Config
      */
     public function getChannelConfig($channel)
     {
-        $config = $this->config->get('logger.channels.' . $channel, array());
+        $config = $this->config->get('logger.channels.' . $channel, []);
 
         if (isset($config['handlers'])) {
             $config['handlers'] = $this->normalizeConfig($config['handlers']);
         } else {
             // set empty handler definition which will be later populated with the default values
-            $config['handlers'] = array(array());
+            $config['handlers'] = [[]];
         }
 
         if (isset($config['processors'])) {
             $config['processors'] = $this->normalizeConfig($config['processors']);
         } else {
-            $config['processors'] = array();
+            $config['processors'] = [];
         }
 
         $config = $this->expandChannelConfig($channel, $config);
@@ -95,20 +95,20 @@ class Config
      */
     protected function normalizeConfig($components)
     {
-        $result = array();
+        $result = [];
 
         if (is_string($components)) {
-            $components = array($components);
+            $components = [$components];
         }
 
-        $isAssociativeArray = array_keys($components) !== range(0, (is_countable($components) ? count($components) : 0) - 1);
+        $isAssociativeArray = array_keys($components) !== range(0, safeCount($components) - 1);
         foreach ($components as $key => $value) {
             if (is_string($value)) {
-                $result[] = array(
+                $result[] = [
                     'type' => $value,
-                );
+                ];
             } else {
-                $normalized = array();
+                $normalized = [];
                 if (isset($value['type'])) {
                     $normalized['type'] = $value['type'];
                     unset($value['type']);
@@ -152,7 +152,7 @@ class Config
                 $handler['level'] = $this->getHandlerLevel($channel, $type);
             }
 
-            $params = $this->config->get('logger.handlers.' . $type, array());
+            $params = $this->config->get('logger.handlers.' . $type, []);
             if (isset($handler['params'])) {
                 $params = array_merge($params, $handler['params']);
             }
@@ -161,14 +161,14 @@ class Config
         }
 
         foreach ($config['processors'] as &$processor) {
-            $processor['params'] = array();
+            $processor['params'] = [];
             unset($processor);
         }
 
-        return array(
+        return [
             'handlers' => $config['handlers'],
             'processors' => $config['processors'],
-        );
+        ];
     }
 
     /**
@@ -181,10 +181,10 @@ class Config
      */
     protected function getHandlerLevel($channel, $handler)
     {
-        $levels = array_filter(array(
+        $levels = array_filter([
             $this->config->get('logger.channels.' . $channel . '.level'),
             $this->config->get('logger.handlers.' . $handler . '.level'),
-        ));
+        ]);
         $level = array_shift($levels);
         if ($level) {
             return Logger::toMonologLevel($level);

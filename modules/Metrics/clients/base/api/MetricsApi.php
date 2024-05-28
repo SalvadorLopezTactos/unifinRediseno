@@ -61,7 +61,7 @@ class MetricsApi extends FilterApi
      */
     public function getVisibleMetrics(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('metric_context', 'metric_module'));
+        $this->requireArgs($args, ['metric_context', 'metric_module']);
         $userPreference = new UserPreference($GLOBALS['current_user']);
         $userMetrics = json_decode($userPreference->getPreference('user_metrics'), true) ?? [];
         $userMetrics = $userMetrics[$args['metric_context'] . $args['metric_module']] ?? [];
@@ -100,7 +100,7 @@ class MetricsApi extends FilterApi
      */
     public function getHiddenMetrics(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('metric_context', 'metric_module'));
+        $this->requireArgs($args, ['metric_context', 'metric_module']);
         $userPreference = new UserPreference($GLOBALS['current_user']);
         $userMetrics = json_decode($userPreference->getPreference('user_metrics'), true) ?? [];
         $userMetrics = $userMetrics[$args['metric_context'] . $args['metric_module']] ?? [];
@@ -108,7 +108,7 @@ class MetricsApi extends FilterApi
         $hiddenMetrics = [];
         if (!empty($userMetrics)) {
             foreach ($metrics['records'] as $key => $val) {
-                if (in_array($val['id'], $userMetrics['hidden_list'])) {
+                if (safeInArray($val['id'], $userMetrics['hidden_list'])) {
                     $hiddenMetrics[] = $val;
                 }
             }
@@ -123,12 +123,12 @@ class MetricsApi extends FilterApi
      */
     public function configSave(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array(
+        $this->requireArgs($args, [
             'metric_context',
             'metric_module',
             'visible_list',
             'hidden_list',
-        ));
+        ]);
         $userPreference = new UserPreference($GLOBALS['current_user']);
         $userMetrics = json_decode($userPreference->getPreference('user_metrics'), true) ?? [];
         $userMetrics[$args['metric_context'] . $args['metric_module']] = [
@@ -147,7 +147,7 @@ class MetricsApi extends FilterApi
      */
     public function restoreAdminDefaults(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('metric_context', 'metric_module'));
+        $this->requireArgs($args, ['metric_context', 'metric_module']);
         $metrics = $this->getMetrics($api, $args);
         $visibleMetrics = [];
         // all are visible by default

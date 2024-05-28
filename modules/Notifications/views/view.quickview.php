@@ -10,33 +10,33 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class ViewQuickview extends SugarView{
-	function display()
-	{
-	    $focus = BeanFactory::getBean('Notifications', empty($_REQUEST['record']) ? "" : $_REQUEST['record']);
+class ViewQuickview extends SugarView
+{
+    public function display()
+    {
+        $focus = BeanFactory::getBean('Notifications', empty($_REQUEST['record']) ? '' : $_REQUEST['record']);
 
-	    if(!empty($focus->id)) {
-    	    //Mark as read.
-    	    $focus->is_read = true;
-    	    $focus->save(FALSE);
-	    }
+        if (!empty($focus->id)) {
+            //Mark as read.
+            $focus->is_read = true;
+            $focus->save(false);
+        }
 
-	    $results = array('contents' => $this->_formatNotificationForDisplay($focus) );
+        $results = ['contents' => $this->_formatNotificationForDisplay($focus)];
 
-	    $json = getJSONobj();
-		$out = $json->encode($results);
-		ob_clean();
-		print($out);
-		sugar_cleanup(true);
+        $json = getJSONobj();
+        $out = $json->encode($results);
+        ob_clean();
+        print($out);
+        sugar_cleanup(true);
+    }
 
-	}
-
-	function _formatNotificationForDisplay($notification)
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    public function _formatNotificationForDisplay($notification)
     {
         global $app_strings;
         $this->ss->assign('APP', $app_strings);
         $this->ss->assign('focus', $notification);
-        return $this->ss->fetch("modules/Notifications/tpls/detailView.tpl");
+        return $this->ss->fetch('modules/Notifications/tpls/detailView.tpl');
     }
 }
-

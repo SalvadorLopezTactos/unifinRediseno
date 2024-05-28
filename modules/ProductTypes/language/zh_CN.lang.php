@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => '产品类型',
     'LBL_MODULE_NAME_SINGULAR' => '产品类型',
     'LBL_MODULE_TITLE' => '产品类型：首页',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => '您确定要删除这条记录吗？',
     'ERR_DELETE_RECORD' => '必须指定记录编号才能删除产品类型。',
     'NTC_LIST_ORDER' => '设置此类型在产品类型下拉列表中的显示顺序。',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'导入产品类型',
-    'LBL_CREATED_BY'=>'创建人',
+    'LNK_IMPORT_PRODUCT_TYPES' => '导入产品类型',
+    'LBL_CREATED_BY' => '创建人',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> '负责人 ID',
-    'LBL_EXPORT_CREATED_BY'=>'创建人 ID',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'导入产品类别',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => '负责人 ID',
+    'LBL_EXPORT_CREATED_BY' => '创建人 ID',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => '导入产品类别',
+];

@@ -29,18 +29,26 @@ class PMSEWrapper
      */
     public function getSelectRows(
         $bean,
-        $orderBy = "",
-        $where = "",
+        $orderBy = '',
+        $where = '',
         $rowOffset = 0,
         $limit = -1,
         $max = -1,
-        $selectFields = array(),
-        $joinTables = array()
+        $selectFields = [],
+        $joinTables = []
     ) {
+
         $GLOBALS['log']->debug("get_list:  order_by = '$orderBy' and where = '$where' and limit = '$limit'");
-//        $orderBy = $this->processOrderBy($orderBy);
-        $queryArray = $this->assembleSelectQueryArray($bean, $orderBy, $where, $selectFields, array(), $joinTables,
-            false);
+        //        $orderBy = $this->processOrderBy($orderBy);
+        $queryArray = $this->assembleSelectQueryArray(
+            $bean,
+            $orderBy,
+            $where,
+            $selectFields,
+            [],
+            $joinTables,
+            false
+        );
 
         $recordSet = $this->processSelectQuery($bean, $queryArray, $rowOffset, $limit, $max);
         foreach ($recordSet['rowList'] as $key => $item) {
@@ -63,12 +71,13 @@ class PMSEWrapper
         $bean,
         $orderBy,
         $where = '',
-        $fieldList = array(),
-        $params = array(),
-        $joinTables = array(),
+        $fieldList = [],
+        $params = [],
+        $joinTables = [],
         $returnArray = false
     ) {
-        $queryArray = array();
+
+        $queryArray = [];
         if (!empty($params['distinct'])) {
             $distinct = ' DISTINCT ';
         } else {
@@ -77,9 +86,9 @@ class PMSEWrapper
         $orderBy = $bean->process_order_by($orderBy);
         if (!empty($orderBy)) {
             //make call to process the order by clause
-            $queryArray['orderBy'] = " ORDER BY " . $orderBy; //$this->processOrderBy($orderBy);
+            $queryArray['orderBy'] = ' ORDER BY ' . $orderBy; //$this->processOrderBy($orderBy);
         }
-        $queryArray['where'] = $where != '' ? " WHERE " . $where : '';
+        $queryArray['where'] = $where != '' ? ' WHERE ' . $where : '';
         $joinedTables = '';
         $lastTableName = '';
         if (!empty($joinTables)) {
@@ -88,27 +97,27 @@ class PMSEWrapper
             $lastJoinAlias = '';
             foreach ($joinTables as $join) {
                 if ($lastTableName == '') {
-                    $joinedTables = "(" . $bean->table_name . ' ' . strtoupper($join[0]) . " JOIN " . $join[1] . " ON " . $join[2];
+                    $joinedTables = '(' . $bean->table_name . ' ' . strtoupper($join[0]) . ' JOIN ' . $join[1] . ' ON ' . $join[2];
                     $lastTableName = $bean->table_name;
                 } else {
-                    $joinedTables = "(" . $joinedTables . ' ' . strtoupper($join[0]) . " JOIN " . $join[1] . " ON " . $join[2];
+                    $joinedTables = '(' . $joinedTables . ' ' . strtoupper($join[0]) . ' JOIN ' . $join[1] . ' ON ' . $join[2];
                     $lastTableName = $join[1];
                 }
-                $joinedTables .= ") ";
+                $joinedTables .= ') ';
             }
-            $queryArray['from'] = " FROM " . $joinedTables;
+            $queryArray['from'] = ' FROM ' . $joinedTables;
         } else {
             $queryArray['from'] = " FROM $bean->table_name ";
         }
         if ($joinedTables == '') {
-            $lastTableName = $bean->table_name . ".";
+            $lastTableName = $bean->table_name . '.';
         } else {
             $lastTableName = '';
         }
         if (empty($fieldList)) {
             $queryArray['select'] = " SELECT $distinct $lastTableName* ";
         } else {
-            $queryFieldList = array();
+            $queryFieldList = [];
             foreach ($bean->field_defs as $fieldDefinition) {
                 foreach ($fieldList as $field) {
                     //                    $fieldName = $field;
@@ -123,7 +132,7 @@ class PMSEWrapper
                 }
             }
             if (empty($queryFieldList)) {
-                $queryFieldList[] = $lastTableName . "." . $bean->getPrimaryFieldName();
+                $queryFieldList[] = $lastTableName . '.' . $bean->getPrimaryFieldName();
             }
             $queryArray['select'] = " SELECT $distinct " . implode(',', $queryFieldList);
         }
@@ -133,14 +142,14 @@ class PMSEWrapper
 
     /**
      * This method assembles the query data array into a complete query in order to execute it and return the results.
-     * @global array $sugar_config
      * @param string $queryArray
      * @param integer $rowOffset
      * @param integer $limit
      * @param integer $maxPerPage
      * @return array
+     * @global array $sugar_config
      */
-    public function processSelectQuery($bean, $queryArray = array(), $rowOffset = 0, $limit = -1, $maxPerPage = -1)
+    public function processSelectQuery($bean, $queryArray = [], $rowOffset = 0, $limit = -1, $maxPerPage = -1)
     {
         global $sugar_config;
         $db = DBManagerFactory::getInstance('listviews');
@@ -148,7 +157,7 @@ class PMSEWrapper
             $queryArray['orderBy'] = '';
         }
         $query = $queryArray['select'] . $queryArray['from'] . $queryArray['where'] . $queryArray['orderBy'] . ' ';
-        $GLOBALS['log']->debug("processQuery: query is " . $query);
+        $GLOBALS['log']->debug('processQuery: query is ' . $query);
         if ($limit == -1 && $rowOffset == 0) {
             $records = $bean->db->query($query, false);
             $totalRows = $bean->db->getRowCount($records);
@@ -157,15 +166,15 @@ class PMSEWrapper
             $totalRows = $bean->getCountRows($queryArray);
         }
 
-        $GLOBALS['log']->debug("processQuery: result is " . print_r($records, true));
+        $GLOBALS['log']->debug('processQuery: result is ' . print_r($records, true));
         $isFirstTime = true;
-        $list = array();
+        $list = [];
         while (($row = $bean->db->fetchByAssoc($records)) != null) {
             $row = $bean->convertRow($row);
             $list[] = $row;
         }
 
-        $response = array();
+        $response = [];
         $response['rowList'] = $list;
         $response['totalRows'] = $totalRows;
         $response['currentOffset'] = $rowOffset;
@@ -211,7 +220,7 @@ class PMSEWrapper
      */
     public function sanitizeBoundFields($row)
     {
-        $fields = array('bou_element', 'bou_element_type', 'bou_rel_position', 'bou_size_identical', 'bou_uid');
+        $fields = ['bou_element', 'bou_element_type', 'bou_rel_position', 'bou_size_identical', 'bou_uid'];
         foreach ($fields as $key) {
             unset($row[$key]);
         }
@@ -226,6 +235,7 @@ class PMSEWrapper
     public function decodeArray($array)
     {
         foreach ($array as $key => $value) {
+            $value = $value ?? '';
             $array[$key] = html_entity_decode($value, ENT_QUOTES);
         }
         return $array;
@@ -262,14 +272,13 @@ class PMSEWrapper
      */
     public function update($bean, $fieldsArray)
     {
-        $primaryKeysFields = array();
+        $primaryKeysFields = [];
         $primaryKeysArray = $this->getPrimaryFieldName($bean);
-        $primaryKeysArray = is_array($primaryKeysArray) ? $primaryKeysArray : array($primaryKeysArray);
+        $primaryKeysArray = is_array($primaryKeysArray) ? $primaryKeysArray : [$primaryKeysArray];
         $beanIsLoaded = true;
         $primaryKeysPresent = true;
 
         foreach ($primaryKeysArray as $primaryKey) {
-
             if (!isset($bean->fetched_row[$primaryKey]) && !isset($bean->$primaryKey)) {
                 $beanIsLoaded = false;
             }
@@ -317,7 +326,7 @@ class PMSEWrapper
         if ($definition['single']) {
             return $definition['name'];
         } else {
-            $definitionArray = array();
+            $definitionArray = [];
             foreach ($definition as $singleDefinition) {
                 if (isset($singleDefinition['name'])) {
                     $definitionArray[] = $singleDefinition['name'];
@@ -334,7 +343,7 @@ class PMSEWrapper
     public function getPrimaryFieldUID($bean)
     {
         $idField = $this->getPrimaryFieldName($bean);
-        $newField = str_replace("_id", "_uid", $idField);
+        $newField = str_replace('_id', '_uid', $idField);
         $newFieldDef = $bean->getFieldDefinition($newField);
         $newField = ($newFieldDef != false) ? $newField : '';
         return $newField;
@@ -351,12 +360,12 @@ class PMSEWrapper
         $indices = $bean->getIndices();
         foreach ($indices as $index) {
             if ($index['type'] == 'primary') {
-                if ((is_countable($index['fields']) ? count($index['fields']) : 0) == 1) {
+                if (safeCount($index['fields']) == 1) {
                     $definition = $bean->getFieldDefinition($index['fields'][0]);
                     $definition['single'] = true;
                 } else {
-                    if ((is_countable($index['fields']) ? count($index['fields']) : 0) > 1) {
-                        $definition = array();
+                    if (safeCount($index['fields']) > 1) {
+                        $definition = [];
                         foreach ($index['fields'] as $field) {
                             $definition[] = $bean->getFieldDefinition($field);
                         }
@@ -392,7 +401,7 @@ class PMSEWrapper
         $query = $this->getDeleteQuery($bean);
 
         // If there is a query, run it and return the result
-        return $query && $bean->db->query($query, true, "Error marking record deleted: ");
+        return $query && $bean->db->query($query, true, 'Error marking record deleted: ');
     }
 
     /**
@@ -436,7 +445,7 @@ class PMSEWrapper
                 // If the condition already has something added to it, glue it
                 // with an AND
                 if (!empty($condition)) {
-                    $condition .= " AND";
+                    $condition .= ' AND';
                 }
 
                 // Append the actual condition now
@@ -458,6 +467,6 @@ class PMSEWrapper
         $keys = $this->getPrimaryFieldName($bean);
 
         // Dress up the response
-        return is_array($keys) ? $keys : array($keys);
+        return is_array($keys) ? $keys : [$keys];
     }
 }

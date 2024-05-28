@@ -28,9 +28,9 @@ class SugarFieldTag extends SugarFieldRelatecollection
     /**
      * Override of parent apiSave to force the custom save to be run from API
      * @param SugarBean $bean
-     * @param array     $params
-     * @param string    $field
-     * @param array     $properties
+     * @param array $params
+     * @param string $field
+     * @param array $properties
      */
     public function apiSave(SugarBean $bean, array $params, $field, $properties)
     {
@@ -46,7 +46,6 @@ class SugarFieldTag extends SugarFieldRelatecollection
         $relField = $properties['link'];
 
         if ($bean->load_relationship($relField)) {
-
             // if an empty array is passed delete all tags associated with the bean and exit
             // Be careful not to delete all when empty array and "add" passed in
             if (empty($params[$field]) &&
@@ -56,7 +55,7 @@ class SugarFieldTag extends SugarFieldRelatecollection
             }
 
             // Loop through submitted Tags to make collection of  tag beans (either new or retrieved)
-            $relBeans = array();
+            $relBeans = [];
             foreach ($params[$field] as $key => $record) {
                 // Collect all tag beans
                 $relBeans[] = $this->getTagBean($record);
@@ -82,11 +81,9 @@ class SugarFieldTag extends SugarFieldRelatecollection
 
             // Handle adding new tags
             $this->addTagsToBean($bean, $relBeans, $relField, $addedTags);
-
         } else {
             $GLOBALS['log']->fatal("Failed to load relationship $relField on {$bean->module_dir}");
         }
-
     }
 
     /**
@@ -115,10 +112,10 @@ class SugarFieldTag extends SugarFieldRelatecollection
         $q = $this->getSugarQuery();
         // Get the tag from the lowercase version of the name, selecting all
         // fields so that we can load the bean from these fields if found
-        $q->select(array('id', 'name', 'name_lower'));
+        $q->select(['id', 'name', 'name_lower']);
         $q->from($tagBean)
-          ->where()
-          ->equals('name_lower', sugarStrToLower($tagName));
+            ->where()
+            ->equals('name_lower', sugarStrToLower($tagName));
         $result = $q->execute();
 
         // If there is a result for this tag name, send back the bean for it
@@ -128,7 +125,7 @@ class SugarFieldTag extends SugarFieldRelatecollection
         }
 
         // Create a new record and send back THAT bean
-        $tagBean->fromArray(array('name' => $tagName));
+        $tagBean->fromArray(['name' => $tagName]);
         $tagBean->verifiedUnique = true;
         $tagBean->save();
         return $tagBean;
@@ -143,12 +140,12 @@ class SugarFieldTag extends SugarFieldRelatecollection
             if (!empty($args['rc_beans'][$fieldName][$bean->id])) {
                 $data[$fieldName] = $args['rc_beans'][$fieldName][$bean->id];
             } else {
-                $data[$fieldName] = array();
+                $data[$fieldName] = [];
             }
         } else {
             [$relName, $fields, $limit] = $this->parseProperties($properties);
             $data[$fieldName] = array_values(
-                $this->getLinkedRecords($bean, $relName, $fields, $limit, array('name_lower', 'ASC'))
+                $this->getLinkedRecords($bean, $relName, $fields, $limit, ['name_lower', 'ASC'])
             );
         }
     }
@@ -161,7 +158,7 @@ class SugarFieldTag extends SugarFieldRelatecollection
      * @param Array $second The changed array of values
      * @return Array of added and removed tags
      */
-    public function getChangedValues(Array $initial, Array $changed)
+    public function getChangedValues(array $initial, array $changed)
     {
         // Handle comparison on the keys
         $iKeys = array_keys($initial);
@@ -170,14 +167,14 @@ class SugarFieldTag extends SugarFieldRelatecollection
         $a = array_diff($cKeys, $iKeys);
         // Removed are what is in $initial but not $changed
         $r = array_diff($iKeys, $cKeys);
-        $added = $removed = array();
+        $added = $removed = [];
         foreach ($a as $add) {
             $added[$add] = $changed[$add];
         }
         foreach ($r as $rem) {
             $removed[$rem] = $initial[$rem];
         }
-        return array($added, $removed);
+        return [$added, $removed];
     }
 
     /**
@@ -189,7 +186,7 @@ class SugarFieldTag extends SugarFieldRelatecollection
      */
     public function getChangedTags($params, $field)
     {
-        $changedTags = array();
+        $changedTags = [];
         if (!empty($params[$field])) {
             $submittedTags = $params[$field];
             foreach ($submittedTags as $submittedTag) {
@@ -214,7 +211,7 @@ class SugarFieldTag extends SugarFieldRelatecollection
      */
     public function getOriginalTags($currRelBeans)
     {
-        $originalTags = array();
+        $originalTags = [];
         if (!empty($currRelBeans)) {
             foreach ($currRelBeans as $tagId => $tagRecord) {
                 $originalTags[sugarStrToLower($tagRecord->name)] = $tagRecord->name;
@@ -275,7 +272,7 @@ class SugarFieldTag extends SugarFieldRelatecollection
      * @param $options Array of additional information including Tags
      * @return string sanitized value
      */
-    public function exportSanitize($value, $vardef, $focus, $row = array())
+    public function exportSanitize($value, $vardef, $focus, $row = [])
     {
         if (!isset($row['id'])) {
             return trim($value);
@@ -286,14 +283,14 @@ class SugarFieldTag extends SugarFieldRelatecollection
         }
 
         $exportString = '';
-        if (isset($this->options['relTags'][$row["id"]])) {
-            foreach ($this->options['relTags'][$row["id"]] as $tag) {
+        if (isset($this->options['relTags'][$row['id']])) {
+            foreach ($this->options['relTags'][$row['id']] as $tag) {
                 if (isset($tag['name'])) {
-                    $exportString .= trim($tag['name']) . ", ";
+                    $exportString .= trim($tag['name']) . ', ';
                 }
             }
         }
-        return rtrim($exportString, ", ");
+        return rtrim($exportString, ', ');
     }
 
     /**
@@ -306,7 +303,7 @@ class SugarFieldTag extends SugarFieldRelatecollection
     public function getTagValuesFromImport($value)
     {
         if (empty($value)) {
-            return array();
+            return [];
         }
 
         if (is_array($value)) {
@@ -337,7 +334,7 @@ class SugarFieldTag extends SugarFieldRelatecollection
      */
     public function getNormalizedFieldValues($bean, $fieldName)
     {
-        $return = array();
+        $return = [];
         if (isset($bean->field_defs[$fieldName]['link'])) {
             $relField = $bean->field_defs[$fieldName]['link'];
             if ($bean->load_relationship($relField)) {
@@ -373,7 +370,7 @@ class SugarFieldTag extends SugarFieldRelatecollection
             }
 
             // DB Quote the elements of the tag array
-            array_walk($value, array($this, 'applyQuoteToTag'), $bean->db);
+            array_walk($value, [$this, 'applyQuoteToTag'], $bean->db);
 
             // Glue the tag array together as a string
             $implodedValue = implode(',', $value);

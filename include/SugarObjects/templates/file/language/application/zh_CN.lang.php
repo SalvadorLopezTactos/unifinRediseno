@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => '市场营销',
-    'Knowledge Base' => '知识库',
-    'Sales' => '销售',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => '营销资料',
-    'Product Brochures' => '产品手册',
-    'FAQ' => '常见问题',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => '营销',
+        'Knowledge Base' => '知识库',
+        'Sales' => '销售',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => '启用',
-    'Draft' => '草稿',
-    'FAQ' => '常见问题',
-    'Expired' => '失效',
-    'Under Review' => '审查中',
-    'Pending' => '未决定',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => '营销宣传资料',
+        'Product Brochures' => '产品手册',
+        'FAQ' => '常见问题',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => '活动的',
+        'Draft' => '草稿',
+        'FAQ' => '常见问题',
+        'Expired' => '过期',
+        'Under Review' => '审核中',
+        'Pending' => '待定',
+    ],
+];

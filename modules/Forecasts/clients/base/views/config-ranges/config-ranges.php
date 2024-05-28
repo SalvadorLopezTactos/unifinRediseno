@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Forecasts']['base']['view']['config-ranges'] = array(
+$viewdefs['Forecasts']['base']['view']['config-ranges'] = [
     'label' => 'LBL_FORECASTS_CONFIG_BREADCRUMB_RANGES',
-    'panels' => array(
-        array(
-            'fields' => array(
-                array(
+    'panels' => [
+        [
+            'fields' => [
+                [
                     'name' => 'forecast_ranges',
                     'type' => 'radioenum',
                     'label' => 'LBL_FORECASTS_CONFIG_RANGES_OPTIONS',
@@ -22,10 +22,10 @@ $viewdefs['Forecasts']['base']['view']['config-ranges'] = array(
                     'options' => 'forecasts_config_ranges_options_dom',
                     'default' => false,
                     'enabled' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'category_ranges',
-                    'include' => array(
+                    'include' => [
                         'name' => 'include',
                         'type' => 'range',
                         'view' => 'edit',
@@ -34,8 +34,8 @@ $viewdefs['Forecasts']['base']['view']['config-ranges'] = array(
                         'maxRange' => 100,
                         'default' => true,
                         'enabled' => true,
-                    ),
-                    'upside' => array(
+                    ],
+                    'upside' => [
                         'name' => 'upside',
                         'type' => 'range',
                         'view' => 'edit',
@@ -44,8 +44,8 @@ $viewdefs['Forecasts']['base']['view']['config-ranges'] = array(
                         'maxRange' => 100,
                         'default' => true,
                         'enabled' => true,
-                    ),
-                    'custom_default' => array(
+                    ],
+                    'custom_default' => [
                         'name' => 'custom_default',
                         'type' => 'range',
                         'view' => 'edit',
@@ -54,8 +54,8 @@ $viewdefs['Forecasts']['base']['view']['config-ranges'] = array(
                         'maxRange' => 100,
                         'default' => true,
                         'enabled' => true,
-                    ),
-                    'custom' => array(
+                    ],
+                    'custom' => [
                         'name' => 'custom',
                         'type' => 'range',
                         'view' => 'edit',
@@ -64,8 +64,8 @@ $viewdefs['Forecasts']['base']['view']['config-ranges'] = array(
                         'maxRange' => 100,
                         'default' => true,
                         'enabled' => true,
-                    ),
-                    'custom_without_probability' => array(
+                    ],
+                    'custom_without_probability' => [
                         'name' => 'custom_without_probability',
                         'type' => 'range',
                         'view' => 'edit',
@@ -74,17 +74,17 @@ $viewdefs['Forecasts']['base']['view']['config-ranges'] = array(
                         'maxRange' => 100,
                         'default' => true,
                         'enabled' => true,
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'buckets_dom',
-                    'options' => array(
+                    'options' => [
                         'show_binary' => 'commit_stage_binary_dom',
                         'show_buckets' => 'commit_stage_dom',
-                        'show_custom_buckets' => 'commit_stage_custom_dom'
-                    )
-                )
-            )
-        ),
-    ),
-);
+                        'show_custom_buckets' => 'commit_stage_custom_dom',
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

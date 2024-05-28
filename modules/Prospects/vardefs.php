@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['Prospect'] = array(
+$dictionary['Prospect'] = [
     'table' => 'prospects',
     'color' => 'yellow',
     'icon' => 'sicon-target-lg',
@@ -18,8 +18,8 @@ $dictionary['Prospect'] = array(
     'audited' => true,
     'unified_search' => true,
     'full_text_search' => true,
-    'fields' => array(
-        'tracker_key' => array(
+    'fields' => [
+        'tracker_key' => [
             'name' => 'tracker_key',
             'vname' => 'LBL_TRACKER_KEY',
             'type' => 'int',
@@ -28,36 +28,36 @@ $dictionary['Prospect'] = array(
             'auto_increment' => true,
             'readonly' => true,
             'importable' => 'false',
-            'studio' => array('editview' => false),
-        ),
-        'birthdate' => array(
+            'studio' => ['editview' => false],
+        ],
+        'birthdate' => [
             'name' => 'birthdate',
             'vname' => 'LBL_BIRTHDATE',
             'massupdate' => false,
             'type' => 'date',
             'audited' => true,
             'pii' => true,
-        ),
-        'do_not_call' => array(
+        ],
+        'do_not_call' => [
             'name' => 'do_not_call',
             'vname' => 'LBL_DO_NOT_CALL',
             'type' => 'bool',
             'default' => '0',
-        ),
-        'lead_id' => array(
+        ],
+        'lead_id' => [
             'name' => 'lead_id',
             'type' => 'id',
             'reportable' => false,
             'vname' => 'LBL_LEAD_ID',
-        ),
-        'account_name' => array(
+        ],
+        'account_name' => [
             'name' => 'account_name',
             'vname' => 'LBL_ACCOUNT_NAME',
             'type' => 'varchar',
             'len' => '150',
-        ),
-        'campaign_id' => array(
-        'name' => 'campaign_id',
+        ],
+        'campaign_id' => [
+            'name' => 'campaign_id',
             'comment' => 'Campaign that generated lead',
             'vname' => 'LBL_CAMPAIGN_ID',
             'rname' => 'id',
@@ -70,25 +70,25 @@ $dictionary['Prospect'] = array(
             'reportable' => false,
             'massupdate' => false,
             'duplicate_merge' => 'disabled',
-        ),
-        'email_addresses' => array(
+        ],
+        'email_addresses' => [
             'name' => 'email_addresses',
             'type' => 'link',
             'relationship' => 'prospects_email_addresses',
             'source' => 'non-db',
             'vname' => 'LBL_EMAIL_ADDRESSES',
             'reportable' => false,
-            'rel_fields' => array('primary_address' => array('type' => 'bool')),
-        ),
-        'email_addresses_primary' => array(
+            'rel_fields' => ['primary_address' => ['type' => 'bool']],
+        ],
+        'email_addresses_primary' => [
             'name' => 'email_addresses_primary',
             'type' => 'link',
             'relationship' => 'prospects_email_addresses_primary',
             'source' => 'non-db',
             'vname' => 'LBL_EMAIL_ADDRESS_PRIMARY',
             'duplicate_merge' => 'disabled',
-        ),
-        'campaigns' => array(
+        ],
+        'campaigns' => [
             'name' => 'campaigns',
             'type' => 'link',
             'relationship' => 'prospect_campaign_log',
@@ -96,38 +96,38 @@ $dictionary['Prospect'] = array(
             'bean_name' => 'CampaignLog',
             'source' => 'non-db',
             'vname' => 'LBL_CAMPAIGNLOG',
-        ),
-        'prospect_lists' => array(
+        ],
+        'prospect_lists' => [
             'name' => 'prospect_lists',
             'type' => 'link',
             'relationship' => 'prospect_list_prospects',
             'module' => 'ProspectLists',
             'source' => 'non-db',
             'vname' => 'LBL_PROSPECT_LIST',
-        ),
-        'calls' => array(
+        ],
+        'calls' => [
             'name' => 'calls',
             'type' => 'link',
             'relationship' => 'prospect_calls',
             'source' => 'non-db',
             'vname' => 'LBL_CALLS',
             'module' => 'Calls',
-        ),
-        'meetings' => array(
+        ],
+        'meetings' => [
             'name' => 'meetings',
             'type' => 'link',
             'relationship' => 'prospect_meetings',
             'source' => 'non-db',
             'vname' => 'LBL_MEETINGS',
             'module' => 'Meetings',
-        ),
-        'notes' => array(
+        ],
+        'notes' => [
             'name' => 'notes',
             'type' => 'link',
             'relationship' => 'prospect_notes',
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
-        ),
+        ],
         'messages' => [
             'name' => 'messages',
             'type' => 'link',
@@ -135,14 +135,14 @@ $dictionary['Prospect'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_MESSAGES',
         ],
-        'dataprivacy' => array(
+        'dataprivacy' => [
             'name' => 'dataprivacy',
             'type' => 'link',
             'relationship' => 'prospects_dataprivacy',
             'source' => 'non-db',
             'vname' => 'LBL_DATAPRIVACY',
-        ),
-        'dp_business_purpose' => array (
+        ],
+        'dp_business_purpose' => [
             'name' => 'dp_business_purpose',
             'vname' => 'LBL_DATAPRIVACY_BUSINESS_PURPOSE',
             'type' => 'multienum',
@@ -152,8 +152,8 @@ $dictionary['Prospect'] = array(
             'default' => '',
             'len' => 255,
             'comment' => 'Business purposes consented for',
-        ),
-        'dp_consent_last_updated' => array(
+        ],
+        'dp_consent_last_updated' => [
             'name' => 'dp_consent_last_updated',
             'vname' => 'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED',
             'type' => 'date',
@@ -162,31 +162,31 @@ $dictionary['Prospect'] = array(
             'enable_range_search' => true,
             'options' => 'date_range_search_dom',
             'comment' => 'Date consent last updated',
-        ),
+        ],
         //d&b principal id, a unique id assigned to a contact by D&B API
         //this contact is used for dupe check
-        'dnb_principal_id' => array (
+        'dnb_principal_id' => [
             'name' => 'dnb_principal_id',
             'vname' => 'LBL_DNB_PRINCIPAL_ID',
             'type' => 'varchar',
             'len' => 30,
             'comment' => 'Unique Id For D&B Contact',
-        ),
-        'tasks' => array (
+        ],
+        'tasks' => [
             'name' => 'tasks',
             'type' => 'link',
             'relationship' => 'prospect_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_TASKS',
-        ),
-        'emails' => array(
+        ],
+        'emails' => [
             'name' => 'emails',
             'type' => 'link',
             'relationship' => 'emails_prospects_rel',
             'source' => 'non-db',
             'vname' => 'LBL_EMAILS',
-        ),
-        'archived_emails' => array(
+        ],
+        'archived_emails' => [
             'name' => 'archived_emails',
             'type' => 'link',
             'link_class' => 'ArchivedEmailsLink',
@@ -197,27 +197,27 @@ $dictionary['Prospect'] = array(
             'relationship' => '',
             'hideacl' => true,
             'readonly' => true,
-        ),
-        'lead' => array(
+        ],
+        'lead' => [
             'name' => 'lead',
             'type' => 'link',
             'relationship' => 'lead_prospect',
             'module' => 'Leads',
             'source' => 'non-db',
             'vname' => 'LBL_LEAD',
-        ),
-        'assistant' => array(
+        ],
+        'assistant' => [
             'name' => 'assistant',
             'type' => 'varchar',
             'len' => 75,
             'vname' => 'LBL_ASSISTANT',
-        ),
-        'assistant_phone' => array(
+        ],
+        'assistant_phone' => [
             'name' => 'assistant_phone',
             'type' => 'varchar',
             'len' => 100,
             'vname' => 'LBL_ASSISTANT_PHONE',
-        ),
+        ],
         'geocode_status' => [
             'studio' => hasMapsLicense() ? [
                 'editField' => true,
@@ -242,25 +242,25 @@ $dictionary['Prospect'] = array(
             'readonly' => true,
             'reportable' => false,
         ],
-    ),
-    'indices' => array(
-        array(
+    ],
+    'indices' => [
+        [
             'name' => 'prospect_auto_tracker_key',
             'type' => 'index',
-            'fields' => array('tracker_key')
-        ),
-        array(
+            'fields' => ['tracker_key'],
+        ],
+        [
             'name' => 'idx_prospecs_del_last',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'last_name',
-                'deleted'
-            )
-        ),
-        array('name' => 'idx_prospect_title', 'type' => 'index', 'fields' => array('title')),
-    ),
-    'relationships' => array(
-        'prospect_tasks' => array(
+                'deleted',
+            ],
+        ],
+        ['name' => 'idx_prospect_title', 'type' => 'index', 'fields' => ['title']],
+    ],
+    'relationships' => [
+        'prospect_tasks' => [
             'lhs_module' => 'Prospects',
             'lhs_table' => 'prospects',
             'lhs_key' => 'id',
@@ -269,9 +269,9 @@ $dictionary['Prospect'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Prospects'
-        ),
-        'prospect_notes' => array(
+            'relationship_role_column_value' => 'Prospects',
+        ],
+        'prospect_notes' => [
             'lhs_module' => 'Prospects',
             'lhs_table' => 'prospects',
             'lhs_key' => 'id',
@@ -280,8 +280,8 @@ $dictionary['Prospect'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Prospects'
-        ),
+            'relationship_role_column_value' => 'Prospects',
+        ],
         'prospect_messages' => [
             'lhs_module' => 'Prospects',
             'lhs_table' => 'prospects',
@@ -293,7 +293,7 @@ $dictionary['Prospect'] = array(
             'relationship_role_column' => 'parent_type',
             'relationship_role_column_value' => 'Prospects',
         ],
-        'prospect_meetings' => array(
+        'prospect_meetings' => [
             'lhs_module' => 'Prospects',
             'lhs_table' => 'prospects',
             'lhs_key' => 'id',
@@ -302,9 +302,9 @@ $dictionary['Prospect'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Prospects'
-        ),
-        'prospect_calls' => array(
+            'relationship_role_column_value' => 'Prospects',
+        ],
+        'prospect_calls' => [
             'lhs_module' => 'Prospects',
             'lhs_table' => 'prospects',
             'lhs_key' => 'id',
@@ -313,9 +313,9 @@ $dictionary['Prospect'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Prospects'
-        ),
-        'prospect_emails' => array(
+            'relationship_role_column_value' => 'Prospects',
+        ],
+        'prospect_emails' => [
             'lhs_module' => 'Prospects',
             'lhs_table' => 'prospects',
             'lhs_key' => 'id',
@@ -324,55 +324,56 @@ $dictionary['Prospect'] = array(
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
             'relationship_role_column' => 'parent_type',
-            'relationship_role_column_value' => 'Prospects'
-        ),
-        'prospect_campaign_log' => array(
+            'relationship_role_column_value' => 'Prospects',
+        ],
+        'prospect_campaign_log' => [
             'lhs_module' => 'Prospects',
             'lhs_table' => 'prospects',
             'lhs_key' => 'id',
             'rhs_module' => 'CampaignLog',
             'rhs_table' => 'campaign_log',
             'rhs_key' => 'target_id',
-            'relationship_type' => 'one-to-many'
-        ),
+            'relationship_type' => 'one-to-many',
+        ],
 
-    ),
-    'duplicate_check' => array(
+    ],
+    'duplicate_check' => [
         'enabled' => true,
-        'FilterDuplicateCheck' => array(
-            'filter_template' => array(
-                array(
-                    '$or' => array(
-                        array(
-                            '$and' => array(
-                                array('first_name' => array('$starts' => '$first_name')),
-                                array('last_name' => array('$starts' => '$last_name')),
-                                array('account_name' => array('$starts' => '$account_name')),
-                                array('dnb_principal_id' => array('$equals' => '$dnb_principal_id')),
-                            )
-                        ),
-                        array('phone_work' => array('$equals' => '$phone_work'))
-                    )
-                )
-            ),
-            'ranking_fields' => array(
-                array('in_field_name' => 'phone_work', 'dupe_field_name' => 'phone_work'),
-                array('in_field_name' => 'account_name', 'dupe_field_name' => 'account_name'),
-                array('in_field_name' => 'last_name', 'dupe_field_name' => 'last_name'),
-                array('in_field_name' => 'first_name', 'dupe_field_name' => 'first_name'),
-            )
-        )
-    ),
-);
+        'FilterDuplicateCheck' => [
+            'filter_template' => [
+                [
+                    '$or' => [
+                        [
+                            '$and' => [
+                                ['first_name' => ['$starts' => '$first_name']],
+                                ['last_name' => ['$starts' => '$last_name']],
+                                ['account_name' => ['$starts' => '$account_name']],
+                                ['dnb_principal_id' => ['$equals' => '$dnb_principal_id']],
+                            ],
+                        ],
+                        ['phone_work' => ['$equals' => '$phone_work']],
+                    ],
+                ],
+            ],
+            'ranking_fields' => [
+                ['in_field_name' => 'phone_work', 'dupe_field_name' => 'phone_work'],
+                ['in_field_name' => 'account_name', 'dupe_field_name' => 'account_name'],
+                ['in_field_name' => 'last_name', 'dupe_field_name' => 'last_name'],
+                ['in_field_name' => 'first_name', 'dupe_field_name' => 'first_name'],
+            ],
+        ],
+    ],
+];
 VardefManager::createVardef(
     'Prospects',
     'Prospect',
-    array(
+    [
         'default',
         'assignable',
         'team_security',
-        'person'
-    )
+        'person',
+        'audit',
+    ]
 );
 
 //boost value for full text search
@@ -387,5 +388,3 @@ $dictionary['Prospect']['fields']['phone_fax']['full_text_search']['boost'] = 0.
 $dictionary['Prospect']['fields']['description']['full_text_search']['boost'] = 0.43;
 $dictionary['Prospect']['fields']['primary_address_street']['full_text_search']['boost'] = 0.22;
 $dictionary['Prospect']['fields']['alt_address_street']['full_text_search']['boost'] = 0.21;
-
-

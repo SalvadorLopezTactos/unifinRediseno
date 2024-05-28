@@ -9,22 +9,22 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['DataPrivacy']['base']['view']['recordlist'] = array(
+$viewdefs['DataPrivacy']['base']['view']['recordlist'] = [
     'favorite' => true,
     'sticky_resizable_columns' => true,
-    'selection' => array(
+    'selection' => [
         'type' => 'multi',
-        'actions' => array(
-            array(
+        'actions' => [
+            [
                 'name' => 'massupdate_button',
                 'type' => 'button',
                 'label' => 'LBL_MASS_UPDATE',
                 'primary' => true,
-                'events' => array(
+                'events' => [
                     'click' => 'list:massupdate:fire',
-                ),
+                ],
                 'acl_action' => 'massupdate',
-            ),
+            ],
             [
                 'name' => 'calc_field_button',
                 'type' => 'button',
@@ -34,35 +34,35 @@ $viewdefs['DataPrivacy']['base']['view']['recordlist'] = array(
                 ],
                 'acl_action' => 'massupdate',
             ],
-            array(
+            [
                 'name' => 'export_button',
                 'type' => 'button',
                 'label' => 'LBL_EXPORT',
                 'acl_action' => 'export',
                 'primary' => true,
-                'events' => array(
+                'events' => [
                     'click' => 'list:massexport:fire',
-                ),
-            ),
-        ),
-    ),
-    'rowactions' => array(
-        'actions' => array(
-            array(
+                ],
+            ],
+        ],
+    ],
+    'rowactions' => [
+        'actions' => [
+            [
                 'type' => 'rowaction',
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
                 'icon' => 'sicon-preview',
                 'acl_action' => 'view',
-            ),
-            array(
+            ],
+            [
                 'type' => 'rowaction',
                 'name' => 'edit_button',
                 'label' => 'LBL_EDIT_BUTTON',
                 'event' => 'list:editrow:fire',
                 'acl_action' => 'edit',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

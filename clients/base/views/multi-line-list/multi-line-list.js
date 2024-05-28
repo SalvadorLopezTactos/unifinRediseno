@@ -49,7 +49,12 @@
     className: 'multi-line-list-view',
     drawerModelId: null,
     sideDrawer: null,
-    plugins: ['ConfigDrivenList', 'ResizableColumns'],
+    plugins: [
+        'ConfigDrivenList',
+        'ResizableColumns',
+        'Editable',
+        'RowEditable',
+    ],
 
     /**
      * Event handlers for left row actions.
@@ -105,7 +110,9 @@
     metricDataInitialize: function(data) {
         if (data) {
             this.metric = data;
+            this.stopListening(this.collection);
             this.initialize(this.options);
+            this.bindDataChange();
             this.undelegateEvents();
             this.delegateEvents();
         }
@@ -176,12 +183,20 @@
                 this.module
             );
             this.addContextListeners();
+
+            let collection = this.context.get('collection');
+            collection.origFilterDef = undefined;
+            collection.dataFetched = false;
+
             return;
         }
         var defaultMeta = app.metadata.getView(null, 'multi-line-list') || {};
         var listViewMeta = app.metadata.getView(options.module, 'multi-line-list') || {};
         options.meta = _.extend({}, defaultMeta, listViewMeta, options.meta || {});
-        options.meta.panels = this.metric.viewdefs.base.view['multi-line-list'].panels;
+        if (this.metric.viewdefs.base) {
+            options.meta.panels = this.metric.viewdefs.base.view['multi-line-list'].panels;
+        }
+
         this._setMetricLabels(this.metric.labels, options.meta);
         this._setConfig(options);
         this._setCollectionOption(options);
@@ -203,9 +218,8 @@
 
         if (this.collection) {
             options.fields = fields;
-            this.collection.fetch(options);
+            this._setCollectionOption(options);
 
-            this.stopListening(this.collection);
             this.listenTo(this.collection, 'sync', this._render);
         }
 
@@ -221,24 +235,111 @@
             };
         }
         this.events = _.extend({}, this.events, leftColumnsEvents, {
-            'click .multi-line-row td:not(:first-child)': 'handleRowClick',
+            'click [data-action=edit-list-row]': '_handleRowEditClicked',
+            'click [data-action=cancel-list-row]': '_handleRowCancelClicked',
+            'click [data-action=save-list-row]': '_handleRowSaveClicked',
         });
-
-        // Add event handlers for row actions
-        _.each(this.rowEvents, function(callback, event) {
-            this.context.off(event, this[callback], this);
-            this.context.on(event, this[callback], this);
-        }, this);
 
         if (this.hasFrozenColumn) {
             this.$el.on('scroll', _.bind(this.toggleFrozenColumnBorder, this));
         }
 
-        this.autoRefresh(true);
         this._setResizableColumns();
         // Add focus drawer types from vardefs.php to mulit-line-list fields
         let moduleMetadataFields = app.metadata.getModule(this.module, 'fields');
         this.setSubfieldType(moduleMetadataFields, this.meta.panels);
+        this.context.trigger('initialized:multi-line-list');
+    },
+
+    /**
+     * Bind events
+     *
+     * @private
+     */
+    _bindEvents: function() {
+        this._disposeEvents();
+
+        this.listenTo(app.events, 'active:metric:change', this._handleConfirm);
+        this.listenTo(app.events, 'tabbed-dashboard:switch-tab-clicked', this._handleConfirm);
+        this.listenTo(app.router, 'route', () => {
+            if (this.hasUnsavedChanges()) {
+                this.listenTo(app.events, 'editable:beforehandlers:off', this.dispose);
+            }
+        });
+
+        if (this.layout) {
+            this.layout.on('list:paginate:previous list:paginate:next list:paginate:input', this._handlePaginate, this);
+        }
+
+        let elements = this.el.getElementsByClassName('multi-line-row');
+        _.each(elements, (el) => {
+            this.addRowClickListener(el);
+        });
+    },
+
+    /**
+     * Add click listeners for rows
+     *
+     * @param el
+     */
+    addRowClickListener: function(el) {
+        let timer;
+
+        el.addEventListener('click', event => {
+            if (event.detail === 1 && $(event.target).attr('rel') !== 'tooltip') {
+                timer = setTimeout(() => {
+                    this.handleRowClick(event);
+                }, 300);
+            }
+        });
+
+        el.addEventListener('dblclick', event => {
+            clearTimeout(timer);
+            this._handleRowDoubleClick(event);
+        });
+    },
+
+    /**
+     * Dispose bind events
+     *
+     * @private
+     */
+    _disposeEvents: function() {
+        app.events.off('active:metric:change tabbed-dashboard:switch-tab-clicked', null, this);
+
+        if (this.layout) {
+            this.layout.off('list:paginate:previous list:paginate:next list:paginate:input', null, this);
+        }
+    },
+
+    /**
+     * Show confirmation message
+     *
+     * @param onConfirm
+     * @private
+     */
+    _handleConfirm: function(onConfirm) {
+        if (this.warnUnsavedChanges(onConfirm)) {
+            onConfirm();
+        }
+    },
+
+    /**
+     * Handler for pagination events
+     *
+     * @param onConfirm
+     * @private
+     */
+    _handlePaginate: function(onConfirm) {
+        const onConfirmWrapper = () => {
+            this.collection.map((model) => {
+                model.revertAttributes();
+            });
+
+            onConfirm();
+        };
+
+        this._handleConfirm(onConfirmWrapper);
     },
 
     /**
@@ -294,7 +395,7 @@
      */
     bindDataChange: function() {
         //Tells that the last metric tab is hidden
-        this.stopListening(this.context);
+        this._super('bindDataChange');
         this.listenTo(this.context, 'metric:empty', this.handleLastMetricHide);
     },
 
@@ -312,6 +413,9 @@
     addContextListeners: function() {
         this.stopListening(this.context);
 
+        this.listenTo(this.context,
+            'app:view:sorting-dropdown:changeDropdownValue app:view:sorting-dropdown:clickArrow',
+            _.bind(this.toggleSkeletonLoader, this, true));
         this.listenTo(this.context, 'filter:fetch:start', _.bind(this.toggleSkeletonLoader, this, true));
         this.listenTo(this.context, 'filter:fetch:success filter:fetch:complete', function() {
             if (this.metric) {
@@ -322,6 +426,11 @@
         }, this);
         this.listenTo(this.context, 'active:metric:changed metric:empty', function() {
             this.toggleSkeletonLoader(true);
+        }, this);
+
+        // Add event handlers for row actions
+        _.each(this.rowEvents, function(callback, event) {
+            this.context.on(event, this[callback], this);
         }, this);
     },
 
@@ -364,7 +473,7 @@
         }
 
         let $firstColumns = this.$('.table tbody tr td:nth-child(2), .table thead tr th:nth-child(2)');
-        $firstColumns.toggleClass('column-border', this.$el[0].scrollLeft > 0);
+        $firstColumns.toggleClass('border-r', this.$el[0].scrollLeft > 0);
     }, 100),
 
     /**
@@ -389,6 +498,39 @@
     },
 
     /**
+     * Get sorting component.
+     * @return {View.View|null}
+     * @private
+     */
+    _getSortingComponent: function() {
+        return this.layout.getComponent('multi-line-filterpanel') ?
+            this.layout.getComponent('multi-line-filterpanel').getComponent('multi-line-sorting') : null;
+    },
+
+    /**
+     * Get cached orderBy values.
+     * @return {string}
+     * @private
+     */
+    _getCachedOrderBy: function() {
+        const sortingComponent = this._getSortingComponent();
+        let orderBy = '';
+        if (sortingComponent) {
+            sortingComponent.setSortingDropdownData();
+            const cachedOrderBy = sortingComponent.getCachedOrderBy(this.metric);
+
+            if (!_.isEmpty(cachedOrderBy)) {
+                orderBy = cachedOrderBy.order_by_primary + ':' + cachedOrderBy.order_by_primary_direction;
+                if (cachedOrderBy.order_by_secondary) {
+                    orderBy += ',' + cachedOrderBy.order_by_secondary + ':' +
+                        cachedOrderBy.order_by_secondary_direction;
+                }
+            }
+        }
+        return orderBy;
+    },
+
+    /**
      * Set filter_def and order_by from config.
      *
      * @param {Object} options object for the view
@@ -398,8 +540,9 @@
         if (this.metric.filter_def) {
             options.meta.filterDef = this.metric.filter_def;
         }
-        if (this.metric.order_by_primary) {
-            var orderBy =
+        let orderBy = this._getCachedOrderBy();
+        if (!orderBy && this.metric.order_by_primary) {
+            orderBy =
                 this.metric.order_by_primary.trim() +
                 ':' +
                 (this.metric.order_by_primary_direction ? this.metric.order_by_primary_direction : 'asc');
@@ -410,6 +553,8 @@
                     ':' +
                     (this.metric.order_by_secondary_direction ? this.metric.order_by_secondary_direction : 'asc');
             }
+        }
+        if (orderBy) {
             options.meta.collectionOptions = options.meta.collectionOptions || {};
             options.meta.collectionOptions.params = options.meta.collectionOptions.params || {};
             options.meta.collectionOptions.params.order_by = orderBy;
@@ -513,7 +658,11 @@
         var $el = this.$(event.target);
 
         // ignore event triggered by dropdown-toggle or any action dropdown is open
-        if (this.isDropdownToggle($el) || this.isActionsDropdownOpen()) {
+        if (this.isDropdownToggle($el) ||
+            this.isActionsDropdownOpen() ||
+            this.isInlineEditButton($el) ||
+            this.isInlineEditActive($el)
+        ) {
             return;
         }
 
@@ -534,7 +683,7 @@
                         contentType: 'dashboard',
                         dataTitle: dataTitle,
                         module: model.get('_module'),
-                        layout: 'multi-line',
+                        layout: 'focus',
                         modelId: model.id,
                         parentContext: this.context,
                         baseModelId: model.get('id'),
@@ -647,6 +796,40 @@
     },
 
     /**
+     * Handles when the save button is clicked on an editable list row
+     *
+     * @param event
+     * @private
+     */
+    _handleRowSaveClicked: function(event) {
+        let row = this._getClickedRowElement(event);
+        let model = this.collection.get(row.data('id'));
+        if (model) {
+            let fieldsToValidate = this.getFields(model.module, model);
+            model.doValidate(fieldsToValidate, (isValid) => {
+                if (isValid) {
+                    const options = {
+                        success: () => {
+                            this._toggleRow(row, false);
+                        },
+                        showAlerts: {
+                            'process': true,
+                            'success': {
+                                messages: app.lang.get('LBL_RECORD_SAVED', self.module)
+                            }
+                        },
+                        params: {
+                            allowBatching: true
+                        },
+                    };
+
+                    model.save({}, options);
+                }
+            });
+        }
+    },
+
+    /**
      * Check if any rowaction dropdown-menu is open
      *
      * @return {boolean} dropdown-menu open or not
@@ -656,13 +839,35 @@
     },
 
     /**
+     * Check if the event is triggered from inline edit buttons
+     *
+     * @param $el
+     * @return {boolean}
+     */
+    isInlineEditButton: function($el) {
+        const elements = $el.closest('.edit-td');
+        return !!(elements && elements.length);
+    },
+
+    /**
+     * Check if inline edit is active for the row
+     *
+     * @param $el
+     * @return {boolean}
+     */
+    isInlineEditActive: function($el) {
+        const elements = $el.closest('.tr-inline-edit');
+        return !!(elements && elements.length);
+    },
+
+    /**
      * Check if the event is triggered from dropdown-toggle
      *
      * @param {jQuery} $el element that trigger the event
      * @return {boolean} element is dropdown-toggle or not
      */
     isDropdownToggle: function($el) {
-        return $el.hasClass('dropdown-toggle') || $el.parent().hasClass('dropdown-toggle');
+        return !!($el.hasClass('dropdown-menu') || (_.isFunction($el.closest) && $el.closest('.dropdown-menu').length));
     },
 
     /**
@@ -676,22 +881,6 @@
         var menuHeight = $buttonGroup.height() + $buttonGroup.children('ul').first().height();
         if (windowHeight < $buttonGroup.offset().top + menuHeight) {
             $buttonGroup.toggleClass('dropup');
-        }
-    },
-
-    /**
-     * Auto refresh the list view every 5 minutes
-     *
-     * @param {boolean} start `true` to start the timer, `false` to stop it
-     */
-    autoRefresh: function(start) {
-        if (start) {
-            clearInterval(this._timerId);
-            this._timerId = setInterval(_.bind(function() {
-                this.refreshData();
-            }, this), 5 * 1000 * 60); // 5 min default
-        } else {
-            clearInterval(this._timerId);
         }
     },
 
@@ -717,8 +906,13 @@
             return;
         }
 
+        this._checkRowEditAccess();
+        this._setUpdatesToCollection();
         this._super('_render');
+        this._setRowFields();
+
         this.$el.closest('.dashboard').css('overflow-y', 'hidden');
+        this.$el.parent().addClass('multi-line');
         this._makeColumnResizable();
         if (app.sideDrawer && app.sideDrawer.isOpen()) {
             let id = app.sideDrawer.getParentContextDef('baseModelId');
@@ -729,17 +923,57 @@
                 }
             }
         }
+
+        this._bindEvents();
+        this._toggleRowsByModelId(_.keys(this.toggledListModels), true);
+    },
+
+    /**
+     * Set updates from toggledListModels in case if collection was reloaded
+     *
+     * @private
+     */
+    _setUpdatesToCollection: function() {
+        if (_.isEmpty(this.toggledListModels)) {
+            return;
+        }
+
+        _.each(this.collection.models, function(model) {
+            const id = model.get('id');
+            const changedModel = this.toggledListModels[id];
+            if (changedModel) {
+                const changedAttributes = changedModel.changedAttributes(changedModel.getSynced());
+
+                _.each(changedAttributes, (value, fieldName) => {
+                    model.set(fieldName, changedModel.get(fieldName));
+                });
+            }
+        }, this);
+    },
+
+    /**
+     * Remove toggled models
+     *
+     * @private
+     */
+    _clearToggledModels: function() {
+        _.each(this.toggledListModels, (model) => {
+            delete this.toggledListModels[model.id];
+        });
+        this.rowFields = {};
     },
 
     /**
      * @inheritdoc
      */
     _dispose: function() {
-        this.autoRefresh(false);
+        this._clearToggledModels();
+
         if (this.hasFrozenColumn) {
             this.$el.off('scroll', _.bind(this.toggleFrozenColumnBorder, this));
         }
         this.$el.closest('.dashboard').css('overflow-y', 'auto');
+        this.$el.parent().removeClass('multi-line');
         this.stopListening();
         if (this.context) {
             _.each(this.rowEvents, function(callback, event) {
@@ -748,6 +982,7 @@
         }
         this.metric = null;
         this.options = null;
+        this._disposeEvents();
         this._super('_dispose');
     }
 })

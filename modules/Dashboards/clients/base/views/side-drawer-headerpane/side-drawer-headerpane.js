@@ -68,6 +68,21 @@
         this.model.on('change', this._updateTabTitle, this);
         this.context.on('side-drawer-headerpane:empty-tab-title', this._setEmptyTabTitle, this);
         this.layout.on('headerpane:adjust_fields', this.adjustDropdownMenu, this);
+        if (!_.isEmpty(this.context.parent) && !_.isEmpty(this.context.parent.parent)) {
+            let rowModel = this.context.parent.parent.get('rowModel');
+            if (rowModel) {
+                this.listenTo(rowModel, 'change', this._updateTabContent);
+            }
+        }
+    },
+
+    /**
+     * Refresh tab content.
+     */
+    _updateTabContent: function() {
+        app.alert.dismiss('data:sync:success');
+        this.render();
+        app.sideDrawer.refreshTab();
     },
 
     /**

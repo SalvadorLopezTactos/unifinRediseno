@@ -57,13 +57,13 @@
         var isPreview = this.name === 'preview-pane';
 
         if (isPreview) {
-            this.$('a[data-toggle="tab"]').off('shown.bs.tab');
+            this.$('li[data-bs-toggle="tab"]').off('shown.bs.tab');
         }
 
         this._super('render');
 
         if (isPreview) {
-            this.$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+            this.$('li[data-bs-toggle="tab"]').on('shown.bs.tab', function(e) {
                 var tabName = $(e.target.parentElement).data('tab-name');
                 var $navTabs = $(e.target).parents('.nav-tabs');
                 var $tabbable = $(e.target).parents('.tabbable');
@@ -114,8 +114,8 @@
 
         if (!lblKey) {
             // handles the 'preview' case returning the label
-            // 'LBL_PREVIEW' for translations
-            lblKey = 'LBL_' + compDef.toUpperCase();
+            // Business Card for translations
+            lblKey = 'LBL_RECORD_BODY';
         }
 
         let label = lblKey;
@@ -131,12 +131,13 @@
         }
         const anchorTag = document.createElement('a');
         anchorTag.classList = 'font-bold p-0 text-center';
-        anchorTag.dataset.toggle = 'tab';
-        anchorTag.href = `#${id}`;
         anchorTag.onclick = 'return false;';
         anchorTag.textContent = label;
 
-        let $nav = $('<li/>').append(anchorTag);
+        let $nav = $('<li />', {
+            'data-bs-toggle': 'tab',
+            'data-bs-target': `#${id}`,
+        }).append(anchorTag);
 
         // we have a sugar app and want to lazy load it
         if (compDef.type === 'external-app') {
@@ -267,7 +268,7 @@
      */
     dispose: function() {
         if (this.name === 'preview-pane') {
-            this.$('a[data-toggle="tab"]').off('shown.bs.tab');
+            this.$('li[data-bs-toggle="tab"]').off('shown.bs.tab');
         }
 
         this._super('dispose');

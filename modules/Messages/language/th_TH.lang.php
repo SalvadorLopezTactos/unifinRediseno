@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'อยู่ระหว่างดำเนินการ',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'ข้อความระบบลิ้นชัก',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนข้อความ',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์ของข้อความ',
 ];

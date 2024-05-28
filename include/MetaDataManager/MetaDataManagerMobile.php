@@ -12,11 +12,11 @@
 
 class MetaDataManagerMobile extends MetaDataManager
 {
-    protected $denyListModuleDataKeys = array(
-        'menu'
-    );
+    protected $denyListModuleDataKeys = [
+        'menu',
+    ];
 
-    protected $allowedModuleViews = array(
+    protected $allowedModuleViews = [
         'list',
         'edit',
         'detail',
@@ -29,15 +29,15 @@ class MetaDataManagerMobile extends MetaDataManager
         'docusign-drafts-list',
         'docusign-envelopes-list',
         'recipients-list',
-    );
+    ];
 
-    protected $allowedModuleLayouts = array(
+    protected $allowedModuleLayouts = [
         'list',
         'edit',
         'detail',
         'subpanels',
         'convert-main',
-    );
+    ];
 
     /**
      * Find all modules enabled in Mobile
@@ -79,7 +79,7 @@ class MetaDataManagerMobile extends MetaDataManager
      */
     public function getSupportingModules($modules)
     {
-        $supportingModules = array();
+        $supportingModules = [];
         foreach ($modules as $module) {
             $supportingModules = array_merge(
                 $supportingModules,
@@ -96,7 +96,7 @@ class MetaDataManagerMobile extends MetaDataManager
      */
     public function getDefaultEnabledModuleList()
     {
-        return array(
+        return [
             'Activities',
             'Forecasts',
             'Home',
@@ -106,7 +106,7 @@ class MetaDataManagerMobile extends MetaDataManager
             'Users',
             'CommentLog',
             'ContractTypes',
-        );
+        ];
     }
 
     /**
@@ -126,7 +126,7 @@ class MetaDataManagerMobile extends MetaDataManager
      *
      * @return array An array with all the modules and their properties
      */
-    public function getModulesInfo($data = array(), MetaDataContextInterface $context = null)
+    public function getModulesInfo($data = [], MetaDataContextInterface $context = null)
     {
         // Need to override the base one because it grabs the visibility settings from
         // the $moduleList global and we don't like messing with globals
@@ -159,12 +159,12 @@ class MetaDataManagerMobile extends MetaDataManager
                 $wireless_module_registry_keys = array_keys($wireless_module_registry);
                 $cache->set('wireless_module_registry_keys', $wireless_module_registry_keys);
             } else {
-                $wireless_module_registry_keys = array();
+                $wireless_module_registry_keys = [];
             }
         }
 
         // Forcibly remove the Users module
-        $wireless_module_registry_keys = array_diff($wireless_module_registry_keys, array('Users'));
+        $wireless_module_registry_keys = array_diff($wireless_module_registry_keys, ['Users']);
 
         return $wireless_module_registry_keys;
     }
@@ -183,9 +183,9 @@ class MetaDataManagerMobile extends MetaDataManager
             unset($wireless_module_registry['Users']);
         }
 
-        $quickcreateList = array();
+        $quickcreateList = [];
 
-        foreach($wireless_module_registry as $module => $moduleData) {
+        foreach ($wireless_module_registry as $module => $moduleData) {
             if (empty($moduleData['disable_create'])) {
                 $quickcreateList[] = $module;
             }
@@ -232,7 +232,7 @@ class MetaDataManagerMobile extends MetaDataManager
     public function normalizeMetadata($data)
     {
         if (!empty($data['modules'])) {
-            foreach($data['modules'] as $module=> $mData) {
+            foreach ($data['modules'] as $module => $mData) {
                 // Deny certain data types altogether
                 foreach ($this->denyListModuleDataKeys as $key) {
                     unset($data['modules'][$module][$key]);
@@ -240,7 +240,7 @@ class MetaDataManagerMobile extends MetaDataManager
 
                 // Filter out views and layouts that are not allowed
                 if (!empty($mData['views'])) {
-                    foreach($mData['views'] as $key => $def) {
+                    foreach ($mData['views'] as $key => $def) {
                         if (!in_array($key, $this->allowedModuleViews)) {
                             unset($data['modules'][$module]['views'][$key]);
                         }
@@ -248,7 +248,7 @@ class MetaDataManagerMobile extends MetaDataManager
                 }
 
                 if (!empty($mData['layouts'])) {
-                    foreach($mData['layouts'] as $key => $def) {
+                    foreach ($mData['layouts'] as $key => $def) {
                         if (!in_array($key, $this->allowedModuleLayouts)) {
                             unset($data['modules'][$module]['layouts'][$key]);
                         }
@@ -267,9 +267,9 @@ class MetaDataManagerMobile extends MetaDataManager
     {
         $modules = $this->getModules();
         sort($modules);
-        return array_merge(parent::getLanguageCacheAttributes(), array(
+        return array_merge(parent::getLanguageCacheAttributes(), [
             // refresh client side language cache after the list of mobile enabled modules is changed
             'modules' => $modules,
-        ));
+        ]);
     }
 }

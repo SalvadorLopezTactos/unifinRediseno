@@ -78,7 +78,7 @@
         }
         let defaults = {
             label: app.isSynced ? app.lang.getModuleName(this.module, {plural: true}) || '' : '',
-            route: app.isSynced ? app.router.buildRoute(this.module, viewMeta.routeId, viewMeta.routeAction) : '',
+            route: this._buildRoute(this.module, viewMeta),
             icon: moduleMeta.icon || '',
             displayType:  moduleMeta.display_type || 'icon',
             abbreviation: app.isSynced ? app.lang.getModuleIconLabel(this.module) : '',
@@ -126,5 +126,25 @@
     _render: function() {
         this.useAbbreviation = this.displayType === 'abbreviation';
         this._super('_render');
+    },
+
+    /**
+     * Generates route for the module sidebar icons.
+     * Handles the case when user is not admin, then build a route to user's profile page
+     *
+     * @param {string} moduleName
+     * @param {Object} viewMeta
+     *
+     * @private
+     */
+    _buildRoute: function(moduleName, viewMeta) {
+        if (moduleName === 'Users') {
+            let acls = app.user.getAcls();
+            if (app.user.get('type') !== 'admin' && acls.Users.developer === 'no') {
+                moduleName = `${this.module}/${app.user.id}`;
+            }
+        }
+
+        return app.isSynced ? app.router.buildRoute(moduleName, viewMeta.routeId, viewMeta.routeAction) : '';
     }
 })

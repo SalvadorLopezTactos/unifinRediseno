@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean as CJBean;
 use Sugarcrm\Sugarcrm\CustomerJourney\Exception as CJException;
 
@@ -79,7 +80,7 @@ class DRI_SubWorkflow_Template extends Basic
      * Retrieves a DRI_SubWorkflow_Template with id $id and
      * returns a instance of the retrieved bean
      *
-     * @param string $id: the id of the DRI_SubWorkflow_Template that should be retrieved
+     * @param string $id : the id of the DRI_SubWorkflow_Template that should be retrieved
      * @return DRI_SubWorkflow_Template
      * @throws NotFoundException: if not found
      */
@@ -92,7 +93,7 @@ class DRI_SubWorkflow_Template extends Basic
      * Retrieves a DRI_SubWorkflow_Template with name $name and
      * returns a instance of the retrieved bean
      *
-     * @param string $name: the name of the DRI_SubWorkflow_Template that should be retrieved
+     * @param string $name : the name of the DRI_SubWorkflow_Template that should be retrieved
      * @param string | null $parentId
      * @param string | null $skipId
      * @return DRI_SubWorkflow_Template
@@ -115,7 +116,7 @@ class DRI_SubWorkflow_Template extends Basic
      * Retrieves a DRI_SubWorkflow_Template with name $name and
      * returns a instance of the retrieved bean
      *
-     * @param string $sortOrder: the name of the DRI_SubWorkflow_Template that should be retrieved
+     * @param string $sortOrder : the name of the DRI_SubWorkflow_Template that should be retrieved
      * @param string $parentId
      * @param string | null $skipId
      * @return DRI_SubWorkflow_Template
@@ -146,6 +147,7 @@ class DRI_SubWorkflow_Template extends Basic
 
         return false;
     }
+
     /**
      * Get the activity templates
      *
@@ -175,9 +177,10 @@ class DRI_SubWorkflow_Template extends Basic
      */
     private function sortActivities($activities)
     {
-        usort($activities, ["DRI_SubWorkflow_Template", "sortActivitiesCallback"]);
+        usort($activities, ['DRI_SubWorkflow_Template', 'sortActivitiesCallback']);
         return $activities;
     }
+
     /**
      * This is the callback function used to sort activities
      * @param \DRI_Workflow_Task_Template $activity1
@@ -186,12 +189,14 @@ class DRI_SubWorkflow_Template extends Basic
      */
     private function sortActivitiesCallback(
         \DRI_Workflow_Task_Template $activity1,
-        \DRI_Workflow_Task_Template  $activity2
+        \DRI_Workflow_Task_Template $activity2
     ) {
+
         $sortOrder1 = (int)$activity1->sort_order;
         $sortOrder2 = (int)$activity2->sort_order;
         return $sortOrder1 - $sortOrder2;
     }
+
     /**
      * Get the last task template
      *
@@ -203,7 +208,7 @@ class DRI_SubWorkflow_Template extends Basic
     {
         $activityTemplates = $this->getActivityTemplates();
 
-        if (count($activityTemplates) === 0) {
+        if (safeCount($activityTemplates) === 0) {
             throw new SugarApiExceptionNotFound();
         }
 
@@ -237,7 +242,7 @@ class DRI_SubWorkflow_Template extends Basic
         try {
             DRI_Workflow_Template::getById($this->dri_workflow_template_id)->save();
         } catch (\Exception $e) {
-            $GLOBALS['log']->debug(__FILE__ . ' ' . __LINE__, $e->getMessage);
+            $GLOBALS['log']->debug(__FILE__ . ' ' . __LINE__, $e->getMessage());
         }
 
         if (!$isNew && $nameChanged) {
@@ -260,7 +265,7 @@ class DRI_SubWorkflow_Template extends Basic
                         WHERE
                             id = ?
 SQL;
-                $db->getConnection()->executeUpdate($sql, [$this->name, $new_label, $id]);
+                $db->getConnection()->executeUpdate($sql, [$this->name, $new_label, $this->id]);
             }
         }
         return $return;
@@ -301,7 +306,7 @@ SQL;
     {
         try {
             self::getByNameAndParent($this->name, $this->dri_workflow_template_id, $this->id);
-            throw new SugarApiExceptionInvalidParameter(sprintf('template with name %s does already exist', $this->name));
+            throw new SugarApiExceptionInvalidParameter(sprintf('Another Smart Guide template is already named %s.', $this->name));
         } catch (CJException\CustomerJourneyException $e) {
             $GLOBALS['log']->debug(__FILE__ . ' ' . __LINE__, $e->getMessage());
         }
@@ -342,7 +347,7 @@ SQL;
     /**
      * Get the journey template
      *
-     * @param bool $deleted: Set false if the bean is already deleted
+     * @param bool $deleted : Set false if the bean is already deleted
      * @return DRI_Workflow_Template
      */
     public function getJourneyTemplate($deleted = true)
@@ -443,8 +448,8 @@ SQL;
     /**
      * After delete the stage, re-order the sort orders and labels of all the stages
      *
-     * @param string  $workflow_template_id
-     * @param string  $defaultSortOrderOperation
+     * @param string $workflow_template_id
+     * @param string $defaultSortOrderOperation
      */
     public function reorderSortOrdersAndLabels(string $workflow_template_id, string $defaultSortOrderOperation = 'minus')
     {

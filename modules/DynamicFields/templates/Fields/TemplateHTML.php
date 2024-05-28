@@ -10,82 +10,95 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class TemplateHTML extends TemplateField{
-    var $data_type = 'html';
-    var $type = 'html';
+class TemplateHTML extends TemplateField
+{
+    public $data_type = 'html';
+    public $type = 'html';
     // Size and Len need to be empty to prevent validation errors on the client
-    var $size = '';
-    var $len = '';
-    
-    function save($df)
+    public $size = '';
+    public $len = '';
+
+    public function save($df)
     {
         $this->ext3 = 'text';
         // clean the field of any dangerous html tags like the script tag, etc
         $this->ext4 = SugarCleaner::cleanHtml($this->ext4, true);
         parent::save($df);
     }
-	
-	function set($values){
-       parent::set($values);
-       if(!empty($this->ext4)){
-           $this->default_value = $this->ext4;
-           $this->default = $this->ext4;
-       }
-        
-    }
-    
-    function get_html_detail(){
-      
-        return '<div title="' . strtoupper($this->name . '_HELP'). '" >{'.strtoupper($this->name) . '}</div>';
-    }
-    
-    function get_html_edit(){
-        return $this->get_html_detail();
-    }
-    
-    function get_html_list(){
-        return $this->get_html_detail();
-    }
-    
-    function get_html_search(){
-        return $this->get_html_detail();
-    }
-    
-    function get_xtpl_detail(){
-        
-        return from_html(nl2br($this->ext4));   
-    }
-    
-    function get_xtpl_edit(){
-       return  $this->get_xtpl_detail();
-    }
-    
-    function get_xtpl_list(){
-        return  $this->get_xtpl_detail();
-    }
-    function get_xtpl_search(){
-        return  $this->get_xtpl_detail();
-    }
-    
-    function get_db_add_alter_table($table){
-        return '';
-    }
 
-    function get_db_modify_alter_table($table){
-        return '';
-    }
-    
-
-    function get_db_delete_alter_table($table)
+    public function set($values)
     {
-        return '' ;
+        parent::set($values);
+        if (!empty($this->ext4)) {
+            $this->default_value = $this->ext4;
+            $this->default = $this->ext4;
+        }
     }
-    
-    function get_field_def() {
+
+    public function get_html_detail()
+    {
+
+        return '<div title="' . strtoupper($this->name . '_HELP') . '" >{' . strtoupper($this->name) . '}</div>';
+    }
+
+    public function get_html_edit()
+    {
+        return $this->get_html_detail();
+    }
+
+    public function get_html_list()
+    {
+        return $this->get_html_detail();
+    }
+
+    public function get_html_search()
+    {
+        return $this->get_html_detail();
+    }
+
+    public function get_xtpl_detail()
+    {
+
+        return from_html(nl2br($this->ext4));
+    }
+
+    public function get_xtpl_edit()
+    {
+        return $this->get_xtpl_detail();
+    }
+
+    public function get_xtpl_list()
+    {
+        return $this->get_xtpl_detail();
+    }
+
+    public function get_xtpl_search()
+    {
+        return $this->get_xtpl_detail();
+    }
+
+    public function get_db_add_alter_table($table)
+    {
+        return '';
+    }
+
+    public function get_db_modify_alter_table($table)
+    {
+        return '';
+    }
+
+
+    public function get_db_delete_alter_table($table)
+    {
+        return '';
+    }
+
+    public function get_field_def()
+    {
         $def = parent::get_field_def();
-        if(!empty($this->ext4)){
-       		$def['default_value'] = $this->ext4;
-        	$def['default'] = $this->ext4;
+        if (!empty($this->ext4)) {
+            $def['default_value'] = $this->ext4;
+            $def['default'] = $this->ext4;
         }
         $def['studio'] = 'visible';
         $def['source'] = 'non-db';
@@ -101,8 +114,4 @@ class TemplateHTML extends TemplateField{
     {
         return [];
     }
-    
 }
-
-
-?>

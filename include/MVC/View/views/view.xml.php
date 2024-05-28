@@ -11,10 +11,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class ViewXML extends SugarView{
-	var $type ='detail';
+class ViewXML extends SugarView
+{
+    public $type = 'detail';
 
-	function display(){
-		echo 'Not implemented';
- 	}
+    public function display()
+    {
+        echo 'Not implemented';
+    }
 }

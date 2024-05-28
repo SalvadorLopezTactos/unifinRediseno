@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Reports\Schedules;
 
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
@@ -25,7 +26,7 @@ class ReportSchedulesHelper
      *
      * @return string
      */
-    protected function getChartGenServiceURL($config) : string
+    protected function getChartGenServiceURL($config): string
     {
         $chartServiceConfig = $config->get('chart_service');
         $region = $this->getRegion();
@@ -42,7 +43,7 @@ class ReportSchedulesHelper
      *
      * @return string
      */
-    private function getRegion() : string
+    private function getRegion(): string
     {
         $sugarConfig = \SugarConfig::getInstance();
         $region = 'default';
@@ -70,7 +71,7 @@ class ReportSchedulesHelper
         $sugarConfig = \SugarConfig::getInstance();
         $serviceUrl = $this->getChartGenServiceURL($sugarConfig);
         $client = new ExternalResourceClient();
-        $response = $client->post("{$serviceUrl}/generate", json_encode($postData), ['Content-Type' => "application/json"]);
+        $response = $client->post("{$serviceUrl}/generate", json_encode($postData), ['Content-Type' => 'application/json']);
 
         return $response;
     }

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_NOTE_POSITION' => '产品组合位置',
     'LBL_PRODUCT_BUNDLE_NOTES_QUOTE_DATA_LIST' => '产品包记录报价数据列表',
-);
+];

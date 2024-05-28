@@ -10,12 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
- * Description:  
+ * Description:
  ********************************************************************************/
-
-
-
 
 
 $header_text = '';
@@ -24,28 +20,25 @@ global $app_list_strings;
 global $app_strings;
 global $current_user;
 
-if (!is_admin($current_user))
-{
-   sugar_die($app_strings['LBL_UNAUTH_ADMIN']);
+if (!is_admin($current_user)) {
+    sugar_die($app_strings['LBL_UNAUTH_ADMIN']);
 }
 
 global $theme;
 
-$GLOBALS['log']->info("DataSets edit view");
+$GLOBALS['log']->info('DataSets edit view');
 
-$xtpl=new XTemplate ('modules/CustomQueries/RepairQuery.html');
-$xtpl->assign("MOD", $mod_strings);
-$xtpl->assign("APP", $app_strings);
+$xtpl = new XTemplate('modules/CustomQueries/RepairQuery.html');
+$xtpl->assign('MOD', $mod_strings);
+$xtpl->assign('APP', $app_strings);
 
-	$xtpl->assign("ID", $_REQUEST['record']);
-	$xtpl->assign("QUERY_MSG", $_REQUEST['error_msg']);
-	
-	if(!empty($_REQUEST['edit'])){
-		$xtpl->assign("EDIT", $_REQUEST['edit']);
-	}
-		$xtpl->assign("REPAIR", "repair");	
-	
-	$xtpl->parse("main");
-	$xtpl->out("main");
+$xtpl->assign('ID', $_REQUEST['record']);
+$xtpl->assign('QUERY_MSG', $_REQUEST['error_msg']);
 
-?>
+if (!empty($_REQUEST['edit'])) {
+    $xtpl->assign('EDIT', $_REQUEST['edit']);
+}
+$xtpl->assign('REPAIR', 'repair');
+
+$xtpl->parse('main');
+$xtpl->out('main');

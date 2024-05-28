@@ -1227,5 +1227,5 @@ VardefManager::createVardef(
 $dictionary['DRI_Workflow_Task_Template']['fields']['name']['len'] = 50;
 
 $dictionary['DRI_Workflow_Task_Template']['fields']['description']['full_text_search'] = [
-  'enabled' => false,
+    'enabled' => false,
 ];

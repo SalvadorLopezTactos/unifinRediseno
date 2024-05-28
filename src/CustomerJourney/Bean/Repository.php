@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean;
 
 use Sugarcrm\Sugarcrm\CustomerJourney\Exception as CJException;
@@ -91,7 +92,7 @@ class Repository
      */
     private function getExceptionObject($class, $msgArgs, $httpCode)
     {
-        $exception =  null;
+        $exception = null;
         switch ($class) {
             case 'BaseException':
                 $exception = new CJException\CustomerJourneyException(null, $msgArgs, null, $httpCode);
@@ -136,8 +137,8 @@ class Repository
     /**
      * Retrieves a module with id $id and
      * returns a instance of the retrieved bean
-     * @param string $id: the id of the module that should be retrieved
-     * @param bool $deleted: Set false if the bean is already deleted
+     * @param string $id : the id of the module that should be retrieved
+     * @param bool $deleted : Set false if the bean is already deleted
      * @return bean
      * @throws CJException\NotFoundException
      */
@@ -181,7 +182,7 @@ class Repository
     {
         $this->requireArgs($args, ['table', 'name', 'module']);
 
-        $query=$this->getBasicSugarQuery($args);
+        $query = $this->getBasicSugarQuery($args);
         $query->where()->equals('name', $args['name']);
         if ($args['module'] === 'DRI_SubWorkflow_Templates') {
             $query->where()->equals('dri_workflow_template_id', $args['parentId']);
@@ -210,7 +211,7 @@ class Repository
     {
         $this->requireArgs($args, ['table', 'name', 'module']);
 
-        $query=$this->getBasicSugarQuery($args);
+        $query = $this->getBasicSugarQuery($args);
         $query->where()->equals('name', $args['name']);
         if (!empty($args['skipId'])) {
             $query->where()->notEquals('id', $args['skipId']);
@@ -254,7 +255,7 @@ class Repository
     {
         $this->requireArgs($args, ['table', 'module']);
 
-        $query=$this->getBasicSugarQuery($args);
+        $query = $this->getBasicSugarQuery($args);
         $query->where()->equals('sort_order', $args['sortOrder']);
         if ($args['module'] === 'DRI_SubWorkflow_Templates') {
             $query->where()->equals('dri_workflow_template_id', $args['parentId']);
@@ -285,17 +286,23 @@ class Repository
         if (empty($bean) || empty($stages) || empty($table)) {
             return;
         }
+        if ($defaultSortOrderOperation === 'update_order') {
+            //assign the last stage's order +1 to this stage now
+            $lastStageSortOrder = $stages[safeCount($stages) - 1]->sort_order;
+            $bean->sort_order = $lastStageSortOrder + 1;
+            $bean->label = (($bean->sort_order < 10) ? '0' : '') . $bean->sort_order . '. ' . $bean->name;
+        } else {
+            foreach ($stages as $stage) {
+                if ($stage->sort_order >= $bean->sort_order) {
+                    if ($defaultSortOrderOperation === 'minus') {
+                        $stage->sort_order = $stage->sort_order - 1;
+                    } else {
+                        $stage->sort_order = $stage->sort_order + 1;
+                    }
+                    $stage->label = (($stage->sort_order < 10) ? '0' : '') . $stage->sort_order . '. ' . $stage->name;
 
-        foreach ($stages as $stage) {
-            if ($stage->sort_order >= $bean->sort_order) {
-                if ($defaultSortOrderOperation === 'minus') {
-                    $stage->sort_order = $stage->sort_order - 1;
-                } else {
-                    $stage->sort_order = $stage->sort_order + 1;
+                    $this->updateSortOrderAndLabel($table, $stage->sort_order, $stage->label, $stage->id);
                 }
-                $stage->label = (($stage->sort_order < 10) ? '0' : '') . $stage->sort_order . '. ' . $stage->name;
-
-                $this->updateSortOrderAndLabel($table, $stage->sort_order, $stage->label, $stage->id);
             }
         }
     }

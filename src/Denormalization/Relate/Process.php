@@ -262,14 +262,14 @@ final class Process
         $objectName = $entity->getTargetObjectName();
 
         $content = "<?php\n";
-        $line = "\$dictionary[" . var_export($objectName, true) . "]['fields']";
+        $line = '$dictionary[' . var_export($objectName, true) . "]['fields']";
 
         foreach ($entity->fieldDefExt as $fieldName => $fieldData) {
             $content .= "\n// " . var_export($fieldName, true) . "\n";
             foreach ($fieldData as $key => $value) {
                 $content .= "{$line}["
-                    . var_export($fieldName, true) . "]["
-                    . var_export($key, true) . "] = "
+                    . var_export($fieldName, true) . ']['
+                    . var_export($key, true) . '] = '
                     . var_export($value, true) . ";\n";
             }
         }
@@ -372,7 +372,7 @@ final class Process
             }
         }
         $indexName = \DBManagerFactory::getInstance()->getValidDBName(
-            "idx_" . $entity->getTargetTableName() . "_{$entity->targetFieldName}"
+            'idx_' . $entity->getTargetTableName() . "_{$entity->targetFieldName}"
         );
 
         $this->db->replicateIndex(

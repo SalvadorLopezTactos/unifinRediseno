@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Табло със запис на покупките',
     'LBL_RELATED_ACCOUNT' => 'Свързан профил',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на покупки',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Хронология на покупки',
 ];

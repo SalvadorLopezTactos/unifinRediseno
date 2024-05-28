@@ -12,13 +12,13 @@
  */
 
 /*********************************************************************************
-* Description:
-* Portions created by SugarCRM are Copyright (C) SugarCRM, Inc. All Rights
-* Reserved. Contributor(s): contact@synolia.com - www.synolia.com
-* *******************************************************************************/
+ * Description:
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc. All Rights
+ * Reserved. Contributor(s): contact@synolia.com - www.synolia.com
+ * *******************************************************************************/
 
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1">
 								<tr>
 									<td valign="top" width="35%" class="dataLabel">Skaffa en API-nyckel och hemlighet från Twitter genom att skapa en applikation för din Sugarinstans.<br/><br>Använd följande steg för att skapa en applikation för din instans:<br/><br/>
@@ -40,9 +40,7 @@ $connector_strings = array (
 							</table>',
     'LBL_NAME' => 'Användarnamn på Twitter',
     'LBL_ID' => 'Användarnamn på Twitter',
-	'company_url' => 'URL',
+    'company_url' => 'URL',
     'oauth_consumer_key' => 'API-nyckel',
     'oauth_consumer_secret' => 'API-hemlighet',
-);
-
-?>
+];

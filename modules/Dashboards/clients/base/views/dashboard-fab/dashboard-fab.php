@@ -175,7 +175,7 @@ $viewdefs['Dashboards']['base']['view']['dashboard-fab'] = [
                     'id' => '0ca2d773-0bb3-4bf3-ae43-68569968af57',
                 ],
             ]
-        ],[
+        ], [
             'name' => 'configure_summary_button',
             'type' => 'rowaction',
             'icon' => 'sicon-edit-lg',

@@ -28,7 +28,7 @@ class PMSEJobQueueHandler extends PMSEAbstractRequestHandler
      * List of valid fields for a process
      * @var array
      */
-    protected $validFields = array(
+    protected $validFields = [
         'evn_criteria',
         'rel_element_module',
         'rel_element_relationship',
@@ -56,7 +56,7 @@ class PMSEJobQueueHandler extends PMSEAbstractRequestHandler
         'cas_id',
         'cas_index',
         'id',
-    );
+    ];
 
     /**
      * Retrieve the Scheduler Job object
@@ -106,8 +106,8 @@ class PMSEJobQueueHandler extends PMSEAbstractRequestHandler
         $job->data = json_encode($this->filterData($params->data));
 
         //function to call
-        $job->target = "function::PMSEJobRun";
-        $job->message = "Executing a PMSE queued task.";
+        $job->target = 'function::PMSEJobRun';
+        $job->message = 'Executing a PMSE queued task.';
 
         //set the user the job runs as
         $job->assigned_user_id = $this->getCurrentUser()->id;

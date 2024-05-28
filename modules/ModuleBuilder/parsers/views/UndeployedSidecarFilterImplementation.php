@@ -14,7 +14,6 @@ require_once 'modules/ModuleBuilder/parsers/constants.php';
 
 class UndeployedSidecarFilterImplementation extends AbstractMetaDataImplementation implements MetaDataImplementationInterface
 {
-
     /**
      * @var string|mixed
      */
@@ -49,7 +48,7 @@ class UndeployedSidecarFilterImplementation extends AbstractMetaDataImplementati
         $this->module->mbvardefs->updateVardefs();
 
         $templates = $this->module->config['templates'];
-        $template_def = "";
+        $template_def = '';
         foreach ($templates as $template => $a) {
             if ($a === 1) {
                 $template_def = $template;
@@ -67,7 +66,7 @@ class UndeployedSidecarFilterImplementation extends AbstractMetaDataImplementati
         if (file_exists($this->sidecarFile)) {
             include $this->sidecarFile;
         }
-        $viewdefs = empty($viewdefs) ? array('fields' => array()) : $viewdefs;
+        $viewdefs = empty($viewdefs) ? ['fields' => []] : $viewdefs;
 
         $this->_viewdefs = $this->getNewViewDefs($viewdefs);
 
@@ -81,7 +80,7 @@ class UndeployedSidecarFilterImplementation extends AbstractMetaDataImplementati
             $selected_lang = $GLOBALS['current_language'];
         }
         $GLOBALS['mod_strings'] = array_merge(
-            $GLOBALS['mod_strings'] ?: array(),
+            $GLOBALS['mod_strings'] ?: [],
             $this->module->getModStrings($selected_lang)
         );
     }
@@ -97,7 +96,7 @@ class UndeployedSidecarFilterImplementation extends AbstractMetaDataImplementati
             return $viewDefs[$this->_moduleName][$this->_viewClient]['filter']['default'];
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -106,7 +105,7 @@ class UndeployedSidecarFilterImplementation extends AbstractMetaDataImplementati
      */
     public function getFieldDefs()
     {
-        $results = array();
+        $results = [];
         if (!isset($this->_viewdefs['fields'])) {
             return $results;
         }
@@ -126,7 +125,7 @@ class UndeployedSidecarFilterImplementation extends AbstractMetaDataImplementati
      */
     public function getLanguage()
     {
-        return ""; // '' is the signal to translate() to use the global mod_strings
+        return ''; // '' is the signal to translate() to use the global mod_strings
     }
 
     /*
@@ -139,7 +138,7 @@ class UndeployedSidecarFilterImplementation extends AbstractMetaDataImplementati
 
         if (!is_dir(dirname($this->sidecarFile))) {
             if (!sugar_mkdir(dirname($this->sidecarFile), null, true)) {
-                throw new Exception(sprintf("Cannot create directory %s", $this->sidecarFile));
+                throw new Exception(sprintf('Cannot create directory %s', $this->sidecarFile));
             }
         }
         write_array_to_file(
@@ -148,5 +147,4 @@ class UndeployedSidecarFilterImplementation extends AbstractMetaDataImplementati
             $this->sidecarFile
         );
     }
-
 }

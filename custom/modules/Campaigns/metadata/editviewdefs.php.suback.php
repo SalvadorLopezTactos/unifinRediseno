@@ -1,25 +1,23 @@
 <?php
-$viewdefs['Campaigns'] = 
-array (
-  'EditView' => 
+// created: 2021-11-10 14:19:09
+$viewdefs['Campaigns']['EditView'] = array (
+  'templateMeta' => 
   array (
-    'templateMeta' => 
+    'maxColumns' => '2',
+    'widths' => 
     array (
-      'maxColumns' => '2',
-      'widths' => 
+      0 => 
       array (
-        0 => 
-        array (
-          'label' => '10',
-          'field' => '30',
-        ),
-        1 => 
-        array (
-          'label' => '10',
-          'field' => '30',
-        ),
+        'label' => '10',
+        'field' => '30',
       ),
-      'javascript' => '<script type="text/javascript" src="include/javascript/popup_parent_helper.js?v=n2VcxnJYdyixAutr131NlA"></script>
+      1 => 
+      array (
+        'label' => '10',
+        'field' => '30',
+      ),
+    ),
+    'javascript' => '<script type="text/javascript" src="include/javascript/popup_parent_helper.js?v=n2VcxnJYdyixAutr131NlA"></script>
 <script type="text/javascript">
 function type_change() {ldelim}
 	type = document.getElementsByName(\'campaign_type\');
@@ -64,129 +62,132 @@ function ConvertItems(id)  {ldelim}
 	actual_cost.value = formatNumber(actual_cost.value, num_grp_sep, dec_sep);
  {rdelim}
 </script>',
-      'useTabs' => false,
-      'tabDefs' => 
+    'useTabs' => false,
+    'tabDefs' => 
+    array (
+      'LBL_CAMPAIGN_INFORMATION' => 
       array (
-        'LBL_CAMPAIGN_INFORMATION' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-        ),
-        'LBL_PANEL_ASSIGNMENT' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-        ),
+        'newTab' => false,
+        'panelDefault' => 'expanded',
+      ),
+      'LBL_PANEL_ASSIGNMENT' => 
+      array (
+        'newTab' => false,
+        'panelDefault' => 'expanded',
       ),
     ),
-    'panels' => 
+  ),
+  'panels' => 
+  array (
+    'lbl_campaign_information' => 
     array (
-      'lbl_campaign_information' => 
+      0 => 
       array (
         0 => 
         array (
-          0 => 
+          'name' => 'name',
+        ),
+        1 => 
+        array (
+          'name' => 'status',
+        ),
+      ),
+      1 => 
+      array (
+        0 => 
+        array (
+          'name' => 'start_date',
+          'displayParams' => 
           array (
-            'name' => 'name',
-          ),
-          1 => 
-          array (
-            'name' => 'status',
+            'required' => false,
+            'showFormats' => true,
           ),
         ),
         1 => 
         array (
-          0 => 
+          'name' => 'end_date',
+          'displayParams' => 
           array (
-            'name' => 'start_date',
-            'displayParams' => 
-            array (
-              'required' => false,
-              'showFormats' => true,
-            ),
-          ),
-          1 => 
-          array (
-            'name' => 'end_date',
-            'displayParams' => 
-            array (
-              'showFormats' => true,
-            ),
-          ),
-        ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'campaign_type',
-            'displayParams' => 
-            array (
-              'javascript' => 'onchange="type_change();"',
-            ),
-          ),
-          1 => 
-          array (
-            'name' => 'frequency',
-            'customCode' => '<div style=\'none\' id=\'freq_field\'>{html_options name="frequency" options=$fields.frequency.options selected=$fields.frequency.value}</div></TD>',
-            'customLabel' => '<div style=\'none\' id=\'freq_label\'>{$MOD.LBL_CAMPAIGN_FREQUENCY}</div>',
-          ),
-        ),
-        3 => 
-        array (
-          0 => 'currency_id',
-          1 => 'impressions',
-        ),
-        4 => 
-        array (
-          0 => 'budget',
-          1 => 'expected_cost',
-        ),
-        5 => 
-        array (
-          0 => 'actual_cost',
-          1 => 'expected_revenue',
-        ),
-        6 => 
-        array (
-          0 => 
-          array (
-            'name' => 'objective',
-            'displayParams' => 
-            array (
-              'rows' => 8,
-              'cols' => 80,
-            ),
-          ),
-        ),
-        7 => 
-        array (
-          0 => 
-          array (
-            'name' => 'content',
-            'displayParams' => 
-            array (
-              'rows' => 8,
-              'cols' => 80,
-            ),
+            'showFormats' => true,
           ),
         ),
       ),
-      'LBL_PANEL_ASSIGNMENT' => 
+      2 => 
       array (
         0 => 
         array (
-          0 => 
+          'name' => 'campaign_type',
+          'displayParams' => 
           array (
-            'name' => 'assigned_user_name',
-            'label' => 'LBL_ASSIGNED_TO',
+            'javascript' => 'onchange="type_change();"',
           ),
-          1 => 
+        ),
+        1 => 
+        array (
+          'name' => 'frequency',
+          'customCode' => '<div style=\'none\' id=\'freq_field\'>{html_options name="frequency" options=$fields.frequency.options selected=$fields.frequency.value}</div></TD>',
+          'customLabel' => '<div style=\'none\' id=\'freq_label\'>{$MOD.LBL_CAMPAIGN_FREQUENCY}</div>',
+        ),
+      ),
+      3 => 
+      array (
+        0 => 'currency_id',
+        1 => 'impressions',
+      ),
+      4 => 
+      array (
+        0 => 'budget',
+        1 => 'expected_cost',
+      ),
+      5 => 
+      array (
+        0 => 'actual_cost',
+        1 => 'expected_revenue',
+      ),
+      6 => 
+      array (
+        0 => 
+        array (
+          'name' => 'objective',
+          'displayParams' => 
           array (
-            'name' => 'team_name',
-            'displayParams' => 
-            array (
-              'display' => true,
-            ),
+            'rows' => 8,
+            'cols' => 80,
+          ),
+        ),
+      ),
+      7 => 
+      array (
+        0 => 
+        array (
+          'name' => 'content',
+          'displayParams' => 
+          array (
+            'rows' => 8,
+            'cols' => 80,
+          ),
+        ),
+      ),
+    ),
+    'LBL_PANEL_ASSIGNMENT' => 
+    array (
+      0 => 
+      array (
+        0 => 
+        array (
+          'name' => 'assigned_user_name',
+          'label' => 'LBL_ASSIGNED_TO',
+          'displayParams' => 
+          array (
+            'htmlescape' => true,
+          ),
+        ),
+        1 => 
+        array (
+          'name' => 'team_name',
+          'displayParams' => 
+          array (
+            'display' => true,
           ),
         ),
       ),

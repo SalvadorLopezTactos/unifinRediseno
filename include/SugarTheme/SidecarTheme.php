@@ -39,12 +39,12 @@ class SidecarTheme
     /**
      * @var array Less variables of the theme
      */
-    private $variables = array();
+    private $variables = [];
 
     /**
      * @var array Less files to compile
      */
-    public $lessFilesToCompile = array('sugar');
+    public $lessFilesToCompile = ['sugar'];
 
 
     /**
@@ -59,7 +59,7 @@ class SidecarTheme
     {
         $this->platformName = $platformName;
         $this->paths = $this->makePaths($platformName);
-        $this->compiler = new lessc;
+        $this->compiler = new lessc();
 
         // Check for a customer less file. If exists, it will be compiled like other files
         if (file_exists('custom/themes/custom.less')) {
@@ -79,13 +79,13 @@ class SidecarTheme
         $filesInCache = $this->retrieveCssFilesInCache();
 
         // Remove the custom css file if the less file does not exist anymore
-        if (isset($filesInCache['custom']) && !in_array('custom', $this->lessFilesToCompile)) {
+        if (isset($filesInCache['custom']) && !safeInArray('custom', $this->lessFilesToCompile)) {
             unlink($this->getCssFileLocation('custom', $filesInCache['custom']));
             unset($filesInCache['custom']);
         }
 
         //If we found css files in cache we can return css urls
-        if (count($filesInCache) === count($this->lessFilesToCompile)) {
+        if (safeCount($filesInCache) === safeCount($this->lessFilesToCompile)) {
             return $this->returnFileLocations($filesInCache);
         }
 
@@ -107,7 +107,7 @@ class SidecarTheme
      */
     public function compileTheme($min = true)
     {
-        $files = array();
+        $files = [];
         foreach ($this->lessFilesToCompile as $lessFile) {
             $files[$lessFile] = $this->compileFile($lessFile, $min);
         }
@@ -128,7 +128,7 @@ class SidecarTheme
     public function previewCss($min = true)
     {
         try {
-            $css = array();
+            $css = [];
             foreach ($this->lessFilesToCompile as $lessFile) {
                 $css[$lessFile] = $this->compileFile($lessFile, $min, false);
             }
@@ -248,6 +248,7 @@ class SidecarTheme
      */
     public function getThemeVariables()
     {
+        $lessdefs = null;
         include 'styleguide/themes/clients/base/default/variables.php';
         $variables = $lessdefs;
 
@@ -294,7 +295,7 @@ class SidecarTheme
         } else {
             //override the base variables with variables passed in arguments
             foreach ($this->variables as $lessVar => $lessValue) {
-                foreach($lessdefs as $type => $varset) {
+                foreach ($lessdefs as $type => $varset) {
                     if (isset($lessdefs[$type][$lessVar])) {
                         $lessdefs[$type][$lessVar] = $lessValue;
                     }
@@ -360,13 +361,14 @@ class SidecarTheme
      * @param string $file Extract variables from this file
      * @return array mixed Merged array
      */
-    private function loadLessDefs($variables, $file, $intersect_merge = true) {
+    private function loadLessDefs($variables, $file, $intersect_merge = true)
+    {
         $lessdefs = [];
         if (file_exists($file)) {
             include $file;
             if ($intersect_merge) {
-                foreach($lessdefs as $type => $varset) {
-                    foreach($varset as $key => $value) {
+                foreach ($lessdefs as $type => $varset) {
+                    foreach ($varset as $key => $value) {
                         if (isset($variables[$type][$key])) {
                             $variables[$type][$key] = $value;
                         }
@@ -429,13 +431,13 @@ class SidecarTheme
     private function makePaths(PlatformName $platformName)
     {
         $plarformDirectory = $platformName->value();
-        return array(
+        return [
             'base' => 'styleguide/themes/clients/' . $plarformDirectory . '/default/',
             'custom' => 'custom/themes/clients/' . $plarformDirectory . '/default/',
             'cache' => sugar_cached('themes/clients/' . $plarformDirectory . '/default/'),
             'clients' => 'styleguide/less/clients/',
             'hashKey' => 'theme-' . $plarformDirectory . '-default',
-        );
+        ];
     }
 
     /**
@@ -448,13 +450,13 @@ class SidecarTheme
      */
     private function retrieveCssFilesInCache()
     {
-        $filesInCache = array();
+        $filesInCache = [];
 
         //First check if the file hashes are cached so we don't have to load the metadata manually to calculate it
         $hashKey = $this->paths['hashKey'];
         $hashArray = sugar_cache_retrieve($hashKey);
 
-        if (is_array($hashArray) && count($hashArray) === count($this->lessFilesToCompile)) {
+        if (is_array($hashArray) && safeCount($hashArray) === safeCount($this->lessFilesToCompile)) {
             foreach ($hashArray as $lessFile => $hash) {
                 $file = $this->getCssFileLocation($lessFile, $hash);
                 if (file_exists($file)) {
@@ -500,7 +502,7 @@ class SidecarTheme
      */
     private function getCssFileLocation($compilerName, $hash)
     {
-        return $this->paths['cache'] . $compilerName . '_' . $hash . ".css";
+        return $this->paths['cache'] . $compilerName . '_' . $hash . '.css';
     }
 
     /**
@@ -512,7 +514,7 @@ class SidecarTheme
      */
     private function returnFileLocations(array $filesArray)
     {
-        $urls = array();
+        $urls = [];
         sugar_cache_put($this->paths['hashKey'], $filesArray);
         if (!empty($filesArray)) {
             foreach ($this->lessFilesToCompile as $lessFile) {

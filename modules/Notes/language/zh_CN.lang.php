@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => '笔记列表仪表板',
     'LBL_NOTES_RECORD_DASHBOARD' => '备注记录仪表板',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => '注释焦点抽屉',
     'LBL_EXTERNAL_USER' => '外部用户',
     'LBL_EXTERNAL_USER_NAME' => '外部用户',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '备注时间轴',
 
     'LBL_RELATED_CONTACT' => '相关联系人',
     'ERR_DELETE_RECORD' => '必须指定记录编号才能删除帐户。',
@@ -126,4 +127,4 @@ $mod_strings = array(
  - 标记为“必填”的字段在保存前必须先填写完整。
  - 如有需要，点击“显示更多”以显示其他字段。
 2. 点击“保存”以完成新纪录，并返回至上一页。',
-);
+];

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => '記錄通話',
     'LNK_NEW_MEETING' => '排程會議',
     'LNK_NEW_TASK' => '建立工作',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => '額外中繼欄位 2',
     'COLUMN_TITLE_EXT3' => '額外中繼欄位 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'IFrame 高度',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => '預設 URL',
     'COLUMN_TITLE_AUDIT' => '稽核',
     'COLUMN_TITLE_PII' => '個人資訊',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => '預設值',
     'LBL_AUDITED' => '已稽核',
     'LBL_REPORTABLE' => '可報告的',
-    'ERR_RESERVED_FIELD_NAME' => "已保留關鍵字",
+    'ERR_RESERVED_FIELD_NAME' => '已保留關鍵字',
     'ERR_SELECT_FIELD_TYPE' => '請選取一個欄位類型',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => '欄位名稱已存在',
     'ERR_FIELD_NAME_NON_DB_CHARS' => '欄位名稱只能包含以下字元：a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => '已完成',
     'LBL_EXE_NON_SIM_MODE' => '執行非模擬模式',
     'LBL_CALCULATION_VISIBLE' => '使計算可見',
-);
+];

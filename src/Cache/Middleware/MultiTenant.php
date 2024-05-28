@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -182,7 +184,7 @@ final class MultiTenant implements CacheInterface
     /**
      * Initializes the updated encryption key
      */
-    private function initializeKey() : void
+    private function initializeKey(): void
     {
         $this->namespace = Uuid::uuid5($this->instanceKey, (string)$this->key);
         $this->crypto = new AES256GCM($this->key->toString());
@@ -193,7 +195,7 @@ final class MultiTenant implements CacheInterface
      *
      * @return UuidInterface
      */
-    private function generateKey() : UuidInterface
+    private function generateKey(): UuidInterface
     {
         $key = Uuid::uuid4();
         $this->keyStorage->updateKey($key);
@@ -207,7 +209,7 @@ final class MultiTenant implements CacheInterface
      * @param string $key
      * @return string
      */
-    private function hash(string $key) : string
+    private function hash(string $key): string
     {
         return Uuid::uuid5($this->namespace, $key)->toString();
     }
@@ -218,7 +220,7 @@ final class MultiTenant implements CacheInterface
      * @param mixed $value
      * @return string
      */
-    private function encrypt($value) : string
+    private function encrypt($value): string
     {
         return $this->crypto->encrypt(serialize($value));
     }

@@ -88,7 +88,7 @@ class HintEnrichFieldConfig extends \Basic implements LoggerAwareInterface
             $hintEnrichConfigFieldsQuery->from($hintEnrichConfigFieldsBean);
             $response = $hintEnrichConfigFieldsQuery->execute();
             // A check to get the one and only entry from the table provided the entry exists.
-            $enrichConfigEntries = count($response) >= 1 ? $response[0] : null;
+            $enrichConfigEntries = safeCount($response) >= 1 ? $response[0] : null;
             return $enrichConfigEntries;
         } else {
             $logger->alert('hint_enrich_field_config table not found');

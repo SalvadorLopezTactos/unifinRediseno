@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Includes generic helper functions used throughout the application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -35,7 +34,7 @@ class JSON
      */
     public static function encode($value)
     {
-        return json_encode($value, JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT);
+        return json_encode($value, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
     }
 
     /**
@@ -46,9 +45,9 @@ class JSON
      * @param bool $assoc
      * @return string
      */
-    public static function decode($string, $examineEnvelope=false, $assoc = true)
+    public static function decode($string, $examineEnvelope = false, $assoc = true)
     {
-        return json_decode($string,$assoc);
+        return json_decode($string, $assoc);
     }
 
     /**

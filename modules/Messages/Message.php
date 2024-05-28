@@ -44,7 +44,7 @@ class Message extends Basic
         $this->load_relationship('invitee_users');
         $existingUsers = $this->invitee_users->get();
 
-        if (isset($this->assigned_user_id) && !in_array($this->assigned_user_id, $existingUsers)) {
+        if (isset($this->assigned_user_id) && !safeInArray($this->assigned_user_id, $existingUsers)) {
             $this->invitee_users->add($this->assigned_user_id);
         }
     }

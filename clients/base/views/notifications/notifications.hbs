@@ -14,11 +14,8 @@
     <li class="dropdown notification-list">
         <div class="btn-group pt-2 pb-1 px-2" data-name="notifications-list-button">
             <button class="btn {{#if this.collection.length}}btn-notification{{else}}btn-inverse{{/if}} dropdown-toggle"
-                data-toggle="dropdown"
-                rel="tooltip"
-                title="{{str "LBL_NOTIFICATIONS" module}}"
+                data-bs-toggle="dropdown"
                 aria-label="{{str "LBL_NOTIFICATIONS" module}}"
-                data-placement="bottom"
                 role="button"
                 aria-haspopup="true"
                 aria-expanded="false"
@@ -29,8 +26,9 @@
                         {{this.collection.length}}{{#if this.collection.next_offset}}{{#notEq this.collection.next_offset "-1"}}+{{/notEq}}{{/if}}
                     </span>
                 {{/if}}
+                {{tooltipTemplate (str 'LBL_NOTIFICATIONS' module) 'bottom'}}
             </button>
-            <div class="dropdown-menu rounded-t-none scroll pull-right">
+            <div class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl rounded-t-none scroll pull-right">
                 <ul role="menu">
                     {{#each this.collection.models}}
                         <li{{#if this.attributes.is_read}} class="read"{{/if}} role="menuitem">
@@ -41,7 +39,7 @@
                                tabindex="-1"><span
                                 class="span8 ellipsis_inline"
                                 title="{{this.attributes.name}}"
-                                data-placement="bottom">
+                                data-bs-placement="bottom">
                             {{#with ../this.meta.fields.severity}}
                                 {{field ../../this model=../this template="detail"}}
                             {{/with}}

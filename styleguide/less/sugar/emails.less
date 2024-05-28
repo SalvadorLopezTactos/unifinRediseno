@@ -29,18 +29,6 @@
             }
           }
         }
-
-        &.select2-choices-pills .select2-search-choice,
-        &.select2-container-multi.select2-choices-pills-close .select2-search-choice {
-          &.select2-choice-optout {
-            span::before {
-              content: @fa-var-ban;
-              font-family: 'FontAwesome';
-              color: @white;
-              padding-right: 3px;
-            }
-          }
-        }
       }
     }
   }
@@ -71,18 +59,6 @@
 }
 
 .email-recipients.fieldset {
-  &.edit-toggled {
-    & > .detail {
-      .hide();
-    }
-  }
-
-  &:not(.edit-toggled) {
-    & > :not(.detail) {
-      .hide();
-    }
-  }
-
   .fieldset-group {
     display: table-row;
 

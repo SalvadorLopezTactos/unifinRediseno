@@ -14,67 +14,71 @@
 /**
  * @api
  */
-class PreviouslyUsedFiltersApi extends SugarApi {
-    public function registerApiRest() {
-        return array(
-            'setUsed' => array(
+class PreviouslyUsedFiltersApi extends SugarApi
+{
+    public function registerApiRest()
+    {
+        return [
+            'setUsed' => [
                 'reqType' => 'PUT',
-                'path' => array('Filters', '?', 'used',),
-                'pathVars' => array('module', 'module_name', 'used',),
+                'path' => ['Filters', '?', 'used',],
+                'pathVars' => ['module', 'module_name', 'used',],
                 'method' => 'setUsed',
                 'shortHelp' => 'This method sets the filter as used for the current user',
                 'longHelp' => '',
-            ),
-            'getUsed' => array(
+            ],
+            'getUsed' => [
                 'reqType' => 'GET',
-                'path' => array('Filters', '?', 'used'),
-                'pathVars' => array('module', 'module_name', 'used',),
+                'path' => ['Filters', '?', 'used'],
+                'pathVars' => ['module', 'module_name', 'used',],
                 'method' => 'getUsed',
                 'shortHelp' => 'This method gets the used filter for the current user',
                 'longHelp' => '',
-            ),
-            'deleteUsed' => array(
+            ],
+            'deleteUsed' => [
                 'reqType' => 'DELETE',
-                'path' => array('Filters', '?', 'used', '?'),
-                'pathVars' => array('module', 'module_name', 'used', 'record'),
+                'path' => ['Filters', '?', 'used', '?'],
+                'pathVars' => ['module', 'module_name', 'used', 'record'],
                 'method' => 'deleteUsed',
                 'shortHelp' => 'This method deletes the used filter for the current user',
                 'longHelp' => '',
-            ),
-            'deleteAllUsed' => array(
+            ],
+            'deleteAllUsed' => [
                 'reqType' => 'DELETE',
-                'path' => array('Filters', '?', 'used',),
-                'pathVars' => array('module', 'module_name', 'used'),
+                'path' => ['Filters', '?', 'used',],
+                'pathVars' => ['module', 'module_name', 'used'],
                 'method' => 'deleteUsed',
                 'shortHelp' => 'This method deletes all used filters for the current user',
                 'longHelp' => '',
-            ),
-        );
+            ],
+        ];
     }
+
     /**
      * Set filters as used
      * @param ServiceBase $api
-     * @param array $args 
+     * @param array $args
      * @return array of formatted Beans
      */
     public function setUsed(ServiceBase $api, array $args)
     {
         $user_preference = new UserPreference($GLOBALS['current_user']);
-        
+
         $used_filters = $args['filters'];
         $user_preference->setPreference($args['module_name'], $used_filters, 'filters');
         $user_preference->savePreferencesToDB(true);
         // loop over and get the Filters to return
         $beans = $this->loadFilters($used_filters);
-        
+
         $data = $this->formatBeans($api, $args, $beans);
 
         return $data;
     }
+
     /**
      * Get filters from previously used
      * @param ServiceBase $api
-     * @param array $args 
+     * @param array $args
      * @return array of formatted Beans
      */
     public function getUsed(ServiceBase $api, array $args)
@@ -83,63 +87,62 @@ class PreviouslyUsedFiltersApi extends SugarApi {
         $used_filters = $user_preference->getPreference($args['module_name'], 'filters');
         // UserPreference::getPreference returns null if the preference does not exist
         if (empty($used_filters)) {
-            $used_filters = array();
+            $used_filters = [];
         }
         // loop over the filters and return them
         $beans = $this->loadFilters($used_filters);
-        $data = array();
-        if(!empty($beans)) {
+        $data = [];
+        if (!empty($beans)) {
             $data = $this->formatBeans($api, $args, $beans);
         }
 
-        return $data;        
+        return $data;
     }
 
     /**
      * Delete a filter from previously used
      * @param ServiceBase $api
-     * @param array $args 
+     * @param array $args
      * @return array of formatted Beans
      */
     public function deleteUsed(ServiceBase $api, array $args)
     {
-        $data = array();
+        $data = [];
         $user_preference = new UserPreference($GLOBALS['current_user']);
         $used_filters = $user_preference->getPreference($args['module_name'], 'filters');
 
-        if(isset($args['record']) && !empty($args['record'])) {
+        if (isset($args['record']) && !empty($args['record'])) {
             // if the record exists unset it
             $key = array_search($args['record'], $used_filters);
-            if($key !== false) {
+            if ($key !== false) {
                 unset($used_filters[$key]);
             }
-        }
-        else {
+        } else {
             // delete them all
-            $used_filters = array();
+            $used_filters = [];
         }
 
 
         $user_preference->setPreference($args['module_name'], $used_filters, 'filters');
         $user_preference->savePreferencesToDB(true);
 
-        if(!empty($used_filters)) {
+        if (!empty($used_filters)) {
             $beans = $this->loadFilters($used_filters);
-        
+
             $data = $this->formatBeans($api, $args, $beans);
         }
 
-        return $data;        
+        return $data;
     }
 
-    protected function loadFilters( &$used_filters ) {
-        $return = array();
-        foreach($used_filters AS $key => $id) {
+    protected function loadFilters(&$used_filters)
+    {
+        $return = [];
+        foreach ($used_filters as $key => $id) {
             $bean = BeanFactory::getBean('Filters', $id);
-            if($bean instanceof SugarBean && !empty($bean->id)) {
+            if ($bean instanceof SugarBean && !empty($bean->id)) {
                 $return[] = $bean;
-            }
-            else {
+            } else {
                 unset($used_filters[$key]);
             }
         }

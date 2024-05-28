@@ -11,19 +11,19 @@
  */
 --}}
 {{#if _hasData}}
-    <table class="table table-striped table-bordered table-condensed matrix-report-table">
+    <table class="table table-striped table-bordered w-full table-condensed matrix-report-table">
         <tbody>
             {{#each _matrixTable}}
                 <tr>
                     {{#each this}}
                         {{#if bold}}
-                            <th class="matrix-data-table-cell {{#if grandTotal}}matrix-data-table-cell-accent{{/if}}" rowspan="{{rowspan}}" colspan="{{colspan}}">
+                            <th class="matrix-data-table-cell !align-middle !p-2.5 !text-center {{#if grandTotal}}matrix-data-table-cell-accent{{/if}}" rowspan="{{rowspan}}" colspan="{{colspan}}">
                                 {{#sanitize}}
                                     {{{value}}}
                                 {{/sanitize}}
                             </th>
                         {{else}}
-                            <td class="matrix-data-table-cell {{#if grandTotal}}matrix-data-table-cell-accent{{/if}}" rowspan="{{rowspan}}" colspan="{{colspan}}">
+                            <td class="matrix-data-table-cell !align-middle !p-2.5 !text-center{{#if grandTotal}}matrix-data-table-cell-accent {{/if}}" rowspan="{{rowspan}}" colspan="{{colspan}}">
                                 {{#sanitize}}
                                     {{{value}}}
                                 {{/sanitize}}
@@ -35,7 +35,7 @@
         </tbody>
     </table>
 {{else}}
-    <div class="matrix-data-table-cell h-full">
+    <div class="matrix-data-table-cell align-middle h-full p-2.5 text-center">
         {{str 'LBL_NO_DATA_AVAILABLE'}}
     </div>
 {{/if}}

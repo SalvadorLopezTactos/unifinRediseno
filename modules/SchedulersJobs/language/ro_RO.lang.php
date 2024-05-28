@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Coadă de operaţii',
     'LBL_MODULE_NAME_SINGULAR' => 'Coadă de operaţii',
     'LBL_MODULE_TITLE' => 'Coadă de operaţii: Pagină de pornire',
@@ -51,15 +51,15 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Rezoluţie anulată',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Rezoluţie în executare',
     // Errors
-    'ERR_CALL' => "Nu se poate apela funcţia de:% s",
-    'ERR_CURL' => "Nu Curl - nu se poate rula URL-ul locuri de munca",
-    'ERR_FAILED' => "Eşec neaşteptat, vă rugăm să verificaţi  PHP şi sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s în %s pe linia %d",
-    'ERR_NOUSER' => "Fara utillizator pt acest job",
-    'ERR_NOSUCHUSER' => "Utilizator inexistent",
-    'ERR_JOBTYPE' => "Tip job necunoscut",
-    'ERR_TIMEOUT' => "Esec fortat pe timeout",
-    'ERR_JOB_FAILED_VERBOSE' => 'Iov% 1 $ s (% 2 $ s) a eşuat în termen Cron',
+    'ERR_CALL' => 'Nu se poate apela funcția: %s',
+    'ERR_CURL' => 'Nu Curl - nu se poate rula URL-ul locuri de munca',
+    'ERR_FAILED' => 'Eşec neaşteptat, vă rugăm să verificaţi  PHP şi sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s în %s pe linia %d',
+    'ERR_NOUSER' => 'Fara utillizator pt acest job',
+    'ERR_NOSUCHUSER' => 'ID-ul utilizatorului %s nu a fost găsit',
+    'ERR_JOBTYPE' => 'Tip necunoscut de job: %s',
+    'ERR_TIMEOUT' => 'Esec fortat pe timeout',
+    'ERR_JOB_FAILED_VERBOSE' => 'Job%1$s (%2$s) nereușit în rularea CRON',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Imposibil de încărcat duza cu ID: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Imposibil de încărcat rutina pentru ruta %s',
     'ERR_CONFIG_MISSING_EXTENSION' => 'Extensia pentru această coadă nu este instalată',
@@ -95,13 +95,13 @@ mai multor computere, astfel încât operaţiile mari să poată fi efectuate ma
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Ajutor Configurare Amazon SQS',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Secţiunea Configurare Amazon SQS.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Secţiunea Configurare Amazon SQS.</b></p>
 <ul>
     <li>ID cheie de acces: <i>Introduceţi numărul ID al cheii dvs. de acces pentru Amazon SQS</i></li>
     <li>Cheie de acces Secret: <i>Introduceţi cheia dvs. de acces Secret pentru Amazon SQS</i></li>
     <li>Regiune: <i>Introduceţi regiuna pentru serverul Amazon SQS</i></li>
     <li>Nume coadă: <i>Introduceţi numele cozii pentru serverul Amazon SQS</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'Ajutor Configurare AMQP',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>Secţiunea Configurare AMQP.</b></p>
 <ul>
@@ -122,4 +122,4 @@ mai multor computere, astfel încât operaţiile mari să poată fi efectuate ma
     'LBL_REGION' => 'Regiune',
     'LBL_ACCESS_KEY_SECRET' => 'Cheie de acces Secret',
     'LBL_QUEUE_NAME' => 'Nume Adapter',
-);
+];

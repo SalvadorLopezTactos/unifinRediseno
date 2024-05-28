@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'نشطة',
     'LBL_ASSIGNEE_RULE' => 'قاعدة المُعين',
     'LBL_TARGET_ASSIGNEE' => 'المستخدم المعين المستهدف',
+    'LBL_STAGE_NUMBERS' => 'ترقيم المراحل',
     'LBL_EXPORT_BUTTON_LABEL' => 'تصدير',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'استيراد',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'قم بالإنشاء/التحديث التلقائي لسجل قالب بريد إلكتروني جديد من خلال استيراد ملف *.json من نظام الملفات الخاص بك.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'إذا تم تحديده، وإذا كان المستخدم المُعين المستهدف = المستخدم المُعين الأصل، عند تغيير المستخدم في "تعيين إلى" في أصل، فسيتغير مستخدمو "تعيين إلى" تلقائيًا أيضًا في الأدلة الذكية والمراحل والأنشطة. لاحظ أن إعدادات المستخدم المُعين المستهدف في قوالب النشاط لها الأسبقية عن قالب الدليل الذكي',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'متى يجب تعيين مستخدم للأنشطة',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'من يجب تعيينه للأنشطة',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'يتيح لك مفتاح التبديل هذا إظهار أو إخفاء الترقيم التلقائي للمراحل.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'قالب الدليل الذكي/المرحلة/النشاط',
 ];

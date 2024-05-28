@@ -146,18 +146,14 @@
 
 .forecast-value {
   .text-xs {
-    .mr-4();
+    margin-right: 1rem;
   }
 }
 
 .forecast-value-input {
-  .relative();
-  .pl-4();
-
   .clickToEdit {
     span.edit-icon {
-      .absolute();
-
+      position: absolute;
       left: 0;
       top: -2px;
     }
@@ -165,9 +161,6 @@
 }
 
 .quarter-picker {
-  display: block;
-  margin-top: -2px;
-
   .controls {
     .select2-choice {
       border: 0 none;
@@ -176,7 +169,8 @@
   }
 
   .select2-loading {
-    .py-0();
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }
 
@@ -199,12 +193,7 @@
       }
 
       .metric-row {
-        .inline-block();
-        .max-w-full();
-
         span {
-          .inline-block();
-
           &:nth-child(1) {
             max-width: 125px;
           }
@@ -239,14 +228,6 @@
         color: @activeTabBorderColor;
         .active-tab();
       }
-
-      &.forecasts-loader {
-        background: @forecastsSkeletonLoader no-repeat center center;
-
-        * {
-          visibility: hidden;
-        }
-      }
     }
   }
 
@@ -269,28 +250,25 @@
   .headerpane.listheaderpane {
     height: auto;
     min-height: auto;
-    .pb-2\.5();
+    padding-bottom: 0.625rem;
   }
 
   .tabbable {
-    .h-full();
-    .flex();
-    .flex-column();
-
     .tab-content {
       flex: 1 1 auto;
 
       .tab-pane {
-        .h-full();
+        height: 100%;
 
         .controls.has-refresh.btn-group-fit.controls-two {
           padding-right: 2.125rem;
 
           .filter-view {
-            .mr-0();
+            margin-right: 0;
 
             .table-cell {
-              .px-1();
+              padding-left: 0.25rem;
+              padding-right: 0.25rem;
             }
           }
 
@@ -308,11 +286,6 @@
         }
 
         &:first-child {
-          > div {
-            .flex();
-            .flex-column();
-          }
-
           @media (max-width: 1320px) {
             .forecast-metrics {
               min-width: 77px;
@@ -325,5 +298,13 @@
         }
       }
     }
+  }
+}
+
+.metric-skeleton-loader {
+  background: @forecastsSkeletonLoader no-repeat center center;
+
+  * {
+    visibility: hidden;
   }
 }

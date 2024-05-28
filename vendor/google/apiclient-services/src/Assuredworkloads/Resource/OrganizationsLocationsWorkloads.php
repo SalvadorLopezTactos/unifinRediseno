@@ -18,6 +18,7 @@
 namespace Google\Service\Assuredworkloads\Resource;
 
 use Google\Service\Assuredworkloads\GoogleCloudAssuredworkloadsV1ListWorkloadsResponse;
+use Google\Service\Assuredworkloads\GoogleCloudAssuredworkloadsV1MutatePartnerPermissionsRequest;
 use Google\Service\Assuredworkloads\GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesRequest;
 use Google\Service\Assuredworkloads\GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesResponse;
 use Google\Service\Assuredworkloads\GoogleCloudAssuredworkloadsV1Workload;
@@ -29,7 +30,7 @@ use Google\Service\Assuredworkloads\GoogleProtobufEmpty;
  * Typical usage is:
  *  <code>
  *   $assuredworkloadsService = new Google\Service\Assuredworkloads(...);
- *   $workloads = $assuredworkloadsService->workloads;
+ *   $workloads = $assuredworkloadsService->organizations_locations_workloads;
  *  </code>
  */
 class OrganizationsLocationsWorkloads extends \Google\Service\Resource
@@ -57,7 +58,9 @@ class OrganizationsLocationsWorkloads extends \Google\Service\Resource
   /**
    * Deletes the workload. Make sure that workload's direct children are already
    * in a deleted state, otherwise the request will fail with a
-   * FAILED_PRECONDITION error. (workloads.delete)
+   * FAILED_PRECONDITION error. In addition to assuredworkloads.workload.delete
+   * permission, the user should also have orgpolicy.policy.set permission on the
+   * deleted folder to remove Assured Workloads OrgPolicies. (workloads.delete)
    *
    * @param string $name Required. The `name` field is used to identify the
    * workload. Format:
@@ -113,6 +116,24 @@ class OrganizationsLocationsWorkloads extends \Google\Service\Resource
     return $this->call('list', [$params], GoogleCloudAssuredworkloadsV1ListWorkloadsResponse::class);
   }
   /**
+   * Update the permissions settings for an existing partner workload. For force
+   * updates don't set etag field in the Workload. Only one update operation per
+   * workload can be in progress. (workloads.mutatePartnerPermissions)
+   *
+   * @param string $name Required. The `name` field is used to identify the
+   * workload. Format:
+   * organizations/{org_id}/locations/{location_id}/workloads/{workload_id}
+   * @param GoogleCloudAssuredworkloadsV1MutatePartnerPermissionsRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return GoogleCloudAssuredworkloadsV1Workload
+   */
+  public function mutatePartnerPermissions($name, GoogleCloudAssuredworkloadsV1MutatePartnerPermissionsRequest $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('mutatePartnerPermissions', [$params], GoogleCloudAssuredworkloadsV1Workload::class);
+  }
+  /**
    * Updates an existing workload. Currently allows updating of workload
    * display_name and labels. For force updates don't set etag field in the
    * Workload. Only one update operation per workload can be in progress.
@@ -135,10 +156,10 @@ class OrganizationsLocationsWorkloads extends \Google\Service\Resource
   }
   /**
    * Restrict the list of resources allowed in the Workload environment. The
-   * current list of allowed products can be found at https://cloud.google.com
-   * /assured-workloads/docs/supported-products In addition to
-   * assuredworkloads.workload.update permission, the user should also have
-   * orgpolicy.policy.set permission on the folder resource to use this
+   * current list of allowed products can be found at
+   * https://cloud.google.com/assured-workloads/docs/supported-products In
+   * addition to assuredworkloads.workload.update permission, the user should also
+   * have orgpolicy.policy.set permission on the folder resource to use this
    * functionality. (workloads.restrictAllowedResources)
    *
    * @param string $name Required. The resource name of the Workload. This is the

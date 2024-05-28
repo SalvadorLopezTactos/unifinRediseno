@@ -10,24 +10,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = '<module_name>';
-  $searchdefs[$module_name] = array(
-  					'templateMeta' => array('maxColumns' => '3', 'maxColumnsBasic' => '4',
-                            'widths' => array('label' => '10', 'field' => '30'),
-                           ),
-                    'layout' => array(
-	  					'basic_search' => array(
-	 							array('name'=>'search_name','label' =>'LBL_NAME', 'type' => 'name'),
-	 							array('name'=>'current_user_only', 'label'=>'LBL_CURRENT_USER_FILTER', 'type'=>'bool'),
-	 							array ('name' => 'favorites_only','label' => 'LBL_FAVORITES_FILTER','type' => 'bool',),
-							),
-						'advanced_search' => array(
-								'first_name',
-								'last_name',
-								'address_city',
-								'created_by_name',
-								'do_not_call',
-								'email',
-								array ('name' => 'favorites_only','label' => 'LBL_FAVORITES_FILTER','type' => 'bool',),
-						),
-					),
- 			   );
+$searchdefs[$module_name] = [
+    'templateMeta' => ['maxColumns' => '3', 'maxColumnsBasic' => '4',
+        'widths' => ['label' => '10', 'field' => '30'],
+    ],
+    'layout' => [
+        'basic_search' => [
+            ['name' => 'search_name', 'label' => 'LBL_NAME', 'type' => 'name'],
+            ['name' => 'current_user_only', 'label' => 'LBL_CURRENT_USER_FILTER', 'type' => 'bool'],
+            ['name' => 'favorites_only', 'label' => 'LBL_FAVORITES_FILTER', 'type' => 'bool',],
+        ],
+        'advanced_search' => [
+            'first_name',
+            'last_name',
+            'address_city',
+            'created_by_name',
+            'do_not_call',
+            'email',
+            ['name' => 'favorites_only', 'label' => 'LBL_FAVORITES_FILTER', 'type' => 'bool',],
+        ],
+    ],
+];

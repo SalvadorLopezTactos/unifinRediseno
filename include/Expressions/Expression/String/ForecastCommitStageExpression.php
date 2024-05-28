@@ -95,9 +95,9 @@ JS;
      */
     public static function getParameterTypes()
     {
-        return array(
-            AbstractExpression::$NUMERIC_TYPE
-        );
+        return [
+            AbstractExpression::$NUMERIC_TYPE,
+        ];
     }
 
     /**
@@ -105,7 +105,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return array('forecastCommitStage');
+        return ['forecastCommitStage'];
     }
 
     /**

@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => 'Reclami',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Opportunità',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Offerte',
-    'LBL_NOTES'=>'Note',
+    'LBL_NOTES' => 'Note',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => 'Dashboard dei record degli utenti esterni',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Sequenza temporale utente esterno',
 ];

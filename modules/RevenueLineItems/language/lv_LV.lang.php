@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Ieņēmumu posteņu saraksta instrumentu panelis',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Ieņēmumu posteņu ierakstu instrumentu panelis',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Produktu tipi',
     'LBL_ASSIGNED_TO_NAME' => 'Piešķirts lietotājam:',
     'LBL_ASSIGNED_TO' => 'Piešķirts lietotājam',
-    'LBL_ASSIGNED_TO_ID'=>'Piešķirts lietotājam ID',
+    'LBL_ASSIGNED_TO_ID' => 'Piešķirts lietotājam ID',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Piešķirts lietotājam',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Piešķirts lietotājam ID',
     'LBL_CAMPAIGN_ID' => 'Kampaņas ID',
@@ -217,4 +217,5 @@ Lai izveidotu {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Attēlo 10 labākas iespējas burbuļu diagrammā.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Mani ieņēmumu posteņi',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Manas darba grupas iespējas",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ieņēmumu posteņa laika josla',
+];

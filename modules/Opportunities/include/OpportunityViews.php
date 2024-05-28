@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,7 +16,6 @@
  */
 class OpportunityViews
 {
-
     /**
      * @var Opportunity
      */
@@ -114,7 +114,7 @@ class OpportunityViews
         // adds properties to the fields present on parser's viewdef
         $parser->setFieldProps($fieldList, $propertyList);
         // handle the putBackFields separately as they will get read from the fielddefs instead of viewdefs
-        if (count($this->putBackFields) > 0) {
+        if (safeCount($this->putBackFields) > 0) {
             /*
              * the utility of this function depends on the fact that once a field is removed from a view, it gets added
              * back to the view via the parser's addField method which merges the fielddefs of a particular field based
@@ -134,7 +134,9 @@ class OpportunityViews
      * @param SidecarGridLayoutMetaDataParser $parser
      * @param array $fieldMap
      */
-    protected function _processRecordParser(SidecarGridLayoutMetaDataParser $parser, array $fieldMap) {
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _processRecordParser(SidecarGridLayoutMetaDataParser $parser, array $fieldMap)
+    {
         // no matter what we are going to add everything to the first panel at the end, SidecarGridLayoutMetaDataParser
         // doesn't have position capabilities...grrrr
 
@@ -197,11 +199,11 @@ class OpportunityViews
         // get the mobile list view now
         $this->processMobileListView($fieldMap);
 
-        $subpanel_modules = array('Opportunities');
+        $subpanel_modules = ['Opportunities'];
 
         $links = $this->bean->get_linked_fields();
 
-        foreach($links as $link => $def) {
+        foreach ($links as $link => $def) {
             if ($this->bean->load_relationship($link) && $this->bean->$link instanceof Link2) {
                 $linkname = $this->bean->$link->getRelatedModuleLinkName();
                 $relatedmodule = $this->bean->$link->getRelatedModuleName();
@@ -307,7 +309,7 @@ class OpportunityViews
         }
 
         $handleSave = false;
-        $saveFields = array();
+        $saveFields = [];
         // process the fields
         foreach ($current_fields as $panel_id => $panel) {
             if (is_array($panel['fields'])) {
@@ -325,7 +327,7 @@ class OpportunityViews
                                 // set the name variable to the new field name.
                                 $name = $fieldMap[$name];
                                 // reset the additionDefs since we have a new field
-                                $additionalDefs = array();
+                                $additionalDefs = [];
                             } else {
                                 // we didn't find any defs for the new field, so error on caution and remove the old one
                                 $addField = false;
@@ -341,7 +343,7 @@ class OpportunityViews
                     }
 
                     if ($addField) {
-                        $saveFields[] = array($name, $additionalDefs);
+                        $saveFields[] = [$name, $additionalDefs];
                     }
                 }
             }
@@ -349,16 +351,16 @@ class OpportunityViews
 
         // make sure that the field map is empty, if it's not process any remaining fields
         if (!empty($fieldMap)) {
-            foreach($fieldMap as $field => $trigger) {
-                if($trigger === true) {
+            foreach ($fieldMap as $field => $trigger) {
+                if ($trigger === true) {
                     $origDef = $listParser->panelGetField($field, $listParser->getOriginalPanelDefs());
                     if (!empty($origDef['field'])) {
-                        $saveFields[] = array($field, $origDef['field']);
+                        $saveFields[] = [$field, $origDef['field']];
                         $handleSave = true;
                     } else {
                         $defs = $this->bean->getFieldDefinition($field);
                         if ($defs) {
-                            $saveFields[] = array($field, array());
+                            $saveFields[] = [$field, []];
                             $handleSave = true;
                         }
                     }
@@ -396,10 +398,10 @@ class OpportunityViews
         // backup what is currently in $_POST
         $backupPost = $_POST;
 
-        $_POST = array(
+        $_POST = [
             'view_module' => $listParser->getModuleName(),
-            'group_0' => array()
-        );
+            'group_0' => [],
+        ];
 
         $handleSave = false;
         // process the fields
@@ -435,8 +437,8 @@ class OpportunityViews
 
         // make sure that the field map is empty, if it's not process any remaining fields
         if (!empty($fieldMap)) {
-            foreach($fieldMap as $field => $trigger) {
-                if($trigger === true) {
+            foreach ($fieldMap as $field => $trigger) {
+                if ($trigger === true) {
                     $defs = $this->bean->getFieldDefinition($field);
                     if ($defs) {
                         $_POST['group_0'][] = $field;

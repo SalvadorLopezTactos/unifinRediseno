@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'Továbbít:',
     'LBL_RE' => 'Válasz:',
     'LBL_BUTTON_CREATE' => 'Létrehozás',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Válasszon email fiókot',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Válasszon aláírást',
     'LBL_SIGNATURE' => 'Aláírás',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Alapértelmezett aláírás",
-    "LBL_SHOW_MORE_SIGNATURES" => "További aláírások...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Alapértelmezett aláírás',
+    'LBL_SHOW_MORE_SIGNATURES' => 'További aláírások...',
     'LBL_SUBJECT' => 'Tárgy:',
     'LBL_TEMPLATE' => 'Sablon',
     'LBL_TEXT_BODY' => 'Szövegtörzs',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Küldés ideje',
     'LBL_LIST_TO_ADDR' => 'Címzett',
     'LBL_LIST_TYPE' => 'Típus',
-    "LBL_SELECTED_RECIPIENTS" => "Megadott címzettek",
-    "LBL_SHOW_MORE_RECIPIENTS" => "További címzettek...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Címjegyzék",
+    'LBL_SELECTED_RECIPIENTS' => 'Megadott címzettek',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'További címzettek...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Címjegyzék',
     'NTC_REMOVE_INVITEE' => 'Biztosan el akarja távolítani ezt a címzettet az emailből?',
     'WARNING_SETTINGS_NOT_CONF' => 'Az e-mail beállítások nincsenek e-mail küldéshez megfelelően konfigurálva. Konfigurálnia kell egy SMTP-kiszolgálót ' .
         'az <a href="#bwc/index.php?module=EmailMan&action=config">E-mail beállítások</a> menüpontban.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'A csatolmányok hibát eredményezhetnek: Az „upload_tmp_dir” értéke helytelen vagy ' .
         'nem használható. Javítsa ki a hibát a php.ini fájlban.',
     'LBL_MESSAGE_UID' => 'Üzenet felh. azon.',
-    'LBL_OPEN_DRAFT_ALERT' => 'Az e-mail piszkozat. Kattintson a(z) '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'Az e-mail piszkozat. Kattintson a(z) ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  mezőre a szerkesztéshez.',
     'LBL_EMAIL_BODY' => 'E-mail üzenet',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Figyelemfelhívás e-mailek',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'E-mail bejegyzések műszerfal',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'E-mail idővonala',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'nincs címzett megadva',
@@ -473,4 +474,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'E-mail küldése',
     'LBL_MAILBOX' => 'Bejövő fiók',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Kérjük, állítsa be a kimenő e-mail fiókot az <a href="#OutboundEmail">E-mail beállítások</a> menüponton keresztül, ha e-maileket szeretne küldeni.',
-);
+    'LBL_TOO_SHORT' => 'Írjon be legalább {0} karaktert...',
+];

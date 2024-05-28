@@ -18,7 +18,7 @@ use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
  */
 class SugarACL
 {
-    static $acls = array();
+    public static $acls = [];
 
     // Access levels for field
     // matches ACLField::hasAccess returns for compatibility
@@ -33,9 +33,9 @@ class SugarACL
      * @param array $context
      * @return SugarBean
      */
-    public static function loadBean($module, $context = array())
+    public static function loadBean($module, $context = [])
     {
-        if(isset($context['bean']) && $context['bean'] instanceof SugarBean && $context['bean']->module_dir == $module) {
+        if (isset($context['bean']) && $context['bean'] instanceof SugarBean && $context['bean']->module_dir == $module) {
             $bean = $context['bean'];
         } else {
             $bean = BeanFactory::newBean($module);
@@ -51,10 +51,10 @@ class SugarACL
      */
     public static function resetACLs($module = null)
     {
-        if($module) {
+        if ($module) {
             unset(self::$acls[$module]);
         } else {
-            self::$acls = array();
+            self::$acls = [];
         }
     }
 
@@ -77,26 +77,26 @@ class SugarACL
      * @param array $context
      * @return array ACLs list
      */
-    public static function loadACLs($module, $context = array())
+    public static function loadACLs($module, $context = [])
     {
-        if(!isset(self::$acls[$module])) {
-            self::$acls[$module] = array();
+        if (!isset(self::$acls[$module])) {
+            self::$acls[$module] = [];
 
             $name = BeanFactory::getObjectName($module);
-            if(!isset($GLOBALS['dictionary'][$name])) {
-                if(empty($name) || empty($GLOBALS['beanList'][$module]) || empty($GLOBALS['beanFiles'][$GLOBALS['beanList'][$module]]) || in_array($module, array('Empty'))) {
+            if (!isset($GLOBALS['dictionary'][$name])) {
+                if (empty($name) || empty($GLOBALS['beanList'][$module]) || empty($GLOBALS['beanFiles'][$GLOBALS['beanList'][$module]]) || in_array($module, ['Empty'])) {
                     // try to weed out non-bean modules - these can't have ACLs as they don't have vardefs to keep them
                     $GLOBALS['log']->debug("Non-bean $module - no ACL for you!");
-                    return array();
+                    return [];
                 }
                 VardefManager::loadVardef($module, $name);
             }
-            $acl_list = $GLOBALS['dictionary'][$name]['acls'] ?? array();
+            $acl_list = $GLOBALS['dictionary'][$name]['acls'] ?? [];
             $acl_list = array_merge($acl_list, SugarBean::getDefaultACL());
 
-            $GLOBALS['log']->debug("ACLS for $module: ".var_export($acl_list, true));
+            $GLOBALS['log']->debug("ACLS for $module: " . var_export($acl_list, true));
 
-            foreach($acl_list as $klass => $args) {
+            foreach ($acl_list as $klass => $args) {
                 if ($args === false) {
                     continue;
                 }
@@ -130,14 +130,14 @@ class SugarACL
      * @param array $context
      * @return bool Access allowed?
      */
-    public static function checkField($module, $field, $action,  $context = array())
+    public static function checkField($module, $field, $action, $context = [])
     {
         if (!self::allowFieldAccess($module, $field)) {
             return false;
         }
         $context['field'] = strtolower($field);
         $context['action'] = $action;
-        return self::checkAccess($module, "field", $context);
+        return self::checkAccess($module, 'field', $context);
     }
 
     /**
@@ -147,12 +147,16 @@ class SugarACL
      * @param array $context
      * @return int Access level - one of ACL_* constants
      */
-    public static function getFieldAccess($module, $field, $context = array())
+    public static function getFieldAccess($module, $field, $context = [])
     {
-        $read = self::checkField($module, $field, "detail", $context);
-        if(!$read) return self::ACL_NO_ACCESS;
-        $write = self::checkField($module, $field, "edit", $context);
-        if($write) return self::ACL_READ_WRITE;
+        $read = self::checkField($module, $field, 'detail', $context);
+        if (!$read) {
+            return self::ACL_NO_ACCESS;
+        }
+        $write = self::checkField($module, $field, 'edit', $context);
+        if ($write) {
+            return self::ACL_READ_WRITE;
+        }
         return self::ACL_READ_ONLY;
     }
 
@@ -163,13 +167,13 @@ class SugarACL
      * @param array $context
      * @return bool Access allowed?
      */
-    public static function checkAccess($module, $action, $context = array())
+    public static function checkAccess($module, $action, $context = [])
     {
-        if(!isset(self::$acls[$module])) {
+        if (!isset(self::$acls[$module])) {
             self::loadACLs($module, $context);
         }
-        foreach(self::$acls[$module] as $acl) {
-            if(!$acl->checkAccess($module, $action, $context)) {
+        foreach (self::$acls[$module] as $acl) {
+            if (!$acl->checkAccess($module, $action, $context)) {
                 return false;
             }
         }
@@ -217,13 +221,13 @@ class SugarACL
      */
     public static function disabledModuleList($list, $action = 'access', $use_value = false)
     {
-        $result = array();
-        if(empty($list)) {
+        $result = [];
+        if (empty($list)) {
             return $result;
         }
-        foreach($list as $key => $module) {
-            $checkmodule = $use_value?$module:$key;
-            if(!self::checkAccess($checkmodule, $action)) {
+        foreach ($list as $key => $module) {
+            $checkmodule = $use_value ? $module : $key;
+            if (!self::checkAccess($checkmodule, $action)) {
                 $result[$checkmodule] = $checkmodule;
             }
         }
@@ -239,13 +243,13 @@ class SugarACL
      */
     public static function filterModuleList($list, $action = 'access', $use_value = false)
     {
-        $result = array();
-        if(empty($list)) {
+        $result = [];
+        if (empty($list)) {
             return $list;
         }
 
-        foreach($list as $key => $module) {
-            if(self::checkAccess($use_value?$module:$key, $action, array("owner_override" => true))) {
+        foreach ($list as $key => $module) {
+            if (self::checkAccess($use_value ? $module : $key, $action, ['owner_override' => true])) {
                 $result[$key] = $module;
             }
         }
@@ -265,28 +269,28 @@ class SugarACL
      * - min_access (int) - require this level of access for field
      * - use_value (bool) - look for field name in value, not in key of the list
      */
-    public static function listFilter($module, &$list, $context = array(), $options = array())
+    public static function listFilter($module, &$list, $context = [], $options = [])
     {
-        if(empty($list)) {
+        if (empty($list)) {
             return;
         }
 
-        if(empty($options['min_access'])) {
+        if (empty($options['min_access'])) {
             $min_access = 'access';
         } else {
-            if($options['min_access'] >= SugarACL::ACL_READ_WRITE) {
-                $min_access = "edit";
+            if ($options['min_access'] >= SugarACL::ACL_READ_WRITE) {
+                $min_access = 'edit';
             }
         }
 
-        $check_fields = array();
+        $check_fields = [];
 
-        foreach($list as $key=>$value) {
-            if(!empty($options['use_value'])) {
-                if(is_array($value)) {
-                    if(!empty($value['group'])){
+        foreach ($list as $key => $value) {
+            if (!empty($options['use_value'])) {
+                if (is_array($value)) {
+                    if (!empty($value['group'])) {
                         $value = $value['group'];
-                    } elseif(!empty($value['name'])) {
+                    } elseif (!empty($value['name'])) {
                         $value = $value['name'];
                     } else {
                         // we don't know what to do with this one, skip it
@@ -296,60 +300,62 @@ class SugarACL
                 $field = $value;
             } else {
                 $field = $key;
-                if(is_array($value) && !empty($value['group'])){
-                        $field = $value['group'];
+                if (is_array($value) && !empty($value['group'])) {
+                    $field = $value['group'];
                 }
             }
-            if(!empty($options['suffix'])) {
+            if (!empty($options['suffix'])) {
                 // remove suffix like _advanced
                 $field = str_replace($options['suffix'], '', $field);
             }
-            if(!empty($options['add_acl'])) {
+            if (!empty($options['add_acl'])) {
                 $check_fields[$key] = $check_fields[$field] = strtolower($field);
             } else {
-                if(!empty($list[$key])) {
+                if (!empty($list[$key])) {
                     $check_fields[$key] = strtolower($field);
                 }
             }
         }
 
-        if(!isset(self::$acls[$module])) {
+        if (!isset(self::$acls[$module])) {
             self::loadACLs($module, $context);
         }
 
-        if(!empty($options['add_acl'])) {
+        if (!empty($options['add_acl'])) {
             // initialize the access details
-            foreach($check_fields as $key => $value) {
+            foreach ($check_fields as $key => $value) {
                 $list[$key]['acl'] = self::ACL_READ_WRITE;
             }
-            foreach(self::$acls[$module] as $acl) {
-                foreach($acl->getFieldListAccess($module, $check_fields, $context) as $key => $acl) {
-                    if($acl < $list[$key]['acl']) {
+            foreach (self::$acls[$module] as $acl) {
+                foreach ($acl->getFieldListAccess($module, $check_fields, $context) as $key => $acl) {
+                    if ($acl < $list[$key]['acl']) {
                         $list[$key]['acl'] = $acl;
                     }
                 }
             }
         } else {
-            foreach(self::$acls[$module] as $acl) {
-                foreach($acl->checkFieldList($module, $check_fields, $min_access, $context) as $key => $access) {
+            foreach (self::$acls[$module] as $acl) {
+                foreach ($acl->checkFieldList($module, $check_fields, $min_access, $context) as $key => $access) {
                     if (!$access || !self::allowFieldAccess($module, $key)) {
                         // if have no access, blank or remove field value
-                        if(empty($options['blank_value'])) {
-                        	unset($list[$key]);
+                        if (empty($options['blank_value'])) {
+                            unset($list[$key]);
                         } else {
-                        	$list[$key] = '';
+                            $list[$key] = '';
                         }
                         // no need to check it again
                         unset($check_fields[$key]);
                     }
                 }
-                if(empty($check_fields)) break;
+                if (empty($check_fields)) {
+                    break;
+                }
             }
         }
     }
 
-    public static $all_access = array('access' => true,'view' => true,'list' => true,'edit' => true,
-        'delete' => true,'import' => true,'export' => true,'massupdate' => true);
+    public static $all_access = ['access' => true, 'view' => true, 'list' => true, 'edit' => true,
+        'delete' => true, 'import' => true, 'export' => true, 'massupdate' => true];
 
     /**
      * Get user access for the list of actions
@@ -357,9 +363,9 @@ class SugarACL
      * @param array $access_list List of actions
      * @returns array - List of access levels. Access levels not returned are assumed to be "all allowed".
      */
-    public static function getUserAccess($module, $access_list = array(), $context = array())
+    public static function getUserAccess($module, $access_list = [], $context = [])
     {
-        if(empty($access_list)) {
+        if (empty($access_list)) {
             $access_list = self::$all_access;
         }
         $access = $access_list;
@@ -381,17 +387,17 @@ class SugarACL
             self::loadACLs($module, $context);
         }
 
-        foreach(self::$acls[$module] as $acl) {
+        foreach (self::$acls[$module] as $acl) {
             $acl_access = $acl->getUserAccess($module, $access_list, $context);
-            foreach($acl_access as $name => $value) {
-                if($value == false) {
+            foreach ($acl_access as $name => $value) {
+                if ($value == false) {
                     $access[$name] = false;
                     // don't check already rejected ones
                     unset($access_list[$name]);
                 }
             }
             // if we did not have any actions left, we're done
-            if(empty($access_list)) {
+            if (empty($access_list)) {
                 break;
             }
         }

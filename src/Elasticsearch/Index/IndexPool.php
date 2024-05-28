@@ -59,13 +59,13 @@ class IndexPool
      * Loaded strategies
      * @var \Sugarcrm\Sugarcrm\Elasticsearch\Index\Strategy\StrategyInterface[]
      */
-    protected $loaded = array();
+    protected $loaded = [];
 
     /**
      * Registered strategies
      * @var array
      */
-    protected $strategies = array();
+    protected $strategies = [];
 
     /**
      * @param string $prefix Index prefix
@@ -122,8 +122,8 @@ class IndexPool
     /**
      * Get strategy object for given module
      * @param string $module Module name
-     * @throws \Sugarcrm\Sugarcrm\Elasticsearch\Exception\IndexPoolStrategyException
      * @return \Sugarcrm\Sugarcrm\Elasticsearch\Index\Strategy\StrategyInterface
+     * @throws \Sugarcrm\Sugarcrm\Elasticsearch\Exception\IndexPoolStrategyException
      */
     public function getStrategy($module)
     {
@@ -141,7 +141,6 @@ class IndexPool
         }
 
         if (!isset($this->loaded[$id])) {
-
             if (!isset($this->strategies[$id])) {
                 throw new IndexPoolStrategyException("Unknown strategy identifier '$id'");
             }
@@ -166,7 +165,7 @@ class IndexPool
      * @param array $context
      * @return \Sugarcrm\Sugarcrm\Elasticsearch\Index\IndexCollection
      */
-    public function getReadIndices(array $modules, array $context = array())
+    public function getReadIndices(array $modules, array $context = [])
     {
         $collection = new IndexCollection($this->container);
         foreach ($modules as $module) {
@@ -198,7 +197,7 @@ class IndexPool
      * @param array $context
      * @return \Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Index
      */
-    public function getWriteIndex($module, array $context = array())
+    public function getWriteIndex($module, array $context = [])
     {
         $index = $this->getStrategy($module)->getWriteIndex($module, $context);
         $normalized = $this->normalizeIndexName($index);
@@ -242,7 +241,7 @@ class IndexPool
      *
      * @return string
      */
-    protected function getIndexStrategyFromConfig() : string
+    protected function getIndexStrategyFromConfig(): string
     {
         return empty(IndexManager::isOneIndexEnabled()) ? self::SINGLE_MODULE_STRATEGY : self::DEFAULT_STRATEGY;
     }

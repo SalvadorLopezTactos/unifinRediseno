@@ -9,14 +9,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
+
 
 /**
  * @api
  */
 class SugarJobMassUpdate implements RunnableSchedulerJob
 {
-
     /**
      * @var \SchedulersJob|mixed
      */
@@ -24,7 +25,7 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
     /**
      * the ids of the child jobs
      */
-    protected $workJobIds = array();
+    protected $workJobIds = [];
 
     /**
      * @var int number of records to be updated/deleted at one time
@@ -96,11 +97,11 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
      * @param String $jobType job type - 'init' for parent job, 'work' for child job
      * @return String id of the created job
      */
-    public function createJobQueueConsumer($data, $jobType = "init")
+    public function createJobQueueConsumer($data, $jobType = 'init')
     {
         $job = new SchedulersJob();
-        $job->name = 'MassUpdate_'.$jobType;
-        $job->target = "class::SugarJobMassUpdate";
+        $job->name = 'MassUpdate_' . $jobType;
+        $job->target = 'class::SugarJobMassUpdate';
 
         $data['_jobType_'] = $jobType;
         $job->data = json_encode($data);
@@ -136,11 +137,9 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
             return false;
         }
 
-        switch ($data['_jobType_'])
-        {
+        switch ($data['_jobType_']) {
             // this is the parent job, find out all the records to be updated and create child jobs
             case 'init':
-
                 // if uid is already provided, use them
                 if (isset($data['uid'])) {
                     if (!is_array($data['uid'])) {
@@ -153,19 +152,18 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
                         $tmpData['uid'] = $chunk;
                         $this->workJobIds[] = $this->createJobQueueConsumer($tmpData, 'work');
                     }
-                }
-                // if updating entire list, use filter
-                else if (!empty($data['entire'])) {
+                } // if updating entire list, use filter
+                elseif (!empty($data['entire'])) {
                     // call filter api to get the ids then create a job queue for each chunk
                     $filterApi = new FilterApi();
                     $api = new RestService();
                     $api->user = $GLOBALS['current_user'];
                     $nextOffset = 0;
-                    $filterArgs = array('module'=>$data['module'], 'fields'=>'id');
+                    $filterArgs = ['module' => $data['module'], 'fields' => 'id'];
                     if (isset($data['filter'])) {
                         $filterArgs['filter'] = $data['filter'];
                     }
-                    $uidArray = array();
+                    $uidArray = [];
 
                     // max_num does not need to set to chunkSize, it can be any size that makes sense
                     $filterArgs['max_num'] = $this->chunkSize;
@@ -181,7 +179,7 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
                             }
                         }
                         // create one child job for each chunk
-                        if (count($uidArray)) {
+                        if (safeCount($uidArray)) {
                             $uidChunks = array_chunk($uidArray, $this->chunkSize);
                             foreach ($uidChunks as $chunk) {
                                 $tmpData = $data;
@@ -200,7 +198,7 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
                 // return the ids of the child jobs that have been created
                 return $this->workJobIds;
 
-            // this is the child job, do update
+                // this is the child job, do update
             case 'work':
                 return $this->workJob($this->job, $data);
 
@@ -255,11 +253,11 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
         unset($data['module']);
         $action = $data['action'];
         unset($data['action']);
-        $ids = is_array($data['uid'])?$data['uid']:array();
+        $ids = is_array($data['uid']) ? $data['uid'] : [];
         unset($data['uid']);
         unset($data['filter']);
         unset($data['entire']);
-        $prospectLists = $data['prospect_lists'] ?? array();
+        $prospectLists = $data['prospect_lists'] ?? [];
         unset($data['prospect_lists']);
 
         $seed = BeanFactory::newBean($module);
@@ -270,7 +268,7 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
         $failed = 0;
         foreach ($ids as $id) {
             // Doing a full retrieve because we are writing we may need dependent fields for workflow that we don't know about
-            $bean = BeanFactory::retrieveBean($module,$id);
+            $bean = BeanFactory::retrieveBean($module, $id);
             if ($bean == null) {
                 // Team permissions may have changed, or a deletion, we won't hold it against them
                 continue;
@@ -287,7 +285,7 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
             }
 
             try {
-                $errors = $helper->populateFromApi($bean, $data, array('massUpdate'=>true));
+                $errors = $helper->populateFromApi($bean, $data, ['massUpdate' => true]);
                 $check_notify = $helper->checkNotify($bean);
                 // Before calling save, we need to clear out any existing AWF
                 // triggered start events so they can continue to trigger.
@@ -300,7 +298,7 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
             }
         }
 
-        if ((is_countable($prospectLists) ? count($prospectLists) : 0) > 0) {
+        if (safeCount($prospectLists) > 0) {
             $massupdate = new MassUpdate();
 
             foreach ($prospectLists as $listId) {
@@ -311,13 +309,12 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
                 }
             }
             if (!$success) {
-                $GLOBALS['log']->error("Could not add prospects to prospect list, could not find a relationship to the ProspectLists module.");
+                $GLOBALS['log']->error('Could not add prospects to prospect list, could not find a relationship to the ProspectLists module.');
             }
         }
 
-        return array(
+        return [
             'failed' => $failed,
-        );
+        ];
     }
-
 }

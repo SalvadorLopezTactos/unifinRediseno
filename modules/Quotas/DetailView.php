@@ -10,9 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
- * Description:  
+ * Description:
  ********************************************************************************/
 
-include ("modules/Quotas/index.php");
-?>
+include 'modules/Quotas/index.php';

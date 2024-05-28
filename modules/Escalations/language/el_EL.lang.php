@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'Προβολή Κλιμάκωσης',
     'LBL_LIST_RELATED_TO_ID' => 'Σχετίζεται με Ταυτότητα',
     'LNK_IMPORT_ESCALATIONS' => 'Εισαγωγή Κλιμακώσεων',
-    
+
     'LBL_LIST_SUBJECT' => 'Θέμα',
     'LBL_LIST_NUMBER' => 'Αριθ.',
     'LBL_LIST_RELATED_TO_TYPE' => 'Σχετιζόμενος Τύπος',

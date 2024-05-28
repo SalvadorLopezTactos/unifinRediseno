@@ -10,71 +10,71 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['calls_contacts'] = array(
+$dictionary['calls_contacts'] = [
     'table' => 'calls_contacts',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'call_id' => array(
+        ],
+        'call_id' => [
             'name' => 'call_id',
             'type' => 'id',
-        ),
-        'contact_id' => array(
+        ],
+        'contact_id' => [
             'name' => 'contact_id',
             'type' => 'id',
-        ),
-        'required' => array(
+        ],
+        'required' => [
             'name' => 'required',
             'type' => 'varchar',
             'len' => '1',
             'default' => '1',
-        ),
-        'accept_status' => array(
+        ],
+        'accept_status' => [
             'name' => 'accept_status',
             'type' => 'varchar',
             'len' => '25',
             'default' => 'none',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'calls_contactspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_con_call_con',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'contact_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_call_contact',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'call_id',
                 'contact_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'calls_contacts' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'calls_contacts' => [
             'lhs_module' => 'Calls',
             'lhs_table' => 'calls',
             'lhs_key' => 'id',
@@ -85,6 +85,6 @@ $dictionary['calls_contacts'] = array(
             'join_table' => 'calls_contacts',
             'join_key_lhs' => 'call_id',
             'join_key_rhs' => 'contact_id',
-        ),
-    ),
-);
+        ],
+    ],
+];

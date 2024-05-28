@@ -22,7 +22,7 @@ $return_action = $request->getValidInputPost('return_action', null, '');
 $return_id = $request->getValidInputPost('return_id', null, '');
 
 
-require_once('include/formbase.php');
+require_once 'include/formbase.php';
 
 $focus = BeanFactory::newBean('Holidays');
 global $current_user;
@@ -35,7 +35,7 @@ $focus = populateFromPost('', $focus);
 if ($focus->id != $relate_id) {
     if ($return_module === 'Users') {
         $focus->person_id = $relate_id;
-        $focus->person_type = "Users";
+        $focus->person_type = 'Users';
     } else {
         $focus->related_module = $return_module;
         $focus->related_module_id = $relate_id;
@@ -52,7 +52,7 @@ if (!$focus->id && !empty($duplicateId)) {
     $focus->related_module_id = $original_focus->related_module_id;
 }
 
-$check_notify = FALSE;
+$check_notify = false;
 
 $focus->save($check_notify);
 
@@ -64,15 +64,15 @@ if ($focus->related_module !== 'Project') {
 }
 $return_id = $focus->id;
 
-if ($return_module === "") {
-    $return_module = "Holidays";
+if ($return_module === '') {
+    $return_module = 'Holidays';
 }
 
-if ($return_action === "") {
-    $return_action = "DetailView";
+if ($return_action === '') {
+    $return_action = 'DetailView';
 }
 
 
-$GLOBALS['log']->debug("Saved record with id of ".$return_id);
+$GLOBALS['log']->debug('Saved record with id of ' . $return_id);
 
-handleRedirect($return_id,'Holidays');
+handleRedirect($return_id, 'Holidays');

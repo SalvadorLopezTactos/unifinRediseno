@@ -19,16 +19,16 @@ class KBContentsRelateRecordApi extends RelateRecordApi
      */
     public function registerApiRest()
     {
-        return array(
-            'createRelatedLinks' => array(
+        return [
+            'createRelatedLinks' => [
                 'reqType' => 'POST',
-                'path' => array('KBContents', '?', 'link'),
-                'pathVars' => array('module', 'record', ''),
+                'path' => ['KBContents', '?', 'link'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'createRelatedLinks',
                 'shortHelp' => 'Relates existing records to this module.',
                 'longHelp' => 'include/api/help/module_record_link_post_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -37,11 +37,12 @@ class KBContentsRelateRecordApi extends RelateRecordApi
      */
     public function createRelatedLinks(
         ServiceBase $api,
-        array $args,
+        array       $args,
         $securityTypeLocal = 'view',
         $securityTypeRemote = 'view'
     ) {
-        if (in_array($args['link_name'], array('localizations', 'revisions'))) {
+
+        if (in_array($args['link_name'], ['localizations', 'revisions'])) {
             throw new SugarApiExceptionInvalidParameter('Unable to link existing record as localisation or revision.');
         }
 

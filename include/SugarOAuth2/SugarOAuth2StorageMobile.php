@@ -11,7 +11,8 @@
  */
 
 
-class SugarOAuth2StorageMobile extends SugarOAuth2StorageBase {
+class SugarOAuth2StorageMobile extends SugarOAuth2StorageBase
+{
     /**
      * How many simultaneous sessions allowed for this platform
      *

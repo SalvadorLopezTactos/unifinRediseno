@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\CustomerJourney\Bean as CJBean;
 use Sugarcrm\Sugarcrm\CustomerJourney\Exception as CJException;
 use Sugarcrm\Sugarcrm\CustomerJourney\LogicHooks;
@@ -154,7 +155,7 @@ class DRI_Workflow_Task_Template extends Basic
      * Retrieves a DRI_Workflow_Task_Template with id $id and
      * returns a instance of the retrieved bean
      *
-     * @param string $id: the id of the DRI_Workflow_Task_Template that should be retrieved
+     * @param string $id : the id of the DRI_Workflow_Task_Template that should be retrieved
      * @return DRI_Workflow_Task_Template
      * @throws NotFoundException: if not found
      */
@@ -286,7 +287,7 @@ class DRI_Workflow_Task_Template extends Basic
     /**
      * {@inheritdoc}
      */
-    public function getForms()
+    public function getForms($mainTriggerType = \CJ_Form::MAIN_TRIGGER_EVENT_SG_To_SA)
     {
         $filtered = [];
 
@@ -294,7 +295,10 @@ class DRI_Workflow_Task_Template extends Basic
             $forms = $this->forms->getBeans();
 
             foreach ($forms as $form) {
-                if ($form->active && $form->parent_id === $this->id) {
+                if ($form->active &&
+                    $form->parent_id === $this->id &&
+                    $form->main_trigger_type === $mainTriggerType
+                ) {
                     $filtered[] = $form;
                 }
             }
@@ -355,7 +359,6 @@ class DRI_Workflow_Task_Template extends Basic
      *
      * @param $trigger_event
      * @param array $request
-
      * * @throws SugarApiException
      * @throws SugarQueryException
      */
@@ -402,12 +405,7 @@ class DRI_Workflow_Task_Template extends Basic
         }
 
         if (null !== $stage && !$stage->deleted) {
-            if ($isParent === 0 || !empty($parent)) {
-                /* When a parent activity is deleted that has child activities as well.
-                  In this case, we ONLY want to reorder the other 1st level parent activites
-                  and not go into the children of the activity that is getting deleted. */
-                $this->reorderSortOrdersAndLabels($stage->id, $parent);
-            }
+            $this->reorderSortOrdersAndLabels($stage->id, $parent);
             $stage->save(false, true);
         }
 
@@ -449,7 +447,7 @@ class DRI_Workflow_Task_Template extends Basic
      */
     public function isParent()
     {
-        return count($this->getChildren()) > 0;
+        return safeCount($this->getChildren()) > 0;
     }
 
     /**
@@ -482,7 +480,7 @@ class DRI_Workflow_Task_Template extends Basic
      */
     private function sortChildren($activities)
     {
-        if (count($activities) < 2) {
+        if (safeCount($activities) < 2) {
             return $activities;
         }
 
@@ -520,13 +518,14 @@ class DRI_Workflow_Task_Template extends Basic
             [$_, $order] = explode('.', $order);
         }
 
-        return (int) $order;
+        return (int)$order;
     }
 
     private function retrieveBean($moduleName, $id)
     {
         return BeanFactory::retrieveBean($moduleName, $id);
     }
+
     /**
      * Get the parent task template
      *
@@ -654,6 +653,7 @@ class DRI_Workflow_Task_Template extends Basic
             return [];
         }
     }
+
     /**
      * Check if task template is blocked
      *
@@ -661,7 +661,7 @@ class DRI_Workflow_Task_Template extends Basic
      */
     public function isBlocked()
     {
-        return count($this->getBlockedByIds()) > 0;
+        return safeCount($this->getBlockedByIds()) > 0;
     }
 
     /**
@@ -671,7 +671,7 @@ class DRI_Workflow_Task_Template extends Basic
      */
     public function hasBlockedBy()
     {
-        return count($this->getBlockedByIds()) > 0;
+        return safeCount($this->getBlockedByIds()) > 0;
     }
 
     /**
@@ -683,7 +683,7 @@ class DRI_Workflow_Task_Template extends Basic
     {
         try {
             self::getByNameAndParent($this->name, $this->dri_subworkflow_template_id, $this->id);
-            throw new SugarApiExceptionInvalidParameter(sprintf('template with name %s does already exist', $this->name));
+            throw new SugarApiExceptionInvalidParameter(sprintf('Another Smart Guide template is already named %s.', $this->name));
         } catch (CJException\CustomerJourneyException $e) {
         }
     }
@@ -834,7 +834,7 @@ class DRI_Workflow_Task_Template extends Basic
 
     private function getUpdatedSortOrder($sort_order, $moveOrDelete)
     {
-        return $moveOrDelete === 'move' ? $sort_order++ : $sort_order--;
+        return $moveOrDelete === 'move' ? ++$sort_order : --$sort_order;
     }
 
     /**

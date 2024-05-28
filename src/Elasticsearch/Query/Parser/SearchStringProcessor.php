@@ -22,18 +22,18 @@ class SearchStringProcessor
 {
     /**
      * to parse parentheses into a structured array
-     * @param string $string, the string to parse
+     * @param string $string , the string to parse
      * @return array
      */
     public static function parse($string)
     {
         if (!$string) {
-            return array();
+            return [];
         }
 
         $startPosition = null;
-        $current = array();
-        $stack = array();
+        $current = [];
+        $stack = [];
 
         $string .= ' ';
         $len = strlen($string);
@@ -47,7 +47,7 @@ class SearchStringProcessor
                     }
                     // push current entry to the stack an begin a new entry
                     array_push($stack, $current);
-                    $current = array();
+                    $current = [];
                     break;
 
                 case ')':
@@ -77,7 +77,7 @@ class SearchStringProcessor
             }
         }
 
-        $ret = array();
+        $ret = [];
         // in case mismatch bracket, there will be some entries left in the stack
         while (!empty($stack)) {
             $ret[] = array_pop($stack);
@@ -88,12 +88,12 @@ class SearchStringProcessor
         }
         return $ret;
     }
-    
+
     /**
      * to get substring based on the startPosition and current position
-     * @param string $string, string to parse
-     * @param int $position, current position
-     * @param int $startPosition, start position
+     * @param string $string , string to parse
+     * @param int $position , current position
+     * @param int $startPosition , start position
      * @return null|string
      */
     protected static function getSubString($string, $position, &$startPosition)

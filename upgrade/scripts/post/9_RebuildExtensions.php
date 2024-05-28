@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Register upgrade with the system
  */
@@ -19,7 +20,7 @@ class SugarUpgradeRebuildExtensions extends UpgradeScript
     public function run()
     {
         // we just finished with the layouts, we need to rebuild the extensions
-        include "include/modules.php";
+        include 'include/modules.php';
         $rac = new RepairAndClear();
         $rac->rebuildExtensions();
     }

@@ -76,6 +76,7 @@
           .headerpane {
             top: 56px;
             left: calc(~"25% + 15px");
+            width: calc(~"75% - 28px");
             right: 15px;
             border-left: @borderWidget;
             border-top: @borderWidget;
@@ -96,10 +97,6 @@
         border-top: @borderWidget;
 
         .preview-pane {
-          .overflow-x-hidden();
-          .overflow-y-auto();
-          .absolute();
-
           top: 15px;
           bottom: 15px;
           right: 15px;
@@ -111,11 +108,11 @@
 
           .preview-headerbar {
             border-left: 0;
-            .w-full();
+            width: 100%;
           }
         }
 
-        .dashboard.bg-secondary-content-background {
+        .dashboard.bg-[--secondary-content-background] {
           top: 64px;
           bottom: 15px;
           border-bottom: @borderWidget;
@@ -135,7 +132,7 @@
           ul.dashlets.row-fluid {
             border-left: @borderWidget;
             border-right: @borderWidget;
-            .w-full();
+            width: 100%;
 
             .grid-stack-item {
               margin-top: 1px;
@@ -146,15 +143,29 @@
     }
   }
 
+  &.pipeline {
+    left: 21rem;
+
+    .drawer-content {
+      > div > .row-fluid {
+        .main-pane {
+          &.span8 {
+            .headerpane {
+              left: calc(~"21rem + 15px");
+            }
+          }
+
+          &.span12 {
+            .headerpane {
+              left: calc(~"21rem + 15px");
+            }
+          }
+        }
+      }
+    }
+  }
+
   > .disabled .btn {
-    > .fa {
-      color: @btnDisabledIconColor;
-    }
-
-    &.btn-primary > .fa {
-      color: inherit;
-    }
-
     &:not(.disabled):hover {
       box-shadow: inset 0 0 10px @transparent;
     }
@@ -224,8 +235,8 @@
       padding-top: 1px;
       background-color: @secondaryContentBackground;
       display: flex;
-      .mr-4();
-      .ml-4();
+      margin-left: 1rem;
+      margin-right: 1rem;
 
       .tab {
         width: 284px;
@@ -294,7 +305,7 @@
           }
 
           &:hover {
-            .bg-tab-background-hover-color();
+            background-color: var(--tab-background-hover-color);
           }
         }
       }
@@ -311,7 +322,7 @@
         }
 
         a {
-          .pr-5();
+          padding-right: 1.25rem;
         }
       }
     }
@@ -321,7 +332,7 @@
     border-left: none;
     overflow-x: hidden;
     overflow-y: visible;
-    top: 48px;
+    top: 42px;
 
     .empty-dashboard {
       display: contents;
@@ -339,7 +350,7 @@
           display: flex;
 
           .record-cell {
-            .w-auto();
+            width: auto;
           }
 
           .record-cell:first-child {

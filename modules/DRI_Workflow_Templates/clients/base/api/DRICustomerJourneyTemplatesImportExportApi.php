@@ -23,7 +23,7 @@ class DRICustomerJourneyTemplatesImportExportApi extends ExportApi
      */
     public function registerApiRest()
     {
-        return[
+        return [
             'templateImportPost' => [
                 'reqType' => 'POST',
                 'path' => ['DRI_Workflow_Templates', 'file', 'template-import'],
@@ -160,10 +160,10 @@ class DRICustomerJourneyTemplatesImportExportApi extends ExportApi
         $bean = BeanFactory::newBean('DRI_Workflow_Templates');
 
         if (!$bean->ACLAccess('save') || !$bean->ACLAccess('import')) {
-            throw new SugarApiExceptionNotAuthorized('No access to import Smart Guide Templates');
+            throw new SugarApiExceptionNotAuthorized('You do not have permission to import Smart Guide templates. Please contact your Sugar Administrator.');
         }
 
-        if ($_FILES !== null && count($_FILES) === 1) {
+        if ($_FILES !== null && safeCount($_FILES) === 1) {
             $file = array_key_first($_FILES);
             $name = $_FILES[$file]['name'];
 
@@ -195,7 +195,7 @@ class DRICustomerJourneyTemplatesImportExportApi extends ExportApi
         $bean = $this->loadBean($api, $args);
 
         if (!$bean->ACLAccess('export')) {
-            throw new SugarApiExceptionNotAuthorized('No access to export Smart Guide Templates');
+            throw new SugarApiExceptionNotAuthorized('You do not have permission to export Smart Guide templates. Please contact your Sugar Administrator.');
         }
 
         $name = $bean->name;

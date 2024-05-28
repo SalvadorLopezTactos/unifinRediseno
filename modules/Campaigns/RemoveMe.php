@@ -11,40 +11,41 @@
  */
 
 
-require_once('modules/Campaigns/utils.php');
+require_once 'modules/Campaigns/utils.php';
 
-if (!empty($_REQUEST['remove'])) clean_string($_REQUEST['remove'], "STANDARD");
-if (!empty($_REQUEST['from'])) clean_string($_REQUEST['from'], "STANDARD");
+if (!empty($_REQUEST['remove'])) {
+    clean_string($_REQUEST['remove'], 'STANDARD');
+}
+if (!empty($_REQUEST['from'])) {
+    clean_string($_REQUEST['from'], 'STANDARD');
+}
 
-if(!empty($_REQUEST['identifier'])) {
+if (!empty($_REQUEST['identifier'])) {
     global $beanFiles, $beanList, $current_user;
 
     //user is most likely not defined, retrieve admin user so that team queries are bypassed
-    if(empty($current_user) || empty($current_user->id)){
-            $current_user = BeanFactory::getBean('Users', '1');
+    if (empty($current_user) || empty($current_user->id)) {
+        $current_user = BeanFactory::getBean('Users', '1');
     }
 
-    $keys=log_campaign_activity($_REQUEST['identifier'],'removed');
+    $keys = log_campaign_activity($_REQUEST['identifier'], 'removed');
     global $current_language;
     $mod_strings = return_module_language($current_language, 'Campaigns');
 
 
-    if (!empty($keys) && $keys['target_type'] == 'Users'){
+    if (!empty($keys) && $keys['target_type'] == 'Users') {
         //Users cannot opt out of receiving emails, print out warning message.
         echo $mod_strings['LBL_USERS_CANNOT_OPTOUT'];
-     }elseif(!empty($keys) && isset($keys['campaign_id']) && !empty($keys['campaign_id'])){
+    } elseif (!empty($keys) && isset($keys['campaign_id']) && !empty($keys['campaign_id'])) {
         //we need to unsubscribe the user from this particular campaign
-        $focus = BeanFactory::getBean($keys['target_type'], $keys['target_id']
-        , array('disable_row_level_security' => true)
-        );
+        $focus = BeanFactory::getBean($keys['target_type'], $keys['target_id'], ['disable_row_level_security' => true]);
         unsubscribe($keys['campaign_id'], $focus);
-
-    }elseif(!empty($keys)){
-		$id = $keys['target_id'];
+    } elseif (!empty($keys)) {
+        $id = $keys['target_id'];
         $module = empty($keys['target_type']) ? '' : $keys['target_type'];
         $db = DBManagerFactory::getInstance();
 
-		//no opt out for users.
+        //no opt out for users.
         if (!empty($module) && $module != 'Users') {
             //record this activity in the campaign log table..
             $status = true;
@@ -55,18 +56,18 @@ if(!empty($_REQUEST['identifier'])) {
             $conn = $db->getConnection();
             $queryResult = $conn->executeQuery($sql, [$module, $id]);
             while ($row = $queryResult->fetchAssociative()) {
-                $status = $status && (bool) $db->updateParams(
+                $status = $status && (bool)$db->updateParams(
                     $email->getTableName(),
                     $email->field_defs,
-                    array('opt_out' => 1),
-                    array('id' => $row['id'])
+                    ['opt_out' => 1],
+                    ['id' => $row['id']]
                 );
             }
-			if($status){
-				echo "*";
-			}
-		}
+            if ($status) {
+                echo '*';
+            }
+        }
     }
-		//Print Confirmation Message.
-		echo $mod_strings['LBL_ELECTED_TO_OPTOUT'];
+    //Print Confirmation Message.
+    echo $mod_strings['LBL_ELECTED_TO_OPTOUT'];
 }

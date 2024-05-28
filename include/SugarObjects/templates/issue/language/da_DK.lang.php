@@ -10,25 +10,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
 
-  'LBL_NAME' =>'Navn',
-  'LBL_NUMBER' => 'Nummer:',
-  'LBL_STATUS' => 'Status:',
-  'LBL_PRIORITY' => 'Prioritet:',
-  'LBL_DESCRIPTION' => 'Beskrivelse:',
-  'LBL_RESOLUTION' => 'Opløsning',
-  'LBL_LAST_MODIFIED' => 'Sidst ændret',
-  'LBL_ASSIGNED_TO_ID'=>'Tildelt til:',
-  'LBL_ASSIGNED_TO_NAME' => 'Tildelt til:',
-  'LBL_WORK_LOG' => 'Arbejdslog:',
+    'LBL_NAME' => 'Navn',
+    'LBL_NUMBER' => 'Nummer:',
+    'LBL_STATUS' => 'Status:',
+    'LBL_PRIORITY' => 'Prioritet:',
+    'LBL_DESCRIPTION' => 'Beskrivelse:',
+    'LBL_RESOLUTION' => 'Opløsning',
+    'LBL_LAST_MODIFIED' => 'Sidst ændret',
+    'LBL_ASSIGNED_TO_ID' => 'Tildelt til:',
+    'LBL_ASSIGNED_TO_NAME' => 'Tildelt til:',
+    'LBL_WORK_LOG' => 'Arbejdslog:',
     'LBL_FOLLOW_UP' => 'Opfølgning',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
     'LBL_RESOLVED_DATETIME' => 'Løst dato',
@@ -36,19 +35,19 @@ $mod_strings = array (
     'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Arbejdstimer til løsning',
     'LBL_PENDING_PROCESSING' => 'Afventer behandling',
     'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Opfølgningsdato',
-  'LBL_CREATED_BY' => 'Oprettet af:',
-  'LBL_DATE_CREATED' => 'Oprettet den:',
-  'LBL_DATE_ENTERED' => 'Oprettet den:',
-  'LBL_DATE_MODIFIED'=>'Ændret den:',
-  'LBL_MODIFIED_BY' => 'Sidst ændret af:',
-  'LBL_ASSIGNED_USER' => 'Tildelt bruger:',
-  'LBL_ASSIGNED_USER_NAME' => 'Tildelt til',
-  'LBL_TEAM_NAME' =>'Teamnavn:',
-  'LBL_TYPE'=>'Type:',
-  'LBL_SUBJECT' => 'Emne:',
+    'LBL_CREATED_BY' => 'Oprettet af:',
+    'LBL_DATE_CREATED' => 'Oprettet den:',
+    'LBL_DATE_ENTERED' => 'Oprettet den:',
+    'LBL_DATE_MODIFIED' => 'Ændret den:',
+    'LBL_MODIFIED_BY' => 'Sidst ændret af:',
+    'LBL_ASSIGNED_USER' => 'Tildelt bruger:',
+    'LBL_ASSIGNED_USER_NAME' => 'Tildelt til',
+    'LBL_TEAM_NAME' => 'Teamnavn:',
+    'LBL_TYPE' => 'Type:',
+    'LBL_SUBJECT' => 'Emne:',
 
     'LBL_EDIT_BUTTON' => 'Rediger',
     'LBL_REMOVE' => 'Fjern',
 
 
-  );
+];

@@ -10,11 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$vardefs = array(
-    'fields' => array(
-        'locked_fields' => array(
+$vardefs = [
+    'fields' => [
+        'locked_fields' => [
             'name' => 'locked_fields',
-            'vname' =>'LBL_LOCKED_FIELDS',
+            'vname' => 'LBL_LOCKED_FIELDS',
             'type' => 'locked_fields',
             'link' => 'locked_fields_link',
             'source' => 'non-db',
@@ -25,26 +25,26 @@ $vardefs = array(
             'exportable' => false,
             'sortable' => false,
             'rname' => 'pro_locked_variables',
-            'collection_fields' => array('pro_locked_variables'),
-            'full_text_search' => array(
+            'collection_fields' => ['pro_locked_variables'],
+            'full_text_search' => [
                 'enabled' => false,
                 'searchable' => false,
-            ),
+            ],
             // This field should not show in the field matrix for roles
             'hideacl' => true,
-        ),
-        'locked_fields_link' => array(
+        ],
+        'locked_fields_link' => [
             'name' => 'locked_fields_link',
             'type' => 'link',
             'vname' => 'LBL_LOCKED_FIELDS_LINK',
-            'relationship' => strtolower($module).'_locked_fields',
+            'relationship' => strtolower($module) . '_locked_fields',
             'source' => 'non-db',
             'exportable' => false,
             'duplicate_merge' => 'disabled',
-        ),
-    ),
-    'relationships' => array(
-        strtolower($module).'_locked_fields' => array(
+        ],
+    ],
+    'relationships' => [
+        strtolower($module) . '_locked_fields' => [
             'lhs_module' => $module,
             'lhs_table' => $table_name,
             'lhs_key' => 'id',
@@ -57,9 +57,9 @@ $vardefs = array(
             'join_key_rhs' => 'pd_id',
             'relationship_role_column' => 'bean_module',
             'relationship_role_column_value' => $module,
-        ),
-    ),
-    'acls' => array(
+        ],
+    ],
+    'acls' => [
         'SugarACLLockedFields' => true,
-    ),
-);
+    ],
+];

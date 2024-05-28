@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '網路邏輯掛鉤',
     'LBL_MODULE_NAME_SINGULAR' => '網路邏輯掛鉤',
     'LBL_MODULE_TITLE' => '網路邏輯掛鉤',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => '請求方法',
     'LBL_TRIGGER_EVENT' => '觸發事件',
     'LBL_URL' => 'URL',
-);
+];

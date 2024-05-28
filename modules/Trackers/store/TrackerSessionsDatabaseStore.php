@@ -17,7 +17,7 @@ class TrackerSessionsDatabaseStore implements Store
     {
         $db = DBManagerFactory::getInstance();
 
-        $values = array();
+        $values = [];
         $metrics = $monitor->getMetrics();
         foreach ($metrics as $name => $metric) {
             if (isset($monitor->$name)) {
@@ -30,15 +30,15 @@ class TrackerSessionsDatabaseStore implements Store
         }
 
         if ($monitor->new === true) {
-            if ($db->supports("auto_increment_sequence")) {
+            if ($db->supports('auto_increment_sequence')) {
                 $values['id'] = $db->getAutoIncrementSQL($monitor->table_name, 'id');
             }
 
             $this->cleanSessions($monitor);
 
             $query = "INSERT INTO
-                      $monitor->table_name (" . implode(",", array_keys($values)) . ")
-                      VALUES (" . implode(",", $values) . ')';
+                      $monitor->table_name (" . implode(',', array_keys($values)) . ')
+                      VALUES (' . implode(',', $values) . ')';
             $db->query($query);
         } else {
             // Update only on session close
@@ -47,11 +47,11 @@ class TrackerSessionsDatabaseStore implements Store
             }
             $query = "UPDATE $monitor->table_name SET";
 
-            $set = array();
+            $set = [];
             foreach ($values as $key => $value) {
                 $set[] = " $key = $value ";
             }
-            $query .= implode(",", $set);
+            $query .= implode(',', $set);
             $query .= "WHERE session_id = '{$monitor->session_id}'";
 
             $GLOBALS['db']->query($query);

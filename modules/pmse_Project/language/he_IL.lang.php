@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'הגדרת תהליך',
-  'LBL_MODULE_TITLE' => 'הגדרת תהליך',
-  'LBL_MODULE_NAME_SINGULAR' => 'הגדרת תהליך',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'הגדרת תהליך',
+    'LBL_MODULE_TITLE' => 'הגדרת תהליך',
+    'LBL_MODULE_NAME_SINGULAR' => 'הגדרת תהליך',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס הגדרות תהליך',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס הגדרות תהליך',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות מסוג הגדרות תהליכים',
-  'LNK_LIST' => 'צפה בהגדרות תהליך',
-  'LNK_NEW_PMSE_PROJECT' => 'צור הגדרות תהליך',
-  'LNK_IMPORT_PMSE_PROJECT' => 'ייבא הגדרות תהליך',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות מסוג הגדרות תהליכים',
+    'LNK_LIST' => 'צפה בהגדרות תהליך',
+    'LNK_NEW_PMSE_PROJECT' => 'צור הגדרות תהליך',
+    'LNK_IMPORT_PMSE_PROJECT' => 'ייבא הגדרות תהליך',
 
-  'LBL_PRJ_STATUS' => 'מצב',
-  'LBL_PRJ_MODULE' => 'מודול מטרה',
-  'LBL_PRJ_RUN_ORDER' => 'סדר הפעלה',
-  'LBL_PMSE_BUTTON_SAVE' => 'שמירה',
-  'LBL_PMSE_BUTTON_CANCEL' => 'בטל',
-  'LBL_PMSE_BUTTON_YES' => 'כן',
-  'LBL_PMSE_BUTTON_NO' => 'לא',
-  'LBL_PMSE_BUTTON_OK' => 'אישור',
+    'LBL_PRJ_STATUS' => 'מצב',
+    'LBL_PRJ_MODULE' => 'מודול מטרה',
+    'LBL_PRJ_RUN_ORDER' => 'סדר הפעלה',
+    'LBL_PMSE_BUTTON_SAVE' => 'שמירה',
+    'LBL_PMSE_BUTTON_CANCEL' => 'בטל',
+    'LBL_PMSE_BUTTON_YES' => 'כן',
+    'LBL_PMSE_BUTTON_NO' => 'לא',
+    'LBL_PMSE_BUTTON_OK' => 'אישור',
     'LBL_PMSE_FORM_ERROR' => 'אנא תקן את שגיאות, אם ישנן, בטרם תמשיך.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'עיצוב',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'פעילות',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'פעולה',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'ארוע התחלת ליד',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'ארוע התחלת הזדמנות' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'ארוע התחלת הזדמנות',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'ארוע התחלת מסמך',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'ארוע מודול אחר',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'ארוע המתנה',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'כלל עסקי',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'פעולת כלל עסקי',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'תבנית דוא"ל',
-);
+];

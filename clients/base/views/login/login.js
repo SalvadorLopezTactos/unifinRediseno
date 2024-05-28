@@ -227,7 +227,7 @@
         this.currentLang = app.lang.getLanguage() || 'en_us';
         this.languageList = this.formatLanguageList();
         this._super('_renderHtml');
-        this.$('[data-toggle="dropdown"]').dropdown();
+        this.$('[data-bs-toggle="dropdown"]').dropdown();
         this.adjustMenuHeight();
     },
 
@@ -419,7 +419,7 @@
      * login setup we need to do prior to rendering the rest of the Sugar app.
      */
     postLogin: function() {
-        if (!app.user.get('show_wizard') && !app.user.get('is_password_expired') && app.user.get('cookie_consent')) {
+        if (!app.user.get('show_wizard') && !app.user.get('is_password_expired')) {
 
             this.refreshAdditionalComponents();
 

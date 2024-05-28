@@ -13,7 +13,7 @@
 {{#if hasAnchor}}
     {{#if ellipsis}}
         <div class="ellipsis_inline"{{#if dir}} dir="{{dir}}"{{/if}} rel="tooltip"
-             title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}" data-placement="bottom">
+             title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}" data-bs-placement="bottom">
     {{/if}}
         <a href="javascript:void(0);"{{#if opt_out}} class="opt-out"{{/if}} data-action="email"
            data-email-address-id="{{email_address_id}}" data-email-to="{{email_address}}"
@@ -26,12 +26,12 @@
 {{else}}
     {{#if invalid_email}}
         <del rel="tooltip"{{#if dir}} dir="{{dir}}"{{/if}} title="{{email_address}} ({{flagLabel}})"
-             data-placement="bottom" class="{{#if ellipsis}}ellipsis_inline{{/if}}{{#if opt_out}} opt-out{{/if}}">
+             data-bs-placement="bottom" class="{{#if ellipsis}}ellipsis_inline{{/if}}{{#if opt_out}} opt-out{{/if}}">
             {{email_address}}
         </del>
     {{else}}
         <span rel="tooltip"{{#if dir}} dir="{{dir}}"{{/if}}
-              title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}" data-placement="bottom"
+              title="{{email_address}}{{#notEq flagLabel ''}} ({{flagLabel}}){{/notEq}}" data-bs-placement="bottom"
               class="{{#if ellipsis}}ellipsis_inline{{/if}}{{#if opt_out}} opt-out{{/if}}">
             {{email_address}}
         </span>

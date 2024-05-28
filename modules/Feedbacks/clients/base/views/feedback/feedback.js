@@ -169,8 +169,7 @@
             this._isOpen = show;
         }
 
-        this.button.popover('destroy');
-
+        this.button.popover('dispose');
 
         if (this._isOpen) {
             this.render();
@@ -187,7 +186,7 @@
      */
     _dispose: function() {
         if (this.button) {
-            this.button.popover('destroy');
+            this.button.popover('dispose');
         }
         this._super('_dispose');
     },

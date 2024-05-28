@@ -47,9 +47,9 @@ class AutoIncrementHandler extends AbstractHandler implements ProcessDocumentHan
     protected function retrieveFieldByQuery(\SugarBean $bean, $fieldName)
     {
         $sq = new \SugarQuery();
-        $sq->select(array($fieldName));
-        $sq->from($bean, array('team_security' => false));
-        $sq->where()->equals("id", $bean->id);
+        $sq->select([$fieldName]);
+        $sq->from($bean, ['team_security' => false]);
+        $sq->where()->equals('id', $bean->id);
         $result = $sq->execute();
 
         // expect only one record

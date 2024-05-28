@@ -11,36 +11,36 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Notifications']['base']['view']['recordlist'] = array(
+$viewdefs['Notifications']['base']['view']['recordlist'] = [
     'favorite' => false,
     'following' => false,
-    'selection' => array(
+    'selection' => [
         'type' => 'multi',
-        'actions' => array(
-            array(
+        'actions' => [
+            [
                 'name' => 'massupdate_button',
                 'type' => 'button',
                 'label' => 'LBL_MASS_UPDATE',
                 'primary' => true,
-                'events' => array(
+                'events' => [
                     'click' => 'list:massupdate:fire',
-                ),
+                ],
                 'acl_action' => 'massupdate',
-            ),
-        ),
-    ),
-    'rowactions' => array(
-        'actions' => array(
-            array(
+            ],
+        ],
+    ],
+    'rowactions' => [
+        'actions' => [
+            [
                 'type' => 'rowaction',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
                 'icon' => 'sicon-preview',
                 'acl_action' => 'view',
-            ),
-        ),
-    ),
-    'last_state' => array(
+            ],
+        ],
+    ],
+    'last_state' => [
         'id' => 'record-list',
-    ),
-);
+    ],
+];

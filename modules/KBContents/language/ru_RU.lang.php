@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Информационная панель списка базы знаний',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Информационная панель записей базы знаний',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для базы знаний',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Временная шкала базы знаний',
 
     'LBL_MODULE_NAME' => 'База знаний',
     'LBL_MODULE_NAME_SINGULAR' => 'База знаний: статья',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => 'Задать значение как основное',
     'LBL_ITEM_REMOVE' => 'Удалить элемент',
     'LBL_ITEM_ADD' => 'Добавить элемент',
-    'LBL_MODULE_ID'=> 'Содержание базы знаний',
+    'LBL_MODULE_ID' => 'Содержание базы знаний',
     'LBL_DOCUMENT_REVISION_ID' => 'Идентификатор версии',
     'LBL_DOCUMENT_REVISION' => 'Ревизия',
     'LBL_NUMBER' => 'Номер',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'Больше статей модуля {{module}}...',
     'LBL_LIST_FORM_TITLE' => 'Список базы знаний',
     'LBL_SEARCH_FORM_TITLE' => 'Поиск в базе знаний',
-);
+];

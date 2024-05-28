@@ -10,25 +10,25 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Quotes']['mobile']['view']['list'] = array(
-    'panels' => array (
-        array (
+$viewdefs['Quotes']['mobile']['view']['list'] = [
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'name',
                     'label' => 'LBL_QUOTE_NAME',
                     'default' => true,
                     'enabled' => true,
                     'link' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'billing_account_name',
                     'label' => 'LBL_ACCOUNT_NAME',
                     'enabled' => true,
                     'default' => true,
-                ),
-            ),
-    	),
-	),
-);
+                ],
+            ],
+        ],
+    ],
+];

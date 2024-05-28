@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Az aláíráshoz szükséges egy név.',
     'LBL_DEFAULT_SIGNATURE' => 'Alapértelmezett',
     'LBL_MODULE_NAME' => 'E-mail aláírások',
@@ -21,4 +21,4 @@ $mod_strings = array(
     'LBL_SIGNATURE_DEFAULT' => 'Használjon aláírást?',
     'LBL_SIGNATURE_PREPEND' => 'Aláírás a válasz felett?',
     'LBL_SIGNATURES' => 'Aláírások',
-);
+];

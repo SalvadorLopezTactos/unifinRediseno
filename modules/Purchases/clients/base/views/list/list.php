@@ -22,7 +22,7 @@ $viewdefs['Purchases']['base']['view']['list'] = [
                     'label' => 'LBL_NAME',
                     'enabled' => true,
                     'default' => true,
-                    'width' =>  'large',
+                    'width' => 'large',
                 ],
                 [
                     'name' => 'account_name',

@@ -16,31 +16,33 @@ class ReportsUtilities
     private $user;
     private $language;
 
-    public function __construct() {
+    public function __construct()
+    {
         global $current_user,
-               $current_language;
+        $current_language;
 
-        $this->user     = $current_user;
+        $this->user = $current_user;
         $this->language = $current_language;
     }
 
     /**
      * Notify the report owner of an invalid report definition.
      *
-     * @param User   $recipient required
-     * @param string $message   required
+     * @param User $recipient required
+     * @param string $message required
      * @throws MailerException Allows exceptions to bubble up for the caller to report if desired.
      */
-    public function sendNotificationOfInvalidReport($recipient, $message) {
-        $mod_strings = return_module_language($this->language, "Reports");
-        $subject = $mod_strings["ERR_REPORT_INVALID_SUBJECT"];
+    public function sendNotificationOfInvalidReport($recipient, $message)
+    {
+        $mod_strings = return_module_language($this->language, 'Reports');
+        $subject = $mod_strings['ERR_REPORT_INVALID_SUBJECT'];
         $this->sendNotificationOfReport($recipient, $subject, $message);
     }
 
     /**
      * Notify the report owner of deactivated report schedule.
      *
-     * @param int  $report_id
+     * @param int $report_id
      * @param User $owner
      * @param User $subscriber
      *
@@ -50,7 +52,7 @@ class ReportsUtilities
     {
         global $sugar_config;
 
-        $recipients = array($owner);
+        $recipients = [$owner];
         foreach ($subscriber as $s) {
             $recipients[] = $s;
         }
@@ -70,11 +72,11 @@ class ReportsUtilities
         $reportUrl = $sugar_config['site_url'] . '/Reports/' . urlencode($report_id);
         $body = string_format(
             $mod_strings['ERR_REPORT_DEACTIVATED'],
-            array('<a href="' . $reportUrl . '">' . $reportName . '</a>', $report_id)
+            ['<a href="' . $reportUrl . '">' . $reportName . '</a>', $report_id]
         );
 
         // make sure that the same user doesn't receive the notification twice
-        $unique = array();
+        $unique = [];
         foreach ($recipients as $recipient) {
             $unique[$recipient->id] = $recipient;
         }
@@ -89,9 +91,9 @@ class ReportsUtilities
     /**
      * Notifies the given user of a report problem
      *
-     * @param User   $recipient Message recipient
-     * @param string $subject   Message subject
-     * @param string $body      Message body
+     * @param User $recipient Message recipient
+     * @param string $subject Message subject
+     * @param string $body Message body
      */
     protected function sendNotificationOfReport(User $recipient, $subject, $body)
     {
@@ -113,7 +115,7 @@ class ReportsUtilities
         // add the recipient...
 
         // first get all email addresses known for this recipient
-        $recipientEmailAddresses = array($recipient->email1, $recipient->email2);
+        $recipientEmailAddresses = [$recipient->email1, $recipient->email2];
         $recipientEmailAddresses = array_filter($recipientEmailAddresses);
 
         // then retrieve first non-empty email address

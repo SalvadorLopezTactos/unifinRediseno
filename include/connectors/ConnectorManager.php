@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Connector Manager
  * Manages connector caching
@@ -30,20 +31,20 @@ class ConnectorManager
      */
     public function buildConnectorsMeta()
     {
-        require_once('include/connectors/utils/ConnectorUtils.php');
+        require_once 'include/connectors/utils/ConnectorUtils.php';
 
         $allConnectors = $this->getConnectorList();
-        $connectors = array();
+        $connectors = [];
         // get general connector info
         foreach ($allConnectors as $name => $connector) {
             $instance = ConnectorFactory::getInstance($connector['id']);
-            $connectorInfo = array(
+            $connectorInfo = [
                 'testing_enabled' => false,
                 'test_passed' => false,
                 'eapm_bean' => false,
-                'field_mapping' => array(),
-                'id' => $connector['id']
-            );
+                'field_mapping' => [],
+                'id' => $connector['id'],
+            ];
 
             if (!empty($connector['name'])) {
                 $connectorInfo['name'] = $connector['name'];
@@ -56,7 +57,7 @@ class ConnectorManager
                     try {
                         $testpassed = $source->test();
                     } catch (Exception $e) {
-                        $GLOBALS['log']->error($name.' testing enabled but test throwing php errors');
+                        $GLOBALS['log']->error($name . ' testing enabled but test throwing php errors');
                     }
                     if (isset($testpassed)) {
                         $connectorInfo['test_passed'] = $testpassed;
@@ -114,10 +115,10 @@ class ConnectorManager
 
         $hash = $this->hash($connectors);
 
-        return array(
+        return [
             'connectors' => $connectors,
             '_hash' => $hash,
-        );
+        ];
     }
 
     /**
@@ -146,7 +147,6 @@ class ConnectorManager
         if (!empty($data['_hash'])) {
             $this->addToHash('connectors', $data['_hash']);
         }
-
     }
 
     /**
@@ -156,11 +156,11 @@ class ConnectorManager
      */
     protected function addToHash($key, $hash)
     {
-        $hashes = array();
-        $path = sugar_cached("api/metadata/connectorHashes.php");
-        @include($path);
+        $hashes = [];
+        $path = sugar_cached('api/metadata/connectorHashes.php');
+        @include $path;
         $hashes[$key] = $hash;
-        write_array_to_file("hashes", $hashes, $path);
+        write_array_to_file('hashes', $hashes, $path);
     }
 
     /**
@@ -170,9 +170,9 @@ class ConnectorManager
      */
     protected function getFromHashCache($key)
     {
-        $hashes = array();
-        $path = sugar_cached("api/metadata/connectorHashes.php");
-        @include($path);
+        $hashes = [];
+        $path = sugar_cached('api/metadata/connectorHashes.php');
+        @include $path;
 
         return !empty($hashes[$key]) ? $hashes[$key] : false;
     }

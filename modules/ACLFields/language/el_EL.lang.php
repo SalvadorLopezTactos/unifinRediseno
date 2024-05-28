@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_DEFAULT' => 'Δεν Ορίστηκε',
     'LBL_READ_WRITE' => 'Ανάγνωση/Εγγραφή',
     'LBL_READ_OWNER_WRITE' => 'Ανάγνωση/Ιδιοκτήτης Εγγραφή',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_READ_SELECTED_TEAMS_WRITE' => 'Ανάγνωση/(ιδιοκτήτη και επιλεγμένων ομάδων) εγγραφή',
     'LBL_SELECTED_TEAMS_READ_OWNER_WRITE' => '(ιδιοκτήτη και επιλεγμένων ομάδων) ανάγνωση/εγγραφή ιδιοκτήτη',
     'LBL_SELECTED_TEAMS_READ_WRITE' => '(Ιδιοκτήτης & επιλεγμένες ομάδες) Ανάγνωση/ (ιδιοκτήτης & επιλεγμένες ομάδες) εγγραφή',
-);
+];

@@ -10,10 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
- * Description:  
+ * Description:
  ********************************************************************************/
 
-$_REQUEST['edit']='true';
-include ("modules/Quotas/index.php");
-?>
+$_REQUEST['edit'] = 'true';
+include 'modules/Quotas/index.php';

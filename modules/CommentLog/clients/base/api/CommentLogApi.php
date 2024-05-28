@@ -18,37 +18,37 @@
  */
 class CommentLogApi extends ModuleApi
 {
-    private $methodMaps = array(
+    private $methodMaps = [
         'POST' => 'Create',
         'GET' => 'Read',
-    );
+    ];
 
     public function registerApiRest()
     {
-        return array(
-            'create' => array(
+        return [
+            'create' => [
                 'reqType' => 'POST',
-                'path' => array('CommentLog'),
-                'pathVars' => array('module'),
+                'path' => ['CommentLog'],
+                'pathVars' => ['module'],
                 'method' => 'accessBlocker',
                 'shortHelp' => 'This method is not available',
-            ),
-            'retrieve' => array(
+            ],
+            'retrieve' => [
                 'reqType' => 'GET',
-                'path' => array('CommentLog','?'),
-                'pathVars' => array('module','record'),
+                'path' => ['CommentLog', '?'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'retrieveRecord',
                 'shortHelp' => 'Returns a single parent record of the given commentlog',
                 'longHelp' => 'include/api/help/module_record_get_help.html',
-            ),
-            'read' => array(
+            ],
+            'read' => [
                 'reqType' => 'GET',
-                'path' => array('CommentLog'),
-                'pathVars' => array('module'),
+                'path' => ['CommentLog'],
+                'pathVars' => ['module'],
                 'method' => 'accessBlocker',
                 'shortHelp' => 'This method is not available',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -73,7 +73,7 @@ class CommentLogApi extends ModuleApi
      */
     public function retrieveRecord(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module','record'));
+        $this->requireArgs($args, ['module', 'record']);
 
         $bean = BeanFactory::retrieveBean('CommentLog', $args['record']);
         if ($bean === null) {

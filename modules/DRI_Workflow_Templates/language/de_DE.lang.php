@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Aktiv',
     'LBL_ASSIGNEE_RULE' => 'Regel für Zugewiesene',
     'LBL_TARGET_ASSIGNEE' => 'Ziel-Zugewiesener',
+    'LBL_STAGE_NUMBERS' => 'Stufennummerierung',
     'LBL_EXPORT_BUTTON_LABEL' => 'Exportieren',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Importieren',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Automatisches Erstellen/Aktualisieren eines neuen Smart Guide Vorlagen-Datensatzes, indem eine *.json-Datei aus Ihrem Dateisystem importiert wird.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Wenn diese Option aktiviert ist: Wenn Ziel-Zugewiesener = Übergeordneter Zugewiesener, wenn der Benutzer "Zugewiesen an" auf einem übergeordneten Benutzer geändert wird, ändern sich automatisch auch die Benutzer "Zugewiesen an" in den intelligenten Führungslinien, Phasen und Aktivitäten. Beachten Sie, dass die Einstellungen des Ziel-Zugewiesenen in Aktivitätsvorlagen Vorrang vor der Smart Guide Vorlage haben',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Wann sollte ein Benutzer den Aktivitäten zugewiesen werden',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Wer sollte den Aktivitäten zugewiesen werden',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Mit diesem Schalter können Sie die automatische Stufennummerierung ein- oder ausblenden.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Smart Guide/Stufe/Aktivitätsvorlage',
 ];

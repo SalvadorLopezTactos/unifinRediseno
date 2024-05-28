@@ -11,12 +11,12 @@
  */
 
 
- class NotesController extends SugarController
+class NotesController extends SugarController
 {
     /**
-    * Overriding parent method to prevent Uploads handling
-    * @return void
-    */
+     * Overriding parent method to prevent Uploads handling
+     * @return void
+     */
     public function pre_save()
     {
         trigger_error('DEPRECATED', E_USER_ERROR);
@@ -27,16 +27,14 @@
         trigger_error('DEPRECATED', E_USER_ERROR);
     }
 
-    function action_editview(){
-		$this->view = 'edit';
-		$GLOBALS['view'] = $this->view;
-		if(!empty($_REQUEST['deleteAttachment'])){
-			ob_clean();
-			echo $this->bean->deleteAttachment($_REQUEST['isDuplicate']) ? 'true' : 'false';
-			sugar_cleanup(true);
-		}
-
-	}
-
+    public function action_editview()
+    {
+        $this->view = 'edit';
+        $GLOBALS['view'] = $this->view;
+        if (!empty($_REQUEST['deleteAttachment'])) {
+            ob_clean();
+            echo $this->bean->deleteAttachment($_REQUEST['isDuplicate']) ? 'true' : 'false';
+            sugar_cleanup(true);
+        }
+    }
 }
-?>

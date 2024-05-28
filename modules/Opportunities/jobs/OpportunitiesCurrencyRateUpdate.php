@@ -42,9 +42,9 @@ class OpportunitiesCurrencyRateUpdate extends CurrencyRateUpdateAbstract
      * To custom processing, do here and return true.
      *
      * @access public
-     * @param  string $table
-     * @param  string $column
-     * @param  string $currencyId
+     * @param string $table
+     * @param string $column
+     * @param string $currencyId
      * @return boolean true if custom processing was done
      */
     public function doCustomUpdateRate($table, $column, $currencyId)
@@ -81,10 +81,10 @@ SQL;
      * To custom processing, do here and return true.
      *
      * @access public
-     * @param  string    $tableName
-     * @param  string    $usDollarColumn
-     * @param  string    $amountColumn
-     * @param  string    $currencyId
+     * @param string $tableName
+     * @param string $usDollarColumn
+     * @param string $amountColumn
+     * @param string $currencyId
      * @return boolean true if custom processing was done
      */
     public function doCustomUpdateUsDollarRate($tableName, $usDollarColumn, $amountColumn, $currencyId)

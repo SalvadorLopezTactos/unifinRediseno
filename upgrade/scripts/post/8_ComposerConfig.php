@@ -41,7 +41,7 @@ class SugarUpgradeComposerConfig extends UpgradeScript
     public function run()
     {
         if (empty($this->state['composer_custom'])) {
-            $this->log("Nothing to do, sticking with the shipped composer files");
+            $this->log('Nothing to do, sticking with the shipped composer files');
         } else {
             foreach ($this->state['composer_custom'] as $file) {
                 if (!$this->restoreFile($file)) {

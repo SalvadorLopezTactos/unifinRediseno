@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_DEFAULT' => 'Nu este pregatit',
     'LBL_READ_WRITE' => 'Citeste/Scrie',
     'LBL_READ_OWNER_WRITE' => 'Citeste/Scrie Proprietar',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_READ_SELECTED_TEAMS_WRITE' => 'Citire/(proprietar şi echipe selectate) scriere',
     'LBL_SELECTED_TEAMS_READ_OWNER_WRITE' => '(Proprietar şi echipe selectate) Citire/Scriere proprietar',
     'LBL_SELECTED_TEAMS_READ_WRITE' => '(Proprietar şi echipe selectate) Citire/(Proprietar şi echipe selectate) scriere',
-);
+];

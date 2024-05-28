@@ -32,7 +32,7 @@
      * @type string[]
      * @private
      */
-    _defaultExtraClasses: ['label', 'pill'],
+    _defaultExtraClasses: ['label', 'pill', 'text-white'],
 
     /**
      * List of default color codes
@@ -54,6 +54,14 @@
         'gray-light',
         'gray-dark'
     ],
+
+    /**
+     * List of additional CSS classes to apply based on action.
+     *
+     * @type string[]
+     * @private
+     */
+    _defaultActionClasses: ['list', 'detail'],
 
     /**
      * @inheritdoc
@@ -80,13 +88,13 @@
 
     /**
      * Set color coding based on enum value.
-     * This is only applied when the action is list (not inline edit on
+     * This is only applied when the action is detail or list (not inline edit on
      * list view).
      */
     setColorCoding: function() {
         this._clearColorCode();
 
-        if (!this.model || this.action !== 'list') {
+        if (!this.model || (this.action !== 'list' && this.action !== 'detail')) {
             return;
         }
 
@@ -119,7 +127,7 @@
      */
     _setColorCodeClass: function(colorCodeClass) {
         if (colorCodeClass) {
-            this.$el.addClass(this._defaultExtraClasses.join(' ') + ' ' + colorCodeClass);
+            this.$el.addClass(this._defaultExtraClasses.join(' ') + ' ' + colorCodeClass + ' ' + this.action);
         }
     },
 
@@ -128,7 +136,7 @@
      * @private
      */
     _clearColorCode: function() {
-        var classes = _.union(this._defaultColorCodes, this._defaultExtraClasses).join(' ');
+        var classes = _.union(this._defaultColorCodes, this._defaultExtraClasses, this._defaultActionClasses).join(' ');
         this.$el.removeClass(classes);
     }
 })

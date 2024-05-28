@@ -10,6 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['history-summary-preview-header'] = array(
-    'type' => 'preview-header'
-);
+$viewdefs['base']['view']['history-summary-preview-header'] = [
+    'type' => 'preview-header',
+];

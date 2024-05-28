@@ -333,6 +333,7 @@
      * @private
      */
     _toggleUploading: function(flag) {
+        $('a[data-event="button:save_button:click"]').toggleClass('disabled', flag);
         if (flag && _.isUndefined(app.alert.get('uploading_file'))) {
             app.alert.show('uploading_file', {
                 level: 'process',

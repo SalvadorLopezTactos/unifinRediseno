@@ -12,10 +12,10 @@
 --}}
 <div class="welcome">
     <div class="thumbnail login">
-        <div class="tcenter">
+        <div class="text-center">
             <h2 class="brand"><img src="{{logoUrl}}" alt="SugarCRM"></h2>
         </div>
-        <form name='{{name}}' class="tcenter" autocomplete="off">
+        <form name='{{name}}' class="text-center" autocomplete="off">
         {{#if externalLoginForm}}
             <p>&nbsp;</p>
             <p class="wide">
@@ -51,13 +51,13 @@
     </button>
     <span class="dropdown w-55" data-action="languageList" id="languageList">
         <button title="{{str 'LBL_LANGUAGE'}}" aria-label="{{str 'LBL_LANGUAGE'}}"
-                class="btn border border-btn-secondary dropdown-toggle bg-btn-secondary-background w-full ml-0 font-normal text-xs rounded-sm"
-                data-toggle="dropdown" role="button" type="button"
+                class="btn border border-[--btn-secondary-border] dropdown-toggle bg-[--btn-secondary-background] w-full ml-0 font-normal text-xs rounded-sm"
+                data-bs-toggle="dropdown" role="button" type="button" data-bs-display="static"
         >
             <span class="action-label">{{str 'LBL_LANGUAGE'}}</span>
             <i class="sicon sicon-chevron-down pl-3"></i>
         </button>
-        <div class="dropdown-menu bottom-up w-full">
+        <div class="dropdown-menu border-0 dark:border border-[--dropdown-border-widget] rounded-md shadow-xl bottom-up w-full">
             <ul role="menu">
                 {{#each languageList}}
                     <li><a data-lang-key="{{key}}" href="javascript:void(0)" tabindex="-1">{{#eq ../currentLang key}}<b>{{value}}</b>{{else}}{{value}}{{/eq}}</a></li>

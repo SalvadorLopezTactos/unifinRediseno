@@ -20,13 +20,13 @@ class CampaignLogApiHelper extends SugarBeanApiHelper
      * @param $options array Currently no options are supported
      * @return array The bean in array format, ready for passing out the API to clients.
      */
-    public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(SugarBean $bean, array $fieldList = [], array $options = [])
     {
         $data = parent::formatForApi($bean, $fieldList, $options);
 
-        if(in_array('related_name', $fieldList) && !empty($bean->related_id) && !empty($bean->related_type)) {
+        if (in_array('related_name', $fieldList) && !empty($bean->related_id) && !empty($bean->related_type)) {
             $relatedBean = BeanFactory::getBean($bean->related_type, $bean->related_id);
-            if(!empty($relatedBean)) {
+            if (!empty($relatedBean)) {
                 if ($bean->related_type == 'CampaignTrackers') {
                     $relatedNameField = 'tracker_url';
                 } elseif ($bean->related_type == 'Contacts' || $bean->related_type == 'Leads' || $bean->related_type == 'Prospects') {

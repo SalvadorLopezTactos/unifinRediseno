@@ -14,23 +14,24 @@
 
 class AccountsRelateApi extends RelateApi
 {
-    public function registerApiRest() {
-        return array(
-            'filterRelatedRecords' => array(
+    public function registerApiRest()
+    {
+        return [
+            'filterRelatedRecords' => [
                 'reqType' => 'GET',
-                'path' => array('Accounts', '?', 'link', '?', 'filter'),
-                'pathVars' => array('module', 'record', '', 'link_name', ''),
-                'jsonParams' => array('filter'),
+                'path' => ['Accounts', '?', 'link', '?', 'filter'],
+                'pathVars' => ['module', 'record', '', 'link_name', ''],
+                'jsonParams' => ['filter'],
                 'method' => 'filterRelated',
                 'shortHelp' => 'Lists related filtered records.',
                 'longHelp' => 'include/api/help/module_record_link_link_name_filter_get_help.html',
-            )
-        );
+            ],
+        ];
     }
 
     public function filterRelated(ServiceBase $api, array $args)
     {
-        if (empty($args['include_child_items']) || !in_array($args['link_name'], array('calls', 'meetings'))) {
+        if (empty($args['include_child_items']) || !in_array($args['link_name'], ['calls', 'meetings'])) {
             return parent::filterRelated($api, $args);
         }
 
@@ -81,7 +82,7 @@ class AccountsRelateApi extends RelateApi
         $options = $this->parseArguments($api, $args, $linkSeed);
         $q = self::getQueryObject($linkSeed, $options);
         if (!isset($args['filter']) || !is_array($args['filter'])) {
-            $args['filter'] = array();
+            $args['filter'] = [];
         }
 
         self::addFilters($args['filter'], $q->where(), $q);
@@ -94,7 +95,6 @@ class AccountsRelateApi extends RelateApi
             $childRelationshipAlias = 'mc';
             $childLhsColumn = $childModuleTable . '.id';
             $childRhsColumn = $childRelationshipAlias . '.meeting_id';
-
         } else {
             $linkToContacts = 'contacts';
             $childModuleTable = 'calls';
@@ -105,16 +105,16 @@ class AccountsRelateApi extends RelateApi
         }
 
         // Join contacts if not already requested.
-        $contactJoin = $q->join($linkToContacts, array('joinType'=>'LEFT'));
+        $contactJoin = $q->join($linkToContacts, ['joinType' => 'LEFT']);
 
         // FIXME: there should be the ability to specify from which related module
         // the child items should be loaded
-        $q->joinTable('accounts_contacts', array('alias' => 'ac', 'joinType' => 'LEFT', 'linkingTable' => true))
+        $q->joinTable('accounts_contacts', ['alias' => 'ac', 'joinType' => 'LEFT', 'linkingTable' => true])
             ->on()
             ->equalsField('ac.contact_id', $contactJoin->joinName() . '.id')
             ->equals('ac.deleted', 0);
 
-        $q->joinTable('accounts', array('alias' => 'a', 'joinType' => 'LEFT', 'linkingTable' => true))
+        $q->joinTable('accounts', ['alias' => 'a', 'joinType' => 'LEFT', 'linkingTable' => true])
             ->on()
             ->equalsField('a.id', 'ac.account_id')
             ->equals('a.deleted', 0);

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '任务队列',
     'LBL_MODULE_NAME_SINGULAR' => '任务队列',
     'LBL_MODULE_TITLE' => '任务队列：首页',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => '分析取消',
     'LBL_RESOLUTION_FILTER_RUNNING' => '分析运行',
     // Errors
-    'ERR_CALL' => "无法调用功能：%s",
-    'ERR_CURL' => "无 CURL - 无法运行 URL 任务",
-    'ERR_FAILED' => "无法预测的失败，请检查 PHP 日志和 sugarcrm. 日志",
-    'ERR_PHP' => "%s [%d]：%s 在 %s 于行 %d",
-    'ERR_NOUSER' => "该任务未指定用户 ID",
-    'ERR_NOSUCHUSER' => "用户编号 %s 未找到",
-    'ERR_JOBTYPE' => "未知任务类型：%s",
-    'ERR_TIMEOUT' => "超时被迫失败",
+    'ERR_CALL' => '无法调用功能：%s',
+    'ERR_CURL' => '无 CURL - 无法运行 URL 任务',
+    'ERR_FAILED' => '无法预测的失败，请检查 PHP 日志和 sugarcrm. 日志',
+    'ERR_PHP' => '%s [%d]：%s 在 %s 于行 %d',
+    'ERR_NOUSER' => '该任务未指定用户 ID',
+    'ERR_NOSUCHUSER' => '用户编号 %s 未找到',
+    'ERR_JOBTYPE' => '未知任务类型：%s',
+    'ERR_TIMEOUT' => '超时被迫失败',
     'ERR_JOB_FAILED_VERBOSE' => '任务 %1$s (%2$s) 在 CRON 运行中失败',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => '无法同时加载 Bean 和 id：%s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => '无法找到路径的处理器 %s',
@@ -92,13 +92,13 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => '亚马逊简单队列服务 (Amazon SQS) 配置帮助',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>亚马逊简单队列服务 (Amazon SQS) 配置部分</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>亚马逊简单队列服务 (Amazon SQS) 配置部分</b></p>
 <ul>
     <li>访问密匙 ID：<i>输入您的 Amazon SQS 访问密匙编号</i></li>
     <li>秘密访问密钥：<i>输入您的 Amazon SQS 秘密访问密匙</i></li>
     <li>区域<i>输入 Amazon SQS 服务器区域</i></li>
     <li>队列名称：<i>输入 Amazon SQS 服务器队列名称</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'AMQP 配置帮助',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>AMQP 配置部分。</b></p>
 <ul>
@@ -119,4 +119,4 @@ $mod_strings = array(
     'LBL_REGION' => '区域',
     'LBL_ACCESS_KEY_SECRET' => '秘密访问密匙',
     'LBL_QUEUE_NAME' => '适配器名称',
-);
+];

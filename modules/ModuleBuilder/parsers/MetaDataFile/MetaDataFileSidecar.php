@@ -30,9 +30,9 @@ class MetaDataFileSidecar implements MetaDataFileInterface
      *
      * @var array
      */
-    protected $viewDirs = array(
+    protected $viewDirs = [
         MB_FILTERVIEW => 'filters',
-    );
+    ];
 
     /**
      * @var MetaDataFile
@@ -61,7 +61,7 @@ class MetaDataFileSidecar implements MetaDataFileInterface
     {
         $path = $this->file->getPath();
         $viewDir = $this->getViewPath();
-        array_splice($path, 2, 0, array('clients', $this->client, $viewDir));
+        array_splice($path, 2, 0, ['clients', $this->client, $viewDir]);
         $path[] = end($path);
 
         return $path;

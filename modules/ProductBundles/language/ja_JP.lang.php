@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'グループステージ:',
-    'LBL_DEAL_TOT'=>'値引計',
-    'LBL_DEAL_TOT_USDOLLAR'=>'値引計（USドル）',
+    'LBL_DEAL_TOT' => '値引計',
+    'LBL_DEAL_TOT_USDOLLAR' => '値引計（USドル）',
     'LBL_NEW_SUB' => '値引後小計:',
     'LBL_SHIPPING' => '配送料:',
-    'LBL_SHIPPING_USDOLLAR'=>'配送料（USドル）',
-    'LBL_SUBTOTAL_USDOLLAR'=>'小計（USドル）',
+    'LBL_SHIPPING_USDOLLAR' => '配送料（USドル）',
+    'LBL_SUBTOTAL_USDOLLAR' => '小計（USドル）',
     'LBL_SUBTOTAL' => '小計:',
     'LBL_TAXABLE_SUBTOTAL' => '課税小計',
-    'LBL_TAX_USDOLLAR'=>'税金（USドル）',
+    'LBL_TAX_USDOLLAR' => '税金（USドル）',
     'LBL_TAX' => '税金:',
-    'LBL_TOTAL_USDOLLAR'=>'計（USドル）',
+    'LBL_TOTAL_USDOLLAR' => '計（USドル）',
     'LBL_TOTAL' => '計:',
     'LBL_QUOTE_BUNDLE_POSITION' => '見積りバンドルポジション',
     'EXCEPTION_INVALID_QUOTE_ID' => '見積りIDがペイロードにありません',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'リクエストされた見積りは見つかりませんでした',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'リクエストされた見積りは見つかりませんでした',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => '追加のグループ値引',
     'LBL_GROUP_TOTAL' => 'グループ合計',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'グループヘッダー',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => '見積にデフォルト設定された製品バンドルグループ',
     'LBL_ALERT_DELETING_ITEM' => '商品を削除しています',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => '商品が削除できました',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '製品バンドルのタイムライン',
+];

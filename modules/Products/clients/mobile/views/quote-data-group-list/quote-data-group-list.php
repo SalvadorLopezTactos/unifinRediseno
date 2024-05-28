@@ -9,23 +9,23 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Products']['mobile']['view']['quote-data-group-list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Products']['mobile']['view']['quote-data-group-list'] = [
+    'panels' => [
+        [
             'name' => 'products_quote_data_group_list',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'line_num',
                     'label' => null,
                     'type' => 'int',
                     'readonly' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'quantity',
                     'label' => 'LBL_QUANTITY',
                     'type' => 'float',
-                ),
-                array(
+                ],
+                [
                     'name' => 'product_template_name',
                     'rname' => 'name',
                     'id_name' => 'product_template_id',
@@ -35,7 +35,7 @@ $viewdefs['Products']['mobile']['view']['quote-data-group-list'] = array(
                     'module' => 'ProductTemplates',
                     'auto_populate' => true,
                     'required' => true,
-                    'populate_list' => array(
+                    'populate_list' => [
                         'name' => 'name',
                         'category_id' => 'category_id',
                         'category_name' => 'category_name',
@@ -54,57 +54,57 @@ $viewdefs['Products']['mobile']['view']['quote-data-group-list'] = array(
                         'manufacturer_name' => 'manufacturer_name',
                         'currency_id' => 'currency_id',
                         'base_rate' => 'base_rate',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'mft_part_num',
                     'label' => 'LBL_MFT_PART_NUM',
                     'type' => 'base',
-                ),
-                array(
+                ],
+                [
                     'name' => 'discount_price',
                     'label' => 'LBL_DISCOUNT_PRICE',
                     'type' => 'currency',
                     'convertToBase' => true,
                     'showTransactionalAmount' => true,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'discount_price',
                         'currency_id',
                         'base_rate',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'discount_field',
                     'type' => 'fieldset',
                     'label' => 'LBL_DISCOUNT_AMOUNT',
                     'orientation' => 'horizontal',
-                    'fields' => array(
-                        array(
+                    'fields' => [
+                        [
                             'type' => 'discount-select',
                             'name' => 'discount_select',
                             'no_default_action' => true,
-                        ),
-                        array(
+                        ],
+                        [
                             'name' => 'discount_amount',
                             'label' => 'LBL_DISCOUNT_AMOUNT',
                             'type' => 'discount-amount',
                             'convertToBase' => true,
                             'showTransactionalAmount' => true,
-                        ),
-                    ),
-                ),
-                array(
+                        ],
+                    ],
+                ],
+                [
                     'name' => 'total_amount',
                     'label' => 'LBL_LINE_ITEM_TOTAL',
                     'type' => 'currency',
                     'showTransactionalAmount' => true,
-                    'related_fields' => array(
+                    'related_fields' => [
                         'total_amount',
                         'currency_id',
                         'base_rate',
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

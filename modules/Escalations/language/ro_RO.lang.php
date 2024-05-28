@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'Vizualizare escalări',
     'LBL_LIST_RELATED_TO_ID' => 'Asociat cu ID',
     'LNK_IMPORT_ESCALATIONS' => 'Importați escalările',
-    
+
     'LBL_LIST_SUBJECT' => 'Subiect',
     'LBL_LIST_NUMBER' => 'Num.',
     'LBL_LIST_RELATED_TO_TYPE' => 'Tip asociat',

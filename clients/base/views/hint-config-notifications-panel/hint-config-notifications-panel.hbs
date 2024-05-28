@@ -11,19 +11,16 @@
  */
 --}}
 
-<div class="accordion-heading">
-    <a id='{{name}}Title' class="accordion-toggle" href="#{{name}}Collapse"
-       data-help-id="{{name}}" data-toggle="collapse" data-parent="#config-accordion"></a>
+<div class="accordion-heading" data-bs-toggle="collapse" data-bs-target="[data-container=notificationOptions]"
+    aria-expanded="false" aria-controls="[data-container=notificationOptions]">
+    <a id='{{name}}Title' class="accordion-toggle"></a>
 </div>
-<div id="{{name}}Collapse" class="accordion-body in collapse">
-    <div>
-        {{#each services}}
-            <label class="notificationsToggleOption">
-                <input type="radio" id={{id}} name="{{name}}" value="true">
-                <span>{{title}}</span>
-            </label>
-            <br/>
-        {{/each}}
-    </div>
+<div class="in bs-collapse collapse show" data-container="notificationOptions">
+    {{#each services}}
+        <label class="notificationsToggleOption">
+            <input type="radio" id={{id}} name="{{name}}" value="true">
+            <span>{{title}}</span>
+        </label>
+        <br/>
+    {{/each}}
 </div>
-

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_AUDIT_TITLE' => '監査ログ',
     'LBL_FIELD_NAME' => 'フィールド',
     'LBL_OLD_NAME' => '以前の値',
@@ -25,4 +25,6 @@ $mod_strings = array(
     // Activity Timeline
     'LBL_UPDATE_TO_MODULE' => '以下に更新:',
     'LBL_BLANK' => '-空欄-',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '監査のタイムライン',
+    'LBL_CREATED' => '作成済み',
+];

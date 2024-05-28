@@ -9,22 +9,22 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Leads']['base']['layout']['subpanels'] = array(
-    'components' => array(
-        array(
+$viewdefs['Leads']['base']['layout']['subpanels'] = [
+    'components' => [
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_CALLS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'calls',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_MEETINGS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'meetings',
-            ),
-        ),
+            ],
+        ],
         [
             'layout' => 'subpanel',
             'label' => 'LBL_MESSAGES_SUBPANEL_TITLE',
@@ -32,41 +32,41 @@ $viewdefs['Leads']['base']['layout']['subpanels'] = array(
                 'link' => 'message_invites',
             ],
         ],
-        array(
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_TASKS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'tasks',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_NOTES_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'notes',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'campaigns',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_EMAILS_SUBPANEL_TITLE',
             'override_subpanel_list_view' => 'subpanel-for-leads-archived-emails',
-            'context' => array(
+            'context' => [
                 'link' => 'archived_emails',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_DATAPRIVACY_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'dataprivacy',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

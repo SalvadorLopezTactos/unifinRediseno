@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,7 +19,6 @@ return [
             [
                 'width' => 12,
                 'rows' => [
-                    // Row 1
                     [
                         [
                             'view' => [

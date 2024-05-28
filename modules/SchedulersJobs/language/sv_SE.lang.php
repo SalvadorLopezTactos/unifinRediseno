@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Jobbkö',
     'LBL_MODULE_NAME_SINGULAR' => 'Jobbkö',
     'LBL_MODULE_TITLE' => 'Jobbkö: Hem',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Lösning avbruten',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Lösning körs',
     // Errors
-    'ERR_CALL' => "Kan inte anropa funktion: %s",
-    'ERR_CURL' => "Ingen CURL - kan inte köra URL jobb",
-    'ERR_FAILED' => "Oväntat fel, vänligen kolla PHP loggar och sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s i %s på rad %d",
-    'ERR_NOUSER' => "Ingen specificerad AnvändarID för jobbet",
-    'ERR_NOSUCHUSER' => "AnvändarID %s hittades inte",
-    'ERR_JOBTYPE' => "Okänd jobbtyp: %s",
-    'ERR_TIMEOUT' => "Forcerat misslyckande av timeout",
+    'ERR_CALL' => 'Kan inte anropa funktion: %s',
+    'ERR_CURL' => 'Ingen CURL - kan inte köra URL jobb',
+    'ERR_FAILED' => 'Oväntat fel, vänligen kolla PHP loggar och sugarcrm.log',
+    'ERR_PHP' => '%s [%d]: %s i %s på rad %d',
+    'ERR_NOUSER' => 'Ingen specificerad AnvändarID för jobbet',
+    'ERR_NOSUCHUSER' => 'AnvändarID %s hittades inte',
+    'ERR_JOBTYPE' => 'Okänd jobbtyp: %s',
+    'ERR_TIMEOUT' => 'Forcerat misslyckande av timeout',
     'ERR_JOB_FAILED_VERBOSE' => 'Jobb %1$s (%2$s) misslyckades i CRON körningen',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Kan inte ladda bean med id: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Kan inte hitta handler för rutt %s',
@@ -91,13 +91,13 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Amazon SQS Konfigurationshjälp',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Amazon SQS-Konfiguration.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Amazon SQS-Konfiguration.</b></p>
 <ul>
     <li>Accessnyckel-ID: <i>Ange ditt Accessnyckel-ID för Amazon SQS</i></li>
     <li>Hemlig accessnyckel: <i>Ange din hemliga accessnyckel för Amazon SQS</i></li>
     <li>Region: <i>Ange region för Amazon SQS server</i></li>
     <li>Könamn: <i>Ange könamn för Amazon SQS server</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'AMQP-konfigurationshjälp',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>AMQP-Konfiguration.</b></p>
 <ul>
@@ -118,4 +118,4 @@ $mod_strings = array(
     'LBL_REGION' => 'Region',
     'LBL_ACCESS_KEY_SECRET' => 'Hemlig accessnyckel',
     'LBL_QUEUE_NAME' => 'Adapternamn',
-);
+];

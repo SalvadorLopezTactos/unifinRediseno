@@ -200,10 +200,10 @@
      * @param {boolean} addIt TRUE if you want to add it, FALSE to remove
      */
     _toggleClearQuickSearchIcon: function(addIt) {
-        if (addIt && !this.$('.add-on.fa-times')[0]) {
+        if (addIt && !this.$('.add-on.sicon-close')[0]) {
             this.$('.filter-view.search').append('<i class=\'add-on sicon sicon-close\'></i>');
         } else if (!addIt) {
-            this.$('.add-on.fa-times').remove();
+            this.$('.add-on.sicon-close').remove();
         }
     },
 

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'baza e njohurisë',
     'LBL_MODULE_NAME_SINGULAR' => 'Knowledge Base Article',
     'LBL_MODULE_TITLE' => 'Artikuj të bazës së nojurive',
@@ -17,4 +17,4 @@ $mod_strings = array(
     'LBL_KEYWORDS' => 'Fjalët kyçe',
     'LBL_CONTENT' => 'Përmbatja',
     'LBL_ATTACHMENTS' => 'Bashkëngjitjet',
-);
+];

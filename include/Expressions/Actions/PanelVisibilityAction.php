@@ -10,10 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class PanelVisibilityAction extends AbstractAction{
-	protected $targetPanel = "";
-	protected $expression = "";
-	
+class PanelVisibilityAction extends AbstractAction
+{
+    protected $targetPanel = '';
+    protected $expression = '';
+
     public function __construct($params)
     {
         $this->params = $params;
@@ -22,18 +23,19 @@ class PanelVisibilityAction extends AbstractAction{
                 $this->targetPanel = $params['target'];
             }
             if (isset($params['value'])) {
-                $this->expression = str_replace("\n", "", $params['value']);
+                $this->expression = str_replace("\n", '', $params['value']);
             }
         }
     }
-	
-	/**
-	 * Returns the javascript class equivalent to this php class
-	 *
-	 * @return string javascript.
-	 */
-	static function getJavascriptClass() {
-		return <<<'EOQ'
+
+    /**
+     * Returns the javascript class equivalent to this php class
+     *
+     * @return string javascript.
+     */
+    public static function getJavascriptClass()
+    {
+        return <<<'EOQ'
 /**
  * Completely hide or show a panel
  */
@@ -235,26 +237,26 @@ SUGAR.forms.animation.Expand = function(target)
     expandAnim.animate();
 };
 EOQ;
-
     }
 
 
-	/**
-	 * Returns the javascript code to generate this actions equivalent. 
-	 *
-	 * @return string javascript.
-	 */
-	function getJavascriptFire() {
-		return "new SUGAR.forms.SetPanelVisibilityAction('{$this->targetPanel}','{$this->expression}')";
-	}
-	
     /**
-    * Applies the Action to the target.
-    *
-    * @param SugarBean $target
-    *
-    * Should only be fired when saving from an edit view and the expression is false.
-    */
+     * Returns the javascript code to generate this actions equivalent.
+     *
+     * @return string javascript.
+     */
+    public function getJavascriptFire()
+    {
+        return "new SUGAR.forms.SetPanelVisibilityAction('{$this->targetPanel}','{$this->expression}')";
+    }
+
+    /**
+     * Applies the Action to the target.
+     *
+     * @param SugarBean $target
+     *
+     * Should only be fired when saving from an edit view and the expression is false.
+     */
     public function fire(&$target)
     {
         $result = Parser::evaluate($this->expression, $target)->evaluate();
@@ -268,9 +270,9 @@ EOQ;
             }
         }
     }
-	
-	static function getActionName() {
-		return "SetPanelVisibility";
-	}
-	
+
+    public static function getActionName()
+    {
+        return 'SetPanelVisibility';
+    }
 }

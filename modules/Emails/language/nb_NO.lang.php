@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'VS:',
     'LBL_RE' => 'Sv:',
     'LBL_BUTTON_CREATE' => 'Opprett',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Velg fra e-postkonto',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Velg signatur',
     'LBL_SIGNATURE' => 'Signatur',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Standard signatur",
-    "LBL_SHOW_MORE_SIGNATURES" => "Flere signaturer...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Standard signatur',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Flere signaturer...',
     'LBL_SUBJECT' => 'Emne:',
     'LBL_TEMPLATE' => 'Mal',
     'LBL_TEXT_BODY' => 'Brødtekst',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Sendt-tidspunkt',
     'LBL_LIST_TO_ADDR' => 'Til',
     'LBL_LIST_TYPE' => 'Type',
-    "LBL_SELECTED_RECIPIENTS" => "Valgte mottakere",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Flere mottakere...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Adressebok",
+    'LBL_SELECTED_RECIPIENTS' => 'Valgte mottakere',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Flere mottakere...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Adressebok',
     'NTC_REMOVE_INVITEE' => 'Er du sikker på at du vil fjerne denne mottakeren fra e-postmeldingen?',
     'WARNING_SETTINGS_NOT_CONF' => 'E-postinnstillingene dine er ikke riktig konfigurert for å sende e-post. En SMTP-server ' .
         'må konfigureres i <a href="#bwc/index.php?module=EmailMan&action=config">E-postinnstillinger</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Vedlegg kan mislykkes: Feil eller ubrukelig verdi for "upload_tmp_dir" ' .
         'ble registrert. Korriger dette i din php.ini-filen.',
     'LBL_MESSAGE_UID' => 'Melding UID',
-    'LBL_OPEN_DRAFT_ALERT' => 'E-post er et utkast. Klikk '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>'.
+    'LBL_OPEN_DRAFT_ALERT' => 'E-post er et utkast. Klikk ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>' .
         '  for å redigere.',
     'LBL_EMAIL_BODY' => 'E-postmelding',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'E-poster fokusskuff',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Registerdashbord for eposter',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'E-posttidslinje',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'ingen mottakere spesifisert',
@@ -473,4 +474,5 @@ $mod_strings = array(
     'LBL_SHORTCUT_EMAIL_SEND' => 'Send e-post',
     'LBL_MAILBOX' => 'Inngående konto',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Konfigurer en utgående e-postkonto via <a href="#OutboundEmail"> e-postinnstillinger </a> for å sende e-post.',
-);
+    'LBL_TOO_SHORT' => 'Skriv minst {0} tegn ...',
+];

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -15,6 +16,7 @@ namespace Sugarcrm\Sugarcrm\Security\ModuleScanner;
 
 use PhpParser\Error;
 use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitor;
 use PhpParser\NodeVisitor\NameResolver;
 use PhpParser\ParserFactory;
 use Sugarcrm\Sugarcrm\Security\ModuleScanner\Issues\Issue;
@@ -22,38 +24,45 @@ use Sugarcrm\Sugarcrm\Security\ModuleScanner\Issues\SyntaxError;
 
 class CodeScanner
 {
+    /**
+     * @var NodeVisitor[]
+     */
+    private array $visitors = [];
 
-    private $classesBlackList;
-    private $functionsBlackList;
-    private $methodsBlackList;
-
-    public function __construct(array $classesBlackList, array $functionsBlackList, array $methodsBlackList)
+    /**
+     * @param NodeVisitor ...$visitor
+     * @return $this
+     */
+    public function registerVisitor(NodeVisitor ...$visitor): CodeScanner
     {
-        $this->classesBlackList = $classesBlackList;
-        $this->functionsBlackList = $functionsBlackList;
-        $this->methodsBlackList = $methodsBlackList;
+        foreach ($visitor as $v) {
+            $this->visitors[] = $v;
+        }
+        return $this;
     }
 
     /**
-     * @throws Error
+     * @param string $code Code to analyze
      * @return  Issue[]
      */
     public function scan(string $code): array
     {
-        $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
-        $traverser = new NodeTraverser;
-        $dynamicNameVisitor = new DynamicNameVisitor();
-        $blacklistVisitor = new BlacklistVisitor($this->classesBlackList, $this->functionsBlackList, $this->methodsBlackList);
+        $parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
+        $traverser = new NodeTraverser();
         $traverser->addVisitor(new NameResolver());
-        $traverser->addVisitor($dynamicNameVisitor);
-        $traverser->addVisitor($blacklistVisitor);
+        foreach ($this->visitors as $visitor) {
+            $traverser->addVisitor($visitor);
+        }
         try {
             $stmts = $parser->parse($code);
         } catch (Error $error) {
             return [new SyntaxError($error)];
         }
         $traverser->traverse($stmts);
-
-        return array_merge($dynamicNameVisitor->getIssues(), $blacklistVisitor->getIssues());
+        $issues = [];
+        foreach ($this->visitors as $visitor) {
+            $issues = array_merge($issues, $visitor->getIssues());
+        }
+        return $issues;
     }
 }

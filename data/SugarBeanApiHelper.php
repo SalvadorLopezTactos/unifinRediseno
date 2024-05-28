@@ -41,7 +41,7 @@ class SugarBeanApiHelper
      * @param array $options
      * @return array The bean in array format, ready for passing out the API to clients.
      */
-    public function formatForApi(\SugarBean $bean, array $fieldList = array(), array $options = array())
+    public function formatForApi(\SugarBean $bean, array $fieldList = [], array $options = [])
     {
         $sfh = new \SugarFieldHandler();
 
@@ -49,17 +49,17 @@ class SugarBeanApiHelper
         // if any other format is called its a view
         $action = (!empty($options['action']) && $options['action'] == 'list') ? 'list' : 'view';
 
-        $data = array();
+        $data = [];
         $hasAccess = empty($bean->deleted) && $bean->ACLAccess($action);
         if ($hasAccess) {
             foreach ($bean->field_defs as $fieldName => $properties) {
                 // Prune fields before ACL check because it can be expensive (Bug58133)
-                if ( !empty($fieldList) && !in_array($fieldName,$fieldList) ) {
+                if (!empty($fieldList) && !safeInArray($fieldName, $fieldList)) {
                     // They want to skip this field
                     continue;
                 }
 
-                if ( !$bean->ACLFieldAccess($fieldName,'read') ) {
+                if (!$bean->ACLFieldAccess($fieldName, 'read')) {
                     // No read access to the field, eh?  Unset the field from the array of data returned
                     unset($data[$fieldName]);
                     continue;
@@ -68,18 +68,20 @@ class SugarBeanApiHelper
                 $type = !empty($properties['custom_type']) ? $properties['custom_type'] : $properties['type'];
                 $field = $sfh->getSugarField($type);
 
-                if(empty($field)) continue;
+                if (empty($field)) {
+                    continue;
+                }
 
-                if (isset($bean->$fieldName)  || $type == 'relate') {
-                     $field->apiFormatField($data, $bean, $options, $fieldName, $properties, $fieldList, $this->api);
+                if (isset($bean->$fieldName) || $type == 'relate') {
+                    $field->apiFormatField($data, $bean, $options, $fieldName, $properties, $fieldList, $this->api);
                 }
 
                 // handle any field-specific ACL rules
-                $field->processAdditionalAcls($data, $bean, $fieldName, "read", $properties, $this->api);
+                $field->processAdditionalAcls($data, $bean, $fieldName, 'read', $properties, $this->api);
             }
 
             // mark if its a favorite
-            if (in_array('my_favorite', $fieldList) || empty($fieldList)) {
+            if (safeInArray('my_favorite', $fieldList) || empty($fieldList)) {
                 if (isset($bean->my_favorite)) {
                     $data['my_favorite'] = (bool)$bean->my_favorite;
                 } else {
@@ -99,7 +101,7 @@ class SugarBeanApiHelper
                     $field->apiFormatField(
                         $data,
                         $bean,
-                        array(),
+                        [],
                         'date_modified',
                         $bean->field_defs['date_modified'],
                         $fieldList,
@@ -110,7 +112,7 @@ class SugarBeanApiHelper
             if ($this->api->user->isAdmin()) {
                 // BR-759 requests that assigned_user_id is returned on deleted records
                 // to better sync some external systems
-                if (isset($bean->assigned_user_id) && in_array('assigned_user_id', $fieldList)) {
+                if (isset($bean->assigned_user_id) && safeInArray('assigned_user_id', $fieldList)) {
                     $data['assigned_user_id'] = $bean->assigned_user_id;
                 }
             }
@@ -132,20 +134,19 @@ class SugarBeanApiHelper
 
     /**
      * Get the beans ACL's to pass back any that differ
-     * @param  SugarBean $bean
-     * @param  array     $fieldList
+     * @param SugarBean $bean
+     * @param array $fieldList
      * @return array
      */
     public function getBeanAcl(\SugarBean $bean, array $fieldList)
     {
-        $acl = array('fields' => (object) array());
+        $acl = ['fields' => (object)[]];
         if (\SugarACL::moduleSupportsACL($bean->module_dir)) {
             $mm = \MetaDataManager::getManager($this->api->platform);
             $moduleAcl = $mm->getAclForModule($bean->module_dir, $this->api->user, false, true);
 
             $beanAcl = $mm->getAclForModule($bean->module_dir, $this->api->user, $bean, true);
             if ($beanAcl['_hash'] != $moduleAcl['_hash'] || !empty($fieldList)) {
-
                 // diff the fields separately, they are usually empty anyway so we won't diff these often.
                 $moduleAclFields = $moduleAcl['fields'];
                 $beanAclFields = $beanAcl['fields'];
@@ -158,7 +159,7 @@ class SugarBeanApiHelper
                 unset($beanAcl['_hash']);
 
                 $acl = array_diff_assoc($beanAcl, $moduleAcl);
-                $fieldAcls = array();
+                $fieldAcls = [];
 
                 /**
                  * Fields are different than module level acces
@@ -173,10 +174,10 @@ class SugarBeanApiHelper
                     $fieldAcls = $beanAclFields;
                 } elseif (!empty($beanAclFields) && !empty($moduleAclFields)) {
                     // we need the ones that are moduleAclFields but not in beanAclFields
-                    foreach ($moduleAclFields AS $field => $aclActions) {
-                        foreach ($aclActions AS $action => $access) {
+                    foreach ($moduleAclFields as $field => $aclActions) {
+                        foreach ($aclActions as $action => $access) {
                             if (!isset($beanAclFields[$field][$action])) {
-                                $beanAclFields[$field][$action] = "yes";
+                                $beanAclFields[$field][$action] = 'yes';
                             }
                             // if the bean action is set and it matches the access from module, we do not need to send it down
                             if (isset($beanAclFields[$field][$action]) && $beanAclFields[$field][$action] == $access) {
@@ -186,7 +187,7 @@ class SugarBeanApiHelper
                     }
 
                     // cleanup BeanAclFields, we don't want to pass a field that doens't have actions
-                    foreach ($beanAclFields AS $field => $actions) {
+                    foreach ($beanAclFields as $field => $actions) {
                         if (empty($actions)) {
                             unset($beanAclFields[$field]);
                         }
@@ -195,14 +196,14 @@ class SugarBeanApiHelper
                     $fieldAcls = $beanAclFields;
                 } elseif (empty($beanAclFields) && !empty($moduleAclFields)) {
                     // it is different because we now have access...
-                    foreach ($moduleAclFields AS $field => $aclActions) {
-                        foreach ($aclActions AS $action => $access) {
-                            $fieldAcls[$field][$action] = "yes";
+                    foreach ($moduleAclFields as $field => $aclActions) {
+                        foreach ($aclActions as $action => $access) {
+                            $fieldAcls[$field][$action] = 'yes';
                         }
                     }
                 }
 
-                foreach ($fieldList AS $fieldName) {
+                foreach ($fieldList as $fieldName) {
                     if (!is_string($fieldName) && !is_numeric($fieldName)) {
                         continue;
                     }
@@ -211,9 +212,8 @@ class SugarBeanApiHelper
                     }
                 }
 
-                $acl['fields'] = (object) $fieldAcls;
+                $acl['fields'] = (object)$fieldAcls;
             }
-
         }
 
         return $acl;
@@ -229,9 +229,9 @@ class SugarBeanApiHelper
      *                       for more information
      * @return array An array of validation errors, or true if the submitted data appeared to be correct
      */
-    public function populateFromApi(\SugarBean $bean, array $submittedData, array $options = array())
+    public function populateFromApi(\SugarBean $bean, array $submittedData, array $options = [])
     {
-        if(!empty($bean->id) && !empty($options['optimistic_lock'])) {
+        if (!empty($bean->id) && !empty($options['optimistic_lock'])) {
             $this->checkOptimisticLocking($bean, $options['optimistic_lock']);
         }
 
@@ -248,7 +248,7 @@ class SugarBeanApiHelper
 
         $sfh = new \SugarFieldHandler();
 
-        $context = array();
+        $context = [];
         /**
          * We need to override because of order of fields.
          * For example, if we are changing ownership and a field that is owner read/owner write
@@ -272,7 +272,7 @@ class SugarBeanApiHelper
                 continue;
             }
             $context['newValue'] = $submittedData[$fieldName];
-            if ( !$bean->ACLFieldAccess($fieldName, $acl, $context) ) {
+            if (!$bean->ACLFieldAccess($fieldName, $acl, $context)) {
                 // No write access to this field, but they tried to edit it
                 throw new \SugarApiExceptionNotAuthorized(
                     'Not allowed to edit field ' . $fieldName . ' in module: ' . $bean->module_name
@@ -282,7 +282,7 @@ class SugarBeanApiHelper
 
         // now update the fields
         foreach ($bean->field_defs as $fieldName => $properties) {
-            if ( !isset($submittedData[$fieldName]) ) {
+            if (!isset($submittedData[$fieldName])) {
                 // They aren't trying to modify this field
                 continue;
             }
@@ -294,7 +294,7 @@ class SugarBeanApiHelper
             if ($field != null) {
                 // validate submitted data
                 if (!$field->apiValidate($bean, $submittedData, $fieldName, $properties)) {
-                    if (in_array($bean->db->getFieldType($properties), ['text', 'html'])) {
+                    if (safeInArray($bean->db->getFieldType($properties), ['text', 'html'])) {
                         throw new \SugarApiExceptionInvalidParameter(
                             'ERR_FIELD_TOO_LARGE',
                             [$fieldName],
@@ -328,20 +328,20 @@ class SugarBeanApiHelper
         if (!$this->platformNotificationsEnabled()) {
             return false;
         }
-        $check_notify = TRUE;
+        $check_notify = true;
         // check update
         // if Notifications are disabled for this module set check notify to false
         if (!empty($GLOBALS['sugar_config']['exclude_notifications'][$bean->module_dir]) && $GLOBALS['sugar_config']['exclude_notifications'][$bean->module_dir] == true) {
-            $check_notify = FALSE;
+            $check_notify = false;
         } else {
             // some modules, like Users don't have an assigned_user_id
             if (isset($bean->assigned_user_id)) {
                 // if the assigned user hasn't changed, set check notify to false
                 if (!empty($bean->fetched_row['assigned_user_id']) && $bean->fetched_row['assigned_user_id'] == $bean->assigned_user_id) {
-                    $check_notify = FALSE;
+                    $check_notify = false;
                     // if its the same user, don't send
                 } elseif ($bean->assigned_user_id == $GLOBALS['current_user']->id) {
-                    $check_notify = FALSE;
+                    $check_notify = false;
                 }
             }
         }
@@ -393,11 +393,11 @@ class SugarBeanApiHelper
             return true;
         }
 
-        if(empty($timestamp)) {
+        if (empty($timestamp)) {
             // no TS - no conflict
             return true;
         }
-        if(empty($bean->id) || empty($bean->date_modified)) {
+        if (empty($bean->id) || empty($bean->date_modified)) {
             // bean is either empty or new, no conflict
             return true;
         }
@@ -406,18 +406,18 @@ class SugarBeanApiHelper
 
         $timedate = \TimeDate::getInstance();
         $ts_client = $timedate->fromIso($timestamp);
-        if(empty($ts_client)) {
+        if (empty($ts_client)) {
             throw new \SugarApiExceptionInvalidParameter("Bad timestamp $timestamp");
         }
         $ts_server = $timedate->fromDb($dateToCheck);
-        if(empty($ts_server)) {
+        if (empty($ts_server)) {
             $ts_server = $timedate->fromUser($dateToCheck);
         }
-        if(empty($ts_server)) {
+        if (empty($ts_server)) {
             // Bean timestamp is incomprehensible, defaulting to no conflict
             return true;
         }
-        if($ts_server->ts != $ts_client->ts) {
+        if ($ts_server->ts != $ts_client->ts) {
             // OOPS, edited after client TS, conflict!
             $cts = "client TS is {$timedate->asIso($ts_client)}";
             $sts = "server TS is {$timedate->asIso($ts_server)}";

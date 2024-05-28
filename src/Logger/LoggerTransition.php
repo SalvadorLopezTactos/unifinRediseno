@@ -15,7 +15,6 @@ namespace Sugarcrm\Sugarcrm\Logger;
 use Psr\Log\AbstractLogger;
 use Psr\Log\LogLevel;
 
-
 /**
  *
  * PSR-0 adapter for SugarLogger until Monolog is integrated.
@@ -31,7 +30,7 @@ class LoggerTransition extends AbstractLogger
     /**
      * @var array Mapping from PSR0 to Sugar log levels
      */
-    protected $psrSugarMap = array();
+    protected $psrSugarMap = [];
 
     /**
      * Constructor.
@@ -49,7 +48,7 @@ class LoggerTransition extends AbstractLogger
     public function initMap()
     {
         if (empty($this->psrSugarMap)) {
-            $this->psrSugarMap = array(
+            $this->psrSugarMap = [
                 LogLevel::EMERGENCY => 'fatal',
                 LogLevel::ALERT => 'fatal',
                 LogLevel::CRITICAL => 'fatal',
@@ -58,16 +57,16 @@ class LoggerTransition extends AbstractLogger
                 LogLevel::NOTICE => 'info',
                 LogLevel::INFO => 'info',
                 LogLevel::DEBUG => 'debug',
-            );
+            ];
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
-        $callBack = array($this->logger, $this->getSugarLevel($level));
+        $callBack = [$this->logger, $this->getSugarLevel($level)];
 
         // LoggerManager doesn't support context so lets skip it for now
         return call_user_func($callBack, $message);
@@ -90,5 +89,4 @@ class LoggerTransition extends AbstractLogger
     {
         return $this->psrSugarMap[$level];
     }
-
 }

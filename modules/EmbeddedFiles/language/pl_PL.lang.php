@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Osadzone pliki',
     'LBL_MODULE_NAME_SINGULAR' => 'Osadzony plik',
     'LBL_MODULE_TITLE' => 'Osadzony plik',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => 'Nazwa pliku',
     'LBL_FILENAME' => 'Nazwa pliku',
     'LBL_UPLOAD_ONLY_IMAGE' => 'Wybrany plik powinien być obrazem.',
-);
+];

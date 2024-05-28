@@ -2650,7 +2650,7 @@ FormPanelFriendlyDropdown.prototype._createControl = function () {
             width: "100%",
             formatResult: function(result, container, query, escapeMarkup) {
                 container.attr('rel', 'tooltip');
-                container.attr('data-placement', 'right');
+                container.attr('data-bs-placement', 'right');
                 container.attr('data-original-title', result.text);
                 return $.fn.select2.defaults.formatResult.apply(this, arguments);
             },

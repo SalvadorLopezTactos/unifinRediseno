@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Baza de cunostinte',
     'LBL_MODULE_NAME_SINGULAR' => 'Articolul de baza a cunoasterilor',
     'LBL_MODULE_TITLE' => 'Articolul de baza a cunoasterilor',
     'LBL_REVISIONS_SUBPANEL_TITLE' => 'Revizii',
-);
+];

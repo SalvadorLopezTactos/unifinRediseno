@@ -12,9 +12,9 @@
 
 use Google\Service\Drive\DriveFile;
 use Google\Service\Drive\FileList;
-use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Sugarcrm\Sugarcrm\CloudDrive\DriveFacade;
-use Sugarcrm\Sugarcrm\CloudDrive\Model\DriveItem;
+use Sugarcrm\Sugarcrm\CloudDrive\Paths\CloudDrivePath;
+use Sugarcrm\Sugarcrm\CloudDrive\Paths\CloudDrivePathUtils;
 use Sugarcrm\Sugarcrm\Util\Uuid;
 
 /**
@@ -22,10 +22,13 @@ use Sugarcrm\Sugarcrm\Util\Uuid;
  */
 class CloudDriveApi extends SugarApi
 {
+    use CloudDrivePathUtils;
+
     /**
      * @var \Sugarcrm\Sugarcrm\CloudDrive\DriveFacade|mixed
      */
     public $driveFacade;
+
     /**
      * @inheritdoc
      */
@@ -147,6 +150,11 @@ class CloudDriveApi extends SugarApi
                 'method' => 'removeDrivePath',
                 'shortHelp' => 'removes a drive path',
                 'longHelp' => 'include/api/help/cloud_drive_remove_path.html',
+                'exceptions' => [
+                    'SugarApiExceptionInvalidParameter',
+                    'SugarApiExceptionNotFound',
+                    'SugarQueryException',
+                ],
                 'minVersion' => '11.16',
             ],
             'createFolder' => [
@@ -203,12 +211,11 @@ class CloudDriveApi extends SugarApi
     public function listFolders(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, ['type',]);
-        $driveFacade = $this->getDrive($args['type']);
-        return $driveFacade->listFolders($args);
+        return $this->listFoldersUtils($args);
     }
 
     /**
-     * Retrieves a file from google drive
+     * Retrieves a file from drive
      *
      * @param ServiceBase $api
      * @param array $args
@@ -217,12 +224,11 @@ class CloudDriveApi extends SugarApi
     public function getFile(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, ['type',]);
-        $driveFacade = $this->getDrive($args['type']);
-        return $driveFacade->getFile($args);
+        return $this->getFileUtils($args);
     }
 
     /**
-     * Retrieves a file from google drive
+     * Retrieves a file from drive
      *
      * @param ServiceBase $api
      * @param array $args
@@ -236,7 +242,7 @@ class CloudDriveApi extends SugarApi
     }
 
     /**
-     *  Syncs all files to google drive
+     *  Syncs all files to drive
      *
      * @param ServiceBase $api
      * @param array $args
@@ -440,7 +446,7 @@ class CloudDriveApi extends SugarApi
         }
 
         $fileContent = $fileData['content'];
-        $args['mimeType'] = $fileData['mimeType'];
+        $args['mimeType'] = array_key_exists('mimeType', $fileData) ? $fileData['mimeType'] : null;
 
         //Adding extension for files like google docs/spreadsheets/presentations
         if (strrpos($fileName, '.') === false) {
@@ -473,20 +479,9 @@ class CloudDriveApi extends SugarApi
         $this->requireArgs($args, ['type',]);
         $driveFacade = $this->getDrive($args['type']);
         $extension = $driveFacade->getFileExtension($args);
-        $fileName = $fileName.$extension;
+        $fileName = $fileName . $extension;
 
         return $fileName;
-    }
-
-    /**
-     * Get Drive facade
-     *
-     * @param string $type
-     * @return DriveFacade
-     */
-    protected function getDrive(string $type)
-    {
-        return new DriveFacade($type);
     }
 
     /**
@@ -522,7 +517,7 @@ class CloudDriveApi extends SugarApi
         $document->name = $fileName;
 
         $document->filename = $fileName;
-        $document->filename_file = $uploadFolder.$revisionId;
+        $document->filename_file = $uploadFolder . $revisionId;
         $document->document_name = $fileName;
         $document->id = $documentId;
         $document->document_revision_id = $revisionId;
@@ -555,7 +550,7 @@ class CloudDriveApi extends SugarApi
         $revision->document_id = $documentId;
         $revision->revision = '1';
         $revision->filename = $fileName;
-        $revision->doc_url = 'upload://'.$revisionId;
+        $revision->doc_url = 'upload://' . $revisionId;
         $revision->doc_type = 'Sugar';
         $revision->new_with_id = true;
         $revision->created_by = $current_user->id;
@@ -623,7 +618,7 @@ class CloudDriveApi extends SugarApi
             if ($lhsModule === $relationshipModule || $rhsModule === $relationshipModule) {
                 $bean->load_relationship($linkDef['relationship'])
                     ? $relationshipName = $linkDef['relationship'] :
-                        ($bean->load_relationship($linkDef['name']) ? $relationshipName = $linkDef['name'] : $relationshipName = null);
+                    ($bean->load_relationship($linkDef['name']) ? $relationshipName = $linkDef['name'] : $relationshipName = null);
             }
         }
 
@@ -659,7 +654,7 @@ class CloudDriveApi extends SugarApi
     }
 
     /**
-     * Gets the list of google record paths
+     * Gets the list of record paths
      *
      * @param ServiceBase $api
      * @param array $args
@@ -670,21 +665,7 @@ class CloudDriveApi extends SugarApi
     {
         $this->requireArgs($args, ['type',]);
 
-        $sugarQuery = new SugarQuery();
-        $sugarQuery->from(BeanFactory::newBean('CloudDrivePaths'), ['team_security' => false]);
-        $sugarQuery->where()->equals('type', $args['type']);
-        $sugarQuery->where()->equals('deleted', 0);
-
-        if ($args['module']) {
-            $sugarQuery->where()->equals('path_module', $args['module']);
-        }
-        if (isset($args['recordId']) && $args['recordId']) {
-            $sugarQuery->where()->equals('record_id', $args['recordId']);
-        }
-
-        $result = $sugarQuery->execute();
-
-        return $result;
+        return $this->getDrivePathsUtils($args);
     }
 
     /**
@@ -705,33 +686,55 @@ class CloudDriveApi extends SugarApi
             $drivePath = $this->findRoot($args['type']);
         }
 
-        if (!$drivePath) {
-            $pathArgs = [
-                'type' => $args['type'],
-                'module' => $args['pathModule'],
-                'recordId' => $args['recordId'],
-                'driveId' => $args['driveId'],
-            ];
-
-            $paths = $this->getDrivePaths($api, $pathArgs);
-            if (count($paths) > 0) {
-                $path = $paths[0];
-                $drivePath = BeanFactory::retrieveBean('CloudDrivePaths', $path['id']);
-            }
+        if ($args['type'] === 'dropbox' && !$drivePath && array_key_exists('pathId', $args)) {
+            $drivePath = BeanFactory::retrieveBean('CloudDrivePaths', $args['pathId']);
         }
 
         if (!isset($drivePath)) {
             $drivePath = BeanFactory::newBean('CloudDrivePaths');
         }
 
-        $drivePath->record_id = $args['recordId'];
-        $drivePath->path_module = $args['pathModule'];
+        if (array_key_exists('recordId', $args)) {
+            $drivePath->record_id = $args['recordId'];
+        }
+
+        if (array_key_exists('pathModule', $args)) {
+            $drivePath->path_module = $args['pathModule'];
+        }
+
+        if (array_key_exists('folderId', $args)) {
+            $drivePath->folder_id = $args['folderId'];
+        } else {
+            $drivePath->folder_id = null;
+        }
+
+        if (array_key_exists('drivePath', $args)) {
+            $drivePath->path = $args['drivePath'];
+        }
+
+        if (array_key_exists('isRoot', $args)) {
+            $drivePath->is_root = $args['isRoot'];
+        }
+
+        if (array_key_exists('isShared', $args)) {
+            $drivePath->is_shared = $args['isShared'];
+        } else {
+            $drivePath->is_shared = null;
+        }
+
+        if (array_key_exists('driveId', $args)) {
+            $drivePath->drive_id = $args['driveId'];
+        } else {
+            $drivePath->drive_id = null;
+        }
+
+        if (array_key_exists('siteId', $args)) {
+            $drivePath->site_id = $args['siteId'];
+        } else {
+            $drivePath->site_id = null;
+        }
+
         $drivePath->type = $args['type'];
-        $drivePath->folder_id = $args['folderId'];
-        $drivePath->path = $args['drivePath'];
-        $drivePath->is_root = $args['isRoot'];
-        $drivePath->is_shared = $args['isShared'];
-        $drivePath->drive_id = $args['driveId'];
 
         $drivePath->save();
 
@@ -739,332 +742,25 @@ class CloudDriveApi extends SugarApi
     }
 
     /**
-     * Find folder root
-     *
-     * @param string $type
-     * @return null|SugarBean
-     * @throws SugarQueryException
-     * @throws SugarApiExceptionNotFound
-     */
-    protected function findRoot(string $type): ?SugarBean
-    {
-        $sugarQuery = new SugarQuery();
-        $sugarQuery->from(\BeanFactory::newBean('CloudDrivePaths'), ['team_security' => false]);
-        $sugarQuery->where()->equals('type', $type);
-        $sugarQuery->where()->equals('is_root', 1);
-        $sugarQuery->where()->equals('deleted', 0);
-        $result = $sugarQuery->execute();
-
-        if (count($result) > 0) {
-            $pathData = $result[0];
-            $driveBean = BeanFactory::retrieveBean('CloudDrivePaths', $pathData['id']);
-
-            return $driveBean;
-        }
-        return null;
-    }
-
-    /**
      * Retreives a folder_id given a path
-     * @todo - refactor
-     *
      * @param ServiceBase $api
      * @param array $args
      * @return null|array
+     *
      */
     public function getDrivePath(ServiceBase $api, array $args): ?array
     {
         $this->requireArgs($args, ['type',]);
 
-        $client = $this->getClient($args);
+        $driveFacade = $this->getDrive($args['type']);
+        $client = $driveFacade->getClient($args);
 
-        if (is_array($client) && !$client['success']) {
+        if (is_array($client) && isset($client['success']) && $client['success'] === false) {
             return $client;
         }
 
-        $paths = [];
-        $record = $this->getRecord($args);
-        $rootPath = $this->findRoot($args['type']);
-
-        if ($args['layoutName'] === 'record') {
-            $paths = $this->getPaths($api, $args);
-        }
-
-        try {
-            if (count($paths) > 0) {
-                $folder = $paths[0];
-                $path = $folder['path'];
-                $path = $this->parsePath($path, $record);
-
-                if ($args['type'] === 'dropbox' && $folder['path']) {
-                    $file = $this->getFile($api, [
-                        'folderPath' => $path,
-                        'type' => $args['type'],
-                    ]);
-
-                    if (is_array($file) && isset($file['message']) && !$file['success']) {
-                        return $file;
-                    }
-
-                    return [
-                        'root' => isset($file['files']) ? true : false,
-                        'path' => $path,
-                        'isShared' => $folder['is_shared'],
-                        'pathCreateIndex' => count((array) $path) - 1,
-                    ];
-                }
-
-                if ($folder['folder_id']) {
-                    $file = $this->getFile($api, [
-                        'fileId' => $folder['folder_id'],
-                        'driveId' => $folder['drive_id'],
-                        'type' => $args['type'],
-                    ]);
-
-                    if (is_array($file) && !$file['success']) {
-                        return $file;
-                    }
-
-                    if (property_exists($file, 'parents')) {
-                        return [
-                            'root' => $folder['folder_id'],
-                            'path' => $folder['path'],
-                            'parentId' => $file->parents[0],
-                            'isShared' => $folder['is_shared'],
-                            'driveId' => $file->driveId,
-                        ];
-                    }
-                }
-
-                if ($path[0]['name'] === 'My files' || $path[0]['name'] === 'Shared') {
-                    $path[0]['folderId'] = 'root';
-                }
-
-                if (count((array) $path) > 1) {
-                    $approximatePath = $this->approximatePath($api, $path, $folder, $args['type']);
-
-                    if (is_null($approximatePath)) {
-                        $approximatePath = [
-                            'root' => false,
-                            'path' => $path,
-                            'isShared' => $folder['is_shared'],
-                            'driveId' => $folder['drive_id'],
-                            'parentId' => 'root',
-                            'pathCreateIndex' => 1,
-                        ];
-                    }
-                    return $approximatePath;
-                } else {
-                    $root = $path[0]['folderId'] ?? false;
-                    return [
-                        'root' => $root,
-                        'path' => $path,
-                        'isShared' => $folder['is_shared'],
-                        'driveId' => $folder['drive_id'],
-                    ];
-                }
-
-                return [
-                    'root' => false,
-                    'path' => $path,
-                    'isShared' => $folder->is_shared,
-                ];
-            }
-
-            if ($rootPath && $rootPath->folder_id) {
-                $file = $this->getFile($api, [
-                    'fileId' => $rootPath->folder_id,
-                    'type' => $args['type'],
-                    'driveId' => $rootPath->drive_id,
-                ]);
-
-                return [
-                    'root' => $rootPath->folder_id,
-                    'driveId' => $file->driveId,
-                    'path' => $rootPath->path,
-                    'parentId' => is_array($file->parents) && count($file->parents) > 0 ? $file->parents[0] : '',
-                    'isShared' => $rootPath->is_shared,
-                ];
-            }
-        } catch (Exception $e) {
-            throw $e;
-        }
-
-        return [
-            'root' => 'root',
-        ];
-    }
-
-    /**
-     * Parse path and replace variables
-     *
-     * @param string $path
-     * @param SugarBean $record
-     * @return null|array
-     */
-    private function parsePath(string $path, SugarBean $record): ?array
-    {
-        /**
-         * We handle 2 types of paths here:
-         * 1. a json formatted path - it means we already know folder ids
-         * 2. just a string - 'path1/path2/{$name}' - this was added manually by the user
-         */
-        $decodedPath = json_decode($path, true);
-
-        if (is_null($decodedPath) && is_string($path)) {
-            $path = trim($path, '/');
-            $path = explode('/', $path);
-            foreach ($path as $index => $pathSubName) {
-                $pathItem = ['name' => $pathSubName];
-                $path[$index] = $pathItem;
-            }
-            $decodedPath = $path;
-        }
-
-        foreach ($decodedPath as $index => $pathItem) {
-            $pattern = '/\$\w+/';
-            preg_match_all($pattern, $pathItem['name'], $matches);
-
-            foreach ($matches[0] as $field) {
-                $field = ltrim($field, $field[0]); //remove the dollar sign $fieldValue
-                $fieldValue = $record->{$field};
-                $field = '$'.$field;
-                $pathItem['name'] = str_replace($field, $fieldValue, $pathItem['name']);
-            }
-            $decodedPath[$index] = $pathItem;
-        }
-        return $decodedPath;
-    }
-
-    /**
-     * Initialize a record bean
-     *
-     * @param array $options
-     * @return null|SugarBean
-     */
-    private function getRecord(array $options): ?SugarBean
-    {
-        $module = $options['module'];
-        $recordId = $options['recordId'];
-
-        if ($recordId) {
-            $record = BeanFactory::getBean($module, $recordId);
-        } else {
-            $record = BeanFactory::newBean($module);
-        }
-        return $record;
-    }
-
-    /**
-     * Retrieve paths for a module
-     *
-     * @param ServiceBase $api
-     * @param array $options
-     * @return array
-     */
-    private function getPaths(ServiceBase $api, array $options): array
-    {
-        //get paths for this module
-        $recordPaths = $this->getDrivePaths($api, $options);
-        $modulePaths = $this->getDrivePaths($api, [
-            'type' => $options['type'],
-            'module' => $options['module'],
-        ]);
-        $paths = count($recordPaths) > 0 ? $recordPaths : $modulePaths;
-
-        return $paths;
-    }
-
-    /**
-     * Try to find a path that matches our path
-     *
-     * @param ServiceBase $api
-     * @param array $path
-     * @param array $pathFolders
-     * @param array $currentFolder
-     * @param string $type
-     * @return null|array
-     */
-    private function approximatePath(
-        ServiceBase $api,
-        array $path,
-        array $currentFolder,
-        string $type
-    ): ?array {
-        $count = count($path);
-
-        for ($index = $count - 1; $index >= 0; $index--) {
-            $folderParent = ($index === 1 && ($path[$index - 1]['name'] === 'My files' || $path[$index - 1]['name'] === 'Shared')) ?
-                'root' : $path[$index - 1]['name'];
-            $parentId = $path[$index - 1]['folderId'];
-            $folderName = ($index === 0 && ($path[$index]['name'] === 'My files' || $path[$index]['name'] === 'Shared')) ? 'root' : $path[$index]['name'];
-
-            $driveId = $currentFolder['is_shared'] ? $currentFolder['drive_id'] : null;
-            $data = $this->listFolders($api, [
-                'folderName' => $folderName,
-                'folderParent' => $folderParent,
-                'sharedWithMe' => $currentFolder['is_shared'],
-                'parentId' => $parentId,
-                'type' => $type,
-                'driveId' => $driveId,
-            ]);
-
-            if ($data['success'] && !$data['success']) {
-                return [
-                    'success' => false,
-                    'message' => $data['message'],
-                ];
-            }
-
-            if (is_array($data['files']) && count($data['files']) > 0) {
-                $driveItem = $data['files'][0];
-                $root = false;
-                $nextPageToken = false;
-                $parentId = $driveItem->id;
-                $driveId = $driveItem->driveId;
-
-                if ($index === $count - 1) {
-                    $root = $driveItem->id;
-                    $parentId = $driveItem->parents[0];
-                    $nextPageToken = $data['nextPageToken'];
-                    $path[$index - 1]['driveId'] = $driveItem->driveId;
-                    $path[$index - 1]['folderId'] = $parentId;
-                }
-
-                $path[$index]['driveId'] = $driveItem->driveId;
-                $path[$index]['folderId'] = $driveItem->id;
-                $path[$index]['sharedWithMe'] = $currentFolder['is_shared'];
-
-                if ($path[0]['name'] === 'My files' || $path[0]['name'] === 'Shared') {
-                    $path[0]['folderId'] = 'root';
-                }
-
-                return [
-                    'root' => $root,
-                    'path' => $path,
-                    'pathCreateIndex' => $index + 1,
-                    'nextPageToken' => $nextPageToken,
-                    'parentId' => $parentId,
-                    'isShared' => $currentFolder['is_shared'],
-                    'driveId' => $driveId,
-                ];
-            }
-
-            if ($data['parentId']) {
-                // should go here on google
-                $path[$index - 1]['folderId'] = $data['parentId'];
-                return [
-                    'root' => false,
-                    'path' => $path,
-                    'pathCreateIndex' => $index,
-                    'nextPageToken' => null,
-                    'parentId' => $data['parentId'],
-                    'isShared' => $currentFolder['is_shared'],
-                    'driveId' => null,
-                ];
-            }
-        }
-        return null;
+        $drivePath = new CloudDrivePath($args['type']);
+        return $drivePath->getDrivePath($args);
     }
 
     /**
@@ -1081,8 +777,20 @@ class CloudDriveApi extends SugarApi
     {
         $this->requireArgs($args, ['pathId',]);
         $pathId = $args['pathId'];
+        $moduleName = 'CloudDrivePaths';
 
-        $pathBean = BeanFactory::retrieveBean('CloudDrivePaths', $pathId);
+        $pathBean = BeanFactory::retrieveBean($moduleName, $pathId);
+
+        if (!$pathBean) {
+            throw new SugarApiExceptionNotFound(
+                sprintf(
+                    'Could not find record %s in module: %s',
+                    $pathId,
+                    $moduleName
+                )
+            );
+        }
+
         $pathBean->mark_deleted($pathId);
         $pathBean->save();
 
@@ -1136,13 +844,14 @@ class CloudDriveApi extends SugarApi
      * @param array $args
      * @return array
      */
-    public function uploadDocumentToDrive(ServiceBase $api, array $args) : array
+    public function uploadDocumentToDrive(ServiceBase $api, array $args): array
     {
         $this->requireArgs($args, ['documentId', 'cloud_service_type', 'path']);
 
         $cloudServiceName = $args['cloud_service_type'];
         $documentId = $args['documentId'];
         $path = $args['path'];
+        $driveId = array_key_exists('driveId', $args) ? $args['driveId'] : null;
 
         $documentBean = \BeanFactory::getBean('Documents', $documentId);
         $drive = new DriveFacade($cloudServiceName);
@@ -1163,6 +872,9 @@ class CloudDriveApi extends SugarApi
             $uploadOptions['filePath'] = $path;
         } else {
             $uploadOptions['pathId'] = $path;
+        }
+        if ($cloudServiceName === 'sharepoint') {
+            $uploadOptions['driveId'] = $driveId;
         }
 
         $res = $drive->uploadFile($uploadOptions);
@@ -1187,13 +899,25 @@ class CloudDriveApi extends SugarApi
      * Gets the drive client
      *
      * @param array $args
+     * @throws SugarApiException
      */
     public function getClient(array $args)
     {
         $this->requireArgs($args, ['type',]);
 
         $driveFacade = $this->getDrive($args['type']);
-        return $driveFacade->getClient($args);
+        $driveClient = $driveFacade->getClient($args);
+
+        if (is_array($driveClient) && !$driveClient['success']) {
+            if (isset($driveClient['message']) && !empty($driveClient['message'])) {
+                $errorMessage = $driveClient['message'];
+            } else {
+                $errorMessage = 'LBL_CHECK_MICROSOFT_CONNECTION';
+            }
+            throw new SugarApiException($errorMessage);
+        }
+
+        return $driveClient;
     }
 
     /**
@@ -1203,7 +927,7 @@ class CloudDriveApi extends SugarApi
      */
     public function checkDocumentAttachedFile(\SugarBean $documentBean)
     {
-        $filePath = 'upload://'.$documentBean->document_revision_id;
+        $filePath = 'upload://' . $documentBean->document_revision_id;
 
         if (!$documentBean->filename || !file_exists($filePath)) {
             throw new Exception('LBL_ERR_NO_FILE_ATTACHED');

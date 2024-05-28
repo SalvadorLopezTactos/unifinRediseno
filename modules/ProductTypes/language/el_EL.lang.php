@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Τύποι Προϊόντων',
     'LBL_MODULE_NAME_SINGULAR' => 'Τύπος Προϊόντος',
     'LBL_MODULE_TITLE' => 'Τύποι Προϊόντων: Αρχή',
@@ -33,11 +33,11 @@ $mod_strings = array (
     'NTC_DELETE_CONFIRMATION' => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την εγγραφή;',
     'ERR_DELETE_RECORD' => 'Πρέπει να διευκρινιστεί αριθμός εγγραφής για να διαγράψετε τον τύπο του προϊόντος.',
     'NTC_LIST_ORDER' => 'Επιλέξτε τη σειρά εμφάνισης του τύπου που θα εμφανίζεται στον Τύπο Προϊόντος στις αναδυόμενες λίστες',
-    'LNK_IMPORT_PRODUCT_TYPES'=>'Εισαγωγή Τύποι Προϊόντων',
-    'LBL_CREATED_BY'=>'Δημιουργήθηκε Από',
+    'LNK_IMPORT_PRODUCT_TYPES' => 'Εισαγωγή Τύποι Προϊόντων',
+    'LBL_CREATED_BY' => 'Δημιουργήθηκε Από',
     'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_MODIFIED_USER_ID'=> 'Ανατέθηκε Σε Ταυτότητα',
-    'LBL_EXPORT_CREATED_BY'=>'Δημιουργήθηκε Από Ταυτότητα',
-    'LNK_IMPORT_PRODUCT_CATEGORIES'=>'Εισαγωγή Κατηγορίες Προϊόντων',
-);
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Ανατέθηκε Σε Ταυτότητα',
+    'LBL_EXPORT_CREATED_BY' => 'Δημιουργήθηκε Από Ταυτότητα',
+    'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Εισαγωγή Κατηγορίες Προϊόντων',
+];

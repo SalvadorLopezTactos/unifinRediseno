@@ -9,7 +9,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const User = require('core/user');
+const User = require('../core/user');
 
 /**
  * Math module provides utility methods for working with basic calculations

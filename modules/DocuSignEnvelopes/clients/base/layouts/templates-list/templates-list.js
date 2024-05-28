@@ -11,7 +11,7 @@
 /**
  * @class View.Layouts.Base.DocuSignEnvelopes.TemplatesListLayout
  * @alias SUGAR.App.view.layouts.BaseDocuSignEnvelopesTemplatesListLayout
- * @extends View.Layouts.Base.Layout
+ * @extends View.Layouts.Base.SelectionListLayout
  */
  ({
     extendsFrom: 'SelectionListLayout',
@@ -45,6 +45,10 @@
      * @param {Object} data
      */
     successCallback: function(data) {
+        if (this.disposed) {
+            return;
+        }
+
         this.collection.reset();
 
         _.each(data.templates, function(templateData) {
@@ -58,7 +62,6 @@
 
         this.collection.dataFetched = true;
         this.collection.offset = data.nextOffset;
-        this.context.set('totalNumberOfTemplates', data.totalNumberOfTemplates);
         this.render();
 
         this.context.trigger('templates:loaded');

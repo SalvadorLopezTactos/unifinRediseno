@@ -9,21 +9,19 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description: Holds import setting for TSV (Tab Delimited) files
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
- 
-
 class ImportMapTab extends ImportMapOther
 {
-	/**
+    /**
      * String identifier for this import
      */
     public $name = 'tab';
-	/**
+    /**
      * Field delimiter
      */
     public $delimiter = "\t";
@@ -32,6 +30,3 @@ class ImportMapTab extends ImportMapOther
      */
     public $enclosure;
 }
-
-
-?>

@@ -14,33 +14,33 @@ class TimePeriodsCurrentApi extends SugarApi
 {
     public function registerApiRest()
     {
-        return array(
-            'currentTimeperiod' => array(
+        return [
+            'currentTimeperiod' => [
                 'reqType' => 'GET',
-                'path' => array('TimePeriods', 'current'),
-                'pathVars' => array('module', ''),
+                'path' => ['TimePeriods', 'current'],
+                'pathVars' => ['module', ''],
                 'method' => 'getCurrentTimePeriod',
-                'jsonParams' => array(),
+                'jsonParams' => [],
                 'shortHelp' => 'Return the Current Timeperiod',
                 'longHelp' => 'modules/TimePeriods/clients/base/api/help/TimePeriodsCurrentApi.html',
-            ),
-            'getTimePeriodByDate' => array(
+            ],
+            'getTimePeriodByDate' => [
                 'reqType' => 'GET',
-                'path' => array('TimePeriods', '?'),
-                'pathVars' => array('module', 'date'),
+                'path' => ['TimePeriods', '?'],
+                'pathVars' => ['module', 'date'],
                 'method' => 'getTimePeriodByDate',
-                'jsonParams' => array(),
+                'jsonParams' => [],
                 'shortHelp' => 'Return a Timeperiod by a given date',
                 'longHelp' => 'modules/TimePeriods/clients/base/api/help/TimePeriodsGetByDateApi.html',
-            ),
-        );
+            ],
+        ];
     }
 
     public function getCurrentTimePeriod(ServiceBase $api, array $args)
     {
         $tp = TimePeriod::getCurrentTimePeriod();
 
-        if(is_null($tp)) {
+        if (is_null($tp)) {
             // return a 404
             throw new SugarApiExceptionNotFound();
         }
@@ -50,12 +50,12 @@ class TimePeriodsCurrentApi extends SugarApi
 
     public function getTimePeriodByDate(ServiceBase $api, array $args)
     {
-        if(!isset($args["date"]) || $args["date"] == 'undefined') {
+        if (!isset($args['date']) || $args['date'] == 'undefined') {
             // return a 404
             throw new SugarApiExceptionNotFound();
         }
 
-        $tp = TimePeriod::retrieveFromDate($args["date"]);
+        $tp = TimePeriod::retrieveFromDate($args['date']);
 
         return ($tp) ? $tp->toArray() : $tp;
     }

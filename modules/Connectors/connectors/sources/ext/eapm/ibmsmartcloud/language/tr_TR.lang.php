@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array (
+$connector_strings = [
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Sugar oluşumunuzu yeni bir uygulama olarak kaydedip IBM SmartCloud ağından bir Anahtar ve Şifre alın.<br>
 &nbsp;<br>
 Oluşumunuzu kaydetmek için gereken adımlar:<br>
@@ -28,5 +28,4 @@ Oluşumunuzu kaydetmek için gereken adımlar:<br>
 </td></tr></table>',
     'oauth_consumer_key' => 'OAuth Müşteri Anahtarı',
     'oauth_consumer_secret' => 'OAuth Müşteri Şifresi',
-);
-
+];

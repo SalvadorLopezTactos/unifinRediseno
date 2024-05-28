@@ -43,6 +43,14 @@ class GoogleCloudRunV2Revision extends \Google\Collection
   /**
    * @var string
    */
+  public $encryptionKeyRevocationAction;
+  /**
+   * @var string
+   */
+  public $encryptionKeyShutdownDuration;
+  /**
+   * @var string
+   */
   public $etag;
   /**
    * @var string
@@ -84,6 +92,10 @@ class GoogleCloudRunV2Revision extends \Google\Collection
    * @var bool
    */
   public $reconciling;
+  /**
+   * @var bool
+   */
+  public $satisfiesPzs;
   protected $scalingType = GoogleCloudRunV2RevisionScaling::class;
   protected $scalingDataType = '';
   /**
@@ -94,6 +106,10 @@ class GoogleCloudRunV2Revision extends \Google\Collection
    * @var string
    */
   public $serviceAccount;
+  /**
+   * @var bool
+   */
+  public $sessionAffinity;
   /**
    * @var string
    */
@@ -194,6 +210,34 @@ class GoogleCloudRunV2Revision extends \Google\Collection
   public function getEncryptionKey()
   {
     return $this->encryptionKey;
+  }
+  /**
+   * @param string
+   */
+  public function setEncryptionKeyRevocationAction($encryptionKeyRevocationAction)
+  {
+    $this->encryptionKeyRevocationAction = $encryptionKeyRevocationAction;
+  }
+  /**
+   * @return string
+   */
+  public function getEncryptionKeyRevocationAction()
+  {
+    return $this->encryptionKeyRevocationAction;
+  }
+  /**
+   * @param string
+   */
+  public function setEncryptionKeyShutdownDuration($encryptionKeyShutdownDuration)
+  {
+    $this->encryptionKeyShutdownDuration = $encryptionKeyShutdownDuration;
+  }
+  /**
+   * @return string
+   */
+  public function getEncryptionKeyShutdownDuration()
+  {
+    return $this->encryptionKeyShutdownDuration;
   }
   /**
    * @param string
@@ -350,6 +394,20 @@ class GoogleCloudRunV2Revision extends \Google\Collection
     return $this->reconciling;
   }
   /**
+   * @param bool
+   */
+  public function setSatisfiesPzs($satisfiesPzs)
+  {
+    $this->satisfiesPzs = $satisfiesPzs;
+  }
+  /**
+   * @return bool
+   */
+  public function getSatisfiesPzs()
+  {
+    return $this->satisfiesPzs;
+  }
+  /**
    * @param GoogleCloudRunV2RevisionScaling
    */
   public function setScaling(GoogleCloudRunV2RevisionScaling $scaling)
@@ -390,6 +448,20 @@ class GoogleCloudRunV2Revision extends \Google\Collection
   public function getServiceAccount()
   {
     return $this->serviceAccount;
+  }
+  /**
+   * @param bool
+   */
+  public function setSessionAffinity($sessionAffinity)
+  {
+    $this->sessionAffinity = $sessionAffinity;
+  }
+  /**
+   * @return bool
+   */
+  public function getSessionAffinity()
+  {
+    return $this->sessionAffinity;
   }
   /**
    * @param string

@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmnFlow'] = array(
+$dictionary['pmse_BpmnFlow'] = [
     'table' => 'pmse_bpmn_flow',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'reassignable' => false,
-    'fields' => array(
-        'flo_uid' => array(
+    'fields' => [
+        'flo_uid' => [
             'required' => true,
             'name' => 'flo_uid',
             'vname' => '',
@@ -38,8 +38,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'prj_id' => array(
+        ],
+        'prj_id' => [
             'required' => true,
             'name' => 'prj_id',
             'vname' => '',
@@ -59,8 +59,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'dia_id' => array(
+        ],
+        'dia_id' => [
             'required' => true,
             'name' => 'dia_id',
             'vname' => '',
@@ -80,8 +80,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'flo_type' => array(
+        ],
+        'flo_type' => [
             'required' => true,
             'name' => 'flo_type',
             'vname' => '',
@@ -101,8 +101,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'calculated' => false,
             'len' => '20',
             'size' => '20',
-        ),
-        'flo_element_origin' => array(
+        ],
+        'flo_element_origin' => [
             'required' => true,
             'name' => 'flo_element_origin',
             'vname' => '',
@@ -122,8 +122,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'flo_element_origin_type' => array(
+        ],
+        'flo_element_origin_type' => [
             'required' => true,
             'name' => 'flo_element_origin_type',
             'vname' => '',
@@ -143,8 +143,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'calculated' => false,
             'len' => '32',
             'size' => '32',
-        ),
-        'flo_element_origin_port' => array(
+        ],
+        'flo_element_origin_port' => [
             'required' => true,
             'name' => 'flo_element_origin_port',
             'vname' => '',
@@ -168,8 +168,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'flo_element_dest' => array(
+        ],
+        'flo_element_dest' => [
             'required' => true,
             'name' => 'flo_element_dest',
             'vname' => '',
@@ -189,8 +189,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'flo_element_dest_type' => array(
+        ],
+        'flo_element_dest_type' => [
             'required' => true,
             'name' => 'flo_element_dest_type',
             'vname' => '',
@@ -210,8 +210,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'calculated' => false,
             'len' => '32',
             'size' => '32',
-        ),
-        'flo_element_dest_port' => array(
+        ],
+        'flo_element_dest_port' => [
             'required' => true,
             'name' => 'flo_element_dest_port',
             'vname' => '',
@@ -235,8 +235,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'flo_is_inmediate' => array(
+        ],
+        'flo_is_inmediate' => [
             'required' => false,
             'name' => 'flo_is_inmediate',
             'vname' => '',
@@ -260,8 +260,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'flo_condition' => array(
+        ],
+        'flo_condition' => [
             'required' => false,
             'name' => 'flo_condition',
             'vname' => '',
@@ -281,8 +281,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'flo_eval_priority' => array(
+        ],
+        'flo_eval_priority' => [
             'required' => true,
             'name' => 'flo_eval_priority',
             'vname' => '',
@@ -306,8 +306,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'flo_x1' => array(
+        ],
+        'flo_x1' => [
             'required' => true,
             'name' => 'flo_x1',
             'vname' => '',
@@ -331,8 +331,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'flo_y1' => array(
+        ],
+        'flo_y1' => [
             'required' => true,
             'name' => 'flo_y1',
             'vname' => '',
@@ -356,8 +356,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'flo_x2' => array(
+        ],
+        'flo_x2' => [
             'required' => true,
             'name' => 'flo_x2',
             'vname' => '',
@@ -381,8 +381,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'flo_y2' => array(
+        ],
+        'flo_y2' => [
             'required' => true,
             'name' => 'flo_y2',
             'vname' => '',
@@ -406,8 +406,8 @@ $dictionary['pmse_BpmnFlow'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'flo_state' => array(
+        ],
+        'flo_state' => [
             'required' => false,
             'name' => 'flo_state',
             'vname' => '',
@@ -427,23 +427,23 @@ $dictionary['pmse_BpmnFlow'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmnFlow', 'pmse_BpmnFlow');

@@ -119,7 +119,7 @@ class MobileDevice extends Basic
      * Relays the register request to the SugarPush service
      * @return bool
      */
-    protected function relayRegisterRequest() : bool
+    protected function relayRegisterRequest(): bool
     {
         if ($service = $this->getService()) {
             return $service->register($this->device_platform, $this->device_id);
@@ -131,7 +131,7 @@ class MobileDevice extends Basic
     /**
      * Relays the update request to the SugarPush service
      */
-    protected function relayUpdateRequest(string $oldId, string $newId = '') : ?bool
+    protected function relayUpdateRequest(string $oldId, string $newId = ''): ?bool
     {
         if ($service = $this->getService()) {
             return $service->update($this->device_platform, $oldId, $newId);
@@ -144,7 +144,7 @@ class MobileDevice extends Basic
      * @return string
      * @throws SugarQueryException
      */
-    protected function getIdOfSameCombo() : string
+    protected function getIdOfSameCombo(): string
     {
         $query = new SugarQuery();
         $query->select(['id']);

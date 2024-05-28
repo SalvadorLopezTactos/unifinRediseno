@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -19,70 +18,61 @@
 global $genericAssocFieldsArray;
 global $moduleAssocFieldsArray;
 
-$genericAssocFieldsArray = array('assigned_user_id' =>
-                                array('table_name' => 'users',
-                                    'select_field_name' => 'user_name',
-                                    'select_field_join'  => 'id',
-                                ),
-                                'team_id' =>
-                                    array('table_name' => 'teams',
-                                    'select_field_name' => 'name',
-                                    'select_field_join'  => 'id',
-                                  ),
-                                  'account_id' =>
-                                  array('table_name' => 'accounts',
-                                    'select_field_name' => 'name',
-                                    'select_field_join'  => 'id',
-                                  ), 
-                                  'contact_id' =>
-                                  array('table_name' => 'contacts',
-                                    'select_field_name' => 
-                                    		array('first_name',
-                                    			  'last_name',
-                                    		),
-                                    'select_field_join'  => 'id',
-                                  ),
-                                  'fixed_in_release' =>
-                                  array('table_name' => 'releases',
-                                    'select_field_name' => 'name',
-                                    'select_field_join'  => 'id',
-                                  ), 
-                                  'found_in_release' =>
-                                  array('table_name' => 'releases',
-                                    'select_field_name' => 'name',
-                                    'select_field_join'  => 'id',
-                                  ),                                   
-                            );
-$moduleAssocFieldsArray = array(
-    'Account' => array(
-        'parent_id' => array(
+$genericAssocFieldsArray = ['assigned_user_id' => ['table_name' => 'users',
+    'select_field_name' => 'user_name',
+    'select_field_join' => 'id',
+],
+    'team_id' => ['table_name' => 'teams',
+        'select_field_name' => 'name',
+        'select_field_join' => 'id',
+    ],
+    'account_id' => ['table_name' => 'accounts',
+        'select_field_name' => 'name',
+        'select_field_join' => 'id',
+    ],
+    'contact_id' => ['table_name' => 'contacts',
+        'select_field_name' => ['first_name',
+            'last_name',
+        ],
+        'select_field_join' => 'id',
+    ],
+    'fixed_in_release' => ['table_name' => 'releases',
+        'select_field_name' => 'name',
+        'select_field_join' => 'id',
+    ],
+    'found_in_release' => ['table_name' => 'releases',
+        'select_field_name' => 'name',
+        'select_field_join' => 'id',
+    ],
+];
+$moduleAssocFieldsArray = [
+    'Account' => [
+        'parent_id' => [
             'table_name' => 'accounts',
             'select_field_name' => 'name',
             'select_field_join' => 'id',
-        ),
-    ),
-    'KBContent' => array(
-        'kbarticle_id' => array(
+        ],
+    ],
+    'KBContent' => [
+        'kbarticle_id' => [
             'table_name' => 'kbarticles',
             'select_field_name' => 'name',
             'select_field_join' => 'id',
-        ),
-        'category_id' => array(
+        ],
+        'category_id' => [
             'table_name' => 'categories',
             'select_field_name' => 'name',
             'select_field_join' => 'id',
-        ),
-        'kbscase_id' => array(
+        ],
+        'kbscase_id' => [
             'table_name' => 'cases',
             'select_field_name' => 'name',
             'select_field_join' => 'id',
-        ),
-        'kbsapprover_id' => array(
+        ],
+        'kbsapprover_id' => [
             'table_name' => 'users',
             'select_field_name' => 'user_name',
             'select_field_join' => 'id',
-        ),
-    ),
-);
-
-?>
+        ],
+    ],
+];

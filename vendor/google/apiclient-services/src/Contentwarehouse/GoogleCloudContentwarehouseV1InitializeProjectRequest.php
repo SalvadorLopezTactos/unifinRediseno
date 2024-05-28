@@ -30,6 +30,14 @@ class GoogleCloudContentwarehouseV1InitializeProjectRequest extends \Google\Mode
   /**
    * @var string
    */
+  public $documentCreatorDefaultRole;
+  /**
+   * @var bool
+   */
+  public $enableCalUserEmailLogging;
+  /**
+   * @var string
+   */
   public $kmsKey;
 
   /**
@@ -59,6 +67,34 @@ class GoogleCloudContentwarehouseV1InitializeProjectRequest extends \Google\Mode
   public function getDatabaseType()
   {
     return $this->databaseType;
+  }
+  /**
+   * @param string
+   */
+  public function setDocumentCreatorDefaultRole($documentCreatorDefaultRole)
+  {
+    $this->documentCreatorDefaultRole = $documentCreatorDefaultRole;
+  }
+  /**
+   * @return string
+   */
+  public function getDocumentCreatorDefaultRole()
+  {
+    return $this->documentCreatorDefaultRole;
+  }
+  /**
+   * @param bool
+   */
+  public function setEnableCalUserEmailLogging($enableCalUserEmailLogging)
+  {
+    $this->enableCalUserEmailLogging = $enableCalUserEmailLogging;
+  }
+  /**
+   * @return bool
+   */
+  public function getEnableCalUserEmailLogging()
+  {
+    return $this->enableCalUserEmailLogging;
   }
   /**
    * @param string

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Shabllonet e bazës së njohurive',
     'LBL_MODULE_NAME_SINGULAR' => 'Shablloni i bazës së njohurisë',
     'LBL_MODULE_TITLE' => 'Shablloni i bazës së njohurisë',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Shiko shabllonet',
     'LBL_TEXT_BODY' => 'Trupi',
     'LBL_LIST_TEMPLATE_NAME' => 'Emri i shabllonit',
-);
+];

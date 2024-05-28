@@ -11,7 +11,7 @@
  */
 
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BODY_HTML' => 'Corp',
     'LBL_BASE_MODULE' => 'Modul ţintă',
 
@@ -45,11 +45,11 @@ $mod_strings = array (
 
     'LBL_PMSE_IMPORT_EMAIL_TEMPLATES_FAILURE' => 'A eşuat crearea Modelului de e-mail din fişier',
     'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT' => 'Acest şablon de e-mail este utilizat moemntan într-o Definiţie de proces. Doriţi să editaţi în continuare acest Şablon de e-mail?',
-    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => "Nu puteţi şterge acest Şablon de e-mail deoarece este utilizat momentan într-o Definiţie de proces.",
+    'LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE' => 'Nu puteţi şterge acest Şablon de e-mail deoarece este utilizat momentan într-o Definiţie de proces.',
 
     'LBL_SUGAR_FIELD_SELECTOR' => 'Selector câmpuri',
     'LBL_SUGAR_LINK_SELECTOR' => 'Record Link Selector',
     'LBL_RELATED_TO_TARGET_MODULE' => 'Related to Target Module',
     'LBL_SELECT_BUTTON_LABEL' => 'Selecteaza',
     'LBL_FIELD_SELECTOR_DROPDOWN' => 'Tip de valoare a câmpului',
-);
+];

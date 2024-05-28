@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Registrar chamada',
     'LNK_NEW_MEETING' => 'Agendar reunião',
     'LNK_NEW_TASK' => 'Criar Tarefa',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Campo extra de metadados 2',
     'COLUMN_TITLE_EXT3' => 'Campo extra de metadados 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'Altura do IFrame',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'URL padrão',
     'COLUMN_TITLE_AUDIT' => 'Auditoria',
     'COLUMN_TITLE_PII' => 'Informações pessoais',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Valor padrão',
     'LBL_AUDITED' => 'Auditado',
     'LBL_REPORTABLE' => 'Reportável',
-    'ERR_RESERVED_FIELD_NAME' => "Palavra-chave reservada",
+    'ERR_RESERVED_FIELD_NAME' => 'Palavra-chave reservada',
     'ERR_SELECT_FIELD_TYPE' => 'Selecione um tipo de campo',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'O nome do campo já existe',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'O nome do campo deve conter apenas os seguintes caracteres: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Completo',
     'LBL_EXE_NON_SIM_MODE' => 'Executar o modo de não simulação',
     'LBL_CALCULATION_VISIBLE' => 'Tornar visível para cálculos',
-);
+];

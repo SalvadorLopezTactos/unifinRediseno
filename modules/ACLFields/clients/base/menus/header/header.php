@@ -11,19 +11,19 @@
  */
 $module_name = 'ACLRoles';
 global $mod_string;
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
-        'route'=>'#'.$module_name,
-        'label' =>'LIST_ROLES',
-        'acl_module'=>$module_name,
-        'acl_action'=>'list',
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
+        'route' => '#' . $module_name,
+        'label' => 'LIST_ROLES',
+        'acl_module' => $module_name,
+        'acl_action' => 'list',
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=>'#bwc/index.php?module=ACLRoles&action=ListUsers',
-        'label' =>'LIST_ROLES_BY_USER',
-        'acl_module'=>$module_name,
-        'acl_action'=>'list',
+    ],
+    [
+        'route' => '#bwc/index.php?module=ACLRoles&action=ListUsers',
+        'label' => 'LIST_ROLES_BY_USER',
+        'acl_module' => $module_name,
+        'acl_action' => 'list',
         'icon' => 'sicon-list-view',
-    ),
-);
+    ],
+];

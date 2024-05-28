@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -62,7 +63,7 @@ class SidecarSubpanelMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
      */
     public function convertLegacyViewDefsToSidecar()
     {
-        if(empty($this->legacyViewdefs)) {
+        if (empty($this->legacyViewdefs)) {
             return true;
         }
         $this->logUpgradeStatus("Converting subpanel view defs for '$this->fullpath'");
@@ -75,8 +76,10 @@ class SidecarSubpanelMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
 
     public function handleSave()
     {
-        return $this->handleSaveArray("viewdefs['{$this->getNormalizedModuleName()}']['{$this->client}']['view']['{$this->subpanelName}']",
-            $this->newPath);
+        return $this->handleSaveArray(
+            "viewdefs['{$this->getNormalizedModuleName()}']['{$this->client}']['view']['{$this->subpanelName}']",
+            $this->newPath
+        );
     }
 
     /**
@@ -90,6 +93,4 @@ class SidecarSubpanelMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
         $pathInfo = pathinfo($this->newPath);
         $this->subpanelName = $pathInfo['filename'];
     }
-
 }
-

@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['TaxRate'] = array(
+$dictionary['TaxRate'] = [
     'table' => 'taxrates',
     'archive' => false,
     'favorites' => false,
-    'fields' => array(
-        'value' => array(
+    'fields' => [
+        'value' => [
             'name' => 'value',
             'vname' => 'LBL_VALUE',
             'type' => 'decimal',
@@ -23,16 +23,16 @@ $dictionary['TaxRate'] = array(
             'importable' => 'required',
             'required' => true,
             'massupdate' => true,
-        ),
-        'list_order' => array(
+        ],
+        'list_order' => [
             'name' => 'list_order',
             'vname' => 'LBL_LIST_ORDER',
             'type' => 'int',
             'len' => '4',
             'importable' => 'required',
             'required' => true,
-        ),
-        'status' => array(
+        ],
+        'status' => [
             'name' => 'status',
             'vname' => 'LBL_STATUS',
             'type' => 'enum',
@@ -41,25 +41,25 @@ $dictionary['TaxRate'] = array(
             'options' => 'taxrate_status_dom',
             'importable' => 'required',
             'required' => true,
-        ),
-        'product_bundles' => array(
+        ],
+        'product_bundles' => [
             'name' => 'product_bundles',
             'type' => 'link',
             'relationship' => 'product_bundle_taxrate',
             'module' => 'ProductBundles',
             'bean_name' => 'ProductBundle',
-            'source' => 'non-db'
-        ),
-        'quotes' => array(
+            'source' => 'non-db',
+        ],
+        'quotes' => [
             'name' => 'quotes',
             'type' => 'link',
             'relationship' => 'taxrate_quotes',
             'vname' => 'LBL_TAXRATE',
             'source' => 'non-db',
-        ),
-    ),
-    'relationships' => array(
-        'taxrate_quotes' => array(
+        ],
+    ],
+    'relationships' => [
+        'taxrate_quotes' => [
             'lhs_module' => 'TaxRates',
             'lhs_table' => 'taxrates',
             'lhs_key' => 'id',
@@ -67,17 +67,17 @@ $dictionary['TaxRate'] = array(
             'rhs_table' => 'quotes',
             'rhs_key' => 'taxrate_id',
             'relationship_type' => 'one-to-many',
-        ),
-    ),
-    'acls' => array('SugarACLDeveloperOrAdmin' => array('aclModule' => 'Quotes', 'allowUserRead' => true))
-);
+        ],
+    ],
+    'acls' => ['SugarACLDeveloperOrAdmin' => ['aclModule' => 'Quotes', 'allowUserRead' => true]],
+];
 
 VardefManager::createVardef(
     'TaxRates',
     'TaxRate',
-    array(
-        'default'
-    )
+    [
+        'default',
+    ]
 );
 
 $dictionary['TaxRate']['fields']['tag']['massupdate'] = false;

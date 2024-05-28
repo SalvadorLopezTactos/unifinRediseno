@@ -55,7 +55,7 @@ class EAPMViewMicrosoftOauth2Redirect extends SugarView
      * @param $tokenData
      * @return array
      */
-    protected function buildResponse($tokenData) : array
+    protected function buildResponse($tokenData): array
     {
         switch ($this->context) {
             case 'email':
@@ -79,18 +79,18 @@ class EAPMViewMicrosoftOauth2Redirect extends SugarView
     protected function buildBasicResponse($token)
     {
         if (empty($token)) {
-            return array(
+            return [
                 'result' => false,
                 'dataSource' => 'microsoftOauthRedirect',
-            );
+            ];
         }
 
         // Build a basic response object indicating authentication success
-        $response = array(
+        $response = [
             'result' => true,
             'hasRefreshToken' => !empty($token->getRefreshToken()),
             'dataSource' => 'microsoftOauthRedirect',
-        );
+        ];
 
         return $response;
     }

@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
@@ -28,7 +29,7 @@ class MetaDataCache implements LoggerAwareInterface
      * Name of the cache table used to store metadata cache data
      * @var string
      */
-    protected static $cacheTable = "metadata_cache";
+    protected static $cacheTable = 'metadata_cache';
 
     protected static $isCacheEnabled = true;
 
@@ -58,7 +59,7 @@ class MetaDataCache implements LoggerAwareInterface
     public function set($key, $data)
     {
         if ($data == null) {
-            static::logDetails($this->logger, "Removing key " . $key . " from cache table.. data is null.");
+            static::logDetails($this->logger, 'Removing key ' . $key . ' from cache table.. data is null.');
             $this->removeFromCacheTable($key);
         } else {
             $this->storeToCacheTable($key, $data);
@@ -125,7 +126,7 @@ class MetaDataCache implements LoggerAwareInterface
      * Stores data in the cache table compressed and serialized. Any PHP data is valid.
      *
      * @param String $key key to store data with
-     * @param mixed  $data Data to store in the cache table blob
+     * @param mixed $data Data to store in the cache table blob
      *
      * @return void
      */
@@ -147,15 +148,15 @@ class MetaDataCache implements LoggerAwareInterface
             }
 
             $now = new DateTime('now', new DateTimeZone('UTC'));
-            $values = array(
+            $values = [
                 'id' => $id,
                 'type' => $key,
                 'data' => $encoded,
                 'date_modified' => $now->format(TimeDate::DB_DATETIME_FORMAT),
                 'deleted' => 0,
-            );
+            ];
 
-            $fields = array();
+            $fields = [];
             foreach ($this->getFields() as $field) {
                 $fields[$field['name']] = $field;
             }
@@ -164,9 +165,9 @@ class MetaDataCache implements LoggerAwareInterface
                 $values['id'] = create_guid();
                 $this->db->insertParams(static::$cacheTable, $fields, $values);
             } else {
-                $this->db->updateParams(static::$cacheTable, $fields, $values, array(
+                $this->db->updateParams(static::$cacheTable, $fields, $values, [
                     'id' => $values['id'],
-                ));
+                ]);
             }
             $this->db->commit();
         }
@@ -187,13 +188,13 @@ class MetaDataCache implements LoggerAwareInterface
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery(
             sprintf('SELECT id, data FROM %s WHERE type = ? ORDER BY date_modified DESC', static::$cacheTable),
-            array($type)
+            [$type]
         );
         $result = $stmt->fetchAssociative();
         if ($result) {
             //If we have more than one entry for the same key, we need to remove the duplicate entries.
             while ($row = $stmt->fetchAssociative()) {
-                $conn->delete(static::$cacheTable, array('id' => $row['id']));
+                $conn->delete(static::$cacheTable, ['id' => $row['id']]);
             }
         }
 
@@ -210,7 +211,7 @@ class MetaDataCache implements LoggerAwareInterface
     protected function removeFromCacheTable($key)
     {
         if (self::$isCacheEnabled) {
-            $this->db->getConnection()->delete(static::$cacheTable, array('type' => $key));
+            $this->db->getConnection()->delete(static::$cacheTable, ['type' => $key]);
         }
     }
 
@@ -223,7 +224,7 @@ class MetaDataCache implements LoggerAwareInterface
             return true;
         }
 
-        static::logDetails(LoggerFactory::getLogger('metadata'), "Clearing all entries from metadata cache table.");
+        static::logDetails(LoggerFactory::getLogger('metadata'), 'Clearing all entries from metadata cache table.');
 
         $db = DBManagerFactory::getInstance();
         $db->commit();
@@ -231,7 +232,8 @@ class MetaDataCache implements LoggerAwareInterface
         $db->commit();
     }
 
-    public function clearKeysLike($key) {
+    public function clearKeysLike($key)
+    {
         $qb = $this->db->getConnection()->createQueryBuilder();
         return $qb->delete(static::$cacheTable)
             ->where($qb->expr()->like('type', $qb->createPositionalParameter($key . '%')))
@@ -249,7 +251,7 @@ class MetaDataCache implements LoggerAwareInterface
         global $dictionary;
         include_once 'modules/TableDictionary.php';
 
-        $fields = array();
+        $fields = [];
         if (!empty($dictionary[static::$cacheTable]['fields'])) {
             $fields = $dictionary[static::$cacheTable]['fields'];
         }

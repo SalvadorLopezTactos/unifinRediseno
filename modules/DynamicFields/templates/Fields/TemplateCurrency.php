@@ -31,7 +31,7 @@ class TemplateCurrency extends TemplateRange
         parent::delete($df);
 
         $field_defs = $df->bean->field_defs;
-        foreach($field_defs as $id => $field) {
+        foreach ($field_defs as $id => $field) {
             if ($field['type'] == 'currency' && $id != $this->name) {
                 return;
             }
@@ -48,15 +48,25 @@ class TemplateCurrency extends TemplateRange
         $base_rate->delete($df);
     }
 
+    /**
+     * Unformat default value.
+     */
+    protected function unformatDefault()
+    {
+        if (!is_null($this->default)) {
+            $this->default = unformat_number((string)$this->default);
+        }
+    }
+
     public function save($df)
     {
         //the currency field
-        $this->default = unformat_number($this->default);
+        $this->unformatDefault();
         $this->default_value = $this->default;
-        $this->related_fields = array(
+        $this->related_fields = [
             'currency_id',
-            'base_rate'
-        );
+            'base_rate',
+        ];
         parent::save($df);
 
         $df->addLabel('LBL_CURRENCY');
@@ -71,7 +81,6 @@ class TemplateCurrency extends TemplateRange
         $base_rate->name = 'base_rate';
         $base_rate->label = 'LBL_CURRENCY_RATE';
         $base_rate->save($df);
-
     }
 
     public function get_field_def()
@@ -80,14 +89,14 @@ class TemplateCurrency extends TemplateRange
         $def['convertToBase'] = $this->convertToBase;
         $def['showTransactionalAmount'] = $this->convertToBase ? $this->showTransactionalAmount : false;
         $def['precision'] = (!empty($this->precision)) ? $this->precision : 6;
-        $def['related_fields'] = array('currency_id', 'base_rate');
+        $def['related_fields'] = ['currency_id', 'base_rate'];
         return $def;
     }
 
-    function get_db_type()
+    public function get_db_type()
     {
         $precision = (!empty($this->precision)) ? $this->precision : 6;
         $len = (!empty($this->len)) ? $this->len : 26;
-        return " " . sprintf($GLOBALS['db']->getColumnType("decimal_tpl"), $len, $precision);
+        return ' ' . sprintf($GLOBALS['db']->getColumnType('decimal_tpl'), $len, $precision);
     }
 }

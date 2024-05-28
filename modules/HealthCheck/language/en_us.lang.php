@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Health Check',
     'LBL_MODULE_NAME_SINGULAR' => 'Health Check',
     'LBL_MODULE_TITLE' => 'Health Check',
@@ -48,9 +48,9 @@ $mod_strings = array(
     'LBL_SCAN_313_LOG' => 'Extension dir %s detected - %s is not MB module',
     'LBL_SCAN_314_LOG' => "Bad vardefs - multienum field '%s' with options list '%s' keys contain incompatible characters - '{%s}' in module %s",
 
-    'LBL_SCAN_401_LOG' => 'Vendor files inclusion found, for files that have been moved to vendor:'. PHP_EOL .'%s',
+    'LBL_SCAN_401_LOG' => 'Vendor files inclusion found, for files that have been moved to vendor:' . PHP_EOL . '%s',
     'LBL_SCAN_402_LOG' => 'Bad module %s - not in beanList and not in filesystem',
-    'LBL_SCAN_403_LOG' => 'Specific Sugar files inclusion found for:' . PHP_EOL .'%s',
+    'LBL_SCAN_403_LOG' => 'Specific Sugar files inclusion found for:' . PHP_EOL . '%s',
     'LBL_SCAN_520_LOG' => 'Logic hook after_ui_frame detected in %s',
     'LBL_SCAN_521_LOG' => 'Logic hook after_ui_footer detected in %s',
 //    'LBL_SCAN_405_LOG' => 'Incompatible Integration - %s %s',
@@ -91,7 +91,7 @@ $mod_strings = array(
     'LBL_SCAN_524_LOG' => 'Vardef HTML function %s in %s module for field %s',
     'LBL_SCAN_432_LOG' => 'Bad vardefs - \'name\' field type is invalid \'%s\', module - \'%s\'',
     'LBL_SCAN_526_LOG' => "Bad vardefs - multienum field '%s' with options list '%s' keys contain incompatible characters - '%s' in module %s",
-    'LBL_SCAN_527_LOG' => "Table name in bean %s does not match the table attribute in the %s/vardefs.php",
+    'LBL_SCAN_527_LOG' => 'Table name in bean %s does not match the table attribute in the %s/vardefs.php',
     'LBL_SCAN_528_LOG' => 'Field %s of %s module has incorrect display_default value',
     'LBL_SCAN_529_LOG' => '%s: %s in file %s on line %s',
     'LBL_SCAN_530_LOG' => 'Missing custom file: %s',
@@ -113,6 +113,8 @@ $mod_strings = array(
     'LBL_SCAN_564_LOG' => 'Use of outdated DBAL functionality: %s',
     'LBL_SCAN_565_LOG' => 'Use of deprecated config property $sugar_config[\'passwordHash\']. From version 13.3 it will be not supported: %s',
     'LBL_SCAN_566_LOG' => 'Use of unsupported config property $sugar_config[\'passwordHash\']: %s',
+    'LBL_SCAN_567_LOG' => 'Use of removed Zend Framework component: %s',
+    'LBL_SCAN_568_LOG' => 'Use of deprecated Zend Framework component: %s',
     'LBL_SCAN_570_LOG' => 'Invalid status and type for emails: status=%s, type=%s',
     'LBL_SCAN_571_LOG' => 'Deprecated file has customizations: %s',
     'LBL_SCAN_572_LOG' => 'Custom file has name conflict: %s',
@@ -181,9 +183,9 @@ $mod_strings = array(
     'LBL_SCAN_312_TITLE' => 'Bad vardefs - \'name\' field type is invalid \'%s\', module - \'%s\'',
     'LBL_SCAN_313_TITLE' => 'Extension dir %s detected - %s is not MB module',
 
-    'LBL_SCAN_401_TITLE' => 'Vendor files inclusion found, for files that have been moved to vendor:'. PHP_EOL .'%s',
+    'LBL_SCAN_401_TITLE' => 'Vendor files inclusion found, for files that have been moved to vendor:' . PHP_EOL . '%s',
     'LBL_SCAN_402_TITLE' => 'Bad module %s - not in beanList and not in filesystem',
-    'LBL_SCAN_403_TITLE' => 'Specific Sugar files inclusion found for:' . PHP_EOL .'%s',
+    'LBL_SCAN_403_TITLE' => 'Specific Sugar files inclusion found for:' . PHP_EOL . '%s',
     'LBL_SCAN_520_TITLE' => 'Logic hook after_ui_frame detected in %s',
     'LBL_SCAN_521_TITLE' => 'Logic hook after_ui_footer detected in %s',
 //    'LBL_SCAN_405_TITLE' => 'Incompatible Integration - %s %s',
@@ -266,6 +268,8 @@ $mod_strings = array(
     'LBL_SCAN_552_TITLE' => 'Use of removed Underscore APIs in %s',
     'LBL_SCAN_553_TITLE' => 'Use of removed Sidecar Bean APIs in %s',
     'LBL_SCAN_554_TITLE' => 'Sidecar controller %s extends from removed Sidecar controller',
+    'LBL_SCAN_567_TITLE' => 'Use of removed Zend Framework component',
+    'LBL_SCAN_568_TITLE' => 'Use of deprecated Zend Framework component',
     'LBL_SCAN_570_TITLE' => 'Unexpected values found in emails',
     'LBL_SCAN_571_TITLE' => 'Custom file contains code that has been deprecated',
     'LBL_SCAN_572_TITLE' => 'There is a name conflict with a custom file',
@@ -368,7 +372,7 @@ $mod_strings = array(
     'LBL_SCAN_514_DESCR' => 'Code contains this output-producing function',
     'LBL_SCAN_515_DESCR' => 'The checking script failed, which means the instaScannerMeta.phpnce probably contains bad PHP code that the script tried to load.',
     'LBL_SCAN_517_DESCR' => 'Package detected which has been denylisted as not supported in Sugar 7',
-    'LBL_SCAN_526_DESCR' => "This List contains Item Name values that prevent the upgrade.",
+    'LBL_SCAN_526_DESCR' => 'This List contains Item Name values that prevent the upgrade.',
     'LBL_SCAN_528_DESCR' => 'Date/Datetime/Time field with incorrect display_default value like -none-',
     'LBL_SCAN_529_DESCR' => 'PHP errors may be triggered by the interpreter when incorrect php-syntax or some run-time code-problems are found.',
     'LBL_SCAN_530_DESCR' => 'One of the custom files is not present in the instance, but is used by the custom code.',
@@ -408,4 +412,4 @@ $mod_strings = array(
 
     'LBL_SCAN_579_TITLE' => 'Unable to perform character set/collation conversion: (%s) on table: %s',
     'LBL_SCAN_579_LOG' => 'Unable to perform character set/collation conversion: (%s) on table: %s',
-);
+];

@@ -11,7 +11,7 @@
  */
 
 // external imports
-                                                      // type
+// type
 
 /**
  * Represents the base configurations and contains the logic for setting the configurations for a Mailer.
@@ -29,9 +29,9 @@ class OutboundEmailConfiguration
     protected $displayName; // the name that user's use to identify the configuration
     protected $from;        // the EmailIdentity representing the sender of an email (used for the From email header)
     protected $replyTo;     // the EmailIdentity representing where replies should be sent (used for the Reply-To email
-                            // header)
+    // header)
     protected $hostname;    // the hostname to use in Message-ID and Received headers and as default HELO string
-                            // not the server hostname
+    // not the server hostname
     protected $locale;      // the Localization object necessary for performing character set translations
     protected $charset;     // the character set of the message
     protected $encoding;    // the encoding of the message, which must be one of the valid encodings from Encoding
@@ -41,7 +41,8 @@ class OutboundEmailConfiguration
     /**
      * @access public
      */
-    public function __construct(User $user) {
+    public function __construct(User $user)
+    {
         $this->setUserId($user->id);
         $this->loadDefaultConfigs();
     }
@@ -51,7 +52,8 @@ class OutboundEmailConfiguration
      *
      * @access public
      */
-    public function loadDefaultConfigs() {
+    public function loadDefaultConfigs()
+    {
         $this->setMode();
         $this->setHostname();
         $this->setLocale();
@@ -67,10 +69,11 @@ class OutboundEmailConfiguration
      * @param string $hostname required
      * @throws MailerException
      */
-    public function setHostname($hostname = "") {
+    public function setHostname($hostname = '')
+    {
         if (!is_string($hostname)) {
             throw new MailerException(
-                "Invalid Configuration: hostname must be a string",
+                'Invalid Configuration: hostname must be a string',
                 MailerException::InvalidConfiguration
             );
         }
@@ -84,7 +87,8 @@ class OutboundEmailConfiguration
      * @access public
      * @return string
      */
-    public function getHostname() {
+    public function getHostname()
+    {
         return $this->hostname;
     }
 
@@ -96,7 +100,8 @@ class OutboundEmailConfiguration
      *                                  null, but the setter should only be used publicly with a valid Localization
      *                                  object.
      */
-    public function setLocale(Localization $locale = null) {
+    public function setLocale(Localization $locale = null)
+    {
         $this->locale = $locale;
     }
 
@@ -104,7 +109,8 @@ class OutboundEmailConfiguration
      * @access public
      * @return Localization|null Null if initialized but never set.
      */
-    public function getLocale() {
+    public function getLocale()
+    {
         return $this->locale;
     }
 
@@ -115,10 +121,11 @@ class OutboundEmailConfiguration
      * @param string $charset required
      * @throws MailerException
      */
-    public function setCharset($charset = "utf-8") {
+    public function setCharset($charset = 'utf-8')
+    {
         if (!is_string($charset)) {
             throw new MailerException(
-                "Invalid Configuration: charset must be a string",
+                'Invalid Configuration: charset must be a string',
                 MailerException::InvalidConfiguration
             );
         }
@@ -132,7 +139,8 @@ class OutboundEmailConfiguration
      * @access public
      * @return string
      */
-    public function getCharset() {
+    public function getCharset()
+    {
         return $this->charset;
     }
 
@@ -143,10 +151,11 @@ class OutboundEmailConfiguration
      * @param string $encoding required
      * @throws MailerException
      */
-    public function setEncoding($encoding = Encoding::QuotedPrintable) {
+    public function setEncoding($encoding = Encoding::QuotedPrintable)
+    {
         if (!Encoding::isValid($encoding)) {
             throw new MailerException(
-                "Invalid Configuration: encoding is invalid",
+                'Invalid Configuration: encoding is invalid',
                 MailerException::InvalidConfiguration
             );
         }
@@ -160,7 +169,8 @@ class OutboundEmailConfiguration
      * @access public
      * @return string
      */
-    public function getEncoding() {
+    public function getEncoding()
+    {
         return $this->encoding;
     }
 
@@ -171,10 +181,11 @@ class OutboundEmailConfiguration
      * @param int $chars required
      * @throws MailerException
      */
-    public function setWordwrap($chars = 996) {
+    public function setWordwrap($chars = 996)
+    {
         if (!is_int($chars)) {
             throw new MailerException(
-                "Invalid Configuration: wordwrap must be an integer",
+                'Invalid Configuration: wordwrap must be an integer',
                 MailerException::InvalidConfiguration
             );
         }
@@ -188,7 +199,8 @@ class OutboundEmailConfiguration
      * @access public
      * @return string
      */
-    public function getWordwrap() {
+    public function getWordwrap()
+    {
         return $this->wordwrap;
     }
 
@@ -196,7 +208,8 @@ class OutboundEmailConfiguration
      * @access public
      * @param string $id required
      */
-    public function setUserId($id) {
+    public function setUserId($id)
+    {
         $this->userId = $id;
     }
 
@@ -204,7 +217,8 @@ class OutboundEmailConfiguration
      * @access public
      * @return string
      */
-    public function getUserId() {
+    public function getUserId()
+    {
         return $this->userId;
     }
 
@@ -212,7 +226,8 @@ class OutboundEmailConfiguration
      * @access public
      * @param string $id required
      */
-    public function setConfigId($id) {
+    public function setConfigId($id)
+    {
         $this->configId = $id;
     }
 
@@ -220,7 +235,8 @@ class OutboundEmailConfiguration
      * @access public
      * @return string
      */
-    public function getConfigId() {
+    public function getConfigId()
+    {
         return $this->configId;
     }
 
@@ -228,7 +244,8 @@ class OutboundEmailConfiguration
      * @access public
      * @param string $name required
      */
-    public function setConfigName($name) {
+    public function setConfigName($name)
+    {
         $this->configName = $name;
     }
 
@@ -236,7 +253,8 @@ class OutboundEmailConfiguration
      * @access public
      * @return string
      */
-    public function getConfigName() {
+    public function getConfigName()
+    {
         return $this->configName;
     }
 
@@ -244,7 +262,8 @@ class OutboundEmailConfiguration
      * @access public
      * @param string $type required
      */
-    public function setConfigType($type) {
+    public function setConfigType($type)
+    {
         $this->configType = $type;
     }
 
@@ -252,7 +271,8 @@ class OutboundEmailConfiguration
      * @access public
      * @return string
      */
-    public function getConfigType() {
+    public function getConfigType()
+    {
         return $this->configType;
     }
 
@@ -260,7 +280,8 @@ class OutboundEmailConfiguration
      * @access public
      * @param string $id required
      */
-    public function setInboxId($id) {
+    public function setInboxId($id)
+    {
         $this->inboxId = $id;
     }
 
@@ -268,7 +289,8 @@ class OutboundEmailConfiguration
      * @access public
      * @return string
      */
-    public function getInboxId() {
+    public function getInboxId()
+    {
         return $this->inboxId;
     }
 
@@ -276,7 +298,8 @@ class OutboundEmailConfiguration
      * @access public
      * @param array $ids required
      */
-    public function setInboundIds($ids) {
+    public function setInboundIds($ids)
+    {
         $this->inboundIds = $ids;
     }
 
@@ -284,7 +307,8 @@ class OutboundEmailConfiguration
      * @access public
      * @return array
      */
-    public function getInboundIds() {
+    public function getInboundIds()
+    {
         return $this->inboundIds;
     }
 
@@ -292,7 +316,8 @@ class OutboundEmailConfiguration
      * @param null|string $mode
      * @throws MailerException
      */
-    public function setMode($mode = null) {
+    public function setMode($mode = null)
+    {
         if (empty($mode)) {
             $mode = OutboundEmailConfigurationPeer::MODE_DEFAULT;
         }
@@ -310,7 +335,8 @@ class OutboundEmailConfiguration
      * @access public
      * @return string
      */
-    public function getMode() {
+    public function getMode()
+    {
         return $this->mode;
     }
 
@@ -318,7 +344,8 @@ class OutboundEmailConfiguration
      * @access public
      * @param bool $personal
      */
-    public function setPersonal($personal = false) {
+    public function setPersonal($personal = false)
+    {
         $this->personal = $personal;
     }
 
@@ -326,7 +353,8 @@ class OutboundEmailConfiguration
      * @access public
      * @return bool
      */
-    public function getPersonal() {
+    public function getPersonal()
+    {
         return $this->personal;
     }
 
@@ -334,7 +362,8 @@ class OutboundEmailConfiguration
      * @access public
      * @param string $name required
      */
-    public function setDisplayName($name) {
+    public function setDisplayName($name)
+    {
         $this->displayName = $name;
     }
 
@@ -342,17 +371,19 @@ class OutboundEmailConfiguration
      * @access public
      * @return string
      */
-    public function getDisplayName() {
+    public function getDisplayName()
+    {
         return $this->displayName;
     }
 
     /**
      * @access public
-     * @param string      $email required
+     * @param string $email required
      * @param null|string $name
      * @throws MailerException Allows MailerExceptions to bubble up.
      */
-    public function setFrom($email, $name = null) {
+    public function setFrom($email, $name = null)
+    {
         $this->from = new EmailIdentity($email, $name);
     }
 
@@ -360,17 +391,19 @@ class OutboundEmailConfiguration
      * @access public
      * @return EmailIdentity
      */
-    public function getFrom() {
+    public function getFrom()
+    {
         return $this->from;
     }
 
     /**
      * @access public
-     * @param string      $email required
+     * @param string $email required
      * @param null|string $name
      * @throws MailerException Allows MailerExceptions to bubble up.
      */
-    public function setReplyTo($email, $name = null) {
+    public function setReplyTo($email, $name = null)
+    {
         $this->replyTo = new EmailIdentity($email, $name);
     }
 
@@ -378,7 +411,8 @@ class OutboundEmailConfiguration
      * @access public
      * @return EmailIdentity
      */
-    public function getReplyTo() {
+    public function getReplyTo()
+    {
         return $this->replyTo;
     }
 
@@ -386,19 +420,20 @@ class OutboundEmailConfiguration
      * @access public
      * @return array
      */
-    public function toArray() {
-        return array(
-            "userId"      => $this->getUserId(),
-            "configId"    => $this->getConfigId(),
-            "configName"  => $this->getConfigName(),
-            "configType"  => $this->getConfigType(),
-            "inboxId"     => $this->getInboxId(),
-            "mode"        => $this->getMode(),
-            "personal"    => $this->getPersonal(),
-            "displayName" => $this->getDisplayName(),
-            "from"        => $this->getFrom(),
-            "replyTo"     => $this->getReplyTo(),
-            "hostname"    => $this->getHostname()
-        );
+    public function toArray()
+    {
+        return [
+            'userId' => $this->getUserId(),
+            'configId' => $this->getConfigId(),
+            'configName' => $this->getConfigName(),
+            'configType' => $this->getConfigType(),
+            'inboxId' => $this->getInboxId(),
+            'mode' => $this->getMode(),
+            'personal' => $this->getPersonal(),
+            'displayName' => $this->getDisplayName(),
+            'from' => $this->getFrom(),
+            'replyTo' => $this->getReplyTo(),
+            'hostname' => $this->getHostname(),
+        ];
     }
 }

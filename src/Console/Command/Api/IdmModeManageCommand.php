@@ -27,8 +27,8 @@ use Symfony\Component\Console\Input\InputArgument;
  */
 class IdmModeManageCommand extends Command implements InstanceModeInterface
 {
-    public const IDM_CONFIG_FILE = 'config_idm.php';
     use ApiEndpointTrait;
+    public const IDM_CONFIG_FILE = 'config_idm.php';
 
     /**
      * {inheritdoc}
@@ -49,8 +49,7 @@ class IdmModeManageCommand extends Command implements InstanceModeInterface
                 '-f',
                 InputOption::VALUE_NONE,
                 'The file contains the idm fields if action is enable, default file is config_idm.php.'
-            )
-        ;
+            );
     }
 
     /**
@@ -62,7 +61,7 @@ class IdmModeManageCommand extends Command implements InstanceModeInterface
         $args['idmMode'] = [];
         $action = $input->getArgument('action');
 
-        if (!in_array($action, array('enable', 'disable', 'moveConfigToDb'), true)) {
+        if (!in_array($action, ['enable', 'disable', 'moveConfigToDb'], true)) {
             throw new \Exception("Please specify a proper action: 'enable', 'disable' or 'moveConfigToDb'");
         }
 

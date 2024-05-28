@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Marketing',
-    'Knowledge Base' => 'Baza wiedzy',
-    'Sales' => 'Sprzedaż',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Materiały marketingowe',
-    'Product Brochures' => 'Katalogi produktów',
-    'FAQ' => 'Często zadawane pytania',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Marketing',
+        'Knowledge Base' => 'Baza wiedzy',
+        'Sales' => 'Sprzedaż',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Aktywny',
-    'Draft' => 'Wersja robocza',
-    'FAQ' => 'Często zadawane pytania',
-    'Expired' => 'Przedawniony',
-    'Under Review' => 'Recenzowany',
-    'Pending' => 'Oczekujące',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Materiały marketingowe',
+        'Product Brochures' => 'Katalogi produktów',
+        'FAQ' => 'Często zadawane pytania',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Aktywny',
+        'Draft' => 'Wersja robocza',
+        'FAQ' => 'Często zadawane pytania',
+        'Expired' => 'Przedawniony',
+        'Under Review' => 'Recenzowany',
+        'Pending' => 'Oczekujące',
+    ],
+];

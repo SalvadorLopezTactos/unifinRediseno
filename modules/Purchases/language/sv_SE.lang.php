@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Instrumentpanel för inköpsposter',
     'LBL_RELATED_ACCOUNT' => 'Relaterat konto',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för köp',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje för köp',
 ];

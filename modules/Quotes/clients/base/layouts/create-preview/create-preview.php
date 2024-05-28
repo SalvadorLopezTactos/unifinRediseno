@@ -9,13 +9,13 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Quotes']['base']['layout']['create-preview'] = array(
-    'components' => array(
-        array(
+$viewdefs['Quotes']['base']['layout']['create-preview'] = [
+    'components' => [
+        [
             'view' => 'product-catalog',
-        ),
-        array(
+        ],
+        [
             'view' => 'product-quick-picks',
-        ),
-    ),
-);
+        ],
+    ],
+];

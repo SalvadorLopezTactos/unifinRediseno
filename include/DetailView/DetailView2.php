@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/EditView/EditView2.php');
+require_once 'include/EditView/EditView2.php';
 
 /**
  * DetailView - display single record
@@ -21,7 +21,7 @@ require_once('include/EditView/EditView2.php');
 class DetailView2 extends EditView
 {
     public $defs;
-    var $view = 'DetailView';
+    public $view = 'DetailView';
 
     /**
      * DetailView constructor
@@ -34,14 +34,14 @@ class DetailView2 extends EditView
      * @param $metadataFile String value of file location to use in overriding default metadata file
      * @param tpl String value of file location to use in overriding default Smarty template
      */
-    function setup(
+    public function setup(
         $module,
         $focus = null,
         $metadataFile = null,
         $tpl = 'include/DetailView/DetailView.tpl',
         $createFocus = true
-        )
-    {
+    ) {
+
         $viewdefs = [];
         $this->th = new TemplateHandler();
         $this->th->ss = $this->ss;
@@ -49,8 +49,8 @@ class DetailView2 extends EditView
         $this->tpl = $tpl;
         $this->module = $module;
         $this->metadataFile = $metadataFile;
-        if(isset($GLOBALS['sugar_config']['disable_vcr'])) {
-           $this->showVCRControl = !$GLOBALS['sugar_config']['disable_vcr'];
+        if (isset($GLOBALS['sugar_config']['disable_vcr'])) {
+            $this->showVCRControl = !$GLOBALS['sugar_config']['disable_vcr'];
         }
 
         if (!empty($this->metadataFile) && file_exists($this->metadataFile)) {

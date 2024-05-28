@@ -10,20 +10,20 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['ReportSchedules']['base']['filter']['reportschedules'] = array(
-    'filters' => array(
-        array(
+$viewdefs['ReportSchedules']['base']['filter']['reportschedules'] = [
+    'filters' => [
+        [
             'id' => 'by_report',
             'name' => 'LBL_FILTER_BY_REPORT',
-            'filter_definition' => array(
-                array(
-                    'report_id' => array(
-                        '$in' => array(),
-                    ),
-                ),
-            ),
+            'filter_definition' => [
+                [
+                    'report_id' => [
+                        '$in' => [],
+                    ],
+                ],
+            ],
             'editable' => true,
             'is_template' => true,
-        ),
-    ),
-);
+        ],
+    ],
+];

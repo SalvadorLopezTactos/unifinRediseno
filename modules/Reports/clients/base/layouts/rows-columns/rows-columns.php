@@ -23,7 +23,7 @@ $viewdefs['Reports']['base']['layout']['rows-columns'] = [
         [
             'view' => [
                 'name' => 'report-table-pagination',
-                'css_class' => 'flex-table-pagination',
+                'css_class' => 'flex-table-pagination bg-[--primary-content-background] relative w-full z-30',
             ],
         ],
     ],

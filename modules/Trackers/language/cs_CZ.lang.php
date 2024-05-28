@@ -10,48 +10,46 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
 
-		  //Column header mapping
-		  'action' => 'Akce',
-		  'active_users' => 'Počítadlo aktviních uživatelů',
-		  'date_modified' => 'Datum poslední akce',
-		  'different_modules_accessed' => 'Do kolika modulů bylo vniknuto',
-		  'first_name' => 'Jméno',
-		  'item_id' => 'ID',
-		  'item_summary' => 'Název',
-		  'last_action' => 'Poslední akce datum/čas',
-		  'last_name' => 'Příjmení',
-		  'module_name' => 'Název modulu',
-		  'records_modified' => 'Celkem modifikovaných záznamů',
-		  'top_module' => 'Největší pohyb v modulech',
-		  'total_count' => 'Celkem prohlédnuto stran',
-		  'total_login_time' => 'Čas (hh:mm:ss)',
-		  'user_name' => 'Uživ.jméno',
-		  'users' => 'Uživatelé',
-		  
-		  //Administration related labels
-		  'LBL_ENABLE' => 'Aktivováno',
-		  'LBL_MODULE_NAME_TITLE' => 'Trakery',
-		  'LBL_MODULE_NAME' => 'Trakery',
-		  'LBL_MODULE_NAME_SINGULAR' => 'Traker',
-		  'LBL_TRACKER_SETTINGS' => 'Nastavení Trakerů',
-		  'LBL_TRACKER_QUERIES_DESC' => 'Traker Queries',
-		  'LBL_TRACKER_QUERIES_HELP' => 'Sledovat SQL, když je povolen "Log pro pomalé dotazy" a čas dotazu dolní časovou hodnotu',
-		  'LBL_TRACKER_PERF_DESC' => 'Výkon Trakeru',
-		  'LBL_TRACKER_PERF_HELP' => 'Sledovat databázy zpátně, přístup do souborů a využití paměti',
-		  'LBL_TRACKER_SESSIONS_DESC' => 'Traker Sessions',
-		  'LBL_TRACKER_SESSIONS_HELP' => 'Sledování aktivních uživatele a uživatele&rsquo; se session informací',
-		  'LBL_TRACKER_DESC' => 'Traker Akce',
-		  'LBL_TRACKER_HELP' => 'sledovaní uživatele&rsquo;s s přístupy ke stránkám (přístupy k modulům a záznamům) and uloženým záznamům',
-		  'LBL_TRACKER_PRUNE_INTERVAL' => 'Počet dní údajů kdy Traker uchovává v tabulce záznamy',
-		  'LBL_TRACKER_PRUNE_RANGE' => 'Počet dní',
-);
-?>
+    //Column header mapping
+    'action' => 'Akce',
+    'active_users' => 'Počítadlo aktviních uživatelů',
+    'date_modified' => 'Datum poslední akce',
+    'different_modules_accessed' => 'Do kolika modulů bylo vniknuto',
+    'first_name' => 'Jméno',
+    'item_id' => 'ID',
+    'item_summary' => 'Název',
+    'last_action' => 'Poslední akce datum/čas',
+    'last_name' => 'Příjmení',
+    'module_name' => 'Název modulu',
+    'records_modified' => 'Celkem modifikovaných záznamů',
+    'top_module' => 'Největší pohyb v modulech',
+    'total_count' => 'Celkem prohlédnuto stran',
+    'total_login_time' => 'Čas (hh:mm:ss)',
+    'user_name' => 'Uživ.jméno',
+    'users' => 'Uživatelé',
+
+    //Administration related labels
+    'LBL_ENABLE' => 'Aktivováno',
+    'LBL_MODULE_NAME_TITLE' => 'Trakery',
+    'LBL_MODULE_NAME' => 'Trakery',
+    'LBL_MODULE_NAME_SINGULAR' => 'Traker',
+    'LBL_TRACKER_SETTINGS' => 'Nastavení Trakerů',
+    'LBL_TRACKER_QUERIES_DESC' => 'Traker Queries',
+    'LBL_TRACKER_QUERIES_HELP' => 'Sledovat SQL, když je povolen "Log pro pomalé dotazy" a čas dotazu dolní časovou hodnotu',
+    'LBL_TRACKER_PERF_DESC' => 'Výkon Trakeru',
+    'LBL_TRACKER_PERF_HELP' => 'Sledovat databázy zpátně, přístup do souborů a využití paměti',
+    'LBL_TRACKER_SESSIONS_DESC' => 'Traker Sessions',
+    'LBL_TRACKER_SESSIONS_HELP' => 'Sledování aktivních uživatele a uživatele&rsquo; se session informací',
+    'LBL_TRACKER_DESC' => 'Traker Akce',
+    'LBL_TRACKER_HELP' => 'sledovaní uživatele&rsquo;s s přístupy ke stránkám (přístupy k modulům a záznamům) and uloženým záznamům',
+    'LBL_TRACKER_PRUNE_INTERVAL' => 'Počet dní údajů kdy Traker uchovává v tabulce záznamy',
+    'LBL_TRACKER_PRUNE_RANGE' => 'Počet dní',
+];

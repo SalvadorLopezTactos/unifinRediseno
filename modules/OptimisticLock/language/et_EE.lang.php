@@ -10,22 +10,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
-   'LBL_YOURS' => 'Teie',
-   'LBL_IN_DATABASE' => 'Andmebaasis',
-   'LBL_CONFLICT_EXISTS' => 'Vastuolu järgmise osas – ',
-   'LBL_ACCEPT_DATABASE' => 'Kinnita andmebaas',
-   'LBL_ACCEPT_YOURS' => 'Kinnita teie',
-   'LBL_RECORDS_MATCH' => 'Kirjed ühtivad',
-   'LBL_NO_LOCKED_OBJECTS' => 'Lukus objektid puuduvad',
-   
-);
+$mod_strings = [
+    'LBL_YOURS' => 'Teie',
+    'LBL_IN_DATABASE' => 'Andmebaasis',
+    'LBL_CONFLICT_EXISTS' => 'Vastuolu järgmise osas – ',
+    'LBL_ACCEPT_DATABASE' => 'Kinnita andmebaas',
+    'LBL_ACCEPT_YOURS' => 'Kinnita teie',
+    'LBL_RECORDS_MATCH' => 'Kirjed ühtivad',
+    'LBL_NO_LOCKED_OBJECTS' => 'Lukus objektid puuduvad',
 
-?>
+];

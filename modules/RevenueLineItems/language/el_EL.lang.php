@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Γραμμής Εσόδων Στοιχείων',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Γραμμής Εσόδων Στοιχείων',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Τύποι Προϊόντων',
     'LBL_ASSIGNED_TO_NAME' => 'Ανατέθηκε σε:',
     'LBL_ASSIGNED_TO' => 'Ανατεθειμένος Χειριστής',
-    'LBL_ASSIGNED_TO_ID'=>'Ταυτότητα Ανατεθειμένου Χειριστή',
+    'LBL_ASSIGNED_TO_ID' => 'Ταυτότητα Ανατεθειμένου Χειριστή',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Ανατεθειμένο Όνομα Χειριστή',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Ταυτότητα Ανατεθειμένου Χειριστή',
     'LBL_CAMPAIGN_ID' => 'Ταυτότητα Εκστρατείας',
@@ -217,4 +217,5 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Εμφανίζει τα 10 καλύτερα Έσοδα στη Γραμμή Ειδών σε γράφημα φυσαλίδας.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Γραμμή Εσόδων, Δικά Μου',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Γραμμή Εσόδων Ειδών, Ομάδας Μου",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Χρονολόγιο γραμμής στοιχείων εσόδων',
+];

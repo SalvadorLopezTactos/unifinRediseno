@@ -16,44 +16,44 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$viewdefs['Forecasts']['base']['view']['tutorial'] = array(
-    'records' => array(
-        'intro' =>'LBL_TOUR_FORECAST_INTRO',
-        'version' =>1,
-        'content' => array(
-            array(
+$viewdefs['Forecasts']['base']['view']['tutorial'] = [
+    'records' => [
+        'intro' => 'LBL_TOUR_FORECAST_INTRO',
+        'version' => 1,
+        'content' => [
+            [
                 'name' => '.topline [for="date_filter"]',
                 'text' => 'LBL_TOUR_FORECASTS_TIMEPERIODS',
                 'full' => true,
-                'horizAdj'=> -15,
-                'vertAdj'=> -15,
-            ),
-            array(
+                'horizAdj' => -15,
+                'vertAdj' => -15,
+            ],
+            [
                 'name' => '.topline .last-commit',
                 'text' => 'LBL_TOUR_FORECASTS_COMMITS',
                 'full' => true,
-                'horizAdj'=> -20,
-                'vertAdj'=> -20,
-            ),
-            array(
+                'horizAdj' => -20,
+                'vertAdj' => -20,
+            ],
+            [
                 'name' => '.editableColumn',
                 'text' => 'LBL_TOUR_FORECASTS_INLINEEDIT',
                 'full' => true,
-            ),
-            array(
+            ],
+            [
                 'name' => '.dashlets .forecast-details',
                 'text' => 'LBL_TOUR_FORECASTS_PROGRESS',
                 'full' => true,
-                'horizAdj'=> -1,
-                'vertAdj'=> -5,
-            ),
-            array(
+                'horizAdj' => -1,
+                'vertAdj' => -5,
+            ],
+            [
                 'name' => '.dashlets .forecasts-chart-wrapper',
                 'text' => 'LBL_TOUR_FORECASTS_CHART',
                 'full' => true,
-                'horizAdj'=> -1,
-                'vertAdj'=> -5,
-            ),
-        )
-    ),
-);
+                'horizAdj' => -1,
+                'vertAdj' => -5,
+            ],
+        ],
+    ],
+];

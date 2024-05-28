@@ -19,9 +19,9 @@
 class RecipientsCollection
 {
     // constants used for documenting which Add methods are valid
-    public const FunctionAddTo  = "addTo";
-    public const FunctionAddCc  = "addCc";
-    public const FunctionAddBcc = "addBcc";
+    public const FunctionAddTo = 'addTo';
+    public const FunctionAddCc = 'addCc';
+    public const FunctionAddBcc = 'addBcc';
 
     // private members
     private $to;
@@ -31,7 +31,8 @@ class RecipientsCollection
     /**
      * @access public
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->clearAll(); // set default values
     }
 
@@ -41,7 +42,8 @@ class RecipientsCollection
      *
      * @access public
      */
-    public function __destruct() {
+    public function __destruct()
+    {
         $this->clearAll();
     }
 
@@ -50,7 +52,8 @@ class RecipientsCollection
      *
      * @access public
      */
-    public function clearAll() {
+    public function clearAll()
+    {
         $this->clearTo();
         $this->clearCc();
         $this->clearBcc();
@@ -61,8 +64,9 @@ class RecipientsCollection
      *
      * @access public
      */
-    public function clearTo() {
-        $this->to = array();
+    public function clearTo()
+    {
+        $this->to = [];
     }
 
     /**
@@ -70,8 +74,9 @@ class RecipientsCollection
      *
      * @access public
      */
-    public function clearCc() {
-        $this->cc = array();
+    public function clearCc()
+    {
+        $this->cc = [];
     }
 
     /**
@@ -79,20 +84,22 @@ class RecipientsCollection
      *
      * @access public
      */
-    public function clearBcc() {
-        $this->bcc = array();
+    public function clearBcc()
+    {
+        $this->bcc = [];
     }
 
     /**
      * Add recipients to the specified list in the $function parameter.
      *
      * @access public
-     * @param array  $recipients Array of EmailIdentity objects.
-     * @param string $function   The name of the RecipientsCollection method to use for adding recipients.
+     * @param array $recipients Array of EmailIdentity objects.
+     * @param string $function The name of the RecipientsCollection method to use for adding recipients.
      * @throws MailerException
      * @todo probably should report success/overwrite for each recipient added
      */
-    public function addRecipients($recipients = array(), $function = RecipientsCollection::FunctionAddTo) {
+    public function addRecipients($recipients = [], $function = RecipientsCollection::FunctionAddTo)
+    {
         // validate the function to use for adding the recipients
         if (!method_exists($this, $function)) {
             throw new MailerException("Cannot add recipients using {$function}", MailerException::ResourceNotFound);
@@ -115,7 +122,8 @@ class RecipientsCollection
      * @param EmailIdentity $recipient required
      * @todo consider reporting success/overwrite; there's really no failure
      */
-    public function addTo(EmailIdentity $recipient) {
+    public function addTo(EmailIdentity $recipient)
+    {
         $this->to[$recipient->getEmail()] = $recipient;
     }
 
@@ -128,7 +136,8 @@ class RecipientsCollection
      * @param EmailIdentity $recipient required
      * @todo consider reporting success/overwrite; there's really no failure
      */
-    public function addCc(EmailIdentity $recipient) {
+    public function addCc(EmailIdentity $recipient)
+    {
         $this->cc[$recipient->getEmail()] = $recipient;
     }
 
@@ -141,7 +150,8 @@ class RecipientsCollection
      * @param EmailIdentity $recipient required
      * @todo consider reporting success/overwrite; there's really no failure
      */
-    public function addBcc(EmailIdentity $recipient) {
+    public function addBcc(EmailIdentity $recipient)
+    {
         $this->bcc[$recipient->getEmail()] = $recipient;
     }
 
@@ -151,12 +161,13 @@ class RecipientsCollection
      * @access public
      * @return array An array of EmailIdentity objects grouped by list.
      */
-    public function getAll() {
-        return array(
-            'to'  => $this->getTo(),
-            'cc'  => $this->getCc(),
+    public function getAll()
+    {
+        return [
+            'to' => $this->getTo(),
+            'cc' => $this->getCc(),
             'bcc' => $this->getBcc(),
-        );
+        ];
     }
 
     /**
@@ -165,7 +176,8 @@ class RecipientsCollection
      * @access public
      * @return array An array of EmailIdentity objects.
      */
-    public function getTo() {
+    public function getTo()
+    {
         return $this->to;
     }
 
@@ -175,7 +187,8 @@ class RecipientsCollection
      * @access public
      * @return array An array of EmailIdentity objects.
      */
-    public function getCc() {
+    public function getCc()
+    {
         return $this->cc;
     }
 
@@ -185,7 +198,8 @@ class RecipientsCollection
      * @access public
      * @return array An array of EmailIdentity objects.
      */
-    public function getBcc() {
+    public function getBcc()
+    {
         return $this->bcc;
     }
 
@@ -197,9 +211,10 @@ class RecipientsCollection
      * @param EmailIdentity|array $recipients Should be a single EmailIdentity or an array of EmailIdentity objects.
      * @return array An array of EmailIdentity objects.
      */
-    private function castRecipientsAsArray($recipients) {
+    private function castRecipientsAsArray($recipients)
+    {
         if (!is_array($recipients)) {
-            $recipients = array($recipients);
+            $recipients = [$recipients];
         }
 
         return $recipients;

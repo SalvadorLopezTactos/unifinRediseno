@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => '獲取信封',
     'LBL_CLOUD_SERVICE_TYPE' => '雲服務類型',
     'LBL_CLOUD_PATH' => '雲路',
+    'LBL_CLOUD_DRIVE_ID' => '硬碟 ID',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign 信封列表儀表板',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'DocuSign 信封記錄儀表板',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => '最近使用的 DocuSign 信封',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign 信封焦點抽屜',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'DocuSign 信封時間軸',
 
     'LBL_NEW_ENVELOPE' => '新信封',
     'LBL_DOCUMENT_IS_NOW' => ' 是現在 ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => '傳送',
     'LBL_BUTTON_CLEAR' => '清除',
     'LBL_BUTTON_SELECT_TEMPLATE' => '使用模板',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => '與範本一起傳送',
     'LBL_PLEASE_LOG_IN' => '請先登錄 DocuSign！',
     'LBL_DOWNLOAD_NOT_ALLOWED' => '您無法下載此文檔。它已由其他用戶創建！',
     'LBL_SEND_NOT_ALLOWED' => '您無法寄出此信封。它已由其他用戶創建！',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => '草稿已更改。是否將狀態更新為當前狀態 ({{status}})？',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'DocuSign 信封已更新!',
     'LBL_DRAFT_CHANGED_ERROR' => 'DocuSign 信封狀態未更新。查看日誌了解詳細信息！',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => '無法套用 DocuSign 範本',
     'LBL_ENVELOPE_NOT_SENT' => '信封未發送！',
     'LBL_ENVELOPE_SENT' => '信封已再次發送！',
     'LBL_DOCUMENT_ADDED' => '文檔已添加到記錄中！',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => '角色',
     'LBL_SELECT_BUTTON_LABEL' => '選擇',
     'LBL_BACK_BUTTON_LABEL' => '返回',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => '以範本名稱搜尋',
+    'LBL_ENVELOPE_NAME' => '信封名稱',
+    'LBL_ENVELOPE_NAME_EMPTY' => '信封名稱不能為空白',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => '未能找到潛在的收件人！',
     'LBL_FAILED_FETCH_TEMPLATES' => '未能獲取模板！',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => '請為每個收件者選擇一個角色',
+    
+    'LBL_DOWNLOAD' => '下載',
+    'LBL_OPEN_DRAFT' => '開啟草稿',
+    'LBL_DOCUSING_NO_ATTACHMENT' => '無法傳送沒有檔案的文件到 DocuSign。',
+    'LBL_START_SIGN_PROMPT' => '按一下加號按鈕以開始簽名程序',
+    'LBL_NO_DOC_SELECTED' => '請先選擇文件',
+    'LBL_SELECT_RECIPIENTS' => '選擇簽名者收件人',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => '排除',
+    'LBL_DOCUSIGN_MISSING_APP' => '您需要安裝 DocuSign 應用程式以獲得更佳的體驗。',
 ];

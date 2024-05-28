@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'לוח מחוונים של רשימת הערות',
     'LBL_NOTES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות הערות',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס פתקים',
     'LBL_EXTERNAL_USER' => 'משתמש חיצוני',
     'LBL_EXTERNAL_USER_NAME' => 'משתמש חיצוני',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן של הערות',
 
     'LBL_RELATED_CONTACT' => 'איש קשר קשור',
     'ERR_DELETE_RECORD' => 'You must specify a record number to delete the account.',
@@ -126,4 +127,4 @@ $mod_strings = array(
  - יש להשלים את השדות המסומנים כ"נדרשים" לפני השמירה.
  - לחץ על "הצג עוד" כדי להציג שדות אחרים לפי הצורך.
 2. לחץ על "שמור" כדי להשלים את הרישום החדש ולחזור לדף הקודם.',
-);
+];

@@ -49,7 +49,7 @@ class CasesHooks
             if (($primaryField['required'] ?? false) == true &&
                 !$bean->deleted &&
                 $bean->primary_contact_id == ($args['related_id'] ?? '')) {
-                throw new Exception("Attempted to remove a contact related to the required primary");
+                throw new Exception('Attempted to remove a contact related to the required primary');
             }
         }
     }

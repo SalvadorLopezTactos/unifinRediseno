@@ -14,7 +14,7 @@
  * @extends View.Views.Base.View
  */
 ({
-    className: 'report-filters-panel',
+    className: 'report-filters-panel contents h-full',
     plugins: ['ReportsPanel'],
     events: {
         'click [data-action="apply-runtime-filters"]': 'applyRuntimeFilters',
@@ -30,6 +30,7 @@
 
         this.dataType = 'filters';
         this.RECORD_NOT_FOUND_ERROR_CODE = 404;
+        this.SERVER_ERROR_CODES = [500, 502, 503, 504];
     },
 
     /**
@@ -40,6 +41,7 @@
         this.listenTo(this.context, 'runtime:filter:broken', this.disableApplyRuntimeFiltersButtons, this);
         this.listenTo(this.context, 'reset:to:default:filters', this.resetToDefaultFilters, this);
         this.listenTo(this.context, 'copy:filters:to:clipboard', this.copyFiltersToClipboard, this);
+        this.listenTo(this.context, 'dashboard-filters-meta-ready', this.integrateDashboardFilters);
     },
 
     /**
@@ -92,6 +94,24 @@
         this.context.trigger('runtime:filters:updated', this._runtimeFiltersDef);
 
         this.$('button[data-action="apply-runtime-filters"]').prop('disabled', true);
+    },
+
+    /**
+     * Deactivate filters that are already a part of a dashboard filter
+     *
+     * @param {Array} filtersAffected
+     */
+    integrateDashboardFilters: function(filtersAffected) {
+        _.each(this._runtimeFilters, (runtimeController) => {
+            runtimeController.enableRuntimeFilter();
+
+            _.each(filtersAffected, (affectedFilter) => {
+                if (runtimeController._filterData.name === affectedFilter.fieldName &&
+                    runtimeController._filterData.table_key === affectedFilter.tableKey) {
+                    runtimeController.disableRuntimeFilter();
+                }
+            });
+        });
     },
 
     /**
@@ -159,7 +179,7 @@
      */
     applyRuntimeFilters: function() {
         if (this._canApplyFilters()) {
-            this.$('[data-action="apply-runtime-filters"]').attr('disabled', true);
+            this.$('.apply-filters-btn').addClass('disabled').attr('disabled', true);
             this._reportData.set('filtersDef', app.utils.deepCopy(this._runtimeFiltersDef));
             this._updateFilters();
         } else {
@@ -179,7 +199,7 @@
      * @param {Object} data
      */
     runtimeFilterChanged: function(data) {
-        this.$('[data-action="apply-runtime-filters"]').removeAttr('disabled');
+        this.$('.apply-filters-btn').removeClass('disabled').removeAttr('disabled');
         this._updateFilterDefinition(this._runtimeFiltersDef, data);
     },
 
@@ -187,7 +207,7 @@
      * Disable button
      */
     disableApplyRuntimeFiltersButtons: function() {
-        this.$('[data-action="apply-runtime-filters"]').attr('disabled', true);
+        this.$('.apply-filters-btn').addClass('disabled').attr('disabled', true);
     },
 
     /**
@@ -237,6 +257,10 @@
      * @param {Error} error
      */
     _failedLoadReportData: function(error) {
+        if (this.disposed) {
+            return;
+        }
+
         this._showEmptyFilters(true, true);
 
         this.context.trigger('report:data:filters:loaded', false, this.dataType);
@@ -247,6 +271,22 @@
             reportModel = this.layout.model;
         }
 
+        let showErrorAlert = error && _.isString(error.message);
+
+        // don't show no access alert for dashlet
+        if (error && reportModel.get('filter') && _.has(error, 'status') &&
+            error.status === this.RECORD_NOT_FOUND_ERROR_CODE) {
+            showErrorAlert = false;
+        }
+
+        if (showErrorAlert) {
+            app.alert.show('failed_to_load_report', {
+                level: 'error',
+                messages: error.message,
+                autoClose: true,
+            });
+        }
+
         // don't show alert for dashlets
         if (!reportModel.get('filter')) {
             const message = app.utils.tryParseJSONObject(error.responseText);
@@ -255,6 +295,10 @@
 
             if (_.isEmpty(errorMessage) || error.status === this.RECORD_NOT_FOUND_ERROR_CODE) {
                 errorMessage = app.lang.get('LBL_NO_ACCESS', 'Reports');
+            }
+
+            if (this.SERVER_ERROR_CODES.includes(error.status)) {
+                errorMessage = app.lang.get('LBL_SERVER_ERROR', 'Reports');
             }
 
             app.alert.show('report-data-error', {
@@ -330,6 +374,8 @@
         if (this.context.get('previewMode')) {
             this.$('.report-filters-container :input').attr('disabled', true);
         }
+
+        this.context.trigger('filters-loaded-successfully');
 
         if (callback) {
             callback();

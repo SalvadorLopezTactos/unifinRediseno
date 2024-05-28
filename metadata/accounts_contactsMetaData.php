@@ -9,57 +9,57 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['accounts_contacts'] = array (
+$dictionary['accounts_contacts'] = [
     'table' => 'accounts_contacts',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'contact_id' => array(
+        ],
+        'contact_id' => [
             'name' => 'contact_id',
             'type' => 'id',
-        ),
-        'account_id' => array(
+        ],
+        'account_id' => [
             'name' => 'account_id',
             'type' => 'id',
-        ),
-        'date_modified' => array (
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'primary_account' => array(
+        ],
+        'primary_account' => [
             'name' => 'primary_account',
             'type' => 'bool',
             'default' => '0',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'required' => false,
             'default' => '0',
-        ),
-    ),
-    'indices' => array (
-        array(
-            'name' =>'accounts_contactspk',
-            'type' =>'primary',
-            'fields'=>array('id'),
-        ),
-        array(
+        ],
+    ],
+    'indices' => [
+        [
+            'name' => 'accounts_contactspk',
+            'type' => 'primary',
+            'fields' => ['id'],
+        ],
+        [
             'name' => 'idx_account_contact',
-            'type'=>'alternate_key',
-            'fields'=>array('account_id','contact_id'),
-        ),
-        array(
+            'type' => 'alternate_key',
+            'fields' => ['account_id', 'contact_id'],
+        ],
+        [
             'name' => 'idx_contid_del_accid',
             'type' => 'index',
-            'fields'=> array('contact_id', 'deleted', 'account_id'),
-        ),
-    ),
-    'relationships' => array (
-        'accounts_contacts' => array(
+            'fields' => ['contact_id', 'deleted', 'account_id'],
+        ],
+    ],
+    'relationships' => [
+        'accounts_contacts' => [
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',
             'lhs_key' => 'id',
@@ -73,6 +73,6 @@ $dictionary['accounts_contacts'] = array (
             'primary_flag_column' => 'primary_account',
             'primary_flag_side' => 'rhs',
             'primary_flag_default' => true,
-        ),
-    ),
-);
+        ],
+    ],
+];

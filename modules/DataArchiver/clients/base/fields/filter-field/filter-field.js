@@ -79,6 +79,14 @@
         'datetimecombo': 'date'
     },
 
+    /* Operators that use a text field (instead of datetime/date/...) to enter the amount of days */
+    amountDaysOperators: [
+        '$more_x_days_ago',
+        '$last_x_days',
+        '$next_x_days',
+        '$more_x_days_ahead',
+    ],
+
     /**
      * Stores the name of the module this filter refers to
      */
@@ -217,9 +225,16 @@
      */
     setupRows: function() {
         var filterDef = this.model.get('filter_def');
+
         if (filterDef) {
             filterDef = JSON.parse(filterDef);
+            // If the filter definition is empty array then set it to undefined
+            if (_.isArray(filterDef) && _.isEmpty(filterDef)) {
+                this.model.set('filter_def', undefined);
+                filterDef = undefined;
+            }
         }
+
         this.populateFilter(filterDef);
 
         // If the filter definition is empty, add a fresh row
@@ -556,7 +571,7 @@
                 break;
             case 'datetimecombo':
             case 'date':
-                fieldDef.type = 'date';
+                fieldDef.type = _.includes(this.amountDaysOperators, operation) ? 'text' : 'date';
                 //Flag to indicate the value needs to be formatted correctly
                 data.isDate = true;
                 if (operation.charAt(0) !== '$') {
@@ -926,7 +941,8 @@
             }
         }, this);
 
-        return JSON.stringify(filter);
+        // If the filter definition is empty array then set it to undefined
+        return _.isEmpty(filter) ? undefined : JSON.stringify(filter);
     },
 
     /**

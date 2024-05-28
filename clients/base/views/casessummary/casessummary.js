@@ -15,7 +15,7 @@
  */
 ({
     events: {
-        'shown.bs.tab a[data-toggle="tab"]': 'resize',
+        'shown.bs.tab li[data-bs-toggle="tab"]': 'resize',
     },
 
     plugins: ['Dashlet', 'Chart'],

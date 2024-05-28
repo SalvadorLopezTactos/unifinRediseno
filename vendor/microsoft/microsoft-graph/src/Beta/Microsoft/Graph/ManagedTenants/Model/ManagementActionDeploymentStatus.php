@@ -25,6 +25,7 @@ class ManagementActionDeploymentStatus extends \Beta\Microsoft\Graph\Model\Entit
 {
     /**
     * Gets the managementActionId
+    * The identifier for the management action. Required. Read-only.
     *
     * @return string|null The managementActionId
     */
@@ -39,6 +40,7 @@ class ManagementActionDeploymentStatus extends \Beta\Microsoft\Graph\Model\Entit
 
     /**
     * Sets the managementActionId
+    * The identifier for the management action. Required. Read-only.
     *
     * @param string $val The value of the managementActionId
     *
@@ -51,6 +53,7 @@ class ManagementActionDeploymentStatus extends \Beta\Microsoft\Graph\Model\Entit
     }
     /**
     * Gets the managementTemplateId
+    * The management template identifier that was used to generate the management action. Required. Read-only.
     *
     * @return string|null The managementTemplateId
     */
@@ -65,6 +68,7 @@ class ManagementActionDeploymentStatus extends \Beta\Microsoft\Graph\Model\Entit
 
     /**
     * Sets the managementTemplateId
+    * The management template identifier that was used to generate the management action. Required. Read-only.
     *
     * @param string $val The value of the managementTemplateId
     *
@@ -75,9 +79,36 @@ class ManagementActionDeploymentStatus extends \Beta\Microsoft\Graph\Model\Entit
         $this->_propDict["managementTemplateId"] = $val;
         return $this;
     }
+    /**
+    * Gets the managementTemplateVersion
+    *
+    * @return int|null The managementTemplateVersion
+    */
+    public function getManagementTemplateVersion()
+    {
+        if (array_key_exists("managementTemplateVersion", $this->_propDict)) {
+            return $this->_propDict["managementTemplateVersion"];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+    * Sets the managementTemplateVersion
+    *
+    * @param int $val The value of the managementTemplateVersion
+    *
+    * @return ManagementActionDeploymentStatus
+    */
+    public function setManagementTemplateVersion($val)
+    {
+        $this->_propDict["managementTemplateVersion"] = $val;
+        return $this;
+    }
 
     /**
     * Gets the status
+    * The status of the management action. Possible values are: toAddress, completed, error, timeOut, inProgress, planned, resolvedBy3rdParty, resolvedThroughAlternateMitigation, riskAccepted, unknownFutureValue. Required.
     *
     * @return ManagementActionStatus|null The status
     */
@@ -96,6 +127,7 @@ class ManagementActionDeploymentStatus extends \Beta\Microsoft\Graph\Model\Entit
 
     /**
     * Sets the status
+    * The status of the management action. Possible values are: toAddress, completed, error, timeOut, inProgress, planned, resolvedBy3rdParty, resolvedThroughAlternateMitigation, riskAccepted, unknownFutureValue. Required.
     *
     * @param ManagementActionStatus $val The value to assign to the status
     *
@@ -109,6 +141,7 @@ class ManagementActionDeploymentStatus extends \Beta\Microsoft\Graph\Model\Entit
 
     /**
     * Gets the workloadActionDeploymentStatuses
+    * The collection of workload action deployment statues for the given management action. Optional.
     *
     * @return WorkloadActionDeploymentStatus|null The workloadActionDeploymentStatuses
     */
@@ -127,6 +160,7 @@ class ManagementActionDeploymentStatus extends \Beta\Microsoft\Graph\Model\Entit
 
     /**
     * Sets the workloadActionDeploymentStatuses
+    * The collection of workload action deployment statues for the given management action. Optional.
     *
     * @param WorkloadActionDeploymentStatus $val The value to assign to the workloadActionDeploymentStatuses
     *

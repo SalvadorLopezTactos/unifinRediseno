@@ -10,20 +10,20 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['layout']['subpanel']  = array (
+$viewdefs['base']['layout']['subpanel'] = [
     'template' => 'panel',
-    'components' => array (
-        array (
+    'components' => [
+        [
             'view' => 'panel-top',
-        ),
-        array (
+        ],
+        [
             'view' => 'subpanel-list',
-        ),
-        array (
+        ],
+        [
             'view' => 'list-pagination',
-        ),
-    ),
-    'last_state' => array(
-        'id' => 'subpanel'
-    ),
-);
+        ],
+    ],
+    'last_state' => [
+        'id' => 'subpanel',
+    ],
+];

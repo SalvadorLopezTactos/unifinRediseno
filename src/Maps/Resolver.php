@@ -62,7 +62,20 @@ class Resolver implements RunnableSchedulerJob
         }
 
         $data = $this->gcsClient->getData();
+
         $message = '';
+
+        if (is_array($data) && array_key_exists('response', $data)
+            && array_key_exists('status', $data['response']) && array_key_exists('batchId', $data)
+            && $data['response']['status'] === Constants::GEOCODE_SCHEDULER_STATUS_NOT_FOUND) {
+            // re-queue the request.
+
+            $this->gcsClient->requeueBatch($data['batchId']);
+
+            $message = "The batch with ID {$batchId} has been sent to the server for re-creation";
+
+            return $this->job->succeedJob($message);
+        }
 
         if (array_key_exists('batchId', $data)) {
             $batchId = $data['batchId'];

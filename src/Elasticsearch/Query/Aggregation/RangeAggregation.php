@@ -22,18 +22,18 @@ class RangeAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    protected $acceptedOptions = array(
+    protected $acceptedOptions = [
         'field',
         'ranges',
-    );
+    ];
 
     /**
      * Acceptable range filter options
      */
-    protected $acceptedRangeOptions = array(
+    protected $acceptedRangeOptions = [
         'from',
         'to',
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -66,7 +66,6 @@ class RangeAggregation extends AbstractAggregation
 
         $filter = new \Elastica\Query\BoolQuery();
         foreach ($filterDefs as $rangeId) {
-
             if (!isset($this->options['ranges'])) {
                 continue;
             }
@@ -98,7 +97,7 @@ class RangeAggregation extends AbstractAggregation
             $buckets = $results['buckets'];
         }
 
-        $parsed = array();
+        $parsed = [];
         foreach ($buckets as $bucket) {
             $parsed[$bucket['key']] = $bucket['doc_count'];
         }

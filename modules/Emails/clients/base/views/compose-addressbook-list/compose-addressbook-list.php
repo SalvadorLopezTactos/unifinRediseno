@@ -9,25 +9,25 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Emails']['base']['view']['compose-addressbook-list'] = array(
+$viewdefs['Emails']['base']['view']['compose-addressbook-list'] = [
     'template' => 'flex-list',
-    'selection' => array(
+    'selection' => [
         'type' => 'multi',
-        'actions' => array(),
+        'actions' => [],
         'disable_select_all_alert' => true,
-    ),
-    'panels' => array(
-        array(
-            'fields' => array(
-                array(
+    ],
+    'panels' => [
+        [
+            'fields' => [
+                [
                     'name' => 'name',
                     'type' => 'fullname',
                     'label' => 'LBL_LIST_NAME',
                     'enabled' => true,
                     'default' => true,
                     'link' => false,
-                ),
-                array(
+                ],
+                [
                     'name' => 'email',
                     'label' => 'LBL_LIST_EMAIL',
                     'type' => 'email',
@@ -35,8 +35,8 @@ $viewdefs['Emails']['base']['view']['compose-addressbook-list'] = array(
                     'enabled' => true,
                     'default' => true,
                     'emailLink' => false,
-                ),
-                array(
+                ],
+                [
                     'name' => '_module',
                     'label' => 'LBL_MODULE',
                     'type' => 'module',
@@ -44,20 +44,20 @@ $viewdefs['Emails']['base']['view']['compose-addressbook-list'] = array(
                     'enabled' => true,
                     'default' => true,
                     'link' => false,
-                ),
-            ),
-        ),
-    ),
-    'rowactions' => array(
-        'actions' => array(
-            array(
+                ],
+            ],
+        ],
+    ],
+    'rowactions' => [
+        'actions' => [
+            [
                 'type' => 'preview-button',
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
                 'icon' => 'sicon-preview',
                 'acl_action' => 'view',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

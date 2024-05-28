@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '데이터 아카이버',
     'LBL_MODULE_NAME' => '데이터 아카이버',
     'LBL_FILTER_DEF_FIELD' => '필터',
@@ -28,7 +27,7 @@ $mod_strings = array (
     'LBL_MANAGE_ARCHIVE_JOB_LIST_TITLE' => '예약된 아카이브',
     'LBL_MANAGE_ARCHIVE_JOB_IS_NOT_SCHEDULED' => '예약된 아카이브 없음',
     'LBL_ARCHIVE_FILTER' => '필터 설정',
-    "LBL_MANAGE_ARCHIVE_SETUP" => '데이터 아카이브 설정',
+    'LBL_MANAGE_ARCHIVE_SETUP' => '데이터 아카이브 설정',
     'LBL_LIST_ARCHIVE_NAME' => '아카이브 이름',
     'LBL_PERFORM_NOW_BTN' => '지금 수행',
     'LBL_ARCHIVE_SUCCESS_TITLE' => '성공',
@@ -45,4 +44,4 @@ $mod_strings = array (
         . '시스템 성능에 영향을 미칠 수 있습니다. 지금 작업을 실행하시겠습니까?',
 
     'TPL_PMSE_INBOX_ERROR_MESSAGE' => '{{moduleName}} 모듈에 대한 아카이버는 필터로 {{fieldName}} 설정이 필요합니다',
-);
+];

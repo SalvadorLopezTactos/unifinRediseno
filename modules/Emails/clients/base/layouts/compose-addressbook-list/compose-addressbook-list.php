@@ -11,14 +11,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Emails']['base']['layout']['compose-addressbook-list'] = array(
-    'components' => array(
-        array(
+$viewdefs['Emails']['base']['layout']['compose-addressbook-list'] = [
+    'components' => [
+        [
             'view' => 'compose-addressbook-list',
-        ),
-        array(
+        ],
+        [
             'view' => 'compose-addressbook-list-bottom',
-        ),
-    ),
-);
-
+        ],
+    ],
+];

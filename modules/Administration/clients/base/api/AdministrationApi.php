@@ -30,159 +30,159 @@ class AdministrationApi extends SugarApi
      */
     public function registerApiRest()
     {
-        return array(
+        return [
 
             //// Search administration ////
 
-            'searchReindex' => array(
-                'reqType' => array('POST'),
-                'path' => array('Administration', 'search', 'reindex'),
-                'pathVars' => array(''),
+            'searchReindex' => [
+                'reqType' => ['POST'],
+                'path' => ['Administration', 'search', 'reindex'],
+                'pathVars' => [''],
                 'method' => 'searchReindex',
                 'shortHelp' => 'Perform a reindex',
                 'longHelp' => 'include/api/help/administration_search_reindex_post_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionSearchUnavailable',
-                ),
-            ),
-            'searchStatus' => array(
-                'reqType' => array('GET'),
-                'path' => array('Administration', 'search', 'status'),
-                'pathVars' => array(''),
+                ],
+            ],
+            'searchStatus' => [
+                'reqType' => ['GET'],
+                'path' => ['Administration', 'search', 'status'],
+                'pathVars' => [''],
                 'method' => 'searchStatus',
                 'shortHelp' => 'Search status',
                 'longHelp' => 'include/api/help/administration_search_status_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotAuthorized',
-                ),
-            ),
-            'searchFields' => array(
-                'reqType' => array('GET'),
-                'path' => array('Administration', 'search', 'fields'),
-                'pathVars' => array(''),
+                ],
+            ],
+            'searchFields' => [
+                'reqType' => ['GET'],
+                'path' => ['Administration', 'search', 'fields'],
+                'pathVars' => [''],
                 'method' => 'searchFields',
                 'shortHelp' => 'List search field configuration',
                 'longHelp' => 'include/api/help/administration_search_fields_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotAuthorized',
-                ),
-            ),
+                ],
+            ],
 
             //// Elasticsearch administration ////
 
-            'elasticSearchQueue' => array(
-                'reqType' => array('GET'),
-                'path' => array('Administration', 'elasticsearch', 'queue'),
-                'pathVars' => array(''),
+            'elasticSearchQueue' => [
+                'reqType' => ['GET'],
+                'path' => ['Administration', 'elasticsearch', 'queue'],
+                'pathVars' => [''],
                 'method' => 'elasticSearchQueue',
                 'shortHelp' => 'Elasticsearch queue statistics',
                 'longHelp' => 'include/api/help/administration_elasticsearch_queue_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionSearchUnavailable',
-                ),
-            ),
-            'elasticSearchRouting' => array(
-                'reqType' => array('GET'),
-                'path' => array('Administration', 'elasticsearch', 'routing'),
-                'pathVars' => array(''),
+                ],
+            ],
+            'elasticSearchRouting' => [
+                'reqType' => ['GET'],
+                'path' => ['Administration', 'elasticsearch', 'routing'],
+                'pathVars' => [''],
                 'method' => 'elasticSearchRouting',
                 'shortHelp' => 'Elasticsearch index routing',
                 'longHelp' => 'include/api/help/administration_elasticsearch_routing_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionSearchUnavailable',
-                ),
-            ),
-            'elasticSearchIndices' => array(
-                'reqType' => array('GET'),
-                'path' => array('Administration', 'elasticsearch', 'indices'),
-                'pathVars' => array(''),
+                ],
+            ],
+            'elasticSearchIndices' => [
+                'reqType' => ['GET'],
+                'path' => ['Administration', 'elasticsearch', 'indices'],
+                'pathVars' => [''],
                 'method' => 'elasticSearchIndices',
                 'shortHelp' => 'Elasticsearch index statistics',
                 'longHelp' => 'include/api/help/administration_elasticsearch_indices_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionSearchUnavailable',
-                ),
-            ),
-            'elasticSearchMapping' => array(
-                'reqType' => array('GET'),
-                'path' => array('Administration', 'elasticsearch', 'mapping'),
-                'pathVars' => array(''),
+                ],
+            ],
+            'elasticSearchMapping' => [
+                'reqType' => ['GET'],
+                'path' => ['Administration', 'elasticsearch', 'mapping'],
+                'pathVars' => [''],
                 'method' => 'elasticSearchMapping',
                 'shortHelp' => 'Elasticsearch index mappings',
                 'longHelp' => 'include/api/help/administration_elasticsearch_mapping_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionSearchUnavailable',
-                ),
-            ),
+                ],
+            ],
 
             // Refresh API's
-            'elasticSearchRefreshStatus' => array(
-                'reqType' => array('GET'),
-                'path' => array('Administration', 'elasticsearch', 'refresh', 'status'),
-                'pathVars' => array(''),
+            'elasticSearchRefreshStatus' => [
+                'reqType' => ['GET'],
+                'path' => ['Administration', 'elasticsearch', 'refresh', 'status'],
+                'pathVars' => [''],
                 'method' => 'elasticSearchRefreshStatus',
                 'shortHelp' => 'Elasticsearch index refresh status',
                 'longHelp' => 'include/api/help/administration_elasticsearch_refresh_status_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionSearchUnavailable',
-                ),
-            ),
-            'elasticSearchRefreshTrigger' => array(
-                'reqType' => array('POST'),
-                'path' => array('Administration', 'elasticsearch', 'refresh', 'trigger'),
-                'pathVars' => array(''),
+                ],
+            ],
+            'elasticSearchRefreshTrigger' => [
+                'reqType' => ['POST'],
+                'path' => ['Administration', 'elasticsearch', 'refresh', 'trigger'],
+                'pathVars' => [''],
                 'method' => 'elasticSearchRefreshTrigger',
                 'shortHelp' => 'Elasticsearch trigger an index refresh',
                 'longHelp' => 'include/api/help/administration_elasticsearch_refresh_trigger_post_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionSearchUnavailable',
-                ),
-            ),
-            'elasticSearchRefreshEnable' => array(
-                'reqType' => array('POST'),
-                'path' => array('Administration', 'elasticsearch', 'refresh', 'enable'),
-                'pathVars' => array(''),
+                ],
+            ],
+            'elasticSearchRefreshEnable' => [
+                'reqType' => ['POST'],
+                'path' => ['Administration', 'elasticsearch', 'refresh', 'enable'],
+                'pathVars' => [''],
                 'method' => 'elasticSearchRefreshEnable',
                 'shortHelp' => 'Elasticsearch enable index refresh',
                 'longHelp' => 'include/api/help/administration_elasticsearch_refresh_enable_post_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionSearchUnavailable',
-                ),
-            ),
+                ],
+            ],
 
             // Replica API's
-            'elasticSearchReplicasStatus' => array(
-                'reqType' => array('GET'),
-                'path' => array('Administration', 'elasticsearch', 'replicas', 'status'),
-                'pathVars' => array(''),
+            'elasticSearchReplicasStatus' => [
+                'reqType' => ['GET'],
+                'path' => ['Administration', 'elasticsearch', 'replicas', 'status'],
+                'pathVars' => [''],
                 'method' => 'elasticSearchReplicasStatus',
                 'shortHelp' => 'Elasticsearch index replica status',
                 'longHelp' => 'include/api/help/administration_elasticsearch_replicas_status_get_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionSearchUnavailable',
-                ),
-            ),
-            'elasticSearchReplicasEnable' => array(
-                'reqType' => array('POST'),
-                'path' => array('Administration', 'elasticsearch', 'replicas', 'enable'),
-                'pathVars' => array(''),
+                ],
+            ],
+            'elasticSearchReplicasEnable' => [
+                'reqType' => ['POST'],
+                'path' => ['Administration', 'elasticsearch', 'replicas', 'enable'],
+                'pathVars' => [''],
                 'method' => 'elasticSearchReplicasEnable',
                 'shortHelp' => 'Elasticsearch enable index replicas',
                 'longHelp' => 'include/api/help/administration_elasticsearch_replicas_enable_post_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionSearchUnavailable',
-                ),
-            ),
+                ],
+            ],
 
             // Enable migration mode for Idm
             'enableIdmMigration' => [
@@ -305,11 +305,11 @@ class AdministrationApi extends SugarApi
             ],
             'retrieve' => [
                 'reqType' => 'GET',
-                'path' => ['Administration','?'],
-                'pathVars' => ['module','record'],
+                'path' => ['Administration', '?'],
+                'pathVars' => ['module', 'record'],
                 'method' => 'retrieveRecord',
             ],
-        );
+        ];
     }
 
     /**
@@ -336,12 +336,12 @@ class AdministrationApi extends SugarApi
         $adminWork = new AdminWork();
         $adminWork->startAdminWork();
 
-        $clearData = isset($args['clear_data']) ? (bool) $args['clear_data'] : false;
-        $modules = empty($args['module_list']) ? array() : explode(',', $args['module_list']);
+        $clearData = isset($args['clear_data']) ? (bool)$args['clear_data'] : false;
+        $modules = empty($args['module_list']) ? [] : explode(',', $args['module_list']);
         $engine = $this->getSearchEngine();
         $status = $engine->scheduleIndexing($modules, $clearData);
 
-        return array('success' => $status);
+        return ['success' => $status];
     }
 
     /**
@@ -360,16 +360,16 @@ class AdministrationApi extends SugarApi
 
         // Check if search backend is available
         if (!$engine->isAvailable(true)) {
-            return array('available' => false);
+            return ['available' => false];
         }
 
         $modules = $engine->getMetaDataHelper()->getAllEnabledModules();
         sort($modules);
 
-        $status = array(
+        $status = [
             'available' => true,
             'enabled_modules' => $modules,
-        );
+        ];
 
         return $status;
     }
@@ -385,7 +385,7 @@ class AdministrationApi extends SugarApi
         $this->ensureAdminUser();
         $adminWork = new AdminWork();
         $adminWork->startAdminWork();
-        $modules = empty($args['module_list']) ? array() : explode(',', $args['module_list']);
+        $modules = empty($args['module_list']) ? [] : explode(',', $args['module_list']);
         $list = $this->getSearchFields($modules);
 
         if (isset($args['order_by_boost'])) {
@@ -407,7 +407,7 @@ class AdministrationApi extends SugarApi
 
         // order by boost returning a flat list
         if ($orderByBoost) {
-            $flat = array();
+            $flat = [];
             foreach ($list as $module => $fields) {
                 foreach ($fields as $field => $defs) {
                     $key = $module . '.' . $field;
@@ -433,19 +433,17 @@ class AdministrationApi extends SugarApi
         // use all modules if non given
         $modules = $modules ?: $metaDataHelper->getAllEnabledModules();
 
-        $fields = array();
+        $fields = [];
         foreach ($modules as $module) {
-
-            $fields[$module] = array();
+            $fields[$module] = [];
             foreach ($metaDataHelper->getFtsFields($module) as $defs) {
-
                 $searchable = $metaDataHelper->isFieldSearchable($defs);
 
-                $field = array(
+                $field = [
                     'name' => $defs['name'],
                     'type' => $defs['type'],
                     'searchable' => $searchable,
-                );
+                ];
 
                 // add boost value for searchable fields
                 if ($searchable) {
@@ -475,7 +473,7 @@ class AdministrationApi extends SugarApi
         $adminWork->startAdminWork();
 
         $total = 0;
-        $queued = array();
+        $queued = [];
 
         // get statistics per module
         $queueManager = $this->getSearchEngine(true)->getContainer()->queueManager;
@@ -490,10 +488,10 @@ class AdministrationApi extends SugarApi
             });
         }
 
-        return array(
+        return [
             'total' => $total,
             'queued' => $queued,
-        );
+        ];
     }
 
     /**
@@ -512,21 +510,20 @@ class AdministrationApi extends SugarApi
         $metaDataHelper = $engine->getMetaDataHelper();
         $indexPool = $engine->getContainer()->indexPool;
 
-        $result = array();
+        $result = [];
         foreach ($metaDataHelper->getAllEnabledModules() as $module) {
-
-            $read = array();
-            foreach ($indexPool->getReadIndices(array($module))->getIterator() as $index) {
+            $read = [];
+            foreach ($indexPool->getReadIndices([$module])->getIterator() as $index) {
                 $read[] = $index->getName();
             }
 
-            $result[$module] = array(
+            $result[$module] = [
                 'strategy' => $indexPool->getStrategy($module)->getIdentifier(),
-                'routing' => array(
+                'routing' => [
                     'write_index' => $indexPool->getWriteIndex($module)->getName(),
                     'read_indices' => $read,
-                ),
-            );
+                ],
+            ];
         }
 
         return $result;
@@ -546,7 +543,7 @@ class AdministrationApi extends SugarApi
 
         $engine = $this->getSearchEngine(true);
 
-        $indices = array();
+        $indices = [];
         foreach ($this->getIndices($engine) as $index) {
             $indices[$index->getName()] = $index->getStats()->getData();
         }
@@ -568,7 +565,7 @@ class AdministrationApi extends SugarApi
 
         $engine = $this->getSearchEngine(true);
 
-        $indices = array();
+        $indices = [];
         foreach ($this->getIndices($engine) as $index) {
             $indices[$index->getName()] = $index->getMapping();
         }
@@ -590,8 +587,8 @@ class AdministrationApi extends SugarApi
     /**
      * Get SearchEngine
      * @param boolean $checkElastic Check if backend is Elastic
-     * @throws SugarApiExceptionSearchUnavailable
      * @return Elastic
+     * @throws SugarApiExceptionSearchUnavailable
      */
     protected function getSearchEngine($checkElastic = false)
     {
@@ -644,7 +641,7 @@ class AdministrationApi extends SugarApi
         $adminWork->startAdminWork();
 
         $engine = $this->getSearchEngine(true);
-        $indices = array();
+        $indices = [];
 
         foreach ($this->getIndices($engine) as $index) {
             $indices[$index->getName()] = $index->getSettings()->getRefreshInterval();
@@ -666,7 +663,7 @@ class AdministrationApi extends SugarApi
         $adminWork->startAdminWork();
 
         $engine = $this->getSearchEngine(true);
-        $indices = array();
+        $indices = [];
 
         foreach ($this->getIndices($engine) as $index) {
             $status = $index->refresh();
@@ -705,7 +702,7 @@ class AdministrationApi extends SugarApi
         $adminWork->startAdminWork();
 
         $engine = $this->getSearchEngine(true);
-        $indices = array();
+        $indices = [];
 
         foreach ($this->getIndices($engine) as $index) {
             $indices[$index->getName()] = $index->getSettings()->get('number_of_replicas');
@@ -813,10 +810,10 @@ class AdministrationApi extends SugarApi
     /**
      * Gets AWS configuration details for Serve instances
      *
-     * @deprecated Since 11.2.0. Please use getConfig in ConfigApi instead.
      * @param ServiceBase $api The RestService object
      * @param array $args Arguments passed to the service
      * @return array
+     * @deprecated Since 11.2.0. Please use getConfig in ConfigApi instead.
      */
     public function getAWSConfig(ServiceBase $api, array $args)
     {
@@ -835,10 +832,10 @@ class AdministrationApi extends SugarApi
     /**
      * Saves new AWS configuration details for Serve instances and returns what was saved
      *
-     * @deprecated Since 11.2.0. Please use setConfig in ConfigApi instead.
      * @param ServiceBase $api The RestService object
      * @param array $args Arguments passed to the service
      * @return array
+     * @deprecated Since 11.2.0. Please use setConfig in ConfigApi instead.
      */
     public function setAWSConfig(ServiceBase $api, array $args)
     {
@@ -946,10 +943,10 @@ class AdministrationApi extends SugarApi
     /**
      * Gets CSP configuration settings
      *
-     * @deprecated Since 11.2.0. Please use getConfig in ConfigApi instead.
      * @param ServiceBase $api The RestService object
      * @param array $args Arguments passed to the service
      * @return array
+     * @deprecated Since 11.2.0. Please use getConfig in ConfigApi instead.
      */
     public function getCSPSConfig(ServiceBase $api, array $args): array
     {
@@ -960,7 +957,7 @@ class AdministrationApi extends SugarApi
         $this->ensureAdminUser();
         $admin = BeanFactory::getBean('Administration');
         $settings = $admin->retrieveSettings('csp', true)->settings;
-        $cspSettings['csp_default_src'] = $settings['csp_default_src']?? '';
+        $cspSettings['csp_default_src'] = $settings['csp_default_src'] ?? '';
 
         return array_merge(['csp_default_src' => ''], $cspSettings);
     }
@@ -968,11 +965,11 @@ class AdministrationApi extends SugarApi
     /**
      * Saves new CSP settings configuration and returns what was saved
      *
-     * @deprecated Since 11.2.0. Please use setConfig in ConfigApi instead.
      * @param ServiceBase $api The RestService object
      * @param array $args Arguments passed to the service
      * @return array
      * @throws SugarApiException
+     * @deprecated Since 11.2.0. Please use setConfig in ConfigApi instead.
      */
     public function setCSPConfig(ServiceBase $api, array $args): array
     {
@@ -980,7 +977,7 @@ class AdministrationApi extends SugarApi
         LoggerManager::getLogger()->deprecated($msg);
 
         $this->ensureAdminUser();
-        $prefix =  'csp_';
+        $prefix = 'csp_';
         $directives = [];
         foreach ($args as $key => $value) {
             if (substr($key, 0, 4) === $prefix) {
@@ -1087,6 +1084,7 @@ class AdministrationApi extends SugarApi
         }
         return $message;
     }
+
 
     /**
      * Method to check which modules are currently enabled for Sugar Portal

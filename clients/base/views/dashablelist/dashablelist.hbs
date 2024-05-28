@@ -16,10 +16,10 @@
             <thead>
                 <tr>
                     {{#each fields}}
-                        <th class="{{#isSortable ../../module this}}sorting{{#eq ../../../collection.orderBy.field name}}_{{../../../../orderBy.direction}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if widthClass}} {{widthClass}}{{/if}}"
+                        <th class="relative {{#isSortable ../../module this}}sorting{{#eq ../../../collection.orderBy.field name}}_{{../../../../orderBy.direction}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if widthClass}} {{widthClass}}{{/if}}"
                         {{#if styles}} style="{{styles}}"{{/if}}
                         {{#if name}} data-fieldname="{{name}}"{{/if}} data-orderby="{{orderBy}}">
-                          <div class="sortable-row-header-container">
+                          <div class="sortable-row-header-container p-2">
                             <span>
                                  {{#if icon}}
                                      <i class="{{buildIcon icon.type}}" rel="tooltip"  title="{{str icon.tooltip ../../../module}} "></i>

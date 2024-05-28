@@ -10,9 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:
  ********************************************************************************/
 
-include ("modules/Releases/index.php");
-?>
+include 'modules/Releases/index.php';

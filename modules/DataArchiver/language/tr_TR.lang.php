@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Veri Arşivleyici',
     'LBL_MODULE_NAME' => 'Veri Arşivleyici',
     'LBL_FILTER_DEF_FIELD' => 'Filtre',
@@ -28,7 +27,7 @@ $mod_strings = array (
     'LBL_MANAGE_ARCHIVE_JOB_LIST_TITLE' => 'Planlı Arşivler',
     'LBL_MANAGE_ARCHIVE_JOB_IS_NOT_SCHEDULED' => 'Planlı arşivler yok',
     'LBL_ARCHIVE_FILTER' => 'Filtre Ayarları',
-    "LBL_MANAGE_ARCHIVE_SETUP" => 'Veri Arşivlemeyi Kur',
+    'LBL_MANAGE_ARCHIVE_SETUP' => 'Veri Arşivlemeyi Kur',
     'LBL_LIST_ARCHIVE_NAME' => 'Arşiv Adı',
     'LBL_PERFORM_NOW_BTN' => 'Şimdi Gerçekleştir',
     'LBL_ARCHIVE_SUCCESS_TITLE' => 'Başarılı',
@@ -45,4 +44,4 @@ $mod_strings = array (
         . 'gerçekleştirilmesi önerilir. Bu işlemi şimdi yapmak istediğinizden emin misiniz?',
 
     'TPL_PMSE_INBOX_ERROR_MESSAGE' => '{{moduleName}} modülü arşivleyicisi, filtre olarak ayarlı {{fieldName}} sahip olmalıdır',
-);
+];

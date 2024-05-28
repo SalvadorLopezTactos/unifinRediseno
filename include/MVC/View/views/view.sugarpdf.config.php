@@ -10,20 +10,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$view_config = array(
-    'actions' => array(
-        'sugarpdf' => array(
+$view_config = [
+    'actions' => [
+        'sugarpdf' => [
             'show_header' => false,
             'show_subpanels' => false,
             'show_search' => false,
             'show_javascript' => false,
-        ),
-    ),
-    'req_params' => array(
-        'to_pdf' => array(
+        ],
+    ],
+    'req_params' => [
+        'to_pdf' => [
             'param_value' => true,
-            'config' => array('show_all' => false),
-        ),
-    ),
-);
-?>
+            'config' => ['show_all' => false],
+        ],
+    ],
+];

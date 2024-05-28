@@ -12,10 +12,10 @@
 $module_name = 'Forecasts';
 $viewdefs[$module_name]['base']['menu']['header'] = [
     [
-        'route' => '#'.$module_name.'/config',
+        'route' => '#' . $module_name . '/config',
         'label' => 'LBL_FORECAST_SETTINGS',
         'acl_action' => 'developer',
-        'acl_module'=>$module_name,
+        'acl_module' => $module_name,
         'icon' => 'sicon-settings',
     ],
 ];

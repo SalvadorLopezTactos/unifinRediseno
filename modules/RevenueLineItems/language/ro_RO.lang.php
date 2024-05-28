@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Tabloul de bord Listă elemente linie venituri',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare elemente linie venituri',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Tipuri produs',
     'LBL_ASSIGNED_TO_NAME' => 'Atribuit lui:',
     'LBL_ASSIGNED_TO' => 'Atribuit lui:',
-    'LBL_ASSIGNED_TO_ID'=>'ID utilizator alocat',
+    'LBL_ASSIGNED_TO_ID' => 'ID utilizator alocat',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nume utilizator alocat',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'ID utilizator alocat',
     'LBL_CAMPAIGN_ID' => 'ID campanie',
@@ -217,4 +217,5 @@ Pentru a crea {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Afişează top 10 elemente de venit într-o diagramă cu bule.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Elementele mele de venit',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Elementele de venit ale echipei mele",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia articolelor de linie de venit',
+];

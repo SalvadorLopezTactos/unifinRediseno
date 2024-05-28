@@ -13,7 +13,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FEEDBACK_TEXT_PLACEHOLDER' => 'Feedback beskrivning',
     'LBL_FEEDBACK_BTN_SUBMIT' => 'Skicka',
     'LBL_FEEDBACK_SENT' => 'Feedback skickat.',
@@ -23,4 +23,4 @@ $mod_strings = array(
     'TPL_FEEDBACK_ASIDE' => 'Vi samlar in viss användardata när du skickar in  din Feedback {{learnMoreLink}}. Vi samlar inte in kontaktinformation. Vänligen {{contactSupportLink}} för buggar eller andra problem som kräver svar.',
     'LBL_FEEDBACK_ASIDE_CLICK_MORE' => 'Klicka här för att lära dig mer',
     'LBL_FEEDBACK_ASIDE_CONTACT_SUPPORT' => 'kontakta Support',
-);
+];

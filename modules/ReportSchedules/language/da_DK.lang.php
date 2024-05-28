@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Rapporttidsplaner',
     'LBL_MODULE_NAME_SINGULAR' => 'Rapporttidsplan',
     'LBL_REPORT_NAME' => 'Rapport',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Filtyper',
     'LBL_EMBED_REPORT' => 'Indlejr rapport i e-mail',
     'LBL_EMBED_REPORT_INFO' => 'Bemærk: Hvis rapporten overstiger 200 rækker, vil vi vedhæfte rapporten som en CSV-fil.',
-);
+];

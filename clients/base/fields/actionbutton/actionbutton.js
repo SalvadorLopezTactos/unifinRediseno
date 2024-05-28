@@ -41,11 +41,14 @@
         'omnichannel-config',
         'omnichannel-detail',
         'config-preview',
+        'side-drawer-headerpane',
     ],
     _calculateDependencyOnDemandViews: [
+        'record',
         'recordlist',
         'dashlet-toolbar',
         'subpanel-list',
+        'side-drawer-headerpane',
     ],
 
     /**
@@ -268,6 +271,12 @@
                 this.activeButtonMeta.settings.hasCalculatedButtons = true;
             }
 
+            if (activeItem.properties.label && activeItem.properties.label.includes('LBL_')) {
+                const currentModel = this._getCurrentModel();
+                const module = (currentModel && currentModel.get('_module')) || this.module;
+                activeItem.properties.label = app.lang.get(activeItem.properties.label, module);
+            }
+
             this.activeButtonMeta.buttons[itemKey] = activeItem;
 
             if (isDependent) {
@@ -297,7 +306,7 @@
      * @inheritdoc
      */
     _render: function() {
-        if (this._isEditDropdownOption() && this._hasDependentFields() && !this._dependencyCalculated) {
+        if (this._shouldCalculateOnRender() && this._hasDependentFields() && !this._dependencyCalculated) {
             this._resolveFieldDependency(this.model, true);
         } else {
             this._buildUIButtonsData();
@@ -309,30 +318,14 @@
             // We do not support action buttons in create view
             this._hideShowFieldLabel(true);
         }
-
-        if (this.view && this.view.action === 'edit') {
-            // We need to set the correct padding while on edit view
-            this._adjustButtonsPadding(true);
-        }
     },
 
     /**
-     * If the button is in Edit view
-     * we have to adjust the padding
+     * If the button is part of a certain view, we calculate the dependency on render
      *
      * @return {Bool}
      */
-    _adjustButtonsPadding: function() {
-        this.$el.css('padding', '5px 7px');
-    },
-
-    /**
-     * If the button is part of an Edit dropdown
-     * we have to calculate the dependency on render
-     *
-     * @return {Bool}
-     */
-    _isEditDropdownOption() {
+    _shouldCalculateOnRender() {
         return _.contains(this._calculateDependencyOnDemandViews, this.view.type);
     },
 
@@ -401,11 +394,11 @@
     _resolveDependency(computedFieldsMeta, buttonFieldNameMapping) {
         const requestType = 'create';
         const apiPath = 'actionButton/evaluateExpression';
-
+        const model = this._getCurrentModel();
         const requestMeta = {
             'targetFields': computedFieldsMeta,
-            'targetRecordId': this.model.id,
-            'targetModule': this.model.module
+            'targetRecordId': model.get('id'),
+            'targetModule': model.get('_module') || this.module,
         };
 
         const apiCallbacks = {
@@ -558,14 +551,26 @@
         const buttonId = e.currentTarget.id;
 
         let actions = this._getActionsByButtonId(buttonId);
-
+        let model = this._getCurrentModel();
         this.execute(actions, {
             createLinkModelFct: _.bind(this.createLinkModel, this),
-            recordModel: this.model,
+            recordModel: model,
             recordView: this.view,
             buttonField: this,
             stopOnError: this.actionMeta.buttons[buttonId].properties.stopOnError,
         });
+    },
+
+    /**
+     * Get current model.
+     * @return {Object}
+     */
+    _getCurrentModel: function() {
+        return this.view.name === 'side-drawer-headerpane' &&
+            !_.isEmpty(this.context) && !_.isEmpty(this.context.parent) &&
+            !_.isEmpty(this.context.parent.parent) &&
+            _.isFunction(this.context.parent.parent.get) ?
+            this.context.parent.parent.get('rowModel') : this.model;
     },
 
     /**
@@ -682,7 +687,7 @@
             if (typeof childData === 'object' && childData !== null) {
                 data[key] = this.base64Parse(childData, encode);
             } else if (typeof childData === 'string') {
-                data[key] = encode ? btoa(childData) : atob(childData);
+                data[key] = encode ? btoa(encodeURIComponent(childData)) : decodeURIComponent(atob(childData));
             }
         }, this);
 

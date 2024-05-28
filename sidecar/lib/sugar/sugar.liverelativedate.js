@@ -9,7 +9,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const DateUtils = require('utils/date');
+const DateUtils = require('../../src/utils/date');
 
 /**
  * LiveRelativeDate plugin is a jQuery/Zepto plugin for sidecar that converts a

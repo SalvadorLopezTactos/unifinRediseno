@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Řídicí panel seznamu řádků tržeb',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Řídicí panel záznamů řádků tržeb',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Typy produktu',
     'LBL_ASSIGNED_TO_NAME' => 'Přiřazeno (komu):',
     'LBL_ASSIGNED_TO' => 'Přidělen',
-    'LBL_ASSIGNED_TO_ID'=>'ID přiřazeného uživatele',
+    'LBL_ASSIGNED_TO_ID' => 'ID přiřazeného uživatele',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Přiřazený uživatel',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'ID přiřazeného uživatele',
     'LBL_CAMPAIGN_ID' => 'ID kampaně',
@@ -211,4 +211,5 @@ Vytvoření modulu {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Zobrazuje nejlepších deset příležitostí v bublinkovém grafu',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Moje řádky',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Příležitosti mého týmu",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová osa řádkové položky tržeb',
+];

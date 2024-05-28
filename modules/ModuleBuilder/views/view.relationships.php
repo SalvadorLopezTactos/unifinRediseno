@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once ('modules/ModuleBuilder/MB/ModuleBuilder.php') ;
+require_once 'modules/ModuleBuilder/MB/ModuleBuilder.php';
 
 use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
@@ -20,19 +20,20 @@ class ViewRelationships extends SugarView
      */
     public $fromModuleBuilder;
     /**
-	 * @see SugarView::_getModuleTitleParams()
-	 */
-	protected function _getModuleTitleParams($browserTitle = false)
-	{
-	    global $mod_strings;
-	    
-    	return array(
-    	   translate('LBL_MODULE_NAME','Administration'),
-    	   ModuleBuilderController::getModuleTitle(),
-    	   );
+     * @see SugarView::_getModuleTitleParams()
+     */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
+    protected function _getModuleTitleParams($browserTitle = false)
+    {
+        global $mod_strings;
+
+        return [
+            translate('LBL_MODULE_NAME', 'Administration'),
+            ModuleBuilderController::getModuleTitle(),
+        ];
     }
 
-    function display()
+    public function display()
     {
         $moduleName = $this->request->getValidInputRequest(
             'view_module',
@@ -46,74 +47,70 @@ class ViewRelationships extends SugarView
         // set the mod_strings as we can be called after doing a Repair and the mod_strings are set to Administration
         $GLOBALS['mod_strings'] = return_module_language($GLOBALS['current_language'], 'ModuleBuilder');
         $this->_initSmarty();
-        $this->ss->assign('mod_strings', $GLOBALS [ 'mod_strings' ]);
+        $this->ss->assign('mod_strings', $GLOBALS ['mod_strings']);
         $this->ss->assign('view_module', $moduleName);
 
-        $ajax = new AjaxCompose ( ) ;
-        $json = getJSONobj () ;
+        $ajax = new AjaxCompose();
+        $json = getJSONobj();
         $this->fromModuleBuilder = !empty($_REQUEST['MB']) || (!empty($packageName) && ($packageName != 'studio'));
         $this->ss->assign('fromModuleBuilder', $this->fromModuleBuilder);
-        if (!$this->fromModuleBuilder)
-        {
+        if (!$this->fromModuleBuilder) {
             $this->ss->assign('view_package', '');
 
-            $relationships = new DeployedRelationships ( $moduleName ) ;
-            $ajaxRelationships = $this->getAjaxRelationships( $relationships ) ;
+            $relationships = new DeployedRelationships($moduleName);
+            $ajaxRelationships = $this->getAjaxRelationships($relationships);
             $this->ss->assign('relationships', $json->encode($ajaxRelationships));
             $this->ss->assign('empty', (sizeof($ajaxRelationships) == 0));
             $this->ss->assign('studio', true);
 
             //crumb
-            global $app_list_strings ;
-            $moduleNames = array_change_key_case ( $app_list_strings [ 'moduleList' ] ) ;
-            $translatedModule = $moduleNames [ strtolower ( $moduleName ) ] ;
-            $ajax->addCrumb ( translate('LBL_STUDIO'), 'ModuleBuilder.main("studio")' ) ;
-            $ajax->addCrumb ( $translatedModule, 'ModuleBuilder.getContent("module=ModuleBuilder&action=wizard&view_module=' . $moduleName . '")' ) ;
-            $ajax->addCrumb ( translate('LBL_RELATIONSHIPS'), '' ) ;
+            global $app_list_strings;
+            $moduleNames = array_change_key_case($app_list_strings ['moduleList']);
+            $translatedModule = $moduleNames [strtolower($moduleName)];
+            $ajax->addCrumb(translate('LBL_STUDIO'), 'ModuleBuilder.main("studio")');
+            $ajax->addCrumb($translatedModule, 'ModuleBuilder.getContent("module=ModuleBuilder&action=wizard&view_module=' . $moduleName . '")');
+            $ajax->addCrumb(translate('LBL_RELATIONSHIPS'), '');
             $ajax->addSection(
                 'center',
                 $moduleName . ' ' . translate('LBL_RELATIONSHIPS'),
                 $this->fetchTemplate('modules/ModuleBuilder/tpls/studioRelationships.tpl')
             );
-
-        } else
-        {
+        } else {
             $this->ss->assign('view_package', $packageName);
 
-            $mb = new ModuleBuilder ( ) ;
+            $mb = new ModuleBuilder();
             $module = &$mb->getPackageModule($packageName, $moduleName);
             $package = $mb->packages[$packageName];
-			$package->loadModuleTitles();
-            $relationships = new UndeployedRelationships ( $module->getModuleDir () ) ;
-            $ajaxRelationships = $this->getAjaxRelationships( $relationships ) ;
+            $package->loadModuleTitles();
+            $relationships = new UndeployedRelationships($module->getModuleDir());
+            $ajaxRelationships = $this->getAjaxRelationships($relationships);
             $this->ss->assign('relationships', $json->encode($ajaxRelationships));
             $this->ss->assign('empty', (sizeof($ajaxRelationships) == 0));
 
             $module->help['default'] = (empty($moduleName)) ? 'create' : 'modify';
             $module->help['group'] = 'module';
 
-            $ajax->addCrumb ( translate('LBL_MODULEBUILDER'), 'ModuleBuilder.main("mb")' ) ;
-            $ajax->addCrumb ( $package->name, 'ModuleBuilder.getContent("module=ModuleBuilder&action=package&package=' . $package->name . '")' ) ;
-            $ajax->addCrumb ( $moduleName, 'ModuleBuilder.getContent("module=ModuleBuilder&action=module&view_package=' . $package->name . '&view_module=' . $moduleName . '")' ) ;
-            $ajax->addCrumb ( translate('LBL_RELATIONSHIPS'), '' ) ;
+            $ajax->addCrumb(translate('LBL_MODULEBUILDER'), 'ModuleBuilder.main("mb")');
+            $ajax->addCrumb($package->name, 'ModuleBuilder.getContent("module=ModuleBuilder&action=package&package=' . $package->name . '")');
+            $ajax->addCrumb($moduleName, 'ModuleBuilder.getContent("module=ModuleBuilder&action=module&view_package=' . $package->name . '&view_module=' . $moduleName . '")');
+            $ajax->addCrumb(translate('LBL_RELATIONSHIPS'), '');
             $ajax->addSection(
                 'center',
                 $moduleName . ' ' . translate('LBL_RELATIONSHIPS'),
                 $this->fetchTemplate('modules/ModuleBuilder/tpls/studioRelationships.tpl')
             );
         }
-        echo $ajax->getJavascript () ;
+        echo $ajax->getJavascript();
     }
 
     /*
      * Encode the relationships for this module for display in the Ext grid layout
      */
-    function getAjaxRelationships ( $relationships )
+    public function getAjaxRelationships($relationships)
     {
-        $ajaxrels = array ( ) ;
-        foreach ( $relationships->getRelationshipList () as $relationshipName )
-        {
-            $rel = $relationships->get ( $relationshipName )->getDefinition () ;
+        $ajaxrels = [];
+        foreach ($relationships->getRelationshipList() as $relationshipName) {
+            $rel = $relationships->get($relationshipName)->getDefinition();
             if (!empty($rel['lhs_vname'])) {
                 $rel['lhs_module'] = translate($rel['lhs_vname']);
             } else {
@@ -124,30 +121,31 @@ class ViewRelationships extends SugarView
             } else {
                 $rel['rhs_module'] = translate($rel['rhs_module']);
             }
-            
+
             //#28668  , translate the relationship type before render it .
-            switch($rel['relationship_type']){
-            	case 'one-to-one':
-            	$rel['relationship_type']  = translate ( 'LBL_ONETOONE' );
-            	break;
-            	case 'one-to-many':
-            	$rel['relationship_type']  = translate ( 'LBL_ONETOMANY' );
-            	break;
-            	case 'many-to-one':
-            	$rel['relationship_type']  = translate ( 'LBL_MANYTOONE' );
-            	break;
-            	case 'many-to-many':
-            	$rel['relationship_type']  = translate ( 'LBL_MANYTOMANY' );
-            	break;
-            	default: $rel['relationship_type']  = '';
+            switch ($rel['relationship_type']) {
+                case 'one-to-one':
+                    $rel['relationship_type'] = translate('LBL_ONETOONE');
+                    break;
+                case 'one-to-many':
+                    $rel['relationship_type'] = translate('LBL_ONETOMANY');
+                    break;
+                case 'many-to-one':
+                    $rel['relationship_type'] = translate('LBL_MANYTOONE');
+                    break;
+                case 'many-to-many':
+                    $rel['relationship_type'] = translate('LBL_MANYTOMANY');
+                    break;
+                default:
+                    $rel['relationship_type'] = '';
             }
-            $rel [ 'name' ] = $relationshipName ;
-            if ($rel [ 'is_custom' ] && isset($rel [ 'from_studio' ]) && $rel [ 'from_studio' ]) {
-            	$rel [ 'name' ] = $relationshipName . "*";
+            $rel ['name'] = $relationshipName;
+            if ($rel ['is_custom'] && isset($rel ['from_studio']) && $rel ['from_studio']) {
+                $rel ['name'] = $relationshipName . '*';
             }
-            $ajaxrels [] = $rel ;
+            $ajaxrels [] = $rel;
         }
-        return $ajaxrels ;
+        return $ajaxrels;
     }
 
     /**

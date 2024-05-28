@@ -10,12 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'CampaignTrackers';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
-        'route'=>'#Campaigns/',
-        'label' =>'LNK_CAMPAIGN_LIST',
-        'acl_action'=>'list',
-        'acl_module'=>'Campaigns',
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
+        'route' => '#Campaigns/',
+        'label' => 'LNK_CAMPAIGN_LIST',
+        'acl_action' => 'list',
+        'acl_module' => 'Campaigns',
         'icon' => 'sicon-list-view',
-    ),
-);
+    ],
+];

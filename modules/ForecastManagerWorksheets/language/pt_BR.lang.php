@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
 
     //module strings.
     'LBL_MODULE_NAME' => 'Planilhas de gerenciamento de previsões',
@@ -35,14 +35,14 @@ $mod_strings = array (
     'LBL_FORECAST_TYPE' => 'Tipo de Previsão',
     'LBL_FORECAST_OPP_COUNT' => 'Contagem Total de Oportunidades',
     'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Contagem de Oportunidades no Pipeline',
-    'LBL_FORECAST_OPP_WEIGH'=> 'Valor Ponderado',
+    'LBL_FORECAST_OPP_WEIGH' => 'Valor Ponderado',
     'LBL_FORECAST_USER' => 'Usuário',
-    'LBL_DATE_COMMITTED'=> 'Data de Registro',
+    'LBL_DATE_COMMITTED' => 'Data de Registro',
     'LBL_DATE_ENTERED' => 'Data da Criação',
     'LBL_DATE_MODIFIED' => 'Data de Modificação',
     'LBL_CREATED_BY' => 'Criado por',
     'LBL_DELETED' => 'Excluído',
-    'LBL_MODIFIED_USER_ID'=>'Modificado Por',
+    'LBL_MODIFIED_USER_ID' => 'Modificado Por',
     'LBL_WK_VERSION' => 'Versão',
     'LBL_WK_REVISION' => 'Revisão',
 
@@ -59,68 +59,68 @@ $mod_strings = array (
     'LBL_QC_UPCOMING_FORECASTS' => 'Minhas Previsões',
     'LBL_QC_LAST_DATE_COMMITTED' => 'Última Data de Registro:',
     'LBL_QC_LAST_COMMIT_VALUE' => 'Último Valor Registro:',
-    'LBL_QC_HEADER_DELIM'=> 'Para',
+    'LBL_QC_HEADER_DELIM' => 'Para',
 
     //opportunity worksheet list view labels
-    'LBL_OW_OPPORTUNITIES' => "Oportunidade",
-    'LBL_OW_ACCOUNTNAME' => "Conta",
-    'LBL_OW_REVENUE' => "Valor",
-    'LBL_OW_WEIGHTED' => "Valor Ponderado",
-    'LBL_OW_MODULE_TITLE'=> 'Planilha Oportunidades',
-    'LBL_OW_PROBABILITY'=>'Probabilidade',
-    'LBL_OW_NEXT_STEP'=>'Próximo Passo',
-    'LBL_OW_DESCRIPTION'=>'Descrição',
-    'LBL_OW_TYPE'=>'Tipo',
+    'LBL_OW_OPPORTUNITIES' => 'Oportunidade',
+    'LBL_OW_ACCOUNTNAME' => 'Conta',
+    'LBL_OW_REVENUE' => 'Valor',
+    'LBL_OW_WEIGHTED' => 'Valor Ponderado',
+    'LBL_OW_MODULE_TITLE' => 'Planilha Oportunidades',
+    'LBL_OW_PROBABILITY' => 'Probabilidade',
+    'LBL_OW_NEXT_STEP' => 'Próximo Passo',
+    'LBL_OW_DESCRIPTION' => 'Descrição',
+    'LBL_OW_TYPE' => 'Tipo',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'Relatório direto',
-    'LBL_FDR_OPPORTUNITIES'=>'Oportunidades na previsão:',
-    'LBL_FDR_WEIGH'=>'Valor Ponderado das Oportunidades:',
-    'LBL_FDR_COMMIT'=>'Valor Registrado',
-    'LBL_FDR_DATE_COMMIT'=>'Data do Registro',
+    'LBL_FDR_USER_NAME' => 'Relatório direto',
+    'LBL_FDR_OPPORTUNITIES' => 'Oportunidades na previsão:',
+    'LBL_FDR_WEIGH' => 'Valor Ponderado das Oportunidades:',
+    'LBL_FDR_COMMIT' => 'Valor Registrado',
+    'LBL_FDR_DATE_COMMIT' => 'Data do Registro',
 
     //detail view.
     'LBL_DV_HEADER' => 'Previsões: Planilha',
     'LBL_DV_MY_FORECASTS' => 'Minhas Previsões',
-    'LBL_DV_MY_TEAM' => "Previsões da Minha Equipe" ,
+    'LBL_DV_MY_TEAM' => "Previsões da Minha Equipe",
     'LBL_DV_TIMEPERIODS' => 'Períodos:',
     'LBL_DV_FORECAST_PERIOD' => 'Período da Previsão',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Oportunidades Previstas',
     'LBL_SEARCH' => 'Selecionar',
     'LBL_SEARCH_LABEL' => 'Selecionar',
     'LBL_COMMIT_HEADER' => 'Registrar Previsão',
-    'LBL_DV_LAST_COMMIT_DATE' =>'Última Data de Registro:',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'Últimos Valores Registrados:',
+    'LBL_DV_LAST_COMMIT_DATE' => 'Última Data de Registro:',
+    'LBL_DV_LAST_COMMIT_AMOUNT' => 'Últimos Valores Registrados:',
     'LBL_DV_FORECAST_ROLLUP' => 'Agregado da Previsão',
     'LBL_DV_TIMEPERIOD' => 'Período',
     'LBL_DV_TIMPERIOD_DATES' => 'Intervalo de Datas:',
     'LBL_LOADING_COMMIT_HISTORY' => 'Carregando histórico registrado...',
 
     //list view
-    'LBL_LV_TIMPERIOD'=> 'Período',
-    'LBL_LV_TIMPERIOD_START_DATE'=> 'Data de início:',
-    'LBL_LV_TIMPERIOD_END_DATE'=> 'Data Final',
-    'LBL_LV_TYPE'=> 'Tipo de Previsão',
-    'LBL_LV_COMMIT_DATE'=> 'Data de Registro',
-    'LBL_LV_OPPORTUNITIES'=> 'Oportunidades',
-    'LBL_LV_WEIGH'=> 'Valor Ponderado',
-    'LBL_LV_COMMIT'=> 'Valor Registrado',
+    'LBL_LV_TIMPERIOD' => 'Período',
+    'LBL_LV_TIMPERIOD_START_DATE' => 'Data de início:',
+    'LBL_LV_TIMPERIOD_END_DATE' => 'Data Final',
+    'LBL_LV_TYPE' => 'Tipo de Previsão',
+    'LBL_LV_COMMIT_DATE' => 'Data de Registro',
+    'LBL_LV_OPPORTUNITIES' => 'Oportunidades',
+    'LBL_LV_WEIGH' => 'Valor Ponderado',
+    'LBL_LV_COMMIT' => 'Valor Registrado',
 
-    'LBL_COMMIT_NOTE'=> 'Insira os valores que pretende registrar para o período selecionado:',
+    'LBL_COMMIT_NOTE' => 'Insira os valores que pretende registrar para o período selecionado:',
 
-    'LBL_COMMIT_MESSAGE'=> 'Deseja registrar estes valores?',
+    'LBL_COMMIT_MESSAGE' => 'Deseja registrar estes valores?',
     'ERR_FORECAST_AMOUNT' => 'O valor registrado é obrigatório e deve ser um número.',
 
     // js error strings
     'LBL_FC_START_DATE' => 'Data de início:',
     'LBL_FC_USER' => 'Agendar para',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'Não existem períodos para o módulo Previsões.',
-    'LBL_FDR_ADJ_AMOUNT'=>'Valor Ajustado',
-    'LBL_SAVE_WOKSHEET'=>'Salvar Planilha',
-    'LBL_RESET_WOKSHEET'=>'Reiniciar Planilha',
-    'LBL_SHOW_CHART'=>'Visualizar Gráfico',
-    'LBL_RESET_CHECK'=>'Todas as planilhas para o período selecionado e usuário autenticado serão removidos. Continuar?',
+    'LBL_NO_ACTIVE_TIMEPERIOD' => 'Não existem períodos para o módulo Previsões.',
+    'LBL_FDR_ADJ_AMOUNT' => 'Valor Ajustado',
+    'LBL_SAVE_WOKSHEET' => 'Salvar Planilha',
+    'LBL_RESET_WOKSHEET' => 'Reiniciar Planilha',
+    'LBL_SHOW_CHART' => 'Visualizar Gráfico',
+    'LBL_RESET_CHECK' => 'Todas as planilhas para o período selecionado e usuário autenticado serão removidos. Continuar?',
 
     'LBL_CURRENCY' => 'Moeda',
     'LBL_CURRENCY_ID' => 'ID da Moeda',
@@ -149,6 +149,6 @@ $mod_strings = array (
     'LBL_HISTORY_LOG' => 'Último compromisso',
     'LBL_NO_COMMIT' => 'Sem registro anterior',
 
-    'LBL_MANGER_SAVED' => 'Gerente salvo'
+    'LBL_MANGER_SAVED' => 'Gerente salvo',
 
-);
+];

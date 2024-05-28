@@ -25,7 +25,7 @@ use Google\Service\Dialogflow\GoogleCloudDialogflowCxV3TestCaseResult;
  * Typical usage is:
  *  <code>
  *   $dialogflowService = new Google\Service\Dialogflow(...);
- *   $results = $dialogflowService->results;
+ *   $results = $dialogflowService->projects_locations_agents_testCases_results;
  *  </code>
  */
 class ProjectsLocationsAgentsTestCasesResults extends \Google\Service\Resource
@@ -45,7 +45,8 @@ class ProjectsLocationsAgentsTestCasesResults extends \Google\Service\Resource
     return $this->call('get', [$params], GoogleCloudDialogflowCxV3TestCaseResult::class);
   }
   /**
-   * Fetches a list of results for a given test case.
+   * Fetches the list of run results for the given test case. A maximum of 100
+   * results are kept for each test case.
    * (results.listProjectsLocationsAgentsTestCasesResults)
    *
    * @param string $parent Required. The test case to list results for. Format:

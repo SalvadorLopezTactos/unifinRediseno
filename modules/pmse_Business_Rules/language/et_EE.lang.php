@@ -11,24 +11,24 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Protsessi ärireeglid',
-  'LBL_MODULE_TITLE' => 'Protsessi ärireeglid',
-  'LBL_MODULE_NAME_SINGULAR' => 'Protsessi ärireegel',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Protsessi ärireeglid',
+    'LBL_MODULE_TITLE' => 'Protsessi ärireeglid',
+    'LBL_MODULE_NAME_SINGULAR' => 'Protsessi ärireegel',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Protsessi ärireeglite fookuse sahtel',
+    'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Protsessi ärireeglite fookuse sahtel',
 
-  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Protsessi ärireeglite kirjete armatuurlaud',
-  'LBL_RST_UID' => 'Ärireegli ID',
-  'LBL_RST_TYPE' => 'Ärireegli tüüp',
-  'LBL_RST_DEFINITION' => 'Ärireegli määratlus',
-  'LBL_RST_EDITABLE' => 'Ärireegel on muudetav',
-  'LBL_RST_SOURCE' => 'Ärireegli allikas',
-  'LBL_RST_SOURCE_DEFINITION' => 'Ärireegli allika määratlus',
-  'LBL_RST_MODULE' => 'Eesmärgi moodul',
-  'LBL_RST_FILENAME' => 'Ärireegli faili nimi',
-  'LBL_RST_CREATE_DATE' => 'Ärireegli loomiskuupäev',
-  'LBL_RST_UPDATE_DATE' => 'Ärireegli värskendamiskuupäev',
+    'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Protsessi ärireeglite kirjete armatuurlaud',
+    'LBL_RST_UID' => 'Ärireegli ID',
+    'LBL_RST_TYPE' => 'Ärireegli tüüp',
+    'LBL_RST_DEFINITION' => 'Ärireegli määratlus',
+    'LBL_RST_EDITABLE' => 'Ärireegel on muudetav',
+    'LBL_RST_SOURCE' => 'Ärireegli allikas',
+    'LBL_RST_SOURCE_DEFINITION' => 'Ärireegli allika määratlus',
+    'LBL_RST_MODULE' => 'Eesmärgi moodul',
+    'LBL_RST_FILENAME' => 'Ärireegli faili nimi',
+    'LBL_RST_CREATE_DATE' => 'Ärireegli loomiskuupäev',
+    'LBL_RST_UPDATE_DATE' => 'Ärireegli värskendamiskuupäev',
 
     'LNK_LIST' => 'Vaata protsessi ärireegleid',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Vaata protsessi ärireeglit',
@@ -84,5 +84,5 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_REQUIRED_FIELDS_BUSINESSRULES' => 'See ärireegel on kehtetu, sest kasutab kehtetuid välju või välju, mida teie SugarCRMi versioonis ei leidu. Parandage allolevad vead ja salvestage ärireegel.',
     'LBL_PMSE_PROCESS_BUSINESS_RULES_EDIT' => 'Seda ärireeglit kasutatakse praegu protsessi määratluses. Kas soovite endiselt seda ärireeglit redigeerida?',
-    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => "Te ei saa seda ärireeglit kustutada, kuna seda kasutatakse praegu protsessi määratluses.",
-);
+    'LBL_PMSE_PROCESS_BUSINESS_RULES_DELETE' => 'Te ei saa seda ärireeglit kustutada, kuna seda kasutatakse praegu protsessi määratluses.',
+];

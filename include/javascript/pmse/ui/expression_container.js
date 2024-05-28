@@ -164,7 +164,7 @@ ExpressionContainer.prototype.createHTML = function () {
     span = this.createHTMLElement('span');
     dvContainer = this.createHTMLElement("div");
     dvContainer.className = 'expression-container-cell';
-    $(dvContainer).attr('data-placement', 'bottom');
+    $(dvContainer).attr('data-bs-placement', 'bottom');
     dvContainer.setAttributeNode(document.createAttribute('title'));
     input = this.createHTMLElement("input");
     input.className = 'expression-container-input';
@@ -228,7 +228,7 @@ ExpressionContainer.prototype.attachListeners = function () {
         }
     }).on("mouseleave", function() {
         if (this.tooltipHandler) {
-            this.tooltipHandler.tooltip('destroy');
+            this.tooltipHandler.tooltip('dispose');
             this.tooltipHandler = null;
         }
     });

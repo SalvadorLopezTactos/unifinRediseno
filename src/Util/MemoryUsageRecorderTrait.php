@@ -33,7 +33,7 @@ trait MemoryUsageRecorderTrait
      * @param int $currntUsage
      * @return int
      */
-    public function stopRecord(int &$currntUsage) : int
+    public function stopRecord(int &$currntUsage): int
     {
         $delta = $this->getMemoryUsage() - $this->currentMemoryUsageInRecorder;
         $currntUsage = $this->getMemoryUsage();
@@ -45,7 +45,7 @@ trait MemoryUsageRecorderTrait
      * check memory usage vs memory limit set in php' ini file, the return value is in %
      * @return int
      */
-    public function checkMemoryUsageVsLimit() : int
+    public function checkMemoryUsageVsLimit(): int
     {
         $memoryLimit = $this->getMemoryUsageLimitFromIni();
         if ($memoryLimit === -1) {
@@ -54,14 +54,14 @@ trait MemoryUsageRecorderTrait
         if ($memoryLimit < 1) {
             return 100;
         }
-        return intdiv($this->getMemoryUsage()*100, $memoryLimit);
+        return intdiv($this->getMemoryUsage() * 100, $memoryLimit);
     }
 
     /**
      * get memory usage
      * @return int
      */
-    protected function getMemoryUsage() : int
+    protected function getMemoryUsage(): int
     {
         return intdiv(memory_get_usage(), 1024);
     }
@@ -70,7 +70,7 @@ trait MemoryUsageRecorderTrait
      * read ini for 'memory_limit' and return in kb
      * @return int
      */
-    protected function getMemoryUsageLimitFromIni() : int
+    protected function getMemoryUsageLimitFromIni(): int
     {
         $memory_limit = ini_get('memory_limit');
         if (empty($memory_limit) || $memory_limit === '-1') {
@@ -84,7 +84,7 @@ trait MemoryUsageRecorderTrait
         if (isset($matches[2])) {
             switch (strtoupper($matches[2])) {
                 case 'G':
-                    $num = $num * 1024*1024;
+                    $num = $num * 1024 * 1024;
                     break;
                 case 'M':
                     $num = $num * 1024;

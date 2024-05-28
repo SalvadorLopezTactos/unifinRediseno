@@ -32,7 +32,7 @@ class ForecastSalesStageExpression extends EnumExpression
         // get the statuses
         $settings = Forecast::getSettings();
 
-        $keysToRemove = array();
+        $keysToRemove = [];
         if ($includeWon == AbstractExpression::$FALSE) {
             $keysToRemove = array_merge($keysToRemove, $settings['sales_stage_won']);
         }
@@ -88,7 +88,7 @@ JS;
      */
     public static function getParameterTypes()
     {
-        return array(AbstractExpression::$BOOLEAN_TYPE, AbstractExpression::$BOOLEAN_TYPE);
+        return [AbstractExpression::$BOOLEAN_TYPE, AbstractExpression::$BOOLEAN_TYPE];
     }
 
     /**
@@ -96,7 +96,7 @@ JS;
      */
     public static function getOperationName()
     {
-        return array("forecastSalesStages");
+        return ['forecastSalesStages'];
     }
 
     /**

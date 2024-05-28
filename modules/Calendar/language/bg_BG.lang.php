@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Календар',
     'LBL_MODULE_NAME_SINGULAR' => 'Календар',
     'LBL_MODULE_TITLE' => 'Календар',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Настройки',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Прилагане на чаови интервал в дневните и седмични изгледи:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Начален час:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Край:',
+    'LBL_SETTINGS_TIME_STARTS' => 'Начален час:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Край:',
     'LBL_SETTINGS_CALLS_SHOW' => 'Показване на обаждания:',
     'LBL_SETTINGS_TASKS_SHOW' => 'Показване на задачи:',
 
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Създаване на календар',
     'LNK_CALENDAR_LIST' => 'Разглеждане на календари',
     'LNK_CALENDAR_LEGACY' => 'Заварен календар',
-    'LBL_IMPORT_CALENDAR'=> 'Импортиране на календар',
+    'LBL_IMPORT_CALENDAR' => 'Импортиране на календар',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Дата и час на събитие',
     'LBL_INSERTFIELD' => 'Вмъкване на поле',
     'LBL_EVENT_START_ERROR' => 'Моля, изберете начало',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Моля, изберете календар',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Неуспешно запазване на календари.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Нд',
             'Пн',
             'Вт',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Чт',
             'Пт',
             'Сб',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Неделя',
             'Понеделник',
             'Вторник',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Четвъртък',
             'Петък',
             'Събота',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Ян',
             'Фев',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Окт',
             'Ное',
             'Дек',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Януари',
             'Февруари',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Октомври',
             'Ноември',
             'Декември',
-        ),
-);
+        ],
+];

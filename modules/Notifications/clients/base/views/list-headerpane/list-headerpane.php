@@ -11,12 +11,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Notifications']['base']['view']['list-headerpane'] = array(
+$viewdefs['Notifications']['base']['view']['list-headerpane'] = [
     'template' => 'headerpane',
-    'buttons' => array(
-        array(
+    'buttons' => [
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-);
+        ],
+    ],
+];

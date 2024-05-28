@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'käynnissä',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Viestit-tietolaatikko',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Viestit-tietueen koontinäyttö',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Viestin aikajana',
 ];

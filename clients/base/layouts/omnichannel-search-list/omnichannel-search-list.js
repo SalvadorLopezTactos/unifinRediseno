@@ -17,7 +17,7 @@
  */
 ({
     extendsFrom: 'SearchLayout',
-    className: 'omnichannel-search-list',
+    className: 'omnichannel-search-list flex flex-row flex-grow',
 
     componentsToAdd: [
         'omnichannel-search-headerpane',

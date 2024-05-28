@@ -57,6 +57,11 @@
 
         this.reportComplexity = this._getReportComplexity(_.size(records), _.size(header));
 
+        if (_.has(this, 'layout') && this.layout) {
+            this.exportAccess = app.acl.hasAccess('export', this.layout.module) &&
+                            app.utils.reports.hasAccessToAllReport(this.layout.model, 'export');
+        }
+
         if (this.reportComplexity === this.complexities.medium && !this.viewingSimplified) {
             this.context.trigger('report:data:table:loaded', false, 'table');
             return;

@@ -9,95 +9,95 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Emails']['base']['view']['compose'] = array(
+$viewdefs['Emails']['base']['view']['compose'] = [
     'template' => 'record',
-    'buttons' => array(
-        array(
-            'type'      => 'button',
-            'name'      => 'cancel_button',
-            'label'     => 'LBL_CANCEL_BUTTON_LABEL',
+    'buttons' => [
+        [
+            'type' => 'button',
+            'name' => 'cancel_button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
-            'events' => array(
+            'events' => [
                 'click' => 'button:cancel_button:click',
-            ),
-        ),
-        array(
-            'type'    => 'actiondropdown',
-            'name'    => 'main_dropdown',
+            ],
+        ],
+        [
+            'type' => 'actiondropdown',
+            'name' => 'main_dropdown',
             'primary' => true,
-            'buttons' => array(
-                array(
-                    'name'  => 'send_button',
-                    'type'  => 'rowaction',
+            'buttons' => [
+                [
+                    'name' => 'send_button',
+                    'type' => 'rowaction',
                     'label' => 'LBL_SEND_BUTTON_LABEL',
-                    'events' => array(
+                    'events' => [
                         'click' => 'button:send_button:click',
-                    ),
-                ),
-                array(
-                    'name'  => 'draft_button',
-                    'type'  => 'rowaction',
+                    ],
+                ],
+                [
+                    'name' => 'draft_button',
+                    'type' => 'rowaction',
                     'label' => 'LBL_SAVE_AS_DRAFT_BUTTON_LABEL',
-                    'events' => array(
+                    'events' => [
                         'click' => 'button:draft_button:click',
-                    ),
-                ),
-            ),
-        ),
-        array(
+                    ],
+                ],
+            ],
+        ],
+        [
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
-        ),
-    ),
-    'panels'  => array(
-        array(
-            'name'         => 'panel_body',
-            'label'        => 'LBL_PANEL_2',
-            'columns'      => 1,
-            'labels'       => true,
-            'labelsOnTop'  => false,
+        ],
+    ],
+    'panels' => [
+        [
+            'name' => 'panel_body',
+            'label' => 'LBL_PANEL_2',
+            'columns' => 1,
+            'labels' => true,
+            'labelsOnTop' => false,
             'placeholders' => true,
-            'fields'       => array(
-                array(
-                    'name'            => 'email_config',
-                    'label'           => 'LBL_FROM',
-                    'type'            => 'sender',
-                    'span'            => 12,
-                    'css_class'       => 'inherit-width',
-                    'endpoint'        => array(
+            'fields' => [
+                [
+                    'name' => 'email_config',
+                    'label' => 'LBL_FROM',
+                    'type' => 'sender',
+                    'span' => 12,
+                    'css_class' => 'inherit-width',
+                    'endpoint' => [
                         'module' => 'OutboundEmailConfiguration',
                         'action' => 'list',
-                    )
-                ),
-                array(
-                    'name'           => 'to_addresses',
-                    'type'           => 'recipients',
-                    'label'          => 'LBL_TO_ADDRS',
-                    'span'           => 12,
-                    'required'       => true,
-                ),
-                array(
-                    'name'           => 'cc_addresses',
-                    'type'           => 'recipients',
-                    'label'          => 'LBL_CC',
-                    'span'           => 12,
-                ),
-                array(
-                    'name'           => 'bcc_addresses',
-                    'type'           => 'recipients',
-                    'label'          => 'LBL_BCC',
-                    'span'           => 12,
-                ),
-                array(
-                    'name'            => 'name',
-                    'label'           => 'LBL_SUBJECT',
-                    'span'            => 12,
-                ),
-                array(
-                    'name'          => 'description_html',
-                    'type'          => 'htmleditable_tinymce',
+                    ],
+                ],
+                [
+                    'name' => 'to_addresses',
+                    'type' => 'recipients',
+                    'label' => 'LBL_TO_ADDRS',
+                    'span' => 12,
+                    'required' => true,
+                ],
+                [
+                    'name' => 'cc_addresses',
+                    'type' => 'recipients',
+                    'label' => 'LBL_CC',
+                    'span' => 12,
+                ],
+                [
+                    'name' => 'bcc_addresses',
+                    'type' => 'recipients',
+                    'label' => 'LBL_BCC',
+                    'span' => 12,
+                ],
+                [
+                    'name' => 'name',
+                    'label' => 'LBL_SUBJECT',
+                    'span' => 12,
+                ],
+                [
+                    'name' => 'description_html',
+                    'type' => 'htmleditable_tinymce',
                     'dismiss_label' => true,
-                    'span'          => 12,
+                    'span' => 12,
                     'tinyConfig' => [
                         'toolbar' => 'code | bold italic underline strikethrough | alignleft aligncenter alignright ' .
                             'alignjustify | forecolor backcolor | fontfamily fontsize blocks | ' .
@@ -106,31 +106,31 @@ $viewdefs['Emails']['base']['view']['compose'] = array(
                             'superscript | charmap | table | hr removeformat | insertdatetime | ' .
                             'sugarattachment sugarsignature sugartemplate',
                     ],
-                ),
-                array(
+                ],
+                [
                     'name' => 'attachments',
                     'type' => 'attachments',
                     'dismiss_label' => true,
-                ),
-            ),
-        ),
-        array(
-            'name'         => 'panel_hidden',
-            'hide'         => true,
-            'columns'      => 1,
-            'labelsOnTop'  => false,
+                ],
+            ],
+        ],
+        [
+            'name' => 'panel_hidden',
+            'hide' => true,
+            'columns' => 1,
+            'labelsOnTop' => false,
             'placeholders' => true,
-            'fields'       => array(
-                array(
+            'fields' => [
+                [
                     'type' => 'teamset',
                     'name' => 'team_name',
                     'span' => 12,
-                ),
-                array(
+                ],
+                [
                     'name' => 'parent_name',
                     'span' => 12,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

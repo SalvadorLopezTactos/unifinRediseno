@@ -10,8 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="{{panel.css_class}}">
-    {{#each panel.fields}}
-        {{field ../view model=../view.activity template="preview"}}
-    {{/each}}
-</div>
+{{#eq panel.empty false}}
+    <div class="{{../panel.css_class}}">
+        {{#each ../panel.fields}}
+            {{#eq empty false}}
+                {{field ../../../view model=../../../view.activity template="preview"}}
+            {{/eq}}
+        {{/each}}
+    </div>
+{{/eq}}

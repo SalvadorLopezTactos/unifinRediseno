@@ -10,62 +10,59 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$subpanel_layout = array(
-	'top_buttons' => array(
-        array('widget_class' => 'SubPanelTopCreateButton'),
-		array('widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'Notes'),
-	),
+$subpanel_layout = [
+    'top_buttons' => [
+        ['widget_class' => 'SubPanelTopCreateButton'],
+        ['widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'Notes'],
+    ],
 
-	'where' => '',
+    'where' => '',
 
 
-
-	'list_fields' => array(
-		'object_image'=>array(
-			'vname' => 'LBL_OBJECT_IMAGE',
-			'widget_class' => 'SubPanelIcon',
- 		 	'width' => '2%',
- 		 	'image2'=>'attachment',
- 		 	'image2_url_field'=> array(
-				'id_field' => 'id',
-				'filename_field' => 'filename',
-			),
-		),
-        'name'=>array(
- 			'vname' => 'LBL_LIST_SUBJECT',
-			'widget_class' => 'SubPanelDetailViewLink',
-			'width' => '50%',
-		),
-		'contact_name'=>array(
-			'module' => 'Contacts',
-			'vname' => 'LBL_LIST_CONTACT_NAME',
-		    'width' => '20%',
+    'list_fields' => [
+        'object_image' => [
+            'vname' => 'LBL_OBJECT_IMAGE',
+            'widget_class' => 'SubPanelIcon',
+            'width' => '2%',
+            'image2' => 'attachment',
+            'image2_url_field' => [
+                'id_field' => 'id',
+                'filename_field' => 'filename',
+            ],
+        ],
+        'name' => [
+            'vname' => 'LBL_LIST_SUBJECT',
+            'widget_class' => 'SubPanelDetailViewLink',
+            'width' => '50%',
+        ],
+        'contact_name' => [
+            'module' => 'Contacts',
+            'vname' => 'LBL_LIST_CONTACT_NAME',
+            'width' => '20%',
             'target_record_key' => 'contact_id',
             'target_module' => 'Contacts',
             'widget_class' => 'SubPanelDetailViewLink',
-		),
-		'date_modified'=>array(
-		 	'vname' => 'LBL_LIST_DATE_MODIFIED',
-			'width' => '10%',
-		),
-		'edit_button'=>array(
-			'vname' => 'LBL_EDIT_BUTTON',
-			'widget_class' => 'SubPanelEditButton',
-		 	'module' => 'Notes',
-			'width' => '5%',
-		),
-        'remove_button'=>array(
+        ],
+        'date_modified' => [
+            'vname' => 'LBL_LIST_DATE_MODIFIED',
+            'width' => '10%',
+        ],
+        'edit_button' => [
+            'vname' => 'LBL_EDIT_BUTTON',
+            'widget_class' => 'SubPanelEditButton',
+            'module' => 'Notes',
+            'width' => '5%',
+        ],
+        'remove_button' => [
             'vname' => 'LBL_REMOVE',
-             'widget_class' => 'SubPanelRemoveButton',
-             'width' => '2%',
-        ),
-		'file_url'=>array(
-			'usage'=>'query_only'
-			),
-		'filename'=>array(
-			'usage'=>'query_only'
-			),
-	),
-);
-
-?>
+            'widget_class' => 'SubPanelRemoveButton',
+            'width' => '2%',
+        ],
+        'file_url' => [
+            'usage' => 'query_only',
+        ],
+        'filename' => [
+            'usage' => 'query_only',
+        ],
+    ],
+];

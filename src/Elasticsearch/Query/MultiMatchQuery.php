@@ -148,7 +148,7 @@ class MultiMatchQuery implements QueryInterface
             }
             return $query;
         } catch (Exception $ex) {
-            throw new QueryBuilderException("exception in building query: " . $ex->getMessage());
+            throw new QueryBuilderException('exception in building query: ' . $ex->getMessage());
         }
     }
 
@@ -163,7 +163,7 @@ class MultiMatchQuery implements QueryInterface
             return $terms;
         }
 
-        $result = array();
+        $result = [];
         foreach ($terms as $operator => $operands) {
             if (TermParserHelper::isAndOperator($operator) || TermParserHelper::isOrOperator($operator)) {
                 $returnExpr = $this->buildBoolQuery($operands);

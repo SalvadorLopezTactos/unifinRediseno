@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => '그룹 단계',
-    'LBL_DEAL_TOT'=>'할인 합계',
-    'LBL_DEAL_TOT_USDOLLAR'=>'할인 합계(미화 달러)',
+    'LBL_DEAL_TOT' => '할인 합계',
+    'LBL_DEAL_TOT_USDOLLAR' => '할인 합계(미화 달러)',
     'LBL_NEW_SUB' => '할인 소계',
     'LBL_SHIPPING' => '배송',
-    'LBL_SHIPPING_USDOLLAR'=>'배송(미화 달러)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'소계(미화 달러)',
+    'LBL_SHIPPING_USDOLLAR' => '배송(미화 달러)',
+    'LBL_SUBTOTAL_USDOLLAR' => '소계(미화 달러)',
     'LBL_SUBTOTAL' => '소계',
     'LBL_TAXABLE_SUBTOTAL' => '과세 소계',
-    'LBL_TAX_USDOLLAR'=>'세금(미화 달러)',
+    'LBL_TAX_USDOLLAR' => '세금(미화 달러)',
     'LBL_TAX' => '세금',
-    'LBL_TOTAL_USDOLLAR'=>'합계(미화 달러)',
+    'LBL_TOTAL_USDOLLAR' => '합계(미화 달러)',
     'LBL_TOTAL' => '합계',
     'LBL_QUOTE_BUNDLE_POSITION' => '견적 번들 위치',
     'EXCEPTION_INVALID_QUOTE_ID' => '견적 ID는 페이로드에서 누락',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  '요청된 내용을 찾을 수 없음',
+    'EXCEPTION_NOT_FOUND_QUOTE' => '요청된 내용을 찾을 수 없음',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => '추가 그룹 할인',
     'LBL_GROUP_TOTAL' => '그룹 합계',
     'LBL_QUOTE_DATA_GROUP_HEADER' => '그룹 머리글',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => '견적의 기본 제품 번들 그룹',
     'LBL_ALERT_DELETING_ITEM' => '상품을 삭제합니다',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => '상품이 성공적으로 삭제되었습니다',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '제품 번들 타임라인',
+];

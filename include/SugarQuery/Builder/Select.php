@@ -15,11 +15,13 @@ class SugarQuery_Builder_Select
     /**
      * @var SugarQuery_Builder_Field_Select[]
      */
-    public $select = array();
+    public $select = [];
 
     protected $query;
 
     protected $countQuery = false;
+
+    protected string $sumField = '';
 
     /**
      * Selected field names indexed by table
@@ -52,7 +54,7 @@ class SugarQuery_Builder_Select
         foreach ($columns as $column) {
             $field = new SugarQuery_Builder_Field_Select($column, $this->query);
             $key = empty($field->alias) ? $field->field : $field->alias;
-            if(!$field->isNonDb()) {
+            if (!$field->isNonDb()) {
                 $this->select[$key] = $field;
                 $this->fieldsByTable[$field->table][$field->field] = true;
             }
@@ -78,10 +80,10 @@ class SugarQuery_Builder_Select
         return $this;
     }
 
-    public function addField($column, $options = array())
+    public function addField($column, $options = [])
     {
         if (!empty($options['alias'])) {
-            $column = array(array($column, $options['alias']));
+            $column = [[$column, $options['alias']]];
         }
         $this->field($column);
     }
@@ -140,12 +142,31 @@ class SugarQuery_Builder_Select
     }
 
     /**
+     * Make the query SUM query by passing filed name
+     *
+     * @return self
+     */
+    public function setSumField(string $field)
+    {
+        $this->sumField = $field;
+        return $this;
+    }
+
+    /**
+     * return SUM query
+     */
+    public function getSumField(): string
+    {
+        return $this->sumField;
+    }
+
+    /**
      * Returns names of the fields selected from the given table
      *
      * @param string $table
      * @return string[]
      */
-    public function getSelectedFieldsByTable(string $table) : array
+    public function getSelectedFieldsByTable(string $table): array
     {
         if (!isset($this->fieldsByTable[$table])) {
             return [];

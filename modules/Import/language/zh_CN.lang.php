@@ -10,14 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:    Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
 global $timedate;
- 
-$mod_strings = array (
+
+$mod_strings = [
     'LBL_GOOD_FILE' => '成功导入文件读取',
     'LBL_RECORD_CONTAIN_LOCK_FIELD' => '导入的记录正参与流程，由于一些字段被流程锁定编辑，因而记录无法编辑。',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => '找到的错误数。由于错误而未导入的行视图错误选项卡',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER' => '如果用户不存在，则使用当前用户',
     'LBL_SHOW_HIDDEN' => '显示非正常导入的字段',
     'LBL_UPDATE_RECORDS' => '更新已存在记录而不导入它们（不能逆操作）',
-    'LBL_TEST'=> '测试导入（不要保存或更改数据）',
+    'LBL_TEST' => '测试导入（不要保存或更改数据）',
     'LBL_TRUNCATE_TABLE' => '导入前清空表格（删除所有记录）',
     'LBL_RELATED_ACCOUNTS' => '不要创建关联帐户',
     'LBL_NO_DATECHECK' => '跳过日期检查 (更快，如果是错的任何日期但会失败)',
@@ -74,10 +73,10 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => '无效整数值',
     'LBL_ERROR_INVALID_NUM' => '无效数字值',
     'LBL_ERROR_INVALID_TIME' => '无效时间',
-    'LBL_ERROR_INVALID_EMAIL'=>'无效电子邮件地址',
-    'LBL_ERROR_INVALID_BOOL'=>'无效的值 (应该为 1 或 0)',
-    'LBL_ERROR_INVALID_DATE'=>'无效日期字符串',
-    'LBL_ERROR_INVALID_USER'=>'无效用户名或 ID',
+    'LBL_ERROR_INVALID_EMAIL' => '无效电子邮件地址',
+    'LBL_ERROR_INVALID_BOOL' => '无效的值 (应该为 1 或 0)',
+    'LBL_ERROR_INVALID_DATE' => '无效日期字符串',
+    'LBL_ERROR_INVALID_USER' => '无效用户名或 ID',
     'LBL_ERROR_INVALID_TEAM' => '无效的团队名称或编号',
     'LBL_ERROR_INVALID_ACCOUNT' => '无效的帐户名称或 ID',
     'LBL_ERROR_INVALID_RELATE' => '无效的关联字段',
@@ -94,14 +93,14 @@ $mod_strings = array (
     'LBL_IMPORT_MODULE_NO_DIRECTORY_END' => '不存在或不可写入',
     'LBL_IMPORT_MODULE_ERROR_NO_UPLOAD' => '文件上传失败。很可能是 php.ini 文件中&#39;upload_max_filesize&#39;的值设置太小',
     'LBL_IMPORT_MODULE_ERROR_LARGE_FILE' => '文件太大。最大值：',
-    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => '字节。在 config.php 中更改 $sugar_config[&#39;upload_maxsize&#39;] 的值',
+    'LBL_IMPORT_MODULE_ERROR_LARGE_FILE_END' => '字节。更改 config.php 中的 $sugar_config[&#39;upload_maxsize&#39;] 设置',
     'LBL_MODULE_NAME' => '导入',
     'LBL_MODULE_NAME_SINGULAR' => '导入',
     'LBL_TRY_AGAIN' => '重试',
     'LBL_START_OVER' => '重新开始',
     'LBL_ERROR' => '错误:',
     'LBL_IMPORT_ERROR_MAX_REC_LIMIT_REACHED' => '导入文件包含 {0} 行。最佳行数是 {1}。较多行会使导入过程缓慢。点击确定以继续导入。点击取消来修改和重新上传导入文件.',
-    'ERR_IMPORT_SYSTEM_ADMININSTRATOR'  => '不能导入系统管理员用户',
+    'ERR_IMPORT_SYSTEM_ADMININSTRATOR' => '不能导入系统管理员用户',
     'ERR_REPORT_LOOP' => '系统检测到一个汇报循环。用户不可以向自己汇报，用户的经理也不可以向他们汇报。',
     'ERR_MULTIPLE' => '多个列被定义了相同的字段名称。',
     'ERR_MISSING_REQUIRED_FIELDS' => '缺少必填字段：',
@@ -213,7 +212,7 @@ $mod_strings = array (
     'LBL_NO_LINES' => '您的导入文件没有检测到任何行。请确认您的文件没有空行并重试。',
     'LBL_FILE_ALREADY_BEEN_OR' => '导入文件已处理或不存在',
     'LBL_SUCCESS' => '成功：',
-	'LBL_FAILURE' => '导入失败：',
+    'LBL_FAILURE' => '导入失败：',
     'LBL_SUCCESSFULLY' => '已成功导入',
     'LBL_LAST_IMPORT_UNDONE' => '导入没有完成。',
     'LBL_NO_IMPORT_TO_UNDO' => '沒有导入的记录可以还原。',
@@ -227,7 +226,7 @@ $mod_strings = array (
     'LBL_IMPORT_MORE' => '再次导入',
     'LBL_FINISHED' => '完成',
     'LBL_UNDO_LAST_IMPORT' => '撤消导入',
-    'LBL_LAST_IMPORTED'=>'已创建',
+    'LBL_LAST_IMPORTED' => '已创建',
     'ERR_MULTIPLE_PARENTS' => '你只能有一个父级编号定义',
     'LBL_DUPLICATES' => '找到重复项',
     'LNK_DUPLICATE_LIST' => '下载重复项列表',
@@ -269,6 +268,7 @@ $mod_strings = array (
     'LBL_HIDE_NOTES' => '隐藏笔记',
     'LBL_SHOW_PREVIEW_COLUMNS' => '显示预览列',
     'LBL_HIDE_PREVIEW_COLUMNS' => '隐藏预览列',
+    'LBL_DUPLICATE_CHECK_OPERATOR' => '使用运算符检查重复项：',
     'LBL_SAVE_MAPPING_AS' => '保存导入设置，为此保存设置提供名称：',
     'LBL_OPTION_ENCLOSURE_QUOTE' => '单引号 (&#39;)',
     'LBL_OPTION_ENCLOSURE_DOUBLEQUOTE' => '双引号 (")',
@@ -353,4 +353,4 @@ $mod_strings = array (
     'LBL_EXTERNAL_TEAM_TOOLTIP' => '要将新记录分派给团队以外您的默认团队，使用默认值列中选择不同的团队。',
     'LBL_SIGN_IN_HELP' => '要启用此服务，请在您的用户设置页面内外部帐户选项卡下登录。',
     'LBL_NO_EMAIL_DEFS_IN_MODULE' => "试图处理在不支持它一个 Bean 中的电子邮件地址。",
-);
+];

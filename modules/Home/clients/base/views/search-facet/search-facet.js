@@ -102,10 +102,12 @@
         }
 
         var labelFunction = this._getDefaultLabel;
+        let modulesCount = 0;
 
         _.each(results, function(val, key) {
             var selected = _.contains(selectedFacets[this.facetId], key);
             this.facetItems.push({key: key, label: labelFunction(key), count: val, selected: selected});
+            modulesCount++;
         }, this);
 
         if (_.isEmpty(this.facetItems)) {
@@ -114,6 +116,8 @@
             this.layout.context.trigger('dashboard:collapse:fire', false);
             this.facetItems = _.sortBy(this.facetItems, 'count').reverse();
         }
+
+        this.context.trigger('search:modules:number:change', modulesCount);
         this.render();
     },
 

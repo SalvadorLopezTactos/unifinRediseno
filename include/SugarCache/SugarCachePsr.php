@@ -71,6 +71,7 @@ class SugarCachePsr extends SugarCacheAbstract
     /**
      * {@inheritDoc}
      */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
     protected function _setExternal($key, $value)
     {
         $this->backend->set(
@@ -83,6 +84,7 @@ class SugarCachePsr extends SugarCacheAbstract
     /**
      * {@inheritDoc}
      */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
     protected function _getExternal($key)
     {
         return $this->backend->get($this->filterKey($key));
@@ -91,6 +93,7 @@ class SugarCachePsr extends SugarCacheAbstract
     /**
      * {@inheritDoc}
      */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
     protected function _clearExternal($key)
     {
         $this->backend->delete($this->filterKey($key));
@@ -99,6 +102,7 @@ class SugarCachePsr extends SugarCacheAbstract
     /**
      * {@inheritDoc}
      */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
     protected function _resetExternal()
     {
         $this->backend->clear();
@@ -107,10 +111,10 @@ class SugarCachePsr extends SugarCacheAbstract
     /**
      * @param string $key
      *
-     * @link https://www.php-fig.org/psr/psr-16/
      * @return string
+     * @link https://www.php-fig.org/psr/psr-16/
      */
-    private function filterKey(string $key) : string
+    private function filterKey(string $key): string
     {
         if (strpbrk($key, '{}()/\@:') !== false) {
             $GLOBALS['log']->warn(

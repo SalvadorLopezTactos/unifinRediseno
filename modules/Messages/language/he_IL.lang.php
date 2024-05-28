@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'מתבצע',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס הודעות',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות הודעות',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן של הודעות',
 ];

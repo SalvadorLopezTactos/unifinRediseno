@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Auftrags-Warteschleife',
     'LBL_MODULE_NAME_SINGULAR' => 'Auftrags-Warteschleife',
     'LBL_MODULE_TITLE' => 'Auftrags-Warteschleife: Startseite',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Lösung annuliert',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'Lösung wird ausgeführt',
     // Errors
-    'ERR_CALL' => "Kann Funktion %s nicht aufrufen",
-    'ERR_CURL' => "Kein CURL - kann URL-Aufträge nicht ausführen",
-    'ERR_FAILED' => "Unerwarteter Fehler. Bitte PHP-Protokoll bzw. sugarcrm.log überprüfen",
-    'ERR_PHP' => "%s [%d]: %s in %s auf Zeile %d",
-    'ERR_NOUSER' => "Keine Benutzer-ID für diesen Auftrag angegeben",
-    'ERR_NOSUCHUSER' => "Benutzer-ID %s nicht gefunden",
-    'ERR_JOBTYPE' => "Unbekannter Auftragtyp: %s",
-    'ERR_TIMEOUT' => "Zwangsversagen bei Timeout",
+    'ERR_CALL' => 'Kann Funktion %s nicht aufrufen',
+    'ERR_CURL' => 'Kein CURL - kann URL-Aufträge nicht ausführen',
+    'ERR_FAILED' => 'Unerwarteter Fehler. Bitte PHP-Protokoll bzw. sugarcrm.log überprüfen',
+    'ERR_PHP' => '%s [%d]: %s in %s auf Zeile %d',
+    'ERR_NOUSER' => 'Keine Benutzer-ID für diesen Auftrag angegeben',
+    'ERR_NOSUCHUSER' => 'Benutzer-ID %s nicht gefunden',
+    'ERR_JOBTYPE' => 'Unbekannter Auftragtyp: %s',
+    'ERR_TIMEOUT' => 'Zwangsversagen bei Timeout',
     'ERR_JOB_FAILED_VERBOSE' => 'Auftrag %1$s (%2$s) in CRON-Lauf fehlgeschlagen',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Bean mit ID %s kann nicht geladen werden',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Für Route %s kann kein Handler gefunden werden',
@@ -93,7 +93,7 @@ ist eine Open Source-Message Broker-Software (manchmal auch Message Oriented Mid
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Amazon SQS-Konfigurationshilfe',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Amazon SQS-Konfigurationsbereich.</b></p> <ul><li>Zugangsschlüssel-ID: <i>Geben Sie Ihre Zugangsschlüssel-ID für Amazon SQS ein</i></li> <li>Geheimer Zugangsschlüssel: <i>Geben Sie Ihren geheimen Zugangsschlüssel für Amazon SQS ein</i></li> <li>Region: <i>Geben Sie die Region des Amazon SQS-Servers ein</i></li> <li>Warteschleifenname: <i>Geben Sie den  Warteschleifennamne von Amazon SQS-Server ein</i></li></ul>",
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Amazon SQS-Konfigurationsbereich.</b></p> <ul><li>Zugangsschlüssel-ID: <i>Geben Sie Ihre Zugangsschlüssel-ID für Amazon SQS ein</i></li> <li>Geheimer Zugangsschlüssel: <i>Geben Sie Ihren geheimen Zugangsschlüssel für Amazon SQS ein</i></li> <li>Region: <i>Geben Sie die Region des Amazon SQS-Servers ein</i></li> <li>Warteschleifenname: <i>Geben Sie den  Warteschleifennamne von Amazon SQS-Server ein</i></li></ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'AMQP-Konfigurationshilfe',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>AMQP-Konfigurationsbereich.</b></p> <ul><li>Server-URL: <i>Geben Sie die URL Ihres Nachrichtenwarteschleifen-Servers ein.</i></li>     <li>Anmeldung: <i>Geben Sie Ihre Anmeldeinformationen für RabbitMQ ein</i></li>     <li>Passwort: <i>Geben Sie Ihr Passwort für RabbitMQ ein</i></li></ul>",
     'LBL_CONFIG_GEARMAN_TITLE' => 'Gearman-Konfigurationshilfe',
@@ -106,4 +106,4 @@ ist eine Open Source-Message Broker-Software (manchmal auch Message Oriented Mid
     'LBL_REGION' => 'Region',
     'LBL_ACCESS_KEY_SECRET' => 'Geheimer Zugangsschlüssel',
     'LBL_QUEUE_NAME' => 'Adaptername',
-);
+];

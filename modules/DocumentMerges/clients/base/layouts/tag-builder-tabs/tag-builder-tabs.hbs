@@ -13,9 +13,15 @@
 
 <div class="tabbable dm-tag-builder-tabs">
     <ul class="nav nav-tabs dm-tag-builder-tab-list">
-        <li class="active"><a data-toggle="tab" data-target="tab1">{{str 'LBL_TAG_BUILDER_FIELDS' module}}</a></li>
-        <li><a data-toggle="tab" data-target="tab2">{{str 'LBL_DIRECTIVES' module}}</a></li>
-        <li><a data-toggle="tab" data-target="tab3">{{str 'LBL_FORMULA_BUILDER' module}}</a></li>
+        <li class="active" data-bs-toggle="tab" data-bs-target="#tab1">
+            <a>{{str 'LBL_TAG_BUILDER_FIELDS' module}}</a>
+        </li>
+        <li data-bs-toggle="tab" data-bs-target="#tab2">
+            <a>{{str 'LBL_DIRECTIVES' module}}</a>
+        </li>
+        <li data-bs-toggle="tab" data-bs-target="#tab3">
+            <a>{{str 'LBL_FORMULA_BUILDER' module}}</a>
+        </li>
         <li class="dm-float-right">
             <i class="sicon sicon-help dm-help-icon"
                 rel="tooltip"

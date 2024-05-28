@@ -41,4 +41,6 @@ $mod_strings = [
     'LBL_ACTIVITY_IN_PROGRESS' => 'en curs',
 
     'LBL_MESSAGES_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als missatges',
+    'LBL_MESSAGES_RECORD_DASHBOARD' => 'Tauler de registre de missatges',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia del missatge',
 ];

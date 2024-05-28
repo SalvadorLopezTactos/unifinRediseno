@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Prosessdefinisjoner',
-  'LBL_MODULE_TITLE' => 'Prosessdefinisjoner',
-  'LBL_MODULE_NAME_SINGULAR' => 'Prosessdefinisjoner',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Prosessdefinisjoner',
+    'LBL_MODULE_TITLE' => 'Prosessdefinisjoner',
+    'LBL_MODULE_NAME_SINGULAR' => 'Prosessdefinisjoner',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Prosessdefinisjoner fokusskuff',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Prosessdefinisjoner fokusskuff',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Registerdashbord for prosessdefinisjoner',
-  'LNK_LIST' => 'Vis Prosessdefinisjoner',
-  'LNK_NEW_PMSE_PROJECT' => 'Opprett prosessdefinisjon',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Importer prosessdefinisjoner',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Registerdashbord for prosessdefinisjoner',
+    'LNK_LIST' => 'Vis Prosessdefinisjoner',
+    'LNK_NEW_PMSE_PROJECT' => 'Opprett prosessdefinisjon',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Importer prosessdefinisjoner',
 
-  'LBL_PRJ_STATUS' => 'Status',
-  'LBL_PRJ_MODULE' => 'Mål Modul',
-  'LBL_PRJ_RUN_ORDER' => 'Kjørerekkefølge',
-  'LBL_PMSE_BUTTON_SAVE' => 'Lagre',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Avbryt',
-  'LBL_PMSE_BUTTON_YES' => 'Ja',
-  'LBL_PMSE_BUTTON_NO' => 'Nei',
-  'LBL_PMSE_BUTTON_OK' => 'OK',
+    'LBL_PRJ_STATUS' => 'Status',
+    'LBL_PRJ_MODULE' => 'Mål Modul',
+    'LBL_PRJ_RUN_ORDER' => 'Kjørerekkefølge',
+    'LBL_PMSE_BUTTON_SAVE' => 'Lagre',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Avbryt',
+    'LBL_PMSE_BUTTON_YES' => 'Ja',
+    'LBL_PMSE_BUTTON_NO' => 'Nei',
+    'LBL_PMSE_BUTTON_OK' => 'OK',
     'LBL_PMSE_FORM_ERROR' => 'Vennligst løs eventuelle feil før du fortsetter.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Design',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktivitet',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Handling',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Emne-starthendelse',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Salgsmulighet Starter Event' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Salgsmulighet Starter Event',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Dokument Starter Event',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Andre Moduler starter Event',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Vent Event',
@@ -227,7 +227,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_ASSIGN_TEAM' => 'Round Robin',
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Denne Aktivitet er tom',
-    'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Navnet «% s » finnes allerede',
+    'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Navnet "%s" finnes allerede i formfamilien.',
 
     'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Nødvendig skifttilgjengelighet',
     'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Hvis ingen brukere er tilgjengelige',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Forretningsregel',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Forretningsregelhandling',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'E-postmal',
-);
+];

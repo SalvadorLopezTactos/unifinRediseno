@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Categories',
     'LBL_MODULE_NAME_SINGULAR' => 'Category',
     'LBL_MODULE_TITLE' => 'Categories',
@@ -30,4 +30,4 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION_FORMATTED_PLURAL' => 'Are you sure you want to delete the {0}? All nested categories will be removed as well',
     'LBL_WRONG_MOVE_PATH' => 'You cannot move a folder into itself.',
     'ERR_EMPTY_NODE_NAME' => 'You cannot add a category without title',
-);
+];

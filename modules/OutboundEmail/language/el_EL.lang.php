@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Λογαριασμοί Εξερχόμενων Email',
     'LBL_MODULE_NAME_SINGULAR' => 'Λογαριασμος Εξερχόμενων Email',
     'LBL_STATUS' => 'Κατάσταση',
@@ -40,4 +40,4 @@ $mod_strings = array(
     'LBL_PREFERRED_SENDING_ACCOUNT' => 'Προτιμώμενος λογαριασμός αποστολής',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης ρυθμίσεων ηλεκτρονικού ταχυδρομείου',
-);
+];

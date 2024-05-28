@@ -19,7 +19,7 @@ $vardefs = [
             'type' => 'link',
             'side' => 'left',
             'bean_name' => 'DRI_Workflow',
-            'relationship' => 'dri_workflow_'.strtolower($module),
+            'relationship' => 'dri_workflow_' . strtolower($module),
             'module' => 'DRI_Workflows',
         ],
         'dri_workflow_template_id' => [
@@ -31,16 +31,13 @@ $vardefs = [
             'importable' => 'true',
             'massupdate' => true,
             'type' => 'enum',
+            'placeholder' => 'LBL_SELECT_SMART_GUIDE_TEMPLATE_PLACEHOLDER',
             'options' => null,
             'dbType' => 'id',
             'processes' => true,
             'studio' => false,
             'function' => [
-                'include' => "modules/DRI_Workflow_Templates/DRI_Workflow_Template.php",
-                'name' => [
-                    'DRI_Workflow_Template',
-                    'listEnumValuesByModule',
-                ],
+                'name' => 'listSmartGuideTemplatesByModule',
                 'params' => [
                     $module,
                 ],
@@ -72,12 +69,21 @@ $vardefs = [
             'type' => 'link',
             'side' => 'right',
             'bean_name' => 'DRI_Workflow_Template',
-            'relationship' => strtolower($object_name).'_dri_workflow_templates',
+            'relationship' => strtolower($object_name) . '_dri_workflow_templates',
             'module' => 'DRI_Workflow_Templates',
+        ],
+        'perform_sugar_action' => [
+            'name' => 'perform_sugar_action',
+            'vname' => 'LBL_PERFORM_SUGAR_ACTION',
+            'type' => 'bool',
+            'studio' => false,
+            'massupdate' => false,
+            'reportable' => false,
+            'default' => 0,
         ],
     ],
     'relationships' => [
-        strtolower($object_name).'_dri_workflow_templates' => [
+        strtolower($object_name) . '_dri_workflow_templates' => [
             'relationship_type' => 'one-to-many',
             'lhs_key' => 'id',
             'lhs_module' => 'DRI_Workflow_Templates',
@@ -88,8 +94,8 @@ $vardefs = [
         ],
     ],
     'indices' => [
-        'idx_'.trim(substr(strtolower($table_name), 0, 17)).'_cjtpl_id' => [
-            'name' => 'idx_'.trim(substr(strtolower($table_name), 0, 17)).'_cjtpl_id',
+        'idx_' . trim(substr(strtolower($table_name), 0, 17)) . '_cjtpl_id' => [
+            'name' => 'idx_' . trim(substr(strtolower($table_name), 0, 17)) . '_cjtpl_id',
             'type' => 'index',
             'fields' => [
                 'dri_workflow_template_id',

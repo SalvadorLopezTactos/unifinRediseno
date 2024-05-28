@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Brickvy',
     'LBL_MODULE_NAME_SINGULAR' => 'Brickvy',
     'LBL_VISUAL_PIPELINE_CONFIG_TITLE' => 'Brickvy',
@@ -18,7 +19,7 @@ $mod_strings = array(
     'LBL_PIPELINE_MODULES_LIST' => 'Aktiverade moduler',
     'LBL_PIPELINE_GENERAL_SETTINGS' => 'Moduler i plattvy',
     'LBL_PIPELINE_MODULE_SETTINGS' => 'Modulinställningar',
-    'LBL_PIPELINE_TABLE_HEADER' => "Markera de fält vars värden ska användas som kolumner",
+    'LBL_PIPELINE_TABLE_HEADER' => 'Markera de fält vars värden ska användas som kolumner',
     'LBL_PIPELINE_TILE_HEADER' => 'Rubrikfält för platta',
     'LBL_PIPELINE_AVAILABLE_COLUMNS' => 'Tillgängliga kolumner',
     'LBL_PIPELINE_TILE_BODY_FIELDS' => 'Brödtextfält för platta',
@@ -33,4 +34,8 @@ $mod_strings = array(
     'LBL_PIPELINE_HEADER_PREVIEW' => 'Bricka förhandsvisning',
     'LBL_PIPELINE_ERR_TOO_MANY_FIELDS_ON_TILE' => 'För många fält på brickan.',
     'LBL_PIPELINE_ERR_VALIDATION_FAILED' => 'Lös alla fel på följande modulinställningsflikar innan du fortsätter:<br><br>',
-);
+    'LBL_MODULE_SELECTION' => 'Välj den modul du vill visa och konfigurera nedan',
+    'LBL_SHOW_COLUMN_COUNT' => 'Visa kolumnantal',
+    'LBL_SHOW_COLUMN_TOTAL' => 'Visa kolumnsumma',
+    'LBL_TOTAL_FIELD' => 'Summafält',
+];

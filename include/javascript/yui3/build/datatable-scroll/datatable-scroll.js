@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('datatable-scroll', function (Y, NAME) {
 
 /**
@@ -110,7 +103,7 @@ Y.mix(Scrollable.prototype, {
                 target = this.getRow(id);
             } else if (isString(id)) {
                 target = this._tbodyNode.one('#' + id);
-            } else if (id instanceof Y.Node &&
+            } else if (id._node &&
                     // TODO: ancestor(yScrollNode, xScrollNode)
                     id.ancestor('.yui3-datatable') === this.get('boundingBox')) {
                 target = id;
@@ -1390,4 +1383,4 @@ Y.mix(Scrollable.prototype, {
 Y.Base.mix(Y.DataTable, [Scrollable]);
 
 
-}, '3.15.0', {"requires": ["datatable-base", "datatable-column-widths", "dom-screen"], "skinnable": true});
+}, '3.18.1', {"requires": ["datatable-base", "datatable-column-widths", "dom-screen"], "skinnable": true});

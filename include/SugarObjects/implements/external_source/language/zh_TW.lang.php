@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-    'LBL_SOURCE_ID'   => '外部來源 ID',
+$mod_strings = [
+    'LBL_SOURCE_ID' => '外部來源 ID',
     'LBL_SOURCE_TYPE' => '外部來源',
     'LBL_SOURCE_META' => '外部來源中繼資料',
-);
+];

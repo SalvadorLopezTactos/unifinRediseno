@@ -12,69 +12,69 @@
 
 $module_name = '<module_name>';
 $_module_name = '<_module_name>';
-$viewdefs[$module_name]['base']['filter']['default'] = array(
+$viewdefs[$module_name]['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        $_module_name . '_type' => array(),
-        'industry' => array(),
-        'annual_revenue' => array(),
-        'address_street' => array(
-            'dbFields' => array(
+    'fields' => [
+        'name' => [],
+        $_module_name . '_type' => [],
+        'industry' => [],
+        'annual_revenue' => [],
+        'address_street' => [
+            'dbFields' => [
                 'billing_address_street',
                 'shipping_address_street',
-            ),
+            ],
             'vname' => 'LBL_STREET',
             'type' => 'text',
-        ),
-        'address_city' => array(
-            'dbFields' => array(
+        ],
+        'address_city' => [
+            'dbFields' => [
                 'billing_address_city',
                 'shipping_address_city',
-            ),
+            ],
             'vname' => 'LBL_CITY',
             'type' => 'text',
-        ),
-        'address_state' => array(
-            'dbFields' => array(
+        ],
+        'address_state' => [
+            'dbFields' => [
                 'billing_address_state',
                 'shipping_address_state',
-            ),
+            ],
             'vname' => 'LBL_STATE',
             'type' => 'text',
-        ),
-        'address_postalcode' => array(
-            'dbFields' => array(
+        ],
+        'address_postalcode' => [
+            'dbFields' => [
                 'billing_address_postalcode',
                 'shipping_address_postalcode',
-            ),
+            ],
             'vname' => 'LBL_POSTAL_CODE',
             'type' => 'text',
-        ),
-        'address_country' => array(
-            'dbFields' => array(
+        ],
+        'address_country' => [
+            'dbFields' => [
                 'billing_address_country',
                 'shipping_address_country',
-            ),
+            ],
             'vname' => 'LBL_COUNTRY',
             'type' => 'text',
-        ),
-        'rating' => array(),
-        'phone_office' => array(),
-        'website' => array(),
-        'ownership' => array(),
-        'employees' => array(),
-        'ticker_symbol' => array(),
-        'email' => array(),
-        'tag' => array(),
-        'assigned_user_name' => array(),
-        '$owner' => array(
+        ],
+        'rating' => [],
+        'phone_office' => [],
+        'website' => [],
+        'ownership' => [],
+        'employees' => [],
+        'ticker_symbol' => [],
+        'email' => [],
+        'tag' => [],
+        'assigned_user_name' => [],
+        '$owner' => [
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',
-        ),
-        '$favorite' => array(
+        ],
+        '$favorite' => [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        ),
-    ),
-);
+        ],
+    ],
+];

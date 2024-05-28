@@ -9,11 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-    'LBL_CURRENCY'=>'Νόμισμα',
+$mod_strings = [
+    'LBL_CURRENCY' => 'Νόμισμα',
     'LBL_CURRENCIES' => 'Νομίσματα',
-    'LBL_CURRENCY_NAME'=>'Όνομα Νομίσματος',
-    'LBL_CURRENCY_SYMBOL'=>'Σύμβολο Νομίσματος',
+    'LBL_CURRENCY_NAME' => 'Όνομα Νομίσματος',
+    'LBL_CURRENCY_SYMBOL' => 'Σύμβολο Νομίσματος',
     'LBL_CURRENCY_RATE' => 'Βασικό Επιτόκιο',
     'LBL_CURRENCY_ID' => 'Ταυτότητα Νομίσματος',
-);
+];

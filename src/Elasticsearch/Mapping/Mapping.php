@@ -195,6 +195,7 @@ class Mapping implements MappingInterface
 
         return $this->notIndexedBase;
     }
+
     /**
      * {@inheritdoc}
      */
@@ -267,7 +268,7 @@ class Mapping implements MappingInterface
     {
         $this->createMultiFieldBase($baseField, $this->multiFieldBase, [])->addField($field, $property);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -311,8 +312,8 @@ class Mapping implements MappingInterface
      * @param string $field
      * @param array $mapping Mapping to apply on base field
      * @param array $copyTo Optional copy_to definition
-     * @throws MappingException
      * @return MultiFieldBaseProperty
+     * @throws MappingException
      */
     protected function createMultiFieldBase($field, array $mapping, array $copyTo = [])
     {
@@ -368,7 +369,7 @@ class Mapping implements MappingInterface
      * check sugar config if 'enable_long_text_search' is enabled
      * @return bool
      */
-    protected function isLongTextEnabled() : bool
+    protected function isLongTextEnabled(): bool
     {
         global $sugar_config;
         if ($sugar_config && !empty($sugar_config['enable_long_text_search'])) {
@@ -382,11 +383,11 @@ class Mapping implements MappingInterface
      * @param string $field
      * @return bool
      */
-    protected static function checkCommonField(?string $field) : bool
+    protected static function checkCommonField(?string $field): bool
     {
         if (!in_array($field, static::COMMON_FIELD_NAMES)) {
             if (!empty($GLOBALS['log'])) {
-                $GLOBALS['log']->error("This field is not in the common field list: " . $field);
+                $GLOBALS['log']->error('This field is not in the common field list: ' . $field);
             }
             return false;
         }

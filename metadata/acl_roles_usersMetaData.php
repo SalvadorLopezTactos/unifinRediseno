@@ -10,58 +10,58 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['acl_roles_users'] = array(
+$dictionary['acl_roles_users'] = [
     'table' => 'acl_roles_users',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'role_id' => array(
+        ],
+        'role_id' => [
             'name' => 'role_id',
             'type' => 'id',
-        ),
-        'user_id' => array(
+        ],
+        'user_id' => [
             'name' => 'user_id',
             'type' => 'id',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'acl_roles_userspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_acluser_id',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'user_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_aclrole_user',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'role_id',
                 'user_id',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'acl_roles_users' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'acl_roles_users' => [
             'lhs_module' => 'ACLRoles',
             'lhs_table' => 'acl_roles',
             'lhs_key' => 'id',
@@ -74,6 +74,6 @@ $dictionary['acl_roles_users'] = array(
             'join_key_rhs' => 'user_id',
             'relationship_class' => 'ACLRoleUserRelationship',
             'relationship_file' => 'modules/ACLRoles/ACLRoleUserRelationship.php',
-        ),
-    ),
-);
+        ],
+    ],
+];

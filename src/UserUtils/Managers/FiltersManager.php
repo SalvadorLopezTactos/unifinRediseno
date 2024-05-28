@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\UserUtils\Managers;
 
 use BeanFactory;
@@ -65,7 +66,7 @@ class FiltersManager extends Manager
         $this->filters = $payload->getFilters();
         $this->modules = $payload->getModules();
 
-        if (count($this->destinationUsers) > self::MAX_USER) {
+        if (safeCount($this->destinationUsers) > self::MAX_USER) {
             $this->useScheduledJob = true;
         }
     }
@@ -111,13 +112,13 @@ class FiltersManager extends Manager
             return;
         }
 
-        if ((is_countable($this->modules) ? count($this->modules) : 0) > 0) {
+        if (safeCount($this->modules) > 0) {
             foreach ($this->destinationUsers as $destinationUserId) {
                 $this->deleteFilters($destinationUserId, $this->modules);
             }
         }
 
-        if (count($this->filters) > 0) {
+        if (safeCount($this->filters) > 0) {
             foreach ($this->filters as $filterId) {
                 $this->deleteFilter($filterId);
             }
@@ -158,7 +159,7 @@ class FiltersManager extends Manager
      */
     private function cloneFilters(string $sourceUser, string $destinationUser, ?array $modules): void
     {
-        if (count((array) $modules) > 0) {
+        if (safeCount((array)$modules) > 0) {
             foreach ($modules as $module) {
                 $this->cloneFiltersFor($sourceUser, $destinationUser, $module);
             }
@@ -246,7 +247,7 @@ class FiltersManager extends Manager
      */
     private function deleteFilters(string $userId, ?array $modules): void
     {
-        if (count((array) $modules) > 0) {
+        if (safeCount((array)$modules) > 0) {
             foreach ($modules as $module) {
                 $this->deleteFiltersFor($userId, $module);
             }
@@ -315,7 +316,7 @@ class FiltersManager extends Manager
         $sugarQuery->where()->equals('id', $filterId);
         $result = $sugarQuery->execute();
 
-        if (is_array($result) && count($result) > 0) {
+        if (is_array($result) && safeCount($result) > 0) {
             return $result[0];
         }
 
@@ -341,7 +342,7 @@ class FiltersManager extends Manager
         $sugarQuery->where()->equals($db->convert('filter_definition', 'text2char'), $filter['filter_definition']);
         $result = $sugarQuery->execute();
 
-        if (count($result) > 0) {
+        if (safeCount($result) > 0) {
             return true;
         }
 

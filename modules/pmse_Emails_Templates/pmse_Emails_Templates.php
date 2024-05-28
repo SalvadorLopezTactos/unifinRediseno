@@ -11,12 +11,14 @@
  */
 
 
-class pmse_Emails_Templates extends pmse_Emails_Templates_sugar {
+class pmse_Emails_Templates extends pmse_Emails_Templates_sugar
+{
     protected array $fillable = ['base_module'];
 
-	public function __construct(){
-		parent::__construct();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Clean string from potential XSS problems
@@ -39,7 +41,7 @@ class pmse_Emails_Templates extends pmse_Emails_Templates_sugar {
     {
         preg_match_all('/%7B::(.*?)::%7D/', (string)$html, $match);
         foreach ($match[1] as $value) {
-            $html = str_replace('%7B::'.$value.'::%7D', '{::'.$value.'::}', $html);
+            $html = str_replace('%7B::' . $value . '::%7D', '{::' . $value . '::}', $html);
         }
 
         return $html;

@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare achiziții',
     'LBL_RELATED_ACCOUNT' => 'Cont asociat',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare achiziții',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia achizițiilor',
 ];

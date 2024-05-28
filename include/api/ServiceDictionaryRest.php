@@ -55,7 +55,7 @@ class ServiceDictionaryRest extends ServiceDictionary
      */
     public function lookupRoute($path, $version, $requestType, $platform)
     {
-        $pathLength = count($path);
+        $pathLength = safeCount($path);
 
         // Put the request type on the front of the path, it is how it is indexed
         array_unshift($path, $requestType);
@@ -63,7 +63,7 @@ class ServiceDictionaryRest extends ServiceDictionary
         // The first element (path length) we can find on our own, but the request type will need to be hunted normally
         if (!isset($this->dict[$pathLength])) {
             // There is no route with the same number of /'s as the requested route, send them on their way
-            throw new SugarApiExceptionNoMethod('Could not find a route with '.$pathLength.' elements');
+            throw new SugarApiExceptionNoMethod('Could not find a route with ' . $pathLength . ' elements');
         }
 
         if (isset($this->dict[$pathLength][$platform])) {
@@ -78,7 +78,7 @@ class ServiceDictionaryRest extends ServiceDictionary
         }
 
         if ($route == false) {
-            throw new SugarApiExceptionNoMethod('Could not find a route with '.$pathLength.' elements');
+            throw new SugarApiExceptionNoMethod('Could not find a route with ' . $pathLength . ' elements');
         }
 
         return $route;
@@ -93,7 +93,7 @@ class ServiceDictionaryRest extends ServiceDictionary
      */
     protected function lookupChildRoute($routeBase, $path, $version)
     {
-        if (count($path) == 0) {
+        if (safeCount($path) == 0) {
             // We are at the end of the lookup, the elements here are actual paths, we need to return the best one
             return $this->getBestEnding($routeBase, $version);
         }
@@ -180,9 +180,9 @@ class ServiceDictionaryRest extends ServiceDictionary
         if (isset($route['minVersion']) && version_compare($route['minVersion'], $version, '<=')) {
             // normalize MAJOR.MINOR version
             $v = explode('.', $route['minVersion']);
-            $majorVer = (int) $v[0];
-            $minorVer = empty($v[1]) ? 0 : (int) $v[1];
-            $wt = round(($majorVer*100 + $minorVer)/self::WEIGHT_BASE, 5);
+            $majorVer = (int)$v[0];
+            $minorVer = empty($v[1]) ? 0 : (int)$v[1];
+            $wt = round(($majorVer * 100 + $minorVer) / self::WEIGHT_BASE, 5);
             $extraScore += self::WEIGHT_MINVERSION + $wt;
         }
 
@@ -207,7 +207,7 @@ class ServiceDictionaryRest extends ServiceDictionary
      */
     public function preRegisterEndpoints()
     {
-        $this->endpointBuffer = array();
+        $this->endpointBuffer = [];
     }
 
     /**
@@ -232,7 +232,7 @@ class ServiceDictionaryRest extends ServiceDictionary
              * ability to perform a GET with a request body, in those situation we want to
              * be able to register the same endpoint for both GET and POST.
              */
-            $reqTypes = is_array($endpoint['reqType']) ? $endpoint['reqType'] : array($endpoint['reqType']);
+            $reqTypes = is_array($endpoint['reqType']) ? $endpoint['reqType'] : [$endpoint['reqType']];
 
             foreach ($reqTypes as $reqType) {
                 // We use the path length, platform, and request type as the first three keys to search by
@@ -240,7 +240,7 @@ class ServiceDictionaryRest extends ServiceDictionary
                 if (is_array($path)) {
                     array_unshift($path, safeCount($endpoint['path']), $platform, $reqType);
                 } else {
-                    LoggerManager::getLogger()->fatal(sprintf('"path" is expected to be array, "%s" given', gettype($path)) . PHP_EOL . (new Exception())->getTraceAsString());
+                    LoggerManager::getLogger()->warn(sprintf('"path" is expected to be array, "%s" given', gettype($path)) . PHP_EOL . (new Exception())->getTraceAsString());
                 }
 
                 $endpointScore = 0.0;
@@ -294,7 +294,7 @@ class ServiceDictionaryRest extends ServiceDictionary
 
 
         if (!isset($parent[$currPath])) {
-            $parent[$currPath] = array();
+            $parent[$currPath] = [];
         }
 
         $this->addToPathArray($parent[$currPath], $path, $endpoint, ($score + $myScore));

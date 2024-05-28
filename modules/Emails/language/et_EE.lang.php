@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FW' => 'FW:',
     'LBL_RE' => 'Re:',
     'LBL_BUTTON_CREATE' => 'Loo',
@@ -154,8 +154,8 @@ $mod_strings = array(
     'LBL_SELECT_FROM_SENDER' => 'Vali e-posti kontolt',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Vali allkiri',
     'LBL_SIGNATURE' => 'Allkiri',
-    "LBL_DEFAULT_SIGNATURE_TITLE" => "Vaikimisi allkiri",
-    "LBL_SHOW_MORE_SIGNATURES" => "Rohkem allkirju ...",
+    'LBL_DEFAULT_SIGNATURE_TITLE' => 'Vaikimisi allkiri',
+    'LBL_SHOW_MORE_SIGNATURES' => 'Rohkem allkirju ...',
     'LBL_SUBJECT' => 'Teema:',
     'LBL_TEMPLATE' => 'Mall',
     'LBL_TEXT_BODY' => 'Kehatekst',
@@ -202,9 +202,9 @@ $mod_strings = array(
     'LBL_LIST_TIME' => 'Saatmisaeg',
     'LBL_LIST_TO_ADDR' => 'Kellele',
     'LBL_LIST_TYPE' => 'Tüüp',
-    "LBL_SELECTED_RECIPIENTS" => "Valitud saajad",
-    "LBL_SHOW_MORE_RECIPIENTS" => "Rohkem saajaid ...",
-    "LBL_COMPOSE_ADDRESSBOOK" => "Aadressiraamat",
+    'LBL_SELECTED_RECIPIENTS' => 'Valitud saajad',
+    'LBL_SHOW_MORE_RECIPIENTS' => 'Rohkem saajaid ...',
+    'LBL_COMPOSE_ADDRESSBOOK' => 'Aadressiraamat',
     'NTC_REMOVE_INVITEE' => 'Kas olete kindel, et soovite selle saaja e-kirjast eemaldada?',
     'WARNING_SETTINGS_NOT_CONF' => 'Teie e-posti sätted ei ole e-kirjade saatmiseks õigesti määratud. SMTP-server ' .
         'tuleb seadistada lehel <a href="#bwc/index.php?module=EmailMan&action=config">E-posti sätted</a>.',
@@ -213,8 +213,8 @@ $mod_strings = array(
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'Manuste saatmine võib ebaõnnestuda: "upload_tmp_dir“ väärtus on vale või kasutuskõlbmatu. ' .
         'Parandage see failis php.ini.',
     'LBL_MESSAGE_UID' => 'Sõnumi UID',
-    'LBL_OPEN_DRAFT_ALERT' => 'E-kiri on mustand. Klõpsake valikut '.
-        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>,'.
+    'LBL_OPEN_DRAFT_ALERT' => 'E-kiri on mustand. Klõpsake valikut ' .
+        '<a href="javascript:void(0);" data-action="email-draft">"{{subject}}"</a>,' .
         ' et kirja redigeerida.',
     'LBL_EMAIL_BODY' => 'Meilisõnum',
 
@@ -451,6 +451,7 @@ $mod_strings = array(
     'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Meilide fookuse sahtel',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Meilikirjete töölaud',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'E-posti ajaskaala',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS' => 'adressaate pole määratud',
@@ -475,4 +476,5 @@ Võite rakendada eelmääratletud malli, kasutades nuppu Mall, või lisada ühe 
     'LBL_SHORTCUT_EMAIL_SEND' => 'E-kirja saatmine',
     'LBL_MAILBOX' => 'Sissetulev konto',
     'LBL_ERR_NO_OUTBOUND_ACCOUNTS_AVAILABLE' => 'Meilide saatmiseks konfigureerige väljaminevate meilide konto jaotises <a href="#OutboundEmail">Meilisätted</a>.',
-);
+    'LBL_TOO_SHORT' => 'Tippige vähemalt {0} märki...',
+];

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_LOCKED_FIELDS_LINK' => '字段被锁定编辑',
     'LBL_LOCKED_FIELDS' => '字段被锁定编辑',
-);
+];

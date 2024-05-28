@@ -17,13 +17,13 @@ class SugarFieldEncrypt extends SugarFieldBase
      * Decrypt encrypt fields values before inserting them into the emails
      *
      * @param string $inputField
-     * @param mixed  $vardef
-     * @param mixed  $displayParams
-     * @param int    $tabindex
+     * @param mixed $vardef
+     * @param mixed $displayParams
+     * @param int $tabindex
      *
      * @return string
      */
-    public function getEmailTemplateValue($inputField, $vardef, $displayParams = array(), $tabindex = 0)
+    public function getEmailTemplateValue($inputField, $vardef, $displayParams = [], $tabindex = 0)
     {
         if ($this->allowRead($vardef)) {
             // Uncrypt the value
@@ -39,14 +39,15 @@ class SugarFieldEncrypt extends SugarFieldBase
      * {@inheritDoc}
      */
     public function apiFormatField(
-        array &$data,
-        SugarBean $bean,
-        array $args,
+        array       &$data,
+        SugarBean   $bean,
+        array       $args,
         $fieldName,
         $properties,
-        array $fieldList = null,
+        array       $fieldList = null,
         ServiceBase $service = null
     ) {
+
         //If read is not allowed, only return the null/not_null status of the field
         if ($this->allowRead($properties)) {
             $data[$fieldName] = $bean->$fieldName;
@@ -64,7 +65,7 @@ class SugarFieldEncrypt extends SugarFieldBase
         return '';
     }
 
-    public function exportSanitize($value, $vardef, $focus, $row = array())
+    public function exportSanitize($value, $vardef, $focus, $row = [])
     {
         if ($this->allowRead($vardef)) {
             return parent::exportSanitize($value, $vardef, $focus, $row);

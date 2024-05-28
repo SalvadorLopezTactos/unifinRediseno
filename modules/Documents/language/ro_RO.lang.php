@@ -10,22 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     //module
     'LBL_MODULE_NAME' => 'Documente',
     'LBL_MODULE_NAME_SINGULAR' => 'Document',
     'LBL_MODULE_TITLE' => 'Documente:Acasa',
     'LNK_NEW_DOCUMENT' => 'Creează document',
-    'LNK_DOCUMENT_LIST'=> 'Vezi documente',
+    'LNK_DOCUMENT_LIST' => 'Vezi documente',
     'LBL_DOC_REV_HEADER' => 'Revizie documente',
-    'LBL_SEARCH_FORM_TITLE'=> 'Cautare document',
+    'LBL_SEARCH_FORM_TITLE' => 'Cautare document',
     //vardef labels
     'LBL_DOCUMENT_ID' => 'Identitate document',
     'LBL_NAME' => 'Nume Document',
@@ -34,31 +33,31 @@ $mod_strings = array (
     'LBL_CATEGORY' => 'Categorie',
     'LBL_SUBCATEGORY' => 'Subcategorie',
     'LBL_STATUS' => 'Status',
-    'LBL_CREATED_BY'=> 'Creat de',
-    'LBL_DATE_ENTERED'=> 'Data creării',
-    'LBL_DATE_MODIFIED'=> 'Data Modificata',
+    'LBL_CREATED_BY' => 'Creat de',
+    'LBL_DATE_ENTERED' => 'Data creării',
+    'LBL_DATE_MODIFIED' => 'Data Modificata',
     'LBL_DELETED' => 'Şters',
-    'LBL_MODIFIED'=> 'Modificat după ID',
+    'LBL_MODIFIED' => 'Modificat după ID',
     'LBL_MODIFIED_USER' => 'Modificat de',
-    'LBL_CREATED'=> 'Creat de',
-    'LBL_REVISIONS'=>'Revizii',
-    'LBL_RELATED_DOCUMENT_ID'=>'ID document inrudit',
-    'LBL_RELATED_DOCUMENT_REVISION_ID'=>'ID revizie document inrudit',
-    'LBL_IS_TEMPLATE'=>'Este Sablon',
-    'LBL_TEMPLATE_TYPE'=>'Tip Document',
-    'LBL_ASSIGNED_TO_NAME'=>'Atribuit lui:',
+    'LBL_CREATED' => 'Creat de',
+    'LBL_REVISIONS' => 'Revizii',
+    'LBL_RELATED_DOCUMENT_ID' => 'ID document inrudit',
+    'LBL_RELATED_DOCUMENT_REVISION_ID' => 'ID revizie document inrudit',
+    'LBL_IS_TEMPLATE' => 'Este Sablon',
+    'LBL_TEMPLATE_TYPE' => 'Tip Document',
+    'LBL_ASSIGNED_TO_NAME' => 'Atribuit lui:',
     'LBL_REVISION_NAME' => 'Revizuire numar',
     'LBL_MIME' => 'Tipul de mima',
     'LBL_REVISION' => 'Revizie',
     'LBL_DOCUMENT' => 'Document asociat',
     'LBL_LATEST_REVISION' => 'Ultima Revizie',
     'LBL_DOCUMENT_REVISION_ID' => 'Revizie Document ID',
-    'LBL_CHANGE_LOG'=> 'Schimba Log',
-    'LBL_ACTIVE_DATE'=> 'Data Publicarii',
+    'LBL_CHANGE_LOG' => 'Schimba Log',
+    'LBL_ACTIVE_DATE' => 'Data Publicarii',
     'LBL_EXPIRATION_DATE' => 'Data expirarii',
-    'LBL_FILE_EXTENSION'  => 'Extensie fisier',
+    'LBL_FILE_EXTENSION' => 'Extensie fisier',
     'LBL_LAST_REV_MIME_TYPE' => 'Ultima revizie de tip MIME',
-    'LBL_CAT_OR_SUBCAT_UNSPEC'=>'Nespecificat',
+    'LBL_CAT_OR_SUBCAT_UNSPEC' => 'Nespecificat',
     'LBL_HOMEPAGE_TITLE' => 'Notificarile mele',
     //quick search
     'LBL_NEW_FORM_TITLE' => 'Document nou',
@@ -70,25 +69,25 @@ $mod_strings = array (
     'LBL_FILE_UPLOAD' => 'Fisier',
 
     'LBL_CATEGORY_VALUE' => 'Categorie',
-    'LBL_SUBCATEGORY_VALUE'=> 'sucategorie',
-    'LBL_DOC_STATUS'=> 'Status:',
-    'LBL_DOC_STATUS_ID'=> 'ID stare:',
+    'LBL_SUBCATEGORY_VALUE' => 'sucategorie',
+    'LBL_DOC_STATUS' => 'Status:',
+    'LBL_DOC_STATUS_ID' => 'ID stare:',
     'LBL_LAST_REV_CREATOR' => 'Revizie creata de:',
     'LBL_LASTEST_REVISION_NAME' => 'Numele ultimei reviziei:',
     'LBL_SELECTED_REVISION_NAME' => 'Numele reviziei selectate',
     'LBL_CONTRACT_STATUS' => 'Status contract:',
     'LBL_CONTRACT_NAME' => 'Nume contract:',
     'LBL_LAST_REV_DATE' => 'Data revizie:',
-    'LBL_DOWNNLOAD_FILE'=> 'Descarca fisier:',
-    'LBL_DET_RELATED_DOCUMENT'=>'Document inrudit:',
-    'LBL_DET_RELATED_DOCUMENT_VERSION'=>"Revizie document inrudit:",
-    'LBL_DET_IS_TEMPLATE'=>'Sablon?:',
-    'LBL_DET_TEMPLATE_TYPE'=>'Tipul de document',
-    'LBL_TEAM'=> 'Echipă:',
+    'LBL_DOWNNLOAD_FILE' => 'Descarca fisier:',
+    'LBL_DET_RELATED_DOCUMENT' => 'Document inrudit:',
+    'LBL_DET_RELATED_DOCUMENT_VERSION' => 'Revizie document inrudit:',
+    'LBL_DET_IS_TEMPLATE' => 'Sablon?:',
+    'LBL_DET_TEMPLATE_TYPE' => 'Tipul de document',
+    'LBL_TEAM' => 'Echipă:',
     'LBL_IS_SHARED' => 'Disponibil extern:',
-    'LBL_DOC_DESCRIPTION'=>'Descriere',
-    'LBL_DOC_ACTIVE_DATE'=> 'Data Publicarii',
-    'LBL_DOC_EXP_DATE'=> 'Data expirarii',
+    'LBL_DOC_DESCRIPTION' => 'Descriere',
+    'LBL_DOC_ACTIVE_DATE' => 'Data Publicarii',
+    'LBL_DOC_EXP_DATE' => 'Data expirarii',
 
     //document list view.
     'LBL_LIST_FORM_TITLE' => 'Lista documente',
@@ -98,11 +97,11 @@ $mod_strings = array (
     'LBL_LIST_REVISION' => 'Revizie',
     'LBL_LIST_LAST_REV_CREATOR' => 'Publicat de',
     'LBL_LIST_LAST_REV_DATE' => 'Data Revizuirii',
-    'LBL_LIST_VIEW_DOCUMENT'=>'Vizualizare',
-    'LBL_LIST_DOWNLOAD'=> 'Descarca',
+    'LBL_LIST_VIEW_DOCUMENT' => 'Vizualizare',
+    'LBL_LIST_DOWNLOAD' => 'Descarca',
     'LBL_LIST_ACTIVE_DATE' => 'Data Publicarii',
     'LBL_LIST_EXP_DATE' => 'Data expirarii',
-    'LBL_LIST_STATUS'=>'Status',
+    'LBL_LIST_STATUS' => 'Status',
     'LBL_LINKED_ID' => 'ID veriga',
     'LBL_SELECTED_REVISION_ID' => 'ID revizie selectat',
     'LBL_LATEST_REVISION_ID' => 'ID ultima revizie',
@@ -114,33 +113,33 @@ $mod_strings = array (
     //document search form.
     'LBL_SF_DOCUMENT' => 'Numele Documentului',
     'LBL_SF_CATEGORY' => 'Categorie',
-    'LBL_SF_SUBCATEGORY'=> 'Subcategorie',
+    'LBL_SF_SUBCATEGORY' => 'Subcategorie',
     'LBL_SF_ACTIVE_DATE' => 'Data publicarii',
-    'LBL_SF_EXP_DATE'=> 'Data expirarii',
+    'LBL_SF_EXP_DATE' => 'Data expirarii',
 
     'DEF_CREATE_LOG' => 'Document Creat',
 
     //error messages
-    'ERR_DOC_NAME'=>'Nume Document',
-    'ERR_DOC_ACTIVE_DATE'=>'Data Publicarii',
-    'ERR_DOC_EXP_DATE'=> 'Data expirarii',
-    'ERR_FILENAME'=> 'Nume Fisier',
-    'ERR_DOC_VERSION'=> 'Versiune document',
-    'ERR_DELETE_CONFIRM'=> 'Vrei sa stergi aceasta revisie a documentului?',
-    'ERR_DELETE_LATEST_VERSION'=> 'Nu iti este admisa stergerea ultimei revizii a documentului.',
+    'ERR_DOC_NAME' => 'Nume Document',
+    'ERR_DOC_ACTIVE_DATE' => 'Data Publicarii',
+    'ERR_DOC_EXP_DATE' => 'Data expirarii',
+    'ERR_FILENAME' => 'Nume Fisier',
+    'ERR_DOC_VERSION' => 'Versiune document',
+    'ERR_DELETE_CONFIRM' => 'Vrei sa stergi aceasta revisie a documentului?',
+    'ERR_DELETE_LATEST_VERSION' => 'Nu iti este admisa stergerea ultimei revizii a documentului.',
     'LNK_NEW_MAIL_MERGE' => 'Îmbinare corespondenţă',
     'LBL_MAIL_MERGE_DOCUMENT' => 'Sablon Imbinare corespondenta:',
     'ERR_MISSING_FILE' => 'Acestui  document ii lipseşte un fişier, cel mai probabil din cauza unei erori în timpul încărcării. Vă rugăm să încercaţi încărcarea fişierului sau contactaţi administratorul.',
 
     'LBL_TREE_TITLE' => 'Documente',
     //sub-panel vardefs.
-    'LBL_LIST_DOCUMENT_NAME'=>'Nume Document',
-    'LBL_LIST_IS_TEMPLATE'=>'Sablon?',
-    'LBL_LIST_TEMPLATE_TYPE'=>'Tip Document',
-    'LBL_LIST_SELECTED_REVISION'=>'Revizie selectata',
-    'LBL_LIST_LATEST_REVISION'=>'Ultima Revizie',
-    'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Contracte inrudite',
-    'LBL_LAST_REV_CREATE_DATE'=>'Data crearii ultimei revizii',
+    'LBL_LIST_DOCUMENT_NAME' => 'Nume Document',
+    'LBL_LIST_IS_TEMPLATE' => 'Sablon?',
+    'LBL_LIST_TEMPLATE_TYPE' => 'Tip Document',
+    'LBL_LIST_SELECTED_REVISION' => 'Revizie selectata',
+    'LBL_LIST_LATEST_REVISION' => 'Ultima Revizie',
+    'LBL_CONTRACTS_SUBPANEL_TITLE' => 'Contracte inrudite',
+    'LBL_LAST_REV_CREATE_DATE' => 'Data crearii ultimei revizii',
     //'LNK_DOCUMENT_CAT'=>'Document Categories',
     'LBL_CONTRACTS' => 'Contracte',
     'LBL_CREATED_USER' => 'Utilizator creat',
@@ -171,9 +170,11 @@ $mod_strings = array (
     // Dashboards
     'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare documente',
     'LBL_MY_DOCUMENTS' => 'Documentele mele',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologia documentelor',
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Trimitere către DocuSign',
+    'LBL_SEND_TO_DOCUSIGN_TEMPLATE_BUTTON' => 'Trimiteți la DocuSign cu un șablon',
 
     // Cloud Drive
 
@@ -183,4 +184,4 @@ $mod_strings = array (
     'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Sincronizare cu OneDrive',
     'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Sincronizare toate cu Dropbox',
     'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Sincronizare cu Dropbox',
-);
+];

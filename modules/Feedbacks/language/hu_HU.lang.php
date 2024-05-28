@@ -13,7 +13,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_FEEDBACK_TEXT_PLACEHOLDER' => 'Visszajelzés leírása',
     'LBL_FEEDBACK_BTN_SUBMIT' => 'Küldés',
     'LBL_FEEDBACK_SENT' => 'Visszajelzés elküldve.',
@@ -23,4 +23,4 @@ $mod_strings = array(
     'TPL_FEEDBACK_ASIDE' => 'Gyüjtünk néhány a használattal kapcsolatos adatot a benyújtáskor. {{learnMoreLink}}. Nem gyüjtünk azonban személyes adatokat. Kérjük az alábbi linken jelentsen be hibákat, vagy más témákat, amik választ igényelnek. {{contactSupportLink}',
     'LBL_FEEDBACK_ASIDE_CLICK_MORE' => 'Kattintson ide további információkért',
     'LBL_FEEDBACK_ASIDE_CONTACT_SUPPORT' => 'Lépjen kapcsolatba a támogató csoporttal',
-);
+];

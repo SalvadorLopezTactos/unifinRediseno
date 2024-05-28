@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,6 +10,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 class Escalation extends SugarBean
 {
     public $object_name = 'Escalation';
@@ -74,7 +76,7 @@ class Escalation extends SugarBean
      */
     public function save($check_notify = false)
     {
-        $id =  parent::save($check_notify);
+        $id = parent::save($check_notify);
 
         $this->handleParentEscalation();
 
@@ -122,7 +124,7 @@ class Escalation extends SugarBean
             $accountIds = $this->$linkName->get();
 
             // if account is already related, don't do anything
-            if (in_array($accountId, $accountIds)) {
+            if (safeInArray($accountId, $accountIds)) {
                 return;
             }
 
@@ -134,7 +136,7 @@ class Escalation extends SugarBean
             }
 
             // link account to the escalation record
-            $this->$linkName->add(array($relatedBean));
+            $this->$linkName->add([$relatedBean]);
 
             //Clean up any hanging related records.
             SugarRelationship::resaveRelatedBeans();
@@ -231,9 +233,9 @@ class Escalation extends SugarBean
      * @return bool
      * @throws SugarQueryException
      */
-    public function isParentEscalated($parentId) : bool
+    public function isParentEscalated($parentId): bool
     {
         $escalations = $this->getNonClosedEscalationsForParent($parentId);
-        return count($escalations) !== 0;
+        return safeCount($escalations) !== 0;
     }
 }

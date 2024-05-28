@@ -25,10 +25,19 @@
     // wait for 20seconds for MFE to return
     scriptTimeoutTime: 20000,
 
+    // True if we are on a focus drawer on a list view
+    isInsideFocusDrawer: false,
+
     /**
      * @inheritdoc
      */
     initialize: function(options) {
+        // Check if we are on a focus drawer on a list view
+        // TODO: Maybe to make things easier in the future we can find a way
+        // to add something like isFocus: true to this.context for all dashlets
+        this.isInsideFocusDrawer = !!(options.context.parent &&
+            options.context.parent.get('layout') === 'focus');
+
         if (!options.meta.config) {
             this.allowApp = this._checkCatalogAccess(options);
 
@@ -153,13 +162,19 @@
     },
 
     /**
-     * Returns the layout name from app.controller.context's layout
+     * Returns the layout name
      *
      * @return {string}
      * @private
      */
     _getLayoutName: function() {
-        var layoutName = app.controller.context.get('layout') === 'records' ? 'list' : 'record';
+        let layoutName;
+
+        if (this.isInsideFocusDrawer) {
+            layoutName = 'record';
+        } else {
+            layoutName = app.controller.context.get('layout') === 'records' ? 'list' : 'record';
+        }
 
         return `${layoutName}-dashlet`;
     },

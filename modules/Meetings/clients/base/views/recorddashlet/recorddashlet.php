@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -72,7 +73,7 @@ $viewdefs['Meetings']['base']['view']['recorddashlet'] = [
                     'name' => 'duration',
                     'type' => 'duration',
                     'label' => 'LBL_START_AND_END_DATE_DETAIL_VIEW',
-                    'dismiss_label' => true,
+                    'dismiss_label' => false,
                     'inline' => true,
                     'show_child_labels' => true,
                     'fields' => [
@@ -127,20 +128,21 @@ $viewdefs['Meetings']['base']['view']['recorddashlet'] = [
                             'default' => 1,
                         ],
                         [
-                            'label' => 'LBL_CALENDAR_REPEAT_DOW',
+                            'label' => 'LBL_CALENDAR_REPEAT_ON',
                             'name' => 'repeat_dow',
                             'type' => 'repeat-dow',
                             'options' => 'dom_cal_day_of_week',
                             'isMultiSelect' => true,
                         ],
                         [
-                            'label' => 'LBL_CALENDAR_CUSTOM_DATE',
+                            'label' => 'LBL_CALENDAR_REPEAT_ON',
                             'name' => 'repeat_selector',
                             'type' => 'enum',
                             'options' => 'repeat_selector_dom',
                             'default' => 'None',
                         ],
                         [
+                            'label' => ' ',
                             'name' => 'repeat_days',
                             'type' => 'repeat-days',
                             'options' => ['' => ''],

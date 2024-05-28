@@ -10,31 +10,31 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['layout']['dupecheck'] = array(
-    'components' => array(
-        array(
-            'layout' => array(
+$viewdefs['base']['layout']['dupecheck'] = [
+    'components' => [
+        [
+            'layout' => [
                 'type' => 'filterpanel',
-                'components' => array(
-                    array(
+                'components' => [
+                    [
                         'layout' => 'dupecheck-filter',
-                    ),
-                    array(
+                    ],
+                    [
                         'view' => 'filter-rows',
-                    ),
-                    array(
+                    ],
+                    [
                         'view' => 'filter-actions',
-                    ),
-                )
-            ),
-        ),
-        array(
+                    ],
+                ],
+            ],
+        ],
+        [
             'name' => 'dupecheck-list',
             'view' => 'dupecheck-list',
             'primary' => true,
-        ),
-        array(
+        ],
+        [
             'view' => 'list-bottom',
-        ),
-    ),
-);
+        ],
+    ],
+];

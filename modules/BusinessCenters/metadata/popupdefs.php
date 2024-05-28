@@ -10,44 +10,44 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$popupMeta = array(
+$popupMeta = [
     'moduleMain' => 'BusinessCenter',
     'varName' => 'BUSINESS_CENTER',
     'orderBy' => 'business_centers.name',
-    'whereClauses' => array(
+    'whereClauses' => [
         'name' => 'business_centers.name',
         'address_city' => 'business_centers.address_city',
         'address_country' => 'business_centers.address_country',
-    ),
-    'searchInputs' => array(
+    ],
+    'searchInputs' => [
         0 => 'name',
         1 => 'address_city',
         2 => 'address_country',
-    ),
-    'listviewdefs' => array(
-        'name' => array(
+    ],
+    'listviewdefs' => [
+        'name' => [
             'type' => 'name',
             'label' => 'LBL_NAME',
             'width' => 10,
             'default' => true,
-        ),
-        'address_city' => array(
+        ],
+        'address_city' => [
             'type' => 'varchar',
             'label' => 'LBL_ADDRESS_CITY',
             'width' => 10,
             'default' => true,
-        ),
-        'address_country' => array(
+        ],
+        'address_country' => [
             'type' => 'varchar',
             'label' => 'LBL_ADDRESS_COUNTRY',
             'width' => 10,
             'default' => true,
-        ),
-        'timezone' => array(
+        ],
+        'timezone' => [
             'type' => 'enum',
             'label' => 'LBL_TIMEZONE',
             'width' => 10,
             'default' => true,
-        ),
-    ),
-);
+        ],
+    ],
+];

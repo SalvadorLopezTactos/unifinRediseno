@@ -136,14 +136,16 @@
         this.isFirstColumnFreezed = freeze;
         app.user.lastState.set(this._thisListViewUserConfigsKey, {freezeFirstColumn: freeze});
         let firstColumnIndex = this.leftColumns.length + 1;
-        let $firstColumns = this.$('table tbody tr td:nth-child(' + firstColumnIndex +
-            '), table thead tr th:nth-child(' + firstColumnIndex + ')');
+        let $firstColumns = this.$('table tbody tr td:nth-child(' + firstColumnIndex + '), ' +
+            'table thead tr th:nth-child(' + firstColumnIndex + ')');
+        const frozenHeaderClassList = `sticky ${this._thisListViewUserConfigsKey.includes('Reports') ?
+            '' : 'stick-first'}`;
         if (freeze) {
-            $firstColumns.addClass('sticky-column stick-first' +
-            (this.leftColumns.length ? '' : ' no-left-column'));
+            $firstColumns.addClass(
+                `${frozenHeaderClassList} ${this.leftColumns.length ? '' : 'left-0'}`
+            );
         } else {
-            $firstColumns.removeClass('sticky-column stick-first no-border' +
-            (this.leftColumns.length ? '' : ' no-left-column'));
+            $firstColumns.removeClass(`${frozenHeaderClassList} no-border ${this.leftColumns.length ? '' : 'left-0'}`);
         }
         this.showFirstColumnBorder();
     },
@@ -161,10 +163,10 @@
         let firstColumnSelector = 'table tbody tr td:nth-child(' + firstColumnIndex +
             '), table thead tr th:nth-child(' + firstColumnIndex + ')';
         if (scrollPanel.scrollLeft === 0) {
-            this.$(firstColumnSelector).addClass('no-border');
+            this.$(firstColumnSelector).removeClass('border-r');
             this.hasFirstColumnBorder = false;
         } else if (!this.hasFirstColumnBorder) {
-            this.$(firstColumnSelector).removeClass('no-border');
+            this.$(firstColumnSelector).addClass('border-r');
             this.hasFirstColumnBorder = true;
         }
     },
@@ -174,19 +176,6 @@
         this.$el.removeClass('no-touch-scrolling');
         var $b = this.$(e.currentTarget).first();
         $b.parent().closest('.list').removeClass('open');
-
-        // Remove open class on Safari
-        if (this._isSafariBrowser) {
-            var stickyColumn = $b.parent().closest('td');
-            stickyColumn.removeClass('open');
-
-            // Remove the position property to fix z-index issues with subpanel header when there are less
-            // than 3 records.
-            if (this.collection.length <= 3) {
-                stickyColumn.addClass('sticky-column');
-            }
-        }
-
         $b.off('resetDropdownDelegate.right-actions');
     },
 
@@ -196,19 +185,6 @@
         this.$el.addClass('no-touch-scrolling');
         // add open class to parent list to elevate absolute z-index for iOS
         $buttonGroup.parent().closest('.list').addClass('open');
-
-        // If the user is on Safari change the z-index of the opened dropdown's parent column to push to top
-        if (this._isSafariBrowser) {
-            var stickyColumn = $buttonGroup.parent().closest('.sticky-column');
-            stickyColumn.addClass('open');
-
-            // Remove the position property to fix z-index issues with subpanel header when there are less
-            // than 3 records.
-            if (this.collection.length <= 3) {
-                stickyColumn.removeClass('sticky-column');
-            }
-        }
-
         // detect window bottom collision
         $buttonGroup.toggleClass('dropup', this.needsDropupClass($buttonGroup));
         // listen for delegate reset
@@ -225,11 +201,11 @@
      * A utility method to determine when a dropdown menu is going to collide with the bottom of the screen.
      */
     needsDropupClass: function($b) {
-        var menuHeight = $b.height() + $b.children('ul').first().height();
+        const menuHeight = $b.height() + $b.children('ul').first().height();
         // TODO fix (SS-1078) | height of window less padding
-        var windowHeight = document.documentElement.clientHeight - 65;
+        let windowHeight = document.documentElement.clientHeight - 65;
         // The total displacement needed for dropdown to expand + distance from top of screen
-        var dropdownDisplacement = $b.offset().top + menuHeight;
+        const dropdownDisplacement = $b.offset().top + menuHeight;
 
         /**
          * Special handling for Safari as the menu cannot overlay table content due to -webkit-sticky positioning
@@ -238,9 +214,9 @@
         if (this._isSafariBrowser && this.collection.length > 3) {
             // Height of visible viewport (page height inside browser window)
             windowHeight = document.documentElement.clientHeight;
-            var table = $b.parent().closest('.dataTable');
-            var tableHeight = table.height();
-            var tableOffsetTop = table.offset().top;
+            const table = $b.parent().closest('.dataTable');
+            const tableHeight = table.height();
+            const tableOffsetTop = table.offset().top;
 
             /**
              * There are 3 cases to check here:
@@ -269,14 +245,9 @@
      * @private
      */
     _toggleAria: function(e) {
-        var $tableHeader = this.$(e.currentTarget);
-        var $dropdown = $tableHeader.find('.dropdown');
-        var $button = $dropdown.find('[data-toggle="dropdown"]');
-
-        // Allow the dropdown for table header to pop over the top, remove position: -webkit-sticky property
-        if (this._isSafariBrowser) {
-            $tableHeader.toggleClass('sticky-column');
-        }
+        const $tableHeader = this.$(e.currentTarget);
+        const $dropdown = $tableHeader.find('.dropdown');
+        const $button = $dropdown.find('[data-bs-toggle="dropdown"]');
 
         $button.attr('aria-expanded', $dropdown.hasClass('open'));
     },
@@ -1180,6 +1151,12 @@
 
     bindResize: function() {
         $(window).on("resize.flexlist-" + this.cid, _.bind(this.resize, this));
+
+        this.listenTo(this.context, 'split-screens-orientation-change', _.bind(function() {
+            if (this.name !== 'summation-details') {
+                this.resetColumnWidths();
+            }
+        }, this));
     },
 
     /**

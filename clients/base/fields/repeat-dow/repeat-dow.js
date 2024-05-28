@@ -42,6 +42,19 @@
     },
 
     /**
+     * @inheritdoc
+     */
+    _render: function() {
+        if (this.action === 'detail') {
+            this.type = 'repeat-dow';
+        } else {
+            this.type = 'enum';
+        }
+
+        this._super('_render');
+    },
+
+    /**
      * Get the default day of week (current day of the week)
      *
      * @return {String} Day of the week
@@ -59,6 +72,10 @@
      * Select2 needs an array of these numeric strings
      */
     format: function(value) {
+        if (_.isNumber(value)) {
+            value = value.toString();
+        }
+
         return (_.isString(value)) ? value.split('').sort() : value;
     },
 
@@ -68,6 +85,10 @@
      * Select2 array of numeric strings to Model numeric string format
      */
     unformat: function(value) {
+        if (_.isNumber(value)) {
+            value = value.toString();
+        }
+
         return (_.isArray(value)) ? value.sort().join('') : value;
     },
 
@@ -85,6 +106,10 @@
     _doValidateRepeatDow: function(fields, errors, callback) {
         var repeatType = this.model.get('repeat_type'),
             repeatDow = this.model.get(this.name);
+
+        if (_.isNumber(repeatDow)) {
+            repeatDow = repeatDow.toString();
+        }
 
         if (repeatType === 'Weekly' && (!_.isString(repeatDow) || repeatDow.length < 1)) {
             errors[this.name] = {'required': true};

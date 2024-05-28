@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmnBound'] = array(
+$dictionary['pmse_BpmnBound'] = [
     'table' => 'pmse_bpmn_bound',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'reassignable' => false,
-    'fields' => array(
-        'bou_uid' => array(
+    'fields' => [
+        'bou_uid' => [
             'required' => true,
             'name' => 'bou_uid',
             'vname' => '',
@@ -38,8 +38,8 @@ $dictionary['pmse_BpmnBound'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'prj_id' => array(
+        ],
+        'prj_id' => [
             'required' => true,
             'name' => 'prj_id',
             'vname' => '',
@@ -59,8 +59,8 @@ $dictionary['pmse_BpmnBound'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'dia_id' => array(
+        ],
+        'dia_id' => [
             'required' => true,
             'name' => 'dia_id',
             'vname' => '',
@@ -80,8 +80,8 @@ $dictionary['pmse_BpmnBound'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'element_id' => array(
+        ],
+        'element_id' => [
             'required' => true,
             'name' => 'element_id',
             'vname' => '',
@@ -101,8 +101,8 @@ $dictionary['pmse_BpmnBound'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'bou_element' => array(
+        ],
+        'bou_element' => [
             'required' => true,
             'name' => 'bou_element',
             'vname' => '',
@@ -122,8 +122,8 @@ $dictionary['pmse_BpmnBound'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'bou_element_type' => array(
+        ],
+        'bou_element_type' => [
             'required' => true,
             'name' => 'bou_element_type',
             'vname' => '',
@@ -143,8 +143,8 @@ $dictionary['pmse_BpmnBound'] = array(
             'calculated' => false,
             'len' => '32',
             'size' => '32',
-        ),
-        'bou_x' => array(
+        ],
+        'bou_x' => [
             'required' => true,
             'name' => 'bou_x',
             'vname' => '',
@@ -168,8 +168,8 @@ $dictionary['pmse_BpmnBound'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'bou_y' => array(
+        ],
+        'bou_y' => [
             'required' => true,
             'name' => 'bou_y',
             'vname' => '',
@@ -193,8 +193,8 @@ $dictionary['pmse_BpmnBound'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'bou_width' => array(
+        ],
+        'bou_width' => [
             'required' => true,
             'name' => 'bou_width',
             'vname' => '',
@@ -218,8 +218,8 @@ $dictionary['pmse_BpmnBound'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'bou_height' => array(
+        ],
+        'bou_height' => [
             'required' => true,
             'name' => 'bou_height',
             'vname' => '',
@@ -243,8 +243,8 @@ $dictionary['pmse_BpmnBound'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'bou_rel_position' => array(
+        ],
+        'bou_rel_position' => [
             'required' => true,
             'name' => 'bou_rel_position',
             'vname' => '',
@@ -268,8 +268,8 @@ $dictionary['pmse_BpmnBound'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'bou_size_identical' => array(
+        ],
+        'bou_size_identical' => [
             'required' => true,
             'name' => 'bou_size_identical',
             'vname' => '',
@@ -293,8 +293,8 @@ $dictionary['pmse_BpmnBound'] = array(
             'disable_num_format' => '',
             'min' => false,
             'max' => false,
-        ),
-        'bou_container' => array(
+        ],
+        'bou_container' => [
             'required' => true,
             'name' => 'bou_container',
             'vname' => '',
@@ -314,23 +314,23 @@ $dictionary['pmse_BpmnBound'] = array(
             'calculated' => false,
             'len' => '30',
             'size' => '30',
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmnBound', 'pmse_BpmnBound');

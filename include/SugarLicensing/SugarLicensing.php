@@ -13,12 +13,13 @@
 
 class SugarLicensing
 {
-
-    protected $_server = "https://authenticate.sugarcrm.com";
+    // @codingStandardsIgnoreLine PSR2.Classes.PropertyDeclaration.Underscore
+    protected $_server = 'https://authenticate.sugarcrm.com';
 
     /**
      * @var resource
      */
+    // @codingStandardsIgnoreLine PSR2.Classes.PropertyDeclaration.Underscore
     protected $_curl;
 
     /**
@@ -95,8 +96,8 @@ class SugarLicensing
     public function request($endpoint, $payload, $doDecode = true, $timeout = 30)
     {
         // make sure that the first char is a "/"
-        if (substr($endpoint, 0, 1) != "/") {
-            $endpoint = "/" . $endpoint;
+        if (substr($endpoint, 0, 1) != '/') {
+            $endpoint = '/' . $endpoint;
         }
 
         $endpoint = $this->getServerName() . $endpoint;
@@ -143,13 +144,13 @@ class SugarLicensing
      *
      * @return mixed
      */
+    // @codingStandardsIgnoreLine PSR2.Methods.MethodDeclaration.Underscore
     private function _reqeust()
     {
         $results = curl_exec($this->_curl);
-        
-        if($results === FALSE)
-        {
-            $GLOBALS['log']->error("Sugar Licensing encountered an error: " . curl_error($this->_curl));
+
+        if ($results === false) {
+            $GLOBALS['log']->error('Sugar Licensing encountered an error: ' . curl_error($this->_curl));
         }
 
         return $results;
@@ -162,7 +163,7 @@ class SugarLicensing
     {
         global $sugar_config;
         if (isset($sugar_config['license_server'])) {
-            return  rtrim(trim($sugar_config['license_server']), '/');
+            return rtrim(trim($sugar_config['license_server']), '/');
         }
 
         return $this->_server;

@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Hae kirjekuori',
     'LBL_CLOUD_SERVICE_TYPE' => 'Pilvipalvelun tyyppi',
     'LBL_CLOUD_PATH' => 'Pilviaseman polku',
+    'LBL_CLOUD_DRIVE_ID' => 'Aseman tunnus',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign-kirjekuorten luettelon koontinäyttö',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'DocuSign-kirjekuorten tietueiden koontinäyttö',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Uusimmat DocuSign-kirjekuoret',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign-kirjekuorten Focus-laatikko',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'DocuSignin-kirjekuoren aikajana',
 
     'LBL_NEW_ENVELOPE' => 'Uusi kirjekuori',
     'LBL_DOCUMENT_IS_NOW' => ' on nyt ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Lähetä',
     'LBL_BUTTON_CLEAR' => 'Tyhjennä',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Käytä mallia',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Lähetä mallin avulla',
     'LBL_PLEASE_LOG_IN' => 'Kirjaudu ensin DocuSign-palveluun.',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Et voi ladata tätä asiakirjaa. Sen on luonut toinen käyttäjä.',
     'LBL_SEND_NOT_ALLOWED' => 'Et voi lähettää tätä kirjekuorta. Sen on luonut toinen käyttäjä.',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Luonnosta on muutettu. Päivitetäänkö tila nykyiseen tilaan ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'DocuSign-kirjekuori päivitetty.',
     'LBL_DRAFT_CHANGED_ERROR' => 'DocuSign-kirjekuoren tilaa ei ole päivitetty. Tarkista tiedot lokista.',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'DocuSign-mallia ei voi käyttää',
     'LBL_ENVELOPE_NOT_SENT' => 'Kirjekuorta ei ole lähetetty.',
     'LBL_ENVELOPE_SENT' => 'Kirjekuori lähetettiin uudelleen.',
     'LBL_DOCUMENT_ADDED' => 'Asiakirja lisätty tietueeseen.',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Rooli',
     'LBL_SELECT_BUTTON_LABEL' => 'Valitse',
     'LBL_BACK_BUTTON_LABEL' => 'Takaisin',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Hae mallin nimen perusteella',
+    'LBL_ENVELOPE_NAME' => 'Kirjekuoren nimi',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Kirjekuoren nimi ei voi olla tyhjä',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Mahdollisten vastaanottajien haku ei onnistunut.',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Mallien haku ei onnistunut.',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Valitse rooli jokaiselle vastaanottajalle',
+    
+    'LBL_DOWNLOAD' => 'Lataa',
+    'LBL_OPEN_DRAFT' => 'Avaa luonnos',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'DocuSigniin ei voi lähettää asiakirjoja, joissa ei ole tiedostoa.',
+    'LBL_START_SIGN_PROMPT' => 'Aloita allekirjoitusprosessi klikkaamalla plus-painiketta',
+    'LBL_NO_DOC_SELECTED' => 'Valitse ensin asiakirjat',
+    'LBL_SELECT_RECIPIENTS' => 'Valitse vastaanottajaksi allekirjoittaja',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Alä sisällytä',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Asenna DocuSign-sovellus käyttökokemuksen parantamiseksi.',
 ];

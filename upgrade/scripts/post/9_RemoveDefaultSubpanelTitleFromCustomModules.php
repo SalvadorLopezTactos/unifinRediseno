@@ -39,14 +39,12 @@ class SugarUpgradeRemoveDefaultSubpanelTitleFromCustomModules extends UpgradeScr
      * Module Builder custom files
      * custom/modulebuilder/builds/*_/SugarModules/modules/*_/language/*.php
      * custom/modulebuilder/packages/*_/modules/*_/language/*.php
-
      * Custom Module files
      * custom/application/Ext/Include/modules.ext.php (if exists)
      * include/modules_override.php (if exists)
      * Look for $moduleList array in both of these. That contains the custom modules
      * For each customModule value, look for
      * modules/$module/language/*.php
-
      * For all of these, load the $mod_list array, unset($mod_list['LBL_DEFAULT_SUBPANEL_TITLE'])
      * then resave the $moduleList array to the file location you just opened
      */
@@ -63,10 +61,10 @@ class SugarUpgradeRemoveDefaultSubpanelTitleFromCustomModules extends UpgradeScr
     protected function removeDefaultSubpanelTitle()
     {
         // get language files from modulebuilder package folder
-        $packageFiles = $this->getFiles("custom/modulebuilder/packages/*/modules/*/language/*.php");
+        $packageFiles = $this->getFiles('custom/modulebuilder/packages/*/modules/*/language/*.php');
 
         // get language files from modulebuilder builds folder
-        $buildFiles = $this->getFiles("custom/modulebuilder/builds/*/SugarModules/modules/*/language/*.php");
+        $buildFiles = $this->getFiles('custom/modulebuilder/builds/*/SugarModules/modules/*/language/*.php');
 
         $files = array_merge($packageFiles, $buildFiles);
 
@@ -99,7 +97,7 @@ class SugarUpgradeRemoveDefaultSubpanelTitleFromCustomModules extends UpgradeScr
     protected function getModuleListFiles($file)
     {
         $moduleList = $this->getModuleListFromFile($file);
-        $moduleFiles = array();
+        $moduleFiles = [];
         if (!empty($moduleList)) {
             foreach ($moduleList as $module) {
                 // Handle named module exceptions
@@ -107,7 +105,7 @@ class SugarUpgradeRemoveDefaultSubpanelTitleFromCustomModules extends UpgradeScr
                     continue;
                 }
 
-                $modFiles = $this->getFiles('modules/'.$module.'/language/*.php');
+                $modFiles = $this->getFiles('modules/' . $module . '/language/*.php');
                 $moduleFiles = array_merge($moduleFiles, $modFiles);
             }
         }
@@ -180,7 +178,7 @@ class SugarUpgradeRemoveDefaultSubpanelTitleFromCustomModules extends UpgradeScr
      */
     protected function getDataFromFile($file, $var)
     {
-        ${$var} = array();
+        ${$var} = [];
         @require $file;
         return ${$var};
     }

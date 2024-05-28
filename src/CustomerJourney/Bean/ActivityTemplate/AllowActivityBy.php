@@ -19,7 +19,7 @@ namespace Sugarcrm\Sugarcrm\CustomerJourney\Bean\ActivityTemplate;
 class AllowActivityBy
 {
     private static $separator = '|';
-    
+
     /**
      * Check that current user allow to complete the given activity or not
      *
@@ -33,9 +33,9 @@ class AllowActivityBy
     public static function isActivityAllow($activity, $allow_activity_by)
     {
         $allowActivityByArray = self::getJsonDecodedData($allow_activity_by);
-        
+
         // means we have [{"id":""}] in DB or nothing get in decoded result
-        $allowCount = count($allowActivityByArray);
+        $allowCount = safeCount($allowActivityByArray);
         if ($allowCount === 0 || ($allowCount === 1 && empty($allowActivityByArray[0]['id']))) {
             return true;
         }
@@ -52,7 +52,7 @@ class AllowActivityBy
 
             if (isset($allowActivityBy['formattedIds']) && array_key_exists('formattedIds', $allowActivityBy)) {
                 $formattedIds = self::getFilteredArray(explode(self::$separator, $allowActivityBy['formattedIds']));
-                $formattedIdsExists = (!$formattedIdsExists && !empty($formattedIds)) ? true: false;
+                $formattedIdsExists = (!$formattedIdsExists && !empty($formattedIds)) ? true : false;
             }
 
             if (empty($formattedIds)) {
@@ -77,7 +77,7 @@ class AllowActivityBy
 
         return $allowed;
     }
-    
+
     /**
      * Decode the data of the allow_activity_by
      * type field
@@ -98,7 +98,7 @@ class AllowActivityBy
         }
         return [];
     }
-    
+
     /**
      * It will return the Team Ids of the current user
      * @return array
@@ -107,10 +107,10 @@ class AllowActivityBy
     {
         global $current_user;
         $teams = $current_user->get_my_teams();
-        
+
         return array_keys($teams);
     }
-    
+
     /**
      * It will return the Roles Ids of the current user
      * @return array
@@ -119,14 +119,14 @@ class AllowActivityBy
     {
         $roles = \ACLRole::getUserRoles($GLOBALS['current_user']->id, false);
         $my_roles_ids = [];
-        
+
         foreach ($roles as $role) {
             $my_roles_ids[] = $role->id;
         }
-        
+
         return $my_roles_ids;
     }
-    
+
     /**
      * It will check that any user matches with the current user
      * or not. If yes then it will return true, otherwise false
@@ -141,9 +141,9 @@ class AllowActivityBy
             return false;
         }
 
-        return in_array($currUserId, $allowedUserIds);
+        return safeInArray($currUserId, $allowedUserIds);
     }
-    
+
     /**
      * It will check that any allowed team matches with the current user team/teams
      * or not. If yes then it will return true, otherwise false
@@ -156,10 +156,10 @@ class AllowActivityBy
         if (empty($allowedTeamIds) || empty($currUserTeamIds)) {
             return false;
         }
-        
-        return count(array_intersect($allowedTeamIds, $currUserTeamIds)) > 0;
+
+        return safeCount(array_intersect($allowedTeamIds, $currUserTeamIds)) > 0;
     }
-    
+
     /**
      * It will check that any allowed role matches with the current user role/roles
      * or not. If yes then it will return true, otherwise false
@@ -172,8 +172,8 @@ class AllowActivityBy
         if (empty($allowedRolesIds) || empty($currUserRoleIds)) {
             return false;
         }
-        
-        return count(array_intersect($allowedRolesIds, $currUserRoleIds)) > 0;
+
+        return safeCount(array_intersect($allowedRolesIds, $currUserRoleIds)) > 0;
     }
 
     /**

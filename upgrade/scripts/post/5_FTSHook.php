@@ -22,10 +22,10 @@ class SugarUpgradeFTSHook extends UpgradeScript
 
     protected $mainHookFile = 'Ext/LogicHooks/fts.php';
 
-    protected $oldHookDefs = array(
+    protected $oldHookDefs = [
         'application/Ext/LogicHooks/logichooks.ext.php',
         'Extension/application/Ext/LogicHooks/SugarFTSHooks.php',
-    );
+    ];
 
     public function run()
     {

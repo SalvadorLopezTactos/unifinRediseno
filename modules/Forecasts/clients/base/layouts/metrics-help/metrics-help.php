@@ -25,7 +25,7 @@ $viewdefs['Forecasts']['base']['layout']['metrics-help'] = [
         [
             'view' => [
                 'name' => 'metrics-help-footer',
-                'css_class' => 'px-3.5 border-t border-default',
+                'css_class' => 'px-3.5 border-t border-[--border-color]',
             ],
         ],
     ],

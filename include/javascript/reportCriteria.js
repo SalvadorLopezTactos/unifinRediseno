@@ -569,7 +569,7 @@ function addFilterInput(cell,filter) {
 		addFilterInputDatetimesBetween(row,filter);
     } else if (qualifier_name.indexOf('_n_days') != -1) {
         addFilterInputText(row, filter);
-    } else if (qualifier_name == 'empty' || qualifier_name == 'not_empty') {
+    } else if (qualifier_name == 'empty' || qualifier_name == 'not_empty' || qualifier_name === 'anything') {
 	    addFilterNoInput(row,filter);
 	} else if (field_type == 'date' || field_type == 'datetime') {
 		if (qualifier_name.indexOf('tp_') == 0) {

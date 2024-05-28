@@ -18,7 +18,6 @@
  */
 class TreeApi extends FilterApi
 {
-
     /**
      * Depth of the tree by default.
      *
@@ -28,161 +27,161 @@ class TreeApi extends FilterApi
 
     public function registerApiRest()
     {
-        return array(
-            'filterModuleSubTree' => array(
+        return [
+            'filterModuleSubTree' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'tree', '?'),
-                'pathVars' => array('module', 'record', '', 'link_name'),
+                'path' => ['<module>', '?', 'tree', '?'],
+                'pathVars' => ['module', 'record', '', 'link_name'],
                 'method' => 'filterSubTree',
-                'exception' => array(
+                'exception' => [
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-            'filterModuleTree' => array(
+                ],
+            ],
+            'filterModuleTree' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', 'tree', '?'),
-                'pathVars' => array('module', '', 'link_name'),
+                'path' => ['<module>', 'tree', '?'],
+                'pathVars' => ['module', '', 'link_name'],
                 'method' => 'filterTree',
-                'exception' => array(
+                'exception' => [
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
-                ),
-            ),
-            'tree' => array(
+                ],
+            ],
+            'tree' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'tree'),
-                'pathVars' => array('module', 'root', ''),
+                'path' => ['<module>', '?', 'tree'],
+                'pathVars' => ['module', 'root', ''],
                 'method' => 'tree',
                 'noEtag' => true,
                 'shortHelp' => 'This method returns formatted tree for selected root',
                 'longHelp' => 'modules/Categories/clients/base/api/help/tree_get_tree_help.html',
-            ),
-            'children' => array(
+            ],
+            'children' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'children'),
-                'pathVars' => array('module', 'record', ''),
+                'path' => ['<module>', '?', 'children'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'children',
                 'shortHelp' => 'This method returns children categories for selected record',
                 'longHelp' => 'modules/Categories/clients/base/api/help/tree_get_children_help.html',
-            ),
-            'next' => array(
+            ],
+            'next' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'next'),
-                'pathVars' => array('module', 'record', ''),
+                'path' => ['<module>', '?', 'next'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'next',
                 'shortHelp' => 'This method returns next sibling of selected record',
                 'longHelp' => 'modules/Categories/clients/base/api/help/tree_get_next_help.html',
-            ),
-            'prev' => array(
+            ],
+            'prev' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'prev'),
-                'pathVars' => array('module', 'record', ''),
+                'path' => ['<module>', '?', 'prev'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'prev',
                 'shortHelp' => 'This method returns previous sibling of selected record',
                 'longHelp' => 'modules/Categories/clients/base/api/help/tree_get_prev_help.html',
-            ),
-            'parent' => array(
+            ],
+            'parent' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'parent'),
-                'pathVars' => array('module', 'record', ''),
+                'path' => ['<module>', '?', 'parent'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'getParent',
                 'shortHelp' => 'This method returns parent node of selected record',
                 'longHelp' => 'modules/Categories/clients/base/api/help/tree_get_parent_help.html',
-            ),
-            'path' => array(
+            ],
+            'path' => [
                 'reqType' => 'GET',
-                'path' => array('<module>', '?', 'path'),
-                'pathVars' => array('module', 'record', ''),
+                'path' => ['<module>', '?', 'path'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'path',
                 'shortHelp' => 'This method returns full path of selected record',
                 'longHelp' => 'modules/Categories/clients/base/api/help/tree_get_path_help.html',
-            ),
-            'movebefore' => array(
+            ],
+            'movebefore' => [
                 'reqType' => 'PUT',
-                'path' => array('<module>', '?', 'movebefore', '?'),
-                'pathVars' => array('module', 'record', 'movebefore', 'target'),
+                'path' => ['<module>', '?', 'movebefore', '?'],
+                'pathVars' => ['module', 'record', 'movebefore', 'target'],
                 'method' => 'moveBefore',
                 'shortHelp' => 'This method record as previous sibling of target',
                 'longHelp' => 'modules/Categories/clients/base/api/help/tree_put_movebefore_help.html',
-            ),
-            'moveafter' => array(
+            ],
+            'moveafter' => [
                 'reqType' => 'PUT',
-                'path' => array('<module>', '?', 'moveafter', '?'),
-                'pathVars' => array('module', 'record', 'moveafter', 'target'),
+                'path' => ['<module>', '?', 'moveafter', '?'],
+                'pathVars' => ['module', 'record', 'moveafter', 'target'],
                 'method' => 'moveAfter',
                 'shortHelp' => 'This method record as next sibling of target',
                 'longHelp' => 'modules/Categories/clients/base/api/help/tree_put_moveafter_help.html',
-            ),
-            'movefirst' => array(
+            ],
+            'movefirst' => [
                 'reqType' => 'PUT',
-                'path' => array('<module>', '?', 'movefirst', '?'),
-                'pathVars' => array('module', 'record', 'movefirst', 'target'),
+                'path' => ['<module>', '?', 'movefirst', '?'],
+                'pathVars' => ['module', 'record', 'movefirst', 'target'],
                 'method' => 'moveFirst',
                 'shortHelp' => 'This method record as first child of target',
                 'longHelp' => 'modules/Categories/clients/base/api/help/tree_put_movefirst_help.html',
-            ),
-            'movelast' => array(
+            ],
+            'movelast' => [
                 'reqType' => 'PUT',
-                'path' => array('<module>', '?', 'movelast', '?'),
-                'pathVars' => array('module', 'record', 'movelast', 'target'),
+                'path' => ['<module>', '?', 'movelast', '?'],
+                'pathVars' => ['module', 'record', 'movelast', 'target'],
                 'method' => 'moveLast',
                 'shortHelp' => 'This method record as last child of target',
                 'longHelp' => 'modules/Categories/clients/base/api/help/tree_put_movelast_help.html',
-            ),
-            'append' => array(
+            ],
+            'append' => [
                 'reqType' => 'POST',
-                'path' => array('<module>', 'append', '?'),
-                'pathVars' => array('module', 'append', 'target'),
+                'path' => ['<module>', 'append', '?'],
+                'pathVars' => ['module', 'append', 'target'],
                 'method' => 'append',
                 'shortHelp' => 'This method append record to target as last child',
                 'longHelp' => 'modules/Categories/clients/base/api/help/tree_post_append_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionInvalidParameter',
-                ),
-            ),
-            'prepend' => array(
+                ],
+            ],
+            'prepend' => [
                 'reqType' => 'POST',
-                'path' => array('<module>', 'prepend', '?'),
-                'pathVars' => array('module', 'prepend', 'target'),
+                'path' => ['<module>', 'prepend', '?'],
+                'pathVars' => ['module', 'prepend', 'target'],
                 'method' => 'prepend',
                 'shortHelp' => 'This method prepend record to target as first child',
                 'longHelp' => 'modules/Categories/clients/base/api/help/tree_post_prepend_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionInvalidParameter',
-                ),
-            ),
-            'insertbefore' => array(
+                ],
+            ],
+            'insertbefore' => [
                 'reqType' => 'POST',
-                'path' => array('<module>', 'insertbefore', '?'),
-                'pathVars' => array('module', 'insertbefore', 'target'),
+                'path' => ['<module>', 'insertbefore', '?'],
+                'pathVars' => ['module', 'insertbefore', 'target'],
                 'method' => 'insertBefore',
                 'shortHelp' => 'This method insert record as previous sibling of target',
                 'longHelp' => 'modules/Categories/clients/base/api/help/tree_post_insertbefore_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionInvalidParameter',
-                ),
-            ),
-            'insertafter' => array(
+                ],
+            ],
+            'insertafter' => [
                 'reqType' => 'POST',
-                'path' => array('<module>', 'insertafter', '?'),
-                'pathVars' => array('module', 'insertafter', 'target'),
+                'path' => ['<module>', 'insertafter', '?'],
+                'pathVars' => ['module', 'insertafter', 'target'],
                 'method' => 'insertAfter',
                 'shortHelp' => 'This method insert record as next sibling of target',
                 'longHelp' => 'modules/Categories/clients/base/api/help/tree_post_insertafter_help.html',
-                'exceptions' => array(
+                'exceptions' => [
                     'SugarApiExceptionNotFound',
                     'SugarApiExceptionInvalidParameter',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
-    
+
     /**
      * This method loads and returns bean.
      * @param string $module Module to retrieve bean.
@@ -237,7 +236,7 @@ class TreeApi extends FilterApi
             throw new SugarApiException('The target node should not be descendant.');
         }
 
-        return array($bean, $target);
+        return [$bean, $target];
     }
 
     /**
@@ -251,7 +250,7 @@ class TreeApi extends FilterApi
     protected function createNewBean(ServiceBase $api, array $args)
     {
         $bean = BeanFactory::newBean($args['module']);
-        
+
         if (false === ($bean instanceof NestedBeanInterface)) {
             throw new SugarApiExceptionInvalidParameter(
                 'Requested module "' . $args['module'] . '" should be ' .
@@ -282,7 +281,7 @@ class TreeApi extends FilterApi
      */
     public function prepend(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'target'));
+        $this->requireArgs($args, ['module', 'target']);
         $bean = $this->createNewBean($api, $args);
         $api->action = 'save';
         $target = $this->retrieveBean($args['module'], $args['target']);
@@ -301,7 +300,7 @@ class TreeApi extends FilterApi
      */
     public function append(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'target'));
+        $this->requireArgs($args, ['module', 'target']);
         $bean = $this->createNewBean($api, $args);
         $api->action = 'save';
         $target = $this->retrieveBean($args['module'], $args['target']);
@@ -320,7 +319,7 @@ class TreeApi extends FilterApi
      */
     public function insertBefore(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'target'));
+        $this->requireArgs($args, ['module', 'target']);
         $bean = $this->createNewBean($api, $args);
         $api->action = 'save';
         $target = $this->retrieveBean($args['module'], $args['target']);
@@ -339,7 +338,7 @@ class TreeApi extends FilterApi
      */
     public function insertAfter(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'target'));
+        $this->requireArgs($args, ['module', 'target']);
         $bean = $this->createNewBean($api, $args);
         $api->action = 'save';
         $target = $this->retrieveBean($args['module'], $args['target']);
@@ -356,7 +355,7 @@ class TreeApi extends FilterApi
      */
     public function moveBefore(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'record', 'target'));
+        $this->requireArgs($args, ['module', 'record', 'target']);
         [$bean, $target] = $this->loadBoundBeans($args['module'], $args['record'], $args['target']);
         $bean->moveBefore($target);
         return $this->formatBean($api, $args, $bean);
@@ -370,7 +369,7 @@ class TreeApi extends FilterApi
      */
     public function moveAfter(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'record', 'target'));
+        $this->requireArgs($args, ['module', 'record', 'target']);
         [$bean, $target] = $this->loadBoundBeans($args['module'], $args['record'], $args['target']);
         $bean->moveAfter($target);
         return $this->formatBean($api, $args, $bean);
@@ -384,7 +383,7 @@ class TreeApi extends FilterApi
      */
     public function moveFirst(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'record', 'target'));
+        $this->requireArgs($args, ['module', 'record', 'target']);
         [$bean, $target] = $this->loadBoundBeans($args['module'], $args['record'], $args['target']);
         $bean->moveAsFirst($target);
         return $this->formatBean($api, $args, $bean);
@@ -398,7 +397,7 @@ class TreeApi extends FilterApi
      */
     public function moveLast(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'record', 'target'));
+        $this->requireArgs($args, ['module', 'record', 'target']);
         [$bean, $target] = $this->loadBoundBeans($args['module'], $args['record'], $args['target']);
         $bean->moveAsLast($target);
         return $this->formatBean($api, $args, $bean);
@@ -406,15 +405,15 @@ class TreeApi extends FilterApi
 
     /**
      * This method returns formatted tree for selected root.
-     * @uses TreeApi::formatTree to format output results.
      * @param ServiceBase $api Api object.
      * @param array $args The arguments array passed in from the API.
      * @return array Formatted collection.
+     * @uses TreeApi::formatTree to format output results.
      */
     public function tree(ServiceBase $api, array $args)
     {
         $api->action = 'list';
-        $this->requireArgs($args, array('module', 'root'));
+        $this->requireArgs($args, ['module', 'root']);
         // Load up a seed bean
         $seed = BeanFactory::newBean($args['module']);
         if (!$seed->ACLAccess($api->action)) {
@@ -433,11 +432,11 @@ class TreeApi extends FilterApi
      */
     public function formatTree(ServiceBase $api, array $args, array $tree)
     {
-        $this->requireArgs($args, array('module'));
-        $data = $emptySet = array(
+        $this->requireArgs($args, ['module']);
+        $data = $emptySet = [
             'next_offset' => -1,
-            'records' => array(),
-        );
+            'records' => [],
+        ];
 
         foreach ($tree as $node) {
             $nodeBean = BeanFactory::getBean($args['module'], $node['id']);
@@ -456,14 +455,14 @@ class TreeApi extends FilterApi
 
     /**
      * This method returns children nodes for selected record.
-     * @uses TreeApi::formatTree to format output results.
      * @param ServiceBase $api Api object.
      * @param array $args The arguments array passed in from the API.
      * @return array List of children nodes.
+     * @uses TreeApi::formatTree to format output results.
      */
     public function children(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'record'));
+        $this->requireArgs($args, ['module', 'record']);
         $record = $this->retrieveBean($args['module'], $args['record']);
         return $this->formatTree($api, $args, $record->getChildren(1));
     }
@@ -476,7 +475,7 @@ class TreeApi extends FilterApi
      */
     public function next(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'record'));
+        $this->requireArgs($args, ['module', 'record']);
         $record = $this->retrieveBean($args['module'], $args['record']);
         return $record->getNextSibling();
     }
@@ -489,7 +488,7 @@ class TreeApi extends FilterApi
      */
     public function prev(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'record'));
+        $this->requireArgs($args, ['module', 'record']);
         $record = $this->retrieveBean($args['module'], $args['record']);
         return $record->getPrevSibling();
     }
@@ -502,7 +501,7 @@ class TreeApi extends FilterApi
      */
     public function getParent(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'record'));
+        $this->requireArgs($args, ['module', 'record']);
         $bean = $this->retrieveBean($args['module'], $args['record']);
         return $bean->getParent();
     }
@@ -515,7 +514,7 @@ class TreeApi extends FilterApi
      */
     public function path(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'record'));
+        $this->requireArgs($args, ['module', 'record']);
         $record = $this->retrieveBean($args['module'], $args['record']);
         return $record->getParents();
     }
@@ -530,7 +529,7 @@ class TreeApi extends FilterApi
         $options['depth'] = $this->defaultTreeDepth;
 
         if (!empty($args['depth'])) {
-            $options['depth'] = (int) $args['depth'];
+            $options['depth'] = (int)$args['depth'];
         }
         return $options;
     }
@@ -543,7 +542,7 @@ class TreeApi extends FilterApi
         $data = parent::runQuery($api, $args, $q, $options, $seed);
 
         if ($options['depth'] > 0) {
-            $options['depth'] --;
+            $options['depth']--;
             foreach ($data['records'] as $i => $row) {
                 $record = $seed->getCleanCopy();
                 $record->loadFromRow($row, true);
@@ -552,10 +551,10 @@ class TreeApi extends FilterApi
                 $q->joinSubpanel(
                     $record,
                     $args['link_name'],
-                    array(
+                    [
                         'joinType' => 'INNER',
-                        'ignoreRole' => !empty($args['ignore_role'])
-                    )
+                        'ignoreRole' => !empty($args['ignore_role']),
+                    ]
                 );
                 self::addFilters($args['filter'], $q->where(), $q);
 
@@ -576,7 +575,7 @@ class TreeApi extends FilterApi
      */
     public function filterSubTree(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'record', 'link_name'));
+        $this->requireArgs($args, ['module', 'record', 'link_name']);
         // Load the parent bean.
         $record = BeanFactory::retrieveBean($args['module'], $args['record']);
 
@@ -612,7 +611,7 @@ class TreeApi extends FilterApi
         // for this relationship
         if (empty($args['fields']) && is_array($linkSeed->field_defs)) {
             $relatedLinkName = $record->$linkName->getRelatedModuleLinkName();
-            $options['linkDataFields'] = array();
+            $options['linkDataFields'] = [];
             foreach ($linkSeed->field_defs as $field => $def) {
                 if (empty($def['rname_link']) || empty($def['link'])) {
                     continue;
@@ -627,17 +626,17 @@ class TreeApi extends FilterApi
         }
 
         if (!isset($args['filter']) || !is_array($args['filter'])) {
-            $args['filter'] = array();
+            $args['filter'] = [];
         }
 
         $q = self::getQueryObject($linkSeed, $options);
         $q->joinSubpanel(
             $record,
             $linkName,
-            array(
+            [
                 'joinType' => 'INNER',
-                'ignoreRole' => !empty($args['ignore_role'])
-            )
+                'ignoreRole' => !empty($args['ignore_role']),
+            ]
         );
         self::addFilters($args['filter'], $q->where(), $q);
 
@@ -655,7 +654,7 @@ class TreeApi extends FilterApi
      */
     public function filterTree(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, array('module', 'link_name'));
+        $this->requireArgs($args, ['module', 'link_name']);
         // Load up a seed bean
         $seed = BeanFactory::newBean($args['module']);
         if (!$seed->ACLAccess('list')) {
@@ -677,7 +676,7 @@ class TreeApi extends FilterApi
         // for this relationship
         if (empty($args['fields']) && is_array($seed->field_defs)) {
             $relatedLinkName = $seed->$linkName->getRelatedModuleLinkName();
-            $options['linkDataFields'] = array();
+            $options['linkDataFields'] = [];
 
             foreach ($seed->field_defs as $field => $def) {
                 if (empty($def['rname_link']) || empty($def['link'])) {
@@ -692,7 +691,7 @@ class TreeApi extends FilterApi
             }
         }
         if (!isset($args['filter']) || !is_array($args['filter'])) {
-            $args['filter'] = array();
+            $args['filter'] = [];
         }
 
         $q = self::getQueryObject($seed, $options);

@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => 'Στάδιο Γκρουπ:',
-    'LBL_DEAL_TOT'=>'συνολική έκπτωση:',
-    'LBL_DEAL_TOT_USDOLLAR'=>'συνολική έκπτωση (Δολλάριο ΗΠΑ)',
+    'LBL_DEAL_TOT' => 'συνολική έκπτωση:',
+    'LBL_DEAL_TOT_USDOLLAR' => 'συνολική έκπτωση (Δολλάριο ΗΠΑ)',
     'LBL_NEW_SUB' => 'Εκπτωτικό Υποσύνολο:',
     'LBL_SHIPPING' => 'Έξοδα Παράδοσης:',
-    'LBL_SHIPPING_USDOLLAR'=>'Παράδοση (US Δολλάριο)',
-    'LBL_SUBTOTAL_USDOLLAR'=>'Υποσύνολο (US Δολλάριο)',
+    'LBL_SHIPPING_USDOLLAR' => 'Παράδοση (US Δολλάριο)',
+    'LBL_SUBTOTAL_USDOLLAR' => 'Υποσύνολο (US Δολλάριο)',
     'LBL_SUBTOTAL' => 'Υποσύνολο:',
     'LBL_TAXABLE_SUBTOTAL' => 'Μερικό Άθροισμα Φορολογητέων',
-    'LBL_TAX_USDOLLAR'=>'Φόρος (US Δολλάριο)',
+    'LBL_TAX_USDOLLAR' => 'Φόρος (US Δολλάριο)',
     'LBL_TAX' => 'Φόρος:',
-    'LBL_TOTAL_USDOLLAR'=>'Σύνολο (US Δολλάριο)',
+    'LBL_TOTAL_USDOLLAR' => 'Σύνολο (US Δολλάριο)',
     'LBL_TOTAL' => 'Σύνολο:',
     'LBL_QUOTE_BUNDLE_POSITION' => 'Θέση Πακέτου Προσφοράς',
     'EXCEPTION_INVALID_QUOTE_ID' => 'Η Ταυτότητα της προσφοράς λείπει από το έγγραφο',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  'Η προσφορά που ζητήσατε δεν βρέθηκε',
+    'EXCEPTION_NOT_FOUND_QUOTE' => 'Η προσφορά που ζητήσατε δεν βρέθηκε',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => 'Πρόσθετη Ομαδική Έκπτωση',
     'LBL_GROUP_TOTAL' => 'Συνολικό Ομάδας',
     'LBL_QUOTE_DATA_GROUP_HEADER' => 'Κεφαλίδα Ομάδας',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Η προεπιλεγμένη ομάδα Πακέτου Προϊόντων για την Προσφορά',
     'LBL_ALERT_DELETING_ITEM' => 'Διαγραφή γραμμής στοιχείου(ων)',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'Η γραμμής στοιχείου διαγράφηκε',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Χρονολόγιο πακέτου προϊόντων',
+];

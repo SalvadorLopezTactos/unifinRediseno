@@ -10,64 +10,64 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['quotes_contacts'] = array(
+$dictionary['quotes_contacts'] = [
     'table' => 'quotes_contacts',
-    'fields' => array(
-        'id' => array(
+    'fields' => [
+        'id' => [
             'name' => 'id',
             'type' => 'id',
-        ),
-        'contact_id' => array(
+        ],
+        'contact_id' => [
             'name' => 'contact_id',
             'type' => 'id',
-        ),
-        'quote_id' => array(
+        ],
+        'quote_id' => [
             'name' => 'quote_id',
             'type' => 'id',
-        ),
-        'contact_role' => array(
+        ],
+        'contact_role' => [
             'name' => 'contact_role',
             'type' => 'varchar',
             'len' => '20',
-        ),
-        'date_modified' => array(
+        ],
+        'date_modified' => [
             'name' => 'date_modified',
             'type' => 'datetime',
-        ),
-        'deleted' => array(
+        ],
+        'deleted' => [
             'name' => 'deleted',
             'type' => 'bool',
             'len' => '1',
             'default' => '0',
             'required' => false,
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'quotes_contactspk',
             'type' => 'primary',
-            'fields' => array(
+            'fields' => [
                 'id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_con_qte_con',
             'type' => 'index',
-            'fields' => array(
+            'fields' => [
                 'contact_id',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'name' => 'idx_quote_contact_role',
             'type' => 'alternate_key',
-            'fields' => array(
+            'fields' => [
                 'quote_id',
                 'contact_role',
-            ),
-        ),
-    ),
-    'relationships' => array(
-        'quotes_contacts_shipto' => array(
+            ],
+        ],
+    ],
+    'relationships' => [
+        'quotes_contacts_shipto' => [
             'rhs_module' => 'Quotes',
             'rhs_table' => 'quotes',
             'rhs_key' => 'id',
@@ -81,8 +81,8 @@ $dictionary['quotes_contacts'] = array(
             'join_key_lhs' => 'contact_id',
             'relationship_role_column' => 'contact_role',
             'relationship_role_column_value' => 'Ship To',
-        ),
-        'quotes_contacts_billto' => array(
+        ],
+        'quotes_contacts_billto' => [
             'rhs_module' => 'Quotes',
             'rhs_table' => 'quotes',
             'rhs_key' => 'id',
@@ -96,6 +96,6 @@ $dictionary['quotes_contacts'] = array(
             'join_key_lhs' => 'contact_id',
             'relationship_role_column' => 'contact_role',
             'relationship_role_column_value' => 'Bill To',
-        ),
-    ),
-);
+        ],
+    ],
+];

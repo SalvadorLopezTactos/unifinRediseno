@@ -23,31 +23,31 @@ class CommentLogRelatedModulesUtilities
     public static function getRelatedFields()
     {
         global $dictionary;
-        $fields = array();
+        $fields = [];
         foreach ($GLOBALS['beanList'] as $module => $bean) {
-            if ($module === "CommentLog") {
+            if ($module === 'CommentLog') {
                 continue;
             }
 
             $object = BeanFactory::getObjectName($module);
 
             if (empty($dictionary[$object])) {
-                VardefManager::loadVardef($module, $object, false, array('ignore_rel_calc_fields' => true));
+                VardefManager::loadVardef($module, $object, false, ['ignore_rel_calc_fields' => true]);
             }
 
             // only add when modules supports commentlog
             if (isset($dictionary[$object]['fields']['commentlog'])) {
-                $relName = strtolower($module) . "_commentlog";
+                $relName = strtolower($module) . '_commentlog';
                 $linkField = VardefManager::getLinkFieldForRelationship($module, $object, $relName);
                 if ($linkField) {
                     $name = strtolower($module) . '_link';
-                    $fields[$name] = array(
+                    $fields[$name] = [
                         'name' => $name,
                         'vname' => $module,
                         'type' => 'link',
                         'relationship' => $relName,
                         'source' => 'non-db',
-                    );
+                    ];
                 }
             }
         }

@@ -30,7 +30,7 @@ class SugarUpgradeFixQuickCreateLinks extends UpgradeScript
                 continue;
             }
 
-            $viewdefs = array();
+            $viewdefs = [];
             include $fileName;
             if (!isset($viewdefs[$module]['base']['menu']['quickcreate'])) {
                 continue;

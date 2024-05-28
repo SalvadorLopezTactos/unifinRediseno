@@ -11,5 +11,5 @@
  */
 
 
-$GLOBALS['studioDefs']['ProductBundle'] = array(
-);
+$GLOBALS['studioDefs']['ProductBundle'] = [
+];

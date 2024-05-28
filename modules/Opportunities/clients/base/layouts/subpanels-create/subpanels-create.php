@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,16 +10,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Opportunities']['base']['layout']['subpanels-create'] = array(
+$viewdefs['Opportunities']['base']['layout']['subpanels-create'] = [
     'type' => 'subpanels',
-    'components' => array(
-        array(
+    'components' => [
+        [
             'layout' => 'subpanel-create',
             'label' => 'LBL_RLI_SUBPANEL_TITLE',
             'override_subpanel_list_view' => 'subpanel-for-opportunities-create',
-            'context' => array(
+            'context' => [
                 'link' => 'revenuelineitems',
-            ),
-        )
-    ),
-);
+            ],
+        ],
+    ],
+];

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,10 +10,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ConsoleConfiguration']['base']['layout']['config-drawer-content'] = array(
-    'components' => array(
-        array(
+$viewdefs['ConsoleConfiguration']['base']['layout']['config-drawer-content'] = [
+    'components' => [
+        [
             'view' => 'config-tab-settings',
-        ),
-    ),
-);
+        ],
+    ],
+];

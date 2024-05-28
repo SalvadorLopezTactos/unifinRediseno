@@ -11,27 +11,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- $view_config = array(
-	'req_params' =>
-		array(
-		    'print' => array('param_value' => true,
-		                     'config' => array(
-		                                  'show_header' => true,
-		                                  'view_print'  => true,
-		                                  'show_title' => false,
-                                          'show_subpanels' => false,
-                                          'show_javascript' => true,
-                                          'show_search' => false,)
-                       ),
-			'to_pdf' => array('param_value' => true,
-							   'config' => array(
-		 										'show_all' => false
-		 										),
-		 				),
-		 	'to_csv' => array('param_value' => true,
-							   'config' => array(
-		 										'show_all' => false
-		 										),
-		 				),
-		),
- );
+$view_config = [
+    'req_params' => [
+        'print' => ['param_value' => true,
+            'config' => [
+                'show_header' => true,
+                'view_print' => true,
+                'show_title' => false,
+                'show_subpanels' => false,
+                'show_javascript' => true,
+                'show_search' => false,],
+        ],
+        'to_pdf' => ['param_value' => true,
+            'config' => [
+                'show_all' => false,
+            ],
+        ],
+        'to_csv' => ['param_value' => true,
+            'config' => [
+                'show_all' => false,
+            ],
+        ],
+    ],
+];

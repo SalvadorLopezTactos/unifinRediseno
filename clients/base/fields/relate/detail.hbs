@@ -10,15 +10,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="relate-field-container">
+<div class="relate-field-container{{#if showIcon}} flex{{/if}}">
+    {{#if showIcon}}
+        {{moduleLabel module 'sm' rel='tooltip' title=(getModuleName module) data-bs-placement='top'}}
+    {{/if}}
+
     {{#if href}}
-        <a class="ellipsis_inline" data-placement="bottom" title="{{value}}" href="{{href}}"
+        <a class="ellipsis_inline {{module}}" data-bs-placement="bottom" title="{{value}}" href="{{href}}"
            data-link-target="{{linkTarget}}" data-module="{{module}}" data-model-id="{{modelId}}">
             {{value}}
         </a>
         {{partial 'focus-icon' this this}}
     {{else}}
-        <span class="ellipsis_inline" data-placement="bottom"
+        <span class="ellipsis_inline" data-bs-placement="bottom"
             title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}"
         >
             {{value}}

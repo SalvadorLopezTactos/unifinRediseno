@@ -22,7 +22,7 @@ class SugarUpgradeAddTagLabelToViews extends UpgradeScript
 {
     public $order = 9701;
     public $type = self::UPGRADE_CUSTOM;
-    protected $taggableLang = array();
+    protected $taggableLang = [];
 
     public function run()
     {
@@ -52,7 +52,7 @@ class SugarUpgradeAddTagLabelToViews extends UpgradeScript
      */
     protected function addTagLabelToConfig()
     {
-        $files = $this->getFiles("custom/modulebuilder/packages/*/modules/*/config.php");
+        $files = $this->getFiles('custom/modulebuilder/packages/*/modules/*/config.php');
 
         foreach ($files as $file) {
             $data = $this->getFileData($file);
@@ -93,7 +93,7 @@ class SugarUpgradeAddTagLabelToViews extends UpgradeScript
      */
     protected function addTagLabelToLanguageFile()
     {
-        $files = $this->getFiles("custom/modulebuilder/builds/*/SugarModules/modules/*/language/en_us.lang.php");
+        $files = $this->getFiles('custom/modulebuilder/builds/*/SugarModules/modules/*/language/en_us.lang.php');
 
         foreach ($files as $file) {
             $data = $this->getDataForLanguageFile($file);
@@ -169,7 +169,7 @@ class SugarUpgradeAddTagLabelToViews extends UpgradeScript
      */
     protected function getDataFromFile($file, $var)
     {
-        ${$var} = array();
+        ${$var} = [];
         @require $file;
         return ${$var};
     }

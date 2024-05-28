@@ -11,93 +11,93 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$view_config = array(
-    'actions' => array(
-		 	'ajaxformsave' => array(
-		 					'show_all' => false
-		 				),
-		 	'popup' => array(
-		 					'show_header' => false,
-		 					'show_subpanels' => false,
-		 					'show_search' => false,
-		 					'show_javascript' => true,
-		 				),
-		 	'authenticate' => array(
-		 					'show_header' => false,
-		 					'show_subpanels' => false,
-		 					'show_search' => false,
-		 					'show_javascript' => false,
-		 				),
-		 	'subpanelcreates' => array(
-		 					'show_header' => false,
-		 					'show_subpanels' => false,
-		 					'show_search' => false,
-		 					'show_javascript' => true,
-		 				),
-		 ),
-    'req_params' => array(
-        'print' => array(
+$view_config = [
+    'actions' => [
+        'ajaxformsave' => [
+            'show_all' => false,
+        ],
+        'popup' => [
+            'show_header' => false,
+            'show_subpanels' => false,
+            'show_search' => false,
+            'show_javascript' => true,
+        ],
+        'authenticate' => [
+            'show_header' => false,
+            'show_subpanels' => false,
+            'show_search' => false,
+            'show_javascript' => false,
+        ],
+        'subpanelcreates' => [
+            'show_header' => false,
+            'show_subpanels' => false,
+            'show_search' => false,
+            'show_javascript' => true,
+        ],
+    ],
+    'req_params' => [
+        'print' => [
             'param_value' => true,
-                             'config' => array(
-                                          'show_header' => true,
-                                          'view_print'  => true,
-                                          'show_title' => false,
-                                          'show_subpanels' => false,
-                                          'show_javascript' => true,
-                                          'show_search' => false,)
-                       ),
-        'action' => array(
-            'param_value' => array('Delete','Save'),
-							   'config' => array(
-		 										'show_all' => false
-		 										),
-		 				),
-        'to_pdf' => array(
+            'config' => [
+                'show_header' => true,
+                'view_print' => true,
+                'show_title' => false,
+                'show_subpanels' => false,
+                'show_javascript' => true,
+                'show_search' => false,],
+        ],
+        'action' => [
+            'param_value' => ['Delete', 'Save'],
+            'config' => [
+                'show_all' => false,
+            ],
+        ],
+        'to_pdf' => [
             'param_value' => true,
-							   'config' => array(
-		 										'show_all' => false
-		 										),
-		 				),
-        'to_csv' => array(
+            'config' => [
+                'show_all' => false,
+            ],
+        ],
+        'to_csv' => [
             'param_value' => true,
-							   'config' => array(
-		 										'show_all' => false
-		 										),
-		 				),
-        'sugar_body_only' => array(
+            'config' => [
+                'show_all' => false,
+            ],
+        ],
+        'sugar_body_only' => [
             'param_value' => true,
-							   'config' => array(
-		 										'show_all' => false
-		 										),
-		 				),
-        'view' => array(
+            'config' => [
+                'show_all' => false,
+            ],
+        ],
+        'view' => [
             'param_value' => 'documentation',
-							   'config' => array(
-		 										'show_all' => false
-		 										),
-		 				),
-        'show_js' => array(
+            'config' => [
+                'show_all' => false,
+            ],
+        ],
+        'show_js' => [
             'param_value' => true,
-                             'config' => array(
-                                          'show_header' => false,
-                                          'view_print'  => false,
-                                          'show_title' => false,
-                                          'show_subpanels' => false,
-                                          'show_javascript' => true,
-                'show_search' => false,
-            )
-        ),
-        'ajax_load' => array(
-            'param_value' => true,
-            'config' => array(
+            'config' => [
                 'show_header' => false,
-                'view_print'  => false,
+                'view_print' => false,
+                'show_title' => false,
+                'show_subpanels' => false,
+                'show_javascript' => true,
+                'show_search' => false,
+            ],
+        ],
+        'ajax_load' => [
+            'param_value' => true,
+            'config' => [
+                'show_header' => false,
+                'view_print' => false,
                 'show_title' => true,
                 'show_subpanels' => false,
                 'show_javascript' => false,
                 'show_search' => true,
                 'json_output' => true,
-            )
-                       ),
-		),
-);
+            ],
+        ],
+    ],
+];

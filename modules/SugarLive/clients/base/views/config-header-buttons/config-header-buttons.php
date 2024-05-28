@@ -12,9 +12,9 @@
 $viewdefs['SugarLive']['base']['view']['config-header-buttons'] = [
     'buttons' => [
         [
-            'name'    => 'cancel_button',
-            'type'    => 'button',
-            'label'   => 'LBL_CANCEL_BUTTON_LABEL',
+            'name' => 'cancel_button',
+            'type' => 'button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
         ], [
             'type' => 'actiondropdown',

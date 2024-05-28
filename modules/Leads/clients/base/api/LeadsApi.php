@@ -10,28 +10,30 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/Campaigns/utils.php');
+require_once 'modules/Campaigns/utils.php';
 
-class LeadsApi extends ModuleApi {
-    public function registerApiRest() {
-        return array(
-            'create' => array(
+class LeadsApi extends ModuleApi
+{
+    public function registerApiRest()
+    {
+        return [
+            'create' => [
                 'reqType' => 'POST',
-                'path' => array('Leads'),
-                'pathVars' => array('module'),
+                'path' => ['Leads'],
+                'pathVars' => ['module'],
                 'method' => 'createRecord',
                 'shortHelp' => 'This method creates a new Lead record with option to add Target & Email relationships',
                 'longHelp' => 'modules/Leads/clients/base/api/help/LeadsApi.html',
-            ),
-            'getFreeBusySchedule' => array(
+            ],
+            'getFreeBusySchedule' => [
                 'reqType' => 'GET',
-                'path' => array("Leads", '?', "freebusy"),
-                'pathVars' => array('module', 'record', ''),
+                'path' => ['Leads', '?', 'freebusy'],
+                'pathVars' => ['module', 'record', ''],
                 'method' => 'getFreeBusySchedule',
                 'shortHelp' => 'Retrieve a list of calendar event start and end times for specified person',
                 'longHelp' => 'include/api/help/lead_get_freebusy_help.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -81,11 +83,11 @@ class LeadsApi extends ModuleApi {
     public function getFreeBusySchedule(ServiceBase $api, array $args)
     {
         $bean = $this->loadBean($api, $args, 'view');
-        return array(
-            "module" => $bean->module_name,
-            "id" => $bean->id,
-            "freebusy" => $bean->getFreeBusySchedule($args),
-        );
+        return [
+            'module' => $bean->module_name,
+            'id' => $bean->id,
+            'freebusy' => $bean->getFreeBusySchedule($args),
+        ];
     }
 
     /**
@@ -96,7 +98,8 @@ class LeadsApi extends ModuleApi {
      * @param $emailId
      * @param $leadId
      */
-    protected function linkLeadToEmail($emailId, $leadId) {
+    protected function linkLeadToEmail($emailId, $leadId)
+    {
         global $current_user;
 
         $email = new Email();
@@ -122,14 +125,14 @@ class LeadsApi extends ModuleApi {
         $linkModuleName = $record->accounts->getRelatedModuleName();
         $linkSeed = BeanFactory::newBean($linkModuleName);
         if (!$linkSeed->ACLAccess('view')) {
-            throw new SugarApiExceptionNotAuthorized('No access to view records for module: '.$linkModuleName);
+            throw new SugarApiExceptionNotAuthorized('No access to view records for module: ' . $linkModuleName);
         }
 
-        $accounts = $record->accounts->query(array());
+        $accounts = $record->accounts->query([]);
         foreach ($accounts['rows'] as $accountId => $value) {
             $account = BeanFactory::getBean('Accounts', $accountId);
             if (empty($account)) {
-                throw new SugarApiExceptionNotFound('Could not find parent record '.$accountId.' in module Accounts');
+                throw new SugarApiExceptionNotFound('Could not find parent record ' . $accountId . ' in module Accounts');
             }
             if (!$account->ACLAccess('view')) {
                 throw new SugarApiExceptionNotAuthorized('No access to view records for module: Accounts');
@@ -140,7 +143,7 @@ class LeadsApi extends ModuleApi {
         }
     }
 
-    protected function getAccountRelationship(ServiceBase $api, array $args, $account, $relationship, $limit = 5, $query = array())
+    protected function getAccountRelationship(ServiceBase $api, array $args, $account, $relationship, $limit = 5, $query = [])
     {
         // Load up the relationship
         if (!$account->load_relationship($relationship)) {
@@ -151,13 +154,13 @@ class LeadsApi extends ModuleApi {
         $linkModuleName = $account->$relationship->getRelatedModuleName();
         $linkSeed = BeanFactory::newBean($linkModuleName);
         if (!$linkSeed->ACLAccess('view')) {
-            throw new SugarApiExceptionNotAuthorized('No access to view records for module: '.$linkModuleName);
+            throw new SugarApiExceptionNotAuthorized('No access to view records for module: ' . $linkModuleName);
         }
 
         $relationshipData = $account->$relationship->query($query);
         $rowCount = 1;
 
-        $data = array();
+        $data = [];
         foreach ($relationshipData['rows'] as $id => $value) {
             $rowCount++;
             $bean = BeanFactory::getBean(ucfirst($relationship), $id);
@@ -169,5 +172,4 @@ class LeadsApi extends ModuleApi {
         }
         return $data;
     }
-
 }

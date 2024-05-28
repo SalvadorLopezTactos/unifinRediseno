@@ -12,10 +12,10 @@
  */
 
 $module_name = 'pmse_Project';
-$viewdefs[$module_name]['mobile']['layout']['list'] = array(
-    'components' => array(
-        array(
+$viewdefs[$module_name]['mobile']['layout']['list'] = [
+    'components' => [
+        [
             'view' => 'list',
-        )
-    ),
-);
+        ],
+    ],
+];

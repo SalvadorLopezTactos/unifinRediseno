@@ -15,8 +15,8 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-require_once('modules/Configurator/Forms.php');
-require_once('modules/Administration/Forms.php');
+require_once 'modules/Configurator/Forms.php';
+require_once 'modules/Administration/Forms.php';
 
 class ViewAdminwizard extends SugarView
 {
@@ -28,37 +28,38 @@ class ViewAdminwizard extends SugarView
         $this->options['show_javascript'] = false;
     }
 
-        /**
-         * @see SugarView::display()
-         */
-        public function display()
-        {
-            global $current_user, $mod_strings, $app_list_strings, $sugar_config, $locale, $sugar_version;
+    /**
+     * @see SugarView::display()
+     */
+    public function display()
+    {
+        global $current_user, $mod_strings, $app_list_strings, $sugar_config, $locale, $sugar_version;
 
-            if(!is_admin($current_user)){
+        if (!is_admin($current_user)) {
             sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
         }
 
-                $themeObject = SugarThemeRegistry::current();
+        $themeObject = SugarThemeRegistry::current();
 
         $configurator = new Configurator();
         $sugarConfig = SugarConfig::getInstance();
         $focus = Administration::getSettings();
 
         $ut = $GLOBALS['current_user']->getPreference('ut');
-        if(empty($ut))
-            $this->ss->assign('SKIP_URL','index.php?module=Users&action=Wizard&skipwelcome=1');
-        else
-            $this->ss->assign('SKIP_URL','index.php?module=Home&action=index');
+        if (empty($ut)) {
+            $this->ss->assign('SKIP_URL', 'index.php?module=Users&action=Wizard&skipwelcome=1');
+        } else {
+            $this->ss->assign('SKIP_URL', 'index.php?module=Home&action=index');
+        }
 
         // Always mark that we have got past this point
-        $focus->saveSetting('system','adminwizard',1);
+        $focus->saveSetting('system', 'adminwizard', 1);
         $css = $themeObject->getCSS();
         $favicon = $themeObject->getImageURL('sugar-favicon.png', false);
-        $this->ss->assign('FAVICON_URL',getJSPath($favicon));
+        $this->ss->assign('FAVICON_URL', getJSPath($favicon));
         $this->ss->assign('SUGAR_CSS', $css);
-        $this->ss->assign('MOD_USERS',return_module_language($GLOBALS['current_language'], 'Users'));
-        $this->ss->assign('CSS', '<link rel="stylesheet" type="text/css" href="'.SugarThemeRegistry::current()->getCSSURL('wizard.css').'" />');
+        $this->ss->assign('MOD_USERS', return_module_language($GLOBALS['current_language'], 'Users'));
+        $this->ss->assign('CSS', '<link rel="stylesheet" type="text/css" href="' . SugarThemeRegistry::current()->getCSSURL('wizard.css') . '" />');
         $this->ss->assign('LANGUAGES', get_languages());
         $this->ss->assign('config', $sugar_config);
         $this->ss->assign('SUGAR_VERSION', $sugar_version);
@@ -66,7 +67,7 @@ class ViewAdminwizard extends SugarView
         $this->ss->assign('exportCharsets', get_select_options_with_id($locale->getCharsetSelect(), $sugar_config['default_export_charset']));
         $this->ss->assign('getNameJs', $locale->getNameJs());
         $this->ss->assign('NAMEFORMATS', $locale->getUsableLocaleNameOptions($sugar_config['name_formats']));
-        $this->ss->assign('JAVASCRIPT',get_set_focus_js(). get_configsettings_js());
+        $this->ss->assign('JAVASCRIPT', get_set_focus_js() . get_configsettings_js());
         $this->ss->assign('company_logo', SugarThemeRegistry::current()->getImageURL('company_logo.png', true, true));
         $this->ss->assign('mail_smtptype', $focus->settings['mail_smtptype']);
         $this->ss->assign('mail_smtpserver', $focus->settings['mail_smtpserver']);
@@ -83,7 +84,7 @@ class ViewAdminwizard extends SugarView
         $this->options['show_javascript'] = true;
         $this->renderJavascript();
         $this->options['show_javascript'] = false;
-        $this->ss->assign("SUGAR_JS",ob_get_contents().$themeObject->getJS());
+        $this->ss->assign('SUGAR_JS', ob_get_contents() . $themeObject->getJS());
         ob_end_clean();
 
         $this->ss->assign('langHeader', get_language_header());
@@ -91,6 +92,6 @@ class ViewAdminwizard extends SugarView
         $page = $this->request->getValidInputRequest('page', null, 'welcome');
         $this->ss->assign('START_PAGE', $page);
 
-            $this->ss->display('modules/Configurator/tpls/adminwizard.tpl');
-        }
+        $this->ss->display('modules/Configurator/tpls/adminwizard.tpl');
+    }
 }

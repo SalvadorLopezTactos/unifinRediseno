@@ -63,12 +63,14 @@ $mod_strings = [
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Ngarko zarfin',
     'LBL_CLOUD_SERVICE_TYPE' => 'Lloji i shërbimit të resë kompjuterike',
     'LBL_CLOUD_PATH' => 'Shtegu i resë kompjuterike',
+    'LBL_CLOUD_DRIVE_ID' => 'ID-ja e njësisë së diskut',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Paneli i listës së zarfeve të DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_RECORD_DASHBOARD' => 'Paneli i regjistrit të zarfeve të DocuSign',
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Zarfet më të fundit të DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit të zarfeve të DocuSign',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e zarfit të DocuSign',
 
     'LBL_NEW_ENVELOPE' => 'Zarf i ri',
     'LBL_DOCUMENT_IS_NOW' => ' është tashmë ',
@@ -94,6 +96,7 @@ $mod_strings = [
     'LBL_BUTTON_SEND' => 'Dërgo',
     'LBL_BUTTON_CLEAR' => 'Pastro',
     'LBL_BUTTON_SELECT_TEMPLATE' => 'Përdor shabllonin',
+    'LBL_BUTTON_SEND_WITH_TEMPLATE' => 'Dërgo me shabllonin',
     'LBL_PLEASE_LOG_IN' => 'Identifikohu fillimisht në DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Nuk mund ta shkarkosh këtë dokument. Ai është krijuar nga një përdorues tjetër!',
     'LBL_SEND_NOT_ALLOWED' => 'Nuk mund ta dërgosh këtë zarf. Ai është krijuar nga një përdorues tjetër!',
@@ -103,6 +106,7 @@ $mod_strings = [
     'LBL_DRAFT_CHANGED_CONFIRM' => 'Drafti është modifikuar. Të përditësohet statusi në atë aktual ({{status}})?',
     'LBL_DRAFT_CHANGED_SUCCESS' => 'Zarfi i DocuSign u përditësua!',
     'LBL_DRAFT_CHANGED_ERROR' => 'Statusi i zarfit të DocuSign nuk u përditësua. Kontrollo regjistrat për detaje!',
+    'LBL_ENVELOPE_TEMPLATE_ERROR' => 'Shablloni DocuSign nuk mund të aplikohet',
     'LBL_ENVELOPE_NOT_SENT' => 'Zarfi nuk u dërgua!',
     'LBL_ENVELOPE_SENT' => 'Zarfi u dërgua sërish!',
     'LBL_DOCUMENT_ADDED' => 'Dokumenti u shtua në regjistër!',
@@ -129,7 +133,20 @@ $mod_strings = [
     'LBL_RECIPIENT_ROLE' => 'Roli',
     'LBL_SELECT_BUTTON_LABEL' => 'Zgjidh',
     'LBL_BACK_BUTTON_LABEL' => 'Prapa',
+    'LBL_SEARCH_BY_TEMPLATE_NAME' => 'Kërko sipas emrit të shabllonit',
+    'LBL_ENVELOPE_NAME' => 'Emri i zarfit',
+    'LBL_ENVELOPE_NAME_EMPTY' => 'Emri i zarfit nuk mund të jetë bosh',
 
     'LBL_FAILED_FETCH_RECIPIENTS' => 'Nuk arriti të marrë marrësit e mundshëm!',
     'LBL_FAILED_FETCH_TEMPLATES' => 'Nuk arriti të marrë shabllonet!',
+    'LBL_RECIPIENT_ROLE_MISSING_ERROR' => 'Zgjidh një rol për çdo marrës',
+    
+    'LBL_DOWNLOAD' => 'Shkarko',
+    'LBL_OPEN_DRAFT' => 'Hap projektin',
+    'LBL_DOCUSING_NO_ATTACHMENT' => 'Dokumentet pa skedar nuk mund të dërgohen në DocuSign.',
+    'LBL_START_SIGN_PROMPT' => 'Kliko butonin Plus për të filluar procesin e nënshkrimit',
+    'LBL_NO_DOC_SELECTED' => 'Fillimisht zgjidh dokumentet',
+    'LBL_SELECT_RECIPIENTS' => 'Zgjidh marrësin',
+    'LBL_DOCUSIGN_EXCLUDE_DOC' => 'Përjashto',
+    'LBL_DOCUSIGN_MISSING_APP' => 'Duhet të instalosh DocuSign për një përvojë më të mirë.',
 ];

@@ -9,55 +9,55 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ProspectLists']['base']['layout']['subpanels'] = array(
-    'components' => array(
-        array(
+$viewdefs['ProspectLists']['base']['layout']['subpanels'] = [
+    'components' => [
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_PROSPECTS_SUBPANEL_TITLE',
             'override_paneltop_view' => 'panel-top-for-prospectlists',
-            'context' => array(
+            'context' => [
                 'link' => 'prospects',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_CONTACTS_SUBPANEL_TITLE',
             'override_paneltop_view' => 'panel-top-for-prospectlists',
-            'context' => array(
+            'context' => [
                 'link' => 'contacts',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_LEADS_SUBPANEL_TITLE',
             'override_paneltop_view' => 'panel-top-for-prospectlists',
-            'context' => array(
+            'context' => [
                 'link' => 'leads',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_USERS_SUBPANEL_TITLE',
             'override_paneltop_view' => 'panel-top-for-prospectlists',
-            'context' => array(
+            'context' => [
                 'link' => 'users',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_ACCOUNTS_SUBPANEL_TITLE',
             'override_subpanel_list_view' => 'subpanel-for-prospectlists',
             'override_paneltop_view' => 'panel-top-for-prospectlists',
-            'context' => array(
+            'context' => [
                 'link' => 'accounts',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_CAMPAIGNS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'campaigns',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

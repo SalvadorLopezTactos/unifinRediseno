@@ -37,6 +37,7 @@ $mod_strings = [
     'LBL_ACTIVE' => 'Aktywne',
     'LBL_ASSIGNEE_RULE' => 'Reguła osoby przydzielonej',
     'LBL_TARGET_ASSIGNEE' => 'Docelowa osoba przydzielona',
+    'LBL_STAGE_NUMBERS' => 'Numerowanie etapów',
     'LBL_EXPORT_BUTTON_LABEL' => 'Eksportuj',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_BUTTON_LABEL' => 'Importuj',
     'LBL_CUSTOMER_JOURNEY_TEMPLATE_IMPORT_TEXT' => 'Automatycznie utwórz/aktualizuj nowy rekord szablonu Smart Guide, importując plik *.json z systemu plików.',
@@ -62,5 +63,6 @@ $mod_strings = [
     'LBL_SMART_GUIDE_TARGET_ASSIGNEE' => 'Jeśli opcja jest zaznaczona i opcja Docelowa osoba przydzielona jest taka sama jak Nadrzędna osoba przydzielona, po zmianie użytkownika „Przydzielono do” w elemencie nadrzędnym zostaną również automatycznie zmienieni użytkownicy „Przydzielono do” w Smart Guide, etapach i działaniach. Pamiętaj, że ustawienie opcji Docelowa osoba przydzielona z szablonów działania ma wyższy priorytet niż to ustawienie z szablonu Smart Guide',
     'LBL_SMART_GUIDE_USER_ASSIGNED' => 'Moment przydzielania użytkownika do działań',
     'LBL_SMART_GUIDE_ACTIVITIES_ASSIGNED' => 'Osoby przydzielane do działań',
+    'LBL_SMART_GUIDE_STAGE_NUMBERS' => 'Ten przełącznik umożliwia pokazywanie lub ukrywanie automatycznego numerowania etapów.',
     'CJ_FORMS_LBL_PARENT_NAME' => 'Szablon Smart Guide / etapu / działania',
 ];

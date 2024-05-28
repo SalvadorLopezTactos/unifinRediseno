@@ -9,33 +9,36 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 use Sugarcrm\Sugarcrm\Security\Crypto\Blowfish;
 
 class SugarWidgetFieldEncrypt extends SugarWidgetReportField
 {
-    function queryFilterEquals(&$layout_def)
+    public function queryFilterEquals(&$layout_def)
     {
         $search_value = Blowfish::encode(Blowfish::getKey('encrypt_field'), $layout_def['input_name0']);
-        return $this->_get_column_select($layout_def)."='".$GLOBALS['db']->quote($search_value)."'\n";
+        return $this->_get_column_select($layout_def) . "='" . $GLOBALS['db']->quote($search_value) . "'\n";
     }
 
-    function queryFilterNot_Equals_Str(&$layout_def)
+    public function queryFilterNot_Equals_Str(&$layout_def)
     {
         $search_value = Blowfish::encode(Blowfish::getKey('encrypt_field'), $layout_def['input_name0']);
-        return $this->_get_column_select($layout_def)."!='".$GLOBALS['db']->quote($search_value)."'\n";
+        return $this->_get_column_select($layout_def) . "!='" . $GLOBALS['db']->quote($search_value) . "'\n";
     }
 
-    function displayList($layout_def) {
-            return $this->displayListPlain($layout_def);
+    public function displayList($layout_def)
+    {
+        return $this->displayListPlain($layout_def);
     }
 
-    function displayListPlain($layout_def) {
-            $value= $this->_get_list_value($layout_def);
+    public function displayListPlain($layout_def)
+    {
+        $value = $this->_get_list_value($layout_def);
 
-            $value = Blowfish::decode(Blowfish::getKey('encrypt_field'), $value);
-            return $value;
+        $value = Blowfish::decode(Blowfish::getKey('encrypt_field'), $value);
+        return $value;
     }
-       
+
     /**
      * Get encrypt value for sidecar field
      *

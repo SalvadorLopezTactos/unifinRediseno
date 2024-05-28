@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Feladat várólista',
     'LBL_MODULE_NAME_SINGULAR' => 'Feladat várólista',
     'LBL_MODULE_TITLE' => 'Feladat várólista: Kezdőoldal',
@@ -51,14 +51,14 @@ $mod_strings = array(
     'LBL_RESOLUTION_FILTER_CANCELLED' => 'Felbontás törölve',
     'LBL_RESOLUTION_FILTER_RUNNING' => 'A felbontás fut',
     // Errors
-    'ERR_CALL' => "Nincs ilyen funkció: %s",
-    'ERR_CURL' => "Nincs cURL - az URL nem futtatható",
-    'ERR_FAILED' => "Váratlan hiba, ellenőrizze a PHP és a sugarcrm.log fájlokat",
-    'ERR_PHP' => "%s [%d]: %s itt: %s a következő soron: %d",
-    'ERR_NOUSER' => "Nincs munkafeladatra kiválasztott felhasználó",
-    'ERR_NOSUCHUSER' => "Nincs ilyen felhasználói azonosító",
-    'ERR_JOBTYPE' => "Ismeretlen munkafeladat: %s",
-    'ERR_TIMEOUT' => "Hiba időkorlát túllépése miatt",
+    'ERR_CALL' => 'Nincs ilyen funkció: %s',
+    'ERR_CURL' => 'Nincs cURL - az URL nem futtatható',
+    'ERR_FAILED' => 'Váratlan hiba, ellenőrizze a PHP és a sugarcrm.log fájlokat',
+    'ERR_PHP' => '%s [%d]: %s itt: %s a következő soron: %d',
+    'ERR_NOUSER' => 'Nincs munkafeladatra kiválasztott felhasználó',
+    'ERR_NOSUCHUSER' => '%s felhasználói azonosító nem található',
+    'ERR_JOBTYPE' => 'Ismeretlen munkafeladat: %s',
+    'ERR_TIMEOUT' => 'Hiba időkorlát túllépése miatt',
     'ERR_JOB_FAILED_VERBOSE' => '%1$s (%2$s) nem fut a cron-on',
     'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Nem lehet betölteni a következő azonosítót: %s',
     'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Nem található kezelő a következő útvonalra: %s',
@@ -90,13 +90,13 @@ $mod_strings = array(
     </li>
 </ul>",
     'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Amazon SQS konfigurációs súgó',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Amazon SQS konfigurációs rész.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => '<p><b>Amazon SQS konfigurációs rész.</b></p>
 <ul>
     <li>Hozzáférési kulcs azonosító: <i>Adja meg hozzáférési kulcs azonosítószámát az Amazon SQS-hez</i></li>
     <li>Titkos hozzáférési kulcs: <i>Adja meg titkos hozzáférési kulcsát az Amazon SQS-hez</i></li>
     <li>Régió: <i>Adja meg az Amazon SQS szerver régióját</i></li>
     <li>Várólista neve: <i>Adja meg az Amazon SQS szerver várólista-nevét</i></li>
-</ul>",
+</ul>',
     'LBL_CONFIG_AMQP_TITLE' => 'AMQP konfigurációs súgó',
     'LBL_CONFIG_AMQP_TEXT' => "<p><b>AMQP Configuration Section.</b></p>
 <ul>
@@ -117,4 +117,4 @@ $mod_strings = array(
     'LBL_REGION' => 'Régió',
     'LBL_ACCESS_KEY_SECRET' => 'Titkos hozzáférési kulcs',
     'LBL_QUEUE_NAME' => 'Adapter neve',
-);
+];

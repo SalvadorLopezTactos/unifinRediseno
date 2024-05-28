@@ -11,22 +11,23 @@
  */
 
 require_once 'data/BeanFactory.php';
-require_once 'clients/base/api/FilterApi.php' ;
+require_once 'clients/base/api/FilterApi.php';
+
 class CurrenciesFilterApi extends FilterApi
 {
     public function registerApiRest()
     {
-        return array(
-            'currenciesGet' => array(
+        return [
+            'currenciesGet' => [
                 'reqType' => 'GET',
-                'path' => array('Currencies'),
-                'pathVars' => array('module'),
+                'path' => ['Currencies'],
+                'pathVars' => ['module'],
                 'method' => 'currenciesGet',
-                'jsonParams' => array(),
+                'jsonParams' => [],
                 'shortHelp' => 'Filter records from a single module',
                 'longHelp' => 'modules/Currencies/clients/base/api/help/CurrenciesGet.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**

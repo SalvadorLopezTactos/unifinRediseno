@@ -18,7 +18,6 @@
  */
 class QuarterTimePeriod extends TimePeriod implements TimePeriodInterface
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -53,10 +52,10 @@ class QuarterTimePeriod extends TimePeriod implements TimePeriodInterface
         $this->leaf_name_template = translate('LBL_MONTH_TIMEPERIOD_FORMAT');
 
         //The chart label
-        $this->chart_label = "F Y";
+        $this->chart_label = 'F Y';
 
         //The date formatting key for chart labels
-        $this->chart_data_key = "m-Y";
+        $this->chart_data_key = 'm-Y';
 
         //The chart data interval modifier
         $this->chart_data_modifier = '+1 month';
@@ -97,7 +96,7 @@ class QuarterTimePeriod extends TimePeriod implements TimePeriodInterface
             }
         }
 
-        return string_format($this->name_template, array($count, $start_year->format('Y')));
+        return string_format($this->name_template, [$count, $start_year->format('Y')]);
     }
 
 
@@ -117,7 +116,7 @@ class QuarterTimePeriod extends TimePeriod implements TimePeriodInterface
         }
 
         $timedate = TimeDate::getInstance();
-        $months = array();
+        $months = [];
         $startDate = $timedate->fromDbDate($this->start_date)->setTime(0, 0, 0);
         $count = 0;
 
@@ -169,7 +168,7 @@ class QuarterTimePeriod extends TimePeriod implements TimePeriodInterface
             return 2;
         }
 
-        $keys = array();
+        $keys = [];
         $startDate = $timedate->fromDbDate($this->start_date);
         $nextDate = $timedate->fromDbDate($this->start_date);
         $endDate = $timedate->fromDbDate($this->end_date);

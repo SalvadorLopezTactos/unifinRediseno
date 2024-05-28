@@ -60,6 +60,6 @@ class CsrfTokenGenerator implements TokenGeneratorInterface
      */
     public function setSize($size)
     {
-        $this->size = (int) $size;
+        $this->size = (int)$size;
     }
 }

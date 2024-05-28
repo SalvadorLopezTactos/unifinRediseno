@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Backup all files that are going to be overwritten to
  *  upload/upgrades/backup/UPGRADE_NAME-restore
@@ -20,24 +21,24 @@ class SugarUpgradeBackupFiles extends UpgradeScript
 
     public function run()
     {
-        if(empty($this->manifest['copy_files']['from_dir'])) {
+        if (empty($this->manifest['copy_files']['from_dir'])) {
             return;
         }
-        if(isset($this->context['backup']) && !$this->context['backup']) {
+        if (isset($this->context['backup']) && !$this->context['backup']) {
             // backup disabled by option
-            $this->log("**** Backup disabled by config");
+            $this->log('**** Backup disabled by config');
             return;
         }
-        $zip_from_dir = $this->context['extract_dir']."/".$this->manifest['copy_files']['from_dir'];
+        $zip_from_dir = $this->context['extract_dir'] . '/' . $this->manifest['copy_files']['from_dir'];
 
         $files = $this->findFiles($zip_from_dir);
-        $this->log("**** Backup started");
-        foreach($files as $file) {
-            if(!$this->backupFile($file)) {
+        $this->log('**** Backup started');
+        foreach ($files as $file) {
+            if (!$this->backupFile($file)) {
                 $this->log("FAILED to back up $file");
             }
         }
 
-        $this->log("**** Backup complete");
+        $this->log('**** Backup complete');
     }
 }

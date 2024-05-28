@@ -86,7 +86,7 @@
   border-radius: 0 0 @baseBorderRadius @baseBorderRadius;
 
   & > div {
-    .overflow-auto();
+    overflow: auto;
   }
 
   .search-container {
@@ -112,10 +112,6 @@
     h4 {
       font-size: 12px;
     }
-  }
-
-  .table thead:first-child tr:first-child th {
-    border-bottom: @borderWidgetLight;
   }
 
   .block-footer {
@@ -204,10 +200,6 @@
     .dashlet-content,
     .dashlet-options {
       display: none;
-    }
-
-    i.fa-chevron-down::before {
-      content: "\f077";
     }
   }
 
@@ -386,7 +378,6 @@
         }
       }
 
-      .fa-stack,
       img {
         text-align: center;
       }
@@ -406,16 +397,6 @@
 
         > i {
           left: 5px;
-        }
-      }
-
-      .fa-stack {
-        font-size: 21px;
-        width: 2em;
-
-        .fa-user + .fa-question-circle {
-          top: 9px;
-          color: @white;
         }
       }
 
@@ -685,11 +666,6 @@
     border-radius: 0 0 4px 4px;
     background-color: @white;
     border-top: @borderWidget;
-
-    .fa-large {
-      vertical-align: middle;
-      margin-left: 2px;
-    }
   }
 
   aside {
@@ -816,18 +792,6 @@
         //List items containing pagination elements
         .favorite-pagination {
           display: inline-block;
-
-          .fa-ellipsis-h {
-            vertical-align: bottom;
-          }
-
-          .left-ellipsis-icon {
-            padding-left: 3px;
-          }
-
-          .right-ellipsis-icon {
-            padding-right: 3px;
-          }
 
           //Anchor tag containing chevron spans
           .paginate-aria-button {
@@ -976,17 +940,17 @@
 // record view dashlet
 .dashlet-title.record-toolbar {
   .record-cell {
-    .pl-2\.5();
+    padding-left: 0.625rem;
   }
 
   .record-cell[data-type="name"],
-    .record-cell[data-type="fullname"] {
+  .record-cell[data-type="fullname"] {
     margin-right: 50px;
   }
 
   .record-cell[data-type="avatar"],
-    .record-cell[data-type="hint-contacts-photo"],
-    .record-cell[data-type="image"] {
+  .record-cell[data-type="hint-contacts-photo"],
+  .record-cell[data-type="image"] {
     padding: 2px 0 0;
     margin-right: 20px;
 
@@ -1017,7 +981,7 @@
   }
 
   .record-cell.edit[data-type="avatar"],
-    .record-cell.edit[data-type="image"] {
+  .record-cell.edit[data-type="image"] {
     margin-right: 30px;
   }
 
@@ -1076,8 +1040,8 @@
   .dataTable {
     tr {
       td.edit-td {
-        .px-0();
-
+        padding-left: 0;
+        padding-right: 0;
         z-index: 10;
       }
 
@@ -1095,13 +1059,57 @@
 
       &.tr-inline-edit {
         td {
-          .bg-dropdown-link-background-hover();
+          background-color: var(--dropdown-link-background-hover);
 
           &.edit-td .btn-group.detail {
             display: none;
           }
         }
       }
+    }
+  }
+}
+
+/* Record view dashlet */
+.dashablerecord {
+  div[data-name="follow_up_datetime"].record-cell {
+    span.record-edit-link-wrapper {
+      width: 18vw;
+      display: none;
+    }
+  }
+
+  div[data-type="follow-up-datetime-colorcoded"] {
+    vertical-align: middle;
+    padding: 0 0 0 8px;
+
+    .label {
+      border: none;
+      line-height: 16px;
+      font-size: 13px;
+
+      &.expired {
+        color: @darkRed;
+        background-color: @lightRed;
+      }
+
+      &.soon-expired {
+        color: @darkOrange;
+        background-color: @lightOrange;
+      }
+    }
+  }
+
+  div[data-type="case-status"] {
+    span.detail.label.pill {
+      border: none;
+      line-height: 16px;
+      font-size: 13px;
+      width: fit-content;
+      min-height: 20px;
+      height: 20px;
+      padding: 2px 4px;
+      margin: 0 0 0 8px;
     }
   }
 }
@@ -1319,6 +1327,16 @@
 /* Activity Timeline Dashlet */
 
 .activity-timeline {
+  &:hover {
+    .timeline-filter-panel {
+      background-color: @dashletBackground;
+    }
+  }
+
+  .timeline-filter-panel {
+    justify-content: left;
+  }
+
   .timeline-entry {
     .static-contents {
       height: 35px;
@@ -1379,6 +1397,21 @@
   .empty-activity {
     color: @gray80;
   }
+
+  .dashlet-footer {
+    display: none;
+  }
+
+  .timeline-skeleton {
+    background: @timelineSkeletonLoader space @primaryContentBackground;
+    background-repeat: repeat-y;
+    background-position: 8px 8px;
+    height: inherit;
+  }
+
+  &.hidden-overflow {
+    overflow: hidden;
+  }
 }
 
 .external-app-dashlet {
@@ -1435,9 +1468,228 @@
     .dashlet-content {
       overflow: scroll;
     }
+  }
+}
 
-    .dashlet-preview-header {
-      .h-7();
+.runtime-filter-toolbar.dashlet-runtime-filter {
+  height: fit-content;
+  min-height: 40px;
+
+  .sicon.sicon-check-circle-line-lg {
+    color: @green;
+  }
+}
+
+.dashlet-group-filter-widget {
+  width: calc(~'100% - 26px');
+  margin-left: 11px;
+  border: solid 1px @borderColor;
+  border-radius: 3px;
+}
+
+.dashboard-filter-group-container {
+  max-height: 12rem;
+}
+
+.dashlet-remove-group:hover {
+  color: @blue;
+}
+
+.collapsed-filter-group {
+  justify-content: space-between;
+}
+
+.filter-widget-headerpane:hover {
+  &:not(.disabled-group) {
+    > div > i.dashlet-remove-group {
+      visibility: visible;
     }
   }
+
+  background-color: @primaryContentHoverBackground;
+  cursor: pointer;
+
+  > div > i.dashlet-collapse-group {
+    visibility: visible;
+  }
+
+  > div > div > div > i.dashlet-collapse-group {
+    visibility: visible;
+  }
+
+  > div > div > div > i.dashlet-remove-group {
+    visibility: visible;
+  }
+}
+
+.filter-widget-toolbar {
+  justify-content: flex-end;
+}
+
+.dashlet-group-filter-widget:hover {
+  &:not(.disabled-group) {
+    > div > div > i.dashlet-remove-group {
+      visibility: visible;
+    }
+
+    border-color: @blue;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  > div > div > i.dashlet-collapse-group {
+    visibility: visible;
+  }
+
+  > div > div > div > div > i.dashlet-collapse-group {
+    visibility: visible;
+  }
+
+  &.disabled-group {
+    label {
+      cursor: initial;
+    }
+  }
+}
+
+.dashlet-group-highlight-fct(@color) {
+  border: 2px solid @color;
+  border-radius: 6px;
+  border-color: @color;
+}
+
+.dashlet-widget-highlight-fct(@color) {
+  .dashlet-group-highlight-fct(@color);
+
+  box-shadow: 0 2px 8px 0 fade(@color, 0.5);
+}
+
+body.sugar-dark-theme {
+  .dashlet-widget-highlight {
+    .dashlet-group-highlight-fct(@color-dark-text-link-base);
+    .dashlet-widget-highlight-fct(@color-dark-text-link-base);
+  }
+
+  .dashlet-group-filter-widget.hover-highlight:hover {
+    .dashlet-group-highlight-fct(@color-dark-text-link-base);
+  }
+}
+
+body.sugar-light-theme {
+  .dashlet-widget-highlight {
+    .dashlet-group-highlight-fct(@color-blue-400);
+    .dashlet-widget-highlight-fct(@color-blue-400);
+  }
+
+  .dashlet-group-filter-widget.hover-highlight:hover {
+    .dashlet-group-highlight-fct(@color-blue-400);
+  }
+}
+
+.dashlet-group-edit {
+  // TODO look at moving to Tailwind
+  label {
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    color: var(--text-color);
+  }
+
+  .dashlet-group-remove-field {
+    height: fit-content;
+    visibility: hidden;
+  }
+
+  &:hover {
+    background-color: @primaryContentHoverBackground;
+
+    .dashlet-group-remove-field {
+      visibility: visible;
+      color: @gray70;
+    }
+
+    .dashlet-group-remove-field:hover {
+      visibility: visible;
+      color: @blue;
+    }
+  }
+}
+
+.dashboard-group-edit-name {
+  border-bottom: solid 1px @borderColor;
+  padding-bottom: 0.5rem;
+}
+
+.dashboard-filters-multiselect-wrapper {
+  border: solid 1px @borderColor;
+  margin: 10px;
+
+  .select-all {
+    .noselect();
+
+    margin-bottom: 0;
+    border-bottom: 1px solid @borderColor;
+  }
+
+  .items-center:hover {
+    cursor: pointer;
+    background-color: @primaryContentBackgroundAccent;
+  }
+
+  .item-selected.items-center {
+    background-color: @tabBackgroundHoverColor;
+  }
+
+  .item-selected.items-center:hover {
+    background-color: @selectedTabBackgroundHoverColor;
+  }
+}
+
+.dashlet-group-filter-widget-collapsed {
+  background-color: @bodyBackground;
+  border-color: @borderColor;
+
+  &:hover {
+    background-color: @primaryContentHoverBackground;
+  }
+}
+
+.filter-widget-group-headerpane:hover {
+  background-color: @primaryContentHoverBackground;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.dashlet-group-active {
+  width: calc(~'100% - 25px');
+  border: solid 2px @blue;
+  box-sizing: border-box;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.dashlet-group-invalid {
+  border-color: @errorBorder;
+}
+
+.dashboard .btn.report-visibility-button {
+  position: relative;
+}
+
+body.safari-browser .dashboard .cols .preview-headerbar {
+  z-index: initial;
+}
+
+.preview-headerbar.home-headerpane {
+  .headerpane {
+    min-height: 3rem;
+    height: 3rem;
+    width: calc(100vw ~"-" @sidebarNavWidth);
+  }
+}
+
+.datepicker-container > input {
+  z-index: 200;
 }

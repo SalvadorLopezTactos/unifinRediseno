@@ -10,25 +10,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
 
-  'LBL_NAME' =>'Nazwa',
-  'LBL_NUMBER' => 'Numer:',
-  'LBL_STATUS' => 'Status:',
-  'LBL_PRIORITY' => 'Priorytet:',
-  'LBL_DESCRIPTION' => 'Opis:',
-  'LBL_RESOLUTION' => 'Rozwiązanie',
-  'LBL_LAST_MODIFIED' => 'Ostatnia modyfikacja',
-  'LBL_ASSIGNED_TO_ID'=>'Przydzielono do:',
-  'LBL_ASSIGNED_TO_NAME' => 'Użytkownik:',
-  'LBL_WORK_LOG' => 'Dziennik prac:',
+    'LBL_NAME' => 'Nazwa',
+    'LBL_NUMBER' => 'Numer:',
+    'LBL_STATUS' => 'Status:',
+    'LBL_PRIORITY' => 'Priorytet:',
+    'LBL_DESCRIPTION' => 'Opis:',
+    'LBL_RESOLUTION' => 'Rozwiązanie',
+    'LBL_LAST_MODIFIED' => 'Ostatnia modyfikacja',
+    'LBL_ASSIGNED_TO_ID' => 'Przydzielono do:',
+    'LBL_ASSIGNED_TO_NAME' => 'Użytkownik:',
+    'LBL_WORK_LOG' => 'Dziennik prac:',
     'LBL_FOLLOW_UP' => 'Monituj',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
     'LBL_RESOLVED_DATETIME' => 'Data rozwiązania',
@@ -36,19 +35,19 @@ $mod_strings = array (
     'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Liczba godzin pracy do rozwiązania',
     'LBL_PENDING_PROCESSING' => 'Oczekujące na przetwarzanie',
     'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Data monitu',
-  'LBL_CREATED_BY' => 'Utworzono przez:',
-  'LBL_DATE_CREATED' => 'Data utworzenia:',
-  'LBL_DATE_ENTERED' => 'Data utworzenia:',
-  'LBL_DATE_MODIFIED'=>'Data modyfikacji:',
-  'LBL_MODIFIED_BY' => 'Ostatnio zmodyfikowane przez:',
-  'LBL_ASSIGNED_USER' => 'Przypisano do:',
-  'LBL_ASSIGNED_USER_NAME' => 'Przydzielono do',
-  'LBL_TEAM_NAME' =>'Nazwa zespołu:',
-  'LBL_TYPE'=>'Typ:',
-  'LBL_SUBJECT' => 'Temat:',
+    'LBL_CREATED_BY' => 'Utworzono przez:',
+    'LBL_DATE_CREATED' => 'Data utworzenia:',
+    'LBL_DATE_ENTERED' => 'Data utworzenia:',
+    'LBL_DATE_MODIFIED' => 'Data modyfikacji:',
+    'LBL_MODIFIED_BY' => 'Ostatnio zmodyfikowane przez:',
+    'LBL_ASSIGNED_USER' => 'Przypisano do:',
+    'LBL_ASSIGNED_USER_NAME' => 'Przydzielono do',
+    'LBL_TEAM_NAME' => 'Nazwa zespołu:',
+    'LBL_TYPE' => 'Typ:',
+    'LBL_SUBJECT' => 'Temat:',
 
     'LBL_EDIT_BUTTON' => 'Edytuj',
     'LBL_REMOVE' => 'Usuń',
 
 
-  );
+];

@@ -12,179 +12,179 @@
 
 
 // ENT/ULT only fields
-$fields = array(
-    array(
+$fields = [
+    [
         'name' => 'name',
         'link' => true,
         'label' => 'LBL_LIST_NAME',
         'enabled' => true,
-        'default' => true
-    ),
-    array(
+        'default' => true,
+    ],
+    [
         'name' => 'opportunity_name',
         'sortable' => false,
         'enabled' => true,
-        'default' => true
-    ),
-    array(
+        'default' => true,
+    ],
+    [
         'name' => 'account_name',
         'readonly' => true,
         'sortable' => false,
         'enabled' => true,
-        'default' => true
-    ),
-    array(
+        'default' => true,
+    ],
+    [
         'name' => 'sales_stage',
         'enabled' => true,
-        'default' => true
-    ),
-    array(
+        'default' => true,
+    ],
+    [
         'name' => 'probability',
         'enabled' => true,
-        'default' => true
-    ),
-    array(
+        'default' => true,
+    ],
+    [
         'name' => 'date_closed',
         'enabled' => true,
-        'default' => true
-    ),
-    array(
+        'default' => true,
+    ],
+    [
         'name' => 'commit_stage',
         'enabled' => true,
-        'default' => true
-    ),
-    array(
+        'default' => true,
+    ],
+    [
         'name' => 'product_template_name',
         'sortable' => false,
         'enabled' => true,
-        'default' => true
-    ),
-    array(
+        'default' => true,
+    ],
+    [
         'name' => 'category_name',
         'sortable' => false,
         'enabled' => true,
-        'default' => true
-    ),
-    array(
+        'default' => true,
+    ],
+    [
         'name' => 'quantity',
         'enabled' => true,
-        'default' => true
-    ),
-    array(
+        'default' => true,
+    ],
+    [
         'name' => 'worst_case',
         'type' => 'currency',
-        'related_fields' => array(
+        'related_fields' => [
             'currency_id',
             'base_rate',
             'total_amount',
             'quantity',
             'discount_amount',
-            'discount_price'
-        ),
+            'discount_price',
+        ],
         'showTransactionalAmount' => true,
         'convertToBase' => true,
         'currency_field' => 'currency_id',
         'base_rate_field' => 'base_rate',
         'enabled' => true,
-        'default' => true
-    ),
-    array(
+        'default' => true,
+    ],
+    [
         'name' => 'likely_case',
         'type' => 'currency',
-        'related_fields' => array(
+        'related_fields' => [
             'currency_id',
             'base_rate',
             'total_amount',
             'quantity',
             'discount_amount',
-            'discount_price'
-        ),
+            'discount_price',
+        ],
         'showTransactionalAmount' => true,
         'convertToBase' => true,
         'currency_field' => 'currency_id',
         'base_rate_field' => 'base_rate',
         'enabled' => true,
-        'default' => true
-    ),
-    array(
+        'default' => true,
+    ],
+    [
         'name' => 'best_case',
         'type' => 'currency',
-        'related_fields' => array(
+        'related_fields' => [
             'currency_id',
             'base_rate',
             'total_amount',
             'quantity',
             'discount_amount',
-            'discount_price'
-        ),
+            'discount_price',
+        ],
         'showTransactionalAmount' => true,
         'convertToBase' => true,
         'currency_field' => 'currency_id',
         'base_rate_field' => 'base_rate',
         'enabled' => true,
-        'default' => true
-    ),
-    array(
+        'default' => true,
+    ],
+    [
         'name' => 'quote_name',
         'label' => 'LBL_ASSOCIATED_QUOTE',
-        'related_fields' => array('quote_id'),
+        'related_fields' => ['quote_id'],
         // this is a hack to get the quote_id field loaded
         'readonly' => true,
         'bwcLink' => true,
         'enabled' => true,
-        'default' => true
-    ),
-    array(
+        'default' => true,
+    ],
+    [
         'name' => 'assigned_user_name',
         'sortable' => false,
         'enabled' => true,
-        'default' => true
-    )
-);
+        'default' => true,
+    ],
+];
 
-$viewdefs['RevenueLineItems']['base']['view']['subpanel-list-with-massupdate'] = array(
+$viewdefs['RevenueLineItems']['base']['view']['subpanel-list-with-massupdate'] = [
     'type' => 'subpanel-list',
     'favorite' => true,
-    'panels' => array(
-        array(
+    'panels' => [
+        [
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => $fields
-        ),
-    ),
-    'selection' => array (
+            'fields' => $fields,
+        ],
+    ],
+    'selection' => [
         'type' => 'multi',
-        'actions' => array (
-            array(
+        'actions' => [
+            [
                 'name' => 'massdelete_button',
                 'type' => 'button',
                 'label' => 'LBL_DELETE',
                 'acl_action' => 'delete',
                 'primary' => true,
-                'events' => array(
+                'events' => [
                     'click' => 'list:massdelete:fire',
-                ),
-            ),
-        ),
-    ),
-    'rowactions' => array(
-        'actions' => array(
-            array(
+                ],
+            ],
+        ],
+    ],
+    'rowactions' => [
+        'actions' => [
+            [
                 'type' => 'rowaction',
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
                 'icon' => 'sicon-preview',
                 'acl_action' => 'view',
-            ),
-            array(
+            ],
+            [
                 'type' => 'rowaction',
                 'name' => 'edit_button',
                 'icon' => 'sicon-edit',
                 'label' => 'LBL_EDIT_BUTTON',
                 'event' => 'list:editrow:fire',
                 'acl_action' => 'edit',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

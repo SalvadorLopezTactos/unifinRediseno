@@ -55,10 +55,10 @@ class PostLoginAuthListener
             $sugarConfig->get('default_language')
         );
 
-        $log->debug("authenticated_user_language is " . $sessionStorage['authenticated_user_language']);
+        $log->debug('authenticated_user_language is ' . $sessionStorage['authenticated_user_language']);
 
         // Clear all uploaded import files for this user if it exists
-        $tmp_file_name = \ImportCacheFiles::getImportDir() . "/IMPORT_" . $currentUser->id;
+        $tmp_file_name = \ImportCacheFiles::getImportDir() . '/IMPORT_' . $currentUser->id;
 
         if (file_exists($tmp_file_name)) {
             unlink($tmp_file_name);

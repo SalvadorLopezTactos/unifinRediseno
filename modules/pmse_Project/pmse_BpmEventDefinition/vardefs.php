@@ -10,15 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['pmse_BpmEventDefinition'] = array(
+$dictionary['pmse_BpmEventDefinition'] = [
     'table' => 'pmse_bpm_event_definition',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'reassignable' => false,
     'duplicate_merge' => true,
-    'fields' => array(
-        'prj_id' => array(
+    'fields' => [
+        'prj_id' => [
             'required' => true,
             'name' => 'prj_id',
             'vname' => 'Project id',
@@ -38,8 +38,8 @@ $dictionary['pmse_BpmEventDefinition'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'pro_id' => array(
+        ],
+        'pro_id' => [
             'required' => true,
             'name' => 'pro_id',
             'vname' => 'Process id',
@@ -59,8 +59,8 @@ $dictionary['pmse_BpmEventDefinition'] = array(
             'calculated' => false,
             'len' => '36',
             'size' => '36',
-        ),
-        'evn_status' => array(
+        ],
+        'evn_status' => [
             'required' => true,
             'name' => 'evn_status',
             'vname' => 'Event Status',
@@ -80,8 +80,8 @@ $dictionary['pmse_BpmEventDefinition'] = array(
             'calculated' => false,
             'len' => '32',
             'size' => '32',
-        ),
-        'evn_type' => array(
+        ],
+        'evn_type' => [
             'required' => true,
             'name' => 'evn_type',
             'vname' => '',
@@ -101,8 +101,8 @@ $dictionary['pmse_BpmEventDefinition'] = array(
             'calculated' => false,
             'len' => '30',
             'size' => '30',
-        ),
-        'evn_module' => array(
+        ],
+        'evn_module' => [
             'required' => true,
             'name' => 'evn_module',
             'vname' => '',
@@ -122,8 +122,8 @@ $dictionary['pmse_BpmEventDefinition'] = array(
             'calculated' => false,
             'len' => '128',
             'size' => '128',
-        ),
-        'evn_criteria' => array(
+        ],
+        'evn_criteria' => [
             'required' => true,
             'name' => 'evn_criteria',
             'vname' => 'criteria to evaluate in the start event',
@@ -143,8 +143,8 @@ $dictionary['pmse_BpmEventDefinition'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'evn_params' => array(
+        ],
+        'evn_params' => [
             'required' => true,
             'name' => 'evn_params',
             'vname' => 'some parameters',
@@ -164,8 +164,8 @@ $dictionary['pmse_BpmEventDefinition'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'evn_script' => array(
+        ],
+        'evn_script' => [
             'required' => true,
             'name' => 'evn_script',
             'vname' => 'script to be executed',
@@ -185,8 +185,8 @@ $dictionary['pmse_BpmEventDefinition'] = array(
             'size' => '20',
             'rows' => '4',
             'cols' => '20',
-        ),
-        'execution_mode' => array(
+        ],
+        'execution_mode' => [
             'required' => true,
             'name' => 'execution_mode',
             'vname' => 'script to be executed',
@@ -206,23 +206,23 @@ $dictionary['pmse_BpmEventDefinition'] = array(
             'calculated' => false,
             'len' => '10',
             'size' => '10',
-        ),
-    ),
-    'relationships' => array(),
+        ],
+    ],
+    'relationships' => [],
     'optimistic_locking' => true,
     'unified_search' => true,
-    'ignore_templates' => array(
+    'ignore_templates' => [
         'taggable',
         'lockable_fields',
         'commentlog',
-    ),
+    ],
     'portal_visibility' => [
         'class' => 'PMSE',
     ],
-    'uses' => array(
+    'uses' => [
         'basic',
         'assignable',
-    ),
-);
+    ],
+];
 
 VardefManager::createVardef('pmse_BpmEventDefinition', 'pmse_BpmEventDefinition');

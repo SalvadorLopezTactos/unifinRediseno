@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Ugrađeni fajlovi',
     'LBL_MODULE_NAME_SINGULAR' => 'Ugrađeni fajl',
     'LBL_MODULE_TITLE' => 'Ugrađeni fajl',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => 'Naziv fajla',
     'LBL_FILENAME' => 'Naziv fajla',
     'LBL_UPLOAD_ONLY_IMAGE' => 'Odabrani fajl treba da bude slika.',
-);
+];

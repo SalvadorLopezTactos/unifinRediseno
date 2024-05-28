@@ -57,7 +57,7 @@ class Result implements ResultInterface
      * @param array $args
      * @return mixed
      */
-    public function __call($method, array $args = array())
+    public function __call($method, array $args = [])
     {
         return is_callable([$this->result, $method])? call_user_func_array([$this->result, $method], $args) : null;
     }
@@ -76,10 +76,11 @@ class Result implements ResultInterface
     /**
      * @return string|null
      */
-    public function getType() : ?string
+    public function getType(): ?string
     {
         return $this->getModule();
     }
+
     /**
      * {@inheritdoc}
      */
@@ -99,7 +100,7 @@ class Result implements ResultInterface
         return $this->result->getSource();
     }
 
-   /**
+    /**
      * {@inheritdoc}
      */
     public function getDataFields()
@@ -141,7 +142,7 @@ class Result implements ResultInterface
         }
 
         // Dispatch event for logic hook framework
-        $this->dispatchEvent($bean, 'after_retrieve_elastic', array('data' => $this->getData()));
+        $this->dispatchEvent($bean, 'after_retrieve_elastic', ['data' => $this->getData()]);
 
         return $bean;
     }
@@ -152,7 +153,7 @@ class Result implements ResultInterface
      * @param string $event Logic hook event
      * @param array $args Optional arguments
      */
-    protected function dispatchEvent(\SugarBean $bean, $event, array $args = array())
+    protected function dispatchEvent(\SugarBean $bean, $event, array $args = [])
     {
         $bean->call_custom_logic($event, $args);
     }

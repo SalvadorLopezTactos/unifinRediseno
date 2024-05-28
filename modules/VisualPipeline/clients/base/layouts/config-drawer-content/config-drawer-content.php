@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,13 +10,13 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['VisualPipeline']['base']['layout']['config-drawer-content'] = array(
-    'components' => array(
-        array(
+$viewdefs['VisualPipeline']['base']['layout']['config-drawer-content'] = [
+    'components' => [
+        [
             'view' => 'pipeline-modules',
-        ),
-        array(
+        ],
+        [
             'view' => 'config-visual-pipeline',
-        ),
-    ),
-);
+        ],
+    ],
+];

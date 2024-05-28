@@ -23,9 +23,9 @@ class Language extends Constraint
 {
     public const ERROR_LANGUAGE_NOT_FOUND = 1;
 
-    protected static $errorNames = array(
+    protected static $errorNames = [
         self::ERROR_LANGUAGE_NOT_FOUND => 'ERROR_LANGUAGE_NOT_FOUND',
-    );
+    ];
 
     public $message = 'Language name violation: %msg%';
 }

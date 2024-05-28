@@ -10,22 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     //module
     'LBL_MODULE_NAME' => 'المستندات',
     'LBL_MODULE_NAME_SINGULAR' => 'المستند',
     'LBL_MODULE_TITLE' => 'المستندات: الصفحة الرئيسية',
     'LNK_NEW_DOCUMENT' => 'إنشاء مستند',
-    'LNK_DOCUMENT_LIST'=> 'عرض المستندات',
+    'LNK_DOCUMENT_LIST' => 'عرض المستندات',
     'LBL_DOC_REV_HEADER' => 'مراجعات المستند',
-    'LBL_SEARCH_FORM_TITLE'=> 'البحث في المستند',
+    'LBL_SEARCH_FORM_TITLE' => 'البحث في المستند',
     //vardef labels
     'LBL_DOCUMENT_ID' => 'معرّف المستند',
     'LBL_NAME' => 'الاسم',
@@ -34,31 +33,31 @@ $mod_strings = array (
     'LBL_CATEGORY' => 'الفئة',
     'LBL_SUBCATEGORY' => 'الفئة الفرعية',
     'LBL_STATUS' => 'الحالة',
-    'LBL_CREATED_BY'=> 'تم الإنشاء بواسطة',
-    'LBL_DATE_ENTERED'=> 'تاريخ الإنشاء',
-    'LBL_DATE_MODIFIED'=> 'تاريخ التعديل',
+    'LBL_CREATED_BY' => 'تم الإنشاء بواسطة',
+    'LBL_DATE_ENTERED' => 'تاريخ الإنشاء',
+    'LBL_DATE_MODIFIED' => 'تاريخ التعديل',
     'LBL_DELETED' => 'تم الحذف',
-    'LBL_MODIFIED'=> 'تم التعديل بواسطة المعرّف',
+    'LBL_MODIFIED' => 'تم التعديل بواسطة المعرّف',
     'LBL_MODIFIED_USER' => 'تم التعديل بواسطة',
-    'LBL_CREATED'=> 'تم الإنشاء بواسطة',
-    'LBL_REVISIONS'=>'المراجعات',
-    'LBL_RELATED_DOCUMENT_ID'=>'معرّف المستند ذي الصلة',
-    'LBL_RELATED_DOCUMENT_REVISION_ID'=>'معرّف مراجعة المستند ذي الصلة',
-    'LBL_IS_TEMPLATE'=>'هو قالب',
-    'LBL_TEMPLATE_TYPE'=>'نوع المستند',
-    'LBL_ASSIGNED_TO_NAME'=>'تعيين إلى:',
+    'LBL_CREATED' => 'تم الإنشاء بواسطة',
+    'LBL_REVISIONS' => 'المراجعات',
+    'LBL_RELATED_DOCUMENT_ID' => 'معرّف المستند ذي الصلة',
+    'LBL_RELATED_DOCUMENT_REVISION_ID' => 'معرّف مراجعة المستند ذي الصلة',
+    'LBL_IS_TEMPLATE' => 'هو قالب',
+    'LBL_TEMPLATE_TYPE' => 'نوع المستند',
+    'LBL_ASSIGNED_TO_NAME' => 'تعيين إلى:',
     'LBL_REVISION_NAME' => 'رقم المراجعة',
     'LBL_MIME' => 'نوع Mime',
     'LBL_REVISION' => 'مراجعة',
     'LBL_DOCUMENT' => 'المستند ذو الصلة',
     'LBL_LATEST_REVISION' => 'أحدث مراجعة',
     'LBL_DOCUMENT_REVISION_ID' => 'معرّف مراجعة المستند',
-    'LBL_CHANGE_LOG'=> 'سجل التغييرات',
-    'LBL_ACTIVE_DATE'=> 'تاريخ النشر',
+    'LBL_CHANGE_LOG' => 'سجل التغييرات',
+    'LBL_ACTIVE_DATE' => 'تاريخ النشر',
     'LBL_EXPIRATION_DATE' => 'تاريخ انتهاء الصلاحية',
-    'LBL_FILE_EXTENSION'  => 'امتداد الملف',
+    'LBL_FILE_EXTENSION' => 'امتداد الملف',
     'LBL_LAST_REV_MIME_TYPE' => 'أحدث مراجعة نوع MIME',
-    'LBL_CAT_OR_SUBCAT_UNSPEC'=>'غير محدد',
+    'LBL_CAT_OR_SUBCAT_UNSPEC' => 'غير محدد',
     'LBL_HOMEPAGE_TITLE' => 'مستنداتي',
     //quick search
     'LBL_NEW_FORM_TITLE' => 'مستند جديد',
@@ -70,25 +69,25 @@ $mod_strings = array (
     'LBL_FILE_UPLOAD' => 'الملف:',
 
     'LBL_CATEGORY_VALUE' => 'الفئة:',
-    'LBL_SUBCATEGORY_VALUE'=> 'الفئة الفرعية:',
-    'LBL_DOC_STATUS'=> 'الحالة:',
-    'LBL_DOC_STATUS_ID'=> 'معرّف الحالة:',
+    'LBL_SUBCATEGORY_VALUE' => 'الفئة الفرعية:',
+    'LBL_DOC_STATUS' => 'الحالة:',
+    'LBL_DOC_STATUS_ID' => 'معرّف الحالة:',
     'LBL_LAST_REV_CREATOR' => 'تم إنشاء المراجعة بواسطة:',
     'LBL_LASTEST_REVISION_NAME' => 'اسم أحدث مراجعة:',
     'LBL_SELECTED_REVISION_NAME' => 'اسم المراجعة المحددة:',
     'LBL_CONTRACT_STATUS' => 'حالة العقد:',
     'LBL_CONTRACT_NAME' => 'اسم العقد:',
     'LBL_LAST_REV_DATE' => 'تاريخ المراجعة:',
-    'LBL_DOWNNLOAD_FILE'=> 'تنزيل الملف:',
-    'LBL_DET_RELATED_DOCUMENT'=>'المستند ذو الصلة:',
-    'LBL_DET_RELATED_DOCUMENT_VERSION'=>"مراجعة المستند ذي الصلة:",
-    'LBL_DET_IS_TEMPLATE'=>'قالب؟ :',
-    'LBL_DET_TEMPLATE_TYPE'=>'نوع المستند:',
-    'LBL_TEAM'=> 'الفريق:',
+    'LBL_DOWNNLOAD_FILE' => 'تنزيل الملف:',
+    'LBL_DET_RELATED_DOCUMENT' => 'المستند ذو الصلة:',
+    'LBL_DET_RELATED_DOCUMENT_VERSION' => 'مراجعة المستند ذي الصلة:',
+    'LBL_DET_IS_TEMPLATE' => 'قالب؟ :',
+    'LBL_DET_TEMPLATE_TYPE' => 'نوع المستند:',
+    'LBL_TEAM' => 'الفريق:',
     'LBL_IS_SHARED' => 'متاح خارجيًا:',
-    'LBL_DOC_DESCRIPTION'=>'الوصف:',
-    'LBL_DOC_ACTIVE_DATE'=> 'تاريخ النشر:',
-    'LBL_DOC_EXP_DATE'=> 'تاريخ انتهاء الصلاحية:',
+    'LBL_DOC_DESCRIPTION' => 'الوصف:',
+    'LBL_DOC_ACTIVE_DATE' => 'تاريخ النشر:',
+    'LBL_DOC_EXP_DATE' => 'تاريخ انتهاء الصلاحية:',
 
     //document list view.
     'LBL_LIST_FORM_TITLE' => 'قائمة المستندات',
@@ -98,11 +97,11 @@ $mod_strings = array (
     'LBL_LIST_REVISION' => 'مراجعة',
     'LBL_LIST_LAST_REV_CREATOR' => 'تم النشر بواسطة',
     'LBL_LIST_LAST_REV_DATE' => 'تاريخ المراجعة',
-    'LBL_LIST_VIEW_DOCUMENT'=>'عرض',
-    'LBL_LIST_DOWNLOAD'=> 'تنزيل',
+    'LBL_LIST_VIEW_DOCUMENT' => 'عرض',
+    'LBL_LIST_DOWNLOAD' => 'تنزيل',
     'LBL_LIST_ACTIVE_DATE' => 'تاريخ النشر',
     'LBL_LIST_EXP_DATE' => 'تاريخ انتهاء الصلاحية',
-    'LBL_LIST_STATUS'=>'الحالة',
+    'LBL_LIST_STATUS' => 'الحالة',
     'LBL_LINKED_ID' => 'معرّف المرتبط',
     'LBL_SELECTED_REVISION_ID' => 'معرّف المراجعة المحددة',
     'LBL_LATEST_REVISION_ID' => 'معرّف المراجعة الأخيرة',
@@ -114,33 +113,33 @@ $mod_strings = array (
     //document search form.
     'LBL_SF_DOCUMENT' => 'اسم المستند:',
     'LBL_SF_CATEGORY' => 'الفئة:',
-    'LBL_SF_SUBCATEGORY'=> 'الفئة الفرعية:',
+    'LBL_SF_SUBCATEGORY' => 'الفئة الفرعية:',
     'LBL_SF_ACTIVE_DATE' => 'تاريخ النشر:',
-    'LBL_SF_EXP_DATE'=> 'تاريخ انتهاء الصلاحية:',
+    'LBL_SF_EXP_DATE' => 'تاريخ انتهاء الصلاحية:',
 
     'DEF_CREATE_LOG' => 'المستند الذي تم إنشاؤه',
 
     //error messages
-    'ERR_DOC_NAME'=>'اسم المستند',
-    'ERR_DOC_ACTIVE_DATE'=>'تاريخ النشر',
-    'ERR_DOC_EXP_DATE'=> 'تاريخ انتهاء الصلاحية',
-    'ERR_FILENAME'=> 'اسم الملف',
-    'ERR_DOC_VERSION'=> 'إصدار المستند',
-    'ERR_DELETE_CONFIRM'=> 'هل تريد حذف مراجعة هذا المستند؟',
-    'ERR_DELETE_LATEST_VERSION'=> 'غير مسموح لك بحذف المراجعة الأخيرة لمستند.',
+    'ERR_DOC_NAME' => 'اسم المستند',
+    'ERR_DOC_ACTIVE_DATE' => 'تاريخ النشر',
+    'ERR_DOC_EXP_DATE' => 'تاريخ انتهاء الصلاحية',
+    'ERR_FILENAME' => 'اسم الملف',
+    'ERR_DOC_VERSION' => 'إصدار المستند',
+    'ERR_DELETE_CONFIRM' => 'هل تريد حذف مراجعة هذا المستند؟',
+    'ERR_DELETE_LATEST_VERSION' => 'غير مسموح لك بحذف المراجعة الأخيرة لمستند.',
     'LNK_NEW_MAIL_MERGE' => 'دمج البريد',
     'LBL_MAIL_MERGE_DOCUMENT' => 'قالب دمج البريد:',
     'ERR_MISSING_FILE' => 'يفتقد هذا المستند ملفًا، وذلك على الأرجح نتيجة لحدوث خطأ أثناء التحميل.  يرجى إعادة محاولة تحميل الملف أو الاتصال بالمسؤول الخاص بك.',
 
     'LBL_TREE_TITLE' => 'المستندات',
     //sub-panel vardefs.
-    'LBL_LIST_DOCUMENT_NAME'=>'الاسم',
-    'LBL_LIST_IS_TEMPLATE'=>'قالب؟',
-    'LBL_LIST_TEMPLATE_TYPE'=>'نوع المستند',
-    'LBL_LIST_SELECTED_REVISION'=>'المراجعة المحددة',
-    'LBL_LIST_LATEST_REVISION'=>'أحدث مراجعة',
-    'LBL_CONTRACTS_SUBPANEL_TITLE'=>'العقود ذات الصلة',
-    'LBL_LAST_REV_CREATE_DATE'=>'تاريخ إنشاء آخر مراجعة',
+    'LBL_LIST_DOCUMENT_NAME' => 'الاسم',
+    'LBL_LIST_IS_TEMPLATE' => 'قالب؟',
+    'LBL_LIST_TEMPLATE_TYPE' => 'نوع المستند',
+    'LBL_LIST_SELECTED_REVISION' => 'المراجعة المحددة',
+    'LBL_LIST_LATEST_REVISION' => 'أحدث مراجعة',
+    'LBL_CONTRACTS_SUBPANEL_TITLE' => 'العقود ذات الصلة',
+    'LBL_LAST_REV_CREATE_DATE' => 'تاريخ إنشاء آخر مراجعة',
     //'LNK_DOCUMENT_CAT'=>'Document Categories',
     'LBL_CONTRACTS' => 'العقود',
     'LBL_CREATED_USER' => 'المستخدم الذي تم إنشاؤه',
@@ -171,9 +170,11 @@ $mod_strings = array (
     // Dashboards
     'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'لوحة معلومات سجل المستندات',
     'LBL_MY_DOCUMENTS' => 'مستنداتي',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني للوثائق',
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'إرسال إلى DocuSign',
+    'LBL_SEND_TO_DOCUSIGN_TEMPLATE_BUTTON' => 'إرسال إلى DocuSign باستخدام قالب',
 
     // Cloud Drive
 
@@ -183,4 +184,4 @@ $mod_strings = array (
     'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'مزامنة مع OneDrive',
     'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'مزامنة الكل مع Dropbox',
     'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'مزامنة مع Dropbox',
-);
+];

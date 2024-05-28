@@ -75,30 +75,30 @@ class QueryBuilder
      * Modules being queried
      * @var array
      */
-    protected $modules = array();
+    protected $modules = [];
 
     /**
      * @var AggregationStack
      */
-    protected $aggregationStack = array();
+    protected $aggregationStack = [];
 
     /**
      * Aggregation filter definitions
      * @var array
      */
-    protected $aggFilterDefs = array();
+    protected $aggFilterDefs = [];
 
     /**
      * List of query filters
      * @var \Elastica\Query\AbstractQuery[]
      */
-    protected $filters = array();
+    protected $filters = [];
 
     /**
      * List of post filters
      * @var \Elastica\Query\AbstractQuery[]
      */
-    protected $postFilters = array();
+    protected $postFilters = [];
 
     /**
      * @var HighlighterInterface
@@ -123,7 +123,7 @@ class QueryBuilder
     /**
      * @var array
      */
-    protected $sort = array('_score');
+    protected $sort = ['_score'];
 
     /**
      * Set explain flag
@@ -271,7 +271,7 @@ class QueryBuilder
      */
     public function setLimit($limit)
     {
-        $this->limit = (int) $limit;
+        $this->limit = (int)$limit;
         return $this;
     }
 
@@ -282,7 +282,7 @@ class QueryBuilder
      */
     public function setOffset($offset)
     {
-        $this->offset = (int) $offset;
+        $this->offset = (int)$offset;
         return $this;
     }
 
@@ -304,7 +304,7 @@ class QueryBuilder
      */
     public function setExplain($flag)
     {
-        $this->explain = (bool) $flag;
+        $this->explain = (bool)$flag;
         return $this;
     }
 
@@ -515,7 +515,7 @@ class QueryBuilder
      */
     protected function getReadIndices(array $modules, User $user = null)
     {
-        $context = empty($user) ? array() : array('user' => $user);
+        $context = empty($user) ? [] : ['user' => $user];
         $collection = $this->container->indexPool->getReadIndices($modules, $context);
         return iterator_to_array($collection);
     }

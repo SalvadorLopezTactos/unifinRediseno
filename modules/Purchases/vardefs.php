@@ -27,10 +27,10 @@ $dictionary['Purchase'] = [
             'vname' => 'LBL_START_DATE',
             'type' => 'date',
             'comment' => 'Start date of the purchase',
-            'full_text_search' => array(
+            'full_text_search' => [
                 'enabled' => true,
                 'searchable' => false,
-            ),
+            ],
             'readonly' => true,
         ],
         'end_date' => [
@@ -144,7 +144,7 @@ $dictionary['Purchase'] = [
             'source' => 'non-db',
             'unified_search' => true,
             'importable' => true,
-            'exportable'=> true,
+            'exportable' => true,
             'required' => true,
         ],
         'account_id' => [
@@ -215,23 +215,23 @@ $dictionary['Purchase'] = [
             ],
         ],
         // Links
-        'purchasedlineitems' => array(
+        'purchasedlineitems' => [
             'name' => 'purchasedlineitems',
             'type' => 'link',
             'vname' => 'LBL_PURCHASED_LINE_ITEMS',
             'relationship' => 'purchase_purchasedlineitems',
             'source' => 'non-db',
             'workflow' => false,
-        ),
-        'pli_collection' => array(
+        ],
+        'pli_collection' => [
             'name' => 'pli_collection',
             'type' => 'collection',
             'vname' => 'LBL_PURCHASED_LINE_ITEMS',
-            'links' => array('purchasedlineitems'),
+            'links' => ['purchasedlineitems'],
             'source' => 'non-db',
             'hideacl' => true,
             'duplicate_on_record_copy' => 'no',
-        ),
+        ],
         'product_templates' => [
             'name' => 'product_templates',
             'type' => 'link',
@@ -441,6 +441,7 @@ $dictionary['Purchase'] = [
         'assignable',
         'team_security',
         'currency',
+        'audit',
     ],
 ];
 VardefManager::createVardef(

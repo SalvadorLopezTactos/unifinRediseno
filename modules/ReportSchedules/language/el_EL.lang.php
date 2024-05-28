@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Χρονοδιαγράμματα Αναφοράς',
     'LBL_MODULE_NAME_SINGULAR' => 'Χρονοδιαγράμματα Αναφοράς',
     'LBL_REPORT_NAME' => 'Αναφορά',
@@ -29,4 +29,4 @@ $mod_strings = array(
     'LBL_FILE_TYPE' => 'Τύπος (τύποι) αρχείου (αρχείων)',
     'LBL_EMBED_REPORT' => 'Ενσωμάτωση αναφοράς στο Email',
     'LBL_EMBED_REPORT_INFO' => 'Σημείωση: Εάν η αναφορά υπερβαίνει τις 200 σειρές, θα επισυνάψουμε την αναφορά ως αρχείο CSV.',
-);
+];

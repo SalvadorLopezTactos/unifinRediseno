@@ -111,6 +111,7 @@
             model.modelView = 'list';
             if (self.view.layout) {
                 self.view.layout.trigger('editablelist:' + self.view.name + ':save', model, oldModelId);
+                self._fetchParentModel();
             }
         };
         var options = {

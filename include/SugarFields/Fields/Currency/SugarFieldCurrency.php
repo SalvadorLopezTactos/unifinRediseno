@@ -12,9 +12,10 @@
  */
 
 
-class SugarFieldCurrency extends SugarFieldFloat 
+class SugarFieldCurrency extends SugarFieldFloat
 {
-    function getListViewSmarty($parentFieldArray, $vardef, $displayParams, $col) {
+    public function getListViewSmarty($parentFieldArray, $vardef, $displayParams, $col)
+    {
         global $current_user;
         $tabindex = 1;
         $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex, false);
@@ -53,7 +54,7 @@ class SugarFieldCurrency extends SugarFieldFloat
 
         return $this->fetch($this->findTemplate('ListView'));
     }
-    
+
     /**
      * @see SugarFieldBase::importSanitize()
      */
@@ -105,7 +106,7 @@ class SugarFieldCurrency extends SugarFieldFloat
      *
      * @return string sanitized value
      */
-    public function exportSanitize($value, $vardef, $focus, $row = array())
+    public function exportSanitize($value, $vardef, $focus, $row = [])
     {
         // If $value is null, default to zero to prevent conversion errors.
         $value = is_null($value) ? 0 : $value;
@@ -125,21 +126,22 @@ class SugarFieldCurrency extends SugarFieldFloat
     }
 
     /**
-	 * format the currency field based on system locale values for currency
+     * format the currency field based on system locale values for currency
      * Note that this may be different from the precision specified in the vardefs.
-	 * @param string $rawfield value of the field
+     * @param string $rawfield value of the field
      * @param string $somewhere vardef for the field being processed
-	 * @return number formatted according to currency settings
-	 */
-    public function formatField($rawField, $vardef){
+     * @return number formatted according to currency settings
+     */
+    public function formatField($rawField, $vardef)
+    {
         // for currency fields, use the user or system precision, not the precision in the vardef
         //this is achived by passing in $precision as null
         $precision = null;
 
-        if ( $rawField === '' || $rawField === NULL ) {
+        if ($rawField === '' || $rawField === null) {
             return '';
         }
-        return format_number($rawField,$precision,$precision);
+        return format_number($rawField, $precision, $precision);
     }
 
     /**
@@ -164,14 +166,15 @@ class SugarFieldCurrency extends SugarFieldFloat
      * {@inheritDoc}
      */
     public function apiFormatField(
-        array &$data,
-        SugarBean $bean,
-        array $args,
+        array       &$data,
+        SugarBean   $bean,
+        array       $args,
         $fieldName,
         $properties,
-        array $fieldList = null,
+        array       $fieldList = null,
         ServiceBase $service = null
     ) {
+
         $this->ensureApiFormatFieldArguments($fieldList, $service);
         if (isset($bean->$fieldName) && $bean->$fieldName !== 'NULL') {
             $data[$fieldName] = $bean->$fieldName;

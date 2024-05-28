@@ -40,14 +40,13 @@ class PMSEEndSendMessageEvent extends PMSEEndEvent
 
         $this->definitionBean = BeanFactory::newBean('pmse_BpmEventDefinition');
         parent::__construct();
-
     }
 
     /**
-     * @deprecated since version 8.2.0
      * @param $id
      * @return array
      * @codeCoverageIgnore
+     * @deprecated since version 8.2.0
      */
     public function retrieveDefinitionData($id)
     {
@@ -81,7 +80,7 @@ class PMSEEndSendMessageEvent extends PMSEEndEvent
      * @param type $externalAction
      * @return type
      */
-    public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
+    public function run($flowData, $bean = null, $externalAction = '', $arguments = [])
     {
         $this->emailHandler->setFlowData($flowData);
         $this->emailHandler->queueEmail($flowData);
@@ -90,5 +89,4 @@ class PMSEEndSendMessageEvent extends PMSEEndEvent
         // run method we just call the parent implementation
         return parent::run($flowData, $bean, $externalAction, $arguments);
     }
-
 }

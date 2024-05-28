@@ -9,32 +9,32 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Quotes']['base']['view']['search-list'] = array(
-    'panels' => array(
-        array(
+$viewdefs['Quotes']['base']['view']['search-list'] = [
+    'panels' => [
+        [
             'name' => 'primary',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'picture',
                     'type' => 'avatar',
                     'size' => 'medium',
                     'readonly' => true,
-                    'css_class' => 'pull-left'
-                ),
-                array(
+                    'css_class' => 'pull-left',
+                ],
+                [
                     'name' => 'name',
                     'type' => 'name',
                     'link' => true,
-                    'label' => 'LBL_SUBJECT'
-                ),
-            ),
-        ),
-        array(
+                    'label' => 'LBL_SUBJECT',
+                ],
+            ],
+        ],
+        [
             'name' => 'secondary',
-            'fields' => array(
+            'fields' => [
                 'quote_num',
-                'quote_stage'
-            ),
-        ),
-    ),
-);
+                'quote_stage',
+            ],
+        ],
+    ],
+];

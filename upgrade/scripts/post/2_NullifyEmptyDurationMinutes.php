@@ -45,14 +45,14 @@ class SugarUpgradeNullifyEmptyDurationMinutes extends UpgradeScript
      * Mapping of integer column types that are the same as int
      * @var array
      */
-    protected $numericColTypes = array(
+    protected $numericColTypes = [
         // MySQL and MSSQL integer type keyword
         'int' => 1,
         // IBMDB2 integer type keyword
         'integer' => 1,
         // Oracle integer type keyword
         'number' => 1,
-    );
+    ];
 
     public function run()
     {

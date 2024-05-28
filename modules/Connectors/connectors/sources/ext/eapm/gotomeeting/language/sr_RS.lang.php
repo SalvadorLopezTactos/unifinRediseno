@@ -11,9 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$connector_strings = array(
+$connector_strings = [
     'LBL_LICENSING_INFO' =>
-'<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
+        '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
 Preuzmite ključ potrošača od LogMeIn-a registrovanjem nove GoToMeeting aplikacije.<br>
 &nbsp;<br>
 Koraci registrovanja instance:<br>
@@ -36,4 +36,4 @@ Koraci registrovanja instance:<br>
 </ol>
 </td></tr></table>',
     'oauth_consumer_key' => 'Ključ potrošača',
-);
+];

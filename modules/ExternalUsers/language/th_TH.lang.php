@@ -25,5 +25,7 @@ $mod_strings = [
     'LBL_CASES_SUBPANEL_TITLE' => 'เคส',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'โอกาสทางการขาย',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'การเสนอราคา',
-    'LBL_NOTES'=>'บันทึก',
+    'LBL_NOTES' => 'บันทึก',
+    'LBL_EXTERNAL_USERS_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนผู้ใช้ภายนอก',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์ผู้ใช้ภายนอก',
 ];

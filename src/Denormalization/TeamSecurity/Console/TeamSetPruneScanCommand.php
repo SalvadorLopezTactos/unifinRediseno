@@ -23,12 +23,13 @@ class TeamSetPruneScanCommand extends TeamSetPruneCommand implements InstanceMod
         $this
             ->setName('teamset:scan')
             ->setDescription('Scan all module tables for unused team sets and report the number found.')
-            ->setHelp("Makes no changes, just reports how many unused team sets are in the database.");
+            ->setHelp('Makes no changes, just reports how many unused team sets are in the database.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->preflightCheck($output);
         $this->getPruner()->scan();
+        return 0;
     }
 }

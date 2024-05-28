@@ -57,7 +57,7 @@ class DRIWorkflowTemplatesApi extends SugarApi
      * Get the last stage for the Smart Guide template
      *
      * @param ServiceBase $api
-     * @param array       $args
+     * @param array $args
      * @return array
      * @throws SugarApiExceptionMissingParameter
      * @throws SugarApiExceptionNotAuthorized
@@ -80,7 +80,7 @@ class DRIWorkflowTemplatesApi extends SugarApi
      * Get the data to be loaded for the Smart Guide including stages and activities
      *
      * @param ServiceBase $api
-     * @param array       $args
+     * @param array $args
      * @return array
      * @throws SugarApiExceptionMissingParameter
      * @throws SugarApiExceptionNotAuthorized
@@ -196,7 +196,7 @@ class DRIWorkflowTemplatesApi extends SugarApi
         foreach ($args['activities_ids'] as $id) {
             $childOrder = 1;
 
-            $activity = BeanFactory::retrieveBean("DRI_Workflow_Task_Templates", $id);
+            $activity = BeanFactory::retrieveBean('DRI_Workflow_Task_Templates', $id);
 
             //Update the parent's activity sort order
             $activity->sort_order = $parentOrder;

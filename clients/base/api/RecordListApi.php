@@ -14,37 +14,38 @@
 /*
  * Record List API implementation
  */
+
 class RecordListApi extends SugarApi
 {
     public function registerApiRest()
     {
-        return array(
-            'recordListCreate' => array(
+        return [
+            'recordListCreate' => [
                 'reqType' => 'POST',
-                'path' => array('<module>','record_list'),
-                'pathVars' => array('module',''),
-                'jsonParams' => array('filter'),
+                'path' => ['<module>', 'record_list'],
+                'pathVars' => ['module', ''],
+                'jsonParams' => ['filter'],
                 'method' => 'recordListCreate',
                 'shortHelp' => 'An API to create and save lists of records',
                 'longHelp' => 'include/api/help/module_recordlist_post.html',
-            ),
-            'recordListDelete' => array(
+            ],
+            'recordListDelete' => [
                 'reqType' => 'DELETE',
-                'path' => array('<module>','record_list','?'),
-                'pathVars' => array('module','','record_list_id'),
+                'path' => ['<module>', 'record_list', '?'],
+                'pathVars' => ['module', '', 'record_list_id'],
                 'method' => 'recordListDelete',
                 'shortHelp' => 'An API to delete an old record list',
                 'longHelp' => 'include/api/help/module_recordlist_delete.html',
-            ),
-            'recordListGet' => array(
+            ],
+            'recordListGet' => [
                 'reqType' => 'GET',
-                'path' => array('<module>','record_list','?'),
-                'pathVars' => array('module','','record_list_id'),
+                'path' => ['<module>', 'record_list', '?'],
+                'pathVars' => ['module', '', 'record_list_id'],
                 'method' => 'recordListGet',
                 'shortHelp' => 'An API to fetch a previously created record list',
                 'longHelp' => 'include/api/help/module_recordlist_get.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -64,11 +65,11 @@ class RecordListApi extends SugarApi
         if (!is_array($args['records'])) {
             throw new SugarApiExceptionMissingParameter();
         }
-        
+
         $id = RecordListFactory::saveRecordList($args['records'], $args['module']);
 
         $loadedRecordList = RecordListFactory::getRecordList($id);
-        
+
         return $loadedRecordList;
     }
 

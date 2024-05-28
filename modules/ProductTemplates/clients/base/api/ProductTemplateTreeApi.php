@@ -12,27 +12,26 @@
 
 class ProductTemplateTreeApi extends SugarApi
 {
-
     public function registerApiRest()
     {
-        return array(
-            'tree' => array(
+        return [
+            'tree' => [
                 'reqType' => 'GET',
-                'path' => array('ProductTemplates', 'tree',),
-                'pathVars' => array('module', 'type',),
+                'path' => ['ProductTemplates', 'tree',],
+                'pathVars' => ['module', 'type',],
                 'method' => 'getTemplateTree',
                 'shortHelp' => 'Returns a filterable tree structure of all Product Templates and Product Categories',
                 'longHelp' => 'modules/ProductTemplates/clients/base/api/help/tree.html',
-            ),
-            'filterTree' => array(
+            ],
+            'filterTree' => [
                 'reqType' => 'POST',
-                'path' => array('ProductTemplates', 'tree',),
-                'pathVars' => array('module', 'type',),
+                'path' => ['ProductTemplates', 'tree',],
+                'pathVars' => ['module', 'type',],
                 'method' => 'getTemplateTree',
                 'shortHelp' => 'Returns a filterable tree structure of all Product Templates and Product Categories',
                 'longHelp' => 'modules/ProductTemplates/clients/base/api/help/tree.html',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -75,7 +74,7 @@ class ProductTemplateTreeApi extends SugarApi
         }
 
         // get total records in this set, calculate start position, slice data to current page
-        $total = count($data);
+        $total = safeCount($data);
 
         $offset = ($offset == -1) ? 0 : $offset;
 
@@ -112,7 +111,7 @@ class ProductTemplateTreeApi extends SugarApi
         $ptBean = BeanFactory::newBean('ProductTemplates');
         if (!$pcBean->aclAccess('list')) {
             throw new SugarApiExceptionNotAuthorized('No access to view Product Categories records');
-        } else if (!$ptBean->aclAccess('list')) {
+        } elseif (!$ptBean->aclAccess('list')) {
             throw new SugarApiExceptionNotAuthorized('No access to view Product Catalog records');
         }
     }
@@ -273,7 +272,7 @@ class ProductTemplateTreeApi extends SugarApi
                     $query->where()->contains('name', $value);
                 }
 
-                 $q->union($query);
+                $q->union($query);
             }
         }
 
@@ -306,33 +305,33 @@ class ProductTemplateTreeApi extends SugarApi
      */
     protected function generateNewLeaf($node, $index)
     {
-        $returnObj =  new \stdClass();
+        $returnObj = new \stdClass();
         $returnObj->id = $node['id'];
         $returnObj->type = $node['type'];
         $returnObj->data = $node['name'];
-        $returnObj->state = ($node['type'] == 'product')? '' : 'closed';
+        $returnObj->state = ($node['type'] == 'product') ? '' : 'closed';
         $returnObj->index = $index;
 
         return $returnObj;
     }
 
     /**
-     * @deprecated
      * @param $filter
      * @return mixed[][]
+     * @deprecated
      */
     protected function getFilteredTreeData($filter)
     {
         $filter = "%$filter%";
-        $unionFilter = "and name like ? ";
+        $unionFilter = 'and name like ? ';
 
         return $this->getTreeData($unionFilter, $unionFilter, [$filter, $filter]);
     }
 
     /**
-     * @deprecated
      * @param $root
      * @return mixed[][]
+     * @deprecated
      */
     protected function getRootedTreeData($root)
     {
@@ -340,12 +339,12 @@ class ProductTemplateTreeApi extends SugarApi
         $union2Root = '';
 
         if ($root == null) {
-            $union1Root = "and parent_id is null ";
-            $union2Root = "and category_id is null ";
+            $union1Root = 'and parent_id is null ';
+            $union2Root = 'and category_id is null ';
             $params = [];
         } else {
-            $union1Root = "and parent_id = ? ";
-            $union2Root = "and category_id = ? ";
+            $union1Root = 'and parent_id = ? ';
+            $union2Root = 'and category_id = ? ';
             $params = [$root, $root];
         }
 
@@ -355,23 +354,23 @@ class ProductTemplateTreeApi extends SugarApi
     /**
      * Gets the tree data
      *
-     * @deprecated
      * @param string $union1Filter
      * @param string $union2Filter
      * @param array $params Query parameters
      *
      * @return mixed[][]
+     * @deprecated
      */
     protected function getTreeData($union1Filter, $union2Filter, array $params)
     {
         $q = "select id, name, 'category' as type from product_categories " .
-            "where deleted = 0 " .
+            'where deleted = 0 ' .
             $union1Filter .
-            "union all " .
+            'union all ' .
             "select id, name, 'product' as type from product_templates " .
-            "where deleted = 0 " .
+            'where deleted = 0 ' .
             $union2Filter .
-            "order by type, name";
+            'order by type, name';
 
         $conn = $this->getDBConnection();
         $result = $conn->executeQuery($q, $params);

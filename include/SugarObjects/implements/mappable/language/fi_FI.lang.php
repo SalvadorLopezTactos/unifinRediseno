@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = [
-    'LBL_GC_STATUS'=>'Geokoodauksen tila',
+    'LBL_GC_STATUS' => 'Geokoodauksen tila',
     'LBL_GC_LATITUDE' => 'Geokoodauksen leveysaste',
     'LBL_GC_LONGITUDE' => 'Geokoodauksen pituusaste',
     'LBL_GC_STATUS_DETAIL' => 'Geokoodauksen tilatiedot',

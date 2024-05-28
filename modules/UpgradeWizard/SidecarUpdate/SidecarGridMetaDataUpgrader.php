@@ -21,28 +21,28 @@ class SidecarGridMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
      *
      * @var array
      */
-    protected $panelKeys = array(
-        'portaledit'     => 'data',
-        'portaldetail'   => 'data',
-        'wirelessedit'   => 'panels',
+    protected $panelKeys = [
+        'portaledit' => 'data',
+        'portaldetail' => 'data',
+        'wirelessedit' => 'panels',
         'wirelessdetail' => 'panels',
-    );
+    ];
 
     /**
      * Panel names in the new style, for the first two panels
-     * 
+     *
      * @var array
      */
-    protected $panelNames = array(
-        array(
+    protected $panelNames = [
+        [
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
-        ),
-        array(
+        ],
+        [
             'name' => 'panel_hidden',
-            'label' => 'LBL_RECORD_SHOWMORE'
-        ),
-    );
+            'label' => 'LBL_RECORD_SHOWMORE',
+        ],
+    ];
 
     /**
      * Converts the legacy Grid metadata to Sidecar style
@@ -60,7 +60,7 @@ class SidecarGridMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
         $defs = $this->legacyViewdefs;
 
         // Find out which panel key to use based on viewtype and client
-        $panelKey = $this->panelKeys[$this->client.$this->viewtype];
+        $panelKey = $this->panelKeys[$this->client . $this->viewtype];
         if (isset($defs[$panelKey])) {
             // Get the converted defs
             $fields = $this->handleConversion($defs, $panelKey);
@@ -73,7 +73,7 @@ class SidecarGridMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
             }
 
             // Set the new panel defs from the fields that were just converted
-            $paneldefs = array(array('label' => 'LBL_PANEL_DEFAULT', 'fields' => $fields));
+            $paneldefs = [['label' => 'LBL_PANEL_DEFAULT', 'fields' => $fields]];
 
             // Kill the data (old defs) and panels (new defs) elements from the defs
             unset($newdefs['data'], $newdefs['panels']);
@@ -92,7 +92,7 @@ class SidecarGridMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
     /**
      * Gets fields from a panel and converts them from legacy format to sidecar
      * format
-     * 
+     *
      * @param array $panel The legacy panel
      * @param integer $maxcols The maximum number of columns for the layout
      * @param integer $maxspan The maximum number of cells to span for a field
@@ -100,16 +100,16 @@ class SidecarGridMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
      */
     public function getConvertedPanelDefs($panel, $maxcols, $maxspan = 12)
     {
-        $fields = array();
+        $fields = [];
         if (is_array($panel)) {
             foreach ($panel as $rowIndex => $row) {
                 // This is a single panel, most likely mobile or portal
                 if (is_string($row)) {
                     // This needs to span the maxcols amount
-                    $fields[] = array(
+                    $fields[] = [
                         'name' => $row,
                         'span' => $maxspan,
-                    );
+                    ];
                     continue;
                 }
 
@@ -126,10 +126,10 @@ class SidecarGridMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
                         if ($maxcols == 1) {
                             $fields[] = $row[0];
                         } else {
-                            $fields[] = array(
+                            $fields[] = [
                                 'name' => $row[0],
                                 'span' => $maxspan,
-                            );
+                            ];
                         }
                     } elseif (is_array($row[0])) {
                         // Some sort of instruction set
@@ -141,9 +141,9 @@ class SidecarGridMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
                             }
                             unset($row[0]['name']);
                             $fields[] = array_merge(
-                                array('name' => $field),
+                                ['name' => $field],
                                 $row[0],
-                                $maxcols == 1 ? array() : array('span' => $maxspan)
+                                $maxcols == 1 ? [] : ['span' => $maxspan]
                             );
                         } else {
                             // Fallback... take it as is
@@ -175,19 +175,19 @@ class SidecarGridMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
     }
 
     /**
-     * Handles the actual conversion of viewdefs. By default this method will 
+     * Handles the actual conversion of viewdefs. By default this method will
      * only convert field defs without panel data to support original upgrading
-     * from 6.5 -> 6.6 and to support portal and mobile conversion. 
-     * 
+     * from 6.5 -> 6.6 and to support portal and mobile conversion.
+     *
      * @param array $defs The complete legacy viewdef
      * @param string $panelKey The viewdef key that contains panel data
-     * @param boolean $full Flag that tells this method whether to return a 
+     * @param boolean $full Flag that tells this method whether to return a
      *                      single array of fields or a full conversion of defs
      * @return array
      */
     public function handleConversion($defs, $panelKey, $full = false)
     {
-        $fields = $panels = array();
+        $fields = $panels = [];
         if (isset($defs[$panelKey])) {
             // Necessary for setting the proper field array types
             $maxcols = isset($defs['templateMeta']['maxColumns']) ? intval($defs['templateMeta']['maxColumns']) : 2;
@@ -196,7 +196,7 @@ class SidecarGridMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
             // handled up front. Also, neither portal nor mobile utilize the
             // additional metadata per panel so sending back the field defs here
             // is adequate.
-            if (in_array($this->client, array('mobile', 'wireless', 'portal'))) {
+            if (in_array($this->client, ['mobile', 'wireless', 'portal'])) {
                 return $this->getConvertedPanelDefs($defs[$panelKey], $maxcols);
             }
 
@@ -207,7 +207,7 @@ class SidecarGridMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
                 // Get fields from this panel and convert them
                 $fields = array_merge($fields, $this->getConvertedPanelDefs($panel, $maxcols));
 
-                // For full conversion of metadata we need to group fields into 
+                // For full conversion of metadata we need to group fields into
                 // their respective panels. This handles that here.
                 if ($full) {
                     // Set the hidden flag for handling 'hide' property
@@ -224,14 +224,14 @@ class SidecarGridMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
                     }
 
                     // Basic defs that should never change
-                    $defs = array(
+                    $defs = [
                         'name' => $panelName,
                         'label' => $panelLabel,
                         'columns' => $maxcols,
                         'labels' => true,
                         'labelsOnTop' => true,
                         'placeholders' => true,
-                    );
+                    ];
 
                     // Handle the 'hide' property
                     if ($hidden) {
@@ -245,7 +245,7 @@ class SidecarGridMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
                     $panels[] = $defs;
 
                     // Reset fields array so they don't stack up inside of panels
-                    $fields = array();
+                    $fields = [];
                 }
 
                 // Increment the counter that handles panel labels
@@ -256,10 +256,10 @@ class SidecarGridMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
         // This is a full metadata conversion, so send back a complete metadata
         // collection
         if ($full) {
-            return array(
-                'templateMeta' => isset($defs['templateMeta']) ? $defs['templateMeta'] : array(),
-                'panels' => $panels
-            );
+            return [
+                'templateMeta' => isset($defs['templateMeta']) ? $defs['templateMeta'] : [],
+                'panels' => $panels,
+            ];
         }
 
         // Return the default converted fields array
@@ -270,7 +270,7 @@ class SidecarGridMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
      * Gets a panel name. Used in conversion of old style to new style. Checks
      * whether a panel label ($name) is a custom panel or not and if not, will
      * convert it to Business Card or Show More where appropriate.
-     * 
+     *
      * @param string $name The name or label of the panel
      * @param integer $index The numeric position of the panel
      * @return array
@@ -292,6 +292,6 @@ class SidecarGridMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
             $panelLabel = strtoupper($name);
         }
 
-        return array('name' => $panelName, 'label' => $panelLabel);
+        return ['name' => $panelName, 'label' => $panelLabel];
     }
 }

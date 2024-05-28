@@ -9,27 +9,27 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['ProductTemplates']['base']['filter']['default'] = array(
+$viewdefs['ProductTemplates']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'type_id' => array(),
-        'manufacturer_id' => array(),
-        'mft_part_num' => array(),
-        'service_duration_value' => array(),
-        'service_duration_unit' => array(),
-        'discount_price_date' => array(),
-        'vendor_part_num' => array(),
-        'category_id' => array(),
-        'contact_name' => array(),
-        'date_available' => array(),
-        'url' => array(),
-        'support_term' => array(),
-        'tag' => array(),
+    'fields' => [
+        'name' => [],
+        'type_id' => [],
+        'manufacturer_id' => [],
+        'mft_part_num' => [],
+        'service_duration_value' => [],
+        'service_duration_unit' => [],
+        'discount_price_date' => [],
+        'vendor_part_num' => [],
+        'category_id' => [],
+        'contact_name' => [],
+        'date_available' => [],
+        'url' => [],
+        'support_term' => [],
+        'tag' => [],
         'active_status' => [],
-        '$favorite' => array(
+        '$favorite' => [
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
-        ),
-    ),
-);
+        ],
+    ],
+];

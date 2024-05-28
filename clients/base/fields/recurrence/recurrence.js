@@ -19,6 +19,8 @@
  * @extends View.Fields.Base.FieldsetField
  */
 ({
+    plugins: ['RecurringEvents'],
+
     extendsFrom: 'FieldsetField',
 
     /**
@@ -69,6 +71,34 @@
             'repeat_count_or_until_required_validator_' + this.cid,
             _.bind(this._doValidateRepeatCountOrUntilRequired, this)
         );
+
+        this.initProperties();
+    },
+
+    /**
+     * Initialize the properties
+     */
+    initProperties: function() {
+        /**
+         * Indicates the field type if the event has a supported Rrule
+         *
+         * @param {string}
+         */
+        this.recurrence = 'recurrence';
+
+        /**
+         * Indicates the field type if the event has an unsupported Rrule
+         *
+         * @param {string}
+         */
+        this.unsupportedRrule = 'unsupportedRrule';
+
+        /**
+         * Indicates the repeat_type values for which the event is recurring
+         *
+         * @param {Array}
+         */
+        this.recurrenceRepeatType = ['Daily', 'Weekly', 'Monthly', 'Yearly'];
     },
 
     /**
@@ -76,7 +106,7 @@
      */
     bindDataChange: function() {
         this._super('bindDataChange');
-        this.model.on('sync', this.setEndTypeFromEndFieldValues, this);
+        this.model.on('sync', this.updateFields, this);
         this.model.on('change:repeat_type', this.repeatTypeChanged, this);
         this.model.on('change:repeat_selector', this.updateRepeatSelectorDependentFieldVisibility, this);
         this.model.on('change:repeat_end_type', this.updateRepeatEndFieldVisibility, this);
@@ -89,10 +119,14 @@
      * @private
      */
     _loadTemplate: function() {
-        var originalType = this.type;
-        this.type = 'fieldset';
-        this._super('_loadTemplate');
-        this.type = originalType;
+        if (this.type === 'unsupportedRrule' && this.action !== 'edit') {
+            this._super('_loadTemplate');
+        } else {
+            const originalType = this.type;
+            this.type = 'fieldset';
+            this._super('_loadTemplate');
+            this.type = originalType;
+        }
     },
 
     /**
@@ -101,20 +135,17 @@
      * Prepare the recurrence fields based on the value of `repeat_type`
      */
     _render: function() {
+        this.updateFieldType();
+
         var repeatType = this.model.get('repeat_type');
 
         this._super('_render');
 
-        switch (repeatType) {
-            case 'Daily':
-            case 'Weekly':
-            case 'Monthly':
-            case 'Yearly':
-                this.showFieldBlock();
-                break;
-            default:
-                this.hideFieldBlock();
-                break;
+        if (_.contains(this.recurrenceRepeatType, repeatType) ||
+            (this.type === 'unsupportedRrule') && this.action !== 'edit') {
+            this.showFieldBlock();
+        } else {
+            this.hideFieldBlock();
         }
 
         this.prepareView();
@@ -217,6 +248,52 @@
         } else {
             this._hideField('repeat_ordinal');
             this._hideField('repeat_unit');
+        }
+    },
+
+    /**
+     * Update the field type based on sugarSupportedRrule flag
+     *
+     * @return {boolean} The type has changed
+     */
+    updateFieldType: function() {
+        const rset = this.model.get('rset');
+        const originalType = this.type;
+
+        if (!rset && this.type === this.unsupportedRrule) {
+            this.type = this.recurrence;
+
+            return true;
+        }
+
+        if (!rset) {
+            return false;
+        }
+
+        const rsetJSON = JSON.parse(rset);
+
+        if (_.isEmpty(rsetJSON) || !_.has(rsetJSON, 'sugarSupportedRrule')) {
+            return false;
+        }
+
+        if (!_.isEmpty(rsetJSON.humanReadableString)) {
+            this.humanReadableString = rsetJSON.humanReadableString;
+        }
+
+        this.type = rsetJSON.sugarSupportedRrule ? this.recurrence : this.unsupportedRrule;
+
+        return originalType !== this.type;
+    },
+
+    /**
+     * After edit we have to make sure the field type is correctly set
+     */
+    updateFields: function() {
+        this.setEndTypeFromEndFieldValues();
+        const hasUpdated = this.updateFieldType();
+
+        if (hasUpdated) {
+            this.render();
         }
     },
 

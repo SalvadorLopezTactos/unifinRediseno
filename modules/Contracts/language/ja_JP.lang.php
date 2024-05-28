@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
-	// module labels
-	'LBL_MODULE_NAME' => '契約',
-	'LBL_MODULE_NAME_SINGULAR' => '契約',
-	'LBL_MODULE_TITLE' => '契約: ホーム',
-	
+$mod_strings = [
+    // module labels
+    'LBL_MODULE_NAME' => '契約',
+    'LBL_MODULE_NAME_SINGULAR' => '契約',
+    'LBL_MODULE_TITLE' => '契約: ホーム',
+
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => '契約作成',
@@ -47,10 +47,10 @@ $mod_strings = array (
     'LBL_CURRENCY_ID' => '通貨ID:',
     'LBL_CURRENCY' => '通貨:',
     'LBL_CURRENCY_RATE' => '通貨レート',
-    'LBL_ASSIGNED_TO_NAME'=>'アサイン先:',                   
+    'LBL_ASSIGNED_TO_NAME' => 'アサイン先:',
 
     // listview labels
-    'LBL_LIST_FORM_TITLE' => '契約一覧',	
+    'LBL_LIST_FORM_TITLE' => '契約一覧',
     'LBL_LIST_CONTRACT_NAME' => '契約名',
     'LBL_LIST_ACCOUNT_NAME' => '取引先',
     'LBL_LIST_START_DATE' => '開始日',
@@ -82,9 +82,9 @@ $mod_strings = array (
     'LBL_LIST_NAME' => '名前',
     'LBL_LIST_CONTRACT_VALUE' => '契約価格',
 
-    'LBL_TYPE'=>'タイプ',
+    'LBL_TYPE' => 'タイプ',
     'LBL_TYPE_NAME' => 'タイプ名',
-    'LBL_CONTRACT_TYPE'=>'タイプ:',
+    'LBL_CONTRACT_TYPE' => 'タイプ:',
 
     'LBL_CREATED_USER' => '作成者',
     'LBL_MODIFIED_USER' => '更新者',
@@ -101,4 +101,5 @@ $mod_strings = array (
     'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => '契約 フォーカス ドロワ',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => '契約記録ダッシュボード',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '連絡のタイムライン',
+];

@@ -20,23 +20,41 @@ namespace Google\Service\Contentwarehouse;
 class AssistantApiAppControlSupport extends \Google\Model
 {
   /**
-   * @var bool
+   * @var string
    */
   public $enabled;
+  /**
+   * @var bool
+   */
+  public $sendMessageSuppressed;
 
   /**
-   * @param bool
+   * @param string
    */
   public function setEnabled($enabled)
   {
     $this->enabled = $enabled;
   }
   /**
-   * @return bool
+   * @return string
    */
   public function getEnabled()
   {
     return $this->enabled;
+  }
+  /**
+   * @param bool
+   */
+  public function setSendMessageSuppressed($sendMessageSuppressed)
+  {
+    $this->sendMessageSuppressed = $sendMessageSuppressed;
+  }
+  /**
+   * @return bool
+   */
+  public function getSendMessageSuppressed()
+  {
+    return $this->sendMessageSuppressed;
   }
 }
 

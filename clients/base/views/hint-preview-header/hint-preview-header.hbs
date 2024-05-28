@@ -11,8 +11,8 @@
  */
 --}}
 
-<h1 class='ellipsis_inline' rel='tooltip' data-placement='bottom' data-original-title="{{str 'LBL_HINT_PANEL'}}">
-    {{str 'LBL_HINT_PANEL'}}
+<h1 class='ellipsis_inline' rel='tooltip' data-bs-placement='bottom' data-original-title="{{#if layout.hideNextPrevious}}  {{str 'LBL_HINT_PANEL'}} {{else}} {{str 'LBL_PREVIEW'}} {{/if}}">
+    {{#if layout.hideNextPrevious}}  {{str 'LBL_HINT_PANEL'}} {{else}} {{str 'LBL_PREVIEW'}} {{/if}}
 </h1>
 
 <div class='btn-toolbar pull-right'>

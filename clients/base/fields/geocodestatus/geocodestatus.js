@@ -47,8 +47,26 @@
      * Listening to external events
      */
     _registerEvents: function() {
-        this.listenTo(this.model, 'sync', _.bind(this._getGeocodeStatus, this, false));
+        this.listenTo(this.model, 'sync', _.bind(this._updateStatus, this));
         this.listenTo(this.view, 'maps-manual-geocoding-finished', _.bind(this._getGeocodeStatus, this, true));
+    },
+
+    /**
+    * Update the status field
+    *
+    * @private
+    */
+    _updateStatus: function() {
+        if (this.disposed) {
+            return;
+        }
+
+        const newStatus = this.model.get('geocode_status');
+
+        if (newStatus && newStatus !== this._statuses[this._status]) {
+            this._status = this.getLabelByStatus(newStatus);
+            this.render();
+        }
     },
 
     /**

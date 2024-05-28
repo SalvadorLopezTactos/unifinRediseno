@@ -38,7 +38,8 @@
         });
 
         this.$('.add-on')
-            .tooltip('destroy')  // I cannot find where _this_ tooltip gets initialised with 'hover', so i detroy it first, -f1vlad
+            // I cannot find where _this_ tooltip gets initialised with 'hover', so i detroy it first, -f1vlad
+            .tooltip('dispose')
             .tooltip({
                 trigger: 'click',
                 container: 'body'

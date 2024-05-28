@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Tarjottujen tuoterivien luettelon työpöytä',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Tarjottujen tuoterivien tietueiden työpöytä',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Tuotetyypit',
     'LBL_ASSIGNED_TO_NAME' => 'Vastuuhenkilö:',
     'LBL_ASSIGNED_TO' => 'Vastuuhenkilö',
-    'LBL_ASSIGNED_TO_ID'=>'Vastuuhenkilön ID',
+    'LBL_ASSIGNED_TO_ID' => 'Vastuuhenkilön ID',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Vastuuhenkilö',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Vastuuhenkilö',
     'LBL_CAMPAIGN_ID' => 'Kampanjan ID',
@@ -221,4 +221,5 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Listaa 10 parasta tuoteriviä kuplakaaviossa.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Tuoterivini',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Tiimini tuoterivit",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tuottorivin nimikkeen aikajana',
+];

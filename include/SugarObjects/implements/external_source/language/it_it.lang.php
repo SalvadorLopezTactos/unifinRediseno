@@ -10,8 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
-    'LBL_SOURCE_ID'   => 'ID sorgente esterna',
+$mod_strings = [
+    'LBL_SOURCE_ID' => 'ID sorgente esterna',
     'LBL_SOURCE_TYPE' => 'Sorgente esterna',
     'LBL_SOURCE_META' => 'Meta sorgente esterna',
-);
+];

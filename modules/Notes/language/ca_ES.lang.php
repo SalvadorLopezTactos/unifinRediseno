@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Quadre de comandament del llistat de notas',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Quadre de comandament del registre de notes',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a les notes',
     'LBL_EXTERNAL_USER' => 'Usuari extern',
     'LBL_EXTERNAL_USER_NAME' => 'Usuari extern',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Anotar calendari',
 
     'LBL_RELATED_CONTACT' => 'Contacte relacionat',
     'ERR_DELETE_RECORD' => 'Per suprimir el compte, heu d&#39;especificar un número de registre.',
@@ -126,4 +127,4 @@ $mod_strings = array(
  - Els camps marcats "Obligatori" s&#39;han de completar abans de desar.
  - Feu clic a "Mostra més" per exposar camps addicionals si és necessari.
 2. Feu clic a "Desa" per finalitzar el nou registre i tornar a la pàgina anterior.',
-);
+];

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Etiketler',
     'LBL_GENERIC_LINK' => 'İlgili hedefler',
     'LBL_NAME_LOWER' => 'Küçük Harf Etiket Adı',
@@ -48,4 +48,4 @@ $mod_strings = array(
     'LBL_MY_TAGS' => 'Etiketlerim',
     'LBL_MY_FAVORITE_TAGS' => 'Favori Etiketlerim',
     'LBL_MORE_TAGS' => '{{tagsNumber}} Etiket',
-);
+];

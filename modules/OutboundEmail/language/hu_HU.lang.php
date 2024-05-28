@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Kimenő e-mail fiókok',
     'LBL_MODULE_NAME_SINGULAR' => 'Kimenő e-mail fiók',
     'LBL_STATUS' => 'Állapot',
@@ -40,4 +40,4 @@ $mod_strings = array(
     'LBL_PREFERRED_SENDING_ACCOUNT' => 'Előnyben részesített küldő fiók',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'E-mailbeállítások figyelemfelhívás',
-);
+];

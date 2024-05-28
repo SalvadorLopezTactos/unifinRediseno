@@ -10,22 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$mod_strings = array (
+$mod_strings = [
     //module
     'LBL_MODULE_NAME' => 'Документи',
     'LBL_MODULE_NAME_SINGULAR' => 'Документ',
     'LBL_MODULE_TITLE' => 'Документи: Головна',
     'LNK_NEW_DOCUMENT' => 'Створити документ',
-    'LNK_DOCUMENT_LIST'=> 'Переглянути документи',
+    'LNK_DOCUMENT_LIST' => 'Переглянути документи',
     'LBL_DOC_REV_HEADER' => 'Редакції документа',
-    'LBL_SEARCH_FORM_TITLE'=> 'Пошук документів',
+    'LBL_SEARCH_FORM_TITLE' => 'Пошук документів',
     //vardef labels
     'LBL_DOCUMENT_ID' => 'ID документа',
     'LBL_NAME' => 'Назва',
@@ -34,31 +33,31 @@ $mod_strings = array (
     'LBL_CATEGORY' => 'Категорія',
     'LBL_SUBCATEGORY' => 'Підкатегорія',
     'LBL_STATUS' => 'Статус',
-    'LBL_CREATED_BY'=> 'Створено',
-    'LBL_DATE_ENTERED'=> 'Дата створення',
-    'LBL_DATE_MODIFIED'=> 'Дата змінення',
+    'LBL_CREATED_BY' => 'Створено',
+    'LBL_DATE_ENTERED' => 'Дата створення',
+    'LBL_DATE_MODIFIED' => 'Дата змінення',
     'LBL_DELETED' => 'Видалено',
-    'LBL_MODIFIED'=> 'Змінено (ID)',
+    'LBL_MODIFIED' => 'Змінено (ID)',
     'LBL_MODIFIED_USER' => 'Змінено',
-    'LBL_CREATED'=> 'Створено',
-    'LBL_REVISIONS'=>'Редакції',
-    'LBL_RELATED_DOCUMENT_ID'=>'ID пов&#39;язаного документа',
-    'LBL_RELATED_DOCUMENT_REVISION_ID'=>'Пов&#39;язана редакція документа (ID)',
-    'LBL_IS_TEMPLATE'=>'Є шаблоном',
-    'LBL_TEMPLATE_TYPE'=>'тип документа',
-    'LBL_ASSIGNED_TO_NAME'=>'Відповідальний (-а)',
+    'LBL_CREATED' => 'Створено',
+    'LBL_REVISIONS' => 'Редакції',
+    'LBL_RELATED_DOCUMENT_ID' => 'ID пов&#39;язаного документа',
+    'LBL_RELATED_DOCUMENT_REVISION_ID' => 'Пов&#39;язана редакція документа (ID)',
+    'LBL_IS_TEMPLATE' => 'Є шаблоном',
+    'LBL_TEMPLATE_TYPE' => 'тип документа',
+    'LBL_ASSIGNED_TO_NAME' => 'Відповідальний (-а)',
     'LBL_REVISION_NAME' => 'Номер редакції',
     'LBL_MIME' => 'Тип Mime',
     'LBL_REVISION' => 'Редакція',
     'LBL_DOCUMENT' => 'Пов&#39;язаний документ',
     'LBL_LATEST_REVISION' => 'Остання редакція',
     'LBL_DOCUMENT_REVISION_ID' => 'Редакція документа (Id)',
-    'LBL_CHANGE_LOG'=> 'Журнал змін',
-    'LBL_ACTIVE_DATE'=> 'Дата публікації',
+    'LBL_CHANGE_LOG' => 'Журнал змін',
+    'LBL_ACTIVE_DATE' => 'Дата публікації',
     'LBL_EXPIRATION_DATE' => 'Дата закінчення строку',
-    'LBL_FILE_EXTENSION'  => 'Розширення файлу',
+    'LBL_FILE_EXTENSION' => 'Розширення файлу',
     'LBL_LAST_REV_MIME_TYPE' => 'Остання редакція типу MIME',
-    'LBL_CAT_OR_SUBCAT_UNSPEC'=>'Не вказано',
+    'LBL_CAT_OR_SUBCAT_UNSPEC' => 'Не вказано',
     'LBL_HOMEPAGE_TITLE' => 'Мої документи',
     //quick search
     'LBL_NEW_FORM_TITLE' => 'Новий документ',
@@ -70,25 +69,25 @@ $mod_strings = array (
     'LBL_FILE_UPLOAD' => 'Файл:',
 
     'LBL_CATEGORY_VALUE' => 'Категорія:',
-    'LBL_SUBCATEGORY_VALUE'=> 'Підкатегорія:',
-    'LBL_DOC_STATUS'=> 'Статус:',
-    'LBL_DOC_STATUS_ID'=> 'Статус (Id):',
+    'LBL_SUBCATEGORY_VALUE' => 'Підкатегорія:',
+    'LBL_DOC_STATUS' => 'Статус:',
+    'LBL_DOC_STATUS_ID' => 'Статус (Id):',
     'LBL_LAST_REV_CREATOR' => 'Редакція створена:',
     'LBL_LASTEST_REVISION_NAME' => 'Назва останньої редакції:',
     'LBL_SELECTED_REVISION_NAME' => 'Обрана назва редакції:',
     'LBL_CONTRACT_STATUS' => 'Статус контракта:',
     'LBL_CONTRACT_NAME' => 'Назва контракту:',
     'LBL_LAST_REV_DATE' => 'Дата редакції:',
-    'LBL_DOWNNLOAD_FILE'=> 'Завантажити файл:',
-    'LBL_DET_RELATED_DOCUMENT'=>'Пов&#39;язаний документ:',
-    'LBL_DET_RELATED_DOCUMENT_VERSION'=>"Редакція пов&#39;язаного документа",
-    'LBL_DET_IS_TEMPLATE'=>'Шаблон? :',
-    'LBL_DET_TEMPLATE_TYPE'=>'Тип документа:',
-    'LBL_TEAM'=> 'Команда:',
+    'LBL_DOWNNLOAD_FILE' => 'Завантажити файл:',
+    'LBL_DET_RELATED_DOCUMENT' => 'Пов&#39;язаний документ:',
+    'LBL_DET_RELATED_DOCUMENT_VERSION' => 'Редакція пов&#39;язаного документа',
+    'LBL_DET_IS_TEMPLATE' => 'Шаблон? :',
+    'LBL_DET_TEMPLATE_TYPE' => 'Тип документа:',
+    'LBL_TEAM' => 'Команда:',
     'LBL_IS_SHARED' => 'Доступно ззовні:',
-    'LBL_DOC_DESCRIPTION'=>'Опис:',
-    'LBL_DOC_ACTIVE_DATE'=> 'Дата публікації:',
-    'LBL_DOC_EXP_DATE'=> 'Дата закінчення строку:',
+    'LBL_DOC_DESCRIPTION' => 'Опис:',
+    'LBL_DOC_ACTIVE_DATE' => 'Дата публікації:',
+    'LBL_DOC_EXP_DATE' => 'Дата закінчення строку:',
 
     //document list view.
     'LBL_LIST_FORM_TITLE' => 'Список документів',
@@ -98,11 +97,11 @@ $mod_strings = array (
     'LBL_LIST_REVISION' => 'Редакція',
     'LBL_LIST_LAST_REV_CREATOR' => 'Опубліковано',
     'LBL_LIST_LAST_REV_DATE' => 'Дата редакції',
-    'LBL_LIST_VIEW_DOCUMENT'=>'Переглянути',
-    'LBL_LIST_DOWNLOAD'=> 'Завантажити',
+    'LBL_LIST_VIEW_DOCUMENT' => 'Переглянути',
+    'LBL_LIST_DOWNLOAD' => 'Завантажити',
     'LBL_LIST_ACTIVE_DATE' => 'Дата публікації',
     'LBL_LIST_EXP_DATE' => 'Дата закінчення строку',
-    'LBL_LIST_STATUS'=>'Статус',
+    'LBL_LIST_STATUS' => 'Статус',
     'LBL_LINKED_ID' => 'Пов&#39;язаний документ (id)',
     'LBL_SELECTED_REVISION_ID' => 'Обрана редакція (Id)',
     'LBL_LATEST_REVISION_ID' => 'Остання редакція (id)',
@@ -114,33 +113,33 @@ $mod_strings = array (
     //document search form.
     'LBL_SF_DOCUMENT' => 'Назва документа:',
     'LBL_SF_CATEGORY' => 'Категорія:',
-    'LBL_SF_SUBCATEGORY'=> 'Підкатегорія:',
+    'LBL_SF_SUBCATEGORY' => 'Підкатегорія:',
     'LBL_SF_ACTIVE_DATE' => 'Дата публікації:',
-    'LBL_SF_EXP_DATE'=> 'Дата закінчення строку:',
+    'LBL_SF_EXP_DATE' => 'Дата закінчення строку:',
 
     'DEF_CREATE_LOG' => 'Створено документ',
 
     //error messages
-    'ERR_DOC_NAME'=>'Назва документа',
-    'ERR_DOC_ACTIVE_DATE'=>'Дата публікації',
-    'ERR_DOC_EXP_DATE'=> 'Дата закінчення строку',
-    'ERR_FILENAME'=> 'Назва файлу',
-    'ERR_DOC_VERSION'=> 'Версія документа',
-    'ERR_DELETE_CONFIRM'=> 'Ви бажаєте видалити цю редакцію документа?',
-    'ERR_DELETE_LATEST_VERSION'=> 'Ви не можете видалити останню редакціію документа.',
+    'ERR_DOC_NAME' => 'Назва документа',
+    'ERR_DOC_ACTIVE_DATE' => 'Дата публікації',
+    'ERR_DOC_EXP_DATE' => 'Дата закінчення строку',
+    'ERR_FILENAME' => 'Назва файлу',
+    'ERR_DOC_VERSION' => 'Версія документа',
+    'ERR_DELETE_CONFIRM' => 'Ви бажаєте видалити цю редакцію документа?',
+    'ERR_DELETE_LATEST_VERSION' => 'Ви не можете видалити останню редакціію документа.',
     'LNK_NEW_MAIL_MERGE' => 'Злиття пошти',
     'LBL_MAIL_MERGE_DOCUMENT' => 'Шаблон злиття пошти:',
     'ERR_MISSING_FILE' => 'У даного документа відсутній файл, швидше за все, через помилку під час завантаження. Повторіть спробу завантаження файлу або зверніться до адміністратора.',
 
     'LBL_TREE_TITLE' => 'Документи',
     //sub-panel vardefs.
-    'LBL_LIST_DOCUMENT_NAME'=>'Назва',
-    'LBL_LIST_IS_TEMPLATE'=>'Шаблон?',
-    'LBL_LIST_TEMPLATE_TYPE'=>'тип документа',
-    'LBL_LIST_SELECTED_REVISION'=>'Обрана редакція',
-    'LBL_LIST_LATEST_REVISION'=>'Остання редакція',
-    'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Пов&#39;язані контракти',
-    'LBL_LAST_REV_CREATE_DATE'=>'Дата створення останньої редакції',
+    'LBL_LIST_DOCUMENT_NAME' => 'Назва',
+    'LBL_LIST_IS_TEMPLATE' => 'Шаблон?',
+    'LBL_LIST_TEMPLATE_TYPE' => 'тип документа',
+    'LBL_LIST_SELECTED_REVISION' => 'Обрана редакція',
+    'LBL_LIST_LATEST_REVISION' => 'Остання редакція',
+    'LBL_CONTRACTS_SUBPANEL_TITLE' => 'Пов&#39;язані контракти',
+    'LBL_LAST_REV_CREATE_DATE' => 'Дата створення останньої редакції',
     //'LNK_DOCUMENT_CAT'=>'Document Categories',
     'LBL_CONTRACTS' => 'Контракти',
     'LBL_CREATED_USER' => 'Створенено користувачем',
@@ -171,9 +170,11 @@ $mod_strings = array (
     // Dashboards
     'LBL_DOCUMENTS_RECORD_DASHBOARD' => 'Інформаційна панель записів документів',
     'LBL_MY_DOCUMENTS' => 'Мої документи',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Часова шкала документації',
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Надіслати в DocuSign',
+    'LBL_SEND_TO_DOCUSIGN_TEMPLATE_BUTTON' => 'Надіслати на DocuSign за допомогою шаблону',
 
     // Cloud Drive
 
@@ -183,4 +184,4 @@ $mod_strings = array (
     'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Синхронізувати з OneDrive',
     'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Синхронізувати все з Dropbox',
     'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Синхронізувати з Dropbox',
-);
+];

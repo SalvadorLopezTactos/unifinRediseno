@@ -10,21 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['base']['view']['modal-confirm'] = array(
-    'buttons' => array(
-        array(
+$viewdefs['base']['view']['modal-confirm'] = [
+    'buttons' => [
+        [
             'name' => 'ok_button',
             'type' => 'button',
             'css_class' => 'btn-primary pull-right',
             'label' => 'LBL_EMAIL_OK',
             'primary' => true,
-        ),
-        array(
+        ],
+        [
             'name' => 'close_button',
             'type' => 'button',
             'css_class' => 'btn-invisible btn-link',
             'label' => 'LBL_EMAIL_CANCEL',
             'primary' => false,
-        ),
-    ),
-);
+        ],
+    ],
+];

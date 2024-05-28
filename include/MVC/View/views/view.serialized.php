@@ -11,13 +11,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class ViewSerialized extends SugarView{
-	var $type ='detail';
+class ViewSerialized extends SugarView
+{
+    public $type = 'detail';
 
-	function display(){
-		ob_clean();
-		echo serialize($this->bean->toArray());
-		sugar_cleanup(true);
- 	}
+    public function display()
+    {
+        ob_clean();
+        echo serialize($this->bean->toArray());
+        sugar_cleanup(true);
+    }
 }
-

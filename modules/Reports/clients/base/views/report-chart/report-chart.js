@@ -26,9 +26,11 @@
         this._chartField = null;
         this._chartDef = {
             type: 'chart',
+            customLegend: true,
         };
 
         this.RECORD_NOT_FOUND_ERROR_CODE = 404;
+        this.SERVER_ERROR_CODES = [500, 502, 503, 504];
     },
 
     /**
@@ -38,6 +40,7 @@
         this.listenTo(this, 'chart:clicked', this._drilldown, this);
         this.listenTo(this.context, 'runtime:filters:updated', this.runtimeFiltersUpdated, this);
         this.listenTo(this.context, 'split-screens-resized', this.updateChartUI, this);
+        this.listenTo(this.context, 'dashlet:mode:loaded', this.updateChartUI, this);
 
         if (_.has(this, 'layout') && this.layout && _.has(this.layout, 'layout') && this.layout.layout) {
             this.listenTo(this.layout.layout, 'panel:collapse', this._collapseChart, this);
@@ -49,8 +52,17 @@
      * Whenever orientation/size/visibility of the chart container changes, we have to rerender the chart
      */
     updateChartUI: function() {
+        if (!this._chartField) {
+            return;
+        }
+
+        const isFunnelOrDonut = (type) => ['funnelF', 'donutF'].includes(type);
+
+        const hasDefaultChart = isFunnelOrDonut(this.model.get('chart_type'));
+        const hasCustomChart =  this.model.get('chart') && isFunnelOrDonut(this.model.get('chart').chartType);
+
         // we only need to recreate the chart element if it's donut or funnel
-        if (this._chartField && ['funnelF', 'donutF'].includes(this.model.get('chart_type'))) {
+        if (hasDefaultChart || hasCustomChart) {
             this._chartField.generateD3Chart();
         }
     },
@@ -368,6 +380,10 @@
      * @param {boolean} noAccess
      */
     _showEmptyChart: function(show, noAccess) {
+        if (this.disposed) {
+            return;
+        }
+
         const elId = noAccess ? 'report-no-data' : 'report-no-chart';
         const emptyChartEl = this.$(`[data-widget="${elId}"]`);
 
@@ -376,6 +392,10 @@
         this._showFooter(!show);
 
         emptyChartEl.toggleClass('hidden', !show);
+
+        if (this._chartField) {
+            this._chartField.disposeLegend();
+        }
     },
 
     /**
@@ -448,6 +468,8 @@
         const properties = {
             report_title: chartProperties.title,
             show_legend: chartProperties.legend === 'on' ? true : false,
+            print_chart_legend: chartProperties.legend === 'on' ? true : false,
+            print_chart_title: chartProperties.title ? true : false,
             module: chartProperties.base_module,
             allow_drillthru: chartProperties.allow_drillthru,
             saveChartAsImage: true,
@@ -566,6 +588,50 @@
     },
 
     /**
+     * Open a focus drawer
+     *
+     * @param {Object} drawerContext
+     * @param {string} tabTitle
+     */
+    _openSideDrwawer: function(context, tabTitle) {
+        if (app.sideDrawer) {
+            const drawerIsOpen = app.sideDrawer.isOpen();
+            const drawerContext = app.sideDrawer.currentContextDef;
+
+            if (drawerIsOpen && _.isEqual(context, drawerContext)) {
+                return;
+            }
+
+            const sideDrawerClick = !!this.$el && (this.$el.closest('#side-drawer').length > 0);
+
+            if (!_.has(context, 'dataTitle')) {
+                const baseModuleKey = 'base_module';
+
+                const hasReportData = _.has(context, 'reportData') && _.has(context.reportData, 'base_module');
+                const hasLabel = _.has(context, 'reportData') && _.has(context.reportData, 'label');
+
+                const reportModule = hasReportData ? context.reportData[baseModuleKey] : '';
+                const reportLabel = hasLabel ? context.reportData.label : '';
+
+                context.dataTitle = app.sideDrawer.getDataTitle(
+                    reportModule,
+                    'LBL_FOCUS_DRAWER_DASHBOARD',
+                    reportLabel
+                );
+            }
+
+            const sideDrawerMeta = {
+                dashboardName: tabTitle,
+                layout: 'report-side-drawer',
+                css_class: 'flex flex-column',
+                context
+            };
+
+            app.sideDrawer.open(sideDrawerMeta, null, sideDrawerClick);
+        }
+    },
+
+    /**
      * Setup drilldown list view
      *
      * @param event
@@ -576,9 +642,18 @@
      */
     _drilldown: function(event, activeElements, chart, wrapper, reportDef) {
         const useCustomReportDef = this.options.useCustomReportDef;
-
         if (useCustomReportDef) {
             reportDef = this._applyCustomChartReportMeta(reportDef);
+        }
+
+        const chartConfig = this.model.get('chart');
+        const chartExtraParams = {};
+        const showLegendKey = 'show_legend';
+
+        if (chartConfig) {
+            chartExtraParams[showLegendKey] = chartConfig.showLegend;
+        } else {
+            chartExtraParams[showLegendKey]  = this._reportData.get('rawChartParams')[showLegendKey];
         }
 
         if (this.context.get('previewMode')) {
@@ -591,7 +666,7 @@
             return;
         }
 
-        let params = Object.assign({}, wrapper.params);
+        let params = Object.assign({}, wrapper.params, chartExtraParams);
 
         // funnel chart uses chartjs v2 which has a different signature
         if (wrapper.chartType === 'funnel') {
@@ -642,38 +717,34 @@
     _handleFilter: function(params, state, reportData, chartData) {
         app.alert.show('listfromreport_loading', {level: 'process', title: app.lang.get('LBL_LOADING')});
 
-        if (this.$el.parents('.drawer.active').length === 0) {
-            const module = params.baseModule;
-            const reportId = this.model.get('id');
-            const enums = SUGAR.charts.getEnums(reportData);
-            const groupDefs = SUGAR.charts.getGrouping(reportData);
+        const module = params.baseModule;
+        const reportId = this.model.get('id');
+        const enums = SUGAR.charts.getEnums(reportData);
+        const groupDefs = SUGAR.charts.getGrouping(reportData);
 
-            const drawerContext = {
-                chartData: chartData,
-                chartModule: module,
-                chartState: state,
-                dashModel: null,
-                dashConfig: params,
-                enumsToFetch: enums,
-                filterOptions: {
-                    auto_apply: false
-                },
-                groupDefs: groupDefs,
-                layout: 'drillthrough-drawer',
-                module: 'Reports',
-                reportData: reportData,
-                reportId: reportId,
-                skipFetch: true,
-                useCustomReportDef: this.options.useCustomReportDef,
-                useSavedFilters: (_.isUndefined(reportData.useSavedFilters) || reportData.useSavedFilters) ?
-                                true :
-                                reportData.useSavedFilters,
-            };
+        const drawerContext = {
+            chartData: chartData,
+            chartModule: module,
+            chartState: state,
+            dashModel: null,
+            dashConfig: params,
+            enumsToFetch: enums,
+            filterOptions: {
+                auto_apply: false
+            },
+            groupDefs: groupDefs,
+            layout: 'report-side-drawer',
+            module: 'Reports',
+            reportData: reportData,
+            reportId: reportId,
+            skipFetch: true,
+            useCustomReportDef: this.options.useCustomReportDef,
+            useSavedFilters: (_.isUndefined(reportData.useSavedFilters) || reportData.useSavedFilters) ?
+                            true :
+                            reportData.useSavedFilters,
+        };
 
-            this._openDrawer(drawerContext);
-        } else {
-            this._updateList(params, state);
-        }
+        this._openSideDrwawer(drawerContext, reportData.label);
     },
 
     /**
@@ -860,6 +931,10 @@
 
             if (_.isEmpty(errorMessage) || error.status === this.RECORD_NOT_FOUND_ERROR_CODE) {
                 errorMessage = app.lang.get('LBL_NO_ACCESS', 'Reports');
+            }
+
+            if (this.SERVER_ERROR_CODES.includes(error.status)) {
+                errorMessage = app.lang.get('LBL_SERVER_ERROR', 'Reports');
             }
 
             app.alert.show('report-data-error', {

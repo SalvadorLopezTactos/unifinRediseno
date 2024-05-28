@@ -27,7 +27,7 @@ class ComponentNameValidator extends ConstraintValidator
      * List of reseverd SQL keywords
      * @var array
      */
-    protected $sqlKeywords = array();
+    protected $sqlKeywords = [];
 
     /**
      * Ctor
@@ -47,7 +47,7 @@ class ComponentNameValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof ComponentName) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\ComponentName');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\ComponentName');
         }
 
         if (null === $value || '' === $value) {
@@ -58,7 +58,7 @@ class ComponentNameValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, 'string');
         }
 
-        $value = (string) $value;
+        $value = (string)$value;
 
         // check for invalid characters
         if (!preg_match('/^[a-z][a-z0-9_\-]*$/i', $value)) {

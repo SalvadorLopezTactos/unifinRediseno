@@ -113,7 +113,7 @@
              */
             _toggleFrozenColumnBorder() {
                 const firstCol = this.$('table tbody tr td:first-child, table thead tr th:first-child');
-                firstCol.toggleClass('column-border', this.scrollContainer[0].scrollLeft > 0);
+                firstCol.toggleClass('border-r', this.scrollContainer[0].scrollLeft > 0);
             },
 
             /**

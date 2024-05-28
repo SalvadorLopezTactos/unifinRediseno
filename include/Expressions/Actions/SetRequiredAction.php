@@ -16,19 +16,19 @@ class SetRequiredAction extends AbstractAction
      * @var mixed|string
      */
     public $targetLabel;
-    protected $expression = "";
+    protected $expression = '';
 
     /**
      * array Array of actions on which the Expression Action is not allowed
      */
-    protected $disallowedActions = array('view');
+    protected $disallowedActions = ['view'];
 
     public function __construct($params)
     {
         $this->params = $params;
         $this->targetField = $params['target'];
         $this->targetLabel = $params['label'] ?? $params['target'] . '_label';
-        $this->expression = str_replace("\n", "", $params['value']);
+        $this->expression = str_replace("\n", '', $params['value']);
     }
 
     /**
@@ -36,7 +36,7 @@ class SetRequiredAction extends AbstractAction
      *
      * @return string javascript.
      */
-    static function getJavascriptClass()
+    public static function getJavascriptClass()
     {
         return "
 SUGAR.forms.SetRequiredAction = function(variable, expr, label) {
@@ -143,7 +143,7 @@ SUGAR.util.extend(SUGAR.forms.SetRequiredAction, SUGAR.forms.AbstractAction, {
      *
      * @return string javascript.
      */
-    function getJavascriptFire()
+    public function getJavascriptFire()
     {
         return "new SUGAR.forms.SetRequiredAction('{$this->targetField}','{$this->expression}', '{$this->targetLabel}')";
     }
@@ -153,7 +153,7 @@ SUGAR.util.extend(SUGAR.forms.SetRequiredAction, SUGAR.forms.AbstractAction, {
      *
      * @param SugarBean $target
      */
-    function fire(&$target)
+    public function fire(&$target)
     {
         $value = Parser::evaluate($this->expression, $target)->evaluate();
         if (!empty($target->field_defs[$this->targetField]) && is_array($target->field_defs[$this->targetField])) {
@@ -161,10 +161,8 @@ SUGAR.util.extend(SUGAR.forms.SetRequiredAction, SUGAR.forms.AbstractAction, {
         }
     }
 
-    static function getActionName()
+    public static function getActionName()
     {
-        return "SetRequired";
+        return 'SetRequired';
     }
-
 }
-

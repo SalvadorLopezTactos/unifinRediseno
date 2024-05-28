@@ -9,196 +9,191 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Leads']['DetailView'] = array (
-    'templateMeta' => array (
-        'form' => array (
-            'buttons' => array (
+$viewdefs['Leads']['DetailView'] = [
+    'templateMeta' => [
+        'form' => [
+            'buttons' => [
                 'EDIT',
                 'DUPLICATE',
                 'DELETE',
-                array (
+                [
                     'customCode' => '{if $bean->aclAccess("edit") && !$DISABLE_CONVERT_ACTION}<input title="{$MOD.LBL_CONVERTLEAD_TITLE}" accessKey="{$MOD.LBL_CONVERTLEAD_BUTTON_KEY}" type="button" class="button" onClick="document.location=\'index.php?module=Leads&action=ConvertLead&record={$fields.id.value}\'" name="convert" value="{$MOD.LBL_CONVERTLEAD}">{/if}',
                     //Bug#51778: The custom code will be replaced with sugar_html. customCode will be deplicated.
-                    'sugar_html' => array(
+                    'sugar_html' => [
                         'type' => 'button',
                         'value' => '{$MOD.LBL_CONVERTLEAD}',
-                        'htmlOptions' => array(
+                        'htmlOptions' => [
                             'title' => '{$MOD.LBL_CONVERTLEAD_TITLE}',
                             'accessKey' => '{$MOD.LBL_CONVERTLEAD_BUTTON_KEY}',
                             'class' => 'button',
                             'onClick' => 'document.location=\'index.php?module=Leads&action=ConvertLead&record={$fields.id.value}\'',
                             'name' => 'convert',
                             'id' => 'convert_lead_button',
-                        ),
+                        ],
                         'template' => '{if $bean->aclAccess("edit") && !$DISABLE_CONVERT_ACTION}[CONTENT]{/if}',
-                    ),
-                ),
+                    ],
+                ],
                 'FIND_DUPLICATES',
-                array (
+                [
                     'customCode' => '<input title="{$APP.LBL_MANAGE_SUBSCRIPTIONS}" class="button" onclick="this.form.return_module.value=\'Leads\'; this.form.return_action.value=\'DetailView\';this.form.return_id.value=\'{$fields.id.value}\'; this.form.action.value=\'Subscriptions\'; this.form.module.value=\'Campaigns\'; this.form.module_tab.value=\'Leads\';" type="submit" name="Manage Subscriptions" value="{$APP.LBL_MANAGE_SUBSCRIPTIONS}">',
                     //Bug#51778: The custom code will be replaced with sugar_html. customCode will be deplicated.
-                    'sugar_html' => array(
+                    'sugar_html' => [
                         'type' => 'submit',
                         'value' => '{$APP.LBL_MANAGE_SUBSCRIPTIONS}',
-                        'htmlOptions' => array(
+                        'htmlOptions' => [
                             'title' => '{$APP.LBL_MANAGE_SUBSCRIPTIONS}',
                             'class' => 'button',
                             'id' => 'manage_subscriptions_button',
                             'onclick' => 'this.form.return_module.value=\'Leads\'; this.form.return_action.value=\'DetailView\';this.form.return_id.value=\'{$fields.id.value}\'; this.form.action.value=\'Subscriptions\'; this.form.module.value=\'Campaigns\'; this.form.module_tab.value=\'Leads\';',
                             'name' => '{$APP.LBL_MANAGE_SUBSCRIPTIONS}',
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                ],
 
-            ),
-            'headerTpl'=>'modules/Leads/tpls/DetailViewHeader.tpl',
-        ),
+            ],
+            'headerTpl' => 'modules/Leads/tpls/DetailViewHeader.tpl',
+        ],
         'maxColumns' => '2',
 
         'useTabs' => true,
-        'widths' => array (
-            array (
+        'widths' => [
+            [
                 'label' => '10',
                 'field' => '30',
-            ),
-            array (
+            ],
+            [
                 'label' => '10',
                 'field' => '30',
-            ),
-        ),
-        'includes'=> array(
-            array('file'=>'modules/Leads/Lead.js'),
-        ),
-    ),
-    'panels' => array (
+            ],
+        ],
+        'includes' => [
+            ['file' => 'modules/Leads/Lead.js'],
+        ],
+    ],
+    'panels' => [
 
-        'LBL_CONTACT_INFORMATION' =>
-            array (
-                array (
-                    array (
-                        'name' => 'full_name',
-                        'label' => 'LBL_NAME',
+        'LBL_CONTACT_INFORMATION' => [
+            [
+                [
+                    'name' => 'full_name',
+                    'label' => 'LBL_NAME',
 
-                        'displayParams' => array (
-                            'enableConnectors' => true,
-                            'module' => 'Leads',
-                            'connectors' =>
-                                array (
-                                    0 => 'ext_rest_twitter',
-                                ),
-                        ),
-                    ),
-                    'phone_work',
-                ),
+                    'displayParams' => [
+                        'enableConnectors' => true,
+                        'module' => 'Leads',
+                        'connectors' => [
+                            0 => 'ext_rest_twitter',
+                        ],
+                    ],
+                ],
+                'phone_work',
+            ],
 
-                array (
-                    'title',
-                    'phone_mobile',
-                ),
+            [
+                'title',
+                'phone_mobile',
+            ],
 
-                array (
-                    'department',
-                    'phone_fax',
-                ),
+            [
+                'department',
+                'phone_fax',
+            ],
 
-                array (
-                    array (
-                        'name' => 'account_name',
+            [
+                [
+                    'name' => 'account_name',
 
-                        'displayParams' => array (
-                            'enableConnectors' => true,
-                            'module' => 'Leads',
-                            'connectors' =>
-                                array (
-                                ),
-                        ),
-                    ),
-                    'website',
-                ),
+                    'displayParams' => [
+                        'enableConnectors' => true,
+                        'module' => 'Leads',
+                        'connectors' => [
+                        ],
+                    ],
+                ],
+                'website',
+            ],
 
-                array (
-                    array (
-                        'name' => 'primary_address_street',
-                        'label' => 'LBL_PRIMARY_ADDRESS',
-                        'type' => 'address',
-                        'displayParams' => array (
-                            'key' => 'primary',
-                        ),
+            [
+                [
+                    'name' => 'primary_address_street',
+                    'label' => 'LBL_PRIMARY_ADDRESS',
+                    'type' => 'address',
+                    'displayParams' => [
+                        'key' => 'primary',
+                    ],
 
-                    ),
+                ],
 
-                    array (
-                        'name' => 'alt_address_street',
-                        'label' => 'LBL_ALTERNATE_ADDRESS',
-                        'type' => 'address',
-                        'displayParams' => array (
-                            'key' => 'alt',
-                        ),
+                [
+                    'name' => 'alt_address_street',
+                    'label' => 'LBL_ALTERNATE_ADDRESS',
+                    'type' => 'address',
+                    'displayParams' => [
+                        'key' => 'alt',
+                    ],
 
-                    ),
+                ],
 
-                ),
+            ],
 
-                array (
-                    'email',
-                    'business_center_name',
-                ),
+            [
+                'email',
+                'business_center_name',
+            ],
 
-                array (
-                    'description',
-                ),
+            [
+                'description',
+            ],
 
-            ),
+        ],
 
-        'LBL_PANEL_ADVANCED' =>
-            array (
+        'LBL_PANEL_ADVANCED' => [
 
-                array (
-                    'status',
-                    'lead_source',
-                ),
+            [
+                'status',
+                'lead_source',
+            ],
 
-                array (
-                    'status_description',
-                    'lead_source_description',
-                ),
+            [
+                'status_description',
+                'lead_source_description',
+            ],
 
-                array (
-                    'opportunity_amount',
-                    'refered_by',
-                ),
+            [
+                'opportunity_amount',
+                'refered_by',
+            ],
 
-                array (
-                    array (
-                        'name' => 'campaign_name',
-                        'label' => 'LBL_CAMPAIGN',
+            [
+                [
+                    'name' => 'campaign_name',
+                    'label' => 'LBL_CAMPAIGN',
 
-                    ),
-                    'do_not_call',
-                ),
-            ),
+                ],
+                'do_not_call',
+            ],
+        ],
 
-        'LBL_PANEL_ASSIGNMENT' =>
-            array(
-                array (
-                    array (
-                        'name' => 'assigned_user_name',
-                        'label' => 'LBL_ASSIGNED_TO',
-                    ),
-                    array (
-                        'name' => 'date_modified',
-                        'label' => 'LBL_DATE_MODIFIED',
-                        'customCode' => '{$fields.date_modified.value} {$APP.LBL_BY} {$fields.modified_by_name.value}',
-                    ),
-                ),
-                array (
+        'LBL_PANEL_ASSIGNMENT' => [
+            [
+                [
+                    'name' => 'assigned_user_name',
+                    'label' => 'LBL_ASSIGNED_TO',
+                ],
+                [
+                    'name' => 'date_modified',
+                    'label' => 'LBL_DATE_MODIFIED',
+                    'customCode' => '{$fields.date_modified.value} {$APP.LBL_BY} {$fields.modified_by_name.value}',
+                ],
+            ],
+            [
 
-                    'team_name',
-                    array (
-                        'name' => 'date_entered',
-                        'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value}',
-                    ),
-                ),
-            ),
-    ),
-);
+                'team_name',
+                [
+                    'name' => 'date_entered',
+                    'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value}',
+                ],
+            ],
+        ],
+    ],
+];

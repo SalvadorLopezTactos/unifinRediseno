@@ -12,7 +12,7 @@
 
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
- /**
+/**
  * Class PubSub_ModuleEvent_PushSub
  *
  * Sugar Connect subscribes to modules for the purpose of change data capture
@@ -162,7 +162,7 @@ final class PubSub_ModuleEvent_PushSub extends Basic
             $bean->mark_deleted($bean->id);
         }
 
-        return count($beans);
+        return safeCount($beans);
     }
 
     /**

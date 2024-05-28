@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'קבצים מוטמעים',
     'LBL_MODULE_NAME_SINGULAR' => 'קובץ מוטמע',
     'LBL_MODULE_TITLE' => 'קובץ מוטמע',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => 'שם קובץ',
     'LBL_FILENAME' => 'שם קובץ',
     'LBL_UPLOAD_ONLY_IMAGE' => 'הקובץ שנבחר צריך להיות תמונה.',
-);
+];

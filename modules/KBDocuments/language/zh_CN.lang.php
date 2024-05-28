@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '知识库',
     'LBL_MODULE_NAME_SINGULAR' => '知识库文章',
     'LBL_MODULE_TITLE' => '知识库文章',
@@ -17,4 +17,4 @@ $mod_strings = array(
     'LBL_KEYWORDS' => '关键字',
     'LBL_CONTENT' => '内容',
     'LBL_ATTACHMENTS' => '附件',
-);
+];

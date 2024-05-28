@@ -21,6 +21,10 @@
 ({
     extendsFrom: 'BaseLayout',
 
+    plugins: [
+        'ActionButton',
+    ],
+
     className: 'row-fluid',
 
     //FIXME We need to remove this. TY-1132 will address it.
@@ -37,7 +41,13 @@
      */
     metaFileNames: {
         'da438c86-df5e-11e9-9801-3c15c2c53980': 'renewal-console',
-        'c108bb4a-775a-11e9-b570-f218983a1c3e': 'agent-dashboard'
+        'c108bb4a-775a-11e9-b570-f218983a1c3e': 'agent-dashboard',
+        '1c59e4d8-b54a-11ee-9d94-095590d26ca4': 'bdr-dashboard',
+        '6483f6a4-b54a-11ee-9d94-095590d26ca4': 'sales-rep-dashboard',
+        'a23e0174-b54a-11ee-9d94-095590d26ca4': 'sales-manager-dashboard',
+        'cf9dde82-b54a-11ee-9d94-095590d26ca4': 'marketing-dashboard',
+        '00aa861a-b54b-11ee-9d94-095590d26ca4': 'customer-success-dashboard',
+        '1f821616-b54b-11ee-9d94-095590d26ca4': 'executive-dashboard'
     },
 
     events: {
@@ -307,7 +317,7 @@
             });
             this.$el.append(
                 $('<div></div>')
-                    .addClass('dashboard bg-secondary-content-background w-full absolute' + css)
+                    .addClass('dashboard bg-[--secondary-content-background] w-full absolute' + css)
                     .attr({'data-dashboard': 'true'})
                     .append(dashboardEl)
             );
@@ -333,6 +343,24 @@
             this.collection.on('reset', this.setDefaultDashboard, this);
         }
         this.context.on('dashboard:restore-dashboard:clicked', this.restoreConsoleDashlets, this);
+    },
+
+    /**
+     * Return list of fields for Action Buttons
+     *
+     * @return {Object|null}
+     */
+    getFieldsForAB: function() {
+        const comp = this.closestComponent('row-model-data');
+        if (comp && comp.layout) {
+            const model = comp.layout.model;
+
+            if (model && model.fields) {
+                return model.fields;
+            }
+        }
+
+        return null;
     },
 
     /**
@@ -600,7 +628,7 @@
         } else {
             headerPane = {
                 view: 'dashboard-headerpane',
-                loadModule: 'Dashboards'
+                loadModule: 'Dashboards',
             };
             actionButtons = {
                 view: 'dashboard-fab',

@@ -9,14 +9,14 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['base']['view']['massaddtolist-progress'] = array(
+$viewdefs['base']['view']['massaddtolist-progress'] = [
     'template' => 'massupdate-progress',
-    'buttons' => array(
-        array(
+    'buttons' => [
+        [
             'type' => 'button',
             'name' => 'btn-stop',
             'css_class' => 'btn-primary',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
-        ),
-    ),
-);
+        ],
+    ],
+];

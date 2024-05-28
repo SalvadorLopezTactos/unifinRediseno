@@ -17,7 +17,7 @@ class AssignToAction extends AbstractAction
     /**
      * array Array of actions on which the Expression Action is not allowed
      */
-    protected $disallowedActions = array('view');
+    protected $disallowedActions = ['view'];
 
     public function __construct($params)
     {
@@ -125,7 +125,7 @@ class AssignToAction extends AbstractAction
             $userName = Parser::evaluate($this->expression, $target)->evaluate();
             $qsd = QuickSearchDefaults::getQuickSearchDefaults();
             $data = $qsd->getQSUser();
-            $data['modules'] = array('Users');
+            $data['modules'] = ['Users'];
             $data['conditions'][0]['value'] = $userName;
             $qs = new QuickSearchQuery();
             $result = $qs->query($data);
@@ -142,12 +142,12 @@ class AssignToAction extends AbstractAction
      */
     public function getDefinition()
     {
-        return array(
+        return [
             'action' => static::getActionName(),
-            'params' => array(
+            'params' => [
                 'value' => $this->expression,
-            )
-        );
+            ],
+        ];
     }
 
     public static function getActionName()

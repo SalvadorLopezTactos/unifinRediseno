@@ -20,7 +20,7 @@ class ForecastsDefaults
      * @param string $targetVersion if isUpgrade == true, the version the user is upgrading to
      * @return array
      */
-    public static function setupForecastSettings($isUpgrade = false, $currentVersion = "670", $targetVersion = "670")
+    public static function setupForecastSettings($isUpgrade = false, $currentVersion = '670', $targetVersion = '670')
     {
         $isSetup = false;
         $admin = BeanFactory::newBean('Administration');
@@ -63,7 +63,7 @@ class ForecastsDefaults
         }
 
         // default forecast config setup
-        return array(
+        return [
             // this is used to indicate whether the admin wizard should be shown on first run (for admin only, otherwise a message telling a non-admin to tell their admin to set it up)
             'is_setup' => $isSetup,
             // this is used to indicate whether we are coming from an upgraded instance
@@ -80,7 +80,7 @@ class ForecastsDefaults
             // the leaf interval that gets the extra week if main period is fiscal + quaterly, options come from forecasts_timeperiod_leaf_quarterly_options_dom, (first, middle, last)
             'timeperiod_leaf_interval' => TimePeriod::QUARTER_TYPE,
             // the starting point for each fiscal year, this is also used as the starting point to dynamically build the timeperiods
-            'timeperiod_start_date' => date("Y") . '-01-01',
+            'timeperiod_start_date' => date('Y') . '-01-01',
             // if timeperiod_start_date is anything other than 01/01/year, the "Fiscal Year" will technically
             // span two years e.g. startDate: 06/01/2013 will span 2013 and 2014. This setting saves if we're calling
             // the Fiscal Year by the Current year (2013) or by the Next year (2014) for labeling purposes
@@ -95,28 +95,28 @@ class ForecastsDefaults
             // used to reference the app_list_string entry to indicate the commit stage list to use
             'buckets_dom' => 'commit_stage_binary_dom', // options:  commit_stage_binary_dom, commit_stage_dom, commit_stage_extended_dom
             // the defined binary ranges the different buckets opportunities will fall in by default based on their probability
-            'show_binary_ranges' => array(
-                'include' => array('min' => 70, 'max' => 100),
-                'exclude' => array('min' => 0, 'max' => 69)
-            ),
+            'show_binary_ranges' => [
+                'include' => ['min' => 70, 'max' => 100],
+                'exclude' => ['min' => 0, 'max' => 69],
+            ],
             // the defined bucket ranges the different buckets opportunities will fall in by default based on their probability
-            'show_buckets_ranges' => array(
-                'include' => array('min' => 85, 'max' => 100),
-                'upside' => array('min' => 70, 'max' => 84),
-                'exclude' => array('min' => 0, 'max' => 69)
-            ),
+            'show_buckets_ranges' => [
+                'include' => ['min' => 85, 'max' => 100],
+                'upside' => ['min' => 70, 'max' => 84],
+                'exclude' => ['min' => 0, 'max' => 69],
+            ],
             // the defined custom ranges the different buckets opportunities will fall in by default based on their probability
-            'show_custom_buckets_ranges' => array(
-                'include' => array('min' => 85, 'max' => 100),
-                'upside' => array('min' => 70, 'max' => 84),
-                'exclude' => array('min' => 0, 'max' => 69)
-            ),
+            'show_custom_buckets_ranges' => [
+                'include' => ['min' => 85, 'max' => 100],
+                'upside' => ['min' => 70, 'max' => 84],
+                'exclude' => ['min' => 0, 'max' => 69],
+            ],
             // contains a comma-separated list of commit_stages that should be included in likely/best/worst totals
-            'commit_stages_included' => array('include'),
+            'commit_stages_included' => ['include'],
             //sales_stage_won are all sales_stage opportunity values indicating the opportunity is won
-            'sales_stage_won' => array('Closed Won'),
+            'sales_stage_won' => ['Closed Won'],
             //sales_stage_lost are all sales_stage opportunity values indicating the opportunity is lost
-            'sales_stage_lost' => array('Closed Lost'),
+            'sales_stage_lost' => ['Closed Lost'],
             // whether or not to show the likely column in the forecasts worksheets
             'show_worksheet_likely' => 1,
             // whether or not to show the best column in the forecasts worksheets
@@ -133,7 +133,7 @@ class ForecastsDefaults
             'show_forecasts_commit_warnings' => 1,
             // default enabled worksheet columns
             'worksheet_columns' => self::getWorksheetColumns('pro'),
-        );
+        ];
     }
 
     /**
@@ -144,11 +144,11 @@ class ForecastsDefaults
      */
     public static function getWorksheetColumns($flav)
     {
-        $cols = array();
-        switch($flav) {
+        $cols = [];
+        switch ($flav) {
             case 'ent':
             case 'ult':
-                $cols = array(
+                $cols = [
                     'commit_stage',
                     'parent_name',  // parent_name is the name of the RLI and the link back to it
                     'opportunity_name',
@@ -159,12 +159,12 @@ class ForecastsDefaults
                     'probability',
                     'likely_case',
                     'best_case',
-                );
+                ];
                 break;
 
             case 'pro':
             case 'corp':
-                $cols = array(
+                $cols = [
                     'commit_stage',
                     'parent_name', // parent_name is the name of the Opportunity and the link back to it
                     'account_name',
@@ -172,7 +172,7 @@ class ForecastsDefaults
                     'sales_stage',
                     'probability',
                     'likely_case',
-                );
+                ];
                 break;
         }
 
@@ -189,5 +189,4 @@ class ForecastsDefaults
         $forecastsDefault = self::getDefaults();
         return $forecastsDefault[$key];
     }
-
 }

@@ -30,6 +30,7 @@ class OpportunityHooks extends AbstractForecastHooks
         return (isset($settings['opps_view_by']) && $settings['opps_view_by'] === 'RevenueLineItems');
     }
 
+
     /**
      * Generate a renewal opportunity when an opportunity containing services is closed won.
      *
@@ -63,13 +64,13 @@ class OpportunityHooks extends AbstractForecastHooks
                 $rlisUpdated = $bean->updateRenewalRLIs($rliBeans);
 
                 // create a new renewal opportunity if it doesn't exist
-                if (empty($renewalBean) && count($rlisUpdated) < count($rliBeans)) {
+                if (empty($renewalBean) && safeCount($rlisUpdated) < safeCount($rliBeans)) {
                     $renewalBean = $bean->createNewRenewalOpportunity();
                 }
 
                 // Create new renewal RLIs, if they don't exist, in a new or existing renewal Opp
                 foreach ($rliBeans as $rliBean) {
-                    if (!in_array($rliBean->id, $rlisUpdated)) {
+                    if (!safeInArray($rliBean->id, $rlisUpdated)) {
                         // If there is was no previous renewal RLI created, link a newly generated renewal RLI
                         // to our parent RLI
                         if (empty($rliBean->renewal_rli_id)) {
@@ -108,7 +109,7 @@ class OpportunityHooks extends AbstractForecastHooks
         }
         $closedWon = $bean->getRliClosedWonStages();
         if (empty($args['dataChanges']['sales_stage']) ||
-            !in_array($args['dataChanges']['sales_stage']['after'], $closedWon)) {
+            !safeInArray($args['dataChanges']['sales_stage']['after'], $closedWon)) {
             return false;
         }
 
@@ -124,7 +125,7 @@ class OpportunityHooks extends AbstractForecastHooks
      * Gets the list of all ScheduledJobs IDs
      * @return array
      */
-    public static function getScheduledJobIDs() : array
+    public static function getScheduledJobIDs(): array
     {
         return static::$scheduledJobIDs;
     }
@@ -132,7 +133,7 @@ class OpportunityHooks extends AbstractForecastHooks
     /**
      * Resets the stack of scheduled job IDs
      */
-    public static function resetScheduledJobIDs() : void
+    public static function resetScheduledJobIDs(): void
     {
         static::$scheduledJobIDs = [];
     }
@@ -183,7 +184,7 @@ class OpportunityHooks extends AbstractForecastHooks
      */
     public static function setSalesStatus(Opportunity $bean, $event, $args)
     {
-        if (static::useRevenueLineItems() && $bean->ACLFieldAccess('sales_status', 'write')) {
+        if (static::useRevenueLineItems() && $bean->ACLFieldAccess('sales_status', 'write') && !empty($bean->id)) {
             // Load forecast config so we have the sales_stage data.
             static::loadForecastSettings();
 
@@ -191,30 +192,14 @@ class OpportunityHooks extends AbstractForecastHooks
             $closed_won = static::$settings['sales_stage_won'];
             $closed_lost = static::$settings['sales_stage_lost'];
 
-            $linked_beans_won = $bean->get_linked_beans(
-                'revenuelineitems',
-                'RevenueLineItems',
-                array(),
-                0,
-                -1,
-                0,
-                "sales_stage in ('" . join("', '", $closed_won) . "')"
-            );
-            $won_rlis = is_countable($linked_beans_won) ? count($linked_beans_won) : 0;
-
-            $linked_beans_lost = $bean->get_linked_beans(
-                'revenuelineitems',
-                'RevenueLineItems',
-                array(),
-                0,
-                -1,
-                0,
-                "sales_stage in ('" . join("', '", $closed_lost) . "')"
-            );
-            $lost_rlis = is_countable($linked_beans_lost) ? count($linked_beans_lost) : 0;
-
-            $linked_beans = $bean->get_linked_beans('revenuelineitems', 'RevenueLineItems');
-            $total_rlis = is_countable($linked_beans) ? count($linked_beans) : 0;
+            try {
+                $won_rlis = static::getCountOfRevenueLineItems($bean->id, $closed_won);
+                $lost_rlis = static::getCountOfRevenueLineItems($bean->id, $closed_lost);
+                $total_rlis = static::getCountOfRevenueLineItems($bean->id);
+            } catch (SugarQueryException $exception) {
+                LoggerManager::getLogger()->fatal($exception->getMessage() . $exception->getTraceAsString());
+                return;
+            }
 
             if ($total_rlis > ($won_rlis + $lost_rlis)) {
                 // still in progress
@@ -236,6 +221,26 @@ class OpportunityHooks extends AbstractForecastHooks
     }
 
     /**
+     * @param string $opportunityId
+     * @param array|null $salesStages
+     * @return int
+     * @throws SugarQueryException
+     */
+    private static function getCountOfRevenueLineItems(string $opportunityId, $salesStages = []) : int
+    {
+        $query = new SugarQuery();
+        $query->from(BeanFactory::newBean('RevenueLineItems'), ['team_security' => false]);
+        $query->where()->equals('opportunity_id', $opportunityId);
+
+        if (!empty($salesStages)) {
+            $query->where()->in('sales_stage', $salesStages);
+        }
+
+        $query->select()->selectReset()->setCountQuery();
+        return (int) $query->getOne();
+    }
+
+    /**
      * Before we save, we need to check to see if this opp is in a closed state. If so,
      * set it to the proper included/excluded state in case mass_update tried to set it to something wonky
      * @param RevenueLineItem $bean
@@ -252,10 +257,10 @@ class OpportunityHooks extends AbstractForecastHooks
 
             //Check to see if we are in a won state. if so, set the probability to 100 and commit_stage to include.
             //if not, set the probability to 0 and commit_stage to exclude
-            if (in_array($bean->sales_stage, $won)) {
+            if (safeInArray($bean->sales_stage, $won)) {
                 $bean->probability = 100;
                 $bean->commit_stage = 'include';
-            } else if (in_array($bean->sales_stage, $lost)) {
+            } elseif (safeInArray($bean->sales_stage, $lost)) {
                 $bean->probability = 0;
                 $bean->commit_stage = 'exclude';
             }
@@ -275,7 +280,6 @@ class OpportunityHooks extends AbstractForecastHooks
             && $args['relationship'] == 'accounts_opportunities'
             && static::isForecastSetup()
             && !static::useRevenueLineItems()) {
-
             $bean->account_id = $args['related_id'];
             static::saveWorksheet($bean, $event, $args);
             return true;

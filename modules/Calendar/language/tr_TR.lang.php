@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Takvim',
     'LBL_MODULE_NAME_SINGULAR' => 'Takvim',
     'LBL_MODULE_TITLE' => 'Takvim',
@@ -98,8 +98,8 @@ $mod_strings = array (
 
     'LBL_SETTINGS_TITLE' => 'Ayarlar',
     'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Gün ve Hafta görünümlerinde zaman dilimlerini göster:',
-    'LBL_SETTINGS_TIME_STARTS'=>'Başlangıç zamanı:',
-    'LBL_SETTINGS_TIME_ENDS'=>'Bitiş zamanı:',
+    'LBL_SETTINGS_TIME_STARTS' => 'Başlangıç zamanı:',
+    'LBL_SETTINGS_TIME_ENDS' => 'Bitiş zamanı:',
     'LBL_SETTINGS_CALLS_SHOW' => 'Aramaları Göster:',
     'LBL_SETTINGS_TASKS_SHOW' => 'Görevleri Göster:',
 
@@ -184,7 +184,7 @@ $mod_strings = array (
     'LNK_NEW_CALENDAR' => 'Takvim Oluştur',
     'LNK_CALENDAR_LIST' => 'Takvimleri Görüntüle',
     'LNK_CALENDAR_LEGACY' => 'Eski Takvim',
-    'LBL_IMPORT_CALENDAR'=> 'Takvimi İçe Aktar',
+    'LBL_IMPORT_CALENDAR' => 'Takvimi İçe Aktar',
     'LBL_INSERTFIELD_EVENT_TIMESTAMP' => 'Etkinlik Zaman Damgası',
     'LBL_INSERTFIELD' => 'Alan Ekle',
     'LBL_EVENT_START_ERROR' => 'Lütfen bir başlangıç seçin',
@@ -318,7 +318,7 @@ $mod_strings = array (
     'LBL_FEB' => 'Şub',
     'LBL_MAR' => 'Mar',
     'LBL_APR' => 'Nis',
-    'LBL_MAY' => 'Mayıs',
+    'LBL_MAY' => 'May',
     'LBL_JUN' => 'Haz',
     'LBL_JUL' => 'Tem',
     'LBL_AUG' => 'Ağu',
@@ -334,11 +334,11 @@ $mod_strings = array (
     'LBL_NO_CALENDAR_SELECTED' => 'Lütfen bir takvim seçin',
     'LBL_SAVE_USER_CALENDARS_ERROR' => 'Takvimler kaydedilemedi.',
 
-);
+];
 
-$mod_list_strings = array(
-    'dom_cal_weekdays'=>
-        array(
+$mod_list_strings = [
+    'dom_cal_weekdays' =>
+        [
             'Paz',
             'Pzt',
             'Sal',
@@ -346,9 +346,9 @@ $mod_list_strings = array(
             'Per',
             'Cum',
             'Cmt',
-        ),
-    'dom_cal_weekdays_long'=>
-        array(
+        ],
+    'dom_cal_weekdays_long' =>
+        [
             'Pazar',
             'Pazartesi',
             'Salı',
@@ -356,9 +356,9 @@ $mod_list_strings = array(
             'Perşembe',
             'Cuma',
             'Cumartesi',
-        ),
-    'dom_cal_month'=>
-        array(
+        ],
+    'dom_cal_month' =>
+        [
             '',
             'Oca',
             'Şub',
@@ -372,9 +372,9 @@ $mod_list_strings = array(
             'Eki',
             'Kas',
             'Ara',
-        ),
-    'dom_cal_month_long'=>
-        array(
+        ],
+    'dom_cal_month_long' =>
+        [
             '',
             'Ocak',
             'Şubat',
@@ -388,5 +388,5 @@ $mod_list_strings = array(
             'Ekim',
             'Kasım',
             'Aralık',
-        ),
-);
+        ],
+];

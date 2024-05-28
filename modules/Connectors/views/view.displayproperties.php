@@ -14,29 +14,29 @@ require_once 'include/connectors/utils/ConnectorUtils.php';
 
 class ViewDisplayProperties extends ViewList
 {
- 	/**
-	 * @see SugarView::process()
-	 */
-    public function process($params = array())
-	{
- 		$this->options['show_all'] = false;
- 		$this->options['show_javascript'] = true;
- 		$this->options['show_header'] = false;
+    /**
+     * @see SugarView::process()
+     */
+    public function process($params = [])
+    {
+        $this->options['show_all'] = false;
+        $this->options['show_javascript'] = true;
+        $this->options['show_header'] = false;
         parent::process($params);
- 	}
+    }
 
     /**
      * Gets the list of enabled modules for a connector source
      *
      * @param array $sources The list of sources in the connector display config
-     * @param  string $source The source that we are checking enabled modules for
+     * @param string $source The source that we are checking enabled modules for
      * @return array
      */
     public function getEnabledModules($sources, $source)
     {
         global $app_list_strings;
 
-        $return = array();
+        $return = [];
         foreach ($sources as $module => $mapping) {
             foreach ($mapping as $entry) {
                 if ($entry == $source) {
@@ -58,8 +58,8 @@ class ViewDisplayProperties extends ViewList
     {
         global $app_list_strings;
 
-        $return = array();
-        foreach (SugarAutoLoader::getDirFiles("modules", true) as $e) {
+        $return = [];
+        foreach (SugarAutoLoader::getDirFiles('modules', true) as $e) {
             //Strip the 'modules/' portion out from beginning of $e
             $e = substr($e, 8);
 
@@ -88,8 +88,8 @@ class ViewDisplayProperties extends ViewList
         $access = $current_user->getDeveloperModules();
 
         // Is the module in the beanList AND accessible to the user?
-        return isset($beanList[$module]) 
-               && (in_array($module, $access) || is_admin($current_user));
+        return isset($beanList[$module])
+            && (safeInArray($module, $access) || is_admin($current_user));
     }
 
     /**
@@ -116,7 +116,7 @@ class ViewDisplayProperties extends ViewList
 
         // Send back our result
         return SugarAutoLoader::existingCustomOne($studioFile)
-               && file_exists($viewFile);
+            && file_exists($viewFile);
     }
 
     /**
@@ -157,7 +157,7 @@ class ViewDisplayProperties extends ViewList
         $fields = $s->getRequiredConfigFields();
         $this->ss->assign('externalHasProperties', !empty($fields));
 
-        $this->ss->assign('externalChecked', !empty($sources[$source]['eapm']['enabled']) ? " checked" : "");
+        $this->ss->assign('externalChecked', !empty($sources[$source]['eapm']['enabled']) ? ' checked' : '');
         echo $this->ss->fetch($this->getCustomFilePathIfExists('modules/Connectors/tpls/display_properties.tpl'));
     }
 }

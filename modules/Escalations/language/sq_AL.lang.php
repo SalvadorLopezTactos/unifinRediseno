@@ -21,7 +21,7 @@ $mod_strings = [
     'LNK_ESCALATION_LIST' => 'Shiko përshkallëzimet',
     'LBL_LIST_RELATED_TO_ID' => 'Në lidhje me ID-në',
     'LNK_IMPORT_ESCALATIONS' => 'Përshkallëzimi i importit',
-    
+
     'LBL_LIST_SUBJECT' => 'Subjekti',
     'LBL_LIST_NUMBER' => 'Numri',
     'LBL_LIST_RELATED_TO_TYPE' => 'Lloji i ngjashëm',

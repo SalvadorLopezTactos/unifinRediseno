@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Definiţii proces',
-  'LBL_MODULE_TITLE' => 'Definiţii proces',
-  'LBL_MODULE_NAME_SINGULAR' => 'Definiţie proces',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Definiţii proces',
+    'LBL_MODULE_TITLE' => 'Definiţii proces',
+    'LBL_MODULE_NAME_SINGULAR' => 'Definiţie proces',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare definiri de proces',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare definiri de proces',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare definiții procese',
-  'LNK_LIST' => 'Vizualizare definiţii proces',
-  'LNK_NEW_PMSE_PROJECT' => 'Creează Definiţie procese',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Importă Definiţii procese',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare definiții procese',
+    'LNK_LIST' => 'Vizualizare definiţii proces',
+    'LNK_NEW_PMSE_PROJECT' => 'Creează Definiţie procese',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Importă Definiţii procese',
 
-  'LBL_PRJ_STATUS' => 'Status',
-  'LBL_PRJ_MODULE' => 'Modul ţintă',
-  'LBL_PRJ_RUN_ORDER' => 'Aplicați ordinea',
-  'LBL_PMSE_BUTTON_SAVE' => 'Salveaza',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Anulare',
-  'LBL_PMSE_BUTTON_YES' => 'Da',
-  'LBL_PMSE_BUTTON_NO' => 'Nu',
-  'LBL_PMSE_BUTTON_OK' => 'OK',
+    'LBL_PRJ_STATUS' => 'Status',
+    'LBL_PRJ_MODULE' => 'Modul ţintă',
+    'LBL_PRJ_RUN_ORDER' => 'Aplicați ordinea',
+    'LBL_PMSE_BUTTON_SAVE' => 'Salveaza',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Anulare',
+    'LBL_PMSE_BUTTON_YES' => 'Da',
+    'LBL_PMSE_BUTTON_NO' => 'Nu',
+    'LBL_PMSE_BUTTON_OK' => 'OK',
     'LBL_PMSE_FORM_ERROR' => 'Remediaţi toate erorile înainte de a continua.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Proiectează',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Activitate',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Actiune',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Pistă Demarare Eveniment',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Oportunitate Demarare Eveniment' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Oportunitate Demarare Eveniment',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Document Demarare Eveniment',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Alt Eveniment din Modul',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Aşteaptă Eveniment',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Regulă operativă',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Acțiune regulă operativă',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Șablon e-mail',
-);
+];

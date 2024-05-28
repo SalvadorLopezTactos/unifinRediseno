@@ -19,16 +19,16 @@ class ViewModulelabels extends SugarView
     {
         global $mod_strings;
 
-        return array(
-            translate('LBL_MODULE_NAME','Administration'),
+        return [
+            translate('LBL_MODULE_NAME', 'Administration'),
             ModuleBuilderController::getModuleTitle(),
-        );
+        ];
     }
 
     public function display()
     {
         global $mod_strings, $locale;
-        $bak_mod_strings=$mod_strings;
+        $bak_mod_strings = $mod_strings;
         $smarty = new Sugar_Smarty();
         $smarty->assign('mod_strings', $mod_strings);
         $package_name = $this->request->getValidInputRequest('view_package', 'Assert\ComponentName');
@@ -53,20 +53,20 @@ class ViewModulelabels extends SugarView
         $smarty->assign('selected_lang', $selected_lang);
         $smarty->assign('view_package', $package_name);
         $smarty->assign('view_module', $module_name);
-        $smarty->assign('mb','1');
+        $smarty->assign('mb', '1');
         $smarty->assign('available_languages', get_languages());
         ///////////////////////////////////////////////////////////////////
-         ////ASSISTANT
-         $smarty->assign('assistant',array('group'=>'module', 'key'=>'labels'));
+        ////ASSISTANT
+        $smarty->assign('assistant', ['group' => 'module', 'key' => 'labels']);
         /////////////////////////////////////////////////////////////////
-         ////ASSISTANT
+        ////ASSISTANT
 
         $ajax = new AjaxCompose();
         $ajax->addCrumb($bak_mod_strings['LBL_MODULEBUILDER'], 'ModuleBuilder.main("mb")');
-        $ajax->addCrumb($package_name, 'ModuleBuilder.getContent("module=ModuleBuilder&action=package&package='.$package->name. '")');
-        $ajax->addCrumb($module_name, 'ModuleBuilder.getContent("module=ModuleBuilder&action=module&view_package='.$package->name.'&view_module='. $module_name . '")');
+        $ajax->addCrumb($package_name, 'ModuleBuilder.getContent("module=ModuleBuilder&action=package&package=' . $package->name . '")');
+        $ajax->addCrumb($module_name, 'ModuleBuilder.getContent("module=ModuleBuilder&action=module&view_package=' . $package->name . '&view_module=' . $module_name . '")');
         $ajax->addCrumb($bak_mod_strings['LBL_LABELS'], '');
-        $ajax->addSection('center', $bak_mod_strings['LBL_LABELS'],$smarty->fetch('modules/ModuleBuilder/tpls/labels.tpl'));
+        $ajax->addSection('center', $bak_mod_strings['LBL_LABELS'], $smarty->fetch('modules/ModuleBuilder/tpls/labels.tpl'));
         echo $ajax->getJavascript();
     }
 }

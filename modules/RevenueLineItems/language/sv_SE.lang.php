@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Instrumentpanel med lista över resultatradartiklar',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Instrumentpanel med poster över resultatradartiklar',
@@ -120,7 +120,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Produkttyper',
     'LBL_ASSIGNED_TO_NAME' => 'Tilldelad till:',
     'LBL_ASSIGNED_TO' => 'Tilldelad till',
-    'LBL_ASSIGNED_TO_ID'=>'Tilldelad användar ID',
+    'LBL_ASSIGNED_TO_ID' => 'Tilldelad användar ID',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Tilldelat användarnamn',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Tilldelad användar ID',
     'LBL_CAMPAIGN_ID' => 'Kampanj ID',
@@ -211,4 +211,5 @@ För att skapa en {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Visar topp tio Intäktsposter i ett bubbeldiagram.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Mina intäktsposter',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Mitt Teams Intäktsposter",
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje för intäktspost',
+];

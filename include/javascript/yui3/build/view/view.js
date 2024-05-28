@@ -1,10 +1,3 @@
-/*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add('view', function (Y, NAME) {
 
 /**
@@ -437,4 +430,4 @@ Y.View = Y.extend(View, Y.Base, {
 
 
 
-}, '3.15.0', {"requires": ["base-build", "node-event-delegate"]});
+}, '3.18.1', {"requires": ["base-build", "node-event-delegate"]});

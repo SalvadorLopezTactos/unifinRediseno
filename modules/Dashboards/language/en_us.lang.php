@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_DASHBOARD_MODULE' => 'Module',
     'LBL_MODULE_NAME' => 'Dashboards',
     'LBL_MODULE_NAME_SINGULAR' => 'Dashboard',
@@ -26,8 +26,12 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'All Dashboards for {{module}} module {{view}} view',
     'LBL_COPY_OF' => 'Copy of {{{name}}}',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Create Dashboard',
-    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
-    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Are you sure you want to restore this dashboard to the default layout?",
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => 'Are you sure you want to restore this tab to the default layout?',
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => 'Are you sure you want to restore this dashboard to the default layout?',
     'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Are you sure you want to restore the dashboard panel to its default layout?',
     'LBL_FILTER_UTILS_SELECT' => 'Assigned',
-);
+    'LBL_FILTER_UPDATES_SINCE_LAST_REFRESH' => 'This dashboard contains runtime filters that have been modified since last refresh.',
+    'LBL_TEMPLATE' => 'Template',
+    'LBL_UNSELECT_DELETE_TEMPLATES' => 'Your selection contains dashboard templates, which cannot be deleted. Please deselect templates to continue.',
+    'LBL_UNSELECT_UPDATE_TEMPLATES' => 'Your selection contains dashboard templates, which cannot be mass updated. Please deselect templates to continue.',
+];

@@ -11,26 +11,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Notifications']['base']['view']['list'] = array(
+$viewdefs['Notifications']['base']['view']['list'] = [
     'favorites' => false,
-    'panels' => array(
-        array(
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_1',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'severity',
                     'type' => 'severity',
                     'default' => true,
                     'enabled' => true,
                     'css_class' => 'full-width',
-                ),
-                array(
+                ],
+                [
                     'name' => 'name',
                     'default' => true,
                     'enabled' => true,
                     'link' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'parent_name',
                     'label' => 'LBL_LIST_RELATED_TO',
                     'id' => 'PARENT_ID',
@@ -38,35 +38,35 @@ $viewdefs['Notifications']['base']['view']['list'] = array(
                     'default' => true,
                     'enabled' => true,
                     'sortable' => false,
-                ),
-                array (
+                ],
+                [
                     'name' => 'assigned_user_name',
                     'sortable' => false,
                     'enabled' => true,
                     'default' => false,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_entered',
                     'default' => false,
                     'enabled' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'date_modified',
                     'default' => false,
                     'enabled' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'is_read',
                     'type' => 'read',
                     'default' => true,
                     'enabled' => true,
                     'css_class' => 'full-width',
-                ),
-            ),
-        ),
-    ),
-    'orderBy' => array(
+                ],
+            ],
+        ],
+    ],
+    'orderBy' => [
         'field' => 'date_entered',
         'direction' => 'desc',
-    ),
-);
+    ],
+];

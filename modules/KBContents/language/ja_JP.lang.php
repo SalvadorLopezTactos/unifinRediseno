@@ -9,11 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array (
+$mod_strings = [
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'ナレッジベース一覧のダッシュボード',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'ナレッジベースレコードのダッシュボード',
     'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'ナレッジベース 　フォーカス ドロワ',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ナレッジベースのタイムライン',
 
     'LBL_MODULE_NAME' => 'ナレッジベース',
     'LBL_MODULE_NAME_SINGULAR' => 'ナレッジベース記事',
@@ -33,7 +34,7 @@ $mod_strings = array (
     'LBL_SET_ITEM_PRIMARY' => '値をプライマリとして設定',
     'LBL_ITEM_REMOVE' => '項目の削除',
     'LBL_ITEM_ADD' => '項目の追加',
-    'LBL_MODULE_ID'=> 'KBContents',
+    'LBL_MODULE_ID' => 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => '版数 ID',
     'LBL_DOCUMENT_REVISION' => '版',
     'LBL_NUMBER' => '番号',
@@ -106,4 +107,4 @@ $mod_strings = array (
     'TPL_SHOW_MORE_MODULE' => 'その他の {{module}} 記事...',
     'LBL_LIST_FORM_TITLE' => 'ナレッジベース一覧',
     'LBL_SEARCH_FORM_TITLE' => 'ナレッジベース検索',
-);
+];

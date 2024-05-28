@@ -132,7 +132,7 @@ class PurchasedLineItem extends Basic
      * @return string The end date or start date
      * @throws SugarQueryException
      */
-    protected function getPurchaseDateByType(string $type, string $purchaseId) : string
+    protected function getPurchaseDateByType(string $type, string $purchaseId): string
     {
         // Get the sort order based on service start or end date
         $sort = $type === 'start' ? 'ASC' : 'DESC';
@@ -196,7 +196,7 @@ class PurchasedLineItem extends Basic
     /**
      * The method will unset our PLI <-> RLI relationship when a PLI is deleted.
      * @override SugarBean::mark_relationships_deleted()
-     * @param string $id  The ID of the record who's RLI relationship we want to update based on our deleted PLI.
+     * @param string $id The ID of the record who's RLI relationship we want to update based on our deleted PLI.
      */
     public function mark_relationships_deleted($id)
     {

@@ -57,4 +57,5 @@ $mod_strings = [
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนการสั่งซื้อ',
     'LBL_RELATED_ACCOUNT' => 'บัญชีที่เกี่ยวข้อง',
     'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'ซื้อระบบลิ้นชัก',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์การซื้อ',
 ];

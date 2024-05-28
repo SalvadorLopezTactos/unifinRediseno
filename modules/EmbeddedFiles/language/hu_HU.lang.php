@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Beágyazott fájlok',
     'LBL_MODULE_NAME_SINGULAR' => 'Beágyazott fájl',
     'LBL_MODULE_TITLE' => 'Beágyazott fájl',
@@ -19,4 +19,4 @@ $mod_strings = array(
     'LBL_LIST_FILENAME' => 'Fájlnév',
     'LBL_FILENAME' => 'Fájlnév',
     'LBL_UPLOAD_ONLY_IMAGE' => 'A kijelölt fájlnak képnek kell lennie.',
-);
+];

@@ -24,11 +24,11 @@ class UpgradeDropdownsHelper
     public function getDropdowns($file)
     {
         if (!file_exists($file)) {
-            return array();
+            return [];
         }
 
         //TODO: this list needs to be kept in sync with DropDownBrowser::$restrictedDropdowns
-        $restrictedDropdowns = array(
+        $restrictedDropdowns = [
             'eapm_list',
             'eapm_list_documents',
             'eapm_list_import',
@@ -46,9 +46,9 @@ class UpgradeDropdownsHelper
             //'moduleList', // We may want to put this in at a later date
             //'moduleListSingular', // Same with this
             'sweetspot_theme_options',
-        );
+        ];
 
-        $dropdowns = array();
+        $dropdowns = [];
         $appListStrings = $this->getAppListStringsFromFile($file);
 
         // checking that it's an array just in case the included file changes the type
@@ -70,18 +70,18 @@ class UpgradeDropdownsHelper
 
     /**
      * Returns array of app_list_strings keys that need to be used with use_push parameter in ParserDropDown::saveDropDown
-     * @see ParserDropDown::saveDropDown for more details
      * @return array
+     * @see ParserDropDown::saveDropDown for more details
      */
     public function getDropdownsToPush()
     {
-        return array(
+        return [
             'moduleList',
             'moduleListSingular',
             'record_type_display',
             'parent_type_display',
             'record_type_display_notes',
-        );
+        ];
     }
 
     /**
@@ -102,7 +102,7 @@ class UpgradeDropdownsHelper
         $appListStringsBackup = $app_list_strings;
 
         // clear $app_list_strings so that only the strings found in the file are loaded into the variable
-        $app_list_strings = array();
+        $app_list_strings = [];
 
         include $file;
 

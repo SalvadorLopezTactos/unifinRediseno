@@ -27,6 +27,11 @@
 (function(app) {
     app.events.on('app:init', function() {
         app.plugins.register('MassCollection', ['view'], {
+            /**
+             * Holds additional fields to fetch
+             */
+            _fieldsToFetch: [],
+
             onAttach: function() {
                 this.on('init', this._initMassCollectionPlugin, this);
             },
@@ -319,6 +324,8 @@
                         fields = _.union(fields, button.related_fields);
                     }
                 }, this);
+
+                fields = _.union(fields, this._fieldsToFetch);
 
                 var options = {
                     fields: fields,

@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Žinių bazė',
     'LBL_MODULE_NAME_SINGULAR' => 'Žinių bazės straipsnis',
     'LBL_MODULE_TITLE' => 'Žinių bazės straipsnis',
     'LBL_REVISIONS_SUBPANEL_TITLE' => 'Versijos',
-);
+];

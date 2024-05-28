@@ -10,42 +10,42 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-if( !isset( $install_script ) || !$install_script ) {
+if (!isset($install_script) || !$install_script) {
     die($mod_strings['ERR_NO_DIRECT_SCRIPT']);
 }
 
-if( !isset($_SESSION['licenseKey_submitted']) || !$_SESSION['licenseKey_submitted'] ) {
-    $_SESSION['setup_license_key_users']        = 0;
-    $_SESSION['setup_license_key_expire_date']  = "";
-    $_SESSION['setup_license_key']              = "";
+if (!isset($_SESSION['licenseKey_submitted']) || !$_SESSION['licenseKey_submitted']) {
+    $_SESSION['setup_license_key_users'] = 0;
+    $_SESSION['setup_license_key_expire_date'] = '';
+    $_SESSION['setup_license_key'] = '';
 }
 
 ////	errors
 $errors = '';
-if( isset($validation_errors) ){
-    if ((is_countable($validation_errors) ? count($validation_errors) : 0) > 0) {
-        $errors  = '<div id="errorMsgs">';
-        $errors .= '<p>'.$mod_strings['LBL_SITECFG_FIX_ERRORS'].'</p><ul>';
-        foreach( $validation_errors as $error ){
-			$errors .= '<li>' . $error . '</li>';
+if (isset($validation_errors)) {
+    if (safeCount($validation_errors) > 0) {
+        $errors = '<div id="errorMsgs">';
+        $errors .= '<p>' . $mod_strings['LBL_SITECFG_FIX_ERRORS'] . '</p><ul>';
+        foreach ($validation_errors as $error) {
+            $errors .= '<li>' . $error . '</li>';
         }
-		$errors .= '</ul></div>';
+        $errors .= '</ul></div>';
     }
 }
 
 ////	javascript
 $javascript = "
 <script>
-	requiredTxt = '".$mod_strings['ERR_LICENSE_MISSING']."'
-	addToValidate('setLicense', 'setup_license_key_users',       'int',  false,  '".$mod_strings["LBL_LICENSE_NUM_USERS"]."' );
-	addToValidate('setLicense', 'setup_license_key_expire_date', 'date', false,  '".$mod_strings["LBL_LICENSE_EXPIRY"]." (yyyy-mm-dd)' );
+	requiredTxt = '" . $mod_strings['ERR_LICENSE_MISSING'] . "'
+	addToValidate('setLicense', 'setup_license_key_users',       'int',  false,  '" . $mod_strings['LBL_LICENSE_NUM_USERS'] . "' );
+	addToValidate('setLicense', 'setup_license_key_expire_date', 'date', false,  '" . $mod_strings['LBL_LICENSE_EXPIRY'] . " (yyyy-mm-dd)' );
 </script>";
 
 
 ///////////////////////////////////////////////////////////////////////////////
 ////	START OUTPUT
 $langHeader = get_language_header();
-$out =<<<EOQ
+$out = <<<EOQ
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html {$langHeader}>
 <head>

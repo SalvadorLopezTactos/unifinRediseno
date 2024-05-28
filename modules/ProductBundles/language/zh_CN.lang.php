@@ -10,23 +10,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_BUNDLE_STAGE' => '分组阶段：',
-    'LBL_DEAL_TOT'=>'折扣总计',
-    'LBL_DEAL_TOT_USDOLLAR'=>'折扣总计（美元）',
+    'LBL_DEAL_TOT' => '折扣总计',
+    'LBL_DEAL_TOT_USDOLLAR' => '折扣总计（美元）',
     'LBL_NEW_SUB' => '折扣小计：',
     'LBL_SHIPPING' => '运费：',
-    'LBL_SHIPPING_USDOLLAR'=>'运费（美元）',
-    'LBL_SUBTOTAL_USDOLLAR'=>'小计（美元）',
+    'LBL_SHIPPING_USDOLLAR' => '运费（美元）',
+    'LBL_SUBTOTAL_USDOLLAR' => '小计（美元）',
     'LBL_SUBTOTAL' => '小计：',
     'LBL_TAXABLE_SUBTOTAL' => '应纳税小计',
-    'LBL_TAX_USDOLLAR'=>'税费（美元）',
+    'LBL_TAX_USDOLLAR' => '税费（美元）',
     'LBL_TAX' => '税费：',
-    'LBL_TOTAL_USDOLLAR'=>'总计（美元）',
+    'LBL_TOTAL_USDOLLAR' => '总计（美元）',
     'LBL_TOTAL' => '总计：',
     'LBL_QUOTE_BUNDLE_POSITION' => '报价组合位置',
     'EXCEPTION_INVALID_QUOTE_ID' => '报价编号不在有效载荷中',
-    'EXCEPTION_NOT_FOUND_QUOTE' =>  '找不到您请求的报价',
+    'EXCEPTION_NOT_FOUND_QUOTE' => '找不到您请求的报价',
     'LBL_ADDITIONAL_GROUP_DISCOUNT' => '其他组折扣',
     'LBL_GROUP_TOTAL' => '组总和',
     'LBL_QUOTE_DATA_GROUP_HEADER' => '组页眉',
@@ -44,4 +44,5 @@ $mod_strings = array (
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => '此报价的默认产品包组',
     'LBL_ALERT_DELETING_ITEM' => '删除单项',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => '单项删除成功',
-);
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '产品组合时间轴',
+];

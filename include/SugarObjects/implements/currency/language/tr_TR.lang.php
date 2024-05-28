@@ -9,11 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
-    'LBL_CURRENCY'=>'Para Birimi',
+$mod_strings = [
+    'LBL_CURRENCY' => 'Para Birimi',
     'LBL_CURRENCIES' => 'Para Birimleri',
-    'LBL_CURRENCY_NAME'=>'Para Birimi İsmi',
-    'LBL_CURRENCY_SYMBOL'=>'Para Birimi Sembolü',
+    'LBL_CURRENCY_NAME' => 'Para Birimi İsmi',
+    'LBL_CURRENCY_SYMBOL' => 'Para Birimi Sembolü',
     'LBL_CURRENCY_RATE' => 'Temel Oran',
     'LBL_CURRENCY_ID' => 'Para Birimi ID',
-);
+];

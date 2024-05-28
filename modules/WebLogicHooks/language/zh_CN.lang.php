@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => '网络逻辑钩',
     'LBL_MODULE_NAME_SINGULAR' => '网络逻辑钩',
     'LBL_MODULE_TITLE' => '网络逻辑钩',
@@ -20,4 +20,4 @@ $mod_strings = array(
     'LBL_REQUEST_METHOD' => '请求方法',
     'LBL_TRIGGER_EVENT' => '触发器事件',
     'LBL_URL' => 'URL',
-);
+];

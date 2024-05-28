@@ -22,8 +22,8 @@ class SugarFieldPassword extends SugarFieldBase
         $vardef,
         $focus,
         ImportFieldSanitize $settings
-        )
-    {
+    ) {
+
         $value = User::getPasswordHash($value);
 
         return $value;
@@ -33,18 +33,19 @@ class SugarFieldPassword extends SugarFieldBase
      * {@inheritDoc}
      */
     public function apiFormatField(
-        array &$data,
-        SugarBean $bean,
-        array $args,
+        array       &$data,
+        SugarBean   $bean,
+        array       $args,
         $fieldName,
         $properties,
-        array $fieldList = null,
+        array       $fieldList = null,
         ServiceBase $service = null
     ) {
+
         $this->ensureApiFormatFieldArguments($fieldList, $service);
 
         $data[$fieldName] = true;
-        if(empty($bean->$fieldName)) {
+        if (empty($bean->$fieldName)) {
             $data[$fieldName] = null;
         }
     }
@@ -55,12 +56,12 @@ class SugarFieldPassword extends SugarFieldBase
      */
     public function apiSave(SugarBean $bean, array $params, $fieldName, $properties)
     {
-        if(!isset($params[$fieldName])) {
+        if (!isset($params[$fieldName])) {
             return;
         }
-        if(empty($params[$fieldName])) {
+        if (empty($params[$fieldName])) {
             $bean->$fieldName = null;
-        } elseif($params[$fieldName] !== true) {
+        } elseif ($params[$fieldName] !== true) {
             $bean->$fieldName = User::getPasswordHash($params[$fieldName]);
         }
     }

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Účty pro odchozí e-maily',
     'LBL_MODULE_NAME_SINGULAR' => 'Účet pro odchozí e-mail',
     'LBL_STATUS' => 'Stav',
@@ -40,4 +40,4 @@ $mod_strings = array(
     'LBL_PREFERRED_SENDING_ACCOUNT' => 'Preferovaný odesílací účet',
 
     'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na nastavení e-mailu',
-);
+];

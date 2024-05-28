@@ -11,6 +11,9 @@
  */
 --}}
 <a class="btn{{#if def.primary}} btn-primary{{/if}}"
-   href="{{#if fullRoute}}#{{fullRoute}}{{else}}{{#if def.route}}#{{buildRoute context=context model=model action=def.route.action}}{{else}}javascript:void(0);{{/if}}{{/if}}"
+   href="{{#if fullRoute}}{{#unless externalRoute}}#{{/unless}}{{fullRoute}}{{else}}{{#if def.route}}#{{buildRoute context=context model=model action=def.route.action}}{{else}}javascript:void(0);{{/if}}{{/if}}"
+{{#if openWindow}}
+   target="_blank"
+{{/if}}
    name="{{name}}">
 {{#if def.icon}}<i class="{{buildIcon def.icon}}"></i> {{/if}}{{label}}</a>

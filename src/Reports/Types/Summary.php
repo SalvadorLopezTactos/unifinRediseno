@@ -9,7 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 namespace Sugarcrm\Sugarcrm\Reports\Types;
+
 use Sugarcrm\Sugarcrm\Reports\Constants\ReportType;
 
 class Summary extends Reporter
@@ -123,7 +125,7 @@ class Summary extends Reporter
         $orderBy = [];
 
         if (array_key_exists('summary_order_by', $report->report_def)) {
-            $orderByMeta = (array) $report->report_def['summary_order_by'];
+            $orderByMeta = (array)$report->report_def['summary_order_by'];
 
             foreach ($orderByMeta as $index => $orderByField) {
                 $orderBy[$index] = $orderByField;
@@ -209,7 +211,7 @@ class Summary extends Reporter
     {
         $header = [];
 
-        $summaryColumns = (array) $report->report_def['summary_columns'];
+        $summaryColumns = (array)$report->report_def['summary_columns'];
 
         foreach ($summaryColumns as $summaryColumn) {
             $fieldDef = $report->getFieldDefFromLayoutDef($summaryColumn);
@@ -239,7 +241,7 @@ class Summary extends Reporter
      */
     protected function createHeaderWithoutGroups(\Report $report): array
     {
-        $displayColumns = (array) $report->report_def['display_columns'];
+        $displayColumns = (array)$report->report_def['display_columns'];
         $fieldsDef = [];
 
         foreach ($displayColumns as $displayColumn) {
@@ -269,7 +271,7 @@ class Summary extends Reporter
             && !empty($report->report_def['display_columns']);
 
         $noGroupDefs = (array_key_exists('group_defs', $report->report_def)
-            && empty($report->report_def['group_defs'])) || !array_key_exists('group_defs', $report->report_def);
+                && empty($report->report_def['group_defs'])) || !array_key_exists('group_defs', $report->report_def);
 
         // Here we actually have a summation without groups as a rows and columns
         if ($report->show_columns && $hasDisplayColumn && $noGroupDefs) {

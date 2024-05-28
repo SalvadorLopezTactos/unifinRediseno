@@ -14,31 +14,28 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$app_list_strings = array (
-strtolower($object_name).'_category_dom' =>
-    array (
-    '' => '',
-    'Marketing' => 'Marketing',
-    'Knowledge Base' => 'Bază de cunoștințe',
-    'Sales' => 'Vanzari',
-  ),
 
-    strtolower($object_name).'_subcategory_dom' =>
-    array (
-    '' => '',
-    'Marketing Collateral' => 'Colaterala de Marketing',
-    'Product Brochures' => 'Brosuri ale produsului',
-    'FAQ' => 'Întrebări frecvente',
-  ),
+$app_list_strings = [
+    strtolower($object_name) . '_category_dom' => [
+        '' => '',
+        'Marketing' => 'Marketing',
+        'Knowledge Base' => 'Bază de cunoştinţe',
+        'Sales' => 'Vânzări',
+    ],
 
-    strtolower($object_name).'_status_dom' =>
-    array (
-    'Active' => 'Activ',
-    'Draft' => 'Schita',
-    'FAQ' => 'Întrebări frecvente',
-    'Expired' => 'Expirat',
-    'Under Review' => 'În curs de revizuire',
-    'Pending' => 'In asteptare',
-  ),
-  );
+    strtolower($object_name) . '_subcategory_dom' => [
+        '' => '',
+        'Marketing Collateral' => 'Garanții de marketing',
+        'Product Brochures' => 'Broșuri ale produsului',
+        'FAQ' => 'Întrebări frecvente',
+    ],
+
+    strtolower($object_name) . '_status_dom' => [
+        'Active' => 'Activ',
+        'Draft' => 'Schiță',
+        'FAQ' => 'Întrebări frecvente',
+        'Expired' => 'Expirat',
+        'Under Review' => 'În curs de revizuire',
+        'Pending' => 'În așteptare',
+    ],
+];

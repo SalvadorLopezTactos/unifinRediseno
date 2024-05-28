@@ -10,54 +10,54 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $module_name = 'ReportMaker';
-$viewdefs[$module_name]['base']['menu']['header'] = array(
-    array(
-        'route'=>'#bwc/index.php?module=ReportMaker&action=EditView&return_module=ReportMaker&return_action=DetailView',
-        'label' =>'LNK_NEW_REPORTMAKER',
+$viewdefs[$module_name]['base']['menu']['header'] = [
+    [
+        'route' => '#bwc/index.php?module=ReportMaker&action=EditView&return_module=ReportMaker&return_action=DetailView',
+        'label' => 'LNK_NEW_REPORTMAKER',
         'acl_action' => 'admin',
         'acl_module' => 'ReportMaker',
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route'=>'#bwc/index.php?module=ReportMaker&action=index&return_module=ReportMaker&return_action=index',
-        'label' =>'LNK_LIST_REPORTMAKER',
-        'acl_action'=>'',
-        'acl_module'=>'',
+    ],
+    [
+        'route' => '#bwc/index.php?module=ReportMaker&action=index&return_module=ReportMaker&return_action=index',
+        'label' => 'LNK_LIST_REPORTMAKER',
+        'acl_action' => '',
+        'acl_module' => '',
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=>'#bwc/index.php?module=CustomQueries&action=EditView&return_module=CustomQueries&return_action=DetailView',
-        'label' =>'LNK_NEW_CUSTOMQUERY',
-        'acl_action'=>'admin',
-        'acl_module'=>'CustomQueries',
+    ],
+    [
+        'route' => '#bwc/index.php?module=CustomQueries&action=EditView&return_module=CustomQueries&return_action=DetailView',
+        'label' => 'LNK_NEW_CUSTOMQUERY',
+        'acl_action' => 'admin',
+        'acl_module' => 'CustomQueries',
         'icon' => 'siconl-plus',
-    ),
-    array(
-        'route'=>'#bwc/index.php?module=CustomQueries&action=index&return_module=CustomQueries&return_action=DetailView',
-        'label' =>'LNK_CUSTOMQUERIES',
-        'acl_action'=>'admin',
-        'acl_module'=>'',
+    ],
+    [
+        'route' => '#bwc/index.php?module=CustomQueries&action=index&return_module=CustomQueries&return_action=DetailView',
+        'label' => 'LNK_CUSTOMQUERIES',
+        'acl_action' => 'admin',
+        'acl_module' => '',
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=>'#bwc/index.php?module=DataSets&action=EditView&return_module=DataSets&return_action=DetailView',
-        'label' =>'LNK_NEW_DATASET',
-        'acl_action'=>'admin',
-        'acl_module'=>'DataSets',
+    ],
+    [
+        'route' => '#bwc/index.php?module=DataSets&action=EditView&return_module=DataSets&return_action=DetailView',
+        'label' => 'LNK_NEW_DATASET',
+        'acl_action' => 'admin',
+        'acl_module' => 'DataSets',
         'icon' => 'sicon-plus',
-    ),
-    array(
-        'route'=>'#bwc/index.php?module=DataSets&action=index&return_module=DataSets&return_action=index',
-        'label' =>'LNK_LIST_DATASET',
-        'acl_action'=>'',
-        'acl_module'=>'',
+    ],
+    [
+        'route' => '#bwc/index.php?module=DataSets&action=index&return_module=DataSets&return_action=index',
+        'label' => 'LNK_LIST_DATASET',
+        'acl_action' => '',
+        'acl_module' => '',
         'icon' => 'sicon-list-view',
-    ),
-    array(
-        'route'=> '#Reports',
-        'label' =>'LBL_ALL_REPORTS',
-        'acl_action'=>'',
-        'acl_module'=>'',
+    ],
+    [
+        'route' => '#Reports',
+        'label' => 'LBL_ALL_REPORTS',
+        'acl_action' => '',
+        'acl_module' => '',
         'icon' => 'sicon-reports',
-    ),
-);
+    ],
+];

@@ -12,38 +12,40 @@
 --}}
 {{#if rowModel}}
     {{#with rowModel}}
-        <tr name="{{module}}_{{attributes.id}}" class="single">
+        <tr name="{{module}}_{{attributes.id}}" class="group/row hover:bg-[--primary-content-hover-background] single table-row">
             {{#each ../leftColumns}}
-                <td class="sticky-column stick-left">
+                <td
+                    class="bg-[--primary-content-background] group-hover/row:bg-[--primary-content-hover-background] left-0 stick-left sticky sticky-border-tl table-cell z-10"
+                >
                     {{field ../../this model=../this template=../../viewName}}
                 </td>
             {{/each}}
             {{#each ../_fields.visible}}
-                <td class="{{#if align}}{{align}}{{/if}}{{#if ../../isFirstColumnFreezed}}{{#if @first}} sticky-column stick-first no-border{{#eq ../../leftColumns.length 0}} no-left-column{{/eq}}{{/if}}{{/if}}" data-type="{{type}}">
+                <td class="bg-[--primary-content-background] group-hover/row:bg-[--primary-content-hover-background]{{#if align}}{{align}}{{/if}}{{#if ../../isFirstColumnFreezed}}{{#if @first}} sticky stick-first{{#eq ../../leftColumns.length 0}} left-0{{/eq}}{{/if}}{{/if}} table-cell" data-type="{{type}}">
                     {{field ../../this model=../this template=../../viewName}}
                 </td>
             {{/each}}
             {{#each ../rightColumns}}
-                <td class="sticky-column stick-right">
+                <td class="absolute bg-[--primary-content-background] focus-within:z-20 group-hover/row:bg-[--primary-content-hover-background] group-[.frozen-list-headers]/records:sticky items-center justify-center right-0 stick-right sticky-border-tr table-cell z-10">
                     {{field ../../this model=../this template=../../viewName}}
                 </td>
             {{/each}}
         </tr>
     {{/with}}
 {{else}}
-    <tr name="{{module}}_{{model.id}}" class="single">
+    <tr name="{{module}}_{{model.id}}" class="group/row hover:bg-[--primary-content-hover-background] single table-row">
         {{#each view.leftColumns}}
-            <td class="sticky-column stick-left">
+            <td class="bg-[--primary-content-background] group-hover/row:bg-[--primary-content-hover-background] left-0 stick-left sticky sticky-border-tl table-cell z-10">
                 {{field ../view model=../model template=../view.viewName}}
             </td>
         {{/each}}
         {{#each view._fields.visible}}
-            <td class="{{#if align}}{{align}}{{/if}}{{#if ../view.isFirstColumnFreezed}}{{#if @first}} sticky-column stick-first no-border{{#eq ../../../view.leftColumns.length 0}} no-left-column{{/eq}}{{/if}}{{/if}}" data-type="{{type}}">
+            <td class="bg-[--primary-content-background] group-hover/row:bg-[--primary-content-hover-background]{{#if align}}{{align}}{{/if}}{{#if ../view.isFirstColumnFreezed}}{{#if @first}} sticky stick-first{{#eq ../../../view.leftColumns.length 0}} left-0{{/eq}}{{/if}}{{/if}} table-cell" data-type="{{type}}">
                 {{field ../view model=../model template=../view.viewName}}
             </td>
         {{/each}}
         {{#each view.rightColumns}}
-            <td class="sticky-column stick-right">
+            <td class="absolute bg-[--primary-content-background] focus-within:z-20 group-hover/row:bg-[--primary-content-hover-background] group-[.frozen-list-headers]/records:sticky items-center justify-center right-0 stick-right sticky-border-tr table-cell z-10">
                 {{field ../view model=../model template=../view.viewName}}
             </td>
         {{/each}}

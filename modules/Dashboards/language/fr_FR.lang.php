@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
     'LBL_DASHBOARD_MODULE' => 'Module',
     'LBL_MODULE_NAME' => 'Tableaux de bord',
     'LBL_MODULE_NAME_SINGULAR' => 'Tableau de bord',
@@ -26,8 +26,12 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Tous les tableaux de bord pour la vue {{view}} du module {{module}}',
     'LBL_COPY_OF' => 'Copie de {{{name}}}',
     'LBL_CREATE_DASHBOARD_BUTTON' => 'Créer un tableau de bord',
-    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
-    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => "Voulez-vous vraiment rétablir la disposition par défaut du panneau du tableau de bord ?",
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => 'Are you sure you want to restore this tab to the default layout?',
+    'LBL_RESTORE_DEFAULT_DASHBOARD_CONFIRM' => 'Voulez-vous vraiment rétablir la disposition par défaut du panneau du tableau de bord ?',
     'LBL_RESTORE_DEFAULT_PORTAL_DASHLETS_CONFIRM' => 'Voulez-vous vraiment rétablir la disposition par défaut du panneau du tableau de bord ?',
     'LBL_FILTER_UTILS_SELECT' => 'Assigné',
-);
+    'LBL_FILTER_UPDATES_SINCE_LAST_REFRESH' => 'Ce tableau de bord contient des filtres d’exécution qui ont été modifiés depuis la dernière actualisation.',
+    'LBL_TEMPLATE' => 'Modèle',
+    'LBL_UNSELECT_DELETE_TEMPLATES' => 'Votre sélection contient des modèles de tableau de bord, qui ne peuvent pas être supprimés en masse. Veuillez désélectionner les modèles pour continuer.',
+    'LBL_UNSELECT_UPDATE_TEMPLATES' => 'Votre sélection contient des modèles de tableau de bord, qui ne peuvent pas être mis à jour en masse. Veuillez désélectionner les modèles pour continuer.',
+];

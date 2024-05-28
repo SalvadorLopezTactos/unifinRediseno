@@ -30,7 +30,7 @@ class DebugMiddleware
      *
      * @return \Closure
      */
-    public function __invoke(callable $handler) : \Closure
+    public function __invoke(callable $handler): \Closure
     {
         return function (RequestInterface $request, array $options) use ($handler) {
             return $handler(
@@ -47,7 +47,7 @@ class DebugMiddleware
      *
      * @return \Closure
      */
-    private function onFulfilled(RequestInterface $request) : \Closure
+    private function onFulfilled(RequestInterface $request): \Closure
     {
         return function (ResponseInterface $response) use ($request) {
             $formatter = $this->getMessageFormatter();
@@ -65,7 +65,7 @@ class DebugMiddleware
      *
      * @return \Closure
      */
-    private function onRejected(RequestInterface $request) : \Closure
+    private function onRejected(RequestInterface $request): \Closure
     {
         return function ($reason) use ($request) {
             $formatter = $this->getMessageFormatter();
@@ -81,7 +81,7 @@ class DebugMiddleware
      *
      * @return MessageFormatter
      */
-    private function getMessageFormatter() : MessageFormatter
+    private function getMessageFormatter(): MessageFormatter
     {
         return new MessageFormatter(MessageFormatter::DEBUG);
     }
@@ -93,7 +93,7 @@ class DebugMiddleware
      *
      * @return void
      */
-    private function logMessage(string $msg) : void
+    private function logMessage(string $msg): void
     {
         $log = \LoggerManager::getLogger();
         $log->debug("sugar connect: client: http: {$msg}");

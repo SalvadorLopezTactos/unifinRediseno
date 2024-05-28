@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -18,7 +17,7 @@
  ********************************************************************************/
 
 
-$mod_strings = array (
+$mod_strings = [
     'LNK_NEW_CALL' => 'Log hovorů',
     'LNK_NEW_MEETING' => 'Harmonogram jednání',
     'LNK_NEW_TASK' => 'Přidat úkol',
@@ -48,7 +47,7 @@ $mod_strings = array (
     'COLUMN_TITLE_EXT2' => 'Speciální pole 2',
     'COLUMN_TITLE_EXT3' => 'Speciální pole 3',
     'COLUMN_TITLE_FRAME_HEIGHT' => 'Výška IFrame',
-    'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
+    'COLUMN_TITLE_HTML_CONTENT' => 'HTML',
     'COLUMN_TITLE_URL' => 'Výchozí URL',
     'COLUMN_TITLE_AUDIT' => 'Auditovat?',
     'COLUMN_TITLE_PII' => 'Osobní informace',
@@ -81,7 +80,7 @@ $mod_strings = array (
     'LBL_DEFAULT_VALUE' => 'Výchozí hodnota',
     'LBL_AUDITED' => 'Revidovaný',
     'LBL_REPORTABLE' => 'Reportovatelné',
-    'ERR_RESERVED_FIELD_NAME' => "Rezervovaná klávesa",
+    'ERR_RESERVED_FIELD_NAME' => 'Rezervovaná klávesa',
     'ERR_SELECT_FIELD_TYPE' => 'Prosím vyberte typ pole',
     'ERR_FIELD_NAME_ALREADY_EXISTS' => 'Název pole již existuje',
     'ERR_FIELD_NAME_NON_DB_CHARS' => 'Název pole by měl obsahovat pouze následující znaky: a-zA-Z_',
@@ -120,4 +119,4 @@ $mod_strings = array (
     'LBL_DONE' => 'Dokončeno',
     'LBL_EXE_NON_SIM_MODE' => 'Vyvolat nesimulační mód',
     'LBL_CALCULATION_VISIBLE' => 'Zviditelnit pro výpočty',
-);
+];

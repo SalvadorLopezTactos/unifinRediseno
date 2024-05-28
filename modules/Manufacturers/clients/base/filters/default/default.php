@@ -9,12 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$viewdefs['Manufacturers']['base']['filter']['default'] = array(
+$viewdefs['Manufacturers']['base']['filter']['default'] = [
     'default_filter' => 'all_records',
-    'fields' => array(
-        'name' => array(),
-        'status' => array(),
-    ),
-    'quicksearch_field' => array('name'),
+    'fields' => [
+        'name' => [],
+        'status' => [],
+    ],
+    'quicksearch_field' => ['name'],
     'quicksearch_priority' => 1,
-);
+];

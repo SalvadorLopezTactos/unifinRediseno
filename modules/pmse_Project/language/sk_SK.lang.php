@@ -11,26 +11,26 @@
  */
 
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Definície procesov',
-  'LBL_MODULE_TITLE' => 'Definície procesov',
-  'LBL_MODULE_NAME_SINGULAR' => 'Definícia procesu',
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Definície procesov',
+    'LBL_MODULE_TITLE' => 'Definície procesov',
+    'LBL_MODULE_NAME_SINGULAR' => 'Definícia procesu',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na definície procesov',
+    'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na definície procesov',
 
-  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Informačný panel so záznamom definícií procesov',
-  'LNK_LIST' => 'Zobraziť definície procesov',
-  'LNK_NEW_PMSE_PROJECT' => 'Vytvoriť definíciu procesu',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Importovať definície procesov',
+    'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Informačný panel so záznamom definícií procesov',
+    'LNK_LIST' => 'Zobraziť definície procesov',
+    'LNK_NEW_PMSE_PROJECT' => 'Vytvoriť definíciu procesu',
+    'LNK_IMPORT_PMSE_PROJECT' => 'Importovať definície procesov',
 
-  'LBL_PRJ_STATUS' => 'Stav',
-  'LBL_PRJ_MODULE' => 'Cieľový modul',
-  'LBL_PRJ_RUN_ORDER' => 'Poradie spustenia',
-  'LBL_PMSE_BUTTON_SAVE' => 'Uložiť',
-  'LBL_PMSE_BUTTON_CANCEL' => 'Zrušiť',
-  'LBL_PMSE_BUTTON_YES' => 'Áno',
-  'LBL_PMSE_BUTTON_NO' => 'Nie',
-  'LBL_PMSE_BUTTON_OK' => 'Ok',
+    'LBL_PRJ_STATUS' => 'Stav',
+    'LBL_PRJ_MODULE' => 'Cieľový modul',
+    'LBL_PRJ_RUN_ORDER' => 'Poradie spustenia',
+    'LBL_PMSE_BUTTON_SAVE' => 'Uložiť',
+    'LBL_PMSE_BUTTON_CANCEL' => 'Zrušiť',
+    'LBL_PMSE_BUTTON_YES' => 'Áno',
+    'LBL_PMSE_BUTTON_NO' => 'Nie',
+    'LBL_PMSE_BUTTON_OK' => 'Ok',
     'LBL_PMSE_FORM_ERROR' => 'Pred pokračovaním odstráňte všetky chyby.',
 
     'LBL_PMSE_LABEL_DESIGN' => 'Navrhnúť',
@@ -102,7 +102,7 @@ $mod_strings = array (
     'LBL_PMSE_ADAM_DESIGNER_TASK' => 'Aktivita',
     'LBL_PMSE_ADAM_DESIGNER_ACTION' => 'Akcia',
     'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => 'Úvodná udalosť záujemcu',
-    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Úvodná udalosť príležitosti' ,
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => 'Úvodná udalosť príležitosti',
     'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => 'Úvodná udalosť dokumentu',
     'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => 'Úvodná udalosť',
     'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => 'Počkajte na udalosť',
@@ -505,4 +505,4 @@ $mod_strings = array (
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Obchodné pravidlo',
     'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Akcia obchodného pravidla',
     'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Šablóna e-mailu',
-);
+];

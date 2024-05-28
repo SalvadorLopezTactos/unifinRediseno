@@ -36,7 +36,7 @@ if (isset($_SESSION['licenseKey_submitted']) && ($_SESSION['licenseKey_submitted
 
 $dbCreate = "({$mod_strings['LBL_CONFIRM_WILL']} ";
 if (empty($_SESSION['setup_db_create_database'])) {
-	$dbCreate .= $mod_strings['LBL_CONFIRM_NOT'];
+    $dbCreate .= $mod_strings['LBL_CONFIRM_NOT'];
 }
 $dbCreate .= " {$mod_strings['LBL_CONFIRM_BE_CREATED']})";
 
@@ -57,9 +57,9 @@ $demoData = empty($_SESSION['demoData']) ? 'no' : $_SESSION['demoData'];
 $demoData = ($demoData == 'no') ? $mod_strings['LBL_NO'] : $mod_strings['LBL_YES'];
 
 // Populate the default date format, time format, and language for the system
-$defaultDateFormat = "";
-$defaultTimeFormat = "";
-$defaultLanguages = "";
+$defaultDateFormat = '';
+$defaultTimeFormat = '';
+$defaultLanguages = '';
 
 $sugar_config_defaults = get_sugar_config_defaults();
 if (isset($_REQUEST['default_language'])) {
@@ -68,7 +68,7 @@ if (isset($_REQUEST['default_language'])) {
 
 $langHeader = get_language_header();
 
-$out =<<<EOQ
+$out = <<<EOQ
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html {$langHeader}>
 <head>
@@ -111,8 +111,8 @@ $out =<<<EOQ
 EOQ;
 
 if ($db->supports('ssl')) {
-$SSLEnabled = !empty($_SESSION['setup_db_options']['ssl']) ? $mod_strings['LBL_YES'] : $mod_strings['LBL_NO'];
-$out .=<<<EOQ
+    $SSLEnabled = !empty($_SESSION['setup_db_options']['ssl']) ? $mod_strings['LBL_YES'] : $mod_strings['LBL_NO'];
+    $out .= <<<EOQ
             <tr>
                 <td></td>
                 <td><b>{$mod_strings['LBL_DBCONF_SSL_ENABLED']} </b></td>
@@ -121,7 +121,7 @@ $out .=<<<EOQ
 EOQ;
 }
 
-$out .=<<<EOQ
+$out .= <<<EOQ
             <tr>
                 <td></td>
                 <td><b>{$mod_strings['LBL_DBCONF_DB_ADMIN_USER']}</b></td>
@@ -133,20 +133,18 @@ $out .=<<<EOQ
                 <td>{$demoData}</td>
             </tr>
 EOQ;
-if($yesNoDropCreate){
-
-$out .=<<<EOQ
+if ($yesNoDropCreate) {
+    $out .= <<<EOQ
             <tr>
                 <td></td>
                 <td><b>{$mod_strings['LBL_DBCONF_DB_DROP']}</b></td>
                 <td>{$yesNoDropCreate}</td>
             </tr>
 EOQ;
-
 }
 
-if(isset($_SESSION['install_type'])  && !empty($_SESSION['install_type'])  && $_SESSION['install_type']=='custom'){
-$out .=<<<EOQ
+if (isset($_SESSION['install_type']) && !empty($_SESSION['install_type']) && $_SESSION['install_type'] == 'custom') {
+    $out .= <<<EOQ
 
 	   <tr><td colspan="3" align="left"></td></tr>
             <tr>
@@ -188,7 +186,7 @@ $out .=<<<EOQ
 EOQ;
 }
 
-$out .=<<<EOQ
+$out .= <<<EOQ
 
 	   <tr><td colspan="3" align="left"></td></tr>
           <tr><th colspan="3" align="left">{$mod_strings['LBL_SYSTEM_CREDS']}</th></tr>
@@ -226,31 +224,26 @@ $out .=<<<EOQ
 EOQ;
 
 
-
-
-
-
 $envString = '
-	   <tr><td colspan="3" align="left"></td></tr><tr><th colspan="3" align="left">'.$mod_strings['LBL_SYSTEM_ENV'].'</th></tr>';
+	   <tr><td colspan="3" align="left"></td></tr><tr><th colspan="3" align="left">' . $mod_strings['LBL_SYSTEM_ENV'] . '</th></tr>';
 
-    // PHP VERSION
-        $envString .='
+// PHP VERSION
+$envString .= '
           <tr>
              <td></td>
-            <td><b>'.$mod_strings['LBL_CHECKSYS_PHPVER'].'</b></td>
-            <td >'.constant('PHP_VERSION').'</td>
+            <td><b>' . $mod_strings['LBL_CHECKSYS_PHPVER'] . '</b></td>
+            <td >' . constant('PHP_VERSION') . '</td>
           </tr>';
 
 
 //Begin List of already known good variables.  These were checked during the initial sys check
 // XML Parsing
-        $envString .='
+$envString .= '
       <tr>
         <td></td>
-        <td><strong>'.$mod_strings['LBL_CHECKSYS_XML'].'</strong></td>
-        <td  >'.$mod_strings['LBL_CHECKSYS_OK'].'</td>
+        <td><strong>' . $mod_strings['LBL_CHECKSYS_XML'] . '</strong></td>
+        <td  >' . $mod_strings['LBL_CHECKSYS_OK'] . '</td>
       </tr>';
-
 
 
 // mbstrings
@@ -266,21 +259,21 @@ if ($mb > 1) {
 $error_found = true;
 
 // memory limit
-$memory_msg = "";
+$memory_msg = '';
 
 // CL - fix for 9183 (if memory_limit is enabled we will honor it and check it; otherwise use unlimited)
 $memory_limit = ini_get('memory_limit');
 if (empty($memory_limit)) {
-    $memory_limit = "-1";
+    $memory_limit = '-1';
 }
 if (!defined('SUGARCRM_MIN_MEM')) {
     define('SUGARCRM_MIN_MEM', 40 * 1024 * 1024);
 }
 $sugarMinMem = constant('SUGARCRM_MIN_MEM');
 // logic based on: http://us2.php.net/manual/en/ini.core.php#ini.memory-limit
-if ($memory_limit == "") {          // memory_limit disabled at compile time, no memory limit
+if ($memory_limit == '') {          // memory_limit disabled at compile time, no memory limit
     $memory_msg = "<b>{$mod_strings['LBL_CHECKSYS_MEM_OK']}</b>";
-} elseif ($memory_limit == "-1") {   // memory_limit enabled, but set to unlimited
+} elseif ($memory_limit == '-1') {   // memory_limit enabled, but set to unlimited
     $memory_msg = "{$mod_strings['LBL_CHECKSYS_MEM_UNLIMITED']}";
 } else {
     $mem_display = $memory_limit;
@@ -290,8 +283,10 @@ if ($memory_limit == "") {          // memory_limit disabled at compile time, no
     switch (strtoupper($matches[2])) {
         case 'G':
             $num = $num * 1024;
+            // no break
         case 'M':
             $num = $num * 1024;
+            // no break
         case 'K':
             $num = $num * 1024;
     }
@@ -313,7 +308,7 @@ if (function_exists('gzclose')) {
 }
 
 // zip
-if (class_exists("ZipArchive")) {
+if (class_exists('ZipArchive')) {
     $zipStatus = "{$mod_strings['LBL_CHECKSYS_OK']}";
 } else {
     $zipStatus = "<span class='stop'><b>{$mod_strings['ERR_CHECKSYS_ZIP']}</b></span>";
@@ -354,7 +349,7 @@ if (function_exists('imagecreatetruecolor')) {
 }
 
 // Suhosin allow to use upload://
-if (UploadStream::getSuhosinStatus() == true || (strpos(ini_get('suhosin.perdir'), 'e') !== false && strpos($_SERVER["SERVER_SOFTWARE"], 'Microsoft-IIS') === false)) {
+if (UploadStream::getSuhosinStatus() == true || (strpos(ini_get('suhosin.perdir'), 'e') !== false && strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') === false)) {
     $suhosinStatus = "{$mod_strings['LBL_CHECKSYS_OK']}";
 } else {
     $suhosinStatus = "<span class='stop'><b>{$app_strings['ERR_SUHOSIN']}</b></span>";
@@ -362,17 +357,21 @@ if (UploadStream::getSuhosinStatus() == true || (strpos(ini_get('suhosin.perdir'
 $uploadStream = UploadStream::STREAM_NAME;
 
 // PHP.ini
-$phpIniLocation = get_cfg_var("cfg_file_path");
+$phpIniLocation = get_cfg_var('cfg_file_path');
 
 // CRON Settings
-if (!isset($sugar_config['default_language']))
+if (!isset($sugar_config['default_language'])) {
     $sugar_config['default_language'] = $_SESSION['default_language'] ?? '';
-if (!isset($sugar_config['cache_dir']))
+}
+if (!isset($sugar_config['cache_dir'])) {
     $sugar_config['cache_dir'] = $sugar_config_defaults['cache_dir'];
-if (!isset($sugar_config['site_url']))
+}
+if (!isset($sugar_config['site_url'])) {
     $sugar_config['site_url'] = $_SESSION['setup_site_url'] ?? '';
-if (!isset($sugar_config['translation_string_prefix']))
+}
+if (!isset($sugar_config['translation_string_prefix'])) {
     $sugar_config['translation_string_prefix'] = $sugar_config_defaults['translation_string_prefix'];
+}
 $mod_strings_scheduler = return_module_language($GLOBALS['current_language'], 'Schedulers');
 $error = '';
 
@@ -420,4 +419,4 @@ $sugar_smarty->assign('suhosinStatus', $suhosinStatus);
 $sugar_smarty->assign('uploadStream', $uploadStream);
 $sugar_smarty->assign('phpIniLocation', $phpIniLocation);
 
-$sugar_smarty->display("install/templates/confirmSettings.tpl");
+$sugar_smarty->display('install/templates/confirmSettings.tpl');

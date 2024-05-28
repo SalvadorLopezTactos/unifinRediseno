@@ -37,10 +37,10 @@ class OpportunitiesDefaults
     public static function getDefaults()
     {
         // default opps config setup
-        return array(
+        return [
             // this is used to indicate the default way to view Opportunities
             'opps_view_by' => 'Opportunities', // Options: 'Opportunities', 'RevenueLineItems'
-        );
+        ];
     }
 
     /**

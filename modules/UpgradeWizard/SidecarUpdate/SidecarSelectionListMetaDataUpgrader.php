@@ -60,7 +60,6 @@ class SidecarSelectionListMetaDataUpgrader extends SidecarAbstractMetaDataUpgrad
      */
     public function upgradeCheck()
     {
-        // Custom files are converted by the upgrade script "7_ConvertPopupListView.php".
         if ($this->client != 'base' || $this->type != 'base') {
             return false;
         }
@@ -76,7 +75,5 @@ class SidecarSelectionListMetaDataUpgrader extends SidecarAbstractMetaDataUpgrad
      */
     public function setLegacyViewdefs()
     {
-
     }
-
 }

@@ -10,11 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => '已报价单项列表仪表板',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => '已报价单项档案仪表板',
     'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => '已报价单项焦点抽屉',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '报价明细项目时间轴',
 
     'LBL_CAMPAIGN_PRODUCT' => '市场活动已报价单项',
     'LBL_MODULE_NAME' => '已报价单项',
@@ -183,4 +184,4 @@ $mod_strings = array(
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' （新的已报价单项）',
     'LBL_DISCOUNT_PERCENT' => '百分比',
     'LBL_DISCOUNT_TYPE' => '折扣类型',
-);
+];

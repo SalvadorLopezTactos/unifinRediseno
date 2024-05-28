@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$mod_strings = array(
+$mod_strings = [
     'LBL_MODULE_NAME' => 'Baza de cunostinte',
     'LBL_MODULE_NAME_SINGULAR' => 'Articol din baza de cunoştinţe',
     'LBL_MODULE_TITLE' => 'Articolul de baza a cunoasterilor',
@@ -17,4 +17,4 @@ $mod_strings = array(
     'LBL_KEYWORDS' => 'Cuvinte cheie:',
     'LBL_CONTENT' => 'Continut',
     'LBL_ATTACHMENTS' => 'Atasate',
-);
+];

@@ -251,7 +251,7 @@ class RememberMeToken implements RememberMeTokenInterface
      */
     public function serialize(): ?string
     {
-        return serialize($this->__serialize());
+        return serialize($this->token);
     }
 
     /**
@@ -259,7 +259,7 @@ class RememberMeToken implements RememberMeTokenInterface
      */
     public function unserialize($data): void
     {
-        $this->__unserialize($data);
+        $this->token = unserialize($data, ['allowed_classes' => false]);
     }
 
     /**
@@ -270,13 +270,21 @@ class RememberMeToken implements RememberMeTokenInterface
         return SRNConverter::fromString($this->getSRN())->getTenantId();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function __serialize(): array
     {
-        return $this->token->__serialize();
+        return [
+            'token' => $this->token,
+        ];
     }
 
+    /**
+     * @inheritDoc
+     */
     public function __unserialize(array $data): void
     {
-        $this->token = unserialize($data, false);
+        $this->token = $data['token'];
     }
 }

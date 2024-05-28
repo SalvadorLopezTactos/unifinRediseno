@@ -10,10 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:
  ********************************************************************************/
 
-$_REQUEST['edit']='true';
-include ("modules/Releases/index.php");
-?>
+$_REQUEST['edit'] = 'true';
+include 'modules/Releases/index.php';

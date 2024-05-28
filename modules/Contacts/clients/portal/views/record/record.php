@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,108 +12,98 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['Contacts']['portal']['view']['record'] = array(
+$viewdefs['Contacts']['portal']['view']['record'] = [
     'hashSync' => false,
-    'panels' => array(
-        array(
+    'panels' => [
+        [
             'name' => 'panel_header',
             'header' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'picture',
                     'type' => 'avatar',
                     'size' => 'large',
                     'dismiss_label' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'name',
                     'label' => 'LBL_NAME',
                     'dismiss_label' => true,
                     'type' => 'fullname',
-                    'fields' => array('salutation','first_name', 'last_name'),
-                ),
-            ),
-        ),
-        array(
+                    'fields' => ['salutation', 'first_name', 'last_name'],
+                ],
+            ],
+        ],
+        [
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'placeholders' => true,
-            'fields' =>
-            array(
-                array(
+            'fields' => [
+                [
                     'name' => 'title',
-                    'displayParams' =>
-                    array(
+                    'displayParams' => [
                         'colspan' => 2,
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'email',
-                    'displayParams' =>
-                    array(
+                    'displayParams' => [
                         'colspan' => 2,
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'portal_password',
                     'type' => 'change-my-password',
                     'label' => 'LBL_CONTACT_EDIT_PASSWORD',
-                    'displayParams' =>
-                    array(
+                    'displayParams' => [
                         'colspan' => 2,
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'phone_work',
-                    'displayParams' =>
-                    array(
+                    'displayParams' => [
                         'colspan' => 2,
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'primary_address_street',
-                    'displayParams' =>
-                    array(
+                    'displayParams' => [
                         'colspan' => 2,
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'primary_address_city',
-                    'displayParams' =>
-                    array(
+                    'displayParams' => [
                         'colspan' => 2,
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'primary_address_state',
                     'options' => 'state_dom',
-                    'displayParams' =>
-                    array(
+                    'displayParams' => [
                         'colspan' => 2,
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'primary_address_postalcode',
-                    'displayParams' =>
-                    array(
+                    'displayParams' => [
                         'colspan' => 2,
-                    ),
-                ),
-                array (
+                    ],
+                ],
+                [
                     'name' => 'primary_address_country',
                     'options' => 'countries_dom',
-                    'displayParams' =>
-                    array(
+                    'displayParams' => [
                         'colspan' => 2,
-                    ),
-                ),
-                array (
+                    ],
+                ],
+                [
                     'name' => 'preferred_language',
                     'type' => 'language',
                     'options' => 'available_language_dom',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

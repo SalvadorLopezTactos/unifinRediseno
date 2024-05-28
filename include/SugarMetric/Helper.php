@@ -35,11 +35,11 @@ class SugarMetric_Helper
         }
 
         if (is_file('config.php')) {
-            require_once('config.php');
+            require_once 'config.php';
         }
 
         if (is_file('config_override.php')) {
-            require_once('config_override.php');
+            require_once 'config_override.php';
         }
     }
 

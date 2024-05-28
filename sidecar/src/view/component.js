@@ -9,8 +9,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-const BeforeEvent = require('core/before-event');
-const User = require('core/user');
+const BeforeEvent = require('../core/before-event');
+const User = require('../core/user');
 
 /**
  * Extends `Backbone.View`. Represents the base view class for layouts, views,
@@ -305,7 +305,7 @@ const Component = Backbone.View.extend({
      *
      * Override this method to provide custom logic:
      * ```
-     * const ViewManager = require('view/view-manager');
+     * const ViewManager = require('./view-manager');
      * ViewManager.views.MyView = ViewManager.View.extend({
      *      _dispose: function() {
      *          // Perform custom clean-up. For example, clear timeout handlers, etc.

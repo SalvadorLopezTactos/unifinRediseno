@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array (
+$mod_strings = [
 
     //module strings.
     'LBL_MODULE_NAME' => 'Планшеты менеджера прогнозов',
@@ -35,14 +35,14 @@ $mod_strings = array (
     'LBL_FORECAST_TYPE' => 'Тип прогноза',
     'LBL_FORECAST_OPP_COUNT' => 'Итоговая сумма сделки',
     'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Количество сделок по воронке',
-    'LBL_FORECAST_OPP_WEIGH'=> 'Взвешенная сумма',
+    'LBL_FORECAST_OPP_WEIGH' => 'Взвешенная сумма',
     'LBL_FORECAST_USER' => 'Пользователь',
-    'LBL_DATE_COMMITTED'=> 'Дата совершения продажи',
+    'LBL_DATE_COMMITTED' => 'Дата совершения продажи',
     'LBL_DATE_ENTERED' => 'Дата создания',
     'LBL_DATE_MODIFIED' => 'Дата изменения',
     'LBL_CREATED_BY' => 'Создано',
     'LBL_DELETED' => 'Удалено',
-    'LBL_MODIFIED_USER_ID'=>'Изменено',
+    'LBL_MODIFIED_USER_ID' => 'Изменено',
     'LBL_WK_VERSION' => 'Версия',
     'LBL_WK_REVISION' => 'Ревизия',
 
@@ -59,68 +59,68 @@ $mod_strings = array (
     'LBL_QC_UPCOMING_FORECASTS' => 'Мои прогнозы',
     'LBL_QC_LAST_DATE_COMMITTED' => 'Дата последнего подтверждения прогноза',
     'LBL_QC_LAST_COMMIT_VALUE' => 'Последняя подтвержденная сумма прогноза',
-    'LBL_QC_HEADER_DELIM'=> 'Кому',
+    'LBL_QC_HEADER_DELIM' => 'Кому',
 
     //opportunity worksheet list view labels
-    'LBL_OW_OPPORTUNITIES' => "Сделка",
-    'LBL_OW_ACCOUNTNAME' => "Контрагент",
-    'LBL_OW_REVENUE' => "Сумма",
-    'LBL_OW_WEIGHTED' => "Взвешенная сумма",
-    'LBL_OW_MODULE_TITLE'=> 'Лист сделки',
-    'LBL_OW_PROBABILITY'=>'Вероятность продажи',
-    'LBL_OW_NEXT_STEP'=>'Следующий шаг',
-    'LBL_OW_DESCRIPTION'=>'Описание',
-    'LBL_OW_TYPE'=>'Тип',
+    'LBL_OW_OPPORTUNITIES' => 'Сделка',
+    'LBL_OW_ACCOUNTNAME' => 'Контрагент',
+    'LBL_OW_REVENUE' => 'Сумма',
+    'LBL_OW_WEIGHTED' => 'Взвешенная сумма',
+    'LBL_OW_MODULE_TITLE' => 'Лист сделки',
+    'LBL_OW_PROBABILITY' => 'Вероятность продажи',
+    'LBL_OW_NEXT_STEP' => 'Следующий шаг',
+    'LBL_OW_DESCRIPTION' => 'Описание',
+    'LBL_OW_TYPE' => 'Тип',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'Полный отчет',
-    'LBL_FDR_OPPORTUNITIES'=>'Продажи в прогнозе',
-    'LBL_FDR_WEIGH'=>'Взвешенная сумма продаж',
-    'LBL_FDR_COMMIT'=>'Выполненная сумма',
-    'LBL_FDR_DATE_COMMIT'=>'Дата совершения продажи',
+    'LBL_FDR_USER_NAME' => 'Полный отчет',
+    'LBL_FDR_OPPORTUNITIES' => 'Продажи в прогнозе',
+    'LBL_FDR_WEIGH' => 'Взвешенная сумма продаж',
+    'LBL_FDR_COMMIT' => 'Выполненная сумма',
+    'LBL_FDR_DATE_COMMIT' => 'Дата совершения продажи',
 
     //detail view.
     'LBL_DV_HEADER' => 'Прогнозы  лист',
     'LBL_DV_MY_FORECASTS' => 'Мои прогнозы',
-    'LBL_DV_MY_TEAM' => "Прогнозы моей команды" ,
+    'LBL_DV_MY_TEAM' => "Прогнозы моей команды",
     'LBL_DV_TIMEPERIODS' => 'Отчетные периоды',
     'LBL_DV_FORECAST_PERIOD' => 'Отчетный период по прогнозу',
     'LBL_DV_FORECAST_OPPORTUNITY' => 'Продажи по прогнозу',
     'LBL_SEARCH' => 'Выбрать',
     'LBL_SEARCH_LABEL' => 'Выбрать',
     'LBL_COMMIT_HEADER' => 'Подтверждение прогноза',
-    'LBL_DV_LAST_COMMIT_DATE' =>'Дата последнего подтверждения прогноза',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'Последние подтвержденные суммы прогноза',
+    'LBL_DV_LAST_COMMIT_DATE' => 'Дата последнего подтверждения прогноза',
+    'LBL_DV_LAST_COMMIT_AMOUNT' => 'Последние подтвержденные суммы прогноза',
     'LBL_DV_FORECAST_ROLLUP' => 'Смещение прогноза',
     'LBL_DV_TIMEPERIOD' => 'Период отчета',
     'LBL_DV_TIMPERIOD_DATES' => 'Диапазон дат',
     'LBL_LOADING_COMMIT_HISTORY' => 'Загружается история по прогнозу…',
 
     //list view
-    'LBL_LV_TIMPERIOD'=> 'Период отчета',
-    'LBL_LV_TIMPERIOD_START_DATE'=> 'Дата начала',
-    'LBL_LV_TIMPERIOD_END_DATE'=> 'Дата окончания',
-    'LBL_LV_TYPE'=> 'Тип прогноза',
-    'LBL_LV_COMMIT_DATE'=> 'Дата совершения продажи',
-    'LBL_LV_OPPORTUNITIES'=> 'Продажи',
-    'LBL_LV_WEIGH'=> 'Взвешенная сумма',
-    'LBL_LV_COMMIT'=> 'Подтвержденная сумма',
+    'LBL_LV_TIMPERIOD' => 'Период отчета',
+    'LBL_LV_TIMPERIOD_START_DATE' => 'Дата начала',
+    'LBL_LV_TIMPERIOD_END_DATE' => 'Дата окончания',
+    'LBL_LV_TYPE' => 'Тип прогноза',
+    'LBL_LV_COMMIT_DATE' => 'Дата совершения продажи',
+    'LBL_LV_OPPORTUNITIES' => 'Продажи',
+    'LBL_LV_WEIGH' => 'Взвешенная сумма',
+    'LBL_LV_COMMIT' => 'Подтвержденная сумма',
 
-    'LBL_COMMIT_NOTE'=> 'Укажите суммы, по которым Вы хотите вывести прогноз за выбранный отчетный период',
+    'LBL_COMMIT_NOTE' => 'Укажите суммы, по которым Вы хотите вывести прогноз за выбранный отчетный период',
 
-    'LBL_COMMIT_MESSAGE'=> 'Вы хотите вывести эти суммы в прогнозе?',
+    'LBL_COMMIT_MESSAGE' => 'Вы хотите вывести эти суммы в прогнозе?',
     'ERR_FORECAST_AMOUNT' => 'Необходимо ввести сумму прогноза в виде числа.',
 
     // js error strings
     'LBL_FC_START_DATE' => 'Дата начала',
     'LBL_FC_USER' => 'Запланировать для',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'Нет активных отчетных периодов для прогнозирования.',
-    'LBL_FDR_ADJ_AMOUNT'=>'Скорректированная сумма',
-    'LBL_SAVE_WOKSHEET'=>'Сохранить лист',
-    'LBL_RESET_WOKSHEET'=>'Сбросить данные листа',
-    'LBL_SHOW_CHART'=>'Просмотреть график',
-    'LBL_RESET_CHECK'=>'Все данные листа для выбранного отчетного периода и авторизованного пользователя будут удалены. Продолжить?',
+    'LBL_NO_ACTIVE_TIMEPERIOD' => 'Нет активных отчетных периодов для прогнозирования.',
+    'LBL_FDR_ADJ_AMOUNT' => 'Скорректированная сумма',
+    'LBL_SAVE_WOKSHEET' => 'Сохранить лист',
+    'LBL_RESET_WOKSHEET' => 'Сбросить данные листа',
+    'LBL_SHOW_CHART' => 'Просмотреть график',
+    'LBL_RESET_CHECK' => 'Все данные листа для выбранного отчетного периода и авторизованного пользователя будут удалены. Продолжить?',
 
     'LBL_CURRENCY' => 'Валюта',
     'LBL_CURRENCY_ID' => 'ID валюты',
@@ -149,6 +149,6 @@ $mod_strings = array (
     'LBL_HISTORY_LOG' => 'Последнее подтверждение',
     'LBL_NO_COMMIT' => 'Без предварительного подтверждения',
 
-    'LBL_MANGER_SAVED' => 'Manager сохранено'
+    'LBL_MANGER_SAVED' => 'Manager сохранено',
 
-);
+];

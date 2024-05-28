@@ -26,7 +26,7 @@ class State implements SplObserver, SplSubject
      * $sugar_config to determine if use of denormalized table is enabled
      * @var string
      */
-    public const CONFIG_KEY = "perfProfile.TeamSecurity";
+    public const CONFIG_KEY = 'perfProfile.TeamSecurity';
 
     /**#@+
      * State parameters
@@ -95,7 +95,7 @@ class State implements SplObserver, SplSubject
         }
 
         $this->isEnabled = false;
-        $modules = $this->config->get(self::CONFIG_KEY, array());
+        $modules = $this->config->get(self::CONFIG_KEY, []);
 
         foreach ($modules as $value) {
             if (!empty($value['use_denorm'])) {
@@ -230,7 +230,7 @@ class State implements SplObserver, SplSubject
      */
     public function isRebuildRunning()
     {
-        return (bool) $this->storage->get(self::STATE_REBUILD_RUNNING);
+        return (bool)$this->storage->get(self::STATE_REBUILD_RUNNING);
     }
 
     /**

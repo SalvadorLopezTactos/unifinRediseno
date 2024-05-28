@@ -21,16 +21,18 @@ class CalendarApi extends FilterApi
      * @var \LoggerManager|mixed
      */
     public $logger;
-    public function registerApiRest() {
-        return array(
-            'invitee_search' => array(
+
+    public function registerApiRest()
+    {
+        return [
+            'invitee_search' => [
                 'reqType' => 'GET',
-                'path' => array('Calendar', 'invitee_search'),
-                'pathVars' => array('', ''),
+                'path' => ['Calendar', 'invitee_search'],
+                'pathVars' => ['', ''],
                 'method' => 'inviteeSearch',
                 'shortHelp' => 'This method searches for people to invite to an event',
                 'longHelp' => 'modules/Calendar/clients/base/api/help/calendar_invitee_search_get_help.html',
-            ),
+            ],
             'getEvents' => [
                 'reqType' => 'POST',
                 'path' => ['Calendar', 'getEvents'],
@@ -114,7 +116,7 @@ class CalendarApi extends FilterApi
                 'rawReply' => true,
                 'minVersion' => '11.14',
             ],
-        );
+        ];
     }
 
     /**
@@ -143,7 +145,7 @@ class CalendarApi extends FilterApi
     public function inviteeSearch(ServiceBase $api, array $args)
     {
         $api->action = 'list';
-        $this->requireArgs($args, array('q', 'module_list', 'search_fields', 'fields'));
+        $this->requireArgs($args, ['q', 'module_list', 'search_fields', 'fields']);
 
         //make legacy search request
         $params = $this->buildSearchParams($args);
@@ -152,7 +154,7 @@ class CalendarApi extends FilterApi
         return $this->transformInvitees($api, $args, $searchResults);
     }
 
-     /**
+    /**
      * Get events
      *
      * @param ServiceBase $api
@@ -257,7 +259,7 @@ class CalendarApi extends FilterApi
             }
         }
 
-        $numberOfCalendarsPrepared = count($calendarsPrepared);
+        $numberOfCalendarsPrepared = safeCount($calendarsPrepared);
         $this->logger->debug("prepareCalendars - prepared {$numberOfCalendarsPrepared} calendars");
         return $calendarsPrepared;
     }
@@ -278,7 +280,7 @@ class CalendarApi extends FilterApi
                 }
             }
         }
-        if (count($userIds) >= 1) {
+        if (safeCount($userIds) >= 1) {
             $userSeed = BeanFactory::newBean('Users');
 
             $fields = ['id', 'first_name', 'last_name'];
@@ -302,12 +304,14 @@ class CalendarApi extends FilterApi
     /**
      * Update Record
      *
-     * @param  ServiceBase $api
-     * @param  array $args
+     * @param ServiceBase $api
+     * @param array $args
      * @return bool
      */
     public function updateRecord(ServiceBase $api, array $args): bool
     {
+        $start = null;
+        $end = null;
         global $timedate, $current_user;
 
         $calendarBean = BeanFactory::retrieveBean('Calendar', $args['calendarId']);
@@ -391,7 +395,7 @@ class CalendarApi extends FilterApi
             $targetBean->{$calendarBean->event_end} = $end;
         }
 
-        
+
         if (($calendarBean->calendar_module == 'Calls' || $calendarBean->calendar_module == 'Meetings')
             && isset($args['sendInvites']) && $args['sendInvites']) {
             $usersIds = [];
@@ -441,7 +445,7 @@ class CalendarApi extends FilterApi
      * @param String $module
      * @return String
      */
-    public function getFieldType(String $fieldName, String $module): String
+    public function getFieldType(string $fieldName, string $module): string
     {
         $db = \DBManagerFactory::getInstance();
         $bean = \BeanFactory::newBean($module);
@@ -467,9 +471,9 @@ class CalendarApi extends FilterApi
             } else {
                 //get the event already added and add the assigned_user_id to eventUsers
                 //this way we know the event appears for multiple users and configurations
-                for ($i = 0; $i < count($result); $i++) {
+                for ($i = 0; $i < safeCount($result); $i++) {
                     if ($result[$i]['id'] == $event['id']
-                        && !in_array($event['eventUsers'][0], $result[$i]['eventUsers'])
+                        && !safeInArray($event['eventUsers'][0], $result[$i]['eventUsers'])
                     ) {
                         $result[$i]['eventUsers'][] = $event['eventUsers'][0];
                     }
@@ -496,7 +500,7 @@ class CalendarApi extends FilterApi
         $dataFormatted = [];
         $invitees = [];
 
-        if (count($data) > 0 &&
+        if (safeCount($data) > 0 &&
             ($calendarBean->calendar_module == 'Calls' || $calendarBean->calendar_module == 'Meetings')) {
             $invitees = $this->getAllInvitees($data, $calendarBean->calendar_module);
         }
@@ -517,11 +521,11 @@ class CalendarApi extends FilterApi
         $relIds = [];
         $dblClickAction = explode(':', $calendarBean->dblclick_event);
 
-        $dblClickField = (is_array($dblClickAction) && count($dblClickAction) === 3) ? $dblClickAction[2] : null;
-        $dblClickTargetModule = (is_array($dblClickAction) && count($dblClickAction) === 3) ? $dblClickAction[1] : null;
-        
+        $dblClickField = (is_array($dblClickAction) && safeCount($dblClickAction) === 3) ? $dblClickAction[2] : null;
+        $dblClickTargetModule = (is_array($dblClickAction) && safeCount($dblClickAction) === 3) ? $dblClickAction[1] : null;
+
         $seed = BeanFactory::newBean($calendarBean->calendar_module);
-        
+
         if ($dblClickField && $dblClickTargetModule !== 'self' &&
             array_key_exists('link', $seed->field_defs[$dblClickField])) {
             $linkName = $seed->field_defs[$dblClickField]['link'];
@@ -533,13 +537,13 @@ class CalendarApi extends FilterApi
                 'relField' => $dblClickField,
                 'lhsKey' => $seed->$linkName->relationship->def['join_key_lhs'],
                 'rhsKey' => $seed->$linkName->relationship->def['join_key_rhs'],
-                'side' =>  !empty($seed->$linkName) ? $seed->$linkName->getSide() : '',
+                'side' => !empty($seed->$linkName) ? $seed->$linkName->getSide() : '',
             ];
-    
+
             if (isset($seed->field_defs[$dblClickField]['source']) &&
                 $seed->field_defs[$dblClickField]['source'] === 'non-db' &&
                 !empty($seed->$linkName->relationship->def['table'])) {
-                    $relIds = $this->getAllRelatedRecords($relOpts, $data);
+                $relIds = $this->getAllRelatedRecords($relOpts, $data);
             }
         }
 
@@ -616,7 +620,7 @@ class CalendarApi extends FilterApi
      * @param Array $rawEvent Record data from db
      * @return String
      */
-    protected function compileTemplatePrototype(SugarBean $calendarBean, $beanField, array $rawEvent): String
+    protected function compileTemplatePrototype(SugarBean $calendarBean, $beanField, array $rawEvent): string
     {
         global $dictionary, $timedate;
 
@@ -670,7 +674,7 @@ class CalendarApi extends FilterApi
      * @param String $template
      * @return Array
      */
-    public function extractFieldsFromTemplate(String $template): array
+    public function extractFieldsFromTemplate(string $template): array
     {
         $fields = [];
 
@@ -678,7 +682,7 @@ class CalendarApi extends FilterApi
 
         if (is_integer($pregRes)) {
             foreach ($matches as $val) {
-                if (is_array($val) && count($val) > 3) {
+                if (is_array($val) && safeCount($val) > 3) {
                     $matchedField = $val[3];
                     $fields[] = $matchedField;
                 }
@@ -699,7 +703,7 @@ class CalendarApi extends FilterApi
      * @param String $fieldValue
      * @return String
      */
-    public function getFieldDisplayInSugar(String $moduleName, String $fieldName, String $fieldValue): String
+    public function getFieldDisplayInSugar(string $moduleName, string $fieldName, string $fieldValue): string
     {
         global $dictionary, $app_list_strings, $timedate;
 
@@ -714,7 +718,7 @@ class CalendarApi extends FilterApi
             }
         }
 
-        $dateTypes = array('date', 'datetime', 'datecombo', 'datetimecombo');
+        $dateTypes = ['date', 'datetime', 'datecombo', 'datetimecombo'];
         if (in_array($fieldDef['type'], $dateTypes)) {
             $dateTimeObject = new DateTime($fieldValue);
             if ($dateTimeObject) {
@@ -830,7 +834,7 @@ class CalendarApi extends FilterApi
             if ($args['calendarFilter'] == 'my_calendars') {
                 foreach ($calendars as $calId => &$calendar) {
                     $calendar['userId'] = 'current_user';
-                    $calendar['userName']  = $current_user->name;
+                    $calendar['userName'] = $current_user->name;
                 }
             } elseif ($args['calendarFilter'] == 'other_calendars') {
                 $newCalendars = [];
@@ -915,7 +919,7 @@ class CalendarApi extends FilterApi
 
         $result = $sq->execute();
 
-        if (count($result) == 0) {
+        if (safeCount($result) == 0) {
             return [];
         } else {
             foreach ($result as $row) {
@@ -931,9 +935,9 @@ class CalendarApi extends FilterApi
                     'end_field' => $row['event_end'],
                     'dblclick_event' => $row['dblclick_event'],
                     'calendar_type' => $row['calendar_type'],
-                    'allow_create' => (bool) $row['allow_create'],
-                    'allow_update' => (bool) $row['allow_update'],
-                    'allow_delete' => (bool) $row['allow_delete'],
+                    'allow_create' => (bool)$row['allow_create'],
+                    'allow_update' => (bool)$row['allow_update'],
+                    'allow_delete' => (bool)$row['allow_delete'],
                     'objName' => $objName,
                 ];
 
@@ -1011,13 +1015,13 @@ class CalendarApi extends FilterApi
             $teamsQuery->select()->fieldRaw($db->concat('teams', ['name', 'name_2']), 'name');
             $teamsQuery->select()->fieldRaw("'Teams'", 'module');
             $teamsQuery->from($teamSeed);
-            
+
             if (isset($args['q'])) {
                 $queryOr = $teamsQuery->where()->queryOr();
                 $queryOr->starts('name', $args['q']);
                 $queryOr->starts('name_2', $args['q']);
             }
-            
+
             if (!$current_user->isAdmin()) {
                 $teamsQuery->join('users', ['joinType' => 'INNER']);
                 $teamsQuery->where()->equals('team_memberships.user_id', $current_user->id);
@@ -1025,7 +1029,7 @@ class CalendarApi extends FilterApi
 
             $sq->union($teamsQuery);
         }
-        
+
         //make sure to force an order so that the offset is relevant
         $sq->orderBy('date_entered');
         $sq->orderBy('id');
@@ -1035,7 +1039,7 @@ class CalendarApi extends FilterApi
 
         $records = $sq->execute();
 
-        if (count($records) == $maxPerPage + 1) {
+        if (safeCount($records) == $maxPerPage + 1) {
             array_pop($records);
             $res['next_offset'] = $args['offset'] + $maxPerPage;
         } else {
@@ -1053,7 +1057,7 @@ class CalendarApi extends FilterApi
     /**
      * Get all invitees of Calls/Meetings events
      *
-     * @param  array $records
+     * @param array $records
      * @param string $calendarModule
      * @return array
      */
@@ -1145,7 +1149,7 @@ class CalendarApi extends FilterApi
      * @param string $module
      * @return array
      */
-    public function formatInvitees(array $recordPersons, string $module) :array
+    public function formatInvitees(array $recordPersons, string $module): array
     {
         $seed = BeanFactory::newBean($module);
         $tableName = $seed->getTableName();
@@ -1182,8 +1186,8 @@ class CalendarApi extends FilterApi
      *
      * Get the invitees and their accept status
      *
-     * @param  array $options
-     * @param  array $recordIds
+     * @param array $options
+     * @param array $recordIds
      * @return array
      */
     public function getRecordsInvitees(array $options, array $recordIds): array
@@ -1221,8 +1225,8 @@ class CalendarApi extends FilterApi
     /**
      * Get invitees names
      *
-     * @param  array $userIds
-     * @param  string $moduleTable
+     * @param array $userIds
+     * @param string $moduleTable
      * @return array User Id and User Name
      */
     public function getInviteesNames(array $userIds, string $moduleTable): array
@@ -1248,11 +1252,11 @@ class CalendarApi extends FilterApi
     /**
      * Get calendar definitions based on ids given
      *
-     * @param  ServiceBase $api
-     * @param  array $args
+     * @param ServiceBase $api
+     * @param array $args
      * @return array
      */
-    public function getCalendarDefs(ServiceBase $api, array $args) :array
+    public function getCalendarDefs(ServiceBase $api, array $args): array
     {
         $calendarIds = [];
         foreach ($args['calendars'] as $key => $calendar) {
@@ -1277,7 +1281,7 @@ class CalendarApi extends FilterApi
      * @return array
      * @throws SugarApiExceptionNotAuthorized If we lack ACL access.
      */
-    public function getCalendarModules(ServiceBase $api, array $args) : array
+    public function getCalendarModules(ServiceBase $api, array $args): array
     {
         $result = [
             'modules' => [],
@@ -1288,7 +1292,7 @@ class CalendarApi extends FilterApi
         }
 
         $calendarModulesInDb = $this->queryCalendarModules();
-        if (is_array($calendarModulesInDb) == true && count($calendarModulesInDb) > 0) {
+        if (is_array($calendarModulesInDb) == true && safeCount($calendarModulesInDb) > 0) {
             foreach ($calendarModulesInDb as $row) {
                 if ($this->hasAccess($row['calendar_module'], 'save') && $row['allow_create']) {
                     $objName = BeanFactory::getObjectName($row['calendar_module']);
@@ -1350,23 +1354,23 @@ class CalendarApi extends FilterApi
         $fieldList = explode(',', $args['fields']);
         $fieldList = array_merge($fieldList, $searchFields);
 
-        $conditions = array();
+        $conditions = [];
         foreach ($searchFields as $searchField) {
-            $conditions[] = array(
+            $conditions[] = [
                 'name' => $searchField,
                 'op' => 'starts_with',
                 'value' => $args['q'],
-            );
+            ];
         }
 
-        return array(
-            array(
+        return [
+            [
                 'modules' => $modules,
                 'group' => 'or',
                 'field_list' => $fieldList,
                 'conditions' => $conditions,
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -1396,24 +1400,26 @@ class CalendarApi extends FilterApi
     protected function transformInvitees(ServiceBase $api, array $args, $searchResults)
     {
         $resultList = $searchResults['result']['list'];
-        $records = array();
+        $records = [];
         foreach ($resultList as $result) {
             if (!empty($args['erased_fields'])) {
                 $options = ['erased_fields' => true, 'use_cache' => false, 'encode' => false];
                 $result['bean'] = BeanFactory::retrieveBean($result['bean']->module_dir, $result['bean']->id, $options);
             }
-            $record = $this->formatBean($api, $args, $result['bean']);
-            $highlighted = $this->getMatchedFields($args, $record, 1);
-            $record['_search'] = array(
-                'highlighted' => $highlighted,
-            );
-            $records[] = $record;
+            if (isset($result['bean']) && $result['bean'] instanceof SugarBean) {
+                $record = $this->formatBean($api, $args, $result['bean']);
+                $highlighted = $this->getMatchedFields($args, $record, 1);
+                $record['_search'] = [
+                    'highlighted' => $highlighted,
+                ];
+                $records[] = $record;
+            }
         }
 
-        return array(
+        return [
             'next_offset' => -1,
             'records' => $records,
-        );
+        ];
     }
 
     /**
@@ -1430,30 +1436,30 @@ class CalendarApi extends FilterApi
         $query = $args['q'];
         $searchFields = explode(',', $args['search_fields']);
 
-        $matchedFields = array();
+        $matchedFields = [];
         foreach ($searchFields as $searchField) {
             if (!isset($record[$searchField])) {
                 continue;
             }
 
-            $fieldValues = array();
+            $fieldValues = [];
             if ($searchField == 'email') {
                 //can be multiple email addresses
                 foreach ($record[$searchField] as $email) {
                     $fieldValues[] = $email['email_address'];
                 }
             } elseif (is_string($record[$searchField])) {
-                $fieldValues = array($record[$searchField]);
+                $fieldValues = [$record[$searchField]];
             }
 
             foreach ($fieldValues as $fieldValue) {
-                if (stripos($fieldValue, $query) !== false) {
-                    $matchedFields[$searchField] = array($fieldValue);
+                if (stripos($fieldValue, (string) $query) !== false) {
+                    $matchedFields[$searchField] = [$fieldValue];
                 }
             }
         }
 
-        $ret = array();
+        $ret = [];
         if (!empty($matchedFields) && is_array($matchedFields)) {
             $highlighter = new SugarSearchEngineHighlighter();
             $highlighter->setModule($record['_module']);
@@ -1518,7 +1524,7 @@ class CalendarApi extends FilterApi
 
         $restService = new RestService();
         $apiVersion = $restService->api_settings['maxVersion'];
-        $apiVersion  = str_replace('.', '_', $apiVersion);
+        $apiVersion = str_replace('.', '_', $apiVersion);
 
         $data = $args['calendarConfigurations'];
 

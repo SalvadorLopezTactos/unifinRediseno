@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -20,13 +19,9 @@
 global $theme;
 global $mod_strings;
 global $current_language;
-if(isset($_REQUEST['step']))
-{
-	$step = $_REQUEST['step'];
+if (isset($_REQUEST['step'])) {
+    $step = $_REQUEST['step'];
+} else {
+    $step = '1';
 }
-else
-{
-	$step = '1';
-}
-include ('modules/MailMerge/Step'. intval($step). '.php');
-?>
+include 'modules/MailMerge/Step' . intval($step) . '.php';

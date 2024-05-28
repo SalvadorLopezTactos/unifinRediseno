@@ -125,7 +125,7 @@ class PMSERelatedDependencyWrapper
      */
     public function processRelatedDependencies($eventData)
     {
-        $this->logger->info("Processing related Dependencies");
+        $this->logger->info('Processing related Dependencies');
         $relatedArray = $this->processEventCriteria($eventData['evn_criteria'], $eventData);
         $this->removeRelatedDependencies($eventData);
         $this->createRelatedDependencies($relatedArray);
@@ -140,16 +140,17 @@ class PMSERelatedDependencyWrapper
     public function processEventCriteria($eventCriteria, $eventData)
     {
 
+        $eventCriteria = $eventCriteria ?? '';
         $criteria = json_decode($eventCriteria);
-        $this->logger->debug("Obtaining dependencies for the following criteria" . print_r($criteria, true));
+        $this->logger->debug('Obtaining dependencies for the following criteria' . print_r($criteria, true));
 
-        $resultArray = array();
+        $resultArray = [];
         if ($eventData['evn_behavior'] !== 'CATCH') {
             return $resultArray;
         }
 
         if (is_array($criteria) && !empty($criteria)) {
-            $criteriaModules = array();
+            $criteriaModules = [];
             foreach ($criteria as $token) {
                 if ($token->expType == 'MODULE') {
                     $tmpObj = new stdClass();
@@ -177,7 +178,6 @@ class PMSERelatedDependencyWrapper
                         $resultArray[] = $tmpObj;
                         $criteriaModules[] = $tmpObj->rel_element_module;
                     }
-
                 }
             }
             if (empty($resultArray)) {
@@ -222,7 +222,7 @@ class PMSERelatedDependencyWrapper
      */
     public function getRelatedElementModule($tmpObject, $tmpToken)
     {
-        $this->logger->debug("Obtaining Related Module for the token: " . print_r($tmpToken, true));
+        $this->logger->debug('Obtaining Related Module for the token: ' . print_r($tmpToken, true));
 
         if ($tmpObject->rel_process_module == $tmpToken->expModule) {
             $tmpObject->rel_element_module = $tmpToken->expModule;
@@ -238,13 +238,13 @@ class PMSERelatedDependencyWrapper
      */
     public function removeRelatedDependencies($eventData)
     {
-        $this->logger->debug("Removing Related Dependencies for the event: " . print_r($eventData, true));
+        $this->logger->debug('Removing Related Dependencies for the event: ' . print_r($eventData, true));
 
         $relatedDependency = $this->getRelatedDependency();
-        while ($element = $relatedDependency->retrieve_by_string_fields(array(
-                'evn_id' => $eventData['id'],
-                'pro_id' => $eventData['pro_id']
-            ))) {
+        while ($element = $relatedDependency->retrieve_by_string_fields([
+            'evn_id' => $eventData['id'],
+            'pro_id' => $eventData['pro_id'],
+        ])) {
             $element->deleted = 1;
             $element->save();
         }
@@ -258,13 +258,13 @@ class PMSERelatedDependencyWrapper
      */
     public function removeActiveTimerEvents($eventData)
     {
-        $this->logger->debug("Removing sleeping timer events for the event: " . print_r($eventData, true));
+        $this->logger->debug('Removing sleeping timer events for the event: ' . print_r($eventData, true));
 
         $bpmFlowBean = BeanFactory::newBean('pmse_BpmFlow');
         $sq = new SugarQuery();
-        $sq->select(array('id'));
+        $sq->select(['id']);
         $sq->from($bpmFlowBean);
-        $sq->where()->equals('bpmn_id', $eventData['id'])->equals('cas_flow_status','SLEEPING');
+        $sq->where()->equals('bpmn_id', $eventData['id'])->equals('cas_flow_status', 'SLEEPING');
         $result = $sq->execute();
 
         foreach ($result as $row) {
@@ -293,7 +293,6 @@ class PMSERelatedDependencyWrapper
             $relatedDependency->new_with_id = false;
             $relatedDependency->save();
         }
-        $this->logger->debug("Creating " . (is_countable($resultArray) ? count($resultArray) : 0) . " Related Dependencies.");
-
+        $this->logger->debug('Creating ' . safeCount($resultArray) . ' Related Dependencies.');
     }
 }

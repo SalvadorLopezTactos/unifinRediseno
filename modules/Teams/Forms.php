@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
  * Description:  Contains a variety of utility functions used to display UI
  * components such as form headers and footers.  Intended to be modified on a per
  * theme basis.
@@ -25,16 +24,17 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  */
-function get_validate_record_js () {
-global $mod_strings;
-global $app_strings;
+function get_validate_record_js()
+{
+    global $mod_strings;
+    global $app_strings;
 
-$lbl_last_name = $mod_strings['LBL_LIST_LAST_NAME'];
-$lbl_user_name = $mod_strings['LBL_LIST_USER_NAME'];
-$err_missing_required_fields = $app_strings['ERR_MISSING_REQUIRED_FIELDS'];
-$err_invalid_email_address = $app_strings['ERR_INVALID_EMAIL_ADDRESS'];
+    $lbl_last_name = $mod_strings['LBL_LIST_LAST_NAME'];
+    $lbl_user_name = $mod_strings['LBL_LIST_USER_NAME'];
+    $err_missing_required_fields = $app_strings['ERR_MISSING_REQUIRED_FIELDS'];
+    $err_invalid_email_address = $app_strings['ERR_INVALID_EMAIL_ADDRESS'];
 
-$the_script  = <<<EOQ
+    $the_script = <<<EOQ
 
 <script type="text/javascript" language="Javascript">
 function verify_data(form) {
@@ -68,7 +68,5 @@ function verify_data(form) {
 
 EOQ;
 
-return $the_script;
+    return $the_script;
 }
-
-?>

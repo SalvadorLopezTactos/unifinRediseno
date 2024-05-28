@@ -18,6 +18,8 @@
 namespace Google\Service\HangoutsChat\Resource;
 
 use Google\Service\HangoutsChat\Media as MediaModel;
+use Google\Service\HangoutsChat\UploadAttachmentRequest;
+use Google\Service\HangoutsChat\UploadAttachmentResponse;
 
 /**
  * The "media" collection of methods.
@@ -43,6 +45,29 @@ class Media extends \Google\Service\Resource
     $params = ['resourceName' => $resourceName];
     $params = array_merge($params, $optParams);
     return $this->call('download', [$params], MediaModel::class);
+  }
+  /**
+   * Uploads an attachment. For an example, see [Upload media as a file
+   * attachment](https://developers.google.com/chat/api/guides/v1/media-and-
+   * attachments/upload). Requires user
+   * [authentication](https://developers.google.com/chat/api/guides/auth/users)
+   * and the `chat.messages` or `chat.messages.create` authorization scope. You
+   * can upload attachments up to 200 MB. Certain file types aren't supported. For
+   * details, see [File types blocked by Google Chat](https://support.google.com/c
+   * hat/answer/7651457?&co=GENIE.Platform%3DDesktop#File%20types%20blocked%20in%2
+   * 0Google%20Chat). (media.upload)
+   *
+   * @param string $parent Required. Resource name of the Chat space in which the
+   * attachment is uploaded. Format "spaces/{space}".
+   * @param UploadAttachmentRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return UploadAttachmentResponse
+   */
+  public function upload($parent, UploadAttachmentRequest $postBody, $optParams = [])
+  {
+    $params = ['parent' => $parent, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('upload', [$params], UploadAttachmentResponse::class);
   }
 }
 

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$mod_strings = array(
+$mod_strings = [
     'LBL_DEFAULT' => 'Standartní',
     'LBL_READ_WRITE' => 'Číst/Zapisovat',
     'LBL_READ_OWNER_WRITE' => 'Číst/Zapisovat svoje',
@@ -22,4 +22,4 @@ $mod_strings = array(
     'LBL_READ_SELECTED_TEAMS_WRITE' => 'Čtení/zápis (vlastník a vybrané týmy)',
     'LBL_SELECTED_TEAMS_READ_OWNER_WRITE' => 'Čtení (vlastník a vybrané týmy) / zápis vlastník',
     'LBL_SELECTED_TEAMS_READ_WRITE' => 'Čtení (vlastník a vybrané týmy) / zápis (vlastník a vybrané týmy)',
-);
+];

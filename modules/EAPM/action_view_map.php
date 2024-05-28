@@ -9,5 +9,4 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$action_view_map['displayproperties']= 'displayproperties';
- 
+$action_view_map['displayproperties'] = 'displayproperties';

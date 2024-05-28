@@ -15,7 +15,7 @@
  * Usage example:
  *
  * ```
- * const logger = require('utils/logger')({
+ * const logger = require('./logger')({
  *     level: 'DEBUG',
  * });
  *
@@ -134,7 +134,7 @@ const formatters = {
      * Default formatter for log messages.
      * Formats a log message as a string with log level and UTC timestamp.
      * ```
-     * const Logger = require('utils/logger');
+     * const Logger = require('./logger');
      *
      * // Log a trace message
      * Logger.trace('Blah-blah');

@@ -21,7 +21,8 @@ interface ExternalLoginInterface extends LoginInterface
      * @param array $returnQueryVars Query variables that should be added to the callback URL
      * @return string
      */
-    public function getLoginUrl($returnQueryVars = array());
+    public function getLoginUrl($returnQueryVars = []);
+
     /**
      * Get URL to follow to get logged out
      * @return string

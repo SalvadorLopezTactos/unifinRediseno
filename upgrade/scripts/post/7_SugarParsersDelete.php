@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Remove SugarParsers and ReportBuilder as they are no longer used by Forecasting
  */
@@ -20,8 +21,8 @@ class SugarUpgradeSugarParsersDelete extends UpgradeScript
 
     public function run()
     {
-        $files = array('include/SugarParsers',
-            'include/SugarCharts/ReportBuilder.php');
+        $files = ['include/SugarParsers',
+            'include/SugarCharts/ReportBuilder.php'];
         $this->upgrader->fileToDelete($files, $this);
     }
 }

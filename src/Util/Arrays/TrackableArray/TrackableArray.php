@@ -12,7 +12,6 @@
 
 namespace Sugarcrm\Sugarcrm\Util\Arrays\TrackableArray;
 
-
 /**
  * Class TrackableArray
  *
@@ -22,13 +21,13 @@ namespace Sugarcrm\Sugarcrm\Util\Arrays\TrackableArray;
  */
 class TrackableArray extends \ArrayObject
 {
-    protected $modifiedKeys = array();
+    protected $modifiedKeys = [];
 
-    protected $unsetKeys = array();
+    protected $unsetKeys = [];
 
     protected $track = false;
 
-    public function __construct($input = array(), $flags = 0, $ittr = "ArrayIterator")
+    public function __construct($input = [], $flags = 0, $ittr = 'ArrayIterator')
     {
         parent::__construct($input, $flags, $ittr);
         //All multidimensional arrays need to be converted as well.
@@ -37,7 +36,6 @@ class TrackableArray extends \ArrayObject
                 $this->offsetSet($key, $value);
             }
         }
-
     }
 
     /**
@@ -70,12 +68,11 @@ class TrackableArray extends \ArrayObject
             } else {
                 $tValue = new TrackableArray();
                 $tValue->enableTracking($this->track);
-                array_walk($value, function($val, $key) use ($tValue) {
+                array_walk($value, function ($val, $key) use ($tValue) {
                     $tValue->offsetSet($key, $val);
                 });
                 $value = $tValue;
             }
-
         }
         parent::offsetSet($offset, $value);
     }
@@ -169,7 +166,7 @@ class TrackableArray extends \ArrayObject
             $val = $this->offsetGet($key);
             if ($val instanceof self) {
                 if (!isset($array[$key]) || !is_array($array[$key])) {
-                    $array[$key] = array();
+                    $array[$key] = [];
                 }
                 $val->applyTrackedChangesToArray($array[$key]);
             } else {
@@ -191,7 +188,7 @@ class TrackableArray extends \ArrayObject
      */
     public function getChangedKeys($includeUnset = true)
     {
-        $modifiedSubArrays = array();
+        $modifiedSubArrays = [];
         foreach ($this as $key => $val) {
             if (($val instanceof self)) {
                 $subChanged = $val->getChangedKeys();
@@ -209,9 +206,9 @@ class TrackableArray extends \ArrayObject
         return array_unique($ret);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return (string) print_r($this, true);
+        return (string)print_r($this, true);
     }
 
 

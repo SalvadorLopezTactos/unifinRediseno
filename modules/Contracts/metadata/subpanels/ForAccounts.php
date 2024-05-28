@@ -10,56 +10,54 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$subpanel_layout = array(
-	'top_buttons' => array(
-		array('widget_class' => 'SubPanelTopCreateButton'),
-		array('widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'Contracts','mode'=>'MultiSelect'),
-	),
+$subpanel_layout = [
+    'top_buttons' => [
+        ['widget_class' => 'SubPanelTopCreateButton'],
+        ['widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'Contracts', 'mode' => 'MultiSelect'],
+    ],
 
-	'where' => '',
-	
-	
+    'where' => '',
 
-	'list_fields' => array(
-		'name'=>array(
-			'name'=>'name',		
-			'vname' => 'LBL_LIST_NAME',
-			'widget_class' => 'SubPanelDetailViewLink',
-		 	'module' => 'Contacts',
-			'width' => '33%',
-		),
-		'start_date'=>array(
-			'name'=>'start_date',		
-			'vname' => 'LBL_LIST_START_DATE',
-			'width' => '10%',
-		),
-		'end_date'=>array(
-			'name'=>'end_date',		
-			'vname' => 'LBL_LIST_END_DATE',
-			'width' => '10%',
-		),
-		'status'=>array(
-			'name'=>'status',		
-			'vname' => 'LBL_LIST_STATUS',
-			'width' => '10%',
-		),
-		'total_contract_value'=>array (
-			'name'=>'total_contract_value',		
-			'vname' => 'LBL_LIST_CONTRACT_VALUE',
-			'width' => '15%',
-		),
-		'edit_button'=>array(
-			'vname' => 'LBL_EDIT_BUTTON',
-			'widget_class' => 'SubPanelEditButton',
-		 	'module' => 'Contracts',
-			'width' => '5%',
-		),
-		'remove_button'=>array(
-			'vname' => 'LBL_REMOVE',
-			'widget_class' => 'SubPanelRemoveButton',
-		 	'module' => 'Contracts',
-			'width' => '5%',
-		),
-	),
-);		
-?>
+
+    'list_fields' => [
+        'name' => [
+            'name' => 'name',
+            'vname' => 'LBL_LIST_NAME',
+            'widget_class' => 'SubPanelDetailViewLink',
+            'module' => 'Contacts',
+            'width' => '33%',
+        ],
+        'start_date' => [
+            'name' => 'start_date',
+            'vname' => 'LBL_LIST_START_DATE',
+            'width' => '10%',
+        ],
+        'end_date' => [
+            'name' => 'end_date',
+            'vname' => 'LBL_LIST_END_DATE',
+            'width' => '10%',
+        ],
+        'status' => [
+            'name' => 'status',
+            'vname' => 'LBL_LIST_STATUS',
+            'width' => '10%',
+        ],
+        'total_contract_value' => [
+            'name' => 'total_contract_value',
+            'vname' => 'LBL_LIST_CONTRACT_VALUE',
+            'width' => '15%',
+        ],
+        'edit_button' => [
+            'vname' => 'LBL_EDIT_BUTTON',
+            'widget_class' => 'SubPanelEditButton',
+            'module' => 'Contracts',
+            'width' => '5%',
+        ],
+        'remove_button' => [
+            'vname' => 'LBL_REMOVE',
+            'widget_class' => 'SubPanelRemoveButton',
+            'module' => 'Contracts',
+            'width' => '5%',
+        ],
+    ],
+];

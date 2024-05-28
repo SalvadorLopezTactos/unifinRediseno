@@ -21,10 +21,6 @@ class TravelFlightsAirlineConfig extends \Google\Collection
 {
   protected $collection_key = 'localizedContactInfo';
   /**
-   * @var int
-   */
-  public $adwordsCid;
-  /**
    * @var string
    */
   public $alliance;
@@ -48,6 +44,8 @@ class TravelFlightsAirlineConfig extends \Google\Collection
    * @var string[]
    */
   public $fqtvPartnerCode;
+  protected $greenFaresInfoType = TravelFlightsAirlineConfigGreenFaresInfo::class;
+  protected $greenFaresInfoDataType = '';
   /**
    * @var string
    */
@@ -68,12 +66,16 @@ class TravelFlightsAirlineConfig extends \Google\Collection
   public $mid;
   protected $namesType = TravelFlightsNameCatalogProto::class;
   protected $namesDataType = '';
+  protected $passengerAssistanceUrlsType = TravelFlightsNameCatalogProto::class;
+  protected $passengerAssistanceUrlsDataType = '';
   /**
    * @var int
    */
   public $popularity;
   protected $shortNamesType = TravelFlightsNameCatalogProto::class;
   protected $shortNamesDataType = '';
+  protected $sustainabilityProgramUrlsType = TravelFlightsNameCatalogProto::class;
+  protected $sustainabilityProgramUrlsDataType = '';
   /**
    * @var string
    */
@@ -83,20 +85,6 @@ class TravelFlightsAirlineConfig extends \Google\Collection
   protected $waiverSummaryUrlsType = TravelFlightsNameCatalogProto::class;
   protected $waiverSummaryUrlsDataType = '';
 
-  /**
-   * @param int
-   */
-  public function setAdwordsCid($adwordsCid)
-  {
-    $this->adwordsCid = $adwordsCid;
-  }
-  /**
-   * @return int
-   */
-  public function getAdwordsCid()
-  {
-    return $this->adwordsCid;
-  }
   /**
    * @param string
    */
@@ -210,6 +198,20 @@ class TravelFlightsAirlineConfig extends \Google\Collection
     return $this->fqtvPartnerCode;
   }
   /**
+   * @param TravelFlightsAirlineConfigGreenFaresInfo
+   */
+  public function setGreenFaresInfo(TravelFlightsAirlineConfigGreenFaresInfo $greenFaresInfo)
+  {
+    $this->greenFaresInfo = $greenFaresInfo;
+  }
+  /**
+   * @return TravelFlightsAirlineConfigGreenFaresInfo
+   */
+  public function getGreenFaresInfo()
+  {
+    return $this->greenFaresInfo;
+  }
+  /**
    * @param string
    */
   public function setIataCode($iataCode)
@@ -294,6 +296,20 @@ class TravelFlightsAirlineConfig extends \Google\Collection
     return $this->names;
   }
   /**
+   * @param TravelFlightsNameCatalogProto
+   */
+  public function setPassengerAssistanceUrls(TravelFlightsNameCatalogProto $passengerAssistanceUrls)
+  {
+    $this->passengerAssistanceUrls = $passengerAssistanceUrls;
+  }
+  /**
+   * @return TravelFlightsNameCatalogProto
+   */
+  public function getPassengerAssistanceUrls()
+  {
+    return $this->passengerAssistanceUrls;
+  }
+  /**
    * @param int
    */
   public function setPopularity($popularity)
@@ -320,6 +336,20 @@ class TravelFlightsAirlineConfig extends \Google\Collection
   public function getShortNames()
   {
     return $this->shortNames;
+  }
+  /**
+   * @param TravelFlightsNameCatalogProto
+   */
+  public function setSustainabilityProgramUrls(TravelFlightsNameCatalogProto $sustainabilityProgramUrls)
+  {
+    $this->sustainabilityProgramUrls = $sustainabilityProgramUrls;
+  }
+  /**
+   * @return TravelFlightsNameCatalogProto
+   */
+  public function getSustainabilityProgramUrls()
+  {
+    return $this->sustainabilityProgramUrls;
   }
   /**
    * @param string

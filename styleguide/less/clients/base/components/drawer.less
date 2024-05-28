@@ -1,14 +1,14 @@
 /* Drawer Layout */
 #drawers > .drawer {
-  top: 0;
+  top: @headerNavHeight;
   bottom: 0;
-  z-index: @zindexFixedNavbar + 3;
+  z-index: @zindexFixedNavbar + 1;
   left: @sidebarNavWidth;
 }
 
 #content {
   .drawer {
-    .w-full();
+    width: 100%;
   }
 }
 
@@ -42,12 +42,17 @@
   }
 
   .main-pane {
-    top: 3.1rem;
+    top: 3rem;
+    margin-bottom: @headerNavHeight;
+
+    :not(.create) > .rowaction.btn {
+      border: none;
+    }
   }
 
   .headerpane {
-    top: 0;
-    .pt-0\.5();
+    top: @headerNavHeight;
+    padding-top: 0.125rem;
   }
 
   /* set drawer transitions */

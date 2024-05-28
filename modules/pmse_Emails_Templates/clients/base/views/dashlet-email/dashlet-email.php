@@ -11,121 +11,121 @@
  */
 
 
-$viewdefs['pmse_Emails_Templates']['base']['view']['dashlet-email'] = array(
-    'dashlets' => array(
-        array(
+$viewdefs['pmse_Emails_Templates']['base']['view']['dashlet-email'] = [
+    'dashlets' => [
+        [
             'label' => 'LBL_PMSE_EMAIL_TEMPLATES_DASHLET',
             'description' => 'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION',
-            'config' => array(
+            'config' => [
                 'limit' => 10,
                 'visibility' => 'user',
-            ),
-            'preview' => array(
+            ],
+            'preview' => [
                 'limit' => 10,
                 'visibility' => 'user',
-            ),
-            'filter' => array(
-                'module' => array(
+            ],
+            'filter' => [
+                'module' => [
                     'Home',
                     'pmse_Emails_Templates',
-                ),
+                ],
                 'view' => 'record',
-            ),
-        ),
-    ),
-    'custom_toolbar' => array(
-        'buttons' => array(
-            array(
+            ],
+        ],
+    ],
+    'custom_toolbar' => [
+        'buttons' => [
+            [
                 'type' => 'actiondropdown',
                 'no_default_action' => true,
                 'icon' => 'sicon-plus',
-                'buttons' => array(
-                    array(
+                'buttons' => [
+                    [
                         'type' => 'dashletaction',
                         'action' => 'createRecord',
-                        'params' => array(
+                        'params' => [
                             'module' => 'pmse_Emails_Templates',
                             'link' => '#pmse_Emails_Templates',
-                        ),
+                        ],
                         'label' => 'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD',
                         'acl_action' => 'create',
                         'acl_module' => 'pmse_Emails_Templates',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'action' => 'importRecord',
-                        'params' => array(
+                        'params' => [
                             'module' => 'pmse_Emails_Templates',
-                            'link' => '#pmse_Emails_Templates/layout/emailtemplates-import'
-                        ),
+                            'link' => '#pmse_Emails_Templates/layout/emailtemplates-import',
+                        ],
                         'label' => 'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD',
                         'acl_action' => 'importRecord',
                         'acl_module' => 'pmse_Emails_Templates',
-                    ),
-                ),
-            ),
-            array(
-                'dropdown_buttons' => array(
-                    array(
-                    'type' => 'dashletaction',
-                    'action' => 'editClicked',
-                    'label' => 'LBL_DASHLET_CONFIG_EDIT_LABEL',
-                ),
-                    array(
+                    ],
+                ],
+            ],
+            [
+                'dropdown_buttons' => [
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'editClicked',
+                        'label' => 'LBL_DASHLET_CONFIG_EDIT_LABEL',
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'action' => 'refreshClicked',
                         'label' => 'LBL_DASHLET_REFRESH_LABEL',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'dashletaction',
                         'action' => 'removeClicked',
                         'label' => 'LBL_DASHLET_REMOVE_LABEL',
-                    ),
-                ),
-            ),
-        ),
-    ),
-    'panels' => array(
-        array(
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'panels' => [
+        [
             'name' => 'panel_body',
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name' => 'visibility',
                     'label' => 'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY',
                     'type' => 'enum',
                     'options' => 'tasks_visibility_options',
-                ),
-                array(
+                ],
+                [
                     'name' => 'limit',
                     'label' => 'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS',
                     'type' => 'enum',
                     'options' => 'tasks_limit_options',
-                ),
-            ),
-        ),
-    ),
-    'filter' => array(
-        array(
+                ],
+            ],
+        ],
+    ],
+    'filter' => [
+        [
             'name' => 'filter',
             'label' => 'LBL_FILTER',
             'type' => 'enum',
-            'options' => 'history_filter_options'
-        ),
-    ),
-    'tabs' => array(
-        array(
+            'options' => 'history_filter_options',
+        ],
+    ],
+    'tabs' => [
+        [
             'active' => true,
-            'filters' => array(),
+            'filters' => [],
             'label' => 'LBL_PMSE_EMAIL_TEMPLATES_DASHLET',
             'link' => 'LBL_PMSE_EMAIL_TEMPLATES_DASHLET',
             'module' => 'pmse_Emails_Templates',
             'order_by' => 'date_entered:desc',
             'record_date' => 'date_entered',
-            'row_actions' => array(
-                array(
+            'row_actions' => [
+                [
                     'type' => 'rowaction',
                     'icon' => 'sicon-edit',
                     'css_class' => 'btn btn-mini',
@@ -133,8 +133,8 @@ $viewdefs['pmse_Emails_Templates']['base']['view']['dashlet-email'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_EDIT_BUTTON',
                     'acl_action' => 'edit',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'icon' => 'sicon-close',
                     'css_class' => 'btn btn-mini',
@@ -142,8 +142,8 @@ $viewdefs['pmse_Emails_Templates']['base']['view']['dashlet-email'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_PMSE_LABEL_DELETE',
                     'acl_action' => 'edit',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'icon' => 'sicon sicon-download',
                     'css_class' => 'btn btn-mini',
@@ -151,8 +151,8 @@ $viewdefs['pmse_Emails_Templates']['base']['view']['dashlet-email'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_PMSE_LABEL_EXPORT',
                     'acl_action' => 'edit',
-                ),
-                array(
+                ],
+                [
                     'type' => 'rowaction',
                     'icon' => 'sicon-info',
                     'css_class' => 'btn btn-mini',
@@ -160,16 +160,16 @@ $viewdefs['pmse_Emails_Templates']['base']['view']['dashlet-email'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_DESCRIPTION',
                     'acl_action' => 'edit',
-                ),
-            ),
-            'fields' => array(
+                ],
+            ],
+            'fields' => [
                 'name',
                 'base_module',
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_entered',
-                'description'
-            ),
-        ),
-    ),
-);
+                'description',
+            ],
+        ],
+    ],
+];
